@@ -53,8 +53,8 @@ const routeGroups = [
       },
       {
         href: "/policy-outcomes/",
-        title: "Resultados de política pública",
-        note: "Indicadores asociados a eventos de política.",
+        title: "Estado de resultados",
+        note: "Evidencia, revisión humana y publicación de vínculos con resultados.",
       },
       {
         href: "/calendario-electoral/",
@@ -73,6 +73,36 @@ const routeGroups = [
         note: "Dicho vs hecho por tema, ámbito y soporte.",
       },
       {
+        href: "/promises/",
+        title: "Promesas con evidencia",
+        note: "Compromisos electorales con actor, cita, página y hash del documento oficial.",
+      },
+      {
+        href: "/comparisons/",
+        title: "Dicho frente a hecho",
+        note: "Promesas y acciones reales comparadas con estados ambiguos, límites y evidencia visible.",
+      },
+      {
+        href: "/spending/",
+        title: "Dinero público con evidencia",
+        note: "Adjudicaciones PLACSP con órgano, proveedor, importe exacto y fuente oficial.",
+      },
+      {
+        href: "/agreements/",
+        title: "Acuerdos y reuniones",
+        note: "Acuerdos del Consejo de Ministros con actores, temas, límites y resumen oficial.",
+      },
+      {
+        href: "/geopolitics/",
+        title: "Geopolítica con evidencia",
+        note: "Acciones exteriores, contrapartes y etapa jurídica sin inferir vigencia, alineamiento ni impacto.",
+      },
+      {
+        href: "/indicators/",
+        title: "Indicadores oficiales",
+        note: "Resultados económicos y sociales con periodo, territorio, revisiones y evidencia de celda.",
+      },
+      {
         href: "/explorer-votaciones/",
         title: "Monitor legislativo",
         note: "Eventos, grupos y seguimiento temporal.",
@@ -86,6 +116,16 @@ const routeGroups = [
         href: "/explorer-sources/",
         title: "Calidad de datos",
         note: "Cobertura, bloqueos externos y backlog operativo.",
+      },
+      {
+        href: "/obstruction-tracker/",
+        title: "Obstrucción de datos públicos",
+        note: "Incidencias, evidencia técnica y escalado por institución.",
+      },
+      {
+        href: "/transparency/",
+        title: "Transparencia operativa",
+        note: "Frescura, salud, snapshot público y cambios con trazabilidad por cifra.",
       },
     ],
   },
@@ -102,6 +142,11 @@ const routeGroups = [
         href: "/explorer-politico/",
         title: "Explorador territorial",
         note: "Actores por territorio, partido y trayectoria.",
+      },
+      {
+        href: "/actor-graph/",
+        title: "Grafo de actores",
+        note: "Personas, partidos, instituciones y relaciones con vigencia y evidencia oficial.",
       },
       {
         href: "/political-positions/",

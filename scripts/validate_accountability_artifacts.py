@@ -61,7 +61,17 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--ledger", required=True, help="Path to accountability-ledger JSON")
     p.add_argument("--dossiers", required=True, help="Path to accountability-dossiers JSON")
     p.add_argument("--evidence-api", default="", help="Optional accountability Evidence API JSON")
-    p.add_argument("--snapshot-date", required=True, help="Expected snapshot date")
+    snapshot_date_group = p.add_mutually_exclusive_group(required=True)
+    snapshot_date_group.add_argument(
+        "--snapshot-date",
+        default="",
+        help="Expected snapshot date",
+    )
+    snapshot_date_group.add_argument(
+        "--infer-snapshot-date",
+        action="store_true",
+        help="Infer the expected date from the ledger and require bundle parity",
+    )
     p.add_argument("--min-entries", type=int, default=1, help="Minimum ledger entries")
     p.add_argument("--min-actors", type=int, default=1, help="Minimum actor dossiers")
     p.add_argument("--min-issues", type=int, default=1, help="Minimum issue dossiers")
@@ -600,6 +610,11 @@ def validate(args: argparse.Namespace) -> dict[str, Any]:
     dossier_cov = _coverage(dossiers, "dossiers")
     evidence_api_cov = _coverage(evidence_api, "evidence_api") if evidence_api_path else {}
     errors: list[str] = []
+    infer_snapshot_date = bool(getattr(args, "infer_snapshot_date", False))
+    requested_snapshot_date = str(getattr(args, "snapshot_date", "") or "").strip()
+    expected_snapshot_date = (
+        _snapshot_date(ledger) if infer_snapshot_date else requested_snapshot_date
+    )
 
     checks: dict[str, Any] = {
         "ledger_path": str(ledger_path),
@@ -614,7 +629,8 @@ def validate(args: argparse.Namespace) -> dict[str, Any]:
         "ledger_snapshot_date": _snapshot_date(ledger),
         "dossiers_snapshot_date": _snapshot_date(dossiers),
         "evidence_api_snapshot_date": _snapshot_date(evidence_api) if evidence_api_path else "",
-        "expected_snapshot_date": str(args.snapshot_date),
+        "expected_snapshot_date": expected_snapshot_date,
+        "snapshot_date_inferred": infer_snapshot_date,
         "ledger_entries_total": _as_int(ledger_cov, "entries_total"),
         "ledger_actors_total": _as_int(ledger_cov, "actors_total"),
         "ledger_issues_total": _as_int(ledger_cov, "issues_total"),
@@ -679,7 +695,9 @@ def validate(args: argparse.Namespace) -> dict[str, Any]:
         evidence_api_review_status_counts.get("reviewed") or 0
     )
 
-    expected = str(args.snapshot_date)
+    expected = expected_snapshot_date
+    if not expected:
+        errors.append("snapshot_date missing")
     if checks["ledger_schema_version"] != "accountability_ledger_snapshot_v1":
         errors.append("ledger schema_version mismatch")
     if checks["dossiers_schema_version"] != "accountability_dossier_snapshot_v1":

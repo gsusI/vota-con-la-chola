@@ -30,6 +30,12 @@ export const siteSections = [
         cta: "Abrir posturas explicables",
       },
       {
+        title: "Contrastar lo dicho y lo observado",
+        note: "Revisa pares explícitos sin convertir similitud temática o ausencia en un veredicto.",
+        href: "/comparisons/",
+        cta: "Abrir comparaciones",
+      },
+      {
         title: "Ver un resumen guiado",
         note: "Si quieres una lectura más rápida, usa la vista ciudadana como resumen.",
         href: "/citizen/",
@@ -46,6 +52,11 @@ export const siteSections = [
         title: "Posturas explicables",
         href: "/political-positions/",
         note: "Comparación de personas y partidos con soportes, continuidad y filtros.",
+      },
+      {
+        title: "Dicho frente a hecho",
+        href: "/comparisons/",
+        note: "Promesas y acciones posteriores con mapping, capacidad, incertidumbre y evidencia oficial.",
       },
       {
         title: "Ciudadanía",
@@ -77,6 +88,12 @@ export const siteSections = [
         cta: "Abrir explorador territorial",
       },
       {
+        title: "Seguir relaciones con evidencia",
+        note: "Consulta actores, vínculos, vigencia y fuente sin fusionar identidades solo por nombre.",
+        href: "/actor-graph/",
+        cta: "Abrir grafo de actores",
+      },
+      {
         title: "Comparar trayectorias y posiciones",
         note: "Cruza perfiles, continuidad y posiciones en una sola vista.",
         href: "/political-positions/",
@@ -93,6 +110,11 @@ export const siteSections = [
         title: "Explorador territorial",
         href: "/explorer-politico/",
         note: "Entrada por ámbito, territorio, institución y mapa político.",
+      },
+      {
+        title: "Grafo de actores",
+        href: "/actor-graph/",
+        note: "Relaciones temporales entre actores con alcance de identidad y evidencia oficial.",
       },
       {
         title: "Posturas explicables",
@@ -235,14 +257,14 @@ export const siteSections = [
     title: "Resultados",
     question: "¿Qué señales aparecen en los datos?",
     description:
-      "Consulta indicadores, sanciones y comportamiento electoral relacionados con decisiones públicas.",
+      "Consulta indicadores, sanciones y comportamiento electoral; cualquier vínculo con una decisión exige revisión explícita.",
     chips: ["Indicadores", "Sanciones", "Series"],
     tasks: [
       {
-        title: "Explorar indicadores",
-        note: "Empieza por resultados observables y señales posteriores a decisiones públicas.",
+        title: "Revisar el estado de resultados",
+        note: "Consulta qué vínculos han superado evidencia, revisión humana y publicación.",
         href: "/policy-outcomes/",
-        cta: "Abrir resultados",
+        cta: "Abrir estado",
       },
       {
         title: "Abrir sanciones y cumplimiento",
@@ -265,9 +287,9 @@ export const siteSections = [
     ],
     surfaces: [
       {
-        title: "Resultados de política pública",
+        title: "Estado de resultados",
         href: "/policy-outcomes/",
-        note: "Indicadores económicos y sociales vinculados a eventos relevantes.",
+        note: "Evidencia, revisión humana y estado de publicación de cada vínculo.",
       },
       {
         title: "Cumplimiento legal y sanciones",
@@ -303,6 +325,18 @@ export const siteSections = [
         cta: "Abrir cobertura",
       },
       {
+        title: "Auditar obstrucciones públicas",
+        note: "Revisa cada bloqueo con señal técnica, evidencia, impacto y siguiente escalado.",
+        href: "/obstruction-tracker/",
+        cta: "Abrir registro",
+      },
+      {
+        title: "Comprobar el estado del proyecto",
+        note: "Contrasta frescura, salud de fuentes, snapshot vigente y cambios publicados.",
+        href: "/transparency/",
+        cta: "Abrir transparencia",
+      },
+      {
         title: "Ver los archivos publicados",
         note: "Consulta los archivos disponibles y la sección donde se usan.",
         href: "/methods/datasets/",
@@ -320,6 +354,16 @@ export const siteSections = [
         title: "Fuentes y calidad",
         href: "/explorer-sources/",
         note: "Estado de fuentes, cobertura y bloqueos abiertos.",
+      },
+      {
+        title: "Obstrucción de datos públicos",
+        href: "/obstruction-tracker/",
+        note: "Registro append-only de acceso bloqueado o degradado con evidencia reproducible.",
+      },
+      {
+        title: "Transparencia operativa",
+        href: "/transparency/",
+        note: "Frescura, salud de fuentes, versión pública y cambios con evidencia por métrica.",
       },
       {
         title: "Explorador SQL",
@@ -401,6 +445,14 @@ export const datasetCatalog = [
     confidence: "Publicado",
   },
   {
+    id: "actor-graph-v1",
+    sectionId: "actors",
+    label: "Grafo temporal de actores",
+    path: "/actor-graph/data/graph.json",
+    note: "Agregados completos y muestra estable de actores y relaciones reales con fuente, vigencia y política de resolución de identidad.",
+    confidence: "Publicado",
+  },
+  {
     id: "votes-preview",
     sectionId: "decisions",
     label: "Vista previa de votaciones",
@@ -443,9 +495,9 @@ export const datasetCatalog = [
   {
     id: "policy-outcomes",
     sectionId: "outcomes",
-    label: "Resultados observables",
+    label: "Estado de resultados",
     path: "/policy-outcomes/data/policy-outcomes.json",
-    note: "Indicadores y asociaciones descriptivas posteriores a eventos.",
+    note: "Estado agregado del pipeline; no publica candidatos pendientes ni afirma efectos.",
     confidence: "Publicado",
   },
   {
@@ -486,6 +538,70 @@ export const datasetCatalog = [
     label: "Estado de fuentes",
     path: "/explorer-sources/data/status.json",
     note: "Estado operativo, hoja de ruta y calidad de fuentes.",
+    confidence: "Publicado",
+  },
+  {
+    id: "obstruction-tracker",
+    sectionId: "methods",
+    label: "Obstrucción de datos públicos",
+    path: "/obstruction-tracker/data/obstructions.json",
+    note: "Incidencias abiertas e históricas, evidencia enlazada y readiness de escala real.",
+    confidence: "Publicado",
+  },
+  {
+    id: "transparency-dashboard",
+    sectionId: "methods",
+    label: "Transparencia operativa",
+    path: "/transparency/data/transparency.json",
+    note: "Frescura, salud, obstrucciones, readiness, snapshot durable y notas de versión trazables.",
+    confidence: "Publicado",
+  },
+  {
+    id: "manifesto-promises-bng-2023",
+    sectionId: "decisions",
+    label: "Promesas BNG 2023",
+    path: "/promises/data/bng-2023.json",
+    note: "Compromisos rule-confirmed con actor, página, cita y hash del manifiesto oficial.",
+    confidence: "Publicado",
+  },
+  {
+    id: "promise-action-comparisons-v1",
+    sectionId: "decisions",
+    label: "Dicho frente a hecho",
+    path: "/comparisons/data/comparisons.json",
+    note: "Cinco comparaciones reales revisadas con identidad pública, estados de incertidumbre y evidencia primaria; cero veredictos fuertes en v1.",
+    confidence: "Publicado",
+  },
+  {
+    id: "placsp-spending-awards-sample",
+    sectionId: "decisions",
+    label: "Adjudicaciones PLACSP",
+    path: "/spending/data/placsp-sample.json",
+    note: "Muestra real actor-adjudicación-evidencia con identidad oficial e importes decimales exactos; no representa pagos.",
+    confidence: "Publicado",
+  },
+  {
+    id: "moncloa-agreements-sample",
+    sectionId: "decisions",
+    label: "Acuerdos del Consejo de Ministros",
+    path: "/agreements/data/moncloa-sample.json",
+    note: "Muestra real sesión-acuerdo-actores-evidencia; temas derivados visibles y cero afirmaciones de influencia.",
+    confidence: "Publicado",
+  },
+  {
+    id: "moncloa-geopolitics-sample",
+    sectionId: "decisions",
+    label: "Acciones exteriores de La Moncloa",
+    path: "/geopolitics/data/moncloa-sample.json",
+    note: "Dos acciones reales de autorización/remisión con contrapartes y evidencia; vigencia, ejecución, alineamiento e impacto no evaluados.",
+    confidence: "Publicado",
+  },
+  {
+    id: "eurostat-gdp-spain-indicator",
+    sectionId: "outcomes",
+    label: "PIB regional por habitante Eurostat",
+    path: "/indicators/data/eurostat-gdp-es.json",
+    note: "2.091 observaciones reales con territorio, periodo, valor decimal, estado provisional y evidencia de celda; sin inferencia causal.",
     confidence: "Publicado",
   },
   {
@@ -550,8 +666,8 @@ export const homeQuestions = [
   {
     id: "question-outcomes",
     sectionId: "outcomes",
-    title: "¿Qué resultados o efectos observables hay?",
-    note: "Cruza indicadores, sanciones y comportamiento con políticas.",
+    title: "¿Qué vínculos con resultados están validados?",
+    note: "Distingue candidatos, revisión humana y publicaciones trazables.",
   },
   {
     id: "question-methods",

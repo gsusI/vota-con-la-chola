@@ -34,8 +34,17 @@ function formatBreadcrumb(segment, index, segments) {
     "initiative-lifecycle": "Legislación",
     "initiative-id": "Iniciativa",
     "political-positions": "Posturas",
-    "policy-outcomes": "Resultados",
+    "policy-outcomes": "Estado de resultados",
     "legal-sanctions": "Cumplimiento legal",
+    "obstruction-tracker": "Obstrucción de datos",
+    transparency: "Transparencia",
+    promises: "Promesas",
+    comparisons: "Dicho frente a hecho",
+    spending: "Dinero público",
+    agreements: "Acuerdos y reuniones",
+    geopolitics: "Geopolítica",
+    indicators: "Indicadores",
+    "actor-graph": "Grafo de actores",
     questions: "Q&A",
   };
 
@@ -96,13 +105,17 @@ export default function Breadcrumbs() {
   }
 
   return (
-    <nav className="breadcrumbs" aria-label="Miga de pan">
-      <ol>
+    <nav className="breadcrumbs site-breadcrumbs" aria-label="Miga de pan">
+      <ol className="site-breadcrumbs__list">
         {crumbs.map((crumb, index) => {
           const isLast = index === crumbs.length - 1;
           return (
-            <li key={`${crumb.href}-${index}`}>
-              {isLast ? <span>{crumb.label}</span> : <Link href={crumb.href}>{crumb.label}</Link>}
+            <li className="site-breadcrumbs__item" key={`${crumb.href}-${index}`}>
+              {isLast ? (
+                <span className="site-breadcrumbs__current">{crumb.label}</span>
+              ) : (
+                <Link className="site-breadcrumbs__link" href={crumb.href}>{crumb.label}</Link>
+              )}
             </li>
           );
         })}

@@ -23,7 +23,7 @@ infoelectoral_elected_manifest_root := env_var_or_default("INFOELECTORAL_ELECTED
 infoelectoral_elected_report := env_var_or_default("INFOELECTORAL_ELECTED_REPORT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/infoelectoral-elected-officials-real-20260811.json")
 infoelectoral_elected_min_free_bytes := env_var_or_default("INFOELECTORAL_ELECTED_MIN_FREE_BYTES", "5368709120")
 infoelectoral_candidate_pipeline_id := env_var_or_default("INFOELECTORAL_CANDIDATE_PIPELINE_ID", "infoelectoral-candidates-v1")
-infoelectoral_candidate_store_root := env_var_or_default("INFOELECTORAL_CANDIDATE_STORE_ROOT", "etl/data/object-origin/restricted/infoelectoral-candidates")
+infoelectoral_candidate_store_root := env_var_or_default("INFOELECTORAL_CANDIDATE_STORE_ROOT", "etl/data/object-origin/infoelectoral-candidates")
 infoelectoral_candidate_local_archive_dir := env_var_or_default("INFOELECTORAL_CANDIDATE_LOCAL_ARCHIVE_DIR", "")
 infoelectoral_candidate_report := env_var_or_default("INFOELECTORAL_CANDIDATE_REPORT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/infoelectoral-candidate-archive-queue-latest.json")
 infoelectoral_candidate_worker_max_items := env_var_or_default("INFOELECTORAL_CANDIDATE_WORKER_MAX_ITEMS", "1")
@@ -72,7 +72,7 @@ gh_pages_remote := env_var_or_default("GH_PAGES_REMOTE", "origin")
 gh_pages_branch := env_var_or_default("GH_PAGES_BRANCH", "gh-pages")
 gh_pages_tmp_branch := env_var_or_default("GH_PAGES_TMP_BRANCH", "gh-pages-tmp")
 gh_pages_next_app_dir := env_var_or_default("GH_PAGES_NEXT_APP_DIR", "ui/gh-pages-next")
-gh_pages_next_out_dir := env_var_or_default("GH_PAGES_NEXT_OUT_DIR", "ui/gh-pages-next/out")
+gh_pages_next_out_dir := gh_pages_next_app_dir + "/out"
 gh_pages_next_port := env_var_or_default("GH_PAGES_NEXT_PORT", "3000")
 gh_pages_next_container := env_var_or_default("GH_PAGES_NEXT_CONTAINER", "vota-gh-pages-next")
 gh_pages_next_docker_image := env_var_or_default("GH_PAGES_NEXT_DOCKER_IMAGE", "node:22-alpine")
@@ -233,6 +233,121 @@ text_extraction_queue_summary_out := env_var_or_default("TEXT_EXTRACTION_QUEUE_S
 scale_queue_enqueue_batch_size := env_var_or_default("SCALE_QUEUE_ENQUEUE_BATCH_SIZE", "5000")
 scale_queue_claim_batch_size := env_var_or_default("SCALE_QUEUE_CLAIM_BATCH_SIZE", "2000")
 scale_readiness_report_out := env_var_or_default("SCALE_READINESS_REPORT_OUT", "etl/data/published/scale-readiness-latest.json")
+obstruction_tracker_status_json := env_var_or_default("OBSTRUCTION_TRACKER_STATUS_JSON", "ui/gh-pages-next/public/explorer-sources/data/status.json")
+obstruction_tracker_readiness_json := env_var_or_default("OBSTRUCTION_TRACKER_READINESS_JSON", scale_readiness_report_out)
+obstruction_tracker_out := env_var_or_default("OBSTRUCTION_TRACKER_OUT", "ui/gh-pages-next/public/obstruction-tracker/data/obstructions.json")
+obstruction_tracker_evidence_dir := env_var_or_default("OBSTRUCTION_TRACKER_EVIDENCE_DIR", "ui/gh-pages-next/public/obstruction-tracker/evidence")
+obstruction_tracker_max_bytes := env_var_or_default("OBSTRUCTION_TRACKER_MAX_BYTES", "5000000")
+transparency_dashboard_status_json := env_var_or_default("TRANSPARENCY_DASHBOARD_STATUS_JSON", obstruction_tracker_status_json)
+transparency_dashboard_obstruction_json := env_var_or_default("TRANSPARENCY_DASHBOARD_OBSTRUCTION_JSON", obstruction_tracker_out)
+transparency_dashboard_readiness_json := env_var_or_default("TRANSPARENCY_DASHBOARD_READINESS_JSON", scale_readiness_report_out)
+transparency_dashboard_origin_verification_json := env_var_or_default("TRANSPARENCY_DASHBOARD_ORIGIN_VERIFICATION_JSON", "docs/etl/sprints/REPRODUCIBILITY-20260819/evidence/live-scale-origin-parity.json")
+transparency_dashboard_release_registry_json := env_var_or_default("TRANSPARENCY_DASHBOARD_RELEASE_REGISTRY_JSON", "docs/release-notes/releases.json")
+transparency_dashboard_out := env_var_or_default("TRANSPARENCY_DASHBOARD_OUT", "ui/gh-pages-next/public/transparency/data/transparency.json")
+transparency_dashboard_max_bytes := env_var_or_default("TRANSPARENCY_DASHBOARD_MAX_BYTES", "1000000")
+evidence_api_v1_evidence_json := env_var_or_default("EVIDENCE_API_V1_EVIDENCE_JSON", "etl/data/published/accountability-evidence-api-latest.json")
+evidence_api_v1_source_health_json := env_var_or_default("EVIDENCE_API_V1_SOURCE_HEALTH_JSON", obstruction_tracker_status_json)
+evidence_api_v1_origin_verification_json := env_var_or_default("EVIDENCE_API_V1_ORIGIN_VERIFICATION_JSON", transparency_dashboard_origin_verification_json)
+evidence_api_v1_attestation_verification_json := env_var_or_default("EVIDENCE_API_V1_ATTESTATION_VERIFICATION_JSON", "docs/etl/sprints/REPRODUCIBILITY-20260819/evidence/live-signed-snapshot-verification.json")
+evidence_api_v1_schema_json := env_var_or_default("EVIDENCE_API_V1_SCHEMA_JSON", "docs/api/evidence-api-v1.schema.json")
+evidence_api_v1_out_root := env_var_or_default("EVIDENCE_API_V1_OUT_ROOT", "ui/gh-pages-next/public/api/v1")
+evidence_api_v1_page_size := env_var_or_default("EVIDENCE_API_V1_PAGE_SIZE", "250")
+evidence_api_v1_export_report := env_var_or_default("EVIDENCE_API_V1_EXPORT_REPORT", "docs/etl/sprints/EVIDENCE-API-20260819/evidence/evidence-api-v1-export.json")
+evidence_api_v1_validation_report := env_var_or_default("EVIDENCE_API_V1_VALIDATION_REPORT", "docs/etl/sprints/EVIDENCE-API-20260819/evidence/evidence-api-v1-validation.json")
+evidence_api_v1_live_verification_report := env_var_or_default("EVIDENCE_API_V1_LIVE_VERIFICATION_REPORT", "docs/etl/sprints/EVIDENCE-API-20260819/evidence/live-evidence-api-v1-verification.json")
+manifesto_promises_db_path := env_var_or_default("MANIFESTO_PROMISES_DB_PATH", "etl/data/staging/promises-bng-2023.db")
+manifesto_promises_pdf := env_var_or_default("MANIFESTO_PROMISES_PDF", "etl/data/raw/text_documents/programas_partidos/b8994deec0bbc45cdcbef5d7c5395cabf30b0509706303c3d8e76058c48eebfd.pdf")
+manifesto_promises_published_out := env_var_or_default("MANIFESTO_PROMISES_PUBLISHED_OUT", "etl/data/published/promises-bng-2023.json")
+manifesto_promises_public_out := env_var_or_default("MANIFESTO_PROMISES_PUBLIC_OUT", "ui/gh-pages-next/public/promises/data/bng-2023.json")
+manifesto_promises_ingest_report := env_var_or_default("MANIFESTO_PROMISES_INGEST_REPORT", "docs/etl/sprints/PROMISES-20260819/evidence/promises-bng-2023-ingest.json")
+manifesto_promises_validation_report := env_var_or_default("MANIFESTO_PROMISES_VALIDATION_REPORT", "docs/etl/sprints/PROMISES-20260819/evidence/promises-bng-2023-validation.json")
+manifesto_promises_publish_limit := env_var_or_default("MANIFESTO_PROMISES_PUBLISH_LIMIT", "20")
+manifesto_promises_live_verification_report := env_var_or_default("MANIFESTO_PROMISES_LIVE_VERIFICATION_REPORT", "docs/etl/sprints/PROMISES-20260819/evidence/live-promises-bng-2023-verification.json")
+placsp_spending_source_db := env_var_or_default("PLACSP_SPENDING_SOURCE_DB", "etl/data/staging/placsp-contracts-real-s1-20260811.db")
+placsp_spending_schema := env_var_or_default("PLACSP_SPENDING_SCHEMA", "etl/load/sqlite_schema.sql")
+placsp_spending_db_path := env_var_or_default("PLACSP_SPENDING_DB_PATH", "etl/data/staging/spending-placsp-mvp.db")
+placsp_spending_published_out := env_var_or_default("PLACSP_SPENDING_PUBLISHED_OUT", "etl/data/published/spending-placsp-sample.json")
+placsp_spending_public_out := env_var_or_default("PLACSP_SPENDING_PUBLIC_OUT", "ui/gh-pages-next/public/spending/data/placsp-sample.json")
+placsp_spending_materialization_report := env_var_or_default("PLACSP_SPENDING_MATERIALIZATION_REPORT", "docs/etl/sprints/SPENDING-20260819/evidence/placsp-spending-materialization.json")
+placsp_spending_validation_report := env_var_or_default("PLACSP_SPENDING_VALIDATION_REPORT", "docs/etl/sprints/SPENDING-20260819/evidence/placsp-spending-validation.json")
+placsp_spending_live_verification_report := env_var_or_default("PLACSP_SPENDING_LIVE_VERIFICATION_REPORT", "docs/etl/sprints/SPENDING-20260819/evidence/live-placsp-spending-verification.json")
+moncloa_agreements_source_db := env_var_or_default("MONCLOA_AGREEMENTS_SOURCE_DB", "etl/data/staging/moncloa-aiops04-matrix-20260216.db")
+moncloa_agreements_schema := env_var_or_default("MONCLOA_AGREEMENTS_SCHEMA", "etl/load/sqlite_schema.sql")
+moncloa_agreements_db_path := env_var_or_default("MONCLOA_AGREEMENTS_DB_PATH", "etl/data/staging/agreements-moncloa-mvp.db")
+moncloa_agreements_published_out := env_var_or_default("MONCLOA_AGREEMENTS_PUBLISHED_OUT", "etl/data/published/agreements-moncloa-sample.json")
+moncloa_agreements_public_out := env_var_or_default("MONCLOA_AGREEMENTS_PUBLIC_OUT", "ui/gh-pages-next/public/agreements/data/moncloa-sample.json")
+moncloa_agreements_materialization_report := env_var_or_default("MONCLOA_AGREEMENTS_MATERIALIZATION_REPORT", "docs/etl/sprints/AGREEMENTS-20260819/evidence/moncloa-agreements-materialization.json")
+moncloa_agreements_validation_report := env_var_or_default("MONCLOA_AGREEMENTS_VALIDATION_REPORT", "docs/etl/sprints/AGREEMENTS-20260819/evidence/moncloa-agreements-validation.json")
+moncloa_agreements_live_verification_report := env_var_or_default("MONCLOA_AGREEMENTS_LIVE_VERIFICATION_REPORT", "docs/etl/sprints/AGREEMENTS-20260819/evidence/live-moncloa-agreements-verification.json")
+moncloa_geopolitics_source_db := env_var_or_default("MONCLOA_GEOPOLITICS_SOURCE_DB", moncloa_agreements_db_path)
+moncloa_geopolitics_schema := env_var_or_default("MONCLOA_GEOPOLITICS_SCHEMA", "etl/load/sqlite_schema.sql")
+moncloa_geopolitics_db_path := env_var_or_default("MONCLOA_GEOPOLITICS_DB_PATH", "etl/data/staging/geopolitics-moncloa-mvp.db")
+moncloa_geopolitics_published_out := env_var_or_default("MONCLOA_GEOPOLITICS_PUBLISHED_OUT", "etl/data/published/geopolitics-moncloa-sample.json")
+moncloa_geopolitics_public_out := env_var_or_default("MONCLOA_GEOPOLITICS_PUBLIC_OUT", "ui/gh-pages-next/public/geopolitics/data/moncloa-sample.json")
+moncloa_geopolitics_materialization_report := env_var_or_default("MONCLOA_GEOPOLITICS_MATERIALIZATION_REPORT", "docs/etl/sprints/GEOPOLITICS-20260819/evidence/moncloa-geopolitics-materialization.json")
+moncloa_geopolitics_validation_report := env_var_or_default("MONCLOA_GEOPOLITICS_VALIDATION_REPORT", "docs/etl/sprints/GEOPOLITICS-20260819/evidence/moncloa-geopolitics-validation.json")
+moncloa_geopolitics_live_verification_report := env_var_or_default("MONCLOA_GEOPOLITICS_LIVE_VERIFICATION_REPORT", "docs/etl/sprints/GEOPOLITICS-20260819/evidence/live-moncloa-geopolitics-verification.json")
+eurostat_gdp_indicator_schema := env_var_or_default("EUROSTAT_GDP_INDICATOR_SCHEMA", "etl/load/sqlite_schema.sql")
+eurostat_gdp_indicator_db := env_var_or_default("EUROSTAT_GDP_INDICATOR_DB", "etl/data/staging/indicators-eurostat-gdp-mvp.db")
+eurostat_gdp_indicator_published_out := env_var_or_default("EUROSTAT_GDP_INDICATOR_PUBLISHED_OUT", "etl/data/published/indicators-eurostat-gdp-es.json")
+eurostat_gdp_indicator_public_out := env_var_or_default("EUROSTAT_GDP_INDICATOR_PUBLIC_OUT", "ui/gh-pages-next/public/indicators/data/eurostat-gdp-es.json")
+eurostat_gdp_indicator_materialization_report := env_var_or_default("EUROSTAT_GDP_INDICATOR_MATERIALIZATION_REPORT", "docs/etl/sprints/INDICATORS-20260820/evidence/eurostat-gdp-materialization.json")
+eurostat_gdp_indicator_validation_report := env_var_or_default("EUROSTAT_GDP_INDICATOR_VALIDATION_REPORT", "docs/etl/sprints/INDICATORS-20260820/evidence/eurostat-gdp-validation.json")
+eurostat_gdp_indicator_live_verification_report := env_var_or_default("EUROSTAT_GDP_INDICATOR_LIVE_VERIFICATION_REPORT", "docs/etl/sprints/INDICATORS-20260820/evidence/live-eurostat-gdp-verification.json")
+actor_graph_schema := env_var_or_default("ACTOR_GRAPH_SCHEMA", "etl/load/sqlite_schema.sql")
+actor_graph_snapshot_date := env_var_or_default("ACTOR_GRAPH_SNAPSHOT_DATE", "2026-08-20")
+actor_graph_db := env_var_or_default("ACTOR_GRAPH_DB", "etl/data/staging/actor-graph-v1.db")
+actor_graph_actor_manifest := env_var_or_default("ACTOR_GRAPH_ACTOR_MANIFEST", "etl/data/published/actor-mandate-semantic-partition-manifest-latest.json")
+actor_graph_published_out := env_var_or_default("ACTOR_GRAPH_PUBLISHED_OUT", "etl/data/published/actor-graph-v1.json")
+actor_graph_public_out := env_var_or_default("ACTOR_GRAPH_PUBLIC_OUT", "ui/gh-pages-next/public/actor-graph/data/graph.json")
+actor_graph_materialization_report := env_var_or_default("ACTOR_GRAPH_MATERIALIZATION_REPORT", "docs/etl/sprints/ACTOR-GRAPH-20260820/evidence/actor-graph-materialization.json")
+actor_graph_validation_report := env_var_or_default("ACTOR_GRAPH_VALIDATION_REPORT", "docs/etl/sprints/ACTOR-GRAPH-20260820/evidence/actor-graph-validation.json")
+actor_graph_live_verification_report := env_var_or_default("ACTOR_GRAPH_LIVE_VERIFICATION_REPORT", "docs/etl/sprints/ACTOR-GRAPH-20260820/evidence/live-actor-graph-verification.json")
+comparison_engine_snapshot_date := env_var_or_default("COMPARISON_ENGINE_SNAPSHOT_DATE", "2026-08-20")
+comparison_engine_schema := env_var_or_default("COMPARISON_ENGINE_SCHEMA", "etl/load/sqlite_schema.sql")
+comparison_engine_reviewed_mappings := env_var_or_default("COMPARISON_ENGINE_REVIEWED_MAPPINGS", "etl/data/manual/promise_action_comparisons/reviewed_mappings_v1.json")
+comparison_engine_db := env_var_or_default("COMPARISON_ENGINE_DB", "etl/data/staging/promise-action-comparisons-v1.db")
+comparison_engine_published_out := env_var_or_default("COMPARISON_ENGINE_PUBLISHED_OUT", "etl/data/published/promise-action-comparisons-v1.json")
+comparison_engine_public_out := env_var_or_default("COMPARISON_ENGINE_PUBLIC_OUT", "ui/gh-pages-next/public/comparisons/data/comparisons.json")
+comparison_engine_materialization_report := env_var_or_default("COMPARISON_ENGINE_MATERIALIZATION_REPORT", "docs/etl/sprints/COMPARISON-ENGINE-20260820/evidence/comparison-materialization.json")
+comparison_engine_validation_report := env_var_or_default("COMPARISON_ENGINE_VALIDATION_REPORT", "docs/etl/sprints/COMPARISON-ENGINE-20260820/evidence/promise-action-comparisons-validation.json")
+comparison_engine_live_verification_report := env_var_or_default("COMPARISON_ENGINE_LIVE_VERIFICATION_REPORT", "docs/etl/sprints/COMPARISON-ENGINE-20260820/evidence/live-promise-action-comparisons-verification.json")
+comparison_engine_batch_size := env_var_or_default("COMPARISON_ENGINE_BATCH_SIZE", "10000")
+outcome_context_schema := env_var_or_default("OUTCOME_CONTEXT_SCHEMA", "etl/load/sqlite_schema.sql")
+outcome_context_manual_input := env_var_or_default("OUTCOME_CONTEXT_MANUAL_INPUT", "etl/data/manual/outcome_links/reviewed_links_v1.json")
+outcome_context_actions_db := env_var_or_default("OUTCOME_CONTEXT_ACTIONS_DB", db_path)
+outcome_context_indicator_db := env_var_or_default("OUTCOME_CONTEXT_INDICATOR_DB", eurostat_gdp_indicator_db)
+outcome_context_actor_db := env_var_or_default("OUTCOME_CONTEXT_ACTOR_DB", actor_graph_db)
+outcome_context_out_root := env_var_or_default("OUTCOME_CONTEXT_OUT_ROOT", "etl/data/staging/outcome-context-candidates-v1")
+outcome_context_materialization_report := env_var_or_default("OUTCOME_CONTEXT_MATERIALIZATION_REPORT", "docs/etl/sprints/OUTCOME-CONTEXT-20260820/evidence/outcome-context-materialization.json")
+outcome_context_validation_report := env_var_or_default("OUTCOME_CONTEXT_VALIDATION_REPORT", "docs/etl/sprints/OUTCOME-CONTEXT-20260820/evidence/outcome-context-validation.json")
+outcome_context_next_status_out := gh_pages_next_app_dir + "/public/policy-outcomes/data/policy-outcomes.json"
+outcome_context_public_status_out := env_var_or_default("OUTCOME_CONTEXT_PUBLIC_STATUS_OUT", outcome_context_next_status_out)
+outcome_context_generated_at := env_var_or_default("OUTCOME_CONTEXT_GENERATED_AT", "2026-08-20T00:00:00Z")
+outcome_context_batch_size := env_var_or_default("OUTCOME_CONTEXT_BATCH_SIZE", "1000")
+outcome_context_pair_plan_config := env_var_or_default("OUTCOME_CONTEXT_PAIR_PLAN_CONFIG", "etl/data/manual/outcome_links/planner_scope_v1.json")
+outcome_context_pair_plan_actions_db := env_var_or_default("OUTCOME_CONTEXT_PAIR_PLAN_ACTIONS_DB", "etl/data/staging/politicos-es.db")
+outcome_context_pair_plan_indicators_db := env_var_or_default("OUTCOME_CONTEXT_PAIR_PLAN_INDICATORS_DB", "etl/data/staging/eurostat-indicators-real-s2-20260811.db")
+outcome_context_pair_plan_db := env_var_or_default("OUTCOME_CONTEXT_PAIR_PLAN_DB", "etl/data/staging/outcome-context-pair-plan-v1.db")
+outcome_context_pair_plan_report := env_var_or_default("OUTCOME_CONTEXT_PAIR_PLAN_REPORT", "etl/data/staging/outcome-context-pair-plan-v1-report.json")
+outcome_context_pair_plan_validation_report := env_var_or_default("OUTCOME_CONTEXT_PAIR_PLAN_VALIDATION_REPORT", "etl/data/staging/outcome-context-pair-plan-v1-validation.json")
+outcome_context_pair_plan_batch_size := env_var_or_default("OUTCOME_CONTEXT_PAIR_PLAN_BATCH_SIZE", "1000")
+outcome_context_pair_plan_source_batch_size := env_var_or_default("OUTCOME_CONTEXT_PAIR_PLAN_SOURCE_BATCH_SIZE", "10000")
+outcome_context_pair_plan_c2b_config := env_var_or_default("OUTCOME_CONTEXT_PAIR_PLAN_C2B_CONFIG", "etl/data/manual/outcome_links/planner_scope_c2b_v1.json")
+outcome_context_pair_plan_c2b_actions_db := env_var_or_default("OUTCOME_CONTEXT_PAIR_PLAN_C2B_ACTIONS_DB", "etl/data/staging/politicos-es.db")
+outcome_context_pair_plan_c2b_indicators_db := env_var_or_default("OUTCOME_CONTEXT_PAIR_PLAN_C2B_INDICATORS_DB", "etl/data/staging/eurostat-indicators-real-s2-20260811.db")
+outcome_context_pair_plan_c2b_db := env_var_or_default("OUTCOME_CONTEXT_PAIR_PLAN_C2B_DB", "etl/data/staging/outcome-context-pair-plan-c2b-v1.db")
+outcome_context_pair_plan_c2b_report := env_var_or_default("OUTCOME_CONTEXT_PAIR_PLAN_C2B_REPORT", "etl/data/staging/outcome-context-pair-plan-c2b-v1-report.json")
+outcome_context_pair_plan_c2b_manifest := env_var_or_default("OUTCOME_CONTEXT_PAIR_PLAN_C2B_MANIFEST", "etl/data/staging/outcome-context-pair-plan-c2b-v1-manifest.json")
+outcome_context_pair_plan_c2b_validation_report := env_var_or_default("OUTCOME_CONTEXT_PAIR_PLAN_C2B_VALIDATION_REPORT", "etl/data/staging/outcome-context-pair-plan-c2b-v1-validation.json")
+outcome_context_pair_plan_c2b_batch_size := env_var_or_default("OUTCOME_CONTEXT_PAIR_PLAN_C2B_BATCH_SIZE", "25000")
+outcome_context_pair_plan_c2b_source_batch_size := env_var_or_default("OUTCOME_CONTEXT_PAIR_PLAN_C2B_SOURCE_BATCH_SIZE", "25000")
+scale_semantic_actor_graph_root := env_var_or_default("SCALE_SEMANTIC_ACTOR_GRAPH_ROOT", "etl/data/derived/semantic-actor-graph")
+scale_semantic_actor_graph_manifest_out := env_var_or_default("SCALE_SEMANTIC_ACTOR_GRAPH_MANIFEST_OUT", "etl/data/published/actor-graph-semantic-partition-manifest-latest.json")
+scale_semantic_actor_graph_validation_out := env_var_or_default("SCALE_SEMANTIC_ACTOR_GRAPH_VALIDATION_OUT", "docs/etl/sprints/ACTOR-GRAPH-20260820/evidence/actor-graph-partition-validation.json")
+scale_semantic_actor_graph_previous_manifest := env_var_or_default("SCALE_SEMANTIC_ACTOR_GRAPH_PREVIOUS_MANIFEST", "")
+scale_semantic_actor_graph_previous_root := env_var_or_default("SCALE_SEMANTIC_ACTOR_GRAPH_PREVIOUS_ROOT", "")
+scale_semantic_actor_graph_min_rows := env_var_or_default("SCALE_SEMANTIC_ACTOR_GRAPH_MIN_ROWS", "1000000")
 scale_member_vote_snapshot := env_var_or_default("SCALE_MEMBER_VOTE_SNAPSHOT", "etl/data/published/votaciones-es-2026-02-25.json")
 scale_member_vote_audit_out := env_var_or_default("SCALE_MEMBER_VOTE_AUDIT_OUT", "etl/data/published/member-vote-million-audit-latest.json")
 scale_vote_db_audit_out := env_var_or_default("SCALE_VOTE_DB_AUDIT_OUT", "etl/data/published/vote-database-audit-latest.json")
@@ -265,9 +380,12 @@ scale_semantic_actor_min_rows := env_var_or_default("SCALE_SEMANTIC_ACTOR_MIN_RO
 scale_semantic_candidate_root := env_var_or_default("SCALE_SEMANTIC_CANDIDATE_ROOT", "etl/data/derived/semantic-candidate-occurrences")
 scale_semantic_candidate_manifest_out := env_var_or_default("SCALE_SEMANTIC_CANDIDATE_MANIFEST_OUT", "etl/data/published/candidate-occurrence-semantic-partition-manifest-latest.json")
 scale_semantic_candidate_validation_out := env_var_or_default("SCALE_SEMANTIC_CANDIDATE_VALIDATION_OUT", "etl/data/published/candidate-occurrence-semantic-partition-validation-latest.json")
+scale_semantic_candidate_replay_root := env_var_or_default("SCALE_SEMANTIC_CANDIDATE_REPLAY_ROOT", "etl/data/derived/semantic-candidate-occurrences-incremental")
+scale_semantic_candidate_incremental_manifest_out := env_var_or_default("SCALE_SEMANTIC_CANDIDATE_INCREMENTAL_MANIFEST_OUT", "etl/data/published/candidate-occurrence-semantic-partition-incremental-latest.json")
+scale_semantic_candidate_incremental_validation_out := env_var_or_default("SCALE_SEMANTIC_CANDIDATE_INCREMENTAL_VALIDATION_OUT", "etl/data/published/candidate-occurrence-semantic-partition-validation-incremental-latest.json")
 scale_semantic_candidate_previous_manifest := env_var_or_default("SCALE_SEMANTIC_CANDIDATE_PREVIOUS_MANIFEST", "")
 scale_semantic_candidate_previous_root := env_var_or_default("SCALE_SEMANTIC_CANDIDATE_PREVIOUS_ROOT", "")
-scale_semantic_candidate_min_rows := env_var_or_default("SCALE_SEMANTIC_CANDIDATE_MIN_ROWS", "1")
+scale_semantic_candidate_min_rows := env_var_or_default("SCALE_SEMANTIC_CANDIDATE_MIN_ROWS", "10000")
 scale_semantic_money_root := env_var_or_default("SCALE_SEMANTIC_MONEY_ROOT", "etl/data/derived/semantic-public-money")
 scale_semantic_money_manifest_out := env_var_or_default("SCALE_SEMANTIC_MONEY_MANIFEST_OUT", "etl/data/published/public-money-semantic-partition-manifest-latest.json")
 scale_semantic_money_validation_out := env_var_or_default("SCALE_SEMANTIC_MONEY_VALIDATION_OUT", "etl/data/published/public-money-semantic-partition-validation-latest.json")
@@ -352,6 +470,26 @@ scale_document_pipeline_evidence := env_var_or_default("SCALE_DOCUMENT_PIPELINE_
 scale_document_format_inventory := env_var_or_default("SCALE_DOCUMENT_FORMAT_INVENTORY", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-format-inventory.json")
 scale_pdf_ocr_routing_benchmark := env_var_or_default("SCALE_PDF_OCR_ROUTING_BENCHMARK", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/pdf-ocr-routing-benchmark.json")
 scale_document_workers := env_var_or_default("SCALE_DOCUMENT_WORKERS", "8")
+scale_document_text_state_db := env_var_or_default("SCALE_DOCUMENT_TEXT_STATE_DB", "etl/data/staging/real-document-text-corpus-v5.db")
+scale_document_ocr_state_db := env_var_or_default("SCALE_DOCUMENT_OCR_STATE_DB", "etl/data/staging/real-document-page-ocr-v5.db")
+wayback_document_timeout := env_var_or_default("WAYBACK_DOCUMENT_TIMEOUT", "30")
+wayback_document_attempts := env_var_or_default("WAYBACK_DOCUMENT_ATTEMPTS", "2")
+wayback_document_args := env_var_or_default("WAYBACK_DOCUMENT_ARGS", "")
+boe_document_start_date := env_var_or_default("BOE_DOCUMENT_START_DATE", "2026-01-01")
+boe_document_end_date := env_var_or_default("BOE_DOCUMENT_END_DATE", "2026-03-31")
+boe_document_snapshot_date := env_var_or_default("BOE_DOCUMENT_SNAPSHOT_DATE", "2026-08-13")
+boe_document_workers := env_var_or_default("BOE_DOCUMENT_WORKERS", "8")
+boe_document_per_host_workers := env_var_or_default("BOE_DOCUMENT_PER_HOST_WORKERS", "4")
+boe_document_max_items := env_var_or_default("BOE_DOCUMENT_MAX_ITEMS", "5000")
+boe_document_min_free_bytes := env_var_or_default("BOE_DOCUMENT_MIN_FREE_BYTES", "10737418240")
+boe_document_report := env_var_or_default("BOE_DOCUMENT_REPORT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-document-corpus.json")
+boe_summary_fetch_report := env_var_or_default("BOE_SUMMARY_FETCH_REPORT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-summary-fetch.json")
+boe_document_fetch_report := env_var_or_default("BOE_DOCUMENT_FETCH_REPORT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-document-fetch.json")
+boe_election_candidate_report := env_var_or_default("BOE_ELECTION_CANDIDATE_REPORT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-election-candidates-latest.json")
+boe_election_candidate_correction_report := env_var_or_default("BOE_ELECTION_CANDIDATE_CORRECTION_REPORT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-election-candidate-correction-materialization.json")
+boe_election_candidate_correction_review_queue := env_var_or_default("BOE_ELECTION_CANDIDATE_CORRECTION_REVIEW_QUEUE", "docs/etl/sprints/SCALE-FOUNDATION-20260810/exports/boe-candidate-correction-review-queue.csv")
+boe_election_candidate_correction_review_context := env_var_or_default("BOE_ELECTION_CANDIDATE_CORRECTION_REVIEW_CONTEXT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/exports/boe-candidate-correction-review-context.jsonl")
+boe_election_candidate_correction_review_report := env_var_or_default("BOE_ELECTION_CANDIDATE_CORRECTION_REVIEW_REPORT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-candidate-correction-review-queue.json")
 scale_member_vote_shard_root := env_var_or_default("SCALE_MEMBER_VOTE_SHARD_ROOT", "etl/data/derived/member-vote-shards")
 scale_member_vote_shard_manifest_out := env_var_or_default("SCALE_MEMBER_VOTE_SHARD_MANIFEST_OUT", "etl/data/published/member-vote-shard-manifest-latest.json")
 scale_member_vote_shard_validation_out := env_var_or_default("SCALE_MEMBER_VOTE_SHARD_VALIDATION_OUT", "etl/data/published/member-vote-shard-validation-latest.json")
@@ -369,11 +507,16 @@ object_store_restore_sample_size := env_var_or_default("OBJECT_STORE_RESTORE_SAM
 object_store_restore_workers := env_var_or_default("OBJECT_STORE_RESTORE_WORKERS", "8")
 object_store_restore_all := env_var_or_default("OBJECT_STORE_RESTORE_ALL", "0")
 object_store_restore_min_free_bytes := env_var_or_default("OBJECT_STORE_RESTORE_MIN_FREE_BYTES", "10737418240")
+storage_health_out := env_var_or_default("STORAGE_HEALTH_OUT", "etl/data/published/storage-health-latest.json")
+storage_health_bdns_evidence := env_var_or_default("STORAGE_HEALTH_BDNS_EVIDENCE", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/bdns-concessions-partitioned-real-s3-storage-preflight-20260812.json")
+storage_health_placsp_evidence := env_var_or_default("STORAGE_HEALTH_PLACSP_EVIDENCE", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/placsp-official-history-storage-preflight-20260811.json")
 integrity_signal_threshold_eur := env_var_or_default("INTEGRITY_SIGNAL_THRESHOLD_EUR", "15000")
 integrity_signal_min_records := env_var_or_default("INTEGRITY_SIGNAL_MIN_RECORDS", "3")
 integrity_signal_max_signals := env_var_or_default("INTEGRITY_SIGNAL_MAX_SIGNALS", "0")
 integrity_signal_internal_report_out := env_var_or_default("INTEGRITY_SIGNAL_INTERNAL_REPORT_OUT", "tmp/integrity-signals/procurement-latest.json")
 integrity_signal_public_out := env_var_or_default("INTEGRITY_SIGNAL_PUBLIC_OUT", "etl/data/published/integrity-signals-latest.json")
+integrity_signal_review_csv := env_var_or_default("INTEGRITY_SIGNAL_REVIEW_CSV", "docs/etl/sprints/SCALE-FOUNDATION-20260810/exports/procurement-integrity-human-review.csv")
+integrity_signal_review_report := env_var_or_default("INTEGRITY_SIGNAL_REVIEW_REPORT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/procurement-integrity-human-review-queue.json")
 document_fetch_workers := env_var_or_default("DOCUMENT_FETCH_WORKERS", "8")
 document_fetch_per_host_workers := env_var_or_default("DOCUMENT_FETCH_PER_HOST_WORKERS", "2")
 document_fetch_claim_size := env_var_or_default("DOCUMENT_FETCH_CLAIM_SIZE", "32")
@@ -1058,7 +1201,7 @@ hf_dataset_repo_id := env_var_or_default("HF_DATASET_REPO_ID", "vota-con-la-chol
 hf_parquet_batch_rows := env_var_or_default("HF_PARQUET_BATCH_ROWS", "50000")
 hf_parquet_compression := env_var_or_default("HF_PARQUET_COMPRESSION", "zstd")
 hf_parquet_tables := env_var_or_default("HF_PARQUET_TABLES", "")
-hf_parquet_exclude_tables := env_var_or_default("HF_PARQUET_EXCLUDE_TABLES", "raw_fetches,run_fetches,source_records,lost_and_found")
+hf_parquet_exclude_tables := env_var_or_default("HF_PARQUET_EXCLUDE_TABLES", "raw_fetches,run_fetches,lost_and_found")
 hf_allow_sensitive_parquet := env_var_or_default("HF_ALLOW_SENSITIVE_PARQUET", "0")
 hf_include_sqlite_gz := env_var_or_default("HF_INCLUDE_SQLITE_GZ", "0")
 hf_require_quality_report := env_var_or_default("HF_REQUIRE_QUALITY_REPORT", "1")
@@ -1073,6 +1216,11 @@ hf_scale_readiness := env_var_or_default("HF_SCALE_READINESS", "etl/data/publish
 hf_scale_report_out := env_var_or_default("HF_SCALE_REPORT_OUT", "")
 hf_scale_verify_out := env_var_or_default("HF_SCALE_VERIFY_OUT", "")
 hf_scale_python := env_var_or_default("HF_SCALE_PYTHON", "python3")
+snapshot_signing_key := env_var_or_default("SNAPSHOT_SIGNING_KEY", "")
+snapshot_signer_identity := env_var_or_default("SNAPSHOT_SIGNER_IDENTITY", "vclc-snapshot-release-2026")
+snapshot_allowed_signers := env_var_or_default("SNAPSHOT_ALLOWED_SIGNERS", "docs/ops/keys/vclc-snapshot-release-2026.allowed_signers")
+snapshot_attestation_report_out := env_var_or_default("SNAPSHOT_ATTESTATION_REPORT_OUT", "")
+snapshot_attestation_verify_out := env_var_or_default("SNAPSHOT_ATTESTATION_VERIFY_OUT", "")
 hf_scale_restore_destination := env_var_or_default("HF_SCALE_RESTORE_DESTINATION", "etl/data/restored/hf-scale")
 hf_scale_restore_corpus_ids := env_var_or_default("HF_SCALE_RESTORE_CORPUS_IDS", "")
 hf_scale_restore_snapshot_path := env_var_or_default("HF_SCALE_RESTORE_SNAPSHOT_PATH", "")
@@ -1084,6 +1232,11 @@ hf_scale_restore_validation_max_rss_mb := env_var_or_default("HF_SCALE_RESTORE_V
 hf_scale_rebuild_corpus_id := env_var_or_default("HF_SCALE_REBUILD_CORPUS_ID", "actor_mandates")
 hf_scale_rebuild_output := env_var_or_default("HF_SCALE_REBUILD_OUTPUT", "etl/data/rebuilt/scale-origin.sqlite")
 hf_scale_rebuild_report_out := env_var_or_default("HF_SCALE_REBUILD_REPORT_OUT", "")
+hf_scale_rollback_target_snapshot_path := env_var_or_default("HF_SCALE_ROLLBACK_TARGET_SNAPSHOT_PATH", "scale/snapshots/2026-08-12/623b4a5ad78fae7536117d0fb64c5d99c331e1d0728a8ff98f9783c0dfc36b06")
+hf_scale_rollback_restore_report := env_var_or_default("HF_SCALE_ROLLBACK_RESTORE_REPORT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/hf-scale-origin-rollback-candidate-full-restore-20260812.json")
+hf_scale_rollback_validation_report := env_var_or_default("HF_SCALE_ROLLBACK_VALIDATION_REPORT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/hf-scale-origin-rollback-candidate-full-validation-20260812.json")
+hf_scale_rollback_live_verification := env_var_or_default("HF_SCALE_ROLLBACK_LIVE_VERIFICATION", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/hf-scale-origin-live-verification-20260812.json")
+hf_scale_rollback_plan_out := env_var_or_default("HF_SCALE_ROLLBACK_PLAN_OUT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/hf-scale-origin-rollback-plan-20260812.json")
 citizen_preset_contract_fixture := env_var_or_default("CITIZEN_PRESET_CONTRACT_FIXTURE", "tests/fixtures/citizen_preset_hash_matrix.json")
 citizen_preset_contract_out := env_var_or_default("CITIZEN_PRESET_CONTRACT_OUT", "")
 citizen_preset_parity_source := env_var_or_default("CITIZEN_PRESET_PARITY_SOURCE", "ui/citizen/preset_codec.js")
@@ -1494,15 +1647,22 @@ etl-backfill-money-subsidy-records:
 etl-test:
   docker compose run --rm --build etl "python3 -m unittest discover -s tests -v"
 
-add-source source_id name scope url format="json" min_records="1":
-  python3 scripts/add_source.py "{{source_id}}" --name "{{name}}" --scope "{{scope}}" --url "{{url}}" --format "{{format}}" --min-records "{{min_records}}"
+etl-audit-official-samples:
+  python3 scripts/audit_official_sample_corpus.py --report-out docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/official-sample-corpus-audit.json
+
+etl-audit-public-source-records:
+  python3 scripts/audit_public_source_records_for_publish.py --db {{db_path}} --report-out docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/public-source-records-publish-audit.json
+
+add-source source_id name scope url sample_file sample_sha256 captured_at rights_basis format="json" min_records="1":
+  python3 scripts/add_source.py "{{source_id}}" --name "{{name}}" --scope "{{scope}}" --url "{{url}}" --sample-file "{{sample_file}}" --sample-sha256 "{{sample_sha256}}" --captured-at "{{captured_at}}" --rights-basis "{{rights_basis}}" --format "{{format}}" --min-records "{{min_records}}"
 
 etl-schema-compat-check:
   python3 scripts/ingestar_politicos_es.py init-db --db /tmp/vota-schema-compat.db
   rm -f /tmp/vota-schema-compat.db
 
 etl-contributor-gates:
-  python3 -m unittest tests.test_source_onboarding_scaffold tests.test_samples_e2e -q
+  just etl-audit-official-samples
+  python3 -m unittest tests.test_source_onboarding_scaffold tests.test_audit_official_sample_corpus tests.test_samples_e2e -q
   just etl-schema-compat-check
   just etl-export-source-catalog
   just privacy-check-public-artifacts
@@ -1779,6 +1939,7 @@ etl-run-source-scrape-queue-prefect:
 
 etl-publish-hf:
   just etl-scale-readiness
+  just etl-storage-health
   if [ "{{hf_require_quality_report}}" = "1" ]; then just parl-quality-report-hf; fi
   just etl-export-source-catalog
   just etl-export-source-scrape-queue
@@ -1799,6 +1960,7 @@ etl-publish-hf:
 
 etl-publish-hf-dry-run:
   just etl-scale-readiness
+  just etl-storage-health
   if [ "{{hf_require_quality_report}}" = "1" ]; then just parl-quality-report-hf; fi
   just etl-export-source-catalog
   just etl-export-source-scrape-queue
@@ -1827,19 +1989,40 @@ etl-scale-origin-hf-dry-run:
   just privacy-check-public-artifacts
   out_arg=""; \
   if [ -n "{{hf_scale_report_out}}" ]; then out_arg="--report-out {{hf_scale_report_out}}"; fi; \
-  {{hf_scale_python}} scripts/publicar_hf_scale_snapshot.py --registry {{hf_scale_registry}} --readiness {{hf_scale_readiness}} --snapshot-date {{snapshot_date}} --dataset-repo {{hf_dataset_repo_id}} ${out_arg}
+  signing_arg=""; \
+  if [ -n "{{snapshot_signing_key}}" ]; then signing_arg="--signing-key {{snapshot_signing_key}} --signer-identity {{snapshot_signer_identity}}"; fi; \
+  {{hf_scale_python}} scripts/publicar_hf_scale_snapshot.py --registry {{hf_scale_registry}} --readiness {{hf_scale_readiness}} --snapshot-date {{snapshot_date}} --dataset-repo {{hf_dataset_repo_id}} ${signing_arg} ${out_arg}
 
 etl-scale-origin-hf-publish:
+  test -n "{{snapshot_signing_key}}" || (echo "SNAPSHOT_SIGNING_KEY is required; unsigned scale publication is forbidden" >&2; exit 2)
+  test -f "{{snapshot_signing_key}}" || (echo "SNAPSHOT_SIGNING_KEY file does not exist" >&2; exit 2)
   just etl-scale-readiness
   just privacy-check-public-artifacts
   out_arg=""; \
   if [ -n "{{hf_scale_report_out}}" ]; then out_arg="--report-out {{hf_scale_report_out}}"; fi; \
-  {{hf_scale_python}} scripts/publicar_hf_scale_snapshot.py --registry {{hf_scale_registry}} --readiness {{hf_scale_readiness}} --snapshot-date {{snapshot_date}} --dataset-repo {{hf_dataset_repo_id}} --publish ${out_arg}
+  {{hf_scale_python}} scripts/publicar_hf_scale_snapshot.py --registry {{hf_scale_registry}} --readiness {{hf_scale_readiness}} --snapshot-date {{snapshot_date}} --dataset-repo {{hf_dataset_repo_id}} --signing-key {{snapshot_signing_key}} --signer-identity {{snapshot_signer_identity}} --publish ${out_arg}
+  verify_out_arg=""; \
+  if [ -n "{{snapshot_attestation_verify_out}}" ]; then verify_out_arg="--json-out {{snapshot_attestation_verify_out}}"; fi; \
+  {{hf_scale_python}} scripts/verify_hf_snapshot_attestation.py --dataset-repo {{hf_dataset_repo_id}} --allowed-signers {{snapshot_allowed_signers}} --signer-identity {{snapshot_signer_identity}} ${verify_out_arg}
+
+etl-scale-origin-hf-attest-current:
+  test -n "{{snapshot_signing_key}}" || (echo "SNAPSHOT_SIGNING_KEY is required" >&2; exit 2)
+  report_arg=""; \
+  if [ -n "{{snapshot_attestation_report_out}}" ]; then report_arg="--report-out {{snapshot_attestation_report_out}}"; fi; \
+  {{hf_scale_python}} scripts/attest_hf_scale_origin.py --dataset-repo {{hf_dataset_repo_id}} --private-key {{snapshot_signing_key}} --signer-identity {{snapshot_signer_identity}} --publish ${report_arg}
+
+etl-scale-origin-hf-verify-attestation:
+  out_arg=""; \
+  if [ -n "{{snapshot_attestation_verify_out}}" ]; then out_arg="--json-out {{snapshot_attestation_verify_out}}"; fi; \
+  {{hf_scale_python}} scripts/verify_hf_snapshot_attestation.py --dataset-repo {{hf_dataset_repo_id}} --allowed-signers {{snapshot_allowed_signers}} --signer-identity {{snapshot_signer_identity}} ${out_arg}
 
 etl-scale-origin-hf-verify:
   out_arg=""; \
   if [ -n "{{hf_scale_verify_out}}" ]; then out_arg="--json-out {{hf_scale_verify_out}}"; fi; \
   {{hf_scale_python}} scripts/verify_hf_scale_origin.py --dataset-repo {{hf_dataset_repo_id}} --registry {{hf_scale_registry}} --readiness {{hf_scale_readiness}} --timeout {{hf_verify_timeout}} ${out_arg}
+
+etl-scale-origin-hf-prepare-rollback:
+  {{hf_scale_python}} scripts/prepare_hf_scale_rollback.py --dataset-repo {{hf_dataset_repo_id}} --target-snapshot-path {{hf_scale_rollback_target_snapshot_path}} --restore-report {{hf_scale_rollback_restore_report}} --validation-report {{hf_scale_rollback_validation_report}} --live-verification {{hf_scale_rollback_live_verification}} --timeout {{hf_verify_timeout}} --out {{hf_scale_rollback_plan_out}} --enforce
 
 etl-scale-origin-hf-restore:
   corpus_arg=""; \
@@ -2020,6 +2203,12 @@ etl-scale-readiness:
   just real-data-only-check
   docker compose run --rm etl "python3 scripts/report_scale_readiness.py --registry docs/etl/real-corpus-registry.json --out {{scale_readiness_report_out}} --enforce-foundation"
 
+etl-storage-health:
+  python3 scripts/export_storage_health.py \
+    --lane bdns_history={{storage_health_bdns_evidence}} \
+    --lane placsp_history={{storage_health_placsp_evidence}} \
+    --out {{storage_health_out}}
+
 real-data-only-check:
   python3 scripts/check_real_data_only.py \
     --db "{{db_path}}" \
@@ -2073,12 +2262,112 @@ etl-scale-inventory-documents:
 etl-scale-audit-document-provenance:
   python3 scripts/audit_document_provenance.py --enforce-integrity
 
+etl-scale-recover-wayback-document-lineage:
+  python3 scripts/recover_wayback_document_lineage.py --timeout {{wayback_document_timeout}} --attempts {{wayback_document_attempts}} {{wayback_document_args}} --enforce
+  just etl-scale-audit-document-provenance
+  python3 scripts/export_document_provenance_gap_queue.py --enforce
+
+etl-scale-boe-document-seed:
+  python3 scripts/manage_boe_document_corpus.py seed-summaries --db {{db_path}} --start-date {{boe_document_start_date}} --end-date {{boe_document_end_date}} --report-out {{boe_document_report}} --enforce
+
+etl-scale-boe-summary-fetch:
+  python3 scripts/run_document_fetch_queue.py --db {{db_path}} --pipeline-id boe_summary_fetch --worker-id boe-summary-worker --raw-root etl/data/raw/text_documents/boe_daily_summaries --workers {{boe_document_workers}} --per-host-workers {{boe_document_per_host_workers}} --claim-size 64 --max-items 0 --timeout 30 --max-bytes 16777216 --min-free-bytes {{boe_document_min_free_bytes}} --download-attempts 3 --retry-delay-seconds 120 --snapshot-date {{boe_document_snapshot_date}} --report-out {{boe_summary_fetch_report}}
+
+etl-scale-boe-summary-requeue-contract-failures:
+  python3 scripts/manage_boe_document_corpus.py requeue-summary-contract-failures --db {{db_path}} --report-out {{boe_document_report}} --enforce
+
+etl-scale-boe-document-expand:
+  python3 scripts/manage_boe_document_corpus.py expand-documents --db {{db_path}} --start-date {{boe_document_start_date}} --end-date {{boe_document_end_date}} --report-out {{boe_document_report}} --enforce
+
+etl-scale-boe-document-fetch:
+  python3 scripts/run_document_fetch_queue.py --db {{db_path}} --pipeline-id boe_document_fetch --worker-id boe-document-worker --raw-root etl/data/raw/text_documents/boe_document_xml --workers {{boe_document_workers}} --per-host-workers {{boe_document_per_host_workers}} --claim-size 64 --max-items {{boe_document_max_items}} --timeout 30 --max-bytes 67108864 --min-free-bytes {{boe_document_min_free_bytes}} --download-attempts 3 --retry-delay-seconds 120 --snapshot-date {{boe_document_snapshot_date}} --report-out {{boe_document_fetch_report}}
+
+etl-scale-boe-document-status:
+  python3 scripts/manage_boe_document_corpus.py status --db {{db_path}} --report-out {{boe_document_report}} --enforce
+
+etl-scale-boe-document-cohort:
+  just etl-scale-boe-document-seed
+  just etl-scale-boe-summary-fetch
+  just etl-scale-boe-document-expand
+  just etl-scale-boe-document-fetch
+  just etl-scale-boe-document-status
+
+# Source-scoped candidate facts plus reconstructable effective state from exact
+# proclamation and correction XML. Base proclamation rows remain immutable.
+etl-scale-boe-election-candidates:
+  python3 scripts/ingest_boe_election_candidates.py --db {{db_path}} --boe-id BOE-A-2015-12734 --boe-id BOE-A-2016-5186 --boe-id BOE-A-2019-4902 --boe-id BOE-A-2019-6475 --boe-id BOE-A-2023-15066 --boe-id BOE-A-2024-9687 --boe-id BOE-A-2024-10230 --snapshot-date {{boe_document_snapshot_date}} --report-out {{boe_election_candidate_report}} --enforce
+  just etl-scale-boe-election-candidate-corrections
+  python3 scripts/ingest_boe_election_candidates.py --db {{db_path}} --boe-id BOE-A-2015-12734 --boe-id BOE-A-2016-5186 --boe-id BOE-A-2019-4902 --boe-id BOE-A-2019-6475 --boe-id BOE-A-2023-15066 --boe-id BOE-A-2024-9687 --boe-id BOE-A-2024-10230 --snapshot-date {{boe_document_snapshot_date}} --report-out {{boe_election_candidate_report}} --enforce
+
+etl-scale-boe-election-candidate-corrections:
+  python3 scripts/materialize_boe_candidate_corrections.py --db {{db_path}} --snapshot-date {{boe_document_snapshot_date}} --report-out {{boe_election_candidate_correction_report}} --enforce
+
+# Exact pending BOE correction paragraphs plus a deduplicated public candidate
+# context corpus. Existing human decisions survive identical regenerations and
+# block evidence/schema drift.
+etl-scale-boe-election-candidate-correction-review-queue:
+  python3 scripts/prepare_boe_candidate_correction_review_queue.py --db {{db_path}} --out {{boe_election_candidate_correction_review_queue}} --context-out {{boe_election_candidate_correction_review_context}} --report-out {{boe_election_candidate_correction_review_report}} --enforce
+
+etl-scale-recover-archived-document-lineage:
+  python3 scripts/export_archived_document_lineage.py --enforce
+  just etl-scale-audit-document-provenance
+  python3 scripts/export_document_provenance_gap_queue.py --enforce
+
+etl-scale-recover-captured-document-links:
+  python3 scripts/recover_captured_document_links.py --enforce
+  just etl-scale-audit-document-provenance
+  python3 scripts/export_document_provenance_gap_queue.py --enforce
+
+etl-scale-recover-official-document-identifiers:
+  python3 scripts/recover_official_document_identifiers.py --enforce
+  just etl-scale-audit-document-provenance
+  python3 scripts/export_document_provenance_gap_queue.py --enforce
+
+etl-scale-recover-official-path-documents:
+  python3 scripts/recover_official_path_documents.py --enforce
+  just etl-scale-audit-document-provenance
+  python3 scripts/export_document_provenance_gap_queue.py --enforce
+
+etl-scale-document-provenance-gap-queue:
+  just etl-scale-audit-document-provenance
+  python3 scripts/export_document_provenance_gap_queue.py --enforce
+
 etl-scale-reconcile-documents:
   just etl-scale-inventory-documents
   just etl-scale-audit-document-provenance
+  python3 scripts/export_document_provenance_gap_queue.py --enforce
 
 etl-scale-benchmark-ocr-routing:
   python3 scripts/benchmark_pdf_ocr_routing.py --root etl/data/raw --manifest etl/data/manifests/real-document-format-inventory.jsonl --workers 4 --max-pages 20
+
+etl-scale-extract-document-text-corpus:
+  python3 scripts/extract_real_document_corpus.py --state-db {{scale_document_text_state_db}} --workers 12 --claim-size 48 --max-input-bytes 134217728 --max-text-chars 16000000 --enforce
+
+etl-scale-validate-document-text-corpus:
+  python3 scripts/validate_real_document_text_corpus.py --workers 12 --batch-size 128 --full-raw-check --enforce
+
+etl-scale-ocr-document-pages:
+  python3 scripts/ocr_real_document_pages.py --state-db {{scale_document_ocr_state_db}} --workers 8 --claim-size 16 --timeout 180 --enforce
+
+etl-scale-validate-document-page-ocr:
+  python3 scripts/validate_real_document_page_ocr.py --workers 8 --batch-size 64 --enforce
+
+etl-scale-prepare-document-page-ocr-review:
+  python3 scripts/prepare_real_document_ocr_review.py --sample-pages 40 --enforce
+
+etl-scale-validate-document-page-ocr-review:
+  python3 scripts/validate_real_document_ocr_review.py --enforce-integrity
+
+etl-scale-require-document-page-ocr-review:
+  python3 scripts/validate_real_document_ocr_review.py --enforce-integrity --require-complete
+
+etl-scale-process-document-corpus:
+  just etl-scale-extract-document-text-corpus
+  just etl-scale-validate-document-text-corpus
+  just etl-scale-ocr-document-pages
+  just etl-scale-validate-document-page-ocr
+  just etl-scale-prepare-document-page-ocr-review
+  just etl-scale-validate-document-page-ocr-review
 
 etl-scale-audit-member-votes:
   python3 scripts/audit_large_vote_snapshot.py --snapshot {{scale_member_vote_snapshot}} --shard-manifest {{scale_member_vote_shard_manifest_out}} --out {{scale_member_vote_audit_out}}
@@ -2117,11 +2406,21 @@ etl-scale-export-semantic-actor-mandates:
 etl-scale-validate-semantic-actor-mandates:
   docker compose run --rm --build etl "python3 scripts/validate_semantic_partitions.py --lane actor_mandates --root {{scale_semantic_actor_root}} --manifest {{scale_semantic_actor_manifest_out}} --report-out {{scale_semantic_actor_validation_out}} --min-rows {{scale_semantic_actor_min_rows}} --max-peak-rss-mb 1024 --enforce"
 
+etl-scale-export-semantic-actor-graph:
+  prev_args=""; if [ -n "{{scale_semantic_actor_graph_previous_manifest}}" ] || [ -n "{{scale_semantic_actor_graph_previous_root}}" ]; then prev_args="--previous-manifest {{scale_semantic_actor_graph_previous_manifest}} --previous-root {{scale_semantic_actor_graph_previous_root}}"; fi; uv --cache-dir /tmp/vclc-actor-partitions-uv run --no-project --with 'pyarrow>=18,<21' python scripts/export_semantic_partitions.py --lane actor_graph --db {{actor_graph_db}} --output-root {{scale_semantic_actor_graph_root}} --snapshot-date {{actor_graph_snapshot_date}} --row-group-rows {{scale_semantic_row_group_rows}} --max-file-rows {{scale_semantic_max_file_rows}} --manifest-out {{scale_semantic_actor_graph_manifest_out}} --min-rows {{scale_semantic_actor_graph_min_rows}} --max-peak-rss-mb 1024 $prev_args --enforce
+
+etl-scale-validate-semantic-actor-graph:
+  uv --cache-dir /tmp/vclc-actor-partitions-uv run --no-project --with 'pyarrow>=18,<21' python scripts/validate_semantic_partitions.py --lane actor_graph --root {{scale_semantic_actor_graph_root}} --manifest {{scale_semantic_actor_graph_manifest_out}} --source-db {{actor_graph_db}} --report-out {{scale_semantic_actor_graph_validation_out}} --batch-rows 10000 --min-rows {{scale_semantic_actor_graph_min_rows}} --max-peak-rss-mb 1024 --enforce
+
 etl-scale-export-semantic-candidate-occurrences:
-  prev_args=""; if [ -n "{{scale_semantic_candidate_previous_manifest}}" ] || [ -n "{{scale_semantic_candidate_previous_root}}" ]; then prev_args="--previous-manifest {{scale_semantic_candidate_previous_manifest}} --previous-root {{scale_semantic_candidate_previous_root}}"; fi; docker compose run --rm --build etl "python3 scripts/export_semantic_partitions.py --lane candidate_occurrences --db {{db_path}} --output-root {{scale_semantic_candidate_root}} --snapshot-date {{snapshot_date}} --row-group-rows {{scale_semantic_row_group_rows}} --max-file-rows {{scale_semantic_max_file_rows}} --manifest-out {{scale_semantic_candidate_manifest_out}} --min-rows {{scale_semantic_candidate_min_rows}} --max-peak-rss-mb 1024 $prev_args --enforce"
+  prev_args=""; if [ -n "{{scale_semantic_candidate_previous_manifest}}" ] || [ -n "{{scale_semantic_candidate_previous_root}}" ]; then prev_args="--previous-manifest {{scale_semantic_candidate_previous_manifest}} --previous-root {{scale_semantic_candidate_previous_root}}"; fi; docker compose run --rm --build etl "python3 scripts/export_semantic_partitions.py --lane candidate_occurrences --db {{db_path}} --output-root {{scale_semantic_candidate_root}} --snapshot-date {{boe_document_snapshot_date}} --row-group-rows {{scale_semantic_row_group_rows}} --max-file-rows {{scale_semantic_max_file_rows}} --manifest-out {{scale_semantic_candidate_manifest_out}} --min-rows {{scale_semantic_candidate_min_rows}} --max-peak-rss-mb 1024 $prev_args --enforce"
 
 etl-scale-validate-semantic-candidate-occurrences:
   docker compose run --rm --build etl "python3 scripts/validate_semantic_partitions.py --lane candidate_occurrences --root {{scale_semantic_candidate_root}} --manifest {{scale_semantic_candidate_manifest_out}} --report-out {{scale_semantic_candidate_validation_out}} --min-rows {{scale_semantic_candidate_min_rows}} --max-peak-rss-mb 1024 --enforce"
+
+etl-scale-replay-semantic-candidate-occurrences:
+  docker compose run --rm --build etl "python3 scripts/export_semantic_partitions.py --lane candidate_occurrences --db {{db_path}} --output-root {{scale_semantic_candidate_replay_root}} --snapshot-date {{boe_document_snapshot_date}} --row-group-rows {{scale_semantic_row_group_rows}} --max-file-rows {{scale_semantic_max_file_rows}} --previous-manifest {{scale_semantic_candidate_manifest_out}} --previous-root {{scale_semantic_candidate_root}} --manifest-out {{scale_semantic_candidate_incremental_manifest_out}} --min-rows {{scale_semantic_candidate_min_rows}} --max-peak-rss-mb 1024 --enforce"
+  docker compose run --rm --build etl "python3 scripts/validate_semantic_partitions.py --lane candidate_occurrences --root {{scale_semantic_candidate_replay_root}} --manifest {{scale_semantic_candidate_incremental_manifest_out}} --report-out {{scale_semantic_candidate_incremental_validation_out}} --min-rows {{scale_semantic_candidate_min_rows}} --max-peak-rss-mb 1024 --enforce"
 
 etl-scale-export-semantic-public-money:
   # Requires project parquet extra or requirements.txt environment.
@@ -2237,6 +2536,9 @@ etl-integrity-procurement-detect-dry-run:
 # Persists internal review signals only. It cannot publish or label corruption.
 etl-integrity-procurement-detect:
   python3 scripts/detect_procurement_integrity_signals.py --db {{db_path}} --threshold-eur {{integrity_signal_threshold_eur}} --min-records {{integrity_signal_min_records}} --max-signals {{integrity_signal_max_signals}} --report-out {{integrity_signal_internal_report_out}}
+
+etl-integrity-procurement-prepare-real-review:
+  python3 scripts/prepare_procurement_integrity_review_queue.py --db {{placsp_bulk_db}} --out {{integrity_signal_review_csv}} --report-out {{integrity_signal_review_report}} --enforce
 
 etl-export-integrity-signals:
   python3 scripts/export_public_integrity_signals.py --db {{db_path}} --snapshot-date {{snapshot_date}} --out {{integrity_signal_public_out}}
@@ -3778,7 +4080,7 @@ etl-extract-infoelectoral-elected-officials:
 etl-infoelectoral-candidates-enqueue:
   docker compose run --rm --build etl "python3 scripts/ingest_infoelectoral_candidates.py --db {{db_path}} --pipeline-id {{infoelectoral_candidate_pipeline_id}} --report-out {{infoelectoral_candidate_report}} enqueue --snapshot-date {{snapshot_date}}"
 
-# Raw candidate archives contain DNI/birth fields. Keep the CAS restricted and ignored.
+# Official candidate archives are public accountability evidence. Retain all source fields.
 # Workers are horizontally repeatable through atomic SQLite leases; each run stays bounded.
 etl-infoelectoral-candidates-work:
   docker compose run --rm --build etl "local_arg=''; if [ -n '{{infoelectoral_candidate_local_archive_dir}}' ]; then local_arg='--local-archive-dir {{infoelectoral_candidate_local_archive_dir}}'; fi; python3 scripts/ingest_infoelectoral_candidates.py --db {{db_path}} --pipeline-id {{infoelectoral_candidate_pipeline_id}} --report-out {{infoelectoral_candidate_report}} worker --worker-id infoelectoral-candidate-worker --store-root {{infoelectoral_candidate_store_root}} --timeout {{infoelectoral_timeout}} --max-items {{infoelectoral_candidate_worker_max_items}} --min-free-bytes {{infoelectoral_candidate_min_free_bytes}} $local_arg"
@@ -3910,51 +4212,46 @@ accountability-dossiers-next-prime:
       --db "$accountability_db" \
       --snapshot-date "{{snapshot_date}}" \
       --out "{{gh_pages_dir}}/accountability-dossiers/data/dossiers.json" \
-      --latest-out "{{gh_pages_next_app_dir}}/public/accountability-dossiers/data/dossiers.json" \
       --max-issues-per-actor "{{accountability_dossiers_max_issues_per_actor}}" \
       --max-actors-per-issue "{{accountability_dossiers_max_actors_per_issue}}"; \
     python3 scripts/export_accountability_ledger_snapshot.py \
       --db "$accountability_db" \
       --snapshot-date "{{snapshot_date}}" \
       --out "{{gh_pages_dir}}/accountability-dossiers/data/ledger.json" \
-      --latest-out "{{gh_pages_next_app_dir}}/public/accountability-dossiers/data/ledger.json" \
       --max-entries-per-issue "{{accountability_ledger_max_entries_per_issue}}" \
       --max-sample-entries-per-actor "{{accountability_ledger_max_sample_entries_per_actor}}"; \
     python3 scripts/export_accountability_evidence_api_snapshot.py \
       --dossiers "{{gh_pages_dir}}/accountability-dossiers/data/dossiers.json" \
       --ledger "{{gh_pages_dir}}/accountability-dossiers/data/ledger.json" \
       --snapshot-date "{{snapshot_date}}" \
-      --out "{{gh_pages_dir}}/accountability-evidence/data/evidence-api.json" \
-      --latest-out "{{gh_pages_next_app_dir}}/public/accountability-evidence/data/evidence-api.json"; \
+      --out "{{gh_pages_dir}}/accountability-evidence/data/evidence-api.json"; \
   else \
-    if [ -f "etl/data/published/accountability-dossiers-latest.json" ]; then \
-      cp -f "etl/data/published/accountability-dossiers-latest.json" "{{gh_pages_dir}}/accountability-dossiers/data/dossiers.json"; \
-      cp -f "etl/data/published/accountability-dossiers-latest.json" "{{gh_pages_next_app_dir}}/public/accountability-dossiers/data/dossiers.json"; \
-    elif [ ! -f "{{gh_pages_next_app_dir}}/public/accountability-dossiers/data/dossiers.json" ]; then \
-      printf '%s\n' '{"meta":{"schema_version":"accountability_dossier_snapshot_v1","generated_at":"dev-local-stub","snapshot_date":"{{snapshot_date}}"},"snapshot_date":"{{snapshot_date}}","coverage":{"entries_total":0,"actors_total":0,"actors_exported":0,"actors_truncated":false,"issues_total":0,"issues_exported":0,"issues_truncated":false,"issue_actor_edges_total":0,"entries_with_person_id":0,"entries_with_party_id":0,"entries_with_parliamentary_group_id":0,"entries_with_mandate_id":0,"entries_with_institution_id":0,"entries_with_org_unit_id":0,"entries_with_position_id":0,"entries_by_role":{},"entries_by_kind":{},"entries_by_actor_kind":{}},"actors":[],"issues":[]}' > "{{gh_pages_next_app_dir}}/public/accountability-dossiers/data/dossiers.json"; \
-      cp -f "{{gh_pages_next_app_dir}}/public/accountability-dossiers/data/dossiers.json" "{{gh_pages_dir}}/accountability-dossiers/data/dossiers.json"; \
-    else \
-      cp -f "{{gh_pages_next_app_dir}}/public/accountability-dossiers/data/dossiers.json" "{{gh_pages_dir}}/accountability-dossiers/data/dossiers.json"; \
-    fi; \
-    if [ -f "etl/data/published/accountability-ledger-latest.json" ]; then \
-      cp -f "etl/data/published/accountability-ledger-latest.json" "{{gh_pages_dir}}/accountability-dossiers/data/ledger.json"; \
-      cp -f "etl/data/published/accountability-ledger-latest.json" "{{gh_pages_next_app_dir}}/public/accountability-dossiers/data/ledger.json"; \
-    elif [ ! -f "{{gh_pages_next_app_dir}}/public/accountability-dossiers/data/ledger.json" ]; then \
-      printf '%s\n' '{"meta":{"schema_version":"accountability_ledger_snapshot_v1","generated_at":"dev-local-stub","snapshot_date":"{{snapshot_date}}","issue_id":""},"snapshot_date":"{{snapshot_date}}","coverage":{"issues_total":0,"entries_total":0,"entries_exported":0,"entries_truncated":false,"issues_with_truncated_entries":0,"actors_total":0,"entries_with_resolved_actor_id":0,"entries_with_person_id":0,"entries_with_party_id":0,"entries_with_parliamentary_group_id":0,"entries_with_mandate_id":0,"entries_with_institution_id":0,"entries_with_org_unit_id":0,"entries_with_position_id":0,"entries_by_role":{},"entries_by_kind":{},"entries_by_actor_kind":{}},"actors":[],"issues":[]}' > "{{gh_pages_next_app_dir}}/public/accountability-dossiers/data/ledger.json"; \
-      cp -f "{{gh_pages_next_app_dir}}/public/accountability-dossiers/data/ledger.json" "{{gh_pages_dir}}/accountability-dossiers/data/ledger.json"; \
-    else \
-      cp -f "{{gh_pages_next_app_dir}}/public/accountability-dossiers/data/ledger.json" "{{gh_pages_dir}}/accountability-dossiers/data/ledger.json"; \
-    fi; \
-    if [ -f "etl/data/published/accountability-evidence-api-latest.json" ]; then \
-      cp -f "etl/data/published/accountability-evidence-api-latest.json" "{{gh_pages_dir}}/accountability-evidence/data/evidence-api.json"; \
-      cp -f "etl/data/published/accountability-evidence-api-latest.json" "{{gh_pages_next_app_dir}}/public/accountability-evidence/data/evidence-api.json"; \
-    elif [ ! -f "{{gh_pages_next_app_dir}}/public/accountability-evidence/data/evidence-api.json" ]; then \
-      printf '%s\n' '{"meta":{"schema_version":"accountability_evidence_api_v1","generated_at":"dev-local-stub","snapshot_date":"{{snapshot_date}}"},"snapshot_date":"{{snapshot_date}}","coverage":{"source_entries_total":0,"source_actors_total":0,"source_issues_total":0,"question_templates_total":0,"actor_answers_total":0,"issue_answers_total":0,"actor_issue_refs_total":0,"issue_clusters_total":0,"issue_cluster_links_total":0,"issue_cluster_review_items_total":0,"issue_cluster_review_status_counts":{},"fallback_issue_cluster_answers_total":0,"gap_answers_total":0,"qa_answers_total":0,"qa_answers_with_self_route_total":0,"evidence_samples_total":0,"answer_status_counts":{},"gap_answer_status_counts":{},"qa_answer_status_counts":{}},"question_templates":[],"actor_answers":[],"issue_answers":[],"actor_issue_refs":[],"issue_clusters":[],"issue_cluster_review_queue":[],"gap_answers":[],"qa_answers":[],"indexes":{"actor_answer_by_key":{},"issue_answer_by_id":{},"issue_cluster_by_id":{},"issue_clusters_by_issue_id":{},"issue_cluster_review_by_id":{},"gap_answer_by_dimension":{},"qa_answer_by_id":{},"qa_route_by_id":{}}}' > "{{gh_pages_next_app_dir}}/public/accountability-evidence/data/evidence-api.json"; \
-      cp -f "{{gh_pages_next_app_dir}}/public/accountability-evidence/data/evidence-api.json" "{{gh_pages_dir}}/accountability-evidence/data/evidence-api.json"; \
-    else \
-      cp -f "{{gh_pages_next_app_dir}}/public/accountability-evidence/data/evidence-api.json" "{{gh_pages_dir}}/accountability-evidence/data/evidence-api.json"; \
-    fi; \
-  fi
+    dossiers_source="etl/data/published/accountability-dossiers-latest.json"; \
+    ledger_source="etl/data/published/accountability-ledger-latest.json"; \
+    evidence_source="etl/data/published/accountability-evidence-api-latest.json"; \
+    if [ ! -s "$dossiers_source" ]; then dossiers_source="{{gh_pages_next_app_dir}}/public/accountability-dossiers/data/dossiers.json"; fi; \
+    if [ ! -s "$ledger_source" ]; then ledger_source="{{gh_pages_next_app_dir}}/public/accountability-dossiers/data/ledger.json"; fi; \
+    if [ ! -s "$evidence_source" ]; then evidence_source="{{gh_pages_next_app_dir}}/public/accountability-evidence/data/evidence-api.json"; fi; \
+    python3 scripts/validate_real_public_json.py \
+      --path "$dossiers_source" \
+      --path "$ledger_source" \
+      --path "$evidence_source"; \
+    cp -f "$dossiers_source" "{{gh_pages_dir}}/accountability-dossiers/data/dossiers.json"; \
+    cp -f "$ledger_source" "{{gh_pages_dir}}/accountability-dossiers/data/ledger.json"; \
+    cp -f "$evidence_source" "{{gh_pages_dir}}/accountability-evidence/data/evidence-api.json"; \
+  fi; \
+  python3 scripts/validate_accountability_artifacts.py \
+    --ledger "{{gh_pages_dir}}/accountability-dossiers/data/ledger.json" \
+    --dossiers "{{gh_pages_dir}}/accountability-dossiers/data/dossiers.json" \
+    --evidence-api "{{gh_pages_dir}}/accountability-evidence/data/evidence-api.json" \
+    --infer-snapshot-date; \
+  python3 scripts/validate_real_public_json.py \
+    --path "{{gh_pages_dir}}/accountability-dossiers/data/dossiers.json" \
+    --path "{{gh_pages_dir}}/accountability-dossiers/data/ledger.json" \
+    --path "{{gh_pages_dir}}/accountability-evidence/data/evidence-api.json"; \
+  cp -f "{{gh_pages_dir}}/accountability-dossiers/data/dossiers.json" "{{gh_pages_next_app_dir}}/public/accountability-dossiers/data/dossiers.json"; \
+  cp -f "{{gh_pages_dir}}/accountability-dossiers/data/ledger.json" "{{gh_pages_next_app_dir}}/public/accountability-dossiers/data/ledger.json"; \
+  cp -f "{{gh_pages_dir}}/accountability-evidence/data/evidence-api.json" "{{gh_pages_next_app_dir}}/public/accountability-evidence/data/evidence-api.json"
 
 gh-pages-next-prime:
   mkdir -p "{{gh_pages_dir}}"/parliamentary-accountability/data
@@ -3981,10 +4278,13 @@ gh-pages-next-prime:
     python3 scripts/export_parliamentary_accountability_snapshot.py \
       --db "{{db_path}}" \
       --out "{{gh_pages_dir}}/parliamentary-accountability/data/accountability.json"; \
-  elif [ ! -f "{{gh_pages_dir}}/parliamentary-accountability/data/accountability.json" ]; then \
-    printf '%s\n' \
-      '{"meta":{"generated_at":"dev-local-stub","total_events":0},"parties":[],"discipline":{"members":[],"parties":[],"parties_by_legislature":[],"attendance_by_member_context":[],"attendance_by_party_context":[]},"outcomes":{"summary":{"passed":0,"failed":0,"tied":0,"no_signal":0},"critical_by_margin":[]},"coalitions":{"pairs":[],"issue_coalitions":[]}}' \
-      > "{{gh_pages_dir}}/parliamentary-accountability/data/accountability.json"; \
+  elif [ ! -s "{{gh_pages_dir}}/parliamentary-accountability/data/accountability.json" ]; then \
+    if [ ! -s "{{gh_pages_next_app_dir}}/public/parliamentary-accountability/data/accountability.json" ]; then \
+      echo "ERROR: missing real parliamentary accountability artifact; set GH_PAGES_NEXT_PRIME_EXPORT=1" >&2; \
+      exit 2; \
+    fi; \
+    cp -f "{{gh_pages_next_app_dir}}/public/parliamentary-accountability/data/accountability.json" \
+      "{{gh_pages_dir}}/parliamentary-accountability/data/accountability.json"; \
   fi
   if [ "{{gh_pages_next_prime_export}}" = "1" ]; then \
     python3 scripts/export_initiative_lifecycle_snapshot.py \
@@ -3993,10 +4293,13 @@ gh-pages-next-prime:
       --max-initiatives 200 \
       --max-votes-per-initiative 80 \
       --min-committee-sample 4; \
-  elif [ ! -f "{{gh_pages_dir}}/initiative-lifecycle/data/lifecycle.json" ]; then \
-    printf '%s\n' \
-      '{"meta":{"generated_at":"dev-local-stub","total_initiatives":0,"linked_initiatives":0,"unlinked_initiatives":0,"total_vote_links":0},"filters":{"source_ids":[],"committees":[],"legislatures":[],"status_buckets":[],"link_methods":[]},"initiative_overview":{"linked_initiatives":0,"unlinked_initiatives":0,"confidence_distribution":{"high":0,"medium":0,"low":0,"none":0},"global_confidence":{"high":0,"medium":0,"low":0,"none":0},"link_methods":{}}, "bottlenecks":{"committee_by_throughput":[]}, "initiatives":[]}' \
-      > "{{gh_pages_dir}}/initiative-lifecycle/data/lifecycle.json"; \
+  elif [ ! -s "{{gh_pages_dir}}/initiative-lifecycle/data/lifecycle.json" ]; then \
+    if [ ! -s "{{gh_pages_next_app_dir}}/public/initiative-lifecycle/data/lifecycle.json" ]; then \
+      echo "ERROR: missing real initiative lifecycle artifact; set GH_PAGES_NEXT_PRIME_EXPORT=1" >&2; \
+      exit 2; \
+    fi; \
+    cp -f "{{gh_pages_next_app_dir}}/public/initiative-lifecycle/data/lifecycle.json" \
+      "{{gh_pages_dir}}/initiative-lifecycle/data/lifecycle.json"; \
   fi
   if [ "{{gh_pages_next_prime_export}}" = "1" ]; then \
     mkdir -p "{{gh_pages_dir}}/people/data"; \
@@ -4043,25 +4346,40 @@ gh-pages-next-prime:
     python3 scripts/export_legal_sanctions_snapshot.py \
       --db "{{db_path}}" \
       --out "{{gh_pages_dir}}/legal-sanctions/data/legal-sanctions.json"; \
-    python3 scripts/export_policy_outcomes_snapshot.py \
-      --db "{{db_path}}" \
-      --out "{{gh_pages_dir}}/policy-outcomes/data/policy-outcomes.json"; \
+    just outcome-context-export; \
+    cp -f "{{outcome_context_public_status_out}}" \
+      "{{gh_pages_dir}}/policy-outcomes/data/policy-outcomes.json"; \
   fi
-  if [ ! -f "{{gh_pages_dir}}/people/data/xray.json" ]; then \
-    printf '%s\n' \
-      '{"meta":{"generated_at":"dev-local-stub","snapshot_date":"{{snapshot_date}}","source_snapshot":"{{snapshot_date}}","top_members":24,"include_party_proxies":0,"group_count":{"party":0,"institution":0,"ambito":0,"territorio":0,"cargo":0}},"kinds":["party","institution","ambito","territorio","cargo"],"groups":{"party":[],"institution":[],"ambito":[],"territorio":[],"cargo":[]}, "group_index":{"party":{},"institution":{},"ambito":{},"territorio":{},"cargo":{}}}' \
-      > "{{gh_pages_dir}}/people/data/xray.json"; \
+  if [ ! -s "{{gh_pages_dir}}/people/data/xray.json" ]; then \
+    if [ ! -s "{{gh_pages_next_app_dir}}/public/people/data/xray.json" ]; then \
+      echo "ERROR: missing real people xray artifact; set GH_PAGES_NEXT_PRIME_EXPORT=1" >&2; \
+      exit 2; \
+    fi; \
+    cp -f "{{gh_pages_next_app_dir}}/public/people/data/xray.json" \
+      "{{gh_pages_dir}}/people/data/xray.json"; \
   fi
-  if [ ! -f "{{gh_pages_dir}}/legal-sanctions/data/legal-sanctions.json" ]; then \
-    printf '%s\n' \
-      '{"generated_at":"dev-local-stub","snapshot_date":"{{snapshot_date}}","schema_version":"legal_sanctions_snapshot_v1","meta":{"norm_nodes":0,"lineage_edges":0,"infraction_type_count":0,"infraction_mappings":0,"volume_rows":0,"kpi_rows":0,"municipal_rows":0},"filters":{"source_ids":[],"relation_types":[],"infraction_type_ids":[],"kpi_ids":[],"periods":[]},"legal_graph":{"nodes":[],"edges":[],"node_count":0,"edge_count":0,"relation_types":[],"nodes_with_fragments":0},"infraction_network":{"infraction_types":[],"mappings":[]},"sanction_volume_monitoring":{"series":[],"source_totals":[],"sources":[],"periods":[]},"procedural_kpi_drift":[],"municipal_monitoring":{"summary":{"total_ordinances":0,"normalized_ordinances":0,"identified_ordinances":0,"blocked_ordinances":0,"status_counts":[]},"city_summary":[],"ordinance_rows":[]},"responsibility_summary":{"roles":[],"top_actors":[],"rows_with_primary_evidence":0,"rows_total":0},"liberty_restriction_monitoring":{"enabled":false,"rows":0}}' \
-      > "{{gh_pages_dir}}/legal-sanctions/data/legal-sanctions.json"; \
+  if [ ! -s "{{gh_pages_dir}}/legal-sanctions/data/legal-sanctions.json" ]; then \
+    if [ ! -s "{{gh_pages_next_app_dir}}/public/legal-sanctions/data/legal-sanctions.json" ]; then \
+      echo "ERROR: missing real legal sanctions artifact; set GH_PAGES_NEXT_PRIME_EXPORT=1" >&2; \
+      exit 2; \
+    fi; \
+    cp -f "{{gh_pages_next_app_dir}}/public/legal-sanctions/data/legal-sanctions.json" \
+      "{{gh_pages_dir}}/legal-sanctions/data/legal-sanctions.json"; \
   fi
-  if [ ! -f "{{gh_pages_dir}}/policy-outcomes/data/policy-outcomes.json" ]; then \
-    printf '%s\n' \
-      '{"meta":{"generated_at":"dev-local-stub","snapshot_date":"{{snapshot_date}}","generated_by":"gh-pages-next-prime","filters":{}}, "coverage":{"indicator_series_total":0,"indicator_points_total":0,"interventions_total":0,"intervention_events_total":0,"causal_estimates_total":0,"policy_events_total":0,"series_loaded":0,"events_loaded":0,"events_in_association":0,"associations_total":0,"series_in_association":0,"series_by_source":{},"series_coverage_by_point_count":{"min_points_included":0,"max_points_included":0}}, "series":[],"policy_events":[],"associations":[],"limitations":{"interventions_available":false,"intervention_events_available":false,"causal_estimates_available":false,"description":["Stub temporal: sin snapshot generado en modo local sin export"],"method_note":"Correlación no implica causalidad."},"filters":{"series_source_ids":[],"event_source_ids":[],"domains":[]}}' \
-      > "{{gh_pages_dir}}/policy-outcomes/data/policy-outcomes.json"; \
+  if [ ! -s "{{gh_pages_dir}}/policy-outcomes/data/policy-outcomes.json" ]; then \
+    if [ ! -s "{{gh_pages_next_app_dir}}/public/policy-outcomes/data/policy-outcomes.json" ]; then \
+      echo "ERROR: missing real policy outcomes artifact; set GH_PAGES_NEXT_PRIME_EXPORT=1" >&2; \
+      exit 2; \
+    fi; \
+    cp -f "{{gh_pages_next_app_dir}}/public/policy-outcomes/data/policy-outcomes.json" \
+      "{{gh_pages_dir}}/policy-outcomes/data/policy-outcomes.json"; \
   fi
+  python3 scripts/validate_real_public_json.py \
+    --path "{{gh_pages_dir}}/parliamentary-accountability/data/accountability.json" \
+    --path "{{gh_pages_dir}}/initiative-lifecycle/data/lifecycle.json" \
+    --path "{{gh_pages_dir}}/people/data/xray.json" \
+    --path "{{gh_pages_dir}}/legal-sanctions/data/legal-sanctions.json" \
+    --path "{{gh_pages_dir}}/policy-outcomes/data/policy-outcomes.json"
   @just accountability-dossiers-next-prime
   @just responsibility-explainer-next-prime
   if [ -f "{{gh_pages_dir}}/parliamentary-accountability/data/accountability.json" ]; then \
@@ -4136,6 +4454,7 @@ gh-pages-next-prime:
     cp -R "{{gh_pages_dir}}"/parliamentary-accountability "{{gh_pages_next_app_dir}}/public/" 2>/dev/null || true; \
   fi
   @just vote-explainer-next-prime
+  @just evidence-api-v1-export
 
 responsibility-explainer-next-prime:
   mkdir -p "{{gh_pages_dir}}/responsibility-explainer/data"
@@ -4171,11 +4490,16 @@ responsibility-explainer-next-prime:
     python3 scripts/export_responsibility_explainer_snapshot.py \
       --db "$responsibility_explainer_db" \
       --out-dir "{{gh_pages_dir}}/responsibility-explainer/data"; \
-  elif [ ! -f "{{gh_pages_dir}}/responsibility-explainer/data/manifest.json" ]; then \
-    printf '%s\n' \
-      '{"meta":{"generated_at":"dev-local-stub","snapshot_date":"{{snapshot_date}}","schema_version":"responsibility_explainer_manifest_v1","snapshot_db":"stub","total_cases":0},"cases":[]}' \
-      > "{{gh_pages_dir}}/responsibility-explainer/data/manifest.json"; \
+  elif [ ! -s "{{gh_pages_dir}}/responsibility-explainer/data/manifest.json" ]; then \
+    if [ ! -s "{{gh_pages_next_app_dir}}/public/responsibility-explainer/data/manifest.json" ]; then \
+      echo "ERROR: missing real responsibility explainer artifact; set GH_PAGES_NEXT_PRIME_EXPORT=1" >&2; \
+      exit 2; \
+    fi; \
+    cp -R "{{gh_pages_next_app_dir}}/public/responsibility-explainer/data/." \
+      "{{gh_pages_dir}}/responsibility-explainer/data/"; \
   fi
+  python3 scripts/validate_real_public_json.py \
+    --path "{{gh_pages_dir}}/responsibility-explainer/data"
   if [ -f "{{gh_pages_dir}}/responsibility-explainer/data/manifest.json" ]; then \
     find "{{gh_pages_next_app_dir}}/public/responsibility-explainer/data" -mindepth 1 -maxdepth 1 -type f -name '*.json' -delete; \
     cp -R "{{gh_pages_dir}}/responsibility-explainer/data/." "{{gh_pages_next_app_dir}}/public/responsibility-explainer/data/"; \
@@ -4238,6 +4562,16 @@ explorer-datasette:
   python3 scripts/run_datasette_explorer.py --db "{{db_path}}" --host {{explorer_host}} --port 8011
 
 cloudflare-pages-build:
+  @just manifesto-promises-export
+  @just placsp-spending-export
+  @just moncloa-agreements-export
+  @just moncloa-geopolitics-export
+  @just eurostat-gdp-indicator-export
+  @just actor-graph-export
+  @just comparison-engine-export
+  @just outcome-context-export
+  @just obstruction-tracker-export
+  @just transparency-dashboard-export
   python3 scripts/build_citizen_tailwind_md3_css.py --tokens "{{citizen_tailwind_md3_tokens}}" --out "{{citizen_tailwind_md3_css}}"
   GH_PAGES_NEXT_PRIME_EXPORT=0 just accountability-dossiers-next-prime
   mkdir -p /tmp/vclc-npm-cache /tmp/vclc-npm-logs
@@ -4251,6 +4585,396 @@ cloudflare-pages-build:
   just cloudflare-pages-size-check
   just privacy-check-public-artifacts
   @echo "Build Cloudflare Pages listo en {{gh_pages_next_out_dir}}"
+
+obstruction-tracker-export:
+  python3 scripts/export_obstruction_tracker_snapshot.py \
+    --status-json "{{obstruction_tracker_status_json}}" \
+    --readiness-json "{{obstruction_tracker_readiness_json}}" \
+    --evidence-dir "{{obstruction_tracker_evidence_dir}}" \
+    --out "{{obstruction_tracker_out}}"
+  python3 scripts/validate_obstruction_tracker_snapshot.py \
+    --path "{{obstruction_tracker_out}}" \
+    --evidence-root "{{obstruction_tracker_evidence_dir}}" \
+    --max-bytes "{{obstruction_tracker_max_bytes}}"
+
+transparency-dashboard-export:
+  python3 scripts/export_transparency_dashboard_snapshot.py \
+    --status-json "{{transparency_dashboard_status_json}}" \
+    --obstruction-json "{{transparency_dashboard_obstruction_json}}" \
+    --readiness-json "{{transparency_dashboard_readiness_json}}" \
+    --origin-verification-json "{{transparency_dashboard_origin_verification_json}}" \
+    --release-registry-json "{{transparency_dashboard_release_registry_json}}" \
+    --out "{{transparency_dashboard_out}}"
+  python3 scripts/validate_transparency_dashboard_snapshot.py \
+    --path "{{transparency_dashboard_out}}" \
+    --max-bytes "{{transparency_dashboard_max_bytes}}"
+
+evidence-api-v1-export:
+  python3 scripts/export_evidence_api_v1.py \
+    --evidence-api "{{evidence_api_v1_evidence_json}}" \
+    --source-health "{{evidence_api_v1_source_health_json}}" \
+    --origin-verification "{{evidence_api_v1_origin_verification_json}}" \
+    --attestation-verification "{{evidence_api_v1_attestation_verification_json}}" \
+    --schema "{{evidence_api_v1_schema_json}}" \
+    --out-root "{{evidence_api_v1_out_root}}" \
+    --page-size "{{evidence_api_v1_page_size}}" \
+    --json-out "{{evidence_api_v1_export_report}}"
+  python3 scripts/validate_evidence_api_v1.py \
+    --out-root "{{evidence_api_v1_out_root}}" \
+    --evidence-api "{{evidence_api_v1_evidence_json}}" \
+    --source-health "{{evidence_api_v1_source_health_json}}" \
+    --schema "{{evidence_api_v1_schema_json}}" \
+    --json-out "{{evidence_api_v1_validation_report}}"
+
+evidence-api-v1-check:
+  @just evidence-api-v1-export
+  python3 -m unittest tests.test_evidence_api_v1_contract
+
+evidence-api-v1-live-verify:
+  python3 scripts/verify_live_evidence_api_v1.py \
+    --base-url "https://votaconlachola.org" \
+    --expected-api-release "$(jq -r '.current_release.api_release_id' '{{evidence_api_v1_out_root}}/index.json')" \
+    --json-out "{{evidence_api_v1_live_verification_report}}"
+
+# First canonical promise vertical slice. The input is the checksum-pinned
+# official BNG 2023 manifesto; no generated or placeholder rows are accepted.
+manifesto-promises-export:
+  python3 scripts/ingest_manifesto_promises.py \
+    --pdf "{{manifesto_promises_pdf}}" \
+    --db "{{manifesto_promises_db_path}}" \
+    --snapshot-date "2026-08-19" \
+    --publish-limit "{{manifesto_promises_publish_limit}}" \
+    --published-out "{{manifesto_promises_published_out}}" \
+    --public-out "{{manifesto_promises_public_out}}" \
+    --report-out "{{manifesto_promises_ingest_report}}"
+  python3 scripts/validate_manifesto_promises.py \
+    --db "{{manifesto_promises_db_path}}" \
+    --pdf "{{manifesto_promises_pdf}}" \
+    --published "{{manifesto_promises_published_out}}" \
+    --public "{{manifesto_promises_public_out}}" \
+    --report-out "{{manifesto_promises_validation_report}}"
+
+manifesto-promises-check:
+  @just manifesto-promises-export
+  UV_CACHE_DIR=/tmp/vclc-uv-cache UV_PROJECT_ENVIRONMENT=/tmp/vclc-promises-env uv run --with pytest python -m pytest -q tests/test_manifesto_promises_real_pipeline.py
+  node --test tests/test_manifesto_promises_ui_contract.js
+
+manifesto-promises-live-verify:
+  python3 scripts/verify_live_manifesto_promises.py \
+    --base-url "https://votaconlachola.org" \
+    --expected-release "$(jq -r '.release_id' '{{manifesto_promises_public_out}}')" \
+    --json-out "{{manifesto_promises_live_verification_report}}"
+
+# First canonical public-money path. It reads only the real official H1 2025
+# PLACSP corpus and preserves every source-published counterparty identity.
+placsp-spending-export:
+  python3 scripts/materialize_placsp_spending_sample.py \
+    --source-db "{{placsp_spending_source_db}}" \
+    --schema "{{placsp_spending_schema}}" \
+    --out-db "{{placsp_spending_db_path}}" \
+    --published-out "{{placsp_spending_published_out}}" \
+    --public-out "{{placsp_spending_public_out}}" \
+    --report-out "{{placsp_spending_materialization_report}}"
+  python3 scripts/validate_placsp_spending_sample.py \
+    --source-db "{{placsp_spending_source_db}}" \
+    --db "{{placsp_spending_db_path}}" \
+    --published "{{placsp_spending_published_out}}" \
+    --public "{{placsp_spending_public_out}}" \
+    --report-out "{{placsp_spending_validation_report}}"
+
+placsp-spending-check:
+  @just placsp-spending-export
+  UV_CACHE_DIR=/tmp/vclc-uv-cache UV_PROJECT_ENVIRONMENT=/tmp/vclc-spending-env uv run --with pytest python -m pytest -q tests/test_placsp_spending_real_pipeline.py
+  node --test tests/test_placsp_spending_ui_contract.js
+
+placsp-spending-live-verify:
+  python3 scripts/verify_live_placsp_spending.py \
+    --base-url "https://votaconlachola.org" \
+    --expected-release "$(jq -r '.release_id' '{{placsp_spending_public_out}}')" \
+    --json-out "{{placsp_spending_live_verification_report}}"
+
+# First canonical public agreement/meeting path. It reads only the real official
+# Moncloa capture and publishes zero inferred attendance or influence claims.
+moncloa-agreements-export:
+  python3 scripts/materialize_moncloa_agreements_sample.py \
+    --source-db "{{moncloa_agreements_source_db}}" \
+    --schema "{{moncloa_agreements_schema}}" \
+    --out-db "{{moncloa_agreements_db_path}}" \
+    --published-out "{{moncloa_agreements_published_out}}" \
+    --public-out "{{moncloa_agreements_public_out}}" \
+    --report-out "{{moncloa_agreements_materialization_report}}"
+  python3 scripts/validate_moncloa_agreements_sample.py \
+    --source-db "{{moncloa_agreements_source_db}}" \
+    --db "{{moncloa_agreements_db_path}}" \
+    --published "{{moncloa_agreements_published_out}}" \
+    --public "{{moncloa_agreements_public_out}}" \
+    --report-out "{{moncloa_agreements_validation_report}}"
+
+moncloa-agreements-check:
+  @just moncloa-agreements-export
+  UV_CACHE_DIR=/tmp/vclc-uv-cache UV_PROJECT_ENVIRONMENT=/tmp/vclc-agreements-env uv run --with pytest python -m pytest -q tests/test_moncloa_agreements_real_pipeline.py
+  node --test tests/test_moncloa_agreements_ui_contract.js
+
+moncloa-agreements-live-verify:
+  python3 scripts/verify_live_moncloa_agreements.py \
+    --base-url "https://votaconlachola.org" \
+    --expected-release "$(jq -r '.release_id' '{{moncloa_agreements_public_out}}')" \
+    --json-out "{{moncloa_agreements_live_verification_report}}"
+
+# First canonical foreign-policy path. It projects only exact official Moncloa
+# procedural facts and leaves treaty force, implementation, alignment and impact unknown.
+moncloa-geopolitics-export:
+  @just moncloa-agreements-export
+  python3 scripts/materialize_moncloa_geopolitics_sample.py \
+    --source-db "{{moncloa_geopolitics_source_db}}" \
+    --schema "{{moncloa_geopolitics_schema}}" \
+    --out-db "{{moncloa_geopolitics_db_path}}" \
+    --published-out "{{moncloa_geopolitics_published_out}}" \
+    --public-out "{{moncloa_geopolitics_public_out}}" \
+    --report-out "{{moncloa_geopolitics_materialization_report}}"
+  python3 scripts/validate_moncloa_geopolitics_sample.py \
+    --source-db "{{moncloa_geopolitics_source_db}}" \
+    --db "{{moncloa_geopolitics_db_path}}" \
+    --published "{{moncloa_geopolitics_published_out}}" \
+    --public "{{moncloa_geopolitics_public_out}}" \
+    --report-out "{{moncloa_geopolitics_validation_report}}"
+
+moncloa-geopolitics-check:
+  @just moncloa-geopolitics-export
+  UV_CACHE_DIR=/tmp/vclc-uv-cache UV_PROJECT_ENVIRONMENT=/tmp/vclc-geopolitics-env uv run --with pytest python -m pytest -q tests/test_moncloa_geopolitics_real_pipeline.py
+  node --test tests/test_moncloa_geopolitics_ui_contract.js
+
+moncloa-geopolitics-live-verify:
+  python3 scripts/verify_live_moncloa_geopolitics.py \
+    --base-url "https://votaconlachola.org" \
+    --expected-release "$(jq -r '.release_id' '{{moncloa_geopolitics_public_out}}')" \
+    --json-out "{{moncloa_geopolitics_live_verification_report}}"
+
+# First canonical outcome-indicator path. It projects every Spanish cell for one
+# exact unit from the checksum-pinned official Eurostat JSON-stat cube.
+eurostat-gdp-indicator-export:
+  python3 scripts/materialize_eurostat_gdp_indicator.py \
+    --schema "{{eurostat_gdp_indicator_schema}}" \
+    --out-db "{{eurostat_gdp_indicator_db}}" \
+    --published-out "{{eurostat_gdp_indicator_published_out}}" \
+    --public-out "{{eurostat_gdp_indicator_public_out}}" \
+    --report-out "{{eurostat_gdp_indicator_materialization_report}}"
+  python3 scripts/validate_eurostat_gdp_indicator.py \
+    --db "{{eurostat_gdp_indicator_db}}" \
+    --published "{{eurostat_gdp_indicator_published_out}}" \
+    --public "{{eurostat_gdp_indicator_public_out}}" \
+    --report-out "{{eurostat_gdp_indicator_validation_report}}"
+
+eurostat-gdp-indicator-check:
+  @just eurostat-gdp-indicator-export
+  UV_CACHE_DIR=/tmp/vclc-uv-cache UV_PROJECT_ENVIRONMENT=/tmp/vclc-indicators-env uv run --with pytest python -m pytest -q tests/test_eurostat_gdp_indicator_real_pipeline.py
+  node --test tests/test_eurostat_gdp_indicator_ui_contract.js
+
+eurostat-gdp-indicator-live-verify:
+  python3 scripts/verify_live_eurostat_gdp_indicator.py \
+    --base-url "https://votaconlachola.org" \
+    --expected-release "$(jq -r '.release_id' '{{eurostat_gdp_indicator_public_out}}')" \
+    --json-out "{{eurostat_gdp_indicator_live_verification_report}}"
+
+# Conservative promise/action slice. The producer accepts only explicit reviews
+# over real official records; topic overlap alone can never emit a strong status.
+comparison-engine-export:
+  python3 scripts/materialize_promise_action_comparisons.py \
+    --schema "{{comparison_engine_schema}}" \
+    --promises-db "{{manifesto_promises_db_path}}" \
+    --actions-db "{{db_path}}" \
+    --actor-graph-db "{{actor_graph_db}}" \
+    --reviewed-mappings "{{comparison_engine_reviewed_mappings}}" \
+    --out-db "{{comparison_engine_db}}" \
+    --out-json "{{comparison_engine_published_out}}" \
+    --public-out "{{comparison_engine_public_out}}" \
+    --report-out "{{comparison_engine_materialization_report}}" \
+    --snapshot-date "{{comparison_engine_snapshot_date}}" \
+    --batch-size "{{comparison_engine_batch_size}}"
+  python3 scripts/validate_promise_action_comparisons.py \
+    --promises-db "{{manifesto_promises_db_path}}" \
+    --actions-db "{{db_path}}" \
+    --actor-graph-db "{{actor_graph_db}}" \
+    --comparison-db "{{comparison_engine_db}}" \
+    --reviewed-mappings "{{comparison_engine_reviewed_mappings}}" \
+    --published "{{comparison_engine_published_out}}" \
+    --public "{{comparison_engine_public_out}}" \
+    --report-out "{{comparison_engine_validation_report}}"
+
+comparison-engine-check:
+  @just comparison-engine-export
+  UV_CACHE_DIR=/tmp/vclc-uv-cache UV_PROJECT_ENVIRONMENT=/tmp/vclc-comparison-env uv run --with pytest python -m pytest -q tests/test_promise_action_comparison_real_pipeline.py
+  UV_CACHE_DIR=/tmp/vclc-uv-cache UV_PROJECT_ENVIRONMENT=/tmp/vclc-comparison-env uv run --with pytest python -m pytest -q tests/test_verify_live_promise_action_comparisons.py -k real_generated_comparison_artifact
+  node --test tests/test_promise_action_comparison_ui_contract.js
+
+# Run only after cloudflare-pages-build; this also checks the exact built copy.
+comparison-engine-built-check:
+  UV_CACHE_DIR=/tmp/vclc-uv-cache UV_PROJECT_ENVIRONMENT=/tmp/vclc-comparison-env uv run --with pytest python -m pytest -q tests/test_verify_live_promise_action_comparisons.py
+
+comparison-engine-live-verify:
+  python3 scripts/verify_live_promise_action_comparisons.py \
+    --base-url "https://votaconlachola.org" \
+    --expected-release "$(jq -r '.release_id' '{{comparison_engine_public_out}}')" \
+    --expected-semantic-sha256 "$(jq -r '.semantic_sha256' '{{comparison_engine_public_out}}')" \
+    --expected-artifact-sha256 "$(jq -r '.json_sha256' '{{comparison_engine_materialization_report}}')" \
+    --expected-artifact "{{comparison_engine_public_out}}" \
+    --json-out "{{comparison_engine_live_verification_report}}"
+
+# Source-scoped actor graph over the complete selected real corpus. Conflicting
+# upstream source IDs are retained under deterministic graph-local scopes.
+actor-graph-export:
+  python3 scripts/materialize_actor_graph.py \
+    --db "{{db_path}}" \
+    --spending-db "{{placsp_spending_db_path}}" \
+    --agreements-db "{{moncloa_agreements_db_path}}" \
+    --geopolitics-db "{{moncloa_geopolitics_db_path}}" \
+    --promises-db "{{manifesto_promises_db_path}}" \
+    --schema "{{actor_graph_schema}}" \
+    --actor-manifest "{{actor_graph_actor_manifest}}" \
+    --snapshot-date "{{actor_graph_snapshot_date}}" \
+    --out-db "{{actor_graph_db}}" \
+    --published-out "{{actor_graph_published_out}}" \
+    --public-out "{{actor_graph_public_out}}" \
+    --report-out "{{actor_graph_materialization_report}}"
+  python3 scripts/validate_actor_graph.py \
+    --db "{{actor_graph_db}}" \
+    --main-db "{{db_path}}" \
+    --spending-db "{{placsp_spending_db_path}}" \
+    --agreements-db "{{moncloa_agreements_db_path}}" \
+    --geopolitics-db "{{moncloa_geopolitics_db_path}}" \
+    --promises-db "{{manifesto_promises_db_path}}" \
+    --actor-manifest "{{actor_graph_actor_manifest}}" \
+    --published "{{actor_graph_published_out}}" \
+    --public "{{actor_graph_public_out}}" \
+    --materialization-report "{{actor_graph_materialization_report}}" \
+    --report-out "{{actor_graph_validation_report}}"
+
+actor-graph-check:
+  @just actor-graph-export
+  UV_CACHE_DIR=/tmp/vclc-uv-cache UV_PROJECT_ENVIRONMENT=/tmp/vclc-actor-graph-env uv run --with pytest python -m pytest -q tests/test_actor_graph_real_pipeline.py
+  node --test tests/test_actor_graph_ui_contract.js
+
+actor-graph-live-verify:
+  python3 scripts/verify_live_actor_graph.py \
+    --base-url "https://votaconlachola.org" \
+    --expected-release "$(jq -r '.meta.release_id' '{{actor_graph_public_out}}')" \
+    --expected-artifact "{{actor_graph_public_out}}" \
+    --json-out "{{actor_graph_live_verification_report}}"
+
+# C0/L1 preproduction outcome-context lane. The materializer never creates a
+# human review, release, release membership, or public candidate. Only the
+# validator-backed aggregate zero-state is eligible for the public site.
+outcome-context-materialize:
+  python3 scripts/materialize_outcome_context.py \
+    --schema "{{outcome_context_schema}}" \
+    --manual-input "{{outcome_context_manual_input}}" \
+    --actions-db "{{outcome_context_actions_db}}" \
+    --indicator-db "{{outcome_context_indicator_db}}" \
+    --actor-db "{{outcome_context_actor_db}}" \
+    --out-root "{{outcome_context_out_root}}" \
+    --report-out "{{outcome_context_materialization_report}}" \
+    --generated-at "{{outcome_context_generated_at}}" \
+    --batch-size "{{outcome_context_batch_size}}"
+
+outcome-context-validate:
+  python3 scripts/validate_outcome_context.py \
+    --actions-db "{{outcome_context_actions_db}}" \
+    --indicators-db "{{outcome_context_indicator_db}}" \
+    --actor-graph-db "{{outcome_context_actor_db}}" \
+    --manual "{{outcome_context_manual_input}}" \
+    --schema "{{outcome_context_schema}}" \
+    --bundle-root "{{outcome_context_out_root}}" \
+    --materialization-report "{{outcome_context_materialization_report}}" \
+    --report-out "{{outcome_context_validation_report}}"
+
+outcome-context-status-export:
+  python3 scripts/export_policy_outcomes_snapshot.py \
+    --validation-report "{{outcome_context_validation_report}}" \
+    --out "{{outcome_context_public_status_out}}"
+  mkdir -p "{{gh_pages_next_app_dir}}/public/policy-outcomes/data"
+  if [ ! "{{outcome_context_public_status_out}}" -ef "{{outcome_context_next_status_out}}" ]; then \
+    cp -f "{{outcome_context_public_status_out}}" "{{outcome_context_next_status_out}}"; \
+  fi
+  python3 scripts/validate_real_public_json.py \
+    --path "{{outcome_context_public_status_out}}" \
+    --path "{{outcome_context_next_status_out}}"
+  cmp -s "{{outcome_context_public_status_out}}" "{{outcome_context_next_status_out}}"
+
+outcome-context-export:
+  @just outcome-context-materialize
+  @just outcome-context-validate
+  @just outcome-context-status-export
+
+outcome-context-built-check:
+  test -s "{{gh_pages_next_out_dir}}/policy-outcomes/data/policy-outcomes.json"
+  python3 scripts/validate_real_public_json.py \
+    --path "{{gh_pages_next_out_dir}}/policy-outcomes/data/policy-outcomes.json"
+  cmp -s \
+    "{{outcome_context_next_status_out}}" \
+    "{{gh_pages_next_out_dir}}/policy-outcomes/data/policy-outcomes.json"
+
+outcome-context-check:
+  @just outcome-context-export
+  UV_CACHE_DIR=/tmp/vclc-uv-cache UV_PROJECT_ENVIRONMENT=/tmp/vclc-outcome-context-env uv run --with pytest python -m pytest -q tests/test_outcome_context_real_pipeline.py tests/test_export_policy_outcomes_snapshot.py
+
+# C2A real sparse discovery-pair planner. Internal L0 rows only: never a
+# reviewed outcome link, association/effect claim, ranking, or publication.
+outcome-context-pair-plan:
+  python3 scripts/plan_outcome_context_pairs.py \
+    --config "{{outcome_context_pair_plan_config}}" \
+    --schema "{{outcome_context_schema}}" \
+    --actions-db "{{outcome_context_pair_plan_actions_db}}" \
+    --indicators-db "{{outcome_context_pair_plan_indicators_db}}" \
+    --out-db "{{outcome_context_pair_plan_db}}" \
+    --report-out "{{outcome_context_pair_plan_report}}" \
+    --batch-size "{{outcome_context_pair_plan_batch_size}}" \
+    --source-batch-size "{{outcome_context_pair_plan_source_batch_size}}"
+
+outcome-context-pair-plan-validate:
+  python3 scripts/validate_outcome_context_pair_plan.py \
+    --config "{{outcome_context_pair_plan_config}}" \
+    --schema "{{outcome_context_schema}}" \
+    --actions-db "{{outcome_context_pair_plan_actions_db}}" \
+    --indicators-db "{{outcome_context_pair_plan_indicators_db}}" \
+    --plan-db "{{outcome_context_pair_plan_db}}" \
+    --materialization-report "{{outcome_context_pair_plan_report}}" \
+    --report-out "{{outcome_context_pair_plan_validation_report}}"
+
+outcome-context-pair-plan-check:
+  @just outcome-context-pair-plan
+  @just outcome-context-pair-plan-validate
+  UV_CACHE_DIR=/tmp/vclc-uv-cache UV_PROJECT_ENVIRONMENT=/tmp/vclc-outcome-pair-plan-env uv run --with pytest python -m pytest -q tests/test_outcome_context_pair_plan_real_pipeline.py
+
+# C2B real ES* million-pair discovery universe. Internal L0 rows only.
+outcome-context-pair-plan-c2b:
+  python3 scripts/plan_outcome_context_pairs_c2b.py \
+    --config "{{outcome_context_pair_plan_c2b_config}}" \
+    --schema "{{outcome_context_schema}}" \
+    --actions-db "{{outcome_context_pair_plan_c2b_actions_db}}" \
+    --indicators-db "{{outcome_context_pair_plan_c2b_indicators_db}}" \
+    --out-db "{{outcome_context_pair_plan_c2b_db}}" \
+    --report-out "{{outcome_context_pair_plan_c2b_report}}" \
+    --manifest-out "{{outcome_context_pair_plan_c2b_manifest}}" \
+    --batch-size "{{outcome_context_pair_plan_c2b_batch_size}}" \
+    --source-batch-size "{{outcome_context_pair_plan_c2b_source_batch_size}}"
+
+outcome-context-pair-plan-c2b-validate:
+  python3 scripts/validate_outcome_context_pair_plan_c2b.py \
+    --config "{{outcome_context_pair_plan_c2b_config}}" \
+    --schema "{{outcome_context_schema}}" \
+    --actions-db "{{outcome_context_pair_plan_c2b_actions_db}}" \
+    --indicators-db "{{outcome_context_pair_plan_c2b_indicators_db}}" \
+    --plan-db "{{outcome_context_pair_plan_c2b_db}}" \
+    --materialization-report "{{outcome_context_pair_plan_c2b_report}}" \
+    --manifest "{{outcome_context_pair_plan_c2b_manifest}}" \
+    --report-out "{{outcome_context_pair_plan_c2b_validation_report}}"
+
+outcome-context-pair-plan-c2b-test:
+  UV_CACHE_DIR=/tmp/vclc-uv-cache UV_PROJECT_ENVIRONMENT=/tmp/vclc-outcome-pair-plan-c2b-env uv run --with pytest python -m pytest -q tests/test_outcome_context_pair_plan_c2b_real_pipeline.py
+
+outcome-context-pair-plan-c2b-check:
+  @just outcome-context-pair-plan-c2b-validate
+  @just outcome-context-pair-plan-c2b-test
 
 cloudflare-pages-size-check:
   set -e; \
@@ -4267,12 +4991,13 @@ explorer-gh-pages-build:
   @just cloudflare-pages-build
 
 cloudflare-pages-refresh-data:
-  rm -rf {{gh_pages_dir}}/_next {{gh_pages_dir}}/legacy {{gh_pages_dir}}/explorer {{gh_pages_dir}}/graph {{gh_pages_dir}}/explorer-politico {{gh_pages_dir}}/explorer-temas {{gh_pages_dir}}/explorer-votaciones {{gh_pages_dir}}/explorer-sources {{gh_pages_dir}}/vote-explainer {{gh_pages_dir}}/responsibility-explainer {{gh_pages_dir}}/citizen {{gh_pages_dir}}/parliamentary-accountability {{gh_pages_dir}}/accountability-dossiers {{gh_pages_dir}}/initiative-lifecycle {{gh_pages_dir}}/political-positions {{gh_pages_dir}}/elections-behavior {{gh_pages_dir}}/elecciones {{gh_pages_dir}}/calendario-electoral {{gh_pages_dir}}/people {{gh_pages_dir}}/legal-sanctions {{gh_pages_dir}}/policy-outcomes {{gh_pages_dir}}/index.html {{gh_pages_dir}}/404.html
+  rm -rf {{gh_pages_dir}}/_next {{gh_pages_dir}}/legacy {{gh_pages_dir}}/explorer {{gh_pages_dir}}/graph {{gh_pages_dir}}/explorer-politico {{gh_pages_dir}}/explorer-temas {{gh_pages_dir}}/explorer-votaciones {{gh_pages_dir}}/explorer-sources {{gh_pages_dir}}/obstruction-tracker {{gh_pages_dir}}/vote-explainer {{gh_pages_dir}}/responsibility-explainer {{gh_pages_dir}}/citizen {{gh_pages_dir}}/parliamentary-accountability {{gh_pages_dir}}/accountability-dossiers {{gh_pages_dir}}/initiative-lifecycle {{gh_pages_dir}}/political-positions {{gh_pages_dir}}/elections-behavior {{gh_pages_dir}}/elecciones {{gh_pages_dir}}/calendario-electoral {{gh_pages_dir}}/people {{gh_pages_dir}}/legal-sanctions {{gh_pages_dir}}/policy-outcomes {{gh_pages_dir}}/geopolitics {{gh_pages_dir}}/indicators {{gh_pages_dir}}/actor-graph {{gh_pages_dir}}/index.html {{gh_pages_dir}}/404.html
   mkdir -p \
     {{gh_pages_dir}}/citizen {{gh_pages_dir}}/citizen/data \
     {{gh_pages_dir}}/graph {{gh_pages_dir}}/graph/data \
     {{gh_pages_dir}}/explorer-politico {{gh_pages_dir}}/explorer-politico/data \
     {{gh_pages_dir}}/explorer-sources {{gh_pages_dir}}/explorer-sources/data \
+    {{gh_pages_dir}}/obstruction-tracker {{gh_pages_dir}}/obstruction-tracker/data {{gh_pages_dir}}/obstruction-tracker/evidence \
     {{gh_pages_dir}}/explorer-temas {{gh_pages_dir}}/explorer-temas/data \
     {{gh_pages_dir}}/explorer-votaciones {{gh_pages_dir}}/explorer-votaciones/data \
     {{gh_pages_dir}}/vote-explainer {{gh_pages_dir}}/vote-explainer/data \
@@ -4287,6 +5012,9 @@ cloudflare-pages-refresh-data:
     {{gh_pages_dir}}/people {{gh_pages_dir}}/people/data \
     {{gh_pages_dir}}/legal-sanctions {{gh_pages_dir}}/legal-sanctions/data \
     {{gh_pages_dir}}/policy-outcomes {{gh_pages_dir}}/policy-outcomes/data \
+    {{gh_pages_dir}}/geopolitics {{gh_pages_dir}}/geopolitics/data \
+    {{gh_pages_dir}}/indicators {{gh_pages_dir}}/indicators/data \
+    {{gh_pages_dir}}/actor-graph {{gh_pages_dir}}/actor-graph/data \
     {{gh_pages_dir}}/legacy {{gh_pages_dir}}/legacy/citizen {{gh_pages_dir}}/legacy/citizen/data \
     {{gh_pages_dir}}/legacy/graph {{gh_pages_dir}}/legacy/graph/data \
     {{gh_pages_dir}}/legacy/explorer {{gh_pages_dir}}/legacy/explorer/data \
@@ -4295,6 +5023,12 @@ cloudflare-pages-refresh-data:
     {{gh_pages_dir}}/legacy/explorer-votaciones {{gh_pages_dir}}/legacy/explorer-votaciones/data \
     {{gh_pages_dir}}/legacy/explorer-politico {{gh_pages_dir}}/legacy/explorer-politico/data
   python3 scripts/build_citizen_tailwind_md3_css.py --tokens "{{citizen_tailwind_md3_tokens}}" --out "{{citizen_tailwind_md3_css}}"
+  @just manifesto-promises-export
+  @just placsp-spending-export
+  @just moncloa-agreements-export
+  @just moncloa-geopolitics-export
+  @just eurostat-gdp-indicator-export
+  @just actor-graph-export
   mkdir -p /tmp/vclc-npm-cache /tmp/vclc-npm-logs
   if [ ! -f "{{gh_pages_next_app_dir}}/node_modules/next/dist/bin/next" ]; then \
     npm --prefix "{{gh_pages_next_app_dir}}" --cache /tmp/vclc-npm-cache --logs-dir /tmp/vclc-npm-logs ci --no-audit --no-fund; \
@@ -4306,6 +5040,7 @@ cloudflare-pages-refresh-data:
   @just vote-explainer-next-prime
   cd "{{gh_pages_next_app_dir}}" && NEXT_PUBLIC_BASE_PATH="{{gh_pages_next_base_path}}" node node_modules/next/dist/bin/next build --webpack
   python3 scripts/check_next_export_notfound_payloads.py --path "{{gh_pages_next_out_dir}}"
+  @just outcome-context-built-check
   just cloudflare-pages-size-check
   cp -R "{{gh_pages_next_out_dir}}"/. "{{gh_pages_dir}}"/
   touch "{{gh_pages_dir}}/.nojekyll"
@@ -4389,10 +5124,9 @@ cloudflare-pages-refresh-data:
   python3 scripts/export_legal_sanctions_snapshot.py \
     --db "{{db_path}}" \
     --out "{{gh_pages_dir}}/legal-sanctions/data/legal-sanctions.json"
-  python3 scripts/export_policy_outcomes_snapshot.py \
-    --db "{{db_path}}" \
-    --out "{{gh_pages_dir}}/policy-outcomes/data/policy-outcomes.json" \
-    --snapshot-date "{{snapshot_date}}"
+  just outcome-context-export
+  cp -f "{{outcome_context_public_status_out}}" \
+    "{{gh_pages_dir}}/policy-outcomes/data/policy-outcomes.json"
   set -e; if [ "{{gh_pages_reuse_people_exports}}" = "1" ] && \
     python3 scripts/check_static_snapshot_date.py --path "{{gh_pages_dir}}/people/data/profiles.json" --snapshot-date "{{snapshot_date}}" >/dev/null 2>&1 && \
     python3 scripts/check_static_snapshot_date.py --path "{{gh_pages_dir}}/people/data/xray.json" --snapshot-date "{{snapshot_date}}" >/dev/null 2>&1; then \
@@ -4410,6 +5144,15 @@ cloudflare-pages-refresh-data:
   python3 scripts/export_explorer_sources_snapshot.py \
     --db "{{db_path}}" \
     --out "{{gh_pages_dir}}/explorer-sources/data/status.json"
+  python3 scripts/export_obstruction_tracker_snapshot.py \
+    --status-json "{{gh_pages_dir}}/explorer-sources/data/status.json" \
+    --readiness-json "{{obstruction_tracker_readiness_json}}" \
+    --evidence-dir "{{gh_pages_dir}}/obstruction-tracker/evidence" \
+    --out "{{gh_pages_dir}}/obstruction-tracker/data/obstructions.json"
+  python3 scripts/validate_obstruction_tracker_snapshot.py \
+    --path "{{gh_pages_dir}}/obstruction-tracker/data/obstructions.json" \
+    --evidence-root "{{gh_pages_dir}}/obstruction-tracker/evidence" \
+    --max-bytes "{{obstruction_tracker_max_bytes}}"
   python3 scripts/export_source_catalog_snapshot.py \
     --db "{{db_path}}" \
     --snapshot-date "{{snapshot_date}}" \
@@ -4557,7 +5300,7 @@ cloudflare-pages-refresh-data:
   mkdir -p "{{gh_pages_next_app_dir}}/public/calendario-electoral/data"
   cp -f "{{gh_pages_dir}}/calendario-electoral/data/election-calendar.json" "{{gh_pages_next_app_dir}}/public/calendario-electoral/data/election-calendar.json"
   cp -f "{{gh_pages_dir}}/policy-outcomes/data/policy-outcomes.json" "{{gh_pages_next_app_dir}}/public/policy-outcomes/data/policy-outcomes.json"
-  for rel in citizen/data graph/data explorer-politico/data explorer-sources/data explorer-temas/data explorer-votaciones/data calendario-electoral/data people/data; do \
+  for rel in citizen/data graph/data explorer-politico/data explorer-sources/data obstruction-tracker/data obstruction-tracker/evidence explorer-temas/data explorer-votaciones/data calendario-electoral/data people/data; do \
     rm -rf "{{gh_pages_next_app_dir}}/public/$rel"; \
     mkdir -p "{{gh_pages_next_app_dir}}/public/$rel"; \
     cp -R "{{gh_pages_dir}}/$rel/." "{{gh_pages_next_app_dir}}/public/$rel/"; \
@@ -5272,8 +6015,9 @@ cloudflare-pages-deploy:
   cd "{{gh_pages_next_app_dir}}" && npx wrangler pages deploy out --project-name "{{cloudflare_pages_project}}"
 
 votaconlachola-gh-pages-publish:
+  @just cloudflare-pages-build
   set -e; \
-  test -d "{{gh_pages_next_out_dir}}" || (echo "Missing {{gh_pages_next_out_dir}}; run just cloudflare-pages-refresh-data first" >&2; exit 2); \
+  test -d "{{gh_pages_next_out_dir}}" || (echo "Missing {{gh_pages_next_out_dir}}; run just cloudflare-pages-build first" >&2; exit 2); \
   tmpdir="$(mktemp -d)"; \
   cleanup() { git worktree remove --force "$tmpdir" >/dev/null 2>&1 || rm -rf "$tmpdir"; }; \
   trap cleanup EXIT; \
@@ -5356,3 +6100,31 @@ etl-tracker-gate:
 # Compatibilidad: gate histórico (solo DONE sin red real)
 etl-tracker-gate-legacy:
   docker compose run --rm --build etl "python3 scripts/e2e_tracker_status.py --db {{db_path}} --tracker {{tracker_path}} --fail-on-done-zero-real"
+
+# Core ontology v1: machine contract, current-schema mappings, real-only policy,
+# public-domain identity retention, provenance, relationships, and scale invariants.
+core-ontology-check:
+  python3 scripts/validate_core_ontology_contract.py
+  python3 -m unittest tests.test_core_ontology_contract
+
+# Plugin architecture v1: manifest schema, ontology compatibility, lifecycle,
+# real-only/public-identity policy, capability security, and current adapters.
+plugin-architecture-check:
+  just core-ontology-check
+  python3 scripts/validate_plugin_architecture.py
+  python3 -m unittest tests.test_plugin_architecture_contract
+
+# Minimal SDK + real official reference plugin. Replays the checksum-pinned
+# Congreso capture twice into the current standard SQLite schema.
+reference-plugin-check:
+  just plugin-architecture-check
+  python3 scripts/validate_reference_plugin.py
+  python3 -m unittest tests.test_reference_plugin_congreso tests.test_source_onboarding_scaffold
+
+# Signed reproducibility contract. Tests use the exact published scale manifest
+# and the exact current local scale manifest; ephemeral keys are credentials only,
+# never dataset rows.
+snapshot-reproducibility-check:
+  python3 -m unittest tests.test_snapshot_attestation tests.test_snapshot_reproducibility_contract tests.test_publicar_hf_scale_snapshot tests.test_verify_hf_scale_origin
+  python3 scripts/diff_scale_snapshot_manifests.py --before docs/etl/sprints/REPRODUCIBILITY-20260819/evidence/remote-scale-manifest-5872efaf.json --after docs/etl/sprints/REPRODUCIBILITY-20260819/evidence/current-signed-scale-manifest-5d9ce557.json --out /tmp/vclc-snapshot-manifest-diff-check.json
+  python3 scripts/validate_snapshot_reproducibility.py --manifest docs/etl/sprints/REPRODUCIBILITY-20260819/evidence/current-signed-scale-manifest-5d9ce557.json --publish-report docs/etl/sprints/REPRODUCIBILITY-20260819/evidence/signed-scale-publish-report.json --live-signature docs/etl/sprints/REPRODUCIBILITY-20260819/evidence/live-signed-snapshot-verification.json --live-parity docs/etl/sprints/REPRODUCIBILITY-20260819/evidence/live-scale-origin-parity.json --diff docs/etl/sprints/REPRODUCIBILITY-20260819/evidence/published-scale-manifest-diff.json --out docs/etl/sprints/REPRODUCIBILITY-20260819/evidence/snapshot-reproducibility-validation.json
