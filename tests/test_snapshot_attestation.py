@@ -26,6 +26,30 @@ REAL_LOCAL_MANIFEST = (
     REPO_ROOT
     / "docs/etl/sprints/REPRODUCIBILITY-20260819/evidence/local-scale-manifest-f062ad4d.json"
 )
+CURRENT_SIGNED_MANIFEST = (
+    REPO_ROOT / "docs/etl/sprints/REPRODUCIBILITY-20260819/evidence/"
+    "current-signed-scale-manifest-5d9ce557.json"
+)
+CURRENT_ATTESTATION = (
+    REPO_ROOT / "docs/etl/sprints/REPRODUCIBILITY-20260819/evidence/"
+    "current-snapshot-attestation.json"
+)
+CURRENT_SIGNATURE = (
+    REPO_ROOT / "docs/etl/sprints/REPRODUCIBILITY-20260819/evidence/"
+    "current-snapshot-attestation.json.sig"
+)
+CURRENT_ALLOWED_SIGNERS = (
+    REPO_ROOT / "docs/ops/keys/vclc-snapshot-release-2026.allowed_signers"
+)
+CURRENT_DISCOVERY_KEY = REPO_ROOT / "docs/ops/keys/vclc-snapshot-release-2026.pub"
+CURRENT_SNAPSHOT_PATH = (
+    "scale/snapshots/2026-08-19/"
+    "5d9ce557ed864de56f677a9f82c999a4ec0dfc494c086b1bfca0bb2e461272dd"
+)
+CURRENT_MANIFEST_URL = (
+    "https://huggingface.co/datasets/JesusIC/vota-con-la-chola-data/resolve/main/"
+    f"{CURRENT_SNAPSHOT_PATH}/manifest.json"
+)
 MANIFEST_URL = (
     "https://huggingface.co/datasets/JesusIC/vota-con-la-chola-data/resolve/main/"
     "scale/snapshots/2026-08-12/"
@@ -64,6 +88,54 @@ def generate_ephemeral_signing_key(directory: Path, name: str = "release-key") -
 
 
 class SnapshotAttestationTests(unittest.TestCase):
+    def test_current_real_release_binds_subject_and_independent_trust_root(
+        self,
+    ) -> None:
+        verification = verify_signed_attestation(
+            manifest_path=CURRENT_SIGNED_MANIFEST,
+            attestation_path=CURRENT_ATTESTATION,
+            signature_path=CURRENT_SIGNATURE,
+            allowed_signers_path=CURRENT_ALLOWED_SIGNERS,
+            signer_identity="vclc-snapshot-release-2026",
+            expected_manifest_url=CURRENT_MANIFEST_URL,
+            expected_snapshot_path=CURRENT_SNAPSHOT_PATH,
+            expected_snapshot_date="2026-08-19",
+            discovery_public_key_path=CURRENT_DISCOVERY_KEY,
+        )
+
+        self.assertTrue(verification["passed"])
+        self.assertEqual(verification["errors"], [])
+        self.assertEqual(
+            verification["checks"]["attested_public_key_fingerprint"],
+            "SHA256:R2B1jFbkLoigmKxObr+ExlBLrKENkaUDp0C3ip0Lj7A",
+        )
+        self.assertEqual(
+            verification["checks"]["discovery_public_key_fingerprint"],
+            verification["checks"]["attested_public_key_fingerprint"],
+        )
+
+    def test_current_real_release_rejects_cross_release_subject_path(self) -> None:
+        verification = verify_signed_attestation(
+            manifest_path=CURRENT_SIGNED_MANIFEST,
+            attestation_path=CURRENT_ATTESTATION,
+            signature_path=CURRENT_SIGNATURE,
+            allowed_signers_path=CURRENT_ALLOWED_SIGNERS,
+            signer_identity="vclc-snapshot-release-2026",
+            expected_manifest_url=CURRENT_MANIFEST_URL,
+            expected_snapshot_path=(
+                "scale/snapshots/2026-08-12/"
+                "5872efaf918430c0c9e2b3b5b01fd9efe4ba03ff586da75419e28dfdb0b2e139"
+            ),
+            expected_snapshot_date="2026-08-19",
+            discovery_public_key_path=CURRENT_DISCOVERY_KEY,
+        )
+
+        self.assertFalse(verification["passed"])
+        self.assertIn(
+            "attested snapshot path does not match selected release",
+            verification["errors"],
+        )
+
     def test_signs_and_verifies_the_real_published_manifest(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

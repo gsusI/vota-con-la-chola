@@ -27,7 +27,14 @@ from scripts.publicar_hf_scale_snapshot import (
     sha256_file,
     write_json,
 )
-from scripts.restore_hf_scale_origin import selected_manifest_files
+from scripts.restore_hf_scale_origin import (
+    DEFAULT_ALLOWED_SIGNERS,
+    DEFAULT_SIGNER_IDENTITY,
+    RESTORED_ATTESTATION_PATHS,
+    audit_destination_files,
+    selected_manifest_files,
+    verify_restore_attestation_files,
+)
 
 ValidationFunction = Callable[..., dict[str, Any]]
 
@@ -43,6 +50,27 @@ def safe_child(root: Path, raw_relative: str, label: str) -> Path:
     if resolved != resolved_root and resolved_root not in resolved.parents:
         raise ScaleOriginError(f"{label} escapes restored root: {raw_relative!r}")
     return resolved
+
+
+def audit_restored_inventory(
+    *,
+    root: Path,
+    manifest: dict[str, Any],
+    corpus_ids: set[str],
+    reference_file_name: str,
+    include_remote_latest: bool = False,
+    include_signed_attestation: bool = False,
+) -> dict[str, Any]:
+    """Require an isolated restore to contain only selected declared files."""
+    expected = {
+        str(item["path"]) for item in selected_manifest_files(manifest, corpus_ids)
+    }
+    expected.update({"manifest.json", reference_file_name})
+    if include_remote_latest:
+        expected.add("remote-latest.json")
+    if include_signed_attestation:
+        expected.update(RESTORED_ATTESTATION_PATHS.values())
+    return audit_destination_files(destination=root, expected_files=expected)
 
 
 def semantic_validators() -> dict[str, ValidationFunction]:
@@ -139,17 +167,35 @@ def validate_restored_bundle(
     corpus_ids: set[str],
     batch_rows: int,
     max_peak_rss_mb: float,
+    require_isolated: bool = False,
+    require_signed: bool = False,
+    allowed_signers_path: Path | None = None,
+    signer_identity: str = DEFAULT_SIGNER_IDENTITY,
     validators: dict[str, ValidationFunction] | None = None,
     shard_validator: ValidationFunction | None = None,
 ) -> dict[str, Any]:
-    restored_root = root.resolve()
+    requested_root = Path(root)
+    if require_isolated and requested_root.is_symlink():
+        raise ScaleOriginError("isolated validation root must not be a symlink")
+    restored_root = requested_root.resolve()
+    if require_isolated and registry_path is not None:
+        raise ScaleOriginError(
+            "isolated validation requires bundled registry; omit registry override"
+        )
     manifest_path = restored_root / "manifest.json"
     reference_path = restored_root / "restore-reference.json"
     if not reference_path.is_file():
         reference_path = restored_root / "remote-latest.json"
+    if require_isolated and reference_path.name != "restore-reference.json":
+        raise ScaleOriginError(
+            "isolated validation requires an exact restore-reference.json"
+        )
+    if require_isolated and (manifest_path.is_symlink() or reference_path.is_symlink()):
+        raise ScaleOriginError("isolated validation control files must not be symlinks")
     manifest = load_json_object(manifest_path)
     latest = load_json_object(reference_path)
     errors: list[str] = []
+    signed_required = bool(require_signed or require_isolated)
 
     if manifest.get("schema_version") != SCHEMA_VERSION:
         errors.append("restored manifest schema is unsupported")
@@ -193,6 +239,118 @@ def validate_restored_bundle(
     unknown = selected_ids - set(corpora)
     if unknown:
         raise ScaleOriginError("unknown corpus IDs: " + ", ".join(sorted(unknown)))
+
+    selection_mode = str(latest.get("selection_mode") or "")
+    remote_pointer_checks: dict[str, bool] = {}
+    remote_pointer_validation_required = selection_mode == "latest_pointer" and (
+        require_isolated or bool(latest.get("remote_latest_sha256"))
+    )
+    if remote_pointer_validation_required:
+        remote_pointer_path = restored_root / "remote-latest.json"
+        if require_isolated and remote_pointer_path.is_symlink():
+            raise ScaleOriginError(
+                "isolated validation remote latest capture must not be a symlink"
+            )
+        remote_pointer = load_json_object(remote_pointer_path)
+        remote_pointer_checks["checksum_matches_capture"] = sha256_file(
+            remote_pointer_path
+        ) == str(latest.get("remote_latest_sha256") or "")
+        for key in (
+            "schema_version",
+            "project",
+            "snapshot_date",
+            "release_id",
+            "snapshot_path",
+            "manifest_sha256",
+            "artifact_contract_sha256",
+        ):
+            remote_pointer_checks[f"{key}_matches_reference"] = remote_pointer.get(
+                key
+            ) == latest.get(key)
+        if signed_required:
+            reference_attestation = latest.get("attestation")
+            expected_remote_attestation = (
+                {
+                    key: value
+                    for key, value in reference_attestation.items()
+                    if key != "restored_files"
+                }
+                if isinstance(reference_attestation, dict)
+                else None
+            )
+            remote_pointer_checks["attestation_matches_reference"] = (
+                remote_pointer.get("attestation") == expected_remote_attestation
+            )
+        errors.extend(
+            f"remote latest capture check failed: {name}"
+            for name, passed in remote_pointer_checks.items()
+            if not passed
+        )
+    inventory = audit_restored_inventory(
+        root=restored_root,
+        manifest=manifest,
+        corpus_ids=selected_ids,
+        reference_file_name=reference_path.name,
+        include_remote_latest=selection_mode == "latest_pointer",
+        include_signed_attestation=signed_required,
+    )
+    if require_isolated and inventory["passed"] is not True:
+        errors.extend(
+            f"isolated restore missing file: {path}"
+            for path in inventory["missing_files"][:20]
+        )
+        errors.extend(
+            f"isolated restore has undeclared file: {path}"
+            for path in inventory["undeclared_files"][:20]
+        )
+        errors.extend(
+            f"isolated restore has symlink: {path}"
+            for path in inventory["symlinks"][:20]
+        )
+    if require_isolated and inventory["symlinks_count"]:
+        raise ScaleOriginError("isolated restore contains symlinks")
+
+    attestation_verification: dict[str, Any] | None = None
+    if signed_required:
+        attestation_meta = latest.get("attestation")
+        if not isinstance(attestation_meta, dict):
+            raise ScaleOriginError(
+                "isolated validation requires restored attestation metadata"
+            )
+        restored_files = attestation_meta.get("restored_files")
+        if restored_files != RESTORED_ATTESTATION_PATHS:
+            raise ScaleOriginError(
+                "restored attestation file contract is missing or unsupported"
+            )
+        manifest_url = str(latest.get("manifest_url") or "")
+        if not manifest_url.startswith("https://"):
+            raise ScaleOriginError("restored reference has no HTTPS manifest URL")
+        effective_allowed_signers = (
+            allowed_signers_path
+            if allowed_signers_path is not None
+            else REPO_ROOT / DEFAULT_ALLOWED_SIGNERS
+        )
+        if not effective_allowed_signers.is_file():
+            raise ScaleOriginError("trusted allowed_signers file is missing")
+        attestation_verification = verify_restore_attestation_files(
+            manifest_path=manifest_path,
+            attestation_path=restored_root / RESTORED_ATTESTATION_PATHS["attestation"],
+            signature_path=restored_root / RESTORED_ATTESTATION_PATHS["signature"],
+            public_key_path=restored_root / RESTORED_ATTESTATION_PATHS["public_key"],
+            allowed_signers_path=effective_allowed_signers,
+            signer_identity=signer_identity,
+            manifest_url=manifest_url,
+            snapshot_path=str(latest.get("snapshot_path") or ""),
+            snapshot_date=str(latest.get("snapshot_date") or ""),
+            attestation_meta=attestation_meta,
+        )
+        if attestation_verification.get("passed") is not True:
+            raise ScaleOriginError(
+                "restored signed attestation failed: "
+                + "; ".join(
+                    str(item) for item in attestation_verification.get("errors", [])
+                )
+            )
 
     effective_registry_path = (
         registry_path or restored_root / "real-corpus-registry.json"
@@ -306,6 +464,20 @@ def validate_restored_bundle(
         )
         is True,
     }
+    if require_isolated:
+        aggregate_checks.update(
+            {
+                "bundled_registry_used": registry_path is None,
+                "isolated_inventory_exact": inventory["passed"] is True,
+                "no_undeclared_files": inventory["undeclared_files_count"] == 0,
+                "no_symlinks": inventory["symlinks_count"] == 0,
+                "signed_origin_verified": attestation_verification is not None
+                and attestation_verification.get("passed") is True,
+                "remote_pointer_capture_valid": all(remote_pointer_checks.values())
+                if remote_pointer_validation_required
+                else True,
+            }
+        )
     errors.extend(
         f"aggregate check failed: {name}"
         for name, passed in aggregate_checks.items()
@@ -322,6 +494,45 @@ def validate_restored_bundle(
         "release_id": manifest_sha256,
         "artifact_contract_sha256": contract_sha256,
         "selected_corpus_ids": sorted(selected_ids),
+        "signed_attestation_required": signed_required,
+        "signed_attestation_verified": attestation_verification is not None
+        and attestation_verification.get("passed") is True,
+        "attestation": (
+            {
+                "status": attestation_verification.get("status"),
+                "attestation_sha256": attestation_verification.get("checks", {}).get(
+                    "attestation_sha256"
+                ),
+                "signature_sha256": attestation_verification.get("checks", {}).get(
+                    "signature_sha256"
+                ),
+                "signer_identity": attestation_verification.get("checks", {}).get(
+                    "signer_identity"
+                ),
+                "public_key_fingerprint": attestation_verification.get(
+                    "checks", {}
+                ).get("attested_public_key_fingerprint"),
+                "errors": attestation_verification.get("errors", []),
+            }
+            if attestation_verification is not None
+            else None
+        ),
+        "remote_latest_capture": {
+            "required": remote_pointer_validation_required,
+            "checks": remote_pointer_checks,
+            "passed": all(remote_pointer_checks.values())
+            if remote_pointer_validation_required
+            else True,
+        },
+        "publish_eligible": False,
+        "public_promotion_eligible": False,
+        "isolation": {
+            "required": bool(require_isolated),
+            "registry_source": (
+                "restored_bundle" if registry_path is None else "external_override"
+            ),
+            **inventory,
+        },
         "totals": {
             "corpora": len(results),
             "rows": validated_rows,
@@ -329,6 +540,8 @@ def validate_restored_bundle(
             "data_bytes": validated_data_bytes,
             "restored_files": len(selected_files),
             "restored_bytes": sum(int(item["bytes"]) for item in selected_files),
+            "bundle_files": inventory["actual_files"],
+            "bundle_bytes": inventory["actual_bytes"],
             "restored_files_checksum_valid": restored_files_valid,
             "restored_bytes_checksum_valid": restored_bytes_valid,
         },
@@ -346,6 +559,18 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--batch-rows", type=int, default=10_000)
     parser.add_argument("--max-peak-rss-mb", type=float, default=1536.0)
     parser.add_argument("--report-out", default="")
+    parser.add_argument(
+        "--require-isolated",
+        action="store_true",
+        help="require exact inventory, bundled registry, and signed-origin proof",
+    )
+    parser.add_argument(
+        "--require-signed",
+        action="store_true",
+        help="re-verify restored attestation files against the trusted signer policy",
+    )
+    parser.add_argument("--allowed-signers", default=DEFAULT_ALLOWED_SIGNERS)
+    parser.add_argument("--signer-identity", default=DEFAULT_SIGNER_IDENTITY)
     parser.add_argument("--enforce", action="store_true")
     return parser.parse_args(argv)
 
@@ -355,12 +580,19 @@ def main(argv: list[str] | None = None) -> int:
     try:
         if args.batch_rows <= 0 or args.max_peak_rss_mb <= 0:
             raise ScaleOriginError("batch rows and RSS ceiling must be positive")
+        allowed_signers_path = Path(args.allowed_signers)
+        if not allowed_signers_path.is_absolute():
+            allowed_signers_path = REPO_ROOT / allowed_signers_path
         report = validate_restored_bundle(
             root=Path(args.root),
             registry_path=Path(args.registry) if args.registry.strip() else None,
             corpus_ids=parse_csv_set(args.corpus_ids),
             batch_rows=args.batch_rows,
             max_peak_rss_mb=args.max_peak_rss_mb,
+            require_isolated=bool(args.require_isolated),
+            require_signed=bool(args.require_signed),
+            allowed_signers_path=allowed_signers_path,
+            signer_identity=args.signer_identity,
         )
     except (
         OSError,

@@ -6,6 +6,7 @@ import base64
 import hashlib
 import json
 import re
+import shlex
 import subprocess
 from datetime import UTC, datetime
 from pathlib import Path
@@ -54,6 +55,13 @@ def sha256_file(path: Path) -> str:
         for chunk in iter(lambda: handle.read(1024 * 1024), b""):
             digest.update(chunk)
     return digest.hexdigest()
+
+
+def sha256_file_or_empty(path: Path) -> str:
+    try:
+        return sha256_file(path)
+    except OSError:
+        return ""
 
 
 def load_json_object(path: Path) -> dict[str, Any]:
@@ -129,6 +137,57 @@ def allowed_signers_line(*, signer_identity: str, public_key: str) -> str:
     identity = _require_signer_identity(signer_identity)
     fields = normalize_public_key(public_key).split()
     return f'{identity} namespaces="{SIGNATURE_NAMESPACE}" {fields[0]} {fields[1]}\n'
+
+
+def trusted_public_key_fingerprints(
+    *, allowed_signers_path: Path, signer_identity: str
+) -> list[str]:
+    """Return independently trusted Ed25519 fingerprints for one signer."""
+    identity = _require_signer_identity(signer_identity)
+    try:
+        lines = allowed_signers_path.read_text(encoding="utf-8").splitlines()
+    except OSError as exc:
+        raise SnapshotAttestationError(
+            f"cannot read trusted allowed_signers: {exc}"
+        ) from exc
+    fingerprints: set[str] = set()
+    for line_number, raw_line in enumerate(lines, start=1):
+        line = raw_line.strip()
+        if not line or line.startswith("#"):
+            continue
+        try:
+            fields = shlex.split(line)
+        except ValueError as exc:
+            raise SnapshotAttestationError(
+                f"invalid allowed_signers line {line_number}: {exc}"
+            ) from exc
+        if not fields or identity not in fields[0].split(","):
+            continue
+        try:
+            key_index = fields.index("ssh-ed25519")
+        except ValueError as exc:
+            raise SnapshotAttestationError(
+                f"trusted signer {identity} does not use ssh-ed25519"
+            ) from exc
+        if key_index + 1 >= len(fields):
+            raise SnapshotAttestationError(
+                f"trusted signer {identity} has no public key payload"
+            )
+        namespace_options = [
+            field.removeprefix("namespaces=")
+            for field in fields[1:key_index]
+            if field.startswith("namespaces=")
+        ]
+        if SIGNATURE_NAMESPACE not in {
+            namespace for option in namespace_options for namespace in option.split(",")
+        }:
+            raise SnapshotAttestationError(
+                f"trusted signer {identity} does not allow snapshot namespace"
+            )
+        fingerprints.add(public_key_fingerprint(f"ssh-ed25519 {fields[key_index + 1]}"))
+    if not fingerprints:
+        raise SnapshotAttestationError(f"trusted signer identity not found: {identity}")
+    return sorted(fingerprints)
 
 
 def build_snapshot_attestation(
@@ -358,6 +417,10 @@ def verify_signed_attestation(
     signature_path: Path,
     allowed_signers_path: Path,
     signer_identity: str,
+    expected_manifest_url: str | None = None,
+    expected_snapshot_path: str | None = None,
+    expected_snapshot_date: str | None = None,
+    discovery_public_key_path: Path | None = None,
 ) -> dict[str, Any]:
     manifest = load_json_object(manifest_path)
     attestation = load_json_object(attestation_path)
@@ -371,6 +434,29 @@ def verify_signed_attestation(
         declared_manifest_sha256 = str(subject["digest"].get("sha256") or "")
     if declared_manifest_sha256 != manifest_sha256:
         errors.append("attested manifest checksum does not match downloaded manifest")
+    if not isinstance(subject, dict):
+        subject = {}
+        errors.append("attestation subject is missing")
+    if subject.get("name") != "scale-origin-manifest":
+        errors.append("attestation subject name is invalid")
+    if (
+        expected_manifest_url is not None
+        and subject.get("uri") != expected_manifest_url
+    ):
+        errors.append("attested manifest URL does not match selected release")
+    if (
+        expected_snapshot_path is not None
+        and subject.get("snapshot_path") != expected_snapshot_path
+    ):
+        errors.append("attested snapshot path does not match selected release")
+    manifest_snapshot_date = str(manifest.get("snapshot_date") or "")
+    if subject.get("snapshot_date") != manifest_snapshot_date:
+        errors.append("attested snapshot date does not match manifest")
+    if (
+        expected_snapshot_date is not None
+        and subject.get("snapshot_date") != expected_snapshot_date
+    ):
+        errors.append("attested snapshot date does not match selected release")
     artifact_contract = manifest.get("artifact_contract")
     build_contract = attestation.get("build_contract")
     if not isinstance(artifact_contract, dict) or not isinstance(build_contract, dict):
@@ -379,14 +465,75 @@ def verify_signed_attestation(
         "artifact_contract_sha256"
     ):
         errors.append("attested artifact contract does not match manifest")
-    policy = attestation.get("policy")
-    if not isinstance(policy, dict) or any(
-        policy.get(key) is not True for key in REQUIRED_PUBLIC_DATA_POLICY
+    if isinstance(artifact_contract, dict) and isinstance(build_contract, dict):
+        if build_contract.get("manifest_schema_version") != manifest.get(
+            "schema_version"
+        ):
+            errors.append("attested manifest schema does not match manifest")
+        if build_contract.get(
+            "artifact_contract_schema_version"
+        ) != artifact_contract.get("schema_version"):
+            errors.append("attested artifact contract schema does not match manifest")
+    attestation_policy = attestation.get("policy")
+    manifest_policy = manifest.get("policy")
+    if not isinstance(attestation_policy, dict) or any(
+        attestation_policy.get(key) is not True for key in REQUIRED_PUBLIC_DATA_POLICY
     ):
         errors.append("attestation is missing mandatory real/public-data policy")
+    if not isinstance(manifest_policy, dict) or any(
+        manifest_policy.get(key) is not True for key in REQUIRED_PUBLIC_DATA_POLICY
+    ):
+        errors.append("manifest is missing mandatory real/public-data policy")
+    manifest_summary = manifest.get("summary")
+    attestation_summary = attestation.get("summary")
+    summary_keys = (
+        "corpora",
+        "rows",
+        "data_files",
+        "data_bytes",
+        "million_scale_lanes",
+        "promoted_lanes",
+    )
+    if not isinstance(manifest_summary, dict) or not isinstance(
+        attestation_summary, dict
+    ):
+        errors.append("attestation or manifest summary is missing")
+    elif any(
+        int(attestation_summary.get(key) or 0) != int(manifest_summary.get(key) or 0)
+        for key in summary_keys
+    ):
+        errors.append("attested summary does not match manifest")
     signer = attestation.get("signer")
     if not isinstance(signer, dict) or signer.get("identity") != signer_identity:
         errors.append("attestation signer identity does not match trusted identity")
+        signer = {}
+    if signer.get("key_type") != "ssh-ed25519":
+        errors.append("attestation signer key type is unsupported")
+    if signer.get("signature_namespace") != SIGNATURE_NAMESPACE:
+        errors.append("attestation signature namespace is invalid")
+    claimed_fingerprint = str(signer.get("public_key_fingerprint") or "")
+    trusted_fingerprints: list[str] = []
+    try:
+        trusted_fingerprints = trusted_public_key_fingerprints(
+            allowed_signers_path=allowed_signers_path,
+            signer_identity=signer_identity,
+        )
+        if claimed_fingerprint not in trusted_fingerprints:
+            errors.append("attestation key fingerprint is not independently trusted")
+    except (OSError, SnapshotAttestationError) as exc:
+        errors.append(f"trusted signer policy failed: {exc}")
+    discovery_fingerprint = ""
+    if discovery_public_key_path is not None:
+        try:
+            discovery_fingerprint = public_key_fingerprint(
+                discovery_public_key_path.read_text(encoding="utf-8")
+            )
+            if discovery_fingerprint != claimed_fingerprint:
+                errors.append("published discovery key differs from attested signer")
+            if discovery_fingerprint not in trusted_fingerprints:
+                errors.append("published discovery key is not independently trusted")
+        except (OSError, SnapshotAttestationError) as exc:
+            errors.append(f"published discovery key validation failed: {exc}")
     signature_verified = False
     verification_output = ""
     try:
@@ -397,6 +544,13 @@ def verify_signed_attestation(
             signer_identity=signer_identity,
         )
         signature_verified = True
+        verified_fingerprint_match = re.search(
+            r"\bkey (SHA256:[A-Za-z0-9+/]+)", verification_output
+        )
+        if verified_fingerprint_match is None:
+            errors.append("verified signing-key fingerprint is unavailable")
+        elif verified_fingerprint_match.group(1) != claimed_fingerprint:
+            errors.append("verified signing key differs from attested fingerprint")
     except (OSError, SnapshotAttestationError) as exc:
         errors.append(f"signature verification failed: {exc}")
     return {
@@ -406,14 +560,28 @@ def verify_signed_attestation(
         "errors": errors,
         "checks": {
             "manifest_sha256": manifest_sha256,
-            "attestation_sha256": sha256_file(attestation_path),
-            "signature_sha256": sha256_file(signature_path),
+            "attestation_sha256": sha256_file_or_empty(attestation_path),
+            "signature_sha256": sha256_file_or_empty(signature_path),
             "signature_verified": signature_verified,
             "signer_identity": signer_identity,
+            "trusted_public_key_fingerprints": trusted_fingerprints,
+            "attested_public_key_fingerprint": claimed_fingerprint,
+            "discovery_public_key_fingerprint": discovery_fingerprint,
+            "signature_namespace": SIGNATURE_NAMESPACE,
+            "subject_manifest_url": subject.get("uri"),
+            "subject_snapshot_path": subject.get("snapshot_path"),
+            "subject_snapshot_date": subject.get("snapshot_date"),
             "verification_output": verification_output,
-            "official_real_records_only": True,
+            "official_real_records_only": isinstance(manifest_policy, dict)
+            and manifest_policy.get("official_real_records_only") is True,
             "synthetic_or_mock_records": False,
-            "official_public_domain_personal_information_retained": True,
+            "official_public_domain_personal_information_retained": isinstance(
+                manifest_policy, dict
+            )
+            and manifest_policy.get(
+                "official_public_domain_personal_information_retained"
+            )
+            is True,
         },
     }
 
