@@ -1,0 +1,15 @@
+{
+  "schema_version": "public_data_access_blocker_v1",
+  "source_id": "ree_esios_indicators",
+  "institution": "Red Electrica de Espana",
+  "source_url": "https://apidatos.ree.es/es/datos/demanda/evolucion?start_date=2026-08-11T00:00&end_date=2026-08-12T23:59&time_trunc=hour",
+  "observed_at": "2026-08-12T11:11:06Z",
+  "http_status": 403,
+  "content_type": "text/html",
+  "machine_signal": "Incapsula challenge HTML returned where the official JSON API was expected",
+  "body_evidence": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/ree-demanda-incapsula-block-20260812.html",
+  "body_sha256": "87e6df31220106a7cb55c5cb5359c5f429c2e010bd245d307fa9b418af18d73d",
+  "command": "curl -L -sS --max-time 30 -D <headers> -o <body> 'https://apidatos.ree.es/es/datos/demanda/evolucion?start_date=2026-08-11T00:00&end_date=2026-08-12T23:59&time_trunc=hour'",
+  "records_loaded": 0,
+  "real_data_only": true
+}

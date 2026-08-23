@@ -1,0 +1,58 @@
+{
+  "documents": {
+    "candidate_urls": 868,
+    "doc_links_seen": 868,
+    "dry_run": false,
+    "failures": [
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000002.xml -> HTTPStatusError: HTTP 404 (playwright)",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000003.xml -> HTTPStatusError: HTTP 404 (playwright)",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000004.xml -> HTTPStatusError: HTTP 404 (playwright)",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000005.xml -> HTTPStatusError: HTTP 404 (playwright)",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000006.xml -> HTTPStatusError: HTTP 404 (playwright)",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000007.xml -> HTTPStatusError: HTTP 404 (playwright)",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000008.xml -> HTTPStatusError: HTTP 404 (playwright)",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000009.xml -> HTTPStatusError: HTTP 404 (playwright)",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000010.xml -> HTTPStatusError: HTTP 404 (playwright)",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000011.xml -> HTTPStatusError: HTTP 404 (playwright)",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000012.xml -> HTTPStatusError: HTTP 404 (playwright)",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000013.xml -> HTTPStatusError: HTTP 404 (playwright)",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000014.xml -> HTTPStatusError: HTTP 404 (playwright)",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000015.xml -> HTTPStatusError: HTTP 404 (playwright)",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000016.xml -> HTTPStatusError: HTTP 404 (playwright)",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000017.xml -> HTTPStatusError: HTTP 404 (playwright)",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000018.xml -> HTTPStatusError: HTTP 404 (playwright)",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000019.xml -> HTTPStatusError: HTTP 404 (playwright)",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000020.xml -> HTTPStatusError: HTTP 404 (playwright)",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000021.xml -> HTTPStatusError: HTTP 404 (playwright)",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000022.xml -> HTTPStatusError: HTTP 404 (playwright)",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000023.xml -> HTTPStatusError: HTTP 404 (playwright)",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000024.xml -> HTTPStatusError: HTTP 404 (playwright)",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000025.xml -> HTTPStatusError: HTTP 404 (playwright)",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000026.xml -> HTTPStatusError: HTTP 404 (playwright)",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000027.xml -> HTTPStatusError: HTTP 404 (playwright)",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000028.xml -> HTTPStatusError: HTTP 404 (playwright)",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000029.xml -> HTTPStatusError: HTTP 404 (playwright)",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000030.xml -> HTTPStatusError: HTTP 404 (playwright)",
+      "url=http://www.senado.es/legis10/expedientes/610/enmiendas/global_enmiendas_vetos_10_610000031.xml -> HTTPStatusError: HTTP 404 (playwright)"
+    ],
+    "fetched_ok": 162,
+    "initiative_documents_upserted": 868,
+    "initiative_source_ids": [
+      "senado_iniciativas"
+    ],
+    "initiatives_seen": 200,
+    "skipped_existing": 4,
+    "skipped_forbidden": 0,
+    "text_documents_upserted": 162,
+    "urls_to_fetch": 864
+  },
+  "link_backfill": {
+    "dry_run": false,
+    "failures": [],
+    "seen": 0,
+    "source_ids": [
+      "senado_iniciativas"
+    ],
+    "updated": 0
+  }
+}

@@ -1,0 +1,387 @@
+.page {
+  --obstruction-red: #9f2f20;
+  --obstruction-red-soft: #fff1ed;
+  --obstruction-blue: #173d66;
+  --obstruction-blue-soft: #edf5ff;
+  --obstruction-green: #136a5b;
+  gap: 18px;
+  animation: obstruction-page-enter 320ms ease-out both;
+}
+
+.warning,
+.methodNote,
+.section {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: var(--shadow);
+}
+
+.warning {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  align-items: baseline;
+  border-color: #e7b589;
+  background: #fff7e8;
+  padding: 14px 16px;
+  color: #6b3d12;
+}
+
+.methodNote {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(280px, 0.8fr);
+  gap: 18px;
+  padding: 20px;
+}
+
+.eyebrow {
+  margin: 0 0 5px;
+  color: var(--obstruction-red);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.sectionTitle {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--display);
+  font-size: clamp(1.35rem, 2vw, 2rem);
+  line-height: 1.1;
+}
+
+.sectionCopy {
+  max-width: 76ch;
+  margin: 9px 0 0;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+
+.policyList,
+.sourceFacts,
+.incidentFacts {
+  margin: 0;
+}
+
+.policyList {
+  display: grid;
+  gap: 8px;
+}
+
+.policyItem,
+.fact {
+  min-width: 0;
+  border: 1px solid #dde4e2;
+  border-radius: 7px;
+  background: #fff;
+  padding: 9px 10px;
+}
+
+.policyItem dt,
+.fact dt {
+  color: var(--ink-soft);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.policyItem dd,
+.fact dd {
+  margin: 4px 0 0;
+  font-weight: 750;
+  overflow-wrap: anywhere;
+}
+
+.section {
+  display: grid;
+  gap: 16px;
+  padding: 20px;
+}
+
+.sectionHeading {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.corpusGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 310px), 1fr));
+  gap: 12px;
+}
+
+.gapSection {
+  display: grid;
+  gap: 10px;
+  border-top: 1px solid var(--line);
+  padding-top: 16px;
+}
+
+.gapSectionHeading {
+  display: grid;
+  gap: 2px;
+}
+
+.gapSectionTitle {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.gapGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));
+  gap: 10px;
+}
+
+.gapCard {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  min-width: 0;
+  border: 1px solid #eccfc7;
+  border-radius: 8px;
+  background: var(--obstruction-red-soft);
+  padding: 13px;
+}
+
+.gapHeader {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.gapTitle {
+  margin: 4px 0 0;
+  font-size: 0.9rem;
+  overflow-wrap: anywhere;
+}
+
+.gapFacts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 7px;
+  margin: 0;
+}
+
+.corpusCard {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  min-width: 0;
+  border: 1px solid #d8e4df;
+  border-radius: 8px;
+  background: linear-gradient(150deg, #fff, #f4faf7);
+  padding: 14px;
+  transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+.corpusCard:hover,
+.corpusCard:focus-within {
+  border-color: #a6c9bd;
+  box-shadow: 0 12px 24px rgba(19, 106, 91, 0.08);
+  transform: translateY(-2px);
+}
+
+.corpusHeader,
+.sourceHeader,
+.incidentHeader {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.mono {
+  color: var(--ink-soft);
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  overflow-wrap: anywhere;
+}
+
+.corpusTitle,
+.sourceTitle,
+.incidentTitle {
+  margin: 4px 0 0;
+  line-height: 1.2;
+}
+
+.corpusTitle {
+  font-size: 1rem;
+}
+
+.corpusRows {
+  color: var(--obstruction-green);
+  font-size: 1.15rem;
+}
+
+.corpusSources,
+.sourceInstitution,
+.endpoint {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.78rem;
+  overflow-wrap: anywhere;
+}
+
+.nextStep {
+  display: grid;
+  gap: 4px;
+  border-left: 3px solid var(--obstruction-blue);
+  background: var(--obstruction-blue-soft);
+  padding: 9px 10px;
+  color: #26384a;
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.sourceList {
+  display: grid;
+  gap: 14px;
+}
+
+.sourceCard {
+  display: grid;
+  gap: 14px;
+  min-width: 0;
+  border: 1px solid #e2c9c3;
+  border-radius: 8px;
+  background: linear-gradient(155deg, #fff, #fff9f7);
+  padding: 16px;
+}
+
+.sourceIdentity {
+  min-width: min(100%, 360px);
+}
+
+.sourceTitle {
+  font-family: var(--display);
+  font-size: clamp(1.2rem, 2vw, 1.55rem);
+}
+
+.sourceInstitution {
+  margin-top: 4px;
+}
+
+.sourceStatus {
+  display: grid;
+  max-width: 340px;
+  gap: 5px;
+  justify-items: end;
+  color: var(--ink-soft);
+  font-size: 0.75rem;
+  text-align: right;
+}
+
+.sourceFacts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 8px;
+}
+
+.sourceLinks,
+.evidenceLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.incidentList {
+  display: grid;
+  gap: 10px;
+}
+
+.incidentCard {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  border: 1px solid #e6d8d4;
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.88);
+  padding: 12px;
+  transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.incidentCard:target,
+.incidentCard:focus-within {
+  border-color: #c67d6e;
+  box-shadow: 0 8px 20px rgba(159, 47, 32, 0.09);
+}
+
+.incidentIdentity {
+  min-width: 0;
+}
+
+.incidentTitle {
+  font-size: 0.96rem;
+}
+
+.incidentFacts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 7px;
+}
+
+.failure {
+  margin: 0;
+  color: #67271f;
+  font-weight: 750;
+  line-height: 1.45;
+}
+
+.endpoint {
+  border-radius: 6px;
+  background: #f2f4f4;
+  padding: 7px 8px;
+  font-family: var(--mono);
+}
+
+@keyframes obstruction-page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 760px) {
+  .methodNote {
+    grid-template-columns: 1fr;
+  }
+
+  .gapFacts {
+    grid-template-columns: 1fr;
+  }
+
+  .sourceStatus {
+    max-width: none;
+    justify-items: start;
+    text-align: left;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page {
+    animation: none;
+  }
+
+  .corpusCard,
+  .incidentCard {
+    transition: none;
+  }
+
+  .corpusCard:hover,
+  .corpusCard:focus-within {
+    transform: none;
+  }
+}

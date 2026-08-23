@@ -1,0 +1,32 @@
+{
+  "captures": [
+    {
+      "label": "detail",
+      "meta_file": "etl/data/raw/manual/senado_iniciativas_cookie_refresh_ai_ops_235_20260227T100143Z.meta.json",
+      "cookie_file": "etl/data/raw/manual/senado_iniciativas_cookie_refresh_ai_ops_235_20260227T100143Z.cookies.json",
+      "result_status": "captured",
+      "final_url": "https://www.senado.es/web/actividadparlamentaria/iniciativas/detalleiniciativa/index.html?legis=14&id1=621&id2=000006",
+      "title": "Access Denied",
+      "html_len": 357,
+      "runtime_fallback_applied": true,
+      "runtime_driver_node_rc": null,
+      "runtime_system_cli_rc": 0,
+      "cookie_count": 0,
+      "senado_domain_cookie_count": 0
+    },
+    {
+      "label": "root",
+      "meta_file": "etl/data/raw/manual/senado_root_cookie_refresh_ai_ops_235_20260227T100613Z.meta.json",
+      "cookie_file": "etl/data/raw/manual/senado_root_cookie_refresh_ai_ops_235_20260227T100613Z.cookies.json",
+      "result_status": "captured",
+      "final_url": "https://www.senado.es/",
+      "title": "Access Denied",
+      "html_len": 291,
+      "runtime_fallback_applied": true,
+      "runtime_driver_node_rc": null,
+      "runtime_system_cli_rc": 0,
+      "cookie_count": 0,
+      "senado_domain_cookie_count": 0
+    }
+  ]
+}

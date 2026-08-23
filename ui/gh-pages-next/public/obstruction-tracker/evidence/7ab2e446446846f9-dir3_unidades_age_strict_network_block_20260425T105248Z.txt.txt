@@ -1,0 +1,30 @@
+DIR3 official source network probe
+timestamp_utc: 2026-04-25T10:52:48Z
+source_id: dir3_unidades_age
+organism: Ministerio para la Transformacion Digital y de la Funcion Publica / Secretaria General de Administracion Digital
+catalog_url: https://datos.gob.es/es/catalogo/e05251701-directorio-comun-de-unidades-organicas-y-oficinas-dir3
+catalog_api_url: https://datos.gob.es/apidata/catalog/dataset/e05251701-directorio-comun-de-unidades-organicas-y-oficinas-dir3
+resolved_distribution_title: Listado de informacion basica de unidades organicas de la AGE
+resolved_distribution_url: https://administracionelectronica.gob.es/ctt/resources/Soluciones/238/Descargas/Listado%20Unidades%20AGE.xlsx?idIniciativa=238&idElemento=2741
+
+Reproducible strict command:
+
+tmpdir=$(mktemp -d /tmp/dir3-net.XXXXXX); tmpdb="$tmpdir/test.db"; tmpr="$tmpdir/raw"; python3 scripts/ingestar_politicos_es.py ingest --db "$tmpdb" --source dir3_unidades_age --raw-dir "$tmpr" --snapshot-date 2026-04-25 --strict-network --timeout 20; rc=$?; rm -rf "$tmpdir"; exit $rc
+
+Observed result:
+
+exit_code: 1
+failure_signal: urllib.error.HTTPError: HTTP Error 302: redirect error that would lead to an infinite loop; last 30x error message was "Moved Temporarily"
+
+Direct distribution probe:
+
+command: curl -L --max-time 20 -sS -D - '<resolved_distribution_url>' -o /tmp/dir3-age-probe.bin; wc -c < /tmp/dir3-age-probe.bin; xxd -l 32 /tmp/dir3-age-probe.bin
+status_signal: HTTP/1.1 200 OK
+content_type: text/html
+content_length: 245
+body_prefix_hex: 3c68746d6c3e3c686561643e3c7469746c653e526571756573742052656a6563
+body_prefix_text: <html><head><title>Request Rejec
+
+Interpretation:
+
+The official datos.gob catalog is reachable and resolves the source-of-truth AGE distribution URL. The official administracionelectronica.gob.es XLSX download endpoint currently rejects or redirects automated strict access from this environment and returns HTML instead of the expected XLSX bytes. No production DIR3 data was loaded from network in this probe.
