@@ -1,0 +1,110 @@
+{
+  "schema_version": "official_document_identifier_recovery_seeds_v1",
+  "policy": {
+    "accept_only_after_live_official_get_matches_capture_sha256_and_bytes": true,
+    "candidate_url_pattern_is_not_provenance_without_exact_download_match": true,
+    "official_real_records_only": true,
+    "public_domain_personal_information_retained": true,
+    "synthetic_or_mock_records_counted": false
+  },
+  "documents": [
+    {
+      "bytes": 592355,
+      "expected_identifier": "DS_P_14_115",
+      "path": "text_documents/parl_initiative_docs/109eabc2918ac6f65ca08d36f87329b5d66918f1de5b236ee3bd5ca1e1b02da7.pdf",
+      "sha256": "109eabc2918ac6f65ca08d36f87329b5d66918f1de5b236ee3bd5ca1e1b02da7",
+      "source_url": "https://www.congreso.es/public_oficiales/L14/SEN/DS/PL/DS_P_14_115.PDF"
+    },
+    {
+      "bytes": 593468,
+      "expected_identifier": "DS_P_14_87",
+      "path": "text_documents/parl_initiative_docs/21e07f5eb0c77983f0bda7974e257ebbe36b380ee5e3933caced09a11058c9ed.pdf",
+      "sha256": "21e07f5eb0c77983f0bda7974e257ebbe36b380ee5e3933caced09a11058c9ed",
+      "source_url": "https://www.congreso.es/public_oficiales/L14/SEN/DS/PL/DS_P_14_87.PDF"
+    },
+    {
+      "bytes": 3475291,
+      "expected_identifier": "DS_P_15_49",
+      "path": "text_documents/parl_initiative_docs/4e2f2fb7d8d9ad585f8b6de077d626e49f86cd64e88a5ecd8419acb7084d38ee.pdf",
+      "sha256": "4e2f2fb7d8d9ad585f8b6de077d626e49f86cd64e88a5ecd8419acb7084d38ee",
+      "source_url": "https://www.congreso.es/public_oficiales/L15/SEN/DS/PL/DS_P_15_49.PDF"
+    },
+    {
+      "bytes": 2473340,
+      "expected_identifier": "DS_P_15_51",
+      "path": "text_documents/parl_initiative_docs/4f35854c6d5b4a88cd8caa3d811a47c90785dd9df828204145acca7238fe0acb.pdf",
+      "sha256": "4f35854c6d5b4a88cd8caa3d811a47c90785dd9df828204145acca7238fe0acb",
+      "source_url": "https://www.congreso.es/public_oficiales/L15/SEN/DS/PL/DS_P_15_51.PDF"
+    },
+    {
+      "bytes": 558265,
+      "expected_identifier": "DS_C_15_208",
+      "path": "text_documents/parl_initiative_docs/6002f2b91308c79981c578ff07c205a42859abbc38aea244964c8db5e41331f6.pdf",
+      "sha256": "6002f2b91308c79981c578ff07c205a42859abbc38aea244964c8db5e41331f6",
+      "source_url": "https://www.congreso.es/public_oficiales/L15/SEN/DS/CO/DS_C_15_208.PDF"
+    },
+    {
+      "bytes": 660608,
+      "expected_identifier": "DS_C_15_45",
+      "path": "text_documents/parl_initiative_docs/6aee53ba828fd4e0948f602aa1f74c9dd36e8bddb65bacb14d788718e5f773f6.pdf",
+      "sha256": "6aee53ba828fd4e0948f602aa1f74c9dd36e8bddb65bacb14d788718e5f773f6",
+      "source_url": "https://www.congreso.es/public_oficiales/L15/SEN/DS/CO/DS_C_15_45.PDF"
+    },
+    {
+      "bytes": 837258,
+      "expected_identifier": "DS_P_14_88",
+      "path": "text_documents/parl_initiative_docs/7652aeed03ba12a4bc8bd1a95b078c36fccf97b7021a790424efe08941740725.pdf",
+      "sha256": "7652aeed03ba12a4bc8bd1a95b078c36fccf97b7021a790424efe08941740725",
+      "source_url": "https://www.congreso.es/public_oficiales/L14/SEN/DS/PL/DS_P_14_88.PDF"
+    },
+    {
+      "bytes": 791956,
+      "expected_identifier": "DS_P_12_22",
+      "path": "text_documents/parl_initiative_docs/8243c3657dfb2ce2b810f2526102feefde93ae52a5323f49d4d07471fc155a9e.pdf",
+      "sha256": "8243c3657dfb2ce2b810f2526102feefde93ae52a5323f49d4d07471fc155a9e",
+      "source_url": "https://www.congreso.es/public_oficiales/L12/SEN/DS/PL/DS_P_12_22.PDF"
+    },
+    {
+      "bytes": 812428,
+      "expected_identifier": "DS_P_15_13",
+      "path": "text_documents/parl_initiative_docs/ac0261cca4ae0b0871993c0db8c137376ef35ac3176c710b0c810ee2ffba19d8.pdf",
+      "sha256": "ac0261cca4ae0b0871993c0db8c137376ef35ac3176c710b0c810ee2ffba19d8",
+      "source_url": "https://www.congreso.es/public_oficiales/L15/SEN/DS/PL/DS_P_15_13.PDF"
+    },
+    {
+      "bytes": 193670,
+      "expected_identifier": "DS_C_12_68",
+      "path": "text_documents/parl_initiative_docs/b2d810114022fa81ccf6e9c496b98386136f8be648183b2abf7a46daa6e477bf.pdf",
+      "sha256": "b2d810114022fa81ccf6e9c496b98386136f8be648183b2abf7a46daa6e477bf",
+      "source_url": "https://www.congreso.es/public_oficiales/L12/SEN/DS/CO/DS_C_12_68.PDF"
+    },
+    {
+      "bytes": 781292,
+      "expected_identifier": "DS_P_15_50",
+      "path": "text_documents/parl_initiative_docs/bd6bac201f879ca00eba3b621ef4fdeb4ed9168ac7ea0002dcf5eb37f9af21d5.pdf",
+      "sha256": "bd6bac201f879ca00eba3b621ef4fdeb4ed9168ac7ea0002dcf5eb37f9af21d5",
+      "source_url": "https://www.congreso.es/public_oficiales/L15/SEN/DS/PL/DS_P_15_50.PDF"
+    },
+    {
+      "bytes": 2444000,
+      "expected_identifier": "DS_P_15_52",
+      "path": "text_documents/parl_initiative_docs/bebdbf2d2f7cefe1d064f1f7a83ec3d1148cdbf4749b7c4970759d5ba943b7d2.pdf",
+      "sha256": "bebdbf2d2f7cefe1d064f1f7a83ec3d1148cdbf4749b7c4970759d5ba943b7d2",
+      "source_url": "https://www.congreso.es/public_oficiales/L15/SEN/DS/PL/DS_P_15_52.PDF"
+    },
+    {
+      "bytes": 126116,
+      "expected_identifier": "DS_C_14_356",
+      "path": "text_documents/parl_initiative_docs/f22039555524641af326bf9d28f4c3ff3e8398cc945e2db349479c9fc0b1e03f.pdf",
+      "sha256": "f22039555524641af326bf9d28f4c3ff3e8398cc945e2db349479c9fc0b1e03f",
+      "source_url": "https://www.congreso.es/public_oficiales/L14/SEN/DS/CO/DS_C_14_356.PDF"
+    },
+    {
+      "bytes": 974917,
+      "expected_identifier": "DS_P_12_11",
+      "path": "text_documents/parl_initiative_docs/fda166fc4847a3c4d17bd71e92011091f67f9df56cfdfbbd33b2f39b884ed275.pdf",
+      "sha256": "fda166fc4847a3c4d17bd71e92011091f67f9df56cfdfbbd33b2f39b884ed275",
+      "source_url": "https://www.congreso.es/public_oficiales/L12/SEN/DS/PL/DS_P_12_11.PDF"
+    }
+  ]
+}

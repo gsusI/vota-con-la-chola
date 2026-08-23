@@ -1,0 +1,130 @@
+{
+  "analytical_partition_gate_passed": true,
+  "checks": {
+    "all_files_present": true,
+    "binary_fields_valid": true,
+    "boe_correction_lineage_retained": true,
+    "boe_document_source_records_complete": true,
+    "boe_election_outcomes_not_inferred": true,
+    "boe_exact_source_text_retained": true,
+    "bounded_peak_rss": true,
+    "checksums_and_bytes": true,
+    "election_fields_valid": true,
+    "file_minmax": true,
+    "file_rows": true,
+    "lane": true,
+    "lineage_complete": true,
+    "manifest_byte_total": true,
+    "manifest_coverage": true,
+    "manifest_file_total": true,
+    "manifest_metric_totals": true,
+    "manifest_row_total": true,
+    "manifest_schema": true,
+    "manifest_schema_definition": true,
+    "minimum_rows": true,
+    "no_duplicate_manifest_paths": true,
+    "no_extra_parquet_files": true,
+    "no_private_tokens": true,
+    "observation_windows_valid": true,
+    "occurrence_ids_match_natural_key": true,
+    "occurrence_ids_sorted_within_partitions": true,
+    "parquet_schemas": true,
+    "partition_hashes": true,
+    "partition_ids_unique": true,
+    "partition_rows": true,
+    "partition_values": true,
+    "public_birth_dates_retained_exactly": true,
+    "public_dni_retained_exactly": true,
+    "public_domain_identity_contract": true,
+    "public_identity_fields_valid": true,
+    "public_names_retained_exactly": true,
+    "public_source_birth_dates_retained_exactly": true,
+    "raw_payload_excluded": true,
+    "schema_sha256": true,
+    "source_evidence_valid": true,
+    "source_ids_valid": true,
+    "source_record_ids_match_occurrence_ids": true,
+    "source_records_complete": true,
+    "source_urls_complete_and_public": true,
+    "transformer_version": true
+  },
+  "coverage": {
+    "birth_date": 0.0,
+    "birth_date_source": 0.0,
+    "dni": 0.0,
+    "document_source_record": 1.0,
+    "elected": 0.0,
+    "exact_source_text": 1.0,
+    "known_election_outcome": 0.0,
+    "present": 1.0,
+    "public_name": 1.0,
+    "source_record": 1.0,
+    "source_url": 1.0
+  },
+  "generated_at": "2026-08-13T04:20:31+00:00",
+  "identity_assurance": "source_scoped_election_occurrence_not_cross_election_identity",
+  "manifest_file": "candidate-occurrence-semantic-partition-manifest-latest.json",
+  "partitions": [
+    {
+      "files": [
+        {
+          "bytes": 446045,
+          "path": "lane=candidate_occurrences/snapshot_date=2026-08-13/source_system=boe/election_type=european_parliament/year=2024/part-00000.parquet",
+          "rows": 2265,
+          "sha256": "33122111c87fa93c3a31c08e4d3986fafed333bafa68cd3499363c395383743b"
+        }
+      ],
+      "input_sha256": "e3439115852176903eee20afdd7023812b22a6d5b1108e50a8153d25db3338b8",
+      "partition_id": "boe|european_parliament|2024",
+      "rows": 2265
+    },
+    {
+      "files": [
+        {
+          "bytes": 1637496,
+          "path": "lane=candidate_occurrences/snapshot_date=2026-08-13/source_system=boe/election_type=general_cortes/year=2023/part-00000.parquet",
+          "rows": 8555,
+          "sha256": "ddb21683eac0d6899cb196470f17357dacfa6d8f2231f41b9b403c0e3f2cb498"
+        }
+      ],
+      "input_sha256": "7121f585b941812c5325c2ea60019b6b904cee72ce76976e45d623ab4160f6d4",
+      "partition_id": "boe|general_cortes|2023",
+      "rows": 8555
+    }
+  ],
+  "performance": {
+    "batch_rows": 10000,
+    "max_peak_rss_mb": 1024.0,
+    "peak_rss_mb": 129.078,
+    "rows_per_second": 14119.545,
+    "total_seconds": 0.766314,
+    "validation_mode": "sequential",
+    "workers": 1
+  },
+  "promotion_gate_passed": false,
+  "publication_status": "local_generated_not_published",
+  "root_name": "semantic-candidate-occurrences",
+  "schema_version": "candidate_occurrence_partition_validation_v2",
+  "status": "ok",
+  "totals": {
+    "birth_date_rows": 0,
+    "birth_date_source_rows": 0,
+    "boe_rows": 10820,
+    "correction_backed_rows": 88,
+    "dni_rows": 0,
+    "document_source_record_rows": 10820,
+    "elected_rows": 0,
+    "exact_public_name_rows": 10820,
+    "exact_source_text_rows": 10820,
+    "files": 2,
+    "infoelectoral_rows": 0,
+    "outcome_known_rows": 0,
+    "parquet_bytes": 2083541,
+    "partitions": 2,
+    "present_rows": 10820,
+    "private_token_findings": 0,
+    "rows": 10820,
+    "source_record_rows": 10820,
+    "source_url_rows": 10820
+  }
+}

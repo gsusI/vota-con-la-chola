@@ -25,8 +25,7 @@ from .semantic_contracts import (
     sha256_file,
 )
 
-
-VALIDATION_SCHEMA_VERSION = "candidate_occurrence_partition_validation_v1"
+VALIDATION_SCHEMA_VERSION = "candidate_occurrence_partition_validation_v2"
 NON_PUBLICATION_COLUMNS = {"raw_payload"}
 
 
@@ -44,29 +43,62 @@ def _is_public_url(value: Any) -> bool:
     return parsed.scheme in {"http", "https"} and bool(parsed.netloc)
 
 
-def _expected_occurrence_id(row: dict[str, Any]) -> str:
-    parts = (
-        row["election_type_code"],
-        row["election_year"],
-        row["election_month"],
-        row["election_round"],
-        row["province_code"],
-        row["district_code"],
-        row["candidate_scope_code"],
-        row["party_source_code"],
-        row["candidate_order"],
-        row["candidate_type_code"],
-    )
+def _identity(prefix: str, *parts: object) -> str:
     encoded = json.dumps(parts, ensure_ascii=True, separators=(",", ":"))
-    return "infoelectoral-candidate:" + hashlib.sha256(
-        encoded.encode("utf-8")
-    ).hexdigest()
+    return prefix + ":" + hashlib.sha256(encoded.encode("utf-8")).hexdigest()
+
+
+def _expected_occurrence_id(row: dict[str, Any]) -> str:
+    if row["source_system_code"] == "infoelectoral":
+        return _identity(
+            "infoelectoral-candidate",
+            row["election_type_code"],
+            row["election_year"],
+            row["election_month"],
+            row["election_round"],
+            row["province_code"],
+            row["district_code"],
+            row["candidate_scope_code"],
+            row["party_source_code"],
+            row["candidate_order"],
+            row["candidate_type_code"],
+        )
+    prefix = str(row["candidate_occurrence_id"]).split(":", 1)[0]
+    if prefix == "boe-candidate":
+        return _identity(
+            "boe-candidate",
+            row["base_document_id"],
+            row["candidacy_id"],
+            row["candidate_type_code"],
+            row["candidate_order"],
+            row["substitute_for_candidate_order"],
+        )
+    return _identity(
+        "boe-effective-candidate",
+        row.get("candidacy_id"),
+        row["candidate_type_code"],
+        row["candidate_order"],
+        row["substitute_for_candidate_order"],
+    )
+
+
+def _expected_source_record_id(row: dict[str, Any]) -> str:
+    if row["source_system_code"] == "infoelectoral":
+        return str(row["candidate_occurrence_id"])
+    if row["correction_operation_id"]:
+        return _identity(
+            "boe-effective-candidate-source-record",
+            row["candidate_occurrence_id"],
+            row["correction_operation_id"],
+        )
+    return str(row["base_candidate_occurrence_id"])
 
 
 def _expected_relative_dir(manifest: dict[str, Any], values: dict[str, Any]) -> str:
     return Path(
         f"lane={CANDIDATE_OCCURRENCE_CONTRACT.lane}",
         f"snapshot_date={safe_component(str(manifest.get('snapshot_date') or ''))}",
+        f"source_system={safe_component(str(values.get('source_system') or ''))}",
         f"election_type={safe_component(str(values.get('election_type') or ''))}",
         f"year={safe_component(str(values.get('year') or ''))}",
     ).as_posix()
@@ -153,6 +185,13 @@ def validate_candidate_occurrence_partitions(
     birth_date_rows = 0
     birth_date_source_rows = 0
     dni_rows = 0
+    infoelectoral_rows = 0
+    boe_rows = 0
+    correction_backed_rows = 0
+    exact_public_name_rows = 0
+    exact_source_text_rows = 0
+    document_source_record_rows = 0
+    outcome_known_rows = 0
     public_identity_fields_valid = True
     private_findings = 0
     partition_reports: list[dict[str, Any]] = []
@@ -181,7 +220,8 @@ def validate_candidate_occurrence_partitions(
         values = dict(partition.get("values") or {})
         expected_relative_dir = _expected_relative_dir(manifest, values)
         expected_partition_id = "|".join(
-            str(values.get(key) or "") for key in ("election_type", "year")
+            str(values.get(key) or "")
+            for key in ("source_system", "election_type", "year")
         )
         if str(partition.get("relative_dir") or "") != expected_relative_dir:
             partition_values_valid = False
@@ -199,6 +239,13 @@ def validate_candidate_occurrence_partitions(
             "birth_date_rows": 0,
             "birth_date_source_rows": 0,
             "dni_rows": 0,
+            "infoelectoral_rows": 0,
+            "boe_rows": 0,
+            "correction_backed_rows": 0,
+            "exact_public_name_rows": 0,
+            "exact_source_text_rows": 0,
+            "document_source_record_rows": 0,
+            "outcome_known_rows": 0,
             "private_token_findings": 0,
         }
         partition_file_reports: list[dict[str, Any]] = []
@@ -222,7 +269,9 @@ def validate_candidate_occurrence_partitions(
             if actual_sha256 != str(file_meta.get("sha256") or ""):
                 checksums_valid = False
             parquet_file = pq.ParquetFile(file_path)
-            if not parquet_file.schema_arrow.equals(expected_schema, check_metadata=True):
+            if not parquet_file.schema_arrow.equals(
+                expected_schema, check_metadata=True
+            ):
                 schemas_valid = False
             expected_file_rows = int(file_meta.get("rows") or 0)
             if int(parquet_file.metadata.num_rows) != expected_file_rows:
@@ -247,20 +296,44 @@ def validate_candidate_occurrence_partitions(
                     ):
                         ids_sorted = False
                     partition_previous_id = occurrence_id
-                    file_min_id = occurrence_id if file_min_id is None else min(file_min_id, occurrence_id)
-                    file_max_id = occurrence_id if file_max_id is None else max(file_max_id, occurrence_id)
-                    partition_min_id = occurrence_id if partition_min_id is None else min(partition_min_id, occurrence_id)
-                    partition_max_id = occurrence_id if partition_max_id is None else max(partition_max_id, occurrence_id)
+                    file_min_id = (
+                        occurrence_id
+                        if file_min_id is None
+                        else min(file_min_id, occurrence_id)
+                    )
+                    file_max_id = (
+                        occurrence_id
+                        if file_max_id is None
+                        else max(file_max_id, occurrence_id)
+                    )
+                    partition_min_id = (
+                        occurrence_id
+                        if partition_min_id is None
+                        else min(partition_min_id, occurrence_id)
+                    )
+                    partition_max_id = (
+                        occurrence_id
+                        if partition_max_id is None
+                        else max(partition_max_id, occurrence_id)
+                    )
 
                     if occurrence_id != _expected_occurrence_id(row):
                         occurrence_ids_valid = False
-                    if str(row["source_record_id"]) != occurrence_id:
+                    if str(row["source_record_id"]) != _expected_source_record_id(row):
                         source_record_ids_valid = False
-                    if str(row["election_type_code"]) != str(values.get("election_type")):
+                    if str(row["election_type_code"]) != str(
+                        values.get("election_type")
+                    ):
+                        partition_values_valid = False
+                    if str(row["source_system_code"]) != str(
+                        values.get("source_system")
+                    ):
                         partition_values_valid = False
                     if str(row["election_year"]) != str(values.get("year")):
                         partition_values_valid = False
-                    if row["election_scope"] != election_scope(str(row["election_type_code"])):
+                    if row["election_scope"] != election_scope(
+                        str(row["election_type_code"])
+                    ):
                         election_fields_valid = False
                     try:
                         election_date = date.fromisoformat(str(row["election_date"]))
@@ -271,15 +344,18 @@ def validate_candidate_occurrence_partitions(
                             election_fields_valid = False
                         if election_date.month != int(row["election_month"]):
                             election_fields_valid = False
-                    if int(row["candidate_order"]) < 0:
+                    if int(row["candidate_order"]) < 1:
                         election_fields_valid = False
-                    if int(row["is_elected"]) not in (0, 1):
-                        binary_fields_valid = False
                     if int(row["is_present"]) not in (0, 1):
                         binary_fields_valid = False
-                    if int(row["is_elected"]):
-                        elected_rows += 1
-                        partition_metrics["elected_rows"] += 1
+                    if row["is_elected"] is not None:
+                        outcome_known_rows += 1
+                        partition_metrics["outcome_known_rows"] += 1
+                        if int(row["is_elected"]) not in (0, 1):
+                            binary_fields_valid = False
+                        if int(row["is_elected"]):
+                            elected_rows += 1
+                            partition_metrics["elected_rows"] += 1
                     if int(row["is_present"]):
                         present_rows += 1
                         partition_metrics["present_rows"] += 1
@@ -295,9 +371,11 @@ def validate_candidate_occurrence_partitions(
                         expected_birth_date = birth_date_source
                         if len(birth_date_source) == 8 and birth_date_source.isdigit():
                             try:
-                                expected_birth_date = datetime.strptime(
-                                    birth_date_source, "%d%m%Y"
-                                ).date().isoformat()
+                                expected_birth_date = date(
+                                    int(birth_date_source[4:8]),
+                                    int(birth_date_source[2:4]),
+                                    int(birth_date_source[0:2]),
+                                ).isoformat()
                             except ValueError:
                                 pass
                         if birth_date != expected_birth_date:
@@ -307,27 +385,104 @@ def validate_candidate_occurrence_partitions(
                     if dni:
                         dni_rows += 1
                         partition_metrics["dni_rows"] += 1
+                    if str(row["full_name"] or "").strip():
+                        exact_public_name_rows += 1
+                        partition_metrics["exact_public_name_rows"] += 1
+                    else:
+                        public_identity_fields_valid = False
+                    if str(row["source_text_exact"] or "").strip():
+                        exact_source_text_rows += 1
+                        partition_metrics["exact_source_text_rows"] += 1
+                    if row["document_source_record_pk"] is not None:
+                        if int(row["document_source_record_pk"]) < 1:
+                            source_evidence_valid = False
+                        else:
+                            document_source_record_rows += 1
+                            partition_metrics["document_source_record_rows"] += 1
+                    if row["correction_operation_id"]:
+                        correction_backed_rows += 1
+                        partition_metrics["correction_backed_rows"] += 1
                     if _is_public_url(row["source_url"]):
                         source_url_rows += 1
                         partition_metrics["source_url_rows"] += 1
                     else:
                         urls_public = False
-                    if row["source_id"] != "infoelectoral_candidates":
-                        source_ids_valid = False
                     if int(row["source_record_pk"]) < 1:
                         source_evidence_valid = False
                     else:
                         source_record_rows += 1
                         partition_metrics["source_record_rows"] += 1
-                    if row["lineage_state"] != "source_record":
-                        lineage_valid = False
                     if not _valid_sha256(row["source_content_sha256"]):
-                        source_evidence_valid = False
-                    member_name = Path(str(row["source_member_name"])).name.upper()
-                    if not member_name.startswith("04") or not member_name.endswith(".DAT"):
                         source_evidence_valid = False
                     if int(row["source_line_number"]) < 1:
                         source_evidence_valid = False
+                    source_system = str(row["source_system_code"])
+                    if source_system == "infoelectoral":
+                        infoelectoral_rows += 1
+                        partition_metrics["infoelectoral_rows"] += 1
+                        if row["source_id"] != "infoelectoral_candidates":
+                            source_ids_valid = False
+                        member_name = Path(
+                            str(row["source_member_name"] or "")
+                        ).name.upper()
+                        if not member_name.startswith("04") or not member_name.endswith(
+                            ".DAT"
+                        ):
+                            source_evidence_valid = False
+                        if row["archive_id"] in (None, ""):
+                            source_evidence_valid = False
+                        if row["lineage_state"] != "source_record":
+                            lineage_valid = False
+                        if row["person_identity_state"] != (
+                            "source_scoped_official_archive"
+                        ):
+                            lineage_valid = False
+                    elif source_system == "boe":
+                        boe_rows += 1
+                        partition_metrics["boe_rows"] += 1
+                        if row["source_id"] != "boe_election_candidates":
+                            source_ids_valid = False
+                        if row["is_elected"] is not None:
+                            election_fields_valid = False
+                        if not str(row["source_url"] or "").startswith(
+                            "https://www.boe.es/"
+                        ):
+                            source_evidence_valid = False
+                        if not str(row["source_document_id"] or "").startswith(
+                            "BOE-A-"
+                        ):
+                            source_evidence_valid = False
+                        if not str(row["base_document_id"] or "").startswith("BOE-A-"):
+                            source_evidence_valid = False
+                        if row["candidacy_id"] in (None, ""):
+                            source_evidence_valid = False
+                        if row["chamber_code"] not in {
+                            "CONGRESS",
+                            "SENATE",
+                            "EUROPEAN_PARLIAMENT",
+                        }:
+                            source_evidence_valid = False
+                        if not _valid_sha256(row["row_content_sha256"]):
+                            source_evidence_valid = False
+                        corrected = row["correction_operation_id"] is not None
+                        expected_lineage = (
+                            "effective_correction_source_record"
+                            if corrected
+                            else "source_record"
+                        )
+                        expected_identity = (
+                            "source_scoped_correction_exact"
+                            if corrected
+                            else "source_scoped_base_exact"
+                        )
+                        if row["lineage_state"] != expected_lineage:
+                            lineage_valid = False
+                        if row["person_identity_state"] != expected_identity:
+                            lineage_valid = False
+                        if not str(row["source_text_exact"] or "").strip():
+                            source_evidence_valid = False
+                    else:
+                        source_ids_valid = False
                     if str(row["first_seen_snapshot_date"]) > str(
                         row["last_seen_snapshot_date"]
                     ):
@@ -335,7 +490,9 @@ def validate_candidate_occurrence_partitions(
                     row_private_findings = private_token_findings(row)
                     private_findings += row_private_findings
                     partition_metrics["private_token_findings"] += row_private_findings
-                    digest.update(CANDIDATE_OCCURRENCE_CONTRACT.canonical_row_bytes(row))
+                    digest.update(
+                        CANDIDATE_OCCURRENCE_CONTRACT.canonical_row_bytes(row)
+                    )
                     file_rows += 1
                     partition_rows += 1
                     rows_total += 1
@@ -379,9 +536,7 @@ def validate_candidate_occurrence_partitions(
     actual_paths = (
         expected_paths
         if _partial_scope
-        else {
-            path.relative_to(root).as_posix() for path in root.rglob("*.parquet")
-        }
+        else {path.relative_to(root).as_posix() for path in root.rglob("*.parquet")}
     )
     peak_rss = peak_rss_mb()
     totals = dict(manifest.get("totals") or {})
@@ -397,6 +552,13 @@ def validate_candidate_occurrence_partitions(
         "birth_date_rows": birth_date_rows,
         "birth_date_source_rows": birth_date_source_rows,
         "dni_rows": dni_rows,
+        "infoelectoral_rows": infoelectoral_rows,
+        "boe_rows": boe_rows,
+        "correction_backed_rows": correction_backed_rows,
+        "exact_public_name_rows": exact_public_name_rows,
+        "exact_source_text_rows": exact_source_text_rows,
+        "document_source_record_rows": document_source_record_rows,
+        "outcome_known_rows": outcome_known_rows,
         "private_token_findings": private_findings,
     }
     expected_coverage = {
@@ -406,13 +568,23 @@ def validate_candidate_occurrence_partitions(
         else 0.0,
         "present": round(present_rows / rows_total, 8) if rows_total else 0.0,
         "elected": round(elected_rows / rows_total, 8) if rows_total else 0.0,
-        "birth_date": round(birth_date_rows / rows_total, 8)
-        if rows_total
-        else 0.0,
+        "birth_date": round(birth_date_rows / rows_total, 8) if rows_total else 0.0,
         "birth_date_source": round(birth_date_source_rows / rows_total, 8)
         if rows_total
         else 0.0,
         "dni": round(dni_rows / rows_total, 8) if rows_total else 0.0,
+        "public_name": round(exact_public_name_rows / rows_total, 8)
+        if rows_total
+        else 0.0,
+        "exact_source_text": round(exact_source_text_rows / rows_total, 8)
+        if rows_total
+        else 0.0,
+        "document_source_record": round(document_source_record_rows / rows_total, 8)
+        if rows_total
+        else 0.0,
+        "known_election_outcome": round(outcome_known_rows / rows_total, 8)
+        if rows_total
+        else 0.0,
     }
     source_contract = dict(manifest.get("source") or {})
     source_database = dict(manifest.get("source_database") or {})
@@ -427,14 +599,18 @@ def validate_candidate_occurrence_partitions(
         "manifest_schema_definition": manifest.get("schema")
         == list(CANDIDATE_OCCURRENCE_CONTRACT.schema),
         "raw_payload_excluded": NON_PUBLICATION_COLUMNS.isdisjoint(contract_columns),
-        "public_domain_identity_contract": source_contract.get(
-            "raw_payload_published"
-        )
+        "public_domain_identity_contract": source_contract.get("raw_payload_published")
         is False
         and source_contract.get("official_archive_publication")
         == "publishable_with_source_provenance"
         and set(source_contract.get("public_domain_identity_fields") or [])
-        == {"birth_date", "birth_date_source", "dni"},
+        == {
+            "full_name",
+            "birth_date",
+            "birth_date_source",
+            "dni",
+            "source_text_exact",
+        },
         "minimum_rows": True if _partial_scope else rows_total >= int(min_rows),
         "all_files_present": files_present,
         "no_duplicate_manifest_paths": duplicate_paths == 0,
@@ -464,8 +640,7 @@ def validate_candidate_occurrence_partitions(
         "public_identity_fields_valid": public_identity_fields_valid,
         "public_birth_dates_retained_exactly": True
         if _partial_scope
-        else int(source_database.get("source_birth_date_rows") or 0)
-        == birth_date_rows,
+        else int(source_database.get("source_birth_date_rows") or 0) == birth_date_rows,
         "public_source_birth_dates_retained_exactly": True
         if _partial_scope
         else int(source_database.get("source_birth_date_source_rows") or 0)
@@ -473,6 +648,26 @@ def validate_candidate_occurrence_partitions(
         "public_dni_retained_exactly": True
         if _partial_scope
         else int(source_database.get("source_dni_rows") or 0) == dni_rows,
+        "public_names_retained_exactly": True
+        if _partial_scope
+        else int(source_database.get("source_public_name_rows") or 0)
+        == exact_public_name_rows
+        == rows_total,
+        "boe_exact_source_text_retained": True
+        if _partial_scope
+        else int(source_database.get("source_exact_text_rows") or 0)
+        == exact_source_text_rows
+        == boe_rows,
+        "boe_correction_lineage_retained": True
+        if _partial_scope
+        else int(source_database.get("source_correction_backed_rows") or 0)
+        == correction_backed_rows,
+        "boe_document_source_records_complete": True
+        if _partial_scope
+        else int(source_database.get("source_boe_document_lineage_rows") or 0)
+        == document_source_record_rows
+        == boe_rows,
+        "boe_election_outcomes_not_inferred": outcome_known_rows == infoelectoral_rows,
         "manifest_row_total": True
         if _partial_scope
         else rows_total == int(totals.get("rows") or -1),
@@ -510,13 +705,9 @@ def validate_candidate_occurrence_partitions(
             "max_peak_rss_mb": float(max_peak_rss_mb),
             "batch_rows": int(batch_rows),
             "total_seconds": round(elapsed, 6),
-            "rows_per_second": round(
-                rows_total / max(elapsed, 0.000001), 3
-            ),
+            "rows_per_second": round(rows_total / max(elapsed, 0.000001), 3),
             "workers": 1,
-            "validation_mode": (
-                "partition_worker" if _partial_scope else "sequential"
-            ),
+            "validation_mode": ("partition_worker" if _partial_scope else "sequential"),
         },
         "identity_assurance": manifest.get("identity_assurance"),
         "publication_status": manifest.get("publication_status"),
@@ -593,6 +784,13 @@ def _validate_parallel_candidate_occurrence_partitions(
         "birth_date_rows",
         "birth_date_source_rows",
         "dni_rows",
+        "infoelectoral_rows",
+        "boe_rows",
+        "correction_backed_rows",
+        "exact_public_name_rows",
+        "exact_source_text_rows",
+        "document_source_record_rows",
+        "outcome_known_rows",
         "private_token_findings",
     )
     calculated_totals = {
@@ -601,14 +799,10 @@ def _validate_parallel_candidate_occurrence_partitions(
     }
     rows_total = calculated_totals["rows"]
     expected_coverage = {
-        "source_url": round(
-            calculated_totals["source_url_rows"] / rows_total, 8
-        )
+        "source_url": round(calculated_totals["source_url_rows"] / rows_total, 8)
         if rows_total
         else 0.0,
-        "source_record": round(
-            calculated_totals["source_record_rows"] / rows_total, 8
-        )
+        "source_record": round(calculated_totals["source_record_rows"] / rows_total, 8)
         if rows_total
         else 0.0,
         "present": round(calculated_totals["present_rows"] / rows_total, 8)
@@ -626,6 +820,26 @@ def _validate_parallel_candidate_occurrence_partitions(
         if rows_total
         else 0.0,
         "dni": round(calculated_totals["dni_rows"] / rows_total, 8)
+        if rows_total
+        else 0.0,
+        "public_name": round(
+            calculated_totals["exact_public_name_rows"] / rows_total, 8
+        )
+        if rows_total
+        else 0.0,
+        "exact_source_text": round(
+            calculated_totals["exact_source_text_rows"] / rows_total, 8
+        )
+        if rows_total
+        else 0.0,
+        "document_source_record": round(
+            calculated_totals["document_source_record_rows"] / rows_total, 8
+        )
+        if rows_total
+        else 0.0,
+        "known_election_outcome": round(
+            calculated_totals["outcome_known_rows"] / rows_total, 8
+        )
         if rows_total
         else 0.0,
     }
@@ -657,8 +871,7 @@ def _validate_parallel_candidate_occurrence_partitions(
     checks.update(
         {
             "minimum_rows": rows_total >= int(min_rows),
-            "no_duplicate_manifest_paths": len(manifest_paths)
-            == len(expected_paths),
+            "no_duplicate_manifest_paths": len(manifest_paths) == len(expected_paths),
             "partition_ids_unique": len(partition_ids) == len(set(partition_ids)),
             "no_extra_parquet_files": actual_paths == expected_paths,
             "manifest_row_total": rows_total == int(totals.get("rows") or -1),
@@ -683,6 +896,29 @@ def _validate_parallel_candidate_occurrence_partitions(
                 source_database.get("source_dni_rows") or 0
             )
             == calculated_totals["dni_rows"],
+            "public_names_retained_exactly": int(
+                source_database.get("source_public_name_rows") or 0
+            )
+            == calculated_totals["exact_public_name_rows"]
+            == rows_total,
+            "boe_exact_source_text_retained": int(
+                source_database.get("source_exact_text_rows") or 0
+            )
+            == calculated_totals["exact_source_text_rows"]
+            == calculated_totals["boe_rows"],
+            "boe_correction_lineage_retained": int(
+                source_database.get("source_correction_backed_rows") or 0
+            )
+            == calculated_totals["correction_backed_rows"],
+            "boe_document_source_records_complete": int(
+                source_database.get("source_boe_document_lineage_rows") or 0
+            )
+            == calculated_totals["document_source_record_rows"]
+            == calculated_totals["boe_rows"],
+            "boe_election_outcomes_not_inferred": calculated_totals[
+                "outcome_known_rows"
+            ]
+            == calculated_totals["infoelectoral_rows"],
             "bounded_peak_rss": conservative_parallel_peak_rss
             <= float(max_peak_rss_mb),
         }
@@ -705,9 +941,7 @@ def _validate_parallel_candidate_occurrence_partitions(
         "performance": {
             "peak_rss_mb": parent_peak_rss,
             "worker_peak_rss_mb_max": max_worker_peak_rss,
-            "conservative_parallel_peak_rss_mb": (
-                conservative_parallel_peak_rss
-            ),
+            "conservative_parallel_peak_rss_mb": (conservative_parallel_peak_rss),
             "parallel_peak_bound_method": (
                 "parent_peak_plus_workers_times_max_worker_peak"
             ),

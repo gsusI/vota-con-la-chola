@@ -15,6 +15,9 @@ if str(REPO_ROOT) not in sys.path:
 from publicdata_publish.accountability_partition_validation import (
     validate_accountability_partitions,
 )
+from publicdata_publish.actor_graph_partition_validation import (
+    validate_actor_graph_partitions,
+)
 from publicdata_publish.actor_mandate_partition_validation import (
     validate_actor_mandate_partitions,
 )
@@ -38,6 +41,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
             "member_votes",
             "accountability_ledger",
             "actor_mandates",
+            "actor_graph",
             "candidate_occurrences",
             "public_money_facts",
             "indicator_observations",
@@ -46,6 +50,10 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     )
     parser.add_argument("--root", required=True)
     parser.add_argument("--manifest")
+    parser.add_argument(
+        "--source-db",
+        help="Source SQLite required for independent actor_graph reconciliation",
+    )
     parser.add_argument("--report-out")
     parser.add_argument("--batch-rows", type=int, default=10_000)
     parser.add_argument("--min-rows", type=int, default=1)
@@ -62,6 +70,7 @@ def main(argv: list[str] | None = None) -> int:
             "member_votes": validate_semantic_partitions,
             "accountability_ledger": validate_accountability_partitions,
             "actor_mandates": validate_actor_mandate_partitions,
+            "actor_graph": validate_actor_graph_partitions,
             "candidate_occurrences": validate_candidate_occurrence_partitions,
             "public_money_facts": validate_money_partitions,
             "indicator_observations": validate_indicator_partitions,
@@ -74,6 +83,12 @@ def main(argv: list[str] | None = None) -> int:
             "min_rows": args.min_rows,
             "max_peak_rss_mb": args.max_peak_rss_mb,
         }
+        if args.lane == "actor_graph":
+            if not args.source_db:
+                raise ValueError("--source-db is required for actor_graph")
+            validator_kwargs["source_db_path"] = Path(args.source_db)
+        elif args.source_db:
+            raise ValueError("--source-db currently applies only to actor_graph")
         if args.lane == "candidate_occurrences":
             validator_kwargs["workers"] = args.workers
         elif args.workers != 1:

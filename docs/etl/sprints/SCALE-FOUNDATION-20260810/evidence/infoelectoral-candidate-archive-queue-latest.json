@@ -27,10 +27,11 @@
       "source_records_reconcile": true
     },
     "identity_assurance": "source_scoped_election_occurrence; cross-election person resolution not asserted",
-    "privacy": {
-      "normalized_birth_date_persisted": false,
-      "normalized_dni_persisted": false,
-      "raw_archive_class": "restricted_personal_data"
+    "public_domain_identity": {
+      "dni_persisted": true,
+      "normalized_birth_date_persisted": true,
+      "official_archive_retained": true,
+      "source_birth_date_persisted": true
     },
     "schema_version": "infoelectoral_candidates_report_v1",
     "source_id": "infoelectoral_candidates",
@@ -52,14 +53,14 @@
     }
   },
   "pipeline_id": "infoelectoral-candidates-v1",
-  "publication_status": "restricted_raw_local_normalized_not_published",
+  "publication_status": "official_public_domain_raw_local_normalized_not_published",
   "queue": {
     "active_workers": [],
     "attempt_status_counts": {},
     "attempts_total": 0,
     "dead_letter_rate": 0.0,
     "earliest_lease_expiry": null,
-    "generated_at": "2026-08-11T20:33:31+00:00",
+    "generated_at": "2026-08-13T01:28:32+00:00",
     "items_total": 60,
     "max_attempts_observed": 0,
     "oldest_pending_at": "2026-08-11T19:22:15+00:00",

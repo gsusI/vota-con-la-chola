@@ -1,0 +1,46 @@
+{
+  "artifact_contract_sha256": "d7de5544cc277c85fb2a4ae6d1e4e2bb1867ddc35857502b73c3780834aef565",
+  "attestation": {
+    "artifact_contract_sha256": "d7de5544cc277c85fb2a4ae6d1e4e2bb1867ddc35857502b73c3780834aef565",
+    "attestation_sha256": "909c90a5c95cea8e74aaa5e048349e870d60511d667ccdafe1f230a1bb45d2a3",
+    "files": {
+      "allowed_signers": "allowed_signers",
+      "attestation": "attestation.json",
+      "public_key": "signing-key.pub",
+      "signature": "attestation.json.sig"
+    },
+    "manifest_sha256": "5d9ce557ed864de56f677a9f82c999a4ec0dfc494c086b1bfca0bb2e461272dd",
+    "public_key_fingerprint": "SHA256:R2B1jFbkLoigmKxObr+ExlBLrKENkaUDp0C3ip0Lj7A",
+    "remote_paths": {
+      "attestation": "scale/snapshots/2026-08-19/5d9ce557ed864de56f677a9f82c999a4ec0dfc494c086b1bfca0bb2e461272dd/attestation/attestation.json",
+      "public_key": "scale/snapshots/2026-08-19/5d9ce557ed864de56f677a9f82c999a4ec0dfc494c086b1bfca0bb2e461272dd/attestation/signing-key.pub",
+      "signature": "scale/snapshots/2026-08-19/5d9ce557ed864de56f677a9f82c999a4ec0dfc494c086b1bfca0bb2e461272dd/attestation/attestation.json.sig"
+    },
+    "schema_version": "vclc_snapshot_attestation_v1",
+    "signature_namespace": "vota-con-la-chola-snapshot-v1",
+    "signature_sha256": "a544ea55eca3be73b7d8bb9ce6bf4eda924a651bedbfdbbfe0bf79d5742a81ab",
+    "signer_identity": "vclc-snapshot-release-2026",
+    "status": "signed_and_verified",
+    "verification_output": "Good \"vota-con-la-chola-snapshot-v1\" signature for vclc-snapshot-release-2026 with ED25519 key SHA256:R2B1jFbkLoigmKxObr+ExlBLrKENkaUDp0C3ip0Lj7A"
+  },
+  "copies": 0,
+  "corpora": 7,
+  "data_bytes": 500714815,
+  "data_files": 8597,
+  "dataset_repo": "JesusIC/vota-con-la-chola-data",
+  "hardlinks": 8625,
+  "manifest_sha256": "5d9ce557ed864de56f677a9f82c999a4ec0dfc494c086b1bfca0bb2e461272dd",
+  "million_scale_lanes": 3,
+  "promoted_lanes": 0,
+  "public_domain_personal_information_retained": true,
+  "published": true,
+  "readiness_sha256": "8f3c613fb6fbca59a7c61d59581f0fc2c1aafeaeefc46082a2f211e06237ad1f",
+  "registry_sha256": "2757f1641ba5f71f4c05ee28d6894723fd0ec8964f427cafbc43c9b0765d0fd4",
+  "release_id": "5d9ce557ed864de56f677a9f82c999a4ec0dfc494c086b1bfca0bb2e461272dd",
+  "rows": 5414326,
+  "schema_version": "real-scale-origin-bundle-v2",
+  "signed": true,
+  "snapshot_date": "2026-08-19",
+  "snapshot_path": "scale/snapshots/2026-08-19/5d9ce557ed864de56f677a9f82c999a4ec0dfc494c086b1bfca0bb2e461272dd",
+  "status": "ok"
+}

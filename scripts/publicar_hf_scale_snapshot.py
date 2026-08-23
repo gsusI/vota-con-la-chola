@@ -22,6 +22,16 @@ from publicdata_publish.hf_snapshot import (
     load_dotenv,
     resolve_setting,
 )
+from publicdata_publish.snapshot_attestation import (
+    ATTESTATION_SCHEMA_VERSION,
+    SIGNATURE_NAMESPACE,
+    create_signed_attestation,
+    now_utc_iso,
+    write_json_canonical,
+)
+from publicdata_publish.snapshot_attestation import (
+    sha256_file as attestation_sha256_file,
+)
 
 SCHEMA_VERSION = "real-scale-origin-bundle-v2"
 ARTIFACT_CONTRACT_SCHEMA_VERSION = "real-scale-artifact-contract-v1"
@@ -309,6 +319,85 @@ def publish_scale_origin_bundle(
         path_in_repo="scale/latest.json",
         commit_message=f"Point to real scale origin snapshot {snapshot_date}",
     )
+
+
+def attach_signed_attestation_to_bundle(
+    *,
+    build_root: Path,
+    report: dict[str, Any],
+    dataset_repo: str,
+    private_key_path: Path,
+    signer_identity: str,
+    issued_at: str,
+) -> dict[str, Any]:
+    snapshot_path = str(report.get("snapshot_path") or "")
+    manifest_path = build_root / snapshot_path / "manifest.json"
+    if not manifest_path.is_file():
+        raise ScaleOriginError("built scale manifest is missing before signing")
+    manifest_url = (
+        f"https://huggingface.co/datasets/{dataset_repo}/resolve/main/"
+        f"{snapshot_path}/manifest.json"
+    )
+    attestation_dir = build_root / snapshot_path / "attestation"
+    signed = create_signed_attestation(
+        manifest_path=manifest_path,
+        manifest_url=manifest_url,
+        snapshot_path=snapshot_path,
+        private_key_path=private_key_path,
+        signer_identity=signer_identity,
+        issued_at=issued_at,
+        out_dir=attestation_dir,
+    )
+    # Trust policy is distributed independently from the signed bundle. Publishing
+    # an allowed_signers file beside its own key would not establish trust.
+    generated_allowed_signers = attestation_dir / "allowed_signers"
+    if generated_allowed_signers.exists():
+        generated_allowed_signers.unlink()
+
+    attestation_rel = f"{snapshot_path}/attestation/attestation.json"
+    signature_rel = f"{snapshot_path}/attestation/attestation.json.sig"
+    public_key_rel = f"{snapshot_path}/attestation/signing-key.pub"
+    latest_path = build_root / "scale" / "latest.json"
+    latest = load_json_object(latest_path)
+    latest["attestation"] = {
+        "schema_version": ATTESTATION_SCHEMA_VERSION,
+        "attestation": attestation_rel,
+        "signature": signature_rel,
+        "public_key": public_key_rel,
+        "attestation_sha256": signed["attestation_sha256"],
+        "signature_sha256": signed["signature_sha256"],
+        "public_key_fingerprint": signed["public_key_fingerprint"],
+        "signer_identity": signed["signer_identity"],
+        "signature_namespace": SIGNATURE_NAMESPACE,
+    }
+    write_json_canonical(latest_path, latest)
+
+    checksums_path = build_root / snapshot_path / "checksums.sha256"
+    existing_lines = {
+        line.strip()
+        for line in checksums_path.read_text(encoding="utf-8").splitlines()
+        if line.strip()
+    }
+    for relative in (
+        Path("attestation/attestation.json"),
+        Path("attestation/attestation.json.sig"),
+        Path("attestation/signing-key.pub"),
+    ):
+        absolute = build_root / snapshot_path / relative
+        existing_lines.add(
+            f"{attestation_sha256_file(absolute)}  {relative.as_posix()}"
+        )
+    checksums_path.write_text(
+        "\n".join(sorted(existing_lines)) + "\n", encoding="utf-8"
+    )
+    return {
+        **signed,
+        "remote_paths": {
+            "attestation": attestation_rel,
+            "signature": signature_rel,
+            "public_key": public_key_rel,
+        },
+    }
 
 
 def build_scale_origin_bundle(
@@ -643,6 +732,9 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--report-out", default="")
     parser.add_argument("--publish", action="store_true")
     parser.add_argument("--private", action="store_true")
+    parser.add_argument("--signing-key", default="")
+    parser.add_argument("--signer-identity", default="vclc-snapshot-release-2026")
+    parser.add_argument("--attestation-issued-at", default="")
     return parser.parse_args(argv)
 
 
@@ -655,6 +747,41 @@ def main(argv: list[str] | None = None) -> int:
     except (ScaleOriginError, ValueError) as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
         return 2
+
+    dotenv_values = load_dotenv(Path(args.env_file))
+    signing_key_raw = resolve_setting(
+        "SNAPSHOT_SIGNING_KEY", args.signing_key, dotenv_values
+    )
+    if args.publish and not signing_key_raw:
+        print(
+            "ERROR: SNAPSHOT_SIGNING_KEY is required for scale-origin publication",
+            file=sys.stderr,
+        )
+        return 2
+    signing_key_path = (
+        Path(signing_key_raw).expanduser().resolve() if signing_key_raw else None
+    )
+    if signing_key_path is not None and not signing_key_path.is_file():
+        print(f"ERROR: signing key does not exist: {signing_key_path}", file=sys.stderr)
+        return 2
+
+    dataset_repo = ""
+    token = ""
+    if args.publish or signing_key_path is not None:
+        username = resolve_setting("HF_USERNAME", args.hf_username, dotenv_values)
+        raw_repo = resolve_setting(
+            "HF_DATASET_REPO_ID", args.dataset_repo, dotenv_values
+        )
+        try:
+            dataset_repo = resolve_dataset_repo(raw_repo, username)
+        except ScaleOriginError as exc:
+            print(f"ERROR: {exc}", file=sys.stderr)
+            return 2
+    if args.publish:
+        token = resolve_setting("HF_TOKEN", args.hf_token, dotenv_values)
+        if token in PLACEHOLDER_VALUES:
+            print("ERROR: HF_TOKEN is not configured", file=sys.stderr)
+            return 2
 
     temporary: tempfile.TemporaryDirectory[str] | None = None
     if args.out_dir.strip():
@@ -675,17 +802,19 @@ def main(argv: list[str] | None = None) -> int:
             build_root=build_root,
             snapshot_date=snapshot_date,
         )
-        dataset_repo = ""
-        if args.publish:
-            dotenv_values = load_dotenv(Path(args.env_file))
-            token = resolve_setting("HF_TOKEN", args.hf_token, dotenv_values)
-            username = resolve_setting("HF_USERNAME", args.hf_username, dotenv_values)
-            raw_repo = resolve_setting(
-                "HF_DATASET_REPO_ID", args.dataset_repo, dotenv_values
+        if signing_key_path is not None:
+            report["attestation"] = attach_signed_attestation_to_bundle(
+                build_root=build_root,
+                report=report,
+                dataset_repo=dataset_repo,
+                private_key_path=signing_key_path,
+                signer_identity=args.signer_identity,
+                issued_at=args.attestation_issued_at.strip() or now_utc_iso(),
             )
-            dataset_repo = resolve_dataset_repo(raw_repo, username)
-            if token in PLACEHOLDER_VALUES:
-                raise ScaleOriginError("HF_TOKEN is not configured")
+            report["signed"] = True
+        else:
+            report["signed"] = False
+        if args.publish:
             from huggingface_hub import HfApi  # type: ignore
 
             api = HfApi(token=token)

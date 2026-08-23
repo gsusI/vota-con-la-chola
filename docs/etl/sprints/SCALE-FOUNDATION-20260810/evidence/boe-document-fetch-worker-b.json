@@ -1,0 +1,46 @@
+{
+  "failure_class_counts": {
+    "upstream_server_error": 1
+  },
+  "failure_samples": [
+    {
+      "error": "HTTPError: HTTP Error 503: Service Unavailable",
+      "failure_class": "upstream_server_error",
+      "http_status": 503,
+      "item_key": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2023-9950"
+    }
+  ],
+  "opened_circuits": [],
+  "opened_hosts": [],
+  "per_host_workers": 8,
+  "pipeline_id": "boe_document_fetch",
+  "queue": {
+    "items_total": 88980,
+    "pipeline_id": "boe_document_fetch",
+    "state_counts": {
+      "dead": 0,
+      "leased": 0,
+      "pending": 0,
+      "succeeded": 88980
+    },
+    "terminal_total": 88980,
+    "unfinished_total": 0
+  },
+  "schema_version": "document_fetch_queue_run_v1",
+  "status": "partial",
+  "storage": {
+    "blocked": false,
+    "free_bytes": 42266005504,
+    "inflight_reserve_bytes": 1073741824,
+    "min_free_bytes": 10737418240,
+    "required_free_bytes": 11811160064
+  },
+  "totals": {
+    "claimed": 31000,
+    "dead": 0,
+    "retried": 1,
+    "succeeded": 30999
+  },
+  "worker_id": "boe-document-worker-b",
+  "workers": 16
+}

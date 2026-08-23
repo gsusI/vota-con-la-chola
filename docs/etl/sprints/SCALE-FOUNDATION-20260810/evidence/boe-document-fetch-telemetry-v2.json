@@ -1,0 +1,51 @@
+{
+  "failure_class_counts": {},
+  "failure_samples": [],
+  "opened_circuits": [],
+  "opened_hosts": [],
+  "per_host_workers": 8,
+  "performance": {
+    "bytes_per_1000_succeeded": 37499284.2,
+    "bytes_per_second": 198044.901247,
+    "cpu_seconds": 25.855456,
+    "elapsed_seconds": 946.736926,
+    "elapsed_seconds_per_1000_succeeded": 189.347385,
+    "items_per_second": 5.281298,
+    "logical_requests": 5000,
+    "network_request_upper_bound": 15000,
+    "peak_rss_bytes": 63422464
+  },
+  "pipeline_id": "boe_document_fetch",
+  "queue": {
+    "items_total": 88980,
+    "pipeline_id": "boe_document_fetch",
+    "state_counts": {
+      "dead": 0,
+      "leased": 192,
+      "pending": 23903,
+      "succeeded": 64885
+    },
+    "terminal_total": 64885,
+    "unfinished_total": 24095
+  },
+  "schema_version": "document_fetch_queue_run_v2",
+  "status": "ok",
+  "storage": {
+    "blocked": false,
+    "free_bytes": 42844602368,
+    "inflight_reserve_bytes": 536870912,
+    "min_free_bytes": 10737418240,
+    "required_free_bytes": 11274289152
+  },
+  "totals": {
+    "bytes_received": 187496421,
+    "claimed": 5000,
+    "dead": 0,
+    "deduplicated_content_objects": 0,
+    "new_content_objects": 5000,
+    "retried": 0,
+    "succeeded": 5000
+  },
+  "worker_id": "boe-document-telemetry-v2",
+  "workers": 16
+}

@@ -1,0 +1,74 @@
+{
+  "checks": {
+    "all_captures_checksum_verified": true,
+    "document_queue_complete_without_failures": true,
+    "manifest_matches_document_rows": true,
+    "manifest_references_every_summary_capture": true,
+    "no_remote_mutation_performed": true,
+    "no_synthetic_or_mock_records_counted": true,
+    "public_domain_personal_information_retained": true,
+    "summary_dead_rows_are_official_404": true,
+    "summary_queue_terminal": true
+  },
+  "documents": {
+    "bytes": 2654761821,
+    "distinct_content_objects": 89001,
+    "rows": 89001
+  },
+  "generated_at": "2026-08-13T04:53:51.248706+00:00",
+  "manifest": {
+    "available_summary_captures": 1034,
+    "bytes": 208836046,
+    "distinct_content_objects": 89001,
+    "distinct_summary_captures": 1034,
+    "document_bytes": 2654761821,
+    "path": "etl/data/manifests/boe-document-corpus-lineage.jsonl",
+    "rows": 89001,
+    "sha256": "29d06f68ac7c0610a3e7cd69d95727d493dbc5e60bfd95fd9be0f9b7f60804ff"
+  },
+  "mode": "status",
+  "operation": {
+    "status_only": true
+  },
+  "policy": {
+    "checksum_and_byte_verification_required": true,
+    "exact_summary_to_document_relation_required": true,
+    "official_boe_https_only": true,
+    "official_public_domain_personal_information_retained": true,
+    "remote_mutation_performed": false,
+    "synthetic_or_mock_records_counted": false
+  },
+  "queues": {
+    "documents": {
+      "items_total": 89001,
+      "pipeline_id": "boe_document_fetch",
+      "state_counts": {
+        "dead": 0,
+        "leased": 0,
+        "pending": 0,
+        "succeeded": 89001
+      },
+      "terminal_total": 89001,
+      "unfinished_total": 0
+    },
+    "summaries": {
+      "items_total": 1204,
+      "pipeline_id": "boe_summary_fetch",
+      "state_counts": {
+        "dead": 170,
+        "leased": 0,
+        "pending": 0,
+        "succeeded": 1034
+      },
+      "terminal_total": 1204,
+      "unfinished_total": 0
+    }
+  },
+  "schema_version": "boe_document_corpus_report_v1",
+  "status": "ok",
+  "summaries": {
+    "bytes": 176418043,
+    "distinct_content_objects": 1034,
+    "rows": 1034
+  }
+}

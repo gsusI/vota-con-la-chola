@@ -1,0 +1,82 @@
+{
+  "checks": {
+    "all_material_gain_pages_selected": true,
+    "all_ocr_no_text_pages_selected": true,
+    "both_routing_reasons_selected": true,
+    "both_source_groups_selected": true,
+    "human_review_fields_are_blank": true,
+    "no_synthetic_or_mock_records": true,
+    "official_public_domain_personal_information_retained": true,
+    "queue_has_requested_real_rows": true
+  },
+  "generated_at": "2026-08-13T05:17:50.569196Z",
+  "input": {
+    "bytes": 857689,
+    "path": "etl/data/published/real-document-page-ocr-manifest-latest.jsonl",
+    "rows": 856,
+    "sha256": "0f451e32fbc3813e979cc0fce5c7e1d117d6c4194f63a76a7f34b337c821e969"
+  },
+  "next_action": "Have identified reviewers complete all 40 decisions and notes, then compute accuracy and usability by source and routing reason.",
+  "policy": {
+    "machine_generated_review_decisions": false,
+    "official_public_domain_personal_information_retained": true,
+    "official_real_documents_only": true,
+    "review_labels_invented": false,
+    "synthetic_or_mock_records_counted": false
+  },
+  "queue": {
+    "assignment_sha256": "756e4e5b177c15e24d15fd8985ca928ff78045ecb7030b23946e9b24d27b1169",
+    "bytes": 20686,
+    "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/exports/real-document-page-ocr-human-review.csv",
+    "rows": 40,
+    "sha256": "eaa317570af0736abeb034fef11fee2631599b6d96573e1f92e129bfbcc70cf3"
+  },
+  "review": {
+    "allowed_decisions": [
+      "ocr_better",
+      "native_better",
+      "equivalent",
+      "both_unusable"
+    ],
+    "human_reviews_completed": 0,
+    "human_reviews_pending": 40,
+    "promotion_ready": false
+  },
+  "schema_version": "real_document_page_ocr_human_review_queue_v1",
+  "selection": {
+    "algorithm": "all OCR-no-text pages, all >=50-character-gain pages, at least five per source/reason where available, then deterministic round-robin across remaining strata",
+    "all_strata": {
+      "elections|empty_text|ocr_no_text|False": 4,
+      "elections|empty_text|ocr_text_extracted|False": 8,
+      "elections|empty_text|ocr_text_extracted|True": 9,
+      "elections|sparse_text|ocr_text_extracted|False": 784,
+      "elections|sparse_text|ocr_text_extracted|True": 2,
+      "text_documents/programas_partidos|empty_text|ocr_text_extracted|False": 8,
+      "text_documents/programas_partidos|empty_text|ocr_text_extracted|True": 5,
+      "text_documents/programas_partidos|sparse_text|ocr_no_text|False": 3,
+      "text_documents/programas_partidos|sparse_text|ocr_text_extracted|False": 32,
+      "text_documents/programas_partidos|sparse_text|ocr_text_extracted|True": 1
+    },
+    "requested_pages": 40,
+    "selected_pages": 40,
+    "selected_strata": {
+      "elections|empty_text|ocr_no_text|False": 4,
+      "elections|empty_text|ocr_text_extracted|False": 3,
+      "elections|empty_text|ocr_text_extracted|True": 9,
+      "elections|sparse_text|ocr_text_extracted|False": 6,
+      "elections|sparse_text|ocr_text_extracted|True": 2,
+      "text_documents/programas_partidos|empty_text|ocr_text_extracted|False": 3,
+      "text_documents/programas_partidos|empty_text|ocr_text_extracted|True": 5,
+      "text_documents/programas_partidos|sparse_text|ocr_no_text|False": 3,
+      "text_documents/programas_partidos|sparse_text|ocr_text_extracted|False": 4,
+      "text_documents/programas_partidos|sparse_text|ocr_text_extracted|True": 1
+    },
+    "selection_reason_counts": {
+      "all_material_gain": 17,
+      "all_ocr_no_text": 7,
+      "source_reason_minimum": 4,
+      "stratified_round_robin_fill": 12
+    }
+  },
+  "status": "ready_for_human_review"
+}

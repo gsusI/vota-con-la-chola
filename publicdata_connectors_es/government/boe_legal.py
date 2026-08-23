@@ -361,10 +361,18 @@ def parse_boe_payload(
     sample = payload[:4096].lstrip()
     lowered_url = feed_url.lower()
     lowered_ct = (content_type or "").lower()
-    if "datosabiertos/api/boe/sumario" in lowered_url or sample.startswith(b"{") or "json" in lowered_ct:
-        return parse_boe_summary_json(payload, feed_url=feed_url)
-    if sample.startswith(b"<response") or b"<sumario" in sample[:2048]:
+    if (
+        sample.startswith(b"<response")
+        or (sample.startswith(b"<?xml") and b"<response" in sample[:2048])
+        or b"<sumario" in sample[:2048]
+    ):
         return parse_boe_summary_xml(payload, feed_url=feed_url, content_type=content_type)
+    if (
+        "datosabiertos/api/boe/sumario" in lowered_url
+        or sample.startswith(b"{")
+        or "json" in lowered_ct
+    ):
+        return parse_boe_summary_json(payload, feed_url=feed_url)
     return parse_boe_rss_items(payload, feed_url=feed_url, content_type=content_type)
 
 

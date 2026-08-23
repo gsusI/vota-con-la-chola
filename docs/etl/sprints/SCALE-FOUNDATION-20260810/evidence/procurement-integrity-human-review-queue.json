@@ -1,0 +1,30 @@
+{
+  "artifact": {
+    "bytes": 10754703,
+    "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/exports/procurement-integrity-human-review.csv",
+    "sha256": "79e38ae09596ef326e12e9fa9f219ff2ce9106afecbbdf97050d1e73618f86cc"
+  },
+  "detector": {
+    "id": "procurement-threshold-pattern-review",
+    "version": "v4"
+  },
+  "generated_at": "2026-08-13T01:38:07.675008+00:00",
+  "policy": {
+    "disagreement_adjudication_required": true,
+    "dual_independent_human_review_required": true,
+    "machine_decisions_invented": false,
+    "official_real_evidence_only": true,
+    "public_by_default": false,
+    "public_domain_personal_information_retained": true,
+    "remote_mutation_performed": false,
+    "review_signal_is_not_corruption_finding": true,
+    "synthetic_or_mock_records_counted": false
+  },
+  "schema_version": "procurement_integrity_human_review_queue_v1",
+  "status": "pending_human_review",
+  "totals": {
+    "official_evidence_rows": 17585,
+    "pending_dual_review": 2036,
+    "tasks": 2036
+  }
+}

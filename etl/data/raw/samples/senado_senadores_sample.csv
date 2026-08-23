@@ -1,3 +1,4 @@
-id;nombre;apellidos;partido;provincia;fecha_nacimiento;fecha_inicio
-SE-0001;Ana;Lopez Diaz;PSOE;Sevilla;1975-03-22;2023-08-17
-SE-0002;Carlos;Serrano Gil;PP;Alicante;1981-10-05;2023-08-17
+source_record_id;id;nombre;apellidos;full_name;partido;partido_nombre;grupo;provincia;fecha_inicio;fecha_fin;is_active;detail_error
+idweb:10141;10141;MICAELA;NAVARRO GARZÓN;MICAELA NAVARRO GARZÓN;;;14:800;;;;true;ParseError: no element found: line 1, column 0
+idweb:10148;10148;JUAN JOSÉ;MATARÍ SÁEZ;JUAN JOSÉ MATARÍ SÁEZ;PP;PARTIDO POPULAR (PP);GRUPO PARLAMENTARIO POPULAR EN EL SENADO;Almería;2023-07-23;;true;
+idweb:10154;10154;FRANCISCO JAVIER;ARENAS BOCANEGRA;FRANCISCO JAVIER ARENAS BOCANEGRA;PP;PARTIDO POPULAR (PP);GRUPO PARLAMENTARIO POPULAR EN EL SENADO;Parlamento de Andalucía;2022-07-28;;true;

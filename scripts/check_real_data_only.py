@@ -5,17 +5,20 @@ from __future__ import annotations
 
 import argparse
 import gzip
+import hashlib
 import json
 import sqlite3
+from collections.abc import Iterable
 from datetime import UTC, datetime
 from pathlib import Path
-from typing import Any, Iterable
-
+from typing import Any
 
 PROHIBITED_MARKERS: tuple[bytes, ...] = tuple(
     marker.casefold().encode("utf-8")
     for marker in (
+        "dev-local-stub",
         "example.invalid",
+        "programa (synthetic)",
         "synthetic sample",
         "sample-metadatos",
         "EXP-2026-0001",
@@ -28,6 +31,8 @@ PROHIBITED_MARKERS: tuple[bytes, ...] = tuple(
         "BDNS-2026-1003",
         "AUTO-AND-2026-2001",
         "AUTO-CAT-2026-2002",
+        "<id>EP-0001</id>",
+        "<name>Laura Sanchez</name>",
         "series:3feb2dae20867f4bf608324a",
         "series:4468f558922332ed237bf17f",
         "Real Decreto 123/2026, de 15 de febrero, por el que se actualizan medidas del regimen electoral general",
@@ -40,14 +45,19 @@ TEXT_SUFFIXES = {".csv", ".html", ".json", ".jsonl", ".md", ".txt", ".xml"}
 def _iter_files(paths: Iterable[Path]) -> Iterable[Path]:
     for path in paths:
         if path.is_file():
-            yield path
+            if "samples" not in path.parts:
+                yield path
             continue
         if not path.exists():
             continue
         for candidate in sorted(path.rglob("*")):
-            if candidate.is_file() and (
-                candidate.suffix.casefold() in TEXT_SUFFIXES
-                or candidate.name.casefold().endswith(".json.gz")
+            if (
+                candidate.is_file()
+                and (
+                    candidate.suffix.casefold() in TEXT_SUFFIXES
+                    or candidate.name.casefold().endswith(".json.gz")
+                )
+                and "samples" not in candidate.parts
             ):
                 yield candidate
 
@@ -59,16 +69,65 @@ def _read_scan_bytes(path: Path) -> bytes:
     return path.read_bytes()
 
 
+def _sample_fingerprint_index(paths: Iterable[Path]) -> dict[str, list[str]]:
+    fingerprints: dict[str, list[str]] = {}
+    for root in paths:
+        candidates = (
+            [root]
+            if root.is_file()
+            else sorted(root.rglob("*"))
+            if root.exists()
+            else []
+        )
+        for candidate in candidates:
+            if (
+                not candidate.is_file()
+                or "samples" not in candidate.parts
+                or (
+                    candidate.suffix.casefold() not in TEXT_SUFFIXES
+                    and not candidate.name.casefold().endswith(".json.gz")
+                )
+            ):
+                continue
+            try:
+                sample_bytes = _read_scan_bytes(candidate)
+            except (OSError, EOFError):
+                continue
+            if not any(marker in sample_bytes.lower() for marker in PROHIBITED_MARKERS):
+                continue
+            digest = hashlib.sha256(sample_bytes).hexdigest()
+            fingerprints.setdefault(digest, []).append(str(candidate))
+    return fingerprints
+
+
 def scan_paths(paths: Iterable[Path]) -> tuple[int, list[dict[str, Any]]]:
+    path_list = list(paths)
+    sample_fingerprints = _sample_fingerprint_index(path_list)
     findings: list[dict[str, Any]] = []
     files_scanned = 0
-    for path in _iter_files(paths):
+    for path in _iter_files(path_list):
         files_scanned += 1
         try:
-            folded = _read_scan_bytes(path).lower()
+            raw_bytes = _read_scan_bytes(path)
+            folded = raw_bytes.lower()
         except (OSError, EOFError) as exc:
             findings.append(
-                {"kind": "unreadable_public_artifact", "path": str(path), "error": str(exc)}
+                {
+                    "kind": "unreadable_public_artifact",
+                    "path": str(path),
+                    "error": str(exc),
+                }
+            )
+            continue
+        digest = hashlib.sha256(raw_bytes).hexdigest()
+        if digest in sample_fingerprints:
+            findings.append(
+                {
+                    "kind": "sample_content_fingerprint_outside_samples",
+                    "path": str(path),
+                    "sha256": digest,
+                    "sample_paths": sample_fingerprints[digest],
+                }
             )
             continue
         for marker in PROHIBITED_MARKERS:
@@ -84,9 +143,12 @@ def scan_paths(paths: Iterable[Path]) -> tuple[int, list[dict[str, Any]]]:
 
 
 def _table_exists(conn: sqlite3.Connection, table: str) -> bool:
-    return conn.execute(
-        "SELECT 1 FROM sqlite_master WHERE type='table' AND name=?", (table,)
-    ).fetchone() is not None
+    return (
+        conn.execute(
+            "SELECT 1 FROM sqlite_master WHERE type='table' AND name=?", (table,)
+        ).fetchone()
+        is not None
+    )
 
 
 def _table_columns(conn: sqlite3.Connection, table: str) -> set[str]:
@@ -102,12 +164,19 @@ def scan_db(path: Path) -> list[dict[str, Any]]:
         if _table_exists(conn, "source_records"):
             columns = _table_columns(conn, "source_records")
             searchable_columns = [
-                column for column in ("raw_payload", "source_record_id") if column in columns
+                column
+                for column in ("raw_payload", "source_record_id")
+                if column in columns
             ]
             if not searchable_columns:
                 searchable_columns = []
             marker_sql = " OR ".join(
-                "(" + " OR ".join(f"lower(CAST({column} AS TEXT)) LIKE ?" for column in searchable_columns) + ")"
+                "("
+                + " OR ".join(
+                    f"lower(CAST({column} AS TEXT)) LIKE ?"
+                    for column in searchable_columns
+                )
+                + ")"
                 for _ in PROHIBITED_MARKERS
             )
             params = tuple(
@@ -174,7 +243,9 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> int:
     args = parse_args()
-    db_paths = [Path(value) for value in args.db] or [Path("etl/data/staging/politicos-es.db")]
+    db_paths = [Path(value) for value in args.db] or [
+        Path("etl/data/staging/politicos-es.db")
+    ]
     artifact_paths = [Path(value) for value in args.path] or [
         Path("etl/data/raw"),
         Path("etl/data/derived"),
@@ -202,7 +273,9 @@ def main() -> int:
     if args.out:
         out_path = Path(args.out)
         out_path.parent.mkdir(parents=True, exist_ok=True)
-        out_path.write_text(json.dumps(report, ensure_ascii=True, indent=2) + "\n", encoding="utf-8")
+        out_path.write_text(
+            json.dumps(report, ensure_ascii=True, indent=2) + "\n", encoding="utf-8"
+        )
     print(json.dumps(report, ensure_ascii=True, indent=2))
     return 1 if args.enforce and findings else 0
 

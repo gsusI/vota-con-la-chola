@@ -1,0 +1,187 @@
+{
+  "activation": {
+    "authorized": false,
+    "compare_and_swap": {
+      "abort_if_any_expected_value_changes": true,
+      "expected_current_manifest_sha256": "5872efaf918430c0c9e2b3b5b01fd9efe4ba03ff586da75419e28dfdb0b2e139",
+      "expected_current_pointer_sha256": "0561d03693fd8d8bf688923452ec2f9ba89e72f9f3c4c7746677bdce7633dd3d",
+      "expected_current_release_id": "5872efaf918430c0c9e2b3b5b01fd9efe4ba03ff586da75419e28dfdb0b2e139"
+    },
+    "mutation_performed": false,
+    "pointer_write_authorized": false,
+    "proposed_pointer_fields": {
+      "artifact_contract_sha256": "bb99c119b911653c835dcf5dbd4b3f247e959b47309905cb2163b8b51cb46c2c",
+      "corpora": 6,
+      "data_bytes": 498631274,
+      "data_files": 8595,
+      "manifest_sha256": "623b4a5ad78fae7536117d0fb64c5d99c331e1d0728a8ff98f9783c0dfc36b06",
+      "million_scale_lanes": 3,
+      "project": "vota-con-la-chola",
+      "promoted_lanes": 0,
+      "release_id": "623b4a5ad78fae7536117d0fb64c5d99c331e1d0728a8ff98f9783c0dfc36b06",
+      "rows": 5403506,
+      "schema_version": "real-scale-origin-bundle-v2",
+      "snapshot_date": "2026-08-12",
+      "snapshot_path": "scale/snapshots/2026-08-12/623b4a5ad78fae7536117d0fb64c5d99c331e1d0728a8ff98f9783c0dfc36b06",
+      "updated_at": "SET_TO_ACTIVATION_TIME_UTC"
+    },
+    "required_steps": [
+      "Obtain explicit maintainer authorization for the exact target release.",
+      "Re-fetch scale/latest.json and abort unless all compare-and-swap expectations still match.",
+      "Re-fetch the target manifest and abort unless its SHA-256 still matches.",
+      "Run the public-artifact hygiene gate against the exact planned pointer.",
+      "Write only scale/latest.json; do not alter immutable snapshot files.",
+      "Immediately verify pointer, manifest, artifact contract, corpus totals, and public availability.",
+      "Record supersession reason, operator, activation timestamp, verification result, and rollback outcome."
+    ]
+  },
+  "checks": {
+    "current_manifest": {
+      "artifact_contract_checksum_valid": true,
+      "artifact_contract_schema_supported": true,
+      "bundle_file_inventory_present": true,
+      "immutable_path_matches_manifest": true,
+      "required_real_data_policy": true,
+      "schema_supported": true,
+      "status_validated": true
+    },
+    "current_pointer": {
+      "artifact_contract_matches": true,
+      "manifest_sha256_matches": true,
+      "release_matches_manifest": true,
+      "schema_supported": true,
+      "snapshot_path_matches": true
+    },
+    "current_target_data_parity": {
+      "artifact_contract_unchanged": true,
+      "corpus_contracts_unchanged": true,
+      "different_release_ids": true,
+      "snapshot_date_unchanged": true,
+      "summary_unchanged": true
+    },
+    "full_validation_evidence": {
+      "all_corpora_valid": true,
+      "artifact_contract_matches": true,
+      "data_bytes_match": true,
+      "data_files_match": true,
+      "errors_absent": true,
+      "official_real_only": true,
+      "public_domain_identity_retained": true,
+      "release_matches": true,
+      "rows_match": true,
+      "status_ok": true,
+      "synthetic_or_mock_forbidden": true
+    },
+    "live_verification_evidence": {
+      "current_manifest_matches": true,
+      "dataset_repo_matches": true,
+      "verification_passed": true
+    },
+    "restore_evidence": {
+      "artifact_contract_matches": true,
+      "bytes_match_manifest": true,
+      "errors_absent": true,
+      "explicit_immutable_selection": true,
+      "files_match_manifest": true,
+      "manifest_sha256_matches": true,
+      "public_domain_identity_retained": true,
+      "snapshot_path_matches": true,
+      "status_verified": true
+    },
+    "target_manifest": {
+      "artifact_contract_checksum_valid": true,
+      "artifact_contract_schema_supported": true,
+      "bundle_file_inventory_present": true,
+      "immutable_path_matches_manifest": true,
+      "required_real_data_policy": true,
+      "schema_supported": true,
+      "status_validated": true
+    }
+  },
+  "current": {
+    "artifact_contract_sha256": "bb99c119b911653c835dcf5dbd4b3f247e959b47309905cb2163b8b51cb46c2c",
+    "latest_url": "https://huggingface.co/datasets/JesusIC/vota-con-la-chola-data/resolve/main/scale/latest.json",
+    "manifest_sha256": "5872efaf918430c0c9e2b3b5b01fd9efe4ba03ff586da75419e28dfdb0b2e139",
+    "manifest_url": "https://huggingface.co/datasets/JesusIC/vota-con-la-chola-data/resolve/main/scale/snapshots/2026-08-12/5872efaf918430c0c9e2b3b5b01fd9efe4ba03ff586da75419e28dfdb0b2e139/manifest.json",
+    "pointer_sha256": "0561d03693fd8d8bf688923452ec2f9ba89e72f9f3c4c7746677bdce7633dd3d",
+    "release_id": "5872efaf918430c0c9e2b3b5b01fd9efe4ba03ff586da75419e28dfdb0b2e139",
+    "snapshot_path": "scale/snapshots/2026-08-12/5872efaf918430c0c9e2b3b5b01fd9efe4ba03ff586da75419e28dfdb0b2e139",
+    "summary": {
+      "corpora": 6,
+      "data_bytes": 498631274,
+      "data_files": 8595,
+      "million_scale_lanes": 3,
+      "promoted_lanes": 0,
+      "rows": 5403506
+    }
+  },
+  "dataset_repo": "JesusIC/vota-con-la-chola-data",
+  "delta": {
+    "artifact_contract_changed": false,
+    "data_bytes": 0,
+    "data_files": 0,
+    "rows": 0,
+    "snapshot_date_days": 0
+  },
+  "errors": [],
+  "evidence": {
+    "full_validation": {
+      "bytes": 5662,
+      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/hf-scale-origin-rollback-candidate-full-validation-20260812.json",
+      "sha256": "af97d94484d6a5f2fde6a3c2b550b688e5723387a79ad2da45d120c21d0c186f"
+    },
+    "live_verification": {
+      "bytes": 4176,
+      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/hf-scale-origin-live-verification-20260812.json",
+      "sha256": "cd5f151c7ad8b2fef921ca09019c103812468f434948f45dc7913127d2b659d6"
+    },
+    "restore": {
+      "bytes": 1156,
+      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/hf-scale-origin-rollback-candidate-full-restore-20260812.json",
+      "sha256": "ad430d58e19bd692c8fe190cbadfbdcc9d166066932a086009400d269cf79195"
+    }
+  },
+  "failed_checks": [],
+  "generated_at": "2026-08-12T21:15:46.381132Z",
+  "operation": {
+    "immutable_upload_required": false,
+    "kind": "pointer_only_rollback",
+    "mutation_performed": false,
+    "remote_method_during_plan": "GET_only"
+  },
+  "public_domain_personal_information_retained": true,
+  "rpo": {
+    "formal_rpo_defined": false,
+    "measured_row_delta": 0,
+    "measured_snapshot_date_delta_days": 0,
+    "reason": "No publication cadence or maximum acceptable data-loss interval is approved; zero measured data-contract delta is not a formal RPO.",
+    "status": "not_defined"
+  },
+  "schema_version": "hf_scale_rollback_plan_v1",
+  "status": "rollback_candidate_ready_authorization_required",
+  "supersession": {
+    "current_release_if_activated": "superseded_pointer_target",
+    "immutable_deletion_allowed": false,
+    "operator_and_timestamp_required": true,
+    "preserve_both_immutable_releases": true,
+    "reason_required_at_activation": true,
+    "status": "planned_not_activated",
+    "target_release_if_activated": "current_pointer_target",
+    "verification_outcome_required": true
+  },
+  "target": {
+    "artifact_contract_sha256": "bb99c119b911653c835dcf5dbd4b3f247e959b47309905cb2163b8b51cb46c2c",
+    "manifest_sha256": "623b4a5ad78fae7536117d0fb64c5d99c331e1d0728a8ff98f9783c0dfc36b06",
+    "manifest_url": "https://huggingface.co/datasets/JesusIC/vota-con-la-chola-data/resolve/main/scale/snapshots/2026-08-12/623b4a5ad78fae7536117d0fb64c5d99c331e1d0728a8ff98f9783c0dfc36b06/manifest.json",
+    "release_id": "623b4a5ad78fae7536117d0fb64c5d99c331e1d0728a8ff98f9783c0dfc36b06",
+    "snapshot_path": "scale/snapshots/2026-08-12/623b4a5ad78fae7536117d0fb64c5d99c331e1d0728a8ff98f9783c0dfc36b06",
+    "summary": {
+      "corpora": 6,
+      "data_bytes": 498631274,
+      "data_files": 8595,
+      "million_scale_lanes": 3,
+      "promoted_lanes": 0,
+      "rows": 5403506
+    }
+  }
+}

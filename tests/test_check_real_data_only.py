@@ -12,7 +12,9 @@ class CheckRealDataOnlyTests(unittest.TestCase):
     def test_artifact_marker_is_rejected(self) -> None:
         with tempfile.TemporaryDirectory() as td:
             path = Path(td) / "artifact.json"
-            path.write_text('{"source_url":"https://example.invalid/record"}', encoding="utf-8")
+            path.write_text(
+                '{"source_url":"https://example.invalid/record"}', encoding="utf-8"
+            )
             files_scanned, findings = scan_paths([path])
         self.assertEqual(files_scanned, 1)
         self.assertEqual(len(findings), 1)
@@ -26,6 +28,25 @@ class CheckRealDataOnlyTests(unittest.TestCase):
             )
             _files_scanned, findings = scan_paths([path])
         self.assertEqual(findings, [])
+
+    def test_sample_content_copied_outside_samples_is_rejected(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            sample = root / "samples" / "source.xml"
+            copied = root / "official" / "captured.xml"
+            sample.parent.mkdir()
+            copied.parent.mkdir()
+            sample.write_text("<record><id>EP-0001</id></record>", encoding="utf-8")
+            copied.write_bytes(sample.read_bytes())
+
+            files_scanned, findings = scan_paths([root])
+
+        self.assertEqual(files_scanned, 1)
+        self.assertEqual(len(findings), 1)
+        self.assertEqual(
+            findings[0]["kind"],
+            "sample_content_fingerprint_outside_samples",
+        )
 
     def test_database_implicit_fallback_is_rejected(self) -> None:
         with tempfile.TemporaryDirectory() as td:
@@ -41,10 +62,13 @@ class CheckRealDataOnlyTests(unittest.TestCase):
             )
             conn.close()
             findings = scan_db(path)
-        self.assertEqual({row["kind"] for row in findings}, {
-            "implicit_fallback_ingestion_run",
-            "prohibited_non_real_source_records",
-        })
+        self.assertEqual(
+            {row["kind"] for row in findings},
+            {
+                "implicit_fallback_ingestion_run",
+                "prohibited_non_real_source_records",
+            },
+        )
 
 
 if __name__ == "__main__":

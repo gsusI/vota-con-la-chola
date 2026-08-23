@@ -1,0 +1,65 @@
+{
+  "checks": {
+    "all_work_states_are_successful_and_well_formed": true,
+    "expected_and_observed_candidate_pages_match": true,
+    "manifest_rows_match_ocr_report": true,
+    "manifest_sha256_matches_ocr_report": true,
+    "native_routing_and_ocr_manifest_values_match": true,
+    "no_synthetic_or_mock_records": true,
+    "ocr_is_additive_and_native_text_is_unchanged": true,
+    "ocr_report_totals_reconcile": true,
+    "ocr_text_cas_checksums_and_character_counts_match": true,
+    "ocr_text_cas_inventory_is_exact": true,
+    "official_public_domain_personal_information_retained": true,
+    "source_document_checksums_match": true
+  },
+  "diagnostics": {
+    "invalid_work_states": 0,
+    "manifest_value_mismatches": 0,
+    "ocr_text_error_samples": [],
+    "source_document_error_samples": []
+  },
+  "generated_at": "2026-08-13T05:17:49.646375Z",
+  "inputs": {
+    "native_manifest": {
+      "bytes": 121555440,
+      "path": "etl/data/published/real-document-text-manifest-latest.jsonl",
+      "rows": 111408,
+      "sha256": "03ce010e1019fc3f23e5a016413aab51f7ec398637973680534c27007b69bfab"
+    },
+    "ocr_manifest": {
+      "bytes": 857689,
+      "path": "etl/data/published/real-document-page-ocr-manifest-latest.jsonl",
+      "rows": 856,
+      "sha256": "0f451e32fbc3813e979cc0fce5c7e1d117d6c4194f63a76a7f34b337c821e969"
+    },
+    "ocr_report": {
+      "bytes": 2706,
+      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr.json",
+      "sha256": "570be801178b6ee6c10869bdd0b86c71b26c67948a751493b0c4c79331cd731c"
+    }
+  },
+  "next_action": "Human-review a stratified real-page sample by source, language, scan quality, and routing reason before analytical promotion.",
+  "policy": {
+    "ocr_is_additive_to_native_text": true,
+    "ocr_text_is_not_sanitized_or_identity_stripped": true,
+    "official_public_domain_personal_information_retained": true,
+    "official_real_documents_only": true,
+    "synthetic_or_mock_records_counted": false
+  },
+  "schema_version": "real_document_page_ocr_validation_v1",
+  "status": "ok",
+  "totals": {
+    "candidate_pages": 856,
+    "documents": 58,
+    "empty_text_pages": 34,
+    "native_manifest_rows": 111408,
+    "native_text_chars_on_candidate_pages": 68951,
+    "ocr_text_cas_files_observed": 131,
+    "ocr_text_cas_objects_checksum_verified": 131,
+    "ocr_text_chars": 89632,
+    "pages_improved_over_native_by_50_chars": 17,
+    "source_documents_checksum_verified": 58,
+    "sparse_text_pages": 822
+  }
+}

@@ -9,7 +9,7 @@ import json
 import os
 import shutil
 import sqlite3
-from datetime import datetime
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
@@ -26,6 +26,7 @@ STATIC_PUBLISHED_FILES = (
     "integrity-signals-latest.json",
     "data-integrity-latest.json",
     "scale-readiness-latest.json",
+    "storage-health-latest.json",
 )
 LIBERTY_ATLAS_RELEASE_LATEST_FILE = "liberty-restrictions-atlas-release-latest.json"
 
@@ -64,7 +65,7 @@ def resolve_setting(key: str, cli_value: str, dotenv_values: dict[str, str]) -> 
 def ensure_iso_date(value: str) -> str:
     cleaned = value.strip()
     try:
-        datetime.strptime(cleaned, "%Y-%m-%d")
+        datetime.strptime(cleaned, "%Y-%m-%d").replace(tzinfo=UTC)
     except ValueError as exc:
         raise ValueError(f"snapshot-date inválido: {cleaned!r}") from exc
     return cleaned
@@ -92,7 +93,7 @@ def format_terms_cell(value: str) -> str:
     terms_url = value.strip()
     if not terms_url:
         return "-"
-    if terms_url.startswith("http://") or terms_url.startswith("https://"):
+    if terms_url.startswith(("http://", "https://")):
         return f"[link]({terms_url})"
     return f"`{md_escape_table(terms_url)}`"
 
@@ -106,9 +107,14 @@ def sha256_file(path: Path) -> str:
 
 
 def gzip_copy(src: Path, dst: Path, compresslevel: int) -> None:
-    with src.open("rb") as f_in, dst.open("wb") as f_raw:
-        with gzip.GzipFile(fileobj=f_raw, mode="wb", compresslevel=compresslevel, mtime=0) as f_out:
-            shutil.copyfileobj(f_in, f_out, 1024 * 1024)
+    with (
+        src.open("rb") as f_in,
+        dst.open("wb") as f_raw,
+        gzip.GzipFile(
+            fileobj=f_raw, mode="wb", compresslevel=compresslevel, mtime=0
+        ) as f_out,
+    ):
+        shutil.copyfileobj(f_in, f_out, 1024 * 1024)
 
 
 def collect_published_files(published_dir: Path, snapshot_date: str) -> list[Path]:
@@ -174,7 +180,7 @@ def extract_quality_report_summary(
             if "votaciones-kpis" in p.name and date_token in p.name and p.suffix in {".json", ".gz"}
         ]
         if fallback:
-            candidate = sorted(fallback, key=lambda p: p.name)[0]
+            candidate = min(fallback, key=lambda p: p.name)
     if candidate is None:
         return {}
 

@@ -11,26 +11,26 @@ import sys
 import tempfile
 from pathlib import Path
 from typing import Any
+from urllib.parse import urlparse
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 from publicdata_core.util import now_utc_iso
-from publicdata_publish.sanitize import redact_sensitive_text, sanitize_url_for_public
 from publicdata_publish.hf_snapshot import (
     _read_json_or_gz,
-    build_explorer_schema_payload,
+    build_explorer_schema_payload,  # noqa: F401 - compatibility re-export
     collect_published_files,
     ensure_iso_date,
     ensure_positive,
     ensure_quality_report_for_publish,
-    extract_quality_report_summary,
-    extract_source_catalog_summary,
     export_explorer_schema_snapshot,
     export_ingestion_runs_csv,
     export_parquet_tables,
     export_source_records_by_source,
+    extract_quality_report_summary,
+    extract_source_catalog_summary,
     fetch_sources_catalog,
     format_terms_cell,
     gzip_copy,
@@ -42,7 +42,7 @@ from publicdata_publish.hf_snapshot import (
     write_checksums,
     yaml_q,
 )
-
+from publicdata_publish.sanitize import redact_sensitive_text, sanitize_url_for_public
 
 DEFAULT_DB = Path("etl/data/staging/politicos-es.db")
 DEFAULT_PUBLISHED_DIR = Path("etl/data/published")
@@ -60,10 +60,11 @@ STATIC_PUBLISHED_FILES = (
     "andalucia-2026-accountability.json",
     "data-integrity-latest.json",
     "scale-readiness-latest.json",
+    "storage-health-latest.json",
 )
 LIBERTY_ATLAS_RELEASE_LATEST_FILE = "liberty-restrictions-atlas-release-latest.json"
 PLACEHOLDER_VALUES = {"", "your_hf_token_here", "your_hf_username_here"}
-DEFAULT_PARQUET_EXCLUDE_TABLES = ("raw_fetches", "run_fetches", "source_records", "lost_and_found")
+DEFAULT_PARQUET_EXCLUDE_TABLES = ("raw_fetches", "run_fetches", "lost_and_found")
 DEFAULT_SENSITIVE_PARQUET_TABLES = frozenset(DEFAULT_PARQUET_EXCLUDE_TABLES)
 LEGAL_REVIEWED_ON = "2026-02-21"
 DEFAULT_LEGAL_OBLIGATIONS = (
@@ -110,6 +111,97 @@ DEFAULT_LEGAL_PROFILE = {
         "rendición de cuentas; no añadir datos no públicos ni deshacer el enmascarado del origen."
     ),
 }
+
+
+def audit_public_source_records_for_publish(db_path: Path) -> dict[str, Any]:
+    """Prove raw official records can publish without identity stripping or secret leakage."""
+    conn = sqlite3.connect(f"file:{db_path.resolve()}?mode=ro", uri=True)
+    try:
+        columns = {
+            str(row[1]) for row in conn.execute("PRAGMA table_info(source_records)")
+        }
+        required = {
+            "source_record_pk",
+            "source_id",
+            "source_record_id",
+            "raw_payload",
+            "content_sha256",
+        }
+        if not required.issubset(columns):
+            raise ValueError("source_records lacks the public raw-record contract")
+        rows = 0
+        payload_bytes = 0
+        sources: set[str] = set()
+        cursor = conn.execute(
+            """
+            SELECT sr.source_record_pk,
+                   sr.source_id,
+                   sr.source_record_id,
+                   sr.raw_payload,
+                   sr.content_sha256,
+                   s.default_url
+            FROM source_records AS sr
+            JOIN sources AS s ON s.source_id = sr.source_id
+            ORDER BY sr.source_record_pk
+            """
+        )
+        for source_record_pk, source_id, source_record_id, raw_payload, content_sha256, default_url in cursor:
+            rows += 1
+            source_id_text = str(source_id or "").strip()
+            source_record_id_text = str(source_record_id or "").strip()
+            payload_text = str(raw_payload or "")
+            checksum = str(content_sha256 or "").strip().lower()
+            if not source_record_pk or not source_id_text or not source_record_id_text or not payload_text:
+                raise ValueError("source_records contains an incomplete public record")
+            if len(checksum) != 64 or any(char not in "0123456789abcdef" for char in checksum):
+                raise ValueError("source_records contains an invalid source checksum")
+            def public_http_origin(value: str) -> bool:
+                parsed = urlparse(value)
+                host = (parsed.hostname or "").lower()
+                return (
+                    parsed.scheme in {"http", "https"}
+                    and bool(host)
+                    and host not in {"localhost", "127.0.0.1", "0.0.0.0", "::1"}
+                    and not host.endswith((".test", ".invalid", ".example"))
+                )
+
+            configured_origin = public_http_origin(str(default_url or "").strip())
+            payload_origin = False
+            try:
+                payload_object = json.loads(payload_text)
+            except json.JSONDecodeError:
+                payload_object = None
+            if isinstance(payload_object, dict):
+                payload_origin = any(
+                    public_http_origin(str(payload_object.get(key) or "").strip())
+                    for key in ("source_url", "url", "detail_url", "official_url")
+                )
+            if not configured_origin and not payload_origin:
+                raise ValueError(
+                    f"source_records row lacks an official public HTTP origin: {source_record_pk}"
+                )
+            if redact_sensitive_text(payload_text) != payload_text:
+                raise ValueError(
+                    "source_records contains a secret, private-session, or workstation marker: "
+                    f"{source_record_pk}"
+                )
+            payload_bytes += len(payload_text.encode("utf-8"))
+            sources.add(source_id_text)
+        if rows < 1:
+            raise ValueError("source_records contains no public records")
+        return {
+            "schema_version": "public_source_records_publish_audit_v1",
+            "status": "pass",
+            "rows": rows,
+            "sources": len(sources),
+            "raw_payload_bytes": payload_bytes,
+            "raw_payload_published_exactly": True,
+            "public_domain_personal_information_retained": True,
+            "identity_fields_removed": 0,
+            "secret_private_session_or_workstation_marker_rows": 0,
+        }
+    finally:
+        conn.close()
 
 LEGAL_PROFILE_BY_SOURCE: dict[str, dict[str, Any]] = {
     "congreso_diputados": {
@@ -358,7 +450,7 @@ def parse_args() -> argparse.Namespace:
     p.add_argument(
         "--allow-sensitive-parquet",
         action="store_true",
-        help="Permite publicar tablas sensibles de trazabilidad cruda (no recomendado en dataset público)",
+        help="Permite publicar tablas operativas con trazas privadas (no recomendado en dataset público)",
     )
     p.add_argument(
         "--private",
@@ -634,7 +726,8 @@ def build_dataset_readme(
     if parquet_excluded_tables:
         excluded = ", ".join(f"`{name}`" for name in parquet_excluded_tables)
         lines.append(
-            f"- Tablas excluidas por privacidad (default público): {excluded}. "
+            f"- Tablas operativas/privadas excluidas por defecto: {excluded}. "
+            "Los `source_records` oficiales y sus identidades públicas se conservan. "
             "Usa `--allow-sensitive-parquet` solo en repos privados."
         )
     lines.extend(
@@ -862,11 +955,21 @@ def main() -> int:
         sensitive_requested = sorted(parquet_table_filter & DEFAULT_SENSITIVE_PARQUET_TABLES)
         if sensitive_requested and not args.allow_sensitive_parquet:
             raise ValueError(
-                "Intento de exportar tablas sensibles sin --allow-sensitive-parquet: "
+                "Intento de exportar tablas operativas/privadas sin --allow-sensitive-parquet: "
                 + ", ".join(sensitive_requested)
             )
         if not args.allow_sensitive_parquet:
             parquet_exclude_filter.update(DEFAULT_SENSITIVE_PARQUET_TABLES)
+        source_records_selected = (
+            not args.skip_parquet
+            and "source_records" not in parquet_exclude_filter
+            and (not parquet_table_filter or "source_records" in parquet_table_filter)
+        )
+        source_records_publish_audit = (
+            audit_public_source_records_for_publish(db_path)
+            if source_records_selected
+            else None
+        )
         if not args.skip_parquet:
             parquet_rel_paths, parquet_tables = export_parquet_tables(
                 db_path=db_path,
@@ -912,6 +1015,8 @@ def main() -> int:
                 "tables_filter": sorted(parquet_table_filter),
                 "tables_excluded": sorted(parquet_exclude_filter),
                 "sensitive_guard_enabled": not args.allow_sensitive_parquet,
+                "official_source_records_public_by_default": True,
+                "public_domain_personal_information_retained": True,
                 "tables": parquet_tables,
             },
         }
@@ -921,6 +1026,8 @@ def main() -> int:
             manifest["source_catalog"] = source_catalog_summary
         if liberty_atlas_release_latest_summary:
             manifest["liberty_atlas_release_latest"] = liberty_atlas_release_latest_summary
+        if source_records_publish_audit:
+            manifest["public_source_records"] = source_records_publish_audit
         for rel in tracked_files:
             abs_path = snapshot_dir / rel
             manifest["files"].append(

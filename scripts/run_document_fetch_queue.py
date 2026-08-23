@@ -5,9 +5,15 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
+import re
+import resource
+import shutil
 import sqlite3
 import sys
+import tempfile
 import threading
+import time
 import urllib.error
 from collections.abc import Mapping
 from concurrent.futures import ThreadPoolExecutor
@@ -44,10 +50,22 @@ DOCUMENT_SOURCES = {
     DOCUMENT_SOURCE_ID: (
         "Documentos oficiales de iniciativas parlamentarias",
         "manifest://parl_initiative_docs",
+        "pdf/html",
     ),
     "placsp_contract_docs": (
         "Documentos oficiales de contratacion PLACSP",
         "manifest://placsp_contract_docs",
+        "pdf/html",
+    ),
+    "boe_daily_summaries": (
+        "Sumarios diarios oficiales del BOE",
+        "https://www.boe.es/datosabiertos/api/boe/sumario",
+        "json/xml",
+    ),
+    "boe_document_xml": (
+        "Documentos individuales oficiales del BOE",
+        "https://www.boe.es/diario_boe/xml.php",
+        "xml",
     ),
 }
 DEFAULT_DB = Path("etl/data/staging/politicos-es.db")
@@ -141,9 +159,11 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--lease-seconds", type=int, default=900)
     parser.add_argument("--timeout", type=int, default=45)
     parser.add_argument("--max-bytes", type=int, default=250 * 1024 * 1024)
+    parser.add_argument("--min-free-bytes", type=int, default=0)
     parser.add_argument("--download-attempts", type=int, default=3)
     parser.add_argument("--ca-bundle", default="")
     parser.add_argument("--retry-delay-seconds", type=int, default=60)
+    parser.add_argument("--snapshot-date", default="")
     parser.add_argument("--report-out", default="")
     return parser.parse_args(argv)
 
@@ -183,6 +203,47 @@ def _classify_download_failure(
     return "download_error", True
 
 
+def _validate_official_download(
+    *, url: str, source_id: str, stored: StoredBlob
+) -> str | None:
+    if source_id not in {"boe_daily_summaries", "boe_document_xml"}:
+        return None
+    parsed = urlparse(url)
+    if parsed.scheme != "https" or (parsed.hostname or "").lower() != "www.boe.es":
+        return "boe_source_url_not_official_https"
+    with stored.path.open("rb") as handle:
+        prefix = handle.read(128 * 1024).lstrip()
+    if source_id == "boe_daily_summaries":
+        if not re.fullmatch(r"/datosabiertos/api/boe/sumario/\d{8}", parsed.path):
+            return "boe_summary_url_contract_mismatch"
+        is_json_summary = prefix.startswith(b"{") and b'"sumario"' in prefix
+        is_xml_summary = (
+            prefix.startswith(b"<?xml")
+            and b"<response" in prefix
+            and b"<sumario" in prefix
+        )
+        if not is_json_summary and not is_xml_summary:
+            return "boe_summary_payload_contract_mismatch"
+        return None
+    if parsed.path != "/diario_boe/xml.php":
+        return "boe_document_url_contract_mismatch"
+    expected_ids = parse_qs(parsed.query).get("id") or []
+    if len(expected_ids) != 1 or not re.fullmatch(
+        r"BOE-[A-Z]-\d{4}-\d+", expected_ids[0], flags=re.IGNORECASE
+    ):
+        return "boe_document_identifier_missing"
+    identifier_match = re.search(
+        rb"<identificador>\s*(BOE-[A-Z]-\d{4}-\d+)\s*</identificador>",
+        prefix,
+        flags=re.IGNORECASE,
+    )
+    if not prefix.startswith(b"<?xml") or identifier_match is None:
+        return "boe_document_xml_contract_mismatch"
+    if identifier_match.group(1).decode("ascii").upper() != expected_ids[0].upper():
+        return "boe_document_identifier_mismatch"
+    return None
+
+
 def _download_item(
     item: Mapping[str, object],
     *,
@@ -209,6 +270,9 @@ def _download_item(
             False,
         )
     try:
+        document_source_id = str(
+            payload.get("document_source_id") or DOCUMENT_SOURCE_ID
+        )
         with host_limiter.for_url(url):
             if host_limiter.is_open(url):
                 return DownloadOutcome(
@@ -229,6 +293,25 @@ def _download_item(
                 max_attempts=download_attempts,
                 ca_bundle=ca_bundle,
             )
+            validation_error = _validate_official_download(
+                url=url,
+                source_id=document_source_id,
+                stored=stored,
+            )
+            if validation_error:
+                if not stored.deduplicated:
+                    stored.path.unlink(missing_ok=True)
+                host_limiter.record_status(url, None)
+                return DownloadOutcome(
+                    work_item_id,
+                    item_key,
+                    payload,
+                    None,
+                    validation_error,
+                    200,
+                    "invalid_official_payload",
+                    False,
+                )
             host_limiter.record_status(url, 200)
         return DownloadOutcome(
             work_item_id, item_key, payload, stored, None, 200, None, False
@@ -280,7 +363,7 @@ def _ensure_document_source(
 ) -> None:
     if source_id not in DOCUMENT_SOURCES:
         raise RuntimeError(f"unsupported document source: {source_id}")
-    name, default_url = DOCUMENT_SOURCES[source_id]
+    name, default_url, data_format = DOCUMENT_SOURCES[source_id]
     conn.execute(
         """
         INSERT INTO sources (
@@ -296,7 +379,7 @@ def _ensure_document_source(
             name,
             "nacional",
             default_url,
-            "pdf/html",
+            data_format,
             now_iso,
             now_iso,
         ),
@@ -334,6 +417,7 @@ def persist_download_outcomes(
                             "snapshot_date": snapshot_date,
                             "fetch_method": "durable_work_queue_stream",
                             "work_item_id": outcome.work_item_id,
+                            "queue_payload": outcome.payload,
                         }
                     ),
                     "content_sha256": str(outcome.stored.content_sha256),
@@ -477,22 +561,51 @@ def process_document_fetch_queue(
     lease_seconds: int,
     timeout: int,
     max_bytes: int,
+    min_free_bytes: int = 0,
     download_attempts: int,
     retry_delay_seconds: int,
     snapshot_date: str = "",
     ca_bundle: Path | None = None,
 ) -> dict[str, Any]:
+    started = time.monotonic()
+    cpu_started = time.process_time()
     ensure_work_queue_schema(conn)
     _ensure_required_tables(conn)
     limiter = HostLimiter(per_host_workers, host_hard_failure_threshold)
-    totals = {"claimed": 0, "succeeded": 0, "retried": 0, "dead": 0}
+    totals = {
+        "claimed": 0,
+        "succeeded": 0,
+        "retried": 0,
+        "dead": 0,
+        "bytes_received": 0,
+        "new_content_objects": 0,
+        "deduplicated_content_objects": 0,
+    }
     failure_samples: list[dict[str, object]] = []
     failure_class_counts: dict[str, int] = {}
+    raw_root.mkdir(parents=True, exist_ok=True)
+    storage: dict[str, Any] = {}
 
     while max_items <= 0 or totals["claimed"] < max_items:
-        remaining = claim_size if max_items <= 0 else min(claim_size, max_items - totals["claimed"])
+        remaining = (
+            claim_size
+            if max_items <= 0
+            else min(claim_size, max_items - totals["claimed"])
+        )
         if remaining <= 0:
             break
+        disk = shutil.disk_usage(raw_root)
+        reserve_bytes = max(1, min(int(workers), int(remaining))) * int(max_bytes)
+        storage = {
+            "free_bytes": int(disk.free),
+            "min_free_bytes": int(min_free_bytes),
+            "inflight_reserve_bytes": reserve_bytes,
+            "required_free_bytes": int(min_free_bytes) + reserve_bytes,
+        }
+        if int(disk.free) < storage["required_free_bytes"]:
+            storage["blocked"] = True
+            break
+        storage["blocked"] = False
         claimed = claim_work_items(
             conn,
             pipeline_id=pipeline_id,
@@ -526,6 +639,21 @@ def process_document_fetch_queue(
 
         successes = [outcome for outcome in outcomes if outcome.stored is not None]
         failures = [outcome for outcome in outcomes if outcome.stored is None]
+        totals["bytes_received"] += sum(
+            int(outcome.stored.bytes)
+            for outcome in successes
+            if outcome.stored is not None
+        )
+        totals["new_content_objects"] += sum(
+            1
+            for outcome in successes
+            if outcome.stored is not None and not outcome.stored.deduplicated
+        )
+        totals["deduplicated_content_objects"] += sum(
+            1
+            for outcome in successes
+            if outcome.stored is not None and outcome.stored.deduplicated
+        )
         persist_download_outcomes(
             conn,
             successes=successes,
@@ -564,14 +692,21 @@ def process_document_fetch_queue(
                     }
                 )
 
-    if totals["claimed"] > 0 and totals["succeeded"] == 0 and totals["retried"] > 0:
+    if storage.get("blocked") is True:
+        status = "blocked_storage"
+    elif totals["claimed"] > 0 and totals["succeeded"] == 0 and totals["retried"] > 0:
         status = "blocked"
     elif totals["retried"] > 0 or totals["dead"] > 0:
         status = "partial"
     else:
         status = "ok"
+    elapsed_seconds = max(0.000001, time.monotonic() - started)
+    cpu_seconds = max(0.0, time.process_time() - cpu_started)
+    rss = int(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss)
+    peak_rss_bytes = rss if sys.platform == "darwin" else rss * 1024
+    succeeded = int(totals["succeeded"])
     return {
-        "schema_version": "document_fetch_queue_run_v1",
+        "schema_version": "document_fetch_queue_run_v2",
         "status": status,
         "pipeline_id": pipeline_id,
         "worker_id": worker_id,
@@ -581,8 +716,32 @@ def process_document_fetch_queue(
         "opened_circuits": limiter.opened_circuits(),
         "failure_class_counts": dict(sorted(failure_class_counts.items())),
         "totals": totals,
+        "performance": {
+            "elapsed_seconds": round(elapsed_seconds, 6),
+            "cpu_seconds": round(cpu_seconds, 6),
+            "peak_rss_bytes": peak_rss_bytes,
+            "items_per_second": round(succeeded / elapsed_seconds, 6),
+            "bytes_per_second": round(
+                int(totals["bytes_received"]) / elapsed_seconds, 6
+            ),
+            "elapsed_seconds_per_1000_succeeded": (
+                round(elapsed_seconds * 1000 / succeeded, 6)
+                if succeeded
+                else None
+            ),
+            "bytes_per_1000_succeeded": (
+                round(int(totals["bytes_received"]) * 1000 / succeeded, 3)
+                if succeeded
+                else None
+            ),
+            "logical_requests": int(totals["claimed"]),
+            "network_request_upper_bound": (
+                int(totals["claimed"]) * int(download_attempts)
+            ),
+        },
         "queue": work_queue_stats(conn, pipeline_id=pipeline_id),
         "failure_samples": failure_samples,
+        "storage": storage,
     }
 
 
@@ -609,7 +768,11 @@ def main(argv: list[str] | None = None) -> int:
         int(args.max_bytes),
         int(args.download_attempts),
     )
-    if any(value < 1 for value in numeric_values) or int(args.max_items) < 0:
+    if (
+        any(value < 1 for value in numeric_values)
+        or int(args.max_items) < 0
+        or int(args.min_free_bytes) < 0
+    ):
         print("ERROR: worker/size/lease/timeout values must be positive", file=sys.stderr)
         return 2
 
@@ -628,8 +791,10 @@ def main(argv: list[str] | None = None) -> int:
             lease_seconds=int(args.lease_seconds),
             timeout=int(args.timeout),
             max_bytes=int(args.max_bytes),
+            min_free_bytes=int(args.min_free_bytes),
             download_attempts=int(args.download_attempts),
             retry_delay_seconds=max(0, int(args.retry_delay_seconds)),
+            snapshot_date=str(args.snapshot_date),
             ca_bundle=Path(args.ca_bundle) if args.ca_bundle else None,
         )
     finally:
@@ -638,10 +803,19 @@ def main(argv: list[str] | None = None) -> int:
     if str(args.report_out or "").strip():
         report_path = Path(args.report_out)
         report_path.parent.mkdir(parents=True, exist_ok=True)
-        report_path.write_text(
-            json.dumps(report, ensure_ascii=True, indent=2, sort_keys=True) + "\n",
-            encoding="utf-8",
+        descriptor, temp_name = tempfile.mkstemp(
+            prefix=f".{report_path.name}.", dir=report_path.parent
         )
+        try:
+            with os.fdopen(descriptor, "w", encoding="utf-8") as handle:
+                json.dump(report, handle, ensure_ascii=True, indent=2, sort_keys=True)
+                handle.write("\n")
+                handle.flush()
+                os.fsync(handle.fileno())
+            os.replace(temp_name, report_path)
+        finally:
+            if os.path.exists(temp_name):
+                os.unlink(temp_name)
     print(json.dumps(report, ensure_ascii=True, sort_keys=True))
     return 0 if report["status"] in {"ok", "partial"} else 1
 

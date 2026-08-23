@@ -1,0 +1,160 @@
+{
+  "failure_class_counts": {
+    "not_fetchable": 157
+  },
+  "failure_samples": [
+    {
+      "error": "HTTPError: HTTP Error 404: Not Found",
+      "failure_class": "not_fetchable",
+      "http_status": 404,
+      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20251228"
+    },
+    {
+      "error": "HTTPError: HTTP Error 404: Not Found",
+      "failure_class": "not_fetchable",
+      "http_status": 404,
+      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20251221"
+    },
+    {
+      "error": "HTTPError: HTTP Error 404: Not Found",
+      "failure_class": "not_fetchable",
+      "http_status": 404,
+      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20251214"
+    },
+    {
+      "error": "HTTPError: HTTP Error 404: Not Found",
+      "failure_class": "not_fetchable",
+      "http_status": 404,
+      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20251207"
+    },
+    {
+      "error": "HTTPError: HTTP Error 404: Not Found",
+      "failure_class": "not_fetchable",
+      "http_status": 404,
+      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20251130"
+    },
+    {
+      "error": "HTTPError: HTTP Error 404: Not Found",
+      "failure_class": "not_fetchable",
+      "http_status": 404,
+      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20251123"
+    },
+    {
+      "error": "HTTPError: HTTP Error 404: Not Found",
+      "failure_class": "not_fetchable",
+      "http_status": 404,
+      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20251116"
+    },
+    {
+      "error": "HTTPError: HTTP Error 404: Not Found",
+      "failure_class": "not_fetchable",
+      "http_status": 404,
+      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20251109"
+    },
+    {
+      "error": "HTTPError: HTTP Error 404: Not Found",
+      "failure_class": "not_fetchable",
+      "http_status": 404,
+      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20251102"
+    },
+    {
+      "error": "HTTPError: HTTP Error 404: Not Found",
+      "failure_class": "not_fetchable",
+      "http_status": 404,
+      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20251026"
+    },
+    {
+      "error": "HTTPError: HTTP Error 404: Not Found",
+      "failure_class": "not_fetchable",
+      "http_status": 404,
+      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20251019"
+    },
+    {
+      "error": "HTTPError: HTTP Error 404: Not Found",
+      "failure_class": "not_fetchable",
+      "http_status": 404,
+      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20251012"
+    },
+    {
+      "error": "HTTPError: HTTP Error 404: Not Found",
+      "failure_class": "not_fetchable",
+      "http_status": 404,
+      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20251005"
+    },
+    {
+      "error": "HTTPError: HTTP Error 404: Not Found",
+      "failure_class": "not_fetchable",
+      "http_status": 404,
+      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20250928"
+    },
+    {
+      "error": "HTTPError: HTTP Error 404: Not Found",
+      "failure_class": "not_fetchable",
+      "http_status": 404,
+      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20250921"
+    },
+    {
+      "error": "HTTPError: HTTP Error 404: Not Found",
+      "failure_class": "not_fetchable",
+      "http_status": 404,
+      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20250914"
+    },
+    {
+      "error": "HTTPError: HTTP Error 404: Not Found",
+      "failure_class": "not_fetchable",
+      "http_status": 404,
+      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20250907"
+    },
+    {
+      "error": "HTTPError: HTTP Error 404: Not Found",
+      "failure_class": "not_fetchable",
+      "http_status": 404,
+      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20250831"
+    },
+    {
+      "error": "HTTPError: HTTP Error 404: Not Found",
+      "failure_class": "not_fetchable",
+      "http_status": 404,
+      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20250824"
+    },
+    {
+      "error": "HTTPError: HTTP Error 404: Not Found",
+      "failure_class": "not_fetchable",
+      "http_status": 404,
+      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20250817"
+    }
+  ],
+  "opened_circuits": [],
+  "opened_hosts": [],
+  "per_host_workers": 4,
+  "pipeline_id": "boe_summary_fetch",
+  "queue": {
+    "items_total": 1186,
+    "pipeline_id": "boe_summary_fetch",
+    "state_counts": {
+      "dead": 170,
+      "leased": 0,
+      "pending": 0,
+      "succeeded": 1016
+    },
+    "terminal_total": 1186,
+    "unfinished_total": 0
+  },
+  "schema_version": "document_fetch_queue_run_v1",
+  "status": "partial",
+  "storage": {
+    "blocked": false,
+    "free_bytes": 46569463808,
+    "inflight_reserve_bytes": 134217728,
+    "min_free_bytes": 10737418240,
+    "required_free_bytes": 10871635968
+  },
+  "totals": {
+    "claimed": 1096,
+    "dead": 157,
+    "retried": 0,
+    "succeeded": 939
+  },
+  "worker_id": "boe-summary-worker",
+  "workers": 8
+}

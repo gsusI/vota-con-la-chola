@@ -1,0 +1,63 @@
+{
+  "breakdown": {
+    "decisions": {},
+    "routing_reasons": {
+      "empty_text": 24,
+      "sparse_text": 16
+    },
+    "source_decisions": {},
+    "source_groups": {
+      "elections": 24,
+      "text_documents/programas_partidos": 16
+    }
+  },
+  "checks": {
+    "assignment_rows_match_queue": true,
+    "immutable_assignment_hash_matches": true,
+    "no_machine_generated_review_decisions": true,
+    "no_synthetic_or_mock_records": true,
+    "official_public_domain_personal_information_retained": true,
+    "queue_report_integrity_passed": true,
+    "review_ids_are_unique": true,
+    "review_rows_are_well_formed": true
+  },
+  "diagnostics": {
+    "errors": []
+  },
+  "gates": {
+    "adjudication_complete": false,
+    "batch_complete": false,
+    "double_review_complete": false,
+    "promotion_ready": false
+  },
+  "generated_at": "2026-08-13T05:17:50.637720Z",
+  "inputs": {
+    "queue_report": {
+      "bytes": 3596,
+      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-human-review-queue.json",
+      "sha256": "cf02b4d2e12c66d5e91427b3affefa99086372166eb1c718b3240c1a3fa408a6"
+    },
+    "review_csv": {
+      "assignment_sha256": "756e4e5b177c15e24d15fd8985ca928ff78045ecb7030b23946e9b24d27b1169",
+      "bytes": 20686,
+      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/exports/real-document-page-ocr-human-review.csv",
+      "sha256": "eaa317570af0736abeb034fef11fee2631599b6d96573e1f92e129bfbcc70cf3"
+    }
+  },
+  "next_action": "Have human reviewers complete every decision, note, reviewer ID, and timezone-aware timestamp; rerun with --require-complete, then perform independent second review and adjudication before promotion.",
+  "policy": {
+    "machine_generated_review_decisions": false,
+    "official_public_domain_personal_information_retained": true,
+    "official_real_documents_only": true,
+    "review_notes_are_required_for_completed_rows": true,
+    "reviewer_identity_is_required_for_completed_rows": true,
+    "synthetic_or_mock_records_counted": false
+  },
+  "schema_version": "real_document_page_ocr_human_review_validation_v1",
+  "status": "pending_human_review",
+  "totals": {
+    "human_reviews_completed": 0,
+    "human_reviews_pending": 40,
+    "review_rows": 40
+  }
+}

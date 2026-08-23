@@ -1,0 +1,75 @@
+{
+  "by_remediation_lane": {
+    "europarl_source_manifest_recovery": 25,
+    "primary_party_manifest_recovery": 25,
+    "senate_session_capture_manifest_reconciliation": 1
+  },
+  "by_source_group": {
+    "europarl_meps": {
+      "bytes": 4398347,
+      "checksum_lineage_gaps": 25,
+      "public_url_gaps": 25,
+      "rows": 25
+    },
+    "manual": {
+      "bytes": 754640,
+      "checksum_lineage_gaps": 1,
+      "public_url_gaps": 1,
+      "rows": 1
+    },
+    "text_documents/programas_partidos": {
+      "bytes": 3162557,
+      "checksum_lineage_gaps": 25,
+      "public_url_gaps": 25,
+      "rows": 25
+    }
+  },
+  "checks": {
+    "all_inventory_rows_scanned": true,
+    "checksum_gap_count_matches_audit": true,
+    "guessed_source_urls_absent": true,
+    "input_manifest_matches_audit": true,
+    "integrity_passed": true,
+    "public_domain_personal_information_retained": true,
+    "public_url_gap_count_matches_audit": true,
+    "queue_rows_balance_gap_union": true
+  },
+  "generated_at": "2026-08-13T05:11:40.013295+00:00",
+  "inputs": {
+    "audit_report": {
+      "bytes": 28339,
+      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-provenance-audit.json",
+      "sha256": "bd822b0286ebb1e9128d8a576db0c483d15bdda5bd8f75a6a6ab73a8a5c709b6"
+    },
+    "file_manifest": {
+      "bytes": 56477511,
+      "path": "etl/data/manifests/real-document-provenance-files.jsonl",
+      "rows": 111408,
+      "sha256": "5c8692041af5ad30d279cfdb206c0503525ecf7b35368a0966ed92f918db0634"
+    }
+  },
+  "next_action": "Process p0 lanes first; accept only exact source/capture manifests whose declared bytes and SHA-256 reconcile; then rerun the provenance audit and queue.",
+  "policy": {
+    "guessed_source_urls_forbidden": true,
+    "official_real_files_only": true,
+    "public_domain_personal_information_retained": true,
+    "synthetic_or_mock_records_counted": false
+  },
+  "queue": {
+    "bytes": 38464,
+    "empty": false,
+    "path": "etl/data/manifests/document-provenance-gap-queue.jsonl",
+    "rows": 51,
+    "sha256": "140fcfcd3479e13a163c4f68f4d5159a0f12c304b20c965ef4912588e6acedcb",
+    "source_bytes_requiring_remediation": 8315544
+  },
+  "schema_version": "document_provenance_gap_queue_v1",
+  "status": "ok",
+  "totals": {
+    "checksum_lineage_gaps": 51,
+    "files_scanned": 111408,
+    "public_url_gaps": 51,
+    "queue_bytes": 8315544,
+    "queue_rows": 51
+  }
+}

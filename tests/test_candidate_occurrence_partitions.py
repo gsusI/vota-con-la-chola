@@ -49,9 +49,9 @@ def _occurrence_id(
         ensure_ascii=True,
         separators=(",", ":"),
     )
-    return "infoelectoral-candidate:" + hashlib.sha256(
-        payload.encode("utf-8")
-    ).hexdigest()
+    return (
+        "infoelectoral-candidate:" + hashlib.sha256(payload.encode("utf-8")).hexdigest()
+    )
 
 
 @unittest.skipIf(pyarrow is None, "pyarrow optional dependency is not installed")
@@ -126,6 +126,43 @@ class TestCandidateOccurrencePartitions(unittest.TestCase):
               last_seen_snapshot_date TEXT NOT NULL,
               is_present INTEGER NOT NULL
             );
+            CREATE TABLE boe_election_effective_candidacies (
+              candidacy_id TEXT PRIMARY KEY,
+              candidacy_name TEXT NOT NULL
+            );
+            CREATE TABLE boe_election_effective_candidate_occurrences (
+              effective_candidate_occurrence_id TEXT PRIMARY KEY,
+              candidacy_id TEXT NOT NULL,
+              base_candidate_occurrence_id TEXT,
+              base_document_id TEXT NOT NULL,
+              election_id TEXT NOT NULL,
+              election_date TEXT NOT NULL,
+              election_type_code TEXT NOT NULL,
+              electoral_board TEXT NOT NULL,
+              electoral_district TEXT NOT NULL,
+              chamber_code TEXT NOT NULL,
+              candidacy_number INTEGER NOT NULL,
+              candidate_order INTEGER NOT NULL,
+              candidate_type_code TEXT NOT NULL,
+              substitute_for_candidate_order INTEGER,
+              full_name TEXT NOT NULL,
+              person_id INTEGER NOT NULL,
+              party_id INTEGER NOT NULL,
+              source_id TEXT NOT NULL,
+              source_record_pk INTEGER NOT NULL,
+              document_source_record_pk INTEGER NOT NULL,
+              effective_source_url TEXT NOT NULL,
+              effective_source_content_sha256 TEXT NOT NULL,
+              source_paragraph_number INTEGER NOT NULL,
+              effective_source_document_id TEXT NOT NULL,
+              correction_operation_id TEXT,
+              source_text_exact TEXT NOT NULL,
+              row_content_sha256 TEXT NOT NULL,
+              first_seen_snapshot_date TEXT NOT NULL,
+              last_seen_snapshot_date TEXT NOT NULL,
+              is_present INTEGER NOT NULL,
+              person_identity_state TEXT NOT NULL
+            );
             INSERT INTO sources VALUES (
               'infoelectoral_candidates',
               'https://infoelectoral.interior.gob.es/'
@@ -194,46 +231,46 @@ class TestCandidateOccurrencePartitions(unittest.TestCase):
             )
             election_date = "2023-05-28" if election_type == "04" else "2023-07-23"
             values = (
-                    occurrence_id,
-                    archive_id,
-                    election_date,
-                    election_type,
-                    year,
-                    month,
-                    election_round,
-                    province,
-                    district,
-                    scope,
-                    party_code,
-                    order,
-                    candidate_type,
-                    given_name,
-                    surname_1,
-                    surname_2,
-                    " ".join(item for item in (given_name, surname_1, surname_2) if item),
-                    "female" if index in {1, 3, 5} else "male",
-                    "1980-01-01",
-                    "01011980",
-                    f"official-id-{index}",
-                    elected,
-                    "Partido Uno" if party_id == 1 else "Partido Dos",
-                    "P1" if party_id == 1 else "P2",
-                    province or None,
-                    None,
-                    "N1" if party_id == 1 else "N2",
-                    person_id,
-                    party_id,
-                    1 if election_type == "04" else 2,
-                    "infoelectoral_candidates",
-                    100 + index,
-                    "https://infoelectoral.interior.gob.es/archive.zip",
-                    "a" * 64,
-                    "040202303.DAT" if election_type == "04" else "040202307.DAT",
-                    index,
-                    "2026-08-11",
-                    "2026-08-11",
-                    1,
-                )
+                occurrence_id,
+                archive_id,
+                election_date,
+                election_type,
+                year,
+                month,
+                election_round,
+                province,
+                district,
+                scope,
+                party_code,
+                order,
+                candidate_type,
+                given_name,
+                surname_1,
+                surname_2,
+                " ".join(item for item in (given_name, surname_1, surname_2) if item),
+                "female" if index in {1, 3, 5} else "male",
+                "1980-01-01",
+                "01011980",
+                f"official-id-{index}",
+                elected,
+                "Partido Uno" if party_id == 1 else "Partido Dos",
+                "P1" if party_id == 1 else "P2",
+                province or None,
+                None,
+                "N1" if party_id == 1 else "N2",
+                person_id,
+                party_id,
+                1 if election_type == "04" else 2,
+                "infoelectoral_candidates",
+                100 + index,
+                "https://infoelectoral.interior.gob.es/archive.zip",
+                "a" * 64,
+                "040202303.DAT" if election_type == "04" else "040202307.DAT",
+                index,
+                "2026-08-11",
+                "2026-08-11",
+                1,
+            )
             conn.execute(
                 "INSERT INTO infoelectoral_candidate_occurrences VALUES ("
                 + ",".join(["?"] * len(values))
@@ -291,7 +328,17 @@ class TestCandidateOccurrencePartitions(unittest.TestCase):
 
             conn = sqlite3.connect(db_path)
             conn.execute(
-                "UPDATE infoelectoral_candidate_occurrences SET candidacy_name = ? WHERE election_type_code = '04' LIMIT 1",
+                """
+                UPDATE infoelectoral_candidate_occurrences
+                SET candidacy_name = ?
+                WHERE rowid = (
+                    SELECT rowid
+                    FROM infoelectoral_candidate_occurrences
+                    WHERE election_type_code = '04'
+                    ORDER BY rowid
+                    LIMIT 1
+                )
+                """,
                 ("Partido Uno Actualizado",),
             )
             conn.commit()

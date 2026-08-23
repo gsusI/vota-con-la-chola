@@ -1,0 +1,129 @@
+{
+  "checkpoint": {
+    "bytes": 22110,
+    "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/wayback-document-checkpoint.jsonl",
+    "rows": 43,
+    "sha256": "236f6db3bb221cc15d721fd541cb0d69b25becacd5faba4eaa4591d8e93efad5"
+  },
+  "checks": {
+    "every_target_is_real_and_checksum_verified": true,
+    "manifest_rows_are_checksum_exact": true,
+    "no_guessed_source_url_accepted": true,
+    "no_remote_mutation_performed": true,
+    "nonmatching_archive_responses_not_promoted": true,
+    "only_evidence_derived_exact_source_urls_queried": true,
+    "public_domain_personal_information_retained": true
+  },
+  "execution": {
+    "attempts": 2,
+    "cdx_endpoint": "https://web.archive.org/cdx/search/cdx",
+    "max_captures_per_source": 5000,
+    "max_document_bytes": 67108864,
+    "refresh_index": false,
+    "replay_modifier": "id_",
+    "retry_failed": false,
+    "timeout_seconds": 30
+  },
+  "generated_at": "2026-08-13T02:53:16.853663+00:00",
+  "index_queries": [
+    {
+      "candidate_count": 5,
+      "source_variant": "http://europarl.europa.eu/meps/es/full-list/xml",
+      "status": "checkpoint_reused"
+    },
+    {
+      "error": "TimeoutError: The read operation timed out",
+      "source_variant": "http://senado.es/legis15/votaciones/ses_10.xml",
+      "status": "failed_checkpoint_reused"
+    },
+    {
+      "error": "TimeoutError: The read operation timed out",
+      "source_variant": "http://www.europarl.europa.eu/meps/es/full-list/xml",
+      "status": "failed_checkpoint_reused"
+    },
+    {
+      "error": "TimeoutError: The read operation timed out",
+      "source_variant": "http://www.senado.es/legis15/votaciones/ses_10.xml",
+      "status": "failed_checkpoint_reused"
+    },
+    {
+      "error": "TimeoutError: The read operation timed out",
+      "source_variant": "https://europarl.europa.eu/meps/es/full-list/xml",
+      "status": "failed_checkpoint_reused"
+    },
+    {
+      "error": "TimeoutError: The read operation timed out",
+      "source_variant": "https://senado.es/legis15/votaciones/ses_10.xml",
+      "status": "failed_checkpoint_reused"
+    },
+    {
+      "error": "TimeoutError: The read operation timed out",
+      "source_variant": "https://www.europarl.europa.eu/meps/es/full-list/xml",
+      "status": "failed_checkpoint_reused"
+    },
+    {
+      "error": "HTTP 503: Service Unavailable",
+      "source_variant": "https://www.senado.es/legis15/votaciones/ses_10.xml",
+      "status": "failed_checkpoint_reused"
+    }
+  ],
+  "inputs": {
+    "gap_queue": {
+      "bytes": 38464,
+      "path": "etl/data/manifests/document-provenance-gap-queue.jsonl",
+      "sha256": "140fcfcd3479e13a163c4f68f4d5159a0f12c304b20c965ef4912588e6acedcb"
+    },
+    "inventory": {
+      "bytes": 75404488,
+      "path": "etl/data/manifests/real-document-format-inventory.jsonl",
+      "sha256": "62191c367b50ba76fa5f50235383d2bd364eecb2db20fd26e7979663dbdee483"
+    }
+  },
+  "manifest": {
+    "bytes": 0,
+    "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/wayback-document-lineage.jsonl",
+    "rows": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "next_action": "If no exact match exists, retain the gap. Refresh the archive index only after a new archived capture or exact source manifest becomes available.",
+  "policy": {
+    "archive_bytes_must_match_local_sha256_and_size": true,
+    "archive_index_cap_is_fail_closed": true,
+    "archive_mismatches_are_rejected_and_checkpointed": true,
+    "archive_queries_use_exact_url_scope_only": true,
+    "official_real_files_only": true,
+    "portable_checkpoint_exported": true,
+    "public_domain_personal_information_retained": true,
+    "remote_mutation_performed": false,
+    "source_urls_must_be_repository_evidence_derived": true,
+    "successful_index_queries_are_not_repeated_without_refresh": true,
+    "synthetic_or_mock_records_counted": false
+  },
+  "replay_results": [],
+  "schema_version": "wayback_document_lineage_report_v1",
+  "state": {
+    "candidate_states": {
+      "rejected_mismatch": 5
+    },
+    "cdx_query_states": {
+      "failed": 7,
+      "ok": 1
+    },
+    "path": "etl/data/staging/wayback-document-lineage.db",
+    "schema_version": 1,
+    "sha256": "010200a52d2904ea03e6d500df4f537940903a407c93a9f2987d158bba97d443"
+  },
+  "status": "partial",
+  "totals": {
+    "archive_candidate_failures_this_run": 0,
+    "archive_candidates_attempted_this_run": 0,
+    "archive_candidates_indexed": 5,
+    "archive_candidates_rejected_this_run": 0,
+    "eligible_gap_file_instances": 26,
+    "evidence_derived_source_urls": 2,
+    "exact_archive_files_recovered": 0,
+    "exact_archive_relations": 0,
+    "unique_expected_content_targets": 3,
+    "unseeded_gap_file_instances": 25
+  }
+}

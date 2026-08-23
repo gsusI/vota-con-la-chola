@@ -1,0 +1,71 @@
+{
+  "checks": {
+    "all_work_states_are_successful_and_well_formed": true,
+    "expected_and_observed_rows_match": true,
+    "extraction_report_totals_reconcile": true,
+    "inventory_provenance_and_manifest_values_match": true,
+    "manifest_rows_match_extraction_report": true,
+    "manifest_sha256_matches_extraction_report": true,
+    "no_native_text_truncation": true,
+    "no_synthetic_or_mock_records": true,
+    "official_public_domain_personal_information_retained": true,
+    "raw_checksums_match": true,
+    "text_cas_checksums_and_character_counts_match": true,
+    "text_cas_inventory_is_exact": true
+  },
+  "diagnostics": {
+    "invalid_work_states": 0,
+    "manifest_value_mismatches": 0,
+    "raw_error_samples": [],
+    "text_error_samples": []
+  },
+  "generated_at": "2026-08-13T05:15:59.632758Z",
+  "inputs": {
+    "extraction_report": {
+      "bytes": 2433,
+      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-extraction.json",
+      "sha256": "02d33740c65cb1d964f6a67bf7658e2b776039028caad15d3c56546db200b2ab"
+    },
+    "inventory": {
+      "path": "etl/data/manifests/real-document-format-inventory.jsonl",
+      "sha256": "1bfe313c276d63ae03ec4b0cbcf63b7a3655090f45b1ad245ccd23d89c8af32a"
+    },
+    "manifest": {
+      "bytes": 121555440,
+      "path": "etl/data/published/real-document-text-manifest-latest.jsonl",
+      "rows": 111408,
+      "sha256": "03ce010e1019fc3f23e5a016413aab51f7ec398637973680534c27007b69bfab"
+    },
+    "provenance": {
+      "path": "etl/data/manifests/real-document-provenance-files.jsonl",
+      "sha256": "5c8692041af5ad30d279cfdb206c0503525ecf7b35368a0966ed92f918db0634"
+    }
+  },
+  "next_action": "Run bounded page-level OCR for every distinct empty or sparse PDF page and publish it as additive evidence beside native text.",
+  "policy": {
+    "native_text_is_not_sanitized_or_identity_stripped": true,
+    "official_public_domain_personal_information_retained": true,
+    "official_real_documents_only": true,
+    "synthetic_or_mock_records_counted": false
+  },
+  "schema_version": "real_document_text_validation_v1",
+  "status": "ok",
+  "totals": {
+    "distinct_content_objects": 109558,
+    "file_instances": 111408,
+    "native_no_text_objects": 0,
+    "native_text_chars": 1999902681,
+    "native_truncated_objects": 0,
+    "ocr_candidate_pages": 856,
+    "provenance_gap_instances": 51,
+    "public_url_instances": 111357,
+    "raw_files_checksum_verified": 111408,
+    "text_cas_files_observed": 108139,
+    "text_cas_objects_checksum_verified": 108139
+  },
+  "validation_scope": {
+    "batch_size": 128,
+    "full_raw_file_instance_checksums": true,
+    "workers": 12
+  }
+}

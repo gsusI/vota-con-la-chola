@@ -1,0 +1,127 @@
+{
+  "artifacts": {
+    "candidate_context": {
+      "bytes": 14686321,
+      "candidate_occurrences": 31241,
+      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/exports/boe-candidate-correction-review-context.jsonl",
+      "rows": 3713,
+      "sha256": "d22c111b7d12a832f0943c8691a5d35bd3f2703af14cc1df6f37c13011490701"
+    },
+    "review_queue": {
+      "bytes": 1186277,
+      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/exports/boe-candidate-correction-review-queue.csv",
+      "sha256": "8f5ebb6ea745531f64e18eada68b726f722e1de8abf47b1ab6985dd4e77e6812"
+    }
+  },
+  "checks": {
+    "all_pending_paragraphs_exported": true,
+    "context_candidacies_reconcile": true,
+    "context_candidate_occurrences_reconcile": true,
+    "context_public_names_and_text_retained": true,
+    "correction_evidence_and_effective_state_unchanged": true,
+    "exact_public_text_retained": true,
+    "human_work_preserved_or_blank": true,
+    "official_https_sources_only": true,
+    "pending_documents_present": true,
+    "pending_paragraphs_reconcile": true,
+    "source_checksums_retained": true,
+    "synthetic_or_mock_records_absent": true,
+    "task_fingerprints_valid": true,
+    "task_ids_unique": true
+  },
+  "next_gate": "Complete two independent reviews for every exact paragraph, adjudicate disagreements, compile accepted operation specs by correction document, and materialize a cohort only after exact base/effective reconciliation passes.",
+  "policy": {
+    "disagreement_adjudication_required": true,
+    "dual_independent_human_review_required": true,
+    "effective_state_mutated": false,
+    "machine_decisions_invented": false,
+    "official_evidence_publicable": true,
+    "official_real_evidence_only": true,
+    "public_domain_personal_information_retained": true,
+    "remote_mutation_performed": false,
+    "reviewer_ids_must_be_public_handles_or_opaque_ids": true,
+    "synthetic_or_mock_records_counted": false
+  },
+  "schema_version": "boe_candidate_correction_review_queue_v1",
+  "source_documents": [
+    {
+      "correction_document_id": "BOE-A-2015-13053",
+      "paragraph_rows": 27,
+      "publication_date": "2015-12-01",
+      "source_content_sha256": "e394cc1dbf2626a876556f808936b259f88770e341ab28d41bee6957c50398b3",
+      "source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2015-13053",
+      "target_documents": 1
+    },
+    {
+      "correction_document_id": "BOE-A-2015-13247",
+      "paragraph_rows": 13,
+      "publication_date": "2015-12-05",
+      "source_content_sha256": "5d76513e41061501ffa27d4be0c61c4c051f909015cfc8c192c968c16938207c",
+      "source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2015-13247",
+      "target_documents": 1
+    },
+    {
+      "correction_document_id": "BOE-A-2015-13868",
+      "paragraph_rows": 8,
+      "publication_date": "2015-12-18",
+      "source_content_sha256": "f8e2712be306c9ebc9ed4baa4cd0eac20307acb97b982d3f8964689cea65bba2",
+      "source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2015-13868",
+      "target_documents": 1
+    },
+    {
+      "correction_document_id": "BOE-A-2016-5626",
+      "paragraph_rows": 34,
+      "publication_date": "2016-06-08",
+      "source_content_sha256": "6dbf35b4670c7d45892d7219c61841296893fd1084bc2653e440bd416792e61b",
+      "source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2016-5626",
+      "target_documents": 1
+    },
+    {
+      "correction_document_id": "BOE-A-2019-4948",
+      "paragraph_rows": 65,
+      "publication_date": "2019-04-03",
+      "source_content_sha256": "71eecd9944dd41bffe6522265050950690c201fce0a33497913669e4fe7ff31e",
+      "source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2019-4948",
+      "target_documents": 1
+    },
+    {
+      "correction_document_id": "BOE-A-2019-5083",
+      "paragraph_rows": 201,
+      "publication_date": "2019-04-05",
+      "source_content_sha256": "d4022b4d5f3af7f9b1a8cb38edf2c1964e2b95aafa9d7605a79e6075a2e5594d",
+      "source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2019-5083",
+      "target_documents": 1
+    },
+    {
+      "correction_document_id": "BOE-A-2019-5322",
+      "paragraph_rows": 12,
+      "publication_date": "2019-04-09",
+      "source_content_sha256": "01f051b4001cf0dc915bbd84ef6ac56fd7bb5ce5b69298d1f5fa74016ee2270d",
+      "source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2019-5322",
+      "target_documents": 1
+    },
+    {
+      "correction_document_id": "BOE-A-2019-6984",
+      "paragraph_rows": 416,
+      "publication_date": "2019-05-10",
+      "source_content_sha256": "c044f31baabadc0d37511a8d3a6f66b59d8fbf2811815afbd71380c149728257",
+      "source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2019-6984",
+      "target_documents": 1
+    }
+  ],
+  "status": "pending_human_review",
+  "totals": {
+    "context_candidacies": 3713,
+    "context_candidate_occurrences": 31241,
+    "pending_correction_documents": 8,
+    "pending_correction_paragraphs": 776,
+    "pending_dual_review": 776,
+    "suggested_candidacy_references": 945,
+    "suggested_candidate_occurrence_references": 30004,
+    "tasks": 776,
+    "tasks_requiring_manual_context": 108,
+    "tasks_with_ambiguous_structural_candidates": 240,
+    "tasks_with_exact_structural_candidate": 417,
+    "tasks_with_numbered_context_unresolved": 11
+  }
+}

@@ -1,0 +1,818 @@
+{
+  "checks": {
+    "BOE-A-2015-12734:all_correction_paragraphs_retained_exactly": true,
+    "BOE-A-2015-12734:all_official_correction_documents_captured": true,
+    "BOE-A-2015-12734:candidacy_count_matches_exact_contract": true,
+    "BOE-A-2015-12734:candidacy_ids_unique": true,
+    "BOE-A-2015-12734:candidate_count_matches_exact_contract": true,
+    "BOE-A-2015-12734:candidate_names_nonempty": true,
+    "BOE-A-2015-12734:candidate_occurrence_ids_unique": true,
+    "BOE-A-2015-12734:database_candidacies_reconcile": true,
+    "BOE-A-2015-12734:database_candidates_reconcile": true,
+    "BOE-A-2015-12734:database_exact_source_text_complete": true,
+    "BOE-A-2015-12734:database_source_record_lineage_complete": true,
+    "BOE-A-2015-12734:document_profile_matches_contract": true,
+    "BOE-A-2015-12734:exact_source_paragraphs_retained": true,
+    "BOE-A-2015-12734:not_proclaimed_count_matches_exact_contract": true,
+    "BOE-A-2015-12734:suplente_count_matches_exact_contract": true,
+    "BOE-A-2015-12734:titular_count_matches_exact_contract": true,
+    "BOE-A-2016-5186:all_correction_paragraphs_retained_exactly": true,
+    "BOE-A-2016-5186:all_official_correction_documents_captured": true,
+    "BOE-A-2016-5186:candidacy_count_matches_exact_contract": true,
+    "BOE-A-2016-5186:candidacy_ids_unique": true,
+    "BOE-A-2016-5186:candidate_count_matches_exact_contract": true,
+    "BOE-A-2016-5186:candidate_names_nonempty": true,
+    "BOE-A-2016-5186:candidate_occurrence_ids_unique": true,
+    "BOE-A-2016-5186:database_candidacies_reconcile": true,
+    "BOE-A-2016-5186:database_candidates_reconcile": true,
+    "BOE-A-2016-5186:database_exact_source_text_complete": true,
+    "BOE-A-2016-5186:database_source_record_lineage_complete": true,
+    "BOE-A-2016-5186:document_profile_matches_contract": true,
+    "BOE-A-2016-5186:exact_source_paragraphs_retained": true,
+    "BOE-A-2016-5186:not_proclaimed_count_matches_exact_contract": true,
+    "BOE-A-2016-5186:suplente_count_matches_exact_contract": true,
+    "BOE-A-2016-5186:titular_count_matches_exact_contract": true,
+    "BOE-A-2019-4902:all_correction_paragraphs_retained_exactly": true,
+    "BOE-A-2019-4902:all_official_correction_documents_captured": true,
+    "BOE-A-2019-4902:candidacy_count_matches_exact_contract": true,
+    "BOE-A-2019-4902:candidacy_ids_unique": true,
+    "BOE-A-2019-4902:candidate_count_matches_exact_contract": true,
+    "BOE-A-2019-4902:candidate_names_nonempty": true,
+    "BOE-A-2019-4902:candidate_occurrence_ids_unique": true,
+    "BOE-A-2019-4902:database_candidacies_reconcile": true,
+    "BOE-A-2019-4902:database_candidates_reconcile": true,
+    "BOE-A-2019-4902:database_exact_source_text_complete": true,
+    "BOE-A-2019-4902:database_source_record_lineage_complete": true,
+    "BOE-A-2019-4902:document_profile_matches_contract": true,
+    "BOE-A-2019-4902:exact_source_paragraphs_retained": true,
+    "BOE-A-2019-4902:not_proclaimed_count_matches_exact_contract": true,
+    "BOE-A-2019-4902:suplente_count_matches_exact_contract": true,
+    "BOE-A-2019-4902:titular_count_matches_exact_contract": true,
+    "BOE-A-2019-6475:all_correction_paragraphs_retained_exactly": true,
+    "BOE-A-2019-6475:all_official_correction_documents_captured": true,
+    "BOE-A-2019-6475:candidacy_count_matches_exact_contract": true,
+    "BOE-A-2019-6475:candidacy_ids_unique": true,
+    "BOE-A-2019-6475:candidate_count_matches_exact_contract": true,
+    "BOE-A-2019-6475:candidate_names_nonempty": true,
+    "BOE-A-2019-6475:candidate_occurrence_ids_unique": true,
+    "BOE-A-2019-6475:database_candidacies_reconcile": true,
+    "BOE-A-2019-6475:database_candidates_reconcile": true,
+    "BOE-A-2019-6475:database_exact_source_text_complete": true,
+    "BOE-A-2019-6475:database_source_record_lineage_complete": true,
+    "BOE-A-2019-6475:document_profile_matches_contract": true,
+    "BOE-A-2019-6475:exact_source_paragraphs_retained": true,
+    "BOE-A-2019-6475:not_proclaimed_count_matches_exact_contract": true,
+    "BOE-A-2019-6475:suplente_count_matches_exact_contract": true,
+    "BOE-A-2019-6475:titular_count_matches_exact_contract": true,
+    "BOE-A-2023-15066:all_correction_paragraphs_retained_exactly": true,
+    "BOE-A-2023-15066:all_official_correction_documents_captured": true,
+    "BOE-A-2023-15066:candidacy_count_matches_exact_contract": true,
+    "BOE-A-2023-15066:candidacy_ids_unique": true,
+    "BOE-A-2023-15066:candidate_count_matches_exact_contract": true,
+    "BOE-A-2023-15066:candidate_names_nonempty": true,
+    "BOE-A-2023-15066:candidate_occurrence_ids_unique": true,
+    "BOE-A-2023-15066:database_candidacies_reconcile": true,
+    "BOE-A-2023-15066:database_candidates_reconcile": true,
+    "BOE-A-2023-15066:database_exact_source_text_complete": true,
+    "BOE-A-2023-15066:database_source_record_lineage_complete": true,
+    "BOE-A-2023-15066:document_profile_matches_contract": true,
+    "BOE-A-2023-15066:exact_source_paragraphs_retained": true,
+    "BOE-A-2023-15066:not_proclaimed_count_matches_exact_contract": true,
+    "BOE-A-2023-15066:suplente_count_matches_exact_contract": true,
+    "BOE-A-2023-15066:titular_count_matches_exact_contract": true,
+    "BOE-A-2024-10230:all_correction_paragraphs_retained_exactly": true,
+    "BOE-A-2024-10230:all_official_correction_documents_captured": true,
+    "BOE-A-2024-10230:candidacy_count_matches_exact_contract": true,
+    "BOE-A-2024-10230:candidacy_ids_unique": true,
+    "BOE-A-2024-10230:candidate_count_matches_exact_contract": true,
+    "BOE-A-2024-10230:candidate_names_nonempty": true,
+    "BOE-A-2024-10230:candidate_occurrence_ids_unique": true,
+    "BOE-A-2024-10230:database_candidacies_reconcile": true,
+    "BOE-A-2024-10230:database_candidates_reconcile": true,
+    "BOE-A-2024-10230:database_exact_source_text_complete": true,
+    "BOE-A-2024-10230:database_source_record_lineage_complete": true,
+    "BOE-A-2024-10230:document_profile_matches_contract": true,
+    "BOE-A-2024-10230:exact_source_paragraphs_retained": true,
+    "BOE-A-2024-10230:not_proclaimed_count_matches_exact_contract": true,
+    "BOE-A-2024-10230:suplente_count_matches_exact_contract": true,
+    "BOE-A-2024-10230:titular_count_matches_exact_contract": true,
+    "BOE-A-2024-9687:all_correction_paragraphs_retained_exactly": true,
+    "BOE-A-2024-9687:all_official_correction_documents_captured": true,
+    "BOE-A-2024-9687:candidacy_count_matches_exact_contract": true,
+    "BOE-A-2024-9687:candidacy_ids_unique": true,
+    "BOE-A-2024-9687:candidate_count_matches_exact_contract": true,
+    "BOE-A-2024-9687:candidate_names_nonempty": true,
+    "BOE-A-2024-9687:candidate_occurrence_ids_unique": true,
+    "BOE-A-2024-9687:database_candidacies_reconcile": true,
+    "BOE-A-2024-9687:database_candidates_reconcile": true,
+    "BOE-A-2024-9687:database_exact_source_text_complete": true,
+    "BOE-A-2024-9687:database_source_record_lineage_complete": true,
+    "BOE-A-2024-9687:document_profile_matches_contract": true,
+    "BOE-A-2024-9687:exact_source_paragraphs_retained": true,
+    "BOE-A-2024-9687:not_proclaimed_count_matches_exact_contract": true,
+    "BOE-A-2024-9687:suplente_count_matches_exact_contract": true,
+    "BOE-A-2024-9687:titular_count_matches_exact_contract": true,
+    "foreign_key_check_passed": true,
+    "quick_check_passed": true
+  },
+  "database": {
+    "foreign_key_violations": 0,
+    "path": "etl/data/staging/politicos-es.db",
+    "quick_check": "ok"
+  },
+  "documents": [
+    {
+      "checks": {
+        "all_correction_paragraphs_retained_exactly": true,
+        "all_official_correction_documents_captured": true,
+        "candidacy_count_matches_exact_contract": true,
+        "candidacy_ids_unique": true,
+        "candidate_count_matches_exact_contract": true,
+        "candidate_names_nonempty": true,
+        "candidate_occurrence_ids_unique": true,
+        "database_candidacies_reconcile": true,
+        "database_candidates_reconcile": true,
+        "database_exact_source_text_complete": true,
+        "database_source_record_lineage_complete": true,
+        "document_profile_matches_contract": true,
+        "exact_source_paragraphs_retained": true,
+        "not_proclaimed_count_matches_exact_contract": true,
+        "suplente_count_matches_exact_contract": true,
+        "titular_count_matches_exact_contract": true
+      },
+      "contract": {
+        "additional_correction_refs": [],
+        "election_date": "2015-12-20",
+        "election_id": "general-cortes-2015-12-20",
+        "election_type_code": "general_cortes",
+        "expected_candidacies": 1282,
+        "expected_candidates": 10498,
+        "expected_not_proclaimed": 31,
+        "expected_suplente": 4668,
+        "expected_titular": 5830
+      },
+      "correction_documents": [
+        {
+          "document_id": "BOE-A-2015-13053",
+          "raw_path": "etl/data/raw/text_documents/boe_document_xml/e3/94/e394cc1dbf2626a876556f808936b259f88770e341ab28d41bee6957c50398b3.xml",
+          "source_bytes": 4896,
+          "source_content_sha256": "e394cc1dbf2626a876556f808936b259f88770e341ab28d41bee6957c50398b3",
+          "source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2015-13053"
+        },
+        {
+          "document_id": "BOE-A-2015-13247",
+          "raw_path": "etl/data/raw/text_documents/boe_document_xml/5d/76/5d76513e41061501ffa27d4be0c61c4c051f909015cfc8c192c968c16938207c.xml",
+          "source_bytes": 3376,
+          "source_content_sha256": "5d76513e41061501ffa27d4be0c61c4c051f909015cfc8c192c968c16938207c",
+          "source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2015-13247"
+        },
+        {
+          "document_id": "BOE-A-2015-13868",
+          "raw_path": "etl/data/raw/text_documents/boe_document_xml/f8/e2/f8e2712be306c9ebc9ed4baa4cd0eac20307acb97b982d3f8964689cea65bba2.xml",
+          "source_bytes": 3189,
+          "source_content_sha256": "f8e2712be306c9ebc9ed4baa4cd0eac20307acb97b982d3f8964689cea65bba2",
+          "source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2015-13868"
+        }
+      ],
+      "correction_evidence": [
+        {
+          "application_state": "captured_unapplied",
+          "base_document_refs": [
+            "BOE-A-2015-12734"
+          ],
+          "document_id": "BOE-A-2015-13053",
+          "exact_paragraph_text_retained": true,
+          "paragraphs": 27,
+          "publication_date": "2015-12-01",
+          "raw_path": "etl/data/raw/text_documents/boe_document_xml/e3/94/e394cc1dbf2626a876556f808936b259f88770e341ab28d41bee6957c50398b3.xml",
+          "relation_basis": "official_metadata",
+          "source_bytes": 4896,
+          "source_content_sha256": "e394cc1dbf2626a876556f808936b259f88770e341ab28d41bee6957c50398b3",
+          "source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2015-13053",
+          "title": "Correcci\u00f3n de errores de las candidaturas proclamadas para las elecciones al Congreso de los Diputados y al Senado, convocadas por Real Decreto 977/2015, de 26 de octubre."
+        },
+        {
+          "application_state": "captured_unapplied",
+          "base_document_refs": [
+            "BOE-A-2015-12734"
+          ],
+          "document_id": "BOE-A-2015-13247",
+          "exact_paragraph_text_retained": true,
+          "paragraphs": 13,
+          "publication_date": "2015-12-05",
+          "raw_path": "etl/data/raw/text_documents/boe_document_xml/5d/76/5d76513e41061501ffa27d4be0c61c4c051f909015cfc8c192c968c16938207c.xml",
+          "relation_basis": "official_metadata",
+          "source_bytes": 3376,
+          "source_content_sha256": "5d76513e41061501ffa27d4be0c61c4c051f909015cfc8c192c968c16938207c",
+          "source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2015-13247",
+          "title": "Correcci\u00f3n de errores de las candidaturas proclamadas para las elecciones al Congreso de los Diputados y al Senado, convocadas por Real Decreto 977/2015, de 26 de octubre."
+        },
+        {
+          "application_state": "captured_unapplied",
+          "base_document_refs": [
+            "BOE-A-2015-12734"
+          ],
+          "document_id": "BOE-A-2015-13868",
+          "exact_paragraph_text_retained": true,
+          "paragraphs": 8,
+          "publication_date": "2015-12-18",
+          "raw_path": "etl/data/raw/text_documents/boe_document_xml/f8/e2/f8e2712be306c9ebc9ed4baa4cd0eac20307acb97b982d3f8964689cea65bba2.xml",
+          "relation_basis": "official_metadata",
+          "source_bytes": 3189,
+          "source_content_sha256": "f8e2712be306c9ebc9ed4baa4cd0eac20307acb97b982d3f8964689cea65bba2",
+          "source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2015-13868",
+          "title": "Correcci\u00f3n de errores de las candidaturas proclamadas para las elecciones al Congreso de los Diputados y al Senado, convocadas por Real Decreto 977/2015, de 26 de octubre."
+        }
+      ],
+      "correction_refs": [
+        "BOE-A-2015-13053",
+        "BOE-A-2015-13247",
+        "BOE-A-2015-13868"
+      ],
+      "correction_state": "pending",
+      "document_id": "BOE-A-2015-12734",
+      "profile": "general_election",
+      "publication_date": "2015-11-24",
+      "raw_path": "etl/data/raw/text_documents/boe_document_xml/71/80/7180548f1d9382837905f35f332e1ae24e74b9169a512c6b1c2f48f195758444.xml",
+      "source_bytes": 842548,
+      "source_content_sha256": "7180548f1d9382837905f35f332e1ae24e74b9169a512c6b1c2f48f195758444",
+      "source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2015-12734",
+      "title": "Candidaturas proclamadas para las elecciones al Congreso de los Diputados y al Senado, convocadas por Real Decreto 977/2015, de 26 de octubre.",
+      "totals": {
+        "candidacies": 1282,
+        "candidates": 10498,
+        "not_proclaimed_candidacies": 31,
+        "suplente": 4668,
+        "titular": 5830
+      }
+    },
+    {
+      "checks": {
+        "all_correction_paragraphs_retained_exactly": true,
+        "all_official_correction_documents_captured": true,
+        "candidacy_count_matches_exact_contract": true,
+        "candidacy_ids_unique": true,
+        "candidate_count_matches_exact_contract": true,
+        "candidate_names_nonempty": true,
+        "candidate_occurrence_ids_unique": true,
+        "database_candidacies_reconcile": true,
+        "database_candidates_reconcile": true,
+        "database_exact_source_text_complete": true,
+        "database_source_record_lineage_complete": true,
+        "document_profile_matches_contract": true,
+        "exact_source_paragraphs_retained": true,
+        "not_proclaimed_count_matches_exact_contract": true,
+        "suplente_count_matches_exact_contract": true,
+        "titular_count_matches_exact_contract": true
+      },
+      "contract": {
+        "additional_correction_refs": [],
+        "election_date": "2016-06-26",
+        "election_id": "general-cortes-2016-06-26",
+        "election_type_code": "general_cortes",
+        "expected_candidacies": 1165,
+        "expected_candidates": 9258,
+        "expected_not_proclaimed": 39,
+        "expected_suplente": 4124,
+        "expected_titular": 5134
+      },
+      "correction_documents": [
+        {
+          "document_id": "BOE-A-2016-5626",
+          "raw_path": "etl/data/raw/text_documents/boe_document_xml/6d/bf/6dbf35b4670c7d45892d7219c61841296893fd1084bc2653e440bd416792e61b.xml",
+          "source_bytes": 6772,
+          "source_content_sha256": "6dbf35b4670c7d45892d7219c61841296893fd1084bc2653e440bd416792e61b",
+          "source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2016-5626"
+        }
+      ],
+      "correction_evidence": [
+        {
+          "application_state": "captured_unapplied",
+          "base_document_refs": [
+            "BOE-A-2016-5186"
+          ],
+          "document_id": "BOE-A-2016-5626",
+          "exact_paragraph_text_retained": true,
+          "paragraphs": 34,
+          "publication_date": "2016-06-08",
+          "raw_path": "etl/data/raw/text_documents/boe_document_xml/6d/bf/6dbf35b4670c7d45892d7219c61841296893fd1084bc2653e440bd416792e61b.xml",
+          "relation_basis": "official_metadata",
+          "source_bytes": 6772,
+          "source_content_sha256": "6dbf35b4670c7d45892d7219c61841296893fd1084bc2653e440bd416792e61b",
+          "source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2016-5626",
+          "title": "Correcci\u00f3n de errores de las candidaturas proclamadas para las elecciones al Congreso de los Diputados y al Senado, convocadas por Real Decreto 184/2016, de 3 de mayo."
+        }
+      ],
+      "correction_refs": [
+        "BOE-A-2016-5626"
+      ],
+      "correction_state": "pending",
+      "document_id": "BOE-A-2016-5186",
+      "profile": "general_election",
+      "publication_date": "2016-05-31",
+      "raw_path": "etl/data/raw/text_documents/boe_document_xml/49/54/4954d0839242991978a4c75b944ac2db0619102d4195cad0e7b95de9908049cf.xml",
+      "source_bytes": 1227433,
+      "source_content_sha256": "4954d0839242991978a4c75b944ac2db0619102d4195cad0e7b95de9908049cf",
+      "source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2016-5186",
+      "title": "Candidaturas proclamadas para las elecciones al Congreso de los Diputados y al Senado, convocadas por Real Decreto 184/2016, de 3 de mayo.",
+      "totals": {
+        "candidacies": 1165,
+        "candidates": 9258,
+        "not_proclaimed_candidacies": 39,
+        "suplente": 4124,
+        "titular": 5134
+      }
+    },
+    {
+      "checks": {
+        "all_correction_paragraphs_retained_exactly": true,
+        "all_official_correction_documents_captured": true,
+        "candidacy_count_matches_exact_contract": true,
+        "candidacy_ids_unique": true,
+        "candidate_count_matches_exact_contract": true,
+        "candidate_names_nonempty": true,
+        "candidate_occurrence_ids_unique": true,
+        "database_candidacies_reconcile": true,
+        "database_candidates_reconcile": true,
+        "database_exact_source_text_complete": true,
+        "database_source_record_lineage_complete": true,
+        "document_profile_matches_contract": true,
+        "exact_source_paragraphs_retained": true,
+        "not_proclaimed_count_matches_exact_contract": true,
+        "suplente_count_matches_exact_contract": true,
+        "titular_count_matches_exact_contract": true
+      },
+      "contract": {
+        "additional_correction_refs": [],
+        "election_date": "2019-04-28",
+        "election_id": "general-cortes-2019-04-28",
+        "election_type_code": "general_cortes",
+        "expected_candidacies": 1234,
+        "expected_candidates": 9578,
+        "expected_not_proclaimed": 49,
+        "expected_suplente": 4153,
+        "expected_titular": 5425
+      },
+      "correction_documents": [
+        {
+          "document_id": "BOE-A-2019-4948",
+          "raw_path": "etl/data/raw/text_documents/boe_document_xml/71/ee/71eecd9944dd41bffe6522265050950690c201fce0a33497913669e4fe7ff31e.xml",
+          "source_bytes": 9216,
+          "source_content_sha256": "71eecd9944dd41bffe6522265050950690c201fce0a33497913669e4fe7ff31e",
+          "source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2019-4948"
+        },
+        {
+          "document_id": "BOE-A-2019-5083",
+          "raw_path": "etl/data/raw/text_documents/boe_document_xml/d4/02/d4022b4d5f3af7f9b1a8cb38edf2c1964e2b95aafa9d7605a79e6075a2e5594d.xml",
+          "source_bytes": 22538,
+          "source_content_sha256": "d4022b4d5f3af7f9b1a8cb38edf2c1964e2b95aafa9d7605a79e6075a2e5594d",
+          "source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2019-5083"
+        },
+        {
+          "document_id": "BOE-A-2019-5322",
+          "raw_path": "etl/data/raw/text_documents/boe_document_xml/01/f0/01f051b4001cf0dc915bbd84ef6ac56fd7bb5ce5b69298d1f5fa74016ee2270d.xml",
+          "source_bytes": 2872,
+          "source_content_sha256": "01f051b4001cf0dc915bbd84ef6ac56fd7bb5ce5b69298d1f5fa74016ee2270d",
+          "source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2019-5322"
+        }
+      ],
+      "correction_evidence": [
+        {
+          "application_state": "captured_unapplied",
+          "base_document_refs": [
+            "BOE-A-2019-4902"
+          ],
+          "document_id": "BOE-A-2019-4948",
+          "exact_paragraph_text_retained": true,
+          "paragraphs": 65,
+          "publication_date": "2019-04-03",
+          "raw_path": "etl/data/raw/text_documents/boe_document_xml/71/ee/71eecd9944dd41bffe6522265050950690c201fce0a33497913669e4fe7ff31e.xml",
+          "relation_basis": "official_metadata",
+          "source_bytes": 9216,
+          "source_content_sha256": "71eecd9944dd41bffe6522265050950690c201fce0a33497913669e4fe7ff31e",
+          "source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2019-4948",
+          "title": "Correcci\u00f3n de errores de las candidaturas proclamadas para las elecciones al Congreso de los Diputados y al Senado, convocadas por Real Decreto 129/2019, de 4 de marzo."
+        },
+        {
+          "application_state": "captured_unapplied",
+          "base_document_refs": [
+            "BOE-A-2019-4902"
+          ],
+          "document_id": "BOE-A-2019-5083",
+          "exact_paragraph_text_retained": true,
+          "paragraphs": 201,
+          "publication_date": "2019-04-05",
+          "raw_path": "etl/data/raw/text_documents/boe_document_xml/d4/02/d4022b4d5f3af7f9b1a8cb38edf2c1964e2b95aafa9d7605a79e6075a2e5594d.xml",
+          "relation_basis": "official_metadata",
+          "source_bytes": 22538,
+          "source_content_sha256": "d4022b4d5f3af7f9b1a8cb38edf2c1964e2b95aafa9d7605a79e6075a2e5594d",
+          "source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2019-5083",
+          "title": "Correcci\u00f3n de errores de las candidaturas proclamadas para las elecciones al Congreso de los Diputados y al Senado, convocadas por Real Decreto 129/2019, de 4 de marzo."
+        },
+        {
+          "application_state": "captured_unapplied",
+          "base_document_refs": [
+            "BOE-A-2019-4902"
+          ],
+          "document_id": "BOE-A-2019-5322",
+          "exact_paragraph_text_retained": true,
+          "paragraphs": 12,
+          "publication_date": "2019-04-09",
+          "raw_path": "etl/data/raw/text_documents/boe_document_xml/01/f0/01f051b4001cf0dc915bbd84ef6ac56fd7bb5ce5b69298d1f5fa74016ee2270d.xml",
+          "relation_basis": "official_metadata",
+          "source_bytes": 2872,
+          "source_content_sha256": "01f051b4001cf0dc915bbd84ef6ac56fd7bb5ce5b69298d1f5fa74016ee2270d",
+          "source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2019-5322",
+          "title": "Correcci\u00f3n de errores de las candidaturas proclamadas para las elecciones al Congreso de los Diputados y al Senado, convocadas por Real Decreto 129/2019, de 4 de marzo."
+        }
+      ],
+      "correction_refs": [
+        "BOE-A-2019-4948",
+        "BOE-A-2019-5083",
+        "BOE-A-2019-5322"
+      ],
+      "correction_state": "pending",
+      "document_id": "BOE-A-2019-4902",
+      "profile": "general_election",
+      "publication_date": "2019-04-02",
+      "raw_path": "etl/data/raw/text_documents/boe_document_xml/c9/4f/c94f370dc9e4af5ee470215af962012426bcac0c69386773de7e80ce02ec26da.xml",
+      "source_bytes": 1267319,
+      "source_content_sha256": "c94f370dc9e4af5ee470215af962012426bcac0c69386773de7e80ce02ec26da",
+      "source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2019-4902",
+      "title": "Candidaturas proclamadas para las elecciones al Congreso de los Diputados y al Senado, convocadas por Real Decreto 129/2019, de 4 de marzo.",
+      "totals": {
+        "candidacies": 1234,
+        "candidates": 9578,
+        "not_proclaimed_candidacies": 49,
+        "suplente": 4153,
+        "titular": 5425
+      }
+    },
+    {
+      "checks": {
+        "all_correction_paragraphs_retained_exactly": true,
+        "all_official_correction_documents_captured": true,
+        "candidacy_count_matches_exact_contract": true,
+        "candidacy_ids_unique": true,
+        "candidate_count_matches_exact_contract": true,
+        "candidate_names_nonempty": true,
+        "candidate_occurrence_ids_unique": true,
+        "database_candidacies_reconcile": true,
+        "database_candidates_reconcile": true,
+        "database_exact_source_text_complete": true,
+        "database_source_record_lineage_complete": true,
+        "document_profile_matches_contract": true,
+        "exact_source_paragraphs_retained": true,
+        "not_proclaimed_count_matches_exact_contract": true,
+        "suplente_count_matches_exact_contract": true,
+        "titular_count_matches_exact_contract": true
+      },
+      "contract": {
+        "additional_correction_refs": [],
+        "election_date": "2019-05-26",
+        "election_id": "european-parliament-2019-05-26",
+        "election_type_code": "european_parliament",
+        "expected_candidacies": 32,
+        "expected_candidates": 1907,
+        "expected_not_proclaimed": 0,
+        "expected_suplente": 179,
+        "expected_titular": 1728
+      },
+      "correction_documents": [
+        {
+          "document_id": "BOE-A-2019-6984",
+          "raw_path": "etl/data/raw/text_documents/boe_document_xml/c0/44/c044f31baabadc0d37511a8d3a6f66b59d8fbf2811815afbd71380c149728257.xml",
+          "source_bytes": 49048,
+          "source_content_sha256": "c044f31baabadc0d37511a8d3a6f66b59d8fbf2811815afbd71380c149728257",
+          "source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2019-6984"
+        }
+      ],
+      "correction_evidence": [
+        {
+          "application_state": "captured_unapplied",
+          "base_document_refs": [
+            "BOE-A-2019-6475"
+          ],
+          "document_id": "BOE-A-2019-6984",
+          "exact_paragraph_text_retained": true,
+          "paragraphs": 416,
+          "publication_date": "2019-05-10",
+          "raw_path": "etl/data/raw/text_documents/boe_document_xml/c0/44/c044f31baabadc0d37511a8d3a6f66b59d8fbf2811815afbd71380c149728257.xml",
+          "relation_basis": "official_metadata",
+          "source_bytes": 49048,
+          "source_content_sha256": "c044f31baabadc0d37511a8d3a6f66b59d8fbf2811815afbd71380c149728257",
+          "source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2019-6984",
+          "title": "Resoluci\u00f3n de 9 de mayo de 2019, de la Presidencia de la Junta Electoral Central, por la que se corrigen errores en la de 29 de abril de 2019, de proclamaci\u00f3n de candidaturas a las elecciones de diputados al Parlamento Europeo convocadas por Real Decreto 206/2019, de 1 de abril, a celebrar el 26 de mayo de 2019, y se da cumplimiento a las Sentencias de 6 de mayo de 2019 dictadas por Juzgados de lo Contencioso-Administrativo de Madrid."
+        }
+      ],
+      "correction_refs": [
+        "BOE-A-2019-6984"
+      ],
+      "correction_state": "pending",
+      "document_id": "BOE-A-2019-6475",
+      "profile": "european_parliament",
+      "publication_date": "2019-04-30",
+      "raw_path": "etl/data/raw/text_documents/boe_document_xml/da/33/da3356b29fdf2fa094f7e2c4acd070c65d100ec58cb4d3444ce6c391fb08a00a.xml",
+      "source_bytes": 285719,
+      "source_content_sha256": "da3356b29fdf2fa094f7e2c4acd070c65d100ec58cb4d3444ce6c391fb08a00a",
+      "source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2019-6475",
+      "title": "Resoluci\u00f3n de 29 de abril de 2019, de la Presidencia de la Junta Electoral Central, de proclamaci\u00f3n de candidaturas a las elecciones de diputados al Parlamento Europeo convocadas por Real Decreto 206/2019, de 1 de abril, a celebrar el 26 de mayo de 2019.",
+      "totals": {
+        "candidacies": 32,
+        "candidates": 1907,
+        "not_proclaimed_candidacies": 0,
+        "suplente": 179,
+        "titular": 1728
+      }
+    },
+    {
+      "checks": {
+        "all_correction_paragraphs_retained_exactly": true,
+        "all_official_correction_documents_captured": true,
+        "candidacy_count_matches_exact_contract": true,
+        "candidacy_ids_unique": true,
+        "candidate_count_matches_exact_contract": true,
+        "candidate_names_nonempty": true,
+        "candidate_occurrence_ids_unique": true,
+        "database_candidacies_reconcile": true,
+        "database_candidates_reconcile": true,
+        "database_exact_source_text_complete": true,
+        "database_source_record_lineage_complete": true,
+        "document_profile_matches_contract": true,
+        "exact_source_paragraphs_retained": true,
+        "not_proclaimed_count_matches_exact_contract": true,
+        "suplente_count_matches_exact_contract": true,
+        "titular_count_matches_exact_contract": true
+      },
+      "contract": {
+        "additional_correction_refs": [],
+        "election_date": "2023-07-23",
+        "election_id": "general-cortes-2023-07-23",
+        "election_type_code": "general_cortes",
+        "expected_candidacies": 1154,
+        "expected_candidates": 8548,
+        "expected_not_proclaimed": 66,
+        "expected_suplente": 3662,
+        "expected_titular": 4886
+      },
+      "correction_documents": [
+        {
+          "document_id": "BOE-A-2023-15548",
+          "raw_path": "etl/data/raw/text_documents/boe_document_xml/d1/2f/d12f14ff69a8573c3a1afcd2f8c20791b842a24c9b91752bdd68c3a1fbaff8d5.xml",
+          "source_bytes": 5285,
+          "source_content_sha256": "d12f14ff69a8573c3a1afcd2f8c20791b842a24c9b91752bdd68c3a1fbaff8d5",
+          "source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2023-15548"
+        },
+        {
+          "document_id": "BOE-A-2023-15828",
+          "raw_path": "etl/data/raw/text_documents/boe_document_xml/4e/8b/4e8bc5226c167bca77b4c7ee84ffb6dc56b046d4f32c37d32db4e291a996640f.xml",
+          "source_bytes": 3843,
+          "source_content_sha256": "4e8bc5226c167bca77b4c7ee84ffb6dc56b046d4f32c37d32db4e291a996640f",
+          "source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2023-15828"
+        }
+      ],
+      "correction_evidence": [
+        {
+          "application_state": "applied",
+          "base_document_refs": [
+            "BOE-A-2023-15066"
+          ],
+          "document_id": "BOE-A-2023-15548",
+          "exact_paragraph_text_retained": true,
+          "paragraphs": 46,
+          "publication_date": "2023-07-04",
+          "raw_path": "etl/data/raw/text_documents/boe_document_xml/d1/2f/d12f14ff69a8573c3a1afcd2f8c20791b842a24c9b91752bdd68c3a1fbaff8d5.xml",
+          "relation_basis": "official_metadata",
+          "source_bytes": 5285,
+          "source_content_sha256": "d12f14ff69a8573c3a1afcd2f8c20791b842a24c9b91752bdd68c3a1fbaff8d5",
+          "source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2023-15548",
+          "title": "Correcci\u00f3n de errores de las candidaturas proclamadas para las elecciones al Congreso de los Diputados y al Senado, convocadas por Real Decreto 400/2023, de 29 de mayo."
+        },
+        {
+          "application_state": "applied",
+          "base_document_refs": [
+            "BOE-A-2023-15066"
+          ],
+          "document_id": "BOE-A-2023-15828",
+          "exact_paragraph_text_retained": true,
+          "paragraphs": 25,
+          "publication_date": "2023-07-07",
+          "raw_path": "etl/data/raw/text_documents/boe_document_xml/4e/8b/4e8bc5226c167bca77b4c7ee84ffb6dc56b046d4f32c37d32db4e291a996640f.xml",
+          "relation_basis": "official_metadata",
+          "source_bytes": 3843,
+          "source_content_sha256": "4e8bc5226c167bca77b4c7ee84ffb6dc56b046d4f32c37d32db4e291a996640f",
+          "source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2023-15828",
+          "title": "Correcci\u00f3n de errores de las candidaturas proclamadas para las elecciones al Congreso de los Diputados y al Senado, convocadas por Real Decreto 400/2023, de 29 de mayo."
+        }
+      ],
+      "correction_refs": [
+        "BOE-A-2023-15548",
+        "BOE-A-2023-15828"
+      ],
+      "correction_state": "applied",
+      "document_id": "BOE-A-2023-15066",
+      "profile": "general_election",
+      "publication_date": "2023-06-27",
+      "raw_path": "etl/data/raw/text_documents/boe_document_xml/0f/bc/0fbc2de13c0f2ae9707c631828687657b62142523d7054f42e6b116a6a647d84.xml",
+      "source_bytes": 1220958,
+      "source_content_sha256": "0fbc2de13c0f2ae9707c631828687657b62142523d7054f42e6b116a6a647d84",
+      "source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2023-15066",
+      "title": "Candidaturas proclamadas para la elecciones al Congreso de los Diputados y al Senado, convocadas por Real Decreto 400/2023, de 29 de mayo.",
+      "totals": {
+        "candidacies": 1154,
+        "candidates": 8548,
+        "not_proclaimed_candidacies": 66,
+        "suplente": 3662,
+        "titular": 4886
+      }
+    },
+    {
+      "checks": {
+        "all_correction_paragraphs_retained_exactly": true,
+        "all_official_correction_documents_captured": true,
+        "candidacy_count_matches_exact_contract": true,
+        "candidacy_ids_unique": true,
+        "candidate_count_matches_exact_contract": true,
+        "candidate_names_nonempty": true,
+        "candidate_occurrence_ids_unique": true,
+        "database_candidacies_reconcile": true,
+        "database_candidates_reconcile": true,
+        "database_exact_source_text_complete": true,
+        "database_source_record_lineage_complete": true,
+        "document_profile_matches_contract": true,
+        "exact_source_paragraphs_retained": true,
+        "not_proclaimed_count_matches_exact_contract": true,
+        "suplente_count_matches_exact_contract": true,
+        "titular_count_matches_exact_contract": true
+      },
+      "contract": {
+        "additional_correction_refs": [],
+        "election_date": "2024-06-09",
+        "election_id": "european-parliament-2024-06-09",
+        "election_type_code": "european_parliament",
+        "expected_candidacies": 33,
+        "expected_candidates": 2206,
+        "expected_not_proclaimed": 0,
+        "expected_suplente": 193,
+        "expected_titular": 2013
+      },
+      "correction_documents": [
+        {
+          "document_id": "BOE-A-2024-10569",
+          "raw_path": "etl/data/raw/text_documents/boe_document_xml/89/7f/897f130a66de54db2d07eb1e0b8576af0838c4922da2f7191a2c7976df5061dc.xml",
+          "source_bytes": 11156,
+          "source_content_sha256": "897f130a66de54db2d07eb1e0b8576af0838c4922da2f7191a2c7976df5061dc",
+          "source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2024-10569"
+        }
+      ],
+      "correction_evidence": [
+        {
+          "application_state": "applied",
+          "base_document_refs": [
+            "BOE-A-2024-9687"
+          ],
+          "document_id": "BOE-A-2024-10569",
+          "exact_paragraph_text_retained": true,
+          "paragraphs": 109,
+          "publication_date": "2024-05-25",
+          "raw_path": "etl/data/raw/text_documents/boe_document_xml/89/7f/897f130a66de54db2d07eb1e0b8576af0838c4922da2f7191a2c7976df5061dc.xml",
+          "relation_basis": "official_metadata",
+          "source_bytes": 11156,
+          "source_content_sha256": "897f130a66de54db2d07eb1e0b8576af0838c4922da2f7191a2c7976df5061dc",
+          "source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2024-10569",
+          "title": "Resoluci\u00f3n de 23 de mayo de 2024, de la Presidencia de la Junta Electoral Central, por la que se corrigen errores en la de 13 de mayo de 2024, de proclamaci\u00f3n de candidaturas a las elecciones de diputados y diputadas al Parlamento Europeo, convocadas por Real Decreto 363/2024, de 9 de abril, a celebrar el 9 de junio de 2024."
+        }
+      ],
+      "correction_refs": [
+        "BOE-A-2024-10569"
+      ],
+      "correction_state": "applied",
+      "document_id": "BOE-A-2024-9687",
+      "profile": "european_parliament",
+      "publication_date": "2024-05-14",
+      "raw_path": "etl/data/raw/text_documents/boe_document_xml/76/ce/76ce3855a65f55a760509fa7d1ae63e895703f7e2151345256d295aeb83da23f.xml",
+      "source_bytes": 171479,
+      "source_content_sha256": "76ce3855a65f55a760509fa7d1ae63e895703f7e2151345256d295aeb83da23f",
+      "source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2024-9687",
+      "title": "Resoluci\u00f3n de 13 de mayo de 2024, de la Presidencia de la Junta Electoral Central, de proclamaci\u00f3n de candidaturas a las elecciones de diputados y diputadas al Parlamento Europeo, convocadas por Real Decreto 363/2024, de 9 de abril, a celebrar el 9 de junio de 2024.",
+      "totals": {
+        "candidacies": 33,
+        "candidates": 2206,
+        "not_proclaimed_candidacies": 0,
+        "suplente": 193,
+        "titular": 2013
+      }
+    },
+    {
+      "checks": {
+        "all_correction_paragraphs_retained_exactly": true,
+        "all_official_correction_documents_captured": true,
+        "candidacy_count_matches_exact_contract": true,
+        "candidacy_ids_unique": true,
+        "candidate_count_matches_exact_contract": true,
+        "candidate_names_nonempty": true,
+        "candidate_occurrence_ids_unique": true,
+        "database_candidacies_reconcile": true,
+        "database_candidates_reconcile": true,
+        "database_exact_source_text_complete": true,
+        "database_source_record_lineage_complete": true,
+        "document_profile_matches_contract": true,
+        "exact_source_paragraphs_retained": true,
+        "not_proclaimed_count_matches_exact_contract": true,
+        "suplente_count_matches_exact_contract": true,
+        "titular_count_matches_exact_contract": true
+      },
+      "contract": {
+        "additional_correction_refs": [
+          "BOE-A-2024-10569"
+        ],
+        "election_date": "2024-06-09",
+        "election_id": "european-parliament-2024-06-09",
+        "election_type_code": "european_parliament",
+        "expected_candidacies": 1,
+        "expected_candidates": 61,
+        "expected_not_proclaimed": 0,
+        "expected_suplente": 0,
+        "expected_titular": 61
+      },
+      "correction_documents": [
+        {
+          "document_id": "BOE-A-2024-10569",
+          "raw_path": "etl/data/raw/text_documents/boe_document_xml/89/7f/897f130a66de54db2d07eb1e0b8576af0838c4922da2f7191a2c7976df5061dc.xml",
+          "source_bytes": 11156,
+          "source_content_sha256": "897f130a66de54db2d07eb1e0b8576af0838c4922da2f7191a2c7976df5061dc",
+          "source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2024-10569"
+        }
+      ],
+      "correction_evidence": [
+        {
+          "application_state": "applied",
+          "base_document_refs": [
+            "BOE-A-2024-9687"
+          ],
+          "document_id": "BOE-A-2024-10569",
+          "exact_paragraph_text_retained": true,
+          "paragraphs": 109,
+          "publication_date": "2024-05-25",
+          "raw_path": "etl/data/raw/text_documents/boe_document_xml/89/7f/897f130a66de54db2d07eb1e0b8576af0838c4922da2f7191a2c7976df5061dc.xml",
+          "relation_basis": "correction_body_scope",
+          "source_bytes": 11156,
+          "source_content_sha256": "897f130a66de54db2d07eb1e0b8576af0838c4922da2f7191a2c7976df5061dc",
+          "source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2024-10569",
+          "title": "Resoluci\u00f3n de 23 de mayo de 2024, de la Presidencia de la Junta Electoral Central, por la que se corrigen errores en la de 13 de mayo de 2024, de proclamaci\u00f3n de candidaturas a las elecciones de diputados y diputadas al Parlamento Europeo, convocadas por Real Decreto 363/2024, de 9 de abril, a celebrar el 9 de junio de 2024."
+        }
+      ],
+      "correction_refs": [
+        "BOE-A-2024-10569"
+      ],
+      "correction_state": "applied",
+      "document_id": "BOE-A-2024-10230",
+      "profile": "european_parliament",
+      "publication_date": "2024-05-21",
+      "raw_path": "etl/data/raw/text_documents/boe_document_xml/dc/b9/dcb9a2060927227c420dabe03be309106b1ccf33b6b451d2f7cc66fae106f814.xml",
+      "source_bytes": 6591,
+      "source_content_sha256": "dcb9a2060927227c420dabe03be309106b1ccf33b6b451d2f7cc66fae106f814",
+      "source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2024-10230",
+      "title": "Resoluci\u00f3n de 20 de mayo de 2024, de la Presidencia de la Junta Electoral Central, en ejecuci\u00f3n de sentencia del Juzgado de lo Contencioso-Administrativo n.\u00ba 17 de Madrid, estimatoria del recurso contencioso-electoral interpuesto por el partido pol\u00edtico SALAMANCA-ZAMORA-LE\u00d3N PREPAL por la denegaci\u00f3n de la proclamaci\u00f3n de su candidatura en las elecciones al Parlamento Europeo de 9 de junio de 2024, convocadas por Real Decreto 363/2024, de 9 de abril.",
+      "totals": {
+        "candidacies": 1,
+        "candidates": 61,
+        "not_proclaimed_candidacies": 0,
+        "suplente": 0,
+        "titular": 61
+      }
+    }
+  ],
+  "parser_version": "boe_election_candidates_v2",
+  "performance": {
+    "candidates_per_second": 6839.914262,
+    "cpu_seconds": 5.893672,
+    "elapsed_seconds": 6.148615,
+    "peak_rss_bytes": 67731456
+  },
+  "policy": {
+    "cross_source_person_identity_inferred": false,
+    "identity_fields_removed": 0,
+    "official_corrections_explicit": true,
+    "official_public_domain_personal_information_retained": true,
+    "pending_official_corrections_explicit": true,
+    "remote_mutation_performed": false,
+    "synthetic_or_mock_records_counted": false
+  },
+  "schema_version": "boe_election_candidates_run_v1",
+  "snapshot_date": "2026-08-13",
+  "source_id": "boe_election_candidates",
+  "status": "ok",
+  "totals": {
+    "candidacies": 4901,
+    "candidates": 42056,
+    "correction_paragraphs": 956,
+    "correction_target_relations": 12,
+    "corrections_applied": 3,
+    "distinct_correction_documents": 11,
+    "documents": 7,
+    "not_proclaimed_candidacies": 185,
+    "suplente": 16979,
+    "titular": 25077
+  }
+}

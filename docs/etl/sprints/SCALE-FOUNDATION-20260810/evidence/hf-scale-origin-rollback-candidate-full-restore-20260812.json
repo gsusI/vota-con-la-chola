@@ -1,0 +1,33 @@
+{
+  "artifact_contract_sha256": "bb99c119b911653c835dcf5dbd4b3f247e959b47309905cb2163b8b51cb46c2c",
+  "bytes": 504093303,
+  "dataset_repo": "JesusIC/vota-con-la-chola-data",
+  "downloaded_bytes": 504093303,
+  "downloaded_files": 8619,
+  "elapsed_seconds": 1199.614233,
+  "errors": [],
+  "files": 8619,
+  "manifest_sha256": "623b4a5ad78fae7536117d0fb64c5d99c331e1d0728a8ff98f9783c0dfc36b06",
+  "preflight": {
+    "bytes": 504093303,
+    "files": 8619,
+    "free_bytes": 43315437568,
+    "headroom_bytes": 41737602441,
+    "minimum_free_after_restore_bytes": 1073741824,
+    "missing_bytes": 504093303,
+    "missing_files": 8619,
+    "required_bytes": 1577835127,
+    "reusable_bytes": 0,
+    "reusable_files": 0,
+    "status": "ok"
+  },
+  "public_domain_personal_information_retained": true,
+  "reused_bytes": 0,
+  "reused_files": 0,
+  "schema_version": "real-scale-origin-restore-v1",
+  "selected_corpus_ids": [],
+  "selection_mode": "explicit_immutable_snapshot",
+  "snapshot_date": "2026-08-12",
+  "snapshot_path": "scale/snapshots/2026-08-12/623b4a5ad78fae7536117d0fb64c5d99c331e1d0728a8ff98f9783c0dfc36b06",
+  "status": "restored_checksums_verified"
+}

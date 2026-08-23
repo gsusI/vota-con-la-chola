@@ -1,0 +1,37 @@
+{
+  "failure_class_counts": {},
+  "failure_samples": [],
+  "opened_circuits": [],
+  "opened_hosts": [],
+  "per_host_workers": 8,
+  "pipeline_id": "boe_document_fetch",
+  "queue": {
+    "items_total": 88980,
+    "pipeline_id": "boe_document_fetch",
+    "state_counts": {
+      "dead": 0,
+      "leased": 24,
+      "pending": 0,
+      "succeeded": 88956
+    },
+    "terminal_total": 88956,
+    "unfinished_total": 24
+  },
+  "schema_version": "document_fetch_queue_run_v1",
+  "status": "ok",
+  "storage": {
+    "blocked": false,
+    "free_bytes": 42266238976,
+    "inflight_reserve_bytes": 1073741824,
+    "min_free_bytes": 10737418240,
+    "required_free_bytes": 11811160064
+  },
+  "totals": {
+    "claimed": 34560,
+    "dead": 0,
+    "retried": 0,
+    "succeeded": 34560
+  },
+  "worker_id": "boe-document-worker",
+  "workers": 16
+}

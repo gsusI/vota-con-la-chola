@@ -9,6 +9,8 @@ import unittest
 from pathlib import Path
 
 from scripts.publicar_hf_snapshot import (
+    DEFAULT_PARQUET_EXCLUDE_TABLES,
+    audit_public_source_records_for_publish,
     build_dataset_readme,
     build_explorer_schema_payload,
     collect_published_files,
@@ -25,6 +27,53 @@ from scripts.publicar_hf_snapshot import (
 
 
 class PublicarHFSnapshotTests(unittest.TestCase):
+    def test_public_source_records_are_not_excluded_by_default(self) -> None:
+        self.assertNotIn("source_records", DEFAULT_PARQUET_EXCLUDE_TABLES)
+        self.assertEqual(
+            set(DEFAULT_PARQUET_EXCLUDE_TABLES),
+            {"raw_fetches", "run_fetches", "lost_and_found"},
+        )
+
+    def test_public_source_record_audit_retains_raw_identity_payload(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            db_path = Path(tmp) / "source.db"
+            conn = sqlite3.connect(db_path)
+            try:
+                conn.executescript(
+                    """
+                    CREATE TABLE sources (source_id TEXT PRIMARY KEY, default_url TEXT);
+                    CREATE TABLE source_records (
+                      source_record_pk INTEGER PRIMARY KEY,
+                      source_id TEXT NOT NULL,
+                      source_record_id TEXT NOT NULL,
+                      raw_payload TEXT NOT NULL,
+                      content_sha256 TEXT NOT NULL
+                    );
+                    """
+                )
+                conn.execute(
+                    "INSERT INTO sources VALUES (?, ?)",
+                    ("official_people", "https://datos.gob.es/people"),
+                )
+                conn.execute(
+                    "INSERT INTO source_records VALUES (?, ?, ?, ?, ?)",
+                    (
+                        1,
+                        "official_people",
+                        "person-1",
+                        '{"full_name":"Persona Pública","dni":"12345678Z"}',
+                        "a" * 64,
+                    ),
+                )
+                conn.commit()
+            finally:
+                conn.close()
+            report = audit_public_source_records_for_publish(db_path)
+            self.assertEqual(report["rows"], 1)
+            self.assertTrue(report["raw_payload_published_exactly"])
+            self.assertTrue(report["public_domain_personal_information_retained"])
+            self.assertEqual(report["identity_fields_removed"], 0)
+
     def test_load_dotenv_parses_values(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             env_path = Path(tmp) / ".env"

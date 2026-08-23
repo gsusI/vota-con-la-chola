@@ -2,6 +2,11 @@
 .github
 .obsidian
 .wrangler
+.cache
+.local
+.pytest_cache
+.ruff_cache
+.trash
 .env
 .env.*
 __pycache__
@@ -12,8 +17,11 @@ __pycache__
 .scale-origin-*
 .playwright-cli
 output
+outputs
+tmp
 vota_publicdata_libs.egg-info
 .DS_Store
+/*.db
 docs/etl/runs
 docs/etl/sprints
 docs/gh-pages

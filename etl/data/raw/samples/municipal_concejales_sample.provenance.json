@@ -1,0 +1,11 @@
+{
+  "captured_at": "2026-02-12T12:07:21+00:00",
+  "derivation": "exact public rows selected without identity redaction from the official XLSX capture and serialized as CSV for the deterministic fallback parser",
+  "official_capture_bytes": 2834537,
+  "official_capture_path": "etl/data/raw/municipal_concejales/2026/02/12/municipal_concejales_20260212T120801Z.xlsx",
+  "official_capture_sha256": "826e6e93555f673d1f57f7570932c83f84382c8fbe4564b0890f4b37c8122982",
+  "official_url": "https://concejales.redsara.es/consulta/getConcejalesLegislatura",
+  "public_domain_personal_information_retained": true,
+  "rights_basis": "official public local-government endpoint",
+  "synthetic_or_mock": false
+}

@@ -1,0 +1,57 @@
+{
+  "checks": {
+    "public_output_contains_no_workstation_paths_or_secrets": true,
+    "source_contracts_valid": true,
+    "storage_arithmetic_reconciled": true
+  },
+  "generated_at": "2026-08-12T20:42:22.046784Z",
+  "lanes": [
+    {
+      "additional_bytes_required": 5177384960,
+      "evidence": {
+        "bytes": 819,
+        "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/bdns-concessions-partitioned-real-s3-storage-preflight-20260812.json",
+        "schema_version": "bdns_worker_storage_preflight_v1",
+        "sha256": "10dfab5db9a975196e71d0fe5225723885771c4122cfa29c3fc37f27d87e7413"
+      },
+      "free_bytes": 5685862400,
+      "headroom_bytes": -5177384960,
+      "id": "bdns_history",
+      "minimum_free_after_work_bytes": 10737418240,
+      "required_free_bytes": 10863247360,
+      "status": "blocked_storage",
+      "work_reserve_bytes": 125829120
+    },
+    {
+      "additional_bytes_required": 66776911872,
+      "evidence": {
+        "bytes": 3289,
+        "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/placsp-official-history-storage-preflight-20260811.json",
+        "schema_version": "placsp_archive_worker_v2",
+        "sha256": "2a84c9272eccbf63a1307ca78ebdb3bfa41e148049b192cbfdcdd202d69b5a6e"
+      },
+      "free_bytes": 41134141440,
+      "headroom_bytes": -66776911872,
+      "id": "placsp_history",
+      "minimum_free_after_work_bytes": 107374182400,
+      "required_free_bytes": 107911053312,
+      "status": "blocked_storage",
+      "work_reserve_bytes": 536870912
+    }
+  ],
+  "next_action": "Restore the declared headroom for every blocked lane, rerun each real preflight before claim or network work, then regenerate this artifact.",
+  "policy": {
+    "credentials_and_session_state_forbidden": true,
+    "official_public_domain_personal_information_unchanged": true,
+    "real_preflight_evidence_only": true,
+    "workstation_paths_forbidden": true
+  },
+  "schema_version": "public_storage_health_v1",
+  "status": "blocked_storage",
+  "summary": {
+    "lanes_blocked_storage": 2,
+    "lanes_ready": 0,
+    "lanes_total": 2,
+    "largest_additional_bytes_required": 66776911872
+  }
+}

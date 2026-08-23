@@ -1,0 +1,217 @@
+{
+  "checks": {
+    "all_captured_correction_paragraphs_retained": true,
+    "all_corrected_people_remain_source_scoped": true,
+    "all_corrected_rows_have_immutable_effective_source_records": true,
+    "all_correction_documents_classified": true,
+    "all_effective_candidate_evidence_exact": true,
+    "all_effective_candidate_lineage_normalized": true,
+    "all_operations_materialized": true,
+    "all_reviewed_correction_documents_applied": true,
+    "captured_base_candidacies_preserved": true,
+    "captured_base_candidates_preserved": true,
+    "changed_or_new_person_links_reconcile": true,
+    "contextual_correction_paragraphs_reconcile": true,
+    "effective_candidacies_reconcile": true,
+    "effective_candidates_reconcile": true,
+    "foreign_key_check_passed": true,
+    "hybrid_base_correction_state_classified": true,
+    "operative_correction_paragraphs_reconcile": true,
+    "pending_base_documents_excluded_from_effective_state": true,
+    "quick_check_passed": true,
+    "reviewed_correction_paragraphs_reconcile": true
+  },
+  "generated_at": "2026-08-13T05:33:02.459258Z",
+  "materializer_version": "boe_candidate_correction_materializer_v3",
+  "operations": [
+    {
+      "base_document_id": "BOE-A-2023-15066",
+      "base_match_state": "before_matches",
+      "correction_document_id": "BOE-A-2023-15548",
+      "operation_id": "boe-candidate-correction-operation:8e1f5ae0be92acbb3f8f253540777decc779c309653fe26cbbe7ee0890c2cdf7",
+      "operation_order": 1,
+      "operation_type": "replace_candidacy_name"
+    },
+    {
+      "base_document_id": "BOE-A-2023-15066",
+      "base_match_state": "before_matches",
+      "correction_document_id": "BOE-A-2023-15548",
+      "operation_id": "boe-candidate-correction-operation:70c759a2da75209949444b3f2fc5730d9e9548b247a0e359e40fd8c86d0870eb",
+      "operation_order": 2,
+      "operation_type": "replace_candidate_slot"
+    },
+    {
+      "base_document_id": "BOE-A-2023-15066",
+      "base_match_state": "before_matches",
+      "correction_document_id": "BOE-A-2023-15548",
+      "operation_id": "boe-candidate-correction-operation:fd92892aa86ce02c33e2edff0c6977b951b34102c867b408ec87df11e5c66d8a",
+      "operation_order": 3,
+      "operation_type": "replace_candidate_slot"
+    },
+    {
+      "base_document_id": "BOE-A-2023-15066",
+      "base_match_state": "before_matches",
+      "correction_document_id": "BOE-A-2023-15548",
+      "operation_id": "boe-candidate-correction-operation:b0f54ff6892f05083c61c5fa76c5a320d1a48a1618167f893b7627c13e38fbec",
+      "operation_order": 4,
+      "operation_type": "replace_candidacy_name"
+    },
+    {
+      "base_document_id": "BOE-A-2023-15066",
+      "base_match_state": "before_matches",
+      "correction_document_id": "BOE-A-2023-15548",
+      "operation_id": "boe-candidate-correction-operation:82fa03ec2eab5baf691bedc6da707adcd419ee5f8131cb9654f8a5ab468d5917",
+      "operation_order": 5,
+      "operation_type": "replace_candidate_slot"
+    },
+    {
+      "base_document_id": "BOE-A-2023-15066",
+      "base_match_state": "before_matches",
+      "correction_document_id": "BOE-A-2023-15548",
+      "operation_id": "boe-candidate-correction-operation:e900f54968152a0b2f293d0d76bb006a1965d936a16dad34a9d89764bbacd85a",
+      "operation_order": 6,
+      "operation_type": "replace_candidacy_name"
+    },
+    {
+      "base_document_id": "BOE-A-2023-15066",
+      "base_match_state": "partial_base_matches",
+      "correction_document_id": "BOE-A-2023-15548",
+      "operation_id": "boe-candidate-correction-operation:a98ced18df43a62fca1a39c48ddddbadfab49b4fd39790dc03124587db2dc98a",
+      "operation_order": 7,
+      "operation_type": "replace_candidate_slot"
+    },
+    {
+      "base_document_id": "BOE-A-2023-15066",
+      "base_match_state": "replacement_scope_matches",
+      "correction_document_id": "BOE-A-2023-15828",
+      "operation_id": "boe-candidate-correction-operation:2071ca1bf2f7485c3d442fe86dd2242a8795049b227a31b8996da7962a9c6bf2",
+      "operation_order": 1,
+      "operation_type": "replace_candidacy_status_and_list",
+      "replacement_rows": 4
+    },
+    {
+      "base_document_id": "BOE-A-2023-15066",
+      "base_match_state": "replacement_scope_matches",
+      "correction_document_id": "BOE-A-2023-15828",
+      "operation_id": "boe-candidate-correction-operation:0b04b71ad048949905d448b741d64748d7379c88b4acff24d571e070223a24db",
+      "operation_order": 2,
+      "operation_type": "replace_candidacy_status_and_list",
+      "replacement_rows": 3
+    },
+    {
+      "base_document_id": "BOE-A-2024-10230",
+      "base_match_state": "before_matches",
+      "correction_document_id": "BOE-A-2024-10569",
+      "operation_id": "boe-candidate-correction-operation:b2720e0a8e4d0aff066ddb30bb7ee2947d445ac4d80774ae8b3cee5621b9ee13",
+      "operation_order": 8,
+      "operation_type": "replace_candidate_slot"
+    },
+    {
+      "base_document_id": "BOE-A-2024-9687",
+      "base_match_state": "before_matches",
+      "correction_document_id": "BOE-A-2024-10569",
+      "operation_id": "boe-candidate-correction-operation:d6174250a5a7e960f64263de469d557fb27ace69dbf676a001fcc66b373eeed2",
+      "operation_order": 1,
+      "operation_type": "replace_candidate_slot"
+    },
+    {
+      "base_document_id": "BOE-A-2024-9687",
+      "base_match_state": "before_matches",
+      "correction_document_id": "BOE-A-2024-10569",
+      "operation_id": "boe-candidate-correction-operation:ca07c189f98f49af8afb6f9b980d5e9d252d9f6b4326cc23c3ba3178b1231d66",
+      "operation_order": 2,
+      "operation_type": "replace_candidate_slot"
+    },
+    {
+      "base_document_id": "BOE-A-2024-9687",
+      "base_match_state": "before_matches",
+      "correction_document_id": "BOE-A-2024-10569",
+      "operation_id": "boe-candidate-correction-operation:6a963550ebad8d0a73d33b95178e866a7c976ced577e7f568cd27a234ce0ee2f",
+      "operation_order": 3,
+      "operation_type": "replace_candidate_slot"
+    },
+    {
+      "base_document_id": "BOE-A-2024-9687",
+      "base_match_state": "replacement_scope_matches",
+      "correction_document_id": "BOE-A-2024-10569",
+      "operation_id": "boe-candidate-correction-operation:08594700151cadabfa14d3a88ac482e6f78ddda2190bdbcbd4ecd7dda10d3a58",
+      "operation_order": 4,
+      "operation_type": "replace_candidate_list",
+      "replacement_rows": 9
+    },
+    {
+      "base_document_id": "BOE-A-2024-9687",
+      "base_match_state": "before_matches",
+      "correction_document_id": "BOE-A-2024-10569",
+      "operation_id": "boe-candidate-correction-operation:49ab79c0457107787fb23a5880d876dd2d943fbc26a6de7bb7056dd9a6550caa",
+      "operation_order": 5,
+      "operation_type": "replace_candidate_slot"
+    },
+    {
+      "base_document_id": "BOE-A-2024-9687",
+      "base_match_state": "before_matches",
+      "correction_document_id": "BOE-A-2024-10569",
+      "operation_id": "boe-candidate-correction-operation:d6d73339fe42a02d1e06e27545013b01810ca1426cf614ad22954e71d0b5f936",
+      "operation_order": 6,
+      "operation_type": "replace_candidate_slot"
+    },
+    {
+      "base_document_id": "BOE-A-2024-9687",
+      "base_match_state": "replacement_scope_matches",
+      "correction_document_id": "BOE-A-2024-10569",
+      "operation_id": "boe-candidate-correction-operation:a140aecb555437bfe0724ad8b980dc5a632e102f3dc96680f435b074b029af7b",
+      "operation_order": 7,
+      "operation_type": "replace_candidate_list",
+      "replacement_rows": 62
+    }
+  ],
+  "policy": {
+    "base_proclamation_rows_mutated": false,
+    "cross_source_person_identity_inferred": false,
+    "identity_fields_removed": 0,
+    "official_public_domain_personal_information_retained": true,
+    "pending_correction_evidence_excluded_from_effective_state": true,
+    "pending_official_corrections_explicit": true,
+    "remote_mutation_performed": false,
+    "synthetic_or_mock_records_counted": false
+  },
+  "schema_version": "boe_candidate_correction_materialization_v2",
+  "snapshot_date": "2026-08-13",
+  "status": "ok",
+  "totals": {
+    "already_effective_operations": 0,
+    "base_candidacies": 1188,
+    "base_candidates": 10815,
+    "base_exact_person_links_reused": 10795,
+    "captured_base_candidacies": 4901,
+    "captured_base_candidates": 42056,
+    "captured_base_documents": 7,
+    "changed_or_new_source_scoped_people": 25,
+    "contextual_correction_paragraphs_retained": 53,
+    "corrected_effective_candidacies": 5,
+    "corrected_effective_candidates": 88,
+    "corrected_effective_source_records": 88,
+    "correction_documents_applied": 3,
+    "correction_documents_captured": 11,
+    "correction_documents_pending_review": 8,
+    "correction_evidence_person_links": 88,
+    "correction_operations": 17,
+    "correction_paragraphs_referenced_by_operations": 127,
+    "correction_paragraphs_retained": 956,
+    "effective_candidacies": 1188,
+    "effective_candidate_delta": 5,
+    "effective_candidates": 10820,
+    "exact_effective_candidate_evidence_rows": 10820,
+    "foreign_key_violations": 0,
+    "normalized_effective_candidate_lineage_rows": 10820,
+    "partial_base_match_operations": 1,
+    "pending_base_candidacies": 3713,
+    "pending_base_candidates": 31241,
+    "pending_base_documents": 4,
+    "pending_correction_paragraphs": 776,
+    "reviewed_base_candidacies": 1188,
+    "reviewed_base_candidates": 10815,
+    "reviewed_base_documents": 3,
+    "reviewed_correction_paragraphs": 180
+  }
+}

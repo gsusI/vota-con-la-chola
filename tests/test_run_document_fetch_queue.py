@@ -2,13 +2,16 @@ from __future__ import annotations
 
 import tempfile
 import unittest
+import hashlib
 from pathlib import Path
 
+from publicdata_core.blobstore import StoredBlob
 from publicdata_ops import enqueue_work_items, ensure_work_queue_schema
 from publicdata_sqlite import open_db
 from scripts.run_document_fetch_queue import (
     HostLimiter,
     _classify_download_failure,
+    _validate_official_download,
     process_document_fetch_queue,
 )
 
@@ -154,6 +157,9 @@ class TestRunDocumentFetchQueue(unittest.TestCase):
         )
         self.assertEqual(report["status"], "ok")
         self.assertEqual(report["totals"]["succeeded"], 1)
+        self.assertEqual(report["totals"]["bytes_received"], 16)
+        self.assertGreater(report["performance"]["items_per_second"], 0)
+        self.assertGreater(report["performance"]["peak_rss_bytes"], 0)
         self.assertEqual(report["queue"]["state_counts"]["succeeded"], 1)
 
         document = self.conn.execute(
@@ -272,6 +278,60 @@ class TestRunDocumentFetchQueue(unittest.TestCase):
             _classify_download_failure(http_status=None, error="max_bytes exceeded"),
             ("oversize", False),
         )
+
+    def test_boe_document_validator_requires_embedded_exact_identifier(self) -> None:
+        path = self.root / "boe.xml"
+        payload = (
+            b'<?xml version="1.0"?><documento><metadatos><identificador>'
+            b"BOE-A-2026-123</identificador></metadatos></documento>"
+        )
+        path.write_bytes(payload)
+        stored = StoredBlob(
+            content_sha256=hashlib.sha256(payload).hexdigest(),
+            bytes=len(payload),
+            path=path,
+            content_type="application/xml",
+            etag=None,
+            last_modified=None,
+            deduplicated=False,
+        )
+        self.assertIsNone(
+            _validate_official_download(
+                url="https://www.boe.es/diario_boe/xml.php?id=BOE-A-2026-123",
+                source_id="boe_document_xml",
+                stored=stored,
+            )
+        )
+        self.assertEqual(
+            _validate_official_download(
+                url="https://www.boe.es/diario_boe/xml.php?id=BOE-A-2026-999",
+                source_id="boe_document_xml",
+                stored=stored,
+            ),
+            "boe_document_identifier_mismatch",
+        )
+
+    def test_storage_floor_blocks_before_claim(self) -> None:
+        self._queue_file(filename="official.pdf", payload=b"%PDF-1.7\ncontent")
+        report = process_document_fetch_queue(
+            self.conn,
+            raw_root=self.root / "raw",
+            pipeline_id="document_fetch",
+            worker_id="worker-storage-gate",
+            workers=2,
+            per_host_workers=1,
+            claim_size=10,
+            max_items=0,
+            lease_seconds=60,
+            timeout=5,
+            max_bytes=1_000,
+            min_free_bytes=10**20,
+            download_attempts=1,
+            retry_delay_seconds=60,
+        )
+        self.assertEqual(report["status"], "blocked_storage")
+        self.assertEqual(report["totals"]["claimed"], 0)
+        self.assertEqual(report["queue"]["state_counts"]["pending"], 1)
 
     def test_host_circuit_opens_after_repeated_hard_failures(self) -> None:
         limiter = HostLimiter(per_host_workers=2, hard_failure_threshold=2)

@@ -1,0 +1,35 @@
+{
+  "change": {
+    "added_files": 6,
+    "bytes_delta": 2172097,
+    "changed_files": 2,
+    "removed_files": 0,
+    "unchanged_files": 8617
+  },
+  "checks": {
+    "immutable_path_verified": true,
+    "live_metadata_current": true,
+    "live_origin_matches_local_contract": true,
+    "official_public_domain_personal_information_retained": true,
+    "published": true,
+    "signed": true,
+    "synthetic_or_mock_records": false,
+    "trusted_signature_verified": true
+  },
+  "errors": [],
+  "passed": true,
+  "release": {
+    "artifact_contract_sha256": "d7de5544cc277c85fb2a4ae6d1e4e2bb1867ddc35857502b73c3780834aef565",
+    "corpora": 7,
+    "data_bytes": 500714815,
+    "data_files": 8597,
+    "manifest_sha256": "5d9ce557ed864de56f677a9f82c999a4ec0dfc494c086b1bfca0bb2e461272dd",
+    "million_scale_lanes": 3,
+    "public_key_fingerprint": "SHA256:R2B1jFbkLoigmKxObr+ExlBLrKENkaUDp0C3ip0Lj7A",
+    "rows": 5414326,
+    "signer_identity": "vclc-snapshot-release-2026",
+    "snapshot_date": "2026-08-19"
+  },
+  "schema_version": "vclc_snapshot_reproducibility_validation_v1",
+  "status": "passed"
+}

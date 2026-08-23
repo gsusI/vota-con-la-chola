@@ -420,6 +420,73 @@
         "path": "etl/data/published/actor-mandate-semantic-partition-validation-latest.json",
         "sha256": "c35d1b0401d26fa1718536afa3b5ee5d8758877b68c02017467e5824cf21ef1d"
       }
+    },
+    {
+      "bytes": 2083541,
+      "files": 2,
+      "id": "candidate_occurrences",
+      "kind": "parquet_manifest",
+      "label": "Official election candidate occurrences",
+      "limitations": [
+        "The semantic artifact contains 10820 real effective BOE candidate occurrences from the reviewed 2023 general and 2024 European election cohort; it is not representative of all elections or offices.",
+        "Immutable base capture now contains 42056 exact public candidate occurrences across 4901 candidacies and seven proclamation documents covering the 2015, 2016, April 2019, May 2019, 2023 and 2024 election dates. All names and exact official source paragraphs remain present.",
+        "Eight historical correction documents with 776 exact paragraphs remain captured_unapplied. Their 31241 base candidate rows are explicitly excluded from effective output until operation mapping is reviewed. The November 2019 proclamation and corrections are captured but not ingested because one official candidacy heading lacks its required number; no identifier is inferred.",
+        "The 88 correction-backed effective rows link to immutable correction source records; the reviewed 10815 base proclamation rows and 17 correction operations remain separately reconstructable.",
+        "The BOE proclamation documents do not establish election results. is_elected remains null for every BOE row instead of being inferred.",
+        "The full two-partition artifact is published under signed immutable release bf0d156e41874729917fbd1eaee6f24c403bcf81ae2a43145b497c5da58b56d8. A clean-room restore of this lane is not yet proven."
+      ],
+      "manifest": {
+        "bytes": 14423,
+        "path": "etl/data/published/candidate-occurrence-semantic-partition-manifest-latest.json",
+        "sha256": "a332fdf56b13cd573b27713092d200d178c375d2f4e80c7c734f4a97847530ca"
+      },
+      "minimum_real_rows": 10000,
+      "next_gate": "Review and materialize the eight captured historical corrections without mutating base evidence, model the November 2019 source defect explicitly, extend official proclamation coverage election by election, add official result linkage as a separate fact type, prove a clean-room restore, and reach one million real candidate occurrences.",
+      "official_hosts": [
+        "www.boe.es"
+      ],
+      "promotion_checks": {
+        "clean_room_restore": false,
+        "complete_public_source_url": true,
+        "corrections_workflow": true,
+        "durable_public_origin": true,
+        "https_source_urls_only": true,
+        "minimum_real_rows": true,
+        "representative_scope": false
+      },
+      "promotion_gate_passed": false,
+      "real_official_data": true,
+      "root": "etl/data/derived/semantic-candidate-occurrences",
+      "rows": 10820,
+      "scale_gate_passed": true,
+      "source_ids": [
+        "boe_election_candidates"
+      ],
+      "source_url_coverage": 1.0,
+      "source_url_https_rows": 10820,
+      "source_url_rows": 10820,
+      "status": "validated_real_artifact",
+      "unchanged_replay": {
+        "files_hardlinked": 2,
+        "manifest": {
+          "bytes": 14423,
+          "path": "etl/data/published/candidate-occurrence-semantic-partition-incremental-latest.json",
+          "sha256": "88efbe4c504f83a967968284cfe3a41dcb19653a86cb5580b335659ab64fa710"
+        },
+        "partitions_reused": 2,
+        "passed": true,
+        "root": "etl/data/derived/semantic-candidate-occurrences-incremental",
+        "validation": {
+          "bytes": 4325,
+          "path": "etl/data/published/candidate-occurrence-semantic-partition-validation-incremental-latest.json",
+          "sha256": "47bee657d1157f2e60420158e19aa3b6cd40f6e53b497766b1bb81fc53d046eb"
+        }
+      },
+      "validation": {
+        "bytes": 4310,
+        "path": "etl/data/published/candidate-occurrence-semantic-partition-validation-latest.json",
+        "sha256": "da78900063072a5fe68c87178ec41f37e6d5789b011c4cdda97154aa675c1561"
+      }
     }
   ],
   "foundation": {
@@ -428,11 +495,182 @@
   },
   "gaps": [
     {
-      "current_real_rows": 8926,
-      "evidence": "Official elected-official occurrences are present; the official candidate archive lane has no accepted candidate rows because origin access is failing.",
+      "current_real_rows": 10820,
+      "evidence": "Seven immutable official BOE proclamation documents now provide 42056 exact base candidate occurrences across 4901 candidacies for elections held in December 2015, June 2016, April 2019, May 2019, July 2023 and June 2024. Eleven official correction documents retain all 956 exact paragraphs. The reviewed 2023 and 2024 subset contains 10815 base rows, three applied correction documents, 180 reviewed paragraphs, 127 paragraphs referenced by 17 reconstructable operations and 53 retained context paragraphs; it produces 10820 effective occurrences. Eight newly captured correction documents and 776 paragraphs remain explicit pending evidence, and all 31241 base rows from their four proclamation documents are barred from effective state. Every pending paragraph has a stable dual-review task with blank decisions, exact source URL, checksum and text; one deduplicated JSONL retains all 3713 pending candidacies and 31241 public candidate rows, and central readiness rehashes and reconciles both artifacts. The November 2019 proclamation and its corrections are retained in the document corpus but excluded from candidate ingestion because the official XML omits a required candidacy number; no number is invented. Every captured base row retains its exact public name, source paragraph, public URL, checksum, source record and document lineage. Every effective row has normalized source-scoped person, party, source-record and document-source lineage; 10795 exact base links are reused, 25 changed or new names receive source-scoped identities, and all 88 correction-backed rows receive immutable effective source records. The bounded two-partition semantic artifact remains 10820 rows, retains every public name and exact source paragraph, infers zero election outcomes, independently validates and replays 2 of 2 files unchanged. Signed immutable release bf0d156e41874729917fbd1eaee6f24c403bcf81ae2a43145b497c5da58b56d8 proves durable public origin; clean-room restore is not yet claimed.",
+      "evidence_contract": {
+        "correction_report": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-election-candidate-correction-materialization.json",
+        "correction_review_context": "docs/etl/sprints/SCALE-FOUNDATION-20260810/exports/boe-candidate-correction-review-context.jsonl",
+        "correction_review_queue": "docs/etl/sprints/SCALE-FOUNDATION-20260810/exports/boe-candidate-correction-review-queue.csv",
+        "correction_review_report": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-candidate-correction-review-queue.json",
+        "database": "etl/data/staging/politicos-es.db",
+        "kind": "boe_candidate_accountability_v2",
+        "report": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-election-candidates-latest.json",
+        "semantic_incremental_manifest": "etl/data/published/candidate-occurrence-semantic-partition-incremental-latest.json",
+        "semantic_incremental_validation": "etl/data/published/candidate-occurrence-semantic-partition-validation-incremental-latest.json",
+        "semantic_manifest": "etl/data/published/candidate-occurrence-semantic-partition-manifest-latest.json",
+        "semantic_replay_root": "etl/data/derived/semantic-candidate-occurrences-incremental",
+        "semantic_root": "etl/data/derived/semantic-candidate-occurrences",
+        "semantic_validation": "etl/data/published/candidate-occurrence-semantic-partition-validation-latest.json"
+      },
+      "evidence_files": [
+        {
+          "bytes": 41874,
+          "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-election-candidates-latest.json",
+          "sha256": "8c3404b0f1dd082d359a6dab12cfd58d30bf700d9642273f07b799dc2a56ad9c"
+        },
+        {
+          "bytes": 9390,
+          "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-election-candidate-correction-materialization.json",
+          "sha256": "eaf5074a5a4eb27dc35fae408900de285b0874e4131d635193660aa4ccf83982"
+        },
+        {
+          "bytes": 5313,
+          "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-candidate-correction-review-queue.json",
+          "sha256": "2b350d96a54886541478ecf7e7f89902361044b9e262ceb92653bb5aedf2e695"
+        },
+        {
+          "bytes": 1186277,
+          "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/exports/boe-candidate-correction-review-queue.csv",
+          "sha256": "8f5ebb6ea745531f64e18eada68b726f722e1de8abf47b1ab6985dd4e77e6812"
+        },
+        {
+          "bytes": 14686321,
+          "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/exports/boe-candidate-correction-review-context.jsonl",
+          "sha256": "d22c111b7d12a832f0943c8691a5d35bd3f2703af14cc1df6f37c13011490701"
+        },
+        {
+          "bytes": 14423,
+          "path": "etl/data/published/candidate-occurrence-semantic-partition-manifest-latest.json",
+          "sha256": "a332fdf56b13cd573b27713092d200d178c375d2f4e80c7c734f4a97847530ca"
+        },
+        {
+          "bytes": 4310,
+          "path": "etl/data/published/candidate-occurrence-semantic-partition-validation-latest.json",
+          "sha256": "da78900063072a5fe68c87178ec41f37e6d5789b011c4cdda97154aa675c1561"
+        },
+        {
+          "bytes": 14423,
+          "path": "etl/data/published/candidate-occurrence-semantic-partition-incremental-latest.json",
+          "sha256": "88efbe4c504f83a967968284cfe3a41dcb19653a86cb5580b335659ab64fa710"
+        },
+        {
+          "bytes": 4325,
+          "path": "etl/data/published/candidate-occurrence-semantic-partition-validation-incremental-latest.json",
+          "sha256": "47bee657d1157f2e60420158e19aa3b6cd40f6e53b497766b1bb81fc53d046eb"
+        }
+      ],
+      "evidence_refs": [
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-election-candidates-latest.json",
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-election-candidate-correction-materialization.json",
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-candidate-correction-review-queue.json",
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/exports/boe-candidate-correction-review-queue.csv",
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/exports/boe-candidate-correction-review-context.jsonl",
+        "etl/data/published/candidate-occurrence-semantic-partition-manifest-latest.json",
+        "etl/data/published/candidate-occurrence-semantic-partition-validation-latest.json",
+        "etl/data/published/candidate-occurrence-semantic-partition-incremental-latest.json",
+        "etl/data/published/candidate-occurrence-semantic-partition-validation-incremental-latest.json"
+      ],
       "id": "candidate_occurrences",
-      "next_action": "Resolve reproducible official archive access, ingest bounded election cohorts, and reconcile candidate and party line counts to official archive metadata.",
-      "status": "blocked_official_origin",
+      "metrics": {
+        "applied_correction_documents": 3,
+        "base_candidates": 42056,
+        "candidacies": 4901,
+        "candidates": 10820,
+        "captured_base_candidacies": 4901,
+        "captured_base_candidates": 42056,
+        "captured_base_documents": 7,
+        "captured_unapplied_correction_documents": 8,
+        "contextual_correction_paragraphs_retained": 53,
+        "correction_documents": 11,
+        "correction_operations": 17,
+        "correction_paragraphs": 956,
+        "correction_paragraphs_referenced_by_operations": 127,
+        "correction_review_context_candidacies": 3713,
+        "correction_review_context_candidates": 31241,
+        "correction_review_pending_dual_review": 776,
+        "correction_review_tasks": 776,
+        "correction_targets": 12,
+        "documents": 7,
+        "effective_candidacies": 1188,
+        "effective_candidates": 10820,
+        "effective_public_identity_rows_retained": 10820,
+        "evidence": {
+          "base_ingest": {
+            "bytes": 41874,
+            "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-election-candidates-latest.json",
+            "sha256": "8c3404b0f1dd082d359a6dab12cfd58d30bf700d9642273f07b799dc2a56ad9c"
+          },
+          "correction_materialization": {
+            "bytes": 9390,
+            "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-election-candidate-correction-materialization.json",
+            "sha256": "eaf5074a5a4eb27dc35fae408900de285b0874e4131d635193660aa4ccf83982"
+          },
+          "correction_review_context": {
+            "bytes": 14686321,
+            "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/exports/boe-candidate-correction-review-context.jsonl",
+            "sha256": "d22c111b7d12a832f0943c8691a5d35bd3f2703af14cc1df6f37c13011490701"
+          },
+          "correction_review_queue": {
+            "bytes": 1186277,
+            "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/exports/boe-candidate-correction-review-queue.csv",
+            "sha256": "8f5ebb6ea745531f64e18eada68b726f722e1de8abf47b1ab6985dd4e77e6812"
+          },
+          "correction_review_report": {
+            "bytes": 5313,
+            "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-candidate-correction-review-queue.json",
+            "sha256": "2b350d96a54886541478ecf7e7f89902361044b9e262ceb92653bb5aedf2e695"
+          },
+          "semantic_manifest": {
+            "bytes": 14423,
+            "path": "etl/data/published/candidate-occurrence-semantic-partition-manifest-latest.json",
+            "sha256": "a332fdf56b13cd573b27713092d200d178c375d2f4e80c7c734f4a97847530ca"
+          },
+          "semantic_validation": {
+            "bytes": 4310,
+            "path": "etl/data/published/candidate-occurrence-semantic-partition-validation-latest.json",
+            "sha256": "da78900063072a5fe68c87178ec41f37e6d5789b011c4cdda97154aa675c1561"
+          }
+        },
+        "foreign_key_violations": 0,
+        "identity_fields_removed": 0,
+        "official_public_identity_rows_retained": 42056,
+        "pending_base_candidacies": 3713,
+        "pending_base_candidates": 31241,
+        "pending_base_documents": 4,
+        "pending_correction_paragraphs": 776,
+        "pending_effective_candidacies": 0,
+        "pending_effective_candidates": 0,
+        "reviewed_base_candidacies": 1188,
+        "reviewed_base_candidates": 10815,
+        "reviewed_base_documents": 3,
+        "reviewed_correction_paragraphs": 180,
+        "semantic_boe_rows": 10820,
+        "semantic_bytes": 2083541,
+        "semantic_correction_backed_rows": 88,
+        "semantic_exact_public_name_rows": 10820,
+        "semantic_exact_source_text_rows": 10820,
+        "semantic_files": 2,
+        "semantic_outcome_known_rows": 0,
+        "semantic_rows": 10820,
+        "semantic_unchanged_replay": {
+          "files_hardlinked": 2,
+          "manifest": {
+            "bytes": 14423,
+            "path": "etl/data/published/candidate-occurrence-semantic-partition-incremental-latest.json",
+            "sha256": "88efbe4c504f83a967968284cfe3a41dcb19653a86cb5580b335659ab64fa710"
+          },
+          "partitions_reused": 2,
+          "passed": true,
+          "root": "etl/data/derived/semantic-candidate-occurrences-incremental",
+          "validation": {
+            "bytes": 4325,
+            "path": "etl/data/published/candidate-occurrence-semantic-partition-validation-incremental-latest.json",
+            "sha256": "47bee657d1157f2e60420158e19aa3b6cd40f6e53b497766b1bb81fc53d046eb"
+          }
+        }
+      },
+      "next_action": "Map and review all eight captured historical correction documents into reconstructable operations, keep their 31241 base rows excluded until each cohort passes the effective-state gate, model or source the missing November 2019 candidacy identifier without inference, extend BOE coverage election by election, add official result links as a separate fact type, publish only with authorization, prove clean-room restore, and reach one million real rows.",
+      "status": "historical_boe_base_expanded_effective_subset_validated_below_scale",
       "target_real_rows": 1000000
     },
     {
@@ -444,23 +682,326 @@
       "target_real_rows": 1000000
     },
     {
-      "current_real_rows": 21398,
-      "evidence": "The current real inventory reconciles 21398 files and 19538 distinct content hashes. A disk-backed file-level audit verifies checksum lineage for 10219 files, public URL lineage for 10195, and all 6792 referenced compressed text artifacts with zero checksum conflicts; 11179 files remain explicitly unlinked. The lane is far below target and lacks artifact-wide provenance and reviewed OCR quality.",
+      "current_real_rows": 111408,
+      "evidence": "The current real-only inventory discovers 111422 local files and counts 111408 accountability-eligible official captures with 109558 distinct content hashes and 5093218479 bytes after excluding 5 fixture/sample files and 9 preserved transport-failure captures. The BOE lane now contains 1034 exact daily summaries and 89001 exact individual XML documents; all 89001 document jobs are terminal success and every accepted document has exact official summary-item, HTTPS URL, byte count, checksum and portable-manifest lineage. The latest sparse historical candidate acquisition added 18 exact summary dates and 21 exact documents while reusing 111369 checksum-identical inventory rows; only 48 file instances required inspection. The provenance audit verifies checksum and public URL lineage for 111357 files (99.9542 percent), with zero checksum or declared-byte conflicts; the same 51 historical gaps over 8315544 bytes remain explicit. Wayback reuses its portable checkpoint without new network probes and publishes no guessed relation. Resumable v5 extraction covers all 111408 instances and 109558 contents, yielding 1999902681 exact unsanitized public text characters in 108139 checksum-addressed text objects with zero retry, dead work, failure or truncation; independent validation rehashes every raw and CAS object. Additive OCR independently validates all 856 routed pages across 58 PDFs, yielding text on 849 pages, 7 explicit no-text pages, 89632 characters, 17 material gains and 131 verified OCR objects. The deterministic 40-page real human packet contains zero invented decisions and remains 0 of 40 complete. Numeric R1 is reached. Representative source, format and language coverage, human OCR quality, full remote raw-object durability and one-million-document operation remain open.",
+      "evidence_contract": {
+        "audit": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-provenance-audit.json",
+        "boe_corpus": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-document-corpus.json",
+        "boe_manifest": "etl/data/manifests/boe-document-corpus-lineage.jsonl",
+        "inventory": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-format-inventory.json",
+        "kind": "document_accountability_v2",
+        "native_extraction": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-extraction.json",
+        "native_validation": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-validation.json",
+        "ocr_review": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-human-review-queue.json",
+        "ocr_review_csv": "docs/etl/sprints/SCALE-FOUNDATION-20260810/exports/real-document-page-ocr-human-review.csv",
+        "ocr_review_validation": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-human-review-validation.json",
+        "page_ocr": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr.json",
+        "page_ocr_validation": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-validation.json",
+        "queue": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-provenance-gap-queue-20260812.json",
+        "wayback_checkpoint": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/wayback-document-checkpoint.jsonl",
+        "wayback_manifest": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/wayback-document-lineage.jsonl",
+        "wayback_recovery": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/wayback-document-lineage.json"
+      },
+      "evidence_files": [
+        {
+          "bytes": 10105,
+          "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-format-inventory.json",
+          "sha256": "3ecb49e23c8f23f0acb4d50999e403bcada01a8ed3ef93eba1ef07dc95525611"
+        },
+        {
+          "bytes": 28339,
+          "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-provenance-audit.json",
+          "sha256": "bd822b0286ebb1e9128d8a576db0c483d15bdda5bd8f75a6a6ab73a8a5c709b6"
+        },
+        {
+          "bytes": 2412,
+          "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-provenance-gap-queue-20260812.json",
+          "sha256": "4e5b36da023bbf7ab983bc24f49ac0160e1c1b7db91a126979324638d74ee969"
+        },
+        {
+          "bytes": 4757,
+          "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/wayback-document-lineage.json",
+          "sha256": "3c18e574ebd6138a293cdf330fcab1d5131a63cbb358361d9438b4f733aaa996"
+        },
+        {
+          "bytes": 22110,
+          "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/wayback-document-checkpoint.jsonl",
+          "sha256": "236f6db3bb221cc15d721fd541cb0d69b25becacd5faba4eaa4591d8e93efad5"
+        },
+        {
+          "bytes": 2103,
+          "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-document-corpus.json",
+          "sha256": "b16f9d70506a0c3b32ebc8ca56828da337900ca70cc742b04bf3bf5ed82625f3"
+        },
+        {
+          "bytes": 208836046,
+          "path": "etl/data/manifests/boe-document-corpus-lineage.jsonl",
+          "sha256": "29d06f68ac7c0610a3e7cd69d95727d493dbc5e60bfd95fd9be0f9b7f60804ff"
+        },
+        {
+          "bytes": 11212,
+          "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/archived-document-source-lineage.json",
+          "sha256": "77b5128c892de63790a38e5c504e0bb4cd197f655f436948a86ce5ecf0f14338"
+        },
+        {
+          "bytes": 3679443,
+          "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/archived-document-source-lineage.jsonl",
+          "sha256": "813fce1a401586d87042a096bfc473e60b1566fa9dd1023597738ac4ef218eb5"
+        },
+        {
+          "bytes": 107790,
+          "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/captured-link-document-lineage.json",
+          "sha256": "5cc1cc9df0632a8916fa28be3c59c08b023c5982dc9e4e3ba855db5fa413ba4d"
+        },
+        {
+          "bytes": 90910,
+          "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/captured-link-document-lineage.jsonl",
+          "sha256": "8a54b81eaa488fda563bc9d483987de69a632059d152d683c05c26101fb9616b"
+        },
+        {
+          "bytes": 14275,
+          "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/official-document-identifier-lineage.json",
+          "sha256": "ff1637f9ec21ac7d0c3e9d868e7bc73e226d0b805ea69cb14545e4765dedf74e"
+        },
+        {
+          "bytes": 18787,
+          "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/official-document-identifier-lineage.jsonl",
+          "sha256": "2e24b98ff52e03fd9e87ab24e8b45f920a607d2175f4afc0a9c02e1fb64adcfe"
+        },
+        {
+          "bytes": 38406,
+          "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/official-path-document-lineage.json",
+          "sha256": "94ae6fa3c7e4575d5d53f8483272cb01f982e9cc7acd02fbd930999c624f8da1"
+        },
+        {
+          "bytes": 70928,
+          "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/official-path-document-lineage.jsonl",
+          "sha256": "e9451f074880ba31e444ee2b3c83b7186fbece75ae437ff6d0c72f10fc2966d7"
+        },
+        {
+          "bytes": 2433,
+          "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-extraction.json",
+          "sha256": "02d33740c65cb1d964f6a67bf7658e2b776039028caad15d3c56546db200b2ab"
+        },
+        {
+          "bytes": 2679,
+          "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-validation.json",
+          "sha256": "7a47e5f42b8025c778be49ec94873eaa5dca98f96d932cf6b60f4bdd781f2d7d"
+        },
+        {
+          "bytes": 2706,
+          "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr.json",
+          "sha256": "570be801178b6ee6c10869bdd0b86c71b26c67948a751493b0c4c79331cd731c"
+        },
+        {
+          "bytes": 2512,
+          "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-validation.json",
+          "sha256": "0e729018446bd83a6d12f28b4c555088d241cd85154f0a38464332d7fb98bdff"
+        },
+        {
+          "bytes": 3596,
+          "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-human-review-queue.json",
+          "sha256": "cf02b4d2e12c66d5e91427b3affefa99086372166eb1c718b3240c1a3fa408a6"
+        },
+        {
+          "bytes": 2257,
+          "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-human-review-validation.json",
+          "sha256": "a08feeef96298cd438d5e168b990df8958e20a2bd7319bd498bd7fe74bc7ebb8"
+        },
+        {
+          "bytes": 20686,
+          "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/exports/real-document-page-ocr-human-review.csv",
+          "sha256": "eaa317570af0736abeb034fef11fee2631599b6d96573e1f92e129bfbcc70cf3"
+        }
+      ],
+      "evidence_refs": [
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-format-inventory.json",
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-provenance-audit.json",
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-provenance-gap-queue-20260812.json",
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/wayback-document-lineage.json",
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/wayback-document-checkpoint.jsonl",
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-document-corpus.json",
+        "etl/data/manifests/boe-document-corpus-lineage.jsonl",
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/archived-document-source-lineage.json",
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/archived-document-source-lineage.jsonl",
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/captured-link-document-lineage.json",
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/captured-link-document-lineage.jsonl",
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/official-document-identifier-lineage.json",
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/official-document-identifier-lineage.jsonl",
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/official-path-document-lineage.json",
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/official-path-document-lineage.jsonl",
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-extraction.json",
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-validation.json",
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr.json",
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-validation.json",
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-human-review-queue.json",
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-human-review-validation.json",
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/exports/real-document-page-ocr-human-review.csv"
+      ],
       "id": "document_corpus",
-      "next_action": "Recover official URL, retrieval, and checksum metadata for the 11179 unlinked files; then fetch and extract a stratified 100000-document cohort, add page-level OCR lineage and quality review, and scale by official-host cohorts.",
-      "status": "below_scale_and_ocr_quality_gate",
+      "metrics": {
+        "boe_document_corpus_bytes": 2654761821,
+        "boe_document_corpus_rows": 89001,
+        "checksum_lineage_gap_files": 51,
+        "distinct_content_objects": 109558,
+        "eligible_real_files": 111408,
+        "evidence": {
+          "audit": {
+            "bytes": 28339,
+            "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-provenance-audit.json",
+            "sha256": "bd822b0286ebb1e9128d8a576db0c483d15bdda5bd8f75a6a6ab73a8a5c709b6"
+          },
+          "boe_corpus": {
+            "bytes": 2103,
+            "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-document-corpus.json",
+            "sha256": "b16f9d70506a0c3b32ebc8ca56828da337900ca70cc742b04bf3bf5ed82625f3"
+          },
+          "boe_manifest": {
+            "bytes": 208836046,
+            "path": "etl/data/manifests/boe-document-corpus-lineage.jsonl",
+            "sha256": "29d06f68ac7c0610a3e7cd69d95727d493dbc5e60bfd95fd9be0f9b7f60804ff"
+          },
+          "inventory": {
+            "bytes": 10105,
+            "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-format-inventory.json",
+            "sha256": "3ecb49e23c8f23f0acb4d50999e403bcada01a8ed3ef93eba1ef07dc95525611"
+          },
+          "native_extraction": {
+            "bytes": 2433,
+            "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-extraction.json",
+            "sha256": "02d33740c65cb1d964f6a67bf7658e2b776039028caad15d3c56546db200b2ab"
+          },
+          "native_validation": {
+            "bytes": 2679,
+            "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-validation.json",
+            "sha256": "7a47e5f42b8025c778be49ec94873eaa5dca98f96d932cf6b60f4bdd781f2d7d"
+          },
+          "ocr_review": {
+            "bytes": 3596,
+            "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-human-review-queue.json",
+            "sha256": "cf02b4d2e12c66d5e91427b3affefa99086372166eb1c718b3240c1a3fa408a6"
+          },
+          "ocr_review_csv": {
+            "bytes": 20686,
+            "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/exports/real-document-page-ocr-human-review.csv",
+            "sha256": "eaa317570af0736abeb034fef11fee2631599b6d96573e1f92e129bfbcc70cf3"
+          },
+          "ocr_review_validation": {
+            "bytes": 2257,
+            "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-human-review-validation.json",
+            "sha256": "a08feeef96298cd438d5e168b990df8958e20a2bd7319bd498bd7fe74bc7ebb8"
+          },
+          "page_ocr": {
+            "bytes": 2706,
+            "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr.json",
+            "sha256": "570be801178b6ee6c10869bdd0b86c71b26c67948a751493b0c4c79331cd731c"
+          },
+          "page_ocr_validation": {
+            "bytes": 2512,
+            "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-validation.json",
+            "sha256": "0e729018446bd83a6d12f28b4c555088d241cd85154f0a38464332d7fb98bdff"
+          },
+          "queue": {
+            "bytes": 2412,
+            "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-provenance-gap-queue-20260812.json",
+            "sha256": "4e5b36da023bbf7ab983bc24f49ac0160e1c1b7db91a126979324638d74ee969"
+          },
+          "wayback_checkpoint": {
+            "bytes": 22110,
+            "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/wayback-document-checkpoint.jsonl",
+            "sha256": "236f6db3bb221cc15d721fd541cb0d69b25becacd5faba4eaa4591d8e93efad5"
+          },
+          "wayback_manifest": {
+            "bytes": 0,
+            "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/wayback-document-lineage.jsonl",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "wayback_recovery": {
+            "bytes": 4757,
+            "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/wayback-document-lineage.json",
+            "sha256": "3c18e574ebd6138a293cdf330fcab1d5131a63cbb358361d9438b4f733aaa996"
+          }
+        },
+        "excluded_fixture_or_sample_files": 5,
+        "excluded_transport_failure_captures": 9,
+        "native_text_cas_objects_checksum_verified": 108139,
+        "native_text_characters": 1999902681,
+        "native_text_distinct_content_objects": 109558,
+        "native_text_file_instances": 111408,
+        "native_text_truncated_objects": 0,
+        "ocr_candidate_pages": 856,
+        "ocr_documents": 58,
+        "ocr_human_review_batch_complete": false,
+        "ocr_human_review_promotion_ready": false,
+        "ocr_human_review_rows": 40,
+        "ocr_human_reviews_completed": 0,
+        "ocr_human_reviews_pending": 40,
+        "ocr_material_gain_pages": 17,
+        "ocr_no_text_pages": 7,
+        "ocr_text_cas_objects_checksum_verified": 131,
+        "ocr_text_characters": 89632,
+        "ocr_text_pages": 849,
+        "provenance_coverage": 0.99954222,
+        "public_url_files": 111357,
+        "public_url_gap_files": 51,
+        "raw_document_files_discovered": 111422,
+        "remediation_queue_rows": 51,
+        "text_artifacts_checksum_verified": 6792,
+        "unlinked_files": 51,
+        "verified_checksum_files": 111357,
+        "wayback_archive_candidates_indexed": 5,
+        "wayback_evidence_seeded_gap_files": 26,
+        "wayback_exact_archive_relations": 0,
+        "wayback_portable_checkpoint_rows": 43,
+        "wayback_unique_content_targets": 3,
+        "wayback_unseeded_gap_files": 25
+      },
+      "next_action": "Complete and validate all 40 real human OCR reviews without invented labels. Add representative source, format, size, language, scan and corruption strata plus cost per 1000; the numeric 100000-document gate already passes but the diversity gate does not. Replicate and clean-restore the full 108139-object text CAS from a durable raw origin. Retry only the seven failed exact-URL archive variants with a new lever and close the 51 historical provenance gaps only from byte-identical immutable evidence or an exact primary-source manifest. Then scale toward one million through bounded official-host and date cohorts with the same queue, manifest, recovery and correction contracts.",
+      "status": "r1_numeric_gate_passed_representativeness_and_ocr_quality_open",
       "target_real_rows": 1000000
     },
     {
       "current_real_rows": 0,
-      "evidence": "No lane is yet promoted for representative public corruption-risk analysis.",
+      "evidence": "No lane is yet promoted for representative public corruption-risk analysis. The real PLACSP v4 detector has 2036 internal review signals derived from 17585 exact official award or contract rows. A deterministic 2036-task CSV retains every material amount, supplier identifier, lot, stable contract identity, public URL, source record and checksum; decisions remain blank. Dual human review, at least one independent reviewer, disagreement adjudication, counterevidence and right-of-reply remain mandatory. Review signals are not corruption findings and are not public by default.",
+      "evidence_contract": {
+        "kind": "integrity_human_review_v1",
+        "queue_csv": "docs/etl/sprints/SCALE-FOUNDATION-20260810/exports/procurement-integrity-human-review.csv",
+        "report": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/procurement-integrity-human-review-queue.json"
+      },
+      "evidence_files": [
+        {
+          "bytes": 10160,
+          "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/placsp-real-2025h1-integrity-signal-run.json",
+          "sha256": "f087b8b63cf23587f0d7ee285be73d023e0bf27d4179289fbcedb22ee8a9d195"
+        },
+        {
+          "bytes": 1018,
+          "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/procurement-integrity-human-review-queue.json",
+          "sha256": "7ed13c2ab98a2ec4b93d04118d25cf44c60c7db07d1a8edf4955f1c208c5bc70"
+        },
+        {
+          "bytes": 10754703,
+          "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/exports/procurement-integrity-human-review.csv",
+          "sha256": "79e38ae09596ef326e12e9fa9f219ff2ce9106afecbbdf97050d1e73618f86cc"
+        }
+      ],
+      "evidence_refs": [
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/placsp-real-2025h1-integrity-signal-run.json",
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/procurement-integrity-human-review-queue.json",
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/exports/procurement-integrity-human-review.csv"
+      ],
       "id": "representative_integrity_analysis",
-      "next_action": "Define reviewed indicator semantics, counterevidence and correction workflows, minimum cohort sizes, false-positive controls, and traceable public explanations before publishing inferred risk signals.",
+      "metrics": {
+        "official_evidence_rows": 17585,
+        "pending_dual_review": 2036,
+        "review_tasks": 2036
+      },
+      "next_action": "Complete the 2036 dual-human reviews without machine-invented decisions; adjudicate every disagreement; measure false-positive rates by authority, CPV and cohort; add counterevidence and right-of-reply before any stronger state. Expand only after the real reviewed pilot passes the versioned publication policy.",
       "status": "not_ready",
       "target_real_rows": 1000000
     }
   ],
-  "generated_at": "2026-08-12T17:30:36.256892Z",
+  "generated_at": "2026-08-19T19:04:54.445376Z",
   "policy": {
     "classification_never_suppresses_public_domain_identity": true,
     "generated_test_records_count_toward_readiness": false,
@@ -472,9 +1013,9 @@
     "synthetic_or_mock_records_forbidden": true
   },
   "registry": {
-    "bytes": 16416,
+    "bytes": 31574,
     "path": "docs/etl/real-corpus-registry.json",
-    "sha256": "5500f73d8068d9c9fb9b41916f1a16b91d1a30293c79e8c6d6fe5a4116ac4b64"
+    "sha256": "2757f1641ba5f71f4c05ee28d6894723fd0ec8964f427cafbc43c9b0765d0fd4"
   },
   "schema_version": "real-scale-readiness-v1",
   "status": "real_foundation_ready_scale_incomplete",
@@ -482,7 +1023,39 @@
     "open_gaps": 4,
     "promoted_lanes": 0,
     "real_million_scale_lanes": 3,
-    "registered_real_corpora": 6,
-    "validated_real_corpora": 6
+    "registered_real_corpora": 7,
+    "validated_real_corpora": 7
+  },
+  "supporting_evidence": {
+    "official_sample_corpus_audit": {
+      "configured_sources": 25,
+      "detailed_sidecars_validated": 9,
+      "evidence": {
+        "bytes": 257,
+        "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/official-sample-corpus-audit.json",
+        "sha256": "83117aed0be3bc4943793e3e82512db83c0466d21f70b92e25a5a71ead56909a"
+      },
+      "public_domain_personal_information_retained": true,
+      "sample_bytes": 277715,
+      "schema_version": "official_sample_corpus_audit_v1",
+      "status": "pass",
+      "synthetic_or_mock_records": 0
+    },
+    "public_source_records_publish_audit": {
+      "evidence": {
+        "bytes": 340,
+        "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/public-source-records-publish-audit.json",
+        "sha256": "cf8677ef840fb13a09de27419c80847a4be19e652476c4ea26da3cfb5a5e4a15"
+      },
+      "identity_fields_removed": 0,
+      "public_domain_personal_information_retained": true,
+      "raw_payload_bytes": 269872457,
+      "raw_payload_published_exactly": true,
+      "rows": 231438,
+      "schema_version": "public_source_records_publish_audit_v1",
+      "secret_private_session_or_workstation_marker_rows": 0,
+      "sources": 34,
+      "status": "pass"
+    }
   }
 }

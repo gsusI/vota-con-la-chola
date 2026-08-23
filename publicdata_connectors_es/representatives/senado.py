@@ -139,7 +139,8 @@ def _build_senado_tipo6_records(payload: bytes, *, legis: str) -> list[dict[str,
         group_name = clean_text(node.findtext("grupoNombre"))
         group_cod = clean_text(node.findtext("grupoCod"))
 
-        # Deterministic-ish synthetic key (we don't have idweb here).
+        # Deterministic derived key for an exact official roster row; tipoFich=6
+        # does not publish idweb.
         srid_seed = stable_json(
             {
                 "legis": str(legis),

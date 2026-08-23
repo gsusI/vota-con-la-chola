@@ -23,7 +23,12 @@ class TestDockerContextContract(unittest.TestCase):
         self.assertTrue(
             {
                 ".venv",
+                ".cache",
+                ".local",
+                ".pytest_cache",
+                ".ruff_cache",
                 ".scale-origin-*",
+                "/*.db",
                 "docs/etl/runs",
                 "docs/etl/sprints",
                 "docs/gh-pages",
@@ -34,6 +39,8 @@ class TestDockerContextContract(unittest.TestCase):
                 "etl/data/restored",
                 "etl/data/staging/**",
                 "etl/data/published/**",
+                "outputs",
+                "tmp",
             }.issubset(lines)
         )
         self.assertIn("!etl/data/raw/samples", lines)

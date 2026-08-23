@@ -17,6 +17,7 @@ if str(REPO_ROOT) not in sys.path:
 from publicdata_publish.accountability_partitions import (
     export_accountability_partitions,
 )
+from publicdata_publish.actor_graph_partitions import export_actor_graph_partitions
 from publicdata_publish.actor_mandate_partitions import (
     export_actor_mandate_partitions,
 )
@@ -43,6 +44,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
             "member_votes",
             "accountability_ledger",
             "actor_mandates",
+            "actor_graph",
             "candidate_occurrences",
             "public_money_facts",
             "indicator_observations",
@@ -96,6 +98,10 @@ def main(argv: list[str] | None = None) -> int:
             if args.vote_audit:
                 raise ValueError("--vote-audit applies only to member_votes")
             manifest = export_actor_mandate_partitions(**common)
+        elif args.lane == "actor_graph":
+            if args.vote_audit:
+                raise ValueError("--vote-audit applies only to member_votes")
+            manifest = export_actor_graph_partitions(**common)
         elif args.lane == "candidate_occurrences":
             if args.vote_audit:
                 raise ValueError("--vote-audit applies only to member_votes")

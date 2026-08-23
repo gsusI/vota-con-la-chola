@@ -1,0 +1,83 @@
+{
+  "checks": {
+    "all_candidate_pages_manifested": true,
+    "all_candidate_pages_terminal_success": true,
+    "native_manifest_bound_by_sha256": true,
+    "no_dead_work": true,
+    "no_synthetic_or_mock_records": true,
+    "ocr_is_additive_and_native_text_is_unchanged": true,
+    "official_public_domain_personal_information_retained": true
+  },
+  "configuration": {
+    "dpi": 200,
+    "language": "spa+cat+glg+eus+eng",
+    "page_segmentation_mode": 6,
+    "tool_versions": {
+      "pdftoppm": "pdftoppm version 26.06.0",
+      "tesseract": "tesseract 5.5.2"
+    }
+  },
+  "generated_at": "2026-08-13T05:17:49.027785Z",
+  "inputs": {
+    "native_manifest": {
+      "bytes": 121555440,
+      "path": "etl/data/published/real-document-text-manifest-latest.jsonl",
+      "rows": 111408,
+      "sha256": "03ce010e1019fc3f23e5a016413aab51f7ec398637973680534c27007b69bfab"
+    }
+  },
+  "limitations": [
+    "More OCR characters do not prove semantic accuracy.",
+    "Native text remains the primary extraction; OCR is page-level additive evidence.",
+    "Human review must measure OCR accuracy by source, language, scan quality, and document type before analytical promotion."
+  ],
+  "manifest": {
+    "bytes": 857689,
+    "path": "etl/data/published/real-document-page-ocr-manifest-latest.jsonl",
+    "rows": 856,
+    "sha256": "0f451e32fbc3813e979cc0fce5c7e1d117d6c4194f63a76a7f34b337c821e969"
+  },
+  "next_action": "Independently validate every page row and OCR text CAS object, then human-review a stratified real-page sample before analytical promotion.",
+  "policy": {
+    "ocr_is_additive_to_native_text": true,
+    "ocr_text_is_not_sanitized_or_identity_stripped": true,
+    "official_public_domain_personal_information_retained": true,
+    "official_real_documents_only": true,
+    "raw_document_bytes_are_not_copied_into_work_rows": true,
+    "synthetic_or_mock_records_counted": false
+  },
+  "run": {
+    "claimed": 856,
+    "dead": 0,
+    "retried": 0,
+    "succeeded": 856
+  },
+  "schema_version": "real_document_page_ocr_v1",
+  "seed": {
+    "candidate_pages": 856,
+    "documents": 58
+  },
+  "state": {
+    "database": "etl/data/staging/real-document-page-ocr-v5.db",
+    "ocr_status_counts": {
+      "ocr_no_text": 7,
+      "ocr_text_extracted": 849
+    },
+    "state_counts": {
+      "succeeded": 856
+    }
+  },
+  "status": "ok",
+  "totals": {
+    "candidate_pages": 856,
+    "documents": 58,
+    "elapsed_worker_seconds": 588.038,
+    "empty_text_pages": 34,
+    "native_text_chars_on_candidate_pages": 68951,
+    "ocr_text_cas_bytes": 14853,
+    "ocr_text_cas_files": 131,
+    "ocr_text_chars": 89632,
+    "pages_improved_over_native_by_50_chars": 17,
+    "sparse_text_pages": 822
+  }
+}

@@ -1,0 +1,406 @@
+{
+  "counts": {
+    "accepted_unique_files": 3757,
+    "accepted_unique_relations": 4516,
+    "duplicate_exact_metadata_rows": 3957,
+    "inventory_path_metadata_rows": 8477,
+    "metadata_rows_scanned": 14429,
+    "pending_gap_files_recovered": 3,
+    "skipped_non_public_url": 4
+  },
+  "databases": [
+    {
+      "accepted_metadata_rows": 0,
+      "path": "etl/data/staging/politicos-es.ai_ops_135.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 0,
+      "path": "etl/data/staging/politicos-es.ai_ops_136.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 0,
+      "path": "etl/data/staging/politicos-es.ai_ops_137.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 0,
+      "path": "etl/data/staging/politicos-es.ai_ops_138.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 0,
+      "path": "etl/data/staging/politicos-es.ai_ops_285_after.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 0,
+      "path": "etl/data/staging/politicos-es.ai_ops_285_before.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 0,
+      "path": "etl/data/staging/politicos-es.aiops115.20260223T173448Z.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 0,
+      "path": "etl/data/staging/politicos-es.aiops115.justpipeline.20260223T173646Z.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 0,
+      "path": "etl/data/staging/politicos-es.aiops116.20260223T174656Z.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 0,
+      "path": "etl/data/staging/politicos-es.aiops117.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 0,
+      "path": "etl/data/staging/politicos-es.aiops118.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 0,
+      "path": "etl/data/staging/politicos-es.aiops119.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 0,
+      "path": "etl/data/staging/politicos-es.aiops120.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 0,
+      "path": "etl/data/staging/politicos-es.aiops121.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 0,
+      "path": "etl/data/staging/politicos-es.aiops122.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 0,
+      "path": "etl/data/staging/politicos-es.aiops123.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 0,
+      "path": "etl/data/staging/politicos-es.aiops129.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 0,
+      "path": "etl/data/staging/politicos-es.aiops296.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 0,
+      "path": "etl/data/staging/politicos-es.and-pv.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 0,
+      "path": "etl/data/staging/politicos-es.aragoncheck.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 0,
+      "path": "etl/data/staging/politicos-es.aragonfix.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 0,
+      "path": "etl/data/staging/politicos-es.asamblea-madrid-20260212.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 0,
+      "path": "etl/data/staging/politicos-es.asamblea-madrid-occup-uniq-20260212.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 0,
+      "path": "etl/data/staging/politicos-es.asamblea-madrid-ocup-20260212.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 0,
+      "path": "etl/data/staging/politicos-es.asamblea-madrid-ocup-uniq-20260212.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 0,
+      "path": "etl/data/staging/politicos-es.asambleaex-20260212.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 0,
+      "path": "etl/data/staging/politicos-es.cantabria-20260212.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 0,
+      "path": "etl/data/staging/politicos-es.cat.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 0,
+      "path": "etl/data/staging/politicos-es.ccyl-20260212.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 0,
+      "path": "etl/data/staging/politicos-es.ceuta.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 1,
+      "path": "etl/data/staging/politicos-es.ci-gate-local.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 0,
+      "path": "etl/data/staging/politicos-es.clean.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 0,
+      "path": "etl/data/staging/politicos-es.cortes-clm-20260212.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 0,
+      "path": "etl/data/staging/politicos-es.cv.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 1,
+      "path": "etl/data/staging/politicos-es.e2e-20260212.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 1,
+      "path": "etl/data/staging/politicos-es.e2e10.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 1,
+      "path": "etl/data/staging/politicos-es.e2e11.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 1,
+      "path": "etl/data/staging/politicos-es.e2e12.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 1,
+      "path": "etl/data/staging/politicos-es.e2e16.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 1,
+      "path": "etl/data/staging/politicos-es.e2e17.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 0,
+      "path": "etl/data/staging/politicos-es.e2e18.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 2,
+      "path": "etl/data/staging/politicos-es.e2e19.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 1,
+      "path": "etl/data/staging/politicos-es.e2e6.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 1,
+      "path": "etl/data/staging/politicos-es.e2e7.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 1,
+      "path": "etl/data/staging/politicos-es.e2e9.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 2,
+      "path": "etl/data/staging/politicos-es.full-20260212.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 0,
+      "path": "etl/data/staging/politicos-es.html-guard-20260212.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 0,
+      "path": "etl/data/staging/politicos-es.jgpa-20260212.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 1,
+      "path": "etl/data/staging/politicos-es.just-e2e-20260212.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 0,
+      "path": "etl/data/staging/politicos-es.larioja-20260212.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 0,
+      "path": "etl/data/staging/politicos-es.liberty-focus-ci-smoke.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 1,
+      "path": "etl/data/staging/politicos-es.municipal-strict-20260212.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 0,
+      "path": "etl/data/staging/politicos-es.murcia-20260212.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 0,
+      "path": "etl/data/staging/politicos-es.norm-samples.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 0,
+      "path": "etl/data/staging/politicos-es.norm-test.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 2,
+      "path": "etl/data/staging/politicos-es.one-go-2026-04-13.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 2,
+      "path": "etl/data/staging/politicos-es.one-go-r2-2026-04-13.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 0,
+      "path": "etl/data/staging/politicos-es.parcan-20260212.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 0,
+      "path": "etl/data/staging/politicos-es.parlamentib-20260212.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 1,
+      "path": "etl/data/staging/politicos-es.refactor-e2e.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 1,
+      "path": "etl/data/staging/politicos-es.refactor-e2e2.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 2,
+      "path": "etl/data/staging/politicos-es.senado-fix-all.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 0,
+      "path": "etl/data/staging/politicos-es.senado-fix-v2.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 0,
+      "path": "etl/data/staging/politicos-es.senado-fix.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 0,
+      "path": "etl/data/staging/politicos-es.strict-check.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 1,
+      "path": "etl/data/staging/politicos-es.thresholds-smoke.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 1,
+      "path": "etl/data/staging/politicos-es.tracker-check-20260212.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 1,
+      "path": "etl/data/staging/quarantine/2026-08-12/politicos-es.e2e-postfix-20260212.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 1,
+      "path": "etl/data/staging/quarantine/2026-08-12/politicos-es.fresh.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 1,
+      "path": "etl/data/staging/quarantine/2026-08-12/politicos-es.fresh.recovered.20260214_1705.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 1,
+      "path": "etl/data/staging/quarantine/2026-08-12/politicos-es.fresh.work.20260214_1710.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 4,
+      "path": "etl/data/staging/quarantine/2026-08-12/politicos-es.recovered.db",
+      "status": "ok"
+    },
+    {
+      "accepted_metadata_rows": 8439,
+      "path": "politicos-es-005.db",
+      "status": "ok"
+    }
+  ],
+  "generated_at": "2026-08-12T22:20:46.051868+00:00",
+  "inventory": {
+    "bytes": 14673712,
+    "path": "etl/data/manifests/real-document-format-inventory.jsonl",
+    "rows": 21373,
+    "sha256": "3f0f32ebb01a59f51f8b70d763038786bcae775baa57421c97569b928e3d1538"
+  },
+  "manifest": {
+    "bytes": 3679443,
+    "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/archived-document-source-lineage.jsonl",
+    "rows": 4516,
+    "sha256": "813fce1a401586d87042a096bfc473e60b1566fa9dd1023597738ac4ef218eb5"
+  },
+  "policy": {
+    "exact_path_bytes_sha_and_public_url_required": true,
+    "placeholder_hosts_rejected": true,
+    "public_domain_personal_information_retained": true,
+    "source_databases_opened_read_only": true,
+    "synthetic_or_mock_records_counted": false
+  },
+  "queue": {
+    "bytes": 92908,
+    "path": "etl/data/manifests/document-provenance-gap-queue.jsonl",
+    "rows": 125,
+    "sha256": "75850ba53d3374293875a1f99306779c75b5cdd8194f2a0f70adc58600b4af9b"
+  },
+  "schema_version": "archived_document_source_lineage_report_v1",
+  "status": "ok"
+}

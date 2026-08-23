@@ -1,0 +1,540 @@
+{
+  "analytical_partition_gate_passed": true,
+  "capacity_class": "below_s1_100k",
+  "checks": {
+    "boe_correction_lineage_retained": true,
+    "boe_document_source_records_complete": true,
+    "boe_election_outcomes_not_inferred": true,
+    "boe_exact_source_text_retained": true,
+    "bounded_file_rows": true,
+    "bounded_peak_rss": true,
+    "database_join_balance": true,
+    "distinct_occurrence_ids": true,
+    "minimum_rows": true,
+    "no_private_tokens": true,
+    "public_birth_dates_retained_exactly": true,
+    "public_dni_retained_exactly": true,
+    "public_names_retained_exactly": true,
+    "public_source_birth_dates_retained_exactly": true,
+    "raw_payload_excluded": true,
+    "source_record_complete": true,
+    "source_url_complete": true
+  },
+  "coverage": {
+    "birth_date": 0.0,
+    "birth_date_source": 0.0,
+    "dni": 0.0,
+    "document_source_record": 1.0,
+    "elected": 0.0,
+    "exact_source_text": 1.0,
+    "known_election_outcome": 0.0,
+    "present": 1.0,
+    "public_name": 1.0,
+    "source_record": 1.0,
+    "source_url": 1.0
+  },
+  "generated_at": "2026-08-13T04:22:00+00:00",
+  "identity_assurance": "source_scoped_election_occurrence_not_cross_election_identity",
+  "incremental_contract": {
+    "files_copied": 0,
+    "files_hardlinked": 2,
+    "input_fingerprint": "sha256_canonical_public_rows",
+    "partitions_rebuilt": 0,
+    "partitions_reused": 2,
+    "previous_manifest_sha256": "a332fdf56b13cd573b27713092d200d178c375d2f4e80c7c734f4a97847530ca",
+    "reuse_key": [
+      "partition_id",
+      "input_sha256",
+      "schema_sha256",
+      "transformer_version"
+    ]
+  },
+  "lane": "candidate_occurrences",
+  "limitations": [
+    "All official public names are retained. Public-domain DNI and birth-date fields remain exact when Infoelectoral provides them; null means the source did not provide that field.",
+    "BOE effective rows retain exact proclamation or correction text, official document, checksum, paragraph, normalized person and party links, and immutable base or correction lineage.",
+    "BOE proclamation documents do not establish election outcomes, so is_elected remains null instead of being guessed.",
+    "Candidate occurrences remain source-scoped; cross-election person equivalence is not asserted.",
+    "Local materialization does not prove durable public-origin publication or restore."
+  ],
+  "partition_contract": {
+    "archive_id_retained_as_column": true,
+    "compression": "zstd",
+    "keys": [
+      "snapshot_date",
+      "source_system",
+      "election_type",
+      "year"
+    ],
+    "max_file_rows": 100000,
+    "ordering": [
+      "source_system_code",
+      "election_type_code",
+      "election_year",
+      "candidate_occurrence_id"
+    ],
+    "row_group_rows": 25000,
+    "strategy": "semantic_hive_source_election_type_year"
+  },
+  "partitions": [
+    {
+      "birth_date_rows": 0,
+      "birth_date_source_rows": 0,
+      "boe_rows": 2265,
+      "correction_backed_rows": 77,
+      "dni_rows": 0,
+      "document_source_record_rows": 2265,
+      "elected_rows": 0,
+      "exact_public_name_rows": 2265,
+      "exact_source_text_rows": 2265,
+      "files": [
+        {
+          "bytes": 446045,
+          "max_id": "boe-effective-candidate:ffc6527396180f0705f8259bb02e4180e14dad0bd2f775c123caae7eb5fa670c",
+          "min_id": "boe-candidate:001a91378c71615f4e8ee734ddc889be8898108fcf9aba90c23c9254b640f2a0",
+          "path": "lane=candidate_occurrences/snapshot_date=2026-08-13/source_system=boe/election_type=european_parliament/year=2024/part-00000.parquet",
+          "rows": 2265,
+          "sha256": "33122111c87fa93c3a31c08e4d3986fafed333bafa68cd3499363c395383743b"
+        }
+      ],
+      "infoelectoral_rows": 0,
+      "input_sha256": "e3439115852176903eee20afdd7023812b22a6d5b1108e50a8153d25db3338b8",
+      "materialization": "reused",
+      "max_id": "boe-effective-candidate:ffc6527396180f0705f8259bb02e4180e14dad0bd2f775c123caae7eb5fa670c",
+      "min_id": "boe-candidate:001a91378c71615f4e8ee734ddc889be8898108fcf9aba90c23c9254b640f2a0",
+      "outcome_known_rows": 0,
+      "partition_id": "boe|european_parliament|2024",
+      "present_rows": 2265,
+      "private_token_findings": 0,
+      "relative_dir": "lane=candidate_occurrences/snapshot_date=2026-08-13/source_system=boe/election_type=european_parliament/year=2024",
+      "rows": 2265,
+      "source_record_rows": 2265,
+      "source_url_rows": 2265,
+      "values": {
+        "election_type": "european_parliament",
+        "snapshot_date": "2026-08-13",
+        "source_system": "boe",
+        "year": "2024"
+      }
+    },
+    {
+      "birth_date_rows": 0,
+      "birth_date_source_rows": 0,
+      "boe_rows": 8555,
+      "correction_backed_rows": 11,
+      "dni_rows": 0,
+      "document_source_record_rows": 8555,
+      "elected_rows": 0,
+      "exact_public_name_rows": 8555,
+      "exact_source_text_rows": 8555,
+      "files": [
+        {
+          "bytes": 1637496,
+          "max_id": "boe-effective-candidate:c6de4b6ec31d02e6ba66c02e61c7dc05e5b5391a0104cf76fe7582b33b178633",
+          "min_id": "boe-candidate:0004301717e626a2de2b813a52976df628093c7a49cb075ee8adc0cfbeeb2003",
+          "path": "lane=candidate_occurrences/snapshot_date=2026-08-13/source_system=boe/election_type=general_cortes/year=2023/part-00000.parquet",
+          "rows": 8555,
+          "sha256": "ddb21683eac0d6899cb196470f17357dacfa6d8f2231f41b9b403c0e3f2cb498"
+        }
+      ],
+      "infoelectoral_rows": 0,
+      "input_sha256": "7121f585b941812c5325c2ea60019b6b904cee72ce76976e45d623ab4160f6d4",
+      "materialization": "reused",
+      "max_id": "boe-effective-candidate:c6de4b6ec31d02e6ba66c02e61c7dc05e5b5391a0104cf76fe7582b33b178633",
+      "min_id": "boe-candidate:0004301717e626a2de2b813a52976df628093c7a49cb075ee8adc0cfbeeb2003",
+      "outcome_known_rows": 0,
+      "partition_id": "boe|general_cortes|2023",
+      "present_rows": 8555,
+      "private_token_findings": 0,
+      "relative_dir": "lane=candidate_occurrences/snapshot_date=2026-08-13/source_system=boe/election_type=general_cortes/year=2023",
+      "rows": 8555,
+      "source_record_rows": 8555,
+      "source_url_rows": 8555,
+      "values": {
+        "election_type": "general_cortes",
+        "snapshot_date": "2026-08-13",
+        "source_system": "boe",
+        "year": "2023"
+      }
+    }
+  ],
+  "performance": {
+    "fingerprint_seconds": 0.651987,
+    "materialize_seconds": 1e-06,
+    "max_peak_rss_mb": 1024.0,
+    "peak_rss_mb": 28.172,
+    "rows_per_second": 14290.593,
+    "total_seconds": 0.757141
+  },
+  "promotion_checks": {
+    "analytical_partition_gate": true,
+    "cross_election_identity_quality_verified": false,
+    "durable_public_origin_verified": false,
+    "million_real_rows": false,
+    "representative_100k_real_rows": false
+  },
+  "promotion_gate_passed": false,
+  "publication_status": "local_generated_not_published",
+  "schema": [
+    {
+      "name": "candidate_occurrence_id",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "source_system_code",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "archive_id",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "election_id",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "election_date",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "election_type_code",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "election_scope",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "election_year",
+      "nullable": false,
+      "type": "int64"
+    },
+    {
+      "name": "election_month",
+      "nullable": false,
+      "type": "int64"
+    },
+    {
+      "name": "election_round",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "province_code",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "district_code",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "candidate_scope_code",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "party_source_code",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "candidate_order",
+      "nullable": false,
+      "type": "int64"
+    },
+    {
+      "name": "candidate_type_code",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "substitute_for_candidate_order",
+      "nullable": true,
+      "type": "int64"
+    },
+    {
+      "name": "given_name",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "surname_1",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "surname_2",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "full_name",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "gender_code",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "birth_date",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "birth_date_source",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "dni",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "is_elected",
+      "nullable": true,
+      "type": "int64"
+    },
+    {
+      "name": "candidacy_id",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "candidacy_name",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "candidacy_acronym",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "party_province_code",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "party_autonomy_code",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "party_national_code",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "electoral_board",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "electoral_district",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "chamber_code",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "candidacy_number",
+      "nullable": true,
+      "type": "int64"
+    },
+    {
+      "name": "person_id",
+      "nullable": false,
+      "type": "int64"
+    },
+    {
+      "name": "party_id",
+      "nullable": false,
+      "type": "int64"
+    },
+    {
+      "name": "territory_id",
+      "nullable": true,
+      "type": "int64"
+    },
+    {
+      "name": "territory_code",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "source_id",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "source_record_id",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "source_record_pk",
+      "nullable": false,
+      "type": "int64"
+    },
+    {
+      "name": "document_source_record_pk",
+      "nullable": true,
+      "type": "int64"
+    },
+    {
+      "name": "source_url",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "source_content_sha256",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "source_member_name",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "source_line_number",
+      "nullable": false,
+      "type": "int64"
+    },
+    {
+      "name": "source_document_id",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "base_document_id",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "base_candidate_occurrence_id",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "correction_operation_id",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "source_text_exact",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "row_content_sha256",
+      "nullable": true,
+      "type": "string"
+    },
+    {
+      "name": "first_seen_snapshot_date",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "last_seen_snapshot_date",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "is_present",
+      "nullable": false,
+      "type": "int64"
+    },
+    {
+      "name": "person_identity_state",
+      "nullable": false,
+      "type": "string"
+    },
+    {
+      "name": "lineage_state",
+      "nullable": false,
+      "type": "string"
+    }
+  ],
+  "schema_sha256": "0bf125ba80c95bbe267aa8460444e0e23cb5d2e65461633572db550aa73e6ab8",
+  "schema_version": "semantic_partition_manifest_v1",
+  "snapshot_date": "2026-08-13",
+  "source": {
+    "database_bytes": 1428922368,
+    "database_file": "politicos-es.db",
+    "evidence_tables": [
+      "infoelectoral_candidate_archives",
+      "boe_election_candidate_occurrences",
+      "boe_election_candidate_correction_operations"
+    ],
+    "official_archive_publication": "publishable_with_source_provenance",
+    "public_domain_identity_fields": [
+      "full_name",
+      "birth_date",
+      "birth_date_source",
+      "dni",
+      "source_text_exact"
+    ],
+    "raw_payload_published": false,
+    "tables": [
+      "infoelectoral_candidate_occurrences",
+      "boe_election_effective_candidate_occurrences"
+    ]
+  },
+  "source_database": {
+    "boe_rows": 10820,
+    "distinct_archives": 0,
+    "distinct_elections": 2,
+    "distinct_occurrence_ids": 10820,
+    "distinct_parties": 123,
+    "distinct_people": 10820,
+    "infoelectoral_rows": 0,
+    "joined_rows": 10820,
+    "occurrence_rows": 10820,
+    "source_birth_date_rows": 0,
+    "source_birth_date_source_rows": 0,
+    "source_boe_document_lineage_rows": 10820,
+    "source_correction_backed_rows": 88,
+    "source_dni_rows": 0,
+    "source_exact_text_rows": 10820,
+    "source_public_name_rows": 10820
+  },
+  "totals": {
+    "birth_date_rows": 0,
+    "birth_date_source_rows": 0,
+    "boe_rows": 10820,
+    "correction_backed_rows": 88,
+    "dni_rows": 0,
+    "document_source_record_rows": 10820,
+    "elected_rows": 0,
+    "exact_public_name_rows": 10820,
+    "exact_source_text_rows": 10820,
+    "files": 2,
+    "infoelectoral_rows": 0,
+    "outcome_known_rows": 0,
+    "parquet_bytes": 2083541,
+    "partitions": 2,
+    "present_rows": 10820,
+    "private_token_findings": 0,
+    "rows": 10820,
+    "source_record_rows": 10820,
+    "source_url_rows": 10820
+  },
+  "transformer_version": "candidate_occurrences_public_v3"
+}

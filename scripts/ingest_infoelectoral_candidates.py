@@ -59,7 +59,7 @@ DEFAULT_DB = Path("etl/data/staging/politicos-es.db")
 DEFAULT_SCHEMA = Path("etl/load/sqlite_schema.sql")
 DEFAULT_PIPELINE_ID = "infoelectoral-candidates-v1"
 DEFAULT_STORE_ROOT = Path(
-    "etl/data/object-origin/restricted/infoelectoral-candidates"
+    "etl/data/object-origin/infoelectoral-candidates"
 )
 DEFAULT_REPORT = Path(
     "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/"
@@ -642,7 +642,9 @@ def build_report(
             "external_identity_verified": False,
             "promotion_gate_passed": False,
         },
-        "publication_status": "restricted_raw_local_normalized_not_published",
+        "publication_status": (
+            "official_public_domain_raw_local_normalized_not_published"
+        ),
     }
 
 

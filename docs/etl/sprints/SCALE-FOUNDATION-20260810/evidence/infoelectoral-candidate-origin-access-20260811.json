@@ -1,5 +1,25 @@
 {
-  "anti_loop_decision": "no_new_lever; do not retry this source again in the current sprint",
+  "alternate_official_endpoint_probe_20260813": {
+    "basis": "The official transparency record and historical public tooling identify the legacy infoelectoral.mir.es docxl/apliext contract as distinct from the failing current catalog URL.",
+    "command": "bounded GET with Range bytes=0-1023, 20 second timeout, and public-data audit User-Agent against the three exact legacy official endpoint variants",
+    "observed_at_utc": "2026-08-13T01:30:18Z",
+    "results": [
+      {
+        "error": "URLError: timed out",
+        "url": "http://www.infoelectoral.mir.es/docxl/apliext/04202305_MUNI.zip"
+      },
+      {
+        "error": "URLError: timed out",
+        "url": "http://www.infoelectoral.mir.es/infoelectoral/docxl/apliext/04202305_MUNI.zip"
+      },
+      {
+        "error": "URLError: timed out",
+        "url": "https://www.infoelectoral.mir.es/docxl/apliext/04202305_MUNI.zip"
+      }
+    ],
+    "status": "blocked_no_bytes_accepted"
+  },
+  "anti_loop_decision": "legacy official endpoint lever exhausted; do not retry current or legacy endpoints without upstream change, exact immutable archive capture, or another reproducible official channel",
   "catalog_snapshot": {
     "candidate_archive_items_enqueued": 60,
     "distinct_election_ids": 36,
@@ -12,7 +32,7 @@
     }
   },
   "first_seen_utc": "2026-08-11T19:01:59.665Z",
-  "last_seen_utc": "2026-08-11T19:06:41.872Z",
+  "last_seen_utc": "2026-08-13T01:30:18Z",
   "official_archive_probe": {
     "command": "curl -k -L --fail --show-error --connect-timeout 20 --max-time 300 --output /dev/null https://infoelectoral.interior.gob.es/estaticos/docxl/apliextr/04202305_MUNI.zip",
     "error": "curl: (56) Recv failure: Connection reset by peer",
