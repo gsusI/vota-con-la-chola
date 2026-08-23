@@ -1,0 +1,586 @@
+.page {
+  --actor-ink: #183b46;
+  --actor-ink-deep: #102c36;
+  --actor-teal-soft: #e9f4f2;
+  --actor-rust: #8c421f;
+  --actor-rust-soft: #fff0e8;
+  --actor-gold: #9b6a14;
+  --actor-gold-soft: #fff7df;
+  gap: 18px;
+  animation: actor-graph-page-enter 320ms ease-out both;
+}
+
+.identityPanel,
+.scaleSection,
+.relationshipCoverage,
+.actorSamplesSection,
+.relationshipSamplesSection,
+.causalityPanel,
+.provenanceSection {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: var(--shadow);
+}
+
+.identityPanel,
+.causalityPanel,
+.provenanceSection {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(360px, 1fr);
+  gap: 20px;
+  align-items: center;
+  padding: 20px;
+  transition: grid-template-columns 220ms ease, padding 220ms ease;
+}
+
+.eyebrow {
+  margin: 0 0 5px;
+  color: var(--actor-rust);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.sectionTitle {
+  margin: 0;
+  color: var(--actor-ink-deep);
+  font-family: var(--display);
+  font-size: clamp(1.35rem, 2vw, 2rem);
+  line-height: 1.1;
+}
+
+.sectionCopy,
+.sectionNote {
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+
+.sectionCopy {
+  max-width: 76ch;
+  margin: 9px 0 0;
+}
+
+.sectionNote {
+  max-width: 58ch;
+  margin: 0;
+}
+
+.sectionHeader {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  align-items: end;
+  justify-content: space-between;
+}
+
+.identityMetrics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+  transition: grid-template-columns 220ms ease;
+}
+
+.identityMetric {
+  min-width: 0;
+  border: 1px solid #bcd5d3;
+  border-left: 3px solid var(--actor-ink);
+  border-radius: 6px;
+  background: var(--actor-teal-soft);
+  padding: 11px;
+}
+
+.identityMetric dt,
+.kindMetric dt,
+.evidenceGrid dt,
+.actorMetadata dt,
+.relationshipMetadata dt,
+.hashGrid dt {
+  color: var(--ink-soft);
+  font-size: 0.67rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.identityMetric dd,
+.kindMetric dd,
+.evidenceGrid dd {
+  margin: 5px 0 0;
+  color: var(--actor-ink);
+  font-family: var(--display);
+  font-size: 1.4rem;
+  font-weight: 850;
+}
+
+.scaleSection,
+.relationshipCoverage,
+.actorSamplesSection,
+.relationshipSamplesSection {
+  display: grid;
+  gap: 18px;
+  padding: 20px;
+}
+
+.scaleBody {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(310px, 1fr);
+  gap: 12px;
+  transition: grid-template-columns 220ms ease;
+}
+
+.kindGrid,
+.evidenceGrid {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+}
+
+.kindGrid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  transition: grid-template-columns 220ms ease;
+}
+
+.kindMetric,
+.evidenceGrid > div {
+  min-width: 0;
+  border: 1px solid #c6d8d8;
+  border-radius: 6px;
+  background: #f3f8f7;
+  padding: 12px;
+}
+
+.evidenceGrid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  transition: grid-template-columns 220ms ease;
+}
+
+.evidenceGrid > div {
+  border-color: #e3c79b;
+  background: var(--actor-gold-soft);
+}
+
+.evidenceGrid dd {
+  color: var(--actor-gold);
+  font-size: 1.15rem;
+}
+
+.relationshipCoverageList {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  transition: grid-template-columns 220ms ease;
+}
+
+.relationshipCoverageItem {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.relationshipCoverageLabelRow {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+}
+
+.relationshipCoverageLabelRow span {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.relationshipCoverageLabelRow strong {
+  flex: 0 0 auto;
+  color: var(--actor-ink);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+}
+
+.relationshipTrack {
+  display: block;
+  overflow: hidden;
+  height: 8px;
+  border-radius: 999px;
+  background: #e5eeed;
+}
+
+.relationshipBar {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #8cbdb6, var(--actor-ink));
+  transform-origin: left center;
+  animation: actor-graph-bar-grow 420ms ease-out both;
+}
+
+.actorSampleList {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  transition: grid-template-columns 220ms ease;
+}
+
+.actorSampleItem {
+  min-width: 0;
+}
+
+.actorSampleCard {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  height: 100%;
+  min-width: 0;
+  border: 1px solid #d4dfde;
+  border-top: 3px solid var(--actor-ink);
+  border-radius: 7px;
+  background: #fff;
+  padding: 13px;
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.actorSampleCard:hover,
+.actorSampleCard:focus-within {
+  border-color: #7aa29d;
+  box-shadow: 0 11px 24px rgba(24, 59, 70, 0.12);
+  transform: translateY(-2px);
+}
+
+.actorSampleHeader,
+.actorSampleFooter,
+.relationshipSampleHeader,
+.relationshipSampleFooter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  align-items: center;
+}
+
+.actorSampleFooter,
+.relationshipSampleFooter {
+  border-top: 1px solid #e4e9e8;
+  padding-top: 10px;
+}
+
+.actorTypeBadge,
+.scopeBadge,
+.evidenceBadge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  border-radius: 999px;
+  padding: 4px 8px;
+  font-size: 0.67rem;
+  font-weight: 800;
+}
+
+.actorTypeBadge {
+  border: 1px solid #acd0ca;
+  background: var(--actor-teal-soft);
+  color: var(--actor-ink);
+}
+
+.scopeBadge {
+  background: #f0f2f2;
+  color: var(--ink-soft);
+}
+
+.actorSampleName {
+  margin: 0;
+  color: var(--actor-ink-deep);
+  font-family: var(--display);
+  font-size: 1.02rem;
+  line-height: 1.28;
+}
+
+.actorMetadata,
+.relationshipMetadata {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+}
+
+.actorMetadata > div,
+.relationshipMetadata > div {
+  display: grid;
+  grid-template-columns: minmax(90px, 0.7fr) minmax(0, 1.3fr);
+  gap: 8px;
+  align-items: baseline;
+  transition: grid-template-columns 180ms ease;
+}
+
+.actorMetadata dd,
+.relationshipMetadata dd {
+  min-width: 0;
+  margin: 0;
+  overflow-wrap: anywhere;
+  color: var(--ink);
+  font-size: 0.76rem;
+}
+
+.identifier {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  color: var(--ink-soft);
+  font-size: 0.65rem;
+}
+
+.relationshipSampleList {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 11px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  transition: grid-template-columns 220ms ease;
+}
+
+.relationshipSampleItem {
+  min-width: 0;
+}
+
+.relationshipSampleCard {
+  display: grid;
+  align-content: start;
+  gap: 13px;
+  height: 100%;
+  min-width: 0;
+  border: 1px solid #d8dfdf;
+  border-left: 4px solid var(--actor-rust);
+  border-radius: 7px;
+  background: #fff;
+  padding: 14px;
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.relationshipSampleCard:hover,
+.relationshipSampleCard:focus-within {
+  border-color: #b87351;
+  box-shadow: 0 11px 24px rgba(95, 49, 28, 0.11);
+  transform: translateY(-2px);
+}
+
+.relationshipType {
+  flex: 1 1 220px;
+  min-width: 0;
+  color: var(--actor-rust);
+  font-family: var(--mono);
+  font-size: 0.69rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.evidenceBadge {
+  flex: 0 0 auto;
+  border: 1px solid #dfc18e;
+  background: var(--actor-gold-soft);
+  color: var(--actor-gold);
+}
+
+.relationshipPath {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(88px, 0.65fr) minmax(0, 1fr);
+  gap: 8px;
+  align-items: center;
+  transition: grid-template-columns 220ms ease;
+}
+
+.pathNode {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  min-height: 62px;
+  border: 1px solid #cbd9d7;
+  border-radius: 7px;
+  background: var(--actor-teal-soft);
+  padding: 9px;
+  overflow-wrap: anywhere;
+  color: var(--actor-ink-deep);
+  font-size: 0.79rem;
+  line-height: 1.3;
+}
+
+.pathEdge {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+  min-width: 0;
+}
+
+.pathEdgeLine {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--actor-rust);
+  transform-origin: left center;
+  animation: actor-graph-edge-grow 360ms ease-out both;
+}
+
+.pathEdgeLabel {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  color: var(--actor-rust);
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  font-weight: 800;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.causalityPanel {
+  border-color: #e1bb9f;
+  background: linear-gradient(135deg, #fff 0%, var(--actor-rust-soft) 100%);
+}
+
+.limitList {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.limitList li {
+  border-left: 3px solid var(--actor-rust);
+  background: rgba(255, 255, 255, 0.78);
+  padding: 9px 11px;
+  color: var(--actor-rust);
+  font-weight: 780;
+}
+
+.hashGrid {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+}
+
+.hashGrid > div {
+  min-width: 0;
+  border: 1px solid #d7e1df;
+  border-radius: 6px;
+  background: #f5f9f8;
+  padding: 9px 10px;
+}
+
+.hashGrid dd {
+  margin: 4px 0 0;
+}
+
+.hashGrid code {
+  display: block;
+  overflow-wrap: anywhere;
+  color: var(--actor-ink);
+  font-size: 0.67rem;
+}
+
+@keyframes actor-graph-page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes actor-graph-bar-grow {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@keyframes actor-graph-edge-grow {
+  from { opacity: 0; transform: scaleX(0); }
+  to { opacity: 1; transform: scaleX(1); }
+}
+
+@media (max-width: 980px) {
+  .identityPanel,
+  .causalityPanel,
+  .provenanceSection,
+  .scaleBody {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .actorSampleList {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .relationshipCoverageList,
+  .relationshipSampleList {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .kindGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 540px) {
+  .identityPanel,
+  .scaleSection,
+  .relationshipCoverage,
+  .actorSamplesSection,
+  .relationshipSamplesSection,
+  .causalityPanel,
+  .provenanceSection {
+    padding: 15px;
+  }
+
+  .identityMetrics,
+  .actorSampleList,
+  .evidenceGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .relationshipPath {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .pathNode {
+    min-height: 0;
+  }
+
+  .pathEdge {
+    align-items: flex-start;
+  }
+
+  .pathEdgeLine {
+    width: 48px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page,
+  .relationshipBar,
+  .pathEdgeLine {
+    animation: none;
+  }
+
+  .identityPanel,
+  .causalityPanel,
+  .provenanceSection,
+  .identityMetrics,
+  .scaleBody,
+  .kindGrid,
+  .evidenceGrid,
+  .relationshipCoverageList,
+  .actorSampleList,
+  .actorSampleCard,
+  .actorMetadata > div,
+  .relationshipSampleList,
+  .relationshipSampleCard,
+  .relationshipPath {
+    transition: none;
+  }
+}

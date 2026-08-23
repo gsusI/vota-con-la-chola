@@ -1,0 +1,22 @@
+{
+  "api_version": "v1",
+  "current_release": {
+    "api_release_id": "feb61b39de9daddbcf53f5e1453cd9900c7272d6f1ee676ff9e3b8505729a300",
+    "href": "/api/v1/releases/feb61b39de9daddbcf53f5e1453cd9900c7272d6f1ee676ff9e3b8505729a300/index.json",
+    "sha256": "5d0938f7eeed2e9cdad59460c0d29bb4473d1d6f16f2a97ae64db614fd6dcc0d",
+    "snapshot_date": "2026-08-19",
+    "upstream_scale_release_id": "5d9ce557ed864de56f677a9f82c999a4ec0dfc494c086b1bfca0bb2e461272dd"
+  },
+  "links": {
+    "documentation": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/api/evidence-api-v1.md",
+    "schema": "/api/v1/schema.json"
+  },
+  "policy": {
+    "official_real_records_only": true,
+    "public_domain_personal_information": "retained",
+    "read_only": true,
+    "synthetic_or_mock_records": "forbidden",
+    "unknown_states_explicit": true
+  },
+  "schema_version": "evidence_api_current_pointer_v1"
+}

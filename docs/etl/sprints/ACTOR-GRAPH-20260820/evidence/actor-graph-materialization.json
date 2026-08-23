@@ -1,0 +1,184 @@
+{
+  "actor_manifest": {
+    "bytes": 147213,
+    "file": "actor-mandate-semantic-partition-manifest-latest.json",
+    "sha256": "807d3841554d24872043bdd0e3210482fcf88d99e81a52a9a050b935f14a678c"
+  },
+  "actors_by_kind": {
+    "office": 8,
+    "organization": 11622,
+    "person": 121960,
+    "unknown": 5
+  },
+  "actors_by_subtype": {
+    "government_position": 8,
+    "institution": 8156,
+    "international_organization": 2,
+    "organization": 13,
+    "parliamentary_group": 27,
+    "party": 3339,
+    "person": 5,
+    "person_registry": 121955,
+    "public_body": 82,
+    "state": 3,
+    "unknown": 5
+  },
+  "blocked_before_w3_006": [
+    "relationship_cross_source_shell_identity"
+  ],
+  "checks": {
+    "atomic_snapshot_replacement": true,
+    "conflict_mapping_violations": 0,
+    "cross_source_merges_published": 0,
+    "foreign_key_violations": 0,
+    "integrity_check": "ok",
+    "missing_graph_source_ids": [],
+    "name_only_merges_published": 0,
+    "node_contextual_validity_rows": 0,
+    "official_public_domain_information_retained": true,
+    "operational_append_only_history_proven": false,
+    "organization_change_events_without_evidence": 0,
+    "person_node_contextual_validity_rows": 0,
+    "published_public_byte_parity": true,
+    "real_data_only": true,
+    "relationship_cross_source_shell_ready": false,
+    "resolution_contextual_validity_rows": 0,
+    "source_mapping_exact": true,
+    "source_mapping_release_digest_exact": true,
+    "source_mapping_rows_actual": 55,
+    "source_mapping_rows_expected": 55,
+    "source_metadata_exact": true,
+    "synthetic_or_mock": false
+  },
+  "contract_version": "actor_graph_v1",
+  "database_counts": {
+    "actor_graph_alias_versions": 4186,
+    "actor_graph_identifier_versions": 79208,
+    "actor_graph_node_versions": 133595,
+    "actor_graph_nodes": 133595,
+    "actor_graph_relationship_evidence": 237973,
+    "actor_graph_relationship_versions": 237973,
+    "actor_graph_relationships": 237973,
+    "actor_graph_releases": 1,
+    "actor_graph_source_mappings": 55,
+    "actor_organization_change_events": 0,
+    "actor_organization_change_evidence": 0,
+    "actor_resolution_decisions": 133595,
+    "actor_resolution_evidence": 133595,
+    "source_mapping_conflicting_upstream_source_ids": 3,
+    "source_mapping_graph_source_ids": 55,
+    "source_mapping_namespaced_rows": 7,
+    "source_mapping_upstream_source_ids": 51
+  },
+  "evidence_by_kind": {
+    "exact_document": 61803,
+    "exact_record": 174296,
+    "source_default": 1874
+  },
+  "extractor_version": "actor_graph_real_projection_v2",
+  "input_artifacts": {
+    "agreements-moncloa-sample.json": {
+      "release_id": "6f75ec32a5c085fbf71109919de785e48a5d7b2dcdf8ea13b2aaddfcffdf3753",
+      "schema_version": "agreements-influence-public-v1",
+      "sha256": "8d8ce21967ac1c63a869dd2b5661877e789bb32fcc7e36f9626f9c2678fea678"
+    },
+    "geopolitics-moncloa-sample.json": {
+      "release_id": "6683fd44eece98198ab3040e264c584b878cb33aa43be719ae19b99f58246204",
+      "schema_version": "geopolitical_actions_sample_v1",
+      "sha256": "ea8c3eb11ff2e31e0a6585ee3f965b7d6dd5d662b2953952f4eb440a988c880e"
+    },
+    "indicators-eurostat-gdp-es.json": {
+      "release_id": "a5d2782888c550487087244b679cd0c5c89f95392a9de3d6a8384c734d757a69",
+      "schema_version": "indicator_public_slice_v1",
+      "sha256": "8a878b41108d2eb58989af825aa1a9309aca389c4da041b09a915230172ab8d7"
+    },
+    "promises-bng-2023.json": {
+      "release_id": "a3864cf278115becd5428afd0559985063a5c8b7e2bd459b244a6f07f1b81590",
+      "schema_version": "promises_public_sample_v1",
+      "sha256": "08a35fc3ff4f626331bd3e95a993f683163a6695dabfddfceb9e8dc6495eff52"
+    },
+    "spending-placsp-sample.json": {
+      "release_id": "7abe9ac62d4af254aa41a2ffb2a7b4b9cf3e1ae607c6082329da17330a86a7a6",
+      "schema_version": "spending_placsp_public_sample_v1",
+      "sha256": "b09990e1c05be599d728156f1e98030a8d1f5eb08ea90139467fd471cc40df34"
+    }
+  },
+  "input_counts": {
+    "agreement_actors": 37,
+    "boe_candidates": 42056,
+    "boe_effective_candidates": 10820,
+    "geopolitics_actors": 11,
+    "infoelectoral_elected": 8926,
+    "mandates": 88031,
+    "manifesto_publishers": 1,
+    "meeting_actors": 22,
+    "organization_memberships": 12,
+    "parliamentary_memberships": 949,
+    "party_aliases": 2562,
+    "person_aliases": 1624,
+    "person_identifiers": 79168,
+    "spending_actors": 40
+  },
+  "limitations": [
+    "Existing normalized identities are re-scoped by source and are not external identity adjudication.",
+    "No name-only cross-source merge is published.",
+    "No reviewed coalition, merger, split, rename, or succession event is present in this first release.",
+    "An outcome indicator does not identify the actor responsible for that outcome.",
+    "A graph path does not prove causation, influence, merit, blame, corruption, or wrongdoing.",
+    "Full graph durable-origin publication, second-snapshot versioning, and identity precision/recall remain open.",
+    "This standalone builder atomically replaces the current snapshot; operational append-only history is not yet proven.",
+    "Relationship shell identity across multiple sources must be resolved before W3-006 cross-source actor merging."
+  ],
+  "outputs": {
+    "database": "actor-graph-v1.db",
+    "public": "ui/gh-pages-next/public/actor-graph/data/graph.json",
+    "published": "etl/data/published/actor-graph-v1.json"
+  },
+  "public_artifact": {
+    "bytes": 55209,
+    "sha256": "9272fb7395b1aa2392f1626d85ae1bc438ab9583a414b5ba6d4c1e37cc8b9f25"
+  },
+  "relationships_by_type": {
+    "acts_in_geopolitical_action": 11,
+    "acts_in_spending_item": 40,
+    "affiliated_with_party": 87068,
+    "candidate_for": 42056,
+    "effective_candidate_for": 10820,
+    "elected_in": 8926,
+    "holds_role_at": 88031,
+    "member_of_organization": 12,
+    "member_of_parliamentary_group": 949,
+    "participates_in_meeting": 22,
+    "party_to_agreement": 37,
+    "publishes_manifesto": 1
+  },
+  "release_id": "e52dd7fac6f29570d23756e927e0b9cfe73d1bf2f7c30fa01de75d4dc3a6f4a5",
+  "resolution_outcomes": {
+    "source_scoped": 133595
+  },
+  "schema_version": "actor_graph_materialization_v1",
+  "snapshot_date": "2026-08-20",
+  "source_database": {
+    "bytes": 1575038976,
+    "file": "politicos-es.db",
+    "sha256": "46e72488f24bbecc240ac94c524fe503b8599d742c983595919678a842c5f0e3"
+  },
+  "source_mapping": {
+    "conflicting_upstream_ids": [
+      "moncloa_referencias",
+      "placsp_sindicacion",
+      "programas_partidos"
+    ],
+    "conflicting_upstream_source_ids": 3,
+    "graph_source_ids": 55,
+    "identical_metadata_mapping_rows": 0,
+    "mapping_rows": 55,
+    "namespaced_mapping_rows": 7,
+    "unique_mapping_rows": 48,
+    "upstream_source_ids": 51
+  },
+  "source_mapping_semantic_sha256": "b7d7d06f456bad77204d4b4e1a7fe9c17bd5cfc58a9a2888f2db9b26a22b40e3",
+  "source_scopes": 30,
+  "source_semantic_sha256": "177545e3eab0bff97e03647805fbae82bda40f1831418a2944396267f12c31e7",
+  "status": "passed"
+}

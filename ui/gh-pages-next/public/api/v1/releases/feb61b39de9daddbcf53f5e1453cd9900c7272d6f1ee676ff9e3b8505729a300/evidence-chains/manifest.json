@@ -1,0 +1,59 @@
+{
+  "api_release_id": "feb61b39de9daddbcf53f5e1453cd9900c7272d6f1ee676ff9e3b8505729a300",
+  "api_version": "v1",
+  "collection": "evidence-chains",
+  "first": "/api/v1/releases/feb61b39de9daddbcf53f5e1453cd9900c7272d6f1ee676ff9e3b8505729a300/evidence-chains/pages/00000001-83a15154a2f87d1c3be815b6f45361ab372c42870f734696450111a5795eebe3.json",
+  "item_count": 1105,
+  "page_count": 5,
+  "page_size": 250,
+  "pages": [
+    {
+      "bytes": 584838,
+      "first_key": "evidence-chain:000e3c28f855160c5437a2b3e40985b8231f184ffcef8d2be1abb3bddf6190ae",
+      "href": "/api/v1/releases/feb61b39de9daddbcf53f5e1453cd9900c7272d6f1ee676ff9e3b8505729a300/evidence-chains/pages/00000001-83a15154a2f87d1c3be815b6f45361ab372c42870f734696450111a5795eebe3.json",
+      "item_count": 250,
+      "last_key": "evidence-chain:3b510efbb7e5e4cae306bfdd4f32a8684e676f3c5804456c86d31f09cc70f20b",
+      "page_number": 1,
+      "sha256": "83a15154a2f87d1c3be815b6f45361ab372c42870f734696450111a5795eebe3"
+    },
+    {
+      "bytes": 587313,
+      "first_key": "evidence-chain:3b8c3d65750b012e88db50e95873e05f9aae202c9facfd3c1748840b528afc76",
+      "href": "/api/v1/releases/feb61b39de9daddbcf53f5e1453cd9900c7272d6f1ee676ff9e3b8505729a300/evidence-chains/pages/00000002-cf337b80e341dabd4c6453886f6de6c324395ab47f65f1a8fd169e104c02dbeb.json",
+      "item_count": 250,
+      "last_key": "evidence-chain:7748797833b49c43552139f728361d91827f9c00b515c76560883d0dfb08ae11",
+      "page_number": 2,
+      "sha256": "cf337b80e341dabd4c6453886f6de6c324395ab47f65f1a8fd169e104c02dbeb"
+    },
+    {
+      "bytes": 589144,
+      "first_key": "evidence-chain:77535d6b2168acb2d845bce51cf55d2adb299fbabd776908add7ecdfd1037676",
+      "href": "/api/v1/releases/feb61b39de9daddbcf53f5e1453cd9900c7272d6f1ee676ff9e3b8505729a300/evidence-chains/pages/00000003-b0fe9e2ee44d906a4305bb5cfe41d1f81060abd72d30184335a7cea36e624571.json",
+      "item_count": 250,
+      "last_key": "evidence-chain:ac838d5c3b7c22cf3d36ead953201ad23faef0152ca819d3023f5b394b1289fe",
+      "page_number": 3,
+      "sha256": "b0fe9e2ee44d906a4305bb5cfe41d1f81060abd72d30184335a7cea36e624571"
+    },
+    {
+      "bytes": 586757,
+      "first_key": "evidence-chain:acaacd74c902b80a6f71f5e8c68cd687d4b5a4a654767bf0504179abf26091ff",
+      "href": "/api/v1/releases/feb61b39de9daddbcf53f5e1453cd9900c7272d6f1ee676ff9e3b8505729a300/evidence-chains/pages/00000004-80a446e9e8b5c27aca46b8fc4db38bb768a34afea401dfb4340cb4bd910b11b8.json",
+      "item_count": 250,
+      "last_key": "evidence-chain:e820a8aaad34b6e55607427feeffb117bac1fd9a4afc38cad51446231c805898",
+      "page_number": 4,
+      "sha256": "80a446e9e8b5c27aca46b8fc4db38bb768a34afea401dfb4340cb4bd910b11b8"
+    },
+    {
+      "bytes": 247232,
+      "first_key": "evidence-chain:e8316170adbaa8f862bf0376cd9651811a8242cb03a47143415136ebf6c13951",
+      "href": "/api/v1/releases/feb61b39de9daddbcf53f5e1453cd9900c7272d6f1ee676ff9e3b8505729a300/evidence-chains/pages/00000005-5358c194a51770efcc075b4ac97e84d3151b1810bb4ec60dd2a882477e08d95f.json",
+      "item_count": 105,
+      "last_key": "evidence-chain:ffddb7ac957c3bb0b4d4ae2ae6eb9074fa3d9fb0767fe80c60a8975b7c1b7bef",
+      "page_number": 5,
+      "sha256": "5358c194a51770efcc075b4ac97e84d3151b1810bb4ec60dd2a882477e08d95f"
+    }
+  ],
+  "pagination": "opaque seek cursor; follow page_info.next",
+  "schema_version": "evidence_api_collection_manifest_v1",
+  "sort": "id ascending, Unicode code-point order"
+}
