@@ -1,7 +1,34 @@
 # ROADMAP
 
 Status: `canonical`
-Updated: `2026-08-12`
+Updated: `2026-08-23`
+
+Scope boundary: strategic direction, delivery sequence, evidence gates, ownership roles, and societal-scale completion. Operational row status remains in the tracker; near-term commands remain in the technical roadmap.
+
+**Estimation status:** Not requested. Estimation is premature while representative source scope, durable raw origin, review operations, release authority, and production infrastructure remain unresolved; measured local C2 throughput is evidence, not a fabricated delivery or provider-cost estimate.
+
+## Revision Record
+
+| Revision | Date | New input | Material changes |
+| --- | --- | --- | --- |
+| `REV-01` | `2026-08-23` | Maintainer mandate for end-to-end accountability at million-item scale using official real data and retaining public-domain identity | Canonical mission, scale classes, SLOs, ten delivery waves, and societal-scale DoD established and updated from current artifacts. |
+| `REV-02` | `2026-08-23` | Systematic scope audit of this canonical roadmap plus current C1/C2, actor-graph, comparison, origin, restore, and review evidence | Added claim ledger, normalized topics, initiatives, outcome-based epics, granular stories, ownership, uncertainty, bidirectional traceability, explicit estimate omission, decision questions, audit log, and residual-risk register. Existing `W*` truth remains authoritative and unchanged by the planning index. |
+
+## Executive Summary
+
+Outcome: public users must be able to trace promises, decisions, responsibility, money, implementation, outcomes, disputes, and corrections to primary official evidence without an automated anomaly becoming a corruption verdict.
+
+Current posture is useful foundation, not societal scale. Seven real corpora and three million-row lanes exist, but zero lanes are promoted because representativeness, source-total reconciliation, durable recovery, correction handling, or other lane-specific gates remain open. Analytical releases have durable origin and clean-restore evidence; full raw-document origin and restore do not.
+
+Immediate release truth as of `2026-08-23`:
+
+- actor graph v1 and promise/action comparison C1 are locally validated but still require live publication and exact remote verification;
+- outcome-context C1 public v3 status, immutable `17`-asset evidence package, full `1,435`-page build, local route/asset audit, and real browser verification agree; remote publication and exact live verification remain open;
+- outcome C2A physically processes all `33,726` national-only real pairs and C2B physically processes all `2,865,602` wider strict real pairs through streaming keyset batches, checkpoints, partitions and independent semantic validation; these are internal L0 capacity facts, never outcome relationships or scale-promotion claims;
+- outcome human review, durable remote artifact origin, remote clean restore/rollback, public release, and any reviewed public outcome link remain open;
+- high-risk integrity findings remain unauthorized while representative lanes and the review/correction plane are incomplete.
+
+Delivery is organized into four initiatives and eleven non-overlapping outcome epics. Existing Waves `W0..W9` retain detailed scope and status; the systematic planning layer below indexes rather than duplicates them. Named human owners, source-universe approvals, review staffing, and publication authority remain decision-changing gaps. Estimates are intentionally omitted until those choices make scope coherent.
 
 ## 1. Mission
 
@@ -118,9 +145,11 @@ Each lane must reach `R2` independently:
 8. accountability: issue ledgers, evidence edges, claims, counterevidence, corrections, appeals;
 9. participation: review tasks, calibration, adjudication, contributor and release evidence.
 
-## 5. Verified Baseline — 2026-08-12
+## 5. Verified Baseline and Dated Proof Register — updated 2026-08-23
 
-`just etl-scale-readiness` currently validates six materialized official-source corpora:
+This section preserves dated milestone evidence. Its figures are verified snapshots, not a substitute for live operational status. `docs/etl/e2e-scrape-load-tracker.md` remains the authority for current commands, blockers, and mutable execution state; material direction changes still begin here.
+
+`just etl-scale-readiness` currently validates seven materialized official-source corpora:
 
 | Lane | Real rows | Files | Current proof | Promotion blockers |
 | --- | ---: | ---: | --- | --- |
@@ -130,23 +159,26 @@ Each lane must reach `R2` independently:
 | BDNS subsidy facts | `1,360,382` | `14` Parquet files | current v7 full-row validation and correct `s2_1m` capacity label; all `1,360,382` official beneficiary names and all `163,270` source-published identifiers retained; `1,419/1,419` queue/page/version/source/amount totals exact; `89/89` selected daily windows complete; durable HF origin and isolated clean-room restore verified | no second snapshot or full-history/representative reconciliation |
 | Accountability ledger | `126,760` | `13` Parquet files | clean real-only rebuild; full source/URL/lineage validation; `13/13` unchanged partitions reused; `26` blank legacy source IDs explicitly inferred from allowlisted BOE URLs; durable HF origin and clean restore verified | parliamentary-heavy mix; below `R2` |
 | Actor mandates | `88,031` | `108` Parquet files | official origins, full URL coverage, identity states, `108/108` unchanged partitions reused; durable HF origin and clean restore verified | below `R1`; uneven jurisdiction mix; external identity precision/recall open |
+| Candidate occurrences | `10,820` effective / `42,056` captured base | `2` semantic Parquet files | exact official BOE names and source paragraphs retained for all `42,056` base rows; `10,820` reviewed effective rows have normalized person/party/source/document lineage; `88` are correction-backed; independent full validation; `2/2` unchanged partitions hardlinked; all `776` pending correction paragraphs have immutable dual-review tasks backed by a deduplicated `3,713`-candidacy / `31,241`-candidate context corpus | eight historical correction documents remain unapplied and all `776` tasks await two independent human decisions; November 2019 has a source identifier defect; outcomes deliberately unknown; durable origin, clean restore, representative scope, and `R2` remain open |
 
 Current truth:
 
-- registered real corpora: `6`;
+- registered real corpora: `7`;
 - real million-scale row lanes: `3`;
 - promoted lanes: `0`;
-- candidate occurrences: `8,926` official historical elected outcomes; accepted nominal candidate corpus still `0` because official archive access is blocked;
+- repository proof: the last completed full Docker run passed `1,401` tests (`12` contextual skips); a fresh post-C2/public-contract full run is required before release. All `92` staging SQLite databases pass the enforced integrity audit with zero issues, the latest real-only gate scans `124,577` files with zero findings, publication hygiene scans `16,803` files with zero secret/session/workstation findings, and repo-root hygiene passes. These gates deliberately retain official public-domain identity fields;
+- candidate occurrences: seven exact BOE proclamation documents now preserve `42,056` immutable base nominations across `4,901` candidacies for the 2015, 2016, April 2019, May 2019, 2023 and 2024 election dates (`25,077` titular; `16,979` substitute; `185` not-proclaimed candidacies). Eleven correction documents preserve all `956` exact paragraphs. The reviewed three-document 2023/2024 base remains `10,815` rows / `1,188` candidacies and materializes through `17` exact operations into `10,820` effective nominations; its `180` reviewed correction paragraphs divide into `127` operation evidence and `53` structural/context rows. The other eight correction documents retain `776` exact paragraphs in `captured_unapplied`; a deterministic dual-review queue maps every paragraph to exact BOE URL/checksum/text and structural candidate hints, while one deduplicated JSONL retains their full `3,713` candidacies / `31,241` public candidate rows once. All `776` decisions remain blank, regeneration preserves completed human work or fails on evidence drift, and the `31,241` rows remain machine-blocked from effective state. The official November 2019 proclamation and corrections are captured in the document corpus but candidate ingestion fails closed because one candidacy heading omits its required number; no number is invented. Every captured base row keeps its exact public name, paragraph, URL, checksum, source record and document lineage. Every effective row has person, party, source-record and document-source lineage; `10,795` exact base person links are reused, `25` changed/new names receive source-scoped identities, and all `88` correction-backed rows receive immutable source records. The semantic artifact remains `2` Parquet partitions / `2,083,541` bytes, preserves all `10,820` effective names/text, validates fully, and replays `2/2` unchanged. The separate `8,926` elected outcomes remain another fact type; BOE `is_elected` stays null. Cross-source identity is not inferred; durable origin/restore are not claimed; the lane remains below societal scale;
 - BDNS: current partitioned durable acquisition and v7 artifact reconcile `1,360,382` official rows, `1,419` page captures, `1,360,382` immutable version sightings, exact official identity retention, correct `s2_1m` classification, and unchanged `14`-file replay; append-only expansion revalidated source totals and completed all `89/89` selected daily windows without retry or dead work;
-- durable analytical origin: published content-addressed HF release v2 `5872efaf...` is remotely verified for all six registered corpora (`5,403,506` rows, `8,595` canonical data files, `498,631,274` bytes) with no public-identity transformation. Its stable artifact contract `bb99c119...c2c` exactly matches the current local data/provenance contract; pointer, manifest, registry and readiness also match. Verification passes without errors or warnings. All six registry flags remain `durable_public_origin=true`;
+- durable analytical origin: published content-addressed HF release v2 `5d9ce557...` is remotely verified for all seven registered corpora (`5,414,326` rows, `8,597` canonical data files, `500,714,815` data bytes) with no public-identity transformation. Its stable artifact contract `d7de5544...6565` exactly matches the current local data/provenance contract. Live pointer, manifest, registry/readiness metadata, corpus parity, real-only policy, and SSH Ed25519 attestation pass without errors or warnings. All seven registry flags remain `durable_public_origin=true`; external second-party reproduction remains open;
 - clean-room recovery: two fresh empty caches fetched every selected artifact for all six corpora. BDNS downloaded `20` files / `43,042,223` bytes; the other five downloaded `8,601` files / `461,088,883` bytes with a `10 GiB` post-restore reserve. Isolated copied validators full-validated all `5,403,506` rows, `8,595` data files, checksums, semantics, public identity retention, lineage, and bounded memory. All six registry flags are `clean_room_restore=true`; this does not claim source-database reconstruction, historical completeness, representativeness, or promotion;
-- explicit release recovery: restore accepts an exact `scale/snapshots/<date>/<full-manifest-sha256>` target and validates the path against the fetched manifest without reading `scale/latest.json`. A fresh actor-lane drill recovered `114` selected files / `9,688,787` bytes and full-validated `88,031` real mandate rows from published release `623b4a5a...`; mutable-pointer rollback, supersession policy, and measured RPO/RTO remain open;
+- explicit release recovery and rollback planning: restore accepts an exact `scale/snapshots/<date>/<full-manifest-sha256>` target and validates the path against the fetched manifest without reading `scale/latest.json`. A fresh full rollback-candidate drill against prior published release `623b4a5a...` recovered and checksum-verified `8,619/8,619` files / `504,093,303` bytes in `1,199.614s`, then independently full-validated all six corpora / `5,403,506` rows with official-public identity retention and peak RSS `1,007.453 MB`. A later GET-only plan rechecked current `5872efaf...` and target `623b4a5a...`, bound all evidence by SHA-256, proved zero row/file/byte delta, captured compare-and-swap expectations, and requires preservation of both immutable releases. It records `authorized=false` and `mutation_performed=false`. The disposable cache was removed after proof. Actual pointer activation, formal RPO and measured activation RTO remain open;
 - analytical SQLite rebuild: the explicitly restored actor corpus rebuilds through bounded Parquet batches into an atomic SQLite artifact. Two independent runs reconcile `88,031` rows, `108` files, `9,236,064` input bytes, `88,031` unique mandate IDs, exact logical row hash `eb7fdb8e...`, integrity/FK checks, and identical `71,168,000`-byte DB SHA-256 `61cfdf8e...`. This proves deterministic analytical recovery, not yet reconstruction of the normalized production schema;
 - accountability ledger: `126,760` real rows are recovered and validated after removing `10` fixture-derived money rows; the mix remains parliamentary-heavy and below `R2`;
 - vote source transport: the disk-backed audit reconciles all `1,809,222` rows, `8,373` shard hashes and `6,426` distinct URLs. HTTPS covers `1,707,050` rows / `5,260` URLs. All `102,172` HTTP rows / `1,166` URLs are Senate legislatures 10 and 12; local checksum captures cover `33,683` rows / `484` URLs, while `68,489` rows / `682` URLs remain uncaptured. Two bounded HTTPS candidates returned `403` HTML, so historical URLs remain unchanged and promotion stays blocked;
-- documents: `21,398` real instances / `19,538` content hashes are inventoried; source provenance, extraction quality, and OCR coverage remain below gate;
-- raw-object local CAS: bounded parallel replication and restore now operate in streaming batches. The real linked-text set (`6,792` objects / `133,219,457` bytes) deduplicates `6,792/6,792`, emits the same deterministic manifest SHA-256 `6e496f35...` on replay, and full-restores all objects with `16` workers after a `10 GiB` reserve preflight. This is a local contract/throughput proof, not a durable external S3-origin claim and not coverage of all `21,398` document instances;
-- document provenance: the file-level disk-backed audit reconciles all `21,398` inventory rows, verifies checksum lineage for `10,219` files (`47.7568%`) and public URLs for `10,195` (`47.6446%`), verifies all `6,792` referenced compressed text artifacts, and exposes `11,179` unlinked files without promotion;
+- documents: `111,422` raw files are discovered; `111,408` accountability-eligible official instances / `109,558` content hashes / `5,093,218,479` bytes pass the numeric `R1` gate after excluding `5` fixture/sample files and `9` preserved transport-failure captures. The official BOE lane now contains `1,034` exact daily summaries and `89,001` individual XML documents; the sparse historical candidate acquisition added `18` exact summary dates and `21` exact documents. Every BOE document job is terminal success and every accepted file links to its summary item, HTTPS URL, checksum, byte count, retrieval, and portable manifest. Incremental inventory reuses `111,369` checksum-identical rows and inspects only `48` instances. Resumable v5 extraction covers all `111,408` instances / `109,558` content objects: `1,999,902,681` unsanitized public text characters, `108,139` checksum-addressed text objects, zero failures/retries/dead work, and zero truncation. Independent validation rehashes every raw instance and CAS object. Additive OCR remains `856/856` empty/sparse pages across `58` PDFs; the deterministic `40`-page human packet has blank decisions and `0/40` complete reviews. Numeric `R1` is reached; representative source/format/language coverage, human OCR quality, durable raw origin, and million-document scale remain open;
+- raw-object local CAS: bounded parallel replication and restore operate in streaming batches. The older linked-text subset (`6,792` objects / `133,219,457` bytes) still proves deterministic local replay and full restore with `16` workers, but it is not a durable external S3-origin claim and does not cover the current `111,408`-document corpus. The v5 native-text CAS contains `108,139` checksum-verified objects / `533,125,716` compressed bytes; remote replication and clean restore of that full set remain open;
+- document provenance: the disk-backed audit reconciles all `111,408` eligible inventory rows, verifies checksum lineage and public URLs for `111,357` files (`99.9542%`), reports zero checksum/declared-byte conflicts, and exposes the same `51` historical gaps / `8,315,544` bytes without promotion. All `89,001` BOE documents and `1,034` summaries are provenance-linked; no new gap was introduced. Existing exact recovery classes remain distinct: embedded official URLs, captured hrefs plus byte-identical GETs, archived SQLite metadata, publication identifiers, official path projections, explicit source sidecars, real program/vote manifests, and JEC/Andalusian Parliament edges. Wayback reuses its `43`-row portable checkpoint, makes zero repeated network probes without a new lever, preserves `5/5` byte-mismatch rejections and seven failed URL variants, and publishes no false relation. The residual queue remains `25` Europarliament captures, `25` party-program captures, and one changed historical Senate XML. Close them only with byte-identical immutable evidence or an exact primary-source manifest;
+- readiness drift control: the public readiness builder loads the document inventory, provenance audit, remediation queue, checkpointed Wayback recovery report, portable checkpoint, and exact-match manifest, native extraction, independent native validation, page OCR, independent OCR validation, human assignment contract, review validation, and reviewed CSV directly. It verifies schema versions, evidence hashes, archive target/path/query/candidate/queue/audit balance, raw/CAS checksums, zero truncation, row/page balance, immutable task assignments, reviewer fields, and identity-retention policy before emitting structured metrics. Review preparation refuses to overwrite any completed human field. A stale or partial processing claim fails the release gate;
 - corruption-risk publication: `0` promoted representative lanes and therefore no inferred high-risk public verdict is authorized.
 
 Status: `REAL FOUNDATION READY; SOCIETAL SCALE INCOMPLETE`.
@@ -200,6 +232,8 @@ Status: `REAL FOUNDATION READY; SOCIETAL SCALE INCOMPLETE`.
 - High-risk publication requires corroboration, human review, conflict disclosure, counterevidence, right of reply where appropriate, and correction/version history.
 - Official court, audit, or control-body findings remain distinct from project inference.
 - Reviewer operational credentials and non-public session state follow least-exposure rules. Official public-domain identity evidence remains publishable and traceable.
+- Million-scale review uses a generated candidate queue plus small append-only decision records keyed to immutable evidence/version IDs. Review tasks reference bounded evidence packets; they do not duplicate entire candidate, participant, or source corpora.
+- Review operations must expose leases, heartbeat/reclaim, identified reviewers, calibration state, independent dual review, adjudication, conflicts, appeals, queue age, throughput, and correction SLA. Public-source names and identifiers remain in referenced evidence at every scale; task minimization is not identity redaction.
 
 ## 7. Delivery Program
 
@@ -211,14 +245,14 @@ Target: two weeks. Priority: `P0`.
 
 | ID | Task | Dependency | Exit evidence |
 | --- | --- | --- | --- |
-| `W0-001` | Enforce official-real-only registry in local and CI readiness | none | disallowed evidence fails; six current corpora pass actual file and provenance audit |
+| `W0-001` | `PARTIAL 2026-08-13`: enforce official-real-only registry in local and CI readiness | none | six scale corpora pass file/provenance gates; all `25` configured fallback sources have immutable path/size/SHA-256/official-HTTPS registry entries, `9` deep sidecars validate against archived official captures, five inherited invented-person fixtures were replaced with exact public records, and `just etl-audit-official-samples` fails on drift or known invented/test markers; next: add equivalent capture-sidecar coverage to every legacy source rather than relying on the central hash registry alone |
 | `W0-002` | Remove obsolete capacity-only outputs, generators, recipes, and roadmap claims | `W0-001` | repository search and artifact inventory show no such output used for readiness |
 | `W0-003` | `DONE 2026-08-12`: regenerate and scale BDNS semantic root from fresh official acquisition | storage preflight | `1,360,382` rows; v6 manifest/full validation; exact source/amount/public-field balance; `1/1` unchanged partition reused through `14/14` hardlinks; validator peak RSS `292.719 MB` via disk-backed exact uniqueness |
-| `W0-004` | Regenerate accountability-ledger root from current canonical evidence | BDNS optional; votes required | every ledger edge resolves; actor/issue/role unknowns explicit; full validation |
-| `W0-005` | `PARTIAL 2026-08-12`: reconcile live document inventory to actual object/text files | none | `21,398/21,398` inventory rows balanced; `10,219` checksum-linked files, `10,195` public-URL-linked files, `6,792/6,792` text artifacts checksum-verified, zero checksum conflicts; next: recover official lineage for `11,179` unlinked files and reconcile fetch/extract/OCR states |
+| `W0-004` | `DONE 2026-08-12`: regenerate accountability-ledger root from current canonical evidence | BDNS optional; votes required | clean real-only root contains `126,760/126,760` lineage and public URLs, `126,757` resolved actor states plus `3` explicit unresolved states, full validation, `13/13` unchanged replay, durable origin and clean restore; the separate scale/representativeness gate remains open |
+| `W0-005` | `PARTIAL 2026-08-13`: reconcile live document inventory to actual object/text files | none | `111,408/111,408` eligible official rows balanced; `111,357` checksum- and public-URL-linked files (`99.9542%`); all `109,558` contents extracted into `108,139` verified text objects / `1,999,902,681` characters with zero retry, dead work, failure, or truncation; all `856` routed pages remain in the independently validated additive OCR lane; `40` real review rows contain `0` invented labels; Wayback checkpoint replays offline; the same `51` historical gaps remain and human review is `0/40` |
 | `W0-006` | Repair the 350 vote rows without public URLs or document a checksum-backed official replacement | official source availability | `DONE 2026-08-12`: verified Congreso capture URL plus official/captured checksums; `0` unexplained missing URL rows |
 | `W0-007` | `PARTIAL 2026-08-12`: inventory official HTTP lineage and secure/capture immutable replacements | `W0-006` | all `102,172` HTTP rows / `1,166` URLs classified; `33,683` rows / `484` URLs have local checksum captures; `68,489` rows / `682` URLs still require immutable official captures or content-equivalent HTTPS; two bounded HTTPS probes returned `403`; promotion policy explicit and no silent rewrite |
-| `W0-008` | Make tracker, technical roadmap, and project knowledge match current artifacts | `W0-001..007` | no absent artifact is `DONE`; commands and next gates current |
+| `W0-008` | `DONE 2026-08-13`: make tracker, technical roadmap, registry, readiness, and project knowledge match current artifacts | `W0-001..007` | registry-backed readiness machine-validates document inventory, provenance, native extraction, OCR, independent validations, and unlabeled human-review queue; no absent artifact is `DONE`; commands and next gates current |
 
 Wave exit:
 
@@ -234,12 +268,13 @@ Target: four weeks. Priority: `P0`.
 | --- | --- | --- | --- |
 | `W1-001` | `PARTIAL 2026-08-12`: use the existing public HF dataset for immutable analytical scale releases and retain S3-compatible CAS for raw objects | `W0` | scale path/version/latest contract implemented; raw-object bucket/retention contract still open |
 | `W1-002` | `PARTIAL 2026-08-12`: upload immutable raw objects by SHA-256 | `W1-001` | 16-worker local CAS replay is idempotent for `6,792` real objects and full-manifest restore passes; remote S3-compatible upload, versioning/retention proof, and all-document coverage remain open |
-| `W1-003` | `DONE 2026-08-12`: upload Parquet/shards/manifests as immutable release | `W1-001` | published contract-bearing release v2 `5872efaf...` is content-addressed and remotely verified for `6` corpora / `5,403,506` rows / `8,595` files / `498,631,274` bytes; artifact, registry and readiness parity pass without warnings |
+| `W1-003` | `DONE 2026-08-19`: upload Parquet/shards/manifests as immutable release | `W1-001` | published signed release v2 `5d9ce557...` is content-addressed and remotely verified for `7` corpora / `5,414,326` rows / `8,597` data files / `500,714,815` data bytes; artifact, corpus, registry/readiness metadata, policy, and signature parity pass without warnings |
 | `W1-004` | `DONE 2026-08-12`: add bounded origin-to-cache fetch by checksum | `W1-002` | worker streams atomically, verifies bytes/SHA-256, reuses verified files, checks storage before download, and restored all six real corpora from fresh empty caches |
-| `W1-005` | `DONE 2026-08-12`: run full clean-room restore of every registered analytical lane | `W1-003..004` | isolated no-project validators full-validate `5,403,506` rows / `8,595` data files after fresh-cache download; every registry `clean_room_restore` flag is true; no canonical corpus input used |
-| `W1-006` | `PARTIAL 2026-08-12`: add database rebuild from immutable inputs | `W1-002` | actor analytical slice rebuilds twice to byte-identical SQLite with exact logical rows and integrity checks; normalized production-schema reconstruction and relationship reconciliation remain open |
-| `W1-007` | `PARTIAL 2026-08-12`: define RPO/RTO, release rollback, and supersession | `W1-003` | explicit immutable-release recovery is implemented and rehearsed on `actor_mandates` (`114` files / `88,031` rows); latest-pointer rollback, supersession rules, and measured RPO/RTO remain open |
-| `W1-008` | Publish storage health without secrets or workstation paths | `W1-003` | public status artifact passes publication-hygiene gate |
+| `W1-005` | `PARTIAL 2026-08-12`: run full clean-room restore of every registered analytical lane | `W1-003..004` | isolated no-project validators full-validate `5,403,506` rows / `8,595` data files for the six legacy restore-enabled corpora after fresh-cache download; candidate occurrences remains registered with `clean_room_restore=false`, so every-lane recovery is still open; no canonical corpus input was used in the six completed proofs |
+| `W1-006` | Prove remote raw-object immutability, versioning, retention, lifecycle, and recovery | `W1-001..002` | independent configuration audit plus write/read/version/delete-guard/restore drill on a dedicated non-production prefix; secrets excluded; retention and recovery evidence current |
+| `W1-007` | `PARTIAL 2026-08-12`: define RPO/RTO, release rollback, and supersession | `W1-003` | prior immutable release `623b4a5a...` full-restored `8,619` checksum-valid files / `504,093,303` bytes in `1,199.614s` and full-validated all six corpora / `5,403,506` rows. GET-only rollback plan from live `5872efaf...` passes all checks with zero data delta, evidence SHA bindings, compare-and-swap, immutable-release preservation, `authorized=false`, and `mutation_performed=false`; next: activate/revert under explicit authority, record supersession, approve formal RPO, and measure pointer activation RTO |
+| `W1-008` | `PARTIAL 2026-08-12`: publish storage health without secrets or workstation paths | `W1-003` | public-safe local artifact aggregates real BDNS/PLACSP preflights, validates reserve/headroom arithmetic, hashes its evidence and omits roots/session/workstation state; next: place the artifact in the next explicitly authorized public release and monitor freshness |
+| `W1-009` | `PARTIAL 2026-08-13`: publish exact official `source_records` instead of suppressing public identity evidence | `W0-001`, `W1-003` | HF packaging includes `source_records` by default and excludes only operational `raw_fetches`, `run_fetches`, and `lost_and_found`; the regenerated audit passes `231,438` exact rows / `269,872,457` raw-payload bytes / `34` sources, requires official public HTTP origin, rejects secrets/private-session/workstation markers, and reports `identity_fields_removed=0`; next: complete local Parquet packaging and publish/restore only with explicit release authority |
 
 Wave exit: local disk can be lost without losing published evidence.
 
@@ -249,13 +284,13 @@ Target: six weeks. Priority: `P0`.
 
 | ID | Task | Dependency | Exit evidence |
 | --- | --- | --- | --- |
-| `W2-001` | Classify every real document by source, MIME, size, language, page count, encryption, and text density | `W0-005` | `100%` classified or explicit unknown |
+| `W2-001` | `PARTIAL 2026-08-13`: classify every real document by source, MIME, size, language, page count, encryption, and text density | `W0-005` | all `111,408` classified for source/MIME/size/format and all `1,437` PDFs for page/text density; explicit language/encryption completeness remains open |
 | `W2-002` | Apply per-host discovery/fetch budgets and politeness | `W1` | host SLO and request budget report |
 | `W2-003` | Stream fetch with byte/time limits, checksum, partial cleanup, retries, and dead letters | `W2-002` | every item terminal or reclaimable; zero orphan partials |
-| `W2-004` | Extract digital PDF, HTML, and office text by page/section | `W2-001` | page lineage, parser version, character counts, failure reason |
-| `W2-005` | Route only text-poor pages to OCR | `W2-004` | route reason and input/engine/version cache key persisted |
-| `W2-006` | Build a stratified 100,000-document official cohort | `W2-001..005` | source/format/size/language strata published |
-| `W2-007` | Human-review extraction and OCR quality | `W2-006` | precision/recall or character/field accuracy by stratum; disagreements adjudicated |
+| `W2-004` | `PARTIAL 2026-08-13`: extract digital PDF, HTML, and office text by page/section | `W2-001` | current corpus complete at `111,408/111,408` instances, `109,558/109,558` contents, `1,999,902,681` characters, `0` retries/dead/failures/truncations; per-page/section lineage and office-format cohort remain open |
+| `W2-005` | `DONE 2026-08-13` for the current real corpus: route only text-poor pages to OCR | `W2-004` | all `856/856` routed pages terminal and independently validated; reason, input manifest, engine/languages/version/configuration, state, and additive CAS persisted |
+| `W2-006` | `PARTIAL 2026-08-13`: build a stratified 100,000-document official cohort | `W2-001..005` | numeric gate passed with `111,408` eligible official captures / `109,558` contents / `5,093,218,479` bytes, led by `89,001` exact BOE documents; incremental inventory reuses `111,369` checksum-identical rows and inspects only `48` instances. Source/format/size/language representativeness and human OCR quality remain open |
+| `W2-007` | `PARTIAL 2026-08-13`: human-review extraction and OCR quality | current real corpus, then `W2-006` | deterministic `40`-page packet covers every no-text/material-gain result and both source/reason groups; `0/40` human decisions complete; next requires completed decisions, metrics by stratum, and adjudication |
 | `W2-008` | Publish cost and throughput per 1,000 documents/pages | `W2-006` | requests, bytes, CPU, RSS, OCR pages, storage, failures, cost |
 | `W2-009` | Scale to one million documents by source cohorts | `W2-006..008` | `R2` SLO, clean restore, bounded delivery, correction path |
 
@@ -267,11 +302,11 @@ Target: eight weeks. Priority: `P0`.
 
 | ID | Task | Dependency | Exit evidence |
 | --- | --- | --- | --- |
-| `W3-001` | Resolve official Infoelectoral candidate archive access with a reproducible method | external lever | one archive retrieved with official origin/checksum and documented contract |
-| `W3-002` | Ingest the queued official election archives in bounded cohorts and retain every official public identity field | `W3-001` | archive/member/candidate/party counts and field-level identity retention reconcile per election |
+| `W3-001` | `PARTIAL 2026-08-13`: establish reproducible official candidate origins | external lever | seven BOE proclamation documents plus eleven correction documents are checksum-preserved and machine-reconciled; sparse exact-date and exact-ID acquisition fails closed on missing IDs; the November 2019 source defect and reproducible Interior archive access remain blocked |
+| `W3-002` | `PARTIAL 2026-08-13`: ingest official election cohorts and retain every official public identity field | `W3-001` | BOE base capture preserves `42,056` immutable occurrences / `4,901` candidacies and all `956` exact correction paragraphs. The reviewed subset preserves `10,815` base rows / `1,188` candidacies; `127` paragraphs support `17` operations, `53` remain context, and effective state reaches `10,820` normalized rows. Eight correction documents / `776` paragraphs and their `31,241` base candidates remain explicit pending evidence barred from effective output. A deterministic `776`-task dual-review queue and deduplicated `3,713`-candidacy / `31,241`-candidate context corpus preserve every public field and reject invented or drifted decisions. The semantic artifact validates full public-name/source-text/lineage retention, keeps outcomes null, and replays `2/2` unchanged files; next: complete dual review and adjudication, compile accepted operations per document, resolve the November 2019 source identifier defect without inference, add result links as separate facts, authorize durable release/restore, and extend cohorts |
 | `W3-003` | Add official regional and municipal candidacy/result sources | source contracts | jurisdiction/election coverage matrix and source totals |
 | `W3-004` | Add party-office and political-appointment history | official registries/bulletins | appointment/dismissal dates and appointing authority traceable |
-| `W3-005` | Preserve source identity, deterministic candidate link, reviewed link, conflict, and unresolved states | `W3-002..004` | no forced ambiguous merge |
+| `W3-005` | `IN PROGRESS — LOCAL VALIDATED, PENDING PUBLICATION 2026-08-23`: time-aware actor graph and entity resolution v1 | `W3-002..004`, core ontology | real projection materializes `133,595` source-scoped actors, `237,973` relationships/evidence, `79,208` public identifiers and `4,186` aliases; `55/55` source origins mapped, including all `3` conflicting upstream IDs as `7` deterministic namespaced origins; `0` inherited actor-lifespan dates, cross-source/name merges or unsupported organization-change events. Independent full-row validator, FK/integrity, atomic-failure safety and actual producer replay pass with release `e52dd7fa...` / JSON `9272fb73...`; the rebuilt `1,436,168,192`-byte SQLite source now contains and uses `idx_actor_graph_node_versions_release_source_actor`. Lossless Parquet reconciles `1,331,749` rows in `179` partitions / `183` Zstd files, including `2,396,140` FK references with `0` missing; incremental replay reuses `179/179`. Static `/actor-graph/` live publication remains before this source-scoped MVP is DONE. Gold set, multi-snapshot history, durable origin/restore, one-million representative actor facts and relationship-shell promotion remain in `W3-006..008` |
 | `W3-006` | Create stratified adjudicated identity gold set | `W3-005` | dual review, adjudication, precision/recall by source and name pattern |
 | `W3-007` | Add immutable merge/split history | `W3-005` | old evidence identities remain reconstructable |
 | `W3-008` | Reach one million real actor/candidate/mandate/appointment rows | `W3-002..007` | `R2` manifest, identity quality, restore, public origin, corrections |
@@ -308,6 +343,7 @@ Target: twelve weeks. Priority: `P0`.
 | `W5-006` | Add inspections, sanctions, permits, staffing, and audit findings | official sources | typed implementation facts with authority and effective dates |
 | `W5-007` | Reconcile monetary totals by source, period, currency, tax treatment, and revision | `W5-001..006` | declared discrepancies and no float-induced drift |
 | `W5-008` | Publish bounded public-money dossiers | `W5-007` | source-to-entity-to-contract-to-payment evidence chain |
+| `W5-009` | `DONE 2026-08-19`: establish the canonical spending-event contract and first public PLACSP path | `W5-001`, `W5-004` | spec fixes `14` event kinds, exact-decimal, actor, evidence, version and scale semantics; release `7abe9ac6...` materializes `20` real awards / `40` actors / `38` evidence rows from the official `330,577`-record corpus, validates the exact `146,382,691`-byte archive, preserves `10/5/5` legal/natural/unclassified identities, reconciles `4,835,494.71 EUR`, and is live at `/spending/` with award != payment. Next: full partitioned canonical materialization, second snapshot/history, and first evidence-backed award -> contract/payment/delivery link |
 
 Wave exit: the product distinguishes promised, budgeted, contracted, paid, delivered, inspected, sanctioned, and unknown.
 
@@ -324,6 +360,10 @@ Target: ten weeks. Priority: `P1`.
 | `W6-005` | Link promises, decisions, rules, money, implementation, enforcement, audits, and outcomes | `W4..006`, `W5` | every edge typed and traceable; unknown edges explicit |
 | `W6-006` | Rebuild the accountability ledger to one million representative facts | `W6-001..005` | domain/source/role mix, actor quality, `R2` origin/restore/corrections |
 | `W6-007` | Publish three complete issue-led dossiers | `W6-006` | citizen can see who did what, who owns it now, and what is missing |
+| `W6-008` | `DONE 2026-08-19`: canonical promise model and first official manifesto slice | `W2-004`, `W6-003` | additive direct-party model covers explicit promises, soft commitments, preferences, slogans, coalition commitments, positions and context; checksum-pinned BNG 2023 PDF yields `266` page-aware claims / `266` exact evidence anchors / `91` rule-confirmed promises / `323` topic links; live `/promises/` sample contains `20` real source-linked promises, keeps `6` incomplete fragments out and makes fulfillment `not_assessed`; idempotence, FK, quote/page/hash, real-only and live origin gates pass, including exact `396,842`-byte official PDF hash. Next: second ideologically distinct manifesto and human adjudication sample |
+| `W6-009` | `DONE 2026-08-19`: canonical agreements, meetings, lobbying and influence contract plus first official executive path | `W2`, `W6-003` | spec v1 and `11` additive tables separate meetings, roles, agenda, agreements, evidence, topics and influence assertions. Official La Moncloa capture `21,234` bytes / SHA `ab08b7dc...` yields `11` sessions, `11` adopted agreements, `37` parties, `20` visibly derived/unreviewed topics and `22` exact evidence anchors; attendance claims `0`, influence assertions `0`. Release `6f75ec32...` / JSON `8d8ce219...` passes deterministic replay, FK, integrity, real-only, public-hygiene and browser gates; live `/agreements/`, exact JSON and three official source pages return HTTP `200`. Next: official agenda/lobby disclosure with published personal identities, second snapshot/history, and agreement -> implementation evidence |
+| `W6-010` | `DONE 2026-08-20`: canonical geopolitics contract and first official foreign-policy path | `W2`, `W6-003`, `W6-009` | spec v1 and `8` additive tables cover treaties, resolutions, sanctions, aid, defence, international votes, action actors/evidence/topics/links, explicit positions and later observations with `10M/100M/1M` scale boundaries. Real-only release `6683fd44...` / JSON `ea8c3eb1...` materializes the `2` exact international procedures in the pinned `21,234`-byte Moncloa capture as `2` actions / `11` actors / `2` evidence rows / `4` derived topics / `2` agreement links; positions, later observations, entry-into-force, implementation and geopolitical inference remain `0`/not assessed. Replay, FK, integrity and UI tests pass; live `/geopolitics/`, exact JSON and both official source pages return HTTP `200`; desktop/mobile browser QA and the current `44`-route audit pass. Next: `TODO 28`, time-aware actor graph and entity resolution |
+| `W6-011` | `IN PROGRESS — LOCAL VALIDATED, PENDING PUBLICATION 2026-08-20`: promise/action comparison engine C1 | `W3-005`, `W4`, `W6-008` | method v1 and `4` additive tables materialize `5` explicit real assessments / `18` evidence rows: `3 ambiguous_mapping`, `1 insufficient_evidence`, `1 not_comparable`, `0 aligned/conflicted/changed_framing`. Independent reconstruction, deterministic replay, FK/integrity, public-identity retention and UI contract pass for release `ea65f3b8...` / JSON `24b6edd0...`; release identity closes over the action cutoff, actor-graph release, four action pairs and the exact ordered projection of all `97` real rows observed by the bounded search. A real SQLite header-only drift replay preserves exact derived bytes. V1 rejects `changed_framing` until actor-authored change evidence and its gate exist. Action corpus cutoff `2026-02-12` is stale, ranking remains hidden, million-row physical execution is unproven and promotion is per-file atomic but not artifact-set atomic. `/comparisons/` and exact asset are local only; live route/hash audit remains before `TODO 29` or this item can close |
 
 Wave exit: responsibility attribution is temporal, sourced, and separable from political rhetoric.
 
@@ -340,6 +380,8 @@ Target: eight weeks. Priority: `P1`.
 | `W7-005` | Define descriptive, associational, quasi-experimental, and causal claim levels | methodology review | UI language and publication gate per level |
 | `W7-006` | Record confounders, comparison group, sensitivity, and caveats | `W7-005` | causal claim cannot publish without method evidence |
 | `W7-007` | Link observed outcomes to issue ledgers conservatively | `W6`, `W7-006` | chronology shown separately from causality |
+| `W7-008` | `PARTIAL — FIRST VERTICAL SLICE DONE 2026-08-20`: canonical indicator/revision contract and first public Eurostat family | `W1`, `W7-001..003` | The bounded first slice is implemented and live: spec v1 plus `5` additive tables preserve release/vintage, revision lineage, exact decimal text, source status, uncertainty, geography, interval, methodology and cell-level provenance. Release `a5d27828...` materializes one pinned official Eurostat family into `86` Spanish territorial series / `2,091` observations / `2,091` evidence pointers / `113` provisional marks. Independent raw-cell replay, FK/integrity, real-only, public-hygiene and UI tests pass. Live `/indicators/` and exact `2,448,614`-byte JSON pass desktop/mobile QA; dataset/methodology/reuse links return `200`; global audit passes `44` routes / `48` critical assets / `119` evidence objects. This slice does not close its dependencies: `W7-001..003` remain open for an approved representative codebook and second official snapshot with observed changed/unchanged/deleted revisions. The validated `1,755,809`-observation corpus proves real processing scale, not representative outcomes |
+| `W7-009` | `IN PROGRESS — C1 LOCAL PACKAGE/BUILD PASS; C2A+C2B PHYSICAL PASS; LIVE/ORIGIN/REVIEW OPEN 2026-08-23`: outcome context | `W3-005`, bounded `W4-002..006`, `W6`, `W7-005..008` | C1's `9` append-only tables materialize one real pending candidate over `20` initiative-linked Senate votes, `25` Eurostat observations and `264` named public participants; `2,973` independent checks pass; reviews/releases/memberships/validated/public links remain `0`. Public v3 is `4,078` bytes / SHA `226dfdf9...`; package `5ac01878...` binds a `9,496`-byte manifest / SHA `2bfe3f2d...` and `17` exact assets. Deterministic validation projection SHA `8e978632...` preserves all check results while excluding volatile physical-run identity; semantic evidence retains all `264` public names, removed/pseudonymized=`0`. Browser-level hashing of every asset fails closed. Fresh local build `1,435` pages, independent audit `46` routes / `50` assets / `119` obstruction-evidence objects, real-only `124,679` files and hygiene `17,072` files pass. C2A physically validates `33,726` pairs with `111` checks. C2B physically validates `2,865,602` pairs in a `3,587,743,744`-byte SQLite shard (SHA `04c82651...`) with `107` checks, `0` dead letters/retries, interruption/resume, config-drift rejection, append-only enforcement, missing/corrupt-shard failure, and byte-identical local restore; semantic root `e9fecdb8...`. All C2 rows remain internal L0, publication-ineligible, and claim-free. Remote C1 publication, durable remote C2 origin/restore/rollback, original vote XML, actor-source capture, identified human review, review control plane and any L2/public outcome link remain open |
 
 Wave exit: the product can say what changed without implying unsupported causation.
 
@@ -356,6 +398,7 @@ Target: eight weeks. Priority: `P0` before any high-risk public inference.
 | `W8-005` | Implement counterevidence, appeal, right-of-reply, and correction queues | `W8-001` | each path reaches public supersession state |
 | `W8-006` | Measure agreement, reversal, drift, correction latency, and queue age | `W8-002..005` | release scorecard |
 | `W8-007` | Publish only reviewed signals with evidence cards and limitations | `W8-003..006` | legal/editorial/publication-hygiene gate and immutable claim version |
+| `W8-008` | Operate a million-task human review and control plane | `W1`, `W8-001..006` | generated candidate queue is separate from append-only reviewer decisions keyed only to immutable version IDs; bounded evidence references replace embedded full candidate/participant payloads; atomic leases, heartbeat/reclaim, reviewer identity, calibration, dual review, adjudication, conflict disclosure, appeals, queue-age and throughput SLOs, correction SLA and immutable release evidence pass on real tasks without suppressing official public identities |
 
 Wave exit: a disputed claim can be audited and corrected without erasing history.
 
@@ -365,15 +408,20 @@ Target: continuous after Wave 1; promotion gate after Waves 3-8. Priority: `P1`.
 
 | ID | Task | Dependency | Exit evidence |
 | --- | --- | --- | --- |
-| `W9-001` | Publish source coverage and obstruction map | `W0` | freshness, completeness, last run, blocker evidence per source |
+| `W9-001` | `DONE 2026-08-19`: publish source coverage and obstruction map | `W0` | live `/obstruction-tracker/` and v2 feed expose freshness, completeness, last run, `27` open incidents / `14` blocked sources, `7` real corpora / `3` million-row lanes / `4` promotion gaps, and `119/119` internally hosted evidence files; `7` copies redact only operational private traces, `112` remain byte-equivalent, public-domain personal information is retained, and the live audit passes `44` routes / `48` critical assets / `119` evidence objects with zero failures |
 | `W9-002` | Publish vote, actor, issue, money, and responsibility explainers | corresponding lanes | primary evidence within three meaningful interactions |
-| `W9-003` | Publish stable Evidence API and schema compatibility policy | `W1`, analytical contracts | versioned endpoints, pagination, changelog, deprecation window |
+| `W9-003` | `DONE 2026-08-19`: publish stable Evidence API and schema compatibility policy | `W1`, analytical contracts | live `/api/v1/index.json` points to immutable API release `feb61b39...`, derived from exact source/schema/exporter/upstream hashes; `4` collections expose `5,830` real objects in `26` content-addressed pages with opaque seek cursors, per-record provenance, explicit unknown states, `180`-day / `2`-release deprecation policy and `1,147/1,147` public labels retained exactly; live verifier fetched `32` files / `11,452,986` bytes with zero errors. Promise, spending, agreements, geopolitics and indicators vertical slices are live. Next: `TODO 28`, time-aware actor graph and entity resolution |
 | `W9-004` | Provide source-adapter SDK and one-command validation | pipeline contracts | new contributor runs capture-to-artifact without private state |
 | `W9-005` | Create bounded starter issues and maintainer ownership map | `W9-004` | no critical lane has one undocumented owner |
 | `W9-006` | Require two-person review for schema, identity, publication, and allegation-policy changes | governance | protected ownership and review evidence |
 | `W9-007` | Publish contributor, review, data-correction, security, and citation paths | none | response SLO and templates visible |
 | `W9-008` | Measure first-contribution time, review latency, retention, bus factor, and source adoption | `W9-004..007` | quarterly community scorecard |
 | `W9-009` | Support independent snapshot replicas and reproducibility attestations | `W1`, `W9-003` | external maintainer reproduces and signs release manifest |
+| `W9-010` | `DONE 2026-08-19`: publish operational transparency dashboard and release-note flow | `W1`, `W9-001` | live `/transparency/` and v1 feed expose `10` source-linked metrics, source freshness/health, `27` open obstructions / `119` evidence files, local readiness, signed durable release `5d9ce557...` with `5,414,326` real rows / `8,597` data files, current metadata, and `10` real release notes; build covers `1,433` static routes and live audit covers `44` routes / `48` critical assets / `119` evidence objects |
+| `W9-011` | `DONE 2026-08-19`: freeze core ontology v1 and current-schema bridge | contributor platform | human + machine contracts define `19` concepts, `26` evidence-backed relation types, ID/time/provenance/uncertainty rules, `49` mappings to current real schema tables, official-only/public-identity policy, and `10M` fact / `1M` document / `100M` no-rewrite scale boundaries; fail-closed validator and `8` tests pass |
+| `W9-012` | `DONE 2026-08-19`: freeze plugin architecture v1 | `W9-011` | human + JSON Schema contracts define `7` plugin types, `14` lifecycle hooks, `19` ontology outputs, `10` mandatory real-data test hooks, bounded partitions, capability security, at-least-once execution with logical exactly-once effects, official-capture provenance, and public-identity retention; fail-closed validator and `8` tests pass |
+| `W9-013` | `DONE 2026-08-19`: ship minimal SDK and official reference plugin | `W9-012` | typed loader/registry/contracts plus Congreso reference plugin replay one checksum-pinned `2,073`-byte official capture into the standard SQLite schema twice; `3` exact public records remain `3` source records / `3` mandates / `3` linked persons, `0` FK failures, stable logical hash, exact source URL, idempotence, and public identity retention; `10` focused tests plus global official-sample audit pass |
+| `W9-014` | `DONE 2026-08-19`: publish signed reproducible scale snapshot flow | `W1`, `W9-011` | immutable live release `5d9ce557...` signs the exact manifest and artifact contract with SSH Ed25519; independent live checks reconcile `7` real corpora / `5,414,326` rows / `8,597` data files / `500,714,815` data bytes, current registry/readiness, real-only policy and official public identity retention; exact prior/current diff reports `6` added / `2` changed / `0` removed / `8,617` unchanged bundle files; private key remains outside Git/publication and `W9-009` stays open for an external maintainer's second attestation |
 
 Wave exit: three independent maintainers can ship a connector or review batch, and an external party can reproduce a release.
 
@@ -383,7 +431,7 @@ Strict order:
 
 1. `W0`: truthful artifact inventory and recovery.
 2. `W1`: durable public origin and clean restore.
-3. `W2`: 100,000-document quality gate, then document `R2`.
+3. `W2`: close representative quality and human-review gates on the passed numeric 100,000-document cohort, then reach document `R2`.
 4. `W3` and `W4`: actor identity and parliamentary completeness.
 5. `W5`: money, implementation, and enforcement.
 6. `W6`: responsibility and issue ledgers.
@@ -500,3 +548,594 @@ The goal is achieved only when all are true:
 - no known missing evidence or blocked source is mislabeled as complete.
 
 Until then, the system may be useful and impactful, but the societal-scale goal remains open.
+
+## Sources and Evidence
+
+This layer records planning evidence. It does not replace artifact validators or the operational tracker.
+
+### Source inventory
+
+| Source ID | Source | Date/version | Authority | Limits or staleness |
+| --- | --- | --- | --- | --- |
+| `SRC-01` | Maintainer mandate recorded in this file, §§1, 3, 4, and 11 | `2026-08-23` | Highest for mission, real-data policy, public-identity retention, scale, and completion | Does not prove implementation or live state. |
+| `SRC-02` | `ROADMAP.md`, §§5-10 and work items `W0..W9` | working tree `2026-08-23` | Canonical direction, sequence, and declared status | Status claims require cited generated evidence; this planning layer cannot upgrade them. |
+| `SRC-03` | `docs/etl/real-corpus-registry.json` and `etl/data/published/scale-readiness-latest.json` | current local artifacts inspected `2026-08-23` | Machine authority for registered corpora and readiness flags | Proves declared artifacts, not representative national completeness by itself. |
+| `SRC-04` | `docs/etl/e2e-scrape-load-tracker.md` | current working tree `2026-08-23` | Operational source/pipeline status and evidence links | Large append-only log; newest evidence wins, unresolved contradictions stay visible. |
+| `SRC-05` | `docs/roadmap-tecnico.md` | updated `2026-08-23` | Near-term derived execution and `SCALE*`/`ACC*`/`OUT*`/`INT*`/`PUB*` IDs | Cannot create scope or mark canonical work complete. |
+| `SRC-06` | `docs/etl/sprints/ACTOR-GRAPH-20260820/evidence/actor-graph-validation.json` and partition validation | current local evidence | Strongest current actor-graph validation | Local validation does not prove live publication, durable origin, representative identity quality, or external reproduction. |
+| `SRC-07` | `docs/etl/sprints/COMPARISON-ENGINE-20260820/evidence/promise-action-comparisons-validation.json` | current local evidence | Strongest current C1 comparison validation | Five assessments are bounded coverage; live publication and million-scale execution remain unverified. |
+| `SRC-08` | `docs/etl/sprints/OUTCOME-CONTEXT-20260820/evidence/outcome-context-validation.json`, public v3 package, and `reports/outcome-context-c0-l1.md` | current local evidence `2026-08-23` | Strongest current outcome C0/L1 validation, exact public package and limitations | Local package/build/audit do not prove live publication; C2 and human review are not proven by C1. |
+| `SRC-09` | `docs/etl/name-and-shame-access-blockers.md` | append-only through `2026-08-23` | Canonical confirmed public-data obstruction history | Records observed access failures, not motive or institutional intent. |
+| `SRC-10` | Schema, materializers, validators, tests, build outputs, and live route checks referenced by each `W*` item | per-artifact versions | Implementation and acceptance evidence | A test or local file alone never proves production/live behavior. |
+| `SRC-11` | C2A/C2B pinned scope files, planner/validator code, physical SQLite shards, manifests, receipts, exact tests, and independent acceptance audit | working tree and audit `2026-08-23` | Current local C2 scope, execution, interruption/resume, parity and local-restore evidence | Local physical proof does not establish durable remote origin, public release, analytical relationship validity or lane promotion. |
+
+### Atomic claim ledger
+
+| Claim ID | Normalized claim | Source | Evidence status | Decision impact | Destination |
+| --- | --- | --- | --- | --- | --- |
+| `CLM-01` | Only identifiable official public records count toward coverage or scale. | `SRC-01`, `SRC-03` | Confirmed policy | Rejects generated, mock, synthetic, loopback, and placeholder capacity claims. | `TOP-01`, `XREQ-01`, all epics |
+| `CLM-02` | Official public-domain identity fields must remain exact and traceable; only secrets, private state, workstation traces, and non-public data are blocked. | `SRC-01`, `SRC-03` | Confirmed policy | Publication and review minimization cannot become identity redaction. | `TOP-02`, `XREQ-02`, `STORY-001`, `STORY-019`, `STORY-052` |
+| `CLM-03` | Million scale is an end-to-end property across acquisition, processing, review, publication, correction, and recovery. | `SRC-01`, `SRC-02` | Confirmed requirement | Row count alone cannot close a lane. | `TOP-03`, `INIT-01..04`, `XREQ-05..08` |
+| `CLM-04` | Every public claim must resolve to primary evidence and expose unknown, stale, blocked, disputed, and correction state. | `SRC-01`, `SRC-02` | Confirmed requirement | Controls API/UI and release gates. | `TOP-04`, `TOP-19`, `STORY-054`, `XREQ-03`, `XREQ-09` |
+| `CLM-05` | Anomaly or integrity scoring is triage, never an automated corruption verdict. | `SRC-01`, `SRC-02` | Confirmed policy | Blocks high-risk inference before corroboration and review. | `TOP-17`, `EPIC-09`, `XREQ-13` |
+| `CLM-06` | Seven registered corpora and three million-row lanes exist, but promoted lanes remain zero. | `SRC-02`, `SRC-03` | Confirmed current state | Work must target missing promotion gates, not more unqualified row counts. | `TOP-05`, `EPIC-01`, `DEC-01` |
+| `CLM-07` | Durable analytical origin and clean restore exist for registered releases, while full raw-object origin, retention, restore, and source reconstruction remain open. | `SRC-02`, `SRC-03`, `SRC-04` | Confirmed with bounded scope | Keeps `W1-001..002`, `W1-006..007` open. | `TOP-06`, `EPIC-02`, `DEC-02` |
+| `CLM-08` | Current document corpus passes numeric `R1`, but representative strata, human OCR quality, durable raw origin, and one million documents remain open. | `SRC-02`, `SRC-03`, `SRC-04` | Confirmed with limitations | Prevents `W2` promotion. | `TOP-07`, `EPIC-03`, `DEC-01` |
+| `CLM-09` | Candidate and actor evidence retain official names; cross-source identity quality, merge history, durable actor origin/restore, and representative million scale remain open. | `SRC-02`, `SRC-06` | Confirmed with limitations | Actor graph may publish only as source-scoped MVP. | `TOP-08`, `EPIC-04`, `DEC-06` |
+| `CLM-10` | Actor graph v1 is locally validated and pending live publication; local validation is not completion. | `SRC-02`, `SRC-06` | Confirmed current state | Requires exact route/asset/hash/live proof before status closure. | `STORY-019`, `STORY-058`, `DEC-09` |
+| `CLM-11` | Member-vote volume exceeds one million, but historical capture, official-total reconciliation, chamber coverage, and text-at-decision gaps remain. | `SRC-02`, `SRC-04` | Confirmed with limitations | Keeps parliamentary lane unpromoted and blocks stronger downstream outcome links. | `TOP-09`, `EPIC-05`, `DEC-03` |
+| `CLM-12` | Awards and subsidy grants are not payments, implementation, or outcomes; lifecycle facts must stay distinct. | `SRC-02`, `SRC-04` | Confirmed semantic constraint | Prevents misleading public-money claims. | `TOP-10`, `EPIC-06`, `XREQ-09` |
+| `CLM-13` | Responsibility must be time-bounded and evidenced separately from rhetoric, influence, implementation, and outcomes. | `SRC-01`, `SRC-02` | Confirmed requirement | Defines ledger edges and public dossiers. | `TOP-11`, `EPIC-07` |
+| `CLM-14` | Outcome observation volume exceeds one million, but four datasets are not representative and no second-snapshot revision proof exists. | `SRC-02`, `SRC-03`, `SRC-04` | Confirmed with limitations | Keeps outcome `R2` and causality gates open. | `TOP-12`, `EPIC-08`, `DEC-01`, `DEC-12` |
+| `CLM-15` | Outcome C1 has one real bounded pending candidate and zero reviews, releases, memberships, validated links, or public links. | `SRC-02`, `SRC-08` | Confirmed current state | No association, effect, merit, blame, or corruption statement may publish from it. | `TOP-13`, `STORY-046`, `XREQ-13` |
+| `CLM-16` | Outcome C1 public v3 status, manifest, all `17` assets, fresh local build, route audit, and real browser verification agree; remote publication/live parity remain open. | `SRC-02`, `SRC-08`, `SRC-10` | Confirmed locally; live state unverified | Blocks C1 publication closure until exact remote parity and live browser evidence pass. | `TOP-13`, `STORY-046`, `DEC-04` |
+| `CLM-17` | C2A physically processes and independently reconstructs all `33,726` national-only real pairs with keyset batching, atomic checkpoints, partitions, crash/resume, missing/corrupt-shard failure and semantic parity; `111` checks pass. | `SRC-05`, `SRC-10`, `SRC-11` | Confirmed local physical capacity; durable remote origin unverified | Proves bounded local behavior, not public eligibility, analytical validity, lane promotion or remote recoverability. | `TOP-14`, `STORY-047`, `DEC-05` |
+| `CLM-18` | Comparison C1 is locally validated but pending live publication and remains bounded, stale, and non-million-scale. | `SRC-02`, `SRC-07` | Confirmed current state | Requires live proof; ranking and strong claims remain hidden. | `TOP-15`, `STORY-040`, `STORY-058` |
+| `CLM-19` | Human review must separate generated candidates from append-only decisions and operate leases, calibration, dual review, adjudication, appeals, and correction at real-task scale. | `SRC-01`, `SRC-02`, `SRC-05` | Confirmed requirement; implementation open | Defines `W8` and blocks high-risk release. | `TOP-16`, `EPIC-09`, `DEC-07` |
+| `CLM-20` | Public delivery must remain bounded and evidence-first; no browser route loads a million-row blob. | `SRC-01`, `SRC-02` | Confirmed requirement | Requires indexes, shards, stable cursors, and drill-down. | `TOP-18`, `EPIC-10`, `XREQ-10` |
+| `CLM-21` | Confirmed public-data access obstruction must stay factual, reproducible, append-only, and linked to evidence. | `SRC-01`, `SRC-09` | Confirmed policy | Keeps blockers visible without motive claims. | `TOP-20`, `STORY-003`, `STORY-022`, `STORY-054`, `XREQ-14` |
+| `CLM-22` | External maintainer reproduction and multi-maintainer operation remain open even though signed release machinery exists. | `SRC-02`, `SRC-05` | Confirmed current state | Keeps ecosystem completion open. | `TOP-21`, `EPIC-11`, `DEC-10` |
+| `CLM-23` | No coherent effort estimate exists because major source, ownership, architecture, review, and release choices remain open. | `SRC-02`, `SRC-05` | Inferred from unresolved gates; estimate intentionally omitted | Prevents false precision or target-shaped planning. | `TOP-22`, `DEC-01..11`, estimation omission |
+| `CLM-24` | C2B physically processes and independently reconstructs all `2,865,602` strict real pairs over `458` Senate actions, `6,400` annual series, `89` `ES*` geographies and `79,722` observations into a `3,587,743,744`-byte SQLite shard (SHA `04c82651...`); `107` checks, interruption/resume and byte-identical local restore pass. | `SRC-11` | Confirmed local million-pair physical capacity; durable remote origin/public release unverified | Converts discovery arithmetic into measured local execution while leaving promotion, public claims and remote disaster recovery closed. | `TOP-14`, `STORY-065`, `DEC-05` |
+
+## Terminology Corrections
+
+| Source term | Normalized term | Reason | Scope effect |
+| --- | --- | --- | --- |
+| “Scale” or “millions” | `R2` lane promotion | One million rows without representative scope, recovery, correction, and delivery is only a capacity fact. | Every scale story uses §4 gates, not row count alone. |
+| “Candidate” in outcome work | outcome-link review candidate | Avoids confusion with election candidates/people. | `STORY-045..046` never imply a validated relationship. |
+| “Public personal information” | official public-domain identity evidence | Clarifies accountable source fields versus private/non-public data. | Exact source fields stay; task packets may reference rather than duplicate them. |
+| “Privacy check” | publication-hygiene and security gate | Gate blocks secrets, sessions, workstation traces, and non-public state—not official public identities. | Applies through `XREQ-02` and `XREQ-11`. |
+| “Corruption signal” | internal integrity review signal | A statistical anomaly is not misconduct evidence or a verdict. | Public release requires `EPIC-09`; automated verdict stays excluded. |
+| “Outcome” | official indicator observation or separately reviewed outcome claim | Observation does not establish policy effect. | `EPIC-08` keeps chronology, association, and causality distinct. |
+| “Linked” | typed evidence edge with explicit claim level | Temporal proximity or shared topic is not causal linkage. | `STORY-043`, `STORY-045` must expose method and uncertainty. |
+| “Done” | exit gate passed with current artifact and environment evidence | Local code/test/size is insufficient. | Existing `W*` status remains authoritative; planning stories do not upgrade it. |
+| “Live” | remotely fetched route and exact asset validated after publication | A static local build is not live. | Applies to actor, comparison, outcome, API, and dashboard stories. |
+| “Durable origin” | externally recoverable immutable object/artifact origin with retention evidence | Local CAS or a generated manifest alone is not durable. | Keeps raw-object and outcome origin work open. |
+| “Clean restore” | reconstruction from an empty environment using only declared immutable inputs | Cache replay or analytical restore does not prove source-DB reconstruction. | Restore acceptance names exact layer restored. |
+| “C1/C2” | outcome pipeline maturity cohorts | C1 is bounded contract/release proof; C2 is sparse, partitioned, resumable real-pair processing. | Neither label implies reviewed L2 claims or `R2` promotion. |
+
+## Topic Inventory
+
+| Topic ID | Topic | Classification | Evidence | Notes |
+| --- | --- | --- | --- | --- |
+| `TOP-01` | Official-real-only corpus qualification | Required constraint | `CLM-01` confirmed | No synthetic/mock/generated capacity credit. |
+| `TOP-02` | Exact official public-identity retention | Required constraint | `CLM-02` confirmed | Field-level provenance required. |
+| `TOP-03` | End-to-end scale contract and lane promotion | Required | `CLM-03`, `CLM-06` confirmed | All priority lanes target `R2`. |
+| `TOP-04` | Claim-to-primary-evidence traceability | Required | `CLM-04` confirmed | Includes uncertainty and correction state. |
+| `TOP-05` | Registry, readiness, artifact truth, and drift control | Required/reused | `CLM-06`; `W0` partial | Registry exists; legacy evidence gaps remain. |
+| `TOP-06` | Immutable object/artifact origin, restore, rollback, RPO/RTO | Required/dependency | `CLM-07` confirmed bounded | Analytical origin reused; raw coverage and formal operations open. |
+| `TOP-07` | Document discovery, preservation, extraction, OCR, and quality | Required | `CLM-08` confirmed bounded | Numeric `R1`; representativeness/human quality/`R2` open. |
+| `TOP-08` | Candidate, mandate, appointment, and time-aware actor identity | Required | `CLM-09`, `CLM-10` | Source-scoped graph exists; adjudicated cross-source resolution open. |
+| `TOP-09` | Parliamentary discovery, versions, vote semantics, reconciliation | Required | `CLM-11` | Million rows observed; lane not promoted. |
+| `TOP-10` | Money lifecycle, counterparties, execution, enforcement | Required | `CLM-12` | Awards/subsidies must not imply payment or delivery. |
+| `TOP-11` | Rules, competence, responsibility, issues, measures, evidence edges | Required | `CLM-13` | Temporal attribution; unknown edges explicit. |
+| `TOP-12` | Representative indicator sources, vintages, revisions, methodology | Required | `CLM-14` | Four-dataset scale corpus is insufficiently representative. |
+| `TOP-13` | Outcome C1 contract, evidence package, zero-state public status | Required/current | `CLM-15..16` | v2/v3 correction/publication gate open. |
+| `TOP-14` | Outcome C2 sparse planner, partitions, checkpoint/resume, and million-pair physical proof | Required/current | `CLM-17` and `CLM-24` pass locally; durable remote origin/public promotion open | C2A `33,726` and C2B `2,865,602` are measured physical L0 facts, not reviewed links, outcome claims or promoted release rows. |
+| `TOP-15` | Promise/action comparison | Required/current | `CLM-18` | Local C1 bounded; live and scale gates open. |
+| `TOP-16` | Review, calibration, adjudication, appeals, correction | Required | `CLM-19` | Real-task control plane open. |
+| `TOP-17` | Integrity-signal corroboration and allegation safety | Required constraint | `CLM-05`, `CLM-15` | No automated verdict. |
+| `TOP-18` | Bounded static public product and Evidence API | Required/reused | `CLM-20` | Existing routes/API are reusable contracts, not proof for new lanes. |
+| `TOP-19` | Freshness, gaps, unknown/no-signal, and supersession | Cross-cutting | `CLM-04` | Visible in every release. |
+| `TOP-20` | Public-source access obstruction evidence | Required operational | `CLM-21` | Factual, append-only, no motive inference. |
+| `TOP-21` | Contributor SDK, governance, bus factor, independent replicas | Required | `CLM-22` | External reproduction remains open. |
+| `TOP-22` | Estimate readiness and delivery authority | Question/dependency | `CLM-23` | Named owners, scope, budgets, and authority unresolved. |
+| `TOP-23` | Performance, observability, and cost per 1,000 | Required cross-cutting | §4.2 and §9 | Must use physical real runs, not extrapolated fixtures. |
+| `TOP-24` | Additive schema, stable IDs, immutable versions | Required constraint/reused | §§6.3-6.4; `W9-011..013` | Existing ontology/plugin contracts reduce but do not remove integration work. |
+
+## Initiative Map
+
+| Initiative ID | Strategic outcome | Included epics | Boundary | Status |
+| --- | --- | --- | --- | --- |
+| `INIT-01` | Every official byte and derived fact is captured, processed, recovered, and measured at scale. | `EPIC-01`, `EPIC-02`, `EPIC-03` | Evidence supply chain only; excludes identity/inference semantics. | Foundation partial; analytical recovery strong, raw/document `R2` open. |
+| `INIT-02` | Public action, actors, money, and responsibility form a temporal evidence graph. | `EPIC-04`, `EPIC-05`, `EPIC-06`, `EPIC-07` | Descriptive accountability facts; excludes unsupported outcome causality and allegations. | Multiple bounded slices exist; no included lane fully promoted. |
+| `INIT-03` | Outcome and integrity claims are method-bounded, human-reviewed, appealable, and correctable. | `EPIC-08`, `EPIC-09` | Includes observations, claim levels, review, correction; excludes automated verdicts. | C1 frozen local package/build and C2A/C2B physical execution pass; live publication, durable origin, review and promotion remain open. |
+| `INIT-04` | Citizens and independent contributors can consume, reproduce, extend, and audit releases. | `EPIC-10`, `EPIC-11` | Public delivery and ecosystem; does not waive upstream evidence gates. | Several routes/contracts live; pending lanes and external reproduction open. |
+
+## Epic Overview
+
+| Epic ID | Epic | Outcome | Need | Included topics | Main uncertainty |
+| --- | --- | --- | --- | --- | --- |
+| `EPIC-01` | Verified evidence foundation | Maintainers can distinguish current, recoverable, official artifacts from gaps and retired non-evidence. | Required | `TOP-01..05`, `TOP-19..20` | Legacy capture-sidecar completeness. |
+| `EPIC-02` | Durable evidence origin and recovery | Operators can lose local state and restore exact raw and analytical releases with measured rollback. | Required | `TOP-06`, `TOP-23..24` | Raw-origin provider, retention policy, activation authority, RPO/RTO. |
+| `EPIC-03` | Million-document evidence factory | Researchers receive preserved, extracted, quality-measured official documents through bounded resumable work. | Required | `TOP-07`, `TOP-23` | Representative corpus definition, OCR reviewers, source access. |
+| `EPIC-04` | Time-aware public actor identity | Users can trace candidates, mandates, offices, identifiers, aliases, and merge/split history without unsupported identity merges. | Required | `TOP-02`, `TOP-08`, `TOP-24` | Adjudicated gold set and multi-snapshot representative scope. |
+| `EPIC-05` | Reproducible parliamentary decisions | Users can reproduce who voted how on which version of text and see every gap. | Required | `TOP-04`, `TOP-09`, `TOP-19` | Historical capture and official-total/chamber reconciliation. |
+| `EPIC-06` | Money-to-implementation evidence chain | Users can distinguish budget, award, contract, payment, delivery, enforcement, and unknown. | Required | `TOP-02`, `TOP-10`, `TOP-24` | Complete history, payment/execution sources, entity resolution. |
+| `EPIC-07` | Temporal responsibility and issue ledgers | Users can identify who held which formal responsibility and which sourced action/evidence edges exist. | Required | `TOP-04`, `TOP-11`, `TOP-15`, `TOP-19` | Legal/domain codebook ownership and representative ledger mix. |
+| `EPIC-08` | Defensible outcome observations and links | Users see what changed, with vintage and method, without unsupported causal attribution. | Required | `TOP-12..15`, `TOP-17`, `TOP-19` | Representative codebook, second snapshots, C1 live release, durable C2 origin/rollback, human review and promotion. |
+| `EPIC-09` | Reviewed and correctable integrity claims | Reviewers can triage, corroborate, adjudicate, appeal, supersede, and measure claims at real-task scale. | Required | `TOP-16..17`, `TOP-19`, `TOP-23` | Reviewer staffing, calibration source, legal/editorial thresholds. |
+| `EPIC-10` | Bounded public evidence product | Citizens can navigate evidence, status, limitations, and corrections through stable small public assets. | Required | `TOP-04`, `TOP-18..20` | Live publication authority and parity for pending routes. |
+| `EPIC-11` | Reproducible contributor ecosystem | Independent maintainers can add sources, review work, reproduce releases, and share ownership. | Required | `TOP-21..24` | Named maintainers, external replica, governance adoption. |
+
+## Detailed Breakdown
+
+Stories index existing canonical work. They add acceptance boundaries and ownership roles; they do not replace each referenced work item's detailed evidence or status.
+
+### EPIC-01 - Verified evidence foundation
+
+**Outcome:** Maintainers and public users can tell which official artifacts exist, which qualify, which are stale or retired, and which gaps block promotion.
+
+**Boundary:** Includes registry, inventory, reconciliation, capture lineage, artifact validation, and roadmap/tracker truth. Excludes durable external storage and downstream semantics.
+
+**Dependencies:** Official source contracts; access to existing artifacts and evidence.
+
+**Epic audit result:** Keep. Outcome is independently acceptable before durable-origin work.
+
+| Story ID | Actor and observable outcome | Need / evidence | Boundary and work refs | Owning layer | Delivery owner | Dependencies | Acceptance evidence | Uncertainty and estimate effect |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `STORY-001` | Maintainer gets a fail-closed inventory where only official real corpora qualify and every official public identity field remains exact. | Required; partial | Registry/CI qualification and retirement of capacity-only artifacts; `W0-001..002`, `SCALE-001..003`. | Integrity/control | Data platform maintainer; named owner open | `SRC-03`, source allowlists | Registry/readiness rehash every declared file and reject non-official, generated, mock, synthetic, loopback, placeholder, identity-removing, or missing artifacts. | Legacy per-source sidecars incomplete; material variance, not estimable. |
+| `STORY-002` | Data maintainer rebuilds BDNS and accountability roots from current canonical official evidence and sees exact reconciled deltas. | Required; current roots validated | Artifact recovery only; `W0-003..004`, related `SCALE*`. | Transform/analytical | Lane maintainer; named owner open | `STORY-001`, real source roots | Canonical validators prove all rows/files/bytes/hashes, public identity retention, idempotence, FK/integrity, and explicit non-promotion. | Representative scope remains open; bounded variance. |
+| `STORY-003` | Source steward sees every document/vote provenance gap classified with reproducible evidence and next action. | Required; partial | Document inventory, missing URLs, HTTP lineage, obstruction evidence; `W0-005..007`, `SCALE-019..024`. | Ingest/integrity | Source stewards; assignments open | Official source availability, `SRC-09` | Eligible totals balance; each gap has immutable evidence or remains open; blocked access is logged factually; no silent URL rewrite or false recovery. | Historical upstream access can block closure; material variance. |
+| `STORY-004` | Program maintainer reads one consistent status across roadmap, technical plan, tracker, registry, and readiness output. | Required; current synchronization slice done | Truth synchronization and drift checks; `W0-008`, `SCALE-001`. | Governance/control | Program maintainer; named owner open | `STORY-001..003` | Generated evidence and docs agree; absent/stale artifacts cannot be `DONE`; current/next/DoD recorded. | High drift rate across many artifacts; bounded recurring work. |
+
+#### EPIC-01 implementation composition
+
+| Existing/reused | Integration | Net-new work | Missing evidence or owner |
+| --- | --- | --- | --- |
+| Registry, readiness builder, validators, tracker, obstruction log | Bind every legacy source and artifact to registry-backed checks | Close source-sidecar gaps and retire remaining non-evidence paths | Named lane stewards and complete legacy capture lineage |
+
+### EPIC-02 - Durable evidence origin and recovery
+
+**Outcome:** Operators can recover exact declared releases after losing local state, and can roll back safely with measured objectives.
+
+**Boundary:** Includes raw and analytical origins, immutable addressing, restore, retention, rollback, supersession, and storage health. Excludes source re-scraping completeness and semantic promotion.
+
+**Dependencies:** `EPIC-01`; external storage and release authority.
+
+**Epic audit result:** Keep. Separate operational outcome; analytical evidence exists while raw-origin scope remains open.
+
+| Story ID | Actor and observable outcome | Need / evidence | Boundary and work refs | Owning layer | Delivery owner | Dependencies | Acceptance evidence | Uncertainty and estimate effect |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `STORY-005` | Storage operator selects explicit immutable origins for analytical releases and raw checksum-addressed objects. | Required; partial | Origin contracts and responsibility split; `W1-001`, `SCALE-032`. | Object/release | Storage/release maintainer; named owner open | `EPIC-01`, provider decision | Versioning, retention, lifecycle, public access, cost, credentials, and recovery contracts are approved without secrets in artifacts. | Raw-origin provider/policy open; not estimable. |
+| `STORY-006` | Storage operator uploads every eligible raw object once by checksum and independently proves immutability and recovery. | Required; local subset only | Full raw-object corpus, not analytical Parquet; `W1-002`, `W1-006`, `SCALE-033..034`. | Object | Storage/release maintainer | `STORY-005`, full object manifest | Remote object count/bytes/hashes match; version/delete guard and clean restore pass on dedicated prefix; local disk is unnecessary. | Full-object volume, provider features, and retention cost open; material variance. |
+| `STORY-007` | Release maintainer publishes content-addressed analytical artifacts and exact official source records without identity suppression. | Required; analytical release done, source-record rollout partial | Immutable analytical release and public-source payload; `W1-003`, `W1-009`, `SCALE-035`. | Release/public data | Release maintainer | `STORY-001`, `STORY-005` | Remote pointer, manifest, artifact contract, signature, corpus parity, and exact public-field audit pass; operational private state excluded. | Next release authority and full source-record packaging proof open; bounded variance. |
+| `STORY-008` | Recovery operator starts empty and reconstructs every registered analytical lane by declared checksum. | Required; current analytical lanes proven | Origin-to-cache and clean-room validation; `W1-004..005`, `SCALE-036..037`. | Recovery | Storage/release maintainer plus lane validators | `STORY-007`, storage headroom | Fresh environment fetches only immutable inputs; independent validators pass rows/files/bytes/hashes/identity; no canonical local input leaks in. | Normalized production-schema reconstruction still open; material variance. |
+| `STORY-009` | Release authority can activate, revert, and supersede a release under compare-and-swap with measured RPO/RTO and public storage health. | Required; read-only drill partial | Rollback activation, supersession, storage status; `W1-007..008`, `SCALE-038`. | Release/operations | Release authority unassigned; operator executes | `STORY-007..008`, explicit mutation authority | Authorized activation/revert preserves both immutable releases, records supersession, measures RTO/RPO, and publishes a secret-free current status. | Authority and formal objectives open; not estimable. |
+
+#### EPIC-02 implementation composition
+
+| Existing/reused | Integration | Net-new work | Missing evidence or owner |
+| --- | --- | --- | --- |
+| Signed HF analytical releases, bounded restore, local CAS, rollback plan | Extend common manifest/checksum contract across raw and analytical layers | Remote raw-object replication, retention drill, authorized pointer activation, normalized rebuild | Provider decision, release authority, full raw coverage, formal RPO/RTO |
+
+### EPIC-03 - Million-document evidence factory
+
+**Outcome:** Researchers receive searchable official documents whose bytes, text/OCR, provenance, quality, throughput, and failures remain reproducible at one-million-document scale.
+
+**Boundary:** Includes document discovery, fetch, classification, extraction, OCR, human quality review, cost, and bounded delivery. Excludes semantic policy claims derived from text.
+
+**Dependencies:** `EPIC-01..02`; official-source access.
+
+**Epic audit result:** Keep. Current numeric `R1` proves a bounded slice, not representative `R2`.
+
+| Story ID | Actor and observable outcome | Need / evidence | Boundary and work refs | Owning layer | Delivery owner | Dependencies | Acceptance evidence | Uncertainty and estimate effect |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `STORY-010` | Extraction operator sees every document classified by source, format, size, language, pages, encryption, and text density. | Required; partial | Inventory classification; `W2-001`, `SCALE-005`. | Ingest | Document pipeline maintainer | `STORY-003` | Reconciled inventory has explicit values/unknowns for every eligible object; representative strata can be sampled reproducibly. | Language/encryption coverage open; bounded variance. |
+| `STORY-011` | Source operator runs polite bounded discovery/fetch where every item becomes succeeded, retryable, or dead and no partial is orphaned. | Required; open | Host budgets and durable work states; `W2-002..003`, `SCALE-004`, `SCALE-006..009`. | Control/ingest | Source steward plus document pipeline maintainer | `STORY-005..006`, source contracts | Atomic leases, heartbeat/reclaim, retry classes, circuit breakers, byte/time limits, checksum completion, and per-host SLO reports pass on real work. | Host-specific access/rate policy; material variance. |
+| `STORY-012` | Researcher receives page/section-linked digital text for all supported real documents with zero silent truncation. | Required; current corpus partial | Native extraction only; `W2-004`, `SCALE-010..011`. | Transform/object | Document pipeline maintainer | `STORY-010..011` | Instance/content/CAS totals balance; extractor version, input/output hashes, page/section locators, retries/failures, and bounded RSS validate independently. | Office-format and page-lineage breadth open; bounded variance. |
+| `STORY-013` | Researcher receives additive OCR only for text-poor pages, preserving native text and engine lineage. | Required; current routed cohort done | OCR routing and CAS; `W2-005`, `SCALE-012..014`. | Transform/object | Document pipeline maintainer | `STORY-012` | Every routed page terminal; reason, engine/language/config/version, input/output hash, text gain, and no-text state independently validate. | Future language/format mix may change engine needs; material variance. |
+| `STORY-014` | Domain reviewer measures extraction/OCR quality across an approved representative 100,000-document cohort. | Required; numeric cohort exists, human review open | Representative cohort and adjudicated quality; `W2-006..007`, `SCALE-015..017`. | Quality/review | Domain review lead unassigned | `STORY-010..013`, representative-strata decision, reviewers | Sampling frame covers source/format/size/language strata; dual decisions and adjudication complete; metrics and errors publish by stratum. | Representative frame and reviewer capacity open; not estimable. |
+| `STORY-015` | Program operator processes one million official documents with measured requests, bytes, CPU, RSS, OCR pages, storage, failures, and cost per 1,000. | Required; open | Physical `R2` execution and bounded public delivery; `W2-008..009`, `SCALE-020`, `SCALE-027`. | End-to-end document lane | Document and release maintainers | `STORY-006`, `STORY-011..014` | All §4.2 gates pass on real representative corpus; clean restore and correction path proven; no monolithic browser payload. | Corpus universe, storage, OCR mix, and source limits open; not estimable. |
+
+#### EPIC-03 implementation composition
+
+| Existing/reused | Integration | Net-new work | Missing evidence or owner |
+| --- | --- | --- | --- |
+| Real inventory, native-text CAS, additive OCR, validators, unlabeled review packet | Unify durable queue/origin and stratum metrics across discovery through publication | Complete classification, human review, representative expansion, cost telemetry, million-document run | Approved strata, reviewers, raw origin, source access, named lane owner |
+
+### EPIC-04 - Time-aware public actor identity
+
+**Outcome:** Citizens can reconstruct candidates, mandates, appointments, public identifiers, aliases, and reviewed identity changes without name-only merging.
+
+**Boundary:** Includes official person/organization occurrences, source-scoped identities, time, evidence, resolution review, and merge/split history. Excludes private enrichment and unsupported inferred identity.
+
+**Dependencies:** `EPIC-01..03`; official electoral, institutional, and bulletin sources; ontology v1.
+
+**Epic audit result:** Keep. Actor identity is reusable infrastructure with its own quality and release gates.
+
+| Story ID | Actor and observable outcome | Need / evidence | Boundary and work refs | Owning layer | Delivery owner | Dependencies | Acceptance evidence | Uncertainty and estimate effect |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `STORY-016` | Election researcher reconstructs each captured candidacy and correction from exact official text while unapplied ambiguity remains blocked. | Required; partial | Official origins and existing election cohorts; `W3-001..002`. | Ingest/normalize | Election-source steward; named owner open | `STORY-003`, source identifiers, human reviewers | Base/correction/effective totals reconcile; every public field and source paragraph remains exact; missing identifiers fail closed; dual-review decisions bind immutable evidence. | Archive access, 2019 source defect, 776 review tasks; material variance. |
+| `STORY-017` | Citizen can inspect comparable official regional and municipal candidacy/result cohorts. | Required; open | Net-new jurisdiction sources; `W3-003`. | Ingest/normalize | Election-source stewards unassigned | Source contracts, `STORY-016` | Coverage matrix and official totals pass by election/jurisdiction; candidacy and result remain separate fact types; full public identity retained. | Source diversity/contracts open; not estimable. |
+| `STORY-018` | Citizen sees dated party-office and political-appointment history with appointing authority. | Required; open | Offices and appointments only; `W3-004`. | Ingest/normalize | Bulletin/registry source steward unassigned | `EPIC-03`, official registries | Appointment/dismissal/version/source totals and actor references reconcile; unknown start/end states remain explicit. | Official registry universe and source ownership open; not estimable. |
+| `STORY-019` | Researcher navigates a time-aware source-scoped actor graph and exact public labels without unsupported cross-source merges. | Required; local v1 validated, live pending | Current MVP and live route; `W3-005`, related `ACT-003..004`, `PUB-001..002`. | Analytical/public | Identity platform maintainer plus public UI maintainer; names open | `STORY-016..018`, ontology, release authority | Full-row/FK/integrity/replay/partition checks pass; source-origin conflicts remain namespaced; local route/asset equals published/live bytes; limitations visible. | Actor source-content provenance, live publication, durable origin/restore open; material variance. |
+| `STORY-020` | Identity reviewers measure precision/recall and can merge or split identities without erasing old evidence. | Required; open | Gold set and immutable resolution history; `W3-006..007`, `ACT-005..006`. | Identity/review | Identity review lead unassigned | `STORY-019`, dual review/adjudication | Stratified official-evidence gold set has independent reviews/adjudication; metrics report source/name patterns; every merge/split is versioned and reversible. | Label policy, reviewers, threshold approval open; not estimable. |
+| `STORY-021` | Public and operators consume one million representative actor/candidate/mandate/appointment facts with recovery and correction proof. | Required; open | Actor-lane `R2`; `W3-008`, `ACT-007..008`. | End-to-end actor lane | Identity and release maintainers | `STORY-019..020`, `EPIC-02` | §4.2 gates pass on representative real corpus; origin, clean restore, public shards, identity quality, and corrections verify. | Current graph row count is not representative one-million actor facts; not estimable. |
+
+#### EPIC-04 implementation composition
+
+| Existing/reused | Integration | Net-new work | Missing evidence or owner |
+| --- | --- | --- | --- |
+| BOE candidate corpora/queue, normalized actor sources, source-scoped graph, ontology | Connect election/appointment versions to graph and public drill-down | Regional/municipal sources, office history, gold set, merge/split history, `R2` release | Identity reviewers, source stewards, actor origin/restore, live publication |
+
+### EPIC-05 - Reproducible parliamentary decisions
+
+**Outcome:** Citizens can reproduce an official decision from session and text version through member/group votes, totals, actor links, and evidence gaps.
+
+**Boundary:** Includes Congress/Senate discovery, initiative/amendment versions, parliamentary stages, vote-state semantics, reconciliation, identity links, and bounded publication. Excludes outcome effect claims.
+
+**Dependencies:** `EPIC-02..04`; chamber source access.
+
+**Epic audit result:** Keep. Million observed member rows do not close missing history, text, reconciliation, or capture gates.
+
+| Story ID | Actor and observable outcome | Need / evidence | Boundary and work refs | Owning layer | Delivery owner | Dependencies | Acceptance evidence | Uncertainty and estimate effect |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `STORY-022` | Parliamentary source steward publishes exact chamber/legislature/session discovery totals and missing ranges. | Required; open | Discovery coverage; `W4-001`, `PAR-001`. | Ingest/control | Parliamentary source steward unassigned | Source contracts, obstruction policy | Official catalogs reconcile to discovered work; gaps and blocked ranges have evidence, owner, and next lever. | Upstream catalogs/WAF and historical ranges; material variance. |
+| `STORY-023` | Researcher opens the exact initiative or amendment text version in force at decision time. | Required; open | Text-at-decision version preservation; `W4-002`, `PAR-002`. | Object/normalize | Parliamentary data maintainer | `EPIC-03`, `STORY-022` | Each decision references checksum-pinned version bytes and effective interval; later consolidated text is distinguishable; missing original bytes stay explicit. | Historical original XML/PDF availability; material variance. |
+| `STORY-024` | Researcher inspects signatories, speeches, committee stages, and group/member votes with balanced source totals. | Required; partial | Parliamentary event facts; `W4-003`. | Ingest/normalize | Parliamentary data maintainer | `STORY-022..023` | Source totals and FK balance pass per chamber/legislature; every fact has source record, URL, retrieval, checksum, and parser lineage. | Chamber heterogeneity and incomplete sessions; material variance. |
+| `STORY-025` | Citizen sees yes, no, abstention, absence, and no-vote as distinct source states and every total mismatch classified. | Required; partial | Vote semantics and reconciliation; `W4-004..005`, `PAR-003..004`. | Normalize/integrity | Parliamentary data maintainer | `STORY-024` | No aggregate gap fabricates member state; each event balances or carries source-supported mismatch class/open incident. | Residual historical capture gaps; material variance. |
+| `STORY-026` | Citizen follows each parliamentary actor through a reviewed source identity or explicit unresolved state. | Required; open | Actor linking quality; `W4-006`, `PAR-005`. | Identity/analytical | Identity and parliamentary maintainers | `EPIC-04`, `STORY-024` | Link precision/recall sampled; reviewed/conflict/unresolved states and evidence are public; no name-only merge. | Gold set and actor provenance open; not estimable. |
+| `STORY-027` | Citizen loads bounded vote indexes/shards while operators validate a representative million-row lane from origin and clean restore. | Required; partial capacity | `R2` analytical/public delivery; `W4-007`, `PAR-006..007`, `SCALE-040`. | Analytical/public/recovery | Parliamentary and release maintainers | `STORY-022..026`, `EPIC-02` | Representative reconciliation plus §4.2 passes; stable index/shard hashes, old links, cache behavior, and evidence drill-down validate live; no monolith. | Existing 1.8M rows are not representative promotion; material variance. |
+
+#### EPIC-05 implementation composition
+
+| Existing/reused | Integration | Net-new work | Missing evidence or owner |
+| --- | --- | --- | --- |
+| Member-vote shards/audits, initiative links, normalized parliamentary schema | Bind text-at-decision, actor graph, totals, and public evidence routes | Complete discovery, original-version capture, reconciliation repair, representative `R2` release | Chamber stewards, historical bytes, official universe totals, actor quality |
+
+### EPIC-06 - Money-to-implementation evidence chain
+
+**Outcome:** Citizens can distinguish and trace public-money lifecycle states from budget through payment, delivery, inspection, sanction, and audit evidence.
+
+**Boundary:** Includes PLACSP, BDNS, budgets, execution, counterparties, implementation/enforcement facts, exact money, and dossiers. Excludes inference that an award or grant caused an outcome.
+
+**Dependencies:** `EPIC-02`, `EPIC-04`; official procurement, subsidy, budget, payment, and control sources.
+
+**Epic audit result:** Keep. Lifecycle semantics form one outcome; identity and source acquisition remain explicit dependencies.
+
+| Story ID | Actor and observable outcome | Need / evidence | Boundary and work refs | Owning layer | Delivery owner | Dependencies | Acceptance evidence | Uncertainty and estimate effect |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `STORY-028` | Money-source steward ingests complete bounded PLACSP and BDNS historical cohorts with versions, tombstones, pagination, and revisions. | Required; partial | Procurement/subsidy acquisition; `W5-001..002`, `MON-001..002`, `SCALE-043..046`. | Ingest/object | Procurement and subsidy stewards unassigned | `EPIC-02`, source/storage preflight | Period catalogs and pages balance to official totals; all work terminal/reclaimable; second snapshot proves changed/deleted state; public counterparties retained exactly. | Archive breadth, disk headroom, source contracts; material variance. |
+| `STORY-029` | Budget analyst distinguishes appropriation, execution, notice, award, change, invoice, payment, and delivery as versioned fact types. | Required; budget open, first award path live | Budget/lifecycle contract; `W5-003..004`, `W5-009`, `MON-003..004`. | Normalize/analytical | Public-money data maintainer | `STORY-028`, official budget/payment sources | Exact Decimal/currency/tax semantics pass; no award is labeled payment; first slice and full materialization share additive stable contract and evidence. | Budget/payment source availability and mapping depth; material variance. |
+| `STORY-030` | Entity reviewer resolves counterparties with official identifiers and immutable conflict/merge history while retaining all source fields. | Required; open | Money-entity identity; `W5-005`, `MON-005`. | Identity/review | Identity review lead plus money maintainer | `EPIC-04`, `STORY-028` | Stratified precision/recall, reviewed states, provenance, and reversible merge/split evidence pass; natural-person and unclassified public records remain exact. | Gold set and identifier quality open; not estimable. |
+| `STORY-031` | Auditor accesses typed staffing, permit, inspection, sanction, service-delivery, and audit-finding facts with authority and effective dates. | Required; open | Implementation/enforcement sources; `W5-006`, `MON-007`. | Ingest/normalize | Control-source stewards unassigned | Official source contracts, `STORY-029` | Every fact has typed lifecycle state, authority, period, source, version, and evidence; missing stages remain unknown rather than inferred. | Source universe and legal semantics open; not estimable. |
+| `STORY-032` | Citizen opens bounded dossiers whose source totals and monetary amounts reconcile through available lifecycle stages. | Required; open beyond first award slice | Reconciliation/public dossier; `W5-007..009`, `MON-006..008`, `PUB-015`. | Analytical/public | Money and public UI maintainers | `STORY-028..031`, `EPIC-02` | Source/period/currency/tax/revision totals reconcile without float drift; entity-to-contract-to-payment/delivery chain links evidence or displays missing; `R2` origin/restore and live route pass. | Complete payment/delivery sources and representative million scale; not estimable. |
+
+#### EPIC-06 implementation composition
+
+| Existing/reused | Integration | Net-new work | Missing evidence or owner |
+| --- | --- | --- | --- |
+| PLACSP/BDNS corpora, canonical spending contract, first live award slice | Bind versioned money events to actor graph, budget/execution, enforcement, and evidence API | Complete archives, second snapshots, budgets/payments, control sources, full dossiers | Source stewards, identity reviewers, authoritative lifecycle sources |
+
+### EPIC-07 - Temporal responsibility and issue ledgers
+
+**Outcome:** Citizens can see which institution or public actor held formal responsibility at a date and how sourced promises, actions, rules, money, implementation, and evidence connect.
+
+**Boundary:** Includes legal acts, competence, issues, measures, typed edges, promise/action comparison, and issue dossiers. Excludes unsupported influence or causal-outcome attribution.
+
+**Dependencies:** `EPIC-03..06`; domain/legal review.
+
+**Epic audit result:** Keep. Bounded live vertical slices demonstrate contracts, while representative ledger and comparison publication remain open.
+
+| Story ID | Actor and observable outcome | Need / evidence | Boundary and work refs | Owning layer | Delivery owner | Dependencies | Acceptance evidence | Uncertainty and estimate effect |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `STORY-033` | Citizen identifies originator, approver, publisher, effective rule version, competence, delegation, oversight, and current owner for a date. | Required; open | Rules and responsibility graph; `W6-001..002`, `ACC-001..002`. | Ingest/analytical | Legal-source steward and data maintainer; names open | `EPIC-03..04`, legal sources | Every responsibility edge has type, interval, source, evidence, version/repeal state; conflicting/unknown ownership visible. | Legal interpretation and source coverage; not estimable. |
+| `STORY-034` | Domain reviewer maintains a versioned issue codebook and evidence-span measures with explicit confidence/review state. | Required; open beyond first slices | Taxonomy and measure extraction; `W6-003..004`, `ACC-003..004`. | Semantic/review | Domain/editorial lead unassigned | `EPIC-03`, methodology approval | Inclusion/exclusion examples, version history, exact text spans, extractor version, confidence, and adjudicated sample pass. | Taxonomy authority and multilingual/domain depth open; not estimable. |
+| `STORY-035` | Researcher traverses typed promise→decision→rule→money→implementation→audit→outcome edges while missing edges remain explicit. | Required; open | Representative ledger construction; `W6-005..006`, `ACC-005`. | Analytical | Accountability graph maintainer | `STORY-029`, `STORY-033..034`, `EPIC-05` | Each edge has typed semantics, time, source and evidence; million representative facts pass origin/restore/quality/corrections; no chronology-to-causality leap. | Representative domain mix and actor quality open; not estimable. |
+| `STORY-036` | Citizen opens three complete issue-led dossiers showing actions, responsibility, evidence, and missing facts. | Required; open | Public dossiers; `W6-007`, `PUB-002`. | Public product | Editorial/public UI maintainer | `STORY-035`, `EPIC-10` | Three distinct issues pass evidence-within-three-interactions, freshness, uncertainty, correction, accessibility, and bounded-payload checks. | Issue selection/editorial ownership open; material variance. |
+| `STORY-037` | Citizen inspects official manifesto promises with page/hash evidence and explicit `not_assessed` fulfillment. | Required slice; first manifesto live | Promise contract expansion; `W6-008`, `PUB-014`. | Semantic/public | Promise data and editorial maintainers | `STORY-034`, official manifestos | Second ideologically distinct source and adjudicated extraction sample join current exact source-linked slice without changing unsupported states. | Source diversity and human adjudication open; bounded variance. |
+| `STORY-038` | Citizen inspects executive meetings/agreements while attendance and influence remain absent unless directly evidenced. | Required slice; first path live | Agreement/lobby disclosure; `W6-009`, `PUB-016`. | Semantic/public | Executive-source and editorial maintainers | `STORY-034`, official agenda/lobby sources | Second snapshot/history, disclosed public participants, exact evidence, and agreement→implementation links validate; influence assertion remains zero without evidence. | Official lobby/agenda disclosure availability; material variance. |
+| `STORY-039` | Citizen inspects foreign-policy actions separately from positions, entry into force, implementation, and later outcomes. | Required slice; first path live | Geopolitics expansion; `W6-010`, `PUB-017`. | Semantic/public | Foreign-policy source and editorial maintainers | `STORY-033..035`, official legal sources | BOE/legal-stage evidence and later source versions extend current slice; absent positions/effects remain not assessed; live exact assets pass. | Source selection and geopolitical terminology review; material variance. |
+| `STORY-040` | Citizen compares sourced promises and actions using explicit bounded outcomes while strong/ranked claims remain hidden without evidence. | Required; local C1 validated, live pending | Comparison C1 and later scale; `W6-011`, `CMP-001`. | Analytical/public | Comparison maintainer plus editorial reviewer | `EPIC-04..05`, `STORY-037`, publication authority | Exact local release/replay/FK/evidence checks pass; source/public/build/live bytes match; stale cutoff is visible; changed-framing remains rejected without actor-authored evidence. | Live publication, fresh action corpus, artifact-set atomicity, million physical run open; material variance. |
+
+#### EPIC-07 implementation composition
+
+| Existing/reused | Integration | Net-new work | Missing evidence or owner |
+| --- | --- | --- | --- |
+| Accountability ledger, promise/agreement/geopolitics contracts, local comparison C1 | Connect legal responsibility, issue codebook, actions, money, actor graph, and bounded public dossiers | Representative rules/competence corpus, reviewed measure extraction, million-fact ledger, live comparison | Legal/domain owners, issue selection, fresh action evidence, comparison publication |
+
+### EPIC-08 - Defensible outcome observations and links
+
+**Outcome:** Citizens see official outcome observations, revisions, chronology, and only the strongest claim level supported by reviewed method evidence.
+
+**Boundary:** Includes indicator codebook/sources, vintages, revisions, descriptive-to-causal claim levels, conservative links, C1 release evidence, and C2 sparse execution. Excludes unreviewed association/effect/merit/blame/corruption claims.
+
+**Dependencies:** `EPIC-02`, `EPIC-04..07`; statistical/domain methodology review.
+
+**Epic audit result:** Keep. Current million-row observation volume and one bounded candidate prove neither representativeness nor a validated policy effect.
+
+| Story ID | Actor and observable outcome | Need / evidence | Boundary and work refs | Owning layer | Delivery owner | Dependencies | Acceptance evidence | Uncertainty and estimate effect |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `STORY-041` | Method reviewer approves a representative indicator codebook and national/regional/municipal source matrix with observed revision behavior. | Required; open | Codebook, sources, second snapshots; `W7-001..003`, `OUT-001..002`. | Method/ingest | Statistical methodology lead and source stewards unassigned | Official statistics contracts | Units, geography, frequency, methods, breaks, uses, coverage, vintages, and changed/unchanged/deleted cases are approved and machine-tested. | Representative scope and second-snapshot availability; not estimable. |
+| `STORY-042` | Researcher queries one million representative official observations with exact decimals, methodology, origin, restore, and corrections. | Required; row capacity exists, promotion open | Outcome-lane `R2`; `W7-004`, `OUT-003`. | Analytical/release | Outcome data and release maintainers | `STORY-041`, `EPIC-02` | §4.2 passes for approved source/geography/topic mix; revision/correction workflow and bounded shards validate from clean restore. | Current four-dataset corpus is not representative; material variance. |
+| `STORY-043` | Reader sees whether a statement is descriptive, associational, quasi-experimental, or causal and can inspect required method evidence. | Required; policy defined, operational gate open | Claim-level methodology; `W7-005..006`. | Method/integrity/public | Methodology lead plus editorial reviewer unassigned | Approved publication language, `EPIC-09` | Each level has machine gate, UI wording, required comparison/confounder/sensitivity/caveat evidence, and explicit failure state; stronger level cannot bypass prerequisites. | Method/legal approval and domain-specific standards; not estimable. |
+| `STORY-044` | Citizen follows a conservative issue→outcome chronology while causality remains separate and unsupported links remain absent. | Required; open | Outcome-ledger edges; `W7-007`. | Analytical/public | Accountability graph maintainer plus method reviewer | `STORY-035`, `STORY-041..043` | Each displayed edge binds versions, geography, time, evidence, decision, and claim level; chronology cannot render as causal; `no_signal` stays explicit. | Geographic/temporal comparability and confounders; material variance. |
+| `STORY-045` | Statistics user inspects the first Eurostat family with exact cell provenance and no causal implication, then sees it expanded only under approved codebook/revision gates. | Required slice; first family live | Existing indicator contract and next-source gate; `W7-008`, `OUT-004`, `PUB-018`. | Analytical/public | Outcome data and public UI maintainers | `STORY-041` | Current release remains byte/source/replay exact; dataset/method links stay live; second snapshot proves revision semantics before status expansion. | Current slice does not close `W7-001..003`; bounded variance. |
+| `STORY-046` | Release reviewer receives a corrected C1 v3 evidence package that exposes the one pending methodological candidate and source provenance while reporting zero validated relationship and zero association/effect/merit/blame/corruption claims. | Required/current; locally generated, not released | C1 contract/build/publication closure; `W7-009`, `OUT-005`, `PUB-001..002`. | Analytical/release/public | Outcome maintainer, independent validator, release maintainer | `STORY-019`, `STORY-023..026`, `STORY-041..045`, publication authority | Producer/validator/source DB/public JSON/build/live asset agree on contract, counts, hashes, source cutoffs, URLs, XML/provenance gaps, one pending candidate, zero reviews/releases/memberships/validated/public links, and non-causal scope; exact release package immutable. | Actor raw provenance, original vote XML, live authority, and material variance remain open. |
+| `STORY-047` | Pipeline operator physically processes C2A's national-only `33,726` eligible real pairs through keyset batches, partitions, checkpoint/resume, and exact semantic parity without Cartesian expansion. | Local physical acceptance passed; remote durability/promotion open | C2A execution gate under `W7-009` / `OUT-005`; no public claim. | Control/analytical | Outcome pipeline maintainer; named owner open | Frozen C1 method/schema/validation contract, `SRC-11`, durable origin contract | `33,726/33,726` pairs reconcile; `111/111` checks, interruption/resume, missing/corrupt-shard tests, bounded memory, semantic root `0fc7c257...`, and independent acceptance pass. | Durable remote origin/restore and promotion remain open; not estimable. |
+| `STORY-065` | Pipeline operator runs C2B over the wider strict `2,865,602`-pair real eligibility universe and proves at least one million pairs physically, incrementally, and recoverably processed. | Local physical acceptance passed; durable remote origin/public release open | C2B million physical proof under `W7-009` / `OUT-005`; never a public relationship claim by itself. | Control/analytical/recovery | Outcome pipeline and release maintainers; named owners open | `STORY-047`, `EPIC-02`, storage/request budget | `2,865,602/2,865,602` pairs reconcile across `1,205` base / `197,196` bucket partitions; `107/107` independent checks, 25k interruption/resume, config-drift rejection, append-only enforcement, five adversarial clones, missing/corrupt-shard failure, and byte-identical local restore pass; DB SHA `04c82651...`, semantic root `e9fecdb8...`. | Durable remote origin, isolated remote restore/rollback, provider cost, public release, review and claim authority remain open; not estimable. |
+
+#### EPIC-08 implementation composition
+
+| Existing/reused | Integration | Net-new work | Missing evidence or owner |
+| --- | --- | --- | --- |
+| Million-row Eurostat corpus, live bounded indicator slice, C1 append-only schema/materializer/validator, accepted C2A/C2B physical planners | Bind actor/vote/text provenance, indicator versions, method gates, public status, and durable C2 origin | Approved representative codebook, second snapshots, C1 live proof, C2 remote origin/restore/rollback, review control plane, `R2` release | Statistical lead, actor/vote provenance, review/release owners and durable-origin provider |
+
+### EPIC-09 - Reviewed and correctable integrity claims
+
+**Outcome:** Reviewers and affected parties can audit, challenge, correct, and supersede high-risk claims without erasing history; public users see only reviewed evidence-bound states.
+
+**Boundary:** Includes review contract, calibration, thresholds, corroboration, counterevidence, right of reply, appeals, corrections, metrics, and million-task operations. Excludes automatic corruption verdicts and invented calibration labels.
+
+**Dependencies:** `EPIC-01..02`, `EPIC-04..08`; legal/editorial governance and real reviewers.
+
+**Epic audit result:** Keep. Cross-cutting publication safety has a distinct independently operated outcome and control plane.
+
+| Story ID | Actor and observable outcome | Need / evidence | Boundary and work refs | Owning layer | Delivery owner | Dependencies | Acceptance evidence | Uncertainty and estimate effect |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `STORY-048` | Reviewer records append-only task, evidence version, decision, confidence, disagreement, and adjudication state. | Required; schema pieces exist, full workflow open | Review state contract; `W8-001`, `INT-001`. | Review/control | Review-platform maintainer and editorial lead unassigned | Immutable evidence IDs, reviewer identity policy | State machine forbids mutation/erasure, binds exact evidence/version/method, and reconstructs every transition; credentials/private sessions remain excluded from public output. | Cross-lane contract and owner open; material variance. |
+| `STORY-049` | Calibration lead provides real historical labels based only on cited official court, audit, or control-body findings. | Required; open | Official calibration set; `W8-002`, `INT-002`. | Review/method | Calibration/editorial lead unassigned | Legal review, official findings | Stratified examples cite immutable official evidence; dual labels/adjudication complete; project inference is separate from official finding. | Availability, legal interpretation, class imbalance; not estimable. |
+| `STORY-050` | Integrity reviewer receives only threshold-qualified signals with minimum cohorts, corroboration, and conflict disclosure. | Required; open | Signal thresholds and publication prerequisites; `W8-003..004`, `INT-004`. | Integrity/method | Methodology and editorial leads unassigned | `STORY-049`, money/outcome evidence | Tests suppress small/missing cohorts; no single weak signal becomes public claim; at least required independent corroboration and conflicts are machine-checked. | Thresholds and corroboration policy open; not estimable. |
+| `STORY-051` | Affected party or evidence contributor can submit counterevidence, reply, appeal, and correction that reaches immutable public supersession. | Required; open | Challenge/correction paths; `W8-005`, `INT-003`. | Review/public | Editorial corrections owner unassigned | `STORY-048`, public policy/legal review | Each path has receipt, owner, SLA, evidence, decision, appeal, release membership, public replacement, and preserved prior version; no quiet deletion. | Right-of-reply policy, abuse handling, legal owner; not estimable. |
+| `STORY-052` | Program lead measures agreement, reversal, drift, queue age, throughput, correction latency, and release eligibility from real decisions. | Required; open | Review scorecard and gated publication; `W8-006..007`. | Review/observability/release | Review operations and release maintainers | `STORY-048..051`, `EPIC-10` | Metrics derive from immutable real tasks/decisions; only eligible reviewed claim versions enter signed releases with evidence cards/limitations; identity remains resolvable. | No completed representative review cohort; material variance. |
+| `STORY-053` | Review operators process one million real tasks with atomic leases, bounded evidence references, dual review, adjudication, appeals, and correction SLA. | Required; open | Million-task control plane; `W8-008`, `INT-005..006`. | Control/review/recovery | Review-platform and operations owners unassigned | `EPIC-02`, `STORY-048..052`, reviewer workforce | Candidate queue is separate from decision-only append records; lease/heartbeat/reclaim/crash tests pass; queue-age/throughput/cost reported; every official identity remains reachable in evidence. | Workforce, calibration, conflict policy, task volume, infrastructure; not estimable. |
+
+#### EPIC-09 implementation composition
+
+| Existing/reused | Integration | Net-new work | Missing evidence or owner |
+| --- | --- | --- | --- |
+| Append-only patterns, candidate review queues, integrity-signal internal states, correction principles | Standardize immutable evidence/version IDs and release membership across lanes | Calibration set, review state machine, dual-review operations, appeals/corrections, million-task run | Legal/editorial owners, reviewers, thresholds, workforce model, real completed decisions |
+
+### EPIC-10 - Bounded public evidence product
+
+**Outcome:** Citizens can find source coverage, accountability evidence, uncertainty, and corrections through stable accessible routes and bounded assets.
+
+**Boundary:** Includes static-first routes, Evidence API, explainers, transparency/obstruction feeds, live parity, accessibility, and evidence links. Excludes raw million-row browser payloads and release claims without upstream gates.
+
+**Dependencies:** Relevant upstream epics; release authority and public hosting.
+
+**Epic audit result:** Keep. Public delivery is independently testable but cannot upgrade upstream evidence state.
+
+| Story ID | Actor and observable outcome | Need / evidence | Boundary and work refs | Owning layer | Delivery owner | Dependencies | Acceptance evidence | Uncertainty and estimate effect |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `STORY-054` | Citizen sees current source coverage, freshness, completeness, and factual obstruction evidence. | Required; first dashboard live | Coverage/obstruction publication; `W9-001`, `PUB-003`. | Public/status | Public UI and source-operations maintainers | `EPIC-01`, `SRC-09` | Feed and route counts/hashes/evidence links validate live; incidents remain factual/append-only; only operational private traces are sanitized. | Historical response/resolution metrics open; bounded variance. |
+| `STORY-055` | Citizen reaches primary vote, actor, issue, money, and responsibility evidence within three meaningful interactions. | Required; partial by slice | Cross-lane explainers; `W9-002`, `PUB-002`. | Public/editorial | Public product and lane editorial owners unassigned | `EPIC-04..08` per explainer | User route exposes source, freshness, coverage, uncertainty, correction state, and exact drill-down; accessibility/mobile/share-state and bounded payload pass. | Upstream lane completeness and editorial ownership; material variance. |
+| `STORY-056` | Researcher consumes stable bounded collections using opaque seek cursors and versioned schema compatibility. | Required; Evidence API v1 live | API contract/expansion; `W9-003`, `PUB-001`, `PUB-013`. | Public API/release | API maintainer | `EPIC-02`, canonical analytical contracts | Immutable index/release/pages/schema validate remotely; per-record provenance and unknowns present; deprecation policy and old links tested; new collections cannot bypass source gates. | Lane onboarding and long-term compatibility owner; bounded variance. |
+| `STORY-057` | Citizen sees operational readiness, release notes, source health, and limitations tied to immutable releases. | Required; first dashboard live | Transparency/release flow; `W9-010`, `PUB-008`. | Public/status/release | Public UI and release maintainers | `STORY-054`, `EPIC-02` | Metrics and notes trace to current evidence/release hashes; stale metrics display as stale; build/routes/assets/a11y validate live. | Historical comparable metrics and ongoing owner open; bounded recurring work. |
+| `STORY-058` | Release reviewer proves actor graph, comparison C1, and outcome C1 source artifacts equal public/build/live assets before any pending status closes. | Required/current; open | Cross-route publication closure; `W3-005`, `W6-011`, `W7-009`, `PUB-001..002`. | Release/public QA | Release maintainer plus independent verifier; authority open | `STORY-019`, `STORY-040`, `STORY-046` | Full gated build passes tests, real-only/publication hygiene, size budgets, exact byte/hash parity, route audit, desktop/mobile browser, accessibility, and remote source links after source branch publication. | Publication timing/authority and C1 evidence-package correction; bounded variance. |
+
+#### EPIC-10 implementation composition
+
+| Existing/reused | Integration | Net-new work | Missing evidence or owner |
+| --- | --- | --- | --- |
+| Static-first site, Evidence API v1, live transparency/obstruction and bounded vertical slices | Add each lane through immutable pointer/index/shards and evidence cards | Pending route releases, broader explainers, historical status metrics, correction views | Release authority, editorial owners, upstream promoted lanes |
+
+### EPIC-11 - Reproducible contributor ecosystem
+
+**Outcome:** Multiple independent maintainers can add official sources, validate review batches, reproduce releases, and share critical ownership.
+
+**Boundary:** Includes adapter/plugin contracts, one-command validation, starter issues, ownership/review policy, contributor paths, community metrics, and independent replicas. Excludes ungoverned third-party data and any relaxation of official-real-only gates.
+
+**Dependencies:** `EPIC-01..02`, stable ontology/API contracts, governance participation.
+
+**Epic audit result:** Keep. Technical SDK foundations exist, but independent operation and bus-factor outcomes remain open.
+
+| Story ID | Actor and observable outcome | Need / evidence | Boundary and work refs | Owning layer | Delivery owner | Dependencies | Acceptance evidence | Uncertainty and estimate effect |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `STORY-059` | New contributor runs one command from official capture through schema, artifact, and validation without private maintainer state. | Required; reference path exists, generalized flow open | Source-adapter SDK; `W9-004`, `PUB-004`, `PUB-010..011`. | Contributor platform | SDK maintainer; named owner open | Ontology/plugin contracts, official fixture capture | Fresh environment reproduces exact sample and failure modes; capability boundaries, idempotence, provenance, public identity, and docs pass without secrets. | Cross-source adapter diversity and onboarding proof open; material variance. |
+| `STORY-060` | Contributor selects a bounded issue with official evidence, expected artifact, dependencies, owner, and DoD. | Required; open | Starter issue catalog/ownership map; `W9-005`, `PUB-005`. | Governance | Community maintainer unassigned | `STORY-059`, tracker gaps | Each issue is independently acceptable, links source/evidence, names exclusions and reviewer, and no critical lane lacks documented ownership. | Maintainer capacity and issue curation open; bounded recurring work. |
+| `STORY-061` | Maintainer gets two-person review for schema, identity, publication, and allegation-policy changes plus visible correction/security/citation paths. | Required; open | Governance and public contribution paths; `W9-006..007`, `PUB-006`. | Governance/security | Governance lead and security/editorial owners unassigned | Repository protection and response policy | Protected rules, required reviewers, escalation templates, response SLOs, and public paths are tested; no single person can silently alter high-risk policy. | Platform enforcement and named reviewers open; not estimable. |
+| `STORY-062` | Community maintainer publishes quarterly first-contribution time, review latency, retention, source adoption, and bus-factor evidence for contributors and users. | Required; open | Community scorecard; `W9-008`. | Governance/observability | Community maintainer | `STORY-060..061`, real contribution events | Metrics derive from real repository/review events with period/method; missing metrics explicit; no synthetic activity. | Insufficient historical contributor events; material variance. |
+| `STORY-063` | External maintainer restores, validates, and independently signs an immutable release without private local state. | Required; open | Independent replicas/attestation; `W9-009`, `W9-014`, `PUB-007`, `PUB-012`. | Release/governance | External maintainer unassigned; release maintainer supports | `EPIC-02`, public trust roots | Independent environment fetches, checksums, validates, and signs declared release; attestation/trust root published; differences reconciled; old release remains recoverable. | External participant and trust policy open; not estimable. |
+| `STORY-064` | Platform maintainer preserves ontology/plugin/schema compatibility while new real-data adapters and outputs scale without rewrites. | Required; core contracts done, adoption ongoing | Contract stewardship; `W9-011..013`, `PUB-009..011`. | Architecture/contributor platform | Architecture/SDK maintainer | `STORY-059`, API compatibility | Human/machine contracts, migration/deprecation rules, reference plugin, capability checks, and real official test hooks pass for each extension. | Long-term owner and multi-plugin compatibility evidence open; bounded recurring work. |
+
+#### EPIC-11 implementation composition
+
+| Existing/reused | Integration | Net-new work | Missing evidence or owner |
+| --- | --- | --- | --- |
+| Core ontology, plugin architecture, reference adapter, signed snapshot flow, Evidence API | Package contributor workflow with issue/review/release governance | General one-command path, maintainer map, community metrics, external replica/attestation | Named maintainers/reviewers, external participant, governance enforcement |
+
+## Cross-Cutting Requirements
+
+| ID | Requirement | Applies to | Acceptance evidence | Estimate treatment |
+| --- | --- | --- | --- | --- |
+| `XREQ-01` | Official-real-only qualification | All epics | Every counted row/object resolves to allowlisted official source, capture/retrieval, immutable hash, source identity, and lineage; real-only gate has zero findings. | Required in every story; no separate estimate. |
+| `XREQ-02` | Exact official public-domain identity retention | `EPIC-01`, `EPIC-04..11` | Source-to-artifact field counts/values reconcile; no official name/identifier/contact/candidacy/appointment/donation field is suppressed; secrets/private state remain blocked. | Required; no privacy-redaction work estimated. |
+| `XREQ-03` | Claim-to-primary-evidence provenance | `EPIC-04..10` | `100%` published claims resolve through source URL/replacement, retrieval, checksum, parser/schema, evidence row, and immutable version. | Required; missing provenance blocks release. |
+| `XREQ-04` | Additive schema and immutable history | `EPIC-01`, `EPIC-04..09`, `EPIC-11` | Stable IDs, append-only versions/transitions, FK/integrity, replay, supersession, and reconstruction tests pass; no destructive history loss. | Required; migration depth remains story-specific. |
+| `XREQ-05` | Durable work and bounded memory | `EPIC-01..09` | Items are pending/leased/succeeded/dead; lease/reclaim and kill/resume pass; RSS bounded by batch/shard/document, not corpus. | Required; million physical evidence needed before estimate confidence. |
+| `XREQ-06` | Idempotence and incremental reuse | `EPIC-01..09`, `EPIC-11` | Replay creates zero duplicate logical facts, emits reconciled delta, and reuses checksum-identical partitions safely. | Required. |
+| `XREQ-07` | End-to-end reconciliation and drift | `EPIC-01..10` | Discovered/fetched/stored/parsed/normalized/reviewed/published totals balance per run; source/schema/parser drift fails closed. | Required; unresolved upstream totals add material variance. |
+| `XREQ-08` | Durable origin, clean restore, rollback | `EPIC-02..11` | Immutable external origin, fresh restore, independent full validation, old-release recovery, supersession, and measured RPO/RTO pass for claimed layer. | Required for `R2`; provider/authority decision open. |
+| `XREQ-09` | Explicit unknown and semantic-state separation | All public facts/claims | Missing, stale, disputed, blocked, `no_signal`, not assessed, award/payment, chronology/causality, and candidate/reviewed/published states render distinctly. | Required. |
+| `XREQ-10` | Bounded accessible public delivery | `EPIC-04..11` | Static indexes/shards/cursors stay within budgets; no million-row blob; keyboard/mobile/accessibility/live route and old-link checks pass. | Required; route-specific work remains nested in stories. |
+| `XREQ-11` | Publication hygiene and least exposure | All releases | Secrets, credentials, cookies, private sessions, workstation paths, and non-public state scan clean; official public fields remain exact. | Required; security owner open. |
+| `XREQ-12` | Freshness, SLO, telemetry, and cost | All lanes | Source owner/SLA, overdue status, attempts/retries/dead, wall time, CPU, RSS, bytes, storage, OCR, and cost per `1,000` derive from real runs. | Required; cost unknown until physical cohorts/provider rates exist. |
+| `XREQ-13` | Corroboration, human review, counterevidence, correction | `EPIC-07..10` | Models cannot publish high-risk findings; required evidence, independent review, conflicts, reply/appeal, supersession, and correction SLA pass. | Required; review model is decision-changing. |
+| `XREQ-14` | Evidence-first obstruction handling | `EPIC-01`, `EPIC-03..05`, `EPIC-10` | One bounded retry without new lever; exact failure/log/URL/timestamps/owner/escalation recorded append-only; no motive speculation. | Required operational constraint. |
+| `XREQ-15` | Two-person governance and reproducibility | `EPIC-09..11` | High-risk schema/identity/publication/policy changes have two reviewers; releases are independently reproducible and signed. | Required for societal-scale done; external owner open. |
+
+## Ownership Matrix
+
+Role ownership is explicit; named people are not assigned without evidence.
+
+| Capability | Authoritative system | Reused layer | New layer | Delivery owner | Owner confidence |
+| --- | --- | --- | --- | --- | --- |
+| Mission, sequence, promotion | `ROADMAP.md` | Waves and §4/§11 gates | Systematic planning index | Program maintainer | Role confirmed; named owner unassigned. |
+| Operational source status | ETL tracker | Existing source rows/evidence | Remaining reconciliations and current closeouts | Per-source steward | Role required; assignments incomplete. |
+| Corpus qualification | Registry/readiness artifacts | Real-only and public-identity checks | Legacy sidecars/drift closure | Data platform maintainer | Implementation exists; named owner unassigned. |
+| Raw object origin | Object manifests/CAS contract | Local CAS and adapter | External versioned origin/retention/restore | Storage/release maintainer | Owner open; provider open. |
+| Analytical release/recovery | Signed immutable release contract | HF releases and validators | Authorized rollback/RPO/RTO and normalized reconstruction | Release maintainer plus release authority | Maintainer role clear; authority unassigned. |
+| Documents/OCR | Document inventory/extraction/OCR artifacts | Current real pipeline | Representative strata, human quality, million run | Document pipeline maintainer plus domain review lead | Technical role clear; review owner open. |
+| Actor identity | Actor/candidate schemas and actor graph | Source-scoped graph and BOE corpora | Gold set, merge/split history, representative `R2` | Identity platform maintainer plus identity review lead | Roles clear; named owners/reviewers open. |
+| Parliamentary action | Parliamentary schemas/source contracts | Existing vote/initiative corpora and shards | Complete discovery/text/reconciliation/identity links | Parliamentary source/data maintainer | Named chamber stewards open. |
+| Public money | Money-event schema/source contracts | PLACSP/BDNS and first spending slice | Full history, budget/payment/implementation joins | Public-money data maintainer plus source stewards | Named owners and sources open. |
+| Responsibility/issues | Accountability ontology/ledger | Current ledger and vertical slices | Legal competence corpus, approved codebook, representative edges | Accountability graph maintainer plus legal/domain leads | Domain/legal ownership open. |
+| Outcomes/method | Indicator and outcome-context contracts | Eurostat corpus/slice, frozen C1 package, accepted C2A/C2B physical planners | Representative codebook, C1 live release, C2 durable origin/rollback, review and `R2` revisions | Outcome pipeline maintainer plus statistical methodology lead | Technical capacity proven locally; methodology/release/origin owners open. |
+| Review/corrections | Append-only review and release contracts | Existing internal queues/state patterns | Calibration, operations, appeals, million-task plane | Review-platform maintainer plus editorial corrections owner | Entire operating team unassigned. |
+| Public UI/API | Static site and Evidence API contracts | Existing live routes/components | Pending routes, broader explainers, correction views | Public product/UI/API maintainers | Roles clear; release/editorial owners open. |
+| Security/publication hygiene | Repository gates and release policy | Current scanners/checks | Two-person enforcement and incident ownership | Security reviewer plus release maintainer | Named security reviewer open. |
+| Contributor ecosystem | Ontology/plugin/SDK/governance contracts | Reference plugin and signed flow | Generalized onboarding, scorecard, external replica | SDK/community/governance maintainers | Named maintainers and external participant open. |
+
+## Uncertainty and Decision Register
+
+| ID | Item | Need | Evidence | Implementation | Estimate effect | Resolver | Decision/evidence needed |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| `DEC-01` | Representative source universe by lane | Required | Current mixes confirmed incomplete | Depth open | Material variance; not estimable | Domain leads plus program maintainer | Approve jurisdiction/time/source/topic/format strata and official totals for each lane. |
+| `DEC-02` | Durable raw-object origin and retention | Required | Local CAS proven; remote full corpus unverified | Provider/policy open | Material variance; not estimable | Storage/release owner | Choose origin, versioning, retention, lifecycle, replication, access, cost, and recovery policy. |
+| `DEC-03` | Historical vote/text capture closure | Required | Exact residual gaps and `403` evidence confirmed | Dependency open | Material variance | Parliamentary stewards | Obtain immutable official captures/equivalence or formally preserve unresolved block and scope consequence. |
+| `DEC-04` | Outcome C1 v3 evidence-package release | Required now | Exact local contract, package and build pass; live release open | Local path frozen; publication decision open | Bounded variance unless evidence changes | Outcome maintainer, independent validator, release reviewer | Preserve exact status/manifest/assets and require live hash/browser acceptance before closing publication. |
+| `DEC-05` | Outcome C2 durable origin, recovery and promotion after accepted sparse execution | Required | C2A `33,726` and C2B `2,865,602` physical runs, local interruption/resume, parity and local restore confirmed | Local execution frozen; remote origin/provider/promotion open | Local throughput measured; remote cost and operational variance not estimable | Outcome pipeline and storage/release maintainers | Choose durable immutable origin, upload exact manifests/shards, prove isolated clean restore/rollback and only then consider public promotion; L0 pairs remain non-claims. |
+| `DEC-06` | Actor identity quality and raw actor-source provenance | Required | Source-scoped graph validated; gold set/raw source hashes incomplete | Depth/owner open | Material variance | Identity lead and source stewards | Approve identity policy/gold strata and bind actor references to immutable source content or label them derived. |
+| `DEC-07` | Human review operating model | Required | Queues/contracts exist; representative completed decisions absent | Owner/workforce open | Material variance; not estimable | Editorial/legal/review operations leads | Assign reviewers, identity/conflict rules, calibration, dual-review/adjudication, SLA, appeals, compensation/capacity if applicable. |
+| `DEC-08` | Statistical claim-level and allegation policy approval | Required | Normative guardrails exist; cross-domain thresholds incomplete | Owner/depth open | Material variance | Statistical, editorial, and legal leads | Approve definitions, evidence minimums, language, cohorts, confounders, corroboration, and release authority. |
+| `DEC-09` | Main/public release and rollback authority | Required | Procedures and read-only rollback plan exist | Authority open | Bounded variance | Maintainer governance | Name approvers, branch/release order, compare-and-swap authority, emergency rollback and supersession procedure. |
+| `DEC-10` | Independent maintainers and replica | Required for final DoD | Tooling exists; second-party reproduction absent | Owner/dependency open | Material variance | Community/governance lead | Recruit three critical-path maintainers and one external reproducer; publish attestations and bus-factor map. |
+| `DEC-11` | Budget, infrastructure envelope, and delivery horizon | Unknown | No target, rates, staffing, or provider envelope supplied | Not selected | Not estimable | Maintainer/sponsor | Supply constraints only after scope decisions; estimate bottom-up, never reverse-fit target. |
+| `DEC-12` | Snapshot/revision cadence per source | Required | First snapshots common; second-snapshot proof sparse | Depth open | Material variance | Source stewards plus release maintainer | Approve freshness SLA, effective/retrieval/vintage semantics, deletion handling, and correction cadence per source. |
+
+## Assumptions and Exclusions
+
+### Assumptions
+
+- Status is a point-in-time classification for `2026-08-23`. Any artifact, live route, source cutoff, or upstream behavior change triggers registry/tracker refresh before a status upgrade.
+- Existing code, data, schemas, routes, and contracts are reusable only at the exact layer independently validated; reuse never implies missing integration, parity, ownership, security, or scale behavior.
+- SQLite remains the reproducible snapshot/single-node baseline. Operational coordination changes only after measured lock or throughput pressure and must preserve export semantics.
+- Official public-source identity fields remain public and exact. Bounded task packets may reference immutable evidence instead of duplicating it; this is a scale optimization, not redaction.
+- Unassigned owner labels are capability roles, not claims that a named person or funded team exists.
+- C2A/C2B local physical acceptance changes capacity status only. Durable remote origin, isolated restore, public promotion, human review and claim authority remain independent gates; no pair row is a validated relationship.
+- External source blocks may persist. Work proceeds on controllable slices while blockers stay factual and visible under `XREQ-14`.
+
+### Exclusions
+
+- Synthetic, mock, invented, generated, placeholder, loopback, or duplicated records as coverage, quality, capacity, calibration, or readiness evidence.
+- Suppression, pseudonymization, or removal of personal information published by an authoritative public source for accountability purposes.
+- Secrets, credentials, cookies, private session state, workstation-identifying traces, or data not obtained from public sources in public artifacts.
+- No automated corruption verdict. Unsupported motive, causal, effect, merit, or blame claims without the required evidence/review level are excluded.
+- Silent WAF bypasses, fabricated source equivalence, invented identifiers, inferred votes, inferred payments, or inferred identity merges.
+- Destructive schema/history rewrites without explicit approved migration, recovery, and compatibility evidence.
+- Unapproved live publication, pointer mutation, destructive rollback, or external communication; authorized release work remains scoped in `STORY-009`, `STORY-058`, and `DEC-09`.
+- Work/cost estimates in this revision.
+
+### Estimation omission
+
+Estimation is premature and was not requested. No `EST-*`, hours, cost, schedule promise, budget capacity, or target-fit total is supplied. Estimate readiness requires at minimum `DEC-01`, `DEC-02`, `DEC-04..11` to resolve scope, architecture, owners, review capacity, release authority, and constraints. When ready, estimate bottom-up at story level with conditional branches, measured throughput, provider rates, review labor, contingency, and confidence; do not reuse wave target durations as estimates.
+
+## Coverage and Traceability
+
+### Claim-to-delivery forward trace
+
+| Claim/topic | Destination | Estimate line | Coverage result | Notes |
+| --- | --- | --- | --- | --- |
+| `CLM-01` / `TOP-01` | `XREQ-01`; all `65` stories | Omitted | Covered | Universal qualification gate. |
+| `CLM-02` / `TOP-02` | `XREQ-02`, `XREQ-11`; `STORY-001`, `016`, `019`, `028..032`, `052..053`, `059` | Omitted | Covered | Task references never become identity redaction. |
+| `CLM-03` / `TOP-03` | §4; `INIT-01..04`; `XREQ-05..08`, `XREQ-12` | Omitted; `DEC-01..02`, `DEC-11` | Covered | Scale requires full operating contract. |
+| `CLM-04` / `TOP-04` / `TOP-19` | `XREQ-03`, `XREQ-09`; `EPIC-05..10` | Omitted | Covered | Evidence, freshness, unknown, dispute, and correction states explicit. |
+| `CLM-05` / `TOP-17` | `EPIC-09`, `XREQ-13`; `STORY-043`, `048..053` | Omitted; `DEC-07..08` | Covered | Automated verdict excluded. |
+| `CLM-06` / `TOP-05` | `EPIC-01`; `STORY-001..004`; `DEC-01` | Omitted | Covered | Zero promoted lanes remains visible. |
+| `CLM-07` / `TOP-06` | `EPIC-02`; `STORY-005..009`; `XREQ-08`; `DEC-02`, `DEC-09` | Omitted | Covered | Analytical and raw recovery scope separated. |
+| `CLM-08` / `TOP-07` | `EPIC-03`; `STORY-010..015`; `DEC-01..02`, `DEC-07` | Omitted | Covered | Numeric `R1` not representative `R2`. |
+| `CLM-09` / `TOP-08` | `EPIC-04`; `STORY-016..021`; `DEC-06` | Omitted | Covered | Source-scoped graph and adjudicated resolution separated. |
+| `CLM-10` | `STORY-019`, `STORY-058`; `DEC-09` | Omitted | Covered | Local actor validation cannot close live state. |
+| `CLM-11` / `TOP-09` | `EPIC-05`; `STORY-022..027`; `DEC-03` | Omitted | Covered | Vote volume and parliamentary completeness separated. |
+| `CLM-12` / `TOP-10` | `EPIC-06`; `STORY-028..032`; `XREQ-09` | Omitted | Covered | Money lifecycle semantics explicit. |
+| `CLM-13` / `TOP-11` | `EPIC-07`; `STORY-033..040` | Omitted; `DEC-01`, `DEC-08` | Covered | Responsibility, rhetoric, influence, and outcomes separated. |
+| `CLM-14` / `TOP-12` | `EPIC-08`; `STORY-041..045`; `DEC-01`, `DEC-12` | Omitted | Covered | Current observation volume not representative. |
+| `CLM-15` / `TOP-13` | `STORY-046`; `XREQ-09`, `XREQ-13` | Omitted | Covered | Zero review/release/link state is acceptance-critical. |
+| `CLM-16` / `TOP-13` | `STORY-046`, `STORY-058`; `DEC-04` | Omitted | Covered | v2/v3 evidence package stays open until exact live proof. |
+| `CLM-17` / `TOP-14` | `STORY-047`; `DEC-05`; `XREQ-05..08`, `XREQ-12` | Omitted | Covered as accepted local physical work | C2A `33,726` capacity is proven; durable origin, promotion and claims remain closed. |
+| `CLM-18` / `TOP-15` | `STORY-040`, `STORY-058`; `DEC-09` | Omitted | Covered | Comparison C1 live and scale gates remain open. |
+| `CLM-19` / `TOP-16` | `EPIC-09`; `STORY-048..053`; `DEC-07..08` | Omitted | Covered | Candidate and decision records remain separate. |
+| `CLM-20` / `TOP-18` | `EPIC-10`; `STORY-054..058`; `XREQ-10` | Omitted | Covered | Bounded delivery is a release gate. |
+| `CLM-21` / `TOP-20` | `STORY-003`, `STORY-022`, `STORY-054`; `XREQ-14` | Omitted | Covered | Factual obstruction, no motive claim. |
+| `CLM-22` / `TOP-21` | `EPIC-11`; `STORY-059..064`; `DEC-10` | Omitted | Covered | Tooling and independent operation remain distinct. |
+| `CLM-23` / `TOP-22` | Estimation omission; `DEC-01..12` | Intentionally omitted | Covered | No false estimate. |
+| `CLM-24` / `TOP-14` | `STORY-065`; `DEC-05`; `XREQ-05..08`, `XREQ-12` | Omitted | Covered as accepted local million-pair execution | C2B `2,865,602` capacity is physical and recoverable locally; remote durability/public promotion remain unproven. |
+| `TOP-23` | `XREQ-12`; `STORY-015`, `021`, `027`, `032`, `042`, `047`, `053`, `065` | Omitted; `DEC-11` | Covered | Requires measured real physical runs. |
+| `TOP-24` | `XREQ-04`; `STORY-019..021`, `029..035`, `046..048`, `056`, `059`, `064` | Omitted | Covered | Existing ontology/schema reuse is bounded. |
+
+### Canonical work-family reverse trace
+
+| Existing IDs | Planning destination | Coverage boundary |
+| --- | --- | --- |
+| `W0-001..008` | `EPIC-01`, `STORY-001..004` | Existing status/evidence stays in Wave 0 and tracker. |
+| `W1-001..009` | `EPIC-02`, `STORY-005..009` | Analytical origin proof does not close raw origin or authorized rollback. |
+| `W2-001..009` | `EPIC-03`, `STORY-010..015` | Numeric `R1` does not close representative quality or document `R2`. |
+| `W3-001..008` | `EPIC-04`, `STORY-016..021` | Current graph is source-scoped and live-pending; no unreviewed merge. |
+| `W4-001..007` | `EPIC-05`, `STORY-022..027` | Million vote rows do not close historical/text/reconciliation gaps. |
+| `W5-001..009` | `EPIC-06`, `STORY-028..032` | Current award/subsidy facts do not imply payment/delivery/outcome. |
+| `W6-001..011` | `EPIC-07`, `STORY-033..040` | Existing vertical slices remain bounded; comparison live gate open. |
+| `W7-001..009` | `EPIC-08`, `STORY-041..047`, `STORY-065` | `W7-009` contains C1 closure, C2A, and C2B next scale proof; none implies L2 claim. |
+| `W8-001..008` | `EPIC-09`, `STORY-048..053` | Review operation requires real completed decisions and corrections. |
+| `W9-001..014` | `EPIC-10..11`, `STORY-054..064` | Done infrastructure is reused; external operation and pending routes remain open. |
+| `SCALE-001..014` | `EPIC-01`, `EPIC-03`, `EPIC-09`; `XREQ-05..07`, `XREQ-13` | Queue/readiness/integrity primitives; real million operation remains separate. |
+| `SCALE-015..023` | `EPIC-02..03`, `STORY-005..015` | Format/origin/OCR/100k technical backlog; exact tracker status retained. |
+| `SCALE-024..031`, `SCALE-038..042`, `SCALE-046..049` | `XREQ-05..12`, `EPIC-02`, `EPIC-10` | Shared Parquet, reconciliation, public-delivery, operations, DR, and cost work. |
+| `SCALE-032` | `EPIC-04`, `STORY-021` | Actor/candidate/mandate `R2`; current source-scoped counts insufficient. |
+| `SCALE-033` | `EPIC-05`, `STORY-027` | Member-vote/action `R2`; capture/reconciliation gaps open. |
+| `SCALE-034` | `EPIC-07`, `STORY-035` | Accountability-fact `R2`; representative mix open. |
+| `SCALE-035..036` | `EPIC-06`, `STORY-028..032` | Contract/subsidy `R2`; history/revisions/semantics open. |
+| `SCALE-037` | `EPIC-08`, `STORY-041..045` | Indicator `R2`; representative mix/revisions/corrections open. |
+| `SCALE-043..045` | `EPIC-09`, `STORY-048..052` | Review/correction states exist; calibrated public workflow open. |
+| `SCALE-050..052` | `EPIC-11`, `STORY-060..063` | Contributor throughput and multi-maintainer proof open. |
+| `ACC-001..005` | `EPIC-07`, `STORY-033..035` | Technical responsibility/ledger work remains derived from `W6`. |
+| `OUT-001..005` | `EPIC-08`, `STORY-041..047`, `STORY-065` | `OUT-004` bounded live observation slice; `OUT-005` C1/C2A/C2B gates remain as classified. |
+| `INT-001..006` | `EPIC-09`, `STORY-048..053` | Review contracts and operations; no public high-risk signal until all prerequisites pass. |
+| `PUB-001..003`, `PUB-008`, `PUB-013` | `EPIC-10`, `STORY-054..058` | Bounded API/status infrastructure and live evidence routes. |
+| `PUB-004..007`, `PUB-009..012` | `EPIC-11`, `STORY-059..064` | SDK/governance/reproducibility; external maintainer proof open. |
+| `PUB-014..018` | `STORY-032`, `STORY-037..039`, `STORY-045` | Existing public vertical slices remain inputs to broader canonical epics, not proof of representative lane completion. |
+
+Orphan claims: none identified. Unsupported deliverables: none treated as confirmed; C2 durable-origin/promotion work and all owner-open work are required proposals backed by canonical gaps, while C2A/C2B local physical execution is confirmed. Duplicate coverage: `STORY-058` owns only cross-route release acceptance; upstream actor/comparison/outcome semantics remain owned by `STORY-019`, `STORY-040`, and `STORY-046`. Consciously excluded topics are listed under Exclusions.
+
+## Decision-Changing Questions
+
+| Priority | Question | Why it matters | Outcome if A | Outcome if B |
+| --- | --- | --- | --- | --- |
+| `P0` | Which source/jurisdiction/time strata define representative completion for each lane? | Changes corpus size, connectors, quality samples, and promotion. | Approved matrix makes `R1/R2` acceptance and estimates coherent. | Without it, rows can grow but lanes remain unpromotable and unestimable. |
+| `P0` | Which external raw-object origin, retention, and recovery policy is authorized? | Controls durability, cost, restore, and document/outcome promotion. | Implement `STORY-005..006` against chosen contract. | Keep raw-dependent lanes explicitly open. |
+| `P0` | Who owns statistical methods, legal/editorial gates, and final high-risk publication decisions? | No reviewed outcome/integrity claim can ship without accountable authority. | Freeze claim/review language and acceptance. | Continue descriptive/zero-state publication only. |
+| `P0` | Who authorizes publication of the frozen C1 v3 package after exact remote parity and live browser verification? | Local status, `17` assets, build, route audit and browser proof now agree; authority/live state are the remaining release boundary. | Publish immutable package, verify live, record release. | C1 remains locally validated and publicly unclosed. |
+| `P0` | Which durable immutable origin will hold the accepted C2A/C2B shards and manifests, and can an isolated operator restore/rollback them byte-identically? | Local physical capacity and local restore pass; workstation-local artifacts are not disaster recovery. | Upload, independently restore, revalidate roots, exercise rollback, then decide promotion. | Keep C2 as internal L0 capacity evidence with no public relationship claim. |
+| `P0` | Can missing historical vote/text bytes and actor raw-source hashes be recovered exactly? | Blocks stronger provenance and outcome L2 prerequisites. | Bind immutable bytes and validate. | Preserve explicit unresolved blocks/derived labels and keep L2 closed. |
+| `P0` | Who supplies and governs real reviewers for identity, OCR, outcome, and integrity queues? | Review labor/quality is critical path and main unknown cost. | Operate calibration, dual review, adjudication, and SLA. | Keep review-dependent releases and estimates open. |
+| `P1` | Who may publish main/public branches and activate or revert release pointers? | Required for safe live closure and measured rollback. | Execute audited compare-and-swap and live verification. | Local validation remains pending publication. |
+| `P1` | Which three independent maintainers and external reproducer will own critical paths? | Final societal-scale DoD requires real distributed ownership. | Validate bus factor and second-party attestation. | Ecosystem completion remains open despite tooling. |
+| `P1` | What budget, provider, staffing, and horizon constraints apply after scope freezes? | Needed for coherent bottom-up estimate and capacity plan. | Estimate stories using measured real throughput and conditional branches. | Continue sequencing by evidence/impact without fabricated cost or dates. |
+
+## Audit Log
+
+| Pass ID | Audit | Scope reviewed | Material findings | Corrections made | Residual issues |
+| --- | --- | --- | --- | --- | --- |
+| `PASS-01` | Full lexical, semantic, structural, evidence, boundary, uncertainty, estimate-readiness, and adversarial loop | Entire canonical roadmap plus first systematic layer, one line/item at a time | “Scale,” “candidate,” “outcome,” “live,” “done,” “privacy,” “durable origin,” and “restore” could overstate scope; early C2 wording bundled eligibility with execution; several claim destinations pointed to shifted story IDs. | Added terminology corrections; separated capacity from promotion, official identity from private state, observations from effects, local from live, analytical from raw restore; split C2A execution from C2B million proof; corrected story trace. | `DEC-01..12`; risks below. |
+| `PASS-02` | Full lexical, semantic, structural, evidence, boundary, uncertainty, estimate-readiness, and adversarial loop | Revised sources, 24 atomic claims, 24 topics, four initiatives, eleven epics, 65 stories, requirements, ownership, and bidirectional trace | Potential overlap between upstream lane stories and public release QA; “reuse” could imply portability; named ownership was unsupported; wave target durations could be mistaken for estimates; initiative ranges and one topic/actor trace were too implicit. | Limited `STORY-058` to cross-route acceptance, kept semantics with upstream owners, bounded every reuse claim to validated layer, used unassigned role owners, explicitly barred wave targets from estimation, enumerated initiative epics, and made `TOP-19`/community actor trace explicit. | No named owners, approved source matrices, review workforce, or estimate inputs. |
+| `PASS-03` | Targeted lexical, semantic, structural, evidence, boundary, uncertainty, estimate-readiness, and adversarial loop | Changed/current/high-risk lines: C1 v3, C2A/C2B, actor/comparison live state, public identity, origin/restore, review, ownership, exclusions, estimation | Eligibility arithmetic could be misread as physical throughput; local physical capacity could be misread as promotion or a relationship claim; pending publication could be misread as live. | Froze the deterministic `17`-asset C1 package; recorded accepted C2A/C2B physical runs, independent checks and recovery tests; kept L0/no-claim/publication boundaries explicit; preserved all official public identities. | C1/C2 remote publication, durable remote origin/restore/rollback, human decisions, actor/vote raw provenance remain open. |
+
+## Residual Risks and Open Issues
+
+| Risk ID | Open issue | Impact | Owner | Next evidence |
+| --- | --- | --- | --- | --- |
+| `RISK-01` | Zero lanes currently satisfy every promotion gate. | Societal-scale claim remains false despite useful high row counts. | Program maintainer plus lane owners | Per-lane representative matrix and full §4.2 attestation. |
+| `RISK-02` | Full raw-document/object origin, retention, and clean restore remain unproven. | Loss of local state can still lose source evidence; document/outcome promotion blocked. | Storage/release owner unassigned | Remote full-manifest upload, version/delete guard, empty restore, independent rehash, cost report. |
+| `RISK-03` | Historical vote/text captures and some official endpoints remain blocked or incomplete. | Parliamentary reconstruction and downstream L2 provenance incomplete. | Parliamentary source stewards unassigned | Immutable official bytes/equivalence or append-only unresolved incident with scope impact. |
+| `RISK-04` | Actor graph lacks adjudicated cross-source gold set, merge/split history, and complete raw actor-source hashes. | False identity joins or overclaimed actor provenance could misattribute responsibility. | Identity lead unassigned | Dual-reviewed gold set, precision/recall, immutable resolution events, content-hash binding. |
+| `RISK-05` | Outcome C1's frozen local package is not yet published and verified live. | A correct local package can still diverge during remote deployment. | Outcome and release maintainers | Publish exact `5ac01878...` package and `226dfdf9...` status; verify every remote asset hash and desktop/mobile browser branch. |
+| `RISK-06` | C2A/C2B physical capacity is proven only on local single-node artifacts without durable remote origin or isolated remote restore. | Loss of local state or provider/restore defects could invalidate operational recoverability; L0 rows could be overread as claims. | Outcome pipeline and storage/release owners unassigned | Upload exact shards/manifests to authorized immutable origin; independent clean restore/rollback and revalidation; preserve non-public/no-claim flags. |
+| `RISK-07` | Human OCR, identity, outcome, and integrity review operations lack completed representative work and assigned workforce. | Quality, allegation safety, correction SLA, and major cost remain unknown. | Review/editorial/legal owners unassigned | Real calibration, dual reviews, adjudications, appeals/corrections, agreement/latency/cost scorecard. |
+| `RISK-08` | Actor graph, comparison and frozen outcome C1 package remain pending live publication. | Local truth is not public truth; statuses can drift. | Release authority unassigned | Source branch publication, full build, exact remote assets, route/browser/accessibility audit, status update. |
+| `RISK-09` | Source snapshots and action cutoffs can be stale; second-snapshot semantics are sparse. | Public conclusions may lag or mishandle revisions/deletions. | Source stewards plus release maintainer | Approved freshness SLAs and real changed/unchanged/deleted second-snapshot tests. |
+| `RISK-10` | Legal/statistical/editorial thresholds and right-of-reply governance have no named authority. | High-risk claims cannot be safely approved or corrected. | Maintainer governance | Named accountable roles and approved method/publication/correction policies. |
+| `RISK-11` | Three-maintainer operation and external second-party reproduction remain absent. | Bus factor and independent trust remain below final DoD. | Community/governance lead unassigned | Ownership map, real contributions, independent restore/validation/signature. |
+| `RISK-12` | C2B supplies measured local million-run time/RSS/disk throughput, but no production provider envelope, storage/egress budget, staffing or representative all-lane cost model exists. | Converting one local capacity result into delivery timeline or operating cost would be false precision. | Sponsor/maintainer | Resolve `DEC-01..11`, price chosen durable origin and representative cohorts, then estimate bottom-up from measured telemetry. |
+| `RISK-13` | Canonical roadmap, technical roadmap, tracker, generated registries, and live assets can drift independently. | False `DONE`, stale metrics, or contradictory public status. | Program/release maintainer | Automated cross-artifact status contract plus weekly generated-evidence closeout. |

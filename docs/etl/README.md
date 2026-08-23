@@ -328,7 +328,8 @@ Nota para posiciones por temas:
   - El repo HF usa `license: other` porque mezcla múltiples condiciones de reutilización por fuente.
   - La referencia normativa efectiva está en `sources/<source_id>.json` dentro de cada snapshot.
 - Guardas de privacidad por defecto:
-  - `HF_PARQUET_EXCLUDE_TABLES=raw_fetches,run_fetches,source_records,lost_and_found`
+  - `HF_PARQUET_EXCLUDE_TABLES=raw_fetches,run_fetches,lost_and_found`
+  - `source_records` se publica por defecto: conserva el payload oficial exacto y todos sus campos personales públicos. Un preflight falla antes de empaquetar si detecta secretos, sesión privada o trazas de workstation.
   - `HF_ALLOW_SENSITIVE_PARQUET=0` (activar solo en datasets privados)
   - `HF_INCLUDE_SQLITE_GZ=0` (activar solo en datasets privados)
 - Guardrail de calidad en publish HF:

@@ -16,10 +16,10 @@ Before starting:
 Use this for a new public dataset.
 
 ```bash
-just add-source <source_id> name="..." scope="..." url="..." format=json
+just add-source <source_id> name="..." scope="..." url="https://fuente-oficial/..." sample_file="..." sample_sha256="..." captured_at="...Z" rights_basis="datos públicos oficiales" format=json
 ```
 
-Then edit only the generated sample, parser, test, and source doc. Default mode is `source_records_only`, so the first PR only needs traceable records. Domain normalization can follow later.
+The command copies the exact official capture and emits a provenance sidecar; it never manufactures a sample row. Then edit the parser, test, and source doc. Default mode is `source_records_only`, so the first PR only needs traceable real records. Domain normalization can follow later.
 
 ### Add a domain backfill
 
@@ -42,7 +42,7 @@ Expected contract:
 - static JSON stays bounded,
 - UI states show `unknown/no_signal` explicitly,
 - every claim links to source or drill-down,
-- `just privacy-check-public-artifacts` passes before publish.
+- `just privacy-check-public-artifacts` passes before publish. This blocks secrets, private session state, and workstation traces; it does not suppress personal information published by the authoritative public source.
 
 ## Required checks
 

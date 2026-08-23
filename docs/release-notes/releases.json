@@ -1,0 +1,238 @@
+{
+  "schema_version": "public_release_registry_v1",
+  "policy": {
+    "real_releases_only": true,
+    "invented_or_placeholder_releases_forbidden": true,
+    "newest_first": true
+  },
+  "releases": [
+    {
+      "id": "promise-action-comparison-mvp-2026-08-20",
+      "date": "2026-08-20T00:36:23+00:00",
+      "status": "validated_pending_publication",
+      "title": "Promise/action comparison MVP",
+      "summary": "Valida localmente cinco assessments reales promesa-acción con 18 evidencias y cero conclusiones fuertes; conserva incertidumbre, identidad oficial pública y un corte de acciones stale explícito.",
+      "public_routes": [
+        "/comparisons/",
+        "/comparisons/data/comparisons.json"
+      ],
+      "note_path": "docs/release-notes/promise-action-comparison-mvp.md",
+      "evidence_paths": [
+        "docs/method/comparison-engine-v1.md",
+        "docs/etl/sprints/COMPARISON-ENGINE-20260820/evidence/comparison-materialization.json",
+        "docs/etl/sprints/COMPARISON-ENGINE-20260820/evidence/promise-action-comparisons-validation.json",
+        "scripts/verify_live_promise_action_comparisons.py",
+        "tests/test_promise_action_comparison_real_pipeline.py",
+        "tests/test_verify_live_promise_action_comparisons.py",
+        "tests/test_promise_action_comparison_ui_contract.js"
+      ]
+    },
+    {
+      "id": "actor-graph-mvp-2026-08-20",
+      "date": "2026-08-20T00:00:00+00:00",
+      "status": "validated_pending_publication",
+      "title": "Time-aware actor graph MVP",
+      "summary": "Materializa 133.595 actores y 237.973 relaciones reales con evidencia, vigencia contextual y 55 mapeos de fuente; conserva identidad oficial pública y publica cero fusiones cross-source o por nombre.",
+      "public_routes": [
+        "/actor-graph/",
+        "/actor-graph/data/graph.json"
+      ],
+      "note_path": "docs/release-notes/actor-graph-mvp.md",
+      "evidence_paths": [
+        "docs/etl/sprints/ACTOR-GRAPH-20260820/evidence/actor-graph-materialization.json",
+        "docs/etl/sprints/ACTOR-GRAPH-20260820/evidence/actor-graph-validation.json",
+        "etl/data/published/actor-graph-semantic-partition-manifest-latest.json",
+        "docs/etl/sprints/ACTOR-GRAPH-20260820/evidence/actor-graph-partition-validation.json",
+        "docs/architecture/entity-resolution-v1.md",
+        "docs/examples/actor-graph-evidence.sql",
+        "tests/test_actor_graph_partitions.py",
+        "tests/test_actor_graph_real_pipeline.py",
+        "tests/test_actor_graph_ui_contract.js"
+      ]
+    },
+    {
+      "id": "indicators-mvp-2026-08-20",
+      "date": "2026-08-19T22:36:55+00:00",
+      "status": "published_live_verified",
+      "title": "Indicators MVP",
+      "summary": "Materializa 2.091 observaciones reales de PIB por habitante Eurostat como definición -> release -> territorio -> periodo -> celda, preservando 113 marcas provisionales y sin inferir causalidad, mérito ni culpa.",
+      "public_routes": [
+        "/indicators/",
+        "/indicators/data/eurostat-gdp-es.json"
+      ],
+      "note_path": "docs/release-notes/indicators-mvp.md",
+      "evidence_paths": [
+        "docs/etl/sprints/INDICATORS-20260820/evidence/eurostat-gdp-materialization.json",
+        "docs/etl/sprints/INDICATORS-20260820/evidence/eurostat-gdp-validation.json",
+        "docs/etl/sprints/INDICATORS-20260820/evidence/live-eurostat-gdp-verification.json",
+        "docs/etl/sprints/INDICATORS-20260820/evidence/live-route-audit.json",
+        "tests/test_eurostat_gdp_indicator_real_pipeline.py",
+        "tests/test_eurostat_gdp_indicator_ui_contract.js"
+      ]
+    },
+    {
+      "id": "geopolitics-mvp-2026-08-20",
+      "date": "2026-08-19T22:05:00+00:00",
+      "status": "published_live_verified",
+      "title": "Geopolitics connector MVP",
+      "summary": "Materializa dos acciones exteriores reales de La Moncloa como fuente -> etapa jurídica -> actores -> evidencia, sin inferir vigencia, implementación, alineamiento, influencia ni impacto.",
+      "public_routes": [
+        "/geopolitics/",
+        "/geopolitics/data/moncloa-sample.json"
+      ],
+      "note_path": "docs/release-notes/geopolitics-mvp.md",
+      "evidence_paths": [
+        "docs/etl/sprints/GEOPOLITICS-20260819/evidence/moncloa-geopolitics-materialization.json",
+        "docs/etl/sprints/GEOPOLITICS-20260819/evidence/moncloa-geopolitics-validation.json",
+        "docs/etl/sprints/GEOPOLITICS-20260819/evidence/live-moncloa-geopolitics-verification.json",
+        "tests/test_moncloa_geopolitics_real_pipeline.py",
+        "tests/test_moncloa_geopolitics_ui_contract.js"
+      ]
+    },
+    {
+      "id": "agreements-connector-mvp-2026-08-19",
+      "date": "2026-08-19T21:30:00+00:00",
+      "status": "published_live_verified",
+      "title": "Agreements and meetings connector MVP",
+      "summary": "Materializa 11 acuerdos reales del Consejo de Ministros como sesión -> acuerdo -> actores -> evidencia, con temas derivados visibles y cero asistentes o influencia inventados.",
+      "public_routes": [
+        "/agreements/",
+        "/agreements/data/moncloa-sample.json"
+      ],
+      "note_path": "docs/release-notes/agreements-connector-mvp.md",
+      "evidence_paths": [
+        "docs/etl/sprints/AGREEMENTS-20260819/evidence/moncloa-agreements-materialization.json",
+        "docs/etl/sprints/AGREEMENTS-20260819/evidence/moncloa-agreements-validation.json",
+        "docs/etl/sprints/AGREEMENTS-20260819/evidence/live-moncloa-agreements-verification.json",
+        "tests/test_moncloa_agreements_real_pipeline.py",
+        "tests/test_moncloa_agreements_ui_contract.js"
+      ]
+    },
+    {
+      "id": "spending-connector-mvp-2026-08-19",
+      "date": "2026-08-19",
+      "status": "published_live_verified",
+      "title": "Spending connector MVP",
+      "summary": "Materializa 20 adjudicaciones PLACSP reales como actor -> spending item -> evidencia, con importes exactos e identidad pública intacta, sin representarlas como pagos.",
+      "public_routes": [
+        "/spending/",
+        "/spending/data/placsp-sample.json"
+      ],
+      "note_path": "docs/release-notes/spending-connector-mvp.md",
+      "evidence_paths": [
+        "docs/etl/sprints/SPENDING-20260819/evidence/placsp-spending-materialization.json",
+        "docs/etl/sprints/SPENDING-20260819/evidence/placsp-spending-validation.json",
+        "docs/etl/sprints/SPENDING-20260819/evidence/live-placsp-spending-verification.json",
+        "tests/test_placsp_spending_real_pipeline.py",
+        "tests/test_placsp_spending_ui_contract.js"
+      ]
+    },
+    {
+      "id": "promises-pipeline-mvp-2026-08-19",
+      "date": "2026-08-19T20:00:00+00:00",
+      "status": "published_live_verified",
+      "title": "Promises pipeline MVP",
+      "summary": "Modela 91 promesas reales del programa oficial BNG 2023 y publica 20 con actor, cita, página, topic y hashes, sin atribuir cumplimiento.",
+      "public_routes": [
+        "/promises/",
+        "/promises/data/bng-2023.json"
+      ],
+      "note_path": "docs/release-notes/promises-pipeline-mvp.md",
+      "evidence_paths": [
+        "docs/etl/sprints/PROMISES-20260819/evidence/promises-bng-2023-ingest.json",
+        "docs/etl/sprints/PROMISES-20260819/evidence/promises-bng-2023-validation.json",
+        "docs/etl/sprints/PROMISES-20260819/evidence/live-promises-bng-2023-verification.json",
+        "tests/test_manifesto_promises_real_pipeline.py",
+        "tests/test_manifesto_promises_ui_contract.js"
+      ]
+    },
+    {
+      "id": "evidence-api-v1-2026-08-19",
+      "date": "2026-08-19T19:36:18+00:00",
+      "status": "published_live_verified",
+      "title": "Evidence API v1",
+      "summary": "Publica entidades, cadenas de evidencia, salud de fuentes y resultados reales como páginas content-addressed con cursor, provenance e identidad pública intacta.",
+      "public_routes": [
+        "/api/v1/index.json",
+        "/api/v1/schema.json"
+      ],
+      "note_path": "docs/release-notes/evidence-api-v1.md",
+      "evidence_paths": [
+        "docs/etl/sprints/EVIDENCE-API-20260819/evidence/evidence-api-v1-export.json",
+        "docs/etl/sprints/EVIDENCE-API-20260819/evidence/evidence-api-v1-validation.json",
+        "docs/etl/sprints/EVIDENCE-API-20260819/evidence/live-evidence-api-v1-verification.json",
+        "docs/api/evidence-api-v1.schema.json",
+        "tests/test_evidence_api_v1_contract.py"
+      ]
+    },
+    {
+      "id": "signed-reproducible-scale-snapshot-2026-08-19",
+      "date": "2026-08-19T19:00:00+00:00",
+      "status": "published_live_verified",
+      "title": "Signed reproducible scale snapshot",
+      "summary": "Publica 5.414.326 filas oficiales reales bajo un manifest inmutable firmado, verificable y comparable por diff exacto.",
+      "public_routes": [
+        "/transparency/",
+        "/transparency/data/transparency.json"
+      ],
+      "note_path": "docs/release-notes/signed-reproducible-scale-snapshot.md",
+      "evidence_paths": [
+        "docs/etl/sprints/REPRODUCIBILITY-20260819/evidence/signed-scale-publish-report.json",
+        "docs/etl/sprints/REPRODUCIBILITY-20260819/evidence/live-signed-snapshot-verification.json",
+        "docs/etl/sprints/REPRODUCIBILITY-20260819/evidence/live-scale-origin-parity.json",
+        "docs/etl/sprints/REPRODUCIBILITY-20260819/evidence/published-scale-manifest-diff.json",
+        "docs/etl/sprints/REPRODUCIBILITY-20260819/evidence/snapshot-reproducibility-validation.json"
+      ]
+    },
+    {
+      "id": "transparency-dashboard-mvp-2026-08-19",
+      "date": "2026-08-19",
+      "status": "published_mvp",
+      "title": "Transparency dashboard MVP",
+      "summary": "Publica frescura, salud de fuentes, obstrucciones, readiness, versión durable y cambios con evidencia por cada cifra.",
+      "public_routes": [
+        "/transparency/",
+        "/transparency/data/transparency.json"
+      ],
+      "note_path": "docs/release-notes/transparency-dashboard-mvp.md",
+      "evidence_paths": [
+        "scripts/export_transparency_dashboard_snapshot.py",
+        "scripts/validate_transparency_dashboard_snapshot.py",
+        "tests/test_transparency_dashboard_snapshot.py",
+        "tests/test_transparency_dashboard_ui_contract.js"
+      ]
+    },
+    {
+      "id": "obstruction-tracker-mvp-2026-08-19",
+      "date": "2026-08-19",
+      "status": "published_live_verified",
+      "title": "Obstruction tracker MVP",
+      "summary": "Publica salud de fuentes, bloqueos, cobertura afectada, escala real y evidencia técnica verificable en una ruta estática.",
+      "public_routes": [
+        "/obstruction-tracker/",
+        "/obstruction-tracker/data/obstructions.json"
+      ],
+      "note_path": "docs/release-notes/obstruction-tracker-mvp.md",
+      "evidence_paths": [
+        "docs/etl/sprints/OBSTRUCTION-TRACKER-20260819/evidence/obstruction-tracker-validation.json",
+        "docs/etl/sprints/OBSTRUCTION-TRACKER-20260819/evidence/live-route-audit.json"
+      ]
+    },
+    {
+      "id": "vote-explainer-mvp-2026-04-04",
+      "date": "2026-04-04",
+      "status": "published_mvp",
+      "title": "Vote explainer MVP",
+      "summary": "Publica páginas canónicas por votación con resultado, desglose visible, fuentes oficiales y caveats metodológicos.",
+      "public_routes": [
+        "/vote-explainer/"
+      ],
+      "note_path": "docs/release-notes/vote-explainer-mvp.md",
+      "evidence_paths": [
+        "scripts/export_vote_explainer_snapshot.py",
+        "tests/test_export_vote_explainer_snapshot.py",
+        "docs/etl/sprints/OBSTRUCTION-TRACKER-20260819/evidence/live-route-audit.json"
+      ]
+    }
+  ]
+}

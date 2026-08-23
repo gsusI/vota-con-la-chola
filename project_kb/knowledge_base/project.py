@@ -16,7 +16,7 @@ from project_kb.schema import (
     Workflow,
 )
 
-UPDATED = date(2026, 8, 12)
+UPDATED = date(2026, 8, 20)
 
 
 PROJECT_DECISIONS = [
@@ -160,6 +160,66 @@ PROJECT_REFERENCE_MAPS = [
 
 
 PROJECT_FACTS = [
+    Fact(
+        name="BOE document and candidate cohorts preserve exact public evidence",
+        description=(
+            "`BOE accountability cohorts` use the official daily summary API as "
+            "discovery evidence and the official per-document XML endpoint as the "
+            "immutable payload. The current cohort contains 1,034 exact daily "
+            "summaries and 89,001 individual documents. "
+            "Every document has summary-item, HTTPS URL, byte-count, SHA-256, fetch, "
+            "and portable-manifest lineage. Exact-date and exact-ID acquisition fails "
+            "closed on missing documents. The source-scoped election parser derives "
+            "42,056 exact public base candidate occurrences across 4,901 candidacies "
+            "and seven proclamation documents for six election dates from 2015 to 2024. "
+            "Eleven correction documents retain all 956 exact paragraphs. The reviewed "
+            "2023/2024 subset contains 10,815 base rows; three applied corrections retain "
+            "180 paragraphs, of which 127 support 17 operations and 53 are context. "
+            "Those operations produce 10,820 effective rows. Eight corrections and 776 "
+            "paragraphs remain captured_unapplied; their 31,241 base candidates are "
+            "excluded from effective state. A deterministic 776-task dual-review queue "
+            "retains exact BOE text with blank decisions and references one deduplicated "
+            "3,713-candidacy / 31,241-candidate public context corpus; readiness rehashes "
+            "and reconciles both artifacts. The November 2019 source is captured but "
+            "candidate ingestion fails closed because one heading omits its number. "
+            "Every effective occurrence has normalized "
+            "person, party, source-record, and document-source lineage; unchanged names reuse "
+            "10,795 exact base person links, while 25 changed/new names remain source-scoped. "
+            "All 88 correction-backed rows have immutable effective source records. The v3 "
+            "semantic artifact retains every exact public name and source paragraph in two "
+            "validated Parquet partitions and replays both unchanged files by hardlink. It "
+            "never infers a missing identifier, cross-source identity, or elected outcome. "
+            "The document inventory passes 111,408 eligible "
+            "instances and its incremental replay reuses checksum-identical rows "
+            "instead of reparsing unchanged PDFs and XML."
+        ),
+        evidence=[
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-document-corpus.json",
+                detail="Official date cohort, queue reconciliation, and portable manifest evidence.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-election-candidates-latest.json",
+                detail="Exact candidate, candidacy, correction, identity-retention, and idempotence totals.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-election-candidate-correction-materialization.json",
+                detail="Immutable correction operations, effective-state totals, before/after evidence, and base preservation.",
+            ),
+            Evidence(
+                source="etl/data/published/candidate-occurrence-semantic-partition-manifest-latest.json",
+                detail="Exact public identity, official text, normalized lineage, correction, partition, and unchanged-replay contract.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-format-inventory.json",
+                detail="Current 100k-plus official inventory and incremental reuse metrics.",
+            ),
+        ],
+        references={
+            "BOE accountability cohorts": "workflow.Ingest official BOE election candidates"
+        },
+        updated_at=UPDATED,
+    ),
     Fact(
         name="Source truth code paths",
         description=(
@@ -323,18 +383,73 @@ PROJECT_FACTS = [
             "corpus: BDNS downloads 20 selected files and the other five download 8,601, "
             "with every byte checksum-verified. Isolated no-project validators using only "
             "copied code full-read all 5,403,506 rows and 8,595 data files under bounded "
-            "memory, without using canonical corpus input. "
+            "memory, without using canonical corpus input. A separate explicit rollback-"
+            "candidate drill restored prior immutable release 623b4a5a... without reading "
+            "the mutable pointer: 8,619 files and 504,093,303 bytes checksum-verified in "
+            "1,199.614 seconds, followed by full validation of all six corpora and 5,403,506 "
+            "rows at 1,007.453 MB peak RSS. A later GET-only plan rechecks live current "
+            "5872efaf... and rollback target 623b4a5a..., binds all restore/validation/live "
+            "evidence by SHA-256, proves zero row/file/byte delta, fixes compare-and-swap "
+            "expectations, preserves both immutable releases, and records authorized=false "
+            "and mutation_performed=false. Formal RPO and activation RTO remain open. "
             "A real Senate slice has 6,792 fetched/extracted "
             "XML/HTML documents and a successful local object-restore sample, but "
-            "the broader local inventory has only 21,398 file instances / 19,538 "
-            "distinct contents, including 1,436 PDFs / 44,825 pages. Page-density "
-            "routing finds 848 OCR candidates and a 20-page OCR sample passes, "
-            "but semantic accuracy, production caching, scanned-PDF diversity, "
-            "and 100k remain open. A disk-backed file/edge audit reconciles all "
-            "21,398 inventory rows, verifies checksum lineage for 10,219 files, "
-            "public URL lineage for 10,195, and decompressed checksums for all 6,792 "
-            "referenced text artifacts with zero conflicts. It leaves 11,179 files "
-            "explicitly unlinked instead of promoting them. Each real lane still needs "
+            "the broader real-only inventory now discovers 111,422 files and counts "
+            "111,408 eligible file instances / 109,558 distinct contents after excluding "
+            "5 fixtures/samples and 9 real transport-failure captures from successful-"
+            "document scale while preserving the latter as obstruction evidence. It includes "
+            "1,437 PDFs / 44,927 pages; content magic routes one PDF stored under an .html path. "
+            "Page-density routing finds 856 OCR candidates. Resumable v5 extraction "
+            "processes all 111,408 instances / 109,558 distinct contents into 108,139 "
+            "checksum-addressed text objects and 1,999,902,681 unsanitized characters, "
+            "with zero failure or truncation; independent validation rehashes every raw "
+            "instance and CAS object. Additive OCR processes all 856 candidate pages "
+            "across 58 PDFs, producing 89,632 characters on 849 pages, seven explicit "
+            "no-text results, 17 material gains, and 131 independently verified OCR CAS "
+            "objects. A deterministic 40-page real review packet covers every no-text "
+            "and material-gain page with blank human fields; review is 0/40, so semantic "
+            "accuracy, scanned/office/language diversity, cost, remote origin, and one-million "
+            "scale remain open; the numeric 100k document gate passes. A disk-backed "
+            "file/edge audit reconciles all 111,408 eligible inventory rows after the "
+            "exclusions and physically removing "
+            "three explicitly synthetic program pages plus eight Europarliament captures "
+            "that copied an invented fallback sample. A known-non-real sample fingerprint "
+            "gate prevents recurrence without rejecting repeated official payloads. The audit "
+            "verifies checksum and public URL lineage for 111,357 files (99.9542%), and decompressed checksums for all 6,792 "
+            "referenced text artifacts with zero conflicts. It recovers 10,326 exact "
+            "embedded URLs across official or primary captures, 50 exact PDF relations "
+            "from preserved official hrefs plus byte-identical live GETs, 4,516 archived-metadata relations over 3,757 files, "
+            "14 official publication-identifier PDF relations, 56 official-path Senate XML relations, one BOE sidecar, and 530 exact "
+            "URL-path-checksum relations from the real vote-lineage manifest under "
+            "distinct evidence classes. Checksum-verified published JEC and Andalusian "
+            "Parliament capture indexes contribute another 124 exact provenance edges, including "
+            "32 vote-document links extracted from official initiative captures; two close prior gaps. "
+            "They also include six Andalucía "
+            "program captures whose three press-hosted copies remain distinct from official-party "
+            "origins; exact party-program manifests add 24. URL construction alone never counts: every new identifier/path relation "
+            "requires a bounded official GET with exact stored SHA-256 and byte count. The workers "
+            "use bounded concurrent streaming, reject every checksum or size non-match, and merge prior immutable "
+            "relations instead of replacing them. A disk-backed Wayback worker derives only "
+            "the exact Europarliament connector URL and Senate path URL, groups 26 gap instances "
+            "into three real SHA-256/size targets, and checkpoints queries plus replays. Its first "
+            "bounded run rehashed five distinct older Europarliament captures, rejected all five "
+            "byte mismatches, retained seven failed endpoint variants for explicit retry, and "
+            "published zero false lineage relations. An atomic 43-row portable checkpoint preserves "
+            "schema, three targets, 26 capture paths, eight queries, and five replay hashes; a "
+            "cap-sized archive index result fails closed instead of truncating silently. "
+            "Successful index queries and rejected digests "
+            "do not repeat without an explicit refresh/retry lever. It leaves 51 files explicitly unlinked "
+            "instead of promoting them. A deterministic streaming remediation queue "
+            "contains 51 work items over 8,315,544 source bytes, all missing checksum and "
+            "public-URL lineage, with guessed URLs forbidden. The 25 Europarliament rows "
+            "require immutable historical archive metadata or an exact source manifest; the "
+            "25 party-program rows require an exact primary-source sidecar/manifest or a "
+            "checksum-identical archived response; and the remaining Senate XML requires an "
+            "immutable historical capture because the current official response differs. "
+            "Without a new lever, network probes must not repeat. A public-safe storage-health "
+            "artifact reconciles the real BDNS and PLACSP preflights without exposing roots "
+            "or session state: both remain blocked, requiring another 5,177,384,960 and "
+            "66,776,911,872 bytes respectively. Each real lane still needs "
             "its own representative-scope, recovery, correction, and promotion proof."
         ),
         evidence=[
@@ -345,6 +460,18 @@ PROJECT_FACTS = [
             Evidence(
                 source="etl/data/published/scale-readiness-latest.json",
                 detail="Real-only audit of current materialized official-source corpora and open promotion gates.",
+            ),
+            Evidence(
+                source="etl/data/published/storage-health-latest.json",
+                detail="Public-safe real-preflight storage status and exact lane headroom.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/hf-scale-origin-rollback-candidate-full-validation-20260812.json",
+                detail="Prior immutable release full restore and six-corpus rollback-candidate validation.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/hf-scale-origin-rollback-plan-20260812.json",
+                detail="GET-only live pointer, target, compare-and-swap, and supersession plan with zero mutation.",
             ),
             Evidence(
                 source="docs/etl/real-corpus-registry.json",
@@ -469,6 +596,58 @@ PROJECT_FACTS = [
             Evidence(
                 source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-provenance-audit.json",
                 detail="Disk-backed file-level reconciliation of the real document inventory against SQLite source URLs, checksums, and derived text artifacts, with unlinked files explicit.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-extraction.json",
+                detail="Resumable complete native extraction of every current real document instance and distinct content object with zero truncation and public identity retained.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-validation.json",
+                detail="Independent checksum and character-count validation of every raw document instance and native text CAS object.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr.json",
+                detail="Complete additive OCR run for every routed empty or sparse real PDF page with durable work state and exact engine configuration.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-validation.json",
+                detail="Independent source-PDF, routing, manifest, and OCR CAS validation for all 856 real candidate pages.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-human-review-queue.json",
+                detail="Deterministic 40-page real OCR review packet with every no-text and material-gain result selected and no invented human decisions.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-human-review-validation.json",
+                detail="Integrity validation separates immutable review assignments from mutable human fields and keeps the 0/40 completion gate explicit.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-provenance-gap-queue-20260812.json",
+                detail="Deterministic remediation queue for every checksum-lineage or public-URL gap, with exact input hashes and no guessed URLs.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/wayback-document-lineage.json",
+                detail="Disk-backed exact-URL archive recovery over 26 real gaps and three content targets; five historical byte mismatches are rejected and zero false relations are published.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/wayback-document-checkpoint.jsonl",
+                detail="Portable resumable archive checkpoint containing verified targets, capture paths, CDX query state, and replay hashes with public identity retained.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/archived-document-source-lineage.json",
+                detail="Read-only recovery of exact path, byte, checksum, and public-URL lineage from preserved root and nested legacy databases.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/captured-link-document-lineage.json",
+                detail="Bounded official GET report for exact links found in preserved official HTML; only byte-identical real gaps enter the cumulative lineage manifest.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/official-document-identifier-lineage.json",
+                detail="Fourteen preserved Senate diary PDFs matched exact official publication URLs by byte count and SHA-256; no URL candidate alone was accepted.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/official-path-document-lineage.json",
+                detail="Fifty-six aggregate Senate session XML captures matched their exact official paths byte-for-byte; the one changed response remains excluded.",
             ),
             Evidence(
                 source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/member-vote-source-url-lineage-20260812.json",
@@ -723,6 +902,74 @@ PROJECT_DOMAIN_CONCEPTS = [
 
 PROJECT_WORKFLOWS = [
     Workflow(
+        name="Ingest official BOE election candidates",
+        description=(
+            "`BOE candidate ingestion` parses exact immutable proclamation XML, "
+            "retains every public identity and source paragraph, then applies official "
+            "corrections through an immutable operation ledger and a separate effective "
+            "state. It is an alternate official source, not evidence "
+            "that the Interior archive is unblocked. Its semantic contract permits only "
+            "source-provided fields: BOE election outcomes remain null until separate official "
+            "result evidence is linked."
+        ),
+        steps=[
+            "Complete and enforce the BOE document corpus status so every requested document has exact summary-item, URL, checksum, and byte lineage.",
+            "Run just etl-scale-boe-election-candidates for the bounded allowlisted proclamation and correction cohort.",
+            "Require exact document-profile, candidacy, titular, substitute, non-proclaimed, and correction-paragraph totals before database mutation is accepted.",
+            "Preserve full_name and source_text_exact; never parse a matching name into cross-source identity or infer is_elected.",
+            "Require every correction operation to retain its exact paragraph evidence, before state, after state, target document, and deterministic operation ID; never mutate proclamation tables.",
+            "Require every effective row to carry person, party, source-record, and document-source lineage; changed or new names remain source-scoped instead of being merged across sources.",
+            "Run just etl-scale-boe-election-candidate-correction-review-queue to export every pending paragraph as a stable dual-review task and all pending public candidates once in the deduplicated context JSONL; preserve completed decisions only when task fingerprints remain identical.",
+            "Export the unified v3 candidate semantic contract, independently validate every row/file/partition and exact public identity/evidence field, then prove an unchanged two-partition hardlink replay.",
+            "Require 42,056 immutable captured base occurrences, isolate all 31,241 rows from pending historical cohorts, materialize only the reviewed 10,815-row base through 17 applied operations into 10,820 effective occurrences and 88 correction-backed source records, infer no BOE outcome, and require quick_check=ok, zero FK violations, and current central readiness reconciliation.",
+        ],
+        validation=[
+            "python3 -m unittest tests.test_boe_election_candidates",
+            "just etl-scale-boe-document-status",
+            "just etl-scale-boe-election-candidates",
+            "just etl-scale-boe-election-candidate-correction-review-queue",
+            "just etl-scale-export-semantic-candidate-occurrences",
+            "just etl-scale-validate-semantic-candidate-occurrences",
+            "just etl-scale-replay-semantic-candidate-occurrences",
+            "just etl-audit-public-source-records",
+            "just etl-scale-readiness",
+        ],
+        evidence=[
+            Evidence(
+                source="scripts/ingest_boe_election_candidates.py",
+                detail="Set-based idempotent source-scoped ingest and exact correction evidence.",
+            ),
+            Evidence(
+                source="publicdata_connectors_es/elections/boe_candidates.py",
+                detail="Strict official BOE proclamation parser and cohort contracts.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-election-candidates-latest.json",
+                detail="Current real cohort counts, exact-source checks, and identity-retention policy.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-election-candidate-correction-materialization.json",
+                detail="Applied operation ledger, effective rows, evidence linkage, and immutable-base proof.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-candidate-correction-review-queue.json",
+                detail="Pending correction task, deduplicated public candidate context, decision-preservation, and no-mutation contract.",
+            ),
+            Evidence(
+                source="publicdata_publish/candidate_occurrence_partitions.py",
+                detail="Unified source-specific BOE and Infoelectoral semantic export without invented values.",
+            ),
+            Evidence(
+                source="publicdata_publish/candidate_occurrence_partition_validation.py",
+                detail="Independent ID, exact identity/text, correction-lineage, outcome-null, file, and replay validation.",
+            ),
+        ],
+        references={
+            "BOE candidate ingestion": "fact.BOE document and candidate cohorts preserve exact public evidence"
+        },
+        updated_at=UPDATED,
+    ),
+    Workflow(
         name="Run a PLACSP scale cohort",
         description=(
             "`PLACSP scale cohort` expands official monthly archives through "
@@ -776,15 +1023,62 @@ PROJECT_WORKFLOWS = [
         updated_at=UPDATED,
     ),
     Workflow(
+        name="Publish a canonical Eurostat indicator family",
+        description=(
+            "`canonical indicator publication` starts from one checksum-pinned "
+            "official JSON-stat capture, materializes definitions, immutable releases, "
+            "territorial series, append-only observation versions, and exact cell "
+            "evidence, then publishes only a bounded static projection. The first real "
+            "family is Eurostat nama_10r_3gdp for every ES-prefixed geography."
+        ),
+        steps=[
+            "Pin and rehash the exact official raw payload before materialization.",
+            "Read JSON-stat dimensions and cell coordinates directly; never seed or hand-select observation values.",
+            "Store decimal values as exact text and preserve source status, geography, period, methodology, and uncertainty.",
+            "Treat the first observed release as baseline, not as proof that the source has never revised the value.",
+            "Validate every published observation independently against the raw cell coordinate, value, and status.",
+            "Publish a bounded JSON projection and static evidence drill-down; keep the million-row corpus out of the browser.",
+            "Run real-only, public-hygiene, desktop/mobile browser, exact live-byte, official-link, and global route gates.",
+            "Keep promotion open until a second real snapshot proves new, unchanged, changed, and deleted version handling and a representative codebook is approved.",
+        ],
+        validation=[
+            "just eurostat-gdp-indicator-check",
+            "just privacy-check-public-artifacts",
+            "just cloudflare-pages-build",
+            "just explorer-gh-pages-publish",
+            "just eurostat-gdp-indicator-live-verify",
+        ],
+        evidence=[
+            Evidence(
+                source="docs/data-model/indicators-spec-v1.md",
+                detail="Indicator, release, revision, geography, uncertainty, provenance, and scale contract.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/INDICATORS-20260820/evidence/eurostat-gdp-validation.json",
+                detail="Independent exact raw-cell and database/public-artifact reconciliation.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/INDICATORS-20260820/evidence/live-eurostat-gdp-verification.json",
+                detail="Exact live bytes, hashes, release identity, counts, real-only policy, and official links.",
+            ),
+        ],
+        references={
+            "canonical indicator publication": "gotcha.Baseline indicator release is not revision proof"
+        },
+        updated_at=UPDATED,
+    ),
+    Workflow(
         name="Contributor source onboarding",
         description=(
             "`source onboarding` starts with just add-source, which creates "
-            "config, sample fixture, parser, strict sample test, and docs hook. "
+            "config, an exact official capture plus provenance sidecar, parser, "
+            "strict sample test, and docs hook. Invented fixture data is forbidden. "
             "PRs for new sources should pass just etl-contributor-gates."
         ),
         steps=[
-            'Run: just add-source <source_id> name="..." scope="..." url="..." format=json.',
-            "Fill the sample fixture and parser contract created under the contributor path.",
+            "Run just add-source with an official HTTPS URL, captured file, SHA-256, capture time, and rights basis.",
+            "Implement the parser against the copied official bytes; do not add mock, synthetic, placeholder, or invented records.",
+            "Run: just etl-audit-official-samples.",
             "Run: just etl-contributor-gates before treating the source as merge-ready.",
             "Promote from source_records_only only after a stable normalization/backfill contract exists.",
         ],
@@ -878,6 +1172,413 @@ PROJECT_WORKFLOWS = [
         ],
         references={
             "strict network blocker handling": "gotcha.Do not fake blocked sources done"
+        },
+        updated_at=UPDATED,
+    ),
+    Workflow(
+        name="Publish the public obstruction tracker",
+        description=(
+            "`obstruction publication` derives one bounded static feed and an "
+            "inert evidence bundle from the canonical append-only blocker log, "
+            "current source status, and scale-readiness artifact. It retains "
+            "official public-domain personal information and removes only secrets, "
+            "private-session state, workstation traces, and non-public personal data."
+        ),
+        steps=[
+            "Update the canonical Name and Shame log, source-status snapshot, and scale-readiness artifact; never hand-edit the derived feed.",
+            "Run just obstruction-tracker-export to expand repository evidence references into deterministic inert .txt files with source and public bytes plus SHA-256.",
+            "Require the exporter and independent validator to reconcile every incident, blocked source, scale corpus, gap, evidence file, and identity-retention policy.",
+            "Run the full static build so real-data-only and publication-hygiene gates cover the feed and evidence bundle.",
+            "Publish with just explorer-gh-pages-publish after merge-ready frontend changes.",
+            "Run the live route audit and require every route, critical asset, and evidence object to return exact manifest bytes and SHA-256 before marking the roadmap item DONE.",
+        ],
+        validation=[
+            "just obstruction-tracker-export",
+            "python3 -m unittest tests.test_obstruction_tracker_snapshot",
+            "node --test tests/test_obstruction_tracker_ui_contract.js",
+            "just cloudflare-pages-build",
+            "node scripts/audit_public_routes.js --base-url https://votaconlachola.org",
+        ],
+        evidence=[
+            Evidence(
+                source="scripts/export_obstruction_tracker_snapshot.py",
+                detail="Canonical feed and inert public evidence-bundle exporter.",
+            ),
+            Evidence(
+                source="scripts/validate_obstruction_tracker_snapshot.py",
+                detail="Independent feed, manifest, policy, size, and public-hygiene validator.",
+            ),
+            Evidence(
+                source="docs/release-notes/obstruction-tracker-mvp.md",
+                detail="Published contract, current real counts, caveats, and verification commands.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/OBSTRUCTION-TRACKER-20260819/evidence/live-route-audit.json",
+                detail="Live route, critical-asset, and exact evidence-object verification.",
+            ),
+        ],
+        references={
+            "obstruction publication": "workflow.Strict network blocker handling"
+        },
+        updated_at=UPDATED,
+    ),
+    Workflow(
+        name="Publish the operational transparency dashboard",
+        description=(
+            "`transparency publication` derives one bounded static feed from "
+            "source health, obstruction, scale readiness, the verified durable "
+            "origin, and a real release registry. Every displayed metric carries "
+            "its repository path and public audit URL."
+        ),
+        steps=[
+            "Update each owning artifact first; never hand-edit the derived transparency feed.",
+            "Register only a real release whose Markdown note, public routes, and non-self-referential evidence paths exist; keep newest entries first in docs/release-notes/releases.json.",
+            "Run just transparency-dashboard-export and require metric, source-state, snapshot, release, checksum, freshness, and identity-retention reconciliation.",
+            "Run focused Python and Node contract tests, then the full static build with real-only and publication-hygiene gates.",
+            "Inspect desktop and mobile rendering, publish with just explorer-gh-pages-publish, and require the live route audit to pass.",
+            "If the operational tracker changed, regenerate the obstruction bundle before transparency because the tracker is itself public obstruction evidence.",
+        ],
+        validation=[
+            "just transparency-dashboard-export",
+            "python3 -m unittest tests.test_transparency_dashboard_snapshot",
+            "node --test tests/test_transparency_dashboard_ui_contract.js",
+            "just cloudflare-pages-build",
+            "node scripts/audit_public_routes.js --base-url https://votaconlachola.org",
+        ],
+        evidence=[
+            Evidence(
+                source="scripts/export_transparency_dashboard_snapshot.py",
+                detail="Real-source feed builder with metric-level trace links and release checksums.",
+            ),
+            Evidence(
+                source="scripts/validate_transparency_dashboard_snapshot.py",
+                detail="Independent policy, reconciliation, freshness, snapshot, and release validator.",
+            ),
+            Evidence(
+                source="docs/product/transparency-dashboard.md",
+                detail="Public contract, source ownership, caveats, and Definition of Done.",
+            ),
+            Evidence(
+                source="docs/release-notes/README.md",
+                detail="Lightweight release-note and publication workflow.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/TRANSPARENCY-DASHBOARD-20260819/evidence/live-route-audit.json",
+                detail="Live route, asset, and obstruction-evidence audit.",
+            ),
+        ],
+        references={
+            "transparency publication": "workflow.Publish the public obstruction tracker"
+        },
+        updated_at=UPDATED,
+    ),
+    Workflow(
+        name="Evolve the core ontology additively",
+        description=(
+            "`core ontology v1` fixes the shared vocabulary, public/source-scoped "
+            "identity rules, temporal semantics, provenance chain, uncertainty "
+            "states, evidence-backed relationships, and scale boundaries without "
+            "replacing the current physical schema in one migration."
+        ),
+        steps=[
+            "Read docs/data-model/core-ontology-v1.md and its JSON companion before designing a new domain table or plugin contract.",
+            "Keep source facts, document versions, evidence, claims, interpretations, aggregates, and publications as separate immutable or reproducible layers.",
+            "Use stable public IDs plus local integer PKs; never resolve a person or organization across sources from a name alone.",
+            "Add physical tables, views, and backfills in thin vertical slices; preserve existing tables and public IDs until real-data reconciliation proves the replacement.",
+            "Require every derived relationship to link to evidence and method/version; preserve unknown, counterevidence, corrections, and superseded history.",
+            "Run just core-ontology-check before accepting ontology, plugin-manifest, Evidence API, or domain-model changes.",
+        ],
+        validation=[
+            "just core-ontology-check",
+            "python3 scripts/validate_core_ontology_contract.py",
+            "python3 -m unittest tests.test_core_ontology_contract",
+            "git diff --check",
+        ],
+        evidence=[
+            Evidence(
+                source="docs/data-model/core-ontology-v1.md",
+                detail="Normative concepts, relationships, time, identity, provenance, scale, migration, and publication rules.",
+            ),
+            Evidence(
+                source="docs/data-model/core-ontology-v1.json",
+                detail="Machine-readable 19-concept and 26-relationship contract.",
+            ),
+            Evidence(
+                source="scripts/validate_core_ontology_contract.py",
+                detail="Fail-closed contract, documentation, policy, scale, and current-schema mapping validator.",
+            ),
+            Evidence(
+                source="tests/test_core_ontology_contract.py",
+                detail="Regression tests for completeness, mappings, relationships, real-only policy, and official public identity retention.",
+            ),
+        ],
+        references={
+            "core ontology v1": "fact.Source truth code paths",
+        },
+        updated_at=UPDATED,
+    ),
+    Workflow(
+        name="Build and validate a public-data plugin",
+        description=(
+            "`public-data plugin validation` loads code only after its manifest "
+            "passes the v1 contract, replays checksum-pinned official bytes, "
+            "preserves public identity and provenance, and proves idempotent output "
+            "against the standard schema before a source family migrates."
+        ),
+        steps=[
+            "Validate plugin.json against docs/architecture/plugin-manifest-v1.schema.json before importing its Python entry point.",
+            "Register an exact official capture with HTTPS source URL, capture time, byte count, SHA-256, rights basis, and an explicit no-synthetic/no-mock policy.",
+            "Implement bounded discover/acquire/parse/normalize lifecycle hooks; use official source IDs or a documented source-scoped stable tuple, never name alone.",
+            "Preserve every public personal field emitted by the official source and link each normalized row back to its source record and artifact hash.",
+            "Replay the same capture at least twice through the current standard schema and reconcile source records, entities, facts, ingestion runs, hashes, URLs, and foreign keys.",
+            "Run global real-only, official-sample, ontology, plugin, and publication-hygiene gates before publishing artifacts.",
+            "Migrate one source family at a time only after old/new parity passes; retain the compatibility adapter until reconciliation proves replacement safe.",
+        ],
+        validation=[
+            "just reference-plugin-check",
+            "just etl-audit-official-samples",
+            "python3 scripts/validate_plugin_architecture.py",
+            "python3 scripts/validate_reference_plugin.py",
+            "git diff --check",
+        ],
+        evidence=[
+            Evidence(
+                source="docs/architecture/plugin-system-v1.md",
+                detail="Normative plugin types, lifecycle, scale, security, versioning, failure, and test contracts.",
+            ),
+            Evidence(
+                source="docs/architecture/plugin-manifest-v1.schema.json",
+                detail="Machine-readable manifest and official-capture provenance contract.",
+            ),
+            Evidence(
+                source="plugins/congreso_representatives/plugin.py",
+                detail="Official Congreso reference plugin and standard-schema compatibility adapter.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/PLUGIN-SYSTEM-20260819/evidence/reference-plugin-validation.json",
+                detail="Two-replay reconciliation for exact official public records with identity retained.",
+            ),
+        ],
+        references={
+            "public-data plugin validation": "workflow.Evolve the core ontology additively",
+        },
+        updated_at=UPDATED,
+    ),
+    Workflow(
+        name="Publish and verify a signed scale snapshot",
+        description=(
+            "`signed scale publication` builds one exact real-data manifest, "
+            "places it at a content-addressed immutable path, signs its canonical "
+            "attestation with SSH Ed25519, moves latest only after upload, and "
+            "verifies the public origin against a trust root outside the dataset."
+        ),
+        steps=[
+            "Build registry and readiness from official real corpora; run the real-only and public-artifact hygiene gates.",
+            "Hash every artifact in streaming mode, stamp manifest and artifact-contract schema versions, and derive the immutable path from the manifest SHA-256.",
+            "Sign the canonical attestation with an ignored private key or managed CI secret; publish only the attestation, signature, and discovery public key.",
+            "Upload the immutable tree before updating scale/latest.json so an interrupted publish leaves the previous release active.",
+            "Download latest, manifest, attestation, signature, and discovery key; verify using the repository allowed_signers file, never the bundled key as trust root.",
+            "Run local/remote corpus and metadata parity, produce an exact sorted manifest diff, and reconcile all evidence with the reproducibility validator.",
+            "Keep W9-009 open until a different maintainer independently rebuilds and signs a second attestation.",
+        ],
+        validation=[
+            "just etl-scale-origin-hf-verify-attestation",
+            "just etl-scale-origin-hf-verify",
+            "just snapshot-reproducibility-check",
+            "just privacy-check-public-artifacts",
+        ],
+        evidence=[
+            Evidence(
+                source="docs/ops/reproducibility.md",
+                detail="Normative signing, trust-root, publication, diff, rotation, and verification contract.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/REPRODUCIBILITY-20260819/evidence/live-signed-snapshot-verification.json",
+                detail="Trusted live signature verification for the current public release.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/REPRODUCIBILITY-20260819/evidence/live-scale-origin-parity.json",
+                detail="Current live/local corpus, metadata, path, contract, and policy parity.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/REPRODUCIBILITY-20260819/evidence/snapshot-reproducibility-validation.json",
+                detail="Fail-closed reconciliation across publish, manifest, live signature, live parity, and diff evidence.",
+            ),
+        ],
+        references={
+            "signed scale publication": "workflow.Promote one real scale lane",
+        },
+        updated_at=UPDATED,
+    ),
+    Workflow(
+        name="Publish the stable Evidence API v1",
+        description=(
+            "`stable Evidence API publication` turns the current bounded real "
+            "accountability exports into immutable, content-addressed pages for "
+            "entities, evidence chains, source health, and question results. It "
+            "keeps public identities exact and unknown states explicit."
+        ),
+        steps=[
+            "Require the current scale origin and SSH Ed25519 attestation verification to pass before export.",
+            "Run just evidence-api-v1-check to derive the API release from source, schema, exporter, page-size, and upstream-release hashes.",
+            "Keep page size at or below 500; consumers pin api_release_id and follow opaque seek-cursor next links instead of offsets.",
+            "Reconcile every collection to its real source export, verify every page and manifest hash, and compare all public entity labels byte for byte.",
+            "Run publication hygiene and the full static build, publish gh-pages, then fetch and validate the current pointer, release index, and representative page from the live origin.",
+            "For incompatible changes, create /api/v2/ and keep v1 public for at least 180 days and two parallel public releases.",
+        ],
+        validation=[
+            "just evidence-api-v1-check",
+            "just privacy-check-public-artifacts",
+            "just cloudflare-pages-build",
+            "node scripts/audit_public_routes.js --base-url https://votaconlachola.org",
+        ],
+        evidence=[
+            Evidence(
+                source="docs/api/evidence-api-v1.md",
+                detail="Stable pagination, provenance, compatibility, public-identity, and scale contract.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/EVIDENCE-API-20260819/evidence/evidence-api-v1-validation.json",
+                detail="Current collection, page, hash, cursor, identity-retention, and real-source reconciliation.",
+            ),
+            Evidence(
+                source="ui/gh-pages-next/public/api/v1/index.json",
+                detail="Current public API pointer to the immutable release.",
+            ),
+        ],
+        references={
+            "stable Evidence API publication": "workflow.Publish and verify a signed scale snapshot",
+        },
+        updated_at=UPDATED,
+    ),
+    Workflow(
+        name="Ingest and publish a real manifesto promise slice",
+        description=(
+            "`real manifesto promise ingestion` verifies exact official bytes, "
+            "segments text by page, stores party claims without proxy people, and "
+            "publishes only complete rule- or human-confirmed promises with exact evidence."
+        ),
+        steps=[
+            "Pin the official HTTPS URL, byte count, page count, and SHA-256 before extraction; fail closed on any drift.",
+            "Apply the additive canonical schema and preserve raw bytes outside SQLite while storing source records, document metadata, exact bounded quotes, pages, offsets, and hashes.",
+            "Segment page-aware document structure, classify claims separately from promises, and leave incomplete or ambiguous fragments pending or needs_context.",
+            "Attach the party directly, assign topics with an explicit codebook version, and never create a person proxy for an organization.",
+            "Run the same input twice and require stable IDs, counts, release ID, artifact hash, clean foreign keys, and exact quote-to-page offset matches.",
+            "Publish only confirmed real rows; state not_assessed for fulfillment until separate implementation evidence exists.",
+            "Run public-artifact hygiene, static build, publish, then verify the live page, live JSON, and official PDF bytes independently.",
+        ],
+        validation=[
+            "just manifesto-promises-check",
+            "just privacy-check-public-artifacts",
+            "just cloudflare-pages-build",
+            "just manifesto-promises-live-verify",
+        ],
+        evidence=[
+            Evidence(
+                source="docs/data-model/promises-spec-v1.md",
+                detail="Claim/promise distinctions, ambiguity rules, stable identity, provenance, publication, and scale contract.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/PROMISES-20260819/evidence/promises-bng-2023-validation.json",
+                detail="Current real source, database, quote/page/hash, identity-retention, and public sample validation.",
+            ),
+            Evidence(
+                source="ui/gh-pages-next/public/promises/data/bng-2023.json",
+                detail="Bounded public sample from the checksum-pinned official BNG 2023 manifesto.",
+            ),
+        ],
+        references={
+            "real manifesto promise ingestion": "workflow.Publish the stable Evidence API v1",
+        },
+        updated_at=UPDATED,
+    ),
+    Workflow(
+        name="Materialize and publish a real public-money slice",
+        description=(
+            "`real public-money materialization` maps latest official source "
+            "versions into canonical actor, spending-item, and evidence rows while "
+            "keeping award, contract, invoice, payment, and delivery semantics distinct."
+        ),
+        steps=[
+            "Fix the spending event, exact-decimal, temporal, identity, evidence, and version contract in docs/data-model/spending-spec-v1.md before mapping a source.",
+            "Select latest non-tombstone source versions with a deterministic bounded query; do not multiply rows or use fixtures to demonstrate scale.",
+            "Preserve source-published authority and counterparty names and identifiers exactly, including natural persons and already-masked source values; keep identity source-scoped until evidence supports resolution.",
+            "Materialize one event per semantic phase and ordinal. An award uses procurement_award and award_amount; paid_on and delivered_on remain null without separate evidence.",
+            "Attach a captured source-record hash and official URL to every item; mark linked documents official_url_only until exact bytes and SHA-256 are preserved.",
+            "Reconcile counts and monetary totals with Decimal, verify the archive bytes/hash, foreign keys, integrity, and unchanged replay, then publish a bounded JSON view rather than the full corpus.",
+            "Run real-only and public-artifact hygiene, build and publish the static route, then verify the live page, JSON hash/release, identity strata, and official evidence links.",
+        ],
+        validation=[
+            "just placsp-spending-check",
+            "sqlite3 -header -column etl/data/staging/spending-placsp-mvp.db < docs/examples/placsp-actor-spending-evidence.sql",
+            "just privacy-check-public-artifacts",
+            "just cloudflare-pages-build",
+            "just placsp-spending-live-verify",
+        ],
+        evidence=[
+            Evidence(
+                source="docs/data-model/spending-spec-v1.md",
+                detail="Canonical event, amount, actor, provenance, edge-case, publication, and scale contract.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SPENDING-20260819/evidence/placsp-spending-validation.json",
+                detail="Exact source, archive, identity, amount, actor-item-evidence, FK, integrity, and real-only validation.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SPENDING-20260819/evidence/live-placsp-spending-verification.json",
+                detail="Live page, JSON release/hash, identity strata, and official PLACSP link verification.",
+            ),
+            Evidence(
+                source="ui/gh-pages-next/public/spending/data/placsp-sample.json",
+                detail="Bounded public view with exact public identities and award-not-payment caveats.",
+            ),
+        ],
+        references={
+            "real public-money materialization": "decision.Preserve identities published by official sources",
+        },
+        updated_at=UPDATED,
+    ),
+    Workflow(
+        name="Materialize and publish real agreements without inventing influence",
+        description=(
+            "`real agreement materialization` maps checksum-pinned official meeting "
+            "or agreement disclosures into meetings, actor roles, agenda items, "
+            "agreements, topics, and exact evidence while keeping every influence "
+            "interpretation in a separate reviewed assertion layer."
+        ),
+        steps=[
+            "Freeze meeting, agreement, actor-role, evidence, topic, and inference-level semantics in docs/data-model/agreements-influence-spec-v1.md before mapping a source.",
+            "Select only real official source records with an explicit agreement or meeting fact; never create sample rows, attendees, counterparties, or positions to fill gaps.",
+            "Preserve public personal and institutional names exactly. Mark attendance only when the source explicitly lists it; a convener or publisher is not automatically an attendee.",
+            "Materialize adopted, signed, in-force, implemented, and fulfilled states separately. Leave unavailable states unknown.",
+            "Store exact excerpt, source-record hash, capture hash, public URL, selector, method, and extractor version for every meeting and agreement.",
+            "Assign topics as source_explicit, reviewed, derived_rule, or derived_model; publish derived unreviewed assignments with that label.",
+            "Keep influence_assertions empty for a fact-only slice. Higher inference levels require supporting and contrary evidence plus the W8 review/publication gates.",
+            "Require stable replay, zero foreign-key violations, integrity ok, no private workstation traces, bounded JSON, static publication, and independent live origin probes.",
+        ],
+        validation=[
+            "just moncloa-agreements-check",
+            "sqlite3 -header -column etl/data/staging/agreements-moncloa-mvp.db < docs/examples/moncloa-actor-agreement-evidence.sql",
+            "just privacy-check-public-artifacts",
+            "just cloudflare-pages-build",
+            "just moncloa-agreements-live-verify",
+        ],
+        evidence=[
+            Evidence(
+                source="docs/data-model/agreements-influence-spec-v1.md",
+                detail="Canonical meeting, agreement, actor, evidence, topic, inference, publication, and million-scale contract.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/AGREEMENTS-20260819/evidence/moncloa-agreements-validation.json",
+                detail="Exact capture, excerpt, date, actors, topics, no-attendance, no-influence, FK, integrity, and real-only validation.",
+            ),
+            Evidence(
+                source="ui/gh-pages-next/public/agreements/data/moncloa-sample.json",
+                detail="Bounded public view of official Council of Ministers agreement summaries with explicit limits.",
+            ),
+        ],
+        references={
+            "real agreement materialization": "decision.Preserve identities published by official sources",
         },
         updated_at=UPDATED,
     ),
@@ -1019,10 +1720,109 @@ PROJECT_WORKFLOWS = [
         },
         updated_at=UPDATED,
     ),
+    Workflow(
+        name="Build and publish the source-scoped actor graph",
+        description=(
+            "`actor graph publication` projects the complete selected official "
+            "actor corpus into source-scoped identities, time-bounded relationships, "
+            "resolution decisions, and evidence rows. It never merges actors across "
+            "sources by name and exposes only a bounded browser projection."
+        ),
+        steps=[
+            "Hash all selected source rows and upstream release artifacts before assigning a release ID.",
+            "Reconstruct every input source definition; retain metadata conflicts under deterministic source-id@database-key mappings.",
+            "Keep actor identity validity separate from mandate, candidacy, meeting, agreement, award, and action dates.",
+            "Materialize actors, identifiers, aliases, relationships, decisions, and evidence into a sibling temporary database.",
+            "Fail on source-mapping drift, missing labels, unsafe identity state, evidence mismatch, FK failure, or integrity failure before atomic replacement.",
+            "Run the independent validator against every selected real row and repeat the producer with an idempotence reference.",
+            "Publish bounded aggregate and sample JSON plus the static evidence view; keep the full graph out of the browser.",
+            "Before million-scale promotion, export bounded Parquet partitions, publish durable origin, and prove clean restore and second-snapshot history.",
+        ],
+        validation=[
+            "just actor-graph-check",
+            "just privacy-check-public-artifacts",
+            "just cloudflare-pages-build",
+            "just explorer-gh-pages-publish",
+            "just actor-graph-live-verify",
+        ],
+        evidence=[
+            Evidence(
+                source="docs/architecture/entity-resolution-v1.md",
+                detail="Identity layers, time model, source-collision handling, failure modes, and scale gates.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/ACTOR-GRAPH-20260820/evidence/actor-graph-validation.json",
+                detail="Independent full-row reconciliation, identity, source mapping, replay, and provenance proof.",
+            ),
+            Evidence(
+                source="docs/release-notes/actor-graph-mvp.md",
+                detail="Exact release counts, hashes, physical limits, and open promotion gates.",
+            ),
+        ],
+        references={
+            "actor graph publication": "gotcha.Source IDs can collide across input databases"
+        },
+        updated_at=UPDATED,
+    ),
 ]
 
 
 PROJECT_GOTCHAS = [
+    Gotcha(
+        name="Source IDs can collide across input databases",
+        description=(
+            "`source catalog collision` occurs when separate databases reuse one "
+            "source_id but publish different names, URLs, formats, or timestamps. "
+            "INSERT OR IGNORE silently selects load order and corrupts provenance."
+        ),
+        mitigation=(
+            "Reconstruct the complete source catalog before graph writes. Keep "
+            "identical definitions under the upstream ID; namespace every conflicting "
+            "origin as source-id@database-key, persist its metadata hash and mapping "
+            "reason, and include the mapping digest in release identity."
+        ),
+        evidence=[
+            Evidence(
+                source="scripts/materialize_actor_graph.py",
+                detail="Deterministic source mapping plan and atomic source-scoped graph projection.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/ACTOR-GRAPH-20260820/evidence/actor-graph-validation.json",
+                detail="Real corpus proves 55 mappings, three conflicting upstream IDs, and seven namespaced origins.",
+            ),
+        ],
+        references={
+            "source catalog collision": "workflow.Build and publish the source-scoped actor graph"
+        },
+        updated_at=UPDATED,
+    ),
+    Gotcha(
+        name="Baseline indicator release is not revision proof",
+        description=(
+            "`indicator baseline semantics` means the first capture observed by this "
+            "project. It does not mean the upstream value is final, unchanged, or free "
+            "of revisions before capture. A single snapshot cannot prove revision behavior."
+        ),
+        mitigation=(
+            "Publish baseline and source status explicitly, keep uncertainty visible, "
+            "capture a second official snapshot, and append version deltas without "
+            "overwriting the original observation."
+        ),
+        evidence=[
+            Evidence(
+                source="docs/data-model/indicators-spec-v1.md",
+                detail="Append-only release and observation-version semantics.",
+            ),
+            Evidence(
+                source="docs/release-notes/indicators-mvp.md",
+                detail="First public release limitation and required second-snapshot gate.",
+            ),
+        ],
+        references={
+            "indicator baseline semantics": "workflow.Publish a canonical Eurostat indicator family"
+        },
+        updated_at=UPDATED,
+    ),
     Gotcha(
         name="Senate session cache is legislature scoped",
         description=(

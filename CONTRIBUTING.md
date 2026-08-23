@@ -24,11 +24,13 @@ Gracias por aportar en un proyecto de infraestructura pública y verificable.
 
 ### Cambios de datos / ETL
 
-- Para una fuente nueva, empieza con `just add-source <source_id> name="..." scope="..." url="..." format=json`.
-- La ruta obligatoria es: config -> sample fixture -> parser -> strict sample test -> catalog/publish mapping -> docs entry.
+- Para una fuente nueva, empieza con `just add-source <source_id> name="..." scope="..." url="https://fuente-oficial/..." sample_file="..." sample_sha256="..." captured_at="...Z" rights_basis="datos públicos oficiales" format=json`.
+- La ruta obligatoria es: config -> captura oficial real + sidecar de procedencia -> registro/hash de origen -> parser -> strict sample test -> catalog/publish mapping -> docs entry.
+- Nunca generes personas, transacciones, votos, contratos o placeholders. Una muestra de test debe ser un payload oficial capturado, con URL, fecha, bytes y SHA-256 verificables.
+- Conserva exactamente los nombres, identificadores y demás información personal que la fuente oficial publique. El gate de higiene bloquea secretos, sesiones y trazas locales; no autoriza suprimir evidencia personal de dominio público.
 - Añade `source_url` y `source_hash` cuando se publique información nueva.
 - Si el cambio altera contratos públicos (snapshots/HF), actualiza documentación de release y validación.
-- Antes del PR ejecuta `just etl-contributor-gates` o documenta exactamente qué gate no pudo ejecutarse.
+- Antes del PR ejecuta `just etl-audit-official-samples` y `just etl-contributor-gates`, o documenta exactamente qué gate no pudo ejecutarse.
 
 ### Cambios de UI/API
 
@@ -39,6 +41,13 @@ Gracias por aportar en un proyecto de infraestructura pública y verificable.
 
 - Prefiere ejemplos concretos y decisiones explícitas.
 - Alinea nuevos docs con `docs/README.md`.
+
+### Revisión de correcciones electorales BOE
+
+- Sigue `docs/community/boe-candidate-correction-review.md`.
+- Revisa solo texto oficial exacto y contexto candidato ya capturado; no inventes operaciones ni identidades.
+- Dos personas distintas deben revisar cada tarea y al menos una debe ser independiente.
+- Los `31,241` candidatos históricos pendientes siguen fuera del estado efectivo hasta que cada documento reconcilie y pase readiness.
 
 ## Revisión comunitaria del recibo de Andalucía
 

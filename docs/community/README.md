@@ -9,6 +9,7 @@ Start here:
 - Contributor rules: `CONTRIBUTING.md`
 - Source catalog UI: `/explorer-sources/`
 - Starter tasks: `docs/community/contributor-challenges-v1.md`
+- BOE candidate correction review: `docs/community/boe-candidate-correction-review.md`
 - Steward map: `docs/community/steward-map.md`
 - Partner guide: `docs/community/partner-integration-guide.md`
 - Conduct: `CODE_OF_CONDUCT.md`
@@ -28,4 +29,4 @@ Operating rule:
 - no source is marked `DONE` without current live evidence;
 - blocked public data access is recorded as a blocker, not hidden;
 - first contributor PR should land traceable raw records before deeper normalization;
-- publish-facing artifacts must pass `just privacy-check-public-artifacts`.
+- publish-facing artifacts must pass `just privacy-check-public-artifacts`; official public-domain identity remains intact, while secrets, private sessions, and workstation traces are forbidden.

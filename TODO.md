@@ -52,91 +52,91 @@ Context: A spec alone will not generate attention; the first public artifact nee
 Prompt: Implement docs/product/vote-explainer-spec.md using existing vote data only. Add one canonical route, official source links, caveat badges from the truth contract, tests, and a short demo note.
 Output: code for vote explainer MVP, docs/release-notes/vote-explainer-mvp.md
 
-\[ \] 11. Source obstruction tracker MVP
+\[x\] 11. Source obstruction tracker MVP
 Context: One of the project's strongest unique angles is showing where public-data accountability is blocked.
 Prompt: Read docs/product/killer-use-case.md, docs/method/truth-contract.md, and /explorer-sources/data/status.json. Build a public obstruction tracker page plus JSON feed showing source health, blocked sources, evidence artifacts, affected coverage, and last change.
 Output: code for obstruction tracker MVP, docs/release-notes/obstruction-tracker-mvp.md
 
-\[ \] 12. Transparency dashboard and release-note flow
+\[x\] 12. Transparency dashboard and release-note flow
 Context: Contributors and users trust projects that expose freshness, source health, and what changed.
 Prompt: Read outputs from tasks 10 and 11 plus current publish/snapshot flow. Build a small transparency dashboard that shows last refresh, source health summary, latest snapshot version, recent changes, and links to release notes. Keep every number traceable to a source.
 Output: transparency dashboard, docs/product/transparency-dashboard.md, lightweight release-note process
 
 ## Phase 3 - Make it modular so outsiders can build on it
 
-\[ \] 13. Core ontology v1
+\[x\] 13. Core ontology v1
 Context: To grow from votes into promises, spending, agreements, and outcomes, the project needs a stable shared vocabulary.
 Prompt: Read docs/strategy/project-thesis.md, docs/product/killer-use-case.md, and current schemas/tables. Design docs/data-model/core-ontology-v1.md for actor, organization, role, territory, source, document, evidence, topic, claim, promise, initiative, vote, spending item, contract, agreement, meeting, event, indicator, and outcome. Include IDs, timestamps, provenance, and relationships.
 Output: docs/data-model/core-ontology-v1.md
 
-\[ \] 14. Plugin architecture v1
+\[x\] 14. Plugin architecture v1
 Context: Activist developers should be able to add connectors and analysis modules without deep coupling to the whole repo.
 Prompt: Read docs/data-model/core-ontology-v1.md and the current pipeline code. Write docs/architecture/plugin-system-v1.md defining interfaces for connectors, parsers, extractors, linkers, scorers, and publishers. Include plugin manifest format, lifecycle hooks, versioning, and test hooks.
 Output: docs/architecture/plugin-system-v1.md
 
-\[ \] 15. Minimal SDK and sample plugin
+\[x\] 15. Minimal SDK and sample plugin
 Context: A plugin architecture becomes real only when there is an example that new contributors can copy.
 Prompt: Implement a minimal SDK and one example plugin based on docs/architecture/plugin-system-v1.md and docs/data-model/core-ontology-v1.md. The example should ingest one simple public source into the standard schema, run locally, and include tests and docs.
 Output: SDK code, example plugin, docs/examples/sample-plugin.md
 
-\[ \] 16. Provenance, reproducibility, and signed snapshot flow
+\[x\] 16. Provenance, reproducibility, and signed snapshot flow
 Context: A political accountability system needs strong provenance and reproducibility, not just raw data dumps.
 Prompt: Read the current snapshot/publish flow, Hugging Face publication config, and docs/data-model/core-ontology-v1.md. Add checksums, schema version stamps, snapshot manifests, diff reports, and a simple way to verify that a published artifact matches a build. Document it.
 Output: provenance/reproducibility improvements, docs/ops/reproducibility.md
 
-\[ \] 17. Stable Evidence API / export contract
+\[x\] 17. Stable Evidence API / export contract
 Context: Outside tools and partner projects need a stable way to consume entities and evidence chains.
 Prompt: Read docs/data-model/core-ontology-v1.md, docs/ops/reproducibility.md, and current public exports. Define and implement a stable read-only Evidence API or export contract for entities, evidence chains, source health, and question results. Include versioning, pagination, and provenance fields.
 Output: docs/api/evidence-api-v1.md, implementation of stable export/API surface
 
 ## Phase 4 - Expand the accountability surface beyond votes
 
-\[ \] 18. Promises and manifesto data model
+\[x\] 18. Promises and manifesto data model
 Context: Accountability starts before parliamentary action, with campaign promises and explicit commitments.
 Prompt: Read docs/data-model/core-ontology-v1.md and any existing promise/topic logic. Write docs/data-model/promises-spec-v1.md defining how to represent explicit promises, softer commitments, preferences, slogans, coalition agreements, and issue positions. Include extraction rules and ambiguity cases.
 Output: docs/data-model/promises-spec-v1.md
 
-\[ \] 19. First promises pipeline
+\[x\] 19. First promises pipeline
 Context: The framework needs one real promise source, not just a schema.
 Prompt: Using docs/data-model/promises-spec-v1.md, implement one end-to-end promise ingestion pipeline for a single party manifesto or equivalent source. Include segmentation, topic tagging, actor attribution, evidence links, and a small published sample.
 Output: first promises pipeline, docs/release-notes/promises-pipeline-mvp.md
 
-\[ \] 20. Spending and procurement data model
+\[x\] 20. Spending and procurement data model
 Context: The user-facing ambition includes accountability from promises to spending, so money must be first-class in the model.
 Prompt: Read docs/data-model/core-ontology-v1.md and docs/strategy/project-thesis.md. Write docs/data-model/spending-spec-v1.md for budgets, amendments, procurement notices, awards, contracts, beneficiaries, amounts, dates, territories, and linked actors. Include provenance requirements and unresolved edge cases.
 Output: docs/data-model/spending-spec-v1.md
 
-\[ \] 21. First spending/procurement connector
+\[x\] 21. First spending/procurement connector
 Context: A working money path is necessary to move beyond legislative behavior alone.
 Prompt: Using docs/data-model/spending-spec-v1.md, implement one official spending or procurement connector. Publish a small normalized sample and one query example that traces actor -> spending item -> source evidence.
 Output: first spending connector, docs/release-notes/spending-connector-mvp.md
 
-\[ \] 22. Agreements, meetings, and influence data model
+\[x\] 22. Agreements, meetings, and influence data model
 Context: Accountability also depends on who meets whom, what is agreed, and what formal or semi-formal pacts exist.
 Prompt: Read docs/data-model/core-ontology-v1.md. Write docs/data-model/agreements-influence-spec-v1.md covering coalition agreements, parliamentary pacts, meeting disclosures, lobbying disclosures, agendas, attendees, counterparties, and topics. Separate verified document facts from inferred influence.
 Output: docs/data-model/agreements-influence-spec-v1.md
 
-\[ \] 23. First agreements / influence connector
+\[x\] 23. First agreements / influence connector
 Context: The framework should prove it can capture at least one source of agreements or meeting disclosures.
 Prompt: Using docs/data-model/agreements-influence-spec-v1.md, implement one connector for an official agreement or meeting disclosure source. Normalize actors, dates, and topics, then publish a small sample with evidence links.
 Output: first agreements/influence connector, docs/release-notes/agreements-connector-mvp.md
 
-\[ \] 24. Geopolitics data model
+\[x\] 24. Geopolitics data model
 Context: The long-term system should cover foreign-policy positions and actions, not only domestic legislative behavior.
 Prompt: Read docs/data-model/core-ontology-v1.md. Write docs/data-model/geopolitics-spec-v1.md covering treaties, resolutions, sanctions, aid commitments, defense agreements, international votes, counterpart states or organizations, and time-scoped positions. Mark what is verifiable fact vs later inference.
 Output: docs/data-model/geopolitics-spec-v1.md
 
-\[ \] 25. First geopolitics connector
+\[x\] 25. First geopolitics connector
 Context: A real foreign-policy source will prove the model extends beyond domestic politics.
 Prompt: Using docs/data-model/geopolitics-spec-v1.md, implement one small connector for an official foreign-policy source and publish a sample dataset with evidence links and coverage notes.
 Output: first geopolitics connector, docs/release-notes/geopolitics-mvp.md
 
-\[ \] 26. Economic and social indicators data model
+\[x\] 26. Economic and social indicators data model
 Context: To connect politics to public results, the project needs structured outcome indicators with time and geography.
 Prompt: Read docs/data-model/core-ontology-v1.md. Write docs/data-model/indicators-spec-v1.md covering economic and social indicators, revisions, geographic scope, time intervals, methodology notes, uncertainty, and provenance.
 Output: docs/data-model/indicators-spec-v1.md
 
-\[ \] 27. First indicators pipeline
+\[x\] 27. First indicators pipeline
 Context: The system needs at least one official indicator family to support later descriptive outcome links.
 Prompt: Using docs/data-model/indicators-spec-v1.md, implement one official indicator pipeline. Preserve revisions and metadata, link indicators to territories and time periods, and document limitations.
 Output: first indicators pipeline, docs/release-notes/indicators-mvp.md
@@ -145,16 +145,22 @@ Output: first indicators pipeline, docs/release-notes/indicators-mvp.md
 Context: The hard question "who did what" requires stable identity across office changes, coalitions, aliases, and institutional shifts.
 Prompt: Read outputs from tasks 19, 21, 23, 25, and 27 plus docs/data-model/core-ontology-v1.md. Implement a time-aware actor graph and entity resolution layer for people, parties, institutions, offices, aliases, mergers, splits, and coalition membership. Document rules and failure modes.
 Output: entity-resolution system, docs/architecture/entity-resolution-v1.md
+Current: `LOCAL VALIDATED — PENDING PUBLICATION 2026-08-23`. The source-scoped v1 graph retains `133,595` public actors, `237,973` relationships/evidence rows, `79,208` identifiers and `4,186` aliases. Rebuild and independent validation pass with release `e52dd7fa...` and exact public JSON `9272fb73...`; the composite release/source lookup index now exists physically and is selected by SQLite.
+Remaining gate: publish and verify `/actor-graph/` plus exact JSON live. Cross-source resolution, reviewed organization changes, multi-snapshot valid time, gold-set precision/recall, durable origin/restore and one-million representative actor facts remain open. Keep this item open.
 
 \[ \] 29. Comparison engine for promises / stated positions vs actions
 Context: The project becomes much more valuable once it can compare commitments or declared stances to later actions with explicit evidence and caveats.
 Prompt: Read docs/data-model/promises-spec-v1.md, docs/method/truth-contract.md, and current position/vote logic. Define and implement docs/method/comparison-engine-v1.md for comparing explicit promise or declared stance against later action. Support statuses such as aligned, conflicted, insufficient evidence, ambiguous mapping, changed framing, and not comparable.
 Output: comparison engine, docs/method/comparison-engine-v1.md
+Current: `LOCAL VALIDATED — PENDING PUBLICATION 2026-08-20`. C1 contains `5` real reviewed assessments / `18` evidence rows: `3 ambiguous_mapping`, `1 insufficient_evidence`, `1 not_comparable`, and `0` strong conclusions. Action coverage stops at `2026-02-12`; million-row execution and artifact-set atomic promotion are not proven.
+Remaining gate: publish `/comparisons/` plus its exact JSON, verify route/asset/hash live, then expand only through explicit reviewed mappings and measured scale evidence. Keep this item open until that proof exists.
 
 \[ \] 30. Descriptive outcome-link layer
 Context: Users will want to connect actions to social or economic results, but the system should not claim causality it cannot support.
 Prompt: Read docs/data-model/indicators-spec-v1.md, docs/method/truth-contract.md, and docs/strategy/project-thesis.md. Implement docs/method/outcome-linking-v1.md that links actions to later indicators or events descriptively while clearly stating that no causal inference is claimed unless stronger methods are later added.
 Output: outcome-link layer, docs/method/outcome-linking-v1.md
+Current: `LOCAL VALIDATED — C1 PUBLIC V3 PACKAGE/BUILD PASS; C2A+C2B PHYSICAL PASS; REMOTE PUBLICATION/ORIGIN OPEN 2026-08-23`. One real C0/L1 candidate closes over `20` Senate action pairs, `25` Eurostat observations and `264` named public participants. The append-only nine-table bundle passes `2,973` independent checks with semantic SHA `2e04efb8...` and artifact-set SHA `22f43918...`; reviews, releases, memberships, validated links and publications remain exactly `0`. Public status v3 is `4,078` bytes / SHA `226dfdf9...`. Package `5ac01878...` binds a `9,496`-byte manifest / SHA `2bfe3f2d...` plus `17` exact assets; deterministic validation projection SHA `8e978632...` retains all check results without volatile physical-run identity. All `264` official names remain public; removed/pseudonymized=`0`. Browser runtime hashes every asset and fails closed on missing, altered, redirected, extra or unsafe-path evidence. Fresh proof passes `1,435` pages, `46` routes, `50` critical assets, `119` obstruction-evidence objects, `124,679` real-only files and `17,072` publication-hygiene files. C2A physically validates `33,726` real pairs with `111` checks. C2B physically validates `2,865,602` real pairs in a `3,587,743,744`-byte SQLite shard / SHA `04c82651...` with `107` checks, interruption/resume, adversarial failure tests and byte-identical local restore; semantic root `e9fecdb8...`. Both C2 cohorts remain internal L0, publication-ineligible and claim-free.
+Remaining gate: publish and verify C1 route/status/manifest/all asset hashes plus desktop/mobile/browser state live; recover original vote XML bytes or retain the explicit gap; pin actor-source capture because all `264` actor-source content hashes are null and their actor URL is only the generic legislature-15 catalog; pass actor-graph durable-origin/restore and bounded vote/text provenance; obtain a real identified human review before any L2 release. Put exact C2 shards/manifests in an authorized durable immutable origin, independently clean-restore/rollback and revalidate them before any promotion. Move review to a generated candidate queue plus append-only decision-only records keyed to immutable version IDs, with leases, identified reviewers, calibration, dual review/adjudication, queue-age/throughput, appeals and correction SLA. Keep this item open.
 
 ## Phase 5 - Turn the framework into answerable questions
 

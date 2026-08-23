@@ -60,8 +60,10 @@ body:
       label: Criterios de aceptación
       description: Qué debe quedar validado para aceptar esta fuente.
       placeholder: |
-        - [ ] `just add-source <source_id> ...` ejecutado
-        - [ ] Config + sample fixture + parser + docs entry creados
+        - [ ] `just add-source <source_id> ... sample_file=... sample_sha256=... captured_at=... rights_basis=...` ejecutado
+        - [ ] Config + captura oficial real + sidecar + parser + docs entry creados
+        - [ ] Cero filas sintéticas, mock, inventadas o placeholder
+        - [ ] Campos personales de dominio público retenidos exactamente con procedencia
         - [ ] Pipeline con muestra de smoke test
         - [ ] `just etl-contributor-gates` pasa o bloqueo documentado
         - [ ] Evidencia y rastreabilidad en DB

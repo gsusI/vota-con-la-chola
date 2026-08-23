@@ -5,11 +5,13 @@ Objetivo: convertir fuentes públicas faltantes o débiles en PRs pequeños, rev
 Ruta estándar:
 
 1. Abrir issue `Data Source`.
-2. Ejecutar `just add-source <source_id> name="..." scope="..." url="..." format=json`.
-3. Sustituir muestra por payload pequeño y representativo.
+2. Capturar un payload pequeño desde la fuente oficial y calcular su SHA-256.
+3. Ejecutar `just add-source <source_id> name="..." scope="..." url="https://fuente-oficial/..." sample_file="..." sample_sha256="..." captured_at="...Z" rights_basis="datos públicos oficiales" format=json`.
 4. Implementar parser.
 5. Ejecutar `just etl-contributor-gates`.
 6. Abrir PR con evidencia, bloqueo o contrato de reutilización.
+
+No se aceptan fixtures inventados, sintéticos o mock. La muestra debe ser una captura oficial real. Los campos personales publicados por la fuente se conservan exactamente con procedencia.
 
 Referencias:
 
@@ -34,6 +36,7 @@ Referencias:
 | C08 | [#8](https://github.com/gsusI/vota-con-la-chola/issues/8) | Infoelectoral procesos | Infoelectoral API | existing Infoelectoral connector | `infoelectoral_procesos` gets real network run or documented blocker |
 | C09 | [#9](https://github.com/gsusI/vota-con-la-chola/issues/9) | Navarra parliament refresh | Parlamento de Navarra | existing Navarra connector | Replace manual-only replay with strict-network evidence or blocker entry |
 | C10 | [#10](https://github.com/gsusI/vota-con-la-chola/issues/10) | PLACSP live refresh | PLACSP syndication | existing PLACSP connector | `placsp_sindicacion` and `placsp_autonomico` both have network rows or blocker notes |
+| C11 | Open a scoped review issue | BOE historical candidate corrections | Eight captured BOE correction documents | `boe-candidate-correction-review-queue.csv`, `boe-candidate-correction-review-context.jsonl` | One correction document has dual independent review, adjudicated disagreements and reconstructable operations or explicit context for every paragraph; central readiness passes |
 
 ## Priority rule
 

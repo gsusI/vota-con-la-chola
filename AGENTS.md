@@ -266,7 +266,7 @@ Explorer uses `history.pushState` / `popstate`.
     - `HF_PARQUET_BATCH_ROWS` (default `50000`)
     - `HF_PARQUET_COMPRESSION` (default `zstd`)
     - `HF_PARQUET_TABLES` (optional subset; empty means all non-excluded tables)
-    - `HF_PARQUET_EXCLUDE_TABLES` (default `raw_fetches,run_fetches,source_records,lost_and_found`)
+    - `HF_PARQUET_EXCLUDE_TABLES` (default `raw_fetches,run_fetches,lost_and_found`; `source_records` remains public so official personal evidence is not stripped)
     - `HF_ALLOW_SENSITIVE_PARQUET` (`0` by default; set `1` only for private repos)
     - `HF_INCLUDE_SQLITE_GZ` (`0` by default; set `1` only for private repos)
 - Significant data change checklist (required):
