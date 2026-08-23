@@ -1,0 +1,61 @@
+{
+  "schema_version": "live_placsp_spending_verification_v1",
+  "status": "ok",
+  "verified_at": "2026-08-19T21:00:09.925662+00:00",
+  "expected_release": "7abe9ac62d4af254aa41a2ffb2a7b4b9cf3e1ae607c6082329da17330a86a7a6",
+  "live_release": "7abe9ac62d4af254aa41a2ffb2a7b4b9cf3e1ae607c6082329da17330a86a7a6",
+  "page": {
+    "url": "https://votaconlachola.org/spending/",
+    "http_status": 200,
+    "content_type": "text/html; charset=utf-8",
+    "bytes": 182646,
+    "sha256": "618ba98c65014ee270131353081b6211ac82a25b98d7ecadfeed679d03f7a580"
+  },
+  "artifact": {
+    "url": "https://votaconlachola.org/spending/data/placsp-sample.json",
+    "http_status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "bytes": 95189,
+    "sha256": "b09990e1c05be599d728156f1e98030a8d1f5eb08ea90139467fd471cc40df34",
+    "items": 20
+  },
+  "identity_counts": {
+    "legal_entity": 10,
+    "potential_natural_person": 5,
+    "unclassified": 5
+  },
+  "official_placsp_probes": [
+    {
+      "category": "legal_entity",
+      "url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=74PNDI%2B%2BhRc7u6%2B%2FR7DUoA%3D%3D",
+      "status": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "prefix_bytes": 106243,
+      "prefix_sha256": "e81258800f279c23edf45820707fe448e88cd30e632d09cab260fb2151b906fd"
+    },
+    {
+      "category": "potential_natural_person",
+      "url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=ClKAdb3d1YaopEMYCmrbmw%3D%3D",
+      "status": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "prefix_bytes": 109008,
+      "prefix_sha256": "18fd23c7f89bd3724af84c4c24eef84e899f9f5f6e12cb56f065bba998cba863"
+    },
+    {
+      "category": "unclassified",
+      "url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=B1wDghEBRrMXhk1FZxEyvw%3D%3D",
+      "status": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "prefix_bytes": 109571,
+      "prefix_sha256": "c40c5904e3ebea0e2a050f2a718709c8792a0f46c5f000c14ba59ed3ebf2ea21"
+    }
+  ],
+  "checks": {
+    "page_markers": 3,
+    "real_data_only": true,
+    "award_not_payment": true,
+    "public_identity_retained": true,
+    "three_identity_strata_probed": true
+  },
+  "errors": []
+}

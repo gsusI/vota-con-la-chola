@@ -1,0 +1,49 @@
+{
+  "schema_version": "live_moncloa_geopolitics_verification_v1",
+  "status": "ok",
+  "verified_at": "2026-08-19T22:14:36.789929+00:00",
+  "expected_release": "6683fd44eece98198ab3040e264c584b878cb33aa43be719ae19b99f58246204",
+  "live_release": "6683fd44eece98198ab3040e264c584b878cb33aa43be719ae19b99f58246204",
+  "page": {
+    "url": "https://votaconlachola.org/geopolitics/",
+    "http_status": 200,
+    "content_type": "text/html; charset=utf-8",
+    "bytes": 46190,
+    "sha256": "3f6a6967d842cdc5a250465565e7f36192610acd526b8167da4b4cd17415a7fe"
+  },
+  "artifact": {
+    "url": "https://votaconlachola.org/geopolitics/data/moncloa-sample.json",
+    "http_status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "bytes": 13937,
+    "sha256": "ea8c3eb11ff2e31e0a6585ee3f965b7d6dd5d662b2953952f4eb440a988c880e",
+    "actions": 2,
+    "actors": 11
+  },
+  "official_moncloa_probes": [
+    {
+      "url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/2026/20260113-referencia-rueda-de-prensa-ministros.aspx",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "prefix_bytes": 89580,
+      "prefix_sha256": "1e96e260ae91e777bc52abce89748971a28413a0c900c40500bbe09e95426657"
+    },
+    {
+      "url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/2026/20260127-referencia-rueda-de-prensa-ministros.aspx",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "prefix_bytes": 157375,
+      "prefix_sha256": "a83b483a5b8df7696381a348901196a79aa301ba235f9302f26ae2528a783ff2"
+    }
+  ],
+  "checks": {
+    "page_markers": 3,
+    "real_data_only": true,
+    "public_identity_retained": true,
+    "fact_only": true,
+    "no_position_rows": true,
+    "no_later_observations": true,
+    "two_official_source_probes": true
+  },
+  "errors": []
+}

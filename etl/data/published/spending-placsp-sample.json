@@ -1,0 +1,1978 @@
+{
+  "schema_version": "spending_placsp_public_sample_v1",
+  "generated_from_source_at": "2026-08-11T16:31:32+00:00",
+  "real_data_only": true,
+  "synthetic_or_mock": false,
+  "public_domain_information_policy": "retained_exactly",
+  "source": {
+    "source_id": "placsp_sindicacion",
+    "name": "PLACSP - Contratacion publica Espana (ATOM/CODICE)",
+    "default_url": "https://contrataciondelestado.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3.atom",
+    "format": "xml",
+    "coverage": "official PLACSP H1 2025 bulk acquisition",
+    "archives": [
+      {
+        "period": "202501",
+        "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202501.zip",
+        "content_sha256": "bda70aa0a7437d031e5d3f6114e5a637920ea1a460e1aba67d200209ae5eab7f",
+        "bytes": 146382691,
+        "transport_security": "verified_custom_ca"
+      }
+    ],
+    "corpus_counts": {
+      "money_contract_records": 330577,
+      "money_contract_award_results": 262558,
+      "money_contract_documents": 3190620,
+      "source_records": 330597,
+      "placsp_bulk_archives": 6,
+      "placsp_bulk_members": 667,
+      "placsp_bulk_record_sightings": 330688
+    }
+  },
+  "methodology": {
+    "selection": "deterministic bounded audit sample from latest non-tombstone contract versions; complete EUR awards; distinct contracting authorities where possible; stratified 50% legal entity, 25% potential natural person, 25% unclassified",
+    "representative_sample": false,
+    "amount_arithmetic": "exact Decimal from source decimal strings",
+    "award_is_payment": false,
+    "identity_resolution": "source_scoped; no name-based merge",
+    "document_capture": "primary ATOM/CODICE source record bytes captured; linked official documents remain official_url_only unless a content SHA-256 exists",
+    "extractor_method": "placsp_latest_award_to_spending_item",
+    "extractor_version": "spending_placsp_v1"
+  },
+  "counts": {
+    "published_items": 20,
+    "published_actors": 40,
+    "published_evidence": 38,
+    "counterparty_legal_entity": 10,
+    "counterparty_potential_natural_person": 5,
+    "counterparty_unclassified": 5,
+    "materialized_db": {
+      "source_records": 20,
+      "money_contract_records": 20,
+      "money_contract_award_results": 20,
+      "money_contract_documents": 18,
+      "spending_items": 20,
+      "spending_item_actors": 40,
+      "spending_item_evidence": 38,
+      "spending_item_links": 0
+    }
+  },
+  "amounts": {
+    "award_amount_total_decimal": "4835494.71",
+    "payable_amount_total_decimal": "5845384.70",
+    "currency": "EUR",
+    "amount_semantics": "award_amount",
+    "tax_semantics": "excluding_tax"
+  },
+  "cannot_answer_yet": [
+    "whether each award was formalized as a signed contract",
+    "whether any invoice was accepted",
+    "whether any amount was paid",
+    "whether the procured work or service was delivered",
+    "whether an award is unethical, irregular, illegal, or corrupt",
+    "whether this bounded sample represents the full PLACSP population"
+  ],
+  "items": [
+    {
+      "spending_item_id": "vclc:spending-item:ede5739ac5bd589d0349a2f0cf7d809ef509c3d974b68d9519a05323995b8ea0",
+      "spending_kind": "procurement_award",
+      "phase_caveat": "adjudicacion_publicada_no_prueba_contrato_pago_ni_entrega",
+      "title": "El suministro de contadores de agua fría con telelectura para Aguas de Alcázar EMSAU.",
+      "description": "Según la propuesta de la Mesa de contratación, por ser el licitador mejor valorado.",
+      "stable_object_id": "https://contrataciondelestado.es/sindicacion/licitacionesPerfilContratante/15329685",
+      "semantic_ordinal": 0,
+      "external_contract_id": "1A/2024",
+      "lot_id": "1",
+      "classification": {
+        "scheme": "CPV",
+        "code": "38421100",
+        "label": null
+      },
+      "procedure": {
+        "notice_type": "DOC_FORM",
+        "procedure_code": "1",
+        "contract_status_code": "RES",
+        "result_code": "9",
+        "received_tender_quantity": 1
+      },
+      "money": {
+        "amount_decimal": "52880",
+        "payable_amount_decimal": "63984.8",
+        "currency": "EUR",
+        "amount_semantics": "award_amount",
+        "tax_semantics": "excluding_tax",
+        "arithmetic_authority": "decimal_string"
+      },
+      "dates": {
+        "published_on": "2024-07-16",
+        "decision_on": "2024-10-25",
+        "paid_on": null,
+        "delivered_on": null,
+        "date_precision": "day"
+      },
+      "territory_code": "ES422",
+      "actors": [
+        {
+          "actor_role": "contracting_authority",
+          "actor_kind": "public_body",
+          "source_label": "Consejo de Administración de Aguas de Alcázar, Empresa Municipal S.A.U.",
+          "source_identifier": "A13157029",
+          "source_identifier_scheme": "NIF",
+          "identity_state": "source_scoped"
+        },
+        {
+          "actor_role": "supplier",
+          "actor_kind": "organization",
+          "source_category": "legal_entity",
+          "source_label": "CONTADORES DE AGUA DE ZARAGOZA SA",
+          "source_identifier": "A50096247",
+          "source_identifier_scheme": "NIF",
+          "identity_state": "source_scoped"
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_role": "primary_record",
+          "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=74PNDI%2B%2BhRc7u6%2B%2FR7DUoA%3D%3D",
+          "document_url": null,
+          "document_label": "PLACSP source record",
+          "document_kind": "ATOM/CODICE entry",
+          "content_sha256": "29b6184e03d9ef5562ce85b6cf5299684a92ddee81771fc9252b7712acb069df",
+          "evidence_state": "captured_bytes"
+        },
+        {
+          "evidence_role": "context",
+          "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=74PNDI%2B%2BhRc7u6%2B%2FR7DUoA%3D%3D",
+          "document_url": "https://contrataciondelestado.es/wps/wcm/connect/PLACE_es/Site/area/docAccCmpnt?srv=cmpnt&cmpntname=GetDocumentsById&source=library&DocumentIdParam=7b361155-66ad-400a-bfdf-3e8b7798f33d",
+          "document_label": "PCAP SUMINISTRO CONTADORES AGUA-firmado.pdf",
+          "document_kind": "LegalDocumentReference",
+          "content_sha256": null,
+          "official_document_hash": "ET3Ig0BO9yyPVDJqkYCxSZ7FoAE=",
+          "evidence_state": "official_url_only"
+        }
+      ],
+      "provenance": {
+        "source_id": "placsp_sindicacion",
+        "source_record_id": "f21326e1f2dd2d039be1e91d6e7f8f7fa8dcfec5787949ee7e8a6bd3ff0ef26b",
+        "source_record_sha256": "29b6184e03d9ef5562ce85b6cf5299684a92ddee81771fc9252b7712acb069df",
+        "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=74PNDI%2B%2BhRc7u6%2B%2FR7DUoA%3D%3D",
+        "source_snapshot_date": "2025-03-31",
+        "observed_at": "2026-08-11T15:40:23+00:00",
+        "archive_period": "202501",
+        "archive_source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202501.zip",
+        "archive_sha256": "bda70aa0a7437d031e5d3f6114e5a637920ea1a460e1aba67d200209ae5eab7f",
+        "archive_bytes": 146382691,
+        "archive_transport_security": "verified_custom_ca",
+        "member_name": "licitacionesPerfilesContratanteCompleto3.atom",
+        "member_sha256": "470509b67f9f556fb050154d2801cb76da2d56cbfcf9faf2511acbb2a8a4d446",
+        "extractor_method": "placsp_latest_award_to_spending_item",
+        "extractor_version": "spending_placsp_v1"
+      }
+    },
+    {
+      "spending_item_id": "vclc:spending-item:c33691c9ef7acb71ede78782b716c8b1a012d3a8e1bf43f56e4d03db377a5ab6",
+      "spending_kind": "procurement_award",
+      "phase_caveat": "adjudicacion_publicada_no_prueba_contrato_pago_ni_entrega",
+      "title": "Contratación del servicio de recogida, transporte y distribución de paquetería en Gipuzkoa.",
+      "description": "Se propone la adjudicación del presente expediente a ADOM REPARTE, S.L.U por cumplir con los requisitos técnicos exigidos y presentar la mejor oferta en base a “la mejor relación coste-eficacia”, siendo los criterios de adjudicación descritos en el Pliego de Condiciones Técnicas y Particulares.",
+      "stable_object_id": "https://contrataciondelestado.es/sindicacion/licitacionesPerfilContratante/16026760",
+      "semantic_ordinal": 15,
+      "external_contract_id": "CO20242005",
+      "lot_id": "5",
+      "classification": {
+        "scheme": "CPV",
+        "code": "60100000",
+        "label": null
+      },
+      "procedure": {
+        "notice_type": "DOC_CN",
+        "procedure_code": "1",
+        "contract_status_code": "ADJ",
+        "result_code": "8",
+        "received_tender_quantity": 1
+      },
+      "money": {
+        "amount_decimal": "83409.37",
+        "payable_amount_decimal": "100925.34",
+        "currency": "EUR",
+        "amount_semantics": "award_amount",
+        "tax_semantics": "excluding_tax",
+        "arithmetic_authority": "decimal_string"
+      },
+      "dates": {
+        "published_on": "2024-11-08",
+        "decision_on": "2025-01-29",
+        "paid_on": null,
+        "delivered_on": null,
+        "date_precision": "day"
+      },
+      "territory_code": "ES300",
+      "actors": [
+        {
+          "actor_role": "contracting_authority",
+          "actor_kind": "public_body",
+          "source_label": "Consejo de Administración de Correos Express Paquetería Urgente, S.A. - S.M.E.",
+          "source_identifier": "A28799120",
+          "source_identifier_scheme": "NIF",
+          "identity_state": "source_scoped"
+        },
+        {
+          "actor_role": "supplier",
+          "actor_kind": "organization",
+          "source_category": "legal_entity",
+          "source_label": "ADOM REPARTE, S.L.",
+          "source_identifier": "B09340225",
+          "source_identifier_scheme": "NIF",
+          "identity_state": "source_scoped"
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_role": "primary_record",
+          "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=wUAeVtzMsQjE6P%2FuLemXRw%3D%3D",
+          "document_url": null,
+          "document_label": "PLACSP source record",
+          "document_kind": "ATOM/CODICE entry",
+          "content_sha256": "f5af8910a0395415b8f7feccfa259f027a4fec622369ef3aedf1b2b9604d2a66",
+          "evidence_state": "captured_bytes"
+        },
+        {
+          "evidence_role": "context",
+          "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=wUAeVtzMsQjE6P%2FuLemXRw%3D%3D",
+          "document_url": "https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=%2BO6FuN1x1tEDd%2BLkW5jk5M/MKHH5OPtqzoY0GzEpFulZpizzQjX/B3XNbAXzQtT8dN5AM4dL6Pq/KKW1/6XEEn%2B9GOhgDO498M0vWfY2JgPDdQD9RyhUmzT4jZ2In4zL&cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D",
+          "document_label": "CO20242005 CC Conducciones GIPUZKOA.pdf",
+          "document_kind": "LegalDocumentReference",
+          "content_sha256": null,
+          "official_document_hash": "2jmj7l5rSw0yVb/vlWAYkK/YBwk=",
+          "evidence_state": "official_url_only"
+        }
+      ],
+      "provenance": {
+        "source_id": "placsp_sindicacion",
+        "source_record_id": "ae285789823e2c9ea5639c9f5cf136ec845c098e6e36191485c3c5481b7a7075",
+        "source_record_sha256": "f5af8910a0395415b8f7feccfa259f027a4fec622369ef3aedf1b2b9604d2a66",
+        "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=wUAeVtzMsQjE6P%2FuLemXRw%3D%3D",
+        "source_snapshot_date": "2025-03-31",
+        "observed_at": "2026-08-11T15:40:23+00:00",
+        "archive_period": "202501",
+        "archive_source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202501.zip",
+        "archive_sha256": "bda70aa0a7437d031e5d3f6114e5a637920ea1a460e1aba67d200209ae5eab7f",
+        "archive_bytes": 146382691,
+        "archive_transport_security": "verified_custom_ca",
+        "member_name": "licitacionesPerfilesContratanteCompleto3.atom",
+        "member_sha256": "470509b67f9f556fb050154d2801cb76da2d56cbfcf9faf2511acbb2a8a4d446",
+        "extractor_method": "placsp_latest_award_to_spending_item",
+        "extractor_version": "spending_placsp_v1"
+      }
+    },
+    {
+      "spending_item_id": "vclc:spending-item:56a81de1db768a5f793491fc9f69bbe952b8fee991de3a21f9917220b1d05cfc",
+      "spending_kind": "procurement_award",
+      "phase_caveat": "adjudicacion_publicada_no_prueba_contrato_pago_ni_entrega",
+      "title": "Contratación del suministro de G.L.P., con destino al Parador de Turismo de La Palma (Sta. Cruz de Tenerife).",
+      "description": "Única oferta presentada y admitida a licitación, la cual cumple con las especificaciones técnicas y económicas solicitadas en los Pliegos de Condiciones de Contratación y de Prescripciones Técnicas, en aplicación de los criterios de valoración establecidos en los citados Pliegos de Condiciones de Contratación, siendo el precio el único criterio valorable.",
+      "stable_object_id": "https://contrataciondelestado.es/sindicacion/licitacionesPerfilContratante/16017294",
+      "semantic_ordinal": 0,
+      "external_contract_id": "2024-0518",
+      "lot_id": null,
+      "classification": {
+        "scheme": "CPV",
+        "code": "09000000",
+        "label": null
+      },
+      "procedure": {
+        "notice_type": "DOC_CN",
+        "procedure_code": "1",
+        "contract_status_code": "ADJ",
+        "result_code": "8",
+        "received_tender_quantity": 1
+      },
+      "money": {
+        "amount_decimal": "91160",
+        "payable_amount_decimal": "110303.6",
+        "currency": "EUR",
+        "amount_semantics": "award_amount",
+        "tax_semantics": "excluding_tax",
+        "arithmetic_authority": "decimal_string"
+      },
+      "dates": {
+        "published_on": "2024-11-05",
+        "decision_on": "2024-12-19",
+        "paid_on": null,
+        "delivered_on": null,
+        "date_precision": "day"
+      },
+      "territory_code": "ES300",
+      "actors": [
+        {
+          "actor_role": "contracting_authority",
+          "actor_kind": "public_body",
+          "source_label": "Paradores de Turismo de España, S.M.E., S.A.",
+          "source_identifier": "A79855201",
+          "source_identifier_scheme": "NIF",
+          "identity_state": "source_scoped"
+        },
+        {
+          "actor_role": "supplier",
+          "actor_kind": "organization",
+          "source_category": "legal_entity",
+          "source_label": "DISA GAS S.A.U",
+          "source_identifier": "A38453825",
+          "source_identifier_scheme": "NIF",
+          "identity_state": "source_scoped"
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_role": "primary_record",
+          "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=zL5B4Pnq8LAS7pcxhTeWOg%3D%3D",
+          "document_url": null,
+          "document_label": "PLACSP source record",
+          "document_kind": "ATOM/CODICE entry",
+          "content_sha256": "d7e7d7405b2b6ab38aefe09f1a71c782cd7aef1ea141ee810b16dceeb11c9857",
+          "evidence_state": "captured_bytes"
+        },
+        {
+          "evidence_role": "context",
+          "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=zL5B4Pnq8LAS7pcxhTeWOg%3D%3D",
+          "document_url": "https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=vRRrby3mKY5tt8RfFBW%2B%2B8EIJVtn2P3wXiRgHMQbgLc5mlf1WhXxUsMfH3v1udVXu9dOBw%2BN4WrvQqusEF5zvRZ1TSrfDf9I5SB5AE77bGFt/o8fNevwsujgRzaBbugn&cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D",
+          "document_label": "C C GLP LA PALMA 2024.pdf",
+          "document_kind": "LegalDocumentReference",
+          "content_sha256": null,
+          "official_document_hash": "2jmj7l5rSw0yVb/vlWAYkK/YBwk=",
+          "evidence_state": "official_url_only"
+        }
+      ],
+      "provenance": {
+        "source_id": "placsp_sindicacion",
+        "source_record_id": "04a315da9c58a36a408bb72c86f88d6e69e13a3ed1ba8e645849910344136f0d",
+        "source_record_sha256": "d7e7d7405b2b6ab38aefe09f1a71c782cd7aef1ea141ee810b16dceeb11c9857",
+        "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=zL5B4Pnq8LAS7pcxhTeWOg%3D%3D",
+        "source_snapshot_date": "2025-03-31",
+        "observed_at": "2026-08-11T15:40:23+00:00",
+        "archive_period": "202501",
+        "archive_source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202501.zip",
+        "archive_sha256": "bda70aa0a7437d031e5d3f6114e5a637920ea1a460e1aba67d200209ae5eab7f",
+        "archive_bytes": 146382691,
+        "archive_transport_security": "verified_custom_ca",
+        "member_name": "licitacionesPerfilesContratanteCompleto3.atom",
+        "member_sha256": "470509b67f9f556fb050154d2801cb76da2d56cbfcf9faf2511acbb2a8a4d446",
+        "extractor_method": "placsp_latest_award_to_spending_item",
+        "extractor_version": "spending_placsp_v1"
+      }
+    },
+    {
+      "spending_item_id": "vclc:spending-item:729fd5d85659041f056b3775af703e68400f8411ef757af8b409fbd1327fcac1",
+      "spending_kind": "procurement_award",
+      "phase_caveat": "adjudicacion_publicada_no_prueba_contrato_pago_ni_entrega",
+      "title": "Servicio de gestión y comunicación para el desarrollo del Club de producto “Alboraya, Artesanos de la Horchata” en su segunda fase del Plan de Sostenibilidad Turística en destino Alboraya",
+      "description": "Mejor oferta valorada",
+      "stable_object_id": "https://contrataciondelestado.es/sindicacion/licitacionesPerfilContratante/15907675",
+      "semantic_ordinal": 0,
+      "external_contract_id": "2717/2024",
+      "lot_id": null,
+      "classification": {
+        "scheme": "CPV",
+        "code": "79411000",
+        "label": null
+      },
+      "procedure": {
+        "notice_type": "DOC_FORM",
+        "procedure_code": "9",
+        "contract_status_code": "RES",
+        "result_code": "9",
+        "received_tender_quantity": 3
+      },
+      "money": {
+        "amount_decimal": "15490",
+        "payable_amount_decimal": "18742.9",
+        "currency": "EUR",
+        "amount_semantics": "award_amount",
+        "tax_semantics": "excluding_tax",
+        "arithmetic_authority": "decimal_string"
+      },
+      "dates": {
+        "published_on": "2024-10-22",
+        "decision_on": "2024-12-17",
+        "paid_on": null,
+        "delivered_on": null,
+        "date_precision": "day"
+      },
+      "territory_code": "ES523",
+      "actors": [
+        {
+          "actor_role": "contracting_authority",
+          "actor_kind": "public_body",
+          "source_label": "Junta de Gobierno del Ayuntamiento de Alboraya",
+          "source_identifier": "P4601300I",
+          "source_identifier_scheme": "NIF",
+          "identity_state": "source_scoped"
+        },
+        {
+          "actor_role": "supplier",
+          "actor_kind": "organization",
+          "source_category": "legal_entity",
+          "source_label": "AMUNDSEN ESTRATEGIA Y COMUNICACIÓN, S.L.",
+          "source_identifier": "B98787641",
+          "source_identifier_scheme": "NIF",
+          "identity_state": "source_scoped"
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_role": "primary_record",
+          "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=GrQO%2B7lIVFmKeVWTb9Scog%3D%3D",
+          "document_url": null,
+          "document_label": "PLACSP source record",
+          "document_kind": "ATOM/CODICE entry",
+          "content_sha256": "2406afcd204ace3c8b5a6debb4c30d128f8240e8b64dbbf6d3d1bfa3f0993dca",
+          "evidence_state": "captured_bytes"
+        },
+        {
+          "evidence_role": "context",
+          "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=GrQO%2B7lIVFmKeVWTb9Scog%3D%3D",
+          "document_url": "https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=KNsjL4OYSOC95AnVboYw/c88GDTCmPAd9pD23HF5WgiZ15dJoQ6VGe2/4rMzBzCy1mcLUenaGU1jhBuaByG/t2pgbgzqY5vS7CdVCJ7xtEb6CYyL7SIrUOBFfNf52ZqA&cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D",
+          "document_label": "PCAP.pdf",
+          "document_kind": "LegalDocumentReference",
+          "content_sha256": null,
+          "official_document_hash": "2jmj7l5rSw0yVb/vlWAYkK/YBwk=",
+          "evidence_state": "official_url_only"
+        }
+      ],
+      "provenance": {
+        "source_id": "placsp_sindicacion",
+        "source_record_id": "63e24cdf0e9518bd408791b9d20b0ba84b74ef409ceb74ac7ade9ac3807c7c58",
+        "source_record_sha256": "2406afcd204ace3c8b5a6debb4c30d128f8240e8b64dbbf6d3d1bfa3f0993dca",
+        "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=GrQO%2B7lIVFmKeVWTb9Scog%3D%3D",
+        "source_snapshot_date": "2025-03-31",
+        "observed_at": "2026-08-11T15:40:23+00:00",
+        "archive_period": "202501",
+        "archive_source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202501.zip",
+        "archive_sha256": "bda70aa0a7437d031e5d3f6114e5a637920ea1a460e1aba67d200209ae5eab7f",
+        "archive_bytes": 146382691,
+        "archive_transport_security": "verified_custom_ca",
+        "member_name": "licitacionesPerfilesContratanteCompleto3.atom",
+        "member_sha256": "470509b67f9f556fb050154d2801cb76da2d56cbfcf9faf2511acbb2a8a4d446",
+        "extractor_method": "placsp_latest_award_to_spending_item",
+        "extractor_version": "spending_placsp_v1"
+      }
+    },
+    {
+      "spending_item_id": "vclc:spending-item:d9ce601c48cde023f1fc9c0bbc6168be6b52a88f42b8836cfa62622f5e6a55c4",
+      "spending_kind": "procurement_award",
+      "phase_caveat": "adjudicacion_publicada_no_prueba_contrato_pago_ni_entrega",
+      "title": "Servicio de limpieza de los edificios del Centro de Desarrollo de Tecnologías de Cubillos del Sil",
+      "description": "Oferta mejor valorada.",
+      "stable_object_id": "https://contrataciondelestado.es/sindicacion/licitacionesPerfilContratante/16395350",
+      "semantic_ordinal": 0,
+      "external_contract_id": "PC-2024-054",
+      "lot_id": null,
+      "classification": {
+        "scheme": "CPV",
+        "code": "90911200",
+        "label": null
+      },
+      "procedure": {
+        "notice_type": "DOC_FORM",
+        "procedure_code": "9",
+        "contract_status_code": "RES",
+        "result_code": "9",
+        "received_tender_quantity": 3
+      },
+      "money": {
+        "amount_decimal": "27725.25",
+        "payable_amount_decimal": "33547.55",
+        "currency": "EUR",
+        "amount_semantics": "award_amount",
+        "tax_semantics": "excluding_tax",
+        "arithmetic_authority": "decimal_string"
+      },
+      "dates": {
+        "published_on": "2024-12-26",
+        "decision_on": "2025-01-31",
+        "paid_on": null,
+        "delivered_on": null,
+        "date_precision": "day"
+      },
+      "territory_code": "ES413",
+      "actors": [
+        {
+          "actor_role": "contracting_authority",
+          "actor_kind": "public_body",
+          "source_label": "Dirección General de la Fundación Ciudad de la Energía",
+          "source_identifier": "G84737238",
+          "source_identifier_scheme": "NIF",
+          "identity_state": "source_scoped"
+        },
+        {
+          "actor_role": "supplier",
+          "actor_kind": "organization",
+          "source_category": "legal_entity",
+          "source_label": "CESMALIMP S.L.",
+          "source_identifier": "B56771900",
+          "source_identifier_scheme": "NIF",
+          "identity_state": "source_scoped"
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_role": "primary_record",
+          "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=BEzX0vhPU%2Fx4zIRvjBVCSw%3D%3D",
+          "document_url": null,
+          "document_label": "PLACSP source record",
+          "document_kind": "ATOM/CODICE entry",
+          "content_sha256": "f9dad1d78e959570bf77e7c772af505719a256e1a2547298209ad56ffa294061",
+          "evidence_state": "captured_bytes"
+        },
+        {
+          "evidence_role": "context",
+          "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=BEzX0vhPU%2Fx4zIRvjBVCSw%3D%3D",
+          "document_url": "https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=1TImZR8SO2tGAl6QAcTccvZs9r1h5g2%2B%2BhdyLHo5Ii31ZMDQnThSV8C7s6ukRHWh5%2Bxz2fcCuaL8AaNPYLw/TnN08SFlcCA6OkF9ZfHabu%2B1aXEvq3KHa/AEHgtDrQw0&cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D",
+          "document_label": "05_1_PCAP.pdf",
+          "document_kind": "LegalDocumentReference",
+          "content_sha256": null,
+          "official_document_hash": "jyT9xeat5RyMmGN2TUGED+vSCRc=",
+          "evidence_state": "official_url_only"
+        }
+      ],
+      "provenance": {
+        "source_id": "placsp_sindicacion",
+        "source_record_id": "dafd80981f3929d8187bbb4914dde8160d3350d86612150884dd31e50817e503",
+        "source_record_sha256": "f9dad1d78e959570bf77e7c772af505719a256e1a2547298209ad56ffa294061",
+        "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=BEzX0vhPU%2Fx4zIRvjBVCSw%3D%3D",
+        "source_snapshot_date": "2025-03-31",
+        "observed_at": "2026-08-11T15:40:23+00:00",
+        "archive_period": "202501",
+        "archive_source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202501.zip",
+        "archive_sha256": "bda70aa0a7437d031e5d3f6114e5a637920ea1a460e1aba67d200209ae5eab7f",
+        "archive_bytes": 146382691,
+        "archive_transport_security": "verified_custom_ca",
+        "member_name": "licitacionesPerfilesContratanteCompleto3.atom",
+        "member_sha256": "470509b67f9f556fb050154d2801cb76da2d56cbfcf9faf2511acbb2a8a4d446",
+        "extractor_method": "placsp_latest_award_to_spending_item",
+        "extractor_version": "spending_placsp_v1"
+      }
+    },
+    {
+      "spending_item_id": "vclc:spending-item:38a592cca62ae2c7a4f08c144010a38d024620ed061c4657c0d6004df824cd0b",
+      "spending_kind": "procurement_award",
+      "phase_caveat": "adjudicacion_publicada_no_prueba_contrato_pago_ni_entrega",
+      "title": "Rehabilitación para Mejora Energética del Edificio de la Policía Local en el Municipio de Novelda.",
+      "description": "Por acuerdo de la Junta de Gobierno Local de fecha 19 de mayo de 2023.",
+      "stable_object_id": "https://contrataciondelestado.es/sindicacion/licitacionesPerfilContratante/12433828",
+      "semantic_ordinal": 0,
+      "external_contract_id": "2023/1670L",
+      "lot_id": null,
+      "classification": {
+        "scheme": "CPV",
+        "code": "45000000",
+        "label": null
+      },
+      "procedure": {
+        "notice_type": "DOC_FORM",
+        "procedure_code": "9",
+        "contract_status_code": "RES",
+        "result_code": "9",
+        "received_tender_quantity": 11
+      },
+      "money": {
+        "amount_decimal": "384503",
+        "payable_amount_decimal": "465248.63",
+        "currency": "EUR",
+        "amount_semantics": "award_amount",
+        "tax_semantics": "excluding_tax",
+        "arithmetic_authority": "decimal_string"
+      },
+      "dates": {
+        "published_on": "2023-03-27",
+        "decision_on": "2023-05-19",
+        "paid_on": null,
+        "delivered_on": null,
+        "date_precision": "day"
+      },
+      "territory_code": "ES521",
+      "actors": [
+        {
+          "actor_role": "contracting_authority",
+          "actor_kind": "public_body",
+          "source_label": "Junta de Gobierno del Ayuntamiento de Novelda",
+          "source_identifier": "P0309300B",
+          "source_identifier_scheme": "NIF",
+          "identity_state": "source_scoped"
+        },
+        {
+          "actor_role": "supplier",
+          "actor_kind": "organization",
+          "source_category": "legal_entity",
+          "source_label": "TERA OBRAS Y SERVICIOS SL",
+          "source_identifier": "B44588218",
+          "source_identifier_scheme": "NIF",
+          "identity_state": "source_scoped"
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_role": "primary_record",
+          "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=PqvXMULvuAF7h85%2Fpmmsfw%3D%3D",
+          "document_url": null,
+          "document_label": "PLACSP source record",
+          "document_kind": "ATOM/CODICE entry",
+          "content_sha256": "937bbf2c5fe41f8fe14a77600cf4e607841950c5adbb6927a034e767cbc026f7",
+          "evidence_state": "captured_bytes"
+        },
+        {
+          "evidence_role": "context",
+          "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=PqvXMULvuAF7h85%2Fpmmsfw%3D%3D",
+          "document_url": "https://contrataciondelestado.es/wps/wcm/connect/PLACE_es/Site/area/docAccCmpnt?srv=cmpnt&cmpntname=GetDocumentsById&source=library&DocumentIdParam=cd53a82d-40c5-4c57-b69f-c7176c9885bb",
+          "document_label": "Pliegos Administrativos.pdf",
+          "document_kind": "LegalDocumentReference",
+          "content_sha256": null,
+          "official_document_hash": "WQAz0nc30gCVYj1zO8tPSyxur64=",
+          "evidence_state": "official_url_only"
+        }
+      ],
+      "provenance": {
+        "source_id": "placsp_sindicacion",
+        "source_record_id": "0e986182f5e105bab56277a0dc5edc904e7be7e51c4156082104d01ebae2c37e",
+        "source_record_sha256": "937bbf2c5fe41f8fe14a77600cf4e607841950c5adbb6927a034e767cbc026f7",
+        "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=PqvXMULvuAF7h85%2Fpmmsfw%3D%3D",
+        "source_snapshot_date": "2025-03-31",
+        "observed_at": "2026-08-11T15:40:23+00:00",
+        "archive_period": "202501",
+        "archive_source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202501.zip",
+        "archive_sha256": "bda70aa0a7437d031e5d3f6114e5a637920ea1a460e1aba67d200209ae5eab7f",
+        "archive_bytes": 146382691,
+        "archive_transport_security": "verified_custom_ca",
+        "member_name": "licitacionesPerfilesContratanteCompleto3.atom",
+        "member_sha256": "470509b67f9f556fb050154d2801cb76da2d56cbfcf9faf2511acbb2a8a4d446",
+        "extractor_method": "placsp_latest_award_to_spending_item",
+        "extractor_version": "spending_placsp_v1"
+      }
+    },
+    {
+      "spending_item_id": "vclc:spending-item:3208e1df25cfdc8e1ae09be38a5d4b7dd4c13b137feecfa2be704aaadd8f94e3",
+      "spending_kind": "procurement_award",
+      "phase_caveat": "adjudicacion_publicada_no_prueba_contrato_pago_ni_entrega",
+      "title": "Mantenimiento Custormer First para el sistema de Scada Citec 2018 R2",
+      "description": "Oferta económicamente más ventajosa basada en los costes, EL PRECIO",
+      "stable_object_id": "https://contrataciondelestado.es/sindicacion/licitacionesPerfilContratante/16586406",
+      "semantic_ordinal": 0,
+      "external_contract_id": "2024000761 169 C2",
+      "lot_id": "1",
+      "classification": {
+        "scheme": "CPV",
+        "code": "30200000",
+        "label": null
+      },
+      "procedure": {
+        "notice_type": "DOC_FORM",
+        "procedure_code": "2",
+        "contract_status_code": "RES",
+        "result_code": "9",
+        "received_tender_quantity": 1
+      },
+      "money": {
+        "amount_decimal": "7194.4",
+        "payable_amount_decimal": "8705.22",
+        "currency": "EUR",
+        "amount_semantics": "award_amount",
+        "tax_semantics": "excluding_tax",
+        "arithmetic_authority": "decimal_string"
+      },
+      "dates": {
+        "published_on": "2025-01-31",
+        "decision_on": "2025-01-31",
+        "paid_on": null,
+        "delivered_on": null,
+        "date_precision": "day"
+      },
+      "territory_code": "ES620",
+      "actors": [
+        {
+          "actor_role": "contracting_authority",
+          "actor_kind": "public_body",
+          "source_label": "Gerencia de la Empresa Municipal de Aguas y Saneamiento de Murcia S.A.",
+          "source_identifier": "A30054209",
+          "source_identifier_scheme": "NIF",
+          "identity_state": "source_scoped"
+        },
+        {
+          "actor_role": "supplier",
+          "actor_kind": "organization",
+          "source_category": "legal_entity",
+          "source_label": "AQUATEC SOLUCIONES MEDIOAMBIENTALES, S.A.U.",
+          "source_identifier": "A85788073",
+          "source_identifier_scheme": "NIF",
+          "identity_state": "source_scoped"
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_role": "primary_record",
+          "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=nbrhO%2BLJHQnpxJFXpLZ%2B2A%3D%3D",
+          "document_url": null,
+          "document_label": "PLACSP source record",
+          "document_kind": "ATOM/CODICE entry",
+          "content_sha256": "8df4469bb5eb54dc32d84e1318dbf7552313afab46dd85e80cbe1552c9ca63fe",
+          "evidence_state": "captured_bytes"
+        },
+        {
+          "evidence_role": "context",
+          "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=nbrhO%2BLJHQnpxJFXpLZ%2B2A%3D%3D",
+          "document_url": "https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=DEWi5ICcUIsyxA4CzWNf30upqdvC1D%2Bn3vzmtlxhpZIksDvGmh7jKiXMEfmTpECu/14RF5drpyNUPYpn8tZS8pD7B2Aqm9jTbwFwmWtEpsm1aXEvq3KHa/AEHgtDrQw0&cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D",
+          "document_label": "Solicitud Adquisicion de ContratoCF SCADA Citec EDAR ME_Firmado.pdf",
+          "document_kind": "LegalDocumentReference",
+          "content_sha256": null,
+          "official_document_hash": "UHXeogYQwNLBzhYC5gP8UIdu/3E=",
+          "evidence_state": "official_url_only"
+        }
+      ],
+      "provenance": {
+        "source_id": "placsp_sindicacion",
+        "source_record_id": "38a9786ee14906574db05bec0906afdac35d5570dddddeaf30484cdb7079c24e",
+        "source_record_sha256": "8df4469bb5eb54dc32d84e1318dbf7552313afab46dd85e80cbe1552c9ca63fe",
+        "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=nbrhO%2BLJHQnpxJFXpLZ%2B2A%3D%3D",
+        "source_snapshot_date": "2025-03-31",
+        "observed_at": "2026-08-11T15:40:23+00:00",
+        "archive_period": "202501",
+        "archive_source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202501.zip",
+        "archive_sha256": "bda70aa0a7437d031e5d3f6114e5a637920ea1a460e1aba67d200209ae5eab7f",
+        "archive_bytes": 146382691,
+        "archive_transport_security": "verified_custom_ca",
+        "member_name": "licitacionesPerfilesContratanteCompleto3.atom",
+        "member_sha256": "470509b67f9f556fb050154d2801cb76da2d56cbfcf9faf2511acbb2a8a4d446",
+        "extractor_method": "placsp_latest_award_to_spending_item",
+        "extractor_version": "spending_placsp_v1"
+      }
+    },
+    {
+      "spending_item_id": "vclc:spending-item:aa20092eaf136874c4921b7f15a031894f635abb075fe8fe6bcd1f99ac7cabd8",
+      "spending_kind": "procurement_award",
+      "phase_caveat": "adjudicacion_publicada_no_prueba_contrato_pago_ni_entrega",
+      "title": "Contrato de Suministro de Materiales de oficina, Papelería y Consumibles de Impresión para el Ayuntamiento de Lora del Río.",
+      "description": "oferta mas ventajosa",
+      "stable_object_id": "https://contrataciondelestado.es/sindicacion/licitacionesPerfilContratante/11961370",
+      "semantic_ordinal": 0,
+      "external_contract_id": "0393/2023",
+      "lot_id": "1",
+      "classification": {
+        "scheme": "CPV",
+        "code": "30192000",
+        "label": null
+      },
+      "procedure": {
+        "notice_type": "DOC_MOD",
+        "procedure_code": "9",
+        "contract_status_code": "RES",
+        "result_code": "8",
+        "received_tender_quantity": 5
+      },
+      "money": {
+        "amount_decimal": "4325.07",
+        "payable_amount_decimal": "5233.33",
+        "currency": "EUR",
+        "amount_semantics": "award_amount",
+        "tax_semantics": "excluding_tax",
+        "arithmetic_authority": "decimal_string"
+      },
+      "dates": {
+        "published_on": "2023-01-18",
+        "decision_on": "2023-02-21",
+        "paid_on": null,
+        "delivered_on": null,
+        "date_precision": "day"
+      },
+      "territory_code": "ES618",
+      "actors": [
+        {
+          "actor_role": "contracting_authority",
+          "actor_kind": "public_body",
+          "source_label": "Alcaldía del Ayuntamiento de Lora del Río",
+          "source_identifier": "P4105500E",
+          "source_identifier_scheme": "NIF",
+          "identity_state": "source_scoped"
+        },
+        {
+          "actor_role": "supplier",
+          "actor_kind": "organization",
+          "source_category": "legal_entity",
+          "source_label": "LUCAS ROJAS, S.L.",
+          "source_identifier": "B14930903",
+          "source_identifier_scheme": "NIF",
+          "identity_state": "source_scoped"
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_role": "primary_record",
+          "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=j52bJycZflerz3GQd5r6SQ%3D%3D",
+          "document_url": null,
+          "document_label": "PLACSP source record",
+          "document_kind": "ATOM/CODICE entry",
+          "content_sha256": "751bbd0e7078c238488252b7694a25232663aa7634e51eaae95dbe47174db590",
+          "evidence_state": "captured_bytes"
+        },
+        {
+          "evidence_role": "context",
+          "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=j52bJycZflerz3GQd5r6SQ%3D%3D",
+          "document_url": "https://contrataciondelestado.es/wps/wcm/connect/PLACE_es/Site/area/docAccCmpnt?srv=cmpnt&cmpntname=GetDocumentsById&source=library&DocumentIdParam=ba4de8a7-68db-4f4b-b49c-d3de206e4ca0",
+          "document_label": "PCAP PAPELERIA.pdf",
+          "document_kind": "LegalDocumentReference",
+          "content_sha256": null,
+          "official_document_hash": "uVAmJW5lCoZvRgxbZIx5z8JAsqU=",
+          "evidence_state": "official_url_only"
+        }
+      ],
+      "provenance": {
+        "source_id": "placsp_sindicacion",
+        "source_record_id": "e3d47fd9b6541800d41ad6c52271b4eeb6efdbb47e77beeaf5532642ac82e261",
+        "source_record_sha256": "751bbd0e7078c238488252b7694a25232663aa7634e51eaae95dbe47174db590",
+        "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=j52bJycZflerz3GQd5r6SQ%3D%3D",
+        "source_snapshot_date": "2025-03-31",
+        "observed_at": "2026-08-11T15:40:23+00:00",
+        "archive_period": "202501",
+        "archive_source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202501.zip",
+        "archive_sha256": "bda70aa0a7437d031e5d3f6114e5a637920ea1a460e1aba67d200209ae5eab7f",
+        "archive_bytes": 146382691,
+        "archive_transport_security": "verified_custom_ca",
+        "member_name": "licitacionesPerfilesContratanteCompleto3.atom",
+        "member_sha256": "470509b67f9f556fb050154d2801cb76da2d56cbfcf9faf2511acbb2a8a4d446",
+        "extractor_method": "placsp_latest_award_to_spending_item",
+        "extractor_version": "spending_placsp_v1"
+      }
+    },
+    {
+      "spending_item_id": "vclc:spending-item:44212c736074193d933568381bbc81f8b4f48cddcc4c49f9b663f44bb4717a9c",
+      "spending_kind": "procurement_award",
+      "phase_caveat": "adjudicacion_publicada_no_prueba_contrato_pago_ni_entrega",
+      "title": "Prestación de los servicios de limpieza diario de las dependencias generales en el Palacio de la Opera y en la calle Riazor, así como en la Escuela Municipal de Música.",
+      "description": ".",
+      "stable_object_id": "https://contrataciondelestado.es/sindicacion/licitacionesPerfilContratante/8363609",
+      "semantic_ordinal": 0,
+      "external_contract_id": "755/2021",
+      "lot_id": null,
+      "classification": {
+        "scheme": "CPV",
+        "code": "90919000",
+        "label": null
+      },
+      "procedure": {
+        "notice_type": "DOC_FORM",
+        "procedure_code": "1",
+        "contract_status_code": "RES",
+        "result_code": "8",
+        "received_tender_quantity": 2
+      },
+      "money": {
+        "amount_decimal": "42400",
+        "payable_amount_decimal": "51304",
+        "currency": "EUR",
+        "amount_semantics": "award_amount",
+        "tax_semantics": "excluding_tax",
+        "arithmetic_authority": "decimal_string"
+      },
+      "dates": {
+        "published_on": "2021-09-27",
+        "decision_on": "2021-12-29",
+        "paid_on": null,
+        "delivered_on": null,
+        "date_precision": "day"
+      },
+      "territory_code": "ES111",
+      "actors": [
+        {
+          "actor_role": "contracting_authority",
+          "actor_kind": "public_body",
+          "source_label": "Gerencia del Consorcio para la Promoción de la Música",
+          "source_identifier": "P6503001G",
+          "source_identifier_scheme": "NIF",
+          "identity_state": "source_scoped"
+        },
+        {
+          "actor_role": "supplier",
+          "actor_kind": "organization",
+          "source_category": "legal_entity",
+          "source_label": "LIMPIEZAS GERMANIA S.L.",
+          "source_identifier": "B15660541",
+          "source_identifier_scheme": "NIF",
+          "identity_state": "source_scoped"
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_role": "primary_record",
+          "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=3DQi5Vl%2BqQmrz3GQd5r6SQ%3D%3D",
+          "document_url": null,
+          "document_label": "PLACSP source record",
+          "document_kind": "ATOM/CODICE entry",
+          "content_sha256": "260c8aa73527c8335dcb97ee18827a8c2c61b2c80558221aba5199bd7c49876e",
+          "evidence_state": "captured_bytes"
+        },
+        {
+          "evidence_role": "context",
+          "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=3DQi5Vl%2BqQmrz3GQd5r6SQ%3D%3D",
+          "document_url": "https://contrataciondelestado.es/wps/wcm/connect/PLACE_es/Site/area/docAccCmpnt?srv=cmpnt&cmpntname=GetDocumentsById&source=library&DocumentIdParam=2b6df767-44e0-4e7d-80c0-2d434e91079e",
+          "document_label": "PCAP servicio de limpieza.pdf",
+          "document_kind": "LegalDocumentReference",
+          "content_sha256": null,
+          "official_document_hash": "PKA5oCXDjmXoHTajN4746i8EUaA=",
+          "evidence_state": "official_url_only"
+        }
+      ],
+      "provenance": {
+        "source_id": "placsp_sindicacion",
+        "source_record_id": "f07632d463178bc680e678444405ba9c0a65c2dbe690b55d7dc819c9a0212552",
+        "source_record_sha256": "260c8aa73527c8335dcb97ee18827a8c2c61b2c80558221aba5199bd7c49876e",
+        "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=3DQi5Vl%2BqQmrz3GQd5r6SQ%3D%3D",
+        "source_snapshot_date": "2025-03-31",
+        "observed_at": "2026-08-11T15:40:23+00:00",
+        "archive_period": "202501",
+        "archive_source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202501.zip",
+        "archive_sha256": "bda70aa0a7437d031e5d3f6114e5a637920ea1a460e1aba67d200209ae5eab7f",
+        "archive_bytes": 146382691,
+        "archive_transport_security": "verified_custom_ca",
+        "member_name": "licitacionesPerfilesContratanteCompleto3.atom",
+        "member_sha256": "470509b67f9f556fb050154d2801cb76da2d56cbfcf9faf2511acbb2a8a4d446",
+        "extractor_method": "placsp_latest_award_to_spending_item",
+        "extractor_version": "spending_placsp_v1"
+      }
+    },
+    {
+      "spending_item_id": "vclc:spending-item:c07583181974b866453589f45b6107425e5d0d2d46b5a68e48403327eb232126",
+      "spending_kind": "procurement_award",
+      "phase_caveat": "adjudicacion_publicada_no_prueba_contrato_pago_ni_entrega",
+      "title": "Obras de ampliación y mejora de la Residencia de Mayores \"Los Jardines\" de Manzanares.",
+      "description": "Tratarse de la única oferta presentada, y por tanto con menor precio, y que cumple con todos los requisitos exigidos.",
+      "stable_object_id": "https://contrataciondelestado.es/sindicacion/licitacionesPerfilContratante/13102485",
+      "semantic_ordinal": 0,
+      "external_contract_id": "12/2023",
+      "lot_id": null,
+      "classification": {
+        "scheme": "CPV",
+        "code": "45215212",
+        "label": null
+      },
+      "procedure": {
+        "notice_type": "DOC_FORM",
+        "procedure_code": "1",
+        "contract_status_code": "RES",
+        "result_code": "9",
+        "received_tender_quantity": 1
+      },
+      "money": {
+        "amount_decimal": "747704",
+        "payable_amount_decimal": "904721.84",
+        "currency": "EUR",
+        "amount_semantics": "award_amount",
+        "tax_semantics": "excluding_tax",
+        "arithmetic_authority": "decimal_string"
+      },
+      "dates": {
+        "published_on": "2023-07-18",
+        "decision_on": "2023-09-11",
+        "paid_on": null,
+        "delivered_on": null,
+        "date_precision": "day"
+      },
+      "territory_code": "ES422",
+      "actors": [
+        {
+          "actor_role": "contracting_authority",
+          "actor_kind": "public_body",
+          "source_label": "Junta de Gobierno del Ayuntamiento de Manzanares",
+          "source_identifier": "P1305300D",
+          "source_identifier_scheme": "NIF",
+          "identity_state": "source_scoped"
+        },
+        {
+          "actor_role": "supplier",
+          "actor_kind": "organization",
+          "source_category": "legal_entity",
+          "source_label": "CONSTRUCCIONES CHAPARRO JARAMILLO",
+          "source_identifier": "B13216296",
+          "source_identifier_scheme": "NIF",
+          "identity_state": "source_scoped"
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_role": "primary_record",
+          "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=zPOR30bpmOl9Zh%2FyRJgM8w%3D%3D",
+          "document_url": null,
+          "document_label": "PLACSP source record",
+          "document_kind": "ATOM/CODICE entry",
+          "content_sha256": "084204dc88763f43a19a20ec661888abbe9806a64b0d7ea052e5ab7d3ece8c45",
+          "evidence_state": "captured_bytes"
+        },
+        {
+          "evidence_role": "context",
+          "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=zPOR30bpmOl9Zh%2FyRJgM8w%3D%3D",
+          "document_url": "https://contrataciondelestado.es/wps/wcm/connect/PLACE_es/Site/area/docAccCmpnt?srv=cmpnt&cmpntname=GetDocumentsById&source=library&DocumentIdParam=55dcfd8c-aa67-46b7-8193-8b8585896367",
+          "document_label": "PCAP Residencia.pdf",
+          "document_kind": "LegalDocumentReference",
+          "content_sha256": null,
+          "official_document_hash": "qJMfD2l7cowvxD5VjmySo5rdijg=",
+          "evidence_state": "official_url_only"
+        }
+      ],
+      "provenance": {
+        "source_id": "placsp_sindicacion",
+        "source_record_id": "902f8fd02aba574796a667dec691534725149cbd4c1a3a72d4feefc14ca240ae",
+        "source_record_sha256": "084204dc88763f43a19a20ec661888abbe9806a64b0d7ea052e5ab7d3ece8c45",
+        "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=zPOR30bpmOl9Zh%2FyRJgM8w%3D%3D",
+        "source_snapshot_date": "2025-03-31",
+        "observed_at": "2026-08-11T15:40:23+00:00",
+        "archive_period": "202501",
+        "archive_source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202501.zip",
+        "archive_sha256": "bda70aa0a7437d031e5d3f6114e5a637920ea1a460e1aba67d200209ae5eab7f",
+        "archive_bytes": 146382691,
+        "archive_transport_security": "verified_custom_ca",
+        "member_name": "licitacionesPerfilesContratanteCompleto3_20250102_175752.atom",
+        "member_sha256": "7633e33ff18c56e12d98488b3e58a97678aa3c6bd82a1afdcb2bef8cc747a141",
+        "extractor_method": "placsp_latest_award_to_spending_item",
+        "extractor_version": "spending_placsp_v1"
+      }
+    },
+    {
+      "spending_item_id": "vclc:spending-item:399489383b7d60026b399f8a8c1ec4c4b6d85b9ba033487deee543026f21b2b0",
+      "spending_kind": "procurement_award",
+      "phase_caveat": "adjudicacion_publicada_no_prueba_contrato_pago_ni_entrega",
+      "title": "Ejecución de las obras de reforma y modernización de la central de biomasa de la red de calor de Cuéllar (Segovia)",
+      "description": "Según informes y PCAP",
+      "stable_object_id": "https://contrataciondelestado.es/sindicacion/licitacionesPerfilContratante/15578664",
+      "semantic_ordinal": 0,
+      "external_contract_id": "COEF/2024/04",
+      "lot_id": null,
+      "classification": {
+        "scheme": "CPV",
+        "code": "45251250",
+        "label": null
+      },
+      "procedure": {
+        "notice_type": "DOC_FORM",
+        "procedure_code": "1",
+        "contract_status_code": "RES",
+        "result_code": "9",
+        "received_tender_quantity": 5
+      },
+      "money": {
+        "amount_decimal": "2568349.41",
+        "payable_amount_decimal": "3107702.79",
+        "currency": "EUR",
+        "amount_semantics": "award_amount",
+        "tax_semantics": "excluding_tax",
+        "arithmetic_authority": "decimal_string"
+      },
+      "dates": {
+        "published_on": "2024-08-30",
+        "decision_on": "2024-11-29",
+        "paid_on": null,
+        "delivered_on": null,
+        "date_precision": "day"
+      },
+      "territory_code": "ES41",
+      "actors": [
+        {
+          "actor_role": "contracting_authority",
+          "actor_kind": "public_body",
+          "source_label": "Sociedad Pública de Infraestructuras y Medio Ambiente de Castilla y León S.A.",
+          "source_identifier": "A47600754",
+          "source_identifier_scheme": "NIF",
+          "identity_state": "source_scoped"
+        },
+        {
+          "actor_role": "supplier",
+          "actor_kind": "unknown",
+          "source_category": "unclassified",
+          "source_label": "INMEVA INFRAESTRUCTURAS,S.L.- VIUDA DE SAINZ",
+          "source_identifier": "309048",
+          "source_identifier_scheme": "UTE",
+          "identity_state": "source_scoped"
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_role": "primary_record",
+          "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=B1wDghEBRrMXhk1FZxEyvw%3D%3D",
+          "document_url": null,
+          "document_label": "PLACSP source record",
+          "document_kind": "ATOM/CODICE entry",
+          "content_sha256": "c1b12596f6b8f59ac70c3ec74c71ecbbb9c2e845b50786972f1025a7b8aadee0",
+          "evidence_state": "captured_bytes"
+        },
+        {
+          "evidence_role": "context",
+          "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=B1wDghEBRrMXhk1FZxEyvw%3D%3D",
+          "document_url": "https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=36c2Gc%2BsRfxY0qg940IiJZd4QyjDWDjjejEaTvD3mrfr9GNhhir4RZy9dZc751oRq2jOhQIKd1/E41iH19KR7vr6hYi6qcuGGnGjOE/7kP145ClyWkoJ44mKM70IFcOu&cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D",
+          "document_label": "PCAP COEF 2024 04 fondos 21 27.pdf",
+          "document_kind": "LegalDocumentReference",
+          "content_sha256": null,
+          "official_document_hash": "2jmj7l5rSw0yVb/vlWAYkK/YBwk=",
+          "evidence_state": "official_url_only"
+        }
+      ],
+      "provenance": {
+        "source_id": "placsp_sindicacion",
+        "source_record_id": "cc927d1077402f255d9714e3d504cbe8a0be4ba6c8b2686e045064190c96cee8",
+        "source_record_sha256": "c1b12596f6b8f59ac70c3ec74c71ecbbb9c2e845b50786972f1025a7b8aadee0",
+        "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=B1wDghEBRrMXhk1FZxEyvw%3D%3D",
+        "source_snapshot_date": "2025-03-31",
+        "observed_at": "2026-08-11T15:40:23+00:00",
+        "archive_period": "202501",
+        "archive_source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202501.zip",
+        "archive_sha256": "bda70aa0a7437d031e5d3f6114e5a637920ea1a460e1aba67d200209ae5eab7f",
+        "archive_bytes": 146382691,
+        "archive_transport_security": "verified_custom_ca",
+        "member_name": "licitacionesPerfilesContratanteCompleto3_20250102_175752.atom",
+        "member_sha256": "7633e33ff18c56e12d98488b3e58a97678aa3c6bd82a1afdcb2bef8cc747a141",
+        "extractor_method": "placsp_latest_award_to_spending_item",
+        "extractor_version": "spending_placsp_v1"
+      }
+    },
+    {
+      "spending_item_id": "vclc:spending-item:d13ab94de00f4e6a43795c4ec5595b92232ebd08eb40778d3a893ca42e806a40",
+      "spending_kind": "procurement_award",
+      "phase_caveat": "adjudicacion_publicada_no_prueba_contrato_pago_ni_entrega",
+      "title": "Exposición MUBA Restaura y folletos nueva exposición permanente MUBA",
+      "description": "Condiciones económicas y/o características técnicas que, a tal efecto, constan en informes técnicos que obran en el expediente",
+      "stable_object_id": "https://contrataciondelestado.es/sindicacion/licitacionesPerfilContratante/15965578",
+      "semantic_ordinal": 0,
+      "external_contract_id": "558/24",
+      "lot_id": "1",
+      "classification": {
+        "scheme": "CPV",
+        "code": "22462000",
+        "label": null
+      },
+      "procedure": {
+        "notice_type": "DOC_FORM",
+        "procedure_code": "1",
+        "contract_status_code": "RES",
+        "result_code": "9",
+        "received_tender_quantity": 1
+      },
+      "money": {
+        "amount_decimal": "11370",
+        "payable_amount_decimal": "12244.7",
+        "currency": "EUR",
+        "amount_semantics": "award_amount",
+        "tax_semantics": "excluding_tax",
+        "arithmetic_authority": "decimal_string"
+      },
+      "dates": {
+        "published_on": "2024-10-31",
+        "decision_on": "2024-12-17",
+        "paid_on": null,
+        "delivered_on": null,
+        "date_precision": "day"
+      },
+      "territory_code": "ES431",
+      "actors": [
+        {
+          "actor_role": "contracting_authority",
+          "actor_kind": "public_body",
+          "source_label": "Presidencia de la Diputación de Badajoz",
+          "source_identifier": "P0600000D",
+          "source_identifier_scheme": "NIF",
+          "identity_state": "source_scoped"
+        },
+        {
+          "actor_role": "supplier",
+          "actor_kind": "person",
+          "source_category": "potential_natural_person",
+          "source_label": "JUANA LEÓN NOGALES",
+          "source_identifier": "09189727P",
+          "source_identifier_scheme": "NIF",
+          "identity_state": "source_scoped"
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_role": "primary_record",
+          "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=ClKAdb3d1YaopEMYCmrbmw%3D%3D",
+          "document_url": null,
+          "document_label": "PLACSP source record",
+          "document_kind": "ATOM/CODICE entry",
+          "content_sha256": "4eab36cb5cb2b0c3fbb42fbd629a4c98c264a418540830120fa3ec65c6899e1e",
+          "evidence_state": "captured_bytes"
+        },
+        {
+          "evidence_role": "context",
+          "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=ClKAdb3d1YaopEMYCmrbmw%3D%3D",
+          "document_url": "https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=xODpnbbGkFCpCXVzYpqbs26g5TbZtYGLYETqjATrKEfncWE1k9k4Uv2SNn9ULLt1ncYVhlAHqOUwknVtpxJd8jU6FJfaLgp6Ux1p9MB62ABJOVDbGCDM%2BMigrvuVS7Rv&cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D",
+          "document_label": "3258125-Pliegodeclausulasadmi-001002PCA_STD_CA.pdf",
+          "document_kind": "LegalDocumentReference",
+          "content_sha256": null,
+          "official_document_hash": "2jmj7l5rSw0yVb/vlWAYkK/YBwk=",
+          "evidence_state": "official_url_only"
+        }
+      ],
+      "provenance": {
+        "source_id": "placsp_sindicacion",
+        "source_record_id": "22a1e9387705ba1b0ee2d6f33643001a40eb85df4371963c8d017afaebe3788b",
+        "source_record_sha256": "4eab36cb5cb2b0c3fbb42fbd629a4c98c264a418540830120fa3ec65c6899e1e",
+        "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=ClKAdb3d1YaopEMYCmrbmw%3D%3D",
+        "source_snapshot_date": "2025-03-31",
+        "observed_at": "2026-08-11T15:40:23+00:00",
+        "archive_period": "202501",
+        "archive_source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202501.zip",
+        "archive_sha256": "bda70aa0a7437d031e5d3f6114e5a637920ea1a460e1aba67d200209ae5eab7f",
+        "archive_bytes": 146382691,
+        "archive_transport_security": "verified_custom_ca",
+        "member_name": "licitacionesPerfilesContratanteCompleto3_20250102_175752.atom",
+        "member_sha256": "7633e33ff18c56e12d98488b3e58a97678aa3c6bd82a1afdcb2bef8cc747a141",
+        "extractor_method": "placsp_latest_award_to_spending_item",
+        "extractor_version": "spending_placsp_v1"
+      }
+    },
+    {
+      "spending_item_id": "vclc:spending-item:ca1f9acd7caa932b808f80c5b244a3b73b9f9f70987ff2faaad37965552aa37b",
+      "spending_kind": "procurement_award",
+      "phase_caveat": "adjudicacion_publicada_no_prueba_contrato_pago_ni_entrega",
+      "title": "Contrato mixto de alquiler de maquinaria con maquinista y gestión de residuos y de suministro de materiales de construcción para ejecución de ““reforma y ampliación de edificación existente para la creación de espacio lúdico y participativo \", incluido en el programa de fomento del empleo agrario garantía de rentas 2024 (licitación por lotes)",
+      "description": "Mejor oferta presentada",
+      "stable_object_id": "https://contrataciondelestado.es/sindicacion/licitacionesPerfilContratante/15993685",
+      "semantic_ordinal": 0,
+      "external_contract_id": "15/2024",
+      "lot_id": "1",
+      "classification": {
+        "scheme": "CPV",
+        "code": "44100000",
+        "label": null
+      },
+      "procedure": {
+        "notice_type": "DOC_FORM",
+        "procedure_code": "1",
+        "contract_status_code": "RES",
+        "result_code": "9",
+        "received_tender_quantity": 2
+      },
+      "money": {
+        "amount_decimal": "3387",
+        "payable_amount_decimal": "4098.27",
+        "currency": "EUR",
+        "amount_semantics": "award_amount",
+        "tax_semantics": "excluding_tax",
+        "arithmetic_authority": "decimal_string"
+      },
+      "dates": {
+        "published_on": "2024-11-06",
+        "decision_on": "2024-12-05",
+        "paid_on": null,
+        "delivered_on": null,
+        "date_precision": "day"
+      },
+      "territory_code": "ES431",
+      "actors": [
+        {
+          "actor_role": "contracting_authority",
+          "actor_kind": "public_body",
+          "source_label": "Alcaldia del Ayuntamiento Llerena",
+          "source_identifier": "P0607400I",
+          "source_identifier_scheme": "NIF",
+          "identity_state": "source_scoped"
+        },
+        {
+          "actor_role": "supplier",
+          "actor_kind": "person",
+          "source_category": "potential_natural_person",
+          "source_label": "Martín Antonio Chacón Crisóstomo",
+          "source_identifier": "44786672Z",
+          "source_identifier_scheme": "NIF",
+          "identity_state": "source_scoped"
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_role": "primary_record",
+          "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=SpsutRT4P5ysNfRW6APEDw%3D%3D",
+          "document_url": null,
+          "document_label": "PLACSP source record",
+          "document_kind": "ATOM/CODICE entry",
+          "content_sha256": "1955e1282ebcc54b6c0d6549d0cefca3a086845a7dfd0c84eeb85e3d2d922838",
+          "evidence_state": "captured_bytes"
+        },
+        {
+          "evidence_role": "context",
+          "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=SpsutRT4P5ysNfRW6APEDw%3D%3D",
+          "document_url": "https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=4HdHJTRUqeM5IypftCSq2xJgLW49uZzt5eC2QNWWgrwVFKY/K1JIq8F%2BH5LQ8K79iOzBuDfAaPsl7inAiZHB9PppeytI2FDWd4Zvcff4TMzVTD3T98KC0nSgQFM0q%2B5s&cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D",
+          "document_label": "pca.pdf",
+          "document_kind": "LegalDocumentReference",
+          "content_sha256": null,
+          "official_document_hash": "2jmj7l5rSw0yVb/vlWAYkK/YBwk=",
+          "evidence_state": "official_url_only"
+        }
+      ],
+      "provenance": {
+        "source_id": "placsp_sindicacion",
+        "source_record_id": "41faef89db28a0da4f2dd39b98b32f6b893a3990600ac6cbde7da73094d841ca",
+        "source_record_sha256": "1955e1282ebcc54b6c0d6549d0cefca3a086845a7dfd0c84eeb85e3d2d922838",
+        "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=SpsutRT4P5ysNfRW6APEDw%3D%3D",
+        "source_snapshot_date": "2025-03-31",
+        "observed_at": "2026-08-11T15:40:23+00:00",
+        "archive_period": "202501",
+        "archive_source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202501.zip",
+        "archive_sha256": "bda70aa0a7437d031e5d3f6114e5a637920ea1a460e1aba67d200209ae5eab7f",
+        "archive_bytes": 146382691,
+        "archive_transport_security": "verified_custom_ca",
+        "member_name": "licitacionesPerfilesContratanteCompleto3_20250102_175752.atom",
+        "member_sha256": "7633e33ff18c56e12d98488b3e58a97678aa3c6bd82a1afdcb2bef8cc747a141",
+        "extractor_method": "placsp_latest_award_to_spending_item",
+        "extractor_version": "spending_placsp_v1"
+      }
+    },
+    {
+      "spending_item_id": "vclc:spending-item:33854e8a827538fcd750b8adf25f6ab96adc738fddf8cd2a74cb82a880380617",
+      "spending_kind": "procurement_award",
+      "phase_caveat": "adjudicacion_publicada_no_prueba_contrato_pago_ni_entrega",
+      "title": "Contrato derivado del “Acuerdo Marco para Alquiler de maquinaria de obra civil, agrícola y forestal, y camiones para obras de construcción y demolición, dotada de operario, para las actuaciones del ámbito territorial de la Gerencia Provincial de Tragsa en Cádiz, incluidas las obras con Fondos NEXT GENERATION EU”, a adjudicar por procedimiento Abierto.",
+      "description": "Se acuerda la adjudicación de la licitación a la empresa mejor valorada de las admitidas a licitación de acuerdo con los criterios establecidos en los Pliegos. Se adjunta Resolución firmada electrónicamente por el Órgano de Contratación. Este pedido genera 3 contratos de maquinaria.",
+      "stable_object_id": "https://contrataciondelestado.es/sindicacion/licitacionesPerfilContratante/16254687",
+      "semantic_ordinal": 0,
+      "external_contract_id": "TSA0077399-19",
+      "lot_id": null,
+      "classification": {
+        "scheme": "CPV",
+        "code": "45500000",
+        "label": null
+      },
+      "procedure": {
+        "notice_type": "DOC_FORM",
+        "procedure_code": "1",
+        "contract_status_code": "RES",
+        "result_code": "9",
+        "received_tender_quantity": 7
+      },
+      "money": {
+        "amount_decimal": "81000",
+        "payable_amount_decimal": "98010",
+        "currency": "EUR",
+        "amount_semantics": "award_amount",
+        "tax_semantics": "excluding_tax",
+        "arithmetic_authority": "decimal_string"
+      },
+      "dates": {
+        "published_on": "2024-12-11",
+        "decision_on": "2024-12-05",
+        "paid_on": null,
+        "delivered_on": null,
+        "date_precision": "day"
+      },
+      "territory_code": "ES612",
+      "actors": [
+        {
+          "actor_role": "contracting_authority",
+          "actor_kind": "public_body",
+          "source_label": "Empresa de Transformación Agraria S.A.,S.M.E., M.P., (TRAGSA)",
+          "source_identifier": "A28476208",
+          "source_identifier_scheme": "NIF",
+          "identity_state": "source_scoped"
+        },
+        {
+          "actor_role": "supplier",
+          "actor_kind": "person",
+          "source_category": "potential_natural_person",
+          "source_label": "VICTOR MANUEL RODRIGUEZ FERNANDEZ",
+          "source_identifier": "52926794E",
+          "source_identifier_scheme": "NIF",
+          "identity_state": "source_scoped"
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_role": "primary_record",
+          "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=RbsbaMKjh9p70UvEyYJSGw%3D%3D",
+          "document_url": null,
+          "document_label": "PLACSP source record",
+          "document_kind": "ATOM/CODICE entry",
+          "content_sha256": "03a98ec69daabde45ebba07b2d5f729d74e1a29e97a1dbc006e97d4ac59622d7",
+          "evidence_state": "captured_bytes"
+        },
+        {
+          "evidence_role": "context",
+          "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=RbsbaMKjh9p70UvEyYJSGw%3D%3D",
+          "document_url": "https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=21xeOce8SC0c35aifaGOxaLTrNwXx/KS%2BqeBdpv0o/CJ%2BaKLfabdgruov616JJcbVQfiySfuUyMaSGOiJ2qKPdxhdKF6dHJ3xwlWukWA6SQC1/zDIE0Kw/PWNnLS0Z0z&cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D",
+          "document_label": "TSA0077399 PCAP MAQUINARIA CON OPERARIO CADIZ PRTRv2 rfg.pdf",
+          "document_kind": "LegalDocumentReference",
+          "content_sha256": null,
+          "official_document_hash": "2jmj7l5rSw0yVb/vlWAYkK/YBwk=",
+          "evidence_state": "official_url_only"
+        }
+      ],
+      "provenance": {
+        "source_id": "placsp_sindicacion",
+        "source_record_id": "b6314bc7a7c373949f628de55b33e4557b4aa8b566cdb9027db7d6d507d1521c",
+        "source_record_sha256": "03a98ec69daabde45ebba07b2d5f729d74e1a29e97a1dbc006e97d4ac59622d7",
+        "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=RbsbaMKjh9p70UvEyYJSGw%3D%3D",
+        "source_snapshot_date": "2025-03-31",
+        "observed_at": "2026-08-11T15:40:23+00:00",
+        "archive_period": "202501",
+        "archive_source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202501.zip",
+        "archive_sha256": "bda70aa0a7437d031e5d3f6114e5a637920ea1a460e1aba67d200209ae5eab7f",
+        "archive_bytes": 146382691,
+        "archive_transport_security": "verified_custom_ca",
+        "member_name": "licitacionesPerfilesContratanteCompleto3_20250102_175752.atom",
+        "member_sha256": "7633e33ff18c56e12d98488b3e58a97678aa3c6bd82a1afdcb2bef8cc747a141",
+        "extractor_method": "placsp_latest_award_to_spending_item",
+        "extractor_version": "spending_placsp_v1"
+      }
+    },
+    {
+      "spending_item_id": "vclc:spending-item:5762f968b64ab8eab0f9ccf50e7ae6540789275068aaf59b9eb2841b9d6b1794",
+      "spending_kind": "procurement_award",
+      "phase_caveat": "adjudicacion_publicada_no_prueba_contrato_pago_ni_entrega",
+      "title": "Suministro en arrendamiento de vestuario para los figurantes de la Cabalgata de Reyes Magos de Fuenlabrada y demás personajes navideños",
+      "description": "Adjudicar al empresario SALVADOR CARRASCO CERRILLO, NIF: 1*****22-Z, la contratación del SUMINISTRO EN ARRENDAMIENTO DE VESTUARIO PARA LOS FIGURANTES DE LA CABALGATA DE REYES MAGOS DE FUENLABRADA Y DEMÁS PERSONAJES NAVIDEÑOS, de acuerdo con el art. 168.a) 1º de la LCSP, único empresario presentado para la realización del contrato, por los importes resultantes de la aplicación de una rebaja del 4,00% sobre la totalidad de los precios unitarios establecidos, hasta el gasto máximo aprobado de 7.045,23€ de los cuales 5.822,50€ corresponden a la base imponible y 1.222,73€ al 21% de IVA",
+      "stable_object_id": "https://contrataciondelestado.es/sindicacion/licitacionesPerfilContratante/16245805",
+      "semantic_ordinal": 0,
+      "external_contract_id": "2024/NEG/001400",
+      "lot_id": null,
+      "classification": {
+        "scheme": "CPV",
+        "code": "18400000",
+        "label": null
+      },
+      "procedure": {
+        "notice_type": "DOC_FORM",
+        "procedure_code": "3",
+        "contract_status_code": "RES",
+        "result_code": "9",
+        "received_tender_quantity": 1
+      },
+      "money": {
+        "amount_decimal": "5822.5",
+        "payable_amount_decimal": "7045.23",
+        "currency": "EUR",
+        "amount_semantics": "award_amount",
+        "tax_semantics": "excluding_tax",
+        "arithmetic_authority": "decimal_string"
+      },
+      "dates": {
+        "published_on": "2024-12-10",
+        "decision_on": "2024-12-05",
+        "paid_on": null,
+        "delivered_on": null,
+        "date_precision": "day"
+      },
+      "territory_code": "ES30",
+      "actors": [
+        {
+          "actor_role": "contracting_authority",
+          "actor_kind": "public_body",
+          "source_label": "Junta de Gobierno Local del Ayuntamiento de Fuenlabrada",
+          "source_identifier": "P2805800F",
+          "source_identifier_scheme": "NIF",
+          "identity_state": "source_scoped"
+        },
+        {
+          "actor_role": "supplier",
+          "actor_kind": "person",
+          "source_category": "potential_natural_person",
+          "source_label": "Salvador Carrasco Cerrillo",
+          "source_identifier": "11803522Z",
+          "source_identifier_scheme": "NIF",
+          "identity_state": "source_scoped"
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_role": "primary_record",
+          "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=NCbqaS84i6x%2FR5QFTlaM4A%3D%3D",
+          "document_url": null,
+          "document_label": "PLACSP source record",
+          "document_kind": "ATOM/CODICE entry",
+          "content_sha256": "902f17fda7951a83242155b4f8ca8ffa085a157acc3b70fa89d1abbd6580b99e",
+          "evidence_state": "captured_bytes"
+        },
+        {
+          "evidence_role": "context",
+          "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=NCbqaS84i6x%2FR5QFTlaM4A%3D%3D",
+          "document_url": "https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=QX6PE4DHkn28jHB1wWWCOpcfINKPMP/JikZHc7w7GNBML3C1qHrcV9eICkzwonsv22L7WyQ/O57pDFFL%2BRdzEQdbRpFHsbnbw9UNWVRqT/gZyAJWGsSt0OzTSTyw9JAs&cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D",
+          "document_label": "2024NEG001400 PCAP NEGOCIADO SIN PUBLIC VESTUARIO RRMM.pdf",
+          "document_kind": "LegalDocumentReference",
+          "content_sha256": null,
+          "official_document_hash": "2jmj7l5rSw0yVb/vlWAYkK/YBwk=",
+          "evidence_state": "official_url_only"
+        }
+      ],
+      "provenance": {
+        "source_id": "placsp_sindicacion",
+        "source_record_id": "72302ec6c4800362623294e8c08d5ded24b7dfa5ef171476947aaadd1d14f647",
+        "source_record_sha256": "902f17fda7951a83242155b4f8ca8ffa085a157acc3b70fa89d1abbd6580b99e",
+        "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=NCbqaS84i6x%2FR5QFTlaM4A%3D%3D",
+        "source_snapshot_date": "2025-03-31",
+        "observed_at": "2026-08-11T15:40:23+00:00",
+        "archive_period": "202501",
+        "archive_source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202501.zip",
+        "archive_sha256": "bda70aa0a7437d031e5d3f6114e5a637920ea1a460e1aba67d200209ae5eab7f",
+        "archive_bytes": 146382691,
+        "archive_transport_security": "verified_custom_ca",
+        "member_name": "licitacionesPerfilesContratanteCompleto3_20250102_175752.atom",
+        "member_sha256": "7633e33ff18c56e12d98488b3e58a97678aa3c6bd82a1afdcb2bef8cc747a141",
+        "extractor_method": "placsp_latest_award_to_spending_item",
+        "extractor_version": "spending_placsp_v1"
+      }
+    },
+    {
+      "spending_item_id": "vclc:spending-item:f61ebcd9e60f451424ef3f161b1a6fac4dce4f74d1853acec93b719bae2af02a",
+      "spending_kind": "procurement_award",
+      "phase_caveat": "adjudicacion_publicada_no_prueba_contrato_pago_ni_entrega",
+      "title": "Explotación y mantenimiento de la Cafetería-Bar del Centro de Mayores de Caudete (Albacete).",
+      "description": "Se establece un canon mínimo anual de 2400,48 €. La mencionada cantidad podrá ser mejorada al alza por los licitadores, como es el caso, el licitador ha mejorado el canon anual a 3.000,00 €",
+      "stable_object_id": "https://contrataciondelestado.es/sindicacion/licitacionesPerfilContratante/15965418",
+      "semantic_ordinal": 0,
+      "external_contract_id": "1362692D BAR CENTRO MAYORES",
+      "lot_id": null,
+      "classification": {
+        "scheme": "CPV",
+        "code": "55330000",
+        "label": null
+      },
+      "procedure": {
+        "notice_type": "DOC_FORM",
+        "procedure_code": "1",
+        "contract_status_code": "RES",
+        "result_code": "9",
+        "received_tender_quantity": 3
+      },
+      "money": {
+        "amount_decimal": "12000",
+        "payable_amount_decimal": "12000",
+        "currency": "EUR",
+        "amount_semantics": "award_amount",
+        "tax_semantics": "excluding_tax",
+        "arithmetic_authority": "decimal_string"
+      },
+      "dates": {
+        "published_on": "2024-10-31",
+        "decision_on": "2024-12-09",
+        "paid_on": null,
+        "delivered_on": null,
+        "date_precision": "day"
+      },
+      "territory_code": "ES421",
+      "actors": [
+        {
+          "actor_role": "contracting_authority",
+          "actor_kind": "public_body",
+          "source_label": "Alcaldía del Ayuntamiento de Caudete",
+          "source_identifier": "P0202500E",
+          "source_identifier_scheme": "NIF",
+          "identity_state": "source_scoped"
+        },
+        {
+          "actor_role": "supplier",
+          "actor_kind": "person",
+          "source_category": "potential_natural_person",
+          "source_label": "Marcelo Felipe Ruiz Martín",
+          "source_identifier": "55223246Q",
+          "source_identifier_scheme": "NIF",
+          "identity_state": "source_scoped"
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_role": "primary_record",
+          "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=utp4PqeuEJ8IYE3ZiZ%2BxmQ%3D%3D",
+          "document_url": null,
+          "document_label": "PLACSP source record",
+          "document_kind": "ATOM/CODICE entry",
+          "content_sha256": "d68487ab4eec00d7b977a66142bbe69c974e4b0fe0cc12249606b2e6cdbbcd77",
+          "evidence_state": "captured_bytes"
+        },
+        {
+          "evidence_role": "context",
+          "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=utp4PqeuEJ8IYE3ZiZ%2BxmQ%3D%3D",
+          "document_url": "https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=LfI/%2BXHOVP2sqmWY/9LuHRgcDLtVKNSX3sUuZnPBhuI0T4uemwNgZMBWLgDSrrJ97CQ2NATwjD9NKGnWXNqZe8nijwqMbmwtiQabBr2az7r3GVhXrFFqN7yFncy7YfRK&cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D",
+          "document_label": "PCAP BAR CENTRO DE MAYORES.pdf",
+          "document_kind": "LegalDocumentReference",
+          "content_sha256": null,
+          "official_document_hash": "2jmj7l5rSw0yVb/vlWAYkK/YBwk=",
+          "evidence_state": "official_url_only"
+        }
+      ],
+      "provenance": {
+        "source_id": "placsp_sindicacion",
+        "source_record_id": "58ab0024f58908ba7fb95ad93021a0219325f08197fe0683348871d5e88e24d8",
+        "source_record_sha256": "d68487ab4eec00d7b977a66142bbe69c974e4b0fe0cc12249606b2e6cdbbcd77",
+        "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=utp4PqeuEJ8IYE3ZiZ%2BxmQ%3D%3D",
+        "source_snapshot_date": "2025-03-31",
+        "observed_at": "2026-08-11T15:40:23+00:00",
+        "archive_period": "202501",
+        "archive_source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202501.zip",
+        "archive_sha256": "bda70aa0a7437d031e5d3f6114e5a637920ea1a460e1aba67d200209ae5eab7f",
+        "archive_bytes": 146382691,
+        "archive_transport_security": "verified_custom_ca",
+        "member_name": "licitacionesPerfilesContratanteCompleto3_20250102_175752.atom",
+        "member_sha256": "7633e33ff18c56e12d98488b3e58a97678aa3c6bd82a1afdcb2bef8cc747a141",
+        "extractor_method": "placsp_latest_award_to_spending_item",
+        "extractor_version": "spending_placsp_v1"
+      }
+    },
+    {
+      "spending_item_id": "vclc:spending-item:a4fc897bd580c864fe1d8ae51e166442a97b6bf41ae33fbbc1c1dab07d72c8aa",
+      "spending_kind": "procurement_award",
+      "phase_caveat": "adjudicacion_publicada_no_prueba_contrato_pago_ni_entrega",
+      "title": "Dirección Técnica y Coordinación de Seguridad y Salud para ejecución de muro anclado al terreno en aleta de estribo de Puente sobre",
+      "description": "Emergencia artículo 120 de la Ley 9/2017, de 8 de noviembre, de Contratos del Sector Público.",
+      "stable_object_id": "https://contrataciondelestado.es/sindicacion/licitacionesPerfilContratante/16328374",
+      "semantic_ordinal": 1,
+      "external_contract_id": "5329/2024",
+      "lot_id": "2",
+      "classification": {
+        "scheme": "CPV",
+        "code": "71356200",
+        "label": null
+      },
+      "procedure": {
+        "notice_type": "DOC_FORM",
+        "procedure_code": "3",
+        "contract_status_code": "RES",
+        "result_code": "9",
+        "received_tender_quantity": 1
+      },
+      "money": {
+        "amount_decimal": "2500",
+        "payable_amount_decimal": "3025",
+        "currency": "EUR",
+        "amount_semantics": "award_amount",
+        "tax_semantics": "excluding_tax",
+        "arithmetic_authority": "decimal_string"
+      },
+      "dates": {
+        "published_on": "2024-04-09",
+        "decision_on": "2024-04-09",
+        "paid_on": null,
+        "delivered_on": null,
+        "date_precision": "day"
+      },
+      "territory_code": "ES419",
+      "actors": [
+        {
+          "actor_role": "contracting_authority",
+          "actor_kind": "public_body",
+          "source_label": "Alcaldía del Ayuntamiento de Zamora",
+          "source_identifier": "P4930500F",
+          "source_identifier_scheme": "NIF",
+          "identity_state": "source_scoped"
+        },
+        {
+          "actor_role": "supplier",
+          "actor_kind": "unknown",
+          "source_category": "unclassified",
+          "source_label": "ANGEL BADÁS MIGUEL",
+          "source_identifier": "***9483**",
+          "source_identifier_scheme": "OTROS",
+          "identity_state": "source_scoped"
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_role": "primary_record",
+          "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=BMpSo%2Fl1g59SYrkJkLlFdw%3D%3D",
+          "document_url": null,
+          "document_label": "PLACSP source record",
+          "document_kind": "ATOM/CODICE entry",
+          "content_sha256": "3413fdadc451ba7860939f283b545265d050450743fad23e044a7bffa271fc38",
+          "evidence_state": "captured_bytes"
+        },
+        {
+          "evidence_role": "context",
+          "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=BMpSo%2Fl1g59SYrkJkLlFdw%3D%3D",
+          "document_url": "https://contrataciondelestado.es/wps/wcm/connect/PLACE_es/Site/area/docAccCmpnt?srv=cmpnt&cmpntname=GetDocumentsById&source=library&DocumentIdParam=2024-e638d1b2-5eb4-44e7-8686-1f5906845500",
+          "document_label": null,
+          "document_kind": "GeneralDocument",
+          "content_sha256": null,
+          "official_document_hash": null,
+          "evidence_state": "official_url_only"
+        }
+      ],
+      "provenance": {
+        "source_id": "placsp_sindicacion",
+        "source_record_id": "acda2251e8d88c6a84445e9e08bab7a3da4ac01251c2ea3300d478a1dfc0bf32",
+        "source_record_sha256": "3413fdadc451ba7860939f283b545265d050450743fad23e044a7bffa271fc38",
+        "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=BMpSo%2Fl1g59SYrkJkLlFdw%3D%3D",
+        "source_snapshot_date": "2025-03-31",
+        "observed_at": "2026-08-11T15:40:23+00:00",
+        "archive_period": "202501",
+        "archive_source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202501.zip",
+        "archive_sha256": "bda70aa0a7437d031e5d3f6114e5a637920ea1a460e1aba67d200209ae5eab7f",
+        "archive_bytes": 146382691,
+        "archive_transport_security": "verified_custom_ca",
+        "member_name": "licitacionesPerfilesContratanteCompleto3_20250102_175752.atom",
+        "member_sha256": "7633e33ff18c56e12d98488b3e58a97678aa3c6bd82a1afdcb2bef8cc747a141",
+        "extractor_method": "placsp_latest_award_to_spending_item",
+        "extractor_version": "spending_placsp_v1"
+      }
+    },
+    {
+      "spending_item_id": "vclc:spending-item:5466dd1d85f9f7808c424b35a1c2480ecde7e17b006cd9ee4d59c41a4058885e",
+      "spending_kind": "procurement_award",
+      "phase_caveat": "adjudicacion_publicada_no_prueba_contrato_pago_ni_entrega",
+      "title": "Servicio de actuación artística única de los espectáculos deteatro de calle “Les Abysses” y “Les Fous Volants” de la compañía Remue Ménage.",
+      "description": "Que, ASS. CIE REMUE MÉNAGE es el único empresario determinado que puede prestar el Servicio por ser la única entidad que tiene los derechos necesarios para la prestación de los servicios objeto de contrato,",
+      "stable_object_id": "https://contrataciondelestado.es/sindicacion/licitacionesPerfilContratante/16343759",
+      "semantic_ordinal": 0,
+      "external_contract_id": "PR24-0147.14",
+      "lot_id": null,
+      "classification": {
+        "scheme": "CPV",
+        "code": "92312000",
+        "label": null
+      },
+      "procedure": {
+        "notice_type": "DOC_FORM",
+        "procedure_code": "3",
+        "contract_status_code": "RES",
+        "result_code": "9",
+        "received_tender_quantity": 1
+      },
+      "money": {
+        "amount_decimal": "33251.3",
+        "payable_amount_decimal": "40234.07",
+        "currency": "EUR",
+        "amount_semantics": "award_amount",
+        "tax_semantics": "excluding_tax",
+        "arithmetic_authority": "decimal_string"
+      },
+      "dates": {
+        "published_on": "2024-12-20",
+        "decision_on": "2024-12-19",
+        "paid_on": null,
+        "delivered_on": null,
+        "date_precision": "day"
+      },
+      "territory_code": "ES300",
+      "actors": [
+        {
+          "actor_role": "contracting_authority",
+          "actor_kind": "public_body",
+          "source_label": "Madrid Destino Cultura Turismo y Negocio, S.A.",
+          "source_identifier": "A84073105",
+          "source_identifier_scheme": "NIF",
+          "identity_state": "source_scoped"
+        },
+        {
+          "actor_role": "supplier",
+          "actor_kind": "unknown",
+          "source_category": "unclassified",
+          "source_label": "Ass Cie Remue-Ménage",
+          "source_identifier": "FR10449282821",
+          "source_identifier_scheme": "OTROS",
+          "identity_state": "source_scoped"
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_role": "primary_record",
+          "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=QvPRffdPxJceC9GJQOEBkQ%3D%3D",
+          "document_url": null,
+          "document_label": "PLACSP source record",
+          "document_kind": "ATOM/CODICE entry",
+          "content_sha256": "f0789c0a2440244f68082a428e1877e34d19e21cb919464e694f593e1c9d9893",
+          "evidence_state": "captured_bytes"
+        }
+      ],
+      "provenance": {
+        "source_id": "placsp_sindicacion",
+        "source_record_id": "a5ac9d6670d41f82fd0d03b525e7ede2405da6277f1ce617f1fd2e9ca9d28bd3",
+        "source_record_sha256": "f0789c0a2440244f68082a428e1877e34d19e21cb919464e694f593e1c9d9893",
+        "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=QvPRffdPxJceC9GJQOEBkQ%3D%3D",
+        "source_snapshot_date": "2025-03-31",
+        "observed_at": "2026-08-11T15:40:24+00:00",
+        "archive_period": "202501",
+        "archive_source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202501.zip",
+        "archive_sha256": "bda70aa0a7437d031e5d3f6114e5a637920ea1a460e1aba67d200209ae5eab7f",
+        "archive_bytes": 146382691,
+        "archive_transport_security": "verified_custom_ca",
+        "member_name": "licitacionesPerfilesContratanteCompleto3_20250102_175752_1.atom",
+        "member_sha256": "97645394fe42fe665b01b496b3f3c3193db9f950eeb00598c47a0cf6f2ecb06c",
+        "extractor_method": "placsp_latest_award_to_spending_item",
+        "extractor_version": "spending_placsp_v1"
+      }
+    },
+    {
+      "spending_item_id": "vclc:spending-item:02a81e82d9a49c6aa9f291f956cd9f3b442c7730d3949efe2095ce13abc500e9",
+      "spending_kind": "procurement_award",
+      "phase_caveat": "adjudicacion_publicada_no_prueba_contrato_pago_ni_entrega",
+      "title": "Suministro de energía eléctrica y la prestación de los servicios energéticos y de mantenimiento con garantía total de las instalaciones de Alumbrado Público Exterior del Ayuntamiento de Burriana",
+      "description": "Haber obtenido la mayor puntuación",
+      "stable_object_id": "https://contrataciondelestado.es/sindicacion/licitacionesPerfilContratante/13514676",
+      "semantic_ordinal": 0,
+      "external_contract_id": "C1/23G13087/23",
+      "lot_id": null,
+      "classification": {
+        "scheme": "CPV",
+        "code": "50232100",
+        "label": null
+      },
+      "procedure": {
+        "notice_type": "DOC_FORM",
+        "procedure_code": "1",
+        "contract_status_code": "RES",
+        "result_code": "9",
+        "received_tender_quantity": 5
+      },
+      "money": {
+        "amount_decimal": "653733.41",
+        "payable_amount_decimal": "791017.43",
+        "currency": "EUR",
+        "amount_semantics": "award_amount",
+        "tax_semantics": "excluding_tax",
+        "arithmetic_authority": "decimal_string"
+      },
+      "dates": {
+        "published_on": "2023-10-13",
+        "decision_on": "2024-06-13",
+        "paid_on": null,
+        "delivered_on": null,
+        "date_precision": "day"
+      },
+      "territory_code": "ES522",
+      "actors": [
+        {
+          "actor_role": "contracting_authority",
+          "actor_kind": "public_body",
+          "source_label": "Pleno del Ayuntamiento de Borriana",
+          "source_identifier": "P1203200I",
+          "source_identifier_scheme": "NIF",
+          "identity_state": "source_scoped"
+        },
+        {
+          "actor_role": "supplier",
+          "actor_kind": "unknown",
+          "source_category": "unclassified",
+          "source_label": "FERROVIAL CONSTRUCCION, S.A. - ENDESA X SERVICIOS, S.L.",
+          "source_identifier": "298652",
+          "source_identifier_scheme": "UTE",
+          "identity_state": "source_scoped"
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_role": "primary_record",
+          "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=1hVJk%2B695mbECtSnloz%2BZQ%3D%3D",
+          "document_url": null,
+          "document_label": "PLACSP source record",
+          "document_kind": "ATOM/CODICE entry",
+          "content_sha256": "a33c6394078f4d0a3468f70cad483a8f995bc949dc2a99b24c60bc324791c6ec",
+          "evidence_state": "captured_bytes"
+        },
+        {
+          "evidence_role": "context",
+          "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=1hVJk%2B695mbECtSnloz%2BZQ%3D%3D",
+          "document_url": "https://contrataciondelestado.es/wps/wcm/connect/PLACE_es/Site/area/docAccCmpnt?srv=cmpnt&cmpntname=GetDocumentsById&source=library&DocumentIdParam=eeb2519d-7aca-4559-b239-729a30343312",
+          "document_label": "PCA aprobado Pleno 051023.pdf",
+          "document_kind": "LegalDocumentReference",
+          "content_sha256": null,
+          "official_document_hash": "x7Q5zFFyxCn+5oxV2XdyLYKmlBQ=",
+          "evidence_state": "official_url_only"
+        }
+      ],
+      "provenance": {
+        "source_id": "placsp_sindicacion",
+        "source_record_id": "2a59976b361927657dc3809bbd440550405058106db5cb48abde7c4c329e8dd8",
+        "source_record_sha256": "a33c6394078f4d0a3468f70cad483a8f995bc949dc2a99b24c60bc324791c6ec",
+        "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=1hVJk%2B695mbECtSnloz%2BZQ%3D%3D",
+        "source_snapshot_date": "2025-03-31",
+        "observed_at": "2026-08-11T15:40:24+00:00",
+        "archive_period": "202501",
+        "archive_source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202501.zip",
+        "archive_sha256": "bda70aa0a7437d031e5d3f6114e5a637920ea1a460e1aba67d200209ae5eab7f",
+        "archive_bytes": 146382691,
+        "archive_transport_security": "verified_custom_ca",
+        "member_name": "licitacionesPerfilesContratanteCompleto3_20250102_175752_1.atom",
+        "member_sha256": "97645394fe42fe665b01b496b3f3c3193db9f950eeb00598c47a0cf6f2ecb06c",
+        "extractor_method": "placsp_latest_award_to_spending_item",
+        "extractor_version": "spending_placsp_v1"
+      }
+    },
+    {
+      "spending_item_id": "vclc:spending-item:328757f27adabf579d33e4871d2349f773a4dce7894d009a85021a4867b848a2",
+      "spending_kind": "procurement_award",
+      "phase_caveat": "adjudicacion_publicada_no_prueba_contrato_pago_ni_entrega",
+      "title": "Air Passenger Forecasts Iata And Country Economic Forecasts 2025",
+      "description": "El criterio establecido para la adjudicación del presente contrato es la mejor relación calidad-precio.",
+      "stable_object_id": "https://contrataciondelestado.es/sindicacion/licitacionesPerfilContratante/16408875",
+      "semantic_ordinal": 0,
+      "external_contract_id": "DPM-606/2024",
+      "lot_id": null,
+      "classification": {
+        "scheme": "CPV",
+        "code": "71311240",
+        "label": null
+      },
+      "procedure": {
+        "notice_type": "DOC_FORM",
+        "procedure_code": "3",
+        "contract_status_code": "RES",
+        "result_code": "9",
+        "received_tender_quantity": 1
+      },
+      "money": {
+        "amount_decimal": "7290",
+        "payable_amount_decimal": "7290",
+        "currency": "EUR",
+        "amount_semantics": "award_amount",
+        "tax_semantics": "excluding_tax",
+        "arithmetic_authority": "decimal_string"
+      },
+      "dates": {
+        "published_on": "2024-12-28",
+        "decision_on": "2024-12-27",
+        "paid_on": null,
+        "delivered_on": null,
+        "date_precision": "day"
+      },
+      "territory_code": "ES300",
+      "actors": [
+        {
+          "actor_role": "contracting_authority",
+          "actor_kind": "public_body",
+          "source_label": "Aena. Dirección de Contratación",
+          "source_identifier": "A86212420",
+          "source_identifier_scheme": "NIF",
+          "identity_state": "source_scoped"
+        },
+        {
+          "actor_role": "supplier",
+          "actor_kind": "unknown",
+          "source_category": "unclassified",
+          "source_label": "OXFORD ECONOMICS LIMITED",
+          "source_identifier": "GB34850843",
+          "source_identifier_scheme": "OTROS",
+          "identity_state": "source_scoped"
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_role": "primary_record",
+          "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=NdWCAGJpd9KLAncw3qdZkA%3D%3D",
+          "document_url": null,
+          "document_label": "PLACSP source record",
+          "document_kind": "ATOM/CODICE entry",
+          "content_sha256": "aa484638866ea54e8b86f20713a35335d06441c0fd1ab3629d8e4c578ee1574a",
+          "evidence_state": "captured_bytes"
+        }
+      ],
+      "provenance": {
+        "source_id": "placsp_sindicacion",
+        "source_record_id": "8d7882c1d44ab21c712d47cc463a76ff8e6df11aeb2e169d94b9a226ca4c68e2",
+        "source_record_sha256": "aa484638866ea54e8b86f20713a35335d06441c0fd1ab3629d8e4c578ee1574a",
+        "source_url": "https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&idEvl=NdWCAGJpd9KLAncw3qdZkA%3D%3D",
+        "source_snapshot_date": "2025-03-31",
+        "observed_at": "2026-08-11T15:40:24+00:00",
+        "archive_period": "202501",
+        "archive_source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202501.zip",
+        "archive_sha256": "bda70aa0a7437d031e5d3f6114e5a637920ea1a460e1aba67d200209ae5eab7f",
+        "archive_bytes": 146382691,
+        "archive_transport_security": "verified_custom_ca",
+        "member_name": "licitacionesPerfilesContratanteCompleto3_20250102_175752_1.atom",
+        "member_sha256": "97645394fe42fe665b01b496b3f3c3193db9f950eeb00598c47a0cf6f2ecb06c",
+        "extractor_method": "placsp_latest_award_to_spending_item",
+        "extractor_version": "spending_placsp_v1"
+      }
+    }
+  ],
+  "release_id": "7abe9ac62d4af254aa41a2ffb2a7b4b9cf3e1ae607c6082329da17330a86a7a6"
+}

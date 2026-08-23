@@ -1,0 +1,45 @@
+{
+  "artifact_bytes": 13937,
+  "artifact_sha256": "ea8c3eb11ff2e31e0a6585ee3f965b7d6dd5d662b2953952f4eb440a988c880e",
+  "checks": {
+    "entry_into_force_claims": 0,
+    "foreign_key_check": "ok",
+    "geopolitical_inferences": 0,
+    "implementation_claims": 0,
+    "integrity_check": "ok",
+    "later_observations_emitted": 0,
+    "positions_emitted": 0,
+    "public_identity_retained": true,
+    "qualifying_records_exact": true,
+    "source_quotes_exact": true
+  },
+  "counts": {
+    "actions": 2,
+    "actors": 11,
+    "evidence": 2,
+    "later_observations": 0,
+    "links": 2,
+    "position_evidence": 0,
+    "positions": 0,
+    "topics": 4
+  },
+  "official_public_domain_information_retained": true,
+  "outputs": {
+    "database": "etl/data/staging/geopolitics-moncloa-mvp.db",
+    "public": "ui/gh-pages-next/public/geopolitics/data/moncloa-sample.json",
+    "published": "etl/data/published/geopolitics-moncloa-sample.json"
+  },
+  "real_data_only": true,
+  "release_id": "6683fd44eece98198ab3040e264c584b878cb33aa43be719ae19b99f58246204",
+  "schema_version": "moncloa_geopolitics_materialization_v1",
+  "source_capture": {
+    "bytes": 21234,
+    "captured_at": "2026-02-16T14:12:56+00:00",
+    "content_sha256": "ab08b7dc09a46c890f055e95fdeac5e7d716a5023f8792f19ce440a239271ddf",
+    "path": "etl/data/raw/moncloa_referencias/2026/02/16/moncloa_referencias_20260216T141256Z.json",
+    "records": 20,
+    "source_url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/index.aspx"
+  },
+  "status": "ok",
+  "synthetic_or_mock": false
+}

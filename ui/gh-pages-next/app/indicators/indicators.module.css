@@ -1,0 +1,343 @@
+.page {
+  --indicator-blue: #174b63;
+  --indicator-blue-soft: #eaf5f8;
+  --indicator-amber: #8a5716;
+  --indicator-amber-soft: #fff5df;
+  gap: 18px;
+  animation: indicators-page-enter 320ms ease-out both;
+}
+
+.truthPanel,
+.revisionPanel,
+.historySection,
+.geographySection,
+.provenanceSection {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: var(--shadow);
+}
+
+.truthPanel,
+.revisionPanel,
+.provenanceSection {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(350px, 1fr);
+  gap: 18px;
+  align-items: center;
+  padding: 20px;
+  transition: grid-template-columns 220ms ease, padding 220ms ease;
+}
+
+.eyebrow {
+  margin: 0 0 5px;
+  color: var(--indicator-blue);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.sectionTitle {
+  margin: 0;
+  font-family: var(--display);
+  font-size: clamp(1.35rem, 2vw, 2rem);
+  line-height: 1.1;
+}
+
+.sectionCopy,
+.sectionNote {
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+
+.sectionCopy {
+  max-width: 78ch;
+  margin: 9px 0 0;
+}
+
+.sectionNote {
+  max-width: 58ch;
+  margin: 0;
+}
+
+.metricGrid,
+.stateGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+  transition: grid-template-columns 220ms ease;
+}
+
+.metric,
+.stateGrid > div {
+  min-width: 0;
+  border: 1px solid #bcd6df;
+  border-radius: 7px;
+  background: var(--indicator-blue-soft);
+  padding: 11px;
+}
+
+.metric dt,
+.stateGrid dt {
+  color: var(--ink-soft);
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.metric dd,
+.stateGrid dd {
+  margin: 5px 0 0;
+  color: var(--indicator-blue);
+  font-family: var(--display);
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+
+.stateGrid {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.stateGrid > div {
+  border-color: #ead0a2;
+  border-left: 3px solid var(--indicator-amber);
+  background: var(--indicator-amber-soft);
+}
+
+.stateGrid dd {
+  color: var(--indicator-amber);
+  font-size: 1rem;
+}
+
+.historySection,
+.geographySection {
+  display: grid;
+  gap: 16px;
+  padding: 20px;
+}
+
+.sectionHeader {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: end;
+  justify-content: space-between;
+}
+
+.historyList {
+  display: grid;
+  gap: 5px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.historyItem {
+  display: grid;
+  grid-template-columns: 4ch minmax(100px, 1fr) 9ch minmax(120px, auto);
+  gap: 9px;
+  align-items: center;
+  border-radius: 5px;
+  padding: 4px 7px;
+  transition: grid-template-columns 220ms ease, background-color 160ms ease;
+}
+
+.historyItem:hover {
+  background: #f5f9fa;
+}
+
+.historyPeriod,
+.historyValue,
+.historyStatus,
+.codeCell,
+.hash {
+  font-family: var(--mono);
+}
+
+.historyPeriod,
+.historyStatus {
+  color: var(--ink-soft);
+  font-size: 0.72rem;
+}
+
+.historyTrack {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  height: 10px;
+  border-radius: 999px;
+  background: #e2edf1;
+}
+
+.historyBar {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #58a8ba, var(--indicator-blue));
+  transform-origin: left center;
+  animation: indicator-bar-grow 420ms ease-out both;
+}
+
+.historyValue {
+  text-align: right;
+}
+
+.tableWrap {
+  overflow-x: auto;
+  border: 1px solid #dce4e8;
+  border-radius: 7px;
+  transition: border-color 160ms ease;
+}
+
+.tableWrap:focus-within,
+.tableWrap:hover {
+  border-color: #9abac7;
+}
+
+.table {
+  width: 100%;
+  min-width: 850px;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+
+.table th,
+.table td {
+  border-bottom: 1px solid #e6ecef;
+  padding: 9px 10px;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.table thead th {
+  position: sticky;
+  top: 0;
+  background: #eef5f7;
+  color: var(--indicator-blue);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+}
+
+.tableRow {
+  transition: background-color 160ms ease;
+}
+
+.tableRow:hover {
+  background: #f7fbfc;
+}
+
+.valueCell {
+  color: var(--indicator-blue);
+  font-family: var(--display);
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.codeCell {
+  color: var(--ink-soft);
+  font-size: 0.72rem;
+}
+
+.statusProvisional,
+.statusNeutral {
+  display: inline-flex;
+  border-radius: 999px;
+  padding: 4px 7px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.statusProvisional {
+  background: var(--indicator-amber-soft);
+  color: var(--indicator-amber);
+}
+
+.statusNeutral {
+  background: var(--indicator-blue-soft);
+  color: var(--indicator-blue);
+}
+
+.provenanceActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.hash {
+  flex: 1 1 100%;
+  overflow-wrap: anywhere;
+  color: var(--ink-soft);
+  font-size: 0.68rem;
+}
+
+@keyframes indicators-page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes indicator-bar-grow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (max-width: 900px) {
+  .truthPanel,
+  .revisionPanel,
+  .provenanceSection {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 620px) {
+  .truthPanel,
+  .revisionPanel,
+  .historySection,
+  .geographySection,
+  .provenanceSection {
+    padding: 15px;
+  }
+
+  .metricGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .historyItem {
+    grid-template-columns: 4ch minmax(80px, 1fr) 8ch;
+  }
+
+  .historyStatus {
+    grid-column: 2 / -1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page,
+  .historyBar {
+    animation: none;
+  }
+
+  .truthPanel,
+  .revisionPanel,
+  .provenanceSection,
+  .metricGrid,
+  .stateGrid,
+  .historyItem,
+  .tableWrap,
+  .tableRow {
+    transition: none;
+  }
+}

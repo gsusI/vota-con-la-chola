@@ -1,0 +1,1213 @@
+{
+  "schema_version": "promises_public_sample_v1",
+  "release_id": "a3864cf278115becd5428afd0559985063a5c8b7e2bd459b244a6f07f1b81590",
+  "generated_at": "2026-08-19T20:00:00Z",
+  "real_data_only": true,
+  "synthetic_or_mock": false,
+  "public_domain_information_policy": "retained_exactly",
+  "source": {
+    "bytes": 396842,
+    "content_sha256": "b8994deec0bbc45cdcbef5d7c5395cabf30b0509706303c3d8e76058c48eebfd",
+    "document_kind": "manifesto",
+    "election_key": "es_generales_2023",
+    "language": "gl",
+    "manifesto_document_id": "manifesto_ce98faab6d2d2ab9731ae0f4cd46093ac270b2f61ed8072db5166e008af12cc3",
+    "page_count": 68,
+    "source_id": "programas_partidos",
+    "source_url": "https://www.bng.gal/media/bnggaliza/files/2023/07/05/23_bng_xerais_programa.pdf",
+    "title": "Programa Electoral Eleccións Xerais 2023"
+  },
+  "methodology": {
+    "ambiguity_policy": "unconfirmed rows remain internal and are not published",
+    "pipeline_version": "manifesto_promises_v1",
+    "review_policy": "rule-confirmed structured bullets with explicit action prefixes",
+    "segmentation_version": "pdf_bullets_page_aware_v1",
+    "spec_path": "docs/data-model/promises-spec-v1.md",
+    "topic_codebook_version": "promise_topics_es_gl_v1"
+  },
+  "counts": {
+    "segments_seen": 266,
+    "claims_loaded": 266,
+    "explicit_promises": 97,
+    "promises_loaded": 91,
+    "soft_commitments": 26,
+    "pending_claims": 169,
+    "needs_context_claims": 6,
+    "topic_links": 323,
+    "published_promises": 20
+  },
+  "items": [
+    {
+      "actor": {
+        "actor_kind": "party",
+        "acronym": "BNG",
+        "name": "Bloque Nacionalista Galego",
+        "source_label": "BNG"
+      },
+      "claim_id": "claim_2ec2ab28006da01e4ee8b967ad4d63b50a24e8f6459ef5b0ec832c068ad73a03",
+      "claim_kind": "explicit_promise",
+      "commitment_strength": "explicit",
+      "evidence": {
+        "claim_evidence_id": "claimevidence_10985500365c1f9a5919fe279cbf17f85477931e980709da2ab6e692a48dc102",
+        "char_end": 1264,
+        "char_start": 805,
+        "document_sha256": "b8994deec0bbc45cdcbef5d7c5395cabf30b0509706303c3d8e76058c48eebfd",
+        "exact_quote": "•   Posta en marcha dunha Facenda Galega, como\ninstrumento esencial do novo modelo de financiamento.\nEn consonancia, capacidade plena da Galiza para\nimplantar unha política fiscal propia, que responda a\ncriterios de xustiza e redistribución social e que garanta\nque todas as empresas que operan no noso País paguen\naquí os tributos que corresponder, de forma que permita\nfacer uso pleno dos nosos recursos económicos para os\ncolocar ao servizo do pobo galego.",
+        "page_end": 11,
+        "page_start": 11,
+        "quote_sha256": "0e34c62e2d790c77a6a2c2d45f975f51b985ca43522118680f2ceea847daace1",
+        "source_url": "https://www.bng.gal/media/bnggaliza/files/2023/07/05/23_bng_xerais_programa.pdf"
+      },
+      "extraction": {
+        "confidence": 0.98,
+        "method": "pdftotext-layout-bullet",
+        "version": "pdf_bullets_page_aware_v1"
+      },
+      "measurability": {
+        "criteria": [
+          {
+            "criterion_type": "action_requires_operational_definition",
+            "source_text": "Posta en marcha dunha Facenda Galega, como instrumento esencial do novo modelo de financiamento. En consonancia, capacidade plena da Galiza para implantar unha política fiscal propia, que responda a criterios de xustiza e redistribución social e que garanta que todas as empresas que operan no noso País paguen aquí os tributos que corresponder, de forma que permita facer uso pleno dos nosos recursos económicos para os colocar ao servizo do pobo galego."
+          }
+        ],
+        "state": "partially_measurable"
+      },
+      "normalized_text": "Posta en marcha dunha Facenda Galega, como instrumento esencial do novo modelo de financiamento. En consonancia, capacidade plena da Galiza para implantar unha política fiscal propia, que responda a criterios de xustiza e redistribución social e que garanta que todas as empresas que operan no noso País paguen aquí os tributos que corresponder, de forma que permita facer uso pleno dos nosos recursos económicos para os colocar ao servizo do pobo galego.",
+      "observation_status": "not_assessed",
+      "promise_id": "promise_61ee180f2ead56a3834eab8c1d7df93490a062be1cf8e6d33a4e64a93e4d5861",
+      "review": {
+        "method": "manifesto_promises_v1:structured_bullet_action_prefix",
+        "status": "rule_confirmed"
+      },
+      "section_path": "1. Soberanía política para garantir maior benestar social",
+      "topics": [
+        {
+          "assignment_method": "keyword_multilabel",
+          "assignment_version": "promise_topics_es_gl_v1",
+          "canonical_key": "promise.v1.institutional_autonomy",
+          "confidence": 0.84,
+          "label": "Autogobierno y organización territorial"
+        },
+        {
+          "assignment_method": "keyword_multilabel",
+          "assignment_version": "promise_topics_es_gl_v1",
+          "canonical_key": "promise.v1.public_finance",
+          "confidence": 0.94,
+          "label": "Fiscalidad y finanzas públicas"
+        },
+        {
+          "assignment_method": "keyword_multilabel",
+          "assignment_version": "promise_topics_es_gl_v1",
+          "canonical_key": "promise.v1.industry",
+          "confidence": 0.84,
+          "label": "Industria y tejido productivo"
+        }
+      ]
+    },
+    {
+      "actor": {
+        "actor_kind": "party",
+        "acronym": "BNG",
+        "name": "Bloque Nacionalista Galego",
+        "source_label": "BNG"
+      },
+      "claim_id": "claim_4934a5d08c8ce2821b5554f2d44de52e153dc0496c6507cd7ba993d98f8c350f",
+      "claim_kind": "explicit_promise",
+      "commitment_strength": "explicit",
+      "evidence": {
+        "claim_evidence_id": "claimevidence_5741a173e19cbe977c328c77b866e1e309a8cb4a790c91f34d6e48a024bfa841",
+        "char_end": 1760,
+        "char_start": 1266,
+        "document_sha256": "b8994deec0bbc45cdcbef5d7c5395cabf30b0509706303c3d8e76058c48eebfd",
+        "exact_quote": "•   Transferencia das competencias en materia de relacións\nlaborais, co obxectivo de que a Galiza teña plena\ncapacidade lexislativa e normativa para estabelecer\nun marco galego de relacións laborais visando blindar\na negociación colectiva e garantir traballo digno e\ncon dereitos para toda a poboación. Tamén para poder\nestabelecer unha renda social básica que permita\ndesfrutar de condicións de vida dignas e participación\nsocial plena a toda a poboación galega, sen exclusións de\nningún tipo.",
+        "page_end": 11,
+        "page_start": 11,
+        "quote_sha256": "37f034cc49330e1e8b7d2b6b484ad6c8b7adf1dd732dd225fe411301432c64c6",
+        "source_url": "https://www.bng.gal/media/bnggaliza/files/2023/07/05/23_bng_xerais_programa.pdf"
+      },
+      "extraction": {
+        "confidence": 0.98,
+        "method": "pdftotext-layout-bullet",
+        "version": "pdf_bullets_page_aware_v1"
+      },
+      "measurability": {
+        "criteria": [
+          {
+            "criterion_type": "binary_action_in_source",
+            "source_text": "Transferencia das competencias en materia de relacións laborais, co obxectivo de que a Galiza teña plena capacidade lexislativa e normativa para estabelecer un marco galego de relacións laborais visando blindar a negociación colectiva e garantir traballo digno e con dereitos para toda a poboación. Tamén para poder estabelecer unha renda social básica que permita desfrutar de condicións de vida dignas e participación social plena a toda a poboación galega, sen exclusións de ningún tipo."
+          }
+        ],
+        "state": "measurable"
+      },
+      "normalized_text": "Transferencia das competencias en materia de relacións laborais, co obxectivo de que a Galiza teña plena capacidade lexislativa e normativa para estabelecer un marco galego de relacións laborais visando blindar a negociación colectiva e garantir traballo digno e con dereitos para toda a poboación. Tamén para poder estabelecer unha renda social básica que permita desfrutar de condicións de vida dignas e participación social plena a toda a poboación galega, sen exclusións de ningún tipo.",
+      "observation_status": "not_assessed",
+      "promise_id": "promise_75a4cd6fb11e08234f8bac1e9d1154071df55eed8b1d04bf274a8562266b4299",
+      "review": {
+        "method": "manifesto_promises_v1:structured_bullet_action_prefix",
+        "status": "rule_confirmed"
+      },
+      "section_path": "1. Soberanía política para garantir maior benestar social",
+      "topics": [
+        {
+          "assignment_method": "keyword_multilabel",
+          "assignment_version": "promise_topics_es_gl_v1",
+          "canonical_key": "promise.v1.institutional_autonomy",
+          "confidence": 0.84,
+          "label": "Autogobierno y organización territorial"
+        },
+        {
+          "assignment_method": "keyword_multilabel",
+          "assignment_version": "promise_topics_es_gl_v1",
+          "canonical_key": "promise.v1.labour",
+          "confidence": 0.84,
+          "label": "Trabajo y relaciones laborales"
+        },
+        {
+          "assignment_method": "keyword_multilabel",
+          "assignment_version": "promise_topics_es_gl_v1",
+          "canonical_key": "promise.v1.democracy_rights",
+          "confidence": 0.84,
+          "label": "Democracia y derechos civiles"
+        }
+      ]
+    },
+    {
+      "actor": {
+        "actor_kind": "party",
+        "acronym": "BNG",
+        "name": "Bloque Nacionalista Galego",
+        "source_label": "BNG"
+      },
+      "claim_id": "claim_7ce9a719513323ab800a53c7fb514638621f511073b98ddee81018d4c2a21a28",
+      "claim_kind": "explicit_promise",
+      "commitment_strength": "explicit",
+      "evidence": {
+        "claim_evidence_id": "claimevidence_eeb113faa7214334adea8af19651a279ded4515c0381ec0a2779e90566c4f67c",
+        "char_end": 1972,
+        "char_start": 1762,
+        "document_sha256": "b8994deec0bbc45cdcbef5d7c5395cabf30b0509706303c3d8e76058c48eebfd",
+        "exact_quote": "•   Transferencia das competencias en materia de\nSeguranza Social e pensións, co obxectivo de garantir un\nsistema sanitario e de atención social ben financiado e\nunhas pensións dignas para as persoas xubiladas.",
+        "page_end": 11,
+        "page_start": 11,
+        "quote_sha256": "ac83afccbbc3d89b1fe3184e2f9afe505b60fa466969e7dc8069c5812128568c",
+        "source_url": "https://www.bng.gal/media/bnggaliza/files/2023/07/05/23_bng_xerais_programa.pdf"
+      },
+      "extraction": {
+        "confidence": 0.98,
+        "method": "pdftotext-layout-bullet",
+        "version": "pdf_bullets_page_aware_v1"
+      },
+      "measurability": {
+        "criteria": [
+          {
+            "criterion_type": "binary_action_in_source",
+            "source_text": "Transferencia das competencias en materia de Seguranza Social e pensións, co obxectivo de garantir un sistema sanitario e de atención social ben financiado e unhas pensións dignas para as persoas xubiladas."
+          }
+        ],
+        "state": "measurable"
+      },
+      "normalized_text": "Transferencia das competencias en materia de Seguranza Social e pensións, co obxectivo de garantir un sistema sanitario e de atención social ben financiado e unhas pensións dignas para as persoas xubiladas.",
+      "observation_status": "not_assessed",
+      "promise_id": "promise_8c59ca9d51545d004ac75c5efbc1cc38f7b0b9c09af1d43654f5bb5a31ec12f4",
+      "review": {
+        "method": "manifesto_promises_v1:structured_bullet_action_prefix",
+        "status": "rule_confirmed"
+      },
+      "section_path": "1. Soberanía política para garantir maior benestar social",
+      "topics": [
+        {
+          "assignment_method": "keyword_multilabel",
+          "assignment_version": "promise_topics_es_gl_v1",
+          "canonical_key": "promise.v1.institutional_autonomy",
+          "confidence": 0.84,
+          "label": "Autogobierno y organización territorial"
+        },
+        {
+          "assignment_method": "keyword_multilabel",
+          "assignment_version": "promise_topics_es_gl_v1",
+          "canonical_key": "promise.v1.pensions",
+          "confidence": 0.84,
+          "label": "Pensiones y Seguridad Social"
+        },
+        {
+          "assignment_method": "keyword_multilabel",
+          "assignment_version": "promise_topics_es_gl_v1",
+          "canonical_key": "promise.v1.health",
+          "confidence": 0.84,
+          "label": "Sanidad"
+        }
+      ]
+    },
+    {
+      "actor": {
+        "actor_kind": "party",
+        "acronym": "BNG",
+        "name": "Bloque Nacionalista Galego",
+        "source_label": "BNG"
+      },
+      "claim_id": "claim_3889d324ff6bce6a20b0e4def85b8df3b2a9985e0724fc58b3a53c0b1f7dad75",
+      "claim_kind": "explicit_promise",
+      "commitment_strength": "explicit",
+      "evidence": {
+        "claim_evidence_id": "claimevidence_61cb82838e00d3c4c0898362ace9ad539c8a03fa42baf1a238a2c3ee3aa4a9a4",
+        "char_end": 2145,
+        "char_start": 1974,
+        "document_sha256": "b8994deec0bbc45cdcbef5d7c5395cabf30b0509706303c3d8e76058c48eebfd",
+        "exact_quote": "•   Traspaso das competencias en materia de seguranza\npública, policía xudicial e fiscal, así como garda\nde tránsito, para o que será despregado o corpo da\nPolicía Galega.",
+        "page_end": 11,
+        "page_start": 11,
+        "quote_sha256": "646f09e942dfcb42147f0136133cffda4b4a4d3e2f216bca98333b3e271aa901",
+        "source_url": "https://www.bng.gal/media/bnggaliza/files/2023/07/05/23_bng_xerais_programa.pdf"
+      },
+      "extraction": {
+        "confidence": 0.98,
+        "method": "pdftotext-layout-bullet",
+        "version": "pdf_bullets_page_aware_v1"
+      },
+      "measurability": {
+        "criteria": [
+          {
+            "criterion_type": "binary_action_in_source",
+            "source_text": "Traspaso das competencias en materia de seguranza pública, policía xudicial e fiscal, así como garda de tránsito, para o que será despregado o corpo da Policía Galega."
+          }
+        ],
+        "state": "measurable"
+      },
+      "normalized_text": "Traspaso das competencias en materia de seguranza pública, policía xudicial e fiscal, así como garda de tránsito, para o que será despregado o corpo da Policía Galega.",
+      "observation_status": "not_assessed",
+      "promise_id": "promise_2f05b57d01d40db43a7133c9386086c361253905ca377bf076e434644afc6ca7",
+      "review": {
+        "method": "manifesto_promises_v1:structured_bullet_action_prefix",
+        "status": "rule_confirmed"
+      },
+      "section_path": "1. Soberanía política para garantir maior benestar social",
+      "topics": [
+        {
+          "assignment_method": "keyword_multilabel",
+          "assignment_version": "promise_topics_es_gl_v1",
+          "canonical_key": "promise.v1.institutional_autonomy",
+          "confidence": 0.84,
+          "label": "Autogobierno y organización territorial"
+        }
+      ]
+    },
+    {
+      "actor": {
+        "actor_kind": "party",
+        "acronym": "BNG",
+        "name": "Bloque Nacionalista Galego",
+        "source_label": "BNG"
+      },
+      "claim_id": "claim_069656e83d33232f9b5ff76e417502d2fd825d5dee537adf8971a6f3d16b9570",
+      "claim_kind": "explicit_promise",
+      "commitment_strength": "explicit",
+      "evidence": {
+        "claim_evidence_id": "claimevidence_655335bc8269a67130b83d5cdaab8b9a713c9b9a913052a21dcaa833a9b8d968",
+        "char_end": 767,
+        "char_start": 538,
+        "document_sha256": "b8994deec0bbc45cdcbef5d7c5395cabf30b0509706303c3d8e76058c48eebfd",
+        "exact_quote": "•   Traspaso das competencias en infraestruturas de\ntransporte de interese xeral: portos de interese xeral,\naeroportos e control de tráfico aéreo na Galiza, alén\nde estradas e camiños de ferro que discorren por\nterritorio galego.",
+        "page_end": 12,
+        "page_start": 12,
+        "quote_sha256": "8fdb7a0c7370513ff644c64138ff04fdd5e3b917d62177b94a71c1bacf3b7661",
+        "source_url": "https://www.bng.gal/media/bnggaliza/files/2023/07/05/23_bng_xerais_programa.pdf"
+      },
+      "extraction": {
+        "confidence": 0.98,
+        "method": "pdftotext-layout-bullet",
+        "version": "pdf_bullets_page_aware_v1"
+      },
+      "measurability": {
+        "criteria": [
+          {
+            "criterion_type": "binary_action_in_source",
+            "source_text": "Traspaso das competencias en infraestruturas de transporte de interese xeral: portos de interese xeral, aeroportos e control de tráfico aéreo na Galiza, alén de estradas e camiños de ferro que discorren por territorio galego."
+          }
+        ],
+        "state": "measurable"
+      },
+      "normalized_text": "Traspaso das competencias en infraestruturas de transporte de interese xeral: portos de interese xeral, aeroportos e control de tráfico aéreo na Galiza, alén de estradas e camiños de ferro que discorren por territorio galego.",
+      "observation_status": "not_assessed",
+      "promise_id": "promise_b146334e55f1fbacc917cb5b70e73fc3380bbeeaeaaf2b75b0cd4991dd845273",
+      "review": {
+        "method": "manifesto_promises_v1:structured_bullet_action_prefix",
+        "status": "rule_confirmed"
+      },
+      "section_path": "1. Soberanía política para garantir maior benestar social",
+      "topics": [
+        {
+          "assignment_method": "keyword_multilabel",
+          "assignment_version": "promise_topics_es_gl_v1",
+          "canonical_key": "promise.v1.institutional_autonomy",
+          "confidence": 0.84,
+          "label": "Autogobierno y organización territorial"
+        },
+        {
+          "assignment_method": "keyword_multilabel",
+          "assignment_version": "promise_topics_es_gl_v1",
+          "canonical_key": "promise.v1.transport",
+          "confidence": 0.99,
+          "label": "Transportes e infraestructuras"
+        }
+      ]
+    },
+    {
+      "actor": {
+        "actor_kind": "party",
+        "acronym": "BNG",
+        "name": "Bloque Nacionalista Galego",
+        "source_label": "BNG"
+      },
+      "claim_id": "claim_77e7725c66b43c7a622648f68cf71fafc34502e2f5f1039db00ba634191fbeb8",
+      "claim_kind": "explicit_promise",
+      "commitment_strength": "explicit",
+      "evidence": {
+        "claim_evidence_id": "claimevidence_d5e134748067ac7606a9d0e5f0fdc114c4c64d144aa7ec840cd7d9ef91c27603",
+        "char_end": 1190,
+        "char_start": 769,
+        "document_sha256": "b8994deec0bbc45cdcbef5d7c5395cabf30b0509706303c3d8e76058c48eebfd",
+        "exact_quote": "•   Transferencia das competencias en materia de\ncostas e do dominio público marítimo-terrestre,\ntanto as normativas para aprobar unha lei galega de\nprotección do litoral adaptada á realidade do país\ncomo as de intervención e xestión (autorizacións de\ninstalacións na costa galega). Tamén se afrontará\no traspaso das competencias sobre as bacías\nhidrográficas (transferencia plena da confederación\nhidrográfica Miño-Sil).",
+        "page_end": 12,
+        "page_start": 12,
+        "quote_sha256": "7d8c77738cba751eb7224ec3b1cdda1e758d5572e072ecaab1504fcb917bf983",
+        "source_url": "https://www.bng.gal/media/bnggaliza/files/2023/07/05/23_bng_xerais_programa.pdf"
+      },
+      "extraction": {
+        "confidence": 0.98,
+        "method": "pdftotext-layout-bullet",
+        "version": "pdf_bullets_page_aware_v1"
+      },
+      "measurability": {
+        "criteria": [
+          {
+            "criterion_type": "binary_action_in_source",
+            "source_text": "Transferencia das competencias en materia de costas e do dominio público marítimo-terrestre, tanto as normativas para aprobar unha lei galega de protección do litoral adaptada á realidade do país como as de intervención e xestión (autorizacións de instalacións na costa galega). Tamén se afrontará o traspaso das competencias sobre as bacías hidrográficas (transferencia plena da confederación hidrográfica Miño-Sil)."
+          }
+        ],
+        "state": "measurable"
+      },
+      "normalized_text": "Transferencia das competencias en materia de costas e do dominio público marítimo-terrestre, tanto as normativas para aprobar unha lei galega de protección do litoral adaptada á realidade do país como as de intervención e xestión (autorizacións de instalacións na costa galega). Tamén se afrontará o traspaso das competencias sobre as bacías hidrográficas (transferencia plena da confederación hidrográfica Miño-Sil).",
+      "observation_status": "not_assessed",
+      "promise_id": "promise_ffbb1b7740c978fb875d471929b40ac75181c1f9625ae946cc41e8deba712b46",
+      "review": {
+        "method": "manifesto_promises_v1:structured_bullet_action_prefix",
+        "status": "rule_confirmed"
+      },
+      "section_path": "1. Soberanía política para garantir maior benestar social",
+      "topics": [
+        {
+          "assignment_method": "keyword_multilabel",
+          "assignment_version": "promise_topics_es_gl_v1",
+          "canonical_key": "promise.v1.institutional_autonomy",
+          "confidence": 0.84,
+          "label": "Autogobierno y organización territorial"
+        },
+        {
+          "assignment_method": "keyword_multilabel",
+          "assignment_version": "promise_topics_es_gl_v1",
+          "canonical_key": "promise.v1.environment",
+          "confidence": 0.84,
+          "label": "Medio ambiente y biodiversidad"
+        }
+      ]
+    },
+    {
+      "actor": {
+        "actor_kind": "party",
+        "acronym": "BNG",
+        "name": "Bloque Nacionalista Galego",
+        "source_label": "BNG"
+      },
+      "claim_id": "claim_f0a12cbb09b4048f0e4a45499a2261ded1b9606664613247a2ddc77edb32a5f5",
+      "claim_kind": "explicit_promise",
+      "commitment_strength": "explicit",
+      "evidence": {
+        "claim_evidence_id": "claimevidence_16ece7768c796ecf4672c0dec304fba5f9c568be369c675631bc6bf40a5d61a7",
+        "char_end": 1354,
+        "char_start": 1192,
+        "document_sha256": "b8994deec0bbc45cdcbef5d7c5395cabf30b0509706303c3d8e76058c48eebfd",
+        "exact_quote": "•   Transferencia das competencias e servizos de\nsalvamento marítimo e gardacostas, así como dos\ncentros do Instituto Español de Oceanografía na Coruña\ne en Vigo.",
+        "page_end": 12,
+        "page_start": 12,
+        "quote_sha256": "92192a456d8ecf3aa1a7d3e4c9895cabd5e0c196bbdbda1f93bb7c66f527ac86",
+        "source_url": "https://www.bng.gal/media/bnggaliza/files/2023/07/05/23_bng_xerais_programa.pdf"
+      },
+      "extraction": {
+        "confidence": 0.98,
+        "method": "pdftotext-layout-bullet",
+        "version": "pdf_bullets_page_aware_v1"
+      },
+      "measurability": {
+        "criteria": [
+          {
+            "criterion_type": "binary_action_in_source",
+            "source_text": "Transferencia das competencias e servizos de salvamento marítimo e gardacostas, así como dos centros do Instituto Español de Oceanografía na Coruña e en Vigo."
+          }
+        ],
+        "state": "measurable"
+      },
+      "normalized_text": "Transferencia das competencias e servizos de salvamento marítimo e gardacostas, así como dos centros do Instituto Español de Oceanografía na Coruña e en Vigo.",
+      "observation_status": "not_assessed",
+      "promise_id": "promise_655baf8cdeb4341facc16cea442e15c5c870b204f56a81fc5231f2dd1222610a",
+      "review": {
+        "method": "manifesto_promises_v1:structured_bullet_action_prefix",
+        "status": "rule_confirmed"
+      },
+      "section_path": "1. Soberanía política para garantir maior benestar social",
+      "topics": [
+        {
+          "assignment_method": "keyword_multilabel",
+          "assignment_version": "promise_topics_es_gl_v1",
+          "canonical_key": "promise.v1.institutional_autonomy",
+          "confidence": 0.84,
+          "label": "Autogobierno y organización territorial"
+        }
+      ]
+    },
+    {
+      "actor": {
+        "actor_kind": "party",
+        "acronym": "BNG",
+        "name": "Bloque Nacionalista Galego",
+        "source_label": "BNG"
+      },
+      "claim_id": "claim_8c34c8252fed8dd130a66dac7ef9233394d4d33ef607a9b5542a1ca2f72d09a5",
+      "claim_kind": "explicit_promise",
+      "commitment_strength": "explicit",
+      "evidence": {
+        "claim_evidence_id": "claimevidence_9d6e5f0ee400afea08ba7ad1c1aad0f6ccc7106e1a0a1c2e6fcdcc1e90e44545",
+        "char_end": 1525,
+        "char_start": 1356,
+        "document_sha256": "b8994deec0bbc45cdcbef5d7c5395cabf30b0509706303c3d8e76058c48eebfd",
+        "exact_quote": "•   Traspaso AP-9 (Ferrol-A Coruña-Vigo) e AP-\n53 (Santiago-Lalín) e nacionalización destas\ninfraestruturas para acabar co espolio económico que\nrepresentan actualmente.",
+        "page_end": 12,
+        "page_start": 12,
+        "quote_sha256": "19ee5b7c97fc3f834949330a5c58f2217d2e84eb1161f9adede08ae175bb5736",
+        "source_url": "https://www.bng.gal/media/bnggaliza/files/2023/07/05/23_bng_xerais_programa.pdf"
+      },
+      "extraction": {
+        "confidence": 0.98,
+        "method": "pdftotext-layout-bullet",
+        "version": "pdf_bullets_page_aware_v1"
+      },
+      "measurability": {
+        "criteria": [
+          {
+            "criterion_type": "numeric_or_deadline_in_source",
+            "source_text": "Traspaso AP-9 (Ferrol-A Coruña-Vigo) e AP- 53 (Santiago-Lalín) e nacionalización destas infraestruturas para acabar co espolio económico que representan actualmente."
+          }
+        ],
+        "state": "measurable"
+      },
+      "normalized_text": "Traspaso AP-9 (Ferrol-A Coruña-Vigo) e AP- 53 (Santiago-Lalín) e nacionalización destas infraestruturas para acabar co espolio económico que representan actualmente.",
+      "observation_status": "not_assessed",
+      "promise_id": "promise_2a3d64fe7daea0caa2cb79ad8e8c1d1620ac28b7cbbd4b26d60e2072fb04a4d1",
+      "review": {
+        "method": "manifesto_promises_v1:structured_bullet_action_prefix",
+        "status": "rule_confirmed"
+      },
+      "section_path": "1. Soberanía política para garantir maior benestar social",
+      "topics": [
+        {
+          "assignment_method": "keyword_multilabel",
+          "assignment_version": "promise_topics_es_gl_v1",
+          "canonical_key": "promise.v1.transport",
+          "confidence": 0.84,
+          "label": "Transportes e infraestructuras"
+        }
+      ]
+    },
+    {
+      "actor": {
+        "actor_kind": "party",
+        "acronym": "BNG",
+        "name": "Bloque Nacionalista Galego",
+        "source_label": "BNG"
+      },
+      "claim_id": "claim_2d7e4cb797f4f9265d0f85022d5eeb4c9976f05b5644c55640f36677c0fc4431",
+      "claim_kind": "explicit_promise",
+      "commitment_strength": "explicit",
+      "evidence": {
+        "claim_evidence_id": "claimevidence_2cbc42dc3541ce1343cbf290a44081c0ad9f4d5f56419d45647313f2663ca29a",
+        "char_end": 1640,
+        "char_start": 1527,
+        "document_sha256": "b8994deec0bbc45cdcbef5d7c5395cabf30b0509706303c3d8e76058c48eebfd",
+        "exact_quote": "•   Traspaso dos fondos e competencias relacionadas\nco fomento da industria cinematográfica e\naudiovisual galega.",
+        "page_end": 12,
+        "page_start": 12,
+        "quote_sha256": "c7a6612a13fd9afea3921998e49951452531423bc37a509f9fe5492bafd38ef8",
+        "source_url": "https://www.bng.gal/media/bnggaliza/files/2023/07/05/23_bng_xerais_programa.pdf"
+      },
+      "extraction": {
+        "confidence": 0.98,
+        "method": "pdftotext-layout-bullet",
+        "version": "pdf_bullets_page_aware_v1"
+      },
+      "measurability": {
+        "criteria": [
+          {
+            "criterion_type": "binary_action_in_source",
+            "source_text": "Traspaso dos fondos e competencias relacionadas co fomento da industria cinematográfica e audiovisual galega."
+          }
+        ],
+        "state": "measurable"
+      },
+      "normalized_text": "Traspaso dos fondos e competencias relacionadas co fomento da industria cinematográfica e audiovisual galega.",
+      "observation_status": "not_assessed",
+      "promise_id": "promise_9799ed0ffdb67004ce0b39e8b0d1e50d0a9119e2281bd898d362b3e88424a7f4",
+      "review": {
+        "method": "manifesto_promises_v1:structured_bullet_action_prefix",
+        "status": "rule_confirmed"
+      },
+      "section_path": "1. Soberanía política para garantir maior benestar social",
+      "topics": [
+        {
+          "assignment_method": "keyword_multilabel",
+          "assignment_version": "promise_topics_es_gl_v1",
+          "canonical_key": "promise.v1.institutional_autonomy",
+          "confidence": 0.84,
+          "label": "Autogobierno y organización territorial"
+        },
+        {
+          "assignment_method": "keyword_multilabel",
+          "assignment_version": "promise_topics_es_gl_v1",
+          "canonical_key": "promise.v1.industry",
+          "confidence": 0.84,
+          "label": "Industria y tejido productivo"
+        },
+        {
+          "assignment_method": "keyword_multilabel",
+          "assignment_version": "promise_topics_es_gl_v1",
+          "canonical_key": "promise.v1.language_culture",
+          "confidence": 0.84,
+          "label": "Lengua y cultura"
+        }
+      ]
+    },
+    {
+      "actor": {
+        "actor_kind": "party",
+        "acronym": "BNG",
+        "name": "Bloque Nacionalista Galego",
+        "source_label": "BNG"
+      },
+      "claim_id": "claim_4a683d3d7fb7df4d1422bbbb3b9163849c8d5d30726976687fa5b10ce98f0fb5",
+      "claim_kind": "explicit_promise",
+      "commitment_strength": "explicit",
+      "evidence": {
+        "claim_evidence_id": "claimevidence_5708c6c37c182c838eff559271a9bcf60f9a719a1187bcac7c3c6fc416e0d545",
+        "char_end": 1801,
+        "char_start": 1642,
+        "document_sha256": "b8994deec0bbc45cdcbef5d7c5395cabf30b0509706303c3d8e76058c48eebfd",
+        "exact_quote": "•   Traspaso á Galiza dos arquivos, bens e fondos\ndocumentais, culturais e históricos, que se achan\nespallados en diversas institucións e organismos\ndo Estado.",
+        "page_end": 12,
+        "page_start": 12,
+        "quote_sha256": "661a98b0fb36be965867a0a7933de8cb62026afaed005844b3e0e54de90abf5c",
+        "source_url": "https://www.bng.gal/media/bnggaliza/files/2023/07/05/23_bng_xerais_programa.pdf"
+      },
+      "extraction": {
+        "confidence": 0.98,
+        "method": "pdftotext-layout-bullet",
+        "version": "pdf_bullets_page_aware_v1"
+      },
+      "measurability": {
+        "criteria": [
+          {
+            "criterion_type": "binary_action_in_source",
+            "source_text": "Traspaso á Galiza dos arquivos, bens e fondos documentais, culturais e históricos, que se achan espallados en diversas institucións e organismos do Estado."
+          }
+        ],
+        "state": "measurable"
+      },
+      "normalized_text": "Traspaso á Galiza dos arquivos, bens e fondos documentais, culturais e históricos, que se achan espallados en diversas institucións e organismos do Estado.",
+      "observation_status": "not_assessed",
+      "promise_id": "promise_fe871b36c97bdd618ad448ed8aecff47ddf5d59371fe86e2ddca1017ad85087b",
+      "review": {
+        "method": "manifesto_promises_v1:structured_bullet_action_prefix",
+        "status": "rule_confirmed"
+      },
+      "section_path": "1. Soberanía política para garantir maior benestar social",
+      "topics": [
+        {
+          "assignment_method": "keyword_multilabel",
+          "assignment_version": "promise_topics_es_gl_v1",
+          "canonical_key": "promise.v1.language_culture",
+          "confidence": 0.89,
+          "label": "Lengua y cultura"
+        }
+      ]
+    },
+    {
+      "actor": {
+        "actor_kind": "party",
+        "acronym": "BNG",
+        "name": "Bloque Nacionalista Galego",
+        "source_label": "BNG"
+      },
+      "claim_id": "claim_46c942c6ececae40680655c91e2e92e863c2e58fa138673c6646ee5356e07e9f",
+      "claim_kind": "explicit_promise",
+      "commitment_strength": "explicit",
+      "evidence": {
+        "claim_evidence_id": "claimevidence_528cda42d38a931e8de70b40aa5826c8bc5514302f29382348b0f32a2dad4a46",
+        "char_end": 2029,
+        "char_start": 1803,
+        "document_sha256": "b8994deec0bbc45cdcbef5d7c5395cabf30b0509706303c3d8e76058c48eebfd",
+        "exact_quote": "•   Traspaso competencias en materia deportiva do Consello\nSuperior de Deportes e das federacións deportivas. Galiza\nparticipará, con pleno dereito, en todas as disciplinas,\nnas competicións deportivas internacionais oficiais.",
+        "page_end": 12,
+        "page_start": 12,
+        "quote_sha256": "abd57a5d94b556d6cf23aa24d94864f08478f1b41cfda27cbbe31b1a522bd442",
+        "source_url": "https://www.bng.gal/media/bnggaliza/files/2023/07/05/23_bng_xerais_programa.pdf"
+      },
+      "extraction": {
+        "confidence": 0.98,
+        "method": "pdftotext-layout-bullet",
+        "version": "pdf_bullets_page_aware_v1"
+      },
+      "measurability": {
+        "criteria": [
+          {
+            "criterion_type": "binary_action_in_source",
+            "source_text": "Traspaso competencias en materia deportiva do Consello Superior de Deportes e das federacións deportivas. Galiza participará, con pleno dereito, en todas as disciplinas, nas competicións deportivas internacionais oficiais."
+          }
+        ],
+        "state": "measurable"
+      },
+      "normalized_text": "Traspaso competencias en materia deportiva do Consello Superior de Deportes e das federacións deportivas. Galiza participará, con pleno dereito, en todas as disciplinas, nas competicións deportivas internacionais oficiais.",
+      "observation_status": "not_assessed",
+      "promise_id": "promise_90c5ef4ef62a0ed4381cf3966c5f30f0cc23bcefd962028495de788fc0694c21",
+      "review": {
+        "method": "manifesto_promises_v1:structured_bullet_action_prefix",
+        "status": "rule_confirmed"
+      },
+      "section_path": "1. Soberanía política para garantir maior benestar social",
+      "topics": [
+        {
+          "assignment_method": "keyword_multilabel",
+          "assignment_version": "promise_topics_es_gl_v1",
+          "canonical_key": "promise.v1.institutional_autonomy",
+          "confidence": 0.84,
+          "label": "Autogobierno y organización territorial"
+        },
+        {
+          "assignment_method": "keyword_multilabel",
+          "assignment_version": "promise_topics_es_gl_v1",
+          "canonical_key": "promise.v1.democracy_rights",
+          "confidence": 0.84,
+          "label": "Democracia y derechos civiles"
+        },
+        {
+          "assignment_method": "keyword_multilabel",
+          "assignment_version": "promise_topics_es_gl_v1",
+          "canonical_key": "promise.v1.sports",
+          "confidence": 0.94,
+          "label": "Deporte"
+        }
+      ]
+    },
+    {
+      "actor": {
+        "actor_kind": "party",
+        "acronym": "BNG",
+        "name": "Bloque Nacionalista Galego",
+        "source_label": "BNG"
+      },
+      "claim_id": "claim_9375467d95c77952dccda4d50f494fb9ad17e91519cc7f2ffb3a07f9c859640f",
+      "claim_kind": "explicit_promise",
+      "commitment_strength": "explicit",
+      "evidence": {
+        "claim_evidence_id": "claimevidence_b75a07cd395da7d35957966a7e9a368bd6b086c837f01be6fdfcc0fc465eecbb",
+        "char_end": 1475,
+        "char_start": 1259,
+        "document_sha256": "b8994deec0bbc45cdcbef5d7c5395cabf30b0509706303c3d8e76058c48eebfd",
+        "exact_quote": "•   Reclamar a transferencia á Galiza do Ingreso Mínimo\nVital (IMV) para garantir unha xestión máis áxil e\nacaída á realidade galega, permitindo a creación dunha\nverdadeira Renda galega de inclusión social e laboral.",
+        "page_end": 14,
+        "page_start": 14,
+        "quote_sha256": "1897ab5615b02fa2ea92159307614ccdf5940ee5bbd3861734f34ace36abf227",
+        "source_url": "https://www.bng.gal/media/bnggaliza/files/2023/07/05/23_bng_xerais_programa.pdf"
+      },
+      "extraction": {
+        "confidence": 0.98,
+        "method": "pdftotext-layout-bullet",
+        "version": "pdf_bullets_page_aware_v1"
+      },
+      "measurability": {
+        "criteria": [
+          {
+            "criterion_type": "action_requires_operational_definition",
+            "source_text": "Reclamar a transferencia á Galiza do Ingreso Mínimo Vital (IMV) para garantir unha xestión máis áxil e acaída á realidade galega, permitindo a creación dunha verdadeira Renda galega de inclusión social e laboral."
+          }
+        ],
+        "state": "partially_measurable"
+      },
+      "normalized_text": "Reclamar a transferencia á Galiza do Ingreso Mínimo Vital (IMV) para garantir unha xestión máis áxil e acaída á realidade galega, permitindo a creación dunha verdadeira Renda galega de inclusión social e laboral.",
+      "observation_status": "not_assessed",
+      "promise_id": "promise_c21e7ddebd04ecd7407ac662fba70d2f6f167948f2aae41cf56ff05f886e1982",
+      "review": {
+        "method": "manifesto_promises_v1:structured_bullet_action_prefix",
+        "status": "rule_confirmed"
+      },
+      "section_path": "2. Máis dereitos para unha maior xustiza social",
+      "topics": [
+        {
+          "assignment_method": "keyword_multilabel",
+          "assignment_version": "promise_topics_es_gl_v1",
+          "canonical_key": "promise.v1.social_protection",
+          "confidence": 0.84,
+          "label": "Protección e inclusión social"
+        },
+        {
+          "assignment_method": "keyword_multilabel",
+          "assignment_version": "promise_topics_es_gl_v1",
+          "canonical_key": "promise.v1.labour",
+          "confidence": 0.84,
+          "label": "Trabajo y relaciones laborales"
+        }
+      ]
+    },
+    {
+      "actor": {
+        "actor_kind": "party",
+        "acronym": "BNG",
+        "name": "Bloque Nacionalista Galego",
+        "source_label": "BNG"
+      },
+      "claim_id": "claim_ebfd12622dc775260a4a6af97e3264655f0eb0dcad8fcef2385c8997991be04f",
+      "claim_kind": "explicit_promise",
+      "commitment_strength": "explicit",
+      "evidence": {
+        "claim_evidence_id": "claimevidence_609959648a2db8bda74fd5e166318c8737ece773178c1dc457c8276810b3d517",
+        "char_end": 1566,
+        "char_start": 1477,
+        "document_sha256": "b8994deec0bbc45cdcbef5d7c5395cabf30b0509706303c3d8e76058c48eebfd",
+        "exact_quote": "•   Aplicar un programa específico de loita contra a pobreza\ne contra a exclusión social.",
+        "page_end": 14,
+        "page_start": 14,
+        "quote_sha256": "41030fd4a00309ccbd9838c4c08ea38d8611c9a5e7c17b9e89508d29043dec27",
+        "source_url": "https://www.bng.gal/media/bnggaliza/files/2023/07/05/23_bng_xerais_programa.pdf"
+      },
+      "extraction": {
+        "confidence": 0.98,
+        "method": "pdftotext-layout-bullet",
+        "version": "pdf_bullets_page_aware_v1"
+      },
+      "measurability": {
+        "criteria": [
+          {
+            "criterion_type": "action_requires_operational_definition",
+            "source_text": "Aplicar un programa específico de loita contra a pobreza e contra a exclusión social."
+          }
+        ],
+        "state": "partially_measurable"
+      },
+      "normalized_text": "Aplicar un programa específico de loita contra a pobreza e contra a exclusión social.",
+      "observation_status": "not_assessed",
+      "promise_id": "promise_0612fb9b9e1693fc96b25fd4e5e99836c757f169870123d62a071b10ac24c1df",
+      "review": {
+        "method": "manifesto_promises_v1:structured_bullet_action_prefix",
+        "status": "rule_confirmed"
+      },
+      "section_path": "2. Máis dereitos para unha maior xustiza social",
+      "topics": [
+        {
+          "assignment_method": "keyword_multilabel",
+          "assignment_version": "promise_topics_es_gl_v1",
+          "canonical_key": "promise.v1.social_protection",
+          "confidence": 0.89,
+          "label": "Protección e inclusión social"
+        }
+      ]
+    },
+    {
+      "actor": {
+        "actor_kind": "party",
+        "acronym": "BNG",
+        "name": "Bloque Nacionalista Galego",
+        "source_label": "BNG"
+      },
+      "claim_id": "claim_0e5bcae645b8e569ecd41359ab0b8bf7d42465e8a2f3b2ef37496c08fc392d01",
+      "claim_kind": "explicit_promise",
+      "commitment_strength": "explicit",
+      "evidence": {
+        "claim_evidence_id": "claimevidence_ff3f63dd079251099cb28bd536ece148b88948271f2b21de4e40a3c592508bdc",
+        "char_end": 566,
+        "char_start": 478,
+        "document_sha256": "b8994deec0bbc45cdcbef5d7c5395cabf30b0509706303c3d8e76058c48eebfd",
+        "exact_quote": "•   Aumentar o investimento destinado á vivenda até\nalcanzar os 250 euros por habitante.",
+        "page_end": 15,
+        "page_start": 15,
+        "quote_sha256": "b08a0c2005fcabb5dab7c8eb3cff3b238856867cdababed0772108fa73c05b30",
+        "source_url": "https://www.bng.gal/media/bnggaliza/files/2023/07/05/23_bng_xerais_programa.pdf"
+      },
+      "extraction": {
+        "confidence": 0.98,
+        "method": "pdftotext-layout-bullet",
+        "version": "pdf_bullets_page_aware_v1"
+      },
+      "measurability": {
+        "criteria": [
+          {
+            "criterion_type": "numeric_or_deadline_in_source",
+            "source_text": "Aumentar o investimento destinado á vivenda até alcanzar os 250 euros por habitante."
+          }
+        ],
+        "state": "measurable"
+      },
+      "normalized_text": "Aumentar o investimento destinado á vivenda até alcanzar os 250 euros por habitante.",
+      "observation_status": "not_assessed",
+      "promise_id": "promise_5eeaa47a74ed03823f1dd298d472c6ed9a2f35c5ffd80f8342af3cdab431b768",
+      "review": {
+        "method": "manifesto_promises_v1:structured_bullet_action_prefix",
+        "status": "rule_confirmed"
+      },
+      "section_path": "2. Máis dereitos para unha maior xustiza social",
+      "topics": [
+        {
+          "assignment_method": "keyword_multilabel",
+          "assignment_version": "promise_topics_es_gl_v1",
+          "canonical_key": "promise.v1.housing",
+          "confidence": 0.84,
+          "label": "Vivienda"
+        }
+      ]
+    },
+    {
+      "actor": {
+        "actor_kind": "party",
+        "acronym": "BNG",
+        "name": "Bloque Nacionalista Galego",
+        "source_label": "BNG"
+      },
+      "claim_id": "claim_4615fb5b1ac43701fb4a00c7d120ef5bee30f89509c117350877974422c1629e",
+      "claim_kind": "explicit_promise",
+      "commitment_strength": "explicit",
+      "evidence": {
+        "claim_evidence_id": "claimevidence_e3f4087a25e57843534eead29e729d9f35568f5996d521e4b2ec8eb26a7e3a69",
+        "char_end": 701,
+        "char_start": 568,
+        "document_sha256": "b8994deec0bbc45cdcbef5d7c5395cabf30b0509706303c3d8e76058c48eebfd",
+        "exact_quote": "•   Incrementar as reservas mínimas de solo de vivenda\nprotexida, especialmente para actuacións de renovación\ne rexeneración urbanas.",
+        "page_end": 15,
+        "page_start": 15,
+        "quote_sha256": "2a53ee6c3cf370ad139af51b8182b7cd344176f6f51b54e3d5f20782690d55bc",
+        "source_url": "https://www.bng.gal/media/bnggaliza/files/2023/07/05/23_bng_xerais_programa.pdf"
+      },
+      "extraction": {
+        "confidence": 0.98,
+        "method": "pdftotext-layout-bullet",
+        "version": "pdf_bullets_page_aware_v1"
+      },
+      "measurability": {
+        "criteria": [
+          {
+            "criterion_type": "action_requires_operational_definition",
+            "source_text": "Incrementar as reservas mínimas de solo de vivenda protexida, especialmente para actuacións de renovación e rexeneración urbanas."
+          }
+        ],
+        "state": "partially_measurable"
+      },
+      "normalized_text": "Incrementar as reservas mínimas de solo de vivenda protexida, especialmente para actuacións de renovación e rexeneración urbanas.",
+      "observation_status": "not_assessed",
+      "promise_id": "promise_5c7cd90db47b76b858ae60f2ac2cdfd1b4401e75961f8df945dc887134d1acb6",
+      "review": {
+        "method": "manifesto_promises_v1:structured_bullet_action_prefix",
+        "status": "rule_confirmed"
+      },
+      "section_path": "2. Máis dereitos para unha maior xustiza social",
+      "topics": [
+        {
+          "assignment_method": "keyword_multilabel",
+          "assignment_version": "promise_topics_es_gl_v1",
+          "canonical_key": "promise.v1.housing",
+          "confidence": 0.89,
+          "label": "Vivienda"
+        }
+      ]
+    },
+    {
+      "actor": {
+        "actor_kind": "party",
+        "acronym": "BNG",
+        "name": "Bloque Nacionalista Galego",
+        "source_label": "BNG"
+      },
+      "claim_id": "claim_b1d4a3fbda5514be7295f012f77bc21c51053a169b5c46ec0550744fca405bd8",
+      "claim_kind": "explicit_promise",
+      "commitment_strength": "explicit",
+      "evidence": {
+        "claim_evidence_id": "claimevidence_c18274b5ed38a6caa49aa83febb9a950f3a54ec286fabbc384f1924eea0b7153",
+        "char_end": 879,
+        "char_start": 703,
+        "document_sha256": "b8994deec0bbc45cdcbef5d7c5395cabf30b0509706303c3d8e76058c48eebfd",
+        "exact_quote": "•   Transferir de forma gratuíta as vivendas, solos e\npromocións da SAREB, de forma que permitan aumentar\na oferta de parque público de vivenda do IGVS alí onde\nexista demanda.",
+        "page_end": 15,
+        "page_start": 15,
+        "quote_sha256": "dba66af1c0eabf21c17cb44c4e3dbcd95afe537f476ac1808778d1c0aef1cc66",
+        "source_url": "https://www.bng.gal/media/bnggaliza/files/2023/07/05/23_bng_xerais_programa.pdf"
+      },
+      "extraction": {
+        "confidence": 0.98,
+        "method": "pdftotext-layout-bullet",
+        "version": "pdf_bullets_page_aware_v1"
+      },
+      "measurability": {
+        "criteria": [
+          {
+            "criterion_type": "binary_action_in_source",
+            "source_text": "Transferir de forma gratuíta as vivendas, solos e promocións da SAREB, de forma que permitan aumentar a oferta de parque público de vivenda do IGVS alí onde exista demanda."
+          }
+        ],
+        "state": "measurable"
+      },
+      "normalized_text": "Transferir de forma gratuíta as vivendas, solos e promocións da SAREB, de forma que permitan aumentar a oferta de parque público de vivenda do IGVS alí onde exista demanda.",
+      "observation_status": "not_assessed",
+      "promise_id": "promise_57b1f4de1643ccb031c3f0f01ce14438b7e550ee9f3a12e68ac542598bfa757f",
+      "review": {
+        "method": "manifesto_promises_v1:structured_bullet_action_prefix",
+        "status": "rule_confirmed"
+      },
+      "section_path": "2. Máis dereitos para unha maior xustiza social",
+      "topics": [
+        {
+          "assignment_method": "keyword_multilabel",
+          "assignment_version": "promise_topics_es_gl_v1",
+          "canonical_key": "promise.v1.housing",
+          "confidence": 0.94,
+          "label": "Vivienda"
+        }
+      ]
+    },
+    {
+      "actor": {
+        "actor_kind": "party",
+        "acronym": "BNG",
+        "name": "Bloque Nacionalista Galego",
+        "source_label": "BNG"
+      },
+      "claim_id": "claim_63ee27d1e866b393748696100912aa258d07b340e83ab6f665ee676f55aae74d",
+      "claim_kind": "explicit_promise",
+      "commitment_strength": "explicit",
+      "evidence": {
+        "claim_evidence_id": "claimevidence_1d98e57655d736d157509b83f0ce145e336d05a72d8a872726f75e20e508788a",
+        "char_end": 1068,
+        "char_start": 993,
+        "document_sha256": "b8994deec0bbc45cdcbef5d7c5395cabf30b0509706303c3d8e76058c48eebfd",
+        "exact_quote": "•   Reformular a fiscalidade sobre a vivenda con\ncriterios redistributivos.",
+        "page_end": 15,
+        "page_start": 15,
+        "quote_sha256": "5d2e4290ccc67ca804b683ff6e27e81658318dee325f2c3faa6e802115a01d58",
+        "source_url": "https://www.bng.gal/media/bnggaliza/files/2023/07/05/23_bng_xerais_programa.pdf"
+      },
+      "extraction": {
+        "confidence": 0.98,
+        "method": "pdftotext-layout-bullet",
+        "version": "pdf_bullets_page_aware_v1"
+      },
+      "measurability": {
+        "criteria": [
+          {
+            "criterion_type": "action_requires_operational_definition",
+            "source_text": "Reformular a fiscalidade sobre a vivenda con criterios redistributivos."
+          }
+        ],
+        "state": "partially_measurable"
+      },
+      "normalized_text": "Reformular a fiscalidade sobre a vivenda con criterios redistributivos.",
+      "observation_status": "not_assessed",
+      "promise_id": "promise_71a82c2ace43c88534835c0485b5914ed547a010a351415ae2642f9f2b458673",
+      "review": {
+        "method": "manifesto_promises_v1:structured_bullet_action_prefix",
+        "status": "rule_confirmed"
+      },
+      "section_path": "2. Máis dereitos para unha maior xustiza social",
+      "topics": [
+        {
+          "assignment_method": "keyword_multilabel",
+          "assignment_version": "promise_topics_es_gl_v1",
+          "canonical_key": "promise.v1.housing",
+          "confidence": 0.84,
+          "label": "Vivienda"
+        },
+        {
+          "assignment_method": "keyword_multilabel",
+          "assignment_version": "promise_topics_es_gl_v1",
+          "canonical_key": "promise.v1.public_finance",
+          "confidence": 0.84,
+          "label": "Fiscalidad y finanzas públicas"
+        }
+      ]
+    },
+    {
+      "actor": {
+        "actor_kind": "party",
+        "acronym": "BNG",
+        "name": "Bloque Nacionalista Galego",
+        "source_label": "BNG"
+      },
+      "claim_id": "claim_7bbf2fbc8716b3206cfbc7cc7417dd5ddde2f6c86631ff205beb3c2916a9ad2e",
+      "claim_kind": "explicit_promise",
+      "commitment_strength": "explicit",
+      "evidence": {
+        "claim_evidence_id": "claimevidence_1deca32c5be2e39b72d1cf830e275b587a3c7e8daaf9e8861c9436a0328fb01f",
+        "char_end": 1318,
+        "char_start": 1070,
+        "document_sha256": "b8994deec0bbc45cdcbef5d7c5395cabf30b0509706303c3d8e76058c48eebfd",
+        "exact_quote": "•   Evitar a degradación, o alleamento e a privatización do\npatrimonio público do solo e da vivenda, nomeadamente\nde entidades estatais como ADIF, INVIED ou Portos do\nEstado, procurando o seu uso como vivendas e espazos\npúblicos e a cesión ás CCAA.",
+        "page_end": 15,
+        "page_start": 15,
+        "quote_sha256": "c3435d07508dee9f9438971edb005315a50a02b3ed56a5bd21902b2009340bf5",
+        "source_url": "https://www.bng.gal/media/bnggaliza/files/2023/07/05/23_bng_xerais_programa.pdf"
+      },
+      "extraction": {
+        "confidence": 0.98,
+        "method": "pdftotext-layout-bullet",
+        "version": "pdf_bullets_page_aware_v1"
+      },
+      "measurability": {
+        "criteria": [
+          {
+            "criterion_type": "action_requires_operational_definition",
+            "source_text": "Evitar a degradación, o alleamento e a privatización do patrimonio público do solo e da vivenda, nomeadamente de entidades estatais como ADIF, INVIED ou Portos do Estado, procurando o seu uso como vivendas e espazos públicos e a cesión ás CCAA."
+          }
+        ],
+        "state": "partially_measurable"
+      },
+      "normalized_text": "Evitar a degradación, o alleamento e a privatización do patrimonio público do solo e da vivenda, nomeadamente de entidades estatais como ADIF, INVIED ou Portos do Estado, procurando o seu uso como vivendas e espazos públicos e a cesión ás CCAA.",
+      "observation_status": "not_assessed",
+      "promise_id": "promise_b72155b84e935183a51f67ec88ee253433fbfbc4f6f5307f1fd718d6c08d4feb",
+      "review": {
+        "method": "manifesto_promises_v1:structured_bullet_action_prefix",
+        "status": "rule_confirmed"
+      },
+      "section_path": "2. Máis dereitos para unha maior xustiza social",
+      "topics": [
+        {
+          "assignment_method": "keyword_multilabel",
+          "assignment_version": "promise_topics_es_gl_v1",
+          "canonical_key": "promise.v1.housing",
+          "confidence": 0.89,
+          "label": "Vivienda"
+        },
+        {
+          "assignment_method": "keyword_multilabel",
+          "assignment_version": "promise_topics_es_gl_v1",
+          "canonical_key": "promise.v1.transport",
+          "confidence": 0.84,
+          "label": "Transportes e infraestructuras"
+        }
+      ]
+    },
+    {
+      "actor": {
+        "actor_kind": "party",
+        "acronym": "BNG",
+        "name": "Bloque Nacionalista Galego",
+        "source_label": "BNG"
+      },
+      "claim_id": "claim_a3f0fd35be5228a55a366ad1b1269d4fa305649672a4cd4c5683a9a9a13999ae",
+      "claim_kind": "explicit_promise",
+      "commitment_strength": "explicit",
+      "evidence": {
+        "claim_evidence_id": "claimevidence_36b2a25c6e5a7683fb5eb8c700d0a598f1e88c214192598ec4a19a53cbcd9293",
+        "char_end": 1759,
+        "char_start": 1430,
+        "document_sha256": "b8994deec0bbc45cdcbef5d7c5395cabf30b0509706303c3d8e76058c48eebfd",
+        "exact_quote": "•   Incorporar nos programas estatais de vivenda medidas\ne recursos para mobilizar a vivenda baleira cara á súa\nocupación e cara ao aluguer accesíbel, de xeito negociado\ncoas administracións competentes en materia de\nvivenda e ordenación territorial e atendendo a un reparto\nque considere a incidencia territorial deste fenómeno.",
+        "page_end": 15,
+        "page_start": 15,
+        "quote_sha256": "9a5e28d9c4de040c36b420f7278ae1831caa47d9e8f34d1a1b7984efb7a92295",
+        "source_url": "https://www.bng.gal/media/bnggaliza/files/2023/07/05/23_bng_xerais_programa.pdf"
+      },
+      "extraction": {
+        "confidence": 0.98,
+        "method": "pdftotext-layout-bullet",
+        "version": "pdf_bullets_page_aware_v1"
+      },
+      "measurability": {
+        "criteria": [
+          {
+            "criterion_type": "binary_action_in_source",
+            "source_text": "Incorporar nos programas estatais de vivenda medidas e recursos para mobilizar a vivenda baleira cara á súa ocupación e cara ao aluguer accesíbel, de xeito negociado coas administracións competentes en materia de vivenda e ordenación territorial e atendendo a un reparto que considere a incidencia territorial deste fenómeno."
+          }
+        ],
+        "state": "measurable"
+      },
+      "normalized_text": "Incorporar nos programas estatais de vivenda medidas e recursos para mobilizar a vivenda baleira cara á súa ocupación e cara ao aluguer accesíbel, de xeito negociado coas administracións competentes en materia de vivenda e ordenación territorial e atendendo a un reparto que considere a incidencia territorial deste fenómeno.",
+      "observation_status": "not_assessed",
+      "promise_id": "promise_17183b4e0d9e2bce762ed71ba4cbb080bf7f6b63807bf681c918ac154c296b53",
+      "review": {
+        "method": "manifesto_promises_v1:structured_bullet_action_prefix",
+        "status": "rule_confirmed"
+      },
+      "section_path": "2. Máis dereitos para unha maior xustiza social",
+      "topics": [
+        {
+          "assignment_method": "keyword_multilabel",
+          "assignment_version": "promise_topics_es_gl_v1",
+          "canonical_key": "promise.v1.housing",
+          "confidence": 0.89,
+          "label": "Vivienda"
+        }
+      ]
+    },
+    {
+      "actor": {
+        "actor_kind": "party",
+        "acronym": "BNG",
+        "name": "Bloque Nacionalista Galego",
+        "source_label": "BNG"
+      },
+      "claim_id": "claim_585892ad3f16d20acfe7b6c11193f423aebc22d0c7bb7ea66d1de0d17c53df65",
+      "claim_kind": "explicit_promise",
+      "commitment_strength": "explicit",
+      "evidence": {
+        "claim_evidence_id": "claimevidence_07e1e3a662fd7d3d746997e33cab372dc249693e7a81a2d821fe6f599dd13d65",
+        "char_end": 690,
+        "char_start": 582,
+        "document_sha256": "b8994deec0bbc45cdcbef5d7c5395cabf30b0509706303c3d8e76058c48eebfd",
+        "exact_quote": "•   Eliminar as Empresas de Traballo Temporal (ETT), a\nsubcontratación en cadea e as falsas/os autónomas/os.",
+        "page_end": 17,
+        "page_start": 17,
+        "quote_sha256": "5c495c258f68d9dc72060c68070009d6b111827d1691df1a4d97ada5e5a578c6",
+        "source_url": "https://www.bng.gal/media/bnggaliza/files/2023/07/05/23_bng_xerais_programa.pdf"
+      },
+      "extraction": {
+        "confidence": 0.98,
+        "method": "pdftotext-layout-bullet",
+        "version": "pdf_bullets_page_aware_v1"
+      },
+      "measurability": {
+        "criteria": [
+          {
+            "criterion_type": "binary_action_in_source",
+            "source_text": "Eliminar as Empresas de Traballo Temporal (ETT), a subcontratación en cadea e as falsas/os autónomas/os."
+          }
+        ],
+        "state": "measurable"
+      },
+      "normalized_text": "Eliminar as Empresas de Traballo Temporal (ETT), a subcontratación en cadea e as falsas/os autónomas/os.",
+      "observation_status": "not_assessed",
+      "promise_id": "promise_08bfb05ff26f8cba42aa6d7d5923846720fd6b024ee4157d309fa29963a33b17",
+      "review": {
+        "method": "manifesto_promises_v1:structured_bullet_action_prefix",
+        "status": "rule_confirmed"
+      },
+      "section_path": "2. Máis dereitos para unha maior xustiza social",
+      "topics": [
+        {
+          "assignment_method": "keyword_multilabel",
+          "assignment_version": "promise_topics_es_gl_v1",
+          "canonical_key": "promise.v1.labour",
+          "confidence": 0.84,
+          "label": "Trabajo y relaciones laborales"
+        },
+        {
+          "assignment_method": "keyword_multilabel",
+          "assignment_version": "promise_topics_es_gl_v1",
+          "canonical_key": "promise.v1.industry",
+          "confidence": 0.84,
+          "label": "Industria y tejido productivo"
+        }
+      ]
+    }
+  ]
+}

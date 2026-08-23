@@ -1,0 +1,41 @@
+{
+  "artifact_bytes": 13937,
+  "artifact_sha256": "ea8c3eb11ff2e31e0a6585ee3f965b7d6dd5d662b2953952f4eb440a988c880e",
+  "checks": {
+    "fact_only": true,
+    "official_public_identity_retained": true,
+    "published_public_byte_parity": true,
+    "real_data_only": true,
+    "release_hash": true
+  },
+  "errors": [],
+  "metrics": {
+    "actor_labels": 7,
+    "database_counts": {
+      "actions": 2,
+      "actors": 11,
+      "evidence": 2,
+      "later_observations": 0,
+      "links": 2,
+      "position_evidence": 0,
+      "positions": 0,
+      "topics": 4
+    },
+    "entry_into_force_claims": 0,
+    "explicit_positions": 0,
+    "foreign_key_violations": 0,
+    "geopolitical_inferences": 0,
+    "implementation_claims": 0,
+    "integrity_check": "ok",
+    "records": 2
+  },
+  "official_capture": {
+    "bytes": 21234,
+    "content_sha256": "ab08b7dc09a46c890f055e95fdeac5e7d716a5023f8792f19ce440a239271ddf",
+    "path": "etl/data/raw/moncloa_referencias/2026/02/16/moncloa_referencias_20260216T141256Z.json",
+    "records": 20
+  },
+  "release_id": "6683fd44eece98198ab3040e264c584b878cb33aa43be719ae19b99f58246204",
+  "schema_version": "moncloa_geopolitics_validation_v1",
+  "status": "ok"
+}

@@ -1,0 +1,74 @@
+{
+  "schema_version": "placsp_spending_materialization_report_v1",
+  "status": "ok",
+  "release_id": "7abe9ac62d4af254aa41a2ffb2a7b4b9cf3e1ae607c6082329da17330a86a7a6",
+  "real_data_only": true,
+  "synthetic_or_mock": false,
+  "public_domain_information_policy": "retained_exactly",
+  "source_database": "placsp-contracts-real-s1-20260811.db",
+  "source_counts": {
+    "money_contract_records": 330577,
+    "money_contract_award_results": 262558,
+    "money_contract_documents": 3190620,
+    "source_records": 330597,
+    "placsp_bulk_archives": 6,
+    "placsp_bulk_members": 667,
+    "placsp_bulk_record_sightings": 330688
+  },
+  "source_archives": [
+    {
+      "period": "202501",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202501.zip",
+      "content_sha256": "bda70aa0a7437d031e5d3f6114e5a637920ea1a460e1aba67d200209ae5eab7f",
+      "bytes": 146382691,
+      "transport_security": "verified_custom_ca"
+    }
+  ],
+  "materialized_counts": {
+    "source_records": 20,
+    "money_contract_records": 20,
+    "money_contract_award_results": 20,
+    "money_contract_documents": 18,
+    "spending_items": 20,
+    "spending_item_actors": 40,
+    "spending_item_evidence": 38,
+    "spending_item_links": 0
+  },
+  "published_counts": {
+    "published_items": 20,
+    "published_actors": 40,
+    "published_evidence": 38,
+    "counterparty_legal_entity": 10,
+    "counterparty_potential_natural_person": 5,
+    "counterparty_unclassified": 5,
+    "materialized_db": {
+      "source_records": 20,
+      "money_contract_records": 20,
+      "money_contract_award_results": 20,
+      "money_contract_documents": 18,
+      "spending_items": 20,
+      "spending_item_actors": 40,
+      "spending_item_evidence": 38,
+      "spending_item_links": 0
+    }
+  },
+  "amounts": {
+    "award_amount_total_decimal": "4835494.71",
+    "payable_amount_total_decimal": "5845384.70",
+    "currency": "EUR",
+    "amount_semantics": "award_amount",
+    "tax_semantics": "excluding_tax"
+  },
+  "artifact_bytes": 95189,
+  "artifact_sha256": "b09990e1c05be599d728156f1e98030a8d1f5eb08ea90139467fd471cc40df34",
+  "checks": {
+    "latest_source_versions_only": true,
+    "phase_is_procurement_award": true,
+    "award_is_not_payment": true,
+    "exact_decimal_arithmetic": true,
+    "actor_to_item_to_evidence_complete": true,
+    "public_counterparty_identity_retained": true,
+    "foreign_key_check": "ok",
+    "integrity_check": "ok"
+  }
+}

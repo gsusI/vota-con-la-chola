@@ -1,0 +1,362 @@
+.page {
+  --money-green: #1f5a46;
+  --money-green-soft: #edf7f2;
+  --money-rust: #8a451c;
+  --money-rust-soft: #fff2e8;
+  gap: 18px;
+  animation: spending-page-enter 320ms ease-out both;
+}
+
+.truthPanel,
+.summaryPanel,
+.sampleSection {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: var(--shadow);
+}
+
+.truthPanel {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(360px, 1fr);
+  gap: 18px;
+  padding: 20px;
+  transition: grid-template-columns 220ms ease, padding 220ms ease;
+}
+
+.eyebrow {
+  margin: 0 0 5px;
+  color: var(--money-green);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.sectionTitle {
+  margin: 0;
+  font-family: var(--display);
+  font-size: clamp(1.35rem, 2vw, 2rem);
+  line-height: 1.1;
+}
+
+.sectionCopy,
+.sectionNote {
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+
+.sectionCopy {
+  max-width: 76ch;
+  margin: 9px 0 0;
+}
+
+.sectionNote {
+  max-width: 52ch;
+  margin: 0;
+}
+
+.metricGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+  transition: grid-template-columns 220ms ease;
+}
+
+.metric {
+  min-width: 0;
+  border: 1px solid #cfe1d9;
+  border-radius: 7px;
+  background: var(--money-green-soft);
+  padding: 11px;
+}
+
+.metric dt,
+.identityGrid dt,
+.factGrid dt {
+  color: var(--ink-soft);
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.metric dd {
+  margin: 5px 0 0;
+  color: var(--money-green);
+  font-family: var(--display);
+  font-size: 1.55rem;
+  font-weight: 800;
+}
+
+.summaryPanel {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(350px, 1fr);
+  gap: 18px;
+  align-items: center;
+  padding: 18px 20px;
+  transition: grid-template-columns 220ms ease, padding 220ms ease;
+}
+
+.identityGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 7px;
+  margin: 0;
+  transition: grid-template-columns 220ms ease;
+}
+
+.identityGrid > div {
+  min-width: 0;
+  border-left: 3px solid var(--money-rust);
+  background: var(--money-rust-soft);
+  padding: 9px;
+}
+
+.identityGrid dd {
+  margin: 4px 0 0;
+  color: var(--money-rust);
+  font-family: var(--display);
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+
+.sampleSection {
+  display: grid;
+  gap: 16px;
+  padding: 20px;
+}
+
+.sectionHeader {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: end;
+  justify-content: space-between;
+}
+
+.spendingList {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  transition: grid-template-columns 220ms ease;
+}
+
+.spendingItem {
+  min-width: 0;
+}
+
+.spendingCard {
+  display: grid;
+  align-content: start;
+  gap: 13px;
+  height: 100%;
+  min-width: 0;
+  border: 1px solid #d9e4de;
+  border-left: 4px solid var(--money-green);
+  border-radius: 8px;
+  background: #fff;
+  padding: 15px;
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.spendingCard:hover,
+.spendingCard:focus-within {
+  border-color: #8eb5a5;
+  box-shadow: 0 12px 25px rgba(31, 90, 70, 0.11);
+  transform: translateY(-2px);
+}
+
+.cardHeader,
+.cardFooter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.cardHeader > :first-child {
+  min-width: 0;
+  flex: 1 1 320px;
+}
+
+.ordinal {
+  display: block;
+  color: var(--money-green);
+  font-family: var(--mono);
+  font-size: 0.69rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.cardTitle {
+  margin: 5px 0 0;
+  font-family: var(--display);
+  font-size: 1.05rem;
+  line-height: 1.35;
+}
+
+.phaseBadge {
+  border: 1px solid #e4c2a9;
+  border-radius: 999px;
+  background: var(--money-rust-soft);
+  padding: 4px 8px;
+  color: var(--money-rust);
+  font-size: 0.68rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.moneyPanel {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 8px;
+  margin: 0;
+  border-radius: 7px;
+  background: var(--money-green-soft);
+  padding: 11px;
+  transition: grid-template-columns 220ms ease;
+}
+
+.moneyPanel dt {
+  color: var(--ink-soft);
+  font-size: 0.67rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.moneyPanel dd {
+  margin: 5px 0 0;
+}
+
+.moneyValue {
+  color: var(--money-green);
+  font-family: var(--display);
+  font-size: 1.35rem;
+  font-weight: 850;
+}
+
+.moneySecondary {
+  font-weight: 800;
+}
+
+.actorGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  transition: grid-template-columns 220ms ease;
+}
+
+.actorPanel {
+  display: grid;
+  align-content: start;
+  gap: 5px;
+  min-width: 0;
+  border: 1px solid #e3e7e4;
+  border-radius: 7px;
+  padding: 10px;
+}
+
+.actorRole {
+  color: var(--ink-soft);
+  font-size: 0.66rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.actorId,
+.hash {
+  color: var(--ink-muted);
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  overflow-wrap: anywhere;
+}
+
+.factGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 7px;
+  margin: 0;
+  transition: grid-template-columns 220ms ease;
+}
+
+.factGrid > div {
+  min-width: 0;
+  border-top: 1px solid #e9ecea;
+  padding-top: 8px;
+}
+
+.factGrid dd {
+  margin: 3px 0 0;
+  font-size: 0.76rem;
+  font-weight: 750;
+  overflow-wrap: anywhere;
+}
+
+.cardFooter {
+  align-self: end;
+  align-items: center;
+  border-top: 1px solid #e9ecea;
+  padding-top: 10px;
+}
+
+.cardLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+@keyframes spending-page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 940px) {
+  .truthPanel,
+  .summaryPanel,
+  .spendingList {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 620px) {
+  .truthPanel,
+  .summaryPanel,
+  .sampleSection {
+    padding: 15px;
+  }
+
+  .metricGrid,
+  .identityGrid,
+  .moneyPanel,
+  .actorGrid,
+  .factGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page,
+  .truthPanel,
+  .summaryPanel,
+  .metricGrid,
+  .identityGrid,
+  .spendingList,
+  .spendingCard,
+  .moneyPanel,
+  .actorGrid,
+  .factGrid {
+    animation: none;
+    transition: none;
+  }
+}

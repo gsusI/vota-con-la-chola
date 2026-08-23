@@ -1,0 +1,365 @@
+.page {
+  --geo-navy: #193a5a;
+  --geo-blue-soft: #edf5fb;
+  --geo-copper: #8a4f24;
+  --geo-copper-soft: #fff2e8;
+  gap: 18px;
+  animation: geopolitics-page-enter 320ms ease-out both;
+}
+
+.truthPanel,
+.coveragePanel,
+.sampleSection {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: var(--shadow);
+}
+
+.truthPanel,
+.coveragePanel {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(350px, 1fr);
+  gap: 18px;
+  padding: 20px;
+  transition: grid-template-columns 220ms ease, padding 220ms ease;
+}
+
+.eyebrow {
+  margin: 0 0 5px;
+  color: var(--geo-navy);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.sectionTitle {
+  margin: 0;
+  font-family: var(--display);
+  font-size: clamp(1.35rem, 2vw, 2rem);
+  line-height: 1.1;
+}
+
+.sectionCopy,
+.sectionNote {
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+
+.sectionCopy {
+  max-width: 78ch;
+  margin: 9px 0 0;
+}
+
+.sectionNote {
+  max-width: 54ch;
+  margin: 0;
+}
+
+.metricGrid,
+.limitGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+  transition: grid-template-columns 220ms ease;
+}
+
+.metric,
+.limitGrid > div {
+  min-width: 0;
+  border: 1px solid #c8d9e7;
+  border-radius: 7px;
+  background: var(--geo-blue-soft);
+  padding: 11px;
+}
+
+.metric dt,
+.limitGrid dt,
+.stateGrid dt {
+  color: var(--ink-soft);
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.metric dd,
+.limitGrid dd {
+  margin: 5px 0 0;
+  color: var(--geo-navy);
+  font-family: var(--display);
+  font-size: 1.45rem;
+  font-weight: 800;
+}
+
+.coveragePanel {
+  align-items: center;
+}
+
+.limitGrid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.limitGrid > div {
+  border-color: #e6c8b2;
+  border-left: 3px solid var(--geo-copper);
+  background: var(--geo-copper-soft);
+}
+
+.limitGrid dd {
+  color: var(--geo-copper);
+  font-size: 1.25rem;
+}
+
+.sampleSection {
+  display: grid;
+  gap: 16px;
+  padding: 20px;
+}
+
+.sectionHeader {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: end;
+  justify-content: space-between;
+}
+
+.actionList {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  transition: grid-template-columns 220ms ease;
+}
+
+.actionItem {
+  min-width: 0;
+}
+
+.actionCard {
+  display: grid;
+  align-content: start;
+  gap: 13px;
+  height: 100%;
+  min-width: 0;
+  border: 1px solid #d6e0e8;
+  border-left: 4px solid var(--geo-navy);
+  border-radius: 8px;
+  background: #fff;
+  padding: 15px;
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.actionCard:hover,
+.actionCard:focus-within {
+  border-color: #7f9bb0;
+  box-shadow: 0 12px 25px rgba(25, 58, 90, 0.13);
+  transform: translateY(-2px);
+}
+
+.cardHeader,
+.cardFooter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.cardHeader > :first-child {
+  min-width: 0;
+  flex: 1 1 310px;
+}
+
+.ordinal {
+  display: block;
+  color: var(--geo-navy);
+  font-family: var(--mono);
+  font-size: 0.69rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.cardTitle {
+  margin: 5px 0 0;
+  font-family: var(--display);
+  font-size: 1.05rem;
+  line-height: 1.35;
+}
+
+.statusBadge {
+  border: 1px solid #d7a985;
+  border-radius: 999px;
+  background: var(--geo-copper-soft);
+  padding: 4px 8px;
+  color: var(--geo-copper);
+  font-size: 0.68rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.scopeLine {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  align-items: baseline;
+  border: 1px solid #d7e2eb;
+  border-radius: 6px;
+  background: var(--geo-blue-soft);
+  padding: 8px 10px;
+  color: var(--ink-soft);
+  font-size: 0.72rem;
+}
+
+.scopeLine strong {
+  color: var(--geo-navy);
+}
+
+.quote {
+  margin: 0;
+  border-left: 3px solid #9bb7cc;
+  background: #f5f9fc;
+  padding: 12px 13px;
+  color: var(--ink);
+  font-size: 0.91rem;
+  line-height: 1.52;
+}
+
+.cardSection {
+  display: grid;
+  gap: 7px;
+}
+
+.cardSectionTitle {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+}
+
+.actorList,
+.topicList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.actorChip {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+  border: 1px solid #dde4ea;
+  border-radius: 6px;
+  background: #fbfcfd;
+  padding: 7px 8px;
+}
+
+.actorRole {
+  color: var(--geo-navy);
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  font-weight: 800;
+}
+
+.topicChip {
+  border-radius: 999px;
+  background: #e8f1f8;
+  padding: 5px 8px;
+  color: var(--geo-navy);
+  font-size: 0.7rem;
+  font-weight: 750;
+}
+
+.stateGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+  margin: 0;
+  transition: grid-template-columns 220ms ease;
+}
+
+.stateGrid > div {
+  min-width: 0;
+  border-left: 3px solid var(--geo-copper);
+  background: var(--geo-copper-soft);
+  padding: 8px;
+}
+
+.stateGrid dd {
+  margin: 3px 0 0;
+  color: var(--geo-copper);
+  font-weight: 800;
+}
+
+.cardFooter {
+  align-items: center;
+  border-top: 1px solid #e4e8ec;
+  padding-top: 11px;
+}
+
+.hash {
+  overflow-wrap: anywhere;
+  color: var(--ink-soft);
+  font-size: 0.68rem;
+}
+
+@keyframes geopolitics-page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 900px) {
+  .truthPanel,
+  .coveragePanel,
+  .actionList {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 620px) {
+  .truthPanel,
+  .coveragePanel,
+  .sampleSection {
+    padding: 15px;
+  }
+
+  .metricGrid,
+  .limitGrid,
+  .stateGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page {
+    animation: none;
+  }
+
+  .truthPanel,
+  .coveragePanel,
+  .metricGrid,
+  .limitGrid,
+  .actionList,
+  .actionCard,
+  .stateGrid {
+    transition: none;
+  }
+
+  .actionCard:hover,
+  .actionCard:focus-within {
+    transform: none;
+  }
+}

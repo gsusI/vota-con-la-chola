@@ -1,0 +1,41 @@
+{
+  "schema_version": "manifesto_promises_ingest_report_v1",
+  "status": "ok",
+  "db_path": "etl/data/staging/promises-bng-2023.db",
+  "published_out": "etl/data/published/promises-bng-2023.json",
+  "public_out": "ui/gh-pages-next/public/promises/data/bng-2023.json",
+  "source": {
+    "bytes": 396842,
+    "content_sha256": "b8994deec0bbc45cdcbef5d7c5395cabf30b0509706303c3d8e76058c48eebfd",
+    "document_kind": "manifesto",
+    "election_key": "es_generales_2023",
+    "language": "gl",
+    "manifesto_document_id": "manifesto_ce98faab6d2d2ab9731ae0f4cd46093ac270b2f61ed8072db5166e008af12cc3",
+    "page_count": 68,
+    "source_id": "programas_partidos",
+    "source_url": "https://www.bng.gal/media/bnggaliza/files/2023/07/05/23_bng_xerais_programa.pdf",
+    "title": "Programa Electoral Eleccións Xerais 2023"
+  },
+  "run_id": "claimrun_33ae9275e502526fe6648618237cd1435a0e38104ee9cea19bcb25229e1a7496",
+  "release_id": "a3864cf278115becd5428afd0559985063a5c8b7e2bd459b244a6f07f1b81590",
+  "party_id": 1,
+  "source_record_pk": 1,
+  "text_document_id": 1,
+  "text_sha256": "00bd13b3236eb432d376e79bf1b5c831e11ea261aa24c34d6bd4d407a5e67ca3",
+  "text_chars": 144270,
+  "counts": {
+    "segments_seen": 266,
+    "claims_loaded": 266,
+    "explicit_promises": 97,
+    "promises_loaded": 91,
+    "soft_commitments": 26,
+    "pending_claims": 169,
+    "needs_context_claims": 6,
+    "topic_links": 323,
+    "published_promises": 20
+  },
+  "foreign_key_errors": 0,
+  "real_data_only": true,
+  "synthetic_or_mock": false,
+  "official_public_domain_information_retained": true
+}

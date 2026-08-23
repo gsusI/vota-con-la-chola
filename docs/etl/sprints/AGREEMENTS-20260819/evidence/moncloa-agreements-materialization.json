@@ -1,0 +1,63 @@
+{
+  "artifact_bytes": 108229,
+  "artifact_sha256": "8d8ce21967ac1c63a869dd2b5661877e789bb32fcc7e36f9626f9c2678fea678",
+  "counts": {
+    "agreement_evidence": 11,
+    "agreement_parties": 37,
+    "agreement_topics": 20,
+    "agreements": 11,
+    "attendance_claims": 0,
+    "influence_assertions": 0,
+    "materialized_db": {
+      "accountability_meetings": 11,
+      "agreement_evidence": 11,
+      "agreement_parties": 37,
+      "agreement_topics": 20,
+      "agreements": 11,
+      "influence_assertions": 0,
+      "meeting_agenda_items": 11,
+      "meeting_evidence": 11,
+      "meeting_participants": 22,
+      "source_records": 11
+    },
+    "meeting_evidence": 11,
+    "meeting_participants": 22,
+    "meetings": 11,
+    "party_roles": {
+      "adopter": 11,
+      "affected_body": 10,
+      "counterparty": 5,
+      "publishing_body": 11
+    },
+    "topic_counts": {
+      "elections_democracy": 1,
+      "equality_gender_violence": 1,
+      "international_relations": 2,
+      "public_administration": 3,
+      "public_finance": 8,
+      "research_innovation": 2,
+      "social_protection": 2,
+      "transport_mobility": 1
+    }
+  },
+  "outputs": {
+    "database": "etl/data/staging/agreements-moncloa-mvp.db",
+    "public": "ui/gh-pages-next/public/agreements/data/moncloa-sample.json",
+    "published": "etl/data/published/agreements-moncloa-sample.json"
+  },
+  "release_id": "6f75ec32a5c085fbf71109919de785e48a5d7b2dcdf8ea13b2aaddfcffdf3753",
+  "source_capture": {
+    "bytes": 21234,
+    "content_sha256": "ab08b7dc09a46c890f055e95fdeac5e7d716a5023f8792f19ce440a239271ddf",
+    "content_type": "application/json",
+    "fetched_at": "2026-02-16T14:12:56+00:00",
+    "path": "etl/data/raw/moncloa_referencias/2026/02/16/moncloa_referencias_20260216T141256Z.json",
+    "source_url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/index.aspx"
+  },
+  "source_counts": {
+    "explicit_agreement_records": 11,
+    "moncloa_referencias_records": 20,
+    "source_records_total": 28
+  },
+  "status": "ok"
+}

@@ -1,0 +1,359 @@
+.page {
+  --agreement-indigo: #31427c;
+  --agreement-indigo-soft: #eef1fb;
+  --agreement-amber: #8a5a12;
+  --agreement-amber-soft: #fff6df;
+  gap: 18px;
+  animation: agreements-page-enter 320ms ease-out both;
+}
+
+.truthPanel,
+.methodPanel,
+.sampleSection {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: var(--shadow);
+}
+
+.truthPanel {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(360px, 1fr);
+  gap: 18px;
+  padding: 20px;
+  transition: grid-template-columns 220ms ease, padding 220ms ease;
+}
+
+.eyebrow {
+  margin: 0 0 5px;
+  color: var(--agreement-indigo);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.sectionTitle {
+  margin: 0;
+  font-family: var(--display);
+  font-size: clamp(1.35rem, 2vw, 2rem);
+  line-height: 1.1;
+}
+
+.sectionCopy,
+.sectionNote {
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+
+.sectionCopy {
+  max-width: 76ch;
+  margin: 9px 0 0;
+}
+
+.sectionNote {
+  max-width: 52ch;
+  margin: 0;
+}
+
+.metricGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+  transition: grid-template-columns 220ms ease;
+}
+
+.metric {
+  min-width: 0;
+  border: 1px solid #ccd4ee;
+  border-radius: 7px;
+  background: var(--agreement-indigo-soft);
+  padding: 11px;
+}
+
+.metric dt,
+.limitGrid dt,
+.factGrid dt {
+  color: var(--ink-soft);
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.metric dd {
+  margin: 5px 0 0;
+  color: var(--agreement-indigo);
+  font-family: var(--display);
+  font-size: 1.55rem;
+  font-weight: 800;
+}
+
+.methodPanel {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(350px, 1fr);
+  gap: 18px;
+  align-items: center;
+  padding: 18px 20px;
+  transition: grid-template-columns 220ms ease, padding 220ms ease;
+}
+
+.limitGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 7px;
+  margin: 0;
+  transition: grid-template-columns 220ms ease;
+}
+
+.limitGrid > div {
+  min-width: 0;
+  border-left: 3px solid var(--agreement-amber);
+  background: var(--agreement-amber-soft);
+  padding: 9px;
+}
+
+.limitGrid dd {
+  margin: 4px 0 0;
+  color: var(--agreement-amber);
+  font-family: var(--display);
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+
+.sampleSection {
+  display: grid;
+  gap: 16px;
+  padding: 20px;
+}
+
+.sectionHeader {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: end;
+  justify-content: space-between;
+}
+
+.agreementList {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  transition: grid-template-columns 220ms ease;
+}
+
+.agreementItem {
+  min-width: 0;
+}
+
+.agreementCard {
+  display: grid;
+  align-content: start;
+  gap: 13px;
+  height: 100%;
+  min-width: 0;
+  border: 1px solid #d9ddeb;
+  border-left: 4px solid var(--agreement-indigo);
+  border-radius: 8px;
+  background: #fff;
+  padding: 15px;
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.agreementCard:hover,
+.agreementCard:focus-within {
+  border-color: #909cc8;
+  box-shadow: 0 12px 25px rgba(49, 66, 124, 0.12);
+  transform: translateY(-2px);
+}
+
+.cardHeader,
+.cardFooter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.cardHeader > :first-child {
+  min-width: 0;
+  flex: 1 1 320px;
+}
+
+.ordinal {
+  display: block;
+  color: var(--agreement-indigo);
+  font-family: var(--mono);
+  font-size: 0.69rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.cardTitle {
+  margin: 5px 0 0;
+  font-family: var(--display);
+  font-size: 1.05rem;
+  line-height: 1.35;
+}
+
+.statusBadge {
+  border: 1px solid #d8b97c;
+  border-radius: 999px;
+  background: var(--agreement-amber-soft);
+  padding: 4px 8px;
+  color: var(--agreement-amber);
+  font-size: 0.68rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.excerpt {
+  margin: 0;
+  border-left: 3px solid #b7c1e1;
+  background: var(--agreement-indigo-soft);
+  padding: 12px 13px;
+  color: var(--ink);
+  font-size: 0.91rem;
+  line-height: 1.52;
+}
+
+.cardSection {
+  display: grid;
+  gap: 7px;
+}
+
+.cardSectionTitle {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+}
+
+.actorList,
+.topicList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.actorChip {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+  border: 1px solid #e1e3eb;
+  border-radius: 6px;
+  background: #fafafe;
+  padding: 7px 8px;
+}
+
+.actorRole {
+  color: var(--agreement-indigo);
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.topicChip {
+  border: 1px solid #e6c993;
+  border-radius: 999px;
+  background: var(--agreement-amber-soft);
+  padding: 4px 7px;
+  color: #71470c;
+  font-size: 0.7rem;
+  font-weight: 750;
+}
+
+.factGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+  margin: 0;
+  transition: grid-template-columns 220ms ease;
+}
+
+.factGrid > div {
+  min-width: 0;
+  border-top: 1px solid #e3e5eb;
+  padding-top: 7px;
+}
+
+.factGrid dd {
+  margin: 3px 0 0;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.cardFooter {
+  align-items: center;
+  border-top: 1px solid #e5e7ed;
+  padding-top: 11px;
+}
+
+.hash {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  color: var(--ink-soft);
+  font-size: 0.68rem;
+}
+
+@keyframes agreements-page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 940px) {
+  .truthPanel,
+  .methodPanel,
+  .agreementList {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 620px) {
+  .truthPanel,
+  .methodPanel,
+  .sampleSection {
+    padding: 15px;
+  }
+
+  .metricGrid,
+  .limitGrid,
+  .factGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page {
+    animation: none;
+  }
+
+  .truthPanel,
+  .methodPanel,
+  .metricGrid,
+  .limitGrid,
+  .agreementList,
+  .agreementCard,
+  .factGrid {
+    transition: none;
+  }
+
+  .agreementCard:hover,
+  .agreementCard:focus-within {
+    transform: none;
+  }
+}

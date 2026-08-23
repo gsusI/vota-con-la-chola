@@ -1,0 +1,61 @@
+{
+  "schema_version": "live_eurostat_gdp_verification_v1",
+  "status": "ok",
+  "verified_at": "2026-08-19T22:43:47.899022+00:00",
+  "expected_release": "a5d2782888c550487087244b679cd0c5c89f95392a9de3d6a8384c734d757a69",
+  "live_release": "a5d2782888c550487087244b679cd0c5c89f95392a9de3d6a8384c734d757a69",
+  "page": {
+    "url": "https://votaconlachola.org/indicators/",
+    "http_status": 200,
+    "content_type": "text/html; charset=utf-8",
+    "bytes": 205105,
+    "sha256": "45fb54810b478e4ec4ddb13369dee5cbe45df556e195fdc98f009ba89e8ce657"
+  },
+  "artifact": {
+    "url": "https://votaconlachola.org/indicators/data/eurostat-gdp-es.json",
+    "http_status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "bytes": 2448614,
+    "sha256": "8a878b41108d2eb58989af825aa1a9309aca389c4da041b09a915230172ab8d7",
+    "series": 86,
+    "observations": 2091,
+    "provisional": 113
+  },
+  "official_eurostat_probes": [
+    {
+      "label": "dataset",
+      "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/nama_10r_3gdp?lang=EN&sinceTimePeriod=2000",
+      "status": 200,
+      "content_type": "application/json",
+      "prefix_bytes": 131072,
+      "prefix_sha256": "1da088d6503ff80a94096c56f402b007e94798bd26f8047553a730e172135e31"
+    },
+    {
+      "label": "methodology",
+      "url": "https://ec.europa.eu/eurostat/cache/metadata/en/reg_eco10_esms.htm",
+      "status": 200,
+      "content_type": "text/html",
+      "prefix_bytes": 131072,
+      "prefix_sha256": "138dc44e4f1977ee06e8989443d078208590767fe3aeac6c3ad2aa11938e539a"
+    },
+    {
+      "label": "reuse_policy",
+      "url": "https://ec.europa.eu/eurostat/about/policies/copyright/",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "prefix_bytes": 22759,
+      "prefix_sha256": "14d36050f8c1736cab45b2ead07542d6ae55e2e167461d163b464d15ef1a938d"
+    }
+  ],
+  "checks": {
+    "page_markers": 3,
+    "exact_artifact_parity": true,
+    "real_data_only": true,
+    "public_domain_information_retained": true,
+    "no_causal_claim": true,
+    "bounded_slice_complete": true,
+    "million_row_corpus_referenced": true,
+    "official_source_probes": true
+  },
+  "errors": []
+}

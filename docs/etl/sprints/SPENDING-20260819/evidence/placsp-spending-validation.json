@@ -1,0 +1,57 @@
+{
+  "schema_version": "placsp_spending_validation_v1",
+  "status": "ok",
+  "release_id": "7abe9ac62d4af254aa41a2ffb2a7b4b9cf3e1ae607c6082329da17330a86a7a6",
+  "artifact_bytes": 95189,
+  "artifact_sha256": "b09990e1c05be599d728156f1e98030a8d1f5eb08ea90139467fd471cc40df34",
+  "source_counts": {
+    "money_contract_records": 330577,
+    "money_contract_award_results": 262558,
+    "money_contract_documents": 3190620,
+    "source_records": 330597,
+    "placsp_bulk_archives": 6,
+    "placsp_bulk_members": 667,
+    "placsp_bulk_record_sightings": 330688
+  },
+  "materialized_counts": {
+    "source_records": 20,
+    "money_contract_records": 20,
+    "money_contract_award_results": 20,
+    "money_contract_documents": 18,
+    "spending_items": 20,
+    "spending_item_actors": 40,
+    "spending_item_evidence": 38,
+    "spending_item_links": 0
+  },
+  "validated_items": 20,
+  "validated_actor_rows": 40,
+  "validated_evidence_rows": 38,
+  "counterparty_identity_strata": {
+    "legal_entity": 10,
+    "unclassified": 5,
+    "potential_natural_person": 5
+  },
+  "amounts": {
+    "award_amount_total_decimal": "4835494.71",
+    "payable_amount_total_decimal": "5845384.70"
+  },
+  "official_archives_verified": [
+    {
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202501.zip",
+      "raw_path": "etl/data/object-origin/placsp-contracts/bd/a7/bda70aa0a7437d031e5d3f6114e5a637920ea1a460e1aba67d200209ae5eab7f.zip",
+      "bytes": 146382691,
+      "sha256": "bda70aa0a7437d031e5d3f6114e5a637920ea1a460e1aba67d200209ae5eab7f"
+    }
+  ],
+  "checks": {
+    "release_hash": true,
+    "published_public_parity": true,
+    "real_data_only": true,
+    "public_identity_retained_exactly": true,
+    "award_not_payment": true,
+    "exact_decimal_reconciliation": true,
+    "integrity_check": "ok",
+    "foreign_key_rows": 0
+  },
+  "errors": []
+}

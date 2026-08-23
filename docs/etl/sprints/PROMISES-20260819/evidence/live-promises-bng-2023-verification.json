@@ -1,0 +1,38 @@
+{
+  "schema_version": "live_manifesto_promises_verification_v1",
+  "status": "ok",
+  "verified_at": "2026-08-19T20:21:44.989729+00:00",
+  "expected_release": "a3864cf278115becd5428afd0559985063a5c8b7e2bd459b244a6f07f1b81590",
+  "live_release": "a3864cf278115becd5428afd0559985063a5c8b7e2bd459b244a6f07f1b81590",
+  "page": {
+    "url": "https://votaconlachola.org/promises/",
+    "http_status": 200,
+    "content_type": "text/html; charset=utf-8",
+    "bytes": 129084,
+    "sha256": "461d2a1311d2c422c0bdda7b5f74b82619e6f5a7d9a6fcce72d367e1977390ba"
+  },
+  "artifact": {
+    "url": "https://votaconlachola.org/promises/data/bng-2023.json",
+    "http_status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "bytes": 57898,
+    "sha256": "08a35fc3ff4f626331bd3e95a993f683163a6695dabfddfceb9e8dc6495eff52",
+    "items": 20
+  },
+  "official_source": {
+    "url": "https://www.bng.gal/media/bnggaliza/files/2023/07/05/23_bng_xerais_programa.pdf",
+    "http_status": 200,
+    "content_type": "application/pdf",
+    "bytes": 396842,
+    "sha256": "b8994deec0bbc45cdcbef5d7c5395cabf30b0509706303c3d8e76058c48eebfd"
+  },
+  "checks": {
+    "page_markers": 3,
+    "public_items": 20,
+    "quote_hashes": 20,
+    "official_source_exact": true,
+    "real_data_only": true,
+    "public_domain_information_retained": true
+  },
+  "errors": []
+}

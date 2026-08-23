@@ -1,0 +1,1771 @@
+{
+  "counts": {
+    "agreement_evidence": 11,
+    "agreement_parties": 37,
+    "agreement_topics": 20,
+    "agreements": 11,
+    "attendance_claims": 0,
+    "influence_assertions": 0,
+    "materialized_db": {
+      "accountability_meetings": 11,
+      "agreement_evidence": 11,
+      "agreement_parties": 37,
+      "agreement_topics": 20,
+      "agreements": 11,
+      "influence_assertions": 0,
+      "meeting_agenda_items": 11,
+      "meeting_evidence": 11,
+      "meeting_participants": 22,
+      "source_records": 11
+    },
+    "meeting_evidence": 11,
+    "meeting_participants": 22,
+    "meetings": 11,
+    "party_roles": {
+      "adopter": 11,
+      "affected_body": 10,
+      "counterparty": 5,
+      "publishing_body": 11
+    },
+    "topic_counts": {
+      "elections_democracy": 1,
+      "equality_gender_violence": 1,
+      "international_relations": 2,
+      "public_administration": 3,
+      "public_finance": 8,
+      "research_innovation": 2,
+      "social_protection": 2,
+      "transport_mobility": 1
+    }
+  },
+  "generated_at": "2026-02-16T14:12:56+00:00",
+  "influence_assertions": [],
+  "methodology": {
+    "attendance_policy": "no_attendee_claim_without_source_disclosure",
+    "contract": "docs/data-model/agreements-influence-spec-v1.md",
+    "extractor_method": "moncloa_explicit_agreement_summary_v1",
+    "extractor_version": "agreements_moncloa_v1",
+    "identity_policy": "retain_exact_official_public_names_and_identifiers",
+    "influence_policy": "zero_influence_assertions_in_fact_sample",
+    "limitations": [
+      "captured_reference_summary_is_not_the_full_agreement_text",
+      "captured_records_do_not_disclose_a_complete_attendee_list",
+      "adopted_does_not_prove_signed_in_force_implemented_or_effective",
+      "meeting_or_temporal_proximity_does_not_prove_influence",
+      "topic_assignments_are_deterministic_unreviewed_classifications"
+    ],
+    "selection": "all_captured_moncloa_referencias_with_explicit_acuerdo_in_summary",
+    "topic_assignment": "derived_rule_unreviewed"
+  },
+  "public_domain_information_policy": "retained_exactly",
+  "real_data_only": true,
+  "records": [
+    {
+      "agreement": {
+        "adopted_on": "2025-10-14",
+        "agenda_item_id": "vclc:agenda-item:b4174299d07da103e3ef3c37fcb0855e092a4a5deeab81ceaff4cc6d611b915f",
+        "agreement_id": "vclc:agreement:032dcaaa5c1e6f6f627c07628035c4a7a06c3073f4d0deefc73a6ed599aee42e",
+        "agreement_kind": "executive_decision",
+        "agreement_status": "adopted",
+        "date_precision": "day",
+        "evidence": [
+          {
+            "agreement_evidence_id": "vclc:agreement-evidence:44404c51cebb2c7b8831fe57d3947ed478228f1c6282709f2140ae3a9c1523c7",
+            "content_sha256": "07860c127c7b215a6cdd1019d026cc26b59995154162fd4b7c188caeb7f9c203",
+            "evidence_ordinal": 0,
+            "evidence_role": "official_summary",
+            "evidence_state": "captured_bytes",
+            "exact_quote": "El Consejo de Ministros ha aprobado un acuerdo por el que se modifican los límites para adquirir compromisos de gasto con cargo a ejercicios futuros en aplicación de lo dispuesto en el artículo 47 de la Ley 47/2003, de 26 de noviembre, General Presupuestaria, a fin de posibilitar al Ministerio de Transportes y Movilidad Sostenible suscribir la adenda número 2 al convenio por el que se regula la gestión de la explotación de autopistas de titularidad estatal.",
+            "quote_sha256": "c37f84ba3e2e593dc140752f32482dd5f5b19ead721d19248ae982819566f82b",
+            "selector": "$.summary_text",
+            "source_url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/2025/20251014-referencia-rueda-de-prensa-ministros.aspx"
+          }
+        ],
+        "fact_state": "source_summary",
+        "influence_state": "not_asserted",
+        "meeting_id": "vclc:meeting:0ff5fe064ee3209a4808b91517fbb7596febde596c69ec049a74dc84b55a4327",
+        "parties": [
+          {
+            "actor_kind": "public_body",
+            "agreement_party_id": "vclc:agreement-party:bac2a871bb36a39bd0b9c9d39526b97193d79439038c0b89124b1cfd1e0c773c",
+            "identity_state": "source_scoped",
+            "party_ordinal": 0,
+            "party_role": "adopter",
+            "resolution_method": "exact_source_subject",
+            "source_label": "Consejo de Ministros"
+          },
+          {
+            "actor_kind": "public_body",
+            "agreement_party_id": "vclc:agreement-party:39fd0b4841734c8bab4e7cca3d122937856eb7d4af029443b2fcf6c7095a6f4b",
+            "identity_state": "source_scoped",
+            "party_ordinal": 1,
+            "party_role": "publishing_body",
+            "resolution_method": "official_source_identity",
+            "source_label": "Gobierno de España / La Moncloa"
+          },
+          {
+            "actor_kind": "public_body",
+            "agreement_party_id": "vclc:agreement-party:91e3b456d9b5f862b080776d36030c1d9264eddf812590b6ed99574d9ee852d2",
+            "identity_state": "source_scoped",
+            "party_ordinal": 2,
+            "party_role": "affected_body",
+            "resolution_method": "exact_source_substring_v1",
+            "source_label": "Ministerio de Transportes y Movilidad Sostenible"
+          }
+        ],
+        "published_on": "2025-10-14",
+        "summary": "El Consejo de Ministros ha aprobado un acuerdo por el que se modifican los límites para adquirir compromisos de gasto con cargo a ejercicios futuros en aplicación de lo dispuesto en el artículo 47 de la Ley 47/2003, de 26 de noviembre, General Presupuestaria, a fin de posibilitar al Ministerio de Transportes y Movilidad Sostenible suscribir la adenda número 2 al convenio por el que se regula la gestión de la explotación de autopistas de titularidad estatal.",
+        "title": "Referencia del Consejo de Ministros",
+        "topics": [
+          {
+            "agreement_topic_id": "vclc:agreement-topic:42da412f840311227d36308f46a7b163ed35d7903bff46fbdc08c54522a1c9a0",
+            "assignment_kind": "derived_rule",
+            "assignment_method": "moncloa_agreement_keyword_codebook",
+            "assignment_version": "agreements_topics_es_v1",
+            "match_text": "presupuest",
+            "review_status": "unreviewed",
+            "topic_key": "public_finance",
+            "topic_label": "Hacienda, presupuestos y deuda pública"
+          },
+          {
+            "agreement_topic_id": "vclc:agreement-topic:60a5d5a00c6a75bc99386650ba1a5d34331ba82b5237061b65cf15f161cdb8a1",
+            "assignment_kind": "derived_rule",
+            "assignment_method": "moncloa_agreement_keyword_codebook",
+            "assignment_version": "agreements_topics_es_v1",
+            "match_text": "transportes",
+            "review_status": "unreviewed",
+            "topic_key": "transport_mobility",
+            "topic_label": "Transportes y movilidad"
+          }
+        ]
+      },
+      "meeting": {
+        "agenda_items": [
+          {
+            "agenda_item_id": "vclc:agenda-item:b4174299d07da103e3ef3c37fcb0855e092a4a5deeab81ceaff4cc6d611b915f",
+            "agenda_state": "source_summary",
+            "description": "El Consejo de Ministros ha aprobado un acuerdo por el que se modifican los límites para adquirir compromisos de gasto con cargo a ejercicios futuros en aplicación de lo dispuesto en el artículo 47 de la Ley 47/2003, de 26 de noviembre, General Presupuestaria, a fin de posibilitar al Ministerio de Transportes y Movilidad Sostenible suscribir la adenda número 2 al convenio por el que se regula la gestión de la explotación de autopistas de titularidad estatal.",
+            "item_ordinal": 0,
+            "source_text_state": "source_summary",
+            "title": "Referencia del Consejo de Ministros"
+          }
+        ],
+        "attendance_disclosure_state": "not_disclosed",
+        "event_date": "2025-10-14",
+        "evidence": [
+          {
+            "content_sha256": "07860c127c7b215a6cdd1019d026cc26b59995154162fd4b7c188caeb7f9c203",
+            "evidence_ordinal": 0,
+            "evidence_role": "outcome",
+            "evidence_state": "captured_bytes",
+            "exact_quote": "El Consejo de Ministros ha aprobado un acuerdo por el que se modifican los límites para adquirir compromisos de gasto con cargo a ejercicios futuros en aplicación de lo dispuesto en el artículo 47 de la Ley 47/2003, de 26 de noviembre, General Presupuestaria, a fin de posibilitar al Ministerio de Transportes y Movilidad Sostenible suscribir la adenda número 2 al convenio por el que se regula la gestión de la explotación de autopistas de titularidad estatal.",
+            "meeting_evidence_id": "vclc:meeting-evidence:9b6b2a76058ce0773aff540e99ee5936c41fb6cf2ec552976dca51393596dd95",
+            "quote_sha256": "c37f84ba3e2e593dc140752f32482dd5f5b19ead721d19248ae982819566f82b",
+            "selector": "$.summary_text",
+            "source_url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/2025/20251014-referencia-rueda-de-prensa-ministros.aspx"
+          }
+        ],
+        "fact_state": "source_summary",
+        "meeting_id": "vclc:meeting:0ff5fe064ee3209a4808b91517fbb7596febde596c69ec049a74dc84b55a4327",
+        "meeting_kind": "council_session",
+        "participants": [
+          {
+            "actor_kind": "public_body",
+            "actor_role": "convener",
+            "attendance_claim_state": "not_claimed",
+            "identity_state": "source_scoped",
+            "meeting_participant_id": "vclc:meeting-participant:cf8ba801fc6e6eef9d4f65ccb64ccf8e4a482d2af62d13876596bb71a104ecb4",
+            "participant_ordinal": 0,
+            "resolution_method": "exact_source_subject",
+            "source_label": "Consejo de Ministros"
+          },
+          {
+            "actor_kind": "public_body",
+            "actor_role": "disclosing_body",
+            "attendance_claim_state": "not_claimed",
+            "identity_state": "source_scoped",
+            "meeting_participant_id": "vclc:meeting-participant:e357263919298149fd8ced1c2c0fae9a89901ecb5decadd231bceafd1a4c5696",
+            "participant_ordinal": 1,
+            "resolution_method": "official_source_identity",
+            "source_label": "Gobierno de España / La Moncloa"
+          }
+        ],
+        "published_at": "2025-10-14",
+        "scheduled_state": "occurred",
+        "summary": "El Consejo de Ministros ha aprobado un acuerdo por el que se modifican los límites para adquirir compromisos de gasto con cargo a ejercicios futuros en aplicación de lo dispuesto en el artículo 47 de la Ley 47/2003, de 26 de noviembre, General Presupuestaria, a fin de posibilitar al Ministerio de Transportes y Movilidad Sostenible suscribir la adenda número 2 al convenio por el que se regula la gestión de la explotación de autopistas de titularidad estatal.",
+        "time_precision": "day",
+        "title": "Referencia del Consejo de Ministros"
+      },
+      "provenance": {
+        "capture_bytes": 21234,
+        "capture_path": "etl/data/raw/moncloa_referencias/2026/02/16/moncloa_referencias_20260216T141256Z.json",
+        "capture_sha256": "ab08b7dc09a46c890f055e95fdeac5e7d716a5023f8792f19ce440a239271ddf",
+        "captured_at": "2026-02-16T14:12:56+00:00",
+        "extractor_method": "moncloa_explicit_agreement_summary_v1",
+        "extractor_version": "agreements_moncloa_v1",
+        "origin_channel": "list+detail",
+        "source_id": "moncloa_referencias",
+        "source_record_id": "referencia:20251014-referencia-rueda-de-prensa-ministros.aspx",
+        "source_record_sha256": "07860c127c7b215a6cdd1019d026cc26b59995154162fd4b7c188caeb7f9c203",
+        "source_snapshot_date": "2026-02-16",
+        "source_url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/2025/20251014-referencia-rueda-de-prensa-ministros.aspx"
+      }
+    },
+    {
+      "agreement": {
+        "adopted_on": "2025-10-21",
+        "agenda_item_id": "vclc:agenda-item:0df2ee1210e5bdb0d51473278f8336ed61e4d793cf668e40e2c374b430cdd0be",
+        "agreement_id": "vclc:agreement:d7bd73d0b83fe0f86a4aa43302ec14483dd6f1b35b42dcc382bde099e91094bd",
+        "agreement_kind": "executive_decision",
+        "agreement_status": "adopted",
+        "date_precision": "day",
+        "evidence": [
+          {
+            "agreement_evidence_id": "vclc:agreement-evidence:1911e40b060eecb3705420f4786ebd28234e17018258c871adc17abbb043dbe6",
+            "content_sha256": "a9bf62cdd7b1100f382a7d091d84df9b2941f2e686740b5128a5d508db800fbd",
+            "evidence_ordinal": 0,
+            "evidence_role": "official_summary",
+            "evidence_state": "captured_bytes",
+            "exact_quote": "El Consejo de Ministros ha aprobado un acuerdo por el que se autoriza la aplicación del Fondo de Contingencia por importe de 5.442.530 euros y la concesión de un suplemento de crédito en el Ministerio de Inclusión, Seguridad Social y Migraciones para la financiación de las prestaciones del síndrome tóxico.",
+            "quote_sha256": "b8bb27b2895f8355c81386c1f0c6e9880a0d76b61c9e8f77d9c99d158b7cabf4",
+            "selector": "$.summary_text",
+            "source_url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/2025/20251021-referencia-rueda-de-prensa-ministros.aspx"
+          }
+        ],
+        "fact_state": "source_summary",
+        "influence_state": "not_asserted",
+        "meeting_id": "vclc:meeting:db515fcd65e1623464149892796e8789a9f5f5034c498475c9dad0958e445758",
+        "parties": [
+          {
+            "actor_kind": "public_body",
+            "agreement_party_id": "vclc:agreement-party:d4732290ea4d8e7ad49c602474a142ed6fdadb4d3c4629563ac3bd3b5f41981c",
+            "identity_state": "source_scoped",
+            "party_ordinal": 0,
+            "party_role": "adopter",
+            "resolution_method": "exact_source_subject",
+            "source_label": "Consejo de Ministros"
+          },
+          {
+            "actor_kind": "public_body",
+            "agreement_party_id": "vclc:agreement-party:0973f7ab64485696a4c329997e886e7f677e49606bf99a7a27b7ce6279a96955",
+            "identity_state": "source_scoped",
+            "party_ordinal": 1,
+            "party_role": "publishing_body",
+            "resolution_method": "official_source_identity",
+            "source_label": "Gobierno de España / La Moncloa"
+          },
+          {
+            "actor_kind": "public_body",
+            "agreement_party_id": "vclc:agreement-party:f47b695693e60e47d2da9a1190ecbbdcbf09a0880bc27afdfb5f0fed49d174eb",
+            "identity_state": "source_scoped",
+            "party_ordinal": 2,
+            "party_role": "affected_body",
+            "resolution_method": "exact_source_substring_v1",
+            "source_label": "Ministerio de Inclusión, Seguridad Social y Migraciones"
+          }
+        ],
+        "published_on": "2025-10-21",
+        "summary": "El Consejo de Ministros ha aprobado un acuerdo por el que se autoriza la aplicación del Fondo de Contingencia por importe de 5.442.530 euros y la concesión de un suplemento de crédito en el Ministerio de Inclusión, Seguridad Social y Migraciones para la financiación de las prestaciones del síndrome tóxico.",
+        "title": "Referencia Consejo de Ministros",
+        "topics": [
+          {
+            "agreement_topic_id": "vclc:agreement-topic:6717d190e9f634e8136fb6971891c6734f8816da79955f67ded939d185ed3650",
+            "assignment_kind": "derived_rule",
+            "assignment_method": "moncloa_agreement_keyword_codebook",
+            "assignment_version": "agreements_topics_es_v1",
+            "match_text": "crédito",
+            "review_status": "unreviewed",
+            "topic_key": "public_finance",
+            "topic_label": "Hacienda, presupuestos y deuda pública"
+          },
+          {
+            "agreement_topic_id": "vclc:agreement-topic:72ebf566e79086685b0b40ce7b494632133cf26650a46b58969482e1948d0d54",
+            "assignment_kind": "derived_rule",
+            "assignment_method": "moncloa_agreement_keyword_codebook",
+            "assignment_version": "agreements_topics_es_v1",
+            "match_text": "prestaciones",
+            "review_status": "unreviewed",
+            "topic_key": "social_protection",
+            "topic_label": "Protección social"
+          }
+        ]
+      },
+      "meeting": {
+        "agenda_items": [
+          {
+            "agenda_item_id": "vclc:agenda-item:0df2ee1210e5bdb0d51473278f8336ed61e4d793cf668e40e2c374b430cdd0be",
+            "agenda_state": "source_summary",
+            "description": "El Consejo de Ministros ha aprobado un acuerdo por el que se autoriza la aplicación del Fondo de Contingencia por importe de 5.442.530 euros y la concesión de un suplemento de crédito en el Ministerio de Inclusión, Seguridad Social y Migraciones para la financiación de las prestaciones del síndrome tóxico.",
+            "item_ordinal": 0,
+            "source_text_state": "source_summary",
+            "title": "Referencia Consejo de Ministros"
+          }
+        ],
+        "attendance_disclosure_state": "not_disclosed",
+        "event_date": "2025-10-21",
+        "evidence": [
+          {
+            "content_sha256": "a9bf62cdd7b1100f382a7d091d84df9b2941f2e686740b5128a5d508db800fbd",
+            "evidence_ordinal": 0,
+            "evidence_role": "outcome",
+            "evidence_state": "captured_bytes",
+            "exact_quote": "El Consejo de Ministros ha aprobado un acuerdo por el que se autoriza la aplicación del Fondo de Contingencia por importe de 5.442.530 euros y la concesión de un suplemento de crédito en el Ministerio de Inclusión, Seguridad Social y Migraciones para la financiación de las prestaciones del síndrome tóxico.",
+            "meeting_evidence_id": "vclc:meeting-evidence:19d470c040148fed89d05fe5ef5936918d45eaaad347888afcfad84afa7b86af",
+            "quote_sha256": "b8bb27b2895f8355c81386c1f0c6e9880a0d76b61c9e8f77d9c99d158b7cabf4",
+            "selector": "$.summary_text",
+            "source_url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/2025/20251021-referencia-rueda-de-prensa-ministros.aspx"
+          }
+        ],
+        "fact_state": "source_summary",
+        "meeting_id": "vclc:meeting:db515fcd65e1623464149892796e8789a9f5f5034c498475c9dad0958e445758",
+        "meeting_kind": "council_session",
+        "participants": [
+          {
+            "actor_kind": "public_body",
+            "actor_role": "convener",
+            "attendance_claim_state": "not_claimed",
+            "identity_state": "source_scoped",
+            "meeting_participant_id": "vclc:meeting-participant:bb2711038dff073df98233a9692b5ffb9a39a082ba5356e36104f6a4353d1491",
+            "participant_ordinal": 0,
+            "resolution_method": "exact_source_subject",
+            "source_label": "Consejo de Ministros"
+          },
+          {
+            "actor_kind": "public_body",
+            "actor_role": "disclosing_body",
+            "attendance_claim_state": "not_claimed",
+            "identity_state": "source_scoped",
+            "meeting_participant_id": "vclc:meeting-participant:2a49a989b7aa0eabf402cfbea1e9d1dd71459145aae1c9ad5f8916d6ea590590",
+            "participant_ordinal": 1,
+            "resolution_method": "official_source_identity",
+            "source_label": "Gobierno de España / La Moncloa"
+          }
+        ],
+        "published_at": "2025-10-21",
+        "scheduled_state": "occurred",
+        "summary": "El Consejo de Ministros ha aprobado un acuerdo por el que se autoriza la aplicación del Fondo de Contingencia por importe de 5.442.530 euros y la concesión de un suplemento de crédito en el Ministerio de Inclusión, Seguridad Social y Migraciones para la financiación de las prestaciones del síndrome tóxico.",
+        "time_precision": "day",
+        "title": "Referencia Consejo de Ministros"
+      },
+      "provenance": {
+        "capture_bytes": 21234,
+        "capture_path": "etl/data/raw/moncloa_referencias/2026/02/16/moncloa_referencias_20260216T141256Z.json",
+        "capture_sha256": "ab08b7dc09a46c890f055e95fdeac5e7d716a5023f8792f19ce440a239271ddf",
+        "captured_at": "2026-02-16T14:12:56+00:00",
+        "extractor_method": "moncloa_explicit_agreement_summary_v1",
+        "extractor_version": "agreements_moncloa_v1",
+        "origin_channel": "list+detail",
+        "source_id": "moncloa_referencias",
+        "source_record_id": "referencia:20251021-referencia-rueda-de-prensa-ministros.aspx",
+        "source_record_sha256": "a9bf62cdd7b1100f382a7d091d84df9b2941f2e686740b5128a5d508db800fbd",
+        "source_snapshot_date": "2026-02-16",
+        "source_url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/2025/20251021-referencia-rueda-de-prensa-ministros.aspx"
+      }
+    },
+    {
+      "agreement": {
+        "adopted_on": "2025-11-11",
+        "agenda_item_id": "vclc:agenda-item:763e63ff26bb9325621d1a3909a0b440cba36e4fa063acc38ab57ca2f2eb7940",
+        "agreement_id": "vclc:agreement:4c8805485afac30ee4889d4c30f6b2744296f6a885072919685a85f8f1f6a4f3",
+        "agreement_kind": "executive_decision",
+        "agreement_status": "adopted",
+        "date_precision": "day",
+        "evidence": [
+          {
+            "agreement_evidence_id": "vclc:agreement-evidence:c89c2820f2f8deb7eeb345ea8cb61347954359c2fe04e9a86b1515cf231d1df7",
+            "content_sha256": "472a465995f40747ff2e70cb718016c0b24489cd79356bf03b7df7604f6e1869",
+            "evidence_ordinal": 0,
+            "evidence_role": "official_summary",
+            "evidence_state": "captured_bytes",
+            "exact_quote": "El Consejo de Ministros ha aprobado un acuerdo por el que se autoriza la aplicación del Fondo de Contingencia por importe de 11.134.288,02 euros y la concesión de un suplemento de crédito en el Ministerio de Inclusión, Seguridad Social y Migraciones para la financiación de las bonificaciones de cuotas empresariales por tripulantes de buques especificados en la Ley 19/1994, de Régimen Económico y Fiscal de Canarias.",
+            "quote_sha256": "052d09a85a4ce9ba5660af63ae6061428c546fb2d7bc84868e97d789e3732d62",
+            "selector": "$.summary_text",
+            "source_url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/2025/20251111-referencia-rueda-de-prensa-ministros.aspx"
+          }
+        ],
+        "fact_state": "source_summary",
+        "influence_state": "not_asserted",
+        "meeting_id": "vclc:meeting:0bbd88571ad057681ec63bc233f21fbb5f777d279fbd537cbb921388e3a81078",
+        "parties": [
+          {
+            "actor_kind": "public_body",
+            "agreement_party_id": "vclc:agreement-party:47eb552964047c51535d1e119fa7326d1b392289a7e4fcb932a5b1841450cdf0",
+            "identity_state": "source_scoped",
+            "party_ordinal": 0,
+            "party_role": "adopter",
+            "resolution_method": "exact_source_subject",
+            "source_label": "Consejo de Ministros"
+          },
+          {
+            "actor_kind": "public_body",
+            "agreement_party_id": "vclc:agreement-party:cdafaa467ff8542e061cf310e9432eaa978d382f423e4fba2914d588c8ac8502",
+            "identity_state": "source_scoped",
+            "party_ordinal": 1,
+            "party_role": "publishing_body",
+            "resolution_method": "official_source_identity",
+            "source_label": "Gobierno de España / La Moncloa"
+          },
+          {
+            "actor_kind": "public_body",
+            "agreement_party_id": "vclc:agreement-party:42a38d7a5bdd30c5781227a3aa0dc03773514eef5f29658a02f32949a33f531b",
+            "identity_state": "source_scoped",
+            "party_ordinal": 2,
+            "party_role": "affected_body",
+            "resolution_method": "exact_source_substring_v1",
+            "source_label": "Ministerio de Inclusión, Seguridad Social y Migraciones"
+          }
+        ],
+        "published_on": "2025-11-11",
+        "summary": "El Consejo de Ministros ha aprobado un acuerdo por el que se autoriza la aplicación del Fondo de Contingencia por importe de 11.134.288,02 euros y la concesión de un suplemento de crédito en el Ministerio de Inclusión, Seguridad Social y Migraciones para la financiación de las bonificaciones de cuotas empresariales por tripulantes de buques especificados en la Ley 19/1994, de Régimen Económico y Fiscal de Canarias.",
+        "title": "Referencia del Consejo de Ministros",
+        "topics": [
+          {
+            "agreement_topic_id": "vclc:agreement-topic:ebdadf2a16ba44fe2e8ca22e8c17e588049c08db77ee62b043429c4e65d7e374",
+            "assignment_kind": "derived_rule",
+            "assignment_method": "moncloa_agreement_keyword_codebook",
+            "assignment_version": "agreements_topics_es_v1",
+            "match_text": "crédito",
+            "review_status": "unreviewed",
+            "topic_key": "public_finance",
+            "topic_label": "Hacienda, presupuestos y deuda pública"
+          },
+          {
+            "agreement_topic_id": "vclc:agreement-topic:d07a49f3f0bcbe4d76eee59acbfc18af211f917d863314b1d514ae4aa768ce43",
+            "assignment_kind": "derived_rule",
+            "assignment_method": "moncloa_agreement_keyword_codebook",
+            "assignment_version": "agreements_topics_es_v1",
+            "match_text": "bonificaciones",
+            "review_status": "unreviewed",
+            "topic_key": "social_protection",
+            "topic_label": "Protección social"
+          }
+        ]
+      },
+      "meeting": {
+        "agenda_items": [
+          {
+            "agenda_item_id": "vclc:agenda-item:763e63ff26bb9325621d1a3909a0b440cba36e4fa063acc38ab57ca2f2eb7940",
+            "agenda_state": "source_summary",
+            "description": "El Consejo de Ministros ha aprobado un acuerdo por el que se autoriza la aplicación del Fondo de Contingencia por importe de 11.134.288,02 euros y la concesión de un suplemento de crédito en el Ministerio de Inclusión, Seguridad Social y Migraciones para la financiación de las bonificaciones de cuotas empresariales por tripulantes de buques especificados en la Ley 19/1994, de Régimen Económico y Fiscal de Canarias.",
+            "item_ordinal": 0,
+            "source_text_state": "source_summary",
+            "title": "Referencia del Consejo de Ministros"
+          }
+        ],
+        "attendance_disclosure_state": "not_disclosed",
+        "event_date": "2025-11-11",
+        "evidence": [
+          {
+            "content_sha256": "472a465995f40747ff2e70cb718016c0b24489cd79356bf03b7df7604f6e1869",
+            "evidence_ordinal": 0,
+            "evidence_role": "outcome",
+            "evidence_state": "captured_bytes",
+            "exact_quote": "El Consejo de Ministros ha aprobado un acuerdo por el que se autoriza la aplicación del Fondo de Contingencia por importe de 11.134.288,02 euros y la concesión de un suplemento de crédito en el Ministerio de Inclusión, Seguridad Social y Migraciones para la financiación de las bonificaciones de cuotas empresariales por tripulantes de buques especificados en la Ley 19/1994, de Régimen Económico y Fiscal de Canarias.",
+            "meeting_evidence_id": "vclc:meeting-evidence:76159bb884de70d6902b774978495d767946d9092a54a97db4ef3038381c42a7",
+            "quote_sha256": "052d09a85a4ce9ba5660af63ae6061428c546fb2d7bc84868e97d789e3732d62",
+            "selector": "$.summary_text",
+            "source_url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/2025/20251111-referencia-rueda-de-prensa-ministros.aspx"
+          }
+        ],
+        "fact_state": "source_summary",
+        "meeting_id": "vclc:meeting:0bbd88571ad057681ec63bc233f21fbb5f777d279fbd537cbb921388e3a81078",
+        "meeting_kind": "council_session",
+        "participants": [
+          {
+            "actor_kind": "public_body",
+            "actor_role": "convener",
+            "attendance_claim_state": "not_claimed",
+            "identity_state": "source_scoped",
+            "meeting_participant_id": "vclc:meeting-participant:fc5f74a60ea35bcb9026d856bfce7b3f86ba45a256550de07aa222fa1870d32c",
+            "participant_ordinal": 0,
+            "resolution_method": "exact_source_subject",
+            "source_label": "Consejo de Ministros"
+          },
+          {
+            "actor_kind": "public_body",
+            "actor_role": "disclosing_body",
+            "attendance_claim_state": "not_claimed",
+            "identity_state": "source_scoped",
+            "meeting_participant_id": "vclc:meeting-participant:ce3ed59e21423182078baabd56e4815b643e185e4115f0678cc0f2a0cdbcecf8",
+            "participant_ordinal": 1,
+            "resolution_method": "official_source_identity",
+            "source_label": "Gobierno de España / La Moncloa"
+          }
+        ],
+        "published_at": "2025-11-11",
+        "scheduled_state": "occurred",
+        "summary": "El Consejo de Ministros ha aprobado un acuerdo por el que se autoriza la aplicación del Fondo de Contingencia por importe de 11.134.288,02 euros y la concesión de un suplemento de crédito en el Ministerio de Inclusión, Seguridad Social y Migraciones para la financiación de las bonificaciones de cuotas empresariales por tripulantes de buques especificados en la Ley 19/1994, de Régimen Económico y Fiscal de Canarias.",
+        "time_precision": "day",
+        "title": "Referencia del Consejo de Ministros"
+      },
+      "provenance": {
+        "capture_bytes": 21234,
+        "capture_path": "etl/data/raw/moncloa_referencias/2026/02/16/moncloa_referencias_20260216T141256Z.json",
+        "capture_sha256": "ab08b7dc09a46c890f055e95fdeac5e7d716a5023f8792f19ce440a239271ddf",
+        "captured_at": "2026-02-16T14:12:56+00:00",
+        "extractor_method": "moncloa_explicit_agreement_summary_v1",
+        "extractor_version": "agreements_moncloa_v1",
+        "origin_channel": "list+detail",
+        "source_id": "moncloa_referencias",
+        "source_record_id": "referencia:20251111-referencia-rueda-de-prensa-ministros.aspx",
+        "source_record_sha256": "472a465995f40747ff2e70cb718016c0b24489cd79356bf03b7df7604f6e1869",
+        "source_snapshot_date": "2026-02-16",
+        "source_url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/2025/20251111-referencia-rueda-de-prensa-ministros.aspx"
+      }
+    },
+    {
+      "agreement": {
+        "adopted_on": "2025-11-18",
+        "agenda_item_id": "vclc:agenda-item:f31c7168f14e7055bad0989824c99a49e1bb08a79a123ad01d4acb2ea17ca949",
+        "agreement_id": "vclc:agreement:3179d79cb9bd490b8860c182459b327635fcc80110faff715fe9e751d025d7f9",
+        "agreement_kind": "executive_decision",
+        "agreement_status": "adopted",
+        "date_precision": "day",
+        "evidence": [
+          {
+            "agreement_evidence_id": "vclc:agreement-evidence:0234f76e9fb28b62f50ee1dfd8e325063ba22b6e906bb2327b1b01d9a72e2b3c",
+            "content_sha256": "0a4234a61e7e3d41b47a80d8d9b611774b5439a45bb99d1f49c4f1baad0f110f",
+            "evidence_ordinal": 0,
+            "evidence_role": "official_summary",
+            "evidence_state": "captured_bytes",
+            "exact_quote": "El Consejo de Ministros ha aprobado el Acuerdo por el que se fijan los objetivos de estabilidad presupuestaria y de deuda pública para el conjunto de Administraciones Públicas y de cada uno de sus subsectores para el período 2026-2028 para su remisión a las Cortes Generales, y el límite de gasto no financiero del presupuesto del Estado para 2026.",
+            "quote_sha256": "09ce2f143ee746d3c7f526746827f24d563472885e60ebcfef4a622aede529d8",
+            "selector": "$.summary_text",
+            "source_url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/2025/20251118-referencia-rueda-de-prensa-ministros.aspx"
+          }
+        ],
+        "fact_state": "source_summary",
+        "influence_state": "not_asserted",
+        "meeting_id": "vclc:meeting:95d6a4ec2b566f21e4d1c5dea810fb406efbd2a807fde564ea28dd9abf0b0beb",
+        "parties": [
+          {
+            "actor_kind": "public_body",
+            "agreement_party_id": "vclc:agreement-party:85a15b9a632188b80589387df15cd24b170690810ea75fea5b84894014f89f03",
+            "identity_state": "source_scoped",
+            "party_ordinal": 0,
+            "party_role": "adopter",
+            "resolution_method": "exact_source_subject",
+            "source_label": "Consejo de Ministros"
+          },
+          {
+            "actor_kind": "public_body",
+            "agreement_party_id": "vclc:agreement-party:3d23b825ee7098b536bd51aeffc705955a739229fc141208c98bcb07e70bc04e",
+            "identity_state": "source_scoped",
+            "party_ordinal": 1,
+            "party_role": "publishing_body",
+            "resolution_method": "official_source_identity",
+            "source_label": "Gobierno de España / La Moncloa"
+          },
+          {
+            "actor_kind": "public_body",
+            "agreement_party_id": "vclc:agreement-party:b21f56240e3d7eae7d76dd30865a304295e5d95473cf8c0c772034a865debfd3",
+            "identity_state": "source_scoped",
+            "party_ordinal": 2,
+            "party_role": "affected_body",
+            "resolution_method": "exact_source_substring_v1",
+            "source_label": "Cortes Generales"
+          }
+        ],
+        "published_on": "2025-11-18",
+        "summary": "El Consejo de Ministros ha aprobado el Acuerdo por el que se fijan los objetivos de estabilidad presupuestaria y de deuda pública para el conjunto de Administraciones Públicas y de cada uno de sus subsectores para el período 2026-2028 para su remisión a las Cortes Generales, y el límite de gasto no financiero del presupuesto del Estado para 2026.",
+        "title": "Referencia del Consejo de Ministros",
+        "topics": [
+          {
+            "agreement_topic_id": "vclc:agreement-topic:85e021947765d6c6491d606e07e84ee4a0cb62a8b280bed7f6204f8418fdfadf",
+            "assignment_kind": "derived_rule",
+            "assignment_method": "moncloa_agreement_keyword_codebook",
+            "assignment_version": "agreements_topics_es_v1",
+            "match_text": "presupuest",
+            "review_status": "unreviewed",
+            "topic_key": "public_finance",
+            "topic_label": "Hacienda, presupuestos y deuda pública"
+          },
+          {
+            "agreement_topic_id": "vclc:agreement-topic:0f77a6413696458845a7b93012275b96b6391fb5f89af26bfcf6fa2513e7fb50",
+            "assignment_kind": "derived_rule",
+            "assignment_method": "moncloa_agreement_keyword_codebook",
+            "assignment_version": "agreements_topics_es_v1",
+            "match_text": "administraciones públicas",
+            "review_status": "unreviewed",
+            "topic_key": "public_administration",
+            "topic_label": "Administración pública"
+          }
+        ]
+      },
+      "meeting": {
+        "agenda_items": [
+          {
+            "agenda_item_id": "vclc:agenda-item:f31c7168f14e7055bad0989824c99a49e1bb08a79a123ad01d4acb2ea17ca949",
+            "agenda_state": "source_summary",
+            "description": "El Consejo de Ministros ha aprobado el Acuerdo por el que se fijan los objetivos de estabilidad presupuestaria y de deuda pública para el conjunto de Administraciones Públicas y de cada uno de sus subsectores para el período 2026-2028 para su remisión a las Cortes Generales, y el límite de gasto no financiero del presupuesto del Estado para 2026.",
+            "item_ordinal": 0,
+            "source_text_state": "source_summary",
+            "title": "Referencia del Consejo de Ministros"
+          }
+        ],
+        "attendance_disclosure_state": "not_disclosed",
+        "event_date": "2025-11-18",
+        "evidence": [
+          {
+            "content_sha256": "0a4234a61e7e3d41b47a80d8d9b611774b5439a45bb99d1f49c4f1baad0f110f",
+            "evidence_ordinal": 0,
+            "evidence_role": "outcome",
+            "evidence_state": "captured_bytes",
+            "exact_quote": "El Consejo de Ministros ha aprobado el Acuerdo por el que se fijan los objetivos de estabilidad presupuestaria y de deuda pública para el conjunto de Administraciones Públicas y de cada uno de sus subsectores para el período 2026-2028 para su remisión a las Cortes Generales, y el límite de gasto no financiero del presupuesto del Estado para 2026.",
+            "meeting_evidence_id": "vclc:meeting-evidence:fdea2d5a287da3691e31f294a83e1620756a4e74a72ade87b94b1af72a78d594",
+            "quote_sha256": "09ce2f143ee746d3c7f526746827f24d563472885e60ebcfef4a622aede529d8",
+            "selector": "$.summary_text",
+            "source_url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/2025/20251118-referencia-rueda-de-prensa-ministros.aspx"
+          }
+        ],
+        "fact_state": "source_summary",
+        "meeting_id": "vclc:meeting:95d6a4ec2b566f21e4d1c5dea810fb406efbd2a807fde564ea28dd9abf0b0beb",
+        "meeting_kind": "council_session",
+        "participants": [
+          {
+            "actor_kind": "public_body",
+            "actor_role": "convener",
+            "attendance_claim_state": "not_claimed",
+            "identity_state": "source_scoped",
+            "meeting_participant_id": "vclc:meeting-participant:ae7d4f1c97d998c8843f7f12105ab4b4dc5f921adb19f7234e0f2b8e38d29e09",
+            "participant_ordinal": 0,
+            "resolution_method": "exact_source_subject",
+            "source_label": "Consejo de Ministros"
+          },
+          {
+            "actor_kind": "public_body",
+            "actor_role": "disclosing_body",
+            "attendance_claim_state": "not_claimed",
+            "identity_state": "source_scoped",
+            "meeting_participant_id": "vclc:meeting-participant:1eae6566592cd603987675b15c7ebef77221f57d143cae4310dc22b9a3bab49c",
+            "participant_ordinal": 1,
+            "resolution_method": "official_source_identity",
+            "source_label": "Gobierno de España / La Moncloa"
+          }
+        ],
+        "published_at": "2025-11-18",
+        "scheduled_state": "occurred",
+        "summary": "El Consejo de Ministros ha aprobado el Acuerdo por el que se fijan los objetivos de estabilidad presupuestaria y de deuda pública para el conjunto de Administraciones Públicas y de cada uno de sus subsectores para el período 2026-2028 para su remisión a las Cortes Generales, y el límite de gasto no financiero del presupuesto del Estado para 2026.",
+        "time_precision": "day",
+        "title": "Referencia del Consejo de Ministros"
+      },
+      "provenance": {
+        "capture_bytes": 21234,
+        "capture_path": "etl/data/raw/moncloa_referencias/2026/02/16/moncloa_referencias_20260216T141256Z.json",
+        "capture_sha256": "ab08b7dc09a46c890f055e95fdeac5e7d716a5023f8792f19ce440a239271ddf",
+        "captured_at": "2026-02-16T14:12:56+00:00",
+        "extractor_method": "moncloa_explicit_agreement_summary_v1",
+        "extractor_version": "agreements_moncloa_v1",
+        "origin_channel": "list+detail",
+        "source_id": "moncloa_referencias",
+        "source_record_id": "referencia:20251118-referencia-rueda-de-prensa-ministros.aspx",
+        "source_record_sha256": "0a4234a61e7e3d41b47a80d8d9b611774b5439a45bb99d1f49c4f1baad0f110f",
+        "source_snapshot_date": "2026-02-16",
+        "source_url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/2025/20251118-referencia-rueda-de-prensa-ministros.aspx"
+      }
+    },
+    {
+      "agreement": {
+        "adopted_on": "2025-12-02",
+        "agenda_item_id": "vclc:agenda-item:acbdcaae96d04f4fb946df7cccec5c29cf51df639cfabf0482886f124e255fe1",
+        "agreement_id": "vclc:agreement:5a85361fa71317c9c631a0537383481de844254370d55a6216a5da87fcb9b7d0",
+        "agreement_kind": "executive_decision",
+        "agreement_status": "adopted",
+        "date_precision": "day",
+        "evidence": [
+          {
+            "agreement_evidence_id": "vclc:agreement-evidence:7df34af16a15f14da5c6e77331aa644d0227870ba5d0645228c150838819522d",
+            "content_sha256": "ba791492032013debe5a8bb824e70c77343d460fee804f24db1a894f5cc13dad",
+            "evidence_ordinal": 0,
+            "evidence_role": "official_summary",
+            "evidence_state": "captured_bytes",
+            "exact_quote": "El Consejo de Ministros ha aprobado el Acuerdo por el que se fijan los objetivos de estabilidad presupuestaria y de deuda pública para el conjunto de Administraciones Públicas y de cada uno de sus subsectores para el período 2026-2028 para su remisión a las Cortes Generales, y el límite de gasto no financiero del presupuesto del Estado para 2026.",
+            "quote_sha256": "09ce2f143ee746d3c7f526746827f24d563472885e60ebcfef4a622aede529d8",
+            "selector": "$.summary_text",
+            "source_url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/2025/20251202-referencia-rueda-de-prensa-ministros.aspx"
+          }
+        ],
+        "fact_state": "source_summary",
+        "influence_state": "not_asserted",
+        "meeting_id": "vclc:meeting:7ec52ce180c226d3954d2021ce365f895237920b06dfea7905555e8d81d75be2",
+        "parties": [
+          {
+            "actor_kind": "public_body",
+            "agreement_party_id": "vclc:agreement-party:77bc41a23f7fc14bed45aedaa85e23636bfca908e60d2f7ee764ac6d449c2181",
+            "identity_state": "source_scoped",
+            "party_ordinal": 0,
+            "party_role": "adopter",
+            "resolution_method": "exact_source_subject",
+            "source_label": "Consejo de Ministros"
+          },
+          {
+            "actor_kind": "public_body",
+            "agreement_party_id": "vclc:agreement-party:fc452e4cd88a4b462c6a69bef8e24fb9c55c9a12dba45e0a8c30bf9cff6f4deb",
+            "identity_state": "source_scoped",
+            "party_ordinal": 1,
+            "party_role": "publishing_body",
+            "resolution_method": "official_source_identity",
+            "source_label": "Gobierno de España / La Moncloa"
+          },
+          {
+            "actor_kind": "public_body",
+            "agreement_party_id": "vclc:agreement-party:3d8992fd320f0f6bd9e3ed3a95c9214f009af930364d714aaf7f9f0439f75f2c",
+            "identity_state": "source_scoped",
+            "party_ordinal": 2,
+            "party_role": "affected_body",
+            "resolution_method": "exact_source_substring_v1",
+            "source_label": "Cortes Generales"
+          }
+        ],
+        "published_on": "2025-12-02",
+        "summary": "El Consejo de Ministros ha aprobado el Acuerdo por el que se fijan los objetivos de estabilidad presupuestaria y de deuda pública para el conjunto de Administraciones Públicas y de cada uno de sus subsectores para el período 2026-2028 para su remisión a las Cortes Generales, y el límite de gasto no financiero del presupuesto del Estado para 2026.",
+        "title": "Referencia del Consejo de Ministros",
+        "topics": [
+          {
+            "agreement_topic_id": "vclc:agreement-topic:14d5f191de12f11aa11eaf30311deafec7a37c477acd2c3d6a4395e6c1616919",
+            "assignment_kind": "derived_rule",
+            "assignment_method": "moncloa_agreement_keyword_codebook",
+            "assignment_version": "agreements_topics_es_v1",
+            "match_text": "presupuest",
+            "review_status": "unreviewed",
+            "topic_key": "public_finance",
+            "topic_label": "Hacienda, presupuestos y deuda pública"
+          },
+          {
+            "agreement_topic_id": "vclc:agreement-topic:0e24e8de134bfb8ace66acb5b151308dec35da2b0e32ce6f360be00b70c84461",
+            "assignment_kind": "derived_rule",
+            "assignment_method": "moncloa_agreement_keyword_codebook",
+            "assignment_version": "agreements_topics_es_v1",
+            "match_text": "administraciones públicas",
+            "review_status": "unreviewed",
+            "topic_key": "public_administration",
+            "topic_label": "Administración pública"
+          }
+        ]
+      },
+      "meeting": {
+        "agenda_items": [
+          {
+            "agenda_item_id": "vclc:agenda-item:acbdcaae96d04f4fb946df7cccec5c29cf51df639cfabf0482886f124e255fe1",
+            "agenda_state": "source_summary",
+            "description": "El Consejo de Ministros ha aprobado el Acuerdo por el que se fijan los objetivos de estabilidad presupuestaria y de deuda pública para el conjunto de Administraciones Públicas y de cada uno de sus subsectores para el período 2026-2028 para su remisión a las Cortes Generales, y el límite de gasto no financiero del presupuesto del Estado para 2026.",
+            "item_ordinal": 0,
+            "source_text_state": "source_summary",
+            "title": "Referencia del Consejo de Ministros"
+          }
+        ],
+        "attendance_disclosure_state": "not_disclosed",
+        "event_date": "2025-12-02",
+        "evidence": [
+          {
+            "content_sha256": "ba791492032013debe5a8bb824e70c77343d460fee804f24db1a894f5cc13dad",
+            "evidence_ordinal": 0,
+            "evidence_role": "outcome",
+            "evidence_state": "captured_bytes",
+            "exact_quote": "El Consejo de Ministros ha aprobado el Acuerdo por el que se fijan los objetivos de estabilidad presupuestaria y de deuda pública para el conjunto de Administraciones Públicas y de cada uno de sus subsectores para el período 2026-2028 para su remisión a las Cortes Generales, y el límite de gasto no financiero del presupuesto del Estado para 2026.",
+            "meeting_evidence_id": "vclc:meeting-evidence:d2bee6d90444efcddef0aeb245a457f5d5953873907076d3edfa6424520190ea",
+            "quote_sha256": "09ce2f143ee746d3c7f526746827f24d563472885e60ebcfef4a622aede529d8",
+            "selector": "$.summary_text",
+            "source_url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/2025/20251202-referencia-rueda-de-prensa-ministros.aspx"
+          }
+        ],
+        "fact_state": "source_summary",
+        "meeting_id": "vclc:meeting:7ec52ce180c226d3954d2021ce365f895237920b06dfea7905555e8d81d75be2",
+        "meeting_kind": "council_session",
+        "participants": [
+          {
+            "actor_kind": "public_body",
+            "actor_role": "convener",
+            "attendance_claim_state": "not_claimed",
+            "identity_state": "source_scoped",
+            "meeting_participant_id": "vclc:meeting-participant:122bd37d7b64bb604af81dac7be46e7713f008b9aca021e0a13b9311543e5549",
+            "participant_ordinal": 0,
+            "resolution_method": "exact_source_subject",
+            "source_label": "Consejo de Ministros"
+          },
+          {
+            "actor_kind": "public_body",
+            "actor_role": "disclosing_body",
+            "attendance_claim_state": "not_claimed",
+            "identity_state": "source_scoped",
+            "meeting_participant_id": "vclc:meeting-participant:f76d0c1feaa087f8c1f6148830c7c297b182f87800e4e66fe9af0239ee4bb3d8",
+            "participant_ordinal": 1,
+            "resolution_method": "official_source_identity",
+            "source_label": "Gobierno de España / La Moncloa"
+          }
+        ],
+        "published_at": "2025-12-02",
+        "scheduled_state": "occurred",
+        "summary": "El Consejo de Ministros ha aprobado el Acuerdo por el que se fijan los objetivos de estabilidad presupuestaria y de deuda pública para el conjunto de Administraciones Públicas y de cada uno de sus subsectores para el período 2026-2028 para su remisión a las Cortes Generales, y el límite de gasto no financiero del presupuesto del Estado para 2026.",
+        "time_precision": "day",
+        "title": "Referencia del Consejo de Ministros"
+      },
+      "provenance": {
+        "capture_bytes": 21234,
+        "capture_path": "etl/data/raw/moncloa_referencias/2026/02/16/moncloa_referencias_20260216T141256Z.json",
+        "capture_sha256": "ab08b7dc09a46c890f055e95fdeac5e7d716a5023f8792f19ce440a239271ddf",
+        "captured_at": "2026-02-16T14:12:56+00:00",
+        "extractor_method": "moncloa_explicit_agreement_summary_v1",
+        "extractor_version": "agreements_moncloa_v1",
+        "origin_channel": "list+detail",
+        "source_id": "moncloa_referencias",
+        "source_record_id": "referencia:20251202-referencia-rueda-de-prensa-ministros.aspx",
+        "source_record_sha256": "ba791492032013debe5a8bb824e70c77343d460fee804f24db1a894f5cc13dad",
+        "source_snapshot_date": "2026-02-16",
+        "source_url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/2025/20251202-referencia-rueda-de-prensa-ministros.aspx"
+      }
+    },
+    {
+      "agreement": {
+        "adopted_on": "2025-12-09",
+        "agenda_item_id": "vclc:agenda-item:536526c78d73e6b6da188746abaa1b4b78fdbeb3f62828eca1063d742d7057e2",
+        "agreement_id": "vclc:agreement:49cf077d2e4e4395080d3708d1358cb294570c264fb00c6bbee27e4abb73033c",
+        "agreement_kind": "executive_decision",
+        "agreement_status": "adopted",
+        "date_precision": "day",
+        "evidence": [
+          {
+            "agreement_evidence_id": "vclc:agreement-evidence:4a7feea4ef6e6fb9b7cc80df221f0435d5bc40dc9ff5062aa0a887f095d454b6",
+            "content_sha256": "600a764c993f93b1c340e02a96339344b78089541d8885376e4f894c94e6e39e",
+            "evidence_ordinal": 0,
+            "evidence_role": "official_summary",
+            "evidence_state": "captured_bytes",
+            "exact_quote": "El Consejo de Ministros ha aprobado un acuerdo por el que se autoriza un crédito extraordinario vinculado al Mecanismo de Recuperación y Resiliencia (MRR) en el Centro Español de Metrología, por un importe de 8.417.335,74 euros, en cumplimiento del artículo 37.3 del Real Decreto-ley 36/2020, de 30 de diciembre, por el que se aprueban medidas urgentes para la modernización de la Administración Pública y para la ejecución del Plan de Recuperación, Transformación y Resiliencia.",
+            "quote_sha256": "984fdd53ae1772eb00f0214887786a65b7a913bf0f622247297a8c6c935c0ff3",
+            "selector": "$.summary_text",
+            "source_url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/2025/20251209-referencia-rueda-de-prensa-ministros.aspx"
+          }
+        ],
+        "fact_state": "source_summary",
+        "influence_state": "not_asserted",
+        "meeting_id": "vclc:meeting:93b0ced91fe0f4f71c2bbc2c99f19408b1717efa72e429d6679b553b78eaaf95",
+        "parties": [
+          {
+            "actor_kind": "public_body",
+            "agreement_party_id": "vclc:agreement-party:7cf23f3bc802c7ab1d8e5693700bac1e845d2338139e27b23bfb36d2e5cd0e15",
+            "identity_state": "source_scoped",
+            "party_ordinal": 0,
+            "party_role": "adopter",
+            "resolution_method": "exact_source_subject",
+            "source_label": "Consejo de Ministros"
+          },
+          {
+            "actor_kind": "public_body",
+            "agreement_party_id": "vclc:agreement-party:6e12172755db351deec49ce51d0d2a30dd852626bbd7d5559f11b0aff6dce786",
+            "identity_state": "source_scoped",
+            "party_ordinal": 1,
+            "party_role": "publishing_body",
+            "resolution_method": "official_source_identity",
+            "source_label": "Gobierno de España / La Moncloa"
+          },
+          {
+            "actor_kind": "public_body",
+            "agreement_party_id": "vclc:agreement-party:a1146b04e81645d21b3baa096a332eedf0e05aeb4a1153713c8fccb56dbbdb73",
+            "identity_state": "source_scoped",
+            "party_ordinal": 2,
+            "party_role": "affected_body",
+            "resolution_method": "exact_source_substring_v1",
+            "source_label": "Centro Español de Metrología"
+          }
+        ],
+        "published_on": "2025-12-09",
+        "summary": "El Consejo de Ministros ha aprobado un acuerdo por el que se autoriza un crédito extraordinario vinculado al Mecanismo de Recuperación y Resiliencia (MRR) en el Centro Español de Metrología, por un importe de 8.417.335,74 euros, en cumplimiento del artículo 37.3 del Real Decreto-ley 36/2020, de 30 de diciembre, por el que se aprueban medidas urgentes para la modernización de la Administración Pública y para la ejecución del Plan de Recuperación, Transformación y Resiliencia.",
+        "title": "Referencia del Consejo de Ministros",
+        "topics": [
+          {
+            "agreement_topic_id": "vclc:agreement-topic:e5a4cf0e8b217d358053dc31547fffec711579fcc7b61ca1d7ac2fb228c191f7",
+            "assignment_kind": "derived_rule",
+            "assignment_method": "moncloa_agreement_keyword_codebook",
+            "assignment_version": "agreements_topics_es_v1",
+            "match_text": "crédito",
+            "review_status": "unreviewed",
+            "topic_key": "public_finance",
+            "topic_label": "Hacienda, presupuestos y deuda pública"
+          },
+          {
+            "agreement_topic_id": "vclc:agreement-topic:30c16be55b131a2caf47a90814f53c3b81274156796a15ab19d049c62c4b5cf0",
+            "assignment_kind": "derived_rule",
+            "assignment_method": "moncloa_agreement_keyword_codebook",
+            "assignment_version": "agreements_topics_es_v1",
+            "match_text": "metrología",
+            "review_status": "unreviewed",
+            "topic_key": "research_innovation",
+            "topic_label": "Ciencia, investigación e innovación"
+          },
+          {
+            "agreement_topic_id": "vclc:agreement-topic:adaa6fe151008e412f045d0e5fe9d29ef6186b5165136f1c8eac11b76fde9419",
+            "assignment_kind": "derived_rule",
+            "assignment_method": "moncloa_agreement_keyword_codebook",
+            "assignment_version": "agreements_topics_es_v1",
+            "match_text": "administración pública",
+            "review_status": "unreviewed",
+            "topic_key": "public_administration",
+            "topic_label": "Administración pública"
+          }
+        ]
+      },
+      "meeting": {
+        "agenda_items": [
+          {
+            "agenda_item_id": "vclc:agenda-item:536526c78d73e6b6da188746abaa1b4b78fdbeb3f62828eca1063d742d7057e2",
+            "agenda_state": "source_summary",
+            "description": "El Consejo de Ministros ha aprobado un acuerdo por el que se autoriza un crédito extraordinario vinculado al Mecanismo de Recuperación y Resiliencia (MRR) en el Centro Español de Metrología, por un importe de 8.417.335,74 euros, en cumplimiento del artículo 37.3 del Real Decreto-ley 36/2020, de 30 de diciembre, por el que se aprueban medidas urgentes para la modernización de la Administración Pública y para la ejecución del Plan de Recuperación, Transformación y Resiliencia.",
+            "item_ordinal": 0,
+            "source_text_state": "source_summary",
+            "title": "Referencia del Consejo de Ministros"
+          }
+        ],
+        "attendance_disclosure_state": "not_disclosed",
+        "event_date": "2025-12-09",
+        "evidence": [
+          {
+            "content_sha256": "600a764c993f93b1c340e02a96339344b78089541d8885376e4f894c94e6e39e",
+            "evidence_ordinal": 0,
+            "evidence_role": "outcome",
+            "evidence_state": "captured_bytes",
+            "exact_quote": "El Consejo de Ministros ha aprobado un acuerdo por el que se autoriza un crédito extraordinario vinculado al Mecanismo de Recuperación y Resiliencia (MRR) en el Centro Español de Metrología, por un importe de 8.417.335,74 euros, en cumplimiento del artículo 37.3 del Real Decreto-ley 36/2020, de 30 de diciembre, por el que se aprueban medidas urgentes para la modernización de la Administración Pública y para la ejecución del Plan de Recuperación, Transformación y Resiliencia.",
+            "meeting_evidence_id": "vclc:meeting-evidence:57fc4754721507fb30489d8248380faa34b6a5434e84ffa720717e5a4ac0e4ed",
+            "quote_sha256": "984fdd53ae1772eb00f0214887786a65b7a913bf0f622247297a8c6c935c0ff3",
+            "selector": "$.summary_text",
+            "source_url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/2025/20251209-referencia-rueda-de-prensa-ministros.aspx"
+          }
+        ],
+        "fact_state": "source_summary",
+        "meeting_id": "vclc:meeting:93b0ced91fe0f4f71c2bbc2c99f19408b1717efa72e429d6679b553b78eaaf95",
+        "meeting_kind": "council_session",
+        "participants": [
+          {
+            "actor_kind": "public_body",
+            "actor_role": "convener",
+            "attendance_claim_state": "not_claimed",
+            "identity_state": "source_scoped",
+            "meeting_participant_id": "vclc:meeting-participant:0ee53889c7e6df1a450160c2a5943f073722df387d53352ac0178ba841818d53",
+            "participant_ordinal": 0,
+            "resolution_method": "exact_source_subject",
+            "source_label": "Consejo de Ministros"
+          },
+          {
+            "actor_kind": "public_body",
+            "actor_role": "disclosing_body",
+            "attendance_claim_state": "not_claimed",
+            "identity_state": "source_scoped",
+            "meeting_participant_id": "vclc:meeting-participant:4a6fc80842944fa7c233a029f30f7dc73315a4718f44eb06cb42b986c9650769",
+            "participant_ordinal": 1,
+            "resolution_method": "official_source_identity",
+            "source_label": "Gobierno de España / La Moncloa"
+          }
+        ],
+        "published_at": "2025-12-09",
+        "scheduled_state": "occurred",
+        "summary": "El Consejo de Ministros ha aprobado un acuerdo por el que se autoriza un crédito extraordinario vinculado al Mecanismo de Recuperación y Resiliencia (MRR) en el Centro Español de Metrología, por un importe de 8.417.335,74 euros, en cumplimiento del artículo 37.3 del Real Decreto-ley 36/2020, de 30 de diciembre, por el que se aprueban medidas urgentes para la modernización de la Administración Pública y para la ejecución del Plan de Recuperación, Transformación y Resiliencia.",
+        "time_precision": "day",
+        "title": "Referencia del Consejo de Ministros"
+      },
+      "provenance": {
+        "capture_bytes": 21234,
+        "capture_path": "etl/data/raw/moncloa_referencias/2026/02/16/moncloa_referencias_20260216T141256Z.json",
+        "capture_sha256": "ab08b7dc09a46c890f055e95fdeac5e7d716a5023f8792f19ce440a239271ddf",
+        "captured_at": "2026-02-16T14:12:56+00:00",
+        "extractor_method": "moncloa_explicit_agreement_summary_v1",
+        "extractor_version": "agreements_moncloa_v1",
+        "origin_channel": "list+detail",
+        "source_id": "moncloa_referencias",
+        "source_record_id": "referencia:20251209-referencia-rueda-de-prensa-ministros.aspx",
+        "source_record_sha256": "600a764c993f93b1c340e02a96339344b78089541d8885376e4f894c94e6e39e",
+        "source_snapshot_date": "2026-02-16",
+        "source_url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/2025/20251209-referencia-rueda-de-prensa-ministros.aspx"
+      }
+    },
+    {
+      "agreement": {
+        "adopted_on": "2025-12-23",
+        "agenda_item_id": "vclc:agenda-item:1acb94126ec958db685d2ff1daf8f1989295e52f951741897998eb582931be1a",
+        "agreement_id": "vclc:agreement:1ba1fd26f703c6fc142617ac02c8f7dd1d983ad26113de36debfd956fd01a6c1",
+        "agreement_kind": "executive_decision",
+        "agreement_status": "adopted",
+        "date_precision": "day",
+        "evidence": [
+          {
+            "agreement_evidence_id": "vclc:agreement-evidence:307b346dba10c8470a12363e19be038da16e31920296f6e66f39ad7bde2294ae",
+            "content_sha256": "8e62e7c76dece84c3c3ff647e72b025edd1620d9ca5a77910a2ceab1ff159267",
+            "evidence_ordinal": 0,
+            "evidence_role": "official_summary",
+            "evidence_state": "captured_bytes",
+            "exact_quote": "El Consejo de Ministros ha aprobado un acuerdo por el que se establecen las obligaciones de servicio público que deberá cumplir el operador postal Correos y Telégrafos S.A. en las elecciones autonómicas convocadas para el próximo 8 de febrero de 2026 en la Comunidad Autónoma de Aragón. Para el normal desarrollo de este proceso electoral, el operador postal Correos deberá hacer frente a unas obligaciones previstas en la Ley Orgánica 5/1985, de 19 de junio, de Régimen Electoral General, y que son las siguientes:",
+            "quote_sha256": "93daa7ed3fdc0616cfdbc9904a17da6e6dca5713fd9e618f7ba6255f550bb058",
+            "selector": "$.summary_text",
+            "source_url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/2025/20251223-referencia-rueda-de-prensa-ministros.aspx"
+          }
+        ],
+        "fact_state": "source_summary",
+        "influence_state": "not_asserted",
+        "meeting_id": "vclc:meeting:f0eec6b7eabb50cc73cfd62e77945b53e83502eb57641b3746a4e340213f1f73",
+        "parties": [
+          {
+            "actor_kind": "public_body",
+            "agreement_party_id": "vclc:agreement-party:81e2665e2a08521bb7994b2937b662a7e769ef252c31519a09f4f8b37edac293",
+            "identity_state": "source_scoped",
+            "party_ordinal": 0,
+            "party_role": "adopter",
+            "resolution_method": "exact_source_subject",
+            "source_label": "Consejo de Ministros"
+          },
+          {
+            "actor_kind": "public_body",
+            "agreement_party_id": "vclc:agreement-party:c8d2e2ab3cf8978fb9e2db89a84b930e706cc726d75cbe0d6676002ce5d0318b",
+            "identity_state": "source_scoped",
+            "party_ordinal": 1,
+            "party_role": "publishing_body",
+            "resolution_method": "official_source_identity",
+            "source_label": "Gobierno de España / La Moncloa"
+          },
+          {
+            "actor_kind": "organization",
+            "agreement_party_id": "vclc:agreement-party:21cde3a4dbe7b9709a48c358e70fa06fe1a5e1f45a27205c10cc37667f1e186d",
+            "identity_state": "source_scoped",
+            "party_ordinal": 2,
+            "party_role": "affected_body",
+            "resolution_method": "exact_source_substring_v1",
+            "source_label": "Correos y Telégrafos S.A."
+          }
+        ],
+        "published_on": "2025-12-23",
+        "summary": "El Consejo de Ministros ha aprobado un acuerdo por el que se establecen las obligaciones de servicio público que deberá cumplir el operador postal Correos y Telégrafos S.A. en las elecciones autonómicas convocadas para el próximo 8 de febrero de 2026 en la Comunidad Autónoma de Aragón. Para el normal desarrollo de este proceso electoral, el operador postal Correos deberá hacer frente a unas obligaciones previstas en la Ley Orgánica 5/1985, de 19 de junio, de Régimen Electoral General, y que son las siguientes:",
+        "title": "Referencia del Consejo de Ministros",
+        "topics": [
+          {
+            "agreement_topic_id": "vclc:agreement-topic:0a7fcc267539d1864d12333201b7fb901f07ae91326dc258530b132481cfd0a8",
+            "assignment_kind": "derived_rule",
+            "assignment_method": "moncloa_agreement_keyword_codebook",
+            "assignment_version": "agreements_topics_es_v1",
+            "match_text": "elecciones",
+            "review_status": "unreviewed",
+            "topic_key": "elections_democracy",
+            "topic_label": "Elecciones y calidad democrática"
+          }
+        ]
+      },
+      "meeting": {
+        "agenda_items": [
+          {
+            "agenda_item_id": "vclc:agenda-item:1acb94126ec958db685d2ff1daf8f1989295e52f951741897998eb582931be1a",
+            "agenda_state": "source_summary",
+            "description": "El Consejo de Ministros ha aprobado un acuerdo por el que se establecen las obligaciones de servicio público que deberá cumplir el operador postal Correos y Telégrafos S.A. en las elecciones autonómicas convocadas para el próximo 8 de febrero de 2026 en la Comunidad Autónoma de Aragón. Para el normal desarrollo de este proceso electoral, el operador postal Correos deberá hacer frente a unas obligaciones previstas en la Ley Orgánica 5/1985, de 19 de junio, de Régimen Electoral General, y que son las siguientes:",
+            "item_ordinal": 0,
+            "source_text_state": "source_summary",
+            "title": "Referencia del Consejo de Ministros"
+          }
+        ],
+        "attendance_disclosure_state": "not_disclosed",
+        "event_date": "2025-12-23",
+        "evidence": [
+          {
+            "content_sha256": "8e62e7c76dece84c3c3ff647e72b025edd1620d9ca5a77910a2ceab1ff159267",
+            "evidence_ordinal": 0,
+            "evidence_role": "outcome",
+            "evidence_state": "captured_bytes",
+            "exact_quote": "El Consejo de Ministros ha aprobado un acuerdo por el que se establecen las obligaciones de servicio público que deberá cumplir el operador postal Correos y Telégrafos S.A. en las elecciones autonómicas convocadas para el próximo 8 de febrero de 2026 en la Comunidad Autónoma de Aragón. Para el normal desarrollo de este proceso electoral, el operador postal Correos deberá hacer frente a unas obligaciones previstas en la Ley Orgánica 5/1985, de 19 de junio, de Régimen Electoral General, y que son las siguientes:",
+            "meeting_evidence_id": "vclc:meeting-evidence:a23a85e9f90d77fafc6d7a6e8e33190de97dd0a778dea001a8aac29442a507da",
+            "quote_sha256": "93daa7ed3fdc0616cfdbc9904a17da6e6dca5713fd9e618f7ba6255f550bb058",
+            "selector": "$.summary_text",
+            "source_url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/2025/20251223-referencia-rueda-de-prensa-ministros.aspx"
+          }
+        ],
+        "fact_state": "source_summary",
+        "meeting_id": "vclc:meeting:f0eec6b7eabb50cc73cfd62e77945b53e83502eb57641b3746a4e340213f1f73",
+        "meeting_kind": "council_session",
+        "participants": [
+          {
+            "actor_kind": "public_body",
+            "actor_role": "convener",
+            "attendance_claim_state": "not_claimed",
+            "identity_state": "source_scoped",
+            "meeting_participant_id": "vclc:meeting-participant:34c3aa46a522224e19380cdcd2bb5af479f176ec94acad4c213d5286cfee4b30",
+            "participant_ordinal": 0,
+            "resolution_method": "exact_source_subject",
+            "source_label": "Consejo de Ministros"
+          },
+          {
+            "actor_kind": "public_body",
+            "actor_role": "disclosing_body",
+            "attendance_claim_state": "not_claimed",
+            "identity_state": "source_scoped",
+            "meeting_participant_id": "vclc:meeting-participant:27dd53fee6627b6cf338a7c85c8a52544174e135829b3550ea708ee4f78075af",
+            "participant_ordinal": 1,
+            "resolution_method": "official_source_identity",
+            "source_label": "Gobierno de España / La Moncloa"
+          }
+        ],
+        "published_at": "2025-12-23",
+        "scheduled_state": "occurred",
+        "summary": "El Consejo de Ministros ha aprobado un acuerdo por el que se establecen las obligaciones de servicio público que deberá cumplir el operador postal Correos y Telégrafos S.A. en las elecciones autonómicas convocadas para el próximo 8 de febrero de 2026 en la Comunidad Autónoma de Aragón. Para el normal desarrollo de este proceso electoral, el operador postal Correos deberá hacer frente a unas obligaciones previstas en la Ley Orgánica 5/1985, de 19 de junio, de Régimen Electoral General, y que son las siguientes:",
+        "time_precision": "day",
+        "title": "Referencia del Consejo de Ministros"
+      },
+      "provenance": {
+        "capture_bytes": 21234,
+        "capture_path": "etl/data/raw/moncloa_referencias/2026/02/16/moncloa_referencias_20260216T141256Z.json",
+        "capture_sha256": "ab08b7dc09a46c890f055e95fdeac5e7d716a5023f8792f19ce440a239271ddf",
+        "captured_at": "2026-02-16T14:12:56+00:00",
+        "extractor_method": "moncloa_explicit_agreement_summary_v1",
+        "extractor_version": "agreements_moncloa_v1",
+        "origin_channel": "list+detail",
+        "source_id": "moncloa_referencias",
+        "source_record_id": "referencia:20251223-referencia-rueda-de-prensa-ministros.aspx",
+        "source_record_sha256": "8e62e7c76dece84c3c3ff647e72b025edd1620d9ca5a77910a2ceab1ff159267",
+        "source_snapshot_date": "2026-02-16",
+        "source_url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/2025/20251223-referencia-rueda-de-prensa-ministros.aspx"
+      }
+    },
+    {
+      "agreement": {
+        "adopted_on": "2026-01-13",
+        "agenda_item_id": "vclc:agenda-item:e8398990c5d818f39a90563639aa731fbc63c07b34fea9b9dcc3434e2183a089",
+        "agreement_id": "vclc:agreement:64241320cd476e8b02266e44ec3ba994d89a33186aabe23faf99046d7a86119a",
+        "agreement_kind": "executive_decision",
+        "agreement_status": "adopted",
+        "date_precision": "day",
+        "evidence": [
+          {
+            "agreement_evidence_id": "vclc:agreement-evidence:80be967eb10350bb4cfe561359d49844361a191eefb2f0a6911c6703b903dd11",
+            "content_sha256": "15e1e3ae00a781b4b711e5820edd3a7a6099b1ac4242bcde4de436fcbd2164a8",
+            "evidence_ordinal": 0,
+            "evidence_role": "official_summary",
+            "evidence_state": "captured_bytes",
+            "exact_quote": "El Consejo de Ministros ha aprobado el Acuerdo por el que se dispone la remisión a las Cortes Generales del Acuerdo entre la Unión Europea y la Comunidad Europea de la Energía Atómica, por una parte, y el Reino de España, por otra, relativo al establecimiento del Centro Común de Investigación de la Comisión Europea en Sevilla y se autorice la manifestación del consentimiento de España para obligarse por el mencionado Acuerdo.",
+            "quote_sha256": "4d6db14bd21536b13c3b496bc2334d988c5ed044ab59800999ed9df24bbb4fad",
+            "selector": "$.summary_text",
+            "source_url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/2026/20260113-referencia-rueda-de-prensa-ministros.aspx"
+          }
+        ],
+        "fact_state": "source_summary",
+        "influence_state": "not_asserted",
+        "meeting_id": "vclc:meeting:deeb4a26239423bfc039593393063a1e6ad21784bee9e8592f5d85a32d9b5da4",
+        "parties": [
+          {
+            "actor_kind": "public_body",
+            "agreement_party_id": "vclc:agreement-party:865ff581a4aa550885711dbff55a4110b0090b1a319414872bd81b7572ed67dd",
+            "identity_state": "source_scoped",
+            "party_ordinal": 0,
+            "party_role": "adopter",
+            "resolution_method": "exact_source_subject",
+            "source_label": "Consejo de Ministros"
+          },
+          {
+            "actor_kind": "public_body",
+            "agreement_party_id": "vclc:agreement-party:d3de8fc610866323461335647040a13b15c112b45306c79b3eff3c13b3108151",
+            "identity_state": "source_scoped",
+            "party_ordinal": 1,
+            "party_role": "publishing_body",
+            "resolution_method": "official_source_identity",
+            "source_label": "Gobierno de España / La Moncloa"
+          },
+          {
+            "actor_kind": "public_body",
+            "agreement_party_id": "vclc:agreement-party:d86ee79d058fc1057345138c95e77ac589d81d35d553d112ea166e5919ec54c2",
+            "identity_state": "source_scoped",
+            "party_ordinal": 2,
+            "party_role": "affected_body",
+            "resolution_method": "exact_source_substring_v1",
+            "source_label": "Cortes Generales"
+          },
+          {
+            "actor_kind": "organization",
+            "agreement_party_id": "vclc:agreement-party:18c708837f1459fb0433d489d012478f5855990f03ddc0b5699c2b1c0ee3caee",
+            "identity_state": "source_scoped",
+            "party_ordinal": 3,
+            "party_role": "counterparty",
+            "resolution_method": "exact_source_substring_v1",
+            "source_label": "Unión Europea"
+          },
+          {
+            "actor_kind": "organization",
+            "agreement_party_id": "vclc:agreement-party:7ccf5658be19e4716933a5fb6c5ac39896a02fa1379abc5596944c832953ff34",
+            "identity_state": "source_scoped",
+            "party_ordinal": 4,
+            "party_role": "counterparty",
+            "resolution_method": "exact_source_substring_v1",
+            "source_label": "Comunidad Europea de la Energía Atómica"
+          },
+          {
+            "actor_kind": "public_body",
+            "agreement_party_id": "vclc:agreement-party:0bce02a3d549bca6f739134dffa993697489bce562646b7d9868e3aba9caef96",
+            "identity_state": "source_scoped",
+            "party_ordinal": 5,
+            "party_role": "counterparty",
+            "resolution_method": "exact_source_substring_v1",
+            "source_label": "Reino de España"
+          }
+        ],
+        "published_on": "2026-01-13",
+        "summary": "El Consejo de Ministros ha aprobado el Acuerdo por el que se dispone la remisión a las Cortes Generales del Acuerdo entre la Unión Europea y la Comunidad Europea de la Energía Atómica, por una parte, y el Reino de España, por otra, relativo al establecimiento del Centro Común de Investigación de la Comisión Europea en Sevilla y se autorice la manifestación del consentimiento de España para obligarse por el mencionado Acuerdo.",
+        "title": "Referencia Consejo de Ministros",
+        "topics": [
+          {
+            "agreement_topic_id": "vclc:agreement-topic:a191024b636a2687363026fac73fb33c866a5a00c098e45abcc5e51d584e3119",
+            "assignment_kind": "derived_rule",
+            "assignment_method": "moncloa_agreement_keyword_codebook",
+            "assignment_version": "agreements_topics_es_v1",
+            "match_text": "unión europea",
+            "review_status": "unreviewed",
+            "topic_key": "international_relations",
+            "topic_label": "Relaciones internacionales"
+          },
+          {
+            "agreement_topic_id": "vclc:agreement-topic:52008fc72fd5dbdab93e34914c8c0a2fb53101472ec7342128f021ef957e2724",
+            "assignment_kind": "derived_rule",
+            "assignment_method": "moncloa_agreement_keyword_codebook",
+            "assignment_version": "agreements_topics_es_v1",
+            "match_text": "centro común de investigación",
+            "review_status": "unreviewed",
+            "topic_key": "research_innovation",
+            "topic_label": "Ciencia, investigación e innovación"
+          }
+        ]
+      },
+      "meeting": {
+        "agenda_items": [
+          {
+            "agenda_item_id": "vclc:agenda-item:e8398990c5d818f39a90563639aa731fbc63c07b34fea9b9dcc3434e2183a089",
+            "agenda_state": "source_summary",
+            "description": "El Consejo de Ministros ha aprobado el Acuerdo por el que se dispone la remisión a las Cortes Generales del Acuerdo entre la Unión Europea y la Comunidad Europea de la Energía Atómica, por una parte, y el Reino de España, por otra, relativo al establecimiento del Centro Común de Investigación de la Comisión Europea en Sevilla y se autorice la manifestación del consentimiento de España para obligarse por el mencionado Acuerdo.",
+            "item_ordinal": 0,
+            "source_text_state": "source_summary",
+            "title": "Referencia Consejo de Ministros"
+          }
+        ],
+        "attendance_disclosure_state": "not_disclosed",
+        "event_date": "2026-01-13",
+        "evidence": [
+          {
+            "content_sha256": "15e1e3ae00a781b4b711e5820edd3a7a6099b1ac4242bcde4de436fcbd2164a8",
+            "evidence_ordinal": 0,
+            "evidence_role": "outcome",
+            "evidence_state": "captured_bytes",
+            "exact_quote": "El Consejo de Ministros ha aprobado el Acuerdo por el que se dispone la remisión a las Cortes Generales del Acuerdo entre la Unión Europea y la Comunidad Europea de la Energía Atómica, por una parte, y el Reino de España, por otra, relativo al establecimiento del Centro Común de Investigación de la Comisión Europea en Sevilla y se autorice la manifestación del consentimiento de España para obligarse por el mencionado Acuerdo.",
+            "meeting_evidence_id": "vclc:meeting-evidence:d378a4d5dd556e67de789fbb30dca85119758a507527a281a0d9dd07d44cd05c",
+            "quote_sha256": "4d6db14bd21536b13c3b496bc2334d988c5ed044ab59800999ed9df24bbb4fad",
+            "selector": "$.summary_text",
+            "source_url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/2026/20260113-referencia-rueda-de-prensa-ministros.aspx"
+          }
+        ],
+        "fact_state": "source_summary",
+        "meeting_id": "vclc:meeting:deeb4a26239423bfc039593393063a1e6ad21784bee9e8592f5d85a32d9b5da4",
+        "meeting_kind": "council_session",
+        "participants": [
+          {
+            "actor_kind": "public_body",
+            "actor_role": "convener",
+            "attendance_claim_state": "not_claimed",
+            "identity_state": "source_scoped",
+            "meeting_participant_id": "vclc:meeting-participant:f7e3c6fa762e507498361c4bc872ca710fd237b5426eb2cdf01c9b93a4dac25d",
+            "participant_ordinal": 0,
+            "resolution_method": "exact_source_subject",
+            "source_label": "Consejo de Ministros"
+          },
+          {
+            "actor_kind": "public_body",
+            "actor_role": "disclosing_body",
+            "attendance_claim_state": "not_claimed",
+            "identity_state": "source_scoped",
+            "meeting_participant_id": "vclc:meeting-participant:629a43df723c7cde6e1ac8ec2e567ba2539ab6c37463781c9245a4817b312349",
+            "participant_ordinal": 1,
+            "resolution_method": "official_source_identity",
+            "source_label": "Gobierno de España / La Moncloa"
+          }
+        ],
+        "published_at": "2026-01-13",
+        "scheduled_state": "occurred",
+        "summary": "El Consejo de Ministros ha aprobado el Acuerdo por el que se dispone la remisión a las Cortes Generales del Acuerdo entre la Unión Europea y la Comunidad Europea de la Energía Atómica, por una parte, y el Reino de España, por otra, relativo al establecimiento del Centro Común de Investigación de la Comisión Europea en Sevilla y se autorice la manifestación del consentimiento de España para obligarse por el mencionado Acuerdo.",
+        "time_precision": "day",
+        "title": "Referencia Consejo de Ministros"
+      },
+      "provenance": {
+        "capture_bytes": 21234,
+        "capture_path": "etl/data/raw/moncloa_referencias/2026/02/16/moncloa_referencias_20260216T141256Z.json",
+        "capture_sha256": "ab08b7dc09a46c890f055e95fdeac5e7d716a5023f8792f19ce440a239271ddf",
+        "captured_at": "2026-02-16T14:12:56+00:00",
+        "extractor_method": "moncloa_explicit_agreement_summary_v1",
+        "extractor_version": "agreements_moncloa_v1",
+        "origin_channel": "list+detail",
+        "source_id": "moncloa_referencias",
+        "source_record_id": "referencia:20260113-referencia-rueda-de-prensa-ministros.aspx",
+        "source_record_sha256": "15e1e3ae00a781b4b711e5820edd3a7a6099b1ac4242bcde4de436fcbd2164a8",
+        "source_snapshot_date": "2026-02-16",
+        "source_url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/2026/20260113-referencia-rueda-de-prensa-ministros.aspx"
+      }
+    },
+    {
+      "agreement": {
+        "adopted_on": "2026-01-20",
+        "agenda_item_id": "vclc:agenda-item:a1d9cf1051bbe31d51e0890058479a56e68e2ada4b6acec1798a2016e9175ac8",
+        "agreement_id": "vclc:agreement:ea306d805dea1650888641e66b2bbade8cb471db8da31d8de7432299e8a768ce",
+        "agreement_kind": "executive_decision",
+        "agreement_status": "adopted",
+        "date_precision": "day",
+        "evidence": [
+          {
+            "agreement_evidence_id": "vclc:agreement-evidence:dd771c1ed9a42b1757812de72b00cd8d1ff6403439ff330f9ac2a56b0ad74a76",
+            "content_sha256": "a2923fdd4898f7c741f77b8a8b226072c8559653e6ee1d6ed407acd160cd96b5",
+            "evidence_ordinal": 0,
+            "evidence_role": "official_summary",
+            "evidence_state": "captured_bytes",
+            "exact_quote": "El Consejo de Ministros ha aprobado un acuerdo por el que se modifican los límites para adquirir compromisos de gasto con cargo a ejercicios futuros en aplicación de lo dispuesto en el artículo 47 de la Ley 47/2003, de 26 de noviembre, General Presupuestaria, para posibilitar al Ministerio de Igualdad la tramitación de diversos expedientes de gasto relativos al Capítulo 6 de 'Inversiones reales' correspondientes al programa 'Actuaciones para la prevención integral de la violencia de género'.",
+            "quote_sha256": "6f4650ccc6d3de64ba3fb192d1a87303bd190b330580ce30a9c094a6e075293f",
+            "selector": "$.summary_text",
+            "source_url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/2026/20260120-referencia-rueda-de-prensa-ministros.aspx"
+          }
+        ],
+        "fact_state": "source_summary",
+        "influence_state": "not_asserted",
+        "meeting_id": "vclc:meeting:14b8a52e6985fef503a8f9c89be74aecbe5545233555e1ad7453477d8be75a74",
+        "parties": [
+          {
+            "actor_kind": "public_body",
+            "agreement_party_id": "vclc:agreement-party:b8968acb30ed6fedcd1dabd7236afce27eafcfadb0cef114ea19b12946cba5df",
+            "identity_state": "source_scoped",
+            "party_ordinal": 0,
+            "party_role": "adopter",
+            "resolution_method": "exact_source_subject",
+            "source_label": "Consejo de Ministros"
+          },
+          {
+            "actor_kind": "public_body",
+            "agreement_party_id": "vclc:agreement-party:ee3098189ee7adcfd96efe0a6ebac3068ce793a8fc35a1bff9de58f31695e203",
+            "identity_state": "source_scoped",
+            "party_ordinal": 1,
+            "party_role": "publishing_body",
+            "resolution_method": "official_source_identity",
+            "source_label": "Gobierno de España / La Moncloa"
+          },
+          {
+            "actor_kind": "public_body",
+            "agreement_party_id": "vclc:agreement-party:c9fdce8efee183f66f46380a75d29920dd345875c1bc339e5cd61cadd4ca925a",
+            "identity_state": "source_scoped",
+            "party_ordinal": 2,
+            "party_role": "affected_body",
+            "resolution_method": "exact_source_substring_v1",
+            "source_label": "Ministerio de Igualdad"
+          }
+        ],
+        "published_on": "2026-01-20",
+        "summary": "El Consejo de Ministros ha aprobado un acuerdo por el que se modifican los límites para adquirir compromisos de gasto con cargo a ejercicios futuros en aplicación de lo dispuesto en el artículo 47 de la Ley 47/2003, de 26 de noviembre, General Presupuestaria, para posibilitar al Ministerio de Igualdad la tramitación de diversos expedientes de gasto relativos al Capítulo 6 de 'Inversiones reales' correspondientes al programa 'Actuaciones para la prevención integral de la violencia de género'.",
+        "title": "Referencia del Consejo de Ministros",
+        "topics": [
+          {
+            "agreement_topic_id": "vclc:agreement-topic:7ad1f6f85b6234654ea325621d800d1ece89ced3d5e3c7bd17cc3b13d3948729",
+            "assignment_kind": "derived_rule",
+            "assignment_method": "moncloa_agreement_keyword_codebook",
+            "assignment_version": "agreements_topics_es_v1",
+            "match_text": "presupuest",
+            "review_status": "unreviewed",
+            "topic_key": "public_finance",
+            "topic_label": "Hacienda, presupuestos y deuda pública"
+          },
+          {
+            "agreement_topic_id": "vclc:agreement-topic:5a5b0125b6f5562e43f752812c8a0529cd7ad90f842c79e051239a37c543604b",
+            "assignment_kind": "derived_rule",
+            "assignment_method": "moncloa_agreement_keyword_codebook",
+            "assignment_version": "agreements_topics_es_v1",
+            "match_text": "ministerio de igualdad",
+            "review_status": "unreviewed",
+            "topic_key": "equality_gender_violence",
+            "topic_label": "Igualdad y violencia de género"
+          }
+        ]
+      },
+      "meeting": {
+        "agenda_items": [
+          {
+            "agenda_item_id": "vclc:agenda-item:a1d9cf1051bbe31d51e0890058479a56e68e2ada4b6acec1798a2016e9175ac8",
+            "agenda_state": "source_summary",
+            "description": "El Consejo de Ministros ha aprobado un acuerdo por el que se modifican los límites para adquirir compromisos de gasto con cargo a ejercicios futuros en aplicación de lo dispuesto en el artículo 47 de la Ley 47/2003, de 26 de noviembre, General Presupuestaria, para posibilitar al Ministerio de Igualdad la tramitación de diversos expedientes de gasto relativos al Capítulo 6 de 'Inversiones reales' correspondientes al programa 'Actuaciones para la prevención integral de la violencia de género'.",
+            "item_ordinal": 0,
+            "source_text_state": "source_summary",
+            "title": "Referencia del Consejo de Ministros"
+          }
+        ],
+        "attendance_disclosure_state": "not_disclosed",
+        "event_date": "2026-01-20",
+        "evidence": [
+          {
+            "content_sha256": "a2923fdd4898f7c741f77b8a8b226072c8559653e6ee1d6ed407acd160cd96b5",
+            "evidence_ordinal": 0,
+            "evidence_role": "outcome",
+            "evidence_state": "captured_bytes",
+            "exact_quote": "El Consejo de Ministros ha aprobado un acuerdo por el que se modifican los límites para adquirir compromisos de gasto con cargo a ejercicios futuros en aplicación de lo dispuesto en el artículo 47 de la Ley 47/2003, de 26 de noviembre, General Presupuestaria, para posibilitar al Ministerio de Igualdad la tramitación de diversos expedientes de gasto relativos al Capítulo 6 de 'Inversiones reales' correspondientes al programa 'Actuaciones para la prevención integral de la violencia de género'.",
+            "meeting_evidence_id": "vclc:meeting-evidence:39e8a7c01aaa0a2375766451b6a1eb60ddf220f8397c885f22f65c7150304c7a",
+            "quote_sha256": "6f4650ccc6d3de64ba3fb192d1a87303bd190b330580ce30a9c094a6e075293f",
+            "selector": "$.summary_text",
+            "source_url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/2026/20260120-referencia-rueda-de-prensa-ministros.aspx"
+          }
+        ],
+        "fact_state": "source_summary",
+        "meeting_id": "vclc:meeting:14b8a52e6985fef503a8f9c89be74aecbe5545233555e1ad7453477d8be75a74",
+        "meeting_kind": "council_session",
+        "participants": [
+          {
+            "actor_kind": "public_body",
+            "actor_role": "convener",
+            "attendance_claim_state": "not_claimed",
+            "identity_state": "source_scoped",
+            "meeting_participant_id": "vclc:meeting-participant:9601e64170628716d9ba51f1d93271a9c56510d813ba57fad5d5adff17117af6",
+            "participant_ordinal": 0,
+            "resolution_method": "exact_source_subject",
+            "source_label": "Consejo de Ministros"
+          },
+          {
+            "actor_kind": "public_body",
+            "actor_role": "disclosing_body",
+            "attendance_claim_state": "not_claimed",
+            "identity_state": "source_scoped",
+            "meeting_participant_id": "vclc:meeting-participant:dfc5b24a84b68ae3370f7a36595ea275edcd4afb6c37a9dce1fd957075461c5f",
+            "participant_ordinal": 1,
+            "resolution_method": "official_source_identity",
+            "source_label": "Gobierno de España / La Moncloa"
+          }
+        ],
+        "published_at": "2026-01-20",
+        "scheduled_state": "occurred",
+        "summary": "El Consejo de Ministros ha aprobado un acuerdo por el que se modifican los límites para adquirir compromisos de gasto con cargo a ejercicios futuros en aplicación de lo dispuesto en el artículo 47 de la Ley 47/2003, de 26 de noviembre, General Presupuestaria, para posibilitar al Ministerio de Igualdad la tramitación de diversos expedientes de gasto relativos al Capítulo 6 de 'Inversiones reales' correspondientes al programa 'Actuaciones para la prevención integral de la violencia de género'.",
+        "time_precision": "day",
+        "title": "Referencia del Consejo de Ministros"
+      },
+      "provenance": {
+        "capture_bytes": 21234,
+        "capture_path": "etl/data/raw/moncloa_referencias/2026/02/16/moncloa_referencias_20260216T141256Z.json",
+        "capture_sha256": "ab08b7dc09a46c890f055e95fdeac5e7d716a5023f8792f19ce440a239271ddf",
+        "captured_at": "2026-02-16T14:12:56+00:00",
+        "extractor_method": "moncloa_explicit_agreement_summary_v1",
+        "extractor_version": "agreements_moncloa_v1",
+        "origin_channel": "list+detail",
+        "source_id": "moncloa_referencias",
+        "source_record_id": "referencia:20260120-referencia-rueda-de-prensa-ministros.aspx",
+        "source_record_sha256": "a2923fdd4898f7c741f77b8a8b226072c8559653e6ee1d6ed407acd160cd96b5",
+        "source_snapshot_date": "2026-02-16",
+        "source_url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/2026/20260120-referencia-rueda-de-prensa-ministros.aspx"
+      }
+    },
+    {
+      "agreement": {
+        "adopted_on": "2026-01-27",
+        "agenda_item_id": "vclc:agenda-item:720dec636923b9a95b7feb546b21c0482e7f7ec91002cebbd0d2e0465756e771",
+        "agreement_id": "vclc:agreement:0af2c8e8497e301132831a42e09c9f83a580a2c65c7e67a7e55f5f1b52e377cb",
+        "agreement_kind": "executive_decision",
+        "agreement_status": "adopted",
+        "date_precision": "day",
+        "evidence": [
+          {
+            "agreement_evidence_id": "vclc:agreement-evidence:4920326ff6271d923536b8aef6904e18ba8e18b88337fca13e8462300a91ba60",
+            "content_sha256": "92961bd9ec6da18feb5d74f9dc28e82358150f9fd88960688265499268b2cfb7",
+            "evidence_ordinal": 0,
+            "evidence_role": "official_summary",
+            "evidence_state": "captured_bytes",
+            "exact_quote": "El Consejo de Ministros ha aprobado el Acuerdo por el que se dispone la remisión a las Cortes Generales del Acuerdo entre el Reino de España y el Sultanato de Omán sobre exención recíproca de visados para titulares de pasaportes diplomáticos, especiales y de servicio y se autoriza la manifestación del consentimiento de España para obligarse por dicho Acuerdo.",
+            "quote_sha256": "c250440ed4a17ea1d20b8cb88a4f11ba20af5cbc8f00476c5476159a98891fc6",
+            "selector": "$.summary_text",
+            "source_url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/2026/20260127-referencia-rueda-de-prensa-ministros.aspx"
+          }
+        ],
+        "fact_state": "source_summary",
+        "influence_state": "not_asserted",
+        "meeting_id": "vclc:meeting:4513f1d1515173f04934688c728d5d1995fbce174d4baf74542e00ef157badc8",
+        "parties": [
+          {
+            "actor_kind": "public_body",
+            "agreement_party_id": "vclc:agreement-party:aa9add2e8601818817b8f9c4c10dd6dc06e8875dc0bc50bec42f11f5de89050a",
+            "identity_state": "source_scoped",
+            "party_ordinal": 0,
+            "party_role": "adopter",
+            "resolution_method": "exact_source_subject",
+            "source_label": "Consejo de Ministros"
+          },
+          {
+            "actor_kind": "public_body",
+            "agreement_party_id": "vclc:agreement-party:b361668dc2892dd9a7788a2202c364c40203313366ebbfaebe56f2f704315f8f",
+            "identity_state": "source_scoped",
+            "party_ordinal": 1,
+            "party_role": "publishing_body",
+            "resolution_method": "official_source_identity",
+            "source_label": "Gobierno de España / La Moncloa"
+          },
+          {
+            "actor_kind": "public_body",
+            "agreement_party_id": "vclc:agreement-party:628cfafa234fa871e33fb409a14bc52322a2af5189cd99e2cd4c5ab17390ab03",
+            "identity_state": "source_scoped",
+            "party_ordinal": 2,
+            "party_role": "affected_body",
+            "resolution_method": "exact_source_substring_v1",
+            "source_label": "Cortes Generales"
+          },
+          {
+            "actor_kind": "public_body",
+            "agreement_party_id": "vclc:agreement-party:f751b3f32059d32a941d43b76557f50fae12641da4b636a4e3a4eeef746ffd5c",
+            "identity_state": "source_scoped",
+            "party_ordinal": 3,
+            "party_role": "counterparty",
+            "resolution_method": "exact_source_substring_v1",
+            "source_label": "Reino de España"
+          },
+          {
+            "actor_kind": "public_body",
+            "agreement_party_id": "vclc:agreement-party:42e7040ade7af6fcc409f742ffc430ae625f9707f89de0c28183572dd53c73aa",
+            "identity_state": "source_scoped",
+            "party_ordinal": 4,
+            "party_role": "counterparty",
+            "resolution_method": "exact_source_substring_v1",
+            "source_label": "Sultanato de Omán"
+          }
+        ],
+        "published_on": "2026-01-27",
+        "summary": "El Consejo de Ministros ha aprobado el Acuerdo por el que se dispone la remisión a las Cortes Generales del Acuerdo entre el Reino de España y el Sultanato de Omán sobre exención recíproca de visados para titulares de pasaportes diplomáticos, especiales y de servicio y se autoriza la manifestación del consentimiento de España para obligarse por dicho Acuerdo.",
+        "title": "Referencia Consejo de Ministros",
+        "topics": [
+          {
+            "agreement_topic_id": "vclc:agreement-topic:0716d4b17f617850d39f0a19a20b6648e1f1f2b109e13c5cf69110f4c94563f5",
+            "assignment_kind": "derived_rule",
+            "assignment_method": "moncloa_agreement_keyword_codebook",
+            "assignment_version": "agreements_topics_es_v1",
+            "match_text": "sultanato de omán",
+            "review_status": "unreviewed",
+            "topic_key": "international_relations",
+            "topic_label": "Relaciones internacionales"
+          }
+        ]
+      },
+      "meeting": {
+        "agenda_items": [
+          {
+            "agenda_item_id": "vclc:agenda-item:720dec636923b9a95b7feb546b21c0482e7f7ec91002cebbd0d2e0465756e771",
+            "agenda_state": "source_summary",
+            "description": "El Consejo de Ministros ha aprobado el Acuerdo por el que se dispone la remisión a las Cortes Generales del Acuerdo entre el Reino de España y el Sultanato de Omán sobre exención recíproca de visados para titulares de pasaportes diplomáticos, especiales y de servicio y se autoriza la manifestación del consentimiento de España para obligarse por dicho Acuerdo.",
+            "item_ordinal": 0,
+            "source_text_state": "source_summary",
+            "title": "Referencia Consejo de Ministros"
+          }
+        ],
+        "attendance_disclosure_state": "not_disclosed",
+        "event_date": "2026-01-27",
+        "evidence": [
+          {
+            "content_sha256": "92961bd9ec6da18feb5d74f9dc28e82358150f9fd88960688265499268b2cfb7",
+            "evidence_ordinal": 0,
+            "evidence_role": "outcome",
+            "evidence_state": "captured_bytes",
+            "exact_quote": "El Consejo de Ministros ha aprobado el Acuerdo por el que se dispone la remisión a las Cortes Generales del Acuerdo entre el Reino de España y el Sultanato de Omán sobre exención recíproca de visados para titulares de pasaportes diplomáticos, especiales y de servicio y se autoriza la manifestación del consentimiento de España para obligarse por dicho Acuerdo.",
+            "meeting_evidence_id": "vclc:meeting-evidence:b93d8929926f723092a1a2a37ae6533fd9139edd7ec4c41d8007da123a48540b",
+            "quote_sha256": "c250440ed4a17ea1d20b8cb88a4f11ba20af5cbc8f00476c5476159a98891fc6",
+            "selector": "$.summary_text",
+            "source_url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/2026/20260127-referencia-rueda-de-prensa-ministros.aspx"
+          }
+        ],
+        "fact_state": "source_summary",
+        "meeting_id": "vclc:meeting:4513f1d1515173f04934688c728d5d1995fbce174d4baf74542e00ef157badc8",
+        "meeting_kind": "council_session",
+        "participants": [
+          {
+            "actor_kind": "public_body",
+            "actor_role": "convener",
+            "attendance_claim_state": "not_claimed",
+            "identity_state": "source_scoped",
+            "meeting_participant_id": "vclc:meeting-participant:b00eb8a9b306c4dfd913fbe703b049f6c7de2fa2549578cfdee0f632bdf546f3",
+            "participant_ordinal": 0,
+            "resolution_method": "exact_source_subject",
+            "source_label": "Consejo de Ministros"
+          },
+          {
+            "actor_kind": "public_body",
+            "actor_role": "disclosing_body",
+            "attendance_claim_state": "not_claimed",
+            "identity_state": "source_scoped",
+            "meeting_participant_id": "vclc:meeting-participant:16a8e37535d6ff3106fde384efa6b1199cbd65f48af326e786e6e4da07daea9b",
+            "participant_ordinal": 1,
+            "resolution_method": "official_source_identity",
+            "source_label": "Gobierno de España / La Moncloa"
+          }
+        ],
+        "published_at": "2026-01-27",
+        "scheduled_state": "occurred",
+        "summary": "El Consejo de Ministros ha aprobado el Acuerdo por el que se dispone la remisión a las Cortes Generales del Acuerdo entre el Reino de España y el Sultanato de Omán sobre exención recíproca de visados para titulares de pasaportes diplomáticos, especiales y de servicio y se autoriza la manifestación del consentimiento de España para obligarse por dicho Acuerdo.",
+        "time_precision": "day",
+        "title": "Referencia Consejo de Ministros"
+      },
+      "provenance": {
+        "capture_bytes": 21234,
+        "capture_path": "etl/data/raw/moncloa_referencias/2026/02/16/moncloa_referencias_20260216T141256Z.json",
+        "capture_sha256": "ab08b7dc09a46c890f055e95fdeac5e7d716a5023f8792f19ce440a239271ddf",
+        "captured_at": "2026-02-16T14:12:56+00:00",
+        "extractor_method": "moncloa_explicit_agreement_summary_v1",
+        "extractor_version": "agreements_moncloa_v1",
+        "origin_channel": "list+detail",
+        "source_id": "moncloa_referencias",
+        "source_record_id": "referencia:20260127-referencia-rueda-de-prensa-ministros.aspx",
+        "source_record_sha256": "92961bd9ec6da18feb5d74f9dc28e82358150f9fd88960688265499268b2cfb7",
+        "source_snapshot_date": "2026-02-16",
+        "source_url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/2026/20260127-referencia-rueda-de-prensa-ministros.aspx"
+      }
+    },
+    {
+      "agreement": {
+        "adopted_on": "2026-02-10",
+        "agenda_item_id": "vclc:agenda-item:794a0ca653ed8647f589d2f097e0da7b6ecdcaf8fb9f66563e04d0c613fd2a05",
+        "agreement_id": "vclc:agreement:154f77f0385e2adf23fc91c382c5df2c3702f0694888900c0d0719a7d9dfc863",
+        "agreement_kind": "executive_decision",
+        "agreement_status": "adopted",
+        "date_precision": "day",
+        "evidence": [
+          {
+            "agreement_evidence_id": "vclc:agreement-evidence:842f90da0123bfc7bed32339a1c680d7a6e2558a6bc9764721a3f1839a1b7591",
+            "content_sha256": "69b071f8b5c0068a3832439ee47b71e8c2dc22298af8c32a680dcf8a297cd1df",
+            "evidence_ordinal": 0,
+            "evidence_role": "official_summary",
+            "evidence_state": "captured_bytes",
+            "exact_quote": "Este acuerdo autoriza a esta comunidad autónoma a formalizar operaciones de deuda a largo plazo para financiar, por un lado, las necesidades no cubiertas por el Fondo de Financiación a Comunidades Autónomas conforme a su Plan Plurianual de Endeudamiento, por un importe máximo de 493.710.940 euros.",
+            "quote_sha256": "84b06daddcda8cd73f62b5d64d6e87f0b99f9aa2b07e42dd4ff4842ff9b85cdf",
+            "selector": "$.summary_text",
+            "source_url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/2026/20260210-referencia-rueda-de-prensa-ministros.aspx"
+          }
+        ],
+        "fact_state": "source_summary",
+        "influence_state": "not_asserted",
+        "meeting_id": "vclc:meeting:56f477768fc187b20cc0a018bec79a5f4262825c0d52f7cf00e6fe5e877a1926",
+        "parties": [
+          {
+            "actor_kind": "public_body",
+            "agreement_party_id": "vclc:agreement-party:a64f3578fb86ec6c12f4e72e004ac520f443e8648422c4c914c865e4cd83baa1",
+            "identity_state": "source_scoped",
+            "party_ordinal": 0,
+            "party_role": "adopter",
+            "resolution_method": "exact_source_subject",
+            "source_label": "Consejo de Ministros"
+          },
+          {
+            "actor_kind": "public_body",
+            "agreement_party_id": "vclc:agreement-party:e4bbdb8e2dd1e925c66f3f7afed42b724096eec1bb6f8b8d593b6b211e931084",
+            "identity_state": "source_scoped",
+            "party_ordinal": 1,
+            "party_role": "publishing_body",
+            "resolution_method": "official_source_identity",
+            "source_label": "Gobierno de España / La Moncloa"
+          }
+        ],
+        "published_on": "2026-02-10",
+        "summary": "Este acuerdo autoriza a esta comunidad autónoma a formalizar operaciones de deuda a largo plazo para financiar, por un lado, las necesidades no cubiertas por el Fondo de Financiación a Comunidades Autónomas conforme a su Plan Plurianual de Endeudamiento, por un importe máximo de 493.710.940 euros.",
+        "title": "Referencia Consejo de Ministros",
+        "topics": [
+          {
+            "agreement_topic_id": "vclc:agreement-topic:62b6c2ae8cd8c3715a01f46c0238a7ce32183b4831d0cec2408275d2493b2974",
+            "assignment_kind": "derived_rule",
+            "assignment_method": "moncloa_agreement_keyword_codebook",
+            "assignment_version": "agreements_topics_es_v1",
+            "match_text": "deuda",
+            "review_status": "unreviewed",
+            "topic_key": "public_finance",
+            "topic_label": "Hacienda, presupuestos y deuda pública"
+          }
+        ]
+      },
+      "meeting": {
+        "agenda_items": [
+          {
+            "agenda_item_id": "vclc:agenda-item:794a0ca653ed8647f589d2f097e0da7b6ecdcaf8fb9f66563e04d0c613fd2a05",
+            "agenda_state": "source_summary",
+            "description": "Este acuerdo autoriza a esta comunidad autónoma a formalizar operaciones de deuda a largo plazo para financiar, por un lado, las necesidades no cubiertas por el Fondo de Financiación a Comunidades Autónomas conforme a su Plan Plurianual de Endeudamiento, por un importe máximo de 493.710.940 euros.",
+            "item_ordinal": 0,
+            "source_text_state": "source_summary",
+            "title": "Referencia Consejo de Ministros"
+          }
+        ],
+        "attendance_disclosure_state": "not_disclosed",
+        "event_date": "2026-02-10",
+        "evidence": [
+          {
+            "content_sha256": "69b071f8b5c0068a3832439ee47b71e8c2dc22298af8c32a680dcf8a297cd1df",
+            "evidence_ordinal": 0,
+            "evidence_role": "outcome",
+            "evidence_state": "captured_bytes",
+            "exact_quote": "Este acuerdo autoriza a esta comunidad autónoma a formalizar operaciones de deuda a largo plazo para financiar, por un lado, las necesidades no cubiertas por el Fondo de Financiación a Comunidades Autónomas conforme a su Plan Plurianual de Endeudamiento, por un importe máximo de 493.710.940 euros.",
+            "meeting_evidence_id": "vclc:meeting-evidence:d9c63ec63d7c42f69ef3d484d32d74c1af085959eb23f75d31ba23a403ea6e2c",
+            "quote_sha256": "84b06daddcda8cd73f62b5d64d6e87f0b99f9aa2b07e42dd4ff4842ff9b85cdf",
+            "selector": "$.summary_text",
+            "source_url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/2026/20260210-referencia-rueda-de-prensa-ministros.aspx"
+          }
+        ],
+        "fact_state": "source_summary",
+        "meeting_id": "vclc:meeting:56f477768fc187b20cc0a018bec79a5f4262825c0d52f7cf00e6fe5e877a1926",
+        "meeting_kind": "council_session",
+        "participants": [
+          {
+            "actor_kind": "public_body",
+            "actor_role": "convener",
+            "attendance_claim_state": "not_claimed",
+            "identity_state": "source_scoped",
+            "meeting_participant_id": "vclc:meeting-participant:0698dd3d26c4176daf55c8ea9e7626b441b404928f5633b7d2fc043d788321e7",
+            "participant_ordinal": 0,
+            "resolution_method": "exact_source_subject",
+            "source_label": "Consejo de Ministros"
+          },
+          {
+            "actor_kind": "public_body",
+            "actor_role": "disclosing_body",
+            "attendance_claim_state": "not_claimed",
+            "identity_state": "source_scoped",
+            "meeting_participant_id": "vclc:meeting-participant:3cfcc28e9e4491109bf023c29a66196b5b62a9a16f3fe51dd3421bd6a5e69149",
+            "participant_ordinal": 1,
+            "resolution_method": "official_source_identity",
+            "source_label": "Gobierno de España / La Moncloa"
+          }
+        ],
+        "published_at": "2026-02-10",
+        "scheduled_state": "occurred",
+        "summary": "Este acuerdo autoriza a esta comunidad autónoma a formalizar operaciones de deuda a largo plazo para financiar, por un lado, las necesidades no cubiertas por el Fondo de Financiación a Comunidades Autónomas conforme a su Plan Plurianual de Endeudamiento, por un importe máximo de 493.710.940 euros.",
+        "time_precision": "day",
+        "title": "Referencia Consejo de Ministros"
+      },
+      "provenance": {
+        "capture_bytes": 21234,
+        "capture_path": "etl/data/raw/moncloa_referencias/2026/02/16/moncloa_referencias_20260216T141256Z.json",
+        "capture_sha256": "ab08b7dc09a46c890f055e95fdeac5e7d716a5023f8792f19ce440a239271ddf",
+        "captured_at": "2026-02-16T14:12:56+00:00",
+        "extractor_method": "moncloa_explicit_agreement_summary_v1",
+        "extractor_version": "agreements_moncloa_v1",
+        "origin_channel": "list+detail",
+        "source_id": "moncloa_referencias",
+        "source_record_id": "referencia:20260210-referencia-rueda-de-prensa-ministros.aspx",
+        "source_record_sha256": "69b071f8b5c0068a3832439ee47b71e8c2dc22298af8c32a680dcf8a297cd1df",
+        "source_snapshot_date": "2026-02-16",
+        "source_url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/2026/20260210-referencia-rueda-de-prensa-ministros.aspx"
+      }
+    }
+  ],
+  "release_basis": {
+    "contract": "agreements-moncloa-release-v1",
+    "extractor_sha256": "fbad643a10ccddfbfdd353b7594eab3aa5f8c142be361123cfdb17cf4518da37",
+    "schema_sha256": "1d4fbbfb83069298996fb694dcb250c6f9bb7569df93b4deed479cace7a4fbf8",
+    "source_capture_bytes": 21234,
+    "source_capture_sha256": "ab08b7dc09a46c890f055e95fdeac5e7d716a5023f8792f19ce440a239271ddf",
+    "source_id": "moncloa_referencias"
+  },
+  "release_id": "6f75ec32a5c085fbf71109919de785e48a5d7b2dcdf8ea13b2aaddfcffdf3753",
+  "schema_version": "agreements-influence-public-v1",
+  "source": {
+    "capture": {
+      "bytes": 21234,
+      "content_sha256": "ab08b7dc09a46c890f055e95fdeac5e7d716a5023f8792f19ce440a239271ddf",
+      "content_type": "application/json",
+      "fetched_at": "2026-02-16T14:12:56+00:00",
+      "path": "etl/data/raw/moncloa_referencias/2026/02/16/moncloa_referencias_20260216T141256Z.json",
+      "source_url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/index.aspx"
+    },
+    "corpus_counts": {
+      "explicit_agreement_records": 11,
+      "moncloa_referencias_records": 20,
+      "source_records_total": 28
+    },
+    "default_url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/index.aspx",
+    "name": "La Moncloa - Referencias del Consejo de Ministros",
+    "official_domain": "www.lamoncloa.gob.es",
+    "source_id": "moncloa_referencias"
+  },
+  "synthetic_or_mock": false
+}

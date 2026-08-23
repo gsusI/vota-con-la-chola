@@ -1,0 +1,54 @@
+{
+  "schema_version": "live_moncloa_agreements_verification_v1",
+  "status": "ok",
+  "verified_at": "2026-08-19T21:45:02.057382+00:00",
+  "expected_release": "6f75ec32a5c085fbf71109919de785e48a5d7b2dcdf8ea13b2aaddfcffdf3753",
+  "live_release": "6f75ec32a5c085fbf71109919de785e48a5d7b2dcdf8ea13b2aaddfcffdf3753",
+  "page": {
+    "url": "https://votaconlachola.org/agreements/",
+    "http_status": 200,
+    "content_type": "text/html; charset=utf-8",
+    "bytes": 124279,
+    "sha256": "6c3f066da5119098291fc8f9cf03ce3f00ce4ee37d298b856ec3ad29388d07f1"
+  },
+  "artifact": {
+    "url": "https://votaconlachola.org/agreements/data/moncloa-sample.json",
+    "http_status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "bytes": 108229,
+    "sha256": "8d8ce21967ac1c63a869dd2b5661877e789bb32fcc7e36f9626f9c2678fea678",
+    "agreements": 11
+  },
+  "official_moncloa_probes": [
+    {
+      "url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/2025/20251014-referencia-rueda-de-prensa-ministros.aspx",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "prefix_bytes": 180608,
+      "prefix_sha256": "797302d225edf6474241f57e79972f68447678307c53ba624e6fa772c2fdd2c0"
+    },
+    {
+      "url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/2025/20251209-referencia-rueda-de-prensa-ministros.aspx",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "prefix_bytes": 262144,
+      "prefix_sha256": "66e2268f26c48baa89b69b7ef2461830c09143e6091a469c409619b27efd0aeb"
+    },
+    {
+      "url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/2026/20260210-referencia-rueda-de-prensa-ministros.aspx",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "prefix_bytes": 177912,
+      "prefix_sha256": "c0994fe596778501154d85312a998e867bb4e9bf4a3288b84b8fbb80cee00833"
+    }
+  ],
+  "checks": {
+    "page_markers": 3,
+    "real_data_only": true,
+    "public_identity_retained": true,
+    "no_attendance_claims": true,
+    "no_influence_assertions": true,
+    "three_official_source_probes": true
+  },
+  "errors": []
+}

@@ -1,0 +1,30 @@
+{
+  "schema_version": "manifesto_promises_validation_report_v1",
+  "status": "ok",
+  "validated_at": "2026-08-19T20:00:00Z",
+  "release_id": "a3864cf278115becd5428afd0559985063a5c8b7e2bd459b244a6f07f1b81590",
+  "artifact_sha256": "08a35fc3ff4f626331bd3e95a993f683163a6695dabfddfceb9e8dc6495eff52",
+  "official_pdf": {
+    "bytes": 396842,
+    "content_sha256": "b8994deec0bbc45cdcbef5d7c5395cabf30b0509706303c3d8e76058c48eebfd",
+    "page_count": 68,
+    "source_url": "https://www.bng.gal/media/bnggaliza/files/2023/07/05/23_bng_xerais_programa.pdf"
+  },
+  "table_counts": {
+    "manifesto_documents": 1,
+    "claim_extraction_runs": 1,
+    "claims": 266,
+    "claim_evidence": 266,
+    "promises": 91,
+    "claim_topics": 323
+  },
+  "public_claims_validated": 20,
+  "foreign_key_errors": 0,
+  "integrity_check": "ok",
+  "published_public_byte_parity": true,
+  "quote_page_offset_matches": 20,
+  "real_data_only": true,
+  "synthetic_or_mock": false,
+  "official_public_domain_information_retained": true,
+  "errors": []
+}
