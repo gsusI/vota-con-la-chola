@@ -142,10 +142,11 @@ def build_payload(
         raise ValueError("document fetch schema mismatch")
     if acquisition_run.get("schema_version") != "document_fetch_queue_run_v3":
         raise ValueError("fresh acquisition run schema mismatch")
-    if (
-        acquisition_validation.get("schema_version")
-        != "real_document_fetch_cohort_validation_v1"
-    ):
+    acquisition_validation_schema = acquisition_validation.get("schema_version")
+    if acquisition_validation_schema not in {
+        "real_document_fetch_cohort_validation_v1",
+        "real_document_fetch_scale_cohort_validation_v2",
+    }:
         raise ValueError("fresh acquisition validation schema mismatch")
 
     inventory_totals = inventory.get("totals") or {}
@@ -189,7 +190,7 @@ def build_payload(
     checks = {
         "official_real_documents_only": all(
             (payload.get("policy") or {}).get("official_real_documents_only") is True
-            for payload in (extraction, ocr)
+            for payload in (extraction, ocr, acquisition_validation)
         ),
         "synthetic_or_mock_records_absent": (
             (extraction.get("policy") or {}).get("synthetic_or_mock_records_counted")
@@ -198,6 +199,10 @@ def build_payload(
             is False
             and (fetch.get("policy") or {}).get("synthetic_or_mock_records")
             == "forbidden"
+            and (acquisition_validation.get("policy") or {}).get(
+                "synthetic_or_mock_records_counted"
+            )
+            is False
         ),
         "public_domain_personal_information_retained": (
             (extraction.get("policy") or {}).get(
@@ -210,6 +215,10 @@ def build_payload(
             is True
             and (fetch.get("policy") or {}).get("public_domain_personal_information")
             == "retained"
+            and (acquisition_validation.get("policy") or {}).get(
+                "official_public_domain_personal_information_retained"
+            )
+            is True
         ),
         "native_physical_run_complete": (
             extraction.get("status") == "ok"
@@ -238,7 +247,18 @@ def build_payload(
             and int(acquisition_totals.get("dead") or 0) == 0
             and int(acquisition_checks.get("fresh_files_rehashed") or 0)
             == acquisition_documents
-            and acquisition_checks.get("immutable_byte_hash_parity") is True
+            and (
+                acquisition_checks.get("immutable_byte_hash_parity") is True
+                if acquisition_validation_schema
+                == "real_document_fetch_cohort_validation_v1"
+                else (
+                    acquisition_checks.get("prior_capture_byte_hash_integrity")
+                    is True
+                    and acquisition_checks.get("fresh_source_contract_parity") is True
+                    and acquisition_checks.get("fresh_content_hash_self_consistency")
+                    is True
+                )
+            )
         ),
         "monetary_cost_not_fabricated": True,
     }
@@ -270,12 +290,12 @@ def build_payload(
             ),
         },
         "acquisition": {
-            "measurement_status": "cold_physical_real_cohort",
+            "measurement_status": "cold_physical_real_multihost_cohort",
             "cohort_id": str(acquisition_validation.get("cohort_id") or ""),
             "cohort_semantic_sha256": str(
                 acquisition_validation.get("cohort_semantic_sha256") or ""
             ),
-            "official_host": "www.boe.es",
+            "official_hosts": sorted((acquisition_validation.get("hosts") or {}).keys()),
             "documents_attempted": int(acquisition_totals.get("claimed") or 0),
             "documents_succeeded": acquisition_documents,
             "network_requests_started": int(
@@ -289,6 +309,27 @@ def build_payload(
             ),
             "retries": int(acquisition_totals.get("retried") or 0),
             "failures": int(acquisition_checks.get("host_failures") or 0),
+            "source_contract_rows": int(
+                acquisition_checks.get("source_contract_rows") or 0
+            ),
+            "content_exact_matches": int(
+                (acquisition_validation.get("content_drift") or {}).get(
+                    "exact_matches"
+                )
+                or 0
+            ),
+            "content_drifted_rows": int(
+                (acquisition_validation.get("content_drift") or {}).get(
+                    "drifted_rows"
+                )
+                or 0
+            ),
+            "official_revisions_preserved": (
+                (acquisition_validation.get("policy") or {}).get(
+                    "official_content_revisions_preserved_and_measured"
+                )
+                is True
+            ),
             "workers": int(acquisition_run.get("workers") or 0),
             "per_host_workers": int(acquisition_run.get("per_host_workers") or 0),
             "per_host_min_interval_ms": int(

@@ -1,7 +1,7 @@
 {
   "meta": {
     "schema_version": "transparency_dashboard_v1",
-    "generated_at": "2026-08-29T17:25:28+00:00",
+    "generated_at": "2026-08-29T18:23:28+00:00",
     "source_status_generated_at": "2026-08-12T11:09:08+00:00",
     "latest_release_date": "2026-08-20T00:36:23+00:00",
     "freshness_contract": "docs/method/truth-contract.md#estados-de-frescura"
@@ -144,7 +144,7 @@
     {
       "id": "document_acquisition_objects_measured",
       "label": "Documentos con descarga física medida",
-      "value": 100,
+      "value": 1000,
       "unit": "documentos",
       "source_path": "ui/gh-pages-next/public/transparency/data/document-factory-economics.json",
       "source_url": "/transparency/data/document-factory-economics.json"
@@ -152,7 +152,7 @@
     {
       "id": "document_acquisition_requests_measured",
       "label": "Requests de descarga medidos",
-      "value": 100,
+      "value": 1000,
       "unit": "requests",
       "source_path": "ui/gh-pages-next/public/transparency/data/document-factory-economics.json",
       "source_url": "/transparency/data/document-factory-economics.json"
@@ -160,7 +160,7 @@
     {
       "id": "document_acquisition_wall_ms_per_1000",
       "label": "Descarga por 1.000",
-      "value": 496256,
+      "value": 506408,
       "unit": "ms/1.000",
       "source_path": "ui/gh-pages-next/public/transparency/data/document-factory-economics.json",
       "source_url": "/transparency/data/document-factory-economics.json"
@@ -212,9 +212,9 @@
     "evidence_files_total": 119,
     "source_path": "ui/gh-pages-next/public/obstruction-tracker/data/obstructions.json",
     "source_url": "/obstruction-tracker/data/obstructions.json",
-    "source_sha256": "08a216c99dd17cc591601a3fb442f18134797e068dece994986aff10ccbecb6d",
+    "source_sha256": "73a1b3c97fa6bbb597dcddf489a5a97954607b1d01561b4454528483d810ae5b",
     "evidence_manifest_url": "/obstruction-tracker/evidence/manifest.json",
-    "evidence_manifest_sha256": "8f9a9365e16e2be8353e6574216786f9d3d30fd3d095bd3fd1c12614a6631f5d"
+    "evidence_manifest_sha256": "6e68cf6852d6af0a16aeab4cb478a6b31fcf1d667b41329d75b074796add7b8b"
   },
   "scale_readiness": {
     "status": "real_foundation_ready_scale_incomplete",
@@ -227,7 +227,7 @@
     },
     "source_path": "etl/data/published/scale-readiness-latest.json",
     "source_url": "https://github.com/gsusI/vota-con-la-chola/blob/main/etl/data/published/scale-readiness-latest.json",
-    "source_sha256": "bfa069ea6c8b14a463171b31e27da1c89c68897a90802f89a3ef2444797c0451"
+    "source_sha256": "2d8f2c0627877e95eb2e2033f64682d8cc83550eb99292937c4fe0957c1e7553"
   },
   "published_snapshot": {
     "verification_status": "verified_current_scale_origin",
@@ -409,32 +409,39 @@
     ],
     "source_path": "ui/gh-pages-next/public/transparency/data/document-fetch-operations.json",
     "source_url": "/transparency/data/document-fetch-operations.json",
-    "source_sha256": "dc888fb7f1e1f069126033175dca27ad846ac47740a41a6d0a593ca2f62539fe"
+    "source_sha256": "1bdd89028718a0cfa43d3bd6f6c9792644199eba8eecc6a407da658a81ee9637"
   },
   "document_factory_economics": {
     "status": "partial_measured_local",
     "acquisition": {
-      "measurement_status": "cold_physical_real_cohort",
-      "cohort_id": "real_document_fetch_cohort_0db6288b2aac5c3ba527d2b3",
-      "cohort_semantic_sha256": "0db6288b2aac5c3ba527d2b3ea2ac17b4b1506c5db66a3bd5037d1385a6e0656",
-      "official_host": "www.boe.es",
-      "documents_attempted": 100,
-      "documents_succeeded": 100,
-      "network_requests_started": 100,
-      "bytes_received": 9552656,
-      "cpu_seconds": 0.621579,
-      "peak_rss_bytes": 50413568,
-      "elapsed_seconds": 49.625576,
+      "measurement_status": "cold_physical_real_multihost_cohort",
+      "cohort_id": "real_document_fetch_scale_cohort_555b33e18fde991164755247",
+      "cohort_semantic_sha256": "555b33e18fde9911647552470f925fa835d2e75fd8e440d71601c53618083170",
+      "official_hosts": [
+        "www.boe.es",
+        "www.parlamentodeandalucia.es"
+      ],
+      "documents_attempted": 1000,
+      "documents_succeeded": 1000,
+      "network_requests_started": 1000,
+      "bytes_received": 65619881,
+      "cpu_seconds": 6.584298,
+      "peak_rss_bytes": 55017472,
+      "elapsed_seconds": 506.408431,
       "retries": 0,
       "failures": 0,
-      "workers": 8,
+      "source_contract_rows": 1000,
+      "content_exact_matches": 948,
+      "content_drifted_rows": 52,
+      "official_revisions_preserved": true,
+      "workers": 16,
       "per_host_workers": 2,
       "per_host_min_interval_ms": 500,
       "per_1000_succeeded": {
         "network_requests_started": 1000.0,
-        "bytes_received": 95526560.0,
-        "elapsed_seconds": 496.25576,
-        "cpu_seconds": 6.21579,
+        "bytes_received": 65619881.0,
+        "elapsed_seconds": 506.408431,
+        "cpu_seconds": 6.584298,
         "failures": 0.0
       }
     },
@@ -540,7 +547,7 @@
     },
     "source_path": "ui/gh-pages-next/public/transparency/data/document-factory-economics.json",
     "source_url": "/transparency/data/document-factory-economics.json",
-    "source_sha256": "5b4049a74a5481535a1e5f8d3e10943dfb60f6bab08363e0db6129955da59e06"
+    "source_sha256": "1f614f50ee5ef8e2b5dbb129095aafa23cafc3cf5db90537932a5497148b997b"
   },
   "recent_changes": [
     {
@@ -568,12 +575,12 @@
         {
           "path": "docs/etl/sprints/COMPARISON-ENGINE-20260820/evidence/comparison-materialization.json",
           "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/etl/sprints/COMPARISON-ENGINE-20260820/evidence/comparison-materialization.json",
-          "sha256": "16989e0aea4df09d1f6b7b7d490be1d1952928002886629ec6225e47d2f14ec3"
+          "sha256": "42f6ba00a6283a4b7873895af7cc7722479520a7936ff4195386d651b2322ac0"
         },
         {
           "path": "docs/etl/sprints/COMPARISON-ENGINE-20260820/evidence/promise-action-comparisons-validation.json",
           "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/etl/sprints/COMPARISON-ENGINE-20260820/evidence/promise-action-comparisons-validation.json",
-          "sha256": "3f8494d77ae016ab2ac5ac7632c97c70e6b61832bc222b1e6fd6ffc1c5206a3a"
+          "sha256": "7562711a5963292bb6c9e1022969e220460c196311cacaac83ffd4f628216f61"
         },
         {
           "path": "scripts/verify_live_promise_action_comparisons.py",
@@ -955,7 +962,7 @@
         {
           "path": "scripts/validate_transparency_dashboard_snapshot.py",
           "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/scripts/validate_transparency_dashboard_snapshot.py",
-          "sha256": "61dc55c700378d787e8c3595e57fbd24e07513d4b567ef68d281253e1f32a293"
+          "sha256": "4c72dae9ab7e8c814b55fd0dfdc2767361d124dda7e0a24194530ef88358f45e"
         },
         {
           "path": "tests/test_transparency_dashboard_snapshot.py",

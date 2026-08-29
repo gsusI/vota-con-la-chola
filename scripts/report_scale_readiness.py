@@ -684,33 +684,46 @@ def audit_document_provenance_gap(
     fetch_run_performance = fetch_run.get("performance") or {}
     fetch_validation_checks = fetch_validation.get("checks") or {}
     if (
-        fetch_cohort.get("schema_version") != "real_document_fetch_cohort_v1"
+        fetch_cohort.get("schema_version")
+        != "real_document_fetch_scale_cohort_v2"
         or fetch_cohort.get("status") != "ready"
-        or len(fetch_cohort.get("rows") or []) != 100
+        or len(fetch_cohort.get("rows") or []) != 1_000
         or fetch_policy.get("official_real_documents_only") is not True
         or fetch_policy.get("synthetic_or_mock_records_counted") is not False
         or fetch_policy.get("official_public_domain_personal_information_retained")
         is not True
         or fetch_policy.get("known_blocked_rows_selected") != 0
+        or fetch_policy.get("official_content_revisions_preserved_and_measured")
+        is not True
+        or (fetch_cohort.get("selection") or {}).get("hosts")
+        != {
+            "www.boe.es": 914,
+            "www.parlamentodeandalucia.es": 86,
+        }
     ):
         raise ReadinessError("fresh document acquisition cohort contract failed")
     if (
         fetch_run.get("schema_version") != "document_fetch_queue_run_v3"
         or fetch_run.get("status") != "ok"
-        or int(fetch_run_totals.get("claimed") or 0) != 100
-        or int(fetch_run_totals.get("succeeded") or 0) != 100
+        or int(fetch_run_totals.get("claimed") or 0) != 1_000
+        or int(fetch_run_totals.get("succeeded") or 0) != 1_000
         or int(fetch_run_totals.get("retried") or 0) != 0
         or int(fetch_run_totals.get("dead") or 0) != 0
-        or int(fetch_run_performance.get("network_requests_started") or 0) != 100
+        or int(fetch_run_performance.get("network_requests_started") or 0) < 1_000
+        or int(fetch_run_performance.get("network_requests_started") or 0)
+        > int(fetch_run_performance.get("network_request_upper_bound") or 0)
     ):
         raise ReadinessError("fresh document acquisition physical run failed")
     if (
         fetch_validation.get("schema_version")
-        != "real_document_fetch_cohort_validation_v1"
+        != "real_document_fetch_scale_cohort_validation_v2"
         or fetch_validation.get("status") != "ok"
         or fetch_validation.get("errors") != []
-        or int(fetch_validation_checks.get("fresh_files_rehashed") or 0) != 100
-        or fetch_validation_checks.get("immutable_byte_hash_parity") is not True
+        or int(fetch_validation_checks.get("prior_files_rehashed") or 0) != 1_000
+        or int(fetch_validation_checks.get("fresh_files_rehashed") or 0) != 1_000
+        or fetch_validation_checks.get("prior_capture_byte_hash_integrity") is not True
+        or fetch_validation_checks.get("fresh_source_contract_parity") is not True
+        or fetch_validation_checks.get("fresh_content_hash_self_consistency") is not True
     ):
         raise ReadinessError("fresh document acquisition validation failed")
     fetch_validation_inputs = fetch_validation.get("inputs") or {}
@@ -1268,9 +1281,13 @@ def audit_document_provenance_gap(
     if (
         native_economics.get("distinct_content_objects") != native_distinct_content
         or ocr_economics.get("candidate_pages") != ocr_pages
-        or acquisition_economics.get("documents_succeeded") != 100
-        or acquisition_economics.get("network_requests_started") != 100
+        or acquisition_economics.get("documents_succeeded") != 1_000
+        or int(acquisition_economics.get("network_requests_started") or 0) < 1_000
+        or int(acquisition_economics.get("network_requests_started") or 0) > 2_000
         or acquisition_economics.get("failures") != 0
+        or acquisition_economics.get("official_hosts")
+        != ["www.boe.es", "www.parlamentodeandalucia.es"]
+        or acquisition_economics.get("official_revisions_preserved") is not True
         or acquisition_economics.get("cohort_semantic_sha256")
         != fetch_validation.get("cohort_semantic_sha256")
         or monetary_economics.get("measurement_status")

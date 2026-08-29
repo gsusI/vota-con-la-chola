@@ -1,0 +1,108 @@
+{
+  "failure_class_counts": {
+    "invalid_official_payload": 1,
+    "timeout": 1
+  },
+  "failure_samples": [
+    {
+      "error": "TimeoutError: The read operation timed out",
+      "failure_class": "timeout",
+      "http_status": null,
+      "item_key": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2023-10737"
+    },
+    {
+      "error": "validation_contract_expected_sha256_mismatch",
+      "failure_class": "invalid_official_payload",
+      "http_status": 200,
+      "item_key": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2023-10344"
+    }
+  ],
+  "host_policy": {
+    "hard_failure_threshold": 3,
+    "per_host_min_interval_ms": 500,
+    "per_host_workers": 2
+  },
+  "host_slos": [
+    {
+      "bytes_received": 46276936,
+      "circuit_open": false,
+      "failure_class_counts": {
+        "invalid_official_payload": 1,
+        "timeout": 1
+      },
+      "failures": 2,
+      "host": "www.boe.es",
+      "http_status_counts": {
+        "200": 914,
+        "none": 1
+      },
+      "peak_inflight": 2,
+      "requests_started": 915,
+      "successes": 913,
+      "throttle_wait_seconds": 787.88797
+    },
+    {
+      "bytes_received": 17055302,
+      "circuit_open": false,
+      "failure_class_counts": {},
+      "failures": 0,
+      "host": "www.parlamentodeandalucia.es",
+      "http_status_counts": {
+        "200": 85
+      },
+      "peak_inflight": 2,
+      "requests_started": 85,
+      "successes": 85,
+      "throttle_wait_seconds": 53.300027
+    }
+  ],
+  "opened_circuits": [],
+  "opened_hosts": [],
+  "per_host_workers": 2,
+  "performance": {
+    "bytes_per_1000_succeeded": 63459156.313,
+    "bytes_per_second": 124182.495932,
+    "cpu_seconds": 5.771278,
+    "elapsed_seconds": 509.993277,
+    "elapsed_seconds_per_1000_succeeded": 511.015307,
+    "items_per_second": 1.956889,
+    "logical_requests": 1000,
+    "network_request_upper_bound": 1000,
+    "network_requests_started": 1000,
+    "peak_rss_bytes": 47808512
+  },
+  "pipeline_id": "real_document_fetch_scale_cohort_v2",
+  "queue": {
+    "items_total": 1000,
+    "pipeline_id": "real_document_fetch_scale_cohort_v2",
+    "state_counts": {
+      "dead": 1,
+      "leased": 0,
+      "pending": 1,
+      "succeeded": 998
+    },
+    "terminal_total": 999,
+    "unfinished_total": 1
+  },
+  "schema_version": "document_fetch_queue_run_v3",
+  "status": "partial",
+  "stop_reason": null,
+  "storage": {
+    "blocked": false,
+    "free_bytes": 62840008704,
+    "inflight_reserve_bytes": 1073741824,
+    "min_free_bytes": 0,
+    "required_free_bytes": 1073741824
+  },
+  "totals": {
+    "bytes_received": 63332238,
+    "claimed": 1000,
+    "dead": 1,
+    "deduplicated_content_objects": 0,
+    "new_content_objects": 998,
+    "retried": 1,
+    "succeeded": 998
+  },
+  "worker_id": "real-document-fetch-scale-cohort",
+  "workers": 16
+}

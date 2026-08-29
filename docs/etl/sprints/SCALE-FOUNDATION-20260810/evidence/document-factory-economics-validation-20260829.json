@@ -4,13 +4,13 @@
   "inputs": {
     "public_artifact": {
       "path": "ui/gh-pages-next/public/transparency/data/document-factory-economics.json",
-      "bytes": 7146,
-      "sha256": "5b4049a74a5481535a1e5f8d3e10943dfb60f6bab08363e0db6129955da59e06"
+      "bytes": 7383,
+      "sha256": "1f614f50ee5ef8e2b5dbb129095aafa23cafc3cf5db90537932a5497148b997b"
     },
     "evidence_copy": {
       "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-factory-economics-20260829.json",
-      "bytes": 7146,
-      "sha256": "5b4049a74a5481535a1e5f8d3e10943dfb60f6bab08363e0db6129955da59e06"
+      "bytes": 7383,
+      "sha256": "1f614f50ee5ef8e2b5dbb129095aafa23cafc3cf5db90537932a5497148b997b"
     },
     "inventory": {
       "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-format-inventory.json",
@@ -45,23 +45,23 @@
       ]
     },
     "fresh_acquisition_run": {
-      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-run-physical-20260829.json",
-      "bytes": 1839,
-      "sha256": "7bc4dab7c130bf3675b7b4b5528ea198ac96ed7d54cd556a8fe1dab8e81b4f2d"
+      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-v2-run-physical-20260829.json",
+      "bytes": 2224,
+      "sha256": "91a49ba26df60e04913cfa0531f923828cd15367823f2aa1c801ef9d8ccc996a"
     },
     "fresh_acquisition_validation": {
-      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-validation-physical-20260829.json",
-      "bytes": 1884,
-      "sha256": "2fd5a42be02f31de3c6e731b1a8e62fc915e0d2abe557281464201ff161af90b"
+      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-v2-validation-physical-20260829.json",
+      "bytes": 2832,
+      "sha256": "b0a1f97ac72353119d5b89067b7bd29334e912f13607795c38d37d8d40f1a3e5"
     }
   },
   "checks": {
-    "file_size_bytes": 7146,
+    "file_size_bytes": 7383,
     "max_bytes": 500000,
     "native_objects": 109558,
     "ocr_pages": 856,
-    "fresh_acquisition_documents_succeeded": 100,
-    "fresh_acquisition_network_requests": 100,
+    "fresh_acquisition_documents_succeeded": 1000,
+    "fresh_acquisition_network_requests": 1000,
     "historical_fetch_documents_succeeded": 6792,
     "input_hashes_verified": true,
     "per_1000_math_verified": true,

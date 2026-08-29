@@ -691,9 +691,9 @@
         "economics": "ui/gh-pages-next/public/transparency/data/document-factory-economics.json",
         "economics_evidence": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-factory-economics-20260829.json",
         "economics_validation": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-factory-economics-validation-20260829.json",
-        "fetch_cohort": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-cohort-20260829.json",
-        "fetch_run": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-run-physical-20260829.json",
-        "fetch_validation": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-validation-physical-20260829.json",
+        "fetch_cohort": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-v2-20260829.json",
+        "fetch_run": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-v2-run-physical-20260829.json",
+        "fetch_validation": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-v2-validation-physical-20260829.json",
         "inventory": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-format-inventory.json",
         "kind": "document_accountability_v2",
         "native_extraction": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-extraction.json",
@@ -835,19 +835,49 @@
           "sha256": "2fd5a42be02f31de3c6e731b1a8e62fc915e0d2abe557281464201ff161af90b"
         },
         {
-          "bytes": 7146,
+          "bytes": 2995,
+          "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-host-health-20260829.json",
+          "sha256": "c6e54aea81e307b4677470c36a1cf3fffa15b55ede0c3797c8cdcd31d0c4ef69"
+        },
+        {
+          "bytes": 2796050,
+          "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-20260829.json",
+          "sha256": "e01f475f93cd46da0107cdfc039c40c5da97f904a85893f8e800d7c7f078cdd8"
+        },
+        {
+          "bytes": 2810,
+          "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-run-physical-20260829.json",
+          "sha256": "af82c8714a5c0a10628eab0ce3b9f59c0e978fab0f662d9071f05d6b96c57f82"
+        },
+        {
+          "bytes": 2703574,
+          "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-v2-20260829.json",
+          "sha256": "475c46f108c5913cfa45383f103318dba2ecb7c2d98c3e61d8a3df5f88e50da7"
+        },
+        {
+          "bytes": 2224,
+          "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-v2-run-physical-20260829.json",
+          "sha256": "91a49ba26df60e04913cfa0531f923828cd15367823f2aa1c801ef9d8ccc996a"
+        },
+        {
+          "bytes": 2832,
+          "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-v2-validation-physical-20260829.json",
+          "sha256": "b0a1f97ac72353119d5b89067b7bd29334e912f13607795c38d37d8d40f1a3e5"
+        },
+        {
+          "bytes": 7383,
           "path": "ui/gh-pages-next/public/transparency/data/document-factory-economics.json",
-          "sha256": "5b4049a74a5481535a1e5f8d3e10943dfb60f6bab08363e0db6129955da59e06"
+          "sha256": "1f614f50ee5ef8e2b5dbb129095aafa23cafc3cf5db90537932a5497148b997b"
         },
         {
-          "bytes": 7146,
+          "bytes": 7383,
           "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-factory-economics-20260829.json",
-          "sha256": "5b4049a74a5481535a1e5f8d3e10943dfb60f6bab08363e0db6129955da59e06"
+          "sha256": "1f614f50ee5ef8e2b5dbb129095aafa23cafc3cf5db90537932a5497148b997b"
         },
         {
-          "bytes": 3067,
+          "bytes": 3087,
           "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-factory-economics-validation-20260829.json",
-          "sha256": "18aab0b78a13ecc95ee02cf7854c39ec62614f9d87c6bdaac8c1ab670aa3f234"
+          "sha256": "095f59f54fcfe02a28113ea4a5c4484ac3fbbea8e841df5f38df210b33df43a0"
         }
       ],
       "evidence_refs": [
@@ -876,6 +906,12 @@
         "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-cohort-20260829.json",
         "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-run-physical-20260829.json",
         "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-validation-physical-20260829.json",
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-host-health-20260829.json",
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-20260829.json",
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-run-physical-20260829.json",
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-v2-20260829.json",
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-v2-run-physical-20260829.json",
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-v2-validation-physical-20260829.json",
         "ui/gh-pages-next/public/transparency/data/document-factory-economics.json",
         "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-factory-economics-20260829.json",
         "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-factory-economics-validation-20260829.json"
@@ -906,34 +942,34 @@
             "sha256": "29d06f68ac7c0610a3e7cd69d95727d493dbc5e60bfd95fd9be0f9b7f60804ff"
           },
           "economics": {
-            "bytes": 7146,
+            "bytes": 7383,
             "path": "ui/gh-pages-next/public/transparency/data/document-factory-economics.json",
-            "sha256": "5b4049a74a5481535a1e5f8d3e10943dfb60f6bab08363e0db6129955da59e06"
+            "sha256": "1f614f50ee5ef8e2b5dbb129095aafa23cafc3cf5db90537932a5497148b997b"
           },
           "economics_evidence": {
-            "bytes": 7146,
+            "bytes": 7383,
             "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-factory-economics-20260829.json",
-            "sha256": "5b4049a74a5481535a1e5f8d3e10943dfb60f6bab08363e0db6129955da59e06"
+            "sha256": "1f614f50ee5ef8e2b5dbb129095aafa23cafc3cf5db90537932a5497148b997b"
           },
           "economics_validation": {
-            "bytes": 3067,
+            "bytes": 3087,
             "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-factory-economics-validation-20260829.json",
-            "sha256": "18aab0b78a13ecc95ee02cf7854c39ec62614f9d87c6bdaac8c1ab670aa3f234"
+            "sha256": "095f59f54fcfe02a28113ea4a5c4484ac3fbbea8e841df5f38df210b33df43a0"
           },
           "fetch_cohort": {
-            "bytes": 216547,
-            "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-cohort-20260829.json",
-            "sha256": "f8bffe4f8bebc96c5286a7e040f9f4a74832efae03f7b4e28eae3e81490ee57e"
+            "bytes": 2703574,
+            "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-v2-20260829.json",
+            "sha256": "475c46f108c5913cfa45383f103318dba2ecb7c2d98c3e61d8a3df5f88e50da7"
           },
           "fetch_run": {
-            "bytes": 1839,
-            "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-run-physical-20260829.json",
-            "sha256": "7bc4dab7c130bf3675b7b4b5528ea198ac96ed7d54cd556a8fe1dab8e81b4f2d"
+            "bytes": 2224,
+            "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-v2-run-physical-20260829.json",
+            "sha256": "91a49ba26df60e04913cfa0531f923828cd15367823f2aa1c801ef9d8ccc996a"
           },
           "fetch_validation": {
-            "bytes": 1884,
-            "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-validation-physical-20260829.json",
-            "sha256": "2fd5a42be02f31de3c6e731b1a8e62fc915e0d2abe557281464201ff161af90b"
+            "bytes": 2832,
+            "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-v2-validation-physical-20260829.json",
+            "sha256": "b0a1f97ac72353119d5b89067b7bd29334e912f13607795c38d37d8d40f1a3e5"
           },
           "inventory": {
             "bytes": 10105,
@@ -998,11 +1034,11 @@
         },
         "excluded_fixture_or_sample_files": 5,
         "excluded_transport_failure_captures": 9,
-        "fresh_acquisition_bytes": 9552656,
-        "fresh_acquisition_cpu_seconds_per_1000": 6.21579,
-        "fresh_acquisition_documents": 100,
-        "fresh_acquisition_network_requests": 100,
-        "fresh_acquisition_wall_seconds_per_1000": 496.25576,
+        "fresh_acquisition_bytes": 65619881,
+        "fresh_acquisition_cpu_seconds_per_1000": 6.584298,
+        "fresh_acquisition_documents": 1000,
+        "fresh_acquisition_network_requests": 1000,
+        "fresh_acquisition_wall_seconds_per_1000": 506.408431,
         "native_cpu_seconds_per_1000": 3.738835,
         "native_text_cas_objects_checksum_verified": 108139,
         "native_text_characters": 1999902681,
@@ -1039,7 +1075,7 @@
         "wayback_unique_content_targets": 3,
         "wayback_unseeded_gap_files": 25
       },
-      "next_action": "Complete and validate all 40 real human OCR reviews without invented labels. Add representative source, format, size, language, scan and corruption strata; the numeric 100000-document gate and local native/OCR economics per 1000 pass. Fresh exact acquisition telemetry now passes for 100 immutable BOE objects across endpoint and size deciles; extend it to 1000, 10000 and 100000 representative multi-host objects and bind real monetary meter/provider rates. Replicate and clean-restore the full 108139-object text CAS from a durable raw origin. Retry only the seven failed exact-URL archive variants with a new lever and close the 51 historical provenance gaps only from byte-identical immutable evidence or an exact primary-source manifest. Then scale toward one million through bounded official-host and date cohorts with the same queue, manifest, recovery and correction contracts.",
+      "next_action": "Complete and validate all 40 real human OCR reviews without invented labels. Add representative source, format, size, language, scan and corruption strata; the numeric 100000-document gate and local native/OCR economics per 1000 pass. Fresh acquisition telemetry now passes for 1000 real objects across BOE and Parlamento de Andalucia, including source-contract validation and measured official content revisions; extend the same revision-aware contract to 10000 and 100000 representative multi-host objects and bind real monetary meter/provider rates. Replicate and clean-restore the full 108139-object text CAS from a durable raw origin. Retry only the seven failed exact-URL archive variants with a new lever and close the 51 historical provenance gaps only from byte-identical evidence or an exact primary-source manifest. Then scale toward one million through bounded official-host and date cohorts with the same queue, manifest, recovery and correction contracts.",
       "status": "r1_numeric_gate_passed_representativeness_and_ocr_quality_open",
       "target_real_rows": 1000000
     },
@@ -1084,7 +1120,7 @@
       "target_real_rows": 1000000
     }
   ],
-  "generated_at": "2026-08-29T17:19:19.881919Z",
+  "generated_at": "2026-08-29T18:13:05.397226Z",
   "policy": {
     "classification_never_suppresses_public_domain_identity": true,
     "generated_test_records_count_toward_readiness": false,
@@ -1096,9 +1132,9 @@
     "synthetic_or_mock_records_forbidden": true
   },
   "registry": {
-    "bytes": 33155,
+    "bytes": 33953,
     "path": "docs/etl/real-corpus-registry.json",
-    "sha256": "f4fe091eb7814b15af9eca6a0269f6c5e4cd2c776ea9515010107b6fe3c07106"
+    "sha256": "b55ac249f89ac4d379ec851b8bcca5a0fde4a08b37455dc40ee970ee4d2dd29c"
   },
   "schema_version": "real-scale-readiness-v1",
   "status": "real_foundation_ready_scale_incomplete",

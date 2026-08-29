@@ -12,6 +12,7 @@ from scripts.run_document_fetch_queue import (
     HostLimiter,
     _classify_download_failure,
     _validate_official_download,
+    _validate_payload_contract,
     process_document_fetch_queue,
 )
 
@@ -309,6 +310,82 @@ class TestRunDocumentFetchQueue(unittest.TestCase):
                 stored=stored,
             ),
             "boe_document_identifier_mismatch",
+        )
+
+    def test_payload_contract_accepts_real_semantic_html_and_detects_block_page(self) -> None:
+        path = self.root / "initiative.html"
+        payload = (
+            b'<!DOCTYPE html><html><head><title>12-22/DL-000002</title>'
+            b"</head><body>Official initiative</body></html>"
+        )
+        path.write_bytes(payload)
+        stored = StoredBlob(
+            content_sha256=hashlib.sha256(payload).hexdigest(),
+            bytes=len(payload),
+            path=path,
+            content_type="text/html;charset=UTF-8",
+            etag=None,
+            last_modified=None,
+            deduplicated=False,
+        )
+        contract = {
+            "require_https": True,
+            "expected_host": "www.parlamentodeandalucia.es",
+            "minimum_bytes": 32,
+            "allowed_content_types": ["text/html"],
+            "required_ascii_casefolded": ["<!doctype html", "12-22/dl-000002"],
+            "forbidden_ascii_casefolded": ["<title>just a moment...</title>"],
+        }
+        self.assertIsNone(
+            _validate_payload_contract(
+                url="https://www.parlamentodeandalucia.es/initiative",
+                stored=stored,
+                contract=contract,
+            )
+        )
+        path.write_bytes(b"<title>Just a moment...</title>")
+        blocked = StoredBlob(
+            content_sha256=hashlib.sha256(path.read_bytes()).hexdigest(),
+            bytes=path.stat().st_size,
+            path=path,
+            content_type="text/html",
+            etag=None,
+            last_modified=None,
+            deduplicated=False,
+        )
+        self.assertEqual(
+            _validate_payload_contract(
+                url="https://www.parlamentodeandalucia.es/initiative",
+                stored=blocked,
+                contract={
+                    **contract,
+                    "minimum_bytes": 1,
+                    "required_ascii_casefolded": [],
+                },
+            ),
+            "validation_contract_forbidden_pattern_present",
+        )
+
+    def test_payload_contract_enforces_immutable_content_hash(self) -> None:
+        path = self.root / "official.pdf"
+        payload = b"%PDF-1.7\nreal official bytes"
+        path.write_bytes(payload)
+        stored = StoredBlob(
+            content_sha256=hashlib.sha256(payload).hexdigest(),
+            bytes=len(payload),
+            path=path,
+            content_type="application/pdf",
+            etag=None,
+            last_modified=None,
+            deduplicated=False,
+        )
+        self.assertEqual(
+            _validate_payload_contract(
+                url="https://official.example/document.pdf",
+                stored=stored,
+                contract={"expected_content_sha256": "0" * 64},
+            ),
+            "validation_contract_expected_sha256_mismatch",
         )
 
     def test_storage_floor_blocks_before_claim(self) -> None:

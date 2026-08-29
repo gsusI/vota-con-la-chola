@@ -1,0 +1,72 @@
+{
+  "schema_version": "real_document_host_health_v1",
+  "status": "bounded_probe_complete",
+  "probe_batch_observed_at_utc": "2026-08-29T17:34:46Z",
+  "timestamp_basis": "mtime of the first successful response body; all three probes ran in one parallel batch",
+  "method": {
+    "command": "curl -L --fail --silent --show-error --max-time 30",
+    "strict_tls": true,
+    "retries_per_host": 0,
+    "probe_requests": 3
+  },
+  "policy": {
+    "official_real_documents_only": true,
+    "synthetic_or_mock_records_counted": false,
+    "official_public_domain_personal_information_retained": true,
+    "known_blocked_hosts_reprobed": false
+  },
+  "probes": [
+    {
+      "host": "www.parlamentodeandalucia.es",
+      "source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/actividadparlamentaria/todaslasiniciativas/portipo.do?numexp=12-22%2FDL-000002&accion=Ver+iniciativas&desdeanyo=&desdemes=&estado=&hastaanyo=&hastames=&legislatura=12&seleccion=publicadosen&sinpaginacion=1&situacion=&tipoespecifico=&tipogeneral=1",
+      "exit_code": 0,
+      "http_status": 200,
+      "content_type": "text/html;charset=UTF-8",
+      "elapsed_seconds": 0.217172,
+      "bytes": 55450,
+      "content_sha256": "ac3ebbd5e15177de112e1e5ef9ed313ff5814e804826f9f52e7d8f3421fa879e",
+      "prior_bytes": 55450,
+      "prior_content_sha256": "6ec54e4860899b1a7027e8c3a2c79782828ff167c5e5b62ff35c88c028778181",
+      "semantic_markers_found": [
+        "<!DOCTYPE html",
+        "12-22/DL-000002",
+        "Parlamento de Andalucia"
+      ],
+      "byte_drift_detected": true,
+      "eligible": true,
+      "validation_mode": "official_html_semantic_contract"
+    },
+    {
+      "host": "www.lamoncloa.gob.es",
+      "source_url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/2026/20260203-referencia-rueda-de-prensa-ministros.aspx",
+      "exit_code": 0,
+      "http_status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "elapsed_seconds": 0.642715,
+      "bytes": 130129,
+      "content_sha256": "b5240a5751f95b15d1626d39498515514809bdb5a3c2d6b0a913140521a2f2ac",
+      "prior_bytes": 131734,
+      "prior_content_sha256": "96dc4f5c54234619edd076b1796a02fbe02708d3873d48b3cfadb8079966f587",
+      "byte_drift_detected": true,
+      "eligible": false,
+      "exclusion_reason": "source_specific_semantic_contract_not_implemented"
+    },
+    {
+      "host": "www.juntaelectoralcentral.es",
+      "source_url": "https://www.juntaelectoralcentral.es/cs/jec/documentos/Andalucia_2026_calendario.pdf",
+      "exit_code": 60,
+      "http_status": null,
+      "bytes": 0,
+      "failure_class": "tls_certificate_chain",
+      "failure": "SSL certificate problem: self signed certificate in certificate chain",
+      "eligible": false,
+      "exclusion_reason": "strict_tls_failed"
+    }
+  ],
+  "known_blocked_hosts_excluded_without_probe": [
+    "contrataciondelestado.es",
+    "parlamentodenavarra.es",
+    "www.congreso.es",
+    "www.senado.es"
+  ]
+}

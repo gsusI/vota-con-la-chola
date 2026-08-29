@@ -257,11 +257,12 @@ document_factory_economics_native := env_var_or_default("DOCUMENT_FACTORY_ECONOM
 document_factory_economics_native_validation := env_var_or_default("DOCUMENT_FACTORY_ECONOMICS_NATIVE_VALIDATION", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-validation-physical-20260829.json")
 document_factory_economics_ocr := env_var_or_default("DOCUMENT_FACTORY_ECONOMICS_OCR", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-physical-20260829.json")
 document_factory_economics_ocr_validation := env_var_or_default("DOCUMENT_FACTORY_ECONOMICS_OCR_VALIDATION", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-validation-physical-20260829.json")
-document_factory_acquisition_db := env_var_or_default("DOCUMENT_FACTORY_ACQUISITION_DB", "etl/data/staging/real-document-fetch-cohort-20260829.db")
-document_factory_acquisition_raw_root := env_var_or_default("DOCUMENT_FACTORY_ACQUISITION_RAW_ROOT", "etl/data/derived/real-document-fetch-cohort-20260829")
-document_factory_acquisition_manifest := env_var_or_default("DOCUMENT_FACTORY_ACQUISITION_MANIFEST", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-cohort-20260829.json")
-document_factory_acquisition_run := env_var_or_default("DOCUMENT_FACTORY_ACQUISITION_RUN", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-run-physical-20260829.json")
-document_factory_acquisition_validation := env_var_or_default("DOCUMENT_FACTORY_ACQUISITION_VALIDATION", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-validation-physical-20260829.json")
+document_factory_acquisition_db := env_var_or_default("DOCUMENT_FACTORY_ACQUISITION_DB", "etl/data/staging/real-document-fetch-scale-cohort-v2-20260829.db")
+document_factory_acquisition_raw_root := env_var_or_default("DOCUMENT_FACTORY_ACQUISITION_RAW_ROOT", "etl/data/derived/real-document-fetch-scale-cohort-v2-20260829")
+document_factory_acquisition_manifest := env_var_or_default("DOCUMENT_FACTORY_ACQUISITION_MANIFEST", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-v2-20260829.json")
+document_factory_acquisition_run := env_var_or_default("DOCUMENT_FACTORY_ACQUISITION_RUN", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-v2-run-physical-20260829.json")
+document_factory_acquisition_validation := env_var_or_default("DOCUMENT_FACTORY_ACQUISITION_VALIDATION", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-v2-validation-physical-20260829.json")
+document_factory_acquisition_host_health := env_var_or_default("DOCUMENT_FACTORY_ACQUISITION_HOST_HEALTH", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-host-health-20260829.json")
 document_factory_economics_max_bytes := env_var_or_default("DOCUMENT_FACTORY_ECONOMICS_MAX_BYTES", "500000")
 evidence_api_v1_evidence_json := env_var_or_default("EVIDENCE_API_V1_EVIDENCE_JSON", "etl/data/published/accountability-evidence-api-latest.json")
 evidence_api_v1_source_health_json := env_var_or_default("EVIDENCE_API_V1_SOURCE_HEALTH_JSON", obstruction_tracker_status_json)
@@ -4707,9 +4708,12 @@ document-factory-economics-export:
     --out "{{document_factory_economics_validation}}"
 
 document-factory-acquisition-cohort-prepare:
-  python3 scripts/prepare_real_document_fetch_cohort.py \
+  python3 scripts/prepare_real_document_fetch_scale_cohort.py \
     --source-db "{{db_path}}" \
     --schema "etl/load/sqlite_schema.sql" \
+    --provenance-edges "etl/data/manifests/real-document-provenance-edges.jsonl" \
+    --raw-root "etl/data/raw" \
+    --host-health "{{document_factory_acquisition_host_health}}" \
     --out-db "{{document_factory_acquisition_db}}" \
     --manifest-out "{{document_factory_acquisition_manifest}}"
 
@@ -4718,24 +4722,24 @@ document-factory-acquisition-cohort-run:
   python3 scripts/run_document_fetch_queue.py \
     --db "{{document_factory_acquisition_db}}" \
     --raw-root "{{document_factory_acquisition_raw_root}}" \
-    --pipeline-id "real_document_fetch_cohort_v1" \
-    --worker-id "real-document-fetch-cohort" \
-    --workers "{{document_fetch_workers}}" \
+    --pipeline-id "real_document_fetch_scale_cohort_v2" \
+    --worker-id "real-document-fetch-scale-cohort-v2" \
+    --workers "16" \
     --per-host-workers "{{document_fetch_per_host_workers}}" \
     --per-host-min-interval-ms "{{document_fetch_per_host_min_interval_ms}}" \
     --host-hard-failure-threshold "3" \
-    --claim-size "20" \
-    --max-items "100" \
+    --claim-size "40" \
+    --max-items "1000" \
     --lease-seconds "900" \
-    --timeout "20" \
-    --max-bytes "2097152" \
-    --download-attempts "1" \
+    --timeout "30" \
+    --max-bytes "67108864" \
+    --download-attempts "2" \
     --retry-delay-seconds "0" \
     --snapshot-date "{{snapshot_date}}" \
     --report-out "{{document_factory_acquisition_run}}"
 
 document-factory-acquisition-cohort-validate:
-  python3 scripts/validate_real_document_fetch_cohort.py \
+  python3 scripts/validate_real_document_fetch_scale_cohort.py \
     --manifest "{{document_factory_acquisition_manifest}}" \
     --run-report "{{document_factory_acquisition_run}}" \
     --db "{{document_factory_acquisition_db}}" \

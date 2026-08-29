@@ -224,14 +224,24 @@ def validate(path: Path, max_bytes: int) -> dict[str, Any]:
         errors.append("document economics must preserve partial local status")
     if int(native_economics.get("distinct_content_objects") or 0) <= 100_000:
         errors.append("document economics lacks the real 100k native cohort")
-    if int(acquisition_economics.get("documents_succeeded") or 0) != 100:
-        errors.append("document economics lacks the fresh real 100-object acquisition cohort")
-    if int(acquisition_economics.get("network_requests_started") or 0) != 100:
+    if int(acquisition_economics.get("documents_succeeded") or 0) != 1_000:
+        errors.append("document economics lacks the fresh real 1,000-object acquisition cohort")
+    if int(acquisition_economics.get("network_requests_started") or 0) < 1_000:
         errors.append("document economics lacks exact fresh request telemetry")
     if int(acquisition_economics.get("failures") or 0) != 0:
         errors.append("document fresh acquisition cohort contains failures")
-    if acquisition_economics.get("measurement_status") != "cold_physical_real_cohort":
+    if (
+        acquisition_economics.get("measurement_status")
+        != "cold_physical_real_multihost_cohort"
+    ):
         errors.append("document fresh acquisition status mismatch")
+    if acquisition_economics.get("official_hosts") != [
+        "www.boe.es",
+        "www.parlamentodeandalucia.es",
+    ]:
+        errors.append("document fresh acquisition host set mismatch")
+    if acquisition_economics.get("official_revisions_preserved") is not True:
+        errors.append("document fresh acquisition revision policy mismatch")
     if int(ocr_economics.get("candidate_pages") or 0) <= 0:
         errors.append("document economics lacks real OCR pages")
     if int(native_economics.get("failures") or 0) != 0:

@@ -344,6 +344,12 @@
         "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-cohort-20260829.json",
         "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-run-physical-20260829.json",
         "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-validation-physical-20260829.json",
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-host-health-20260829.json",
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-20260829.json",
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-run-physical-20260829.json",
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-v2-20260829.json",
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-v2-run-physical-20260829.json",
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-v2-validation-physical-20260829.json",
         "ui/gh-pages-next/public/transparency/data/document-factory-economics.json",
         "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-factory-economics-20260829.json",
         "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-factory-economics-validation-20260829.json"
@@ -365,14 +371,14 @@
         "ocr_review": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-human-review-queue.json",
         "ocr_review_validation": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-human-review-validation.json",
         "ocr_review_csv": "docs/etl/sprints/SCALE-FOUNDATION-20260810/exports/real-document-page-ocr-human-review.csv",
-        "fetch_cohort": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-cohort-20260829.json",
-        "fetch_run": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-run-physical-20260829.json",
-        "fetch_validation": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-validation-physical-20260829.json",
+        "fetch_cohort": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-v2-20260829.json",
+        "fetch_run": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-v2-run-physical-20260829.json",
+        "fetch_validation": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-v2-validation-physical-20260829.json",
         "economics": "ui/gh-pages-next/public/transparency/data/document-factory-economics.json",
         "economics_evidence": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-factory-economics-20260829.json",
         "economics_validation": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-factory-economics-validation-20260829.json"
       },
-      "next_action": "Complete and validate all 40 real human OCR reviews without invented labels. Add representative source, format, size, language, scan and corruption strata; the numeric 100000-document gate and local native/OCR economics per 1000 pass. Fresh exact acquisition telemetry now passes for 100 immutable BOE objects across endpoint and size deciles; extend it to 1000, 10000 and 100000 representative multi-host objects and bind real monetary meter/provider rates. Replicate and clean-restore the full 108139-object text CAS from a durable raw origin. Retry only the seven failed exact-URL archive variants with a new lever and close the 51 historical provenance gaps only from byte-identical immutable evidence or an exact primary-source manifest. Then scale toward one million through bounded official-host and date cohorts with the same queue, manifest, recovery and correction contracts."
+      "next_action": "Complete and validate all 40 real human OCR reviews without invented labels. Add representative source, format, size, language, scan and corruption strata; the numeric 100000-document gate and local native/OCR economics per 1000 pass. Fresh acquisition telemetry now passes for 1000 real objects across BOE and Parlamento de Andalucia, including source-contract validation and measured official content revisions; extend the same revision-aware contract to 10000 and 100000 representative multi-host objects and bind real monetary meter/provider rates. Replicate and clean-restore the full 108139-object text CAS from a durable raw origin. Retry only the seven failed exact-URL archive variants with a new lever and close the 51 historical provenance gaps only from byte-identical evidence or an exact primary-source manifest. Then scale toward one million through bounded official-host and date cohorts with the same queue, manifest, recovery and correction contracts."
     },
     {
       "id": "representative_integrity_analysis",

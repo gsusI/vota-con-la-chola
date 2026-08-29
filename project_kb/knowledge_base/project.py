@@ -684,6 +684,26 @@ PROJECT_FACTS = [
                 detail="Independent 100-file checksum, immutable-byte, host-SLO, request, database-integrity, and per-1,000 reconciliation proof.",
             ),
             Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-host-health-20260829.json",
+                detail="Bounded current-health probes select eligible official hosts, reject strict-TLS and unmodeled dynamic sources, and avoid reprobing known blockers.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-run-physical-20260829.json",
+                detail="Preserved first 1,000-object attempt that exposed one transient timeout and one valid BOE content revision, disproving a global immutable-URL assumption.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-v2-20260829.json",
+                detail="Deterministic 1,000-object real multi-host cohort with exact prior checksums, known-blocked exclusion, source-specific contracts, and public identity retention.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-v2-run-physical-20260829.json",
+                detail="Fresh cold two-host acquisition of all 1,000 objects with exact request, byte, wall, CPU, RSS, pacing, queue, and failure telemetry.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-v2-validation-physical-20260829.json",
+                detail="Independent rehash of 1,000 prior and 1,000 fresh files, 1,000 source-contract checks, and explicit reconciliation of 948 exact objects plus 52 valid official revisions.",
+            ),
+            Evidence(
                 source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-validation-physical-20260829.json",
                 detail="Cold-run OCR validation bound to the deterministic semantic manifest and every real source/CAS checksum.",
             ),
@@ -1068,13 +1088,14 @@ PROJECT_WORKFLOWS = [
         ),
         steps=[
             "Enqueue exact official URLs idempotently; never substitute generated or sample records for missing source data.",
-            "For a fresh healthy-source scale cohort, select only previously successful official objects with preserved bytes, rehash every prior capture, stratify deterministically, and exclude known blocked rows before creating a clean queue database.",
+            "For a fresh healthy-source scale cohort, select only previously captured official objects, rehash every prior capture, stratify deterministically by host/type/size, bind a source-specific validation contract, and exclude known blocked rows before creating a clean queue database.",
             "Set a global claim ceiling plus per-host concurrency, minimum request-start interval, byte/time ceiling, storage reserve, retry delay, and circuit threshold before network work.",
             "Run requests through the per-host slot for every retry; record exact request, outcome, byte, HTTP status, failure class, peak in-flight, throttle wait, and circuit metrics.",
             "Persist success only after atomic checksum-addressed publication; delete partial files on every failure and retain retryable or dead queue state explicitly.",
+            "Treat prior checksums as revision baselines, not universal immutability promises: preserve the fresh object when its official URL and source-specific structure validate, then report the exact prior-to-fresh hash delta.",
             "Do not repeat a blocked-host probe without a new lever; publish current queue truth from the read-only database instead.",
             "Run the independent operations validator and require queue/document/host parity, zero overdue leases, zero orphan partials, official-host allowlist, no unsupported million-scale claim, no secrets, and exact public identity retention.",
-            "Increase real cohorts through 100, 1000, 10000, and 100000 only after the prior cohort's host SLO and recovery gates pass.",
+            "The 100- and 1,000-object gates pass; increase through 10,000 and 100,000 only after the prior cohort's host SLO, revision, and recovery gates pass.",
         ],
         validation=[
             "just document-factory-acquisition-cohort-validate",
@@ -1097,8 +1118,8 @@ PROJECT_WORKFLOWS = [
                 detail="Current real Senate queue validation with zero orphan partials and no unsupported promotion.",
             ),
             Evidence(
-                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-validation-physical-20260829.json",
-                detail="Fresh healthy-source BOE cohort proves 100 exact requests for 100 immutable objects, full byte/hash parity, host pacing, and zero failures without probing known blockers.",
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-v2-validation-physical-20260829.json",
+                detail="Fresh multi-host cohort proves 1,000 successes from 1,000 exact requests, complete prior/fresh rehashing, source-contract parity, revision preservation, host pacing, and zero failures without probing known blockers.",
             ),
         ],
         references={

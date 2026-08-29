@@ -327,45 +327,112 @@ def _classify_download_failure(
     return "download_error", True
 
 
-def _validate_official_download(
-    *, url: str, source_id: str, stored: StoredBlob
+def _validate_payload_contract(
+    *, url: str, stored: StoredBlob, contract: object
 ) -> str | None:
-    if source_id not in {"boe_daily_summaries", "boe_document_xml"}:
+    """Apply bounded, source-declared checks after a streamed download."""
+
+    if contract is None:
         return None
+    if not isinstance(contract, Mapping):
+        return "validation_contract_not_object"
     parsed = urlparse(url)
-    if parsed.scheme != "https" or (parsed.hostname or "").lower() != "www.boe.es":
-        return "boe_source_url_not_official_https"
-    with stored.path.open("rb") as handle:
-        prefix = handle.read(128 * 1024).lstrip()
-    if source_id == "boe_daily_summaries":
-        if not re.fullmatch(r"/datosabiertos/api/boe/sumario/\d{8}", parsed.path):
-            return "boe_summary_url_contract_mismatch"
-        is_json_summary = prefix.startswith(b"{") and b'"sumario"' in prefix
-        is_xml_summary = (
-            prefix.startswith(b"<?xml")
-            and b"<response" in prefix
-            and b"<sumario" in prefix
-        )
-        if not is_json_summary and not is_xml_summary:
-            return "boe_summary_payload_contract_mismatch"
-        return None
-    if parsed.path != "/diario_boe/xml.php":
-        return "boe_document_url_contract_mismatch"
-    expected_ids = parse_qs(parsed.query).get("id") or []
-    if len(expected_ids) != 1 or not re.fullmatch(
-        r"BOE-[A-Z]-\d{4}-\d+", expected_ids[0], flags=re.IGNORECASE
-    ):
-        return "boe_document_identifier_missing"
-    identifier_match = re.search(
-        rb"<identificador>\s*(BOE-[A-Z]-\d{4}-\d+)\s*</identificador>",
-        prefix,
-        flags=re.IGNORECASE,
-    )
-    if not prefix.startswith(b"<?xml") or identifier_match is None:
-        return "boe_document_xml_contract_mismatch"
-    if identifier_match.group(1).decode("ascii").upper() != expected_ids[0].upper():
-        return "boe_document_identifier_mismatch"
+    if contract.get("require_https") is True and parsed.scheme.lower() != "https":
+        return "validation_contract_https_required"
+    expected_host = str(contract.get("expected_host") or "").strip().lower()
+    if expected_host and (parsed.hostname or "").lower() != expected_host:
+        return "validation_contract_host_mismatch"
+    minimum_bytes = contract.get("minimum_bytes")
+    if minimum_bytes is not None:
+        try:
+            if stored.bytes < max(0, int(minimum_bytes)):
+                return "validation_contract_minimum_bytes"
+        except (TypeError, ValueError):
+            return "validation_contract_minimum_bytes_invalid"
+    expected_sha256 = str(contract.get("expected_content_sha256") or "").strip()
+    if expected_sha256 and stored.content_sha256 != expected_sha256:
+        return "validation_contract_expected_sha256_mismatch"
+
+    allowed_types = contract.get("allowed_content_types")
+    if allowed_types is not None:
+        if not isinstance(allowed_types, list) or not all(
+            isinstance(value, str) and value.strip() for value in allowed_types
+        ):
+            return "validation_contract_content_types_invalid"
+        normalized_type = str(stored.content_type or "").split(";", 1)[0].strip().lower()
+        if normalized_type not in {value.strip().lower() for value in allowed_types}:
+            return "validation_contract_content_type_mismatch"
+
+    required = contract.get("required_ascii_casefolded") or []
+    forbidden = contract.get("forbidden_ascii_casefolded") or []
+    if not isinstance(required, list) or not isinstance(forbidden, list):
+        return "validation_contract_patterns_invalid"
+    if not all(isinstance(value, str) and value for value in required + forbidden):
+        return "validation_contract_patterns_invalid"
+    if required or forbidden:
+        with stored.path.open("rb") as handle:
+            validation_body = handle.read(1024 * 1024).lower()
+        try:
+            required_bytes = [value.encode("ascii").lower() for value in required]
+            forbidden_bytes = [value.encode("ascii").lower() for value in forbidden]
+        except UnicodeEncodeError:
+            return "validation_contract_patterns_not_ascii"
+        if any(pattern not in validation_body for pattern in required_bytes):
+            return "validation_contract_required_pattern_missing"
+        if any(pattern in validation_body for pattern in forbidden_bytes):
+            return "validation_contract_forbidden_pattern_present"
     return None
+
+
+def _validate_official_download(
+    *,
+    url: str,
+    source_id: str,
+    stored: StoredBlob,
+    validation_contract: object = None,
+) -> str | None:
+    if source_id in {"boe_daily_summaries", "boe_document_xml"}:
+        parsed = urlparse(url)
+        if parsed.scheme != "https" or (parsed.hostname or "").lower() != "www.boe.es":
+            return "boe_source_url_not_official_https"
+        with stored.path.open("rb") as handle:
+            prefix = handle.read(128 * 1024).lstrip()
+        if source_id == "boe_daily_summaries":
+            if not re.fullmatch(r"/datosabiertos/api/boe/sumario/\d{8}", parsed.path):
+                return "boe_summary_url_contract_mismatch"
+            is_json_summary = prefix.startswith(b"{") and b'"sumario"' in prefix
+            is_xml_summary = (
+                prefix.startswith(b"<?xml")
+                and b"<response" in prefix
+                and b"<sumario" in prefix
+            )
+            if not is_json_summary and not is_xml_summary:
+                return "boe_summary_payload_contract_mismatch"
+        else:
+            if parsed.path != "/diario_boe/xml.php":
+                return "boe_document_url_contract_mismatch"
+            expected_ids = parse_qs(parsed.query).get("id") or []
+            if len(expected_ids) != 1 or not re.fullmatch(
+                r"BOE-[A-Z]-\d{4}-\d+", expected_ids[0], flags=re.IGNORECASE
+            ):
+                return "boe_document_identifier_missing"
+            identifier_match = re.search(
+                rb"<identificador>\s*(BOE-[A-Z]-\d{4}-\d+)\s*</identificador>",
+                prefix,
+                flags=re.IGNORECASE,
+            )
+            if not prefix.startswith(b"<?xml") or identifier_match is None:
+                return "boe_document_xml_contract_mismatch"
+            if (
+                identifier_match.group(1).decode("ascii").upper()
+                != expected_ids[0].upper()
+            ):
+                return "boe_document_identifier_mismatch"
+    return _validate_payload_contract(
+        url=url,
+        stored=stored,
+        contract=validation_contract,
+    )
 
 
 def _download_item(
@@ -466,6 +533,7 @@ def _download_item(
                 url=url,
                 source_id=document_source_id,
                 stored=stored,
+                validation_contract=payload.get("validation_contract"),
             )
             if validation_error:
                 if not stored.deduplicated:

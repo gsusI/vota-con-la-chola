@@ -156,9 +156,13 @@ def validate(
         errors.append("fresh acquisition run schema mismatch")
     if acquisition_run.get("status") != "ok":
         errors.append("fresh acquisition run status mismatch")
+    acquisition_validation_schema = acquisition_validation.get("schema_version")
     if (
-        acquisition_validation.get("schema_version")
-        != "real_document_fetch_cohort_validation_v1"
+        acquisition_validation_schema
+        not in {
+            "real_document_fetch_cohort_validation_v1",
+            "real_document_fetch_scale_cohort_validation_v2",
+        }
         or acquisition_validation.get("status") != "ok"
         or acquisition_validation.get("errors") != []
     ):
@@ -298,7 +302,10 @@ def validate(
             acquisition_per_1000.get(key), scaled(value, acquisition_denominator)
         ):
             errors.append(f"acquisition per-1,000 {key} mismatch")
-    if acquisition.get("measurement_status") != "cold_physical_real_cohort":
+    if (
+        acquisition.get("measurement_status")
+        != "cold_physical_real_multihost_cohort"
+    ):
         errors.append("fresh acquisition measurement status mismatch")
     if acquisition.get("peak_rss_bytes") != int(
         acquisition_run_perf.get("peak_rss_bytes") or 0
@@ -310,6 +317,29 @@ def validate(
         "cohort_semantic_sha256"
     ):
         errors.append("fresh acquisition cohort semantic hash mismatch")
+    expected_hosts = sorted((acquisition_validation.get("hosts") or {}).keys())
+    if acquisition.get("official_hosts") != expected_hosts:
+        errors.append("fresh acquisition official hosts mismatch")
+    if acquisition.get("source_contract_rows") != int(
+        acquisition_validation_checks.get("source_contract_rows") or 0
+    ):
+        errors.append("fresh acquisition source-contract rows mismatch")
+    content_drift = acquisition_validation.get("content_drift") or {}
+    if acquisition.get("content_exact_matches") != int(
+        content_drift.get("exact_matches") or 0
+    ):
+        errors.append("fresh acquisition exact-match rows mismatch")
+    if acquisition.get("content_drifted_rows") != int(
+        content_drift.get("drifted_rows") or 0
+    ):
+        errors.append("fresh acquisition drift rows mismatch")
+    if acquisition.get("official_revisions_preserved") is not (
+        (acquisition_validation.get("policy") or {}).get(
+            "official_content_revisions_preserved_and_measured"
+        )
+        is True
+    ):
+        errors.append("fresh acquisition revision policy mismatch")
 
     historical = artifact.get("historical_acquisition_queue") or {}
     fetch_denominator = int(fetch_docs.get("fetched_succeeded_total") or 0)
