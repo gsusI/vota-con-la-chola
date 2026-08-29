@@ -16,7 +16,7 @@ from project_kb.schema import (
     Workflow,
 )
 
-UPDATED = date(2026, 8, 20)
+UPDATED = date(2026, 8, 29)
 
 
 PROJECT_DECISIONS = [
@@ -117,6 +117,45 @@ PROJECT_DECISIONS = [
         ],
         references={
             "public accountability identity": "gotcha.Public artifact hygiene gate is mandatory"
+        },
+        updated_at=UPDATED,
+    ),
+    Decision(
+        name="Separate review capacity from reviewer operations",
+        description=(
+            "`review capacity separation` keeps the immutable C2C capacity snapshot "
+            "limited to real source-derived tasks, required review slots, and "
+            "machine audit evidence. Reviewer identities, trust roots, "
+            "authorizations, conflicts, assignments, claims, decisions, "
+            "adjudications, promotions, release bindings, and publications belong "
+            "only in a separately versioned operational snapshot."
+        ),
+        rationale=(
+            "Millions of available tasks prove bounded queue capacity, not human "
+            "review, semantic validity, publication authority, or societal impact."
+        ),
+        consequences=[
+            "Never bootstrap reviewers, trust roots, decisions, or approvals with invented records.",
+            "Reject operational mutation of the canonical capacity database.",
+            "Require externally supplied real identity, authority, conflict, assignment, and review evidence before an operational snapshot can advance.",
+            "Keep semantic promotion and public release closed until their independent gates pass.",
+        ],
+        evidence=[
+            Evidence(
+                source="etl/data/manual/outcome_links/review_control_scope_c2c_v1.json",
+                detail="Pinned real capacity scope and explicit empty operational trust state.",
+            ),
+            Evidence(
+                source="etl/load/sqlite_schema.sql",
+                detail="Append-only review-control, authorization, lease, decision, eligibility, release, and publication contracts.",
+            ),
+            Evidence(
+                source="scripts/operate_outcome_review_control_c2c.py",
+                detail="Fail-closed boundary between read-only capacity status and separately versioned real operations.",
+            ),
+        ],
+        references={
+            "review capacity separation": "workflow.Rebuild outcome review capacity"
         },
         updated_at=UPDATED,
     ),
@@ -727,6 +766,90 @@ PROJECT_FACTS = [
             ),
         ],
         references={"real-only readiness": "workflow.Promote one real scale lane"},
+        updated_at=UPDATED,
+    ),
+    Fact(
+        name="Outcome C2B delivery separates planning identity and portable rows",
+        description=(
+            "`outcome C2B layers` are three distinct non-claim artifacts: a "
+            "source planner database containing the strict real L0 eligibility "
+            "universe, an exact official-public identity companion retaining "
+            "Senate member-vote names and action identifiers, and a bounded "
+            "content-addressed Parquet package. Materializing, packaging, or "
+            "recovering these rows never turns temporal/topic eligibility into a "
+            "relationship, association, effect, ranking, merit, blame, corruption "
+            "finding, semantic promotion, or public release."
+        ),
+        evidence=[
+            Evidence(
+                source="docs/etl/sprints/OUTCOME-CONTEXT-20260820/evidence/outcome-pair-identity-resolver-audit-v1.json",
+                detail="Independent exact-name resolver audit over official Senate evidence.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/OUTCOME-CONTEXT-20260820/evidence/outcome-pair-discovery-c2b-v1-manifest.json",
+                detail="Content-addressed portable package contract and complete physical inventory.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/OUTCOME-CONTEXT-20260820/evidence/outcome-pair-discovery-c2b-v1-validation.json",
+                detail="Independent source parity, identity retention, safety, and bounded-resource validation.",
+            ),
+        ],
+        references={
+            "outcome C2B layers": "decision.Separate review capacity from reviewer operations"
+        },
+        updated_at=UPDATED,
+    ),
+    Fact(
+        name="SQLite physical identity requires a pinned runtime",
+        description=(
+            "`pinned SQLite artifact runtime` is required when a release contract "
+            "pins the byte-level SHA-256 of a generated SQLite database. The same "
+            "C2C inputs and semantic root produced different physical database "
+            "hashes under Python 3.14 and Python 3.12, so canonical materialization, "
+            "validation, replay, and tests now use one declared Python 3.12 runtime."
+        ),
+        evidence=[
+            Evidence(
+                source="justfile",
+                detail="C2C materialization, validation, and tests share the pinned Python and isolated cache variables.",
+            ),
+            Evidence(
+                source="scripts/validate_outcome_review_control_c2c.py",
+                detail="Validator independently pins semantic, physical database, and manifest identities.",
+            ),
+            Evidence(
+                source="tests/test_outcome_review_control_c2c_real_pipeline.py",
+                detail="Crash/resume reconstruction must be byte-identical with the canonical real capacity database.",
+            ),
+        ],
+        references={
+            "pinned SQLite artifact runtime": "workflow.Rebuild outcome review capacity"
+        },
+        updated_at=UPDATED,
+    ),
+    Fact(
+        name="Abandoned ingestion runs close as explicit errors",
+        description=(
+            "`stale run reconciliation` is a separate, opt-in repair after a "
+            "read-only audit. It mutates a database only when its sole reported "
+            'issue is stale ingestion runs, changes "running" to "error", keeps '
+            "the observed real row counts, records repair time and reason, and "
+            "requires a clean post-audit. It never promotes an interrupted run "
+            "to success."
+        ),
+        evidence=[
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/data-integrity-stale-run-reconciliation-20260829.json",
+                detail="Two real abandoned BDNS runs reconciled with original counts preserved and all 101 staging databases passing afterward.",
+            ),
+            Evidence(
+                source="scripts/audit_data_integrity.py",
+                detail="Read-only pre-audit, issue-only mutation eligibility, transactional update, and enforced post-audit.",
+            ),
+        ],
+        references={
+            "stale run reconciliation": "workflow.Rebuild outcome review capacity"
+        },
         updated_at=UPDATED,
     ),
 ]
@@ -1761,6 +1884,51 @@ PROJECT_WORKFLOWS = [
         ],
         references={
             "actor graph publication": "gotcha.Source IDs can collide across input databases"
+        },
+        updated_at=UPDATED,
+    ),
+    Workflow(
+        name="Rebuild outcome review capacity",
+        description=(
+            "`outcome capacity rebuild` serially validates the official identity "
+            "companion, portable C2B pair package, and C2C capacity database against "
+            "the same immutable real planner inputs. Shared kernel leases prevent "
+            "mixed source snapshots."
+        ),
+        steps=[
+            "Run the identity companion check with exact official public names and no identity suppression.",
+            "Export the pair package into a private work root with bounded inventory, descriptor-bound reads, durable checkpoints, and fail-closed controls.",
+            "Interrupt after a real checkpoint cohort, resume against identical source fingerprints, and reject config or source drift.",
+            "Validate all rows, physical files, hashes, manifest roots, decompression bounds, memory ceilings, and non-claim safety fields.",
+            "Build an independent replay root and require every Parquet byte and semantic root to match.",
+            "Materialize and validate C2C capacity only after pair leases release; require zero human or release events unless real operational inputs were explicitly supplied.",
+            "Run real-data-only, publication-hygiene, staging-integrity, and repository-hygiene gates before recording current status in the tracker.",
+        ],
+        validation=[
+            "just outcome-pair-identity-check",
+            "just outcome-pair-discovery-check",
+            "just outcome-review-control-c2c-check",
+            "just privacy-check-public-artifacts",
+            "just etl-data-integrity-audit-all-staging",
+            "just etl-data-integrity-reconcile-all-staging",
+            "just repo-hygiene-check",
+        ],
+        evidence=[
+            Evidence(
+                source="tests/test_outcome_pair_identity_companion_real_pipeline.py",
+                detail="Real-source identity, restart, path, resource, and exact replay tests.",
+            ),
+            Evidence(
+                source="tests/test_outcome_pair_partitions_real_pipeline.py",
+                detail="Real-source package interruption, recovery, inventory, Parquet, and replay tests.",
+            ),
+            Evidence(
+                source="tests/test_outcome_review_control_c2c_real_pipeline.py",
+                detail="Real capacity, immutable-operation boundary, leases, paths, and adversarial tests.",
+            ),
+        ],
+        references={
+            "outcome capacity rebuild": "fact.Outcome C2B delivery separates planning identity and portable rows"
         },
         updated_at=UPDATED,
     ),

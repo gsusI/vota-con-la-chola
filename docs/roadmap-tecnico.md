@@ -1,6 +1,6 @@
 # Roadmap técnico
 
-Actualizado: `2026-08-23`.
+Actualizado: `2026-08-29`.
 
 Autoridad:
 
@@ -47,7 +47,7 @@ just etl-storage-health
 | BDNS | `1,360,382` | `14` Parquet, `42,955,289` bytes | v7 validado; `capacity_class=s2_1m`; nombres `1,360,382/1,360,382`, identificadores `163,270/163,270`; replay `1/1` por `14/14` hardlinks; 1,419 páginas y `89/89` fechas completas |
 | accountability ledger | `126,760` | `13` Parquet, `1,271,649` bytes | real-only validado; replay `13/13`; mix parlamentario |
 | actores/mandatos | `88,031` | `108` Parquet, `9,236,064` bytes | validado; replay `108/108`; bajo `100k` |
-| candidatos BOE | `42,056` base / `10,820` efectivos | `2` Parquet, `2,083,541` bytes | identidad/texto oficial base `42,056/42,056`; lineage efectivo normalizado; `88` filas corregidas; `31,241` base pendientes excluidas; outcome desconocido explícito; replay `2/2`; local-only |
+| candidatos BOE | `42,056` base / `10,820` efectivos | `2` Parquet, `2,083,541` bytes | identidad/texto oficial base `42,056/42,056`; lineage efectivo normalizado; `88` filas corregidas; `31,241` base pendientes excluidas; outcome desconocido explícito; replay `2/2`; origin firmado y restore aislado pasan; no promocionado |
 
 Defectos visibles:
 
@@ -56,6 +56,8 @@ Defectos visibles:
 - BDNS: el root actual valida `1,360,382` filas oficiales y cruza el gate de capacidad `R2`; las `89/89` ventanas seleccionadas están completas; origin y clean-room restore pasan, pero faltan historia completa y segundo snapshot para promoción;
 - ledger: `126,760` facts reales recuperados; `10` facts derivados de fixtures fueron purgados; `26` source IDs legacy se infieren explícitamente desde URL BOE oficial; origin y clean-room restore pasan; faltan mix representativo y `1M`;
 - documentos: se descubren `111,422` ficheros y se cuentan `111,408` instancias oficiales elegibles / `109,558` hashes / `5,093,218,479` bytes; `5` fixtures/samples y `9` capturas reales de denegación/error quedan fuera del éxito. BOE aporta `1,034` resúmenes y `89,001` XML; todos los jobs de documentos terminan y cada documento tiene summary item, HTTPS, bytes, SHA-256, timestamps y manifest. El incremento histórico añadió `18` fechas y `21` documentos exactos; inventario reutiliza `111,369` filas y sólo inspecciona `48`. Provenance verifica checksum + URL para `111,357` (`99.9542%`) sin conflictos y conserva `51` gaps / `8,315,544` bytes. Extracción v5 procesa `111,408/111,408` instancias / `109,558/109,558` contenidos: `1,999,902,681` caracteres públicos, `108,139` CAS, `0` retry/dead/failure/truncation; validation rehasha cada raw y CAS. OCR sigue `856/856`, `849` text, `7` no-text, `89,632` chars, `17` gains, `131` CAS; review humano `0/40`. Gate `100k` pasa; faltan diversidad, review, origin raw remoto y `1M`;
+- outcome C2B: el planner SQLite real de `2,865,602` filas se mantiene separado del formato de entrega. El companion conserva exactamente `119,116` votos nominales / `490` nombres públicos / `458` acciones en `8` Parquet; el paquete portable añade `1,205` Parquet de pares y totaliza `1,213` ficheros / `251,522,252` bytes. La prueba canónica se interrumpió tras `25` particiones durables, invalidó controles de éxito obsoletos, reanudó los `25` checkpoints y completó `1,205/1,205`; manifest root `81cc315e...`. Raíces semántica `2afaf9ef...`, física `f2d50fa5...` y portable `049f9718...` coinciden entre canonical y replay byte a byte. Validator full-row: `376.845s`, `621.047 MiB`, techo `1 GiB`; `22/22` tests de identidad y `23/23` de paquete pasan. `ranking_eligible_rows=0`, `publication_eligible_rows=0`, `private_token_findings=0`; los nombres oficiales no se suprimen;
+- review C2C: Python `3.12` queda fijado porque el runtime host alteraba el hash físico SQLite. El capacity artifact actual tiene `2,865,603` tareas / `2,865,604` slots, `115` batches, `2,864,201,728` bytes, SHA `a97f9941...`, semantic root `21acddf2...`, `330/330` checks y `12/12` tests adversariales. Materialización: `366.340s`, `7,822.249` filas/s, `370,376,704` bytes RSS. Validator: `159,727,616` bytes RSS. Todas las `16` tablas de trust/reviewer/auth/conflict/assignment/claim/decision/adjudication/eligibility/promotion/release/publication/audit operacional contienen `0` filas. Es capacidad local, no operación humana;
 - lanes promocionadas: `0`.
 
 El reporte `etl/data/published/scale-readiness-latest.json` debe decir `real_foundation_ready_scale_incomplete` hasta cerrar representatividad, origin público, clean restore y correcciones.
@@ -135,20 +137,20 @@ Implementado:
 - valida path, bytes y SHA-256 de cada fichero antes de staging;
 - usa hardlinks cuando es posible y no transforma ni suprime identidad pública;
 - `scripts/verify_hf_scale_origin.py` reconstruye el bundle local, compara fail-closed el contrato estable de data/provenance y reporta drift de registry/readiness como metadata separada;
-- `scripts/restore_hf_scale_origin.py` restaura por corpus con concurrencia acotada, preflight de storage, partials atómicos, bytes/SHA-256 exactos y reuse de ficheros ya verificados; acepta además un `--snapshot-path` inmutable para recovery sin depender de `latest`;
+- `scripts/restore_hf_scale_origin.py` restaura por corpus con concurrencia acotada, preflight de storage, partials atómicos y bytes/SHA-256 exactos; el recipe canónico exige destino vacío, attestation válida y trust root externo, y acepta `--snapshot-path` inmutable para recovery sin depender de `latest`;
 - `scripts/rebuild_restored_scale_sqlite.py` importa corpora Parquet restaurados por batches, conserva strings/listas/identidades publicados, compara hash lógico input/SQLite, exige integridad y RSS acotado, y hace publish local por rename atómico;
 - `scripts/replicate_content_objects.py` y `scripts/verify_object_store_restore.py` procesan manifests en batches acotados con workers configurables; el manifest de objetos elimina timestamps por fila para ser determinista, el restore completo hace preflight de bytes + reserva antes de transferir, y el report conserva generated/throughput;
 - el publisher tabular incluye `data-integrity-latest.json` y `scale-readiness-latest.json` en el snapshot actual.
 
 Evidencia real actual:
 
-- release v2 contract-bearing publicada: `6` corpora, `5,403,506` filas, `8,595` data files, `498,631,274` bytes, `0` copies y `8,619` hardlinks metadata+data; release `5872efaf...`, artifact contract `bb99c119...`; la paridad live de datos pasa y dos warnings de frescura reflejan el registry/readiness documental posterior todavía no publicado;
-- parity remota: pointer, manifest, artifact contract y contratos de corpora coinciden; `verify_hf_scale_origin.py` devuelve `verified_current_scale_origin_metadata_drift`, sin errores y con dos warnings esperados porque registry/readiness local contiene el audit documental posterior aún no publicado. Las seis lanes declaran `durable_public_origin=true`;
-- clean-room restore completo: BDNS descarga `20` ficheros / `43,042,223` bytes; las otras cinco lanes descargan `8,601` ficheros / `461,088,883` bytes con `10 GiB` de reserva. Todos los bytes verifican SHA-256 y validadores aislados no-project leen `5,403,506` filas / `8,595` data files con `0` private tokens;
+- release firmada contract-bearing publicada: `7` corpora, `5,414,326` filas, `8,597` data files y `500,714,815` data bytes; release `5d9ce557...`, artifact contract `d7de5544...`. Pointer, manifest, registry/readiness, políticas y attestation SSH Ed25519 verifican live sin errores ni warnings;
+- parity remota: pointer, manifest, artifact contract y contratos de los siete corpora coinciden. La identidad `vclc-snapshot-release-2026` firma el manifest exacto y el verificador confía solo en el `allowed_signers` externo;
+- clean-room restore de las siete lanes: los seis corpora históricos validan `5,403,506` filas / `8,595` data files. El drill adicional anónimo GET-only de `candidate_occurrences` descarga `8` ficheros seleccionados / `2,211,900` bytes a un root inexistente, con `0` reuse, credenciales o mutación; el validator aislado usa el registry bundled y reconcilia `10,820` filas / `2` Parquet / `2,083,541` data bytes en un inventario exacto de `14` ficheros;
 - recovery de release explícita: un cache vacío apuntado directamente a `scale/snapshots/2026-08-12/623b4a5a...` descarga y verifica `8,619/8,619` ficheros / `504,093,303` bytes en `1,199.614s`, sin consultar el pointer `latest`; el validador full-read pasa los seis corpora / `5,403,506` filas con peak RSS `1,007.453 MB`; el cache desechable se retiró. `just etl-scale-origin-hf-prepare-rollback` revalida live current/target, enlaza evidencia por SHA-256 y emite un plan compare-and-swap con delta cero, preservación de ambas releases y ninguna mutación;
 - rebuild SQLite determinista: dos ejecuciones independientes desde ese restore actor producen `88,031` filas, `88,031` mandate IDs distintos y DBs byte-idénticos de `71,168,000` bytes (`SHA-256 61cfdf8e...`); el hash lógico de todas las columnas es `eb7fdb8e...`, `integrity_check=ok` y peak RSS queda entre `229.750` y `233.578 MB`;
 - raw-object CAS local: `16` workers procesan los `6,792` objetos reales enlazados / `133,219,457` bytes; replay deduplica `6,792/6,792`, repite manifest de `2,733,754` bytes con SHA-256 `6e496f35...`, y restore `full_manifest` recupera `6,792/6,792` tras preflight con reserva `10 GiB`. El throughput warm/local observado (`7,482.620` objetos/s en dedupe; hasta `5,028.098` objetos/s en restore) no se extrapola a red;
-- durable origin y clean-room restore pasan en las seis lanes registradas. Ninguna se promociona por ello: representatividad, historia, reconciliación y correcciones siguen mandando.
+- durable origin y clean-room restore pasan en las siete lanes publicadas. Ninguna se promociona por ello: representatividad, historia, reconciliación y correcciones siguen mandando.
 
 DoD pendiente: reconstruir el esquema normalizado y sus relaciones desde inputs inmutables, activar/revertir `latest` bajo autorización explícita, registrar el evento de supersession, aprobar RPO formal, medir activation RTO y publicar/verificar el CAS completo en un origin S3-compatible con versioning/retention. El plan read-only ya fija compare-and-swap y no confunde delta cero con RPO. El publisher evita paths mutables y el contrato estable evita que cambiar el propio flag de publicación invalide la paridad de datos.
 
@@ -344,13 +346,13 @@ Los probes de red son explícitos y solo se repiten si cambia el endpoint, exist
 | `OUT-002` | second snapshot | revisions/deletions verificadas |
 | `OUT-003` | representative `1M` | outcomes Tier 1, origin, restore, correction |
 | `OUT-004` | `DONE 2026-08-20`: contrato canónico + primera familia Eurostat | `86` series / `2.091` observaciones / `2.091` evidencias / `113` provisionales; release baseline inmutable, Decimal exacto, geografía/tiempo/metodología/uncertainty y no-causalidad; JSON live exacto. `OUT-001..003` siguen abiertos |
-| `OUT-005` | `LOCAL VALIDATED — C1 PACKAGE/BUILD PASS; C2A+C2B PHYSICAL PASS; REMOTE PUBLICATION/ORIGIN OPEN 2026-08-23`: outcome context | C1: `1` candidato pendiente real / `20` pares / `25` observaciones / `264` participantes públicos / `7` evidencias; reviews, releases, memberships, links validados/públicos=`0`; semántica `2e04efb8...`, artifact set `22f43918...`. Status v3 `4.078` bytes / SHA `226dfdf9...`; paquete `5ac01878...`, manifest `9.496` bytes / SHA `2bfe3f2d...`, `17` assets y proyección determinista de `2.973` checks SHA `8e978632...`. Los `264` nombres permanecen exactos; eliminados/seudonimizados=`0`. Browser rehashes todos los assets y falla cerrado. Build `1.435` páginas, audit `46` rutas / `50` assets / `119` evidencias, real-only `124.679` y hygiene `17.072` pasan. C2A procesa físicamente `33.726` pares / `111` checks. C2B procesa `2.865.602` pares en `3.587.743.744` bytes / DB SHA `04c82651...`, `107` checks, checkpoint/resume, fallos adversariales y restore local byte-idéntico; raíz semántica `e9fecdb8...`, retries/dead letters=`0`. Ambos C2 son L0 internos, no publicables y sin claims. Abiertos: publicación/audit C1 live, XML original, actor provenance, origin remoto durable + restore/rollback C2, review humano y control plane de revisión |
+| `OUT-005` | `LOCAL VALIDATED — C1 PACKAGE/BUILD PASS; C2A+C2B PORTABLE PHYSICAL PASS; REMOTE PUBLICATION/ORIGIN OPEN 2026-08-29`: outcome context | C1: `1` candidato pendiente real / `20` pares / `25` observaciones / `264` participantes públicos / `7` evidencias; reviews, releases, memberships, links validados/públicos=`0`; semántica `2e04efb8...`, artifact set `22f43918...`. Status v3 `4.078` bytes / SHA `226dfdf9...`; paquete `5ac01878...`, manifest `9.496` bytes / SHA `2bfe3f2d...`, `17` assets y proyección determinista de `2.973` checks SHA `8e978632...`. Los `264` nombres permanecen exactos; eliminados/seudonimizados=`0`. Browser rehashes todos los assets y falla cerrado. C2A procesa físicamente `33.726` pares / `111` checks. C2B procesa `2.865.602` pares en el planner `3.587.743.744` bytes / SHA `04c82651...`, conserva identidad pública exacta (`119.116` member-votes / `490` nombres / `458` acciones) y entrega `1.205` pair + `8` identity Parquet / `251.522.252` bytes. Canonical/replay comparten raíces semantic `2afaf9ef...`, physical `f2d50fa5...`, portable `049f9718...` y bytes exactos; `22` identity + `23` package tests pasan. C2A/C2B son L0 internos, no publicables y sin claims. Abiertos: publicación/audit C1 live, XML original, actor provenance, origin remoto durable + restore/rollback C2, review humano y promoción |
 | `INT-001` | review state machine | review/disagreement/adjudication/appeal/correction |
 | `INT-002` | official historical calibration | labels con finding oficial citado |
 | `INT-003` | counterevidence/right of reply | supersession pública end-to-end |
 | `INT-004` | publication gate | modelo no puede publicar; dos fuentes y review humano |
 | `INT-005` | generated candidate queue + decision-only review packets | candidate version ID inmutable, bounded evidence refs y manifest; la decisión append-only contiene solo reviewer/method/verdict/rationale/sign-off y nunca duplica el candidato completo ni sus `264+` participantes |
-| `INT-006` | million-task review operations | leases atómicos, heartbeat/reclaim, reviewer identity, calibration, dual review, adjudication, conflicts, appeals, queue age, throughput y correction SLA medidos sobre tareas reales; identidad oficial pública permanece resoluble en evidencia |
+| `INT-006` | `PARTIAL — C2C CAPACITY PASS; REAL OPERATION OPEN 2026-08-29`: million-task review operations | capacity inmutable sobre `2.865.603` tareas / `2.865.604` slots, Python `3.12`, DB SHA `a97f9941...`, semantic `21acddf2...`, `330` checks y `12` tests. Cero trust roots/reviewers/auth/conflicts/assignments/claims/decisions/promotions/releases/publications. DoD pendiente: builder/export inmutable de snapshot operativo separado, identidades y autoridad reales, leases/heartbeat/reclaim, calibration, dual review, adjudication, conflicts, appeals, queue age, throughput y correction SLA medidos; identidad oficial pública permanece resoluble en evidencia |
 
 ### P1 — delivery y comunidad
 
@@ -375,7 +377,7 @@ Los probes de red son explícitos y solo se repiten si cambia el endpoint, exist
 | `PUB-016` | `DONE 2026-08-19`: agreements/meetings/influence canónico | spec v1 + `11` tablas aditivas separan facts, actor roles, agenda, agreement states, topics y assertions; captura Moncloa real `21,234` bytes / SHA `ab08b7dc...` produce `11` sesiones/acuerdos, `37` parties, `20` topics derivados, `22` evidencias, `0` attendance claims y `0` influence assertions; release `6f75ec32...` / JSON `8d8ce219...`, replay, FK, integridad, real-only y browser pasan; live `/agreements/` + JSON exacto + `3` fuentes Moncloa HTTP `200`. Siguiente: agenda/lobby disclosure con personas públicas, segunda captura/history y agreement -> implementation |
 | `PUB-017` | `DONE 2026-08-20`: geopolitics canónico | spec v1 + `8` tablas aditivas; release real-only `6683fd44...` / JSON `ea8c3eb1...` proyecta `2` procedimientos internacionales Moncloa en `2` acciones / `11` actores / `2` evidencias / `4` topics derivados / `2` links, con posiciones, observaciones posteriores, entrada en vigor, implementación e inferencias en `0`/not assessed; replay, FK, integridad y tests UI pasan; live `/geopolitics/`, JSON exacto y `2` fuentes Moncloa HTTP `200`; browser desktop/móvil y audit global `43/47/119` verdes. Siguiente: BOE para etapa jurídica posterior y `TODO 26/27` indicators |
 
-## 5. Secuencia rolling de ocho semanas desde 2026-08-23
+## 5. Secuencia rolling de ocho semanas desde 2026-08-29
 
 Semana 1 — cerrar publicación local -> live:
 
@@ -391,17 +393,18 @@ Semana 2 — provenance y freshness antes de L2:
 - hacer visibles por contrato la fecha contractual, action cutoff `2026-02-12`, indicator snapshot `2026-08-11`, upstream update/release y estado stale/current;
 - bloquear L2 mientras actor origin/restore y el slice W4 de voto/texto no pasen sus gates requeridos.
 
-Semanas 3-4 — operacionalizar C2 aceptado y plano humano mínimo:
+Semanas 3-4 — congelar C2 aceptado y preparar plano humano real:
 
-- congelar roots, manifests y receipts de C2A `33.726/111` y C2B `2.865.602/107`; mantener sus filas L0 no publicables y sin claims;
-- definir packaging multi-shard/Parquet y reuse incremental sin alterar semantic roots ni depender del SQLite único de `3.587.743.744` bytes;
+- congelar roots, manifests y receipts de C2A `33.726/111`, C2B planner `2.865.602/107`, package `1.213` Parquet y C2C capacity `2.865.603` tareas / `2.865.604` slots; mantener L0/capacity no publicables y sin claims humanos;
+- mantener Python `3.12` + PyArrow `20.0.0`, exact inventory, copy-only replay, hard-link fail-closed y límites de batch/RSS como contrato; no volver a depender del SQLite planner único como formato de entrega;
 - separar candidate queue de decisiones append-only keyed por immutable version ID; servir evidence packets bounded por referencia;
-- operar primer lote humano real con reviewer identity, calibración, dos reviews independientes y adjudicación cuando discrepen.
+- implementar primero un builder de snapshot `operational_working` separado que acepte solo trust roots, identidades, autorizaciones, conflicts y assignments reales; exportarlo content-addressed antes de uso;
+- operar después el primer lote humano real con reviewer identity, calibración, dos reviews independientes y adjudicación cuando discrepen.
 
 Semanas 5-6 — origin durable y review operations:
 
-- publicar los exactos artifacts C2 aceptados en un origin remoto inmutable autorizado; verificar hashes, retention, versioning y coste;
-- ejecutar clean restore y rollback aislados sin leer estado local; revalidar `111/111` y `107/107`, roots y counts exactos;
+- publicar los exactos artifacts C2A/C2B y C2C capacity aceptados en un origin remoto inmutable autorizado; verificar hashes, retention, versioning y coste;
+- ejecutar clean restore y rollback aislados sin leer estado local; revalidar C2A `111/111`, C2B `107/107` + package completo, C2C `330/330`, roots y counts exactos;
 - medir leases, heartbeat/reclaim, queue age, throughput, agreement, reversal, appeal y correction SLA;
 - mantener candidate/reviewed/validated/published separados y conservar toda identidad oficial pública en evidencia.
 
@@ -492,10 +495,22 @@ just actor-graph-check
 # Comparación promesa/acción real
 just comparison-engine-check
 
-# Outcome context real C0/L1 + planners físicos C2A/C2B
+# Outcome context real C0/L1 + planner físico C2A/C2B
 just outcome-context-check
 just outcome-context-pair-plan-check
 just outcome-context-pair-plan-c2b-check
+
+# C2B portable exacto: identidad pública, paquete y replay
+just outcome-pair-identity-check
+just outcome-pair-discovery-export
+just outcome-pair-discovery-validate
+just outcome-pair-discovery-replay
+just outcome-pair-discovery-check
+
+# C2C: capacidad inmutable; no equivale a review humano
+just outcome-review-control-c2c-materialize
+just outcome-review-control-c2c-validate
+just outcome-review-control-c2c-check
 
 # Build local y paridad del output
 just cloudflare-pages-build

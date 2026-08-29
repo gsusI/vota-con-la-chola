@@ -1,7 +1,7 @@
 {
   "meta": {
     "schema_version": "transparency_dashboard_v1",
-    "generated_at": "2026-08-23T20:25:24+00:00",
+    "generated_at": "2026-08-29T15:15:20+00:00",
     "source_status_generated_at": "2026-08-12T11:09:08+00:00",
     "latest_release_date": "2026-08-20T00:36:23+00:00",
     "freshness_contract": "docs/method/truth-contract.md#estados-de-frescura"
@@ -118,9 +118,9 @@
     "freshness": {
       "tier": "aging",
       "label": "vigente",
-      "data_age_days": 11,
+      "data_age_days": 17,
       "should_warn": true,
-      "detail": "Corte vigente con advertencia: 11 días sin refresco."
+      "detail": "Corte vigente con advertencia: 17 días sin refresco."
     },
     "source_path": "ui/gh-pages-next/public/explorer-sources/data/status.json",
     "source_url": "/explorer-sources/data/status.json",
@@ -132,9 +132,9 @@
     "evidence_files_total": 119,
     "source_path": "ui/gh-pages-next/public/obstruction-tracker/data/obstructions.json",
     "source_url": "/obstruction-tracker/data/obstructions.json",
-    "source_sha256": "a110c6c71aa66155e22d2c4af74a7219afefd558bbab2237fedd7d2b16a22d89",
+    "source_sha256": "46c718a7948b1b202497fbcc30d9dcfbc9939954694b712d1088d6a83fb52151",
     "evidence_manifest_url": "/obstruction-tracker/evidence/manifest.json",
-    "evidence_manifest_sha256": "1e343eafcf7818534cd303d4343042aa15f7c4721118f696d011b3cec48193bd"
+    "evidence_manifest_sha256": "df9bbd2279b50a493710d1a1913e95edb70cda9c5f4a8b710d7cd92fced0cb33"
   },
   "scale_readiness": {
     "status": "real_foundation_ready_scale_incomplete",
@@ -208,11 +208,11 @@
       }
     ],
     "freshness": {
-      "tier": "fresh",
-      "label": "reciente",
-      "data_age_days": 4,
-      "should_warn": false,
-      "detail": "Corte reciente: 4 días de antigüedad."
+      "tier": "aging",
+      "label": "vigente",
+      "data_age_days": 10,
+      "should_warn": true,
+      "detail": "Corte vigente con advertencia: 10 días sin refresco."
     },
     "pointer_url": "https://huggingface.co/datasets/JesusIC/vota-con-la-chola-data/resolve/main/scale/latest.json",
     "manifest_url": "https://huggingface.co/datasets/JesusIC/vota-con-la-chola-data/resolve/main/scale/snapshots/2026-08-19/5d9ce557ed864de56f677a9f82c999a4ec0dfc494c086b1bfca0bb2e461272dd/manifest.json",
@@ -234,8 +234,8 @@
       "note": {
         "path": "docs/release-notes/promise-action-comparison-mvp.md",
         "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/release-notes/promise-action-comparison-mvp.md",
-        "bytes": 6213,
-        "sha256": "d27bcc21d10d808ae3ffa219ab9c756372d81c7977a84dafd9c5f77453c63b70"
+        "bytes": 6212,
+        "sha256": "dedda5b60b2793b7e34e287ea6b1b97a81eed1768361d55082228012a4433ce7"
       },
       "evidence": [
         {
@@ -246,12 +246,12 @@
         {
           "path": "docs/etl/sprints/COMPARISON-ENGINE-20260820/evidence/comparison-materialization.json",
           "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/etl/sprints/COMPARISON-ENGINE-20260820/evidence/comparison-materialization.json",
-          "sha256": "ac88e3bd5942487492656a302f8c09d4b281440be6d84b58bbe0c3c246185907"
+          "sha256": "917eaffa0fa13488cb93419d4785ca99ef3c1916f7b8501092529571a7b99d23"
         },
         {
           "path": "docs/etl/sprints/COMPARISON-ENGINE-20260820/evidence/promise-action-comparisons-validation.json",
           "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/etl/sprints/COMPARISON-ENGINE-20260820/evidence/promise-action-comparisons-validation.json",
-          "sha256": "5721ac9613cb1c146539086ff0f03950965f89d6281a90c8dbaa2be5df2a1073"
+          "sha256": "4edc9568af15634cd127f63ebc660fe158b4fee1f1f4693b0673666c4d6bd7cf"
         },
         {
           "path": "scripts/verify_live_promise_action_comparisons.py",
@@ -288,8 +288,8 @@
       "note": {
         "path": "docs/release-notes/actor-graph-mvp.md",
         "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/release-notes/actor-graph-mvp.md",
-        "bytes": 7144,
-        "sha256": "5943ae03012f6fcec4b16b490b28dafa40c3e76abb14a715ec32a444dfd7789d"
+        "bytes": 7143,
+        "sha256": "8f520d1b9d3c9ada98e1984acc669193420f60b620a70ee22efeb8737648ea4a"
       },
       "evidence": [
         {
@@ -352,8 +352,8 @@
       "note": {
         "path": "docs/release-notes/indicators-mvp.md",
         "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/release-notes/indicators-mvp.md",
-        "bytes": 5625,
-        "sha256": "035130ccc5a5f055f723caa3c17fac57b00d6d3281caa1073a0cb4364a67b778"
+        "bytes": 5624,
+        "sha256": "fdd7017c86d4f4999046e5f347798ca3e45d36f72bea351ca43ecaad9f410726"
       },
       "evidence": [
         {
@@ -401,8 +401,8 @@
       "note": {
         "path": "docs/release-notes/geopolitics-mvp.md",
         "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/release-notes/geopolitics-mvp.md",
-        "bytes": 4938,
-        "sha256": "5477691dec6746295d2ebbf27da02a0c4ff9bbce7c6e9c81b7b3e6a1dc7e7865"
+        "bytes": 4937,
+        "sha256": "69592b7f9490bc0b2586aa38b747b87392cb67e405db826f741e3833558b960d"
       },
       "evidence": [
         {
@@ -445,8 +445,8 @@
       "note": {
         "path": "docs/release-notes/agreements-connector-mvp.md",
         "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/release-notes/agreements-connector-mvp.md",
-        "bytes": 4869,
-        "sha256": "70b772108e3f960844752583f631a5cedf1bb0dc5e93dc5e2d0d378108a712e2"
+        "bytes": 4868,
+        "sha256": "865b242cfd5c93dbac36bb2519da2c64e35bcbfde4311303c2b16616503e27dc"
       },
       "evidence": [
         {
@@ -489,8 +489,8 @@
       "note": {
         "path": "docs/release-notes/promises-pipeline-mvp.md",
         "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/release-notes/promises-pipeline-mvp.md",
-        "bytes": 3037,
-        "sha256": "3548678ba1388f323c252142c3d4a702fd07253b810f387f8a71ba6448dc82cf"
+        "bytes": 3036,
+        "sha256": "e1edfe2e98be0b50db6aba3dc9b45b4e071166b11ddf07785dda9b6f5aa79ec4"
       },
       "evidence": [
         {
@@ -660,8 +660,8 @@
       "note": {
         "path": "docs/release-notes/spending-connector-mvp.md",
         "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/release-notes/spending-connector-mvp.md",
-        "bytes": 4498,
-        "sha256": "748c4f95b0b4cd284a4175003150d2d190eabc960064fd469ed1bb245087c1c0"
+        "bytes": 4497,
+        "sha256": "fdef0a8766b1c44d1f9fa0bb5c715eb609ac1a6d388d3359f8290a38da269d42"
       },
       "evidence": [
         {
