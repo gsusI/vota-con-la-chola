@@ -342,6 +342,32 @@ outcome_context_pair_plan_c2b_manifest := env_var_or_default("OUTCOME_CONTEXT_PA
 outcome_context_pair_plan_c2b_validation_report := env_var_or_default("OUTCOME_CONTEXT_PAIR_PLAN_C2B_VALIDATION_REPORT", "etl/data/staging/outcome-context-pair-plan-c2b-v1-validation.json")
 outcome_context_pair_plan_c2b_batch_size := env_var_or_default("OUTCOME_CONTEXT_PAIR_PLAN_C2B_BATCH_SIZE", "25000")
 outcome_context_pair_plan_c2b_source_batch_size := env_var_or_default("OUTCOME_CONTEXT_PAIR_PLAN_C2B_SOURCE_BATCH_SIZE", "25000")
+outcome_pair_identity_root := env_var_or_default("OUTCOME_PAIR_IDENTITY_ROOT", "etl/data/derived/outcome-pair-identity-companion-c2b-v1")
+outcome_pair_identity_manifest := env_var_or_default("OUTCOME_PAIR_IDENTITY_MANIFEST", "etl/data/staging/outcome-pair-identity-companion-c2b-v1-manifest.json")
+outcome_pair_identity_report := env_var_or_default("OUTCOME_PAIR_IDENTITY_REPORT", "etl/data/staging/outcome-pair-identity-companion-c2b-v1-report.json")
+outcome_pair_identity_validation := env_var_or_default("OUTCOME_PAIR_IDENTITY_VALIDATION", "etl/data/staging/outcome-pair-identity-companion-c2b-v1-validation.json")
+outcome_pair_identity_audit := env_var_or_default("OUTCOME_PAIR_IDENTITY_AUDIT", "docs/etl/sprints/OUTCOME-CONTEXT-20260820/evidence/outcome-pair-identity-resolver-audit-v1.json")
+outcome_pair_python := env_var_or_default("OUTCOME_PAIR_PYTHON", "3.12")
+outcome_pair_uv_cache := env_var_or_default("OUTCOME_PAIR_UV_CACHE_DIR", "/tmp/vclc-outcome-pair-uv-cache-v1")
+outcome_pair_root := env_var_or_default("OUTCOME_PAIR_ROOT", "etl/data/derived/outcome-pair-discovery-c2b-v1")
+outcome_pair_manifest := env_var_or_default("OUTCOME_PAIR_MANIFEST", "docs/etl/sprints/OUTCOME-CONTEXT-20260820/evidence/outcome-pair-discovery-c2b-v1-manifest.json")
+outcome_pair_report := env_var_or_default("OUTCOME_PAIR_REPORT", "docs/etl/sprints/OUTCOME-CONTEXT-20260820/evidence/outcome-pair-discovery-c2b-v1-report.json")
+outcome_pair_validation := env_var_or_default("OUTCOME_PAIR_VALIDATION", "docs/etl/sprints/OUTCOME-CONTEXT-20260820/evidence/outcome-pair-discovery-c2b-v1-validation.json")
+outcome_pair_previous_manifest := env_var_or_default("OUTCOME_PAIR_PREVIOUS_MANIFEST", "")
+outcome_pair_previous_root := env_var_or_default("OUTCOME_PAIR_PREVIOUS_ROOT", "")
+outcome_pair_interrupt_after := env_var_or_default("OUTCOME_PAIR_INTERRUPT_AFTER", "")
+outcome_pair_replay_root := env_var_or_default("OUTCOME_PAIR_REPLAY_ROOT", "etl/data/derived/outcome-pair-discovery-c2b-v1-replay")
+outcome_pair_replay_manifest := env_var_or_default("OUTCOME_PAIR_REPLAY_MANIFEST", "etl/data/staging/outcome-pair-discovery-c2b-v1-replay-manifest.json")
+outcome_pair_replay_report := env_var_or_default("OUTCOME_PAIR_REPLAY_REPORT", "etl/data/staging/outcome-pair-discovery-c2b-v1-replay-report.json")
+outcome_pair_replay_validation := env_var_or_default("OUTCOME_PAIR_REPLAY_VALIDATION", "docs/etl/sprints/OUTCOME-CONTEXT-20260820/evidence/outcome-pair-discovery-c2b-v1-replay-validation.json")
+outcome_review_control_config := env_var_or_default("OUTCOME_REVIEW_CONTROL_CONFIG", "etl/data/manual/outcome_links/review_control_scope_c2c_v1.json")
+outcome_review_control_db := env_var_or_default("OUTCOME_REVIEW_CONTROL_DB", "etl/data/staging/outcome-review-control-c2c-v1.db")
+outcome_review_control_report := env_var_or_default("OUTCOME_REVIEW_CONTROL_REPORT", "etl/data/staging/outcome-review-control-c2c-v1-report.json")
+outcome_review_control_manifest := env_var_or_default("OUTCOME_REVIEW_CONTROL_MANIFEST", "etl/data/staging/outcome-review-control-c2c-v1-manifest.json")
+outcome_review_control_validation := env_var_or_default("OUTCOME_REVIEW_CONTROL_VALIDATION", "docs/etl/sprints/OUTCOME-CONTEXT-20260820/evidence/outcome-review-control-c2c-v1-validation.json")
+outcome_review_control_batch_size := env_var_or_default("OUTCOME_REVIEW_CONTROL_BATCH_SIZE", "25000")
+outcome_review_control_python := env_var_or_default("OUTCOME_REVIEW_CONTROL_PYTHON", "3.12")
+outcome_review_control_uv_cache := env_var_or_default("OUTCOME_REVIEW_CONTROL_UV_CACHE_DIR", "/tmp/vclc-outcome-review-control-uv-cache-v1")
 scale_semantic_actor_graph_root := env_var_or_default("SCALE_SEMANTIC_ACTOR_GRAPH_ROOT", "etl/data/derived/semantic-actor-graph")
 scale_semantic_actor_graph_manifest_out := env_var_or_default("SCALE_SEMANTIC_ACTOR_GRAPH_MANIFEST_OUT", "etl/data/published/actor-graph-semantic-partition-manifest-latest.json")
 scale_semantic_actor_graph_validation_out := env_var_or_default("SCALE_SEMANTIC_ACTOR_GRAPH_VALIDATION_OUT", "docs/etl/sprints/ACTOR-GRAPH-20260820/evidence/actor-graph-partition-validation.json")
@@ -2226,6 +2252,9 @@ etl-data-integrity-audit:
 
 etl-data-integrity-audit-all-staging:
   python3 scripts/audit_data_integrity.py --scan-staging --enforce
+
+etl-data-integrity-reconcile-all-staging:
+  python3 scripts/audit_data_integrity.py --scan-staging --reconcile-stale-running --report-out etl/data/published/data-integrity-latest.json --enforce
 
 etl-scale-eurostat-indicators-enqueue:
   python3 scripts/ingest_eurostat_indicator_registry.py enqueue --db {{eurostat_indicator_db}} --pipeline-id {{eurostat_indicator_pipeline_id}} --registry {{eurostat_indicator_registry}} --snapshot-date {{snapshot_date}}
@@ -4975,6 +5004,109 @@ outcome-context-pair-plan-c2b-test:
 outcome-context-pair-plan-c2b-check:
   @just outcome-context-pair-plan-c2b-validate
   @just outcome-context-pair-plan-c2b-test
+
+# Exact public Senate participant dimension used by the full C2B package.
+outcome-pair-identity-export:
+  UV_CACHE_DIR="{{outcome_pair_uv_cache}}" uv run --python "{{outcome_pair_python}}" --no-project --with pyarrow==20.0.0 python scripts/export_outcome_pair_identity_companion.py \
+    --source-db "{{outcome_context_pair_plan_c2b_actions_db}}" \
+    --config "{{outcome_context_pair_plan_c2b_config}}" \
+    --pair-plan-db "{{outcome_context_pair_plan_c2b_db}}" \
+    --out-root "{{outcome_pair_identity_root}}" \
+    --manifest-out "{{outcome_pair_identity_manifest}}" \
+    --report-out "{{outcome_pair_identity_report}}"
+
+outcome-pair-identity-validate:
+  UV_CACHE_DIR="{{outcome_pair_uv_cache}}" uv run --python "{{outcome_pair_python}}" --no-project --with pyarrow==20.0.0 python scripts/validate_outcome_pair_identity_companion.py \
+    --root "{{outcome_pair_identity_root}}" \
+    --manifest "{{outcome_pair_identity_manifest}}" \
+    --source-db "{{outcome_context_pair_plan_c2b_actions_db}}" \
+    --config "{{outcome_context_pair_plan_c2b_config}}" \
+    --pair-plan-db "{{outcome_context_pair_plan_c2b_db}}" \
+    --report-out "{{outcome_pair_identity_validation}}"
+
+outcome-pair-identity-check:
+  @just outcome-pair-identity-validate
+  RUN_REAL_C2B_IDENTITY_E2E=1 UV_CACHE_DIR="{{outcome_pair_uv_cache}}" uv run --python "{{outcome_pair_python}}" --no-project --with pyarrow==20.0.0 --with pytest python -m pytest -q tests/test_outcome_pair_identity_companion_real_pipeline.py
+
+# Full 2.86M-row internal L0 discovery universe. Exact canonical Parquet
+# settings are enforced in code; successful materialization never promotes it.
+outcome-pair-discovery-export:
+  UV_CACHE_DIR="{{outcome_pair_uv_cache}}" uv run --python "{{outcome_pair_python}}" --no-project --with pyarrow==20.0.0 python scripts/export_outcome_pair_partitions.py \
+    --db "{{outcome_context_pair_plan_c2b_db}}" \
+    --source-manifest "{{outcome_context_pair_plan_c2b_manifest}}" \
+    --source-validation "{{outcome_context_pair_plan_c2b_validation_report}}" \
+    --identity-resolver-audit "{{outcome_pair_identity_audit}}" \
+    --identity-source-db "{{outcome_context_pair_plan_c2b_actions_db}}" \
+    --identity-config "{{outcome_context_pair_plan_c2b_config}}" \
+    --identity-companion-root "{{outcome_pair_identity_root}}" \
+    --identity-companion-manifest "{{outcome_pair_identity_manifest}}" \
+    --identity-companion-validation "{{outcome_pair_identity_validation}}" \
+    --out-root "{{outcome_pair_root}}" \
+    --manifest-out "{{outcome_pair_manifest}}" \
+    --report-out "{{outcome_pair_report}}" \
+    --validation-out "{{outcome_pair_validation}}" \
+    --previous-manifest "{{outcome_pair_previous_manifest}}" \
+    --previous-root "{{outcome_pair_previous_root}}"
+
+outcome-pair-discovery-interrupt partitions="25":
+  UV_CACHE_DIR="{{outcome_pair_uv_cache}}" uv run --python "{{outcome_pair_python}}" --no-project --with pyarrow==20.0.0 python scripts/export_outcome_pair_partitions.py \
+    --db "{{outcome_context_pair_plan_c2b_db}}" \
+    --source-manifest "{{outcome_context_pair_plan_c2b_manifest}}" \
+    --source-validation "{{outcome_context_pair_plan_c2b_validation_report}}" \
+    --identity-resolver-audit "{{outcome_pair_identity_audit}}" \
+    --identity-source-db "{{outcome_context_pair_plan_c2b_actions_db}}" \
+    --identity-config "{{outcome_context_pair_plan_c2b_config}}" \
+    --identity-companion-root "{{outcome_pair_identity_root}}" \
+    --identity-companion-manifest "{{outcome_pair_identity_manifest}}" \
+    --identity-companion-validation "{{outcome_pair_identity_validation}}" \
+    --out-root "{{outcome_pair_root}}" \
+    --manifest-out "{{outcome_pair_manifest}}" \
+    --report-out "{{outcome_pair_report}}" \
+    --validation-out "{{outcome_pair_validation}}" \
+    --interrupt-after-new-partitions "{{partitions}}"
+
+outcome-pair-discovery-validate:
+  UV_CACHE_DIR="{{outcome_pair_uv_cache}}" uv run --python "{{outcome_pair_python}}" --no-project --with pyarrow==20.0.0 python scripts/validate_outcome_pair_partitions.py \
+    --root "{{outcome_pair_root}}" \
+    --manifest "{{outcome_pair_manifest}}" \
+    --source-db "{{outcome_context_pair_plan_c2b_db}}" \
+    --source-manifest "{{outcome_context_pair_plan_c2b_manifest}}" \
+    --source-validation "{{outcome_context_pair_plan_c2b_validation_report}}" \
+    --identity-source-db "{{outcome_context_pair_plan_c2b_actions_db}}" \
+    --identity-config "{{outcome_context_pair_plan_c2b_config}}" \
+    --report-out "{{outcome_pair_validation}}"
+
+outcome-pair-discovery-replay:
+  OUTCOME_PAIR_ROOT="{{outcome_pair_replay_root}}" OUTCOME_PAIR_MANIFEST="{{outcome_pair_replay_manifest}}" OUTCOME_PAIR_REPORT="{{outcome_pair_replay_report}}" OUTCOME_PAIR_VALIDATION="{{outcome_pair_replay_validation}}" OUTCOME_PAIR_PREVIOUS_MANIFEST="{{outcome_pair_manifest}}" OUTCOME_PAIR_PREVIOUS_ROOT="{{outcome_pair_root}}" just outcome-pair-discovery-export
+  OUTCOME_PAIR_ROOT="{{outcome_pair_replay_root}}" OUTCOME_PAIR_MANIFEST="{{outcome_pair_replay_manifest}}" OUTCOME_PAIR_VALIDATION="{{outcome_pair_replay_validation}}" just outcome-pair-discovery-validate
+
+outcome-pair-discovery-check:
+  @just outcome-pair-discovery-validate
+  UV_CACHE_DIR="{{outcome_pair_uv_cache}}" uv run --python "{{outcome_pair_python}}" --no-project --with pyarrow==20.0.0 --with pytest python -m pytest -q tests/test_outcome_pair_partitions_real_pipeline.py
+
+# C2C control capacity for the real discovery universe. Operational reviewer,
+# assignment, decision, promotion, and publication tables stay empty by design.
+outcome-review-control-c2c-materialize:
+  UV_CACHE_DIR="{{outcome_review_control_uv_cache}}" uv run --python "{{outcome_review_control_python}}" --no-project python scripts/materialize_outcome_review_control_c2c.py \
+    --config "{{outcome_review_control_config}}" \
+    --schema "{{outcome_context_schema}}" \
+    --out-db "{{outcome_review_control_db}}" \
+    --report-out "{{outcome_review_control_report}}" \
+    --manifest-out "{{outcome_review_control_manifest}}" \
+    --batch-size "{{outcome_review_control_batch_size}}"
+
+outcome-review-control-c2c-validate:
+  UV_CACHE_DIR="{{outcome_review_control_uv_cache}}" uv run --python "{{outcome_review_control_python}}" --no-project python scripts/validate_outcome_review_control_c2c.py \
+    --config "{{outcome_review_control_config}}" \
+    --schema "{{outcome_context_schema}}" \
+    --plan-db "{{outcome_review_control_db}}" \
+    --materialization-report "{{outcome_review_control_report}}" \
+    --manifest "{{outcome_review_control_manifest}}" \
+    --report-out "{{outcome_review_control_validation}}"
+
+outcome-review-control-c2c-check:
+  @just outcome-review-control-c2c-validate
+  UV_CACHE_DIR="{{outcome_review_control_uv_cache}}" uv run --python "{{outcome_review_control_python}}" --no-project --with pytest python -m pytest -q tests/test_outcome_review_control_c2c_real_pipeline.py
 
 cloudflare-pages-size-check:
   set -e; \

@@ -101,6 +101,16 @@ class SemanticLaneContract:
 
 
 def peak_rss_mb() -> float:
+    # Linux ru_maxrss can retain the parent's pre-exec high-water mark. VmHWM
+    # measures this process image, so composed validation keeps a truthful cap.
+    if sys.platform.startswith("linux"):
+        try:
+            for line in Path("/proc/self/status").read_text(encoding="ascii").splitlines():
+                parts = line.split()
+                if len(parts) == 3 and parts[0] == "VmHWM:" and parts[2] == "kB":
+                    return round(int(parts[1]) / 1024, 3)
+        except (OSError, ValueError):
+            pass
     raw = float(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss)
     if sys.platform == "darwin":
         return round(raw / (1024 * 1024), 3)

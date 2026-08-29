@@ -5972,6 +5972,2077 @@ BEFORE DELETE ON outcome_pair_plan_pairs BEGIN
 END;
 -- END OUTCOME PAIR PLANNER C2A SCHEMA
 
+-- Real-human-review control plane for the C2C capacity slice. These tables
+-- schedule review work only. They never turn an L0 discovery pair into an
+-- association, causal, merit/blame, corruption, ranking, or publication claim.
+-- BEGIN OUTCOME REVIEW CONTROL C2C SCHEMA
+CREATE TABLE IF NOT EXISTS outcome_review_control_meta (
+  pipeline_key TEXT NOT NULL PRIMARY KEY,
+  contract_version TEXT NOT NULL CHECK (
+    contract_version = 'outcome_review_control_c2c_v1'
+  ),
+  config_sha256 TEXT NOT NULL CHECK (
+    length(config_sha256) = 64 AND config_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  source_root_sha256 TEXT NOT NULL CHECK (
+    length(source_root_sha256) = 64
+    AND source_root_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  schema_root_sha256 TEXT NOT NULL CHECK (
+    length(schema_root_sha256) = 64
+    AND schema_root_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  artifact_scope TEXT NOT NULL CHECK (
+    artifact_scope IN ('capacity_only', 'operational_working')
+  ),
+  trust_root_contract_sha256 TEXT NOT NULL CHECK (
+    length(trust_root_contract_sha256) = 64
+    AND trust_root_contract_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  operational_state TEXT NOT NULL CHECK (
+    operational_state IN ('not_materialized', 'working_unpublished')
+  ),
+  control_plane_capacity_status TEXT NOT NULL CHECK (
+    control_plane_capacity_status IN ('BUILDING', 'PASS')
+  ),
+  human_review_status TEXT NOT NULL CHECK (human_review_status = 'OPEN'),
+  semantic_promotion_status TEXT NOT NULL CHECK (
+    semantic_promotion_status = 'OPEN'
+  ),
+  public_release_status TEXT NOT NULL CHECK (public_release_status = 'OPEN'),
+  real_data_only INTEGER NOT NULL CHECK (real_data_only = 1),
+  synthetic_or_mock_decisions INTEGER NOT NULL CHECK (
+    synthetic_or_mock_decisions = 0
+  ),
+  capacity_snapshot_effective_at TEXT NOT NULL CHECK (
+    length(capacity_snapshot_effective_at) = 20
+    AND strftime(
+      '%Y-%m-%dT%H:%M:%SZ', capacity_snapshot_effective_at
+    ) = capacity_snapshot_effective_at
+    AND unixepoch(capacity_snapshot_effective_at) IS NOT NULL
+  ),
+  row_semantic_sha256 TEXT NOT NULL CHECK (
+    length(row_semantic_sha256) = 64
+    AND row_semantic_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  UNIQUE (pipeline_key, config_sha256, source_root_sha256, schema_root_sha256),
+  CHECK (
+    (artifact_scope = 'capacity_only' AND operational_state = 'not_materialized')
+    OR (artifact_scope = 'operational_working'
+      AND operational_state = 'working_unpublished')
+  )
+);
+
+CREATE TABLE IF NOT EXISTS outcome_review_control_checkpoints (
+  pipeline_key TEXT NOT NULL REFERENCES outcome_review_control_meta(pipeline_key),
+  stage TEXT NOT NULL CHECK (stage = 'discovery_tasks'),
+  checkpoint_contract_version TEXT NOT NULL CHECK (
+    checkpoint_contract_version = 'outcome_review_control_checkpoint_c2c_v1'
+  ),
+  config_sha256 TEXT NOT NULL,
+  source_root_sha256 TEXT NOT NULL,
+  schema_root_sha256 TEXT NOT NULL,
+  last_action_plan_pk INTEGER NOT NULL DEFAULT 0 CHECK (last_action_plan_pk >= 0),
+  last_series_plan_pk INTEGER NOT NULL DEFAULT 0 CHECK (last_series_plan_pk >= 0),
+  tasks_written INTEGER NOT NULL DEFAULT 0 CHECK (tasks_written >= 0),
+  slots_written INTEGER NOT NULL DEFAULT 0 CHECK (slots_written >= 0),
+  batches_committed INTEGER NOT NULL DEFAULT 0 CHECK (batches_committed >= 0),
+  task_chain_sha256 TEXT NOT NULL CHECK (
+    length(task_chain_sha256) = 64
+    AND task_chain_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  slot_chain_sha256 TEXT NOT NULL CHECK (
+    length(slot_chain_sha256) = 64
+    AND slot_chain_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  audit_chain_sha256 TEXT NOT NULL CHECK (
+    length(audit_chain_sha256) = 64
+    AND audit_chain_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  completed INTEGER NOT NULL DEFAULT 0 CHECK (completed IN (0, 1)),
+  checkpoint_snapshot_effective_at TEXT NOT NULL CHECK (
+    length(checkpoint_snapshot_effective_at) = 20
+    AND strftime(
+      '%Y-%m-%dT%H:%M:%SZ', checkpoint_snapshot_effective_at
+    ) = checkpoint_snapshot_effective_at
+    AND unixepoch(checkpoint_snapshot_effective_at) IS NOT NULL
+  ),
+  PRIMARY KEY (pipeline_key, stage),
+  FOREIGN KEY (pipeline_key, config_sha256, source_root_sha256, schema_root_sha256)
+    REFERENCES outcome_review_control_meta(
+      pipeline_key, config_sha256, source_root_sha256, schema_root_sha256
+    )
+);
+
+CREATE UNIQUE INDEX IF NOT EXISTS idx_outcome_review_control_meta_roots
+  ON outcome_review_control_meta(
+    pipeline_key, config_sha256, source_root_sha256, schema_root_sha256
+  );
+
+CREATE TABLE IF NOT EXISTS outcome_review_cohorts (
+  cohort_id TEXT NOT NULL PRIMARY KEY,
+  pipeline_key TEXT NOT NULL REFERENCES outcome_review_control_meta(pipeline_key),
+  cohort_kind TEXT NOT NULL CHECK (
+    cohort_kind IN ('c2b_l0_discovery', 'c1_l1_semantic_canary')
+  ),
+  source_artifact_path TEXT NOT NULL CHECK (
+    source_artifact_path NOT LIKE '/Users/%'
+    AND source_artifact_path NOT LIKE '/home/%'
+    AND source_artifact_path NOT LIKE 'file://%'
+  ),
+  source_artifact_sha256 TEXT NOT NULL CHECK (
+    length(source_artifact_sha256) = 64
+    AND source_artifact_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  source_manifest_sha256 TEXT NOT NULL CHECK (
+    length(source_manifest_sha256) = 64
+    AND source_manifest_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  source_semantic_root_sha256 TEXT NOT NULL CHECK (
+    length(source_semantic_root_sha256) = 64
+    AND source_semantic_root_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  evidence_level TEXT NOT NULL CHECK (evidence_level IN ('L0', 'L1')),
+  expected_task_count INTEGER NOT NULL CHECK (expected_task_count > 0),
+  required_slots_per_task INTEGER NOT NULL CHECK (required_slots_per_task IN (1, 2)),
+  assignment_eligible INTEGER NOT NULL CHECK (assignment_eligible = 1),
+  requires_dual_review INTEGER NOT NULL CHECK (requires_dual_review IN (0, 1)),
+  adjudication_on_disagreement INTEGER NOT NULL CHECK (
+    adjudication_on_disagreement IN (0, 1)
+  ),
+  semantic_promotion_requires_review INTEGER NOT NULL CHECK (
+    semantic_promotion_requires_review = 1
+  ),
+  public_release_requires_promotion INTEGER NOT NULL CHECK (
+    public_release_requires_promotion = 1
+  ),
+  eligibility_policy_json TEXT NOT NULL CHECK (json_valid(eligibility_policy_json)),
+  row_semantic_sha256 TEXT NOT NULL CHECK (
+    length(row_semantic_sha256) = 64
+    AND row_semantic_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  CHECK (
+    (cohort_kind = 'c2b_l0_discovery' AND evidence_level = 'L0'
+      AND required_slots_per_task = 1 AND requires_dual_review = 0
+      AND adjudication_on_disagreement = 0)
+    OR
+    (cohort_kind = 'c1_l1_semantic_canary' AND evidence_level = 'L1'
+      AND expected_task_count = 1 AND required_slots_per_task = 2
+      AND requires_dual_review = 1 AND adjudication_on_disagreement = 1)
+  )
+);
+
+CREATE TABLE IF NOT EXISTS outcome_review_tasks (
+  task_pk INTEGER PRIMARY KEY,
+  task_id TEXT NOT NULL UNIQUE,
+  cohort_id TEXT NOT NULL REFERENCES outcome_review_cohorts(cohort_id),
+  task_kind TEXT NOT NULL CHECK (
+    task_kind IN ('discovery_triage', 'semantic_canary')
+  ),
+  source_row_id TEXT NOT NULL,
+  source_row_semantic_sha256 TEXT NOT NULL CHECK (
+    length(source_row_semantic_sha256) = 64
+    AND source_row_semantic_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  source_action_plan_pk INTEGER,
+  source_series_plan_pk INTEGER,
+  evidence_level TEXT NOT NULL CHECK (evidence_level IN ('L0', 'L1')),
+  task_state TEXT NOT NULL CHECK (task_state = 'pending_human_review'),
+  assignment_eligible INTEGER NOT NULL CHECK (assignment_eligible = 1),
+  initial_semantic_promotion_eligible INTEGER NOT NULL CHECK (
+    initial_semantic_promotion_eligible = 0
+  ),
+  initial_publication_eligible INTEGER NOT NULL CHECK (
+    initial_publication_eligible = 0
+  ),
+  row_semantic_sha256 TEXT NOT NULL CHECK (
+    length(row_semantic_sha256) = 64
+    AND row_semantic_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  UNIQUE (cohort_id, source_row_id),
+  CHECK (
+    (task_kind = 'discovery_triage' AND evidence_level = 'L0'
+      AND source_action_plan_pk IS NOT NULL AND source_series_plan_pk IS NOT NULL)
+    OR
+    (task_kind = 'semantic_canary' AND evidence_level = 'L1'
+      AND source_action_plan_pk IS NULL AND source_series_plan_pk IS NULL)
+  )
+);
+
+CREATE INDEX IF NOT EXISTS idx_outcome_review_tasks_cohort_keyset
+  ON outcome_review_tasks(
+    cohort_id, source_action_plan_pk, source_series_plan_pk, task_pk
+  );
+
+CREATE TABLE IF NOT EXISTS outcome_review_slots (
+  slot_pk INTEGER PRIMARY KEY,
+  slot_id TEXT NOT NULL UNIQUE,
+  task_pk INTEGER NOT NULL REFERENCES outcome_review_tasks(task_pk) ON DELETE RESTRICT,
+  slot_kind TEXT NOT NULL CHECK (
+    slot_kind IN ('discovery_primary', 'semantic_primary', 'semantic_secondary')
+  ),
+  slot_ordinal INTEGER NOT NULL CHECK (slot_ordinal IN (1, 2)),
+  review_dimension TEXT NOT NULL CHECK (
+    review_dimension IN ('discovery_triage', 'semantic')
+  ),
+  required_reviewer_role TEXT NOT NULL CHECK (
+    required_reviewer_role IN ('discovery_reviewer', 'semantic_reviewer')
+  ),
+  independent_reviewer_required INTEGER NOT NULL CHECK (
+    independent_reviewer_required IN (0, 1)
+  ),
+  adjudication_rule TEXT NOT NULL CHECK (
+    adjudication_rule IN ('not_applicable', 'on_disagreement_after_dual_review')
+  ),
+  slot_state TEXT NOT NULL CHECK (slot_state = 'pending_unassigned'),
+  row_semantic_sha256 TEXT NOT NULL CHECK (
+    length(row_semantic_sha256) = 64
+    AND row_semantic_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  UNIQUE (task_pk, slot_kind),
+  UNIQUE (task_pk, slot_ordinal),
+  CHECK (
+    (slot_kind = 'discovery_primary' AND slot_ordinal = 1
+      AND review_dimension = 'discovery_triage'
+      AND required_reviewer_role = 'discovery_reviewer'
+      AND independent_reviewer_required = 0
+      AND adjudication_rule = 'not_applicable')
+    OR
+    (slot_kind = 'semantic_primary' AND slot_ordinal = 1
+      AND review_dimension = 'semantic'
+      AND required_reviewer_role = 'semantic_reviewer'
+      AND independent_reviewer_required = 1
+      AND adjudication_rule = 'on_disagreement_after_dual_review')
+    OR
+    (slot_kind = 'semantic_secondary' AND slot_ordinal = 2
+      AND review_dimension = 'semantic'
+      AND required_reviewer_role = 'semantic_reviewer'
+      AND independent_reviewer_required = 1
+      AND adjudication_rule = 'on_disagreement_after_dual_review')
+  )
+);
+
+CREATE INDEX IF NOT EXISTS idx_outcome_review_slots_task
+  ON outcome_review_slots(task_pk, slot_ordinal, slot_pk);
+
+-- A capacity artifact pins the empty trust-root set. Real trust roots may be
+-- introduced only in a separate unpublished operational working database.
+-- Its eventual immutable export must bind the exact public authority evidence.
+CREATE TABLE IF NOT EXISTS outcome_review_trust_roots (
+  trust_root_id TEXT NOT NULL PRIMARY KEY,
+  authority_public_id TEXT NOT NULL,
+  identity_provider TEXT NOT NULL CHECK (
+    length(identity_provider) BETWEEN 1 AND 128
+  ),
+  provider_subject_sha256 TEXT NOT NULL CHECK (
+    length(provider_subject_sha256) = 64
+    AND provider_subject_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  evidence_sha256 TEXT NOT NULL CHECK (
+    length(evidence_sha256) = 64 AND evidence_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  effective_at TEXT NOT NULL CHECK (
+    length(effective_at) = 20
+    AND strftime('%Y-%m-%dT%H:%M:%SZ', effective_at) = effective_at
+    AND unixepoch(effective_at) IS NOT NULL
+  ),
+  expires_at TEXT CHECK (
+    expires_at IS NULL OR (
+      length(expires_at) = 20
+      AND strftime('%Y-%m-%dT%H:%M:%SZ', expires_at) = expires_at
+      AND unixepoch(expires_at) IS NOT NULL
+      AND expires_at > effective_at
+    )
+  ),
+  row_semantic_sha256 TEXT NOT NULL CHECK (
+    length(row_semantic_sha256) = 64
+    AND row_semantic_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  UNIQUE (identity_provider, provider_subject_sha256)
+);
+
+CREATE TABLE IF NOT EXISTS outcome_review_reviewer_identities (
+  reviewer_public_id TEXT NOT NULL PRIMARY KEY,
+  identity_provider TEXT NOT NULL CHECK (
+    length(identity_provider) BETWEEN 1 AND 128
+  ),
+  provider_subject_sha256 TEXT NOT NULL CHECK (
+    length(provider_subject_sha256) = 64
+    AND provider_subject_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  human_identity_sha256 TEXT NOT NULL CHECK (
+    length(human_identity_sha256) = 64
+    AND human_identity_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  verified_by_trust_root_id TEXT NOT NULL REFERENCES outcome_review_trust_roots(
+    trust_root_id
+  ),
+  registered_at TEXT NOT NULL CHECK (
+    length(registered_at) = 20
+    AND strftime('%Y-%m-%dT%H:%M:%SZ', registered_at) = registered_at
+    AND unixepoch(registered_at) IS NOT NULL
+  ),
+  identity_state TEXT NOT NULL CHECK (identity_state = 'verified'),
+  row_semantic_sha256 TEXT NOT NULL CHECK (
+    length(row_semantic_sha256) = 64
+    AND row_semantic_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  UNIQUE (identity_provider, provider_subject_sha256),
+  UNIQUE (human_identity_sha256)
+);
+
+CREATE TABLE IF NOT EXISTS outcome_review_auth_events (
+  auth_event_pk INTEGER PRIMARY KEY,
+  auth_event_id TEXT NOT NULL UNIQUE,
+  reviewer_public_id TEXT NOT NULL REFERENCES outcome_review_reviewer_identities(
+    reviewer_public_id
+  ),
+  cohort_id TEXT REFERENCES outcome_review_cohorts(cohort_id),
+  reviewer_role TEXT NOT NULL CHECK (
+    reviewer_role IN (
+      'discovery_reviewer', 'semantic_reviewer', 'adjudicator',
+      'claim_coordinator', 'promotion_authority', 'publisher'
+    )
+  ),
+  auth_state TEXT NOT NULL CHECK (auth_state IN ('granted', 'revoked')),
+  supersedes_auth_event_id TEXT REFERENCES outcome_review_auth_events(auth_event_id),
+  effective_at TEXT NOT NULL CHECK (
+    length(effective_at) = 20
+    AND strftime('%Y-%m-%dT%H:%M:%SZ', effective_at) = effective_at
+    AND unixepoch(effective_at) IS NOT NULL
+  ),
+  expires_at TEXT CHECK (
+    expires_at IS NULL OR (
+      length(expires_at) = 20
+      AND strftime('%Y-%m-%dT%H:%M:%SZ', expires_at) = expires_at
+      AND unixepoch(expires_at) IS NOT NULL
+      AND expires_at > effective_at
+    )
+  ),
+  issuer_public_id TEXT NOT NULL REFERENCES outcome_review_reviewer_identities(
+    reviewer_public_id
+  ),
+  issuer_trust_root_id TEXT NOT NULL REFERENCES outcome_review_trust_roots(
+    trust_root_id
+  ),
+  evidence_sha256 TEXT NOT NULL CHECK (
+    length(evidence_sha256) = 64 AND evidence_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  row_semantic_sha256 TEXT NOT NULL CHECK (
+    length(row_semantic_sha256) = 64
+    AND row_semantic_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  CHECK (
+    (auth_state = 'granted' AND supersedes_auth_event_id IS NULL)
+    OR (auth_state = 'revoked' AND supersedes_auth_event_id IS NOT NULL)
+  )
+);
+
+CREATE INDEX IF NOT EXISTS idx_outcome_review_auth_current
+  ON outcome_review_auth_events(
+    reviewer_public_id, cohort_id, reviewer_role, auth_event_pk
+  );
+
+CREATE TABLE IF NOT EXISTS outcome_review_conflict_events (
+  conflict_event_pk INTEGER PRIMARY KEY,
+  conflict_event_id TEXT NOT NULL UNIQUE,
+  reviewer_public_id TEXT NOT NULL REFERENCES outcome_review_reviewer_identities(
+    reviewer_public_id
+  ),
+  cohort_id TEXT NOT NULL REFERENCES outcome_review_cohorts(cohort_id),
+  task_pk INTEGER REFERENCES outcome_review_tasks(task_pk),
+  conflict_kind TEXT NOT NULL CHECK (length(trim(conflict_kind)) BETWEEN 1 AND 128),
+  conflict_state TEXT NOT NULL CHECK (conflict_state IN ('declared', 'cleared')),
+  supersedes_conflict_event_id TEXT REFERENCES outcome_review_conflict_events(
+    conflict_event_id
+  ),
+  recorded_at TEXT NOT NULL CHECK (
+    length(recorded_at) = 20
+    AND strftime('%Y-%m-%dT%H:%M:%SZ', recorded_at) = recorded_at
+    AND unixepoch(recorded_at) IS NOT NULL
+  ),
+  evidence_json TEXT NOT NULL CHECK (
+    json_valid(evidence_json)
+    AND json_type(evidence_json) = 'object'
+    AND json(evidence_json) <> '{}'
+    AND length(evidence_json) BETWEEN 2 AND 8192
+  ),
+  row_semantic_sha256 TEXT NOT NULL CHECK (
+    length(row_semantic_sha256) = 64
+    AND row_semantic_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  CHECK (
+    (conflict_state = 'declared' AND supersedes_conflict_event_id IS NULL)
+    OR (conflict_state = 'cleared' AND supersedes_conflict_event_id IS NOT NULL)
+  )
+);
+
+CREATE INDEX IF NOT EXISTS idx_outcome_review_conflict_current
+  ON outcome_review_conflict_events(
+    reviewer_public_id, cohort_id, task_pk, conflict_event_pk
+  );
+
+CREATE TABLE IF NOT EXISTS outcome_review_assignment_events (
+  assignment_event_pk INTEGER PRIMARY KEY,
+  assignment_event_id TEXT NOT NULL UNIQUE,
+  slot_pk INTEGER NOT NULL REFERENCES outcome_review_slots(slot_pk),
+  reviewer_public_id TEXT NOT NULL REFERENCES outcome_review_reviewer_identities(
+    reviewer_public_id
+  ),
+  auth_event_id TEXT NOT NULL REFERENCES outcome_review_auth_events(auth_event_id),
+  assignment_state TEXT NOT NULL CHECK (assignment_state IN ('assigned', 'released')),
+  supersedes_assignment_event_id TEXT REFERENCES outcome_review_assignment_events(
+    assignment_event_id
+  ),
+  recorded_at TEXT NOT NULL CHECK (
+    length(recorded_at) = 20
+    AND strftime('%Y-%m-%dT%H:%M:%SZ', recorded_at) = recorded_at
+    AND unixepoch(recorded_at) IS NOT NULL
+  ),
+  row_semantic_sha256 TEXT NOT NULL CHECK (
+    length(row_semantic_sha256) = 64
+    AND row_semantic_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  CHECK (
+    (assignment_state = 'assigned' AND supersedes_assignment_event_id IS NULL)
+    OR (assignment_state = 'released' AND supersedes_assignment_event_id IS NOT NULL)
+  )
+);
+
+CREATE INDEX IF NOT EXISTS idx_outcome_review_assignment_current
+  ON outcome_review_assignment_events(slot_pk, assignment_event_pk);
+
+CREATE INDEX IF NOT EXISTS idx_outcome_review_auth_supersedes
+  ON outcome_review_auth_events(
+    supersedes_auth_event_id, auth_state, effective_at, auth_event_pk
+  );
+CREATE UNIQUE INDEX IF NOT EXISTS idx_outcome_review_auth_one_supersession
+  ON outcome_review_auth_events(supersedes_auth_event_id)
+  WHERE supersedes_auth_event_id IS NOT NULL;
+CREATE INDEX IF NOT EXISTS idx_outcome_review_conflict_supersedes
+  ON outcome_review_conflict_events(
+    supersedes_conflict_event_id, conflict_state, recorded_at, conflict_event_pk
+  );
+CREATE UNIQUE INDEX IF NOT EXISTS idx_outcome_review_conflict_one_supersession
+  ON outcome_review_conflict_events(supersedes_conflict_event_id)
+  WHERE supersedes_conflict_event_id IS NOT NULL;
+CREATE INDEX IF NOT EXISTS idx_outcome_review_assignment_supersedes
+  ON outcome_review_assignment_events(
+    supersedes_assignment_event_id, assignment_state, recorded_at,
+    assignment_event_pk
+  );
+CREATE UNIQUE INDEX IF NOT EXISTS idx_outcome_review_assignment_one_supersession
+  ON outcome_review_assignment_events(supersedes_assignment_event_id)
+  WHERE supersedes_assignment_event_id IS NOT NULL;
+
+CREATE TABLE IF NOT EXISTS outcome_review_claim_events (
+  claim_event_pk INTEGER PRIMARY KEY,
+  claim_event_id TEXT NOT NULL UNIQUE,
+  assignment_event_id TEXT NOT NULL REFERENCES outcome_review_assignment_events(
+    assignment_event_id
+  ),
+  slot_pk INTEGER NOT NULL REFERENCES outcome_review_slots(slot_pk),
+  reviewer_public_id TEXT NOT NULL REFERENCES outcome_review_reviewer_identities(
+    reviewer_public_id
+  ),
+  actor_public_id TEXT NOT NULL REFERENCES outcome_review_reviewer_identities(
+    reviewer_public_id
+  ),
+  actor_auth_event_id TEXT REFERENCES outcome_review_auth_events(auth_event_id),
+  claim_state TEXT NOT NULL CHECK (
+    claim_state IN ('claimed', 'heartbeat', 'released', 'completed', 'reclaimed')
+  ),
+  supersedes_claim_event_id TEXT REFERENCES outcome_review_claim_events(
+    claim_event_id
+  ),
+  lease_token_sha256 TEXT NOT NULL CHECK (
+    length(lease_token_sha256) = 64
+    AND lease_token_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  attempt_ordinal INTEGER NOT NULL CHECK (attempt_ordinal BETWEEN 1 AND 100),
+  lease_expires_at TEXT NOT NULL CHECK (
+    length(lease_expires_at) = 20
+    AND strftime('%Y-%m-%dT%H:%M:%SZ', lease_expires_at) = lease_expires_at
+    AND unixepoch(lease_expires_at) IS NOT NULL
+  ),
+  recorded_at TEXT NOT NULL CHECK (
+    length(recorded_at) = 20
+    AND strftime('%Y-%m-%dT%H:%M:%SZ', recorded_at) = recorded_at
+    AND unixepoch(recorded_at) IS NOT NULL
+  ),
+  row_semantic_sha256 TEXT NOT NULL CHECK (
+    length(row_semantic_sha256) = 64
+    AND row_semantic_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  CHECK (
+    (claim_state = 'claimed'
+      AND ((supersedes_claim_event_id IS NULL AND attempt_ordinal = 1)
+        OR supersedes_claim_event_id IS NOT NULL)
+      AND actor_public_id = reviewer_public_id
+      AND actor_auth_event_id IS NULL)
+    OR (claim_state IN ('heartbeat', 'released', 'completed')
+      AND supersedes_claim_event_id IS NOT NULL
+      AND actor_public_id = reviewer_public_id
+      AND actor_auth_event_id IS NULL)
+    OR (claim_state = 'reclaimed'
+      AND supersedes_claim_event_id IS NOT NULL
+      AND actor_auth_event_id IS NOT NULL)
+  ),
+  CHECK (
+    (claim_state <> 'reclaimed' AND lease_expires_at > recorded_at)
+    OR (claim_state = 'reclaimed' AND lease_expires_at <= recorded_at)
+  )
+);
+
+CREATE INDEX IF NOT EXISTS idx_outcome_review_claim_current
+  ON outcome_review_claim_events(slot_pk, claim_event_pk);
+CREATE INDEX IF NOT EXISTS idx_outcome_review_claim_supersedes
+  ON outcome_review_claim_events(
+    supersedes_claim_event_id, claim_state, recorded_at, claim_event_pk
+  );
+CREATE UNIQUE INDEX IF NOT EXISTS idx_outcome_review_claim_one_supersession
+  ON outcome_review_claim_events(supersedes_claim_event_id)
+  WHERE supersedes_claim_event_id IS NOT NULL;
+CREATE INDEX IF NOT EXISTS idx_outcome_review_claim_expiry
+  ON outcome_review_claim_events(claim_state, lease_expires_at, claim_event_pk);
+
+CREATE TABLE IF NOT EXISTS outcome_review_decisions (
+  decision_pk INTEGER PRIMARY KEY,
+  decision_id TEXT NOT NULL UNIQUE,
+  task_pk INTEGER NOT NULL REFERENCES outcome_review_tasks(task_pk),
+  slot_pk INTEGER NOT NULL UNIQUE REFERENCES outcome_review_slots(slot_pk),
+  assignment_event_id TEXT NOT NULL UNIQUE REFERENCES outcome_review_assignment_events(
+    assignment_event_id
+  ),
+  claim_event_id TEXT NOT NULL UNIQUE REFERENCES outcome_review_claim_events(
+    claim_event_id
+  ),
+  reviewer_public_id TEXT NOT NULL REFERENCES outcome_review_reviewer_identities(
+    reviewer_public_id
+  ),
+  decision_value TEXT NOT NULL CHECK (
+    decision_value IN (
+      'advance_to_semantic_review', 'exclude_from_semantic_review',
+      'insufficient_evidence', 'support', 'reject', 'needs_more_evidence'
+    )
+  ),
+  evidence_examined_json TEXT NOT NULL CHECK (
+    json_valid(evidence_examined_json)
+    AND json_type(evidence_examined_json) = 'array'
+    AND json_array_length(evidence_examined_json) BETWEEN 1 AND 128
+    AND length(evidence_examined_json) BETWEEN 2 AND 8192
+  ),
+  rationale TEXT NOT NULL CHECK (length(trim(rationale)) BETWEEN 1 AND 4000),
+  decided_at TEXT NOT NULL CHECK (
+    length(decided_at) = 20
+    AND strftime('%Y-%m-%dT%H:%M:%SZ', decided_at) = decided_at
+    AND unixepoch(decided_at) IS NOT NULL
+  ),
+  row_semantic_sha256 TEXT NOT NULL CHECK (
+    length(row_semantic_sha256) = 64
+    AND row_semantic_sha256 NOT GLOB '*[^0-9a-f]*'
+  )
+);
+
+CREATE INDEX IF NOT EXISTS idx_outcome_review_decisions_task_reviewer
+  ON outcome_review_decisions(
+    task_pk, reviewer_public_id, slot_pk, decision_value, decision_pk
+  );
+
+CREATE TABLE IF NOT EXISTS outcome_review_adjudications (
+  adjudication_pk INTEGER PRIMARY KEY,
+  adjudication_id TEXT NOT NULL UNIQUE,
+  task_pk INTEGER NOT NULL UNIQUE REFERENCES outcome_review_tasks(task_pk),
+  primary_decision_id TEXT NOT NULL REFERENCES outcome_review_decisions(decision_id),
+  secondary_decision_id TEXT NOT NULL REFERENCES outcome_review_decisions(decision_id),
+  adjudicator_public_id TEXT NOT NULL REFERENCES outcome_review_reviewer_identities(
+    reviewer_public_id
+  ),
+  auth_event_id TEXT NOT NULL REFERENCES outcome_review_auth_events(auth_event_id),
+  adjudicated_value TEXT NOT NULL CHECK (
+    adjudicated_value IN ('support', 'reject', 'needs_more_evidence')
+  ),
+  evidence_examined_json TEXT NOT NULL CHECK (
+    json_valid(evidence_examined_json)
+    AND json_type(evidence_examined_json) = 'array'
+    AND json_array_length(evidence_examined_json) BETWEEN 1 AND 128
+    AND length(evidence_examined_json) BETWEEN 2 AND 8192
+  ),
+  rationale TEXT NOT NULL CHECK (length(trim(rationale)) BETWEEN 1 AND 4000),
+  adjudicated_at TEXT NOT NULL CHECK (
+    length(adjudicated_at) = 20
+    AND strftime('%Y-%m-%dT%H:%M:%SZ', adjudicated_at) = adjudicated_at
+    AND unixepoch(adjudicated_at) IS NOT NULL
+  ),
+  row_semantic_sha256 TEXT NOT NULL CHECK (
+    length(row_semantic_sha256) = 64
+    AND row_semantic_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  CHECK (primary_decision_id <> secondary_decision_id)
+);
+
+CREATE TABLE IF NOT EXISTS outcome_review_semantic_eligibility_events (
+  eligibility_event_id TEXT NOT NULL PRIMARY KEY,
+  task_pk INTEGER NOT NULL UNIQUE REFERENCES outcome_review_tasks(task_pk),
+  eligibility_state TEXT NOT NULL CHECK (eligibility_state = 'eligible'),
+  primary_decision_id TEXT REFERENCES outcome_review_decisions(decision_id),
+  secondary_decision_id TEXT REFERENCES outcome_review_decisions(decision_id),
+  adjudication_id TEXT REFERENCES outcome_review_adjudications(adjudication_id),
+  computed_at TEXT NOT NULL CHECK (
+    length(computed_at) = 20
+    AND strftime('%Y-%m-%dT%H:%M:%SZ', computed_at) = computed_at
+    AND unixepoch(computed_at) IS NOT NULL
+  ),
+  row_semantic_sha256 TEXT NOT NULL CHECK (
+    length(row_semantic_sha256) = 64
+    AND row_semantic_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  CHECK (
+    (primary_decision_id IS NOT NULL AND secondary_decision_id IS NOT NULL
+      AND adjudication_id IS NULL AND primary_decision_id <> secondary_decision_id)
+    OR
+    (primary_decision_id IS NULL AND secondary_decision_id IS NULL
+      AND adjudication_id IS NOT NULL)
+  )
+);
+
+CREATE TABLE IF NOT EXISTS outcome_review_semantic_promotions (
+  promotion_id TEXT NOT NULL PRIMARY KEY,
+  task_pk INTEGER NOT NULL UNIQUE REFERENCES outcome_review_tasks(task_pk),
+  promotion_authority_public_id TEXT NOT NULL REFERENCES outcome_review_reviewer_identities(
+    reviewer_public_id
+  ),
+  auth_event_id TEXT NOT NULL REFERENCES outcome_review_auth_events(auth_event_id),
+  eligibility_event_id TEXT NOT NULL UNIQUE REFERENCES outcome_review_semantic_eligibility_events(
+    eligibility_event_id
+  ),
+  selected_value TEXT NOT NULL CHECK (selected_value = 'support'),
+  selected_evidence_level TEXT NOT NULL CHECK (selected_evidence_level = 'L1'),
+  promoted_at TEXT NOT NULL CHECK (
+    length(promoted_at) = 20
+    AND strftime('%Y-%m-%dT%H:%M:%SZ', promoted_at) = promoted_at
+    AND unixepoch(promoted_at) IS NOT NULL
+  ),
+  row_semantic_sha256 TEXT NOT NULL CHECK (
+    length(row_semantic_sha256) = 64
+    AND row_semantic_sha256 NOT GLOB '*[^0-9a-f]*'
+  )
+);
+
+-- Cross-artifact binding to a real outcome_link_releases row and one real
+-- outcome_link_release_memberships row. A future operational validator must
+-- resolve these identifiers against the pinned source database before it can
+-- root the operational snapshot.
+CREATE TABLE IF NOT EXISTS outcome_review_release_bindings (
+  release_binding_id TEXT NOT NULL PRIMARY KEY,
+  task_pk INTEGER NOT NULL UNIQUE REFERENCES outcome_review_tasks(task_pk),
+  source_database_sha256 TEXT NOT NULL CHECK (
+    length(source_database_sha256) = 64
+    AND source_database_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  outcome_link_release_id TEXT NOT NULL,
+  outcome_link_release_membership_id TEXT NOT NULL,
+  outcome_link_version_id TEXT NOT NULL,
+  release_descriptor_sha256 TEXT NOT NULL CHECK (
+    length(release_descriptor_sha256) = 64
+    AND release_descriptor_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  membership_row_sha256 TEXT NOT NULL CHECK (
+    length(membership_row_sha256) = 64
+    AND membership_row_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  verified_at TEXT NOT NULL CHECK (
+    length(verified_at) = 20
+    AND strftime('%Y-%m-%dT%H:%M:%SZ', verified_at) = verified_at
+    AND unixepoch(verified_at) IS NOT NULL
+  ),
+  row_semantic_sha256 TEXT NOT NULL CHECK (
+    length(row_semantic_sha256) = 64
+    AND row_semantic_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  UNIQUE (
+    source_database_sha256, outcome_link_release_id,
+    outcome_link_release_membership_id
+  )
+);
+
+CREATE TABLE IF NOT EXISTS outcome_review_publication_eligibility_events (
+  publication_eligibility_event_id TEXT NOT NULL PRIMARY KEY,
+  task_pk INTEGER NOT NULL UNIQUE REFERENCES outcome_review_tasks(task_pk),
+  promotion_id TEXT NOT NULL UNIQUE REFERENCES outcome_review_semantic_promotions(
+    promotion_id
+  ),
+  release_binding_id TEXT NOT NULL UNIQUE REFERENCES outcome_review_release_bindings(
+    release_binding_id
+  ),
+  eligibility_state TEXT NOT NULL CHECK (eligibility_state = 'eligible'),
+  computed_at TEXT NOT NULL CHECK (
+    length(computed_at) = 20
+    AND strftime('%Y-%m-%dT%H:%M:%SZ', computed_at) = computed_at
+    AND unixepoch(computed_at) IS NOT NULL
+  ),
+  row_semantic_sha256 TEXT NOT NULL CHECK (
+    length(row_semantic_sha256) = 64
+    AND row_semantic_sha256 NOT GLOB '*[^0-9a-f]*'
+  )
+);
+
+CREATE TABLE IF NOT EXISTS outcome_review_publication_events (
+  publication_event_id TEXT NOT NULL PRIMARY KEY,
+  task_pk INTEGER NOT NULL REFERENCES outcome_review_tasks(task_pk),
+  promotion_id TEXT NOT NULL REFERENCES outcome_review_semantic_promotions(promotion_id),
+  publication_eligibility_event_id TEXT NOT NULL UNIQUE
+    REFERENCES outcome_review_publication_eligibility_events(
+      publication_eligibility_event_id
+    ),
+  release_binding_id TEXT NOT NULL UNIQUE REFERENCES outcome_review_release_bindings(
+    release_binding_id
+  ),
+  publisher_public_id TEXT NOT NULL REFERENCES outcome_review_reviewer_identities(
+    reviewer_public_id
+  ),
+  auth_event_id TEXT NOT NULL REFERENCES outcome_review_auth_events(auth_event_id),
+  outcome_link_release_id TEXT NOT NULL,
+  outcome_link_release_membership_id TEXT NOT NULL,
+  published_at TEXT NOT NULL CHECK (
+    length(published_at) = 20
+    AND strftime('%Y-%m-%dT%H:%M:%SZ', published_at) = published_at
+    AND unixepoch(published_at) IS NOT NULL
+  ),
+  row_semantic_sha256 TEXT NOT NULL CHECK (
+    length(row_semantic_sha256) = 64
+    AND row_semantic_sha256 NOT GLOB '*[^0-9a-f]*'
+  )
+);
+
+CREATE TABLE IF NOT EXISTS outcome_review_operation_requests (
+  idempotency_key TEXT NOT NULL PRIMARY KEY CHECK (
+    length(idempotency_key) BETWEEN 16 AND 200
+  ),
+  operation_kind TEXT NOT NULL CHECK (
+    operation_kind IN (
+      'trust_root', 'reviewer_identity', 'authorization', 'conflict',
+      'assignment', 'claim', 'decision', 'adjudication'
+    )
+  ),
+  payload_sha256 TEXT NOT NULL CHECK (
+    length(payload_sha256) = 64 AND payload_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  target_table TEXT NOT NULL CHECK (
+    target_table IN (
+      'outcome_review_trust_roots', 'outcome_review_reviewer_identities',
+      'outcome_review_auth_events', 'outcome_review_conflict_events',
+      'outcome_review_assignment_events', 'outcome_review_claim_events',
+      'outcome_review_decisions', 'outcome_review_adjudications'
+    )
+  ),
+  target_row_id TEXT NOT NULL CHECK (length(target_row_id) BETWEEN 1 AND 256),
+  applied_at TEXT NOT NULL CHECK (
+    length(applied_at) = 20
+    AND strftime('%Y-%m-%dT%H:%M:%SZ', applied_at) = applied_at
+    AND unixepoch(applied_at) IS NOT NULL
+  ),
+  row_semantic_sha256 TEXT NOT NULL CHECK (
+    length(row_semantic_sha256) = 64
+    AND row_semantic_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  CHECK (
+    (operation_kind = 'trust_root'
+      AND target_table = 'outcome_review_trust_roots')
+    OR (operation_kind = 'reviewer_identity'
+      AND target_table = 'outcome_review_reviewer_identities')
+    OR (operation_kind = 'authorization'
+      AND target_table = 'outcome_review_auth_events')
+    OR (operation_kind = 'conflict'
+      AND target_table = 'outcome_review_conflict_events')
+    OR (operation_kind = 'assignment'
+      AND target_table = 'outcome_review_assignment_events')
+    OR (operation_kind = 'claim'
+      AND target_table = 'outcome_review_claim_events')
+    OR (operation_kind = 'decision'
+      AND target_table = 'outcome_review_decisions')
+    OR (operation_kind = 'adjudication'
+      AND target_table = 'outcome_review_adjudications')
+  )
+);
+
+CREATE TABLE IF NOT EXISTS outcome_review_operational_audit_events (
+  operational_audit_pk INTEGER PRIMARY KEY,
+  operational_audit_id TEXT NOT NULL UNIQUE,
+  idempotency_key TEXT NOT NULL UNIQUE REFERENCES outcome_review_operation_requests(
+    idempotency_key
+  ),
+  operation_kind TEXT NOT NULL,
+  target_table TEXT NOT NULL,
+  target_row_id TEXT NOT NULL,
+  payload_sha256 TEXT NOT NULL CHECK (
+    length(payload_sha256) = 64 AND payload_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  previous_event_sha256 TEXT NOT NULL CHECK (
+    length(previous_event_sha256) = 64
+    AND previous_event_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  actor_public_id TEXT NOT NULL REFERENCES outcome_review_reviewer_identities(
+    reviewer_public_id
+  ),
+  occurred_at TEXT NOT NULL CHECK (
+    length(occurred_at) = 20
+    AND strftime('%Y-%m-%dT%H:%M:%SZ', occurred_at) = occurred_at
+    AND unixepoch(occurred_at) IS NOT NULL
+  ),
+  event_sha256 TEXT NOT NULL UNIQUE CHECK (
+    length(event_sha256) = 64 AND event_sha256 NOT GLOB '*[^0-9a-f]*'
+  )
+);
+
+CREATE INDEX IF NOT EXISTS idx_outcome_review_operational_audit_chain
+  ON outcome_review_operational_audit_events(
+    operational_audit_pk, previous_event_sha256, event_sha256
+  );
+
+CREATE TABLE IF NOT EXISTS outcome_review_audit_events (
+  audit_event_pk INTEGER PRIMARY KEY,
+  audit_event_id TEXT NOT NULL UNIQUE,
+  pipeline_key TEXT NOT NULL REFERENCES outcome_review_control_meta(pipeline_key),
+  event_kind TEXT NOT NULL CHECK (
+    event_kind IN ('control_initialized', 'discovery_batch_committed')
+  ),
+  batch_ordinal INTEGER NOT NULL CHECK (batch_ordinal >= 0),
+  source_rows_committed INTEGER NOT NULL CHECK (source_rows_committed >= 0),
+  slots_committed INTEGER NOT NULL CHECK (slots_committed >= 0),
+  previous_event_sha256 TEXT NOT NULL CHECK (
+    length(previous_event_sha256) = 64
+    AND previous_event_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  event_payload_json TEXT NOT NULL CHECK (
+    json_valid(event_payload_json)
+    AND json_type(event_payload_json) = 'object'
+    AND length(event_payload_json) BETWEEN 2 AND 16384
+  ),
+  actor_kind TEXT NOT NULL CHECK (actor_kind = 'system_materializer'),
+  actor_id TEXT NOT NULL CHECK (
+    actor_id = 'vclc:outcome-review-control-materializer-c2c-v1'
+  ),
+  snapshot_effective_at TEXT NOT NULL CHECK (
+    length(snapshot_effective_at) = 20
+    AND strftime('%Y-%m-%dT%H:%M:%SZ', snapshot_effective_at)
+      = snapshot_effective_at
+    AND unixepoch(snapshot_effective_at) IS NOT NULL
+  ),
+  event_sha256 TEXT NOT NULL CHECK (
+    length(event_sha256) = 64 AND event_sha256 NOT GLOB '*[^0-9a-f]*'
+  ),
+  UNIQUE (pipeline_key, batch_ordinal)
+);
+
+CREATE INDEX IF NOT EXISTS idx_outcome_review_audit_chain
+  ON outcome_review_audit_events(pipeline_key, audit_event_pk);
+
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_control_checkpoint_roots_immutable
+BEFORE UPDATE ON outcome_review_control_checkpoints
+WHEN OLD.pipeline_key IS NOT NEW.pipeline_key
+  OR OLD.stage IS NOT NEW.stage
+  OR OLD.checkpoint_contract_version IS NOT NEW.checkpoint_contract_version
+  OR OLD.config_sha256 IS NOT NEW.config_sha256
+  OR OLD.source_root_sha256 IS NOT NEW.source_root_sha256
+  OR OLD.schema_root_sha256 IS NOT NEW.schema_root_sha256
+BEGIN
+  SELECT RAISE(ABORT, 'review control checkpoint identity roots are immutable');
+END;
+
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_control_checkpoint_completed_immutable
+BEFORE UPDATE ON outcome_review_control_checkpoints
+WHEN OLD.completed = 1
+BEGIN
+  SELECT RAISE(ABORT, 'completed review control checkpoint is immutable');
+END;
+
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_control_checkpoint_no_delete
+BEFORE DELETE ON outcome_review_control_checkpoints BEGIN
+  SELECT RAISE(ABORT, 'review control checkpoints cannot be deleted');
+END;
+
+-- The canonical C2C database is a capacity root, not a mutable operational
+-- database. Every human or release event therefore requires a separate
+-- unpublished operational working database from its first insert.
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_trust_roots_snapshot_guard
+BEFORE INSERT ON outcome_review_trust_roots
+WHEN NOT EXISTS (
+  SELECT 1 FROM outcome_review_control_meta
+  WHERE artifact_scope = 'operational_working'
+    AND operational_state = 'working_unpublished'
+)
+BEGIN
+  SELECT RAISE(ABORT, 'trust roots require an unpublished operational working database');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_reviewer_identities_snapshot_guard
+BEFORE INSERT ON outcome_review_reviewer_identities
+WHEN NOT EXISTS (
+  SELECT 1 FROM outcome_review_control_meta
+  WHERE artifact_scope = 'operational_working'
+    AND operational_state = 'working_unpublished'
+)
+BEGIN
+  SELECT RAISE(ABORT, 'reviewer identities require an unpublished operational working database');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_auth_events_snapshot_guard
+BEFORE INSERT ON outcome_review_auth_events
+WHEN NOT EXISTS (
+  SELECT 1 FROM outcome_review_control_meta
+  WHERE artifact_scope = 'operational_working'
+    AND operational_state = 'working_unpublished'
+)
+BEGIN
+  SELECT RAISE(ABORT, 'authorization events require an unpublished operational working database');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_conflict_events_snapshot_guard
+BEFORE INSERT ON outcome_review_conflict_events
+WHEN NOT EXISTS (
+  SELECT 1 FROM outcome_review_control_meta
+  WHERE artifact_scope = 'operational_working'
+    AND operational_state = 'working_unpublished'
+)
+BEGIN
+  SELECT RAISE(ABORT, 'conflict events require an unpublished operational working database');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_assignment_events_snapshot_guard
+BEFORE INSERT ON outcome_review_assignment_events
+WHEN NOT EXISTS (
+  SELECT 1 FROM outcome_review_control_meta
+  WHERE artifact_scope = 'operational_working'
+    AND operational_state = 'working_unpublished'
+)
+BEGIN
+  SELECT RAISE(ABORT, 'assignment events require an unpublished operational working database');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_claim_events_snapshot_guard
+BEFORE INSERT ON outcome_review_claim_events
+WHEN NOT EXISTS (
+  SELECT 1 FROM outcome_review_control_meta
+  WHERE artifact_scope = 'operational_working'
+    AND operational_state = 'working_unpublished'
+)
+BEGIN
+  SELECT RAISE(ABORT, 'claim events require an unpublished operational working database');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_decisions_snapshot_guard
+BEFORE INSERT ON outcome_review_decisions
+WHEN NOT EXISTS (
+  SELECT 1 FROM outcome_review_control_meta
+  WHERE artifact_scope = 'operational_working'
+    AND operational_state = 'working_unpublished'
+)
+BEGIN
+  SELECT RAISE(ABORT, 'review decisions require an unpublished operational working database');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_adjudications_snapshot_guard
+BEFORE INSERT ON outcome_review_adjudications
+WHEN NOT EXISTS (
+  SELECT 1 FROM outcome_review_control_meta
+  WHERE artifact_scope = 'operational_working'
+    AND operational_state = 'working_unpublished'
+)
+BEGIN
+  SELECT RAISE(ABORT, 'adjudications require an unpublished operational working database');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_semantic_eligibility_snapshot_guard
+BEFORE INSERT ON outcome_review_semantic_eligibility_events
+WHEN NOT EXISTS (
+  SELECT 1 FROM outcome_review_control_meta
+  WHERE artifact_scope = 'operational_working'
+    AND operational_state = 'working_unpublished'
+)
+BEGIN
+  SELECT RAISE(ABORT, 'semantic eligibility requires an unpublished operational working database');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_semantic_promotions_snapshot_guard
+BEFORE INSERT ON outcome_review_semantic_promotions
+WHEN NOT EXISTS (
+  SELECT 1 FROM outcome_review_control_meta
+  WHERE artifact_scope = 'operational_working'
+    AND operational_state = 'working_unpublished'
+)
+BEGIN
+  SELECT RAISE(ABORT, 'semantic promotion requires an unpublished operational working database');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_release_bindings_snapshot_guard
+BEFORE INSERT ON outcome_review_release_bindings
+WHEN NOT EXISTS (
+  SELECT 1 FROM outcome_review_control_meta
+  WHERE artifact_scope = 'operational_working'
+    AND operational_state = 'working_unpublished'
+)
+BEGIN
+  SELECT RAISE(ABORT, 'release bindings require an unpublished operational working database');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_publication_eligibility_snapshot_guard
+BEFORE INSERT ON outcome_review_publication_eligibility_events
+WHEN NOT EXISTS (
+  SELECT 1 FROM outcome_review_control_meta
+  WHERE artifact_scope = 'operational_working'
+    AND operational_state = 'working_unpublished'
+)
+BEGIN
+  SELECT RAISE(ABORT, 'publication eligibility requires an unpublished operational working database');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_publication_events_snapshot_guard
+BEFORE INSERT ON outcome_review_publication_events
+WHEN NOT EXISTS (
+  SELECT 1 FROM outcome_review_control_meta
+  WHERE artifact_scope = 'operational_working'
+    AND operational_state = 'working_unpublished'
+)
+BEGIN
+  SELECT RAISE(ABORT, 'publication events require an unpublished operational working database');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_operation_requests_snapshot_guard
+BEFORE INSERT ON outcome_review_operation_requests
+WHEN NOT EXISTS (
+  SELECT 1 FROM outcome_review_control_meta
+  WHERE artifact_scope = 'operational_working'
+    AND operational_state = 'working_unpublished'
+)
+BEGIN
+  SELECT RAISE(ABORT, 'operation requests require an unpublished operational working database');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_operation_request_target_guard
+BEFORE INSERT ON outcome_review_operation_requests
+BEGIN
+  SELECT CASE WHEN NOT (
+    (NEW.target_table = 'outcome_review_trust_roots' AND EXISTS (
+      SELECT 1 FROM outcome_review_trust_roots target
+      WHERE target.trust_root_id = NEW.target_row_id
+        AND target.row_semantic_sha256 = NEW.row_semantic_sha256
+    ))
+    OR (NEW.target_table = 'outcome_review_reviewer_identities' AND EXISTS (
+      SELECT 1 FROM outcome_review_reviewer_identities target
+      WHERE target.reviewer_public_id = NEW.target_row_id
+        AND target.row_semantic_sha256 = NEW.row_semantic_sha256
+    ))
+    OR (NEW.target_table = 'outcome_review_auth_events' AND EXISTS (
+      SELECT 1 FROM outcome_review_auth_events target
+      WHERE target.auth_event_id = NEW.target_row_id
+        AND target.row_semantic_sha256 = NEW.row_semantic_sha256
+    ))
+    OR (NEW.target_table = 'outcome_review_conflict_events' AND EXISTS (
+      SELECT 1 FROM outcome_review_conflict_events target
+      WHERE target.conflict_event_id = NEW.target_row_id
+        AND target.row_semantic_sha256 = NEW.row_semantic_sha256
+    ))
+    OR (NEW.target_table = 'outcome_review_assignment_events' AND EXISTS (
+      SELECT 1 FROM outcome_review_assignment_events target
+      WHERE target.assignment_event_id = NEW.target_row_id
+        AND target.row_semantic_sha256 = NEW.row_semantic_sha256
+    ))
+    OR (NEW.target_table = 'outcome_review_claim_events' AND EXISTS (
+      SELECT 1 FROM outcome_review_claim_events target
+      WHERE target.claim_event_id = NEW.target_row_id
+        AND target.row_semantic_sha256 = NEW.row_semantic_sha256
+    ))
+    OR (NEW.target_table = 'outcome_review_decisions' AND EXISTS (
+      SELECT 1 FROM outcome_review_decisions target
+      WHERE target.decision_id = NEW.target_row_id
+        AND target.row_semantic_sha256 = NEW.row_semantic_sha256
+    ))
+    OR (NEW.target_table = 'outcome_review_adjudications' AND EXISTS (
+      SELECT 1 FROM outcome_review_adjudications target
+      WHERE target.adjudication_id = NEW.target_row_id
+        AND target.row_semantic_sha256 = NEW.row_semantic_sha256
+    ))
+  ) THEN RAISE(ABORT, 'operation request does not bind its exact target row') END;
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_operational_audit_snapshot_guard
+BEFORE INSERT ON outcome_review_operational_audit_events
+WHEN NOT EXISTS (
+  SELECT 1 FROM outcome_review_control_meta
+  WHERE artifact_scope = 'operational_working'
+    AND operational_state = 'working_unpublished'
+)
+BEGIN
+  SELECT RAISE(ABORT, 'operational audit requires an unpublished operational working database');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_operational_audit_chain_guard
+BEFORE INSERT ON outcome_review_operational_audit_events
+BEGIN
+  SELECT CASE WHEN NEW.operational_audit_pk <> (
+    SELECT COALESCE(MAX(operational_audit_pk), 0) + 1
+    FROM outcome_review_operational_audit_events
+  ) THEN RAISE(ABORT, 'operational audit ordinal is not contiguous') END;
+  SELECT CASE WHEN NEW.previous_event_sha256 <> COALESCE(
+    (
+      SELECT event_sha256 FROM outcome_review_operational_audit_events
+      ORDER BY operational_audit_pk DESC LIMIT 1
+    ),
+    'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'
+  ) THEN RAISE(ABORT, 'operational audit chain is discontinuous') END;
+  SELECT CASE WHEN NEW.occurred_at < COALESCE(
+    (
+      SELECT occurred_at FROM outcome_review_operational_audit_events
+      ORDER BY operational_audit_pk DESC LIMIT 1
+    ),
+    '0000-01-01T00:00:00Z'
+  ) THEN RAISE(ABORT, 'operational audit chronology moved backwards') END;
+  SELECT CASE WHEN NOT EXISTS (
+    SELECT 1 FROM outcome_review_operation_requests request
+    WHERE request.idempotency_key = NEW.idempotency_key
+      AND request.operation_kind = NEW.operation_kind
+      AND request.target_table = NEW.target_table
+      AND request.target_row_id = NEW.target_row_id
+      AND request.payload_sha256 = NEW.payload_sha256
+      AND request.applied_at = NEW.occurred_at
+  ) THEN RAISE(ABORT, 'operational audit does not bind its idempotent request') END;
+  SELECT CASE WHEN NOT (
+    (NEW.target_table = 'outcome_review_claim_events' AND EXISTS (
+      SELECT 1 FROM outcome_review_claim_events target
+      WHERE target.claim_event_id = NEW.target_row_id
+        AND target.actor_public_id = NEW.actor_public_id
+    ))
+    OR (NEW.target_table = 'outcome_review_decisions' AND EXISTS (
+      SELECT 1 FROM outcome_review_decisions target
+      WHERE target.decision_id = NEW.target_row_id
+        AND target.reviewer_public_id = NEW.actor_public_id
+    ))
+    OR NEW.target_table NOT IN (
+      'outcome_review_claim_events', 'outcome_review_decisions'
+    )
+  ) THEN RAISE(ABORT, 'operational audit actor does not match the target event') END;
+END;
+
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_reviewer_identity_trust_guard
+BEFORE INSERT ON outcome_review_reviewer_identities
+BEGIN
+  SELECT CASE WHEN NOT EXISTS (
+    SELECT 1 FROM outcome_review_trust_roots root
+    WHERE root.trust_root_id = NEW.verified_by_trust_root_id
+      AND root.effective_at <= NEW.registered_at
+      AND (root.expires_at IS NULL OR root.expires_at > NEW.registered_at)
+  ) THEN RAISE(ABORT, 'reviewer identity lacks an active real trust root') END;
+END;
+
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_auth_grant_guard
+BEFORE INSERT ON outcome_review_auth_events
+WHEN NEW.auth_state = 'granted'
+BEGIN
+  SELECT CASE WHEN NOT EXISTS (
+    SELECT 1
+    FROM outcome_review_trust_roots root
+    JOIN outcome_review_reviewer_identities issuer
+      ON issuer.reviewer_public_id = NEW.issuer_public_id
+    JOIN outcome_review_reviewer_identities target
+      ON target.reviewer_public_id = NEW.reviewer_public_id
+    WHERE root.trust_root_id = NEW.issuer_trust_root_id
+      AND root.authority_public_id = issuer.reviewer_public_id
+      AND root.identity_provider = issuer.identity_provider
+      AND root.provider_subject_sha256 = issuer.provider_subject_sha256
+      AND issuer.registered_at <= NEW.effective_at
+      AND target.registered_at <= NEW.effective_at
+      AND root.effective_at <= NEW.effective_at
+      AND (root.expires_at IS NULL OR root.expires_at > NEW.effective_at)
+      AND (
+        root.expires_at IS NULL
+        OR (NEW.expires_at IS NOT NULL AND NEW.expires_at <= root.expires_at)
+      )
+  ) THEN RAISE(ABORT, 'authorization grant lacks pinned trust-root authority') END;
+END;
+
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_auth_supersession_guard
+BEFORE INSERT ON outcome_review_auth_events
+WHEN NEW.auth_state = 'revoked'
+BEGIN
+  SELECT CASE WHEN NEW.effective_at < COALESCE((
+    SELECT occurred_at FROM outcome_review_operational_audit_events
+    ORDER BY operational_audit_pk DESC LIMIT 1
+  ), '0000-01-01T00:00:00Z')
+    THEN RAISE(ABORT, 'authorization revocation cannot be retroactive') END;
+  SELECT CASE WHEN NOT EXISTS (
+    SELECT 1
+    FROM outcome_review_trust_roots root
+    JOIN outcome_review_reviewer_identities issuer
+      ON issuer.reviewer_public_id = NEW.issuer_public_id
+    JOIN outcome_review_reviewer_identities target
+      ON target.reviewer_public_id = NEW.reviewer_public_id
+    WHERE root.trust_root_id = NEW.issuer_trust_root_id
+      AND root.authority_public_id = issuer.reviewer_public_id
+      AND root.identity_provider = issuer.identity_provider
+      AND root.provider_subject_sha256 = issuer.provider_subject_sha256
+      AND issuer.registered_at <= NEW.effective_at
+      AND target.registered_at <= NEW.effective_at
+      AND root.effective_at <= NEW.effective_at
+      AND (root.expires_at IS NULL OR root.expires_at > NEW.effective_at)
+  ) THEN RAISE(ABORT, 'authorization revocation lacks pinned trust-root authority') END;
+  SELECT CASE WHEN NOT EXISTS (
+    SELECT 1 FROM outcome_review_auth_events granted
+    WHERE granted.auth_event_id = NEW.supersedes_auth_event_id
+      AND granted.auth_state = 'granted'
+      AND granted.reviewer_public_id = NEW.reviewer_public_id
+      AND granted.reviewer_role = NEW.reviewer_role
+      AND granted.cohort_id IS NEW.cohort_id
+      AND granted.effective_at <= NEW.effective_at
+      AND NOT EXISTS (
+        SELECT 1 FROM outcome_review_auth_events prior_revocation
+        WHERE prior_revocation.supersedes_auth_event_id = granted.auth_event_id
+          AND prior_revocation.auth_state = 'revoked'
+      )
+  ) THEN RAISE(ABORT, 'authorization revocation must supersede matching active grant') END;
+END;
+
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_conflict_supersession_guard
+BEFORE INSERT ON outcome_review_conflict_events
+WHEN NEW.conflict_state = 'cleared'
+BEGIN
+  SELECT CASE WHEN NOT EXISTS (
+    SELECT 1 FROM outcome_review_conflict_events declared
+    WHERE declared.conflict_event_id = NEW.supersedes_conflict_event_id
+      AND declared.conflict_state = 'declared'
+      AND declared.reviewer_public_id = NEW.reviewer_public_id
+      AND declared.cohort_id = NEW.cohort_id
+      AND declared.task_pk IS NEW.task_pk
+      AND declared.conflict_kind = NEW.conflict_kind
+      AND declared.recorded_at <= NEW.recorded_at
+      AND NOT EXISTS (
+        SELECT 1 FROM outcome_review_conflict_events prior_clearance
+        WHERE prior_clearance.supersedes_conflict_event_id = declared.conflict_event_id
+          AND prior_clearance.conflict_state = 'cleared'
+      )
+  ) THEN RAISE(ABORT, 'conflict clearance must supersede matching active declaration') END;
+END;
+
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_conflict_task_cohort_guard
+BEFORE INSERT ON outcome_review_conflict_events
+BEGIN
+  SELECT CASE WHEN NEW.recorded_at < COALESCE((
+    SELECT occurred_at FROM outcome_review_operational_audit_events
+    ORDER BY operational_audit_pk DESC LIMIT 1
+  ), '0000-01-01T00:00:00Z')
+    THEN RAISE(ABORT, 'conflict event cannot be retroactive') END;
+  SELECT CASE WHEN NOT EXISTS (
+    SELECT 1 FROM outcome_review_reviewer_identities reviewer
+    WHERE reviewer.reviewer_public_id = NEW.reviewer_public_id
+      AND reviewer.registered_at <= NEW.recorded_at
+  ) THEN RAISE(ABORT, 'conflict predates reviewer registration') END;
+  SELECT CASE WHEN NOT EXISTS (
+    SELECT 1 FROM outcome_review_tasks task
+    WHERE task.task_pk = NEW.task_pk AND task.cohort_id = NEW.cohort_id
+  ) AND NEW.task_pk IS NOT NULL
+    THEN RAISE(ABORT, 'task-scoped conflict must match the task cohort') END;
+END;
+
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_assignment_release_guard
+BEFORE INSERT ON outcome_review_assignment_events
+WHEN NEW.assignment_state = 'released'
+BEGIN
+  SELECT CASE WHEN NEW.recorded_at < COALESCE((
+    SELECT occurred_at FROM outcome_review_operational_audit_events
+    ORDER BY operational_audit_pk DESC LIMIT 1
+  ), '0000-01-01T00:00:00Z')
+    THEN RAISE(ABORT, 'assignment release cannot be retroactive') END;
+  SELECT CASE WHEN NOT EXISTS (
+    SELECT 1 FROM outcome_review_assignment_events assigned
+    WHERE assigned.assignment_event_id = NEW.supersedes_assignment_event_id
+      AND assigned.assignment_state = 'assigned'
+      AND assigned.slot_pk = NEW.slot_pk
+      AND assigned.reviewer_public_id = NEW.reviewer_public_id
+      AND assigned.auth_event_id = NEW.auth_event_id
+      AND assigned.recorded_at <= NEW.recorded_at
+      AND NOT EXISTS (
+        SELECT 1 FROM outcome_review_assignment_events prior_release
+        WHERE prior_release.supersedes_assignment_event_id = assigned.assignment_event_id
+          AND prior_release.assignment_state = 'released'
+      )
+  ) THEN RAISE(ABORT, 'assignment release must supersede matching active assignment') END;
+END;
+
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_assignment_guard
+BEFORE INSERT ON outcome_review_assignment_events
+WHEN NEW.assignment_state = 'assigned'
+BEGIN
+  SELECT CASE WHEN EXISTS (
+    SELECT 1 FROM outcome_review_decisions decision
+    WHERE decision.slot_pk = NEW.slot_pk
+  ) OR EXISTS (
+    SELECT 1 FROM outcome_review_claim_events completed
+    WHERE completed.slot_pk = NEW.slot_pk
+      AND completed.claim_state = 'completed'
+  ) THEN RAISE(ABORT, 'completed review slots cannot be reassigned') END;
+  SELECT CASE WHEN NOT EXISTS (
+    SELECT 1
+    FROM outcome_review_slots s
+    JOIN outcome_review_tasks t USING(task_pk)
+    JOIN outcome_review_cohorts c USING(cohort_id)
+    JOIN outcome_review_auth_events a ON a.auth_event_id = NEW.auth_event_id
+    WHERE s.slot_pk = NEW.slot_pk
+      AND t.assignment_eligible = 1
+      AND a.reviewer_public_id = NEW.reviewer_public_id
+      AND a.reviewer_role = s.required_reviewer_role
+      AND (a.cohort_id IS NULL OR a.cohort_id = c.cohort_id)
+      AND a.auth_state = 'granted'
+      AND a.effective_at <= NEW.recorded_at
+      AND (a.expires_at IS NULL OR a.expires_at > NEW.recorded_at)
+      AND NOT EXISTS (
+        SELECT 1 FROM outcome_review_auth_events revoked
+        WHERE revoked.supersedes_auth_event_id = a.auth_event_id
+          AND revoked.auth_state = 'revoked'
+          AND revoked.effective_at <= NEW.recorded_at
+      )
+  ) THEN RAISE(ABORT, 'review assignment lacks active scoped authorization') END;
+  SELECT CASE WHEN EXISTS (
+    SELECT 1
+    FROM outcome_review_conflict_events conflict
+    JOIN outcome_review_slots selected_slot ON selected_slot.slot_pk = NEW.slot_pk
+    JOIN outcome_review_tasks task ON task.task_pk = selected_slot.task_pk
+    WHERE conflict.reviewer_public_id = NEW.reviewer_public_id
+      AND conflict.cohort_id = task.cohort_id
+      AND (conflict.task_pk IS NULL OR conflict.task_pk = task.task_pk)
+      AND conflict.conflict_state = 'declared'
+      AND conflict.recorded_at <= NEW.recorded_at
+      AND NOT EXISTS (
+        SELECT 1 FROM outcome_review_conflict_events cleared
+        WHERE cleared.supersedes_conflict_event_id = conflict.conflict_event_id
+          AND cleared.conflict_state = 'cleared'
+          AND cleared.recorded_at <= NEW.recorded_at
+      )
+  ) THEN RAISE(ABORT, 'review assignment conflicts with declared interest') END;
+  SELECT CASE WHEN EXISTS (
+    SELECT 1
+    FROM outcome_review_assignment_events prior
+    WHERE prior.slot_pk = NEW.slot_pk
+      AND prior.assignment_state = 'assigned'
+      AND NOT EXISTS (
+        SELECT 1 FROM outcome_review_assignment_events released
+        WHERE released.supersedes_assignment_event_id = prior.assignment_event_id
+          AND released.assignment_state = 'released'
+          AND released.recorded_at <= NEW.recorded_at
+      )
+  ) THEN RAISE(ABORT, 'review slot already has an active assignment') END;
+  SELECT CASE WHEN EXISTS (
+    SELECT 1
+    FROM outcome_review_slots requested
+    JOIN outcome_review_slots peer ON peer.task_pk = requested.task_pk
+    JOIN outcome_review_assignment_events assigned ON assigned.slot_pk = peer.slot_pk
+    JOIN outcome_review_reviewer_identities requested_identity
+      ON requested_identity.reviewer_public_id = NEW.reviewer_public_id
+    JOIN outcome_review_reviewer_identities assigned_identity
+      ON assigned_identity.reviewer_public_id = assigned.reviewer_public_id
+    WHERE requested.slot_pk = NEW.slot_pk
+      AND requested.review_dimension = 'semantic'
+      AND peer.slot_pk <> requested.slot_pk
+      AND assigned.assignment_state = 'assigned'
+      AND requested_identity.human_identity_sha256
+        = assigned_identity.human_identity_sha256
+      AND NOT EXISTS (
+        SELECT 1 FROM outcome_review_assignment_events released
+        WHERE released.supersedes_assignment_event_id = assigned.assignment_event_id
+          AND released.assignment_state = 'released'
+          AND released.recorded_at <= NEW.recorded_at
+      )
+  ) THEN RAISE(ABORT, 'dual semantic review requires distinct humans') END;
+END;
+
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_claim_guard
+BEFORE INSERT ON outcome_review_claim_events
+BEGIN
+  SELECT CASE WHEN NEW.supersedes_claim_event_id IS NOT NULL
+    AND NEW.recorded_at < COALESCE((
+      SELECT occurred_at FROM outcome_review_operational_audit_events
+      ORDER BY operational_audit_pk DESC LIMIT 1
+    ), '0000-01-01T00:00:00Z')
+    THEN RAISE(ABORT, 'claim transition cannot be retroactive') END;
+  SELECT CASE WHEN NOT EXISTS (
+    SELECT 1 FROM outcome_review_assignment_events assignment
+    WHERE assignment.assignment_event_id = NEW.assignment_event_id
+      AND assignment.assignment_state = 'assigned'
+      AND assignment.slot_pk = NEW.slot_pk
+      AND assignment.reviewer_public_id = NEW.reviewer_public_id
+      AND assignment.recorded_at <= NEW.recorded_at
+      AND NOT EXISTS (
+        SELECT 1 FROM outcome_review_assignment_events released
+        WHERE released.supersedes_assignment_event_id = assignment.assignment_event_id
+          AND released.assignment_state = 'released'
+          AND released.recorded_at <= NEW.recorded_at
+      )
+  ) THEN RAISE(ABORT, 'claim transition lacks an active authorized assignment') END;
+  SELECT CASE WHEN NEW.claim_state = 'claimed' AND EXISTS (
+    SELECT 1 FROM outcome_review_claim_events prior
+    WHERE prior.slot_pk = NEW.slot_pk
+      AND prior.claim_state IN ('claimed', 'heartbeat')
+      AND prior.lease_expires_at > NEW.recorded_at
+      AND NOT EXISTS (
+        SELECT 1 FROM outcome_review_claim_events successor
+        WHERE successor.supersedes_claim_event_id = prior.claim_event_id
+          AND successor.recorded_at <= NEW.recorded_at
+      )
+  ) THEN RAISE(ABORT, 'review slot already has a live claim lease') END;
+  SELECT CASE WHEN NEW.claim_state = 'claimed'
+    AND NEW.supersedes_claim_event_id IS NULL AND EXISTS (
+      SELECT 1 FROM outcome_review_claim_events prior
+      WHERE prior.slot_pk = NEW.slot_pk
+    ) THEN RAISE(ABORT, 'only the first claim attempt may start a new lineage') END;
+  SELECT CASE WHEN NEW.claim_state = 'claimed' AND EXISTS (
+    SELECT 1 FROM outcome_review_claim_events completed
+    WHERE completed.slot_pk = NEW.slot_pk
+      AND completed.claim_state = 'completed'
+  ) THEN RAISE(ABORT, 'a completed review slot cannot be reclaimed') END;
+  SELECT CASE WHEN NEW.claim_state IN ('claimed', 'heartbeat') AND NOT EXISTS (
+    SELECT 1
+    FROM outcome_review_assignment_events assignment
+    JOIN outcome_review_slots slot ON slot.slot_pk = NEW.slot_pk
+    JOIN outcome_review_tasks task ON task.task_pk = slot.task_pk
+    JOIN outcome_review_auth_events auth
+      ON auth.auth_event_id = assignment.auth_event_id
+    WHERE assignment.assignment_event_id = NEW.assignment_event_id
+      AND auth.reviewer_public_id = NEW.reviewer_public_id
+      AND auth.auth_state = 'granted'
+      AND auth.effective_at <= NEW.recorded_at
+      AND (auth.expires_at IS NULL OR auth.expires_at > NEW.recorded_at)
+      AND NOT EXISTS (
+        SELECT 1 FROM outcome_review_auth_events revoked
+        WHERE revoked.supersedes_auth_event_id = auth.auth_event_id
+          AND revoked.auth_state = 'revoked'
+          AND revoked.effective_at <= NEW.recorded_at
+      )
+      AND NOT EXISTS (
+        SELECT 1 FROM outcome_review_conflict_events conflict
+        WHERE conflict.reviewer_public_id = NEW.reviewer_public_id
+          AND conflict.cohort_id = task.cohort_id
+          AND (conflict.task_pk IS NULL OR conflict.task_pk = task.task_pk)
+          AND conflict.conflict_state = 'declared'
+          AND conflict.recorded_at <= NEW.recorded_at
+          AND NOT EXISTS (
+            SELECT 1 FROM outcome_review_conflict_events cleared
+            WHERE cleared.supersedes_conflict_event_id = conflict.conflict_event_id
+              AND cleared.conflict_state = 'cleared'
+              AND cleared.recorded_at <= NEW.recorded_at
+          )
+      )
+  ) THEN RAISE(ABORT, 'claim lease lacks current authorization or has a conflict') END;
+  SELECT CASE WHEN NEW.claim_state = 'claimed'
+    AND NEW.supersedes_claim_event_id IS NOT NULL AND NOT EXISTS (
+      SELECT 1 FROM outcome_review_claim_events prior
+      WHERE prior.claim_event_id = NEW.supersedes_claim_event_id
+        AND prior.slot_pk = NEW.slot_pk
+        AND prior.claim_state IN ('released', 'reclaimed')
+        AND prior.attempt_ordinal + 1 = NEW.attempt_ordinal
+        AND prior.lease_token_sha256 <> NEW.lease_token_sha256
+        AND prior.recorded_at <= NEW.recorded_at
+        AND NOT EXISTS (
+          SELECT 1 FROM outcome_review_claim_events later
+          WHERE later.supersedes_claim_event_id = prior.claim_event_id
+        )
+    ) THEN RAISE(ABORT, 'new claim attempt must supersede the current terminal lease') END;
+  SELECT CASE WHEN NEW.claim_state <> 'claimed' AND NOT EXISTS (
+    SELECT 1 FROM outcome_review_claim_events prior
+    WHERE prior.claim_event_id = NEW.supersedes_claim_event_id
+      AND prior.assignment_event_id = NEW.assignment_event_id
+      AND prior.slot_pk = NEW.slot_pk
+      AND prior.reviewer_public_id = NEW.reviewer_public_id
+      AND prior.lease_token_sha256 = NEW.lease_token_sha256
+      AND prior.attempt_ordinal = NEW.attempt_ordinal
+      AND prior.recorded_at <= NEW.recorded_at
+      AND prior.claim_state IN ('claimed', 'heartbeat')
+      AND NOT EXISTS (
+        SELECT 1 FROM outcome_review_claim_events later
+        WHERE later.supersedes_claim_event_id = prior.claim_event_id
+      )
+      AND (
+        (NEW.claim_state IN ('heartbeat', 'released', 'completed')
+          AND prior.lease_expires_at > NEW.recorded_at)
+        OR (NEW.claim_state = 'reclaimed'
+          AND prior.lease_expires_at <= NEW.recorded_at)
+      )
+      AND (
+        (NEW.claim_state = 'heartbeat'
+          AND NEW.lease_expires_at > prior.lease_expires_at)
+        OR (NEW.claim_state IN ('released', 'completed', 'reclaimed')
+          AND NEW.lease_expires_at = prior.lease_expires_at)
+      )
+  ) THEN RAISE(ABORT, 'claim transition is not the current authorized lease') END;
+  SELECT CASE WHEN NEW.claim_state = 'reclaimed' AND NOT EXISTS (
+    SELECT 1
+    FROM outcome_review_auth_events auth
+    JOIN outcome_review_slots slot ON slot.slot_pk = NEW.slot_pk
+    JOIN outcome_review_tasks task ON task.task_pk = slot.task_pk
+    WHERE auth.auth_event_id = NEW.actor_auth_event_id
+      AND auth.reviewer_public_id = NEW.actor_public_id
+      AND auth.reviewer_role = 'claim_coordinator'
+      AND (auth.cohort_id IS NULL OR auth.cohort_id = task.cohort_id)
+      AND auth.auth_state = 'granted'
+      AND auth.effective_at <= NEW.recorded_at
+      AND (auth.expires_at IS NULL OR auth.expires_at > NEW.recorded_at)
+      AND NOT EXISTS (
+        SELECT 1 FROM outcome_review_auth_events revoked
+        WHERE revoked.supersedes_auth_event_id = auth.auth_event_id
+          AND revoked.auth_state = 'revoked'
+          AND revoked.effective_at <= NEW.recorded_at
+      )
+      AND NOT EXISTS (
+        SELECT 1 FROM outcome_review_conflict_events conflict
+        WHERE conflict.reviewer_public_id = NEW.actor_public_id
+          AND conflict.cohort_id = task.cohort_id
+          AND (conflict.task_pk IS NULL OR conflict.task_pk = task.task_pk)
+          AND conflict.conflict_state = 'declared'
+          AND conflict.recorded_at <= NEW.recorded_at
+          AND NOT EXISTS (
+            SELECT 1 FROM outcome_review_conflict_events cleared
+            WHERE cleared.supersedes_conflict_event_id = conflict.conflict_event_id
+              AND cleared.conflict_state = 'cleared'
+              AND cleared.recorded_at <= NEW.recorded_at
+          )
+      )
+  ) THEN RAISE(ABORT, 'claim reclaim lacks active coordinator authorization') END;
+  SELECT CASE WHEN NEW.claim_state = 'completed' AND NOT EXISTS (
+    SELECT 1 FROM outcome_review_decisions decision
+    WHERE decision.claim_event_id = NEW.supersedes_claim_event_id
+      AND decision.assignment_event_id = NEW.assignment_event_id
+      AND decision.slot_pk = NEW.slot_pk
+      AND decision.reviewer_public_id = NEW.reviewer_public_id
+      AND decision.decided_at <= NEW.recorded_at
+  ) THEN RAISE(ABORT, 'claim completion requires its committed review decision') END;
+END;
+
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_decision_guard
+BEFORE INSERT ON outcome_review_decisions
+BEGIN
+  SELECT CASE WHEN EXISTS (
+    SELECT 1 FROM json_each(NEW.evidence_examined_json) evidence
+    WHERE evidence.type <> 'text'
+      OR length(trim(CAST(evidence.value AS TEXT))) NOT BETWEEN 1 AND 2048
+  ) THEN RAISE(ABORT, 'decision evidence references must be bounded strings') END;
+  SELECT CASE WHEN NOT EXISTS (
+    SELECT 1
+    FROM outcome_review_assignment_events assignment
+    JOIN outcome_review_slots slot ON slot.slot_pk = assignment.slot_pk
+    JOIN outcome_review_claim_events claim
+      ON claim.claim_event_id = NEW.claim_event_id
+    WHERE assignment.assignment_event_id = NEW.assignment_event_id
+      AND assignment.assignment_state = 'assigned'
+      AND assignment.slot_pk = NEW.slot_pk
+      AND assignment.reviewer_public_id = NEW.reviewer_public_id
+      AND assignment.recorded_at <= NEW.decided_at
+      AND slot.task_pk = NEW.task_pk
+      AND claim.assignment_event_id = assignment.assignment_event_id
+      AND claim.slot_pk = assignment.slot_pk
+      AND claim.reviewer_public_id = NEW.reviewer_public_id
+      AND claim.claim_state IN ('claimed', 'heartbeat')
+      AND claim.recorded_at <= NEW.decided_at
+      AND claim.lease_expires_at > NEW.decided_at
+      AND NOT EXISTS (
+        SELECT 1 FROM outcome_review_claim_events later_claim
+        WHERE later_claim.supersedes_claim_event_id = claim.claim_event_id
+          AND later_claim.recorded_at <= NEW.decided_at
+      )
+      AND EXISTS (
+        SELECT 1
+        FROM outcome_review_auth_events auth
+        WHERE auth.auth_event_id = assignment.auth_event_id
+          AND auth.auth_state = 'granted'
+          AND auth.effective_at <= NEW.decided_at
+          AND (auth.expires_at IS NULL OR auth.expires_at > NEW.decided_at)
+          AND NOT EXISTS (
+            SELECT 1 FROM outcome_review_auth_events revoked
+            WHERE revoked.supersedes_auth_event_id = auth.auth_event_id
+              AND revoked.auth_state = 'revoked'
+              AND revoked.effective_at <= NEW.decided_at
+          )
+      )
+      AND NOT EXISTS (
+        SELECT 1 FROM outcome_review_assignment_events released
+        WHERE released.supersedes_assignment_event_id = assignment.assignment_event_id
+          AND released.assignment_state = 'released'
+          AND released.recorded_at <= NEW.decided_at
+      )
+  ) THEN RAISE(ABORT, 'review decision lacks active assignment') END;
+  SELECT CASE WHEN EXISTS (
+    SELECT 1 FROM outcome_review_slots slot
+    WHERE slot.slot_pk = NEW.slot_pk
+      AND (
+        (slot.review_dimension = 'discovery_triage'
+          AND NEW.decision_value NOT IN (
+            'advance_to_semantic_review', 'exclude_from_semantic_review',
+            'insufficient_evidence'
+          ))
+        OR
+        (slot.review_dimension = 'semantic'
+          AND NEW.decision_value NOT IN ('support', 'reject', 'needs_more_evidence'))
+      )
+  ) THEN RAISE(ABORT, 'decision value does not match review dimension') END;
+  SELECT CASE WHEN EXISTS (
+    SELECT 1
+    FROM outcome_review_slots requested
+    JOIN outcome_review_decisions prior ON prior.task_pk = requested.task_pk
+    JOIN outcome_review_slots prior_slot ON prior_slot.slot_pk = prior.slot_pk
+    JOIN outcome_review_reviewer_identities requested_identity
+      ON requested_identity.reviewer_public_id = NEW.reviewer_public_id
+    JOIN outcome_review_reviewer_identities prior_identity
+      ON prior_identity.reviewer_public_id = prior.reviewer_public_id
+    WHERE requested.slot_pk = NEW.slot_pk
+      AND requested.review_dimension = 'semantic'
+      AND prior_slot.review_dimension = 'semantic'
+      AND requested_identity.human_identity_sha256
+        = prior_identity.human_identity_sha256
+  ) THEN RAISE(ABORT, 'dual semantic decisions require distinct humans') END;
+  SELECT CASE WHEN EXISTS (
+    SELECT 1
+    FROM outcome_review_slots selected_slot
+    JOIN outcome_review_tasks task ON task.task_pk = selected_slot.task_pk
+    JOIN outcome_review_conflict_events conflict
+      ON conflict.reviewer_public_id = NEW.reviewer_public_id
+      AND conflict.cohort_id = task.cohort_id
+      AND (conflict.task_pk IS NULL OR conflict.task_pk = task.task_pk)
+    WHERE selected_slot.slot_pk = NEW.slot_pk
+      AND conflict.conflict_state = 'declared'
+      AND conflict.recorded_at <= NEW.decided_at
+      AND NOT EXISTS (
+        SELECT 1 FROM outcome_review_conflict_events cleared
+        WHERE cleared.supersedes_conflict_event_id = conflict.conflict_event_id
+          AND cleared.conflict_state = 'cleared'
+          AND cleared.recorded_at <= NEW.decided_at
+      )
+  ) THEN RAISE(ABORT, 'review decision conflicts with declared interest') END;
+END;
+
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_adjudication_guard
+BEFORE INSERT ON outcome_review_adjudications
+BEGIN
+  SELECT CASE WHEN EXISTS (
+    SELECT 1 FROM json_each(NEW.evidence_examined_json) evidence
+    WHERE evidence.type <> 'text'
+      OR length(trim(CAST(evidence.value AS TEXT))) NOT BETWEEN 1 AND 2048
+  ) THEN RAISE(ABORT, 'adjudication evidence references must be bounded strings') END;
+  SELECT CASE WHEN NOT EXISTS (
+    SELECT 1
+    FROM outcome_review_decisions primary_decision
+    JOIN outcome_review_slots primary_slot ON primary_slot.slot_pk = primary_decision.slot_pk
+    JOIN outcome_review_decisions secondary_decision
+      ON secondary_decision.decision_id = NEW.secondary_decision_id
+    JOIN outcome_review_slots secondary_slot
+      ON secondary_slot.slot_pk = secondary_decision.slot_pk
+    JOIN outcome_review_tasks task ON task.task_pk = NEW.task_pk
+    JOIN outcome_review_auth_events auth ON auth.auth_event_id = NEW.auth_event_id
+    JOIN outcome_review_reviewer_identities primary_identity
+      ON primary_identity.reviewer_public_id = primary_decision.reviewer_public_id
+    JOIN outcome_review_reviewer_identities secondary_identity
+      ON secondary_identity.reviewer_public_id = secondary_decision.reviewer_public_id
+    JOIN outcome_review_reviewer_identities adjudicator_identity
+      ON adjudicator_identity.reviewer_public_id = NEW.adjudicator_public_id
+    WHERE primary_decision.decision_id = NEW.primary_decision_id
+      AND primary_decision.task_pk = NEW.task_pk
+      AND secondary_decision.task_pk = NEW.task_pk
+      AND primary_slot.slot_kind = 'semantic_primary'
+      AND secondary_slot.slot_kind = 'semantic_secondary'
+      AND primary_decision.decision_value <> secondary_decision.decision_value
+      AND primary_decision.reviewer_public_id <> secondary_decision.reviewer_public_id
+      AND primary_decision.decided_at <= NEW.adjudicated_at
+      AND secondary_decision.decided_at <= NEW.adjudicated_at
+      AND EXISTS (
+        SELECT 1 FROM outcome_review_claim_events completed_primary
+        WHERE completed_primary.supersedes_claim_event_id
+          = primary_decision.claim_event_id
+          AND completed_primary.claim_state = 'completed'
+          AND completed_primary.recorded_at <= NEW.adjudicated_at
+      )
+      AND EXISTS (
+        SELECT 1 FROM outcome_review_claim_events completed_secondary
+        WHERE completed_secondary.supersedes_claim_event_id
+          = secondary_decision.claim_event_id
+          AND completed_secondary.claim_state = 'completed'
+          AND completed_secondary.recorded_at <= NEW.adjudicated_at
+      )
+      AND primary_identity.human_identity_sha256
+        <> secondary_identity.human_identity_sha256
+      AND adjudicator_identity.human_identity_sha256
+        <> primary_identity.human_identity_sha256
+      AND adjudicator_identity.human_identity_sha256
+        <> secondary_identity.human_identity_sha256
+      AND auth.reviewer_public_id = NEW.adjudicator_public_id
+      AND auth.reviewer_role = 'adjudicator'
+      AND (auth.cohort_id IS NULL OR auth.cohort_id = task.cohort_id)
+      AND auth.auth_state = 'granted'
+      AND auth.effective_at <= NEW.adjudicated_at
+      AND (auth.expires_at IS NULL OR auth.expires_at > NEW.adjudicated_at)
+      AND NOT EXISTS (
+        SELECT 1 FROM outcome_review_auth_events revoked
+        WHERE revoked.supersedes_auth_event_id = auth.auth_event_id
+          AND revoked.auth_state = 'revoked'
+          AND revoked.effective_at <= NEW.adjudicated_at
+      )
+      AND NOT EXISTS (
+        SELECT 1 FROM outcome_review_conflict_events conflict
+        WHERE conflict.reviewer_public_id = NEW.adjudicator_public_id
+          AND conflict.cohort_id = task.cohort_id
+          AND (conflict.task_pk IS NULL OR conflict.task_pk = task.task_pk)
+          AND conflict.conflict_state = 'declared'
+          AND conflict.recorded_at <= NEW.adjudicated_at
+          AND NOT EXISTS (
+            SELECT 1 FROM outcome_review_conflict_events cleared
+            WHERE cleared.supersedes_conflict_event_id = conflict.conflict_event_id
+              AND cleared.conflict_state = 'cleared'
+              AND cleared.recorded_at <= NEW.adjudicated_at
+          )
+      )
+  ) THEN RAISE(ABORT, 'adjudication requires a real disagreement and independent authority') END;
+END;
+
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_semantic_eligibility_guard
+BEFORE INSERT ON outcome_review_semantic_eligibility_events
+BEGIN
+  SELECT CASE WHEN NOT EXISTS (
+    SELECT 1 FROM outcome_review_tasks task
+    WHERE task.task_pk = NEW.task_pk
+      AND task.task_kind = 'semantic_canary'
+      AND task.evidence_level = 'L1'
+      AND (
+        EXISTS (
+          SELECT 1
+          FROM outcome_review_decisions first
+          JOIN outcome_review_slots first_slot ON first_slot.slot_pk = first.slot_pk
+          JOIN outcome_review_decisions second ON second.task_pk = first.task_pk
+          JOIN outcome_review_slots second_slot ON second_slot.slot_pk = second.slot_pk
+          WHERE first.decision_id = NEW.primary_decision_id
+            AND second.decision_id = NEW.secondary_decision_id
+            AND first.task_pk = task.task_pk
+            AND first_slot.slot_kind = 'semantic_primary'
+            AND second_slot.slot_kind = 'semantic_secondary'
+            AND first.decision_value = 'support'
+            AND second.decision_value = 'support'
+            AND first.reviewer_public_id <> second.reviewer_public_id
+            AND first.decided_at <= NEW.computed_at
+            AND second.decided_at <= NEW.computed_at
+            AND EXISTS (
+              SELECT 1 FROM outcome_review_claim_events completed_first
+              WHERE completed_first.supersedes_claim_event_id = first.claim_event_id
+                AND completed_first.claim_state = 'completed'
+                AND completed_first.recorded_at <= NEW.computed_at
+            )
+            AND EXISTS (
+              SELECT 1 FROM outcome_review_claim_events completed_second
+              WHERE completed_second.supersedes_claim_event_id = second.claim_event_id
+                AND completed_second.claim_state = 'completed'
+                AND completed_second.recorded_at <= NEW.computed_at
+            )
+        )
+        OR EXISTS (
+          SELECT 1 FROM outcome_review_adjudications adjudication
+          WHERE adjudication.adjudication_id = NEW.adjudication_id
+            AND adjudication.task_pk = task.task_pk
+            AND adjudication.adjudicated_value = 'support'
+            AND adjudication.adjudicated_at <= NEW.computed_at
+        )
+      )
+  ) THEN RAISE(ABORT, 'semantic eligibility requires completed supporting review') END;
+END;
+
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_semantic_promotion_guard
+BEFORE INSERT ON outcome_review_semantic_promotions
+BEGIN
+  SELECT CASE WHEN NOT EXISTS (
+    SELECT 1
+    FROM outcome_review_tasks task
+    JOIN outcome_review_semantic_eligibility_events eligibility
+      ON eligibility.eligibility_event_id = NEW.eligibility_event_id
+    JOIN outcome_review_auth_events auth ON auth.auth_event_id = NEW.auth_event_id
+    WHERE task.task_pk = NEW.task_pk
+      AND task.task_kind = 'semantic_canary'
+      AND task.evidence_level = 'L1'
+      AND eligibility.task_pk = task.task_pk
+      AND eligibility.eligibility_state = 'eligible'
+      AND eligibility.computed_at <= NEW.promoted_at
+      AND auth.reviewer_public_id = NEW.promotion_authority_public_id
+      AND auth.reviewer_role = 'promotion_authority'
+      AND (auth.cohort_id IS NULL OR auth.cohort_id = task.cohort_id)
+      AND auth.auth_state = 'granted'
+      AND auth.effective_at <= NEW.promoted_at
+      AND (auth.expires_at IS NULL OR auth.expires_at > NEW.promoted_at)
+      AND NOT EXISTS (
+        SELECT 1 FROM outcome_review_auth_events revoked
+        WHERE revoked.supersedes_auth_event_id = auth.auth_event_id
+          AND revoked.auth_state = 'revoked'
+          AND revoked.effective_at <= NEW.promoted_at
+      )
+      AND NOT EXISTS (
+        SELECT 1 FROM outcome_review_conflict_events conflict
+        WHERE conflict.reviewer_public_id = NEW.promotion_authority_public_id
+          AND conflict.cohort_id = task.cohort_id
+          AND (conflict.task_pk IS NULL OR conflict.task_pk = task.task_pk)
+          AND conflict.conflict_state = 'declared'
+          AND conflict.recorded_at <= NEW.promoted_at
+          AND NOT EXISTS (
+            SELECT 1 FROM outcome_review_conflict_events cleared
+            WHERE cleared.supersedes_conflict_event_id = conflict.conflict_event_id
+              AND cleared.conflict_state = 'cleared'
+              AND cleared.recorded_at <= NEW.promoted_at
+          )
+      )
+  ) THEN RAISE(ABORT, 'semantic promotion requires computed eligibility and active authority') END;
+END;
+
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_release_binding_guard
+BEFORE INSERT ON outcome_review_release_bindings
+BEGIN
+  SELECT CASE WHEN NOT EXISTS (
+    SELECT 1 FROM outcome_review_tasks task
+    WHERE task.task_pk = NEW.task_pk
+      AND task.task_kind = 'semantic_canary'
+      AND task.source_row_id = NEW.outcome_link_version_id
+  ) THEN RAISE(ABORT, 'release membership must bind the reviewed source version') END;
+END;
+
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_publication_eligibility_guard
+BEFORE INSERT ON outcome_review_publication_eligibility_events
+BEGIN
+  SELECT CASE WHEN NOT EXISTS (
+    SELECT 1
+    FROM outcome_review_semantic_promotions promotion
+    JOIN outcome_review_release_bindings binding
+      ON binding.release_binding_id = NEW.release_binding_id
+    WHERE promotion.promotion_id = NEW.promotion_id
+      AND promotion.task_pk = NEW.task_pk
+      AND binding.task_pk = NEW.task_pk
+      AND promotion.promoted_at <= NEW.computed_at
+      AND binding.verified_at <= NEW.computed_at
+  ) THEN RAISE(ABORT, 'publication eligibility requires promotion and verified release membership') END;
+END;
+
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_publication_guard
+BEFORE INSERT ON outcome_review_publication_events
+BEGIN
+  SELECT CASE WHEN NOT EXISTS (
+    SELECT 1
+    FROM outcome_review_semantic_promotions promotion
+    JOIN outcome_review_publication_eligibility_events eligibility
+      ON eligibility.publication_eligibility_event_id = NEW.publication_eligibility_event_id
+    JOIN outcome_review_release_bindings binding
+      ON binding.release_binding_id = NEW.release_binding_id
+    JOIN outcome_review_tasks task ON task.task_pk = promotion.task_pk
+    JOIN outcome_review_auth_events auth ON auth.auth_event_id = NEW.auth_event_id
+    WHERE promotion.promotion_id = NEW.promotion_id
+      AND promotion.task_pk = NEW.task_pk
+      AND eligibility.task_pk = NEW.task_pk
+      AND eligibility.promotion_id = promotion.promotion_id
+      AND eligibility.release_binding_id = binding.release_binding_id
+      AND eligibility.eligibility_state = 'eligible'
+      AND binding.task_pk = NEW.task_pk
+      AND binding.outcome_link_release_id = NEW.outcome_link_release_id
+      AND binding.outcome_link_release_membership_id = NEW.outcome_link_release_membership_id
+      AND promotion.promoted_at <= NEW.published_at
+      AND eligibility.computed_at <= NEW.published_at
+      AND binding.verified_at <= NEW.published_at
+      AND auth.reviewer_public_id = NEW.publisher_public_id
+      AND auth.reviewer_role = 'publisher'
+      AND (auth.cohort_id IS NULL OR auth.cohort_id = task.cohort_id)
+      AND auth.auth_state = 'granted'
+      AND auth.effective_at <= NEW.published_at
+      AND (auth.expires_at IS NULL OR auth.expires_at > NEW.published_at)
+      AND NOT EXISTS (
+        SELECT 1 FROM outcome_review_auth_events revoked
+        WHERE revoked.supersedes_auth_event_id = auth.auth_event_id
+          AND revoked.auth_state = 'revoked'
+          AND revoked.effective_at <= NEW.published_at
+      )
+      AND NOT EXISTS (
+        SELECT 1 FROM outcome_review_conflict_events conflict
+        WHERE conflict.reviewer_public_id = NEW.publisher_public_id
+          AND conflict.cohort_id = task.cohort_id
+          AND (conflict.task_pk IS NULL OR conflict.task_pk = task.task_pk)
+          AND conflict.conflict_state = 'declared'
+          AND conflict.recorded_at <= NEW.published_at
+          AND NOT EXISTS (
+            SELECT 1 FROM outcome_review_conflict_events cleared
+            WHERE cleared.supersedes_conflict_event_id = conflict.conflict_event_id
+              AND cleared.conflict_state = 'cleared'
+              AND cleared.recorded_at <= NEW.published_at
+          )
+      )
+  ) THEN RAISE(ABORT, 'public release lacks computed eligibility or bound release membership') END;
+END;
+
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_control_meta_status_transition
+BEFORE UPDATE ON outcome_review_control_meta
+WHEN NOT (
+  OLD.control_plane_capacity_status = 'BUILDING'
+  AND NEW.control_plane_capacity_status = 'PASS'
+  AND OLD.pipeline_key IS NEW.pipeline_key
+  AND OLD.contract_version IS NEW.contract_version
+  AND OLD.config_sha256 IS NEW.config_sha256
+  AND OLD.source_root_sha256 IS NEW.source_root_sha256
+  AND OLD.schema_root_sha256 IS NEW.schema_root_sha256
+  AND OLD.artifact_scope IS NEW.artifact_scope
+  AND OLD.trust_root_contract_sha256 IS NEW.trust_root_contract_sha256
+  AND OLD.operational_state IS NEW.operational_state
+  AND OLD.human_review_status IS NEW.human_review_status
+  AND OLD.semantic_promotion_status IS NEW.semantic_promotion_status
+  AND OLD.public_release_status IS NEW.public_release_status
+  AND OLD.real_data_only IS NEW.real_data_only
+  AND OLD.synthetic_or_mock_decisions IS NEW.synthetic_or_mock_decisions
+  AND OLD.capacity_snapshot_effective_at IS NEW.capacity_snapshot_effective_at
+  AND OLD.row_semantic_sha256 IS NOT NEW.row_semantic_sha256
+  AND EXISTS (
+    SELECT 1 FROM outcome_review_control_checkpoints checkpoint
+    WHERE checkpoint.pipeline_key = OLD.pipeline_key
+      AND checkpoint.stage = 'discovery_tasks'
+      AND checkpoint.completed = 1
+  )
+)
+BEGIN
+  SELECT RAISE(ABORT, 'review control meta permits only BUILDING to PASS');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_control_meta_no_delete
+BEFORE DELETE ON outcome_review_control_meta BEGIN
+  SELECT RAISE(ABORT, 'outcome_review_control_meta is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_cohorts_no_update
+BEFORE UPDATE ON outcome_review_cohorts BEGIN
+  SELECT RAISE(ABORT, 'outcome_review_cohorts is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_cohorts_no_delete
+BEFORE DELETE ON outcome_review_cohorts BEGIN
+  SELECT RAISE(ABORT, 'outcome_review_cohorts is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_tasks_no_update
+BEFORE UPDATE ON outcome_review_tasks BEGIN
+  SELECT RAISE(ABORT, 'outcome_review_tasks is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_tasks_no_delete
+BEFORE DELETE ON outcome_review_tasks BEGIN
+  SELECT RAISE(ABORT, 'outcome_review_tasks is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_slots_no_update
+BEFORE UPDATE ON outcome_review_slots BEGIN
+  SELECT RAISE(ABORT, 'outcome_review_slots is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_slots_no_delete
+BEFORE DELETE ON outcome_review_slots BEGIN
+  SELECT RAISE(ABORT, 'outcome_review_slots is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_trust_roots_no_update
+BEFORE UPDATE ON outcome_review_trust_roots BEGIN
+  SELECT RAISE(ABORT, 'outcome_review_trust_roots is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_trust_roots_no_delete
+BEFORE DELETE ON outcome_review_trust_roots BEGIN
+  SELECT RAISE(ABORT, 'outcome_review_trust_roots is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_reviewer_identities_no_update
+BEFORE UPDATE ON outcome_review_reviewer_identities BEGIN
+  SELECT RAISE(ABORT, 'outcome_review_reviewer_identities is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_reviewer_identities_no_delete
+BEFORE DELETE ON outcome_review_reviewer_identities BEGIN
+  SELECT RAISE(ABORT, 'outcome_review_reviewer_identities is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_auth_events_no_update
+BEFORE UPDATE ON outcome_review_auth_events BEGIN
+  SELECT RAISE(ABORT, 'outcome_review_auth_events is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_auth_events_no_delete
+BEFORE DELETE ON outcome_review_auth_events BEGIN
+  SELECT RAISE(ABORT, 'outcome_review_auth_events is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_conflict_events_no_update
+BEFORE UPDATE ON outcome_review_conflict_events BEGIN
+  SELECT RAISE(ABORT, 'outcome_review_conflict_events is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_conflict_events_no_delete
+BEFORE DELETE ON outcome_review_conflict_events BEGIN
+  SELECT RAISE(ABORT, 'outcome_review_conflict_events is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_assignment_events_no_update
+BEFORE UPDATE ON outcome_review_assignment_events BEGIN
+  SELECT RAISE(ABORT, 'outcome_review_assignment_events is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_assignment_events_no_delete
+BEFORE DELETE ON outcome_review_assignment_events BEGIN
+  SELECT RAISE(ABORT, 'outcome_review_assignment_events is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_claim_events_no_update
+BEFORE UPDATE ON outcome_review_claim_events BEGIN
+  SELECT RAISE(ABORT, 'outcome_review_claim_events is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_claim_events_no_delete
+BEFORE DELETE ON outcome_review_claim_events BEGIN
+  SELECT RAISE(ABORT, 'outcome_review_claim_events is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_decisions_no_update
+BEFORE UPDATE ON outcome_review_decisions BEGIN
+  SELECT RAISE(ABORT, 'outcome_review_decisions is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_decisions_no_delete
+BEFORE DELETE ON outcome_review_decisions BEGIN
+  SELECT RAISE(ABORT, 'outcome_review_decisions is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_adjudications_no_update
+BEFORE UPDATE ON outcome_review_adjudications BEGIN
+  SELECT RAISE(ABORT, 'outcome_review_adjudications is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_adjudications_no_delete
+BEFORE DELETE ON outcome_review_adjudications BEGIN
+  SELECT RAISE(ABORT, 'outcome_review_adjudications is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_semantic_eligibility_events_no_update
+BEFORE UPDATE ON outcome_review_semantic_eligibility_events BEGIN
+  SELECT RAISE(ABORT, 'outcome_review_semantic_eligibility_events is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_semantic_eligibility_events_no_delete
+BEFORE DELETE ON outcome_review_semantic_eligibility_events BEGIN
+  SELECT RAISE(ABORT, 'outcome_review_semantic_eligibility_events is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_semantic_promotions_no_update
+BEFORE UPDATE ON outcome_review_semantic_promotions BEGIN
+  SELECT RAISE(ABORT, 'outcome_review_semantic_promotions is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_semantic_promotions_no_delete
+BEFORE DELETE ON outcome_review_semantic_promotions BEGIN
+  SELECT RAISE(ABORT, 'outcome_review_semantic_promotions is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_release_bindings_no_update
+BEFORE UPDATE ON outcome_review_release_bindings BEGIN
+  SELECT RAISE(ABORT, 'outcome_review_release_bindings is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_release_bindings_no_delete
+BEFORE DELETE ON outcome_review_release_bindings BEGIN
+  SELECT RAISE(ABORT, 'outcome_review_release_bindings is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_publication_eligibility_events_no_update
+BEFORE UPDATE ON outcome_review_publication_eligibility_events BEGIN
+  SELECT RAISE(ABORT, 'outcome_review_publication_eligibility_events is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_publication_eligibility_events_no_delete
+BEFORE DELETE ON outcome_review_publication_eligibility_events BEGIN
+  SELECT RAISE(ABORT, 'outcome_review_publication_eligibility_events is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_publication_events_no_update
+BEFORE UPDATE ON outcome_review_publication_events BEGIN
+  SELECT RAISE(ABORT, 'outcome_review_publication_events is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_publication_events_no_delete
+BEFORE DELETE ON outcome_review_publication_events BEGIN
+  SELECT RAISE(ABORT, 'outcome_review_publication_events is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_operation_requests_no_update
+BEFORE UPDATE ON outcome_review_operation_requests BEGIN
+  SELECT RAISE(ABORT, 'outcome_review_operation_requests is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_operation_requests_no_delete
+BEFORE DELETE ON outcome_review_operation_requests BEGIN
+  SELECT RAISE(ABORT, 'outcome_review_operation_requests is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_operational_audit_events_no_update
+BEFORE UPDATE ON outcome_review_operational_audit_events BEGIN
+  SELECT RAISE(ABORT, 'outcome_review_operational_audit_events is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_operational_audit_events_no_delete
+BEFORE DELETE ON outcome_review_operational_audit_events BEGIN
+  SELECT RAISE(ABORT, 'outcome_review_operational_audit_events is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_audit_events_no_update
+BEFORE UPDATE ON outcome_review_audit_events BEGIN
+  SELECT RAISE(ABORT, 'outcome_review_audit_events is append-only');
+END;
+CREATE TRIGGER IF NOT EXISTS trg_outcome_review_audit_events_no_delete
+BEFORE DELETE ON outcome_review_audit_events BEGIN
+  SELECT RAISE(ABORT, 'outcome_review_audit_events is append-only');
+END;
+-- END OUTCOME REVIEW CONTROL C2C SCHEMA
+
 -- Supports one bounded actor-release/source scan before bulk participant matching.
 CREATE INDEX IF NOT EXISTS idx_actor_graph_node_versions_release_source_actor
   ON actor_graph_node_versions(release_id, source_id, actor_id, node_version_id);

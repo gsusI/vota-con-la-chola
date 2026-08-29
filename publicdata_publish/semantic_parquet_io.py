@@ -2,12 +2,13 @@
 
 from __future__ import annotations
 
+import hashlib
 import os
 import shutil
 from pathlib import Path
 from typing import Any
 
-from .semantic_contracts import SemanticLaneContract, sha256_file
+from .semantic_contracts import SemanticLaneContract, safe_child, sha256_file
 
 
 class PartitionWriter:
@@ -20,11 +21,13 @@ class PartitionWriter:
         compression: str,
         row_group_rows: int,
         max_file_rows: int,
+        compression_level: int | None = None,
     ) -> None:
         self.root = root
         self.partition = partition
         self.contract = contract
         self.compression = None if compression == "none" else compression
+        self.compression_level = compression_level
         self.row_group_rows = row_group_rows
         self.max_file_rows = max_file_rows
         self.schema = contract.arrow_schema()
@@ -37,8 +40,10 @@ class PartitionWriter:
         self.file_max_id: str | int | None = None
         self.writer = None
         self.files: list[dict[str, Any]] = []
+        self.input_digest = hashlib.sha256()
 
     def append(self, row: dict[str, Any]) -> None:
+        self.input_digest.update(self.contract.canonical_row_bytes(row))
         for name in self.contract.columns:
             self.columns[name].append(row[name])
         self.buffered += 1
@@ -56,8 +61,11 @@ class PartitionWriter:
             abs_path,
             self.schema,
             compression=self.compression,
+            compression_level=self.compression_level,
             use_dictionary=True,
             write_statistics=True,
+            version="2.6",
+            data_page_version="1.0",
         )
         self.file_rows = 0
         self.file_min_id = None
@@ -133,6 +141,13 @@ class PartitionWriter:
                 f"partition {self.partition['partition_id']} wrote "
                 f"{self.rows_written} rows, expected {expected}"
             )
+        expected_digest = str(self.partition.get("input_sha256") or "")
+        actual_digest = self.input_digest.hexdigest()
+        if actual_digest != expected_digest:
+            raise RuntimeError(
+                f"partition {self.partition['partition_id']} input hash "
+                f"{actual_digest} differs from scanned {expected_digest}"
+            )
         return self.files
 
 
@@ -152,8 +167,8 @@ def reusable_partition(
     if not files:
         return None
     for file_meta in files:
-        source = previous_root / str(file_meta["path"])
-        if not source.is_file():
+        source = safe_child(previous_root, str(file_meta["path"]))
+        if source is None or not source.is_file():
             return None
         if sha256_file(source) != str(file_meta["sha256"]):
             return None
@@ -166,21 +181,33 @@ def reuse_partition_files(
     previous_root: Path,
     staging_root: Path,
     partition: dict[str, Any],
+    allow_hardlink: bool = True,
 ) -> tuple[list[dict[str, Any]], dict[str, int]]:
     files: list[dict[str, Any]] = []
     modes = {"hardlink": 0, "copy": 0}
     new_dir = Path(str(partition["relative_dir"]))
     for old_meta in list(previous.get("files") or []):
-        source = previous_root / str(old_meta["path"])
+        source = safe_child(previous_root, str(old_meta["path"]))
+        if source is None or not source.is_file():
+            raise ValueError("reusable partition source path is unsafe or missing")
         destination_rel = new_dir / Path(str(old_meta["path"])).name
         destination = staging_root / destination_rel
         destination.parent.mkdir(parents=True, exist_ok=True)
-        try:
-            os.link(source, destination)
-            modes["hardlink"] += 1
-        except OSError:
+        if allow_hardlink:
+            try:
+                os.link(source, destination)
+                modes["hardlink"] += 1
+            except OSError:
+                shutil.copy2(source, destination)
+                modes["copy"] += 1
+        else:
             shutil.copy2(source, destination)
             modes["copy"] += 1
+        if (
+            int(destination.stat().st_size) != int(old_meta.get("bytes") or -1)
+            or sha256_file(destination) != str(old_meta.get("sha256") or "")
+        ):
+            raise RuntimeError("reused partition copy failed checksum verification")
         file_meta = dict(old_meta)
         file_meta["path"] = destination_rel.as_posix()
         files.append(file_meta)

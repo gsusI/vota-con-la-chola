@@ -1,6 +1,6 @@
 # Dependencias Python base del entorno ETL y validacion.
 huggingface_hub>=0.24,<1.0
-pyarrow>=18,<21
+pyarrow==20.0.0
 pydantic>=2.9,<3
 pypdf>=6,<7
 pytest>=8,<9

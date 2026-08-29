@@ -1,0 +1,63 @@
+{
+  "checks_failed": 0,
+  "checks_passed": 330,
+  "config_sha256": "fad0866a59bf8e007f4084b64d964c7344dcd396ac7ba505b86e601ceef1608d",
+  "counts": {
+    "adjudications": 0,
+    "assignment_events": 0,
+    "audit_events": 116,
+    "auth_events": 0,
+    "claim_events": 0,
+    "cohorts": 2,
+    "conflict_events": 0,
+    "decisions": 0,
+    "operation_requests": 0,
+    "operational_audit_events": 0,
+    "publication_eligibility_events": 0,
+    "publication_events": 0,
+    "release_bindings": 0,
+    "reviewer_identities": 0,
+    "semantic_eligibility_events": 0,
+    "semantic_promotions": 0,
+    "slots": 2865604,
+    "tasks": 2865603,
+    "trust_roots": 0
+  },
+  "database_sha256": "a97f99410672a1d2fc4c52866062c311f56da712333d58efa5ac6629f3c200fa",
+  "format_version": "outcome_review_control_c2c_validation_report_v1",
+  "manifest_sha256": "7ddc000f4ebd860423e0d8ef37490365aff890f0706321c1163bf0822052767e",
+  "maximum_resident_set_bytes": 159727616,
+  "operational_lifecycle": {
+    "capacity_artifact_scope": "capacity_only",
+    "capacity_operational_state": "not_materialized",
+    "capacity_root_excludes_operational_rows": true,
+    "claim_lease_contract_version": "outcome_review_claim_lease_c2c_v1",
+    "empty_operational_root_sha256": "3c7819e98fdd323dd3b2ab99f93932d39aec1021cbe6e88a721f8a3b9b2b9b97",
+    "immutable_content_addressed_export_required_before_use": true,
+    "operational_export_implemented": false,
+    "release_binding_contract_version": "outcome_review_release_binding_c2c_v1",
+    "working_artifact_scope": "operational_working",
+    "working_operational_state": "working_unpublished",
+    "working_rows_are_unpublished": true
+  },
+  "pipeline_key": "vclc:outcome-review-control-c2c:ca4078b5235ea4d8a894cdea",
+  "real_data_only": true,
+  "root_scope": "capacity_only_excludes_future_operational_rows",
+  "schema_root_sha256": "62d31fb97ce7580797d77ce9ebd95fc5768d10c40f985ca7d3449206cb8e5a3c",
+  "semantic_root_sha256": "21acddf2e8e29dbce637069abcc16c2fb4baf7d976a4167599285cbaf9a6960f",
+  "source_root_sha256": "06264ed14d824753a7fc3ddc4ddff799939708a8b662bd7128eff680b426cf93",
+  "status": "passed",
+  "statuses": {
+    "control_plane_capacity": "PASS",
+    "human_review": "OPEN",
+    "public_release": "OPEN",
+    "semantic_promotion": "OPEN"
+  },
+  "synthetic_or_mock_decisions": 0,
+  "trust_root_contract": {
+    "contract_version": "outcome_review_trust_root_set_c2c_v1",
+    "state": "pinned_empty_requires_real_unpublished_operational_working_database",
+    "trust_root_count": 0,
+    "trust_root_sha256": "ce76316802e222eafe5a4823bb52cc17c76167f22a3ffcef240ad67c267c16c8"
+  }
+}

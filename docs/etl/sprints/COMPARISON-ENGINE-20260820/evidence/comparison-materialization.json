@@ -39,14 +39,14 @@
       "sha256": "46e72488f24bbecc240ac94c524fe503b8599d742c983595919678a842c5f0e3"
     },
     "actor_graph_db": {
-      "bytes": 1436262400,
+      "bytes": 1436733440,
       "path": "etl/data/staging/actor-graph-v1.db",
-      "sha256": "b6792dfc02194c4bc434bdf97f29e05d31aa951a22f0813da993f83572093cb1"
+      "sha256": "704b50cbd88c6338f1a94b827569ea87e96e9afd6b186385e2f06a6866eea9f5"
     },
     "promises_db": {
-      "bytes": 4997120,
+      "bytes": 5476352,
       "path": "etl/data/staging/promises-bng-2023.db",
-      "sha256": "9f0b61abf13f8d046a58762f2e14806fb3a78d73477ae355d1acb3b91493dfc2"
+      "sha256": "4c4e9b9dca6ac2a67fef9dcb269799ac18e5d96eeb221f3f7610f2e8ebf28cd8"
     },
     "reviewed_mappings": {
       "bytes": 11104,
@@ -54,9 +54,9 @@
       "sha256": "82bbfa1c34c227ce3e6525e32149be0d6ded86a1eb20ab56fadbca0d717d0e3b"
     },
     "schema": {
-      "bytes": 249163,
+      "bytes": 341595,
       "path": "etl/load/sqlite_schema.sql",
-      "sha256": "920a38dc06e6ace2c10142a7642f4d619c0b83efd728b5a964e5349e6948f5c2"
+      "sha256": "e6e994e77d2c32518437beac82ae70c2ea615f9782adf6d34fee8609fa8253d1"
     }
   },
   "input_scope_sha256": {
@@ -79,10 +79,10 @@
   "json_sha256": "24b6edd02329158040b50dc80a9191df3efea8ec07e10bbcb7adaaed280e0ca6",
   "million_row_physical_run_proven": false,
   "out_db": "etl/data/staging/promise-action-comparisons-v1.db",
-  "out_db_bytes": 4067328,
-  "out_db_sha256": "97ca482c7e9376f3e7313c16afa19be144a0eafe237502ef1792802a01bc9941",
+  "out_db_bytes": 4538368,
+  "out_db_sha256": "1f7db50b6f4e78846c8b14e1568f0d744abe4082bb5626e9526a14b262b35c89",
   "out_json": "etl/data/published/promise-action-comparisons-v1.json",
-  "peak_rss_mb": 50.812,
+  "peak_rss_mb": 52.5,
   "per_file_atomic_replacement": true,
   "public_out": "ui/gh-pages-next/public/comparisons/data/comparisons.json",
   "real_data_only": true,

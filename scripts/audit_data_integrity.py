@@ -85,6 +85,74 @@ def stale_ingestion_runs(
     return stale
 
 
+def reconcile_stale_ingestion_runs(
+    path: Path,
+    *,
+    stale_after_hours: int,
+    now: datetime | None = None,
+) -> dict[str, Any]:
+    """Close abandoned runs as errors without changing their real row counts."""
+    observed_at = now or utc_now()
+    connection = sqlite3.connect(path)
+    connection.row_factory = sqlite3.Row
+    try:
+        connection.execute("PRAGMA foreign_keys = ON")
+        connection.execute("BEGIN IMMEDIATE")
+        stale = stale_ingestion_runs(
+            connection,
+            cutoff=observed_at - timedelta(hours=stale_after_hours),
+        )
+        columns = {
+            str(row[1]) for row in connection.execute("PRAGMA table_info(ingestion_runs)")
+        }
+        reconciled: list[dict[str, Any]] = []
+        for row in stale:
+            assignments = ["status = 'error'"]
+            values: list[Any] = []
+            reconciled_at = iso_utc(observed_at)
+            if "finished_at" in columns:
+                assignments.append("finished_at = ?")
+                values.append(reconciled_at)
+            if "message" in columns:
+                note = (
+                    "integrity_reconciled_stale_running_at="
+                    f"{reconciled_at}; previous_status=running; reason={row['reason']}"
+                )
+                assignments.append(
+                    "message = CASE WHEN message IS NULL OR trim(message) = '' "
+                    "THEN ? ELSE message || ' | ' || ? END"
+                )
+                values.extend((note, note))
+            cursor = connection.execute(
+                f"UPDATE ingestion_runs SET {', '.join(assignments)} "
+                "WHERE run_id = ? AND status = 'running'",
+                (*values, int(row["run_id"])),
+            )
+            if cursor.rowcount != 1:
+                raise RuntimeError(
+                    f"stale ingestion run changed during reconciliation: {row['run_id']}"
+                )
+            reconciled.append(
+                {
+                    **row,
+                    "previous_status": "running",
+                    "reconciled_status": "error",
+                    "reconciled_at": reconciled_at,
+                }
+            )
+        connection.commit()
+        return {
+            "path": display_path(path),
+            "rows_reconciled": len(reconciled),
+            "runs": reconciled,
+        }
+    except Exception:
+        connection.rollback()
+        raise
+    finally:
+        connection.close()
+
+
 def audit_database(
     path: Path,
     *,
@@ -225,6 +293,14 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--staging-root", default="etl/data/staging")
     parser.add_argument("--text-root", default=DEFAULT_TEXT_ROOT)
     parser.add_argument("--stale-after-hours", type=int, default=24)
+    parser.add_argument(
+        "--reconcile-stale-running",
+        action="store_true",
+        help=(
+            "when stale ingestion runs are a database's only issue, mark them "
+            "as error and preserve their real counts"
+        ),
+    )
     parser.add_argument("--report-out")
     parser.add_argument("--enforce", action="store_true")
     return parser.parse_args()
@@ -241,11 +317,42 @@ def main() -> int:
         requested = args.databases or list(DEFAULT_DATABASES)
         database_paths = [REPO_ROOT / value for value in requested]
 
+    observed_at = utc_now()
+    reconciliation_entries: list[dict[str, Any]] = []
+    pre_report: dict[str, Any] | None = None
+    if args.reconcile_stale_running:
+        pre_report = build_report(
+            database_paths,
+            text_root=REPO_ROOT / args.text_root,
+            stale_after_hours=args.stale_after_hours,
+            now=observed_at,
+        )
+        for path, database in zip(database_paths, pre_report["databases"], strict=True):
+            if database["issues"] != ["stale_ingestion_runs"]:
+                continue
+            reconciliation_entries.append(
+                reconcile_stale_ingestion_runs(
+                    path,
+                    stale_after_hours=args.stale_after_hours,
+                    now=observed_at,
+                )
+            )
+
     report = build_report(
         database_paths,
         text_root=REPO_ROOT / args.text_root,
         stale_after_hours=args.stale_after_hours,
+        now=observed_at,
     )
+    report["reconciliation"] = {
+        "enabled": bool(args.reconcile_stale_running),
+        "pre_audit_status": pre_report["status"] if pre_report else None,
+        "databases_reconciled": len(reconciliation_entries),
+        "rows_reconciled": sum(
+            int(entry["rows_reconciled"]) for entry in reconciliation_entries
+        ),
+        "databases": reconciliation_entries,
+    }
     if args.report_out:
         output_path = REPO_ROOT / args.report_out
         output_path.parent.mkdir(parents=True, exist_ok=True)

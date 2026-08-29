@@ -207,6 +207,16 @@ def schema_object_definitions(connection: sqlite3.Connection) -> list[dict[str, 
 
 
 def max_rss_bytes() -> int:
+    # Linux ru_maxrss can retain the parent's pre-exec high-water mark. VmHWM
+    # measures this process image, so composed validation keeps a truthful cap.
+    if sys.platform.startswith("linux"):
+        try:
+            for line in Path("/proc/self/status").read_text(encoding="ascii").splitlines():
+                parts = line.split()
+                if len(parts) == 3 and parts[0] == "VmHWM:" and parts[2] == "kB":
+                    return int(parts[1]) * 1024
+        except (OSError, ValueError):
+            pass
     value = int(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss)
     return value if sys.platform == "darwin" else value * 1024
 

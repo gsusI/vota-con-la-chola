@@ -1,0 +1,97 @@
+{
+  "databases": [
+    {
+      "bytes": 4169728,
+      "checks": {
+        "exists": true,
+        "foreign_keys": true,
+        "no_recovery_residue": true,
+        "no_stale_ingestion_runs": true,
+        "sqlite_quick_check": true
+      },
+      "foreign_key_violations": 0,
+      "issues": [],
+      "lost_and_found_rows": 0,
+      "path": "etl/data/staging/bdns-concessions-partitioned-real-s2-20260812.db",
+      "stale_ingestion_runs": []
+    },
+    {
+      "bytes": 486834176,
+      "checks": {
+        "exists": true,
+        "foreign_keys": true,
+        "no_recovery_residue": true,
+        "no_stale_ingestion_runs": true,
+        "sqlite_quick_check": true
+      },
+      "foreign_key_violations": 0,
+      "issues": [],
+      "lost_and_found_rows": 0,
+      "path": "etl/data/staging/bdns-concessions-real-s1-20260812.db",
+      "stale_ingestion_runs": []
+    }
+  ],
+  "derived_artifacts": {
+    "checks": {
+      "no_zero_byte_artifacts": true
+    },
+    "exists": true,
+    "issues": [],
+    "root": "etl/data/derived/parl_initiative_doc_texts",
+    "zero_byte_files": []
+  },
+  "generated_at": "2026-08-29T14:54:43.798556Z",
+  "policy": {
+    "quarantine_directories_excluded": true,
+    "stale_running_after_hours": 24
+  },
+  "reconciliation": {
+    "databases": [
+      {
+        "path": "etl/data/staging/bdns-concessions-partitioned-real-s2-20260812.db",
+        "rows_reconciled": 1,
+        "runs": [
+          {
+            "previous_status": "running",
+            "reason": "stale_running_status",
+            "reconciled_at": "2026-08-29T14:54:43.798556Z",
+            "reconciled_status": "error",
+            "records_loaded": 0,
+            "records_seen": 0,
+            "run_id": 1,
+            "source_id": "bdns_api_subvenciones",
+            "started_at": "2026-08-12T13:07:10+00:00"
+          }
+        ]
+      },
+      {
+        "path": "etl/data/staging/bdns-concessions-real-s1-20260812.db",
+        "rows_reconciled": 1,
+        "runs": [
+          {
+            "previous_status": "running",
+            "reason": "stale_running_status",
+            "reconciled_at": "2026-08-29T14:54:43.798556Z",
+            "reconciled_status": "error",
+            "records_loaded": 100000,
+            "records_seen": 100000,
+            "run_id": 1,
+            "source_id": "bdns_api_subvenciones",
+            "started_at": "2026-08-12T12:23:11+00:00"
+          }
+        ]
+      }
+    ],
+    "databases_reconciled": 2,
+    "enabled": true,
+    "pre_audit_status": "failed",
+    "rows_reconciled": 2
+  },
+  "status": "ok",
+  "summary": {
+    "databases_checked": 2,
+    "databases_with_issues": 0,
+    "issue_count": 0,
+    "zero_byte_artifacts": 0
+  }
+}

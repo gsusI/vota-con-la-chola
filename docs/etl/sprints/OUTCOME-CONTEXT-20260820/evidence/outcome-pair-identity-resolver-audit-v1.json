@@ -1,0 +1,54 @@
+{
+  "artifacts": {
+    "member_vote_manifest": "etl/data/published/member-vote-shard-manifest-latest.json",
+    "member_vote_validation": "etl/data/published/member-vote-shard-validation-latest.json",
+    "plan_database": "etl/data/staging/outcome-context-pair-plan-c2b-v1.db",
+    "registry": "docs/etl/real-corpus-registry.json",
+    "shard_root": "etl/data/derived/member-vote-shards"
+  },
+  "checks": {
+    "all_action_ids_resolved": true,
+    "durable_registry_entry": true,
+    "exact_real_c2b_actions": true,
+    "exact_source_member_vote_rows": true,
+    "exact_source_official_name_rows": true,
+    "expected_count_mismatches_preserved": true,
+    "member_vote_manifest_validated": true,
+    "no_private_tokens": true,
+    "resolver_member_votes_present": true,
+    "resolver_public_names_present": true
+  },
+  "counts": {
+    "actions": 458,
+    "count_mismatches": 64,
+    "missing_actions": 0,
+    "private_token_findings": 0,
+    "resolver_distinct_official_names": 492,
+    "resolver_member_votes": 108554,
+    "source_member_votes": 119116,
+    "source_official_name_rows": 119116
+  },
+  "limitations": [
+    "The durable shard corpus resolves every C2B action and retains exact public names, but 64 action member counts differ from the pinned C2B source.",
+    "The pinned C2B member component root remains authoritative for exact participant projection until that exact 119,116-row source is durably restorable."
+  ],
+  "policy": {
+    "action_locator_resolved": true,
+    "exact_source_participant_projection_resolved": false,
+    "official_public_names_retained": true,
+    "official_real_records_only": true,
+    "synthetic_or_mock_records_counted": false
+  },
+  "roots": {
+    "action_resolution_root_sha256": "b0f71f6445b8736f77cd52092202901a38f04e436e84bd5eaf4303c1bb4f7a6f",
+    "count_mismatch_root_sha256": "82827093bc8a8e0f976874c97eeac2a29e758b630289dbfcda240f7ae2eaaeff",
+    "member_vote_manifest_sha256": "864f683b8b6986834ec1833933e223b5ddc185bf3cf0b9b0fdb9be0dcd86d7be",
+    "member_vote_validation_sha256": "1d4ba60a25a5466f6c7a71d19d2fa46f12ec62a291dddced767fc448d9933d54",
+    "registry_entry_sha256": "dff220b514752bd581771d2fac9e2c81d7b1bd0488c77c2325e6cecde2ce8597",
+    "registry_sha256": "2757f1641ba5f71f4c05ee28d6894723fd0ec8964f427cafbc43c9b0765d0fd4",
+    "source_database_sha256": "04c8265154bf6659971b732db135f07fe6db0d45a0482d775bb30c15bde57680",
+    "source_member_component_root_sha256": "95aac5313afd057f042d7c1d39a7cfc8b20db8522eff591fff52f84774cf1631"
+  },
+  "schema_version": "outcome_pair_identity_resolver_audit_v1",
+  "status": "passed"
+}

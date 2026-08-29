@@ -351,6 +351,29 @@ def stable_source_database_fact(path: Path) -> dict[str, Any]:
     }
 
 
+def portable_source_database_fact(fact: dict[str, Any]) -> dict[str, Any]:
+    """Project a same-run SQLite fact onto its cross-runtime content identity."""
+
+    if set(fact) != {
+        "path",
+        "bytes",
+        "sha256",
+        "stat_identity_sha256",
+        "wal_bytes",
+    }:
+        raise RuntimeError("source database fact keys differ from the contract")
+    if not isinstance(fact["stat_identity_sha256"], str) or not HEX64_RE.fullmatch(
+        fact["stat_identity_sha256"]
+    ):
+        raise RuntimeError("source database stat identity is not a SHA-256")
+    return {
+        "path": fact["path"],
+        "bytes": fact["bytes"],
+        "sha256": fact["sha256"],
+        "wal_bytes": fact["wal_bytes"],
+    }
+
+
 def open_readonly(path: Path) -> sqlite3.Connection:
     connection = sqlite3.connect(
         f"file:{path.resolve().as_posix()}?mode=ro", uri=True
@@ -3377,7 +3400,11 @@ def validate_materialization_report(
         file_fact(truth.indicator_raw_path),
     )
     for key, expected in current_source_facts.items():
-        audit.equal(f"materialization_report_{key}_current_fact", inputs[key], expected)
+        audit.equal(
+            f"materialization_report_{key}_current_fact",
+            portable_source_database_fact(inputs[key]),
+            portable_source_database_fact(expected),
+        )
     stability = inputs["source_database_stability"]
     audit.equal(
         "materialization_report_source_stability_keys",
@@ -3398,13 +3425,25 @@ def validate_materialization_report(
     )
     audit.equal(
         "materialization_report_source_pre_query_facts",
-        stability["pre_query"],
-        current_source_facts,
+        {
+            key: portable_source_database_fact(value)
+            for key, value in stability["pre_query"].items()
+        },
+        {
+            key: portable_source_database_fact(value)
+            for key, value in current_source_facts.items()
+        },
     )
     audit.equal(
         "materialization_report_source_post_query_facts",
-        stability["post_query"],
-        current_source_facts,
+        {
+            key: portable_source_database_fact(value)
+            for key, value in stability["post_query"].items()
+        },
+        {
+            key: portable_source_database_fact(value)
+            for key, value in current_source_facts.items()
+        },
     )
     audit.equal(
         "materialization_report_source_pre_post_exact",

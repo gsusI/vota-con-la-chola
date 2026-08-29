@@ -1,0 +1,100 @@
+{
+  "artifacts": {
+    "manifest": "etl/data/staging/outcome-pair-discovery-c2b-v1-final-resumed-manifest.json",
+    "report": "etl/data/staging/outcome-pair-discovery-c2b-v1-final-resumed-report.json",
+    "root": "etl/data/derived/outcome-pair-discovery-c2b-v1-final-resumed",
+    "validation": "etl/data/staging/outcome-pair-discovery-c2b-v1-final-resumed-validation.json"
+  },
+  "checks": {
+    "association_claims_zero": true,
+    "bounded_file_rows": true,
+    "bounded_peak_rss": true,
+    "causal_claims_zero": true,
+    "downstream_hive_dataset_compatible": true,
+    "effect_estimates_zero": true,
+    "exact_action_projections_bundled": true,
+    "exact_canonical_pair_layout": true,
+    "exact_member_votes_bundled": true,
+    "exact_official_names_bundled": true,
+    "exact_source_pair_count": true,
+    "hard_byte_contract": true,
+    "hard_resource_contract": true,
+    "identity_companion_inventory_exact": true,
+    "identity_companion_validation_passed": true,
+    "indicator_source_url_complete": true,
+    "member_votes_retained_at_source": true,
+    "minimum_real_rows": true,
+    "no_private_tokens": true,
+    "official_identity_reference_complete": true,
+    "official_public_names_retained_at_source": true,
+    "publication_eligible_rows_zero": true,
+    "ranking_eligible_rows_zero": true,
+    "source_artifacts_unchanged": true,
+    "source_url_complete": true,
+    "source_validation_passed": true
+  },
+  "counts": {
+    "files": 1213,
+    "identity_companion_distinct_official_names": 490,
+    "identity_companion_member_vote_rows": 119116,
+    "pairs": 2865602,
+    "parquet_bytes": 251522252,
+    "partitions": 1205,
+    "publication_eligible_rows": 0
+  },
+  "incremental_contract": {
+    "files_copied": 0,
+    "files_hardlinked": 0,
+    "input_fingerprint": "sha256_canonical_internal_rows",
+    "partitions_checkpoint_resumed": 25,
+    "partitions_rebuilt": 1205,
+    "partitions_reused": 0,
+    "previous_manifest_sha256": null,
+    "reuse_key": [
+      "partition_id",
+      "input_sha256",
+      "schema_sha256",
+      "transformer_version",
+      "partition_contract"
+    ]
+  },
+  "independent_validation_passed": false,
+  "materialization_gate_passed": true,
+  "policy": {
+    "association_assessment": "not_assessed",
+    "causal_assessment": "not_assessed",
+    "corruption_assessment": "not_assessed",
+    "effect_estimate_state": "not_computed",
+    "evidence_level": "L0",
+    "identity_companion": "bundled_exact_public_member_vote_dimension",
+    "identity_storage": "bundled_normalized_exact_member_vote_companion_without_pair_duplication",
+    "link_state": "internal_discovery_pair",
+    "official_public_domain_personal_information_retained": true,
+    "official_real_records_only": true,
+    "political_merit_or_blame": "not_assessed",
+    "publication_eligible_rows": 0,
+    "synthetic_or_mock_records_forbidden": true
+  },
+  "promotion_gate_passed": false,
+  "recovered_existing_valid_package": false,
+  "roots": {
+    "identity_companion_semantic_root_sha256": "e6891375adfabf8a6a89f0c3691eff7f895856817cdb036d6def98b9d37c2a4e",
+    "package_manifest_root_sha256": "81cc315e9d879a43694db3a30649d9045f7b59159be156cae38a84d7d8de84bd",
+    "package_manifest_sha256": "be0bf3c79037d9f666fe315465a61047f0270aff19f2b5bd3c1455a1f5da99a7",
+    "package_semantic_root_sha256": "2afaf9efa3d4dc9d327bcf7248d543a4584b30e954daef43caa84362ebb8ae2b",
+    "physical_inventory_root_sha256": "f2d50fa56aa2d05606f0f92b11e2dc064cec5d9dd6ad1bc914ea9284525ac110",
+    "portable_package_root_sha256": "049f9718cb43289170b17110985744d386bd5ba26b0c0dcee14c8fdf3fb406f3",
+    "source_database_sha256": "04c8265154bf6659971b732db135f07fe6db0d45a0482d775bb30c15bde57680",
+    "source_manifest_root_sha256": "9ba36e3994ef2ab1ba90dacf2441fc20fdcda6f14d1942f7fe4fc58be40a24b6",
+    "source_semantic_root_sha256": "e9fecdb89e518c7d8f6ecc947c6930c84afa96dad031c4bbc332842cc685d7ae"
+  },
+  "schema_version": "outcome_pair_discovery_package_report_v1",
+  "status": "materialized_pending_independent_validation",
+  "unresolved_gates": {
+    "durable_remote_origin": false,
+    "full_l1_candidate_materialization": false,
+    "isolated_remote_restore": false,
+    "publication_authorized": false,
+    "real_human_review": false
+  }
+}
