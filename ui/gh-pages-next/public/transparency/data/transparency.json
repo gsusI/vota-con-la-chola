@@ -1,7 +1,7 @@
 {
   "meta": {
     "schema_version": "transparency_dashboard_v1",
-    "generated_at": "2026-08-29T15:15:20+00:00",
+    "generated_at": "2026-08-29T15:58:00+00:00",
     "source_status_generated_at": "2026-08-12T11:09:08+00:00",
     "latest_release_date": "2026-08-20T00:36:23+00:00",
     "freshness_contract": "docs/method/truth-contract.md#estados-de-frescura"
@@ -100,6 +100,30 @@
       "unit": "ficheros",
       "source_path": "docs/etl/sprints/REPRODUCIBILITY-20260819/evidence/live-scale-origin-parity.json",
       "source_url": "https://huggingface.co/datasets/JesusIC/vota-con-la-chola-data/resolve/main/scale/snapshots/2026-08-19/5d9ce557ed864de56f677a9f82c999a4ec0dfc494c086b1bfca0bb2e461272dd/manifest.json"
+    },
+    {
+      "id": "document_fetch_official_urls",
+      "label": "Documentos oficiales en cola",
+      "value": 9084,
+      "unit": "documentos",
+      "source_path": "ui/gh-pages-next/public/transparency/data/document-fetch-operations.json",
+      "source_url": "/transparency/data/document-fetch-operations.json"
+    },
+    {
+      "id": "document_fetch_terminal",
+      "label": "Descargas con estado terminal",
+      "value": 6990,
+      "unit": "documentos",
+      "source_path": "ui/gh-pages-next/public/transparency/data/document-fetch-operations.json",
+      "source_url": "/transparency/data/document-fetch-operations.json"
+    },
+    {
+      "id": "document_fetch_unfinished",
+      "label": "Descargas pendientes",
+      "value": 2094,
+      "unit": "documentos",
+      "source_path": "ui/gh-pages-next/public/transparency/data/document-fetch-operations.json",
+      "source_url": "/transparency/data/document-fetch-operations.json"
     }
   ],
   "source_health": {
@@ -132,9 +156,9 @@
     "evidence_files_total": 119,
     "source_path": "ui/gh-pages-next/public/obstruction-tracker/data/obstructions.json",
     "source_url": "/obstruction-tracker/data/obstructions.json",
-    "source_sha256": "46c718a7948b1b202497fbcc30d9dcfbc9939954694b712d1088d6a83fb52151",
+    "source_sha256": "b3b21b67bd710407a900f4c51542342c4a9f91318724b0db76564e0ba3dc78fe",
     "evidence_manifest_url": "/obstruction-tracker/evidence/manifest.json",
-    "evidence_manifest_sha256": "df9bbd2279b50a493710d1a1913e95edb70cda9c5f4a8b710d7cd92fced0cb33"
+    "evidence_manifest_sha256": "e91c5c2398fc37de020bc328972b83fc70f2c7759408da6928fb613a128d77b8"
   },
   "scale_readiness": {
     "status": "real_foundation_ready_scale_incomplete",
@@ -219,6 +243,117 @@
     "verification_evidence_path": "docs/etl/sprints/REPRODUCIBILITY-20260819/evidence/live-scale-origin-parity.json",
     "verification_evidence_url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/etl/sprints/REPRODUCIBILITY-20260819/evidence/live-scale-origin-parity.json",
     "verification_evidence_sha256": "dc6ed2b6d5e2fbe30a09bc98a52d90f022bfbb73da51a6422319bb43b0af2fa1"
+  },
+  "document_fetch": {
+    "operational_contract_status": "partial",
+    "queue": {
+      "items_total": 9084,
+      "state_counts": {
+        "pending": 2094,
+        "leased": 0,
+        "succeeded": 6792,
+        "dead": 198
+      },
+      "unfinished_total": 2094,
+      "terminal_total": 6990,
+      "attempts_total": 9187,
+      "retry_attempts_total": 103,
+      "max_attempts_observed": 2,
+      "attempt_status_counts": {
+        "dead": 198,
+        "retry": 2197,
+        "succeeded": 6792
+      },
+      "overdue_leases_total": 0,
+      "oldest_created_at": "2026-08-10T14:18:56+00:00",
+      "latest_updated_at": "2026-08-10T14:50:41+00:00"
+    },
+    "documents": {
+      "official_url_sightings_total": 9084,
+      "official_urls_total": 9084,
+      "source_record_linked_urls_total": 6792,
+      "source_record_missing_urls_total": 2292,
+      "fetched_succeeded_total": 6792,
+      "fetched_failed_total": 2292,
+      "missing_fetch_rows_total": 0,
+      "bytes_received": 133219457,
+      "url_scheme_counts": {
+        "http": 3176,
+        "https": 5908
+      },
+      "http_status_counts": {
+        "200": 6792,
+        "404": 198,
+        "500": 21,
+        "none": 2073
+      },
+      "failure_class_counts": {
+        "host_circuit_open": 2070,
+        "not_fetchable": 198,
+        "timeout": 3,
+        "upstream_server_error": 21
+      }
+    },
+    "worker_policy": {
+      "global_workers": 8,
+      "per_host_workers": 2,
+      "per_host_min_interval_ms": 500,
+      "max_document_bytes": 262144000,
+      "streaming_content_addressed_storage": true,
+      "atomic_leases": true,
+      "heartbeat_and_reclaim": true,
+      "retry_and_dead_letter_states": true,
+      "cohort_circuit_breakers": true,
+      "per_host_slo_report_on_worker_runs": true
+    },
+    "integrity": {
+      "queue_balance_passed": true,
+      "document_queue_parity_passed": true,
+      "succeeded_fetch_parity_passed": true,
+      "fetch_rows_parity_passed": true,
+      "orphan_partial_files_total": 0,
+      "official_host_allowlist_passed": true,
+      "official_https_only": false,
+      "plaintext_http_urls_total": 3176
+    },
+    "scale_claim": {
+      "operational_contract_status": "partial",
+      "one_million_documents_processed": false,
+      "promoted_for_unbounded_operation": false,
+      "next_gate": "complete_measured_real_cohorts_100_1000_10000_100000_before_one_million"
+    },
+    "hosts": [
+      {
+        "official_urls_total": 9084,
+        "queue_state_counts": {
+          "pending": 2094,
+          "leased": 0,
+          "succeeded": 6792,
+          "dead": 198
+        },
+        "attempts_total": 9187,
+        "max_attempts_observed": 2,
+        "fetched_succeeded_total": 6792,
+        "fetched_failed_total": 2292,
+        "bytes_received": 133219457,
+        "host": "www.senado.es",
+        "http_status_counts": {
+          "200": 6792,
+          "404": 198,
+          "500": 21,
+          "none": 2073
+        },
+        "failure_class_counts": {
+          "host_circuit_open": 2070,
+          "not_fetchable": 198,
+          "timeout": 3,
+          "upstream_server_error": 21
+        }
+      }
+    ],
+    "source_path": "ui/gh-pages-next/public/transparency/data/document-fetch-operations.json",
+    "source_url": "/transparency/data/document-fetch-operations.json",
+    "source_sha256": "acd9225d07408457850d5853c0fb13839cf80e03253ddf8f5d74741c7f699ca5"
   },
   "recent_changes": [
     {
@@ -628,17 +763,17 @@
         {
           "path": "scripts/export_transparency_dashboard_snapshot.py",
           "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/scripts/export_transparency_dashboard_snapshot.py",
-          "sha256": "ff0e696a096355d327e6458082bf897a85e1c80c869b6c4841729a11b0b67fd6"
+          "sha256": "4314a03a7d14963446a817a64976a8f365b530dcf375a3ef0ab0c14f8117fecb"
         },
         {
           "path": "scripts/validate_transparency_dashboard_snapshot.py",
           "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/scripts/validate_transparency_dashboard_snapshot.py",
-          "sha256": "9541bbcea42871b4a6b1a5622b2033603f8e7236e3d091047275777deb54fc8f"
+          "sha256": "0e662a20ae90f88d3a752d01b66e65bfc1eb06d2f340e7dedce7d787b8a6c72c"
         },
         {
           "path": "tests/test_transparency_dashboard_snapshot.py",
           "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/tests/test_transparency_dashboard_snapshot.py",
-          "sha256": "696e9b55d0e1f96ad17a90e63e8796a2b19a0bf6255221d314fa2119348587fa"
+          "sha256": "d6f8480c1c0dafc7d4a954fee174c512e18fb9c0086921eb2cab99a236e60409"
         },
         {
           "path": "tests/test_transparency_dashboard_ui_contract.js",
@@ -759,6 +894,7 @@
     "source_status": "/explorer-sources/data/status.json",
     "obstruction_tracker": "/obstruction-tracker/",
     "obstruction_feed": "/obstruction-tracker/data/obstructions.json",
+    "document_fetch_operations": "/transparency/data/document-fetch-operations.json",
     "release_registry": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/release-notes/releases.json",
     "roadmap": "https://github.com/gsusI/vota-con-la-chola/blob/main/ROADMAP.md",
     "technical_roadmap": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/roadmap-tecnico.md",

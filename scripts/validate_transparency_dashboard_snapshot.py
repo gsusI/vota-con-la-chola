@@ -103,6 +103,9 @@ def validate(path: Path, max_bytes: int) -> dict[str, Any]:
         "promoted_lanes",
         "published_snapshot_rows",
         "published_snapshot_files",
+        "document_fetch_official_urls",
+        "document_fetch_terminal",
+        "document_fetch_unfinished",
     }
     missing_metrics = sorted(required_metric_ids - metric_ids)
     if missing_metrics:
@@ -162,6 +165,48 @@ def validate(path: Path, max_bytes: int) -> dict[str, Any]:
     if (snapshot.get("freshness") or {}).get("tier") not in ALLOWED_FRESHNESS:
         errors.append("published_snapshot.freshness.tier invalid")
 
+    document_fetch = payload.get("document_fetch") or {}
+    document_queue = document_fetch.get("queue") or {}
+    document_summary = document_fetch.get("documents") or {}
+    document_integrity = document_fetch.get("integrity") or {}
+    document_claim = document_fetch.get("scale_claim") or {}
+    document_states = document_queue.get("state_counts") or {}
+    document_items = int(document_queue.get("items_total") or 0)
+    document_terminal = int(document_queue.get("terminal_total") or 0)
+    document_unfinished = int(document_queue.get("unfinished_total") or 0)
+    if document_items <= 0:
+        errors.append("document fetch requires real official queue items")
+    if document_terminal + document_unfinished != document_items:
+        errors.append("document fetch terminal + unfinished does not reconcile")
+    if document_terminal != int(document_states.get("succeeded") or 0) + int(
+        document_states.get("dead") or 0
+    ):
+        errors.append("document fetch terminal states do not reconcile")
+    if document_unfinished != int(document_states.get("pending") or 0) + int(
+        document_states.get("leased") or 0
+    ):
+        errors.append("document fetch unfinished states do not reconcile")
+    if int(document_summary.get("official_urls_total") or 0) != document_items:
+        errors.append("official document URLs do not reconcile to queue items")
+    if int(document_summary.get("fetched_succeeded_total") or 0) != int(
+        document_states.get("succeeded") or 0
+    ):
+        errors.append("document fetch successes do not reconcile")
+    if int(document_integrity.get("orphan_partial_files_total") or 0) != 0:
+        errors.append("document fetch has orphan partial files")
+    if document_integrity.get("official_host_allowlist_passed") is not True:
+        errors.append("document fetch official host allowlist must pass")
+    if document_claim.get("one_million_documents_processed") != (
+        document_terminal >= 1_000_000
+    ):
+        errors.append("document one-million claim is unsupported")
+    if document_claim.get("promoted_for_unbounded_operation") is not False:
+        errors.append("document fetch unbounded promotion is unsupported")
+    if not HEX_64.fullmatch(str(document_fetch.get("source_sha256") or "")):
+        errors.append("document_fetch.source_sha256 invalid")
+    if not is_link(document_fetch.get("source_url")):
+        errors.append("document_fetch.source_url missing")
+
     releases = payload.get("recent_changes") or []
     release_ids: set[str] = set()
     dates: list[str] = []
@@ -204,6 +249,11 @@ def validate(path: Path, max_bytes: int) -> dict[str, Any]:
         "promoted_lanes": int(readiness_summary.get("promoted_lanes") or 0),
         "published_snapshot_rows": int(snapshot.get("rows_total") or 0),
         "published_snapshot_files": int(snapshot.get("data_files_total") or 0),
+        "document_fetch_official_urls": int(
+            document_summary.get("official_urls_total") or 0
+        ),
+        "document_fetch_terminal": document_terminal,
+        "document_fetch_unfinished": document_unfinished,
     }
     for metric_id, expected in expected_values.items():
         if metric_values.get(metric_id) != expected:
@@ -221,6 +271,11 @@ def validate(path: Path, max_bytes: int) -> dict[str, Any]:
             "open_incidents_total": int(obstruction.get("open_incidents_total") or 0),
             "published_snapshot_rows": int(snapshot.get("rows_total") or 0),
             "published_snapshot_files": int(snapshot.get("data_files_total") or 0),
+            "document_fetch_official_urls": int(
+                document_summary.get("official_urls_total") or 0
+            ),
+            "document_fetch_terminal": document_terminal,
+            "document_fetch_unfinished": document_unfinished,
         },
         "errors": errors,
     }

@@ -245,6 +245,10 @@ transparency_dashboard_origin_verification_json := env_var_or_default("TRANSPARE
 transparency_dashboard_release_registry_json := env_var_or_default("TRANSPARENCY_DASHBOARD_RELEASE_REGISTRY_JSON", "docs/release-notes/releases.json")
 transparency_dashboard_out := env_var_or_default("TRANSPARENCY_DASHBOARD_OUT", "ui/gh-pages-next/public/transparency/data/transparency.json")
 transparency_dashboard_max_bytes := env_var_or_default("TRANSPARENCY_DASHBOARD_MAX_BYTES", "1000000")
+document_fetch_operations_out := env_var_or_default("DOCUMENT_FETCH_OPERATIONS_OUT", "ui/gh-pages-next/public/transparency/data/document-fetch-operations.json")
+document_fetch_operations_evidence := env_var_or_default("DOCUMENT_FETCH_OPERATIONS_EVIDENCE", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-fetch-operations-20260829.json")
+document_fetch_operations_validation := env_var_or_default("DOCUMENT_FETCH_OPERATIONS_VALIDATION", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-fetch-operations-validation-20260829.json")
+document_fetch_operations_max_bytes := env_var_or_default("DOCUMENT_FETCH_OPERATIONS_MAX_BYTES", "500000")
 evidence_api_v1_evidence_json := env_var_or_default("EVIDENCE_API_V1_EVIDENCE_JSON", "etl/data/published/accountability-evidence-api-latest.json")
 evidence_api_v1_source_health_json := env_var_or_default("EVIDENCE_API_V1_SOURCE_HEALTH_JSON", obstruction_tracker_status_json)
 evidence_api_v1_origin_verification_json := env_var_or_default("EVIDENCE_API_V1_ORIGIN_VERIFICATION_JSON", transparency_dashboard_origin_verification_json)
@@ -545,10 +549,12 @@ integrity_signal_review_csv := env_var_or_default("INTEGRITY_SIGNAL_REVIEW_CSV",
 integrity_signal_review_report := env_var_or_default("INTEGRITY_SIGNAL_REVIEW_REPORT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/procurement-integrity-human-review-queue.json")
 document_fetch_workers := env_var_or_default("DOCUMENT_FETCH_WORKERS", "8")
 document_fetch_per_host_workers := env_var_or_default("DOCUMENT_FETCH_PER_HOST_WORKERS", "2")
+document_fetch_per_host_min_interval_ms := env_var_or_default("DOCUMENT_FETCH_PER_HOST_MIN_INTERVAL_MS", "500")
 document_fetch_claim_size := env_var_or_default("DOCUMENT_FETCH_CLAIM_SIZE", "32")
 document_fetch_max_items := env_var_or_default("DOCUMENT_FETCH_MAX_ITEMS", "0")
 document_fetch_max_bytes := env_var_or_default("DOCUMENT_FETCH_MAX_BYTES", "262144000")
 document_fetch_report_out := env_var_or_default("DOCUMENT_FETCH_REPORT_OUT", "docs/etl/runs/document-fetch-queue-latest.json")
+document_fetch_raw_root := env_var_or_default("DOCUMENT_FETCH_RAW_ROOT", "etl/data/raw/text_documents/parl_initiative_docs")
 text_extraction_workers := env_var_or_default("TEXT_EXTRACTION_WORKERS", "4")
 text_extraction_claim_size := env_var_or_default("TEXT_EXTRACTION_CLAIM_SIZE", "16")
 text_extraction_max_items := env_var_or_default("TEXT_EXTRACTION_MAX_ITEMS", "0")
@@ -2211,7 +2217,7 @@ parl-enqueue-document-fetch-work:
   python3 scripts/enqueue_pipeline_work.py --db {{db_path}} --kind document-fetch --source-ids 'congreso_iniciativas,senado_iniciativas' --only-missing --batch-size {{scale_queue_enqueue_batch_size}}
 
 parl-run-document-fetch-work:
-  python3 scripts/run_document_fetch_queue.py --db {{db_path}} --raw-root etl/data/raw/text_documents/parl_initiative_docs --workers {{document_fetch_workers}} --per-host-workers {{document_fetch_per_host_workers}} --claim-size {{document_fetch_claim_size}} --max-items {{document_fetch_max_items}} --max-bytes {{document_fetch_max_bytes}} --report-out {{document_fetch_report_out}}
+  python3 scripts/run_document_fetch_queue.py --db {{db_path}} --raw-root {{document_fetch_raw_root}} --workers {{document_fetch_workers}} --per-host-workers {{document_fetch_per_host_workers}} --per-host-min-interval-ms {{document_fetch_per_host_min_interval_ms}} --claim-size {{document_fetch_claim_size}} --max-items {{document_fetch_max_items}} --max-bytes {{document_fetch_max_bytes}} --report-out {{document_fetch_report_out}}
 
 parl-enqueue-text-extraction-work:
   python3 scripts/enqueue_pipeline_work.py --db {{db_path}} --kind text-extract --source-ids '{{text_extraction_queue_source_ids}}' --only-missing --batch-size {{scale_queue_enqueue_batch_size}}
@@ -2300,7 +2306,7 @@ etl-scale-boe-document-seed:
   python3 scripts/manage_boe_document_corpus.py seed-summaries --db {{db_path}} --start-date {{boe_document_start_date}} --end-date {{boe_document_end_date}} --report-out {{boe_document_report}} --enforce
 
 etl-scale-boe-summary-fetch:
-  python3 scripts/run_document_fetch_queue.py --db {{db_path}} --pipeline-id boe_summary_fetch --worker-id boe-summary-worker --raw-root etl/data/raw/text_documents/boe_daily_summaries --workers {{boe_document_workers}} --per-host-workers {{boe_document_per_host_workers}} --claim-size 64 --max-items 0 --timeout 30 --max-bytes 16777216 --min-free-bytes {{boe_document_min_free_bytes}} --download-attempts 3 --retry-delay-seconds 120 --snapshot-date {{boe_document_snapshot_date}} --report-out {{boe_summary_fetch_report}}
+  python3 scripts/run_document_fetch_queue.py --db {{db_path}} --pipeline-id boe_summary_fetch --worker-id boe-summary-worker --raw-root etl/data/raw/text_documents/boe_daily_summaries --workers {{boe_document_workers}} --per-host-workers {{boe_document_per_host_workers}} --per-host-min-interval-ms {{document_fetch_per_host_min_interval_ms}} --claim-size 64 --max-items 0 --timeout 30 --max-bytes 16777216 --min-free-bytes {{boe_document_min_free_bytes}} --download-attempts 3 --retry-delay-seconds 120 --snapshot-date {{boe_document_snapshot_date}} --report-out {{boe_summary_fetch_report}}
 
 etl-scale-boe-summary-requeue-contract-failures:
   python3 scripts/manage_boe_document_corpus.py requeue-summary-contract-failures --db {{db_path}} --report-out {{boe_document_report}} --enforce
@@ -2309,7 +2315,7 @@ etl-scale-boe-document-expand:
   python3 scripts/manage_boe_document_corpus.py expand-documents --db {{db_path}} --start-date {{boe_document_start_date}} --end-date {{boe_document_end_date}} --report-out {{boe_document_report}} --enforce
 
 etl-scale-boe-document-fetch:
-  python3 scripts/run_document_fetch_queue.py --db {{db_path}} --pipeline-id boe_document_fetch --worker-id boe-document-worker --raw-root etl/data/raw/text_documents/boe_document_xml --workers {{boe_document_workers}} --per-host-workers {{boe_document_per_host_workers}} --claim-size 64 --max-items {{boe_document_max_items}} --timeout 30 --max-bytes 67108864 --min-free-bytes {{boe_document_min_free_bytes}} --download-attempts 3 --retry-delay-seconds 120 --snapshot-date {{boe_document_snapshot_date}} --report-out {{boe_document_fetch_report}}
+  python3 scripts/run_document_fetch_queue.py --db {{db_path}} --pipeline-id boe_document_fetch --worker-id boe-document-worker --raw-root etl/data/raw/text_documents/boe_document_xml --workers {{boe_document_workers}} --per-host-workers {{boe_document_per_host_workers}} --per-host-min-interval-ms {{document_fetch_per_host_min_interval_ms}} --claim-size 64 --max-items {{boe_document_max_items}} --timeout 30 --max-bytes 67108864 --min-free-bytes {{boe_document_min_free_bytes}} --download-attempts 3 --retry-delay-seconds 120 --snapshot-date {{boe_document_snapshot_date}} --report-out {{boe_document_fetch_report}}
 
 etl-scale-boe-document-status:
   python3 scripts/manage_boe_document_corpus.py status --db {{db_path}} --report-out {{boe_document_report}} --enforce
@@ -2534,7 +2540,7 @@ etl-scale-placsp-documents-enqueue:
   python3 scripts/enqueue_pipeline_work.py --db {{placsp_bulk_db}} --kind placsp-document-fetch --pipeline-id {{placsp_document_pipeline_id}} --source-ids placsp_sindicacion --only-missing --batch-size 5000 --max-attempts 5 --report-out {{placsp_document_enqueue_report}}
 
 etl-scale-placsp-documents-work:
-  ca_arg=""; if [ -n "{{placsp_bulk_ca_bundle}}" ]; then ca_arg="--ca-bundle {{placsp_bulk_ca_bundle}}"; fi; python3 scripts/run_document_fetch_queue.py --db {{placsp_bulk_db}} --pipeline-id {{placsp_document_pipeline_id}} --worker-id placsp-document-worker --raw-root {{placsp_document_raw_root}} --workers 2 --per-host-workers 1 --claim-size 4 --max-items {{placsp_document_worker_max_items}} --lease-seconds 900 --timeout 60 --max-bytes 262144000 --download-attempts 1 --retry-delay-seconds 300 --report-out {{placsp_document_worker_report}} $ca_arg
+  ca_arg=""; if [ -n "{{placsp_bulk_ca_bundle}}" ]; then ca_arg="--ca-bundle {{placsp_bulk_ca_bundle}}"; fi; python3 scripts/run_document_fetch_queue.py --db {{placsp_bulk_db}} --pipeline-id {{placsp_document_pipeline_id}} --worker-id placsp-document-worker --raw-root {{placsp_document_raw_root}} --workers 2 --per-host-workers 1 --per-host-min-interval-ms {{document_fetch_per_host_min_interval_ms}} --claim-size 4 --max-items {{placsp_document_worker_max_items}} --lease-seconds 900 --timeout 60 --max-bytes 262144000 --download-attempts 1 --retry-delay-seconds 300 --report-out {{placsp_document_worker_report}} $ca_arg
 
 etl-scale-placsp-integrity-review:
   python3 scripts/detect_procurement_integrity_signals.py --db {{placsp_bulk_db}} --source-ids placsp_sindicacion --threshold-eur {{integrity_signal_threshold_eur}} --min-records {{integrity_signal_min_records}} --max-signals {{integrity_signal_max_signals}} --supersede-missing --supersede-prior-versions --report-out {{placsp_integrity_report}}
@@ -4627,16 +4633,36 @@ obstruction-tracker-export:
     --max-bytes "{{obstruction_tracker_max_bytes}}"
 
 transparency-dashboard-export:
+  @just document-fetch-operations-export
   python3 scripts/export_transparency_dashboard_snapshot.py \
     --status-json "{{transparency_dashboard_status_json}}" \
     --obstruction-json "{{transparency_dashboard_obstruction_json}}" \
     --readiness-json "{{transparency_dashboard_readiness_json}}" \
     --origin-verification-json "{{transparency_dashboard_origin_verification_json}}" \
     --release-registry-json "{{transparency_dashboard_release_registry_json}}" \
+    --document-fetch-operations-json "{{document_fetch_operations_out}}" \
     --out "{{transparency_dashboard_out}}"
   python3 scripts/validate_transparency_dashboard_snapshot.py \
     --path "{{transparency_dashboard_out}}" \
     --max-bytes "{{transparency_dashboard_max_bytes}}"
+
+document-fetch-operations-export:
+  python3 scripts/report_document_fetch_operations.py \
+    --db "{{db_path}}" \
+    --raw-root "{{document_fetch_raw_root}}" \
+    --global-workers "{{document_fetch_workers}}" \
+    --per-host-workers "{{document_fetch_per_host_workers}}" \
+    --per-host-min-interval-ms "{{document_fetch_per_host_min_interval_ms}}" \
+    --max-document-bytes "{{document_fetch_max_bytes}}" \
+    --out "{{document_fetch_operations_out}}" \
+    --evidence-out "{{document_fetch_operations_evidence}}"
+  python3 scripts/validate_document_fetch_operations.py \
+    --path "{{document_fetch_operations_out}}" \
+    --evidence-path "{{document_fetch_operations_evidence}}" \
+    --db "{{db_path}}" \
+    --raw-root "{{document_fetch_raw_root}}" \
+    --max-bytes "{{document_fetch_operations_max_bytes}}" \
+    --out "{{document_fetch_operations_validation}}"
 
 evidence-api-v1-export:
   python3 scripts/export_evidence_api_v1.py \

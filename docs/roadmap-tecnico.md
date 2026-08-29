@@ -188,12 +188,13 @@ DoD:
 Pasos:
 
 1. `DONE 2026-08-13`: inventariar `111,408` instancias raw oficiales / `109,558` contenidos y clasificar source, MIME, bytes, páginas y densidad; idioma/encryption completos siguen como gap de `DOC-001`;
-2. `PARTIAL 2026-08-13`: reconciliar file instances y provenance. El audit balancea `111,408/111,408`, verifica checksum + URL para `111,357` y preserva `51` gaps / `8,315,544` bytes. Los `89,001` documentos y `1,034` resúmenes BOE no introducen gaps. Wayback conserva `3` targets, `5` nonmatches y `7` variantes fallidas en checkpoint de `43` filas sin red repetida;
-3. `DONE 2026-08-13` para el corpus actual: extracción nativa con estado SQLite inmutable por input, leases, retries, SHA-256, CAS gzip determinista y límites duros. Resultado v5 `111,408/111,408`, `109,558/109,558`, `1,999,902,681` caracteres, `108,139` CAS, `0` retry/dead/failure/truncation; validator independiente rehasha cada raw y CAS;
-4. `DONE 2026-08-13` para el corpus actual: enrutar sólo las `856` páginas vacías/sparse y ejecutar OCR aditivo con input manifest, engine, idiomas, versión y config persistidos. Resultado `856/856`, `849` con texto, `7` no-text, `89,632` caracteres, `17` mejoras y `131` CAS; validator independiente verifica `58` PDFs y cada CAS;
-5. `READY_FOR_HUMAN_REVIEW 2026-08-13`: revisar las `40` páginas reales seleccionadas. Incluye todos los `7` no-text, las `17` mejoras materiales, ambas fuentes y ambas razones; `0/40` decisiones y reviewer fields completos, sin labels inventados;
-6. `PARTIAL 2026-08-13`: el volumen real `100k` ya pasa; cerrar estratos representativos de formatos, idiomas, tamaños, scans, corruptos y hosts antes de promoción;
-7. calcular request/storage/CPU/RSS/OCR/coste por `1,000` antes de `1M`.
+2. `PARTIAL 2026-08-29`: operar fetch por host. Cada request real pasa límites de concurrencia y un intervalo mínimo configurable (`500ms` por defecto); el worker v3 reporta requests, success/failure, bytes, HTTP/failure classes, peak in-flight, espera y circuitos por host. El snapshot público, generado sin red, reconcilia `9,084` URLs Senado: `6,792` succeeded, `198` dead, `2,094` pending reclaimable, `9,187` attempts, `0` leases vencidos y `0` parciales huérfanos. Conserva como riesgo visible `3,176` URLs oficiales HTTP y `5,908` HTTPS; no reescribe evidencia. Falta fijar máximos por host con source steward y ejecutar cohorts frescas `100 -> 1k -> 10k -> 100k`;
+3. `PARTIAL 2026-08-13`: reconciliar file instances y provenance. El audit balancea `111,408/111,408`, verifica checksum + URL para `111,357` y preserva `51` gaps / `8,315,544` bytes. Los `89,001` documentos y `1,034` resúmenes BOE no introducen gaps. Wayback conserva `3` targets, `5` nonmatches y `7` variantes fallidas en checkpoint de `43` filas sin red repetida;
+4. `DONE 2026-08-13` para el corpus actual: extracción nativa con estado SQLite inmutable por input, leases, retries, SHA-256, CAS gzip determinista y límites duros. Resultado v5 `111,408/111,408`, `109,558/109,558`, `1,999,902,681` caracteres, `108,139` CAS, `0` retry/dead/failure/truncation; validator independiente rehasha cada raw y CAS;
+5. `DONE 2026-08-13` para el corpus actual: enrutar sólo las `856` páginas vacías/sparse y ejecutar OCR aditivo con input manifest, engine, idiomas, versión y config persistidos. Resultado `856/856`, `849` con texto, `7` no-text, `89,632` caracteres, `17` mejoras y `131` CAS; validator independiente verifica `58` PDFs y cada CAS;
+6. `READY_FOR_HUMAN_REVIEW 2026-08-13`: revisar las `40` páginas reales seleccionadas. Incluye todos los `7` no-text, las `17` mejoras materiales, ambas fuentes y ambas razones; `0/40` decisiones y reviewer fields completos, sin labels inventados;
+7. `PARTIAL 2026-08-13`: el volumen real `100k` ya pasa; cerrar estratos representativos de formatos, idiomas, tamaños, scans, corruptos y hosts antes de promoción;
+8. calcular request/storage/CPU/RSS/OCR/coste por `1,000` antes de `1M`.
 
 Comandos base:
 
@@ -212,6 +213,7 @@ just etl-scale-validate-document-page-ocr-review
 just etl-scale-require-document-page-ocr-review
 just parl-enqueue-document-fetch-work
 just parl-run-document-fetch-work
+just document-fetch-operations-export
 just parl-enqueue-text-extraction-work
 just parl-run-text-extraction-work
 ```

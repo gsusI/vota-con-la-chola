@@ -1025,6 +1025,46 @@ PROJECT_DOMAIN_CONCEPTS = [
 
 PROJECT_WORKFLOWS = [
     Workflow(
+        name="Operate the bounded document fetch queue",
+        description=(
+            "`bounded document fetch operations` claim official document URLs through "
+            "durable leases, stream each response into content-addressed storage, pace "
+            "every request and retry per host, and publish only reconciled bounded status."
+        ),
+        steps=[
+            "Enqueue exact official URLs idempotently; never substitute generated or sample records for missing source data.",
+            "Set a global claim ceiling plus per-host concurrency, minimum request-start interval, byte/time ceiling, storage reserve, retry delay, and circuit threshold before network work.",
+            "Run requests through the per-host slot for every retry; record exact request, outcome, byte, HTTP status, failure class, peak in-flight, throttle wait, and circuit metrics.",
+            "Persist success only after atomic checksum-addressed publication; delete partial files on every failure and retain retryable or dead queue state explicitly.",
+            "Do not repeat a blocked-host probe without a new lever; publish current queue truth from the read-only database instead.",
+            "Run the independent operations validator and require queue/document/host parity, zero overdue leases, zero orphan partials, official-host allowlist, no unsupported million-scale claim, no secrets, and exact public identity retention.",
+            "Increase real cohorts through 100, 1000, 10000, and 100000 only after the prior cohort's host SLO and recovery gates pass.",
+        ],
+        validation=[
+            "just document-fetch-operations-export",
+            "just transparency-dashboard-export",
+            "just privacy-check-public-artifacts",
+        ],
+        evidence=[
+            Evidence(
+                source="scripts/run_document_fetch_queue.py",
+                detail="Durable streaming worker, exact per-request host pacing, circuits, and per-host SLO report.",
+            ),
+            Evidence(
+                source="scripts/validate_document_fetch_operations.py",
+                detail="Independent real-DB reconciliation and public claim gate.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-fetch-operations-validation-20260829.json",
+                detail="Current real Senate queue validation with zero orphan partials and no unsupported promotion.",
+            ),
+        ],
+        references={
+            "bounded document fetch operations": "fact.Readiness counts only verified official corpora"
+        },
+        updated_at=UPDATED,
+    ),
+    Workflow(
         name="Ingest official BOE election candidates",
         description=(
             "`BOE candidate ingestion` parses exact immutable proclamation XML, "

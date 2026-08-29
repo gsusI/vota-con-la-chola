@@ -21,9 +21,15 @@ DEFAULT_ORIGIN_VERIFICATION_JSON = Path(
     "docs/etl/sprints/REPRODUCIBILITY-20260819/evidence/live-scale-origin-parity.json"
 )
 DEFAULT_RELEASE_REGISTRY_JSON = Path("docs/release-notes/releases.json")
+DEFAULT_DOCUMENT_FETCH_OPERATIONS_JSON = Path(
+    "ui/gh-pages-next/public/transparency/data/document-fetch-operations.json"
+)
 DEFAULT_REPO_BLOB_BASE = "https://github.com/gsusI/vota-con-la-chola/blob/main"
 DEFAULT_PUBLIC_STATUS_URL = "/explorer-sources/data/status.json"
 DEFAULT_PUBLIC_OBSTRUCTION_URL = "/obstruction-tracker/data/obstructions.json"
+DEFAULT_PUBLIC_DOCUMENT_FETCH_OPERATIONS_URL = (
+    "/transparency/data/document-fetch-operations.json"
+)
 
 
 def read_json(path: Path) -> dict[str, Any]:
@@ -204,12 +210,14 @@ def build_payload(
     obstruction: dict[str, Any],
     readiness: dict[str, Any],
     origin: dict[str, Any],
+    document_fetch: dict[str, Any],
     releases: list[dict[str, Any]],
     generated_at: str,
     status_path: str,
     obstruction_path: str,
     readiness_path: str,
     origin_path: str,
+    document_fetch_path: str,
     release_registry_path: str,
     repo_blob_base: str,
 ) -> dict[str, Any]:
@@ -231,6 +239,9 @@ def build_payload(
     evidence_manifest_url = "/obstruction-tracker/evidence/manifest.json"
     readiness_url = repo_blob_url(repo_blob_base, readiness_path)
     origin_evidence_url = repo_blob_url(repo_blob_base, origin_path)
+    document_queue = document_fetch.get("queue") or {}
+    document_summary = document_fetch.get("documents") or {}
+    document_fetch_url = DEFAULT_PUBLIC_DOCUMENT_FETCH_OPERATIONS_URL
 
     metrics = [
         traced_metric("sources_ok", "Fuentes OK", status_summary.get("ok") or 0, "fuentes", status_path, status_url),
@@ -243,6 +254,9 @@ def build_payload(
         traced_metric("promoted_lanes", "Lanes promovidas", readiness_summary.get("promoted_lanes") or 0, "lanes", readiness_path, readiness_url),
         traced_metric("published_snapshot_rows", "Filas en origen público", published_rows, "filas", origin_path, checks.get("declared_snapshot_path") and (origin.get("urls") or {}).get("manifest") or origin_evidence_url),
         traced_metric("published_snapshot_files", "Ficheros de datos públicos", published_files, "ficheros", origin_path, (origin.get("urls") or {}).get("manifest") or origin_evidence_url),
+        traced_metric("document_fetch_official_urls", "Documentos oficiales en cola", document_summary.get("official_urls_total") or 0, "documentos", document_fetch_path, document_fetch_url),
+        traced_metric("document_fetch_terminal", "Descargas con estado terminal", document_queue.get("terminal_total") or 0, "documentos", document_fetch_path, document_fetch_url),
+        traced_metric("document_fetch_unfinished", "Descargas pendientes", document_queue.get("unfinished_total") or 0, "documentos", document_fetch_path, document_fetch_url),
     ]
 
     return {
@@ -320,12 +334,30 @@ def build_payload(
             "verification_evidence_url": origin_evidence_url,
             "verification_evidence_sha256": sha256_file(Path(origin_path)),
         },
+        "document_fetch": {
+            "operational_contract_status": str(
+                (document_fetch.get("scale_claim") or {}).get(
+                    "operational_contract_status"
+                )
+                or ""
+            ),
+            "queue": document_queue,
+            "documents": document_summary,
+            "worker_policy": document_fetch.get("worker_policy") or {},
+            "integrity": document_fetch.get("integrity") or {},
+            "scale_claim": document_fetch.get("scale_claim") or {},
+            "hosts": document_fetch.get("hosts") or [],
+            "source_path": document_fetch_path,
+            "source_url": document_fetch_url,
+            "source_sha256": sha256_file(Path(document_fetch_path)),
+        },
         "recent_changes": releases,
         "audit_links": {
             "self": "/transparency/data/transparency.json",
             "source_status": status_url,
             "obstruction_tracker": "/obstruction-tracker/",
             "obstruction_feed": obstruction_url,
+            "document_fetch_operations": document_fetch_url,
             "release_registry": repo_blob_url(repo_blob_base, release_registry_path),
             "roadmap": repo_blob_url(repo_blob_base, "ROADMAP.md"),
             "technical_roadmap": repo_blob_url(repo_blob_base, "docs/roadmap-tecnico.md"),
@@ -341,6 +373,10 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--readiness-json", default=str(DEFAULT_READINESS_JSON))
     parser.add_argument("--origin-verification-json", default=str(DEFAULT_ORIGIN_VERIFICATION_JSON))
     parser.add_argument("--release-registry-json", default=str(DEFAULT_RELEASE_REGISTRY_JSON))
+    parser.add_argument(
+        "--document-fetch-operations-json",
+        default=str(DEFAULT_DOCUMENT_FETCH_OPERATIONS_JSON),
+    )
     parser.add_argument("--repo-blob-base", default=DEFAULT_REPO_BLOB_BASE)
     parser.add_argument("--generated-at", default="")
     parser.add_argument("--out", required=True)
@@ -355,6 +391,7 @@ def main() -> int:
         "readiness": Path(args.readiness_json),
         "origin": Path(args.origin_verification_json),
         "releases": Path(args.release_registry_json),
+        "document_fetch": Path(args.document_fetch_operations_json),
     }
     missing = [f"{key}={path}" for key, path in source_paths.items() if not path.is_file()]
     if missing:
@@ -372,12 +409,14 @@ def main() -> int:
             obstruction=read_json(source_paths["obstruction"]),
             readiness=read_json(source_paths["readiness"]),
             origin=read_json(source_paths["origin"]),
+            document_fetch=read_json(source_paths["document_fetch"]),
             releases=releases,
             generated_at=generated_at,
             status_path=source_paths["status"].as_posix(),
             obstruction_path=source_paths["obstruction"].as_posix(),
             readiness_path=source_paths["readiness"].as_posix(),
             origin_path=source_paths["origin"].as_posix(),
+            document_fetch_path=source_paths["document_fetch"].as_posix(),
             release_registry_path=source_paths["releases"].as_posix(),
             repo_blob_base=args.repo_blob_base,
         )
