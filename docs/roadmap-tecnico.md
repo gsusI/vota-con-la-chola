@@ -294,7 +294,7 @@ Los probes de red son explícitos y solo se repiten si cambia el endpoint, exist
 | `DOC-005` | OCR cache | `DONE current corpus`: input manifest + engine/language/version/config; rerun reclama `0` |
 | `DOC-006` | quarantine | bombs, corruptos, password y unsupported separados |
 | `DOC-007` | quality gold set | `PARTIAL`: packet real `40`, review humano `0/40`; falta doble review, métricas y adjudicación |
-| `DOC-008` | `100k` real | `PARTIAL 2026-08-29`: volumen, success, extracción/OCR física y economics local por `1,000` pasan; faltan quality humano, diversidad, request telemetry fresca y coste monetario real por estrato |
+| `DOC-008` | `100k` real | `PARTIAL 2026-08-29`: volumen, success, extracción/OCR física y economics local por `1,000` pasan; adquisición fresca BOE `100/100` mide exactamente `100` requests, bytes, wall/CPU/RSS y `0` fallos. Faltan quality humano, diversidad, cohortes multi-host `1k/10k/100k` y coste monetario real por estrato |
 | `DOC-009` | `1M` real | origin, restore, SLO y bounded public delivery |
 
 ### P0 — actores y candidatos

@@ -110,6 +110,8 @@ def build_payload(
     ocr_path: Path,
     ocr_validation_path: Path,
     fetch_path: Path,
+    acquisition_run_path: Path,
+    acquisition_validation_path: Path,
     generated_at: str,
 ) -> dict[str, Any]:
     inventory = read_json(inventory_path)
@@ -118,6 +120,8 @@ def build_payload(
     ocr = read_json(ocr_path)
     ocr_validation = read_json(ocr_validation_path)
     fetch = read_json(fetch_path)
+    acquisition_run = read_json(acquisition_run_path)
+    acquisition_validation = read_json(acquisition_validation_path)
 
     if inventory.get("schema_version") != "real_document_format_inventory_v4":
         raise ValueError("inventory schema mismatch")
@@ -136,6 +140,13 @@ def build_payload(
         "schema_version"
     ) != "document_fetch_operations_v1":
         raise ValueError("document fetch schema mismatch")
+    if acquisition_run.get("schema_version") != "document_fetch_queue_run_v3":
+        raise ValueError("fresh acquisition run schema mismatch")
+    if (
+        acquisition_validation.get("schema_version")
+        != "real_document_fetch_cohort_validation_v1"
+    ):
+        raise ValueError("fresh acquisition validation schema mismatch")
 
     inventory_totals = inventory.get("totals") or {}
     extraction_run = extraction.get("run") or {}
@@ -146,12 +157,25 @@ def build_payload(
     ocr_performance = ocr.get("performance") or {}
     fetch_queue = fetch.get("queue") or {}
     fetch_documents = fetch.get("documents") or {}
+    acquisition_totals = acquisition_run.get("totals") or {}
+    acquisition_performance = acquisition_run.get("performance") or {}
+    acquisition_checks = acquisition_validation.get("checks") or {}
 
     extracted_objects = int(extraction_run.get("succeeded") or 0)
     ocr_pages = int(ocr_run.get("succeeded") or 0)
     fetched_documents = int(fetch_documents.get("fetched_succeeded_total") or 0)
+    acquisition_documents = int(acquisition_totals.get("succeeded") or 0)
     file_instances = int(inventory_totals.get("files") or 0)
-    if min(extracted_objects, ocr_pages, fetched_documents, file_instances) <= 0:
+    if (
+        min(
+            extracted_objects,
+            ocr_pages,
+            fetched_documents,
+            acquisition_documents,
+            file_instances,
+        )
+        <= 0
+    ):
         raise ValueError("real observed cohorts must all be non-empty")
 
     native_failures = int(extraction_run.get("dead") or 0)
@@ -205,6 +229,17 @@ def build_payload(
             == int(fetch_queue.get("terminal_total") or 0)
             + int(fetch_queue.get("unfinished_total") or 0)
         ),
+        "fresh_acquisition_physical_run_complete": (
+            acquisition_run.get("status") == "ok"
+            and acquisition_validation.get("status") == "ok"
+            and acquisition_validation.get("errors") == []
+            and int(acquisition_totals.get("claimed") or 0) == acquisition_documents
+            and int(acquisition_totals.get("retried") or 0) == 0
+            and int(acquisition_totals.get("dead") or 0) == 0
+            and int(acquisition_checks.get("fresh_files_rehashed") or 0)
+            == acquisition_documents
+            and acquisition_checks.get("immutable_byte_hash_parity") is True
+        ),
         "monetary_cost_not_fabricated": True,
     }
 
@@ -229,31 +264,70 @@ def build_payload(
             "page_ocr": source_descriptor(ocr_path),
             "page_ocr_validation": source_descriptor(ocr_validation_path),
             "document_fetch_operations": document_fetch_descriptor(fetch_path, fetch),
+            "fresh_acquisition_run": source_descriptor(acquisition_run_path),
+            "fresh_acquisition_validation": source_descriptor(
+                acquisition_validation_path
+            ),
         },
         "acquisition": {
-            "measurement_status": "historical_queue_state_not_request_telemetry",
+            "measurement_status": "cold_physical_real_cohort",
+            "cohort_id": str(acquisition_validation.get("cohort_id") or ""),
+            "cohort_semantic_sha256": str(
+                acquisition_validation.get("cohort_semantic_sha256") or ""
+            ),
+            "official_host": "www.boe.es",
+            "documents_attempted": int(acquisition_totals.get("claimed") or 0),
+            "documents_succeeded": acquisition_documents,
+            "network_requests_started": int(
+                acquisition_performance.get("network_requests_started") or 0
+            ),
+            "bytes_received": int(acquisition_totals.get("bytes_received") or 0),
+            "cpu_seconds": float(acquisition_performance.get("cpu_seconds") or 0),
+            "peak_rss_bytes": int(acquisition_performance.get("peak_rss_bytes") or 0),
+            "elapsed_seconds": float(
+                acquisition_performance.get("elapsed_seconds") or 0
+            ),
+            "retries": int(acquisition_totals.get("retried") or 0),
+            "failures": int(acquisition_checks.get("host_failures") or 0),
+            "workers": int(acquisition_run.get("workers") or 0),
+            "per_host_workers": int(acquisition_run.get("per_host_workers") or 0),
+            "per_host_min_interval_ms": int(
+                (acquisition_run.get("host_policy") or {}).get(
+                    "per_host_min_interval_ms"
+                )
+                or 0
+            ),
+            "per_1000_succeeded": {
+                "network_requests_started": per_1000(
+                    int(acquisition_performance.get("network_requests_started") or 0),
+                    acquisition_documents,
+                ),
+                "bytes_received": per_1000(
+                    int(acquisition_totals.get("bytes_received") or 0),
+                    acquisition_documents,
+                ),
+                "elapsed_seconds": per_1000(
+                    float(acquisition_performance.get("elapsed_seconds") or 0),
+                    acquisition_documents,
+                ),
+                "cpu_seconds": per_1000(
+                    float(acquisition_performance.get("cpu_seconds") or 0),
+                    acquisition_documents,
+                ),
+                "failures": per_1000(
+                    int(acquisition_checks.get("host_failures") or 0),
+                    acquisition_documents,
+                ),
+            },
+        },
+        "historical_acquisition_queue": {
+            "measurement_status": "historical_queue_state",
             "official_urls_total": int(fetch_documents.get("official_urls_total") or 0),
             "documents_succeeded": fetched_documents,
             "terminal_dead": fetch_dead,
             "unfinished": int(fetch_queue.get("unfinished_total") or 0),
             "queue_attempts": int(fetch_queue.get("attempts_total") or 0),
-            "network_requests_started": None,
             "bytes_received": int(fetch_documents.get("bytes_received") or 0),
-            "cpu_seconds": None,
-            "peak_rss_bytes": None,
-            "elapsed_seconds": None,
-            "per_1000_succeeded": {
-                "queue_attempts": per_1000(
-                    int(fetch_queue.get("attempts_total") or 0), fetched_documents
-                ),
-                "bytes_received": per_1000(
-                    int(fetch_documents.get("bytes_received") or 0), fetched_documents
-                ),
-                "terminal_dead": per_1000(fetch_dead, fetched_documents),
-                "unfinished": per_1000(
-                    int(fetch_queue.get("unfinished_total") or 0), fetched_documents
-                ),
-            },
         },
         "native_extraction": {
             "measurement_status": "cold_physical_run",
@@ -358,14 +432,14 @@ def build_payload(
             ),
         },
         "measurement_gaps": [
-            (
-                "Historical acquisition state does not expose exact network requests "
-                "started, wall time, CPU, or RSS."
-            ),
             "No actual monetary meter or provider invoice is bound to the measured cohorts.",
             (
-                "The 100k corpus is not yet representative across every source, format, "
-                "language, scan quality, and host."
+                "Fresh acquisition telemetry covers 100 BOE objects on one official host, "
+                "not yet 1k/10k/100k cohorts across representative hosts and formats."
+            ),
+            (
+                "The 100k stored corpus is not yet representative across every source, "
+                "format, language, scan quality, and host."
             ),
             "Human OCR quality review remains incomplete at 0/40 decisions.",
         ],
@@ -377,8 +451,8 @@ def build_payload(
             "one_million_documents_processed": extracted_objects >= 1_000_000,
             "promoted_for_one_million_operation": False,
             "next_gate": (
-                "measure exact requests and actual monetary cost on representative "
-                "100_1000_10000_100000 cohorts before one million"
+                "scale exact request telemetry through representative 1000_10000_100000 "
+                "host cohorts and bind actual monetary cost before one million"
             ),
         },
     }
@@ -392,6 +466,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--page-ocr", required=True)
     parser.add_argument("--page-ocr-validation", required=True)
     parser.add_argument("--document-fetch-operations", required=True)
+    parser.add_argument("--fresh-acquisition-run", required=True)
+    parser.add_argument("--fresh-acquisition-validation", required=True)
     parser.add_argument("--generated-at", default="")
     parser.add_argument("--out", required=True)
     parser.add_argument("--evidence-out", default="")
@@ -407,11 +483,13 @@ def main() -> int:
         Path(args.page_ocr),
         Path(args.page_ocr_validation),
         Path(args.document_fetch_operations),
+        Path(args.fresh_acquisition_run),
+        Path(args.fresh_acquisition_validation),
     ]
     try:
         payloads = [read_json(path) for path in paths]
         generated_at = str(args.generated_at or "").strip() or latest_generated_at(
-            payloads[:-1]
+            payloads[:5]
         )
         datetime.fromisoformat(generated_at.replace("Z", "+00:00"))
         payload = build_payload(
@@ -421,6 +499,8 @@ def main() -> int:
             ocr_path=paths[3],
             ocr_validation_path=paths[4],
             fetch_path=paths[5],
+            acquisition_run_path=paths[6],
+            acquisition_validation_path=paths[7],
             generated_at=generated_at,
         )
         atomic_write_json(Path(args.out), payload)

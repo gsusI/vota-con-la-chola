@@ -96,6 +96,8 @@ def validate(
     ocr_path: Path,
     ocr_validation_path: Path,
     fetch_path: Path,
+    acquisition_run_path: Path,
+    acquisition_validation_path: Path,
     max_bytes: int,
 ) -> dict[str, Any]:
     errors: list[str] = []
@@ -117,6 +119,8 @@ def validate(
         ocr = read_json(ocr_path)
         ocr_validation = read_json(ocr_validation_path)
         fetch = read_json(fetch_path)
+        acquisition_run = read_json(acquisition_run_path)
+        acquisition_validation = read_json(acquisition_validation_path)
     except (OSError, ValueError, json.JSONDecodeError) as exc:
         return {
             "status": "error",
@@ -148,6 +152,17 @@ def validate(
     for key, expected in expected_policy.items():
         if policy.get(key) != expected:
             errors.append(f"policy.{key} mismatch")
+    if acquisition_run.get("schema_version") != "document_fetch_queue_run_v3":
+        errors.append("fresh acquisition run schema mismatch")
+    if acquisition_run.get("status") != "ok":
+        errors.append("fresh acquisition run status mismatch")
+    if (
+        acquisition_validation.get("schema_version")
+        != "real_document_fetch_cohort_validation_v1"
+        or acquisition_validation.get("status") != "ok"
+        or acquisition_validation.get("errors") != []
+    ):
+        errors.append("fresh acquisition independent validation failed")
 
     input_paths = {
         "inventory": inventory_path,
@@ -156,6 +171,8 @@ def validate(
         "page_ocr": ocr_path,
         "page_ocr_validation": ocr_validation_path,
         "document_fetch_operations": fetch_path,
+        "fresh_acquisition_run": acquisition_run_path,
+        "fresh_acquisition_validation": acquisition_validation_path,
     }
     inputs = artifact.get("inputs") or {}
     for key, path in input_paths.items():
@@ -184,6 +201,14 @@ def validate(
     fetch_queue = fetch.get("queue") or {}
     fetch_docs = fetch.get("documents") or {}
     inventory_totals = inventory.get("totals") or {}
+    acquisition_run_totals = acquisition_run.get("totals") or {}
+    acquisition_run_perf = acquisition_run.get("performance") or {}
+    acquisition_validation_checks = acquisition_validation.get("checks") or {}
+    acquisition_validation_inputs = acquisition_validation.get("inputs") or {}
+    if (acquisition_validation_inputs.get("run_report") or {}).get(
+        "sha256"
+    ) != sha256_file(acquisition_run_path):
+        errors.append("fresh acquisition validation run input drifted")
 
     native = artifact.get("native_extraction") or {}
     native_denominator = int(extraction_run.get("succeeded") or 0)
@@ -248,34 +273,59 @@ def validate(
         errors.append("OCR run is not a cold physical run")
 
     acquisition = artifact.get("acquisition") or {}
+    acquisition_denominator = int(acquisition_run_totals.get("succeeded") or 0)
+    acquisition_expected = {
+        "network_requests_started": int(
+            acquisition_run_perf.get("network_requests_started") or 0
+        ),
+        "bytes_received": int(acquisition_run_totals.get("bytes_received") or 0),
+        "elapsed_seconds": float(acquisition_run_perf.get("elapsed_seconds") or 0),
+        "cpu_seconds": float(acquisition_run_perf.get("cpu_seconds") or 0),
+        "failures": int(acquisition_validation_checks.get("host_failures") or 0),
+    }
+    acquisition_per_1000 = acquisition.get("per_1000_succeeded") or {}
+    if (
+        acquisition_denominator <= 0
+        or acquisition.get("documents_succeeded") != acquisition_denominator
+        or acquisition.get("documents_attempted")
+        != int(acquisition_run_totals.get("claimed") or 0)
+    ):
+        errors.append("acquisition denominator mismatch")
+    for key, value in acquisition_expected.items():
+        if acquisition.get(key) != value:
+            errors.append(f"acquisition.{key} mismatch")
+        if acquisition_denominator > 0 and not close(
+            acquisition_per_1000.get(key), scaled(value, acquisition_denominator)
+        ):
+            errors.append(f"acquisition per-1,000 {key} mismatch")
+    if acquisition.get("measurement_status") != "cold_physical_real_cohort":
+        errors.append("fresh acquisition measurement status mismatch")
+    if acquisition.get("peak_rss_bytes") != int(
+        acquisition_run_perf.get("peak_rss_bytes") or 0
+    ):
+        errors.append("fresh acquisition peak RSS mismatch")
+    if acquisition.get("cohort_id") != acquisition_validation.get("cohort_id"):
+        errors.append("fresh acquisition cohort identity mismatch")
+    if acquisition.get("cohort_semantic_sha256") != acquisition_validation.get(
+        "cohort_semantic_sha256"
+    ):
+        errors.append("fresh acquisition cohort semantic hash mismatch")
+
+    historical = artifact.get("historical_acquisition_queue") or {}
     fetch_denominator = int(fetch_docs.get("fetched_succeeded_total") or 0)
-    fetch_expected = {
+    historical_expected = {
+        "official_urls_total": int(fetch_docs.get("official_urls_total") or 0),
+        "documents_succeeded": fetch_denominator,
         "queue_attempts": int(fetch_queue.get("attempts_total") or 0),
         "bytes_received": int(fetch_docs.get("bytes_received") or 0),
         "terminal_dead": int((fetch_queue.get("state_counts") or {}).get("dead") or 0),
         "unfinished": int(fetch_queue.get("unfinished_total") or 0),
     }
-    acquisition_per_1000 = acquisition.get("per_1000_succeeded") or {}
-    if (
-        fetch_denominator <= 0
-        or acquisition.get("documents_succeeded") != fetch_denominator
-    ):
-        errors.append("acquisition denominator mismatch")
-    for key, value in fetch_expected.items():
-        if acquisition.get(key) != value:
-            errors.append(f"acquisition.{key} mismatch")
-        if fetch_denominator > 0 and not close(
-            acquisition_per_1000.get(key), scaled(value, fetch_denominator)
-        ):
-            errors.append(f"acquisition per-1,000 {key} mismatch")
-    for key in (
-        "network_requests_started",
-        "cpu_seconds",
-        "peak_rss_bytes",
-        "elapsed_seconds",
-    ):
-        if acquisition.get(key) is not None:
-            errors.append(f"unmeasured acquisition field {key} must be null")
+    if historical.get("measurement_status") != "historical_queue_state":
+        errors.append("historical acquisition status mismatch")
+    for key, value in historical_expected.items():
+        if historical.get(key) != value:
+            errors.append(f"historical_acquisition_queue.{key} mismatch")
 
     storage = artifact.get("storage") or {}
     file_instances = int(inventory_totals.get("files") or 0)
@@ -333,13 +383,21 @@ def validate(
             "page_ocr": input_descriptor(ocr_path),
             "page_ocr_validation": input_descriptor(ocr_validation_path),
             "document_fetch_operations": document_fetch_descriptor(fetch_path, fetch),
+            "fresh_acquisition_run": input_descriptor(acquisition_run_path),
+            "fresh_acquisition_validation": input_descriptor(
+                acquisition_validation_path
+            ),
         },
         "checks": {
             "file_size_bytes": size,
             "max_bytes": max_bytes,
             "native_objects": native_denominator,
             "ocr_pages": ocr_denominator,
-            "fetch_documents_succeeded": fetch_denominator,
+            "fresh_acquisition_documents_succeeded": acquisition_denominator,
+            "fresh_acquisition_network_requests": int(
+                acquisition_run_perf.get("network_requests_started") or 0
+            ),
+            "historical_fetch_documents_succeeded": fetch_denominator,
             "input_hashes_verified": not any("inputs." in error for error in errors),
             "per_1000_math_verified": not any("per-1,000" in error for error in errors),
             "unmeasured_cost_remains_null": not any(
@@ -360,6 +418,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--page-ocr", required=True)
     parser.add_argument("--page-ocr-validation", required=True)
     parser.add_argument("--document-fetch-operations", required=True)
+    parser.add_argument("--fresh-acquisition-run", required=True)
+    parser.add_argument("--fresh-acquisition-validation", required=True)
     parser.add_argument("--max-bytes", type=int, default=500_000)
     parser.add_argument("--out", required=True)
     return parser.parse_args()
@@ -376,6 +436,8 @@ def main() -> int:
         ocr_path=Path(args.page_ocr),
         ocr_validation_path=Path(args.page_ocr_validation),
         fetch_path=Path(args.document_fetch_operations),
+        acquisition_run_path=Path(args.fresh_acquisition_run),
+        acquisition_validation_path=Path(args.fresh_acquisition_validation),
         max_bytes=int(args.max_bytes),
     )
     atomic_write_json(Path(args.out), report)

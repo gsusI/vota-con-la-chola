@@ -253,6 +253,7 @@ def build_payload(
     document_factory_economics_url = DEFAULT_PUBLIC_DOCUMENT_FACTORY_ECONOMICS_URL
     native_economics = document_factory_economics.get("native_extraction") or {}
     ocr_economics = document_factory_economics.get("page_ocr") or {}
+    acquisition_economics = document_factory_economics.get("acquisition") or {}
     monetary_economics = document_factory_economics.get("monetary_cost") or {}
     economics_claim = document_factory_economics.get("scale_claim") or {}
 
@@ -272,6 +273,9 @@ def build_payload(
         traced_metric("document_fetch_unfinished", "Descargas pendientes", document_queue.get("unfinished_total") or 0, "documentos", document_fetch_path, document_fetch_url),
         traced_metric("document_native_objects_measured", "Documentos con extracción física medida", native_economics.get("distinct_content_objects") or 0, "documentos", document_factory_economics_path, document_factory_economics_url),
         traced_metric("document_ocr_pages_measured", "Páginas OCR con ejecución física medida", ocr_economics.get("candidate_pages") or 0, "páginas", document_factory_economics_path, document_factory_economics_url),
+        traced_metric("document_acquisition_objects_measured", "Documentos con descarga física medida", acquisition_economics.get("documents_succeeded") or 0, "documentos", document_factory_economics_path, document_factory_economics_url),
+        traced_metric("document_acquisition_requests_measured", "Requests de descarga medidos", acquisition_economics.get("network_requests_started") or 0, "requests", document_factory_economics_path, document_factory_economics_url),
+        traced_metric("document_acquisition_wall_ms_per_1000", "Descarga por 1.000", round(float((acquisition_economics.get("per_1000_succeeded") or {}).get("elapsed_seconds") or 0) * 1000), "ms/1.000", document_factory_economics_path, document_factory_economics_url),
         traced_metric("document_native_wall_ms_per_1000", "Extracción nativa por 1.000", round(float((native_economics.get("per_1000_distinct_content_objects") or {}).get("elapsed_seconds") or 0) * 1000), "ms/1.000", document_factory_economics_path, document_factory_economics_url),
         traced_metric("document_ocr_cpu_ms_per_1000", "CPU OCR por 1.000 páginas", round(float((ocr_economics.get("per_1000_candidate_pages") or {}).get("cpu_seconds_parent_and_children") or 0) * 1000), "ms CPU/1.000", document_factory_economics_path, document_factory_economics_url),
     ]
@@ -370,6 +374,8 @@ def build_payload(
         },
         "document_factory_economics": {
             "status": str((document_factory_economics.get("meta") or {}).get("status") or ""),
+            "acquisition": acquisition_economics,
+            "historical_acquisition_queue": document_factory_economics.get("historical_acquisition_queue") or {},
             "native_extraction": native_economics,
             "page_ocr": ocr_economics,
             "storage": document_factory_economics.get("storage") or {},

@@ -1,0 +1,74 @@
+{
+  "failure_class_counts": {},
+  "failure_samples": [],
+  "host_policy": {
+    "hard_failure_threshold": 3,
+    "per_host_min_interval_ms": 500,
+    "per_host_workers": 2
+  },
+  "host_slos": [
+    {
+      "bytes_received": 9552656,
+      "circuit_open": false,
+      "failure_class_counts": {},
+      "failures": 0,
+      "host": "www.boe.es",
+      "http_status_counts": {
+        "200": 100
+      },
+      "peak_inflight": 2,
+      "requests_started": 100,
+      "successes": 100,
+      "throttle_wait_seconds": 85.734114
+    }
+  ],
+  "opened_circuits": [],
+  "opened_hosts": [],
+  "per_host_workers": 2,
+  "performance": {
+    "bytes_per_1000_succeeded": 95526560.0,
+    "bytes_per_second": 192494.610272,
+    "cpu_seconds": 0.621579,
+    "elapsed_seconds": 49.625576,
+    "elapsed_seconds_per_1000_succeeded": 496.255765,
+    "items_per_second": 2.01509,
+    "logical_requests": 100,
+    "network_request_upper_bound": 100,
+    "network_requests_started": 100,
+    "peak_rss_bytes": 50413568
+  },
+  "pipeline_id": "real_document_fetch_cohort_v1",
+  "queue": {
+    "items_total": 100,
+    "pipeline_id": "real_document_fetch_cohort_v1",
+    "state_counts": {
+      "dead": 0,
+      "leased": 0,
+      "pending": 0,
+      "succeeded": 100
+    },
+    "terminal_total": 100,
+    "unfinished_total": 0
+  },
+  "schema_version": "document_fetch_queue_run_v3",
+  "status": "ok",
+  "stop_reason": null,
+  "storage": {
+    "blocked": false,
+    "free_bytes": 63685128192,
+    "inflight_reserve_bytes": 16777216,
+    "min_free_bytes": 0,
+    "required_free_bytes": 16777216
+  },
+  "totals": {
+    "bytes_received": 9552656,
+    "claimed": 100,
+    "dead": 0,
+    "deduplicated_content_objects": 0,
+    "new_content_objects": 100,
+    "retried": 0,
+    "succeeded": 100
+  },
+  "worker_id": "real-document-fetch-cohort-20260829",
+  "workers": 8
+}

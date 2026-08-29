@@ -570,6 +570,9 @@ def audit_document_provenance_gap(
         "page_ocr_validation",
         "ocr_review",
         "ocr_review_validation",
+        "fetch_cohort",
+        "fetch_run",
+        "fetch_validation",
         "economics",
         "economics_evidence",
         "economics_validation",
@@ -597,6 +600,9 @@ def audit_document_provenance_gap(
     page_ocr_validation = payloads["page_ocr_validation"]
     ocr_review = payloads["ocr_review"]
     ocr_review_validation = payloads["ocr_review_validation"]
+    fetch_cohort = payloads["fetch_cohort"]
+    fetch_run = payloads["fetch_run"]
+    fetch_validation = payloads["fetch_validation"]
     economics = payloads["economics"]
     economics_evidence = payloads["economics_evidence"]
     economics_validation = payloads["economics_validation"]
@@ -673,6 +679,49 @@ def audit_document_provenance_gap(
         ):
             raise ReadinessError(f"document {key} real-data policy failed")
 
+    fetch_policy = fetch_cohort.get("policy") or {}
+    fetch_run_totals = fetch_run.get("totals") or {}
+    fetch_run_performance = fetch_run.get("performance") or {}
+    fetch_validation_checks = fetch_validation.get("checks") or {}
+    if (
+        fetch_cohort.get("schema_version") != "real_document_fetch_cohort_v1"
+        or fetch_cohort.get("status") != "ready"
+        or len(fetch_cohort.get("rows") or []) != 100
+        or fetch_policy.get("official_real_documents_only") is not True
+        or fetch_policy.get("synthetic_or_mock_records_counted") is not False
+        or fetch_policy.get("official_public_domain_personal_information_retained")
+        is not True
+        or fetch_policy.get("known_blocked_rows_selected") != 0
+    ):
+        raise ReadinessError("fresh document acquisition cohort contract failed")
+    if (
+        fetch_run.get("schema_version") != "document_fetch_queue_run_v3"
+        or fetch_run.get("status") != "ok"
+        or int(fetch_run_totals.get("claimed") or 0) != 100
+        or int(fetch_run_totals.get("succeeded") or 0) != 100
+        or int(fetch_run_totals.get("retried") or 0) != 0
+        or int(fetch_run_totals.get("dead") or 0) != 0
+        or int(fetch_run_performance.get("network_requests_started") or 0) != 100
+    ):
+        raise ReadinessError("fresh document acquisition physical run failed")
+    if (
+        fetch_validation.get("schema_version")
+        != "real_document_fetch_cohort_validation_v1"
+        or fetch_validation.get("status") != "ok"
+        or fetch_validation.get("errors") != []
+        or int(fetch_validation_checks.get("fresh_files_rehashed") or 0) != 100
+        or fetch_validation_checks.get("immutable_byte_hash_parity") is not True
+    ):
+        raise ReadinessError("fresh document acquisition validation failed")
+    fetch_validation_inputs = fetch_validation.get("inputs") or {}
+    if (
+        (fetch_validation_inputs.get("manifest") or {}).get("sha256")
+        != sha256_file(evidence_paths["fetch_cohort"])
+        or (fetch_validation_inputs.get("run_report") or {}).get("sha256")
+        != sha256_file(evidence_paths["fetch_run"])
+    ):
+        raise ReadinessError("fresh document acquisition validation inputs drifted")
+
     economics_meta = economics.get("meta") or {}
     economics_policy = economics.get("policy") or {}
     if (
@@ -698,6 +747,14 @@ def audit_document_provenance_gap(
         != sha256_file(evidence_paths["economics"])
         or (economics_validation_inputs.get("evidence_copy") or {}).get("sha256")
         != sha256_file(evidence_paths["economics_evidence"])
+        or (economics_validation_inputs.get("fresh_acquisition_run") or {}).get(
+            "sha256"
+        )
+        != sha256_file(evidence_paths["fetch_run"])
+        or (
+            economics_validation_inputs.get("fresh_acquisition_validation") or {}
+        ).get("sha256")
+        != sha256_file(evidence_paths["fetch_validation"])
     ):
         raise ReadinessError("document economics validation inputs have drifted")
 
@@ -1206,10 +1263,16 @@ def audit_document_provenance_gap(
         raise ReadinessError("OCR terminal statuses do not balance candidate pages")
     native_economics = economics.get("native_extraction") or {}
     ocr_economics = economics.get("page_ocr") or {}
+    acquisition_economics = economics.get("acquisition") or {}
     monetary_economics = economics.get("monetary_cost") or {}
     if (
         native_economics.get("distinct_content_objects") != native_distinct_content
         or ocr_economics.get("candidate_pages") != ocr_pages
+        or acquisition_economics.get("documents_succeeded") != 100
+        or acquisition_economics.get("network_requests_started") != 100
+        or acquisition_economics.get("failures") != 0
+        or acquisition_economics.get("cohort_semantic_sha256")
+        != fetch_validation.get("cohort_semantic_sha256")
         or monetary_economics.get("measurement_status")
         != "unknown_not_measured"
         or monetary_economics.get("actual_amount") is not None
@@ -1270,6 +1333,25 @@ def audit_document_provenance_gap(
         "ocr_human_review_promotion_ready": (
             (ocr_review_validation.get("gates") or {}).get("promotion_ready") is True
         ),
+        "fresh_acquisition_documents": int(
+            acquisition_economics.get("documents_succeeded") or 0
+        ),
+        "fresh_acquisition_network_requests": int(
+            acquisition_economics.get("network_requests_started") or 0
+        ),
+        "fresh_acquisition_bytes": int(
+            acquisition_economics.get("bytes_received") or 0
+        ),
+        "fresh_acquisition_wall_seconds_per_1000": float(
+            (acquisition_economics.get("per_1000_succeeded") or {}).get(
+                "elapsed_seconds"
+            )
+            or 0
+        ),
+        "fresh_acquisition_cpu_seconds_per_1000": float(
+            (acquisition_economics.get("per_1000_succeeded") or {}).get("cpu_seconds")
+            or 0
+        ),
         "native_wall_seconds_per_1000": float(
             (
                 native_economics.get("per_1000_distinct_content_objects") or {}
@@ -1297,10 +1379,7 @@ def audit_document_provenance_gap(
         "document_monetary_cost_status": monetary_economics.get(
             "measurement_status"
         ),
-        "document_network_requests_measured": (
-            (economics.get("acquisition") or {}).get("network_requests_started")
-            is not None
-        ),
+        "document_network_requests_measured": True,
         "evidence": {
             key: evidence_reference(path) for key, path in evidence_paths.items()
         },

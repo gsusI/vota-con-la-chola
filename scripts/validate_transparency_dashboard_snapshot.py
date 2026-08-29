@@ -108,6 +108,9 @@ def validate(path: Path, max_bytes: int) -> dict[str, Any]:
         "document_fetch_unfinished",
         "document_native_objects_measured",
         "document_ocr_pages_measured",
+        "document_acquisition_objects_measured",
+        "document_acquisition_requests_measured",
+        "document_acquisition_wall_ms_per_1000",
         "document_native_wall_ms_per_1000",
         "document_ocr_cpu_ms_per_1000",
     }
@@ -212,6 +215,7 @@ def validate(path: Path, max_bytes: int) -> dict[str, Any]:
         errors.append("document_fetch.source_url missing")
 
     economics = payload.get("document_factory_economics") or {}
+    acquisition_economics = economics.get("acquisition") or {}
     native_economics = economics.get("native_extraction") or {}
     ocr_economics = economics.get("page_ocr") or {}
     money = economics.get("monetary_cost") or {}
@@ -220,6 +224,14 @@ def validate(path: Path, max_bytes: int) -> dict[str, Any]:
         errors.append("document economics must preserve partial local status")
     if int(native_economics.get("distinct_content_objects") or 0) <= 100_000:
         errors.append("document economics lacks the real 100k native cohort")
+    if int(acquisition_economics.get("documents_succeeded") or 0) != 100:
+        errors.append("document economics lacks the fresh real 100-object acquisition cohort")
+    if int(acquisition_economics.get("network_requests_started") or 0) != 100:
+        errors.append("document economics lacks exact fresh request telemetry")
+    if int(acquisition_economics.get("failures") or 0) != 0:
+        errors.append("document fresh acquisition cohort contains failures")
+    if acquisition_economics.get("measurement_status") != "cold_physical_real_cohort":
+        errors.append("document fresh acquisition status mismatch")
     if int(ocr_economics.get("candidate_pages") or 0) <= 0:
         errors.append("document economics lacks real OCR pages")
     if int(native_economics.get("failures") or 0) != 0:
@@ -302,6 +314,21 @@ def validate(path: Path, max_bytes: int) -> dict[str, Any]:
         "document_ocr_pages_measured": int(
             ocr_economics.get("candidate_pages") or 0
         ),
+        "document_acquisition_objects_measured": int(
+            acquisition_economics.get("documents_succeeded") or 0
+        ),
+        "document_acquisition_requests_measured": int(
+            acquisition_economics.get("network_requests_started") or 0
+        ),
+        "document_acquisition_wall_ms_per_1000": round(
+            float(
+                (acquisition_economics.get("per_1000_succeeded") or {}).get(
+                    "elapsed_seconds"
+                )
+                or 0
+            )
+            * 1000
+        ),
         "document_native_wall_ms_per_1000": round(
             float(
                 (native_economics.get("per_1000_distinct_content_objects") or {}).get(
@@ -347,6 +374,12 @@ def validate(path: Path, max_bytes: int) -> dict[str, Any]:
             ),
             "document_ocr_pages_measured": int(
                 ocr_economics.get("candidate_pages") or 0
+            ),
+            "document_acquisition_objects_measured": int(
+                acquisition_economics.get("documents_succeeded") or 0
+            ),
+            "document_acquisition_requests_measured": int(
+                acquisition_economics.get("network_requests_started") or 0
             ),
         },
         "errors": errors,

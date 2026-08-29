@@ -450,9 +450,16 @@ PROJECT_FACTS = [
             "accuracy, scanned/office/language diversity, remote origin, and one-million "
             "scale remain open; the numeric 100k document gate passes. Cold physical "
             "runs now measure native extraction and OCR wall time, parent/child CPU, RSS, "
-            "bytes, storage, failures, and normalized per-1,000 values. Historical fetch "
-            "state supplies queue attempts and bytes but not exact network requests or "
-            "resource telemetry. Monetary cost remains null and unknown because no real "
+            "bytes, storage, failures, and normalized per-1,000 values. A fresh cold "
+            "acquisition cohort selects 80 BOE document XML objects and 20 BOE daily "
+            "summaries across captured-size deciles, excludes known blocked rows, and "
+            "rehashes the prior official bytes before queue creation. The physical run "
+            "downloads all 100 immutable objects through exactly 100 requests and "
+            "9,552,656 bytes in 49.625576 wall seconds / 0.621579 CPU seconds / "
+            "50,413,568 bytes peak RSS, with zero retries, dead rows, failures, or byte/hash "
+            "drift. This closes fresh exact request telemetry only for one healthy BOE host; "
+            "representative multi-host 1k, 10k, and 100k cohorts remain open. Monetary cost "
+            "remains null and unknown because no real "
             "provider rate, invoice, energy meter, or labor ledger is bound to the runs. "
             "Per-page elapsed time remains in operational state and aggregate reports, "
             "not semantic OCR manifests; two independent real OCR states therefore emit "
@@ -662,7 +669,19 @@ PROJECT_FACTS = [
             ),
             Evidence(
                 source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-factory-economics-validation-20260829.json",
-                detail="Independent hashes and per-1,000 math for cold native/OCR physical telemetry, storage, failures, and explicit unmeasured monetary cost.",
+                detail="Independent hashes and per-1,000 math for fresh physical acquisition, cold native/OCR telemetry, storage, failures, and explicit unmeasured monetary cost.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-cohort-20260829.json",
+                detail="Deterministic real-only 100-object BOE cohort selected across endpoint and captured-size deciles, with every prior raw checksum revalidated and known blocked rows excluded.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-run-physical-20260829.json",
+                detail="Fresh physical acquisition report with exact request, byte, wall, CPU, RSS, host pacing, retry, failure, and content-object telemetry.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-validation-physical-20260829.json",
+                detail="Independent 100-file checksum, immutable-byte, host-SLO, request, database-integrity, and per-1,000 reconciliation proof.",
             ),
             Evidence(
                 source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-validation-physical-20260829.json",
@@ -1049,6 +1068,7 @@ PROJECT_WORKFLOWS = [
         ),
         steps=[
             "Enqueue exact official URLs idempotently; never substitute generated or sample records for missing source data.",
+            "For a fresh healthy-source scale cohort, select only previously successful official objects with preserved bytes, rehash every prior capture, stratify deterministically, and exclude known blocked rows before creating a clean queue database.",
             "Set a global claim ceiling plus per-host concurrency, minimum request-start interval, byte/time ceiling, storage reserve, retry delay, and circuit threshold before network work.",
             "Run requests through the per-host slot for every retry; record exact request, outcome, byte, HTTP status, failure class, peak in-flight, throttle wait, and circuit metrics.",
             "Persist success only after atomic checksum-addressed publication; delete partial files on every failure and retain retryable or dead queue state explicitly.",
@@ -1057,7 +1077,9 @@ PROJECT_WORKFLOWS = [
             "Increase real cohorts through 100, 1000, 10000, and 100000 only after the prior cohort's host SLO and recovery gates pass.",
         ],
         validation=[
+            "just document-factory-acquisition-cohort-validate",
             "just document-fetch-operations-export",
+            "just document-factory-economics-export",
             "just transparency-dashboard-export",
             "just privacy-check-public-artifacts",
         ],
@@ -1073,6 +1095,10 @@ PROJECT_WORKFLOWS = [
             Evidence(
                 source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-fetch-operations-validation-20260829.json",
                 detail="Current real Senate queue validation with zero orphan partials and no unsupported promotion.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-validation-physical-20260829.json",
+                detail="Fresh healthy-source BOE cohort proves 100 exact requests for 100 immutable objects, full byte/hash parity, host pacing, and zero failures without probing known blockers.",
             ),
         ],
         references={

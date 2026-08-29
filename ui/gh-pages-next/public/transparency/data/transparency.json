@@ -1,7 +1,7 @@
 {
   "meta": {
     "schema_version": "transparency_dashboard_v1",
-    "generated_at": "2026-08-29T16:54:40+00:00",
+    "generated_at": "2026-08-29T17:25:28+00:00",
     "source_status_generated_at": "2026-08-12T11:09:08+00:00",
     "latest_release_date": "2026-08-20T00:36:23+00:00",
     "freshness_contract": "docs/method/truth-contract.md#estados-de-frescura"
@@ -142,6 +142,30 @@
       "source_url": "/transparency/data/document-factory-economics.json"
     },
     {
+      "id": "document_acquisition_objects_measured",
+      "label": "Documentos con descarga física medida",
+      "value": 100,
+      "unit": "documentos",
+      "source_path": "ui/gh-pages-next/public/transparency/data/document-factory-economics.json",
+      "source_url": "/transparency/data/document-factory-economics.json"
+    },
+    {
+      "id": "document_acquisition_requests_measured",
+      "label": "Requests de descarga medidos",
+      "value": 100,
+      "unit": "requests",
+      "source_path": "ui/gh-pages-next/public/transparency/data/document-factory-economics.json",
+      "source_url": "/transparency/data/document-factory-economics.json"
+    },
+    {
+      "id": "document_acquisition_wall_ms_per_1000",
+      "label": "Descarga por 1.000",
+      "value": 496256,
+      "unit": "ms/1.000",
+      "source_path": "ui/gh-pages-next/public/transparency/data/document-factory-economics.json",
+      "source_url": "/transparency/data/document-factory-economics.json"
+    },
+    {
       "id": "document_native_wall_ms_per_1000",
       "label": "Extracción nativa por 1.000",
       "value": 2385,
@@ -188,9 +212,9 @@
     "evidence_files_total": 119,
     "source_path": "ui/gh-pages-next/public/obstruction-tracker/data/obstructions.json",
     "source_url": "/obstruction-tracker/data/obstructions.json",
-    "source_sha256": "004aedf0d3fb77863b27aff6d3ef6f5df35df0c41d3745790ffa315ab4d43f79",
+    "source_sha256": "08a216c99dd17cc591601a3fb442f18134797e068dece994986aff10ccbecb6d",
     "evidence_manifest_url": "/obstruction-tracker/evidence/manifest.json",
-    "evidence_manifest_sha256": "e1a8f5f9c5cb9b21a167b46b45cce5cb596e9d0449888661638e6877d1ec4c21"
+    "evidence_manifest_sha256": "8f9a9365e16e2be8353e6574216786f9d3d30fd3d095bd3fd1c12614a6631f5d"
   },
   "scale_readiness": {
     "status": "real_foundation_ready_scale_incomplete",
@@ -203,7 +227,7 @@
     },
     "source_path": "etl/data/published/scale-readiness-latest.json",
     "source_url": "https://github.com/gsusI/vota-con-la-chola/blob/main/etl/data/published/scale-readiness-latest.json",
-    "source_sha256": "0e5c2872ab26507cd3bd7a76e5e200d0e4bf14a7d5eebf33d401a8bc207e10d4"
+    "source_sha256": "bfa069ea6c8b14a463171b31e27da1c89c68897a90802f89a3ef2444797c0451"
   },
   "published_snapshot": {
     "verification_status": "verified_current_scale_origin",
@@ -385,10 +409,44 @@
     ],
     "source_path": "ui/gh-pages-next/public/transparency/data/document-fetch-operations.json",
     "source_url": "/transparency/data/document-fetch-operations.json",
-    "source_sha256": "d87ebcfcdc56a3d4585589bafaae64023460ccf8e4d23132688e9fae5e29876f"
+    "source_sha256": "dc888fb7f1e1f069126033175dca27ad846ac47740a41a6d0a593ca2f62539fe"
   },
   "document_factory_economics": {
     "status": "partial_measured_local",
+    "acquisition": {
+      "measurement_status": "cold_physical_real_cohort",
+      "cohort_id": "real_document_fetch_cohort_0db6288b2aac5c3ba527d2b3",
+      "cohort_semantic_sha256": "0db6288b2aac5c3ba527d2b3ea2ac17b4b1506c5db66a3bd5037d1385a6e0656",
+      "official_host": "www.boe.es",
+      "documents_attempted": 100,
+      "documents_succeeded": 100,
+      "network_requests_started": 100,
+      "bytes_received": 9552656,
+      "cpu_seconds": 0.621579,
+      "peak_rss_bytes": 50413568,
+      "elapsed_seconds": 49.625576,
+      "retries": 0,
+      "failures": 0,
+      "workers": 8,
+      "per_host_workers": 2,
+      "per_host_min_interval_ms": 500,
+      "per_1000_succeeded": {
+        "network_requests_started": 1000.0,
+        "bytes_received": 95526560.0,
+        "elapsed_seconds": 496.25576,
+        "cpu_seconds": 6.21579,
+        "failures": 0.0
+      }
+    },
+    "historical_acquisition_queue": {
+      "measurement_status": "historical_queue_state",
+      "official_urls_total": 9084,
+      "documents_succeeded": 6792,
+      "terminal_dead": 198,
+      "unfinished": 2094,
+      "queue_attempts": 9187,
+      "bytes_received": 133219457
+    },
     "native_extraction": {
       "measurement_status": "cold_physical_run",
       "distinct_content_objects": 109558,
@@ -457,9 +515,9 @@
       "reason": "No approved provider rate, invoice, energy meter, or labor ledger is bound to these physical local runs; zero would be fabricated."
     },
     "measurement_gaps": [
-      "Historical acquisition state does not expose exact network requests started, wall time, CPU, or RSS.",
       "No actual monetary meter or provider invoice is bound to the measured cohorts.",
-      "The 100k corpus is not yet representative across every source, format, language, scan quality, and host.",
+      "Fresh acquisition telemetry covers 100 BOE objects on one official host, not yet 1k/10k/100k cohorts across representative hosts and formats.",
+      "The 100k stored corpus is not yet representative across every source, format, language, scan quality, and host.",
       "Human OCR quality review remains incomplete at 0/40 decisions."
     ],
     "checks": {
@@ -469,6 +527,7 @@
       "native_physical_run_complete": true,
       "ocr_physical_run_complete": true,
       "acquisition_queue_reconciled": true,
+      "fresh_acquisition_physical_run_complete": true,
       "monetary_cost_not_fabricated": true
     },
     "scale_claim": {
@@ -477,11 +536,11 @@
       "physical_ocr_pages_measured": 856,
       "one_million_documents_processed": false,
       "promoted_for_one_million_operation": false,
-      "next_gate": "measure exact requests and actual monetary cost on representative 100_1000_10000_100000 cohorts before one million"
+      "next_gate": "scale exact request telemetry through representative 1000_10000_100000 host cohorts and bind actual monetary cost before one million"
     },
     "source_path": "ui/gh-pages-next/public/transparency/data/document-factory-economics.json",
     "source_url": "/transparency/data/document-factory-economics.json",
-    "source_sha256": "5a57cccdf7f4e822a18bbba99a3b6db4eecf684da4ac3dd44f2e6bd91fc9a8c0"
+    "source_sha256": "5b4049a74a5481535a1e5f8d3e10943dfb60f6bab08363e0db6129955da59e06"
   },
   "recent_changes": [
     {
@@ -509,12 +568,12 @@
         {
           "path": "docs/etl/sprints/COMPARISON-ENGINE-20260820/evidence/comparison-materialization.json",
           "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/etl/sprints/COMPARISON-ENGINE-20260820/evidence/comparison-materialization.json",
-          "sha256": "917eaffa0fa13488cb93419d4785ca99ef3c1916f7b8501092529571a7b99d23"
+          "sha256": "16989e0aea4df09d1f6b7b7d490be1d1952928002886629ec6225e47d2f14ec3"
         },
         {
           "path": "docs/etl/sprints/COMPARISON-ENGINE-20260820/evidence/promise-action-comparisons-validation.json",
           "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/etl/sprints/COMPARISON-ENGINE-20260820/evidence/promise-action-comparisons-validation.json",
-          "sha256": "4edc9568af15634cd127f63ebc660fe158b4fee1f1f4693b0673666c4d6bd7cf"
+          "sha256": "3f8494d77ae016ab2ac5ac7632c97c70e6b61832bc222b1e6fd6ffc1c5206a3a"
         },
         {
           "path": "scripts/verify_live_promise_action_comparisons.py",
@@ -891,12 +950,12 @@
         {
           "path": "scripts/export_transparency_dashboard_snapshot.py",
           "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/scripts/export_transparency_dashboard_snapshot.py",
-          "sha256": "7033ec9197793b471216c4183e825f03cf740f50cf4dc3c917b8c54ca6a323b5"
+          "sha256": "f42fe65ae3cd6abefac11f4c3a5b1007f67ee7b866c26634f3973dfb4b627646"
         },
         {
           "path": "scripts/validate_transparency_dashboard_snapshot.py",
           "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/scripts/validate_transparency_dashboard_snapshot.py",
-          "sha256": "dd4a0be28dc5302f5a266e51f71afb9bde2f1605015cfbffdd0ad54286141190"
+          "sha256": "61dc55c700378d787e8c3595e57fbd24e07513d4b567ef68d281253e1f32a293"
         },
         {
           "path": "tests/test_transparency_dashboard_snapshot.py",

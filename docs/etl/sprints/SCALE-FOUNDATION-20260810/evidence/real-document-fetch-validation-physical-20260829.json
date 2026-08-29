@@ -1,0 +1,56 @@
+{
+  "schema_version": "real_document_fetch_cohort_validation_v1",
+  "status": "ok",
+  "cohort_id": "real_document_fetch_cohort_0db6288b2aac5c3ba527d2b3",
+  "cohort_semantic_sha256": "0db6288b2aac5c3ba527d2b3ea2ac17b4b1506c5db66a3bd5037d1385a6e0656",
+  "policy": {
+    "official_real_documents_only": true,
+    "synthetic_or_mock_records_counted": false,
+    "official_public_domain_personal_information_retained": true,
+    "known_blocked_rows_selected": 0
+  },
+  "inputs": {
+    "manifest": {
+      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-cohort-20260829.json",
+      "bytes": 216547,
+      "sha256": "f8bffe4f8bebc96c5286a7e040f9f4a74832efae03f7b4e28eae3e81490ee57e"
+    },
+    "run_report": {
+      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-run-physical-20260829.json",
+      "bytes": 1839,
+      "sha256": "7bc4dab7c130bf3675b7b4b5528ea198ac96ed7d54cd556a8fe1dab8e81b4f2d"
+    },
+    "database": {
+      "path": "etl/data/staging/real-document-fetch-cohort-20260829.db",
+      "bytes": 5115904,
+      "sha256": "878c92645ea3c7d9ed16ed542ca5c6fee6390ca472e5c2fb8ff79c8521d02cf4"
+    }
+  },
+  "checks": {
+    "cohort_rows": 100,
+    "fresh_files_rehashed": 100,
+    "fresh_bytes_reconciled": 9552656,
+    "network_requests_started": 100,
+    "host_successes": 100,
+    "host_failures": 0,
+    "database_integrity": "ok",
+    "foreign_key_violations": 0,
+    "immutable_byte_hash_parity": true
+  },
+  "per_1000_succeeded": {
+    "network_requests_started": 1000.0,
+    "bytes_received": 95526560.0,
+    "elapsed_seconds": 496.25576,
+    "cpu_seconds": 6.21579,
+    "failures": 0.0
+  },
+  "performance": {
+    "elapsed_seconds": 49.625576,
+    "cpu_seconds": 0.621579,
+    "peak_rss_bytes": 50413568,
+    "workers": 8,
+    "per_host_workers": 2,
+    "per_host_min_interval_ms": 500
+  },
+  "errors": []
+}

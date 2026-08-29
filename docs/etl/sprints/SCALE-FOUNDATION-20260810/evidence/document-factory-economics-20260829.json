@@ -44,26 +44,51 @@
       "volatile_fields_excluded": [
         "meta.generated_at"
       ]
+    },
+    "fresh_acquisition_run": {
+      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-run-physical-20260829.json",
+      "bytes": 1839,
+      "sha256": "7bc4dab7c130bf3675b7b4b5528ea198ac96ed7d54cd556a8fe1dab8e81b4f2d"
+    },
+    "fresh_acquisition_validation": {
+      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-validation-physical-20260829.json",
+      "bytes": 1884,
+      "sha256": "2fd5a42be02f31de3c6e731b1a8e62fc915e0d2abe557281464201ff161af90b"
     }
   },
   "acquisition": {
-    "measurement_status": "historical_queue_state_not_request_telemetry",
+    "measurement_status": "cold_physical_real_cohort",
+    "cohort_id": "real_document_fetch_cohort_0db6288b2aac5c3ba527d2b3",
+    "cohort_semantic_sha256": "0db6288b2aac5c3ba527d2b3ea2ac17b4b1506c5db66a3bd5037d1385a6e0656",
+    "official_host": "www.boe.es",
+    "documents_attempted": 100,
+    "documents_succeeded": 100,
+    "network_requests_started": 100,
+    "bytes_received": 9552656,
+    "cpu_seconds": 0.621579,
+    "peak_rss_bytes": 50413568,
+    "elapsed_seconds": 49.625576,
+    "retries": 0,
+    "failures": 0,
+    "workers": 8,
+    "per_host_workers": 2,
+    "per_host_min_interval_ms": 500,
+    "per_1000_succeeded": {
+      "network_requests_started": 1000.0,
+      "bytes_received": 95526560.0,
+      "elapsed_seconds": 496.25576,
+      "cpu_seconds": 6.21579,
+      "failures": 0.0
+    }
+  },
+  "historical_acquisition_queue": {
+    "measurement_status": "historical_queue_state",
     "official_urls_total": 9084,
     "documents_succeeded": 6792,
     "terminal_dead": 198,
     "unfinished": 2094,
     "queue_attempts": 9187,
-    "network_requests_started": null,
-    "bytes_received": 133219457,
-    "cpu_seconds": null,
-    "peak_rss_bytes": null,
-    "elapsed_seconds": null,
-    "per_1000_succeeded": {
-      "queue_attempts": 1352.62073,
-      "bytes_received": 19614172.114252,
-      "terminal_dead": 29.151943,
-      "unfinished": 308.303887
-    }
+    "bytes_received": 133219457
   },
   "native_extraction": {
     "measurement_status": "cold_physical_run",
@@ -133,9 +158,9 @@
     "reason": "No approved provider rate, invoice, energy meter, or labor ledger is bound to these physical local runs; zero would be fabricated."
   },
   "measurement_gaps": [
-    "Historical acquisition state does not expose exact network requests started, wall time, CPU, or RSS.",
     "No actual monetary meter or provider invoice is bound to the measured cohorts.",
-    "The 100k corpus is not yet representative across every source, format, language, scan quality, and host.",
+    "Fresh acquisition telemetry covers 100 BOE objects on one official host, not yet 1k/10k/100k cohorts across representative hosts and formats.",
+    "The 100k stored corpus is not yet representative across every source, format, language, scan quality, and host.",
     "Human OCR quality review remains incomplete at 0/40 decisions."
   ],
   "checks": {
@@ -145,6 +170,7 @@
     "native_physical_run_complete": true,
     "ocr_physical_run_complete": true,
     "acquisition_queue_reconciled": true,
+    "fresh_acquisition_physical_run_complete": true,
     "monetary_cost_not_fabricated": true
   },
   "scale_claim": {
@@ -153,6 +179,6 @@
     "physical_ocr_pages_measured": 856,
     "one_million_documents_processed": false,
     "promoted_for_one_million_operation": false,
-    "next_gate": "measure exact requests and actual monetary cost on representative 100_1000_10000_100000 cohorts before one million"
+    "next_gate": "scale exact request telemetry through representative 1000_10000_100000 host cohorts and bind actual monetary cost before one million"
   }
 }
