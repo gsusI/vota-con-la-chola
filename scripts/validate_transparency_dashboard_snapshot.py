@@ -224,9 +224,17 @@ def validate(path: Path, max_bytes: int) -> dict[str, Any]:
         errors.append("document economics must preserve partial local status")
     if int(native_economics.get("distinct_content_objects") or 0) <= 100_000:
         errors.append("document economics lacks the real 100k native cohort")
-    if int(acquisition_economics.get("documents_succeeded") or 0) != 1_000:
-        errors.append("document economics lacks the fresh real 1,000-object acquisition cohort")
-    if int(acquisition_economics.get("network_requests_started") or 0) < 1_000:
+    acquisition_documents = int(
+        acquisition_economics.get("documents_succeeded") or 0
+    )
+    if acquisition_documents < 1_000:
+        errors.append(
+            "document economics lacks a fresh real acquisition cohort of at least 1,000 objects"
+        )
+    if (
+        int(acquisition_economics.get("network_requests_started") or 0)
+        < acquisition_documents
+    ):
         errors.append("document economics lacks exact fresh request telemetry")
     if int(acquisition_economics.get("failures") or 0) != 0:
         errors.append("document fresh acquisition cohort contains failures")

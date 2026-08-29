@@ -169,6 +169,15 @@ class RealScaleReadinessTests(unittest.TestCase):
         self.assertEqual(metrics["ocr_human_reviews_pending"], 40)
         self.assertFalse(metrics["ocr_human_review_batch_complete"])
         self.assertFalse(metrics["ocr_human_review_promotion_ready"])
+        self.assertEqual(metrics["fresh_acquisition_documents"], 10_000)
+        self.assertEqual(metrics["fresh_acquisition_network_requests"], 10_000)
+        self.assertEqual(metrics["fresh_acquisition_bytes"], 455_228_315)
+        self.assertEqual(
+            metrics["fresh_acquisition_wall_seconds_per_1000"], 502.467034
+        )
+        self.assertEqual(
+            metrics["fresh_acquisition_cpu_seconds_per_1000"], 8.170722
+        )
 
     def test_boe_candidate_gap_retains_exact_public_identity_and_corrections(
         self,

@@ -683,7 +683,7 @@
     },
     {
       "current_real_rows": 111408,
-      "evidence": "The current real-only inventory discovers 111422 local files and counts 111408 accountability-eligible official captures with 109558 distinct content hashes and 5093218479 bytes after excluding 5 fixture/sample files and 9 preserved transport-failure captures. The BOE lane now contains 1034 exact daily summaries and 89001 exact individual XML documents; all 89001 document jobs are terminal success and every accepted document has exact official summary-item, HTTPS URL, byte count, checksum and portable-manifest lineage. The latest sparse historical candidate acquisition added 18 exact summary dates and 21 exact documents while reusing 111369 checksum-identical inventory rows; only 48 file instances required inspection. The provenance audit verifies checksum and public URL lineage for 111357 files (99.9542 percent), with zero checksum or declared-byte conflicts; the same 51 historical gaps over 8315544 bytes remain explicit. Wayback reuses its portable checkpoint without new network probes and publishes no guessed relation. Resumable v5 extraction covers all 111408 instances and 109558 contents, yielding 1999902681 exact unsanitized public text characters in 108139 checksum-addressed text objects with zero retry, dead work, failure or truncation; independent validation rehashes every raw and CAS object. Additive OCR independently validates all 856 routed pages across 58 PDFs, yielding text on 849 pages, 7 explicit no-text pages, 89632 characters, 17 material gains and 131 verified OCR objects. The deterministic 40-page real human packet contains zero invented decisions and remains 0 of 40 complete. Numeric R1 is reached. Representative source, format and language coverage, human OCR quality, full remote raw-object durability and one-million-document operation remain open.",
+      "evidence": "The current real-only inventory discovers 111422 local files and counts 111408 accountability-eligible official captures with 109558 distinct content hashes and 5093218479 bytes after excluding 5 fixture/sample files and 9 preserved transport-failure captures. The BOE lane now contains 1034 exact daily summaries and 89001 exact individual XML documents; all 89001 document jobs are terminal success and every accepted document has exact official summary-item, HTTPS URL, byte count, checksum and portable-manifest lineage. The latest sparse historical candidate acquisition added 18 exact summary dates and 21 exact documents while reusing 111369 checksum-identical inventory rows; only 48 file instances required inspection. A partitioned 30-file manifest prepares 10000 real official objects without a monolithic row array: 9914 BOE and 86 Parlamento de Andalucia across captured-size strata. Preflight independently rehashes all 10000 prior files and 455225911 bytes before network, validates all source contracts, proves a pristine 10000-row queue, and excludes known blockers. The cold physical run then succeeds for 10000 of 10000 objects through exactly 10000 requests and 455228315 bytes in 5024.670344 wall seconds, 81.707215 CPU seconds and 53215232 bytes peak RSS, with zero retry, dead work or failure. Disk-backed final validation rehashes all 10000 prior plus 10000 fresh files, passes all 10000 source contracts and reports 9943 exact objects plus 57 valid official revisions. The provenance audit verifies checksum and public URL lineage for 111357 files (99.9542 percent), with zero checksum or declared-byte conflicts; the same 51 historical gaps over 8315544 bytes remain explicit. Wayback reuses its portable checkpoint without new network probes and publishes no guessed relation. Resumable v5 extraction covers all 111408 instances and 109558 contents, yielding 1999902681 exact unsanitized public text characters in 108139 checksum-addressed text objects with zero retry, dead work, failure or truncation; independent validation rehashes every raw and CAS object. Additive OCR independently validates all 856 routed pages across 58 PDFs, yielding text on 849 pages, 7 explicit no-text pages, 89632 characters, 17 material gains and 131 verified OCR objects. The deterministic 40-page real human packet contains zero invented decisions and remains 0 of 40 complete. Numeric R1 is reached. Representative source, format and language coverage, human OCR quality, full remote raw-object durability, representative 100000-object transport and one-million-document operation remain open.",
       "evidence_contract": {
         "audit": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-provenance-audit.json",
         "boe_corpus": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-document-corpus.json",
@@ -691,9 +691,10 @@
         "economics": "ui/gh-pages-next/public/transparency/data/document-factory-economics.json",
         "economics_evidence": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-factory-economics-20260829.json",
         "economics_validation": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-factory-economics-validation-20260829.json",
-        "fetch_cohort": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-v2-20260829.json",
-        "fetch_run": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-v2-run-physical-20260829.json",
-        "fetch_validation": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-v2-validation-physical-20260829.json",
+        "fetch_cohort": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-10k-v1-20260829.json",
+        "fetch_preflight": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-10k-v1-preflight-validation-20260829.json",
+        "fetch_run": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-10k-v1-run-physical-20260829.json",
+        "fetch_validation": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-10k-v1-validation-physical-20260829.json",
         "inventory": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-format-inventory.json",
         "kind": "document_accountability_v2",
         "native_extraction": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-extraction.json",
@@ -865,19 +866,39 @@
           "sha256": "b0a1f97ac72353119d5b89067b7bd29334e912f13607795c38d37d8d40f1a3e5"
         },
         {
-          "bytes": 7383,
+          "bytes": 25278,
+          "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-10k-v1-20260829.json",
+          "sha256": "825d4043acf88ef59a1381ff27d6fc081a4c350aeaecfa5538b8a904b2656f73"
+        },
+        {
+          "bytes": 2044,
+          "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-10k-v1-preflight-validation-20260829.json",
+          "sha256": "76277b3e0bf674438c88c3e8aa6e3a83b8ab590a3e388c562a3582d9e31bc0a5"
+        },
+        {
+          "bytes": 2243,
+          "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-10k-v1-run-physical-20260829.json",
+          "sha256": "c77f9ece61b1dd66b6f7d5a6d86b46bd9af33d9848422b3b7b7a62731beb23a9"
+        },
+        {
+          "bytes": 3270,
+          "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-10k-v1-validation-physical-20260829.json",
+          "sha256": "049d5e537cd376b1d1ae3cdb5672e0902caa7ef56f9a7b3f527e917fba5ddba4"
+        },
+        {
+          "bytes": 7413,
           "path": "ui/gh-pages-next/public/transparency/data/document-factory-economics.json",
-          "sha256": "1f614f50ee5ef8e2b5dbb129095aafa23cafc3cf5db90537932a5497148b997b"
+          "sha256": "3cd366769abc9ea409e0e4b4de075ee32aebbaa18b3e05938a39b55d36fed35f"
         },
         {
-          "bytes": 7383,
+          "bytes": 7413,
           "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-factory-economics-20260829.json",
-          "sha256": "1f614f50ee5ef8e2b5dbb129095aafa23cafc3cf5db90537932a5497148b997b"
+          "sha256": "3cd366769abc9ea409e0e4b4de075ee32aebbaa18b3e05938a39b55d36fed35f"
         },
         {
-          "bytes": 3087,
+          "bytes": 3111,
           "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-factory-economics-validation-20260829.json",
-          "sha256": "095f59f54fcfe02a28113ea4a5c4484ac3fbbea8e841df5f38df210b33df43a0"
+          "sha256": "3be8e0ef228f8311e2dfa687f7386becd7691abe122370d7f9c083381cdb00d8"
         }
       ],
       "evidence_refs": [
@@ -912,6 +933,10 @@
         "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-v2-20260829.json",
         "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-v2-run-physical-20260829.json",
         "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-v2-validation-physical-20260829.json",
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-10k-v1-20260829.json",
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-10k-v1-preflight-validation-20260829.json",
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-10k-v1-run-physical-20260829.json",
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-10k-v1-validation-physical-20260829.json",
         "ui/gh-pages-next/public/transparency/data/document-factory-economics.json",
         "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-factory-economics-20260829.json",
         "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-factory-economics-validation-20260829.json"
@@ -942,34 +967,39 @@
             "sha256": "29d06f68ac7c0610a3e7cd69d95727d493dbc5e60bfd95fd9be0f9b7f60804ff"
           },
           "economics": {
-            "bytes": 7383,
+            "bytes": 7413,
             "path": "ui/gh-pages-next/public/transparency/data/document-factory-economics.json",
-            "sha256": "1f614f50ee5ef8e2b5dbb129095aafa23cafc3cf5db90537932a5497148b997b"
+            "sha256": "3cd366769abc9ea409e0e4b4de075ee32aebbaa18b3e05938a39b55d36fed35f"
           },
           "economics_evidence": {
-            "bytes": 7383,
+            "bytes": 7413,
             "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-factory-economics-20260829.json",
-            "sha256": "1f614f50ee5ef8e2b5dbb129095aafa23cafc3cf5db90537932a5497148b997b"
+            "sha256": "3cd366769abc9ea409e0e4b4de075ee32aebbaa18b3e05938a39b55d36fed35f"
           },
           "economics_validation": {
-            "bytes": 3087,
+            "bytes": 3111,
             "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-factory-economics-validation-20260829.json",
-            "sha256": "095f59f54fcfe02a28113ea4a5c4484ac3fbbea8e841df5f38df210b33df43a0"
+            "sha256": "3be8e0ef228f8311e2dfa687f7386becd7691abe122370d7f9c083381cdb00d8"
           },
           "fetch_cohort": {
-            "bytes": 2703574,
-            "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-v2-20260829.json",
-            "sha256": "475c46f108c5913cfa45383f103318dba2ecb7c2d98c3e61d8a3df5f88e50da7"
+            "bytes": 25278,
+            "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-10k-v1-20260829.json",
+            "sha256": "825d4043acf88ef59a1381ff27d6fc081a4c350aeaecfa5538b8a904b2656f73"
+          },
+          "fetch_preflight": {
+            "bytes": 2044,
+            "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-10k-v1-preflight-validation-20260829.json",
+            "sha256": "76277b3e0bf674438c88c3e8aa6e3a83b8ab590a3e388c562a3582d9e31bc0a5"
           },
           "fetch_run": {
-            "bytes": 2224,
-            "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-v2-run-physical-20260829.json",
-            "sha256": "91a49ba26df60e04913cfa0531f923828cd15367823f2aa1c801ef9d8ccc996a"
+            "bytes": 2243,
+            "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-10k-v1-run-physical-20260829.json",
+            "sha256": "c77f9ece61b1dd66b6f7d5a6d86b46bd9af33d9848422b3b7b7a62731beb23a9"
           },
           "fetch_validation": {
-            "bytes": 2832,
-            "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-v2-validation-physical-20260829.json",
-            "sha256": "b0a1f97ac72353119d5b89067b7bd29334e912f13607795c38d37d8d40f1a3e5"
+            "bytes": 3270,
+            "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-10k-v1-validation-physical-20260829.json",
+            "sha256": "049d5e537cd376b1d1ae3cdb5672e0902caa7ef56f9a7b3f527e917fba5ddba4"
           },
           "inventory": {
             "bytes": 10105,
@@ -1034,11 +1064,11 @@
         },
         "excluded_fixture_or_sample_files": 5,
         "excluded_transport_failure_captures": 9,
-        "fresh_acquisition_bytes": 65619881,
-        "fresh_acquisition_cpu_seconds_per_1000": 6.584298,
-        "fresh_acquisition_documents": 1000,
-        "fresh_acquisition_network_requests": 1000,
-        "fresh_acquisition_wall_seconds_per_1000": 506.408431,
+        "fresh_acquisition_bytes": 455228315,
+        "fresh_acquisition_cpu_seconds_per_1000": 8.170722,
+        "fresh_acquisition_documents": 10000,
+        "fresh_acquisition_network_requests": 10000,
+        "fresh_acquisition_wall_seconds_per_1000": 502.467034,
         "native_cpu_seconds_per_1000": 3.738835,
         "native_text_cas_objects_checksum_verified": 108139,
         "native_text_characters": 1999902681,
@@ -1075,7 +1105,7 @@
         "wayback_unique_content_targets": 3,
         "wayback_unseeded_gap_files": 25
       },
-      "next_action": "Complete and validate all 40 real human OCR reviews without invented labels. Add representative source, format, size, language, scan and corruption strata; the numeric 100000-document gate and local native/OCR economics per 1000 pass. Fresh acquisition telemetry now passes for 1000 real objects across BOE and Parlamento de Andalucia, including source-contract validation and measured official content revisions; extend the same revision-aware contract to 10000 and 100000 representative multi-host objects and bind real monetary meter/provider rates. Replicate and clean-restore the full 108139-object text CAS from a durable raw origin. Retry only the seven failed exact-URL archive variants with a new lever and close the 51 historical provenance gaps only from byte-identical evidence or an exact primary-source manifest. Then scale toward one million through bounded official-host and date cohorts with the same queue, manifest, recovery and correction contracts.",
+      "next_action": "Complete and validate all 40 real human OCR reviews without invented labels. Add representative source, format, size, language, scan and corruption strata; the numeric 100000-document gate and local native/OCR economics per 1000 pass. Fresh acquisition now passes for 10000 real official objects across BOE and Parlamento de Andalucia with partitioned manifests, preflight, exact request telemetry, source-contract validation and measured official revisions. Inventory and expand the healthy official source universe before a representative 100000-object run; the current locally captured healthy-host universe is below that gate. Exercise the newly durable request-event, explicit host-budget, redirect-refusal and host-fair queue contract on the next cold cohort, and bind real monetary meter/provider rates. Replicate and clean-restore the full 108139-object text CAS from a durable raw origin. Retry only the seven failed exact-URL archive variants with a new lever and close the 51 historical provenance gaps only from byte-identical evidence or an exact primary-source manifest. Then scale toward one million through bounded official-host and date cohorts with the same queue, manifest, recovery and correction contracts.",
       "status": "r1_numeric_gate_passed_representativeness_and_ocr_quality_open",
       "target_real_rows": 1000000
     },
@@ -1120,7 +1150,7 @@
       "target_real_rows": 1000000
     }
   ],
-  "generated_at": "2026-08-29T18:13:05.397226Z",
+  "generated_at": "2026-08-29T20:09:24.984756Z",
   "policy": {
     "classification_never_suppresses_public_domain_identity": true,
     "generated_test_records_count_toward_readiness": false,
@@ -1132,9 +1162,9 @@
     "synthetic_or_mock_records_forbidden": true
   },
   "registry": {
-    "bytes": 33953,
+    "bytes": 35722,
     "path": "docs/etl/real-corpus-registry.json",
-    "sha256": "b55ac249f89ac4d379ec851b8bcca5a0fde4a08b37455dc40ee970ee4d2dd29c"
+    "sha256": "1ec63aa84c9bb6e2b3859f84a46fab5c983761aca06541a83b662fe252569309"
   },
   "schema_version": "real-scale-readiness-v1",
   "status": "real_foundation_ready_scale_incomplete",

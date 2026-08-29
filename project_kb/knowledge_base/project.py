@@ -451,14 +451,19 @@ PROJECT_FACTS = [
             "scale remain open; the numeric 100k document gate passes. Cold physical "
             "runs now measure native extraction and OCR wall time, parent/child CPU, RSS, "
             "bytes, storage, failures, and normalized per-1,000 values. A fresh cold "
-            "acquisition cohort selects 80 BOE document XML objects and 20 BOE daily "
-            "summaries across captured-size deciles, excludes known blocked rows, and "
-            "rehashes the prior official bytes before queue creation. The physical run "
-            "downloads all 100 immutable objects through exactly 100 requests and "
-            "9,552,656 bytes in 49.625576 wall seconds / 0.621579 CPU seconds / "
-            "50,413,568 bytes peak RSS, with zero retries, dead rows, failures, or byte/hash "
-            "drift. This closes fresh exact request telemetry only for one healthy BOE host; "
-            "representative multi-host 1k, 10k, and 100k cohorts remain open. Monetary cost "
+            "acquisition cohort uses 30 deterministic gzip JSONL partitions for 10,000 "
+            "real official objects: 8,880 BOE document XML files, 1,034 BOE daily summaries, "
+            "51 Andalusian Parliament HTML documents, and 35 PDFs. A disk-backed preflight "
+            "rehashes all 10,000 prior files / 455,225,911 bytes, validates every source "
+            "contract and proves a pristine queue before network. The physical run downloads "
+            "10,000/10,000 objects through exactly 10,000 requests and 455,228,315 bytes in "
+            "5,024.670344 wall seconds / 81.707215 CPU seconds / 53,215,232 bytes peak RSS, "
+            "with zero retries, dead rows, or failures. Independent final validation rehashes "
+            "all 20,000 prior/fresh files and preserves 57 valid official revisions. Durable "
+            "request events, conservative crash-window budget recovery, explicit per-host "
+            "ceilings, redirect refusal, and host-fair priority are implemented and tested "
+            "after that run, so their next physical proof remains open. Representative 100k "
+            "transport and the one-million cohort remain open. Monetary cost "
             "remains null and unknown because no real "
             "provider rate, invoice, energy meter, or labor ledger is bound to the runs. "
             "Per-page elapsed time remains in operational state and aggregate reports, "
@@ -702,6 +707,22 @@ PROJECT_FACTS = [
             Evidence(
                 source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-v2-validation-physical-20260829.json",
                 detail="Independent rehash of 1,000 prior and 1,000 fresh files, 1,000 source-contract checks, and explicit reconciliation of 948 exact objects plus 52 valid official revisions.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-10k-v1-20260829.json",
+                detail="Bounded root manifest for 10,000 real official objects backed by 30 deterministic gzip JSONL partitions and a streaming semantic identity.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-10k-v1-preflight-validation-20260829.json",
+                detail="Pre-network disk-backed validation of every prior checksum, source contract, policy row, partition and pristine queue item.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-10k-v1-run-physical-20260829.json",
+                detail="Fresh cold two-host acquisition of all 10,000 objects with exact request, byte, wall, CPU, RSS, pacing, queue and failure telemetry.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-10k-v1-validation-physical-20260829.json",
+                detail="Independent disk-backed rehash of 10,000 prior and 10,000 fresh files, 10,000 source contracts, and 9,943 exact plus 57 valid revised objects.",
             ),
             Evidence(
                 source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-validation-physical-20260829.json",

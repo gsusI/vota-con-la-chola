@@ -1,0 +1,88 @@
+{
+  "failure_class_counts": {},
+  "failure_samples": [],
+  "host_policy": {
+    "hard_failure_threshold": 3,
+    "per_host_min_interval_ms": 500,
+    "per_host_workers": 2
+  },
+  "host_slos": [
+    {
+      "bytes_received": 436411658,
+      "circuit_open": false,
+      "failure_class_counts": {},
+      "failures": 0,
+      "host": "www.boe.es",
+      "http_status_counts": {
+        "200": 9914
+      },
+      "peak_inflight": 2,
+      "requests_started": 9914,
+      "successes": 9914,
+      "throttle_wait_seconds": 8938.286639
+    },
+    {
+      "bytes_received": 18816657,
+      "circuit_open": false,
+      "failure_class_counts": {},
+      "failures": 0,
+      "host": "www.parlamentodeandalucia.es",
+      "http_status_counts": {
+        "200": 86
+      },
+      "peak_inflight": 2,
+      "requests_started": 86,
+      "successes": 86,
+      "throttle_wait_seconds": 57.023276
+    }
+  ],
+  "opened_circuits": [],
+  "opened_hosts": [],
+  "per_host_workers": 2,
+  "performance": {
+    "bytes_per_1000_succeeded": 45522831.5,
+    "bytes_per_second": 90598.643071,
+    "cpu_seconds": 81.707215,
+    "elapsed_seconds": 5024.670344,
+    "elapsed_seconds_per_1000_succeeded": 502.467034,
+    "items_per_second": 1.99018,
+    "logical_requests": 10000,
+    "network_request_upper_bound": 20000,
+    "network_requests_started": 10000,
+    "peak_rss_bytes": 53215232
+  },
+  "pipeline_id": "real_document_fetch_scale_cohort_v2",
+  "queue": {
+    "items_total": 10000,
+    "pipeline_id": "real_document_fetch_scale_cohort_v2",
+    "state_counts": {
+      "dead": 0,
+      "leased": 0,
+      "pending": 0,
+      "succeeded": 10000
+    },
+    "terminal_total": 10000,
+    "unfinished_total": 0
+  },
+  "schema_version": "document_fetch_queue_run_v3",
+  "status": "ok",
+  "stop_reason": null,
+  "storage": {
+    "blocked": false,
+    "free_bytes": 50184491008,
+    "inflight_reserve_bytes": 1073741824,
+    "min_free_bytes": 0,
+    "required_free_bytes": 1073741824
+  },
+  "totals": {
+    "bytes_received": 455228315,
+    "claimed": 10000,
+    "dead": 0,
+    "deduplicated_content_objects": 0,
+    "new_content_objects": 10000,
+    "retried": 0,
+    "succeeded": 10000
+  },
+  "worker_id": "real-document-fetch-scale-cohort-10k-v1",
+  "workers": 16
+}

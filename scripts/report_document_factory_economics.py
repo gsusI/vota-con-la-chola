@@ -146,6 +146,7 @@ def build_payload(
     if acquisition_validation_schema not in {
         "real_document_fetch_cohort_validation_v1",
         "real_document_fetch_scale_cohort_validation_v2",
+        "real_document_fetch_scale_cohort_validation_v3",
     }:
         raise ValueError("fresh acquisition validation schema mismatch")
 

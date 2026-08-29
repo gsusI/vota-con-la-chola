@@ -571,6 +571,7 @@ def audit_document_provenance_gap(
         "ocr_review",
         "ocr_review_validation",
         "fetch_cohort",
+        "fetch_preflight",
         "fetch_run",
         "fetch_validation",
         "economics",
@@ -601,6 +602,7 @@ def audit_document_provenance_gap(
     ocr_review = payloads["ocr_review"]
     ocr_review_validation = payloads["ocr_review_validation"]
     fetch_cohort = payloads["fetch_cohort"]
+    fetch_preflight = payloads["fetch_preflight"]
     fetch_run = payloads["fetch_run"]
     fetch_validation = payloads["fetch_validation"]
     economics = payloads["economics"]
@@ -683,11 +685,27 @@ def audit_document_provenance_gap(
     fetch_run_totals = fetch_run.get("totals") or {}
     fetch_run_performance = fetch_run.get("performance") or {}
     fetch_validation_checks = fetch_validation.get("checks") or {}
+    fetch_selection = fetch_cohort.get("selection") or {}
+    fetch_expected_rows = int(fetch_selection.get("rows") or 0)
+    fetch_cohort_schema = fetch_cohort.get("schema_version")
+    if fetch_cohort_schema == "real_document_fetch_scale_cohort_v2":
+        fetch_manifest_rows = len(fetch_cohort.get("rows") or [])
+        partitioned_manifest_ok = fetch_expected_rows == 1_000
+    elif fetch_cohort_schema == "real_document_fetch_scale_cohort_v3":
+        row_manifest = fetch_cohort.get("row_manifest") or {}
+        fetch_manifest_rows = int(row_manifest.get("rows") or 0)
+        partitioned_manifest_ok = (
+            row_manifest.get("layout") == "partitioned_jsonl_gzip_v1"
+            and len(row_manifest.get("partitions") or []) > 0
+        )
+    else:
+        fetch_manifest_rows = 0
+        partitioned_manifest_ok = False
     if (
-        fetch_cohort.get("schema_version")
-        != "real_document_fetch_scale_cohort_v2"
-        or fetch_cohort.get("status") != "ready"
-        or len(fetch_cohort.get("rows") or []) != 1_000
+        fetch_cohort.get("status") != "ready"
+        or fetch_expected_rows < 1_000
+        or fetch_manifest_rows != fetch_expected_rows
+        or not partitioned_manifest_ok
         or fetch_policy.get("official_real_documents_only") is not True
         or fetch_policy.get("synthetic_or_mock_records_counted") is not False
         or fetch_policy.get("official_public_domain_personal_information_retained")
@@ -695,43 +713,78 @@ def audit_document_provenance_gap(
         or fetch_policy.get("known_blocked_rows_selected") != 0
         or fetch_policy.get("official_content_revisions_preserved_and_measured")
         is not True
-        or (fetch_cohort.get("selection") or {}).get("hosts")
-        != {
-            "www.boe.es": 914,
-            "www.parlamentodeandalucia.es": 86,
-        }
+        or sum(int(value) for value in (fetch_selection.get("hosts") or {}).values())
+        != fetch_expected_rows
     ):
         raise ReadinessError("fresh document acquisition cohort contract failed")
+    fetch_preflight_checks = fetch_preflight.get("checks") or {}
+    if (
+        fetch_cohort_schema == "real_document_fetch_scale_cohort_v3"
+        and (
+            fetch_preflight.get("schema_version")
+            != "real_document_fetch_scale_cohort_preflight_validation_v1"
+            or fetch_preflight.get("status") != "ok"
+            or fetch_preflight.get("errors") != []
+            or int(fetch_preflight.get("error_count") or 0) != 0
+            or fetch_preflight.get("cohort_id") != fetch_cohort.get("cohort_id")
+            or fetch_preflight.get("cohort_semantic_sha256")
+            != fetch_cohort.get("cohort_semantic_sha256")
+            or int(fetch_preflight_checks.get("cohort_rows") or 0)
+            != fetch_expected_rows
+            or int(fetch_preflight_checks.get("prior_files_rehashed") or 0)
+            != fetch_expected_rows
+            or int(fetch_preflight_checks.get("source_contract_rows") or 0)
+            != fetch_expected_rows
+            or int(fetch_preflight_checks.get("known_blocked_host_rows") or 0) != 0
+            or int(fetch_preflight_checks.get("preexisting_fetch_rows") or 0) != 0
+            or int(fetch_preflight_checks.get("preexisting_document_rows") or 0)
+            != 0
+        )
+    ):
+        raise ReadinessError("fresh document acquisition preflight failed")
     if (
         fetch_run.get("schema_version") != "document_fetch_queue_run_v3"
         or fetch_run.get("status") != "ok"
-        or int(fetch_run_totals.get("claimed") or 0) != 1_000
-        or int(fetch_run_totals.get("succeeded") or 0) != 1_000
+        or int(fetch_run_totals.get("claimed") or 0) != fetch_expected_rows
+        or int(fetch_run_totals.get("succeeded") or 0) != fetch_expected_rows
         or int(fetch_run_totals.get("retried") or 0) != 0
         or int(fetch_run_totals.get("dead") or 0) != 0
-        or int(fetch_run_performance.get("network_requests_started") or 0) < 1_000
+        or int(fetch_run_performance.get("network_requests_started") or 0)
+        < fetch_expected_rows
         or int(fetch_run_performance.get("network_requests_started") or 0)
         > int(fetch_run_performance.get("network_request_upper_bound") or 0)
     ):
         raise ReadinessError("fresh document acquisition physical run failed")
     if (
         fetch_validation.get("schema_version")
-        != "real_document_fetch_scale_cohort_validation_v2"
+        not in {
+            "real_document_fetch_scale_cohort_validation_v2",
+            "real_document_fetch_scale_cohort_validation_v3",
+        }
         or fetch_validation.get("status") != "ok"
         or fetch_validation.get("errors") != []
-        or int(fetch_validation_checks.get("prior_files_rehashed") or 0) != 1_000
-        or int(fetch_validation_checks.get("fresh_files_rehashed") or 0) != 1_000
+        or int(fetch_validation.get("error_count") or 0) != 0
+        or int(fetch_validation_checks.get("prior_files_rehashed") or 0)
+        != fetch_expected_rows
+        or int(fetch_validation_checks.get("fresh_files_rehashed") or 0)
+        != fetch_expected_rows
         or fetch_validation_checks.get("prior_capture_byte_hash_integrity") is not True
         or fetch_validation_checks.get("fresh_source_contract_parity") is not True
         or fetch_validation_checks.get("fresh_content_hash_self_consistency") is not True
     ):
         raise ReadinessError("fresh document acquisition validation failed")
     fetch_validation_inputs = fetch_validation.get("inputs") or {}
+    fetch_preflight_inputs = fetch_preflight.get("inputs") or {}
     if (
         (fetch_validation_inputs.get("manifest") or {}).get("sha256")
         != sha256_file(evidence_paths["fetch_cohort"])
         or (fetch_validation_inputs.get("run_report") or {}).get("sha256")
         != sha256_file(evidence_paths["fetch_run"])
+        or (
+            fetch_cohort_schema == "real_document_fetch_scale_cohort_v3"
+            and (fetch_preflight_inputs.get("manifest") or {}).get("sha256")
+            != sha256_file(evidence_paths["fetch_cohort"])
+        )
     ):
         raise ReadinessError("fresh document acquisition validation inputs drifted")
 
@@ -1281,12 +1334,14 @@ def audit_document_provenance_gap(
     if (
         native_economics.get("distinct_content_objects") != native_distinct_content
         or ocr_economics.get("candidate_pages") != ocr_pages
-        or acquisition_economics.get("documents_succeeded") != 1_000
-        or int(acquisition_economics.get("network_requests_started") or 0) < 1_000
-        or int(acquisition_economics.get("network_requests_started") or 0) > 2_000
+        or acquisition_economics.get("documents_succeeded") != fetch_expected_rows
+        or int(acquisition_economics.get("network_requests_started") or 0)
+        < fetch_expected_rows
+        or int(acquisition_economics.get("network_requests_started") or 0)
+        > int(fetch_run_performance.get("network_request_upper_bound") or 0)
         or acquisition_economics.get("failures") != 0
         or acquisition_economics.get("official_hosts")
-        != ["www.boe.es", "www.parlamentodeandalucia.es"]
+        != sorted((fetch_selection.get("hosts") or {}).keys())
         or acquisition_economics.get("official_revisions_preserved") is not True
         or acquisition_economics.get("cohort_semantic_sha256")
         != fetch_validation.get("cohort_semantic_sha256")

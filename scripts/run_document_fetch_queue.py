@@ -87,6 +87,8 @@ class DownloadOutcome:
     http_status: int | None
     failure_class: str | None
     retryable: bool
+    network_requests_started: int = 0
+    bytes_received: int = 0
 
 
 class HostLimiter:
@@ -95,10 +97,25 @@ class HostLimiter:
         per_host_workers: int,
         hard_failure_threshold: int = 3,
         min_interval_ms: int = 0,
+        request_budgets: Mapping[str, int] | None = None,
+        require_explicit_budget: bool = False,
+        initial_request_budget_usage: Mapping[str, int] | None = None,
     ) -> None:
         self._per_host_workers = max(1, int(per_host_workers))
         self._hard_failure_threshold = max(1, int(hard_failure_threshold))
         self._min_interval_seconds = max(0, int(min_interval_ms)) / 1000
+        self._request_budgets = {
+            str(host).strip().lower(): max(1, int(limit))
+            for host, limit in (request_budgets or {}).items()
+        }
+        self._initial_request_budget_usage = {
+            str(host).strip().lower(): max(0, int(requests_reserved))
+            for host, requests_reserved in (
+                initial_request_budget_usage or {}
+            ).items()
+            if str(host).strip()
+        }
+        self._require_explicit_budget = bool(require_explicit_budget)
         self._lock = threading.Lock()
         self._semaphores: dict[str, threading.BoundedSemaphore] = {}
         self._next_start_at: dict[str, float] = {}
@@ -106,6 +123,8 @@ class HostLimiter:
         self._host_stats: dict[str, dict[str, Any]] = {}
         self._hard_failures: dict[str, int] = {}
         self._open_circuits: set[str] = set()
+        self._budget_exhausted_hosts: set[str] = set()
+        self._unbudgeted_hosts: set[str] = set()
 
     @staticmethod
     def _host(url: str) -> str:
@@ -143,7 +162,20 @@ class HostLimiter:
         entered = False
         try:
             with self._lock:
-                if self._circuit_key(url) in self._open_circuits:
+                stats = self._stats_for_host(host)
+                budget = self._request_budgets.get(host)
+                cumulative_requests = self._initial_request_budget_usage.get(
+                    host, 0
+                ) + int(stats["requests_started"])
+                if self._require_explicit_budget and budget is None:
+                    self._unbudgeted_hosts.add(host)
+                    allowed = False
+                    wait_seconds = 0.0
+                elif budget is not None and cumulative_requests >= budget:
+                    self._budget_exhausted_hosts.add(host)
+                    allowed = False
+                    wait_seconds = 0.0
+                elif self._circuit_key(url) in self._open_circuits:
                     allowed = False
                     wait_seconds = 0.0
                 else:
@@ -159,12 +191,20 @@ class HostLimiter:
                     allowed = False
                 if allowed:
                     stats = self._stats_for_host(host)
-                    stats["requests_started"] += 1
-                    stats["throttle_wait_seconds"] += wait_seconds
-                    inflight = self._inflight.get(host, 0) + 1
-                    self._inflight[host] = inflight
-                    stats["peak_inflight"] = max(stats["peak_inflight"], inflight)
-                    entered = True
+                    budget = self._request_budgets.get(host)
+                    cumulative_requests = self._initial_request_budget_usage.get(
+                        host, 0
+                    ) + int(stats["requests_started"])
+                    if budget is not None and cumulative_requests >= budget:
+                        self._budget_exhausted_hosts.add(host)
+                        allowed = False
+                    else:
+                        stats["requests_started"] += 1
+                        stats["throttle_wait_seconds"] += wait_seconds
+                        inflight = self._inflight.get(host, 0) + 1
+                        self._inflight[host] = inflight
+                        stats["peak_inflight"] = max(stats["peak_inflight"], inflight)
+                        entered = True
             yield allowed
         finally:
             if entered:
@@ -191,6 +231,15 @@ class HostLimiter:
     def is_open(self, url: str) -> bool:
         with self._lock:
             return self._circuit_key(url) in self._open_circuits
+
+    def budget_block_reason(self, url: str) -> str | None:
+        host = self._host(url)
+        with self._lock:
+            if host in self._unbudgeted_hosts:
+                return "host_request_budget_missing"
+            if host in self._budget_exhausted_hosts:
+                return "host_request_budget_exhausted"
+        return None
 
     def record_status(
         self,
@@ -239,15 +288,41 @@ class HostLimiter:
         with self._lock:
             return sorted(self._open_circuits)
 
+    def budget_exhausted_hosts(self) -> list[str]:
+        with self._lock:
+            return sorted(self._budget_exhausted_hosts)
+
+    def unbudgeted_hosts(self) -> list[str]:
+        with self._lock:
+            return sorted(self._unbudgeted_hosts)
+
     def host_slos(self) -> list[dict[str, Any]]:
         with self._lock:
             rows: list[dict[str, Any]] = []
             for host in sorted(self._host_stats):
                 stats = self._host_stats[host]
+                prior_budget_usage = self._initial_request_budget_usage.get(host, 0)
+                current_requests = int(stats["requests_started"])
                 rows.append(
                     {
                         "host": host,
-                        "requests_started": int(stats["requests_started"]),
+                        "request_budget": self._request_budgets.get(host),
+                        "request_budget_remaining": (
+                            max(
+                                0,
+                                int(self._request_budgets[host])
+                                - prior_budget_usage
+                                - current_requests,
+                            )
+                            if host in self._request_budgets
+                            else None
+                        ),
+                        "request_budget_exhausted": host
+                        in self._budget_exhausted_hosts,
+                        "requests_started": current_requests,
+                        "request_budget_used_prior": prior_budget_usage,
+                        "request_budget_used_cumulative": prior_budget_usage
+                        + current_requests,
                         "successes": int(stats["successes"]),
                         "failures": int(stats["failures"]),
                         "bytes_received": int(stats["bytes_received"]),
@@ -278,6 +353,13 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--per-host-workers", type=int, default=2)
     parser.add_argument("--per-host-min-interval-ms", type=int, default=500)
     parser.add_argument("--host-hard-failure-threshold", type=int, default=3)
+    parser.add_argument(
+        "--host-request-budget",
+        action="append",
+        default=[],
+        metavar="HOST=REQUESTS",
+    )
+    parser.add_argument("--require-explicit-host-budget", action="store_true")
     parser.add_argument("--claim-size", type=int, default=32)
     parser.add_argument("--max-items", type=int, default=0, help="0 processes until no ready work")
     parser.add_argument("--lease-seconds", type=int, default=900)
@@ -290,6 +372,25 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--snapshot-date", default="")
     parser.add_argument("--report-out", default="")
     return parser.parse_args(argv)
+
+
+def _parse_host_request_budgets(values: list[str]) -> dict[str, int]:
+    budgets: dict[str, int] = {}
+    for raw in values:
+        host, separator, limit_text = str(raw or "").strip().partition("=")
+        normalized_host = host.strip().lower()
+        if not separator or not normalized_host:
+            raise ValueError(f"invalid host request budget: {raw}")
+        if normalized_host in budgets:
+            raise ValueError(f"duplicate host request budget: {normalized_host}")
+        try:
+            limit = int(limit_text)
+        except ValueError as exc:
+            raise ValueError(f"invalid host request budget: {raw}") from exc
+        if limit < 1:
+            raise ValueError(f"host request budget must be positive: {raw}")
+        budgets[normalized_host] = limit
+    return dict(sorted(budgets.items()))
 
 
 def _http_status(exc: BaseException) -> int | None:
@@ -306,8 +407,14 @@ def _classify_download_failure(
     *, http_status: int | None, error: str
 ) -> tuple[str, bool]:
     normalized = str(error or "").lower()
+    if "host_request_budget_missing" in normalized:
+        return "host_request_budget_missing", False
+    if "host_request_budget_exhausted" in normalized:
+        return "host_request_budget_exhausted", False
     if "host_circuit_open" in normalized:
         return "host_circuit_open", True
+    if "redirect_not_allowed" in normalized:
+        return "redirect_not_allowed", False
     if "max_bytes" in normalized:
         return "oversize", False
     if "missing_doc_url" in normalized:
@@ -462,19 +569,23 @@ def _download_item(
         )
     document_source_id = str(payload.get("document_source_id") or DOCUMENT_SOURCE_ID)
     attempts = max(1, int(download_attempts))
+    network_requests_started = 0
     for attempt in range(1, attempts + 1):
         with host_limiter.request_slot(url) as allowed:
             if not allowed:
+                budget_reason = host_limiter.budget_block_reason(url)
                 return DownloadOutcome(
                     work_item_id,
                     item_key,
                     payload,
                     None,
-                    "host_circuit_open",
+                    budget_reason or "host_circuit_open",
                     None,
-                    "host_circuit_open",
-                    True,
+                    budget_reason or "host_circuit_open",
+                    budget_reason is None,
+                    network_requests_started,
                 )
+            network_requests_started += 1
             try:
                 stored = download_to_content_addressed_store(
                     url,
@@ -483,6 +594,7 @@ def _download_item(
                     max_bytes=max_bytes,
                     max_attempts=1,
                     ca_bundle=ca_bundle,
+                    follow_redirects=False,
                 )
             except Exception as exc:  # noqa: BLE001
                 http_status = _http_status(exc)
@@ -528,6 +640,7 @@ def _download_item(
                     http_status,
                     failure_class,
                     retryable,
+                    network_requests_started,
                 )
             validation_error = _validate_official_download(
                 url=url,
@@ -542,6 +655,7 @@ def _download_item(
                     url,
                     200,
                     success=False,
+                    bytes_received=int(stored.bytes),
                     failure_class="invalid_official_payload",
                 )
                 return DownloadOutcome(
@@ -553,6 +667,8 @@ def _download_item(
                     200,
                     "invalid_official_payload",
                     False,
+                    network_requests_started,
+                    int(stored.bytes),
                 )
             host_limiter.record_status(
                 url,
@@ -561,7 +677,16 @@ def _download_item(
                 bytes_received=int(stored.bytes),
             )
         return DownloadOutcome(
-            work_item_id, item_key, payload, stored, None, 200, None, False
+            work_item_id,
+            item_key,
+            payload,
+            stored,
+            None,
+            200,
+            None,
+            False,
+            network_requests_started,
+            int(stored.bytes),
         )
     raise RuntimeError("document download attempt loop exhausted")
 
@@ -576,6 +701,40 @@ def _ensure_required_tables(conn: sqlite3.Connection) -> None:
     missing = sorted(table for table in required if not table_exists(conn, table))
     if missing:
         raise RuntimeError(f"required tables missing: {', '.join(missing)}")
+
+
+def _ensure_request_event_schema(conn: sqlite3.Connection) -> None:
+    conn.executescript(
+        """
+        CREATE TABLE IF NOT EXISTS document_fetch_request_events (
+          document_fetch_request_event_id INTEGER PRIMARY KEY AUTOINCREMENT,
+          work_item_id INTEGER NOT NULL
+            REFERENCES pipeline_work_items(work_item_id) ON DELETE CASCADE,
+          pipeline_id TEXT NOT NULL,
+          queue_attempt_number INTEGER NOT NULL CHECK (queue_attempt_number >= 1),
+          worker_id TEXT NOT NULL,
+          source_url TEXT NOT NULL,
+          source_host TEXT NOT NULL,
+          outcome_state TEXT NOT NULL
+            CHECK (outcome_state IN ('succeeded', 'failed')),
+          network_requests_started INTEGER NOT NULL
+            CHECK (network_requests_started >= 0),
+          http_status INTEGER,
+          failure_class TEXT,
+          bytes_received INTEGER NOT NULL DEFAULT 0 CHECK (bytes_received >= 0),
+          recorded_at TEXT NOT NULL,
+          UNIQUE (work_item_id, queue_attempt_number)
+        );
+        CREATE INDEX IF NOT EXISTS idx_document_fetch_request_events_pipeline
+          ON document_fetch_request_events (
+            pipeline_id,
+            source_host,
+            outcome_state,
+            document_fetch_request_event_id
+          );
+        """
+    )
+    conn.commit()
 
 
 def _document_source_id(outcome: DownloadOutcome) -> str:
@@ -621,12 +780,71 @@ def persist_download_outcomes(
     *,
     successes: list[DownloadOutcome],
     failures: list[DownloadOutcome],
+    pipeline_id: str,
+    worker_id: str,
     snapshot_date: str = "",
 ) -> None:
     now_iso = now_utc_iso()
-    source_ids = sorted({_document_source_id(outcome) for outcome in successes + failures})
+    outcomes = successes + failures
+    source_ids = sorted({_document_source_id(outcome) for outcome in outcomes})
     for source_id in source_ids:
         _ensure_document_source(conn, source_id=source_id, now_iso=now_iso)
+
+    if outcomes:
+        work_item_ids = [int(outcome.work_item_id) for outcome in outcomes]
+        placeholders = ",".join("?" for _ in work_item_ids)
+        attempt_numbers = {
+            int(row["work_item_id"]): int(row["attempts"])
+            for row in conn.execute(
+                f"""
+                SELECT work_item_id, attempts
+                FROM pipeline_work_items
+                WHERE work_item_id IN ({placeholders})
+                """,
+                work_item_ids,
+            ).fetchall()
+        }
+        if len(attempt_numbers) != len(outcomes):
+            raise RuntimeError("request telemetry work-item lookup mismatch")
+        conn.executemany(
+            """
+            INSERT INTO document_fetch_request_events (
+              work_item_id, pipeline_id, queue_attempt_number, worker_id,
+              source_url, source_host, outcome_state,
+              network_requests_started, http_status, failure_class,
+              bytes_received, recorded_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ON CONFLICT(work_item_id, queue_attempt_number) DO UPDATE SET
+              worker_id = excluded.worker_id,
+              source_url = excluded.source_url,
+              source_host = excluded.source_host,
+              outcome_state = excluded.outcome_state,
+              network_requests_started = excluded.network_requests_started,
+              http_status = excluded.http_status,
+              failure_class = excluded.failure_class,
+              bytes_received = excluded.bytes_received,
+              recorded_at = excluded.recorded_at
+            """,
+            [
+                (
+                    int(outcome.work_item_id),
+                    pipeline_id,
+                    int(attempt_numbers[int(outcome.work_item_id)]),
+                    worker_id,
+                    outcome.item_key,
+                    HostLimiter._host(
+                        str(outcome.payload.get("doc_url") or outcome.item_key)
+                    ),
+                    "succeeded" if outcome.stored is not None else "failed",
+                    int(outcome.network_requests_started),
+                    outcome.http_status,
+                    outcome.failure_class,
+                    int(outcome.bytes_received),
+                    now_iso,
+                )
+                for outcome in outcomes
+            ],
+        )
 
     pk_maps: dict[str, dict[str, int]] = {}
     for source_id in sorted({_document_source_id(outcome) for outcome in successes}):
@@ -777,6 +995,104 @@ def persist_download_outcomes(
     conn.commit()
 
 
+def durable_request_telemetry(
+    conn: sqlite3.Connection, *, pipeline_id: str
+) -> dict[str, Any]:
+    host_rows = conn.execute(
+        """
+        SELECT
+          source_host,
+          COUNT(*) AS queue_attempt_events,
+          COALESCE(SUM(network_requests_started), 0) AS network_requests_started,
+          COALESCE(SUM(CASE WHEN outcome_state = 'succeeded' THEN 1 ELSE 0 END), 0)
+            AS succeeded_attempts,
+          COALESCE(SUM(CASE WHEN outcome_state = 'failed' THEN 1 ELSE 0 END), 0)
+            AS failed_attempts,
+          COALESCE(SUM(bytes_received), 0) AS bytes_received
+        FROM document_fetch_request_events
+        WHERE pipeline_id = ?
+        GROUP BY source_host
+        ORDER BY source_host
+        """,
+        (pipeline_id,),
+    ).fetchall()
+    hosts = [
+        {
+            "host": str(row["source_host"]),
+            "queue_attempt_events": int(row["queue_attempt_events"] or 0),
+            "network_requests_started": int(row["network_requests_started"] or 0),
+            "succeeded_attempts": int(row["succeeded_attempts"] or 0),
+            "failed_attempts": int(row["failed_attempts"] or 0),
+            "bytes_received": int(row["bytes_received"] or 0),
+        }
+        for row in host_rows
+    ]
+    return {
+        "storage": "sqlite_document_fetch_request_events_v1",
+        "queue_attempt_events": sum(row["queue_attempt_events"] for row in hosts),
+        "network_requests_started": sum(
+            row["network_requests_started"] for row in hosts
+        ),
+        "succeeded_attempts": sum(row["succeeded_attempts"] for row in hosts),
+        "failed_attempts": sum(row["failed_attempts"] for row in hosts),
+        "bytes_received": sum(row["bytes_received"] for row in hosts),
+        "hosts": hosts,
+    }
+
+
+def request_budget_recovery_usage(
+    conn: sqlite3.Connection,
+    *,
+    pipeline_id: str,
+    download_attempts: int,
+) -> dict[str, Any]:
+    telemetry = durable_request_telemetry(conn, pipeline_id=pipeline_id)
+    actual_by_host = {
+        str(row["host"]): int(row["network_requests_started"])
+        for row in telemetry["hosts"]
+    }
+    conservative_by_host: dict[str, int] = {}
+    unmatched_attempts = 0
+    rows = conn.execute(
+        """
+        SELECT w.item_key, w.payload_json, COUNT(*) AS unmatched_attempts
+        FROM pipeline_work_attempts a
+        JOIN pipeline_work_items w ON w.work_item_id = a.work_item_id
+        LEFT JOIN document_fetch_request_events e
+          ON e.work_item_id = a.work_item_id
+         AND e.queue_attempt_number = a.attempt_number
+        WHERE w.pipeline_id = ?
+          AND e.document_fetch_request_event_id IS NULL
+        GROUP BY w.work_item_id, w.item_key, w.payload_json
+        ORDER BY w.work_item_id
+        """,
+        (pipeline_id,),
+    ).fetchall()
+    for row in rows:
+        payload = json.loads(str(row["payload_json"] or "{}"))
+        url = str(payload.get("doc_url") or row["item_key"] or "")
+        host = HostLimiter._host(url)
+        attempts = int(row["unmatched_attempts"] or 0)
+        unmatched_attempts += attempts
+        conservative_by_host[host] = conservative_by_host.get(host, 0) + (
+            attempts * max(1, int(download_attempts))
+        )
+    hosts = sorted(set(actual_by_host) | set(conservative_by_host))
+    budget_usage_by_host = {
+        host: actual_by_host.get(host, 0) + conservative_by_host.get(host, 0)
+        for host in hosts
+    }
+    return {
+        "policy": "durable_events_plus_full_bound_for_unmatched_attempts_v1",
+        "durable_network_requests_started": sum(actual_by_host.values()),
+        "unmatched_queue_attempts": unmatched_attempts,
+        "conservative_unmatched_request_reservations": sum(
+            conservative_by_host.values()
+        ),
+        "budget_usage_by_host": budget_usage_by_host,
+    }
+
+
 def process_document_fetch_queue(
     conn: sqlite3.Connection,
     *,
@@ -787,6 +1103,8 @@ def process_document_fetch_queue(
     per_host_workers: int,
     per_host_min_interval_ms: int = 0,
     host_hard_failure_threshold: int = 3,
+    host_request_budgets: Mapping[str, int] | None = None,
+    require_explicit_host_budget: bool = False,
     claim_size: int,
     max_items: int,
     lease_seconds: int,
@@ -802,10 +1120,21 @@ def process_document_fetch_queue(
     cpu_started = time.process_time()
     ensure_work_queue_schema(conn)
     _ensure_required_tables(conn)
+    _ensure_request_event_schema(conn)
+    request_budget_recovery = request_budget_recovery_usage(
+        conn,
+        pipeline_id=pipeline_id,
+        download_attempts=download_attempts,
+    )
     limiter = HostLimiter(
         per_host_workers,
         host_hard_failure_threshold,
         per_host_min_interval_ms,
+        request_budgets=host_request_budgets,
+        require_explicit_budget=require_explicit_host_budget,
+        initial_request_budget_usage=request_budget_recovery[
+            "budget_usage_by_host"
+        ],
     )
     totals = {
         "claimed": 0,
@@ -900,6 +1229,8 @@ def process_document_fetch_queue(
             conn,
             successes=successes,
             failures=failures,
+            pipeline_id=pipeline_id,
+            worker_id=worker_id,
             snapshot_date=snapshot_date,
         )
         if successes:
@@ -936,9 +1267,14 @@ def process_document_fetch_queue(
         if (
             not successes
             and batch_hosts
-            and batch_hosts <= set(limiter.opened_hosts())
+            and batch_hosts
+            <= set(
+                limiter.opened_hosts()
+                + limiter.budget_exhausted_hosts()
+                + limiter.unbudgeted_hosts()
+            )
         ):
-            stop_reason = "all_claimed_hosts_circuit_open"
+            stop_reason = "all_claimed_hosts_blocked_by_circuit_or_budget"
             break
 
     if storage.get("blocked") is True:
@@ -958,6 +1294,7 @@ def process_document_fetch_queue(
     network_requests_started = sum(
         int(row["requests_started"]) for row in host_slos
     )
+    request_telemetry = durable_request_telemetry(conn, pipeline_id=pipeline_id)
     return {
         "schema_version": "document_fetch_queue_run_v3",
         "status": status,
@@ -970,10 +1307,17 @@ def process_document_fetch_queue(
             "per_host_workers": int(per_host_workers),
             "per_host_min_interval_ms": int(per_host_min_interval_ms),
             "hard_failure_threshold": int(host_hard_failure_threshold),
+            "download_attempts_per_queue_attempt": int(download_attempts),
+            "request_budgets": dict(sorted((host_request_budgets or {}).items())),
+            "require_explicit_host_budget": bool(require_explicit_host_budget),
         },
         "host_slos": host_slos,
+        "durable_request_telemetry": request_telemetry,
+        "request_budget_recovery": request_budget_recovery,
         "opened_hosts": limiter.opened_hosts(),
         "opened_circuits": limiter.opened_circuits(),
+        "budget_exhausted_hosts": limiter.budget_exhausted_hosts(),
+        "unbudgeted_hosts": limiter.unbudgeted_hosts(),
         "failure_class_counts": dict(sorted(failure_class_counts.items())),
         "totals": totals,
         "performance": {
@@ -1038,6 +1382,20 @@ def main(argv: list[str] | None = None) -> int:
         print("ERROR: worker/size/lease/timeout values must be positive", file=sys.stderr)
         return 2
 
+    try:
+        host_request_budgets = _parse_host_request_budgets(
+            list(args.host_request_budget or [])
+        )
+    except ValueError as exc:
+        print(f"ERROR: {exc}", file=sys.stderr)
+        return 2
+    if args.require_explicit_host_budget and not host_request_budgets:
+        print(
+            "ERROR: --require-explicit-host-budget needs at least one host budget",
+            file=sys.stderr,
+        )
+        return 2
+
     conn = open_db(db_path)
     try:
         report = process_document_fetch_queue(
@@ -1049,6 +1407,8 @@ def main(argv: list[str] | None = None) -> int:
             per_host_workers=int(args.per_host_workers),
             per_host_min_interval_ms=int(args.per_host_min_interval_ms),
             host_hard_failure_threshold=int(args.host_hard_failure_threshold),
+            host_request_budgets=host_request_budgets,
+            require_explicit_host_budget=bool(args.require_explicit_host_budget),
             claim_size=min(10_000, int(args.claim_size)),
             max_items=int(args.max_items),
             lease_seconds=int(args.lease_seconds),

@@ -1,23 +1,26 @@
 #!/usr/bin/env python3
-"""Prepare a deterministic 1,000-object real official document cohort."""
+"""Prepare deterministic bounded cohorts of real official documents."""
 
 from __future__ import annotations
 
 import argparse
+import gzip
 import hashlib
 import json
 import os
+import shutil
 import sqlite3
 import tempfile
 from datetime import UTC, datetime
+from itertools import groupby
 from pathlib import Path
 from typing import Any
 from urllib.parse import parse_qs, urlparse
 
 
 PIPELINE_ID = "real_document_fetch_scale_cohort_v2"
-BOE_DOCUMENTS_PER_DECILE = 80
-BOE_SUMMARIES_PER_DECILE = {decile: 12 if decile <= 4 else 11 for decile in range(1, 11)}
+DEFAULT_BOE_DOCUMENT_ROWS = 800
+DEFAULT_BOE_SUMMARY_ROWS = 114
 EXPECTED_HOST_ROWS = {
     "www.boe.es": 914,
     "www.parlamentodeandalucia.es": 86,
@@ -34,6 +37,8 @@ FORBIDDEN_HTML_MARKERS = [
     "attention required! | cloudflare",
     "access denied",
 ]
+MAX_PARTITION_ROWS = 250_000
+MAX_PARTITION_UNCOMPRESSED_BYTES = 512 * 1024 * 1024
 
 
 def utc_now() -> str:
@@ -136,7 +141,20 @@ def boe_validation_contract(
     }
 
 
-def select_boe_rows(conn: sqlite3.Connection) -> list[dict[str, Any]]:
+def decile_quota(total: int) -> tuple[int, int]:
+    if total < 0:
+        raise ValueError("row quota cannot be negative")
+    return divmod(total, 10)
+
+
+def select_boe_rows(
+    conn: sqlite3.Connection,
+    *,
+    document_rows: int,
+    summary_rows: int,
+) -> list[dict[str, Any]]:
+    document_base, document_extra = decile_quota(document_rows)
+    summary_base, summary_extra = decile_quota(summary_rows)
     rows = conn.execute(
         """
         WITH ranked AS (
@@ -172,15 +190,16 @@ def select_boe_rows(conn: sqlite3.Connection) -> list[dict[str, Any]]:
         )
         SELECT *
         FROM numbered
-        WHERE (source_pipeline_id = 'boe_document_fetch' AND row_in_decile <= 80)
-           OR (source_pipeline_id = 'boe_summary_fetch' AND row_in_decile <= 11)
-           OR (
-             source_pipeline_id = 'boe_summary_fetch'
-             AND size_decile <= 4
-             AND row_in_decile = 12
-           )
+        WHERE (
+          source_pipeline_id = 'boe_document_fetch'
+          AND row_in_decile <= ? + CASE WHEN size_decile <= ? THEN 1 ELSE 0 END
+        ) OR (
+          source_pipeline_id = 'boe_summary_fetch'
+          AND row_in_decile <= ? + CASE WHEN size_decile <= ? THEN 1 ELSE 0 END
+        )
         ORDER BY source_pipeline_id, size_decile, source_url
-        """
+        """,
+        (document_base, document_extra, summary_base, summary_extra),
     ).fetchall()
     selected: list[dict[str, Any]] = []
     for raw in rows:
@@ -241,6 +260,20 @@ def select_boe_rows(conn: sqlite3.Connection) -> list[dict[str, Any]]:
                 "payload": payload,
             }
         )
+    counts = {
+        "boe_document_fetch": sum(
+            row["source_pipeline_id"] == "boe_document_fetch" for row in selected
+        ),
+        "boe_summary_fetch": sum(
+            row["source_pipeline_id"] == "boe_summary_fetch" for row in selected
+        ),
+    }
+    expected = {
+        "boe_document_fetch": document_rows,
+        "boe_summary_fetch": summary_rows,
+    }
+    if counts != expected:
+        raise ValueError(f"BOE row allocation mismatch: expected={expected} actual={counts}")
     return selected
 
 
@@ -399,9 +432,15 @@ def select_parliament_rows(edges_path: Path, raw_root: Path) -> list[dict[str, A
     return sorted(base_rows, key=lambda row: str(row["source_url"]))
 
 
-def validate_rows(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    if len(rows) != 1000:
-        raise ValueError(f"expected 1,000 rows, got {len(rows)}")
+def validate_rows(
+    rows: list[dict[str, Any]],
+    *,
+    expected_rows: int,
+    expected_host_rows: dict[str, int],
+    expected_mode_rows: dict[str, int],
+) -> list[dict[str, Any]]:
+    if len(rows) != expected_rows:
+        raise ValueError(f"expected {expected_rows:,} rows, got {len(rows):,}")
     urls = [str(row["source_url"]) for row in rows]
     if len(set(urls)) != len(urls):
         raise ValueError("cohort URLs are not unique")
@@ -419,23 +458,24 @@ def validate_rows(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
             raise ValueError(f"real-data policy mismatch: {row['source_url']}")
         if payload.get("official_public_domain_personal_information_retained") is not True:
             raise ValueError(f"public-information policy mismatch: {row['source_url']}")
-    if host_counts != EXPECTED_HOST_ROWS:
+    if host_counts != expected_host_rows:
         raise ValueError(f"host allocation mismatch: {host_counts}")
-    if mode_counts != {
-        "boe_document_identifier": 800,
-        "boe_summary_structure": 114,
-        "parliament_html_semantic": 51,
-        "parliament_pdf_signature": 35,
-    }:
+    if mode_counts != expected_mode_rows:
         raise ValueError(f"validation-mode allocation mismatch: {mode_counts}")
-    return sorted(
-        rows,
+    rows.sort(
         key=lambda row: (
             str(row["source_pipeline_id"]),
             int(row["size_decile"]),
             str(row["source_url"]),
-        ),
+        )
     )
+    host_ranks: dict[str, int] = {}
+    for row in rows:
+        host = str(row["source_host"])
+        host_rank = host_ranks.get(host, 0)
+        row["queue_priority"] = -host_rank
+        host_ranks[host] = host_rank + 1
+    return rows
 
 
 def semantic_projection(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -463,6 +503,107 @@ def semantic_sha256(rows: list[dict[str, Any]]) -> str:
     return hashlib.sha256(encoded).hexdigest()
 
 
+def partitioned_semantic_sha256(rows: list[dict[str, Any]]) -> str:
+    digest = hashlib.sha256()
+    for row in rows:
+        digest.update(
+            json.dumps(
+                semantic_projection([row])[0],
+                ensure_ascii=True,
+                sort_keys=True,
+                separators=(",", ":"),
+            ).encode("utf-8")
+        )
+        digest.update(b"\n")
+    return digest.hexdigest()
+
+
+def partition_slug(source_pipeline_id: str, size_decile: int) -> str:
+    safe_pipeline = "".join(
+        character if character.isalnum() else "-"
+        for character in source_pipeline_id.lower()
+    ).strip("-")
+    return f"{safe_pipeline}-size-decile-{size_decile:02d}.jsonl.gz"
+
+
+def write_partitioned_rows(
+    *, partition_dir: Path, rows: list[dict[str, Any]]
+) -> dict[str, Any]:
+    if partition_dir.exists():
+        raise ValueError(f"manifest partition directory already exists: {partition_dir}")
+    partition_dir.parent.mkdir(parents=True, exist_ok=True)
+    temporary = Path(
+        tempfile.mkdtemp(prefix=f".{partition_dir.name}.", dir=partition_dir.parent)
+    )
+    descriptors: list[dict[str, Any]] = []
+    try:
+        for (source_pipeline_id, size_decile), member_rows in groupby(
+            rows,
+            key=lambda row: (
+                str(row["source_pipeline_id"]),
+                int(row["size_decile"]),
+            ),
+        ):
+            members = list(member_rows)
+            if len(members) > MAX_PARTITION_ROWS:
+                raise ValueError(
+                    "manifest partition exceeds row bound: "
+                    f"{source_pipeline_id} decile {size_decile}"
+                )
+            filename = partition_slug(source_pipeline_id, size_decile)
+            temporary_path = temporary / filename
+            uncompressed_bytes = 0
+            with temporary_path.open("wb") as raw_handle:
+                with gzip.GzipFile(
+                    filename="", mode="wb", fileobj=raw_handle, mtime=0
+                ) as compressed:
+                    for row in members:
+                        line = (
+                            json.dumps(
+                                row,
+                                ensure_ascii=True,
+                                sort_keys=True,
+                                separators=(",", ":"),
+                            )
+                            + "\n"
+                        ).encode("utf-8")
+                        compressed.write(line)
+                        uncompressed_bytes += len(line)
+                        if uncompressed_bytes > MAX_PARTITION_UNCOMPRESSED_BYTES:
+                            raise ValueError(
+                                "manifest partition exceeds expanded-byte bound: "
+                                f"{source_pipeline_id} decile {size_decile}"
+                            )
+                raw_handle.flush()
+                os.fsync(raw_handle.fileno())
+            descriptors.append(
+                {
+                    "path": repo_path(partition_dir / filename),
+                    "compression": "gzip",
+                    "rows": len(members),
+                    "bytes": temporary_path.stat().st_size,
+                    "uncompressed_bytes": uncompressed_bytes,
+                    "sha256": sha256_path(temporary_path),
+                    "source_pipeline_id": source_pipeline_id,
+                    "size_decile": size_decile,
+                    "first_source_url": str(members[0]["source_url"]),
+                    "last_source_url": str(members[-1]["source_url"]),
+                }
+            )
+        os.replace(temporary, partition_dir)
+    except BaseException:
+        shutil.rmtree(temporary, ignore_errors=True)
+        raise
+    return {
+        "layout": "partitioned_jsonl_gzip_v1",
+        "semantic_identity_contract": (
+            "sha256_concatenated_canonical_projection_jsonl_v1"
+        ),
+        "rows": len(rows),
+        "partitions": descriptors,
+    }
+
+
 def build_queue_db(
     *, schema_path: Path, out_db: Path, rows: list[dict[str, Any]], prepared_at: str
 ) -> None:
@@ -481,13 +622,14 @@ def build_queue_db(
                   pipeline_id, item_key, partition_key, priority, state,
                   payload_json, available_at, attempts, max_attempts,
                   created_at, updated_at
-                ) VALUES (?, ?, ?, 0, 'pending', ?, ?, 0, 2, ?, ?)
+                ) VALUES (?, ?, ?, ?, 'pending', ?, ?, 0, 2, ?, ?)
                 """,
-                [
+                (
                     (
                         PIPELINE_ID,
                         row["source_url"],
                         row["partition_key"],
+                        int(row["queue_priority"]),
                         json.dumps(
                             row["payload"],
                             ensure_ascii=True,
@@ -499,7 +641,7 @@ def build_queue_db(
                         prepared_at,
                     )
                     for row in rows
-                ],
+                ),
             )
             conn.commit()
             if str(conn.execute("PRAGMA integrity_check").fetchone()[0]) != "ok":
@@ -527,6 +669,18 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--host-health", required=True)
     parser.add_argument("--out-db", required=True)
     parser.add_argument("--manifest-out", required=True)
+    parser.add_argument(
+        "--manifest-layout",
+        choices=("embedded_v2", "partitioned_v3"),
+        default="embedded_v2",
+    )
+    parser.add_argument("--manifest-partition-dir", default="")
+    parser.add_argument(
+        "--boe-document-rows", type=int, default=DEFAULT_BOE_DOCUMENT_ROWS
+    )
+    parser.add_argument(
+        "--boe-summary-rows", type=int, default=DEFAULT_BOE_SUMMARY_ROWS
+    )
     parser.add_argument("--prepared-at", default="")
     return parser.parse_args()
 
@@ -540,7 +694,17 @@ def main() -> int:
     host_health_path = Path(args.host_health)
     out_db = Path(args.out_db)
     manifest_out = Path(args.manifest_out)
+    partition_dir = (
+        Path(
+            args.manifest_partition_dir
+            or manifest_out.with_suffix("").as_posix() + "-rows"
+        )
+        if args.manifest_layout == "partitioned_v3"
+        else None
+    )
     prepared_at = str(args.prepared_at or "").strip() or utc_now()
+    created_out_db = False
+    created_partition_dir = False
     try:
         datetime.fromisoformat(prepared_at.replace("Z", "+00:00"))
         for required in (source_db, schema_path, edges_path, host_health_path):
@@ -548,18 +712,51 @@ def main() -> int:
                 raise ValueError(f"required input missing: {required}")
         if not raw_root.is_dir():
             raise ValueError(f"raw root missing: {raw_root}")
+        for output in (out_db, manifest_out, partition_dir):
+            if output is not None and output.exists():
+                raise ValueError(f"output already exists: {output}")
         host_health = validate_host_health(host_health_path)
         with read_only_db(source_db) as conn:
-            boe_rows = select_boe_rows(conn)
+            boe_rows = select_boe_rows(
+                conn,
+                document_rows=args.boe_document_rows,
+                summary_rows=args.boe_summary_rows,
+            )
         parliament_rows = select_parliament_rows(edges_path, raw_root)
-        rows = validate_rows(boe_rows + parliament_rows)
-        cohort_sha256 = semantic_sha256(rows)
+        expected_mode_rows = {
+            "boe_document_identifier": args.boe_document_rows,
+            "boe_summary_structure": args.boe_summary_rows,
+            "parliament_html_semantic": sum(
+                row["validation_mode"] == "parliament_html_semantic"
+                for row in parliament_rows
+            ),
+            "parliament_pdf_signature": sum(
+                row["validation_mode"] == "parliament_pdf_signature"
+                for row in parliament_rows
+            ),
+        }
+        expected_host_rows = {
+            "www.boe.es": args.boe_document_rows + args.boe_summary_rows,
+            "www.parlamentodeandalucia.es": len(parliament_rows),
+        }
+        expected_rows = sum(expected_host_rows.values())
+        rows = validate_rows(
+            boe_rows + parliament_rows,
+            expected_rows=expected_rows,
+            expected_host_rows=expected_host_rows,
+            expected_mode_rows=expected_mode_rows,
+        )
+        if args.manifest_layout == "partitioned_v3":
+            cohort_sha256 = partitioned_semantic_sha256(rows)
+        else:
+            cohort_sha256 = semantic_sha256(rows)
         build_queue_db(
             schema_path=schema_path,
             out_db=out_db,
             rows=rows,
             prepared_at=prepared_at,
         )
+        created_out_db = True
         host_counts: dict[str, int] = {}
         kind_counts: dict[str, int] = {}
         mode_counts: dict[str, int] = {}
@@ -570,8 +767,12 @@ def main() -> int:
                 (mode_counts, str(row["validation_mode"])),
             ):
                 counts[key] = counts.get(key, 0) + 1
-        manifest = {
-            "schema_version": "real_document_fetch_scale_cohort_v2",
+        manifest: dict[str, Any] = {
+            "schema_version": (
+                "real_document_fetch_scale_cohort_v3"
+                if args.manifest_layout == "partitioned_v3"
+                else "real_document_fetch_scale_cohort_v2"
+            ),
             "prepared_at": prepared_at,
             "status": "ready",
             "cohort_id": f"real_document_fetch_scale_cohort_{cohort_sha256[:24]}",
@@ -597,20 +798,36 @@ def main() -> int:
             },
             "host_health": {
                 "status": host_health.get("status"),
-                "probe_requests": int((host_health.get("method") or {}).get("probe_requests") or 0),
+                "probe_requests": int(
+                    (host_health.get("method") or {}).get("probe_requests") or 0
+                ),
                 "eligible_hosts": sorted(EXPECTED_HOST_ROWS),
             },
             "inputs": {
+                "producer": source_descriptor(Path(__file__)),
                 "source_db": source_descriptor(source_db),
                 "schema": source_descriptor(schema_path),
                 "provenance_edges": source_descriptor(edges_path),
                 "host_health": source_descriptor(host_health_path),
             },
             "output_db": repo_path(out_db),
-            "rows": rows,
         }
+        if args.manifest_layout == "partitioned_v3":
+            if partition_dir is None:
+                raise ValueError("partition directory is required for v3")
+            manifest["row_manifest"] = write_partitioned_rows(
+                partition_dir=partition_dir,
+                rows=rows,
+            )
+            created_partition_dir = True
+        else:
+            manifest["rows"] = rows
         write_json_atomic(manifest_out, manifest)
     except (OSError, ValueError, sqlite3.Error, json.JSONDecodeError) as exc:
+        if created_out_db:
+            out_db.unlink(missing_ok=True)
+        if created_partition_dir and partition_dir is not None:
+            shutil.rmtree(partition_dir, ignore_errors=True)
         print(f"ERROR real document fetch scale cohort preparation: {exc}")
         return 2
     print(

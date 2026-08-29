@@ -21,6 +21,26 @@ DEFAULT_CHUNK_BYTES = 1024 * 1024
 DEFAULT_MAX_BYTES = 250 * 1024 * 1024
 
 
+class RedirectNotAllowedError(RuntimeError):
+    pass
+
+
+class _NoRedirectHandler(urllib.request.HTTPRedirectHandler):
+    def redirect_request(
+        self,
+        req: urllib.request.Request,
+        fp: BinaryIO,
+        code: int,
+        msg: str,
+        headers: object,
+        newurl: str,
+    ) -> urllib.request.Request | None:
+        del req, fp, msg, headers
+        raise RedirectNotAllowedError(
+            f"redirect_not_allowed: status={int(code)} target={newurl}"
+        )
+
+
 @dataclass(frozen=True)
 class StoredBlob:
     content_sha256: str
@@ -160,6 +180,7 @@ def download_to_content_addressed_store(
     retryable_http_codes: set[int] | None = None,
     ca_bundle: Path | None = None,
     insecure_ssl: bool = False,
+    follow_redirects: bool = True,
     progress_callback: Callable[[], None] | None = None,
 ) -> StoredBlob:
     """Download one URL without retaining its body in memory."""
@@ -185,6 +206,12 @@ def download_to_content_addressed_store(
     if headers:
         request_headers.update(headers)
     request = urllib.request.Request(str(url), headers=request_headers)
+    opener: urllib.request.OpenerDirector | None = None
+    if not follow_redirects:
+        handlers: list[urllib.request.BaseHandler] = [_NoRedirectHandler()]
+        if ssl_context is not None:
+            handlers.append(urllib.request.HTTPSHandler(context=ssl_context))
+        opener = urllib.request.build_opener(*handlers)
     retryable_codes = set(retryable_http_codes or DEFAULT_RETRYABLE_HTTP_CODES)
     attempts = max(1, int(max_attempts))
     last_error: Exception | None = None
@@ -192,11 +219,16 @@ def download_to_content_addressed_store(
     for attempt in range(1, attempts + 1):
         retry_after: str | None = None
         try:
-            with urllib.request.urlopen(
-                request,
-                timeout=max(1, int(timeout)),
-                context=ssl_context,
-            ) as response:
+            response_context = (
+                opener.open(request, timeout=max(1, int(timeout)))
+                if opener is not None
+                else urllib.request.urlopen(
+                    request,
+                    timeout=max(1, int(timeout)),
+                    context=ssl_context,
+                )
+            )
+            with response_context as response:
                 return stream_response_to_content_addressed_store(
                     response,
                     url=str(url),

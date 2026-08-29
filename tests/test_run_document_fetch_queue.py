@@ -11,9 +11,12 @@ from publicdata_sqlite import open_db
 from scripts.run_document_fetch_queue import (
     HostLimiter,
     _classify_download_failure,
+    _ensure_request_event_schema,
+    _parse_host_request_budgets,
     _validate_official_download,
     _validate_payload_contract,
     process_document_fetch_queue,
+    request_budget_recovery_usage,
 )
 
 
@@ -162,6 +165,27 @@ class TestRunDocumentFetchQueue(unittest.TestCase):
         self.assertGreater(report["performance"]["items_per_second"], 0)
         self.assertGreater(report["performance"]["peak_rss_bytes"], 0)
         self.assertEqual(report["queue"]["state_counts"]["succeeded"], 1)
+        self.assertEqual(
+            report["durable_request_telemetry"],
+            {
+                "storage": "sqlite_document_fetch_request_events_v1",
+                "queue_attempt_events": 1,
+                "network_requests_started": 1,
+                "succeeded_attempts": 1,
+                "failed_attempts": 0,
+                "bytes_received": 16,
+                "hosts": [
+                    {
+                        "host": "local",
+                        "queue_attempt_events": 1,
+                        "network_requests_started": 1,
+                        "succeeded_attempts": 1,
+                        "failed_attempts": 0,
+                        "bytes_received": 16,
+                    }
+                ],
+            },
+        )
 
         document = self.conn.execute(
             "SELECT source_record_pk, content_sha256, raw_path FROM text_documents WHERE source_url = ?",
@@ -200,6 +224,10 @@ class TestRunDocumentFetchQueue(unittest.TestCase):
         self.assertEqual(report["status"], "partial")
         self.assertEqual(report["totals"]["dead"], 1)
         self.assertEqual(report["queue"]["state_counts"]["dead"], 1)
+        self.assertEqual(
+            report["durable_request_telemetry"]["network_requests_started"], 1
+        )
+        self.assertEqual(report["durable_request_telemetry"]["failed_attempts"], 1)
         fetch = self.conn.execute(
             "SELECT fetched_ok, last_error FROM document_fetches WHERE doc_url = ?",
             (url,),
@@ -425,6 +453,101 @@ class TestRunDocumentFetchQueue(unittest.TestCase):
             limiter.opened_circuits(),
             ["blocked.example|legis:10|legis10/document.pdf"],
         )
+
+    def test_explicit_host_request_budget_fails_closed(self) -> None:
+        budgets = _parse_host_request_budgets(["www.boe.es=1"])
+        limiter = HostLimiter(
+            per_host_workers=1,
+            request_budgets=budgets,
+            require_explicit_budget=True,
+        )
+        with limiter.request_slot("https://www.boe.es/first.xml") as allowed:
+            self.assertTrue(allowed)
+        with limiter.request_slot("https://www.boe.es/second.xml") as allowed:
+            self.assertFalse(allowed)
+        self.assertEqual(
+            limiter.budget_block_reason("https://www.boe.es/second.xml"),
+            "host_request_budget_exhausted",
+        )
+        with limiter.request_slot("https://unexpected.example/file") as allowed:
+            self.assertFalse(allowed)
+        self.assertEqual(
+            limiter.budget_block_reason("https://unexpected.example/file"),
+            "host_request_budget_missing",
+        )
+
+        resumed_limiter = HostLimiter(
+            per_host_workers=1,
+            request_budgets={"www.boe.es": 2},
+            require_explicit_budget=True,
+            initial_request_budget_usage={"www.boe.es": 2},
+        )
+        with resumed_limiter.request_slot(
+            "https://www.boe.es/resumed.xml"
+        ) as allowed:
+            self.assertFalse(allowed)
+        self.assertEqual(
+            resumed_limiter.budget_block_reason(
+                "https://www.boe.es/resumed.xml"
+            ),
+            "host_request_budget_exhausted",
+        )
+        self.assertEqual(
+            resumed_limiter.host_slos()[0]["requests_started"],
+            0,
+        )
+        self.assertEqual(
+            resumed_limiter.host_slos()[0]["request_budget_used_prior"],
+            2,
+        )
+        self.assertEqual(
+            resumed_limiter.host_slos()[0]["request_budget_used_cumulative"],
+            2,
+        )
+
+    def test_crash_window_reserves_full_request_bound_durably(self) -> None:
+        enqueue_work_items(
+            self.conn,
+            pipeline_id="document_fetch",
+            items=[
+                {
+                    "item_key": "https://www.boe.es/crash-window.xml",
+                    "payload": {
+                        "doc_url": "https://www.boe.es/crash-window.xml"
+                    },
+                }
+            ],
+        )
+        item = self.conn.execute(
+            "SELECT work_item_id FROM pipeline_work_items"
+        ).fetchone()
+        work_item_id = int(item["work_item_id"])
+        self.conn.execute(
+            "UPDATE pipeline_work_items SET attempts = 1, state = 'leased' "
+            "WHERE work_item_id = ?",
+            (work_item_id,),
+        )
+        self.conn.execute(
+            """
+            INSERT INTO pipeline_work_attempts (
+              work_item_id, attempt_number, worker_id, started_at, status
+            ) VALUES (?, 1, 'crashed-worker', 'now', 'running')
+            """,
+            (work_item_id,),
+        )
+        self.conn.commit()
+        _ensure_request_event_schema(self.conn)
+
+        recovery = request_budget_recovery_usage(
+            self.conn,
+            pipeline_id="document_fetch",
+            download_attempts=2,
+        )
+        self.assertEqual(recovery["unmatched_queue_attempts"], 1)
+        self.assertEqual(
+            recovery["conservative_unmatched_request_reservations"], 2
+        )
+        self.assertEqual(recovery["budget_usage_by_host"], {"www.boe.es": 2})
 
     def test_repeated_server_errors_open_only_the_affected_cohort(self) -> None:
         limiter = HostLimiter(per_host_workers=1, hard_failure_threshold=2)

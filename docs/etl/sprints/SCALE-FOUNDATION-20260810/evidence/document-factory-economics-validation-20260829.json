@@ -4,13 +4,13 @@
   "inputs": {
     "public_artifact": {
       "path": "ui/gh-pages-next/public/transparency/data/document-factory-economics.json",
-      "bytes": 7383,
-      "sha256": "1f614f50ee5ef8e2b5dbb129095aafa23cafc3cf5db90537932a5497148b997b"
+      "bytes": 7413,
+      "sha256": "3cd366769abc9ea409e0e4b4de075ee32aebbaa18b3e05938a39b55d36fed35f"
     },
     "evidence_copy": {
       "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-factory-economics-20260829.json",
-      "bytes": 7383,
-      "sha256": "1f614f50ee5ef8e2b5dbb129095aafa23cafc3cf5db90537932a5497148b997b"
+      "bytes": 7413,
+      "sha256": "3cd366769abc9ea409e0e4b4de075ee32aebbaa18b3e05938a39b55d36fed35f"
     },
     "inventory": {
       "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-format-inventory.json",
@@ -45,23 +45,23 @@
       ]
     },
     "fresh_acquisition_run": {
-      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-v2-run-physical-20260829.json",
-      "bytes": 2224,
-      "sha256": "91a49ba26df60e04913cfa0531f923828cd15367823f2aa1c801ef9d8ccc996a"
+      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-10k-v1-run-physical-20260829.json",
+      "bytes": 2243,
+      "sha256": "c77f9ece61b1dd66b6f7d5a6d86b46bd9af33d9848422b3b7b7a62731beb23a9"
     },
     "fresh_acquisition_validation": {
-      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-v2-validation-physical-20260829.json",
-      "bytes": 2832,
-      "sha256": "b0a1f97ac72353119d5b89067b7bd29334e912f13607795c38d37d8d40f1a3e5"
+      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-10k-v1-validation-physical-20260829.json",
+      "bytes": 3270,
+      "sha256": "049d5e537cd376b1d1ae3cdb5672e0902caa7ef56f9a7b3f527e917fba5ddba4"
     }
   },
   "checks": {
-    "file_size_bytes": 7383,
+    "file_size_bytes": 7413,
     "max_bytes": 500000,
     "native_objects": 109558,
     "ocr_pages": 856,
-    "fresh_acquisition_documents_succeeded": 1000,
-    "fresh_acquisition_network_requests": 1000,
+    "fresh_acquisition_documents_succeeded": 10000,
+    "fresh_acquisition_network_requests": 10000,
     "historical_fetch_documents_succeeded": 6792,
     "input_hashes_verified": true,
     "per_1000_math_verified": true,

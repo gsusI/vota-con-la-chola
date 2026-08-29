@@ -263,6 +263,13 @@ document_factory_acquisition_manifest := env_var_or_default("DOCUMENT_FACTORY_AC
 document_factory_acquisition_run := env_var_or_default("DOCUMENT_FACTORY_ACQUISITION_RUN", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-v2-run-physical-20260829.json")
 document_factory_acquisition_validation := env_var_or_default("DOCUMENT_FACTORY_ACQUISITION_VALIDATION", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-v2-validation-physical-20260829.json")
 document_factory_acquisition_host_health := env_var_or_default("DOCUMENT_FACTORY_ACQUISITION_HOST_HEALTH", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-host-health-20260829.json")
+document_factory_acquisition_10k_db := env_var_or_default("DOCUMENT_FACTORY_ACQUISITION_10K_DB", "etl/data/staging/real-document-fetch-scale-cohort-10k-v1-20260829.db")
+document_factory_acquisition_10k_raw_root := env_var_or_default("DOCUMENT_FACTORY_ACQUISITION_10K_RAW_ROOT", "etl/data/derived/real-document-fetch-scale-cohort-10k-v1-20260829")
+document_factory_acquisition_10k_manifest := env_var_or_default("DOCUMENT_FACTORY_ACQUISITION_10K_MANIFEST", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-10k-v1-20260829.json")
+document_factory_acquisition_10k_manifest_rows := env_var_or_default("DOCUMENT_FACTORY_ACQUISITION_10K_MANIFEST_ROWS", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-10k-v1-20260829-rows")
+document_factory_acquisition_10k_preflight := env_var_or_default("DOCUMENT_FACTORY_ACQUISITION_10K_PREFLIGHT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-10k-v1-preflight-validation-20260829.json")
+document_factory_acquisition_10k_run := env_var_or_default("DOCUMENT_FACTORY_ACQUISITION_10K_RUN", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-10k-v1-run-physical-20260829.json")
+document_factory_acquisition_10k_validation := env_var_or_default("DOCUMENT_FACTORY_ACQUISITION_10K_VALIDATION", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-10k-v1-validation-physical-20260829.json")
 document_factory_economics_max_bytes := env_var_or_default("DOCUMENT_FACTORY_ECONOMICS_MAX_BYTES", "500000")
 evidence_api_v1_evidence_json := env_var_or_default("EVIDENCE_API_V1_EVIDENCE_JSON", "etl/data/published/accountability-evidence-api-latest.json")
 evidence_api_v1_source_health_json := env_var_or_default("EVIDENCE_API_V1_SOURCE_HEALTH_JSON", obstruction_tracker_status_json)
@@ -4689,8 +4696,8 @@ document-factory-economics-export:
     --page-ocr "{{document_factory_economics_ocr}}" \
     --page-ocr-validation "{{document_factory_economics_ocr_validation}}" \
     --document-fetch-operations "{{document_fetch_operations_out}}" \
-    --fresh-acquisition-run "{{document_factory_acquisition_run}}" \
-    --fresh-acquisition-validation "{{document_factory_acquisition_validation}}" \
+    --fresh-acquisition-run "{{document_factory_acquisition_10k_run}}" \
+    --fresh-acquisition-validation "{{document_factory_acquisition_10k_validation}}" \
     --out "{{document_factory_economics_out}}" \
     --evidence-out "{{document_factory_economics_evidence}}"
   python3 scripts/validate_document_factory_economics.py \
@@ -4702,8 +4709,8 @@ document-factory-economics-export:
     --page-ocr "{{document_factory_economics_ocr}}" \
     --page-ocr-validation "{{document_factory_economics_ocr_validation}}" \
     --document-fetch-operations "{{document_fetch_operations_out}}" \
-    --fresh-acquisition-run "{{document_factory_acquisition_run}}" \
-    --fresh-acquisition-validation "{{document_factory_acquisition_validation}}" \
+    --fresh-acquisition-run "{{document_factory_acquisition_10k_run}}" \
+    --fresh-acquisition-validation "{{document_factory_acquisition_10k_validation}}" \
     --max-bytes "{{document_factory_economics_max_bytes}}" \
     --out "{{document_factory_economics_validation}}"
 
@@ -4728,6 +4735,9 @@ document-factory-acquisition-cohort-run:
     --per-host-workers "{{document_fetch_per_host_workers}}" \
     --per-host-min-interval-ms "{{document_fetch_per_host_min_interval_ms}}" \
     --host-hard-failure-threshold "3" \
+    --host-request-budget "www.boe.es=1828" \
+    --host-request-budget "www.parlamentodeandalucia.es=172" \
+    --require-explicit-host-budget \
     --claim-size "40" \
     --max-items "1000" \
     --lease-seconds "900" \
@@ -4745,6 +4755,63 @@ document-factory-acquisition-cohort-validate:
     --db "{{document_factory_acquisition_db}}" \
     --raw-root "{{document_factory_acquisition_raw_root}}" \
     --out "{{document_factory_acquisition_validation}}"
+
+document-factory-acquisition-cohort-10k-prepare:
+  test ! -e "{{document_factory_acquisition_10k_db}}"
+  test ! -e "{{document_factory_acquisition_10k_manifest}}"
+  test ! -e "{{document_factory_acquisition_10k_manifest_rows}}"
+  python3 scripts/prepare_real_document_fetch_scale_cohort.py \
+    --source-db "{{db_path}}" \
+    --schema "etl/load/sqlite_schema.sql" \
+    --provenance-edges "etl/data/manifests/real-document-provenance-edges.jsonl" \
+    --raw-root "etl/data/raw" \
+    --host-health "{{document_factory_acquisition_host_health}}" \
+    --out-db "{{document_factory_acquisition_10k_db}}" \
+    --manifest-out "{{document_factory_acquisition_10k_manifest}}" \
+    --manifest-layout "partitioned_v3" \
+    --manifest-partition-dir "{{document_factory_acquisition_10k_manifest_rows}}" \
+    --boe-document-rows "8880" \
+    --boe-summary-rows "1034"
+
+document-factory-acquisition-cohort-10k-preflight:
+  python3 scripts/validate_real_document_fetch_scale_cohort.py \
+    --mode "preflight" \
+    --manifest "{{document_factory_acquisition_10k_manifest}}" \
+    --db "{{document_factory_acquisition_10k_db}}" \
+    --out "{{document_factory_acquisition_10k_preflight}}"
+
+document-factory-acquisition-cohort-10k-run-cold:
+  test ! -e "{{document_factory_acquisition_10k_raw_root}}"
+  test ! -e "{{document_factory_acquisition_10k_run}}"
+  python3 scripts/run_document_fetch_queue.py \
+    --db "{{document_factory_acquisition_10k_db}}" \
+    --raw-root "{{document_factory_acquisition_10k_raw_root}}" \
+    --pipeline-id "real_document_fetch_scale_cohort_v2" \
+    --worker-id "real-document-fetch-scale-cohort-10k-v1" \
+    --workers "16" \
+    --per-host-workers "{{document_fetch_per_host_workers}}" \
+    --per-host-min-interval-ms "{{document_fetch_per_host_min_interval_ms}}" \
+    --host-hard-failure-threshold "3" \
+    --host-request-budget "www.boe.es=19828" \
+    --host-request-budget "www.parlamentodeandalucia.es=172" \
+    --require-explicit-host-budget \
+    --claim-size "80" \
+    --max-items "10000" \
+    --lease-seconds "1800" \
+    --timeout "30" \
+    --max-bytes "67108864" \
+    --download-attempts "2" \
+    --retry-delay-seconds "0" \
+    --snapshot-date "{{snapshot_date}}" \
+    --report-out "{{document_factory_acquisition_10k_run}}"
+
+document-factory-acquisition-cohort-10k-validate:
+  python3 scripts/validate_real_document_fetch_scale_cohort.py \
+    --manifest "{{document_factory_acquisition_10k_manifest}}" \
+    --run-report "{{document_factory_acquisition_10k_run}}" \
+    --db "{{document_factory_acquisition_10k_db}}" \
+    --raw-root "{{document_factory_acquisition_10k_raw_root}}" \
+    --out "{{document_factory_acquisition_10k_validation}}"
 
 evidence-api-v1-export:
   python3 scripts/export_evidence_api_v1.py \

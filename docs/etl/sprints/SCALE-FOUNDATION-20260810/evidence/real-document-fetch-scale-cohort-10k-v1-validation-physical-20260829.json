@@ -1,0 +1,98 @@
+{
+  "schema_version": "real_document_fetch_scale_cohort_validation_v3",
+  "status": "ok",
+  "cohort_id": "real_document_fetch_scale_cohort_64d1d46fe1bf60911837534c",
+  "cohort_semantic_sha256": "64d1d46fe1bf60911837534ca95c6b66a94150f034393ec9be373ce2cbd594bf",
+  "policy": {
+    "official_real_documents_only": true,
+    "synthetic_or_mock_records_counted": false,
+    "official_public_domain_personal_information_retained": true,
+    "known_blocked_rows_selected": 0,
+    "dynamic_official_html_requires_semantic_contract": true,
+    "official_content_revisions_preserved_and_measured": true
+  },
+  "inputs": {
+    "manifest": {
+      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-10k-v1-20260829.json",
+      "bytes": 25278,
+      "sha256": "825d4043acf88ef59a1381ff27d6fc081a4c350aeaecfa5538b8a904b2656f73"
+    },
+    "run_report": {
+      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-10k-v1-run-physical-20260829.json",
+      "bytes": 2243,
+      "sha256": "c77f9ece61b1dd66b6f7d5a6d86b46bd9af33d9848422b3b7b7a62731beb23a9"
+    },
+    "database": {
+      "path": "etl/data/staging/real-document-fetch-scale-cohort-10k-v1-20260829.db",
+      "bytes": 89432064,
+      "sha256": "1d38b3f6f9ccbb7ee22d0bfea9c7cc66eb31a6f2fa2e82e3de2a0cd8aacad579"
+    }
+  },
+  "checks": {
+    "cohort_rows": 10000,
+    "manifest_validation_storage": "sqlite_temp_file",
+    "manifest_partitions": 30,
+    "prior_files_rehashed": 10000,
+    "fresh_files_rehashed": 10000,
+    "fresh_bytes_reconciled": 455228315,
+    "network_requests_started": 10000,
+    "network_request_telemetry_storage": "run_report_host_slos",
+    "host_request_budget_policy": "manifest_rows_times_download_attempt_bound",
+    "network_retry_attempts": 0,
+    "network_request_upper_bound": 20000,
+    "host_successes": 10000,
+    "host_failures": 0,
+    "database_integrity": "ok",
+    "foreign_key_violations": 0,
+    "prior_capture_byte_hash_integrity": true,
+    "source_contract_rows": 10000,
+    "fresh_source_contract_parity": true,
+    "fresh_content_hash_self_consistency": true
+  },
+  "content_drift": {
+    "exact_matches": 9943,
+    "drifted_rows": 57,
+    "drift_by_document_kind": {
+      "boe_document_xml": 6,
+      "parliament_html": 51
+    },
+    "drift_is_allowed_when_fresh_source_contract_passes": true
+  },
+  "hosts": {
+    "www.boe.es": {
+      "rows": 9914,
+      "bytes": 436411658,
+      "network_requests": 9914,
+      "network_successes": 9914
+    },
+    "www.parlamentodeandalucia.es": {
+      "rows": 86,
+      "bytes": 18816657,
+      "network_requests": 86,
+      "network_successes": 86
+    }
+  },
+  "per_1000_succeeded": {
+    "network_requests_started": 1000.0,
+    "bytes_received": 45522831.5,
+    "elapsed_seconds": 502.467034,
+    "cpu_seconds": 8.170722,
+    "failures": 0.0
+  },
+  "performance": {
+    "elapsed_seconds": 5024.670344,
+    "cpu_seconds": 81.707215,
+    "peak_rss_bytes": 53215232,
+    "workers": 16,
+    "per_host_workers": 2,
+    "per_host_min_interval_ms": 500,
+    "validation": {
+      "elapsed_seconds": 7.484826,
+      "cpu_seconds": 3.682564,
+      "peak_rss_bytes": 52625408
+    }
+  },
+  "error_count": 0,
+  "errors_truncated": false,
+  "errors": []
+}

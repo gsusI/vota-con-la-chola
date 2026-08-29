@@ -1,0 +1,60 @@
+{
+  "schema_version": "real_document_fetch_scale_cohort_preflight_validation_v1",
+  "status": "ok",
+  "cohort_id": "real_document_fetch_scale_cohort_64d1d46fe1bf60911837534c",
+  "cohort_semantic_sha256": "64d1d46fe1bf60911837534ca95c6b66a94150f034393ec9be373ce2cbd594bf",
+  "policy": {
+    "official_real_documents_only": true,
+    "synthetic_or_mock_records_counted": false,
+    "official_public_domain_personal_information_retained": true,
+    "known_blocked_rows_selected": 0,
+    "dynamic_official_html_requires_semantic_contract": true,
+    "official_content_revisions_preserved_and_measured": true
+  },
+  "inputs": {
+    "manifest": {
+      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-10k-v1-20260829.json",
+      "bytes": 25278,
+      "sha256": "825d4043acf88ef59a1381ff27d6fc081a4c350aeaecfa5538b8a904b2656f73"
+    },
+    "database": {
+      "path": "etl/data/staging/real-document-fetch-scale-cohort-10k-v1-20260829.db",
+      "bytes": 32313344,
+      "sha256": "6898c49ee3358cca62c0d8ce5adf60265be5a4c9bb0d5420116bac0246fd7504"
+    }
+  },
+  "checks": {
+    "cohort_rows": 10000,
+    "manifest_partitions": 30,
+    "manifest_compressed_bytes": 1655592,
+    "manifest_uncompressed_bytes": 22070608,
+    "manifest_validation_storage": "sqlite_temp_file",
+    "prior_files_rehashed": 10000,
+    "prior_bytes_reconciled": 455225911,
+    "source_contract_rows": 10000,
+    "real_policy_rows": 10000,
+    "official_public_information_rows": 10000,
+    "known_blocked_host_rows": 0,
+    "queue_states": {
+      "pending": {
+        "rows": 10000,
+        "attempts": 0
+      }
+    },
+    "database_integrity": "ok",
+    "foreign_key_violations": 0,
+    "preexisting_fetch_rows": 0,
+    "preexisting_document_rows": 0
+  },
+  "hosts": {
+    "www.boe.es": 9914,
+    "www.parlamentodeandalucia.es": 86
+  },
+  "validation_modes": {
+    "boe_document_identifier": 8880,
+    "boe_summary_structure": 1034,
+    "parliament_html_semantic": 51,
+    "parliament_pdf_signature": 35
+  },
+  "errors": []
+}

@@ -162,6 +162,7 @@ def validate(
         not in {
             "real_document_fetch_cohort_validation_v1",
             "real_document_fetch_scale_cohort_validation_v2",
+            "real_document_fetch_scale_cohort_validation_v3",
         }
         or acquisition_validation.get("status") != "ok"
         or acquisition_validation.get("errors") != []

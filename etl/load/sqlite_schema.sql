@@ -123,6 +123,30 @@ CREATE TABLE IF NOT EXISTS pipeline_work_attempts (
   UNIQUE (work_item_id, attempt_number)
 );
 
+-- Durable request accounting for document fetches. One row records the exact
+-- number of network requests performed by one queue attempt, including bounded
+-- in-item HTTP retries. This survives worker restarts and supports cumulative
+-- telemetry across resumed runs without retaining response bodies in SQLite.
+CREATE TABLE IF NOT EXISTS document_fetch_request_events (
+  document_fetch_request_event_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  work_item_id INTEGER NOT NULL
+    REFERENCES pipeline_work_items(work_item_id) ON DELETE CASCADE,
+  pipeline_id TEXT NOT NULL,
+  queue_attempt_number INTEGER NOT NULL CHECK (queue_attempt_number >= 1),
+  worker_id TEXT NOT NULL,
+  source_url TEXT NOT NULL,
+  source_host TEXT NOT NULL,
+  outcome_state TEXT NOT NULL
+    CHECK (outcome_state IN ('succeeded', 'failed')),
+  network_requests_started INTEGER NOT NULL
+    CHECK (network_requests_started >= 0),
+  http_status INTEGER,
+  failure_class TEXT,
+  bytes_received INTEGER NOT NULL DEFAULT 0 CHECK (bytes_received >= 0),
+  recorded_at TEXT NOT NULL,
+  UNIQUE (work_item_id, queue_attempt_number)
+);
+
 CREATE TABLE IF NOT EXISTS persons (
   person_id INTEGER PRIMARY KEY AUTOINCREMENT,
   full_name TEXT NOT NULL,
@@ -4611,6 +4635,13 @@ CREATE INDEX IF NOT EXISTS idx_pipeline_work_partition
   ON pipeline_work_items (pipeline_id, partition_key, state, work_item_id);
 CREATE INDEX IF NOT EXISTS idx_pipeline_work_attempt_item
   ON pipeline_work_attempts (work_item_id, attempt_number);
+CREATE INDEX IF NOT EXISTS idx_document_fetch_request_events_pipeline
+  ON document_fetch_request_events (
+    pipeline_id,
+    source_host,
+    outcome_state,
+    document_fetch_request_event_id
+  );
 CREATE INDEX IF NOT EXISTS idx_persons_name ON persons(full_name);
 CREATE INDEX IF NOT EXISTS idx_persons_gender_id ON persons(gender_id);
 CREATE INDEX IF NOT EXISTS idx_persons_territory_id ON persons(territory_id);

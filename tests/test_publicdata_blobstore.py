@@ -4,9 +4,12 @@ import hashlib
 import io
 import tempfile
 import unittest
+import urllib.request
 from pathlib import Path
 
 from publicdata_core.blobstore import (
+    RedirectNotAllowedError,
+    _NoRedirectHandler,
     download_to_content_addressed_store,
     stream_response_to_content_addressed_store,
 )
@@ -24,6 +27,18 @@ class FakeResponse(io.BytesIO):
 
 
 class TestPublicDataBlobStore(unittest.TestCase):
+    def test_fail_closed_redirect_handler_never_follows_target(self) -> None:
+        request = urllib.request.Request("https://www.boe.es/original")
+        with self.assertRaisesRegex(RedirectNotAllowedError, "redirect_not_allowed"):
+            _NoRedirectHandler().redirect_request(
+                request,
+                io.BytesIO(),
+                302,
+                "Found",
+                {},
+                "https://unexpected.example/redirected",
+            )
+
     def test_rejects_conflicting_tls_modes_before_network(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:
             bundle = Path(temp_dir) / "ca.pem"
