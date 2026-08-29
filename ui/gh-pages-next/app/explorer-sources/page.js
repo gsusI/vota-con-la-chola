@@ -181,7 +181,12 @@ function StateBucket({ title, state, sources }) {
 }
 
 export default function ExplorerSourcesPage() {
-  const status = readPublicJson("explorer-sources/data/status.json", { summary: {}, sources: [], actions: [] });
+  const legacyStatus = readPublicJson("legacy/explorer-sources/data/status.json", {
+    summary: {},
+    sources: [],
+    actions: [],
+  });
+  const status = readPublicJson("explorer-sources/data/status.json", legacyStatus);
   const catalog = readSourceCatalog();
   const scrapeQueue = readSourceQueue();
   const ideal = readPublicJson("legacy/explorer-sources/data/ideal.json", { sources: [] });
