@@ -462,8 +462,13 @@ PROJECT_FACTS = [
             "all 20,000 prior/fresh files and preserves 57 valid official revisions. Durable "
             "request events, conservative crash-window budget recovery, explicit per-host "
             "ceilings, redirect refusal, and host-fair priority are implemented and tested "
-            "after that run, so their next physical proof remains open. Representative 100k "
-            "transport and the one-million cohort remain open. Monetary cost "
+            "after that run, so their next physical proof remains open. A zero-network, "
+            "disk-backed audit and independent replay reduce 304,165 real provenance edges "
+            "to 104,064 unique official public URLs / 100,418 HTTPS. Only 90,121 HTTPS URLs "
+            "currently combine an implemented semantic contract with clean physical host "
+            "proof, leaving an exact 9,879-URL supply gap before a 100k acquisition can be "
+            "prepared; representativeness remains a separate maintainer decision. "
+            "Representative 100k transport and the one-million cohort remain open. Monetary cost "
             "remains null and unknown because no real "
             "provider rate, invoice, energy meter, or labor ledger is bound to the runs. "
             "Per-page elapsed time remains in operational state and aggregate reports, "
@@ -723,6 +728,14 @@ PROJECT_FACTS = [
             Evidence(
                 source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-10k-v1-validation-physical-20260829.json",
                 detail="Independent disk-backed rehash of 10,000 prior and 10,000 fresh files, 10,000 source contracts, and 9,943 exact plus 57 valid revised objects.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-source-universe-20260829.json",
+                detail="Zero-network disk-backed census of 304,165 real provenance edges, 104,064 unique official public URLs, 100,418 HTTPS URLs, and the exact contract-plus-health eligibility gap before a numeric 100,000 acquisition.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-source-universe-validation-20260829.json",
+                detail="Independent edge replay and hash-bound validation of source, host, eligibility, real-data policy, and target arithmetic without inferring representativeness.",
             ),
             Evidence(
                 source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-validation-physical-20260829.json",

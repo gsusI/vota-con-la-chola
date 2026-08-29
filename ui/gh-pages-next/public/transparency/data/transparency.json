@@ -1,7 +1,7 @@
 {
   "meta": {
     "schema_version": "transparency_dashboard_v1",
-    "generated_at": "2026-08-29T20:27:06+00:00",
+    "generated_at": "2026-08-29T21:02:51+00:00",
     "source_status_generated_at": "2026-08-12T11:09:08+00:00",
     "latest_release_date": "2026-08-20T00:36:23+00:00",
     "freshness_contract": "docs/method/truth-contract.md#estados-de-frescura"
@@ -212,9 +212,9 @@
     "evidence_files_total": 119,
     "source_path": "ui/gh-pages-next/public/obstruction-tracker/data/obstructions.json",
     "source_url": "/obstruction-tracker/data/obstructions.json",
-    "source_sha256": "ddd411212543d44650cff4ecbdb352f0744207a9cfa29ec297843752d770ca63",
+    "source_sha256": "0cda75a180f357f6d898cf00baeb319be77a5e9337c261578ab13ed21daf0217",
     "evidence_manifest_url": "/obstruction-tracker/evidence/manifest.json",
-    "evidence_manifest_sha256": "05d7d190849e8c01eb342280d14f46c9683fb002a079882914efc6d9569f1a1c"
+    "evidence_manifest_sha256": "eba4e5a3b63e47c697a88f5066d7bd18090c78df1658aaae9b1b24f124ae4b6a"
   },
   "scale_readiness": {
     "status": "real_foundation_ready_scale_incomplete",
@@ -227,7 +227,7 @@
     },
     "source_path": "etl/data/published/scale-readiness-latest.json",
     "source_url": "https://github.com/gsusI/vota-con-la-chola/blob/main/etl/data/published/scale-readiness-latest.json",
-    "source_sha256": "5934011380684b6f9b3a6770cbb9ffb672532f886e6be1c63769aacad126ba37"
+    "source_sha256": "f19e00e067797056bfc98ccf12313e6bb9046de94a327d80aab41aa6cae65142"
   },
   "published_snapshot": {
     "verification_status": "verified_current_scale_origin",

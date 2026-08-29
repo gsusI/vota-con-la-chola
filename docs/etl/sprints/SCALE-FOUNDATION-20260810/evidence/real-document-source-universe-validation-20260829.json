@@ -1,0 +1,41 @@
+{
+  "schema_version": "real_document_source_universe_validation_v1",
+  "status": "ok",
+  "generated_at": "2026-08-29T20:59:07.590292Z",
+  "policy": {
+    "official_real_urls_only": true,
+    "synthetic_or_mock_records_counted": false,
+    "official_public_domain_personal_information_retained": true,
+    "network_requests_performed": 0
+  },
+  "inputs": {
+    "report": {
+      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-source-universe-20260829.json",
+      "bytes": 28745,
+      "sha256": "302974f7b090c4ed1f1dd2f4f451109057395f7154571331ed9a20e04c3bcce6"
+    },
+    "edge_manifest": {
+      "path": "etl/data/manifests/real-document-provenance-edges.jsonl",
+      "bytes": 228237330,
+      "sha256": "e5329f46a9d6a17ef71b8798c54a16f4464cb93c19306d5ede165350b11492c1"
+    }
+  },
+  "checks": {
+    "input_descriptors_exact": true,
+    "edge_rows_replayed": 304165,
+    "unique_https_urls_replayed": 100418,
+    "host_counts_exact": true,
+    "contract_eligible_urls_exact": true,
+    "physical_health_bound": true,
+    "numeric_target_math_exact": true,
+    "representativeness_not_inferred": true,
+    "real_data_policy_enforced": true
+  },
+  "summary": {
+    "contract_eligible_physically_healthy_https_urls": 90121,
+    "numeric_target_urls": 100000,
+    "numeric_target_gap_urls": 9879,
+    "numeric_target_available": false
+  },
+  "errors": []
+}

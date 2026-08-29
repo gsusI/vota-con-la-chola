@@ -270,6 +270,10 @@ document_factory_acquisition_10k_manifest_rows := env_var_or_default("DOCUMENT_F
 document_factory_acquisition_10k_preflight := env_var_or_default("DOCUMENT_FACTORY_ACQUISITION_10K_PREFLIGHT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-10k-v1-preflight-validation-20260829.json")
 document_factory_acquisition_10k_run := env_var_or_default("DOCUMENT_FACTORY_ACQUISITION_10K_RUN", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-10k-v1-run-physical-20260829.json")
 document_factory_acquisition_10k_validation := env_var_or_default("DOCUMENT_FACTORY_ACQUISITION_10K_VALIDATION", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-10k-v1-validation-physical-20260829.json")
+document_factory_source_universe_provenance := env_var_or_default("DOCUMENT_FACTORY_SOURCE_UNIVERSE_PROVENANCE", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-provenance-audit.json")
+document_factory_source_universe_out := env_var_or_default("DOCUMENT_FACTORY_SOURCE_UNIVERSE_OUT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-source-universe-20260829.json")
+document_factory_source_universe_validation := env_var_or_default("DOCUMENT_FACTORY_SOURCE_UNIVERSE_VALIDATION", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-source-universe-validation-20260829.json")
+document_factory_source_universe_target := env_var_or_default("DOCUMENT_FACTORY_SOURCE_UNIVERSE_TARGET", "100000")
 document_factory_economics_max_bytes := env_var_or_default("DOCUMENT_FACTORY_ECONOMICS_MAX_BYTES", "500000")
 evidence_api_v1_evidence_json := env_var_or_default("EVIDENCE_API_V1_EVIDENCE_JSON", "etl/data/published/accountability-evidence-api-latest.json")
 evidence_api_v1_source_health_json := env_var_or_default("EVIDENCE_API_V1_SOURCE_HEALTH_JSON", obstruction_tracker_status_json)
@@ -4812,6 +4816,22 @@ document-factory-acquisition-cohort-10k-validate:
     --db "{{document_factory_acquisition_10k_db}}" \
     --raw-root "{{document_factory_acquisition_10k_raw_root}}" \
     --out "{{document_factory_acquisition_10k_validation}}"
+
+document-factory-source-universe-report:
+  python3 scripts/report_real_document_source_universe.py \
+    --provenance-audit "{{document_factory_source_universe_provenance}}" \
+    --host-health "{{document_factory_acquisition_host_health}}" \
+    --acquisition-validation "{{document_factory_acquisition_10k_validation}}" \
+    --obstruction-snapshot "{{obstruction_tracker_out}}" \
+    --target-urls "{{document_factory_source_universe_target}}" \
+    --out "{{document_factory_source_universe_out}}"
+  python3 scripts/validate_real_document_source_universe.py \
+    --report "{{document_factory_source_universe_out}}" \
+    --provenance-audit "{{document_factory_source_universe_provenance}}" \
+    --host-health "{{document_factory_acquisition_host_health}}" \
+    --acquisition-validation "{{document_factory_acquisition_10k_validation}}" \
+    --obstruction-snapshot "{{obstruction_tracker_out}}" \
+    --out "{{document_factory_source_universe_validation}}"
 
 evidence-api-v1-export:
   python3 scripts/export_evidence_api_v1.py \

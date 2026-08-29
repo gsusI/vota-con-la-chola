@@ -178,6 +178,17 @@ class RealScaleReadinessTests(unittest.TestCase):
         self.assertEqual(
             metrics["fresh_acquisition_cpu_seconds_per_1000"], 8.170722
         )
+        self.assertEqual(metrics["official_source_unique_public_urls"], 104_064)
+        self.assertEqual(metrics["official_source_unique_https_urls"], 100_418)
+        self.assertEqual(
+            metrics["contract_eligible_physically_healthy_https_urls"], 90_121
+        )
+        self.assertEqual(metrics["numeric_100k_source_url_gap"], 9_879)
+        self.assertFalse(metrics["numeric_100k_source_url_gate_passed"])
+        self.assertEqual(
+            metrics["representative_source_universe_status"],
+            "decision_required_dec_01",
+        )
 
     def test_boe_candidate_gap_retains_exact_public_identity_and_corrections(
         self,

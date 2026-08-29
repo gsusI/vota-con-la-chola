@@ -1,0 +1,961 @@
+{
+  "schema_version": "real_document_source_universe_v1",
+  "status": "blocked_below_numeric_target",
+  "generated_at": "2026-08-29T20:59:05.079637Z",
+  "policy": {
+    "official_real_urls_only": true,
+    "synthetic_or_mock_records_counted": false,
+    "official_public_domain_personal_information_retained": true,
+    "network_requests_performed": 0,
+    "known_blocked_hosts_reprobed": false,
+    "representativeness_inferred": false
+  },
+  "inputs": {
+    "provenance_audit": {
+      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-provenance-audit.json",
+      "bytes": 28339,
+      "sha256": "bd822b0286ebb1e9128d8a576db0c483d15bdda5bd8f75a6a6ab73a8a5c709b6"
+    },
+    "edge_manifest": {
+      "path": "etl/data/manifests/real-document-provenance-edges.jsonl",
+      "bytes": 228237330,
+      "sha256": "e5329f46a9d6a17ef71b8798c54a16f4464cb93c19306d5ede165350b11492c1"
+    },
+    "host_health": {
+      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-host-health-20260829.json",
+      "bytes": 2995,
+      "sha256": "c6e54aea81e307b4677470c36a1cf3fffa15b55ede0c3797c8cdcd31d0c4ef69"
+    },
+    "acquisition_validation": {
+      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-10k-v1-validation-physical-20260829.json",
+      "bytes": 3270,
+      "sha256": "049d5e537cd376b1d1ae3cdb5672e0902caa7ef56f9a7b3f527e917fba5ddba4"
+    },
+    "obstruction_snapshot": {
+      "path": "ui/gh-pages-next/public/obstruction-tracker/data/obstructions.json",
+      "descriptor_kind": "canonical_json_projection",
+      "projection_schema": "obstruction_classification_projection_v1",
+      "bytes": 6555,
+      "sha256": "b74df90e1ce67d5357181c7124d84a4cb82498d7bda3cae1b9116c363807ae35",
+      "open_incidents": 27
+    }
+  },
+  "edge_counts": {
+    "edge_rows": 304165,
+    "public_https_edges": 297474,
+    "public_http_edges": 6691
+  },
+  "summary": {
+    "unique_public_urls": 104064,
+    "unique_https_urls": 100418,
+    "unique_http_urls": 3646,
+    "source_ids": 43,
+    "hosts": 32,
+    "contract_eligible_physically_healthy_https_urls": 90121,
+    "healthy_host_uncontracted_https_urls": 1,
+    "numeric_target_urls": 100000,
+    "numeric_target_gap_urls": 9879,
+    "numeric_target_available": false,
+    "representative_cohort_status": "decision_required_dec_01"
+  },
+  "category_https_urls": {
+    "contract_implemented_and_physically_healthy": 86,
+    "known_blocked_no_new_lever": 10214,
+    "not_assessed_for_bulk_acquisition": 52,
+    "open_access_incident": 0,
+    "partially_contract_implemented_and_physically_healthy": 90036,
+    "reachable_semantic_contract_missing": 28,
+    "strict_tls_failed": 2
+  },
+  "hosts": [
+    {
+      "host": "www.boe.es",
+      "unique_public_urls": 90036,
+      "unique_https_urls": 90036,
+      "unique_http_urls": 0,
+      "contract_eligible_https_urls": 90035,
+      "classification": "partially_contract_implemented_and_physically_healthy",
+      "physical_success_rows": 9914,
+      "probe_http_status": null,
+      "probe_exclusion_reason": null,
+      "open_incident_ids": [],
+      "sources": [
+        {
+          "source_id": "boe_api_legal",
+          "url_kind": "public_https",
+          "unique_urls": 1
+        },
+        {
+          "source_id": "boe_daily_summaries",
+          "url_kind": "public_https",
+          "unique_urls": 1034
+        },
+        {
+          "source_id": "boe_document_xml",
+          "url_kind": "public_https",
+          "unique_urls": 89001
+        }
+      ]
+    },
+    {
+      "host": "www.senado.es",
+      "unique_public_urls": 11309,
+      "unique_https_urls": 7742,
+      "unique_http_urls": 3567,
+      "contract_eligible_https_urls": 0,
+      "classification": "known_blocked_no_new_lever",
+      "physical_success_rows": 0,
+      "probe_http_status": null,
+      "probe_exclusion_reason": null,
+      "open_incident_ids": [
+        "nso-2026-02-senado-iniciativas-403",
+        "nso-2026-02-senado-iniciativas-403-ai-ops-225",
+        "nso-2026-02-senado-iniciativas-403-ai-ops-232",
+        "nso-2026-02-senado-iniciativas-403-ai-ops-233",
+        "nso-2026-02-senado-iniciativas-403-ai-ops-234",
+        "nso-2026-02-senado-iniciativas-403-ai-ops-235",
+        "nso-2026-02-senado-iniciativas-403-ai-ops-236",
+        "nso-2026-02-senado-iniciativas-403-ai-ops-306",
+        "nso-2026-02-senado-iniciativas-403-ai-ops-307",
+        "nso-2026-02-senado-iniciativas-403-ai-ops-308",
+        "nso-2026-02-senado-iniciativas-403-ai-ops-309",
+        "nso-2026-02-senado-iniciativas-403-vpn",
+        "nso-2026-02-senado-iniciativas-intermitente",
+        "nso-2026-05-senado-senadores-403",
+        "nso-2026-08-senado-iniciativas-detail-500-scale",
+        "nso-2026-08-senado-vote-xml-https-403"
+      ],
+      "sources": [
+        {
+          "source_id": "manual",
+          "url_kind": "public_http",
+          "unique_urls": 96
+        },
+        {
+          "source_id": "manual",
+          "url_kind": "public_https",
+          "unique_urls": 3
+        },
+        {
+          "source_id": "parl_initiative_docs",
+          "url_kind": "public_http",
+          "unique_urls": 2987
+        },
+        {
+          "source_id": "parl_initiative_docs",
+          "url_kind": "public_https",
+          "unique_urls": 4850
+        },
+        {
+          "source_id": "senado_votaciones",
+          "url_kind": "public_http",
+          "unique_urls": 484
+        },
+        {
+          "source_id": "senado_votaciones",
+          "url_kind": "public_https",
+          "unique_urls": 102
+        },
+        {
+          "source_id": "text_documents/parl_initiative_docs",
+          "url_kind": "public_https",
+          "unique_urls": 2788
+        }
+      ]
+    },
+    {
+      "host": "www.congreso.es",
+      "unique_public_urls": 1433,
+      "unique_https_urls": 1430,
+      "unique_http_urls": 3,
+      "contract_eligible_https_urls": 0,
+      "classification": "known_blocked_no_new_lever",
+      "physical_success_rows": 0,
+      "probe_http_status": null,
+      "probe_exclusion_reason": null,
+      "open_incident_ids": [
+        "nso-2026-02-congreso-votaciones-403",
+        "nso-2026-03-congreso-voteevent-403-ai-ops-553"
+      ],
+      "sources": [
+        {
+          "source_id": "congreso_intervenciones",
+          "url_kind": "public_https",
+          "unique_urls": 557
+        },
+        {
+          "source_id": "parl_initiative_docs",
+          "url_kind": "public_http",
+          "unique_urls": 3
+        },
+        {
+          "source_id": "parl_initiative_docs",
+          "url_kind": "public_https",
+          "unique_urls": 854
+        },
+        {
+          "source_id": "text_documents/congreso_intervenciones",
+          "url_kind": "public_https",
+          "unique_urls": 19
+        }
+      ]
+    },
+    {
+      "host": "contrataciondelestado.es",
+      "unique_public_urls": 991,
+      "unique_https_urls": 991,
+      "unique_http_urls": 0,
+      "contract_eligible_https_urls": 0,
+      "classification": "known_blocked_no_new_lever",
+      "physical_success_rows": 0,
+      "probe_http_status": null,
+      "probe_exclusion_reason": null,
+      "open_incident_ids": [],
+      "sources": [
+        {
+          "source_id": "placsp_autonomico_detail",
+          "url_kind": "public_https",
+          "unique_urls": 991
+        },
+        {
+          "source_id": "placsp_sindicacion_detail",
+          "url_kind": "public_https",
+          "unique_urls": 991
+        }
+      ]
+    },
+    {
+      "host": "www.parlamentodeandalucia.es",
+      "unique_public_urls": 86,
+      "unique_https_urls": 86,
+      "unique_http_urls": 0,
+      "contract_eligible_https_urls": 86,
+      "classification": "contract_implemented_and_physically_healthy",
+      "physical_success_rows": 86,
+      "probe_http_status": 200,
+      "probe_exclusion_reason": null,
+      "open_incident_ids": [],
+      "sources": [
+        {
+          "source_id": "parlamento_andalucia",
+          "url_kind": "public_https",
+          "unique_urls": 2
+        },
+        {
+          "source_id": "parlamento_andalucia_actividad_xii",
+          "url_kind": "public_https",
+          "unique_urls": 49
+        },
+        {
+          "source_id": "parlamento_andalucia_votaciones",
+          "url_kind": "public_https",
+          "unique_urls": 35
+        }
+      ]
+    },
+    {
+      "host": "parlamentodenavarra.es",
+      "unique_public_urls": 51,
+      "unique_https_urls": 51,
+      "unique_http_urls": 0,
+      "contract_eligible_https_urls": 0,
+      "classification": "known_blocked_no_new_lever",
+      "physical_success_rows": 0,
+      "probe_http_status": null,
+      "probe_exclusion_reason": null,
+      "open_incident_ids": [
+        "nso-2026-02-navarra-403"
+      ],
+      "sources": [
+        {
+          "source_id": "manual",
+          "url_kind": "public_https",
+          "unique_urls": 51
+        }
+      ]
+    },
+    {
+      "host": "www.lamoncloa.gob.es",
+      "unique_public_urls": 28,
+      "unique_https_urls": 28,
+      "unique_http_urls": 0,
+      "contract_eligible_https_urls": 0,
+      "classification": "reachable_semantic_contract_missing",
+      "physical_success_rows": 0,
+      "probe_http_status": 200,
+      "probe_exclusion_reason": "source_specific_semantic_contract_not_implemented",
+      "open_incident_ids": [],
+      "sources": [
+        {
+          "source_id": "manual",
+          "url_kind": "public_https",
+          "unique_urls": 28
+        },
+        {
+          "source_id": "moncloa_referencias",
+          "url_kind": "public_https",
+          "unique_urls": 1
+        },
+        {
+          "source_id": "moncloa_rss_referencias",
+          "url_kind": "public_https",
+          "unique_urls": 1
+        }
+      ]
+    },
+    {
+      "host": "www.bng.gal",
+      "unique_public_urls": 5,
+      "unique_https_urls": 5,
+      "unique_http_urls": 0,
+      "contract_eligible_https_urls": 0,
+      "classification": "not_assessed_for_bulk_acquisition",
+      "physical_success_rows": 0,
+      "probe_http_status": null,
+      "probe_exclusion_reason": null,
+      "open_incident_ids": [],
+      "sources": [
+        {
+          "source_id": "programas_partidos",
+          "url_kind": "public_https",
+          "unique_urls": 3
+        },
+        {
+          "source_id": "programas_partidos:276",
+          "url_kind": "public_https",
+          "unique_urls": 3
+        },
+        {
+          "source_id": "text_documents/programas_partidos",
+          "url_kind": "public_https",
+          "unique_urls": 2
+        }
+      ]
+    },
+    {
+      "host": "coalicioncanaria.org",
+      "unique_public_urls": 4,
+      "unique_https_urls": 4,
+      "unique_http_urls": 0,
+      "contract_eligible_https_urls": 0,
+      "classification": "not_assessed_for_bulk_acquisition",
+      "physical_success_rows": 0,
+      "probe_http_status": null,
+      "probe_exclusion_reason": null,
+      "open_incident_ids": [],
+      "sources": [
+        {
+          "source_id": "programas_partidos",
+          "url_kind": "public_https",
+          "unique_urls": 2
+        },
+        {
+          "source_id": "programas_partidos:347",
+          "url_kind": "public_https",
+          "unique_urls": 2
+        },
+        {
+          "source_id": "text_documents/programas_partidos",
+          "url_kind": "public_https",
+          "unique_urls": 2
+        }
+      ]
+    },
+    {
+      "host": "compromis.net",
+      "unique_public_urls": 3,
+      "unique_https_urls": 3,
+      "unique_http_urls": 0,
+      "contract_eligible_https_urls": 0,
+      "classification": "not_assessed_for_bulk_acquisition",
+      "physical_success_rows": 0,
+      "probe_http_status": null,
+      "probe_exclusion_reason": null,
+      "open_incident_ids": [],
+      "sources": [
+        {
+          "source_id": "programas_partidos",
+          "url_kind": "public_https",
+          "unique_urls": 1
+        },
+        {
+          "source_id": "programas_partidos:61293",
+          "url_kind": "public_https",
+          "unique_urls": 1
+        },
+        {
+          "source_id": "text_documents/programas_partidos",
+          "url_kind": "public_https",
+          "unique_urls": 2
+        }
+      ]
+    },
+    {
+      "host": "cup.cat",
+      "unique_public_urls": 3,
+      "unique_https_urls": 3,
+      "unique_http_urls": 0,
+      "contract_eligible_https_urls": 0,
+      "classification": "not_assessed_for_bulk_acquisition",
+      "physical_success_rows": 0,
+      "probe_http_status": null,
+      "probe_exclusion_reason": null,
+      "open_incident_ids": [],
+      "sources": [
+        {
+          "source_id": "programas_partidos",
+          "url_kind": "public_https",
+          "unique_urls": 1
+        },
+        {
+          "source_id": "programas_partidos:68157",
+          "url_kind": "public_https",
+          "unique_urls": 1
+        },
+        {
+          "source_id": "text_documents/programas_partidos",
+          "url_kind": "public_https",
+          "unique_urls": 2
+        }
+      ]
+    },
+    {
+      "host": "foroasturias.es",
+      "unique_public_urls": 3,
+      "unique_https_urls": 3,
+      "unique_http_urls": 0,
+      "contract_eligible_https_urls": 0,
+      "classification": "not_assessed_for_bulk_acquisition",
+      "physical_success_rows": 0,
+      "probe_http_status": null,
+      "probe_exclusion_reason": null,
+      "open_incident_ids": [],
+      "sources": [
+        {
+          "source_id": "programas_partidos",
+          "url_kind": "public_https",
+          "unique_urls": 1
+        },
+        {
+          "source_id": "programas_partidos:4756",
+          "url_kind": "public_https",
+          "unique_urls": 1
+        },
+        {
+          "source_id": "text_documents/programas_partidos",
+          "url_kind": "public_https",
+          "unique_urls": 2
+        }
+      ]
+    },
+    {
+      "host": "izquierdaunida.org",
+      "unique_public_urls": 3,
+      "unique_https_urls": 3,
+      "unique_http_urls": 0,
+      "contract_eligible_https_urls": 0,
+      "classification": "not_assessed_for_bulk_acquisition",
+      "physical_success_rows": 0,
+      "probe_http_status": null,
+      "probe_exclusion_reason": null,
+      "open_incident_ids": [],
+      "sources": [
+        {
+          "source_id": "programas_partidos",
+          "url_kind": "public_https",
+          "unique_urls": 1
+        },
+        {
+          "source_id": "programas_partidos:7628",
+          "url_kind": "public_https",
+          "unique_urls": 1
+        },
+        {
+          "source_id": "text_documents/programas_partidos",
+          "url_kind": "public_https",
+          "unique_urls": 2
+        }
+      ]
+    },
+    {
+      "host": "movimientosumar.es",
+      "unique_public_urls": 3,
+      "unique_https_urls": 3,
+      "unique_http_urls": 0,
+      "contract_eligible_https_urls": 0,
+      "classification": "not_assessed_for_bulk_acquisition",
+      "physical_success_rows": 0,
+      "probe_http_status": null,
+      "probe_exclusion_reason": null,
+      "open_incident_ids": [],
+      "sources": [
+        {
+          "source_id": "programas_partidos",
+          "url_kind": "public_https",
+          "unique_urls": 1
+        },
+        {
+          "source_id": "programas_partidos:29",
+          "url_kind": "public_https",
+          "unique_urls": 1
+        },
+        {
+          "source_id": "text_documents/programas_partidos",
+          "url_kind": "public_https",
+          "unique_urls": 2
+        }
+      ]
+    },
+    {
+      "host": "verdesequo.es",
+      "unique_public_urls": 3,
+      "unique_https_urls": 3,
+      "unique_http_urls": 0,
+      "contract_eligible_https_urls": 0,
+      "classification": "not_assessed_for_bulk_acquisition",
+      "physical_success_rows": 0,
+      "probe_http_status": null,
+      "probe_exclusion_reason": null,
+      "open_incident_ids": [],
+      "sources": [
+        {
+          "source_id": "programas_partidos",
+          "url_kind": "public_https",
+          "unique_urls": 1
+        },
+        {
+          "source_id": "programas_partidos:18201",
+          "url_kind": "public_https",
+          "unique_urls": 1
+        },
+        {
+          "source_id": "text_documents/programas_partidos",
+          "url_kind": "public_https",
+          "unique_urls": 2
+        }
+      ]
+    },
+    {
+      "host": "www.eaj-pnv.eus",
+      "unique_public_urls": 3,
+      "unique_https_urls": 3,
+      "unique_http_urls": 0,
+      "contract_eligible_https_urls": 0,
+      "classification": "not_assessed_for_bulk_acquisition",
+      "physical_success_rows": 0,
+      "probe_http_status": null,
+      "probe_exclusion_reason": null,
+      "open_incident_ids": [],
+      "sources": [
+        {
+          "source_id": "programas_partidos",
+          "url_kind": "public_https",
+          "unique_urls": 1
+        },
+        {
+          "source_id": "programas_partidos:18",
+          "url_kind": "public_https",
+          "unique_urls": 1
+        },
+        {
+          "source_id": "text_documents/programas_partidos",
+          "url_kind": "public_https",
+          "unique_urls": 2
+        }
+      ]
+    },
+    {
+      "host": "www.eldebate.com",
+      "unique_public_urls": 3,
+      "unique_https_urls": 3,
+      "unique_http_urls": 0,
+      "contract_eligible_https_urls": 0,
+      "classification": "not_assessed_for_bulk_acquisition",
+      "physical_success_rows": 0,
+      "probe_http_status": null,
+      "probe_exclusion_reason": null,
+      "open_incident_ids": [],
+      "sources": [
+        {
+          "source_id": "andalucia_2026_programa_adelante_andalucia",
+          "url_kind": "public_https",
+          "unique_urls": 1
+        },
+        {
+          "source_id": "andalucia_2026_programa_pora",
+          "url_kind": "public_https",
+          "unique_urls": 1
+        },
+        {
+          "source_id": "andalucia_2026_programa_vox",
+          "url_kind": "public_https",
+          "unique_urls": 1
+        }
+      ]
+    },
+    {
+      "host": "www.pp.es",
+      "unique_public_urls": 3,
+      "unique_https_urls": 3,
+      "unique_http_urls": 0,
+      "contract_eligible_https_urls": 0,
+      "classification": "not_assessed_for_bulk_acquisition",
+      "physical_success_rows": 0,
+      "probe_http_status": null,
+      "probe_exclusion_reason": null,
+      "open_incident_ids": [],
+      "sources": [
+        {
+          "source_id": "programas_partidos",
+          "url_kind": "public_https",
+          "unique_urls": 2
+        },
+        {
+          "source_id": "programas_partidos:2",
+          "url_kind": "public_https",
+          "unique_urls": 2
+        },
+        {
+          "source_id": "text_documents/programas_partidos",
+          "url_kind": "public_https",
+          "unique_urls": 1
+        }
+      ]
+    },
+    {
+      "host": "www.upn.org",
+      "unique_public_urls": 3,
+      "unique_https_urls": 3,
+      "unique_http_urls": 0,
+      "contract_eligible_https_urls": 0,
+      "classification": "not_assessed_for_bulk_acquisition",
+      "physical_success_rows": 0,
+      "probe_http_status": null,
+      "probe_exclusion_reason": null,
+      "open_incident_ids": [],
+      "sources": [
+        {
+          "source_id": "text_documents/programas_partidos",
+          "url_kind": "public_https",
+          "unique_urls": 3
+        }
+      ]
+    },
+    {
+      "host": "www.voxespana.es",
+      "unique_public_urls": 3,
+      "unique_https_urls": 3,
+      "unique_http_urls": 0,
+      "contract_eligible_https_urls": 0,
+      "classification": "not_assessed_for_bulk_acquisition",
+      "physical_success_rows": 0,
+      "probe_http_status": null,
+      "probe_exclusion_reason": null,
+      "open_incident_ids": [],
+      "sources": [
+        {
+          "source_id": "programas_partidos",
+          "url_kind": "public_https",
+          "unique_urls": 1
+        },
+        {
+          "source_id": "programas_partidos:14",
+          "url_kind": "public_https",
+          "unique_urls": 1
+        },
+        {
+          "source_id": "text_documents/programas_partidos",
+          "url_kind": "public_https",
+          "unique_urls": 2
+        }
+      ]
+    },
+    {
+      "host": "www.juntaelectoralcentral.es",
+      "unique_public_urls": 2,
+      "unique_https_urls": 2,
+      "unique_http_urls": 0,
+      "contract_eligible_https_urls": 0,
+      "classification": "strict_tls_failed",
+      "physical_success_rows": 0,
+      "probe_http_status": null,
+      "probe_exclusion_reason": "strict_tls_failed",
+      "open_incident_ids": [],
+      "sources": [
+        {
+          "source_id": "jec_andalucia_2026_calendario",
+          "url_kind": "public_https",
+          "unique_urls": 1
+        },
+        {
+          "source_id": "jec_andalucia_2026_candidaturas_proclamadas",
+          "url_kind": "public_https",
+          "unique_urls": 1
+        }
+      ]
+    },
+    {
+      "host": "www.socialistes.cat",
+      "unique_public_urls": 2,
+      "unique_https_urls": 2,
+      "unique_http_urls": 0,
+      "contract_eligible_https_urls": 0,
+      "classification": "not_assessed_for_bulk_acquisition",
+      "physical_success_rows": 0,
+      "probe_http_status": null,
+      "probe_exclusion_reason": null,
+      "open_incident_ids": [],
+      "sources": [
+        {
+          "source_id": "programas_partidos",
+          "url_kind": "public_https",
+          "unique_urls": 1
+        },
+        {
+          "source_id": "programas_partidos:67790",
+          "url_kind": "public_https",
+          "unique_urls": 1
+        },
+        {
+          "source_id": "text_documents/programas_partidos",
+          "url_kind": "public_https",
+          "unique_urls": 1
+        }
+      ]
+    },
+    {
+      "host": "andalucia.porunmundomasjusto.es",
+      "unique_public_urls": 1,
+      "unique_https_urls": 1,
+      "unique_http_urls": 0,
+      "contract_eligible_https_urls": 0,
+      "classification": "not_assessed_for_bulk_acquisition",
+      "physical_success_rows": 0,
+      "probe_http_status": null,
+      "probe_exclusion_reason": null,
+      "open_incident_ids": [],
+      "sources": [
+        {
+          "source_id": "andalucia_2026_programa_mj",
+          "url_kind": "public_https",
+          "unique_urls": 1
+        }
+      ]
+    },
+    {
+      "host": "concejales.redsara.es",
+      "unique_public_urls": 1,
+      "unique_https_urls": 1,
+      "unique_http_urls": 0,
+      "contract_eligible_https_urls": 0,
+      "classification": "not_assessed_for_bulk_acquisition",
+      "physical_success_rows": 0,
+      "probe_http_status": null,
+      "probe_exclusion_reason": null,
+      "open_incident_ids": [],
+      "sources": [
+        {
+          "source_id": "municipal_concejales",
+          "url_kind": "public_https",
+          "unique_urls": 1
+        }
+      ]
+    },
+    {
+      "host": "ehbildu.eus",
+      "unique_public_urls": 1,
+      "unique_https_urls": 1,
+      "unique_http_urls": 0,
+      "contract_eligible_https_urls": 0,
+      "classification": "not_assessed_for_bulk_acquisition",
+      "physical_success_rows": 0,
+      "probe_http_status": null,
+      "probe_exclusion_reason": null,
+      "open_incident_ids": [],
+      "sources": [
+        {
+          "source_id": "programas_partidos",
+          "url_kind": "public_https",
+          "unique_urls": 1
+        },
+        {
+          "source_id": "programas_partidos:22",
+          "url_kind": "public_https",
+          "unique_urls": 1
+        }
+      ]
+    },
+    {
+      "host": "elecciones.upn.org",
+      "unique_public_urls": 1,
+      "unique_https_urls": 1,
+      "unique_http_urls": 0,
+      "contract_eligible_https_urls": 0,
+      "classification": "not_assessed_for_bulk_acquisition",
+      "physical_success_rows": 0,
+      "probe_http_status": null,
+      "probe_exclusion_reason": null,
+      "open_incident_ids": [],
+      "sources": [
+        {
+          "source_id": "programas_partidos",
+          "url_kind": "public_https",
+          "unique_urls": 1
+        },
+        {
+          "source_id": "programas_partidos:73",
+          "url_kind": "public_https",
+          "unique_urls": 1
+        }
+      ]
+    },
+    {
+      "host": "fundacionandalucia-asd.com",
+      "unique_public_urls": 1,
+      "unique_https_urls": 1,
+      "unique_http_urls": 0,
+      "contract_eligible_https_urls": 0,
+      "classification": "not_assessed_for_bulk_acquisition",
+      "physical_success_rows": 0,
+      "probe_http_status": null,
+      "probe_exclusion_reason": null,
+      "open_incident_ids": [],
+      "sources": [
+        {
+          "source_id": "andalucia_2026_programa_psoe_a",
+          "url_kind": "public_https",
+          "unique_urls": 1
+        }
+      ]
+    },
+    {
+      "host": "juanmapresidente.es",
+      "unique_public_urls": 1,
+      "unique_https_urls": 1,
+      "unique_http_urls": 0,
+      "contract_eligible_https_urls": 0,
+      "classification": "not_assessed_for_bulk_acquisition",
+      "physical_success_rows": 0,
+      "probe_http_status": null,
+      "probe_exclusion_reason": null,
+      "open_incident_ids": [],
+      "sources": [
+        {
+          "source_id": "andalucia_2026_programa_pp",
+          "url_kind": "public_https",
+          "unique_urls": 1
+        }
+      ]
+    },
+    {
+      "host": "www.ciudadanos-cs.org",
+      "unique_public_urls": 1,
+      "unique_https_urls": 1,
+      "unique_http_urls": 0,
+      "contract_eligible_https_urls": 0,
+      "classification": "not_assessed_for_bulk_acquisition",
+      "physical_success_rows": 0,
+      "probe_http_status": null,
+      "probe_exclusion_reason": null,
+      "open_incident_ids": [],
+      "sources": [
+        {
+          "source_id": "programas_partidos",
+          "url_kind": "public_https",
+          "unique_urls": 1
+        },
+        {
+          "source_id": "programas_partidos:1055",
+          "url_kind": "public_https",
+          "unique_urls": 1
+        }
+      ]
+    },
+    {
+      "host": "www.europarl.europa.eu",
+      "unique_public_urls": 1,
+      "unique_https_urls": 1,
+      "unique_http_urls": 0,
+      "contract_eligible_https_urls": 0,
+      "classification": "not_assessed_for_bulk_acquisition",
+      "physical_success_rows": 0,
+      "probe_http_status": null,
+      "probe_exclusion_reason": null,
+      "open_incident_ids": [],
+      "sources": [
+        {
+          "source_id": "europarl_meps",
+          "url_kind": "public_https",
+          "unique_urls": 1
+        }
+      ]
+    },
+    {
+      "host": "www.parlamentodegalicia.es",
+      "unique_public_urls": 1,
+      "unique_https_urls": 0,
+      "unique_http_urls": 1,
+      "contract_eligible_https_urls": 0,
+      "classification": "not_assessed_for_bulk_acquisition",
+      "physical_success_rows": 0,
+      "probe_http_status": null,
+      "probe_exclusion_reason": null,
+      "open_incident_ids": [],
+      "sources": [
+        {
+          "source_id": "manual",
+          "url_kind": "public_http",
+          "unique_urls": 1
+        }
+      ]
+    },
+    {
+      "host": "www.parlamentodegalicia.gal",
+      "unique_public_urls": 75,
+      "unique_https_urls": 0,
+      "unique_http_urls": 75,
+      "contract_eligible_https_urls": 0,
+      "classification": "open_access_incident",
+      "physical_success_rows": 0,
+      "probe_http_status": null,
+      "probe_exclusion_reason": null,
+      "open_incident_ids": [
+        "nso-2026-02-galicia-403"
+      ],
+      "sources": [
+        {
+          "source_id": "manual",
+          "url_kind": "public_http",
+          "unique_urls": 75
+        }
+      ]
+    }
+  ],
+  "checks": {
+    "provenance_edge_descriptor_exact": true,
+    "all_edge_rows_accounted": true,
+    "https_categories_reconcile": true,
+    "physical_health_required_for_contract_eligible_hosts": true,
+    "known_blocked_hosts_not_probed": true,
+    "real_data_policy_enforced": true
+  },
+  "limitations": [
+    "URL totals are the exact current local provenance universe, not a claim of complete official publication totals.",
+    "Accessibility classifications reuse bound physical evidence; this report performs no network request.",
+    "A numeric 100k URL supply would not by itself prove representative source, format, language, time, or jurisdiction coverage.",
+    "HTTP-only URLs remain evidence but cannot enter the strict HTTPS acquisition cohort."
+  ],
+  "next_action": {
+    "minimum_additional_contract_eligible_https_urls": 9879,
+    "reachable_moncloa_urls_after_contract": 28,
+    "instruction": "Implement and validate the Moncloa semantic contract, then expand healthy official HTTPS sources or use a genuinely new lever on an existing blocked source. Do not repeat blocker probes without a new lever."
+  },
+  "performance": {
+    "staging": "disk_backed_sqlite",
+    "edge_batch_rows": 10000,
+    "wall_seconds": 2.442115,
+    "cpu_seconds": 2.386671,
+    "peak_rss_bytes": 46891008
+  },
+  "errors": []
+}

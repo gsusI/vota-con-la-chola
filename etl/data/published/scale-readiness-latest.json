@@ -683,7 +683,7 @@
     },
     {
       "current_real_rows": 111408,
-      "evidence": "The current real-only inventory discovers 111422 local files and counts 111408 accountability-eligible official captures with 109558 distinct content hashes and 5093218479 bytes after excluding 5 fixture/sample files and 9 preserved transport-failure captures. The BOE lane now contains 1034 exact daily summaries and 89001 exact individual XML documents; all 89001 document jobs are terminal success and every accepted document has exact official summary-item, HTTPS URL, byte count, checksum and portable-manifest lineage. The latest sparse historical candidate acquisition added 18 exact summary dates and 21 exact documents while reusing 111369 checksum-identical inventory rows; only 48 file instances required inspection. A partitioned 30-file manifest prepares 10000 real official objects without a monolithic row array: 9914 BOE and 86 Parlamento de Andalucia across captured-size strata. Preflight independently rehashes all 10000 prior files and 455225911 bytes before network, validates all source contracts, proves a pristine 10000-row queue, and excludes known blockers. The cold physical run then succeeds for 10000 of 10000 objects through exactly 10000 requests and 455228315 bytes in 5024.670344 wall seconds, 81.707215 CPU seconds and 53215232 bytes peak RSS, with zero retry, dead work or failure. Disk-backed final validation rehashes all 10000 prior plus 10000 fresh files, passes all 10000 source contracts and reports 9943 exact objects plus 57 valid official revisions. The provenance audit verifies checksum and public URL lineage for 111357 files (99.9542 percent), with zero checksum or declared-byte conflicts; the same 51 historical gaps over 8315544 bytes remain explicit. Wayback reuses its portable checkpoint without new network probes and publishes no guessed relation. Resumable v5 extraction covers all 111408 instances and 109558 contents, yielding 1999902681 exact unsanitized public text characters in 108139 checksum-addressed text objects with zero retry, dead work, failure or truncation; independent validation rehashes every raw and CAS object. Additive OCR independently validates all 856 routed pages across 58 PDFs, yielding text on 849 pages, 7 explicit no-text pages, 89632 characters, 17 material gains and 131 verified OCR objects. The deterministic 40-page real human packet contains zero invented decisions and remains 0 of 40 complete. Numeric R1 is reached. Representative source, format and language coverage, human OCR quality, full remote raw-object durability, representative 100000-object transport and one-million-document operation remain open.",
+      "evidence": "The current real-only inventory discovers 111422 local files and counts 111408 accountability-eligible official captures with 109558 distinct content hashes and 5093218479 bytes after excluding 5 fixture/sample files and 9 preserved transport-failure captures. The BOE lane now contains 1034 exact daily summaries and 89001 exact individual XML documents; all 89001 document jobs are terminal success and every accepted document has exact official summary-item, HTTPS URL, byte count, checksum and portable-manifest lineage. The latest sparse historical candidate acquisition added 18 exact summary dates and 21 exact documents while reusing 111369 checksum-identical inventory rows; only 48 file instances required inspection. A partitioned 30-file manifest prepares 10000 real official objects without a monolithic row array: 9914 BOE and 86 Parlamento de Andalucia across captured-size strata. Preflight independently rehashes all 10000 prior files and 455225911 bytes before network, validates all source contracts, proves a pristine 10000-row queue, and excludes known blockers. The cold physical run then succeeds for 10000 of 10000 objects through exactly 10000 requests and 455228315 bytes in 5024.670344 wall seconds, 81.707215 CPU seconds and 53215232 bytes peak RSS, with zero retry, dead work or failure. Disk-backed final validation rehashes all 10000 prior plus 10000 fresh files, passes all 10000 source contracts and reports 9943 exact objects plus 57 valid official revisions. A separate disk-backed replay now accounts for all 304165 provenance edges and 104064 unique official URLs: 100418 are HTTPS, but only 90121 currently bind implemented semantic contracts to clean physical host evidence, leaving an exact 9879-URL gap before even a numeric 100000 acquisition can be prepared. It performs zero network requests, does not repeat known blockers, and keeps representativeness under DEC-01 rather than inferring it from volume. The provenance audit verifies checksum and public URL lineage for 111357 files (99.9542 percent), with zero checksum or declared-byte conflicts; the same 51 historical gaps over 8315544 bytes remain explicit. Wayback reuses its portable checkpoint without new network probes and publishes no guessed relation. Resumable v5 extraction covers all 111408 instances and 109558 contents, yielding 1999902681 exact unsanitized public text characters in 108139 checksum-addressed text objects with zero retry, dead work, failure or truncation; independent validation rehashes every raw and CAS object. Additive OCR independently validates all 856 routed pages across 58 PDFs, yielding text on 849 pages, 7 explicit no-text pages, 89632 characters, 17 material gains and 131 verified OCR objects. The deterministic 40-page real human packet contains zero invented decisions and remains 0 of 40 complete. Numeric R1 is reached. Representative source, format and language coverage, human OCR quality, full remote raw-object durability, representative 100000-object transport and one-million-document operation remain open.",
       "evidence_contract": {
         "audit": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-provenance-audit.json",
         "boe_corpus": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-document-corpus.json",
@@ -705,6 +705,8 @@
         "page_ocr": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr.json",
         "page_ocr_validation": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-validation.json",
         "queue": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-provenance-gap-queue-20260812.json",
+        "source_universe": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-source-universe-20260829.json",
+        "source_universe_validation": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-source-universe-validation-20260829.json",
         "wayback_checkpoint": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/wayback-document-checkpoint.jsonl",
         "wayback_manifest": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/wayback-document-lineage.jsonl",
         "wayback_recovery": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/wayback-document-lineage.json"
@@ -886,6 +888,16 @@
           "sha256": "049d5e537cd376b1d1ae3cdb5672e0902caa7ef56f9a7b3f527e917fba5ddba4"
         },
         {
+          "bytes": 28745,
+          "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-source-universe-20260829.json",
+          "sha256": "302974f7b090c4ed1f1dd2f4f451109057395f7154571331ed9a20e04c3bcce6"
+        },
+        {
+          "bytes": 1384,
+          "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-source-universe-validation-20260829.json",
+          "sha256": "80fd320fb7d6ce1847a73ec0b6664f5b1e254f8d92c6b77ceebc3d642ff4775c"
+        },
+        {
           "bytes": 7413,
           "path": "ui/gh-pages-next/public/transparency/data/document-factory-economics.json",
           "sha256": "3cd366769abc9ea409e0e4b4de075ee32aebbaa18b3e05938a39b55d36fed35f"
@@ -937,6 +949,8 @@
         "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-10k-v1-preflight-validation-20260829.json",
         "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-10k-v1-run-physical-20260829.json",
         "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-10k-v1-validation-physical-20260829.json",
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-source-universe-20260829.json",
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-source-universe-validation-20260829.json",
         "ui/gh-pages-next/public/transparency/data/document-factory-economics.json",
         "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-factory-economics-20260829.json",
         "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-factory-economics-validation-20260829.json"
@@ -946,6 +960,7 @@
         "boe_document_corpus_bytes": 2654761821,
         "boe_document_corpus_rows": 89001,
         "checksum_lineage_gap_files": 51,
+        "contract_eligible_physically_healthy_https_urls": 90121,
         "distinct_content_objects": 109558,
         "document_monetary_cost_status": "unknown_not_measured",
         "document_network_requests_measured": true,
@@ -1046,6 +1061,16 @@
             "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-provenance-gap-queue-20260812.json",
             "sha256": "4e5b36da023bbf7ab983bc24f49ac0160e1c1b7db91a126979324638d74ee969"
           },
+          "source_universe": {
+            "bytes": 28745,
+            "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-source-universe-20260829.json",
+            "sha256": "302974f7b090c4ed1f1dd2f4f451109057395f7154571331ed9a20e04c3bcce6"
+          },
+          "source_universe_validation": {
+            "bytes": 1384,
+            "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-source-universe-validation-20260829.json",
+            "sha256": "80fd320fb7d6ce1847a73ec0b6664f5b1e254f8d92c6b77ceebc3d642ff4775c"
+          },
           "wayback_checkpoint": {
             "bytes": 22110,
             "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/wayback-document-checkpoint.jsonl",
@@ -1076,6 +1101,8 @@
         "native_text_file_instances": 111408,
         "native_text_truncated_objects": 0,
         "native_wall_seconds_per_1000": 2.385409,
+        "numeric_100k_source_url_gap": 9879,
+        "numeric_100k_source_url_gate_passed": false,
         "ocr_candidate_pages": 856,
         "ocr_cpu_seconds_per_1000_pages": 688.624091,
         "ocr_documents": 58,
@@ -1090,11 +1117,14 @@
         "ocr_text_characters": 89632,
         "ocr_text_pages": 849,
         "ocr_wall_seconds_per_1000_pages": 128.359071,
+        "official_source_unique_https_urls": 100418,
+        "official_source_unique_public_urls": 104064,
         "provenance_coverage": 0.99954222,
         "public_url_files": 111357,
         "public_url_gap_files": 51,
         "raw_document_files_discovered": 111422,
         "remediation_queue_rows": 51,
+        "representative_source_universe_status": "decision_required_dec_01",
         "text_artifacts_checksum_verified": 6792,
         "unlinked_files": 51,
         "verified_checksum_files": 111357,
@@ -1105,7 +1135,7 @@
         "wayback_unique_content_targets": 3,
         "wayback_unseeded_gap_files": 25
       },
-      "next_action": "Complete and validate all 40 real human OCR reviews without invented labels. Add representative source, format, size, language, scan and corruption strata; the numeric 100000-document gate and local native/OCR economics per 1000 pass. Fresh acquisition now passes for 10000 real official objects across BOE and Parlamento de Andalucia with partitioned manifests, preflight, exact request telemetry, source-contract validation and measured official revisions. Inventory and expand the healthy official source universe before a representative 100000-object run; the current locally captured healthy-host universe is below that gate. Exercise the newly durable request-event, explicit host-budget, redirect-refusal and host-fair queue contract on the next cold cohort, and bind real monetary meter/provider rates. Replicate and clean-restore the full 108139-object text CAS from a durable raw origin. Retry only the seven failed exact-URL archive variants with a new lever and close the 51 historical provenance gaps only from byte-identical evidence or an exact primary-source manifest. Then scale toward one million through bounded official-host and date cohorts with the same queue, manifest, recovery and correction contracts.",
+      "next_action": "Complete and validate all 40 real human OCR reviews without invented labels. Add representative source, format, size, language, scan and corruption strata; the numeric 100000-document inventory gate and local native/OCR economics per 1000 pass. Fresh acquisition passes for 10000 real official objects across BOE and Parlamento de Andalucia. The exact source-universe gate proves only 90121 HTTPS URLs currently have both implemented semantic contracts and clean physical host evidence, so acquire at least 9879 additional contract-valid official HTTPS URLs before preparing the numeric 100000 cohort. Implement the 28-URL Moncloa semantic contract first, then expand healthy sources or use a genuinely new lever on a blocked source; do not repeat blocker probes without one. Exercise durable request events, explicit host budgets, redirect refusal and host-fair priority on the next cold cohort, and bind real monetary meter/provider rates. Replicate and clean-restore the full 108139-object text CAS from a durable raw origin. Retry only the seven failed exact-URL archive variants with a new lever and close the 51 historical provenance gaps only from byte-identical evidence or an exact primary-source manifest. Then scale toward one million through bounded official-host and date cohorts with the same queue, manifest, recovery and correction contracts.",
       "status": "r1_numeric_gate_passed_representativeness_and_ocr_quality_open",
       "target_real_rows": 1000000
     },
@@ -1150,7 +1180,7 @@
       "target_real_rows": 1000000
     }
   ],
-  "generated_at": "2026-08-29T20:09:24.984756Z",
+  "generated_at": "2026-08-29T21:00:02.954257Z",
   "policy": {
     "classification_never_suppresses_public_domain_identity": true,
     "generated_test_records_count_toward_readiness": false,
@@ -1162,9 +1192,9 @@
     "synthetic_or_mock_records_forbidden": true
   },
   "registry": {
-    "bytes": 35722,
+    "bytes": 36807,
     "path": "docs/etl/real-corpus-registry.json",
-    "sha256": "1ec63aa84c9bb6e2b3859f84a46fab5c983761aca06541a83b662fe252569309"
+    "sha256": "23f1868aa979f751520fa0c54580a6230bb65e2cacea7816914e835f03d1b5a1"
   },
   "schema_version": "real-scale-readiness-v1",
   "status": "real_foundation_ready_scale_incomplete",

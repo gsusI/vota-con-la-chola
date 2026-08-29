@@ -77,6 +77,48 @@ def evidence_reference(file_path: Path) -> dict[str, Any]:
     }
 
 
+def obstruction_projection_descriptor(
+    file_path: Path, payload: dict[str, Any]
+) -> dict[str, Any]:
+    policy = payload.get("policy") or {}
+    open_incidents = []
+    for row in payload.get("incidents") or []:
+        if not isinstance(row, dict) or row.get("status") != "OPEN":
+            continue
+        open_incidents.append(
+            {
+                "incident_id": str(row.get("incident_id") or ""),
+                "status": "OPEN",
+                "endpoint_or_page": str(row.get("endpoint_or_page") or ""),
+            }
+        )
+    open_incidents.sort(
+        key=lambda row: (row["incident_id"], row["endpoint_or_page"])
+    )
+    projection = {
+        "schema_version": "obstruction_classification_projection_v1",
+        "policy": {
+            "data_origin": policy.get("data_origin"),
+            "synthetic_or_mock_records": policy.get("synthetic_or_mock_records"),
+            "public_domain_personal_information": policy.get(
+                "public_domain_personal_information"
+            ),
+        },
+        "open_incidents": open_incidents,
+    }
+    body = json.dumps(
+        projection, ensure_ascii=False, sort_keys=True, separators=(",", ":")
+    ).encode("utf-8")
+    return {
+        "path": file_path.relative_to(REPO_ROOT).as_posix(),
+        "descriptor_kind": "canonical_json_projection",
+        "projection_schema": projection["schema_version"],
+        "bytes": len(body),
+        "sha256": hashlib.sha256(body).hexdigest(),
+        "open_incidents": len(open_incidents),
+    }
+
+
 def reject_disallowed_evidence(value: Any, location: str = "root") -> None:
     """Reject metadata markers that describe generated or loopback-only evidence."""
     if isinstance(value, dict):
@@ -574,6 +616,8 @@ def audit_document_provenance_gap(
         "fetch_preflight",
         "fetch_run",
         "fetch_validation",
+        "source_universe",
+        "source_universe_validation",
         "economics",
         "economics_evidence",
         "economics_validation",
@@ -605,6 +649,8 @@ def audit_document_provenance_gap(
     fetch_preflight = payloads["fetch_preflight"]
     fetch_run = payloads["fetch_run"]
     fetch_validation = payloads["fetch_validation"]
+    source_universe = payloads["source_universe"]
+    source_universe_validation = payloads["source_universe_validation"]
     economics = payloads["economics"]
     economics_evidence = payloads["economics_evidence"]
     economics_validation = payloads["economics_validation"]
@@ -787,6 +833,140 @@ def audit_document_provenance_gap(
         )
     ):
         raise ReadinessError("fresh document acquisition validation inputs drifted")
+
+    source_universe_policy = source_universe.get("policy") or {}
+    source_universe_summary = source_universe.get("summary") or {}
+    source_universe_checks = source_universe.get("checks") or {}
+    source_universe_edge_counts = source_universe.get("edge_counts") or {}
+    source_target_urls = _require_nonnegative_int(
+        source_universe_summary.get("numeric_target_urls"),
+        "document source universe numeric target",
+    )
+    source_eligible_urls = _require_nonnegative_int(
+        source_universe_summary.get(
+            "contract_eligible_physically_healthy_https_urls"
+        ),
+        "document source universe eligible HTTPS URLs",
+    )
+    source_target_gap = _require_nonnegative_int(
+        source_universe_summary.get("numeric_target_gap_urls"),
+        "document source universe target gap",
+    )
+    source_unique_https_urls = _require_nonnegative_int(
+        source_universe_summary.get("unique_https_urls"),
+        "document source universe unique HTTPS URLs",
+    )
+    if (
+        source_universe.get("schema_version")
+        != "real_document_source_universe_v1"
+        or source_universe.get("status")
+        not in {
+            "blocked_below_numeric_target",
+            "ready_for_numeric_cohort_preparation",
+        }
+        or source_universe.get("errors") != []
+        or source_universe_policy.get("official_real_urls_only") is not True
+        or source_universe_policy.get("synthetic_or_mock_records_counted") is not False
+        or source_universe_policy.get(
+            "official_public_domain_personal_information_retained"
+        )
+        is not True
+        or source_universe_policy.get("network_requests_performed") != 0
+        or source_universe_policy.get("known_blocked_hosts_reprobed") is not False
+        or source_universe_policy.get("representativeness_inferred") is not False
+        or not source_universe_checks
+        or not all(value is True for value in source_universe_checks.values())
+        or source_target_urls != 100_000
+        or source_target_gap != max(0, source_target_urls - source_eligible_urls)
+        or source_universe_summary.get("numeric_target_available")
+        != (source_eligible_urls >= source_target_urls)
+        or source_universe_summary.get("representative_cohort_status")
+        != "decision_required_dec_01"
+        or sum(
+            int((row or {}).get("contract_eligible_https_urls") or 0)
+            for row in source_universe.get("hosts") or []
+        )
+        != source_eligible_urls
+        or sum(
+            int(value)
+            for value in (source_universe.get("category_https_urls") or {}).values()
+        )
+        != source_unique_https_urls
+    ):
+        raise ReadinessError("document source universe contract failed")
+    source_universe_inputs = source_universe.get("inputs") or {}
+    audit_edge_manifest = audit.get("edge_manifest") or {}
+    for key in (
+        "provenance_audit",
+        "edge_manifest",
+        "host_health",
+        "acquisition_validation",
+    ):
+        input_descriptor = source_universe_inputs.get(key) or {}
+        input_path = repo_path(str(input_descriptor.get("path") or ""))
+        if (
+            input_descriptor.get("sha256") != sha256_file(input_path)
+            or int(input_descriptor.get("bytes") or -1) != input_path.stat().st_size
+        ):
+            raise ReadinessError(f"document source universe {key} input drifted")
+    obstruction_descriptor = source_universe_inputs.get("obstruction_snapshot") or {}
+    obstruction_path = repo_path(str(obstruction_descriptor.get("path") or ""))
+    if obstruction_descriptor != obstruction_projection_descriptor(
+        obstruction_path, load_json(obstruction_path)
+    ):
+        raise ReadinessError(
+            "document source universe obstruction classification input drifted"
+        )
+    if (
+        (source_universe_inputs.get("provenance_audit") or {}).get("sha256")
+        != sha256_file(evidence_paths["audit"])
+        or (source_universe_inputs.get("acquisition_validation") or {}).get("sha256")
+        != sha256_file(evidence_paths["fetch_validation"])
+        or (source_universe_inputs.get("edge_manifest") or {}).get("sha256")
+        != audit_edge_manifest.get("sha256")
+        or int(source_universe_edge_counts.get("edge_rows") or 0)
+        != int(audit_edge_manifest.get("rows") or -1)
+    ):
+        raise ReadinessError("document source universe authority inputs drifted")
+    source_validation_checks = source_universe_validation.get("checks") or {}
+    source_validation_summary = source_universe_validation.get("summary") or {}
+    source_validation_inputs = source_universe_validation.get("inputs") or {}
+    if (
+        source_universe_validation.get("schema_version")
+        != "real_document_source_universe_validation_v1"
+        or source_universe_validation.get("status") != "ok"
+        or source_universe_validation.get("errors") != []
+        or (source_validation_inputs.get("report") or {}).get("sha256")
+        != sha256_file(evidence_paths["source_universe"])
+        or (source_validation_inputs.get("edge_manifest") or {}).get("sha256")
+        != audit_edge_manifest.get("sha256")
+        or int(source_validation_checks.get("edge_rows_replayed") or 0)
+        != int(source_universe_edge_counts.get("edge_rows") or -1)
+        or int(source_validation_checks.get("unique_https_urls_replayed") or 0)
+        != source_unique_https_urls
+        or not all(
+            source_validation_checks.get(key) is True
+            for key in (
+                "input_descriptors_exact",
+                "host_counts_exact",
+                "contract_eligible_urls_exact",
+                "physical_health_bound",
+                "numeric_target_math_exact",
+                "representativeness_not_inferred",
+                "real_data_policy_enforced",
+            )
+        )
+        or int(
+            source_validation_summary.get(
+                "contract_eligible_physically_healthy_https_urls"
+            )
+            or -1
+        )
+        != source_eligible_urls
+        or int(source_validation_summary.get("numeric_target_gap_urls") or -1)
+        != source_target_gap
+    ):
+        raise ReadinessError("document source universe independent validation failed")
 
     economics_meta = economics.get("meta") or {}
     economics_policy = economics.get("policy") or {}
@@ -1423,6 +1603,18 @@ def audit_document_provenance_gap(
         "fresh_acquisition_cpu_seconds_per_1000": float(
             (acquisition_economics.get("per_1000_succeeded") or {}).get("cpu_seconds")
             or 0
+        ),
+        "official_source_unique_public_urls": _require_nonnegative_int(
+            source_universe_summary.get("unique_public_urls"),
+            "document source universe unique public URLs",
+        ),
+        "official_source_unique_https_urls": source_unique_https_urls,
+        "contract_eligible_physically_healthy_https_urls": source_eligible_urls,
+        "numeric_100k_source_url_gap": source_target_gap,
+        "numeric_100k_source_url_gate_passed": source_eligible_urls
+        >= source_target_urls,
+        "representative_source_universe_status": source_universe_summary.get(
+            "representative_cohort_status"
         ),
         "native_wall_seconds_per_1000": float(
             (
