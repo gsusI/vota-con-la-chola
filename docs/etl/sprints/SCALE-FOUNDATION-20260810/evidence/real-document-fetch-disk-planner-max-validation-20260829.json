@@ -1,0 +1,94 @@
+{
+  "schema_version": "real_document_fetch_disk_planner_validation_v1",
+  "status": "ok",
+  "policy": {
+    "official_real_documents_only": true,
+    "synthetic_or_mock_records_counted": false,
+    "official_public_domain_personal_information_retained": true
+  },
+  "inputs": {
+    "candidate_manifest": {
+      "path": "etl/data/staging/real-document-fetch-disk-planner-max-v1-20260829.json",
+      "bytes": 27502,
+      "sha256": "9a49ddc48e1205742cba6518add3ed8db9bffc552fb5dc87cdd7492e85c38541"
+    },
+    "candidate_database": {
+      "path": "etl/data/staging/real-document-fetch-disk-planner-max-v1-20260829.db",
+      "bytes": 259207168,
+      "sha256": "9a4f5ace0d1f9a4acf64151d2ecf1639f3d64d30ed8027d57db4fead172b365e"
+    },
+    "reference_manifest": null
+  },
+  "candidate": {
+    "rows": 90121,
+    "selection_sha256": "dba419b3c2b3377c456af9fe3165c83df698445278500ffc4172721a58ad05e8",
+    "execution_sha256": "dde64e6fde248dac9ac9deb9c4f375cb11258e70755887e5d8b60d7ad280cebd",
+    "real_policy_rows": 90121,
+    "public_information_rows": 90121,
+    "blocked_host_rows": 0,
+    "provenance_enrichment_rows": 86,
+    "provenance_reference_pairs": 116,
+    "logical_partition_hashes": {
+      "boe_document_fetch:size_decile_1": "efcc4d239296d9f1ac85c9ca5e6f5afc34a53498db874be3d1e2a2f70846af64",
+      "boe_document_fetch:size_decile_2": "dd28d327c06c9136ec6a3874d3fccf41b5c8aa3e3cf121ab77e4b5f9f2069147",
+      "boe_document_fetch:size_decile_3": "77073b5d146e70b5d9cf108a7b9ea5fb50f3805696febfcf220fd01483c8fdd8",
+      "boe_document_fetch:size_decile_4": "c061528ee4cd2bc441cd5b66531799c4ccc8f916a4cbfb564fe4fc747315166f",
+      "boe_document_fetch:size_decile_5": "3144638c351d276abc431280defa6317b828550948798cac707643367e115684",
+      "boe_document_fetch:size_decile_6": "ba5f26c017b6fd2f77778fd15ca9674c088643ed338099465dd61795c375c016",
+      "boe_document_fetch:size_decile_7": "cf08dbe55ec0bb0b7c3a232d1d4f3e258a6c48b8920187e06075088823625856",
+      "boe_document_fetch:size_decile_8": "d38a0380e3c926a9a11b73a993e98871a7d5e88ac5969fd3f7ec66df5ae6fde8",
+      "boe_document_fetch:size_decile_9": "2ef0171c99053c22027d5cafa5c90a671b15d7399dbd96c9672cb1e742ce47c8",
+      "boe_document_fetch:size_decile_10": "2c6e5887c641a20234626c371523e821ef0832010109f61326600cff1dc784ce",
+      "boe_summary_fetch:size_decile_1": "9638845f07c644eb1829bf035cb4b747b7d5a881058a5e480fe733e0cc83194f",
+      "boe_summary_fetch:size_decile_2": "d0cbfc013d822d8303ee8cd716ba6cfb58873ffe9480d1b496856ddff33251c1",
+      "boe_summary_fetch:size_decile_3": "da10df798439062a359ab3c3b19129751a9f2a92001fc3f17691b5b583f7db2c",
+      "boe_summary_fetch:size_decile_4": "eaa26fdb9376ed2a916c0896f840e2071888f76e8367613302a4afe66e42f187",
+      "boe_summary_fetch:size_decile_5": "b10f5cd9276ecd8adf24cc5a72b13e6be8fa7bd8a43ac0aab36c25207dc06447",
+      "boe_summary_fetch:size_decile_6": "5019d644b038af13d19cbb57787f744498e88dfd4d929a66fdebaccda6412ce2",
+      "boe_summary_fetch:size_decile_7": "1c659c997df635547ef9ffa3b43ece4f6bc3d8918433a43048ae5045a24227e3",
+      "boe_summary_fetch:size_decile_8": "0de299da1e7d9fd05c2967e1b58fb1136bf6eb32ace9af7d41d974c4e8d43c90",
+      "boe_summary_fetch:size_decile_9": "d570a604cba62b5918a64c447452d20742fba1cf4b669e737529d69c6ec74bc8",
+      "boe_summary_fetch:size_decile_10": "e0a673970cc248aeaf0e106e4435c5906d02ea094bd824e8f9404b96ceb55ea5",
+      "provenance_edges:parlamento_andalucia:size_decile_1": "3bdc09a6943333a2040046bda42714aaaba34c5895b8f2fc4731a21e54875677",
+      "provenance_edges:parlamento_andalucia:size_decile_2": "249489f8e6c69ab81faaedc75dbce2512da94bcaf4fa3576fd9276e1e1e5ea37",
+      "provenance_edges:parlamento_andalucia:size_decile_3": "ccdbbe342b3af8d1ed859ebd56658d98bdcd1f554397e60543219414c8e92a95",
+      "provenance_edges:parlamento_andalucia:size_decile_4": "355687ab14a0c327d563e26364d8b1e3fdc3e5ed6412c77454d9dd64d0a5b5a6",
+      "provenance_edges:parlamento_andalucia:size_decile_5": "2b79276baf9c48e301592930526f6e21052947f2321b629db0a2b349b42b510f",
+      "provenance_edges:parlamento_andalucia:size_decile_6": "9092099a5979bb408250330419c02e1644d3dd088075aa1ec3408ba725fd6523",
+      "provenance_edges:parlamento_andalucia:size_decile_7": "8192a69e4ebe853f39aac9d77248a115c2b3fbdc860e5e037bfe0c973b0419d1",
+      "provenance_edges:parlamento_andalucia:size_decile_8": "8b16712e2c07329be69873be1c73367d2f7503e98bb2f2437fb13ea34d3316f8",
+      "provenance_edges:parlamento_andalucia:size_decile_9": "89e374bc7de84ec6452d2e6e468fa16ef9b2297c3eb84c4b0f1ab6cb8328f9d8",
+      "provenance_edges:parlamento_andalucia:size_decile_10": "06d7922a3f8be7e741f7b2449debacc94d1ab48eb3c173be6c12ee249099cb9c"
+    }
+  },
+  "reference": null,
+  "comparison": null,
+  "logical_partition_parity": null,
+  "queue": {
+    "database_integrity": "ok",
+    "foreign_key_violations": 0,
+    "queue_rows": 90121,
+    "priority_min": -90034,
+    "priority_max": 0,
+    "distinct_priorities": 90035,
+    "queue_mismatch_rows": 0,
+    "extra_queue_rows": 0,
+    "preexisting_fetch_rows": 0,
+    "preexisting_document_rows": 0,
+    "valid": true
+  },
+  "planning": {
+    "backend": "disk_backed_sqlite",
+    "full_cohort_materialized_in_memory": false,
+    "planner_peak_rss_bytes": 53198848,
+    "planner_peak_rss_bound_bytes": 268435456,
+    "planner_peak_rss_within_bound": true
+  },
+  "validation_performance": {
+    "elapsed_seconds": 9.338258,
+    "peak_rss_bytes": 54296576,
+    "temporary_store_removed_after_validation": true
+  },
+  "error_count": 0,
+  "errors": []
+}

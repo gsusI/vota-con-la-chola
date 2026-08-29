@@ -29,10 +29,12 @@ EXPECTED_MODES = {
     "parliament_html_semantic": 51,
     "parliament_pdf_signature": 35,
 }
-MAX_MANIFEST_ROWS = 5_000_000
-MAX_MANIFEST_PARTITIONS = 10_000
+MAX_MANIFEST_ROWS = 100_000_000
+MAX_MANIFEST_PARTITIONS = 100_000
 MAX_PARTITION_ROWS = 250_000
 MAX_PARTITION_UNCOMPRESSED_BYTES = 512 * 1024 * 1024
+PLANNER_SCHEMA_VERSION = "real_document_fetch_disk_planner_v1"
+MAX_EMBEDDED_ROWS = 25_000
 
 
 class BoundedErrors:
@@ -167,6 +169,75 @@ def canonical_projection_line(row: dict[str, Any]) -> bytes:
     ).encode("utf-8")
 
 
+def execution_contract_line(
+    row: dict[str, Any], *, queue_priority: int
+) -> bytes:
+    fields = (
+        "source_pipeline_id",
+        "source_id",
+        "provenance_source_id",
+        "source_url",
+        "source_host",
+        "document_kind",
+        "validation_mode",
+        "size_decile",
+        "expected_bytes",
+        "expected_content_sha256",
+        "captured_raw_path",
+        "partition_key",
+        "queue_priority",
+        "payload",
+    )
+    projected = {field: row.get(field) for field in fields}
+    projected["queue_priority"] = queue_priority
+    return (
+        json.dumps(
+            projected,
+            ensure_ascii=True,
+            sort_keys=True,
+            separators=(",", ":"),
+        )
+        + "\n"
+    ).encode("utf-8")
+
+
+def validate_exact_provenance_reference_edges(payload: dict[str, Any]) -> None:
+    provenance = payload.get("provenance") or {}
+    if not isinstance(provenance, dict):
+        raise ValueError("Parliament provenance is not an object")
+    reference_edges = provenance.get("reference_edges") or []
+    if not isinstance(reference_edges, list) or not 1 <= len(reference_edges) <= 10_000:
+        raise ValueError("Parliament provenance reference-edge count is invalid")
+    pairs: list[tuple[str, str]] = []
+    for edge in reference_edges:
+        if not isinstance(edge, dict) or set(edge) != {"db_ref", "table_name"}:
+            raise ValueError("Parliament provenance reference edge is invalid")
+        pair = (str(edge.get("db_ref") or ""), str(edge.get("table_name") or ""))
+        if not all(pair):
+            raise ValueError("Parliament provenance reference edge is empty")
+        pairs.append(pair)
+    if pairs != sorted(set(pairs)):
+        raise ValueError("Parliament provenance reference edges are not sorted unique")
+    if provenance.get("db_refs") != sorted({pair[0] for pair in pairs}):
+        raise ValueError("Parliament provenance db-ref projection mismatch")
+    if provenance.get("table_names") != sorted({pair[1] for pair in pairs}):
+        raise ValueError("Parliament provenance table-name projection mismatch")
+
+
+def expected_partition_filename(
+    *, source_pipeline_id: str, size_decile: int, shard_ordinal: int
+) -> str:
+    safe_pipeline = "".join(
+        character if character.isalnum() else "-"
+        for character in source_pipeline_id.lower()
+    ).strip("-")
+    pipeline_hash = hashlib.sha256(source_pipeline_id.encode("utf-8")).hexdigest()[:10]
+    return (
+        f"{safe_pipeline}-{pipeline_hash}-size-decile-{size_decile:02d}-"
+        f"part-{shard_ordinal:06d}.jsonl.gz"
+    )
+
+
 def iter_manifest_rows(
     *, manifest: dict[str, Any], manifest_path: Path
 ):
@@ -177,10 +248,18 @@ def iter_manifest_rows(
             raise ValueError("embedded manifest rows are not a list")
         yield from rows
         return
-    if schema_version != "real_document_fetch_scale_cohort_v3":
+    if schema_version not in {
+        "real_document_fetch_scale_cohort_v3",
+        "real_document_fetch_scale_cohort_v4",
+    }:
         raise ValueError("manifest schema mismatch")
     row_manifest = manifest.get("row_manifest") or {}
-    if row_manifest.get("layout") != "partitioned_jsonl_gzip_v1":
+    expected_layout = (
+        "partitioned_jsonl_gzip_v2"
+        if schema_version == "real_document_fetch_scale_cohort_v4"
+        else "partitioned_jsonl_gzip_v1"
+    )
+    if row_manifest.get("layout") != expected_layout:
         raise ValueError("partitioned manifest layout mismatch")
     if (
         row_manifest.get("semantic_identity_contract")
@@ -197,6 +276,9 @@ def iter_manifest_rows(
         raise ValueError("partitioned manifest has too many partitions")
     seen_paths: set[str] = set()
     total_rows = 0
+    previous_descriptor_key: tuple[str, int, int] | None = None
+    previous_group_key: tuple[str, int] | None = None
+    previous_group_last_url = ""
     for descriptor in descriptors:
         if not isinstance(descriptor, dict):
             raise ValueError("partition descriptor is not an object")
@@ -233,8 +315,53 @@ def iter_manifest_rows(
         previous_source_url = ""
         descriptor_pipeline = str(descriptor.get("source_pipeline_id") or "")
         descriptor_decile = int(descriptor.get("size_decile") or 0)
+        if schema_version == "real_document_fetch_scale_cohort_v4":
+            shard_ordinal = int(descriptor.get("shard_ordinal") or 0)
+            descriptor_key = (
+                descriptor_pipeline,
+                descriptor_decile,
+                shard_ordinal,
+            )
+            group_key = (descriptor_pipeline, descriptor_decile)
+            if not descriptor_pipeline or not 1 <= descriptor_decile <= 10:
+                raise ValueError(f"manifest partition group mismatch: {stored_path}")
+            if shard_ordinal < 1:
+                raise ValueError(f"manifest partition shard ordinal mismatch: {stored_path}")
+            if previous_descriptor_key is not None and descriptor_key <= previous_descriptor_key:
+                raise ValueError("manifest partition descriptor order mismatch")
+            expected_ordinal = (
+                previous_descriptor_key[2] + 1
+                if previous_group_key == group_key and previous_descriptor_key is not None
+                else 1
+            )
+            if shard_ordinal != expected_ordinal:
+                raise ValueError(f"manifest partition shard sequence mismatch: {stored_path}")
+            expected_filename = expected_partition_filename(
+                source_pipeline_id=descriptor_pipeline,
+                size_decile=descriptor_decile,
+                shard_ordinal=shard_ordinal,
+            )
+            if partition_path.name != expected_filename:
+                raise ValueError(f"manifest partition filename mismatch: {stored_path}")
+        else:
+            shard_ordinal = 1
+            descriptor_key = (
+                descriptor_pipeline,
+                descriptor_decile,
+                shard_ordinal,
+            )
+            group_key = (descriptor_pipeline, descriptor_decile)
         with gzip.open(partition_path, "rb") as handle:
-            for line_number, line in enumerate(handle, start=1):
+            line_number = 0
+            while True:
+                line = handle.readline(MAX_PARTITION_UNCOMPRESSED_BYTES + 1)
+                if not line:
+                    break
+                line_number += 1
+                if len(line) > MAX_PARTITION_UNCOMPRESSED_BYTES:
+                    raise ValueError(
+                        f"manifest row exceeds validation byte bound: {stored_path}:{line_number}"
+                    )
                 if not line.strip():
                     raise ValueError(
                         f"blank manifest row: {stored_path}:{line_number}"
@@ -280,6 +407,16 @@ def iter_manifest_rows(
             raise ValueError(f"manifest partition first URL mismatch: {stored_path}")
         if last_source_url != str(descriptor.get("last_source_url") or ""):
             raise ValueError(f"manifest partition last URL mismatch: {stored_path}")
+        if (
+            schema_version == "real_document_fetch_scale_cohort_v4"
+            and previous_group_key == group_key
+            and previous_group_last_url
+            and first_source_url <= previous_group_last_url
+        ):
+            raise ValueError(f"manifest cross-shard URL order mismatch: {stored_path}")
+        previous_descriptor_key = descriptor_key
+        previous_group_key = group_key
+        previous_group_last_url = last_source_url
         total_rows += rows
     if total_rows != declared_total_rows:
         raise ValueError("partitioned manifest total row mismatch")
@@ -310,8 +447,10 @@ def stage_manifest_rows(
     schema_version = str(manifest.get("schema_version") or "")
     legacy_projections: list[dict[str, Any]] = []
     streaming_digest = hashlib.sha256()
+    execution_digest = hashlib.sha256()
     host_counts: dict[str, int] = {}
     mode_counts: dict[str, int] = {}
+    host_ranks: dict[str, int] = {}
     batch: list[tuple[Any, ...]] = []
     row_count = 0
     insert_sql = """
@@ -333,10 +472,20 @@ def stage_manifest_rows(
         projection = semantic_projection([row])[0]
         if schema_version == "real_document_fetch_scale_cohort_v2":
             legacy_projections.append(projection)
-        else:
-            streaming_digest.update(canonical_projection_line(row))
+        streaming_digest.update(canonical_projection_line(row))
         host_counts[source_host] = host_counts.get(source_host, 0) + 1
         mode_counts[validation_mode] = mode_counts.get(validation_mode, 0) + 1
+        if schema_version == "real_document_fetch_scale_cohort_v4":
+            if source_host == "www.parlamentodeandalucia.es":
+                validate_exact_provenance_reference_edges(payload)
+            queue_priority = -host_ranks.get(source_host, 0)
+            host_ranks[source_host] = host_ranks.get(source_host, 0) + 1
+        else:
+            queue_priority = int(row.get("queue_priority") or 0)
+        if schema_version == "real_document_fetch_scale_cohort_v4":
+            execution_digest.update(
+                execution_contract_line(row, queue_priority=queue_priority)
+            )
         batch.append(
             (
                 source_url,
@@ -348,7 +497,7 @@ def stage_manifest_rows(
                 int(row.get("size_decile") or 0),
                 int(row.get("expected_bytes") or 0),
                 str(row.get("expected_content_sha256") or ""),
-                int(row.get("queue_priority") or 0),
+                queue_priority,
                 str(row.get("captured_raw_path") or ""),
                 json.dumps(payload, ensure_ascii=True, sort_keys=True, separators=(",", ":")),
             )
@@ -369,6 +518,12 @@ def stage_manifest_rows(
         "hosts": dict(sorted(host_counts.items())),
         "validation_modes": dict(sorted(mode_counts.items())),
         "cohort_semantic_sha256": cohort_sha256,
+        "cohort_selection_sha256": streaming_digest.hexdigest(),
+        "execution_contract_sha256": (
+            execution_digest.hexdigest()
+            if schema_version == "real_document_fetch_scale_cohort_v4"
+            else ""
+        ),
         "validation_storage": "sqlite_temp_file",
     }
 
@@ -477,6 +632,84 @@ def expected_policy_contract() -> dict[str, Any]:
     }
 
 
+def validate_planning_contract(
+    *,
+    manifest: dict[str, Any],
+    errors: BoundedErrors,
+    max_peak_rss_bytes: int = 0,
+) -> bool:
+    planning = manifest.get("planning") or {}
+    before = errors.total
+    expected = {
+        "schema_version": PLANNER_SCHEMA_VERSION,
+        "backend": "disk_backed_sqlite",
+        "candidate_deduplication": "sqlite_primary_key",
+        "selected_row_iteration": "ordered_sqlite_cursor",
+        "source_query_temp_store": "file",
+        "queue_insertion": "streamed_executemany",
+        "queue_priority": "deterministic_negative_host_rank_db_only",
+        "partition_writes": "streamed_bounded_shards",
+        "full_cohort_materialized_in_memory": False,
+        "partition_members_materialized_in_memory": False,
+        "embedded_compatibility_max_rows": MAX_EMBEDDED_ROWS,
+        "partition_max_rows": MAX_PARTITION_ROWS,
+        "partition_max_uncompressed_bytes": MAX_PARTITION_UNCOMPRESSED_BYTES,
+        "output_locking": "sorted_per_target_kernel_flock_v1",
+        "output_publication": "journaled_manifest_last_bundle_v1",
+        "input_immutability": "sha256_before_after_checkpointed_sqlite_v1",
+        "provenance_reference_edges": (
+            "exact_db_ref_table_name_pairs_bounded_10000_v1"
+        ),
+    }
+    for key, value in expected.items():
+        if planning.get(key) != value:
+            errors.append(f"planning.{key} mismatch")
+    if int(planning.get("planner_store_bytes") or 0) < 1:
+        errors.append("planning.planner_store_bytes is not positive")
+    source_snapshot = (manifest.get("inputs") or {}).get(
+        "source_sqlite_snapshot"
+    ) or {}
+    if source_snapshot != {
+        "transaction": "read_only_snapshot",
+        "wal_required_empty": True,
+    }:
+        errors.append("inputs.source_sqlite_snapshot mismatch")
+    peak_rss_bytes = int(planning.get("peak_rss_bytes") or 0)
+    if peak_rss_bytes < 1:
+        errors.append("planning.peak_rss_bytes is not positive")
+    if max_peak_rss_bytes > 0 and peak_rss_bytes > max_peak_rss_bytes:
+        errors.append("planning.peak_rss_bytes exceeds configured bound")
+    return errors.total == before
+
+
+def validate_execution_contract(
+    *, manifest: dict[str, Any], staged_sha256: str, errors: BoundedErrors
+) -> bool:
+    contract = manifest.get("execution_contract") or {}
+    before = errors.total
+    if contract.get("schema_version") != "real_document_fetch_execution_contract_v1":
+        errors.append("execution_contract.schema_version mismatch")
+    if contract.get("includes_payload_and_queue_priority") is not True:
+        errors.append("execution_contract payload/priority scope mismatch")
+    if str(contract.get("sha256") or "") != staged_sha256:
+        errors.append("execution_contract.sha256 mismatch")
+    return errors.total == before
+
+
+def validate_selection_identity(
+    *, manifest: dict[str, Any], staged_sha256: str, errors: BoundedErrors
+) -> bool:
+    before = errors.total
+    if (
+        manifest.get("selection_identity_contract")
+        != "sha256_concatenated_canonical_projection_jsonl_v1"
+    ):
+        errors.append("selection_identity_contract mismatch")
+    if str(manifest.get("cohort_selection_sha256") or "") != staged_sha256:
+        errors.append("cohort_selection_sha256 mismatch")
+    return errors.total == before
+
+
 def prior_content_type(*, mode: str, path: Path) -> str:
     if mode == "boe_summary_structure":
         with path.open("rb") as handle:
@@ -491,14 +724,31 @@ def prior_content_type(*, mode: str, path: Path) -> str:
     return "application/octet-stream"
 
 
-def validate_preflight(*, manifest_path: Path, db_path: Path) -> dict[str, Any]:
+def validate_preflight(
+    *,
+    manifest_path: Path,
+    db_path: Path,
+    max_planner_peak_rss_bytes: int = 0,
+) -> dict[str, Any]:
     started = time.monotonic()
     cpu_started = time.process_time()
     errors = BoundedErrors()
     manifest = read_json(manifest_path)
     manifest_schema = str(manifest.get("schema_version") or "")
-    if manifest_schema != "real_document_fetch_scale_cohort_v3":
-        errors.append("preflight requires partitioned cohort schema v3")
+    if manifest_schema not in {
+        "real_document_fetch_scale_cohort_v3",
+        "real_document_fetch_scale_cohort_v4",
+    }:
+        errors.append("preflight requires partitioned cohort schema v3 or v4")
+    planning_contract_validated = False
+    execution_contract_validated = False
+    selection_identity_validated = False
+    if manifest_schema == "real_document_fetch_scale_cohort_v4":
+        planning_contract_validated = validate_planning_contract(
+            manifest=manifest,
+            errors=errors,
+            max_peak_rss_bytes=max_planner_peak_rss_bytes,
+        )
     policy = manifest.get("policy") or {}
     expected_policy = expected_policy_contract()
     for key, expected in expected_policy.items():
@@ -513,6 +763,17 @@ def validate_preflight(*, manifest_path: Path, db_path: Path) -> dict[str, Any]:
             manifest=manifest,
             manifest_path=manifest_path,
         )
+        if manifest_schema == "real_document_fetch_scale_cohort_v4":
+            selection_identity_validated = validate_selection_identity(
+                manifest=manifest,
+                staged_sha256=str(stage["cohort_selection_sha256"]),
+                errors=errors,
+            )
+            execution_contract_validated = validate_execution_contract(
+                manifest=manifest,
+                staged_sha256=str(stage["execution_contract_sha256"]),
+                errors=errors,
+            )
         row_count = int(stage["rows"])
         expected_host_rows = {
             str(key): int(value)
@@ -656,6 +917,7 @@ def validate_preflight(*, manifest_path: Path, db_path: Path) -> dict[str, Any]:
         "cohort_id": str(manifest.get("cohort_id") or ""),
         "cohort_semantic_sha256": str(stage["cohort_semantic_sha256"]),
         "policy": expected_policy,
+        "planning": manifest.get("planning") or {},
         "inputs": {
             "manifest": {
                 "path": repo_path(manifest_path),
@@ -674,6 +936,9 @@ def validate_preflight(*, manifest_path: Path, db_path: Path) -> dict[str, Any]:
             "manifest_compressed_bytes": compressed_bytes,
             "manifest_uncompressed_bytes": uncompressed_bytes,
             "manifest_validation_storage": str(stage["validation_storage"]),
+            "disk_planning_contract_validated": planning_contract_validated,
+            "execution_contract_validated": execution_contract_validated,
+            "selection_identity_validated": selection_identity_validated,
             "prior_files_rehashed": prior_files_rehashed,
             "prior_bytes_reconciled": prior_bytes_reconciled,
             "source_contract_rows": source_contract_rows,
@@ -699,7 +964,12 @@ def validate_preflight(*, manifest_path: Path, db_path: Path) -> dict[str, Any]:
 
 
 def validate(
-    *, manifest_path: Path, run_report_path: Path, db_path: Path, raw_root: Path
+    *,
+    manifest_path: Path,
+    run_report_path: Path,
+    db_path: Path,
+    raw_root: Path,
+    max_planner_peak_rss_bytes: int = 0,
 ) -> dict[str, Any]:
     validation_started = time.monotonic()
     validation_cpu_started = time.process_time()
@@ -710,8 +980,18 @@ def validate(
     if manifest_schema not in {
         "real_document_fetch_scale_cohort_v2",
         "real_document_fetch_scale_cohort_v3",
+        "real_document_fetch_scale_cohort_v4",
     }:
         errors.append("manifest schema mismatch")
+    planning_contract_validated = False
+    execution_contract_validated = False
+    selection_identity_validated = False
+    if manifest_schema == "real_document_fetch_scale_cohort_v4":
+        planning_contract_validated = validate_planning_contract(
+            manifest=manifest,
+            errors=errors,
+            max_peak_rss_bytes=max_planner_peak_rss_bytes,
+        )
     if run_report.get("schema_version") != "document_fetch_queue_run_v3":
         errors.append("run report schema mismatch")
     if run_report.get("status") != "ok":
@@ -731,6 +1011,17 @@ def validate(
             manifest=manifest,
             manifest_path=manifest_path,
         )
+        if manifest_schema == "real_document_fetch_scale_cohort_v4":
+            selection_identity_validated = validate_selection_identity(
+                manifest=manifest,
+                staged_sha256=str(stage["cohort_selection_sha256"]),
+                errors=errors,
+            )
+            execution_contract_validated = validate_execution_contract(
+                manifest=manifest,
+                staged_sha256=str(stage["execution_contract_sha256"]),
+                errors=errors,
+            )
         row_count = int(stage["rows"])
         cohort_semantic_sha256 = str(stage["cohort_semantic_sha256"])
         expected_host_rows = {
@@ -1051,14 +1342,19 @@ def validate(
     denominator = succeeded or 1
     return {
         "schema_version": (
-            "real_document_fetch_scale_cohort_validation_v3"
-            if manifest_schema == "real_document_fetch_scale_cohort_v3"
-            else "real_document_fetch_scale_cohort_validation_v2"
+            "real_document_fetch_scale_cohort_validation_v4"
+            if manifest_schema == "real_document_fetch_scale_cohort_v4"
+            else (
+                "real_document_fetch_scale_cohort_validation_v3"
+                if manifest_schema == "real_document_fetch_scale_cohort_v3"
+                else "real_document_fetch_scale_cohort_validation_v2"
+            )
         ),
         "status": "ok" if not errors else "error",
         "cohort_id": str(manifest.get("cohort_id") or ""),
         "cohort_semantic_sha256": cohort_semantic_sha256,
         "policy": expected_policy,
+        "planning": manifest.get("planning") or {},
         "inputs": {
             "manifest": {
                 "path": repo_path(manifest_path),
@@ -1079,6 +1375,9 @@ def validate(
         "checks": {
             "cohort_rows": row_count,
             "manifest_validation_storage": str(stage["validation_storage"]),
+            "disk_planning_contract_validated": planning_contract_validated,
+            "execution_contract_validated": execution_contract_validated,
+            "selection_identity_validated": selection_identity_validated,
             "manifest_partitions": len(
                 ((manifest.get("row_manifest") or {}).get("partitions") or [])
             ),
@@ -1164,6 +1463,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--run-report", default="")
     parser.add_argument("--db", required=True)
     parser.add_argument("--raw-root", default="")
+    parser.add_argument("--max-planner-peak-rss-mb", type=float, default=0.0)
     parser.add_argument("--out", required=True)
     return parser.parse_args()
 
@@ -1171,10 +1471,14 @@ def parse_args() -> argparse.Namespace:
 def main() -> int:
     args = parse_args()
     try:
+        max_planner_peak_rss_bytes = int(
+            max(0.0, float(args.max_planner_peak_rss_mb)) * 1024 * 1024
+        )
         if args.mode == "preflight":
             report = validate_preflight(
                 manifest_path=Path(args.manifest),
                 db_path=Path(args.db),
+                max_planner_peak_rss_bytes=max_planner_peak_rss_bytes,
             )
         else:
             if not args.run_report or not args.raw_root:
@@ -1186,6 +1490,7 @@ def main() -> int:
                 run_report_path=Path(args.run_report),
                 db_path=Path(args.db),
                 raw_root=Path(args.raw_root),
+                max_planner_peak_rss_bytes=max_planner_peak_rss_bytes,
             )
         write_json_atomic(Path(args.out), report)
     except (OSError, ValueError, sqlite3.Error, json.JSONDecodeError) as exc:

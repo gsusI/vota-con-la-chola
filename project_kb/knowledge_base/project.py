@@ -467,7 +467,17 @@ PROJECT_FACTS = [
             "to 104,064 unique official public URLs / 100,418 HTTPS. Only 90,121 HTTPS URLs "
             "currently combine an implemented semantic contract with clean physical host "
             "proof, leaving an exact 9,879-URL supply gap before a 100k acquisition can be "
-            "prepared; representativeness remains a separate maintainer decision. "
+            "prepared; representativeness remains a separate maintainer decision. The v4 "
+            "cohort planner now deduplicates and orders through file-backed SQLite, streams "
+            "bounded deterministic shards, preserves exact Parliament db-ref/table-name "
+            "pairs, locks every output through kernel advisory locks, rehashes immutable "
+            "inputs before and after use, and publishes a journaled bundle with its manifest "
+            "last. Independent SQL reconciliation finds zero normalized selection/payload "
+            "differences against the real 10,000-row baseline. The same path prepares and "
+            "preflights all 90,121 currently eligible rows / 2,849,994,795 prior bytes in 30 "
+            "partitions at 53,198,848 bytes planner peak RSS, with every prior file and source "
+            "contract revalidated, zero blocked hosts, and exact public-information retention. "
+            "This is bounded preparation without network, not a representative 100k run. "
             "Representative 100k transport and the one-million cohort remain open. Monetary cost "
             "remains null and unknown because no real "
             "provider rate, invoice, energy meter, or labor ledger is bound to the runs. "
@@ -736,6 +746,18 @@ PROJECT_FACTS = [
             Evidence(
                 source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-source-universe-validation-20260829.json",
                 detail="Independent edge replay and hash-bound validation of source, host, eligibility, real-data policy, and target arithmetic without inferring representativeness.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-disk-planner-10k-v1-20260829.json",
+                detail="Disk-backed v4 10,000-row cohort with bounded sharded rows, selection/execution identities, exact paired provenance, immutable-input checks and manifest-last publication contract.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-disk-planner-equivalence-validation-20260829.json",
+                detail="Independent disk-SQL proof of zero bidirectional normalized selection/payload differences and exact logical-partition parity against the prior real 10,000-row cohort.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-disk-planner-max-validation-20260829.json",
+                detail="Independent reconciliation of all 90,121 currently eligible official rows, their exact queue contract, public-information retention, paired provenance and bounded planner RSS.",
             ),
             Evidence(
                 source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-validation-physical-20260829.json",
@@ -1123,6 +1145,7 @@ PROJECT_WORKFLOWS = [
         steps=[
             "Enqueue exact official URLs idempotently; never substitute generated or sample records for missing source data.",
             "For a fresh healthy-source scale cohort, select only previously captured official objects, rehash every prior capture, stratify deterministically by host/type/size, bind a source-specific validation contract, and exclude known blocked rows before creating a clean queue database.",
+            "For cohorts above embedded compatibility, use partitioned v4: file-backed SQLite selection, deterministic bounded sub-shards, exact selection/execution identities, per-target kernel locks, before/after input hashes, and journaled manifest-last publication; preflight the complete queue before any request.",
             "Set a global claim ceiling plus per-host concurrency, minimum request-start interval, byte/time ceiling, storage reserve, retry delay, and circuit threshold before network work.",
             "Run requests through the per-host slot for every retry; record exact request, outcome, byte, HTTP status, failure class, peak in-flight, throttle wait, and circuit metrics.",
             "Persist success only after atomic checksum-addressed publication; delete partial files on every failure and retain retryable or dead queue state explicitly.",
@@ -1133,6 +1156,9 @@ PROJECT_WORKFLOWS = [
         ],
         validation=[
             "just document-factory-acquisition-cohort-validate",
+            "just document-factory-disk-planner-test",
+            "just document-factory-disk-planner-10k-verify",
+            "just document-factory-disk-planner-max-verify",
             "just document-fetch-operations-export",
             "just document-factory-economics-export",
             "just transparency-dashboard-export",

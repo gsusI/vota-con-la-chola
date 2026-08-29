@@ -1,0 +1,509 @@
+{
+  "schema_version": "real_document_fetch_scale_cohort_v4",
+  "prepared_at": "2026-08-29T21:46:48Z",
+  "status": "ready",
+  "cohort_id": "real_document_fetch_scale_cohort_64d1d46fe1bf60911837534c",
+  "cohort_semantic_sha256": "64d1d46fe1bf60911837534ca95c6b66a94150f034393ec9be373ce2cbd594bf",
+  "cohort_selection_sha256": "64d1d46fe1bf60911837534ca95c6b66a94150f034393ec9be373ce2cbd594bf",
+  "selection_identity_contract": "sha256_concatenated_canonical_projection_jsonl_v1",
+  "pipeline_id": "real_document_fetch_scale_cohort_v2",
+  "policy": {
+    "official_real_documents_only": true,
+    "synthetic_or_mock_records_counted": false,
+    "official_public_domain_personal_information_retained": true,
+    "known_blocked_rows_selected": 0,
+    "known_blocked_hosts_excluded": [
+      "contrataciondelestado.es",
+      "parlamentodenavarra.es",
+      "www.congreso.es",
+      "www.senado.es"
+    ],
+    "dynamic_official_html_requires_semantic_contract": true,
+    "official_content_revisions_preserved_and_measured": true
+  },
+  "selection": {
+    "method": "deterministic_official_host_kind_and_captured_size_decile",
+    "rows": 10000,
+    "expected_prior_bytes": 455225911,
+    "hosts": {
+      "www.boe.es": 9914,
+      "www.parlamentodeandalucia.es": 86
+    },
+    "document_kinds": {
+      "boe_daily_summary": 1034,
+      "boe_document_xml": 8880,
+      "parliament_html": 51,
+      "parliament_pdf": 35
+    },
+    "validation_modes": {
+      "boe_document_identifier": 8880,
+      "boe_summary_structure": 1034,
+      "parliament_html_semantic": 51,
+      "parliament_pdf_signature": 35
+    },
+    "size_deciles": 10
+  },
+  "planning": {
+    "schema_version": "real_document_fetch_disk_planner_v1",
+    "backend": "disk_backed_sqlite",
+    "candidate_deduplication": "sqlite_primary_key",
+    "selected_row_iteration": "ordered_sqlite_cursor",
+    "source_query_temp_store": "file",
+    "queue_insertion": "streamed_executemany",
+    "queue_priority": "deterministic_negative_host_rank_db_only",
+    "partition_writes": "streamed_bounded_shards",
+    "full_cohort_materialized_in_memory": false,
+    "partition_members_materialized_in_memory": false,
+    "embedded_compatibility_max_rows": 25000,
+    "partition_max_rows": 250000,
+    "partition_max_uncompressed_bytes": 536870912,
+    "output_locking": "sorted_per_target_kernel_flock_v1",
+    "output_publication": "journaled_manifest_last_bundle_v1",
+    "input_immutability": "sha256_before_after_checkpointed_sqlite_v1",
+    "provenance_reference_edges": "exact_db_ref_table_name_pairs_bounded_10000_v1",
+    "planner_store_bytes": 35332096,
+    "peak_rss_bytes": 58818560
+  },
+  "host_health": {
+    "status": "bounded_probe_complete",
+    "probe_requests": 3,
+    "eligible_hosts": [
+      "www.boe.es",
+      "www.parlamentodeandalucia.es"
+    ]
+  },
+  "inputs": {
+    "producer": {
+      "path": "scripts/prepare_real_document_fetch_scale_cohort.py",
+      "bytes": 64833,
+      "sha256": "7269cebc66bcd3b12a05d7bffe7da096e12bcc3499ed4f678ecdbc1a26d54226"
+    },
+    "source_db": {
+      "path": "etl/data/staging/politicos-es.db",
+      "bytes": 1575038976,
+      "sha256": "46e72488f24bbecc240ac94c524fe503b8599d742c983595919678a842c5f0e3"
+    },
+    "schema": {
+      "path": "etl/load/sqlite_schema.sql",
+      "bytes": 342895,
+      "sha256": "3e703ef099db3b332fc3697cab96821506d74a16eb4aafa61c981149509fe35e"
+    },
+    "provenance_edges": {
+      "path": "etl/data/manifests/real-document-provenance-edges.jsonl",
+      "bytes": 228237330,
+      "sha256": "e5329f46a9d6a17ef71b8798c54a16f4464cb93c19306d5ede165350b11492c1"
+    },
+    "host_health": {
+      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-host-health-20260829.json",
+      "bytes": 2995,
+      "sha256": "c6e54aea81e307b4677470c36a1cf3fffa15b55ede0c3797c8cdcd31d0c4ef69"
+    },
+    "source_sqlite_snapshot": {
+      "transaction": "read_only_snapshot",
+      "wal_required_empty": true
+    }
+  },
+  "output_db": "etl/data/staging/real-document-fetch-disk-planner-10k-v1-20260829.db",
+  "execution_contract": {
+    "schema_version": "real_document_fetch_execution_contract_v1",
+    "sha256": "18abb6a0f6ea4910a0c907b4a5c02df2f4f6e5cac0ba6bc3f4280871f0576cad",
+    "includes_payload_and_queue_priority": true
+  },
+  "row_manifest": {
+    "layout": "partitioned_jsonl_gzip_v2",
+    "semantic_identity_contract": "sha256_concatenated_canonical_projection_jsonl_v1",
+    "rows": 10000,
+    "partitions": [
+      {
+        "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-disk-planner-10k-v1-20260829-rows/boe-document-fetch-ea45c0d09f-size-decile-01-part-000001.jsonl.gz",
+        "compression": "gzip",
+        "rows": 888,
+        "bytes": 146692,
+        "uncompressed_bytes": 2035924,
+        "sha256": "379e52aa03a00b7a254ee70a1ed0644e6c0a40cf36282d4a58250e96348cda50",
+        "source_pipeline_id": "boe_document_fetch",
+        "size_decile": 1,
+        "first_source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2016-5627",
+        "last_source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2023-2076",
+        "shard_ordinal": 1
+      },
+      {
+        "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-disk-planner-10k-v1-20260829-rows/boe-document-fetch-ea45c0d09f-size-decile-02-part-000001.jsonl.gz",
+        "compression": "gzip",
+        "rows": 888,
+        "bytes": 122862,
+        "uncompressed_bytes": 2006072,
+        "sha256": "b32d1580016e06217583c0a98b9a0f1a2f92a20875ffae7f9b3f1b0bc80e6447",
+        "source_pipeline_id": "boe_document_fetch",
+        "size_decile": 2,
+        "first_source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2016-5624",
+        "last_source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2023-19719",
+        "shard_ordinal": 1
+      },
+      {
+        "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-disk-planner-10k-v1-20260829-rows/boe-document-fetch-ea45c0d09f-size-decile-03-part-000001.jsonl.gz",
+        "compression": "gzip",
+        "rows": 888,
+        "bytes": 128223,
+        "uncompressed_bytes": 2010591,
+        "sha256": "5080bf8288d883b9d4d644d86ec8cdf95650b15c27fd9a2c2079c8749361135c",
+        "source_pipeline_id": "boe_document_fetch",
+        "size_decile": 3,
+        "first_source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2015-13092",
+        "last_source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2023-17463",
+        "shard_ordinal": 1
+      },
+      {
+        "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-disk-planner-10k-v1-20260829-rows/boe-document-fetch-ea45c0d09f-size-decile-04-part-000001.jsonl.gz",
+        "compression": "gzip",
+        "rows": 888,
+        "bytes": 131891,
+        "uncompressed_bytes": 2022003,
+        "sha256": "399d8ecef39e58660cfc3eea4ccd270f2d28b141cdd0e9e5658c0f7a4c900085",
+        "source_pipeline_id": "boe_document_fetch",
+        "size_decile": 4,
+        "first_source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2015-13247",
+        "last_source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2023-16144",
+        "shard_ordinal": 1
+      },
+      {
+        "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-disk-planner-10k-v1-20260829-rows/boe-document-fetch-ea45c0d09f-size-decile-05-part-000001.jsonl.gz",
+        "compression": "gzip",
+        "rows": 888,
+        "bytes": 146262,
+        "uncompressed_bytes": 2060927,
+        "sha256": "64c65c74540e240c141e98f81859f3093a75699f6c8cd0697e1316fc5d9beb69",
+        "source_pipeline_id": "boe_document_fetch",
+        "size_decile": 5,
+        "first_source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2015-13053",
+        "last_source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2023-16023",
+        "shard_ordinal": 1
+      },
+      {
+        "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-disk-planner-10k-v1-20260829-rows/boe-document-fetch-ea45c0d09f-size-decile-06-part-000001.jsonl.gz",
+        "compression": "gzip",
+        "rows": 888,
+        "bytes": 156806,
+        "uncompressed_bytes": 2099497,
+        "sha256": "2ebb0ae42458eaefa72bfd7820beb57ee8c2d293d0f84308ac31f09dbeebe8e7",
+        "source_pipeline_id": "boe_document_fetch",
+        "size_decile": 6,
+        "first_source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2019-15224",
+        "last_source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2023-1859",
+        "shard_ordinal": 1
+      },
+      {
+        "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-disk-planner-10k-v1-20260829-rows/boe-document-fetch-ea45c0d09f-size-decile-07-part-000001.jsonl.gz",
+        "compression": "gzip",
+        "rows": 888,
+        "bytes": 180891,
+        "uncompressed_bytes": 2130507,
+        "sha256": "9d98a5d031726514c7d40cf78781bb58b3718518bc78281b709723a9a421016b",
+        "source_pipeline_id": "boe_document_fetch",
+        "size_decile": 7,
+        "first_source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2019-15006",
+        "last_source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2023-19441",
+        "shard_ordinal": 1
+      },
+      {
+        "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-disk-planner-10k-v1-20260829-rows/boe-document-fetch-ea45c0d09f-size-decile-08-part-000001.jsonl.gz",
+        "compression": "gzip",
+        "rows": 888,
+        "bytes": 180959,
+        "uncompressed_bytes": 2148345,
+        "sha256": "8c43f144657f6ef9ad98eb0ea860ef28d3b71d82832fc73ee81342f9cfb24ae0",
+        "source_pipeline_id": "boe_document_fetch",
+        "size_decile": 8,
+        "first_source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2019-5083",
+        "last_source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2023-18144",
+        "shard_ordinal": 1
+      },
+      {
+        "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-disk-planner-10k-v1-20260829-rows/boe-document-fetch-ea45c0d09f-size-decile-09-part-000001.jsonl.gz",
+        "compression": "gzip",
+        "rows": 888,
+        "bytes": 182508,
+        "uncompressed_bytes": 2165904,
+        "sha256": "cb1d68bf4da550e78f77f871fd94543e3279d54a01b0eb93b5c57358394cb037",
+        "source_pipeline_id": "boe_document_fetch",
+        "size_decile": 9,
+        "first_source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2019-6984",
+        "last_source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2023-17786",
+        "shard_ordinal": 1
+      },
+      {
+        "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-disk-planner-10k-v1-20260829-rows/boe-document-fetch-ea45c0d09f-size-decile-10-part-000001.jsonl.gz",
+        "compression": "gzip",
+        "rows": 888,
+        "bytes": 186710,
+        "uncompressed_bytes": 2144249,
+        "sha256": "5cef5bd7c0a02db67a0f5b174a5ada2cfbd0f041cf4e35161b920adcb1c3dc4f",
+        "source_pipeline_id": "boe_document_fetch",
+        "size_decile": 10,
+        "first_source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2015-12734",
+        "last_source_url": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2023-17641",
+        "shard_ordinal": 1
+      },
+      {
+        "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-disk-planner-10k-v1-20260829-rows/boe-summary-fetch-85e70079ed-size-decile-01-part-000001.jsonl.gz",
+        "compression": "gzip",
+        "rows": 104,
+        "bytes": 7460,
+        "uncompressed_bytes": 107334,
+        "sha256": "9c6ac9bf6f8cbd65d8d4ebd116630e75094582bfe78758e4bb3e0eb84ea24b89",
+        "source_pipeline_id": "boe_summary_fetch",
+        "size_decile": 1,
+        "first_source_url": "https://www.boe.es/datosabiertos/api/boe/sumario/20230104",
+        "last_source_url": "https://www.boe.es/datosabiertos/api/boe/sumario/20260128",
+        "shard_ordinal": 1
+      },
+      {
+        "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-disk-planner-10k-v1-20260829-rows/boe-summary-fetch-85e70079ed-size-decile-02-part-000001.jsonl.gz",
+        "compression": "gzip",
+        "rows": 104,
+        "bytes": 7515,
+        "uncompressed_bytes": 107432,
+        "sha256": "5f778f89150545db2fe6bab7c66d0950f5292cab9b0c3f8d8880afd6abbfb132",
+        "source_pipeline_id": "boe_summary_fetch",
+        "size_decile": 2,
+        "first_source_url": "https://www.boe.es/datosabiertos/api/boe/sumario/20151202",
+        "last_source_url": "https://www.boe.es/datosabiertos/api/boe/sumario/20260204",
+        "shard_ordinal": 1
+      },
+      {
+        "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-disk-planner-10k-v1-20260829-rows/boe-summary-fetch-85e70079ed-size-decile-03-part-000001.jsonl.gz",
+        "compression": "gzip",
+        "rows": 104,
+        "bytes": 7523,
+        "uncompressed_bytes": 107432,
+        "sha256": "f98d905e1fce1a49ebf16a60186810ca02a1392e3d2494ee76bc85fadbe266c7",
+        "source_pipeline_id": "boe_summary_fetch",
+        "size_decile": 3,
+        "first_source_url": "https://www.boe.es/datosabiertos/api/boe/sumario/20151124",
+        "last_source_url": "https://www.boe.es/datosabiertos/api/boe/sumario/20260331",
+        "shard_ordinal": 1
+      },
+      {
+        "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-disk-planner-10k-v1-20260829-rows/boe-summary-fetch-85e70079ed-size-decile-04-part-000001.jsonl.gz",
+        "compression": "gzip",
+        "rows": 104,
+        "bytes": 7531,
+        "uncompressed_bytes": 107432,
+        "sha256": "27c0a32bea7288d96c64e5562b9edcb50f81e4b6d872dcbf6a09eaa6fd7c4883",
+        "source_pipeline_id": "boe_summary_fetch",
+        "size_decile": 4,
+        "first_source_url": "https://www.boe.es/datosabiertos/api/boe/sumario/20151201",
+        "last_source_url": "https://www.boe.es/datosabiertos/api/boe/sumario/20260330",
+        "shard_ordinal": 1
+      },
+      {
+        "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-disk-planner-10k-v1-20260829-rows/boe-summary-fetch-85e70079ed-size-decile-05-part-000001.jsonl.gz",
+        "compression": "gzip",
+        "rows": 103,
+        "bytes": 7481,
+        "uncompressed_bytes": 106399,
+        "sha256": "d2f9944a263f4f05b0c4dd99d782286f2e250b56457649136266e3cee87443a0",
+        "source_pipeline_id": "boe_summary_fetch",
+        "size_decile": 5,
+        "first_source_url": "https://www.boe.es/datosabiertos/api/boe/sumario/20151205",
+        "last_source_url": "https://www.boe.es/datosabiertos/api/boe/sumario/20260327",
+        "shard_ordinal": 1
+      },
+      {
+        "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-disk-planner-10k-v1-20260829-rows/boe-summary-fetch-85e70079ed-size-decile-06-part-000001.jsonl.gz",
+        "compression": "gzip",
+        "rows": 103,
+        "bytes": 7439,
+        "uncompressed_bytes": 106399,
+        "sha256": "1ffe4dc94f83994ba98990048c2bddd5eff7db1b00de6ef32a1b52e766d9b65d",
+        "source_pipeline_id": "boe_summary_fetch",
+        "size_decile": 6,
+        "first_source_url": "https://www.boe.es/datosabiertos/api/boe/sumario/20230120",
+        "last_source_url": "https://www.boe.es/datosabiertos/api/boe/sumario/20260306",
+        "shard_ordinal": 1
+      },
+      {
+        "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-disk-planner-10k-v1-20260829-rows/boe-summary-fetch-85e70079ed-size-decile-07-part-000001.jsonl.gz",
+        "compression": "gzip",
+        "rows": 103,
+        "bytes": 7446,
+        "uncompressed_bytes": 106399,
+        "sha256": "e0b09873c0ca9266ffd6fa64aa847eb8ca768710ee8d4c19431e11f7c3932e79",
+        "source_pipeline_id": "boe_summary_fetch",
+        "size_decile": 7,
+        "first_source_url": "https://www.boe.es/datosabiertos/api/boe/sumario/20190409",
+        "last_source_url": "https://www.boe.es/datosabiertos/api/boe/sumario/20260317",
+        "shard_ordinal": 1
+      },
+      {
+        "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-disk-planner-10k-v1-20260829-rows/boe-summary-fetch-85e70079ed-size-decile-08-part-000001.jsonl.gz",
+        "compression": "gzip",
+        "rows": 103,
+        "bytes": 7446,
+        "uncompressed_bytes": 106399,
+        "sha256": "d5f91363dbb254aba90988504bfd15721c4225442fd57d934583dee5d6da2620",
+        "source_pipeline_id": "boe_summary_fetch",
+        "size_decile": 8,
+        "first_source_url": "https://www.boe.es/datosabiertos/api/boe/sumario/20191015",
+        "last_source_url": "https://www.boe.es/datosabiertos/api/boe/sumario/20260328",
+        "shard_ordinal": 1
+      },
+      {
+        "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-disk-planner-10k-v1-20260829-rows/boe-summary-fetch-85e70079ed-size-decile-09-part-000001.jsonl.gz",
+        "compression": "gzip",
+        "rows": 103,
+        "bytes": 7477,
+        "uncompressed_bytes": 106399,
+        "sha256": "fdf8d9eff03ad3c952f6e220bc2cb7e3abf2b0d9e0d3670e7888a2bd3bda3435",
+        "source_pipeline_id": "boe_summary_fetch",
+        "size_decile": 9,
+        "first_source_url": "https://www.boe.es/datosabiertos/api/boe/sumario/20190402",
+        "last_source_url": "https://www.boe.es/datosabiertos/api/boe/sumario/20260321",
+        "shard_ordinal": 1
+      },
+      {
+        "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-disk-planner-10k-v1-20260829-rows/boe-summary-fetch-85e70079ed-size-decile-10-part-000001.jsonl.gz",
+        "compression": "gzip",
+        "rows": 103,
+        "bytes": 7541,
+        "uncompressed_bytes": 106605,
+        "sha256": "6ba01c2ff62c9be96816e03a09f604e7680becc70b3b4b5bf891ea68bc637503",
+        "source_pipeline_id": "boe_summary_fetch",
+        "size_decile": 10,
+        "first_source_url": "https://www.boe.es/datosabiertos/api/boe/sumario/20160531",
+        "last_source_url": "https://www.boe.es/datosabiertos/api/boe/sumario/20260323",
+        "shard_ordinal": 1
+      },
+      {
+        "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-disk-planner-10k-v1-20260829-rows/provenance-edges-parlamento-andalucia-72e531fe87-size-decile-01-part-000001.jsonl.gz",
+        "compression": "gzip",
+        "rows": 10,
+        "bytes": 1870,
+        "uncompressed_bytes": 22476,
+        "sha256": "6c8b245ae42b37f64e6b4fb9712255b0145ba986be10cf1dd60ffec3bfc8af10",
+        "source_pipeline_id": "provenance_edges:parlamento_andalucia",
+        "size_decile": 1,
+        "first_source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/actividadparlamentaria/todaslasiniciativas/portipo.do?numexp=12-22%2FPPL-000002&accion=Ver+iniciativas&desdeanyo=&desdemes=&estado=&hastaanyo=&hastames=&legislatura=12&seleccion=publicadosen&sinpaginacion=1&situacion=&tipoespecifico=&tipogeneral=1",
+        "last_source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/pdf.do?tipodoc=diario&id=199894",
+        "shard_ordinal": 1
+      },
+      {
+        "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-disk-planner-10k-v1-20260829-rows/provenance-edges-parlamento-andalucia-72e531fe87-size-decile-02-part-000001.jsonl.gz",
+        "compression": "gzip",
+        "rows": 8,
+        "bytes": 1672,
+        "uncompressed_bytes": 18291,
+        "sha256": "4fed8f0bd077f7df26f2eb87f93ec3b1f0ba455e28ced19d9e4bf8bbb3f4c512",
+        "source_pipeline_id": "provenance_edges:parlamento_andalucia",
+        "size_decile": 2,
+        "first_source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/actividadparlamentaria/todaslasiniciativas/portipo.do?numexp=12-25%2FILPA-000001&accion=Ver+iniciativas&desdeanyo=&desdemes=&estado=&hastaanyo=&hastames=&legislatura=12&seleccion=publicadosen&sinpaginacion=1&situacion=&tipoespecifico=&tipogeneral=1",
+        "last_source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/pdf.do?tipodoc=diario&id=178155",
+        "shard_ordinal": 1
+      },
+      {
+        "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-disk-planner-10k-v1-20260829-rows/provenance-edges-parlamento-andalucia-72e531fe87-size-decile-03-part-000001.jsonl.gz",
+        "compression": "gzip",
+        "rows": 9,
+        "bytes": 1770,
+        "uncompressed_bytes": 20523,
+        "sha256": "aa28a5001b93af442fbabe8268bc5b7b0bfb07939f1960938499aa8cba25090c",
+        "source_pipeline_id": "provenance_edges:parlamento_andalucia",
+        "size_decile": 3,
+        "first_source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/actividadparlamentaria/todaslasiniciativas/portipo.do?numexp=12-23%2FDL-000008&accion=Ver+iniciativas&desdeanyo=&desdemes=&estado=&hastaanyo=&hastames=&legislatura=12&seleccion=publicadosen&sinpaginacion=1&situacion=&tipoespecifico=&tipogeneral=1",
+        "last_source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/pdf.do?tipodoc=diario&id=182834",
+        "shard_ordinal": 1
+      },
+      {
+        "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-disk-planner-10k-v1-20260829-rows/provenance-edges-parlamento-andalucia-72e531fe87-size-decile-04-part-000001.jsonl.gz",
+        "compression": "gzip",
+        "rows": 8,
+        "bytes": 1656,
+        "uncompressed_bytes": 18113,
+        "sha256": "e1ae81db5c538af101dda043e8f1ebf23d54ad5c8ab006bbc698ec165ee98df3",
+        "source_pipeline_id": "provenance_edges:parlamento_andalucia",
+        "size_decile": 4,
+        "first_source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/actividadparlamentaria/todaslasiniciativas/portipo.do?numexp=12-22%2FDL-000005&accion=Ver+iniciativas&desdeanyo=&desdemes=&estado=&hastaanyo=&hastames=&legislatura=12&seleccion=publicadosen&sinpaginacion=1&situacion=&tipoespecifico=&tipogeneral=1",
+        "last_source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/pdf.do?tipodoc=diario&id=181074",
+        "shard_ordinal": 1
+      },
+      {
+        "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-disk-planner-10k-v1-20260829-rows/provenance-edges-parlamento-andalucia-72e531fe87-size-decile-05-part-000001.jsonl.gz",
+        "compression": "gzip",
+        "rows": 9,
+        "bytes": 1763,
+        "uncompressed_bytes": 20533,
+        "sha256": "cf5ca03f7d533baec6af077d5c1a33c399eacf03f7a6d0540263c7a6b7b0b849",
+        "source_pipeline_id": "provenance_edges:parlamento_andalucia",
+        "size_decile": 5,
+        "first_source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/actividadparlamentaria/todaslasiniciativas/portipo.do?numexp=12-23%2FDL-000002&accion=Ver+iniciativas&desdeanyo=&desdemes=&estado=&hastaanyo=&hastames=&legislatura=12&seleccion=publicadosen&sinpaginacion=1&situacion=&tipoespecifico=&tipogeneral=1",
+        "last_source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/pdf.do?tipodoc=diario&id=176614",
+        "shard_ordinal": 1
+      },
+      {
+        "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-disk-planner-10k-v1-20260829-rows/provenance-edges-parlamento-andalucia-72e531fe87-size-decile-06-part-000001.jsonl.gz",
+        "compression": "gzip",
+        "rows": 8,
+        "bytes": 1668,
+        "uncompressed_bytes": 18083,
+        "sha256": "db9839b612d2b02dc89b569bd25888d2ffef534453d73b69d4d3bba51baf742d",
+        "source_pipeline_id": "provenance_edges:parlamento_andalucia",
+        "size_decile": 6,
+        "first_source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/actividadparlamentaria/todaslasiniciativas/portipo.do?numexp=12-22%2FDL-000007&accion=Ver+iniciativas&desdeanyo=&desdemes=&estado=&hastaanyo=&hastames=&legislatura=12&seleccion=publicadosen&sinpaginacion=1&situacion=&tipoespecifico=&tipogeneral=1",
+        "last_source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/pdf.do?tipodoc=diario&id=200414",
+        "shard_ordinal": 1
+      },
+      {
+        "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-disk-planner-10k-v1-20260829-rows/provenance-edges-parlamento-andalucia-72e531fe87-size-decile-07-part-000001.jsonl.gz",
+        "compression": "gzip",
+        "rows": 9,
+        "bytes": 1788,
+        "uncompressed_bytes": 20538,
+        "sha256": "40afc4f1bb5005f639c59319acef3d1a3443c127e51aa6a9c67b7f4352081f60",
+        "source_pipeline_id": "provenance_edges:parlamento_andalucia",
+        "size_decile": 7,
+        "first_source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/actividadparlamentaria/todaslasiniciativas/portipo.do?numexp=12-22%2FDL-000002&accion=Ver+iniciativas&desdeanyo=&desdemes=&estado=&hastaanyo=&hastames=&legislatura=12&seleccion=publicadosen&sinpaginacion=1&situacion=&tipoespecifico=&tipogeneral=1",
+        "last_source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/pdf.do?tipodoc=diario&id=197175",
+        "shard_ordinal": 1
+      },
+      {
+        "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-disk-planner-10k-v1-20260829-rows/provenance-edges-parlamento-andalucia-72e531fe87-size-decile-08-part-000001.jsonl.gz",
+        "compression": "gzip",
+        "rows": 8,
+        "bytes": 1673,
+        "uncompressed_bytes": 18083,
+        "sha256": "ede1cdb25319786da98403803c7d87ec1266a42484105634205b92f611d4d7ff",
+        "source_pipeline_id": "provenance_edges:parlamento_andalucia",
+        "size_decile": 8,
+        "first_source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/actividadparlamentaria/todaslasiniciativas/portipo.do?numexp=12-22%2FPL-000001&accion=Ver+iniciativas&desdeanyo=&desdemes=&estado=&hastaanyo=&hastames=&legislatura=12&seleccion=publicadosen&sinpaginacion=1&situacion=&tipoespecifico=&tipogeneral=1",
+        "last_source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/pdf.do?tipodoc=diario&id=201694",
+        "shard_ordinal": 1
+      },
+      {
+        "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-disk-planner-10k-v1-20260829-rows/provenance-edges-parlamento-andalucia-72e531fe87-size-decile-09-part-000001.jsonl.gz",
+        "compression": "gzip",
+        "rows": 9,
+        "bytes": 1758,
+        "uncompressed_bytes": 20518,
+        "sha256": "c6cbdfff008e3ece41ad2061d210a38e6d6f71e6787cfc5f351e836c2bfa0d61",
+        "source_pipeline_id": "provenance_edges:parlamento_andalucia",
+        "size_decile": 9,
+        "first_source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/actividadparlamentaria/todaslasiniciativas/portipo.do?numexp=12-22%2FPL-000004&accion=Ver+iniciativas&desdeanyo=&desdemes=&estado=&hastaanyo=&hastames=&legislatura=12&seleccion=publicadosen&sinpaginacion=1&situacion=&tipoespecifico=&tipogeneral=1",
+        "last_source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/pdf.do?tipodoc=diario&id=201495",
+        "shard_ordinal": 1
+      },
+      {
+        "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-disk-planner-10k-v1-20260829-rows/provenance-edges-parlamento-andalucia-72e531fe87-size-decile-10-part-000001.jsonl.gz",
+        "compression": "gzip",
+        "rows": 8,
+        "bytes": 1772,
+        "uncompressed_bytes": 17798,
+        "sha256": "c6617c197cba172874b6a33828f383f48f8c7674875bb13d734163abac3b7feb",
+        "source_pipeline_id": "provenance_edges:parlamento_andalucia",
+        "size_decile": 10,
+        "first_source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/actividadparlamentaria/todaslasiniciativas/portipo.do?accion=Ver+iniciativas&desdeanyo=&desdemes=&estado=&hastaanyo=&hastames=&legislatura=12&seleccion=publicadosen&sinpaginacion=1&situacion=&tipoespecifico=&tipogeneral=1",
+        "last_source_url": "https://www.parlamentodeandalucia.es/webdinamica/portal-web-parlamento/pdf.do?tipodoc=diario&id=188394",
+        "shard_ordinal": 1
+      }
+    ]
+  }
+}

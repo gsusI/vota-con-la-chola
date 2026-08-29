@@ -270,6 +270,18 @@ document_factory_acquisition_10k_manifest_rows := env_var_or_default("DOCUMENT_F
 document_factory_acquisition_10k_preflight := env_var_or_default("DOCUMENT_FACTORY_ACQUISITION_10K_PREFLIGHT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-10k-v1-preflight-validation-20260829.json")
 document_factory_acquisition_10k_run := env_var_or_default("DOCUMENT_FACTORY_ACQUISITION_10K_RUN", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-10k-v1-run-physical-20260829.json")
 document_factory_acquisition_10k_validation := env_var_or_default("DOCUMENT_FACTORY_ACQUISITION_10K_VALIDATION", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-10k-v1-validation-physical-20260829.json")
+document_factory_disk_planner_prepared_at := env_var_or_default("DOCUMENT_FACTORY_DISK_PLANNER_PREPARED_AT", "2026-08-29T21:46:48Z")
+document_factory_disk_planner_10k_db := env_var_or_default("DOCUMENT_FACTORY_DISK_PLANNER_10K_DB", "etl/data/staging/real-document-fetch-disk-planner-10k-v1-20260829.db")
+document_factory_disk_planner_10k_manifest := env_var_or_default("DOCUMENT_FACTORY_DISK_PLANNER_10K_MANIFEST", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-disk-planner-10k-v1-20260829.json")
+document_factory_disk_planner_10k_rows := env_var_or_default("DOCUMENT_FACTORY_DISK_PLANNER_10K_ROWS", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-disk-planner-10k-v1-20260829-rows")
+document_factory_disk_planner_10k_preflight := env_var_or_default("DOCUMENT_FACTORY_DISK_PLANNER_10K_PREFLIGHT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-disk-planner-10k-v1-preflight-validation-20260829.json")
+document_factory_disk_planner_10k_equivalence := env_var_or_default("DOCUMENT_FACTORY_DISK_PLANNER_10K_EQUIVALENCE", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-disk-planner-equivalence-validation-20260829.json")
+document_factory_disk_planner_max_db := env_var_or_default("DOCUMENT_FACTORY_DISK_PLANNER_MAX_DB", "etl/data/staging/real-document-fetch-disk-planner-max-v1-20260829.db")
+document_factory_disk_planner_max_manifest := env_var_or_default("DOCUMENT_FACTORY_DISK_PLANNER_MAX_MANIFEST", "etl/data/staging/real-document-fetch-disk-planner-max-v1-20260829.json")
+document_factory_disk_planner_max_rows := env_var_or_default("DOCUMENT_FACTORY_DISK_PLANNER_MAX_ROWS", "etl/data/staging/real-document-fetch-disk-planner-max-v1-20260829-rows")
+document_factory_disk_planner_max_preflight := env_var_or_default("DOCUMENT_FACTORY_DISK_PLANNER_MAX_PREFLIGHT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-disk-planner-max-preflight-validation-20260829.json")
+document_factory_disk_planner_max_validation := env_var_or_default("DOCUMENT_FACTORY_DISK_PLANNER_MAX_VALIDATION", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-disk-planner-max-validation-20260829.json")
+document_factory_disk_planner_max_selection_sha256 := env_var_or_default("DOCUMENT_FACTORY_DISK_PLANNER_MAX_SELECTION_SHA256", "dba419b3c2b3377c456af9fe3165c83df698445278500ffc4172721a58ad05e8")
 document_factory_source_universe_provenance := env_var_or_default("DOCUMENT_FACTORY_SOURCE_UNIVERSE_PROVENANCE", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-provenance-audit.json")
 document_factory_source_universe_out := env_var_or_default("DOCUMENT_FACTORY_SOURCE_UNIVERSE_OUT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-source-universe-20260829.json")
 document_factory_source_universe_validation := env_var_or_default("DOCUMENT_FACTORY_SOURCE_UNIVERSE_VALIDATION", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-source-universe-validation-20260829.json")
@@ -4816,6 +4828,76 @@ document-factory-acquisition-cohort-10k-validate:
     --db "{{document_factory_acquisition_10k_db}}" \
     --raw-root "{{document_factory_acquisition_10k_raw_root}}" \
     --out "{{document_factory_acquisition_10k_validation}}"
+
+document-factory-disk-planner-test:
+  python3 -m unittest tests.test_real_document_fetch_partitioned_manifest tests.test_real_document_fetch_disk_planner_real -v
+
+document-factory-disk-planner-10k-prepare:
+  test ! -e "{{document_factory_disk_planner_10k_db}}"
+  test ! -e "{{document_factory_disk_planner_10k_manifest}}"
+  test ! -e "{{document_factory_disk_planner_10k_rows}}"
+  python3 scripts/prepare_real_document_fetch_scale_cohort.py \
+    --source-db "{{db_path}}" \
+    --schema "etl/load/sqlite_schema.sql" \
+    --provenance-edges "etl/data/manifests/real-document-provenance-edges.jsonl" \
+    --raw-root "etl/data/raw" \
+    --host-health "{{document_factory_acquisition_host_health}}" \
+    --out-db "{{document_factory_disk_planner_10k_db}}" \
+    --manifest-out "{{document_factory_disk_planner_10k_manifest}}" \
+    --manifest-layout "partitioned_v4" \
+    --manifest-partition-dir "{{document_factory_disk_planner_10k_rows}}" \
+    --boe-document-rows "8880" \
+    --boe-summary-rows "1034" \
+    --prepared-at "{{document_factory_disk_planner_prepared_at}}"
+
+document-factory-disk-planner-10k-verify:
+  python3 scripts/validate_real_document_fetch_scale_cohort.py \
+    --mode "preflight" \
+    --manifest "{{document_factory_disk_planner_10k_manifest}}" \
+    --db "{{document_factory_disk_planner_10k_db}}" \
+    --max-planner-peak-rss-mb "256" \
+    --out "{{document_factory_disk_planner_10k_preflight}}"
+  python3 scripts/validate_real_document_fetch_disk_planner.py \
+    --candidate-manifest "{{document_factory_disk_planner_10k_manifest}}" \
+    --candidate-db "{{document_factory_disk_planner_10k_db}}" \
+    --reference-manifest "{{document_factory_acquisition_10k_manifest}}" \
+    --expected-rows "10000" \
+    --expected-selection-sha256 "64d1d46fe1bf60911837534ca95c6b66a94150f034393ec9be373ce2cbd594bf" \
+    --max-planner-peak-rss-mb "256" \
+    --out "{{document_factory_disk_planner_10k_equivalence}}"
+
+document-factory-disk-planner-max-prepare:
+  test ! -e "{{document_factory_disk_planner_max_db}}"
+  test ! -e "{{document_factory_disk_planner_max_manifest}}"
+  test ! -e "{{document_factory_disk_planner_max_rows}}"
+  python3 scripts/prepare_real_document_fetch_scale_cohort.py \
+    --source-db "{{db_path}}" \
+    --schema "etl/load/sqlite_schema.sql" \
+    --provenance-edges "etl/data/manifests/real-document-provenance-edges.jsonl" \
+    --raw-root "etl/data/raw" \
+    --host-health "{{document_factory_acquisition_host_health}}" \
+    --out-db "{{document_factory_disk_planner_max_db}}" \
+    --manifest-out "{{document_factory_disk_planner_max_manifest}}" \
+    --manifest-layout "partitioned_v4" \
+    --manifest-partition-dir "{{document_factory_disk_planner_max_rows}}" \
+    --boe-document-rows "89001" \
+    --boe-summary-rows "1034" \
+    --prepared-at "{{document_factory_disk_planner_prepared_at}}"
+
+document-factory-disk-planner-max-verify:
+  python3 scripts/validate_real_document_fetch_scale_cohort.py \
+    --mode "preflight" \
+    --manifest "{{document_factory_disk_planner_max_manifest}}" \
+    --db "{{document_factory_disk_planner_max_db}}" \
+    --max-planner-peak-rss-mb "256" \
+    --out "{{document_factory_disk_planner_max_preflight}}"
+  python3 scripts/validate_real_document_fetch_disk_planner.py \
+    --candidate-manifest "{{document_factory_disk_planner_max_manifest}}" \
+    --candidate-db "{{document_factory_disk_planner_max_db}}" \
+    --expected-rows "90121" \
+    --expected-selection-sha256 "{{document_factory_disk_planner_max_selection_sha256}}" \
+    --max-planner-peak-rss-mb "256" \
+    --out "{{document_factory_disk_planner_max_validation}}"
 
 document-factory-source-universe-report:
   python3 scripts/report_real_document_source_universe.py \

@@ -1,0 +1,91 @@
+{
+  "schema_version": "real_document_fetch_scale_cohort_preflight_validation_v1",
+  "status": "ok",
+  "cohort_id": "real_document_fetch_scale_cohort_64d1d46fe1bf60911837534c",
+  "cohort_semantic_sha256": "64d1d46fe1bf60911837534ca95c6b66a94150f034393ec9be373ce2cbd594bf",
+  "policy": {
+    "official_real_documents_only": true,
+    "synthetic_or_mock_records_counted": false,
+    "official_public_domain_personal_information_retained": true,
+    "known_blocked_rows_selected": 0,
+    "dynamic_official_html_requires_semantic_contract": true,
+    "official_content_revisions_preserved_and_measured": true
+  },
+  "planning": {
+    "schema_version": "real_document_fetch_disk_planner_v1",
+    "backend": "disk_backed_sqlite",
+    "candidate_deduplication": "sqlite_primary_key",
+    "selected_row_iteration": "ordered_sqlite_cursor",
+    "source_query_temp_store": "file",
+    "queue_insertion": "streamed_executemany",
+    "queue_priority": "deterministic_negative_host_rank_db_only",
+    "partition_writes": "streamed_bounded_shards",
+    "full_cohort_materialized_in_memory": false,
+    "partition_members_materialized_in_memory": false,
+    "embedded_compatibility_max_rows": 25000,
+    "partition_max_rows": 250000,
+    "partition_max_uncompressed_bytes": 536870912,
+    "output_locking": "sorted_per_target_kernel_flock_v1",
+    "output_publication": "journaled_manifest_last_bundle_v1",
+    "input_immutability": "sha256_before_after_checkpointed_sqlite_v1",
+    "provenance_reference_edges": "exact_db_ref_table_name_pairs_bounded_10000_v1",
+    "planner_store_bytes": 35332096,
+    "peak_rss_bytes": 58818560
+  },
+  "inputs": {
+    "manifest": {
+      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-disk-planner-10k-v1-20260829.json",
+      "bytes": 28537,
+      "sha256": "beedeb20b41e633a24c562d1f15c529f0fe940fae0ad5e5d1a12a82790ef045f"
+    },
+    "database": {
+      "path": "etl/data/staging/real-document-fetch-disk-planner-10k-v1-20260829.db",
+      "bytes": 31453184,
+      "sha256": "6fe8c29be17b4a643e28fc88b5340b9ba0e767296da96019b70c707c43a2af7b"
+    }
+  },
+  "checks": {
+    "cohort_rows": 10000,
+    "manifest_partitions": 30,
+    "manifest_compressed_bytes": 1656053,
+    "manifest_uncompressed_bytes": 22087205,
+    "manifest_validation_storage": "sqlite_temp_file",
+    "disk_planning_contract_validated": true,
+    "execution_contract_validated": true,
+    "selection_identity_validated": true,
+    "prior_files_rehashed": 10000,
+    "prior_bytes_reconciled": 455225911,
+    "source_contract_rows": 10000,
+    "real_policy_rows": 10000,
+    "official_public_information_rows": 10000,
+    "known_blocked_host_rows": 0,
+    "queue_states": {
+      "pending": {
+        "rows": 10000,
+        "attempts": 0
+      }
+    },
+    "database_integrity": "ok",
+    "foreign_key_violations": 0,
+    "preexisting_fetch_rows": 0,
+    "preexisting_document_rows": 0
+  },
+  "hosts": {
+    "www.boe.es": 9914,
+    "www.parlamentodeandalucia.es": 86
+  },
+  "validation_modes": {
+    "boe_document_identifier": 8880,
+    "boe_summary_structure": 1034,
+    "parliament_html_semantic": 51,
+    "parliament_pdf_signature": 35
+  },
+  "validation_performance": {
+    "elapsed_seconds": 2.153739,
+    "cpu_seconds": 2.152365,
+    "peak_rss_bytes": 53772288
+  },
+  "error_count": 0,
+  "errors_truncated": false,
+  "errors": []
+}
