@@ -8,9 +8,11 @@ import gzip
 import hashlib
 import json
 import os
+import resource
 import sqlite3
 import sys
 import tempfile
+import time
 import uuid
 from collections.abc import Iterator, Mapping
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -59,6 +61,20 @@ class ExtractionOutcome:
 
 def utc_now() -> str:
     return datetime.now(UTC).isoformat().replace("+00:00", "Z")
+
+
+def process_usage() -> dict[str, float | int]:
+    """Return cumulative CPU and peak-memory telemetry for this real run."""
+    own = resource.getrusage(resource.RUSAGE_SELF)
+    children = resource.getrusage(resource.RUSAGE_CHILDREN)
+    rss_multiplier = 1 if sys.platform == "darwin" else 1024
+    return {
+        "cpu_seconds": float(
+            own.ru_utime + own.ru_stime + children.ru_utime + children.ru_stime
+        ),
+        "peak_rss_bytes_self": int(own.ru_maxrss * rss_multiplier),
+        "peak_rss_bytes_child_max": int(children.ru_maxrss * rss_multiplier),
+    }
 
 
 def sha256_path(path: Path, chunk_bytes: int = 1024 * 1024) -> str:
@@ -625,7 +641,13 @@ def run_worker(
     max_text_chars: int,
 ) -> dict[str, int]:
     owner = f"real-document-text-{uuid.uuid4().hex}"
-    totals = {"claimed": 0, "succeeded": 0, "retried": 0, "dead": 0}
+    totals = {
+        "claimed": 0,
+        "succeeded": 0,
+        "retried": 0,
+        "dead": 0,
+        "raw_bytes_succeeded": 0,
+    }
     while max_items <= 0 or totals["claimed"] < max_items:
         remaining = (
             claim_size
@@ -658,6 +680,16 @@ def run_worker(
         persisted = persist_outcomes(conn, owner=owner, outcomes=outcomes)
         for key, value in persisted.items():
             totals[key] += value
+        succeeded_hashes = {
+            outcome.content_sha256
+            for outcome in outcomes
+            if outcome.status != "failed"
+        }
+        totals["raw_bytes_succeeded"] += sum(
+            int(row["bytes"])
+            for row in claimed
+            if str(row["content_sha256"]) in succeeded_hashes
+        )
     return totals
 
 
@@ -750,6 +782,7 @@ def build_report(
     output_root: Path,
     manifest: dict[str, Any],
     run_totals: dict[str, int],
+    performance: dict[str, Any],
 ) -> dict[str, Any]:
     metadata = _metadata(conn)
     state_counts = {
@@ -769,6 +802,7 @@ def build_report(
         """
         SELECT
           COUNT(*) AS distinct_content_objects,
+          COALESCE(SUM(bytes), 0) AS raw_content_bytes,
           COALESCE(SUM(text_chars), 0) AS native_text_chars,
           SUM(CASE WHEN text_truncated = 1 THEN 1 ELSE 0 END) AS truncated_objects,
           SUM(CASE WHEN extraction_status = 'native_no_text' THEN 1 ELSE 0 END)
@@ -816,6 +850,15 @@ def build_report(
         "no_synthetic_or_mock_records": True,
         "official_public_domain_personal_information_retained": True,
     }
+    succeeded_this_run = int(run_totals.get("succeeded", 0))
+    elapsed_seconds = float(performance["elapsed_seconds"])
+    corpus_bytes = int(totals_row["raw_content_bytes"] or 0)
+    measured_bytes = int(run_totals.get("raw_bytes_succeeded", 0))
+    performance = {
+        **performance,
+        "items_per_second": round(succeeded_this_run / elapsed_seconds, 6),
+        "raw_bytes_per_second": round(measured_bytes / elapsed_seconds, 6),
+    }
     return {
         "schema_version": "real_document_text_extraction_v1",
         "generated_at": utc_now(),
@@ -847,11 +890,13 @@ def build_report(
         },
         "manifest": manifest,
         "run": run_totals,
+        "performance": performance,
         "totals": {
             "file_instances": int(instance_row["file_instances"]),
             "distinct_content_objects": int(totals_row["distinct_content_objects"]),
             "duplicate_file_instances": int(instance_row["file_instances"])
             - int(totals_row["distinct_content_objects"]),
+            "raw_content_bytes": corpus_bytes,
             "public_url_instances": int(instance_row["public_url_instances"] or 0),
             "provenance_gap_instances": int(
                 instance_row["provenance_gap_instances"] or 0
@@ -912,6 +957,10 @@ def main(argv: list[str] | None = None) -> int:
         return 2
 
     try:
+        output_root_preexisting = output_root.exists()
+        state_db_preexisting = state_db.exists()
+        started = time.monotonic()
+        usage_before = process_usage()
         output_root.mkdir(parents=True, exist_ok=True)
         with open_state_db(state_db) as conn:
             apply_state_schema(conn)
@@ -934,6 +983,26 @@ def main(argv: list[str] | None = None) -> int:
                 max_text_chars=int(args.max_text_chars),
             )
             manifest = write_manifest(conn, manifest_out)
+            usage_after = process_usage()
+            performance = {
+                "measurement_scope": "seed_extract_and_manifest",
+                "elapsed_seconds": round(time.monotonic() - started, 6),
+                "cpu_seconds": round(
+                    float(usage_after["cpu_seconds"])
+                    - float(usage_before["cpu_seconds"]),
+                    6,
+                ),
+                "peak_rss_bytes_self": usage_after["peak_rss_bytes_self"],
+                "peak_rss_bytes_child_max": usage_after[
+                    "peak_rss_bytes_child_max"
+                ],
+                "workers": int(args.workers),
+                "claim_size": int(args.claim_size),
+                "state_db_preexisting": state_db_preexisting,
+                "output_root_preexisting": output_root_preexisting,
+                "cold_state_and_output": not state_db_preexisting
+                and not output_root_preexisting,
+            }
             report = build_report(
                 conn,
                 inventory_path=inventory_path,
@@ -942,6 +1011,7 @@ def main(argv: list[str] | None = None) -> int:
                 output_root=output_root,
                 manifest=manifest,
                 run_totals=run_totals,
+                performance=performance,
             )
         report["seed"] = seeded
         write_json_atomic(report_out, report)

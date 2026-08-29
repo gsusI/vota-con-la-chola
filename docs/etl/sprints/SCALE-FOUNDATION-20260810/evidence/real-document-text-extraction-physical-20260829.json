@@ -1,0 +1,89 @@
+{
+  "checks": {
+    "all_distinct_content_objects_terminal_success": true,
+    "all_file_instances_manifested": true,
+    "inventory_and_provenance_inputs_bound_by_sha256": true,
+    "no_dead_work": true,
+    "no_native_text_truncation": true,
+    "no_synthetic_or_mock_records": true,
+    "official_public_domain_personal_information_retained": true
+  },
+  "generated_at": "2026-08-29T16:17:56.988749Z",
+  "inputs": {
+    "inventory": {
+      "bytes": 75430959,
+      "path": "etl/data/manifests/real-document-format-inventory.jsonl",
+      "sha256": "1bfe313c276d63ae03ec4b0cbcf63b7a3655090f45b1ad245ccd23d89c8af32a"
+    },
+    "provenance": {
+      "bytes": 56477511,
+      "path": "etl/data/manifests/real-document-provenance-files.jsonl",
+      "sha256": "5c8692041af5ad30d279cfdb206c0503525ecf7b35368a0966ed92f918db0634"
+    }
+  },
+  "manifest": {
+    "bytes": 121555440,
+    "path": "text-manifest.jsonl",
+    "rows": 111408,
+    "sha256": "03ce010e1019fc3f23e5a016413aab51f7ec398637973680534c27007b69bfab"
+  },
+  "next_action": "Independently validate every manifest row and text CAS object, then OCR every distinct empty or sparse PDF page without replacing native text.",
+  "performance": {
+    "claim_size": 48,
+    "cold_state_and_output": true,
+    "cpu_seconds": 409.619259,
+    "elapsed_seconds": 261.340691,
+    "items_per_second": 419.215238,
+    "measurement_scope": "seed_extract_and_manifest",
+    "output_root_preexisting": false,
+    "peak_rss_bytes_child_max": 242745344,
+    "peak_rss_bytes_self": 1073545216,
+    "raw_bytes_per_second": 18676721.892497,
+    "state_db_preexisting": false,
+    "workers": 12
+  },
+  "policy": {
+    "content_deduplicated_processing": true,
+    "native_text_is_not_sanitized_or_identity_stripped": true,
+    "official_public_domain_personal_information_retained": true,
+    "official_real_documents_only": true,
+    "raw_document_bytes_are_not_copied_into_work_rows": true,
+    "synthetic_or_mock_records_counted": false
+  },
+  "run": {
+    "claimed": 109558,
+    "dead": 0,
+    "raw_bytes_succeeded": 4880987405,
+    "retried": 0,
+    "succeeded": 109558
+  },
+  "schema_version": "real_document_text_extraction_v1",
+  "seed": {
+    "distinct_content_objects": 109558,
+    "file_instances": 111408
+  },
+  "state": {
+    "database": "etl/data/staging/real-document-text-physical-20260829.db",
+    "extraction_counts": {
+      "native_text_extracted": 109558
+    },
+    "state_counts": {
+      "succeeded": 109558
+    }
+  },
+  "status": "ok",
+  "totals": {
+    "distinct_content_objects": 109558,
+    "duplicate_file_instances": 1850,
+    "file_instances": 111408,
+    "native_no_text_objects": 0,
+    "native_text_chars": 1999902681,
+    "native_truncated_objects": 0,
+    "ocr_candidate_pages": 856,
+    "provenance_gap_instances": 51,
+    "public_url_instances": 111357,
+    "raw_content_bytes": 4880987405,
+    "text_cas_bytes": 533125716,
+    "text_cas_files": 108139
+  }
+}

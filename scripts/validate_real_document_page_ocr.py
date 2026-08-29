@@ -251,6 +251,7 @@ def load_observed(conn: sqlite3.Connection, ocr_manifest: Path) -> int:
         )
         if (
             item.get("schema_version") != "real_document_page_ocr_manifest_row_v1"
+            or "elapsed_seconds" in item
             or item.get("synthetic_or_mock") is not False
             or item.get("official_public_domain_personal_information_retained")
             is not True

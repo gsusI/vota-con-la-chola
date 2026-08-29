@@ -249,6 +249,15 @@ document_fetch_operations_out := env_var_or_default("DOCUMENT_FETCH_OPERATIONS_O
 document_fetch_operations_evidence := env_var_or_default("DOCUMENT_FETCH_OPERATIONS_EVIDENCE", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-fetch-operations-20260829.json")
 document_fetch_operations_validation := env_var_or_default("DOCUMENT_FETCH_OPERATIONS_VALIDATION", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-fetch-operations-validation-20260829.json")
 document_fetch_operations_max_bytes := env_var_or_default("DOCUMENT_FETCH_OPERATIONS_MAX_BYTES", "500000")
+document_factory_economics_out := env_var_or_default("DOCUMENT_FACTORY_ECONOMICS_OUT", "ui/gh-pages-next/public/transparency/data/document-factory-economics.json")
+document_factory_economics_evidence := env_var_or_default("DOCUMENT_FACTORY_ECONOMICS_EVIDENCE", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-factory-economics-20260829.json")
+document_factory_economics_validation := env_var_or_default("DOCUMENT_FACTORY_ECONOMICS_VALIDATION", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-factory-economics-validation-20260829.json")
+document_factory_economics_inventory := env_var_or_default("DOCUMENT_FACTORY_ECONOMICS_INVENTORY", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-format-inventory.json")
+document_factory_economics_native := env_var_or_default("DOCUMENT_FACTORY_ECONOMICS_NATIVE", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-extraction-physical-20260829.json")
+document_factory_economics_native_validation := env_var_or_default("DOCUMENT_FACTORY_ECONOMICS_NATIVE_VALIDATION", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-validation-physical-20260829.json")
+document_factory_economics_ocr := env_var_or_default("DOCUMENT_FACTORY_ECONOMICS_OCR", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-physical-20260829.json")
+document_factory_economics_ocr_validation := env_var_or_default("DOCUMENT_FACTORY_ECONOMICS_OCR_VALIDATION", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-validation-physical-20260829.json")
+document_factory_economics_max_bytes := env_var_or_default("DOCUMENT_FACTORY_ECONOMICS_MAX_BYTES", "500000")
 evidence_api_v1_evidence_json := env_var_or_default("EVIDENCE_API_V1_EVIDENCE_JSON", "etl/data/published/accountability-evidence-api-latest.json")
 evidence_api_v1_source_health_json := env_var_or_default("EVIDENCE_API_V1_SOURCE_HEALTH_JSON", obstruction_tracker_status_json)
 evidence_api_v1_origin_verification_json := env_var_or_default("EVIDENCE_API_V1_ORIGIN_VERIFICATION_JSON", transparency_dashboard_origin_verification_json)
@@ -4634,6 +4643,7 @@ obstruction-tracker-export:
 
 transparency-dashboard-export:
   @just document-fetch-operations-export
+  @just document-factory-economics-export
   python3 scripts/export_transparency_dashboard_snapshot.py \
     --status-json "{{transparency_dashboard_status_json}}" \
     --obstruction-json "{{transparency_dashboard_obstruction_json}}" \
@@ -4641,6 +4651,7 @@ transparency-dashboard-export:
     --origin-verification-json "{{transparency_dashboard_origin_verification_json}}" \
     --release-registry-json "{{transparency_dashboard_release_registry_json}}" \
     --document-fetch-operations-json "{{document_fetch_operations_out}}" \
+    --document-factory-economics-json "{{document_factory_economics_out}}" \
     --out "{{transparency_dashboard_out}}"
   python3 scripts/validate_transparency_dashboard_snapshot.py \
     --path "{{transparency_dashboard_out}}" \
@@ -4663,6 +4674,28 @@ document-fetch-operations-export:
     --raw-root "{{document_fetch_raw_root}}" \
     --max-bytes "{{document_fetch_operations_max_bytes}}" \
     --out "{{document_fetch_operations_validation}}"
+
+document-factory-economics-export:
+  python3 scripts/report_document_factory_economics.py \
+    --inventory "{{document_factory_economics_inventory}}" \
+    --native-extraction "{{document_factory_economics_native}}" \
+    --native-validation "{{document_factory_economics_native_validation}}" \
+    --page-ocr "{{document_factory_economics_ocr}}" \
+    --page-ocr-validation "{{document_factory_economics_ocr_validation}}" \
+    --document-fetch-operations "{{document_fetch_operations_out}}" \
+    --out "{{document_factory_economics_out}}" \
+    --evidence-out "{{document_factory_economics_evidence}}"
+  python3 scripts/validate_document_factory_economics.py \
+    --path "{{document_factory_economics_out}}" \
+    --evidence-path "{{document_factory_economics_evidence}}" \
+    --inventory "{{document_factory_economics_inventory}}" \
+    --native-extraction "{{document_factory_economics_native}}" \
+    --native-validation "{{document_factory_economics_native_validation}}" \
+    --page-ocr "{{document_factory_economics_ocr}}" \
+    --page-ocr-validation "{{document_factory_economics_ocr_validation}}" \
+    --document-fetch-operations "{{document_fetch_operations_out}}" \
+    --max-bytes "{{document_factory_economics_max_bytes}}" \
+    --out "{{document_factory_economics_validation}}"
 
 evidence-api-v1-export:
   python3 scripts/export_evidence_api_v1.py \

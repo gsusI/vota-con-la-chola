@@ -1,7 +1,7 @@
 {
   "meta": {
     "schema_version": "transparency_dashboard_v1",
-    "generated_at": "2026-08-29T15:58:00+00:00",
+    "generated_at": "2026-08-29T16:54:40+00:00",
     "source_status_generated_at": "2026-08-12T11:09:08+00:00",
     "latest_release_date": "2026-08-20T00:36:23+00:00",
     "freshness_contract": "docs/method/truth-contract.md#estados-de-frescura"
@@ -124,6 +124,38 @@
       "unit": "documentos",
       "source_path": "ui/gh-pages-next/public/transparency/data/document-fetch-operations.json",
       "source_url": "/transparency/data/document-fetch-operations.json"
+    },
+    {
+      "id": "document_native_objects_measured",
+      "label": "Documentos con extracción física medida",
+      "value": 109558,
+      "unit": "documentos",
+      "source_path": "ui/gh-pages-next/public/transparency/data/document-factory-economics.json",
+      "source_url": "/transparency/data/document-factory-economics.json"
+    },
+    {
+      "id": "document_ocr_pages_measured",
+      "label": "Páginas OCR con ejecución física medida",
+      "value": 856,
+      "unit": "páginas",
+      "source_path": "ui/gh-pages-next/public/transparency/data/document-factory-economics.json",
+      "source_url": "/transparency/data/document-factory-economics.json"
+    },
+    {
+      "id": "document_native_wall_ms_per_1000",
+      "label": "Extracción nativa por 1.000",
+      "value": 2385,
+      "unit": "ms/1.000",
+      "source_path": "ui/gh-pages-next/public/transparency/data/document-factory-economics.json",
+      "source_url": "/transparency/data/document-factory-economics.json"
+    },
+    {
+      "id": "document_ocr_cpu_ms_per_1000",
+      "label": "CPU OCR por 1.000 páginas",
+      "value": 688624,
+      "unit": "ms CPU/1.000",
+      "source_path": "ui/gh-pages-next/public/transparency/data/document-factory-economics.json",
+      "source_url": "/transparency/data/document-factory-economics.json"
     }
   ],
   "source_health": {
@@ -156,9 +188,9 @@
     "evidence_files_total": 119,
     "source_path": "ui/gh-pages-next/public/obstruction-tracker/data/obstructions.json",
     "source_url": "/obstruction-tracker/data/obstructions.json",
-    "source_sha256": "b3b21b67bd710407a900f4c51542342c4a9f91318724b0db76564e0ba3dc78fe",
+    "source_sha256": "004aedf0d3fb77863b27aff6d3ef6f5df35df0c41d3745790ffa315ab4d43f79",
     "evidence_manifest_url": "/obstruction-tracker/evidence/manifest.json",
-    "evidence_manifest_sha256": "e91c5c2398fc37de020bc328972b83fc70f2c7759408da6928fb613a128d77b8"
+    "evidence_manifest_sha256": "e1a8f5f9c5cb9b21a167b46b45cce5cb596e9d0449888661638e6877d1ec4c21"
   },
   "scale_readiness": {
     "status": "real_foundation_ready_scale_incomplete",
@@ -171,7 +203,7 @@
     },
     "source_path": "etl/data/published/scale-readiness-latest.json",
     "source_url": "https://github.com/gsusI/vota-con-la-chola/blob/main/etl/data/published/scale-readiness-latest.json",
-    "source_sha256": "8f3c613fb6fbca59a7c61d59581f0fc2c1aafeaeefc46082a2f211e06237ad1f"
+    "source_sha256": "0e5c2872ab26507cd3bd7a76e5e200d0e4bf14a7d5eebf33d401a8bc207e10d4"
   },
   "published_snapshot": {
     "verification_status": "verified_current_scale_origin",
@@ -353,7 +385,103 @@
     ],
     "source_path": "ui/gh-pages-next/public/transparency/data/document-fetch-operations.json",
     "source_url": "/transparency/data/document-fetch-operations.json",
-    "source_sha256": "acd9225d07408457850d5853c0fb13839cf80e03253ddf8f5d74741c7f699ca5"
+    "source_sha256": "d87ebcfcdc56a3d4585589bafaae64023460ccf8e4d23132688e9fae5e29876f"
+  },
+  "document_factory_economics": {
+    "status": "partial_measured_local",
+    "native_extraction": {
+      "measurement_status": "cold_physical_run",
+      "distinct_content_objects": 109558,
+      "file_instances": 111408,
+      "failures": 0,
+      "raw_content_bytes_processed": 4880987405,
+      "native_text_chars": 1999902681,
+      "native_text_cas_bytes": 533125716,
+      "elapsed_seconds": 261.340691,
+      "cpu_seconds": 409.619259,
+      "peak_rss_bytes_self": 1073545216,
+      "workers": 12,
+      "per_1000_distinct_content_objects": {
+        "raw_content_bytes_processed": 44551629.31963,
+        "native_text_chars": 18254282.48964,
+        "native_text_cas_bytes": 4866150.495628,
+        "elapsed_seconds": 2.385409,
+        "cpu_seconds": 3.738835,
+        "failures": 0.0
+      }
+    },
+    "page_ocr": {
+      "measurement_status": "cold_physical_run",
+      "documents": 58,
+      "candidate_pages": 856,
+      "failures": 0,
+      "ocr_text_chars": 89632,
+      "ocr_text_cas_bytes": 14853,
+      "elapsed_seconds": 109.875365,
+      "elapsed_worker_seconds": 598.8365,
+      "cpu_seconds_parent_and_children": 589.462222,
+      "peak_rss_bytes_self": 36503552,
+      "peak_rss_bytes_child_max": 203227136,
+      "workers": 8,
+      "per_1000_candidate_pages": {
+        "ocr_text_chars": 104710.280374,
+        "ocr_text_cas_bytes": 17351.635514,
+        "elapsed_seconds": 128.359071,
+        "elapsed_worker_seconds": 699.57535,
+        "cpu_seconds_parent_and_children": 688.624091,
+        "failures": 0.0
+      }
+    },
+    "storage": {
+      "file_instances": 111408,
+      "raw_document_bytes": 5093218479,
+      "native_text_cas_bytes": 533125716,
+      "ocr_candidate_pages": 856,
+      "ocr_text_cas_bytes": 14853,
+      "per_1000_file_instances": {
+        "raw_document_bytes": 45716810.992029,
+        "native_text_cas_bytes": 4785345.002154
+      },
+      "per_1000_ocr_candidate_pages": {
+        "ocr_text_cas_bytes": 17351.635514
+      }
+    },
+    "monetary_cost": {
+      "measurement_status": "unknown_not_measured",
+      "currency": null,
+      "actual_amount": null,
+      "cost_per_1000_documents": null,
+      "cost_per_1000_ocr_pages": null,
+      "provider_rates_present": false,
+      "invoice_or_meter_present": false,
+      "reason": "No approved provider rate, invoice, energy meter, or labor ledger is bound to these physical local runs; zero would be fabricated."
+    },
+    "measurement_gaps": [
+      "Historical acquisition state does not expose exact network requests started, wall time, CPU, or RSS.",
+      "No actual monetary meter or provider invoice is bound to the measured cohorts.",
+      "The 100k corpus is not yet representative across every source, format, language, scan quality, and host.",
+      "Human OCR quality review remains incomplete at 0/40 decisions."
+    ],
+    "checks": {
+      "official_real_documents_only": true,
+      "synthetic_or_mock_records_absent": true,
+      "public_domain_personal_information_retained": true,
+      "native_physical_run_complete": true,
+      "ocr_physical_run_complete": true,
+      "acquisition_queue_reconciled": true,
+      "monetary_cost_not_fabricated": true
+    },
+    "scale_claim": {
+      "capacity_class": "s1_100k",
+      "physical_native_objects_measured": 109558,
+      "physical_ocr_pages_measured": 856,
+      "one_million_documents_processed": false,
+      "promoted_for_one_million_operation": false,
+      "next_gate": "measure exact requests and actual monetary cost on representative 100_1000_10000_100000 cohorts before one million"
+    },
+    "source_path": "ui/gh-pages-next/public/transparency/data/document-factory-economics.json",
+    "source_url": "/transparency/data/document-factory-economics.json",
+    "source_sha256": "5a57cccdf7f4e822a18bbba99a3b6db4eecf684da4ac3dd44f2e6bd91fc9a8c0"
   },
   "recent_changes": [
     {
@@ -763,17 +891,17 @@
         {
           "path": "scripts/export_transparency_dashboard_snapshot.py",
           "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/scripts/export_transparency_dashboard_snapshot.py",
-          "sha256": "4314a03a7d14963446a817a64976a8f365b530dcf375a3ef0ab0c14f8117fecb"
+          "sha256": "7033ec9197793b471216c4183e825f03cf740f50cf4dc3c917b8c54ca6a323b5"
         },
         {
           "path": "scripts/validate_transparency_dashboard_snapshot.py",
           "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/scripts/validate_transparency_dashboard_snapshot.py",
-          "sha256": "0e662a20ae90f88d3a752d01b66e65bfc1eb06d2f340e7dedce7d787b8a6c72c"
+          "sha256": "dd4a0be28dc5302f5a266e51f71afb9bde2f1605015cfbffdd0ad54286141190"
         },
         {
           "path": "tests/test_transparency_dashboard_snapshot.py",
           "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/tests/test_transparency_dashboard_snapshot.py",
-          "sha256": "d6f8480c1c0dafc7d4a954fee174c512e18fb9c0086921eb2cab99a236e60409"
+          "sha256": "923029e988ad559d6f64a12befa8991f88e0a5bbf0c57a58c344ac254db81821"
         },
         {
           "path": "tests/test_transparency_dashboard_ui_contract.js",
@@ -895,6 +1023,7 @@
     "obstruction_tracker": "/obstruction-tracker/",
     "obstruction_feed": "/obstruction-tracker/data/obstructions.json",
     "document_fetch_operations": "/transparency/data/document-fetch-operations.json",
+    "document_factory_economics": "/transparency/data/document-factory-economics.json",
     "release_registry": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/release-notes/releases.json",
     "roadmap": "https://github.com/gsusI/vota-con-la-chola/blob/main/ROADMAP.md",
     "technical_roadmap": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/roadmap-tecnico.md",

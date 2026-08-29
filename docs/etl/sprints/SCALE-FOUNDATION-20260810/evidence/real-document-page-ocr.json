@@ -17,7 +17,7 @@
       "tesseract": "tesseract 5.5.2"
     }
   },
-  "generated_at": "2026-08-13T05:17:49.027785Z",
+  "generated_at": "2026-08-29T16:30:54.684100Z",
   "inputs": {
     "native_manifest": {
       "bytes": 121555440,
@@ -29,15 +29,29 @@
   "limitations": [
     "More OCR characters do not prove semantic accuracy.",
     "Native text remains the primary extraction; OCR is page-level additive evidence.",
+    "Volatile per-page elapsed time stays in the state database and aggregate report; it is excluded from the deterministic semantic manifest.",
     "Human review must measure OCR accuracy by source, language, scan quality, and document type before analytical promotion."
   ],
   "manifest": {
-    "bytes": 857689,
+    "bytes": 834675,
     "path": "etl/data/published/real-document-page-ocr-manifest-latest.jsonl",
     "rows": 856,
-    "sha256": "0f451e32fbc3813e979cc0fce5c7e1d117d6c4194f63a76a7f34b337c821e969"
+    "sha256": "31acdf4e61d119594644efa6342100f006c0bfe21c125531d2654a6cd1abf804"
   },
   "next_action": "Independently validate every page row and OCR text CAS object, then human-review a stratified real-page sample before analytical promotion.",
+  "performance": {
+    "claim_size": 16,
+    "cold_state_and_output": true,
+    "cpu_seconds": 623.683103,
+    "elapsed_seconds": 117.969863,
+    "measurement_scope": "seed_ocr_and_manifest",
+    "output_root_preexisting": false,
+    "pages_per_second": 7.25609,
+    "peak_rss_bytes_child_max": 197492736,
+    "peak_rss_bytes_self": 37535744,
+    "state_db_preexisting": false,
+    "workers": 8
+  },
   "policy": {
     "ocr_is_additive_to_native_text": true,
     "ocr_text_is_not_sanitized_or_identity_stripped": true,
@@ -58,7 +72,7 @@
     "documents": 58
   },
   "state": {
-    "database": "etl/data/staging/real-document-page-ocr-v5.db",
+    "database": "etl/data/staging/real-document-page-ocr-canonical-20260829.db",
     "ocr_status_counts": {
       "ocr_no_text": 7,
       "ocr_text_extracted": 849
@@ -71,7 +85,7 @@
   "totals": {
     "candidate_pages": 856,
     "documents": 58,
-    "elapsed_worker_seconds": 588.038,
+    "elapsed_worker_seconds": 654.6043,
     "empty_text_pages": 34,
     "native_text_chars_on_candidate_pages": 68951,
     "ocr_text_cas_bytes": 14853,

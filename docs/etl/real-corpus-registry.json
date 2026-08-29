@@ -340,7 +340,10 @@
         "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-validation.json",
         "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-human-review-queue.json",
         "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-human-review-validation.json",
-        "docs/etl/sprints/SCALE-FOUNDATION-20260810/exports/real-document-page-ocr-human-review.csv"
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/exports/real-document-page-ocr-human-review.csv",
+        "ui/gh-pages-next/public/transparency/data/document-factory-economics.json",
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-factory-economics-20260829.json",
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-factory-economics-validation-20260829.json"
       ],
       "evidence_contract": {
         "kind": "document_accountability_v2",
@@ -358,9 +361,12 @@
         "page_ocr_validation": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-validation.json",
         "ocr_review": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-human-review-queue.json",
         "ocr_review_validation": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-human-review-validation.json",
-        "ocr_review_csv": "docs/etl/sprints/SCALE-FOUNDATION-20260810/exports/real-document-page-ocr-human-review.csv"
+        "ocr_review_csv": "docs/etl/sprints/SCALE-FOUNDATION-20260810/exports/real-document-page-ocr-human-review.csv",
+        "economics": "ui/gh-pages-next/public/transparency/data/document-factory-economics.json",
+        "economics_evidence": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-factory-economics-20260829.json",
+        "economics_validation": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-factory-economics-validation-20260829.json"
       },
-      "next_action": "Complete and validate all 40 real human OCR reviews without invented labels. Add representative source, format, size, language, scan and corruption strata plus cost per 1000; the numeric 100000-document gate already passes but the diversity gate does not. Replicate and clean-restore the full 108139-object text CAS from a durable raw origin. Retry only the seven failed exact-URL archive variants with a new lever and close the 51 historical provenance gaps only from byte-identical immutable evidence or an exact primary-source manifest. Then scale toward one million through bounded official-host and date cohorts with the same queue, manifest, recovery and correction contracts."
+      "next_action": "Complete and validate all 40 real human OCR reviews without invented labels. Add representative source, format, size, language, scan and corruption strata; the numeric 100000-document gate and local native/OCR economics per 1000 pass, but fresh exact request telemetry and real monetary meter/provider rates remain open. Replicate and clean-restore the full 108139-object text CAS from a durable raw origin. Retry only the seven failed exact-URL archive variants with a new lever and close the 51 historical provenance gaps only from byte-identical immutable evidence or an exact primary-source manifest. Then scale toward one million through bounded official-host and date cohorts with the same queue, manifest, recovery and correction contracts."
     },
     {
       "id": "representative_integrity_analysis",

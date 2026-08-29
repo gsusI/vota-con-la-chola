@@ -570,6 +570,9 @@ def audit_document_provenance_gap(
         "page_ocr_validation",
         "ocr_review",
         "ocr_review_validation",
+        "economics",
+        "economics_evidence",
+        "economics_validation",
     )
     path_keys = (
         *json_keys,
@@ -594,6 +597,9 @@ def audit_document_provenance_gap(
     page_ocr_validation = payloads["page_ocr_validation"]
     ocr_review = payloads["ocr_review"]
     ocr_review_validation = payloads["ocr_review_validation"]
+    economics = payloads["economics"]
+    economics_evidence = payloads["economics_evidence"]
+    economics_validation = payloads["economics_validation"]
     if inventory.get("schema_version") != "real_document_format_inventory_v4":
         raise ReadinessError("document gap inventory contract version mismatch")
     if audit.get("schema_version") != "real_document_provenance_audit_v13":
@@ -666,6 +672,34 @@ def audit_document_provenance_gap(
             is not True
         ):
             raise ReadinessError(f"document {key} real-data policy failed")
+
+    economics_meta = economics.get("meta") or {}
+    economics_policy = economics.get("policy") or {}
+    if (
+        economics_meta.get("schema_version") != "document_factory_economics_v1"
+        or economics_meta.get("status") != "partial_measured_local"
+        or not all(value is True for value in (economics.get("checks") or {}).values())
+        or economics_policy.get("synthetic_or_mock_records") != "forbidden"
+        or economics_policy.get("public_domain_personal_information") != "retained"
+        or economics_policy.get("unmeasured_values") != "null_not_zero"
+        or economics != economics_evidence
+    ):
+        raise ReadinessError("document economics contract failed")
+    if (
+        economics_validation.get("schema_version")
+        != "document_factory_economics_validation_v1"
+        or economics_validation.get("status") != "ok"
+        or economics_validation.get("errors") != []
+    ):
+        raise ReadinessError("document economics independent validation failed")
+    economics_validation_inputs = economics_validation.get("inputs") or {}
+    if (
+        (economics_validation_inputs.get("public_artifact") or {}).get("sha256")
+        != sha256_file(evidence_paths["economics"])
+        or (economics_validation_inputs.get("evidence_copy") or {}).get("sha256")
+        != sha256_file(evidence_paths["economics_evidence"])
+    ):
+        raise ReadinessError("document economics validation inputs have drifted")
 
     inventory_totals = inventory.get("totals") or {}
     audit_totals = audit.get("totals") or {}
@@ -1170,6 +1204,19 @@ def audit_document_provenance_gap(
     )
     if ocr_text_pages + ocr_no_text_pages != ocr_pages:
         raise ReadinessError("OCR terminal statuses do not balance candidate pages")
+    native_economics = economics.get("native_extraction") or {}
+    ocr_economics = economics.get("page_ocr") or {}
+    monetary_economics = economics.get("monetary_cost") or {}
+    if (
+        native_economics.get("distinct_content_objects") != native_distinct_content
+        or ocr_economics.get("candidate_pages") != ocr_pages
+        or monetary_economics.get("measurement_status")
+        != "unknown_not_measured"
+        or monetary_economics.get("actual_amount") is not None
+        or monetary_economics.get("cost_per_1000_documents") is not None
+        or monetary_economics.get("cost_per_1000_ocr_pages") is not None
+    ):
+        raise ReadinessError("document economics totals or unknown-cost boundary drifted")
     return {
         "eligible_real_files": eligible_files,
         "distinct_content_objects": distinct_content,
@@ -1222,6 +1269,37 @@ def audit_document_provenance_gap(
         ),
         "ocr_human_review_promotion_ready": (
             (ocr_review_validation.get("gates") or {}).get("promotion_ready") is True
+        ),
+        "native_wall_seconds_per_1000": float(
+            (
+                native_economics.get("per_1000_distinct_content_objects") or {}
+            ).get("elapsed_seconds")
+            or 0
+        ),
+        "native_cpu_seconds_per_1000": float(
+            (
+                native_economics.get("per_1000_distinct_content_objects") or {}
+            ).get("cpu_seconds")
+            or 0
+        ),
+        "ocr_wall_seconds_per_1000_pages": float(
+            (ocr_economics.get("per_1000_candidate_pages") or {}).get(
+                "elapsed_seconds"
+            )
+            or 0
+        ),
+        "ocr_cpu_seconds_per_1000_pages": float(
+            (ocr_economics.get("per_1000_candidate_pages") or {}).get(
+                "cpu_seconds_parent_and_children"
+            )
+            or 0
+        ),
+        "document_monetary_cost_status": monetary_economics.get(
+            "measurement_status"
+        ),
+        "document_network_requests_measured": (
+            (economics.get("acquisition") or {}).get("network_requests_started")
+            is not None
         ),
         "evidence": {
             key: evidence_reference(path) for key, path in evidence_paths.items()

@@ -447,8 +447,16 @@ PROJECT_FACTS = [
             "no-text results, 17 material gains, and 131 independently verified OCR CAS "
             "objects. A deterministic 40-page real review packet covers every no-text "
             "and material-gain page with blank human fields; review is 0/40, so semantic "
-            "accuracy, scanned/office/language diversity, cost, remote origin, and one-million "
-            "scale remain open; the numeric 100k document gate passes. A disk-backed "
+            "accuracy, scanned/office/language diversity, remote origin, and one-million "
+            "scale remain open; the numeric 100k document gate passes. Cold physical "
+            "runs now measure native extraction and OCR wall time, parent/child CPU, RSS, "
+            "bytes, storage, failures, and normalized per-1,000 values. Historical fetch "
+            "state supplies queue attempts and bytes but not exact network requests or "
+            "resource telemetry. Monetary cost remains null and unknown because no real "
+            "provider rate, invoice, energy meter, or labor ledger is bound to the runs. "
+            "Per-page elapsed time remains in operational state and aggregate reports, "
+            "not semantic OCR manifests; two independent real OCR states therefore emit "
+            "the same semantic manifest hash. A disk-backed "
             "file/edge audit reconciles all 111,408 eligible inventory rows after the "
             "exclusions and physically removing "
             "three explicitly synthetic program pages plus eight Europarliament captures "
@@ -651,6 +659,14 @@ PROJECT_FACTS = [
             Evidence(
                 source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-validation.json",
                 detail="Independent source-PDF, routing, manifest, and OCR CAS validation for all 856 real candidate pages.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-factory-economics-validation-20260829.json",
+                detail="Independent hashes and per-1,000 math for cold native/OCR physical telemetry, storage, failures, and explicit unmeasured monetary cost.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-validation-physical-20260829.json",
+                detail="Cold-run OCR validation bound to the deterministic semantic manifest and every real source/CAS checksum.",
             ),
             Evidence(
                 source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-human-review-queue.json",
@@ -1976,6 +1992,36 @@ PROJECT_WORKFLOWS = [
 
 
 PROJECT_GOTCHAS = [
+    Gotcha(
+        name="Keep volatile telemetry out of semantic manifests",
+        description=(
+            "`semantic manifest determinism` requires content identity to exclude "
+            "wall time, per-item elapsed time, RSS, CPU, generated timestamps, and "
+            "other run-variant observations. Embedding those values makes identical "
+            "official inputs and output CAS objects produce different manifest hashes."
+        ),
+        mitigation=(
+            "Store volatile telemetry in the durable state database and aggregate run "
+            "report. Keep the semantic manifest limited to stable evidence identity and "
+            "prove replay hashes across independent real states."
+        ),
+        evidence=[
+            Evidence(
+                source="scripts/ocr_real_document_pages.py",
+                detail="Per-page elapsed stays in SQLite and aggregate totals but is excluded from semantic manifest rows.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-validation-physical-20260829.json",
+                detail="Independent validation of the stable 856-row real OCR manifest and all referenced CAS objects.",
+            ),
+        ],
+        references={
+            "semantic manifest determinism": (
+                "fact.Readiness counts only verified official corpora"
+            )
+        },
+        updated_at=UPDATED,
+    ),
     Gotcha(
         name="Source IDs can collide across input databases",
         description=(

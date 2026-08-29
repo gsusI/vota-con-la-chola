@@ -106,6 +106,10 @@ def validate(path: Path, max_bytes: int) -> dict[str, Any]:
         "document_fetch_official_urls",
         "document_fetch_terminal",
         "document_fetch_unfinished",
+        "document_native_objects_measured",
+        "document_ocr_pages_measured",
+        "document_native_wall_ms_per_1000",
+        "document_ocr_cpu_ms_per_1000",
     }
     missing_metrics = sorted(required_metric_ids - metric_ids)
     if missing_metrics:
@@ -207,6 +211,44 @@ def validate(path: Path, max_bytes: int) -> dict[str, Any]:
     if not is_link(document_fetch.get("source_url")):
         errors.append("document_fetch.source_url missing")
 
+    economics = payload.get("document_factory_economics") or {}
+    native_economics = economics.get("native_extraction") or {}
+    ocr_economics = economics.get("page_ocr") or {}
+    money = economics.get("monetary_cost") or {}
+    economics_claim = economics.get("scale_claim") or {}
+    if economics.get("status") != "partial_measured_local":
+        errors.append("document economics must preserve partial local status")
+    if int(native_economics.get("distinct_content_objects") or 0) <= 100_000:
+        errors.append("document economics lacks the real 100k native cohort")
+    if int(ocr_economics.get("candidate_pages") or 0) <= 0:
+        errors.append("document economics lacks real OCR pages")
+    if int(native_economics.get("failures") or 0) != 0:
+        errors.append("document native physical cohort contains failures")
+    if int(ocr_economics.get("failures") or 0) != 0:
+        errors.append("document OCR physical cohort contains failures")
+    if money.get("measurement_status") != "unknown_not_measured":
+        errors.append("document monetary cost must remain explicitly unknown")
+    for key in (
+        "currency",
+        "actual_amount",
+        "cost_per_1000_documents",
+        "cost_per_1000_ocr_pages",
+    ):
+        if money.get(key) is not None:
+            errors.append(f"unmeasured document monetary field {key} must be null")
+    if economics_claim.get("one_million_documents_processed") is not False:
+        errors.append("document economics makes unsupported million claim")
+    if economics_claim.get("promoted_for_one_million_operation") is not False:
+        errors.append("document economics makes unsupported promotion claim")
+    if not economics.get("checks") or not all(
+        value is True for value in (economics.get("checks") or {}).values()
+    ):
+        errors.append("document economics checks must all pass")
+    if not HEX_64.fullmatch(str(economics.get("source_sha256") or "")):
+        errors.append("document_factory_economics.source_sha256 invalid")
+    if not is_link(economics.get("source_url")):
+        errors.append("document_factory_economics.source_url missing")
+
     releases = payload.get("recent_changes") or []
     release_ids: set[str] = set()
     dates: list[str] = []
@@ -254,6 +296,30 @@ def validate(path: Path, max_bytes: int) -> dict[str, Any]:
         ),
         "document_fetch_terminal": document_terminal,
         "document_fetch_unfinished": document_unfinished,
+        "document_native_objects_measured": int(
+            native_economics.get("distinct_content_objects") or 0
+        ),
+        "document_ocr_pages_measured": int(
+            ocr_economics.get("candidate_pages") or 0
+        ),
+        "document_native_wall_ms_per_1000": round(
+            float(
+                (native_economics.get("per_1000_distinct_content_objects") or {}).get(
+                    "elapsed_seconds"
+                )
+                or 0
+            )
+            * 1000
+        ),
+        "document_ocr_cpu_ms_per_1000": round(
+            float(
+                (ocr_economics.get("per_1000_candidate_pages") or {}).get(
+                    "cpu_seconds_parent_and_children"
+                )
+                or 0
+            )
+            * 1000
+        ),
     }
     for metric_id, expected in expected_values.items():
         if metric_values.get(metric_id) != expected:
@@ -276,6 +342,12 @@ def validate(path: Path, max_bytes: int) -> dict[str, Any]:
             ),
             "document_fetch_terminal": document_terminal,
             "document_fetch_unfinished": document_unfinished,
+            "document_native_objects_measured": int(
+                native_economics.get("distinct_content_objects") or 0
+            ),
+            "document_ocr_pages_measured": int(
+                ocr_economics.get("candidate_pages") or 0
+            ),
         },
         "errors": errors,
     }

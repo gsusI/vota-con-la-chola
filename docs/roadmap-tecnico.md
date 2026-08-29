@@ -194,7 +194,7 @@ Pasos:
 5. `DONE 2026-08-13` para el corpus actual: enrutar sólo las `856` páginas vacías/sparse y ejecutar OCR aditivo con input manifest, engine, idiomas, versión y config persistidos. Resultado `856/856`, `849` con texto, `7` no-text, `89,632` caracteres, `17` mejoras y `131` CAS; validator independiente verifica `58` PDFs y cada CAS;
 6. `READY_FOR_HUMAN_REVIEW 2026-08-13`: revisar las `40` páginas reales seleccionadas. Incluye todos los `7` no-text, las `17` mejoras materiales, ambas fuentes y ambas razones; `0/40` decisiones y reviewer fields completos, sin labels inventados;
 7. `PARTIAL 2026-08-13`: el volumen real `100k` ya pasa; cerrar estratos representativos de formatos, idiomas, tamaños, scans, corruptos y hosts antes de promoción;
-8. calcular request/storage/CPU/RSS/OCR/coste por `1,000` antes de `1M`.
+8. `PARTIAL 2026-08-29`: publicar request/storage/CPU/RSS/OCR/coste por `1,000` antes de `1M`. `just document-factory-economics-export` produce y valida un JSON publicable de `5,969` bytes sobre pasadas físicas cold: native `109,558/109,558`, `4,880,987,405` bytes, `261.340691s` wall, `409.619259s` CPU, `1,073,545,216` bytes RSS; OCR `856/856`, `109.875365s` wall, `589.462222s` CPU parent+children y `203,227,136` bytes max child RSS. El manifest OCR semántico excluye elapsed volátil y dos estados independientes producen SHA `31acdf4e...`. Adquisición histórica sólo permite `9,187` queue attempts / `133,219,457` bytes; requests reales, CPU/RSS/wall y coste monetario siguen `null/unknown_not_measured` hasta una cohorte fresca y un meter/rate real;
 
 Comandos base:
 
@@ -210,6 +210,7 @@ just etl-scale-reconcile-documents
 just etl-scale-process-document-corpus
 just etl-scale-prepare-document-page-ocr-review
 just etl-scale-validate-document-page-ocr-review
+just document-factory-economics-export
 just etl-scale-require-document-page-ocr-review
 just parl-enqueue-document-fetch-work
 just parl-run-document-fetch-work
@@ -293,7 +294,7 @@ Los probes de red son explícitos y solo se repiten si cambia el endpoint, exist
 | `DOC-005` | OCR cache | `DONE current corpus`: input manifest + engine/language/version/config; rerun reclama `0` |
 | `DOC-006` | quarantine | bombs, corruptos, password y unsupported separados |
 | `DOC-007` | quality gold set | `PARTIAL`: packet real `40`, review humano `0/40`; falta doble review, métricas y adjudicación |
-| `DOC-008` | `100k` real | `PARTIAL`: volumen, success y extracción pasan; faltan quality humano, diversidad y coste completo por estrato |
+| `DOC-008` | `100k` real | `PARTIAL 2026-08-29`: volumen, success, extracción/OCR física y economics local por `1,000` pasan; faltan quality humano, diversidad, request telemetry fresca y coste monetario real por estrato |
 | `DOC-009` | `1M` real | origin, restore, SLO y bounded public delivery |
 
 ### P0 — actores y candidatos

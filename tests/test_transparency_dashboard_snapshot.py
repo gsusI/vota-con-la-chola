@@ -7,6 +7,7 @@ from pathlib import Path
 
 from scripts.export_transparency_dashboard_snapshot import (
     DEFAULT_DOCUMENT_FETCH_OPERATIONS_JSON,
+    DEFAULT_DOCUMENT_FACTORY_ECONOMICS_JSON,
     DEFAULT_OBSTRUCTION_JSON,
     DEFAULT_ORIGIN_VERIFICATION_JSON,
     DEFAULT_READINESS_JSON,
@@ -28,6 +29,9 @@ class TransparencyDashboardSnapshotTests(unittest.TestCase):
         cls.readiness = read_json(DEFAULT_READINESS_JSON)
         cls.origin = read_json(DEFAULT_ORIGIN_VERIFICATION_JSON)
         cls.document_fetch = read_json(DEFAULT_DOCUMENT_FETCH_OPERATIONS_JSON)
+        cls.document_factory_economics = read_json(
+            DEFAULT_DOCUMENT_FACTORY_ECONOMICS_JSON
+        )
         cls.registry = read_json(DEFAULT_RELEASE_REGISTRY_JSON)
         cls.releases = build_releases(cls.registry, DEFAULT_REPO_BLOB_BASE)
         cls.payload = build_payload(
@@ -36,6 +40,7 @@ class TransparencyDashboardSnapshotTests(unittest.TestCase):
             readiness=cls.readiness,
             origin=cls.origin,
             document_fetch=cls.document_fetch,
+            document_factory_economics=cls.document_factory_economics,
             releases=cls.releases,
             generated_at="2026-08-19T17:30:00+00:00",
             status_path=DEFAULT_STATUS_JSON.as_posix(),
@@ -43,6 +48,9 @@ class TransparencyDashboardSnapshotTests(unittest.TestCase):
             readiness_path=DEFAULT_READINESS_JSON.as_posix(),
             origin_path=DEFAULT_ORIGIN_VERIFICATION_JSON.as_posix(),
             document_fetch_path=DEFAULT_DOCUMENT_FETCH_OPERATIONS_JSON.as_posix(),
+            document_factory_economics_path=(
+                DEFAULT_DOCUMENT_FACTORY_ECONOMICS_JSON.as_posix()
+            ),
             release_registry_path=DEFAULT_RELEASE_REGISTRY_JSON.as_posix(),
             repo_blob_base=DEFAULT_REPO_BLOB_BASE,
         )

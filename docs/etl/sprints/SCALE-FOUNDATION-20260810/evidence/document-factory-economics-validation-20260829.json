@@ -1,0 +1,59 @@
+{
+  "schema_version": "document_factory_economics_validation_v1",
+  "status": "ok",
+  "inputs": {
+    "public_artifact": {
+      "path": "ui/gh-pages-next/public/transparency/data/document-factory-economics.json",
+      "bytes": 5969,
+      "sha256": "5a57cccdf7f4e822a18bbba99a3b6db4eecf684da4ac3dd44f2e6bd91fc9a8c0"
+    },
+    "evidence_copy": {
+      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-factory-economics-20260829.json",
+      "bytes": 5969,
+      "sha256": "5a57cccdf7f4e822a18bbba99a3b6db4eecf684da4ac3dd44f2e6bd91fc9a8c0"
+    },
+    "inventory": {
+      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-format-inventory.json",
+      "bytes": 10105,
+      "sha256": "3ecb49e23c8f23f0acb4d50999e403bcada01a8ed3ef93eba1ef07dc95525611"
+    },
+    "native_extraction": {
+      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-extraction-physical-20260829.json",
+      "bytes": 2932,
+      "sha256": "1ff8c7f0819f2febf67637c8ebfae721e7bf1eb0ef561a7561b51c51f0b7222d"
+    },
+    "native_validation": {
+      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-validation-physical-20260829.json",
+      "bytes": 2657,
+      "sha256": "37bc38a048397c8071c4ad1dca0c971c1fe35ded21117880dc62d051a0f0f833"
+    },
+    "page_ocr": {
+      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-physical-20260829.json",
+      "bytes": 3234,
+      "sha256": "8e1c3d9f7b00030d09d0b8e3981b0eb294f24ad42b2442689eeb8d2949c72459"
+    },
+    "page_ocr_validation": {
+      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-validation-physical-20260829.json",
+      "bytes": 2494,
+      "sha256": "7fdae185f3eba95f72c7ad4eaa1e18b3c550c3eff60c46acafa95590dfa674f3"
+    },
+    "document_fetch_operations": {
+      "path": "ui/gh-pages-next/public/transparency/data/document-fetch-operations.json",
+      "semantic_sha256": "1fe48b2a86496ff18cd6d6f1140291f2bd99df3987b89c481ef452b8e869a2be",
+      "volatile_fields_excluded": [
+        "meta.generated_at"
+      ]
+    }
+  },
+  "checks": {
+    "file_size_bytes": 5969,
+    "max_bytes": 500000,
+    "native_objects": 109558,
+    "ocr_pages": 856,
+    "fetch_documents_succeeded": 6792,
+    "input_hashes_verified": true,
+    "per_1000_math_verified": true,
+    "unmeasured_cost_remains_null": true
+  },
+  "errors": []
+}

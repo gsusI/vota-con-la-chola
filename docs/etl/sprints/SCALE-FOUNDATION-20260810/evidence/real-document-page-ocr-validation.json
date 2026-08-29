@@ -19,7 +19,7 @@
     "ocr_text_error_samples": [],
     "source_document_error_samples": []
   },
-  "generated_at": "2026-08-13T05:17:49.646375Z",
+  "generated_at": "2026-08-29T16:31:03.941648Z",
   "inputs": {
     "native_manifest": {
       "bytes": 121555440,
@@ -28,15 +28,15 @@
       "sha256": "03ce010e1019fc3f23e5a016413aab51f7ec398637973680534c27007b69bfab"
     },
     "ocr_manifest": {
-      "bytes": 857689,
+      "bytes": 834675,
       "path": "etl/data/published/real-document-page-ocr-manifest-latest.jsonl",
       "rows": 856,
-      "sha256": "0f451e32fbc3813e979cc0fce5c7e1d117d6c4194f63a76a7f34b337c821e969"
+      "sha256": "31acdf4e61d119594644efa6342100f006c0bfe21c125531d2654a6cd1abf804"
     },
     "ocr_report": {
-      "bytes": 2706,
+      "bytes": 3268,
       "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr.json",
-      "sha256": "570be801178b6ee6c10869bdd0b86c71b26c67948a751493b0c4c79331cd731c"
+      "sha256": "06c7749ed36b19e2d5f240c7a38d864e7363d406c38eaca1b9dcdb2c63b6d3b5"
     }
   },
   "next_action": "Human-review a stratified real-page sample by source, language, scan quality, and routing reason before analytical promotion.",

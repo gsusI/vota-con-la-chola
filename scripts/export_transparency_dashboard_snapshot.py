@@ -24,11 +24,17 @@ DEFAULT_RELEASE_REGISTRY_JSON = Path("docs/release-notes/releases.json")
 DEFAULT_DOCUMENT_FETCH_OPERATIONS_JSON = Path(
     "ui/gh-pages-next/public/transparency/data/document-fetch-operations.json"
 )
+DEFAULT_DOCUMENT_FACTORY_ECONOMICS_JSON = Path(
+    "ui/gh-pages-next/public/transparency/data/document-factory-economics.json"
+)
 DEFAULT_REPO_BLOB_BASE = "https://github.com/gsusI/vota-con-la-chola/blob/main"
 DEFAULT_PUBLIC_STATUS_URL = "/explorer-sources/data/status.json"
 DEFAULT_PUBLIC_OBSTRUCTION_URL = "/obstruction-tracker/data/obstructions.json"
 DEFAULT_PUBLIC_DOCUMENT_FETCH_OPERATIONS_URL = (
     "/transparency/data/document-fetch-operations.json"
+)
+DEFAULT_PUBLIC_DOCUMENT_FACTORY_ECONOMICS_URL = (
+    "/transparency/data/document-factory-economics.json"
 )
 
 
@@ -211,6 +217,7 @@ def build_payload(
     readiness: dict[str, Any],
     origin: dict[str, Any],
     document_fetch: dict[str, Any],
+    document_factory_economics: dict[str, Any],
     releases: list[dict[str, Any]],
     generated_at: str,
     status_path: str,
@@ -218,6 +225,7 @@ def build_payload(
     readiness_path: str,
     origin_path: str,
     document_fetch_path: str,
+    document_factory_economics_path: str,
     release_registry_path: str,
     repo_blob_base: str,
 ) -> dict[str, Any]:
@@ -242,6 +250,11 @@ def build_payload(
     document_queue = document_fetch.get("queue") or {}
     document_summary = document_fetch.get("documents") or {}
     document_fetch_url = DEFAULT_PUBLIC_DOCUMENT_FETCH_OPERATIONS_URL
+    document_factory_economics_url = DEFAULT_PUBLIC_DOCUMENT_FACTORY_ECONOMICS_URL
+    native_economics = document_factory_economics.get("native_extraction") or {}
+    ocr_economics = document_factory_economics.get("page_ocr") or {}
+    monetary_economics = document_factory_economics.get("monetary_cost") or {}
+    economics_claim = document_factory_economics.get("scale_claim") or {}
 
     metrics = [
         traced_metric("sources_ok", "Fuentes OK", status_summary.get("ok") or 0, "fuentes", status_path, status_url),
@@ -257,6 +270,10 @@ def build_payload(
         traced_metric("document_fetch_official_urls", "Documentos oficiales en cola", document_summary.get("official_urls_total") or 0, "documentos", document_fetch_path, document_fetch_url),
         traced_metric("document_fetch_terminal", "Descargas con estado terminal", document_queue.get("terminal_total") or 0, "documentos", document_fetch_path, document_fetch_url),
         traced_metric("document_fetch_unfinished", "Descargas pendientes", document_queue.get("unfinished_total") or 0, "documentos", document_fetch_path, document_fetch_url),
+        traced_metric("document_native_objects_measured", "Documentos con extracción física medida", native_economics.get("distinct_content_objects") or 0, "documentos", document_factory_economics_path, document_factory_economics_url),
+        traced_metric("document_ocr_pages_measured", "Páginas OCR con ejecución física medida", ocr_economics.get("candidate_pages") or 0, "páginas", document_factory_economics_path, document_factory_economics_url),
+        traced_metric("document_native_wall_ms_per_1000", "Extracción nativa por 1.000", round(float((native_economics.get("per_1000_distinct_content_objects") or {}).get("elapsed_seconds") or 0) * 1000), "ms/1.000", document_factory_economics_path, document_factory_economics_url),
+        traced_metric("document_ocr_cpu_ms_per_1000", "CPU OCR por 1.000 páginas", round(float((ocr_economics.get("per_1000_candidate_pages") or {}).get("cpu_seconds_parent_and_children") or 0) * 1000), "ms CPU/1.000", document_factory_economics_path, document_factory_economics_url),
     ]
 
     return {
@@ -351,6 +368,19 @@ def build_payload(
             "source_url": document_fetch_url,
             "source_sha256": sha256_file(Path(document_fetch_path)),
         },
+        "document_factory_economics": {
+            "status": str((document_factory_economics.get("meta") or {}).get("status") or ""),
+            "native_extraction": native_economics,
+            "page_ocr": ocr_economics,
+            "storage": document_factory_economics.get("storage") or {},
+            "monetary_cost": monetary_economics,
+            "measurement_gaps": document_factory_economics.get("measurement_gaps") or [],
+            "checks": document_factory_economics.get("checks") or {},
+            "scale_claim": economics_claim,
+            "source_path": document_factory_economics_path,
+            "source_url": document_factory_economics_url,
+            "source_sha256": sha256_file(Path(document_factory_economics_path)),
+        },
         "recent_changes": releases,
         "audit_links": {
             "self": "/transparency/data/transparency.json",
@@ -358,6 +388,7 @@ def build_payload(
             "obstruction_tracker": "/obstruction-tracker/",
             "obstruction_feed": obstruction_url,
             "document_fetch_operations": document_fetch_url,
+            "document_factory_economics": document_factory_economics_url,
             "release_registry": repo_blob_url(repo_blob_base, release_registry_path),
             "roadmap": repo_blob_url(repo_blob_base, "ROADMAP.md"),
             "technical_roadmap": repo_blob_url(repo_blob_base, "docs/roadmap-tecnico.md"),
@@ -377,6 +408,10 @@ def parse_args() -> argparse.Namespace:
         "--document-fetch-operations-json",
         default=str(DEFAULT_DOCUMENT_FETCH_OPERATIONS_JSON),
     )
+    parser.add_argument(
+        "--document-factory-economics-json",
+        default=str(DEFAULT_DOCUMENT_FACTORY_ECONOMICS_JSON),
+    )
     parser.add_argument("--repo-blob-base", default=DEFAULT_REPO_BLOB_BASE)
     parser.add_argument("--generated-at", default="")
     parser.add_argument("--out", required=True)
@@ -392,6 +427,7 @@ def main() -> int:
         "origin": Path(args.origin_verification_json),
         "releases": Path(args.release_registry_json),
         "document_fetch": Path(args.document_fetch_operations_json),
+        "document_factory_economics": Path(args.document_factory_economics_json),
     }
     missing = [f"{key}={path}" for key, path in source_paths.items() if not path.is_file()]
     if missing:
@@ -410,6 +446,9 @@ def main() -> int:
             readiness=read_json(source_paths["readiness"]),
             origin=read_json(source_paths["origin"]),
             document_fetch=read_json(source_paths["document_fetch"]),
+            document_factory_economics=read_json(
+                source_paths["document_factory_economics"]
+            ),
             releases=releases,
             generated_at=generated_at,
             status_path=source_paths["status"].as_posix(),
@@ -417,6 +456,9 @@ def main() -> int:
             readiness_path=source_paths["readiness"].as_posix(),
             origin_path=source_paths["origin"].as_posix(),
             document_fetch_path=source_paths["document_fetch"].as_posix(),
+            document_factory_economics_path=source_paths[
+                "document_factory_economics"
+            ].as_posix(),
             release_registry_path=source_paths["releases"].as_posix(),
             repo_blob_base=args.repo_blob_base,
         )

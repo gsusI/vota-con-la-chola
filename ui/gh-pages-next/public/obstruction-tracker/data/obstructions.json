@@ -1,7 +1,7 @@
 {
   "meta": {
     "schema_version": "obstruction_tracker_v2",
-    "generated_at": "2026-08-29T15:52:56+00:00",
+    "generated_at": "2026-08-29T16:54:39+00:00",
     "source_snapshot_generated_at": "2026-08-12T11:09:08+00:00",
     "status_json_path": "/explorer-sources/data/status.json",
     "status_json_evidence_path": "ui/gh-pages-next/public/explorer-sources/data/status.json",
@@ -242,7 +242,7 @@
         "status": "r1_numeric_gate_passed_representativeness_and_ocr_quality_open",
         "current_real_rows": 111408,
         "target_real_rows": 1000000,
-        "next_action": "Complete and validate all 40 real human OCR reviews without invented labels. Add representative source, format, size, language, scan and corruption strata plus cost per 1000; the numeric 100000-document gate already passes but the diversity gate does not. Replicate and clean-restore the full 108139-object text CAS from a durable raw origin. Retry only the seven failed exact-URL archive variants with a new lever and close the 51 historical provenance gaps only from byte-identical immutable evidence or an exact primary-source manifest. Then scale toward one million through bounded official-host and date cohorts with the same queue, manifest, recovery and correction contracts."
+        "next_action": "Complete and validate all 40 real human OCR reviews without invented labels. Add representative source, format, size, language, scan and corruption strata; the numeric 100000-document gate and local native/OCR economics per 1000 pass, but fresh exact request telemetry and real monetary meter/provider rates remain open. Replicate and clean-restore the full 108139-object text CAS from a durable raw origin. Retry only the seven failed exact-URL archive variants with a new lever and close the 51 historical provenance gaps only from byte-identical immutable evidence or an exact primary-source manifest. Then scale toward one million through bounded official-host and date cohorts with the same queue, manifest, recovery and correction contracts."
       },
       {
         "id": "representative_integrity_analysis",

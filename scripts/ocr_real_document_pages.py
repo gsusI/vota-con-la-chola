@@ -8,9 +8,11 @@ import gzip
 import hashlib
 import json
 import os
+import resource
 import shutil
 import sqlite3
 import subprocess
+import sys
 import tempfile
 import time
 import uuid
@@ -56,6 +58,20 @@ class OcrOutcome:
 
 def utc_now() -> str:
     return datetime.now(UTC).isoformat().replace("+00:00", "Z")
+
+
+def process_usage() -> dict[str, float | int]:
+    """Return cumulative parent/child CPU and peak-memory telemetry."""
+    own = resource.getrusage(resource.RUSAGE_SELF)
+    children = resource.getrusage(resource.RUSAGE_CHILDREN)
+    rss_multiplier = 1 if sys.platform == "darwin" else 1024
+    return {
+        "cpu_seconds": float(
+            own.ru_utime + own.ru_stime + children.ru_utime + children.ru_stime
+        ),
+        "peak_rss_bytes_self": int(own.ru_maxrss * rss_multiplier),
+        "peak_rss_bytes_child_max": int(children.ru_maxrss * rss_multiplier),
+    }
 
 
 def display_path(path: Path) -> str:
@@ -700,7 +716,7 @@ def write_manifest(conn: sqlite3.Connection, out_path: Path) -> dict[str, Any]:
                   d.source_group, d.page_count, w.page_number, w.reason,
                   w.native_text_chars, w.state, w.attempts, w.ocr_status,
                   w.ocr_text_sha256, w.ocr_text_cas_path, w.ocr_text_chars,
-                  w.improved_over_native, w.elapsed_seconds, w.last_error
+                  w.improved_over_native, w.last_error
                 FROM ocr_page_work w
                 JOIN ocr_documents d USING (document_sha256)
                 ORDER BY d.document_sha256, w.page_number
@@ -728,7 +744,6 @@ def write_manifest(conn: sqlite3.Connection, out_path: Path) -> dict[str, Any]:
                         if row["improved_over_native"] is not None
                         else None
                     ),
-                    "elapsed_seconds": row["elapsed_seconds"],
                     "last_error": row["last_error"],
                     "additive_to_native_text": True,
                     "synthetic_or_mock": False,
@@ -767,6 +782,7 @@ def build_report(
     psm: int,
     pdftoppm: str,
     tesseract: str,
+    performance: dict[str, Any],
 ) -> dict[str, Any]:
     metadata = _metadata(conn)
     state_counts = {
@@ -824,6 +840,12 @@ def build_report(
         "no_synthetic_or_mock_records": True,
         "official_public_domain_personal_information_retained": True,
     }
+    succeeded_this_run = int(run_totals.get("succeeded", 0))
+    elapsed_seconds = float(performance["elapsed_seconds"])
+    performance = {
+        **performance,
+        "pages_per_second": round(succeeded_this_run / elapsed_seconds, 6),
+    }
     return {
         "schema_version": "real_document_page_ocr_v1",
         "generated_at": utc_now(),
@@ -860,6 +882,7 @@ def build_report(
         },
         "manifest": manifest,
         "run": run_totals,
+        "performance": performance,
         "totals": {
             "documents": int(documents),
             "candidate_pages": int(totals_row["candidate_pages"]),
@@ -882,6 +905,7 @@ def build_report(
         "limitations": [
             "More OCR characters do not prove semantic accuracy.",
             "Native text remains the primary extraction; OCR is page-level additive evidence.",
+            "Volatile per-page elapsed time stays in the state database and aggregate report; it is excluded from the deterministic semantic manifest.",
             "Human review must measure OCR accuracy by source, language, scan quality, and document type before analytical promotion.",
         ],
         "next_action": (
@@ -940,6 +964,10 @@ def main(argv: list[str] | None = None) -> int:
         print("ERROR: raw root, native manifest, pdftoppm, and tesseract are required")
         return 2
     try:
+        output_root_preexisting = output_root.exists()
+        state_db_preexisting = state_db.exists()
+        started = time.monotonic()
+        usage_before = process_usage()
         output_root.mkdir(parents=True, exist_ok=True)
         with open_state_db(state_db) as conn:
             apply_state_schema(conn)
@@ -965,6 +993,26 @@ def main(argv: list[str] | None = None) -> int:
                 timeout=float(args.timeout),
             )
             manifest = write_manifest(conn, manifest_out)
+            usage_after = process_usage()
+            performance = {
+                "measurement_scope": "seed_ocr_and_manifest",
+                "elapsed_seconds": round(time.monotonic() - started, 6),
+                "cpu_seconds": round(
+                    float(usage_after["cpu_seconds"])
+                    - float(usage_before["cpu_seconds"]),
+                    6,
+                ),
+                "peak_rss_bytes_self": usage_after["peak_rss_bytes_self"],
+                "peak_rss_bytes_child_max": usage_after[
+                    "peak_rss_bytes_child_max"
+                ],
+                "workers": int(args.workers),
+                "claim_size": int(args.claim_size),
+                "state_db_preexisting": state_db_preexisting,
+                "output_root_preexisting": output_root_preexisting,
+                "cold_state_and_output": not state_db_preexisting
+                and not output_root_preexisting,
+            }
             report = build_report(
                 conn,
                 native_manifest=native_manifest,
@@ -977,6 +1025,7 @@ def main(argv: list[str] | None = None) -> int:
                 psm=int(args.psm),
                 pdftoppm=pdftoppm,
                 tesseract=tesseract,
+                performance=performance,
             )
         report["seed"] = seeded
         write_json_atomic(report_out, report)

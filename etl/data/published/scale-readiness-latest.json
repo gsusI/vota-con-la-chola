@@ -688,6 +688,9 @@
         "audit": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-provenance-audit.json",
         "boe_corpus": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-document-corpus.json",
         "boe_manifest": "etl/data/manifests/boe-document-corpus-lineage.jsonl",
+        "economics": "ui/gh-pages-next/public/transparency/data/document-factory-economics.json",
+        "economics_evidence": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-factory-economics-20260829.json",
+        "economics_validation": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-factory-economics-validation-20260829.json",
         "inventory": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-format-inventory.json",
         "kind": "document_accountability_v2",
         "native_extraction": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-extraction.json",
@@ -789,29 +792,44 @@
           "sha256": "7a47e5f42b8025c778be49ec94873eaa5dca98f96d932cf6b60f4bdd781f2d7d"
         },
         {
-          "bytes": 2706,
+          "bytes": 3268,
           "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr.json",
-          "sha256": "570be801178b6ee6c10869bdd0b86c71b26c67948a751493b0c4c79331cd731c"
+          "sha256": "06c7749ed36b19e2d5f240c7a38d864e7363d406c38eaca1b9dcdb2c63b6d3b5"
         },
         {
           "bytes": 2512,
           "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-validation.json",
-          "sha256": "0e729018446bd83a6d12f28b4c555088d241cd85154f0a38464332d7fb98bdff"
+          "sha256": "644071eaef3b02c0f13bf12d8327b8d00fed102fc5ae3aff00c6b0ce9739eaef"
         },
         {
           "bytes": 3596,
           "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-human-review-queue.json",
-          "sha256": "cf02b4d2e12c66d5e91427b3affefa99086372166eb1c718b3240c1a3fa408a6"
+          "sha256": "ee40b1f0600405a64c4112585800c14247316d8fe39e46fc3bc67de8301a46d3"
         },
         {
           "bytes": 2257,
           "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-human-review-validation.json",
-          "sha256": "a08feeef96298cd438d5e168b990df8958e20a2bd7319bd498bd7fe74bc7ebb8"
+          "sha256": "72b12c2e7f333df49834b686f3d7b40441cc51e447acdea9dd5a1a23a5420a4f"
         },
         {
           "bytes": 20686,
           "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/exports/real-document-page-ocr-human-review.csv",
           "sha256": "eaa317570af0736abeb034fef11fee2631599b6d96573e1f92e129bfbcc70cf3"
+        },
+        {
+          "bytes": 5908,
+          "path": "ui/gh-pages-next/public/transparency/data/document-factory-economics.json",
+          "sha256": "76eb87e30180d6b70c5795294e8eaf2efc61c97713b44d9273440f6a1f2637bb"
+        },
+        {
+          "bytes": 5908,
+          "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-factory-economics-20260829.json",
+          "sha256": "76eb87e30180d6b70c5795294e8eaf2efc61c97713b44d9273440f6a1f2637bb"
+        },
+        {
+          "bytes": 2368,
+          "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-factory-economics-validation-20260829.json",
+          "sha256": "607d2ce5a6d05a589ad15bcbcc990dc27a636f2d0f44f2766b8fd7c6d11c2caf"
         }
       ],
       "evidence_refs": [
@@ -836,7 +854,10 @@
         "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-validation.json",
         "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-human-review-queue.json",
         "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-human-review-validation.json",
-        "docs/etl/sprints/SCALE-FOUNDATION-20260810/exports/real-document-page-ocr-human-review.csv"
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/exports/real-document-page-ocr-human-review.csv",
+        "ui/gh-pages-next/public/transparency/data/document-factory-economics.json",
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-factory-economics-20260829.json",
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-factory-economics-validation-20260829.json"
       ],
       "id": "document_corpus",
       "metrics": {
@@ -844,6 +865,8 @@
         "boe_document_corpus_rows": 89001,
         "checksum_lineage_gap_files": 51,
         "distinct_content_objects": 109558,
+        "document_monetary_cost_status": "unknown_not_measured",
+        "document_network_requests_measured": false,
         "eligible_real_files": 111408,
         "evidence": {
           "audit": {
@@ -860,6 +883,21 @@
             "bytes": 208836046,
             "path": "etl/data/manifests/boe-document-corpus-lineage.jsonl",
             "sha256": "29d06f68ac7c0610a3e7cd69d95727d493dbc5e60bfd95fd9be0f9b7f60804ff"
+          },
+          "economics": {
+            "bytes": 5908,
+            "path": "ui/gh-pages-next/public/transparency/data/document-factory-economics.json",
+            "sha256": "76eb87e30180d6b70c5795294e8eaf2efc61c97713b44d9273440f6a1f2637bb"
+          },
+          "economics_evidence": {
+            "bytes": 5908,
+            "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-factory-economics-20260829.json",
+            "sha256": "76eb87e30180d6b70c5795294e8eaf2efc61c97713b44d9273440f6a1f2637bb"
+          },
+          "economics_validation": {
+            "bytes": 2368,
+            "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-factory-economics-validation-20260829.json",
+            "sha256": "607d2ce5a6d05a589ad15bcbcc990dc27a636f2d0f44f2766b8fd7c6d11c2caf"
           },
           "inventory": {
             "bytes": 10105,
@@ -879,7 +917,7 @@
           "ocr_review": {
             "bytes": 3596,
             "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-human-review-queue.json",
-            "sha256": "cf02b4d2e12c66d5e91427b3affefa99086372166eb1c718b3240c1a3fa408a6"
+            "sha256": "ee40b1f0600405a64c4112585800c14247316d8fe39e46fc3bc67de8301a46d3"
           },
           "ocr_review_csv": {
             "bytes": 20686,
@@ -889,17 +927,17 @@
           "ocr_review_validation": {
             "bytes": 2257,
             "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-human-review-validation.json",
-            "sha256": "a08feeef96298cd438d5e168b990df8958e20a2bd7319bd498bd7fe74bc7ebb8"
+            "sha256": "72b12c2e7f333df49834b686f3d7b40441cc51e447acdea9dd5a1a23a5420a4f"
           },
           "page_ocr": {
-            "bytes": 2706,
+            "bytes": 3268,
             "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr.json",
-            "sha256": "570be801178b6ee6c10869bdd0b86c71b26c67948a751493b0c4c79331cd731c"
+            "sha256": "06c7749ed36b19e2d5f240c7a38d864e7363d406c38eaca1b9dcdb2c63b6d3b5"
           },
           "page_ocr_validation": {
             "bytes": 2512,
             "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-validation.json",
-            "sha256": "0e729018446bd83a6d12f28b4c555088d241cd85154f0a38464332d7fb98bdff"
+            "sha256": "644071eaef3b02c0f13bf12d8327b8d00fed102fc5ae3aff00c6b0ce9739eaef"
           },
           "queue": {
             "bytes": 2412,
@@ -924,12 +962,15 @@
         },
         "excluded_fixture_or_sample_files": 5,
         "excluded_transport_failure_captures": 9,
+        "native_cpu_seconds_per_1000": 3.738835,
         "native_text_cas_objects_checksum_verified": 108139,
         "native_text_characters": 1999902681,
         "native_text_distinct_content_objects": 109558,
         "native_text_file_instances": 111408,
         "native_text_truncated_objects": 0,
+        "native_wall_seconds_per_1000": 2.385409,
         "ocr_candidate_pages": 856,
+        "ocr_cpu_seconds_per_1000_pages": 688.624091,
         "ocr_documents": 58,
         "ocr_human_review_batch_complete": false,
         "ocr_human_review_promotion_ready": false,
@@ -941,6 +982,7 @@
         "ocr_text_cas_objects_checksum_verified": 131,
         "ocr_text_characters": 89632,
         "ocr_text_pages": 849,
+        "ocr_wall_seconds_per_1000_pages": 128.359071,
         "provenance_coverage": 0.99954222,
         "public_url_files": 111357,
         "public_url_gap_files": 51,
@@ -956,7 +998,7 @@
         "wayback_unique_content_targets": 3,
         "wayback_unseeded_gap_files": 25
       },
-      "next_action": "Complete and validate all 40 real human OCR reviews without invented labels. Add representative source, format, size, language, scan and corruption strata plus cost per 1000; the numeric 100000-document gate already passes but the diversity gate does not. Replicate and clean-restore the full 108139-object text CAS from a durable raw origin. Retry only the seven failed exact-URL archive variants with a new lever and close the 51 historical provenance gaps only from byte-identical immutable evidence or an exact primary-source manifest. Then scale toward one million through bounded official-host and date cohorts with the same queue, manifest, recovery and correction contracts.",
+      "next_action": "Complete and validate all 40 real human OCR reviews without invented labels. Add representative source, format, size, language, scan and corruption strata; the numeric 100000-document gate and local native/OCR economics per 1000 pass, but fresh exact request telemetry and real monetary meter/provider rates remain open. Replicate and clean-restore the full 108139-object text CAS from a durable raw origin. Retry only the seven failed exact-URL archive variants with a new lever and close the 51 historical provenance gaps only from byte-identical immutable evidence or an exact primary-source manifest. Then scale toward one million through bounded official-host and date cohorts with the same queue, manifest, recovery and correction contracts.",
       "status": "r1_numeric_gate_passed_representativeness_and_ocr_quality_open",
       "target_real_rows": 1000000
     },
@@ -1001,7 +1043,7 @@
       "target_real_rows": 1000000
     }
   ],
-  "generated_at": "2026-08-19T19:04:54.445376Z",
+  "generated_at": "2026-08-29T16:39:07.062890Z",
   "policy": {
     "classification_never_suppresses_public_domain_identity": true,
     "generated_test_records_count_toward_readiness": false,
@@ -1013,9 +1055,9 @@
     "synthetic_or_mock_records_forbidden": true
   },
   "registry": {
-    "bytes": 31574,
+    "bytes": 32306,
     "path": "docs/etl/real-corpus-registry.json",
-    "sha256": "2757f1641ba5f71f4c05ee28d6894723fd0ec8964f427cafbc43c9b0765d0fd4"
+    "sha256": "b56edb863c22ef4fec786e4ddd483649386fbcef1faa05f878fb96430eab8fe1"
   },
   "schema_version": "real-scale-readiness-v1",
   "status": "real_foundation_ready_scale_incomplete",

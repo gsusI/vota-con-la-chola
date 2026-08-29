@@ -1,0 +1,158 @@
+{
+  "meta": {
+    "schema_version": "document_factory_economics_v1",
+    "generated_at": "2026-08-29T16:24:10+00:00",
+    "status": "partial_measured_local",
+    "measurement_basis": "physical_real_official_cohorts"
+  },
+  "policy": {
+    "synthetic_or_mock_records": "forbidden",
+    "public_domain_personal_information": "retained",
+    "unmeasured_values": "null_not_zero",
+    "local_measurements_are_not_provider_forecasts": true,
+    "one_million_projection_published": false
+  },
+  "inputs": {
+    "inventory": {
+      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-format-inventory.json",
+      "bytes": 10105,
+      "sha256": "3ecb49e23c8f23f0acb4d50999e403bcada01a8ed3ef93eba1ef07dc95525611"
+    },
+    "native_extraction": {
+      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-extraction-physical-20260829.json",
+      "bytes": 2932,
+      "sha256": "1ff8c7f0819f2febf67637c8ebfae721e7bf1eb0ef561a7561b51c51f0b7222d"
+    },
+    "native_validation": {
+      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-validation-physical-20260829.json",
+      "bytes": 2657,
+      "sha256": "37bc38a048397c8071c4ad1dca0c971c1fe35ded21117880dc62d051a0f0f833"
+    },
+    "page_ocr": {
+      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-physical-20260829.json",
+      "bytes": 3234,
+      "sha256": "8e1c3d9f7b00030d09d0b8e3981b0eb294f24ad42b2442689eeb8d2949c72459"
+    },
+    "page_ocr_validation": {
+      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-validation-physical-20260829.json",
+      "bytes": 2494,
+      "sha256": "7fdae185f3eba95f72c7ad4eaa1e18b3c550c3eff60c46acafa95590dfa674f3"
+    },
+    "document_fetch_operations": {
+      "path": "ui/gh-pages-next/public/transparency/data/document-fetch-operations.json",
+      "semantic_sha256": "1fe48b2a86496ff18cd6d6f1140291f2bd99df3987b89c481ef452b8e869a2be",
+      "volatile_fields_excluded": [
+        "meta.generated_at"
+      ]
+    }
+  },
+  "acquisition": {
+    "measurement_status": "historical_queue_state_not_request_telemetry",
+    "official_urls_total": 9084,
+    "documents_succeeded": 6792,
+    "terminal_dead": 198,
+    "unfinished": 2094,
+    "queue_attempts": 9187,
+    "network_requests_started": null,
+    "bytes_received": 133219457,
+    "cpu_seconds": null,
+    "peak_rss_bytes": null,
+    "elapsed_seconds": null,
+    "per_1000_succeeded": {
+      "queue_attempts": 1352.62073,
+      "bytes_received": 19614172.114252,
+      "terminal_dead": 29.151943,
+      "unfinished": 308.303887
+    }
+  },
+  "native_extraction": {
+    "measurement_status": "cold_physical_run",
+    "distinct_content_objects": 109558,
+    "file_instances": 111408,
+    "failures": 0,
+    "raw_content_bytes_processed": 4880987405,
+    "native_text_chars": 1999902681,
+    "native_text_cas_bytes": 533125716,
+    "elapsed_seconds": 261.340691,
+    "cpu_seconds": 409.619259,
+    "peak_rss_bytes_self": 1073545216,
+    "workers": 12,
+    "per_1000_distinct_content_objects": {
+      "raw_content_bytes_processed": 44551629.31963,
+      "native_text_chars": 18254282.48964,
+      "native_text_cas_bytes": 4866150.495628,
+      "elapsed_seconds": 2.385409,
+      "cpu_seconds": 3.738835,
+      "failures": 0.0
+    }
+  },
+  "page_ocr": {
+    "measurement_status": "cold_physical_run",
+    "documents": 58,
+    "candidate_pages": 856,
+    "failures": 0,
+    "ocr_text_chars": 89632,
+    "ocr_text_cas_bytes": 14853,
+    "elapsed_seconds": 109.875365,
+    "elapsed_worker_seconds": 598.8365,
+    "cpu_seconds_parent_and_children": 589.462222,
+    "peak_rss_bytes_self": 36503552,
+    "peak_rss_bytes_child_max": 203227136,
+    "workers": 8,
+    "per_1000_candidate_pages": {
+      "ocr_text_chars": 104710.280374,
+      "ocr_text_cas_bytes": 17351.635514,
+      "elapsed_seconds": 128.359071,
+      "elapsed_worker_seconds": 699.57535,
+      "cpu_seconds_parent_and_children": 688.624091,
+      "failures": 0.0
+    }
+  },
+  "storage": {
+    "file_instances": 111408,
+    "raw_document_bytes": 5093218479,
+    "native_text_cas_bytes": 533125716,
+    "ocr_candidate_pages": 856,
+    "ocr_text_cas_bytes": 14853,
+    "per_1000_file_instances": {
+      "raw_document_bytes": 45716810.992029,
+      "native_text_cas_bytes": 4785345.002154
+    },
+    "per_1000_ocr_candidate_pages": {
+      "ocr_text_cas_bytes": 17351.635514
+    }
+  },
+  "monetary_cost": {
+    "measurement_status": "unknown_not_measured",
+    "currency": null,
+    "actual_amount": null,
+    "cost_per_1000_documents": null,
+    "cost_per_1000_ocr_pages": null,
+    "provider_rates_present": false,
+    "invoice_or_meter_present": false,
+    "reason": "No approved provider rate, invoice, energy meter, or labor ledger is bound to these physical local runs; zero would be fabricated."
+  },
+  "measurement_gaps": [
+    "Historical acquisition state does not expose exact network requests started, wall time, CPU, or RSS.",
+    "No actual monetary meter or provider invoice is bound to the measured cohorts.",
+    "The 100k corpus is not yet representative across every source, format, language, scan quality, and host.",
+    "Human OCR quality review remains incomplete at 0/40 decisions."
+  ],
+  "checks": {
+    "official_real_documents_only": true,
+    "synthetic_or_mock_records_absent": true,
+    "public_domain_personal_information_retained": true,
+    "native_physical_run_complete": true,
+    "ocr_physical_run_complete": true,
+    "acquisition_queue_reconciled": true,
+    "monetary_cost_not_fabricated": true
+  },
+  "scale_claim": {
+    "capacity_class": "s1_100k",
+    "physical_native_objects_measured": 109558,
+    "physical_ocr_pages_measured": 856,
+    "one_million_documents_processed": false,
+    "promoted_for_one_million_operation": false,
+    "next_gate": "measure exact requests and actual monetary cost on representative 100_1000_10000_100000 cohorts before one million"
+  }
+}
