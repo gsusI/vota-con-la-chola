@@ -225,7 +225,7 @@ DoD:
 
 Pasos:
 
-1. `DONE_FOR_CAPTURED_GENERATION 2026-08-30`: inventario `122,607` instancias raw oficiales / `120,757` contenidos / `5,524,892,735` bytes; `1,437` PDFs / `44,927` páginas; idioma/encryption completos siguen como gap de `DOC-001`;
+1. `DONE_FOR_CAPTURED_GENERATION 2026-08-30`: inventario `122,607` instancias raw oficiales / `120,757` contenidos / `5,524,892,735` bytes; `1,437` PDFs / `44,927` páginas. Perfil content-deduplicated cubre todo el corpus: `122,288` machine-language candidates, `319` unknown explícitos y encryption de cada PDF (`1` encrypted / `1,436` not encrypted). Replay independiente rehasha raw+CAS y reclasifica `120,757/120,757` sin mismatch. Todos los candidatos siguen `unreviewed`; no son ground truth humano;
 2. `PARTIAL/BLOCKED 2026-08-30`: worker persiste eventos de request, progreso atómico, budgets conservadores ante crash, límites por host, redirect refusal, fairness y circuitos por HTTP/network/timeout. BOE tail usa budget `500,000`, avanza `63` objetos dentro del último batch y queda `100,051/100,867`; `1` dead tras tres timeouts, `815` unfinished. El incidente `nso-2026-08-boe-document-xml-connect-timeout` prohíbe repetir sin palanca nueva;
 3. `PARTIAL 2026-08-30`: provenance balancea `122,607/122,607`, verifica checksum + URL para `122,539`, preserva `68` gaps y `0` conflicts. Manifest BOE actual reconcilia `100,051` documentos, pero solo `1,156/1,166` summary captures y falla completion;
 4. `DONE_FOR_CAPTURED_GENERATION 2026-08-30`: native state v6 procesa `120,757/120,757` contenidos / `5,312,661,661` bytes, conserva `2,211,203,471` caracteres en `119,338` CAS, `0` retry/dead/failure/truncation. Validator rehasha `122,607` raw y cada CAS;
@@ -246,6 +246,7 @@ just etl-scale-recover-official-path-documents
 just etl-scale-audit-document-provenance
 just etl-scale-reconcile-documents
 just etl-scale-process-document-corpus
+just etl-scale-document-language-encryption-profile
 just etl-scale-prepare-document-page-ocr-review
 just etl-scale-validate-document-page-ocr-review
 just document-factory-economics-export
@@ -274,6 +275,7 @@ DoD:
 - coste y SLO medidos antes de `1M`.
 - lineage BOE indexado en shards bounded, no un único control file creciente;
 - cada generación native/OCR tiene identidad/supersession explícita y restore reproducible.
+- cada generación profile tiene machine-candidate/unknown explícito, full replay, identidad/supersession y restore reproducible; ninguna etiqueta probabilística se presenta como review humano.
 
 ### RT-005 — Cerrar provenance de votos
 
@@ -335,7 +337,7 @@ Los probes de red son explícitos y solo se repiten si cambia el endpoint, exist
 
 | ID | Entregable | DoD |
 | --- | --- | --- |
-| `DOC-001` | inventory completo | source/MIME/bytes/pages/language/density o unknown |
+| `DOC-001` | inventory completo | `DONE_FOR_CAPTURED_GENERATION 2026-08-30`: source/MIME/bytes/pages/density y machine-language candidate/unknown para `122,607/122,607`; encryption para `1,437/1,437` PDFs; full raw/CAS replay y lifecycle de dos generaciones pasan; review lingüístico/representatividad y rerun post-BOE siguen abiertos |
 | `DOC-002` | fetch streaming | límite duro, SHA, atomic commit, cero parciales |
 | `DOC-003` | digital extraction | `DONE_FOR_CAPTURED_GENERATION 2026-08-30`: `122,607/122,607` instancias, `120,757/120,757` contenidos, `2,211,203,471` chars, `119,338` CAS, `0` retry/dead/truncation; falta page/section lineage completo y generación final post-BOE |
 | `DOC-004` | OCR routing | `DONE current corpus`: `856/856` páginas pobres; razón persistida |

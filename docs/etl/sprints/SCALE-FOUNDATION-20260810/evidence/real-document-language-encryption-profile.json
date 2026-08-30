@@ -1,0 +1,160 @@
+{
+  "by_encryption_status_file_instances": {
+    "encrypted": 1,
+    "not_applicable_plain_markup": 121170,
+    "not_encrypted": 1436
+  },
+  "by_language_evidence_status_content_objects": {
+    "machine_candidate_only_unreviewed": 107171,
+    "source_declared_model_agree": 9382,
+    "source_declared_model_conflict": 4035,
+    "unknown_unreviewed": 169
+  },
+  "by_language_review_status_content_objects": {
+    "unreviewed": 120757
+  },
+  "by_machine_language_candidate_file_instances": {
+    "am": 31,
+    "an": 4,
+    "az": 1,
+    "ca": 41,
+    "en": 84,
+    "es": 121913,
+    "eu": 42,
+    "ga": 9,
+    "gl": 82,
+    "la": 1,
+    "lo": 23,
+    "qu": 53,
+    "rw": 4,
+    "und": 319
+  },
+  "by_machine_language_status_content_objects": {
+    "candidate_threshold_passed": 120588,
+    "insufficient_alphabetic_text": 169
+  },
+  "by_source_declared_language_content_objects": {
+    "ca": 72,
+    "en": 3869,
+    "es": 9324,
+    "eu": 4,
+    "gl": 109,
+    "null": 107340,
+    "va": 39
+  },
+  "checks": {
+    "encryption_status_explicit_for_every_profiled_instance": true,
+    "every_content_object_terminal_success": true,
+    "every_file_instance_profiled": true,
+    "every_pdf_encryption_status_observed": true,
+    "inventory_and_native_generation_bound_by_sha256": true,
+    "language_review_status_explicit_and_unreviewed": true,
+    "machine_language_candidates_not_promoted_to_human_ground_truth": true,
+    "machine_language_status_explicit_for_every_profiled_instance": true,
+    "manifest_contains_every_file_instance": true,
+    "no_dead_work": true,
+    "no_synthetic_or_mock_records": true,
+    "official_public_domain_personal_information_retained": true
+  },
+  "configuration": {
+    "language_model": "py3langid",
+    "language_model_version": "0.3.0",
+    "min_alpha_chars": 200,
+    "min_confidence": 0.8,
+    "min_margin": 0.2,
+    "pdf_timeout": 60.0,
+    "profile_algorithm_version": "document_profile_v2",
+    "sample_bytes": 65536
+  },
+  "generated_at": "2026-08-30T10:12:42.637266Z",
+  "inputs": {
+    "inventory": {
+      "bytes": 82987794,
+      "path": "etl/data/manifests/real-document-format-inventory.jsonl",
+      "sha256": "4d11b77c8a2ac64b59baed5190fe52975d9d820fe76777585bf6799e8718a9ad"
+    },
+    "native_manifest": {
+      "bytes": 5423,
+      "path": "etl/data/published/real-document-text-manifest-latest.jsonl",
+      "sha256": "fea6dc86110ad94c190133077d2271130652f30475f6f561ad0ab5ca98e25024"
+    }
+  },
+  "manifest": {
+    "bytes": 5626,
+    "compressed_bytes": 15506428,
+    "logical_sha256": "7a40cfdbe0e11fac4c93362305815014ea445642537c7e4d7d83b4154d72e4b3",
+    "path": "etl/data/published/real-document-profile-manifest-latest.jsonl",
+    "publication": {
+      "activated": true,
+      "active_history_path": "real-document-profile-manifest-latest-history/1b5d0902ece3855e0730ab88efc99de9d989bb1a1204c6540ebad2d96e4e53ec.json",
+      "active_logical_sha256": "7a40cfdbe0e11fac4c93362305815014ea445642537c7e4d7d83b4154d72e4b3",
+      "active_manifest_sha256": "1b5d0902ece3855e0730ab88efc99de9d989bb1a1204c6540ebad2d96e4e53ec",
+      "active_receipt_path": "real-document-profile-manifest-latest-receipts/1b5d0902ece3855e0730ab88efc99de9d989bb1a1204c6540ebad2d96e4e53ec.json",
+      "automatic_deletion_performed": false,
+      "legacy_equivalent_jsonl_migrated": false,
+      "live_index_changed": true,
+      "live_index_switched_last": true,
+      "predecessor_manifest_sha256": "4b6b90feca7f0e27d0a18d8d0520eb3b0044b392cebbdcc7cd25290cd7fd283b",
+      "state_snapshot": {
+        "bytes": 193093632,
+        "compressed_bytes": 46777761,
+        "compressed_sha256": "c9789e842d45a762735f6526ab79d88f38e373388046cc8ee7692eaaf697ef94",
+        "path": "real-document-profile-manifest-latest-state/186662d82543b90318b50a764c762b595526c11fdfe4969fc60d4c148b6c0f9a.sqlite.gz",
+        "sha256": "186662d82543b90318b50a764c762b595526c11fdfe4969fc60d4c148b6c0f9a",
+        "sqlite_quick_check": "ok"
+      },
+      "superseded_predecessor": true
+    },
+    "rows": 122607,
+    "sha256": "1b5d0902ece3855e0730ab88efc99de9d989bb1a1204c6540ebad2d96e4e53ec",
+    "shard_files": 13,
+    "uncompressed_bytes": 170181264
+  },
+  "next_action": "Run the independent full-row/full-byte validator, then use the versioned machine-language/encryption distribution as an input to DEC-01. Treat every machine-only language label as an unreviewed candidate; human review remains required before language-quality promotion.",
+  "performance": {
+    "cpu_seconds": 4.362463,
+    "elapsed_seconds": 4.612268,
+    "objects_per_second": 0.0,
+    "peak_rss_bytes_child_max": 0,
+    "peak_rss_bytes_self": 48119808
+  },
+  "policy": {
+    "all_language_profiles_are_explicitly_unreviewed": true,
+    "classification_is_content_deduplicated": true,
+    "language_is_probabilistic_not_ground_truth": true,
+    "machine_language_candidate_is_not_an_authoritative_language_label": true,
+    "official_public_domain_personal_information_retained": true,
+    "official_real_documents_only": true,
+    "public_identity_text_is_not_removed_or_sanitized": true,
+    "raw_and_native_text_bytes_are_fully_rehashed": true,
+    "synthetic_or_mock_records_counted": false,
+    "unknown_language_is_retained_not_imputed": true
+  },
+  "run": {
+    "expired_leases_reclaimed": 0,
+    "processed": 0
+  },
+  "schema_version": "real_document_language_encryption_profile_v2",
+  "seed": {
+    "content_objects": 120757,
+    "file_instances": 122607
+  },
+  "state": {
+    "database": "etl/data/staging/real-document-profile-v1-20260830.db",
+    "state_counts": {
+      "succeeded": 120757
+    }
+  },
+  "status": "ok",
+  "totals": {
+    "distinct_content_objects": 120757,
+    "duplicate_file_instances": 1850,
+    "encrypted_pdf_file_instances": 1,
+    "file_instances": 122607,
+    "machine_language_candidate_file_instances": 122288,
+    "pdf_file_instances": 1437,
+    "profiled_content_objects": 120757,
+    "profiled_file_instances": 122607,
+    "unknown_language_file_instances": 319
+  }
+}

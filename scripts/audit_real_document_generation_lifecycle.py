@@ -23,6 +23,9 @@ DEFAULT_REPORT_ROOT = Path("docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence"
 MANIFESTS = {
     "native_text": Path("etl/data/published/real-document-text-manifest-latest.jsonl"),
     "page_ocr": Path("etl/data/published/real-document-page-ocr-manifest-latest.jsonl"),
+    "document_profile": Path(
+        "etl/data/published/real-document-profile-manifest-latest.jsonl"
+    ),
     "real_document_origin_replicas": Path(
         "etl/data/manifests/real-document-origin-replicas.json"
     ),
@@ -33,6 +36,7 @@ MANIFESTS = {
 REPORT_NAMES = {
     "native_text": "real-document-text-generation-audit.json",
     "page_ocr": "real-document-page-ocr-generation-audit.json",
+    "document_profile": "real-document-profile-generation-audit.json",
     "real_document_origin_replicas": "real-document-origin-generation-audit.json",
     "real_document_origin_packs": "real-document-origin-pack-generation-audit.json",
 }

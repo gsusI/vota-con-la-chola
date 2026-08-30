@@ -547,6 +547,11 @@ scale_pdf_ocr_routing_benchmark := env_var_or_default("SCALE_PDF_OCR_ROUTING_BEN
 scale_document_workers := env_var_or_default("SCALE_DOCUMENT_WORKERS", "8")
 scale_document_text_state_db := env_var_or_default("SCALE_DOCUMENT_TEXT_STATE_DB", "etl/data/staging/real-document-text-corpus-v6-20260830.db")
 scale_document_ocr_state_db := env_var_or_default("SCALE_DOCUMENT_OCR_STATE_DB", "etl/data/staging/real-document-page-ocr-v8-20260830.db")
+scale_document_profile_state_db := env_var_or_default("SCALE_DOCUMENT_PROFILE_STATE_DB", "etl/data/staging/real-document-profile-v1-20260830.db")
+scale_document_profile_manifest := env_var_or_default("SCALE_DOCUMENT_PROFILE_MANIFEST", "etl/data/published/real-document-profile-manifest-latest.jsonl")
+scale_document_profile_report := env_var_or_default("SCALE_DOCUMENT_PROFILE_REPORT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-language-encryption-profile.json")
+scale_document_profile_validation := env_var_or_default("SCALE_DOCUMENT_PROFILE_VALIDATION", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-language-encryption-validation.json")
+scale_document_profile_generation_audit := env_var_or_default("SCALE_DOCUMENT_PROFILE_GENERATION_AUDIT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-profile-generation-audit.json")
 scale_document_origin_state_db := env_var_or_default("SCALE_DOCUMENT_ORIGIN_STATE_DB", "etl/data/staging/real-document-origin-replication-v1.db")
 scale_document_origin_filesystem_root := env_var_or_default("SCALE_DOCUMENT_ORIGIN_FILESYSTEM_ROOT", "etl/data/object-origin/real-document-corpus-v1")
 scale_document_origin_manifest := env_var_or_default("SCALE_DOCUMENT_ORIGIN_MANIFEST", "etl/data/manifests/real-document-origin-replicas.json")
@@ -2475,6 +2480,20 @@ etl-scale-validate-document-page-ocr:
 
 etl-scale-audit-document-page-ocr-generation:
   python3 scripts/audit_real_document_generation_lifecycle.py page_ocr --full-shard-check --full-state-check --enforce
+
+etl-scale-profile-document-language-encryption:
+  python3 scripts/classify_real_document_profiles.py --state-db {{scale_document_profile_state_db}} --manifest-out {{scale_document_profile_manifest}} --report-out {{scale_document_profile_report}} --workers {{scale_document_workers}} --claim-size 64 --sample-bytes 65536 --min-alpha-chars 200 --min-confidence 0.80 --min-margin 0.20 --enforce
+
+etl-scale-validate-document-language-encryption:
+  python3 scripts/validate_real_document_profiles.py --profile-manifest {{scale_document_profile_manifest}} --profile-report {{scale_document_profile_report}} --report-out {{scale_document_profile_validation}} --workers {{scale_document_workers}} --batch-size 128 --enforce
+
+etl-scale-audit-document-profile-generation:
+  python3 scripts/audit_real_document_generation_lifecycle.py document_profile --manifest {{scale_document_profile_manifest}} --report-out {{scale_document_profile_generation_audit}} --full-shard-check --full-state-check --enforce
+
+etl-scale-document-language-encryption-profile:
+  just etl-scale-profile-document-language-encryption
+  just etl-scale-validate-document-language-encryption
+  just etl-scale-audit-document-profile-generation
 
 etl-scale-prepare-document-page-ocr-review:
   python3 scripts/prepare_real_document_ocr_review.py --sample-pages 40 --enforce

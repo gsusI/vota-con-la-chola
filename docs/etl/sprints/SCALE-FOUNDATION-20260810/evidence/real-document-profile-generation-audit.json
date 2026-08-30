@@ -1,0 +1,69 @@
+{
+  "activation_chain": [
+    "1b5d0902ece3855e0730ab88efc99de9d989bb1a1204c6540ebad2d96e4e53ec",
+    "4b6b90feca7f0e27d0a18d8d0520eb3b0044b392cebbdcc7cd25290cd7fd283b"
+  ],
+  "checks": {
+    "activation_receipt_chain_complete": true,
+    "active_manifest_archived_exactly": true,
+    "automatic_deletion_forbidden_and_not_performed": true,
+    "no_interrupted_staging_directories": true,
+    "no_orphan_generation_directories": true,
+    "no_orphan_state_snapshots": true,
+    "no_synthetic_or_mock_rows": true,
+    "no_unactivated_activation_receipts": true,
+    "no_unactivated_generation_directories": true,
+    "no_unactivated_manifest_archives": true,
+    "official_public_information_retained": true,
+    "retained_manifest_contracts_valid": true,
+    "retained_shards_checked_to_requested_depth": true,
+    "retained_state_snapshots_checked_to_requested_depth": true
+  },
+  "dataset": "document_profile",
+  "generated_at": "2026-08-30T10:19:57.816417+00:00",
+  "input": {
+    "bytes": 5626,
+    "logical_sha256": "7a40cfdbe0e11fac4c93362305815014ea445642537c7e4d7d83b4154d72e4b3",
+    "path": "etl/data/published/real-document-profile-manifest-latest.jsonl",
+    "sha256": "1b5d0902ece3855e0730ab88efc99de9d989bb1a1204c6540ebad2d96e4e53ec"
+  },
+  "mode": {
+    "full_shard_check": true,
+    "full_state_check": true
+  },
+  "policy": {
+    "automatic_deletion_forbidden": true,
+    "interrupted_artifacts_retained_for_audit": true,
+    "official_public_domain_personal_information_retained": true,
+    "remote_mutation_performed": false,
+    "synthetic_or_mock_records_counted": false
+  },
+  "retention": {
+    "interrupted_staging_directories": [],
+    "orphan_generation_logical_sha256": [],
+    "orphan_state_snapshots": [],
+    "unactivated_activation_receipt_sha256": [],
+    "unactivated_generation_logical_sha256": [],
+    "unactivated_manifest_archive_sha256": []
+  },
+  "schema_version": "real_document_generation_lifecycle_audit_v1",
+  "status": "ok",
+  "totals": {
+    "activation_chain_manifests": 2,
+    "activation_receipts": 2,
+    "automatic_deletions": 0,
+    "interrupted_staging_directories": 0,
+    "manifest_archives": 2,
+    "orphan_generation_directories": 0,
+    "orphan_state_snapshots": 0,
+    "retained_compressed_manifest_bytes": 31086897,
+    "retained_compressed_state_bytes": 93555522,
+    "retained_shard_files": 26,
+    "retained_state_snapshots": 1,
+    "retained_unique_generations": 2,
+    "superseded_generations": 1,
+    "unactivated_activation_receipts": 0,
+    "unactivated_generation_directories": 0,
+    "unactivated_manifest_archives": 0
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "checks": {
+    "every_distinct_content_object_rehashed_and_reclassified": true,
+    "every_pdf_encryption_status_reobserved_from_raw_bytes": true,
+    "language_model_and_configuration_replayed_exactly": true,
+    "native_and_profile_file_sets_match": true,
+    "no_synthetic_or_mock_records": true,
+    "official_public_domain_personal_information_retained": true,
+    "profile_generation_full_shard_validation_passed": true,
+    "source_profile_report_passed": true
+  },
+  "configuration": {
+    "language_model": "py3langid",
+    "language_model_version": "0.3.0",
+    "min_alpha_chars": 200,
+    "min_confidence": 0.8,
+    "min_margin": 0.2,
+    "pdf_timeout": 60.0,
+    "profile_algorithm_version": "document_profile_v2",
+    "sample_bytes": 65536
+  },
+  "failure_samples": [],
+  "generated_at": "2026-08-30T10:19:47.011274Z",
+  "inputs": {
+    "native_manifest": {
+      "bytes": 5423,
+      "path": "etl/data/published/real-document-text-manifest-latest.jsonl",
+      "sha256": "fea6dc86110ad94c190133077d2271130652f30475f6f561ad0ab5ca98e25024"
+    },
+    "profile_manifest": {
+      "bytes": 5626,
+      "logical_sha256": "7a40cfdbe0e11fac4c93362305815014ea445642537c7e4d7d83b4154d72e4b3",
+      "path": "etl/data/published/real-document-profile-manifest-latest.jsonl",
+      "sha256": "1b5d0902ece3855e0730ab88efc99de9d989bb1a1204c6540ebad2d96e4e53ec"
+    },
+    "profile_report": {
+      "bytes": 5997,
+      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-language-encryption-profile.json",
+      "sha256": "2dbc451026e3d83d291846156c8d03a0877c2b18226d18b984f3ba205d46c216"
+    }
+  },
+  "mode": {
+    "full_language_reclassification": true,
+    "full_manifest_shard_check": true,
+    "full_native_text_cas_checksum_check": true,
+    "full_pdf_encryption_reinspection": true,
+    "full_raw_checksum_check": true
+  },
+  "next_action": "Bind this independent validation and the generation lifecycle audit into central readiness, then use explicit language/encryption strata in DEC-01.",
+  "performance": {
+    "cpu_seconds": 980.393317,
+    "elapsed_seconds": 405.784859,
+    "objects_per_second": 297.588728,
+    "peak_rss_bytes_child_max": 51937280,
+    "peak_rss_bytes_self": 414760960
+  },
+  "policy": {
+    "machine_language_candidates_are_explicitly_unreviewed": true,
+    "official_public_domain_personal_information_retained": true,
+    "official_real_documents_only": true,
+    "probabilistic_language_is_not_human_ground_truth": true,
+    "synthetic_or_mock_records_counted": false,
+    "unknown_language_is_retained_not_imputed": true
+  },
+  "schema_version": "real_document_language_encryption_validation_v2",
+  "status": "ok",
+  "totals": {
+    "content_objects_rehashed_and_reclassified": 120757,
+    "distinct_content_objects": 120757,
+    "file_set_mismatches": 0,
+    "native_file_instances": 122607,
+    "profile_file_instances": 122607,
+    "validation_failures": 0
+  }
+}

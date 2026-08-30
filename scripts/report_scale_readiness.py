@@ -609,6 +609,9 @@ def audit_document_provenance_gap(
         "native_extraction",
         "native_validation",
         "native_generation_audit",
+        "document_profile",
+        "document_profile_validation",
+        "document_profile_generation_audit",
         "page_ocr",
         "page_ocr_validation",
         "page_ocr_generation_audit",
@@ -657,6 +660,9 @@ def audit_document_provenance_gap(
     native_extraction = payloads["native_extraction"]
     native_validation = payloads["native_validation"]
     native_generation_audit = payloads["native_generation_audit"]
+    document_profile = payloads["document_profile"]
+    document_profile_validation = payloads["document_profile_validation"]
+    document_profile_generation_audit = payloads["document_profile_generation_audit"]
     page_ocr = payloads["page_ocr"]
     page_ocr_validation = payloads["page_ocr_validation"]
     page_ocr_generation_audit = payloads["page_ocr_generation_audit"]
@@ -753,6 +759,18 @@ def audit_document_provenance_gap(
             "real_document_generation_lifecycle_audit_v1",
             {"ok"},
         ),
+        "document_profile": (
+            "real_document_language_encryption_profile_v2",
+            {"ok"},
+        ),
+        "document_profile_validation": (
+            "real_document_language_encryption_validation_v2",
+            {"ok"},
+        ),
+        "document_profile_generation_audit": (
+            "real_document_generation_lifecycle_audit_v1",
+            {"ok"},
+        ),
         "page_ocr": ("real_document_page_ocr_v1", {"ok"}),
         "page_ocr_validation": ("real_document_page_ocr_validation_v1", {"ok"}),
         "page_ocr_generation_audit": (
@@ -814,6 +832,12 @@ def audit_document_provenance_gap(
             native_generation_audit,
             "native_text",
             native_extraction,
+        ),
+        (
+            "document_profile_generation_audit",
+            document_profile_generation_audit,
+            "document_profile",
+            document_profile,
         ),
         (
             "page_ocr_generation_audit",
@@ -1728,6 +1752,113 @@ def audit_document_provenance_gap(
     ):
         raise ReadinessError("native validation was not built from the current run")
 
+    profile_totals = document_profile.get("totals") or {}
+    profile_validation_totals = document_profile_validation.get("totals") or {}
+    profile_inputs = document_profile.get("inputs") or {}
+    profile_validation_inputs = document_profile_validation.get("inputs") or {}
+    profile_manifest = document_profile.get("manifest") or {}
+    profile_validation_manifest = (
+        profile_validation_inputs.get("profile_manifest") or {}
+    )
+    profile_validation_report = profile_validation_inputs.get("profile_report") or {}
+    native_profile_input = profile_inputs.get("native_manifest") or {}
+    native_current_manifest = native_extraction.get("manifest") or {}
+    machine_status_counts = (
+        document_profile.get("by_machine_language_status_content_objects") or {}
+    )
+    language_evidence_counts = (
+        document_profile.get("by_language_evidence_status_content_objects") or {}
+    )
+    language_review_counts = (
+        document_profile.get("by_language_review_status_content_objects") or {}
+    )
+    encryption_counts = (
+        document_profile.get("by_encryption_status_file_instances") or {}
+    )
+    profile_file_instances = _require_nonnegative_int(
+        profile_totals.get("file_instances"), "document profile file instances"
+    )
+    profile_distinct_content = _require_nonnegative_int(
+        profile_totals.get("distinct_content_objects"),
+        "document profile distinct content objects",
+    )
+    profile_pdf_instances = _require_nonnegative_int(
+        profile_totals.get("pdf_file_instances"), "document profile PDF instances"
+    )
+    profile_machine_candidates = _require_nonnegative_int(
+        profile_totals.get("machine_language_candidate_file_instances"),
+        "document profile machine-language candidates",
+    )
+    profile_unknown_language = _require_nonnegative_int(
+        profile_totals.get("unknown_language_file_instances"),
+        "document profile unknown-language instances",
+    )
+    if (
+        profile_file_instances != eligible_files
+        or profile_distinct_content != distinct_content
+        or profile_pdf_instances
+        != _require_nonnegative_int(inventory_totals.get("pdf_files"), "PDF files")
+        or profile_machine_candidates + profile_unknown_language != eligible_files
+        or sum(
+            _require_nonnegative_int(value, "machine-language status count")
+            for value in machine_status_counts.values()
+        )
+        != distinct_content
+        or sum(
+            _require_nonnegative_int(value, "language evidence count")
+            for value in language_evidence_counts.values()
+        )
+        != distinct_content
+        or language_review_counts != {"unreviewed": distinct_content}
+        or sum(
+            _require_nonnegative_int(value, "encryption status count")
+            for value in encryption_counts.values()
+        )
+        != eligible_files
+        or _require_nonnegative_int(
+            encryption_counts.get("encrypted"), "encrypted PDF instances"
+        )
+        + _require_nonnegative_int(
+            encryption_counts.get("not_encrypted"), "unencrypted PDF instances"
+        )
+        != profile_pdf_instances
+    ):
+        raise ReadinessError("document language/encryption profile totals drifted")
+    if (
+        native_profile_input.get("sha256") != native_current_manifest.get("sha256")
+        or native_profile_input.get("path") != native_current_manifest.get("path")
+        or profile_validation_manifest.get("sha256") != profile_manifest.get("sha256")
+        or profile_validation_manifest.get("logical_sha256")
+        != profile_manifest.get("logical_sha256")
+        or profile_validation_report.get("sha256")
+        != sha256_file(evidence_paths["document_profile"])
+        or profile_validation_report.get("bytes")
+        != evidence_paths["document_profile"].stat().st_size
+        or _require_nonnegative_int(
+            profile_validation_totals.get("native_file_instances"),
+            "document profile validation native instances",
+        )
+        != eligible_files
+        or _require_nonnegative_int(
+            profile_validation_totals.get("profile_file_instances"),
+            "document profile validation profile instances",
+        )
+        != eligible_files
+        or _require_nonnegative_int(
+            profile_validation_totals.get("distinct_content_objects"),
+            "document profile validation content objects",
+        )
+        != distinct_content
+        or _require_nonnegative_int(
+            profile_validation_totals.get("content_objects_rehashed_and_reclassified"),
+            "document profile replayed content objects",
+        )
+        != distinct_content
+        or profile_validation_totals.get("file_set_mismatches") != 0
+        or profile_validation_totals.get("validation_failures") != 0
+    ):
+        raise ReadinessError("document language/encryption validation drifted")
+
     expected_ocr_pages = _require_nonnegative_int(
         inventory_totals.get("pdf_pages_empty"), "empty PDF pages"
     ) + _require_nonnegative_int(
@@ -1987,6 +2118,31 @@ def audit_document_provenance_gap(
                 "retained_state_snapshots"
             ),
             "native text retained state snapshots",
+        ),
+        "document_profile_file_instances": profile_file_instances,
+        "document_profile_distinct_content_objects": profile_distinct_content,
+        "document_profile_machine_language_candidates": profile_machine_candidates,
+        "document_profile_unknown_language_instances": profile_unknown_language,
+        "document_profile_pdf_instances": profile_pdf_instances,
+        "document_profile_encrypted_pdf_instances": _require_nonnegative_int(
+            profile_totals.get("encrypted_pdf_file_instances"),
+            "document profile encrypted PDF instances",
+        ),
+        "document_profile_replayed_content_objects": _require_nonnegative_int(
+            profile_validation_totals.get("content_objects_rehashed_and_reclassified"),
+            "document profile replayed content objects",
+        ),
+        "document_profile_retained_generations": _require_nonnegative_int(
+            (document_profile_generation_audit.get("totals") or {}).get(
+                "retained_unique_generations"
+            ),
+            "document profile retained generations",
+        ),
+        "document_profile_superseded_generations": _require_nonnegative_int(
+            (document_profile_generation_audit.get("totals") or {}).get(
+                "superseded_generations"
+            ),
+            "document profile superseded generations",
         ),
         "ocr_documents": ocr_documents,
         "ocr_candidate_pages": ocr_pages,

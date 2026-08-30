@@ -248,8 +248,14 @@ PROJECT_FACTS = [
             "never infers a missing identifier, cross-source identity, or elected outcome. "
             "The current document inventory contains 122,607 eligible real official "
             "instances and 120,757 distinct contents. Native extraction finishes all "
-            "120,757 contents without failure; the bounded OCR lane finishes all 856 "
-            "candidates. The deterministic 40-row human-review packet remains blank and "
+            "120,757 contents without failure. A content-deduplicated profile rehashes "
+            "raw and native CAS bytes, retains 122,288 machine-language candidates and "
+            "319 explicit unknown instances, observes encryption for all 1,437 PDFs, "
+            "and marks all 120,757 contents unreviewed. Independent full replay has zero "
+            "mismatch, and two immutable profile generations retain one exact "
+            "predecessor/supersession chain. Machine candidates are sampling evidence, "
+            "not human ground truth. The bounded OCR lane finishes all 856 candidates. "
+            "The deterministic 40-row human-review packet remains blank and "
             "pending, so no machine label or invented decision is promoted. Incremental "
             "replay reuses checksum-identical rows instead of reparsing unchanged files."
         ),
@@ -297,6 +303,14 @@ PROJECT_FACTS = [
             Evidence(
                 source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-validation.json",
                 detail="Independent full native-text manifest and CAS validation for the current real corpus.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-language-encryption-validation.json",
+                detail="Independent full raw/CAS replay of every machine-language candidate and every PDF encryption observation.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-profile-generation-audit.json",
+                detail="Two retained profile generations, predecessor linkage, restored state, full shards, and zero lifecycle debris.",
             ),
             Evidence(
                 source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-validation.json",
@@ -2156,6 +2170,36 @@ PROJECT_WORKFLOWS = [
 
 
 PROJECT_GOTCHAS = [
+    Gotcha(
+        name="Do not mix host and container access to one live SQLite WAL state",
+        description=(
+            "`single-runtime SQLite state` is required for long document queues on a "
+            "bind-mounted database. Concurrent host inspection while a container owns "
+            "the live WAL state can produce unsafe cross-runtime locking behavior; the "
+            "first document-profile attempt was quarantined after SQLite quick_check "
+            "reported malformed structures. This state is never counted as evidence."
+        ),
+        mitigation=(
+            "Run the producer and all live state inspection in one runtime namespace. "
+            "Use emitted progress instead of opening the live database elsewhere. After "
+            "the writer exits, run quick_check before reuse; quarantine any failed state "
+            "without deleting it, then resume from a new database."
+        ),
+        evidence=[
+            Evidence(
+                source="justfile",
+                detail="Document profile producer, validator, and lifecycle recipes run in the same host runtime.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/reports/million-scale-foundation-and-real-document-run.md",
+                detail="Profile closeout records the quarantined container state and successful host-only replacement.",
+            ),
+        ],
+        references={
+            "single-runtime SQLite state": "fact.Project is static and SQLite first"
+        },
+        updated_at=UPDATED,
+    ),
     Gotcha(
         name="Keep volatile telemetry out of semantic manifests",
         description=(
