@@ -1,0 +1,62 @@
+{
+  "backend": "filesystem",
+  "checks": {
+    "all_manifest_bytes_restored": true,
+    "all_manifest_objects_restored_and_checksum_verified": true,
+    "all_object_classes_reconciled": true,
+    "bounded_scratch_space_used": true,
+    "no_synthetic_or_mock_records": true,
+    "official_public_domain_personal_information_retained": true
+  },
+  "clean_room_restore_mechanics_proven": true,
+  "durable_public_origin_proven": false,
+  "generated_at": "2026-08-30T06:41:25.416088Z",
+  "manifest": {
+    "bytes": 5902869836,
+    "bytes_by_class": {
+      "native_text": 590193322,
+      "ocr_text": 14853,
+      "raw_document": 5312661661
+    },
+    "inventory_sha256": "d33d2791b021d075280869f98c95cd9fb2e5154d09dc8d0a8bcc23cd69f195f4",
+    "max_object_bytes": 59735955,
+    "objects_by_class": {
+      "native_text": 119338,
+      "ocr_text": 131,
+      "raw_document": 120757
+    },
+    "path": "real-document-origin-replicas.json",
+    "rows": 240226,
+    "sha256": "83401a2eff6ad45a16e00e8b8352fe0f5430ad589e0064b9b431752c38705181"
+  },
+  "next_action": "Repeat this exact full restore from an authorized immutable public origin. Filesystem-origin proof is local mechanics only, not durable recovery.",
+  "performance": {
+    "batch_size": 48,
+    "elapsed_seconds": 58.161139,
+    "workers": 12
+  },
+  "policy": {
+    "bounded_scratch_restore": true,
+    "filesystem_backend_is_local_drill_only": true,
+    "official_public_domain_personal_information_retained": true,
+    "synthetic_or_mock_records_counted": false
+  },
+  "preflight": {
+    "bounded_scratch_bytes": 716831460,
+    "free_bytes": 23853117440,
+    "headroom_bytes": 12398867740,
+    "minimum_free_after_restore_bytes": 10737418240
+  },
+  "remote_publication_performed": false,
+  "restored": {
+    "bytes": 5902869836,
+    "objects": 240226,
+    "objects_by_class": {
+      "native_text": 119338,
+      "ocr_text": 131,
+      "raw_document": 120757
+    }
+  },
+  "schema_version": "real_document_origin_clean_restore_v1",
+  "status": "ok"
+}

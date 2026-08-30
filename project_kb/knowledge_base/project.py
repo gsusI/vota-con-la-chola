@@ -2521,7 +2521,11 @@ PROJECT_GOTCHAS = [
             "supersession. Native and OCR now use the same terminal-only activation "
             "boundary, bounded gzip shards, immutable receipts, checksum-addressed "
             "SQLite state snapshots, restored-state quick checks, and fail-closed "
-            "input identities while reusing content-addressed output safely."
+            "input identities while reusing content-addressed output safely. The "
+            "complete local origin lane adds a resumable 240,226-object queue, 25 "
+            "bounded replica-manifest shards, a restorable queue snapshot, and a "
+            "full 5,902,869,836-byte bounded clean restore without claiming that a "
+            "same-machine filesystem origin is durable public recovery."
         ),
         mitigation=(
             "Shard large manifests and execution state by deterministic generation, "
@@ -2557,6 +2561,18 @@ PROJECT_GOTCHAS = [
             Evidence(
                 source="tests/test_real_document_generation_lifecycle.py",
                 detail="Real captured rows prove interrupted activation availability, retained candidate state, and non-destructive supersession.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-origin-replication.json",
+                detail="Exact raw, native, and OCR local-origin queue totals, sharded activation, and zero-failure replication.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-origin-clean-restore.json",
+                detail="Full bounded restore rehashes every current object and byte while keeping durable-public-origin false.",
+            ),
+            Evidence(
+                source="tests/test_real_document_origin_replication.py",
+                detail="Real production raw, native, and OCR objects prove replication, activation, audit, and clean restore without invented fixtures.",
             ),
             Evidence(
                 source="docs/etl/sprints/SCALE-FOUNDATION-20260810/reports/million-scale-foundation-and-real-document-run.md",

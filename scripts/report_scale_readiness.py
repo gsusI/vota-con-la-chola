@@ -612,6 +612,9 @@ def audit_document_provenance_gap(
         "page_ocr",
         "page_ocr_validation",
         "page_ocr_generation_audit",
+        "local_origin_replication",
+        "local_origin_generation_audit",
+        "local_origin_clean_restore",
         "ocr_review",
         "ocr_review_validation",
         "fetch_cohort",
@@ -649,6 +652,9 @@ def audit_document_provenance_gap(
     page_ocr = payloads["page_ocr"]
     page_ocr_validation = payloads["page_ocr_validation"]
     page_ocr_generation_audit = payloads["page_ocr_generation_audit"]
+    local_origin_replication = payloads["local_origin_replication"]
+    local_origin_generation_audit = payloads["local_origin_generation_audit"]
+    local_origin_clean_restore = payloads["local_origin_clean_restore"]
     ocr_review = payloads["ocr_review"]
     ocr_review_validation = payloads["ocr_review_validation"]
     fetch_cohort = payloads["fetch_cohort"]
@@ -735,6 +741,18 @@ def audit_document_provenance_gap(
             "real_document_generation_lifecycle_audit_v1",
             {"ok"},
         ),
+        "local_origin_replication": (
+            "real_document_origin_replication_v1",
+            {"ok"},
+        ),
+        "local_origin_generation_audit": (
+            "real_document_generation_lifecycle_audit_v1",
+            {"ok"},
+        ),
+        "local_origin_clean_restore": (
+            "real_document_origin_clean_restore_v1",
+            {"ok"},
+        ),
         "ocr_review": (
             "real_document_page_ocr_human_review_queue_v1",
             {"ready_for_human_review"},
@@ -773,6 +791,12 @@ def audit_document_provenance_gap(
             "page_ocr",
             page_ocr,
         ),
+        (
+            "local_origin_generation_audit",
+            local_origin_generation_audit,
+            "real_document_origin_replicas",
+            local_origin_replication,
+        ),
     ):
         lifecycle_input = payload.get("input") or {}
         lifecycle_mode = payload.get("mode") or {}
@@ -805,6 +829,43 @@ def audit_document_provenance_gap(
             or int(lifecycle_totals.get("retained_state_snapshots") or 0) < 1
         ):
             raise ReadinessError(f"document {key} lifecycle contract failed")
+
+    origin_manifest = local_origin_replication.get("manifest") or {}
+    origin_seeded = local_origin_replication.get("seeded") or {}
+    origin_states = local_origin_replication.get("state_counts") or {}
+    restore_manifest = local_origin_clean_restore.get("manifest") or {}
+    restored = local_origin_clean_restore.get("restored") or {}
+    expected_origin_classes = {
+        "raw_document": 120_757,
+        "native_text": 119_338,
+        "ocr_text": 131,
+    }
+    if (
+        local_origin_replication.get("backend") != "filesystem"
+        or local_origin_replication.get("durable_public_origin_proven") is not False
+        or local_origin_replication.get("clean_room_restore_proven") is not False
+        or (local_origin_replication.get("policy") or {}).get(
+            "remote_publication_performed"
+        )
+        is not False
+        or origin_seeded.get("total") != sum(expected_origin_classes.values())
+        or {key: origin_seeded.get(key) for key in expected_origin_classes}
+        != expected_origin_classes
+        or origin_states != {"succeeded": sum(expected_origin_classes.values())}
+        or origin_manifest.get("rows") != sum(expected_origin_classes.values())
+        or local_origin_clean_restore.get("backend") != "filesystem"
+        or local_origin_clean_restore.get("durable_public_origin_proven") is not False
+        or local_origin_clean_restore.get("clean_room_restore_mechanics_proven")
+        is not True
+        or local_origin_clean_restore.get("remote_publication_performed") is not False
+        or restore_manifest.get("sha256") != origin_manifest.get("sha256")
+        or restore_manifest.get("rows") != origin_manifest.get("rows")
+        or restore_manifest.get("objects_by_class") != expected_origin_classes
+        or restored.get("objects") != origin_manifest.get("rows")
+        or restored.get("objects_by_class") != expected_origin_classes
+        or restored.get("bytes") != restore_manifest.get("bytes")
+    ):
+        raise ReadinessError("document local origin and clean-restore contract failed")
 
     fetch_policy = fetch_cohort.get("policy") or {}
     fetch_run_totals = fetch_run.get("totals") or {}

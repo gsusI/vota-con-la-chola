@@ -547,6 +547,12 @@ scale_pdf_ocr_routing_benchmark := env_var_or_default("SCALE_PDF_OCR_ROUTING_BEN
 scale_document_workers := env_var_or_default("SCALE_DOCUMENT_WORKERS", "8")
 scale_document_text_state_db := env_var_or_default("SCALE_DOCUMENT_TEXT_STATE_DB", "etl/data/staging/real-document-text-corpus-v6-20260830.db")
 scale_document_ocr_state_db := env_var_or_default("SCALE_DOCUMENT_OCR_STATE_DB", "etl/data/staging/real-document-page-ocr-v8-20260830.db")
+scale_document_origin_state_db := env_var_or_default("SCALE_DOCUMENT_ORIGIN_STATE_DB", "etl/data/staging/real-document-origin-replication-v1.db")
+scale_document_origin_filesystem_root := env_var_or_default("SCALE_DOCUMENT_ORIGIN_FILESYSTEM_ROOT", "etl/data/object-origin/real-document-corpus-v1")
+scale_document_origin_manifest := env_var_or_default("SCALE_DOCUMENT_ORIGIN_MANIFEST", "etl/data/manifests/real-document-origin-replicas.json")
+scale_document_origin_replication_report := env_var_or_default("SCALE_DOCUMENT_ORIGIN_REPLICATION_REPORT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-origin-replication.json")
+scale_document_origin_restore_report := env_var_or_default("SCALE_DOCUMENT_ORIGIN_RESTORE_REPORT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-origin-clean-restore.json")
+scale_document_origin_generation_audit := env_var_or_default("SCALE_DOCUMENT_ORIGIN_GENERATION_AUDIT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-origin-generation-audit.json")
 wayback_document_timeout := env_var_or_default("WAYBACK_DOCUMENT_TIMEOUT", "30")
 wayback_document_attempts := env_var_or_default("WAYBACK_DOCUMENT_ATTEMPTS", "2")
 wayback_document_args := env_var_or_default("WAYBACK_DOCUMENT_ARGS", "")
@@ -2464,6 +2470,15 @@ etl-scale-prepare-document-page-ocr-review:
 
 etl-scale-validate-document-page-ocr-review:
   python3 scripts/validate_real_document_ocr_review.py --enforce-integrity
+
+etl-scale-replicate-document-origin-local:
+  python3 scripts/replicate_real_document_origin.py --state-db {{scale_document_origin_state_db}} --backend filesystem --filesystem-root {{scale_document_origin_filesystem_root}} --workers 12 --claim-size 48 --manifest-out {{scale_document_origin_manifest}} --report-out {{scale_document_origin_replication_report}} --enforce
+
+etl-scale-restore-document-origin-local:
+  python3 scripts/verify_real_document_origin_restore.py --manifest {{scale_document_origin_manifest}} --backend filesystem --filesystem-root {{scale_document_origin_filesystem_root}} --workers 12 --batch-size 48 --report-out {{scale_document_origin_restore_report}} --enforce
+
+etl-scale-audit-document-origin-generation:
+  python3 scripts/audit_real_document_generation_lifecycle.py real_document_origin_replicas --manifest {{scale_document_origin_manifest}} --report-out {{scale_document_origin_generation_audit}} --full-shard-check --full-state-check --enforce
 
 etl-scale-require-document-page-ocr-review:
   python3 scripts/validate_real_document_ocr_review.py --enforce-integrity --require-complete

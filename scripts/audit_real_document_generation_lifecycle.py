@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Audit immutable native-text or OCR generation activation and restore state."""
+"""Audit immutable document generation activation and restorable control state."""
 
 from __future__ import annotations
 
@@ -23,6 +23,14 @@ DEFAULT_REPORT_ROOT = Path("docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence"
 MANIFESTS = {
     "native_text": Path("etl/data/published/real-document-text-manifest-latest.jsonl"),
     "page_ocr": Path("etl/data/published/real-document-page-ocr-manifest-latest.jsonl"),
+    "real_document_origin_replicas": Path(
+        "etl/data/manifests/real-document-origin-replicas.json"
+    ),
+}
+REPORT_NAMES = {
+    "native_text": "real-document-text-generation-audit.json",
+    "page_ocr": "real-document-page-ocr-generation-audit.json",
+    "real_document_origin_replicas": "real-document-origin-generation-audit.json",
 }
 
 
@@ -56,11 +64,7 @@ def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
     dataset = str(args.dataset)
     manifest = Path(args.manifest) if args.manifest else MANIFESTS[dataset]
-    report_name = (
-        "real-document-text-generation-audit.json"
-        if dataset == "native_text"
-        else "real-document-page-ocr-generation-audit.json"
-    )
+    report_name = REPORT_NAMES[dataset]
     report_out = (
         Path(args.report_out) if args.report_out else DEFAULT_REPORT_ROOT / report_name
     )
