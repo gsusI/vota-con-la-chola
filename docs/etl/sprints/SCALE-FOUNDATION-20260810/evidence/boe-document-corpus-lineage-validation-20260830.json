@@ -1,0 +1,33 @@
+{
+  "checks": {
+    "manifest_schema_supported": true,
+    "no_synthetic_or_mock_rows": true,
+    "partition_checksums_and_rows_valid": true,
+    "partition_paths_unique_and_bounded": true,
+    "policy_retains_official_public_information": true,
+    "raw_captures_checksum_verified": true,
+    "source_urls_strictly_ordered": true,
+    "totals_reconcile": true
+  },
+  "generated_at": "2026-08-30T04:40:28.961271+00:00",
+  "input": {
+    "bytes": 7717,
+    "path": "etl/data/manifests/boe-document-corpus-lineage-manifest.json",
+    "sha256": "0d2cf2080e3c4a85e03066c51a263469cf21c7daab55d7655502af03a4554605"
+  },
+  "mode": {
+    "full_raw_check": true
+  },
+  "schema_version": "boe_document_corpus_lineage_validation_v1",
+  "status": "ok",
+  "totals": {
+    "compressed_lineage_bytes": 16081029,
+    "distinct_content_objects": 100051,
+    "distinct_summary_captures": 1156,
+    "document_bytes": 3064836413,
+    "logical_sha256": "99739ca6ac462edada2d20e61be6f81c9404689405632751da4b6bc54d5848f4",
+    "rows": 100051,
+    "shard_files": 11,
+    "uncompressed_lineage_bytes": 234632869
+  }
+}

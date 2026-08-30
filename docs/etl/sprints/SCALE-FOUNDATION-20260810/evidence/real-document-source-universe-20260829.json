@@ -1,7 +1,7 @@
 {
   "schema_version": "real_document_source_universe_v1",
   "status": "ready_for_numeric_cohort_preparation",
-  "generated_at": "2026-08-30T04:04:36.008403Z",
+  "generated_at": "2026-08-30T04:41:37.995972Z",
   "policy": {
     "official_real_urls_only": true,
     "synthetic_or_mock_records_counted": false,
@@ -13,13 +13,13 @@
   "inputs": {
     "provenance_audit": {
       "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-provenance-audit.json",
-      "bytes": 28369,
-      "sha256": "af36c442afd8fe3d190b42ee76f245659a86fa1af5ace8175ac65fce6a09dfdd"
+      "bytes": 28372,
+      "sha256": "fa7cec80b25e2977b5449b33be4a9229cac49e28840fbfbfa9c8643599d9bac3"
     },
     "edge_manifest": {
       "path": "etl/data/manifests/real-document-provenance-edges.jsonl",
-      "bytes": 253262872,
-      "sha256": "392af27ccb113a425d39ea96e0163f14b8101e5b756da81347463d4781a88578"
+      "bytes": 254072528,
+      "sha256": "05a30252ac0d8e5303709b84ff545f78bb85c2d82115778eac2f01939cb1a96b"
     },
     "host_health": {
       "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-host-health-20260829.json",
@@ -953,9 +953,9 @@
   "performance": {
     "staging": "disk_backed_sqlite",
     "edge_batch_rows": 10000,
-    "wall_seconds": 2.763151,
-    "cpu_seconds": 2.7588,
-    "peak_rss_bytes": 49037312
+    "wall_seconds": 2.800898,
+    "cpu_seconds": 2.796335,
+    "peak_rss_bytes": 49119232
   },
   "errors": []
 }

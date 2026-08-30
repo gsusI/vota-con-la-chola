@@ -23,11 +23,11 @@
   "boe_document_corpus_lineage_manifests": [
     {
       "accepted_checksum_captures": 100051,
-      "bytes": 234632869,
+      "bytes": 7717,
       "distinct_content_objects": 100051,
-      "path": "etl/data/manifests/boe-document-corpus-lineage.jsonl",
+      "path": "etl/data/manifests/boe-document-corpus-lineage-manifest.json",
       "rows": 100051,
-      "sha256": "99739ca6ac462edada2d20e61be6f81c9404689405632751da4b6bc54d5848f4",
+      "sha256": "0d2cf2080e3c4a85e03066c51a263469cf21c7daab55d7655502af03a4554605",
       "status": "ok"
     }
   ],
@@ -260,10 +260,10 @@
     }
   ],
   "edge_manifest": {
-    "bytes": 253262872,
+    "bytes": 254072528,
     "path": "etl/data/manifests/real-document-provenance-edges.jsonl",
     "rows": 337701,
-    "sha256": "392af27ccb113a425d39ea96e0163f14b8101e5b756da81347463d4781a88578"
+    "sha256": "05a30252ac0d8e5303709b84ff545f78bb85c2d82115778eac2f01939cb1a96b"
   },
   "embedded_official_urls": {
     "already_checksum_linked": 6890,
@@ -361,7 +361,7 @@
     "rows": 122607,
     "sha256": "bf2f0483bdea7bf6e3bac9abbd636af5d87c862d1eba569c15315145b722f466"
   },
-  "generated_at": "2026-08-30T04:02:03.301913+00:00",
+  "generated_at": "2026-08-30T04:41:19.154663+00:00",
   "inventory": {
     "bytes": 82987794,
     "path": "etl/data/manifests/real-document-format-inventory.jsonl",

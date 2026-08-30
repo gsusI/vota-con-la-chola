@@ -3,10 +3,12 @@
 from __future__ import annotations
 
 import argparse
+import gzip
 import hashlib
 import json
 import os
 import re
+import shutil
 import sqlite3
 import sys
 import tempfile
@@ -29,7 +31,9 @@ from publicdata_ops import (
 from publicdata_sqlite import open_db, table_exists
 
 DEFAULT_DB = Path("etl/data/staging/politicos-es.db")
-DEFAULT_MANIFEST = Path("etl/data/manifests/boe-document-corpus-lineage.jsonl")
+DEFAULT_MANIFEST = Path("etl/data/manifests/boe-document-corpus-lineage-manifest.json")
+DEFAULT_MANIFEST_SHARD_MAX_ROWS = 10_000
+DEFAULT_MANIFEST_SHARD_MAX_UNCOMPRESSED_BYTES = 64 * 1024 * 1024
 DEFAULT_REPORT = Path(
     "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-document-corpus.json"
 )
@@ -78,6 +82,16 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--batch-size", type=int, default=1000)
     parser.add_argument("--max-attempts", type=int, default=3)
     parser.add_argument("--manifest-out", default=str(DEFAULT_MANIFEST))
+    parser.add_argument(
+        "--manifest-shard-max-rows",
+        type=int,
+        default=DEFAULT_MANIFEST_SHARD_MAX_ROWS,
+    )
+    parser.add_argument(
+        "--manifest-shard-max-uncompressed-bytes",
+        type=int,
+        default=DEFAULT_MANIFEST_SHARD_MAX_UNCOMPRESSED_BYTES,
+    )
     parser.add_argument("--report-out", default=str(DEFAULT_REPORT))
     parser.add_argument("--enforce", action="store_true")
     return parser.parse_args(argv)
@@ -127,6 +141,171 @@ def atomic_write_jsonl(path: Path, rows: Any) -> None:
     finally:
         if os.path.exists(temp_name):
             os.unlink(temp_name)
+
+
+def atomic_write_json(path: Path, payload: dict[str, Any]) -> None:
+    atomic_write_text(
+        path,
+        json.dumps(payload, ensure_ascii=True, indent=2, sort_keys=True) + "\n",
+    )
+
+
+def _publish_content_addressed_shards(
+    *,
+    staging_dir: Path,
+    output_path: Path,
+    logical_sha256: str,
+    staged_shards: list[dict[str, Any]],
+) -> tuple[Path, list[dict[str, Any]]]:
+    generation_root = output_path.parent / f"{output_path.stem}-data"
+    generation_root.mkdir(parents=True, exist_ok=True)
+    final_dir = generation_root / logical_sha256
+    if final_dir.exists():
+        for shard in staged_shards:
+            staged_path = staging_dir / str(shard["name"])
+            final_path = final_dir / str(shard["name"])
+            if (
+                not final_path.is_file()
+                or final_path.stat().st_size != staged_path.stat().st_size
+                or sha256_file(final_path) != sha256_file(staged_path)
+            ):
+                raise BoeCorpusError(
+                    "content-addressed BOE lineage generation collision"
+                )
+        shutil.rmtree(staging_dir)
+    else:
+        os.replace(staging_dir, final_dir)
+    published: list[dict[str, Any]] = []
+    for shard in staged_shards:
+        published.append(
+            {
+                **{key: value for key, value in shard.items() if key != "name"},
+                "path": display_path(final_dir / str(shard["name"])),
+            }
+        )
+    return final_dir, published
+
+
+def write_partitioned_lineage_manifest(
+    *,
+    output_path: Path,
+    rows: Any,
+    max_rows: int,
+    max_uncompressed_bytes: int,
+) -> dict[str, Any]:
+    if max_rows < 1 or max_uncompressed_bytes < 1:
+        raise BoeCorpusError("BOE manifest shard bounds must be positive")
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    staging_dir = Path(
+        tempfile.mkdtemp(prefix=f".{output_path.stem}-", dir=output_path.parent)
+    )
+    shards: list[dict[str, Any]] = []
+    logical_digest = hashlib.sha256()
+    total_rows = 0
+    total_uncompressed_bytes = 0
+    shard_handle: Any = None
+    shard_raw_handle: Any = None
+    shard_path: Path | None = None
+    shard_rows = 0
+    shard_uncompressed_bytes = 0
+    shard_digest = hashlib.sha256()
+    shard_first_source_url = ""
+    shard_last_source_url = ""
+
+    def open_shard() -> None:
+        nonlocal shard_handle, shard_raw_handle, shard_path
+        nonlocal shard_rows, shard_uncompressed_bytes, shard_digest
+        nonlocal shard_first_source_url, shard_last_source_url
+        shard_path = staging_dir / f"part-{len(shards):05d}.jsonl.gz"
+        shard_raw_handle = shard_path.open("wb")
+        shard_handle = gzip.GzipFile(
+            filename="", mode="wb", fileobj=shard_raw_handle, mtime=0
+        )
+        shard_rows = 0
+        shard_uncompressed_bytes = 0
+        shard_digest = hashlib.sha256()
+        shard_first_source_url = ""
+        shard_last_source_url = ""
+
+    def close_shard() -> None:
+        nonlocal shard_handle, shard_raw_handle, shard_path
+        if shard_handle is None or shard_raw_handle is None or shard_path is None:
+            return
+        shard_handle.close()
+        shard_raw_handle.flush()
+        os.fsync(shard_raw_handle.fileno())
+        shard_raw_handle.close()
+        shards.append(
+            {
+                "name": shard_path.name,
+                "rows": shard_rows,
+                "bytes": shard_path.stat().st_size,
+                "sha256": sha256_file(shard_path),
+                "uncompressed_bytes": shard_uncompressed_bytes,
+                "uncompressed_sha256": shard_digest.hexdigest(),
+                "first_source_url": shard_first_source_url,
+                "last_source_url": shard_last_source_url,
+            }
+        )
+        shard_handle = None
+        shard_raw_handle = None
+        shard_path = None
+
+    try:
+        for row in rows:
+            encoded = (
+                json.dumps(row, ensure_ascii=True, sort_keys=True) + "\n"
+            ).encode("utf-8")
+            if shard_handle is None:
+                open_shard()
+            elif shard_rows > 0 and (
+                shard_rows >= max_rows
+                or shard_uncompressed_bytes + len(encoded) > max_uncompressed_bytes
+            ):
+                close_shard()
+                open_shard()
+            source_url = str(row.get("source_url") or "")
+            if not shard_first_source_url:
+                shard_first_source_url = source_url
+            shard_last_source_url = source_url
+            shard_handle.write(encoded)
+            shard_digest.update(encoded)
+            logical_digest.update(encoded)
+            shard_rows += 1
+            shard_uncompressed_bytes += len(encoded)
+            total_rows += 1
+            total_uncompressed_bytes += len(encoded)
+        close_shard()
+        if total_rows < 1:
+            raise BoeCorpusError("BOE lineage manifest cannot be empty")
+        final_dir, published_shards = _publish_content_addressed_shards(
+            staging_dir=staging_dir,
+            output_path=output_path,
+            logical_sha256=logical_digest.hexdigest(),
+            staged_shards=shards,
+        )
+    except Exception:
+        if shard_handle is not None:
+            shard_handle.close()
+        if shard_raw_handle is not None and not shard_raw_handle.closed:
+            shard_raw_handle.close()
+        if staging_dir.exists():
+            shutil.rmtree(staging_dir)
+        raise
+    return {
+        "layout": "partitioned_jsonl_gzip_v1",
+        "rows": total_rows,
+        "uncompressed_bytes": total_uncompressed_bytes,
+        "logical_sha256": logical_digest.hexdigest(),
+        "shard_root": display_path(final_dir),
+        "shard_files": len(published_shards),
+        "compressed_bytes": sum(int(item["bytes"]) for item in published_shards),
+        "partitions": published_shards,
+        "bounds": {
+            "max_rows": max_rows,
+            "max_uncompressed_bytes": max_uncompressed_bytes,
+        },
+    }
 
 
 def sha256_file(path: Path) -> str:
@@ -483,9 +662,7 @@ def expand_documents(
     return {
         **counters,
         "requested_boe_ids": sorted(requested_boe_ids),
-        "selected_boe_ids": (
-            sorted(selected_counts) if requested_boe_ids else []
-        ),
+        "selected_boe_ids": (sorted(selected_counts) if requested_boe_ids else []),
         "selected_boe_ids_complete": bool(requested_boe_ids),
         "selected_boe_ids_count": counters["documents_selected"],
         "selected_boe_ids_ordered_stream_sha256": selected_ids_digest.hexdigest(),
@@ -670,7 +847,11 @@ def requeue_document_transient_failures(
 
 
 def export_manifest(
-    connection: sqlite3.Connection, *, output_path: Path
+    connection: sqlite3.Connection,
+    *,
+    output_path: Path,
+    shard_max_rows: int = DEFAULT_MANIFEST_SHARD_MAX_ROWS,
+    shard_max_uncompressed_bytes: int = DEFAULT_MANIFEST_SHARD_MAX_UNCOMPRESSED_BYTES,
 ) -> dict[str, Any]:
     summary_captures: dict[str, dict[str, Any]] = {}
     for summary in iter_summary_rows(
@@ -777,12 +958,47 @@ def export_manifest(
                 "remote_mutation_performed": False,
             }
 
-    atomic_write_jsonl(output_path, manifest_rows())
+    partitioned = write_partitioned_lineage_manifest(
+        output_path=output_path,
+        rows=manifest_rows(),
+        max_rows=shard_max_rows,
+        max_uncompressed_bytes=shard_max_uncompressed_bytes,
+    )
     totals = source_totals(connection, DOCUMENT_SOURCE_ID)
     if validated_rows != totals["rows"]:
         raise BoeCorpusError("BOE manifest row count drifted during export")
+    if partitioned["rows"] != validated_rows:
+        raise BoeCorpusError("BOE partitioned manifest row count drifted")
+    manifest_payload = {
+        "schema_version": "boe_document_corpus_lineage_manifest_v1",
+        "layout": partitioned["layout"],
+        "policy": {
+            "official_boe_https_only": True,
+            "checksum_and_byte_verification_required": True,
+            "official_public_domain_personal_information_retained": True,
+            "synthetic_or_mock_records_counted": False,
+            "remote_mutation_performed": False,
+        },
+        "totals": {
+            "rows": validated_rows,
+            "distinct_content_objects": totals["distinct_content_objects"],
+            "distinct_summary_captures": len(referenced_summary_urls),
+            "available_summary_captures": len(summary_captures),
+            "document_bytes": totals["bytes"],
+            "uncompressed_lineage_bytes": partitioned["uncompressed_bytes"],
+            "compressed_lineage_bytes": partitioned["compressed_bytes"],
+            "shard_files": partitioned["shard_files"],
+        },
+        "logical_sha256": partitioned["logical_sha256"],
+        "shard_root": partitioned["shard_root"],
+        "bounds": partitioned["bounds"],
+        "partitions": partitioned["partitions"],
+    }
+    atomic_write_json(output_path, manifest_payload)
     return {
         "path": display_path(output_path),
+        "schema_version": manifest_payload["schema_version"],
+        "layout": partitioned["layout"],
         "rows": validated_rows,
         "distinct_content_objects": totals["distinct_content_objects"],
         "distinct_summary_captures": len(referenced_summary_urls),
@@ -790,6 +1006,12 @@ def export_manifest(
         "document_bytes": totals["bytes"],
         "bytes": output_path.stat().st_size,
         "sha256": sha256_file(output_path),
+        "logical_sha256": partitioned["logical_sha256"],
+        "shard_root": partitioned["shard_root"],
+        "shard_files": partitioned["shard_files"],
+        "compressed_bytes": partitioned["compressed_bytes"],
+        "uncompressed_bytes": partitioned["uncompressed_bytes"],
+        "bounds": partitioned["bounds"],
     }
 
 
@@ -831,6 +1053,14 @@ def build_report(
     checks = {
         "manifest_matches_document_rows": (
             manifest["rows"] == source_totals(connection, DOCUMENT_SOURCE_ID)["rows"]
+        ),
+        "manifest_is_partitioned_and_bounded": (
+            manifest.get("schema_version") == "boe_document_corpus_lineage_manifest_v1"
+            and manifest.get("layout") == "partitioned_jsonl_gzip_v1"
+            and int(manifest.get("shard_files") or 0) > 0
+            and int((manifest.get("bounds") or {}).get("max_rows") or 0) > 0
+            and int((manifest.get("bounds") or {}).get("max_uncompressed_bytes") or 0)
+            > 0
         ),
         "manifest_references_every_summary_capture": (
             mode != "status"
@@ -882,9 +1112,16 @@ def build_report(
 
 def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
-    if args.limit < 0 or args.batch_size < 1 or args.max_attempts < 1:
+    if (
+        args.limit < 0
+        or args.batch_size < 1
+        or args.max_attempts < 1
+        or args.manifest_shard_max_rows < 1
+        or args.manifest_shard_max_uncompressed_bytes < 1
+    ):
         print(
-            "ERROR: limit must be nonnegative; batch-size/max-attempts must be positive"
+            "ERROR: limit must be nonnegative; batch-size/max-attempts/manifest "
+            "shard bounds must be positive"
         )
         return 2
     try:
@@ -954,7 +1191,12 @@ def main(argv: list[str] | None = None) -> int:
                     )
                 operation = {"status_only": True}
             manifest = export_manifest(
-                connection, output_path=repo_path(args.manifest_out)
+                connection,
+                output_path=repo_path(args.manifest_out),
+                shard_max_rows=args.manifest_shard_max_rows,
+                shard_max_uncompressed_bytes=(
+                    args.manifest_shard_max_uncompressed_bytes
+                ),
             )
             report = build_report(
                 connection,

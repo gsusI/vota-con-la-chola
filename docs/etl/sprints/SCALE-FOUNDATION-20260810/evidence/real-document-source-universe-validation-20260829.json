@@ -1,7 +1,7 @@
 {
   "schema_version": "real_document_source_universe_validation_v1",
   "status": "ok",
-  "generated_at": "2026-08-30T04:04:38.883657Z",
+  "generated_at": "2026-08-30T04:41:40.891619Z",
   "policy": {
     "official_real_urls_only": true,
     "synthetic_or_mock_records_counted": false,
@@ -11,13 +11,13 @@
   "inputs": {
     "report": {
       "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-source-universe-20260829.json",
-      "bytes": 28750,
-      "sha256": "a2c28a48116bb81526cbfde22568da4bfc7397225d49b96580474574d3aeb53f"
+      "bytes": 28752,
+      "sha256": "a287559b04f8b78313e04eca9a1e06d3e8f6f7104367af7d4b4eb48c10e71c46"
     },
     "edge_manifest": {
       "path": "etl/data/manifests/real-document-provenance-edges.jsonl",
-      "bytes": 253262872,
-      "sha256": "392af27ccb113a425d39ea96e0163f14b8101e5b756da81347463d4781a88578"
+      "bytes": 254072528,
+      "sha256": "05a30252ac0d8e5303709b84ff545f78bb85c2d82115778eac2f01939cb1a96b"
     }
   },
   "checks": {

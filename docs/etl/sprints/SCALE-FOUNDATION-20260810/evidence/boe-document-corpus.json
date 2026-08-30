@@ -2,6 +2,7 @@
   "checks": {
     "all_captures_checksum_verified": true,
     "document_queue_complete_without_failures": false,
+    "manifest_is_partitioned_and_bounded": true,
     "manifest_matches_document_rows": true,
     "manifest_references_every_summary_capture": false,
     "no_remote_mutation_performed": true,
@@ -15,16 +16,27 @@
     "distinct_content_objects": 100051,
     "rows": 100051
   },
-  "generated_at": "2026-08-30T03:32:36.254172+00:00",
+  "generated_at": "2026-08-30T04:40:10.484471+00:00",
   "manifest": {
     "available_summary_captures": 1166,
-    "bytes": 234632869,
+    "bounds": {
+      "max_rows": 10000,
+      "max_uncompressed_bytes": 67108864
+    },
+    "bytes": 7717,
+    "compressed_bytes": 16081029,
     "distinct_content_objects": 100051,
     "distinct_summary_captures": 1156,
     "document_bytes": 3064836413,
-    "path": "etl/data/manifests/boe-document-corpus-lineage.jsonl",
+    "layout": "partitioned_jsonl_gzip_v1",
+    "logical_sha256": "99739ca6ac462edada2d20e61be6f81c9404689405632751da4b6bc54d5848f4",
+    "path": "etl/data/manifests/boe-document-corpus-lineage-manifest.json",
     "rows": 100051,
-    "sha256": "99739ca6ac462edada2d20e61be6f81c9404689405632751da4b6bc54d5848f4"
+    "schema_version": "boe_document_corpus_lineage_manifest_v1",
+    "sha256": "0d2cf2080e3c4a85e03066c51a263469cf21c7daab55d7655502af03a4554605",
+    "shard_files": 11,
+    "shard_root": "etl/data/manifests/boe-document-corpus-lineage-manifest-data/99739ca6ac462edada2d20e61be6f81c9404689405632751da4b6bc54d5848f4",
+    "uncompressed_bytes": 234632869
   },
   "mode": "status",
   "operation": {

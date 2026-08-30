@@ -209,8 +209,11 @@ PROJECT_FACTS = [
             "HTTP 404 responses. The document queue contains 100,867 official jobs: "
             "100,051 succeeded, one is dead after three connect timeouts, and 815 remain "
             "unfinished. Current physical promotion therefore fails closed. Its 100,051-row "
-            "portable lineage contains 234,632,869 bytes and references 1,156 of the 1,166 "
-            "successful summaries. Separately, the deterministic 100,000-row acquisition "
+            "portable lineage now uses a 7,717-byte manifest-last index plus 11 immutable "
+            "content-addressed gzip shards / 16,081,029 compressed bytes. Logical SHA-256 "
+            "99739ca6... binds all 234,632,869 uncompressed bytes; independent full validation "
+            "rehashes every shard, document, and referenced summary. It references 1,156 of "
+            "the 1,166 successful summaries. Separately, the deterministic 100,000-row acquisition "
             "plan closes its numeric supply gate with selection SHA-256 "
             "c81d3c0a90222122309a259c791cdbb9ffa900f21f96eed5a12d30a71f314185: "
             "98,748 BOE XML, 1,166 BOE summaries, and 86 Parliament of Andalusia files. "
@@ -247,6 +250,10 @@ PROJECT_FACTS = [
             Evidence(
                 source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-document-corpus.json",
                 detail="Official date cohort, queue reconciliation, and portable manifest evidence.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-document-corpus-lineage-validation-20260830.json",
+                detail="Independent bounded-shard, raw-capture, summary, logical-order, and public-information validation.",
             ),
             Evidence(
                 source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-election-candidates-latest.json",
@@ -2493,12 +2500,13 @@ PROJECT_GOTCHAS = [
         updated_at=UPDATED,
     ),
     Gotcha(
-        name="Million-scale control state cannot remain monolithic",
+        name="Million-scale control state must be sharded and generation-bound",
         description=(
             "`input-bound control state` appears before raw bytes become the only "
-            "problem. The current BOE portable lineage is already 234,632,869 bytes "
-            "for 100,051 rows, and stale embedded state can bind a new run to an old "
-            "input inventory even when output CAS is reusable."
+            "problem. BOE lineage now bounds 100,051 rows / 234,632,869 logical bytes "
+            "behind 11 content-addressed gzip shards and a small index, but stale native/OCR "
+            "state can still bind a new run to an old input inventory even when output CAS "
+            "is reusable. Interrupted reconstruction and supersession remain unproven."
         ),
         mitigation=(
             "Shard large manifests and execution state by deterministic generation, "
@@ -2508,8 +2516,8 @@ PROJECT_GOTCHAS = [
         ),
         evidence=[
             Evidence(
-                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-document-corpus-interim-20260830.json",
-                detail="Current BOE row count, manifest size, incomplete queue, and summary-reference truth.",
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-document-corpus-lineage-validation-20260830.json",
+                detail="Independent shard, row, raw-document, summary, order, bound, and policy validation.",
             ),
             Evidence(
                 source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-validation.json",
@@ -2517,7 +2525,7 @@ PROJECT_GOTCHAS = [
             ),
             Evidence(
                 source="docs/etl/sprints/SCALE-FOUNDATION-20260810/reports/million-scale-foundation-and-real-document-run.md",
-                detail="Current scale-foundation report records the input-bound state boundary and next sharding gate.",
+                detail="Current scale-foundation report records the completed sharding gate and remaining generation lifecycle boundary.",
             ),
         ],
         references={

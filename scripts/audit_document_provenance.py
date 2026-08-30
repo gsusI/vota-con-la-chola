@@ -46,7 +46,7 @@ DEFAULT_WAYBACK_DOCUMENT_LINEAGE_MANIFESTS = (
     ),
 )
 DEFAULT_BOE_DOCUMENT_CORPUS_LINEAGE_MANIFESTS = (
-    Path("etl/data/manifests/boe-document-corpus-lineage.jsonl"),
+    Path("etl/data/manifests/boe-document-corpus-lineage-manifest.json"),
 )
 DEFAULT_CAPTURED_LINK_DOCUMENT_LINEAGE_MANIFESTS = (
     Path(
@@ -1266,6 +1266,142 @@ def load_wayback_document_lineage_manifest(
     }
 
 
+def iter_boe_document_corpus_lineage_items(
+    manifest_path: Path,
+    *,
+    repo_root: Path,
+) -> Iterator[tuple[str, dict[str, Any]]]:
+    if manifest_path.suffix.lower() != ".json":
+        with manifest_path.open("r", encoding="utf-8") as handle:
+            for line_number, line in enumerate(handle, start=1):
+                if not line.strip():
+                    continue
+                try:
+                    item = json.loads(line)
+                except json.JSONDecodeError as exc:
+                    raise ProvenanceAuditError(
+                        f"invalid BOE corpus JSON at line {line_number}: {exc}"
+                    ) from exc
+                if not isinstance(item, dict):
+                    raise ProvenanceAuditError(
+                        f"invalid BOE corpus row at line {line_number}"
+                    )
+                yield f"line {line_number}", item
+        return
+    try:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        raise ProvenanceAuditError(f"invalid BOE corpus manifest: {exc}") from exc
+    policy = manifest.get("policy") or {}
+    partitions = manifest.get("partitions")
+    totals = manifest.get("totals") or {}
+    if (
+        manifest.get("schema_version") != "boe_document_corpus_lineage_manifest_v1"
+        or manifest.get("layout") != "partitioned_jsonl_gzip_v1"
+        or policy.get("official_public_domain_personal_information_retained")
+        is not True
+        or policy.get("synthetic_or_mock_records_counted") is not False
+        or policy.get("remote_mutation_performed") is not False
+        or not isinstance(partitions, list)
+        or not partitions
+    ):
+        raise ProvenanceAuditError("invalid BOE partitioned manifest contract")
+    shard_root = safe_repo_path(
+        str(manifest.get("shard_root") or ""), repo_root=repo_root
+    )
+    if not shard_root.is_dir():
+        raise ProvenanceAuditError("BOE partitioned manifest shard root is missing")
+    logical_digest = hashlib.sha256()
+    observed_rows = 0
+    observed_compressed_bytes = 0
+    observed_uncompressed_bytes = 0
+    seen_paths: set[str] = set()
+    for partition_index, partition in enumerate(partitions):
+        if not isinstance(partition, dict):
+            raise ProvenanceAuditError("invalid BOE partition contract")
+        relative_path = str(partition.get("path") or "")
+        if relative_path in seen_paths:
+            raise ProvenanceAuditError(f"duplicate BOE partition path: {relative_path}")
+        seen_paths.add(relative_path)
+        shard_path = safe_repo_path(relative_path, repo_root=repo_root)
+        try:
+            shard_path.relative_to(shard_root)
+        except ValueError as exc:
+            raise ProvenanceAuditError(
+                f"BOE partition escapes shard root: {relative_path}"
+            ) from exc
+        expected_bytes = int(partition.get("bytes") or -1)
+        expected_sha256 = str(partition.get("sha256") or "").lower()
+        if (
+            not shard_path.is_file()
+            or shard_path.stat().st_size != expected_bytes
+            or not SHA256_RE.fullmatch(expected_sha256)
+            or sha256_file(shard_path) != expected_sha256
+        ):
+            raise ProvenanceAuditError(f"BOE partition drifted: {relative_path}")
+        shard_digest = hashlib.sha256()
+        shard_rows = 0
+        shard_uncompressed_bytes = 0
+        first_source_url = ""
+        last_source_url = ""
+        try:
+            with gzip.open(shard_path, "rb") as handle:
+                for line_number, line in enumerate(handle, start=1):
+                    if not line.strip():
+                        raise ProvenanceAuditError(
+                            f"blank BOE partition row: {relative_path}:{line_number}"
+                        )
+                    shard_digest.update(line)
+                    logical_digest.update(line)
+                    shard_uncompressed_bytes += len(line)
+                    try:
+                        item = json.loads(line)
+                    except json.JSONDecodeError as exc:
+                        raise ProvenanceAuditError(
+                            f"invalid BOE partition JSON: {relative_path}:{line_number}"
+                        ) from exc
+                    if not isinstance(item, dict):
+                        raise ProvenanceAuditError(
+                            f"invalid BOE partition row: {relative_path}:{line_number}"
+                        )
+                    source_url = str(item.get("source_url") or "")
+                    if not first_source_url:
+                        first_source_url = source_url
+                    last_source_url = source_url
+                    shard_rows += 1
+                    observed_rows += 1
+                    yield f"{relative_path}:{line_number}", item
+        except (gzip.BadGzipFile, EOFError, OSError) as exc:
+            raise ProvenanceAuditError(
+                f"cannot read BOE partition {relative_path}: {exc}"
+            ) from exc
+        if (
+            shard_rows != int(partition.get("rows") or -1)
+            or shard_uncompressed_bytes
+            != int(partition.get("uncompressed_bytes") or -1)
+            or shard_digest.hexdigest()
+            != str(partition.get("uncompressed_sha256") or "").lower()
+            or first_source_url != partition.get("first_source_url")
+            or last_source_url != partition.get("last_source_url")
+        ):
+            raise ProvenanceAuditError(
+                f"BOE partition totals drifted at index {partition_index}"
+            )
+        observed_compressed_bytes += expected_bytes
+        observed_uncompressed_bytes += shard_uncompressed_bytes
+    if (
+        observed_rows != int(totals.get("rows") or -1)
+        or len(partitions) != int(totals.get("shard_files") or -1)
+        or observed_compressed_bytes
+        != int(totals.get("compressed_lineage_bytes") or -1)
+        or observed_uncompressed_bytes
+        != int(totals.get("uncompressed_lineage_bytes") or -1)
+        or logical_digest.hexdigest()
+        != str(manifest.get("logical_sha256") or "").lower()
+    ):
+        raise ProvenanceAuditError("BOE partitioned manifest totals drifted")
+
+
 def load_boe_document_corpus_lineage_manifest(
     work: sqlite3.Connection,
     manifest_path: Path,
@@ -1280,168 +1416,159 @@ def load_boe_document_corpus_lineage_manifest(
     manifest_ref = display_path(manifest_path, repo_root=repo_root)
     rows = 0
     accepted = 0
-    distinct_hashes: set[str] = set()
-    with manifest_path.open("r", encoding="utf-8") as handle:
-        for line_number, line in enumerate(handle, start=1):
-            if not line.strip():
-                continue
-            rows += 1
-            try:
-                item = json.loads(line)
-            except json.JSONDecodeError as exc:
-                raise ProvenanceAuditError(
-                    f"invalid BOE corpus JSON at line {line_number}: {exc}"
-                ) from exc
-            capture = item.get("capture")
-            boe_record = item.get("boe_record")
-            summary = item.get("source_summary")
-            source_url = str(item.get("source_url") or "")
-            parsed = urlparse(source_url)
-            boe_ids = parse_qs(parsed.query).get("id") or []
-            normalized_path = normalize_inventory_path(
-                capture.get("path") if isinstance(capture, dict) else None,
-                repo_root=repo_root,
-                inventory_root=inventory_root,
+    work.execute(
+        "CREATE TEMP TABLE IF NOT EXISTS boe_distinct_hashes "
+        "(content_sha256 TEXT PRIMARY KEY) WITHOUT ROWID"
+    )
+    work.execute("DELETE FROM boe_distinct_hashes")
+    for row_ref, item in iter_boe_document_corpus_lineage_items(
+        manifest_path, repo_root=repo_root
+    ):
+        rows += 1
+        capture = item.get("capture")
+        boe_record = item.get("boe_record")
+        summary = item.get("source_summary")
+        source_url = str(item.get("source_url") or "")
+        parsed = urlparse(source_url)
+        boe_ids = parse_qs(parsed.query).get("id") or []
+        normalized_path = normalize_inventory_path(
+            capture.get("path") if isinstance(capture, dict) else None,
+            repo_root=repo_root,
+            inventory_root=inventory_root,
+        )
+        content_sha256 = str(
+            capture.get("sha256") if isinstance(capture, dict) else ""
+        ).lower()
+        declared_bytes = capture.get("bytes") if isinstance(capture, dict) else None
+        summary_url = str(
+            summary.get("source_url") if isinstance(summary, dict) else ""
+        )
+        summary_sha256 = str(
+            summary.get("sha256") if isinstance(summary, dict) else ""
+        ).lower()
+        summary_path = normalize_inventory_path(
+            summary.get("path") if isinstance(summary, dict) else None,
+            repo_root=repo_root,
+            inventory_root=inventory_root,
+        )
+        summary_bytes = summary.get("bytes") if isinstance(summary, dict) else None
+        parsed_summary = urlparse(summary_url)
+        boe_ref = str(
+            boe_record.get("boe_ref") if isinstance(boe_record, dict) else ""
+        ).upper()
+        if (
+            item.get("schema_version") != "boe_document_corpus_lineage_v2"
+            or item.get("capture_status") != "checksum_capture_present"
+            or item.get("source_id") != "boe_document_xml"
+            or item.get("synthetic_or_mock_records_counted") is not False
+            or item.get("official_public_domain_personal_information_retained")
+            is not True
+            or item.get("remote_mutation_performed") is not False
+            or not isinstance(capture, dict)
+            or not isinstance(boe_record, dict)
+            or not isinstance(summary, dict)
+            or parsed.scheme != "https"
+            or (parsed.hostname or "").lower() != "www.boe.es"
+            or parsed.path != "/diario_boe/xml.php"
+            or len(boe_ids) != 1
+            or not re.fullmatch(r"BOE-[A-Z]-\d{4}-\d+", boe_ids[0], flags=re.IGNORECASE)
+            or boe_ref != boe_ids[0].upper()
+            or not normalized_path
+            or not normalized_path.startswith("text_documents/boe_document_xml/")
+            or not SHA256_RE.fullmatch(content_sha256)
+            or not isinstance(declared_bytes, int)
+            or declared_bytes <= 0
+            or parsed_summary.scheme != "https"
+            or (parsed_summary.hostname or "").lower() != "www.boe.es"
+            or not re.fullmatch(
+                r"/datosabiertos/api/boe/sumario/\d{8}",
+                parsed_summary.path,
             )
-            content_sha256 = str(
-                capture.get("sha256") if isinstance(capture, dict) else ""
-            ).lower()
-            declared_bytes = (
-                capture.get("bytes") if isinstance(capture, dict) else None
-            )
-            summary_url = str(
-                summary.get("source_url") if isinstance(summary, dict) else ""
-            )
-            summary_sha256 = str(
-                summary.get("sha256") if isinstance(summary, dict) else ""
-            ).lower()
-            summary_path = normalize_inventory_path(
-                summary.get("path") if isinstance(summary, dict) else None,
-                repo_root=repo_root,
-                inventory_root=inventory_root,
-            )
-            summary_bytes = (
-                summary.get("bytes") if isinstance(summary, dict) else None
-            )
-            parsed_summary = urlparse(summary_url)
-            boe_ref = str(
-                boe_record.get("boe_ref") if isinstance(boe_record, dict) else ""
-            ).upper()
-            if (
-                item.get("schema_version") != "boe_document_corpus_lineage_v2"
-                or item.get("capture_status") != "checksum_capture_present"
-                or item.get("source_id") != "boe_document_xml"
-                or item.get("synthetic_or_mock_records_counted") is not False
-                or item.get("official_public_domain_personal_information_retained")
-                is not True
-                or item.get("remote_mutation_performed") is not False
-                or not isinstance(capture, dict)
-                or not isinstance(boe_record, dict)
-                or not isinstance(summary, dict)
-                or parsed.scheme != "https"
-                or (parsed.hostname or "").lower() != "www.boe.es"
-                or parsed.path != "/diario_boe/xml.php"
-                or len(boe_ids) != 1
-                or not re.fullmatch(
-                    r"BOE-[A-Z]-\d{4}-\d+", boe_ids[0], flags=re.IGNORECASE
-                )
-                or boe_ref != boe_ids[0].upper()
-                or not normalized_path
-                or not normalized_path.startswith(
-                    "text_documents/boe_document_xml/"
-                )
-                or not SHA256_RE.fullmatch(content_sha256)
-                or not isinstance(declared_bytes, int)
-                or declared_bytes <= 0
-                or parsed_summary.scheme != "https"
-                or (parsed_summary.hostname or "").lower() != "www.boe.es"
-                or not re.fullmatch(
-                    r"/datosabiertos/api/boe/sumario/\d{8}",
-                    parsed_summary.path,
-                )
-                or not SHA256_RE.fullmatch(summary_sha256)
-                or not summary_path
-                or not summary_path.startswith(
-                    "text_documents/boe_daily_summaries/"
-                )
-                or not isinstance(summary_bytes, int)
-                or summary_bytes <= 0
-            ):
-                raise ProvenanceAuditError(
-                    f"invalid BOE corpus contract at line {line_number}"
-                )
-            values = (
+            or not SHA256_RE.fullmatch(summary_sha256)
+            or not summary_path
+            or not summary_path.startswith("text_documents/boe_daily_summaries/")
+            or not isinstance(summary_bytes, int)
+            or summary_bytes <= 0
+        ):
+            raise ProvenanceAuditError(f"invalid BOE corpus contract at {row_ref}")
+        values = (
+            manifest_ref,
+            "boe_document_corpus_lineage",
+            normalized_path,
+            content_sha256,
+            "boe_document_xml",
+            source_url,
+            item.get("fetched_at"),
+        )
+        work.execute(
+            """
+                INSERT OR IGNORE INTO provenance(
+                  edge_key, db_ref, table_name, raw_path, normalized_path,
+                  content_sha256, source_id, source_url, fetched_at,
+                  declared_bytes, url_kind
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+            (
+                metadata_edge_key(values),
                 manifest_ref,
                 "boe_document_corpus_lineage",
+                str(capture.get("path") or ""),
                 normalized_path,
                 content_sha256,
                 "boe_document_xml",
                 source_url,
                 item.get("fetched_at"),
-            )
-            work.execute(
-                """
+                declared_bytes,
+                public_url_kind(source_url),
+            ),
+        )
+        accepted += 1
+        work.execute(
+            "INSERT OR IGNORE INTO boe_distinct_hashes(content_sha256) VALUES (?)",
+            (content_sha256,),
+        )
+        summary_values = (
+            manifest_ref,
+            "boe_document_corpus_summary_lineage",
+            summary_path,
+            summary_sha256,
+            "boe_daily_summaries",
+            summary_url,
+            summary.get("fetched_at"),
+        )
+        work.execute(
+            """
                 INSERT OR IGNORE INTO provenance(
                   edge_key, db_ref, table_name, raw_path, normalized_path,
                   content_sha256, source_id, source_url, fetched_at,
                   declared_bytes, url_kind
                 ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """,
-                (
-                    metadata_edge_key(values),
-                    manifest_ref,
-                    "boe_document_corpus_lineage",
-                    str(capture.get("path") or ""),
-                    normalized_path,
-                    content_sha256,
-                    "boe_document_xml",
-                    source_url,
-                    item.get("fetched_at"),
-                    declared_bytes,
-                    public_url_kind(source_url),
-                ),
-            )
-            accepted += 1
-            distinct_hashes.add(content_sha256)
-            summary_values = (
+            (
+                metadata_edge_key(summary_values),
                 manifest_ref,
                 "boe_document_corpus_summary_lineage",
+                str(summary.get("path") or ""),
                 summary_path,
                 summary_sha256,
                 "boe_daily_summaries",
                 summary_url,
                 summary.get("fetched_at"),
-            )
-            work.execute(
-                """
-                INSERT OR IGNORE INTO provenance(
-                  edge_key, db_ref, table_name, raw_path, normalized_path,
-                  content_sha256, source_id, source_url, fetched_at,
-                  declared_bytes, url_kind
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-                """,
-                (
-                    metadata_edge_key(summary_values),
-                    manifest_ref,
-                    "boe_document_corpus_summary_lineage",
-                    str(summary.get("path") or ""),
-                    summary_path,
-                    summary_sha256,
-                    "boe_daily_summaries",
-                    summary_url,
-                    summary.get("fetched_at"),
-                    summary_bytes,
-                    public_url_kind(summary_url),
-                ),
-            )
+                summary_bytes,
+                public_url_kind(summary_url),
+            ),
+        )
     work.commit()
+    distinct_content_objects = int(
+        work.execute("SELECT COUNT(*) FROM boe_distinct_hashes").fetchone()[0]
+    )
     return {
         "path": manifest_ref,
         "bytes": manifest_path.stat().st_size,
         "sha256": sha256_file(manifest_path),
         "rows": rows,
         "accepted_checksum_captures": accepted,
-        "distinct_content_objects": len(distinct_hashes),
+        "distinct_content_objects": distinct_content_objects,
         "status": "ok",
     }
 

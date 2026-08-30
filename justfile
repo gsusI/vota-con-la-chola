@@ -560,6 +560,10 @@ boe_document_progress_min_interval_seconds := env_var_or_default("BOE_DOCUMENT_P
 boe_document_max_items := env_var_or_default("BOE_DOCUMENT_MAX_ITEMS", "5000")
 boe_document_min_free_bytes := env_var_or_default("BOE_DOCUMENT_MIN_FREE_BYTES", "10737418240")
 boe_document_report := env_var_or_default("BOE_DOCUMENT_REPORT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-document-corpus.json")
+boe_document_manifest := env_var_or_default("BOE_DOCUMENT_MANIFEST", "etl/data/manifests/boe-document-corpus-lineage-manifest.json")
+boe_document_manifest_validation := env_var_or_default("BOE_DOCUMENT_MANIFEST_VALIDATION", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-document-corpus-lineage-validation-20260830.json")
+boe_document_manifest_shard_max_rows := env_var_or_default("BOE_DOCUMENT_MANIFEST_SHARD_MAX_ROWS", "10000")
+boe_document_manifest_shard_max_uncompressed_bytes := env_var_or_default("BOE_DOCUMENT_MANIFEST_SHARD_MAX_UNCOMPRESSED_BYTES", "67108864")
 boe_summary_fetch_report := env_var_or_default("BOE_SUMMARY_FETCH_REPORT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-summary-fetch.json")
 boe_document_fetch_report := env_var_or_default("BOE_DOCUMENT_FETCH_REPORT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-document-fetch.json")
 boe_election_candidate_report := env_var_or_default("BOE_ELECTION_CANDIDATE_REPORT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-election-candidates-latest.json")
@@ -2371,7 +2375,11 @@ etl-scale-boe-document-fetch:
   python3 scripts/run_document_fetch_queue.py --db {{db_path}} --pipeline-id boe_document_fetch --worker-id boe-document-worker --raw-root etl/data/raw/text_documents/boe_document_xml --workers {{boe_document_workers}} --per-host-workers {{boe_document_per_host_workers}} --per-host-min-interval-ms {{document_fetch_per_host_min_interval_ms}} --host-request-budget www.boe.es={{boe_document_host_request_budget}} --require-explicit-host-budget --claim-size 64 --max-items {{boe_document_max_items}} --timeout 30 --max-bytes 67108864 --min-free-bytes {{boe_document_min_free_bytes}} --download-attempts 3 --retry-delay-seconds 120 --snapshot-date {{boe_document_snapshot_date}} --progress-min-interval-seconds {{boe_document_progress_min_interval_seconds}} --report-out {{boe_document_fetch_report}}
 
 etl-scale-boe-document-status:
-  python3 scripts/manage_boe_document_corpus.py status --db {{db_path}} --report-out {{boe_document_report}} --enforce
+  python3 scripts/manage_boe_document_corpus.py status --db {{db_path}} --manifest-out {{boe_document_manifest}} --manifest-shard-max-rows {{boe_document_manifest_shard_max_rows}} --manifest-shard-max-uncompressed-bytes {{boe_document_manifest_shard_max_uncompressed_bytes}} --report-out {{boe_document_report}} --enforce
+
+etl-scale-boe-document-lineage:
+  python3 scripts/manage_boe_document_corpus.py status --db {{db_path}} --manifest-out {{boe_document_manifest}} --manifest-shard-max-rows {{boe_document_manifest_shard_max_rows}} --manifest-shard-max-uncompressed-bytes {{boe_document_manifest_shard_max_uncompressed_bytes}} --report-out {{boe_document_report}}
+  python3 scripts/validate_boe_document_corpus_manifest.py --manifest {{boe_document_manifest}} --report-out {{boe_document_manifest_validation}} --full-raw-check --enforce
 
 etl-scale-boe-document-cohort:
   just etl-scale-boe-document-seed

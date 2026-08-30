@@ -92,9 +92,7 @@ def obstruction_projection_descriptor(
                 "endpoint_or_page": str(row.get("endpoint_or_page") or ""),
             }
         )
-    open_incidents.sort(
-        key=lambda row: (row["incident_id"], row["endpoint_or_page"])
-    )
+    open_incidents.sort(key=lambda row: (row["incident_id"], row["endpoint_or_page"]))
     projection = {
         "schema_version": "obstruction_classification_projection_v1",
         "policy": {
@@ -606,6 +604,7 @@ def audit_document_provenance_gap(
         "queue",
         "wayback_recovery",
         "boe_corpus",
+        "boe_manifest_validation",
         "native_extraction",
         "native_validation",
         "page_ocr",
@@ -639,6 +638,7 @@ def audit_document_provenance_gap(
     queue = payloads["queue"]
     wayback_recovery = payloads["wayback_recovery"]
     boe_corpus = payloads["boe_corpus"]
+    boe_manifest_validation = payloads["boe_manifest_validation"]
     native_extraction = payloads["native_extraction"]
     native_validation = payloads["native_validation"]
     page_ocr = payloads["page_ocr"]
@@ -783,28 +783,23 @@ def audit_document_provenance_gap(
     ):
         raise ReadinessError("fresh document acquisition cohort contract failed")
     fetch_preflight_checks = fetch_preflight.get("checks") or {}
-    if (
-        fetch_cohort_schema == "real_document_fetch_scale_cohort_v3"
-        and (
-            fetch_preflight.get("schema_version")
-            != "real_document_fetch_scale_cohort_preflight_validation_v1"
-            or fetch_preflight.get("status") != "ok"
-            or fetch_preflight.get("errors") != []
-            or int(fetch_preflight.get("error_count") or 0) != 0
-            or fetch_preflight.get("cohort_id") != fetch_cohort.get("cohort_id")
-            or fetch_preflight.get("cohort_semantic_sha256")
-            != fetch_cohort.get("cohort_semantic_sha256")
-            or int(fetch_preflight_checks.get("cohort_rows") or 0)
-            != fetch_expected_rows
-            or int(fetch_preflight_checks.get("prior_files_rehashed") or 0)
-            != fetch_expected_rows
-            or int(fetch_preflight_checks.get("source_contract_rows") or 0)
-            != fetch_expected_rows
-            or int(fetch_preflight_checks.get("known_blocked_host_rows") or 0) != 0
-            or int(fetch_preflight_checks.get("preexisting_fetch_rows") or 0) != 0
-            or int(fetch_preflight_checks.get("preexisting_document_rows") or 0)
-            != 0
-        )
+    if fetch_cohort_schema == "real_document_fetch_scale_cohort_v3" and (
+        fetch_preflight.get("schema_version")
+        != "real_document_fetch_scale_cohort_preflight_validation_v1"
+        or fetch_preflight.get("status") != "ok"
+        or fetch_preflight.get("errors") != []
+        or int(fetch_preflight.get("error_count") or 0) != 0
+        or fetch_preflight.get("cohort_id") != fetch_cohort.get("cohort_id")
+        or fetch_preflight.get("cohort_semantic_sha256")
+        != fetch_cohort.get("cohort_semantic_sha256")
+        or int(fetch_preflight_checks.get("cohort_rows") or 0) != fetch_expected_rows
+        or int(fetch_preflight_checks.get("prior_files_rehashed") or 0)
+        != fetch_expected_rows
+        or int(fetch_preflight_checks.get("source_contract_rows") or 0)
+        != fetch_expected_rows
+        or int(fetch_preflight_checks.get("known_blocked_host_rows") or 0) != 0
+        or int(fetch_preflight_checks.get("preexisting_fetch_rows") or 0) != 0
+        or int(fetch_preflight_checks.get("preexisting_document_rows") or 0) != 0
     ):
         raise ReadinessError("fresh document acquisition preflight failed")
     if (
@@ -835,7 +830,8 @@ def audit_document_provenance_gap(
         != fetch_expected_rows
         or fetch_validation_checks.get("prior_capture_byte_hash_integrity") is not True
         or fetch_validation_checks.get("fresh_source_contract_parity") is not True
-        or fetch_validation_checks.get("fresh_content_hash_self_consistency") is not True
+        or fetch_validation_checks.get("fresh_content_hash_self_consistency")
+        is not True
     ):
         raise ReadinessError("fresh document acquisition validation failed")
     fetch_validation_inputs = fetch_validation.get("inputs") or {}
@@ -862,9 +858,7 @@ def audit_document_provenance_gap(
         "document source universe numeric target",
     )
     source_eligible_urls = _require_nonnegative_int(
-        source_universe_summary.get(
-            "contract_eligible_physically_healthy_https_urls"
-        ),
+        source_universe_summary.get("contract_eligible_physically_healthy_https_urls"),
         "document source universe eligible HTTPS URLs",
     )
     source_target_gap = _require_nonnegative_int(
@@ -876,8 +870,7 @@ def audit_document_provenance_gap(
         "document source universe unique HTTPS URLs",
     )
     if (
-        source_universe.get("schema_version")
-        != "real_document_source_universe_v1"
+        source_universe.get("schema_version") != "real_document_source_universe_v1"
         or source_universe.get("status")
         not in {
             "blocked_below_numeric_target",
@@ -1019,9 +1012,9 @@ def audit_document_provenance_gap(
             "sha256"
         )
         != sha256_file(evidence_paths["fetch_run"])
-        or (
-            economics_validation_inputs.get("fresh_acquisition_validation") or {}
-        ).get("sha256")
+        or (economics_validation_inputs.get("fresh_acquisition_validation") or {}).get(
+            "sha256"
+        )
         != sha256_file(evidence_paths["fetch_validation"])
     ):
         raise ReadinessError("document economics validation inputs have drifted")
@@ -1138,6 +1131,9 @@ def audit_document_provenance_gap(
     boe_manifest_path = evidence_paths["boe_manifest"]
     if (
         boe_manifest.get("path") != contract["boe_manifest"]
+        or boe_manifest.get("schema_version")
+        != "boe_document_corpus_lineage_manifest_v1"
+        or boe_manifest.get("layout") != "partitioned_jsonl_gzip_v1"
         or boe_manifest.get("sha256") != sha256_file(boe_manifest_path)
         or boe_manifest.get("bytes") != boe_manifest_path.stat().st_size
     ):
@@ -1152,6 +1148,31 @@ def audit_document_provenance_gap(
         or boe_manifest.get("document_bytes") != boe_documents.get("bytes")
     ):
         raise ReadinessError("BOE document corpus totals do not reconcile")
+    boe_manifest_validation_input = boe_manifest_validation.get("input") or {}
+    boe_manifest_validation_totals = boe_manifest_validation.get("totals") or {}
+    if (
+        boe_manifest_validation.get("schema_version")
+        != "boe_document_corpus_lineage_validation_v1"
+        or boe_manifest_validation.get("status") != "ok"
+        or not all(
+            value is True
+            for value in (boe_manifest_validation.get("checks") or {}).values()
+        )
+        or (boe_manifest_validation.get("mode") or {}).get("full_raw_check") is not True
+        or boe_manifest_validation_input.get("path") != contract["boe_manifest"]
+        or boe_manifest_validation_input.get("sha256") != boe_manifest.get("sha256")
+        or boe_manifest_validation_input.get("bytes") != boe_manifest.get("bytes")
+        or boe_manifest_validation_totals.get("rows") != boe_rows
+        or boe_manifest_validation_totals.get("document_bytes")
+        != boe_documents.get("bytes")
+        or boe_manifest_validation_totals.get("distinct_content_objects")
+        != boe_documents.get("distinct_content_objects")
+        or boe_manifest_validation_totals.get("logical_sha256")
+        != boe_manifest.get("logical_sha256")
+        or boe_manifest_validation_totals.get("shard_files")
+        != boe_manifest.get("shard_files")
+    ):
+        raise ReadinessError("BOE partitioned manifest validation failed")
     boe_audit_manifests = audit.get("boe_document_corpus_lineage_manifests") or []
     if (
         len(boe_audit_manifests) != 1
@@ -1528,16 +1549,15 @@ def audit_document_provenance_gap(
         or acquisition_economics.get("official_revisions_preserved") is not True
         or acquisition_economics.get("cohort_semantic_sha256")
         != fetch_validation.get("cohort_semantic_sha256")
-        or monetary_economics.get("measurement_status")
-        != "unknown_not_measured"
+        or monetary_economics.get("measurement_status") != "unknown_not_measured"
         or monetary_economics.get("actual_amount") is not None
         or monetary_economics.get("cost_per_1000_documents") is not None
         or monetary_economics.get("cost_per_1000_ocr_pages") is not None
     ):
-        raise ReadinessError("document economics totals or unknown-cost boundary drifted")
-    if not all(
-        value is True for value in (boe_corpus.get("checks") or {}).values()
-    ):
+        raise ReadinessError(
+            "document economics totals or unknown-cost boundary drifted"
+        )
+    if not all(value is True for value in (boe_corpus.get("checks") or {}).values()):
         raise ReadinessError("BOE document corpus checks failed")
     return {
         "eligible_real_files": eligible_files,
@@ -1624,21 +1644,19 @@ def audit_document_provenance_gap(
             "representative_cohort_status"
         ),
         "native_wall_seconds_per_1000": float(
-            (
-                native_economics.get("per_1000_distinct_content_objects") or {}
-            ).get("elapsed_seconds")
+            (native_economics.get("per_1000_distinct_content_objects") or {}).get(
+                "elapsed_seconds"
+            )
             or 0
         ),
         "native_cpu_seconds_per_1000": float(
-            (
-                native_economics.get("per_1000_distinct_content_objects") or {}
-            ).get("cpu_seconds")
+            (native_economics.get("per_1000_distinct_content_objects") or {}).get(
+                "cpu_seconds"
+            )
             or 0
         ),
         "ocr_wall_seconds_per_1000_pages": float(
-            (ocr_economics.get("per_1000_candidate_pages") or {}).get(
-                "elapsed_seconds"
-            )
+            (ocr_economics.get("per_1000_candidate_pages") or {}).get("elapsed_seconds")
             or 0
         ),
         "ocr_cpu_seconds_per_1000_pages": float(
@@ -1647,9 +1665,7 @@ def audit_document_provenance_gap(
             )
             or 0
         ),
-        "document_monetary_cost_status": monetary_economics.get(
-            "measurement_status"
-        ),
+        "document_monetary_cost_status": monetary_economics.get("measurement_status"),
         "document_network_requests_measured": True,
         "evidence": {
             key: evidence_reference(path) for key, path in evidence_paths.items()
