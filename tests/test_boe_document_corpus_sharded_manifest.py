@@ -5,7 +5,10 @@ import sqlite3
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
+from scripts import manage_boe_document_corpus
+from scripts.audit_boe_document_corpus_generations import audit_generations
 from scripts.audit_document_provenance import (
     create_work_database,
     load_boe_document_corpus_lineage_manifest,
@@ -174,6 +177,142 @@ class BoeDocumentCorpusShardedManifestTests(unittest.TestCase):
             self.assertEqual(audit["rows"], 2)
             self.assertEqual(audit["accepted_checksum_captures"], 2)
             self.assertEqual(audit["sha256"], first["sha256"])
+
+    def test_interrupted_rebuild_preserves_live_index_and_superseded_generation(
+        self,
+    ) -> None:
+        with tempfile.TemporaryDirectory(
+            prefix="boe-lineage-lifecycle-test-", dir=ROOT / "etl/data/staging"
+        ) as temp_dir:
+            manifest_path = Path(temp_dir) / "manifest.json"
+            connection = self.new_connection()
+            try:
+                first = export_manifest(
+                    connection,
+                    output_path=manifest_path,
+                    shard_max_rows=1,
+                    shard_max_uncompressed_bytes=1024 * 1024,
+                )
+                first_bytes = manifest_path.read_bytes()
+                first_root = ROOT / first["shard_root"]
+                connection.execute(
+                    """
+                    DELETE FROM text_documents
+                    WHERE rowid = (
+                      SELECT MAX(rowid) FROM text_documents
+                      WHERE source_id = 'boe_document_xml'
+                    )
+                    """
+                )
+                connection.commit()
+                original_atomic_write_text = (
+                    manage_boe_document_corpus.atomic_write_text
+                )
+
+                def interrupt_live_switch(path: Path, payload: str) -> None:
+                    if Path(path) == manifest_path:
+                        raise OSError("simulated interruption before live index switch")
+                    original_atomic_write_text(Path(path), payload)
+
+                with (
+                    mock.patch.object(
+                        manage_boe_document_corpus,
+                        "atomic_write_text",
+                        side_effect=interrupt_live_switch,
+                    ),
+                    self.assertRaisesRegex(OSError, "simulated interruption"),
+                ):
+                    export_manifest(
+                        connection,
+                        output_path=manifest_path,
+                        shard_max_rows=1,
+                        shard_max_uncompressed_bytes=1024 * 1024,
+                    )
+                self.assertEqual(manifest_path.read_bytes(), first_bytes)
+                interrupted = audit_generations(
+                    manifest_path,
+                    full_shard_check=True,
+                )
+                self.assertEqual(interrupted["status"], "degraded")
+                self.assertEqual(
+                    interrupted["totals"]["unactivated_manifest_archives"], 1
+                )
+                self.assertEqual(
+                    interrupted["totals"]["unactivated_generation_directories"],
+                    1,
+                )
+                self.assertEqual(interrupted["totals"]["automatic_deletions"], 0)
+                self.assertEqual(
+                    validate_manifest(manifest_path, full_raw_check=True)["status"],
+                    "ok",
+                )
+                second = export_manifest(
+                    connection,
+                    output_path=manifest_path,
+                    shard_max_rows=1,
+                    shard_max_uncompressed_bytes=1024 * 1024,
+                )
+                replay = export_manifest(
+                    connection,
+                    output_path=manifest_path,
+                    shard_max_rows=1,
+                    shard_max_uncompressed_bytes=1024 * 1024,
+                )
+                canonical_second_bytes = manifest_path.read_bytes()
+                restored_document = self.documents[-1]
+                restored_source_record_pk = connection.execute(
+                    "SELECT source_record_pk FROM source_records WHERE raw_payload = ?",
+                    (restored_document["raw_payload"],),
+                ).fetchone()[0]
+                connection.execute(
+                    """
+                    INSERT INTO text_documents(
+                      source_url, source_id, fetched_at, content_type,
+                      content_sha256, bytes, raw_path, source_record_pk
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                    """,
+                    (
+                        restored_document["source_url"],
+                        restored_document["source_id"],
+                        restored_document["fetched_at"],
+                        restored_document["content_type"],
+                        restored_document["content_sha256"],
+                        restored_document["bytes"],
+                        restored_document["raw_path"],
+                        restored_source_record_pk,
+                    ),
+                )
+                connection.commit()
+                with self.assertRaisesRegex(
+                    RuntimeError,
+                    "historical BOE lineage manifest reactivation requires",
+                ):
+                    export_manifest(
+                        connection,
+                        output_path=manifest_path,
+                        shard_max_rows=1,
+                        shard_max_uncompressed_bytes=1024 * 1024,
+                    )
+            finally:
+                connection.close()
+            completed = audit_generations(
+                manifest_path,
+                full_shard_check=True,
+            )
+            self.assertEqual(second["rows"], 1)
+            self.assertNotEqual(first["sha256"], second["sha256"])
+            self.assertEqual(replay["sha256"], second["sha256"])
+            self.assertFalse(replay["publication"]["live_index_changed"])
+            self.assertTrue(replay["publication"]["superseded_predecessor"])
+            self.assertEqual(manifest_path.read_bytes(), canonical_second_bytes)
+            self.assertEqual(completed["status"], "ok")
+            self.assertTrue(all(completed["checks"].values()))
+            self.assertEqual(completed["totals"]["manifest_archives"], 2)
+            self.assertEqual(completed["totals"]["activation_receipts"], 2)
+            self.assertEqual(completed["totals"]["superseded_generations"], 1)
+            self.assertEqual(completed["totals"]["retained_unique_generations"], 2)
+            self.assertEqual(completed["totals"]["automatic_deletions"], 0)
+            self.assertTrue(first_root.is_dir())
 
 
 if __name__ == "__main__":

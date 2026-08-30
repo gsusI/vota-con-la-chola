@@ -605,6 +605,7 @@ def audit_document_provenance_gap(
         "wayback_recovery",
         "boe_corpus",
         "boe_manifest_validation",
+        "boe_generation_audit",
         "native_extraction",
         "native_validation",
         "page_ocr",
@@ -639,6 +640,7 @@ def audit_document_provenance_gap(
     wayback_recovery = payloads["wayback_recovery"]
     boe_corpus = payloads["boe_corpus"]
     boe_manifest_validation = payloads["boe_manifest_validation"]
+    boe_generation_audit = payloads["boe_generation_audit"]
     native_extraction = payloads["native_extraction"]
     native_validation = payloads["native_validation"]
     page_ocr = payloads["page_ocr"]
@@ -1173,6 +1175,38 @@ def audit_document_provenance_gap(
         != boe_manifest.get("shard_files")
     ):
         raise ReadinessError("BOE partitioned manifest validation failed")
+    boe_generation_input = boe_generation_audit.get("input") or {}
+    boe_generation_policy = boe_generation_audit.get("policy") or {}
+    boe_generation_totals = boe_generation_audit.get("totals") or {}
+    if (
+        boe_generation_audit.get("schema_version")
+        != "boe_document_corpus_generation_audit_v1"
+        or boe_generation_audit.get("status") != "ok"
+        or not all(
+            value is True
+            for value in (boe_generation_audit.get("checks") or {}).values()
+        )
+        or (boe_generation_audit.get("mode") or {}).get("full_shard_check") is not True
+        or boe_generation_input.get("path") != contract["boe_manifest"]
+        or boe_generation_input.get("sha256") != boe_manifest.get("sha256")
+        or boe_generation_input.get("bytes") != boe_manifest.get("bytes")
+        or boe_generation_input.get("logical_sha256")
+        != boe_manifest.get("logical_sha256")
+        or boe_generation_policy.get("synthetic_or_mock_records_counted") is not False
+        or boe_generation_policy.get(
+            "official_public_domain_personal_information_retained"
+        )
+        is not True
+        or boe_generation_policy.get("automatic_deletion_forbidden") is not True
+        or boe_generation_policy.get("remote_mutation_performed") is not False
+        or boe_generation_totals.get("active_generations") != 1
+        or boe_generation_totals.get("unactivated_manifest_archives") != 0
+        or boe_generation_totals.get("unactivated_generation_directories") != 0
+        or boe_generation_totals.get("orphan_generation_directories") != 0
+        or boe_generation_totals.get("interrupted_staging_directories") != 0
+        or boe_generation_totals.get("automatic_deletions") != 0
+    ):
+        raise ReadinessError("BOE generation lifecycle audit failed")
     boe_audit_manifests = audit.get("boe_document_corpus_lineage_manifests") or []
     if (
         len(boe_audit_manifests) != 1
@@ -1589,6 +1623,18 @@ def audit_document_provenance_gap(
         "boe_document_corpus_rows": boe_rows,
         "boe_document_corpus_bytes": _require_nonnegative_int(
             boe_documents.get("bytes"), "BOE document bytes"
+        ),
+        "boe_retained_lineage_generations": _require_nonnegative_int(
+            boe_generation_totals.get("retained_unique_generations"),
+            "BOE retained lineage generations",
+        ),
+        "boe_superseded_lineage_generations": _require_nonnegative_int(
+            boe_generation_totals.get("superseded_generations"),
+            "BOE superseded lineage generations",
+        ),
+        "boe_lineage_automatic_deletions": _require_nonnegative_int(
+            boe_generation_totals.get("automatic_deletions"),
+            "BOE lineage automatic deletions",
         ),
         "text_artifacts_checksum_verified": text_artifacts_verified,
         "native_text_file_instances": native_file_instances,

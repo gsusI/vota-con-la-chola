@@ -1,0 +1,59 @@
+{
+  "activation_chain": [
+    "0d2cf2080e3c4a85e03066c51a263469cf21c7daab55d7655502af03a4554605"
+  ],
+  "checks": {
+    "activation_receipt_chain_complete": true,
+    "active_manifest_archived_exactly": true,
+    "automatic_deletion_forbidden_and_not_performed": true,
+    "no_interrupted_staging_directories": true,
+    "no_orphan_generation_directories": true,
+    "no_synthetic_or_mock_rows": true,
+    "no_unactivated_generation_directories": true,
+    "no_unactivated_manifest_archives": true,
+    "official_public_information_retained": true,
+    "retained_generation_file_inventory_exact": true,
+    "retained_manifest_contracts_valid": true,
+    "retained_shards_checked_to_requested_depth": true
+  },
+  "generated_at": "2026-08-30T05:28:30.211124+00:00",
+  "input": {
+    "bytes": 7717,
+    "logical_sha256": "99739ca6ac462edada2d20e61be6f81c9404689405632751da4b6bc54d5848f4",
+    "path": "etl/data/manifests/boe-document-corpus-lineage-manifest.json",
+    "sha256": "0d2cf2080e3c4a85e03066c51a263469cf21c7daab55d7655502af03a4554605"
+  },
+  "mode": {
+    "full_shard_check": true
+  },
+  "policy": {
+    "automatic_deletion_forbidden": true,
+    "interrupted_artifacts_retained_for_audit": true,
+    "official_public_domain_personal_information_retained": true,
+    "remote_mutation_performed": false,
+    "synthetic_or_mock_records_counted": false
+  },
+  "retention": {
+    "interrupted_staging_directories": [],
+    "orphan_generation_logical_sha256": [],
+    "unactivated_generation_logical_sha256": [],
+    "unactivated_manifest_archive_sha256": []
+  },
+  "schema_version": "boe_document_corpus_generation_audit_v1",
+  "status": "ok",
+  "totals": {
+    "activation_chain_manifests": 1,
+    "activation_receipts": 1,
+    "active_generations": 1,
+    "automatic_deletions": 0,
+    "interrupted_staging_directories": 0,
+    "manifest_archives": 1,
+    "orphan_generation_directories": 0,
+    "retained_compressed_bytes": 16081029,
+    "retained_shard_files": 11,
+    "retained_unique_generations": 1,
+    "superseded_generations": 0,
+    "unactivated_generation_directories": 0,
+    "unactivated_manifest_archives": 0
+  }
+}

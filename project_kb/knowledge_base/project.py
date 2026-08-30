@@ -213,7 +213,14 @@ PROJECT_FACTS = [
             "content-addressed gzip shards / 16,081,029 compressed bytes. Logical SHA-256 "
             "99739ca6... binds all 234,632,869 uncompressed bytes; independent full validation "
             "rehashes every shard, document, and referenced summary. It references 1,156 of "
-            "the 1,166 successful summaries. Separately, the deterministic 100,000-row acquisition "
+            "the 1,166 successful summaries. Exact manifest archives, immutable activation "
+            "receipts, predecessor linkage, refusal of ambiguous historical reactivation, and "
+            "a no-deletion policy make index changes auditable. The production full-shard "
+            "lifecycle audit reports one active generation and zero orphan, unactivated, "
+            "interrupted-staging, or deletion state. A test over real BOE captures forces an "
+            "interruption before the live switch, proves the prior index remains byte-identical "
+            "and valid, then completes a successor while retaining both generations. "
+            "Separately, the deterministic 100,000-row acquisition "
             "plan closes its numeric supply gate with selection SHA-256 "
             "c81d3c0a90222122309a259c791cdbb9ffa900f21f96eed5a12d30a71f314185: "
             "98,748 BOE XML, 1,166 BOE summaries, and 86 Parliament of Andalusia files. "
@@ -254,6 +261,10 @@ PROJECT_FACTS = [
             Evidence(
                 source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-document-corpus-lineage-validation-20260830.json",
                 detail="Independent bounded-shard, raw-capture, summary, logical-order, and public-information validation.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-document-corpus-generation-audit-20260830.json",
+                detail="Full-shard archive, activation receipt, predecessor, retention, and no-deletion audit.",
             ),
             Evidence(
                 source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-election-candidates-latest.json",
@@ -2504,9 +2515,11 @@ PROJECT_GOTCHAS = [
         description=(
             "`input-bound control state` appears before raw bytes become the only "
             "problem. BOE lineage now bounds 100,051 rows / 234,632,869 logical bytes "
-            "behind 11 content-addressed gzip shards and a small index, but stale native/OCR "
-            "state can still bind a new run to an old input inventory even when output CAS "
-            "is reusable. Interrupted reconstruction and supersession remain unproven."
+            "behind 11 content-addressed gzip shards and a small index. Its immutable "
+            "index archives, activation receipts, predecessor chain, forced-interruption "
+            "test, and independent lifecycle audit prove non-destructive lineage "
+            "supersession. Stale native/OCR state can still bind a new run to an old input "
+            "inventory even when output CAS is reusable."
         ),
         mitigation=(
             "Shard large manifests and execution state by deterministic generation, "
@@ -2518,6 +2531,14 @@ PROJECT_GOTCHAS = [
             Evidence(
                 source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-document-corpus-lineage-validation-20260830.json",
                 detail="Independent shard, row, raw-document, summary, order, bound, and policy validation.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-document-corpus-generation-audit-20260830.json",
+                detail="Active index archive, receipt chain, retained generation, and zero orphan or deletion state.",
+            ),
+            Evidence(
+                source="tests/test_boe_document_corpus_sharded_manifest.py",
+                detail="Real-capture interruption and successor transition retain the old live index and both generations.",
             ),
             Evidence(
                 source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-validation.json",

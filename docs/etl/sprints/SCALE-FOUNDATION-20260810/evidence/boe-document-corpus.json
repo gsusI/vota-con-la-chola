@@ -16,7 +16,7 @@
     "distinct_content_objects": 100051,
     "rows": 100051
   },
-  "generated_at": "2026-08-30T04:40:10.484471+00:00",
+  "generated_at": "2026-08-30T05:15:50.405167+00:00",
   "manifest": {
     "available_summary_captures": 1166,
     "bounds": {
@@ -31,6 +31,18 @@
     "layout": "partitioned_jsonl_gzip_v1",
     "logical_sha256": "99739ca6ac462edada2d20e61be6f81c9404689405632751da4b6bc54d5848f4",
     "path": "etl/data/manifests/boe-document-corpus-lineage-manifest.json",
+    "publication": {
+      "activation_receipt_committed": true,
+      "active_history_path": "etl/data/manifests/boe-document-corpus-lineage-manifest-history/0d2cf2080e3c4a85e03066c51a263469cf21c7daab55d7655502af03a4554605.json",
+      "active_manifest_sha256": "0d2cf2080e3c4a85e03066c51a263469cf21c7daab55d7655502af03a4554605",
+      "active_receipt_path": "etl/data/manifests/boe-document-corpus-lineage-manifest-receipts/0d2cf2080e3c4a85e03066c51a263469cf21c7daab55d7655502af03a4554605.json",
+      "automatic_deletion_performed": false,
+      "live_index_changed": false,
+      "live_index_switched_after_shards_and_archive": true,
+      "predecessor_logical_sha256": null,
+      "predecessor_manifest_sha256": null,
+      "superseded_predecessor": false
+    },
     "rows": 100051,
     "schema_version": "boe_document_corpus_lineage_manifest_v1",
     "sha256": "0d2cf2080e3c4a85e03066c51a263469cf21c7daab55d7655502af03a4554605",

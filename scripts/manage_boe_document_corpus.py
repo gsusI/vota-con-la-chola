@@ -122,9 +122,18 @@ def atomic_write_text(path: Path, payload: str) -> None:
             handle.flush()
             os.fsync(handle.fileno())
         os.replace(temp_name, path)
+        fsync_directory(path.parent)
     finally:
         if os.path.exists(temp_name):
             os.unlink(temp_name)
+
+
+def fsync_directory(path: Path) -> None:
+    descriptor = os.open(path, os.O_RDONLY)
+    try:
+        os.fsync(descriptor)
+    finally:
+        os.close(descriptor)
 
 
 def atomic_write_jsonl(path: Path, rows: Any) -> None:
@@ -138,6 +147,7 @@ def atomic_write_jsonl(path: Path, rows: Any) -> None:
             handle.flush()
             os.fsync(handle.fileno())
         os.replace(temp_name, path)
+        fsync_directory(path.parent)
     finally:
         if os.path.exists(temp_name):
             os.unlink(temp_name)
@@ -148,6 +158,146 @@ def atomic_write_json(path: Path, payload: dict[str, Any]) -> None:
         path,
         json.dumps(payload, ensure_ascii=True, indent=2, sort_keys=True) + "\n",
     )
+
+
+def canonical_json_bytes(payload: dict[str, Any]) -> bytes:
+    return (
+        json.dumps(payload, ensure_ascii=True, indent=2, sort_keys=True) + "\n"
+    ).encode("utf-8")
+
+
+def _manifest_lifecycle_roots(output_path: Path) -> tuple[Path, Path]:
+    return (
+        output_path.parent / f"{output_path.stem}-history",
+        output_path.parent / f"{output_path.stem}-receipts",
+    )
+
+
+def _load_partitioned_manifest_bytes(
+    payload_bytes: bytes, *, label: str
+) -> dict[str, Any]:
+    try:
+        payload = json.loads(payload_bytes)
+    except json.JSONDecodeError as exc:
+        raise BoeCorpusError(f"{label} is invalid JSON") from exc
+    if (
+        not isinstance(payload, dict)
+        or payload.get("schema_version") != "boe_document_corpus_lineage_manifest_v1"
+        or payload.get("layout") != "partitioned_jsonl_gzip_v1"
+        or not SHA256_RE.fullmatch(str(payload.get("logical_sha256") or ""))
+    ):
+        raise BoeCorpusError(f"{label} has an unsupported BOE lineage contract")
+    return payload
+
+
+def _archive_immutable_bytes(path: Path, payload_bytes: bytes) -> None:
+    if path.exists():
+        if not path.is_file() or path.read_bytes() != payload_bytes:
+            raise BoeCorpusError(
+                f"immutable BOE lineage artifact collision: {path.name}"
+            )
+        return
+    path.parent.mkdir(parents=True, exist_ok=True)
+    atomic_write_text(path, payload_bytes.decode("utf-8"))
+
+
+def _load_activation_receipt(
+    path: Path, *, manifest_sha256: str, logical_sha256: str
+) -> dict[str, Any]:
+    try:
+        receipt = json.loads(path.read_bytes())
+    except json.JSONDecodeError as exc:
+        raise BoeCorpusError("BOE lineage activation receipt is invalid JSON") from exc
+    if (
+        not isinstance(receipt, dict)
+        or receipt.get("schema_version")
+        != "boe_document_corpus_lineage_activation_receipt_v1"
+        or receipt.get("active_manifest_sha256") != manifest_sha256
+        or receipt.get("active_logical_sha256") != logical_sha256
+        or receipt.get("deletion_performed") is not False
+        or receipt.get("remote_mutation_performed") is not False
+    ):
+        raise BoeCorpusError("BOE lineage activation receipt drifted")
+    return receipt
+
+
+def publish_lineage_manifest_index(
+    *, output_path: Path, payload: dict[str, Any]
+) -> dict[str, Any]:
+    """Archive immutable indices and switch the live manifest only after shards exist."""
+    new_bytes = canonical_json_bytes(payload)
+    new_sha256 = hashlib.sha256(new_bytes).hexdigest()
+    history_root, receipt_root = _manifest_lifecycle_roots(output_path)
+    previous_bytes: bytes | None = None
+    previous_payload: dict[str, Any] | None = None
+    previous_sha256: str | None = None
+    if output_path.exists():
+        if not output_path.is_file():
+            raise BoeCorpusError("BOE lineage manifest path is not a regular file")
+        previous_bytes = output_path.read_bytes()
+        previous_payload = _load_partitioned_manifest_bytes(
+            previous_bytes, label="current BOE lineage manifest"
+        )
+        previous_sha256 = hashlib.sha256(previous_bytes).hexdigest()
+        _archive_immutable_bytes(
+            history_root / f"{previous_sha256}.json", previous_bytes
+        )
+    new_history_path = history_root / f"{new_sha256}.json"
+    _archive_immutable_bytes(new_history_path, new_bytes)
+    receipt_path = receipt_root / f"{new_sha256}.json"
+    if previous_sha256 != new_sha256 and receipt_path.exists():
+        raise BoeCorpusError(
+            "historical BOE lineage manifest reactivation requires an explicit rollback workflow"
+        )
+    live_index_changed = previous_bytes != new_bytes
+    if live_index_changed:
+        atomic_write_text(output_path, new_bytes.decode("utf-8"))
+    if receipt_path.exists():
+        receipt = _load_activation_receipt(
+            receipt_path,
+            manifest_sha256=new_sha256,
+            logical_sha256=str(payload["logical_sha256"]),
+        )
+    else:
+        predecessor_sha256 = (
+            previous_sha256
+            if previous_sha256 is not None and previous_sha256 != new_sha256
+            else None
+        )
+        receipt = {
+            "schema_version": "boe_document_corpus_lineage_activation_receipt_v1",
+            "active_manifest_sha256": new_sha256,
+            "active_logical_sha256": payload["logical_sha256"],
+            "predecessor_manifest_sha256": predecessor_sha256,
+            "predecessor_logical_sha256": (
+                previous_payload.get("logical_sha256")
+                if predecessor_sha256 is not None and previous_payload is not None
+                else None
+            ),
+            "superseded_predecessor": predecessor_sha256 is not None,
+            "retention_policy": {
+                "manifest_indices_immutable": True,
+                "referenced_generations_immutable": True,
+                "automatic_deletion_forbidden": True,
+                "interrupted_artifacts_retained_for_audit": True,
+            },
+            "deletion_performed": False,
+            "remote_mutation_performed": False,
+        }
+        _archive_immutable_bytes(receipt_path, canonical_json_bytes(receipt))
+    receipt_predecessor = receipt.get("predecessor_manifest_sha256")
+    return {
+        "active_history_path": display_path(new_history_path),
+        "active_receipt_path": display_path(receipt_path),
+        "active_manifest_sha256": new_sha256,
+        "predecessor_manifest_sha256": receipt_predecessor,
+        "predecessor_logical_sha256": receipt["predecessor_logical_sha256"],
+        "superseded_predecessor": receipt_predecessor is not None,
+        "live_index_changed": live_index_changed,
+        "live_index_switched_after_shards_and_archive": True,
+        "activation_receipt_committed": True,
+        "automatic_deletion_performed": False,
+    }
 
 
 def _publish_content_addressed_shards(
@@ -161,6 +311,14 @@ def _publish_content_addressed_shards(
     generation_root.mkdir(parents=True, exist_ok=True)
     final_dir = generation_root / logical_sha256
     if final_dir.exists():
+        expected_names = {str(shard["name"]) for shard in staged_shards}
+        actual_names = {path.name for path in final_dir.iterdir() if path.is_file()}
+        if actual_names != expected_names or any(
+            not path.is_file() for path in final_dir.iterdir()
+        ):
+            raise BoeCorpusError(
+                "content-addressed BOE lineage generation inventory collision"
+            )
         for shard in staged_shards:
             staged_path = staging_dir / str(shard["name"])
             final_path = final_dir / str(shard["name"])
@@ -175,6 +333,7 @@ def _publish_content_addressed_shards(
         shutil.rmtree(staging_dir)
     else:
         os.replace(staging_dir, final_dir)
+        fsync_directory(generation_root)
     published: list[dict[str, Any]] = []
     for shard in staged_shards:
         published.append(
@@ -994,7 +1153,10 @@ def export_manifest(
         "bounds": partitioned["bounds"],
         "partitions": partitioned["partitions"],
     }
-    atomic_write_json(output_path, manifest_payload)
+    publication = publish_lineage_manifest_index(
+        output_path=output_path,
+        payload=manifest_payload,
+    )
     return {
         "path": display_path(output_path),
         "schema_version": manifest_payload["schema_version"],
@@ -1012,6 +1174,7 @@ def export_manifest(
         "compressed_bytes": partitioned["compressed_bytes"],
         "uncompressed_bytes": partitioned["uncompressed_bytes"],
         "bounds": partitioned["bounds"],
+        "publication": publication,
     }
 
 

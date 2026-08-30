@@ -562,6 +562,7 @@ boe_document_min_free_bytes := env_var_or_default("BOE_DOCUMENT_MIN_FREE_BYTES",
 boe_document_report := env_var_or_default("BOE_DOCUMENT_REPORT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-document-corpus.json")
 boe_document_manifest := env_var_or_default("BOE_DOCUMENT_MANIFEST", "etl/data/manifests/boe-document-corpus-lineage-manifest.json")
 boe_document_manifest_validation := env_var_or_default("BOE_DOCUMENT_MANIFEST_VALIDATION", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-document-corpus-lineage-validation-20260830.json")
+boe_document_generation_audit := env_var_or_default("BOE_DOCUMENT_GENERATION_AUDIT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-document-corpus-generation-audit-20260830.json")
 boe_document_manifest_shard_max_rows := env_var_or_default("BOE_DOCUMENT_MANIFEST_SHARD_MAX_ROWS", "10000")
 boe_document_manifest_shard_max_uncompressed_bytes := env_var_or_default("BOE_DOCUMENT_MANIFEST_SHARD_MAX_UNCOMPRESSED_BYTES", "67108864")
 boe_summary_fetch_report := env_var_or_default("BOE_SUMMARY_FETCH_REPORT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-summary-fetch.json")
@@ -2380,6 +2381,10 @@ etl-scale-boe-document-status:
 etl-scale-boe-document-lineage:
   python3 scripts/manage_boe_document_corpus.py status --db {{db_path}} --manifest-out {{boe_document_manifest}} --manifest-shard-max-rows {{boe_document_manifest_shard_max_rows}} --manifest-shard-max-uncompressed-bytes {{boe_document_manifest_shard_max_uncompressed_bytes}} --report-out {{boe_document_report}}
   python3 scripts/validate_boe_document_corpus_manifest.py --manifest {{boe_document_manifest}} --report-out {{boe_document_manifest_validation}} --full-raw-check --enforce
+  python3 scripts/audit_boe_document_corpus_generations.py --manifest {{boe_document_manifest}} --report-out {{boe_document_generation_audit}} --full-shard-check --enforce
+
+etl-scale-boe-document-generation-audit:
+  python3 scripts/audit_boe_document_corpus_generations.py --manifest {{boe_document_manifest}} --report-out {{boe_document_generation_audit}} --full-shard-check --enforce
 
 etl-scale-boe-document-cohort:
   just etl-scale-boe-document-seed
