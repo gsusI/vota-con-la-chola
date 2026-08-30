@@ -608,8 +608,10 @@ def audit_document_provenance_gap(
         "boe_generation_audit",
         "native_extraction",
         "native_validation",
+        "native_generation_audit",
         "page_ocr",
         "page_ocr_validation",
+        "page_ocr_generation_audit",
         "ocr_review",
         "ocr_review_validation",
         "fetch_cohort",
@@ -643,8 +645,10 @@ def audit_document_provenance_gap(
     boe_generation_audit = payloads["boe_generation_audit"]
     native_extraction = payloads["native_extraction"]
     native_validation = payloads["native_validation"]
+    native_generation_audit = payloads["native_generation_audit"]
     page_ocr = payloads["page_ocr"]
     page_ocr_validation = payloads["page_ocr_validation"]
+    page_ocr_generation_audit = payloads["page_ocr_generation_audit"]
     ocr_review = payloads["ocr_review"]
     ocr_review_validation = payloads["ocr_review_validation"]
     fetch_cohort = payloads["fetch_cohort"]
@@ -721,8 +725,16 @@ def audit_document_provenance_gap(
     processing_contracts = {
         "native_extraction": ("real_document_text_extraction_v1", {"ok"}),
         "native_validation": ("real_document_text_validation_v1", {"ok"}),
+        "native_generation_audit": (
+            "real_document_generation_lifecycle_audit_v1",
+            {"ok"},
+        ),
         "page_ocr": ("real_document_page_ocr_v1", {"ok"}),
         "page_ocr_validation": ("real_document_page_ocr_validation_v1", {"ok"}),
+        "page_ocr_generation_audit": (
+            "real_document_generation_lifecycle_audit_v1",
+            {"ok"},
+        ),
         "ocr_review": (
             "real_document_page_ocr_human_review_queue_v1",
             {"ready_for_human_review"},
@@ -747,6 +759,52 @@ def audit_document_provenance_gap(
             is not True
         ):
             raise ReadinessError(f"document {key} real-data policy failed")
+
+    for key, payload, expected_dataset, producer in (
+        (
+            "native_generation_audit",
+            native_generation_audit,
+            "native_text",
+            native_extraction,
+        ),
+        (
+            "page_ocr_generation_audit",
+            page_ocr_generation_audit,
+            "page_ocr",
+            page_ocr,
+        ),
+    ):
+        lifecycle_input = payload.get("input") or {}
+        lifecycle_mode = payload.get("mode") or {}
+        lifecycle_policy = payload.get("policy") or {}
+        lifecycle_totals = payload.get("totals") or {}
+        producer_manifest = producer.get("manifest") or {}
+        if (
+            payload.get("dataset") != expected_dataset
+            or lifecycle_mode.get("full_shard_check") is not True
+            or lifecycle_mode.get("full_state_check") is not True
+            or lifecycle_input.get("path") != producer_manifest.get("path")
+            or lifecycle_input.get("sha256") != producer_manifest.get("sha256")
+            or lifecycle_input.get("bytes") != producer_manifest.get("bytes")
+            or lifecycle_input.get("logical_sha256")
+            != producer_manifest.get("logical_sha256")
+            or lifecycle_policy.get("synthetic_or_mock_records_counted") is not False
+            or lifecycle_policy.get(
+                "official_public_domain_personal_information_retained"
+            )
+            is not True
+            or lifecycle_policy.get("automatic_deletion_forbidden") is not True
+            or lifecycle_policy.get("remote_mutation_performed") is not False
+            or lifecycle_totals.get("unactivated_manifest_archives") != 0
+            or lifecycle_totals.get("unactivated_activation_receipts") != 0
+            or lifecycle_totals.get("unactivated_generation_directories") != 0
+            or lifecycle_totals.get("orphan_generation_directories") != 0
+            or lifecycle_totals.get("orphan_state_snapshots") != 0
+            or lifecycle_totals.get("interrupted_staging_directories") != 0
+            or lifecycle_totals.get("automatic_deletions") != 0
+            or int(lifecycle_totals.get("retained_state_snapshots") or 0) < 1
+        ):
+            raise ReadinessError(f"document {key} lifecycle contract failed")
 
     fetch_policy = fetch_cohort.get("policy") or {}
     fetch_run_totals = fetch_run.get("totals") or {}
@@ -1642,6 +1700,18 @@ def audit_document_provenance_gap(
         "native_text_characters": native_chars,
         "native_text_truncated_objects": native_truncated,
         "native_text_cas_objects_checksum_verified": native_cas_files,
+        "native_text_retained_generations": _require_nonnegative_int(
+            (native_generation_audit.get("totals") or {}).get(
+                "retained_unique_generations"
+            ),
+            "native text retained generations",
+        ),
+        "native_text_retained_state_snapshots": _require_nonnegative_int(
+            (native_generation_audit.get("totals") or {}).get(
+                "retained_state_snapshots"
+            ),
+            "native text retained state snapshots",
+        ),
         "ocr_documents": ocr_documents,
         "ocr_candidate_pages": ocr_pages,
         "ocr_text_pages": ocr_text_pages,
@@ -1649,6 +1719,18 @@ def audit_document_provenance_gap(
         "ocr_text_characters": ocr_chars,
         "ocr_material_gain_pages": ocr_improved_pages,
         "ocr_text_cas_objects_checksum_verified": ocr_cas_files,
+        "ocr_retained_generations": _require_nonnegative_int(
+            (page_ocr_generation_audit.get("totals") or {}).get(
+                "retained_unique_generations"
+            ),
+            "OCR retained generations",
+        ),
+        "ocr_retained_state_snapshots": _require_nonnegative_int(
+            (page_ocr_generation_audit.get("totals") or {}).get(
+                "retained_state_snapshots"
+            ),
+            "OCR retained state snapshots",
+        ),
         "ocr_human_review_rows": len(review_rows),
         "ocr_human_reviews_completed": reviews_completed,
         "ocr_human_reviews_pending": reviews_pending,

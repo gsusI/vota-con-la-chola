@@ -11,7 +11,6 @@ import os
 import resource
 import sqlite3
 import sys
-import tempfile
 import time
 import uuid
 from collections.abc import Iterator, Mapping
@@ -29,6 +28,10 @@ from publicdata_docs.extraction import (
     DocumentExtraction,
     extract_document_path,
 )
+from publicdata_docs.generation_manifest import (
+    GenerationManifestError,
+    publish_generation_manifest,
+)
 
 DEFAULT_RAW_ROOT = Path("etl/data/raw")
 DEFAULT_INVENTORY = Path("etl/data/manifests/real-document-format-inventory.jsonl")
@@ -41,6 +44,8 @@ DEFAULT_REPORT = Path(
     "real-document-text-extraction.json"
 )
 SHA256_HEX_LENGTH = 64
+DEFAULT_MANIFEST_SHARD_MAX_ROWS = 10_000
+DEFAULT_MANIFEST_SHARD_MAX_UNCOMPRESSED_BYTES = 64 * 1024 * 1024
 
 
 class CorpusExtractionError(RuntimeError):
@@ -112,6 +117,16 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--state-db", default=str(DEFAULT_STATE_DB))
     parser.add_argument("--output-root", default=str(DEFAULT_OUTPUT_ROOT))
     parser.add_argument("--manifest-out", default=str(DEFAULT_MANIFEST))
+    parser.add_argument(
+        "--manifest-shard-max-rows",
+        type=int,
+        default=DEFAULT_MANIFEST_SHARD_MAX_ROWS,
+    )
+    parser.add_argument(
+        "--manifest-shard-max-uncompressed-bytes",
+        type=int,
+        default=DEFAULT_MANIFEST_SHARD_MAX_UNCOMPRESSED_BYTES,
+    )
     parser.add_argument("--report-out", default=str(DEFAULT_REPORT))
     parser.add_argument("--workers", type=int, default=8)
     parser.add_argument("--claim-size", type=int, default=32)
@@ -681,9 +696,7 @@ def run_worker(
         for key, value in persisted.items():
             totals[key] += value
         succeeded_hashes = {
-            outcome.content_sha256
-            for outcome in outcomes
-            if outcome.status != "failed"
+            outcome.content_sha256 for outcome in outcomes if outcome.status != "failed"
         }
         totals["raw_bytes_succeeded"] += sum(
             int(row["bytes"])
@@ -693,84 +706,96 @@ def run_worker(
     return totals
 
 
-def write_manifest(conn: sqlite3.Connection, out_path: Path) -> dict[str, Any]:
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    file_descriptor, temp_name = tempfile.mkstemp(
-        prefix=f".{out_path.name}.", suffix=".tmp", dir=out_path.parent
+def iter_manifest_rows(conn: sqlite3.Connection) -> Iterator[dict[str, Any]]:
+    cursor = conn.execute(
+        """
+        SELECT
+          f.path, f.content_sha256, f.bytes, f.extension, f.mime_type,
+          f.source_group, f.quality_class, f.inventory_text_chars,
+          f.page_count, f.ocr_candidate_pages_json,
+          f.provenance_status, f.public_url_edges,
+          f.public_https_edges, w.state, w.attempts,
+          w.extraction_status, w.text_sha256, w.text_cas_path,
+          w.text_chars, w.extraction_method, w.text_truncated,
+          w.last_error
+        FROM document_file_instances f
+        JOIN document_text_work w
+          ON w.content_sha256 = f.content_sha256
+        ORDER BY f.path
+        """
     )
-    os.close(file_descriptor)
-    temp_path = Path(temp_name)
-    rows = 0
-    digest = hashlib.sha256()
-    try:
-        with temp_path.open("wb") as handle:
-            cursor = conn.execute(
-                """
-                SELECT
-                  f.path, f.content_sha256, f.bytes, f.extension, f.mime_type,
-                  f.source_group, f.quality_class, f.inventory_text_chars,
-                  f.page_count, f.ocr_candidate_pages_json,
-                  f.provenance_status, f.public_url_edges,
-                  f.public_https_edges, w.state, w.attempts,
-                  w.extraction_status, w.text_sha256, w.text_cas_path,
-                  w.text_chars, w.extraction_method, w.text_truncated,
-                  w.last_error
-                FROM document_file_instances f
-                JOIN document_text_work w
-                  ON w.content_sha256 = f.content_sha256
-                ORDER BY f.path
-                """
-            )
-            for row in cursor:
-                payload = {
-                    "schema_version": "real_document_text_manifest_row_v1",
-                    "path": row["path"],
-                    "source_group": row["source_group"],
-                    "extension": row["extension"],
-                    "mime_type": row["mime_type"],
-                    "bytes": int(row["bytes"]),
-                    "content_sha256": row["content_sha256"],
-                    "quality_class": row["quality_class"],
-                    "inventory_text_chars": row["inventory_text_chars"],
-                    "page_count": row["page_count"],
-                    "ocr_candidate_pages": json.loads(row["ocr_candidate_pages_json"]),
-                    "provenance_status": row["provenance_status"],
-                    "public_url_edges": int(row["public_url_edges"]),
-                    "public_https_edges": int(row["public_https_edges"]),
-                    "work_state": row["state"],
-                    "attempts": int(row["attempts"]),
-                    "native_extraction_status": row["extraction_status"],
-                    "native_text_sha256": row["text_sha256"],
-                    "native_text_cas_path": row["text_cas_path"],
-                    "native_text_chars": row["text_chars"],
-                    "native_extraction_method": row["extraction_method"],
-                    "native_text_truncated": (
-                        bool(row["text_truncated"])
-                        if row["text_truncated"] is not None
-                        else None
-                    ),
-                    "last_error": row["last_error"],
-                    "synthetic_or_mock": False,
-                    "official_public_domain_personal_information_retained": True,
-                }
-                encoded = (
-                    json.dumps(payload, ensure_ascii=True, sort_keys=True) + "\n"
-                ).encode("utf-8")
-                handle.write(encoded)
-                digest.update(encoded)
-                rows += 1
-            handle.flush()
-            os.fsync(handle.fileno())
-        os.replace(temp_path, out_path)
-    except Exception:
-        temp_path.unlink(missing_ok=True)
-        raise
-    return {
-        "path": display_path(out_path),
-        "rows": rows,
-        "bytes": out_path.stat().st_size,
-        "sha256": digest.hexdigest(),
-    }
+    for row in cursor:
+        yield {
+            "schema_version": "real_document_text_manifest_row_v1",
+            "path": row["path"],
+            "source_group": row["source_group"],
+            "extension": row["extension"],
+            "mime_type": row["mime_type"],
+            "bytes": int(row["bytes"]),
+            "content_sha256": row["content_sha256"],
+            "quality_class": row["quality_class"],
+            "inventory_text_chars": row["inventory_text_chars"],
+            "page_count": row["page_count"],
+            "ocr_candidate_pages": json.loads(row["ocr_candidate_pages_json"]),
+            "provenance_status": row["provenance_status"],
+            "public_url_edges": int(row["public_url_edges"]),
+            "public_https_edges": int(row["public_https_edges"]),
+            "work_state": row["state"],
+            "attempts": int(row["attempts"]),
+            "native_extraction_status": row["extraction_status"],
+            "native_text_sha256": row["text_sha256"],
+            "native_text_cas_path": row["text_cas_path"],
+            "native_text_chars": row["text_chars"],
+            "native_extraction_method": row["extraction_method"],
+            "native_text_truncated": (
+                bool(row["text_truncated"])
+                if row["text_truncated"] is not None
+                else None
+            ),
+            "last_error": row["last_error"],
+            "synthetic_or_mock": False,
+            "official_public_domain_personal_information_retained": True,
+        }
+
+
+def terminal_state(conn: sqlite3.Connection) -> bool:
+    row = conn.execute(
+        """
+        SELECT COUNT(*) AS total,
+               SUM(CASE WHEN state = 'succeeded' THEN 1 ELSE 0 END) AS succeeded
+        FROM document_text_work
+        """
+    ).fetchone()
+    return int(row["total"] or 0) > 0 and int(row["total"] or 0) == int(
+        row["succeeded"] or 0
+    )
+
+
+def write_manifest(
+    conn: sqlite3.Connection,
+    out_path: Path,
+    *,
+    max_rows: int,
+    max_uncompressed_bytes: int,
+) -> dict[str, Any]:
+    manifest = publish_generation_manifest(
+        manifest_path=out_path,
+        rows=iter_manifest_rows(conn),
+        dataset="native_text",
+        row_schema_version="real_document_text_manifest_row_v1",
+        state_connection=conn,
+        max_rows=max_rows,
+        max_uncompressed_bytes=max_uncompressed_bytes,
+        policy={
+            "official_real_documents_only": True,
+            "synthetic_or_mock_records_counted": False,
+            "official_public_domain_personal_information_retained": True,
+            "native_text_is_not_sanitized_or_identity_stripped": True,
+            "automatic_deletion_forbidden": True,
+        },
+    )
+    manifest["path"] = display_path(out_path)
+    return manifest
 
 
 def build_report(
@@ -940,6 +965,8 @@ def main(argv: list[str] | None = None) -> int:
         int(args.lease_seconds),
         int(args.max_input_bytes),
         int(args.max_text_chars),
+        int(args.manifest_shard_max_rows),
+        int(args.manifest_shard_max_uncompressed_bytes),
     )
     if any(value < 1 for value in positive_values) or int(args.max_items) < 0:
         print("ERROR: worker, lease, size, and attempt values are invalid")
@@ -982,7 +1009,28 @@ def main(argv: list[str] | None = None) -> int:
                 max_input_bytes=int(args.max_input_bytes),
                 max_text_chars=int(args.max_text_chars),
             )
-            manifest = write_manifest(conn, manifest_out)
+            if terminal_state(conn):
+                manifest = write_manifest(
+                    conn,
+                    manifest_out,
+                    max_rows=int(args.manifest_shard_max_rows),
+                    max_uncompressed_bytes=int(
+                        args.manifest_shard_max_uncompressed_bytes
+                    ),
+                )
+            else:
+                manifest = {
+                    "path": display_path(manifest_out),
+                    "rows": -1,
+                    "bytes": 0,
+                    "sha256": None,
+                    "publication": {
+                        "activated": False,
+                        "reason": "nonterminal_work_state",
+                        "live_index_preserved": manifest_out.is_file(),
+                        "automatic_deletion_performed": False,
+                    },
+                }
             usage_after = process_usage()
             performance = {
                 "measurement_scope": "seed_extract_and_manifest",
@@ -993,9 +1041,7 @@ def main(argv: list[str] | None = None) -> int:
                     6,
                 ),
                 "peak_rss_bytes_self": usage_after["peak_rss_bytes_self"],
-                "peak_rss_bytes_child_max": usage_after[
-                    "peak_rss_bytes_child_max"
-                ],
+                "peak_rss_bytes_child_max": usage_after["peak_rss_bytes_child_max"],
                 "workers": int(args.workers),
                 "claim_size": int(args.claim_size),
                 "state_db_preexisting": state_db_preexisting,
@@ -1021,6 +1067,7 @@ def main(argv: list[str] | None = None) -> int:
         return 0
     except (
         CorpusExtractionError,
+        GenerationManifestError,
         OSError,
         sqlite3.Error,
         ValueError,

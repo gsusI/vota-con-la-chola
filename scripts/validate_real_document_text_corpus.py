@@ -10,6 +10,7 @@ import hashlib
 import json
 import os
 import sqlite3
+import sys
 import tempfile
 import uuid
 from collections.abc import Iterator, Mapping
@@ -19,6 +20,14 @@ from pathlib import Path
 from typing import Any
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+from publicdata_docs.generation_manifest import (
+    GenerationManifestError,
+    iter_generation_rows,
+)
+
 DEFAULT_RAW_ROOT = Path("etl/data/raw")
 DEFAULT_TEXT_ROOT = Path("etl/data/derived/real-document-text-corpus-v2")
 DEFAULT_INVENTORY = Path("etl/data/manifests/real-document-format-inventory.jsonl")
@@ -243,52 +252,60 @@ def load_expected(
 
 def load_observed(conn: sqlite3.Connection, manifest_path: Path) -> int:
     rows = 0
-    for item in iter_jsonl(manifest_path):
-        path = str(item.get("path") or "")
-        if (
-            item.get("schema_version") != "real_document_text_manifest_row_v1"
-            or item.get("synthetic_or_mock") is not False
-            or item.get("official_public_domain_personal_information_retained")
-            is not True
-        ):
-            raise CorpusValidationError(f"invalid extraction manifest row: {path}")
-        ocr_pages = item.get("ocr_candidate_pages")
-        if not isinstance(ocr_pages, list):
-            raise CorpusValidationError(f"invalid OCR candidate list: {path}")
-        conn.execute(
-            """
-            INSERT INTO observed (
-              path, content_sha256, bytes, provenance_status,
-              public_url_edges, ocr_candidate_pages, work_state,
-              extraction_status, text_sha256, text_cas_path, text_chars,
-              text_truncated, last_error
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-            """,
-            (
-                path,
-                str(item.get("content_sha256") or "").lower(),
-                int(item.get("bytes") or 0),
-                str(item.get("provenance_status") or ""),
-                int(item.get("public_url_edges") or 0),
-                len(ocr_pages),
-                str(item.get("work_state") or ""),
-                str(item.get("native_extraction_status") or ""),
-                item.get("native_text_sha256"),
-                item.get("native_text_cas_path"),
-                item.get("native_text_chars"),
-                (
-                    1
-                    if item.get("native_text_truncated") is True
-                    else 0
-                    if item.get("native_text_truncated") is False
-                    else None
-                ),
-                item.get("last_error"),
-            ),
+    try:
+        manifest_rows = iter_generation_rows(
+            manifest_path,
+            dataset="native_text",
+            row_schema_version="real_document_text_manifest_row_v1",
         )
-        rows += 1
-        if rows % 5_000 == 0:
-            conn.commit()
+        for item in manifest_rows:
+            path = str(item.get("path") or "")
+            if (
+                item.get("schema_version") != "real_document_text_manifest_row_v1"
+                or item.get("synthetic_or_mock") is not False
+                or item.get("official_public_domain_personal_information_retained")
+                is not True
+            ):
+                raise CorpusValidationError(f"invalid extraction manifest row: {path}")
+            ocr_pages = item.get("ocr_candidate_pages")
+            if not isinstance(ocr_pages, list):
+                raise CorpusValidationError(f"invalid OCR candidate list: {path}")
+            conn.execute(
+                """
+                INSERT INTO observed (
+                  path, content_sha256, bytes, provenance_status,
+                  public_url_edges, ocr_candidate_pages, work_state,
+                  extraction_status, text_sha256, text_cas_path, text_chars,
+                  text_truncated, last_error
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    path,
+                    str(item.get("content_sha256") or "").lower(),
+                    int(item.get("bytes") or 0),
+                    str(item.get("provenance_status") or ""),
+                    int(item.get("public_url_edges") or 0),
+                    len(ocr_pages),
+                    str(item.get("work_state") or ""),
+                    str(item.get("native_extraction_status") or ""),
+                    item.get("native_text_sha256"),
+                    item.get("native_text_cas_path"),
+                    item.get("native_text_chars"),
+                    (
+                        1
+                        if item.get("native_text_truncated") is True
+                        else 0
+                        if item.get("native_text_truncated") is False
+                        else None
+                    ),
+                    item.get("last_error"),
+                ),
+            )
+            rows += 1
+            if rows % 5_000 == 0:
+                conn.commit()
+    except GenerationManifestError as exc:
+        raise CorpusValidationError(f"invalid extraction manifest: {exc}") from exc
     conn.commit()
     return rows
 
@@ -684,6 +701,7 @@ def main(argv: list[str] | None = None) -> int:
         return 0
     except (
         CorpusValidationError,
+        GenerationManifestError,
         OSError,
         sqlite3.Error,
         ValueError,

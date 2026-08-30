@@ -10,6 +10,7 @@ import hashlib
 import json
 import os
 import sqlite3
+import sys
 import tempfile
 import uuid
 from collections.abc import Iterator, Mapping
@@ -19,6 +20,14 @@ from pathlib import Path
 from typing import Any
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+from publicdata_docs.generation_manifest import (
+    GenerationManifestError,
+    iter_generation_rows,
+)
+
 DEFAULT_RAW_ROOT = Path("etl/data/raw")
 DEFAULT_OCR_ROOT = Path("etl/data/derived/real-document-page-ocr-v2")
 DEFAULT_NATIVE_MANIFEST = Path(
@@ -85,22 +94,19 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     return parser.parse_args(argv)
 
 
-def iter_jsonl(path: Path) -> Iterator[dict[str, Any]]:
-    if not path.is_file():
-        raise OcrValidationError(f"missing JSONL input: {display_path(path)}")
-    with path.open("r", encoding="utf-8") as handle:
-        for line_number, line in enumerate(handle, start=1):
-            try:
-                item = json.loads(line)
-            except json.JSONDecodeError as exc:
-                raise OcrValidationError(
-                    f"invalid JSONL at {display_path(path)}:{line_number}: {exc}"
-                ) from exc
-            if not isinstance(item, dict):
-                raise OcrValidationError(
-                    f"JSONL row must be an object: {display_path(path)}:{line_number}"
-                )
-            yield item
+def iter_manifest(
+    path: Path, *, dataset: str, row_schema_version: str
+) -> Iterator[dict[str, Any]]:
+    try:
+        yield from iter_generation_rows(
+            path,
+            dataset=dataset,
+            row_schema_version=row_schema_version,
+        )
+    except GenerationManifestError as exc:
+        raise OcrValidationError(
+            f"invalid generation manifest {display_path(path)}: {exc}"
+        ) from exc
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -168,7 +174,11 @@ def open_index() -> tuple[sqlite3.Connection, Path]:
 def load_expected(conn: sqlite3.Connection, native_manifest: Path) -> tuple[int, int]:
     native_rows = 0
     candidates = 0
-    for item in iter_jsonl(native_manifest):
+    for item in iter_manifest(
+        native_manifest,
+        dataset="native_text",
+        row_schema_version="real_document_text_manifest_row_v1",
+    ):
         native_rows += 1
         path = str(item.get("path") or "")
         document_sha256 = str(item.get("content_sha256") or "").lower()
@@ -244,7 +254,11 @@ def load_expected(conn: sqlite3.Connection, native_manifest: Path) -> tuple[int,
 
 def load_observed(conn: sqlite3.Connection, ocr_manifest: Path) -> int:
     rows = 0
-    for item in iter_jsonl(ocr_manifest):
+    for item in iter_manifest(
+        ocr_manifest,
+        dataset="page_ocr",
+        row_schema_version="real_document_page_ocr_manifest_row_v1",
+    ):
         identity = (
             str(item.get("document_sha256") or "").lower(),
             int(item.get("page_number") or 0),
@@ -664,6 +678,7 @@ def main(argv: list[str] | None = None) -> int:
         return 0
     except (
         OcrValidationError,
+        GenerationManifestError,
         OSError,
         sqlite3.Error,
         ValueError,

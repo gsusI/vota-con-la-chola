@@ -24,6 +24,15 @@ from pathlib import Path
 from typing import Any
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+from publicdata_docs.generation_manifest import (
+    GenerationManifestError,
+    iter_generation_rows,
+    publish_generation_manifest,
+)
+
 DEFAULT_RAW_ROOT = Path("etl/data/raw")
 DEFAULT_NATIVE_MANIFEST = Path(
     "etl/data/published/real-document-text-manifest-latest.jsonl"
@@ -37,6 +46,8 @@ DEFAULT_REPORT = Path(
     "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr.json"
 )
 SHA256_HEX_LENGTH = 64
+DEFAULT_MANIFEST_SHARD_MAX_ROWS = 10_000
+DEFAULT_MANIFEST_SHARD_MAX_UNCOMPRESSED_BYTES = 64 * 1024 * 1024
 
 
 class CorpusOcrError(RuntimeError):
@@ -108,6 +119,16 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--state-db", default=str(DEFAULT_STATE_DB))
     parser.add_argument("--output-root", default=str(DEFAULT_OUTPUT_ROOT))
     parser.add_argument("--manifest-out", default=str(DEFAULT_MANIFEST))
+    parser.add_argument(
+        "--manifest-shard-max-rows",
+        type=int,
+        default=DEFAULT_MANIFEST_SHARD_MAX_ROWS,
+    )
+    parser.add_argument(
+        "--manifest-shard-max-uncompressed-bytes",
+        type=int,
+        default=DEFAULT_MANIFEST_SHARD_MAX_UNCOMPRESSED_BYTES,
+    )
     parser.add_argument("--report-out", default=str(DEFAULT_REPORT))
     parser.add_argument("--workers", type=int, default=8)
     parser.add_argument("--claim-size", type=int, default=16)
@@ -123,21 +144,16 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
 
 
 def iter_jsonl(path: Path) -> Iterator[dict[str, Any]]:
-    if not path.is_file():
-        raise CorpusOcrError(f"missing native manifest: {display_path(path)}")
-    with path.open("r", encoding="utf-8") as handle:
-        for line_number, line in enumerate(handle, start=1):
-            try:
-                item = json.loads(line)
-            except json.JSONDecodeError as exc:
-                raise CorpusOcrError(
-                    f"invalid JSONL at {display_path(path)}:{line_number}: {exc}"
-                ) from exc
-            if not isinstance(item, dict):
-                raise CorpusOcrError(
-                    f"JSONL row must be an object: {display_path(path)}:{line_number}"
-                )
-            yield item
+    try:
+        yield from iter_generation_rows(
+            path,
+            dataset="native_text",
+            row_schema_version="real_document_text_manifest_row_v1",
+        )
+    except GenerationManifestError as exc:
+        raise CorpusOcrError(
+            f"invalid native manifest {display_path(path)}: {exc}"
+        ) from exc
 
 
 def open_state_db(path: Path) -> sqlite3.Connection:
@@ -698,75 +714,88 @@ def tool_version(command: str, version_arg: str = "--version") -> str:
     return text.splitlines()[0].strip() if text else "unknown"
 
 
-def write_manifest(conn: sqlite3.Connection, out_path: Path) -> dict[str, Any]:
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    file_descriptor, temp_name = tempfile.mkstemp(
-        prefix=f".{out_path.name}.", suffix=".tmp", dir=out_path.parent
+def iter_manifest_rows(conn: sqlite3.Connection) -> Iterator[dict[str, Any]]:
+    cursor = conn.execute(
+        """
+        SELECT
+          d.document_sha256, d.representative_path, d.bytes,
+          d.source_group, d.page_count, w.page_number, w.reason,
+          w.native_text_chars, w.state, w.attempts, w.ocr_status,
+          w.ocr_text_sha256, w.ocr_text_cas_path, w.ocr_text_chars,
+          w.improved_over_native, w.last_error
+        FROM ocr_page_work w
+        JOIN ocr_documents d USING (document_sha256)
+        ORDER BY d.document_sha256, w.page_number
+        """
     )
-    os.close(file_descriptor)
-    temp_path = Path(temp_name)
-    rows = 0
-    digest = hashlib.sha256()
-    try:
-        with temp_path.open("wb") as handle:
-            cursor = conn.execute(
-                """
-                SELECT
-                  d.document_sha256, d.representative_path, d.bytes,
-                  d.source_group, d.page_count, w.page_number, w.reason,
-                  w.native_text_chars, w.state, w.attempts, w.ocr_status,
-                  w.ocr_text_sha256, w.ocr_text_cas_path, w.ocr_text_chars,
-                  w.improved_over_native, w.last_error
-                FROM ocr_page_work w
-                JOIN ocr_documents d USING (document_sha256)
-                ORDER BY d.document_sha256, w.page_number
-                """
-            )
-            for row in cursor:
-                payload = {
-                    "schema_version": "real_document_page_ocr_manifest_row_v1",
-                    "document_sha256": row["document_sha256"],
-                    "representative_path": row["representative_path"],
-                    "document_bytes": int(row["bytes"]),
-                    "source_group": row["source_group"],
-                    "document_page_count": int(row["page_count"]),
-                    "page_number": int(row["page_number"]),
-                    "routing_reason": row["reason"],
-                    "native_text_chars": int(row["native_text_chars"]),
-                    "work_state": row["state"],
-                    "attempts": int(row["attempts"]),
-                    "ocr_status": row["ocr_status"],
-                    "ocr_text_sha256": row["ocr_text_sha256"],
-                    "ocr_text_cas_path": row["ocr_text_cas_path"],
-                    "ocr_text_chars": row["ocr_text_chars"],
-                    "improved_over_native": (
-                        bool(row["improved_over_native"])
-                        if row["improved_over_native"] is not None
-                        else None
-                    ),
-                    "last_error": row["last_error"],
-                    "additive_to_native_text": True,
-                    "synthetic_or_mock": False,
-                    "official_public_domain_personal_information_retained": True,
-                }
-                encoded = (
-                    json.dumps(payload, ensure_ascii=True, sort_keys=True) + "\n"
-                ).encode("utf-8")
-                handle.write(encoded)
-                digest.update(encoded)
-                rows += 1
-            handle.flush()
-            os.fsync(handle.fileno())
-        os.replace(temp_path, out_path)
-    except Exception:
-        temp_path.unlink(missing_ok=True)
-        raise
-    return {
-        "path": display_path(out_path),
-        "rows": rows,
-        "bytes": out_path.stat().st_size,
-        "sha256": digest.hexdigest(),
-    }
+    for row in cursor:
+        yield {
+            "schema_version": "real_document_page_ocr_manifest_row_v1",
+            "document_sha256": row["document_sha256"],
+            "representative_path": row["representative_path"],
+            "document_bytes": int(row["bytes"]),
+            "source_group": row["source_group"],
+            "document_page_count": int(row["page_count"]),
+            "page_number": int(row["page_number"]),
+            "routing_reason": row["reason"],
+            "native_text_chars": int(row["native_text_chars"]),
+            "work_state": row["state"],
+            "attempts": int(row["attempts"]),
+            "ocr_status": row["ocr_status"],
+            "ocr_text_sha256": row["ocr_text_sha256"],
+            "ocr_text_cas_path": row["ocr_text_cas_path"],
+            "ocr_text_chars": row["ocr_text_chars"],
+            "improved_over_native": (
+                bool(row["improved_over_native"])
+                if row["improved_over_native"] is not None
+                else None
+            ),
+            "last_error": row["last_error"],
+            "additive_to_native_text": True,
+            "synthetic_or_mock": False,
+            "official_public_domain_personal_information_retained": True,
+        }
+
+
+def terminal_state(conn: sqlite3.Connection) -> bool:
+    row = conn.execute(
+        """
+        SELECT COUNT(*) AS total,
+               SUM(CASE WHEN state = 'succeeded' THEN 1 ELSE 0 END) AS succeeded
+        FROM ocr_page_work
+        """
+    ).fetchone()
+    return int(row["total"] or 0) > 0 and int(row["total"] or 0) == int(
+        row["succeeded"] or 0
+    )
+
+
+def write_manifest(
+    conn: sqlite3.Connection,
+    out_path: Path,
+    *,
+    max_rows: int,
+    max_uncompressed_bytes: int,
+) -> dict[str, Any]:
+    manifest = publish_generation_manifest(
+        manifest_path=out_path,
+        rows=iter_manifest_rows(conn),
+        dataset="page_ocr",
+        row_schema_version="real_document_page_ocr_manifest_row_v1",
+        state_connection=conn,
+        max_rows=max_rows,
+        max_uncompressed_bytes=max_uncompressed_bytes,
+        policy={
+            "official_real_documents_only": True,
+            "synthetic_or_mock_records_counted": False,
+            "official_public_domain_personal_information_retained": True,
+            "ocr_text_is_not_sanitized_or_identity_stripped": True,
+            "ocr_is_additive_to_native_text": True,
+            "automatic_deletion_forbidden": True,
+        },
+    )
+    manifest["path"] = display_path(out_path)
+    return manifest
 
 
 def build_report(
@@ -939,6 +968,8 @@ def main(argv: list[str] | None = None) -> int:
         int(args.lease_seconds),
         int(args.dpi),
         int(args.psm),
+        int(args.manifest_shard_max_rows),
+        int(args.manifest_shard_max_uncompressed_bytes),
     )
     if (
         any(value < 1 for value in positive)
@@ -992,7 +1023,28 @@ def main(argv: list[str] | None = None) -> int:
                 psm=int(args.psm),
                 timeout=float(args.timeout),
             )
-            manifest = write_manifest(conn, manifest_out)
+            if terminal_state(conn):
+                manifest = write_manifest(
+                    conn,
+                    manifest_out,
+                    max_rows=int(args.manifest_shard_max_rows),
+                    max_uncompressed_bytes=int(
+                        args.manifest_shard_max_uncompressed_bytes
+                    ),
+                )
+            else:
+                manifest = {
+                    "path": display_path(manifest_out),
+                    "rows": -1,
+                    "bytes": 0,
+                    "sha256": None,
+                    "publication": {
+                        "activated": False,
+                        "reason": "nonterminal_work_state",
+                        "live_index_preserved": manifest_out.is_file(),
+                        "automatic_deletion_performed": False,
+                    },
+                }
             usage_after = process_usage()
             performance = {
                 "measurement_scope": "seed_ocr_and_manifest",
@@ -1003,9 +1055,7 @@ def main(argv: list[str] | None = None) -> int:
                     6,
                 ),
                 "peak_rss_bytes_self": usage_after["peak_rss_bytes_self"],
-                "peak_rss_bytes_child_max": usage_after[
-                    "peak_rss_bytes_child_max"
-                ],
+                "peak_rss_bytes_child_max": usage_after["peak_rss_bytes_child_max"],
                 "workers": int(args.workers),
                 "claim_size": int(args.claim_size),
                 "state_db_preexisting": state_db_preexisting,
@@ -1035,6 +1085,7 @@ def main(argv: list[str] | None = None) -> int:
         return 0
     except (
         CorpusOcrError,
+        GenerationManifestError,
         OSError,
         sqlite3.Error,
         ValueError,

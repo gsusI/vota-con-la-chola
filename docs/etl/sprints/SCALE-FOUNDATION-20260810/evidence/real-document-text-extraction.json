@@ -8,7 +8,7 @@
     "no_synthetic_or_mock_records": true,
     "official_public_domain_personal_information_retained": true
   },
-  "generated_at": "2026-08-30T03:24:36.093257Z",
+  "generated_at": "2026-08-30T05:48:41.310443Z",
   "inputs": {
     "inventory": {
       "bytes": 82987794,
@@ -22,24 +22,49 @@
     }
   },
   "manifest": {
-    "bytes": 133774263,
+    "bytes": 5423,
+    "compressed_bytes": 13729285,
+    "logical_sha256": "2a78979fec348f5ac5bcf9c9acab82df784d7241e4d10da22a098bb0fe88ffb2",
     "path": "etl/data/published/real-document-text-manifest-latest.jsonl",
+    "publication": {
+      "activated": true,
+      "active_history_path": "real-document-text-manifest-latest-history/fea6dc86110ad94c190133077d2271130652f30475f6f561ad0ab5ca98e25024.json",
+      "active_logical_sha256": "2a78979fec348f5ac5bcf9c9acab82df784d7241e4d10da22a098bb0fe88ffb2",
+      "active_manifest_sha256": "fea6dc86110ad94c190133077d2271130652f30475f6f561ad0ab5ca98e25024",
+      "active_receipt_path": "real-document-text-manifest-latest-receipts/fea6dc86110ad94c190133077d2271130652f30475f6f561ad0ab5ca98e25024.json",
+      "automatic_deletion_performed": false,
+      "legacy_equivalent_jsonl_migrated": true,
+      "live_index_changed": true,
+      "live_index_switched_last": true,
+      "predecessor_manifest_sha256": null,
+      "state_snapshot": {
+        "bytes": 166522880,
+        "compressed_bytes": 40150145,
+        "compressed_sha256": "7cf4a4591fe8aba761570212064a4d5474bf873ef6dfd20f24e2503e5dbfecd4",
+        "path": "real-document-text-manifest-latest-state/d9dd188b827132e0b4a68b35273607aba2a046713928053fb3050acffcc6c58e.sqlite.gz",
+        "sha256": "d9dd188b827132e0b4a68b35273607aba2a046713928053fb3050acffcc6c58e",
+        "sqlite_quick_check": "ok"
+      },
+      "superseded_predecessor": false
+    },
     "rows": 122607,
-    "sha256": "2a78979fec348f5ac5bcf9c9acab82df784d7241e4d10da22a098bb0fe88ffb2"
+    "sha256": "fea6dc86110ad94c190133077d2271130652f30475f6f561ad0ab5ca98e25024",
+    "shard_files": 13,
+    "uncompressed_bytes": 133774263
   },
   "next_action": "Independently validate every manifest row and text CAS object, then OCR every distinct empty or sparse PDF page without replacing native text.",
   "performance": {
     "claim_size": 48,
     "cold_state_and_output": false,
-    "cpu_seconds": 294.948389,
-    "elapsed_seconds": 223.155116,
-    "items_per_second": 541.134804,
+    "cpu_seconds": 5.774562,
+    "elapsed_seconds": 7.069565,
+    "items_per_second": 0.0,
     "measurement_scope": "seed_extract_and_manifest",
     "output_root_preexisting": true,
-    "peak_rss_bytes_child_max": 239288320,
-    "peak_rss_bytes_self": 1161691136,
-    "raw_bytes_per_second": 23807035.017741,
-    "state_db_preexisting": false,
+    "peak_rss_bytes_child_max": 0,
+    "peak_rss_bytes_self": 311705600,
+    "raw_bytes_per_second": 0.0,
+    "state_db_preexisting": true,
     "workers": 12
   },
   "policy": {
@@ -51,11 +76,11 @@
     "synthetic_or_mock_records_counted": false
   },
   "run": {
-    "claimed": 120757,
+    "claimed": 0,
     "dead": 0,
-    "raw_bytes_succeeded": 5312661661,
+    "raw_bytes_succeeded": 0,
     "retried": 0,
-    "succeeded": 120757
+    "succeeded": 0
   },
   "schema_version": "real_document_text_extraction_v1",
   "seed": {

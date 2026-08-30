@@ -17,13 +17,13 @@
       "tesseract": "tesseract 5.5.2"
     }
   },
-  "generated_at": "2026-08-30T03:30:12.039621Z",
+  "generated_at": "2026-08-30T05:52:07.853237Z",
   "inputs": {
     "native_manifest": {
-      "bytes": 133774263,
+      "bytes": 5423,
       "path": "etl/data/published/real-document-text-manifest-latest.jsonl",
       "rows": 122607,
-      "sha256": "2a78979fec348f5ac5bcf9c9acab82df784d7241e4d10da22a098bb0fe88ffb2"
+      "sha256": "fea6dc86110ad94c190133077d2271130652f30475f6f561ad0ab5ca98e25024"
     }
   },
   "limitations": [
@@ -33,22 +33,47 @@
     "Human review must measure OCR accuracy by source, language, scan quality, and document type before analytical promotion."
   ],
   "manifest": {
-    "bytes": 834675,
+    "bytes": 1194,
+    "compressed_bytes": 21424,
+    "logical_sha256": "31acdf4e61d119594644efa6342100f006c0bfe21c125531d2654a6cd1abf804",
     "path": "etl/data/published/real-document-page-ocr-manifest-latest.jsonl",
+    "publication": {
+      "activated": true,
+      "active_history_path": "real-document-page-ocr-manifest-latest-history/deb426b8928f336df15f256a5701bfe294add242bd0a9e688fbf31086fd97f67.json",
+      "active_logical_sha256": "31acdf4e61d119594644efa6342100f006c0bfe21c125531d2654a6cd1abf804",
+      "active_manifest_sha256": "deb426b8928f336df15f256a5701bfe294add242bd0a9e688fbf31086fd97f67",
+      "active_receipt_path": "real-document-page-ocr-manifest-latest-receipts/deb426b8928f336df15f256a5701bfe294add242bd0a9e688fbf31086fd97f67.json",
+      "automatic_deletion_performed": false,
+      "legacy_equivalent_jsonl_migrated": true,
+      "live_index_changed": true,
+      "live_index_switched_last": true,
+      "predecessor_manifest_sha256": null,
+      "state_snapshot": {
+        "bytes": 589824,
+        "compressed_bytes": 66033,
+        "compressed_sha256": "f4e870c15338f471c2798dfc97dadb9003297b18b3a5ed79d113b82960b6f786",
+        "path": "real-document-page-ocr-manifest-latest-state/983b34775517e6fba884f04e02edad0b6a551bfedbba355e258f4993aefeac15.sqlite.gz",
+        "sha256": "983b34775517e6fba884f04e02edad0b6a551bfedbba355e258f4993aefeac15",
+        "sqlite_quick_check": "ok"
+      },
+      "superseded_predecessor": false
+    },
     "rows": 856,
-    "sha256": "31acdf4e61d119594644efa6342100f006c0bfe21c125531d2654a6cd1abf804"
+    "sha256": "deb426b8928f336df15f256a5701bfe294add242bd0a9e688fbf31086fd97f67",
+    "shard_files": 1,
+    "uncompressed_bytes": 834675
   },
   "next_action": "Independently validate every page row and OCR text CAS object, then human-review a stratified real-page sample before analytical promotion.",
   "performance": {
     "claim_size": 16,
     "cold_state_and_output": false,
-    "cpu_seconds": 578.954385,
-    "elapsed_seconds": 107.886765,
+    "cpu_seconds": 570.45105,
+    "elapsed_seconds": 105.707825,
     "measurement_scope": "seed_ocr_and_manifest",
     "output_root_preexisting": true,
-    "pages_per_second": 7.934245,
-    "peak_rss_bytes_child_max": 201687040,
-    "peak_rss_bytes_self": 37519360,
+    "pages_per_second": 8.097792,
+    "peak_rss_bytes_child_max": 206405632,
+    "peak_rss_bytes_self": 42500096,
     "state_db_preexisting": false,
     "workers": 8
   },
@@ -72,7 +97,7 @@
     "documents": 58
   },
   "state": {
-    "database": "etl/data/staging/real-document-page-ocr-v6-20260830.db",
+    "database": "etl/data/staging/real-document-page-ocr-v8-20260830.db",
     "ocr_status_counts": {
       "ocr_no_text": 7,
       "ocr_text_extracted": 849
@@ -85,7 +110,7 @@
   "totals": {
     "candidate_pages": 856,
     "documents": 58,
-    "elapsed_worker_seconds": 587.0126,
+    "elapsed_worker_seconds": 576.7412,
     "empty_text_pages": 34,
     "native_text_chars_on_candidate_pages": 68951,
     "ocr_text_cas_bytes": 14853,

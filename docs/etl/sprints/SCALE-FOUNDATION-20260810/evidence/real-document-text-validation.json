@@ -19,22 +19,22 @@
     "raw_error_samples": [],
     "text_error_samples": []
   },
-  "generated_at": "2026-08-30T03:28:06.707542Z",
+  "generated_at": "2026-08-30T05:49:56.819613Z",
   "inputs": {
     "extraction_report": {
-      "bytes": 2973,
+      "bytes": 4345,
       "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-extraction.json",
-      "sha256": "3734193d006a099742a61bb1b06a3875c6bc5e8c90a17e64a136108ebcfc7d6b"
+      "sha256": "b7ea2c2331e5dd576704ae9cc7b2fd4133fb17641bf7c9b4fc43874a100cc66f"
     },
     "inventory": {
       "path": "etl/data/manifests/real-document-format-inventory.jsonl",
       "sha256": "4d11b77c8a2ac64b59baed5190fe52975d9d820fe76777585bf6799e8718a9ad"
     },
     "manifest": {
-      "bytes": 133774263,
+      "bytes": 5423,
       "path": "etl/data/published/real-document-text-manifest-latest.jsonl",
       "rows": 122607,
-      "sha256": "2a78979fec348f5ac5bcf9c9acab82df784d7241e4d10da22a098bb0fe88ffb2"
+      "sha256": "fea6dc86110ad94c190133077d2271130652f30475f6f561ad0ab5ca98e25024"
     },
     "provenance": {
       "path": "etl/data/manifests/real-document-provenance-files.jsonl",

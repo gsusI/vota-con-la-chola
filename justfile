@@ -545,8 +545,8 @@ scale_document_pipeline_evidence := env_var_or_default("SCALE_DOCUMENT_PIPELINE_
 scale_document_format_inventory := env_var_or_default("SCALE_DOCUMENT_FORMAT_INVENTORY", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-format-inventory.json")
 scale_pdf_ocr_routing_benchmark := env_var_or_default("SCALE_PDF_OCR_ROUTING_BENCHMARK", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/pdf-ocr-routing-benchmark.json")
 scale_document_workers := env_var_or_default("SCALE_DOCUMENT_WORKERS", "8")
-scale_document_text_state_db := env_var_or_default("SCALE_DOCUMENT_TEXT_STATE_DB", "etl/data/staging/real-document-text-corpus-v5.db")
-scale_document_ocr_state_db := env_var_or_default("SCALE_DOCUMENT_OCR_STATE_DB", "etl/data/staging/real-document-page-ocr-v5.db")
+scale_document_text_state_db := env_var_or_default("SCALE_DOCUMENT_TEXT_STATE_DB", "etl/data/staging/real-document-text-corpus-v6-20260830.db")
+scale_document_ocr_state_db := env_var_or_default("SCALE_DOCUMENT_OCR_STATE_DB", "etl/data/staging/real-document-page-ocr-v8-20260830.db")
 wayback_document_timeout := env_var_or_default("WAYBACK_DOCUMENT_TIMEOUT", "30")
 wayback_document_attempts := env_var_or_default("WAYBACK_DOCUMENT_ATTEMPTS", "2")
 wayback_document_args := env_var_or_default("WAYBACK_DOCUMENT_ARGS", "")
@@ -2447,11 +2447,17 @@ etl-scale-extract-document-text-corpus:
 etl-scale-validate-document-text-corpus:
   python3 scripts/validate_real_document_text_corpus.py --workers 12 --batch-size 128 --full-raw-check --enforce
 
+etl-scale-audit-document-text-generation:
+  python3 scripts/audit_real_document_generation_lifecycle.py native_text --full-shard-check --full-state-check --enforce
+
 etl-scale-ocr-document-pages:
   python3 scripts/ocr_real_document_pages.py --state-db {{scale_document_ocr_state_db}} --workers 8 --claim-size 16 --timeout 180 --enforce
 
 etl-scale-validate-document-page-ocr:
   python3 scripts/validate_real_document_page_ocr.py --workers 8 --batch-size 64 --enforce
+
+etl-scale-audit-document-page-ocr-generation:
+  python3 scripts/audit_real_document_generation_lifecycle.py page_ocr --full-shard-check --full-state-check --enforce
 
 etl-scale-prepare-document-page-ocr-review:
   python3 scripts/prepare_real_document_ocr_review.py --sample-pages 40 --enforce
@@ -2465,8 +2471,10 @@ etl-scale-require-document-page-ocr-review:
 etl-scale-process-document-corpus:
   just etl-scale-extract-document-text-corpus
   just etl-scale-validate-document-text-corpus
+  just etl-scale-audit-document-text-generation
   just etl-scale-ocr-document-pages
   just etl-scale-validate-document-page-ocr
+  just etl-scale-audit-document-page-ocr-generation
   just etl-scale-prepare-document-page-ocr-review
   just etl-scale-validate-document-page-ocr-review
 

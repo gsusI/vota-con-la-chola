@@ -11,6 +11,7 @@ import json
 import os
 import shutil
 import subprocess
+import sys
 import uuid
 from collections import Counter, defaultdict
 from collections.abc import Iterator, Mapping
@@ -19,6 +20,14 @@ from pathlib import Path
 from typing import Any
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+from publicdata_docs.generation_manifest import (
+    GenerationManifestError,
+    iter_generation_rows,
+)
+
 DEFAULT_RAW_ROOT = Path("etl/data/raw")
 DEFAULT_OCR_ROOT = Path("etl/data/derived/real-document-page-ocr-v2")
 DEFAULT_OCR_MANIFEST = Path(
@@ -123,21 +132,16 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
 
 
 def iter_jsonl(path: Path) -> Iterator[dict[str, Any]]:
-    if not path.is_file():
-        raise OcrReviewQueueError(f"missing OCR manifest: {display_path(path)}")
-    with path.open("r", encoding="utf-8") as handle:
-        for line_number, line in enumerate(handle, start=1):
-            try:
-                item = json.loads(line)
-            except json.JSONDecodeError as exc:
-                raise OcrReviewQueueError(
-                    f"invalid JSONL at {display_path(path)}:{line_number}: {exc}"
-                ) from exc
-            if not isinstance(item, dict):
-                raise OcrReviewQueueError(
-                    f"JSONL row must be an object: {display_path(path)}:{line_number}"
-                )
-            yield item
+    try:
+        yield from iter_generation_rows(
+            path,
+            dataset="page_ocr",
+            row_schema_version="real_document_page_ocr_manifest_row_v1",
+        )
+    except GenerationManifestError as exc:
+        raise OcrReviewQueueError(
+            f"invalid OCR manifest {display_path(path)}: {exc}"
+        ) from exc
 
 
 def candidate_key(row: Mapping[str, Any]) -> tuple[str, int]:

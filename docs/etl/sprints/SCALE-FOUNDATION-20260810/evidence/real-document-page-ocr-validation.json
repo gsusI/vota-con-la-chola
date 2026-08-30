@@ -19,24 +19,24 @@
     "ocr_text_error_samples": [],
     "source_document_error_samples": []
   },
-  "generated_at": "2026-08-30T03:30:17.300442Z",
+  "generated_at": "2026-08-30T05:52:13.463803Z",
   "inputs": {
     "native_manifest": {
-      "bytes": 133774263,
+      "bytes": 5423,
       "path": "etl/data/published/real-document-text-manifest-latest.jsonl",
       "rows": 122607,
-      "sha256": "2a78979fec348f5ac5bcf9c9acab82df784d7241e4d10da22a098bb0fe88ffb2"
+      "sha256": "fea6dc86110ad94c190133077d2271130652f30475f6f561ad0ab5ca98e25024"
     },
     "ocr_manifest": {
-      "bytes": 834675,
+      "bytes": 1194,
       "path": "etl/data/published/real-document-page-ocr-manifest-latest.jsonl",
       "rows": 856,
-      "sha256": "31acdf4e61d119594644efa6342100f006c0bfe21c125531d2654a6cd1abf804"
+      "sha256": "deb426b8928f336df15f256a5701bfe294add242bd0a9e688fbf31086fd97f67"
     },
     "ocr_report": {
-      "bytes": 3262,
+      "bytes": 4682,
       "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr.json",
-      "sha256": "cccd8a975d22b36e1fcbe74034326909f0510e4547dedea2e7d14a3d26de3ecd"
+      "sha256": "e4e154bca88d004c5441f9ecaca646b6d3c9d6e7355711a999eac139b4ffd870"
     }
   },
   "next_action": "Human-review a stratified real-page sample by source, language, scan quality, and routing reason before analytical promotion.",

@@ -5,6 +5,8 @@ import json
 import unittest
 from pathlib import Path
 
+from publicdata_docs.generation_manifest import iter_generation_rows
+
 REPO_ROOT = Path(__file__).resolve().parents[1]
 EVIDENCE_ROOT = REPO_ROOT / "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence"
 NATIVE_REPORT = EVIDENCE_ROOT / "real-document-text-extraction.json"
@@ -69,18 +71,18 @@ class RealDocumentCorpusProcessingTests(unittest.TestCase):
     def test_every_real_native_manifest_row_retains_identity_policy(self) -> None:
         self.require_real_artifacts(NATIVE_MANIFEST)
         rows = 0
-        with NATIVE_MANIFEST.open("r", encoding="utf-8") as handle:
-            for line in handle:
-                item = json.loads(line)
-                rows += 1
-                self.assertFalse(item["synthetic_or_mock"])
-                self.assertTrue(
-                    item["official_public_domain_personal_information_retained"]
-                )
-                self.assertEqual(item["work_state"], "succeeded")
-                self.assertEqual(
-                    item["native_extraction_status"], "native_text_extracted"
-                )
+        for item in iter_generation_rows(
+            NATIVE_MANIFEST,
+            dataset="native_text",
+            row_schema_version="real_document_text_manifest_row_v1",
+        ):
+            rows += 1
+            self.assertFalse(item["synthetic_or_mock"])
+            self.assertTrue(
+                item["official_public_domain_personal_information_retained"]
+            )
+            self.assertEqual(item["work_state"], "succeeded")
+            self.assertEqual(item["native_extraction_status"], "native_text_extracted")
         self.assertEqual(rows, 122_607)
 
     def test_page_ocr_and_independent_validation_cover_every_real_candidate(
@@ -107,17 +109,19 @@ class RealDocumentCorpusProcessingTests(unittest.TestCase):
     def test_every_real_ocr_manifest_row_is_additive(self) -> None:
         self.require_real_artifacts(OCR_MANIFEST)
         rows = 0
-        with OCR_MANIFEST.open("r", encoding="utf-8") as handle:
-            for line in handle:
-                item = json.loads(line)
-                rows += 1
-                self.assertFalse(item["synthetic_or_mock"])
-                self.assertTrue(item["additive_to_native_text"])
-                self.assertTrue(
-                    item["official_public_domain_personal_information_retained"]
-                )
-                self.assertEqual(item["work_state"], "succeeded")
-                self.assertIn(item["ocr_status"], {"ocr_text_extracted", "ocr_no_text"})
+        for item in iter_generation_rows(
+            OCR_MANIFEST,
+            dataset="page_ocr",
+            row_schema_version="real_document_page_ocr_manifest_row_v1",
+        ):
+            rows += 1
+            self.assertFalse(item["synthetic_or_mock"])
+            self.assertTrue(item["additive_to_native_text"])
+            self.assertTrue(
+                item["official_public_domain_personal_information_retained"]
+            )
+            self.assertEqual(item["work_state"], "succeeded")
+            self.assertIn(item["ocr_status"], {"ocr_text_extracted", "ocr_no_text"})
         self.assertEqual(rows, 856)
 
     def test_human_review_queue_contains_only_unlabeled_real_pages(self) -> None:

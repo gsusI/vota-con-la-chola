@@ -2518,8 +2518,10 @@ PROJECT_GOTCHAS = [
             "behind 11 content-addressed gzip shards and a small index. Its immutable "
             "index archives, activation receipts, predecessor chain, forced-interruption "
             "test, and independent lifecycle audit prove non-destructive lineage "
-            "supersession. Stale native/OCR state can still bind a new run to an old input "
-            "inventory even when output CAS is reusable."
+            "supersession. Native and OCR now use the same terminal-only activation "
+            "boundary, bounded gzip shards, immutable receipts, checksum-addressed "
+            "SQLite state snapshots, restored-state quick checks, and fail-closed "
+            "input identities while reusing content-addressed output safely."
         ),
         mitigation=(
             "Shard large manifests and execution state by deterministic generation, "
@@ -2545,8 +2547,20 @@ PROJECT_GOTCHAS = [
                 detail="Current generation-bound native-text state and independently rehashed manifest/CAS.",
             ),
             Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-generation-audit.json",
+                detail="Full native shard and restored SQLite state audit with zero lifecycle debris.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-generation-audit.json",
+                detail="Full OCR shard and restored SQLite state audit with exact public-information retention.",
+            ),
+            Evidence(
+                source="tests/test_real_document_generation_lifecycle.py",
+                detail="Real captured rows prove interrupted activation availability, retained candidate state, and non-destructive supersession.",
+            ),
+            Evidence(
                 source="docs/etl/sprints/SCALE-FOUNDATION-20260810/reports/million-scale-foundation-and-real-document-run.md",
-                detail="Current scale-foundation report records the completed sharding gate and remaining generation lifecycle boundary.",
+                detail="Current report records completed BOE/native/OCR sharding and lifecycle boundaries plus remaining physical gates.",
             ),
         ],
         references={
