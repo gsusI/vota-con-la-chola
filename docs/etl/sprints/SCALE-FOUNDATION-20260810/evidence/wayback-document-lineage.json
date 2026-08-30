@@ -3,12 +3,13 @@
     "bytes": 22110,
     "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/wayback-document-checkpoint.jsonl",
     "rows": 43,
-    "sha256": "236f6db3bb221cc15d721fd541cb0d69b25becacd5faba4eaa4591d8e93efad5"
+    "sha256": "78218ab59b6ebfce8ea93a03e0cc75cd88e7a0b5161ac8dba4a16f28cbda64da"
   },
   "checks": {
     "every_target_is_real_and_checksum_verified": true,
     "manifest_rows_are_checksum_exact": true,
     "no_guessed_source_url_accepted": true,
+    "no_network_mode_performed_zero_requests": true,
     "no_remote_mutation_performed": true,
     "nonmatching_archive_responses_not_promoted": true,
     "only_evidence_derived_exact_source_urls_queried": true,
@@ -19,12 +20,14 @@
     "cdx_endpoint": "https://web.archive.org/cdx/search/cdx",
     "max_captures_per_source": 5000,
     "max_document_bytes": 67108864,
+    "network_requests_performed": 0,
+    "no_network": true,
     "refresh_index": false,
     "replay_modifier": "id_",
     "retry_failed": false,
     "timeout_seconds": 30
   },
-  "generated_at": "2026-08-13T02:53:16.853663+00:00",
+  "generated_at": "2026-08-30T04:06:11.869424+00:00",
   "index_queries": [
     {
       "candidate_count": 5,
@@ -69,14 +72,14 @@
   ],
   "inputs": {
     "gap_queue": {
-      "bytes": 38464,
+      "bytes": 51703,
       "path": "etl/data/manifests/document-provenance-gap-queue.jsonl",
-      "sha256": "140fcfcd3479e13a163c4f68f4d5159a0f12c304b20c965ef4912588e6acedcb"
+      "sha256": "ab16fb203780fda618be84edd56d07808d1b7c17fb8c7a7246db62d70acc7264"
     },
     "inventory": {
-      "bytes": 75404488,
+      "bytes": 82987794,
       "path": "etl/data/manifests/real-document-format-inventory.jsonl",
-      "sha256": "62191c367b50ba76fa5f50235383d2bd364eecb2db20fd26e7979663dbdee483"
+      "sha256": "4d11b77c8a2ac64b59baed5190fe52975d9d820fe76777585bf6799e8718a9ad"
     }
   },
   "manifest": {
@@ -91,6 +94,7 @@
     "archive_index_cap_is_fail_closed": true,
     "archive_mismatches_are_rejected_and_checkpointed": true,
     "archive_queries_use_exact_url_scope_only": true,
+    "checkpoint_only_reconciliation_supported": true,
     "official_real_files_only": true,
     "portable_checkpoint_exported": true,
     "public_domain_personal_information_retained": true,
@@ -111,7 +115,7 @@
     },
     "path": "etl/data/staging/wayback-document-lineage.db",
     "schema_version": 1,
-    "sha256": "010200a52d2904ea03e6d500df4f537940903a407c93a9f2987d158bba97d443"
+    "sha256": "2ae14f00f3dba7313a0d18fbb051f25624c863a5210eb01080c253c03b2bef85"
   },
   "status": "partial",
   "totals": {
@@ -123,7 +127,8 @@
     "evidence_derived_source_urls": 2,
     "exact_archive_files_recovered": 0,
     "exact_archive_relations": 0,
+    "source_variants_not_queried_no_network": 0,
     "unique_expected_content_targets": 3,
-    "unseeded_gap_file_instances": 25
+    "unseeded_gap_file_instances": 42
   }
 }

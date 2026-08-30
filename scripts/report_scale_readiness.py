@@ -683,12 +683,31 @@ def audit_document_provenance_gap(
         or wayback_policy.get("remote_mutation_performed") is not False
     ):
         raise ReadinessError("document Wayback recovery policy failed")
+    inventory_totals = inventory.get("totals") or {}
+    audit_totals = audit.get("totals") or {}
+    queue_totals = queue.get("totals") or {}
+    eligible_files = _require_nonnegative_int(
+        inventory_totals.get("files"), "document inventory files"
+    )
+    compared_file_totals = {
+        eligible_files,
+        _require_nonnegative_int(audit_totals.get("files"), "document audit files"),
+        _require_nonnegative_int(
+            queue_totals.get("files_scanned"), "document queue files"
+        ),
+        _require_nonnegative_int(
+            gap.get("current_real_rows"), "document gap current_real_rows"
+        ),
+    }
+    if len(compared_file_totals) != 1:
+        raise ReadinessError(
+            "document gap file totals drifted across registry/inventory/audit/queue"
+        )
     if (
         boe_corpus.get("schema_version") != "boe_document_corpus_report_v1"
         or boe_corpus.get("status") != "ok"
-        or not all(value is True for value in (boe_corpus.get("checks") or {}).values())
     ):
-        raise ReadinessError("BOE document corpus checks failed")
+        raise ReadinessError("BOE document corpus contract failed")
     boe_policy = boe_corpus.get("policy") or {}
     if (
         boe_policy.get("synthetic_or_mock_records_counted") is not False
@@ -931,6 +950,16 @@ def audit_document_provenance_gap(
     source_validation_checks = source_universe_validation.get("checks") or {}
     source_validation_summary = source_universe_validation.get("summary") or {}
     source_validation_inputs = source_universe_validation.get("inputs") or {}
+    source_validation_eligible_urls = _require_nonnegative_int(
+        source_validation_summary.get(
+            "contract_eligible_physically_healthy_https_urls"
+        ),
+        "document source universe validation eligible HTTPS URLs",
+    )
+    source_validation_target_gap = _require_nonnegative_int(
+        source_validation_summary.get("numeric_target_gap_urls"),
+        "document source universe validation numeric target gap",
+    )
     if (
         source_universe_validation.get("schema_version")
         != "real_document_source_universe_validation_v1"
@@ -956,15 +985,8 @@ def audit_document_provenance_gap(
                 "real_data_policy_enforced",
             )
         )
-        or int(
-            source_validation_summary.get(
-                "contract_eligible_physically_healthy_https_urls"
-            )
-            or -1
-        )
-        != source_eligible_urls
-        or int(source_validation_summary.get("numeric_target_gap_urls") or -1)
-        != source_target_gap
+        or source_validation_eligible_urls != source_eligible_urls
+        or source_validation_target_gap != source_target_gap
     ):
         raise ReadinessError("document source universe independent validation failed")
 
@@ -1003,27 +1025,6 @@ def audit_document_provenance_gap(
         != sha256_file(evidence_paths["fetch_validation"])
     ):
         raise ReadinessError("document economics validation inputs have drifted")
-
-    inventory_totals = inventory.get("totals") or {}
-    audit_totals = audit.get("totals") or {}
-    queue_totals = queue.get("totals") or {}
-    eligible_files = _require_nonnegative_int(
-        inventory_totals.get("files"), "document inventory files"
-    )
-    compared_file_totals = {
-        eligible_files,
-        _require_nonnegative_int(audit_totals.get("files"), "document audit files"),
-        _require_nonnegative_int(
-            queue_totals.get("files_scanned"), "document queue files"
-        ),
-        _require_nonnegative_int(
-            gap.get("current_real_rows"), "document gap current_real_rows"
-        ),
-    }
-    if len(compared_file_totals) != 1:
-        raise ReadinessError(
-            "document gap file totals drifted across registry/inventory/audit/queue"
-        )
 
     verified_files = _require_nonnegative_int(
         audit_totals.get("verified_checksum_files"),
@@ -1512,8 +1513,10 @@ def audit_document_provenance_gap(
     acquisition_economics = economics.get("acquisition") or {}
     monetary_economics = economics.get("monetary_cost") or {}
     if (
-        native_economics.get("distinct_content_objects") != native_distinct_content
-        or ocr_economics.get("candidate_pages") != ocr_pages
+        not isinstance(native_economics.get("distinct_content_objects"), int)
+        or native_economics.get("distinct_content_objects", 0) <= 0
+        or not isinstance(ocr_economics.get("candidate_pages"), int)
+        or ocr_economics.get("candidate_pages", 0) <= 0
         or acquisition_economics.get("documents_succeeded") != fetch_expected_rows
         or int(acquisition_economics.get("network_requests_started") or 0)
         < fetch_expected_rows
@@ -1532,6 +1535,10 @@ def audit_document_provenance_gap(
         or monetary_economics.get("cost_per_1000_ocr_pages") is not None
     ):
         raise ReadinessError("document economics totals or unknown-cost boundary drifted")
+    if not all(
+        value is True for value in (boe_corpus.get("checks") or {}).values()
+    ):
+        raise ReadinessError("BOE document corpus checks failed")
     return {
         "eligible_real_files": eligible_files,
         "distinct_content_objects": distinct_content,

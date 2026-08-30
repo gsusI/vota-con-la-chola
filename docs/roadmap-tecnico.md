@@ -1,6 +1,6 @@
 # Roadmap técnico
 
-Actualizado: `2026-08-29`.
+Actualizado: `2026-08-30`.
 
 Autoridad:
 
@@ -51,19 +51,52 @@ just etl-storage-health
 
 Defectos visibles:
 
+- actualización documental `2026-08-30`, que supersede las cifras documentales `2026-08-29` conservadas en bullets posteriores: source-universe validado `115,246` URLs oficiales / `111,600` HTTPS / `101,303` elegibles; gap numérico `0`. Planner exacto fija `100,000` filas reales (`98,748` BOE XML + `1,166` BOE summaries + `86` Parlamento de Andalucía), selection SHA `c81d3c0...`, preflight completo, `0` hosts bloqueados, `0` synthetic/mock y public information retained. Captura BOE física queda `100,051/100,867`, `1` dead por timeout de red y `815` unfinished; readiness falla cerrado. Corpus capturado actual: `122,607` instancias / `120,757` contenidos / `5,524,892,735` bytes; provenance checksum+URL `122,539`, gaps `68`, conflicts `0`; extracción `2,211,203,471` chars / `119,338` CAS / `0` fallos o truncación; OCR `856/856` / `131` CAS; review humano `0/40`. Cierra suministro numérico, plan, extracción y OCR del corpus capturado; no cierra transporte físico, `DEC-01`, origin raw remoto/restore, review ni `1M`;
 - votos: URL pública/source record `100%`; las `102,172` filas HTTP / `1,166` URLs están clasificadas: `33,683` filas / `484` URLs tienen captura checksum local y `68,489` filas / `682` URLs siguen sin replacement inmutable; dos probes HTTPS acotados devolvieron `403` HTML y ninguna URL histórica fue reescrita;
 - candidatos: siete proclamaciones BOE conservan `42,056` ocurrencias base / `4,901` candidaturas (`25,077` titulares; `16,979` suplentes) para seis fechas electorales entre 2015 y 2024. Once correcciones retienen `956` párrafos exactos. El subconjunto revisado de 2023/2024 conserva `10,815` base / `1,188` candidaturas y tres correcciones con `180` párrafos: `127` sostienen `17` operaciones y `53` quedan como contexto; produce `10,820` efectivas con lineage completo, `10,795` links base reutilizados, `25` identidades BOE-scoped y `88` source records corregidos. Ocho correcciones / `776` párrafos y sus `31,241` candidatos base quedan `captured_unapplied` y excluidos del efectivo. Una cola determinista exporta los `776` párrafos a dual review con decisiones vacías y separa un contexto deduplicado de `3,713` candidaturas / `31,241` candidatos; regenera preservando review idéntico o falla ante drift. Noviembre 2019 se conserva como documento pero falla cerrado porque la fuente omite un número obligatorio. El artifact semántico valida y replays `2/2`, outcome null; los `8,926` resultados electos son otro hecho. No se infiere identidad cross-source ni identificadores ausentes;
 - BDNS: el root actual valida `1,360,382` filas oficiales y cruza el gate de capacidad `R2`; las `89/89` ventanas seleccionadas están completas; origin y clean-room restore pasan, pero faltan historia completa y segundo snapshot para promoción;
 - ledger: `126,760` facts reales recuperados; `10` facts derivados de fixtures fueron purgados; `26` source IDs legacy se infieren explícitamente desde URL BOE oficial; origin y clean-room restore pasan; faltan mix representativo y `1M`;
-- documentos: se descubren `111,422` ficheros y se cuentan `111,408` instancias oficiales elegibles / `109,558` hashes / `5,093,218,479` bytes; `5` fixtures/samples y `9` capturas reales de denegación/error quedan fuera del éxito. BOE aporta `1,034` resúmenes y `89,001` XML; todos los jobs de documentos terminan y cada documento tiene summary item, HTTPS, bytes, SHA-256, timestamps y manifest. Una cohorte fresca particionada prepara y preflighta `10,000` objetos reales (`9,914` BOE + `86` Parlamento de Andalucía) en `30` JSONL gzip, rehasha `10,000` capturas previas / `455,225,911` bytes y prueba una cola prístina. La corrida cold cierra `10,000/10,000`, exactamente `10,000` requests / `455,228,315` bytes / `5,024.670s` wall / `81.707s` CPU / `53,215,232` bytes RSS, `0` retry/dead/failure; validation disk-backed rehasha `20,000` ficheros, pasa `10,000` contratos y conserva `57` revisiones válidas. El inventario de fuentes replays `304,165` edges reales sin red: `104,064` URLs oficiales únicas / `100,418` HTTPS, pero solo `90,121` tienen contrato semántico implementado + host probado limpio; faltan `9,879` para preparar una adquisición `100k`, y `DEC-01` sigue abierto. Provenance verifica checksum + URL para `111,357` (`99.9542%`) sin conflictos y conserva `51` gaps / `8,315,544` bytes. Extracción v5 procesa `111,408/111,408` instancias / `109,558/109,558` contenidos: `1,999,902,681` caracteres públicos, `108,139` CAS, `0` retry/dead/failure/truncation; validation rehasha cada raw y CAS. OCR sigue `856/856`, `849` text, `7` no-text, `89,632` chars, `17` gains, `131` CAS; review humano `0/40`. Gate `100k` del corpus almacenado pasa; adquisición `100k`, representatividad, diversidad, review, origin raw remoto y `1M` siguen abiertos;
-- planificación documental: v4 elimina el array completo en memoria y usa SQLite file-backed, cursor ordenado, shards gzip acotados a `250,000` filas / `512 MiB` expandidos, SHA de selección y ejecución, locks kernel por cada output, inputs rehasheados antes/después y publicación transaccional con manifest al final. El replay `10k` tiene `0/10,000` diferencias SQL de selección/payload normalizado y conserva `116` pares exactos de provenance parlamentario. La pasada máxima actual prepara y preflighta las `90,121/90,121` URLs elegibles / `2,849,994,795` bytes previos en `30` particiones, RSS planner `53,198,848` bytes, `0` hosts bloqueados y cola prístina. No hizo red ni prueba transporte `90k`, no cierra el gap `9,879` ni `DEC-01`;
+- documentos: el universo actual reconcilia `337,701` edges reales, `115,246` URLs oficiales / `111,600` HTTPS / `101,303` elegibles: gap numérico `0`. El planner fija y preflighta exactamente `100,000` filas reales (`98,748` BOE XML + `1,166` resúmenes BOE + `86` Parlamento de Andalucía), SHA de selección `c81d3c0...`, `0` hosts bloqueados, `0` mock/synthetic y retención íntegra de información pública. La captura física BOE queda abierta: documentos `100,051/100,867`, `1` dead por timeout y `815` unfinished; resúmenes `1,166` success + `191` `404` oficiales terminales. Inventario actual `122,607` instancias / `120,757` contenidos / `5,524,892,735` bytes; provenance `122,539`, gaps `68`, conflicts `0`. Extracción v6 procesa todo el contenido en `2,211,203,471` caracteres públicos / `119,338` CAS / `0` retry/dead/failure/truncation; OCR valida `856/856` páginas / `131` CAS; review humano `0/40`. Readiness falla cerrado en BOE. Siguen abiertos transporte físico, `DEC-01`, review, origin raw remoto/restore y `1M`;
+- planificación documental: v4 usa SQLite file-backed, cursor ordenado, shards gzip bounded, hashes exactos, locks kernel, inputs rehasheados y manifest-last recuperable. El plan `100k` valida `100,000/100,000` filas, contratos, contenido real e información pública, sin afirmar que el transporte esté completo ni que la selección sea representativa. El worker persiste progreso y request budget desde el primer batch, recupera crashes conservadoramente, abre circuitos por ruta ante timeout/network y solo permite requeue budget-only o transient con evidencia durable exacta. Próximo paso: esperar una palanca BOE nueva, cerrar los `815` jobs, regenerar lineage shardeado y ejecutar el gate central; `DEC-01` permanece separado;
 - outcome C2B: el planner SQLite real de `2,865,602` filas se mantiene separado del formato de entrega. El companion conserva exactamente `119,116` votos nominales / `490` nombres públicos / `458` acciones en `8` Parquet; el paquete portable añade `1,205` Parquet de pares y totaliza `1,213` ficheros / `251,522,252` bytes. La prueba canónica se interrumpió tras `25` particiones durables, invalidó controles de éxito obsoletos, reanudó los `25` checkpoints y completó `1,205/1,205`; manifest root `81cc315e...`. Raíces semántica `2afaf9ef...`, física `f2d50fa5...` y portable `049f9718...` coinciden entre canonical y replay byte a byte. Validator full-row: `376.845s`, `621.047 MiB`, techo `1 GiB`; `22/22` tests de identidad y `23/23` de paquete pasan. `ranking_eligible_rows=0`, `publication_eligible_rows=0`, `private_token_findings=0`; los nombres oficiales no se suprimen;
 - review C2C: Python `3.12` queda fijado porque el runtime host alteraba el hash físico SQLite. El capacity artifact actual tiene `2,865,603` tareas / `2,865,604` slots, `115` batches, `2,864,201,728` bytes, SHA `a97f9941...`, semantic root `21acddf2...`, `330/330` checks y `12/12` tests adversariales. Materialización: `366.340s`, `7,822.249` filas/s, `370,376,704` bytes RSS. Validator: `159,727,616` bytes RSS. Todas las `16` tablas de trust/reviewer/auth/conflict/assignment/claim/decision/adjudication/eligibility/promotion/release/publication/audit operacional contienen `0` filas. Es capacidad local, no operación humana;
 - lanes promocionadas: `0`.
 
-El reporte `etl/data/published/scale-readiness-latest.json` debe decir `real_foundation_ready_scale_incomplete` hasta cerrar representatividad, origin público, clean restore y correcciones.
+El reporte `etl/data/published/scale-readiness-latest.json` debe decir `real_foundation_ready_scale_incomplete` solo cuando el builder actual pase. La ejecución `2026-08-30` falla cerrado en `BOE document corpus checks failed`; no reutilizar el último JSON verde como prueba de readiness actual. Tras cerrar BOE, seguirá sin promoción hasta resolver representatividad, origin público, clean restore, review y correcciones.
 
 ## 3. Sprint inmediato — recuperación de verdad
+
+### RT-000 — Cerrar el salto documental `100k` sin falsear escala (`P0`)
+
+Orden obligatorio derivado de `ROADMAP.md` `W2`:
+
+1. `DONE`: preservar supply numérico `>=100,000` mediante source-universe report + validator; actual `101,303`, gap `0`;
+2. `DONE`: preservar plan exacto `100,000`, selection SHA `c81d3c0...`, full preflight, real-only/public-identity gates y queue prístina;
+3. `BLOCKED_EXTERNAL`: no repetir BOE este sprint. Esperar palanca nueva: señal upstream fresca, ruta bulk BOE documentada o canal oficial alternativo reproducible;
+4. con palanca nueva, ejecutar un único control acotado sobre `BOE-A-2022-13616`; si falla igual, actualizar incidente y parar;
+5. si responde, ejecutar `etl-scale-boe-document-requeue-transient-failures`; no usar requeue genérico ni modificar attempts sin telemetría;
+6. reanudar cola; claims normales recuperan leases expirados. Exigir progreso atómico por batch y budget acumulado `<=500,000`;
+7. exigir `etl-scale-boe-document-status` verde: `100,867/100,867` documentos success, `0` dead/unfinished, todos los summary captures referenciados, checksum/bytes/manifest exactos;
+8. sustituir lineage BOE monolítico por index + shards acotados antes de `1M`; objetivo: ningún control file requiere cargar o copiar los actuales `234,632,869` bytes completos;
+9. regenerar inventario y provenance. Exigir checksum+URL o gap explícito para cada instancia, sin retirar nombres/identificadores públicos;
+10. rotar a una generación nueva de estado native/OCR ligada a hashes de inputs; conservar generación previa como superseded, no reutilizarla ante drift;
+11. rerun extracción + validator full raw/CAS, OCR + validator, y packet humano; mantener `0/40` hasta decisiones humanas reales;
+12. resolver `DEC-01`: aprobar la mezcla BOE-heavy como prueba de carga solamente o producir selección representativa nueva antes de adquisición cold;
+13. ejecutar adquisición física de la selección aprobada, validar every-row source contract, revisions, requests/bytes/RSS/cost, luego raw-origin upload + clean restore;
+14. solo después abrir `1M`, por shards/source periods, con checkpoint, correction path y delivery bounded.
+
+Gates que no se fusionan:
+
+| Gate | Estado `2026-08-30` | Cierre |
+| --- | --- | --- |
+| supply numérico | `DONE` | `101,303 >= 100,000`, replay independiente |
+| plan exacto | `DONE` | `100,000/100,000`, SHA de selección fijado, preflight verde |
+| captura fuente BOE | `BLOCKED` | `100,867/100,867`, `0` dead/unfinished |
+| corpus procesado actual | `DONE_FOR_CAPTURED_GENERATION` | `122,607` raw + `119,338` text CAS + `856` OCR validados |
+| representatividad | `DECISION_REQUIRED` | matriz aprobada source/jurisdiction/time/format/language/size |
+| quality humana | `OPEN` | `40/40` dual review + adjudicación + métricas por estrato |
+| raw durability | `OPEN` | origin externo inmutable + restore vacío + rehash independiente |
+| document `R2` | `OPEN` | `1M` real + todos los SLOs §4.2 |
 
 ### RT-001 — Mantener el registry real-only
 
@@ -188,14 +221,14 @@ DoD:
 
 Pasos:
 
-1. `DONE 2026-08-13`: inventariar `111,408` instancias raw oficiales / `109,558` contenidos y clasificar source, MIME, bytes, páginas y densidad; idioma/encryption completos siguen como gap de `DOC-001`;
-2. `PARTIAL 2026-08-29`: operar fetch por host. Cada request real pasa límites de concurrencia y un intervalo mínimo configurable (`500ms` por defecto); el worker v3 reporta requests, success/failure, bytes, HTTP/failure classes, peak in-flight, espera y circuitos por host. La cohorte fresca `10k` cierra `10,000/10,000`, exactamente `10,000` requests, dos slots por host y `0` fallos. El código siguiente añade eventos de request durables, recuperación conservadora del budget ante crash, máximos explícitos por host, rechazo de redirects y prioridad host-fair; pasa tests focales pero no se atribuye retrospectivamente a esa corrida. El snapshot público histórico, generado sin red, reconcilia otras `9,084` URLs Senado: `6,792` succeeded, `198` dead, `2,094` pending reclaimable, `9,187` attempts, `0` leases vencidos y `0` parciales huérfanos. Conserva como riesgo visible `3,176` URLs oficiales HTTP y `5,908` HTTPS; no reescribe evidencia. Un segundo audit disk-backed, también sin red, prueba que el universo actual solo aporta `90,121` URLs HTTPS con contrato + health válidos, `9,879` por debajo del target. Falta aprobar límites con source steward, probar físicamente los controles nuevos, implementar primero el contrato Moncloa de `28` URLs y ampliar fuentes sanas antes de preparar `100k`;
-3. `PARTIAL 2026-08-13`: reconciliar file instances y provenance. El audit balancea `111,408/111,408`, verifica checksum + URL para `111,357` y preserva `51` gaps / `8,315,544` bytes. Los `89,001` documentos y `1,034` resúmenes BOE no introducen gaps. Wayback conserva `3` targets, `5` nonmatches y `7` variantes fallidas en checkpoint de `43` filas sin red repetida;
-4. `DONE 2026-08-13` para el corpus actual: extracción nativa con estado SQLite inmutable por input, leases, retries, SHA-256, CAS gzip determinista y límites duros. Resultado v5 `111,408/111,408`, `109,558/109,558`, `1,999,902,681` caracteres, `108,139` CAS, `0` retry/dead/failure/truncation; validator independiente rehasha cada raw y CAS;
-5. `DONE 2026-08-13` para el corpus actual: enrutar sólo las `856` páginas vacías/sparse y ejecutar OCR aditivo con input manifest, engine, idiomas, versión y config persistidos. Resultado `856/856`, `849` con texto, `7` no-text, `89,632` caracteres, `17` mejoras y `131` CAS; validator independiente verifica `58` PDFs y cada CAS;
-6. `READY_FOR_HUMAN_REVIEW 2026-08-13`: revisar las `40` páginas reales seleccionadas. Incluye todos los `7` no-text, las `17` mejoras materiales, ambas fuentes y ambas razones; `0/40` decisiones y reviewer fields completos, sin labels inventados;
-7. `PARTIAL 2026-08-29`: el volumen almacenado real `100k` pasa y el planner v4 disk-backed prepara/preflighta sin red todo el universo elegible actual (`90,121` filas, `2,849,994,795` bytes previos, `30` particiones, `53,198,848` bytes RSS). Siguen faltando `9,879` URLs elegibles. Añadirlas, aprobar estratos representativos de formatos, idiomas, tamaños, scans, corruptos, hosts y jurisdicciones, y solo después ejecutar la adquisición física `100k`;
-8. `PARTIAL 2026-08-29`: publicar request/storage/CPU/RSS/OCR/coste por `1,000` antes de `1M`. `just document-factory-economics-export` produce y valida un JSON publicable de `7,413` bytes sobre pasadas físicas cold: adquisición `10,000/10,000`, exactamente `10,000` requests / `455,228,315` bytes / `5,024.670344s` wall / `81.707215s` CPU / `53,215,232` bytes RSS; native `109,558/109,558`, `4,880,987,405` bytes, `261.340691s` wall, `409.619259s` CPU, `1,073,545,216` bytes RSS; OCR `856/856`, `109.875365s` wall, `589.462222s` CPU parent+children y `203,227,136` bytes max child RSS. El manifest OCR semántico excluye elapsed volátil y dos estados independientes producen SHA `31acdf4e...`. Coste monetario sigue `null/unknown_not_measured` hasta enlazar un meter/rate real;
+1. `DONE_FOR_CAPTURED_GENERATION 2026-08-30`: inventario `122,607` instancias raw oficiales / `120,757` contenidos / `5,524,892,735` bytes; `1,437` PDFs / `44,927` páginas; idioma/encryption completos siguen como gap de `DOC-001`;
+2. `PARTIAL/BLOCKED 2026-08-30`: worker persiste eventos de request, progreso atómico, budgets conservadores ante crash, límites por host, redirect refusal, fairness y circuitos por HTTP/network/timeout. BOE tail usa budget `500,000`, avanza `63` objetos dentro del último batch y queda `100,051/100,867`; `1` dead tras tres timeouts, `815` unfinished. El incidente `nso-2026-08-boe-document-xml-connect-timeout` prohíbe repetir sin palanca nueva;
+3. `PARTIAL 2026-08-30`: provenance balancea `122,607/122,607`, verifica checksum + URL para `122,539`, preserva `68` gaps y `0` conflicts. Manifest BOE actual reconcilia `100,051` documentos, pero solo `1,156/1,166` summary captures y falla completion;
+4. `DONE_FOR_CAPTURED_GENERATION 2026-08-30`: native state v6 procesa `120,757/120,757` contenidos / `5,312,661,661` bytes, conserva `2,211,203,471` caracteres en `119,338` CAS, `0` retry/dead/failure/truncation. Validator rehasha `122,607` raw y cada CAS;
+5. `DONE_FOR_CAPTURED_GENERATION 2026-08-30`: OCR state v6 procesa `856/856`, `849` text, `7` no-text, `89,632` chars, `17` gains, `131` CAS; validator verifica `58` PDFs y cada CAS;
+6. `READY_FOR_HUMAN_REVIEW 2026-08-30`: packet determinista `40` páginas conserva campos humanos vacíos; integrity pasa, promotion false, review `0/40`; no machine-generated labels;
+7. `PARTIAL 2026-08-30`: source-universe replays `337,701` edges y fija `101,303` URLs elegibles / gap `0`. Planner prepara/preflighta exactamente `100,000` filas, SHA `c81d3c0...`, `98,748/1,166/86` por cohorte. Falta `DEC-01`, captura física terminal y final-generation rerun;
+8. `PARTIAL 2026-08-30`: economics previo `10k` sigue ligado a su run exacto. Native actual mide `223.155s` wall y `1.161 GB` peak self RSS; OCR actual `107.887s`. BOE partial no autoriza denominador completo `100k`; coste monetario sigue `null/unknown_not_measured` hasta meter/rate real;
 
 Comandos base:
 
@@ -215,6 +248,11 @@ just document-factory-economics-export
 just document-factory-disk-planner-test
 just document-factory-disk-planner-10k-verify
 just document-factory-disk-planner-max-verify
+just document-factory-disk-planner-100k-prepare
+just document-factory-disk-planner-100k-verify
+just document-factory-source-universe-report
+just etl-scale-boe-document-requeue-transient-failures
+just etl-scale-boe-document-status
 just etl-scale-require-document-page-ocr-review
 just parl-enqueue-document-fetch-work
 just parl-run-document-fetch-work
@@ -230,6 +268,8 @@ DoD:
 - cada failure terminal con razón/replay;
 - muestra de calidad revisada por humanos;
 - coste y SLO medidos antes de `1M`.
+- lineage BOE indexado en shards bounded, no un único control file creciente;
+- cada generación native/OCR tiene identidad/supersession explícita y restore reproducible.
 
 ### RT-005 — Cerrar provenance de votos
 
@@ -293,13 +333,13 @@ Los probes de red son explícitos y solo se repiten si cambia el endpoint, exist
 | --- | --- | --- |
 | `DOC-001` | inventory completo | source/MIME/bytes/pages/language/density o unknown |
 | `DOC-002` | fetch streaming | límite duro, SHA, atomic commit, cero parciales |
-| `DOC-003` | digital extraction | `DONE current corpus`: `111,408/111,408`, `1,999,902,681` chars, `108,139` CAS, `0` retry/dead/truncation; falta page/section lineage completo |
+| `DOC-003` | digital extraction | `DONE_FOR_CAPTURED_GENERATION 2026-08-30`: `122,607/122,607` instancias, `120,757/120,757` contenidos, `2,211,203,471` chars, `119,338` CAS, `0` retry/dead/truncation; falta page/section lineage completo y generación final post-BOE |
 | `DOC-004` | OCR routing | `DONE current corpus`: `856/856` páginas pobres; razón persistida |
 | `DOC-005` | OCR cache | `DONE current corpus`: input manifest + engine/language/version/config; rerun reclama `0` |
 | `DOC-006` | quarantine | bombs, corruptos, password y unsupported separados |
 | `DOC-007` | quality gold set | `PARTIAL`: packet real `40`, review humano `0/40`; falta doble review, métricas y adjudicación |
-| `DOC-008` | `100k` real | `PARTIAL 2026-08-29`: volumen almacenado, success, extracción/OCR física y economics local por `1,000` pasan; manifest particionado + preflight + adquisición fresca multi-host `10,000/10,000` mide exactamente `10,000` requests / `455,228,315` bytes / `5,024.670s` wall / `81.707s` CPU / `53,215,232` bytes RSS y `0` fallos. Rehash independiente valida `10,000` capturas previas + `10,000` frescas, `9,943` exactas y `57` revisiones oficiales válidas. Source-universe + validator replays `304,165` edges y fija `90,121` URLs elegibles / gap `9,879`. Planner v4 disk-backed prepara y preflighta todas las `90,121` filas actuales / `2,849,994,795` bytes bajo `62 MB` RSS, con `0` datos sintéticos, `0` hosts bloqueados y toda la información oficial pública retenida. Faltan cerrar suministro, `DEC-01`, quality humano, diversidad, adquisición física `100k` y coste monetario real por estrato |
-| `DOC-009` | `1M` real | origin, restore, SLO y bounded public delivery |
+| `DOC-008` | `100k` real | `PARTIAL 2026-08-30`: supply `101,303`, gap `0`; plan exacto `100,000` y preflight pasan con SHA `c81d3c0...`, `0` mock/synthetic, `0` blocked hosts y public identity retained. Captura BOE física `100,051/100,867`; `815` unfinished bloquean readiness. Faltan palanca BOE, terminal queue, `DEC-01`, physical selected-cohort run, final processing generation, human review, raw origin/restore y cost rates |
+| `DOC-009` | `1M` real | sharded lineage, input-generation lifecycle, origin/restore, SLO, corrections y bounded public delivery |
 
 ### P0 — actores y candidatos
 

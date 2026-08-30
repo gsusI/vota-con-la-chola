@@ -10,6 +10,8 @@ from scripts.manage_boe_document_corpus import (
     BoeCorpusError,
     exact_summary_dates,
     expand_documents,
+    requeue_document_budget_failures,
+    requeue_document_transient_failures,
     selected_boe_ids,
 )
 
@@ -97,6 +99,26 @@ class ManageBoeDocumentCorpusTargetingTests(unittest.TestCase):
             ),
         )
         ensure_work_queue_schema(connection)
+        connection.executescript(
+            """
+            CREATE TABLE document_fetch_request_events (
+              document_fetch_request_event_id INTEGER PRIMARY KEY AUTOINCREMENT,
+              work_item_id INTEGER NOT NULL,
+              pipeline_id TEXT NOT NULL,
+              queue_attempt_number INTEGER NOT NULL,
+              worker_id TEXT NOT NULL,
+              source_url TEXT NOT NULL,
+              source_host TEXT NOT NULL,
+              outcome_state TEXT NOT NULL,
+              network_requests_started INTEGER NOT NULL,
+              http_status INTEGER,
+              failure_class TEXT,
+              bytes_received INTEGER NOT NULL DEFAULT 0,
+              recorded_at TEXT NOT NULL,
+              UNIQUE (work_item_id, queue_attempt_number)
+            );
+            """
+        )
         connection.commit()
         return connection
 
@@ -126,6 +148,11 @@ class ManageBoeDocumentCorpusTargetingTests(unittest.TestCase):
             self.assertGreater(report["documents_discovered"], 1)
             self.assertEqual(report["documents_selected"], 1)
             self.assertEqual(report["selected_boe_ids"], [PROCLAMATION_ID])
+            self.assertTrue(report["selected_boe_ids_complete"])
+            self.assertEqual(report["selected_boe_ids_count"], 1)
+            self.assertEqual(
+                report["selected_boe_ids_sample"]["first"], [PROCLAMATION_ID]
+            )
             queued = connection.execute(
                 """
                 SELECT item_key, payload_json
@@ -136,6 +163,150 @@ class ManageBoeDocumentCorpusTargetingTests(unittest.TestCase):
             self.assertEqual(len(queued), 1)
             self.assertIn(PROCLAMATION_ID, str(queued[0]["item_key"]))
             self.assertIn(PROCLAMATION_ID, str(queued[0]["payload_json"]))
+        finally:
+            connection.close()
+
+    def test_unfiltered_expansion_keeps_report_identity_evidence_bounded(self) -> None:
+        connection = self.new_connection()
+        try:
+            report = expand_documents(
+                connection,
+                bounds=None,
+                summary_dates=(),
+                boe_ids=(),
+                limit=0,
+                batch_size=100,
+                max_attempts=3,
+            )
+            self.assertGreater(report["documents_selected"], 1)
+            self.assertEqual(report["selected_boe_ids"], [])
+            self.assertFalse(report["selected_boe_ids_complete"])
+            self.assertEqual(
+                report["selected_boe_ids_count"], report["documents_selected"]
+            )
+            self.assertEqual(
+                len(report["selected_boe_ids_ordered_stream_sha256"]), 64
+            )
+            self.assertLessEqual(
+                len(report["selected_boe_ids_sample"]["first"]), 10
+            )
+            self.assertLessEqual(
+                len(report["selected_boe_ids_sample"]["last"]), 10
+            )
+        finally:
+            connection.close()
+
+    def test_budget_failure_requeue_requires_zero_request_event(self) -> None:
+        connection = self.new_connection()
+        try:
+            connection.execute(
+                """
+                INSERT INTO pipeline_work_items(
+                  pipeline_id, item_key, state, payload_json, available_at,
+                  attempts, max_attempts, last_error, created_at, updated_at,
+                  completed_at
+                ) VALUES (
+                  'boe_document_fetch', 'https://www.boe.es/diario_boe/xml.php?id=BOE-A-2024-9687',
+                  'dead', '{}', '2026-08-30T00:00:00+00:00', 3, 3,
+                  'host_request_budget_exhausted', '2026-08-30T00:00:00+00:00',
+                  '2026-08-30T00:00:00+00:00', '2026-08-30T00:00:00+00:00'
+                )
+                """
+            )
+            work_item_id = int(connection.execute("SELECT last_insert_rowid()").fetchone()[0])
+            connection.execute(
+                """
+                INSERT INTO document_fetch_request_events(
+                  work_item_id, pipeline_id, queue_attempt_number, worker_id,
+                  source_url, source_host, outcome_state,
+                  network_requests_started, failure_class, recorded_at
+                ) VALUES (?, 'boe_document_fetch', 3, 'worker', ?, 'www.boe.es',
+                          'failed', 0, 'host_request_budget_exhausted',
+                          '2026-08-30T00:00:00+00:00')
+                """,
+                (work_item_id, "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2024-9687"),
+            )
+            connection.commit()
+
+            report = requeue_document_budget_failures(connection)
+
+            self.assertEqual(report["items_requeued"], 1)
+            self.assertEqual(report["unsafe_items"], 0)
+            row = connection.execute(
+                "SELECT state, attempts, max_attempts, last_error FROM pipeline_work_items"
+            ).fetchone()
+            self.assertEqual(tuple(row), ("pending", 3, 4, None))
+            event = connection.execute(
+                "SELECT network_requests_started, failure_class FROM document_fetch_request_events"
+            ).fetchone()
+            self.assertEqual(tuple(event), (0, "host_request_budget_exhausted"))
+        finally:
+            connection.close()
+
+    def test_budget_failure_requeue_rejects_missing_telemetry(self) -> None:
+        connection = self.new_connection()
+        try:
+            connection.execute(
+                """
+                INSERT INTO pipeline_work_items(
+                  pipeline_id, item_key, state, payload_json, available_at,
+                  attempts, max_attempts, last_error, created_at, updated_at,
+                  completed_at
+                ) VALUES (
+                  'boe_document_fetch', 'missing-telemetry', 'dead', '{}',
+                  '2026-08-30T00:00:00+00:00', 1, 3,
+                  'host_request_budget_exhausted', '2026-08-30T00:00:00+00:00',
+                  '2026-08-30T00:00:00+00:00', '2026-08-30T00:00:00+00:00'
+                )
+                """
+            )
+            connection.commit()
+            with self.assertRaisesRegex(BoeCorpusError, "zero-request telemetry"):
+                requeue_document_budget_failures(connection)
+        finally:
+            connection.close()
+
+    def test_transient_failure_requeue_requires_positive_request_event(self) -> None:
+        connection = self.new_connection()
+        try:
+            connection.execute(
+                """
+                INSERT INTO pipeline_work_items(
+                  pipeline_id, item_key, state, payload_json, available_at,
+                  attempts, max_attempts, last_error, created_at, updated_at,
+                  completed_at
+                ) VALUES (
+                  'boe_document_fetch', 'network-timeout', 'dead', '{}',
+                  '2026-08-30T00:00:00+00:00', 3, 3, 'network timeout',
+                  '2026-08-30T00:00:00+00:00', '2026-08-30T00:00:00+00:00',
+                  '2026-08-30T00:00:00+00:00'
+                )
+                """
+            )
+            work_item_id = int(
+                connection.execute("SELECT last_insert_rowid()").fetchone()[0]
+            )
+            connection.execute(
+                """
+                INSERT INTO document_fetch_request_events(
+                  work_item_id, pipeline_id, queue_attempt_number, worker_id,
+                  source_url, source_host, outcome_state,
+                  network_requests_started, failure_class, recorded_at
+                ) VALUES (?, 'boe_document_fetch', 3, 'worker', ?, 'www.boe.es',
+                          'failed', 3, 'network',
+                          '2026-08-30T00:00:00+00:00')
+                """,
+                (work_item_id, "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2024-9687"),
+            )
+            connection.commit()
+
+            report = requeue_document_transient_failures(connection)
+
+            self.assertEqual(report["items_requeued"], 1)
+            row = connection.execute(
+                "SELECT state, attempts, max_attempts, last_error FROM pipeline_work_items"
+            ).fetchone()
+            self.assertEqual(tuple(row), ("pending", 3, 4, None))
         finally:
             connection.close()
 

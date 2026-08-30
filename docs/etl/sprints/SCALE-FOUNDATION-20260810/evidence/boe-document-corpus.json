@@ -1,9 +1,9 @@
 {
   "checks": {
     "all_captures_checksum_verified": true,
-    "document_queue_complete_without_failures": true,
+    "document_queue_complete_without_failures": false,
     "manifest_matches_document_rows": true,
-    "manifest_references_every_summary_capture": true,
+    "manifest_references_every_summary_capture": false,
     "no_remote_mutation_performed": true,
     "no_synthetic_or_mock_records_counted": true,
     "public_domain_personal_information_retained": true,
@@ -11,20 +11,20 @@
     "summary_queue_terminal": true
   },
   "documents": {
-    "bytes": 2654761821,
-    "distinct_content_objects": 89001,
-    "rows": 89001
+    "bytes": 3064836413,
+    "distinct_content_objects": 100051,
+    "rows": 100051
   },
-  "generated_at": "2026-08-13T04:53:51.248706+00:00",
+  "generated_at": "2026-08-30T03:32:36.254172+00:00",
   "manifest": {
-    "available_summary_captures": 1034,
-    "bytes": 208836046,
-    "distinct_content_objects": 89001,
-    "distinct_summary_captures": 1034,
-    "document_bytes": 2654761821,
+    "available_summary_captures": 1166,
+    "bytes": 234632869,
+    "distinct_content_objects": 100051,
+    "distinct_summary_captures": 1156,
+    "document_bytes": 3064836413,
     "path": "etl/data/manifests/boe-document-corpus-lineage.jsonl",
-    "rows": 89001,
-    "sha256": "29d06f68ac7c0610a3e7cd69d95727d493dbc5e60bfd95fd9be0f9b7f60804ff"
+    "rows": 100051,
+    "sha256": "99739ca6ac462edada2d20e61be6f81c9404689405632751da4b6bc54d5848f4"
   },
   "mode": "status",
   "operation": {
@@ -40,35 +40,35 @@
   },
   "queues": {
     "documents": {
-      "items_total": 89001,
+      "items_total": 100867,
       "pipeline_id": "boe_document_fetch",
       "state_counts": {
-        "dead": 0,
-        "leased": 0,
-        "pending": 0,
-        "succeeded": 89001
+        "dead": 1,
+        "leased": 64,
+        "pending": 751,
+        "succeeded": 100051
       },
-      "terminal_total": 89001,
-      "unfinished_total": 0
+      "terminal_total": 100052,
+      "unfinished_total": 815
     },
     "summaries": {
-      "items_total": 1204,
+      "items_total": 1357,
       "pipeline_id": "boe_summary_fetch",
       "state_counts": {
-        "dead": 170,
+        "dead": 191,
         "leased": 0,
         "pending": 0,
-        "succeeded": 1034
+        "succeeded": 1166
       },
-      "terminal_total": 1204,
+      "terminal_total": 1357,
       "unfinished_total": 0
     }
   },
   "schema_version": "boe_document_corpus_report_v1",
   "status": "ok",
   "summaries": {
-    "bytes": 176418043,
-    "distinct_content_objects": 1034,
-    "rows": 1034
+    "bytes": 197645306,
+    "distinct_content_objects": 1166,
+    "rows": 1166
   }
 }

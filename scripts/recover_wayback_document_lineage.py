@@ -83,6 +83,14 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--user-agent", default=DEFAULT_USER_AGENT)
     parser.add_argument("--refresh-index", action="store_true")
     parser.add_argument("--retry-failed", action="store_true")
+    parser.add_argument(
+        "--no-network",
+        action="store_true",
+        help=(
+            "Rebind current real targets and export state/report/checkpoint without "
+            "querying CDX or replaying archive candidates."
+        ),
+    )
     parser.add_argument("--enforce", action="store_true")
     return parser.parse_args(argv)
 
@@ -994,6 +1002,7 @@ def recover(
     user_agent: str,
     refresh_index: bool,
     retry_failed: bool,
+    no_network: bool,
 ) -> dict[str, Any]:
     inventory = load_inventory(inventory_manifest_path)
     targets = load_targets(
@@ -1004,24 +1013,60 @@ def recover(
     try:
         sync_targets(connection, targets, now=now)
         source_urls = sorted({item["source_url"] for item in targets})
-        query_results = query_indexes(
-            connection,
-            source_urls,
-            refresh_index=refresh_index,
-            retry_failed=retry_failed,
-            timeout=max(1, timeout),
-            attempts=max(1, attempts),
-            max_captures_per_source=max(1, max_captures_per_source),
-            user_agent=user_agent,
-        )
-        replay_results = replay_candidates(
-            connection,
-            retry_failed=retry_failed,
-            timeout=max(1, timeout),
-            attempts=max(1, attempts),
-            max_document_bytes=max(1, max_document_bytes),
-            user_agent=user_agent,
-        )
+        if no_network:
+            query_results = []
+            variants = sorted(
+                {variant for url in source_urls for variant in source_url_variants(url)}
+            )
+            for variant in variants:
+                prior = connection.execute(
+                    "SELECT status, candidate_count, error FROM cdx_queries "
+                    "WHERE source_variant = ?",
+                    (variant,),
+                ).fetchone()
+                if prior is None:
+                    query_results.append(
+                        {
+                            "source_variant": variant,
+                            "status": "not_queried_no_network",
+                        }
+                    )
+                elif prior["status"] == "ok":
+                    query_results.append(
+                        {
+                            "source_variant": variant,
+                            "status": "checkpoint_reused",
+                            "candidate_count": prior["candidate_count"],
+                        }
+                    )
+                else:
+                    query_results.append(
+                        {
+                            "source_variant": variant,
+                            "status": "failed_checkpoint_reused",
+                            "error": prior["error"],
+                        }
+                    )
+            replay_results = []
+        else:
+            query_results = query_indexes(
+                connection,
+                source_urls,
+                refresh_index=refresh_index,
+                retry_failed=retry_failed,
+                timeout=max(1, timeout),
+                attempts=max(1, attempts),
+                max_captures_per_source=max(1, max_captures_per_source),
+                user_agent=user_agent,
+            )
+            replay_results = replay_candidates(
+                connection,
+                retry_failed=retry_failed,
+                timeout=max(1, timeout),
+                attempts=max(1, attempts),
+                max_document_bytes=max(1, max_document_bytes),
+                user_agent=user_agent,
+            )
         manifest_rows = build_manifest(
             connection,
             inventory_root=inventory_root,
@@ -1060,6 +1105,9 @@ def recover(
         for line in gap_queue_path.read_text(encoding="utf-8").splitlines()
     )
     replay_failures = sum(item["status"] == "failed" for item in replay_results)
+    unqueried_no_network = sum(
+        item["status"] == "not_queried_no_network" for item in query_results
+    )
     report: dict[str, Any] = {
         "schema_version": "wayback_document_lineage_report_v1",
         "generated_at": datetime.now(UTC).isoformat(),
@@ -1068,6 +1116,7 @@ def recover(
             if cdx_counts.get("failed", 0)
             or state_counts.get("failed", 0)
             or replay_failures
+            or unqueried_no_network
             else "ok"
         ),
         "policy": {
@@ -1079,6 +1128,7 @@ def recover(
             "archive_index_cap_is_fail_closed": True,
             "successful_index_queries_are_not_repeated_without_refresh": True,
             "portable_checkpoint_exported": True,
+            "checkpoint_only_reconciliation_supported": True,
             "synthetic_or_mock_records_counted": False,
             "public_domain_personal_information_retained": True,
             "remote_mutation_performed": False,
@@ -1115,6 +1165,8 @@ def recover(
             "max_captures_per_source": max(1, max_captures_per_source),
             "refresh_index": refresh_index,
             "retry_failed": retry_failed,
+            "no_network": no_network,
+            "network_requests_performed": 0 if no_network else None,
             "cdx_endpoint": CDX_ENDPOINT,
             "replay_modifier": "id_",
         },
@@ -1131,6 +1183,7 @@ def recover(
                 item["status"] == "rejected_mismatch" for item in replay_results
             ),
             "archive_candidate_failures_this_run": replay_failures,
+            "source_variants_not_queried_no_network": unqueried_no_network,
             "exact_archive_relations": len(manifest_rows),
             "exact_archive_files_recovered": len(recovered_paths),
         },
@@ -1144,6 +1197,18 @@ def recover(
             "no_guessed_source_url_accepted": True,
             "public_domain_personal_information_retained": True,
             "no_remote_mutation_performed": True,
+            "no_network_mode_performed_zero_requests": (
+                not no_network
+                or (not replay_results and all(
+                    item["status"]
+                    in {
+                        "checkpoint_reused",
+                        "failed_checkpoint_reused",
+                        "not_queried_no_network",
+                    }
+                    for item in query_results
+                ))
+            ),
         },
         "index_queries": query_results,
         "replay_results": replay_results,
@@ -1168,6 +1233,10 @@ def recover(
 def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
     try:
+        if args.no_network and (args.refresh_index or args.retry_failed):
+            raise WaybackRecoveryError(
+                "--no-network cannot be combined with --refresh-index or --retry-failed"
+            )
         report = recover(
             inventory_root=safe_repo_path(args.inventory_root),
             inventory_manifest_path=safe_repo_path(args.inventory_manifest),
@@ -1183,6 +1252,7 @@ def main(argv: list[str] | None = None) -> int:
             user_agent=args.user_agent,
             refresh_index=args.refresh_index,
             retry_failed=args.retry_failed,
+            no_network=args.no_network,
         )
     except (OSError, sqlite3.DatabaseError, ValueError, WaybackRecoveryError) as exc:
         print(f"ERROR: {type(exc).__name__}: {exc}")

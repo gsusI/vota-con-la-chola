@@ -1,160 +1,237 @@
 {
+  "budget_exhausted_hosts": [],
+  "durable_request_telemetry": {
+    "bytes_received": 21227263,
+    "failed_attempts": 21,
+    "hosts": [
+      {
+        "bytes_received": 21227263,
+        "failed_attempts": 21,
+        "host": "www.boe.es",
+        "network_requests_started": 153,
+        "queue_attempt_events": 153,
+        "succeeded_attempts": 132
+      }
+    ],
+    "network_requests_started": 153,
+    "queue_attempt_events": 153,
+    "storage": "sqlite_document_fetch_request_events_v1",
+    "succeeded_attempts": 132
+  },
   "failure_class_counts": {
-    "not_fetchable": 157
+    "not_fetchable": 21
   },
   "failure_samples": [
     {
       "error": "HTTPError: HTTP Error 404: Not Found",
       "failure_class": "not_fetchable",
       "http_status": 404,
-      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20251228"
+      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20221218"
     },
     {
       "error": "HTTPError: HTTP Error 404: Not Found",
       "failure_class": "not_fetchable",
       "http_status": 404,
-      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20251221"
+      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20221211"
     },
     {
       "error": "HTTPError: HTTP Error 404: Not Found",
       "failure_class": "not_fetchable",
       "http_status": 404,
-      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20251214"
+      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20221204"
     },
     {
       "error": "HTTPError: HTTP Error 404: Not Found",
       "failure_class": "not_fetchable",
       "http_status": 404,
-      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20251207"
+      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20221127"
     },
     {
       "error": "HTTPError: HTTP Error 404: Not Found",
       "failure_class": "not_fetchable",
       "http_status": 404,
-      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20251130"
+      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20221120"
     },
     {
       "error": "HTTPError: HTTP Error 404: Not Found",
       "failure_class": "not_fetchable",
       "http_status": 404,
-      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20251123"
+      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20221113"
     },
     {
       "error": "HTTPError: HTTP Error 404: Not Found",
       "failure_class": "not_fetchable",
       "http_status": 404,
-      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20251116"
+      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20221106"
     },
     {
       "error": "HTTPError: HTTP Error 404: Not Found",
       "failure_class": "not_fetchable",
       "http_status": 404,
-      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20251109"
+      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20221030"
     },
     {
       "error": "HTTPError: HTTP Error 404: Not Found",
       "failure_class": "not_fetchable",
       "http_status": 404,
-      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20251102"
+      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20221225"
     },
     {
       "error": "HTTPError: HTTP Error 404: Not Found",
       "failure_class": "not_fetchable",
       "http_status": 404,
-      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20251026"
+      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20221016"
     },
     {
       "error": "HTTPError: HTTP Error 404: Not Found",
       "failure_class": "not_fetchable",
       "http_status": 404,
-      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20251019"
+      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20221009"
     },
     {
       "error": "HTTPError: HTTP Error 404: Not Found",
       "failure_class": "not_fetchable",
       "http_status": 404,
-      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20251012"
+      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20221002"
     },
     {
       "error": "HTTPError: HTTP Error 404: Not Found",
       "failure_class": "not_fetchable",
       "http_status": 404,
-      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20251005"
+      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20220925"
     },
     {
       "error": "HTTPError: HTTP Error 404: Not Found",
       "failure_class": "not_fetchable",
       "http_status": 404,
-      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20250928"
+      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20220918"
     },
     {
       "error": "HTTPError: HTTP Error 404: Not Found",
       "failure_class": "not_fetchable",
       "http_status": 404,
-      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20250921"
+      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20220911"
     },
     {
       "error": "HTTPError: HTTP Error 404: Not Found",
       "failure_class": "not_fetchable",
       "http_status": 404,
-      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20250914"
+      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20220904"
     },
     {
       "error": "HTTPError: HTTP Error 404: Not Found",
       "failure_class": "not_fetchable",
       "http_status": 404,
-      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20250907"
+      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20220828"
     },
     {
       "error": "HTTPError: HTTP Error 404: Not Found",
       "failure_class": "not_fetchable",
       "http_status": 404,
-      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20250831"
+      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20221023"
     },
     {
       "error": "HTTPError: HTTP Error 404: Not Found",
       "failure_class": "not_fetchable",
       "http_status": 404,
-      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20250824"
+      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20220814"
     },
     {
       "error": "HTTPError: HTTP Error 404: Not Found",
       "failure_class": "not_fetchable",
       "http_status": 404,
-      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20250817"
+      "item_key": "https://www.boe.es/datosabiertos/api/boe/sumario/20220807"
+    }
+  ],
+  "host_policy": {
+    "download_attempts_per_queue_attempt": 3,
+    "hard_failure_threshold": 3,
+    "per_host_min_interval_ms": 500,
+    "per_host_workers": 4,
+    "request_budgets": {},
+    "require_explicit_host_budget": false
+  },
+  "host_slos": [
+    {
+      "bytes_received": 21227263,
+      "circuit_open": false,
+      "failure_class_counts": {
+        "not_fetchable": 21
+      },
+      "failures": 21,
+      "host": "www.boe.es",
+      "http_status_counts": {
+        "200": 132,
+        "404": 21
+      },
+      "peak_inflight": 4,
+      "request_budget": null,
+      "request_budget_exhausted": false,
+      "request_budget_remaining": null,
+      "request_budget_used_cumulative": 3996,
+      "request_budget_used_prior": 3843,
+      "requests_started": 153,
+      "successes": 132,
+      "throttle_wait_seconds": 160.303142
     }
   ],
   "opened_circuits": [],
   "opened_hosts": [],
   "per_host_workers": 4,
+  "performance": {
+    "bytes_per_1000_succeeded": 160812598.485,
+    "bytes_per_second": 224740.286949,
+    "cpu_seconds": 2.893833,
+    "elapsed_seconds": 94.452416,
+    "elapsed_seconds_per_1000_succeeded": 715.548604,
+    "items_per_second": 1.397529,
+    "logical_requests": 153,
+    "network_request_upper_bound": 459,
+    "network_requests_started": 153,
+    "peak_rss_bytes": 113934336
+  },
   "pipeline_id": "boe_summary_fetch",
   "queue": {
-    "items_total": 1186,
+    "items_total": 1357,
     "pipeline_id": "boe_summary_fetch",
     "state_counts": {
-      "dead": 170,
+      "dead": 191,
       "leased": 0,
       "pending": 0,
-      "succeeded": 1016
+      "succeeded": 1166
     },
-    "terminal_total": 1186,
+    "terminal_total": 1357,
     "unfinished_total": 0
   },
-  "schema_version": "document_fetch_queue_run_v1",
+  "request_budget_recovery": {
+    "budget_usage_by_host": {
+      "www.boe.es": 3843
+    },
+    "conservative_unmatched_request_reservations": 3843,
+    "durable_network_requests_started": 0,
+    "policy": "durable_events_plus_full_bound_for_unmatched_attempts_v1",
+    "unmatched_queue_attempts": 1281
+  },
+  "schema_version": "document_fetch_queue_run_v3",
   "status": "partial",
+  "stop_reason": null,
   "storage": {
     "blocked": false,
-    "free_bytes": 46569463808,
+    "free_bytes": 37617725440,
     "inflight_reserve_bytes": 134217728,
     "min_free_bytes": 10737418240,
     "required_free_bytes": 10871635968
   },
   "totals": {
-    "claimed": 1096,
-    "dead": 157,
+    "bytes_received": 21227263,
+    "claimed": 153,
+    "dead": 21,
+    "deduplicated_content_objects": 0,
+    "new_content_objects": 132,
     "retried": 0,
-    "succeeded": 939
+    "succeeded": 132
   },
+  "unbudgeted_hosts": [],
   "worker_id": "boe-summary-worker",
   "workers": 8
 }

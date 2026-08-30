@@ -120,6 +120,10 @@ class TestRealDocumentFetchDiskPlanner(unittest.TestCase):
 
     def test_real_selection_matches_committed_legacy_cohort(self) -> None:
         reference = json.loads(REFERENCE_MANIFEST.read_text(encoding="utf-8"))
+        self.assertEqual(
+            self.manifest["selection"]["source_queue_created_before"],
+            "2026-08-29T18:38:04.541170+00:00",
+        )
         reference_rows = reference["rows"]
         candidate_rows = list(
             iter_manifest_rows(

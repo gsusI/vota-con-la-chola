@@ -329,7 +329,7 @@ def validate(args: argparse.Namespace) -> dict[str, Any]:
     expected_gap = max(0, target - executable)
     if (
         target <= 0
-        or int(summary.get("numeric_target_gap_urls") or -1) != expected_gap
+        or int(summary.get("numeric_target_gap_urls", -1)) != expected_gap
         or summary.get("numeric_target_available") != (executable >= target)
         or summary.get("representative_cohort_status") != "decision_required_dec_01"
     ):

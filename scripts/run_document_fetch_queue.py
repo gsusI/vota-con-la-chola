@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import os
 import re
 import resource
@@ -15,7 +16,7 @@ import tempfile
 import threading
 import time
 import urllib.error
-from collections.abc import Mapping
+from collections.abc import Callable, Mapping
 from concurrent.futures import ThreadPoolExecutor
 from contextlib import contextmanager
 from dataclasses import dataclass
@@ -266,8 +267,10 @@ class HostLimiter:
                     failure_counts[failure_class] = (
                         failure_counts.get(failure_class, 0) + 1
                     )
-            if http_status in {401, 403, 429} or (
-                http_status is not None and 500 <= http_status <= 599
+            if (
+                http_status in {401, 403, 429}
+                or (http_status is not None and 500 <= http_status <= 599)
+                or failure_class in {"timeout", "network"}
             ):
                 failures = self._hard_failures.get(circuit_key, 0) + 1
                 self._hard_failures[circuit_key] = failures
@@ -371,6 +374,15 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--retry-delay-seconds", type=int, default=60)
     parser.add_argument("--snapshot-date", default="")
     parser.add_argument("--report-out", default="")
+    parser.add_argument(
+        "--progress-min-interval-seconds",
+        type=float,
+        default=10.0,
+        help=(
+            "Minimum wall interval between atomic progress publications; "
+            "the first completed batch and final report are always published"
+        ),
+    )
     return parser.parse_args(argv)
 
 
@@ -1115,6 +1127,8 @@ def process_document_fetch_queue(
     retry_delay_seconds: int,
     snapshot_date: str = "",
     ca_bundle: Path | None = None,
+    progress_callback: Callable[[dict[str, Any]], None] | None = None,
+    progress_min_interval_seconds: float = 10.0,
 ) -> dict[str, Any]:
     started = time.monotonic()
     cpu_started = time.process_time()
@@ -1150,6 +1164,9 @@ def process_document_fetch_queue(
     stop_reason: str | None = None
     raw_root.mkdir(parents=True, exist_ok=True)
     storage: dict[str, Any] = {}
+    completed_batches = 0
+    published_checkpoints = 0
+    last_progress_published_at: float | None = None
 
     while max_items <= 0 or totals["claimed"] < max_items:
         remaining = (
@@ -1264,6 +1281,36 @@ def process_document_fetch_queue(
                         "error": outcome.error,
                     }
                 )
+        completed_batches += 1
+        progress_now = time.monotonic()
+        publish_progress = progress_callback is not None and (
+            last_progress_published_at is None
+            or float(progress_min_interval_seconds) <= 0
+            or progress_now - last_progress_published_at
+            >= float(progress_min_interval_seconds)
+        )
+        if publish_progress:
+            published_checkpoints += 1
+            progress_callback(
+                {
+                    "schema_version": "document_fetch_queue_progress_v1",
+                    "status": "running",
+                    "updated_at": now_utc_iso(),
+                    "pipeline_id": pipeline_id,
+                    "worker_id": worker_id,
+                    "checkpoint_sequence": published_checkpoints,
+                    "completed_batches": completed_batches,
+                    "totals": dict(totals),
+                    "queue": work_queue_stats(conn, pipeline_id=pipeline_id),
+                    "host_slos": limiter.host_slos(),
+                    "failure_class_counts": dict(
+                        sorted(failure_class_counts.items())
+                    ),
+                    "failure_samples": list(failure_samples),
+                    "storage": dict(storage),
+                }
+            )
+            last_progress_published_at = progress_now
         if (
             not successes
             and batch_hosts
@@ -1314,6 +1361,15 @@ def process_document_fetch_queue(
         "host_slos": host_slos,
         "durable_request_telemetry": request_telemetry,
         "request_budget_recovery": request_budget_recovery,
+        "progress_checkpoints": {
+            "callback_enabled": progress_callback is not None,
+            "completed_batches": completed_batches,
+            "published_checkpoints": published_checkpoints,
+            "min_interval_seconds": max(
+                0.0, float(progress_min_interval_seconds)
+            ),
+            "publication": "atomic_replace_first_batch_then_time_bounded_v2",
+        },
         "opened_hosts": limiter.opened_hosts(),
         "opened_circuits": limiter.opened_circuits(),
         "budget_exhausted_hosts": limiter.budget_exhausted_hosts(),
@@ -1357,6 +1413,28 @@ def _display_path(path: Path) -> str:
         return path.name
 
 
+def _atomic_write_json(path: Path, payload: dict[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    descriptor, temp_name = tempfile.mkstemp(
+        prefix=f".{path.name}.", dir=path.parent
+    )
+    try:
+        with os.fdopen(descriptor, "w", encoding="utf-8") as handle:
+            json.dump(payload, handle, ensure_ascii=True, indent=2, sort_keys=True)
+            handle.write("\n")
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(temp_name, path)
+        parent_descriptor = os.open(path.parent, os.O_RDONLY)
+        try:
+            os.fsync(parent_descriptor)
+        finally:
+            os.close(parent_descriptor)
+    finally:
+        if os.path.exists(temp_name):
+            os.unlink(temp_name)
+
+
 def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
     db_path = Path(args.db)
@@ -1378,6 +1456,8 @@ def main(argv: list[str] | None = None) -> int:
         or int(args.max_items) < 0
         or int(args.min_free_bytes) < 0
         or int(args.per_host_min_interval_ms) < 0
+        or not math.isfinite(float(args.progress_min_interval_seconds))
+        or float(args.progress_min_interval_seconds) < 0
     ):
         print("ERROR: worker/size/lease/timeout values must be positive", file=sys.stderr)
         return 2
@@ -1395,6 +1475,14 @@ def main(argv: list[str] | None = None) -> int:
             file=sys.stderr,
         )
         return 2
+
+    report_path = (
+        Path(args.report_out) if str(args.report_out or "").strip() else None
+    )
+
+    def write_progress(progress: dict[str, Any]) -> None:
+        if report_path is not None:
+            _atomic_write_json(report_path, progress)
 
     conn = open_db(db_path)
     try:
@@ -1419,26 +1507,16 @@ def main(argv: list[str] | None = None) -> int:
             retry_delay_seconds=max(0, int(args.retry_delay_seconds)),
             snapshot_date=str(args.snapshot_date),
             ca_bundle=Path(args.ca_bundle) if args.ca_bundle else None,
+            progress_callback=write_progress if report_path is not None else None,
+            progress_min_interval_seconds=max(
+                0.0, float(args.progress_min_interval_seconds)
+            ),
         )
     finally:
         conn.close()
 
-    if str(args.report_out or "").strip():
-        report_path = Path(args.report_out)
-        report_path.parent.mkdir(parents=True, exist_ok=True)
-        descriptor, temp_name = tempfile.mkstemp(
-            prefix=f".{report_path.name}.", dir=report_path.parent
-        )
-        try:
-            with os.fdopen(descriptor, "w", encoding="utf-8") as handle:
-                json.dump(report, handle, ensure_ascii=True, indent=2, sort_keys=True)
-                handle.write("\n")
-                handle.flush()
-                os.fsync(handle.fileno())
-            os.replace(temp_name, report_path)
-        finally:
-            if os.path.exists(temp_name):
-                os.unlink(temp_name)
+    if report_path is not None:
+        _atomic_write_json(report_path, report)
     print(json.dumps(report, ensure_ascii=True, sort_keys=True))
     return 0 if report["status"] in {"ok", "partial"} else 1
 

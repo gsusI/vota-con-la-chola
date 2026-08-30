@@ -48,9 +48,9 @@ class RealDocumentCorpusProcessingTests(unittest.TestCase):
         self.assertEqual(validation["status"], "ok")
         self.assertTrue(all(extraction["checks"].values()))
         self.assertTrue(all(validation["checks"].values()))
-        self.assertEqual(extraction["totals"]["file_instances"], 111_408)
-        self.assertEqual(extraction["totals"]["distinct_content_objects"], 109_558)
-        self.assertEqual(validation["totals"]["raw_files_checksum_verified"], 111_408)
+        self.assertEqual(extraction["totals"]["file_instances"], 122_607)
+        self.assertEqual(extraction["totals"]["distinct_content_objects"], 120_757)
+        self.assertEqual(validation["totals"]["raw_files_checksum_verified"], 122_607)
         self.assertEqual(extraction["totals"]["native_truncated_objects"], 0)
         self.assertEqual(validation["totals"]["native_truncated_objects"], 0)
         self.assertEqual(
@@ -81,7 +81,7 @@ class RealDocumentCorpusProcessingTests(unittest.TestCase):
                 self.assertEqual(
                     item["native_extraction_status"], "native_text_extracted"
                 )
-        self.assertEqual(rows, 111_408)
+        self.assertEqual(rows, 122_607)
 
     def test_page_ocr_and_independent_validation_cover_every_real_candidate(
         self,
@@ -170,7 +170,9 @@ class RealDocumentCorpusProcessingTests(unittest.TestCase):
         self.assertTrue(report["policy"]["public_domain_personal_information_retained"])
         self.assertEqual(report["totals"]["eligible_gap_file_instances"], 26)
         self.assertEqual(report["totals"]["unique_expected_content_targets"], 3)
-        self.assertEqual(report["totals"]["unseeded_gap_file_instances"], 25)
+        self.assertEqual(report["totals"]["unseeded_gap_file_instances"], 42)
+        self.assertTrue(report["execution"]["no_network"])
+        self.assertEqual(report["execution"]["network_requests_performed"], 0)
         self.assertGreaterEqual(report["totals"]["archive_candidates_indexed"], 5)
         checkpoint_rows = [
             json.loads(line)

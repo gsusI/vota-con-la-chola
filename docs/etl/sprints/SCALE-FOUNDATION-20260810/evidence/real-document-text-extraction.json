@@ -8,26 +8,40 @@
     "no_synthetic_or_mock_records": true,
     "official_public_domain_personal_information_retained": true
   },
-  "generated_at": "2026-08-13T05:15:21.185454Z",
+  "generated_at": "2026-08-30T03:24:36.093257Z",
   "inputs": {
     "inventory": {
-      "bytes": 75430959,
+      "bytes": 82987794,
       "path": "etl/data/manifests/real-document-format-inventory.jsonl",
-      "sha256": "1bfe313c276d63ae03ec4b0cbcf63b7a3655090f45b1ad245ccd23d89c8af32a"
+      "sha256": "4d11b77c8a2ac64b59baed5190fe52975d9d820fe76777585bf6799e8718a9ad"
     },
     "provenance": {
-      "bytes": 56477511,
+      "bytes": 62149654,
       "path": "etl/data/manifests/real-document-provenance-files.jsonl",
-      "sha256": "5c8692041af5ad30d279cfdb206c0503525ecf7b35368a0966ed92f918db0634"
+      "sha256": "bf2f0483bdea7bf6e3bac9abbd636af5d87c862d1eba569c15315145b722f466"
     }
   },
   "manifest": {
-    "bytes": 121555440,
+    "bytes": 133774263,
     "path": "etl/data/published/real-document-text-manifest-latest.jsonl",
-    "rows": 111408,
-    "sha256": "03ce010e1019fc3f23e5a016413aab51f7ec398637973680534c27007b69bfab"
+    "rows": 122607,
+    "sha256": "2a78979fec348f5ac5bcf9c9acab82df784d7241e4d10da22a098bb0fe88ffb2"
   },
   "next_action": "Independently validate every manifest row and text CAS object, then OCR every distinct empty or sparse PDF page without replacing native text.",
+  "performance": {
+    "claim_size": 48,
+    "cold_state_and_output": false,
+    "cpu_seconds": 294.948389,
+    "elapsed_seconds": 223.155116,
+    "items_per_second": 541.134804,
+    "measurement_scope": "seed_extract_and_manifest",
+    "output_root_preexisting": true,
+    "peak_rss_bytes_child_max": 239288320,
+    "peak_rss_bytes_self": 1161691136,
+    "raw_bytes_per_second": 23807035.017741,
+    "state_db_preexisting": false,
+    "workers": 12
+  },
   "policy": {
     "content_deduplicated_processing": true,
     "native_text_is_not_sanitized_or_identity_stripped": true,
@@ -37,37 +51,39 @@
     "synthetic_or_mock_records_counted": false
   },
   "run": {
-    "claimed": 109558,
+    "claimed": 120757,
     "dead": 0,
+    "raw_bytes_succeeded": 5312661661,
     "retried": 0,
-    "succeeded": 109558
+    "succeeded": 120757
   },
   "schema_version": "real_document_text_extraction_v1",
   "seed": {
-    "distinct_content_objects": 109558,
-    "file_instances": 111408
+    "distinct_content_objects": 120757,
+    "file_instances": 122607
   },
   "state": {
-    "database": "etl/data/staging/real-document-text-corpus-v5.db",
+    "database": "etl/data/staging/real-document-text-corpus-v6-20260830.db",
     "extraction_counts": {
-      "native_text_extracted": 109558
+      "native_text_extracted": 120757
     },
     "state_counts": {
-      "succeeded": 109558
+      "succeeded": 120757
     }
   },
   "status": "ok",
   "totals": {
-    "distinct_content_objects": 109558,
+    "distinct_content_objects": 120757,
     "duplicate_file_instances": 1850,
-    "file_instances": 111408,
+    "file_instances": 122607,
     "native_no_text_objects": 0,
-    "native_text_chars": 1999902681,
+    "native_text_chars": 2211203471,
     "native_truncated_objects": 0,
     "ocr_candidate_pages": 856,
-    "provenance_gap_instances": 51,
-    "public_url_instances": 111357,
-    "text_cas_bytes": 533125716,
-    "text_cas_files": 108139
+    "provenance_gap_instances": 68,
+    "public_url_instances": 122539,
+    "raw_content_bytes": 5312661661,
+    "text_cas_bytes": 590193322,
+    "text_cas_files": 119338
   }
 }

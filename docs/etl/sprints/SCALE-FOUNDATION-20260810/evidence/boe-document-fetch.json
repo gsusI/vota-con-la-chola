@@ -1,37 +1,72 @@
 {
-  "failure_class_counts": {},
-  "failure_samples": [],
-  "opened_circuits": [],
-  "opened_hosts": [],
-  "per_host_workers": 8,
+  "checkpoint_sequence": 1,
+  "completed_batches": 1,
+  "failure_class_counts": {
+    "network": 1
+  },
+  "failure_samples": [
+    {
+      "error": "URLError: <urlopen error timed out>",
+      "failure_class": "network",
+      "http_status": null,
+      "item_key": "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2022-13616"
+    }
+  ],
+  "host_slos": [
+    {
+      "bytes_received": 1246052,
+      "circuit_open": false,
+      "failure_class_counts": {
+        "network": 22
+      },
+      "failures": 22,
+      "host": "www.boe.es",
+      "http_status_counts": {
+        "200": 63,
+        "none": 22
+      },
+      "peak_inflight": 4,
+      "request_budget": 500000,
+      "request_budget_exhausted": false,
+      "request_budget_remaining": 221032,
+      "request_budget_used_cumulative": 278968,
+      "request_budget_used_prior": 278883,
+      "requests_started": 85,
+      "successes": 63,
+      "throttle_wait_seconds": 18.30216
+    }
+  ],
   "pipeline_id": "boe_document_fetch",
   "queue": {
-    "items_total": 88980,
+    "items_total": 100867,
     "pipeline_id": "boe_document_fetch",
     "state_counts": {
-      "dead": 0,
-      "leased": 24,
-      "pending": 0,
-      "succeeded": 88956
+      "dead": 1,
+      "leased": 0,
+      "pending": 815,
+      "succeeded": 100051
     },
-    "terminal_total": 88956,
-    "unfinished_total": 24
+    "terminal_total": 100052,
+    "unfinished_total": 815
   },
-  "schema_version": "document_fetch_queue_run_v1",
-  "status": "ok",
+  "schema_version": "document_fetch_queue_progress_v1",
+  "status": "running",
   "storage": {
     "blocked": false,
-    "free_bytes": 42266238976,
-    "inflight_reserve_bytes": 1073741824,
+    "free_bytes": 34159685632,
+    "inflight_reserve_bytes": 536870912,
     "min_free_bytes": 10737418240,
-    "required_free_bytes": 11811160064
+    "required_free_bytes": 11274289152
   },
   "totals": {
-    "claimed": 34560,
-    "dead": 0,
+    "bytes_received": 1246052,
+    "claimed": 64,
+    "dead": 1,
+    "deduplicated_content_objects": 63,
+    "new_content_objects": 0,
     "retried": 0,
-    "succeeded": 34560
+    "succeeded": 63
   },
-  "worker_id": "boe-document-worker",
-  "workers": 16
+  "updated_at": "2026-08-30T03:08:08+00:00",
+  "worker_id": "boe-document-worker"
 }

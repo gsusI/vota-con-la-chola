@@ -1,7 +1,7 @@
 {
   "schema_version": "real_document_source_universe_v1",
-  "status": "blocked_below_numeric_target",
-  "generated_at": "2026-08-29T20:59:05.079637Z",
+  "status": "ready_for_numeric_cohort_preparation",
+  "generated_at": "2026-08-30T04:04:36.008403Z",
   "policy": {
     "official_real_urls_only": true,
     "synthetic_or_mock_records_counted": false,
@@ -13,13 +13,13 @@
   "inputs": {
     "provenance_audit": {
       "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-provenance-audit.json",
-      "bytes": 28339,
-      "sha256": "bd822b0286ebb1e9128d8a576db0c483d15bdda5bd8f75a6a6ab73a8a5c709b6"
+      "bytes": 28369,
+      "sha256": "af36c442afd8fe3d190b42ee76f245659a86fa1af5ace8175ac65fce6a09dfdd"
     },
     "edge_manifest": {
       "path": "etl/data/manifests/real-document-provenance-edges.jsonl",
-      "bytes": 228237330,
-      "sha256": "e5329f46a9d6a17ef71b8798c54a16f4464cb93c19306d5ede165350b11492c1"
+      "bytes": 253262872,
+      "sha256": "392af27ccb113a425d39ea96e0163f14b8101e5b756da81347463d4781a88578"
     },
     "host_health": {
       "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-host-health-20260829.json",
@@ -41,21 +41,21 @@
     }
   },
   "edge_counts": {
-    "edge_rows": 304165,
-    "public_https_edges": 297474,
+    "edge_rows": 337701,
+    "public_https_edges": 331010,
     "public_http_edges": 6691
   },
   "summary": {
-    "unique_public_urls": 104064,
-    "unique_https_urls": 100418,
+    "unique_public_urls": 115246,
+    "unique_https_urls": 111600,
     "unique_http_urls": 3646,
     "source_ids": 43,
     "hosts": 32,
-    "contract_eligible_physically_healthy_https_urls": 90121,
+    "contract_eligible_physically_healthy_https_urls": 101303,
     "healthy_host_uncontracted_https_urls": 1,
     "numeric_target_urls": 100000,
-    "numeric_target_gap_urls": 9879,
-    "numeric_target_available": false,
+    "numeric_target_gap_urls": 0,
+    "numeric_target_available": true,
     "representative_cohort_status": "decision_required_dec_01"
   },
   "category_https_urls": {
@@ -63,17 +63,17 @@
     "known_blocked_no_new_lever": 10214,
     "not_assessed_for_bulk_acquisition": 52,
     "open_access_incident": 0,
-    "partially_contract_implemented_and_physically_healthy": 90036,
+    "partially_contract_implemented_and_physically_healthy": 101218,
     "reachable_semantic_contract_missing": 28,
     "strict_tls_failed": 2
   },
   "hosts": [
     {
       "host": "www.boe.es",
-      "unique_public_urls": 90036,
-      "unique_https_urls": 90036,
+      "unique_public_urls": 101218,
+      "unique_https_urls": 101218,
       "unique_http_urls": 0,
-      "contract_eligible_https_urls": 90035,
+      "contract_eligible_https_urls": 101217,
       "classification": "partially_contract_implemented_and_physically_healthy",
       "physical_success_rows": 9914,
       "probe_http_status": null,
@@ -88,12 +88,12 @@
         {
           "source_id": "boe_daily_summaries",
           "url_kind": "public_https",
-          "unique_urls": 1034
+          "unique_urls": 1166
         },
         {
           "source_id": "boe_document_xml",
           "url_kind": "public_https",
-          "unique_urls": 89001
+          "unique_urls": 100051
         }
       ]
     },
@@ -946,16 +946,16 @@
     "HTTP-only URLs remain evidence but cannot enter the strict HTTPS acquisition cohort."
   ],
   "next_action": {
-    "minimum_additional_contract_eligible_https_urls": 9879,
+    "minimum_additional_contract_eligible_https_urls": 0,
     "reachable_moncloa_urls_after_contract": 28,
     "instruction": "Implement and validate the Moncloa semantic contract, then expand healthy official HTTPS sources or use a genuinely new lever on an existing blocked source. Do not repeat blocker probes without a new lever."
   },
   "performance": {
     "staging": "disk_backed_sqlite",
     "edge_batch_rows": 10000,
-    "wall_seconds": 2.442115,
-    "cpu_seconds": 2.386671,
-    "peak_rss_bytes": 46891008
+    "wall_seconds": 2.763151,
+    "cpu_seconds": 2.7588,
+    "peak_rss_bytes": 49037312
   },
   "errors": []
 }

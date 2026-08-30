@@ -17,13 +17,13 @@
       "tesseract": "tesseract 5.5.2"
     }
   },
-  "generated_at": "2026-08-29T16:30:54.684100Z",
+  "generated_at": "2026-08-30T03:30:12.039621Z",
   "inputs": {
     "native_manifest": {
-      "bytes": 121555440,
+      "bytes": 133774263,
       "path": "etl/data/published/real-document-text-manifest-latest.jsonl",
-      "rows": 111408,
-      "sha256": "03ce010e1019fc3f23e5a016413aab51f7ec398637973680534c27007b69bfab"
+      "rows": 122607,
+      "sha256": "2a78979fec348f5ac5bcf9c9acab82df784d7241e4d10da22a098bb0fe88ffb2"
     }
   },
   "limitations": [
@@ -41,14 +41,14 @@
   "next_action": "Independently validate every page row and OCR text CAS object, then human-review a stratified real-page sample before analytical promotion.",
   "performance": {
     "claim_size": 16,
-    "cold_state_and_output": true,
-    "cpu_seconds": 623.683103,
-    "elapsed_seconds": 117.969863,
+    "cold_state_and_output": false,
+    "cpu_seconds": 578.954385,
+    "elapsed_seconds": 107.886765,
     "measurement_scope": "seed_ocr_and_manifest",
-    "output_root_preexisting": false,
-    "pages_per_second": 7.25609,
-    "peak_rss_bytes_child_max": 197492736,
-    "peak_rss_bytes_self": 37535744,
+    "output_root_preexisting": true,
+    "pages_per_second": 7.934245,
+    "peak_rss_bytes_child_max": 201687040,
+    "peak_rss_bytes_self": 37519360,
     "state_db_preexisting": false,
     "workers": 8
   },
@@ -72,7 +72,7 @@
     "documents": 58
   },
   "state": {
-    "database": "etl/data/staging/real-document-page-ocr-canonical-20260829.db",
+    "database": "etl/data/staging/real-document-page-ocr-v6-20260830.db",
     "ocr_status_counts": {
       "ocr_no_text": 7,
       "ocr_text_extracted": 849
@@ -85,7 +85,7 @@
   "totals": {
     "candidate_pages": 856,
     "documents": 58,
-    "elapsed_worker_seconds": 654.6043,
+    "elapsed_worker_seconds": 587.0126,
     "empty_text_pages": 34,
     "native_text_chars_on_candidate_pages": 68951,
     "ocr_text_cas_bytes": 14853,

@@ -35,7 +35,6 @@ from publicdata_publish.outcome_pair_identity_companion import (
     EXPECTED_MEMBER_ROWS,
     EXPECTED_OFFICIAL_NAMES,
     EXPECTED_PACKAGE_SEMANTIC_ROOT_SHA256,
-    EXPECTED_SOURCE_DATABASE_BYTES,
     SOURCE_ACTION_SCAN_SQL,
     SOURCE_MEMBER_SCAN_SQL,
     canonical_sha256,
@@ -127,11 +126,10 @@ def _require_pyarrow() -> None:
         raise unittest.SkipTest("pyarrow optional dependency is not installed")
 
 
-def test_pinned_real_source_has_every_public_identity() -> None:
+def test_real_source_projection_has_every_public_identity() -> None:
     config = load_json(CONFIG)
     assert _sha256_file(CONFIG) == EXPECTED_CONFIG_FILE_SHA256
     assert canonical_sha256(config) == EXPECTED_CONFIG_CANONICAL_SHA256
-    assert SOURCE_DB.stat().st_size == EXPECTED_SOURCE_DATABASE_BYTES
     connection = _readonly(SOURCE_DB)
     try:
         row = connection.execute(
@@ -221,11 +219,15 @@ def test_bound_sqlite_descriptor_is_the_database_actually_queried() -> None:
             connection.close()
         descriptor_stat = os.fstat(source_bound.handle.fileno())
         opened_stat = Path(database_path).stat()
-        assert (opened_stat.st_dev, opened_stat.st_ino, opened_stat.st_size) == (
-            descriptor_stat.st_dev,
+        assert (opened_stat.st_ino, opened_stat.st_size) == (
             descriptor_stat.st_ino,
             descriptor_stat.st_size,
         )
+        if opened_stat.st_dev != descriptor_stat.st_dev:
+            # macOS devfs exposes a wrapped st_dev for /dev/fd/N. Linux SQLite
+            # may instead canonicalize the same descriptor to its mount path.
+            assert sys.platform == "darwin"
+            assert database_path == f"/dev/fd/{source_bound.handle.fileno()}"
         assert member_rows == EXPECTED_MEMBER_ROWS
 
 
@@ -840,6 +842,12 @@ def test_canonical_real_package_runs_full_independent_validation_and_dataset_api
     assert report["counts"]["member_vote_rows"] == EXPECTED_MEMBER_ROWS
     assert report["counts"]["distinct_official_names"] == EXPECTED_OFFICIAL_NAMES
     assert report["counts"]["actions"] == EXPECTED_ACTIONS
+    assert report["runtime_source_equivalence"]["mode"] == (
+        "exact_scoped_projection_roots_v1"
+    )
+    assert report["runtime_source_equivalence"][
+        "member_component_root_sha256"
+    ] == EXPECTED_MEMBER_COMPONENT_ROOT_SHA256
     assert (
         report["package_semantic_root_sha256"] == EXPECTED_PACKAGE_SEMANTIC_ROOT_SHA256
     )
@@ -1203,7 +1211,7 @@ def test_real_rows_reencoded_with_alternate_writer_options_are_rejected() -> Non
 def load_tests(loader, standard_tests, pattern):  # noqa: ANN001
     del loader, standard_tests, pattern
     functions = [
-        test_pinned_real_source_has_every_public_identity,
+        test_real_source_projection_has_every_public_identity,
         test_manifest_binds_exact_executed_scans_and_explicit_source_projection,
         test_bound_sqlite_descriptor_is_the_database_actually_queried,
         test_disk_staged_real_stream_is_indexed_and_matches_plan,

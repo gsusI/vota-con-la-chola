@@ -13,7 +13,9 @@ EVIDENCE_ROOT = REPO_ROOT / "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence
 
 
 class RealDocumentSourceUniverseTests(unittest.TestCase):
-    def test_real_official_universe_replays_and_fails_target_honestly(self) -> None:
+    def test_real_official_universe_replays_numeric_target_without_inferring_representativeness(
+        self,
+    ) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             report_path = Path(temporary) / "source-universe.json"
             validation_path = Path(temporary) / "source-universe-validation.json"
@@ -66,17 +68,21 @@ class RealDocumentSourceUniverseTests(unittest.TestCase):
             report = json.loads(report_path.read_text(encoding="utf-8"))
             validation = json.loads(validation_path.read_text(encoding="utf-8"))
 
-        self.assertEqual(report["edge_counts"]["edge_rows"], 304_165)
-        self.assertEqual(report["summary"]["unique_public_urls"], 104_064)
-        self.assertEqual(report["summary"]["unique_https_urls"], 100_418)
+        self.assertEqual(report["edge_counts"]["edge_rows"], 337_701)
+        self.assertEqual(report["summary"]["unique_public_urls"], 115_246)
+        self.assertEqual(report["summary"]["unique_https_urls"], 111_600)
         self.assertEqual(
             report["summary"]["contract_eligible_physically_healthy_https_urls"],
-            90_121,
+            101_303,
         )
         self.assertEqual(report["summary"]["healthy_host_uncontracted_https_urls"], 1)
-        self.assertEqual(report["summary"]["numeric_target_gap_urls"], 9_879)
-        self.assertFalse(report["summary"]["numeric_target_available"])
-        self.assertEqual(report["status"], "blocked_below_numeric_target")
+        self.assertEqual(report["summary"]["numeric_target_gap_urls"], 0)
+        self.assertTrue(report["summary"]["numeric_target_available"])
+        self.assertEqual(
+            report["summary"]["representative_cohort_status"],
+            "decision_required_dec_01",
+        )
+        self.assertEqual(report["status"], "ready_for_numeric_cohort_preparation")
         self.assertEqual(report["policy"]["network_requests_performed"], 0)
         self.assertFalse(report["policy"]["synthetic_or_mock_records_counted"])
         self.assertTrue(
@@ -91,7 +97,9 @@ class RealDocumentSourceUniverseTests(unittest.TestCase):
             "obstruction_classification_projection_v1",
         )
         hosts = {row["host"]: row for row in report["hosts"]}
-        self.assertEqual(hosts["www.boe.es"]["contract_eligible_https_urls"], 90_035)
+        self.assertEqual(
+            hosts["www.boe.es"]["contract_eligible_https_urls"], 101_217
+        )
         self.assertEqual(
             hosts["www.boe.es"]["classification"],
             "partially_contract_implemented_and_physically_healthy",
@@ -107,7 +115,7 @@ class RealDocumentSourceUniverseTests(unittest.TestCase):
         self.assertEqual(validation["status"], "ok")
         self.assertEqual(validation["errors"], [])
         self.assertEqual(
-            validation["checks"]["unique_https_urls_replayed"], 100_418
+            validation["checks"]["unique_https_urls_replayed"], 111_600
         )
 
 

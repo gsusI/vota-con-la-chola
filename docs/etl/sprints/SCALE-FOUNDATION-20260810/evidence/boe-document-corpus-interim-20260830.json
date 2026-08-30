@@ -1,0 +1,74 @@
+{
+  "checks": {
+    "all_captures_checksum_verified": true,
+    "document_queue_complete_without_failures": false,
+    "manifest_matches_document_rows": true,
+    "manifest_references_every_summary_capture": false,
+    "no_remote_mutation_performed": true,
+    "no_synthetic_or_mock_records_counted": true,
+    "public_domain_personal_information_retained": true,
+    "summary_dead_rows_are_official_404": true,
+    "summary_queue_terminal": true
+  },
+  "documents": {
+    "bytes": 3064836413,
+    "distinct_content_objects": 100051,
+    "rows": 100051
+  },
+  "generated_at": "2026-08-30T03:19:53.984653+00:00",
+  "manifest": {
+    "available_summary_captures": 1166,
+    "bytes": 234632869,
+    "distinct_content_objects": 100051,
+    "distinct_summary_captures": 1156,
+    "document_bytes": 3064836413,
+    "path": "etl/data/manifests/boe-document-corpus-lineage.jsonl",
+    "rows": 100051,
+    "sha256": "99739ca6ac462edada2d20e61be6f81c9404689405632751da4b6bc54d5848f4"
+  },
+  "mode": "status",
+  "operation": {
+    "status_only": true
+  },
+  "policy": {
+    "checksum_and_byte_verification_required": true,
+    "exact_summary_to_document_relation_required": true,
+    "official_boe_https_only": true,
+    "official_public_domain_personal_information_retained": true,
+    "remote_mutation_performed": false,
+    "synthetic_or_mock_records_counted": false
+  },
+  "queues": {
+    "documents": {
+      "items_total": 100867,
+      "pipeline_id": "boe_document_fetch",
+      "state_counts": {
+        "dead": 1,
+        "leased": 64,
+        "pending": 751,
+        "succeeded": 100051
+      },
+      "terminal_total": 100052,
+      "unfinished_total": 815
+    },
+    "summaries": {
+      "items_total": 1357,
+      "pipeline_id": "boe_summary_fetch",
+      "state_counts": {
+        "dead": 191,
+        "leased": 0,
+        "pending": 0,
+        "succeeded": 1166
+      },
+      "terminal_total": 1357,
+      "unfinished_total": 0
+    }
+  },
+  "schema_version": "boe_document_corpus_report_v1",
+  "status": "ok",
+  "summaries": {
+    "bytes": 197645306,
+    "distinct_content_objects": 1166,
+    "rows": 1166
+  }
+}

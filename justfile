@@ -282,6 +282,13 @@ document_factory_disk_planner_max_rows := env_var_or_default("DOCUMENT_FACTORY_D
 document_factory_disk_planner_max_preflight := env_var_or_default("DOCUMENT_FACTORY_DISK_PLANNER_MAX_PREFLIGHT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-disk-planner-max-preflight-validation-20260829.json")
 document_factory_disk_planner_max_validation := env_var_or_default("DOCUMENT_FACTORY_DISK_PLANNER_MAX_VALIDATION", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-disk-planner-max-validation-20260829.json")
 document_factory_disk_planner_max_selection_sha256 := env_var_or_default("DOCUMENT_FACTORY_DISK_PLANNER_MAX_SELECTION_SHA256", "dba419b3c2b3377c456af9fe3165c83df698445278500ffc4172721a58ad05e8")
+document_factory_disk_planner_100k_prepared_at := env_var_or_default("DOCUMENT_FACTORY_DISK_PLANNER_100K_PREPARED_AT", "2026-08-30T00:00:00Z")
+document_factory_disk_planner_100k_db := env_var_or_default("DOCUMENT_FACTORY_DISK_PLANNER_100K_DB", "etl/data/staging/real-document-fetch-disk-planner-100k-v1-20260830.db")
+document_factory_disk_planner_100k_manifest := env_var_or_default("DOCUMENT_FACTORY_DISK_PLANNER_100K_MANIFEST", "etl/data/staging/real-document-fetch-disk-planner-100k-v1-20260830.json")
+document_factory_disk_planner_100k_rows := env_var_or_default("DOCUMENT_FACTORY_DISK_PLANNER_100K_ROWS", "etl/data/staging/real-document-fetch-disk-planner-100k-v1-20260830-rows")
+document_factory_disk_planner_100k_preflight := env_var_or_default("DOCUMENT_FACTORY_DISK_PLANNER_100K_PREFLIGHT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-disk-planner-100k-preflight-validation-20260830.json")
+document_factory_disk_planner_100k_validation := env_var_or_default("DOCUMENT_FACTORY_DISK_PLANNER_100K_VALIDATION", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-disk-planner-100k-validation-20260830.json")
+document_factory_disk_planner_100k_selection_sha256 := env_var_or_default("DOCUMENT_FACTORY_DISK_PLANNER_100K_SELECTION_SHA256", "c81d3c0a90222122309a259c791cdbb9ffa900f21f96eed5a12d30a71f314185")
 document_factory_source_universe_provenance := env_var_or_default("DOCUMENT_FACTORY_SOURCE_UNIVERSE_PROVENANCE", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-provenance-audit.json")
 document_factory_source_universe_out := env_var_or_default("DOCUMENT_FACTORY_SOURCE_UNIVERSE_OUT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-source-universe-20260829.json")
 document_factory_source_universe_validation := env_var_or_default("DOCUMENT_FACTORY_SOURCE_UNIVERSE_VALIDATION", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-source-universe-validation-20260829.json")
@@ -548,6 +555,8 @@ boe_document_end_date := env_var_or_default("BOE_DOCUMENT_END_DATE", "2026-03-31
 boe_document_snapshot_date := env_var_or_default("BOE_DOCUMENT_SNAPSHOT_DATE", "2026-08-13")
 boe_document_workers := env_var_or_default("BOE_DOCUMENT_WORKERS", "8")
 boe_document_per_host_workers := env_var_or_default("BOE_DOCUMENT_PER_HOST_WORKERS", "4")
+boe_document_host_request_budget := env_var_or_default("BOE_DOCUMENT_HOST_REQUEST_BUDGET", "500000")
+boe_document_progress_min_interval_seconds := env_var_or_default("BOE_DOCUMENT_PROGRESS_MIN_INTERVAL_SECONDS", "10")
 boe_document_max_items := env_var_or_default("BOE_DOCUMENT_MAX_ITEMS", "5000")
 boe_document_min_free_bytes := env_var_or_default("BOE_DOCUMENT_MIN_FREE_BYTES", "10737418240")
 boe_document_report := env_var_or_default("BOE_DOCUMENT_REPORT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-document-corpus.json")
@@ -2344,16 +2353,22 @@ etl-scale-boe-document-seed:
   python3 scripts/manage_boe_document_corpus.py seed-summaries --db {{db_path}} --start-date {{boe_document_start_date}} --end-date {{boe_document_end_date}} --report-out {{boe_document_report}} --enforce
 
 etl-scale-boe-summary-fetch:
-  python3 scripts/run_document_fetch_queue.py --db {{db_path}} --pipeline-id boe_summary_fetch --worker-id boe-summary-worker --raw-root etl/data/raw/text_documents/boe_daily_summaries --workers {{boe_document_workers}} --per-host-workers {{boe_document_per_host_workers}} --per-host-min-interval-ms {{document_fetch_per_host_min_interval_ms}} --claim-size 64 --max-items 0 --timeout 30 --max-bytes 16777216 --min-free-bytes {{boe_document_min_free_bytes}} --download-attempts 3 --retry-delay-seconds 120 --snapshot-date {{boe_document_snapshot_date}} --report-out {{boe_summary_fetch_report}}
+  python3 scripts/run_document_fetch_queue.py --db {{db_path}} --pipeline-id boe_summary_fetch --worker-id boe-summary-worker --raw-root etl/data/raw/text_documents/boe_daily_summaries --workers {{boe_document_workers}} --per-host-workers {{boe_document_per_host_workers}} --per-host-min-interval-ms {{document_fetch_per_host_min_interval_ms}} --host-request-budget www.boe.es={{boe_document_host_request_budget}} --require-explicit-host-budget --claim-size 64 --max-items 0 --timeout 30 --max-bytes 16777216 --min-free-bytes {{boe_document_min_free_bytes}} --download-attempts 3 --retry-delay-seconds 120 --snapshot-date {{boe_document_snapshot_date}} --progress-min-interval-seconds {{boe_document_progress_min_interval_seconds}} --report-out {{boe_summary_fetch_report}}
 
 etl-scale-boe-summary-requeue-contract-failures:
   python3 scripts/manage_boe_document_corpus.py requeue-summary-contract-failures --db {{db_path}} --report-out {{boe_document_report}} --enforce
+
+etl-scale-boe-document-requeue-budget-failures:
+  python3 scripts/manage_boe_document_corpus.py requeue-document-budget-failures --db {{db_path}} --report-out {{boe_document_report}} --enforce
+
+etl-scale-boe-document-requeue-transient-failures:
+  python3 scripts/manage_boe_document_corpus.py requeue-document-transient-failures --db {{db_path}} --report-out {{boe_document_report}} --enforce
 
 etl-scale-boe-document-expand:
   python3 scripts/manage_boe_document_corpus.py expand-documents --db {{db_path}} --start-date {{boe_document_start_date}} --end-date {{boe_document_end_date}} --report-out {{boe_document_report}} --enforce
 
 etl-scale-boe-document-fetch:
-  python3 scripts/run_document_fetch_queue.py --db {{db_path}} --pipeline-id boe_document_fetch --worker-id boe-document-worker --raw-root etl/data/raw/text_documents/boe_document_xml --workers {{boe_document_workers}} --per-host-workers {{boe_document_per_host_workers}} --per-host-min-interval-ms {{document_fetch_per_host_min_interval_ms}} --claim-size 64 --max-items {{boe_document_max_items}} --timeout 30 --max-bytes 67108864 --min-free-bytes {{boe_document_min_free_bytes}} --download-attempts 3 --retry-delay-seconds 120 --snapshot-date {{boe_document_snapshot_date}} --report-out {{boe_document_fetch_report}}
+  python3 scripts/run_document_fetch_queue.py --db {{db_path}} --pipeline-id boe_document_fetch --worker-id boe-document-worker --raw-root etl/data/raw/text_documents/boe_document_xml --workers {{boe_document_workers}} --per-host-workers {{boe_document_per_host_workers}} --per-host-min-interval-ms {{document_fetch_per_host_min_interval_ms}} --host-request-budget www.boe.es={{boe_document_host_request_budget}} --require-explicit-host-budget --claim-size 64 --max-items {{boe_document_max_items}} --timeout 30 --max-bytes 67108864 --min-free-bytes {{boe_document_min_free_bytes}} --download-attempts 3 --retry-delay-seconds 120 --snapshot-date {{boe_document_snapshot_date}} --progress-min-interval-seconds {{boe_document_progress_min_interval_seconds}} --report-out {{boe_document_fetch_report}}
 
 etl-scale-boe-document-status:
   python3 scripts/manage_boe_document_corpus.py status --db {{db_path}} --report-out {{boe_document_report}} --enforce
@@ -4898,6 +4913,41 @@ document-factory-disk-planner-max-verify:
     --expected-selection-sha256 "{{document_factory_disk_planner_max_selection_sha256}}" \
     --max-planner-peak-rss-mb "256" \
     --out "{{document_factory_disk_planner_max_validation}}"
+
+# Numeric scale gate only. Exact 100,000 real official rows; this does not assert
+# that maintainers approved the source/format/language strata in DEC-01.
+document-factory-disk-planner-100k-prepare:
+  test ! -e "{{document_factory_disk_planner_100k_db}}"
+  test ! -e "{{document_factory_disk_planner_100k_manifest}}"
+  test ! -e "{{document_factory_disk_planner_100k_rows}}"
+  python3 scripts/prepare_real_document_fetch_scale_cohort.py \
+    --source-db "{{db_path}}" \
+    --schema "etl/load/sqlite_schema.sql" \
+    --provenance-edges "etl/data/manifests/real-document-provenance-edges.jsonl" \
+    --raw-root "etl/data/raw" \
+    --host-health "{{document_factory_acquisition_host_health}}" \
+    --out-db "{{document_factory_disk_planner_100k_db}}" \
+    --manifest-out "{{document_factory_disk_planner_100k_manifest}}" \
+    --manifest-layout "partitioned_v4" \
+    --manifest-partition-dir "{{document_factory_disk_planner_100k_rows}}" \
+    --boe-document-rows "98748" \
+    --boe-summary-rows "1166" \
+    --prepared-at "{{document_factory_disk_planner_100k_prepared_at}}"
+
+document-factory-disk-planner-100k-verify:
+  python3 scripts/validate_real_document_fetch_scale_cohort.py \
+    --mode "preflight" \
+    --manifest "{{document_factory_disk_planner_100k_manifest}}" \
+    --db "{{document_factory_disk_planner_100k_db}}" \
+    --max-planner-peak-rss-mb "256" \
+    --out "{{document_factory_disk_planner_100k_preflight}}"
+  python3 scripts/validate_real_document_fetch_disk_planner.py \
+    --candidate-manifest "{{document_factory_disk_planner_100k_manifest}}" \
+    --candidate-db "{{document_factory_disk_planner_100k_db}}" \
+    --expected-rows "100000" \
+    --expected-selection-sha256 "{{document_factory_disk_planner_100k_selection_sha256}}" \
+    --max-planner-peak-rss-mb "256" \
+    --out "{{document_factory_disk_planner_100k_validation}}"
 
 document-factory-source-universe-report:
   python3 scripts/report_real_document_source_universe.py \

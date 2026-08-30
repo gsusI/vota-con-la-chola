@@ -19,13 +19,13 @@
     "ocr_text_error_samples": [],
     "source_document_error_samples": []
   },
-  "generated_at": "2026-08-29T16:31:03.941648Z",
+  "generated_at": "2026-08-30T03:30:17.300442Z",
   "inputs": {
     "native_manifest": {
-      "bytes": 121555440,
+      "bytes": 133774263,
       "path": "etl/data/published/real-document-text-manifest-latest.jsonl",
-      "rows": 111408,
-      "sha256": "03ce010e1019fc3f23e5a016413aab51f7ec398637973680534c27007b69bfab"
+      "rows": 122607,
+      "sha256": "2a78979fec348f5ac5bcf9c9acab82df784d7241e4d10da22a098bb0fe88ffb2"
     },
     "ocr_manifest": {
       "bytes": 834675,
@@ -34,9 +34,9 @@
       "sha256": "31acdf4e61d119594644efa6342100f006c0bfe21c125531d2654a6cd1abf804"
     },
     "ocr_report": {
-      "bytes": 3268,
+      "bytes": 3262,
       "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr.json",
-      "sha256": "06c7749ed36b19e2d5f240c7a38d864e7363d406c38eaca1b9dcdb2c63b6d3b5"
+      "sha256": "cccd8a975d22b36e1fcbe74034326909f0510e4547dedea2e7d14a3d26de3ecd"
     }
   },
   "next_action": "Human-review a stratified real-page sample by source, language, scan quality, and routing reason before analytical promotion.",
@@ -53,7 +53,7 @@
     "candidate_pages": 856,
     "documents": 58,
     "empty_text_pages": 34,
-    "native_manifest_rows": 111408,
+    "native_manifest_rows": 122607,
     "native_text_chars_on_candidate_pages": 68951,
     "ocr_text_cas_files_observed": 131,
     "ocr_text_cas_objects_checksum_verified": 131,

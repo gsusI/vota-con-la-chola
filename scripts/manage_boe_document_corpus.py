@@ -10,6 +10,7 @@ import re
 import sqlite3
 import sys
 import tempfile
+from collections import deque
 from datetime import UTC, date, datetime, timedelta
 from pathlib import Path
 from typing import Any
@@ -52,6 +53,8 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         choices=(
             "seed-summaries",
             "requeue-summary-contract-failures",
+            "requeue-document-budget-failures",
+            "requeue-document-transient-failures",
             "expand-documents",
             "status",
         ),
@@ -370,6 +373,9 @@ def expand_documents(
     )
     requested_boe_ids = set(boe_ids)
     selected_counts: dict[str, int] = {}
+    selected_ids_digest = hashlib.sha256()
+    selected_ids_first: list[str] = []
+    selected_ids_last: deque[str] = deque(maxlen=10)
     counters = {
         "summaries_parsed": 0,
         "documents_discovered": 0,
@@ -427,7 +433,13 @@ def expand_documents(
                 counters["documents_discovered"] += 1
                 if requested_boe_ids and boe_ref not in requested_boe_ids:
                     continue
-                selected_counts[boe_ref] = selected_counts.get(boe_ref, 0) + 1
+                if requested_boe_ids:
+                    selected_counts[boe_ref] = selected_counts.get(boe_ref, 0) + 1
+                selected_ids_digest.update(boe_ref.encode("ascii"))
+                selected_ids_digest.update(b"\n")
+                if len(selected_ids_first) < 10:
+                    selected_ids_first.append(boe_ref)
+                selected_ids_last.append(boe_ref)
                 counters["documents_selected"] += 1
                 yield {
                     "item_key": url,
@@ -471,7 +483,17 @@ def expand_documents(
     return {
         **counters,
         "requested_boe_ids": sorted(requested_boe_ids),
-        "selected_boe_ids": sorted(selected_counts),
+        "selected_boe_ids": (
+            sorted(selected_counts) if requested_boe_ids else []
+        ),
+        "selected_boe_ids_complete": bool(requested_boe_ids),
+        "selected_boe_ids_count": counters["documents_selected"],
+        "selected_boe_ids_ordered_stream_sha256": selected_ids_digest.hexdigest(),
+        "selected_boe_ids_sample": {
+            "first": selected_ids_first,
+            "last": list(selected_ids_last),
+            "max_per_edge": 10,
+        },
         "enqueue": result,
         "queue": work_queue_stats(connection, pipeline_id=DOCUMENT_PIPELINE),
     }
@@ -481,36 +503,169 @@ def requeue_summary_contract_failures(
     connection: sqlite3.Connection,
 ) -> dict[str, Any]:
     error = "boe_summary_payload_contract_mismatch"
-    work_item_ids = [
-        int(row["work_item_id"])
-        for row in connection.execute(
+    work_items = int(
+        connection.execute(
             """
-            SELECT work_item_id
+            SELECT COUNT(*)
             FROM pipeline_work_items
             WHERE pipeline_id = ? AND state = 'dead' AND last_error = ?
-            ORDER BY work_item_id
             """,
             (SUMMARY_PIPELINE, error),
-        )
-    ]
-    if work_item_ids:
-        marks = ",".join("?" for _ in work_item_ids)
+        ).fetchone()[0]
+    )
+    if work_items:
         now = datetime.now(UTC).replace(microsecond=0).isoformat()
-        connection.execute(
-            f"""
+        updated = connection.execute(
+            """
             UPDATE pipeline_work_items
             SET state = 'pending', available_at = ?, lease_owner = NULL,
                 lease_expires_at = NULL, completed_at = NULL, last_error = NULL,
                 updated_at = ?
-            WHERE work_item_id IN ({marks}) AND state = 'dead'
+            WHERE pipeline_id = ? AND state = 'dead' AND last_error = ?
             """,
-            (now, now, *work_item_ids),
-        )
+            (now, now, SUMMARY_PIPELINE, error),
+        ).rowcount
+        if updated != work_items:
+            raise BoeCorpusError("summary contract requeue count drifted")
         connection.commit()
     return {
         "error_contract": error,
-        "items_requeued": len(work_item_ids),
+        "items_requeued": work_items,
         "queue": work_queue_stats(connection, pipeline_id=SUMMARY_PIPELINE),
+    }
+
+
+def requeue_document_budget_failures(
+    connection: sqlite3.Connection,
+) -> dict[str, Any]:
+    """Requeue policy-only failures after an operator raises the host ceiling.
+
+    Budget exhaustion starts no network request. Preserve the failed attempt as
+    audit evidence, grant one additional queue attempt, and refuse to touch any
+    row whose durable request event does not prove that exact zero-request fact.
+    """
+
+    if not table_exists(connection, "document_fetch_request_events"):
+        raise BoeCorpusError("document request telemetry table is missing")
+    error = "host_request_budget_exhausted"
+    row = connection.execute(
+        """
+        SELECT COUNT(*) AS work_items,
+               SUM(
+                 CASE
+                   WHEN e.document_fetch_request_event_id IS NULL
+                     OR e.outcome_state <> 'failed'
+                     OR e.failure_class <> ?
+                     OR e.network_requests_started <> 0
+                   THEN 1 ELSE 0
+                 END
+               ) AS unsafe_items
+        FROM pipeline_work_items AS w
+        LEFT JOIN document_fetch_request_events AS e
+          ON e.work_item_id = w.work_item_id
+         AND e.queue_attempt_number = w.attempts
+         AND e.pipeline_id = w.pipeline_id
+        WHERE w.pipeline_id = ?
+          AND w.state = 'dead'
+          AND w.last_error = ?
+        """,
+        (error, DOCUMENT_PIPELINE, error),
+    ).fetchone()
+    work_items = int(row["work_items"] or 0)
+    unsafe_items = int(row["unsafe_items"] or 0)
+    if unsafe_items:
+        raise BoeCorpusError(
+            "document budget failures lack exact zero-request telemetry"
+        )
+    if work_items:
+        now = datetime.now(UTC).replace(microsecond=0).isoformat()
+        updated = connection.execute(
+            """
+            UPDATE pipeline_work_items
+            SET state = 'pending', available_at = ?, lease_owner = NULL,
+                lease_expires_at = NULL, completed_at = NULL, last_error = NULL,
+                max_attempts = CASE
+                  WHEN max_attempts <= attempts THEN attempts + 1
+                  ELSE max_attempts
+                END,
+                updated_at = ?
+            WHERE pipeline_id = ? AND state = 'dead' AND last_error = ?
+            """,
+            (now, now, DOCUMENT_PIPELINE, error),
+        ).rowcount
+        if updated != work_items:
+            raise BoeCorpusError("document budget requeue count drifted")
+        connection.commit()
+    return {
+        "error_contract": error,
+        "zero_network_request_evidence_required": True,
+        "unsafe_items": unsafe_items,
+        "items_requeued": work_items,
+        "queue": work_queue_stats(connection, pipeline_id=DOCUMENT_PIPELINE),
+    }
+
+
+def requeue_document_transient_failures(
+    connection: sqlite3.Connection,
+) -> dict[str, Any]:
+    """Grant one audited retry to terminal network/timeout failures."""
+
+    if not table_exists(connection, "document_fetch_request_events"):
+        raise BoeCorpusError("document request telemetry table is missing")
+    eligible = int(
+        connection.execute(
+            """
+            SELECT COUNT(*)
+            FROM pipeline_work_items AS w
+            JOIN document_fetch_request_events AS e
+              ON e.work_item_id = w.work_item_id
+             AND e.queue_attempt_number = w.attempts
+             AND e.pipeline_id = w.pipeline_id
+            WHERE w.pipeline_id = ?
+              AND w.state = 'dead'
+              AND e.outcome_state = 'failed'
+              AND e.failure_class IN ('network', 'timeout')
+              AND e.network_requests_started > 0
+            """,
+            (DOCUMENT_PIPELINE,),
+        ).fetchone()[0]
+    )
+    if eligible:
+        now = datetime.now(UTC).replace(microsecond=0).isoformat()
+        updated = connection.execute(
+            """
+            UPDATE pipeline_work_items
+            SET state = 'pending', available_at = ?, lease_owner = NULL,
+                lease_expires_at = NULL, completed_at = NULL, last_error = NULL,
+                max_attempts = CASE
+                  WHEN max_attempts <= attempts THEN attempts + 1
+                  ELSE max_attempts
+                END,
+                updated_at = ?
+            WHERE work_item_id IN (
+              SELECT w.work_item_id
+              FROM pipeline_work_items AS w
+              JOIN document_fetch_request_events AS e
+                ON e.work_item_id = w.work_item_id
+               AND e.queue_attempt_number = w.attempts
+               AND e.pipeline_id = w.pipeline_id
+              WHERE w.pipeline_id = ?
+                AND w.state = 'dead'
+                AND e.outcome_state = 'failed'
+                AND e.failure_class IN ('network', 'timeout')
+                AND e.network_requests_started > 0
+            )
+            """,
+            (now, now, DOCUMENT_PIPELINE),
+        ).rowcount
+        if updated != eligible:
+            raise BoeCorpusError("document transient requeue count drifted")
+        connection.commit()
+    return {
+        "failure_classes": ["network", "timeout"],
+        "positive_network_request_evidence_required": True,
+        "items_requeued": eligible,
+        "queue": work_queue_stats(connection, pipeline_id=DOCUMENT_PIPELINE),
     }
 
 
@@ -770,6 +925,18 @@ def main(argv: list[str] | None = None) -> int:
                         "summary-date and boe-id are not valid when requeueing"
                     )
                 operation = requeue_summary_contract_failures(connection)
+            elif args.mode == "requeue-document-budget-failures":
+                if exact_dates or exact_boe_ids:
+                    raise BoeCorpusError(
+                        "summary-date and boe-id are not valid when requeueing"
+                    )
+                operation = requeue_document_budget_failures(connection)
+            elif args.mode == "requeue-document-transient-failures":
+                if exact_dates or exact_boe_ids:
+                    raise BoeCorpusError(
+                        "summary-date and boe-id are not valid when requeueing"
+                    )
+                operation = requeue_document_transient_failures(connection)
             elif args.mode == "expand-documents":
                 operation = expand_documents(
                     connection,

@@ -1,0 +1,55 @@
+{
+  "schema_version": "boe_open_data_interface_audit_v1",
+  "status": "open_scale_gap",
+  "retrieved_at": "2026-08-29T23:16:42Z",
+  "scope": "Exact current BOE open-data API catalog and BOE FAQ pages only; this is not a claim that no undocumented or separately negotiated bulk service exists.",
+  "official_sources": [
+    {
+      "url": "https://www.boe.es/datosabiertos/api/api.php?lang=es",
+      "http_status": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "bytes": 98675,
+      "sha256": "d878083712ae4ffc763ce9bfbc6d143707fcb491727b2101b8b9d3590f59eee2",
+      "observed_contract": "GET /datosabiertos/api/boe/sumario/{fecha}; one selected publication date; XML or JSON response"
+    },
+    {
+      "url": "https://www.boe.es/datosabiertos/faq/boe.php",
+      "http_status": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "bytes": 19796,
+      "sha256": "65a2c87b4675ae647f547aff3cd39424e9f0960c58057eabdbf2856470e3565e",
+      "observed_contract": "The selected-date summary supplies individual PDF, XML, and HTML URLs for each published document."
+    }
+  ],
+  "real_control_date": {
+    "date": "2022-07-30",
+    "url": "https://www.boe.es/datosabiertos/api/boe/sumario/20220730",
+    "http_status": 200,
+    "content_type": "application/xml",
+    "bytes": 99648,
+    "sha256": "69854af17a7d10b1999c9f20ab2ef71f585423a62bf21bd7527b7ea604d90a25",
+    "item_elements": 142
+  },
+  "findings": {
+    "daily_summary_endpoint_documented": true,
+    "individual_document_urls_documented": true,
+    "bulk_archive_documented_on_inspected_pages": false,
+    "current_connector_matches_documented_contract": true,
+    "million_document_request_amplification_closed": false
+  },
+  "reproduction_commands": [
+    "curl -sS -L -o boe-api.html -w '%{http_code} %{content_type} %{size_download}\\n' 'https://www.boe.es/datosabiertos/api/api.php?lang=es'",
+    "curl -sS -L -o boe-faq.html -w '%{http_code} %{content_type} %{size_download}\\n' 'https://www.boe.es/datosabiertos/faq/boe.php'",
+    "curl -sS -L -H 'Accept: application/xml' -o boe-summary-20220730.xml -w '%{http_code} %{content_type} %{size_download}\\n' 'https://www.boe.es/datosabiertos/api/boe/sumario/20220730'"
+  ],
+  "next_actions": [
+    "Run one exact real control day through the queue with explicit host budget and atomic progress evidence.",
+    "Before a one-million-document acquisition, obtain and validate an official bulk feed or record an explicit maintainer-approved multi-source acquisition design with global rate and cost ceilings.",
+    "Keep the current per-document queue bounded, resumable, checksum-addressed, and fail-closed while the bulk path remains open."
+  ],
+  "policy": {
+    "synthetic_or_mock_records_counted": 0,
+    "official_public_domain_personal_information_retained": true,
+    "publication_or_remote_mutation_performed": false
+  }
+}

@@ -22,12 +22,12 @@
   ],
   "boe_document_corpus_lineage_manifests": [
     {
-      "accepted_checksum_captures": 89001,
-      "bytes": 208836046,
-      "distinct_content_objects": 89001,
+      "accepted_checksum_captures": 100051,
+      "bytes": 234632869,
+      "distinct_content_objects": 100051,
       "path": "etl/data/manifests/boe-document-corpus-lineage.jsonl",
-      "rows": 89001,
-      "sha256": "29d06f68ac7c0610a3e7cd69d95727d493dbc5e60bfd95fd9be0f9b7f60804ff",
+      "rows": 100051,
+      "sha256": "99739ca6ac462edada2d20e61be6f81c9404689405632751da4b6bc54d5848f4",
       "status": "ok"
     }
   ],
@@ -104,16 +104,17 @@
       "verified_content_checksum": 796
     },
     "text_documents/boe_daily_summaries": {
-      "bytes": 176418043,
-      "files": 1034,
-      "files_with_public_url": 1034,
-      "verified_path_checksum": 1034
+      "bytes": 197645306,
+      "files": 1166,
+      "files_with_public_url": 1166,
+      "verified_path_checksum": 1166
     },
     "text_documents/boe_document_xml": {
-      "bytes": 2654761821,
-      "files": 89001,
-      "files_with_public_url": 89001,
-      "verified_path_checksum": 89001
+      "bytes": 3065208814,
+      "files": 100068,
+      "files_with_public_url": 100051,
+      "unlinked": 17,
+      "verified_path_checksum": 100051
     },
     "text_documents/congreso_intervenciones": {
       "bytes": 27731231,
@@ -171,13 +172,13 @@
   },
   "databases": [
     {
-      "bytes": 1574998016,
+      "bytes": 1656840192,
       "path": "etl/data/staging/politicos-es.db",
-      "raw_metadata_rows": 193657,
+      "raw_metadata_rows": 216021,
       "status": "ok",
       "tables": {
         "document_fetches": {
-          "raw_metadata_rows": 96827,
+          "raw_metadata_rows": 108009,
           "text_metadata_rows": 0
         },
         "ingestion_runs": {
@@ -193,7 +194,7 @@
           "text_metadata_rows": 0
         },
         "text_documents": {
-          "raw_metadata_rows": 96827,
+          "raw_metadata_rows": 108009,
           "text_metadata_rows": 6792
         }
       },
@@ -259,10 +260,10 @@
     }
   ],
   "edge_manifest": {
-    "bytes": 228237330,
+    "bytes": 253262872,
     "path": "etl/data/manifests/real-document-provenance-edges.jsonl",
-    "rows": 304165,
-    "sha256": "e5329f46a9d6a17ef71b8798c54a16f4464cb93c19306d5ede165350b11492c1"
+    "rows": 337701,
+    "sha256": "392af27ccb113a425d39ea96e0163f14b8101e5b756da81347463d4781a88578"
   },
   "embedded_official_urls": {
     "already_checksum_linked": 6890,
@@ -355,17 +356,17 @@
     ]
   },
   "file_manifest": {
-    "bytes": 56477511,
+    "bytes": 62149654,
     "path": "etl/data/manifests/real-document-provenance-files.jsonl",
-    "rows": 111408,
-    "sha256": "5c8692041af5ad30d279cfdb206c0503525ecf7b35368a0966ed92f918db0634"
+    "rows": 122607,
+    "sha256": "bf2f0483bdea7bf6e3bac9abbd636af5d87c862d1eba569c15315145b722f466"
   },
-  "generated_at": "2026-08-13T05:11:39.063787+00:00",
+  "generated_at": "2026-08-30T04:02:03.301913+00:00",
   "inventory": {
-    "bytes": 75430959,
+    "bytes": 82987794,
     "path": "etl/data/manifests/real-document-format-inventory.jsonl",
-    "rows": 111408,
-    "sha256": "1bfe313c276d63ae03ec4b0cbcf63b7a3655090f45b1ad245ccd23d89c8af32a"
+    "rows": 122607,
+    "sha256": "4d11b77c8a2ac64b59baed5190fe52975d9d820fe76777585bf6799e8718a9ad"
   },
   "limitations": [
     "The audit covers only the declared inventory, SQLite inputs, auxiliary provenance manifests, and checksum-verified published capture indexes.",
@@ -374,8 +375,8 @@
     "This reconciliation does not increase the document corpus row count or prove extraction accuracy."
   ],
   "metadata": {
-    "matched_metadata_edges": 299572,
-    "metadata_edges": 299612,
+    "matched_metadata_edges": 333108,
+    "metadata_edges": 333148,
     "unmatched_metadata_edges": 40,
     "unmatched_samples": [
       {
@@ -715,21 +716,21 @@
     "unique_paths": 6792
   },
   "totals": {
-    "bytes": 5093218479,
-    "files": 111408,
+    "bytes": 5524892735,
+    "files": 122607,
     "files_with_checksum_conflict": 0,
     "files_with_declared_bytes_conflict": 0,
-    "files_with_public_https_url": 107656,
-    "files_with_public_url": 111357,
+    "files_with_public_https_url": 118838,
+    "files_with_public_url": 122539,
     "inventory_non_ok_files": 0,
-    "provenance_edges": 304165,
-    "public_url_coverage": 0.999542,
-    "unlinked": 51,
-    "verified_checksum_coverage": 0.999542,
-    "verified_checksum_files": 111357,
+    "provenance_edges": 337701,
+    "public_url_coverage": 0.999445,
+    "unlinked": 68,
+    "verified_checksum_coverage": 0.999445,
+    "verified_checksum_files": 122539,
     "verified_content_checksum": 1336,
     "verified_embedded_url_checksum": 7374,
-    "verified_path_checksum": 102647
+    "verified_path_checksum": 113829
   },
   "wayback_document_lineage_manifests": [
     {

@@ -648,15 +648,9 @@ def validate_outcome_pair_identity_companion(
             bound_regular_file(pair_plan_db_path, database=True)
         )
         config_sha = config_bound.sha256()
-        source_sha = source_bound.sha256()
         plan_sha = plan_bound.sha256()
         if config_sha != EXPECTED_CONFIG_FILE_SHA256:
             raise RuntimeError("C2B config file hash mismatch")
-        if (source_sha, source_bound.identity.size) != (
-            EXPECTED_SOURCE_DATABASE_SHA256,
-            EXPECTED_SOURCE_DATABASE_BYTES,
-        ):
-            raise RuntimeError("real Senate source bytes mismatch")
         if (plan_sha, plan_bound.identity.size) != (
             EXPECTED_PAIR_PLAN_DATABASE_SHA256,
             EXPECTED_PAIR_PLAN_DATABASE_BYTES,
@@ -678,9 +672,12 @@ def validate_outcome_pair_identity_companion(
             "config_file_bytes": config_bound.identity.size,
             "config_file_sha256": config_sha,
             "config_canonical_sha256": EXPECTED_CONFIG_CANONICAL_SHA256,
-            "database_path": repo_path(source_bound.path),
-            "database_bytes": source_bound.identity.size,
-            "database_sha256": source_sha,
+            # The manifest records the original full-file provenance. Runtime
+            # equivalence is established later from exact scoped projections,
+            # so unrelated additive tables cannot invalidate this package.
+            "database_path": str(config["sources"]["actions"]["path"]),
+            "database_bytes": int(config["sources"]["actions"]["bytes"]),
+            "database_sha256": str(config["sources"]["actions"]["sha256"]),
             "source_id": "senado_votaciones",
             "source_snapshot_date": "2026-02-12",
             "executed_actions_scan_sql_sha256": EXECUTED_ACTION_SCAN_SQL_SHA256,
@@ -1358,6 +1355,7 @@ def validate_outcome_pair_identity_companion(
             "executed_scan_sql_hashes_pinned": True,
             "descriptor_bound_sqlite_reads": True,
             "source_read_only_before_after_stable": True,
+            "runtime_source_exact_projection_equivalence": True,
             "pair_plan_read_only_before_after_stable": True,
             "publication_disabled": True,
             "ranking_disabled": True,
@@ -1371,6 +1369,26 @@ def validate_outcome_pair_identity_companion(
             "policy": dict(POLICY),
             "counts": counts,
             "roots": roots,
+            "runtime_source_equivalence": {
+                "mode": "exact_scoped_projection_roots_v1",
+                "runtime_database_path": repo_path(source_bound.path),
+                "runtime_database_bytes": source_bound.identity.size,
+                "runtime_database_sha256": None,
+                "pinned_database_bytes": EXPECTED_SOURCE_DATABASE_BYTES,
+                "pinned_database_sha256": EXPECTED_SOURCE_DATABASE_SHA256,
+                "whole_database_identical": None,
+                "whole_database_identity_status": (
+                    "not_computed_projection_scoped"
+                ),
+                "member_component_root_sha256": roots[
+                    "member_component_root_sha256"
+                ],
+                "member_rows_root_sha256": roots["member_rows_root_sha256"],
+                "action_rows_root_sha256": roots["action_rows_root_sha256"],
+                "official_names_root_sha256": roots[
+                    "official_names_root_sha256"
+                ],
+            },
             "parquet_bytes": member_bytes + action_bytes,
             "performance": {
                 "process_peak_rss_mb": process_peak,

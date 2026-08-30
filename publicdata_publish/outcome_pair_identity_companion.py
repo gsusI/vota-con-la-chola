@@ -1161,11 +1161,6 @@ def export_outcome_pair_identity_companion(
             "bytes": config_bound.identity.size,
             "sha256": config_bound.sha256(),
         }
-        source_fact = {
-            "path": repo_path(source_bound.path),
-            "bytes": source_bound.identity.size,
-            "sha256": source_bound.sha256(),
-        }
         plan_fact = {
             "path": repo_path(plan_bound.path),
             "bytes": plan_bound.identity.size,
@@ -1173,11 +1168,6 @@ def export_outcome_pair_identity_companion(
         }
         if config_fact["sha256"] != EXPECTED_CONFIG_FILE_SHA256:
             raise RuntimeError("C2B config file hash mismatch")
-        if (source_fact["sha256"], source_fact["bytes"]) != (
-            EXPECTED_SOURCE_DATABASE_SHA256,
-            EXPECTED_SOURCE_DATABASE_BYTES,
-        ):
-            raise RuntimeError("pinned real Senate database bytes mismatch")
         if (plan_fact["sha256"], plan_fact["bytes"]) != (
             EXPECTED_PAIR_PLAN_DATABASE_SHA256,
             EXPECTED_PAIR_PLAN_DATABASE_BYTES,
@@ -1347,9 +1337,14 @@ def export_outcome_pair_identity_companion(
                     "config_file_bytes": int(config_fact["bytes"]),
                     "config_file_sha256": str(config_fact["sha256"]),
                     "config_canonical_sha256": EXPECTED_CONFIG_CANONICAL_SHA256,
-                    "database_path": str(source_fact["path"]),
-                    "database_bytes": int(source_fact["bytes"]),
-                    "database_sha256": str(source_fact["sha256"]),
+                    # Bind the artifact to its original source fact. A later
+                    # mutable database is accepted only if every scoped row
+                    # reproduces the exact semantic roots below.
+                    "database_path": str(config["sources"]["actions"]["path"]),
+                    "database_bytes": int(config["sources"]["actions"]["bytes"]),
+                    "database_sha256": str(
+                        config["sources"]["actions"]["sha256"]
+                    ),
                     "source_id": "senado_votaciones",
                     "source_snapshot_date": "2026-02-12",
                     "executed_actions_scan_sql_sha256": (

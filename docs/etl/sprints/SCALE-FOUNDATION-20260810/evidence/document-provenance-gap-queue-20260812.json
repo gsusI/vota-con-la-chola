@@ -2,7 +2,8 @@
   "by_remediation_lane": {
     "europarl_source_manifest_recovery": 25,
     "primary_party_manifest_recovery": 25,
-    "senate_session_capture_manifest_reconciliation": 1
+    "senate_session_capture_manifest_reconciliation": 1,
+    "source_manifest_recovery": 17
   },
   "by_source_group": {
     "europarl_meps": {
@@ -16,6 +17,12 @@
       "checksum_lineage_gaps": 1,
       "public_url_gaps": 1,
       "rows": 1
+    },
+    "text_documents/boe_document_xml": {
+      "bytes": 372401,
+      "checksum_lineage_gaps": 17,
+      "public_url_gaps": 17,
+      "rows": 17
     },
     "text_documents/programas_partidos": {
       "bytes": 3162557,
@@ -34,18 +41,18 @@
     "public_url_gap_count_matches_audit": true,
     "queue_rows_balance_gap_union": true
   },
-  "generated_at": "2026-08-13T05:11:40.013295+00:00",
+  "generated_at": "2026-08-30T04:02:04.805139+00:00",
   "inputs": {
     "audit_report": {
-      "bytes": 28339,
+      "bytes": 28369,
       "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-provenance-audit.json",
-      "sha256": "bd822b0286ebb1e9128d8a576db0c483d15bdda5bd8f75a6a6ab73a8a5c709b6"
+      "sha256": "af36c442afd8fe3d190b42ee76f245659a86fa1af5ace8175ac65fce6a09dfdd"
     },
     "file_manifest": {
-      "bytes": 56477511,
+      "bytes": 62149654,
       "path": "etl/data/manifests/real-document-provenance-files.jsonl",
-      "rows": 111408,
-      "sha256": "5c8692041af5ad30d279cfdb206c0503525ecf7b35368a0966ed92f918db0634"
+      "rows": 122607,
+      "sha256": "bf2f0483bdea7bf6e3bac9abbd636af5d87c862d1eba569c15315145b722f466"
     }
   },
   "next_action": "Process p0 lanes first; accept only exact source/capture manifests whose declared bytes and SHA-256 reconcile; then rerun the provenance audit and queue.",
@@ -56,20 +63,20 @@
     "synthetic_or_mock_records_counted": false
   },
   "queue": {
-    "bytes": 38464,
+    "bytes": 51703,
     "empty": false,
     "path": "etl/data/manifests/document-provenance-gap-queue.jsonl",
-    "rows": 51,
-    "sha256": "140fcfcd3479e13a163c4f68f4d5159a0f12c304b20c965ef4912588e6acedcb",
-    "source_bytes_requiring_remediation": 8315544
+    "rows": 68,
+    "sha256": "ab16fb203780fda618be84edd56d07808d1b7c17fb8c7a7246db62d70acc7264",
+    "source_bytes_requiring_remediation": 8687945
   },
   "schema_version": "document_provenance_gap_queue_v1",
   "status": "ok",
   "totals": {
-    "checksum_lineage_gaps": 51,
-    "files_scanned": 111408,
-    "public_url_gaps": 51,
-    "queue_bytes": 8315544,
-    "queue_rows": 51
+    "checksum_lineage_gaps": 68,
+    "files_scanned": 122607,
+    "public_url_gaps": 68,
+    "queue_bytes": 8687945,
+    "queue_rows": 68
   }
 }

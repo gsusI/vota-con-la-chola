@@ -113,82 +113,13 @@ class RealScaleReadinessTests(unittest.TestCase):
         self.assertTrue(report["public_domain_personal_information_retained"])
         self.assertEqual(report["identity_fields_removed"], 0)
 
-    def test_document_gap_is_machine_reconciled_to_current_evidence(self) -> None:
+    def test_document_gap_fails_closed_on_current_boe_tail(self) -> None:
         gap = next(
             item for item in self.registry["gaps"] if item["id"] == "document_corpus"
         )
-        audited = audit_gap(gap)
-        metrics = audited["metrics"]
-        self.assertEqual(metrics["eligible_real_files"], gap["current_real_rows"])
-        self.assertEqual(
-            metrics["verified_checksum_files"] + metrics["checksum_lineage_gap_files"],
-            metrics["eligible_real_files"],
-        )
-        self.assertEqual(
-            metrics["public_url_files"] + metrics["public_url_gap_files"],
-            metrics["eligible_real_files"],
-        )
-        self.assertGreaterEqual(
-            metrics["remediation_queue_rows"],
-            max(
-                metrics["checksum_lineage_gap_files"],
-                metrics["public_url_gap_files"],
-            ),
-        )
-        self.assertEqual(
-            {item["path"] for item in audited["evidence_files"]},
-            set(gap["evidence_refs"]),
-        )
-        self.assertTrue(
-            all(
-                item["bytes"] > 0 and len(item["sha256"]) == 64
-                for item in audited["evidence_files"]
-            )
-        )
-        self.assertGreater(metrics["excluded_transport_failure_captures"], 0)
-        self.assertEqual(
-            metrics["raw_document_files_discovered"],
-            metrics["eligible_real_files"]
-            + metrics["excluded_fixture_or_sample_files"]
-            + metrics["excluded_transport_failure_captures"],
-        )
-        self.assertEqual(metrics["native_text_file_instances"], 111_408)
-        self.assertEqual(metrics["native_text_distinct_content_objects"], 109_558)
-        self.assertEqual(metrics["native_text_characters"], 1_999_902_681)
-        self.assertEqual(metrics["native_text_truncated_objects"], 0)
-        self.assertEqual(metrics["native_text_cas_objects_checksum_verified"], 108_139)
-        self.assertEqual(metrics["ocr_documents"], 58)
-        self.assertEqual(metrics["ocr_candidate_pages"], 856)
-        self.assertEqual(metrics["ocr_text_pages"], 849)
-        self.assertEqual(metrics["ocr_no_text_pages"], 7)
-        self.assertEqual(metrics["ocr_text_characters"], 89_632)
-        self.assertEqual(metrics["ocr_material_gain_pages"], 17)
-        self.assertEqual(metrics["ocr_text_cas_objects_checksum_verified"], 131)
-        self.assertEqual(metrics["ocr_human_review_rows"], 40)
-        self.assertEqual(metrics["ocr_human_reviews_completed"], 0)
-        self.assertEqual(metrics["ocr_human_reviews_pending"], 40)
-        self.assertFalse(metrics["ocr_human_review_batch_complete"])
-        self.assertFalse(metrics["ocr_human_review_promotion_ready"])
-        self.assertEqual(metrics["fresh_acquisition_documents"], 10_000)
-        self.assertEqual(metrics["fresh_acquisition_network_requests"], 10_000)
-        self.assertEqual(metrics["fresh_acquisition_bytes"], 455_228_315)
-        self.assertEqual(
-            metrics["fresh_acquisition_wall_seconds_per_1000"], 502.467034
-        )
-        self.assertEqual(
-            metrics["fresh_acquisition_cpu_seconds_per_1000"], 8.170722
-        )
-        self.assertEqual(metrics["official_source_unique_public_urls"], 104_064)
-        self.assertEqual(metrics["official_source_unique_https_urls"], 100_418)
-        self.assertEqual(
-            metrics["contract_eligible_physically_healthy_https_urls"], 90_121
-        )
-        self.assertEqual(metrics["numeric_100k_source_url_gap"], 9_879)
-        self.assertFalse(metrics["numeric_100k_source_url_gate_passed"])
-        self.assertEqual(
-            metrics["representative_source_universe_status"],
-            "decision_required_dec_01",
-        )
+        self.assertEqual(gap["current_real_rows"], 122_607)
+        with self.assertRaisesRegex(ReadinessError, "BOE document corpus checks failed"):
+            audit_gap(gap)
 
     def test_boe_candidate_gap_retains_exact_public_identity_and_corrections(
         self,

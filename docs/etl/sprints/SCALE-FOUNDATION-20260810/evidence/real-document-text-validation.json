@@ -19,26 +19,26 @@
     "raw_error_samples": [],
     "text_error_samples": []
   },
-  "generated_at": "2026-08-13T05:15:59.632758Z",
+  "generated_at": "2026-08-30T03:28:06.707542Z",
   "inputs": {
     "extraction_report": {
-      "bytes": 2433,
+      "bytes": 2973,
       "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-extraction.json",
-      "sha256": "02d33740c65cb1d964f6a67bf7658e2b776039028caad15d3c56546db200b2ab"
+      "sha256": "3734193d006a099742a61bb1b06a3875c6bc5e8c90a17e64a136108ebcfc7d6b"
     },
     "inventory": {
       "path": "etl/data/manifests/real-document-format-inventory.jsonl",
-      "sha256": "1bfe313c276d63ae03ec4b0cbcf63b7a3655090f45b1ad245ccd23d89c8af32a"
+      "sha256": "4d11b77c8a2ac64b59baed5190fe52975d9d820fe76777585bf6799e8718a9ad"
     },
     "manifest": {
-      "bytes": 121555440,
+      "bytes": 133774263,
       "path": "etl/data/published/real-document-text-manifest-latest.jsonl",
-      "rows": 111408,
-      "sha256": "03ce010e1019fc3f23e5a016413aab51f7ec398637973680534c27007b69bfab"
+      "rows": 122607,
+      "sha256": "2a78979fec348f5ac5bcf9c9acab82df784d7241e4d10da22a098bb0fe88ffb2"
     },
     "provenance": {
       "path": "etl/data/manifests/real-document-provenance-files.jsonl",
-      "sha256": "5c8692041af5ad30d279cfdb206c0503525ecf7b35368a0966ed92f918db0634"
+      "sha256": "bf2f0483bdea7bf6e3bac9abbd636af5d87c862d1eba569c15315145b722f466"
     }
   },
   "next_action": "Run bounded page-level OCR for every distinct empty or sparse PDF page and publish it as additive evidence beside native text.",
@@ -51,17 +51,17 @@
   "schema_version": "real_document_text_validation_v1",
   "status": "ok",
   "totals": {
-    "distinct_content_objects": 109558,
-    "file_instances": 111408,
+    "distinct_content_objects": 120757,
+    "file_instances": 122607,
     "native_no_text_objects": 0,
-    "native_text_chars": 1999902681,
+    "native_text_chars": 2211203471,
     "native_truncated_objects": 0,
     "ocr_candidate_pages": 856,
-    "provenance_gap_instances": 51,
-    "public_url_instances": 111357,
-    "raw_files_checksum_verified": 111408,
-    "text_cas_files_observed": 108139,
-    "text_cas_objects_checksum_verified": 108139
+    "provenance_gap_instances": 68,
+    "public_url_instances": 122539,
+    "raw_files_checksum_verified": 122607,
+    "text_cas_files_observed": 119338,
+    "text_cas_objects_checksum_verified": 119338
   },
   "validation_scope": {
     "batch_size": 128,

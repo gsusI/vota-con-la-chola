@@ -643,6 +643,7 @@ def load_boe_rows(
     *,
     document_rows: int,
     summary_rows: int,
+    queue_created_before: str,
 ) -> int:
     document_base, document_extra = decile_quota(document_rows)
     summary_base, summary_extra = decile_quota(summary_rows)
@@ -665,6 +666,7 @@ def load_boe_rows(
           FROM pipeline_work_items w
           JOIN document_fetches f ON f.doc_url = w.item_key
           WHERE w.pipeline_id IN ('boe_document_fetch', 'boe_summary_fetch')
+            AND w.created_at <= ?
             AND w.state = 'succeeded'
             AND f.fetched_ok = 1
             AND f.last_http_status = 200
@@ -690,7 +692,13 @@ def load_boe_rows(
         )
         ORDER BY source_pipeline_id, size_decile, source_url
         """,
-        (document_base, document_extra, summary_base, summary_extra),
+        (
+            queue_created_before,
+            document_base,
+            document_extra,
+            summary_base,
+            summary_extra,
+        ),
     )
     counts = {
         "boe_document_fetch": 0,
@@ -1404,7 +1412,10 @@ def main() -> int:
     manifest: dict[str, Any] = {}
     input_descriptors: dict[str, dict[str, Any]] = {}
     try:
-        datetime.fromisoformat(prepared_at.replace("Z", "+00:00"))
+        prepared_datetime = datetime.fromisoformat(prepared_at.replace("Z", "+00:00"))
+        if prepared_datetime.tzinfo is None:
+            raise ValueError("prepared-at must include a timezone")
+        queue_created_before = prepared_datetime.astimezone(UTC).isoformat()
         if (
             args.manifest_layout == "embedded_v2"
             and args.boe_document_rows + args.boe_summary_rows > MAX_EMBEDDED_ROWS
@@ -1456,6 +1467,7 @@ def main() -> int:
                 planner,
                 document_rows=args.boe_document_rows,
                 summary_rows=args.boe_summary_rows,
+                queue_created_before=queue_created_before,
             )
         finally:
             source_conn.rollback()
@@ -1578,6 +1590,7 @@ def main() -> int:
                 "document_kinds": dict(sorted(kind_counts.items())),
                 "validation_modes": dict(sorted(mode_counts.items())),
                 "size_deciles": 10,
+                "source_queue_created_before": queue_created_before,
             },
             "planning": {
                 "schema_version": PLANNER_SCHEMA_VERSION,

@@ -16,7 +16,7 @@ from project_kb.schema import (
     Workflow,
 )
 
-UPDATED = date(2026, 8, 29)
+UPDATED = date(2026, 8, 30)
 
 
 PROJECT_DECISIONS = [
@@ -204,11 +204,19 @@ PROJECT_FACTS = [
         description=(
             "`BOE accountability cohorts` use the official daily summary API as "
             "discovery evidence and the official per-document XML endpoint as the "
-            "immutable payload. The current cohort contains 1,034 exact daily "
-            "summaries and 89,001 individual documents. "
-            "Every document has summary-item, HTTPS URL, byte-count, SHA-256, fetch, "
-            "and portable-manifest lineage. Exact-date and exact-ID acquisition fails "
-            "closed on missing documents. The source-scoped election parser derives "
+            "immutable payload. The current BOE summary cohort is terminal: 1,166 "
+            "official summaries succeeded and 191 exact requested dates returned official "
+            "HTTP 404 responses. The document queue contains 100,867 official jobs: "
+            "100,051 succeeded, one is dead after three connect timeouts, and 815 remain "
+            "unfinished. Current physical promotion therefore fails closed. Its 100,051-row "
+            "portable lineage contains 234,632,869 bytes and references 1,156 of the 1,166 "
+            "successful summaries. Separately, the deterministic 100,000-row acquisition "
+            "plan closes its numeric supply gate with selection SHA-256 "
+            "c81d3c0a90222122309a259c791cdbb9ffa900f21f96eed5a12d30a71f314185: "
+            "98,748 BOE XML, 1,166 BOE summaries, and 86 Parliament of Andalusia files. "
+            "That plan is not a claim that all planned bytes have been freshly acquired. "
+            "Exact-date and exact-ID acquisition fails closed on missing documents. "
+            "The source-scoped election parser derives "
             "42,056 exact public base candidate occurrences across 4,901 candidacies "
             "and seven proclamation documents for six election dates from 2015 to 2024. "
             "Eleven correction documents retain all 956 exact paragraphs. The reviewed "
@@ -228,9 +236,12 @@ PROJECT_FACTS = [
             "semantic artifact retains every exact public name and source paragraph in two "
             "validated Parquet partitions and replays both unchanged files by hardlink. It "
             "never infers a missing identifier, cross-source identity, or elected outcome. "
-            "The document inventory passes 111,408 eligible "
-            "instances and its incremental replay reuses checksum-identical rows "
-            "instead of reparsing unchanged PDFs and XML."
+            "The current document inventory contains 122,607 eligible real official "
+            "instances and 120,757 distinct contents. Native extraction finishes all "
+            "120,757 contents without failure; the bounded OCR lane finishes all 856 "
+            "candidates. The deterministic 40-row human-review packet remains blank and "
+            "pending, so no machine label or invented decision is promoted. Incremental "
+            "replay reuses checksum-identical rows instead of reparsing unchanged files."
         ),
         evidence=[
             Evidence(
@@ -252,6 +263,26 @@ PROJECT_FACTS = [
             Evidence(
                 source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-format-inventory.json",
                 detail="Current 100k-plus official inventory and incremental reuse metrics.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-disk-planner-100k-validation-20260830.json",
+                detail="Exact 100,000-row real official plan, pinned selection identity, source mix, and zero numeric supply gap.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-source-universe-validation-20260829.json",
+                detail="Independent source-universe validation including physical eligibility and public-identity retention.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-document-access-timeout-20260830.md",
+                detail="Bounded reproducible evidence for the current BOE XML connect-timeout blocker.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-validation.json",
+                detail="Independent full native-text manifest and CAS validation for the current real corpus.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-validation.json",
+                detail="Independent bounded OCR state, manifest, and CAS validation for all current candidates.",
             ),
         ],
         references={
@@ -433,14 +464,13 @@ PROJECT_FACTS = [
             "and mutation_performed=false. Formal RPO and activation RTO remain open. "
             "A real Senate slice has 6,792 fetched/extracted "
             "XML/HTML documents and a successful local object-restore sample, but "
-            "the broader real-only inventory now discovers 111,422 files and counts "
-            "111,408 eligible file instances / 109,558 distinct contents after excluding "
-            "5 fixtures/samples and 9 real transport-failure captures from successful-"
-            "document scale while preserving the latter as obstruction evidence. It includes "
-            "1,437 PDFs / 44,927 pages; content magic routes one PDF stored under an .html path. "
-            "Page-density routing finds 856 OCR candidates. Resumable v5 extraction "
-            "processes all 111,408 instances / 109,558 distinct contents into 108,139 "
-            "checksum-addressed text objects and 1,999,902,681 unsanitized characters, "
+            "the broader real-only inventory now discovers 122,621 files and counts "
+            "122,607 eligible file instances / 120,757 distinct contents after excluding "
+            "fixtures/samples and preserved transport-failure captures from successful-"
+            "document scale while retaining the latter as obstruction evidence. It includes "
+            "1,437 PDFs / 44,927 pages. Page-density routing finds 856 OCR candidates. "
+            "Resumable v6 extraction processes all 120,757 distinct contents into 119,338 "
+            "checksum-addressed text objects and 2,211,203,471 unsanitized public characters, "
             "with zero failure or truncation; independent validation rehashes every raw "
             "instance and CAS object. Additive OCR processes all 856 candidate pages "
             "across 58 PDFs, producing 89,632 characters on 849 pages, seven explicit "
@@ -448,48 +478,38 @@ PROJECT_FACTS = [
             "objects. A deterministic 40-page real review packet covers every no-text "
             "and material-gain page with blank human fields; review is 0/40, so semantic "
             "accuracy, scanned/office/language diversity, remote origin, and one-million "
-            "scale remain open; the numeric 100k document gate passes. Cold physical "
-            "runs now measure native extraction and OCR wall time, parent/child CPU, RSS, "
-            "bytes, storage, failures, and normalized per-1,000 values. A fresh cold "
-            "acquisition cohort uses 30 deterministic gzip JSONL partitions for 10,000 "
-            "real official objects: 8,880 BOE document XML files, 1,034 BOE daily summaries, "
-            "51 Andalusian Parliament HTML documents, and 35 PDFs. A disk-backed preflight "
-            "rehashes all 10,000 prior files / 455,225,911 bytes, validates every source "
-            "contract and proves a pristine queue before network. The physical run downloads "
-            "10,000/10,000 objects through exactly 10,000 requests and 455,228,315 bytes in "
-            "5,024.670344 wall seconds / 81.707215 CPU seconds / 53,215,232 bytes peak RSS, "
-            "with zero retries, dead rows, or failures. Independent final validation rehashes "
-            "all 20,000 prior/fresh files and preserves 57 valid official revisions. Durable "
-            "request events, conservative crash-window budget recovery, explicit per-host "
-            "ceilings, redirect refusal, and host-fair priority are implemented and tested "
-            "after that run, so their next physical proof remains open. A zero-network, "
-            "disk-backed audit and independent replay reduce 304,165 real provenance edges "
-            "to 104,064 unique official public URLs / 100,418 HTTPS. Only 90,121 HTTPS URLs "
-            "currently combine an implemented semantic contract with clean physical host "
-            "proof, leaving an exact 9,879-URL supply gap before a 100k acquisition can be "
-            "prepared; representativeness remains a separate maintainer decision. The v4 "
+            "scale remain open; the stored-corpus numeric 100k gate passes. A zero-network, "
+            "disk-backed audit and independent replay reduce 337,701 real provenance edges "
+            "to 115,246 unique official public URLs / 111,600 HTTPS. Exactly 101,303 HTTPS "
+            "URLs combine an implemented semantic contract with clean physical proof, so "
+            "numeric supply for 100k closes; representativeness remains a separate maintainer "
+            "decision. The deterministic plan selects and preflights exactly 100,000 real "
+            "official rows: 98,748 BOE documents, 1,166 BOE summaries, and 86 Parliament "
+            "of Andalusia files, with zero mock/synthetic rows and public information retained. "
+            "Physical BOE acquisition remains incomplete at 100,051 of 100,867 document "
+            "successes, one dead network timeout, and 815 unfinished. The v4 "
             "cohort planner now deduplicates and orders through file-backed SQLite, streams "
             "bounded deterministic shards, preserves exact Parliament db-ref/table-name "
             "pairs, locks every output through kernel advisory locks, rehashes immutable "
             "inputs before and after use, and publishes a journaled bundle with its manifest "
             "last. Independent SQL reconciliation finds zero normalized selection/payload "
-            "differences against the real 10,000-row baseline. The same path prepares and "
-            "preflights all 90,121 currently eligible rows / 2,849,994,795 prior bytes in 30 "
-            "partitions at 53,198,848 bytes planner peak RSS, with every prior file and source "
-            "contract revalidated, zero blocked hosts, and exact public-information retention. "
-            "This is bounded preparation without network, not a representative 100k run. "
+            "differences against the real 10,000-row baseline. The 100,000-row plan uses the "
+            "same bounded path, validates every row and source contract, and has zero blocked "
+            "hosts. This proves exact bounded preparation, not completed transport or a "
+            "representative 100k run. "
             "Representative 100k transport and the one-million cohort remain open. Monetary cost "
             "remains null and unknown because no real "
             "provider rate, invoice, energy meter, or labor ledger is bound to the runs. "
             "Per-page elapsed time remains in operational state and aggregate reports, "
             "not semantic OCR manifests; two independent real OCR states therefore emit "
             "the same semantic manifest hash. A disk-backed "
-            "file/edge audit reconciles all 111,408 eligible inventory rows after the "
+            "file/edge audit reconciles all 122,607 eligible inventory rows after the "
             "exclusions and physically removing "
             "three explicitly synthetic program pages plus eight Europarliament captures "
             "that copied an invented fallback sample. A known-non-real sample fingerprint "
             "gate prevents recurrence without rejecting repeated official payloads. The audit "
-            "verifies checksum and public URL lineage for 111,357 files (99.9542%), and decompressed checksums for all 6,792 "
+            "verifies checksum and public URL lineage for 122,539 files with zero conflicts, "
+            "and decompressed checksums for all 6,792 "
             "referenced text artifacts with zero conflicts. It recovers 10,326 exact "
             "embedded URLs across official or primary captures, 50 exact PDF relations "
             "from preserved official hrefs plus byte-identical live GETs, 4,516 archived-metadata relations over 3,757 files, "
@@ -504,22 +524,22 @@ PROJECT_FACTS = [
             "requires a bounded official GET with exact stored SHA-256 and byte count. The workers "
             "use bounded concurrent streaming, reject every checksum or size non-match, and merge prior immutable "
             "relations instead of replacing them. A disk-backed Wayback worker derives only "
-            "the exact Europarliament connector URL and Senate path URL, groups 26 gap instances "
-            "into three real SHA-256/size targets, and checkpoints queries plus replays. Its first "
+            "the exact Europarliament connector URL and Senate path URL. The current no-network "
+            "rebind covers all 68 gaps, groups 26 evidence-derived instances into three real "
+            "SHA-256/size targets, leaves 42 unseeded, and checkpoints queries plus replays. Its first "
             "bounded run rehashed five distinct older Europarliament captures, rejected all five "
             "byte mismatches, retained seven failed endpoint variants for explicit retry, and "
             "published zero false lineage relations. An atomic 43-row portable checkpoint preserves "
             "schema, three targets, 26 capture paths, eight queries, and five replay hashes; a "
             "cap-sized archive index result fails closed instead of truncating silently. "
             "Successful index queries and rejected digests "
-            "do not repeat without an explicit refresh/retry lever. It leaves 51 files explicitly unlinked "
+            "do not repeat without an explicit refresh/retry lever. It leaves 68 files explicitly unlinked "
             "instead of promoting them. A deterministic streaming remediation queue "
-            "contains 51 work items over 8,315,544 source bytes, all missing checksum and "
+            "contains 68 current work items, all missing checksum and "
             "public-URL lineage, with guessed URLs forbidden. The 25 Europarliament rows "
             "require immutable historical archive metadata or an exact source manifest; the "
-            "25 party-program rows require an exact primary-source sidecar/manifest or a "
-            "checksum-identical archived response; and the remaining Senate XML requires an "
-            "immutable historical capture because the current official response differs. "
+            "remaining unseeded rows require exact primary-source sidecars/manifests or "
+            "checksum-identical archived responses. "
             "Without a new lever, network probes must not repeat. A public-safe storage-health "
             "artifact reconciles the real BDNS and PLACSP preflights without exposing roots "
             "or session state: both remain blocked, requiring another 5,177,384,960 and "
@@ -1144,11 +1164,15 @@ PROJECT_WORKFLOWS = [
         ),
         steps=[
             "Enqueue exact official URLs idempotently; never substitute generated or sample records for missing source data.",
+            "Separate planning gates from acquisition gates: an exact 100,000-row numeric cohort proves selectable official supply, not downloaded bytes or end-to-end promotion.",
             "For a fresh healthy-source scale cohort, select only previously captured official objects, rehash every prior capture, stratify deterministically by host/type/size, bind a source-specific validation contract, and exclude known blocked rows before creating a clean queue database.",
             "For cohorts above embedded compatibility, use partitioned v4: file-backed SQLite selection, deterministic bounded sub-shards, exact selection/execution identities, per-target kernel locks, before/after input hashes, and journaled manifest-last publication; preflight the complete queue before any request.",
-            "Set a global claim ceiling plus per-host concurrency, minimum request-start interval, byte/time ceiling, storage reserve, retry delay, and circuit threshold before network work.",
+            "Set a global claim ceiling plus per-host concurrency, minimum request-start interval, byte/time ceiling, storage reserve, retry delay, circuit threshold, and durable request budget before network work; the current BOE recovery ceiling is 500,000 requests.",
             "Run requests through the per-host slot for every retry; record exact request, outcome, byte, HTTP status, failure class, peak in-flight, throttle wait, and circuit metrics.",
+            "Count transport exceptions and timeouts as route failures for the host circuit, not only HTTP status failures.",
             "Persist success only after atomic checksum-addressed publication; delete partial files on every failure and retain retryable or dead queue state explicitly.",
+            "Write the first progress checkpoint atomically before long work, then refresh it on a bounded clock; never require a full queue scan after every batch.",
+            "Recover expired leases through normal queue claiming. Requeue budget failures or transient failures only through exact, bounded maintenance commands that preserve attempt and request-budget telemetry.",
             "Treat prior checksums as revision baselines, not universal immutability promises: preserve the fresh object when its official URL and source-specific structure validate, then report the exact prior-to-fresh hash delta.",
             "Do not repeat a blocked-host probe without a new lever; publish current queue truth from the read-only database instead.",
             "Run the independent operations validator and require queue/document/host parity, zero overdue leases, zero orphan partials, official-host allowlist, no unsupported million-scale claim, no secrets, and exact public identity retention.",
@@ -1158,7 +1182,10 @@ PROJECT_WORKFLOWS = [
             "just document-factory-acquisition-cohort-validate",
             "just document-factory-disk-planner-test",
             "just document-factory-disk-planner-10k-verify",
+            "just document-factory-disk-planner-100k-verify",
             "just document-factory-disk-planner-max-verify",
+            "just document-factory-source-universe-report",
+            "just etl-scale-boe-document-status",
             "just document-fetch-operations-export",
             "just document-factory-economics-export",
             "just transparency-dashboard-export",
@@ -1180,6 +1207,18 @@ PROJECT_WORKFLOWS = [
             Evidence(
                 source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-v2-validation-physical-20260829.json",
                 detail="Fresh multi-host cohort proves 1,000 successes from 1,000 exact requests, complete prior/fresh rehashing, source-contract parity, revision preservation, host pacing, and zero failures without probing known blockers.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-disk-planner-100k-validation-20260830.json",
+                detail="Exact 100,000-row planning gate with pinned selection identity and no numeric supply gap.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-source-universe-validation-20260829.json",
+                detail="Validated real official source universe and physically healthy planning eligibility.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-document-access-timeout-20260830.md",
+                detail="Current bounded BOE acquisition blocker and no-repeat-probe boundary.",
             ),
         ],
         references={
@@ -2423,6 +2462,66 @@ PROJECT_GOTCHAS = [
         ],
         references={
             "fallback contamination": "fact.Readiness counts only verified official corpora"
+        },
+        updated_at=UPDATED,
+    ),
+    Gotcha(
+        name="Valid zero values must survive validation defaults",
+        description=(
+            "`zero-safe validation` matters for exact scale gates. Using truthiness "
+            "such as value or -1 converts a valid zero gap or zero failure count into "
+            "the fallback and can make correct official evidence fail validation."
+        ),
+        mitigation=(
+            "Default only when a key is absent or its value is None. Keep explicit "
+            "zero-value regression tests for numeric supply gaps, failure totals, and "
+            "other readiness counters."
+        ),
+        evidence=[
+            Evidence(
+                source="scripts/validate_real_document_source_universe.py",
+                detail="Zero-safe integer parsing preserves the exact zero numeric gap.",
+            ),
+            Evidence(
+                source="tests/test_real_document_source_universe.py",
+                detail="Real-artifact regression proves the zero-gap source universe validates.",
+            ),
+        ],
+        references={
+            "zero-safe validation": "workflow.Operate the bounded document fetch queue"
+        },
+        updated_at=UPDATED,
+    ),
+    Gotcha(
+        name="Million-scale control state cannot remain monolithic",
+        description=(
+            "`input-bound control state` appears before raw bytes become the only "
+            "problem. The current BOE portable lineage is already 234,632,869 bytes "
+            "for 100,051 rows, and stale embedded state can bind a new run to an old "
+            "input inventory even when output CAS is reusable."
+        ),
+        mitigation=(
+            "Shard large manifests and execution state by deterministic generation, "
+            "record immutable input roots, publish manifest-last, preserve explicit "
+            "supersession lineage, and reject state whose bound input identity differs. "
+            "Prove reconstruction and interrupted replay before any one-million-row claim."
+        ),
+        evidence=[
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/boe-document-corpus-interim-20260830.json",
+                detail="Current BOE row count, manifest size, incomplete queue, and summary-reference truth.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-validation.json",
+                detail="Current generation-bound native-text state and independently rehashed manifest/CAS.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/reports/million-scale-foundation-and-real-document-run.md",
+                detail="Current scale-foundation report records the input-bound state boundary and next sharding gate.",
+            ),
+        ],
+        references={
+            "input-bound control state": "workflow.Operate the bounded document fetch queue"
         },
         updated_at=UPDATED,
     ),

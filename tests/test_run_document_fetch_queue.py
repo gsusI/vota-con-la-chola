@@ -143,6 +143,7 @@ class TestRunDocumentFetchQueue(unittest.TestCase):
 
     def test_download_worker_streams_persists_links_and_completes_queue(self) -> None:
         url = self._queue_file(filename="official.pdf", payload=b"%PDF-1.7\ncontent")
+        progress_checkpoints: list[dict[str, object]] = []
         report = process_document_fetch_queue(
             self.conn,
             raw_root=self.root / "raw",
@@ -158,8 +159,30 @@ class TestRunDocumentFetchQueue(unittest.TestCase):
             download_attempts=1,
             retry_delay_seconds=60,
             snapshot_date="2026-08-10",
+            progress_callback=progress_checkpoints.append,
         )
+        self.assertEqual(len(progress_checkpoints), 1)
+        self.assertEqual(
+            progress_checkpoints[0]["schema_version"],
+            "document_fetch_queue_progress_v1",
+        )
+        self.assertEqual(progress_checkpoints[0]["status"], "running")
+        self.assertEqual(progress_checkpoints[0]["checkpoint_sequence"], 1)
+        self.assertEqual(progress_checkpoints[0]["completed_batches"], 1)
+        checkpoint_totals = progress_checkpoints[0]["totals"]
+        self.assertIsInstance(checkpoint_totals, dict)
+        self.assertEqual(checkpoint_totals["succeeded"], 1)
         self.assertEqual(report["status"], "ok")
+        self.assertEqual(
+            report["progress_checkpoints"],
+            {
+                "callback_enabled": True,
+                "completed_batches": 1,
+                "published_checkpoints": 1,
+                "min_interval_seconds": 10.0,
+                "publication": "atomic_replace_first_batch_then_time_bounded_v2",
+            },
+        )
         self.assertEqual(report["totals"]["succeeded"], 1)
         self.assertEqual(report["totals"]["bytes_received"], 16)
         self.assertGreater(report["performance"]["items_per_second"], 0)
@@ -453,6 +476,20 @@ class TestRunDocumentFetchQueue(unittest.TestCase):
             limiter.opened_circuits(),
             ["blocked.example|legis:10|legis10/document.pdf"],
         )
+
+    def test_network_outage_opens_only_affected_route_circuit(self) -> None:
+        limiter = HostLimiter(per_host_workers=2, hard_failure_threshold=2)
+        document_url = "https://www.boe.es/diario_boe/xml.php?id=BOE-A-2024-9687"
+        summary_url = "https://www.boe.es/datosabiertos/api/boe/sumario/20240514"
+        limiter.record_status(
+            document_url, None, success=False, failure_class="network"
+        )
+        self.assertFalse(limiter.is_open(document_url))
+        limiter.record_status(
+            document_url, None, success=False, failure_class="network"
+        )
+        self.assertTrue(limiter.is_open(document_url))
+        self.assertFalse(limiter.is_open(summary_url))
 
     def test_explicit_host_request_budget_fails_closed(self) -> None:
         budgets = _parse_host_request_budgets(["www.boe.es=1"])
