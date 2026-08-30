@@ -2,6 +2,7 @@
   "checks": {
     "all_work_states_are_successful_and_well_formed": true,
     "expected_and_observed_rows_match": true,
+    "extraction_algorithm_version_replayed": true,
     "extraction_report_totals_reconcile": true,
     "inventory_provenance_and_manifest_values_match": true,
     "manifest_rows_match_extraction_report": true,
@@ -11,7 +12,7 @@
     "official_public_domain_personal_information_retained": true,
     "raw_checksums_match": true,
     "text_cas_checksums_and_character_counts_match": true,
-    "text_cas_inventory_is_exact": true
+    "text_cas_inventory_is_exact_across_retained_generations": true
   },
   "diagnostics": {
     "invalid_work_states": 0,
@@ -19,12 +20,13 @@
     "raw_error_samples": [],
     "text_error_samples": []
   },
-  "generated_at": "2026-08-30T05:49:56.819613Z",
+  "extraction_algorithm_version": "document_extraction_v2_pdf_plain_text",
+  "generated_at": "2026-08-30T11:58:31.654752Z",
   "inputs": {
     "extraction_report": {
-      "bytes": 4345,
+      "bytes": 4719,
       "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-extraction.json",
-      "sha256": "b7ea2c2331e5dd576704ae9cc7b2fd4133fb17641bf7c9b4fc43874a100cc66f"
+      "sha256": "70189fa830e6901586830bd281b27ab896ef995d638e4ae8b5b895a33efaad4e"
     },
     "inventory": {
       "path": "etl/data/manifests/real-document-format-inventory.jsonl",
@@ -34,7 +36,7 @@
       "bytes": 5423,
       "path": "etl/data/published/real-document-text-manifest-latest.jsonl",
       "rows": 122607,
-      "sha256": "fea6dc86110ad94c190133077d2271130652f30475f6f561ad0ab5ca98e25024"
+      "sha256": "e5e7aa2ec3d7f80d036885b2ff214da58b8ee9532dc647e5336cde1578a147a9"
     },
     "provenance": {
       "path": "etl/data/manifests/real-document-provenance-files.jsonl",
@@ -46,6 +48,7 @@
     "native_text_is_not_sanitized_or_identity_stripped": true,
     "official_public_domain_personal_information_retained": true,
     "official_real_documents_only": true,
+    "pdf_plain_text_angle_brackets_retained": true,
     "synthetic_or_mock_records_counted": false
   },
   "schema_version": "real_document_text_validation_v1",
@@ -54,13 +57,17 @@
     "distinct_content_objects": 120757,
     "file_instances": 122607,
     "native_no_text_objects": 0,
-    "native_text_chars": 2211203471,
+    "native_text_chars": 2211254429,
     "native_truncated_objects": 0,
     "ocr_candidate_pages": 856,
     "provenance_gap_instances": 68,
     "public_url_instances": 122539,
     "raw_files_checksum_verified": 122607,
+    "retained_native_generation_manifests_checked": 2,
+    "retained_superseded_text_cas_objects_checksum_verified": 6,
+    "text_cas_files_expected_across_retained_generations": 119344,
     "text_cas_files_observed": 119338,
+    "text_cas_files_observed_across_retained_generations": 119344,
     "text_cas_objects_checksum_verified": 119338
   },
   "validation_scope": {

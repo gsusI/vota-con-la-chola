@@ -609,6 +609,9 @@ def audit_document_provenance_gap(
         "native_extraction",
         "native_validation",
         "native_generation_audit",
+        "text_locators",
+        "text_locator_validation",
+        "text_locator_generation_audit",
         "document_profile",
         "document_profile_validation",
         "document_profile_generation_audit",
@@ -660,6 +663,10 @@ def audit_document_provenance_gap(
     native_extraction = payloads["native_extraction"]
     native_validation = payloads["native_validation"]
     native_generation_audit = payloads["native_generation_audit"]
+    native_current_manifest = native_extraction.get("manifest") or {}
+    text_locators = payloads["text_locators"]
+    text_locator_validation = payloads["text_locator_validation"]
+    text_locator_generation_audit = payloads["text_locator_generation_audit"]
     document_profile = payloads["document_profile"]
     document_profile_validation = payloads["document_profile_validation"]
     document_profile_generation_audit = payloads["document_profile_generation_audit"]
@@ -759,6 +766,15 @@ def audit_document_provenance_gap(
             "real_document_generation_lifecycle_audit_v1",
             {"ok"},
         ),
+        "text_locators": ("real_document_text_locator_extraction_v1", {"ok"}),
+        "text_locator_validation": (
+            "real_document_text_locator_validation_v1",
+            {"ok"},
+        ),
+        "text_locator_generation_audit": (
+            "real_document_generation_lifecycle_audit_v1",
+            {"ok"},
+        ),
         "document_profile": (
             "real_document_language_encryption_profile_v2",
             {"ok"},
@@ -834,6 +850,12 @@ def audit_document_provenance_gap(
             native_extraction,
         ),
         (
+            "text_locator_generation_audit",
+            text_locator_generation_audit,
+            "native_text_locator",
+            text_locators,
+        ),
+        (
             "document_profile_generation_audit",
             document_profile_generation_audit,
             "document_profile",
@@ -891,6 +913,7 @@ def audit_document_provenance_gap(
             raise ReadinessError(f"document {key} lifecycle contract failed")
 
     origin_manifest = local_origin_replication.get("manifest") or {}
+    origin_inputs = local_origin_replication.get("inputs") or {}
     origin_seeded = local_origin_replication.get("seeded") or {}
     origin_states = local_origin_replication.get("state_counts") or {}
     restore_manifest = local_origin_clean_restore.get("manifest") or {}
@@ -913,6 +936,10 @@ def audit_document_provenance_gap(
         != expected_origin_classes
         or origin_states != {"succeeded": sum(expected_origin_classes.values())}
         or origin_manifest.get("rows") != sum(expected_origin_classes.values())
+        or origin_inputs.get("native_manifest_sha256")
+        != native_current_manifest.get("sha256")
+        or origin_inputs.get("ocr_manifest_sha256")
+        != (page_ocr.get("manifest") or {}).get("sha256")
         or local_origin_clean_restore.get("backend") != "filesystem"
         or local_origin_clean_restore.get("durable_public_origin_proven") is not False
         or local_origin_clean_restore.get("clean_room_restore_mechanics_proven")
@@ -968,6 +995,11 @@ def audit_document_provenance_gap(
     release_preparation_checks = local_origin_release_preparation.get("checks") or {}
     upload_plan_policy = local_origin_release_upload_plan.get("policy") or {}
     release_pointer_policy = local_origin_release_pointer.get("policy") or {}
+    release_files = local_origin_release_manifest.get("files") or []
+    release_file_bytes = sum(
+        _require_nonnegative_int(row.get("bytes"), "document origin release file bytes")
+        for row in release_files
+    )
     if (
         local_origin_release_manifest.get("schema_version")
         != "real_document_origin_release_manifest_v1"
@@ -1007,10 +1039,16 @@ def audit_document_provenance_gap(
         or release_summary.get("archive_bytes") != pack_packed.get("archive_bytes")
         or release_summary.get("member_manifest_bytes")
         != pack_packed.get("member_manifest_bytes")
-        or release_summary.get("release_files") != 90
-        or release_summary.get("release_bytes") != 1_911_188_479
-        or len(local_origin_release_manifest.get("files") or [])
-        != release_summary.get("release_files")
+        or _require_nonnegative_int(
+            release_summary.get("release_files"), "document origin release files"
+        )
+        <= 0
+        or _require_nonnegative_int(
+            release_summary.get("release_bytes"), "document origin release bytes"
+        )
+        <= 0
+        or release_summary.get("release_bytes") != release_file_bytes
+        or len(release_files) != release_summary.get("release_files")
         or len(local_origin_release_upload_plan.get("immutable_files") or [])
         != release_summary.get("release_files")
         or release_policy.get("official_real_records_only") is not True
@@ -1744,6 +1782,28 @@ def audit_document_provenance_gap(
             != expected
         ):
             raise ReadinessError(f"native validation {key} does not reconcile")
+    native_retained_cas_expected = _require_nonnegative_int(
+        native_validation_totals.get(
+            "text_cas_files_expected_across_retained_generations"
+        ),
+        "native retained text CAS expected",
+    )
+    native_retained_cas_observed = _require_nonnegative_int(
+        native_validation_totals.get(
+            "text_cas_files_observed_across_retained_generations"
+        ),
+        "native retained text CAS observed",
+    )
+    if (
+        native_retained_cas_expected != native_retained_cas_observed
+        or native_retained_cas_expected < native_cas_files
+        or _require_nonnegative_int(
+            native_totals.get("text_cas_files_observed_across_retained_generations"),
+            "native producer retained text CAS observed",
+        )
+        != native_retained_cas_observed
+    ):
+        raise ReadinessError("native retained CAS generations do not reconcile")
     native_report_input = (native_validation.get("inputs") or {}).get(
         "extraction_report"
     ) or {}
@@ -1751,6 +1811,87 @@ def audit_document_provenance_gap(
         evidence_paths["native_extraction"]
     ):
         raise ReadinessError("native validation was not built from the current run")
+
+    locator_totals = text_locators.get("totals") or {}
+    locator_validation_totals = text_locator_validation.get("totals") or {}
+    locator_inputs = text_locators.get("inputs") or {}
+    locator_validation_inputs = text_locator_validation.get("inputs") or {}
+    locator_manifest = text_locators.get("manifest") or {}
+    locator_native_input = locator_inputs.get("native_manifest") or {}
+    locator_validation_native_input = (
+        locator_validation_inputs.get("native_manifest") or {}
+    )
+    locator_validation_manifest_input = (
+        locator_validation_inputs.get("locator_manifest") or {}
+    )
+    locator_validation_report_input = (
+        locator_validation_inputs.get("locator_report") or {}
+    )
+    locator_content_rows = _require_nonnegative_int(
+        locator_totals.get("content_locator_rows"), "native text content locators"
+    )
+    locator_instance_rows = _require_nonnegative_int(
+        locator_totals.get("instance_locator_rows"), "native text instance locators"
+    )
+    locator_pdf_pages = _require_nonnegative_int(
+        locator_totals.get("pdf_page_locators"), "native text PDF page locators"
+    )
+    locator_span_rows = _require_nonnegative_int(
+        locator_totals.get("normalized_text_span_locators"),
+        "native text normalized-span locators",
+    )
+    if (
+        _require_nonnegative_int(
+            locator_totals.get("file_instances"), "locator file instances"
+        )
+        != native_file_instances
+        or _require_nonnegative_int(
+            locator_totals.get("distinct_content_objects"),
+            "locator distinct content objects",
+        )
+        != native_distinct_content
+        or _require_nonnegative_int(
+            locator_totals.get("native_text_chars"), "locator native text chars"
+        )
+        != native_chars
+        or locator_content_rows != locator_pdf_pages + locator_span_rows
+        or locator_manifest.get("rows") != locator_instance_rows
+        or locator_native_input.get("path") != native_current_manifest.get("path")
+        or locator_native_input.get("sha256")
+        != native_current_manifest.get("sha256")
+        or locator_validation_native_input.get("path")
+        != native_current_manifest.get("path")
+        or locator_validation_native_input.get("sha256")
+        != native_current_manifest.get("sha256")
+        or locator_validation_manifest_input.get("sha256")
+        != locator_manifest.get("sha256")
+        or locator_validation_manifest_input.get("logical_sha256")
+        != locator_manifest.get("logical_sha256")
+        or locator_validation_report_input.get("sha256")
+        != sha256_file(evidence_paths["text_locators"])
+        or locator_validation_report_input.get("bytes")
+        != evidence_paths["text_locators"].stat().st_size
+    ):
+        raise ReadinessError("native text locator inputs or totals drifted")
+    for key, expected in {
+        "native_file_instances": native_file_instances,
+        "distinct_content_objects": native_distinct_content,
+        "content_objects_replayed": native_distinct_content,
+        "replayed_content_locator_rows": locator_content_rows,
+        "expected_instance_locator_rows": locator_instance_rows,
+        "observed_instance_locator_rows": locator_instance_rows,
+        "missing_rows": 0,
+        "unexpected_rows": 0,
+        "mismatched_rows": 0,
+        "validation_failures": 0,
+    }.items():
+        if (
+            _require_nonnegative_int(
+                locator_validation_totals.get(key), f"text locator validation {key}"
+            )
+            != expected
+        ):
+            raise ReadinessError(f"text locator validation {key} does not reconcile")
 
     profile_totals = document_profile.get("totals") or {}
     profile_validation_totals = document_profile_validation.get("totals") or {}
@@ -1762,7 +1903,6 @@ def audit_document_provenance_gap(
     )
     profile_validation_report = profile_validation_inputs.get("profile_report") or {}
     native_profile_input = profile_inputs.get("native_manifest") or {}
-    native_current_manifest = native_extraction.get("manifest") or {}
     machine_status_counts = (
         document_profile.get("by_machine_language_status_content_objects") or {}
     )
@@ -2107,6 +2247,9 @@ def audit_document_provenance_gap(
         "native_text_characters": native_chars,
         "native_text_truncated_objects": native_truncated,
         "native_text_cas_objects_checksum_verified": native_cas_files,
+        "native_text_retained_cas_objects_checksum_verified": (
+            native_retained_cas_observed
+        ),
         "native_text_retained_generations": _require_nonnegative_int(
             (native_generation_audit.get("totals") or {}).get(
                 "retained_unique_generations"
@@ -2118,6 +2261,20 @@ def audit_document_provenance_gap(
                 "retained_state_snapshots"
             ),
             "native text retained state snapshots",
+        ),
+        "native_text_locator_content_rows": locator_content_rows,
+        "native_text_locator_instance_rows": locator_instance_rows,
+        "native_text_locator_pdf_pages": locator_pdf_pages,
+        "native_text_locator_normalized_spans": locator_span_rows,
+        "native_text_locator_replayed_content_objects": _require_nonnegative_int(
+            locator_validation_totals.get("content_objects_replayed"),
+            "native text locator replayed content objects",
+        ),
+        "native_text_locator_retained_generations": _require_nonnegative_int(
+            (text_locator_generation_audit.get("totals") or {}).get(
+                "retained_unique_generations"
+            ),
+            "native text locator retained generations",
         ),
         "document_profile_file_instances": profile_file_instances,
         "document_profile_distinct_content_objects": profile_distinct_content,
@@ -3180,6 +3337,43 @@ def atomic_write_json(output_path: Path, payload: dict[str, Any]) -> None:
             os.unlink(temp_name)
 
 
+def build_failure_report(
+    registry_path: Path,
+    error: ReadinessError,
+) -> dict[str, Any]:
+    reason = str(error).replace(str(REPO_ROOT), "<repo>")
+    registry_reference: dict[str, Any] = {
+        "path": registry_path.relative_to(REPO_ROOT).as_posix(),
+        "available": registry_path.is_file(),
+    }
+    if registry_path.is_file():
+        registry_reference.update(evidence_reference(registry_path))
+    return {
+        "schema_version": "real-scale-readiness-v1",
+        "generated_at": utc_now(),
+        "status": "not_ready",
+        "policy": {
+            "official_real_records_only": True,
+            "synthetic_or_mock_records_forbidden": True,
+            "generated_test_records_count_toward_readiness": False,
+            "loopback_network_results_count_toward_readiness": False,
+            "official_public_domain_personal_information_retained": True,
+            "classification_never_suppresses_public_domain_identity": True,
+            "secrets_workstation_traces_and_non_public_data_forbidden": True,
+            "promotion_requires_public_origin_and_clean_restore": True,
+        },
+        "registry": registry_reference,
+        "foundation": {
+            "ready": False,
+            "meaning": "Current evidence validation failed; no prior readiness result remains authoritative.",
+        },
+        "failure": {
+            "kind": "readiness_validation_failed",
+            "reason": reason,
+        },
+    }
+
+
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -3202,6 +3396,7 @@ def main(argv: list[str] | None = None) -> int:
         report = build_report(registry_path)
         atomic_write_json(output_path, report)
     except ReadinessError as exc:
+        atomic_write_json(output_path, build_failure_report(registry_path, exc))
         print(f"scale readiness failed: {exc}", file=sys.stderr)
         return 1
     print(json.dumps(report, ensure_ascii=False, indent=2, sort_keys=True))

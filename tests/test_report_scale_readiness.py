@@ -1,14 +1,17 @@
 from __future__ import annotations
 
 import json
+import tempfile
 import unittest
 
 from scripts.report_scale_readiness import (
     REPO_ROOT,
     ReadinessError,
     audit_gap,
+    build_failure_report,
     checks_pass,
     load_json,
+    main,
     official_host,
     reject_disallowed_evidence,
     repo_path,
@@ -208,6 +211,52 @@ class RealScaleReadinessTests(unittest.TestCase):
         gap["current_real_rows"] += 1
         with self.assertRaisesRegex(ReadinessError, "file totals drifted"):
             audit_gap(gap)
+
+    def test_failure_report_retains_policy_and_never_claims_readiness(self) -> None:
+        report = build_failure_report(
+            self.registry_path,
+            ReadinessError("BOE document corpus checks failed"),
+        )
+        self.assertEqual(report["status"], "not_ready")
+        self.assertIs(report["foundation"]["ready"], False)
+        self.assertEqual(
+            report["failure"]["reason"], "BOE document corpus checks failed"
+        )
+        self.assertTrue(report["registry"]["available"])
+        self.assertTrue(report["policy"]["official_real_records_only"])
+        self.assertTrue(
+            report["policy"][
+                "official_public_domain_personal_information_retained"
+            ]
+        )
+
+    def test_failed_main_atomically_replaces_stale_success_control(self) -> None:
+        published_dir = REPO_ROOT / "etl/data/published"
+        with tempfile.TemporaryDirectory(
+            prefix="readiness-failure-test-", dir=published_dir
+        ) as temp_dir:
+            output_path = (
+                REPO_ROOT / temp_dir / "scale-readiness-failure-control.json"
+            )
+            output_path.write_text(
+                '{"status":"real_foundation_ready_scale_incomplete"}\n',
+                encoding="utf-8",
+            )
+            return_code = main(
+                [
+                    "--registry",
+                    "docs/etl/missing-readiness-registry.json",
+                    "--out",
+                    output_path.relative_to(REPO_ROOT).as_posix(),
+                    "--enforce-foundation",
+                ]
+            )
+            report = json.loads(output_path.read_text(encoding="utf-8"))
+        self.assertEqual(return_code, 1)
+        self.assertEqual(report["status"], "not_ready")
+        self.assertIs(report["foundation"]["ready"], False)
+        self.assertEqual(report["failure"]["kind"], "readiness_validation_failed")
+        self.assertIn("missing evidence file", report["failure"]["reason"])
 
 
 if __name__ == "__main__":

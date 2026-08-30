@@ -23,6 +23,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
+from publicdata_docs.extraction import DOCUMENT_EXTRACTION_ALGORITHM_VERSION
 from publicdata_docs.generation_manifest import (
     GenerationManifestError,
     iter_generation_rows,
@@ -265,6 +266,8 @@ def load_observed(conn: sqlite3.Connection, manifest_path: Path) -> int:
                 or item.get("synthetic_or_mock") is not False
                 or item.get("official_public_domain_personal_information_retained")
                 is not True
+                or item.get("native_extraction_algorithm_version")
+                != DOCUMENT_EXTRACTION_ALGORITHM_VERSION
             ):
                 raise CorpusValidationError(f"invalid extraction manifest row: {path}")
             ocr_pages = item.get("ocr_candidate_pages")
@@ -420,9 +423,10 @@ def validate_text_cas(
     conn: sqlite3.Connection,
     *,
     text_root: Path,
+    manifest_path: Path,
     workers: int,
     batch_size: int,
-) -> tuple[int, int, list[str]]:
+) -> tuple[int, int, int, int, int, list[str]]:
     cursor = conn.execute(
         """
         SELECT text_sha256, MIN(text_cas_path) AS text_cas_path,
@@ -437,12 +441,15 @@ def validate_text_cas(
     )
     checked = 0
     expected_paths: set[str] = set()
+    retained_items: dict[str, dict[str, Any]] = {}
     errors: list[str] = []
     with ThreadPoolExecutor(max_workers=max(1, workers)) as executor:
         while rows := cursor.fetchmany(max(1, batch_size)):
             items = [dict(row) for row in rows]
             for item in items:
-                expected_paths.add(str(item["text_cas_path"]))
+                relative = str(item["text_cas_path"])
+                expected_paths.add(relative)
+                retained_items[relative] = item
                 if (
                     int(item["paths"]) != 1
                     or int(item["text_chars"]) != int(item["max_text_chars"])
@@ -460,12 +467,67 @@ def validate_text_cas(
         for path in text_root.rglob("*.txt.gz")
         if path.is_file()
     }
-    extras = sorted(actual_paths - expected_paths)
+    history_root = (
+        manifest_path.parent / f"{manifest_path.stem}-history"
+    )
+    retained_paths = set(expected_paths)
+    retained_generations = 0
+    if history_root.is_dir():
+        for history_manifest in sorted(history_root.glob("*.json")):
+            for item in iter_generation_rows(
+                history_manifest,
+                dataset="native_text",
+                row_schema_version="real_document_text_manifest_row_v1",
+                allow_legacy_jsonl=False,
+                artifact_root=manifest_path.parent,
+            ):
+                relative = item.get("native_text_cas_path")
+                if relative:
+                    relative = str(relative)
+                    retained_paths.add(relative)
+                    retained_item = {
+                        "text_sha256": str(item.get("native_text_sha256") or ""),
+                        "text_cas_path": relative,
+                        "text_chars": int(item.get("native_text_chars") or 0),
+                    }
+                    prior = retained_items.get(relative)
+                    if prior and (
+                        str(prior["text_sha256"]),
+                        int(prior["text_chars"]),
+                    ) != (
+                        retained_item["text_sha256"],
+                        retained_item["text_chars"],
+                    ):
+                        errors.append(f"retained_manifest_conflict:{relative}")
+                    retained_items[relative] = retained_item
+            retained_generations += 1
+    retained_only = [
+        retained_items[path] for path in sorted(retained_paths - expected_paths)
+    ]
+    with ThreadPoolExecutor(max_workers=max(1, workers)) as executor:
+        for result in executor.map(
+            lambda item: _verify_text_item(text_root, item), retained_only
+        ):
+            if result and len(errors) < 20:
+                errors.append(result)
+    extras = sorted(actual_paths - retained_paths)
     missing = sorted(expected_paths - actual_paths)
-    for prefix, paths in (("extra", extras), ("missing", missing)):
+    retained_missing = sorted(retained_paths - actual_paths)
+    for prefix, paths in (
+        ("orphan", extras),
+        ("missing", missing),
+        ("retained_missing", retained_missing),
+    ):
         for path in paths[: max(0, 20 - len(errors))]:
             errors.append(f"{prefix}:{path}")
-    return checked, len(actual_paths), errors
+    return (
+        checked,
+        len(actual_paths),
+        len(retained_paths),
+        retained_generations,
+        len(retained_only),
+        errors,
+    )
 
 
 def write_json_atomic(path: Path, payload: Mapping[str, Any]) -> None:
@@ -502,6 +564,9 @@ def validate(args: argparse.Namespace) -> dict[str, Any]:
         or policy.get("official_public_domain_personal_information_retained")
         is not True
         or policy.get("native_text_is_not_sanitized_or_identity_stripped") is not True
+        or policy.get("pdf_plain_text_angle_brackets_retained") is not True
+        or extraction_report.get("extraction_algorithm_version")
+        != DOCUMENT_EXTRACTION_ALGORITHM_VERSION
     ):
         raise CorpusValidationError("extraction report policy is unsafe")
 
@@ -546,9 +611,17 @@ def validate(args: argparse.Namespace) -> dict[str, Any]:
             batch_size=int(args.batch_size),
             full_raw_check=bool(args.full_raw_check),
         )
-        text_checked, actual_cas_files, text_errors = validate_text_cas(
+        (
+            text_checked,
+            actual_cas_files,
+            retained_cas_files,
+            retained_native_generations,
+            retained_superseded_cas_checked,
+            text_errors,
+        ) = validate_text_cas(
             conn,
             text_root=text_root,
+            manifest_path=manifest_path,
             workers=int(args.workers),
             batch_size=int(args.batch_size),
         )
@@ -602,7 +675,13 @@ def validate(args: argparse.Namespace) -> dict[str, Any]:
         "ocr_candidate_pages": int(totals_row["ocr_candidate_pages"] or 0),
         "raw_files_checksum_verified": raw_checked,
         "text_cas_objects_checksum_verified": text_checked,
-        "text_cas_files_observed": actual_cas_files,
+        "text_cas_files_observed": text_checked,
+        "text_cas_files_observed_across_retained_generations": actual_cas_files,
+        "text_cas_files_expected_across_retained_generations": retained_cas_files,
+        "retained_native_generation_manifests_checked": retained_native_generations,
+        "retained_superseded_text_cas_objects_checksum_verified": (
+            retained_superseded_cas_checked
+        ),
     }
     reconciled_report_keys = (
         "file_instances",
@@ -630,11 +709,14 @@ def validate(args: argparse.Namespace) -> dict[str, Any]:
         "all_work_states_are_successful_and_well_formed": invalid_states == 0,
         "raw_checksums_match": not raw_errors,
         "text_cas_checksums_and_character_counts_match": not text_errors,
-        "text_cas_inventory_is_exact": text_checked == actual_cas_files,
+        "text_cas_inventory_is_exact_across_retained_generations": (
+            retained_cas_files == actual_cas_files
+        ),
         "extraction_report_totals_reconcile": report_totals_match,
         "no_native_text_truncation": totals["native_truncated_objects"] == 0,
         "no_synthetic_or_mock_records": True,
         "official_public_domain_personal_information_retained": True,
+        "extraction_algorithm_version_replayed": True,
     }
     return {
         "schema_version": "real_document_text_validation_v1",
@@ -645,7 +727,9 @@ def validate(args: argparse.Namespace) -> dict[str, Any]:
             "synthetic_or_mock_records_counted": False,
             "official_public_domain_personal_information_retained": True,
             "native_text_is_not_sanitized_or_identity_stripped": True,
+            "pdf_plain_text_angle_brackets_retained": True,
         },
+        "extraction_algorithm_version": DOCUMENT_EXTRACTION_ALGORITHM_VERSION,
         "inputs": {
             "inventory": {
                 "path": display_path(inventory_path),

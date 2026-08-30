@@ -1,0 +1,73 @@
+{
+  "checks": {
+    "every_content_object_raw_and_native_rehashed": true,
+    "every_locator_recomputed_exactly": true,
+    "locator_generation_full_shard_validation_passed": true,
+    "no_public_text_copied_into_manifest": true,
+    "no_synthetic_or_mock_records": true,
+    "official_public_domain_personal_information_retained": true,
+    "source_locator_report_passed": true
+  },
+  "configuration": {
+    "markup_locator": "normalized_native_text_character_span",
+    "max_span_chars": 8192,
+    "pdf_locator": "page_number"
+  },
+  "failure_samples": [],
+  "generated_at": "2026-08-30T11:09:30.934387Z",
+  "inputs": {
+    "locator_manifest": {
+      "bytes": 14619,
+      "logical_sha256": "e10c152eb66a16a468fe4bd548ac6d806d6cfac823d34a13b5c68b1f3ee7ba9d",
+      "path": "etl/data/published/real-document-text-locator-manifest-latest.jsonl",
+      "sha256": "621b8b47c8e5f506a07900f474c7ca95a4df1395e13068f82a58a04a76c68eb9"
+    },
+    "locator_report": {
+      "bytes": 4521,
+      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-locator-extraction.json",
+      "sha256": "55dfc74a035ed34b25a461e3ba6a7b2e487cdb49fce794b9fb434f8fa77e9d3b"
+    },
+    "native_manifest": {
+      "bytes": 5423,
+      "path": "etl/data/published/real-document-text-manifest-latest.jsonl",
+      "sha256": "e5e7aa2ec3d7f80d036885b2ff214da58b8ee9532dc647e5336cde1578a147a9"
+    }
+  },
+  "mode": {
+    "full_manifest_shard_check": true,
+    "full_native_text_cas_checksum_check": true,
+    "full_page_and_span_recomputation": true,
+    "full_raw_checksum_check": true
+  },
+  "next_action": "Bind locator generation and lifecycle into central readiness, then use page/span addresses in evidence exports and citizen drill-downs.",
+  "performance": {
+    "content_objects_per_second": 1366.886683,
+    "cpu_seconds": 164.820386,
+    "elapsed_seconds": 88.344558,
+    "peak_rss_bytes_child_max": 239665152,
+    "peak_rss_bytes_self": 205701120
+  },
+  "policy": {
+    "locator_rows_copy_no_public_text": true,
+    "markup_locators_are_normalized_text_spans_not_semantic_sections": true,
+    "official_public_domain_personal_information_retained": true,
+    "official_real_documents_only": true,
+    "synthetic_or_mock_records_counted": false
+  },
+  "schema_version": "real_document_text_locator_validation_v1",
+  "status": "ok",
+  "totals": {
+    "content_objects_replayed": 120757,
+    "distinct_content_objects": 120757,
+    "expected_instance_locator_rows": 379445,
+    "mismatched_rows": 0,
+    "missing_rows": 0,
+    "native_file_instances": 122607,
+    "native_text_bytes_rehashed": 2256345242,
+    "observed_instance_locator_rows": 379445,
+    "raw_bytes_rehashed": 5312661661,
+    "replayed_content_locator_rows": 363164,
+    "unexpected_rows": 0,
+    "validation_failures": 0
+  }
+}

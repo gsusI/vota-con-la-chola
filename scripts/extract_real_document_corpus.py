@@ -25,6 +25,7 @@ if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 from publicdata_docs.extraction import (
+    DOCUMENT_EXTRACTION_ALGORITHM_VERSION,
     DocumentExtraction,
     extract_document_path,
 )
@@ -264,9 +265,11 @@ def seed_state(
         if (
             metadata.get("inventory_sha256") != inventory_sha256
             or metadata.get("provenance_sha256") != provenance_sha256
+            or metadata.get("extraction_algorithm_version")
+            != DOCUMENT_EXTRACTION_ALGORITHM_VERSION
         ):
             raise CorpusExtractionError(
-                "state DB belongs to different inventory/provenance inputs; "
+                "state DB belongs to different inputs/extractor version; "
                 "use a new --state-db so prior evidence remains immutable"
             )
         return {
@@ -419,6 +422,7 @@ def seed_state(
             "schema_version": "real_document_text_extraction_state_v1",
             "inventory_sha256": inventory_sha256,
             "provenance_sha256": provenance_sha256,
+            "extraction_algorithm_version": DOCUMENT_EXTRACTION_ALGORITHM_VERSION,
             "file_instances": inventory_rows,
             "distinct_content_objects": int(distinct_contents),
             "seeded_at": utc_now(),
@@ -747,6 +751,9 @@ def iter_manifest_rows(conn: sqlite3.Connection) -> Iterator[dict[str, Any]]:
             "native_text_cas_path": row["text_cas_path"],
             "native_text_chars": row["text_chars"],
             "native_extraction_method": row["extraction_method"],
+            "native_extraction_algorithm_version": (
+                DOCUMENT_EXTRACTION_ALGORITHM_VERSION
+            ),
             "native_text_truncated": (
                 bool(row["text_truncated"])
                 if row["text_truncated"] is not None
@@ -848,13 +855,27 @@ def build_report(
         FROM document_file_instances
         """
     ).fetchone()
-    cas_files = 0
-    cas_bytes = 0
+    current_cas_paths = {
+        str(row["text_cas_path"])
+        for row in conn.execute(
+            """
+            SELECT DISTINCT text_cas_path FROM document_text_work
+            WHERE text_cas_path IS NOT NULL
+            """
+        )
+    }
+    cas_files = len(current_cas_paths)
+    cas_bytes = sum(
+        safe_child(output_root, relative).stat().st_size
+        for relative in current_cas_paths
+    )
+    retained_cas_files = 0
+    retained_cas_bytes = 0
     if output_root.is_dir():
         for path in output_root.rglob("*.txt.gz"):
             if path.is_file():
-                cas_files += 1
-                cas_bytes += path.stat().st_size
+                retained_cas_files += 1
+                retained_cas_bytes += path.stat().st_size
     complete = (
         state_counts.get("succeeded", 0) == int(totals_row["distinct_content_objects"])
         and state_counts.get("dead", 0) == 0
@@ -866,6 +887,10 @@ def build_report(
             metadata.get("inventory_sha256") == sha256_path(inventory_path)
             and metadata.get("provenance_sha256") == sha256_path(provenance_path)
         ),
+        "extraction_algorithm_version_bound": metadata.get(
+            "extraction_algorithm_version"
+        )
+        == DOCUMENT_EXTRACTION_ALGORITHM_VERSION,
         "all_file_instances_manifested": (
             int(instance_row["file_instances"]) == int(manifest["rows"])
         ),
@@ -895,7 +920,9 @@ def build_report(
             "native_text_is_not_sanitized_or_identity_stripped": True,
             "raw_document_bytes_are_not_copied_into_work_rows": True,
             "content_deduplicated_processing": True,
+            "pdf_plain_text_angle_brackets_retained": True,
         },
+        "extraction_algorithm_version": DOCUMENT_EXTRACTION_ALGORITHM_VERSION,
         "inputs": {
             "inventory": {
                 "path": display_path(inventory_path),
@@ -932,6 +959,12 @@ def build_report(
             "ocr_candidate_pages": int(instance_row["ocr_candidate_pages"] or 0),
             "text_cas_files": cas_files,
             "text_cas_bytes": cas_bytes,
+            "text_cas_files_observed_across_retained_generations": (
+                retained_cas_files
+            ),
+            "text_cas_bytes_observed_across_retained_generations": (
+                retained_cas_bytes
+            ),
         },
         "checks": checks,
         "next_action": (

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import html
+import hashlib
 from dataclasses import dataclass
 from io import BytesIO
 from pathlib import Path
@@ -14,6 +15,7 @@ TAG_RE = re.compile(r"<[^>]+>")
 WS_RE = re.compile(r"\s+")
 XML_ENCODING_RE = re.compile(br"encoding=['\"](?P<encoding>[^'\"]+)['\"]", re.I)
 HTML_CHARSET_RE = re.compile(br"charset=(?P<charset>[A-Za-z0-9._-]+)", re.I)
+DOCUMENT_EXTRACTION_ALGORITHM_VERSION = "document_extraction_v2_pdf_plain_text"
 
 
 @dataclass(frozen=True)
@@ -24,11 +26,33 @@ class DocumentExtraction:
     truncated: bool
 
 
+@dataclass(frozen=True)
+class DocumentTextLocator:
+    """Exact address into the normalized native text for one real document."""
+
+    segment_index: int
+    locator_type: str
+    locator_value: str
+    page_number: int | None
+    text_start_char: int
+    text_end_char: int
+    text_chars: int
+    text_sha256: str
+    has_text: bool
+
+
 def normalize_text(text: str) -> str:
     text = html.unescape(text)
     text = TAG_RE.sub(" ", text)
     text = WS_RE.sub(" ", text).strip()
     return text
+
+
+def normalize_plain_text(text: str) -> str:
+    """Normalize extracted plain text without treating angle brackets as tags."""
+
+    text = html.unescape(text)
+    return WS_RE.sub(" ", text).strip()
 
 
 def decode_markup_bytes(raw_bytes: bytes) -> str:
@@ -83,7 +107,7 @@ def extract_from_pdf(raw_bytes: bytes, raw_path: Path) -> str:
                 timeout=30,
             )
             if cp.returncode == 0 and cp.stdout:
-                return normalize_text(cp.stdout.decode("utf-8", errors="replace"))
+                return normalize_plain_text(cp.stdout.decode("utf-8", errors="replace"))
         except Exception:
             pass
         return ""
@@ -109,7 +133,7 @@ def extract_from_pdf(raw_bytes: bytes, raw_path: Path) -> str:
             txt = ""
         if txt:
             chunks.append(txt)
-    out = normalize_text("\n".join(chunks))
+    out = normalize_plain_text("\n".join(chunks))
     if out:
         return out
     return _pdftotext_fallback()
@@ -120,6 +144,164 @@ def should_parse_as_pdf(content_type: str, raw_path: Path) -> bool:
     if "pdf" in ct:
         return True
     return raw_path.suffix.lower() == ".pdf"
+
+
+def _normalized_pdf_pages_from_pdftotext(
+    path: Path,
+    *,
+    expected_page_count: int,
+    timeout_seconds: float,
+) -> list[str]:
+    try:
+        completed = subprocess.run(
+            ["pdftotext", "-enc", "UTF-8", str(path), "-"],
+            check=False,
+            capture_output=True,
+            timeout=timeout_seconds,
+        )
+    except Exception as exc:
+        raise RuntimeError(
+            f"PDF page extraction unavailable: {type(exc).__name__}: {exc}"
+        ) from exc
+    if completed.returncode != 0:
+        raise RuntimeError(
+            f"pdftotext page extraction failed: exit_code={completed.returncode}"
+        )
+    pages = [
+        normalize_plain_text(part)
+        for part in completed.stdout.decode("utf-8", errors="replace").split("\f")
+    ]
+    while len(pages) > expected_page_count and pages[-1] == "":
+        pages.pop()
+    if len(pages) < expected_page_count:
+        pages.extend([""] * (expected_page_count - len(pages)))
+    if len(pages) != expected_page_count:
+        raise RuntimeError(
+            "pdftotext page boundary count drifted: "
+            f"expected={expected_page_count} observed={len(pages)}"
+        )
+    return pages
+
+
+def _normalized_pdf_pages_from_python(
+    path: Path,
+    *,
+    extraction_method: str,
+    expected_page_count: int,
+) -> list[str]:
+    if extraction_method == "pypdf_path":
+        from pypdf import PdfReader  # type: ignore
+    elif extraction_method == "pypdf2_path":
+        from PyPDF2 import PdfReader  # type: ignore
+    else:
+        raise RuntimeError(f"unsupported PDF extraction method: {extraction_method}")
+    reader = PdfReader(str(path))
+    if len(reader.pages) != expected_page_count:
+        raise RuntimeError(
+            "Python PDF page count drifted: "
+            f"expected={expected_page_count} observed={len(reader.pages)}"
+        )
+    pages: list[str] = []
+    for page in reader.pages:
+        try:
+            pages.append(normalize_plain_text(page.extract_text() or ""))
+        except Exception:
+            pages.append("")
+    return pages
+
+
+def build_document_text_locators(
+    native_text: str,
+    *,
+    raw_path: Path,
+    content_type: str,
+    extraction_method: str,
+    expected_page_count: int | None,
+    max_span_chars: int = 8_192,
+    pdf_timeout_seconds: float = 120.0,
+) -> list[DocumentTextLocator]:
+    """Build exact page or normalized-span locators without copying public text."""
+
+    if max_span_chars < 1 or pdf_timeout_seconds <= 0:
+        raise ValueError("locator bounds must be positive")
+    def encoded_digest(value: str) -> str:
+        return hashlib.sha256(value.encode("utf-8")).hexdigest()
+    if should_parse_as_pdf(content_type, raw_path):
+        if expected_page_count is None or expected_page_count < 1:
+            raise RuntimeError("PDF locator generation requires a positive page count")
+        if extraction_method == "pdftotext":
+            pages = _normalized_pdf_pages_from_pdftotext(
+                raw_path,
+                expected_page_count=expected_page_count,
+                timeout_seconds=pdf_timeout_seconds,
+            )
+        else:
+            pages = _normalized_pdf_pages_from_python(
+                raw_path,
+                extraction_method=extraction_method,
+                expected_page_count=expected_page_count,
+            )
+        reconstructed = normalize_plain_text(" ".join(page for page in pages if page))
+        if reconstructed != native_text:
+            raise RuntimeError("PDF page text does not reconstruct the native text CAS")
+        locators: list[DocumentTextLocator] = []
+        cursor = 0
+        has_prior_text = False
+        for page_number, page_text in enumerate(pages, start=1):
+            if page_text and has_prior_text:
+                cursor += 1
+            start = cursor
+            cursor += len(page_text)
+            end = cursor
+            if page_text:
+                has_prior_text = True
+            locators.append(
+                DocumentTextLocator(
+                    segment_index=page_number - 1,
+                    locator_type="pdf_page",
+                    locator_value=f"page:{page_number:06d}",
+                    page_number=page_number,
+                    text_start_char=start,
+                    text_end_char=end,
+                    text_chars=len(page_text),
+                    text_sha256=encoded_digest(page_text),
+                    has_text=bool(page_text),
+                )
+            )
+        return locators
+
+    if not native_text:
+        return [
+            DocumentTextLocator(
+                segment_index=0,
+                locator_type="document_no_text",
+                locator_value="chars:000000000000-000000000000",
+                page_number=None,
+                text_start_char=0,
+                text_end_char=0,
+                text_chars=0,
+                text_sha256=encoded_digest(""),
+                has_text=False,
+            )
+        ]
+    locators = []
+    for segment_index, start in enumerate(range(0, len(native_text), max_span_chars)):
+        end = min(len(native_text), start + max_span_chars)
+        segment_text = native_text[start:end]
+        locators.append(
+            DocumentTextLocator(
+                segment_index=segment_index,
+                locator_type="normalized_text_span",
+                locator_value=f"chars:{start:012d}-{end:012d}",
+                page_number=None,
+                text_start_char=start,
+                text_end_char=end,
+                text_chars=len(segment_text),
+                text_sha256=encoded_digest(segment_text),
+                has_text=True,
+            )
+        )
+    return locators
 
 
 def extract_document_path(
@@ -160,7 +342,7 @@ def extract_document_path(
             truncated = False
             for page in reader.pages:
                 try:
-                    text = normalize_text(page.extract_text() or "")
+                    text = normalize_plain_text(page.extract_text() or "")
                 except Exception:
                     text = ""
                 if not text:
@@ -176,7 +358,7 @@ def extract_document_path(
                     break
                 chunks.append(text)
                 chars += len(text)
-            joined = normalize_text("\n".join(chunks))
+            joined = normalize_plain_text("\n".join(chunks))
             if joined:
                 return DocumentExtraction(
                     text=joined,
@@ -196,7 +378,7 @@ def extract_document_path(
             raise RuntimeError(f"PDF text extraction unavailable: {type(exc).__name__}: {exc}") from exc
         if completed.returncode != 0 or not completed.stdout:
             raise RuntimeError(f"pdftotext failed: exit_code={completed.returncode}")
-        decoded = normalize_text(completed.stdout.decode("utf-8", errors="replace"))
+        decoded = normalize_plain_text(completed.stdout.decode("utf-8", errors="replace"))
         truncated = len(decoded) > int(max_text_chars)
         text = decoded[: int(max_text_chars)]
         return DocumentExtraction(

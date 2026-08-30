@@ -17,13 +17,13 @@
       "tesseract": "tesseract 5.5.2"
     }
   },
-  "generated_at": "2026-08-30T05:52:07.853237Z",
+  "generated_at": "2026-08-30T11:11:32.514201Z",
   "inputs": {
     "native_manifest": {
       "bytes": 5423,
       "path": "etl/data/published/real-document-text-manifest-latest.jsonl",
       "rows": 122607,
-      "sha256": "fea6dc86110ad94c190133077d2271130652f30475f6f561ad0ab5ca98e25024"
+      "sha256": "e5e7aa2ec3d7f80d036885b2ff214da58b8ee9532dc647e5336cde1578a147a9"
     }
   },
   "limitations": [
@@ -45,7 +45,7 @@
       "active_receipt_path": "real-document-page-ocr-manifest-latest-receipts/deb426b8928f336df15f256a5701bfe294add242bd0a9e688fbf31086fd97f67.json",
       "automatic_deletion_performed": false,
       "legacy_equivalent_jsonl_migrated": true,
-      "live_index_changed": true,
+      "live_index_changed": false,
       "live_index_switched_last": true,
       "predecessor_manifest_sha256": null,
       "state_snapshot": {
@@ -67,13 +67,13 @@
   "performance": {
     "claim_size": 16,
     "cold_state_and_output": false,
-    "cpu_seconds": 570.45105,
-    "elapsed_seconds": 105.707825,
+    "cpu_seconds": 572.352796,
+    "elapsed_seconds": 106.710411,
     "measurement_scope": "seed_ocr_and_manifest",
     "output_root_preexisting": true,
-    "pages_per_second": 8.097792,
-    "peak_rss_bytes_child_max": 206405632,
-    "peak_rss_bytes_self": 42500096,
+    "pages_per_second": 8.02171,
+    "peak_rss_bytes_child_max": 203407360,
+    "peak_rss_bytes_self": 42221568,
     "state_db_preexisting": false,
     "workers": 8
   },
@@ -97,7 +97,7 @@
     "documents": 58
   },
   "state": {
-    "database": "etl/data/staging/real-document-page-ocr-v8-20260830.db",
+    "database": "etl/data/staging/real-document-page-ocr-v9-20260830.db",
     "ocr_status_counts": {
       "ocr_no_text": 7,
       "ocr_text_extracted": 849
@@ -110,7 +110,7 @@
   "totals": {
     "candidate_pages": 856,
     "documents": 58,
-    "elapsed_worker_seconds": 576.7412,
+    "elapsed_worker_seconds": 579.1217,
     "empty_text_pages": 34,
     "native_text_chars_on_candidate_pages": 68951,
     "ocr_text_cas_bytes": 14853,

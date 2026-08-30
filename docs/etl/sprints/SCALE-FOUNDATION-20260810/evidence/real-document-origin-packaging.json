@@ -10,51 +10,51 @@
     "pack_row_ceiling_respected": true
   },
   "durable_public_origin_proven": false,
-  "generated_at": "2026-08-30T07:12:10.265561Z",
+  "generated_at": "2026-08-30T12:05:59.507842Z",
   "inputs": {
     "max_objects_per_pack": "10000",
     "max_payload_bytes_per_pack": "469762048",
-    "origin_manifest_sha256": "83401a2eff6ad45a16e00e8b8352fe0f5430ad589e0064b9b431752c38705181",
+    "origin_manifest_sha256": "12187efc092f50bc42f0c965b3dda5d1cb618702c4b128b715eb3c168fd7d443",
     "origin_root_contract": "etl/data/object-origin/real-document-corpus-v1"
   },
   "manifest": {
     "bytes": 1198,
-    "compressed_bytes": 6343,
-    "logical_sha256": "5c09d00de345dcdec3772c2c9c7a0d927bb484afb68dfc51f889e981a329eb84",
+    "compressed_bytes": 6346,
+    "logical_sha256": "675d85b01befaf846e86ce4fb4a71a4e40e4742e45a4cb3da4b540b774c65ce2",
     "path": "etl/data/manifests/real-document-origin-packs.json",
     "publication": {
       "activated": true,
-      "active_history_path": "real-document-origin-packs-history/56268796b95daa049741c58c7b243a6c7c6f5e7ddd2245f6135fa6e4d5013b30.json",
-      "active_logical_sha256": "5c09d00de345dcdec3772c2c9c7a0d927bb484afb68dfc51f889e981a329eb84",
-      "active_manifest_sha256": "56268796b95daa049741c58c7b243a6c7c6f5e7ddd2245f6135fa6e4d5013b30",
-      "active_receipt_path": "real-document-origin-packs-receipts/56268796b95daa049741c58c7b243a6c7c6f5e7ddd2245f6135fa6e4d5013b30.json",
+      "active_history_path": "real-document-origin-packs-history/4272785719f81aca761ba2b86f141a8ddbc63b99baeaf19437b83ea842390179.json",
+      "active_logical_sha256": "675d85b01befaf846e86ce4fb4a71a4e40e4742e45a4cb3da4b540b774c65ce2",
+      "active_manifest_sha256": "4272785719f81aca761ba2b86f141a8ddbc63b99baeaf19437b83ea842390179",
+      "active_receipt_path": "real-document-origin-packs-receipts/4272785719f81aca761ba2b86f141a8ddbc63b99baeaf19437b83ea842390179.json",
       "automatic_deletion_performed": false,
       "legacy_equivalent_jsonl_migrated": false,
       "live_index_changed": true,
       "live_index_switched_last": true,
-      "predecessor_manifest_sha256": null,
+      "predecessor_manifest_sha256": "56268796b95daa049741c58c7b243a6c7c6f5e7ddd2245f6135fa6e4d5013b30",
       "state_snapshot": {
         "bytes": 97771520,
-        "compressed_bytes": 23435797,
-        "compressed_sha256": "9cc7c97903b23674b827f84ba398a869d2d227a6a77e4414305898eaeb1f8d48",
-        "path": "real-document-origin-packs-state/b72db54cb94a91139b67ccb4132ba799e1c2b10308cf5f56e9ac271218b8b5d3.sqlite.gz",
-        "sha256": "b72db54cb94a91139b67ccb4132ba799e1c2b10308cf5f56e9ac271218b8b5d3",
+        "compressed_bytes": 23435334,
+        "compressed_sha256": "73061a823668ca63b1b795974cbd6e7462f55c8d2d54546e04b80abe09b1b8fe",
+        "path": "real-document-origin-packs-state/92b6324826eb679505238580ec61fb7fcdffc121905af3afbdc0d0173bd2e46c.sqlite.gz",
+        "sha256": "92b6324826eb679505238580ec61fb7fcdffc121905af3afbdc0d0173bd2e46c",
         "sqlite_quick_check": "ok"
       },
-      "superseded_predecessor": false
+      "superseded_predecessor": true
     },
     "rows": 25,
-    "sha256": "56268796b95daa049741c58c7b243a6c7c6f5e7ddd2245f6135fa6e4d5013b30",
+    "sha256": "4272785719f81aca761ba2b86f141a8ddbc63b99baeaf19437b83ea842390179",
     "shard_files": 1,
     "uncompressed_bytes": 26376
   },
   "next_action": "Run the full independent pack verifier. After explicit release authority, publish the immutable pack generation to a public origin without delete operations, then restore and rehash it from an independent clean machine.",
   "packed": {
-    "archive_bytes": 1793094983,
-    "member_manifest_bytes": 17893134
+    "archive_bytes": 1793105638,
+    "member_manifest_bytes": 17893141
   },
   "performance": {
-    "elapsed_seconds": 112.569414,
+    "elapsed_seconds": 99.523126,
     "gzip_level": 6,
     "workers": 2
   },
@@ -63,7 +63,7 @@
     "max_payload_bytes": 469745048,
     "objects": 240226,
     "packs": 25,
-    "payload_bytes": 5902869836
+    "payload_bytes": 5902879469
   },
   "policy": {
     "automatic_deletion_forbidden": true,

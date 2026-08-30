@@ -254,7 +254,13 @@ PROJECT_FACTS = [
             "and marks all 120,757 contents unreviewed. Independent full replay has zero "
             "mismatch, and two immutable profile generations retain one exact "
             "predecessor/supersession chain. Machine candidates are sampling evidence, "
-            "not human ground truth. The bounded OCR lane finishes all 856 candidates. "
+            "not human ground truth. Native extraction v7 preserves PDF angle-bracket "
+            "content as plain text and produces 2,211,254,429 public characters. Exact "
+            "locator generation covers every content and file instance with 30,634 PDF "
+            "pages plus 332,530 bounded normalized markup spans; independent replay "
+            "rehashes all raw/native bytes and recomputes 379,445 instance locators with "
+            "zero mismatch. Locator manifests copy no public text. The bounded OCR lane "
+            "finishes all 856 candidates. "
             "The deterministic 40-row human-review packet remains blank and "
             "pending, so no machine label or invented decision is promoted. Incremental "
             "replay reuses checksum-identical rows instead of reparsing unchanged files."
@@ -303,6 +309,10 @@ PROJECT_FACTS = [
             Evidence(
                 source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-validation.json",
                 detail="Independent full native-text manifest and CAS validation for the current real corpus.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-locator-validation.json",
+                detail="Independent full raw/native replay and exact recomputation of every PDF-page and normalized-span locator.",
             ),
             Evidence(
                 source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-language-encryption-validation.json",
@@ -501,10 +511,13 @@ PROJECT_FACTS = [
             "fixtures/samples and preserved transport-failure captures from successful-"
             "document scale while retaining the latter as obstruction evidence. It includes "
             "1,437 PDFs / 44,927 pages. Page-density routing finds 856 OCR candidates. "
-            "Resumable v6 extraction processes all 120,757 distinct contents into 119,338 "
-            "checksum-addressed text objects and 2,211,203,471 unsanitized public characters, "
+            "Resumable v7 extraction processes all 120,757 distinct contents into 119,338 "
+            "checksum-addressed text objects and 2,211,254,429 unsanitized public characters, "
             "with zero failure or truncation; independent validation rehashes every raw "
-            "instance and CAS object. Additive OCR processes all 856 candidate pages "
+            "instance and CAS object. Exact locators cover 30,634 PDF pages and 332,530 "
+            "normalized markup spans, producing 363,164 content and 379,445 instance "
+            "locators without copying public text; full replay reports zero mismatch. "
+            "Additive OCR processes all 856 candidate pages "
             "across 58 PDFs, producing 89,632 characters on 849 pages, seven explicit "
             "no-text results, 17 material gains, and 131 independently verified OCR CAS "
             "objects. A deterministic 40-page real review packet covers every no-text "
@@ -2188,7 +2201,7 @@ PROJECT_GOTCHAS = [
         evidence=[
             Evidence(
                 source="justfile",
-                detail="Document profile producer, validator, and lifecycle recipes run in the same host runtime.",
+                detail="Document profile producer and validator use the pinned Docker runtime; lifecycle inspection runs only after the producer exits.",
             ),
             Evidence(
                 source="docs/etl/sprints/SCALE-FOUNDATION-20260810/reports/million-scale-foundation-and-real-document-run.md",
@@ -2197,6 +2210,37 @@ PROJECT_GOTCHAS = [
         ],
         references={
             "single-runtime SQLite state": "fact.Project is static and SQLite first"
+        },
+        updated_at=UPDATED,
+    ),
+    Gotcha(
+        name="Never run markup normalization over extracted PDF plain text",
+        description=(
+            "`PDF plain-text normalization` must preserve literal angle brackets. A real "
+            "55-page official PDF contained less-than and greater-than text across page "
+            "boundaries; the former HTML tag regex treated that range as markup and "
+            "silently removed public evidence. Six real PDF CAS objects changed when the "
+            "defect was corrected, recovering 50,958 characters."
+        ),
+        mitigation=(
+            "Use markup normalization only for HTML/XML inputs. Normalize PDF extractor "
+            "output as plain text, bind the extraction algorithm version into queue and "
+            "manifest identity, reconstruct native text from exact page output, and rerun "
+            "every dependent profile, OCR, locator, origin, and readiness gate after a "
+            "normalization-version change."
+        ),
+        evidence=[
+            Evidence(
+                source="publicdata_docs/extraction.py",
+                detail="Separate markup/plain-text normalization and exact PDF page reconstruction contract.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-locator-validation.json",
+                detail="Full real-corpus raw/native rehash and exact locator recomputation.",
+            ),
+        ],
+        references={
+            "PDF plain-text normalization": "fact.BOE document and candidate cohorts preserve exact public evidence"
         },
         updated_at=UPDATED,
     ),
@@ -2568,12 +2612,12 @@ PROJECT_GOTCHAS = [
             "input identities while reusing content-addressed output safely. The "
             "complete local origin lane adds a resumable 240,226-object queue, 25 "
             "bounded replica-manifest shards, a restorable queue snapshot, and a "
-            "full 5,902,869,836-byte bounded clean restore without claiming that a "
+            "full 5,902,879,469-byte bounded clean restore without claiming that a "
             "same-machine filesystem origin is durable public recovery. Its exact "
             "generation now also forms 25 deterministic publication packs with both "
             "10,000-object and 448-MiB payload ceilings, content-addressed member "
             "manifests, complete member rehash, and no-delete lifecycle control. The "
-            "exact pack generation is bound to one 90-file content-addressed release; "
+            "exact pack generation is bound to one 122-file content-addressed release; "
             "its publisher refuses immutable collisions, never deletes, verifies parity "
             "before resume, seals the release manifest after data, and moves the latest "
             "pointer last. A read-only live preflight is not durable-origin proof."
@@ -2635,7 +2679,7 @@ PROJECT_GOTCHAS = [
             ),
             Evidence(
                 source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-origin-pack-validation.json",
-                detail="Full validation restores and rehashes all 240,226 packed real objects and 5,902,869,836 payload bytes.",
+                detail="Full validation restores and rehashes all 240,226 packed real objects and 5,902,879,469 payload bytes.",
             ),
             Evidence(
                 source="tests/test_real_document_origin_packs.py",
@@ -2643,7 +2687,7 @@ PROJECT_GOTCHAS = [
             ),
             Evidence(
                 source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-origin-release-preparation.json",
-                detail="Exact 90-file release inventory rehashes pack data, lifecycle controls, and validation evidence without remote mutation.",
+                detail="Exact 122-file release inventory rehashes pack data, retained lifecycle controls, and validation evidence without remote mutation.",
             ),
             Evidence(
                 source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-origin-hf-publish-dry-run.json",

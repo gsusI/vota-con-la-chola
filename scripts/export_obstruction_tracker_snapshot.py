@@ -416,8 +416,20 @@ def build_scale_readiness_summary(payload: dict[str, Any]) -> dict[str, Any]:
             }
         )
 
+    foundation = payload.get("foundation") or {}
+    failure = payload.get("failure") or {}
     return {
         "status": clean_markdown_cell(payload.get("status")),
+        "foundation": {
+            "ready": foundation.get("ready") is True,
+            "meaning": clean_markdown_cell(foundation.get("meaning")),
+        },
+        "failure": {
+            "kind": clean_markdown_cell(failure.get("kind")),
+            "reason": clean_markdown_cell(failure.get("reason")),
+        }
+        if failure
+        else {},
         "summary": payload.get("summary") or {},
         "corpora": corpora,
         "gaps": gaps,

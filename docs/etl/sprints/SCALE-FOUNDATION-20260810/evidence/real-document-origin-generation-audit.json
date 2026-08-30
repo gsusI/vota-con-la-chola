@@ -1,5 +1,6 @@
 {
   "activation_chain": [
+    "12187efc092f50bc42f0c965b3dda5d1cb618702c4b128b715eb3c168fd7d443",
     "83401a2eff6ad45a16e00e8b8352fe0f5430ad589e0064b9b431752c38705181"
   ],
   "checks": {
@@ -19,12 +20,12 @@
     "retained_state_snapshots_checked_to_requested_depth": true
   },
   "dataset": "real_document_origin_replicas",
-  "generated_at": "2026-08-30T06:35:56.695616+00:00",
+  "generated_at": "2026-08-30T12:04:13.351227+00:00",
   "input": {
     "bytes": 9512,
-    "logical_sha256": "1d5c6c7d9ba697cc18f28e1e09a974a89b0ad25e7955b21bcc0101df13b1cefb",
+    "logical_sha256": "e415e5eb2e7a13c6c0c3abbda75a974e82b20bfb970a66f7fc96f7d33468e405",
     "path": "etl/data/manifests/real-document-origin-replicas.json",
-    "sha256": "83401a2eff6ad45a16e00e8b8352fe0f5430ad589e0064b9b431752c38705181"
+    "sha256": "12187efc092f50bc42f0c965b3dda5d1cb618702c4b128b715eb3c168fd7d443"
   },
   "mode": {
     "full_shard_check": true,
@@ -48,19 +49,19 @@
   "schema_version": "real_document_generation_lifecycle_audit_v1",
   "status": "ok",
   "totals": {
-    "activation_chain_manifests": 1,
-    "activation_receipts": 1,
+    "activation_chain_manifests": 2,
+    "activation_receipts": 2,
     "automatic_deletions": 0,
     "interrupted_staging_directories": 0,
-    "manifest_archives": 1,
+    "manifest_archives": 2,
     "orphan_generation_directories": 0,
     "orphan_state_snapshots": 0,
-    "retained_compressed_manifest_bytes": 17780648,
-    "retained_compressed_state_bytes": 58938160,
-    "retained_shard_files": 25,
-    "retained_state_snapshots": 1,
-    "retained_unique_generations": 1,
-    "superseded_generations": 0,
+    "retained_compressed_manifest_bytes": 35577046,
+    "retained_compressed_state_bytes": 117877159,
+    "retained_shard_files": 50,
+    "retained_state_snapshots": 2,
+    "retained_unique_generations": 2,
+    "superseded_generations": 1,
     "unactivated_activation_receipts": 0,
     "unactivated_generation_directories": 0,
     "unactivated_manifest_archives": 0

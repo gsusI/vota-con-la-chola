@@ -1,0 +1,113 @@
+{
+  "checks": {
+    "every_content_object_has_locator": true,
+    "every_content_object_terminal_success": true,
+    "every_file_instance_has_locator": true,
+    "every_pdf_page_has_locator": true,
+    "manifest_contains_every_instance_locator": true,
+    "native_manifest_bound_by_sha256": true,
+    "no_dead_work": true,
+    "no_public_text_copied_into_manifest": true,
+    "no_synthetic_or_mock_records": true,
+    "normalized_spans_within_configured_bound": true,
+    "official_public_domain_personal_information_retained": true
+  },
+  "configuration": {
+    "markup_locator": "normalized_native_text_character_span",
+    "max_span_chars": 8192,
+    "pdf_locator": "page_number"
+  },
+  "generated_at": "2026-08-30T11:08:02.406259Z",
+  "inputs": {
+    "native_manifest": {
+      "bytes": 5423,
+      "path": "etl/data/published/real-document-text-manifest-latest.jsonl",
+      "sha256": "e5e7aa2ec3d7f80d036885b2ff214da58b8ee9532dc647e5336cde1578a147a9"
+    }
+  },
+  "manifest": {
+    "bytes": 14619,
+    "compressed_bytes": 32050870,
+    "logical_sha256": "e10c152eb66a16a468fe4bd548ac6d806d6cfac823d34a13b5c68b1f3ee7ba9d",
+    "path": "etl/data/published/real-document-text-locator-manifest-latest.jsonl",
+    "publication": {
+      "activated": true,
+      "active_history_path": "real-document-text-locator-manifest-latest-history/621b8b47c8e5f506a07900f474c7ca95a4df1395e13068f82a58a04a76c68eb9.json",
+      "active_logical_sha256": "e10c152eb66a16a468fe4bd548ac6d806d6cfac823d34a13b5c68b1f3ee7ba9d",
+      "active_manifest_sha256": "621b8b47c8e5f506a07900f474c7ca95a4df1395e13068f82a58a04a76c68eb9",
+      "active_receipt_path": "real-document-text-locator-manifest-latest-receipts/621b8b47c8e5f506a07900f474c7ca95a4df1395e13068f82a58a04a76c68eb9.json",
+      "automatic_deletion_performed": false,
+      "legacy_equivalent_jsonl_migrated": false,
+      "live_index_changed": true,
+      "live_index_switched_last": true,
+      "predecessor_manifest_sha256": null,
+      "state_snapshot": {
+        "bytes": 277614592,
+        "compressed_bytes": 67491308,
+        "compressed_sha256": "39175d6ffac3ee678115b95a228af2bc5dfb9a574d8cb351a42d347c3f4f1ceb",
+        "path": "real-document-text-locator-manifest-latest-state/c2ae4a307c98d4ff64394ed62cea4862e0d75ff38da164a2ff5f02e57892d87a.sqlite.gz",
+        "sha256": "c2ae4a307c98d4ff64394ed62cea4862e0d75ff38da164a2ff5f02e57892d87a",
+        "sqlite_quick_check": "ok"
+      },
+      "superseded_predecessor": false
+    },
+    "rows": 379445,
+    "sha256": "621b8b47c8e5f506a07900f474c7ca95a4df1395e13068f82a58a04a76c68eb9",
+    "shard_files": 38,
+    "uncompressed_bytes": 401918515
+  },
+  "next_action": "Independently replay every raw/native object and locator, then expose page/span anchors through evidence exports without copying full text.",
+  "performance": {
+    "content_objects_per_second": 1088.398211,
+    "cpu_seconds": 170.389407,
+    "elapsed_seconds": 110.949282,
+    "measurement_scope": "seed_rehash_locate_and_manifest",
+    "peak_rss_bytes_child_max": 239452160,
+    "peak_rss_bytes_self": 218611712,
+    "raw_bytes_per_second": 47883695.732254
+  },
+  "policy": {
+    "locator_rows_copy_no_public_text": true,
+    "markup_locators_are_normalized_text_spans_not_semantic_sections": true,
+    "native_text_is_not_sanitized_or_identity_stripped": true,
+    "official_public_domain_personal_information_retained": true,
+    "official_real_documents_only": true,
+    "pdf_locators_are_exact_pages": true,
+    "synthetic_or_mock_records_counted": false
+  },
+  "run": {
+    "claimed": 120757,
+    "dead": 0,
+    "locator_rows": 363164,
+    "native_text_bytes_rehashed": 2256345242,
+    "raw_bytes_rehashed": 5312661661,
+    "retried": 0,
+    "seeded": {
+      "distinct_content_objects": 120757,
+      "file_instances": 122607
+    },
+    "succeeded": 120757
+  },
+  "schema_version": "real_document_text_locator_extraction_v1",
+  "state": {
+    "database": "etl/data/staging/real-document-text-locators-v2-20260830.db",
+    "state_counts": {
+      "succeeded": 120757
+    }
+  },
+  "status": "ok",
+  "totals": {
+    "content_locator_rows": 363164,
+    "distinct_content_objects": 120757,
+    "document_no_text_locators": 0,
+    "file_instances": 122607,
+    "instance_locator_rows": 379445,
+    "locator_text_chars": 2211224791,
+    "locators_with_text": 363130,
+    "native_text_bytes": 2256345242,
+    "native_text_chars": 2211254429,
+    "normalized_text_span_locators": 332530,
+    "pdf_content_objects": 962,
+    "pdf_page_locators": 30634
+  }
+}

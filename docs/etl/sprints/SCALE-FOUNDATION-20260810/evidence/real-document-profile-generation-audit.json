@@ -1,5 +1,6 @@
 {
   "activation_chain": [
+    "4dfeba473b16789a1e058567ec4f29ff3b2eff30925bbf753752947b3d2bc96b",
     "1b5d0902ece3855e0730ab88efc99de9d989bb1a1204c6540ebad2d96e4e53ec",
     "4b6b90feca7f0e27d0a18d8d0520eb3b0044b392cebbdcc7cd25290cd7fd283b"
   ],
@@ -20,12 +21,12 @@
     "retained_state_snapshots_checked_to_requested_depth": true
   },
   "dataset": "document_profile",
-  "generated_at": "2026-08-30T10:19:57.816417+00:00",
+  "generated_at": "2026-08-30T11:57:18.594558+00:00",
   "input": {
     "bytes": 5626,
-    "logical_sha256": "7a40cfdbe0e11fac4c93362305815014ea445642537c7e4d7d83b4154d72e4b3",
+    "logical_sha256": "18c2c47fcc46900e51a1d24ac26147e24030760505ec57a96393c02594924705",
     "path": "etl/data/published/real-document-profile-manifest-latest.jsonl",
-    "sha256": "1b5d0902ece3855e0730ab88efc99de9d989bb1a1204c6540ebad2d96e4e53ec"
+    "sha256": "4dfeba473b16789a1e058567ec4f29ff3b2eff30925bbf753752947b3d2bc96b"
   },
   "mode": {
     "full_shard_check": true,
@@ -49,19 +50,19 @@
   "schema_version": "real_document_generation_lifecycle_audit_v1",
   "status": "ok",
   "totals": {
-    "activation_chain_manifests": 2,
-    "activation_receipts": 2,
+    "activation_chain_manifests": 3,
+    "activation_receipts": 3,
     "automatic_deletions": 0,
     "interrupted_staging_directories": 0,
-    "manifest_archives": 2,
+    "manifest_archives": 3,
     "orphan_generation_directories": 0,
     "orphan_state_snapshots": 0,
-    "retained_compressed_manifest_bytes": 31086897,
-    "retained_compressed_state_bytes": 93555522,
-    "retained_shard_files": 26,
-    "retained_state_snapshots": 1,
-    "retained_unique_generations": 2,
-    "superseded_generations": 1,
+    "retained_compressed_manifest_bytes": 46593328,
+    "retained_compressed_state_bytes": 138584458,
+    "retained_shard_files": 39,
+    "retained_state_snapshots": 2,
+    "retained_unique_generations": 3,
+    "superseded_generations": 2,
     "unactivated_activation_receipts": 0,
     "unactivated_generation_directories": 0,
     "unactivated_manifest_archives": 0

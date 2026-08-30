@@ -10,15 +10,15 @@
   },
   "clean_room_restore_mechanics_proven": true,
   "durable_public_origin_proven": false,
-  "generated_at": "2026-08-30T06:41:25.416088Z",
+  "generated_at": "2026-08-30T12:03:50.692078Z",
   "manifest": {
-    "bytes": 5902869836,
+    "bytes": 5902879469,
     "bytes_by_class": {
-      "native_text": 590193322,
+      "native_text": 590202955,
       "ocr_text": 14853,
       "raw_document": 5312661661
     },
-    "inventory_sha256": "d33d2791b021d075280869f98c95cd9fb2e5154d09dc8d0a8bcc23cd69f195f4",
+    "inventory_sha256": "65c0659b5a445098deaa6edabfa0d213c89d222c99514c9c4b36e9de4d1431ce",
     "max_object_bytes": 59735955,
     "objects_by_class": {
       "native_text": 119338,
@@ -27,12 +27,12 @@
     },
     "path": "real-document-origin-replicas.json",
     "rows": 240226,
-    "sha256": "83401a2eff6ad45a16e00e8b8352fe0f5430ad589e0064b9b431752c38705181"
+    "sha256": "12187efc092f50bc42f0c965b3dda5d1cb618702c4b128b715eb3c168fd7d443"
   },
   "next_action": "Repeat this exact full restore from an authorized immutable public origin. Filesystem-origin proof is local mechanics only, not durable recovery.",
   "performance": {
     "batch_size": 48,
-    "elapsed_seconds": 58.161139,
+    "elapsed_seconds": 53.381888,
     "workers": 12
   },
   "policy": {
@@ -43,13 +43,13 @@
   },
   "preflight": {
     "bounded_scratch_bytes": 716831460,
-    "free_bytes": 23853117440,
-    "headroom_bytes": 12398867740,
+    "free_bytes": 24283934720,
+    "headroom_bytes": 12829685020,
     "minimum_free_after_restore_bytes": 10737418240
   },
   "remote_publication_performed": false,
   "restored": {
-    "bytes": 5902869836,
+    "bytes": 5902879469,
     "objects": 240226,
     "objects_by_class": {
       "native_text": 119338,

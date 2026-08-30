@@ -545,20 +545,25 @@ scale_document_pipeline_evidence := env_var_or_default("SCALE_DOCUMENT_PIPELINE_
 scale_document_format_inventory := env_var_or_default("SCALE_DOCUMENT_FORMAT_INVENTORY", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-format-inventory.json")
 scale_pdf_ocr_routing_benchmark := env_var_or_default("SCALE_PDF_OCR_ROUTING_BENCHMARK", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/pdf-ocr-routing-benchmark.json")
 scale_document_workers := env_var_or_default("SCALE_DOCUMENT_WORKERS", "8")
-scale_document_text_state_db := env_var_or_default("SCALE_DOCUMENT_TEXT_STATE_DB", "etl/data/staging/real-document-text-corpus-v6-20260830.db")
-scale_document_ocr_state_db := env_var_or_default("SCALE_DOCUMENT_OCR_STATE_DB", "etl/data/staging/real-document-page-ocr-v8-20260830.db")
-scale_document_profile_state_db := env_var_or_default("SCALE_DOCUMENT_PROFILE_STATE_DB", "etl/data/staging/real-document-profile-v1-20260830.db")
+scale_document_text_state_db := env_var_or_default("SCALE_DOCUMENT_TEXT_STATE_DB", "etl/data/staging/real-document-text-corpus-v7-20260830.db")
+scale_document_ocr_state_db := env_var_or_default("SCALE_DOCUMENT_OCR_STATE_DB", "etl/data/staging/real-document-page-ocr-v9-20260830.db")
+scale_document_profile_state_db := env_var_or_default("SCALE_DOCUMENT_PROFILE_STATE_DB", "etl/data/staging/real-document-profile-v3-20260830.db")
 scale_document_profile_manifest := env_var_or_default("SCALE_DOCUMENT_PROFILE_MANIFEST", "etl/data/published/real-document-profile-manifest-latest.jsonl")
 scale_document_profile_report := env_var_or_default("SCALE_DOCUMENT_PROFILE_REPORT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-language-encryption-profile.json")
 scale_document_profile_validation := env_var_or_default("SCALE_DOCUMENT_PROFILE_VALIDATION", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-language-encryption-validation.json")
 scale_document_profile_generation_audit := env_var_or_default("SCALE_DOCUMENT_PROFILE_GENERATION_AUDIT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-profile-generation-audit.json")
-scale_document_origin_state_db := env_var_or_default("SCALE_DOCUMENT_ORIGIN_STATE_DB", "etl/data/staging/real-document-origin-replication-v1.db")
+scale_document_locator_state_db := env_var_or_default("SCALE_DOCUMENT_LOCATOR_STATE_DB", "etl/data/staging/real-document-text-locators-v2-20260830.db")
+scale_document_locator_manifest := env_var_or_default("SCALE_DOCUMENT_LOCATOR_MANIFEST", "etl/data/published/real-document-text-locator-manifest-latest.jsonl")
+scale_document_locator_report := env_var_or_default("SCALE_DOCUMENT_LOCATOR_REPORT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-locator-extraction.json")
+scale_document_locator_validation := env_var_or_default("SCALE_DOCUMENT_LOCATOR_VALIDATION", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-locator-validation.json")
+scale_document_locator_generation_audit := env_var_or_default("SCALE_DOCUMENT_LOCATOR_GENERATION_AUDIT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-locator-generation-audit.json")
+scale_document_origin_state_db := env_var_or_default("SCALE_DOCUMENT_ORIGIN_STATE_DB", "etl/data/staging/real-document-origin-replication-v2-20260830.db")
 scale_document_origin_filesystem_root := env_var_or_default("SCALE_DOCUMENT_ORIGIN_FILESYSTEM_ROOT", "etl/data/object-origin/real-document-corpus-v1")
 scale_document_origin_manifest := env_var_or_default("SCALE_DOCUMENT_ORIGIN_MANIFEST", "etl/data/manifests/real-document-origin-replicas.json")
 scale_document_origin_replication_report := env_var_or_default("SCALE_DOCUMENT_ORIGIN_REPLICATION_REPORT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-origin-replication.json")
 scale_document_origin_restore_report := env_var_or_default("SCALE_DOCUMENT_ORIGIN_RESTORE_REPORT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-origin-clean-restore.json")
 scale_document_origin_generation_audit := env_var_or_default("SCALE_DOCUMENT_ORIGIN_GENERATION_AUDIT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-origin-generation-audit.json")
-scale_document_pack_state_db := env_var_or_default("SCALE_DOCUMENT_PACK_STATE_DB", "etl/data/staging/real-document-origin-pack-v1.db")
+scale_document_pack_state_db := env_var_or_default("SCALE_DOCUMENT_PACK_STATE_DB", "etl/data/staging/real-document-origin-pack-v2-20260830.db")
 scale_document_pack_root := env_var_or_default("SCALE_DOCUMENT_PACK_ROOT", "etl/data/object-origin-packs/real-document-corpus-v1")
 scale_document_pack_manifest := env_var_or_default("SCALE_DOCUMENT_PACK_MANIFEST", "etl/data/manifests/real-document-origin-packs.json")
 scale_document_pack_report := env_var_or_default("SCALE_DOCUMENT_PACK_REPORT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-origin-packaging.json")
@@ -2482,10 +2487,10 @@ etl-scale-audit-document-page-ocr-generation:
   python3 scripts/audit_real_document_generation_lifecycle.py page_ocr --full-shard-check --full-state-check --enforce
 
 etl-scale-profile-document-language-encryption:
-  python3 scripts/classify_real_document_profiles.py --state-db {{scale_document_profile_state_db}} --manifest-out {{scale_document_profile_manifest}} --report-out {{scale_document_profile_report}} --workers {{scale_document_workers}} --claim-size 64 --sample-bytes 65536 --min-alpha-chars 200 --min-confidence 0.80 --min-margin 0.20 --enforce
+  docker compose run --rm --build etl "python3 scripts/classify_real_document_profiles.py --state-db {{scale_document_profile_state_db}} --manifest-out {{scale_document_profile_manifest}} --report-out {{scale_document_profile_report}} --workers {{scale_document_workers}} --claim-size 64 --sample-bytes 65536 --min-alpha-chars 200 --min-confidence 0.80 --min-margin 0.20 --enforce"
 
 etl-scale-validate-document-language-encryption:
-  python3 scripts/validate_real_document_profiles.py --profile-manifest {{scale_document_profile_manifest}} --profile-report {{scale_document_profile_report}} --report-out {{scale_document_profile_validation}} --workers {{scale_document_workers}} --batch-size 128 --enforce
+  docker compose run --rm --build etl "python3 scripts/validate_real_document_profiles.py --profile-manifest {{scale_document_profile_manifest}} --profile-report {{scale_document_profile_report}} --report-out {{scale_document_profile_validation}} --workers {{scale_document_workers}} --batch-size 128 --enforce"
 
 etl-scale-audit-document-profile-generation:
   python3 scripts/audit_real_document_generation_lifecycle.py document_profile --manifest {{scale_document_profile_manifest}} --report-out {{scale_document_profile_generation_audit}} --full-shard-check --full-state-check --enforce
@@ -2494,6 +2499,20 @@ etl-scale-document-language-encryption-profile:
   just etl-scale-profile-document-language-encryption
   just etl-scale-validate-document-language-encryption
   just etl-scale-audit-document-profile-generation
+
+etl-scale-locate-document-text:
+  python3 scripts/locate_real_document_text.py --state-db {{scale_document_locator_state_db}} --manifest-out {{scale_document_locator_manifest}} --report-out {{scale_document_locator_report}} --workers {{scale_document_workers}} --claim-size 64 --max-span-chars 8192 --enforce
+
+etl-scale-validate-document-text-locators:
+  python3 scripts/validate_real_document_text_locators.py --locator-manifest {{scale_document_locator_manifest}} --locator-report {{scale_document_locator_report}} --report-out {{scale_document_locator_validation}} --workers {{scale_document_workers}} --batch-size 128 --enforce
+
+etl-scale-audit-document-text-locator-generation:
+  python3 scripts/audit_real_document_generation_lifecycle.py native_text_locator --manifest {{scale_document_locator_manifest}} --report-out {{scale_document_locator_generation_audit}} --full-shard-check --full-state-check --enforce
+
+etl-scale-document-text-locators:
+  just etl-scale-locate-document-text
+  just etl-scale-validate-document-text-locators
+  just etl-scale-audit-document-text-locator-generation
 
 etl-scale-prepare-document-page-ocr-review:
   python3 scripts/prepare_real_document_ocr_review.py --sample-pages 40 --enforce
@@ -2544,6 +2563,7 @@ etl-scale-process-document-corpus:
   just etl-scale-extract-document-text-corpus
   just etl-scale-validate-document-text-corpus
   just etl-scale-audit-document-text-generation
+  just etl-scale-document-text-locators
   just etl-scale-ocr-document-pages
   just etl-scale-validate-document-page-ocr
   just etl-scale-audit-document-page-ocr-generation

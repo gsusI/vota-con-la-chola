@@ -19,13 +19,13 @@
     "ocr_text_error_samples": [],
     "source_document_error_samples": []
   },
-  "generated_at": "2026-08-30T05:52:13.463803Z",
+  "generated_at": "2026-08-30T11:11:41.590816Z",
   "inputs": {
     "native_manifest": {
       "bytes": 5423,
       "path": "etl/data/published/real-document-text-manifest-latest.jsonl",
       "rows": 122607,
-      "sha256": "fea6dc86110ad94c190133077d2271130652f30475f6f561ad0ab5ca98e25024"
+      "sha256": "e5e7aa2ec3d7f80d036885b2ff214da58b8ee9532dc647e5336cde1578a147a9"
     },
     "ocr_manifest": {
       "bytes": 1194,
@@ -34,9 +34,9 @@
       "sha256": "deb426b8928f336df15f256a5701bfe294add242bd0a9e688fbf31086fd97f67"
     },
     "ocr_report": {
-      "bytes": 4682,
+      "bytes": 4683,
       "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr.json",
-      "sha256": "e4e154bca88d004c5441f9ecaca646b6d3c9d6e7355711a999eac139b4ffd870"
+      "sha256": "252d09814fbd5ccf399bc4bbd0f9b08d138c925f867fe4545d92a78073b4b4f8"
     }
   },
   "next_action": "Human-review a stratified real-page sample by source, language, scan quality, and routing reason before analytical promotion.",

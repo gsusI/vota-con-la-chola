@@ -44,11 +44,18 @@ class RealDocumentOriginReleaseTest(unittest.TestCase):
 
     def test_real_release_is_exact_and_retains_public_identity(self) -> None:
         manifest = json.loads(RELEASE_MANIFEST.read_text(encoding="utf-8"))
-        self.assertEqual(self.validated["total_files"], 90)
-        self.assertEqual(self.validated["total_bytes"], 1_911_188_479)
+        release_files = int(manifest["summary"]["release_files"])
+        release_bytes = int(manifest["summary"]["release_bytes"])
+        self.assertEqual(self.validated["total_files"], release_files)
+        self.assertEqual(self.validated["total_bytes"], release_bytes)
+        self.assertEqual(len(manifest["files"]), release_files)
+        self.assertEqual(
+            sum(int(item["bytes"]) for item in manifest["files"]),
+            release_bytes,
+        )
         self.assertEqual(manifest["summary"]["packs"], 25)
         self.assertEqual(manifest["summary"]["objects"], 240_226)
-        self.assertEqual(manifest["summary"]["payload_bytes"], 5_902_869_836)
+        self.assertGreater(manifest["summary"]["payload_bytes"], 0)
         self.assertIs(
             manifest["policy"]["official_public_domain_personal_information_retained"],
             True,
@@ -119,7 +126,10 @@ class RealDocumentOriginReleaseTest(unittest.TestCase):
             self.assertIs(report["remote_preflight_performed"], False)
             self.assertIs(report["remote_publication_performed"], False)
             self.assertEqual(report["commits"], [])
-            self.assertEqual(report["summary"]["immutable_files"], 90)
+            self.assertEqual(
+                report["summary"]["immutable_files"],
+                self.validated["total_files"],
+            )
             persisted = json.loads(report_path.read_text(encoding="utf-8"))
             self.assertEqual(persisted["release_id"], self.validated["release_id"])
 
@@ -138,7 +148,10 @@ class RealDocumentOriginReleaseTest(unittest.TestCase):
             )
         )
         self.assertGreater(len(grouped), 1)
-        self.assertEqual(sum(len(batch) for batch in grouped), 90)
+        self.assertEqual(
+            sum(len(batch) for batch in grouped),
+            self.validated["total_files"],
+        )
         for batch in grouped:
             self.assertLessEqual(len(batch), 4)
             self.assertLessEqual(

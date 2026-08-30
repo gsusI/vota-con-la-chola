@@ -66,7 +66,7 @@
     "profile_algorithm_version": "document_profile_v2",
     "sample_bytes": 65536
   },
-  "generated_at": "2026-08-30T10:12:42.637266Z",
+  "generated_at": "2026-08-30T11:37:22.896209Z",
   "inputs": {
     "inventory": {
       "bytes": 82987794,
@@ -76,47 +76,47 @@
     "native_manifest": {
       "bytes": 5423,
       "path": "etl/data/published/real-document-text-manifest-latest.jsonl",
-      "sha256": "fea6dc86110ad94c190133077d2271130652f30475f6f561ad0ab5ca98e25024"
+      "sha256": "e5e7aa2ec3d7f80d036885b2ff214da58b8ee9532dc647e5336cde1578a147a9"
     }
   },
   "manifest": {
     "bytes": 5626,
-    "compressed_bytes": 15506428,
-    "logical_sha256": "7a40cfdbe0e11fac4c93362305815014ea445642537c7e4d7d83b4154d72e4b3",
+    "compressed_bytes": 15506431,
+    "logical_sha256": "18c2c47fcc46900e51a1d24ac26147e24030760505ec57a96393c02594924705",
     "path": "etl/data/published/real-document-profile-manifest-latest.jsonl",
     "publication": {
       "activated": true,
-      "active_history_path": "real-document-profile-manifest-latest-history/1b5d0902ece3855e0730ab88efc99de9d989bb1a1204c6540ebad2d96e4e53ec.json",
-      "active_logical_sha256": "7a40cfdbe0e11fac4c93362305815014ea445642537c7e4d7d83b4154d72e4b3",
-      "active_manifest_sha256": "1b5d0902ece3855e0730ab88efc99de9d989bb1a1204c6540ebad2d96e4e53ec",
-      "active_receipt_path": "real-document-profile-manifest-latest-receipts/1b5d0902ece3855e0730ab88efc99de9d989bb1a1204c6540ebad2d96e4e53ec.json",
+      "active_history_path": "real-document-profile-manifest-latest-history/4dfeba473b16789a1e058567ec4f29ff3b2eff30925bbf753752947b3d2bc96b.json",
+      "active_logical_sha256": "18c2c47fcc46900e51a1d24ac26147e24030760505ec57a96393c02594924705",
+      "active_manifest_sha256": "4dfeba473b16789a1e058567ec4f29ff3b2eff30925bbf753752947b3d2bc96b",
+      "active_receipt_path": "real-document-profile-manifest-latest-receipts/4dfeba473b16789a1e058567ec4f29ff3b2eff30925bbf753752947b3d2bc96b.json",
       "automatic_deletion_performed": false,
       "legacy_equivalent_jsonl_migrated": false,
       "live_index_changed": true,
       "live_index_switched_last": true,
-      "predecessor_manifest_sha256": "4b6b90feca7f0e27d0a18d8d0520eb3b0044b392cebbdcc7cd25290cd7fd283b",
+      "predecessor_manifest_sha256": "1b5d0902ece3855e0730ab88efc99de9d989bb1a1204c6540ebad2d96e4e53ec",
       "state_snapshot": {
-        "bytes": 193093632,
-        "compressed_bytes": 46777761,
-        "compressed_sha256": "c9789e842d45a762735f6526ab79d88f38e373388046cc8ee7692eaaf697ef94",
-        "path": "real-document-profile-manifest-latest-state/186662d82543b90318b50a764c762b595526c11fdfe4969fc60d4c148b6c0f9a.sqlite.gz",
-        "sha256": "186662d82543b90318b50a764c762b595526c11fdfe4969fc60d4c148b6c0f9a",
+        "bytes": 190431232,
+        "compressed_bytes": 45028936,
+        "compressed_sha256": "d7ce9fd81881a3ca34fc74a5c419bcfb09096706876b94572c37d13f291a9d30",
+        "path": "real-document-profile-manifest-latest-state/cb6f3bdc96a1fce5e91a5373c77a89a52c0c02f336616bb1d8ade08ab23d2dca.sqlite.gz",
+        "sha256": "cb6f3bdc96a1fce5e91a5373c77a89a52c0c02f336616bb1d8ade08ab23d2dca",
         "sqlite_quick_check": "ok"
       },
       "superseded_predecessor": true
     },
     "rows": 122607,
-    "sha256": "1b5d0902ece3855e0730ab88efc99de9d989bb1a1204c6540ebad2d96e4e53ec",
+    "sha256": "4dfeba473b16789a1e058567ec4f29ff3b2eff30925bbf753752947b3d2bc96b",
     "shard_files": 13,
-    "uncompressed_bytes": 170181264
+    "uncompressed_bytes": 170181267
   },
   "next_action": "Run the independent full-row/full-byte validator, then use the versioned machine-language/encryption distribution as an input to DEC-01. Treat every machine-only language label as an unreviewed candidate; human review remains required before language-quality promotion.",
   "performance": {
-    "cpu_seconds": 4.362463,
-    "elapsed_seconds": 4.612268,
-    "objects_per_second": 0.0,
-    "peak_rss_bytes_child_max": 0,
-    "peak_rss_bytes_self": 48119808
+    "cpu_seconds": 18838.562203,
+    "elapsed_seconds": 1247.586226,
+    "objects_per_second": 96.792508,
+    "peak_rss_bytes_child_max": 406048768,
+    "peak_rss_bytes_self": 406048768
   },
   "policy": {
     "all_language_profiles_are_explicitly_unreviewed": true,
@@ -132,7 +132,8 @@
   },
   "run": {
     "expired_leases_reclaimed": 0,
-    "processed": 0
+    "processed": 120757,
+    "succeeded": 120757
   },
   "schema_version": "real_document_language_encryption_profile_v2",
   "seed": {
@@ -140,7 +141,7 @@
     "file_instances": 122607
   },
   "state": {
-    "database": "etl/data/staging/real-document-profile-v1-20260830.db",
+    "database": "etl/data/staging/real-document-profile-v3-20260830.db",
     "state_counts": {
       "succeeded": 120757
     }

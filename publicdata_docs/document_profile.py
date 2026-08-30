@@ -90,6 +90,17 @@ def _language_detector() -> Any:
     return detector
 
 
+def validate_profile_runtime() -> dict[str, str]:
+    """Fail before queue mutation when the pinned language runtime is unavailable."""
+
+    _language_detector()
+    return {
+        "language_model": LANGUAGE_MODEL,
+        "language_model_version": LANGUAGE_MODEL_VERSION,
+        "profile_algorithm_version": PROFILE_ALGORITHM_VERSION,
+    }
+
+
 def read_verified_text_sample(
     path: Path,
     *,

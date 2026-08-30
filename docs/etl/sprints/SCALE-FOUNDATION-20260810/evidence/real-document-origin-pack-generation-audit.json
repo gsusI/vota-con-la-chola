@@ -1,5 +1,6 @@
 {
   "activation_chain": [
+    "4272785719f81aca761ba2b86f141a8ddbc63b99baeaf19437b83ea842390179",
     "56268796b95daa049741c58c7b243a6c7c6f5e7ddd2245f6135fa6e4d5013b30"
   ],
   "checks": {
@@ -19,12 +20,12 @@
     "retained_state_snapshots_checked_to_requested_depth": true
   },
   "dataset": "real_document_origin_packs",
-  "generated_at": "2026-08-30T07:12:17.975353+00:00",
+  "generated_at": "2026-08-30T12:06:29.983301+00:00",
   "input": {
     "bytes": 1198,
-    "logical_sha256": "5c09d00de345dcdec3772c2c9c7a0d927bb484afb68dfc51f889e981a329eb84",
+    "logical_sha256": "675d85b01befaf846e86ce4fb4a71a4e40e4742e45a4cb3da4b540b774c65ce2",
     "path": "etl/data/manifests/real-document-origin-packs.json",
-    "sha256": "56268796b95daa049741c58c7b243a6c7c6f5e7ddd2245f6135fa6e4d5013b30"
+    "sha256": "4272785719f81aca761ba2b86f141a8ddbc63b99baeaf19437b83ea842390179"
   },
   "mode": {
     "full_shard_check": true,
@@ -48,19 +49,19 @@
   "schema_version": "real_document_generation_lifecycle_audit_v1",
   "status": "ok",
   "totals": {
-    "activation_chain_manifests": 1,
-    "activation_receipts": 1,
+    "activation_chain_manifests": 2,
+    "activation_receipts": 2,
     "automatic_deletions": 0,
     "interrupted_staging_directories": 0,
-    "manifest_archives": 1,
+    "manifest_archives": 2,
     "orphan_generation_directories": 0,
     "orphan_state_snapshots": 0,
-    "retained_compressed_manifest_bytes": 6343,
-    "retained_compressed_state_bytes": 23435797,
-    "retained_shard_files": 1,
-    "retained_state_snapshots": 1,
-    "retained_unique_generations": 1,
-    "superseded_generations": 0,
+    "retained_compressed_manifest_bytes": 12689,
+    "retained_compressed_state_bytes": 46871131,
+    "retained_shard_files": 2,
+    "retained_state_snapshots": 2,
+    "retained_unique_generations": 2,
+    "superseded_generations": 1,
     "unactivated_activation_receipts": 0,
     "unactivated_generation_directories": 0,
     "unactivated_manifest_archives": 0

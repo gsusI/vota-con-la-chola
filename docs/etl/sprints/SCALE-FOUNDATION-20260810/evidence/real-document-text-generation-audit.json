@@ -1,5 +1,6 @@
 {
   "activation_chain": [
+    "e5e7aa2ec3d7f80d036885b2ff214da58b8ee9532dc647e5336cde1578a147a9",
     "fea6dc86110ad94c190133077d2271130652f30475f6f561ad0ab5ca98e25024"
   ],
   "checks": {
@@ -19,12 +20,12 @@
     "retained_state_snapshots_checked_to_requested_depth": true
   },
   "dataset": "native_text",
-  "generated_at": "2026-08-30T05:49:12.492736+00:00",
+  "generated_at": "2026-08-30T11:58:43.175909+00:00",
   "input": {
     "bytes": 5423,
-    "logical_sha256": "2a78979fec348f5ac5bcf9c9acab82df784d7241e4d10da22a098bb0fe88ffb2",
+    "logical_sha256": "2b022ccb276e3f9b8829673e747daf5bea9c0f6f4b50ad20d12d0cf41a2805c6",
     "path": "etl/data/published/real-document-text-manifest-latest.jsonl",
-    "sha256": "fea6dc86110ad94c190133077d2271130652f30475f6f561ad0ab5ca98e25024"
+    "sha256": "e5e7aa2ec3d7f80d036885b2ff214da58b8ee9532dc647e5336cde1578a147a9"
   },
   "mode": {
     "full_shard_check": true,
@@ -48,19 +49,19 @@
   "schema_version": "real_document_generation_lifecycle_audit_v1",
   "status": "ok",
   "totals": {
-    "activation_chain_manifests": 1,
-    "activation_receipts": 1,
+    "activation_chain_manifests": 2,
+    "activation_receipts": 2,
     "automatic_deletions": 0,
     "interrupted_staging_directories": 0,
-    "manifest_archives": 1,
+    "manifest_archives": 2,
     "orphan_generation_directories": 0,
     "orphan_state_snapshots": 0,
-    "retained_compressed_manifest_bytes": 13729285,
-    "retained_compressed_state_bytes": 40150145,
-    "retained_shard_files": 13,
-    "retained_state_snapshots": 1,
-    "retained_unique_generations": 1,
-    "superseded_generations": 0,
+    "retained_compressed_manifest_bytes": 27430694,
+    "retained_compressed_state_bytes": 80271384,
+    "retained_shard_files": 26,
+    "retained_state_snapshots": 2,
+    "retained_unique_generations": 2,
+    "superseded_generations": 1,
     "unactivated_activation_receipts": 0,
     "unactivated_generation_directories": 0,
     "unactivated_manifest_archives": 0

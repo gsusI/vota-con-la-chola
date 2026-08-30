@@ -35,6 +35,7 @@ from publicdata_docs.document_profile import (
     profile_document_content,
     safe_child,
     sha256_path,
+    validate_profile_runtime,
 )
 from publicdata_docs.generation_manifest import (
     GenerationManifestError,
@@ -996,6 +997,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         raise ProfileRunError("inventory/native manifest is missing")
     if int(args.workers) < 1 or int(args.claim_size) < 1:
         raise ProfileRunError("workers and claim-size must be positive")
+    validate_profile_runtime()
     start = time.monotonic()
     conn = open_state(state_db)
     try:

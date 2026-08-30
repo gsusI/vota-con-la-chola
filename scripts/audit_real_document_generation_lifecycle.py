@@ -26,6 +26,9 @@ MANIFESTS = {
     "document_profile": Path(
         "etl/data/published/real-document-profile-manifest-latest.jsonl"
     ),
+    "native_text_locator": Path(
+        "etl/data/published/real-document-text-locator-manifest-latest.jsonl"
+    ),
     "real_document_origin_replicas": Path(
         "etl/data/manifests/real-document-origin-replicas.json"
     ),
@@ -37,6 +40,7 @@ REPORT_NAMES = {
     "native_text": "real-document-text-generation-audit.json",
     "page_ocr": "real-document-page-ocr-generation-audit.json",
     "document_profile": "real-document-profile-generation-audit.json",
+    "native_text_locator": "real-document-text-locator-generation-audit.json",
     "real_document_origin_replicas": "real-document-origin-generation-audit.json",
     "real_document_origin_packs": "real-document-origin-pack-generation-audit.json",
 }

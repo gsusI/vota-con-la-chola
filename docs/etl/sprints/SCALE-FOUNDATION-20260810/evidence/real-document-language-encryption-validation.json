@@ -20,23 +20,23 @@
     "sample_bytes": 65536
   },
   "failure_samples": [],
-  "generated_at": "2026-08-30T10:19:47.011274Z",
+  "generated_at": "2026-08-30T11:57:14.834653Z",
   "inputs": {
     "native_manifest": {
       "bytes": 5423,
       "path": "etl/data/published/real-document-text-manifest-latest.jsonl",
-      "sha256": "fea6dc86110ad94c190133077d2271130652f30475f6f561ad0ab5ca98e25024"
+      "sha256": "e5e7aa2ec3d7f80d036885b2ff214da58b8ee9532dc647e5336cde1578a147a9"
     },
     "profile_manifest": {
       "bytes": 5626,
-      "logical_sha256": "7a40cfdbe0e11fac4c93362305815014ea445642537c7e4d7d83b4154d72e4b3",
+      "logical_sha256": "18c2c47fcc46900e51a1d24ac26147e24030760505ec57a96393c02594924705",
       "path": "etl/data/published/real-document-profile-manifest-latest.jsonl",
-      "sha256": "1b5d0902ece3855e0730ab88efc99de9d989bb1a1204c6540ebad2d96e4e53ec"
+      "sha256": "4dfeba473b16789a1e058567ec4f29ff3b2eff30925bbf753752947b3d2bc96b"
     },
     "profile_report": {
-      "bytes": 5997,
+      "bytes": 6049,
       "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-language-encryption-profile.json",
-      "sha256": "2dbc451026e3d83d291846156c8d03a0877c2b18226d18b984f3ba205d46c216"
+      "sha256": "35fd40ce23b5adac64eabf26489400c9dc3351630b5492d2d12f8fafc7a00442"
     }
   },
   "mode": {
@@ -48,11 +48,11 @@
   },
   "next_action": "Bind this independent validation and the generation lifecycle audit into central readiness, then use explicit language/encryption strata in DEC-01.",
   "performance": {
-    "cpu_seconds": 980.393317,
-    "elapsed_seconds": 405.784859,
-    "objects_per_second": 297.588728,
-    "peak_rss_bytes_child_max": 51937280,
-    "peak_rss_bytes_self": 414760960
+    "cpu_seconds": 18180.900775000002,
+    "elapsed_seconds": 1187.177238,
+    "objects_per_second": 101.717752,
+    "peak_rss_bytes_child_max": 402051072,
+    "peak_rss_bytes_self": 402051072
   },
   "policy": {
     "machine_language_candidates_are_explicitly_unreviewed": true,

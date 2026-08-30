@@ -52,10 +52,16 @@ class ObstructionTrackerSnapshotTests(unittest.TestCase):
             sum(source["incident_count"] for source in self.payload["blocked_sources"]),
             len(open_incidents),
         )
+        readiness = self.payload["scale_readiness"]
+        self.assertEqual(readiness["status"], "not_ready")
+        self.assertIs(readiness["foundation"]["ready"], False)
         self.assertEqual(
-            self.payload["scale_readiness"]["summary"]["registered_real_corpora"],
-            len(self.payload["scale_readiness"]["corpora"]),
+            readiness["failure"]["reason"],
+            "BOE document corpus checks failed",
         )
+        self.assertEqual(readiness["summary"], {})
+        self.assertEqual(readiness["corpora"], [])
+        self.assertEqual(readiness["gaps"], [])
 
     def test_evidence_references_resolve_to_real_repository_files(self) -> None:
         references = {

@@ -156,8 +156,21 @@ def validate_scale_readiness(readiness: Any, errors: list[str]) -> None:
     summary = readiness.get("summary") or {}
     corpora = readiness.get("corpora") or []
     gaps = readiness.get("gaps") or []
-    if not safe_text(readiness.get("status")):
+    status = safe_text(readiness.get("status"))
+    if not status:
         errors.append("scale_readiness.status is required")
+    if status == "not_ready":
+        foundation = readiness.get("foundation") or {}
+        failure = readiness.get("failure") or {}
+        if foundation.get("ready") is not False:
+            errors.append("scale_readiness not_ready requires foundation.ready=false")
+        if not safe_text(failure.get("kind")) or not safe_text(failure.get("reason")):
+            errors.append("scale_readiness not_ready requires an exact failure")
+        if summary or corpora or gaps:
+            errors.append(
+                "scale_readiness validation failure cannot expose unvalidated summary rows"
+            )
+        return
     if integer(summary.get("registered_real_corpora")) != len(corpora):
         errors.append("scale_readiness registered_real_corpora does not match corpora")
     validated = sum(1 for corpus in corpora if safe_text(corpus.get("status")).startswith("validated_real"))
