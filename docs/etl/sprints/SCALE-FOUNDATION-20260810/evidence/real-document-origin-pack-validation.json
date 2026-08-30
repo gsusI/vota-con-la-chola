@@ -1,0 +1,44 @@
+{
+  "checks": {
+    "all_members_restored_and_rehashed": true,
+    "all_pack_artifacts_rehashed": true,
+    "no_remote_publication_or_restore_claimed": true,
+    "no_synthetic_or_mock_records": true,
+    "official_public_domain_personal_information_retained": true,
+    "source_origin_generation_single_and_exact": true
+  },
+  "durable_public_origin_proven": false,
+  "generated_at": "2026-08-30T07:12:32.085770Z",
+  "manifest": {
+    "path": "real-document-origin-packs.json",
+    "sha256": "56268796b95daa049741c58c7b243a6c7c6f5e7ddd2245f6135fa6e4d5013b30"
+  },
+  "next_action": "After explicit release authority, upload these immutable packs and exact control artifacts without deletion, then repeat full verification from an independent clean machine.",
+  "performance": {
+    "elapsed_seconds": 14.348405,
+    "max_object_bytes": 2147483648
+  },
+  "policy": {
+    "every_packed_object_fully_rehashed": true,
+    "immutable_publication_package_only": true,
+    "official_public_domain_personal_information_retained": true,
+    "synthetic_or_mock_records_counted": false
+  },
+  "remote_publication_performed": false,
+  "remote_restore_proven": false,
+  "schema_version": "real_document_origin_pack_validation_v1",
+  "status": "ok",
+  "verified": {
+    "archive_bytes": 1793094983,
+    "member_manifest_bytes": 17893134,
+    "objects": 240226,
+    "objects_by_class": {
+      "native_text": 119338,
+      "ocr_text": 131,
+      "raw_document": 120757
+    },
+    "packs": 25,
+    "payload_bytes": 5902869836,
+    "source_origin_manifest_sha256": "83401a2eff6ad45a16e00e8b8352fe0f5430ad589e0064b9b431752c38705181"
+  }
+}

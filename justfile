@@ -553,6 +553,12 @@ scale_document_origin_manifest := env_var_or_default("SCALE_DOCUMENT_ORIGIN_MANI
 scale_document_origin_replication_report := env_var_or_default("SCALE_DOCUMENT_ORIGIN_REPLICATION_REPORT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-origin-replication.json")
 scale_document_origin_restore_report := env_var_or_default("SCALE_DOCUMENT_ORIGIN_RESTORE_REPORT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-origin-clean-restore.json")
 scale_document_origin_generation_audit := env_var_or_default("SCALE_DOCUMENT_ORIGIN_GENERATION_AUDIT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-origin-generation-audit.json")
+scale_document_pack_state_db := env_var_or_default("SCALE_DOCUMENT_PACK_STATE_DB", "etl/data/staging/real-document-origin-pack-v1.db")
+scale_document_pack_root := env_var_or_default("SCALE_DOCUMENT_PACK_ROOT", "etl/data/object-origin-packs/real-document-corpus-v1")
+scale_document_pack_manifest := env_var_or_default("SCALE_DOCUMENT_PACK_MANIFEST", "etl/data/manifests/real-document-origin-packs.json")
+scale_document_pack_report := env_var_or_default("SCALE_DOCUMENT_PACK_REPORT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-origin-packaging.json")
+scale_document_pack_validation := env_var_or_default("SCALE_DOCUMENT_PACK_VALIDATION", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-origin-pack-validation.json")
+scale_document_pack_generation_audit := env_var_or_default("SCALE_DOCUMENT_PACK_GENERATION_AUDIT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-origin-pack-generation-audit.json")
 wayback_document_timeout := env_var_or_default("WAYBACK_DOCUMENT_TIMEOUT", "30")
 wayback_document_attempts := env_var_or_default("WAYBACK_DOCUMENT_ATTEMPTS", "2")
 wayback_document_args := env_var_or_default("WAYBACK_DOCUMENT_ARGS", "")
@@ -2479,6 +2485,15 @@ etl-scale-restore-document-origin-local:
 
 etl-scale-audit-document-origin-generation:
   python3 scripts/audit_real_document_generation_lifecycle.py real_document_origin_replicas --manifest {{scale_document_origin_manifest}} --report-out {{scale_document_origin_generation_audit}} --full-shard-check --full-state-check --enforce
+
+etl-scale-pack-document-origin:
+  python3 scripts/pack_real_document_origin.py --origin-manifest {{scale_document_origin_manifest}} --origin-root {{scale_document_origin_filesystem_root}} --state-db {{scale_document_pack_state_db}} --pack-root {{scale_document_pack_root}} --manifest-out {{scale_document_pack_manifest}} --report-out {{scale_document_pack_report}} --workers 2 --max-objects-per-pack 10000 --max-payload-bytes-per-pack 469762048 --enforce
+
+etl-scale-validate-document-origin-packs:
+  python3 scripts/verify_real_document_origin_packs.py --manifest {{scale_document_pack_manifest}} --pack-root {{scale_document_pack_root}} --report-out {{scale_document_pack_validation}} --enforce
+
+etl-scale-audit-document-origin-pack-generation:
+  python3 scripts/audit_real_document_generation_lifecycle.py real_document_origin_packs --manifest {{scale_document_pack_manifest}} --report-out {{scale_document_pack_generation_audit}} --full-shard-check --full-state-check --enforce
 
 etl-scale-require-document-page-ocr-review:
   python3 scripts/validate_real_document_ocr_review.py --enforce-integrity --require-complete

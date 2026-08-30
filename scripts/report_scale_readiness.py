@@ -615,6 +615,9 @@ def audit_document_provenance_gap(
         "local_origin_replication",
         "local_origin_generation_audit",
         "local_origin_clean_restore",
+        "local_origin_packaging",
+        "local_origin_pack_validation",
+        "local_origin_pack_generation_audit",
         "ocr_review",
         "ocr_review_validation",
         "fetch_cohort",
@@ -655,6 +658,9 @@ def audit_document_provenance_gap(
     local_origin_replication = payloads["local_origin_replication"]
     local_origin_generation_audit = payloads["local_origin_generation_audit"]
     local_origin_clean_restore = payloads["local_origin_clean_restore"]
+    local_origin_packaging = payloads["local_origin_packaging"]
+    local_origin_pack_validation = payloads["local_origin_pack_validation"]
+    local_origin_pack_generation_audit = payloads["local_origin_pack_generation_audit"]
     ocr_review = payloads["ocr_review"]
     ocr_review_validation = payloads["ocr_review_validation"]
     fetch_cohort = payloads["fetch_cohort"]
@@ -753,6 +759,18 @@ def audit_document_provenance_gap(
             "real_document_origin_clean_restore_v1",
             {"ok"},
         ),
+        "local_origin_packaging": (
+            "real_document_origin_packaging_v1",
+            {"ok"},
+        ),
+        "local_origin_pack_validation": (
+            "real_document_origin_pack_validation_v1",
+            {"ok"},
+        ),
+        "local_origin_pack_generation_audit": (
+            "real_document_generation_lifecycle_audit_v1",
+            {"ok"},
+        ),
         "ocr_review": (
             "real_document_page_ocr_human_review_queue_v1",
             {"ready_for_human_review"},
@@ -796,6 +814,12 @@ def audit_document_provenance_gap(
             local_origin_generation_audit,
             "real_document_origin_replicas",
             local_origin_replication,
+        ),
+        (
+            "local_origin_pack_generation_audit",
+            local_origin_pack_generation_audit,
+            "real_document_origin_packs",
+            local_origin_packaging,
         ),
     ):
         lifecycle_input = payload.get("input") or {}
@@ -866,6 +890,40 @@ def audit_document_provenance_gap(
         or restored.get("bytes") != restore_manifest.get("bytes")
     ):
         raise ReadinessError("document local origin and clean-restore contract failed")
+
+    pack_plan = local_origin_packaging.get("plan") or {}
+    pack_states = local_origin_packaging.get("state_counts") or {}
+    pack_packed = local_origin_packaging.get("packed") or {}
+    pack_manifest = local_origin_packaging.get("manifest") or {}
+    pack_validation_manifest = local_origin_pack_validation.get("manifest") or {}
+    pack_verified = local_origin_pack_validation.get("verified") or {}
+    if (
+        local_origin_packaging.get("durable_public_origin_proven") is not False
+        or local_origin_packaging.get("remote_publication_performed") is not False
+        or pack_plan.get("objects") != sum(expected_origin_classes.values())
+        or pack_plan.get("payload_bytes") != restore_manifest.get("bytes")
+        or pack_plan.get("packs") != 25
+        or int(pack_plan.get("max_objects") or 0) > 10_000
+        or int(pack_plan.get("max_payload_bytes") or 0) > 448 * 1024 * 1024
+        or pack_states != {"succeeded": pack_plan.get("packs")}
+        or pack_manifest.get("rows") != pack_plan.get("packs")
+        or (local_origin_packaging.get("inputs") or {}).get("origin_manifest_sha256")
+        != origin_manifest.get("sha256")
+        or local_origin_pack_validation.get("durable_public_origin_proven") is not False
+        or local_origin_pack_validation.get("remote_restore_proven") is not False
+        or local_origin_pack_validation.get("remote_publication_performed") is not False
+        or pack_validation_manifest.get("sha256") != pack_manifest.get("sha256")
+        or pack_verified.get("packs") != pack_plan.get("packs")
+        or pack_verified.get("objects") != pack_plan.get("objects")
+        or pack_verified.get("payload_bytes") != pack_plan.get("payload_bytes")
+        or pack_verified.get("archive_bytes") != pack_packed.get("archive_bytes")
+        or pack_verified.get("member_manifest_bytes")
+        != pack_packed.get("member_manifest_bytes")
+        or pack_verified.get("objects_by_class") != expected_origin_classes
+        or pack_verified.get("source_origin_manifest_sha256")
+        != origin_manifest.get("sha256")
+    ):
+        raise ReadinessError("document immutable local pack contract failed")
 
     fetch_policy = fetch_cohort.get("policy") or {}
     fetch_run_totals = fetch_run.get("totals") or {}

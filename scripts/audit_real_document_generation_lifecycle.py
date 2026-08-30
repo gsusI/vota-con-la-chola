@@ -26,11 +26,15 @@ MANIFESTS = {
     "real_document_origin_replicas": Path(
         "etl/data/manifests/real-document-origin-replicas.json"
     ),
+    "real_document_origin_packs": Path(
+        "etl/data/manifests/real-document-origin-packs.json"
+    ),
 }
 REPORT_NAMES = {
     "native_text": "real-document-text-generation-audit.json",
     "page_ocr": "real-document-page-ocr-generation-audit.json",
     "real_document_origin_replicas": "real-document-origin-generation-audit.json",
+    "real_document_origin_packs": "real-document-origin-pack-generation-audit.json",
 }
 
 

@@ -1,0 +1,91 @@
+{
+  "checks": {
+    "all_packs_terminal_success": true,
+    "bounded_pack_manifest_activated": true,
+    "exact_real_origin_generation_bound": true,
+    "no_remote_publication_claimed": true,
+    "no_synthetic_or_mock_records": true,
+    "official_public_domain_personal_information_retained": true,
+    "pack_payload_ceiling_respected": true,
+    "pack_row_ceiling_respected": true
+  },
+  "durable_public_origin_proven": false,
+  "generated_at": "2026-08-30T07:12:10.265561Z",
+  "inputs": {
+    "max_objects_per_pack": "10000",
+    "max_payload_bytes_per_pack": "469762048",
+    "origin_manifest_sha256": "83401a2eff6ad45a16e00e8b8352fe0f5430ad589e0064b9b431752c38705181",
+    "origin_root_contract": "etl/data/object-origin/real-document-corpus-v1"
+  },
+  "manifest": {
+    "bytes": 1198,
+    "compressed_bytes": 6343,
+    "logical_sha256": "5c09d00de345dcdec3772c2c9c7a0d927bb484afb68dfc51f889e981a329eb84",
+    "path": "etl/data/manifests/real-document-origin-packs.json",
+    "publication": {
+      "activated": true,
+      "active_history_path": "real-document-origin-packs-history/56268796b95daa049741c58c7b243a6c7c6f5e7ddd2245f6135fa6e4d5013b30.json",
+      "active_logical_sha256": "5c09d00de345dcdec3772c2c9c7a0d927bb484afb68dfc51f889e981a329eb84",
+      "active_manifest_sha256": "56268796b95daa049741c58c7b243a6c7c6f5e7ddd2245f6135fa6e4d5013b30",
+      "active_receipt_path": "real-document-origin-packs-receipts/56268796b95daa049741c58c7b243a6c7c6f5e7ddd2245f6135fa6e4d5013b30.json",
+      "automatic_deletion_performed": false,
+      "legacy_equivalent_jsonl_migrated": false,
+      "live_index_changed": true,
+      "live_index_switched_last": true,
+      "predecessor_manifest_sha256": null,
+      "state_snapshot": {
+        "bytes": 97771520,
+        "compressed_bytes": 23435797,
+        "compressed_sha256": "9cc7c97903b23674b827f84ba398a869d2d227a6a77e4414305898eaeb1f8d48",
+        "path": "real-document-origin-packs-state/b72db54cb94a91139b67ccb4132ba799e1c2b10308cf5f56e9ac271218b8b5d3.sqlite.gz",
+        "sha256": "b72db54cb94a91139b67ccb4132ba799e1c2b10308cf5f56e9ac271218b8b5d3",
+        "sqlite_quick_check": "ok"
+      },
+      "superseded_predecessor": false
+    },
+    "rows": 25,
+    "sha256": "56268796b95daa049741c58c7b243a6c7c6f5e7ddd2245f6135fa6e4d5013b30",
+    "shard_files": 1,
+    "uncompressed_bytes": 26376
+  },
+  "next_action": "Run the full independent pack verifier. After explicit release authority, publish the immutable pack generation to a public origin without delete operations, then restore and rehash it from an independent clean machine.",
+  "packed": {
+    "archive_bytes": 1793094983,
+    "member_manifest_bytes": 17893134
+  },
+  "performance": {
+    "elapsed_seconds": 112.569414,
+    "gzip_level": 6,
+    "workers": 2
+  },
+  "plan": {
+    "max_objects": 10000,
+    "max_payload_bytes": 469745048,
+    "objects": 240226,
+    "packs": 25,
+    "payload_bytes": 5902869836
+  },
+  "policy": {
+    "automatic_deletion_forbidden": true,
+    "deterministic_archives": true,
+    "exact_origin_generation_bound": true,
+    "immutable_publication_package_only": true,
+    "official_public_domain_personal_information_retained": true,
+    "pack_rows_and_payload_bytes_bounded": true,
+    "remote_restore_not_yet_proven": true,
+    "synthetic_or_mock_records_counted": false,
+    "terminal_only_manifest_activation": true
+  },
+  "remote_publication_performed": false,
+  "run": {
+    "attempted": 25,
+    "failed": 0,
+    "reclaimed_expired_leases": 0,
+    "succeeded": 25
+  },
+  "schema_version": "real_document_origin_packaging_v1",
+  "state_counts": {
+    "succeeded": 25
+  },
+  "status": "ok"
+}

@@ -1,0 +1,68 @@
+{
+  "activation_chain": [
+    "56268796b95daa049741c58c7b243a6c7c6f5e7ddd2245f6135fa6e4d5013b30"
+  ],
+  "checks": {
+    "activation_receipt_chain_complete": true,
+    "active_manifest_archived_exactly": true,
+    "automatic_deletion_forbidden_and_not_performed": true,
+    "no_interrupted_staging_directories": true,
+    "no_orphan_generation_directories": true,
+    "no_orphan_state_snapshots": true,
+    "no_synthetic_or_mock_rows": true,
+    "no_unactivated_activation_receipts": true,
+    "no_unactivated_generation_directories": true,
+    "no_unactivated_manifest_archives": true,
+    "official_public_information_retained": true,
+    "retained_manifest_contracts_valid": true,
+    "retained_shards_checked_to_requested_depth": true,
+    "retained_state_snapshots_checked_to_requested_depth": true
+  },
+  "dataset": "real_document_origin_packs",
+  "generated_at": "2026-08-30T07:12:17.975353+00:00",
+  "input": {
+    "bytes": 1198,
+    "logical_sha256": "5c09d00de345dcdec3772c2c9c7a0d927bb484afb68dfc51f889e981a329eb84",
+    "path": "etl/data/manifests/real-document-origin-packs.json",
+    "sha256": "56268796b95daa049741c58c7b243a6c7c6f5e7ddd2245f6135fa6e4d5013b30"
+  },
+  "mode": {
+    "full_shard_check": true,
+    "full_state_check": true
+  },
+  "policy": {
+    "automatic_deletion_forbidden": true,
+    "interrupted_artifacts_retained_for_audit": true,
+    "official_public_domain_personal_information_retained": true,
+    "remote_mutation_performed": false,
+    "synthetic_or_mock_records_counted": false
+  },
+  "retention": {
+    "interrupted_staging_directories": [],
+    "orphan_generation_logical_sha256": [],
+    "orphan_state_snapshots": [],
+    "unactivated_activation_receipt_sha256": [],
+    "unactivated_generation_logical_sha256": [],
+    "unactivated_manifest_archive_sha256": []
+  },
+  "schema_version": "real_document_generation_lifecycle_audit_v1",
+  "status": "ok",
+  "totals": {
+    "activation_chain_manifests": 1,
+    "activation_receipts": 1,
+    "automatic_deletions": 0,
+    "interrupted_staging_directories": 0,
+    "manifest_archives": 1,
+    "orphan_generation_directories": 0,
+    "orphan_state_snapshots": 0,
+    "retained_compressed_manifest_bytes": 6343,
+    "retained_compressed_state_bytes": 23435797,
+    "retained_shard_files": 1,
+    "retained_state_snapshots": 1,
+    "retained_unique_generations": 1,
+    "superseded_generations": 0,
+    "unactivated_activation_receipts": 0,
+    "unactivated_generation_directories": 0,
+    "unactivated_manifest_archives": 0
+  }
+}

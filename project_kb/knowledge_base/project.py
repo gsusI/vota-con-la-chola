@@ -2525,13 +2525,18 @@ PROJECT_GOTCHAS = [
             "complete local origin lane adds a resumable 240,226-object queue, 25 "
             "bounded replica-manifest shards, a restorable queue snapshot, and a "
             "full 5,902,869,836-byte bounded clean restore without claiming that a "
-            "same-machine filesystem origin is durable public recovery."
+            "same-machine filesystem origin is durable public recovery. Its exact "
+            "generation now also forms 25 deterministic publication packs with both "
+            "10,000-object and 448-MiB payload ceilings, content-addressed member "
+            "manifests, complete member rehash, and no-delete lifecycle control."
         ),
         mitigation=(
             "Shard large manifests and execution state by deterministic generation, "
             "record immutable input roots, publish manifest-last, preserve explicit "
             "supersession lineage, and reject state whose bound input identity differs. "
-            "Prove reconstruction and interrupted replay before any one-million-row claim."
+            "Use deterministic byte-bounded packs instead of loose million-object upload "
+            "fanout, and prove reconstruction and interrupted replay before any "
+            "one-million-row claim."
         ),
         evidence=[
             Evidence(
@@ -2573,6 +2578,18 @@ PROJECT_GOTCHAS = [
             Evidence(
                 source="tests/test_real_document_origin_replication.py",
                 detail="Real production raw, native, and OCR objects prove replication, activation, audit, and clean restore without invented fixtures.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-origin-packaging.json",
+                detail="Exact origin generation becomes 25 deterministic object-and-byte-bounded immutable packs with zero failure.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-origin-pack-validation.json",
+                detail="Full validation restores and rehashes all 240,226 packed real objects and 5,902,869,836 payload bytes.",
+            ),
+            Evidence(
+                source="tests/test_real_document_origin_packs.py",
+                detail="Actual production objects prove byte-identical deterministic replay plus lifecycle and full member validation.",
             ),
             Evidence(
                 source="docs/etl/sprints/SCALE-FOUNDATION-20260810/reports/million-scale-foundation-and-real-document-run.md",
