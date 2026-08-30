@@ -618,6 +618,11 @@ def audit_document_provenance_gap(
         "local_origin_packaging",
         "local_origin_pack_validation",
         "local_origin_pack_generation_audit",
+        "local_origin_release_manifest",
+        "local_origin_release_upload_plan",
+        "local_origin_release_pointer",
+        "local_origin_release_preparation",
+        "local_origin_hf_publication_preflight",
         "ocr_review",
         "ocr_review_validation",
         "fetch_cohort",
@@ -661,6 +666,13 @@ def audit_document_provenance_gap(
     local_origin_packaging = payloads["local_origin_packaging"]
     local_origin_pack_validation = payloads["local_origin_pack_validation"]
     local_origin_pack_generation_audit = payloads["local_origin_pack_generation_audit"]
+    local_origin_release_manifest = payloads["local_origin_release_manifest"]
+    local_origin_release_upload_plan = payloads["local_origin_release_upload_plan"]
+    local_origin_release_pointer = payloads["local_origin_release_pointer"]
+    local_origin_release_preparation = payloads["local_origin_release_preparation"]
+    local_origin_hf_publication_preflight = payloads[
+        "local_origin_hf_publication_preflight"
+    ]
     ocr_review = payloads["ocr_review"]
     ocr_review_validation = payloads["ocr_review_validation"]
     fetch_cohort = payloads["fetch_cohort"]
@@ -924,6 +936,151 @@ def audit_document_provenance_gap(
         != origin_manifest.get("sha256")
     ):
         raise ReadinessError("document immutable local pack contract failed")
+
+    release_summary = local_origin_release_manifest.get("summary") or {}
+    release_policy = local_origin_release_manifest.get("policy") or {}
+    release_preparation_summary = local_origin_release_preparation.get("summary") or {}
+    release_preparation_policy = local_origin_release_preparation.get("policy") or {}
+    release_preparation_checks = local_origin_release_preparation.get("checks") or {}
+    upload_plan_policy = local_origin_release_upload_plan.get("policy") or {}
+    release_pointer_policy = local_origin_release_pointer.get("policy") or {}
+    if (
+        local_origin_release_manifest.get("schema_version")
+        != "real_document_origin_release_manifest_v1"
+        or local_origin_release_upload_plan.get("schema_version")
+        != "real_document_origin_upload_plan_v1"
+        or local_origin_release_pointer.get("schema_version")
+        != "real_document_origin_release_pointer_v1"
+        or local_origin_release_preparation.get("schema_version")
+        != "real_document_origin_release_preparation_v1"
+        or local_origin_release_preparation.get("status")
+        != "ready_for_authorized_publication"
+        or local_origin_release_preparation.get("authorized") is not False
+        or local_origin_release_preparation.get("remote_preflight_performed")
+        is not False
+        or local_origin_release_preparation.get("remote_publication_performed")
+        is not False
+        or local_origin_release_preparation.get("durable_public_origin_proven")
+        is not False
+        or local_origin_release_preparation.get("independent_remote_restore_proven")
+        is not False
+        or not release_preparation_checks
+        or not all(value is True for value in release_preparation_checks.values())
+        or local_origin_release_manifest.get("release_id")
+        != local_origin_release_upload_plan.get("release_id")
+        or local_origin_release_manifest.get("release_id")
+        != local_origin_release_pointer.get("release_id")
+        or local_origin_release_manifest.get("release_id")
+        != local_origin_release_preparation.get("release_id")
+        or local_origin_release_manifest.get("release_prefix")
+        != local_origin_release_upload_plan.get("release_prefix")
+        or local_origin_release_manifest.get("release_prefix")
+        != local_origin_release_pointer.get("release_prefix")
+        or release_summary != release_preparation_summary
+        or release_summary.get("packs") != pack_plan.get("packs")
+        or release_summary.get("objects") != pack_plan.get("objects")
+        or release_summary.get("payload_bytes") != pack_plan.get("payload_bytes")
+        or release_summary.get("archive_bytes") != pack_packed.get("archive_bytes")
+        or release_summary.get("member_manifest_bytes")
+        != pack_packed.get("member_manifest_bytes")
+        or release_summary.get("release_files") != 90
+        or release_summary.get("release_bytes") != 1_911_188_479
+        or len(local_origin_release_manifest.get("files") or [])
+        != release_summary.get("release_files")
+        or len(local_origin_release_upload_plan.get("immutable_files") or [])
+        != release_summary.get("release_files")
+        or release_policy.get("official_real_records_only") is not True
+        or release_policy.get("synthetic_or_mock_records_forbidden") is not True
+        or release_policy.get("official_public_domain_personal_information_retained")
+        is not True
+        or release_policy.get("append_only_immutable_release") is not True
+        or release_policy.get("automatic_deletion_forbidden") is not True
+        or release_policy.get("latest_pointer_activated_last") is not True
+        or release_preparation_policy != release_policy
+        or upload_plan_policy.get("append_only") is not True
+        or upload_plan_policy.get("delete_operations_forbidden") is not True
+        or upload_plan_policy.get("immutable_manifest_uploaded_after_data") is not True
+        or upload_plan_policy.get("latest_pointer_uploaded_last") is not True
+        or upload_plan_policy.get("resume_requires_remote_checksum_parity") is not True
+        or release_pointer_policy.get(
+            "official_public_domain_personal_information_retained"
+        )
+        is not True
+        or release_pointer_policy.get("synthetic_or_mock_records_counted") is not False
+        or release_pointer_policy.get("immutable_release_files") is not True
+        or release_pointer_policy.get("pointer_activated_after_remote_parity")
+        is not True
+    ):
+        raise ReadinessError("document origin release preparation contract failed")
+    for report_key, artifact_key in (
+        ("release_manifest", "local_origin_release_manifest"),
+        ("upload_plan", "local_origin_release_upload_plan"),
+        ("latest_pointer", "local_origin_release_pointer"),
+    ):
+        descriptor = local_origin_release_preparation.get(report_key) or {}
+        artifact_path = evidence_paths[artifact_key]
+        if (
+            descriptor.get("path") != contract[artifact_key]
+            or descriptor.get("sha256") != sha256_file(artifact_path)
+            or descriptor.get("bytes") != artifact_path.stat().st_size
+        ):
+            raise ReadinessError(
+                f"document origin release {report_key} evidence drifted"
+            )
+
+    hf_checks = local_origin_hf_publication_preflight.get("checks") or {}
+    hf_summary = local_origin_hf_publication_preflight.get("summary") or {}
+    hf_remote = (local_origin_hf_publication_preflight.get("remote") or {}).get(
+        "before"
+    ) or {}
+    hf_release = hf_remote.get("release") or {}
+    hf_pointer = hf_remote.get("latest_pointer") or {}
+    if (
+        local_origin_hf_publication_preflight.get("schema_version")
+        != "real_document_origin_hf_publication_v1"
+        or local_origin_hf_publication_preflight.get("mode") != "dry_run"
+        or local_origin_hf_publication_preflight.get("status")
+        != "ready_for_authorized_publication"
+        or local_origin_hf_publication_preflight.get("authorized") is not False
+        or local_origin_hf_publication_preflight.get("remote_preflight_performed")
+        is not True
+        or local_origin_hf_publication_preflight.get("remote_publication_performed")
+        is not False
+        or local_origin_hf_publication_preflight.get("durable_public_origin_proven")
+        is not False
+        or local_origin_hf_publication_preflight.get(
+            "independent_remote_restore_proven"
+        )
+        is not False
+        or local_origin_hf_publication_preflight.get("commits") != []
+        or not str(local_origin_hf_publication_preflight.get("dataset_repo") or "")
+        or local_origin_hf_publication_preflight.get("release_id")
+        != local_origin_release_manifest.get("release_id")
+        or local_origin_hf_publication_preflight.get("release_prefix")
+        != local_origin_release_manifest.get("release_prefix")
+        or not hf_checks
+        or not all(value is True for value in hf_checks.values())
+        or hf_summary.get("immutable_files") != release_summary.get("release_files")
+        or hf_summary.get("immutable_bytes") != release_summary.get("release_bytes")
+        or hf_summary.get("release_manifest_bytes")
+        != evidence_paths["local_origin_release_manifest"].stat().st_size
+        or hf_summary.get("latest_pointer_bytes")
+        != evidence_paths["local_origin_release_pointer"].stat().st_size
+        or hf_remote.get("append_only_safe") is not True
+        or hf_remote.get("release_exact") is not False
+        or hf_remote.get("pointer_exact") is not False
+        or hf_release.get("expected_files") != release_summary.get("release_files") + 1
+        or hf_release.get("exact_files") != 0
+        or hf_release.get("missing_files") != release_summary.get("release_files") + 1
+        or hf_release.get("conflict_files") != 0
+        or hf_release.get("unexpected_files") != 0
+        or hf_pointer.get("expected_files") != 1
+        or hf_pointer.get("exact_files") != 0
+        or hf_pointer.get("missing_files") != 1
+        or hf_pointer.get("conflict_files") != 0
+        or hf_pointer.get("unexpected_files") != 0
+    ):
+        raise ReadinessError("document origin HF dry-run/preflight contract failed")
 
     fetch_policy = fetch_cohort.get("policy") or {}
     fetch_run_totals = fetch_run.get("totals") or {}
@@ -1914,6 +2071,16 @@ def audit_document_provenance_gap(
         ),
         "document_monetary_cost_status": monetary_economics.get("measurement_status"),
         "document_network_requests_measured": True,
+        "local_origin_release_id": local_origin_release_manifest.get("release_id"),
+        "local_origin_release_files": release_summary.get("release_files"),
+        "local_origin_release_bytes": release_summary.get("release_bytes"),
+        "local_origin_release_remote_preflight_performed": True,
+        "local_origin_release_remote_conflicts": hf_release.get("conflict_files"),
+        "local_origin_release_remote_unexpected_files": hf_release.get(
+            "unexpected_files"
+        ),
+        "local_origin_release_remote_publication_performed": False,
+        "local_origin_release_durable_public_origin_proven": False,
         "evidence": {
             key: evidence_reference(path) for key, path in evidence_paths.items()
         },

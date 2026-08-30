@@ -559,6 +559,11 @@ scale_document_pack_manifest := env_var_or_default("SCALE_DOCUMENT_PACK_MANIFEST
 scale_document_pack_report := env_var_or_default("SCALE_DOCUMENT_PACK_REPORT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-origin-packaging.json")
 scale_document_pack_validation := env_var_or_default("SCALE_DOCUMENT_PACK_VALIDATION", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-origin-pack-validation.json")
 scale_document_pack_generation_audit := env_var_or_default("SCALE_DOCUMENT_PACK_GENERATION_AUDIT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-origin-pack-generation-audit.json")
+scale_document_origin_release_preparation := env_var_or_default("SCALE_DOCUMENT_ORIGIN_RELEASE_PREPARATION", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-origin-release-preparation.json")
+scale_document_origin_hf_publish_report := env_var_or_default("SCALE_DOCUMENT_ORIGIN_HF_PUBLISH_REPORT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-origin-hf-publish-dry-run.json")
+scale_document_origin_hf_authorized := env_var_or_default("SCALE_DOCUMENT_ORIGIN_HF_AUTHORIZED", "0")
+scale_document_origin_hf_batch_files := env_var_or_default("SCALE_DOCUMENT_ORIGIN_HF_BATCH_FILES", "4")
+scale_document_origin_hf_batch_bytes := env_var_or_default("SCALE_DOCUMENT_ORIGIN_HF_BATCH_BYTES", "524288000")
 wayback_document_timeout := env_var_or_default("WAYBACK_DOCUMENT_TIMEOUT", "30")
 wayback_document_attempts := env_var_or_default("WAYBACK_DOCUMENT_ATTEMPTS", "2")
 wayback_document_args := env_var_or_default("WAYBACK_DOCUMENT_ARGS", "")
@@ -2494,6 +2499,24 @@ etl-scale-validate-document-origin-packs:
 
 etl-scale-audit-document-origin-pack-generation:
   python3 scripts/audit_real_document_generation_lifecycle.py real_document_origin_packs --manifest {{scale_document_pack_manifest}} --report-out {{scale_document_pack_generation_audit}} --full-shard-check --full-state-check --enforce
+
+etl-scale-prepare-document-origin-release:
+  python3 scripts/prepare_real_document_origin_release.py --origin-manifest {{scale_document_origin_manifest}} --origin-audit {{scale_document_origin_generation_audit}} --pack-manifest {{scale_document_pack_manifest}} --pack-root {{scale_document_pack_root}} --pack-audit {{scale_document_pack_generation_audit}} --report-out {{scale_document_origin_release_preparation}} --enforce
+
+etl-scale-document-origin-hf-dry-run:
+  just etl-scale-prepare-document-origin-release
+  python3 scripts/publish_real_document_origin_hf.py --report-out {{scale_document_origin_hf_publish_report}} --batch-files {{scale_document_origin_hf_batch_files}} --batch-bytes {{scale_document_origin_hf_batch_bytes}} --enforce
+
+etl-scale-document-origin-hf-preflight:
+  just etl-scale-prepare-document-origin-release
+  UV_CACHE_DIR=.cache/uv uv run --no-project --with 'huggingface-hub>=0.24,<1.0' python scripts/publish_real_document_origin_hf.py --dataset-repo {{hf_dataset_repo_id}} --report-out {{scale_document_origin_hf_publish_report}} --batch-files {{scale_document_origin_hf_batch_files}} --batch-bytes {{scale_document_origin_hf_batch_bytes}} --remote-preflight --enforce
+
+# Mutates the configured public dataset only when the caller explicitly sets the release-authority gate.
+etl-scale-document-origin-hf-publish:
+  test "{{scale_document_origin_hf_authorized}}" = "1" || (echo "Set SCALE_DOCUMENT_ORIGIN_HF_AUTHORIZED=1 only after explicit release authority" >&2; exit 2)
+  just privacy-check-public-artifacts
+  just etl-scale-prepare-document-origin-release
+  UV_CACHE_DIR=.cache/uv uv run --no-project --with 'huggingface-hub>=0.24,<1.0' python scripts/publish_real_document_origin_hf.py --dataset-repo {{hf_dataset_repo_id}} --report-out {{scale_document_origin_hf_publish_report}} --batch-files {{scale_document_origin_hf_batch_files}} --batch-bytes {{scale_document_origin_hf_batch_bytes}} --remote-preflight --publish --authorize-remote-write --enforce
 
 etl-scale-require-document-page-ocr-review:
   python3 scripts/validate_real_document_ocr_review.py --enforce-integrity --require-complete

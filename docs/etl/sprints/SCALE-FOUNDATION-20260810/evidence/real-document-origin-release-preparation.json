@@ -1,0 +1,56 @@
+{
+  "authorized": false,
+  "checks": {
+    "all_pack_and_control_files_rehashed": true,
+    "append_only_no_delete_contract": true,
+    "exact_pack_generation_bound": true,
+    "exact_source_origin_generation_bound": true,
+    "no_remote_mutation_claimed": true,
+    "no_synthetic_or_mock_records": true,
+    "official_public_domain_personal_information_retained": true,
+    "release_identity_content_addressed": true,
+    "release_inventory_paths_unique": true
+  },
+  "durable_public_origin_proven": false,
+  "generated_at": "2026-08-30T08:49:36.410692Z",
+  "independent_remote_restore_proven": false,
+  "latest_pointer": {
+    "bytes": 1249,
+    "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-origin-release-latest.json",
+    "sha256": "78fcb0a0e8e6b9f2f0fc9e8c755a675189a2ac8ac7d8e9432ca027c6f1d261b7"
+  },
+  "next_action": "Run the publisher dry-run and read-only remote preflight. After explicit release authority, upload immutable files, upload the release manifest, verify exact remote parity, and move the latest pointer last.",
+  "policy": {
+    "append_only_immutable_release": true,
+    "automatic_deletion_forbidden": true,
+    "latest_pointer_activated_last": true,
+    "official_public_domain_personal_information_retained": true,
+    "official_real_records_only": true,
+    "synthetic_or_mock_records_forbidden": true
+  },
+  "release_id": "7ba596492414d6f808b79725440949378cc318f7d725286f0f702c8d8d76a391",
+  "release_manifest": {
+    "bytes": 23211,
+    "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-origin-release-manifest.json",
+    "sha256": "5965565d19cc1d93ea2dd1c0b75bb2daf94947098d96eae8952516caa9ca5136"
+  },
+  "release_prefix": "document-origin/snapshots/83401a2eff6ad45a16e00e8b8352fe0f5430ad589e0064b9b431752c38705181/56268796b95daa049741c58c7b243a6c7c6f5e7ddd2245f6135fa6e4d5013b30/7ba596492414d6f808b79725440949378cc318f7d725286f0f702c8d8d76a391",
+  "remote_preflight_performed": false,
+  "remote_publication_performed": false,
+  "schema_version": "real_document_origin_release_preparation_v1",
+  "status": "ready_for_authorized_publication",
+  "summary": {
+    "archive_bytes": 1793094983,
+    "member_manifest_bytes": 17893134,
+    "objects": 240226,
+    "packs": 25,
+    "payload_bytes": 5902869836,
+    "release_bytes": 1911188479,
+    "release_files": 90
+  },
+  "upload_plan": {
+    "bytes": 36325,
+    "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-origin-upload-plan.json",
+    "sha256": "2991607b5d08a3fb103fea3445b4dcddd79f7db5d06cea585e5ec3295be46126"
+  }
+}

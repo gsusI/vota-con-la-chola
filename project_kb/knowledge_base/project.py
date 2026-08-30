@@ -2528,15 +2528,21 @@ PROJECT_GOTCHAS = [
             "same-machine filesystem origin is durable public recovery. Its exact "
             "generation now also forms 25 deterministic publication packs with both "
             "10,000-object and 448-MiB payload ceilings, content-addressed member "
-            "manifests, complete member rehash, and no-delete lifecycle control."
+            "manifests, complete member rehash, and no-delete lifecycle control. The "
+            "exact pack generation is bound to one 90-file content-addressed release; "
+            "its publisher refuses immutable collisions, never deletes, verifies parity "
+            "before resume, seals the release manifest after data, and moves the latest "
+            "pointer last. A read-only live preflight is not durable-origin proof."
         ),
         mitigation=(
             "Shard large manifests and execution state by deterministic generation, "
             "record immutable input roots, publish manifest-last, preserve explicit "
             "supersession lineage, and reject state whose bound input identity differs. "
             "Use deterministic byte-bounded packs instead of loose million-object upload "
-            "fanout, and prove reconstruction and interrupted replay before any "
-            "one-million-row claim."
+            "fanout. Require explicit release authority, immutable remote checksum parity, "
+            "manifest-after-data and pointer-last ordering. Prove independent remote "
+            "reconstruction and interrupted replay before any durability or one-million-row "
+            "claim."
         ),
         evidence=[
             Evidence(
@@ -2590,6 +2596,18 @@ PROJECT_GOTCHAS = [
             Evidence(
                 source="tests/test_real_document_origin_packs.py",
                 detail="Actual production objects prove byte-identical deterministic replay plus lifecycle and full member validation.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-origin-release-preparation.json",
+                detail="Exact 90-file release inventory rehashes pack data, lifecycle controls, and validation evidence without remote mutation.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-origin-hf-publish-dry-run.json",
+                detail="Read-only public-origin preflight proves collision-free append-only eligibility while durable origin remains false.",
+            ),
+            Evidence(
+                source="tests/test_real_document_origin_release.py",
+                detail="Production-only release replay, local rehash, bounded upload batches, and double remote-write fence tests.",
             ),
             Evidence(
                 source="docs/etl/sprints/SCALE-FOUNDATION-20260810/reports/million-scale-foundation-and-real-document-run.md",
