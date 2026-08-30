@@ -25,6 +25,9 @@ if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 from publicdata_docs.extraction import (
+    DEFAULT_MARKUP_SECTION_MAX_DEPTH,
+    DEFAULT_MAX_SEMANTIC_MARKUP_BYTES,
+    DOCUMENT_LOCATOR_ALGORITHM_VERSION,
     DocumentTextLocator,
     build_document_text_locators,
 )
@@ -120,6 +123,18 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--manifest-out", default=str(DEFAULT_MANIFEST))
     parser.add_argument("--report-out", default=str(DEFAULT_REPORT))
     parser.add_argument("--max-span-chars", type=int, default=8_192)
+    parser.add_argument("--max-average-locators-per-content", type=float, default=10.0)
+    parser.add_argument("--max-locators-per-content", type=int, default=2_000)
+    parser.add_argument(
+        "--markup-section-max-depth",
+        type=int,
+        default=DEFAULT_MARKUP_SECTION_MAX_DEPTH,
+    )
+    parser.add_argument(
+        "--max-semantic-markup-bytes",
+        type=int,
+        default=DEFAULT_MAX_SEMANTIC_MARKUP_BYTES,
+    )
     parser.add_argument("--pdf-timeout-seconds", type=float, default=120.0)
     parser.add_argument("--workers", type=int, default=8)
     parser.add_argument("--claim-size", type=int, default=32)
@@ -239,6 +254,8 @@ def seed_state(
     *,
     native_manifest: Path,
     max_span_chars: int,
+    markup_section_max_depth: int,
+    max_semantic_markup_bytes: int,
     max_attempts: int,
 ) -> dict[str, int]:
     manifest_sha256 = sha256_path(native_manifest)
@@ -247,6 +264,12 @@ def seed_state(
         if (
             existing.get("native_manifest_sha256") != manifest_sha256
             or int(existing.get("max_span_chars") or 0) != max_span_chars
+            or existing.get("locator_algorithm_version")
+            != DOCUMENT_LOCATOR_ALGORITHM_VERSION
+            or int(existing.get("markup_section_max_depth") or -1)
+            != markup_section_max_depth
+            or int(existing.get("max_semantic_markup_bytes") or 0)
+            != max_semantic_markup_bytes
         ):
             raise LocatorRunError(
                 "state DB belongs to another native generation/configuration"
@@ -366,6 +389,9 @@ def seed_state(
         [
             ("native_manifest_sha256", manifest_sha256),
             ("max_span_chars", str(max_span_chars)),
+            ("locator_algorithm_version", DOCUMENT_LOCATOR_ALGORITHM_VERSION),
+            ("markup_section_max_depth", str(markup_section_max_depth)),
+            ("max_semantic_markup_bytes", str(max_semantic_markup_bytes)),
             ("file_instances", str(file_instances)),
             ("distinct_content_objects", str(distinct)),
             ("seeded_at", utc_now()),
@@ -384,8 +410,8 @@ def claim_work(
 ) -> list[dict[str, Any]]:
     now = datetime.now(UTC)
     now_iso = now.isoformat().replace("+00:00", "Z")
-    expires = (now + timedelta(seconds=lease_seconds)).isoformat().replace(
-        "+00:00", "Z"
+    expires = (
+        (now + timedelta(seconds=lease_seconds)).isoformat().replace("+00:00", "Z")
     )
     conn.execute("BEGIN IMMEDIATE")
     conn.execute(
@@ -440,6 +466,9 @@ def locate_one(
     native_root: Path,
     max_span_chars: int,
     pdf_timeout_seconds: float,
+    markup_section_max_depth: int,
+    max_semantic_markup_bytes: int,
+    max_locators_per_content: int,
 ) -> LocatorOutcome:
     content_sha256 = str(row["content_sha256"])
     try:
@@ -464,6 +493,9 @@ def locate_one(
             expected_page_count=row["page_count"],
             max_span_chars=max_span_chars,
             pdf_timeout_seconds=pdf_timeout_seconds,
+            markup_section_max_depth=markup_section_max_depth,
+            max_semantic_markup_bytes=max_semantic_markup_bytes,
+            max_locators_per_content=max_locators_per_content,
         )
         if not locators:
             raise LocatorRunError("locator generation returned no rows")
@@ -599,6 +631,9 @@ def run_worker(
     lease_seconds: int,
     max_span_chars: int,
     pdf_timeout_seconds: float,
+    markup_section_max_depth: int,
+    max_semantic_markup_bytes: int,
+    max_locators_per_content: int,
 ) -> dict[str, int]:
     owner = f"real-document-locator-{uuid.uuid4().hex}"
     totals = {
@@ -634,6 +669,9 @@ def run_worker(
                     native_root=native_root,
                     max_span_chars=max_span_chars,
                     pdf_timeout_seconds=pdf_timeout_seconds,
+                    markup_section_max_depth=markup_section_max_depth,
+                    max_semantic_markup_bytes=max_semantic_markup_bytes,
+                    max_locators_per_content=max_locators_per_content,
                 )
                 for row in claimed
             ]
@@ -741,6 +779,10 @@ def build_report(
     state_db: Path,
     manifest: Mapping[str, Any],
     max_span_chars: int,
+    markup_section_max_depth: int,
+    max_semantic_markup_bytes: int,
+    max_average_locators_per_content: float,
+    max_locators_per_content: int,
     run_totals: Mapping[str, int],
     performance: Mapping[str, Any],
 ) -> dict[str, Any]:
@@ -758,9 +800,13 @@ def build_report(
                COALESCE(SUM(native_text_bytes), 0) AS native_text_bytes,
                SUM(CASE WHEN mime_type LIKE '%pdf%' THEN 1 ELSE 0 END)
                  AS pdf_content_objects,
+               SUM(CASE WHEN mime_type NOT LIKE '%pdf%' THEN 1 ELSE 0 END)
+                 AS markup_content_objects,
                COALESCE(SUM(CASE WHEN mime_type LIKE '%pdf%'
                                  THEN page_count ELSE 0 END), 0)
-                 AS expected_pdf_page_locators
+                 AS expected_pdf_page_locators,
+               COALESCE(AVG(locator_rows), 0) AS average_locator_rows_per_content,
+               COALESCE(MAX(locator_rows), 0) AS max_locator_rows_per_content
         FROM locator_work
         """
     ).fetchone()
@@ -771,11 +817,20 @@ def build_report(
                  AS pdf_page_locators,
                SUM(CASE WHEN locator_type = 'normalized_text_span' THEN 1 ELSE 0 END)
                  AS normalized_text_span_locators,
+               SUM(CASE WHEN locator_type = 'markup_section' THEN 1 ELSE 0 END)
+                 AS markup_section_locators,
                SUM(CASE WHEN locator_type = 'document_no_text' THEN 1 ELSE 0 END)
                  AS no_text_locators,
+               COUNT(DISTINCT CASE WHEN locator_type = 'markup_section'
+                                   THEN content_sha256 END)
+                 AS semantic_markup_content_objects,
+               COUNT(DISTINCT CASE WHEN locator_type = 'normalized_text_span'
+                                   THEN content_sha256 END)
+                 AS fallback_markup_content_objects,
                SUM(CASE WHEN has_text = 1 THEN 1 ELSE 0 END) AS locators_with_text,
                COALESCE(SUM(text_chars), 0) AS locator_text_chars,
-               MAX(CASE WHEN locator_type = 'normalized_text_span'
+               MAX(CASE WHEN locator_type IN (
+                              'normalized_text_span', 'markup_section')
                         THEN text_chars ELSE 0 END) AS max_span_chars
         FROM content_locators
         """
@@ -799,9 +854,7 @@ def build_report(
         and state_counts.get("leased", 0) == 0
     )
     checks = {
-        "native_manifest_bound_by_sha256": metadata_values.get(
-            "native_manifest_sha256"
-        )
+        "native_manifest_bound_by_sha256": metadata_values.get("native_manifest_sha256")
         == sha256_path(native_manifest),
         "every_content_object_terminal_success": complete,
         "every_content_object_has_locator": int(locator_totals["locator_rows"] or 0)
@@ -813,6 +866,24 @@ def build_report(
             locator_totals["max_span_chars"] or 0
         )
         <= max_span_chars,
+        "semantic_markup_sections_materialized": int(
+            locator_totals["markup_section_locators"] or 0
+        )
+        > 0,
+        "average_locator_fanout_within_million_scale_bound": float(
+            totals["average_locator_rows_per_content"] or 0
+        )
+        <= max_average_locators_per_content,
+        "maximum_locator_fanout_within_bound": int(
+            totals["max_locator_rows_per_content"] or 0
+        )
+        <= max_locators_per_content,
+        "markup_content_objects_accounted_for": (
+            int(locator_totals["semantic_markup_content_objects"] or 0)
+            + int(locator_totals["fallback_markup_content_objects"] or 0)
+            + int(locator_totals["no_text_locators"] or 0)
+        )
+        == int(totals["markup_content_objects"] or 0),
         "manifest_contains_every_instance_locator": instance_locator_rows
         == int(manifest.get("rows") or -1),
         "no_dead_work": state_counts.get("dead", 0) == 0,
@@ -840,12 +911,19 @@ def build_report(
             "native_text_is_not_sanitized_or_identity_stripped": True,
             "locator_rows_copy_no_public_text": True,
             "pdf_locators_are_exact_pages": True,
-            "markup_locators_are_normalized_text_spans_not_semantic_sections": True,
+            "markup_sections_come_only_from_observed_source_structure": True,
+            "unproven_markup_structure_falls_back_to_exact_text_spans": True,
         },
         "configuration": {
+            "locator_algorithm_version": DOCUMENT_LOCATOR_ALGORITHM_VERSION,
             "max_span_chars": max_span_chars,
+            "max_average_locators_per_content": max_average_locators_per_content,
+            "max_locators_per_content": max_locators_per_content,
+            "markup_section_max_depth": markup_section_max_depth,
+            "max_semantic_markup_bytes": max_semantic_markup_bytes,
             "pdf_locator": "page_number",
-            "markup_locator": "normalized_native_text_character_span",
+            "markup_locator": "source_xpath_plus_bounded_native_text_span",
+            "markup_fallback_locator": "normalized_native_text_character_span",
         },
         "inputs": {
             "native_manifest": {
@@ -866,20 +944,38 @@ def build_report(
             "content_locator_rows": int(locator_totals["locator_rows"] or 0),
             "instance_locator_rows": instance_locator_rows,
             "pdf_content_objects": int(totals["pdf_content_objects"] or 0),
+            "markup_content_objects": int(totals["markup_content_objects"] or 0),
             "pdf_page_locators": int(locator_totals["pdf_page_locators"] or 0),
+            "markup_section_locators": int(
+                locator_totals["markup_section_locators"] or 0
+            ),
             "normalized_text_span_locators": int(
                 locator_totals["normalized_text_span_locators"] or 0
             ),
-            "document_no_text_locators": int(
-                locator_totals["no_text_locators"] or 0
+            "semantic_markup_content_objects": int(
+                locator_totals["semantic_markup_content_objects"] or 0
             ),
+            "fallback_markup_content_objects": int(
+                locator_totals["fallback_markup_content_objects"] or 0
+            ),
+            "document_no_text_locators": int(locator_totals["no_text_locators"] or 0),
             "locators_with_text": int(locator_totals["locators_with_text"] or 0),
             "locator_text_chars": int(locator_totals["locator_text_chars"] or 0),
+            "average_locator_rows_per_content": round(
+                float(totals["average_locator_rows_per_content"] or 0), 6
+            ),
+            "max_locator_rows_per_content": int(
+                totals["max_locator_rows_per_content"] or 0
+            ),
+            "projected_content_locator_rows_at_one_million_documents": round(
+                float(totals["average_locator_rows_per_content"] or 0) * 1_000_000
+            ),
         },
         "checks": checks,
         "next_action": (
-            "Independently replay every raw/native object and locator, then expose "
-            "page/span anchors through evidence exports without copying full text."
+            "Independently replay every raw/native object and page/section locator, "
+            "then acquire a representative real office-format cohort before claiming "
+            "office extraction support."
         ),
     }
 
@@ -902,6 +998,9 @@ def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
     positive = (
         int(args.max_span_chars),
+        int(args.max_semantic_markup_bytes),
+        float(args.max_average_locators_per_content),
+        int(args.max_locators_per_content),
         float(args.pdf_timeout_seconds),
         int(args.workers),
         int(args.claim_size),
@@ -910,7 +1009,11 @@ def main(argv: list[str] | None = None) -> int:
         int(args.manifest_shard_max_rows),
         int(args.manifest_shard_max_uncompressed_bytes),
     )
-    if any(value <= 0 for value in positive) or int(args.max_items) < 0:
+    if (
+        any(value <= 0 for value in positive)
+        or int(args.max_items) < 0
+        or int(args.markup_section_max_depth) < 0
+    ):
         print("ERROR: locator bounds must be positive")
         return 2
     raw_root = Path(args.raw_root)
@@ -935,6 +1038,8 @@ def main(argv: list[str] | None = None) -> int:
                 conn,
                 native_manifest=native_manifest,
                 max_span_chars=int(args.max_span_chars),
+                markup_section_max_depth=int(args.markup_section_max_depth),
+                max_semantic_markup_bytes=int(args.max_semantic_markup_bytes),
                 max_attempts=int(args.max_attempts),
             )
             run_totals = run_worker(
@@ -947,6 +1052,9 @@ def main(argv: list[str] | None = None) -> int:
                 lease_seconds=int(args.lease_seconds),
                 max_span_chars=int(args.max_span_chars),
                 pdf_timeout_seconds=float(args.pdf_timeout_seconds),
+                markup_section_max_depth=int(args.markup_section_max_depth),
+                max_semantic_markup_bytes=int(args.max_semantic_markup_bytes),
+                max_locators_per_content=int(args.max_locators_per_content),
             )
             if terminal_state(conn):
                 manifest = publish_manifest(
@@ -988,6 +1096,12 @@ def main(argv: list[str] | None = None) -> int:
                 state_db=state_db,
                 manifest=manifest,
                 max_span_chars=int(args.max_span_chars),
+                markup_section_max_depth=int(args.markup_section_max_depth),
+                max_semantic_markup_bytes=int(args.max_semantic_markup_bytes),
+                max_average_locators_per_content=float(
+                    args.max_average_locators_per_content
+                ),
+                max_locators_per_content=int(args.max_locators_per_content),
                 run_totals={"seeded": seeded, **run_totals},
                 performance=performance,
             )

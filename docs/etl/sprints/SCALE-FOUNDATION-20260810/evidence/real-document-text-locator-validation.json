@@ -9,23 +9,29 @@
     "source_locator_report_passed": true
   },
   "configuration": {
-    "markup_locator": "normalized_native_text_character_span",
+    "locator_algorithm_version": "document_text_locator_v3_major_markup_sections",
+    "markup_fallback_locator": "normalized_native_text_character_span",
+    "markup_locator": "source_xpath_plus_bounded_native_text_span",
+    "markup_section_max_depth": 1,
+    "max_average_locators_per_content": 10.0,
+    "max_locators_per_content": 2000,
+    "max_semantic_markup_bytes": 67108864,
     "max_span_chars": 8192,
     "pdf_locator": "page_number"
   },
   "failure_samples": [],
-  "generated_at": "2026-08-30T11:09:30.934387Z",
+  "generated_at": "2026-08-30T14:20:25.280519Z",
   "inputs": {
     "locator_manifest": {
-      "bytes": 14619,
-      "logical_sha256": "e10c152eb66a16a468fe4bd548ac6d806d6cfac823d34a13b5c68b1f3ee7ba9d",
+      "bytes": 32720,
+      "logical_sha256": "387a6ce263540f7ee86e5980026acf77eeb421c56c09d5378ad5b8b5f9143248",
       "path": "etl/data/published/real-document-text-locator-manifest-latest.jsonl",
-      "sha256": "621b8b47c8e5f506a07900f474c7ca95a4df1395e13068f82a58a04a76c68eb9"
+      "sha256": "61bf8adfa5870cfde279bd6f4e20b0681ff172257975ec024e31a011297b9723"
     },
     "locator_report": {
-      "bytes": 4521,
+      "bytes": 5477,
       "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-locator-extraction.json",
-      "sha256": "55dfc74a035ed34b25a461e3ba6a7b2e487cdb49fce794b9fb434f8fa77e9d3b"
+      "sha256": "9d9d6d406d6d17488f097aa5583799777fcae47a1704f41bdff136e61d97bf61"
     },
     "native_manifest": {
       "bytes": 5423,
@@ -41,32 +47,33 @@
   },
   "next_action": "Bind locator generation and lifecycle into central readiness, then use page/span addresses in evidence exports and citizen drill-downs.",
   "performance": {
-    "content_objects_per_second": 1366.886683,
-    "cpu_seconds": 164.820386,
-    "elapsed_seconds": 88.344558,
-    "peak_rss_bytes_child_max": 239665152,
-    "peak_rss_bytes_self": 205701120
+    "content_objects_per_second": 427.825414,
+    "cpu_seconds": 353.19995,
+    "elapsed_seconds": 282.257659,
+    "peak_rss_bytes_child_max": 239501312,
+    "peak_rss_bytes_self": 833257472
   },
   "policy": {
     "locator_rows_copy_no_public_text": true,
-    "markup_locators_are_normalized_text_spans_not_semantic_sections": true,
+    "markup_sections_come_only_from_observed_source_structure": true,
     "official_public_domain_personal_information_retained": true,
     "official_real_documents_only": true,
-    "synthetic_or_mock_records_counted": false
+    "synthetic_or_mock_records_counted": false,
+    "unproven_markup_structure_falls_back_to_exact_text_spans": true
   },
   "schema_version": "real_document_text_locator_validation_v1",
   "status": "ok",
   "totals": {
     "content_objects_replayed": 120757,
     "distinct_content_objects": 120757,
-    "expected_instance_locator_rows": 379445,
+    "expected_instance_locator_rows": 879104,
     "mismatched_rows": 0,
     "missing_rows": 0,
     "native_file_instances": 122607,
     "native_text_bytes_rehashed": 2256345242,
-    "observed_instance_locator_rows": 379445,
+    "observed_instance_locator_rows": 879104,
     "raw_bytes_rehashed": 5312661661,
-    "replayed_content_locator_rows": 363164,
+    "replayed_content_locator_rows": 818781,
     "unexpected_rows": 0,
     "validation_failures": 0
   }

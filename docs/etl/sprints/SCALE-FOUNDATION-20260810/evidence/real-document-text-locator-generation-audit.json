@@ -1,5 +1,6 @@
 {
   "activation_chain": [
+    "61bf8adfa5870cfde279bd6f4e20b0681ff172257975ec024e31a011297b9723",
     "621b8b47c8e5f506a07900f474c7ca95a4df1395e13068f82a58a04a76c68eb9"
   ],
   "checks": {
@@ -19,12 +20,12 @@
     "retained_state_snapshots_checked_to_requested_depth": true
   },
   "dataset": "native_text_locator",
-  "generated_at": "2026-08-30T11:09:33.470100+00:00",
+  "generated_at": "2026-08-30T14:00:24.504816+00:00",
   "input": {
-    "bytes": 14619,
-    "logical_sha256": "e10c152eb66a16a468fe4bd548ac6d806d6cfac823d34a13b5c68b1f3ee7ba9d",
+    "bytes": 32720,
+    "logical_sha256": "387a6ce263540f7ee86e5980026acf77eeb421c56c09d5378ad5b8b5f9143248",
     "path": "etl/data/published/real-document-text-locator-manifest-latest.jsonl",
-    "sha256": "621b8b47c8e5f506a07900f474c7ca95a4df1395e13068f82a58a04a76c68eb9"
+    "sha256": "61bf8adfa5870cfde279bd6f4e20b0681ff172257975ec024e31a011297b9723"
   },
   "mode": {
     "full_shard_check": true,
@@ -48,19 +49,19 @@
   "schema_version": "real_document_generation_lifecycle_audit_v1",
   "status": "ok",
   "totals": {
-    "activation_chain_manifests": 1,
-    "activation_receipts": 1,
+    "activation_chain_manifests": 2,
+    "activation_receipts": 2,
     "automatic_deletions": 0,
     "interrupted_staging_directories": 0,
-    "manifest_archives": 1,
+    "manifest_archives": 2,
     "orphan_generation_directories": 0,
     "orphan_state_snapshots": 0,
-    "retained_compressed_manifest_bytes": 32050870,
-    "retained_compressed_state_bytes": 67491308,
-    "retained_shard_files": 38,
-    "retained_state_snapshots": 1,
-    "retained_unique_generations": 1,
-    "superseded_generations": 0,
+    "retained_compressed_manifest_bytes": 96937696,
+    "retained_compressed_state_bytes": 169004723,
+    "retained_shard_files": 126,
+    "retained_state_snapshots": 2,
+    "retained_unique_generations": 2,
+    "superseded_generations": 1,
     "unactivated_activation_receipts": 0,
     "unactivated_generation_directories": 0,
     "unactivated_manifest_archives": 0

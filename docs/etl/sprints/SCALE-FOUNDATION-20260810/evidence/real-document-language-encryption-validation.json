@@ -20,7 +20,7 @@
     "sample_bytes": 65536
   },
   "failure_samples": [],
-  "generated_at": "2026-08-30T11:57:14.834653Z",
+  "generated_at": "2026-08-30T13:34:59.127787Z",
   "inputs": {
     "native_manifest": {
       "bytes": 5423,
@@ -34,9 +34,9 @@
       "sha256": "4dfeba473b16789a1e058567ec4f29ff3b2eff30925bbf753752947b3d2bc96b"
     },
     "profile_report": {
-      "bytes": 6049,
+      "bytes": 6588,
       "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-language-encryption-profile.json",
-      "sha256": "35fd40ce23b5adac64eabf26489400c9dc3351630b5492d2d12f8fafc7a00442"
+      "sha256": "d07429c9d92484c242df177187d27dda075326eb199e73a3a372c58a2eca0848"
     }
   },
   "mode": {
@@ -48,11 +48,11 @@
   },
   "next_action": "Bind this independent validation and the generation lifecycle audit into central readiness, then use explicit language/encryption strata in DEC-01.",
   "performance": {
-    "cpu_seconds": 18180.900775000002,
-    "elapsed_seconds": 1187.177238,
-    "objects_per_second": 101.717752,
-    "peak_rss_bytes_child_max": 402051072,
-    "peak_rss_bytes_self": 402051072
+    "cpu_seconds": 20408.765573,
+    "elapsed_seconds": 1338.544559,
+    "objects_per_second": 90.215151,
+    "peak_rss_bytes_child_max": 399777792,
+    "peak_rss_bytes_self": 399777792
   },
   "policy": {
     "machine_language_candidates_are_explicitly_unreviewed": true,

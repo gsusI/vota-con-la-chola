@@ -2,20 +2,69 @@
 
 from __future__ import annotations
 
-import html
 import hashlib
-from dataclasses import dataclass
-from io import BytesIO
-from pathlib import Path
+import html
 import re
 import subprocess
 import xml.etree.ElementTree as ET
+from dataclasses import dataclass
+from io import BytesIO
+from pathlib import Path
 
 TAG_RE = re.compile(r"<[^>]+>")
 WS_RE = re.compile(r"\s+")
-XML_ENCODING_RE = re.compile(br"encoding=['\"](?P<encoding>[^'\"]+)['\"]", re.I)
-HTML_CHARSET_RE = re.compile(br"charset=(?P<charset>[A-Za-z0-9._-]+)", re.I)
+MARKUP_START_TAG_RE = re.compile(r"^<\s*(?P<tag>[A-Za-z_][\w:.-]*)")
+MARKUP_END_TAG_RE = re.compile(r"^<\s*/\s*(?P<tag>[A-Za-z_][\w:.-]*)")
+XML_ENCODING_RE = re.compile(
+    rb"encoding=['\"](?P<encoding>[^'\"]+)['\"]", re.IGNORECASE
+)
+HTML_CHARSET_RE = re.compile(rb"charset=(?P<charset>[A-Za-z0-9._-]+)", re.IGNORECASE)
 DOCUMENT_EXTRACTION_ALGORITHM_VERSION = "document_extraction_v2_pdf_plain_text"
+DOCUMENT_LOCATOR_ALGORITHM_VERSION = "document_text_locator_v3_major_markup_sections"
+DEFAULT_MARKUP_SECTION_MAX_DEPTH = 1
+DEFAULT_MAX_SEMANTIC_MARKUP_BYTES = 64 * 1024 * 1024
+MAX_MARKUP_PATH_DEPTH = 16
+SEMANTIC_MARKUP_CONTAINER_NAMES = frozenset(
+    {
+        "acta",
+        "analisis",
+        "anexo",
+        "article",
+        "body",
+        "capitulo",
+        "chapter",
+        "document",
+        "documento",
+        "footer",
+        "header",
+        "iniciativa",
+        "main",
+        "metadatos",
+        "propuesta",
+        "section",
+        "sesion",
+        "texto",
+        "votacion",
+    }
+)
+HTML_VOID_ELEMENTS = frozenset(
+    {
+        "area",
+        "base",
+        "br",
+        "col",
+        "embed",
+        "hr",
+        "img",
+        "input",
+        "link",
+        "meta",
+        "param",
+        "source",
+        "track",
+        "wbr",
+    }
+)
 
 
 @dataclass(frozen=True)
@@ -58,7 +107,10 @@ def normalize_plain_text(text: str) -> str:
 def decode_markup_bytes(raw_bytes: bytes) -> str:
     head = raw_bytes[:2048]
     candidates: list[str] = []
-    for regex, group_name in ((XML_ENCODING_RE, "encoding"), (HTML_CHARSET_RE, "charset")):
+    for regex, group_name in (
+        (XML_ENCODING_RE, "encoding"),
+        (HTML_CHARSET_RE, "charset"),
+    ):
         m = regex.search(head)
         if not m:
             continue
@@ -210,6 +262,161 @@ def _normalized_pdf_pages_from_python(
     return pages
 
 
+def _markup_name(value: object) -> str:
+    name = str(value).rsplit("}", 1)[-1].rsplit(":", 1)[-1].strip().casefold()
+    return name or "unknown"
+
+
+def _append_markup_piece(
+    pieces: list[tuple[str, str]],
+    *,
+    owner: str,
+    raw_text: str | None,
+) -> None:
+    if not raw_text:
+        return
+    normalized = normalize_text(raw_text)
+    if normalized:
+        pieces.append((owner, normalized))
+
+
+def _xml_markup_pieces(
+    decoded: str,
+    *,
+    max_depth: int,
+) -> list[tuple[str, str]] | None:
+    try:
+        root = ET.fromstring(decoded)
+    except ET.ParseError:
+        return None
+
+    root_path = f"/{_markup_name(root.tag)}[1]"
+    pieces: list[tuple[str, str]] = []
+
+    def walk(element: ET.Element, *, depth: int, path: str, owner: str) -> None:
+        _append_markup_piece(pieces, owner=owner, raw_text=element.text)
+        sibling_counts: dict[str, int] = {}
+        for child in list(element):
+            name = _markup_name(child.tag)
+            sibling_counts[name] = sibling_counts.get(name, 0) + 1
+            child_path = (
+                f"{path}/{name}[{sibling_counts[name]}]"
+                if depth < MAX_MARKUP_PATH_DEPTH
+                else path
+            )
+            child_owner = (
+                child_path
+                if depth < max_depth or name in SEMANTIC_MARKUP_CONTAINER_NAMES
+                else owner
+            )
+            walk(
+                child,
+                depth=depth + 1,
+                path=child_path,
+                owner=child_owner,
+            )
+            _append_markup_piece(pieces, owner=owner, raw_text=child.tail)
+
+    walk(root, depth=0, path=root_path, owner=root_path)
+    return pieces
+
+
+def _tag_scanner_markup_pieces(
+    decoded: str,
+    *,
+    max_depth: int,
+) -> list[tuple[str, str]]:
+    """Recover stable paths from the same tag-stripped stream as fallback extraction."""
+
+    unescaped = html.unescape(decoded)
+    pieces: list[tuple[str, str]] = []
+    stack: list[tuple[str, str, str, dict[str, int]]] = []
+    root_counts: dict[str, int] = {}
+    cursor = 0
+
+    def owner() -> str:
+        return stack[-1][2] if stack else "/document[1]"
+
+    for match in TAG_RE.finditer(unescaped):
+        _append_markup_piece(
+            pieces,
+            owner=owner(),
+            raw_text=unescaped[cursor : match.start()],
+        )
+        token = match.group(0)
+        cursor = match.end()
+        end_match = MARKUP_END_TAG_RE.match(token)
+        if end_match:
+            closing_name = _markup_name(end_match.group("tag"))
+            while stack:
+                open_name = stack.pop()[0]
+                if open_name == closing_name:
+                    break
+            continue
+        start_match = MARKUP_START_TAG_RE.match(token)
+        if (
+            not start_match
+            or token.startswith(("<!", "<?"))
+            or token.rstrip().endswith("/>")
+        ):
+            continue
+        name = _markup_name(start_match.group("tag"))
+        sibling_counts = stack[-1][3] if stack else root_counts
+        sibling_counts[name] = sibling_counts.get(name, 0) + 1
+        parent_path = stack[-1][1] if stack else ""
+        path = (
+            f"{parent_path}/{name}[{sibling_counts[name]}]"
+            if len(stack) <= MAX_MARKUP_PATH_DEPTH
+            else parent_path
+        )
+        semantic_owner = (
+            path
+            if len(stack) <= max_depth or name in SEMANTIC_MARKUP_CONTAINER_NAMES
+            else owner()
+        )
+        if name not in HTML_VOID_ELEMENTS:
+            stack.append((name, path, semantic_owner, {}))
+    _append_markup_piece(pieces, owner=owner(), raw_text=unescaped[cursor:])
+    return pieces
+
+
+def _semantic_markup_ranges(
+    native_text: str,
+    *,
+    raw_path: Path,
+    max_depth: int,
+    max_parse_bytes: int,
+) -> list[tuple[str, int, int]] | None:
+    """Return exact structural ranges, or None when structure cannot be proven."""
+
+    if raw_path.stat().st_size > max_parse_bytes:
+        return None
+    decoded = decode_markup_bytes(raw_path.read_bytes())
+    pieces = _xml_markup_pieces(decoded, max_depth=max_depth)
+    if pieces is None:
+        pieces = _tag_scanner_markup_pieces(decoded, max_depth=max_depth)
+    if not pieces or " ".join(text for _, text in pieces) != native_text:
+        return None
+
+    ranges: list[tuple[str, int, int]] = []
+    section_owner = pieces[0][0]
+    section_start = 0
+    cursor = 0
+    for piece_index, (piece_owner, piece_text) in enumerate(pieces):
+        if piece_index:
+            cursor += 1
+        piece_start = cursor
+        if piece_owner != section_owner:
+            ranges.append((section_owner, section_start, piece_start))
+            section_owner = piece_owner
+            section_start = piece_start
+        cursor += len(piece_text)
+    ranges.append((section_owner, section_start, cursor))
+    if cursor != len(native_text) or any(end <= start for _, start, end in ranges):
+        return None
+    return ranges
+
+
 def build_document_text_locators(
     native_text: str,
     *,
@@ -219,13 +426,24 @@ def build_document_text_locators(
     expected_page_count: int | None,
     max_span_chars: int = 8_192,
     pdf_timeout_seconds: float = 120.0,
+    markup_section_max_depth: int = DEFAULT_MARKUP_SECTION_MAX_DEPTH,
+    max_semantic_markup_bytes: int = DEFAULT_MAX_SEMANTIC_MARKUP_BYTES,
+    max_locators_per_content: int = 2_000,
 ) -> list[DocumentTextLocator]:
-    """Build exact page or normalized-span locators without copying public text."""
+    """Build exact page/section locators without copying public text."""
 
-    if max_span_chars < 1 or pdf_timeout_seconds <= 0:
+    if (
+        max_span_chars < 1
+        or pdf_timeout_seconds <= 0
+        or markup_section_max_depth < 0
+        or max_semantic_markup_bytes < 1
+        or max_locators_per_content < 1
+    ):
         raise ValueError("locator bounds must be positive")
+
     def encoded_digest(value: str) -> str:
         return hashlib.sha256(value.encode("utf-8")).hexdigest()
+
     if should_parse_as_pdf(content_type, raw_path):
         if expected_page_count is None or expected_page_count < 1:
             raise RuntimeError("PDF locator generation requires a positive page count")
@@ -268,6 +486,8 @@ def build_document_text_locators(
                     has_text=bool(page_text),
                 )
             )
+        if len(locators) > max_locators_per_content:
+            raise ValueError("locator fanout exceeds per-content bound")
         return locators
 
     if not native_text:
@@ -284,15 +504,58 @@ def build_document_text_locators(
                 has_text=False,
             )
         ]
+    semantic_ranges = _semantic_markup_ranges(
+        native_text,
+        raw_path=raw_path,
+        max_depth=markup_section_max_depth,
+        max_parse_bytes=max_semantic_markup_bytes,
+    )
+    locator_specs: list[tuple[str, str, int, int]] = []
+    if semantic_ranges is not None:
+        for section_index, (section_path, section_start, section_end) in enumerate(
+            semantic_ranges
+        ):
+            for part_index, start in enumerate(
+                range(section_start, section_end, max_span_chars)
+            ):
+                end = min(section_end, start + max_span_chars)
+                locator_specs.append(
+                    (
+                        "markup_section",
+                        (
+                            f"xpath:{section_path}#section:{section_index + 1:06d}"
+                            f"#part:{part_index + 1:06d}"
+                        ),
+                        start,
+                        end,
+                    )
+                )
+                if len(locator_specs) > max_locators_per_content:
+                    raise ValueError("locator fanout exceeds per-content bound")
+    else:
+        for start in range(0, len(native_text), max_span_chars):
+            end = min(len(native_text), start + max_span_chars)
+            locator_specs.append(
+                (
+                    "normalized_text_span",
+                    f"chars:{start:012d}-{end:012d}",
+                    start,
+                    end,
+                )
+            )
+            if len(locator_specs) > max_locators_per_content:
+                raise ValueError("locator fanout exceeds per-content bound")
+
     locators = []
-    for segment_index, start in enumerate(range(0, len(native_text), max_span_chars)):
-        end = min(len(native_text), start + max_span_chars)
+    for segment_index, (locator_type, locator_value, start, end) in enumerate(
+        locator_specs
+    ):
         segment_text = native_text[start:end]
         locators.append(
             DocumentTextLocator(
                 segment_index=segment_index,
-                locator_type="normalized_text_span",
-                locator_value=f"chars:{start:012d}-{end:012d}",
+                locator_type=locator_type,
+                locator_value=locator_value,
                 page_number=None,
                 text_start_char=start,
                 text_end_char=end,
@@ -375,10 +638,14 @@ def extract_document_path(
                 timeout=120,
             )
         except Exception as exc:
-            raise RuntimeError(f"PDF text extraction unavailable: {type(exc).__name__}: {exc}") from exc
+            raise RuntimeError(
+                f"PDF text extraction unavailable: {type(exc).__name__}: {exc}"
+            ) from exc
         if completed.returncode != 0 or not completed.stdout:
             raise RuntimeError(f"pdftotext failed: exit_code={completed.returncode}")
-        decoded = normalize_plain_text(completed.stdout.decode("utf-8", errors="replace"))
+        decoded = normalize_plain_text(
+            completed.stdout.decode("utf-8", errors="replace")
+        )
         truncated = len(decoded) > int(max_text_chars)
         text = decoded[: int(max_text_chars)]
         return DocumentExtraction(

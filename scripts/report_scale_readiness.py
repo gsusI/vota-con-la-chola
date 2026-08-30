@@ -1840,6 +1840,14 @@ def audit_document_provenance_gap(
         locator_totals.get("normalized_text_span_locators"),
         "native text normalized-span locators",
     )
+    locator_markup_section_rows = _require_nonnegative_int(
+        locator_totals.get("markup_section_locators"),
+        "native text semantic markup-section locators",
+    )
+    locator_no_text_rows = _require_nonnegative_int(
+        locator_totals.get("document_no_text_locators"),
+        "native text no-text locators",
+    )
     if (
         _require_nonnegative_int(
             locator_totals.get("file_instances"), "locator file instances"
@@ -1854,11 +1862,17 @@ def audit_document_provenance_gap(
             locator_totals.get("native_text_chars"), "locator native text chars"
         )
         != native_chars
-        or locator_content_rows != locator_pdf_pages + locator_span_rows
+        or locator_content_rows
+        != (
+            locator_pdf_pages
+            + locator_markup_section_rows
+            + locator_span_rows
+            + locator_no_text_rows
+        )
+        or locator_markup_section_rows < 1
         or locator_manifest.get("rows") != locator_instance_rows
         or locator_native_input.get("path") != native_current_manifest.get("path")
-        or locator_native_input.get("sha256")
-        != native_current_manifest.get("sha256")
+        or locator_native_input.get("sha256") != native_current_manifest.get("sha256")
         or locator_validation_native_input.get("path")
         != native_current_manifest.get("path")
         or locator_validation_native_input.get("sha256")
@@ -1915,6 +1929,8 @@ def audit_document_provenance_gap(
     encryption_counts = (
         document_profile.get("by_encryption_status_file_instances") or {}
     )
+    profile_format_counts = document_profile.get("by_format_file_instances") or {}
+    profile_format_coverage = document_profile.get("format_coverage") or {}
     profile_file_instances = _require_nonnegative_int(
         profile_totals.get("file_instances"), "document profile file instances"
     )
@@ -1924,6 +1940,10 @@ def audit_document_provenance_gap(
     )
     profile_pdf_instances = _require_nonnegative_int(
         profile_totals.get("pdf_file_instances"), "document profile PDF instances"
+    )
+    profile_office_instances = _require_nonnegative_int(
+        profile_totals.get("office_format_file_instances"),
+        "document profile office-format instances",
     )
     profile_machine_candidates = _require_nonnegative_int(
         profile_totals.get("machine_language_candidate_file_instances"),
@@ -1936,6 +1956,21 @@ def audit_document_provenance_gap(
     if (
         profile_file_instances != eligible_files
         or profile_distinct_content != distinct_content
+        or sum(
+            _require_nonnegative_int(value, "document profile format count")
+            for value in profile_format_counts.values()
+        )
+        != eligible_files
+        or _require_nonnegative_int(
+            profile_format_counts.get("pdf"), "document profile PDF format count"
+        )
+        != profile_pdf_instances
+        or profile_office_instances != 0
+        or profile_format_coverage.get("observed_office_extensions") != []
+        or profile_format_coverage.get("representative_office_format_cohort_present")
+        is not False
+        or profile_format_coverage.get("office_extraction_support_claimed") is not False
+        or profile_format_coverage.get("reason") != "real_office_format_cohort_absent"
         or profile_pdf_instances
         != _require_nonnegative_int(inventory_totals.get("pdf_files"), "PDF files")
         or profile_machine_candidates + profile_unknown_language != eligible_files
@@ -2265,6 +2300,7 @@ def audit_document_provenance_gap(
         "native_text_locator_content_rows": locator_content_rows,
         "native_text_locator_instance_rows": locator_instance_rows,
         "native_text_locator_pdf_pages": locator_pdf_pages,
+        "native_text_locator_markup_sections": locator_markup_section_rows,
         "native_text_locator_normalized_spans": locator_span_rows,
         "native_text_locator_replayed_content_objects": _require_nonnegative_int(
             locator_validation_totals.get("content_objects_replayed"),
@@ -2281,6 +2317,7 @@ def audit_document_provenance_gap(
         "document_profile_machine_language_candidates": profile_machine_candidates,
         "document_profile_unknown_language_instances": profile_unknown_language,
         "document_profile_pdf_instances": profile_pdf_instances,
+        "document_profile_office_format_instances": profile_office_instances,
         "document_profile_encrypted_pdf_instances": _require_nonnegative_int(
             profile_totals.get("encrypted_pdf_file_instances"),
             "document profile encrypted PDF instances",

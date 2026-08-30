@@ -60,6 +60,9 @@ DEFAULT_REPORT = Path(
 ROW_SCHEMA = "real_document_profile_manifest_row_v2"
 REPORT_SCHEMA = "real_document_language_encryption_profile_v2"
 DATASET = "document_profile"
+OFFICE_DOCUMENT_EXTENSIONS = frozenset(
+    {"doc", "docx", "odt", "rtf", "xls", "xlsx", "ods", "ppt", "pptx", "odp"}
+)
 
 _MACHINE_STATUS_ALIASES = {
     "detected": "candidate_threshold_passed",
@@ -859,6 +862,18 @@ def build_report(
             """
         )
     }
+    extension_counts = {
+        str(row["extension"]): int(row["total"])
+        for row in conn.execute(
+            "SELECT extension, COUNT(*) AS total FROM document_instances "
+            "GROUP BY extension ORDER BY extension"
+        )
+    }
+    office_format_instances = sum(
+        total
+        for extension, total in extension_counts.items()
+        if extension.casefold().lstrip(".") in OFFICE_DOCUMENT_EXTENSIONS
+    )
     terminal = _terminal(conn)
     checks = {
         "inventory_and_native_generation_bound_by_sha256": (
@@ -878,6 +893,9 @@ def build_report(
         "language_review_status_explicit_and_unreviewed": terminal,
         "encryption_status_explicit_for_every_profiled_instance": (
             sum(encryption_counts.values()) == profiled_instances
+        ),
+        "file_format_explicit_for_every_profiled_instance": (
+            sum(extension_counts.values()) == profiled_instances
         ),
         "every_pdf_encryption_status_observed": (
             int(
@@ -912,6 +930,7 @@ def build_report(
             "unknown_language_is_retained_not_imputed": True,
             "classification_is_content_deduplicated": True,
             "raw_and_native_text_bytes_are_fully_rehashed": True,
+            "unsupported_formats_are_not_claimed_from_absent_real_data": True,
         },
         "configuration": _configuration(args),
         "inputs": {
@@ -945,6 +964,7 @@ def build_report(
             "profiled_file_instances": profiled_instances,
             "profiled_content_objects": succeeded_objects,
             "pdf_file_instances": pdf_instances,
+            "office_format_file_instances": office_format_instances,
             "encrypted_pdf_file_instances": encrypted_pdf_instances,
             "machine_language_candidate_file_instances": profiled_instances
             - language_counts.get("und", 0),
@@ -958,12 +978,29 @@ def build_report(
         ),
         "by_language_review_status_content_objects": {"unreviewed": succeeded_objects},
         "by_encryption_status_file_instances": encryption_counts,
+        "by_format_file_instances": extension_counts,
+        "format_coverage": {
+            "observed_office_extensions": sorted(
+                extension
+                for extension in extension_counts
+                if extension.casefold().lstrip(".") in OFFICE_DOCUMENT_EXTENSIONS
+            ),
+            "representative_office_format_cohort_present": office_format_instances > 0,
+            "office_extraction_support_claimed": False,
+            "reason": (
+                "real_office_format_cohort_absent"
+                if office_format_instances == 0
+                else "real_office_cohort_present_but_not_yet_quality_promoted"
+            ),
+        },
         "checks": checks,
         "next_action": (
             "Run the independent full-row/full-byte validator, then use the versioned "
             "machine-language/encryption distribution as an input to DEC-01. Treat "
             "every machine-only language label as an unreviewed candidate; human "
-            "review remains required before language-quality promotion."
+            "review remains required before language-quality promotion. Acquire and "
+            "validate a representative real office-format cohort before claiming "
+            "office extraction support."
         ),
     }
 

@@ -24,7 +24,10 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from publicdata_docs.extraction import build_document_text_locators
+from publicdata_docs.extraction import (
+    DOCUMENT_LOCATOR_ALGORITHM_VERSION,
+    build_document_text_locators,
+)
 from publicdata_docs.generation_manifest import (
     GenerationManifestError,
     iter_generation_rows,
@@ -97,10 +100,7 @@ def usage() -> dict[str, float | int]:
     multiplier = 1 if sys.platform == "darwin" else 1024
     return {
         "cpu_seconds": round(
-            own.ru_utime
-            + own.ru_stime
-            + children.ru_utime
-            + children.ru_stime,
+            own.ru_utime + own.ru_stime + children.ru_utime + children.ru_stime,
             6,
         ),
         "peak_rss_bytes_self": int(own.ru_maxrss * multiplier),
@@ -222,9 +222,7 @@ def load_native(conn: sqlite3.Connection, manifest: Path) -> tuple[int, int]:
             int(item["native_text_chars"]),
             str(item["native_extraction_method"]),
         )
-        conn.execute(
-            "INSERT INTO instances VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", values
-        )
+        conn.execute("INSERT INTO instances VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", values)
         conn.execute(
             "INSERT OR IGNORE INTO contents VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
             (
@@ -267,7 +265,9 @@ def load_actual(conn: sqlite3.Connection, manifest: Path) -> int:
         row_schema_version=ROW_SCHEMA,
         allow_legacy_jsonl=False,
     ):
-        forbidden_text_fields = {"text", "segment_text", "public_text"}.intersection(item)
+        forbidden_text_fields = {"text", "segment_text", "public_text"}.intersection(
+            item
+        )
         if (
             forbidden_text_fields
             or item.get("text_included_in_manifest") is not False
@@ -313,6 +313,9 @@ def replay_one(
     native_root: Path,
     max_span_chars: int,
     pdf_timeout_seconds: float,
+    markup_section_max_depth: int,
+    max_semantic_markup_bytes: int,
+    max_locators_per_content: int,
 ) -> tuple[str, list[tuple[Any, ...]], int, int]:
     content_sha256 = str(row["content_sha256"])
     raw_path = safe_child(raw_root, str(row["representative_path"]))
@@ -336,6 +339,9 @@ def replay_one(
         expected_page_count=row["page_count"],
         max_span_chars=max_span_chars,
         pdf_timeout_seconds=pdf_timeout_seconds,
+        markup_section_max_depth=markup_section_max_depth,
+        max_semantic_markup_bytes=max_semantic_markup_bytes,
+        max_locators_per_content=max_locators_per_content,
     )
     return (
         content_sha256,
@@ -366,6 +372,9 @@ def full_replay(
     native_root: Path,
     max_span_chars: int,
     pdf_timeout_seconds: float,
+    markup_section_max_depth: int,
+    max_semantic_markup_bytes: int,
+    max_locators_per_content: int,
     workers: int,
     batch_size: int,
 ) -> tuple[int, int, int, list[str]]:
@@ -387,6 +396,9 @@ def full_replay(
                     native_root=native_root,
                     max_span_chars=max_span_chars,
                     pdf_timeout_seconds=pdf_timeout_seconds,
+                    markup_section_max_depth=markup_section_max_depth,
+                    max_semantic_markup_bytes=max_semantic_markup_bytes,
+                    max_locators_per_content=max_locators_per_content,
                 ): str(row["content_sha256"])
                 for row in rows
             }
@@ -515,7 +527,17 @@ def validate(args: argparse.Namespace) -> dict[str, Any]:
         raise LocatorValidationError("source locator report is not passing")
     configuration = source_report.get("configuration") or {}
     max_span_chars = int(configuration.get("max_span_chars") or 0)
-    if max_span_chars < 1:
+    markup_section_max_depth = int(configuration.get("markup_section_max_depth") or 0)
+    max_semantic_markup_bytes = int(configuration.get("max_semantic_markup_bytes") or 0)
+    max_locators_per_content = int(configuration.get("max_locators_per_content") or 0)
+    if (
+        max_span_chars < 1
+        or markup_section_max_depth < 0
+        or max_semantic_markup_bytes < 1
+        or max_locators_per_content < 1
+        or configuration.get("locator_algorithm_version")
+        != DOCUMENT_LOCATOR_ALGORITHM_VERSION
+    ):
         raise LocatorValidationError("source locator configuration drifted")
     index = load_index_bytes(locator_manifest.read_bytes(), dataset=DATASET)
     if (
@@ -553,6 +575,9 @@ def validate(args: argparse.Namespace) -> dict[str, Any]:
             native_root=native_root,
             max_span_chars=max_span_chars,
             pdf_timeout_seconds=float(args.pdf_timeout_seconds),
+            markup_section_max_depth=markup_section_max_depth,
+            max_semantic_markup_bytes=max_semantic_markup_bytes,
+            max_locators_per_content=max_locators_per_content,
             workers=int(args.workers),
             batch_size=int(args.batch_size),
         )
@@ -597,7 +622,8 @@ def validate(args: argparse.Namespace) -> dict[str, Any]:
             "synthetic_or_mock_records_counted": False,
             "official_public_domain_personal_information_retained": True,
             "locator_rows_copy_no_public_text": True,
-            "markup_locators_are_normalized_text_spans_not_semantic_sections": True,
+            "markup_sections_come_only_from_observed_source_structure": True,
+            "unproven_markup_structure_falls_back_to_exact_text_spans": True,
         },
         "inputs": {
             "native_manifest": {

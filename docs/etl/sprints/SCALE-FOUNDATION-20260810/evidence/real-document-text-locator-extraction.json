@@ -1,23 +1,33 @@
 {
   "checks": {
+    "average_locator_fanout_within_million_scale_bound": true,
     "every_content_object_has_locator": true,
     "every_content_object_terminal_success": true,
     "every_file_instance_has_locator": true,
     "every_pdf_page_has_locator": true,
     "manifest_contains_every_instance_locator": true,
+    "markup_content_objects_accounted_for": true,
+    "maximum_locator_fanout_within_bound": true,
     "native_manifest_bound_by_sha256": true,
     "no_dead_work": true,
     "no_public_text_copied_into_manifest": true,
     "no_synthetic_or_mock_records": true,
     "normalized_spans_within_configured_bound": true,
-    "official_public_domain_personal_information_retained": true
+    "official_public_domain_personal_information_retained": true,
+    "semantic_markup_sections_materialized": true
   },
   "configuration": {
-    "markup_locator": "normalized_native_text_character_span",
+    "locator_algorithm_version": "document_text_locator_v3_major_markup_sections",
+    "markup_fallback_locator": "normalized_native_text_character_span",
+    "markup_locator": "source_xpath_plus_bounded_native_text_span",
+    "markup_section_max_depth": 1,
+    "max_average_locators_per_content": 10.0,
+    "max_locators_per_content": 2000,
+    "max_semantic_markup_bytes": 67108864,
     "max_span_chars": 8192,
     "pdf_locator": "page_number"
   },
-  "generated_at": "2026-08-30T11:08:02.406259Z",
+  "generated_at": "2026-08-30T13:47:23.736058Z",
   "inputs": {
     "native_manifest": {
       "bytes": 5423,
@@ -26,88 +36,96 @@
     }
   },
   "manifest": {
-    "bytes": 14619,
-    "compressed_bytes": 32050870,
-    "logical_sha256": "e10c152eb66a16a468fe4bd548ac6d806d6cfac823d34a13b5c68b1f3ee7ba9d",
+    "bytes": 32720,
+    "compressed_bytes": 64886826,
+    "logical_sha256": "387a6ce263540f7ee86e5980026acf77eeb421c56c09d5378ad5b8b5f9143248",
     "path": "etl/data/published/real-document-text-locator-manifest-latest.jsonl",
     "publication": {
       "activated": true,
-      "active_history_path": "real-document-text-locator-manifest-latest-history/621b8b47c8e5f506a07900f474c7ca95a4df1395e13068f82a58a04a76c68eb9.json",
-      "active_logical_sha256": "e10c152eb66a16a468fe4bd548ac6d806d6cfac823d34a13b5c68b1f3ee7ba9d",
-      "active_manifest_sha256": "621b8b47c8e5f506a07900f474c7ca95a4df1395e13068f82a58a04a76c68eb9",
-      "active_receipt_path": "real-document-text-locator-manifest-latest-receipts/621b8b47c8e5f506a07900f474c7ca95a4df1395e13068f82a58a04a76c68eb9.json",
+      "active_history_path": "real-document-text-locator-manifest-latest-history/61bf8adfa5870cfde279bd6f4e20b0681ff172257975ec024e31a011297b9723.json",
+      "active_logical_sha256": "387a6ce263540f7ee86e5980026acf77eeb421c56c09d5378ad5b8b5f9143248",
+      "active_manifest_sha256": "61bf8adfa5870cfde279bd6f4e20b0681ff172257975ec024e31a011297b9723",
+      "active_receipt_path": "real-document-text-locator-manifest-latest-receipts/61bf8adfa5870cfde279bd6f4e20b0681ff172257975ec024e31a011297b9723.json",
       "automatic_deletion_performed": false,
       "legacy_equivalent_jsonl_migrated": false,
-      "live_index_changed": true,
+      "live_index_changed": false,
       "live_index_switched_last": true,
-      "predecessor_manifest_sha256": null,
+      "predecessor_manifest_sha256": "621b8b47c8e5f506a07900f474c7ca95a4df1395e13068f82a58a04a76c68eb9",
       "state_snapshot": {
-        "bytes": 277614592,
-        "compressed_bytes": 67491308,
-        "compressed_sha256": "39175d6ffac3ee678115b95a228af2bc5dfb9a574d8cb351a42d347c3f4f1ceb",
-        "path": "real-document-text-locator-manifest-latest-state/c2ae4a307c98d4ff64394ed62cea4862e0d75ff38da164a2ff5f02e57892d87a.sqlite.gz",
-        "sha256": "c2ae4a307c98d4ff64394ed62cea4862e0d75ff38da164a2ff5f02e57892d87a",
+        "bytes": 432967680,
+        "compressed_bytes": 101513415,
+        "compressed_sha256": "03d0b492824bd5695c9f9e689d130c96a50d0c4bc9b40ed54ed2260d517ada18",
+        "path": "real-document-text-locator-manifest-latest-state/6a52a9dc5c2109f7aaaaad4e669fce6e84e8cfb2f4febfce54ee237e41486b52.sqlite.gz",
+        "sha256": "6a52a9dc5c2109f7aaaaad4e669fce6e84e8cfb2f4febfce54ee237e41486b52",
         "sqlite_quick_check": "ok"
       },
-      "superseded_predecessor": false
+      "superseded_predecessor": true
     },
-    "rows": 379445,
-    "sha256": "621b8b47c8e5f506a07900f474c7ca95a4df1395e13068f82a58a04a76c68eb9",
-    "shard_files": 38,
-    "uncompressed_bytes": 401918515
+    "rows": 879104,
+    "sha256": "61bf8adfa5870cfde279bd6f4e20b0681ff172257975ec024e31a011297b9723",
+    "shard_files": 88,
+    "uncompressed_bytes": 948116826
   },
-  "next_action": "Independently replay every raw/native object and locator, then expose page/span anchors through evidence exports without copying full text.",
+  "next_action": "Independently replay every raw/native object and page/section locator, then acquire a representative real office-format cohort before claiming office extraction support.",
   "performance": {
-    "content_objects_per_second": 1088.398211,
-    "cpu_seconds": 170.389407,
-    "elapsed_seconds": 110.949282,
+    "content_objects_per_second": 0.0,
+    "cpu_seconds": 16.78822,
+    "elapsed_seconds": 17.179425,
     "measurement_scope": "seed_rehash_locate_and_manifest",
-    "peak_rss_bytes_child_max": 239452160,
-    "peak_rss_bytes_self": 218611712,
-    "raw_bytes_per_second": 47883695.732254
+    "peak_rss_bytes_child_max": 0,
+    "peak_rss_bytes_self": 43679744,
+    "raw_bytes_per_second": 0.0
   },
   "policy": {
     "locator_rows_copy_no_public_text": true,
-    "markup_locators_are_normalized_text_spans_not_semantic_sections": true,
+    "markup_sections_come_only_from_observed_source_structure": true,
     "native_text_is_not_sanitized_or_identity_stripped": true,
     "official_public_domain_personal_information_retained": true,
     "official_real_documents_only": true,
     "pdf_locators_are_exact_pages": true,
-    "synthetic_or_mock_records_counted": false
+    "synthetic_or_mock_records_counted": false,
+    "unproven_markup_structure_falls_back_to_exact_text_spans": true
   },
   "run": {
-    "claimed": 120757,
+    "claimed": 0,
     "dead": 0,
-    "locator_rows": 363164,
-    "native_text_bytes_rehashed": 2256345242,
-    "raw_bytes_rehashed": 5312661661,
+    "locator_rows": 0,
+    "native_text_bytes_rehashed": 0,
+    "raw_bytes_rehashed": 0,
     "retried": 0,
     "seeded": {
       "distinct_content_objects": 120757,
       "file_instances": 122607
     },
-    "succeeded": 120757
+    "succeeded": 0
   },
   "schema_version": "real_document_text_locator_extraction_v1",
   "state": {
-    "database": "etl/data/staging/real-document-text-locators-v2-20260830.db",
+    "database": "etl/data/staging/real-document-text-locators-v4-20260830.db",
     "state_counts": {
       "succeeded": 120757
     }
   },
   "status": "ok",
   "totals": {
-    "content_locator_rows": 363164,
+    "average_locator_rows_per_content": 6.780402,
+    "content_locator_rows": 818781,
     "distinct_content_objects": 120757,
     "document_no_text_locators": 0,
+    "fallback_markup_content_objects": 322,
     "file_instances": 122607,
-    "instance_locator_rows": 379445,
+    "instance_locator_rows": 879104,
     "locator_text_chars": 2211224791,
-    "locators_with_text": 363130,
+    "locators_with_text": 818747,
+    "markup_content_objects": 119795,
+    "markup_section_locators": 782814,
+    "max_locator_rows_per_content": 1568,
     "native_text_bytes": 2256345242,
     "native_text_chars": 2211254429,
-    "normalized_text_span_locators": 332530,
+    "normalized_text_span_locators": 5333,
     "pdf_content_objects": 962,
-    "pdf_page_locators": 30634
+    "pdf_page_locators": 30634,
+    "projected_content_locator_rows_at_one_million_documents": 6780402,
+    "semantic_markup_content_objects": 119473
   }
 }

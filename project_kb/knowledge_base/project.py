@@ -256,10 +256,18 @@ PROJECT_FACTS = [
             "predecessor/supersession chain. Machine candidates are sampling evidence, "
             "not human ground truth. Native extraction v7 preserves PDF angle-bracket "
             "content as plain text and produces 2,211,254,429 public characters. Exact "
-            "locator generation covers every content and file instance with 30,634 PDF "
-            "pages plus 332,530 bounded normalized markup spans; independent replay "
-            "rehashes all raw/native bytes and recomputes 379,445 instance locators with "
-            "zero mismatch. Locator manifests copy no public text. The bounded OCR lane "
+            "locator v3 covers every content and file instance with 30,634 PDF pages, "
+            "782,814 source-derived major XML/HTML sections, and 5,333 exact fallback "
+            "spans; independent replay rehashes all raw/native bytes and recomputes "
+            "879,104 instance locators with zero mismatch. A depth-3 canary was rejected "
+            "because it averaged about 79 locators per document and reached 25,061 on "
+            "one BOE file; the major-container design averages 6.780402, caps the "
+            "observed maximum at 1,568, projects 6,780,402 content locators at one "
+            "million documents, fails generation/replay fast above 2,000, and enforces "
+            "a complete-report average gate of 10. The "
+            "real profile observes 108,042 XML, 13,128 HTML, 1,437 "
+            "PDF, and zero office files, so office extraction support remains explicitly "
+            "unclaimed. Locator manifests copy no public text. The bounded OCR lane "
             "finishes all 856 candidates. "
             "The deterministic 40-row human-review packet remains blank and "
             "pending, so no machine label or invented decision is promoted. Incremental "
@@ -312,7 +320,7 @@ PROJECT_FACTS = [
             ),
             Evidence(
                 source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-locator-validation.json",
-                detail="Independent full raw/native replay and exact recomputation of every PDF-page and normalized-span locator.",
+                detail="Independent full raw/native replay and exact recomputation of every PDF-page, semantic markup-section, and fallback-span locator.",
             ),
             Evidence(
                 source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-language-encryption-validation.json",
@@ -514,9 +522,12 @@ PROJECT_FACTS = [
             "Resumable v7 extraction processes all 120,757 distinct contents into 119,338 "
             "checksum-addressed text objects and 2,211,254,429 unsanitized public characters, "
             "with zero failure or truncation; independent validation rehashes every raw "
-            "instance and CAS object. Exact locators cover 30,634 PDF pages and 332,530 "
-            "normalized markup spans, producing 363,164 content and 379,445 instance "
-            "locators without copying public text; full replay reports zero mismatch. "
+            "instance and CAS object. Locator v3 covers 30,634 PDF pages, 782,814 "
+            "source-derived major markup sections, and 5,333 exact fallback spans, "
+            "producing 818,781 content and 879,104 instance locators without copying "
+            "public text; full replay reports zero mismatch. The profile observes only "
+            "XML, HTML, and PDF, with zero office-format instances; office support is "
+            "therefore unclaimed pending a representative real cohort. "
             "Additive OCR processes all 856 candidate pages "
             "across 58 PDFs, producing 89,632 characters on 849 pages, seven explicit "
             "no-text results, 17 material gains, and 131 independently verified OCR CAS "
@@ -2210,6 +2221,37 @@ PROJECT_GOTCHAS = [
         ],
         references={
             "single-runtime SQLite state": "fact.Project is static and SQLite first"
+        },
+        updated_at=UPDATED,
+    ),
+    Gotcha(
+        name="Bound semantic markup locators to major source containers",
+        description=(
+            "`major-container markup lineage` avoids treating every XML/HTML leaf as "
+            "a section. A real depth-3 canary averaged about 79 locators per document "
+            "and reached 25,061 locators on one BOE XML, which projected toward about "
+            "79 million content locators at one million documents."
+        ),
+        mitigation=(
+            "Use source-derived XPath owners only for root/direct-child structure and "
+            "recognized major containers, then split long sections at the configured "
+            "character bound. Require exact reconstruction of the existing native CAS; "
+            "fall back to bounded character spans when structure cannot be proven. Bind "
+            "the locator algorithm and bounds into queue metadata, canary real files, "
+            "and reject designs whose locator fan-out does not scale."
+        ),
+        evidence=[
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-locator-extraction.json",
+                detail="Complete v3 fan-out, source-structure coverage, fallback, memory, and throughput evidence.",
+            ),
+            Evidence(
+                source="docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-locator-validation.json",
+                detail="Independent exact full-corpus locator replay.",
+            ),
+        ],
+        references={
+            "major-container markup lineage": "fact.BOE document and candidate cohorts preserve exact public evidence"
         },
         updated_at=UPDATED,
     ),

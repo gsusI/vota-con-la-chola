@@ -552,7 +552,7 @@ scale_document_profile_manifest := env_var_or_default("SCALE_DOCUMENT_PROFILE_MA
 scale_document_profile_report := env_var_or_default("SCALE_DOCUMENT_PROFILE_REPORT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-language-encryption-profile.json")
 scale_document_profile_validation := env_var_or_default("SCALE_DOCUMENT_PROFILE_VALIDATION", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-language-encryption-validation.json")
 scale_document_profile_generation_audit := env_var_or_default("SCALE_DOCUMENT_PROFILE_GENERATION_AUDIT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-profile-generation-audit.json")
-scale_document_locator_state_db := env_var_or_default("SCALE_DOCUMENT_LOCATOR_STATE_DB", "etl/data/staging/real-document-text-locators-v2-20260830.db")
+scale_document_locator_state_db := env_var_or_default("SCALE_DOCUMENT_LOCATOR_STATE_DB", "etl/data/staging/real-document-text-locators-v4-20260830.db")
 scale_document_locator_manifest := env_var_or_default("SCALE_DOCUMENT_LOCATOR_MANIFEST", "etl/data/published/real-document-text-locator-manifest-latest.jsonl")
 scale_document_locator_report := env_var_or_default("SCALE_DOCUMENT_LOCATOR_REPORT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-locator-extraction.json")
 scale_document_locator_validation := env_var_or_default("SCALE_DOCUMENT_LOCATOR_VALIDATION", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-locator-validation.json")
@@ -2501,7 +2501,7 @@ etl-scale-document-language-encryption-profile:
   just etl-scale-audit-document-profile-generation
 
 etl-scale-locate-document-text:
-  python3 scripts/locate_real_document_text.py --state-db {{scale_document_locator_state_db}} --manifest-out {{scale_document_locator_manifest}} --report-out {{scale_document_locator_report}} --workers {{scale_document_workers}} --claim-size 64 --max-span-chars 8192 --enforce
+  python3 scripts/locate_real_document_text.py --state-db {{scale_document_locator_state_db}} --manifest-out {{scale_document_locator_manifest}} --report-out {{scale_document_locator_report}} --workers {{scale_document_workers}} --claim-size 64 --max-span-chars 8192 --max-average-locators-per-content 10 --max-locators-per-content 2000 --markup-section-max-depth 1 --max-semantic-markup-bytes 67108864 --enforce
 
 etl-scale-validate-document-text-locators:
   python3 scripts/validate_real_document_text_locators.py --locator-manifest {{scale_document_locator_manifest}} --locator-report {{scale_document_locator_report}} --report-out {{scale_document_locator_validation}} --workers {{scale_document_workers}} --batch-size 128 --enforce

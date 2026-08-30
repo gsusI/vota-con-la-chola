@@ -98,6 +98,21 @@ class RealDocumentProfileTest(unittest.TestCase):
         self.assertEqual(source_report["status"], "ok")
         self.assertEqual(source_report["totals"]["file_instances"], 122_607)
         self.assertEqual(source_report["totals"]["distinct_content_objects"], 120_757)
+        self.assertEqual(
+            source_report["by_format_file_instances"],
+            {"html": 13_128, "pdf": 1_437, "xml": 108_042},
+        )
+        self.assertEqual(source_report["totals"]["office_format_file_instances"], 0)
+        self.assertIs(
+            source_report["format_coverage"][
+                "representative_office_format_cohort_present"
+            ],
+            False,
+        )
+        self.assertIs(
+            source_report["format_coverage"]["office_extraction_support_claimed"],
+            False,
+        )
         self.assertEqual(index["row_schema_version"], ROW_SCHEMA)
         self.assertEqual(index["totals"]["rows"], 122_607)
         self.assertIs(index["policy"]["synthetic_or_mock_records_counted"], False)
