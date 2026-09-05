@@ -3,9 +3,12 @@
 import argparse
 import csv
 import hashlib
+import html
 import json
+import re
 import sqlite3
 import sys
+import unicodedata
 import zipfile
 from collections import Counter, defaultdict
 from datetime import date
@@ -27,6 +30,61 @@ def sha(data):
 def dump(path, data):
     path.write_text(json.dumps(data, ensure_ascii=False, sort_keys=True, indent=2, default=str) + '\n')
 
+def clean_party_name(value):
+    text = unicodedata.normalize('NFKC', html.unescape(value or '')).replace('\u00a0', ' ')
+    text = ' '.join(text.split())
+    return re.sub(r'\s+([,.;:])', r'\1', text)
+
+def party_name_key(value):
+    return clean_party_name(value).rstrip(' .,:;').casefold()
+
+def party_identity(row, kind):
+    if kind == 'authority':
+        identifier = re.sub(r'[\s.\-]', '', row.get('authority_id') or '').upper()
+        return ('id', identifier) if identifier else ('name', party_name_key(row['authority_source_text']))
+    identifier = re.sub(r'[\s.\-]', '', row.get('supplier_id') or '').upper()
+    return ('id', identifier) if identifier else ('name', party_name_key(row['supplier_source_text']))
+
+def normalize_party_names(rows):
+    aliases = []
+    stats = {}
+    for kind in ('authority', 'supplier'):
+        source_field = kind + '_source_text'
+        variants = defaultdict(Counter)
+        for row in rows:
+            variants[party_identity(row, kind)][clean_party_name(row[source_field])] += 1
+        canonical = {
+            identity: min(counts, key=lambda name: (-counts[name], -len(name), name.casefold(), name))
+            for identity, counts in variants.items()
+        }
+        changed = 0
+        for row in rows:
+            label = canonical[party_identity(row, kind)]
+            changed += label != clean_party_name(row[source_field])
+            row[kind] = label
+        merged = 0
+        for identity, counts in variants.items():
+            if len(counts) < 2:
+                continue
+            merged += 1
+            aliases.append({
+                'entity_type': kind,
+                'identity_basis': identity[0],
+                'identity_key': '|'.join(identity[1:]),
+                'canonical_name': canonical[identity],
+                'source_names': [
+                    {'name': name, 'rows': count}
+                    for name, count in sorted(counts.items(), key=lambda item: (-item[1], item[0].casefold(), item[0]))
+                ],
+            })
+        stats[kind] = {
+            'canonical_entities': len(variants),
+            'groups_with_multiple_source_names': merged,
+            'rows_using_canonical_alias': changed,
+        }
+    aliases.sort(key=lambda row: (row['entity_type'], row['canonical_name'].casefold(), row['identity_key']))
+    return aliases, stats
+
 def retain_literal_labels(rows, out):
     def child(node, name):
         return next((x for x in node if x.tag.rsplit('}', 1)[-1] == name), None)
@@ -36,15 +94,26 @@ def retain_literal_labels(rows, out):
             if node is None:
                 raise ValueError('Missing source identity element')
         return node
+    entries = {}
     for row in rows:
-        entry = ET.parse(out/row['capture_path']).getroot()
-        status = child(entry, 'ContractFolderStatus')
-        awards = [x for x in status if x.tag.rsplit('}', 1)[-1] == 'TenderResult']
-        row['supplier_source_text'] = ''.join(path(awards[row['award_ordinal']], 'WinningParty', 'PartyName', 'Name').itertext())
-        row['authority_source_text'] = ''.join(path(status, 'LocatedContractingParty', 'Party', 'PartyName', 'Name').itertext())
+        capture = row['capture_path']
+        if capture not in entries:
+            entry = ET.parse(out/capture).getroot()
+            status = child(entry, 'ContractFolderStatus')
+            entries[capture] = (
+                ''.join(path(status, 'LocatedContractingParty', 'Party', 'PartyName', 'Name').itertext()),
+                [award for award in status if award.tag.rsplit('}', 1)[-1] == 'TenderResult'],
+                {},
+            )
+        authority, awards, suppliers = entries[capture]
+        ordinal = row['award_ordinal']
+        if ordinal not in suppliers:
+            suppliers[ordinal] = ''.join(path(awards[ordinal], 'WinningParty', 'PartyName', 'Name').itertext())
+        row['authority_source_text'] = authority
+        row['supplier_source_text'] = suppliers[ordinal]
 
 
-def build(corpus, db, out, limit=120):
+def build(corpus, db, out, limit=None):
     import pyarrow as pa
     import pyarrow.parquet as pq
     if out.exists() and any(out.iterdir()):
@@ -109,6 +178,7 @@ def build(corpus, db, out, limit=120):
         candidates.append(r)
     candidates.sort(key=lambda r:(r['effective_date'],r['source_record_id'],r['money_fact_id']))
     selected = []
+    selected_keys = set()
     source_payloads = {}
     for r in candidates:
         source = c.execute('SELECT raw_payload,content_sha256 FROM source_records WHERE source_record_pk=?',(r['source_record_pk'],)).fetchone()
@@ -126,8 +196,9 @@ def build(corpus, db, out, limit=120):
             excluded['source_parquet_semantic_mismatch'] += 1
             continue
         identity = rec['stable_contract_id'] + '#' + str(a['award_ordinal'])
-        if any(s['award_key']==identity for s in selected):
+        if identity in selected_keys:
             raise ValueError('Duplicate award version')
+        selected_keys.add(identity)
         source_payloads[r['source_record_pk']] = payload
         selected.append(dict(
             award_key=identity, money_fact_id=r['money_fact_id'], source_record_id=r['source_record_id'],
@@ -141,12 +212,15 @@ def build(corpus, db, out, limit=120):
             source_snapshot_date=r['source_snapshot_date'], entry_updated_at=rec['entry_updated_at'],
             entry_sha256=source['content_sha256'], capture_path='evidence/'+source['content_sha256']+'.xml',
         ))
-        if len(selected) == limit:
+        if limit is not None and len(selected) == limit:
             break
-    if len(selected) != limit:
+    if limit is not None and len(selected) != limit:
         raise ValueError('Insufficient eligible source rows')
+    if not selected:
+        raise ValueError('No eligible source rows')
     # Rehash original archives and members; recover exact ET-serialized entries used by ingest.
     targets = defaultdict(dict)
+    target_metadata = {}
     lineage = []
     for pk, payload in source_payloads.items():
         row = c.execute('''SELECT m.member_name,m.content_sha256 member_sha256,a.raw_path,
@@ -157,12 +231,13 @@ def build(corpus, db, out, limit=120):
         if not row:
             raise ValueError('Missing original capture')
         targets[(row['raw_path'],row['member_name'])][payload['entry_content_sha256']] = payload
+        target_metadata[(row['raw_path'],row['member_name'])] = dict(row)
         lineage.append({k:row[k] for k in ('member_name','member_sha256','archive_sha256','source_url','fetched_at','bytes')} | {'entry_sha256':payload['entry_content_sha256']})
     (out/'evidence').mkdir()
     checked_archives = set()
     recovered = set()
     for (raw_path, member), payloads in targets.items():
-        line = next(l for l in lineage if l['member_name']==member)
+        line = target_metadata[(raw_path, member)]
         archive = ROOT/raw_path
         if raw_path not in checked_archives:
             h = hashlib.sha256()
@@ -190,6 +265,8 @@ def build(corpus, db, out, limit=120):
         raise ValueError('Incomplete original XML recovery')
     c.close()
     retain_literal_labels(selected, out)
+    aliases, normalization = normalize_party_names(selected)
+    dump(out/'name-aliases.json', aliases)
     dump(out/'awards.json',selected)
     with (out/'awards.csv').open('w',newline='') as f:
         writer=csv.DictWriter(f,fieldnames=list(selected[0]));writer.writeheader();writer.writerows(selected)
@@ -197,13 +274,14 @@ def build(corpus, db, out, limit=120):
     dump(out/'lineage.json',lineage)
     (out/'source-manifest.json').write_bytes(manifest_bytes)
     counts=Counter(r['fact_kind'] for r in all_rows)
-    audit=dict(schema_version='placsp-launch-v1', upstream_release=RELEASE, upstream_base_url=BASE,
+    audit=dict(schema_version='placsp-launch-v2', upstream_release=RELEASE, upstream_base_url=BASE,
         upstream_manifest_sha256=MANIFEST_SHA, manifest_snapshot_label=manifest['snapshot_date'],
         observed_source_snapshot_dates=sorted({r['source_snapshot_date'] for r in all_rows}),
         corpus_rows=len(all_rows),corpus_fact_kinds=dict(counts),
-        scope='First 120 eligible January 2025 award results ordered by decision date, source record id and fact id; latest unambiguous version inside frozen corpus only. Not complete procurement coverage.',
-        selection_limit=limit,selected_rows=len(selected),eligible_january_rows_before_source_result_check=len(candidates),
+        scope='Complete eligible January 2025 award-result cohort inside the frozen corpus; latest unambiguous version only. Not complete procurement coverage outside this month or snapshot.',
+        selection_mode='complete_month',selection_limit=limit,selected_rows=len(selected),eligible_january_rows_before_source_result_check=len(candidates),
         selection_exclusions=dict(excluded),ambiguous_contract_version_groups=ambiguous,
+        name_normalization=dict(method='NFKC, HTML entity decoding, whitespace/punctuation cleanup, case-insensitive terminal-punctuation key; published identifiers group variants even when the identifier scheme label differs; literal XML labels retained per row', **normalization),
         capture_entries=len(recovered),original_archives_rehashed=len(checked_archives),original_members_rehashed=len(targets),
         amount_cents=sum(r['amount_cents'] for r in selected),
         decision_date_min=min(r['decision_date'] for r in selected),decision_date_max=max(r['decision_date'] for r in selected),
@@ -219,4 +297,5 @@ def build(corpus, db, out, limit=120):
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--corpus',type=Path,required=True);p.add_argument('--source-db',type=Path,required=True);p.add_argument('--out',type=Path,required=True)
-    a=p.parse_args();build(a.corpus,a.source_db,a.out)
+    p.add_argument('--limit',type=int,default=0,help='Development-only cap; zero validates the complete January cohort')
+    a=p.parse_args();build(a.corpus,a.source_db,a.out,a.limit or None)

@@ -2012,3 +2012,12 @@ CI global de la publicación: fallos fuera del corte en artefactos de escala aus
 Searchable authority/supplier selectors and a single two-click date range are implemented. Local and public browser checks, CSV parity, static build and privacy gates pass. Published in `95586e58ca`; canonical-domain verification complete. Next: external alpha usability feedback. Evidence: [filter UX verification](sprints/PUBLIC-LAUNCH-20260905/evidence/filter-ux-verification.md).
 
 Date refinement published in source 0163c87015 / site 2b892b1c19: separate editable Desde/Hasta inputs update either endpoint independently; the shared calendar retains its two-click range flow. Manual validation, reset, URL restore, mobile layout, static build, privacy gates and canonical-domain browser checks pass. Next: external alpha usability feedback. Evidence: [filter UX verification](sprints/PUBLIC-LAUNCH-20260905/evidence/filter-ux-verification.md#independent-date-editing-refinement).
+
+### 2026-09-05 · Cohorte PLACSP completa de enero
+
+- **Ahora:** eliminado el límite artificial de 120. La cohorte validada contiene 2.632 resultados, 47.744.719.885 céntimos EUR sin impuestos, decisiones del 1 al 31 de enero y 1.960 XML; ZIP 9.625.726 bytes. El frontend carga y verifica JSON fuera del HTML.
+- **Normalización:** 21 grupos duplicados de órganos y 111 de proveedores convergen mediante identificador o clave conservadora; el texto XML literal permanece por fila. Gas Natural `A61797536` aparece como una sola opción y reúne nueve filas con cuatro grafías fuente.
+- **Gates:** seis pruebas de release, build estático, privacidad, datos reales, tamaño y Playwright escritorio/móvil pasan. Release inmutable `aa4d6082…`; SHA-256 del ZIP `ffa5cd49…`.
+- **Dirección:** publicar fuente, web y release GitHub; conservar la alfa de 120 como historial.
+- **Siguiente:** tres pruebas externas, dos reproducciones y expansión mensual solo con release fechada y validada.
+- **Evidencia:** [generación, normalización y QA](sprints/PUBLIC-LAUNCH-20260905/evidence/full-january-release.md).

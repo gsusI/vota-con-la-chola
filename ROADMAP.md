@@ -1,19 +1,19 @@
 # ROADMAP
 
 Status: `canonical`
-Updated: `2026-08-12`
+Updated: `2026-09-05`
 
 ## Prioridad inmediata: lanzamiento útil para la comunidad
 
-Estado: `alfa técnica publicada`; `L0` y reproducción local de `L1` verificados con 120 resultados y XML original. Responde al mandato del mantenedor de dar foco y hacer aprovechable públicamente lo desarrollado. Esta secuencia tiene prioridad de ejecución sobre las ondas de expansión posteriores; conserva su historial, requisitos y estados.
+Estado: `release mensual preparada`; `L0–L5` técnicos verificados y cohorte completa de enero de 2025 ampliada a 2.632 resultados elegibles con 1.960 XML originales. Responde al mandato del mantenedor de dar foco y hacer aprovechable públicamente lo desarrollado. Esta secuencia tiene prioridad de ejecución sobre las ondas de expansión posteriores; conserva su historial, requisitos y estados.
 
 **Ahora:** código, web y datos ya son públicos. El índice HF de escala declara siete corpora y 5.414.326 filas, pero la portada ofrece numerosas herramientas, `/spending/` solo veinte adjudicaciones fijas y `/explorer/` un índice sin ejecución SQL. GitHub no tiene releases y el issue de revisión ciudadana sigue sin revisores independientes. Evidencia y límites: [auditoría del 5 de septiembre](docs/etl/sprints/PUBLIC-LAUNCH-20260905/evidence/launch-audit.md).
 
 **Destino:** que alguien ajeno al proyecto responda una pregunta sobre dinero público, abra la fuente y reproduzca el resultado; después pueda aportar una consulta, una corrección o una fuente oficial mediante una tarea acotada. Primera audiencia: desarrolladores de datos, periodistas y fiscalizadores cívicos. La misión ciudadana y `/citizen/` se conservan; la campaña inicial sirve a quienes pueden reutilizar y ampliar la evidencia.
 
-**Propuesta de valor:** «Investiga decisiones públicas con datos descargables y resultados que puedes comprobar». Primera entrega: contratación PLACSP de un corte fechado y explícitamente parcial. Mantener el nombre del proyecto. Diferenciación: pregunta → consulta → resultado → expediente oficial → reproducción.
+**Propuesta de valor:** «Investiga decisiones públicas con datos descargables y resultados que puedes comprobar». Primera entrega: cohorte mensual PLACSP fechada y acotada al corpus congelado. Mantener el nombre del proyecto. Diferenciación: pregunta → consulta → resultado → expediente oficial → reproducción.
 
-**Pregunta inicial:** «¿A quién adjudicó este organismo, cuánto y en qué expedientes, dentro de este corte?». Tres consultas del mismo dataset: adjudicaciones por órgano/proveedor; distribución temporal; desglose hasta expediente y fuente. No sumar anuncios con adjudicaciones, confundir adjudicación con pago ni fusionar identidades por nombre. No convertir concentraciones o anomalías en acusaciones. Publicar una release no actualiza la fecha de sus datos.
+**Pregunta inicial:** «¿A quién adjudicó este organismo, cuánto y en qué expedientes, durante enero de 2025?». Tres consultas del mismo dataset: adjudicaciones por órgano/proveedor; distribución temporal; desglose hasta expediente y fuente. No sumar anuncios con adjudicaciones ni confundir adjudicación con pago. Normalizar variantes tipográficas mediante identificadores publicados o una clave conservadora de nombre; retener siempre el texto XML literal. No convertir concentraciones o anomalías en acusaciones. Publicar una release no actualiza la fecha de sus datos.
 
 ### Hitos de lanzamiento
 

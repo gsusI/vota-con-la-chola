@@ -1,0 +1,58 @@
+{
+  "ambiguous_contract_version_groups": 0,
+  "amount_cents": 47744719885,
+  "amount_semantics": "EUR tax-exclusive awarded amount; integer cents for aggregation; lexical source decimal retained",
+  "capture_entries": 1960,
+  "community_validation": {
+    "journey_testers": 0,
+    "query_reproducers": 0,
+    "status": "pending"
+  },
+  "corpus_fact_kinds": {
+    "contract_award": 141747,
+    "contract_notice": 121555
+  },
+  "corpus_rows": 263302,
+  "decision_date_max": "2025-01-31",
+  "decision_date_min": "2025-01-01",
+  "eligible_january_rows_before_source_result_check": 10394,
+  "evidence_serialization": "ET UTF-8 serialization of original captured Atom entry, matching ingest SHA-256; archive and member lineage retained",
+  "identity": "Names and identifiers retained as published; no name-only entity resolution",
+  "manifest_snapshot_label": "2025-03-31",
+  "name_normalization": {
+    "authority": {
+      "canonical_entities": 521,
+      "groups_with_multiple_source_names": 21,
+      "rows_using_canonical_alias": 125
+    },
+    "method": "NFKC, HTML entity decoding, whitespace/punctuation cleanup, case-insensitive terminal-punctuation key; published identifiers group variants even when the identifier scheme label differs; literal XML labels retained per row",
+    "supplier": {
+      "canonical_entities": 1457,
+      "groups_with_multiple_source_names": 111,
+      "rows_using_canonical_alias": 202
+    }
+  },
+  "observed_source_snapshot_dates": [
+    "2025-03-31",
+    "2025-06-30"
+  ],
+  "original_archives_rehashed": 6,
+  "original_members_rehashed": 350,
+  "rights_url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/legal/data-rights.md",
+  "schema_version": "placsp-launch-v2",
+  "scope": "Complete eligible January 2025 award-result cohort inside the frozen corpus; latest unambiguous version only. Not complete procurement coverage outside this month or snapshot.",
+  "selected_rows": 2632,
+  "selection_exclusions": {
+    "missing_identity_or_eur_amount": 1611,
+    "not_awarded_or_tombstone": 7720,
+    "outside_january_2025": 129742,
+    "source_parquet_semantic_mismatch": 42
+  },
+  "selection_limit": null,
+  "selection_mode": "complete_month",
+  "status": "technical_alpha",
+  "unit": "award result, identified by source stable contract and award ordinal; not unique contract, lot, invoice or payment",
+  "upstream_base_url": "https://huggingface.co/datasets/JesusIC/vota-con-la-chola-data/resolve/main/scale/snapshots/2026-08-19/5d9ce557ed864de56f677a9f82c999a4ec0dfc494c086b1bfca0bb2e461272dd/",
+  "upstream_manifest_sha256": "b225f167d1fad027a0f8d3bac336ec96f9a5e06770f32db8c2f2af53810dda4b",
+  "upstream_release": "5d9ce557ed864de56f677a9f82c999a4ec0dfc494c086b1bfca0bb2e461272dd"
+}

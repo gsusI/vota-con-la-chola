@@ -11,6 +11,8 @@ from xml.etree import ElementTree as ET
 ROOT=Path(__file__).resolve().parents[1]
 spec=importlib.util.spec_from_file_location('reproduce',ROOT/'docs/examples/placsp-launch/reproduce.py')
 reproduce=importlib.util.module_from_spec(spec);spec.loader.exec_module(reproduce)
+build_spec=importlib.util.spec_from_file_location('build_placsp_launch',ROOT/'scripts/build_placsp_launch.py')
+build_launch=importlib.util.module_from_spec(build_spec);build_spec.loader.exec_module(build_launch)
 PUBLIC=ROOT/'ui/gh-pages-next/public/spending/launch'
 
 class LaunchTests(unittest.TestCase):
@@ -49,7 +51,21 @@ class LaunchTests(unittest.TestCase):
             self.assertIsNotNone(amount)
             self.assertEqual(Decimal(amount.text)*100,row['amount_cents'])
             self.assertEqual(''.join(supplier.itertext()),row['supplier_source_text'])
-            self.assertEqual(' '.join(row['supplier_source_text'].split()),row['supplier'])
+            self.assertTrue(row['supplier'])
+    def test_name_normalization_merges_punctuation_aliases_without_losing_source(self):
+        rows=[
+            {'authority_id':'A1','authority_source_text':'Órgano  Uno','supplier_id_scheme':'NIF','supplier_id':'A123',
+             'supplier_source_text':'GAS NATURAL COMERCIALIZADORA, S.A'},
+            {'authority_id':'A1','authority_source_text':'Órgano Uno','supplier_id_scheme':'OTROS','supplier_id':'A123',
+             'supplier_source_text':'GAS NATURAL COMERCIALIZADORA, S.A.'},
+        ]
+        aliases,stats=build_launch.normalize_party_names(rows)
+        self.assertEqual({row['supplier'] for row in rows},{'GAS NATURAL COMERCIALIZADORA, S.A.'})
+        self.assertEqual(rows[0]['supplier_source_text'],'GAS NATURAL COMERCIALIZADORA, S.A')
+        self.assertEqual(stats['supplier']['groups_with_multiple_source_names'],1)
+        supplier_alias=next(row for row in aliases if row['entity_type']=='supplier')
+        self.assertEqual({row['name'] for row in supplier_alias['source_names']},{
+            'GAS NATURAL COMERCIALIZADORA, S.A','GAS NATURAL COMERCIALIZADORA, S.A.'})
     def test_tampered_download_rejected(self):
         with self.assertRaisesRegex(ValueError,'SHA-256'):
             reproduce.unpack_verified((self.root/'placsp-launch.zip').read_bytes()+b'x',self.release['archive_sha256'],Path(self.tmp.name)/'tampered')
