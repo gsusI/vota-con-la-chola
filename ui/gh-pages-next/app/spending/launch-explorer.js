@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { flushSync } from 'react-dom';
 import { withBasePath } from '../path-utils.mjs';
 import styles from './launch.module.css';
+import { SearchSelect, DateRangeField } from './filter-controls';
 
 const initial = { authority: '', supplier: '', start: '2025-01-01', end: '2025-01-31' };
 const money = (cents) => new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(cents / 100);
@@ -86,20 +87,13 @@ export default function LaunchExplorer({ rows, audit, release }) {
       <section className={`spending-filters ${styles.filters}`} aria-labelledby="spending-filter-title">
         <h2 className="spending-filters__title" id="spending-filter-title">Explora este corte</h2>
         <div className={`spending-filters__controls ${styles.controls}`}>
-          <label className="spending-filters__authority">Órgano de contratación
-            <select className="spending-filters__authority-select" value={filters.authority} onChange={(e) => change('authority', e.target.value)}>
-              <option className="spending-filters__option" value="">Todos los órganos del corte</option>
-              {authorities.map((name) => <option className="spending-filters__option" key={name} value={name}>{name}</option>)}
-            </select>
-          </label>
-          <label className="spending-filters__supplier">Proveedor
-            <select className="spending-filters__supplier-select" value={filters.supplier} onChange={(e) => change('supplier', e.target.value)}>
-              <option className="spending-filters__option" value="">Todos los proveedores del corte</option>
-              {suppliers.map((name) => <option className="spending-filters__option" key={name} value={name}>{name}</option>)}
-            </select>
-          </label>
-          <label className="spending-filters__start">Desde<input className="spending-filters__start-input" type="date" value={filters.start} onChange={(e) => change('start', e.target.value)} /></label>
-          <label className="spending-filters__end">Hasta<input className="spending-filters__end-input" type="date" value={filters.end} onChange={(e) => change('end', e.target.value)} /></label>
+          <SearchSelect id="authority" label="Órgano de contratación" placeholder="Todos los órganos del corte"
+            values={authorities} value={filters.authority} onChange={(value) => change('authority', value)} />
+          <SearchSelect id="supplier" label="Proveedor" placeholder="Todos los proveedores del corte"
+            values={suppliers} value={filters.supplier} onChange={(value) => change('supplier', value)} />
+          <DateRangeField start={filters.start} end={filters.end} onChange={(range) => animate(() => {
+            setFilters((prior) => ({ ...prior, ...range })); setPage(0); setMessage('');
+          })} />
         </div>
         <div className={`spending-filters__actions ${styles.actions}`}>
           <button className="spending-filters__reset" onClick={() => animate(() => { setFilters(initial); setPage(0); setMessage(''); })}>Restablecer</button>
