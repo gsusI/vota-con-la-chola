@@ -28,14 +28,16 @@ Status: published and verified. Next: external alpha usability feedback under th
 
 ## Independent date editing refinement
 
-- Now: Desde and Hasta are separate text inputs backed by separate ISO filter values. Enter or blur applies only the edited endpoint. The shared calendar keeps the first-click start, second-click end interaction and commits both endpoints together.
+- Now: Desde and Hasta are separate text inputs backed by separate ISO filter values, published on the canonical Spending route. Enter or blur applies only the edited endpoint. The shared calendar keeps the first-click start, second-click end interaction and commits both endpoints together.
 - Target: allow precise correction of either endpoint without rewriting the other, while retaining the faster hotel-style range picker.
-- Next: publish through the scoped frontend path, verify both independent fields and the two-click calendar on the canonical domain, then return to external alpha usability feedback.
+- Next: collect external alpha usability feedback for the published controls.
 
-Verification before publication:
+Verification:
 - Editing only Desde to 02/01/2025 preserves Hasta=31/01/2025 and returns 112 rows. Editing only Hasta to 01/01/2025 preserves Desde=01/01/2025 and returns 8 rows / 194804631 cents.
 - Text accepts dd/mm/yyyy and canonical yyyy-mm-dd, then displays normalized dd/mm/yyyy. Invalid dates such as 31/02/2025 and inverted ranges produce a field-specific error without changing the applied range. Escape restores the applied value.
 - Reset clears local invalid text and both applied endpoints. Shared URLs continue storing separate start and end values and restore both inputs after reload.
 - Calendar first click leaves both inputs/results unchanged and highlights only the chosen start; second click orders and commits the two dates. Dialog Escape returns focus to its trigger.
 - Width 320 has no field or dialog horizontal overflow. Stable-state mobile visual review passed. Zero captured JavaScript errors.
 - Frozen static build, five launch tests, notFound scan, size gate and both privacy checks pass.
+- Source commit 0163c87015; public commit 2b892b1c19. [Pages deployment](https://github.com/gsusI/vota-con-la-chola/actions/runs/33965689810) succeeded. Scoped overlay retained 15155 unrelated files exactly, deleted zero files, and found zero privacy issues.
+- Public browser: changing only Desde to 02/01/2025 preserves Hasta and returns 112 rows; changing only Hasta to 01/01/2025 preserves Desde and returns 8 rows. Share/reload restores both ISO-backed values. Calendar click 1 leaves the text fields unchanged and highlights only the new start; click 2 commits both ordered endpoints and closes. Zero captured JavaScript errors.
