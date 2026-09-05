@@ -81,7 +81,7 @@ export function DateRangeField({ start, end, onChange }) {
       <p className={`spending-calendar__help ${styles.calendarHelp}`} id="spending-calendar-help" aria-live="polite">
         {draft ? `Desde ${formatDate(isoDate(draft))}. Ahora elige hasta qué día.` : 'Primer clic: desde. Segundo clic: hasta.'}
       </p>
-      <DayPicker key={session} mode="range" selected={selected} onDayClick={selectDay}
+      <DayPicker key={session} mode="range" selected={selected} onSelect={(_range, day) => selectDay(day)}
         month={month} onMonthChange={setMonth} locale={es} autoFocus animate fixedWeeks
         classNames={calendarClasses} captionLayout="dropdown" startMonth={new Date(2000, 0)} endMonth={new Date(2100, 11)} />
       <button className="spending-calendar__cancel" type="button" onClick={close}>Cancelar</button>
