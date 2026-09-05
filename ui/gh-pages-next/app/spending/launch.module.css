@@ -11,7 +11,7 @@
 .filters, .results, .method { margin-top: 2.5rem; }
 .controls { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
 .controls label { display: grid; gap: .5rem; font-weight: 600; min-width: 0; }
-.controls select, .controls input { width: 100%; min-width: 0; min-height: 48px; padding: .65rem; border: 1px solid #718b7e; border-radius: .5rem; background: #fff; color: #192923; font: inherit; box-sizing: border-box; }
+.controls > label select, .controls > label input { width: 100%; min-width: 0; min-height: 48px; padding: .65rem; border: 1px solid #718b7e; border-radius: .5rem; background: #fff; color: #192923; font: inherit; box-sizing: border-box; }
 .message { min-height: 3em; font-size: .9rem; }
 .results { view-transition-name: spending-results; }
 .list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; padding: 0; list-style: none; }
@@ -25,3 +25,27 @@
 .hash { overflow-wrap: anywhere; font-size: .8rem; }
 @media (max-width: 650px) { .controls, .list { grid-template-columns: 1fr; } .page { padding-inline: .8rem; } .hero { padding: 1.3rem; } }
 @media (prefers-reduced-motion: reduce) { .page *, .page *::before, .page *::after { transition: none !important; animation: none !important; } }
+
+.searchField, .dateField { display: grid; gap: .5rem; min-width: 0; align-content: start; }
+.searchField > label, .dateField > span { font-weight: 600; }
+.searchField :global(.spending-search__input) { min-height: 0; box-shadow: none; }
+.searchField :global(.spending-search__menu) { animation: filter-menu-in .16s ease-out; }
+.searchField :global(.spending-search__option) { overflow-wrap: anywhere; }
+.searchField :global(.spending-search__clear-indicator), .searchField :global(.spending-search__dropdown-indicator) { min-height: 44px; align-items: center; }
+.dateField { grid-column: 1 / -1; max-width: 34rem; }
+.dateField > button { min-height: 48px; display: flex; justify-content: space-between; gap: 1rem; }
+.calendarDialog { width: min(360px, calc(100vw - 24px)); max-height: calc(100dvh - 32px); box-sizing: border-box; padding: 1rem; margin: auto; border: 1px solid #718b7e; border-radius: 1rem; color: #192923; background: #fff; overflow: auto; opacity: 0; transform: translateY(12px) scale(.98); transition: opacity .18s, transform .18s, display .18s allow-discrete, overlay .18s allow-discrete; }
+.calendarDialog[open] { opacity: 1; transform: translateY(0) scale(1); }
+.calendarDialog::backdrop { background: rgb(10 30 20 / .35); }
+.calendarDialog h3 { margin: 0; font-size: 1.15rem; }
+.calendarHelp { min-height: 3em; margin: .65rem 0; line-height: 1.4; }
+.calendarDialog :global(.rdp-root) { --rdp-accent-color: #195f45; --rdp-accent-background-color: #e6f0e8; --rdp-day-height: 42px; --rdp-day-width: 42px; --rdp-day_button-height: 40px; --rdp-day_button-width: 40px; --rdp-animation_duration: .18s; }
+.calendarDialog :global(.rdp-day_button) { min-height: 40px; padding: 0; border-radius: 50%; font-size: .95rem; }
+.calendarDialog :global(.rdp-selected) :global(.rdp-day_button) { border: 2px solid #195f45; }
+.calendarDialog :global(.rdp-range_start) :global(.rdp-day_button), .calendarDialog :global(.rdp-range_end) :global(.rdp-day_button) { background: #195f45; color: #fff; }
+.calendarDialog :global(.rdp-range_middle) :global(.rdp-day_button) { background: transparent; border: 0; border-radius: 0; }
+.calendarDialog :global(.rdp-button_previous), .calendarDialog :global(.rdp-button_next) { padding: .4rem; }
+.calendarDialog :global(.rdp-dropdown) { color: #192923; background: #fff; }
+@starting-style { .calendarDialog[open] { opacity: 0; transform: translateY(12px) scale(.98); } }
+@keyframes filter-menu-in { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 370px) { .calendarDialog { padding: .65rem; } .calendarDialog :global(.rdp-root) { --rdp-day-width: 38px; --rdp-day_button-width: 36px; } }

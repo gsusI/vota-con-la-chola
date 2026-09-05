@@ -2006,3 +2006,7 @@ Defecto acotado detectado: un identificador cambia mayúsculas entre Parquet con
 L0 corte publicado; L1 tres consultas verificadas desde descarga anónima; L2 web live con 88/88 assets exactos, enlace/filtros/móvil/CSV; L3 guía y seis tareas públicas; L4 validación técnica pasada y validación externa pendiente; L5 prerelease/vídeo publicados, convocatoria sin enviar y adopción abierta. Source `0d028cade3`, site `8d146beff0`, paquete `909fc46b…`, ZIP 399945 bytes. [Verificación live](sprints/PUBLIC-LAUNCH-20260905/evidence/live-verification.json). Próximo: 3 pruebas externas, 2 reproducciones y revisión de adopción a 14 días. No afirmar seis hitos socialmente cerrados ni promoción de escala.
 
 CI global de la publicación: fallos fuera del corte en artefactos de escala ausentes y frescura del recibo andaluz (29 días frente a 8); no se marca verde. Gate específico de alfa añadido: `PLACSP Launch Gate`, verificación de Git/paquete/SQL/XML/privacidad en checkout limpio. Mantener separados los gates del corte y los bloqueos globales.
+
+### 2026-09-05 · Spending filter usability
+
+Searchable authority/supplier selectors and a single two-click date range are implemented. Local browser, CSV parity, static build and privacy gates pass. Next: scoped publication and canonical verification. Evidence: [filter UX verification](sprints/PUBLIC-LAUNCH-20260905/evidence/filter-ux-verification.md).
