@@ -25,6 +25,8 @@ Resultado: 521 órganos canónicos, 21 grupos con varias grafías y 125 filas re
 - Playwright local: 2.632 filas y 477.447.198,85 EUR; Select2 de Gas Natural ofrece una opción y devuelve nueve filas conservando grafías fuente; editar solo Desde mantiene Hasta; calendario 10–20 de enero actualiza ambos campos tras dos clics y devuelve 926 filas; viewport 390 × 844 conserva controles y resultados.
 - El HTML no serializa las 2.632 filas. El cliente descarga `awards.json`, comprueba filas e importe contra `latest.json` y habilita los filtros solo cuando coincide.
 
-## Dirección y siguiente acción
+## Publicación, dirección y siguiente acción
 
-Dirección: publicar el commit fuente, el snapshot estático y una release GitHub estable manteniendo la release de 120 filas como historial inmutable. Siguiente: recoger tres pruebas externas y dos reproducciones; ampliar meses solo mediante otra release fechada con los mismos gates.
+Publicación verificada: fuente `1925016eee3e1e643e16b17e0ad715fbc782cac5`; sitio `1b2b62588a`; release GitHub `v0.2.0-placsp-january-2025`. El dominio canónico sirve el puntero `aa4d6082…`, 2.632 filas y 477.447.198,85 EUR; el ZIP descargado anónimamente desde GitHub mide 9.625.726 bytes y coincide con SHA-256 `ffa5cd49…`. Playwright confirma en producción la carga completa y una sola opción para Gas Natural. La release de 120 filas permanece como historial inmutable.
+
+Dirección: mantener releases mensuales fechadas, acotadas y reproducibles. Siguiente: recoger tres pruebas externas y dos reproducciones; ampliar meses solo mediante otra release con los mismos gates.
