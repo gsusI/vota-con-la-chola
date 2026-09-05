@@ -1,5 +1,9 @@
 # Vota Con La Chola
 
+**[Explorar adjudicaciones](https://votaconlachola.org/spending/) · [Reproducir una consulta](docs/examples/placsp-launch/README.md) · [Contribuir](docs/community/placsp-launch-tasks.md)**
+
+Pregunta de entrada: ¿a quién se adjudicó, cuánto y en qué expedientes? La demo muestra un corte histórico parcial con fuentes verificables. Alfa técnica; revisión comunitaria pendiente.
+
 ![Vota Con La Chola - portada](docs/screenshots/cover-graph-congreso-diputados-depth-3-active-lens-all.png)
 
 [![ETL Tracker Gate](https://github.com/gsusI/vota-con-la-chola/actions/workflows/etl-tracker-gate.yml/badge.svg)](https://github.com/gsusI/vota-con-la-chola/actions/workflows/etl-tracker-gate.yml)
@@ -10,6 +14,23 @@
 Herramienta abierta y orientada a la evidencia para ayudar a decidir tu voto: cruza tus prioridades con lo que actores políticos y partidos **dicen** y **hacen**, con explicaciones trazables y fuentes auditables.
 
 Este repo es intencionalmente **ultraligero**: SQLite reproducible para control/snapshots, objetos content-addressed para documentos, artefactos analíticos/publicación acotados y trazabilidad por defecto.
+
+## Prioridad inmediata: lanzamiento útil para la comunidad
+
+Primera entrega: investigar contratación pública con un corte fechado y explícitamente parcial de PLACSP. Pregunta de entrada: **«¿A quién adjudicó este organismo, cuánto y en qué expedientes, dentro de este corte?»**. El recorrido previsto une pregunta, consulta, resultado, expediente oficial y reproducción.
+
+**Ahora:** corte y reproducción validados localmente; demo y publicación en verificación. **Destino:** una respuesta comprobable y reutilizable por desarrolladores de datos, periodistas y fiscalizadores cívicos. **Siguiente:** verificar publicación de la alfa y recoger reproducciones externas. Una adjudicación no equivale a un pago; el corte no representa toda la contratación pública.
+
+Los seis hitos siguientes resumen el [plan canónico y sus condiciones de aceptación](ROADMAP.md#hitos-de-lanzamiento); su estado operativo se mantiene en el [tracker de lanzamiento](docs/etl/e2e-scrape-load-tracker.md#lanzamiento-comunitario-con-foco-2026-09-05).
+
+1. **L0 — Corte defendible.** Fijar release inmutable, procedencia, fechas, cobertura, exclusiones y hashes; reconciliar anuncios, adjudicaciones, lotes y versiones, con fuentes verificables para cada resultado.
+2. **L1 — Reutilización real.** Entregar CSV/Parquet, tres consultas SQL parametrizadas, resultados esperados, diccionario y reproducción desde descarga anónima en un entorno vacío.
+3. **L2 — Demo pública.** Ampliar `/spending/` con órgano, proveedor y periodo; resultado compartible, CSV y acceso directo a evidencia. Mostrar fecha y límites del mismo corte validado.
+4. **L3 — Entrada de colaboradores.** Facilitar reproducción y tres rutas de aportación, con seis tareas pequeñas que indiquen entrada, salida, validación y responsable; reconocer contribuciones por dataset, consulta y revisión.
+5. **L4 — Verificación.** Comprobar recorrido, privacidad, datos reales y coincidencia de hashes/resultados entre descarga y web. Buscar tres pruebas externas del recorrido y dos reproducciones de consultas; mientras falten, identificar la entrega como alfa técnica con validación comunitaria pendiente.
+6. **L5 — Presentación y adopción.** Publicar release GitHub, vídeo de 60–90 segundos y ejemplo reproducible; preparar convocatoria para una tarea concreta. Enviar solo con autorización específica y revisar adopción real a los 14 días de difusión.
+
+Comandos y secuencia de implementación: [roadmap técnico](docs/roadmap-tecnico.md#lanzamiento-comunitario-primer-trabajo). Este lanzamiento acotado tiene prioridad sobre la expansión; no cierra los requisitos globales de escala ni sustituye la misión ciudadana.
 
 ## Sobre el repo (para colaboradores)
 
@@ -50,30 +71,14 @@ Misión:
 - Sitio público canónico (Cloudflare Pages): https://votaconlachola.org/
 - Hugging Face (dataset público): https://huggingface.co/datasets/JesusIC/vota-con-la-chola-data
 
-## Qué hay hoy (MVP)
+## Qué hay hoy
 
-- ETL de representantes y mandatos a un único SQLite.
-- Ingesta parlamentaria (Congreso/Senado) para votaciones e iniciativas (con pipeline de calidad en curso).
-- Ingesta inicial de Infoelectoral (procesos/descargas/resultados).
-- Publicación de snapshots canónicos en `etl/data/published/`.
-- App pública estática para Cloudflare Pages en `ui/gh-pages-next/`; salida de build en `ui/gh-pages-next/out/`.
-- Espejo público de snapshots en Hugging Face Datasets (`just etl-publish-hf`): https://huggingface.co/datasets/JesusIC/vota-con-la-chola-data
-- Origen analítico versionado en Hugging Face (`just etl-scale-origin-hf-publish`): `scale/snapshots/<snapshot-date>/<full-manifest-sha256>/` empaqueta solo archivos declarados por manifests validados y mueve `scale/latest.json` al final. El bundle incluye un hash estable del contrato de datos/provenance, independiente del estado mutable de publicación. `just etl-scale-origin-hf-verify` exige path content-addressed, contrato válido y parity exacta. La release publicada v2 `5872efaf...` pasa con metadata local/remota exacta y cero warnings.
-- Restore reproducible (`just etl-scale-origin-hf-restore-validate`): por defecto sigue `scale/latest.json`; `HF_SCALE_RESTORE_SNAPSHOT_PATH=scale/snapshots/<date>/<full-sha256>` fija una release inmutable para recovery/rollback sin depender del pointer mutable. Un restore real explícito de `actor_mandates` descargó y verificó `114` ficheros / `9,688,787` bytes y full-validó `88,031` filas.
-- Rebuild SQLite desde origin restaurado (`just etl-scale-origin-sqlite-rebuild`): importa Parquet por batches, exige checksums/contrato real-only, conserva campos públicos sin transformación, valida hash lógico e integridad y publica el DB solo mediante rename atómico. Dos rebuilds del corpus actor produjeron el mismo SHA-256 SQLite `61cfdf8e...` para `88,031` filas.
-- CAS de objetos documentales (`just etl-object-store-replicate` / `etl-object-store-restore-drill`): upload y restore usan batches con workers acotados, claves SHA-256, writes atómicos y manifest determinista. La prueba local real replica/deduplica `6,792` objetos / `133,219,457` bytes con `16` workers y restaura el manifest completo. Esto prueba el contrato y throughput local; el origen S3-compatible remoto sigue pendiente.
-- UI local para explorar el esquema y la evidencia: `just graph-ui` (ver `docs/etl/README.md`).
+- [Demo de contratación](https://votaconlachola.org/spending/): corte parcial de 120 resultados, decisiones del 1–3 de enero de 2025; fuente y captura XML por resultado.
+- [Reproducción con Python](docs/examples/placsp-launch/README.md): CSV/Parquet, tres consultas SQL y hashes; sin claves ni base previa.
+- [Seis primeras tareas](docs/community/placsp-launch-tasks.md): consultas, verificación y documentación, con entradas, resultados y validación definidos.
+- ETL de representantes, votaciones, contratación, subvenciones e indicadores; SQLite, artefactos analíticos y evidencia oficial.
 
-Estado de escala (`2026-08-12`): solo datos capturados de fuentes oficiales cuentan. `just etl-scale-readiness` valida todos los ficheros, bytes, SHA-256, filas, `source_id` y hosts de seis corpora actuales:
-
-- votos nominales: `1,809,222` filas / `8,373` shards; URL pública y source record `100%`; las `102,172` filas HTTP / `1,166` URLs están clasificadas, con captura checksum para `33,683` filas / `484` URLs y `68,489` filas / `682` URLs pendientes de replacement inmutable;
-- Eurostat: `1,755,809` observaciones / `37` Parquet; full validation y replay `26/26`;
-- PLACSP: `263,302` facts / `50` Parquet; `128,849/128,849` nombres e identificadores de contraparte publicados por la fuente se conservan exactamente; full validation y replay `50/50`;
-- BDNS: `1,360,382` facts / `14` Parquet; nombres `1,360,382/1,360,382` e identificadores source `163,270/163,270` retenidos exactamente; full validation y replay `1/1` partición mediante `14/14` hardlinks;
-- accountability ledger: `126,760` facts / `13` Parquet; full validation y replay `13/13`;
-- actores: `88,031` mandatos / `108` Parquet; full validation y replay `108/108`.
-
-Hay `3` lanes reales por encima de un millón, `6` corpora registrados y `0` lanes promocionadas. La release HF v2 content-addressed publicada `5872efaf...` y el contrato estable `bb99c119...c2c` verifican `5,403,506` filas, `8,595` ficheros y `498,631,274` bytes sin transformar identidades públicas. Pointer, manifest, registry y readiness coinciden con el estado local; la verificación pasa sin errores ni warnings. Los seis corpora pasan además clean-room restore desde cache vacío: `8,619` ficheros de bundle verificados por checksum y validadores aislados que leen todas las filas. Todavía faltan segundo snapshot y cobertura histórica completa. El worker BDNS bloquea antes de claim cuando falta storage; el preflight capturado más reciente devuelve `blocked_storage`: `5,685,862,400` bytes libres frente a `10,863,247,360` requeridos, headroom `-5,177,384,960`. Candidaturas nominales siguen en `0` por bloqueo del origen oficial. El inventario documental real contiene `21,398` instancias / `19,538` hashes; el audit file-level verifica checksum lineage para `10,219`, URL pública para `10,195`, todos los `6,792` textos referenciados y deja `11,179` ficheros unlinked explícitos. Estado honesto: `real_foundation_ready_scale_incomplete`. Ver `etl/data/published/scale-readiness-latest.json`, `docs/etl/real-corpus-registry.json` y `ROADMAP.md`.
+El lanzamiento es una alfa técnica. Validación comunitaria pendiente. Estado de escala y bloqueos globales: [tracker](docs/etl/e2e-scrape-load-tracker.md) y [roadmap](ROADMAP.md); esta entrega no los cierra.
 
 ## Fuente de verdad (código)
 
@@ -110,57 +115,7 @@ just parl-quality-pipeline
 just etl-publish-votaciones
 ```
 
-Gates y pipelines de escala real:
-
-```bash
-just etl-scale-readiness
-just etl-scale-origin-hf-dry-run
-just etl-scale-origin-hf-verify
-just etl-scale-origin-hf-restore-bdns
-just etl-scale-audit-vote-db
-just parl-refresh-senado-local-cache
-just etl-scale-export-vote-db-shards
-just etl-scale-validate-vote-db-shards
-just etl-scale-export-semantic-member-votes
-just etl-scale-validate-semantic-member-votes
-just etl-scale-export-semantic-accountability-ledger
-just etl-scale-validate-semantic-accountability-ledger
-just etl-scale-export-semantic-actor-mandates
-just etl-scale-validate-semantic-actor-mandates
-just etl-scale-export-semantic-public-money
-just etl-scale-validate-semantic-public-money
-just etl-scale-export-semantic-indicators
-just etl-scale-validate-semantic-indicators
-just etl-scale-bdns-bulk-enqueue
-just etl-scale-bdns-bulk-work
-just etl-scale-bdns-bulk-report
-just etl-scale-eurostat-indicators-enqueue
-just etl-scale-eurostat-indicators-work
-just etl-scale-eurostat-indicators-backfill
-just etl-scale-eurostat-indicators-report
-just etl-scale-eurostat-indicators-export
-just etl-scale-eurostat-indicators-validate
-just etl-scale-eurostat-indicators-replay
-just etl-scale-eurostat-indicators-replay-validate
-just etl-scale-placsp-archives-enqueue
-just etl-scale-placsp-archives-work
-just etl-scale-placsp-members-work
-just etl-scale-placsp-report
-just etl-scale-placsp-export
-just etl-scale-placsp-validate
-just etl-scale-placsp-replay
-just etl-scale-placsp-replay-validate
-just etl-scale-placsp-documents-enqueue
-just etl-scale-placsp-documents-work
-just etl-scale-placsp-integrity-review
-just etl-scale-gate
-```
-
-El worker Eurostat renueva su lease durante cada chunk descargado y cada commit batch; aborta si pierde ownership. Cada query del registry declara `maximum_bytes` y `maximum_cube_cells`; payloads legacy de queue reciben un techo conservador. `EUROSTAT_INDICATOR_CA_BUNDLE` solo es necesario si el CA store del runtime está desactualizado: mantener esa ruta fuera del repo. No usar TLS inseguro en la lane reproducible.
-
-PLACSP usa dos queues para archivos ZIP y miembros Atom, y una tercera queue independiente para documentos. El parser inspecciona ZIP en streaming y falla ante límites de path, tamaño, ratio, records o documentos. `PLACSP_BULK_ARCHIVE_ARGS` permite ampliar meses/años sin cambiar el loader. No drenar la queue de `998,392` documentos con los defaults de muestra: definir primero presupuesto por host, ventana, concurrencia, origin remoto, coste y cohortes crecientes. Los imports son notices/awards publicados; no son pagos. Las señales de integridad quedan internas y requieren revisión humana.
-
-Ningún resultado generado localmente sustituye las promociones reales por lane (`100k` documentos estratificados; `1M` actores/votos/ledger/dinero/indicadores). Los gates están desglosados en `docs/roadmap-tecnico.md` y su estado vive en el tracker.
+Comandos de escala, adquisición, publicación y gates: [guía ETL](docs/etl/README.md) y [roadmap técnico](docs/roadmap-tecnico.md). Para analizar el corte PLACSP basta con la [guía de reproducción](docs/examples/placsp-launch/README.md).
 
 ## Notas (KISS)
 

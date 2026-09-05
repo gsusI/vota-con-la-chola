@@ -1985,3 +1985,18 @@ Actualización operativa (2026-02-23, AI-OPS-62..AI-OPS-103):
 - Dirección: el gate `just etl-data-integrity-audit` bloquea publicación ante corrupción física, FKs rotas, `lost_and_found`, runs `running` obsoletos o textos derivados vacíos.
 - Siguiente: ejecutar el gate antes de empaquetar/publicar snapshots y regenerar cualquier texto en cuarentena únicamente desde su documento fuente.
 - Evidencia: `docs/etl/sprints/DATA-INTEGRITY-20260812/report.md`, `docs/etl/sprints/DATA-INTEGRITY-20260812/evidence/quarantine-manifest.json`, `docs/etl/sprints/DATA-INTEGRITY-20260812/evidence/canonical-run-repairs.json`, `etl/data/published/data-integrity-latest.json`.
+
+
+## Lanzamiento comunitario con foco (2026-09-05)
+
+- **Ahora:** auditoría de entrada pública terminada; implementación `L0–L5` pendiente. GitHub/web/HF ya son públicos. La página de contratación ofrece veinte adjudicaciones fijas, el enlace SQL abre un índice y la revisión comunitaria sigue `0/5`. El índice HF de escala declara siete corpora; el readiness global local sigue `not_ready`. No se promociona ninguna lane ni se marca lanzamiento como DONE.
+- **Dirección:** [prioridad de lanzamiento en ROADMAP](../../ROADMAP.md#prioridad-inmediata-lanzamiento-útil-para-la-comunidad): una pregunta de contratación, descarga/consultas reproducibles, demo existente y contribuciones acotadas. Trabajo de expansión subordinado al corte.
+- **Siguiente:** `L0`, fijar release/cohorte y reconciliar anuncios, adjudicaciones, versiones, fechas e importes. PLACSP analítico y muestra web tienen universos distintos. No iniciar otra ingesta para sustituir esa comprobación.
+- **Evidencia:** [auditoría](sprints/PUBLIC-LAUNCH-20260905/evidence/launch-audit.md); [ejecución derivada](../roadmap-tecnico.md#lanzamiento-comunitario-primer-trabajo).
+- **Estado de entrega:** plan y diagnóstico locales preparados; sin nuevo snapshot, commit, release, publicación remota, mensaje o revisión externa. Preservados los cambios previos. Validación de esta entrega limitada a documentación y sus referencias.
+
+### Avance de implementación L0–L5
+
+Corte de 120 resultados validado contra 76 XML originales; paquete 399945 bytes y tres consultas reproducidas. Demo, filtros, CSV, enlace compartible, móvil y estado vacío comprobados. Cinco tests pasan. Build aislado sobre main remoto; overlay conserva 15110 archivos publicados ajenos por hash. Publicación/descarga remota en curso; revisión comunitaria 0/3 y reproducción externa 0/2. Evidencia y siguiente acción: [registro de ejecución](sprints/PUBLIC-LAUNCH-20260905/evidence/launch-execution.md).
+
+Defecto acotado detectado: un identificador cambia mayúsculas entre Parquet congelado y fuente. Excluido de la alfa; pendiente corregir productor en una nueva release del corpus, conservando la anterior y sus hashes. No marcar el corpus global íntegro por pasar este corte.

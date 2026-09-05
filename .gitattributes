@@ -10,3 +10,6 @@
 *.js text eol=lf
 *.mjs text eol=lf
 *.css text eol=lf
+
+# Content-addressed PLACSP releases must retain their exact published bytes.
+ui/gh-pages-next/public/spending/launch/** -text -whitespace

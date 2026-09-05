@@ -1,0 +1,27 @@
+.page { max-width: 1120px; margin: auto; padding: 2rem 1rem 4rem; color: #192923; }
+.hero { padding: clamp(1.5rem, 5vw, 4rem); background: #e6f0e8; border: 1px solid #b8cbbc; border-radius: 1.5rem; }
+.hero h1 { max-width: 18ch; font-size: clamp(2rem, 5vw, 3.6rem); line-height: 1.08; margin: 1rem 0; }
+.hero p { max-width: 78ch; line-height: 1.65; }
+.actions { display: flex; flex-wrap: wrap; gap: .75rem 1rem; align-items: center; margin: 1rem 0; }
+.page a { color: #195f45; text-underline-offset: .2em; overflow-wrap: anywhere; }
+.page button { padding: .7rem 1rem; border: 1px solid #718b7e; border-radius: .65rem; background: #fff; color: #192923; font: inherit; cursor: pointer; min-height: 44px; transition: background .2s, transform .2s; }
+.page button:hover:not(:disabled) { background: #e6f0e8; transform: translateY(-1px); }
+.page button:disabled { opacity: .5; cursor: default; }
+.page :focus-visible { outline: 3px solid #a94d13; outline-offset: 3px; }
+.filters, .results, .method { margin-top: 2.5rem; }
+.controls { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.controls label { display: grid; gap: .5rem; font-weight: 600; min-width: 0; }
+.controls select, .controls input { width: 100%; min-width: 0; min-height: 48px; padding: .65rem; border: 1px solid #718b7e; border-radius: .5rem; background: #fff; color: #192923; font: inherit; box-sizing: border-box; }
+.message { min-height: 3em; font-size: .9rem; }
+.results { view-transition-name: spending-results; }
+.list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; padding: 0; list-style: none; }
+.card { padding: 1.4rem; border: 1px solid #cbd7cf; border-radius: 1rem; background: #fff; overflow-wrap: anywhere; }
+.card h3 { font-size: 1.1rem; line-height: 1.45; }
+.card dt { font-size: .8rem; font-weight: 700; margin-top: 1rem; text-transform: uppercase; }
+.card dd { margin: .3rem 0; line-height: 1.5; }
+.amount { font-size: 1.5rem; font-weight: 700; color: #195f45; }
+.empty { padding: 2rem; background: #f2f4f0; border-radius: 1rem; min-height: 100px; }
+.method { border-top: 1px solid #cbd7cf; padding-top: 1.5rem; line-height: 1.6; }
+.hash { overflow-wrap: anywhere; font-size: .8rem; }
+@media (max-width: 650px) { .controls, .list { grid-template-columns: 1fr; } .page { padding-inline: .8rem; } .hero { padding: 1.3rem; } }
+@media (prefers-reduced-motion: reduce) { .page *, .page *::before, .page *::after { transition: none !important; animation: none !important; } }

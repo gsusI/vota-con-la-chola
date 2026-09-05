@@ -11,6 +11,18 @@ Autoridad:
 
 Este documento traduce `ROADMAP.md` a trabajo técnico cercano. No crea scope nuevo.
 
+## Lanzamiento comunitario: primer trabajo
+
+Prioridad, recortes, capacidad y aceptación: [L0–L5 en ROADMAP](../ROADMAP.md#prioridad-inmediata-lanzamiento-útil-para-la-comunidad). Estado: corte, paquete y demo validados; publicación y comprobación anónima remota en curso. Evidencia: [auditoría pública](etl/sprints/PUBLIC-LAUNCH-20260905/evidence/launch-audit.md).
+
+1. **L0 — Fijar inputs.** Resolver `scale/latest.json` público a una release inmutable; usar `placsp_public_money` de `docs/etl/real-corpus-registry.json` y su manifest. Verificar descarga/checksums. Los `263302` facts incluyen `121555` anuncios y `141747` resultados de adjudicación; snapshot fuente `2025-03-31`. Reconciliar unidades con `ui/gh-pages-next/public/spending/data/placsp-sample.json`, procedente de otro corte. No mezclar contadores ni asumir contratos distintos.
+2. **L0 — Comprobar semántica.** Resolver expediente/lote/versión, duplicados, moneda, significado del importe y fecha. Investigar particiones anómalas (el manifest contiene `year=1925`); preservar raw, declarar exclusiones justificadas en el derivado y comparar ejemplos públicos con la fuente. Elegir órgano y periodo solo tras verificar cobertura; sin denominador oficial, titular «en este corte».
+3. **L1 — Reproducir una respuesta.** Adaptar `docs/examples/placsp-actor-spending-evidence.sql` al contrato Parquet real: ahora requiere una base staging que un recién llegado no tiene. Entregar consultas/datos fijados, resultados esperados y ejecución desde descarga pública en entorno vacío. No anunciar un comando nuevo hasta implementarlo y comprobarlo. Medir descarga/setup además de ejecución.
+4. **L2/L3 — Usar lo existente.** Trabajar sobre `ui/gh-pages-next/app/spending/page.js`, `ui/gh-pages-next/app/page.js`, `README.md`, `CONTRIBUTING.md` y `docs/dev/quickstart.md`. Mantener navegación avanzada accesible con etiquetas fieles: `/explorer/` actual no ejecuta SQL. Separar uso de datos de desarrollo ETL. Para nuevas fuentes conservar `source_records_only`, captura oficial, procedencia y gates; no exigir expansión de ontología en la primera PR. SDK existente: `docs/examples/sample-plugin.md`.
+5. **L4 — Publicar el mismo corte validado.** Aislar cambios del trabajo previo sin descartar nada. Ejecutar pruebas del exportador, consultas y UI afectada; `just privacy-check-public-artifacts`; gates aplicables y `just explorer-gh-pages-publish` para UI según las reglas del repo. Si cambian datos significativos, dry-run y publicación HF según su contrato. Verificar después descarga, hashes, resultado y enlace profundo públicos. Guardar evidencia antes de declarar listo.
+
+Esta modificación documental no requiere ejecutar backfills ni `etl-contributor-gates`. En implementación, medir el coste de ese gate —incluye exportación de catálogo y dry-run HF— y separar checks por fuente de integración global sin eliminar validaciones requeridas. Ejecución actual: [evidencia del lanzamiento](etl/sprints/PUBLIC-LAUNCH-20260905/evidence/launch-execution.md).
+
 ## 1. Regla de ejecución
 
 Solo cuentan registros capturados de fuentes oficiales identificables.

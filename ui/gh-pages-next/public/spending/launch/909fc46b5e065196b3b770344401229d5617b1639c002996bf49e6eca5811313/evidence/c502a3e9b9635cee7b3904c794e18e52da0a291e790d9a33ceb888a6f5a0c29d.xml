@@ -1,0 +1,265 @@
+<ns0:entry xmlns:ns0="http://www.w3.org/2005/Atom" xmlns:ns1="urn:dgpe:names:draft:codice-place-ext:schema:xsd:CommonAggregateComponents-2" xmlns:ns2="urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2" xmlns:ns3="urn:dgpe:names:draft:codice-place-ext:schema:xsd:CommonBasicComponents-2" xmlns:ns4="urn:dgpe:names:draft:codice:schema:xsd:CommonAggregateComponents-2">
+        <ns0:id>https://contrataciondelestado.es/sindicacion/licitacionesPerfilContratante/16176049</ns0:id>
+        <ns0:link href="https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&amp;idEvl=PJM5t%2B57dvXIGlsa0Wad%2Bw%3D%3D" />
+        <ns0:summary type="text">Id licitación: CON2024131; Órgano de Contratación: Junta de Gobierno del Ayuntamiento de León; Importe: 4400 EUR; Estado: ADJ</ns0:summary>
+        <ns0:title>Servicio de caracterización cabalgata Reyes Magos</ns0:title>
+        <ns0:updated>2025-01-20T12:58:54.706+01:00</ns0:updated>
+        <ns1:ContractFolderStatus>
+            <ns2:ContractFolderID>CON2024131</ns2:ContractFolderID>
+            <ns3:ContractFolderStatusCode listURI="https://contrataciondelestado.es/codice/cl/2.04/SyndicationContractFolderStatusCode-2.04.gc" languageID="es">ADJ</ns3:ContractFolderStatusCode>
+            <ns1:LocatedContractingParty>
+                <ns2:ContractingPartyTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.10/ContractingAuthorityCode-2.10.gc">3</ns2:ContractingPartyTypeCode>
+                <ns2:ActivityCode listURI="http://contrataciondelestado.es/codice/cl/2.10/ContractingAuthorityActivityCode-2.10.gc">1</ns2:ActivityCode>
+                <ns2:BuyerProfileURIID>https://contrataciondelestado.es/wps/poc?uri=deeplink:perfilContratante&amp;idBp=eZklaAKsTn8QK2TEfXGy%2BA%3D%3D</ns2:BuyerProfileURIID>
+                <ns4:Party>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="DIR3">L01240896</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">P2409100A</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="ID_PLATAFORMA">31057240149484</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>Junta de Gobierno del Ayuntamiento de León</ns2:Name>
+                    </ns4:PartyName>
+                    <ns4:PostalAddress>
+                        <ns2:CityName>León</ns2:CityName>
+                        <ns2:PostalZone>24001</ns2:PostalZone>
+                        <ns4:AddressLine>
+                            <ns2:Line>Avda. Ordoño II, 10</ns2:Line>
+                        </ns4:AddressLine>
+                        <ns4:Country>
+                            <ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+                            <ns2:Name>España</ns2:Name>
+                        </ns4:Country>
+                    </ns4:PostalAddress>
+                    <ns4:Contact>
+                        <ns2:Name>Junta de Gobierno del Ayuntamiento de León</ns2:Name>
+                        <ns2:Telephone>987895623</ns2:Telephone>
+                        <ns2:ElectronicMail>negociado.contratacion@aytoleon.es</ns2:ElectronicMail>
+                    </ns4:Contact>
+                </ns4:Party>
+                <ns1:ParentLocatedParty>
+                    <ns4:PartyName>
+                        <ns2:Name>León</ns2:Name>
+                    </ns4:PartyName>
+                    <ns1:ParentLocatedParty>
+                        <ns4:PartyName>
+                            <ns2:Name>Ayuntamientos</ns2:Name>
+                        </ns4:PartyName>
+                        <ns1:ParentLocatedParty>
+                            <ns4:PartyName>
+<ns2:Name>León</ns2:Name>
+                            </ns4:PartyName>
+                            <ns1:ParentLocatedParty>
+<ns4:PartyName>
+    <ns2:Name>Castilla y León</ns2:Name>
+</ns4:PartyName>
+<ns1:ParentLocatedParty>
+    <ns4:PartyName>
+        <ns2:Name>ENTIDADES LOCALES</ns2:Name>
+    </ns4:PartyName>
+    <ns1:ParentLocatedParty>
+        <ns4:PartyName>
+            <ns2:Name>Sector Público</ns2:Name>
+        </ns4:PartyName>
+    </ns1:ParentLocatedParty>
+</ns1:ParentLocatedParty>
+                            </ns1:ParentLocatedParty>
+                        </ns1:ParentLocatedParty>
+                    </ns1:ParentLocatedParty>
+                </ns1:ParentLocatedParty>
+            </ns1:LocatedContractingParty>
+            <ns4:ProcurementProject>
+                <ns2:Name>Servicio de caracterización cabalgata Reyes Magos</ns2:Name>
+                <ns2:TypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/ContractCode-2.08.gc">2</ns2:TypeCode>
+                <ns2:SubTypeCode listURI="http://contrataciondelestado.es/codice/cl/1.04/ServiceContractCode-1.04.gc">27</ns2:SubTypeCode>
+                <ns2:MixContractIndicator>false</ns2:MixContractIndicator>
+                <ns4:BudgetAmount>
+                    <ns2:EstimatedOverallContractAmount currencyID="EUR">4400</ns2:EstimatedOverallContractAmount>
+                    <ns2:TotalAmount currencyID="EUR">5324</ns2:TotalAmount>
+                    <ns2:TaxExclusiveAmount currencyID="EUR">4400</ns2:TaxExclusiveAmount>
+                </ns4:BudgetAmount>
+                <ns4:RequiredCommodityClassification>
+                    <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">98321000</ns2:ItemClassificationCode>
+                </ns4:RequiredCommodityClassification>
+                <ns4:RequiredCommodityClassification>
+                    <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">98393000</ns2:ItemClassificationCode>
+                </ns4:RequiredCommodityClassification>
+                <ns4:RealizedLocation>
+                    <ns2:CountrySubentity>León</ns2:CountrySubentity>
+                    <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES413</ns2:CountrySubentityCode>
+                    <ns4:Address>
+                        <ns4:Country>
+                            <ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+                            <ns2:Name>España</ns2:Name>
+                        </ns4:Country>
+                    </ns4:Address>
+                </ns4:RealizedLocation>
+                <ns4:PlannedPeriod>
+                    <ns2:DurationMeasure unitCode="ANN">4</ns2:DurationMeasure>
+                </ns4:PlannedPeriod>
+                <ns4:ContractExtension>
+                    <ns4:OptionValidityPeriod>
+                        <ns2:Description>Posibilidad de una prórroga de 2 años. </ns2:Description>
+                    </ns4:OptionValidityPeriod>
+                </ns4:ContractExtension>
+            </ns4:ProcurementProject>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">1</ns2:ID>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Maquillaje y caracterización de los Reyes Magos</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">2420</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">2000</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">98321000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">98393000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>León</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES413</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">2</ns2:ID>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Arreglo y limpieza de los trajes de los Reyes Magos</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">2904</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">2400</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">98393000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">98321000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>León</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES413</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Precio más económico </ns2:Description>
+                <ns2:AwardDate>2025-01-03</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:Contract>
+                    <ns2:IssueDate>2025-01-14</ns2:IssueDate>
+                </ns4:Contract>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">B33045188</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>PELUQUERIAS VALLINA, S.L. </ns2:Name>
+                    </ns4:PartyName>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>1</ns2:ProcurementProjectLotID>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">2000</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">2420</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">3</ns2:ResultCode>
+                <ns2:AwardDate>2025-01-03</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>0</ns2:ReceivedTenderQuantity>
+                <ns2:SMEsReceivedTenderQuantity>0</ns2:SMEsReceivedTenderQuantity>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>2</ns2:ProcurementProjectLotID>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderingTerms>
+                <ns2:RequiredCurriculaIndicator>false</ns2:RequiredCurriculaIndicator>
+                <ns2:VariantConstraintIndicator>false</ns2:VariantConstraintIndicator>
+                <ns2:FundingProgramCode listURI="http://contrataciondelestado.es/codice/cl/2.08/FundingProgramCode-2.08.gc" name="No hay financiación con fondos de la UE">NO-EU</ns2:FundingProgramCode>
+                <ns2:ProcurementNationalLegislationCode listURI="https://contrataciondelestado.es/codice/cl/2.08/ProcurementNationalLegislationCode-2.08.gc">3</ns2:ProcurementNationalLegislationCode>
+                <ns2:ReceivedAppealQuantity>0</ns2:ReceivedAppealQuantity>
+                <ns4:ProcurementLegislationDocumentReference>
+                    <ns2:ID>N/A</ns2:ID>
+                </ns4:ProcurementLegislationDocumentReference>
+                <ns4:ContractExecutionRequirement>
+                    <ns2:Name>Consideraciones de tipo medioambiental</ns2:Name>
+                    <ns2:ExecutionRequirementCode listURI="https://contrataciondelestado.es/codice/cl/2.08/ExecutionRequirementCode-2.08.gc">1</ns2:ExecutionRequirementCode>
+                    <ns2:Description>Ver apartado L.2 del CCP rector </ns2:Description>
+                </ns4:ContractExecutionRequirement>
+                <ns4:AwardingTerms>
+                    <ns4:AwardingCriteria>
+                        <ns2:AwardingCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/AwardingCriteriaCode-2.0.gc">OBJ</ns2:AwardingCriteriaTypeCode>
+                        <ns2:Description>Precio más económico </ns2:Description>
+                        <ns2:AwardingCriteriaSubTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.09/AwardingCriteriaAutomaticallyEvaluatedSubTypeCode-2.09.gc">1</ns2:AwardingCriteriaSubTypeCode>
+                        <ns2:WeightNumeric>100</ns2:WeightNumeric>
+                    </ns4:AwardingCriteria>
+                </ns4:AwardingTerms>
+                <ns4:Language>
+                    <ns2:ID>es</ns2:ID>
+                </ns4:Language>
+            </ns4:TenderingTerms>
+            <ns4:TenderingProcess>
+                <ns2:ProcedureCode listURI="https://contrataciondelestado.es/codice/cl/2.07/SyndicationTenderingProcessCode-2.07.gc">9</ns2:ProcedureCode>
+                <ns2:UrgencyCode listURI="http://contrataciondelestado.es/codice/cl/1.04/DiligenceTypeCode-1.04.gc">1</ns2:UrgencyCode>
+                <ns2:PartPresentationCode listURI="http://contrataciondelestado.es/codice/cl/1.04/TenderPresentationCode-1.04.gc" name="A uno o varios lotes">3</ns2:PartPresentationCode>
+                <ns2:ContractingSystemCode listURI="http://contrataciondelestado.es/codice/cl/2.08/ContractingSystemTypeCode-2.08.gc">0</ns2:ContractingSystemCode>
+                <ns2:SubmissionMethodCode listURI="http://contrataciondelestado.es/codice/cl/1.04/TenderDeliveryCode-1.04.gc">1</ns2:SubmissionMethodCode>
+                <ns2:MaximumLotPresentationQuantity>2</ns2:MaximumLotPresentationQuantity>
+                <ns2:MaximumTendererAwardedLotsQuantity>2</ns2:MaximumTendererAwardedLotsQuantity>
+                <ns2:OverThresholdIndicator>false</ns2:OverThresholdIndicator>
+                <ns4:DocumentAvailabilityPeriod>
+                    <ns2:EndDate>2024-12-17</ns2:EndDate>
+                    <ns2:EndTime>10:53:00</ns2:EndTime>
+                </ns4:DocumentAvailabilityPeriod>
+                <ns4:TenderSubmissionDeadlinePeriod>
+                    <ns2:EndDate>2024-12-17</ns2:EndDate>
+                    <ns2:EndTime>14:00:00</ns2:EndTime>
+                    <ns2:Description>Servicio de caracterización cabalgata Reyes Magos</ns2:Description>
+                </ns4:TenderSubmissionDeadlinePeriod>
+                <ns4:AuctionTerms>
+                    <ns2:AuctionConstraintIndicator>false</ns2:AuctionConstraintIndicator>
+                </ns4:AuctionTerms>
+            </ns4:TenderingProcess>
+            <ns1:ValidNoticeInfo>
+                <ns3:NoticeTypeCode listURI="https://contrataciondelestado.es/codice/cl/2.11/TenderingNoticeTypeCode-2.11.gc">DOC_CAN_ADJ</ns3:NoticeTypeCode>
+                <ns1:AdditionalPublicationStatus>
+                    <ns3:PublicationMediaName>Perfil del contratante</ns3:PublicationMediaName>
+                    <ns1:AdditionalPublicationDocumentReference>
+                        <ns2:IssueDate>2025-01-20</ns2:IssueDate>
+                    </ns1:AdditionalPublicationDocumentReference>
+                </ns1:AdditionalPublicationStatus>
+            </ns1:ValidNoticeInfo>
+            <ns1:ValidNoticeInfo>
+                <ns3:NoticeTypeCode listURI="https://contrataciondelestado.es/codice/cl/2.11/TenderingNoticeTypeCode-2.11.gc">DOC_CN</ns3:NoticeTypeCode>
+                <ns1:AdditionalPublicationStatus>
+                    <ns3:PublicationMediaName>Perfil del contratante</ns3:PublicationMediaName>
+                    <ns1:AdditionalPublicationDocumentReference>
+                        <ns2:IssueDate>2024-11-28</ns2:IssueDate>
+                    </ns1:AdditionalPublicationDocumentReference>
+                </ns1:AdditionalPublicationStatus>
+            </ns1:ValidNoticeInfo>
+        </ns1:ContractFolderStatus>
+    </ns0:entry>
+    
