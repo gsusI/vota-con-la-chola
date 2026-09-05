@@ -2000,3 +2000,9 @@ Actualización operativa (2026-02-23, AI-OPS-62..AI-OPS-103):
 Corte de 120 resultados validado contra 76 XML originales; paquete 399945 bytes y tres consultas reproducidas. Demo, filtros, CSV, enlace compartible, móvil y estado vacío comprobados. Cinco tests pasan. Build aislado sobre main remoto; overlay conserva 15110 archivos publicados ajenos por hash. Publicación/descarga remota en curso; revisión comunitaria 0/3 y reproducción externa 0/2. Evidencia y siguiente acción: [registro de ejecución](sprints/PUBLIC-LAUNCH-20260905/evidence/launch-execution.md).
 
 Defecto acotado detectado: un identificador cambia mayúsculas entre Parquet congelado y fuente. Excluido de la alfa; pendiente corregir productor en una nueva release del corpus, conservando la anterior y sus hashes. No marcar el corpus global íntegro por pasar este corte.
+
+### Cierre técnico de la alfa — 2026-09-05
+
+L0 corte publicado; L1 tres consultas verificadas desde descarga anónima; L2 web live con 88/88 assets exactos, enlace/filtros/móvil/CSV; L3 guía y seis tareas públicas; L4 validación técnica pasada y validación externa pendiente; L5 prerelease/vídeo publicados, convocatoria sin enviar y adopción abierta. Source `0d028cade3`, site `8d146beff0`, paquete `909fc46b…`, ZIP 399945 bytes. [Verificación live](sprints/PUBLIC-LAUNCH-20260905/evidence/live-verification.json). Próximo: 3 pruebas externas, 2 reproducciones y revisión de adopción a 14 días. No afirmar seis hitos socialmente cerrados ni promoción de escala.
+
+CI global de la publicación: fallos fuera del corte en artefactos de escala ausentes y frescura del recibo andaluz (29 días frente a 8); no se marca verde. Gate específico de alfa añadido: `PLACSP Launch Gate`, verificación de Git/paquete/SQL/XML/privacidad en checkout limpio. Mantener separados los gates del corte y los bloqueos globales.

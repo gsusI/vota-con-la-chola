@@ -19,7 +19,7 @@ Este repo es intencionalmente **ultraligero**: SQLite reproducible para control/
 
 Primera entrega: investigar contratación pública con un corte fechado y explícitamente parcial de PLACSP. Pregunta de entrada: **«¿A quién adjudicó este organismo, cuánto y en qué expedientes, dentro de este corte?»**. El recorrido previsto une pregunta, consulta, resultado, expediente oficial y reproducción.
 
-**Ahora:** corte y reproducción validados localmente; demo y publicación en verificación. **Destino:** una respuesta comprobable y reutilizable por desarrolladores de datos, periodistas y fiscalizadores cívicos. **Siguiente:** verificar publicación de la alfa y recoger reproducciones externas. Una adjudicación no equivale a un pago; el corte no representa toda la contratación pública.
+**Ahora:** [alfa técnica publicada](https://github.com/gsusI/vota-con-la-chola/releases/tag/v0.1.0-placsp-alpha.1), demo y descarga anónima verificadas. **Destino:** una respuesta comprobable y reutilizable por desarrolladores de datos, periodistas y fiscalizadores cívicos. **Siguiente:** recoger reproducciones externas y revisar adopción. Una adjudicación no equivale a un pago; el corte no representa toda la contratación pública.
 
 Los seis hitos siguientes resumen el [plan canónico y sus condiciones de aceptación](ROADMAP.md#hitos-de-lanzamiento); su estado operativo se mantiene en el [tracker de lanzamiento](docs/etl/e2e-scrape-load-tracker.md#lanzamiento-comunitario-con-foco-2026-09-05).
 

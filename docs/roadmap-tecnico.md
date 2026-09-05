@@ -13,7 +13,7 @@ Este documento traduce `ROADMAP.md` a trabajo técnico cercano. No crea scope nu
 
 ## Lanzamiento comunitario: primer trabajo
 
-Prioridad, recortes, capacidad y aceptación: [L0–L5 en ROADMAP](../ROADMAP.md#prioridad-inmediata-lanzamiento-útil-para-la-comunidad). Estado: corte, paquete y demo validados; publicación y comprobación anónima remota en curso. Evidencia: [auditoría pública](etl/sprints/PUBLIC-LAUNCH-20260905/evidence/launch-audit.md).
+Prioridad, recortes, capacidad y aceptación: [L0–L5 en ROADMAP](../ROADMAP.md#prioridad-inmediata-lanzamiento-útil-para-la-comunidad). Estado: alfa publicada; corte, paquete, demo y reproducción anónima remota verificados. Revisión comunitaria y adopción pendientes. Evidencia: [auditoría pública](etl/sprints/PUBLIC-LAUNCH-20260905/evidence/launch-audit.md).
 
 1. **L0 — Fijar inputs.** Resolver `scale/latest.json` público a una release inmutable; usar `placsp_public_money` de `docs/etl/real-corpus-registry.json` y su manifest. Verificar descarga/checksums. Los `263302` facts incluyen `121555` anuncios y `141747` resultados de adjudicación; snapshot fuente `2025-03-31`. Reconciliar unidades con `ui/gh-pages-next/public/spending/data/placsp-sample.json`, procedente de otro corte. No mezclar contadores ni asumir contratos distintos.
 2. **L0 — Comprobar semántica.** Resolver expediente/lote/versión, duplicados, moneda, significado del importe y fecha. Investigar particiones anómalas (el manifest contiene `year=1925`); preservar raw, declarar exclusiones justificadas en el derivado y comparar ejemplos públicos con la fuente. Elegir órgano y periodo solo tras verificar cobertura; sin denominador oficial, titular «en este corte».

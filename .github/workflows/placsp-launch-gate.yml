@@ -1,0 +1,41 @@
+name: PLACSP Launch Gate
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.gitattributes'
+      - '.github/workflows/placsp-launch-gate.yml'
+      - 'scripts/*placsp_launch*.py'
+      - 'tests/test_placsp_launch.py'
+      - 'docs/examples/placsp-launch/**'
+      - 'ui/gh-pages-next/public/spending/launch/**'
+  pull_request:
+    paths:
+      - '.gitattributes'
+      - '.github/workflows/placsp-launch-gate.yml'
+      - 'scripts/*placsp_launch*.py'
+      - 'tests/test_placsp_launch.py'
+      - 'docs/examples/placsp-launch/**'
+      - 'ui/gh-pages-next/public/spending/launch/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  reproduce-frozen-alpha:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify committed bytes and three reproducible queries
+        run: |
+          python3 scripts/verify_placsp_launch_git.py
+          python3 -m unittest tests.test_placsp_launch -v
+      - name: Check public launch privacy
+        run: |
+          python3 scripts/check_public_privacy_leaks.py --path ui/gh-pages-next/public/spending/launch --path docs/examples/placsp-launch
