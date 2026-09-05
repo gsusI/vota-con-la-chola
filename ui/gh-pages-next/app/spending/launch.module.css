@@ -32,8 +32,17 @@
 .searchField :global(.spending-search__menu) { animation: filter-menu-in .16s ease-out; }
 .searchField :global(.spending-search__option) { overflow-wrap: anywhere; }
 .searchField :global(.spending-search__clear-indicator), .searchField :global(.spending-search__dropdown-indicator) { min-height: 44px; align-items: center; }
-.dateField { grid-column: 1 / -1; max-width: 34rem; }
-.dateField > button { min-height: 48px; display: flex; justify-content: space-between; gap: 1rem; }
+.dateField { grid-column: 1 / -1; max-width: 44rem; }
+.dateInputs { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto; gap: .65rem; align-items: end; }
+.dateInputs label { display: grid; gap: .4rem; font-weight: 600; min-width: 0; }
+.dateInputs input { width: 100%; min-width: 0; min-height: 48px; padding: .65rem; border: 1px solid #718b7e; border-radius: .5rem; background: #fff; color: #192923; font: inherit; box-sizing: border-box; }
+.dateInputs input[aria-invalid="true"] { border-color: #a94d13; }
+.dateInputs > button { min-width: 48px; min-height: 48px; padding-inline: .8rem; }
+.dateInputs > button span:first-child { font-size: 1.35rem; line-height: 1; }
+.dateInputs > button span:last-child { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+.dateFormat, .dateError { margin: 0; font-size: .85rem; line-height: 1.4; }
+.dateFormat { color: #4b5d55; }
+.dateError { min-height: 1.2em; color: #8b3510; font-weight: 600; }
 .calendarDialog { width: min(360px, calc(100vw - 24px)); max-height: calc(100dvh - 32px); box-sizing: border-box; padding: 1rem; margin: auto; border: 1px solid #718b7e; border-radius: 1rem; color: #192923; background: #fff; overflow: auto; opacity: 0; transform: translateY(12px) scale(.98); transition: opacity .18s, transform .18s, display .18s allow-discrete, overlay .18s allow-discrete; }
 .calendarDialog[open] { opacity: 1; transform: translateY(0) scale(1); }
 .calendarDialog::backdrop { background: rgb(10 30 20 / .35); }
@@ -48,4 +57,5 @@
 .calendarDialog :global(.rdp-dropdown) { color: #192923; background: #fff; }
 @starting-style { .calendarDialog[open] { opacity: 0; transform: translateY(12px) scale(.98); } }
 @keyframes filter-menu-in { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 480px) { .dateInputs { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } .dateInputs > button { grid-column: 1 / -1; width: 100%; } .dateInputs > button span:last-child { position: static; width: auto; height: auto; margin: 0; overflow: visible; clip: auto; white-space: normal; } }
 @media (max-width: 370px) { .calendarDialog { padding: .65rem; } .calendarDialog :global(.rdp-root) { --rdp-day-width: 38px; --rdp-day_button-width: 36px; } }

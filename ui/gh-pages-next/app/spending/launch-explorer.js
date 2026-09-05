@@ -13,6 +13,7 @@ export default function LaunchExplorer({ rows, audit, release }) {
   const [filters, setFilters] = useState(initial);
   const [page, setPage] = useState(0);
   const [message, setMessage] = useState('');
+  const [filterResetToken, setFilterResetToken] = useState(0);
   const resultsRef = useRef(null);
   const base = withBasePath(`/spending/launch/${release.release}/`);
   const authorities = [...new Set(rows.map((row) => row.authority))].sort();
@@ -95,12 +96,14 @@ export default function LaunchExplorer({ rows, audit, release }) {
             values={authorities} value={filters.authority} onChange={(value) => change('authority', value)} />
           <SearchSelect id="supplier" label="Proveedor" placeholder="Todos los proveedores del corte"
             values={suppliers} value={filters.supplier} onChange={(value) => change('supplier', value)} />
-          <DateRangeField start={filters.start} end={filters.end} onChange={(range) => animate(() => {
+          <DateRangeField start={filters.start} end={filters.end} resetToken={filterResetToken} onChange={(range) => animate(() => {
             setFilters((prior) => ({ ...prior, ...range })); setPage(0); setMessage('');
           })} />
         </div>
         <div className={`spending-filters__actions ${styles.actions}`}>
-          <button className="spending-filters__reset" onClick={() => animate(() => { setFilters(initial); setPage(0); setMessage(''); })}>Restablecer</button>
+          <button className="spending-filters__reset" onClick={() => animate(() => {
+            setFilters(initial); setFilterResetToken((prior) => prior + 1); setPage(0); setMessage('');
+          })}>Restablecer</button>
           <button className="spending-filters__share" onClick={share}>Copiar enlace a este resultado</button>
           <button className="spending-filters__csv" onClick={downloadCsv}>Descargar resultados CSV</button>
         </div>

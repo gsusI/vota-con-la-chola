@@ -25,3 +25,17 @@ Public browser verification on the canonical domain:
 - Final deployment checked at `/spending/?v=95586e58ca` to avoid the preceding cached response: first click on January 5 highlights only day 5; second click on January 3 commits January 3–5. The `v` parameter is a deployment verification marker, not a preference input.
 
 Status: published and verified. Next: external alpha usability feedback under the existing launch tracker.
+
+## Independent date editing refinement
+
+- Now: Desde and Hasta are separate text inputs backed by separate ISO filter values. Enter or blur applies only the edited endpoint. The shared calendar keeps the first-click start, second-click end interaction and commits both endpoints together.
+- Target: allow precise correction of either endpoint without rewriting the other, while retaining the faster hotel-style range picker.
+- Next: publish through the scoped frontend path, verify both independent fields and the two-click calendar on the canonical domain, then return to external alpha usability feedback.
+
+Verification before publication:
+- Editing only Desde to 02/01/2025 preserves Hasta=31/01/2025 and returns 112 rows. Editing only Hasta to 01/01/2025 preserves Desde=01/01/2025 and returns 8 rows / 194804631 cents.
+- Text accepts dd/mm/yyyy and canonical yyyy-mm-dd, then displays normalized dd/mm/yyyy. Invalid dates such as 31/02/2025 and inverted ranges produce a field-specific error without changing the applied range. Escape restores the applied value.
+- Reset clears local invalid text and both applied endpoints. Shared URLs continue storing separate start and end values and restore both inputs after reload.
+- Calendar first click leaves both inputs/results unchanged and highlights only the chosen start; second click orders and commits the two dates. Dialog Escape returns focus to its trigger.
+- Width 320 has no field or dialog horizontal overflow. Stable-state mobile visual review passed. Zero captured JavaScript errors.
+- Frozen static build, five launch tests, notFound scan, size gate and both privacy checks pass.
