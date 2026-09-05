@@ -1,0 +1,481 @@
+<ns0:entry xmlns:ns0="http://www.w3.org/2005/Atom" xmlns:ns1="urn:dgpe:names:draft:codice-place-ext:schema:xsd:CommonAggregateComponents-2" xmlns:ns2="urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2" xmlns:ns3="urn:dgpe:names:draft:codice-place-ext:schema:xsd:CommonBasicComponents-2" xmlns:ns4="urn:dgpe:names:draft:codice:schema:xsd:CommonAggregateComponents-2">
+        <ns0:id>https://contrataciondelestado.es/sindicacion/licitacionesPerfilContratante/15907542</ns0:id>
+        <ns0:link href="https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&amp;idEvl=aizH8wlJI3wQyBAnWzHfCg%3D%3D" />
+        <ns0:summary type="text">Id licitación: 5100026946; Órgano de Contratación: Comité de Dirección Corporativo de Navantia S.A., S.M.E.; Importe: 482843.38 EUR; Estado: ADJ</ns0:summary>
+        <ns0:title>Suministro de pertrechos no plano S-80</ns0:title>
+        <ns0:updated>2025-02-05T09:29:09.938+01:00</ns0:updated>
+        <ns1:ContractFolderStatus>
+            <ns2:ContractFolderID>5100026946</ns2:ContractFolderID>
+            <ns3:ContractFolderStatusCode listURI="https://contrataciondelestado.es/codice/cl/2.04/SyndicationContractFolderStatusCode-2.04.gc" languageID="es">ADJ</ns3:ContractFolderStatusCode>
+            <ns1:LocatedContractingParty>
+                <ns2:ContractingPartyTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.10/ContractingAuthorityCode-2.10.gc">9</ns2:ContractingPartyTypeCode>
+                <ns2:ActivityCode listURI="http://contrataciondelestado.es/codice/cl/2.10/ContractingAuthorityActivityCode-2.10.gc">1</ns2:ActivityCode>
+                <ns2:BuyerProfileURIID>https://contrataciondelestado.es/wps/poc?uri=deeplink:perfilContratante&amp;idBp=euxtSRgRs24QK2TEfXGy%2BA%3D%3D</ns2:BuyerProfileURIID>
+                <ns4:Party>
+                    <ns2:WebsiteURI>http://www.navantia.es</ns2:WebsiteURI>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="DIR3">EA0008398</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">A84076397</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="ID_PLATAFORMA">50289410050061</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>Comité de Dirección Corporativo de Navantia S.A., S.M.E.</ns2:Name>
+                    </ns4:PartyName>
+                    <ns4:PostalAddress>
+                        <ns2:CityName>Madrid</ns2:CityName>
+                        <ns2:PostalZone>28006</ns2:PostalZone>
+                        <ns4:AddressLine>
+                            <ns2:Line>Velázquez, 132</ns2:Line>
+                        </ns4:AddressLine>
+                        <ns4:Country>
+                            <ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+                            <ns2:Name>España</ns2:Name>
+                        </ns4:Country>
+                    </ns4:PostalAddress>
+                    <ns4:Contact>
+                        <ns2:Name>Comité de Dirección Corporativo de Navantia S.A., S.M.E.</ns2:Name>
+                        <ns2:ElectronicMail>licitaciones_placsp@navantia.es</ns2:ElectronicMail>
+                    </ns4:Contact>
+                </ns4:Party>
+                <ns1:ParentLocatedParty>
+                    <ns4:PartyName>
+                        <ns2:Name>NAVANTIA</ns2:Name>
+                    </ns4:PartyName>
+                    <ns1:ParentLocatedParty>
+                        <ns4:PartyIdentification>
+                            <ns2:ID schemeName="DIR3">EA0000141</ns2:ID>
+                        </ns4:PartyIdentification>
+                        <ns4:PartyName>
+                            <ns2:Name>SEPI</ns2:Name>
+                        </ns4:PartyName>
+                        <ns1:ParentLocatedParty>
+                            <ns4:PartyIdentification>
+<ns2:ID schemeName="DIR3">E05188501</ns2:ID>
+                            </ns4:PartyIdentification>
+                            <ns4:PartyName>
+<ns2:Name>Ministerio de Hacienda</ns2:Name>
+                            </ns4:PartyName>
+                            <ns1:ParentLocatedParty>
+<ns4:PartyName>
+    <ns2:Name>SOCIEDADES, FUNDACIONES y CONSORCIOS ESTATALES</ns2:Name>
+</ns4:PartyName>
+<ns1:ParentLocatedParty>
+    <ns4:PartyName>
+        <ns2:Name>OTRAS ENTIDADES DEL SECTOR PÚBLICO</ns2:Name>
+    </ns4:PartyName>
+    <ns1:ParentLocatedParty>
+        <ns4:PartyName>
+            <ns2:Name>Sector Público</ns2:Name>
+        </ns4:PartyName>
+    </ns1:ParentLocatedParty>
+</ns1:ParentLocatedParty>
+                            </ns1:ParentLocatedParty>
+                        </ns1:ParentLocatedParty>
+                    </ns1:ParentLocatedParty>
+                </ns1:ParentLocatedParty>
+            </ns1:LocatedContractingParty>
+            <ns4:ProcurementProject>
+                <ns2:Name>Suministro de pertrechos no plano S-80</ns2:Name>
+                <ns2:TypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/ContractCode-2.08.gc">1</ns2:TypeCode>
+                <ns2:SubTypeCode listURI="http://contrataciondelestado.es/codice/cl/1.04/GoodsContractCode-1.04.gc">2</ns2:SubTypeCode>
+                <ns2:MixContractIndicator>false</ns2:MixContractIndicator>
+                <ns4:BudgetAmount>
+                    <ns2:EstimatedOverallContractAmount currencyID="EUR">482843.38</ns2:EstimatedOverallContractAmount>
+                    <ns2:TotalAmount currencyID="EUR">584240.49</ns2:TotalAmount>
+                    <ns2:TaxExclusiveAmount currencyID="EUR">482843.38</ns2:TaxExclusiveAmount>
+                </ns4:BudgetAmount>
+                <ns4:RequiredCommodityClassification>
+                    <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">44316000</ns2:ItemClassificationCode>
+                </ns4:RequiredCommodityClassification>
+                <ns4:RequiredCommodityClassification>
+                    <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">33100000</ns2:ItemClassificationCode>
+                </ns4:RequiredCommodityClassification>
+                <ns4:RequiredCommodityClassification>
+                    <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">33182100</ns2:ItemClassificationCode>
+                </ns4:RequiredCommodityClassification>
+                <ns4:RequiredCommodityClassification>
+                    <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">39510000</ns2:ItemClassificationCode>
+                </ns4:RequiredCommodityClassification>
+                <ns4:RequiredCommodityClassification>
+                    <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">30192700</ns2:ItemClassificationCode>
+                </ns4:RequiredCommodityClassification>
+                <ns4:RequiredCommodityClassification>
+                    <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">31518220</ns2:ItemClassificationCode>
+                </ns4:RequiredCommodityClassification>
+                <ns4:RequiredCommodityClassification>
+                    <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">35110000</ns2:ItemClassificationCode>
+                </ns4:RequiredCommodityClassification>
+                <ns4:RequiredCommodityClassification>
+                    <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">42600000</ns2:ItemClassificationCode>
+                </ns4:RequiredCommodityClassification>
+                <ns4:RequiredCommodityClassification>
+                    <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">44424300</ns2:ItemClassificationCode>
+                </ns4:RequiredCommodityClassification>
+                <ns4:RequiredCommodityClassification>
+                    <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">18110000</ns2:ItemClassificationCode>
+                </ns4:RequiredCommodityClassification>
+                <ns4:RequiredCommodityClassification>
+                    <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">35230000</ns2:ItemClassificationCode>
+                </ns4:RequiredCommodityClassification>
+                <ns4:RequiredCommodityClassification>
+                    <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">38100000</ns2:ItemClassificationCode>
+                </ns4:RequiredCommodityClassification>
+                <ns4:RequiredCommodityClassification>
+                    <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">38110000</ns2:ItemClassificationCode>
+                </ns4:RequiredCommodityClassification>
+                <ns4:RequiredCommodityClassification>
+                    <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">44111530</ns2:ItemClassificationCode>
+                </ns4:RequiredCommodityClassification>
+                <ns4:RequiredCommodityClassification>
+                    <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">44400000</ns2:ItemClassificationCode>
+                </ns4:RequiredCommodityClassification>
+                <ns4:RequiredCommodityClassification>
+                    <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">38630000</ns2:ItemClassificationCode>
+                </ns4:RequiredCommodityClassification>
+                <ns4:RequiredCommodityClassification>
+                    <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">38342000</ns2:ItemClassificationCode>
+                </ns4:RequiredCommodityClassification>
+                <ns4:RequiredCommodityClassification>
+                    <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">39220000</ns2:ItemClassificationCode>
+                </ns4:RequiredCommodityClassification>
+                <ns4:RealizedLocation>
+                    <ns2:CountrySubentity>Región de Murcia</ns2:CountrySubentity>
+                    <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES62</ns2:CountrySubentityCode>
+                    <ns4:Address>
+                        <ns4:Country>
+                            <ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+                            <ns2:Name>España</ns2:Name>
+                        </ns4:Country>
+                    </ns4:Address>
+                </ns4:RealizedLocation>
+                <ns4:PlannedPeriod>
+                    <ns2:DurationMeasure unitCode="ANN">1</ns2:DurationMeasure>
+                </ns4:PlannedPeriod>
+                <ns4:ContractExtension>
+                    <ns4:OptionValidityPeriod>
+                        <ns2:Description>No se prevén prórrogas</ns2:Description>
+                    </ns4:OptionValidityPeriod>
+                </ns4:ContractExtension>
+            </ns4:ProcurementProject>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Se propone adjudicación al proveedor SUYFA DEFENCE, S.L.
+Las posiciones asignadas  son:
+ 
+1003678356: 10, 20, 30, 40, 90, 110, 120, 130, 140, 150, 170, 220, 340, 350, 370, 390, 400, 410, 470, 550, 590, 600, 610, 620, 650, 680, 690, 730, 750, 760, 770, 780, 810, 840, 850, 870, 910, 920, 940, 960, 980, 990, 1000, 1010,  1020,  1030, 1040, 1050, 1060, 1080, 1090, 1100, 1120, 1130, 1140, 1150, 1160, 1170, 1180, 1190, 1200, 1230, 1290, 1300, 1310, 1320, 1330, 1340, 1350, 1380, 1390, 1400,  1410, 1420, 1430, 1440, 1450, 1510, 1520, 1530, 1540, 1610, 1630, 1640, 1690, 1700, 1730, 1740, 1750, 1760, 1770, 1780, 1850, 1940, 1950, 1960, 1970, 1980, 1990, 2170, 2200, 2250, 2280, 2360, 2390, 2430, 2460, 2470, 2520, 2590, 2600, 2610, 2620, 2630, 2660, 2670, 2680, 2690, 2700, 2710, 2720, 2760, 2770, 2790, 2800, 2820, 2840, 2890, 2900, 2910, 2920, 2930, 2940, 2950, 2960, 3030, 3040.
+
+1003723772: 20, 30, 40, 50, 90, 250, 400, 700, 810, 840, 870, 960, 1020, 1110, 1120, 1130, 1190, 1230, 1360, 1380, 1390, 1410, 1420, 1430, 1460
+
+Se propone adjudicación al proveedor GAUZON IBERICA.
+Las posiciones asignadas  son:
+
+1003678356: 50, 60, 70, 80, 100, 160, 180, 190, 200, 210, 230, 240, 250, 260, 270, 280, 290, 300, 310, 320, 330, 360, 380, 420, 430, 440, 460, 480, 490, 500, 510, 530, 540, 560, 570, 580, 630, 640, 660, 670, 710, 720, 740, 830, 860, 880, 890, 900, 930, 950, 970, 1070, 1110, 1210, 1220, 1240, 1250, 1260, 1270, 1280, 1370, 1460, 1470, 1480, 1490, 1500, 1550, 1560, 1570, 1580, 1590, 1600, 1620, 1650, 1660, 1680, 1720, 1790, 1800, 1810, 1820, 1830, 1840, 1860, 1870, 1880, 1890, 1900, 1910, 1920, 1930, 2000, 2010, 2020, 2030, 2040, 2050, 2060, 2070, 2080, 2090, 2100, 2110, 2120, 2130, 2140, 2150, 2160, 2180, 2190, 2210, 2220, 2230, 2240, 2260, 2270, 2290, 2300, 2310, 2320, 2330, 2340, 2350, 2370, 2380, 2400, 2410, 2420, 2440, 2450, 2480, 2490, 2500, 2510, 2530, 2540, 2550, 2560, 2570, 2640, 2650, 2730, 2740, 2750, 2780, 2810, 2830, 2850, 2860, 2870, 2880, 3000, 3010, 3020, 3050, 3060.
+ 
+1003723772: 10, 70, 80, 100, 110, 120, 130, 140, 150, 160, 170, 180, 190, 200, 210, 220, 230, 240, 260, 270, 280, 290, 300, 310, 320, 330, 340, 350, 360, 380, 390, 410, 420, 430, 440, 450, 460, 470, 480, 490, 500, 510, 520, 530, 540, 550, 560, 570, 580, 590, 600, 610, 620, 630, 640, 650, 660, 670, 680, 710, 720, 730, 740, 750, 760, 770, 780, 790, 800, 820, 830, 860, 880, 890, 900, 910, 920, 930, 940, 950, 970, 980, 990, 1000, 1010, 1030, 1040, 1050, 1060, 1070, 1080, 1090, 1100, 1140, 1150, 1160, 1170, 1180, 1200, 1210, 1220, 1240, 1250, 1260, 1270, 1280, 1290, 1300, 1310, 1320, 1330, 1340, 1350, 1370, 1400, 1440, 1450, 1470, 1480, 1490, 1500, 1510, 1520, 1600, 1610, 1620, 1630, 1640, 1650, 1660, 1670, 1680, 1690, 1700, 1710, 1720, 1730, 1740, 1750, 1760, 1770, 1780, 1790, 1800, 1810, 1820, 1840, 1850, 1860, 1900, 1910, 1920, 1930, 1940, 1950, 1960, 1970, 1980, 1990, 2000, 2010, 2060, 2070, 2080, 2090, 2100, 2110, 2120, 2130, 2140, 2150, 2160, 2170, 2180, 2190, 2200, 2210, 2270, 2280, 2290, 2300, 2310, 2330, 2340, 2350, 2360, 2370, 2380, 2390.
+
+</ns2:Description>
+                <ns2:AwardDate>2025-01-29</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>3</ns2:ReceivedTenderQuantity>
+                <ns2:StartDate>2025-02-21</ns2:StartDate>
+                <ns2:SMEsReceivedTenderQuantity>3</ns2:SMEsReceivedTenderQuantity>
+                <ns2:EUNationalsReceivedTenderQuantity>0</ns2:EUNationalsReceivedTenderQuantity>
+                <ns2:NonEUNationalsReceivedTenderQuantity>0</ns2:NonEUNationalsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:Contract>
+                    <ns2:IssueDate>2025-02-21</ns2:IssueDate>
+                </ns4:Contract>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">B84995711</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>SUYFA DEFENCE, S.L.</ns2:Name>
+                    </ns4:PartyName>
+                    <ns4:PhysicalLocation>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc" name="España">ES612</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns2:CityName>CÁDIZ</ns2:CityName>
+                            <ns2:PostalZone>28005</ns2:PostalZone>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc" name="España">ES</ns2:IdentificationCode>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:PhysicalLocation>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">120077.86</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">145294.21</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Se propone adjudicación al proveedor SUYFA DEFENCE, S.L.
+Las posiciones asignadas  son:
+ 
+1003678356: 10, 20, 30, 40, 90, 110, 120, 130, 140, 150, 170, 220, 340, 350, 370, 390, 400, 410, 470, 550, 590, 600, 610, 620, 650, 680, 690, 730, 750, 760, 770, 780, 810, 840, 850, 870, 910, 920, 940, 960, 980, 990, 1000, 1010,  1020,  1030, 1040, 1050, 1060, 1080, 1090, 1100, 1120, 1130, 1140, 1150, 1160, 1170, 1180, 1190, 1200, 1230, 1290, 1300, 1310, 1320, 1330, 1340, 1350, 1380, 1390, 1400,  1410, 1420, 1430, 1440, 1450, 1510, 1520, 1530, 1540, 1610, 1630, 1640, 1690, 1700, 1730, 1740, 1750, 1760, 1770, 1780, 1850, 1940, 1950, 1960, 1970, 1980, 1990, 2170, 2200, 2250, 2280, 2360, 2390, 2430, 2460, 2470, 2520, 2590, 2600, 2610, 2620, 2630, 2660, 2670, 2680, 2690, 2700, 2710, 2720, 2760, 2770, 2790, 2800, 2820, 2840, 2890, 2900, 2910, 2920, 2930, 2940, 2950, 2960, 3030, 3040.
+
+1003723772: 20, 30, 40, 50, 90, 250, 400, 700, 810, 840, 870, 960, 1020, 1110, 1120, 1130, 1190, 1230, 1360, 1380, 1390, 1410, 1420, 1430, 1460
+
+Se propone adjudicación al proveedor GAUZON IBERICA.
+Las posiciones asignadas  son:
+
+1003678356: 50, 60, 70, 80, 100, 160, 180, 190, 200, 210, 230, 240, 250, 260, 270, 280, 290, 300, 310, 320, 330, 360, 380, 420, 430, 440, 460, 480, 490, 500, 510, 530, 540, 560, 570, 580, 630, 640, 660, 670, 710, 720, 740, 830, 860, 880, 890, 900, 930, 950, 970, 1070, 1110, 1210, 1220, 1240, 1250, 1260, 1270, 1280, 1370, 1460, 1470, 1480, 1490, 1500, 1550, 1560, 1570, 1580, 1590, 1600, 1620, 1650, 1660, 1680, 1720, 1790, 1800, 1810, 1820, 1830, 1840, 1860, 1870, 1880, 1890, 1900, 1910, 1920, 1930, 2000, 2010, 2020, 2030, 2040, 2050, 2060, 2070, 2080, 2090, 2100, 2110, 2120, 2130, 2140, 2150, 2160, 2180, 2190, 2210, 2220, 2230, 2240, 2260, 2270, 2290, 2300, 2310, 2320, 2330, 2340, 2350, 2370, 2380, 2400, 2410, 2420, 2440, 2450, 2480, 2490, 2500, 2510, 2530, 2540, 2550, 2560, 2570, 2640, 2650, 2730, 2740, 2750, 2780, 2810, 2830, 2850, 2860, 2870, 2880, 3000, 3010, 3020, 3050, 3060.
+ 
+1003723772: 10, 70, 80, 100, 110, 120, 130, 140, 150, 160, 170, 180, 190, 200, 210, 220, 230, 240, 260, 270, 280, 290, 300, 310, 320, 330, 340, 350, 360, 380, 390, 410, 420, 430, 440, 450, 460, 470, 480, 490, 500, 510, 520, 530, 540, 550, 560, 570, 580, 590, 600, 610, 620, 630, 640, 650, 660, 670, 680, 710, 720, 730, 740, 750, 760, 770, 780, 790, 800, 820, 830, 860, 880, 890, 900, 910, 920, 930, 940, 950, 970, 980, 990, 1000, 1010, 1030, 1040, 1050, 1060, 1070, 1080, 1090, 1100, 1140, 1150, 1160, 1170, 1180, 1200, 1210, 1220, 1240, 1250, 1260, 1270, 1280, 1290, 1300, 1310, 1320, 1330, 1340, 1350, 1370, 1400, 1440, 1450, 1470, 1480, 1490, 1500, 1510, 1520, 1600, 1610, 1620, 1630, 1640, 1650, 1660, 1670, 1680, 1690, 1700, 1710, 1720, 1730, 1740, 1750, 1760, 1770, 1780, 1790, 1800, 1810, 1820, 1840, 1850, 1860, 1900, 1910, 1920, 1930, 1940, 1950, 1960, 1970, 1980, 1990, 2000, 2010, 2060, 2070, 2080, 2090, 2100, 2110, 2120, 2130, 2140, 2150, 2160, 2170, 2180, 2190, 2200, 2210, 2270, 2280, 2290, 2300, 2310, 2330, 2340, 2350, 2360, 2370, 2380, 2390.
+
+</ns2:Description>
+                <ns2:AwardDate>2025-01-29</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>3</ns2:ReceivedTenderQuantity>
+                <ns2:StartDate>2025-02-21</ns2:StartDate>
+                <ns2:SMEsReceivedTenderQuantity>3</ns2:SMEsReceivedTenderQuantity>
+                <ns2:EUNationalsReceivedTenderQuantity>0</ns2:EUNationalsReceivedTenderQuantity>
+                <ns2:NonEUNationalsReceivedTenderQuantity>0</ns2:NonEUNationalsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:Contract>
+                    <ns2:IssueDate>2025-02-21</ns2:IssueDate>
+                </ns4:Contract>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">B15391303</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>GAUZON IBERICA, S.L.</ns2:Name>
+                    </ns4:PartyName>
+                    <ns4:PhysicalLocation>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc" name="España">ES111</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns2:CityName>FERROL</ns2:CityName>
+                            <ns2:PostalZone>15401</ns2:PostalZone>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc" name="España">ES</ns2:IdentificationCode>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:PhysicalLocation>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">218705.15</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">264633.23</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderingTerms>
+                <ns2:RequiredCurriculaIndicator>false</ns2:RequiredCurriculaIndicator>
+                <ns2:VariantConstraintIndicator>false</ns2:VariantConstraintIndicator>
+                <ns2:FundingProgramCode listURI="http://contrataciondelestado.es/codice/cl/2.08/FundingProgramCode-2.08.gc" name="No hay financiación con fondos de la UE">NO-EU</ns2:FundingProgramCode>
+                <ns2:ProcurementNationalLegislationCode listURI="https://contrataciondelestado.es/codice/cl/2.08/ProcurementNationalLegislationCode-2.08.gc">0</ns2:ProcurementNationalLegislationCode>
+                <ns2:ReceivedAppealQuantity>0</ns2:ReceivedAppealQuantity>
+                <ns4:ProcurementLegislationDocumentReference>
+                    <ns2:ID>N/A</ns2:ID>
+                </ns4:ProcurementLegislationDocumentReference>
+                <ns4:TendererQualificationRequest>
+                    <ns4:TechnicalEvaluationCriteria>
+                        <ns2:EvaluationCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/TechnicalCapabilityTypeCode-2.0.gc">XSX-CERTCALIDAD</ns2:EvaluationCriteriaTypeCode>
+                        <ns2:Description>De acuerdo con el apartado 13.3 del PCP este criterio es de obligado cumplimiento</ns2:Description>
+                    </ns4:TechnicalEvaluationCriteria>
+                    <ns4:TechnicalEvaluationCriteria>
+                        <ns2:EvaluationCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/TechnicalCapabilityTypeCode-2.0.gc">OXR-MEDIOS</ns2:EvaluationCriteriaTypeCode>
+                        <ns2:Description>De acuerdo con el apartado 13.3 del PCP este criterio es de obligado cumplimiento</ns2:Description>
+                    </ns4:TechnicalEvaluationCriteria>
+                    <ns4:FinancialEvaluationCriteria>
+                        <ns2:EvaluationCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/FinancialCapabilityTypeCode-2.0.gc">2</ns2:EvaluationCriteriaTypeCode>
+                        <ns2:Description>De acuerdo con el apartado 13.2 del PCP este criterio es de obligado cumplimiento</ns2:Description>
+                    </ns4:FinancialEvaluationCriteria>
+                    <ns4:FinancialEvaluationCriteria>
+                        <ns2:EvaluationCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/FinancialCapabilityTypeCode-2.0.gc">5</ns2:EvaluationCriteriaTypeCode>
+                        <ns2:Description>De acuerdo con el apartado 13.2 del PCP este criterio es de obligado cumplimiento</ns2:Description>
+                    </ns4:FinancialEvaluationCriteria>
+                    <ns4:SpecificTendererRequirement>
+                        <ns2:RequirementTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/DeclarationTypeCode-2.08.gc">4</ns2:RequirementTypeCode>
+                        <ns2:Description>Cumplimiento con las obligaciones con la Seguridad Social</ns2:Description>
+                    </ns4:SpecificTendererRequirement>
+                    <ns4:SpecificTendererRequirement>
+                        <ns2:RequirementTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/DeclarationTypeCode-2.08.gc">3</ns2:RequirementTypeCode>
+                        <ns2:Description>No estar incurso en incompatibilidades</ns2:Description>
+                    </ns4:SpecificTendererRequirement>
+                    <ns4:SpecificTendererRequirement>
+                        <ns2:RequirementTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/DeclarationTypeCode-2.08.gc">5</ns2:RequirementTypeCode>
+                        <ns2:Description>Cumplimiento con las obligaciones tributarias</ns2:Description>
+                    </ns4:SpecificTendererRequirement>
+                    <ns4:SpecificTendererRequirement>
+                        <ns2:RequirementTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/DeclarationTypeCode-2.08.gc">1</ns2:RequirementTypeCode>
+                        <ns2:Description>Capacidad de obrar</ns2:Description>
+                    </ns4:SpecificTendererRequirement>
+                    <ns4:SpecificTendererRequirement>
+                        <ns2:RequirementTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/DeclarationTypeCode-2.08.gc">9</ns2:RequirementTypeCode>
+                        <ns2:Description>Para las empresas extranjeras, declaración de sometimiento a la legislación española.</ns2:Description>
+                    </ns4:SpecificTendererRequirement>
+                    <ns4:SpecificTendererRequirement>
+                        <ns2:RequirementTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/DeclarationTypeCode-2.08.gc">2</ns2:RequirementTypeCode>
+                        <ns2:Description>No prohibición para contratar</ns2:Description>
+                    </ns4:SpecificTendererRequirement>
+                </ns4:TendererQualificationRequest>
+                <ns4:AllowedSubcontractTerms>
+                    <ns2:Description>En caso afirmativo, la subcontratación requiere información y consentimiento previo y por escrito de Navantia.</ns2:Description>
+                </ns4:AllowedSubcontractTerms>
+                <ns4:AwardingTerms>
+                    <ns4:AwardingCriteria>
+                        <ns2:AwardingCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/AwardingCriteriaCode-2.0.gc">SUBJ</ns2:AwardingCriteriaTypeCode>
+                        <ns2:Description>El contrato se adjudicará a la oferta con mejor relación calidad-precio-plazo de entrega de conformidad con los criterios de valoración establecidos en el apartado 16 del cuadro resumen del PCP</ns2:Description>
+                        <ns2:AwardingCriteriaSubTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.09/AwardingCriteriaNotAutomaticallyEvaluatedSubTypeCode-2.09.gc">99</ns2:AwardingCriteriaSubTypeCode>
+                        <ns2:WeightNumeric>100</ns2:WeightNumeric>
+                    </ns4:AwardingCriteria>
+                </ns4:AwardingTerms>
+                <ns4:Language>
+                    <ns2:ID>es</ns2:ID>
+                </ns4:Language>
+            </ns4:TenderingTerms>
+            <ns4:TenderingProcess>
+                <ns2:ProcedureCode listURI="https://contrataciondelestado.es/codice/cl/2.07/SyndicationTenderingProcessCode-2.07.gc">100</ns2:ProcedureCode>
+                <ns2:UrgencyCode listURI="http://contrataciondelestado.es/codice/cl/1.04/DiligenceTypeCode-1.04.gc">1</ns2:UrgencyCode>
+                <ns2:ContractingSystemCode listURI="http://contrataciondelestado.es/codice/cl/2.08/ContractingSystemTypeCode-2.08.gc">0</ns2:ContractingSystemCode>
+                <ns2:SubmissionMethodCode listURI="http://contrataciondelestado.es/codice/cl/1.04/TenderDeliveryCode-1.04.gc">1</ns2:SubmissionMethodCode>
+                <ns2:OverThresholdIndicator>false</ns2:OverThresholdIndicator>
+                <ns4:DocumentAvailabilityPeriod>
+                    <ns2:EndDate>2024-11-21</ns2:EndDate>
+                    <ns2:EndTime>12:00:00</ns2:EndTime>
+                </ns4:DocumentAvailabilityPeriod>
+                <ns4:TenderSubmissionDeadlinePeriod>
+                    <ns2:EndDate>2024-11-21</ns2:EndDate>
+                    <ns2:EndTime>12:00:00</ns2:EndTime>
+                </ns4:TenderSubmissionDeadlinePeriod>
+                <ns4:ParticipationRequestReceptionPeriod>
+                    <ns2:EndDate>2024-11-07</ns2:EndDate>
+                    <ns2:EndTime>12:00:00</ns2:EndTime>
+                </ns4:ParticipationRequestReceptionPeriod>
+            </ns4:TenderingProcess>
+            <ns4:LegalDocumentReference>
+                <ns2:ID>PCP 5100026946_SUMINISTRO DE PERTRECHOS NO PLANO S-80.pdf</ns2:ID>
+                <ns4:Attachment>
+                    <ns4:ExternalReference>
+                        <ns2:URI>https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=LjbntWXj9ietTSwRxw9cUUbK1Xt52D2J9Ms7H8zNY3fJsduhoAdTjzAy8lXupJS64U7rFt4TzELgkxXWOdR5eh2MmxuOtAOx9vwu1560Bgv6CYyL7SIrUOBFfNf52ZqA&amp;cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D</ns2:URI>
+                        <ns2:DocumentHash>2jmj7l5rSw0yVb/vlWAYkK/YBwk=</ns2:DocumentHash>
+                    </ns4:ExternalReference>
+                </ns4:Attachment>
+            </ns4:LegalDocumentReference>
+            <ns4:AdditionalDocumentReference>
+                <ns2:ID>N16 MANGUERAS.pdf</ns2:ID>
+                <ns4:Attachment>
+                    <ns4:ExternalReference>
+                        <ns2:URI>https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=Zht8xkIC9QR7CXY6mooZQcI%2BPtJuxyFe6dmWBq0eMjsMphI85Yc9hq9ncdS8jBs4mpq81j9VAHRwVv1cvRr0WvO%2B1LFRyEX0qKAJt9UzvNWCx2e6p7hqtlp2aFupgHMr&amp;cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D</ns2:URI>
+                        <ns2:DocumentHash>2jmj7l5rSw0yVb/vlWAYkK/YBwk=</ns2:DocumentHash>
+                    </ns4:ExternalReference>
+                </ns4:Attachment>
+            </ns4:AdditionalDocumentReference>
+            <ns4:AdditionalDocumentReference>
+                <ns2:ID>N02-N03-N04.pdf</ns2:ID>
+                <ns4:Attachment>
+                    <ns4:ExternalReference>
+                        <ns2:URI>https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=293%2BPWnO8rHG6sVcisxoZUppzbSEABbmQoxy0x3xrjCMfvvFX259YwOA8Xm5I32Ly4H7BQ0UufBaVv173ea/Y/vz%2BNE6jGDEVyEpdlRpEmb3GVhXrFFqN7yFncy7YfRK&amp;cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D</ns2:URI>
+                        <ns2:DocumentHash>2jmj7l5rSw0yVb/vlWAYkK/YBwk=</ns2:DocumentHash>
+                    </ns4:ExternalReference>
+                </ns4:Attachment>
+            </ns4:AdditionalDocumentReference>
+            <ns4:AdditionalDocumentReference>
+                <ns2:ID>N15 CABLES.pdf</ns2:ID>
+                <ns4:Attachment>
+                    <ns4:ExternalReference>
+                        <ns2:URI>https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=Ga2UoZEnhXEu4pp7rBfFRSzp0i45O3mrjdAHmItWj9%2BJJcdyWNPHZf7/cX0q8%2BdPMK1QmaXjdXrW/OzW4gRnImyUMi2X8y9zUG%2B0DBp9VVtJOVDbGCDM%2BMigrvuVS7Rv&amp;cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D</ns2:URI>
+                        <ns2:DocumentHash>2jmj7l5rSw0yVb/vlWAYkK/YBwk=</ns2:DocumentHash>
+                    </ns4:ExternalReference>
+                </ns4:Attachment>
+            </ns4:AdditionalDocumentReference>
+            <ns4:AdditionalDocumentReference>
+                <ns2:ID>ACUERDO CONFIDENCIALIDAD COMERCIAL.docx</ns2:ID>
+                <ns4:Attachment>
+                    <ns4:ExternalReference>
+                        <ns2:URI>https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=9bedm0Nn6i8m3E51z4jY/myr4uMbjL9ZEOqpzcrM2tZtIUD8wvZer3GbSkrdBl0F6Bx%2BuM6ZRjC%2BUQ74Dk30KvQ5%2Bff8kqUgVb%2Bf1N9mYxqCx2e6p7hqtlp2aFupgHMr&amp;cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D</ns2:URI>
+                        <ns2:DocumentHash>2jmj7l5rSw0yVb/vlWAYkK/YBwk=</ns2:DocumentHash>
+                    </ns4:ExternalReference>
+                </ns4:Attachment>
+            </ns4:AdditionalDocumentReference>
+            <ns4:AdditionalDocumentReference>
+                <ns2:ID>NOTAS S80 PEDIDOS MATERIALES.pdf</ns2:ID>
+                <ns4:Attachment>
+                    <ns4:ExternalReference>
+                        <ns2:URI>https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=rdm%2BWzPIw6smwFB4x9mm2aXtmlhc7W3ox%2BBUtYfWzYYPa7CwTAO8BEOXhGJXbFWu6Wmjs/X0qSoa6Cb/AVsE1mNyedC5XvEOwS81OQOqHVR7QB3HKyQaFUExmUVQCerk&amp;cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D</ns2:URI>
+                        <ns2:DocumentHash>2jmj7l5rSw0yVb/vlWAYkK/YBwk=</ns2:DocumentHash>
+                    </ns4:ExternalReference>
+                </ns4:Attachment>
+            </ns4:AdditionalDocumentReference>
+            <ns4:AdditionalDocumentReference>
+                <ns2:ID>Condiciones generales CGAS.pdf</ns2:ID>
+                <ns4:Attachment>
+                    <ns4:ExternalReference>
+                        <ns2:URI>https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=7VCYimRmk0XPEhPiktgx1DK/icdmKIFi0IBZMSUa6f9MTeMJadxBpzObVCbLHkh4lgISfe4p0nlYqM2bE4BksyvFof8B1Lx032kxMKGTKc2Cx2e6p7hqtlp2aFupgHMr&amp;cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D</ns2:URI>
+                        <ns2:DocumentHash>2jmj7l5rSw0yVb/vlWAYkK/YBwk=</ns2:DocumentHash>
+                    </ns4:ExternalReference>
+                </ns4:Attachment>
+            </ns4:AdditionalDocumentReference>
+            <ns4:AdditionalDocumentReference>
+                <ns2:ID>N17 PRODUCTOS PERECEDEROS.pdf</ns2:ID>
+                <ns4:Attachment>
+                    <ns4:ExternalReference>
+                        <ns2:URI>https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=FIydNOC8xb%2BMZUyjbQPg8SQ/3ITgWKc1DvafbJvqTA%2BXGqfXeer3jewyBpQb5sb2QoIg2wN3IVoCiexdTewyP7dmRVO%2B149qVCEazZP84EMZyAJWGsSt0OzTSTyw9JAs&amp;cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D</ns2:URI>
+                        <ns2:DocumentHash>2jmj7l5rSw0yVb/vlWAYkK/YBwk=</ns2:DocumentHash>
+                    </ns4:ExternalReference>
+                </ns4:Attachment>
+            </ns4:AdditionalDocumentReference>
+            <ns4:AdditionalDocumentReference>
+                <ns2:ID>N18 MAQUINAS Y HERRAMIENTAS.pdf</ns2:ID>
+                <ns4:Attachment>
+                    <ns4:ExternalReference>
+                        <ns2:URI>https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=9L/CBcX0VrZWmswUqjWLR4G8PNKANKH2KxPw%2BIw29cq6NaSDta4gPb/d%2BIS5DfoCySQqcxmsni2TVj6JgVN1fHbZTQEHq93dOqxG9PBjVTd45ClyWkoJ44mKM70IFcOu&amp;cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D</ns2:URI>
+                        <ns2:DocumentHash>2jmj7l5rSw0yVb/vlWAYkK/YBwk=</ns2:DocumentHash>
+                    </ns4:ExternalReference>
+                </ns4:Attachment>
+            </ns4:AdditionalDocumentReference>
+            <ns4:AdditionalDocumentReference>
+                <ns2:ID>N19 PRODUCTOS TOXICOS.pdf</ns2:ID>
+                <ns4:Attachment>
+                    <ns4:ExternalReference>
+                        <ns2:URI>https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=nMglHeC%2BuS/NNjNU2AchlD1Y5P9fJdd7ElTvWHwC1c1MqED97atjTh71Hass2hjKGRL33EfQZXmpsdLsB7YxDvJkyVaOqo7Aq3apJlShh/q1aXEvq3KHa/AEHgtDrQw0&amp;cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D</ns2:URI>
+                        <ns2:DocumentHash>2jmj7l5rSw0yVb/vlWAYkK/YBwk=</ns2:DocumentHash>
+                    </ns4:ExternalReference>
+                </ns4:Attachment>
+            </ns4:AdditionalDocumentReference>
+            <ns4:AdditionalDocumentReference>
+                <ns2:ID>N24.pdf</ns2:ID>
+                <ns4:Attachment>
+                    <ns4:ExternalReference>
+                        <ns2:URI>https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=zueb954q22Kt9xA6IUsRBuF0E2F1TBRtMILVNalviQjaWEbm77mw5n2v/NEYQtUDIjjjK6SHcPVKuzj8S2bXdIduxQ9Ijltdl42yEG4WBaKCx2e6p7hqtlp2aFupgHMr&amp;cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D</ns2:URI>
+                        <ns2:DocumentHash>2jmj7l5rSw0yVb/vlWAYkK/YBwk=</ns2:DocumentHash>
+                    </ns4:ExternalReference>
+                </ns4:Attachment>
+            </ns4:AdditionalDocumentReference>
+            <ns1:ValidNoticeInfo>
+                <ns3:NoticeTypeCode listURI="https://contrataciondelestado.es/codice/cl/2.11/TenderingNoticeTypeCode-2.11.gc">DOC_CAN_ADJ</ns3:NoticeTypeCode>
+                <ns1:AdditionalPublicationStatus>
+                    <ns3:PublicationMediaName>Perfil del contratante</ns3:PublicationMediaName>
+                    <ns1:AdditionalPublicationDocumentReference>
+                        <ns2:IssueDate>2025-02-05</ns2:IssueDate>
+                    </ns1:AdditionalPublicationDocumentReference>
+                </ns1:AdditionalPublicationStatus>
+            </ns1:ValidNoticeInfo>
+            <ns1:ValidNoticeInfo>
+                <ns3:NoticeTypeCode listURI="https://contrataciondelestado.es/codice/cl/2.11/TenderingNoticeTypeCode-2.11.gc">DOC_CD</ns3:NoticeTypeCode>
+                <ns1:AdditionalPublicationStatus>
+                    <ns3:PublicationMediaName>Perfil del contratante</ns3:PublicationMediaName>
+                    <ns1:AdditionalPublicationDocumentReference>
+                        <ns2:IssueDate>2024-10-23</ns2:IssueDate>
+                    </ns1:AdditionalPublicationDocumentReference>
+                </ns1:AdditionalPublicationStatus>
+            </ns1:ValidNoticeInfo>
+            <ns1:ValidNoticeInfo>
+                <ns3:NoticeTypeCode listURI="https://contrataciondelestado.es/codice/cl/2.11/TenderingNoticeTypeCode-2.11.gc">DOC_CN</ns3:NoticeTypeCode>
+                <ns1:AdditionalPublicationStatus>
+                    <ns3:PublicationMediaName>Perfil del contratante</ns3:PublicationMediaName>
+                    <ns1:AdditionalPublicationDocumentReference>
+                        <ns2:IssueDate>2024-10-23</ns2:IssueDate>
+                    </ns1:AdditionalPublicationDocumentReference>
+                </ns1:AdditionalPublicationStatus>
+            </ns1:ValidNoticeInfo>
+        </ns1:ContractFolderStatus>
+    </ns0:entry>
+    

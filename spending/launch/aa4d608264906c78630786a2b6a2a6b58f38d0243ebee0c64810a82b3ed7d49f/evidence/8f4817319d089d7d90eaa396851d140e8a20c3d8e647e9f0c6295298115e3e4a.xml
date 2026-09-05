@@ -1,0 +1,601 @@
+<ns0:entry xmlns:ns0="http://www.w3.org/2005/Atom" xmlns:ns1="urn:dgpe:names:draft:codice-place-ext:schema:xsd:CommonAggregateComponents-2" xmlns:ns2="urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2" xmlns:ns3="urn:dgpe:names:draft:codice-place-ext:schema:xsd:CommonBasicComponents-2" xmlns:ns4="urn:dgpe:names:draft:codice:schema:xsd:CommonAggregateComponents-2">
+        <ns0:id>https://contrataciondelestado.es/sindicacion/licitacionesPerfilContratante/16043358</ns0:id>
+        <ns0:link href="https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&amp;idEvl=V7Tz7LzuLE1eKgd8LfVV9g%3D%3D" />
+        <ns0:summary type="text">Id licitación: GEX 6102/2024; Órgano de Contratación: Junta de Gobierno del Ayuntamiento de Posadas; Importe: 75371.9 EUR; Estado: RES</ns0:summary>
+        <ns0:title>Suministro de combustible para la flota de vehículos del Ayuntamiento de Posadas, Colegios Públicos y de bombonas de GLP (butano y propano).</ns0:title>
+        <ns0:updated>2025-06-19T14:07:59.079+02:00</ns0:updated>
+        <ns1:ContractFolderStatus>
+            <ns2:ContractFolderID>GEX 6102/2024</ns2:ContractFolderID>
+            <ns3:ContractFolderStatusCode listURI="https://contrataciondelestado.es/codice/cl/2.04/SyndicationContractFolderStatusCode-2.04.gc" languageID="es">RES</ns3:ContractFolderStatusCode>
+            <ns1:LocatedContractingParty>
+                <ns2:ContractingPartyTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.10/ContractingAuthorityCode-2.10.gc">3</ns2:ContractingPartyTypeCode>
+                <ns2:ActivityCode listURI="http://contrataciondelestado.es/codice/cl/2.10/ContractingAuthorityActivityCode-2.10.gc">1</ns2:ActivityCode>
+                <ns2:BuyerProfileURIID>https://contrataciondelestado.es/wps/poc?uri=deeplink:perfilContratante&amp;idBp=xiPnNrAFdMQQK2TEfXGy%2BA%3D%3D</ns2:BuyerProfileURIID>
+                <ns4:Party>
+                    <ns2:WebsiteURI>http://www.posadas.es</ns2:WebsiteURI>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="DIR3">L01140538</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">P1405300C</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="ID_PLATAFORMA">30399210075401</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>Junta de Gobierno del Ayuntamiento de Posadas</ns2:Name>
+                    </ns4:PartyName>
+                    <ns4:PostalAddress>
+                        <ns2:CityName>Posadas (Córdoba)</ns2:CityName>
+                        <ns2:PostalZone>14730</ns2:PostalZone>
+                        <ns4:AddressLine>
+                            <ns2:Line>Plaza del Ayuntamiento, 1</ns2:Line>
+                        </ns4:AddressLine>
+                        <ns4:Country>
+                            <ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+                            <ns2:Name>España</ns2:Name>
+                        </ns4:Country>
+                    </ns4:PostalAddress>
+                    <ns4:Contact>
+                        <ns2:Name>Junta de Gobierno del Ayuntamiento de Posadas</ns2:Name>
+                        <ns2:Telephone>957630013</ns2:Telephone>
+                        <ns2:Telefax>957630294</ns2:Telefax>
+                        <ns2:ElectronicMail>secretaria@posadas.es</ns2:ElectronicMail>
+                    </ns4:Contact>
+                </ns4:Party>
+                <ns1:ParentLocatedParty>
+                    <ns4:PartyName>
+                        <ns2:Name>Posadas</ns2:Name>
+                    </ns4:PartyName>
+                    <ns1:ParentLocatedParty>
+                        <ns4:PartyName>
+                            <ns2:Name>Ayuntamientos</ns2:Name>
+                        </ns4:PartyName>
+                        <ns1:ParentLocatedParty>
+                            <ns4:PartyName>
+<ns2:Name>Córdoba</ns2:Name>
+                            </ns4:PartyName>
+                            <ns1:ParentLocatedParty>
+<ns4:PartyName>
+    <ns2:Name>Andalucía</ns2:Name>
+</ns4:PartyName>
+<ns1:ParentLocatedParty>
+    <ns4:PartyName>
+        <ns2:Name>ENTIDADES LOCALES</ns2:Name>
+    </ns4:PartyName>
+    <ns1:ParentLocatedParty>
+        <ns4:PartyName>
+            <ns2:Name>Sector Público</ns2:Name>
+        </ns4:PartyName>
+    </ns1:ParentLocatedParty>
+</ns1:ParentLocatedParty>
+                            </ns1:ParentLocatedParty>
+                        </ns1:ParentLocatedParty>
+                    </ns1:ParentLocatedParty>
+                </ns1:ParentLocatedParty>
+            </ns1:LocatedContractingParty>
+            <ns4:ProcurementProject>
+                <ns2:Name>Suministro de combustible para la flota de vehículos del Ayuntamiento de Posadas, Colegios Públicos y de bombonas de GLP (butano y propano).</ns2:Name>
+                <ns2:TypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/ContractCode-2.08.gc">1</ns2:TypeCode>
+                <ns2:SubTypeCode listURI="http://contrataciondelestado.es/codice/cl/1.04/GoodsContractCode-1.04.gc">2</ns2:SubTypeCode>
+                <ns2:MixContractIndicator>false</ns2:MixContractIndicator>
+                <ns4:BudgetAmount>
+                    <ns2:EstimatedOverallContractAmount currencyID="EUR">150743.8</ns2:EstimatedOverallContractAmount>
+                    <ns2:TotalAmount currencyID="EUR">91200</ns2:TotalAmount>
+                    <ns2:TaxExclusiveAmount currencyID="EUR">75371.9</ns2:TaxExclusiveAmount>
+                </ns4:BudgetAmount>
+                <ns4:RequiredCommodityClassification>
+                    <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">09130000</ns2:ItemClassificationCode>
+                </ns4:RequiredCommodityClassification>
+                <ns4:RealizedLocation>
+                    <ns2:CountrySubentity>Córdoba</ns2:CountrySubentity>
+                    <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES613</ns2:CountrySubentityCode>
+                    <ns4:Address>
+                        <ns4:Country>
+                            <ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+                            <ns2:Name>España</ns2:Name>
+                        </ns4:Country>
+                    </ns4:Address>
+                </ns4:RealizedLocation>
+                <ns4:PlannedPeriod>
+                    <ns2:DurationMeasure unitCode="ANN">2</ns2:DurationMeasure>
+                </ns4:PlannedPeriod>
+                <ns4:ContractExtension>
+                    <ns2:OptionsDescription>El plazo de duración del contrato y sus prórrogas se ajustarán en todo caso a lo establecido en el artículo 29 de la LCSP.
+La prórroga se acordará por el órgano de contratación y será obligatoria para el empresario, siempre que su preaviso se produzca al menos con dos meses de antelación a la finalización del plazo de duración del contrato.
+En ningún caso podrá producirse la prórroga por el consentimiento tácito de las partes.</ns2:OptionsDescription>
+                    <ns4:OptionValidityPeriod>
+                        <ns2:Description>El contrato podrá prorrogarse por dos anualidades más.
+</ns2:Description>
+                    </ns4:OptionValidityPeriod>
+                </ns4:ContractExtension>
+            </ns4:ProcurementProject>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">1</ns2:ID>
+                <ns4:TenderingTerms>
+                    <ns4:AwardingTerms>
+                        <ns4:AwardingCriteria>
+                            <ns2:AwardingCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/AwardingCriteriaCode-2.0.gc">OBJ</ns2:AwardingCriteriaTypeCode>
+                            <ns2:Description>Proximidad de las estaciones de servicio al centro del municipio (Plaza del Ayuntamiento)</ns2:Description>
+                            <ns2:Note>El licitador deberá indicar la distancia en kilómetros.
+Se valorará conforme a lo dispuesto en la cláusula undécima del PCAP.</ns2:Note>
+                            <ns2:AwardingCriteriaSubTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.09/AwardingCriteriaAutomaticallyEvaluatedSubTypeCode-2.09.gc">2</ns2:AwardingCriteriaSubTypeCode>
+                            <ns2:WeightNumeric>30</ns2:WeightNumeric>
+                        </ns4:AwardingCriteria>
+                        <ns4:AwardingCriteria>
+                            <ns2:AwardingCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/AwardingCriteriaCode-2.0.gc">OBJ</ns2:AwardingCriteriaTypeCode>
+                            <ns2:Description>Limpieza mensual de los vehículos (en tren de lavado)</ns2:Description>
+                            <ns2:Note>Se valorará conforme a lo dispuesto en la cláusula undécima del PCAP.</ns2:Note>
+                            <ns2:AwardingCriteriaSubTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.09/AwardingCriteriaAutomaticallyEvaluatedSubTypeCode-2.09.gc">2</ns2:AwardingCriteriaSubTypeCode>
+                            <ns2:WeightNumeric>10</ns2:WeightNumeric>
+                        </ns4:AwardingCriteria>
+                        <ns4:AwardingCriteria>
+                            <ns2:AwardingCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/AwardingCriteriaCode-2.0.gc">OBJ</ns2:AwardingCriteriaTypeCode>
+                            <ns2:Description>Disponer de trabajadores con más de un año de contrato en la propia estación de servicio.</ns2:Description>
+                            <ns2:Note>Se valorará conforme a lo dispuesto en la cláusula undécima del PCAP.</ns2:Note>
+                            <ns2:AwardingCriteriaSubTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.09/AwardingCriteriaAutomaticallyEvaluatedSubTypeCode-2.09.gc">4</ns2:AwardingCriteriaSubTypeCode>
+                            <ns2:WeightNumeric>10</ns2:WeightNumeric>
+                        </ns4:AwardingCriteria>
+                    </ns4:AwardingTerms>
+                </ns4:TenderingTerms>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Suministro de combustible diésel y gasolina para vehículos y maquinaria del parque móvil municipal</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">65200</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">53884.3</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">09130000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Córdoba</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES613</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">2</ns2:ID>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Transporte y suministro de combustible para los sistemas de calefacción de los colegios públicos</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">21000</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">17355.37</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">09130000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Córdoba</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES613</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">3</ns2:ID>
+                <ns4:TenderingTerms>
+                    <ns4:AwardingTerms>
+                        <ns4:AwardingCriteria>
+                            <ns2:AwardingCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/AwardingCriteriaCode-2.0.gc">OBJ</ns2:AwardingCriteriaTypeCode>
+                            <ns2:Description>Disponer de trabajadores con más de un año de contrato en la propia estación de servicio.</ns2:Description>
+                            <ns2:Note>Se valorará conforme a lo dispuesto en la cláusula undécima del PCAP.</ns2:Note>
+                            <ns2:AwardingCriteriaSubTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.09/AwardingCriteriaAutomaticallyEvaluatedSubTypeCode-2.09.gc">4</ns2:AwardingCriteriaSubTypeCode>
+                            <ns2:WeightNumeric>10</ns2:WeightNumeric>
+                        </ns4:AwardingCriteria>
+                        <ns4:AwardingCriteria>
+                            <ns2:AwardingCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/AwardingCriteriaCode-2.0.gc">OBJ</ns2:AwardingCriteriaTypeCode>
+                            <ns2:Description>Proximidad de las estaciones de servicio al centro del municipio (Plaza del Ayuntamiento)</ns2:Description>
+                            <ns2:Note>El licitador deberá indicar la distancia en kilómetros.
+Se valorará conforme a lo dispuesto en la cláusula undécima del PCAP.</ns2:Note>
+                            <ns2:AwardingCriteriaSubTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.09/AwardingCriteriaAutomaticallyEvaluatedSubTypeCode-2.09.gc">2</ns2:AwardingCriteriaSubTypeCode>
+                            <ns2:WeightNumeric>30</ns2:WeightNumeric>
+                        </ns4:AwardingCriteria>
+                    </ns4:AwardingTerms>
+                </ns4:TenderingTerms>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Suministro de bombonas de GLP</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">5000</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">4132.23</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">09130000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Córdoba</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES613</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">9</ns2:ResultCode>
+                <ns2:Description>Única oferta presentada y, por tanto, mejor oferta en relación a los criterios de adjudicación del contrato.</ns2:Description>
+                <ns2:AwardDate>2025-01-16</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:LowerTenderAmount currencyID="EUR">51318.38</ns2:LowerTenderAmount>
+                <ns2:HigherTenderAmount currencyID="EUR">51318.38</ns2:HigherTenderAmount>
+                <ns2:StartDate>2025-02-03</ns2:StartDate>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:Contract>
+                    <ns2:ID>1</ns2:ID>
+                    <ns2:IssueDate>2025-02-03</ns2:IssueDate>
+                </ns4:Contract>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">B72936081</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>NTRA SRA MARIA AUXILIADORA SL</ns2:Name>
+                    </ns4:PartyName>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>1</ns2:ProcurementProjectLotID>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">51318.38</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">62095.24</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Única oferta presentada y, por tanto, mejor oferta en relación a los criterios de adjudicación del contrato.</ns2:Description>
+                <ns2:AwardDate>2025-01-16</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:LowerTenderAmount currencyID="EUR">17355.37</ns2:LowerTenderAmount>
+                <ns2:HigherTenderAmount currencyID="EUR">17355.37</ns2:HigherTenderAmount>
+                <ns2:StartDate>2025-01-31</ns2:StartDate>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:Contract>
+                    <ns2:ID>1</ns2:ID>
+                    <ns2:IssueDate>2025-01-31</ns2:IssueDate>
+                </ns4:Contract>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">A14375182</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>SUMINISTROS ENERGÉTICOS CÓRDOBA-SECSA, S.A</ns2:Name>
+                    </ns4:PartyName>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>2</ns2:ProcurementProjectLotID>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">17355.37</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">21000</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">3</ns2:ResultCode>
+                <ns2:Description>No se ha presentado ninguna oferta.</ns2:Description>
+                <ns2:AwardDate>2024-11-29</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>0</ns2:ReceivedTenderQuantity>
+                <ns2:HigherTenderAmount currencyID="EUR">0</ns2:HigherTenderAmount>
+                <ns2:SMEsReceivedTenderQuantity>0</ns2:SMEsReceivedTenderQuantity>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>3</ns2:ProcurementProjectLotID>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderingTerms>
+                <ns2:RequiredCurriculaIndicator>false</ns2:RequiredCurriculaIndicator>
+                <ns2:VariantConstraintIndicator>false</ns2:VariantConstraintIndicator>
+                <ns2:FundingProgramCode listURI="http://contrataciondelestado.es/codice/cl/2.08/FundingProgramCode-2.08.gc" name="No hay financiación con fondos de la UE">NO-EU</ns2:FundingProgramCode>
+                <ns2:ProcurementNationalLegislationCode listURI="https://contrataciondelestado.es/codice/cl/2.08/ProcurementNationalLegislationCode-2.08.gc">3</ns2:ProcurementNationalLegislationCode>
+                <ns2:ReceivedAppealQuantity>0</ns2:ReceivedAppealQuantity>
+                <ns4:RequiredFinancialGuarantee>
+                    <ns2:GuaranteeTypeCode listURI="http://contrataciondelestado.es/codice/cl/1.04/GuaranteeTypeCode-1.04.gc">2</ns2:GuaranteeTypeCode>
+                    <ns2:AmountRate>5</ns2:AmountRate>
+                </ns4:RequiredFinancialGuarantee>
+                <ns4:ProcurementLegislationDocumentReference>
+                    <ns2:ID>N/A</ns2:ID>
+                </ns4:ProcurementLegislationDocumentReference>
+                <ns4:TendererQualificationRequest>
+                    <ns4:TechnicalEvaluationCriteria>
+                        <ns2:EvaluationCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/TechnicalCapabilityTypeCode-2.0.gc">XXR-SUBCONT</ns2:EvaluationCriteriaTypeCode>
+                        <ns2:Description>Ostentarán el requisito de solvencia técnica o profesional aquellos licitadores que indiquen la parte del contrato que tiene eventualmente el propósito de subcontratar. No obstante lo anterior, a efectos de concurrir a la licitación este requisito se considerará cumplido mediante la declaración responsable que se ajusta al Modelo del Anexo I del PCAP.</ns2:Description>
+                    </ns4:TechnicalEvaluationCriteria>
+                    <ns4:TechnicalEvaluationCriteria>
+                        <ns2:EvaluationCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/TechnicalCapabilityTypeCode-2.0.gc">XSR-CALIDAD</ns2:EvaluationCriteriaTypeCode>
+                        <ns2:Description>Ostentarán el requisito de solvencia técnica o profesional aquellos licitadores que presenten descripción de las instalaciones técnicas, de las medidas empleadas por el empresario para garantizar la calidad y de los medios de estudio e investigación de la empresa. No obstante lo anterior, a efectos de concurrir a la licitación este requisito se considerará cumplido mediante la declaración responsable que se ajusta al Modelo de Declaración Responsable del Anexo I del PCAP.</ns2:Description>
+                    </ns4:TechnicalEvaluationCriteria>
+                    <ns4:TechnicalEvaluationCriteria>
+                        <ns2:EvaluationCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/TechnicalCapabilityTypeCode-2.0.gc">OXR-TITULOS</ns2:EvaluationCriteriaTypeCode>
+                        <ns2:Description>Ostentarán el requisito de solvencia técnica o profesional aquellos licitadores que presenten las titulaciones académicas y profesionales del empresario y del personal directivo de la empresa y, en particular, del personal responsable de la ejecución del contrato. No obstante lo anterior, a efectos de concurrir a la licitación este requisito se considerará cumplido mediante la declaración responsable que se ajusta al Modelo de Declaración Responsable del  Anexo I del PCAP.</ns2:Description>
+                    </ns4:TechnicalEvaluationCriteria>
+                    <ns4:TechnicalEvaluationCriteria>
+                        <ns2:EvaluationCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/TechnicalCapabilityTypeCode-2.0.gc">OXR-GESTMEDIOAMB</ns2:EvaluationCriteriaTypeCode>
+                        <ns2:Description>En los casos adecuados, indicación de las medidas de gestión medioambiental que el empresario podrá aplicar al ejecutar el contrato. No obstante lo anterior, a efectos de concurrir a la licitación este requisito se considerará cumplido mediante la declaración responsable que se ajusta al Modelo de Declaración Responsable del  Anexo I del PCAP.</ns2:Description>
+                    </ns4:TechnicalEvaluationCriteria>
+                    <ns4:TechnicalEvaluationCriteria>
+                        <ns2:EvaluationCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/TechnicalCapabilityTypeCode-2.0.gc">XSR-CONTROL</ns2:EvaluationCriteriaTypeCode>
+                        <ns2:Description>Cuando se trate de servicios o trabajos complejos o cuando, excepcionalmente, deban responder a un fin especial, un control efectuado por el órgano de contratación o, en nombre de este, por un organismo oficial u homologado competente del Estado en que esté establecido el empresario, siempre que medie acuerdo de dicho organismo. El control versará sobre la capacidad técnica del empresario y, si fuese necesario, sobre los medios de estudio y de investigación de que disponga y sobre las medidas de control de la calidad. No obstante lo anterior, a efectos de concurrir a la licitación este requisito se considerará cumplido mediante la declaración responsable que se ajusta al Modelo de Declaración Responsable del Anexo I del PCAP.</ns2:Description>
+                    </ns4:TechnicalEvaluationCriteria>
+                    <ns4:TechnicalEvaluationCriteria>
+                        <ns2:EvaluationCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/TechnicalCapabilityTypeCode-2.0.gc">OXR-MEDIOS</ns2:EvaluationCriteriaTypeCode>
+                        <ns2:Description>Ostentarán el requisito de solvencia técnica o profesional aquellos licitadores que presenten declaración indicando la maquinaria, material y equipo técnico del que se dispondrá para la ejecución de los trabajos o prestaciones, a la que se adjuntará la documentación acreditativa pertinente. No obstante lo anterior, a efectos de concurrir a la licitación este requisito se considerará cumplido mediante la declaración responsable que se ajusta al Modelo de Declaración Responsable del Anexo I del PCAP.</ns2:Description>
+                    </ns4:TechnicalEvaluationCriteria>
+                    <ns4:TechnicalEvaluationCriteria>
+                        <ns2:EvaluationCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/TechnicalCapabilityTypeCode-2.0.gc">OSR-TECH</ns2:EvaluationCriteriaTypeCode>
+                        <ns2:Description>Ostentarán el requisito de solvencia técnica o profesional aquellos licitadores que indiquen el personal técnico o las unidades técnicas, integradas o no en la empresa, participantes en el contrato, especialmente aquellos encargados del control de calidad. No obstante lo anterior, a efectos de concurrir a la licitación este requisito se considerará cumplido mediante la declaración responsable que se ajusta al Modelo de Declaración Responsable del Anexo I del PCAP.</ns2:Description>
+                    </ns4:TechnicalEvaluationCriteria>
+                    <ns4:TechnicalEvaluationCriteria>
+                        <ns2:EvaluationCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/TechnicalCapabilityTypeCode-2.0.gc">OXR-PLANTILLA</ns2:EvaluationCriteriaTypeCode>
+                        <ns2:Description>Ostentarán el requisito de solvencia técnica o profesional aquellos licitadores que presenten declaración sobre la plantilla media anual de la empresa y la importancia de su personal directivo durante los tres últimos años, acompañada de la documentación justificativa correspondiente. No obstante lo anterior, a efectos de concurrir a la licitación este requisito se considerará cumplido mediante la declaración responsable que se ajusta al Modelo de Declaración Responsable del Anexo I del PCAP.</ns2:Description>
+                    </ns4:TechnicalEvaluationCriteria>
+                    <ns4:TechnicalEvaluationCriteria>
+                        <ns2:EvaluationCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/TechnicalCapabilityTypeCode-2.0.gc">OSR-COMPTASK</ns2:EvaluationCriteriaTypeCode>
+                        <ns2:Description>Se considerará que el licitador cumple el requisito de solvencia técnica o profesional, si acredita la realización de suministros o trabajos realizados en los últimos tres años correspondientes al mismo tipo o naturaleza al que corresponde el objeto del contrato por un importe anual acumulado en el año de mayor ejecución del licitador o candidato,  al menos por un importe igual al valor estimado del presente contrato referido al lote ofertado. No obstante lo anterior, a efectos de concurrir a la licitación este requisito se considerará cumplido mediante la declaración responsable que se ajusta al modelo del Anexo I del PCAP.</ns2:Description>
+                    </ns4:TechnicalEvaluationCriteria>
+                    <ns4:FinancialEvaluationCriteria>
+                        <ns2:EvaluationCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/FinancialCapabilityTypeCode-2.0.gc">3</ns2:EvaluationCriteriaTypeCode>
+                        <ns2:Description>Ostentarán el requisito de solvencia económica o financiera aquellos licitadores que presenten declaraciones apropiadas de entidades financieras o, en su caso, justificante de un seguro de indemnización por riesgos profesionales por importe al menos igual al valor estimado del presente contrato referido al lote ofertado. No obstante lo anterior, a efectos de concurrir a la licitación este requisito se considerará cumplido mediante la declaración responsable que se ajusta al Modelo de Declaración Responsable del PCAP.</ns2:Description>
+                    </ns4:FinancialEvaluationCriteria>
+                    <ns4:FinancialEvaluationCriteria>
+                        <ns2:EvaluationCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/FinancialCapabilityTypeCode-2.0.gc">2</ns2:EvaluationCriteriaTypeCode>
+                        <ns2:Description>Ostentarán el requisito de solvencia económica o financiera aquellos licitadores que presenten declaraciones apropiadas de entidades financieras o, en su caso, justificante de un seguro de indemnización por riesgos profesionales por importe al menos igual al valor estimado del presente contrato referido al lote ofertado. No obstante lo anterior, a efectos de concurrir a la licitación este requisito se considerará cumplido mediante la declaración responsable que se ajusta al Modelo de Declaración Responsable del Anexo I del PCAP.</ns2:Description>
+                    </ns4:FinancialEvaluationCriteria>
+                    <ns4:FinancialEvaluationCriteria>
+                        <ns2:EvaluationCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/FinancialCapabilityTypeCode-2.0.gc">5</ns2:EvaluationCriteriaTypeCode>
+                        <ns2:Description>Ostentarán el requisito de solvencia económica o financiera aquellos licitadores que cuenten con un volumen anual de negocio, referido al año de mayor volumen de negocio de los tres últimos concluidos, de al menos igual al valor estimado del presente contrato en relación al lote ofertado. No obstante lo anterior, a efectos de concurrir a la licitación este requisito se considerará cumplido mediante la declaración responsable que se ajusta al modelo del Anexo I del PCAP.</ns2:Description>
+                    </ns4:FinancialEvaluationCriteria>
+                    <ns4:SpecificTendererRequirement>
+                        <ns2:RequirementTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/DeclarationTypeCode-2.08.gc">4</ns2:RequirementTypeCode>
+                        <ns2:Description>Cumplimiento con las obligaciones con la Seguridad Social</ns2:Description>
+                    </ns4:SpecificTendererRequirement>
+                    <ns4:SpecificTendererRequirement>
+                        <ns2:RequirementTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/DeclarationTypeCode-2.08.gc">12</ns2:RequirementTypeCode>
+                        <ns2:Description>Declaración sobre personas con discapacidad</ns2:Description>
+                    </ns4:SpecificTendererRequirement>
+                    <ns4:SpecificTendererRequirement>
+                        <ns2:RequirementTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/DeclarationTypeCode-2.08.gc">5</ns2:RequirementTypeCode>
+                        <ns2:Description>Cumplimiento con las obligaciones tributarias</ns2:Description>
+                    </ns4:SpecificTendererRequirement>
+                    <ns4:SpecificTendererRequirement>
+                        <ns2:RequirementTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/DeclarationTypeCode-2.08.gc">3</ns2:RequirementTypeCode>
+                        <ns2:Description>No estar incurso en incompatibilidades</ns2:Description>
+                    </ns4:SpecificTendererRequirement>
+                    <ns4:SpecificTendererRequirement>
+                        <ns2:RequirementTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/DeclarationTypeCode-2.08.gc">2</ns2:RequirementTypeCode>
+                        <ns2:Description>No prohibición para contratar</ns2:Description>
+                    </ns4:SpecificTendererRequirement>
+                    <ns4:SpecificTendererRequirement>
+                        <ns2:RequirementTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/DeclarationTypeCode-2.08.gc">1</ns2:RequirementTypeCode>
+                        <ns2:Description>Capacidad de obrar</ns2:Description>
+                    </ns4:SpecificTendererRequirement>
+                </ns4:TendererQualificationRequest>
+                <ns4:ContractExecutionRequirement>
+                    <ns2:Name>Consideraciones de tipo social</ns2:Name>
+                    <ns2:ExecutionRequirementCode listURI="https://contrataciondelestado.es/codice/cl/2.08/ExecutionRequirementCode-2.08.gc">2</ns2:ExecutionRequirementCode>
+                    <ns2:Description>Cumplimiento del pago de los salarios del personal adscrito al contrato y Transparencia y justicia fiscal.
+</ns2:Description>
+                </ns4:ContractExecutionRequirement>
+                <ns4:AwardingTerms>
+                    <ns4:AwardingCriteria>
+                        <ns2:AwardingCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/AwardingCriteriaCode-2.0.gc">OBJ</ns2:AwardingCriteriaTypeCode>
+                        <ns2:Description>Oferta económica (% DESCUENTO)</ns2:Description>
+                        <ns2:Note>Dado que en virtud de la Orden ITC/230812007, de 25 de julio, por la que se determina la forma de remisión de información al Ministerio de Industria, Turismo y Comercio sobre las actividades de suministro de productos petrolíferos, existe la obligación de publicar y actualizar continuamente los precios de los combustibles en el Geoportal que el Ministerio de Energía ha establecido (http://geoportalgasolineras.es/), el licitador ofertará un descuento por litro suministrado expresado en tanto por ciento (con 3 decimales) para el lote 1, que se aplicará al precio de venta al público por él publicado cada día para cada una de las estaciones de servicio pertenecientes al mismo.
+
+En cuanto al lote 2, las empresas, en sus ofertas económicas, indicarán el porcentaje, expresado en tanto por ciento (con 3 decimales), de descuento por litro suministrado sobre el precio medio publicado para España en el Boletín Petrolero de la Comisión Europea para los diferentes tipos de combustibles, con todas las tasas e impuestos incluidos.
+
+Por su parte el lote 3, las empresas, en sus ofertas económicas, indicaran el porcentaje, expresado en tanto por ciento (con 3 decimales), de descuento por kg suministrado sobre el precio publicado en la resolución de la Dirección General de Política Energética y Minas del Gobierno de España.
+
+Se valorará mediante la fórmula de la cláusula undécima del PCAP.
+</ns2:Note>
+                        <ns2:AwardingCriteriaSubTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.09/AwardingCriteriaAutomaticallyEvaluatedSubTypeCode-2.09.gc">1</ns2:AwardingCriteriaSubTypeCode>
+                        <ns2:WeightNumeric>50</ns2:WeightNumeric>
+                    </ns4:AwardingCriteria>
+                </ns4:AwardingTerms>
+                <ns4:TenderRecipientParty>
+                    <ns2:EndpointID>https://contrataciondelestado.es</ns2:EndpointID>
+                </ns4:TenderRecipientParty>
+                <ns4:Language>
+                    <ns2:ID>es</ns2:ID>
+                </ns4:Language>
+            </ns4:TenderingTerms>
+            <ns4:TenderingProcess>
+                <ns2:ProcedureCode listURI="https://contrataciondelestado.es/codice/cl/2.07/SyndicationTenderingProcessCode-2.07.gc">1</ns2:ProcedureCode>
+                <ns2:UrgencyCode listURI="http://contrataciondelestado.es/codice/cl/1.04/DiligenceTypeCode-1.04.gc">2</ns2:UrgencyCode>
+                <ns2:PartPresentationCode listURI="http://contrataciondelestado.es/codice/cl/1.04/TenderPresentationCode-1.04.gc" name="A uno o varios lotes">3</ns2:PartPresentationCode>
+                <ns2:ContractingSystemCode listURI="http://contrataciondelestado.es/codice/cl/2.08/ContractingSystemTypeCode-2.08.gc">0</ns2:ContractingSystemCode>
+                <ns2:SubmissionMethodCode listURI="http://contrataciondelestado.es/codice/cl/1.04/TenderDeliveryCode-1.04.gc">1</ns2:SubmissionMethodCode>
+                <ns2:MaximumLotPresentationQuantity>3</ns2:MaximumLotPresentationQuantity>
+                <ns2:MaximumTendererAwardedLotsQuantity>3</ns2:MaximumTendererAwardedLotsQuantity>
+                <ns2:LotsCombinationContractingAuthorityRights>No se establecen limitaciones sobre el número máximo de lotes a los que se puede presentar oferta.</ns2:LotsCombinationContractingAuthorityRights>
+                <ns2:OverThresholdIndicator>false</ns2:OverThresholdIndicator>
+                <ns4:DocumentAvailabilityPeriod>
+                    <ns2:EndDate>2024-11-27</ns2:EndDate>
+                    <ns2:EndTime>13:00:00</ns2:EndTime>
+                </ns4:DocumentAvailabilityPeriod>
+                <ns4:TenderSubmissionDeadlinePeriod>
+                    <ns2:EndDate>2024-11-27</ns2:EndDate>
+                    <ns2:EndTime>19:00:00</ns2:EndTime>
+                    <ns2:Description>Sólo se admiten ofertas presentadas a través de la herramienta de preparación y presentación que facilita la PLACSP. Para cualquier duda o incidencia con la descarga, uso y manejo de dicha herramienta, póngase en contacto con los responsables de la Plataforma de Contratación a través del correo-e licitacionE@hacienda.gob.es, en horario de lunes a jueves de 9:00 a 19:00 y viernes de 9:00 a 15:00, indicando el número de expediente, órgano de contratación y detalle del error, adjuntando captura de pantalla si es posible.</ns2:Description>
+                </ns4:TenderSubmissionDeadlinePeriod>
+            </ns4:TenderingProcess>
+            <ns4:LegalDocumentReference>
+                <ns2:ID>PCAP.pdf</ns2:ID>
+                <ns4:Attachment>
+                    <ns4:ExternalReference>
+                        <ns2:URI>https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=X2vIobuayQg5NIXjjbVH4WlX/s/DJz8EjXIjxqjRaljs6Ory%2BvGFg1TuB/kj8d4AI7L1XuZxrCh5Uozc42Ly3UaClNV4gPQV5lo8i50Gatpt/o8fNevwsujgRzaBbugn&amp;cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D</ns2:URI>
+                        <ns2:DocumentHash>2jmj7l5rSw0yVb/vlWAYkK/YBwk=</ns2:DocumentHash>
+                    </ns4:ExternalReference>
+                </ns4:Attachment>
+            </ns4:LegalDocumentReference>
+            <ns4:TechnicalDocumentReference>
+                <ns2:ID>PPT.pdf</ns2:ID>
+                <ns4:Attachment>
+                    <ns4:ExternalReference>
+                        <ns2:URI>https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=KFJX5MMzRjBLeqREex2TflhkRtuefMZNBpuO9jLwvO2qh295EUKrqxjujg1RP/Ku5aqSly%2BFlYnpYuiZViT6tjnOvz%2B/fd6sy1xDhTjsH8jVTD3T98KC0nSgQFM0q%2B5s&amp;cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D</ns2:URI>
+                        <ns2:DocumentHash>2jmj7l5rSw0yVb/vlWAYkK/YBwk=</ns2:DocumentHash>
+                    </ns4:ExternalReference>
+                </ns4:Attachment>
+            </ns4:TechnicalDocumentReference>
+            <ns4:AdditionalDocumentReference>
+                <ns2:ID>Anexo I.doc</ns2:ID>
+                <ns4:Attachment>
+                    <ns4:ExternalReference>
+                        <ns2:URI>https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=2G5GQgvpfDRzGNYWxM1KWjKDgDAWI3yfDz0eiSHB8sYgtehV1hE6vTIjTCRA4hWTmhDREYgYKiTgXE%2Ba7CoG4xd1RZJXGRna6nujUiCMYMh45ClyWkoJ44mKM70IFcOu&amp;cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D</ns2:URI>
+                        <ns2:DocumentHash>2jmj7l5rSw0yVb/vlWAYkK/YBwk=</ns2:DocumentHash>
+                    </ns4:ExternalReference>
+                </ns4:Attachment>
+            </ns4:AdditionalDocumentReference>
+            <ns4:AdditionalDocumentReference>
+                <ns2:ID>Anexo II.doc</ns2:ID>
+                <ns4:Attachment>
+                    <ns4:ExternalReference>
+                        <ns2:URI>https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=tK8qn7L2hAHbZkQwbjHdyXVQ8yw/9p06dLvc/e6PAKzPm3d948XviMlLvyIjHsN2VunV06%2BHbrlbgkq8gj2tsOmzFsZC4BMk4ifD8Nn70QkC1/zDIE0Kw/PWNnLS0Z0z&amp;cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D</ns2:URI>
+                        <ns2:DocumentHash>2jmj7l5rSw0yVb/vlWAYkK/YBwk=</ns2:DocumentHash>
+                    </ns4:ExternalReference>
+                </ns4:Attachment>
+            </ns4:AdditionalDocumentReference>
+            <ns4:AdditionalDocumentReference>
+                <ns2:ID>Anexo III.doc</ns2:ID>
+                <ns4:Attachment>
+                    <ns4:ExternalReference>
+                        <ns2:URI>https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=IvkiDd4SAVpG1cDaqexyhNowSoB/FbbsSv0tTlRMBZHD9NoAHcQrmQvncCvn7ovJ6kFZi0XfaNVZ3IQMoEbH7VT/cmzZ3QEcyGIlaWGiMCrVTD3T98KC0nSgQFM0q%2B5s&amp;cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D</ns2:URI>
+                        <ns2:DocumentHash>2jmj7l5rSw0yVb/vlWAYkK/YBwk=</ns2:DocumentHash>
+                    </ns4:ExternalReference>
+                </ns4:Attachment>
+            </ns4:AdditionalDocumentReference>
+            <ns4:AdditionalDocumentReference>
+                <ns2:ID>Anexo IV.doc</ns2:ID>
+                <ns4:Attachment>
+                    <ns4:ExternalReference>
+                        <ns2:URI>https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=Rx1LhZaazNEX0Or%2Bodw11iedjSTXEt0U8VhgCaXttYywJEaY91p%2BOQU6dt71mU9Sw0b4gxVpQFP3Wt84V9B/HZeuoK6QrYrY/5cotKIQXf7DdQD9RyhUmzT4jZ2In4zL&amp;cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D</ns2:URI>
+                        <ns2:DocumentHash>2jmj7l5rSw0yVb/vlWAYkK/YBwk=</ns2:DocumentHash>
+                    </ns4:ExternalReference>
+                </ns4:Attachment>
+            </ns4:AdditionalDocumentReference>
+            <ns4:AdditionalDocumentReference>
+                <ns2:ID>Anexo V.doc</ns2:ID>
+                <ns4:Attachment>
+                    <ns4:ExternalReference>
+                        <ns2:URI>https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=IQEluo4vO6j1Snw2yG8iMz7p2UnQFVIFnRcHYFODklhmThHRIX17yBUiNE2N%2B62qoxUjo6JVmPX20eDLvRPNBRN1RybwP3Rmcxyz80FkpcuHAj0WEJrB5sP7amrh2jBD&amp;cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D</ns2:URI>
+                        <ns2:DocumentHash>2jmj7l5rSw0yVb/vlWAYkK/YBwk=</ns2:DocumentHash>
+                    </ns4:ExternalReference>
+                </ns4:Attachment>
+            </ns4:AdditionalDocumentReference>
+            <ns1:ValidNoticeInfo>
+                <ns3:NoticeTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.11/TenderingNoticeTypeCode-2.11.gc">DOC_CAN_ADJ</ns3:NoticeTypeCode>
+                <ns1:AdditionalPublicationStatus>
+                    <ns3:PublicationMediaName>Perfil del contratante</ns3:PublicationMediaName>
+                    <ns1:AdditionalPublicationDocumentReference>
+                        <ns2:IssueDate>2025-01-20</ns2:IssueDate>
+                    </ns1:AdditionalPublicationDocumentReference>
+                    <ns1:AdditionalPublicationDocumentReference>
+                        <ns2:IssueDate>2025-01-20</ns2:IssueDate>
+                    </ns1:AdditionalPublicationDocumentReference>
+                    <ns1:AdditionalPublicationDocumentReference>
+                        <ns2:DocumentTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.11/TenderingDocumentTypeCode-2.11.gc" name="Documento de Acta de Adjudicación">ACTA_ADJ</ns2:DocumentTypeCode>
+                        <ns4:Attachment>
+                            <ns4:ExternalReference>
+<ns2:URI>https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=93NT1GqIc4fR37YF0UHyGyxWUxu9NygJ/50PuoWNdjddW1ABjxss/YRWpYq0uGfYmbSIScE/GRN3f4kjjfoUrQvVij%2B/aGEeKaagJwz7CNCCx2e6p7hqtlp2aFupgHMr&amp;cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D</ns2:URI>
+<ns2:FileName>DECRETO DE REQUERIMIENTO Y DECLARANDO DESIERTO EL LOTE 3.pdf</ns2:FileName>
+                            </ns4:ExternalReference>
+                        </ns4:Attachment>
+                    </ns1:AdditionalPublicationDocumentReference>
+                    <ns1:AdditionalPublicationDocumentReference>
+                        <ns2:DocumentTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.11/TenderingDocumentTypeCode-2.11.gc" name="Documento de Acta de Adjudicación">ACTA_ADJ</ns2:DocumentTypeCode>
+                        <ns4:Attachment>
+                            <ns4:ExternalReference>
+<ns2:URI>https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=Cb1ezOE6xVCGVwdSWQOOw4EyycD4lxiJJcOD49QdJEOHGpypKPp6dgt%2BbN5R50XhVL7pXZo0n%2BesKtkcDvWedToY%2BXieflIHs0mN2SxqLJKCx2e6p7hqtlp2aFupgHMr&amp;cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D</ns2:URI>
+<ns2:FileName>DECRETO DE ADJUDICACION.pdf</ns2:FileName>
+                            </ns4:ExternalReference>
+                        </ns4:Attachment>
+                    </ns1:AdditionalPublicationDocumentReference>
+                </ns1:AdditionalPublicationStatus>
+            </ns1:ValidNoticeInfo>
+            <ns1:ValidNoticeInfo>
+                <ns3:NoticeTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.11/TenderingNoticeTypeCode-2.11.gc">DOC_CD</ns3:NoticeTypeCode>
+                <ns1:AdditionalPublicationStatus>
+                    <ns3:PublicationMediaName>Perfil del contratante</ns3:PublicationMediaName>
+                    <ns1:AdditionalPublicationDocumentReference>
+                        <ns2:IssueDate>2024-11-12</ns2:IssueDate>
+                    </ns1:AdditionalPublicationDocumentReference>
+                </ns1:AdditionalPublicationStatus>
+            </ns1:ValidNoticeInfo>
+            <ns1:ValidNoticeInfo>
+                <ns3:NoticeTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.11/TenderingNoticeTypeCode-2.11.gc">DOC_CN</ns3:NoticeTypeCode>
+                <ns1:AdditionalPublicationStatus>
+                    <ns3:PublicationMediaName>Perfil del contratante</ns3:PublicationMediaName>
+                    <ns1:AdditionalPublicationDocumentReference>
+                        <ns2:IssueDate>2024-11-12</ns2:IssueDate>
+                    </ns1:AdditionalPublicationDocumentReference>
+                </ns1:AdditionalPublicationStatus>
+            </ns1:ValidNoticeInfo>
+            <ns1:ValidNoticeInfo>
+                <ns3:NoticeTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.11/TenderingNoticeTypeCode-2.11.gc">DOC_FORM</ns3:NoticeTypeCode>
+                <ns1:AdditionalPublicationStatus>
+                    <ns3:PublicationMediaName>Perfil del contratante</ns3:PublicationMediaName>
+                    <ns1:AdditionalPublicationDocumentReference>
+                        <ns2:IssueDate>2025-02-06</ns2:IssueDate>
+                    </ns1:AdditionalPublicationDocumentReference>
+                </ns1:AdditionalPublicationStatus>
+            </ns1:ValidNoticeInfo>
+            <ns1:ValidNoticeInfo>
+                <ns3:NoticeTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.11/TenderingNoticeTypeCode-2.11.gc">DOC_MOD</ns3:NoticeTypeCode>
+                <ns1:AdditionalPublicationStatus>
+                    <ns3:PublicationMediaName>Perfil del contratante</ns3:PublicationMediaName>
+                    <ns1:AdditionalPublicationDocumentReference>
+                        <ns2:IssueDate>2025-06-19</ns2:IssueDate>
+                    </ns1:AdditionalPublicationDocumentReference>
+                </ns1:AdditionalPublicationStatus>
+            </ns1:ValidNoticeInfo>
+            <ns1:GeneralDocument>
+                <ns1:GeneralDocumentDocumentReference>
+                    <ns2:ID>2025-99846830-2d31-469d-b8db-d1ca919a6700</ns2:ID>
+                    <ns2:DocumentTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/GeneralContractDocuments-2.08.gc">ZZZ</ns2:DocumentTypeCode>
+                    <ns4:Attachment>
+                        <ns4:ExternalReference>
+                            <ns2:URI>https://contrataciondelestado.es/wps/wcm/connect/PLACE_es/Site/area/docAccCmpnt?srv=cmpnt&amp;cmpntname=GetDocumentsById&amp;source=library&amp;DocumentIdParam=2025-99846830-2d31-469d-b8db-d1ca919a6700</ns2:URI>
+                            <ns2:FileName>DECRETO DE RECTIFICACIÓN DEL DECRETO DE ADJUDICACIÓN</ns2:FileName>
+                        </ns4:ExternalReference>
+                    </ns4:Attachment>
+                </ns1:GeneralDocumentDocumentReference>
+            </ns1:GeneralDocument>
+            <ns1:GeneralDocument>
+                <ns1:GeneralDocumentDocumentReference>
+                    <ns2:ID>2024-ee77b9dc-e0dd-4832-a10d-de3a6959b61d</ns2:ID>
+                    <ns2:DocumentTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/GeneralContractDocuments-2.08.gc">12</ns2:DocumentTypeCode>
+                    <ns4:Attachment>
+                        <ns4:ExternalReference>
+                            <ns2:URI>https://contrataciondelestado.es/wps/wcm/connect/PLACE_es/Site/area/docAccCmpnt?srv=cmpnt&amp;cmpntname=GetDocumentsById&amp;source=library&amp;DocumentIdParam=2024-ee77b9dc-e0dd-4832-a10d-de3a6959b61d</ns2:URI>
+                            <ns2:FileName>Acta del órgano de asistencia</ns2:FileName>
+                        </ns4:ExternalReference>
+                    </ns4:Attachment>
+                </ns1:GeneralDocumentDocumentReference>
+            </ns1:GeneralDocument>
+            <ns4:ContractModification>
+                <ns2:ID>1</ns2:ID>
+                <ns2:Note>El precio máximo anual del contrato asciende a la cantidad de 13.016,53 € más IVA, lo que supone un total de 15.750 € (IVA incluido).
+</ns2:Note>
+                <ns2:ContractID>1</ns2:ContractID>
+                <ns4:ContractModificationLegalMonetaryTotal>
+                    <ns2:TaxExclusiveAmount currencyID="EUR">8677.69</ns2:TaxExclusiveAmount>
+                </ns4:ContractModificationLegalMonetaryTotal>
+                <ns4:FinalLegalMonetaryTotal>
+                    <ns2:TaxExclusiveAmount currencyID="EUR">26033.06</ns2:TaxExclusiveAmount>
+                </ns4:FinalLegalMonetaryTotal>
+            </ns4:ContractModification>
+        </ns1:ContractFolderStatus>
+    </ns0:entry>
+    
