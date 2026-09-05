@@ -1,3 +1,4 @@
+import { readPublicJson } from "./static-snapshot.mjs";
 import { withBasePath } from "./path-utils.mjs";
 
 const primaryRoutes = [
@@ -79,8 +80,8 @@ const routeGroups = [
       },
       {
         href: "/explorer/",
-        title: "Explorador SQL",
-        note: "Cruza tablas y baja a registros puntuales.",
+        title: "Índice de datos",
+        note: "Catálogo estático; reproduce consultas SQL con la descarga.",
       },
       {
         href: "/explorer-sources/",
@@ -156,6 +157,8 @@ const signalRows = [
 ];
 
 export default function HomePage() {
+  const launch = readPublicJson("spending/launch/latest.json", null);
+  if (!launch) throw new Error("Missing PLACSP launch");
   return (
     <main className="homepage">
       <section className="homepage-hero" aria-labelledby="homepage-title">
@@ -163,8 +166,17 @@ export default function HomePage() {
           <p className="homepage-hero__eyebrow eyebrow">Corte público · evidencia primero</p>
           <h1 className="homepage-hero__title" id="homepage-title">Vota Con La Chola</h1>
           <p className="homepage-hero__summary">
-            Decide, audita y comparte lo que partidos y cargos hacen con datos trazables.
+            Investiga decisiones públicas con datos descargables y resultados que puedes comprobar. Empieza por una pregunta: ¿a quién se adjudicó, cuánto y en qué expedientes?
           </p>
+          <div className="homepage-launch" aria-label="Caso de contratación pública">
+            <h2 className="homepage-launch__title">Sigue el dinero hasta el expediente</h2>
+            <p className="homepage-launch__scope">120 resultados PLACSP seleccionados · decisiones del 1–3 de enero de 2025 · alfa técnica. Corte parcial; adjudicado no significa pagado.</p>
+            <p className="homepage-launch__actions">
+              <a className="homepage-launch__demo" href={withBasePath("/spending/")}>Explorar adjudicaciones</a>{" · "}
+              <a className="homepage-launch__download" href={withBasePath(`/spending/launch/${launch.release}/placsp-launch.zip`)}>Descargar datos y consultas</a>{" · "}
+              <a className="homepage-launch__contribute" href="https://github.com/gsusI/vota-con-la-chola/blob/main/docs/community/placsp-launch-tasks.md">Contribuir</a>
+            </p>
+          </div>
           <div className="homepage-hero__actions" aria-label="Entradas principales">
             {primaryRoutes.map((item) => (
               <a className="homepage-primary-link" href={withBasePath(item.href)} key={item.href}>

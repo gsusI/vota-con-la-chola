@@ -4237,7 +4237,19 @@ explorer-bg-watch:
 explorer-datasette:
   python3 scripts/run_datasette_explorer.py --db "{{db_path}}" --host {{explorer_host}} --port 8011
 
+# Frozen publication renders already-reviewed public inputs without re-running ETL.
 cloudflare-pages-build:
+  if [ "${CLOUDFLARE_PAGES_FROZEN_INPUTS:-0}" = "1" ]; then just cloudflare-pages-build-frozen; else just cloudflare-pages-build-refresh; fi
+
+cloudflare-pages-build-frozen:
+  @just privacy-check-public-artifacts
+  python3 -m unittest tests.test_placsp_launch -v
+  cd "{{gh_pages_next_app_dir}}" && NEXT_PUBLIC_BASE_PATH="{{gh_pages_next_base_path}}" node node_modules/next/dist/bin/next build --webpack
+  python3 scripts/check_next_export_notfound_payloads.py --path "{{gh_pages_next_out_dir}}"
+  just cloudflare-pages-size-check
+  just privacy-check-public-artifacts
+
+cloudflare-pages-build-refresh:
   python3 scripts/build_citizen_tailwind_md3_css.py --tokens "{{citizen_tailwind_md3_tokens}}" --out "{{citizen_tailwind_md3_css}}"
   GH_PAGES_NEXT_PRIME_EXPORT=0 just accountability-dossiers-next-prime
   mkdir -p /tmp/vclc-npm-cache /tmp/vclc-npm-logs
@@ -5292,7 +5304,19 @@ votaconlachola-gh-pages-publish:
   fi
 
 explorer-gh-pages-publish:
-  @just votaconlachola-gh-pages-publish
+  if [ "${PLACSP_LAUNCH_SCOPED_PUBLISH:-0}" = "1" ]; then just placsp-launch-scoped-publish; else just votaconlachola-gh-pages-publish; fi
+
+placsp-launch-scoped-publish:
+  #!/usr/bin/env bash
+  set -euo pipefail
+  CLOUDFLARE_PAGES_FROZEN_INPUTS=1 just cloudflare-pages-build
+  : "${PLACSP_PUBLISH_SITE:?Set a detached gh-pages checkout to preserve existing routes}"
+  python3 scripts/overlay_placsp_launch_site.py --build "{{gh_pages_next_out_dir}}" --site "$PLACSP_PUBLISH_SITE" --report docs/etl/sprints/PUBLIC-LAUNCH-20260905/evidence/scoped-publication.json
+  git -C "$PLACSP_PUBLISH_SITE" -c core.autocrlf=false add -- index.html index.txt spending _next
+  python3 scripts/verify_placsp_launch_git.py --repo "$PLACSP_PUBLISH_SITE" --prefix spending/launch --ref ""
+  git -C "$PLACSP_PUBLISH_SITE" commit -m "Publish PLACSP technical alpha from $(git rev-parse --short HEAD)"
+  git -C "$PLACSP_PUBLISH_SITE" push "{{gh_pages_remote}}" HEAD:"{{gh_pages_branch}}"
+
 
 explorer-gh-pages:
   @just explorer-gh-pages-publish

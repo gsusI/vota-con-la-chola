@@ -3,6 +3,43 @@
 Status: `canonical`
 Updated: `2026-08-12`
 
+## Prioridad inmediata: lanzamiento útil para la comunidad
+
+Estado: `alfa técnica en publicación`; `L0` y reproducción local de `L1` verificados con 120 resultados y XML original. Responde al mandato del mantenedor de dar foco y hacer aprovechable públicamente lo desarrollado. Esta secuencia tiene prioridad de ejecución sobre las ondas de expansión posteriores; conserva su historial, requisitos y estados.
+
+**Ahora:** código, web y datos ya son públicos. El índice HF de escala declara siete corpora y 5.414.326 filas, pero la portada ofrece numerosas herramientas, `/spending/` solo veinte adjudicaciones fijas y `/explorer/` un índice sin ejecución SQL. GitHub no tiene releases y el issue de revisión ciudadana sigue sin revisores independientes. Evidencia y límites: [auditoría del 5 de septiembre](docs/etl/sprints/PUBLIC-LAUNCH-20260905/evidence/launch-audit.md).
+
+**Destino:** que alguien ajeno al proyecto responda una pregunta sobre dinero público, abra la fuente y reproduzca el resultado; después pueda aportar una consulta, una corrección o una fuente oficial mediante una tarea acotada. Primera audiencia: desarrolladores de datos, periodistas y fiscalizadores cívicos. La misión ciudadana y `/citizen/` se conservan; la campaña inicial sirve a quienes pueden reutilizar y ampliar la evidencia.
+
+**Propuesta de valor:** «Investiga decisiones públicas con datos descargables y resultados que puedes comprobar». Primera entrega: contratación PLACSP de un corte fechado y explícitamente parcial. Mantener el nombre del proyecto. Diferenciación: pregunta → consulta → resultado → expediente oficial → reproducción.
+
+**Pregunta inicial:** «¿A quién adjudicó este organismo, cuánto y en qué expedientes, dentro de este corte?». Tres consultas del mismo dataset: adjudicaciones por órgano/proveedor; distribución temporal; desglose hasta expediente y fuente. No sumar anuncios con adjudicaciones, confundir adjudicación con pago ni fusionar identidades por nombre. No convertir concentraciones o anomalías en acusaciones. Publicar una release no actualiza la fecha de sus datos.
+
+### Hitos de lanzamiento
+
+Presupuesto propuesto: máximo diez jornadas de trabajo concentrado para un candidato de lanzamiento. Son límites de capacidad, no estimaciones verificadas ni fechas prometidas. Si un hito excede su límite, reducir presentación; no rebajar integridad ni evidencia. Las respuestas externas no tienen plazo garantizado.
+
+| Hito | Capacidad | Entrega | Condición de salida | Estado |
+| --- | --- | --- | --- | --- |
+| `L0` Corte defendible | 1 jornada | Release inmutable y corte de adjudicaciones; ficha de fuente, fechas, unidad, cobertura, exclusiones, derechos y hashes | Reconciliar corpus y cifras web; distinguir anuncios/adjudicaciones/lotes/versiones; comprobar duplicados, fechas e importes; cada resultado de demo tiene fuente y captura verificable. Si falla, reducir el corte hasta que pase; ningún scrape masivo como requisito | VALIDADO LOCAL |
+| `L1` Reutilización real | 2 jornadas | Paquete pequeño CSV/Parquet, tres consultas SQL parametrizadas, resultados esperados, diccionario y comando documentado | Descarga anónima fijada por hash; en entorno vacío, sin bases locales previas ni secretos, las tres consultas reproducen los resultados publicados. Registrar runtime, bytes y tiempo. Objetivo: primera respuesta en menos de 10 minutos desde prerrequisitos explícitos | REPRODUCCIÓN LOCAL OK |
+| `L2` Demo pública | 3 jornadas | Ampliar `/spending/` con selección de órgano/proveedor/periodo sobre el corte aprobado, resultado, enlace compartible, CSV y evidencia. Portada con un caso protagonista y accesos a datos/contribución | Respuesta visible sin instalar ni registrarse; mismo resultado al recargar enlace en escritorio/móvil; fuente a una interacción; fecha y límites visibles. Reutilizar componentes/exportadores; carga acotada y animaciones de layout con respeto a movimiento reducido | NAVEGADOR LOCAL OK |
+| `L3` Entrada de colaboradores | 1 jornada | README breve con demo antes de arquitectura, guía de reproducción y tres rutas de aportación; seis tareas pequeñas; créditos por dataset/consulta/revisión y release candidata | Cada tarea especifica archivo, entrada, salida esperada, validación y responsable. Al menos dos se resuelven sin conocimientos del dominio ni acceso privado. Reutilizar SDK, plantillas y `CITATION.cff` | PREPARADO |
+| `L4` Verificación | 2 jornadas propias | Prueba del recorrido y reproducción, defectos corregidos y publicación desde cambios aislados y revisables | Gates del corte y privacidad/datos reales pasan; hashes/resultados coinciden entre descarga y web; tres personas ajenas prueban recorrido y dos reproducen una consulta. Sin respuestas externas, publicar como alfa técnica con ese gate pendiente; no afirmar validación comunitaria | TÉCNICA OK; EXTERNA PENDIENTE |
+| `L5` Presentación y adopción | 1 jornada propia | Release GitHub, vídeo de 60–90 segundos, ejemplo reproducible y convocatoria sobre una tarea concreta | Release/enlaces verificados. Envíos solo con autorización específica. Registrar respuestas, reproducciones, correcciones y PR reales; revisar adopción a los 14 días de difusión. Ningún contacto individual es dependencia del lanzamiento | EN PUBLICACIÓN |
+
+**Siguiente:** verificar publicación y descarga anónima de la alfa; recoger revisión externa sin inventar resultados. Ejecución: [roadmap técnico](docs/roadmap-tecnico.md#lanzamiento-comunitario-primer-trabajo); estado operativo: [tracker](docs/etl/e2e-scrape-load-tracker.md#lanzamiento-comunitario-con-foco-2026-09-05). Los hitos acotan `W9-002`, `W9-004`, `W9-005`, `W9-007`, `W9-008` y `W9-009`; no crean otra plataforma.
+
+### Recortes y criterio para volver a ampliar
+
+- Una sola entrega en construcción. Infraestructura adicional solo si bloquea un hito del corte; presupuesto orientativo 80% reutilización/demo/comunidad y 20% reparación necesaria.
+- Diferir adquisición a un millón de documentos, cobertura territorial completa, nueva ontología/SDK, causalidad, ranking político, resolución universal de identidades y operación masiva de revisión. Mantener los sistemas existentes; no borrarlos ni anunciar su cierre.
+- No construir SQL general en navegador, cuentas, editor de dashboards, nueva API ni nuevo repositorio. Primer acceso analítico: descarga + consultas reproducibles; la web puede usar agregaciones estáticas del mismo corte.
+- BDNS es la siguiente fuente candidata tras demostrar reutilización de PLACSP. Votos explicados siguen como utilidad secundaria. El recibo andaluz conserva historial y estado real; actualizar con evidencia o presentar como corte histórico, nunca como seguimiento vigente por omisión.
+- El cierre global `foundation.ready` sigue abierto. Una alfa limitada puede publicarse con gates propios del corte, sin promover lanes ni esconder fallos globales. No modificar un gate para hacer pasar evidencia defectuosa.
+- Éxito inicial: 5 reproducciones externas, 3 aportaciones externas aceptadas y 1 consulta/caso creado sin ayuda directa. Son objetivos, no resultados actuales. Stars y visitas son señales secundarias. Si a los 14 días nadie reutiliza, observar dónde se atascan tres usuarios y reparar esa entrada antes de añadir datasets.
+- Reconocer contribuciones en el resultado: autor y revisión de cada consulta/caso, crédito de procedencia por dataset, enlace al PR/corrección y sección de aportaciones en cada release. Incluir trabajo editorial y de datos, no solo commits. No inventar revisiones ni atribuir trabajo ajeno al proyecto.
+
 ## 1. Mission
 
 Build Spain's open, evidence-backed accountability infrastructure.
