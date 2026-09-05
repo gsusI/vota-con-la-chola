@@ -42,8 +42,12 @@ export default function LaunchExplorer({ rows, audit, release }) {
       const params = new URLSearchParams(window.location.hash.slice(1));
       const next = { ...initial };
       for (const key of Object.keys(initial)) if (params.has(key)) next[key] = params.get(key);
-      if (!/^\d{4}-\d{2}-\d{2}$/.test(next.start)) next.start = initial.start;
-      if (!/^\d{4}-\d{2}-\d{2}$/.test(next.end)) next.end = initial.end;
+      for (const key of ['start', 'end']) {
+        const date = new Date(`${next[key]}T12:00:00Z`);
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(next[key]) || Number.isNaN(date.getTime())
+          || date.toISOString().slice(0, 10) !== next[key]) next[key] = initial[key];
+      }
+      if (next.start > next.end) [next.start, next.end] = [next.end, next.start];
       animate(() => { setFilters(next); setPage(0); });
     }
     restore(); window.addEventListener('hashchange', restore);
