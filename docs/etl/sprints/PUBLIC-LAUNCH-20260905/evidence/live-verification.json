@@ -1,0 +1,45 @@
+{
+  "schema_version": "placsp-launch-live-verification-v1",
+  "verified_at": "2026-09-05T11:30:21.304257+00:00",
+  "source_commit": "0d028cade343029a217d7706c64a64196acd7eca",
+  "site_commit": "8d146beff0afedc6587a8ae2dd1d69106ac99d09",
+  "release_url": "https://github.com/gsusI/vota-con-la-chola/releases/tag/v0.1.0-placsp-alpha.1",
+  "browser": {
+    "verifiedAssets": 88,
+    "result": "1 resultado · 1860,00 € sin impuestos",
+    "overflow": false,
+    "errors": [],
+    "url": "https://votaconlachola.org/spending/#authority=Empresa+de+Transformaci%C3%B3n+Agraria+S.A.%2CS.M.E.%2C+M.P.%2C+%28TRAGSA%29&supplier=&start=2025-01-01&end=2025-01-31"
+  },
+  "zip_bytes": 399945,
+  "zip_sha256": "9d322d80c13247e835991d9187b75d5ad4c32d59bb440c1ca564672f242f7c9b",
+  "anonymous_reproduction": {
+    "download_origin": "github_release",
+    "verified": true,
+    "seconds": 1.057,
+    "queries": 3,
+    "award_results": 120,
+    "amount_cents": 604519346
+  },
+  "canonical_download": {
+    "browser": "verified",
+    "curl": "verified",
+    "python_urllib_direct": "HTTP 403; documented GitHub release route works"
+  },
+  "video": {
+    "seconds": 64.4,
+    "width": 800,
+    "height": 450,
+    "codec": "h264",
+    "pixel_format": "yuv420p",
+    "bytes": 1278078,
+    "sha256": "92f6a842850d58ff015e340781c4a29fc0a0ed27c1aacf45df0948ca0b96dbf9",
+    "full_decode": "pass"
+  },
+  "external_validation": {
+    "journey_testers": 0,
+    "query_reproducers": 0,
+    "status": "pending"
+  },
+  "outreach_sent": false
+}

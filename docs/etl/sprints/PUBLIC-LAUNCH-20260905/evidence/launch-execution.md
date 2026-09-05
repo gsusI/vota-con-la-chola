@@ -28,3 +28,21 @@ No se envían convocatorias ni mensajes a terceros. Pruebas comunitarias 0/3 y r
 - Navegador real: TRAGSA 1 resultado/186000 céntimos; enlace recargado conserva resultado. CSV descargado contiene la misma fila/suma. Móvil 390 px sin overflow. Estado vacío y reduced-motion probados. Capturas visuales revisadas.
 - Release del paquete `909fc46b5e065196b3b770344401229d5617b1639c002996bf49e6eca5811313`; ZIP 399945 bytes, SHA-256 `9d322d80c13247e835991d9187b75d5ad4c32d59bb440c1ca564672f242f7c9b`.
 - Siguiente acción autorizada: commit aislado a main, overlay a gh-pages, verificación de hosting canónico, prerelease GitHub con bundle/runner/vídeo. No se publica el resto del trabajo local.
+
+## Cierre técnico publicado
+
+- Source commit `0d028cade343029a217d7706c64a64196acd7eca` publicado en main; sitio `8d146beff0afedc6587a8ae2dd1d69106ac99d09` en gh-pages. Los 30 commits locales previos no se publicaron.
+- Dominio canónico verificado con navegador: 88/88 assets con SHA-256 y tamaño exactos, manifest fijado, filtros, enlace recargado y móvil sin overflow; cero errores JS observados. ZIP descargado desde navegador y curl: 399945 bytes y hash esperado.
+- Comando documentado contra GitHub Releases: descarga anónima, directorio temporal vacío, tres consultas y 120 resultados, 604519346 céntimos; 1,057 segundos. Descarga directa con Python urllib al dominio devuelve HTTP 403; navegador/curl y ruta documentada GitHub funcionan. No se oculta esa limitación.
+- Prerelease `v0.1.0-placsp-alpha.1`: ZIP, runner, vídeo H.264 de 64,4 segundos y SRT. Vídeo 800×450, yuv420p; decode completo sin errores, storyboard revisado.
+- Integridad Git: se añadió atributo -text para impedir normalización CRLF en artefactos content-addressed. Se verificaron los bytes de 88 archivos más manifest/ZIP desde Git antes de push; el publicador vuelve a comprobar el index antes del commit.
+- Gates externos abiertos: 0/3 personas ajenas prueban recorrido; 0/2 reproducen consulta. No hay aportaciones externas ni difusión directa registradas. Convocatoria preparada y no enviada. Siguiente: observar adopción a 14 días de la release y aceptar correcciones con crédito real.
+- Evidencia estructurada: [live-verification.json](live-verification.json). El estado global de escala conserva sus bloqueos previos.
+
+Revisión de adopción programada para el 19 de septiembre de 2026, 13:30 Europe/Madrid, una sola ejecución de lectura y evaluación. No autoriza envío de mensajes.
+
+## CI global y gate propio
+
+GitHub Pages build/deployment del commit de sitio finaliza `success`. El workflow ETL global no está verde: `million-scale-control-plane-contract` falla por capturas BDNS/votos y roots de corpora ausentes en el checkout de CI (mismo job fallaba antes de la alfa); `andalucia-water-receipt-contract` falla porque el recibo 2026-08-07 tiene 29 días frente al máximo de 8. El job de conectores strict-network sigue independiente. Ninguno se rebaja ni se presenta como cerrado.
+
+Se añade `PLACSP Launch Gate`: en checkout limpio y Python 3.12 verifica bytes Git, las cinco pruebas del paquete y privacidad de artefactos/guía. No descarga bases privadas ni omite controles globales. Workflow: `.github/workflows/placsp-launch-gate.yml`.
