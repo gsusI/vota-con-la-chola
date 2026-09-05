@@ -27,13 +27,14 @@ const parseTextDate = (value) => {
   return Number.isNaN(date.getTime()) || isoDate(date) !== normalized ? null : normalized;
 };
 
-export function SearchSelect({ id, label, placeholder, values, value, onChange }) {
+export function SearchSelect({ id, label, placeholder, values, value, onChange, disabled = false }) {
   const options = values.map((name) => ({ value: name, label: name }));
   return <div className={`spending-filter spending-filter--${id} ${styles.searchField}`}>
     <label className="spending-filter__label" htmlFor={`spending-${id}`}>{label}</label>
     <Select inputId={`spending-${id}`} instanceId={`spending-${id}`} className="spending-search"
       classNamePrefix="spending-search" options={options} value={options.find((option) => option.value === value) || null}
       onChange={(option) => onChange(option?.value || '')} isClearable isSearchable placeholder={placeholder}
+      isDisabled={disabled}
       noOptionsMessage={() => 'Sin coincidencias'} loadingMessage={() => 'Buscando…'}
       screenReaderStatus={({ count }) => `${count} opciones disponibles.`}
       ariaLiveMessages={{
@@ -52,7 +53,7 @@ export function SearchSelect({ id, label, placeholder, values, value, onChange }
   </div>;
 }
 
-export function DateRangeField({ start, end, resetToken, onChange }) {
+export function DateRangeField({ start, end, resetToken, onChange, disabled = false }) {
   const dialogRef = useRef(null);
   const triggerRef = useRef(null);
   const [draft, setDraft] = useState(null);
@@ -140,6 +141,7 @@ export function DateRangeField({ start, end, resetToken, onChange }) {
         Desde
         <input className="spending-date-range__start-input" id="spending-date-start" type="text"
           inputMode="numeric" autoComplete="off" placeholder="dd/mm/aaaa" value={texts.start}
+          disabled={disabled}
           aria-invalid={errorKey === 'start'} aria-describedby="spending-date-format spending-date-error"
           onChange={(event) => editDate('start', event.target.value)}
           onBlur={() => commitDate('start')} onKeyDown={(event) => handleDateKeyDown(event, 'start')} />
@@ -148,11 +150,13 @@ export function DateRangeField({ start, end, resetToken, onChange }) {
         Hasta
         <input className="spending-date-range__end-input" id="spending-date-end" type="text"
           inputMode="numeric" autoComplete="off" placeholder="dd/mm/aaaa" value={texts.end}
+          disabled={disabled}
           aria-invalid={errorKey === 'end'} aria-describedby="spending-date-format spending-date-error"
           onChange={(event) => editDate('end', event.target.value)}
           onBlur={() => commitDate('end')} onKeyDown={(event) => handleDateKeyDown(event, 'end')} />
       </label>
       <button className="spending-date-range__trigger" ref={triggerRef} type="button" onClick={open}
+        disabled={disabled}
         aria-haspopup="dialog" aria-labelledby="spending-date-label spending-date-calendar-label">
         <span className="spending-date-range__calendar-icon" aria-hidden="true">▦</span>
         <span className="spending-date-range__calendar-label" id="spending-date-calendar-label">Elegir rango en calendario</span>

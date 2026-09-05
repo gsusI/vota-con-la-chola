@@ -1,0 +1,314 @@
+<ns0:entry xmlns:ns0="http://www.w3.org/2005/Atom" xmlns:ns1="urn:dgpe:names:draft:codice-place-ext:schema:xsd:CommonAggregateComponents-2" xmlns:ns2="urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2" xmlns:ns3="urn:dgpe:names:draft:codice-place-ext:schema:xsd:CommonBasicComponents-2" xmlns:ns4="urn:dgpe:names:draft:codice:schema:xsd:CommonAggregateComponents-2">
+        <ns0:id>https://contrataciondelestado.es/sindicacion/licitacionesPerfilContratante/16208252</ns0:id>
+        <ns0:link href="https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&amp;idEvl=zgObU3DpDwLIGlsa0Wad%2Bw%3D%3D" />
+        <ns0:summary type="text">Id licitación: LPC2/2024; Órgano de Contratación: Consejo de la Juventud de Castilla y León; Importe: 48000 EUR; Estado: ADJ</ns0:summary>
+        <ns0:title>Suministro de catering para el albergue juvenil el callejón</ns0:title>
+        <ns0:updated>2025-01-10T15:10:49.831+01:00</ns0:updated>
+        <ns1:ContractFolderStatus>
+            <ns2:ContractFolderID>LPC2/2024</ns2:ContractFolderID>
+            <ns3:ContractFolderStatusCode listURI="https://contrataciondelestado.es/codice/cl/2.04/SyndicationContractFolderStatusCode-2.04.gc" languageID="es">ADJ</ns3:ContractFolderStatusCode>
+            <ns1:LocatedContractingParty>
+                <ns2:ContractingPartyTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.10/ContractingAuthorityCode-2.10.gc">2</ns2:ContractingPartyTypeCode>
+                <ns2:ActivityCode listURI="http://contrataciondelestado.es/codice/cl/2.10/ContractingAuthorityActivityCode-2.10.gc">1</ns2:ActivityCode>
+                <ns2:BuyerProfileURIID>https://contrataciondelestado.es/wps/poc?uri=deeplink:perfilContratante&amp;idBp=d29iJDIP6PKiEJrVRqloyA%3D%3D</ns2:BuyerProfileURIID>
+                <ns4:Party>
+                    <ns2:WebsiteURI>http://www.cjcyl.es</ns2:WebsiteURI>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">V47044789</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="ID_PLATAFORMA">21391630182923</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>Consejo de la Juventud de Castilla y León</ns2:Name>
+                    </ns4:PartyName>
+                    <ns4:PostalAddress>
+                        <ns2:CityName>Palencia</ns2:CityName>
+                        <ns2:PostalZone>34004</ns2:PostalZone>
+                        <ns4:AddressLine>
+                            <ns2:Line>Chalets</ns2:Line>
+                        </ns4:AddressLine>
+                        <ns4:Country>
+                            <ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+                            <ns2:Name>España</ns2:Name>
+                        </ns4:Country>
+                    </ns4:PostalAddress>
+                    <ns4:Contact>
+                        <ns2:Name>Consejo de la Juventud de Castilla y León</ns2:Name>
+                        <ns2:Telephone>979165973</ns2:Telephone>
+                        <ns2:Telefax>979165964</ns2:Telefax>
+                        <ns2:ElectronicMail>cjcyl@cjcyl.es</ns2:ElectronicMail>
+                    </ns4:Contact>
+                </ns4:Party>
+                <ns1:ParentLocatedParty>
+                    <ns4:PartyName>
+                        <ns2:Name>Consejo de la Juventud de Castilla y León</ns2:Name>
+                    </ns4:PartyName>
+                    <ns1:ParentLocatedParty>
+                        <ns4:PartyIdentification>
+                            <ns2:ID schemeName="DIR3">A07002862</ns2:ID>
+                        </ns4:PartyIdentification>
+                        <ns4:PartyName>
+                            <ns2:Name>Castilla y León</ns2:Name>
+                        </ns4:PartyName>
+                        <ns1:ParentLocatedParty>
+                            <ns4:PartyName>
+<ns2:Name>COMUNIDADES Y CIUDADES AUTÓNOMAS</ns2:Name>
+                            </ns4:PartyName>
+                            <ns1:ParentLocatedParty>
+<ns4:PartyName>
+    <ns2:Name>Sector Público</ns2:Name>
+</ns4:PartyName>
+                            </ns1:ParentLocatedParty>
+                        </ns1:ParentLocatedParty>
+                    </ns1:ParentLocatedParty>
+                </ns1:ParentLocatedParty>
+            </ns1:LocatedContractingParty>
+            <ns4:ProcurementProject>
+                <ns2:Name>Suministro de catering para el albergue juvenil el callejón</ns2:Name>
+                <ns2:TypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/ContractCode-2.08.gc">2</ns2:TypeCode>
+                <ns2:SubTypeCode listURI="http://contrataciondelestado.es/codice/cl/1.04/ServiceContractCode-1.04.gc">17</ns2:SubTypeCode>
+                <ns2:MixContractIndicator>false</ns2:MixContractIndicator>
+                <ns4:BudgetAmount>
+                    <ns2:EstimatedOverallContractAmount currencyID="EUR">48000</ns2:EstimatedOverallContractAmount>
+                    <ns2:TotalAmount currencyID="EUR">52800</ns2:TotalAmount>
+                    <ns2:TaxExclusiveAmount currencyID="EUR">48000</ns2:TaxExclusiveAmount>
+                </ns4:BudgetAmount>
+                <ns4:RequiredCommodityClassification>
+                    <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">55320000</ns2:ItemClassificationCode>
+                </ns4:RequiredCommodityClassification>
+                <ns4:RealizedLocation>
+                    <ns2:CountrySubentity>Palencia</ns2:CountrySubentity>
+                    <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES414</ns2:CountrySubentityCode>
+                    <ns4:Address>
+                        <ns2:CityName>PALENCIA</ns2:CityName>
+                        <ns2:PostalZone>34005</ns2:PostalZone>
+                        <ns4:Country>
+                            <ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+                            <ns2:Name>España</ns2:Name>
+                        </ns4:Country>
+                    </ns4:Address>
+                </ns4:RealizedLocation>
+                <ns4:PlannedPeriod>
+                    <ns2:DurationMeasure unitCode="MON">24</ns2:DurationMeasure>
+                </ns4:PlannedPeriod>
+            </ns4:ProcurementProject>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Mejor puntuación obtenida.</ns2:Description>
+                <ns2:AwardDate>2025-01-10</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:LowerTenderAmount currencyID="EUR">48000</ns2:LowerTenderAmount>
+                <ns2:HigherTenderAmount currencyID="EUR">48000</ns2:HigherTenderAmount>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">B49201700</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>ENSUMA EMPLEO SOCIAL S.L.</ns2:Name>
+                    </ns4:PartyName>
+                    <ns4:PhysicalLocation>
+                        <ns4:Address>
+                            <ns2:CityName>CORESES</ns2:CityName>
+                            <ns2:PostalZone>49530</ns2:PostalZone>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc" name="España">ES</ns2:IdentificationCode>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:PhysicalLocation>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">48000</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">52800</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderingTerms>
+                <ns2:RequiredCurriculaIndicator>false</ns2:RequiredCurriculaIndicator>
+                <ns2:VariantConstraintIndicator>false</ns2:VariantConstraintIndicator>
+                <ns2:FundingProgramCode listURI="http://contrataciondelestado.es/codice/cl/2.08/FundingProgramCode-2.08.gc" name="No hay financiación con fondos de la UE">NO-EU</ns2:FundingProgramCode>
+                <ns2:ProcurementNationalLegislationCode listURI="https://contrataciondelestado.es/codice/cl/2.08/ProcurementNationalLegislationCode-2.08.gc">0</ns2:ProcurementNationalLegislationCode>
+                <ns4:ProcurementLegislationDocumentReference>
+                    <ns2:ID>N/A</ns2:ID>
+                </ns4:ProcurementLegislationDocumentReference>
+                <ns4:TendererQualificationRequest>
+                    <ns4:SpecificTendererRequirement>
+                        <ns2:RequirementTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/DeclarationTypeCode-2.08.gc">4</ns2:RequirementTypeCode>
+                        <ns2:Description>Cumplimiento con las obligaciones con la Seguridad Social</ns2:Description>
+                    </ns4:SpecificTendererRequirement>
+                    <ns4:SpecificTendererRequirement>
+                        <ns2:RequirementTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/DeclarationTypeCode-2.08.gc">1</ns2:RequirementTypeCode>
+                        <ns2:Description>Capacidad de obrar</ns2:Description>
+                    </ns4:SpecificTendererRequirement>
+                </ns4:TendererQualificationRequest>
+                <ns4:AllowedSubcontractTerms>
+                    <ns2:Description>NO ES POSIBLE</ns2:Description>
+                </ns4:AllowedSubcontractTerms>
+                <ns4:AwardingTerms>
+                    <ns4:AwardingCriteria>
+                        <ns2:AwardingCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/AwardingCriteriaCode-2.0.gc">OBJ</ns2:AwardingCriteriaTypeCode>
+                        <ns2:Description>C5.Estar en posesión de certificado de calidad ISO 9001 o equivalente</ns2:Description>
+                        <ns2:Note>Enviar adjunto el certificado</ns2:Note>
+                        <ns2:AwardingCriteriaSubTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.09/AwardingCriteriaAutomaticallyEvaluatedSubTypeCode-2.09.gc">2</ns2:AwardingCriteriaSubTypeCode>
+                        <ns2:WeightNumeric>5</ns2:WeightNumeric>
+                    </ns4:AwardingCriteria>
+                    <ns4:AwardingCriteria>
+                        <ns2:AwardingCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/AwardingCriteriaCode-2.0.gc">OBJ</ns2:AwardingCriteriaTypeCode>
+                        <ns2:Description>C.3. TIEMPO DE PREAVISO</ns2:Description>
+                        <ns2:Note>Se valorará el tiempo de antelación al comunicar el número definitivo de menús a servir en el centro; la evaluación de este criterio se realizará conforme al baremo si
+guiente: VER PCAP</ns2:Note>
+                        <ns2:AwardingCriteriaSubTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.09/AwardingCriteriaAutomaticallyEvaluatedSubTypeCode-2.09.gc">2</ns2:AwardingCriteriaSubTypeCode>
+                        <ns2:WeightNumeric>20</ns2:WeightNumeric>
+                    </ns4:AwardingCriteria>
+                    <ns4:AwardingCriteria>
+                        <ns2:AwardingCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/AwardingCriteriaCode-2.0.gc">OBJ</ns2:AwardingCriteriaTypeCode>
+                        <ns2:Description>C.1 OFERTA ECONÓMICA</ns2:Description>
+                        <ns2:Note>Introduce los valores con redondeo a dos decimales</ns2:Note>
+                        <ns2:AwardingCriteriaSubTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.09/AwardingCriteriaAutomaticallyEvaluatedSubTypeCode-2.09.gc">1</ns2:AwardingCriteriaSubTypeCode>
+                        <ns2:WeightNumeric>40</ns2:WeightNumeric>
+                    </ns4:AwardingCriteria>
+                    <ns4:AwardingCriteria>
+                        <ns2:AwardingCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/AwardingCriteriaCode-2.0.gc">OBJ</ns2:AwardingCriteriaTypeCode>
+                        <ns2:Description>C.4. Estar en posesión de certificado de seguridad alimentaria ISO 22000 o equivalente</ns2:Description>
+                        <ns2:Note>Enviar adjunto el certificado.</ns2:Note>
+                        <ns2:AwardingCriteriaSubTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.09/AwardingCriteriaAutomaticallyEvaluatedSubTypeCode-2.09.gc">2</ns2:AwardingCriteriaSubTypeCode>
+                        <ns2:WeightNumeric>10</ns2:WeightNumeric>
+                    </ns4:AwardingCriteria>
+                    <ns4:AwardingCriteria>
+                        <ns2:AwardingCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/AwardingCriteriaCode-2.0.gc">OBJ</ns2:AwardingCriteriaTypeCode>
+                        <ns2:Description>C.2. CERCANIA DESDE EL LUGAR DONDE SE HACE LA COMIDA AL CENTRO DONDE SE SIRVE</ns2:Description>
+                        <ns2:Note>Se valorará la proximidad entre el municipio donde esté situada la cocina en la que se vayan a cocinar y preparar los menús y la ubicación del albergue juvenil el callejón, en el casco urbano de Valladolid.
+VER PCAP</ns2:Note>
+                        <ns2:AwardingCriteriaSubTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.09/AwardingCriteriaAutomaticallyEvaluatedSubTypeCode-2.09.gc">2</ns2:AwardingCriteriaSubTypeCode>
+                        <ns2:WeightNumeric>25</ns2:WeightNumeric>
+                    </ns4:AwardingCriteria>
+                </ns4:AwardingTerms>
+                <ns4:TenderRecipientParty>
+                    <ns2:EndpointID>https://contrataciondelestado.es</ns2:EndpointID>
+                </ns4:TenderRecipientParty>
+                <ns4:Language>
+                    <ns2:ID>es</ns2:ID>
+                </ns4:Language>
+            </ns4:TenderingTerms>
+            <ns4:TenderingProcess>
+                <ns2:ProcedureCode listURI="https://contrataciondelestado.es/codice/cl/2.07/SyndicationTenderingProcessCode-2.07.gc">9</ns2:ProcedureCode>
+                <ns2:UrgencyCode listURI="http://contrataciondelestado.es/codice/cl/1.04/DiligenceTypeCode-1.04.gc">1</ns2:UrgencyCode>
+                <ns2:ContractingSystemCode listURI="http://contrataciondelestado.es/codice/cl/2.08/ContractingSystemTypeCode-2.08.gc">0</ns2:ContractingSystemCode>
+                <ns2:SubmissionMethodCode listURI="http://contrataciondelestado.es/codice/cl/1.04/TenderDeliveryCode-1.04.gc">1</ns2:SubmissionMethodCode>
+                <ns2:OverThresholdIndicator>false</ns2:OverThresholdIndicator>
+                <ns4:TenderSubmissionDeadlinePeriod>
+                    <ns2:EndDate>2024-12-20</ns2:EndDate>
+                    <ns2:EndTime>12:00:00</ns2:EndTime>
+                </ns4:TenderSubmissionDeadlinePeriod>
+                <ns4:AuctionTerms>
+                    <ns2:AuctionConstraintIndicator>false</ns2:AuctionConstraintIndicator>
+                </ns4:AuctionTerms>
+            </ns4:TenderingProcess>
+            <ns4:LegalDocumentReference>
+                <ns2:ID>PCAP_CATERING.pdf</ns2:ID>
+                <ns4:Attachment>
+                    <ns4:ExternalReference>
+                        <ns2:URI>https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=qcIScRp504eybCERSHkZ8di1h5DYx%2BQhlMxJGuMPDdPRlUKhltor3kx03yePEjPGPk0EECXhNGXwF8QxxKZubL%2BcMQwHzG0V6zs1tKlob8w//q7NB2iMZvNyf0xrJmjt&amp;cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D</ns2:URI>
+                        <ns2:DocumentHash>2jmj7l5rSw0yVb/vlWAYkK/YBwk=</ns2:DocumentHash>
+                    </ns4:ExternalReference>
+                </ns4:Attachment>
+            </ns4:LegalDocumentReference>
+            <ns4:TechnicalDocumentReference>
+                <ns2:ID>PPT_CATERING.pdf</ns2:ID>
+                <ns4:Attachment>
+                    <ns4:ExternalReference>
+                        <ns2:URI>https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=UCJ1dfD%2BjEBB%2BpFRezWUsCoNl4DaBUzm8nlfYH/eajhiylihj5nx4wZSucm3qD/6jo0Nzsgcw8Um/igujv5XBP9PmlAT6k49LGYdQ3jo20xt/o8fNevwsujgRzaBbugn&amp;cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D</ns2:URI>
+                        <ns2:DocumentHash>2jmj7l5rSw0yVb/vlWAYkK/YBwk=</ns2:DocumentHash>
+                    </ns4:ExternalReference>
+                </ns4:Attachment>
+            </ns4:TechnicalDocumentReference>
+            <ns4:AdditionalDocumentReference>
+                <ns2:ID>ANEXO II - DR.pdf</ns2:ID>
+                <ns4:Attachment>
+                    <ns4:ExternalReference>
+                        <ns2:URI>https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=iclzOoxEC6CtdvbmloSU7oimHXhyFstDbP16vA4HrgUensB8Ly9iKFDwP2rbkiNz8Ro3ujLvqCXlaEI6Yun9BLhNsyN7Khh70tbG/6TWcKOHAj0WEJrB5sP7amrh2jBD&amp;cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D</ns2:URI>
+                        <ns2:DocumentHash>2jmj7l5rSw0yVb/vlWAYkK/YBwk=</ns2:DocumentHash>
+                    </ns4:ExternalReference>
+                </ns4:Attachment>
+            </ns4:AdditionalDocumentReference>
+            <ns4:AdditionalDocumentReference>
+                <ns2:ID>ANEXO III.pdf</ns2:ID>
+                <ns4:Attachment>
+                    <ns4:ExternalReference>
+                        <ns2:URI>https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=p%2BA0tQDWDqvgryh0DeYO/6Kca0TFUs3SbAzNWSBxRmb7faGbJcgs/%2BK1AHtFwgUJYuR2GiVURe1DIvdyCR5hdNRECldUVkylym3aROR/aXvVTD3T98KC0nSgQFM0q%2B5s&amp;cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D</ns2:URI>
+                        <ns2:DocumentHash>2jmj7l5rSw0yVb/vlWAYkK/YBwk=</ns2:DocumentHash>
+                    </ns4:ExternalReference>
+                </ns4:Attachment>
+            </ns4:AdditionalDocumentReference>
+            <ns4:AdditionalDocumentReference>
+                <ns2:ID>ANEXO IV.pdf</ns2:ID>
+                <ns4:Attachment>
+                    <ns4:ExternalReference>
+                        <ns2:URI>https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=yYEP/z0pSt%2BtbECtxjnUZM03gxeq4Z5KjvqNOnKeXbfmVOpEHiFLmieuM02GYuwl8QBUuzilO7P86YFa%2BML%2BJgRhJbU7yEpsTa0Pkp6rarJ7QB3HKyQaFUExmUVQCerk&amp;cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D</ns2:URI>
+                        <ns2:DocumentHash>2jmj7l5rSw0yVb/vlWAYkK/YBwk=</ns2:DocumentHash>
+                    </ns4:ExternalReference>
+                </ns4:Attachment>
+            </ns4:AdditionalDocumentReference>
+            <ns1:ValidNoticeInfo>
+                <ns3:NoticeTypeCode listURI="https://contrataciondelestado.es/codice/cl/2.11/TenderingNoticeTypeCode-2.11.gc">DOC_CAN_ADJ</ns3:NoticeTypeCode>
+                <ns1:AdditionalPublicationStatus>
+                    <ns3:PublicationMediaName>Perfil del contratante</ns3:PublicationMediaName>
+                    <ns1:AdditionalPublicationDocumentReference>
+                        <ns2:IssueDate>2025-01-10</ns2:IssueDate>
+                    </ns1:AdditionalPublicationDocumentReference>
+                    <ns1:AdditionalPublicationDocumentReference>
+                        <ns2:DocumentTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderingDocumentTypeCode-2.09.gc" name="Documento de Acta de Adjudicación">ACTA_ADJ</ns2:DocumentTypeCode>
+                        <ns4:Attachment>
+                            <ns4:ExternalReference>
+<ns2:URI>https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=hoB%2BQ91c0JS1s9c/Bl1PtLK/U0Uhv5c9wORjs3/YP1rd9lxga1aBywfAUZXokjv%2BNdoa2IU/KpfD6N5r3gQTBHHlnug7brrWSK6X/PwtzW7DdQD9RyhUmzT4jZ2In4zL&amp;cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D</ns2:URI>
+<ns2:FileName>LPC2-2024-RESOLUCION DE ADJUDICACION.pdf</ns2:FileName>
+                            </ns4:ExternalReference>
+                        </ns4:Attachment>
+                    </ns1:AdditionalPublicationDocumentReference>
+                </ns1:AdditionalPublicationStatus>
+            </ns1:ValidNoticeInfo>
+            <ns1:ValidNoticeInfo>
+                <ns3:NoticeTypeCode listURI="https://contrataciondelestado.es/codice/cl/2.11/TenderingNoticeTypeCode-2.11.gc">DOC_CD</ns3:NoticeTypeCode>
+                <ns1:AdditionalPublicationStatus>
+                    <ns3:PublicationMediaName>Perfil del contratante</ns3:PublicationMediaName>
+                    <ns1:AdditionalPublicationDocumentReference>
+                        <ns2:IssueDate>2024-12-03</ns2:IssueDate>
+                    </ns1:AdditionalPublicationDocumentReference>
+                </ns1:AdditionalPublicationStatus>
+            </ns1:ValidNoticeInfo>
+            <ns1:ValidNoticeInfo>
+                <ns3:NoticeTypeCode listURI="https://contrataciondelestado.es/codice/cl/2.11/TenderingNoticeTypeCode-2.11.gc">DOC_CN</ns3:NoticeTypeCode>
+                <ns1:AdditionalPublicationStatus>
+                    <ns3:PublicationMediaName>Perfil del contratante</ns3:PublicationMediaName>
+                    <ns1:AdditionalPublicationDocumentReference>
+                        <ns2:IssueDate>2024-12-03</ns2:IssueDate>
+                    </ns1:AdditionalPublicationDocumentReference>
+                </ns1:AdditionalPublicationStatus>
+            </ns1:ValidNoticeInfo>
+            <ns1:ValidNoticeInfo>
+                <ns3:NoticeTypeCode listURI="https://contrataciondelestado.es/codice/cl/2.11/TenderingNoticeTypeCode-2.11.gc">DOC_PIN</ns3:NoticeTypeCode>
+                <ns1:AdditionalPublicationStatus>
+                    <ns3:PublicationMediaName>Perfil del contratante</ns3:PublicationMediaName>
+                    <ns1:AdditionalPublicationDocumentReference>
+                        <ns2:IssueDate>2024-12-02</ns2:IssueDate>
+                    </ns1:AdditionalPublicationDocumentReference>
+                </ns1:AdditionalPublicationStatus>
+            </ns1:ValidNoticeInfo>
+            <ns1:GeneralDocument>
+                <ns1:GeneralDocumentDocumentReference>
+                    <ns2:ID>2024-6fd651b0-8ae3-475e-a1a2-788940a8037e</ns2:ID>
+                    <ns2:DocumentTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/GeneralContractDocuments-2.08.gc">10</ns2:DocumentTypeCode>
+                    <ns4:Attachment>
+                        <ns4:ExternalReference>
+                            <ns2:URI>https://contrataciondelestado.es/wps/wcm/connect/PLACE_es/Site/area/docAccCmpnt?srv=cmpnt&amp;cmpntname=GetDocumentsById&amp;source=library&amp;DocumentIdParam=2024-6fd651b0-8ae3-475e-a1a2-788940a8037e</ns2:URI>
+                            <ns2:FileName>Informe de insuficiencia de medios</ns2:FileName>
+                        </ns4:ExternalReference>
+                    </ns4:Attachment>
+                </ns1:GeneralDocumentDocumentReference>
+            </ns1:GeneralDocument>
+        </ns1:ContractFolderStatus>
+    </ns0:entry>
+    

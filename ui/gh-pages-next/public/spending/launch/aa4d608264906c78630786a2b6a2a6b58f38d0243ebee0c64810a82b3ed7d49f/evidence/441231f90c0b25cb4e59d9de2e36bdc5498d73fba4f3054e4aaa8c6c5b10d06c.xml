@@ -1,0 +1,785 @@
+<ns0:entry xmlns:ns0="http://www.w3.org/2005/Atom" xmlns:ns1="urn:dgpe:names:draft:codice-place-ext:schema:xsd:CommonAggregateComponents-2" xmlns:ns2="urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2" xmlns:ns3="urn:dgpe:names:draft:codice-place-ext:schema:xsd:CommonBasicComponents-2" xmlns:ns4="urn:dgpe:names:draft:codice:schema:xsd:CommonAggregateComponents-2">
+        <ns0:id>https://contrataciondelestado.es/sindicacion/licitacionesPerfilContratante/16051474</ns0:id>
+        <ns0:link href="https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&amp;idEvl=3%2ByVPDdkkrxQFSeKCRun4Q%3D%3D" />
+        <ns0:summary type="text">Id licitación: 66/2024; Órgano de Contratación: Presidencia de la Mancomunidad de Municipios de las Medianías de Gran Canaria; Importe: 461693.75 EUR; Estado: ADJ</ns0:summary>
+        <ns0:title>Suministro de vehículos y otros elementos para prestación de servicios básicos municipales por procedimiento abierto SARA PCM Anualidad 2024.</ns0:title>
+        <ns0:updated>2025-02-07T12:12:56.797+01:00</ns0:updated>
+        <ns1:ContractFolderStatus>
+            <ns2:ContractFolderID>66/2024</ns2:ContractFolderID>
+            <ns3:ContractFolderStatusCode listURI="https://contrataciondelestado.es/codice/cl/2.04/SyndicationContractFolderStatusCode-2.04.gc" languageID="es">ADJ</ns3:ContractFolderStatusCode>
+            <ns2:UUID schemeName="TED">e9e379e7-b4a0-4c4e-89ec-4c114fa2e2d3</ns2:UUID>
+            <ns1:LocatedContractingParty>
+                <ns2:ContractingPartyTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.10/ContractingAuthorityCode-2.10.gc">3</ns2:ContractingPartyTypeCode>
+                <ns2:ActivityCode listURI="http://contrataciondelestado.es/codice/cl/2.10/ContractingAuthorityActivityCode-2.10.gc">1</ns2:ActivityCode>
+                <ns2:ActivityCode listURI="http://contrataciondelestado.es/codice/cl/2.10/ContractingAuthorityActivityCode-2.10.gc">4</ns2:ActivityCode>
+                <ns2:ActivityCode listURI="http://contrataciondelestado.es/codice/cl/2.10/ContractingAuthorityActivityCode-2.10.gc">10</ns2:ActivityCode>
+                <ns2:ActivityCode listURI="http://contrataciondelestado.es/codice/cl/2.10/ContractingAuthorityActivityCode-2.10.gc">9</ns2:ActivityCode>
+                <ns2:ActivityCode listURI="http://contrataciondelestado.es/codice/cl/2.10/ContractingAuthorityActivityCode-2.10.gc">5</ns2:ActivityCode>
+                <ns2:BuyerProfileURIID>https://contrataciondelestado.es/wps/poc?uri=deeplink:perfilContratante&amp;idBp=rG%2BrVv83TigQK2TEfXGy%2BA%3D%3D</ns2:BuyerProfileURIID>
+                <ns4:Party>
+                    <ns2:WebsiteURI>http://www.medianias.org</ns2:WebsiteURI>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="DIR3">L05350004</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">P8502201J</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="ID_PLATAFORMA">30317810058221</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>Presidencia de la Mancomunidad de Municipios de las Medianías de Gran Canaria</ns2:Name>
+                    </ns4:PartyName>
+                    <ns4:PostalAddress>
+                        <ns2:CityName>Vega de San Mateo</ns2:CityName>
+                        <ns2:PostalZone>35320</ns2:PostalZone>
+                        <ns4:AddressLine>
+                            <ns2:Line>Plaza Contra la Esclavitud Infantil, 1</ns2:Line>
+                        </ns4:AddressLine>
+                        <ns4:Country>
+                            <ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+                            <ns2:Name>España</ns2:Name>
+                        </ns4:Country>
+                    </ns4:PostalAddress>
+                    <ns4:Contact>
+                        <ns2:Name>Presidencia de la Mancomunidad de Municipios de las Medianías de Gran Canaria</ns2:Name>
+                        <ns2:Telephone>928661357</ns2:Telephone>
+                        <ns2:ElectronicMail>gerencia@medianias.org</ns2:ElectronicMail>
+                    </ns4:Contact>
+                </ns4:Party>
+                <ns1:ParentLocatedParty>
+                    <ns4:PartyName>
+                        <ns2:Name>Mancomunidad de Municipios de las Medianías de Gran Canaria</ns2:Name>
+                    </ns4:PartyName>
+                    <ns1:ParentLocatedParty>
+                        <ns4:PartyName>
+                            <ns2:Name>Mancomunidades</ns2:Name>
+                        </ns4:PartyName>
+                        <ns1:ParentLocatedParty>
+                            <ns4:PartyName>
+<ns2:Name>Las Palmas</ns2:Name>
+                            </ns4:PartyName>
+                            <ns1:ParentLocatedParty>
+<ns4:PartyName>
+    <ns2:Name>Canarias</ns2:Name>
+</ns4:PartyName>
+<ns1:ParentLocatedParty>
+    <ns4:PartyName>
+        <ns2:Name>ENTIDADES LOCALES</ns2:Name>
+    </ns4:PartyName>
+    <ns1:ParentLocatedParty>
+        <ns4:PartyName>
+            <ns2:Name>Sector Público</ns2:Name>
+        </ns4:PartyName>
+    </ns1:ParentLocatedParty>
+</ns1:ParentLocatedParty>
+                            </ns1:ParentLocatedParty>
+                        </ns1:ParentLocatedParty>
+                    </ns1:ParentLocatedParty>
+                </ns1:ParentLocatedParty>
+            </ns1:LocatedContractingParty>
+            <ns4:ProcurementProject>
+                <ns2:Name>Suministro de vehículos y otros elementos para prestación de servicios básicos municipales por procedimiento abierto SARA PCM Anualidad 2024.</ns2:Name>
+                <ns2:TypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/ContractCode-2.08.gc">1</ns2:TypeCode>
+                <ns2:SubTypeCode listURI="http://contrataciondelestado.es/codice/cl/1.04/GoodsContractCode-1.04.gc">1</ns2:SubTypeCode>
+                <ns2:MixContractIndicator>false</ns2:MixContractIndicator>
+                <ns4:BudgetAmount>
+                    <ns2:EstimatedOverallContractAmount currencyID="EUR">461693.75</ns2:EstimatedOverallContractAmount>
+                    <ns2:TotalAmount currencyID="EUR">493947.22</ns2:TotalAmount>
+                    <ns2:TaxExclusiveAmount currencyID="EUR">461693.75</ns2:TaxExclusiveAmount>
+                </ns4:BudgetAmount>
+                <ns4:RequiredCommodityClassification>
+                    <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">34100000</ns2:ItemClassificationCode>
+                </ns4:RequiredCommodityClassification>
+                <ns4:RequiredCommodityClassification>
+                    <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">34142100</ns2:ItemClassificationCode>
+                </ns4:RequiredCommodityClassification>
+                <ns4:RequiredCommodityClassification>
+                    <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">34142000</ns2:ItemClassificationCode>
+                </ns4:RequiredCommodityClassification>
+                <ns4:RequiredCommodityClassification>
+                    <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">34114200</ns2:ItemClassificationCode>
+                </ns4:RequiredCommodityClassification>
+                <ns4:RequiredCommodityClassification>
+                    <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">34110000</ns2:ItemClassificationCode>
+                </ns4:RequiredCommodityClassification>
+                <ns4:RequiredCommodityClassification>
+                    <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">39100000</ns2:ItemClassificationCode>
+                </ns4:RequiredCommodityClassification>
+                <ns4:RealizedLocation>
+                    <ns2:CountrySubentity>Canarias</ns2:CountrySubentity>
+                    <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES70</ns2:CountrySubentityCode>
+                    <ns4:Address>
+                        <ns2:CityName>Vega de San Mateo</ns2:CityName>
+                        <ns2:PostalZone>35320</ns2:PostalZone>
+                        <ns4:Country>
+                            <ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+                            <ns2:Name>España</ns2:Name>
+                        </ns4:Country>
+                    </ns4:Address>
+                </ns4:RealizedLocation>
+                <ns4:PlannedPeriod>
+                    <ns2:DurationMeasure unitCode="MON">8</ns2:DurationMeasure>
+                </ns4:PlannedPeriod>
+            </ns4:ProcurementProject>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">1</ns2:ID>
+                <ns4:TenderingTerms>
+                    <ns4:TendererQualificationRequest>
+                        <ns4:TechnicalEvaluationCriteria>
+                            <ns2:EvaluationCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/TechnicalCapabilityTypeCode-2.0.gc">OSR-COMPTASK</ns2:EvaluationCriteriaTypeCode>
+                            <ns2:Description>En los contratos de suministros, la solvencia técnica de los empresarios deberá acreditarse mediante una relación de los principales suministros realizados de igual o similar naturaleza que los que constituyen el objeto del contrato en el curso de como máximo, los tres últimos años, en la que se indique el importe, la fecha y el destinatario, público o privado de los mismos; cuando sea necesario para garantizar un nivel adecuado de competencia, los poderes adjudicadores podrán indicar que se tendrán en cuenta las pruebas de los suministros pertinentes efectuados más de tres años antes.
+
+Los suministros efectuados se acreditarán mediante certificados expedidos o visados por el órgano competente, cuando el destinatario sea una entidad del sector público; cuando el destinatario sea un sujeto privado, mediante un certificado expedido por este o, a falta de este certificado, mediante una declaración del empresario acompañado de los documentos obrantes en poder del mismo que acrediten la realización de la prestación; en su caso estos certificados serán comunicados directamente al órgano de contratación por la autoridad competente.
+
+Para determinar que un suministro es de igual o similar naturaleza al que constituye el objeto del contrato, se atenderá a los tres primeros dígitos de los respectivos códigos de la CPV. Se exigirá como mínimo que el importe anual acumulado en el año de mayor ejecución (del período antes citado), en suministros de igual o similar naturaleza que los que constituyen el objeto del presente contrato.
+
+No obstante lo dispuesto en el párrafo anterior, podrá acudir además de al CPV, a otros sistemas de clasificación de actividades o productos como el Código normalizado de productos y servicios de las Naciones Unidas (UNSPSC), a la Clasificación central de productos (CPC) o a la Clasificación Nacional de Actividades Económicas (CNAE), que en todo caso deberá garantizar la competencia efectiva para la adjudicación del contrato. En defecto de previsión en el pliego se atenderá a los tres primeros dígitos de los respectivos códigos de la CPV. La Junta Consultiva de Contratación Pública del Estado podrá efectuar recomendaciones para indicar qué códigos de las respectivas clasificaciones se ajustan con mayor precisión a las prestaciones más habituales en la contratación pública.
+
+En todos los casos anteriores, los importes deberán ser iguales o superiores al presupuesto base de licitación, excluido IGIC, de cada uno de los lotes</ns2:Description>
+                        </ns4:TechnicalEvaluationCriteria>
+                        <ns4:FinancialEvaluationCriteria>
+                            <ns2:EvaluationCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/FinancialCapabilityTypeCode-2.0.gc">5</ns2:EvaluationCriteriaTypeCode>
+                            <ns2:Description>Volumen anual de negocios del licitador o candidato, que referido al año de mayor volumen de negocio de los tres últimos concluidos deberá ser, al menos, la cantidad que se establezca como nivel mínimo:
+Nivel mínimo de solvencia económica: Será igual o superior al presupuesto base de licitación, IGIC excluido, de cada uno de los lotes.
+Forma de acreditación: El volumen anual de negocios del licitador o candidato se acreditará por medio de sus cuentas anuales, aprobadas y depositadas en el Registro Mercantil, si el empresario estuviera inscrito en dicho registro, y en caso contrario por las depositadas en el registro oficial en que debe estar inscrito. Los empresarios individuales no inscritos en el Registro Mercantil acreditarán su volumen anual de negocios mediante sus libros de inventarios y cuentas anuales legalizados por el Registro Mercantil.</ns2:Description>
+                        </ns4:FinancialEvaluationCriteria>
+                    </ns4:TendererQualificationRequest>
+                </ns4:TenderingTerms>
+                <ns4:ProcurementProject>
+                    <ns2:Name>2 Vehículos, tipo SUV Híbrido Enchufable (4X4), para los servicios municipales del Ayuntamiento de San Bartolomé de Tirajana</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">91800</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">91800</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">34100000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">34110000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Gran Canaria</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES705</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">2</ns2:ID>
+                <ns4:TenderingTerms>
+                    <ns4:TendererQualificationRequest>
+                        <ns4:TechnicalEvaluationCriteria>
+                            <ns2:EvaluationCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/TechnicalCapabilityTypeCode-2.0.gc">OSR-COMPTASK</ns2:EvaluationCriteriaTypeCode>
+                            <ns2:Description>En los contratos de suministros, la solvencia técnica de los empresarios deberá acreditarse mediante una relación de los principales suministros realizados de igual o similar naturaleza que los que constituyen el objeto del contrato en el curso de como máximo, los tres últimos años, en la que se indique el importe, la fecha y el destinatario, público o privado de los mismos; cuando sea necesario para garantizar un nivel adecuado de competencia, los poderes adjudicadores podrán indicar que se tendrán en cuenta las pruebas de los suministros pertinentes efectuados más de tres años antes.
+
+Los suministros efectuados se acreditarán mediante certificados expedidos o visados por el órgano competente, cuando el destinatario sea una entidad del sector público; cuando el destinatario sea un sujeto privado, mediante un certificado expedido por este o, a falta de este certificado, mediante una declaración del empresario acompañado de los documentos obrantes en poder del mismo que acrediten la realización de la prestación; en su caso estos certificados serán comunicados directamente al órgano de contratación por la autoridad competente.
+
+Para determinar que un suministro es de igual o similar naturaleza al que constituye el objeto del contrato, se atenderá a los tres primeros dígitos de los respectivos códigos de la CPV. Se exigirá como mínimo que el importe anual acumulado en el año de mayor ejecución (del período antes citado), en suministros de igual o similar naturaleza que los que constituyen el objeto del presente contrato.
+
+No obstante lo dispuesto en el párrafo anterior, podrá acudir además de al CPV, a otros sistemas de clasificación de actividades o productos como el Código normalizado de productos y servicios de las Naciones Unidas (UNSPSC), a la Clasificación central de productos (CPC) o a la Clasificación Nacional de Actividades Económicas (CNAE), que en todo caso deberá garantizar la competencia efectiva para la adjudicación del contrato. En defecto de previsión en el pliego se atenderá a los tres primeros dígitos de los respectivos códigos de la CPV. La Junta Consultiva de Contratación Pública del Estado podrá efectuar recomendaciones para indicar qué códigos de las respectivas clasificaciones se ajustan con mayor precisión a las prestaciones más habituales en la contratación pública.
+
+En todos los casos anteriores, los importes deberán ser iguales o superiores al presupuesto base de licitación, excluido IGIC, de cada uno de los lotes</ns2:Description>
+                        </ns4:TechnicalEvaluationCriteria>
+                        <ns4:FinancialEvaluationCriteria>
+                            <ns2:EvaluationCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/FinancialCapabilityTypeCode-2.0.gc">5</ns2:EvaluationCriteriaTypeCode>
+                            <ns2:Description>Volumen anual de negocios del licitador o candidato, que referido al año de mayor volumen de negocio de los tres últimos concluidos deberá ser, al menos, la cantidad que se establezca como nivel mínimo:
+Nivel mínimo de solvencia económica: Será igual o superior al presupuesto base de licitación, IGIC excluido, de cada uno de los lotes.
+Forma de acreditación: El volumen anual de negocios del licitador o candidato se acreditará por medio de sus cuentas anuales, aprobadas y depositadas en el Registro Mercantil, si el empresario estuviera inscrito en dicho registro, y en caso contrario por las depositadas en el registro oficial en que debe estar inscrito. Los empresarios individuales no inscritos en el Registro Mercantil acreditarán su volumen anual de negocios mediante sus libros de inventarios y cuentas anuales legalizados por el Registro Mercantil.</ns2:Description>
+                        </ns4:FinancialEvaluationCriteria>
+                    </ns4:TendererQualificationRequest>
+                </ns4:TenderingTerms>
+                <ns4:ProcurementProject>
+                    <ns2:Name>1 Vehículo tipo todo terreno 4X4, para los servicios municipales del Ayuntamiento de San Bartolomé de Tirajana</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">91437.94</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">79511.25</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">34100000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">34110000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Canarias</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES70</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">3</ns2:ID>
+                <ns4:TenderingTerms>
+                    <ns4:TendererQualificationRequest>
+                        <ns4:TechnicalEvaluationCriteria>
+                            <ns2:EvaluationCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/TechnicalCapabilityTypeCode-2.0.gc">OSR-COMPTASK</ns2:EvaluationCriteriaTypeCode>
+                            <ns2:Description>En los contratos de suministros, la solvencia técnica de los empresarios deberá acreditarse mediante una relación de los principales suministros realizados de igual o similar naturaleza que los que constituyen el objeto del contrato en el curso de como máximo, los tres últimos años, en la que se indique el importe, la fecha y el destinatario, público o privado de los mismos; cuando sea necesario para garantizar un nivel adecuado de competencia, los poderes adjudicadores podrán indicar que se tendrán en cuenta las pruebas de los suministros pertinentes efectuados más de tres años antes.
+
+Los suministros efectuados se acreditarán mediante certificados expedidos o visados por el órgano competente, cuando el destinatario sea una entidad del sector público; cuando el destinatario sea un sujeto privado, mediante un certificado expedido por este o, a falta de este certificado, mediante una declaración del empresario acompañado de los documentos obrantes en poder del mismo que acrediten la realización de la prestación; en su caso estos certificados serán comunicados directamente al órgano de contratación por la autoridad competente.
+
+Para determinar que un suministro es de igual o similar naturaleza al que constituye el objeto del contrato, se atenderá a los tres primeros dígitos de los respectivos códigos de la CPV. Se exigirá como mínimo que el importe anual acumulado en el año de mayor ejecución (del período antes citado), en suministros de igual o similar naturaleza que los que constituyen el objeto del presente contrato.
+
+No obstante lo dispuesto en el párrafo anterior, podrá acudir además de al CPV, a otros sistemas de clasificación de actividades o productos como el Código normalizado de productos y servicios de las Naciones Unidas (UNSPSC), a la Clasificación central de productos (CPC) o a la Clasificación Nacional de Actividades Económicas (CNAE), que en todo caso deberá garantizar la competencia efectiva para la adjudicación del contrato. En defecto de previsión en el pliego se atenderá a los tres primeros dígitos de los respectivos códigos de la CPV. La Junta Consultiva de Contratación Pública del Estado podrá efectuar recomendaciones para indicar qué códigos de las respectivas clasificaciones se ajustan con mayor precisión a las prestaciones más habituales en la contratación pública.
+
+En todos los casos anteriores, los importes deberán ser iguales o superiores al presupuesto base de licitación, excluido IGIC, de cada uno de los lotes</ns2:Description>
+                        </ns4:TechnicalEvaluationCriteria>
+                        <ns4:FinancialEvaluationCriteria>
+                            <ns2:EvaluationCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/FinancialCapabilityTypeCode-2.0.gc">5</ns2:EvaluationCriteriaTypeCode>
+                            <ns2:Description>Volumen anual de negocios del licitador o candidato, que referido al año de mayor volumen de negocio de los tres últimos concluidos deberá ser, al menos, la cantidad que se establezca como nivel mínimo:
+Nivel mínimo de solvencia económica: Será igual o superior al presupuesto base de licitación, IGIC excluido, de cada uno de los lotes.
+Forma de acreditación: El volumen anual de negocios del licitador o candidato se acreditará por medio de sus cuentas anuales, aprobadas y depositadas en el Registro Mercantil, si el empresario estuviera inscrito en dicho registro, y en caso contrario por las depositadas en el registro oficial en que debe estar inscrito. Los empresarios individuales no inscritos en el Registro Mercantil acreditarán su volumen anual de negocios mediante sus libros de inventarios y cuentas anuales legalizados por el Registro Mercantil.</ns2:Description>
+                        </ns4:FinancialEvaluationCriteria>
+                    </ns4:TendererQualificationRequest>
+                </ns4:TenderingTerms>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Armarios guardarropa para las oficinas de la Comisaría de la Policía Local de San Bartolomé de Tirajana</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">41069.28</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">38382.5</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">39100000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Gran Canaria</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES705</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">4</ns2:ID>
+                <ns4:TenderingTerms>
+                    <ns4:TendererQualificationRequest>
+                        <ns4:TechnicalEvaluationCriteria>
+                            <ns2:EvaluationCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/TechnicalCapabilityTypeCode-2.0.gc">OSR-COMPTASK</ns2:EvaluationCriteriaTypeCode>
+                            <ns2:Description>En los contratos de suministros, la solvencia técnica de los empresarios deberá acreditarse mediante una relación de los principales suministros realizados de igual o similar naturaleza que los que constituyen el objeto del contrato en el curso de como máximo, los tres últimos años, en la que se indique el importe, la fecha y el destinatario, público o privado de los mismos; cuando sea necesario para garantizar un nivel adecuado de competencia, los poderes adjudicadores podrán indicar que se tendrán en cuenta las pruebas de los suministros pertinentes efectuados más de tres años antes.
+
+Los suministros efectuados se acreditarán mediante certificados expedidos o visados por el órgano competente, cuando el destinatario sea una entidad del sector público; cuando el destinatario sea un sujeto privado, mediante un certificado expedido por este o, a falta de este certificado, mediante una declaración del empresario acompañado de los documentos obrantes en poder del mismo que acrediten la realización de la prestación; en su caso estos certificados serán comunicados directamente al órgano de contratación por la autoridad competente.
+
+Para determinar que un suministro es de igual o similar naturaleza al que constituye el objeto del contrato, se atenderá a los tres primeros dígitos de los respectivos códigos de la CPV. Se exigirá como mínimo que el importe anual acumulado en el año de mayor ejecución (del período antes citado), en suministros de igual o similar naturaleza que los que constituyen el objeto del presente contrato.
+
+No obstante lo dispuesto en el párrafo anterior, podrá acudir además de al CPV, a otros sistemas de clasificación de actividades o productos como el Código normalizado de productos y servicios de las Naciones Unidas (UNSPSC), a la Clasificación central de productos (CPC) o a la Clasificación Nacional de Actividades Económicas (CNAE), que en todo caso deberá garantizar la competencia efectiva para la adjudicación del contrato. En defecto de previsión en el pliego se atenderá a los tres primeros dígitos de los respectivos códigos de la CPV. La Junta Consultiva de Contratación Pública del Estado podrá efectuar recomendaciones para indicar qué códigos de las respectivas clasificaciones se ajustan con mayor precisión a las prestaciones más habituales en la contratación pública.
+
+En todos los casos anteriores, los importes deberán ser iguales o superiores al presupuesto base de licitación, excluido IGIC, de cada uno de los lotes</ns2:Description>
+                        </ns4:TechnicalEvaluationCriteria>
+                        <ns4:FinancialEvaluationCriteria>
+                            <ns2:EvaluationCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/FinancialCapabilityTypeCode-2.0.gc">5</ns2:EvaluationCriteriaTypeCode>
+                            <ns2:Description>Volumen anual de negocios del licitador o candidato, que referido al año de mayor volumen de negocio de los tres últimos concluidos deberá ser, al menos, la cantidad que se establezca como nivel mínimo:
+Nivel mínimo de solvencia económica: Será igual o superior al presupuesto base de licitación, IGIC excluido, de cada uno de los lotes.
+Forma de acreditación: El volumen anual de negocios del licitador o candidato se acreditará por medio de sus cuentas anuales, aprobadas y depositadas en el Registro Mercantil, si el empresario estuviera inscrito en dicho registro, y en caso contrario por las depositadas en el registro oficial en que debe estar inscrito. Los empresarios individuales no inscritos en el Registro Mercantil acreditarán su volumen anual de negocios mediante sus libros de inventarios y cuentas anuales legalizados por el Registro Mercantil.</ns2:Description>
+                        </ns4:FinancialEvaluationCriteria>
+                    </ns4:TendererQualificationRequest>
+                </ns4:TenderingTerms>
+                <ns4:ProcurementProject>
+                    <ns2:Name>1 Vehículo Turismo tipo SUV, para los servicios de la Policía Municipal del Ayuntamiento de Santa Brígida</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">67410</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">63000</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">34100000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">34114200</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Gran Canaria</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES705</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">5</ns2:ID>
+                <ns4:TenderingTerms>
+                    <ns4:TendererQualificationRequest>
+                        <ns4:TechnicalEvaluationCriteria>
+                            <ns2:EvaluationCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/TechnicalCapabilityTypeCode-2.0.gc">OSR-COMPTASK</ns2:EvaluationCriteriaTypeCode>
+                            <ns2:Description>En los contratos de suministros, la solvencia técnica de los empresarios deberá acreditarse mediante una relación de los principales suministros realizados de igual o similar naturaleza que los que constituyen el objeto del contrato en el curso de como máximo, los tres últimos años, en la que se indique el importe, la fecha y el destinatario, público o privado de los mismos; cuando sea necesario para garantizar un nivel adecuado de competencia, los poderes adjudicadores podrán indicar que se tendrán en cuenta las pruebas de los suministros pertinentes efectuados más de tres años antes.
+
+Los suministros efectuados se acreditarán mediante certificados expedidos o visados por el órgano competente, cuando el destinatario sea una entidad del sector público; cuando el destinatario sea un sujeto privado, mediante un certificado expedido por este o, a falta de este certificado, mediante una declaración del empresario acompañado de los documentos obrantes en poder del mismo que acrediten la realización de la prestación; en su caso estos certificados serán comunicados directamente al órgano de contratación por la autoridad competente.
+
+Para determinar que un suministro es de igual o similar naturaleza al que constituye el objeto del contrato, se atenderá a los tres primeros dígitos de los respectivos códigos de la CPV. Se exigirá como mínimo que el importe anual acumulado en el año de mayor ejecución (del período antes citado), en suministros de igual o similar naturaleza que los que constituyen el objeto del presente contrato.
+
+No obstante lo dispuesto en el párrafo anterior, podrá acudir además de al CPV, a otros sistemas de clasificación de actividades o productos como el Código normalizado de productos y servicios de las Naciones Unidas (UNSPSC), a la Clasificación central de productos (CPC) o a la Clasificación Nacional de Actividades Económicas (CNAE), que en todo caso deberá garantizar la competencia efectiva para la adjudicación del contrato. En defecto de previsión en el pliego se atenderá a los tres primeros dígitos de los respectivos códigos de la CPV. La Junta Consultiva de Contratación Pública del Estado podrá efectuar recomendaciones para indicar qué códigos de las respectivas clasificaciones se ajustan con mayor precisión a las prestaciones más habituales en la contratación pública.
+
+En todos los casos anteriores, los importes deberán ser iguales o superiores al presupuesto base de licitación, excluido IGIC, de cada uno de los lotes</ns2:Description>
+                        </ns4:TechnicalEvaluationCriteria>
+                        <ns4:FinancialEvaluationCriteria>
+                            <ns2:EvaluationCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/FinancialCapabilityTypeCode-2.0.gc">5</ns2:EvaluationCriteriaTypeCode>
+                            <ns2:Description>Volumen anual de negocios del licitador o candidato, que referido al año de mayor volumen de negocio de los tres últimos concluidos deberá ser, al menos, la cantidad que se establezca como nivel mínimo:
+Nivel mínimo de solvencia económica: Será igual o superior al presupuesto base de licitación, IGIC excluido, de cada uno de los lotes.
+Forma de acreditación: El volumen anual de negocios del licitador o candidato se acreditará por medio de sus cuentas anuales, aprobadas y depositadas en el Registro Mercantil, si el empresario estuviera inscrito en dicho registro, y en caso contrario por las depositadas en el registro oficial en que debe estar inscrito. Los empresarios individuales no inscritos en el Registro Mercantil acreditarán su volumen anual de negocios mediante sus libros de inventarios y cuentas anuales legalizados por el Registro Mercantil.</ns2:Description>
+                        </ns4:FinancialEvaluationCriteria>
+                    </ns4:TendererQualificationRequest>
+                </ns4:TenderingTerms>
+                <ns4:ProcurementProject>
+                    <ns2:Name>1 Vehículo tipo pickup con equipación policial, para los servicios municipales del Ayuntamiento de Valsequillo de GC</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">67410</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">63000</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">34100000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">34114200</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Gran Canaria</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES705</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">6</ns2:ID>
+                <ns4:TenderingTerms>
+                    <ns4:TendererQualificationRequest>
+                        <ns4:TechnicalEvaluationCriteria>
+                            <ns2:EvaluationCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/TechnicalCapabilityTypeCode-2.0.gc">OSR-COMPTASK</ns2:EvaluationCriteriaTypeCode>
+                            <ns2:Description>En los contratos de suministros, la solvencia técnica de los empresarios deberá acreditarse mediante una relación de los principales suministros realizados de igual o similar naturaleza que los que constituyen el objeto del contrato en el curso de como máximo, los tres últimos años, en la que se indique el importe, la fecha y el destinatario, público o privado de los mismos; cuando sea necesario para garantizar un nivel adecuado de competencia, los poderes adjudicadores podrán indicar que se tendrán en cuenta las pruebas de los suministros pertinentes efectuados más de tres años antes.
+
+Los suministros efectuados se acreditarán mediante certificados expedidos o visados por el órgano competente, cuando el destinatario sea una entidad del sector público; cuando el destinatario sea un sujeto privado, mediante un certificado expedido por este o, a falta de este certificado, mediante una declaración del empresario acompañado de los documentos obrantes en poder del mismo que acrediten la realización de la prestación; en su caso estos certificados serán comunicados directamente al órgano de contratación por la autoridad competente.
+
+Para determinar que un suministro es de igual o similar naturaleza al que constituye el objeto del contrato, se atenderá a los tres primeros dígitos de los respectivos códigos de la CPV. Se exigirá como mínimo que el importe anual acumulado en el año de mayor ejecución (del período antes citado), en suministros de igual o similar naturaleza que los que constituyen el objeto del presente contrato.
+
+No obstante lo dispuesto en el párrafo anterior, podrá acudir además de al CPV, a otros sistemas de clasificación de actividades o productos como el Código normalizado de productos y servicios de las Naciones Unidas (UNSPSC), a la Clasificación central de productos (CPC) o a la Clasificación Nacional de Actividades Económicas (CNAE), que en todo caso deberá garantizar la competencia efectiva para la adjudicación del contrato. En defecto de previsión en el pliego se atenderá a los tres primeros dígitos de los respectivos códigos de la CPV. La Junta Consultiva de Contratación Pública del Estado podrá efectuar recomendaciones para indicar qué códigos de las respectivas clasificaciones se ajustan con mayor precisión a las prestaciones más habituales en la contratación pública.
+
+En todos los casos anteriores, los importes deberán ser iguales o superiores al presupuesto base de licitación, excluido IGIC, de cada uno de los lotes</ns2:Description>
+                        </ns4:TechnicalEvaluationCriteria>
+                        <ns4:FinancialEvaluationCriteria>
+                            <ns2:EvaluationCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/FinancialCapabilityTypeCode-2.0.gc">5</ns2:EvaluationCriteriaTypeCode>
+                            <ns2:Description>Volumen anual de negocios del licitador o candidato, que referido al año de mayor volumen de negocio de los tres últimos concluidos deberá ser, al menos, la cantidad que se establezca como nivel mínimo:
+Nivel mínimo de solvencia económica: Será igual o superior al presupuesto base de licitación, IGIC excluido, de cada uno de los lotes.
+Forma de acreditación: El volumen anual de negocios del licitador o candidato se acreditará por medio de sus cuentas anuales, aprobadas y depositadas en el Registro Mercantil, si el empresario estuviera inscrito en dicho registro, y en caso contrario por las depositadas en el registro oficial en que debe estar inscrito. Los empresarios individuales no inscritos en el Registro Mercantil acreditarán su volumen anual de negocios mediante sus libros de inventarios y cuentas anuales legalizados por el Registro Mercantil.</ns2:Description>
+                        </ns4:FinancialEvaluationCriteria>
+                    </ns4:TendererQualificationRequest>
+                </ns4:TenderingTerms>
+                <ns4:ProcurementProject>
+                    <ns2:Name>2 Vehículos tipo pickup 4x4 equipada con pluma y cesta, para el Área de Servicios Básicos de los Ayuntamientos de Vega de San Mateo y Tejeda</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">134820</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">126000</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">34142000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">34142100</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Gran Canaria</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES705</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">3</ns2:ResultCode>
+                <ns2:AwardDate>2025-01-30</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>0</ns2:ReceivedTenderQuantity>
+                <ns2:LowerTenderAmount currencyID="EUR">0</ns2:LowerTenderAmount>
+                <ns2:HigherTenderAmount currencyID="EUR">0</ns2:HigherTenderAmount>
+                <ns2:SMEsReceivedTenderQuantity>0</ns2:SMEsReceivedTenderQuantity>
+                <ns2:AbnormallyLowTendersIndicator>false</ns2:AbnormallyLowTendersIndicator>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>1</ns2:ProcurementProjectLotID>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">3</ns2:ResultCode>
+                <ns2:Description>No se recibieron Ofertas</ns2:Description>
+                <ns2:AwardDate>2025-01-30</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>0</ns2:ReceivedTenderQuantity>
+                <ns2:SMEsReceivedTenderQuantity>0</ns2:SMEsReceivedTenderQuantity>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>2</ns2:ProcurementProjectLotID>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Por ser la única oferta presentada</ns2:Description>
+                <ns2:AwardDate>2025-01-30</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns2:AwardedOwnerNationalityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:AwardedOwnerNationalityCode>
+                <ns2:AbnormallyLowTendersIndicator>false</ns2:AbnormallyLowTendersIndicator>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">B76768555</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>SUMINISTROS Y OBRAS ISRAEL S.L.U.</ns2:Name>
+                    </ns4:PartyName>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>3</ns2:ProcurementProjectLotID>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">38000</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">40660</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">3</ns2:ResultCode>
+                <ns2:Description>No se recibieron Ofertas</ns2:Description>
+                <ns2:AwardDate>2025-01-30</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>0</ns2:ReceivedTenderQuantity>
+                <ns2:SMEsReceivedTenderQuantity>0</ns2:SMEsReceivedTenderQuantity>
+                <ns2:AbnormallyLowTendersIndicator>false</ns2:AbnormallyLowTendersIndicator>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>4</ns2:ProcurementProjectLotID>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">3</ns2:ResultCode>
+                <ns2:Description>No se recibieron Ofertas</ns2:Description>
+                <ns2:AwardDate>2025-01-30</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>0</ns2:ReceivedTenderQuantity>
+                <ns2:SMEsReceivedTenderQuantity>0</ns2:SMEsReceivedTenderQuantity>
+                <ns2:AbnormallyLowTendersIndicator>false</ns2:AbnormallyLowTendersIndicator>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>5</ns2:ProcurementProjectLotID>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">3</ns2:ResultCode>
+                <ns2:Description>No se recibieron Ofertas</ns2:Description>
+                <ns2:AwardDate>2025-01-30</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>0</ns2:ReceivedTenderQuantity>
+                <ns2:SMEsReceivedTenderQuantity>0</ns2:SMEsReceivedTenderQuantity>
+                <ns2:AbnormallyLowTendersIndicator>false</ns2:AbnormallyLowTendersIndicator>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>6</ns2:ProcurementProjectLotID>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderingTerms>
+                <ns2:RequiredCurriculaIndicator>false</ns2:RequiredCurriculaIndicator>
+                <ns2:VariantConstraintIndicator>false</ns2:VariantConstraintIndicator>
+                <ns2:PriceRevisionFormulaDescription>NO</ns2:PriceRevisionFormulaDescription>
+                <ns2:FundingProgramCode listURI="http://contrataciondelestado.es/codice/cl/2.08/FundingProgramCode-2.08.gc" name="No hay financiación con fondos de la UE">NO-EU</ns2:FundingProgramCode>
+                <ns2:ProcurementNationalLegislationCode listURI="https://contrataciondelestado.es/codice/cl/2.08/ProcurementNationalLegislationCode-2.08.gc">3</ns2:ProcurementNationalLegislationCode>
+                <ns4:RequiredFinancialGuarantee>
+                    <ns2:GuaranteeTypeCode listURI="http://contrataciondelestado.es/codice/cl/1.04/GuaranteeTypeCode-1.04.gc">2</ns2:GuaranteeTypeCode>
+                    <ns2:AmountRate>5</ns2:AmountRate>
+                </ns4:RequiredFinancialGuarantee>
+                <ns4:ProcurementLegislationDocumentReference>
+                    <ns2:ID>2014/24/EU</ns2:ID>
+                </ns4:ProcurementLegislationDocumentReference>
+                <ns4:TendererQualificationRequest>
+                    <ns4:SpecificTendererRequirement>
+                        <ns2:RequirementTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/DeclarationTypeCode-2.08.gc">1</ns2:RequirementTypeCode>
+                        <ns2:Description>Capacidad de obrar</ns2:Description>
+                    </ns4:SpecificTendererRequirement>
+                    <ns4:SpecificTendererRequirement>
+                        <ns2:RequirementTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/DeclarationTypeCode-2.08.gc">2</ns2:RequirementTypeCode>
+                        <ns2:Description>No prohibición para contratar</ns2:Description>
+                    </ns4:SpecificTendererRequirement>
+                </ns4:TendererQualificationRequest>
+                <ns4:ContractExecutionRequirement>
+                    <ns2:Name>Consideraciones de tipo medioambiental</ns2:Name>
+                    <ns2:ExecutionRequirementCode listURI="https://contrataciondelestado.es/codice/cl/2.08/ExecutionRequirementCode-2.08.gc">1</ns2:ExecutionRequirementCode>
+                    <ns2:Description>En la ejecución del contrato la adjudicataria habrá de cumplir la condición siguiente: el mantenimiento o mejora de los valores medioambientales que puedan verse afectados por la ejecución del contrato</ns2:Description>
+                </ns4:ContractExecutionRequirement>
+                <ns4:AwardingTerms>
+                    <ns4:AwardingCriteria>
+                        <ns2:AwardingCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/AwardingCriteriaCode-2.0.gc">OBJ</ns2:AwardingCriteriaTypeCode>
+                        <ns2:Description>Reducción del plazo de entrega,</ns2:Description>
+                        <ns2:Note>Se otorgará un (1) punto por cada semana de reducción sobre el plazo máximo de entrega fijado en el Pliego, hasta un máximo de 5 puntos. </ns2:Note>
+                        <ns2:AwardingCriteriaSubTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.09/AwardingCriteriaAutomaticallyEvaluatedSubTypeCode-2.09.gc">2</ns2:AwardingCriteriaSubTypeCode>
+                        <ns2:WeightNumeric>5</ns2:WeightNumeric>
+                    </ns4:AwardingCriteria>
+                    <ns4:AwardingCriteria>
+                        <ns2:AwardingCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/AwardingCriteriaCode-2.0.gc">OBJ</ns2:AwardingCriteriaTypeCode>
+                        <ns2:Description>Proposición económica</ns2:Description>
+                        <ns2:Note>Se asignarán 70 puntos a la oferta económica más baja de entre las presentadas, conforme a la siguiente fórmula: 
+
+R = Pmax x (%Bof / %Bmax)
+
+Siendo:
+- R = Resultado en puntos 
+- Pmax = Puntuación máxima a otorgar 
+- %Bof = Baja ofertada por cada licitador expresada en porcentaje 
+- %Bmax = Baja máxima expresada en porcentaje </ns2:Note>
+                        <ns2:AwardingCriteriaSubTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.09/AwardingCriteriaAutomaticallyEvaluatedSubTypeCode-2.09.gc">1</ns2:AwardingCriteriaSubTypeCode>
+                        <ns2:WeightNumeric>70</ns2:WeightNumeric>
+                    </ns4:AwardingCriteria>
+                    <ns4:AwardingCriteria>
+                        <ns2:AwardingCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/AwardingCriteriaCode-2.0.gc">OBJ</ns2:AwardingCriteriaTypeCode>
+                        <ns2:Description>Menor plazo de Atención al Servicio postventa</ns2:Description>
+                        <ns2:Note>Se otorgará un (1) punto por cada día de reducción sobre el plazo en el servicio postventa, hasta un máximo de 5 puntos.</ns2:Note>
+                        <ns2:AwardingCriteriaSubTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.09/AwardingCriteriaAutomaticallyEvaluatedSubTypeCode-2.09.gc">2</ns2:AwardingCriteriaSubTypeCode>
+                        <ns2:WeightNumeric>5</ns2:WeightNumeric>
+                    </ns4:AwardingCriteria>
+                    <ns4:AwardingCriteria>
+                        <ns2:AwardingCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/AwardingCriteriaCode-2.0.gc">OBJ</ns2:AwardingCriteriaTypeCode>
+                        <ns2:Description>Ampliación del Plazo de garantía</ns2:Description>
+                        <ns2:Note>Se otorgarán dos (2) puntos por cada año extraordinario que amplíe el plazo de garantía previsto en el Pliego o que otorgue el fabricante si este es mayor, hasta un máximo de 20 puntos.</ns2:Note>
+                        <ns2:AwardingCriteriaSubTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.09/AwardingCriteriaAutomaticallyEvaluatedSubTypeCode-2.09.gc">2</ns2:AwardingCriteriaSubTypeCode>
+                        <ns2:WeightNumeric>20</ns2:WeightNumeric>
+                    </ns4:AwardingCriteria>
+                </ns4:AwardingTerms>
+                <ns4:TenderRecipientParty>
+                    <ns2:EndpointID>https://contrataciondelestado.es</ns2:EndpointID>
+                </ns4:TenderRecipientParty>
+                <ns4:Language>
+                    <ns2:ID>es</ns2:ID>
+                </ns4:Language>
+            </ns4:TenderingTerms>
+            <ns4:TenderingProcess>
+                <ns2:ProcedureCode listURI="https://contrataciondelestado.es/codice/cl/2.07/SyndicationTenderingProcessCode-2.07.gc">1</ns2:ProcedureCode>
+                <ns2:UrgencyCode listURI="http://contrataciondelestado.es/codice/cl/1.04/DiligenceTypeCode-1.04.gc">1</ns2:UrgencyCode>
+                <ns2:PartPresentationCode listURI="http://contrataciondelestado.es/codice/cl/1.04/TenderPresentationCode-1.04.gc" name="A uno o varios lotes">3</ns2:PartPresentationCode>
+                <ns2:ContractingSystemCode listURI="http://contrataciondelestado.es/codice/cl/2.08/ContractingSystemTypeCode-2.08.gc">0</ns2:ContractingSystemCode>
+                <ns2:SubmissionMethodCode listURI="http://contrataciondelestado.es/codice/cl/1.04/TenderDeliveryCode-1.04.gc">1</ns2:SubmissionMethodCode>
+                <ns2:MaximumLotPresentationQuantity>6</ns2:MaximumLotPresentationQuantity>
+                <ns2:MaximumTendererAwardedLotsQuantity>6</ns2:MaximumTendererAwardedLotsQuantity>
+                <ns2:OverThresholdIndicator>true</ns2:OverThresholdIndicator>
+                <ns4:DocumentAvailabilityPeriod>
+                    <ns2:EndDate>2024-12-23</ns2:EndDate>
+                    <ns2:EndTime>12:00:00</ns2:EndTime>
+                </ns4:DocumentAvailabilityPeriod>
+                <ns4:TenderSubmissionDeadlinePeriod>
+                    <ns2:EndDate>2024-12-23</ns2:EndDate>
+                    <ns2:EndTime>12:00:00</ns2:EndTime>
+                    <ns2:Description>Plazo Final Presentación Ofertas Hora Peninsular</ns2:Description>
+                </ns4:TenderSubmissionDeadlinePeriod>
+                <ns4:AuctionTerms>
+                    <ns2:AuctionConstraintIndicator>false</ns2:AuctionConstraintIndicator>
+                </ns4:AuctionTerms>
+            </ns4:TenderingProcess>
+            <ns4:LegalDocumentReference>
+                <ns2:ID>05 PCAP Suministro Vehiculos An 2024.pdf</ns2:ID>
+                <ns4:Attachment>
+                    <ns4:ExternalReference>
+                        <ns2:URI>https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=NIWpFRFlBTcEoJeH/BOINg8aPecNUmQtVHOrO%2BhdmBxvnD59tEGe5/S3S%2BDDQO%2B9Fa5zpBXEhIX4J2QSeyXM5pBZIOnaCdRNODE3mwy0aE145ClyWkoJ44mKM70IFcOu&amp;cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D</ns2:URI>
+                        <ns2:DocumentHash>2jmj7l5rSw0yVb/vlWAYkK/YBwk=</ns2:DocumentHash>
+                    </ns4:ExternalReference>
+                </ns4:Attachment>
+            </ns4:LegalDocumentReference>
+            <ns4:TechnicalDocumentReference>
+                <ns2:ID>06 PPT Suministro Vehiculos An 2024.pdf</ns2:ID>
+                <ns4:Attachment>
+                    <ns4:ExternalReference>
+                        <ns2:URI>https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=lg7GaUN6ycclZXJ1PYVFwpm6CcwD3rsFUxlKToaBNN6vwogEr9XBgzVMhC%2B15qxe7D5vjfnm5H1P2IQErUVtU0ZcQ1RUIPMWkFqNjo6gE9SCx2e6p7hqtlp2aFupgHMr&amp;cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D</ns2:URI>
+                        <ns2:DocumentHash>2jmj7l5rSw0yVb/vlWAYkK/YBwk=</ns2:DocumentHash>
+                    </ns4:ExternalReference>
+                </ns4:Attachment>
+            </ns4:TechnicalDocumentReference>
+            <ns1:ValidNoticeInfo>
+                <ns3:NoticeTypeCode listURI="https://contrataciondelestado.es/codice/cl/2.11/TenderingNoticeTypeCode-2.11.gc">DOC_CN</ns3:NoticeTypeCode>
+                <ns1:AdditionalPublicationStatus>
+                    <ns3:PublicationMediaName>DOUE</ns3:PublicationMediaName>
+                    <ns1:AdditionalPublicationDocumentReference>
+                        <ns2:IssueDate>2024-11-18</ns2:IssueDate>
+                    </ns1:AdditionalPublicationDocumentReference>
+                    <ns1:AdditionalPublicationRequest>
+                        <ns2:AgencyID>DOUE</ns2:AgencyID>
+                        <ns3:SendDate>2024-11-15+01:00</ns3:SendDate>
+                        <ns3:SendTime>10:33:25</ns3:SendTime>
+                    </ns1:AdditionalPublicationRequest>
+                </ns1:AdditionalPublicationStatus>
+            </ns1:ValidNoticeInfo>
+            <ns1:ValidNoticeInfo>
+                <ns3:NoticeTypeCode listURI="https://contrataciondelestado.es/codice/cl/2.11/TenderingNoticeTypeCode-2.11.gc">DOC_PIN</ns3:NoticeTypeCode>
+                <ns1:AdditionalPublicationStatus>
+                    <ns3:PublicationMediaName>DOUE</ns3:PublicationMediaName>
+                    <ns1:AdditionalPublicationDocumentReference>
+                        <ns2:IssueDate>2024-11-15</ns2:IssueDate>
+                    </ns1:AdditionalPublicationDocumentReference>
+                    <ns1:AdditionalPublicationRequest>
+                        <ns2:AgencyID>DOUE</ns2:AgencyID>
+                        <ns3:SendDate>2024-11-13+01:00</ns3:SendDate>
+                        <ns3:SendTime>15:45:01</ns3:SendTime>
+                    </ns1:AdditionalPublicationRequest>
+                </ns1:AdditionalPublicationStatus>
+            </ns1:ValidNoticeInfo>
+            <ns1:ValidNoticeInfo>
+                <ns3:NoticeTypeCode listURI="https://contrataciondelestado.es/codice/cl/2.11/TenderingNoticeTypeCode-2.11.gc">DOC_PIN_RTL</ns3:NoticeTypeCode>
+                <ns1:AdditionalPublicationStatus>
+                    <ns3:PublicationMediaName>DOUE</ns3:PublicationMediaName>
+                    <ns1:AdditionalPublicationDocumentReference>
+                        <ns2:IssueDate>2024-11-15</ns2:IssueDate>
+                    </ns1:AdditionalPublicationDocumentReference>
+                    <ns1:AdditionalPublicationRequest>
+                        <ns2:AgencyID>DOUE</ns2:AgencyID>
+                        <ns3:SendDate>2024-11-13+01:00</ns3:SendDate>
+                        <ns3:SendTime>16:02:19</ns3:SendTime>
+                    </ns1:AdditionalPublicationRequest>
+                </ns1:AdditionalPublicationStatus>
+            </ns1:ValidNoticeInfo>
+            <ns1:ValidNoticeInfo>
+                <ns3:NoticeTypeCode listURI="https://contrataciondelestado.es/codice/cl/2.11/TenderingNoticeTypeCode-2.11.gc">DOC_CAN_ADJ</ns3:NoticeTypeCode>
+                <ns1:AdditionalPublicationStatus>
+                    <ns3:PublicationMediaName>Perfil del contratante</ns3:PublicationMediaName>
+                    <ns1:AdditionalPublicationDocumentReference>
+                        <ns2:IssueDate>2025-02-07</ns2:IssueDate>
+                    </ns1:AdditionalPublicationDocumentReference>
+                    <ns1:AdditionalPublicationDocumentReference>
+                        <ns2:DocumentTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderingDocumentTypeCode-2.09.gc" name="Documento de Acta de Adjudicación">ACTA_ADJ</ns2:DocumentTypeCode>
+                        <ns4:Attachment>
+                            <ns4:ExternalReference>
+<ns2:URI>https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=goSccHsLMdDRYR1UTt2ncaJzjDDTk7ASweX0gfwEN3x1f4YPZId1S08KupL7txDx1%2BhjQNdbdhWp8zQyT46/xQEvr8vb7Jphcs5rH3RmSOPVTD3T98KC0nSgQFM0q%2B5s&amp;cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D</ns2:URI>
+<ns2:FileName>DECRETO 2025 0008 Resolucion de Presidencia de Adjudicacion Lote 3 y Dec Desiertos.pdf</ns2:FileName>
+                            </ns4:ExternalReference>
+                        </ns4:Attachment>
+                    </ns1:AdditionalPublicationDocumentReference>
+                </ns1:AdditionalPublicationStatus>
+            </ns1:ValidNoticeInfo>
+            <ns1:ValidNoticeInfo>
+                <ns3:NoticeTypeCode listURI="https://contrataciondelestado.es/codice/cl/2.11/TenderingNoticeTypeCode-2.11.gc">DOC_CD</ns3:NoticeTypeCode>
+                <ns1:AdditionalPublicationStatus>
+                    <ns3:PublicationMediaName>Perfil del contratante</ns3:PublicationMediaName>
+                    <ns1:AdditionalPublicationDocumentReference>
+                        <ns2:IssueDate>2024-11-18</ns2:IssueDate>
+                    </ns1:AdditionalPublicationDocumentReference>
+                </ns1:AdditionalPublicationStatus>
+            </ns1:ValidNoticeInfo>
+            <ns1:ValidNoticeInfo>
+                <ns3:NoticeTypeCode listURI="https://contrataciondelestado.es/codice/cl/2.11/TenderingNoticeTypeCode-2.11.gc">DOC_CN</ns3:NoticeTypeCode>
+                <ns1:AdditionalPublicationStatus>
+                    <ns3:PublicationMediaName>Perfil del contratante</ns3:PublicationMediaName>
+                    <ns1:AdditionalPublicationDocumentReference>
+                        <ns2:IssueDate>2024-11-17</ns2:IssueDate>
+                    </ns1:AdditionalPublicationDocumentReference>
+                </ns1:AdditionalPublicationStatus>
+            </ns1:ValidNoticeInfo>
+            <ns1:ValidNoticeInfo>
+                <ns3:NoticeTypeCode listURI="https://contrataciondelestado.es/codice/cl/2.11/TenderingNoticeTypeCode-2.11.gc">DOC_PIN</ns3:NoticeTypeCode>
+                <ns1:AdditionalPublicationStatus>
+                    <ns3:PublicationMediaName>Perfil del contratante</ns3:PublicationMediaName>
+                    <ns1:AdditionalPublicationDocumentReference>
+                        <ns2:IssueDate>2024-11-13</ns2:IssueDate>
+                    </ns1:AdditionalPublicationDocumentReference>
+                </ns1:AdditionalPublicationStatus>
+            </ns1:ValidNoticeInfo>
+            <ns1:ValidNoticeInfo>
+                <ns3:NoticeTypeCode listURI="https://contrataciondelestado.es/codice/cl/2.11/TenderingNoticeTypeCode-2.11.gc">DOC_PIN_RTL</ns3:NoticeTypeCode>
+                <ns1:AdditionalPublicationStatus>
+                    <ns3:PublicationMediaName>Perfil del contratante</ns3:PublicationMediaName>
+                    <ns1:AdditionalPublicationDocumentReference>
+                        <ns2:IssueDate>2024-11-15</ns2:IssueDate>
+                    </ns1:AdditionalPublicationDocumentReference>
+                </ns1:AdditionalPublicationStatus>
+            </ns1:ValidNoticeInfo>
+            <ns1:GeneralDocument>
+                <ns1:GeneralDocumentDocumentReference>
+                    <ns2:ID>2025-4edc2ad8-d727-4790-a92a-bd2ad9b409e8</ns2:ID>
+                    <ns2:DocumentTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/GeneralContractDocuments-2.08.gc">12</ns2:DocumentTypeCode>
+                    <ns4:Attachment>
+                        <ns4:ExternalReference>
+                            <ns2:URI>https://contrataciondelestado.es/wps/wcm/connect/PLACE_es/Site/area/docAccCmpnt?srv=cmpnt&amp;cmpntname=GetDocumentsById&amp;source=library&amp;DocumentIdParam=2025-4edc2ad8-d727-4790-a92a-bd2ad9b409e8</ns2:URI>
+                            <ns2:FileName>Acta del órgano de asistencia</ns2:FileName>
+                        </ns4:ExternalReference>
+                    </ns4:Attachment>
+                </ns1:GeneralDocumentDocumentReference>
+            </ns1:GeneralDocument>
+            <ns1:GeneralDocument>
+                <ns1:GeneralDocumentDocumentReference>
+                    <ns2:ID>2025-8f7573c5-4ccd-4d41-903d-ee95c8a78169</ns2:ID>
+                    <ns2:DocumentTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/GeneralContractDocuments-2.08.gc">ZZZ</ns2:DocumentTypeCode>
+                    <ns4:Attachment>
+                        <ns4:ExternalReference>
+                            <ns2:URI>https://contrataciondelestado.es/wps/wcm/connect/PLACE_es/Site/area/docAccCmpnt?srv=cmpnt&amp;cmpntname=GetDocumentsById&amp;source=library&amp;DocumentIdParam=2025-8f7573c5-4ccd-4d41-903d-ee95c8a78169</ns2:URI>
+                            <ns2:FileName>Informe Técnico sobre Ofertas Presentadas</ns2:FileName>
+                        </ns4:ExternalReference>
+                    </ns4:Attachment>
+                </ns1:GeneralDocumentDocumentReference>
+            </ns1:GeneralDocument>
+            <ns1:GeneralDocument>
+                <ns1:GeneralDocumentDocumentReference>
+                    <ns2:ID>2025-2a93cc4a-fa4c-41b7-a4e7-e30aedd2cdae</ns2:ID>
+                    <ns2:DocumentTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/GeneralContractDocuments-2.08.gc">ZZZ</ns2:DocumentTypeCode>
+                    <ns4:Attachment>
+                        <ns4:ExternalReference>
+                            <ns2:URI>https://contrataciondelestado.es/wps/wcm/connect/PLACE_es/Site/area/docAccCmpnt?srv=cmpnt&amp;cmpntname=GetDocumentsById&amp;source=library&amp;DocumentIdParam=2025-2a93cc4a-fa4c-41b7-a4e7-e30aedd2cdae</ns2:URI>
+                            <ns2:FileName>Informe de Valoración de Ofertas y Otros</ns2:FileName>
+                        </ns4:ExternalReference>
+                    </ns4:Attachment>
+                </ns1:GeneralDocumentDocumentReference>
+            </ns1:GeneralDocument>
+            <ns1:GeneralDocument>
+                <ns1:GeneralDocumentDocumentReference>
+                    <ns2:ID>2024-d972f64f-ff8a-48b9-af18-449b836e264e</ns2:ID>
+                    <ns2:DocumentTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/GeneralContractDocuments-2.08.gc">9</ns2:DocumentTypeCode>
+                    <ns4:Attachment>
+                        <ns4:ExternalReference>
+                            <ns2:URI>https://contrataciondelestado.es/wps/wcm/connect/PLACE_es/Site/area/docAccCmpnt?srv=cmpnt&amp;cmpntname=GetDocumentsById&amp;source=library&amp;DocumentIdParam=2024-d972f64f-ff8a-48b9-af18-449b836e264e</ns2:URI>
+                            <ns2:FileName>Memoria justificativa</ns2:FileName>
+                        </ns4:ExternalReference>
+                    </ns4:Attachment>
+                </ns1:GeneralDocumentDocumentReference>
+            </ns1:GeneralDocument>
+            <ns1:GeneralDocument>
+                <ns1:GeneralDocumentDocumentReference>
+                    <ns2:ID>2024-7e411a9f-bfa7-4235-8b01-4dbea6ae81bd</ns2:ID>
+                    <ns2:DocumentTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/GeneralContractDocuments-2.08.gc">11</ns2:DocumentTypeCode>
+                    <ns4:Attachment>
+                        <ns4:ExternalReference>
+                            <ns2:URI>https://contrataciondelestado.es/wps/wcm/connect/PLACE_es/Site/area/docAccCmpnt?srv=cmpnt&amp;cmpntname=GetDocumentsById&amp;source=library&amp;DocumentIdParam=2024-7e411a9f-bfa7-4235-8b01-4dbea6ae81bd</ns2:URI>
+                            <ns2:FileName>Documento de aprobación del expediente</ns2:FileName>
+                        </ns4:ExternalReference>
+                    </ns4:Attachment>
+                </ns1:GeneralDocumentDocumentReference>
+            </ns1:GeneralDocument>
+            <ns1:GeneralDocument>
+                <ns1:GeneralDocumentDocumentReference>
+                    <ns2:ID>2024-394aadda-e048-496e-b970-4ceff3a185f7</ns2:ID>
+                    <ns2:DocumentTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/GeneralContractDocuments-2.08.gc">8</ns2:DocumentTypeCode>
+                    <ns4:Attachment>
+                        <ns4:ExternalReference>
+                            <ns2:URI>https://contrataciondelestado.es/wps/wcm/connect/PLACE_es/Site/area/docAccCmpnt?srv=cmpnt&amp;cmpntname=GetDocumentsById&amp;source=library&amp;DocumentIdParam=2024-394aadda-e048-496e-b970-4ceff3a185f7</ns2:URI>
+                            <ns2:FileName>Acuerdo de iniciación del expediente</ns2:FileName>
+                        </ns4:ExternalReference>
+                    </ns4:Attachment>
+                </ns1:GeneralDocumentDocumentReference>
+            </ns1:GeneralDocument>
+            <ns1:GeneralDocument>
+                <ns1:GeneralDocumentDocumentReference>
+                    <ns2:ID>2024-f77a3143-4b63-47a6-b595-78e4e265479e</ns2:ID>
+                    <ns2:DocumentTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/GeneralContractDocuments-2.08.gc">ZZZ</ns2:DocumentTypeCode>
+                    <ns4:Attachment>
+                        <ns4:ExternalReference>
+                            <ns2:URI>https://contrataciondelestado.es/wps/wcm/connect/PLACE_es/Site/area/docAccCmpnt?srv=cmpnt&amp;cmpntname=GetDocumentsById&amp;source=library&amp;DocumentIdParam=2024-f77a3143-4b63-47a6-b595-78e4e265479e</ns2:URI>
+                            <ns2:FileName>Aclaración Naturaleza del Contrato</ns2:FileName>
+                        </ns4:ExternalReference>
+                    </ns4:Attachment>
+                </ns1:GeneralDocumentDocumentReference>
+            </ns1:GeneralDocument>
+        </ns1:ContractFolderStatus>
+    </ns0:entry>
+    

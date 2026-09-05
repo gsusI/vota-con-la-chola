@@ -3,7 +3,7 @@ import LaunchExplorer from './launch-explorer';
 
 export const metadata = {
   title: '¿A quién se adjudicó? | Vota Con La Chola',
-  description: 'Explora 120 resultados de adjudicación PLACSP, abre su fuente y reproduce tres consultas con datos descargables.',
+  description: 'Explora la cohorte completa de resultados de adjudicación PLACSP de enero de 2025, abre su fuente y reproduce tres consultas con datos descargables.',
 };
 
 export default function SpendingPage() {
@@ -15,5 +15,5 @@ export default function SpendingPage() {
   if (!rows || rows.length !== release.rows || rows.reduce((sum, row) => sum + row.amount_cents, 0) !== release.amount_cents) {
     throw new Error('PLACSP launch row/amount mismatch');
   }
-  return <LaunchExplorer rows={rows} audit={audit} release={release} />;
+  return <LaunchExplorer audit={audit} release={release} />;
 }

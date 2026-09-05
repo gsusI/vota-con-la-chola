@@ -14,6 +14,9 @@ from decimal import Decimal
 from pathlib import Path, PurePosixPath
 
 QUERIES = ('by-supplier', 'by-month', 'records')
+MAX_DOWNLOAD_BYTES = 100_000_000
+MAX_UNPACKED_BYTES = 500_000_000
+MAX_ARCHIVE_FILES = 20_000
 
 def sha(data):
     return hashlib.sha256(data).hexdigest()
@@ -66,7 +69,7 @@ def unpack_verified(data, digest, root):
         raise ValueError('Download SHA-256 mismatch')
     with zipfile.ZipFile(io.BytesIO(data)) as archive:
         infos=archive.infolist()
-        if sum(i.file_size for i in infos)>50_000_000 or len(infos)>1000:
+        if sum(i.file_size for i in infos)>MAX_UNPACKED_BYTES or len(infos)>MAX_ARCHIVE_FILES:
             raise ValueError('Bundle exceeds bounded extraction budget')
         names=set()
         for info in infos:
@@ -90,8 +93,8 @@ def main():
         if not a.sha256 or not a.url.startswith('https://'):
             p.error('HTTPS URL and trusted --sha256 are required')
         with urllib.request.urlopen(a.url,timeout=60) as response:
-            data=response.read(20_000_001)
-        if len(data)>20_000_000:raise ValueError('Download exceeds 20 MB')
+            data=response.read(MAX_DOWNLOAD_BYTES + 1)
+        if len(data)>MAX_DOWNLOAD_BYTES:raise ValueError('Download exceeds bounded release budget')
         with tempfile.TemporaryDirectory(prefix='placsp-reproduction-') as tmp:
             root=Path(tmp);unpack_verified(data,a.sha256,root);results=reproduce(root,params)
     else:

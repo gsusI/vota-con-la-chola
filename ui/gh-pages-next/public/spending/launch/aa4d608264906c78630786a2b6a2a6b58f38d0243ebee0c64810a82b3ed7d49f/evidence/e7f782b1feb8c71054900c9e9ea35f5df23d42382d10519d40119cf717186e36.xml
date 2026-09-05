@@ -1,0 +1,364 @@
+<ns0:entry xmlns:ns0="http://www.w3.org/2005/Atom" xmlns:ns1="urn:dgpe:names:draft:codice-place-ext:schema:xsd:CommonAggregateComponents-2" xmlns:ns2="urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2" xmlns:ns3="urn:dgpe:names:draft:codice-place-ext:schema:xsd:CommonBasicComponents-2" xmlns:ns4="urn:dgpe:names:draft:codice:schema:xsd:CommonAggregateComponents-2">
+        <ns0:id>https://contrataciondelestado.es/sindicacion/licitacionesPerfilContratante/16151878</ns0:id>
+        <ns0:link href="https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&amp;idEvl=hmC36i8eaDnVGIpKDxgsAQ%3D%3D" />
+        <ns0:summary type="text">Id licitación: 1426/2024; Órgano de Contratación: Alcaldía del Ayuntamiento de Cenicientos; Importe: 39200 EUR; Estado: ADJ</ns0:summary>
+        <ns0:title>Impartición de la formación del Programa Público de Empleo- Formación para la Cualificación Profesional en Ocupaciones con competencias emergentes año 2024</ns0:title>
+        <ns0:updated>2025-01-07T09:38:29.171+01:00</ns0:updated>
+        <ns1:ContractFolderStatus>
+            <ns2:ContractFolderID>1426/2024</ns2:ContractFolderID>
+            <ns3:ContractFolderStatusCode listURI="https://contrataciondelestado.es/codice/cl/2.04/SyndicationContractFolderStatusCode-2.04.gc" languageID="es">ADJ</ns3:ContractFolderStatusCode>
+            <ns1:LocatedContractingParty>
+                <ns2:ContractingPartyTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.10/ContractingAuthorityCode-2.10.gc">3</ns2:ContractingPartyTypeCode>
+                <ns2:ActivityCode listURI="http://contrataciondelestado.es/codice/cl/2.10/ContractingAuthorityActivityCode-2.10.gc">1</ns2:ActivityCode>
+                <ns2:BuyerProfileURIID>https://contrataciondelestado.es/wps/poc?uri=deeplink:perfilContratante&amp;idBp=6l3WyXDoKSWmq21uxhbaVQ%3D%3D</ns2:BuyerProfileURIID>
+                <ns4:Party>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="DIR3">L01280376</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">P2803700J</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="ID_PLATAFORMA">31505030194263</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>Alcaldía del Ayuntamiento de Cenicientos</ns2:Name>
+                    </ns4:PartyName>
+                    <ns4:PostalAddress>
+                        <ns2:CityName>Cenicientos</ns2:CityName>
+                        <ns2:PostalZone>28650</ns2:PostalZone>
+                        <ns4:AddressLine>
+                            <ns2:Line>Plaza de la Constitución, 1</ns2:Line>
+                        </ns4:AddressLine>
+                        <ns4:Country>
+                            <ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+                            <ns2:Name>España</ns2:Name>
+                        </ns4:Country>
+                    </ns4:PostalAddress>
+                    <ns4:Contact>
+                        <ns2:Name>Alcaldía del Ayuntamiento de Cenicientos</ns2:Name>
+                        <ns2:Telephone>918642660</ns2:Telephone>
+                        <ns2:Telefax>918642702</ns2:Telefax>
+                        <ns2:ElectronicMail>alcaldia@cenicientos.es</ns2:ElectronicMail>
+                    </ns4:Contact>
+                </ns4:Party>
+                <ns1:ParentLocatedParty>
+                    <ns4:PartyName>
+                        <ns2:Name>Cenicientos</ns2:Name>
+                    </ns4:PartyName>
+                    <ns1:ParentLocatedParty>
+                        <ns4:PartyName>
+                            <ns2:Name>Ayuntamientos</ns2:Name>
+                        </ns4:PartyName>
+                        <ns1:ParentLocatedParty>
+                            <ns4:PartyName>
+<ns2:Name>Comunidad de Madrid</ns2:Name>
+                            </ns4:PartyName>
+                            <ns1:ParentLocatedParty>
+<ns4:PartyName>
+    <ns2:Name>ENTIDADES LOCALES</ns2:Name>
+</ns4:PartyName>
+<ns1:ParentLocatedParty>
+    <ns4:PartyName>
+        <ns2:Name>Sector Público</ns2:Name>
+    </ns4:PartyName>
+</ns1:ParentLocatedParty>
+                            </ns1:ParentLocatedParty>
+                        </ns1:ParentLocatedParty>
+                    </ns1:ParentLocatedParty>
+                </ns1:ParentLocatedParty>
+            </ns1:LocatedContractingParty>
+            <ns4:ProcurementProject>
+                <ns2:Name>Impartición de la formación del Programa Público de Empleo- Formación para la Cualificación Profesional en Ocupaciones con competencias emergentes año 2024</ns2:Name>
+                <ns2:TypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/ContractCode-2.08.gc">2</ns2:TypeCode>
+                <ns2:SubTypeCode listURI="http://contrataciondelestado.es/codice/cl/1.04/ServiceContractCode-1.04.gc">1</ns2:SubTypeCode>
+                <ns2:MixContractIndicator>false</ns2:MixContractIndicator>
+                <ns4:BudgetAmount>
+                    <ns2:EstimatedOverallContractAmount currencyID="EUR">39200</ns2:EstimatedOverallContractAmount>
+                    <ns2:TotalAmount currencyID="EUR">39200</ns2:TotalAmount>
+                    <ns2:TaxExclusiveAmount currencyID="EUR">39200</ns2:TaxExclusiveAmount>
+                </ns4:BudgetAmount>
+                <ns4:RequiredCommodityClassification>
+                    <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">80530000</ns2:ItemClassificationCode>
+                </ns4:RequiredCommodityClassification>
+                <ns4:RealizedLocation>
+                    <ns2:CountrySubentity>Comunidad de Madrid</ns2:CountrySubentity>
+                    <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES30</ns2:CountrySubentityCode>
+                    <ns4:Address>
+                        <ns2:CityName>CENICIENTOS</ns2:CityName>
+                        <ns2:PostalZone>28650</ns2:PostalZone>
+                        <ns4:Country>
+                            <ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+                            <ns2:Name>España</ns2:Name>
+                        </ns4:Country>
+                    </ns4:Address>
+                </ns4:RealizedLocation>
+                <ns4:PlannedPeriod>
+                    <ns2:DurationMeasure unitCode="MON">6</ns2:DurationMeasure>
+                </ns4:PlannedPeriod>
+            </ns4:ProcurementProject>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Ha obtenido un a mayor puntuación en la valoración de ofertas </ns2:Description>
+                <ns2:AwardDate>2025-01-03</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>2</ns2:ReceivedTenderQuantity>
+                <ns2:LowerTenderAmount currencyID="EUR">39200</ns2:LowerTenderAmount>
+                <ns2:HigherTenderAmount currencyID="EUR">39200</ns2:HigherTenderAmount>
+                <ns2:SMEsReceivedTenderQuantity>2</ns2:SMEsReceivedTenderQuantity>
+                <ns2:EUNationalsReceivedTenderQuantity>0</ns2:EUNationalsReceivedTenderQuantity>
+                <ns2:NonEUNationalsReceivedTenderQuantity>0</ns2:NonEUNationalsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns2:AwardedOwnerNationalityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:AwardedOwnerNationalityCode>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">B84947944</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>LOPEZ DE SANTIAGO CONSULTORES S. L.</ns2:Name>
+                    </ns4:PartyName>
+                    <ns4:PhysicalLocation>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc" name="España">ES</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns2:CityName>SAN MARTIN DE VALDEIGLESIAS</ns2:CityName>
+                            <ns2:PostalZone>28680</ns2:PostalZone>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc" name="España">ES</ns2:IdentificationCode>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:PhysicalLocation>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">0</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">0</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderingTerms>
+                <ns2:RequiredCurriculaIndicator>false</ns2:RequiredCurriculaIndicator>
+                <ns2:VariantConstraintIndicator>false</ns2:VariantConstraintIndicator>
+                <ns2:FundingProgramCode listURI="http://contrataciondelestado.es/codice/cl/2.08/FundingProgramCode-2.08.gc" name="No hay financiación con fondos de la UE">NO-EU</ns2:FundingProgramCode>
+                <ns2:ProcurementNationalLegislationCode listURI="https://contrataciondelestado.es/codice/cl/2.08/ProcurementNationalLegislationCode-2.08.gc">3</ns2:ProcurementNationalLegislationCode>
+                <ns4:RequiredFinancialGuarantee>
+                    <ns2:GuaranteeTypeCode listURI="http://contrataciondelestado.es/codice/cl/1.04/GuaranteeTypeCode-1.04.gc">2</ns2:GuaranteeTypeCode>
+                    <ns2:AmountRate>5</ns2:AmountRate>
+                </ns4:RequiredFinancialGuarantee>
+                <ns4:ProcurementLegislationDocumentReference>
+                    <ns2:ID>2014/24/EU</ns2:ID>
+                </ns4:ProcurementLegislationDocumentReference>
+                <ns4:TendererQualificationRequest>
+                    <ns4:TechnicalEvaluationCriteria>
+                        <ns2:EvaluationCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/TechnicalCapabilityTypeCode-2.0.gc">ZZZ</ns2:EvaluationCriteriaTypeCode>
+                        <ns2:Description>Tener un centro inscrito o acreditado en el Registro de Centros y Entidades de Formación habilitado al efecto en la Dirección General de Formación de la Comunidad de Madrid y deberá ser centro Inscrito o Acreditado en las correspondientes especialidades formativas objeto de contrato en el Registro de Centros y Entidades de Formación de la Comunidad de Madrid.</ns2:Description>
+                    </ns4:TechnicalEvaluationCriteria>
+                    <ns4:FinancialEvaluationCriteria>
+                        <ns2:EvaluationCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/FinancialCapabilityTypeCode-2.0.gc">5</ns2:EvaluationCriteriaTypeCode>
+                        <ns2:Description>Volumen anual de negocios referido al mejor ejercicio dentro de los tres últimos disponibles en función de las fechas de constitución o de inicio de actividades del empresario y de presentación de las ofertas por importe igual o superior al exigido en el anuncio de licitación o en la invitación a participar en el procedimiento y en los pliegos del contrato o, en su defecto, al establecido reglamentariamente</ns2:Description>
+                    </ns4:FinancialEvaluationCriteria>
+                    <ns4:SpecificTendererRequirement>
+                        <ns2:RequirementTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/DeclarationTypeCode-2.08.gc">1</ns2:RequirementTypeCode>
+                        <ns2:Description>Capacidad de obrar</ns2:Description>
+                    </ns4:SpecificTendererRequirement>
+                    <ns4:SpecificTendererRequirement>
+                        <ns2:RequirementTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/DeclarationTypeCode-2.08.gc">2</ns2:RequirementTypeCode>
+                        <ns2:Description>No prohibición para contratar</ns2:Description>
+                    </ns4:SpecificTendererRequirement>
+                </ns4:TendererQualificationRequest>
+                <ns4:AwardingTerms>
+                    <ns4:AwardingCriteria>
+                        <ns2:AwardingCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/AwardingCriteriaCode-2.0.gc">OBJ</ns2:AwardingCriteriaTypeCode>
+                        <ns2:Description>Mejora 2. Medios, materiales didácticos y bienes consumibles</ns2:Description>
+                        <ns2:Note>Aportación de medios, material didáctico, libros y bienes consumibles utilizado durante la acción formativa y clases prácticas (manuales, folios, bolígrafos, cuadernos, carpetas, portaminas, etc para los 10 empleados.
+Oferta valorada: por cada 150 euros (sin IVA), 5 puntos hasta un máximo de 20 puntos</ns2:Note>
+                        <ns2:AwardingCriteriaSubTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.09/AwardingCriteriaAutomaticallyEvaluatedSubTypeCode-2.09.gc">2</ns2:AwardingCriteriaSubTypeCode>
+                        <ns2:WeightNumeric>20</ns2:WeightNumeric>
+                    </ns4:AwardingCriteria>
+                    <ns4:AwardingCriteria>
+                        <ns2:AwardingCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/AwardingCriteriaCode-2.0.gc">OBJ</ns2:AwardingCriteriaTypeCode>
+                        <ns2:Description>Mejora 3. Cartel anunciador</ns2:Description>
+                        <ns2:Note>Compromiso de instalación de un cartel anunciador de metracrilato para el programa al que se licita de acuerdo al ANEXO CARTEL</ns2:Note>
+                        <ns2:AwardingCriteriaSubTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.09/AwardingCriteriaAutomaticallyEvaluatedSubTypeCode-2.09.gc">2</ns2:AwardingCriteriaSubTypeCode>
+                        <ns2:WeightNumeric>5</ns2:WeightNumeric>
+                    </ns4:AwardingCriteria>
+                    <ns4:AwardingCriteria>
+                        <ns2:AwardingCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/AwardingCriteriaCode-2.0.gc">OBJ</ns2:AwardingCriteriaTypeCode>
+                        <ns2:Description>Mejora 1. Complementos a la ropa de trabajo</ns2:Description>
+                        <ns2:Note>Compromiso de pago de la factura de la ropa de trabajo adquirida por el Ayuntamiento para los 10 empleados al comienzo del programa, y entrega del resto de ropa que se haya ofertado si ésta no hubiese sido adquirida por parte del Ayuntamiento, o pago de una segunda factura de ropa hasta el importe ofertado, si ésta hubiese sido adquirida por el Ayuntamiento durante la vigencia del programa
+
+Oferta valorada: por 1.000 euros (sin IVA), 5 puntos, por cada 500 euros más, 5 puntos, hasta un máximo de 25 puntos</ns2:Note>
+                        <ns2:AwardingCriteriaSubTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.09/AwardingCriteriaAutomaticallyEvaluatedSubTypeCode-2.09.gc">2</ns2:AwardingCriteriaSubTypeCode>
+                        <ns2:WeightNumeric>25</ns2:WeightNumeric>
+                    </ns4:AwardingCriteria>
+                    <ns4:AwardingCriteria>
+                        <ns2:AwardingCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/AwardingCriteriaCode-2.0.gc">OBJ</ns2:AwardingCriteriaTypeCode>
+                        <ns2:Description>Experiencia en la impartición de la formación</ns2:Description>
+                        <ns2:Note>Se otorgará 1 punto por la impartición del certificado de profesionalidad objeto de contratación (AGAO0108- ACTIVIDADES AUXILIARES EN VIVEROS Y CENTROS DE JARDINERÍA. 250 HORAS) completo en los últimos cinco años en programas de empleo-formación para la Cualificación Profesional hasta un hasta un máximo de 30 puntos</ns2:Note>
+                        <ns2:AwardingCriteriaSubTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.09/AwardingCriteriaAutomaticallyEvaluatedSubTypeCode-2.09.gc">2</ns2:AwardingCriteriaSubTypeCode>
+                        <ns2:WeightNumeric>30</ns2:WeightNumeric>
+                    </ns4:AwardingCriteria>
+                    <ns4:AwardingCriteria>
+                        <ns2:AwardingCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/AwardingCriteriaCode-2.0.gc">OBJ</ns2:AwardingCriteriaTypeCode>
+                        <ns2:Description>Ubicación centro de trabajo</ns2:Description>
+                        <ns2:Note>Se otorgarán 20 puntos al centro de formación más cercano a Cenicientos, siendo el resto de centros puntuados de manera proporcional de la siguiente manera: 15 puntos, al segundo más cercano, 10 puntos al tercero, 5 puntos al cuarto, el quinto y sucesivos obtendrán 0 puntos. Máximo de 20 puntos.</ns2:Note>
+                        <ns2:AwardingCriteriaSubTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.09/AwardingCriteriaAutomaticallyEvaluatedSubTypeCode-2.09.gc">2</ns2:AwardingCriteriaSubTypeCode>
+                        <ns2:WeightNumeric>20</ns2:WeightNumeric>
+                    </ns4:AwardingCriteria>
+                </ns4:AwardingTerms>
+                <ns4:TenderRecipientParty>
+                    <ns2:EndpointID>https://contrataciondelestado.es</ns2:EndpointID>
+                </ns4:TenderRecipientParty>
+                <ns4:Language>
+                    <ns2:ID>es</ns2:ID>
+                </ns4:Language>
+            </ns4:TenderingTerms>
+            <ns4:TenderingProcess>
+                <ns2:ProcedureCode listURI="https://contrataciondelestado.es/codice/cl/2.07/SyndicationTenderingProcessCode-2.07.gc">1</ns2:ProcedureCode>
+                <ns2:UrgencyCode listURI="http://contrataciondelestado.es/codice/cl/1.04/DiligenceTypeCode-1.04.gc">1</ns2:UrgencyCode>
+                <ns2:ContractingSystemCode listURI="http://contrataciondelestado.es/codice/cl/2.08/ContractingSystemTypeCode-2.08.gc">0</ns2:ContractingSystemCode>
+                <ns2:SubmissionMethodCode listURI="http://contrataciondelestado.es/codice/cl/1.04/TenderDeliveryCode-1.04.gc">1</ns2:SubmissionMethodCode>
+                <ns2:OverThresholdIndicator>false</ns2:OverThresholdIndicator>
+                <ns4:DocumentAvailabilityPeriod>
+                    <ns2:EndDate>2024-12-11</ns2:EndDate>
+                    <ns2:EndTime>23:59:00</ns2:EndTime>
+                </ns4:DocumentAvailabilityPeriod>
+                <ns4:TenderSubmissionDeadlinePeriod>
+                    <ns2:EndDate>2024-12-11</ns2:EndDate>
+                    <ns2:EndTime>23:59:00</ns2:EndTime>
+                    <ns2:Description>Fin del plazo de presentación de ofertas</ns2:Description>
+                </ns4:TenderSubmissionDeadlinePeriod>
+                <ns4:AuctionTerms>
+                    <ns2:AuctionConstraintIndicator>false</ns2:AuctionConstraintIndicator>
+                </ns4:AuctionTerms>
+            </ns4:TenderingProcess>
+            <ns4:LegalDocumentReference>
+                <ns2:ID>PCAP.pdf</ns2:ID>
+                <ns4:Attachment>
+                    <ns4:ExternalReference>
+                        <ns2:URI>https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=J6Ye4CWG5459FPjMCtdysx4zOqWjI3V3JuR%2BJ3c68bEfNtkvqvpnQK6KY77uSh3mgoFE3psiqJrGEKqRIMBFnE5OWdr9QCYcEjzVoch0WMN7QB3HKyQaFUExmUVQCerk&amp;cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D</ns2:URI>
+                        <ns2:DocumentHash>2jmj7l5rSw0yVb/vlWAYkK/YBwk=</ns2:DocumentHash>
+                    </ns4:ExternalReference>
+                </ns4:Attachment>
+            </ns4:LegalDocumentReference>
+            <ns4:TechnicalDocumentReference>
+                <ns2:ID>PPT.pdf</ns2:ID>
+                <ns4:Attachment>
+                    <ns4:ExternalReference>
+                        <ns2:URI>https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=wiwdc9m9zNWeXB4d1nNK7YgLsUVVh86uslivg2biF6yp1KNbQBa0e8v9X8NpuROpOvwMnmjh6b3%2BFYvuEuVdpDOdczXyqcC5Q8Qd4hC%2BEX4C1/zDIE0Kw/PWNnLS0Z0z&amp;cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D</ns2:URI>
+                        <ns2:DocumentHash>2jmj7l5rSw0yVb/vlWAYkK/YBwk=</ns2:DocumentHash>
+                    </ns4:ExternalReference>
+                </ns4:Attachment>
+            </ns4:TechnicalDocumentReference>
+            <ns4:AdditionalDocumentReference>
+                <ns2:ID>anexos.pdf</ns2:ID>
+                <ns4:Attachment>
+                    <ns4:ExternalReference>
+                        <ns2:URI>https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=rhon3lFsz2TgAlzFqyM2QbGZL/wmt/VnSW1h%2BQKtc%2B1OEJwnhyerg3yU7tt8NaKkZUVmzmxK%2BL8L7uAlXi5aH3niEHN259H8CXnKKS70VT/3GVhXrFFqN7yFncy7YfRK&amp;cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D</ns2:URI>
+                        <ns2:DocumentHash>2jmj7l5rSw0yVb/vlWAYkK/YBwk=</ns2:DocumentHash>
+                    </ns4:ExternalReference>
+                </ns4:Attachment>
+            </ns4:AdditionalDocumentReference>
+            <ns1:ValidNoticeInfo>
+                <ns3:NoticeTypeCode listURI="https://contrataciondelestado.es/codice/cl/2.11/TenderingNoticeTypeCode-2.11.gc">DOC_CAN_ADJ</ns3:NoticeTypeCode>
+                <ns1:AdditionalPublicationStatus>
+                    <ns3:PublicationMediaName>Perfil del contratante</ns3:PublicationMediaName>
+                    <ns1:AdditionalPublicationDocumentReference>
+                        <ns2:IssueDate>2025-01-07</ns2:IssueDate>
+                    </ns1:AdditionalPublicationDocumentReference>
+                    <ns1:AdditionalPublicationDocumentReference>
+                        <ns2:DocumentTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderingDocumentTypeCode-2.09.gc" name="Documento de Acta de Adjudicación">ACTA_ADJ</ns2:DocumentTypeCode>
+                        <ns4:Attachment>
+                            <ns4:ExternalReference>
+<ns2:URI>https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=qETOjnonnFoiudl9FN7DrGryz218Van9QR3HM8O8zyuMBSi6BZJQ5q4cMB1zbM6s%2BfGr8GvJVOb7oZDqLVbNtKfFE%2BOp92Flh%2BEN4IpUqjPfdyQgZAdTm3EfcUAC7CJ6&amp;cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D</ns2:URI>
+<ns2:FileName>Resolucion de Alcaldia de Adjudicacion.pdf</ns2:FileName>
+                            </ns4:ExternalReference>
+                        </ns4:Attachment>
+                    </ns1:AdditionalPublicationDocumentReference>
+                </ns1:AdditionalPublicationStatus>
+            </ns1:ValidNoticeInfo>
+            <ns1:ValidNoticeInfo>
+                <ns3:NoticeTypeCode listURI="https://contrataciondelestado.es/codice/cl/2.11/TenderingNoticeTypeCode-2.11.gc">DOC_CD</ns3:NoticeTypeCode>
+                <ns1:AdditionalPublicationStatus>
+                    <ns3:PublicationMediaName>Perfil del contratante</ns3:PublicationMediaName>
+                    <ns1:AdditionalPublicationDocumentReference>
+                        <ns2:IssueDate>2024-11-26</ns2:IssueDate>
+                    </ns1:AdditionalPublicationDocumentReference>
+                </ns1:AdditionalPublicationStatus>
+            </ns1:ValidNoticeInfo>
+            <ns1:ValidNoticeInfo>
+                <ns3:NoticeTypeCode listURI="https://contrataciondelestado.es/codice/cl/2.11/TenderingNoticeTypeCode-2.11.gc">DOC_CN</ns3:NoticeTypeCode>
+                <ns1:AdditionalPublicationStatus>
+                    <ns3:PublicationMediaName>Perfil del contratante</ns3:PublicationMediaName>
+                    <ns1:AdditionalPublicationDocumentReference>
+                        <ns2:IssueDate>2024-11-26</ns2:IssueDate>
+                    </ns1:AdditionalPublicationDocumentReference>
+                </ns1:AdditionalPublicationStatus>
+            </ns1:ValidNoticeInfo>
+            <ns1:ValidNoticeInfo>
+                <ns3:NoticeTypeCode listURI="https://contrataciondelestado.es/codice/cl/2.11/TenderingNoticeTypeCode-2.11.gc">DOC_PIN</ns3:NoticeTypeCode>
+                <ns1:AdditionalPublicationStatus>
+                    <ns3:PublicationMediaName>Perfil del contratante</ns3:PublicationMediaName>
+                    <ns1:AdditionalPublicationDocumentReference>
+                        <ns2:IssueDate>2024-11-26</ns2:IssueDate>
+                    </ns1:AdditionalPublicationDocumentReference>
+                </ns1:AdditionalPublicationStatus>
+            </ns1:ValidNoticeInfo>
+            <ns1:ValidNoticeInfo>
+                <ns3:NoticeTypeCode listURI="https://contrataciondelestado.es/codice/cl/2.11/TenderingNoticeTypeCode-2.11.gc">DOC_PIN_RTL</ns3:NoticeTypeCode>
+                <ns1:AdditionalPublicationStatus>
+                    <ns3:PublicationMediaName>Perfil del contratante</ns3:PublicationMediaName>
+                    <ns1:AdditionalPublicationDocumentReference>
+                        <ns2:IssueDate>2024-11-26</ns2:IssueDate>
+                    </ns1:AdditionalPublicationDocumentReference>
+                </ns1:AdditionalPublicationStatus>
+            </ns1:ValidNoticeInfo>
+            <ns1:GeneralDocument>
+                <ns1:GeneralDocumentDocumentReference>
+                    <ns2:ID>2024-4544c6db-c831-4b9d-a30d-fa55343dedc0</ns2:ID>
+                    <ns2:DocumentTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/GeneralContractDocuments-2.08.gc">12</ns2:DocumentTypeCode>
+                    <ns4:Attachment>
+                        <ns4:ExternalReference>
+                            <ns2:URI>https://contrataciondelestado.es/wps/wcm/connect/PLACE_es/Site/area/docAccCmpnt?srv=cmpnt&amp;cmpntname=GetDocumentsById&amp;source=library&amp;DocumentIdParam=2024-4544c6db-c831-4b9d-a30d-fa55343dedc0</ns2:URI>
+                            <ns2:FileName>Acta del órgano de asistencia</ns2:FileName>
+                        </ns4:ExternalReference>
+                    </ns4:Attachment>
+                </ns1:GeneralDocumentDocumentReference>
+            </ns1:GeneralDocument>
+            <ns1:GeneralDocument>
+                <ns1:GeneralDocumentDocumentReference>
+                    <ns2:ID>2024-864356d9-096c-41eb-9247-17478e5e1eb3</ns2:ID>
+                    <ns2:DocumentTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/GeneralContractDocuments-2.08.gc">11</ns2:DocumentTypeCode>
+                    <ns4:Attachment>
+                        <ns4:ExternalReference>
+                            <ns2:URI>https://contrataciondelestado.es/wps/wcm/connect/PLACE_es/Site/area/docAccCmpnt?srv=cmpnt&amp;cmpntname=GetDocumentsById&amp;source=library&amp;DocumentIdParam=2024-864356d9-096c-41eb-9247-17478e5e1eb3</ns2:URI>
+                            <ns2:FileName>Documento de aprobación del expediente</ns2:FileName>
+                        </ns4:ExternalReference>
+                    </ns4:Attachment>
+                </ns1:GeneralDocumentDocumentReference>
+            </ns1:GeneralDocument>
+            <ns1:GeneralDocument>
+                <ns1:GeneralDocumentDocumentReference>
+                    <ns2:ID>2024-1d4f95f0-8b6a-473e-a286-5c44d6c5de42</ns2:ID>
+                    <ns2:DocumentTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/GeneralContractDocuments-2.08.gc">8</ns2:DocumentTypeCode>
+                    <ns4:Attachment>
+                        <ns4:ExternalReference>
+                            <ns2:URI>https://contrataciondelestado.es/wps/wcm/connect/PLACE_es/Site/area/docAccCmpnt?srv=cmpnt&amp;cmpntname=GetDocumentsById&amp;source=library&amp;DocumentIdParam=2024-1d4f95f0-8b6a-473e-a286-5c44d6c5de42</ns2:URI>
+                            <ns2:FileName>Acuerdo de iniciación del expediente</ns2:FileName>
+                        </ns4:ExternalReference>
+                    </ns4:Attachment>
+                </ns1:GeneralDocumentDocumentReference>
+            </ns1:GeneralDocument>
+            <ns1:GeneralDocument>
+                <ns1:GeneralDocumentDocumentReference>
+                    <ns2:ID>2024-5ac51cbf-7c11-42f2-8a96-e516409feb0c</ns2:ID>
+                    <ns2:DocumentTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/GeneralContractDocuments-2.08.gc">9</ns2:DocumentTypeCode>
+                    <ns4:Attachment>
+                        <ns4:ExternalReference>
+                            <ns2:URI>https://contrataciondelestado.es/wps/wcm/connect/PLACE_es/Site/area/docAccCmpnt?srv=cmpnt&amp;cmpntname=GetDocumentsById&amp;source=library&amp;DocumentIdParam=2024-5ac51cbf-7c11-42f2-8a96-e516409feb0c</ns2:URI>
+                            <ns2:FileName>Memoria justificativa</ns2:FileName>
+                        </ns4:ExternalReference>
+                    </ns4:Attachment>
+                </ns1:GeneralDocumentDocumentReference>
+            </ns1:GeneralDocument>
+        </ns1:ContractFolderStatus>
+    </ns0:entry>
+    

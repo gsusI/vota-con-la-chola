@@ -1,0 +1,405 @@
+<ns0:entry xmlns:ns0="http://www.w3.org/2005/Atom" xmlns:ns1="urn:dgpe:names:draft:codice-place-ext:schema:xsd:CommonAggregateComponents-2" xmlns:ns2="urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2" xmlns:ns3="urn:dgpe:names:draft:codice-place-ext:schema:xsd:CommonBasicComponents-2" xmlns:ns4="urn:dgpe:names:draft:codice:schema:xsd:CommonAggregateComponents-2">
+        <ns0:id>https://contrataciondelestado.es/sindicacion/licitacionesPerfilContratante/15988509</ns0:id>
+        <ns0:link href="https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&amp;idEvl=FvbDhoUAsLJ6nTs9LZ9RhQ%3D%3D" />
+        <ns0:summary type="text">Id licitación: 1037/2024; Órgano de Contratación: Pleno del Ayuntamiento de Benasque; Importe: 451389.64 EUR; Estado: ADJ</ns0:summary>
+        <ns0:title>Proyecto de reforma de alumbrado público de Benasque</ns0:title>
+        <ns0:updated>2025-03-07T13:24:35.894+01:00</ns0:updated>
+        <ns1:ContractFolderStatus>
+            <ns2:ContractFolderID>1037/2024</ns2:ContractFolderID>
+            <ns3:ContractFolderStatusCode listURI="https://contrataciondelestado.es/codice/cl/2.04/SyndicationContractFolderStatusCode-2.04.gc" languageID="es">ADJ</ns3:ContractFolderStatusCode>
+            <ns1:LocatedContractingParty>
+                <ns2:ContractingPartyTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.10/ContractingAuthorityCode-2.10.gc">3</ns2:ContractingPartyTypeCode>
+                <ns2:ActivityCode listURI="http://contrataciondelestado.es/codice/cl/2.10/ContractingAuthorityActivityCode-2.10.gc">1</ns2:ActivityCode>
+                <ns2:BuyerProfileURIID>https://contrataciondelestado.es/wps/poc?uri=deeplink:perfilContratante&amp;idBp=GSRZij7Dmj0QK2TEfXGy%2BA%3D%3D</ns2:BuyerProfileURIID>
+                <ns4:Party>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="DIR3">L01220540</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">P2206900I</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="ID_PLATAFORMA">30999000143660</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>Pleno del Ayuntamiento de Benasque</ns2:Name>
+                    </ns4:PartyName>
+                    <ns4:PostalAddress>
+                        <ns2:CityName>Benasque</ns2:CityName>
+                        <ns2:PostalZone>22440</ns2:PostalZone>
+                        <ns4:AddressLine>
+                            <ns2:Line>Plaza del Ayuntamiento, 1</ns2:Line>
+                        </ns4:AddressLine>
+                        <ns4:Country>
+                            <ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+                            <ns2:Name>España</ns2:Name>
+                        </ns4:Country>
+                    </ns4:PostalAddress>
+                    <ns4:Contact>
+                        <ns2:Name>Pleno del Ayuntamiento de Benasque</ns2:Name>
+                        <ns2:Telephone>974551001</ns2:Telephone>
+                        <ns2:ElectronicMail>alcaldia@benasque.es</ns2:ElectronicMail>
+                    </ns4:Contact>
+                </ns4:Party>
+                <ns1:ParentLocatedParty>
+                    <ns4:PartyName>
+                        <ns2:Name>Benasque</ns2:Name>
+                    </ns4:PartyName>
+                    <ns1:ParentLocatedParty>
+                        <ns4:PartyName>
+                            <ns2:Name>Ayuntamientos</ns2:Name>
+                        </ns4:PartyName>
+                        <ns1:ParentLocatedParty>
+                            <ns4:PartyName>
+<ns2:Name>Huesca</ns2:Name>
+                            </ns4:PartyName>
+                            <ns1:ParentLocatedParty>
+<ns4:PartyName>
+    <ns2:Name>Aragón</ns2:Name>
+</ns4:PartyName>
+<ns1:ParentLocatedParty>
+    <ns4:PartyName>
+        <ns2:Name>ENTIDADES LOCALES</ns2:Name>
+    </ns4:PartyName>
+    <ns1:ParentLocatedParty>
+        <ns4:PartyName>
+            <ns2:Name>Sector Público</ns2:Name>
+        </ns4:PartyName>
+    </ns1:ParentLocatedParty>
+</ns1:ParentLocatedParty>
+                            </ns1:ParentLocatedParty>
+                        </ns1:ParentLocatedParty>
+                    </ns1:ParentLocatedParty>
+                </ns1:ParentLocatedParty>
+            </ns1:LocatedContractingParty>
+            <ns4:ProcurementProject>
+                <ns2:Name>Proyecto de reforma de alumbrado público de Benasque</ns2:Name>
+                <ns2:TypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/ContractCode-2.08.gc">3</ns2:TypeCode>
+                <ns2:SubTypeCode listURI="http://contrataciondelestado.es/codice/cl/1.04/WorksContractCode-1.04.gc">4531</ns2:SubTypeCode>
+                <ns2:MixContractIndicator>false</ns2:MixContractIndicator>
+                <ns4:BudgetAmount>
+                    <ns2:EstimatedOverallContractAmount currencyID="EUR">451389.64</ns2:EstimatedOverallContractAmount>
+                    <ns2:TotalAmount currencyID="EUR">546181.46</ns2:TotalAmount>
+                    <ns2:TaxExclusiveAmount currencyID="EUR">451389.64</ns2:TaxExclusiveAmount>
+                </ns4:BudgetAmount>
+                <ns4:RequiredCommodityClassification>
+                    <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">45316100</ns2:ItemClassificationCode>
+                </ns4:RequiredCommodityClassification>
+                <ns4:RealizedLocation>
+                    <ns2:CountrySubentity>Huesca</ns2:CountrySubentity>
+                    <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES241</ns2:CountrySubentityCode>
+                    <ns4:Address>
+                        <ns2:CityName>Benasque</ns2:CityName>
+                        <ns2:PostalZone>22440</ns2:PostalZone>
+                        <ns4:Country>
+                            <ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+                            <ns2:Name>España</ns2:Name>
+                        </ns4:Country>
+                    </ns4:Address>
+                </ns4:RealizedLocation>
+                <ns4:PlannedPeriod>
+                    <ns2:StartDate>2024-12-20</ns2:StartDate>
+                    <ns2:DurationMeasure unitCode="MON">6</ns2:DurationMeasure>
+                </ns4:PlannedPeriod>
+            </ns4:ProcurementProject>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Ser el licitador mejor valorado</ns2:Description>
+                <ns2:AwardDate>2025-01-29</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>3</ns2:ReceivedTenderQuantity>
+                <ns2:LowerTenderAmount currencyID="EUR">413200</ns2:LowerTenderAmount>
+                <ns2:HigherTenderAmount currencyID="EUR">437734</ns2:HigherTenderAmount>
+                <ns2:SMEsReceivedTenderQuantity>0</ns2:SMEsReceivedTenderQuantity>
+                <ns2:EUNationalsReceivedTenderQuantity>0</ns2:EUNationalsReceivedTenderQuantity>
+                <ns2:NonEUNationalsReceivedTenderQuantity>0</ns2:NonEUNationalsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>false</ns2:SMEAwardedIndicator>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">B22420590</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>Angel Estaún Sistemas S.L.</ns2:Name>
+                    </ns4:PartyName>
+                    <ns4:PhysicalLocation>
+                        <ns4:Address>
+                            <ns2:CityName>Huesca</ns2:CityName>
+                            <ns2:PostalZone>22002</ns2:PostalZone>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc" name="España">ES</ns2:IdentificationCode>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:PhysicalLocation>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">413200</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">499972</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderingTerms>
+                <ns2:RequiredCurriculaIndicator>false</ns2:RequiredCurriculaIndicator>
+                <ns2:VariantConstraintIndicator>false</ns2:VariantConstraintIndicator>
+                <ns2:FundingProgramCode listURI="http://contrataciondelestado.es/codice/cl/2.08/FundingProgramCode-2.08.gc" name="No hay financiación con fondos de la UE">NO-EU</ns2:FundingProgramCode>
+                <ns2:ProcurementNationalLegislationCode listURI="https://contrataciondelestado.es/codice/cl/2.08/ProcurementNationalLegislationCode-2.08.gc">3</ns2:ProcurementNationalLegislationCode>
+                <ns4:RequiredFinancialGuarantee>
+                    <ns2:GuaranteeTypeCode listURI="http://contrataciondelestado.es/codice/cl/1.04/GuaranteeTypeCode-1.04.gc">2</ns2:GuaranteeTypeCode>
+                    <ns2:AmountRate>5</ns2:AmountRate>
+                </ns4:RequiredFinancialGuarantee>
+                <ns4:ProcurementLegislationDocumentReference>
+                    <ns2:ID>N/A</ns2:ID>
+                </ns4:ProcurementLegislationDocumentReference>
+                <ns4:TendererQualificationRequest>
+                    <ns4:TechnicalEvaluationCriteria>
+                        <ns2:EvaluationCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/TechnicalCapabilityTypeCode-2.0.gc">OXR-MEDIOS</ns2:EvaluationCriteriaTypeCode>
+                        <ns2:Description>El licitador deberá comprometerse a la adscripción obligatoria al contrato de los medios personales y materiales que se describen en la clausula 8 del PCAP.</ns2:Description>
+                    </ns4:TechnicalEvaluationCriteria>
+                    <ns4:TechnicalEvaluationCriteria>
+                        <ns2:EvaluationCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/TechnicalCapabilityTypeCode-2.0.gc">OSR-COMPTASK</ns2:EvaluationCriteriaTypeCode>
+                        <ns2:Description>Mediante una relación de obras similares ejecutadas en los últimos cinco años.</ns2:Description>
+                        <ns2:ThresholdQuantity>350000</ns2:ThresholdQuantity>
+                    </ns4:TechnicalEvaluationCriteria>
+                    <ns4:FinancialEvaluationCriteria>
+                        <ns2:EvaluationCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/FinancialCapabilityTypeCode-2.0.gc">5</ns2:EvaluationCriteriaTypeCode>
+                        <ns2:Description>Declaración sobre el volumen anual de negocios referido al mejor ejercicio dentro de los TRES últimos disponibles</ns2:Description>
+                    </ns4:FinancialEvaluationCriteria>
+                    <ns4:FinancialEvaluationCriteria>
+                        <ns2:EvaluationCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/FinancialCapabilityTypeCode-2.0.gc">3</ns2:EvaluationCriteriaTypeCode>
+                        <ns2:Description>Tener un seguro de responsabilidad civil con una cobertura igual o superior a una vez y media el importe del contrato que se licita</ns2:Description>
+                    </ns4:FinancialEvaluationCriteria>
+                    <ns4:SpecificTendererRequirement>
+                        <ns2:RequirementTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/DeclarationTypeCode-2.08.gc">1</ns2:RequirementTypeCode>
+                        <ns2:Description>Capacidad de obrar</ns2:Description>
+                    </ns4:SpecificTendererRequirement>
+                </ns4:TendererQualificationRequest>
+                <ns4:AwardingTerms>
+                    <ns4:AwardingCriteria>
+                        <ns2:AwardingCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/AwardingCriteriaCode-2.0.gc">OBJ</ns2:AwardingCriteriaTypeCode>
+                        <ns2:Description>Plazo de entrega</ns2:Description>
+                        <ns2:AwardingCriteriaSubTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.09/AwardingCriteriaAutomaticallyEvaluatedSubTypeCode-2.09.gc">2</ns2:AwardingCriteriaSubTypeCode>
+                        <ns2:WeightNumeric>5.56</ns2:WeightNumeric>
+                    </ns4:AwardingCriteria>
+                    <ns4:AwardingCriteria>
+                        <ns2:AwardingCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/AwardingCriteriaCode-2.0.gc">SUBJ</ns2:AwardingCriteriaTypeCode>
+                        <ns2:Description>Pruebas de funcionamiento y puesta en marcha de las instalaciones</ns2:Description>
+                        <ns2:AwardingCriteriaSubTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.09/AwardingCriteriaNotAutomaticallyEvaluatedSubTypeCode-2.09.gc">99</ns2:AwardingCriteriaSubTypeCode>
+                        <ns2:WeightNumeric>11.11</ns2:WeightNumeric>
+                    </ns4:AwardingCriteria>
+                    <ns4:AwardingCriteria>
+                        <ns2:AwardingCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/AwardingCriteriaCode-2.0.gc">SUBJ</ns2:AwardingCriteriaTypeCode>
+                        <ns2:Description>Análisis del Proyecto y propuesta de mejoras</ns2:Description>
+                        <ns2:AwardingCriteriaSubTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.09/AwardingCriteriaNotAutomaticallyEvaluatedSubTypeCode-2.09.gc">99</ns2:AwardingCriteriaSubTypeCode>
+                        <ns2:WeightNumeric>11.11</ns2:WeightNumeric>
+                    </ns4:AwardingCriteria>
+                    <ns4:AwardingCriteria>
+                        <ns2:AwardingCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/AwardingCriteriaCode-2.0.gc">OBJ</ns2:AwardingCriteriaTypeCode>
+                        <ns2:Description>Extensión del plazo de Garantía</ns2:Description>
+                        <ns2:AwardingCriteriaSubTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.09/AwardingCriteriaAutomaticallyEvaluatedSubTypeCode-2.09.gc">2</ns2:AwardingCriteriaSubTypeCode>
+                        <ns2:WeightNumeric>5.56</ns2:WeightNumeric>
+                    </ns4:AwardingCriteria>
+                    <ns4:AwardingCriteria>
+                        <ns2:AwardingCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/AwardingCriteriaCode-2.0.gc">SUBJ</ns2:AwardingCriteriaTypeCode>
+                        <ns2:Description>Servicio Post Venta</ns2:Description>
+                        <ns2:AwardingCriteriaSubTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.09/AwardingCriteriaNotAutomaticallyEvaluatedSubTypeCode-2.09.gc">99</ns2:AwardingCriteriaSubTypeCode>
+                        <ns2:WeightNumeric>11.11</ns2:WeightNumeric>
+                    </ns4:AwardingCriteria>
+                    <ns4:AwardingCriteria>
+                        <ns2:AwardingCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/AwardingCriteriaCode-2.0.gc">OBJ</ns2:AwardingCriteriaTypeCode>
+                        <ns2:Description>Precio</ns2:Description>
+                        <ns2:AwardingCriteriaSubTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.09/AwardingCriteriaAutomaticallyEvaluatedSubTypeCode-2.09.gc">1</ns2:AwardingCriteriaSubTypeCode>
+                        <ns2:WeightNumeric>55.56</ns2:WeightNumeric>
+                    </ns4:AwardingCriteria>
+                </ns4:AwardingTerms>
+                <ns4:TenderRecipientParty>
+                    <ns2:EndpointID>https://contrataciondelestado.es</ns2:EndpointID>
+                </ns4:TenderRecipientParty>
+                <ns4:Language>
+                    <ns2:ID>es</ns2:ID>
+                </ns4:Language>
+            </ns4:TenderingTerms>
+            <ns4:TenderingProcess>
+                <ns2:ProcedureCode listURI="https://contrataciondelestado.es/codice/cl/2.07/SyndicationTenderingProcessCode-2.07.gc">1</ns2:ProcedureCode>
+                <ns2:UrgencyCode listURI="http://contrataciondelestado.es/codice/cl/1.04/DiligenceTypeCode-1.04.gc">1</ns2:UrgencyCode>
+                <ns2:ContractingSystemCode listURI="http://contrataciondelestado.es/codice/cl/2.08/ContractingSystemTypeCode-2.08.gc">0</ns2:ContractingSystemCode>
+                <ns2:SubmissionMethodCode listURI="http://contrataciondelestado.es/codice/cl/1.04/TenderDeliveryCode-1.04.gc">1</ns2:SubmissionMethodCode>
+                <ns2:OverThresholdIndicator>false</ns2:OverThresholdIndicator>
+                <ns4:DocumentAvailabilityPeriod>
+                    <ns2:EndDate>2024-11-30</ns2:EndDate>
+                    <ns2:EndTime>23:59:00</ns2:EndTime>
+                </ns4:DocumentAvailabilityPeriod>
+                <ns4:TenderSubmissionDeadlinePeriod>
+                    <ns2:EndDate>2024-12-02</ns2:EndDate>
+                    <ns2:EndTime>23:59:00</ns2:EndTime>
+                </ns4:TenderSubmissionDeadlinePeriod>
+                <ns4:AuctionTerms>
+                    <ns2:AuctionConstraintIndicator>false</ns2:AuctionConstraintIndicator>
+                </ns4:AuctionTerms>
+            </ns4:TenderingProcess>
+            <ns4:LegalDocumentReference>
+                <ns2:ID>Pliego Clausulas Administrativas Particulares.pdf</ns2:ID>
+                <ns4:Attachment>
+                    <ns4:ExternalReference>
+                        <ns2:URI>https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=Tj5EYyh3rpi6EkOVut5iBO62stQD/7GXMdn6dDgJ%2BQ0krTdKNlRztqksMO8wZu2ZPutfl6bSjrPx%2BpwjE0I6lFvNkayVMNfBFywn4icbrr0C1/zDIE0Kw/PWNnLS0Z0z&amp;cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D</ns2:URI>
+                        <ns2:DocumentHash>2jmj7l5rSw0yVb/vlWAYkK/YBwk=</ns2:DocumentHash>
+                    </ns4:ExternalReference>
+                </ns4:Attachment>
+            </ns4:LegalDocumentReference>
+            <ns4:TechnicalDocumentReference>
+                <ns2:ID>PROYECTO REFORMA ALUMBRADO PUBLICO__ PLIEGO CONDICIONES TECNICAS.pdf</ns2:ID>
+                <ns4:Attachment>
+                    <ns4:ExternalReference>
+                        <ns2:URI>https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=Cpplxf/fMpE0IV3gF61p53bIMjQHB8ZqBq6JBroVuSpvhwvH0j44hhoBinVngRljGcHxU2NUKtAKcj6UeNfWNqITXYGLy9A5d1sFwNjJfqn3GVhXrFFqN7yFncy7YfRK&amp;cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D</ns2:URI>
+                        <ns2:DocumentHash>2jmj7l5rSw0yVb/vlWAYkK/YBwk=</ns2:DocumentHash>
+                    </ns4:ExternalReference>
+                </ns4:Attachment>
+            </ns4:TechnicalDocumentReference>
+            <ns4:AdditionalDocumentReference>
+                <ns2:ID>PROYECTO REFORMA ALUMBRADO PUBLICO__ PLAN DE GESTION DE RESIDUOS.pdf</ns2:ID>
+                <ns4:Attachment>
+                    <ns4:ExternalReference>
+                        <ns2:URI>https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=93dJFN%2BxzL3jtNxYdEGNP09EejQQQW/mKavhdTYA6KljQYKuRb7q8fr5W5jD/6A%2B8CsE0nFRYzltkiCCnuk2bi7bUMv/SomUnZKODqPDg/8//q7NB2iMZvNyf0xrJmjt&amp;cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D</ns2:URI>
+                        <ns2:DocumentHash>2jmj7l5rSw0yVb/vlWAYkK/YBwk=</ns2:DocumentHash>
+                    </ns4:ExternalReference>
+                </ns4:Attachment>
+            </ns4:AdditionalDocumentReference>
+            <ns4:AdditionalDocumentReference>
+                <ns2:ID>PROYECTO REFORMA ALUMBRADO PUBLICO__ PRESUPUESTO.pdf</ns2:ID>
+                <ns4:Attachment>
+                    <ns4:ExternalReference>
+                        <ns2:URI>https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=WAHLB2vAzBYaHFsI6TbJr3ig/YhAz6DbqU6xsty/LjrofEh94ab1Wo4mwwHMpz1oKy8xFxkYMHO0b/p77VYtnB2KMOb/7c5YKu3Tu7XT0zZt/o8fNevwsujgRzaBbugn&amp;cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D</ns2:URI>
+                        <ns2:DocumentHash>2jmj7l5rSw0yVb/vlWAYkK/YBwk=</ns2:DocumentHash>
+                    </ns4:ExternalReference>
+                </ns4:Attachment>
+            </ns4:AdditionalDocumentReference>
+            <ns4:AdditionalDocumentReference>
+                <ns2:ID>PROYECTO REFORMA ALUMBRADO PUBLICO__ ANEXO LUMINARIAS PROPUESTAS.pdf</ns2:ID>
+                <ns4:Attachment>
+                    <ns4:ExternalReference>
+                        <ns2:URI>https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=cXncdpUcaCNy9EYIYyt2sT32DfYyvctqFvsdVzGRTex5Iv9miYkDcvv250tX1Jc92r9Fj9f6Z4cowZ2lFdkBWg950ywZolTkXQlYexEewvBJOVDbGCDM%2BMigrvuVS7Rv&amp;cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D</ns2:URI>
+                        <ns2:DocumentHash>2jmj7l5rSw0yVb/vlWAYkK/YBwk=</ns2:DocumentHash>
+                    </ns4:ExternalReference>
+                </ns4:Attachment>
+            </ns4:AdditionalDocumentReference>
+            <ns4:AdditionalDocumentReference>
+                <ns2:ID>PROYECTO REFORMA ALUMBRADO PUBLICO__ MEMORIA.pdf</ns2:ID>
+                <ns4:Attachment>
+                    <ns4:ExternalReference>
+                        <ns2:URI>https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=2dRIfGu5B%2BRA/SG9mgC200oFXgJpuNv9gUE6%2BnwXRUi7KIWIJHV8Tb7bjvGiqPgO9v8nq3pmvwBKHDzWv5JsH/p8Cn%2BMtBJo337dHQrwuToZyAJWGsSt0OzTSTyw9JAs&amp;cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D</ns2:URI>
+                        <ns2:DocumentHash>2jmj7l5rSw0yVb/vlWAYkK/YBwk=</ns2:DocumentHash>
+                    </ns4:ExternalReference>
+                </ns4:Attachment>
+            </ns4:AdditionalDocumentReference>
+            <ns4:AdditionalDocumentReference>
+                <ns2:ID>PROYECTO REFORMA ALUMBRADO PUBLICO__ PLANOS.pdf</ns2:ID>
+                <ns4:Attachment>
+                    <ns4:ExternalReference>
+                        <ns2:URI>https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=iumypBlbmIHsHK6zT5BhTgC/7YGTnAwdoS%2BQqy2/l4CVJ%2Bn4dAvat6asJUuJncivHbBI7JeX3Ix89%2BwqQhlvMSGduC5JGW%2BLapTmMVaIKg97QB3HKyQaFUExmUVQCerk&amp;cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D</ns2:URI>
+                        <ns2:DocumentHash>2jmj7l5rSw0yVb/vlWAYkK/YBwk=</ns2:DocumentHash>
+                    </ns4:ExternalReference>
+                </ns4:Attachment>
+            </ns4:AdditionalDocumentReference>
+            <ns4:AdditionalDocumentReference>
+                <ns2:ID>PROYECTO REFORMA ALUMBRADO PUBLICO__ ANEXO ESTUDIO LUMINICO.pdf</ns2:ID>
+                <ns4:Attachment>
+                    <ns4:ExternalReference>
+                        <ns2:URI>https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=ncJYALc3GT4oE81UOBg0RnT3JhUDwnU%2BE3shzzNpiESBwl%2BF4kVokZLwF8dn3j4oxsOo%2B2x6NoDayu%2Bxl%2BsIF6twVgpjN0JowSNq6vApRtaHAj0WEJrB5sP7amrh2jBD&amp;cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D</ns2:URI>
+                        <ns2:DocumentHash>2jmj7l5rSw0yVb/vlWAYkK/YBwk=</ns2:DocumentHash>
+                    </ns4:ExternalReference>
+                </ns4:Attachment>
+            </ns4:AdditionalDocumentReference>
+            <ns4:AdditionalDocumentReference>
+                <ns2:ID>PROYECTO REFORMA ALUMBRADO PUBLICO__ ESTUDIO SEGURIDAD Y SALUD.pdf</ns2:ID>
+                <ns4:Attachment>
+                    <ns4:ExternalReference>
+                        <ns2:URI>https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=yMqguRtNPjh1Ab%2BN7dFUs3DCo%2BXUttUB8MqjEOqTbTjTmaOQPqC4uS8iANcaCqMEdG3voJxy596xkRn0DyCr0LKZRp2EPqApSyUgdbX5Jt0C1/zDIE0Kw/PWNnLS0Z0z&amp;cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D</ns2:URI>
+                        <ns2:DocumentHash>2jmj7l5rSw0yVb/vlWAYkK/YBwk=</ns2:DocumentHash>
+                    </ns4:ExternalReference>
+                </ns4:Attachment>
+            </ns4:AdditionalDocumentReference>
+            <ns1:ValidNoticeInfo>
+                <ns3:NoticeTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.11/TenderingNoticeTypeCode-2.11.gc">DOC_CAN_ADJ</ns3:NoticeTypeCode>
+                <ns1:AdditionalPublicationStatus>
+                    <ns3:PublicationMediaName>Perfil del contratante</ns3:PublicationMediaName>
+                    <ns1:AdditionalPublicationDocumentReference>
+                        <ns2:IssueDate>2025-03-07</ns2:IssueDate>
+                    </ns1:AdditionalPublicationDocumentReference>
+                    <ns1:AdditionalPublicationDocumentReference>
+                        <ns2:DocumentTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.11/TenderingDocumentTypeCode-2.11.gc" name="Documento de Acta de Adjudicación">ACTA_ADJ</ns2:DocumentTypeCode>
+                        <ns4:Attachment>
+                            <ns4:ExternalReference>
+<ns2:URI>https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=KHmvFdt01roDaLrCYMeC9XkMlKG7wMYVjGY%2B5m3B6zF2zNHLLqWtRC10nP9lPQQtRaq6TGz31N597AXUphZMSWfneDEIpeYfzghc/at%2B/3HVTD3T98KC0nSgQFM0q%2B5s&amp;cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D</ns2:URI>
+<ns2:FileName>Certificado de Acuerdo Pleno Adjudicacion.pdf</ns2:FileName>
+                            </ns4:ExternalReference>
+                        </ns4:Attachment>
+                    </ns1:AdditionalPublicationDocumentReference>
+                </ns1:AdditionalPublicationStatus>
+            </ns1:ValidNoticeInfo>
+            <ns1:ValidNoticeInfo>
+                <ns3:NoticeTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.11/TenderingNoticeTypeCode-2.11.gc">DOC_CD</ns3:NoticeTypeCode>
+                <ns1:AdditionalPublicationStatus>
+                    <ns3:PublicationMediaName>Perfil del contratante</ns3:PublicationMediaName>
+                    <ns1:AdditionalPublicationDocumentReference>
+                        <ns2:IssueDate>2024-11-05</ns2:IssueDate>
+                    </ns1:AdditionalPublicationDocumentReference>
+                </ns1:AdditionalPublicationStatus>
+            </ns1:ValidNoticeInfo>
+            <ns1:ValidNoticeInfo>
+                <ns3:NoticeTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.11/TenderingNoticeTypeCode-2.11.gc">DOC_CN</ns3:NoticeTypeCode>
+                <ns1:AdditionalPublicationStatus>
+                    <ns3:PublicationMediaName>Perfil del contratante</ns3:PublicationMediaName>
+                    <ns1:AdditionalPublicationDocumentReference>
+                        <ns2:IssueDate>2024-11-05</ns2:IssueDate>
+                    </ns1:AdditionalPublicationDocumentReference>
+                </ns1:AdditionalPublicationStatus>
+            </ns1:ValidNoticeInfo>
+            <ns1:GeneralDocument>
+                <ns1:GeneralDocumentDocumentReference>
+                    <ns2:ID>2025-62146acf-5fb2-4ec7-b96a-3cf1d73e88d1</ns2:ID>
+                    <ns2:DocumentTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/GeneralContractDocuments-2.08.gc">12</ns2:DocumentTypeCode>
+                    <ns4:Attachment>
+                        <ns4:ExternalReference>
+                            <ns2:URI>https://contrataciondelestado.es/wps/wcm/connect/PLACE_es/Site/area/docAccCmpnt?srv=cmpnt&amp;cmpntname=GetDocumentsById&amp;source=library&amp;DocumentIdParam=2025-62146acf-5fb2-4ec7-b96a-3cf1d73e88d1</ns2:URI>
+                            <ns2:FileName>Acta del órgano de asistencia</ns2:FileName>
+                        </ns4:ExternalReference>
+                    </ns4:Attachment>
+                </ns1:GeneralDocumentDocumentReference>
+            </ns1:GeneralDocument>
+            <ns1:GeneralDocument>
+                <ns1:GeneralDocumentDocumentReference>
+                    <ns2:ID>2025-26cdc414-18cd-4c23-a323-9cc9f9bdfb7b</ns2:ID>
+                    <ns2:DocumentTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/GeneralContractDocuments-2.08.gc">13</ns2:DocumentTypeCode>
+                    <ns4:Attachment>
+                        <ns4:ExternalReference>
+                            <ns2:URI>https://contrataciondelestado.es/wps/wcm/connect/PLACE_es/Site/area/docAccCmpnt?srv=cmpnt&amp;cmpntname=GetDocumentsById&amp;source=library&amp;DocumentIdParam=2025-26cdc414-18cd-4c23-a323-9cc9f9bdfb7b</ns2:URI>
+                            <ns2:FileName>Informe de valoración de los criterios de adjudicación cuantificables mediante juicio de valor</ns2:FileName>
+                        </ns4:ExternalReference>
+                    </ns4:Attachment>
+                </ns1:GeneralDocumentDocumentReference>
+            </ns1:GeneralDocument>
+            <ns1:GeneralDocument>
+                <ns1:GeneralDocumentDocumentReference>
+                    <ns2:ID>2024-832ad091-8854-4974-bac8-27c32d779fb4</ns2:ID>
+                    <ns2:DocumentTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/GeneralContractDocuments-2.08.gc">ZZZ</ns2:DocumentTypeCode>
+                    <ns4:Attachment>
+                        <ns4:ExternalReference>
+                            <ns2:URI>https://contrataciondelestado.es/wps/wcm/connect/PLACE_es/Site/area/docAccCmpnt?srv=cmpnt&amp;cmpntname=GetDocumentsById&amp;source=library&amp;DocumentIdParam=2024-832ad091-8854-4974-bac8-27c32d779fb4</ns2:URI>
+                            <ns2:FileName>Presupuesto en formato editable</ns2:FileName>
+                        </ns4:ExternalReference>
+                    </ns4:Attachment>
+                </ns1:GeneralDocumentDocumentReference>
+            </ns1:GeneralDocument>
+            <ns1:GeneralDocument>
+                <ns1:GeneralDocumentDocumentReference>
+                    <ns2:ID>2024-f6fe4c6b-4aa8-45a6-abea-d8818adb6640</ns2:ID>
+                    <ns2:DocumentTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/GeneralContractDocuments-2.08.gc">2</ns2:DocumentTypeCode>
+                    <ns4:Attachment>
+                        <ns4:ExternalReference>
+                            <ns2:URI>https://contrataciondelestado.es/wps/wcm/connect/PLACE_es/Site/area/docAccCmpnt?srv=cmpnt&amp;cmpntname=GetDocumentsById&amp;source=library&amp;DocumentIdParam=2024-f6fe4c6b-4aa8-45a6-abea-d8818adb6640</ns2:URI>
+                            <ns2:FileName>Composición de la mesa de contratación</ns2:FileName>
+                        </ns4:ExternalReference>
+                    </ns4:Attachment>
+                </ns1:GeneralDocumentDocumentReference>
+            </ns1:GeneralDocument>
+        </ns1:ContractFolderStatus>
+    </ns0:entry>
+    

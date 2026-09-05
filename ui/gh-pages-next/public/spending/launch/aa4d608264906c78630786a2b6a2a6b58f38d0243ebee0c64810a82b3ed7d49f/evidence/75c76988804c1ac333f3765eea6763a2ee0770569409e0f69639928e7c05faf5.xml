@@ -1,0 +1,532 @@
+<ns0:entry xmlns:ns0="http://www.w3.org/2005/Atom" xmlns:ns1="urn:dgpe:names:draft:codice-place-ext:schema:xsd:CommonAggregateComponents-2" xmlns:ns2="urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2" xmlns:ns3="urn:dgpe:names:draft:codice-place-ext:schema:xsd:CommonBasicComponents-2" xmlns:ns4="urn:dgpe:names:draft:codice:schema:xsd:CommonAggregateComponents-2">
+        <ns0:id>https://contrataciondelestado.es/sindicacion/licitacionesPerfilContratante/16176946</ns0:id>
+        <ns0:link href="https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&amp;idEvl=LCNbWolGQoVq1DdmE7eaXg%3D%3D" />
+        <ns0:summary type="text">Id licitación: ALC0311; Órgano de Contratación: Alcaldía del Ayuntamiento de Illescas; Importe: 7000 EUR; Estado: RES</ns0:summary>
+        <ns0:title>Servicio de Seguro de Responsabilidad Civil Profesional para los técnicos de Obras y Urbanismo del Ayuntamiento de Illescas (Toledo)</ns0:title>
+        <ns0:updated>2025-06-03T08:55:57.244+02:00</ns0:updated>
+        <ns1:ContractFolderStatus>
+            <ns2:ContractFolderID>ALC0311</ns2:ContractFolderID>
+            <ns3:ContractFolderStatusCode listURI="https://contrataciondelestado.es/codice/cl/2.04/SyndicationContractFolderStatusCode-2.04.gc" languageID="es">RES</ns3:ContractFolderStatusCode>
+            <ns1:LocatedContractingParty>
+                <ns2:ContractingPartyTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.10/ContractingAuthorityCode-2.10.gc">3</ns2:ContractingPartyTypeCode>
+                <ns2:ActivityCode listURI="http://contrataciondelestado.es/codice/cl/2.10/ContractingAuthorityActivityCode-2.10.gc">1</ns2:ActivityCode>
+                <ns2:BuyerProfileURIID>https://contrataciondelestado.es/wps/poc?uri=deeplink:perfilContratante&amp;idBp=NTp9%2FIprcpQBPRBxZ4nJ%2Fg%3D%3D</ns2:BuyerProfileURIID>
+                <ns4:Party>
+                    <ns2:WebsiteURI>http://www.illescas.es</ns2:WebsiteURI>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">P4508200E</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="ID_PLATAFORMA">31086630152423</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>Alcaldía del Ayuntamiento de Illescas</ns2:Name>
+                    </ns4:PartyName>
+                    <ns4:PostalAddress>
+                        <ns2:CityName>Illescas</ns2:CityName>
+                        <ns2:PostalZone>45200</ns2:PostalZone>
+                        <ns4:AddressLine>
+                            <ns2:Line>Plaza del Mercado nº 14</ns2:Line>
+                        </ns4:AddressLine>
+                        <ns4:Country>
+                            <ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+                            <ns2:Name>España</ns2:Name>
+                        </ns4:Country>
+                    </ns4:PostalAddress>
+                    <ns4:Contact>
+                        <ns2:Name>Alcaldía del Ayuntamiento de Illescas</ns2:Name>
+                        <ns2:Telephone>925511051</ns2:Telephone>
+                        <ns2:Telefax>925541615</ns2:Telefax>
+                        <ns2:ElectronicMail>licitaciones@illescas.es</ns2:ElectronicMail>
+                    </ns4:Contact>
+                </ns4:Party>
+                <ns1:ParentLocatedParty>
+                    <ns4:PartyName>
+                        <ns2:Name>Illescas</ns2:Name>
+                    </ns4:PartyName>
+                    <ns1:ParentLocatedParty>
+                        <ns4:PartyName>
+                            <ns2:Name>Ayuntamientos</ns2:Name>
+                        </ns4:PartyName>
+                        <ns1:ParentLocatedParty>
+                            <ns4:PartyName>
+<ns2:Name>Toledo</ns2:Name>
+                            </ns4:PartyName>
+                            <ns1:ParentLocatedParty>
+<ns4:PartyName>
+    <ns2:Name>Castilla La Mancha</ns2:Name>
+</ns4:PartyName>
+<ns1:ParentLocatedParty>
+    <ns4:PartyName>
+        <ns2:Name>ENTIDADES LOCALES</ns2:Name>
+    </ns4:PartyName>
+    <ns1:ParentLocatedParty>
+        <ns4:PartyName>
+            <ns2:Name>Sector Público</ns2:Name>
+        </ns4:PartyName>
+    </ns1:ParentLocatedParty>
+</ns1:ParentLocatedParty>
+                            </ns1:ParentLocatedParty>
+                        </ns1:ParentLocatedParty>
+                    </ns1:ParentLocatedParty>
+                </ns1:ParentLocatedParty>
+            </ns1:LocatedContractingParty>
+            <ns4:ProcurementProject>
+                <ns2:Name>Servicio de Seguro de Responsabilidad Civil Profesional para los técnicos de Obras y Urbanismo del Ayuntamiento de Illescas (Toledo)</ns2:Name>
+                <ns2:TypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/ContractCode-2.08.gc">2</ns2:TypeCode>
+                <ns2:SubTypeCode listURI="http://contrataciondelestado.es/codice/cl/1.04/ServiceContractCode-1.04.gc">27</ns2:SubTypeCode>
+                <ns2:MixContractIndicator>false</ns2:MixContractIndicator>
+                <ns4:BudgetAmount>
+                    <ns2:EstimatedOverallContractAmount currencyID="EUR">15400</ns2:EstimatedOverallContractAmount>
+                    <ns2:TotalAmount currencyID="EUR">7000</ns2:TotalAmount>
+                    <ns2:TaxExclusiveAmount currencyID="EUR">7000</ns2:TaxExclusiveAmount>
+                </ns4:BudgetAmount>
+                <ns4:RequiredCommodityClassification>
+                    <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">66516000</ns2:ItemClassificationCode>
+                </ns4:RequiredCommodityClassification>
+                <ns4:RealizedLocation>
+                    <ns2:CountrySubentity>Toledo</ns2:CountrySubentity>
+                    <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES425</ns2:CountrySubentityCode>
+                    <ns4:Address>
+                        <ns4:Country>
+                            <ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+                            <ns2:Name>España</ns2:Name>
+                        </ns4:Country>
+                    </ns4:Address>
+                </ns4:RealizedLocation>
+                <ns4:PlannedPeriod>
+                    <ns2:DurationMeasure unitCode="ANN">1</ns2:DurationMeasure>
+                </ns4:PlannedPeriod>
+                <ns4:ContractExtension>
+                    <ns4:OptionValidityPeriod>
+                        <ns2:Description>Conforme determina el art. 29.2 de la LCSP</ns2:Description>
+                    </ns4:OptionValidityPeriod>
+                </ns4:ContractExtension>
+            </ns4:ProcurementProject>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">1</ns2:ID>
+                <ns4:TenderingTerms>
+                    <ns4:AwardingTerms>
+                        <ns4:AwardingCriteria>
+                            <ns2:AwardingCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/AwardingCriteriaCode-2.0.gc">OBJ</ns2:AwardingCriteriaTypeCode>
+                            <ns2:Description>Reducción prima individual</ns2:Description>
+                            <ns2:Note>Conforme Anexo X del PCAP</ns2:Note>
+                            <ns2:AwardingCriteriaSubTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.09/AwardingCriteriaAutomaticallyEvaluatedSubTypeCode-2.09.gc">2</ns2:AwardingCriteriaSubTypeCode>
+                            <ns2:WeightNumeric>20</ns2:WeightNumeric>
+                        </ns4:AwardingCriteria>
+                        <ns4:AwardingCriteria>
+                            <ns2:AwardingCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/AwardingCriteriaCode-2.0.gc">OBJ</ns2:AwardingCriteriaTypeCode>
+                            <ns2:Description>Mejora cuantía mínima indemnización mensual</ns2:Description>
+                            <ns2:Note>Conforme Anexo X del PCAP</ns2:Note>
+                            <ns2:AwardingCriteriaSubTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.09/AwardingCriteriaAutomaticallyEvaluatedSubTypeCode-2.09.gc">2</ns2:AwardingCriteriaSubTypeCode>
+                            <ns2:WeightNumeric>10</ns2:WeightNumeric>
+                        </ns4:AwardingCriteria>
+                        <ns4:AwardingCriteria>
+                            <ns2:AwardingCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/AwardingCriteriaCode-2.0.gc">OBJ</ns2:AwardingCriteriaTypeCode>
+                            <ns2:Description>Presupuesto de licitación</ns2:Description>
+                            <ns2:Note>Conforme Anexo X del PCAP</ns2:Note>
+                            <ns2:AwardingCriteriaSubTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.09/AwardingCriteriaAutomaticallyEvaluatedSubTypeCode-2.09.gc">1</ns2:AwardingCriteriaSubTypeCode>
+                            <ns2:WeightNumeric>70</ns2:WeightNumeric>
+                        </ns4:AwardingCriteria>
+                    </ns4:AwardingTerms>
+                </ns4:TenderingTerms>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Seguro Responsabilidad Civil Profesional - Arquitectos municipales</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">3000</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">3000</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">66516000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Toledo</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES425</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">2</ns2:ID>
+                <ns4:TenderingTerms>
+                    <ns4:AwardingTerms>
+                        <ns4:AwardingCriteria>
+                            <ns2:AwardingCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/AwardingCriteriaCode-2.0.gc">OBJ</ns2:AwardingCriteriaTypeCode>
+                            <ns2:Description>Reducción prima individual</ns2:Description>
+                            <ns2:Note>Conforme Anexo X del PCAP</ns2:Note>
+                            <ns2:AwardingCriteriaSubTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.09/AwardingCriteriaAutomaticallyEvaluatedSubTypeCode-2.09.gc">2</ns2:AwardingCriteriaSubTypeCode>
+                            <ns2:WeightNumeric>20</ns2:WeightNumeric>
+                        </ns4:AwardingCriteria>
+                        <ns4:AwardingCriteria>
+                            <ns2:AwardingCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/AwardingCriteriaCode-2.0.gc">OBJ</ns2:AwardingCriteriaTypeCode>
+                            <ns2:Description>Mejora cuantía mínima indemnización mensual</ns2:Description>
+                            <ns2:Note>Conforme Anexo X del PCAP</ns2:Note>
+                            <ns2:AwardingCriteriaSubTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.09/AwardingCriteriaAutomaticallyEvaluatedSubTypeCode-2.09.gc">2</ns2:AwardingCriteriaSubTypeCode>
+                            <ns2:WeightNumeric>10</ns2:WeightNumeric>
+                        </ns4:AwardingCriteria>
+                        <ns4:AwardingCriteria>
+                            <ns2:AwardingCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/AwardingCriteriaCode-2.0.gc">OBJ</ns2:AwardingCriteriaTypeCode>
+                            <ns2:Description>Presupuesto de licitación</ns2:Description>
+                            <ns2:Note>Conforme Anexo X del PCAP</ns2:Note>
+                            <ns2:AwardingCriteriaSubTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.09/AwardingCriteriaAutomaticallyEvaluatedSubTypeCode-2.09.gc">1</ns2:AwardingCriteriaSubTypeCode>
+                            <ns2:WeightNumeric>70</ns2:WeightNumeric>
+                        </ns4:AwardingCriteria>
+                    </ns4:AwardingTerms>
+                </ns4:TenderingTerms>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Seguro Responsabilidad Civil - Arquitectos Técnicos o Ingenieros Técnicos de la Edificación e Ingeniero Técnico Municipal</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">4000</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">4000</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">66516000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Toledo</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES425</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Conforme propuesta adjudicación emitida por la Mesa de Contratación</ns2:Description>
+                <ns2:AwardDate>2025-01-15</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:LowerTenderAmount currencyID="EUR">2731</ns2:LowerTenderAmount>
+                <ns2:HigherTenderAmount currencyID="EUR">2731</ns2:HigherTenderAmount>
+                <ns2:StartDate>2025-01-01</ns2:StartDate>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:Contract>
+                    <ns2:ID>ALC0311_L1</ns2:ID>
+                    <ns2:IssueDate>2025-02-12</ns2:IssueDate>
+                </ns4:Contract>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">V48148639</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>ASEMAS, Mutua de Seguros y Reaseguros a Prima Fija</ns2:Name>
+                    </ns4:PartyName>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>1</ns2:ProcurementProjectLotID>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">2731</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">2953.58</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Conforme propuesta de adjudicación emitida por la Mesa de Contratación</ns2:Description>
+                <ns2:AwardDate>2025-01-15</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:LowerTenderAmount currencyID="EUR">3186</ns2:LowerTenderAmount>
+                <ns2:HigherTenderAmount currencyID="EUR">3186</ns2:HigherTenderAmount>
+                <ns2:StartDate>2025-01-01</ns2:StartDate>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:Contract>
+                    <ns2:ID>ALC0311_L2</ns2:ID>
+                    <ns2:IssueDate>2025-02-12</ns2:IssueDate>
+                </ns4:Contract>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">V48148639</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>ASEMAS, Mutua de Seguros y Reaseguros a Prima Fija</ns2:Name>
+                    </ns4:PartyName>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>2</ns2:ProcurementProjectLotID>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">3186</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">3445.66</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderingTerms>
+                <ns2:RequiredCurriculaIndicator>false</ns2:RequiredCurriculaIndicator>
+                <ns2:VariantConstraintIndicator>false</ns2:VariantConstraintIndicator>
+                <ns2:FundingProgramCode listURI="http://contrataciondelestado.es/codice/cl/2.08/FundingProgramCode-2.08.gc" name="No hay financiación con fondos de la UE">NO-EU</ns2:FundingProgramCode>
+                <ns2:ProcurementNationalLegislationCode listURI="https://contrataciondelestado.es/codice/cl/2.08/ProcurementNationalLegislationCode-2.08.gc">3</ns2:ProcurementNationalLegislationCode>
+                <ns2:ReceivedAppealQuantity>0</ns2:ReceivedAppealQuantity>
+                <ns4:RequiredFinancialGuarantee>
+                    <ns2:GuaranteeTypeCode listURI="http://contrataciondelestado.es/codice/cl/1.04/GuaranteeTypeCode-1.04.gc">2</ns2:GuaranteeTypeCode>
+                    <ns2:AmountRate>5</ns2:AmountRate>
+                </ns4:RequiredFinancialGuarantee>
+                <ns4:ProcurementLegislationDocumentReference>
+                    <ns2:ID>N/A</ns2:ID>
+                </ns4:ProcurementLegislationDocumentReference>
+                <ns4:TendererQualificationRequest>
+                    <ns4:TechnicalEvaluationCriteria>
+                        <ns2:EvaluationCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/TechnicalCapabilityTypeCode-2.0.gc">OSR-COMPTASK</ns2:EvaluationCriteriaTypeCode>
+                        <ns2:Description>Conforme Anexo V del PCAP</ns2:Description>
+                    </ns4:TechnicalEvaluationCriteria>
+                    <ns4:FinancialEvaluationCriteria>
+                        <ns2:EvaluationCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/FinancialCapabilityTypeCode-2.0.gc">3</ns2:EvaluationCriteriaTypeCode>
+                        <ns2:Description>Conforme Anexo V del PCAP</ns2:Description>
+                    </ns4:FinancialEvaluationCriteria>
+                    <ns4:FinancialEvaluationCriteria>
+                        <ns2:EvaluationCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/FinancialCapabilityTypeCode-2.0.gc">5</ns2:EvaluationCriteriaTypeCode>
+                        <ns2:Description>Conforme Anexo V del PCAP</ns2:Description>
+                    </ns4:FinancialEvaluationCriteria>
+                    <ns4:SpecificTendererRequirement>
+                        <ns2:RequirementTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/DeclarationTypeCode-2.08.gc">4</ns2:RequirementTypeCode>
+                        <ns2:Description>Cumplimiento con las obligaciones con la Seguridad Social</ns2:Description>
+                    </ns4:SpecificTendererRequirement>
+                    <ns4:SpecificTendererRequirement>
+                        <ns2:RequirementTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/DeclarationTypeCode-2.08.gc">2</ns2:RequirementTypeCode>
+                        <ns2:Description>No prohibición para contratar</ns2:Description>
+                    </ns4:SpecificTendererRequirement>
+                    <ns4:SpecificTendererRequirement>
+                        <ns2:RequirementTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/DeclarationTypeCode-2.08.gc">3</ns2:RequirementTypeCode>
+                        <ns2:Description>No estar incurso en incompatibilidades</ns2:Description>
+                    </ns4:SpecificTendererRequirement>
+                    <ns4:SpecificTendererRequirement>
+                        <ns2:RequirementTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/DeclarationTypeCode-2.08.gc">1</ns2:RequirementTypeCode>
+                        <ns2:Description>Capacidad de obrar</ns2:Description>
+                    </ns4:SpecificTendererRequirement>
+                    <ns4:SpecificTendererRequirement>
+                        <ns2:RequirementTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/DeclarationTypeCode-2.08.gc">5</ns2:RequirementTypeCode>
+                        <ns2:Description>Cumplimiento con las obligaciones tributarias</ns2:Description>
+                    </ns4:SpecificTendererRequirement>
+                </ns4:TendererQualificationRequest>
+                <ns4:ContractExecutionRequirement>
+                    <ns2:Name>Consideraciones de tipo social</ns2:Name>
+                    <ns2:ExecutionRequirementCode listURI="https://contrataciondelestado.es/codice/cl/2.08/ExecutionRequirementCode-2.08.gc">2</ns2:ExecutionRequirementCode>
+                    <ns2:Description>Conforme art. 202 de la LCSP y Anexo XI del PCAP</ns2:Description>
+                </ns4:ContractExecutionRequirement>
+                <ns4:TenderRecipientParty>
+                    <ns2:EndpointID>https://contrataciondelestado.es</ns2:EndpointID>
+                </ns4:TenderRecipientParty>
+                <ns4:Language>
+                    <ns2:ID>es</ns2:ID>
+                </ns4:Language>
+            </ns4:TenderingTerms>
+            <ns4:TenderingProcess>
+                <ns2:ProcedureCode listURI="https://contrataciondelestado.es/codice/cl/2.07/SyndicationTenderingProcessCode-2.07.gc">9</ns2:ProcedureCode>
+                <ns2:UrgencyCode listURI="http://contrataciondelestado.es/codice/cl/1.04/DiligenceTypeCode-1.04.gc">1</ns2:UrgencyCode>
+                <ns2:PartPresentationCode listURI="http://contrataciondelestado.es/codice/cl/1.04/TenderPresentationCode-1.04.gc" name="A uno o varios lotes">3</ns2:PartPresentationCode>
+                <ns2:ContractingSystemCode listURI="http://contrataciondelestado.es/codice/cl/2.08/ContractingSystemTypeCode-2.08.gc">0</ns2:ContractingSystemCode>
+                <ns2:SubmissionMethodCode listURI="http://contrataciondelestado.es/codice/cl/1.04/TenderDeliveryCode-1.04.gc">1</ns2:SubmissionMethodCode>
+                <ns2:MaximumLotPresentationQuantity>2</ns2:MaximumLotPresentationQuantity>
+                <ns2:MaximumTendererAwardedLotsQuantity>2</ns2:MaximumTendererAwardedLotsQuantity>
+                <ns2:OverThresholdIndicator>false</ns2:OverThresholdIndicator>
+                <ns4:DocumentAvailabilityPeriod>
+                    <ns2:EndDate>2024-12-13</ns2:EndDate>
+                    <ns2:EndTime>23:59:00</ns2:EndTime>
+                </ns4:DocumentAvailabilityPeriod>
+                <ns4:TenderSubmissionDeadlinePeriod>
+                    <ns2:EndDate>2024-12-13</ns2:EndDate>
+                    <ns2:EndTime>23:59:00</ns2:EndTime>
+                </ns4:TenderSubmissionDeadlinePeriod>
+                <ns4:AuctionTerms>
+                    <ns2:AuctionConstraintIndicator>false</ns2:AuctionConstraintIndicator>
+                </ns4:AuctionTerms>
+            </ns4:TenderingProcess>
+            <ns4:LegalDocumentReference>
+                <ns2:ID>PCAP SEGURO RC.pdf</ns2:ID>
+                <ns4:Attachment>
+                    <ns4:ExternalReference>
+                        <ns2:URI>https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=51fBrOB1tCqD5rbLYvGLq6itRJBeviWpF37d9wEnqbmN4HHM/Mn8ZxQOhF3vPYCJDLG%2BPjIj%2BiiV5w1iH5ZmAB7r1%2Bt21ce54ecj2REQsj8C1/zDIE0Kw/PWNnLS0Z0z&amp;cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D</ns2:URI>
+                        <ns2:DocumentHash>2jmj7l5rSw0yVb/vlWAYkK/YBwk=</ns2:DocumentHash>
+                    </ns4:ExternalReference>
+                </ns4:Attachment>
+            </ns4:LegalDocumentReference>
+            <ns4:TechnicalDocumentReference>
+                <ns2:ID>MEMORIA_PPT_SEGURO RC.pdf</ns2:ID>
+                <ns4:Attachment>
+                    <ns4:ExternalReference>
+                        <ns2:URI>https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=OUAo19rb66PKTha2gGiftwI6ItY%2BuQGIjvr10QQ3IthnGGAtglAqpN3h2Og9yAXj9W3F94kmHcudsa34FfZuX3sRTmt9GgI5VYViM/xLZR3DdQD9RyhUmzT4jZ2In4zL&amp;cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D</ns2:URI>
+                        <ns2:DocumentHash>2jmj7l5rSw0yVb/vlWAYkK/YBwk=</ns2:DocumentHash>
+                    </ns4:ExternalReference>
+                </ns4:Attachment>
+            </ns4:TechnicalDocumentReference>
+            <ns1:ValidNoticeInfo>
+                <ns3:NoticeTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.11/TenderingNoticeTypeCode-2.11.gc">DOC_CAN_ADJ</ns3:NoticeTypeCode>
+                <ns1:AdditionalPublicationStatus>
+                    <ns3:PublicationMediaName>Perfil del contratante</ns3:PublicationMediaName>
+                    <ns1:AdditionalPublicationDocumentReference>
+                        <ns2:IssueDate>2025-01-16</ns2:IssueDate>
+                    </ns1:AdditionalPublicationDocumentReference>
+                    <ns1:AdditionalPublicationDocumentReference>
+                        <ns2:DocumentTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.11/TenderingDocumentTypeCode-2.11.gc" name="Documento de Acta de Adjudicación">ACTA_ADJ</ns2:DocumentTypeCode>
+                        <ns4:Attachment>
+                            <ns4:ExternalReference>
+<ns2:URI>https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=k0hIzFe%2BEVhSZzDPsfm/n24EvxvWWZlDu4mmBwboxg47TNO9Ua0sW/0fu62CtfzuMs3sHG1klcQiaAbkaCQ3vrn%2BZy9Ua/hTcWplBPcgGBB45ClyWkoJ44mKM70IFcOu&amp;cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D</ns2:URI>
+<ns2:FileName>RESOLUCION ADJUDICACION.pdf</ns2:FileName>
+                            </ns4:ExternalReference>
+                        </ns4:Attachment>
+                    </ns1:AdditionalPublicationDocumentReference>
+                </ns1:AdditionalPublicationStatus>
+            </ns1:ValidNoticeInfo>
+            <ns1:ValidNoticeInfo>
+                <ns3:NoticeTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.11/TenderingNoticeTypeCode-2.11.gc">DOC_CD</ns3:NoticeTypeCode>
+                <ns1:AdditionalPublicationStatus>
+                    <ns3:PublicationMediaName>Perfil del contratante</ns3:PublicationMediaName>
+                    <ns1:AdditionalPublicationDocumentReference>
+                        <ns2:IssueDate>2024-11-28</ns2:IssueDate>
+                    </ns1:AdditionalPublicationDocumentReference>
+                </ns1:AdditionalPublicationStatus>
+            </ns1:ValidNoticeInfo>
+            <ns1:ValidNoticeInfo>
+                <ns3:NoticeTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.11/TenderingNoticeTypeCode-2.11.gc">DOC_CN</ns3:NoticeTypeCode>
+                <ns1:AdditionalPublicationStatus>
+                    <ns3:PublicationMediaName>Perfil del contratante</ns3:PublicationMediaName>
+                    <ns1:AdditionalPublicationDocumentReference>
+                        <ns2:IssueDate>2024-11-28</ns2:IssueDate>
+                    </ns1:AdditionalPublicationDocumentReference>
+                </ns1:AdditionalPublicationStatus>
+            </ns1:ValidNoticeInfo>
+            <ns1:ValidNoticeInfo>
+                <ns3:NoticeTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.11/TenderingNoticeTypeCode-2.11.gc">DOC_FORM</ns3:NoticeTypeCode>
+                <ns1:AdditionalPublicationStatus>
+                    <ns3:PublicationMediaName>Perfil del contratante</ns3:PublicationMediaName>
+                    <ns1:AdditionalPublicationDocumentReference>
+                        <ns2:IssueDate>2025-02-13</ns2:IssueDate>
+                    </ns1:AdditionalPublicationDocumentReference>
+                    <ns1:AdditionalPublicationDocumentReference>
+                        <ns2:DocumentTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.11/TenderingDocumentTypeCode-2.11.gc" name="Documento de Acta de Formalización">ACTA_FORM</ns2:DocumentTypeCode>
+                        <ns4:Attachment>
+                            <ns4:ExternalReference>
+<ns2:URI>https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=0C0SmLhm6E/AGIwrnCqtCbqxpK8lqslymG2OFRAIkvmVYnRAymuV1BKNMOUc4sC86c%2BZed4cECJISIJWxOYVLvf9sWiJXRUTw4NPIE6rosL6CYyL7SIrUOBFfNf52ZqA&amp;cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D</ns2:URI>
+<ns2:FileName>CONTRATOS LOTES 1_2.pdf</ns2:FileName>
+                            </ns4:ExternalReference>
+                        </ns4:Attachment>
+                    </ns1:AdditionalPublicationDocumentReference>
+                </ns1:AdditionalPublicationStatus>
+            </ns1:ValidNoticeInfo>
+            <ns1:ValidNoticeInfo>
+                <ns3:NoticeTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.11/TenderingNoticeTypeCode-2.11.gc">DOC_MOD</ns3:NoticeTypeCode>
+                <ns1:AdditionalPublicationStatus>
+                    <ns3:PublicationMediaName>Perfil del contratante</ns3:PublicationMediaName>
+                    <ns1:AdditionalPublicationDocumentReference>
+                        <ns2:IssueDate>2025-06-03</ns2:IssueDate>
+                    </ns1:AdditionalPublicationDocumentReference>
+                    <ns1:AdditionalPublicationDocumentReference>
+                        <ns2:IssueDate>2025-06-03</ns2:IssueDate>
+                    </ns1:AdditionalPublicationDocumentReference>
+                </ns1:AdditionalPublicationStatus>
+            </ns1:ValidNoticeInfo>
+            <ns1:GeneralDocument>
+                <ns1:GeneralDocumentDocumentReference>
+                    <ns2:ID>2024-b1b44fba-9901-4204-8735-fc1e746055e4</ns2:ID>
+                    <ns2:DocumentTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/GeneralContractDocuments-2.08.gc">ZZZ</ns2:DocumentTypeCode>
+                    <ns4:Attachment>
+                        <ns4:ExternalReference>
+                            <ns2:URI>https://contrataciondelestado.es/wps/wcm/connect/PLACE_es/Site/area/docAccCmpnt?srv=cmpnt&amp;cmpntname=GetDocumentsById&amp;source=library&amp;DocumentIdParam=2024-b1b44fba-9901-4204-8735-fc1e746055e4</ns2:URI>
+                            <ns2:FileName>CONVOCATORIA APERTURA SOBRE ÚNICO</ns2:FileName>
+                        </ns4:ExternalReference>
+                    </ns4:Attachment>
+                </ns1:GeneralDocumentDocumentReference>
+            </ns1:GeneralDocument>
+            <ns1:GeneralDocument>
+                <ns1:GeneralDocumentDocumentReference>
+                    <ns2:ID>2024-b70b44bd-17ce-4d92-aec3-303a54ba4d8f</ns2:ID>
+                    <ns2:DocumentTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/GeneralContractDocuments-2.08.gc">ZZZ</ns2:DocumentTypeCode>
+                    <ns4:Attachment>
+                        <ns4:ExternalReference>
+                            <ns2:URI>https://contrataciondelestado.es/wps/wcm/connect/PLACE_es/Site/area/docAccCmpnt?srv=cmpnt&amp;cmpntname=GetDocumentsById&amp;source=library&amp;DocumentIdParam=2024-b70b44bd-17ce-4d92-aec3-303a54ba4d8f</ns2:URI>
+                            <ns2:FileName>ACTA APERTURA SOBRE ÚNICO Y PPTA ADJUDICACION</ns2:FileName>
+                        </ns4:ExternalReference>
+                    </ns4:Attachment>
+                </ns1:GeneralDocumentDocumentReference>
+            </ns1:GeneralDocument>
+            <ns1:GeneralDocument>
+                <ns1:GeneralDocumentDocumentReference>
+                    <ns2:ID>2024-c7b6e1de-31dd-4bfd-9123-1a9edca84d05</ns2:ID>
+                    <ns2:DocumentTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/GeneralContractDocuments-2.08.gc">11</ns2:DocumentTypeCode>
+                    <ns4:Attachment>
+                        <ns4:ExternalReference>
+                            <ns2:URI>https://contrataciondelestado.es/wps/wcm/connect/PLACE_es/Site/area/docAccCmpnt?srv=cmpnt&amp;cmpntname=GetDocumentsById&amp;source=library&amp;DocumentIdParam=2024-c7b6e1de-31dd-4bfd-9123-1a9edca84d05</ns2:URI>
+                            <ns2:FileName>Documento de aprobación del expediente</ns2:FileName>
+                        </ns4:ExternalReference>
+                    </ns4:Attachment>
+                </ns1:GeneralDocumentDocumentReference>
+            </ns1:GeneralDocument>
+            <ns1:GeneralDocument>
+                <ns1:GeneralDocumentDocumentReference>
+                    <ns2:ID>2024-52e977fc-1b5f-4337-a684-af6ae094f454</ns2:ID>
+                    <ns2:DocumentTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/GeneralContractDocuments-2.08.gc">8</ns2:DocumentTypeCode>
+                    <ns4:Attachment>
+                        <ns4:ExternalReference>
+                            <ns2:URI>https://contrataciondelestado.es/wps/wcm/connect/PLACE_es/Site/area/docAccCmpnt?srv=cmpnt&amp;cmpntname=GetDocumentsById&amp;source=library&amp;DocumentIdParam=2024-52e977fc-1b5f-4337-a684-af6ae094f454</ns2:URI>
+                            <ns2:FileName>Acuerdo de iniciación del expediente</ns2:FileName>
+                        </ns4:ExternalReference>
+                    </ns4:Attachment>
+                </ns1:GeneralDocumentDocumentReference>
+            </ns1:GeneralDocument>
+            <ns1:GeneralDocument>
+                <ns1:GeneralDocumentDocumentReference>
+                    <ns2:ID>2024-d163acea-0ab4-4f24-9a9c-542632516608</ns2:ID>
+                    <ns2:DocumentTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/GeneralContractDocuments-2.08.gc">ZZZ</ns2:DocumentTypeCode>
+                    <ns4:Attachment>
+                        <ns4:ExternalReference>
+                            <ns2:URI>https://contrataciondelestado.es/wps/wcm/connect/PLACE_es/Site/area/docAccCmpnt?srv=cmpnt&amp;cmpntname=GetDocumentsById&amp;source=library&amp;DocumentIdParam=2024-d163acea-0ab4-4f24-9a9c-542632516608</ns2:URI>
+                            <ns2:FileName>Informe necesidades</ns2:FileName>
+                        </ns4:ExternalReference>
+                    </ns4:Attachment>
+                </ns1:GeneralDocumentDocumentReference>
+            </ns1:GeneralDocument>
+            <ns1:GeneralDocument>
+                <ns1:GeneralDocumentDocumentReference>
+                    <ns2:ID>2024-3b4b853e-5ced-4828-a06d-f5872322b960</ns2:ID>
+                    <ns2:DocumentTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/GeneralContractDocuments-2.08.gc">9</ns2:DocumentTypeCode>
+                    <ns4:Attachment>
+                        <ns4:ExternalReference>
+                            <ns2:URI>https://contrataciondelestado.es/wps/wcm/connect/PLACE_es/Site/area/docAccCmpnt?srv=cmpnt&amp;cmpntname=GetDocumentsById&amp;source=library&amp;DocumentIdParam=2024-3b4b853e-5ced-4828-a06d-f5872322b960</ns2:URI>
+                            <ns2:FileName>Memoria justificativa</ns2:FileName>
+                        </ns4:ExternalReference>
+                    </ns4:Attachment>
+                </ns1:GeneralDocumentDocumentReference>
+            </ns1:GeneralDocument>
+            <ns1:GeneralDocument>
+                <ns1:GeneralDocumentDocumentReference>
+                    <ns2:ID>2024-175eb892-a303-42c9-a863-d65c9a95fc5b</ns2:ID>
+                    <ns2:DocumentTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/GeneralContractDocuments-2.08.gc">10</ns2:DocumentTypeCode>
+                    <ns4:Attachment>
+                        <ns4:ExternalReference>
+                            <ns2:URI>https://contrataciondelestado.es/wps/wcm/connect/PLACE_es/Site/area/docAccCmpnt?srv=cmpnt&amp;cmpntname=GetDocumentsById&amp;source=library&amp;DocumentIdParam=2024-175eb892-a303-42c9-a863-d65c9a95fc5b</ns2:URI>
+                            <ns2:FileName>Informe de insuficiencia de medios</ns2:FileName>
+                        </ns4:ExternalReference>
+                    </ns4:Attachment>
+                </ns1:GeneralDocumentDocumentReference>
+            </ns1:GeneralDocument>
+            <ns4:ContractModification>
+                <ns2:ID>1</ns2:ID>
+                <ns2:ContractID>ALC0311_L1</ns2:ContractID>
+                <ns4:ContractModificationLegalMonetaryTotal>
+                    <ns2:TaxExclusiveAmount currencyID="EUR">910.33</ns2:TaxExclusiveAmount>
+                </ns4:ContractModificationLegalMonetaryTotal>
+                <ns4:FinalLegalMonetaryTotal>
+                    <ns2:TaxExclusiveAmount currencyID="EUR">3863.91</ns2:TaxExclusiveAmount>
+                </ns4:FinalLegalMonetaryTotal>
+            </ns4:ContractModification>
+            <ns4:ContractModification>
+                <ns2:ID>1</ns2:ID>
+                <ns2:ContractID>ALC0311_L2</ns2:ContractID>
+                <ns4:ContractModificationLegalMonetaryTotal>
+                    <ns2:TaxExclusiveAmount currencyID="EUR">1593</ns2:TaxExclusiveAmount>
+                </ns4:ContractModificationLegalMonetaryTotal>
+                <ns4:FinalLegalMonetaryTotal>
+                    <ns2:TaxExclusiveAmount currencyID="EUR">5038.66</ns2:TaxExclusiveAmount>
+                </ns4:FinalLegalMonetaryTotal>
+            </ns4:ContractModification>
+        </ns1:ContractFolderStatus>
+    </ns0:entry>
+    

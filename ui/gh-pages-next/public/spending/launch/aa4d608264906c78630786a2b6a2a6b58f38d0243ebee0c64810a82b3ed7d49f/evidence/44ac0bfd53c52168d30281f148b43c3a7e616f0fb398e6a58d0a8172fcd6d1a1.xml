@@ -1,0 +1,2474 @@
+<ns0:entry xmlns:ns0="http://www.w3.org/2005/Atom" xmlns:ns1="urn:dgpe:names:draft:codice-place-ext:schema:xsd:CommonAggregateComponents-2" xmlns:ns2="urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2" xmlns:ns3="urn:dgpe:names:draft:codice-place-ext:schema:xsd:CommonBasicComponents-2" xmlns:ns4="urn:dgpe:names:draft:codice:schema:xsd:CommonAggregateComponents-2">
+        <ns0:id>https://contrataciondelestado.es/sindicacion/licitacionesPerfilContratante/16522915</ns0:id>
+        <ns0:link href="https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&amp;idEvl=gW5IUlqjCMA2wEhQbcAqug%3D%3D" />
+        <ns0:summary type="text">Id licitación: 15001/2025; Órgano de Contratación: Consejería de Educación y Formación Profesional de la Región de Murcia; Importe: 3680494.9 EUR; Estado: ADJ</ns0:summary>
+        <ns0:title>Emergencia del servicio de transporte escolar en 232 rutas de centros educativos dependientes de la Consejería de Educación y Formación Profesional (46 lotes)</ns0:title>
+        <ns0:updated>2025-03-11T13:11:04.395+01:00</ns0:updated>
+        <ns1:ContractFolderStatus>
+            <ns2:ContractFolderID>15001/2025</ns2:ContractFolderID>
+            <ns3:ContractFolderStatusCode listURI="https://contrataciondelestado.es/codice/cl/2.04/SyndicationContractFolderStatusCode-2.04.gc" languageID="es">ADJ</ns3:ContractFolderStatusCode>
+            <ns1:LocatedContractingParty>
+                <ns2:ContractingPartyTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.10/ContractingAuthorityCode-2.10.gc">2</ns2:ContractingPartyTypeCode>
+                <ns2:ActivityCode listURI="http://contrataciondelestado.es/codice/cl/2.10/ContractingAuthorityActivityCode-2.10.gc">9</ns2:ActivityCode>
+                <ns2:BuyerProfileURIID>https://contrataciondelestado.es/wps/poc?uri=deeplink:perfilContratante&amp;idBp=GPb%2BaT2N7Wqmq21uxhbaVQ%3D%3D</ns2:BuyerProfileURIID>
+                <ns4:Party>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="DIR3">A14002961</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">S3011001I</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="ID_PLATAFORMA">21261610169921</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>Consejería de Educación y Formación Profesional de la Región de Murcia</ns2:Name>
+                    </ns4:PartyName>
+                    <ns4:PostalAddress>
+                        <ns2:CityName>Murcia</ns2:CityName>
+                        <ns2:PostalZone>30006</ns2:PostalZone>
+                        <ns4:AddressLine>
+                            <ns2:Line>Avda. de la Fama, 15</ns2:Line>
+                        </ns4:AddressLine>
+                        <ns4:Country>
+                            <ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+                            <ns2:Name>España</ns2:Name>
+                        </ns4:Country>
+                    </ns4:PostalAddress>
+                    <ns4:Contact>
+                        <ns2:Name>Consejería de Educación y Formación Profesional de la Región de Murcia</ns2:Name>
+                        <ns2:Telephone>968279688</ns2:Telephone>
+                        <ns2:ElectronicMail>contratacioneducacion@murciaeduca.es</ns2:ElectronicMail>
+                    </ns4:Contact>
+                </ns4:Party>
+                <ns1:ParentLocatedParty>
+                    <ns4:PartyName>
+                        <ns2:Name>Región de Murcia</ns2:Name>
+                    </ns4:PartyName>
+                    <ns1:ParentLocatedParty>
+                        <ns4:PartyName>
+                            <ns2:Name>COMUNIDADES Y CIUDADES AUTÓNOMAS</ns2:Name>
+                        </ns4:PartyName>
+                        <ns1:ParentLocatedParty>
+                            <ns4:PartyName>
+<ns2:Name>Sector Público</ns2:Name>
+                            </ns4:PartyName>
+                        </ns1:ParentLocatedParty>
+                    </ns1:ParentLocatedParty>
+                </ns1:ParentLocatedParty>
+            </ns1:LocatedContractingParty>
+            <ns4:ProcurementProject>
+                <ns2:Name>Emergencia del servicio de transporte escolar en 232 rutas de centros educativos dependientes de la Consejería de Educación y Formación Profesional (46 lotes)</ns2:Name>
+                <ns2:TypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/ContractCode-2.08.gc">2</ns2:TypeCode>
+                <ns2:SubTypeCode listURI="http://contrataciondelestado.es/codice/cl/1.04/ServiceContractCode-1.04.gc">2</ns2:SubTypeCode>
+                <ns2:MixContractIndicator>false</ns2:MixContractIndicator>
+                <ns4:BudgetAmount>
+                    <ns2:EstimatedOverallContractAmount currencyID="EUR">3680494.9</ns2:EstimatedOverallContractAmount>
+                    <ns2:TotalAmount currencyID="EUR">4048544.43</ns2:TotalAmount>
+                    <ns2:TaxExclusiveAmount currencyID="EUR">3680494.9</ns2:TaxExclusiveAmount>
+                </ns4:BudgetAmount>
+                <ns4:RequiredCommodityClassification>
+                    <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">60130000</ns2:ItemClassificationCode>
+                </ns4:RequiredCommodityClassification>
+                <ns4:RealizedLocation>
+                    <ns2:CountrySubentity>Murcia</ns2:CountrySubentity>
+                    <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES620</ns2:CountrySubentityCode>
+                    <ns4:Address>
+                        <ns4:Country>
+                            <ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+                            <ns2:Name>España</ns2:Name>
+                        </ns4:Country>
+                    </ns4:Address>
+                </ns4:RealizedLocation>
+                <ns4:PlannedPeriod>
+                    <ns2:StartDate>2025-01-07</ns2:StartDate>
+                    <ns2:EndDate>2025-03-31</ns2:EndDate>
+                </ns4:PlannedPeriod>
+            </ns4:ProcurementProject>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">1</ns2:ID>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Lote 1 - Emergencia del servicio de transporte escolar en 232 rutas de centros educativos dependientes de la consejería de educación y formación profesional</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">14026.62</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">12751.47</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">60130000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Murcia</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES620</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">10</ns2:ID>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Lote 10 - Emergencia del servicio de transporte escolar en 232 rutas de centros educativos dependientes de la consejería de educación y formación profesional</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">52121.41</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">47383.1</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">60130000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Murcia</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES620</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">11</ns2:ID>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Lote 11 - Emergencia del servicio de transporte escolar en 232 rutas de centros educativos dependientes de la consejería de educación y formación profesional</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">60373.17</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">54884.7</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">60130000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Murcia</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES620</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">12</ns2:ID>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Lote 12 - Emergencia del servicio de transporte escolar en 232 rutas de centros educativos dependientes de la consejería de educación y formación profesional</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">342179.92</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">311072.65</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">60130000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Murcia</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES620</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">13</ns2:ID>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Lote 13 - Emergencia del servicio de transporte escolar en 232 rutas de centros educativos dependientes de la consejería de educación y formación profesional</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">156810.34</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">142554.85</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">60130000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Murcia</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES620</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">14</ns2:ID>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Lote 14 - Emergencia del servicio de transporte escolar en 232 rutas de centros educativos dependientes de la consejería de educación y formación profesional</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">24337.15</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">22124.68</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">60130000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Murcia</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES620</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">15</ns2:ID>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Lote 15 - Emergencia del servicio de transporte escolar en 232 rutas de centros educativos dependientes de la consejería de educación y formación profesional</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">37107.36</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">33733.96</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">60130000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Murcia</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES620</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">16</ns2:ID>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Lote 16 - Emergencia del servicio de transporte escolar en 232 rutas de centros educativos dependientes de la consejería de educación y formación profesional</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">59653</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">54230</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">60130000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Murcia</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES620</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">17</ns2:ID>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Lote 17 - Emergencia del servicio de transporte escolar en 232 rutas de centros educativos dependientes de la consejería de educación y formación profesional</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">54798.79</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">49817.08</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">60130000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Murcia</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES620</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">18</ns2:ID>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Lote 18 - Emergencia del servicio de transporte escolar en 232 rutas de centros educativos dependientes de la consejería de educación y formación profesional</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">255033.91</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">231849.01</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">60130000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Murcia</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES620</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">19</ns2:ID>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Lote 19 - Emergencia del servicio de transporte escolar en 232 rutas de centros educativos dependientes de la consejería de educación y formación profesional</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">135524.4</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">123204</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">60130000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Murcia</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES620</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">2</ns2:ID>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Lote 2 - Emergencia del servicio de transporte escolar en 232 rutas de centros educativos dependientes de la consejería de educación y formación profesional</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">15312</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">13920</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">60130000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Murcia</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES620</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">20</ns2:ID>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Lote 20 - Emergencia del servicio de transporte escolar en 232 rutas de centros educativos dependientes de la consejería de educación y formación profesional</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">48447.29</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">44042.99</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">60130000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Murcia</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES620</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">21</ns2:ID>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Lote 21 - Emergencia del servicio de transporte escolar en 232 rutas de centros educativos dependientes de la consejería de educación y formación profesional</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">112449.7</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">102227</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">60130000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Murcia</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES620</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">22</ns2:ID>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Lote 22 - Emergencia del servicio de transporte escolar en 232 rutas de centros educativos dependientes de la consejería de educación y formación profesional</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">208008.14</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">189098.31</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">60130000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Murcia</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES620</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">23</ns2:ID>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Lote 23 - Emergencia del servicio de transporte escolar en 232 rutas de centros educativos dependientes de la consejería de educación y formación profesional</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">55264</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">50240</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">60130000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Murcia</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES620</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">24</ns2:ID>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Lote 24 - Emergencia del servicio de transporte escolar en 232 rutas de centros educativos dependientes de la consejería de educación y formación profesional</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">373374.1</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">339431</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">60130000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Murcia</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES620</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">25</ns2:ID>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Lote 25 - Emergencia del servicio de transporte escolar en 232 rutas de centros educativos dependientes de la consejería de educación y formación profesional</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">116367.52</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">105788.66</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">60130000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Murcia</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES620</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">26</ns2:ID>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Lote 26 - Emergencia del servicio de transporte escolar en 232 rutas de centros educativos dependientes de la consejería de educación y formación profesional</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">113474.24</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">103158.4</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">60130000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Murcia</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES620</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">27</ns2:ID>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Lote 27 - Emergencia del servicio de transporte escolar en 232 rutas de centros educativos dependientes de la consejería de educación y formación profesional</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">292862.35</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">266238.5</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">60130000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Murcia</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES620</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">28</ns2:ID>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Lote 28 - Emergencia del servicio de transporte escolar en 232 rutas de centros educativos dependientes de la consejería de educación y formación profesional</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">219618.5</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">199653.18</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">60130000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Murcia</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES620</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">29</ns2:ID>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Lote 29 - Emergencia del servicio de transporte escolar en 232 rutas de centros educativos dependientes de la consejería de educación y formación profesional</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">42277.47</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">38434.06</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">60130000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Murcia</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES620</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">3</ns2:ID>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Lote 3 - Emergencia del servicio de transporte escolar en 232 rutas de centros educativos dependientes de la consejería de educación y formación profesional</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">54988.28</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">49989.34</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">60130000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Murcia</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES620</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">30</ns2:ID>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Lote 30 - Emergencia del servicio de transporte escolar en 232 rutas de centros educativos dependientes de la consejería de educación y formación profesional</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">52537.53</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">47761.39</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">60130000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Murcia</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES620</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">31</ns2:ID>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Lote 31 - Emergencia del servicio de transporte escolar en 232 rutas de centros educativos dependientes de la consejería de educación y formación profesional</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">14272.7</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">12975.18</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">60130000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Murcia</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES620</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">32</ns2:ID>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Lote 32 - Emergencia del servicio de transporte escolar en 232 rutas de centros educativos dependientes de la consejería de educación y formación profesional</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">75326.11</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">68478.28</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">60130000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Murcia</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES620</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">33</ns2:ID>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Lote 33 - Emergencia del servicio de transporte escolar en 232 rutas de centros educativos dependientes de la consejería de educación y formación profesional</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">29986</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">27260</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">60130000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Murcia</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES620</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">34</ns2:ID>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Lote 34 - Emergencia del servicio de transporte escolar en 232 rutas de centros educativos dependientes de la consejería de educación y formación profesional</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">33466.13</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">30423.75</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">60130000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Murcia</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES620</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">35</ns2:ID>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Lote 35 - Emergencia del servicio de transporte escolar en 232 rutas de centros educativos dependientes de la consejería de educación y formación profesional</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">14272.7</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">12975.18</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">60130000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Murcia</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES620</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">36</ns2:ID>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Lote 36 - Emergencia del servicio de transporte escolar en 232 rutas de centros educativos dependientes de la consejería de educación y formación profesional</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">15083.11</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">13711.92</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">60130000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Murcia</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES620</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">37</ns2:ID>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Lote 37 - Emergencia del servicio de transporte escolar en 232 rutas de centros educativos dependientes de la consejería de educación y formación profesional</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">19459</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">17690</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">60130000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Murcia</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES620</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">38</ns2:ID>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Lote 38 - Emergencia del servicio de transporte escolar en 232 rutas de centros educativos dependientes de la consejería de educación y formación profesional</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">17800.2</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">16182</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">60130000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Murcia</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES620</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">39</ns2:ID>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Lote 39 - Emergencia del servicio de transporte escolar en 232 rutas de centros educativos dependientes de la consejería de educación y formación profesional</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">194733.65</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">177030.59</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">60130000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Murcia</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES620</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">4</ns2:ID>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Lote 4 - Emergencia del servicio de transporte escolar en 232 rutas de centros educativos dependientes de la consejería de educación y formación profesional</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">86231.5</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">78392.27</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">60130000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Murcia</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES620</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">40</ns2:ID>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Lote 40 - Emergencia del servicio de transporte escolar en 232 rutas de centros educativos dependientes de la consejería de educación y formación profesional</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">116670.11</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">106063.74</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">60130000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Murcia</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES620</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">41</ns2:ID>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Lote 41 - Emergencia del servicio de transporte escolar en 232 rutas de centros educativos dependientes de la consejería de educación y formación profesional</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">33840.74</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">30764.31</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">60130000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Murcia</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES620</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">42</ns2:ID>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Lote 42 - Emergencia del servicio de transporte escolar en 232 rutas de centros educativos dependientes de la consejería de educación y formación profesional</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">72592.18</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">65992.89</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">60130000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Murcia</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES620</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">43</ns2:ID>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Lote 43 - Emergencia del servicio de transporte escolar en 232 rutas de centros educativos dependientes de la consejería de educación y formación profesional</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">93019.1</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">84562.82</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">60130000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Murcia</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES620</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">44</ns2:ID>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Lote 44- Emergencia del servicio de transporte escolar en 232 rutas de centros educativos dependientes de la consejería de educación y formación profesional</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">43406</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">39460</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">60130000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Murcia</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES620</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">45</ns2:ID>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Lote 45- Emergencia del servicio de transporte escolar en 232 rutas de centros educativos dependientes de la consejería de educación y formación profesional</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">64011.2</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">58192</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">60130000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Murcia</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES620</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">46</ns2:ID>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Lote 46 - Emergencia del servicio de transporte escolar en 232 rutas de centros educativos dependientes de la consejería de educación y formación profesional</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">54419.31</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">49472.1</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">60130000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Murcia</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES620</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">5</ns2:ID>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Lote 5 - Emergencia del servicio de transporte escolar en 232 rutas de centros educativos dependientes de la consejería de educación y formación profesional</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">28053.24</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">25502.94</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">60130000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Murcia</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES620</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">6</ns2:ID>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Lote 6 - Emergencia del servicio de transporte escolar en 232 rutas de centros educativos dependientes de la consejería de educación y formación profesional</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">21800.46</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">19818.6</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">60130000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Murcia</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES620</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">7</ns2:ID>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Lote 7 - Emergencia del servicio de transporte escolar en 232 rutas de centros educativos dependientes de la consejería de educación y formación profesional</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">28374.5</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">25795</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">60130000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Murcia</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES620</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">8</ns2:ID>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Lote 8 - Emergencia del servicio de transporte escolar en 232 rutas de centros educativos dependientes de la consejería de educación y formación profesional</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">26265.8</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">23878</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">60130000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Murcia</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES620</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:ProcurementProjectLot>
+                <ns2:ID schemeName="ID_LOTE">9</ns2:ID>
+                <ns4:ProcurementProject>
+                    <ns2:Name>Lote 9 - Emergencia del servicio de transporte escolar en 232 rutas de centros educativos dependientes de la consejería de educación y formación profesional</ns2:Name>
+                    <ns4:BudgetAmount>
+                        <ns2:TotalAmount currencyID="EUR">68513.5</ns2:TotalAmount>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">62285</ns2:TaxExclusiveAmount>
+                    </ns4:BudgetAmount>
+                    <ns4:RequiredCommodityClassification>
+                        <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">60130000</ns2:ItemClassificationCode>
+                    </ns4:RequiredCommodityClassification>
+                    <ns4:RealizedLocation>
+                        <ns2:CountrySubentity>Murcia</ns2:CountrySubentity>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES620</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+<ns2:Name>España</ns2:Name>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:RealizedLocation>
+                </ns4:ProcurementProject>
+            </ns4:ProcurementProjectLot>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Proposición mejor valorada.</ns2:Description>
+                <ns2:AwardDate>2025-01-17</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:Contract>
+                    <ns2:ID>99</ns2:ID>
+                    <ns2:IssueDate>2025-01-17</ns2:IssueDate>
+                </ns4:Contract>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">23253995Y</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>SAEZ LOPEZ, ALFONSO</ns2:Name>
+                    </ns4:PartyName>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>1</ns2:ProcurementProjectLotID>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">12751.47</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">14026.62</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Proposición mejor valorada</ns2:Description>
+                <ns2:AwardDate>2025-01-17</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:Contract>
+                    <ns2:ID>110</ns2:ID>
+                    <ns2:IssueDate>2025-01-17</ns2:IssueDate>
+                </ns4:Contract>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">B73953747</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>AUTOBUSES MARTINEZ GARCIA, S.L.L.</ns2:Name>
+                    </ns4:PartyName>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>10</ns2:ProcurementProjectLotID>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">47383.1</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">52121.41</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Proposición mejor valorada</ns2:Description>
+                <ns2:AwardDate>2025-01-17</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:Contract>
+                    <ns2:ID>111</ns2:ID>
+                    <ns2:IssueDate>2025-01-17</ns2:IssueDate>
+                </ns4:Contract>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">B05534169</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>AUTOBUSES RUIZ BUENO</ns2:Name>
+                    </ns4:PartyName>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>11</ns2:ProcurementProjectLotID>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">54884.7</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">60373.17</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Proposicion mejor valorada</ns2:Description>
+                <ns2:AwardDate>2025-01-17</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:Contract>
+                    <ns2:ID>109</ns2:ID>
+                    <ns2:IssueDate>2025-01-17</ns2:IssueDate>
+                </ns4:Contract>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">B30299895</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>AUTOCARES AGUILAS, S.L.</ns2:Name>
+                    </ns4:PartyName>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>12</ns2:ProcurementProjectLotID>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">311072.65</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">342179.92</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Proposición mejor valorada</ns2:Description>
+                <ns2:AwardDate>2025-01-17</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:Contract>
+                    <ns2:ID>69</ns2:ID>
+                    <ns2:IssueDate>2025-01-17</ns2:IssueDate>
+                </ns4:Contract>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">B30685622</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>AUTOCARES BELMONTE HERMANOS, S.L.</ns2:Name>
+                    </ns4:PartyName>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>13</ns2:ProcurementProjectLotID>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">142554.85</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">156810.34</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Proposicion mejor valorada</ns2:Description>
+                <ns2:AwardDate>2025-01-17</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:Contract>
+                    <ns2:ID>70</ns2:ID>
+                    <ns2:IssueDate>2025-01-17</ns2:IssueDate>
+                </ns4:Contract>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">F73181331</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>CIEZABUS, S. COOP.</ns2:Name>
+                    </ns4:PartyName>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>14</ns2:ProcurementProjectLotID>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">22124.68</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">24337.15</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Proposicion mejor valorada</ns2:Description>
+                <ns2:AwardDate>2025-01-17</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:Contract>
+                    <ns2:ID>71</ns2:ID>
+                    <ns2:IssueDate>2025-01-17</ns2:IssueDate>
+                </ns4:Contract>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">B45327186</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>AUTOCARES CRISBEL SL</ns2:Name>
+                    </ns4:PartyName>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>15</ns2:ProcurementProjectLotID>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">33733.96</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">37107.36</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Proposición mejor valorada</ns2:Description>
+                <ns2:AwardDate>2025-01-17</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:Contract>
+                    <ns2:ID>72</ns2:ID>
+                    <ns2:IssueDate>2025-01-17</ns2:IssueDate>
+                </ns4:Contract>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">B30286868</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>AUTOCARES DE MOLINA, S.L.</ns2:Name>
+                    </ns4:PartyName>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>16</ns2:ProcurementProjectLotID>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">54230</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">59653</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Proposición mejor valorada</ns2:Description>
+                <ns2:AwardDate>2025-01-17</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:Contract>
+                    <ns2:ID>73</ns2:ID>
+                    <ns2:IssueDate>2025-01-17</ns2:IssueDate>
+                </ns4:Contract>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">B30361786</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>AUTOCARES FORTUNA, S.L.</ns2:Name>
+                    </ns4:PartyName>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>17</ns2:ProcurementProjectLotID>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">49817.08</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">54798.79</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Proposición mejor valorada</ns2:Description>
+                <ns2:AwardDate>2025-01-17</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:Contract>
+                    <ns2:ID>74</ns2:ID>
+                    <ns2:IssueDate>2025-01-17</ns2:IssueDate>
+                </ns4:Contract>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">A30019806</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>AUTOCARES IBEROCAR, S.A.</ns2:Name>
+                    </ns4:PartyName>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>18</ns2:ProcurementProjectLotID>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">231849.01</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">255033.91</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Proposición mejor valorada</ns2:Description>
+                <ns2:AwardDate>2025-01-17</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:Contract>
+                    <ns2:ID>75</ns2:ID>
+                    <ns2:IssueDate>2025-01-17</ns2:IssueDate>
+                </ns4:Contract>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">B30350938</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>AUTOCARES JUSTO MARTINEZ, S.L.</ns2:Name>
+                    </ns4:PartyName>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>19</ns2:ProcurementProjectLotID>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">123204</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">135524.4</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Proposición mejor valorada.</ns2:Description>
+                <ns2:AwardDate>2025-01-17</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:Contract>
+                    <ns2:ID>100</ns2:ID>
+                    <ns2:IssueDate>2025-01-17</ns2:IssueDate>
+                </ns4:Contract>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">52810322E</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>HIDALGO DE LA CERDA, ANTONIO FRANCISCO</ns2:Name>
+                    </ns4:PartyName>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>2</ns2:ProcurementProjectLotID>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">13920</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">15312</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Proposición mejor valorada</ns2:Description>
+                <ns2:AwardDate>2025-01-17</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:Contract>
+                    <ns2:ID>76</ns2:ID>
+                    <ns2:IssueDate>2025-01-17</ns2:IssueDate>
+                </ns4:Contract>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">B30266373</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>AUTOCARES LA INMACULADA, S.L.</ns2:Name>
+                    </ns4:PartyName>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>20</ns2:ProcurementProjectLotID>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">44042.99</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">48447.29</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Proposición mejor valorada</ns2:Description>
+                <ns2:AwardDate>2025-01-17</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:Contract>
+                    <ns2:ID>77</ns2:ID>
+                    <ns2:IssueDate>2025-01-17</ns2:IssueDate>
+                </ns4:Contract>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">B30559835</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>AUTOCARES LOPEZ FERNANDEZ, S.L.</ns2:Name>
+                    </ns4:PartyName>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>21</ns2:ProcurementProjectLotID>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">102227</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">112449.7</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Proposición mejor valorada.</ns2:Description>
+                <ns2:AwardDate>2025-01-17</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:Contract>
+                    <ns2:ID>78</ns2:ID>
+                    <ns2:IssueDate>2025-01-17</ns2:IssueDate>
+                </ns4:Contract>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">B30556476</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>AUTOCARES LORCA BUS</ns2:Name>
+                    </ns4:PartyName>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>22</ns2:ProcurementProjectLotID>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">189098.31</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">208008.14</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Proposición mejor valorada</ns2:Description>
+                <ns2:AwardDate>2025-01-17</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:Contract>
+                    <ns2:ID>79</ns2:ID>
+                    <ns2:IssueDate>2025-01-17</ns2:IssueDate>
+                </ns4:Contract>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">B04696944</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>AUTOCARES MARIA SL</ns2:Name>
+                    </ns4:PartyName>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>23</ns2:ProcurementProjectLotID>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">50240</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">55264</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Proposición mejor valorada</ns2:Description>
+                <ns2:AwardDate>2025-01-17</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:Contract>
+                    <ns2:ID>80</ns2:ID>
+                    <ns2:IssueDate>2025-01-17</ns2:IssueDate>
+                </ns4:Contract>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">B30022321</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>AUTOCARES MELLIZO, S.L.</ns2:Name>
+                    </ns4:PartyName>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>24</ns2:ProcurementProjectLotID>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">339431</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">373374.1</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Proposición mejor valorada</ns2:Description>
+                <ns2:AwardDate>2025-01-17</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:Contract>
+                    <ns2:ID>81</ns2:ID>
+                    <ns2:IssueDate>2025-01-17</ns2:IssueDate>
+                </ns4:Contract>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">B30678718</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>AUTOCARES SANCHEZ ORTUÑO, S.L.</ns2:Name>
+                    </ns4:PartyName>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>25</ns2:ProcurementProjectLotID>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">105788.66</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">116367.52</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Proposición mejor valorada</ns2:Description>
+                <ns2:AwardDate>2025-01-17</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:Contract>
+                    <ns2:ID>82</ns2:ID>
+                    <ns2:IssueDate>2025-01-17</ns2:IssueDate>
+                </ns4:Contract>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">B30503510</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>AUTOCARES TORRE ALTA, S.L.</ns2:Name>
+                    </ns4:PartyName>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>26</ns2:ProcurementProjectLotID>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">103158.4</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">113474.24</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Proposición mejor valorada</ns2:Description>
+                <ns2:AwardDate>2025-01-17</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:Contract>
+                    <ns2:ID>83</ns2:ID>
+                    <ns2:IssueDate>2025-01-17</ns2:IssueDate>
+                </ns4:Contract>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">B30727457</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>BELMONTE BUS, S.L.</ns2:Name>
+                    </ns4:PartyName>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>27</ns2:ProcurementProjectLotID>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">266238.5</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">292862.35</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Proposición mejor valorada</ns2:Description>
+                <ns2:AwardDate>2025-01-17</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:Contract>
+                    <ns2:ID>84</ns2:ID>
+                    <ns2:IssueDate>2025-01-17</ns2:IssueDate>
+                </ns4:Contract>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">B30596688</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>BUS LINEA 5, S.L.</ns2:Name>
+                    </ns4:PartyName>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>28</ns2:ProcurementProjectLotID>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">199653.18</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">219618.5</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Proposición mejor valorada</ns2:Description>
+                <ns2:AwardDate>2025-01-17</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:Contract>
+                    <ns2:ID>114</ns2:ID>
+                    <ns2:IssueDate>2025-01-17</ns2:IssueDate>
+                </ns4:Contract>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">B30515605</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>BUS RIOS, S.L.</ns2:Name>
+                    </ns4:PartyName>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>29</ns2:ProcurementProjectLotID>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">38434.06</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">42277.47</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Proposición mejor valorada</ns2:Description>
+                <ns2:AwardDate>2025-01-17</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:Contract>
+                    <ns2:ID>101</ns2:ID>
+                    <ns2:IssueDate>2025-01-17</ns2:IssueDate>
+                </ns4:Contract>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">B30041461</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>ANTONIO MUÑOZ BAENA, S.L.</ns2:Name>
+                    </ns4:PartyName>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>3</ns2:ProcurementProjectLotID>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">49989.34</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">54988.28</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Proposicion mejor valorada</ns2:Description>
+                <ns2:AwardDate>2025-01-17</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:Contract>
+                    <ns2:ID>85</ns2:ID>
+                    <ns2:IssueDate>2025-01-17</ns2:IssueDate>
+                </ns4:Contract>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">B03412269</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>BUS SIGUENZA, S.L.</ns2:Name>
+                    </ns4:PartyName>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>30</ns2:ProcurementProjectLotID>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">47761.39</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">52537.53</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Proposición mejor valorada</ns2:Description>
+                <ns2:AwardDate>2025-01-17</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:Contract>
+                    <ns2:ID>86</ns2:ID>
+                    <ns2:IssueDate>2025-01-17</ns2:IssueDate>
+                </ns4:Contract>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">B30569750</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>BUSALFER, S.L</ns2:Name>
+                    </ns4:PartyName>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>31</ns2:ProcurementProjectLotID>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">12975.18</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">14272.7</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Proposición mejor valorada</ns2:Description>
+                <ns2:AwardDate>2025-01-17</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:Contract>
+                    <ns2:ID>87</ns2:ID>
+                    <ns2:IssueDate>2025-01-17</ns2:IssueDate>
+                </ns4:Contract>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">B30020606</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>BUSMAR SLU</ns2:Name>
+                    </ns4:PartyName>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>32</ns2:ProcurementProjectLotID>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">68478.28</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">75326.11</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Proposición mejor valorada</ns2:Description>
+                <ns2:AwardDate>2025-01-17</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:Contract>
+                    <ns2:ID>88</ns2:ID>
+                    <ns2:IssueDate>2025-01-17</ns2:IssueDate>
+                </ns4:Contract>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">B30076103</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>CONESA Y SANCHEZ, S.L.</ns2:Name>
+                    </ns4:PartyName>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>33</ns2:ProcurementProjectLotID>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">27260</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">29986</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Proposición mejor valorada</ns2:Description>
+                <ns2:AwardDate>2025-01-17</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:Contract>
+                    <ns2:ID>89</ns2:ID>
+                    <ns2:IssueDate>2025-01-17</ns2:IssueDate>
+                </ns4:Contract>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">B30391726</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>EUSEBIO ARMERO E HIJOS, S.L.</ns2:Name>
+                    </ns4:PartyName>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>34</ns2:ProcurementProjectLotID>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">30423.75</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">33466.13</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Proposicion mejor valorada</ns2:Description>
+                <ns2:AwardDate>2025-01-17</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:Contract>
+                    <ns2:ID>90</ns2:ID>
+                    <ns2:IssueDate>2025-01-17</ns2:IssueDate>
+                </ns4:Contract>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">22441746W</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>LORENTE MARTINEZ, JOSE PASCUAL</ns2:Name>
+                    </ns4:PartyName>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>35</ns2:ProcurementProjectLotID>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">12975.18</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">14272.7</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Proposicion mejor valorada</ns2:Description>
+                <ns2:AwardDate>2025-01-17</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:Contract>
+                    <ns2:ID>91</ns2:ID>
+                    <ns2:IssueDate>2025-01-17</ns2:IssueDate>
+                </ns4:Contract>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">B30915508</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>LOW COST BUS S.L.</ns2:Name>
+                    </ns4:PartyName>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>36</ns2:ProcurementProjectLotID>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">13711.92</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">15083.11</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Proposición mejor valorada</ns2:Description>
+                <ns2:AwardDate>2025-01-17</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:Contract>
+                    <ns2:ID>93</ns2:ID>
+                    <ns2:IssueDate>2025-01-17</ns2:IssueDate>
+                </ns4:Contract>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">B30719355</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>MICROBUSES NUÑEZ, S.L.</ns2:Name>
+                    </ns4:PartyName>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>37</ns2:ProcurementProjectLotID>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">17690</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">19459</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Proposición mejor valorada</ns2:Description>
+                <ns2:AwardDate>2025-01-17</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:Contract>
+                    <ns2:ID>94</ns2:ID>
+                    <ns2:IssueDate>2025-01-17</ns2:IssueDate>
+                </ns4:Contract>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">B54347695</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>REALEZA DEL CID, S.L.</ns2:Name>
+                    </ns4:PartyName>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>38</ns2:ProcurementProjectLotID>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">16182</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">17800.2</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Proposición mejor valorada</ns2:Description>
+                <ns2:AwardDate>2025-01-17</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:Contract>
+                    <ns2:ID>95</ns2:ID>
+                    <ns2:IssueDate>2025-01-17</ns2:IssueDate>
+                </ns4:Contract>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">B18320184</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>RUIZ BUS, S.L.</ns2:Name>
+                    </ns4:PartyName>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>39</ns2:ProcurementProjectLotID>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">177030.59</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">194733.65</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Proposición mejor valorada.</ns2:Description>
+                <ns2:AwardDate>2025-01-17</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:Contract>
+                    <ns2:ID>102</ns2:ID>
+                    <ns2:IssueDate>2025-01-17</ns2:IssueDate>
+                </ns4:Contract>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">B30492524</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>ARACIL BUS, S.L.</ns2:Name>
+                    </ns4:PartyName>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>4</ns2:ProcurementProjectLotID>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">78392.27</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">86231.5</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Proposicion mejor valorada</ns2:Description>
+                <ns2:AwardDate>2025-01-17</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:Contract>
+                    <ns2:ID>92</ns2:ID>
+                    <ns2:IssueDate>2025-01-17</ns2:IssueDate>
+                </ns4:Contract>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">B73601429</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>SELECTA BUS SL</ns2:Name>
+                    </ns4:PartyName>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>40</ns2:ProcurementProjectLotID>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">106063.74</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">116670.11</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Proposición mejor valorada</ns2:Description>
+                <ns2:AwardDate>2025-01-17</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:Contract>
+                    <ns2:ID>96</ns2:ID>
+                    <ns2:IssueDate>2025-01-17</ns2:IssueDate>
+                </ns4:Contract>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">B73700528</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>TRADEBUS SUR S.R.L.</ns2:Name>
+                    </ns4:PartyName>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>41</ns2:ProcurementProjectLotID>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">30764.31</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">33840.74</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Proposición mejor valorada</ns2:Description>
+                <ns2:AwardDate>2025-01-17</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:Contract>
+                    <ns2:ID>97</ns2:ID>
+                    <ns2:IssueDate>2025-01-17</ns2:IssueDate>
+                </ns4:Contract>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">A30625628</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>TRANSPORTES URBANOS DE CARTAGENA, S.A.</ns2:Name>
+                    </ns4:PartyName>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>42</ns2:ProcurementProjectLotID>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">65992.89</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">72592.18</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Proposición mejor valorada</ns2:Description>
+                <ns2:AwardDate>2025-01-17</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:Contract>
+                    <ns2:ID>98</ns2:ID>
+                    <ns2:IssueDate>2025-01-17</ns2:IssueDate>
+                </ns4:Contract>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">B30595136</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>TRAVELPYM, S.L.</ns2:Name>
+                    </ns4:PartyName>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>43</ns2:ProcurementProjectLotID>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">84562.82</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">93019.1</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Proposición mejor valorada</ns2:Description>
+                <ns2:AwardDate>2025-01-17</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:Contract>
+                    <ns2:ID>103</ns2:ID>
+                    <ns2:IssueDate>2025-01-17</ns2:IssueDate>
+                </ns4:Contract>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">A30375729</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>VIAJES ALTIPLANO, S.A. L.</ns2:Name>
+                    </ns4:PartyName>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>44</ns2:ProcurementProjectLotID>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">39460</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">43406</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Proposicion mejor valorada</ns2:Description>
+                <ns2:AwardDate>2025-01-17</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:Contract>
+                    <ns2:ID>104</ns2:ID>
+                    <ns2:IssueDate>2025-01-17</ns2:IssueDate>
+                </ns4:Contract>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">B30688444</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>VIDAL CARTAGENA, S.L.</ns2:Name>
+                    </ns4:PartyName>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>45</ns2:ProcurementProjectLotID>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">58192</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">64011.2</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Proposicion mejor valorada</ns2:Description>
+                <ns2:AwardDate>2025-01-17</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:Contract>
+                    <ns2:ID>105</ns2:ID>
+                    <ns2:IssueDate>2025-01-17</ns2:IssueDate>
+                </ns4:Contract>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">B73739146</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>ZIEZAR AUTOCARES DEL SEGURA, SLL</ns2:Name>
+                    </ns4:PartyName>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>46</ns2:ProcurementProjectLotID>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">49472.1</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">54419.31</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Proposición mejor valorada</ns2:Description>
+                <ns2:AwardDate>2025-01-17</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:Contract>
+                    <ns2:ID>112</ns2:ID>
+                    <ns2:IssueDate>2025-01-17</ns2:IssueDate>
+                </ns4:Contract>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">A30020895</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>AURBUS, S.A.</ns2:Name>
+                    </ns4:PartyName>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>5</ns2:ProcurementProjectLotID>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">25502.94</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">28053.24</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Proposición mejor valorada</ns2:Description>
+                <ns2:AwardDate>2025-01-17</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:Contract>
+                    <ns2:ID>106</ns2:ID>
+                    <ns2:IssueDate>2025-01-17</ns2:IssueDate>
+                </ns4:Contract>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">B73281370</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>AUTOBUSES ANTONIO GARCIA, S.L.</ns2:Name>
+                    </ns4:PartyName>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>6</ns2:ProcurementProjectLotID>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">19818.6</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">21800.46</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Proposición mejor valorada</ns2:Description>
+                <ns2:AwardDate>2025-01-17</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:Contract>
+                    <ns2:ID>113</ns2:ID>
+                    <ns2:IssueDate>2025-01-17</ns2:IssueDate>
+                </ns4:Contract>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">B30486054</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>AUTOBUSES FRANCISCO SANCHEZ GIL, S.L.</ns2:Name>
+                    </ns4:PartyName>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>7</ns2:ProcurementProjectLotID>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">25795</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">28374.5</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Proposición mejor valorada</ns2:Description>
+                <ns2:AwardDate>2025-01-17</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:Contract>
+                    <ns2:ID>107</ns2:ID>
+                    <ns2:IssueDate>2025-01-17</ns2:IssueDate>
+                </ns4:Contract>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">B04219549</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>AUTOBUSES LORENZO, S.L.</ns2:Name>
+                    </ns4:PartyName>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>8</ns2:ProcurementProjectLotID>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">23878</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">26265.8</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Proposición mejor valorada</ns2:Description>
+                <ns2:AwardDate>2025-01-17</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:Contract>
+                    <ns2:ID>108</ns2:ID>
+                    <ns2:IssueDate>2025-01-17</ns2:IssueDate>
+                </ns4:Contract>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">B30465868</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>AUTOBUSES MAR MENOR, S.L.</ns2:Name>
+                    </ns4:PartyName>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns2:ProcurementProjectLotID>9</ns2:ProcurementProjectLotID>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">62285</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">68513.5</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderingTerms>
+                <ns2:RequiredCurriculaIndicator>false</ns2:RequiredCurriculaIndicator>
+                <ns2:VariantConstraintIndicator>false</ns2:VariantConstraintIndicator>
+                <ns2:FundingProgramCode listURI="http://contrataciondelestado.es/codice/cl/2.08/FundingProgramCode-2.08.gc" name="No hay financiación con fondos de la UE">NO-EU</ns2:FundingProgramCode>
+                <ns2:ProcurementNationalLegislationCode listURI="https://contrataciondelestado.es/codice/cl/2.08/ProcurementNationalLegislationCode-2.08.gc">3</ns2:ProcurementNationalLegislationCode>
+                <ns2:ReceivedAppealQuantity>0</ns2:ReceivedAppealQuantity>
+                <ns4:ProcurementLegislationDocumentReference>
+                    <ns2:ID>N/A</ns2:ID>
+                </ns4:ProcurementLegislationDocumentReference>
+                <ns4:TendererQualificationRequest>
+                    <ns4:SpecificTendererRequirement>
+                        <ns2:RequirementTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/DeclarationTypeCode-2.08.gc">1</ns2:RequirementTypeCode>
+                        <ns2:Description>Capacidad de obrar</ns2:Description>
+                    </ns4:SpecificTendererRequirement>
+                </ns4:TendererQualificationRequest>
+                <ns4:AwardingTerms>
+                    <ns4:AwardingCriteria>
+                        <ns2:AwardingCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/AwardingCriteriaCode-2.0.gc">OBJ</ns2:AwardingCriteriaTypeCode>
+                        <ns2:Description>Precio</ns2:Description>
+                        <ns2:Note>Emergencia</ns2:Note>
+                        <ns2:AwardingCriteriaSubTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.09/AwardingCriteriaAutomaticallyEvaluatedSubTypeCode-2.09.gc">1</ns2:AwardingCriteriaSubTypeCode>
+                        <ns2:WeightNumeric>100</ns2:WeightNumeric>
+                    </ns4:AwardingCriteria>
+                </ns4:AwardingTerms>
+                <ns4:TenderRecipientParty>
+                    <ns2:EndpointID>https://contrataciondelestado.es</ns2:EndpointID>
+                </ns4:TenderRecipientParty>
+                <ns4:Language>
+                    <ns2:ID>es</ns2:ID>
+                </ns4:Language>
+            </ns4:TenderingTerms>
+            <ns4:TenderingProcess>
+                <ns2:ProcedureCode listURI="https://contrataciondelestado.es/codice/cl/2.07/SyndicationTenderingProcessCode-2.07.gc">4</ns2:ProcedureCode>
+                <ns2:UrgencyCode listURI="http://contrataciondelestado.es/codice/cl/1.04/DiligenceTypeCode-1.04.gc">3</ns2:UrgencyCode>
+                <ns2:PartPresentationCode listURI="http://contrataciondelestado.es/codice/cl/1.04/TenderPresentationCode-1.04.gc" name="A un solo lote">1</ns2:PartPresentationCode>
+                <ns2:ContractingSystemCode listURI="http://contrataciondelestado.es/codice/cl/2.08/ContractingSystemTypeCode-2.08.gc">0</ns2:ContractingSystemCode>
+                <ns2:SubmissionMethodCode listURI="http://contrataciondelestado.es/codice/cl/1.04/TenderDeliveryCode-1.04.gc">2</ns2:SubmissionMethodCode>
+                <ns2:OverThresholdIndicator>true</ns2:OverThresholdIndicator>
+                <ns4:AuctionTerms>
+                    <ns2:AuctionConstraintIndicator>false</ns2:AuctionConstraintIndicator>
+                </ns4:AuctionTerms>
+            </ns4:TenderingProcess>
+            <ns1:ValidNoticeInfo>
+                <ns3:NoticeTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.11/TenderingNoticeTypeCode-2.11.gc">DOC_CAN_ADJ</ns3:NoticeTypeCode>
+                <ns1:AdditionalPublicationStatus>
+                    <ns3:PublicationMediaName>Perfil del contratante</ns3:PublicationMediaName>
+                    <ns1:AdditionalPublicationDocumentReference>
+                        <ns2:IssueDate>2025-01-22</ns2:IssueDate>
+                    </ns1:AdditionalPublicationDocumentReference>
+                    <ns1:AdditionalPublicationDocumentReference>
+                        <ns2:DocumentTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.11/TenderingDocumentTypeCode-2.11.gc" name="Documento de Acta de Adjudicación">ACTA_ADJ</ns2:DocumentTypeCode>
+                        <ns4:Attachment>
+                            <ns4:ExternalReference>
+<ns2:URI>https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=fNTGgTo6gqkAeg8vmnImZ1wUOsBIgbeha0TX1minbKjrJpzkEebQ0BJygmbVYGSDzi6yG5Hy%2BNVD69wnl18oDeryK96NxYmBD4SNjUsjH8%2BCx2e6p7hqtlp2aFupgHMr&amp;cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D</ns2:URI>
+<ns2:FileName>orden_emergencia.pdf</ns2:FileName>
+                            </ns4:ExternalReference>
+                        </ns4:Attachment>
+                    </ns1:AdditionalPublicationDocumentReference>
+                </ns1:AdditionalPublicationStatus>
+            </ns1:ValidNoticeInfo>
+            <ns1:GeneralDocument>
+                <ns1:GeneralDocumentDocumentReference>
+                    <ns2:ID>2025-a648960b-23ac-4ecb-b5f5-6b3811c30887</ns2:ID>
+                    <ns2:DocumentTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/GeneralContractDocuments-2.08.gc">ZZZ</ns2:DocumentTypeCode>
+                    <ns4:Attachment>
+                        <ns4:ExternalReference>
+                            <ns2:URI>https://contrataciondelestado.es/wps/wcm/connect/PLACE_es/Site/area/docAccCmpnt?srv=cmpnt&amp;cmpntname=GetDocumentsById&amp;source=library&amp;DocumentIdParam=2025-a648960b-23ac-4ecb-b5f5-6b3811c30887</ns2:URI>
+                            <ns2:FileName>Orden ajuste condiciones ejecución emergencia</ns2:FileName>
+                        </ns4:ExternalReference>
+                    </ns4:Attachment>
+                </ns1:GeneralDocumentDocumentReference>
+            </ns1:GeneralDocument>
+            <ns1:GeneralDocument>
+                <ns1:GeneralDocumentDocumentReference>
+                    <ns2:ID>2025-a10e0623-79df-44f9-ac3a-7f1125428bd7</ns2:ID>
+                    <ns2:DocumentTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/GeneralContractDocuments-2.08.gc">8</ns2:DocumentTypeCode>
+                    <ns4:Attachment>
+                        <ns4:ExternalReference>
+                            <ns2:URI>https://contrataciondelestado.es/wps/wcm/connect/PLACE_es/Site/area/docAccCmpnt?srv=cmpnt&amp;cmpntname=GetDocumentsById&amp;source=library&amp;DocumentIdParam=2025-a10e0623-79df-44f9-ac3a-7f1125428bd7</ns2:URI>
+                            <ns2:FileName>Acuerdo de iniciación del expediente</ns2:FileName>
+                        </ns4:ExternalReference>
+                    </ns4:Attachment>
+                </ns1:GeneralDocumentDocumentReference>
+            </ns1:GeneralDocument>
+        </ns1:ContractFolderStatus>
+    </ns0:entry>
+    

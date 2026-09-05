@@ -1,0 +1,310 @@
+<ns0:entry xmlns:ns0="http://www.w3.org/2005/Atom" xmlns:ns1="urn:dgpe:names:draft:codice-place-ext:schema:xsd:CommonAggregateComponents-2" xmlns:ns2="urn:dgpe:names:draft:codice:schema:xsd:CommonBasicComponents-2" xmlns:ns3="urn:dgpe:names:draft:codice-place-ext:schema:xsd:CommonBasicComponents-2" xmlns:ns4="urn:dgpe:names:draft:codice:schema:xsd:CommonAggregateComponents-2">
+        <ns0:id>https://contrataciondelestado.es/sindicacion/licitacionesPerfilContratante/16586482</ns0:id>
+        <ns0:link href="https://contrataciondelestado.es/wps/poc?uri=deeplink:detalle_licitacion&amp;idEvl=Or8sVS1f7SOopEMYCmrbmw%3D%3D" />
+        <ns0:summary type="text">Id licitación: 2024/ETSAE0905/00006313E; Órgano de Contratación: Jefatura de Asuntos Económicos del Mando de Personal; Importe: 158850 EUR; Estado: ADJ</ns0:summary>
+        <ns0:title>Servicio de alimentación de familias ucranianas para el primer semestre de 2025.</ns0:title>
+        <ns0:updated>2025-02-26T13:03:21.916+01:00</ns0:updated>
+        <ns1:ContractFolderStatus>
+            <ns2:ContractFolderID>2024/ETSAE0905/00006313E</ns2:ContractFolderID>
+            <ns3:ContractFolderStatusCode listURI="https://contrataciondelestado.es/codice/cl/2.04/SyndicationContractFolderStatusCode-2.04.gc" languageID="es">ADJ</ns3:ContractFolderStatusCode>
+            <ns1:LocatedContractingParty>
+                <ns2:ContractingPartyTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.10/ContractingAuthorityCode-2.10.gc">1</ns2:ContractingPartyTypeCode>
+                <ns2:ActivityCode listURI="http://contrataciondelestado.es/codice/cl/2.10/ContractingAuthorityActivityCode-2.10.gc">2</ns2:ActivityCode>
+                <ns2:BuyerProfileURIID>https://contrataciondelestado.es/wps/poc?uri=deeplink:perfilContratante&amp;idBp=7MDaP9D8ICM%3D</ns2:BuyerProfileURIID>
+                <ns4:Party>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="DIR3">EA0003090</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">S2830086A</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="ID_PLATAFORMA">10000140000200</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>Jefatura de Asuntos Económicos del Mando de Personal</ns2:Name>
+                    </ns4:PartyName>
+                    <ns4:PostalAddress>
+                        <ns2:CityName>Madrid</ns2:CityName>
+                        <ns2:PostalZone>28004</ns2:PostalZone>
+                        <ns4:AddressLine>
+                            <ns2:Line>C/ Prim 6-8 (desp. 2E27)</ns2:Line>
+                        </ns4:AddressLine>
+                        <ns4:Country>
+                            <ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+                            <ns2:Name>España</ns2:Name>
+                        </ns4:Country>
+                    </ns4:PostalAddress>
+                    <ns4:Contact>
+                        <ns2:Name>Jefatura de Asuntos Económicos del Mando de Personal</ns2:Name>
+                        <ns2:Telephone>917802322</ns2:Telephone>
+                        <ns2:Telefax>917802322</ns2:Telefax>
+                        <ns2:ElectronicMail>contratacion_maper@et.mde.es</ns2:ElectronicMail>
+                    </ns4:Contact>
+                </ns4:Party>
+                <ns1:ParentLocatedParty>
+                    <ns4:PartyName>
+                        <ns2:Name>JAE del Mando de Personal del Ejército</ns2:Name>
+                    </ns4:PartyName>
+                    <ns1:ParentLocatedParty>
+                        <ns4:PartyIdentification>
+                            <ns2:ID schemeName="DIR3">E00117001</ns2:ID>
+                        </ns4:PartyIdentification>
+                        <ns4:PartyName>
+                            <ns2:Name>Ejército de Tierra</ns2:Name>
+                        </ns4:PartyName>
+                        <ns1:ParentLocatedParty>
+                            <ns4:PartyIdentification>
+<ns2:ID schemeName="DIR3">E00003301</ns2:ID>
+                            </ns4:PartyIdentification>
+                            <ns4:PartyName>
+<ns2:Name>Ministerio de Defensa</ns2:Name>
+                            </ns4:PartyName>
+                            <ns1:ParentLocatedParty>
+<ns4:PartyIdentification>
+    <ns2:ID schemeName="DIR3">EA9999999</ns2:ID>
+</ns4:PartyIdentification>
+<ns4:PartyName>
+    <ns2:Name>ADMINISTRACIÓN GENERAL DEL ESTADO</ns2:Name>
+</ns4:PartyName>
+<ns1:ParentLocatedParty>
+    <ns4:PartyName>
+        <ns2:Name>Sector Público</ns2:Name>
+    </ns4:PartyName>
+</ns1:ParentLocatedParty>
+                            </ns1:ParentLocatedParty>
+                        </ns1:ParentLocatedParty>
+                    </ns1:ParentLocatedParty>
+                </ns1:ParentLocatedParty>
+            </ns1:LocatedContractingParty>
+            <ns4:ProcurementProject>
+                <ns2:Name>Servicio de alimentación de familias ucranianas para el primer semestre de 2025.</ns2:Name>
+                <ns2:TypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/ContractCode-2.08.gc">2</ns2:TypeCode>
+                <ns2:SubTypeCode listURI="http://contrataciondelestado.es/codice/cl/1.04/ServiceContractCode-1.04.gc">17</ns2:SubTypeCode>
+                <ns2:MixContractIndicator>false</ns2:MixContractIndicator>
+                <ns4:BudgetAmount>
+                    <ns2:EstimatedOverallContractAmount currencyID="EUR">158850</ns2:EstimatedOverallContractAmount>
+                    <ns2:TotalAmount currencyID="EUR">174735</ns2:TotalAmount>
+                    <ns2:TaxExclusiveAmount currencyID="EUR">158850</ns2:TaxExclusiveAmount>
+                </ns4:BudgetAmount>
+                <ns4:RequiredCommodityClassification>
+                    <ns2:ItemClassificationCode listURI="http://contrataciondelestado.es/codice/cl/2.04/CPV2008-2.04.gc">55300000</ns2:ItemClassificationCode>
+                </ns4:RequiredCommodityClassification>
+                <ns4:RealizedLocation>
+                    <ns2:CountrySubentity>Castellón/Castelló</ns2:CountrySubentity>
+                    <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc">ES522</ns2:CountrySubentityCode>
+                    <ns4:Address>
+                        <ns4:Country>
+                            <ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc">ES</ns2:IdentificationCode>
+                            <ns2:Name>España</ns2:Name>
+                        </ns4:Country>
+                    </ns4:Address>
+                </ns4:RealizedLocation>
+                <ns4:PlannedPeriod>
+                    <ns2:StartDate>2024-12-01</ns2:StartDate>
+                    <ns2:EndDate>2025-03-12</ns2:EndDate>
+                </ns4:PlannedPeriod>
+                <ns4:ContractExtension>
+                    <ns4:OptionValidityPeriod>
+                        <ns2:Description>Hasta el 30 de junio de 2025</ns2:Description>
+                    </ns4:OptionValidityPeriod>
+                </ns4:ContractExtension>
+            </ns4:ProcurementProject>
+            <ns4:TenderResult>
+                <ns2:ResultCode listURI="http://contrataciondelestado.es/codice/cl/2.09/TenderResultCode-2.09.gc">8</ns2:ResultCode>
+                <ns2:Description>Oferta más ventajosa para la Administración</ns2:Description>
+                <ns2:AwardDate>2025-01-31</ns2:AwardDate>
+                <ns2:ReceivedTenderQuantity>1</ns2:ReceivedTenderQuantity>
+                <ns2:LowerTenderAmount currencyID="EUR">29.09</ns2:LowerTenderAmount>
+                <ns2:HigherTenderAmount currencyID="EUR">29.09</ns2:HigherTenderAmount>
+                <ns2:SMEsReceivedTenderQuantity>1</ns2:SMEsReceivedTenderQuantity>
+                <ns2:SMEAwardedIndicator>true</ns2:SMEAwardedIndicator>
+                <ns4:WinningParty>
+                    <ns4:PartyIdentification>
+                        <ns2:ID schemeName="NIF">B13032750</ns2:ID>
+                    </ns4:PartyIdentification>
+                    <ns4:PartyName>
+                        <ns2:Name>TECNOVE, S.L.</ns2:Name>
+                    </ns4:PartyName>
+                    <ns4:PhysicalLocation>
+                        <ns2:CountrySubentityCode listURI="http://contrataciondelestado.es/codice/cl/2.08/NUTS-2021.gc" name="España">ES422</ns2:CountrySubentityCode>
+                        <ns4:Address>
+                            <ns2:CityName>Herencia</ns2:CityName>
+                            <ns2:PostalZone>13640</ns2:PostalZone>
+                            <ns4:Country>
+<ns2:IdentificationCode listURI="http://contrataciondelestado.es/codice/cl/2.08/CountryIdentificationCode-2.08.gc" name="España">ES</ns2:IdentificationCode>
+                            </ns4:Country>
+                        </ns4:Address>
+                    </ns4:PhysicalLocation>
+                </ns4:WinningParty>
+                <ns4:AwardedTenderedProject>
+                    <ns4:LegalMonetaryTotal>
+                        <ns2:TaxExclusiveAmount currencyID="EUR">29.09</ns2:TaxExclusiveAmount>
+                        <ns2:PayableAmount currencyID="EUR">32</ns2:PayableAmount>
+                    </ns4:LegalMonetaryTotal>
+                </ns4:AwardedTenderedProject>
+            </ns4:TenderResult>
+            <ns4:TenderingTerms>
+                <ns2:RequiredCurriculaIndicator>false</ns2:RequiredCurriculaIndicator>
+                <ns2:VariantConstraintIndicator>false</ns2:VariantConstraintIndicator>
+                <ns2:FundingProgramCode listURI="http://contrataciondelestado.es/codice/cl/2.08/FundingProgramCode-2.08.gc" name="No hay financiación con fondos de la UE">NO-EU</ns2:FundingProgramCode>
+                <ns2:ProcurementNationalLegislationCode listURI="https://contrataciondelestado.es/codice/cl/2.08/ProcurementNationalLegislationCode-2.08.gc">3</ns2:ProcurementNationalLegislationCode>
+                <ns4:RequiredFinancialGuarantee>
+                    <ns2:GuaranteeTypeCode listURI="http://contrataciondelestado.es/codice/cl/1.04/GuaranteeTypeCode-1.04.gc">2</ns2:GuaranteeTypeCode>
+                    <ns2:AmountRate>5</ns2:AmountRate>
+                </ns4:RequiredFinancialGuarantee>
+                <ns4:ProcurementLegislationDocumentReference>
+                    <ns2:ID>N/A</ns2:ID>
+                </ns4:ProcurementLegislationDocumentReference>
+                <ns4:TendererQualificationRequest>
+                    <ns4:TechnicalEvaluationCriteria>
+                        <ns2:EvaluationCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/TechnicalCapabilityTypeCode-2.0.gc">OSR-COMPTASK</ns2:EvaluationCriteriaTypeCode>
+                        <ns2:Description>Experiencia en la relación de servicios o trabajos de igual o similar naturaleza que los que
+constituyen el objeto del contrato en el curso de, como máximo, los tres últimos años, en la que
+se indique, tiempo o plazo de ejecución y el destinatario, público o privado de los mismos, avalados
+por certificados de buena ejecución. Para este expediente el requisito mínimo para dicha solvencia
+será que al menos se acredite la ejecución de un servicio similar al objeto del contrato, de duración
+igual o superior a este contrato, en el curso de los últimos tres años, y de al menos igual valor
+estimado del contrato por el que se licita.
+
+Los servicios o trabajos efectuados se acreditarán, mediante certificados expedidos o visados por
+el órgano competente, cuando el destinatario sea una entidad del sector público; cuando el
+destinatario sea un sujeto privado, mediante un certificado expedido por éste o, a falta de este
+certificado, mediante una declaración del empresario acompañado de los documentos obrantes
+en poder del mismo que acrediten la realización de la prestación. Esta última declaración,
+únicamente será válida cuando quede suficientemente justificado por el empresario, que le ha
+resultado imposible aportar los certificados correspondientes. En todo caso, en este certificado se
+hará constar el nombre y apellido del firmante, cargo que ostenta en la organización,
+denominación del servicio e importe desglosado de la adjudicación y mención expresa a que la
+ejecución ha sido de conformidad y satisfacción, no tomándose en cuenta los certificados que no
+cumplan estos requisitos.</ns2:Description>
+                    </ns4:TechnicalEvaluationCriteria>
+                    <ns4:TechnicalEvaluationCriteria>
+                        <ns2:EvaluationCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/TechnicalCapabilityTypeCode-2.0.gc">ZZZ</ns2:EvaluationCriteriaTypeCode>
+                        <ns2:Description>COMPROMISO DE CONSTITUCIÓN DE UNIÓN TEMPORAL DE EMPRESARIOS: Cuando dos o más empresas acudan a una licitación con el compromiso de constituirse en Unión Temporal se deberá presentar una declaración, conforme al modelo establecido en el Anexo IV, indicando los nombres y circunstancias de los empresarios que la suscriben, el porcentaje de participación de cada uno de ellos, así como que asumen el compromiso de constituirse formalmente en unión temporal en caso de resultar adjudicatarios del contrato y designando a la persona o personas que durante la vigencia del contrato han de ostentar la plena representación de todas ante la Administración. El citado documento deberá estar firmado por los representantes de cada una de las Empresas componentes de la Unión.</ns2:Description>
+                    </ns4:TechnicalEvaluationCriteria>
+                    <ns4:TechnicalEvaluationCriteria>
+                        <ns2:EvaluationCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/TechnicalCapabilityTypeCode-2.0.gc">ZZZ</ns2:EvaluationCriteriaTypeCode>
+                        <ns2:Description>DECLARACIÓN DE PERTENENCIA A GRUPO EMPRESARIAL conforme al modelo que se acompaña como
+Anexo V.</ns2:Description>
+                    </ns4:TechnicalEvaluationCriteria>
+                    <ns4:TechnicalEvaluationCriteria>
+                        <ns2:EvaluationCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/TechnicalCapabilityTypeCode-2.0.gc">ZZZ</ns2:EvaluationCriteriaTypeCode>
+                        <ns2:Description>SOLICITUD DE PARTICIPACIÓN ajustada al modelo que se adjunta como Anexo II.</ns2:Description>
+                    </ns4:TechnicalEvaluationCriteria>
+                    <ns4:TechnicalEvaluationCriteria>
+                        <ns2:EvaluationCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/TechnicalCapabilityTypeCode-2.0.gc">ZZZ</ns2:EvaluationCriteriaTypeCode>
+                        <ns2:Description>Declaración responsable, conforme al modelo del Anexo VII, relativa al cumplimiento de la obligación de
+contar con un dos por ciento de trabajadores con discapacidad o adoptar las medidas alternativas
+correspondientes y al cumplimiento de las obligaciones establecidas en la normativa vigente en materia
+laboral, social y de igualdad efectiva entre mujeres y hombres.</ns2:Description>
+                    </ns4:TechnicalEvaluationCriteria>
+                    <ns4:FinancialEvaluationCriteria>
+                        <ns2:EvaluationCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/FinancialCapabilityTypeCode-2.0.gc">5</ns2:EvaluationCriteriaTypeCode>
+                        <ns2:Description>Volumen mínimo anual de negocios del licitador o candidato, que referido al año de mayor
+volumen de negocio de los tres últimos concluidos deberá ser al menos IGUAL AL VALOR
+ESTIMADO del contrato.
+El volumen anual de negocios del licitador o candidato se acreditará por medio de sus cuentas
+anuales aprobadas y depositadas en el Registro Mercantil, si el empresario estuviera inscrito en
+dicho registro, y en caso contrario por las depositadas en el registro oficial en que deba estar
+inscrito. Los empresarios individuales no inscritos en el Registro Mercantil acreditarán su volumen
+anual de negocios mediante sus libros de inventarios y cuentas anuales legalizados por el Registro
+Mercantil.
+</ns2:Description>
+                    </ns4:FinancialEvaluationCriteria>
+                    <ns4:SpecificTendererRequirement>
+                        <ns2:RequirementTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/DeclarationTypeCode-2.08.gc">1</ns2:RequirementTypeCode>
+                        <ns2:Description>Capacidad de obrar</ns2:Description>
+                    </ns4:SpecificTendererRequirement>
+                </ns4:TendererQualificationRequest>
+                <ns4:AwardingTerms>
+                    <ns4:AwardingCriteria>
+                        <ns2:AwardingCriteriaTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.0/AwardingCriteriaCode-2.0.gc">OBJ</ns2:AwardingCriteriaTypeCode>
+                        <ns2:Description>PRECIO</ns2:Description>
+                        <ns2:Note>Según el anexo VIII del PCAP.</ns2:Note>
+                        <ns2:AwardingCriteriaSubTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.09/AwardingCriteriaAutomaticallyEvaluatedSubTypeCode-2.09.gc">1</ns2:AwardingCriteriaSubTypeCode>
+                        <ns2:WeightNumeric>100</ns2:WeightNumeric>
+                    </ns4:AwardingCriteria>
+                </ns4:AwardingTerms>
+                <ns4:TenderRecipientParty>
+                    <ns2:EndpointID>https://contrataciondelestado.es</ns2:EndpointID>
+                </ns4:TenderRecipientParty>
+                <ns4:Language>
+                    <ns2:ID>es</ns2:ID>
+                </ns4:Language>
+            </ns4:TenderingTerms>
+            <ns4:TenderingProcess>
+                <ns2:ProcedureCode listURI="https://contrataciondelestado.es/codice/cl/2.07/SyndicationTenderingProcessCode-2.07.gc">3</ns2:ProcedureCode>
+                <ns2:UrgencyCode listURI="http://contrataciondelestado.es/codice/cl/1.04/DiligenceTypeCode-1.04.gc">1</ns2:UrgencyCode>
+                <ns2:ContractingSystemCode listURI="http://contrataciondelestado.es/codice/cl/2.08/ContractingSystemTypeCode-2.08.gc">0</ns2:ContractingSystemCode>
+                <ns2:SubmissionMethodCode listURI="http://contrataciondelestado.es/codice/cl/1.04/TenderDeliveryCode-1.04.gc">1</ns2:SubmissionMethodCode>
+                <ns2:OverThresholdIndicator>true</ns2:OverThresholdIndicator>
+                <ns4:DocumentAvailabilityPeriod>
+                    <ns2:EndDate>2024-12-27</ns2:EndDate>
+                    <ns2:EndTime>12:00:00</ns2:EndTime>
+                </ns4:DocumentAvailabilityPeriod>
+                <ns4:TenderSubmissionDeadlinePeriod>
+                    <ns2:EndDate>2024-12-27</ns2:EndDate>
+                    <ns2:EndTime>12:00:00</ns2:EndTime>
+                </ns4:TenderSubmissionDeadlinePeriod>
+            </ns4:TenderingProcess>
+            <ns4:LegalDocumentReference>
+                <ns2:ID>PCAP.pdf</ns2:ID>
+                <ns4:Attachment>
+                    <ns4:ExternalReference>
+                        <ns2:URI>https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=me%2B5k3wHvk5qgpFQ6IXICB3dF38BeR7wRPMGHjBnHw3ScVnpYNXNj8d6vxLa05FORFKu3ZHyC0TnD5nEpUWZ5zWx3I7vl3a%2BOpy1y9GGNfv3GVhXrFFqN7yFncy7YfRK&amp;cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D</ns2:URI>
+                        <ns2:DocumentHash>ame36T4QBFnX4uSQ/2k6Pf0JsPw=</ns2:DocumentHash>
+                    </ns4:ExternalReference>
+                </ns4:Attachment>
+            </ns4:LegalDocumentReference>
+            <ns4:TechnicalDocumentReference>
+                <ns2:ID>PPT alimentacion UKR en RMASD La Plana.pdf</ns2:ID>
+                <ns4:Attachment>
+                    <ns4:ExternalReference>
+                        <ns2:URI>https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=N7Q2ACBeOSKTz/pdsO1qtahgSVRzQbtXeZCq/UUgNScAyAbNFmw2zSeC1t7zl%2ByKleGKVDDb0in9MBe1poQn13EdoPSZ0eAAM/zCN0SjKSnVTD3T98KC0nSgQFM0q%2B5s&amp;cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D</ns2:URI>
+                        <ns2:DocumentHash>8f6/xBMe9mezweLzrHq05nKGQtI=</ns2:DocumentHash>
+                    </ns4:ExternalReference>
+                </ns4:Attachment>
+            </ns4:TechnicalDocumentReference>
+            <ns4:AdditionalDocumentReference>
+                <ns2:ID>ANEXOS PLIEGO.docx</ns2:ID>
+                <ns4:Attachment>
+                    <ns4:ExternalReference>
+                        <ns2:URI>https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=AtbiNYz2TrHlEayILZKxyR88oQcIdybr9ZX%2BPEadv%2BGlEJk5sCNYrO4GiIE311YdAom7fAi45vz5k11RdOPhWjVtD9A6mz1VnHJmFgxa75R7QB3HKyQaFUExmUVQCerk&amp;cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D</ns2:URI>
+                        <ns2:DocumentHash>ApMzmL9YbJkN6eOfCZUKxZ4BK0w=</ns2:DocumentHash>
+                    </ns4:ExternalReference>
+                </ns4:Attachment>
+            </ns4:AdditionalDocumentReference>
+            <ns1:ValidNoticeInfo>
+                <ns3:NoticeTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.11/TenderingNoticeTypeCode-2.11.gc">DOC_CAN_ADJ</ns3:NoticeTypeCode>
+                <ns1:AdditionalPublicationStatus>
+                    <ns3:PublicationMediaName>Perfil del contratante</ns3:PublicationMediaName>
+                    <ns1:AdditionalPublicationDocumentReference>
+                        <ns2:IssueDate>2025-01-31</ns2:IssueDate>
+                    </ns1:AdditionalPublicationDocumentReference>
+                    <ns1:AdditionalPublicationDocumentReference>
+                        <ns2:DocumentTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.11/TenderingDocumentTypeCode-2.11.gc" name="Documento de Acta de Adjudicación">ACTA_ADJ</ns2:DocumentTypeCode>
+                        <ns4:Attachment>
+                            <ns4:ExternalReference>
+<ns2:URI>https://contrataciondelestado.es/FileSystem/servlet/GetDocumentByIdServlet?DocumentIdParam=8j7AR3S6ohvjzqV1qu8J9Ws7cQ2xSD24CaBAWqWpD9P8ZZmvxIcUPxyzlAEd7TIR33D0Ud5lBKchH55p/Qp3VEt5vr8qADCM4PwLyBg6qIP3GVhXrFFqN7yFncy7YfRK&amp;cifrado=QUC1GjXXSiLkydRHJBmbpw%3D%3D</ns2:URI>
+<ns2:FileName>RESOL ADJUDICACION.pdf</ns2:FileName>
+                            </ns4:ExternalReference>
+                        </ns4:Attachment>
+                    </ns1:AdditionalPublicationDocumentReference>
+                </ns1:AdditionalPublicationStatus>
+            </ns1:ValidNoticeInfo>
+            <ns1:GeneralDocument>
+                <ns1:GeneralDocumentDocumentReference>
+                    <ns2:ID>2025-a205eae3-b9c5-45d4-bb70-5823b553d6d4</ns2:ID>
+                    <ns2:DocumentTypeCode listURI="http://contrataciondelestado.es/codice/cl/2.08/GeneralContractDocuments-2.08.gc">ZZZ</ns2:DocumentTypeCode>
+                    <ns4:Attachment>
+                        <ns4:ExternalReference>
+                            <ns2:URI>https://contrataciondelestado.es/wps/wcm/connect/PLACE_es/Site/area/docAccCmpnt?srv=cmpnt&amp;cmpntname=GetDocumentsById&amp;source=library&amp;DocumentIdParam=2025-a205eae3-b9c5-45d4-bb70-5823b553d6d4</ns2:URI>
+                            <ns2:FileName>FORMALIZACION CONTRATO</ns2:FileName>
+                        </ns4:ExternalReference>
+                    </ns4:Attachment>
+                </ns1:GeneralDocumentDocumentReference>
+            </ns1:GeneralDocument>
+        </ns1:ContractFolderStatus>
+    </ns0:entry>
+    

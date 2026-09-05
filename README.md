@@ -2,7 +2,7 @@
 
 **[Explorar adjudicaciones](https://votaconlachola.org/spending/) · [Reproducir una consulta](docs/examples/placsp-launch/README.md) · [Contribuir](docs/community/placsp-launch-tasks.md)**
 
-Pregunta de entrada: ¿a quién se adjudicó, cuánto y en qué expedientes? La demo muestra un corte histórico parcial con fuentes verificables. Alfa técnica; revisión comunitaria pendiente.
+Pregunta de entrada: ¿a quién se adjudicó, cuánto y en qué expedientes? La demo muestra los 2.632 resultados elegibles de enero de 2025 dentro del corpus congelado, con fuentes verificables. Validación comunitaria pendiente.
 
 ![Vota Con La Chola - portada](docs/screenshots/cover-graph-congreso-diputados-depth-3-active-lens-all.png)
 
@@ -17,9 +17,9 @@ Este repo es intencionalmente **ultraligero**: SQLite reproducible para control/
 
 ## Prioridad inmediata: lanzamiento útil para la comunidad
 
-Primera entrega: investigar contratación pública con un corte fechado y explícitamente parcial de PLACSP. Pregunta de entrada: **«¿A quién adjudicó este organismo, cuánto y en qué expedientes, dentro de este corte?»**. El recorrido previsto une pregunta, consulta, resultado, expediente oficial y reproducción.
+Primera entrega: investigar contratación pública con una cohorte mensual fechada de PLACSP. Pregunta de entrada: **«¿A quién adjudicó este organismo, cuánto y en qué expedientes, dentro de enero de 2025?»**. El recorrido une pregunta, consulta, resultado, expediente oficial y reproducción.
 
-**Ahora:** [alfa técnica publicada](https://github.com/gsusI/vota-con-la-chola/releases/tag/v0.1.0-placsp-alpha.1), demo y descarga anónima verificadas. **Destino:** una respuesta comprobable y reutilizable por desarrolladores de datos, periodistas y fiscalizadores cívicos. **Siguiente:** recoger reproducciones externas y revisar adopción. Una adjudicación no equivale a un pago; el corte no representa toda la contratación pública.
+**Ahora:** cohorte completa de enero dentro del corpus congelado, demo y descarga anónima verificadas. **Destino:** una respuesta comprobable y reutilizable por desarrolladores de datos, periodistas y fiscalizadores cívicos. **Siguiente:** recoger reproducciones externas y revisar adopción. Una adjudicación no equivale a un pago; la cohorte no representa toda la contratación pública.
 
 Los seis hitos siguientes resumen el [plan canónico y sus condiciones de aceptación](ROADMAP.md#hitos-de-lanzamiento); su estado operativo se mantiene en el [tracker de lanzamiento](docs/etl/e2e-scrape-load-tracker.md#lanzamiento-comunitario-con-foco-2026-09-05).
 
@@ -73,7 +73,7 @@ Misión:
 
 ## Qué hay hoy
 
-- [Demo de contratación](https://votaconlachola.org/spending/): corte parcial de 120 resultados, decisiones del 1–3 de enero de 2025; fuente y captura XML por resultado.
+- [Demo de contratación](https://votaconlachola.org/spending/): 2.632 resultados elegibles, decisiones del 1–31 de enero de 2025; nombres normalizados para búsqueda y etiqueta XML literal por resultado.
 - [Reproducción con Python](docs/examples/placsp-launch/README.md): CSV/Parquet, tres consultas SQL y hashes; sin claves ni base previa.
 - [Seis primeras tareas](docs/community/placsp-launch-tasks.md): consultas, verificación y documentación, con entradas, resultados y validación definidos.
 - ETL de representantes, votaciones, contratación, subvenciones e indicadores; SQLite, artefactos analíticos y evidencia oficial.

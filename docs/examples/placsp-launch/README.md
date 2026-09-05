@@ -1,6 +1,6 @@
-# Reproducir el corte PLACSP
+# Reproducir enero de 2025 en PLACSP
 
-Alfa técnica: 120 resultados de adjudicación, decisiones del 1 al 3 de enero de 2025. Selección parcial por fecha e identificador, no cobertura completa de esos días ni de los organismos. Importe adjudicado sin impuestos; no pagos ni contratos únicos. No inferir irregularidades.
+Release reproducible: 2.632 resultados de adjudicación elegibles, con decisiones del 1 al 31 de enero de 2025 dentro del corpus congelado. Importe adjudicado sin impuestos; no pagos ni contratos únicos. No inferir irregularidades ni cobertura fuera del mes y del snapshot.
 
 ## Inicio
 
@@ -16,21 +16,22 @@ El comando verifica todos los hashes, contrasta CSV y JSON, comprueba los XML, c
 python3 reproduce.py --bundle . --start 2025-01-02 --end 2025-01-03
 ```
 
-`--authority` y `--supplier` aceptan los nombres exactos del CSV; filtran etiquetas publicadas, no identifican una entidad universal. Las agrupaciones conservan nombre, identificador y esquema. Fechas inclusivas. Sin filtros, suma esperada: 604519346 céntimos; 120 resultados.
+`--authority` y `--supplier` aceptan los nombres canónicos del CSV. Las agrupaciones usan los identificadores publicados cuando existen y convergen variantes tipográficas del mismo nombre; los campos `*_source_text` conservan el texto literal de cada XML. Fechas inclusivas. Sin filtros, suma esperada: 47.744.719.885 céntimos; 2.632 resultados.
 
 ## Descarga anónima fijada por hash
 
-Descarga `reproduce.py` desde los assets de la release `v0.1.0-placsp-alpha.1` y ejecútalo con Python:
+Descarga `reproduce.py` y el ZIP de la última release; toma el hash confiable del puntero público:
 
 ```sh
-python3 reproduce.py --url https://github.com/gsusI/vota-con-la-chola/releases/download/v0.1.0-placsp-alpha.1/placsp-launch.zip --sha256 9d322d80c13247e835991d9187b75d5ad4c32d59bb440c1ca564672f242f7c9b
+python3 reproduce.py --url https://github.com/gsusI/vota-con-la-chola/releases/latest/download/placsp-launch.zip --sha256 HASH_PUBLICADO_EN_LATEST_JSON
 ```
 
-El directorio de datos es temporal y nuevo en cada ejecución. El hash fija los bytes aunque la descarga cambie; cualquier diferencia detiene la reproducción. El ZIP conserva la guía que se selló al crear el paquete.
+El hash está en `https://votaconlachola.org/spending/launch/latest.json`. Sustituye `HASH_PUBLICADO_EN_LATEST_JSON` por `archive_sha256`. El directorio de datos es temporal y nuevo en cada ejecución. El hash fija los bytes aunque la descarga cambie; cualquier diferencia detiene la reproducción. El ZIP conserva la guía que se selló al crear el paquete.
 
 ## Contenido y diccionario
 
-- `awards.csv`, `awards.parquet`, `awards.json`: las mismas 120 filas. CSV técnico exacto: importar como datos, no abrir fórmulas automáticamente en una hoja de cálculo.
+- `awards.csv`, `awards.parquet`, `awards.json`: las mismas 2.632 filas. CSV técnico exacto: importar como datos, no abrir fórmulas automáticamente en una hoja de cálculo.
+- `name-aliases.json`: grupos de variantes, nombre canónico, criterio de identidad y frecuencia de cada texto fuente.
 - `by-supplier.sql`: resultados e importes por órgano y proveedor, con identificadores separados.
 - `by-month.sql`: distribución temporal de las decisiones del corte.
 - `records.sql`: detalle, expediente, lote, URL oficial y captura.
@@ -42,12 +43,12 @@ El directorio de datos es temporal y nuevo en cada ejecución. El hash fija los 
 | --- | --- |
 | `award_key` | Identificador estable del expediente fuente + ordinal del resultado; versión capturada única |
 | `money_fact_id`, `source_record_id` | Referencias al corpus analítico congelado |
-| `authority_id`, `authority` | Identificador y nombre del órgano publicados; vacío indica identificador ausente |
-| `supplier_id_scheme`, `supplier_id`, `supplier` | Esquema, identificador y nombre publicados; sin fusión por nombre |
+| `authority_id`, `authority` | Identificador publicado y nombre canónico del órgano; vacío indica identificador ausente |
+| `supplier_id_scheme`, `supplier_id`, `supplier` | Esquema e identificador publicados y nombre canónico del proveedor |
 | `contract_id`, `lot_id`, `award_ordinal` | Expediente, lote publicado o vacío, posición del resultado en la fuente |
 | `decision_date` | Fecha de adjudicación publicada, ISO 8601 |
 | `amount_decimal`, `amount_cents`, `currency` | Decimal fuente, equivalente exacto en céntimos, EUR; sin impuestos |
-| `supplier_source_text`, `authority_source_text` | Texto literal XML, incluidos espacios; las etiquetas analíticas normalizan espacios y conservan aquí el original |
+| `supplier_source_text`, `authority_source_text` | Texto literal XML, incluidos espacios y puntuación; las etiquetas analíticas convergen variantes y conservan aquí el original |
 | `title`, `source_url` | Título del expediente y URL oficial |
 | `source_snapshot_date`, `entry_updated_at` | Etiqueta de captura y actualización de la entrada; no fecha de lanzamiento |
 | `entry_sha256`, `capture_path` | Hash de entrada XML y ruta de captura verificable |
