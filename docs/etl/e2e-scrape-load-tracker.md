@@ -2010,3 +2010,5 @@ CI global de la publicación: fallos fuera del corte en artefactos de escala aus
 ### 2026-09-05 · Spending filter usability
 
 Searchable authority/supplier selectors and a single two-click date range are implemented. Local and public browser checks, CSV parity, static build and privacy gates pass. Published in `95586e58ca`; canonical-domain verification complete. Next: external alpha usability feedback. Evidence: [filter UX verification](sprints/PUBLIC-LAUNCH-20260905/evidence/filter-ux-verification.md).
+
+Date refinement ready for scoped publication: separate editable Desde/Hasta inputs now update either endpoint independently; the shared calendar retains its two-click range flow. Manual validation, reset, URL restore, mobile layout, static build and privacy gates pass. Next: canonical-domain verification, then external alpha usability feedback. Evidence: [filter UX verification](sprints/PUBLIC-LAUNCH-20260905/evidence/filter-ux-verification.md#independent-date-editing-refinement).
