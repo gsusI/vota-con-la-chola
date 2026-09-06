@@ -2,6 +2,7 @@
 """Seal a checked PLACSP slice and its independently computed SQL answers."""
 import argparse
 import hashlib
+import gzip
 import json
 import shutil
 import zipfile
@@ -41,6 +42,33 @@ def package(bundle,public):
                 info=zipfile.ZipInfo(p.relative_to(bundle).as_posix(),date_time=(2026,9,5,0,0,0));info.compress_type=zipfile.ZIP_DEFLATED;info.external_attr=0o100644<<16
                 z.writestr(info,p.read_bytes())
     pointer=dict(release=release,archive_sha256=hashlib.sha256(archive.read_bytes()).hexdigest(),archive_bytes=archive.stat().st_size,rows=len(rows),amount_cents=sum(r['amount_cents'] for r in rows))
+    # Lossless transport keeps the complete history within static hosting budgets.
+    pointer['file_parts'] = {}
+    pointer['file_encodings'] = {}
+    pointer['compressed_xml'] = True
+    chunk_bytes = 20 * 1024 * 1024
+    for original in sorted(target.rglob('*')):
+        if not original.is_file():
+            continue
+        name = original.relative_to(target).as_posix()
+        if original.suffix == '.xml' or (original.stat().st_size > 1024 * 1024 and original.suffix in ('.json', '.csv') and original.name != 'manifest.json'):
+            compressed = original.with_name(original.name + '.gz')
+            compressed.write_bytes(gzip.compress(original.read_bytes(), compresslevel=6, mtime=0))
+            original.unlink()
+            if original.suffix != '.xml':
+                pointer['file_encodings'][name] = 'gzip'
+            original = compressed
+        if original.stat().st_size <= chunk_bytes:
+            continue
+        transport_name = original.relative_to(target).as_posix()
+        parts = []
+        with original.open('rb') as stream:
+            while data := stream.read(chunk_bytes):
+                part = original.with_name(original.name + f'.part-{len(parts):04d}')
+                part.write_bytes(data)
+                parts.append({'path': part.relative_to(target).as_posix(), 'bytes': len(data), 'sha256': hashlib.sha256(data).hexdigest()})
+        pointer['file_parts'][name] = parts
+        original.unlink()
     dump(public/'latest.json',pointer)
     print(json.dumps(pointer))
 

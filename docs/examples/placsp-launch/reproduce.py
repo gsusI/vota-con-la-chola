@@ -14,9 +14,9 @@ from decimal import Decimal
 from pathlib import Path, PurePosixPath
 
 QUERIES = ('by-supplier', 'by-month', 'records')
-MAX_DOWNLOAD_BYTES = 100_000_000
-MAX_UNPACKED_BYTES = 500_000_000
-MAX_ARCHIVE_FILES = 20_000
+MAX_DOWNLOAD_BYTES = 500_000_000
+MAX_UNPACKED_BYTES = 2_000_000_000
+MAX_ARCHIVE_FILES = 150_000
 
 def sha(data):
     return hashlib.sha256(data).hexdigest()
@@ -56,7 +56,7 @@ def run_queries(root, connection, params):
 
 def reproduce(root, params):
     c, rows = load_verified(root)
-    default = dict(authority='',supplier='',start='2025-01-01',end='2025-01-31')
+    default = dict(authority='',supplier='',start='0001-01-01',end='9999-12-31')
     expected = json.loads((root/'expected.json').read_text())
     if run_queries(root,c,default) != expected:
         raise ValueError('Published SQL result mismatch')
@@ -86,7 +86,7 @@ def main():
     group=p.add_mutually_exclusive_group(required=True)
     group.add_argument('--bundle',type=Path);group.add_argument('--url')
     p.add_argument('--sha256');p.add_argument('--authority',default='');p.add_argument('--supplier',default='')
-    p.add_argument('--start',default='2025-01-01');p.add_argument('--end',default='2025-01-31')
+    p.add_argument('--start',default='0001-01-01');p.add_argument('--end',default='9999-12-31')
     a=p.parse_args();start=time.monotonic()
     params={k:getattr(a,k) for k in ('authority','supplier','start','end')}
     if a.url:

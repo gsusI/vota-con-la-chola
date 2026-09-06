@@ -1,6 +1,6 @@
-# Reproducir enero de 2025 en PLACSP
+# Reproducir el histórico disponible de PLACSP
 
-Release reproducible: 2.632 resultados de adjudicación elegibles, con decisiones del 1 al 31 de enero de 2025 dentro del corpus congelado. Importe adjudicado sin impuestos; no pagos ni contratos únicos. No inferir irregularidades ni cobertura fuera del mes y del snapshot.
+Release reproducible: todos los resultados de adjudicación elegibles, sin recorte de fechas dentro del corpus congelado. Importe adjudicado sin impuestos; no pagos ni contratos únicos. No inferir irregularidades ni cobertura fuera del snapshot.
 
 ## Inicio
 
@@ -16,21 +16,17 @@ El comando verifica todos los hashes, contrasta CSV y JSON, comprueba los XML, c
 python3 reproduce.py --bundle . --start 2025-01-02 --end 2025-01-03
 ```
 
-`--authority` y `--supplier` aceptan los nombres canónicos del CSV. Las agrupaciones usan los identificadores publicados cuando existen y convergen variantes tipográficas del mismo nombre; los campos `*_source_text` conservan el texto literal de cada XML. Fechas inclusivas. Sin filtros, suma esperada: 47.744.719.885 céntimos; 2.632 resultados.
+`--authority` y `--supplier` aceptan los nombres canónicos del CSV. Las agrupaciones usan los identificadores publicados cuando existen y convergen variantes tipográficas del mismo nombre; los campos `*_source_text` conservan el texto literal de cada XML. Fechas inclusivas. Sin filtros se consulta todo el histórico. El puntero `latest.json` publica el número de resultados y la suma esperada en céntimos.
 
-## Descarga anónima fijada por hash
+## Descarga completa verificada
 
-Descarga `reproduce.py` y el ZIP de la última release; toma el hash confiable del puntero público:
+En `https://votaconlachola.org/spending/`, pulsa «Descargar datos y consultas». La página reúne todas las partes del ZIP, verifica SHA-256 y descarga un único archivo que puede descomprimirse y consultarse con el comando anterior. El puntero público `spending/launch/latest.json` contiene `archive_sha256`, tamaños y partes de transporte. La compresión y las partes son reversibles: no eliminan filas ni XML.
 
-```sh
-python3 reproduce.py --url https://github.com/gsusI/vota-con-la-chola/releases/latest/download/placsp-launch.zip --sha256 HASH_PUBLICADO_EN_LATEST_JSON
-```
-
-El hash está en `https://votaconlachola.org/spending/launch/latest.json`. Sustituye `HASH_PUBLICADO_EN_LATEST_JSON` por `archive_sha256`. El directorio de datos es temporal y nuevo en cada ejecución. El hash fija los bytes aunque la descarga cambie; cualquier diferencia detiene la reproducción. El ZIP conserva la guía que se selló al crear el paquete.
+Los XML descargados desde cada resultado se descomprimen y verifican contra `entry_sha256`. El paquete completo conserva `evidence/*.xml` sin comprimir individualmente para la reproducción local.
 
 ## Contenido y diccionario
 
-- `awards.csv`, `awards.parquet`, `awards.json`: las mismas 2.632 filas. CSV técnico exacto: importar como datos, no abrir fórmulas automáticamente en una hoja de cálculo.
+- `awards.csv`, `awards.parquet`, `awards.json`: las mismas filas del histórico completo. CSV técnico exacto: importar como datos, no abrir fórmulas automáticamente en una hoja de cálculo.
 - `name-aliases.json`: grupos de variantes, nombre canónico, criterio de identidad y frecuencia de cada texto fuente.
 - `by-supplier.sql`: resultados e importes por órgano y proveedor, con identificadores separados.
 - `by-month.sql`: distribución temporal de las decisiones del corte.

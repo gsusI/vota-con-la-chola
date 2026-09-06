@@ -114,6 +114,15 @@ def may_contain_leak_candidate(text: str) -> bool:
     return any(token in text for token in LEAK_SENTINELS)
 
 
+def is_public_login_route(text: str, kind: str, start: int) -> bool:
+    # Vortal publishes this literal route in official procurement XML.
+    # Only this host and login path qualify; nearby workstation paths still fail.
+    prefix = "https://community.vortal.biz/PRODSTS"
+    return (kind == "local_user_path"
+            and text[max(0, start - len(prefix)):start] == prefix
+            and text[start:].startswith((LOCAL_USERS_PREFIX + "Login/", LOCAL_USERS_PREFIX + "LoginIndex")))
+
+
 def should_scan_pattern(text: str, kind: str) -> bool:
     return all(token in text for token in LEAK_PREFILTERS.get(kind, ()))
 
@@ -163,6 +172,8 @@ def _collect_stream_findings(path: Path, handle: TextIO) -> list[Finding]:
                 if not should_scan_pattern(text, kind):
                     continue
                 for match in pattern.finditer(text):
+                    if is_public_login_route(text, kind, match.start()):
+                        continue
                     if match.end() <= carry_length:
                         continue
                     line = lines_before + text.count("\n", 0, match.start()) + 1
@@ -231,6 +242,8 @@ def collect_findings(paths: list[Path]) -> tuple[list[Finding], int]:
             if not should_scan_pattern(text, kind):
                 continue
             for match in pattern.finditer(text):
+                if is_public_login_route(text, kind, match.start()):
+                    continue
                 line = text.count("\n", 0, match.start()) + 1
                 findings.append(
                     Finding(

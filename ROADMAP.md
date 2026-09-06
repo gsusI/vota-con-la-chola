@@ -5,6 +5,8 @@ Updated: `2026-09-05`
 
 ## Prioridad inmediata: lanzamiento útil para la comunidad
 
+Mandato 2026-09-06: `/spending/` consulta todo el histórico disponible, sin recorte mensual previo al calendario. Publicar nueva release inmutable y verificar Galasa con rango 1999–2027. Sustituye la limitación mensual del lanzamiento inicial; conservar la distinción entre adjudicado, estimado y pagado.
+
 Estado: `release mensual publicada`; `L0–L5` técnicos verificados y cohorte completa de enero de 2025 ampliada a 2.632 resultados elegibles con 1.960 XML originales. Responde al mandato del mantenedor de dar foco y hacer aprovechable públicamente lo desarrollado. Esta secuencia tiene prioridad de ejecución sobre las ondas de expansión posteriores; conserva su historial, requisitos y estados.
 
 **Ahora:** código, web y datos ya son públicos. El índice HF de escala declara siete corpora y 5.414.326 filas, pero la portada ofrece numerosas herramientas, `/spending/` solo veinte adjudicaciones fijas y `/explorer/` un índice sin ejecución SQL. GitHub no tiene releases y el issue de revisión ciudadana sigue sin revisores independientes. Evidencia y límites: [auditoría del 5 de septiembre](docs/etl/sprints/PUBLIC-LAUNCH-20260905/evidence/launch-audit.md).
