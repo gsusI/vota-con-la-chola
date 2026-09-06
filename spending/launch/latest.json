@@ -1,7 +1,64 @@
 {
-  "amount_cents": 47744719885,
-  "archive_bytes": 9625726,
-  "archive_sha256": "ffa5cd49ff239d629394539df877c52366eb1938fb05b5f91524679ae14a2e1f",
-  "release": "aa4d608264906c78630786a2b6a2a6b58f38d0243ebee0c64810a82b3ed7d49f",
-  "rows": 2632
+  "amount_cents": 4865774429683,
+  "archive_bytes": 182758699,
+  "archive_sha256": "ce490104c5bd41ba9c23205c45395d6edf20b80b745cfac73212b4a32601606c",
+  "compressed_xml": true,
+  "file_encodings": {
+    "awards.csv": "gzip",
+    "awards.json": "gzip",
+    "expected.json": "gzip",
+    "lineage.json": "gzip",
+    "name-aliases.json": "gzip"
+  },
+  "file_parts": {
+    "placsp-launch.zip": [
+      {
+        "bytes": 20971520,
+        "path": "placsp-launch.zip.part-0000",
+        "sha256": "326d77d425e3efe8454ea2a616a2ae78707a95e74c5751e5265f3bc79ffb90d2"
+      },
+      {
+        "bytes": 20971520,
+        "path": "placsp-launch.zip.part-0001",
+        "sha256": "d7427602be93f517cd38bb0451fa65e469b671ac0a0dc7c051d293aed9589a0e"
+      },
+      {
+        "bytes": 20971520,
+        "path": "placsp-launch.zip.part-0002",
+        "sha256": "02a525160dddb046122e2125112f09ff8cae172e97a01e98fb7217417fab5a51"
+      },
+      {
+        "bytes": 20971520,
+        "path": "placsp-launch.zip.part-0003",
+        "sha256": "107359449bbb2e5abcafe7fd055390cd7cd981d92ac0b3f1b52f01e08af8c2cb"
+      },
+      {
+        "bytes": 20971520,
+        "path": "placsp-launch.zip.part-0004",
+        "sha256": "f30e1f9134c20f95eb41351150d3c046d9eefb3f4fc2470a189862d386f3c52b"
+      },
+      {
+        "bytes": 20971520,
+        "path": "placsp-launch.zip.part-0005",
+        "sha256": "07b558876108bc9ec1f1621e1e3e6dc9e8ed758f22e69b7594f7ee91cd0a1ca9"
+      },
+      {
+        "bytes": 20971520,
+        "path": "placsp-launch.zip.part-0006",
+        "sha256": "e7ff858574fa89334bae27440ad806cc4edb44871a555ec7c0d63fd61d368201"
+      },
+      {
+        "bytes": 20971520,
+        "path": "placsp-launch.zip.part-0007",
+        "sha256": "a658b6bd3293ea0064bb2909e37ee2ce09588e94d3a0de613a7fefdc358ee742"
+      },
+      {
+        "bytes": 14986539,
+        "path": "placsp-launch.zip.part-0008",
+        "sha256": "74d5476e413aa3cb737b0395c7ac23902797e55dd37766d62ae47bc5d39dc957"
+      }
+    ]
+  },
+  "release": "0e55b07120bcb42731b45a78fd682813cd6a51793232faee805ddce46be32a90",
+  "rows": 47397
 }
