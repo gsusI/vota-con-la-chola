@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import Select from 'react-select';
 import { DayPicker, getDefaultClassNames } from 'react-day-picker';
 import { es } from 'react-day-picker/locale';
@@ -10,10 +10,10 @@ import styles from './launch.module.css';
 const calendarClasses = Object.fromEntries(Object.entries(getDefaultClassNames())
   .map(([key, value]) => [key, /_(enter|exit)$/.test(key) ? value : `${value} spending-calendar__${key.replaceAll('_', '-')}`]));
 const parseDate = (value) => new Date(`${value}T12:00:00`);
-const isoDate = (date) => `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+const isoDate = (date) => `${String(date.getFullYear()).padStart(4, '0')}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
 const formatDate = (value) => {
   const date = parseDate(value);
-  return `${String(date.getDate()).padStart(2, '0')}/${String(date.getMonth() + 1).padStart(2, '0')}/${date.getFullYear()}`;
+  return `${String(date.getDate()).padStart(2, '0')}/${String(date.getMonth() + 1).padStart(2, '0')}/${String(date.getFullYear()).padStart(4, '0')}`;
 };
 const parseTextDate = (value) => {
   const text = value.trim();
@@ -28,11 +28,13 @@ const parseTextDate = (value) => {
 };
 
 export function SearchSelect({ id, label, placeholder, values, value, onChange, disabled = false }) {
-  const options = values.map((name) => ({ value: name, label: name }));
+  const [search, setSearch] = useState('');
+  const normalize = (text) => text.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+  const options = useMemo(() => values.filter((name) => normalize(name).includes(normalize(search))).slice(0, 100).map((name) => ({ value: name, label: name })), [values, search]);
   return <div className={`spending-filter spending-filter--${id} ${styles.searchField}`}>
     <label className="spending-filter__label" htmlFor={`spending-${id}`}>{label}</label>
     <Select inputId={`spending-${id}`} instanceId={`spending-${id}`} className="spending-search"
-      classNamePrefix="spending-search" options={options} value={options.find((option) => option.value === value) || null}
+      classNamePrefix="spending-search" options={options} value={value ? { value, label: value } : null} onInputChange={setSearch}
       onChange={(option) => onChange(option?.value || '')} isClearable isSearchable placeholder={placeholder}
       isDisabled={disabled}
       noOptionsMessage={() => 'Sin coincidencias'} loadingMessage={() => 'Buscando…'}
@@ -62,10 +64,17 @@ export function DateRangeField({ start, end, resetToken, onChange, disabled = fa
   const [texts, setTexts] = useState({ start: formatDate(start), end: formatDate(end) });
   const [error, setError] = useState('');
   const [errorKey, setErrorKey] = useState('');
+  const previousDates = useRef({ start, end, resetToken });
   const selected = draft ? { from: draft } : { from: parseDate(start), to: parseDate(end) };
 
   useEffect(() => {
-    setTexts({ start: formatDate(start), end: formatDate(end) });
+    const previous = previousDates.current;
+    const reset = previous.resetToken !== resetToken;
+    setTexts((prior) => ({
+      start: reset || previous.start !== start ? formatDate(start) : prior.start,
+      end: reset || previous.end !== end ? formatDate(end) : prior.end,
+    }));
+    previousDates.current = { start, end, resetToken };
     setError('');
     setErrorKey('');
   }, [start, end, resetToken]);
@@ -120,7 +129,7 @@ export function DateRangeField({ start, end, resetToken, onChange, disabled = fa
     setError('');
     setErrorKey('');
     setTexts((prior) => ({ ...prior, [key]: formatDate(value) }));
-    onChange({ start, end, [key]: value });
+    onChange({ [key]: value });
   }
   function handleDateKeyDown(event, key) {
     if (event.key === 'Enter') {
@@ -177,7 +186,7 @@ export function DateRangeField({ start, end, resetToken, onChange, disabled = fa
       </p>
       <DayPicker key={session} mode="range" selected={selected} onSelect={(_range, day) => selectDay(day)}
         month={month} onMonthChange={setMonth} locale={es} autoFocus animate fixedWeeks
-        classNames={calendarClasses} captionLayout="dropdown" startMonth={new Date(2000, 0)} endMonth={new Date(2100, 11)} />
+        classNames={calendarClasses} captionLayout="dropdown" startMonth={parseDate(`${String(Math.min(1900, parseDate(start).getFullYear())).padStart(4, '0')}-01-01`)} endMonth={new Date(Math.max(2100, parseDate(end).getFullYear()), 11)} />
       <button className="spending-calendar__cancel" type="button" onClick={close}>Cancelar</button>
     </dialog>
   </div>;

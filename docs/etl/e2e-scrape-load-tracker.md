@@ -2021,3 +2021,7 @@ Date refinement published in source 0163c87015 / site 2b892b1c19: separate edita
 - **Publicación:** fuente `1925016eee`, sitio `1b2b62588a` y release estable `v0.2.0-placsp-january-2025` publicados. El dominio canónico y la descarga GitHub fueron verificados; bytes y SHA-256 coinciden. La alfa de 120 permanece como historial.
 - **Siguiente:** tres pruebas externas, dos reproducciones y expansión mensual solo con release fechada y validada.
 - **Evidencia:** [generación, normalización y QA](sprints/PUBLIC-LAUNCH-20260905/evidence/full-january-release.md).
+
+## Corrección de cobertura pública PLACSP — 2026-09-06
+
+Estado: IN_PROGRESS. `/spending/` eliminó el recorte previo de enero: nueva selección de 47.397 adjudicaciones y 32.783 XML verificables. Galasa 1999–2027: 8 resultados, 5.505.965,94 EUR sin impuestos; enero: 1 resultado, 7.546,48 EUR. Pruebas de datos, privacidad e integridad Git pasan. Siguiente: verificar navegador y publicación. Evidencia: [histórico disponible](sprints/PUBLIC-LAUNCH-20260905/evidence/full-history-release.md).

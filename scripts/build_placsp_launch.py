@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build a bounded, checksum-bound PLACSP launch from the public frozen corpus."""
+"""Build a checksum-bound complete available PLACSP history from the public frozen corpus."""
 import argparse
 import csv
 import hashlib
@@ -164,10 +164,14 @@ def build(corpus, db, out, limit=None):
         if r['source_record_pk'] not in latest:
             excluded['older_or_ambiguous_version'] += 1
             continue
-        if not '2025-01-01' <= (r['effective_date'] or '') <= '2025-01-31':
-            excluded['outside_january_2025'] += 1
+        if not r['effective_date']:
+            excluded['missing_decision_date'] += 1
             continue
-        date.fromisoformat(r['effective_date'])
+        try:
+            date.fromisoformat(r['effective_date'].removesuffix('Z'))
+        except ValueError:
+            excluded['invalid_decision_date'] += 1
+            continue
         if not r['public_authority'] or not r['counterparty_name'] or r['currency'] != 'EUR' or r['amount_eur'] is None:
             excluded['missing_identity_or_eur_amount'] += 1
             continue
@@ -206,7 +210,7 @@ def build(corpus, db, out, limit=None):
             supplier_id=a.get('supplier_identifier') or '', supplier=r['counterparty_name'],
             supplier_id_scheme=a.get('supplier_identifier_scheme') or '',
             contract_id=r['primary_reference_id'] or '', lot_id=a.get('lot_id') or '',
-            award_ordinal=a['award_ordinal'], decision_date=r['effective_date'],
+            award_ordinal=a['award_ordinal'], decision_date=r['effective_date'].removesuffix('Z'),
             amount_decimal=a['amount_eur_decimal'], amount_cents=int(r['amount_eur']*100),currency='EUR',
             title=rec.get('title') or '', source_url=r['source_url'],
             source_snapshot_date=r['source_snapshot_date'], entry_updated_at=rec['entry_updated_at'],
@@ -218,16 +222,21 @@ def build(corpus, db, out, limit=None):
         raise ValueError('Insufficient eligible source rows')
     if not selected:
         raise ValueError('No eligible source rows')
+    print(json.dumps({'stage':'selected','rows':len(selected)}), flush=True)
     # Rehash original archives and members; recover exact ET-serialized entries used by ingest.
     targets = defaultdict(dict)
     target_metadata = {}
     lineage = []
-    for pk, payload in source_payloads.items():
-        row = c.execute('''SELECT m.member_name,m.content_sha256 member_sha256,a.raw_path,
+    captures = {}
+    for row in c.execute("""SELECT s.source_record_pk,m.member_name,m.content_sha256 member_sha256,a.raw_path,
           a.content_sha256 archive_sha256,a.source_url,a.fetched_at,a.bytes
           FROM placsp_bulk_record_sightings s JOIN placsp_bulk_members m USING(placsp_bulk_member_id)
           JOIN placsp_bulk_archives a USING(placsp_bulk_archive_id)
-          WHERE s.source_record_pk=? ORDER BY s.placsp_bulk_record_sighting_id LIMIT 1''',(pk,)).fetchone()
+          ORDER BY s.placsp_bulk_record_sighting_id"""):
+        if row['source_record_pk'] in source_payloads:
+            captures.setdefault(row['source_record_pk'], row)
+    for pk, payload in source_payloads.items():
+        row = captures.get(pk)
         if not row:
             raise ValueError('Missing original capture')
         targets[(row['raw_path'],row['member_name'])][payload['entry_content_sha256']] = payload
@@ -278,8 +287,8 @@ def build(corpus, db, out, limit=None):
         upstream_manifest_sha256=MANIFEST_SHA, manifest_snapshot_label=manifest['snapshot_date'],
         observed_source_snapshot_dates=sorted({r['source_snapshot_date'] for r in all_rows}),
         corpus_rows=len(all_rows),corpus_fact_kinds=dict(counts),
-        scope='Complete eligible January 2025 award-result cohort inside the frozen corpus; latest unambiguous version only. Not complete procurement coverage outside this month or snapshot.',
-        selection_mode='complete_month',selection_limit=limit,selected_rows=len(selected),eligible_january_rows_before_source_result_check=len(candidates),
+        scope='All eligible award results across every available date in the frozen corpus; latest unambiguous version only. Source coverage remains incomplete.',
+        selection_mode='complete_available_history',selection_limit=limit,selected_rows=len(selected),eligible_rows_before_source_result_check=len(candidates),
         selection_exclusions=dict(excluded),ambiguous_contract_version_groups=ambiguous,
         name_normalization=dict(method='NFKC, HTML entity decoding, whitespace/punctuation cleanup, case-insensitive terminal-punctuation key; published identifiers group variants even when the identifier scheme label differs; literal XML labels retained per row', **normalization),
         capture_entries=len(recovered),original_archives_rehashed=len(checked_archives),original_members_rehashed=len(targets),
@@ -297,5 +306,5 @@ def build(corpus, db, out, limit=None):
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--corpus',type=Path,required=True);p.add_argument('--source-db',type=Path,required=True);p.add_argument('--out',type=Path,required=True)
-    p.add_argument('--limit',type=int,default=0,help='Development-only cap; zero validates the complete January cohort')
+    p.add_argument('--limit',type=int,default=0,help='Development-only cap; zero validates the complete available history')
     a=p.parse_args();build(a.corpus,a.source_db,a.out,a.limit or None)
