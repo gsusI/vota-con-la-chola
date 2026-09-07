@@ -59,3 +59,8 @@
 @keyframes filter-menu-in { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
 @media (max-width: 480px) { .dateInputs { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } .dateInputs > button { grid-column: 1 / -1; width: 100%; } .dateInputs > button span:last-child { position: static; width: auto; height: auto; margin: 0; overflow: visible; clip: auto; white-space: normal; } }
 @media (max-width: 370px) { .calendarDialog { padding: .65rem; } .calendarDialog :global(.rdp-root) { --rdp-day-width: 38px; --rdp-day_button-width: 36px; } }
+
+.page :global(.spending-text-search) { display: flex; align-items: end; gap: 0.75rem; flex-wrap: wrap; margin-block: 1rem; }
+.page :global(.spending-text-search__label) { flex-basis: 100%; font-weight: 600; }
+.page :global(.spending-text-search__input) { flex: 1 1 15rem; min-width: 0; min-height: 48px; border: 1px solid #718b7e; border-radius: 8px; padding: .65rem .8rem; font: inherit; }
+.page :global(.spending-text-search__submit) { min-height: 48px; padding: .65rem 1rem; border: 1px solid #195f45; border-radius: 8px; background: #195f45; color: white; font: inherit; cursor: pointer; }

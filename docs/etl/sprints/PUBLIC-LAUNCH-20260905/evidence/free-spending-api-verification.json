@@ -1,0 +1,100 @@
+{
+  "ok": true,
+  "public_api": "https://vclc-spending-api.jesus-inica.workers.dev",
+  "rows": 47397,
+  "amount_cents": 4865774429683,
+  "galasa_count": 8,
+  "csv_rows": 8,
+  "checks": [
+    {
+      "path": "/v1/awards",
+      "params": {},
+      "bytes": 15222,
+      "seconds": 0.33,
+      "rows_read": "13"
+    },
+    {
+      "path": "/v1/options",
+      "params": {
+        "kind": "authority",
+        "q": "galasa"
+      },
+      "bytes": 171,
+      "seconds": 0.468,
+      "rows_read": "825"
+    },
+    {
+      "path": "/v1/awards",
+      "params": {
+        "authority": "Consejería Delegada de Gestión de Aguas del Levante Almeriense, S.A. (GALASA)",
+        "start": "1999-01-01",
+        "end": "2027-12-31"
+      },
+      "bytes": 10999,
+      "seconds": 0.423,
+      "rows_read": "50"
+    },
+    {
+      "path": "/v1/awards",
+      "params": {
+        "authority": "Consejería Delegada de Gestión de Aguas del Levante Almeriense, S.A. (GALASA)",
+        "start": "2025-01-01",
+        "end": "2025-01-31"
+      },
+      "bytes": 1479,
+      "seconds": 0.31,
+      "rows_read": "50"
+    },
+    {
+      "path": "/v1/awards",
+      "params": {
+        "q": "OBR/EMERG/2023/2244"
+      },
+      "bytes": 1369,
+      "seconds": 0.467,
+      "rows_read": "4044"
+    },
+    {
+      "path": "/v1/export",
+      "params": {
+        "authority": "Consejería Delegada de Gestión de Aguas del Levante Almeriense, S.A. (GALASA)",
+        "start": "1999-01-01",
+        "end": "2027-12-31",
+        "after": 0,
+        "limit": 3,
+        "version": "128c777217c83fcafa6502a1df842f4c598feff5e5229581296742b978715b62"
+      },
+      "bytes": 3179,
+      "seconds": 0.413,
+      "rows_read": "17"
+    },
+    {
+      "path": "/v1/export",
+      "params": {
+        "authority": "Consejería Delegada de Gestión de Aguas del Levante Almeriense, S.A. (GALASA)",
+        "start": "1999-01-01",
+        "end": "2027-12-31",
+        "after": 39864,
+        "limit": 3,
+        "version": "128c777217c83fcafa6502a1df842f4c598feff5e5229581296742b978715b62"
+      },
+      "bytes": 2913,
+      "seconds": 0.381,
+      "rows_read": "23"
+    },
+    {
+      "path": "/v1/export",
+      "params": {
+        "authority": "Consejería Delegada de Gestión de Aguas del Levante Almeriense, S.A. (GALASA)",
+        "start": "1999-01-01",
+        "end": "2027-12-31",
+        "after": 43905,
+        "limit": 3,
+        "version": "128c777217c83fcafa6502a1df842f4c598feff5e5229581296742b978715b62"
+      },
+      "bytes": 2124,
+      "seconds": 0.525,
+      "rows_read": "25"
+    }
+  ]
+}
