@@ -5384,3 +5384,11 @@ etl-tracker-gate:
 # Compatibilidad: gate histórico (solo DONE sin red real)
 etl-tracker-gate-legacy:
   docker compose run --rm --build etl "python3 scripts/e2e_tracker_status.py --db {{db_path}} --tracker {{tracker_path}} --fail-on-done-zero-real"
+
+# Deploy the spending API through the isolated Hetzner target and blue/green gates.
+[positional-arguments]
+spending-api-deploy bundle slot:
+  #!/usr/bin/env bash
+  set -euo pipefail
+  infra_repo="${VCLC_INFRA_REPO:-../first_hetzner}"
+  just --working-directory "$infra_repo" --justfile "$infra_repo/Justfile" spending-api-deploy "$1" "$2"

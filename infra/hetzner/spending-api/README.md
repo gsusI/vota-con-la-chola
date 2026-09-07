@@ -5,7 +5,8 @@ directly; SQLite queries do not use Cloudflare Workers or D1.
 
 The application reuses the existing `/v1/status`, `/v1/options`, `/v1/awards`
 and `/v1/export` contract through a read-only SQLite adapter. One worker handles
-queries with a five-second deadline. Saturation returns 503, rather than spawning
+queries with a five-second deadline and a queue capped at eight waiting requests.
+The initial parallel page requests are queued; saturation returns JSON with 503, rather than spawning
 unbounded workers on the shared server. Health/readiness remains on the HTTP
 thread. Each blue/green container is limited to 0.5 CPU and 512 MiB by Ansible.
 
