@@ -4,7 +4,7 @@ Release reproducible: todos los resultados de adjudicación elegibles, sin recor
 
 ## Inicio
 
-Requisito: Python 3.10 o posterior. No requiere pip, Docker, claves ni bases previas. Tras descargar y verificar el ZIP enlazado en la demo, descomprimir en una carpeta nueva:
+Requisitos: Python 3.10 o posterior, al menos 4 GB de disco libre para extraer la candidata de 128.837 resultados y memoria suficiente para cargar JSON/CSV y SQLite. El ZIP ocupa aproximadamente 526 MB y sus archivos extraídos 3,08 GB. No requiere pip, Docker, claves ni bases previas. Tras descargar y verificar el ZIP enlazado en la demo, descomprimir en una carpeta nueva:
 
 ```sh
 python3 reproduce.py --bundle .
@@ -49,8 +49,14 @@ Los XML descargados desde cada resultado se descomprimen y verifican contra `ent
 | `source_snapshot_date`, `entry_updated_at` | Etiqueta de captura y actualización de la entrada; no fecha de lanzamiento |
 | `entry_sha256`, `capture_path` | Hash de entrada XML y ruta de captura verificable |
 
-El manifest original rotula 2025-03-31, pero sus filas contienen etiquetas de captura 2025-03-31 y 2025-06-30. El lanzamiento no actualiza esos datos. El conjunto original mezcla anuncios y resultados; este derivado incluye solo resultados de adjudicación con código fuente 8, importe EUR exacto y versión no ambigua dentro del corpus congelado. Excluye discrepancias entre Parquet y fuente. No certifica vigencia actual, representatividad o cobertura nacional.
+El manifest original rotula 2025-03-31, pero sus filas contienen etiquetas de captura 2025-03-31 y 2025-06-30. El lanzamiento no actualiza esos datos. El conjunto original mezcla anuncios y resultados; este derivado incluye resultados adjudicados (código fuente 8) y formalizados (código fuente 9), importe EUR exacto y versión no ambigua dentro del corpus congelado. Excluye discrepancias entre Parquet y fuente. No certifica vigencia actual, representatividad o cobertura nacional.
 
 ## Derechos y créditos
 
 Fuente: Plataforma de Contratación del Sector Público, Ministerio de Hacienda. Captura y transformación: Vota Con La Chola. No hay revisión independiente registrada. Código: MIT; datos sujetos a las condiciones por fuente de https://github.com/gsusI/vota-con-la-chola/blob/main/docs/legal/data-rights.md. No atribuir licencia MIT a los documentos oficiales. Citación del proyecto: `CITATION.cff` en el repositorio.
+
+La web y la API aplican correcciones documentadas de fechas y permiten separar
+las fechas no resueltas. Este paquete conserva las fechas fuente literalmente:
+las consultas SQL de reproducción filtran esos valores originales. Para
+reproducir exactamente los filtros corregidos de la web, usa su exportación CSV
+de la misma versión, que incluye fecha original y estado de corrección.

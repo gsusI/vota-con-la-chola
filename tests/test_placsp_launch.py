@@ -52,8 +52,9 @@ class LaunchTests(unittest.TestCase):
     def test_galasa_full_history_and_january_regression(self):
         rows=json.loads((self.bundle/'awards.json').read_text())
         galasa=[r for r in rows if r['authority_id']=='A04107272' and '1999-01-01' <= r['decision_date'] <= '2027-12-31']
-        self.assertEqual(len(galasa),8)
-        self.assertEqual(sum(r['amount_cents'] for r in galasa),550596594)
+        candidate=self.release['rows']==128837
+        self.assertEqual(len(galasa),11 if candidate else 8)
+        self.assertEqual(sum(r['amount_cents'] for r in galasa),572335676 if candidate else 550596594)
         january=[r for r in galasa if '2025-01-01' <= r['decision_date'] <= '2025-01-31']
         self.assertEqual(len(january),1)
         self.assertEqual(january[0]['amount_cents'],754648)
@@ -74,6 +75,11 @@ class LaunchTests(unittest.TestCase):
             status=child(entry,'ContractFolderStatus')
             awards=[n for n in status if n.tag.rsplit('}',1)[-1]=='TenderResult']
             award=awards[row['award_ordinal']]
+            result_code=path(award,'ResultCode').text
+            self.assertIn(result_code,('8','9'))
+            if 'result_code' in row:
+                self.assertEqual(row['result_code'],result_code)
+                self.assertEqual(row['result_stage'],{'8':'awarded','9':'formalized'}[result_code])
             amount=path(award,'AwardedTenderedProject','LegalMonetaryTotal','TaxExclusiveAmount')
             supplier=path(award,'WinningParty','PartyName','Name')
             self.assertIsNotNone(amount)

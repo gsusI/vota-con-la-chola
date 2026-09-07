@@ -24,6 +24,17 @@ RELEASE = '5d9ce557ed864de56f677a9f82c999a4ec0dfc494c086b1bfca0bb2e461272dd'
 MANIFEST_SHA = 'b225f167d1fad027a0f8d3bac336ec96f9a5e06770f32db8c2f2af53810dda4b'
 BASE = f'https://huggingface.co/datasets/JesusIC/vota-con-la-chola-data/resolve/main/scale/snapshots/2026-08-19/{RELEASE}/'
 
+# CODICE TenderResultCode: successful award and subsequent formalization.
+# These are result stages, never proof of payment.
+SUCCESSFUL_RESULT_STAGES = {'8': 'awarded', '9': 'formalized'}
+
+def successful_result_stage(result_code, tombstone=False):
+    return None if tombstone else SUCCESSFUL_RESULT_STAGES.get(result_code)
+
+def published_supplier_identifier(value):
+    """Mirror the frozen money publisher's documented identifier normalization."""
+    return str(value).strip().upper() or None if value is not None else None
+
 def sha(data):
     return hashlib.sha256(data).hexdigest()
 
@@ -191,10 +202,11 @@ def build(corpus, db, out, limit=None):
         award = dict(c.execute('SELECT * FROM money_contract_award_results WHERE contract_award_result_id=?',(award_id,)).fetchone())
         a = payload['awards'][award['award_ordinal']]
         rec = payload['record']
-        if payload['record'].get('tombstone') or a.get('result_code') != '8':
+        result_stage = successful_result_stage(a.get('result_code'), rec.get('tombstone'))
+        if result_stage is None:
             excluded['not_awarded_or_tombstone'] += 1
             continue
-        expected = [rec.get('contracting_authority'),a.get('supplier_name'),a.get('supplier_identifier'),a.get('award_date'),a.get('currency'),a.get('lot_id')]
+        expected = [rec.get('contracting_authority'),a.get('supplier_name'),published_supplier_identifier(a.get('supplier_identifier')),a.get('award_date'),a.get('currency'),a.get('lot_id')]
         observed = [r['public_authority'],r['counterparty_name'],r['counterparty_identifier'],r['effective_date'],r['currency'],r['secondary_reference_id']]
         if expected != observed or Decimal(a['amount_eur_decimal']) != r['amount_eur'] or source['content_sha256'] != payload['entry_content_sha256']:
             excluded['source_parquet_semantic_mismatch'] += 1
@@ -211,6 +223,7 @@ def build(corpus, db, out, limit=None):
             supplier_id_scheme=a.get('supplier_identifier_scheme') or '',
             contract_id=r['primary_reference_id'] or '', lot_id=a.get('lot_id') or '',
             award_ordinal=a['award_ordinal'], decision_date=r['effective_date'].removesuffix('Z'),
+            result_code=a['result_code'], result_stage=result_stage,
             amount_decimal=a['amount_eur_decimal'], amount_cents=int(r['amount_eur']*100),currency='EUR',
             title=rec.get('title') or '', source_url=r['source_url'],
             source_snapshot_date=r['source_snapshot_date'], entry_updated_at=rec['entry_updated_at'],
@@ -283,7 +296,8 @@ def build(corpus, db, out, limit=None):
     dump(out/'lineage.json',lineage)
     (out/'source-manifest.json').write_bytes(manifest_bytes)
     counts=Counter(r['fact_kind'] for r in all_rows)
-    audit=dict(schema_version='placsp-launch-v2', upstream_release=RELEASE, upstream_base_url=BASE,
+    audit=dict(schema_version='placsp-launch-v3', upstream_release=RELEASE, upstream_base_url=BASE,
+        selected_result_stages=dict(Counter(r['result_stage'] for r in selected)),
         upstream_manifest_sha256=MANIFEST_SHA, manifest_snapshot_label=manifest['snapshot_date'],
         observed_source_snapshot_dates=sorted({r['source_snapshot_date'] for r in all_rows}),
         corpus_rows=len(all_rows),corpus_fact_kinds=dict(counts),

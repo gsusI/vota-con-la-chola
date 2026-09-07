@@ -8,10 +8,10 @@ import { loadHistoryFile } from './history-files.mjs';
 import { queryUrl, searchOptions } from './backend.mjs';
 import { SearchSelect, DateRangeField } from './filter-controls';
 
-const initial = { authority: '', supplier: '', start: '0001-01-01', end: '9999-12-31', q: '' };
+const initial = { authority: '', supplier: '', start: '0001-01-01', end: '9999-12-31', q: '', date_scope: 'all' };
 const money = (cents) => new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(cents / 100);
 
-export default function LaunchExplorer({ audit, release }) {
+export default function LaunchExplorer({ audit, release, apiVersion }) {
   const [result, setResult] = useState({rows:[],count:0,amount_cents:0,next_cursor:null});
   const [cursors, setCursors] = useState([0]);
   const [restored, setRestored] = useState(false);
@@ -30,8 +30,8 @@ export default function LaunchExplorer({ audit, release }) {
   const lastPage = Math.max(0, Math.ceil(result.count / 12) - 1);
   const currentPage = page;
   const visible = loadState === 'ready' ? result.rows : [];
-  const authoritySearch = (q, signal) => searchOptions('authority', q, signal);
-  const supplierSearch = (q, signal) => searchOptions('supplier', q, signal);
+  const authoritySearch = (q, signal) => searchOptions('authority', q, signal, apiVersion);
+  const supplierSearch = (q, signal) => searchOptions('supplier', q, signal, apiVersion);
 
   function animate(update) {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { update(); return; }
@@ -51,9 +51,10 @@ export default function LaunchExplorer({ audit, release }) {
     const timer = setTimeout(async () => {
       animate(() => setLoadState('loading'));
       try {
-        const response = await fetch(queryUrl('/v1/awards', { ...filters, after: cursors[page] || 0, limit: 12 }), { signal: controller.signal });
+        const response = await fetch(queryUrl('/v1/awards', { ...filters, after: cursors[page] || 0, limit: 12, version: apiVersion }), { signal: controller.signal });
         const data = await response.json();
         if (!response.ok) throw new Error(data.error || 'No se pudieron consultar los resultados.');
+        if (data.release !== release.release) throw new Error('La versión de datos está cambiando. Recarga la página en unos segundos para consultar resultados y capturas de la misma versión.');
         if (data.rows.length > 12 || !Number.isSafeInteger(data.count)) throw new Error('Respuesta no válida.');
         if (!controller.signal.aborted) animate(() => { setResult(data); setLoadState('ready'); });
       } catch (error) {
@@ -73,6 +74,7 @@ export default function LaunchExplorer({ audit, release }) {
         if (!/^\d{4}-\d{2}-\d{2}$/.test(next[key]) || Number.isNaN(date.getTime())
           || date.toISOString().slice(0, 10) !== next[key]) next[key] = defaults[key];
       }
+      if (!['all', 'dated', 'unresolved'].includes(next.date_scope)) next.date_scope = 'all';
       if (next.start > next.end) [next.start, next.end] = [next.end, next.start];
       animate(() => { setFilters(next); setQueryDraft(next.q); setPage(0); setCursors([0]); setRestored(true); });
     }
@@ -151,8 +153,8 @@ export default function LaunchExplorer({ audit, release }) {
         <p className="spending-launch__status">PLACSP · Histórico disponible</p>
         <h1 className="spending-launch__title">¿A quién se adjudicó el dinero público?</h1>
         <p className="spending-launch__intro">Elige un órgano o proveedor. Consulta importes adjudicados, abre el expediente y comprueba el resultado con los mismos datos descargables.</p>
-        <p className="spending-launch__scope"><strong className="spending-launch__scope-count">{release.rows.toLocaleString('es-ES')} resultados elegibles</strong>, con decisiones entre {audit.decision_date_min} y {audit.decision_date_max}. El calendario consulta todo el histórico disponible. Adjudicado sin impuestos; no equivale a pagado.</p>
-        <nav className={`spending-launch__links ${styles.actions}`} aria-label="Datos y contribución">
+        <p className="spending-launch__scope"><strong className="spending-launch__scope-count">{release.rows.toLocaleString('es-ES')} resultados elegibles</strong>, en el corpus adquirido de PLACSP. Cobertura parcial: publicaciones actualizadas en el primer semestre de 2025. El calendario filtra fechas de adjudicación; sus extremos no prueban continuidad histórica. Adjudicado sin impuestos; no equivale a pagado.</p>
+        <nav id="spending-downloads" className={`spending-launch__links ${styles.actions}`} aria-label="Datos y contribución">
           <button className="spending-launch__package" onClick={downloadPackage} disabled={downloading}>{downloading ? 'Preparando descarga…' : `Descargar datos fuente y consultas · ${Math.ceil(release.archive_bytes / 1024 / 1024)} MB`}</button>
           <a className="spending-launch__guide" href="https://github.com/gsusI/vota-con-la-chola/blob/main/docs/examples/placsp-launch/README.md">Reproducir con Python</a>
           <a className="spending-launch__contribute" href="https://github.com/gsusI/vota-con-la-chola/blob/main/docs/community/placsp-launch-tasks.md">Aportar una mejora</a>
@@ -165,9 +167,18 @@ export default function LaunchExplorer({ audit, release }) {
             loadOptions={authoritySearch} value={filters.authority} disabled={false} onChange={(value) => change('authority', value)} />
           <SearchSelect id="supplier" label="Proveedor" placeholder="Todos los proveedores"
             loadOptions={supplierSearch} value={filters.supplier} disabled={false} onChange={(value) => change('supplier', value)} />
-          <DateRangeField start={filters.start} end={filters.end} resetToken={filterResetToken} disabled={false} onChange={(range) => animate(() => {
+          <DateRangeField start={filters.start} end={filters.end} resetToken={filterResetToken} disabled={filters.date_scope === 'unresolved'} onChange={(range) => animate(() => {
             setFilters((prior) => ({ ...prior, ...range })); setPage(0); setCursors([0]); setLoadState('loading'); setMessage('');
           })} />
+        </div>
+        <div className="spending-date-scope">
+          <label className="spending-date-scope__label" htmlFor="spending-date-scope">Resultados con fecha dudosa</label>
+          <select className="spending-date-scope__select" id="spending-date-scope" value={filters.date_scope} onChange={(event) => change('date_scope', event.target.value)} aria-describedby="spending-date-scope-help">
+            <option className="spending-date-scope__option" value="all">Incluir junto al rango elegido</option>
+            <option className="spending-date-scope__option" value="dated">Excluir: solo fechas del rango</option>
+            <option className="spending-date-scope__option" value="unresolved">Ver solo fechas dudosas</option>
+          </select>
+          <p className="spending-date-scope__help" id="spending-date-scope-help">{filters.date_scope === 'unresolved' ? 'El calendario no se aplica. Se mantienen los filtros de órgano, proveedor y texto.' : filters.date_scope === 'dated' ? 'Solo resultados con fecha válida dentro del calendario.' : 'Las fechas dudosas no pueden situarse dentro del calendario. Se incluyen aparte y se identifican en cada resultado.'}</p>
         </div>
         <form className="spending-text-search" onSubmit={(event) => { event.preventDefault(); change('q', queryDraft.trim()); }}>
           <label className="spending-text-search__label" htmlFor="spending-query">Objeto del contrato o expediente</label>
@@ -185,12 +196,13 @@ export default function LaunchExplorer({ audit, release }) {
       </section>
       <section ref={resultsRef} className={`spending-results ${styles.results}`} aria-labelledby="spending-results-title">
         <h2 className="spending-results__title" id="spending-results-title" aria-live="polite">{loadState === 'loading' ? 'Cargando resultados…' : loadState === 'error' ? 'Resultados no disponibles' : `${result.count.toLocaleString('es-ES')} ${result.count === 1 ? 'resultado' : 'resultados'} · ${money(total)} sin impuestos`}</h2>
+        {loadState === 'ready' && result.undated_count > 0 ? <p className="spending-results__undated">Incluye {result.undated_count.toLocaleString('es-ES')} resultados con fecha dudosa. Sus importes forman parte del total; no se les asigna una fecha inventada.</p> : null}
         <p className="spending-results__unit">Suma de resultados de adjudicación del histórico filtrado. Un expediente puede contener varios resultados o lotes.</p>
         {loadState === 'ready' && result.count === 0 ? <p className={`spending-results__empty ${styles.empty}`}>No hay resultados disponibles para esos filtros. Nuestra cobertura de las fuentes es incompleta.</p> : null}
         <ol className={`spending-results__list ${styles.list}`}>
           {visible.map((row) => <li className={`spending-result ${styles.card}`} key={row.award_key}>
             <article className="spending-result__article">
-              <p className="spending-result__date">{row.decision_date} · expediente {row.contract_id}{row.lot_id ? ` · lote ${row.lot_id}` : ' · lote no publicado'}</p>
+              <p className="spending-result__date">{row.decision_date ?? `Fecha dudosa · original: ${row.decision_date_source}`} · expediente {row.contract_id}{row.lot_id ? ` · lote ${row.lot_id}` : ' · lote no publicado'}</p>
               <h3 className="spending-result__title">{row.title}</h3>
               <p className={`spending-result__amount ${styles.amount}`}>{money(row.amount_cents)} sin impuestos</p>
               <dl className="spending-result__parties">
@@ -213,8 +225,8 @@ export default function LaunchExplorer({ audit, release }) {
       <footer className={`spending-method ${styles.method}`}>
         <h2 className="spending-method__title">Qué puedes comprobar y qué falta</h2>
         <p className="spending-method__scope">Todas las adjudicaciones elegibles del histórico disponible, usando la última versión no ambigua dentro del corpus congelado. Incluye {audit.capture_entries.toLocaleString('es-ES')} capturas XML verificadas. No prueba pagos, ejecución, irregularidades ni cobertura completa de la contratación pública.</p>
-        <p className="spending-method__date-corrections">{audit.date_corrections} fechas con años truncados corregidas. El calendario y el CSV usan la fecha corregida; el CSV conserva también la fecha original. El paquete fuente y los XML conservan los datos recibidos.</p>
-        <p className="spending-method__dates">El manifest original etiqueta 31/03/2025; sus filas contienen capturas de 31/03/2025 y 30/06/2025. Release analítica: 19/08/2026. Ninguna de esas fechas convierte el corte en datos actuales.</p>
+        <p className="spending-method__date-corrections">{audit.date_corrections} fechas corregidas; {audit.unresolved_dates} fechas dudosas conservadas sin asignarles un año. El calendario y el CSV usan las fechas corregidas cuando hay una regla de corrección; el CSV conserva también la fecha original. El paquete fuente y los XML conservan los datos recibidos.</p>
+        <p className="spending-method__dates">El manifest original etiqueta 31/03/2025; sus filas contienen capturas de 31/03/2025 y 30/06/2025. Estos resultados incluyen adjudicaciones y formalizaciones, contadas una sola vez por resultado elegible. Ninguna de esas fechas convierte el corte en datos actuales.</p>
         <p className="spending-method__review">Revisión comunitaria pendiente: 0 personas externas han validado este recorrido; 0 reproducciones externas registradas.</p>
         <p className="spending-method__credit">Fuente: Plataforma de Contratación del Sector Público. Captura y transformación: Vota Con La Chola. Las variantes tipográficas convergen para filtrar y sumar; cada fila conserva el nombre literal de la fuente.</p>
         <div className={`spending-method__links ${styles.actions}`}><a className="spending-method__audit" href={`${base}audit.json`}>Selección y exclusiones</a><a className="spending-method__hashes" href={`${base}manifest.json`}>Hashes de todos los archivos</a><a className="spending-method__rights" href="https://github.com/gsusI/vota-con-la-chola/blob/main/docs/legal/data-rights.md">Derechos de reutilización</a></div>

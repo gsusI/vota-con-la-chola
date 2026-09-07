@@ -14,8 +14,8 @@ from decimal import Decimal
 from pathlib import Path, PurePosixPath
 
 QUERIES = ('by-supplier', 'by-month', 'records')
-MAX_DOWNLOAD_BYTES = 500_000_000
-MAX_UNPACKED_BYTES = 2_000_000_000
+MAX_DOWNLOAD_BYTES = 600_000_000
+MAX_UNPACKED_BYTES = 4_000_000_000
 MAX_ARCHIVE_FILES = 150_000
 
 def sha(data):

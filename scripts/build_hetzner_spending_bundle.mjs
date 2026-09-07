@@ -3,20 +3,31 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {DatabaseSync} from 'node:sqlite';
+import {validDateRepresentation} from './spending_date_quality.mjs';
 const [database,output]=process.argv.slice(2);
 if(!database||!output||fs.existsSync(output))throw Error('Usage: build_hetzner_spending_bundle.mjs VERIFIED_DB NEW_OUTPUT');
 const db=new DatabaseSync(database,{readOnly:true});
 const metadata=JSON.parse(db.prepare('SELECT payload FROM metadata WHERE id=1').get().payload);
 const totals=db.prepare('SELECT COUNT(*) rows, SUM(amount_cents) amount_cents FROM awards').get();
 if(totals.rows!==metadata.rows||totals.amount_cents!==metadata.amount_cents)throw Error('Database parity failed');
-if(db.prepare("SELECT COUNT(*) n FROM awards WHERE json_extract(payload,'$.decision_date') IS NULL OR json_extract(payload,'$.decision_date') < '1900-01-01'").get().n)throw Error('API handling for unresolved dates must be finished before publishing this candidate');
+let undatedCount=0,undatedAmount=0;
+for(const record of db.prepare('SELECT id,payload,amount_cents FROM awards ORDER BY id').iterate()){
+ const row=JSON.parse(record.payload);
+ if(!validDateRepresentation(row))throw Error('Invalid decision date representation');
+ if(row.decision_date===null){
+  undatedCount++;undatedAmount+=record.amount_cents;
+  if(record.id!==(metadata.undated?.first??-1)+undatedCount-1)throw Error('Unresolved date ordering failed');
+ }
+}
+if(undatedCount&&metadata.undated.first!==metadata.rows-undatedCount+1)throw Error('Unresolved dates must form the final contiguous range');
+if(undatedCount!==(metadata.undated?.count??0)||undatedAmount!==(metadata.undated?.amount_cents??0))throw Error('Unresolved date metadata parity failed');
 if(db.prepare('PRAGMA quick_check').get().quick_check!=='ok')throw Error('SQLite integrity failed');
 db.close();
 fs.mkdirSync(output,{recursive:true});
 for(const name of ['server.mjs','worker.mjs'])fs.copyFileSync(path.join('infra/hetzner/spending-api',name),path.join(output,name));
 fs.copyFileSync('infra/cloudflare/spending-api/src/index.mjs',path.join(output,'index.mjs'));
 fs.copyFileSync(database,path.join(output,'awards.db'));
-const release=Object.fromEntries(['version','release','rows','amount_cents','date_min','date_max'].map(key=>[key,metadata[key]]));
+const release=Object.fromEntries(['version','release','rows','amount_cents','date_min','date_max','undated'].map(key=>[key,metadata[key]]));
 fs.writeFileSync(path.join(output,'release.json'),JSON.stringify(release));
 let sums='';
 for(const name of ['server.mjs','worker.mjs','index.mjs','release.json','awards.db']){

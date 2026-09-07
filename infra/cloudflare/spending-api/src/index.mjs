@@ -12,8 +12,9 @@ function validDate(value) {
 }
 export function parseQuery(url) {
  const p=url.searchParams;
- for(const key of p.keys()) if(!['authority','supplier','start','end','q','after','limit','kind','version'].includes(key) || p.getAll(key).length!==1) throw new Error('Parámetro no válido.');
- const f={authority:p.get('authority')||'',supplier:p.get('supplier')||'',start:p.get('start')||release.date_min,end:p.get('end')||release.date_max,q:(p.get('q')||'').trim(),after:Number(p.get('after')||0),limit:Number(p.get('limit')||12)};
+ for(const key of p.keys()) if(!['authority','supplier','start','end','q','after','limit','kind','version','date_scope'].includes(key) || p.getAll(key).length!==1) throw new Error('Parámetro no válido.');
+ const f={date_scope:p.get('date_scope')||'all',authority:p.get('authority')||'',supplier:p.get('supplier')||'',start:p.get('start')||release.date_min,end:p.get('end')||release.date_max,q:(p.get('q')||'').trim(),after:Number(p.get('after')||0),limit:Number(p.get('limit')||12)};
+ if(!['all','dated','unresolved'].includes(f.date_scope)) throw new Error('Selección de fechas no válida.');
  if(!validDate(f.start)||!validDate(f.end)||f.start>f.end) throw new Error('Rango de fechas no válido.');
  if(!Number.isSafeInteger(f.after)||f.after<0||f.after>release.rows||!Number.isInteger(f.limit)||f.limit<1||f.limit>200) throw new Error('Paginación no válida.');
  if(f.authority.length>1000||f.supplier.length>1000||f.q.length>80||(f.q.length>0&&f.q.length<2)) throw new Error('La búsqueda debe tener entre 2 y 80 caracteres.');
@@ -26,13 +27,18 @@ export function queryPlan(f, meta) {
  const first=meta.days.find(d=>d.date>=f.start);
  const last=meta.days.findLast(d=>d.date<=f.end);
  const lo=first?.first??meta.rows+1, hi=last?.last??0;
- const clauses=['id BETWEEN ? AND ?'], bindings=[lo,hi];
+ const undated=meta.undated??{count:0,first:meta.rows+1,amount_cents:0};
+ const scope=f.date_scope??'all';
+ const includeDated=scope!=='unresolved', includeUndated=scope!=='dated';
+ const clauses=[includeDated?(includeUndated?'(id BETWEEN ? AND ? OR id BETWEEN ? AND ?)':'id BETWEEN ? AND ?'):'id BETWEEN ? AND ?'];
+ const bindings=includeDated?[lo,hi,...(includeUndated?[undated.first,meta.rows]:[])]:[undated.first,meta.rows];
  for(const kind of ['authority','supplier']) if(f[kind]) {
   clauses.push('id IN (SELECT value FROM json_each((SELECT ids FROM entities WHERE kind=? AND name=?)))');
   bindings.push(kind,f[kind]);
  }
  if(f.q) {clauses.push(`id IN (SELECT value FROM json_each((${postingQuery(f.q)}))) AND instr(title_search, ?) > 0`);bindings.push('awards',...grams(f.q),normalize(f.q));}
- return {where:clauses.join(' AND '),bindings,summary:lo>hi?{count:0,amount_cents:0}:{count:hi-lo+1,amount_cents:last.amountThrough-first.amountBefore}};
+ const dated=includeDated&&lo<=hi?{count:hi-lo+1,amount_cents:last.amountThrough-first.amountBefore}:{count:0,amount_cents:0};
+ return {where:clauses.join(' AND '),bindings,summary:{count:dated.count+(includeUndated?undated.count:0),amount_cents:dated.amount_cents+(includeUndated?undated.amount_cents:0),undated_count:includeUndated?undated.count:0}};
 }
 export function csvValue(value) {
  let text=String(value??'');
@@ -43,7 +49,7 @@ async function getMetadata(env) {
  if(metadata && metadataBinding===env.DB) return metadata;
  const row=await env.DB.prepare('SELECT payload FROM metadata WHERE id=1').first();
  const result=JSON.parse(row.payload);
- if(result.version!==release.version||result.rows!==release.rows||result.amount_cents!==release.amount_cents) throw new Error('Data parity failed');
+ if(result.release!==release.release||result.version!==release.version||result.rows!==release.rows||result.amount_cents!==release.amount_cents) throw new Error('Data parity failed');
  metadata=result;metadataBinding=env.DB;return result;
 }
 export async function respond(request, env, ctx={waitUntil:()=>{}}) {
@@ -57,7 +63,7 @@ export async function respond(request, env, ctx={waitUntil:()=>{}}) {
  const canonical=new URL(url.origin+url.pathname);
  for(const [key,value] of Object.entries(f)) canonical.searchParams.set(key,String(value));
  if(url.pathname==='/v1/options') canonical.searchParams.set('kind',url.searchParams.get('kind'));
- canonical.searchParams.set('version',release.version+'-search-v1');
+ canonical.searchParams.set('version',release.version+'-dates-v2');
  const key=new Request(canonical);
  const cache=globalThis.caches?.default;
  if(cache) {const cached=await cache.match(key);if(cached)return cached;}
@@ -74,7 +80,7 @@ export async function respond(request, env, ctx={waitUntil:()=>{}}) {
    const plan=queryPlan(f,meta), exporting=url.pathname==='/v1/export';
    const statements=[env.DB.prepare(`SELECT id,payload FROM awards WHERE ${plan.where} AND id>? ORDER BY id LIMIT ?`).bind(...plan.bindings,f.after,f.limit+1)];
    const needsCount=!exporting && (f.authority||f.supplier||f.q);
-   if(needsCount) statements.push(env.DB.prepare(`SELECT COUNT(*) AS count, COALESCE(SUM(amount_cents),0) AS amount_cents FROM awards WHERE ${plan.where}`).bind(...plan.bindings));
+   if(needsCount) statements.push(env.DB.prepare(`SELECT COUNT(*) AS count, COALESCE(SUM(amount_cents),0) AS amount_cents, COALESCE(SUM(CASE WHEN id >= ${meta.undated?.first??meta.rows+1} THEN 1 ELSE 0 END),0) AS undated_count FROM awards WHERE ${plan.where}`).bind(...plan.bindings));
    const result=await env.DB.batch(statements);
    reads=result.reduce((s,r)=>s+(r.meta?.rows_read||0),0);
    const records=result[0].results, more=records.length>f.limit, shown=records.slice(0,f.limit);
@@ -85,7 +91,7 @@ export async function respond(request, env, ctx={waitUntil:()=>{}}) {
     if(f.after===0)lines.push(meta.csv_keys.map(csvValue).join(','));
     for(const row of rows)lines.push(meta.csv_keys.map(k=>csvValue(row[k])).join(','));
     response=new Response(lines.join('\r\n')+(lines.length?'\r\n':''),{headers:{...headers,'Content-Type':'text/csv; charset=utf-8','Content-Disposition':'attachment; filename="placsp-resultados.csv"','X-Next-Cursor':next===null?'':String(next)}});
-   } else response=json({rows,...(needsCount?result[1].results[0]:plan.summary),next_cursor:next,version:release.version});
+   } else response=json({rows,...(needsCount?result[1].results[0]:plan.summary),next_cursor:next,date_scope:f.date_scope,release:release.release,version:release.version});
   }
   response.headers.set('Cache-Control','public, max-age=3600, s-maxage=86400');
   response.headers.set('X-Data-Version',release.version);
@@ -93,7 +99,7 @@ export async function respond(request, env, ctx={waitUntil:()=>{}}) {
   if(cache)ctx.waitUntil(cache.put(key,response.clone()));
   return response;
  } catch {
-  return json({error:'El servicio de consulta no está disponible temporalmente. Puede haberse agotado la cuota gratuita. Puedes descargar los datos fuente o volver a intentarlo más tarde.'},503,{'Retry-After':'3600','Cache-Control':'no-store'});
+  return json({error:'El servicio de consulta no está disponible temporalmente. Puedes descargar los datos fuente o volver a intentarlo más tarde.'},503,{'Retry-After':'3600','Cache-Control':'no-store'});
  }
 }
 export default {fetch:respond};
