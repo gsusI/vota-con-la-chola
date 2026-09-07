@@ -4244,6 +4244,7 @@ cloudflare-pages-build:
 cloudflare-pages-build-frozen:
   @just privacy-check-public-artifacts
   python3 -m unittest tests.test_placsp_launch -v
+  node tests/test_spending_decision_dates.mjs
   cd "{{gh_pages_next_app_dir}}" && NEXT_PUBLIC_BASE_PATH="{{gh_pages_next_base_path}}" node node_modules/next/dist/bin/next build --webpack
   python3 scripts/check_next_export_notfound_payloads.py --path "{{gh_pages_next_out_dir}}"
   just cloudflare-pages-size-check

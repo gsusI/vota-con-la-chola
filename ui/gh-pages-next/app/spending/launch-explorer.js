@@ -5,6 +5,7 @@ import { flushSync } from 'react-dom';
 import { withBasePath } from '../path-utils.mjs';
 import styles from './launch.module.css';
 import { loadHistoryFile } from './history-files.mjs';
+import { normalizeDecisionDates } from './decision-dates.mjs';
 import { SearchSelect, DateRangeField } from './filter-controls';
 
 const initial = { authority: '', supplier: '', start: '0001-01-01', end: '9999-12-31' };
@@ -52,7 +53,7 @@ export default function LaunchExplorer({ audit, release }) {
           || loaded.reduce((sum, row) => sum + row.amount_cents, 0) !== release.amount_cents) {
           throw new Error('El fichero no coincide con el release verificado.');
         }
-        if (active) animate(() => { setRows(loaded); setLoadState('ready'); });
+        if (active) animate(() => { setRows(normalizeDecisionDates(loaded)); setLoadState('ready'); });
       })
       .catch(() => { if (active) setLoadState('error'); });
     return () => { active = false; };
@@ -118,9 +119,9 @@ export default function LaunchExplorer({ audit, release }) {
 
   function downloadCsv() {
     if (!rows.length) return;
-    const keys = Object.keys(rows[0]);
+    const keys = [...Object.keys(rows[0]).filter((key) => key !== 'decision_date_source'), 'decision_date_source'];
     const escape = (value) => `"${String(value ?? '').replaceAll('"', '""')}"`;
-    const text = [keys.map(escape).join(','), ...filtered.map((row) => keys.map((key) => escape(row[key])).join(','))].join('\r\n') + '\r\n';
+    const text = [keys.map(escape).join(','), ...filtered.map((row) => keys.map((key) => escape(key === 'decision_date_source' ? (row.decision_date_source || row.decision_date) : row[key])).join(','))].join('\r\n') + '\r\n';
     const url = URL.createObjectURL(new Blob([text], { type: 'text/csv;charset=utf-8' }));
     const link = document.createElement('a'); link.className = 'spending-csv-download'; link.href = url; link.download = 'placsp-resultados.csv'; link.click();
     setTimeout(() => URL.revokeObjectURL(url), 1000);
@@ -134,7 +135,7 @@ export default function LaunchExplorer({ audit, release }) {
         <p className="spending-launch__intro">Elige un órgano o proveedor. Consulta importes adjudicados, abre el expediente y comprueba el resultado con los mismos datos descargables.</p>
         <p className="spending-launch__scope"><strong className="spending-launch__scope-count">{release.rows.toLocaleString('es-ES')} resultados elegibles</strong>, con decisiones entre {audit.decision_date_min} y {audit.decision_date_max}. El calendario consulta todo el histórico disponible. Adjudicado sin impuestos; no equivale a pagado.</p>
         <nav className={`spending-launch__links ${styles.actions}`} aria-label="Datos y contribución">
-          <button className="spending-launch__package" onClick={downloadPackage} disabled={downloading}>{downloading ? 'Preparando descarga…' : `Descargar datos y consultas · ${Math.ceil(release.archive_bytes / 1024 / 1024)} MB`}</button>
+          <button className="spending-launch__package" onClick={downloadPackage} disabled={downloading}>{downloading ? 'Preparando descarga…' : `Descargar datos fuente y consultas · ${Math.ceil(release.archive_bytes / 1024 / 1024)} MB`}</button>
           <a className="spending-launch__guide" href="https://github.com/gsusI/vota-con-la-chola/blob/main/docs/examples/placsp-launch/README.md">Reproducir con Python</a>
           <a className="spending-launch__contribute" href="https://github.com/gsusI/vota-con-la-chola/blob/main/docs/community/placsp-launch-tasks.md">Aportar una mejora</a>
         </nav>
@@ -189,6 +190,7 @@ export default function LaunchExplorer({ audit, release }) {
       <footer className={`spending-method ${styles.method}`}>
         <h2 className="spending-method__title">Qué puedes comprobar y qué falta</h2>
         <p className="spending-method__scope">Todas las adjudicaciones elegibles del histórico disponible, usando la última versión no ambigua dentro del corpus congelado. Incluye {audit.capture_entries.toLocaleString('es-ES')} capturas XML verificadas. No prueba pagos, ejecución, irregularidades ni cobertura completa de la contratación pública.</p>
+        <p className="spending-method__date-corrections">{audit.date_corrections} fechas con años truncados corregidas. El calendario y el CSV usan la fecha corregida; el CSV conserva también la fecha original. El paquete fuente y los XML conservan los datos recibidos.</p>
         <p className="spending-method__dates">El manifest original etiqueta 31/03/2025; sus filas contienen capturas de 31/03/2025 y 30/06/2025. Release analítica: 19/08/2026. Ninguna de esas fechas convierte el corte en datos actuales.</p>
         <p className="spending-method__review">Revisión comunitaria pendiente: 0 personas externas han validado este recorrido; 0 reproducciones externas registradas.</p>
         <p className="spending-method__credit">Fuente: Plataforma de Contratación del Sector Público. Captura y transformación: Vota Con La Chola. Las variantes tipográficas convergen para filtrar y sumar; cada fila conserva el nombre literal de la fuente.</p>
