@@ -1,4 +1,4 @@
-export const SPENDING_API = 'https://vclc-spending-api.jesus-inica.workers.dev';
+export const SPENDING_API = 'https://api.votaconlachola.org';
 export function queryUrl(path, filters = {}) {
  const url=new URL(path,SPENDING_API);
  for(const [key,value] of Object.entries(filters)) if(value!=='' && value!==undefined && value!==null) url.searchParams.set(key,String(value));
