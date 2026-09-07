@@ -1,0 +1,9 @@
+{
+  "name": "vclc-spending-api",
+  "main": "src/index.mjs",
+  "compatibility_date": "2026-09-07",
+  "account_id": "2a9c5bd32808734be6ee294d77e05ffb",
+  "workers_dev": true,
+  "observability": { "enabled": false },
+  "d1_databases": [{ "binding": "DB", "database_name": "vclc-spending", "database_id": "b6fa6c34-bcd8-47ed-8e71-9672ed9234f8" }]
+}

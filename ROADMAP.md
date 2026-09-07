@@ -5,6 +5,8 @@ Updated: `2026-09-05`
 
 ## Prioridad inmediata: lanzamiento útil para la comunidad
 
+Mandato 2026-09-07: mover consultas de `/spending/` a un backend gratuito con límites duros, filtros y paginación en servidor. Sustituye para esta superficie la restricción previa de no crear API. Ahora: 47.397 resultados disponibles, descarga completa obligatoria en navegador. Destino: respuestas pequeñas, evidencia original y cero sobrecostes. Siguiente: desplegar Workers Free + D1 y verificar paridad, bytes y manejo de cuota.
+
 Mandato 2026-09-06: `/spending/` consulta todo el histórico disponible, sin recorte mensual previo al calendario. Publicar nueva release inmutable y verificar Galasa con rango 1999–2027. Sustituye la limitación mensual del lanzamiento inicial; conservar la distinción entre adjudicado, estimado y pagado.
 
 Estado: `release mensual publicada`; `L0–L5` técnicos verificados y cohorte completa de enero de 2025 ampliada a 2.632 resultados elegibles con 1.960 XML originales. Responde al mandato del mantenedor de dar foco y hacer aprovechable públicamente lo desarrollado. Esta secuencia tiene prioridad de ejecución sobre las ondas de expansión posteriores; conserva su historial, requisitos y estados.

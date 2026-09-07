@@ -27,17 +27,35 @@ const parseTextDate = (value) => {
   return Number.isNaN(date.getTime()) || isoDate(date) !== normalized ? null : normalized;
 };
 
-export function SearchSelect({ id, label, placeholder, values, value, onChange, disabled = false }) {
+export function SearchSelect({ id, label, placeholder, values = [], loadOptions, value, onChange, disabled = false }) {
   const [search, setSearch] = useState('');
+  const [remoteValues, setRemoteValues] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [searchError, setSearchError] = useState(false);
+  const loaderRef = useRef(loadOptions);
+  loaderRef.current = loadOptions;
+  useEffect(() => {
+    if (!loaderRef.current) return;
+    const controller = new AbortController();
+    const timer = setTimeout(async () => {
+      setLoading(true); setSearchError(false);
+      try {
+        const names = await loaderRef.current(search, controller.signal);
+        if (!controller.signal.aborted) setRemoteValues(names);
+      } catch { if (!controller.signal.aborted) { setRemoteValues([]); setSearchError(true); } }
+      finally { if (!controller.signal.aborted) setLoading(false); }
+    }, 250);
+    return () => { clearTimeout(timer); controller.abort(); };
+  }, [search]);
   const normalize = (text) => text.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
-  const options = useMemo(() => values.filter((name) => normalize(name).includes(normalize(search))).slice(0, 100).map((name) => ({ value: name, label: name })), [values, search]);
+  const options = useMemo(() => (loadOptions ? remoteValues : values).filter((name) => normalize(name).includes(normalize(search))).slice(0, 100).map((name) => ({ value: name, label: name })), [values, remoteValues, loadOptions, search]);
   return <div className={`spending-filter spending-filter--${id} ${styles.searchField}`}>
     <label className="spending-filter__label" htmlFor={`spending-${id}`}>{label}</label>
     <Select inputId={`spending-${id}`} instanceId={`spending-${id}`} className="spending-search"
       classNamePrefix="spending-search" options={options} value={value ? { value, label: value } : null} onInputChange={setSearch}
       onChange={(option) => onChange(option?.value || '')} isClearable isSearchable placeholder={placeholder}
-      isDisabled={disabled}
-      noOptionsMessage={() => 'Sin coincidencias'} loadingMessage={() => 'Buscando…'}
+      isDisabled={disabled} isLoading={loading}
+      noOptionsMessage={() => searchError ? 'Consulta no disponible. Vuelve a escribir para reintentar.' : search.length < 2 ? 'Escribe al menos dos caracteres' : 'Sin coincidencias'} loadingMessage={() => 'Buscando…'}
       screenReaderStatus={({ count }) => `${count} opciones disponibles.`}
       ariaLiveMessages={{
         guidance: () => 'Escribe para buscar. Usa las flechas y Enter para seleccionar; Escape para cerrar.',

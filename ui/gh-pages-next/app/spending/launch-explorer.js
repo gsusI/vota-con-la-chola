@@ -1,18 +1,22 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { flushSync } from 'react-dom';
 import { withBasePath } from '../path-utils.mjs';
 import styles from './launch.module.css';
 import { loadHistoryFile } from './history-files.mjs';
-import { normalizeDecisionDates } from './decision-dates.mjs';
+import { queryUrl, searchOptions } from './backend.mjs';
 import { SearchSelect, DateRangeField } from './filter-controls';
 
-const initial = { authority: '', supplier: '', start: '0001-01-01', end: '9999-12-31' };
+const initial = { authority: '', supplier: '', start: '0001-01-01', end: '9999-12-31', q: '' };
 const money = (cents) => new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(cents / 100);
 
 export default function LaunchExplorer({ audit, release }) {
-  const [rows, setRows] = useState([]);
+  const [result, setResult] = useState({rows:[],count:0,amount_cents:0,next_cursor:null});
+  const [cursors, setCursors] = useState([0]);
+  const [restored, setRestored] = useState(false);
+  const [csvBusy, setCsvBusy] = useState(false);
+  const [queryDraft, setQueryDraft] = useState('');
   const [loadState, setLoadState] = useState('loading');
   const defaults = { ...initial, start: audit.decision_date_min, end: audit.decision_date_max };
   const [filters, setFilters] = useState(defaults);
@@ -22,15 +26,12 @@ export default function LaunchExplorer({ audit, release }) {
   const [filterResetToken, setFilterResetToken] = useState(0);
   const resultsRef = useRef(null);
   const base = withBasePath(`/spending/launch/${release.release}/`);
-  const authorities = useMemo(() => [...new Set(rows.map((row) => row.authority))].sort(), [rows]);
-  const suppliers = useMemo(() => [...new Set(rows.map((row) => row.supplier))].sort(), [rows]);
-  const filtered = useMemo(() => rows.filter((row) => (!filters.authority || row.authority === filters.authority)
-    && (!filters.supplier || row.supplier === filters.supplier)
-    && row.decision_date >= filters.start && row.decision_date <= filters.end), [rows, filters]);
-  const total = filtered.reduce((sum, row) => sum + row.amount_cents, 0);
-  const lastPage = Math.max(0, Math.ceil(filtered.length / 12) - 1);
-  const currentPage = Math.min(page, lastPage);
-  const visible = filtered.slice(currentPage * 12, (currentPage + 1) * 12);
+  const total = result.amount_cents;
+  const lastPage = Math.max(0, Math.ceil(result.count / 12) - 1);
+  const currentPage = page;
+  const visible = loadState === 'ready' ? result.rows : [];
+  const authoritySearch = (q, signal) => searchOptions('authority', q, signal);
+  const supplierSearch = (q, signal) => searchOptions('supplier', q, signal);
 
   function animate(update) {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { update(); return; }
@@ -45,19 +46,22 @@ export default function LaunchExplorer({ audit, release }) {
   }
 
   useEffect(() => {
-    let active = true;
-    loadHistoryFile(base, release, 'awards.json')
-      .then(async (blob) => JSON.parse(await blob.text()))
-      .then((loaded) => {
-        if (!Array.isArray(loaded) || loaded.length !== release.rows
-          || loaded.reduce((sum, row) => sum + row.amount_cents, 0) !== release.amount_cents) {
-          throw new Error('El fichero no coincide con el release verificado.');
-        }
-        if (active) animate(() => { setRows(normalizeDecisionDates(loaded)); setLoadState('ready'); });
-      })
-      .catch(() => { if (active) setLoadState('error'); });
-    return () => { active = false; };
-  }, [base, release.amount_cents, release.rows]);
+    if (!restored) return;
+    const controller = new AbortController();
+    const timer = setTimeout(async () => {
+      animate(() => setLoadState('loading'));
+      try {
+        const response = await fetch(queryUrl('/v1/awards', { ...filters, after: cursors[page] || 0, limit: 12 }), { signal: controller.signal });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || 'No se pudieron consultar los resultados.');
+        if (data.rows.length > 12 || !Number.isSafeInteger(data.count)) throw new Error('Respuesta no válida.');
+        if (!controller.signal.aborted) animate(() => { setResult(data); setLoadState('ready'); });
+      } catch (error) {
+        if (!controller.signal.aborted) animate(() => { setLoadState('error'); setMessage(error.message); });
+      }
+    }, 150);
+    return () => { clearTimeout(timer); controller.abort(); };
+  }, [filters, page, restored]);
 
   useEffect(() => {
     function restore() {
@@ -70,14 +74,14 @@ export default function LaunchExplorer({ audit, release }) {
           || date.toISOString().slice(0, 10) !== next[key]) next[key] = defaults[key];
       }
       if (next.start > next.end) [next.start, next.end] = [next.end, next.start];
-      animate(() => { setFilters(next); setPage(0); });
+      animate(() => { setFilters(next); setQueryDraft(next.q); setPage(0); setCursors([0]); setRestored(true); });
     }
     restore(); window.addEventListener('hashchange', restore);
     return () => window.removeEventListener('hashchange', restore);
   }, []);
 
   function change(key, value) {
-    animate(() => { setFilters((prior) => ({ ...prior, [key]: value })); setPage(0); setMessage(''); });
+    animate(() => { setFilters((prior) => ({ ...prior, [key]: value })); setPage(0); setCursors([0]); setLoadState('loading'); setMessage(''); });
   }
 
   async function share() {
@@ -117,14 +121,28 @@ export default function LaunchExplorer({ audit, release }) {
     finally { setDownloading(false); }
   }
 
-  function downloadCsv() {
-    if (!rows.length) return;
-    const keys = [...Object.keys(rows[0]).filter((key) => key !== 'decision_date_source'), 'decision_date_source'];
-    const escape = (value) => `"${String(value ?? '').replaceAll('"', '""')}"`;
-    const text = [keys.map(escape).join(','), ...filtered.map((row) => keys.map((key) => escape(key === 'decision_date_source' ? (row.decision_date_source || row.decision_date) : row[key])).join(','))].join('\r\n') + '\r\n';
-    const url = URL.createObjectURL(new Blob([text], { type: 'text/csv;charset=utf-8' }));
-    const link = document.createElement('a'); link.className = 'spending-csv-download'; link.href = url; link.download = 'placsp-resultados.csv'; link.click();
-    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  async function downloadCsv() {
+    setCsvBusy(true); setMessage('Descargando los resultados elegidos…');
+    const selected = { ...filters };
+    try {
+      let after = 0;
+      const chunks = [];
+      do {
+        const response = await fetch(queryUrl('/v1/export', { ...selected, after, limit: 200, version: result.version }));
+        if (!response.ok) throw new Error('Exportación interrumpida. Vuelve a intentarlo; no se ha generado un CSV parcial.');
+        chunks.push(await response.blob());
+        const next = response.headers.get('X-Next-Cursor');
+        if (next === '') break;
+        const cursor = Number(next);
+        if (!Number.isSafeInteger(cursor) || cursor <= after) throw new Error('Paginación de descarga no válida.');
+        after = cursor;
+      } while (after <= release.rows);
+      const url = URL.createObjectURL(new Blob(chunks, { type: 'text/csv;charset=utf-8' }));
+      const link = document.createElement('a'); link.className = 'spending-csv-download'; link.href = url; link.download = 'placsp-resultados.csv'; link.click();
+      setTimeout(() => URL.revokeObjectURL(url), 60000);
+      setMessage('CSV descargado con los filtros seleccionados.');
+    } catch (error) { setMessage(error.message); }
+    finally { setCsvBusy(false); }
   }
 
   return (
@@ -144,26 +162,31 @@ export default function LaunchExplorer({ audit, release }) {
         <h2 className="spending-filters__title" id="spending-filter-title">Explora todas las adjudicaciones disponibles</h2>
         <div className={`spending-filters__controls ${styles.controls}`}>
           <SearchSelect id="authority" label="Órgano de contratación" placeholder="Todos los órganos"
-            values={authorities} value={filters.authority} disabled={loadState !== 'ready'} onChange={(value) => change('authority', value)} />
+            loadOptions={authoritySearch} value={filters.authority} disabled={false} onChange={(value) => change('authority', value)} />
           <SearchSelect id="supplier" label="Proveedor" placeholder="Todos los proveedores"
-            values={suppliers} value={filters.supplier} disabled={loadState !== 'ready'} onChange={(value) => change('supplier', value)} />
-          <DateRangeField start={filters.start} end={filters.end} resetToken={filterResetToken} disabled={loadState !== 'ready'} onChange={(range) => animate(() => {
-            setFilters((prior) => ({ ...prior, ...range })); setPage(0); setMessage('');
+            loadOptions={supplierSearch} value={filters.supplier} disabled={false} onChange={(value) => change('supplier', value)} />
+          <DateRangeField start={filters.start} end={filters.end} resetToken={filterResetToken} disabled={false} onChange={(range) => animate(() => {
+            setFilters((prior) => ({ ...prior, ...range })); setPage(0); setCursors([0]); setLoadState('loading'); setMessage('');
           })} />
         </div>
+        <form className="spending-text-search" onSubmit={(event) => { event.preventDefault(); change('q', queryDraft.trim()); }}>
+          <label className="spending-text-search__label" htmlFor="spending-query">Objeto del contrato o expediente</label>
+          <input className="spending-text-search__input" id="spending-query" value={queryDraft} onChange={(event) => setQueryDraft(event.target.value)} minLength={2} maxLength={80} placeholder="Ej.: materiales hidráulicos" />
+          <button className="spending-text-search__submit" type="submit">Buscar</button>
+        </form>
         <div className={`spending-filters__actions ${styles.actions}`}>
-          <button className="spending-filters__reset" disabled={loadState !== 'ready'} onClick={() => animate(() => {
-            setFilters(defaults); setFilterResetToken((prior) => prior + 1); setPage(0); setMessage('');
+          <button className="spending-filters__reset" disabled={false} onClick={() => animate(() => {
+            setFilters(defaults); setQueryDraft(''); setFilterResetToken((prior) => prior + 1); setPage(0); setCursors([0]); setLoadState('loading'); setMessage('');
           })}>Restablecer</button>
           <button className="spending-filters__share" onClick={share}>Copiar enlace a este resultado</button>
-          <button className="spending-filters__csv" disabled={loadState !== 'ready'} onClick={downloadCsv}>Descargar resultados CSV</button>
+          <button className="spending-filters__csv" disabled={loadState !== 'ready' || csvBusy} onClick={downloadCsv}>{csvBusy ? 'Descargando CSV…' : 'Descargar resultados CSV'}</button>
         </div>
-        <p className={`spending-filters__message ${styles.message}`} role="status">{message || (loadState === 'loading' ? 'Cargando y verificando los resultados…' : loadState === 'error' ? 'No se pudieron cargar los resultados. Vuelve a intentarlo.' : 'Los filtros agrupan variantes tipográficas; cada resultado conserva la etiqueta literal de su fuente.')}</p>
+        <p className={`spending-filters__message ${styles.message}`} role="status">{message || (loadState === 'loading' ? 'Consultando resultados…' : loadState === 'error' ? 'No se pudieron cargar los resultados. Vuelve a intentarlo.' : 'Los filtros agrupan variantes tipográficas; cada resultado conserva la etiqueta literal de su fuente.')}</p>
       </section>
       <section ref={resultsRef} className={`spending-results ${styles.results}`} aria-labelledby="spending-results-title">
-        <h2 className="spending-results__title" id="spending-results-title" aria-live="polite">{loadState === 'loading' ? 'Cargando resultados…' : loadState === 'error' ? 'Resultados no disponibles' : `${filtered.length.toLocaleString('es-ES')} ${filtered.length === 1 ? 'resultado' : 'resultados'} · ${money(total)} sin impuestos`}</h2>
+        <h2 className="spending-results__title" id="spending-results-title" aria-live="polite">{loadState === 'loading' ? 'Cargando resultados…' : loadState === 'error' ? 'Resultados no disponibles' : `${result.count.toLocaleString('es-ES')} ${result.count === 1 ? 'resultado' : 'resultados'} · ${money(total)} sin impuestos`}</h2>
         <p className="spending-results__unit">Suma de resultados de adjudicación del histórico filtrado. Un expediente puede contener varios resultados o lotes.</p>
-        {loadState === 'ready' && filtered.length === 0 ? <p className={`spending-results__empty ${styles.empty}`}>No hay resultados disponibles para esos filtros. Nuestra cobertura de las fuentes es incompleta.</p> : null}
+        {loadState === 'ready' && result.count === 0 ? <p className={`spending-results__empty ${styles.empty}`}>No hay resultados disponibles para esos filtros. Nuestra cobertura de las fuentes es incompleta.</p> : null}
         <ol className={`spending-results__list ${styles.list}`}>
           {visible.map((row) => <li className={`spending-result ${styles.card}`} key={row.award_key}>
             <article className="spending-result__article">
@@ -182,9 +205,9 @@ export default function LaunchExplorer({ audit, release }) {
           </li>)}
         </ol>
         <nav className={`spending-results__pagination ${styles.actions}`} aria-label="Páginas de resultados">
-          <button className="spending-results__previous" disabled={currentPage === 0} onClick={() => animate(() => setPage(currentPage - 1))}>Anterior</button>
+          <button className="spending-results__previous" disabled={loadState !== 'ready' || currentPage === 0} onClick={() => animate(() => { setLoadState('loading'); setPage(currentPage - 1); })}>Anterior</button>
           <span className="spending-results__page">Página {currentPage + 1} de {lastPage + 1}</span>
-          <button className="spending-results__next" disabled={currentPage === lastPage} onClick={() => animate(() => setPage(currentPage + 1))}>Siguiente</button>
+          <button className="spending-results__next" disabled={loadState !== 'ready' || result.next_cursor === null} onClick={() => animate(() => { setLoadState('loading'); setCursors((prior) => [...prior.slice(0, currentPage + 1), result.next_cursor]); setPage(currentPage + 1); })}>Siguiente</button>
         </nav>
       </section>
       <footer className={`spending-method ${styles.method}`}>
