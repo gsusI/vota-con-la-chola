@@ -53,3 +53,9 @@ wrangler deploy --config infra/cloudflare/spending-api/wrangler.jsonc
 Después de verificar la API: publicar frontend mediante `PLACSP_LAUNCH_SCOPED_PUBLISH=1 PLACSP_PUBLISH_SITE=<checkout-gh-pages> just explorer-gh-pages-publish`. Comprobar navegador, Galasa, CSV, evidencia y ausencia de carga automática de `awards.json`.
 
 Rollback: desplegar la versión anterior de Worker con su base compatible; para volver temporalmente a la interfaz anterior, publicar el commit previo del componente. No modificar paquetes originales.
+
+## Alojamiento de la interfaz
+
+El router del dominio conserva las rutas existentes y sirve `/spending/`, portada, favicons y `_next/static` mediante Workers Static Assets. Son 286 archivos (4,27 MB), muy por debajo de los 20.000 del plan Free. Los archivos coincidentes se sirven antes de ejecutar el script; [peticiones estáticas gratuitas](https://developers.cloudflare.com/workers/static-assets/billing-and-limitations/). El resto mantiene el proxy previo. Los errores del proxy llevan `no-store`.
+
+Motivo: comprobación pública detectó JavaScript con HTTP 429 de GitHub, cacheado durante 300 segundos. Esto impedía iniciar React aunque D1 respondiese. La publicación acotada actualiza también los assets mediante `scripts/publish_spending_static_assets.py`; activa una versión exacta, sin alterar DNS, dominios ni rutas. Wrangler usa su autenticación nativa. Nunca publicar desde una plantilla generada por C3: descargar e inspeccionar primero el Worker real.

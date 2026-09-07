@@ -5319,6 +5319,7 @@ placsp-launch-scoped-publish:
   python3 scripts/verify_placsp_launch_git.py --repo "$PLACSP_PUBLISH_SITE" --prefix spending/launch --ref ""
   git -C "$PLACSP_PUBLISH_SITE" commit -m "Publish PLACSP technical alpha from $(git rev-parse --short HEAD)"
   git -C "$PLACSP_PUBLISH_SITE" push "{{gh_pages_remote}}" HEAD:"{{gh_pages_branch}}"
+  python3 scripts/publish_spending_static_assets.py --site "$PLACSP_PUBLISH_SITE"
 
 
 explorer-gh-pages:
