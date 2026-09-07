@@ -1,5 +1,6 @@
 import { readPublicJson } from '../static-snapshot.mjs';
 import LaunchExplorer from './launch-explorer';
+import { normalizeDecisionDates } from './decision-dates.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { gunzipSync } from 'node:zlib';
@@ -24,5 +25,7 @@ export default function SpendingPage() {
   if (!rows || rows.length !== release.rows || rows.reduce((sum, row) => sum + row.amount_cents, 0) !== release.amount_cents) {
     throw new Error('PLACSP launch row/amount mismatch');
   }
-  return <LaunchExplorer audit={audit} release={release} />;
+  const normalized = normalizeDecisionDates(rows);
+  const correctedAudit = { ...audit, decision_date_min: normalized[0].decision_date, decision_date_max: normalized.at(-1).decision_date, date_corrections: normalized.filter((row) => row.decision_date_source).length };
+  return <LaunchExplorer audit={correctedAudit} release={release} />;
 }
