@@ -64,3 +64,9 @@
 .page :global(.spending-text-search__label) { flex-basis: 100%; font-weight: 600; }
 .page :global(.spending-text-search__input) { flex: 1 1 15rem; min-width: 0; min-height: 48px; border: 1px solid #718b7e; border-radius: 8px; padding: .65rem .8rem; font: inherit; }
 .page :global(.spending-text-search__submit) { min-height: 48px; padding: .65rem 1rem; border: 1px solid #195f45; border-radius: 8px; background: #195f45; color: white; font: inherit; cursor: pointer; }
+
+.page :global(.spending-date-scope) { display: grid; gap: .5rem; max-width: 44rem; margin-block: 1rem; }
+.page :global(.spending-date-scope__label) { font-weight: 600; }
+.page :global(.spending-date-scope__select) { min-width: 0; width: 100%; min-height: 48px; padding: .65rem; border: 1px solid #718b7e; border-radius: .5rem; background: #fff; color: #192923; font: inherit; }
+.page :global(.spending-date-scope__help) { min-height: 4.5em; margin: 0; line-height: 1.5; font-size: .9rem; }
+.page :global(.spending-results__undated) { padding: 1rem; background: #fff6dc; border-left: 3px solid #8b641c; line-height: 1.5; }

@@ -170,10 +170,10 @@ export default function HomePage() {
           </p>
           <div className="homepage-launch" aria-label="Caso de contratación pública">
             <h2 className="homepage-launch__title">Sigue el dinero hasta el expediente</h2>
-            <p className="homepage-launch__scope">Todas las adjudicaciones PLACSP disponibles, sin recorte mensual. Filtra por organismo, proveedor y fechas. Adjudicado no significa pagado.</p>
+            <p className="homepage-launch__scope">Consulta el corpus adquirido de PLACSP, con cobertura parcial y fuentes verificables. Filtra por organismo, proveedor y fechas. Adjudicado no significa pagado.</p>
             <p className="homepage-launch__actions">
               <a className="homepage-launch__demo" href={withBasePath("/spending/")}>Explorar adjudicaciones</a>{" · "}
-              <a className="homepage-launch__download" href={withBasePath(`/spending/launch/${launch.release}/placsp-launch.zip`)}>Descargar datos y consultas</a>{" · "}
+              <a className="homepage-launch__download" href={withBasePath("/spending/#spending-downloads")}>Descargar datos y consultas</a>{" · "}
               <a className="homepage-launch__contribute" href="https://github.com/gsusI/vota-con-la-chola/blob/main/docs/community/placsp-launch-tasks.md">Contribuir</a>
             </p>
           </div>

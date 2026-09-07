@@ -2029,3 +2029,11 @@ Estado: DONE; publicado y verificado en dominio canónico. `/spending/` eliminó
 - 2026-09-07: normalización de 11 años truncados en `/spending/`; calendario y CSV corregidos, fecha fuente conservada. Tests de casos y del corpus completo pasan; publicado en `a6dee879b4`, calendario y total verificados en navegador público. Siguiente: mantener normalización y trazabilidad en nuevas capturas. Evidencia: `sprints/PUBLIC-LAUNCH-20260905/evidence/truncated-decision-years.md`.
 
 - 2026-09-07: backend `/spending/` en Workers Free + D1; importación de 47.397 adjudicaciones y pruebas completas de paridad pasan. DONE: interfaz y API publicadas; navegador canónico sin descarga masiva, Galasa y CSV pasan. Assets movidos a Cloudflare tras detectar 429 de GitHub. Siguiente: nuevas capturas con límites gratuitos y paridad. Evidencia: `sprints/PUBLIC-LAUNCH-20260905/evidence/free-spending-backend.md`.
+
+### DN-02 · 2026-09-08 · ampliación preparada
+
+Ahora: Hetzner sirve 47.397 resultados; candidata de 128.837 verificada localmente.
+Destino: publicar ampliación con fechas dudosas explícitas y capturas de la misma
+release. Siguiente: terminar build, publicar archivos inmutables y promocionar
+slot inactivo con comprobación pública.
+[Fechas y paridad](sprints/DINERO-NACIONAL-20260907/evidence/date-representation-v2.md).

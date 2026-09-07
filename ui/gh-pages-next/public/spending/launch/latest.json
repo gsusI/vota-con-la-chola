@@ -1,7 +1,7 @@
 {
-  "amount_cents": 4865774429683,
-  "archive_bytes": 182758699,
-  "archive_sha256": "ce490104c5bd41ba9c23205c45395d6edf20b80b745cfac73212b4a32601606c",
+  "amount_cents": 8908050904021,
+  "archive_bytes": 526103577,
+  "archive_sha256": "cf5dc2ce568af4c645994271fe0a84b04401b847fe5456214ee802f6ec4a0234",
   "compressed_xml": true,
   "file_encodings": {
     "awards.csv": "gzip",
@@ -11,54 +11,175 @@
     "name-aliases.json": "gzip"
   },
   "file_parts": {
+    "awards.csv": [
+      {
+        "bytes": 20971520,
+        "path": "awards.csv.gz.part-0000",
+        "sha256": "ad4aa15cdcad0bdecdedf04808e63019c471ea778538216e7ccb81b112bd055f"
+      },
+      {
+        "bytes": 5829786,
+        "path": "awards.csv.gz.part-0001",
+        "sha256": "cd0d8d3fb9e21a2788318cdc592f92369a9d65a9cb5f791a112be4a2589fe2c7"
+      }
+    ],
+    "awards.json": [
+      {
+        "bytes": 20971520,
+        "path": "awards.json.gz.part-0000",
+        "sha256": "13e61cd91be6eba35e0f7ebef90f3a17a41cc0cf65a03be4b8fd9eaaf1a121ca"
+      },
+      {
+        "bytes": 8403810,
+        "path": "awards.json.gz.part-0001",
+        "sha256": "9233dcc5cefabd8b0aaf8a71c081c7cba032d5d6378b84a1ffcbcb12f179d4ea"
+      }
+    ],
+    "awards.parquet": [
+      {
+        "bytes": 20971520,
+        "path": "awards.parquet.part-0000",
+        "sha256": "ef67d6297d87f155253cf3fb96ec706f628b462a6bbc3bd0ab571e0fa13814e6"
+      },
+      {
+        "bytes": 965133,
+        "path": "awards.parquet.part-0001",
+        "sha256": "9136ce56630b3e7178aa03ca26ee73283321f3c1689ce922e69927fe0bb724fa"
+      }
+    ],
     "placsp-launch.zip": [
       {
         "bytes": 20971520,
         "path": "placsp-launch.zip.part-0000",
-        "sha256": "326d77d425e3efe8454ea2a616a2ae78707a95e74c5751e5265f3bc79ffb90d2"
+        "sha256": "eebec859bc0bc923f9e3d6dfdda48deaac2229101c659d55a41d2a28195806da"
       },
       {
         "bytes": 20971520,
         "path": "placsp-launch.zip.part-0001",
-        "sha256": "d7427602be93f517cd38bb0451fa65e469b671ac0a0dc7c051d293aed9589a0e"
+        "sha256": "ba29e02dc521565746c7db3b63f07cf046622deabaced319b2a2da3494d6bbe2"
       },
       {
         "bytes": 20971520,
         "path": "placsp-launch.zip.part-0002",
-        "sha256": "02a525160dddb046122e2125112f09ff8cae172e97a01e98fb7217417fab5a51"
+        "sha256": "833a0f2628fa31c0c8c10fbe1787d568d9854cd8466a228febd0516b12083467"
       },
       {
         "bytes": 20971520,
         "path": "placsp-launch.zip.part-0003",
-        "sha256": "107359449bbb2e5abcafe7fd055390cd7cd981d92ac0b3f1b52f01e08af8c2cb"
+        "sha256": "f75e7c65b5e32c41a5c259fff88206d0a393768c2b13a5229e9f5aa286584892"
       },
       {
         "bytes": 20971520,
         "path": "placsp-launch.zip.part-0004",
-        "sha256": "f30e1f9134c20f95eb41351150d3c046d9eefb3f4fc2470a189862d386f3c52b"
+        "sha256": "2724503c94aa59cf0cb2f1a0e3d363e0c3be2ca5652e2c3521ca5b9593ae31f7"
       },
       {
         "bytes": 20971520,
         "path": "placsp-launch.zip.part-0005",
-        "sha256": "07b558876108bc9ec1f1621e1e3e6dc9e8ed758f22e69b7594f7ee91cd0a1ca9"
+        "sha256": "6d5777b42659f770071e74e18b9b3e69e75e7ecc2077a7bc9432a4857cb55c75"
       },
       {
         "bytes": 20971520,
         "path": "placsp-launch.zip.part-0006",
-        "sha256": "e7ff858574fa89334bae27440ad806cc4edb44871a555ec7c0d63fd61d368201"
+        "sha256": "dca1753ce0a3fe676f4d869d2e9d862aa2797a144049fd42b4ea0cf19df43061"
       },
       {
         "bytes": 20971520,
         "path": "placsp-launch.zip.part-0007",
-        "sha256": "a658b6bd3293ea0064bb2909e37ee2ce09588e94d3a0de613a7fefdc358ee742"
+        "sha256": "3db134dfae599cb0aa3533cc11bef5499080f0f92b1220c00b07033ab8ed21de"
       },
       {
-        "bytes": 14986539,
+        "bytes": 20971520,
         "path": "placsp-launch.zip.part-0008",
-        "sha256": "74d5476e413aa3cb737b0395c7ac23902797e55dd37766d62ae47bc5d39dc957"
+        "sha256": "97bcc950fe73395fd9a3bbe6e9ff986f2b9be53416c991be2358ac7eb737014c"
+      },
+      {
+        "bytes": 20971520,
+        "path": "placsp-launch.zip.part-0009",
+        "sha256": "da572e00e76d3f29af14375b0a13b0fa499de51135575f85e84514971fa2f6b3"
+      },
+      {
+        "bytes": 20971520,
+        "path": "placsp-launch.zip.part-0010",
+        "sha256": "2969ca8854f2840755120819dbdd73a385435a278ed9578e84fa3b1a56033b55"
+      },
+      {
+        "bytes": 20971520,
+        "path": "placsp-launch.zip.part-0011",
+        "sha256": "d89c14ef5bef7facdae9176ab0d5042fb571d6e00f0ea309d1ccb4194803173a"
+      },
+      {
+        "bytes": 20971520,
+        "path": "placsp-launch.zip.part-0012",
+        "sha256": "9b7071cc09a4b2556593bd359a1171c04205494e19c52665b8817e3ef4bd51d7"
+      },
+      {
+        "bytes": 20971520,
+        "path": "placsp-launch.zip.part-0013",
+        "sha256": "90de1fecfd5e686f1cbb6e5c62f9bf815c32a2520e39b3ecc462ecafd676a343"
+      },
+      {
+        "bytes": 20971520,
+        "path": "placsp-launch.zip.part-0014",
+        "sha256": "60471ad526d72ea7bd518b2e0e54ad6fbc71450da0bbb6d363ada36693ed4b74"
+      },
+      {
+        "bytes": 20971520,
+        "path": "placsp-launch.zip.part-0015",
+        "sha256": "e651701c24fe97af1416fde7d89c381474a38b4fea0a2a5cd3ad5366a17fda1f"
+      },
+      {
+        "bytes": 20971520,
+        "path": "placsp-launch.zip.part-0016",
+        "sha256": "23d6f72128a1c8c926357f107f6e0e68b861dc0be494de70d7acf6c0e8a82ddc"
+      },
+      {
+        "bytes": 20971520,
+        "path": "placsp-launch.zip.part-0017",
+        "sha256": "ab4f62b841dbe864296118805e2f68008937035e99f28547ecd49259432728fd"
+      },
+      {
+        "bytes": 20971520,
+        "path": "placsp-launch.zip.part-0018",
+        "sha256": "2f7f104f88f62b7e356a158c8883d466609c94ff24cceb69fb37a95f4fbc4822"
+      },
+      {
+        "bytes": 20971520,
+        "path": "placsp-launch.zip.part-0019",
+        "sha256": "81f2e7cc25a5019f9a861fa57cf40adb4a515728a7dca031096263f99ddb9990"
+      },
+      {
+        "bytes": 20971520,
+        "path": "placsp-launch.zip.part-0020",
+        "sha256": "bdbeb71787f8198a546226bba39c778cb606322249181dcc41d88d9a0b7ba2df"
+      },
+      {
+        "bytes": 20971520,
+        "path": "placsp-launch.zip.part-0021",
+        "sha256": "851b406941071a82d53ac3decc434cbddf633b8c2c790ef482c57e7c92b9bcaa"
+      },
+      {
+        "bytes": 20971520,
+        "path": "placsp-launch.zip.part-0022",
+        "sha256": "675ffc9959293a2451e9f3c9ca9476c7feae26c97e0bf1fa45bb40163898ba6c"
+      },
+      {
+        "bytes": 20971520,
+        "path": "placsp-launch.zip.part-0023",
+        "sha256": "6739280547b9d909d7242098822d855440f11b58b03f52d0e51f0827a1057e0d"
+      },
+      {
+        "bytes": 20971520,
+        "path": "placsp-launch.zip.part-0024",
+        "sha256": "436ebab1ec70ba025a3a821c6ab4fffc31245d9b18621cf030955040cd41948c"
+      },
+      {
+        "bytes": 1815577,
+        "path": "placsp-launch.zip.part-0025",
+        "sha256": "09b89c6c0579e1546a2d27b9351d0a8fa47d4ff379a7ce6631d4dd5c4c863bcc"
       }
     ]
   },
-  "release": "0e55b07120bcb42731b45a78fd682813cd6a51793232faee805ddce46be32a90",
-  "rows": 47397
+  "release": "ab964ef550781b61e62bef96fa000e251a9ae133d4e1894d6f6bbda1ad733147",
+  "rows": 128837
 }

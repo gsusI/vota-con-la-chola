@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import path from 'node:path';
+import fs from 'node:fs';
 import {spawn} from 'node:child_process';
 const bundle=path.resolve(process.argv[2]);
 const child=spawn(process.execPath,[path.join(bundle,'server.mjs')],{env:{...process.env,HOST:'127.0.0.1',PORT:'18087',DB_PATH:path.join(bundle,'awards.db')},stdio:['ignore','ignore','inherit']});
@@ -15,7 +16,7 @@ try{
  assert.ok(ready);
  const routes=['/v1/awards?limit=12','/v1/options?kind=authority','/v1/options?kind=supplier'];
  const initial=await Promise.all(routes.map(async route=>{const r=await fetch(base+route);assert.equal(r.status,200);return r.json();}));
- assert.equal(initial[0].count,47397);
+ assert.equal(initial[0].count,JSON.parse(fs.readFileSync(path.join(bundle,'release.json'))).rows);
  assert.ok(Array.isArray(initial[1].values)&&Array.isArray(initial[2].values));
  const burst=await Promise.all(Array.from({length:20},async()=>{const r=await fetch(base+'/v1/awards?limit=200');assert.ok([200,503].includes(r.status));const body=await r.json();assert.ok(r.ok?Array.isArray(body.rows):typeof body.error==='string');return r.status;}));
  assert.equal((await fetch(base+'/readyz')).status,200);

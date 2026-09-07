@@ -26,3 +26,30 @@ export function normalizeDecisionDates(rows) {
   return rows.map(normalizeDecisionDate).sort((a, b) => a.decision_date.localeCompare(b.decision_date)
     || a.source_record_id.localeCompare(b.source_record_id) || a.money_fact_id.localeCompare(b.money_fact_id));
 }
+
+
+export function usableDecisionDate(value) {
+ if(typeof value!=='string'||!/^\d{4}-\d{2}-\d{2}$/.test(value)||Number(value.slice(0,4))<1900)return false;
+ const parsed=new Date(`${value}T12:00:00Z`);
+ return !Number.isNaN(parsed.getTime())&&parsed.toISOString().slice(0,10)===value;
+}
+
+export function classifyDecisionDate(original) {
+ const row=normalizeDecisionDate(original);
+ const source=original.decision_date_source??original.decision_date;
+ if(!usableDecisionDate(row.decision_date))return {...row,decision_date:null,
+  decision_date_source:source,decision_date_status:'unresolved'};
+ return {...row,decision_date_source:source,
+  decision_date_status:row.decision_date===source?'source':'corrected'};
+}
+
+export function classifyDecisionDates(rows) {
+ return rows.map(classifyDecisionDate).sort((a,b)=>(a.decision_date??'9999-99-99').localeCompare(b.decision_date??'9999-99-99')
+  ||a.source_record_id.localeCompare(b.source_record_id)||a.money_fact_id.localeCompare(b.money_fact_id));
+}
+
+export function validDateRepresentation(row) {
+ return row.decision_date_status==='unresolved'
+  ?row.decision_date===null&&typeof row.decision_date_source==='string'&&!usableDecisionDate(row.decision_date_source)
+  :usableDecisionDate(row.decision_date);
+}

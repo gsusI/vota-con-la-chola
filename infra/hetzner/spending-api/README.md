@@ -34,3 +34,17 @@ version, amounts and evidence. Expanding coverage remains separate work.
 No ingestion, historical downloads, shared PostgreSQL/Redis changes or host cleanup
 are part of this service. Immutable bundles contain only reviewed public data and
 application files. Keep old snapshots until replacement and rollback are verified.
+
+## Candidate date semantics (not yet promoted)
+
+`date_scope=all` (default) returns dated results inside `start`/`end` plus
+results with unresolved dates. `date_scope=dated` excludes unresolved dates.
+`date_scope=unresolved` selects only unresolved dates; the calendar does not
+restrict those results. Authority, supplier and text filters apply in every mode.
+Responses expose `undated_count` for the selected result set. Pagination and CSV
+use the same selection, and CSV retains `decision_date_source` and
+`decision_date_status`. Unknown dates are JSON null, never guessed years.
+
+Promotion requires the frontend to explain these modes and use the matching
+immutable capture release. The minimum literal date is not a coverage claim;
+the candidate contains a literal 1925 date in a 2025 contract source.
