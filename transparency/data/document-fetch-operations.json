@@ -1,0 +1,121 @@
+{
+  "meta": {
+    "schema_version": "document_fetch_operations_v1",
+    "generated_at": "2026-08-29T20:27:05+00:00",
+    "pipeline_id": "document_fetch",
+    "source_db": "etl/data/staging/politicos-es.db",
+    "network_run_performed": false
+  },
+  "policy": {
+    "data_origin": "official_public_documents_only",
+    "synthetic_or_mock_records": "forbidden",
+    "public_domain_personal_information": "retained",
+    "raw_urls_or_error_samples_published": false,
+    "worker_policy_scope": "configured_guardrail_for_subsequent_runs"
+  },
+  "worker_policy": {
+    "global_workers": 8,
+    "per_host_workers": 2,
+    "per_host_min_interval_ms": 500,
+    "max_document_bytes": 262144000,
+    "streaming_content_addressed_storage": true,
+    "atomic_leases": true,
+    "heartbeat_and_reclaim": true,
+    "retry_and_dead_letter_states": true,
+    "cohort_circuit_breakers": true,
+    "per_host_slo_report_on_worker_runs": true
+  },
+  "queue": {
+    "items_total": 9084,
+    "state_counts": {
+      "pending": 2094,
+      "leased": 0,
+      "succeeded": 6792,
+      "dead": 198
+    },
+    "unfinished_total": 2094,
+    "terminal_total": 6990,
+    "attempts_total": 9187,
+    "retry_attempts_total": 103,
+    "max_attempts_observed": 2,
+    "attempt_status_counts": {
+      "dead": 198,
+      "retry": 2197,
+      "succeeded": 6792
+    },
+    "overdue_leases_total": 0,
+    "oldest_created_at": "2026-08-10T14:18:56+00:00",
+    "latest_updated_at": "2026-08-10T14:50:41+00:00"
+  },
+  "documents": {
+    "official_url_sightings_total": 9084,
+    "official_urls_total": 9084,
+    "source_record_linked_urls_total": 6792,
+    "source_record_missing_urls_total": 2292,
+    "fetched_succeeded_total": 6792,
+    "fetched_failed_total": 2292,
+    "missing_fetch_rows_total": 0,
+    "bytes_received": 133219457,
+    "url_scheme_counts": {
+      "http": 3176,
+      "https": 5908
+    },
+    "http_status_counts": {
+      "200": 6792,
+      "404": 198,
+      "500": 21,
+      "none": 2073
+    },
+    "failure_class_counts": {
+      "host_circuit_open": 2070,
+      "not_fetchable": 198,
+      "timeout": 3,
+      "upstream_server_error": 21
+    }
+  },
+  "hosts": [
+    {
+      "official_urls_total": 9084,
+      "queue_state_counts": {
+        "pending": 2094,
+        "leased": 0,
+        "succeeded": 6792,
+        "dead": 198
+      },
+      "attempts_total": 9187,
+      "max_attempts_observed": 2,
+      "fetched_succeeded_total": 6792,
+      "fetched_failed_total": 2292,
+      "bytes_received": 133219457,
+      "host": "www.senado.es",
+      "http_status_counts": {
+        "200": 6792,
+        "404": 198,
+        "500": 21,
+        "none": 2073
+      },
+      "failure_class_counts": {
+        "host_circuit_open": 2070,
+        "not_fetchable": 198,
+        "timeout": 3,
+        "upstream_server_error": 21
+      }
+    }
+  ],
+  "integrity": {
+    "queue_balance_passed": true,
+    "document_queue_parity_passed": true,
+    "succeeded_fetch_parity_passed": true,
+    "fetch_rows_parity_passed": true,
+    "orphan_partial_files_total": 0,
+    "official_host_allowlist_passed": true,
+    "official_https_only": false,
+    "plaintext_http_urls_total": 3176
+  },
+  "scale_claim": {
+    "operational_contract_status": "partial",
+    "one_million_documents_processed": false,
+    "promoted_for_unbounded_operation": false,
+    "next_gate": "complete_measured_real_cohorts_100_1000_10000_100000_before_one_million"
+  }
+}

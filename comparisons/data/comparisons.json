@@ -1,0 +1,1322 @@
+{
+  "as_of_date": "2026-08-20",
+  "caveats": [
+    "Este corte conserva solo cinco revisiones explícitas sobre registros oficiales reales.",
+    "No hay comparaciones aligned o conflicted en v1; una coincidencia temática no autoriza ese veredicto.",
+    "Un voto individual de una persona afiliada se atribuye como acción de esa representante, no como posición colectiva completa del partido.",
+    "Insufficient evidence no significa incumplimiento; not comparable no significa neutralidad política.",
+    "La sustitución coordinada del conjunto DB+JSON aún no es transaccional: cada archivo se reemplaza atómicamente, pero una caída entre reemplazos puede dejar releases mezcladas y exige validación antes de publicar.",
+    "La arquitectura escribe por lotes, pero este corte pequeño no prueba todavía una ejecución física de un millón de comparaciones."
+  ],
+  "counts": {
+    "action_pairs_total": 4,
+    "bounded_action_search_assessments_total": 1,
+    "comparisons_total": 5,
+    "evidence_total": 18,
+    "strong_pairs_total": 0,
+    "unique_claims_total": 4
+  },
+  "coverage": {
+    "all_possible_actions_searched": false,
+    "bounded_action_searches": [
+      {
+        "candidate_events_scanned": 97,
+        "candidate_rows_sha256": "1b8e4e8e982edf2985a5e184395331d3271ae7a0d055eb9d6a9f3d509dbadb0a",
+        "candidate_vote_rows_scanned": 97,
+        "date_from": "2023-07-05",
+        "date_to": "2026-02-12",
+        "expected_matching_events": 0,
+        "matching_event_ids": [],
+        "matching_policy": "literal_terms_then_explicit_evidence_review",
+        "member_names": [
+          "MARÍA CARMEN DA SILVA MÉNDEZ",
+          "Néstor Rego Candamil"
+        ],
+        "result_state": "no_reviewed_action_found",
+        "search_terms": [
+          "AP-9",
+          "AP 9",
+          "AP-53",
+          "AP 53"
+        ],
+        "source_tables": [
+          "parl_vote_events",
+          "parl_vote_member_votes"
+        ]
+      }
+    ],
+    "counterevidence_search_complete": false,
+    "ranking_reason": "Ranking oculto: la muestra comparable no alcanza el mínimo para una lectura responsable.",
+    "ranking_state": "hidden",
+    "state": "bounded_non_exhaustive",
+    "strong_pairs_total": 0
+  },
+  "freshness": {
+    "action_corpus_cutoff": "2026-02-12",
+    "as_of_date": "2026-08-20",
+    "generated_at": "2026-08-20T00:00:00Z",
+    "ranking_eligible": false,
+    "reason": "El corpus de acciones queda cortado el 2026-02-12; la release es reciente, pero su cobertura de acciones no lo es.",
+    "should_warn": true,
+    "tier": "stale"
+  },
+  "generated_at": "2026-08-20T00:00:00Z",
+  "hash_contract": {
+    "canonicalization": "UTF-8 JSON with sorted keys and compact separators",
+    "full_artifact_sha256_location": "producer report; excluded from artifact to avoid a circular self-hash",
+    "reviewed_mappings_canonical_sha256": "44b579a3e16e59f8807dd3ed1933bed17ee7e290e4f605b2e4694502d6f21c49",
+    "semantic_sha256": "7b37c75c836a0a85c0aab70b7165a5ce005cef320c22c49e34ec650969691b19"
+  },
+  "input_releases": {
+    "actions": {
+      "coverage_cutoff": "2026-02-12",
+      "selected_scope_sha256": "e7535d6a4c186c79ff8ba7b56cbe96c886aa2c49ebe5adef4d83d2bd6db933e1"
+    },
+    "actor_graph": {
+      "release_id": "e52dd7fac6f29570d23756e927e0b9cfe73d1bf2f7c30fa01de75d4dc3a6f4a5",
+      "selected_scope_sha256": "7513cb344282eab9cd29c5242a63db92eeb6a6a1bcac472e6f8dc57ffe1eb060"
+    },
+    "promises": {
+      "selected_scope_sha256": "23539aa305db1ff157c33566e380f69dc43f0d6e86a3bb95e265ea0a31aba954"
+    },
+    "reviewed_mappings": {
+      "canonical_sha256": "44b579a3e16e59f8807dd3ed1933bed17ee7e290e4f605b2e4694502d6f21c49"
+    }
+  },
+  "items": [
+    {
+      "action": {
+        "action_date": "2023-11-08",
+        "action_id": "url:https://www.senado.es/legis15/votaciones/ses_4_12.xml",
+        "action_kind": "roll_call_vote",
+        "actor_id": "urn:vclc:actor:95b408d6747db7f69579d9410daca892f2333c33991d261934b02a6db136c36d",
+        "member_name": "MARÍA CARMEN DA SILVA MÉNDEZ",
+        "party_actor_id": "urn:vclc:actor:cfb49809e5572f5c1f2ae5553d5f318b5f528ba9e699cca5c4781b385a5187ed",
+        "responsible_capacity": "individual_legislator_roll_call",
+        "source_id": "senado_votaciones",
+        "source_url": "https://www.senado.es/legis15/votaciones/ses_4.xml",
+        "title": "Proposición de Ley por la que se modifica el apartado Uno, punto 2, del artículo 91 de la Ley 37/1992, de 28 de diciembre, del Impuesto sobre el Valor Añadido. (622/000006)",
+        "vote_choice": "SÍ"
+      },
+      "action_search": {
+        "scope": {},
+        "state": "not_applicable"
+      },
+      "actor_capacity": {
+        "action_capacity": "individual_legislator_roll_call",
+        "actor_link_state": "reviewed_official_identity_and_affiliation",
+        "assertion_capacity": "party_manifesto_publisher",
+        "attribution_unit": "party_assertion_vs_individual_representative_action",
+        "collective_party_position_inferred": false,
+        "global_cross_source_actor_merge_used": false
+      },
+      "caveat": "Mapeo ambiguo: no se cuenta como alineación ni conflicto hasta revisar el texto exacto de la alternativa votada.",
+      "claim": {
+        "actor_id": "urn:vclc:actor:0e14cabbdb70e0fd35aa37bc2968cebe97c6a3b3ecacaef8d99db3da42181a74",
+        "actor_label": "BNG",
+        "claim_id": "claim_67146dd9977d23b456c0a65f9d0b396baa01a4a177f179e1ac379b2567137cdf",
+        "claim_kind": "explicit_promise",
+        "exact_text": "•   Estabelecer a rebaixa permanente do IVE de produtos\nde alimentación básica, produtos do mar, elementos\nde hixiene persoal e feminina, transporte público de\npasaxeiros, investimentos en eficiencia enerxética\ne enerxías renovábeis no ámbito doméstico e nas\npequenas e medianas empresas.",
+        "page_end": 40,
+        "page_start": 40,
+        "promise_id": "promise_e3a859837a991f90a887899b20bac8aee435daf5eb4898eac4ec2a6c66cd48c9",
+        "published_date": "2023-07-05",
+        "responsible_capacity": "party_manifesto_publisher",
+        "review_status": "rule_confirmed"
+      },
+      "comparison_id": "vclc:promise-action-comparison:c04a8f18344b02e03743166a57f44454",
+      "comparison_status": "ambiguous_mapping",
+      "confidence": {
+        "aggregate_rule": "minimum_required_component",
+        "aggregate_value": 0.0,
+        "components": {
+          "action_effect_quality": {
+            "reason": "Falta efecto material exacto comparable o la acción es procesal.",
+            "value": 0.0
+          },
+          "assertion_quality": {
+            "reason": "Claim rule_confirmed con cita primaria exacta y SHA-256 documental.",
+            "value": 1.0
+          },
+          "coverage_quality": {
+            "reason": "No existe búsqueda exhaustiva y completa de todas las acciones y contraevidencias posibles.",
+            "value": 0.0
+          },
+          "evidence_quality": {
+            "reason": "La evidencia oficial preservada no completa todos los eslabones necesarios para un veredicto fuerte.",
+            "value": 0.0
+          },
+          "identity_quality": {
+            "reason": "La identidad y afiliación están revisadas solo para este enlace; el actor graph sigue source-scoped y no convierte el voto individual en posición colectiva del partido.",
+            "value": 0.0
+          },
+          "mapping_quality": {
+            "reason": "El mapping no está confirmado como mismo frame exacto.",
+            "value": 0.0
+          },
+          "temporal_quality": {
+            "reason": "Assertion y acción tienen fechas observadas y la acción es posterior.",
+            "value": 1.0
+          }
+        },
+        "label": "sin_confianza_util",
+        "method": "categorical_gate_projection_v1"
+      },
+      "counterevidence": {
+        "exhaustive": false,
+        "items": [],
+        "search_state": "not_searched"
+      },
+      "coverage": {
+        "action_search_scope": {},
+        "exhaustive": false,
+        "state": "pair_review_only_not_exhaustive"
+      },
+      "directional_countable": false,
+      "evidence": [
+        {
+          "comparison_evidence_id": "vclc:comparison-evidence:3e6d88bda1739aad1dd2eca7e5a63a12",
+          "content_sha256": "ab3fb04a05d6d824b647d07bcb60ff6e8dc20357491eae36e45b325b2eae7451",
+          "evidence_role": "primary",
+          "evidence_side": "action",
+          "exact_quote": "Proposición de Ley por la que se modifica el apartado Uno, punto 2, del artículo 91 de la Ley 37/1992, de 28 de diciembre, del Impuesto sobre el Valor Añadido. (622/000006)",
+          "metadata": {
+            "group_code": "GRUPO PARLAMENTARIO PLURAL EN EL SENADO JUNTS PER CATALUNYA-COALICIÓN CANARIA-AGRUPACIÓN HERREÑA INDEPENDIENTE-BLOQUE NACIONALISTA GALEGO",
+            "initiative_id": "senado:leg15:exp:622/000006",
+            "initiative_link_confidence": 1.0,
+            "initiative_link_method": "leg_expediente_payload_exact",
+            "initiative_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=15",
+            "member_name": "MARÍA CARMEN DA SILVA MÉNDEZ",
+            "member_vote_id": 19571,
+            "vote_choice": "SÍ",
+            "vote_event_id": "url:https://www.senado.es/legis15/votaciones/ses_4_12.xml"
+          },
+          "observed_at": "2026-02-12",
+          "source_id": "senado_votaciones",
+          "source_record_id": "url:https://www.senado.es/legis15/votaciones/ses_4_12.xml",
+          "source_url": "https://www.senado.es/legis15/votaciones/ses_4.xml"
+        },
+        {
+          "comparison_evidence_id": "vclc:comparison-evidence:b3fde11e6ab2333cd593bf2cc229ab45",
+          "content_sha256": "d3d2cf6d78e8841fcbe5a0e6b13d74473bf179c7260c3026c1dc325ee38583f9",
+          "evidence_role": "identity",
+          "evidence_side": "actor_link",
+          "exact_quote": "MARÍA CARMEN DA SILVA MÉNDEZ — afiliación oficial — BNG",
+          "metadata": {
+            "claim_actor_id": "urn:vclc:actor:0e14cabbdb70e0fd35aa37bc2968cebe97c6a3b3ecacaef8d99db3da42181a74",
+            "party_actor_id": "urn:vclc:actor:cfb49809e5572f5c1f2ae5553d5f318b5f528ba9e699cca5c4781b385a5187ed",
+            "registry_actor_id": "urn:vclc:actor:d72d976cd39783aa17567cc42ab50cfbe4bcd9a7d6f77e5f884faaec9033d51d",
+            "relationship_id": "urn:vclc:actor-relationship:96df6ae519e64b5eb12ee0054d20341725c18b77e8b8b22f3dcbcdb85a4f7b1d",
+            "resolution_state": "source_scoped",
+            "rollcall_actor_id": "urn:vclc:actor:95b408d6747db7f69579d9410daca892f2333c33991d261934b02a6db136c36d",
+            "scope_note": "bounded_review_not_global_actor_merge",
+            "valid_from": "2023-07-29",
+            "valid_to": null
+          },
+          "observed_at": "2026-02-12",
+          "source_id": "senado_senadores",
+          "source_record_id": "idweb:19968",
+          "source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=6&legis=15"
+        },
+        {
+          "comparison_evidence_id": "vclc:comparison-evidence:d207bd954804df078c1f023e3e5de7f5",
+          "content_sha256": "b8994deec0bbc45cdcbef5d7c5395cabf30b0509706303c3d8e76058c48eebfd",
+          "evidence_role": "primary",
+          "evidence_side": "claim",
+          "exact_quote": "•   Estabelecer a rebaixa permanente do IVE de produtos\nde alimentación básica, produtos do mar, elementos\nde hixiene persoal e feminina, transporte público de\npasaxeiros, investimentos en eficiencia enerxética\ne enerxías renovábeis no ámbito doméstico e nas\npequenas e medianas empresas.",
+          "metadata": {
+            "claim_evidence_id": "claimevidence_e4d88951d953ee45da8545df557ce1e4b228903e3bc193fa447cef669eece7cc",
+            "manifesto_document_id": "manifesto_ce98faab6d2d2ab9731ae0f4cd46093ac270b2f61ed8072db5166e008af12cc3",
+            "page_end": 40,
+            "page_start": 40,
+            "quote_sha256": "460617dce10314f28c9ce99e577ced05facc3ad1e6433456115dc66f95abf04b"
+          },
+          "observed_at": "2026-08-19",
+          "source_id": "programas_partidos",
+          "source_record_id": "manifesto:b8994deec0bbc45cdcbef5d7c5395cabf30b0509706303c3d8e76058c48eebfd",
+          "source_url": "https://www.bng.gal/media/bnggaliza/files/2023/07/05/23_bng_xerais_programa.pdf"
+        },
+        {
+          "comparison_evidence_id": "vclc:comparison-evidence:b22adb0be9009e7250db36b8e2dadd18",
+          "content_sha256": "58de43fcde5fab517f7ac4ff34e84ba83b887ed81095ca40bf3f59f51fdc2c1e",
+          "evidence_role": "review",
+          "evidence_side": "mapping_review",
+          "exact_quote": "La promesa enumera bienes y servicios concretos para una rebaja permanente del IVA. El registro del Senado identifica una toma en consideración de una alternativa del GPP que modifica el artículo 91 de la Ley del IVA, pero el corpus acotado no contiene el texto operativo de esa alternativa. El título común y el artículo compartido no prueban que coincidan bienes, tipo o permanencia.",
+          "metadata": {
+            "action_direction": "unclear",
+            "action_search_scope": {},
+            "action_search_state": "not_applicable",
+            "action_substance_state": "procedural",
+            "claim_direction": "support",
+            "directional_countable": false,
+            "mapping_basis": "broad_topic_only",
+            "material_differences": [
+              "promised_goods_not_verified_in_action",
+              "tax_rate_not_verified_in_action",
+              "permanence_not_verified_in_action"
+            ],
+            "reason_codes": [
+              "exact_action_text_missing",
+              "consideration_vote_not_final_approval",
+              "competing_legislative_alternatives",
+              "topic_overlap_not_equivalence"
+            ],
+            "review_method": "explicit_evidence_review",
+            "review_version": "explicit_mapping_review_v1"
+          },
+          "observed_at": "2026-08-20T00:00:00Z",
+          "source_id": "comparison_review",
+          "source_record_id": "vclc:comparison-mapping-review:b81ee922d015d1ada079a82d5da86015",
+          "source_url": null
+        }
+      ],
+      "evidence_links": [
+        "https://www.bng.gal/media/bnggaliza/files/2023/07/05/23_bng_xerais_programa.pdf",
+        "https://www.senado.es/legis15/votaciones/ses_4.xml",
+        "https://www.senado.es/web/ficopendataservlet?tipoFich=6&legis=15"
+      ],
+      "frame": {
+        "action_source_text": "Proposición de Ley por la que se modifica el apartado Uno, punto 2, del artículo 91 de la Ley 37/1992, de 28 de diciembre, del Impuesto sobre el Valor Añadido. (622/000006)",
+        "claim_source_text": "•   Estabelecer a rebaixa permanente do IVE de produtos\nde alimentación básica, produtos do mar, elementos\nde hixiene persoal e feminina, transporte público de\npasaxeiros, investimentos en eficiencia enerxética\ne enerxías renovábeis no ámbito doméstico e nas\npequenas e medianas empresas.",
+        "material_differences": [
+          "promised_goods_not_verified_in_action",
+          "tax_rate_not_verified_in_action",
+          "permanence_not_verified_in_action"
+        ],
+        "normalization_state": "reviewed_difference_only_not_fully_normalized",
+        "same_exact_frame_confirmed": false
+      },
+      "freshness": {
+        "action_corpus_cutoff": "2026-02-12",
+        "as_of_date": "2026-08-20",
+        "ranking_eligible": false,
+        "reason": "El corte de votaciones usado termina el 2026-02-12 y no representa todas las acciones posteriores posibles.",
+        "should_warn": true,
+        "tier": "stale"
+      },
+      "mapping_review": {
+        "action_direction": "unclear",
+        "action_substance_state": "procedural",
+        "actor_link_state": "reviewed_official_identity_and_affiliation",
+        "claim_direction": "support",
+        "mapping_basis": "broad_topic_only",
+        "mapping_review_id": "vclc:comparison-mapping-review:b81ee922d015d1ada079a82d5da86015",
+        "mapping_state": "ambiguous",
+        "material_differences": [
+          "promised_goods_not_verified_in_action",
+          "tax_rate_not_verified_in_action",
+          "permanence_not_verified_in_action"
+        ],
+        "reason_codes": [
+          "exact_action_text_missing",
+          "consideration_vote_not_final_approval",
+          "competing_legislative_alternatives",
+          "topic_overlap_not_equivalence"
+        ],
+        "review_method": "explicit_evidence_review",
+        "review_rationale": "La promesa enumera bienes y servicios concretos para una rebaja permanente del IVA. El registro del Senado identifica una toma en consideración de una alternativa del GPP que modifica el artículo 91 de la Ley del IVA, pero el corpus acotado no contiene el texto operativo de esa alternativa. El título común y el artículo compartido no prueban que coincidan bienes, tipo o permanencia.",
+        "review_version": "explicit_mapping_review_v1",
+        "reviewed_at": "2026-08-20T00:00:00Z"
+      },
+      "mapping_review_id": "vclc:comparison-mapping-review:b81ee922d015d1ada079a82d5da86015",
+      "public_summary": "Hay una votación posterior sobre el artículo 91 del IVA, pero la evidencia disponible no permite afirmar que ejecute o contradiga esta promesa.",
+      "reason_codes": [
+        "exact_action_text_missing",
+        "consideration_vote_not_final_approval",
+        "competing_legislative_alternatives",
+        "topic_overlap_not_equivalence"
+      ]
+    },
+    {
+      "action": {
+        "action_date": "2023-11-08",
+        "action_id": "url:https://www.senado.es/legis15/votaciones/ses_4_13.xml",
+        "action_kind": "roll_call_vote",
+        "actor_id": "urn:vclc:actor:95b408d6747db7f69579d9410daca892f2333c33991d261934b02a6db136c36d",
+        "member_name": "MARÍA CARMEN DA SILVA MÉNDEZ",
+        "party_actor_id": "urn:vclc:actor:cfb49809e5572f5c1f2ae5553d5f318b5f528ba9e699cca5c4781b385a5187ed",
+        "responsible_capacity": "individual_legislator_roll_call",
+        "source_id": "senado_votaciones",
+        "source_url": "https://www.senado.es/legis15/votaciones/ses_4.xml",
+        "title": "Proposición de Ley por la que se modifica el apartado Uno, punto 2, del artículo 91 de la Ley 37/1992, de 28 de diciembre, del Impuesto sobre el Valor Añadido. (622/000006)",
+        "vote_choice": "SÍ"
+      },
+      "action_search": {
+        "scope": {},
+        "state": "not_applicable"
+      },
+      "actor_capacity": {
+        "action_capacity": "individual_legislator_roll_call",
+        "actor_link_state": "reviewed_official_identity_and_affiliation",
+        "assertion_capacity": "party_manifesto_publisher",
+        "attribution_unit": "party_assertion_vs_individual_representative_action",
+        "collective_party_position_inferred": false,
+        "global_cross_source_actor_merge_used": false
+      },
+      "caveat": "Mapeo ambiguo: una coincidencia de expediente no demuestra equivalencia de medida.",
+      "claim": {
+        "actor_id": "urn:vclc:actor:0e14cabbdb70e0fd35aa37bc2968cebe97c6a3b3ecacaef8d99db3da42181a74",
+        "actor_label": "BNG",
+        "claim_id": "claim_67146dd9977d23b456c0a65f9d0b396baa01a4a177f179e1ac379b2567137cdf",
+        "claim_kind": "explicit_promise",
+        "exact_text": "•   Estabelecer a rebaixa permanente do IVE de produtos\nde alimentación básica, produtos do mar, elementos\nde hixiene persoal e feminina, transporte público de\npasaxeiros, investimentos en eficiencia enerxética\ne enerxías renovábeis no ámbito doméstico e nas\npequenas e medianas empresas.",
+        "page_end": 40,
+        "page_start": 40,
+        "promise_id": "promise_e3a859837a991f90a887899b20bac8aee435daf5eb4898eac4ec2a6c66cd48c9",
+        "published_date": "2023-07-05",
+        "responsible_capacity": "party_manifesto_publisher",
+        "review_status": "rule_confirmed"
+      },
+      "comparison_id": "vclc:promise-action-comparison:ced1172bcfbfefb036caffe6049bb7fe",
+      "comparison_status": "ambiguous_mapping",
+      "confidence": {
+        "aggregate_rule": "minimum_required_component",
+        "aggregate_value": 0.0,
+        "components": {
+          "action_effect_quality": {
+            "reason": "Falta efecto material exacto comparable o la acción es procesal.",
+            "value": 0.0
+          },
+          "assertion_quality": {
+            "reason": "Claim rule_confirmed con cita primaria exacta y SHA-256 documental.",
+            "value": 1.0
+          },
+          "coverage_quality": {
+            "reason": "No existe búsqueda exhaustiva y completa de todas las acciones y contraevidencias posibles.",
+            "value": 0.0
+          },
+          "evidence_quality": {
+            "reason": "La evidencia oficial preservada no completa todos los eslabones necesarios para un veredicto fuerte.",
+            "value": 0.0
+          },
+          "identity_quality": {
+            "reason": "La identidad y afiliación están revisadas solo para este enlace; el actor graph sigue source-scoped y no convierte el voto individual en posición colectiva del partido.",
+            "value": 0.0
+          },
+          "mapping_quality": {
+            "reason": "El mapping no está confirmado como mismo frame exacto.",
+            "value": 0.0
+          },
+          "temporal_quality": {
+            "reason": "Assertion y acción tienen fechas observadas y la acción es posterior.",
+            "value": 1.0
+          }
+        },
+        "label": "sin_confianza_util",
+        "method": "categorical_gate_projection_v1"
+      },
+      "counterevidence": {
+        "exhaustive": false,
+        "items": [],
+        "search_state": "not_searched"
+      },
+      "coverage": {
+        "action_search_scope": {},
+        "exhaustive": false,
+        "state": "pair_review_only_not_exhaustive"
+      },
+      "directional_countable": false,
+      "evidence": [
+        {
+          "comparison_evidence_id": "vclc:comparison-evidence:5906effd20dcd105f6ebe4499b317460",
+          "content_sha256": "ca9feb68a4f67fc1b6bf8e0786aa3eb88e9ea64c9df3fe30b675808d12d15bcc",
+          "evidence_role": "primary",
+          "evidence_side": "action",
+          "exact_quote": "Proposición de Ley por la que se modifica el apartado Uno, punto 2, del artículo 91 de la Ley 37/1992, de 28 de diciembre, del Impuesto sobre el Valor Añadido. (622/000006)",
+          "metadata": {
+            "group_code": "GRUPO PARLAMENTARIO PLURAL EN EL SENADO JUNTS PER CATALUNYA-COALICIÓN CANARIA-AGRUPACIÓN HERREÑA INDEPENDIENTE-BLOQUE NACIONALISTA GALEGO",
+            "initiative_id": "senado:leg15:exp:622/000006",
+            "initiative_link_confidence": 1.0,
+            "initiative_link_method": "leg_expediente_payload_exact",
+            "initiative_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=15",
+            "member_name": "MARÍA CARMEN DA SILVA MÉNDEZ",
+            "member_vote_id": 19837,
+            "vote_choice": "SÍ",
+            "vote_event_id": "url:https://www.senado.es/legis15/votaciones/ses_4_13.xml"
+          },
+          "observed_at": "2026-02-12",
+          "source_id": "senado_votaciones",
+          "source_record_id": "url:https://www.senado.es/legis15/votaciones/ses_4_13.xml",
+          "source_url": "https://www.senado.es/legis15/votaciones/ses_4.xml"
+        },
+        {
+          "comparison_evidence_id": "vclc:comparison-evidence:b84776fd992869ae003721b4eb3302c8",
+          "content_sha256": "d3d2cf6d78e8841fcbe5a0e6b13d74473bf179c7260c3026c1dc325ee38583f9",
+          "evidence_role": "identity",
+          "evidence_side": "actor_link",
+          "exact_quote": "MARÍA CARMEN DA SILVA MÉNDEZ — afiliación oficial — BNG",
+          "metadata": {
+            "claim_actor_id": "urn:vclc:actor:0e14cabbdb70e0fd35aa37bc2968cebe97c6a3b3ecacaef8d99db3da42181a74",
+            "party_actor_id": "urn:vclc:actor:cfb49809e5572f5c1f2ae5553d5f318b5f528ba9e699cca5c4781b385a5187ed",
+            "registry_actor_id": "urn:vclc:actor:d72d976cd39783aa17567cc42ab50cfbe4bcd9a7d6f77e5f884faaec9033d51d",
+            "relationship_id": "urn:vclc:actor-relationship:96df6ae519e64b5eb12ee0054d20341725c18b77e8b8b22f3dcbcdb85a4f7b1d",
+            "resolution_state": "source_scoped",
+            "rollcall_actor_id": "urn:vclc:actor:95b408d6747db7f69579d9410daca892f2333c33991d261934b02a6db136c36d",
+            "scope_note": "bounded_review_not_global_actor_merge",
+            "valid_from": "2023-07-29",
+            "valid_to": null
+          },
+          "observed_at": "2026-02-12",
+          "source_id": "senado_senadores",
+          "source_record_id": "idweb:19968",
+          "source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=6&legis=15"
+        },
+        {
+          "comparison_evidence_id": "vclc:comparison-evidence:ec5e43b1c0dd9cdb6f89e470f870a9ed",
+          "content_sha256": "b8994deec0bbc45cdcbef5d7c5395cabf30b0509706303c3d8e76058c48eebfd",
+          "evidence_role": "primary",
+          "evidence_side": "claim",
+          "exact_quote": "•   Estabelecer a rebaixa permanente do IVE de produtos\nde alimentación básica, produtos do mar, elementos\nde hixiene persoal e feminina, transporte público de\npasaxeiros, investimentos en eficiencia enerxética\ne enerxías renovábeis no ámbito doméstico e nas\npequenas e medianas empresas.",
+          "metadata": {
+            "claim_evidence_id": "claimevidence_e4d88951d953ee45da8545df557ce1e4b228903e3bc193fa447cef669eece7cc",
+            "manifesto_document_id": "manifesto_ce98faab6d2d2ab9731ae0f4cd46093ac270b2f61ed8072db5166e008af12cc3",
+            "page_end": 40,
+            "page_start": 40,
+            "quote_sha256": "460617dce10314f28c9ce99e577ced05facc3ad1e6433456115dc66f95abf04b"
+          },
+          "observed_at": "2026-08-19",
+          "source_id": "programas_partidos",
+          "source_record_id": "manifesto:b8994deec0bbc45cdcbef5d7c5395cabf30b0509706303c3d8e76058c48eebfd",
+          "source_url": "https://www.bng.gal/media/bnggaliza/files/2023/07/05/23_bng_xerais_programa.pdf"
+        },
+        {
+          "comparison_evidence_id": "vclc:comparison-evidence:92e17cb83667e7be875add5817de9f05",
+          "content_sha256": "585f6c0179d2d9ba76bf4cc796cd07bbe44a20ad3844b4fc42f5bdd3ac100c48",
+          "evidence_role": "review",
+          "evidence_side": "mapping_review",
+          "exact_quote": "La promesa enumera bienes y servicios concretos para una rebaja permanente del IVA. El registro del Senado identifica una segunda toma en consideración, esta vez de una alternativa del GPMX, bajo el mismo expediente y artículo, pero el corpus acotado no contiene su texto operativo. No se puede sustituir ese texto por coincidencia temática.",
+          "metadata": {
+            "action_direction": "unclear",
+            "action_search_scope": {},
+            "action_search_state": "not_applicable",
+            "action_substance_state": "procedural",
+            "claim_direction": "support",
+            "directional_countable": false,
+            "mapping_basis": "broad_topic_only",
+            "material_differences": [
+              "promised_goods_not_verified_in_action",
+              "tax_rate_not_verified_in_action",
+              "permanence_not_verified_in_action"
+            ],
+            "reason_codes": [
+              "exact_action_text_missing",
+              "consideration_vote_not_final_approval",
+              "competing_legislative_alternatives",
+              "topic_overlap_not_equivalence"
+            ],
+            "review_method": "explicit_evidence_review",
+            "review_version": "explicit_mapping_review_v1"
+          },
+          "observed_at": "2026-08-20T00:00:00Z",
+          "source_id": "comparison_review",
+          "source_record_id": "vclc:comparison-mapping-review:8237fb7f79ac1e628070252eb05ac6b9",
+          "source_url": null
+        }
+      ],
+      "evidence_links": [
+        "https://www.bng.gal/media/bnggaliza/files/2023/07/05/23_bng_xerais_programa.pdf",
+        "https://www.senado.es/legis15/votaciones/ses_4.xml",
+        "https://www.senado.es/web/ficopendataservlet?tipoFich=6&legis=15"
+      ],
+      "frame": {
+        "action_source_text": "Proposición de Ley por la que se modifica el apartado Uno, punto 2, del artículo 91 de la Ley 37/1992, de 28 de diciembre, del Impuesto sobre el Valor Añadido. (622/000006)",
+        "claim_source_text": "•   Estabelecer a rebaixa permanente do IVE de produtos\nde alimentación básica, produtos do mar, elementos\nde hixiene persoal e feminina, transporte público de\npasaxeiros, investimentos en eficiencia enerxética\ne enerxías renovábeis no ámbito doméstico e nas\npequenas e medianas empresas.",
+        "material_differences": [
+          "promised_goods_not_verified_in_action",
+          "tax_rate_not_verified_in_action",
+          "permanence_not_verified_in_action"
+        ],
+        "normalization_state": "reviewed_difference_only_not_fully_normalized",
+        "same_exact_frame_confirmed": false
+      },
+      "freshness": {
+        "action_corpus_cutoff": "2026-02-12",
+        "as_of_date": "2026-08-20",
+        "ranking_eligible": false,
+        "reason": "El corte de votaciones usado termina el 2026-02-12 y no representa todas las acciones posteriores posibles.",
+        "should_warn": true,
+        "tier": "stale"
+      },
+      "mapping_review": {
+        "action_direction": "unclear",
+        "action_substance_state": "procedural",
+        "actor_link_state": "reviewed_official_identity_and_affiliation",
+        "claim_direction": "support",
+        "mapping_basis": "broad_topic_only",
+        "mapping_review_id": "vclc:comparison-mapping-review:8237fb7f79ac1e628070252eb05ac6b9",
+        "mapping_state": "ambiguous",
+        "material_differences": [
+          "promised_goods_not_verified_in_action",
+          "tax_rate_not_verified_in_action",
+          "permanence_not_verified_in_action"
+        ],
+        "reason_codes": [
+          "exact_action_text_missing",
+          "consideration_vote_not_final_approval",
+          "competing_legislative_alternatives",
+          "topic_overlap_not_equivalence"
+        ],
+        "review_method": "explicit_evidence_review",
+        "review_rationale": "La promesa enumera bienes y servicios concretos para una rebaja permanente del IVA. El registro del Senado identifica una segunda toma en consideración, esta vez de una alternativa del GPMX, bajo el mismo expediente y artículo, pero el corpus acotado no contiene su texto operativo. No se puede sustituir ese texto por coincidencia temática.",
+        "review_version": "explicit_mapping_review_v1",
+        "reviewed_at": "2026-08-20T00:00:00Z"
+      },
+      "mapping_review_id": "vclc:comparison-mapping-review:8237fb7f79ac1e628070252eb05ac6b9",
+      "public_summary": "Una segunda alternativa sobre el mismo artículo del IVA fue votada, pero falta el texto exacto que permitiría compararla con la lista prometida.",
+      "reason_codes": [
+        "exact_action_text_missing",
+        "consideration_vote_not_final_approval",
+        "competing_legislative_alternatives",
+        "topic_overlap_not_equivalence"
+      ]
+    },
+    {
+      "action": {
+        "action_date": "2026-02-12",
+        "action_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion159/20260212/Votacion025/VOT_20260212114346.json",
+        "action_kind": "roll_call_vote",
+        "actor_id": "urn:vclc:actor:2abed899439f5f0863228bbc0d63cd217452e8016d90d2ae71438c7ceb5cac48",
+        "member_name": "Néstor Rego Candamil",
+        "party_actor_id": "urn:vclc:actor:b373962642c1bc636fc463024c818b9e26ffe3a9fd1698f6e97b24935d8fb8f6",
+        "responsible_capacity": "individual_legislator_roll_call",
+        "source_id": "congreso_votaciones",
+        "source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion159/20260212/Votacion025/VOT_20260212114346.json",
+        "title": "Votación de la solicitud de avocación por el Pleno de la Cámara de la deliberación y votación final del Proyecto de Ley por la que se modifican el Texto Refundido de la Ley General de derechos de las personas con discapacidad y de su inclusión social, aprobado por el Real Decreto Legislativo 1/2013, de 29 de noviembre, y la Ley 39/2006, de 14 de diciembre, de Promoción de la Autonomía Personal y Atención a las personas en situación de dependencia, para la extensión y refuerzo de los derechos de las personas con discapacidad a la inclusión, la autonomía y la accesibilidad universal conforme al artículo 49 de la Constitución Española,  presentada por el Grupo Parlamentario Junts per Catalunya.",
+        "vote_choice": "Sí"
+      },
+      "action_search": {
+        "scope": {},
+        "state": "not_applicable"
+      },
+      "actor_capacity": {
+        "action_capacity": "individual_legislator_roll_call",
+        "actor_link_state": "reviewed_official_identity_and_affiliation",
+        "assertion_capacity": "party_manifesto_publisher",
+        "attribution_unit": "party_assertion_vs_individual_representative_action",
+        "collective_party_position_inferred": false,
+        "global_cross_source_actor_merge_used": false
+      },
+      "caveat": "No comparable: ni el objeto ni el efecto institucional de las dos evidencias son equivalentes.",
+      "claim": {
+        "actor_id": "urn:vclc:actor:0e14cabbdb70e0fd35aa37bc2968cebe97c6a3b3ecacaef8d99db3da42181a74",
+        "actor_label": "BNG",
+        "claim_id": "claim_7da7c5f0e7c8f31e666412a68d0310136478a95af85e24d1cb1fc822ed329f24",
+        "claim_kind": "explicit_promise",
+        "exact_text": "•   Garantir a atención presencial sen cita previa en todas as\noficinas da Administración, facilitando a accesibilidade\naos servizos públicos cando sexa preciso.",
+        "page_end": 19,
+        "page_start": 19,
+        "promise_id": "promise_abc919e33ea6f9d837b6361cc707c32a58ee1e75f68352c21e5e54cf70f74bbc",
+        "published_date": "2023-07-05",
+        "responsible_capacity": "party_manifesto_publisher",
+        "review_status": "rule_confirmed"
+      },
+      "comparison_id": "vclc:promise-action-comparison:57ba6de80c99cbdd9d0a9dfd70e2af03",
+      "comparison_status": "not_comparable",
+      "confidence": {
+        "aggregate_rule": "minimum_required_component",
+        "aggregate_value": 0.0,
+        "components": {
+          "action_effect_quality": {
+            "reason": "Falta efecto material exacto comparable o la acción es procesal.",
+            "value": 0.0
+          },
+          "assertion_quality": {
+            "reason": "Claim rule_confirmed con cita primaria exacta y SHA-256 documental.",
+            "value": 1.0
+          },
+          "coverage_quality": {
+            "reason": "No existe búsqueda exhaustiva y completa de todas las acciones y contraevidencias posibles.",
+            "value": 0.0
+          },
+          "evidence_quality": {
+            "reason": "La evidencia oficial preservada no completa todos los eslabones necesarios para un veredicto fuerte.",
+            "value": 0.0
+          },
+          "identity_quality": {
+            "reason": "La identidad y afiliación están revisadas solo para este enlace; el actor graph sigue source-scoped y no convierte el voto individual en posición colectiva del partido.",
+            "value": 0.0
+          },
+          "mapping_quality": {
+            "reason": "El mapping no está confirmado como mismo frame exacto.",
+            "value": 0.0
+          },
+          "temporal_quality": {
+            "reason": "Assertion y acción tienen fechas observadas y la acción es posterior.",
+            "value": 1.0
+          }
+        },
+        "label": "sin_confianza_util",
+        "method": "categorical_gate_projection_v1"
+      },
+      "counterevidence": {
+        "exhaustive": false,
+        "items": [],
+        "search_state": "not_searched"
+      },
+      "coverage": {
+        "action_search_scope": {},
+        "exhaustive": false,
+        "state": "pair_review_only_not_exhaustive"
+      },
+      "directional_countable": false,
+      "evidence": [
+        {
+          "comparison_evidence_id": "vclc:comparison-evidence:4292c76ef257ca58c4e8d66a9e2a0c26",
+          "content_sha256": "4135a2723102143caefbafed0a1a8804679284dfcd4b85c03e567ea20a599fc6",
+          "evidence_role": "primary",
+          "evidence_side": "action",
+          "exact_quote": "Votación de la solicitud de avocación por el Pleno de la Cámara de la deliberación y votación final del Proyecto de Ley por la que se modifican el Texto Refundido de la Ley General de derechos de las personas con discapacidad y de su inclusión social, aprobado por el Real Decreto Legislativo 1/2013, de 29 de noviembre, y la Ley 39/2006, de 14 de diciembre, de Promoción de la Autonomía Personal y Atención a las personas en situación de dependencia, para la extensión y refuerzo de los derechos de las personas con discapacidad a la inclusión, la autonomía y la accesibilidad universal conforme al artículo 49 de la Constitución Española,  presentada por el Grupo Parlamentario Junts per Catalunya.",
+          "metadata": {
+            "group_code": "GMx",
+            "initiative_id": "congreso:leg15:derived:0d84e1bfea736ef1bb2d01b0",
+            "initiative_link_confidence": 1.0,
+            "initiative_link_method": "derived_title_key",
+            "initiative_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion159/20260212/Votacion025/VOT_20260212114346.json",
+            "member_name": "Néstor Rego Candamil",
+            "member_vote_id": 558,
+            "vote_choice": "Sí",
+            "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion159/20260212/Votacion025/VOT_20260212114346.json"
+          },
+          "observed_at": "2026-02-12",
+          "source_id": "congreso_votaciones",
+          "source_record_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion159/20260212/Votacion025/VOT_20260212114346.json",
+          "source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion159/20260212/Votacion025/VOT_20260212114346.json"
+        },
+        {
+          "comparison_evidence_id": "vclc:comparison-evidence:4bacb9b63fd0eb18726cd0d6056ccd24",
+          "content_sha256": "beb8c148faf71d142f1868089ae4813ccc08a0dc76f8f795c2b183bca72d2c07",
+          "evidence_role": "identity",
+          "evidence_side": "actor_link",
+          "exact_quote": "Néstor Rego Candamil — afiliación oficial — BNG",
+          "metadata": {
+            "claim_actor_id": "urn:vclc:actor:0e14cabbdb70e0fd35aa37bc2968cebe97c6a3b3ecacaef8d99db3da42181a74",
+            "party_actor_id": "urn:vclc:actor:b373962642c1bc636fc463024c818b9e26ffe3a9fd1698f6e97b24935d8fb8f6",
+            "registry_actor_id": "urn:vclc:actor:6e30dbe1d59ebb0ce18cafa45e069d448a3c75859ee8b62bc96c95a7d142e705",
+            "relationship_id": "urn:vclc:actor-relationship:21cd3e219796f3c531e3aad0d53042bb5e790ea29320d7553b3341c06a47e8a0",
+            "resolution_state": "source_scoped",
+            "rollcall_actor_id": "urn:vclc:actor:2abed899439f5f0863228bbc0d63cd217452e8016d90d2ae71438c7ceb5cac48",
+            "scope_note": "bounded_review_not_global_actor_merge",
+            "valid_from": "2023-08-10",
+            "valid_to": null
+          },
+          "observed_at": "2026-02-12",
+          "source_id": "congreso_diputados",
+          "source_record_id": "a8a8a7542853d57d296df28d",
+          "source_url": "https://www.congreso.es/es/opendata/diputados"
+        },
+        {
+          "comparison_evidence_id": "vclc:comparison-evidence:52f817662483ac1cef75ecb62ad1091e",
+          "content_sha256": "b8994deec0bbc45cdcbef5d7c5395cabf30b0509706303c3d8e76058c48eebfd",
+          "evidence_role": "primary",
+          "evidence_side": "claim",
+          "exact_quote": "•   Garantir a atención presencial sen cita previa en todas as\noficinas da Administración, facilitando a accesibilidade\naos servizos públicos cando sexa preciso.",
+          "metadata": {
+            "claim_evidence_id": "claimevidence_e35df8066f7c2de5cc68f1ff8528e748271d4f0c33298a0da5867f773c03b072",
+            "manifesto_document_id": "manifesto_ce98faab6d2d2ab9731ae0f4cd46093ac270b2f61ed8072db5166e008af12cc3",
+            "page_end": 19,
+            "page_start": 19,
+            "quote_sha256": "b1a6de93c5fc94a22fd475b736344fe570d4ad15ccecdb6fc1c10698ad86df52"
+          },
+          "observed_at": "2026-08-19",
+          "source_id": "programas_partidos",
+          "source_record_id": "manifesto:b8994deec0bbc45cdcbef5d7c5395cabf30b0509706303c3d8e76058c48eebfd",
+          "source_url": "https://www.bng.gal/media/bnggaliza/files/2023/07/05/23_bng_xerais_programa.pdf"
+        },
+        {
+          "comparison_evidence_id": "vclc:comparison-evidence:b588c2140f5bcff23a2974d9322fa9e4",
+          "content_sha256": "59e342206831d2a58600001181821d6a12803f01d7a8a689b49bf671cbef7183",
+          "evidence_role": "review",
+          "evidence_side": "mapping_review",
+          "exact_quote": "La promesa se refiere a atención presencial sin cita y accesibilidad de oficinas administrativas. La votación es una solicitud procesal de avocación parlamentaria de otro proyecto sobre discapacidad, dependencia y accesibilidad universal. Comparte una palabra, no el objeto ni el tipo de acción.",
+          "metadata": {
+            "action_direction": "not_applicable",
+            "action_search_scope": {},
+            "action_search_state": "not_applicable",
+            "action_substance_state": "procedural",
+            "claim_direction": "support",
+            "directional_countable": false,
+            "mapping_basis": "procedural_near_match",
+            "material_differences": [
+              "administrative_service_access_vs_disability_rights",
+              "service_delivery_vs_parliamentary_avocation"
+            ],
+            "reason_codes": [
+              "procedural_vote",
+              "different_policy_object",
+              "lexical_overlap_only"
+            ],
+            "review_method": "explicit_evidence_review",
+            "review_version": "explicit_mapping_review_v1"
+          },
+          "observed_at": "2026-08-20T00:00:00Z",
+          "source_id": "comparison_review",
+          "source_record_id": "vclc:comparison-mapping-review:9eb35a5cc1af82abedbee2c4e967809f",
+          "source_url": null
+        }
+      ],
+      "evidence_links": [
+        "https://www.bng.gal/media/bnggaliza/files/2023/07/05/23_bng_xerais_programa.pdf",
+        "https://www.congreso.es/es/opendata/diputados",
+        "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion159/20260212/Votacion025/VOT_20260212114346.json"
+      ],
+      "frame": {
+        "action_source_text": "Votación de la solicitud de avocación por el Pleno de la Cámara de la deliberación y votación final del Proyecto de Ley por la que se modifican el Texto Refundido de la Ley General de derechos de las personas con discapacidad y de su inclusión social, aprobado por el Real Decreto Legislativo 1/2013, de 29 de noviembre, y la Ley 39/2006, de 14 de diciembre, de Promoción de la Autonomía Personal y Atención a las personas en situación de dependencia, para la extensión y refuerzo de los derechos de las personas con discapacidad a la inclusión, la autonomía y la accesibilidad universal conforme al artículo 49 de la Constitución Española,  presentada por el Grupo Parlamentario Junts per Catalunya.",
+        "claim_source_text": "•   Garantir a atención presencial sen cita previa en todas as\noficinas da Administración, facilitando a accesibilidade\naos servizos públicos cando sexa preciso.",
+        "material_differences": [
+          "administrative_service_access_vs_disability_rights",
+          "service_delivery_vs_parliamentary_avocation"
+        ],
+        "normalization_state": "reviewed_difference_only_not_fully_normalized",
+        "same_exact_frame_confirmed": false
+      },
+      "freshness": {
+        "action_corpus_cutoff": "2026-02-12",
+        "as_of_date": "2026-08-20",
+        "ranking_eligible": false,
+        "reason": "El corte de votaciones usado termina el 2026-02-12 y no representa todas las acciones posteriores posibles.",
+        "should_warn": true,
+        "tier": "stale"
+      },
+      "mapping_review": {
+        "action_direction": "not_applicable",
+        "action_substance_state": "procedural",
+        "actor_link_state": "reviewed_official_identity_and_affiliation",
+        "claim_direction": "support",
+        "mapping_basis": "procedural_near_match",
+        "mapping_review_id": "vclc:comparison-mapping-review:9eb35a5cc1af82abedbee2c4e967809f",
+        "mapping_state": "human_rejected",
+        "material_differences": [
+          "administrative_service_access_vs_disability_rights",
+          "service_delivery_vs_parliamentary_avocation"
+        ],
+        "reason_codes": [
+          "procedural_vote",
+          "different_policy_object",
+          "lexical_overlap_only"
+        ],
+        "review_method": "explicit_evidence_review",
+        "review_rationale": "La promesa se refiere a atención presencial sin cita y accesibilidad de oficinas administrativas. La votación es una solicitud procesal de avocación parlamentaria de otro proyecto sobre discapacidad, dependencia y accesibilidad universal. Comparte una palabra, no el objeto ni el tipo de acción.",
+        "review_version": "explicit_mapping_review_v1",
+        "reviewed_at": "2026-08-20T00:00:00Z"
+      },
+      "mapping_review_id": "vclc:comparison-mapping-review:9eb35a5cc1af82abedbee2c4e967809f",
+      "public_summary": "El voto registrado es procesal y trata otra dimensión de accesibilidad; no permite evaluar la promesa sobre atención presencial.",
+      "reason_codes": [
+        "procedural_vote",
+        "different_policy_object",
+        "lexical_overlap_only"
+      ]
+    },
+    {
+      "action": {
+        "action_date": "2023-12-13",
+        "action_id": "url:https://www.senado.es/legis15/votaciones/ses_8_42.xml",
+        "action_kind": "roll_call_vote",
+        "actor_id": "urn:vclc:actor:95b408d6747db7f69579d9410daca892f2333c33991d261934b02a6db136c36d",
+        "member_name": "MARÍA CARMEN DA SILVA MÉNDEZ",
+        "party_actor_id": "urn:vclc:actor:cfb49809e5572f5c1f2ae5553d5f318b5f528ba9e699cca5c4781b385a5187ed",
+        "responsible_capacity": "individual_legislator_roll_call",
+        "source_id": "senado_votaciones",
+        "source_url": "https://www.senado.es/legis15/votaciones/ses_8.xml",
+        "title": "Proposición de Ley de modificación del Real Decreto Legislativo 1/2013, de 29 de noviembre, por el que se aprueba el Texto Refundido de la Ley General de derechos de las personas con discapacidad y de su inclusión social, para la asimilación legal de la valoración de las situaciones de dependencia con la calificación mínima del grado de discapacidad. (622/000015)",
+        "vote_choice": "SÍ"
+      },
+      "action_search": {
+        "scope": {},
+        "state": "not_applicable"
+      },
+      "actor_capacity": {
+        "action_capacity": "individual_legislator_roll_call",
+        "actor_link_state": "reviewed_official_identity_and_affiliation",
+        "assertion_capacity": "party_manifesto_publisher",
+        "attribution_unit": "party_assertion_vs_individual_representative_action",
+        "collective_party_position_inferred": false,
+        "global_cross_source_actor_merge_used": false
+      },
+      "caveat": "Mapeo ambiguo: relación revisada, pero no equivalencia sustantiva; no se cuenta como alineación.",
+      "claim": {
+        "actor_id": "urn:vclc:actor:0e14cabbdb70e0fd35aa37bc2968cebe97c6a3b3ecacaef8d99db3da42181a74",
+        "actor_label": "BNG",
+        "claim_id": "claim_810d40a5ac625cf15fe96b2e1383e3d82b392d17e0a2f1f13589d3f7cc58ddae",
+        "claim_kind": "explicit_promise",
+        "exact_text": "•   Estabelecer o acceso directo ao 33 % xunto co diagnóstico\npara as persoas con enfermidades neurodexenerativas.",
+        "page_end": 15,
+        "page_start": 15,
+        "promise_id": "promise_305fda46b059c587c54f528e28539f6e661b7d4449a15ffee3c6f40dfdf5cdb9",
+        "published_date": "2023-07-05",
+        "responsible_capacity": "party_manifesto_publisher",
+        "review_status": "rule_confirmed"
+      },
+      "comparison_id": "vclc:promise-action-comparison:a4b7f8886fad1af19b3e32f9aa49563a",
+      "comparison_status": "ambiguous_mapping",
+      "confidence": {
+        "aggregate_rule": "minimum_required_component",
+        "aggregate_value": 0.0,
+        "components": {
+          "action_effect_quality": {
+            "reason": "Falta efecto material exacto comparable o la acción es procesal.",
+            "value": 0.0
+          },
+          "assertion_quality": {
+            "reason": "Claim rule_confirmed con cita primaria exacta y SHA-256 documental.",
+            "value": 1.0
+          },
+          "coverage_quality": {
+            "reason": "No existe búsqueda exhaustiva y completa de todas las acciones y contraevidencias posibles.",
+            "value": 0.0
+          },
+          "evidence_quality": {
+            "reason": "La evidencia oficial preservada no completa todos los eslabones necesarios para un veredicto fuerte.",
+            "value": 0.0
+          },
+          "identity_quality": {
+            "reason": "La identidad y afiliación están revisadas solo para este enlace; el actor graph sigue source-scoped y no convierte el voto individual en posición colectiva del partido.",
+            "value": 0.0
+          },
+          "mapping_quality": {
+            "reason": "El mapping no está confirmado como mismo frame exacto.",
+            "value": 0.0
+          },
+          "temporal_quality": {
+            "reason": "Assertion y acción tienen fechas observadas y la acción es posterior.",
+            "value": 1.0
+          }
+        },
+        "label": "sin_confianza_util",
+        "method": "categorical_gate_projection_v1"
+      },
+      "counterevidence": {
+        "exhaustive": false,
+        "items": [],
+        "search_state": "not_searched"
+      },
+      "coverage": {
+        "action_search_scope": {},
+        "exhaustive": false,
+        "state": "pair_review_only_not_exhaustive"
+      },
+      "directional_countable": false,
+      "evidence": [
+        {
+          "comparison_evidence_id": "vclc:comparison-evidence:1d587cd966768fa4a6f86f172d317886",
+          "content_sha256": "91456a00d787d6a6e9a109c56137ad4218e54bd99f0d657f022490a9c0ab69b8",
+          "evidence_role": "primary",
+          "evidence_side": "action",
+          "exact_quote": "Proposición de Ley de modificación del Real Decreto Legislativo 1/2013, de 29 de noviembre, por el que se aprueba el Texto Refundido de la Ley General de derechos de las personas con discapacidad y de su inclusión social, para la asimilación legal de la valoración de las situaciones de dependencia con la calificación mínima del grado de discapacidad. (622/000015)",
+          "metadata": {
+            "group_code": "GRUPO PARLAMENTARIO PLURAL EN EL SENADO JUNTS PER CATALUNYA-COALICIÓN CANARIA-AGRUPACIÓN HERREÑA INDEPENDIENTE-BLOQUE NACIONALISTA GALEGO",
+            "initiative_id": "senado:leg15:exp:622/000015",
+            "initiative_link_confidence": 1.0,
+            "initiative_link_method": "leg_expediente_payload_exact",
+            "initiative_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=9&legis=15",
+            "member_name": "MARÍA CARMEN DA SILVA MÉNDEZ",
+            "member_vote_id": 20854,
+            "vote_choice": "SÍ",
+            "vote_event_id": "url:https://www.senado.es/legis15/votaciones/ses_8_42.xml"
+          },
+          "observed_at": "2026-02-12",
+          "source_id": "senado_votaciones",
+          "source_record_id": "url:https://www.senado.es/legis15/votaciones/ses_8_42.xml",
+          "source_url": "https://www.senado.es/legis15/votaciones/ses_8.xml"
+        },
+        {
+          "comparison_evidence_id": "vclc:comparison-evidence:66bf656c0a409a4b7dfd0f746bb64b35",
+          "content_sha256": "d3d2cf6d78e8841fcbe5a0e6b13d74473bf179c7260c3026c1dc325ee38583f9",
+          "evidence_role": "identity",
+          "evidence_side": "actor_link",
+          "exact_quote": "MARÍA CARMEN DA SILVA MÉNDEZ — afiliación oficial — BNG",
+          "metadata": {
+            "claim_actor_id": "urn:vclc:actor:0e14cabbdb70e0fd35aa37bc2968cebe97c6a3b3ecacaef8d99db3da42181a74",
+            "party_actor_id": "urn:vclc:actor:cfb49809e5572f5c1f2ae5553d5f318b5f528ba9e699cca5c4781b385a5187ed",
+            "registry_actor_id": "urn:vclc:actor:d72d976cd39783aa17567cc42ab50cfbe4bcd9a7d6f77e5f884faaec9033d51d",
+            "relationship_id": "urn:vclc:actor-relationship:96df6ae519e64b5eb12ee0054d20341725c18b77e8b8b22f3dcbcdb85a4f7b1d",
+            "resolution_state": "source_scoped",
+            "rollcall_actor_id": "urn:vclc:actor:95b408d6747db7f69579d9410daca892f2333c33991d261934b02a6db136c36d",
+            "scope_note": "bounded_review_not_global_actor_merge",
+            "valid_from": "2023-07-29",
+            "valid_to": null
+          },
+          "observed_at": "2026-02-12",
+          "source_id": "senado_senadores",
+          "source_record_id": "idweb:19968",
+          "source_url": "https://www.senado.es/web/ficopendataservlet?tipoFich=6&legis=15"
+        },
+        {
+          "comparison_evidence_id": "vclc:comparison-evidence:5e79da434e48ee4122055f4c62d918b3",
+          "content_sha256": "b8994deec0bbc45cdcbef5d7c5395cabf30b0509706303c3d8e76058c48eebfd",
+          "evidence_role": "primary",
+          "evidence_side": "claim",
+          "exact_quote": "•   Estabelecer o acceso directo ao 33 % xunto co diagnóstico\npara as persoas con enfermidades neurodexenerativas.",
+          "metadata": {
+            "claim_evidence_id": "claimevidence_d53867e3e9c460cfcbf45be3b543287f86ce76edd3dcabfedbb74b63cdc9b859",
+            "manifesto_document_id": "manifesto_ce98faab6d2d2ab9731ae0f4cd46093ac270b2f61ed8072db5166e008af12cc3",
+            "page_end": 15,
+            "page_start": 15,
+            "quote_sha256": "07e0f0e1015d4002b166bbf467e8befa79427e358c0d0ebacc5ed78b41e34433"
+          },
+          "observed_at": "2026-08-19",
+          "source_id": "programas_partidos",
+          "source_record_id": "manifesto:b8994deec0bbc45cdcbef5d7c5395cabf30b0509706303c3d8e76058c48eebfd",
+          "source_url": "https://www.bng.gal/media/bnggaliza/files/2023/07/05/23_bng_xerais_programa.pdf"
+        },
+        {
+          "comparison_evidence_id": "vclc:comparison-evidence:32f5ae30f6d6d3b0aa901b417dde3e3a",
+          "content_sha256": "4589d6deb76f6d82f2a51ca39608fde28d10039d51caf8f5499682eeaccaf722",
+          "evidence_role": "review",
+          "evidence_side": "mapping_review",
+          "exact_quote": "La promesa pide acceso directo al 33 % junto al diagnóstico para personas con enfermedades neurodegenerativas. La toma en consideración votada trata de equiparar una valoración de dependencia con un grado mínimo de discapacidad. Son una fase procesal, mecanismos y poblaciones distintos. El voto favorable a tramitar una iniciativa de tercero no prueba que el actor reformulara, cumpliera o contradijera su promesa.",
+          "metadata": {
+            "action_direction": "unclear",
+            "action_search_scope": {},
+            "action_search_state": "not_applicable",
+            "action_substance_state": "procedural",
+            "claim_direction": "support",
+            "directional_countable": false,
+            "mapping_basis": "reviewed_related_measure",
+            "material_differences": [
+              "diagnosis_vs_dependency_assessment",
+              "neurodegenerative_disease_vs_dependency_population"
+            ],
+            "reason_codes": [
+              "different_eligibility_trigger",
+              "different_target_population",
+              "consideration_vote_not_final_approval",
+              "third_party_initiative_not_actor_reframing"
+            ],
+            "review_method": "explicit_evidence_review",
+            "review_version": "explicit_mapping_review_v1"
+          },
+          "observed_at": "2026-08-20T00:00:00Z",
+          "source_id": "comparison_review",
+          "source_record_id": "vclc:comparison-mapping-review:0049f0894ab125baedf7eea21d8472c9",
+          "source_url": null
+        }
+      ],
+      "evidence_links": [
+        "https://www.bng.gal/media/bnggaliza/files/2023/07/05/23_bng_xerais_programa.pdf",
+        "https://www.senado.es/legis15/votaciones/ses_8.xml",
+        "https://www.senado.es/web/ficopendataservlet?tipoFich=6&legis=15"
+      ],
+      "frame": {
+        "action_source_text": "Proposición de Ley de modificación del Real Decreto Legislativo 1/2013, de 29 de noviembre, por el que se aprueba el Texto Refundido de la Ley General de derechos de las personas con discapacidad y de su inclusión social, para la asimilación legal de la valoración de las situaciones de dependencia con la calificación mínima del grado de discapacidad. (622/000015)",
+        "claim_source_text": "•   Estabelecer o acceso directo ao 33 % xunto co diagnóstico\npara as persoas con enfermidades neurodexenerativas.",
+        "material_differences": [
+          "diagnosis_vs_dependency_assessment",
+          "neurodegenerative_disease_vs_dependency_population"
+        ],
+        "normalization_state": "reviewed_difference_only_not_fully_normalized",
+        "same_exact_frame_confirmed": false
+      },
+      "freshness": {
+        "action_corpus_cutoff": "2026-02-12",
+        "as_of_date": "2026-08-20",
+        "ranking_eligible": false,
+        "reason": "El corte de votaciones usado termina el 2026-02-12 y no representa todas las acciones posteriores posibles.",
+        "should_warn": true,
+        "tier": "stale"
+      },
+      "mapping_review": {
+        "action_direction": "unclear",
+        "action_substance_state": "procedural",
+        "actor_link_state": "reviewed_official_identity_and_affiliation",
+        "claim_direction": "support",
+        "mapping_basis": "reviewed_related_measure",
+        "mapping_review_id": "vclc:comparison-mapping-review:0049f0894ab125baedf7eea21d8472c9",
+        "mapping_state": "ambiguous",
+        "material_differences": [
+          "diagnosis_vs_dependency_assessment",
+          "neurodegenerative_disease_vs_dependency_population"
+        ],
+        "reason_codes": [
+          "different_eligibility_trigger",
+          "different_target_population",
+          "consideration_vote_not_final_approval",
+          "third_party_initiative_not_actor_reframing"
+        ],
+        "review_method": "explicit_evidence_review",
+        "review_rationale": "La promesa pide acceso directo al 33 % junto al diagnóstico para personas con enfermedades neurodegenerativas. La toma en consideración votada trata de equiparar una valoración de dependencia con un grado mínimo de discapacidad. Son una fase procesal, mecanismos y poblaciones distintos. El voto favorable a tramitar una iniciativa de tercero no prueba que el actor reformulara, cumpliera o contradijera su promesa.",
+        "review_version": "explicit_mapping_review_v1",
+        "reviewed_at": "2026-08-20T00:00:00Z"
+      },
+      "mapping_review_id": "vclc:comparison-mapping-review:0049f0894ab125baedf7eea21d8472c9",
+      "public_summary": "La toma en consideración aborda una vía relacionada de reconocimiento de discapacidad, pero no aprueba la medida final ni coincide con la vía diagnóstica o la población exacta de la promesa.",
+      "reason_codes": [
+        "different_eligibility_trigger",
+        "different_target_population",
+        "consideration_vote_not_final_approval",
+        "third_party_initiative_not_actor_reframing"
+      ]
+    },
+    {
+      "action": null,
+      "action_search": {
+        "scope": {
+          "candidate_events_scanned": 97,
+          "candidate_rows_sha256": "1b8e4e8e982edf2985a5e184395331d3271ae7a0d055eb9d6a9f3d509dbadb0a",
+          "candidate_vote_rows_scanned": 97,
+          "date_from": "2023-07-05",
+          "date_to": "2026-02-12",
+          "expected_matching_events": 0,
+          "matching_event_ids": [],
+          "matching_policy": "literal_terms_then_explicit_evidence_review",
+          "member_names": [
+            "MARÍA CARMEN DA SILVA MÉNDEZ",
+            "Néstor Rego Candamil"
+          ],
+          "result_state": "no_reviewed_action_found",
+          "search_terms": [
+            "AP-9",
+            "AP 9",
+            "AP-53",
+            "AP 53"
+          ],
+          "source_tables": [
+            "parl_vote_events",
+            "parl_vote_member_votes"
+          ]
+        },
+        "state": "no_reviewed_action_found"
+      },
+      "actor_capacity": {
+        "action_capacity": null,
+        "actor_link_state": "claim_actor_only_no_action",
+        "assertion_capacity": "party_manifesto_publisher",
+        "attribution_unit": "party_assertion_bounded_action_search",
+        "collective_party_position_inferred": false,
+        "global_cross_source_actor_merge_used": false
+      },
+      "caveat": "Evidencia insuficiente: ausencia de acción vinculada no equivale a promesa incumplida.",
+      "claim": {
+        "actor_id": "urn:vclc:actor:0e14cabbdb70e0fd35aa37bc2968cebe97c6a3b3ecacaef8d99db3da42181a74",
+        "actor_label": "BNG",
+        "claim_id": "claim_8c34c8252fed8dd130a66dac7ef9233394d4d33ef607a9b5542a1ca2f72d09a5",
+        "claim_kind": "explicit_promise",
+        "exact_text": "•   Traspaso AP-9 (Ferrol-A Coruña-Vigo) e AP-\n53 (Santiago-Lalín) e nacionalización destas\ninfraestruturas para acabar co espolio económico que\nrepresentan actualmente.",
+        "page_end": 12,
+        "page_start": 12,
+        "promise_id": "promise_2a3d64fe7daea0caa2cb79ad8e8c1d1620ac28b7cbbd4b26d60e2072fb04a4d1",
+        "published_date": "2023-07-05",
+        "responsible_capacity": "party_manifesto_publisher",
+        "review_status": "rule_confirmed"
+      },
+      "comparison_id": "vclc:promise-action-comparison:fe9c762c4a5c7fbf8cb9e2728ea34790",
+      "comparison_status": "insufficient_evidence",
+      "confidence": {
+        "aggregate_rule": "minimum_required_component",
+        "aggregate_value": 0.0,
+        "components": {
+          "action_effect_quality": {
+            "reason": "No se localizó acción revisada dentro del alcance acotado.",
+            "value": 0.0
+          },
+          "assertion_quality": {
+            "reason": "Claim rule_confirmed con cita primaria exacta y SHA-256 documental.",
+            "value": 1.0
+          },
+          "coverage_quality": {
+            "reason": "No existe búsqueda exhaustiva y completa de todas las acciones y contraevidencias posibles.",
+            "value": 0.0
+          },
+          "evidence_quality": {
+            "reason": "La evidencia oficial preservada no completa todos los eslabones necesarios para un veredicto fuerte.",
+            "value": 0.0
+          },
+          "identity_quality": {
+            "reason": "No existe actor de acción en la assessment acotada.",
+            "value": 0.0
+          },
+          "mapping_quality": {
+            "reason": "El mapping no está confirmado como mismo frame exacto.",
+            "value": 0.0
+          },
+          "temporal_quality": {
+            "reason": "No existe fecha de acción porque no se localizó una acción revisada.",
+            "value": 0.0
+          }
+        },
+        "label": "sin_confianza_util",
+        "method": "categorical_gate_projection_v1"
+      },
+      "counterevidence": {
+        "exhaustive": false,
+        "items": [],
+        "search_state": "searched_bounded_scope"
+      },
+      "coverage": {
+        "action_search_scope": {
+          "candidate_events_scanned": 97,
+          "candidate_rows_sha256": "1b8e4e8e982edf2985a5e184395331d3271ae7a0d055eb9d6a9f3d509dbadb0a",
+          "candidate_vote_rows_scanned": 97,
+          "date_from": "2023-07-05",
+          "date_to": "2026-02-12",
+          "expected_matching_events": 0,
+          "matching_event_ids": [],
+          "matching_policy": "literal_terms_then_explicit_evidence_review",
+          "member_names": [
+            "MARÍA CARMEN DA SILVA MÉNDEZ",
+            "Néstor Rego Candamil"
+          ],
+          "result_state": "no_reviewed_action_found",
+          "search_terms": [
+            "AP-9",
+            "AP 9",
+            "AP-53",
+            "AP 53"
+          ],
+          "source_tables": [
+            "parl_vote_events",
+            "parl_vote_member_votes"
+          ]
+        },
+        "exhaustive": false,
+        "state": "searched_bounded_scope"
+      },
+      "directional_countable": false,
+      "evidence": [
+        {
+          "comparison_evidence_id": "vclc:comparison-evidence:cce4e3602b0df3a3513b05a1c02b38df",
+          "content_sha256": "b8994deec0bbc45cdcbef5d7c5395cabf30b0509706303c3d8e76058c48eebfd",
+          "evidence_role": "primary",
+          "evidence_side": "claim",
+          "exact_quote": "•   Traspaso AP-9 (Ferrol-A Coruña-Vigo) e AP-\n53 (Santiago-Lalín) e nacionalización destas\ninfraestruturas para acabar co espolio económico que\nrepresentan actualmente.",
+          "metadata": {
+            "claim_evidence_id": "claimevidence_9d6e5f0ee400afea08ba7ad1c1aad0f6ccc7106e1a0a1c2e6fcdcc1e90e44545",
+            "manifesto_document_id": "manifesto_ce98faab6d2d2ab9731ae0f4cd46093ac270b2f61ed8072db5166e008af12cc3",
+            "page_end": 12,
+            "page_start": 12,
+            "quote_sha256": "19ee5b7c97fc3f834949330a5c58f2217d2e84eb1161f9adede08ae175bb5736"
+          },
+          "observed_at": "2026-08-19",
+          "source_id": "programas_partidos",
+          "source_record_id": "manifesto:b8994deec0bbc45cdcbef5d7c5395cabf30b0509706303c3d8e76058c48eebfd",
+          "source_url": "https://www.bng.gal/media/bnggaliza/files/2023/07/05/23_bng_xerais_programa.pdf"
+        },
+        {
+          "comparison_evidence_id": "vclc:comparison-evidence:4f4d7d7fc397295f0519f72b5a4a4090",
+          "content_sha256": "00dd2258ace1e340e7349be4f5a56f151220ef4bf6b8c96cb165e987a42dad48",
+          "evidence_role": "review",
+          "evidence_side": "mapping_review",
+          "exact_quote": "No hay una acción posterior explícitamente revisada y vinculada a esta promesa dentro del recorte de votaciones cargado. La ausencia en este corpus no demuestra inacción ni incumplimiento.",
+          "metadata": {
+            "action_direction": "not_applicable",
+            "action_search_scope": {
+              "candidate_events_scanned": 97,
+              "candidate_rows_sha256": "1b8e4e8e982edf2985a5e184395331d3271ae7a0d055eb9d6a9f3d509dbadb0a",
+              "candidate_vote_rows_scanned": 97,
+              "date_from": "2023-07-05",
+              "date_to": "2026-02-12",
+              "expected_matching_events": 0,
+              "matching_event_ids": [],
+              "matching_policy": "literal_terms_then_explicit_evidence_review",
+              "member_names": [
+                "MARÍA CARMEN DA SILVA MÉNDEZ",
+                "Néstor Rego Candamil"
+              ],
+              "result_state": "no_reviewed_action_found",
+              "search_terms": [
+                "AP-9",
+                "AP 9",
+                "AP-53",
+                "AP 53"
+              ],
+              "source_tables": [
+                "parl_vote_events",
+                "parl_vote_member_votes"
+              ]
+            },
+            "action_search_state": "no_reviewed_action_found",
+            "action_substance_state": "not_applicable",
+            "claim_direction": "support",
+            "directional_countable": false,
+            "mapping_basis": "bounded_search_no_reviewed_action",
+            "material_differences": [
+              "action_not_observed_in_bounded_scope"
+            ],
+            "reason_codes": [
+              "no_reviewed_action_in_bounded_scope",
+              "absence_not_nonfulfilment"
+            ],
+            "review_method": "explicit_evidence_review",
+            "review_version": "explicit_mapping_review_v1"
+          },
+          "observed_at": "2026-08-20T00:00:00Z",
+          "source_id": "comparison_review",
+          "source_record_id": "vclc:comparison-mapping-review:e98b67119e9852a2c2488f3c924c7d97",
+          "source_url": null
+        }
+      ],
+      "evidence_links": [
+        "https://www.bng.gal/media/bnggaliza/files/2023/07/05/23_bng_xerais_programa.pdf"
+      ],
+      "frame": {
+        "action_source_text": null,
+        "claim_source_text": "•   Traspaso AP-9 (Ferrol-A Coruña-Vigo) e AP-\n53 (Santiago-Lalín) e nacionalización destas\ninfraestruturas para acabar co espolio económico que\nrepresentan actualmente.",
+        "material_differences": [
+          "action_not_observed_in_bounded_scope"
+        ],
+        "normalization_state": "reviewed_difference_only_not_fully_normalized",
+        "same_exact_frame_confirmed": false
+      },
+      "freshness": {
+        "action_corpus_cutoff": "2026-02-12",
+        "as_of_date": "2026-08-20",
+        "ranking_eligible": false,
+        "reason": "El corte de votaciones usado termina el 2026-02-12 y no representa todas las acciones posteriores posibles.",
+        "should_warn": true,
+        "tier": "stale"
+      },
+      "mapping_review": {
+        "action_direction": "not_applicable",
+        "action_substance_state": "not_applicable",
+        "actor_link_state": "claim_actor_only_no_action",
+        "claim_direction": "support",
+        "mapping_basis": "bounded_search_no_reviewed_action",
+        "mapping_review_id": "vclc:comparison-mapping-review:e98b67119e9852a2c2488f3c924c7d97",
+        "mapping_state": "needs_context",
+        "material_differences": [
+          "action_not_observed_in_bounded_scope"
+        ],
+        "reason_codes": [
+          "no_reviewed_action_in_bounded_scope",
+          "absence_not_nonfulfilment"
+        ],
+        "review_method": "explicit_evidence_review",
+        "review_rationale": "No hay una acción posterior explícitamente revisada y vinculada a esta promesa dentro del recorte de votaciones cargado. La ausencia en este corpus no demuestra inacción ni incumplimiento.",
+        "review_version": "explicit_mapping_review_v1",
+        "reviewed_at": "2026-08-20T00:00:00Z"
+      },
+      "mapping_review_id": "vclc:comparison-mapping-review:e98b67119e9852a2c2488f3c924c7d97",
+      "public_summary": "Todavía no hay una acción posterior revisada en este recorte que permita evaluar el traspaso o la nacionalización de la AP-9 y la AP-53.",
+      "reason_codes": [
+        "no_reviewed_action_in_bounded_scope",
+        "absence_not_nonfulfilment"
+      ]
+    }
+  ],
+  "methodology": {
+    "contract_path": "docs/method/comparison-engine-v1.md",
+    "directional_verdict_gate": "aligned/conflicted require explicit exact-measure review, clear directions, substantive action, and primary evidence",
+    "mapping_review_version": "explicit_mapping_review_v1",
+    "method_version": "explicit_reviewed_mapping_v1",
+    "topic_overlap_is_proof": false
+  },
+  "public_domain_information_policy": "retain_official_public_identity_exclude_only_secrets_private_session_state_and_workstation_traces",
+  "real_data_only": true,
+  "release_id": "vclc:comparison-release:ea65f3b8104dd678cb7ebce724b78f86",
+  "scale_contract": {
+    "artifact_set_atomic": false,
+    "million_row_physical_run_proven": false,
+    "per_file_atomic_replacement": true,
+    "source_lookup": "bulk indexed selection via json_each sets",
+    "write_mode": "bounded executemany batches"
+  },
+  "schema_version": "promise_action_comparison_v1",
+  "semantic_sha256": "7b37c75c836a0a85c0aab70b7165a5ce005cef320c22c49e34ec650969691b19",
+  "snapshot_date": "2026-08-20",
+  "status_counts": {
+    "ambiguous_mapping": 3,
+    "insufficient_evidence": 1,
+    "not_comparable": 1
+  },
+  "synthetic_or_mock": false
+}

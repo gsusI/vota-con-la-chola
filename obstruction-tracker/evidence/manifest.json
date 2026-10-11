@@ -6,18 +6,18 @@
   },
   "summary": {
     "files_total": 119,
-    "files_sanitized": 7,
-    "source_bytes_total": 2471720,
-    "public_bytes_total": 2471778
+    "files_sanitized": 12,
+    "source_bytes_total": 2490309,
+    "public_bytes_total": 2490361
   },
   "files": [
     {
       "source_path": "docs/etl/e2e-scrape-load-tracker.md",
       "public_file": "cfa99b5612061641-e2e-scrape-load-tracker.md.txt",
-      "source_bytes": 1317391,
-      "public_bytes": 1317391,
-      "source_sha256": "9d0016dfe878d659adbb52a4db0beb8d53a289fea41dc07d4be5206392b6c4a2",
-      "public_sha256": "0893262d99b28cafe831f0ef6e035bc74ce7a05ef52d7267fd71adefda471332",
+      "source_bytes": 1335980,
+      "public_bytes": 1335976,
+      "source_sha256": "2c4bcd749a099f3cfa49cd70a8f194eb29c1d60c7e47c8913134f86f97be876f",
+      "public_sha256": "d0e5a74631aa6f393225fb83d41e829eda520df8ccd1e92ab124468270410fcf",
       "sanitized": true,
       "official_public_information_retained": true
     },
@@ -705,10 +705,10 @@
       "source_path": "docs/etl/sprints/AI-OPS-27/evidence/senado_tail_daemon_real_20260222T103548Z/_stop_summary.json",
       "public_file": "8c486dc3fc726067-_stop_summary.json.txt",
       "source_bytes": 186,
-      "public_bytes": 186,
+      "public_bytes": 187,
       "source_sha256": "7ec791330abfbeb6ddeb42a67b0208cbcbd347d2c4798f926cfe7377757c11d2",
-      "public_sha256": "7ec791330abfbeb6ddeb42a67b0208cbcbd347d2c4798f926cfe7377757c11d2",
-      "sanitized": false,
+      "public_sha256": "365229a2810b490a9cd170416bc5f813bdd8c29ecdc7e5b9e8d2808edb5f1b0d",
+      "sanitized": true,
       "official_public_information_retained": true
     },
     {
@@ -785,9 +785,9 @@
       "source_path": "docs/etl/sprints/AI-OPS-296/evidence/ree_esios_curl_headers_latest.txt",
       "public_file": "b11c10445d76fe04-ree_esios_curl_headers_latest.txt.txt",
       "source_bytes": 821,
-      "public_bytes": 673,
+      "public_bytes": 671,
       "source_sha256": "ae74c15df5feb158408c02018e3be35fd5cfe83cb9042223d3d0e8b0372f48cd",
-      "public_sha256": "8164b8be4fc65a5fb1f1d387974517d9f6cc67125b5114c6300b4aeaf071aebe",
+      "public_sha256": "dacf0b07158fd451fd5a45f9d44e105974690bdc549a689549bcc99e7cd17a41",
       "sanitized": true,
       "official_public_information_retained": true
     },
@@ -965,10 +965,10 @@
       "source_path": "docs/etl/sprints/AI-OPS-309/evidence/senado_manual_capture_validity_20260228T233500Z.rc",
       "public_file": "9533cb149e618f60-senado_manual_capture_validity_20260228T233500Z.rc.txt",
       "source_bytes": 1,
-      "public_bytes": 1,
+      "public_bytes": 2,
       "source_sha256": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a",
-      "public_sha256": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a",
-      "sanitized": false,
+      "public_sha256": "7de1555df0c2700329e815b93b32c571c3ea54dc967b89e81ab73b9972b72d1d",
+      "sanitized": true,
       "official_public_information_retained": true
     },
     {
@@ -1035,20 +1035,20 @@
       "source_path": "docs/etl/sprints/AI-OPS-553/evidence/congreso_vote_event_url_403_body_20260308T180003Z.html",
       "public_file": "597533b7b30b9677-congreso_vote_event_url_403_body_20260308T180003Z.html.txt",
       "source_bytes": 496,
-      "public_bytes": 496,
+      "public_bytes": 495,
       "source_sha256": "eb2907b0c8b9f0812c650a3692e8e51ae61386b5f8a699bfa66db4bd9fe9ae27",
-      "public_sha256": "eb2907b0c8b9f0812c650a3692e8e51ae61386b5f8a699bfa66db4bd9fe9ae27",
-      "sanitized": false,
+      "public_sha256": "269d2b03dccd9de793c219f3626f6d97ada206e37aaafffe8bfe6d25ee3b7128",
+      "sanitized": true,
       "official_public_information_retained": true
     },
     {
       "source_path": "docs/etl/sprints/AI-OPS-553/evidence/congreso_vote_event_url_403_headers_20260308T180003Z.txt",
       "public_file": "bb9392eba6421354-congreso_vote_event_url_403_headers_20260308T180003Z.txt.txt",
       "source_bytes": 294,
-      "public_bytes": 283,
+      "public_bytes": 281,
       "source_sha256": "653b09be60b7ee1a9b2c3446f1c377689011802238681296d6a0dc5dc826ec80",
-      "public_sha256": "1c93f28d8251669bafc0f56d3cfb2fb4a53035dc45cfe48724152d8bfb99108e",
-      "sanitized": false,
+      "public_sha256": "3920b9df346395479fe354a170e11ba2dae389fcd9e4e2bf6aee0b46588bf35d",
+      "sanitized": true,
       "official_public_information_retained": true
     },
     {
@@ -1175,10 +1175,10 @@
       "source_path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/ree-demanda-incapsula-block-20260812.html",
       "public_file": "35f446dc07820946-ree-demanda-incapsula-block-20260812.html.txt",
       "source_bytes": 860,
-      "public_bytes": 860,
+      "public_bytes": 861,
       "source_sha256": "87e6df31220106a7cb55c5cb5359c5f429c2e010bd245d307fa9b418af18d73d",
-      "public_sha256": "87e6df31220106a7cb55c5cb5359c5f429c2e010bd245d307fa9b418af18d73d",
-      "sanitized": false,
+      "public_sha256": "a571fddac112c4c55f006a1625d0fcd42fc96442f1d14599ba96cddc746f3388",
+      "sanitized": true,
       "official_public_information_retained": true
     },
     {

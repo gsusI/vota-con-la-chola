@@ -1,7 +1,7 @@
 {
   "meta": {
     "schema_version": "obstruction_tracker_v2",
-    "generated_at": "2026-08-19T22:50:48+00:00",
+    "generated_at": "2026-08-29T21:02:50+00:00",
     "source_snapshot_generated_at": "2026-08-12T11:09:08+00:00",
     "status_json_path": "/explorer-sources/data/status.json",
     "status_json_evidence_path": "ui/gh-pages-next/public/explorer-sources/data/status.json",
@@ -9,11 +9,11 @@
     "readiness_json_path": "etl/data/published/scale-readiness-latest.json",
     "repo_blob_base": "https://github.com/gsusI/vota-con-la-chola/blob/main",
     "freshness": {
-      "tier": "fresh",
-      "label": "reciente",
-      "should_warn": false,
-      "data_age_days": 7,
-      "detail": "reciente · sin advertencia de antiguedad"
+      "tier": "aging",
+      "label": "vigente",
+      "should_warn": true,
+      "data_age_days": 17,
+      "detail": "vigente · con advertencia de antiguedad (17 dias) por no refresco reciente"
     }
   },
   "policy": {
@@ -242,7 +242,7 @@
         "status": "r1_numeric_gate_passed_representativeness_and_ocr_quality_open",
         "current_real_rows": 111408,
         "target_real_rows": 1000000,
-        "next_action": "Complete and validate all 40 real human OCR reviews without invented labels. Add representative source, format, size, language, scan and corruption strata plus cost per 1000; the numeric 100000-document gate already passes but the diversity gate does not. Replicate and clean-restore the full 108139-object text CAS from a durable raw origin. Retry only the seven failed exact-URL archive variants with a new lever and close the 51 historical provenance gaps only from byte-identical immutable evidence or an exact primary-source manifest. Then scale toward one million through bounded official-host and date cohorts with the same queue, manifest, recovery and correction contracts."
+        "next_action": "Complete and validate all 40 real human OCR reviews without invented labels. Add representative source, format, size, language, scan and corruption strata; the numeric 100000-document inventory gate and local native/OCR economics per 1000 pass. Fresh acquisition passes for 10000 real official objects across BOE and Parlamento de Andalucia. The exact source-universe gate proves only 90121 HTTPS URLs currently have both implemented semantic contracts and clean physical host evidence, so acquire at least 9879 additional contract-valid official HTTPS URLs before preparing the numeric 100000 cohort. Implement the 28-URL Moncloa semantic contract first, then expand healthy sources or use a genuinely new lever on a blocked source; do not repeat blocker probes without one. Exercise durable request events, explicit host budgets, redirect refusal and host-fair priority on the next cold cohort, and bind real monetary meter/provider rates. Replicate and clean-restore the full 108139-object text CAS from a durable raw origin. Retry only the seven failed exact-URL archive variants with a new lever and close the 51 historical provenance gaps only from byte-identical evidence or an exact primary-source manifest. Then scale toward one million through bounded official-host and date cohorts with the same queue, manifest, recovery and correction contracts."
       },
       {
         "id": "representative_integrity_analysis",
