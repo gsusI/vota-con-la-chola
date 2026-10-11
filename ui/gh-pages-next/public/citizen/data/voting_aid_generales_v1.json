@@ -1,7 +1,7 @@
 {
  "meta": {
   "schema_version": "voting_aid_snapshot_v1",
-  "generated_at": "2026-10-11T20:37:50+00:00",
+  "generated_at": "2026-10-11T20:42:59+00:00",
   "election": "generales",
   "legislature": "15",
   "institution": "Congreso de los Diputados",
@@ -19,20 +19,20 @@
   "votes_first_date": "2024-02-27",
   "votes_last_date": "2026-09-22",
   "quality": {
-   "statements_total": 32,
-   "votes_total": 39,
+   "statements_total": 33,
+   "votes_total": 41,
    "votes_missing": [],
-   "cells_total": 384,
+   "cells_total": 396,
    "cells_by_position": {
     "abstain": 29,
-    "agree": 213,
-    "disagree": 131,
-    "mixed": 9,
+    "agree": 215,
+    "disagree": 140,
+    "mixed": 10,
     "no_data": 2
    },
    "unmapped_member_votes": {
     "Francisco Javier Ortega Smith-Molina": 2,
-    "José Luis Ábalos Meco": 31,
+    "José Luis Ábalos Meco": 33,
     "Àgueda Micó Micó": 17
    },
    "direction_balance": {
@@ -42,7 +42,7 @@
     ],
     "agree_sides_only_with": {
      "psoe": 14,
-     "pp": 12
+     "pp": 13
     }
    }
   },
@@ -2562,6 +2562,191 @@
        "yes": 1,
        "no": 0,
        "abstain": 0,
+       "not_voting": 0
+      }
+     }
+    }
+   ]
+  },
+  {
+   "statement_id": "energia-pacto-verde",
+   "concern_id": "energia",
+   "text": "España debería pedir que se rebajen los objetivos climáticos del Pacto Verde Europeo.",
+   "context": "Proposición no de ley del PSOE en defensa del Pacto Verde Europeo; no tiene efecto legal, expresa la posición de la Cámara.",
+   "cells": {
+    "psoe": {
+     "position": "disagree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "pp": {
+     "position": "agree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "vox": {
+     "position": "agree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "sumar": {
+     "position": "disagree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "podemos": {
+     "position": "disagree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "erc": {
+     "position": "disagree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "junts": {
+     "position": "disagree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "bildu": {
+     "position": "disagree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "pnv": {
+     "position": "disagree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "bng": {
+     "position": "disagree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "cc": {
+     "position": "disagree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "upn": {
+     "position": "abstain",
+     "votes_with_data": 1,
+     "votes_total": 1
+    }
+   },
+   "votes": [
+    {
+     "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion111/20250514/Votacion001/VOT_20250514165626.json",
+     "found": true,
+     "vote_date": "2025-05-14",
+     "title": "Proposición no de Ley del Grupo Parlamentario Socialista, en defensa del Pacto Verde europeo.\n",
+     "subgroup": "",
+     "totals": {
+      "yes": 175,
+      "no": 169,
+      "abstain": 1
+     },
+     "agree_vote": "No",
+     "note": "Proposición no de ley del PSOE en defensa del Pacto Verde Europeo (aprobada); votar No es rechazar esa defensa.",
+     "text_url": null,
+     "source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion111/20250514/Votacion001/VOT_20250514165626.json",
+     "explorer_member_votes": "../explorer/?t=parl_vote_member_votes&wc=vote_event_id&wv=url%3Ahttps%3A%2F%2Fwww.congreso.es%2Fwebpublica%2Fopendata%2Fvotaciones%2FLeg15%2FSesion111%2F20250514%2FVotacion001%2FVOT_20250514165626.json",
+     "party_votes": {
+      "psoe": {
+       "choice": "Sí",
+       "position": "disagree",
+       "yes": 119,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 1
+      },
+      "pp": {
+       "choice": "No",
+       "position": "agree",
+       "yes": 0,
+       "no": 137,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "vox": {
+       "choice": "No",
+       "position": "agree",
+       "yes": 0,
+       "no": 32,
+       "abstain": 0,
+       "not_voting": 1
+      },
+      "sumar": {
+       "choice": "Sí",
+       "position": "disagree",
+       "yes": 25,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 2
+      },
+      "podemos": {
+       "choice": "Sí",
+       "position": "disagree",
+       "yes": 4,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "erc": {
+       "choice": "Sí",
+       "position": "disagree",
+       "yes": 7,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "junts": {
+       "choice": "Sí",
+       "position": "disagree",
+       "yes": 7,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "bildu": {
+       "choice": "Sí",
+       "position": "disagree",
+       "yes": 6,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "pnv": {
+       "choice": "Sí",
+       "position": "disagree",
+       "yes": 5,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "bng": {
+       "choice": "Sí",
+       "position": "disagree",
+       "yes": 1,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "cc": {
+       "choice": "Sí",
+       "position": "disagree",
+       "yes": 1,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "upn": {
+       "choice": "Abstención",
+       "position": "abstain",
+       "yes": 0,
+       "no": 0,
+       "abstain": 1,
        "not_voting": 0
       }
      }
@@ -6662,70 +6847,185 @@
    "statement_id": "exterior-armas-israel",
    "concern_id": null,
    "text": "España debería prohibir la compraventa de armas con Israel.",
-   "context": "El decreto incluye un embargo de armas a Israel y otras medidas de apoyo a la población palestina.",
+   "context": "La proposición de 2025 crea la figura del embargo automático de transferencias de armas; el decreto de 2025 lo aplica a Israel junto a otras medidas de apoyo a la población palestina.",
    "cells": {
     "psoe": {
      "position": "agree",
-     "votes_with_data": 1,
-     "votes_total": 1
+     "votes_with_data": 2,
+     "votes_total": 2
     },
     "pp": {
      "position": "disagree",
-     "votes_with_data": 1,
-     "votes_total": 1
+     "votes_with_data": 2,
+     "votes_total": 2
     },
     "vox": {
      "position": "disagree",
-     "votes_with_data": 1,
-     "votes_total": 1
+     "votes_with_data": 2,
+     "votes_total": 2
     },
     "sumar": {
      "position": "agree",
-     "votes_with_data": 1,
-     "votes_total": 1
+     "votes_with_data": 2,
+     "votes_total": 2
     },
     "podemos": {
      "position": "agree",
-     "votes_with_data": 1,
-     "votes_total": 1
+     "votes_with_data": 2,
+     "votes_total": 2
     },
     "erc": {
      "position": "agree",
-     "votes_with_data": 1,
-     "votes_total": 1
+     "votes_with_data": 2,
+     "votes_total": 2
     },
     "junts": {
      "position": "agree",
-     "votes_with_data": 1,
-     "votes_total": 1
+     "votes_with_data": 2,
+     "votes_total": 2
     },
     "bildu": {
      "position": "agree",
-     "votes_with_data": 1,
-     "votes_total": 1
+     "votes_with_data": 2,
+     "votes_total": 2
     },
     "pnv": {
      "position": "agree",
-     "votes_with_data": 1,
-     "votes_total": 1
+     "votes_with_data": 2,
+     "votes_total": 2
     },
     "bng": {
      "position": "agree",
-     "votes_with_data": 1,
-     "votes_total": 1
+     "votes_with_data": 2,
+     "votes_total": 2
     },
     "cc": {
      "position": "agree",
-     "votes_with_data": 1,
-     "votes_total": 1
+     "votes_with_data": 2,
+     "votes_total": 2
     },
     "upn": {
-     "position": "abstain",
-     "votes_with_data": 1,
-     "votes_total": 1
+     "position": "mixed",
+     "votes_with_data": 2,
+     "votes_total": 2
     }
    },
    "votes": [
+    {
+     "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion112/20250520/Votacion002/VOT_20250520203911.json",
+     "found": true,
+     "vote_date": "2025-05-20",
+     "title": "Proposición de Ley de los Grupos Parlamentarios Plurinacional SUMAR y Mixto, por la que se reforma la Ley 53/2007, de 28 de diciembre, sobre el control del comercio exterior de material de defensa y de doble uso, introduciendo la figura del embargo y su régimen jurídico.",
+     "subgroup": "",
+     "totals": {
+      "yes": 176,
+      "no": 171,
+      "abstain": 0
+     },
+     "agree_vote": "Sí",
+     "note": "Toma en consideración de la proposición de SUMAR y Mixto que crea el embargo de armas en la ley de comercio exterior de material de defensa, citando Gaza (aprobada).",
+     "text_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-138-1.PDF",
+     "source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion112/20250520/Votacion002/VOT_20250520203911.json",
+     "explorer_member_votes": "../explorer/?t=parl_vote_member_votes&wc=vote_event_id&wv=url%3Ahttps%3A%2F%2Fwww.congreso.es%2Fwebpublica%2Fopendata%2Fvotaciones%2FLeg15%2FSesion112%2F20250520%2FVotacion002%2FVOT_20250520203911.json",
+     "party_votes": {
+      "psoe": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 118,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 2
+      },
+      "pp": {
+       "choice": "No",
+       "position": "disagree",
+       "yes": 0,
+       "no": 137,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "vox": {
+       "choice": "No",
+       "position": "disagree",
+       "yes": 0,
+       "no": 33,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "sumar": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 26,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 1
+      },
+      "podemos": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 4,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "erc": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 7,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "junts": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 7,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "bildu": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 6,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "pnv": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 5,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "bng": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 1,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "cc": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 1,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "upn": {
+       "choice": "No",
+       "position": "disagree",
+       "yes": 0,
+       "no": 1,
+       "abstain": 0,
+       "not_voting": 0
+      }
+     }
+    },
     {
      "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion087/VOT_20251008195359.json",
      "found": true,
