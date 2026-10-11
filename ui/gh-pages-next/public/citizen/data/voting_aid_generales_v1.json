@@ -1,7 +1,7 @@
 {
  "meta": {
   "schema_version": "voting_aid_snapshot_v1",
-  "generated_at": "2026-10-11T20:00:35+00:00",
+  "generated_at": "2026-10-11T20:21:50+00:00",
   "election": "generales",
   "legislature": "15",
   "institution": "Congreso de los Diputados",
@@ -13,7 +13,8 @@
   "method": {
    "party_position": "Mayoría de los votos Sí/No/Abstención de los diputados asignados al partido en cada votación ('No vota' no cuenta).",
    "statement_position": "agree si el partido votó 'agree_vote'; disagree si votó lo contrario; abstain si se abstuvo. Con varias votaciones: igual en todas -> esa posición; distintas -> mixed.",
-   "toma_en_consideracion": "Votar Sí a la toma en consideración apoya debatir la proposición; se interpreta como apoyo a su objetivo."
+   "toma_en_consideracion": "Votar Sí a la toma en consideración apoya debatir la proposición; se interpreta como apoyo a su objetivo.",
+   "direction_balance": "Las afirmaciones se redactan en ambos sentidos para que responder siempre «de acuerdo» no favorezca a un bloque; se comprueba con el reparto PSOE/PP."
   },
   "votes_first_date": "2024-02-27",
   "votes_last_date": "2026-02-12",
@@ -24,14 +25,24 @@
    "cells_total": 324,
    "cells_by_position": {
     "abstain": 22,
-    "agree": 198,
-    "disagree": 97,
+    "agree": 179,
+    "disagree": 116,
     "mixed": 5,
     "no_data": 2
    },
    "unmapped_member_votes": {
     "José Luis Ábalos Meco": 30,
     "Àgueda Micó Micó": 9
+   },
+   "direction_balance": {
+    "reference_parties": [
+     "psoe",
+     "pp"
+    ],
+    "agree_sides_only_with": {
+     "psoe": 10,
+     "pp": 10
+    }
    }
   },
   "honesty": [
@@ -775,66 +786,66 @@
   {
    "statement_id": "empleo-jornada-37-5",
    "concern_id": "empleo",
-   "text": "La jornada laboral máxima debería bajar de 40 a 37,5 horas semanales.",
+   "text": "La jornada laboral máxima debería seguir siendo de 40 horas semanales.",
    "context": "El proyecto del Gobierno reducía la jornada ordinaria máxima a 37,5 horas e implantaba registro de jornada digital.",
    "cells": {
     "psoe": {
-     "position": "agree",
+     "position": "disagree",
      "votes_with_data": 1,
      "votes_total": 1
     },
     "pp": {
-     "position": "disagree",
+     "position": "agree",
      "votes_with_data": 1,
      "votes_total": 1
     },
     "vox": {
-     "position": "disagree",
+     "position": "agree",
      "votes_with_data": 1,
      "votes_total": 1
     },
     "sumar": {
-     "position": "agree",
+     "position": "disagree",
      "votes_with_data": 1,
      "votes_total": 1
     },
     "podemos": {
-     "position": "agree",
+     "position": "disagree",
      "votes_with_data": 1,
      "votes_total": 1
     },
     "erc": {
-     "position": "agree",
+     "position": "disagree",
      "votes_with_data": 1,
      "votes_total": 1
     },
     "junts": {
-     "position": "disagree",
+     "position": "agree",
      "votes_with_data": 1,
      "votes_total": 1
     },
     "bildu": {
-     "position": "agree",
+     "position": "disagree",
      "votes_with_data": 1,
      "votes_total": 1
     },
     "pnv": {
-     "position": "agree",
+     "position": "disagree",
      "votes_with_data": 1,
      "votes_total": 1
     },
     "bng": {
-     "position": "agree",
+     "position": "disagree",
      "votes_with_data": 1,
      "votes_total": 1
     },
     "cc": {
-     "position": "agree",
+     "position": "disagree",
      "votes_with_data": 1,
      "votes_total": 1
     },
     "upn": {
-     "position": "disagree",
+     "position": "agree",
      "votes_with_data": 1,
      "votes_total": 1
     }
@@ -851,7 +862,7 @@
       "no": 170,
       "abstain": 0
      },
-     "agree_vote": "No",
+     "agree_vote": "Sí",
      "note": "Enmiendas a la totalidad de devolución al proyecto de ley de reducción de jornada; votar Sí era devolver el proyecto (aprobadas, el proyecto decayó).",
      "text_url": null,
      "source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion130/20250910/Votacion010/VOT_20250910213544.json",
@@ -859,7 +870,7 @@
      "party_votes": {
       "psoe": {
        "choice": "No",
-       "position": "agree",
+       "position": "disagree",
        "yes": 0,
        "no": 119,
        "abstain": 0,
@@ -867,7 +878,7 @@
       },
       "pp": {
        "choice": "Sí",
-       "position": "disagree",
+       "position": "agree",
        "yes": 137,
        "no": 0,
        "abstain": 0,
@@ -875,7 +886,7 @@
       },
       "vox": {
        "choice": "Sí",
-       "position": "disagree",
+       "position": "agree",
        "yes": 33,
        "no": 0,
        "abstain": 0,
@@ -883,7 +894,7 @@
       },
       "sumar": {
        "choice": "No",
-       "position": "agree",
+       "position": "disagree",
        "yes": 0,
        "no": 26,
        "abstain": 0,
@@ -891,7 +902,7 @@
       },
       "podemos": {
        "choice": "No",
-       "position": "agree",
+       "position": "disagree",
        "yes": 0,
        "no": 4,
        "abstain": 0,
@@ -899,7 +910,7 @@
       },
       "erc": {
        "choice": "No",
-       "position": "agree",
+       "position": "disagree",
        "yes": 0,
        "no": 7,
        "abstain": 0,
@@ -907,7 +918,7 @@
       },
       "junts": {
        "choice": "Sí",
-       "position": "disagree",
+       "position": "agree",
        "yes": 7,
        "no": 0,
        "abstain": 0,
@@ -915,7 +926,7 @@
       },
       "bildu": {
        "choice": "No",
-       "position": "agree",
+       "position": "disagree",
        "yes": 0,
        "no": 5,
        "abstain": 0,
@@ -923,7 +934,7 @@
       },
       "pnv": {
        "choice": "No",
-       "position": "agree",
+       "position": "disagree",
        "yes": 0,
        "no": 5,
        "abstain": 0,
@@ -931,7 +942,7 @@
       },
       "bng": {
        "choice": "No",
-       "position": "agree",
+       "position": "disagree",
        "yes": 0,
        "no": 1,
        "abstain": 0,
@@ -939,7 +950,7 @@
       },
       "cc": {
        "choice": "No",
-       "position": "agree",
+       "position": "disagree",
        "yes": 0,
        "no": 1,
        "abstain": 0,
@@ -947,7 +958,7 @@
       },
       "upn": {
        "choice": "Sí",
-       "position": "disagree",
+       "position": "agree",
        "yes": 1,
        "no": 0,
        "abstain": 0,
@@ -1700,56 +1711,56 @@
   {
    "statement_id": "energia-impuesto-energeticas",
    "concern_id": "energia",
-   "text": "Las grandes empresas energéticas deberían seguir pagando un impuesto temporal extraordinario.",
+   "text": "El impuesto extraordinario a las grandes empresas energéticas debería desaparecer.",
    "context": "El decreto prorrogaba el gravamen a grandes energéticas durante 2025.",
    "cells": {
     "psoe": {
-     "position": "agree",
+     "position": "disagree",
      "votes_with_data": 1,
      "votes_total": 1
     },
     "pp": {
-     "position": "disagree",
+     "position": "agree",
      "votes_with_data": 1,
      "votes_total": 1
     },
     "vox": {
-     "position": "disagree",
+     "position": "agree",
      "votes_with_data": 1,
      "votes_total": 1
     },
     "sumar": {
-     "position": "agree",
+     "position": "disagree",
      "votes_with_data": 1,
      "votes_total": 1
     },
     "podemos": {
-     "position": "agree",
+     "position": "disagree",
      "votes_with_data": 1,
      "votes_total": 1
     },
     "erc": {
-     "position": "agree",
+     "position": "disagree",
      "votes_with_data": 1,
      "votes_total": 1
     },
     "junts": {
-     "position": "disagree",
+     "position": "agree",
      "votes_with_data": 1,
      "votes_total": 1
     },
     "bildu": {
-     "position": "agree",
-     "votes_with_data": 1,
-     "votes_total": 1
-    },
-    "pnv": {
      "position": "disagree",
      "votes_with_data": 1,
      "votes_total": 1
     },
-    "bng": {
+    "pnv": {
      "position": "agree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "bng": {
+     "position": "disagree",
      "votes_with_data": 1,
      "votes_total": 1
     },
@@ -1759,7 +1770,7 @@
      "votes_total": 1
     },
     "upn": {
-     "position": "disagree",
+     "position": "agree",
      "votes_with_data": 1,
      "votes_total": 1
     }
@@ -1776,7 +1787,7 @@
       "no": 183,
       "abstain": 1
      },
-     "agree_vote": "Sí",
+     "agree_vote": "No",
      "note": "Convalidación del Real Decreto-ley 10/2024 del gravamen temporal energético para 2025 (derogado).",
      "text_url": null,
      "source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion089/20250122/Votacion002/VOT_20250122154427.json",
@@ -1784,7 +1795,7 @@
      "party_votes": {
       "psoe": {
        "choice": "Sí",
-       "position": "agree",
+       "position": "disagree",
        "yes": 120,
        "no": 0,
        "abstain": 0,
@@ -1792,7 +1803,7 @@
       },
       "pp": {
        "choice": "No",
-       "position": "disagree",
+       "position": "agree",
        "yes": 0,
        "no": 137,
        "abstain": 0,
@@ -1800,7 +1811,7 @@
       },
       "vox": {
        "choice": "No",
-       "position": "disagree",
+       "position": "agree",
        "yes": 0,
        "no": 33,
        "abstain": 0,
@@ -1808,7 +1819,7 @@
       },
       "sumar": {
        "choice": "Sí",
-       "position": "agree",
+       "position": "disagree",
        "yes": 27,
        "no": 0,
        "abstain": 0,
@@ -1816,7 +1827,7 @@
       },
       "podemos": {
        "choice": "Sí",
-       "position": "agree",
+       "position": "disagree",
        "yes": 4,
        "no": 0,
        "abstain": 0,
@@ -1824,7 +1835,7 @@
       },
       "erc": {
        "choice": "Sí",
-       "position": "agree",
+       "position": "disagree",
        "yes": 7,
        "no": 0,
        "abstain": 0,
@@ -1832,7 +1843,7 @@
       },
       "junts": {
        "choice": "No",
-       "position": "disagree",
+       "position": "agree",
        "yes": 0,
        "no": 7,
        "abstain": 0,
@@ -1840,7 +1851,7 @@
       },
       "bildu": {
        "choice": "Sí",
-       "position": "agree",
+       "position": "disagree",
        "yes": 6,
        "no": 0,
        "abstain": 0,
@@ -1848,7 +1859,7 @@
       },
       "pnv": {
        "choice": "No",
-       "position": "disagree",
+       "position": "agree",
        "yes": 0,
        "no": 5,
        "abstain": 0,
@@ -1856,7 +1867,7 @@
       },
       "bng": {
        "choice": "Sí",
-       "position": "agree",
+       "position": "disagree",
        "yes": 1,
        "no": 0,
        "abstain": 0,
@@ -1872,7 +1883,7 @@
       },
       "upn": {
        "choice": "No",
-       "position": "disagree",
+       "position": "agree",
        "yes": 0,
        "no": 1,
        "abstain": 0,
@@ -3225,66 +3236,66 @@
   {
    "statement_id": "territorio-amnistia",
    "concern_id": "seguridad_justicia",
-   "text": "La amnistía a los encausados por el proceso independentista catalán debía aprobarse.",
+   "text": "La amnistía a los encausados por el proceso independentista catalán no debió aprobarse.",
    "context": "Ley Orgánica de amnistía para la normalización institucional, política y social en Cataluña.",
    "cells": {
     "psoe": {
-     "position": "agree",
+     "position": "disagree",
      "votes_with_data": 1,
      "votes_total": 1
     },
     "pp": {
-     "position": "disagree",
+     "position": "agree",
      "votes_with_data": 1,
      "votes_total": 1
     },
     "vox": {
-     "position": "disagree",
+     "position": "agree",
      "votes_with_data": 1,
      "votes_total": 1
     },
     "sumar": {
-     "position": "agree",
+     "position": "disagree",
      "votes_with_data": 1,
      "votes_total": 1
     },
     "podemos": {
-     "position": "agree",
+     "position": "disagree",
      "votes_with_data": 1,
      "votes_total": 1
     },
     "erc": {
-     "position": "agree",
+     "position": "disagree",
      "votes_with_data": 1,
      "votes_total": 1
     },
     "junts": {
-     "position": "agree",
+     "position": "disagree",
      "votes_with_data": 1,
      "votes_total": 1
     },
     "bildu": {
-     "position": "agree",
+     "position": "disagree",
      "votes_with_data": 1,
      "votes_total": 1
     },
     "pnv": {
-     "position": "agree",
+     "position": "disagree",
      "votes_with_data": 1,
      "votes_total": 1
     },
     "bng": {
-     "position": "agree",
+     "position": "disagree",
      "votes_with_data": 1,
      "votes_total": 1
     },
     "cc": {
-     "position": "disagree",
+     "position": "agree",
      "votes_with_data": 1,
      "votes_total": 1
     },
     "upn": {
-     "position": "disagree",
+     "position": "agree",
      "votes_with_data": 1,
      "votes_total": 1
     }
@@ -3301,7 +3312,7 @@
       "no": 172,
       "abstain": 0
      },
-     "agree_vote": "Sí",
+     "agree_vote": "No",
      "note": "Votación del nuevo dictamen de la Ley Orgánica de amnistía en el Congreso (aprobada).",
      "text_url": null,
      "source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion030/20240314/Votacion001/VOT_20240314135323.json",
@@ -3309,7 +3320,7 @@
      "party_votes": {
       "psoe": {
        "choice": "Sí",
-       "position": "agree",
+       "position": "disagree",
        "yes": 120,
        "no": 0,
        "abstain": 0,
@@ -3317,7 +3328,7 @@
       },
       "pp": {
        "choice": "No",
-       "position": "disagree",
+       "position": "agree",
        "yes": 0,
        "no": 137,
        "abstain": 0,
@@ -3325,7 +3336,7 @@
       },
       "vox": {
        "choice": "No",
-       "position": "disagree",
+       "position": "agree",
        "yes": 0,
        "no": 33,
        "abstain": 0,
@@ -3333,7 +3344,7 @@
       },
       "sumar": {
        "choice": "Sí",
-       "position": "agree",
+       "position": "disagree",
        "yes": 27,
        "no": 0,
        "abstain": 0,
@@ -3341,7 +3352,7 @@
       },
       "podemos": {
        "choice": "Sí",
-       "position": "agree",
+       "position": "disagree",
        "yes": 4,
        "no": 0,
        "abstain": 0,
@@ -3349,7 +3360,7 @@
       },
       "erc": {
        "choice": "Sí",
-       "position": "agree",
+       "position": "disagree",
        "yes": 7,
        "no": 0,
        "abstain": 0,
@@ -3357,7 +3368,7 @@
       },
       "junts": {
        "choice": "Sí",
-       "position": "agree",
+       "position": "disagree",
        "yes": 7,
        "no": 0,
        "abstain": 0,
@@ -3365,7 +3376,7 @@
       },
       "bildu": {
        "choice": "Sí",
-       "position": "agree",
+       "position": "disagree",
        "yes": 6,
        "no": 0,
        "abstain": 0,
@@ -3373,7 +3384,7 @@
       },
       "pnv": {
        "choice": "Sí",
-       "position": "agree",
+       "position": "disagree",
        "yes": 5,
        "no": 0,
        "abstain": 0,
@@ -3381,7 +3392,7 @@
       },
       "bng": {
        "choice": "Sí",
-       "position": "agree",
+       "position": "disagree",
        "yes": 1,
        "no": 0,
        "abstain": 0,
@@ -3389,7 +3400,7 @@
       },
       "cc": {
        "choice": "No",
-       "position": "disagree",
+       "position": "agree",
        "yes": 0,
        "no": 1,
        "abstain": 0,
@@ -3397,7 +3408,7 @@
       },
       "upn": {
        "choice": "No",
-       "position": "disagree",
+       "position": "agree",
        "yes": 0,
        "no": 1,
        "abstain": 0,
@@ -3410,66 +3421,66 @@
   {
    "statement_id": "territorio-inmigracion-cataluna",
    "concern_id": "inmigracion",
-   "text": "La Generalitat de Cataluña debería gestionar competencias de inmigración que hoy ejerce el Estado.",
+   "text": "Las competencias de inmigración deberían seguir siendo exclusivamente del Estado.",
    "context": "La proposición delega en Cataluña la tramitación de autorizaciones de estancia y residencia, entre otras funciones.",
    "cells": {
     "psoe": {
-     "position": "agree",
+     "position": "disagree",
      "votes_with_data": 1,
      "votes_total": 1
     },
     "pp": {
-     "position": "disagree",
+     "position": "agree",
      "votes_with_data": 1,
      "votes_total": 1
     },
     "vox": {
-     "position": "disagree",
+     "position": "agree",
      "votes_with_data": 1,
      "votes_total": 1
     },
     "sumar": {
-     "position": "agree",
+     "position": "disagree",
      "votes_with_data": 1,
      "votes_total": 1
     },
     "podemos": {
-     "position": "disagree",
+     "position": "agree",
      "votes_with_data": 1,
      "votes_total": 1
     },
     "erc": {
-     "position": "agree",
+     "position": "disagree",
      "votes_with_data": 1,
      "votes_total": 1
     },
     "junts": {
-     "position": "agree",
+     "position": "disagree",
      "votes_with_data": 1,
      "votes_total": 1
     },
     "bildu": {
-     "position": "agree",
+     "position": "disagree",
      "votes_with_data": 1,
      "votes_total": 1
     },
     "pnv": {
-     "position": "agree",
+     "position": "disagree",
      "votes_with_data": 1,
      "votes_total": 1
     },
     "bng": {
-     "position": "agree",
+     "position": "disagree",
      "votes_with_data": 1,
      "votes_total": 1
     },
     "cc": {
-     "position": "agree",
+     "position": "disagree",
      "votes_with_data": 1,
      "votes_total": 1
     },
     "upn": {
-     "position": "disagree",
+     "position": "agree",
      "votes_with_data": 1,
      "votes_total": 1
     }
@@ -3486,7 +3497,7 @@
       "no": 177,
       "abstain": 0
      },
-     "agree_vote": "Sí",
+     "agree_vote": "No",
      "note": "Toma en consideración de la proposición del PSOE y Junts de delegación de competencias de inmigración (rechazada).",
      "text_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-195-1.PDF",
      "source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion133/20250923/Votacion001/VOT_20250923211048.json",
@@ -3494,7 +3505,7 @@
      "party_votes": {
       "psoe": {
        "choice": "Sí",
-       "position": "agree",
+       "position": "disagree",
        "yes": 120,
        "no": 0,
        "abstain": 0,
@@ -3502,7 +3513,7 @@
       },
       "pp": {
        "choice": "No",
-       "position": "disagree",
+       "position": "agree",
        "yes": 0,
        "no": 137,
        "abstain": 0,
@@ -3510,7 +3521,7 @@
       },
       "vox": {
        "choice": "No",
-       "position": "disagree",
+       "position": "agree",
        "yes": 0,
        "no": 33,
        "abstain": 0,
@@ -3518,7 +3529,7 @@
       },
       "sumar": {
        "choice": "Sí",
-       "position": "agree",
+       "position": "disagree",
        "yes": 24,
        "no": 2,
        "abstain": 0,
@@ -3526,7 +3537,7 @@
       },
       "podemos": {
        "choice": "No",
-       "position": "disagree",
+       "position": "agree",
        "yes": 0,
        "no": 4,
        "abstain": 0,
@@ -3534,7 +3545,7 @@
       },
       "erc": {
        "choice": "Sí",
-       "position": "agree",
+       "position": "disagree",
        "yes": 7,
        "no": 0,
        "abstain": 0,
@@ -3542,7 +3553,7 @@
       },
       "junts": {
        "choice": "Sí",
-       "position": "agree",
+       "position": "disagree",
        "yes": 7,
        "no": 0,
        "abstain": 0,
@@ -3550,7 +3561,7 @@
       },
       "bildu": {
        "choice": "Sí",
-       "position": "agree",
+       "position": "disagree",
        "yes": 6,
        "no": 0,
        "abstain": 0,
@@ -3558,7 +3569,7 @@
       },
       "pnv": {
        "choice": "Sí",
-       "position": "agree",
+       "position": "disagree",
        "yes": 5,
        "no": 0,
        "abstain": 0,
@@ -3566,7 +3577,7 @@
       },
       "bng": {
        "choice": "Sí",
-       "position": "agree",
+       "position": "disagree",
        "yes": 1,
        "no": 0,
        "abstain": 0,
@@ -3574,7 +3585,7 @@
       },
       "cc": {
        "choice": "Sí",
-       "position": "agree",
+       "position": "disagree",
        "yes": 1,
        "no": 0,
        "abstain": 0,
@@ -3582,7 +3593,7 @@
       },
       "upn": {
        "choice": "No",
-       "position": "disagree",
+       "position": "agree",
        "yes": 0,
        "no": 1,
        "abstain": 0,
@@ -3780,36 +3791,36 @@
   {
    "statement_id": "inmigracion-reparto-menores",
    "concern_id": "inmigracion",
-   "text": "El reparto de menores migrantes no acompañados entre comunidades autónomas debería ser obligatorio.",
+   "text": "Cada comunidad autónoma debería decidir cuántos menores migrantes no acompañados acoge, sin reparto obligatorio.",
    "context": "Ambas iniciativas crean un mecanismo obligatorio de reubicación de menores no acompañados.",
    "cells": {
     "psoe": {
-     "position": "agree",
+     "position": "disagree",
      "votes_with_data": 2,
      "votes_total": 2
     },
     "pp": {
-     "position": "disagree",
+     "position": "agree",
      "votes_with_data": 2,
      "votes_total": 2
     },
     "vox": {
-     "position": "disagree",
+     "position": "agree",
      "votes_with_data": 2,
      "votes_total": 2
     },
     "sumar": {
-     "position": "agree",
+     "position": "disagree",
      "votes_with_data": 2,
      "votes_total": 2
     },
     "podemos": {
-     "position": "agree",
+     "position": "disagree",
      "votes_with_data": 2,
      "votes_total": 2
     },
     "erc": {
-     "position": "agree",
+     "position": "disagree",
      "votes_with_data": 2,
      "votes_total": 2
     },
@@ -3819,22 +3830,22 @@
      "votes_total": 2
     },
     "bildu": {
-     "position": "agree",
+     "position": "disagree",
      "votes_with_data": 2,
      "votes_total": 2
     },
     "pnv": {
-     "position": "agree",
+     "position": "disagree",
      "votes_with_data": 2,
      "votes_total": 2
     },
     "bng": {
-     "position": "agree",
+     "position": "disagree",
      "votes_with_data": 2,
      "votes_total": 2
     },
     "cc": {
-     "position": "agree",
+     "position": "disagree",
      "votes_with_data": 2,
      "votes_total": 2
     },
@@ -3856,7 +3867,7 @@
       "no": 177,
       "abstain": 1
      },
-     "agree_vote": "Sí",
+     "agree_vote": "No",
      "note": "Toma en consideración de la proposición del PSOE, SUMAR y Mixto de reforma de la ley de extranjería para la contingencia migratoria de menores (rechazada).",
      "text_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-137-1.PDF",
      "source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion056/20240723/Votacion063/VOT_20240723221735.json",
@@ -3864,7 +3875,7 @@
      "party_votes": {
       "psoe": {
        "choice": "Sí",
-       "position": "agree",
+       "position": "disagree",
        "yes": 119,
        "no": 0,
        "abstain": 0,
@@ -3872,7 +3883,7 @@
       },
       "pp": {
        "choice": "No",
-       "position": "disagree",
+       "position": "agree",
        "yes": 0,
        "no": 137,
        "abstain": 0,
@@ -3880,7 +3891,7 @@
       },
       "vox": {
        "choice": "No",
-       "position": "disagree",
+       "position": "agree",
        "yes": 0,
        "no": 33,
        "abstain": 0,
@@ -3888,7 +3899,7 @@
       },
       "sumar": {
        "choice": "Sí",
-       "position": "agree",
+       "position": "disagree",
        "yes": 27,
        "no": 0,
        "abstain": 0,
@@ -3896,7 +3907,7 @@
       },
       "podemos": {
        "choice": "Sí",
-       "position": "agree",
+       "position": "disagree",
        "yes": 4,
        "no": 0,
        "abstain": 0,
@@ -3904,7 +3915,7 @@
       },
       "erc": {
        "choice": "Sí",
-       "position": "agree",
+       "position": "disagree",
        "yes": 7,
        "no": 0,
        "abstain": 0,
@@ -3912,7 +3923,7 @@
       },
       "junts": {
        "choice": "No",
-       "position": "disagree",
+       "position": "agree",
        "yes": 0,
        "no": 7,
        "abstain": 0,
@@ -3920,7 +3931,7 @@
       },
       "bildu": {
        "choice": "Sí",
-       "position": "agree",
+       "position": "disagree",
        "yes": 6,
        "no": 0,
        "abstain": 0,
@@ -3928,7 +3939,7 @@
       },
       "pnv": {
        "choice": "Sí",
-       "position": "agree",
+       "position": "disagree",
        "yes": 5,
        "no": 0,
        "abstain": 0,
@@ -3936,7 +3947,7 @@
       },
       "bng": {
        "choice": "Sí",
-       "position": "agree",
+       "position": "disagree",
        "yes": 1,
        "no": 0,
        "abstain": 0,
@@ -3944,7 +3955,7 @@
       },
       "cc": {
        "choice": "Sí",
-       "position": "agree",
+       "position": "disagree",
        "yes": 1,
        "no": 0,
        "abstain": 0,
@@ -3971,7 +3982,7 @@
       "no": 170,
       "abstain": 1
      },
-     "agree_vote": "Sí",
+     "agree_vote": "No",
      "note": "Convalidación del Real Decreto-ley 2/2025 sobre menores en contingencias migratorias extraordinarias (convalidado).",
      "text_url": null,
      "source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion106/20250410/Votacion015/VOT_20250410155154.json",
@@ -3979,7 +3990,7 @@
      "party_votes": {
       "psoe": {
        "choice": "Sí",
-       "position": "agree",
+       "position": "disagree",
        "yes": 120,
        "no": 0,
        "abstain": 0,
@@ -3987,7 +3998,7 @@
       },
       "pp": {
        "choice": "No",
-       "position": "disagree",
+       "position": "agree",
        "yes": 0,
        "no": 137,
        "abstain": 0,
@@ -3995,7 +4006,7 @@
       },
       "vox": {
        "choice": "No",
-       "position": "disagree",
+       "position": "agree",
        "yes": 0,
        "no": 33,
        "abstain": 0,
@@ -4003,7 +4014,7 @@
       },
       "sumar": {
        "choice": "Sí",
-       "position": "agree",
+       "position": "disagree",
        "yes": 27,
        "no": 0,
        "abstain": 0,
@@ -4011,7 +4022,7 @@
       },
       "podemos": {
        "choice": "Sí",
-       "position": "agree",
+       "position": "disagree",
        "yes": 4,
        "no": 0,
        "abstain": 0,
@@ -4019,7 +4030,7 @@
       },
       "erc": {
        "choice": "Sí",
-       "position": "agree",
+       "position": "disagree",
        "yes": 7,
        "no": 0,
        "abstain": 0,
@@ -4027,7 +4038,7 @@
       },
       "junts": {
        "choice": "Sí",
-       "position": "agree",
+       "position": "disagree",
        "yes": 7,
        "no": 0,
        "abstain": 0,
@@ -4035,7 +4046,7 @@
       },
       "bildu": {
        "choice": "Sí",
-       "position": "agree",
+       "position": "disagree",
        "yes": 6,
        "no": 0,
        "abstain": 0,
@@ -4043,7 +4054,7 @@
       },
       "pnv": {
        "choice": "Sí",
-       "position": "agree",
+       "position": "disagree",
        "yes": 5,
        "no": 0,
        "abstain": 0,
@@ -4051,7 +4062,7 @@
       },
       "bng": {
        "choice": "Sí",
-       "position": "agree",
+       "position": "disagree",
        "yes": 1,
        "no": 0,
        "abstain": 0,
@@ -4059,7 +4070,7 @@
       },
       "cc": {
        "choice": "Sí",
-       "position": "agree",
+       "position": "disagree",
        "yes": 1,
        "no": 0,
        "abstain": 0,

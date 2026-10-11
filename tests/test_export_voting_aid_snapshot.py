@@ -90,6 +90,11 @@ class TestVotingAidSnapshot(unittest.TestCase):
         self.assertEqual(snap["meta"]["quality"]["votes_missing"], [])
         self.assertIn("parl_vote_member_votes", s1["votes"][0]["explorer_member_votes"])
 
+    def test_direction_balance_counts_one_sided_agreement(self) -> None:
+        snap = va.build_snapshot(_db(), _seed(balance_reference_parties=["a", "b"]), generated_at="x")
+        # s1: A agree, B disagree -> A; s2: A mixed, B agree -> B.
+        self.assertEqual(snap["meta"]["quality"]["direction_balance"]["agree_sides_only_with"], {"a": 1, "b": 1})
+
     def test_statement_without_any_vote_data_is_no_data(self) -> None:
         self.assertEqual(va.combine_positions(["no_data", "no_data"]), "no_data")
         self.assertEqual(va.combine_positions(["agree", "no_data", "agree"]), "agree")
@@ -140,6 +145,9 @@ class TestVotingAidSnapshot(unittest.TestCase):
         self.assertEqual(published["meta"]["quality"]["votes_missing"], [])
         for st in published["statements"]:
             self.assertEqual(set(st["cells"]), {p["party_id"] for p in seed["parties"]})
+        # Answering "agree" to everything must not systematically favour one bloc.
+        counts = published["meta"]["quality"]["direction_balance"]["agree_sides_only_with"]
+        self.assertLessEqual(abs(counts["psoe"] - counts["pp"]), 3, counts)
 
 
 if __name__ == "__main__":

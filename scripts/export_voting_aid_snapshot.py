@@ -111,6 +111,25 @@ def combine_positions(positions: list[str]) -> str:
     return known[0] if len(set(known)) == 1 else "mixed"
 
 
+def direction_balance(statements: list[dict[str, Any]], reference: list[str]) -> dict[str, Any] | None:
+    """Count statements where "agree" sides with one reference party and not the other.
+
+    A lopsided count means answering "agree" to everything favours one bloc (acquiescence bias).
+    """
+    if len(reference) != 2:
+        return None
+    a, b = reference
+    counts = {a: 0, b: 0}
+    for st in statements:
+        pa = st["cells"].get(a, {}).get("position")
+        pb = st["cells"].get(b, {}).get("position")
+        if pa == "agree" and pb != "agree":
+            counts[a] += 1
+        elif pb == "agree" and pa != "agree":
+            counts[b] += 1
+    return {"reference_parties": [a, b], "agree_sides_only_with": counts}
+
+
 def explorer_member_votes_link(vote_event_id: str) -> str:
     return f"../explorer/?t=parl_vote_member_votes&wc=vote_event_id&wv={quote(vote_event_id, safe='')}"
 
@@ -210,6 +229,7 @@ def build_snapshot(conn: sqlite3.Connection, seed: dict[str, Any], *, generated_
         )
 
     vote_dates = sorted(ev["vote_date"] for ev in events.values() if ev["vote_date"])
+    balance = direction_balance(statements_out, seed.get("balance_reference_parties") or [])
     return {
         "meta": {
             "schema_version": SNAPSHOT_SCHEMA_VERSION,
@@ -228,6 +248,7 @@ def build_snapshot(conn: sqlite3.Connection, seed: dict[str, Any], *, generated_
                 "cells_total": sum(cell_counts.values()),
                 "cells_by_position": dict(sorted(cell_counts.items())),
                 "unmapped_member_votes": dict(sorted(unmapped.items())),
+                "direction_balance": balance,
             },
             "honesty": [
                 "Las posiciones salen solo de votaciones nominales del Congreso; no de programas ni declaraciones.",
