@@ -40,13 +40,16 @@ def try_clone(source: Path, destination: Path) -> bool:
     if sys.platform.startswith("linux"):
         import fcntl
 
-        try:
-            with source.open("rb") as src, destination.open("xb") as dst:
-                fcntl.ioctl(dst.fileno(), _FICLONE, src.fileno())
-            return True
-        except OSError:
-            destination.unlink(missing_ok=True)
-            return False
+        with source.open("rb") as src:
+            # FileExistsError must propagate: never unlink a destination we did not create.
+            dst = destination.open("xb")
+            try:
+                with dst:
+                    fcntl.ioctl(dst.fileno(), _FICLONE, src.fileno())
+                return True
+            except OSError:
+                destination.unlink(missing_ok=True)
+                return False
     return False
 
 

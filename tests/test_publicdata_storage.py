@@ -3,9 +3,12 @@ from __future__ import annotations
 import contextlib
 import io
 import tempfile
+import sys
 import unittest
 from pathlib import Path
+from unittest import mock
 
+from publicdata_core import storage
 from publicdata_core.storage import clone_or_copy, prune_browser_profile
 from scripts.dedupe_local_storage import find_duplicate_groups, main as dedupe_main
 
@@ -27,8 +30,24 @@ class CloneOrCopyTest(unittest.TestCase):
             dst.write_bytes(b"old")
             with self.assertRaises(FileExistsError):
                 clone_or_copy(src, dst)
+            self.assertEqual(dst.read_bytes(), b"old")
             clone_or_copy(src, dst, replace=True)
             self.assertEqual(dst.read_bytes(), b"new")
+
+    @unittest.skipUnless(hasattr(__import__("os"), "O_EXCL") and sys.platform != "win32", "needs fcntl")
+    def test_linux_reflink_path_never_deletes_existing_destination(self) -> None:
+        # Regression: FileExistsError was swallowed as a clone failure and the existing file unlinked.
+        with tempfile.TemporaryDirectory() as tmp:
+            src, dst = Path(tmp) / "a.bin", Path(tmp) / "b.bin"
+            src.write_bytes(b"new")
+            dst.write_bytes(b"old")
+            with mock.patch.object(storage, "_clonefile", None), mock.patch.object(sys, "platform", "linux"):
+                with self.assertRaises(FileExistsError):
+                    clone_or_copy(src, dst)
+                self.assertEqual(dst.read_bytes(), b"old")
+                fresh = Path(tmp) / "c.bin"
+                clone_or_copy(src, fresh)
+                self.assertEqual(fresh.read_bytes(), b"new")
 
 
 class PruneBrowserProfileTest(unittest.TestCase):
