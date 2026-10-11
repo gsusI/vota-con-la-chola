@@ -20,7 +20,7 @@ from typing import Any
 from urllib.parse import parse_qs, urlparse
 
 DEFAULT_DB = Path("etl/data/staging/politicos-es.db")
-DEFAULT_HOST = "0.0.0.0"
+DEFAULT_HOST = "127.0.0.1"
 DEFAULT_PORT = 8080
 BASE_DIR = Path(__file__).resolve().parent.parent
 if str(BASE_DIR) not in sys.path:
@@ -7801,7 +7801,31 @@ def create_handler(config: AppConfig) -> type[BaseHTTPRequestHandler]:
 
             self.write_json({"error": "Not found"}, status=HTTPStatus.NOT_FOUND)
 
+        def write_request_rejection(self) -> bool:
+            """Reject cross-site or non-JSON writes; return True when the request was rejected.
+
+            Requiring application/json forces a CORS preflight that this server never
+            approves, and Origin/Sec-Fetch-Site must match this host, so a page on
+            another site cannot drive writes through the user's browser.
+            """
+            content_type = self.headers.get("Content-Type", "").split(";", 1)[0].strip().lower()
+            if content_type != "application/json":
+                self.write_json({"error": "Content-Type debe ser application/json"}, status=HTTPStatus.UNSUPPORTED_MEDIA_TYPE)
+                return True
+            fetch_site = self.headers.get("Sec-Fetch-Site", "").strip().lower()
+            origin = self.headers.get("Origin", "").strip()
+            host = self.headers.get("Host", "").strip().lower()
+            if fetch_site and fetch_site not in {"same-origin", "none"}:
+                self.write_json({"error": "Origen no permitido"}, status=HTTPStatus.FORBIDDEN)
+                return True
+            if origin and urlparse(origin).netloc.lower() != host:
+                self.write_json({"error": "Origen no permitido"}, status=HTTPStatus.FORBIDDEN)
+                return True
+            return False
+
         def do_POST(self) -> None:  # noqa: N802
+            if self.write_request_rejection():
+                return
             parsed = urlparse(self.path)
             path = parsed.path.rstrip("/") if parsed.path.endswith("/") and parsed.path != "/" else parsed.path
 

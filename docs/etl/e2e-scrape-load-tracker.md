@@ -2,6 +2,10 @@
 
 Objetivo: **una sola lista** de trabajo operativo para completar el extremo a extremo (extract -> transform -> load -> publish) por tipo de dato.
 
+## Explorer local: escritura solo desde el mismo origen (`2026-10-11`)
+
+Estado: HECHO. Ahora: `scripts/graph_ui_server.py` escucha por defecto en `127.0.0.1` y `docker compose` publica el puerto solo en loopback; `POST /api/topics/reviews/decision` exige `application/json` y rechaza `Origin`/`Sec-Fetch-Site` de otro sitio (`tests/test_graph_ui_server_write_guard.py`). Antes, cualquier equipo de la red o cualquier web abierta en el navegador podía escribir decisiones de revisión. Siguiente: si se expone en red, añadir autenticación explícita antes.
+
 ## CI: suite completa de tests (`2026-10-11`)
 
 Estado: ACTIVO. Ahora: el job `full-test-suite` de `ETL Tracker Gate` ejecuta toda la suite pytest en checkout limpio (antes solo ~10 módulos elegidos a mano); verificado localmente en checkout limpio: `1400 passed, 185 skipped, 19 deselected`. Los tests que leen datos reales locales ignorados por git se saltan solo si su error nombra una ruta `etl/data/` ausente (`tests/conftest.py`; `VCLC_REQUIRE_REAL_DATA=1` / `just test-real` los vuelve fallo). Destino: cuarentena vacía. Siguiente: regenerar evidencia v2 (grupo A de `tests/ci_quarantine.txt`) y dar mensajes con ruta o `skipTest` explícito a los tests del grupo B; cada arreglo borra su entrada (las entradas obsoletas rompen CI).

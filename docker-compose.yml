@@ -31,7 +31,8 @@ services:
       - PYTHONUNBUFFERED=1
       - TZ=UTC
     ports:
-      - "${GRAPH_PORT:-8080}:8080"
+      # Publish on loopback only: the API has a write endpoint and no auth.
+      - "127.0.0.1:${GRAPH_PORT:-8080}:8080"
     entrypoint: ["/bin/sh", "-lc"]
     command:
       [
