@@ -1,0 +1,19 @@
+{
+  "schema_version": "cloudflare_usage_observation_v1",
+  "observed_at": "2026-09-07T21:27:52.191004+00:00",
+  "source": "Cloudflare authenticated D1 account dashboard and Workers plans",
+  "plan": "free",
+  "displayed_rows_written": "79.21k / 100k",
+  "displayed_remaining_approx": 20790,
+  "precision": "rounded dashboard display; not an exact execution quota receipt",
+  "displayed_billable_usage_usd": "0.00",
+  "displayed_total_storage": "146.22 MB",
+  "databases": 2,
+  "candidate_tables": 0,
+  "candidate_size_displayed": "12.29 kB",
+  "import_executed": false,
+  "import_blockers": [
+    "Unresolved candidate decision dates",
+    "20,000 batch budget plus 2,000 reserve exceeds approximately 20,790 remaining writes"
+  ]
+}

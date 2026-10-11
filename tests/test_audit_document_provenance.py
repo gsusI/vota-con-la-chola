@@ -3,12 +3,29 @@ from __future__ import annotations
 import gzip
 import hashlib
 import json
+import shutil
 import sqlite3
 import tempfile
 import unittest
 from pathlib import Path
 
-from scripts.audit_document_provenance import run_audit
+from scripts.audit_document_provenance import (
+    ProvenanceAuditError,
+    create_work_database,
+    load_xlsx_document_lineage_manifest,
+    run_audit,
+)
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+REAL_EVIDENCE_ROOT = (
+    PROJECT_ROOT / "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence"
+)
+REAL_PROVENANCE_REPORT = REAL_EVIDENCE_ROOT / "real-document-provenance-audit.json"
+REAL_PROVENANCE_MANIFEST = (
+    PROJECT_ROOT / "etl/data/manifests/real-document-provenance-files.jsonl"
+)
+REAL_XLSX_COHORT = REAL_EVIDENCE_ROOT / "real-xlsx-cohort.json"
+REAL_XLSX_LINEAGE = REAL_EVIDENCE_ROOT / "real-xlsx-source-lineage.jsonl"
 
 
 def digest(payload: bytes) -> str:
@@ -90,6 +107,7 @@ class TestAuditDocumentProvenance(unittest.TestCase):
         captured_link_document_lineage_manifests: list[Path] | None = None,
         official_document_identifier_lineage_manifests: list[Path] | None = None,
         official_path_document_lineage_manifests: list[Path] | None = None,
+        xlsx_document_lineage_manifests: list[Path] | None = None,
     ) -> dict[str, object]:
         return run_audit(
             repo_root=self.repo_root,
@@ -117,10 +135,219 @@ class TestAuditDocumentProvenance(unittest.TestCase):
             official_path_document_lineage_manifest_paths=(
                 official_path_document_lineage_manifests or []
             ),
+            xlsx_document_lineage_manifest_paths=(
+                xlsx_document_lineage_manifests or []
+            ),
             file_manifest_out=self.file_manifest,
             edge_manifest_out=self.edge_manifest,
             report_out=self.report,
         )
+
+    def test_current_real_xlsx_mappings_remain_unverified_provenance(self) -> None:
+        required = (
+            REAL_PROVENANCE_REPORT,
+            REAL_PROVENANCE_MANIFEST,
+            REAL_XLSX_COHORT,
+            REAL_XLSX_LINEAGE,
+        )
+        if not all(path.is_file() for path in required):
+            self.skipTest(
+                "real full-corpus artifacts are excluded from this test context"
+            )
+
+        report = json.loads(REAL_PROVENANCE_REPORT.read_text(encoding="utf-8"))
+        cohort = json.loads(REAL_XLSX_COHORT.read_text(encoding="utf-8"))
+        lineage_rows = [
+            json.loads(line)
+            for line in REAL_XLSX_LINEAGE.read_text(encoding="utf-8").splitlines()
+            if line.strip()
+        ]
+        lineage_paths = {
+            str(row["capture"]["path"]).removeprefix("etl/data/raw/")
+            for row in lineage_rows
+        }
+        provenance_xlsx_rows = []
+        with REAL_PROVENANCE_MANIFEST.open("r", encoding="utf-8") as handle:
+            for line in handle:
+                if not line.strip():
+                    continue
+                row = json.loads(line)
+                if row["extension"] == "xlsx":
+                    provenance_xlsx_rows.append(row)
+
+        self.assertEqual(report["schema_version"], "real_document_provenance_audit_v13")
+        self.assertEqual(report["status"], "partial")
+        self.assertTrue(report["checks"]["integrity_passed"])
+        self.assertFalse(report["checks"]["complete_checksum_provenance"])
+        self.assertFalse(report["checks"]["promotion_ready"])
+        self.assertEqual(cohort["schema_version"], "real_xlsx_cohort_v2")
+        self.assertEqual(cohort["status"], "mapped_unverified")
+        self.assertEqual(
+            cohort["bounded_execution"]["inventory_input_ordering"],
+            "strict_path_order_verified",
+        )
+        self.assertFalse(
+            cohort["bounded_execution"]["lineage_rows_materialized_in_memory"]
+        )
+        self.assertEqual(
+            cohort["bounded_execution"]["distinct_content_tracking"],
+            "sqlite_disk_backed",
+        )
+        self.assertFalse(cohort["policy"]["synthetic_or_mock_records_counted"])
+        self.assertTrue(
+            cohort["policy"][
+                "official_public_domain_personal_information_retained"
+            ]
+        )
+        self.assertTrue(
+            cohort["policy"][
+                "path_inferred_source_urls_are_not_checksum_proven_provenance"
+            ]
+        )
+        self.assertEqual(
+            cohort["totals"]["checksum_bound_retrieval_receipts"], 0
+        )
+        self.assertEqual(len(lineage_rows), cohort["totals"]["file_instances"])
+        self.assertEqual(
+            len({row["capture"]["sha256"] for row in lineage_rows}),
+            cohort["totals"]["distinct_content_objects"],
+        )
+        self.assertEqual(cohort["manifest"]["rows"], len(lineage_rows))
+        self.assertEqual(cohort["manifest"]["bytes"], REAL_XLSX_LINEAGE.stat().st_size)
+        self.assertEqual(
+            cohort["manifest"]["sha256"], digest(REAL_XLSX_LINEAGE.read_bytes())
+        )
+        for row in lineage_rows:
+            self.assertEqual(
+                row["schema_version"], "official_xlsx_source_mapping_v1"
+            )
+            self.assertEqual(
+                row["source_url_binding_status"],
+                "inferred_from_repository_path_contract_without_retrieval_receipt",
+            )
+            self.assertFalse(row["synthetic_or_mock_records_counted"])
+            self.assertTrue(
+                row["official_public_domain_personal_information_retained"]
+            )
+
+        self.assertEqual(
+            {row["path"] for row in provenance_xlsx_rows}, lineage_paths
+        )
+        self.assertEqual(len(provenance_xlsx_rows), len(lineage_rows))
+        unlinked_xlsx_rows = 0
+        for row in provenance_xlsx_rows:
+            self.assertIn(
+                row["provenance_status"], {"unlinked", "verified_path_checksum"}
+            )
+            if row["provenance_status"] == "unlinked":
+                unlinked_xlsx_rows += 1
+                self.assertEqual(row["provenance_edges"], 0)
+                self.assertEqual(row["public_url_edges"], 0)
+            else:
+                self.assertGreater(row["provenance_edges"], 0)
+                self.assertGreater(row["public_url_edges"], 0)
+            self.assertFalse(row["checksum_conflict"])
+            self.assertFalse(row["declared_bytes_conflict"])
+        self.assertGreater(unlinked_xlsx_rows, 0)
+        self.assertGreaterEqual(report["totals"]["unlinked"], unlinked_xlsx_rows)
+
+        xlsx_audit = report["xlsx_document_lineage_manifests"]
+        self.assertEqual(len(xlsx_audit), 1)
+        self.assertEqual(xlsx_audit[0]["status"], "partial")
+        self.assertEqual(xlsx_audit[0]["rows"], len(lineage_rows))
+        self.assertEqual(xlsx_audit[0]["accepted_checksum_captures"], 0)
+        self.assertEqual(xlsx_audit[0]["verified_retrieval_receipts"], 0)
+        self.assertEqual(xlsx_audit[0]["verified_retrieval_receipt_samples"], [])
+        self.assertEqual(
+            xlsx_audit[0]["inferred_source_url_mappings"], len(lineage_rows)
+        )
+        self.assertEqual(xlsx_audit[0]["sha256"], cohort["manifest"]["sha256"])
+
+    def test_verified_label_without_receipt_fails_closed_on_real_xlsx(self) -> None:
+        if not REAL_XLSX_LINEAGE.is_file():
+            self.skipTest("real XLSX lineage is excluded from this test context")
+        real_row = next(
+            json.loads(line)
+            for line in REAL_XLSX_LINEAGE.read_text(encoding="utf-8").splitlines()
+            if line.strip()
+        )
+        real_capture = PROJECT_ROOT / str(real_row["capture"]["path"])
+        if not real_capture.is_file():
+            self.skipTest("real XLSX capture is excluded from this test context")
+        raw_root = self.repo_root / "etl/data/raw"
+        relative = str(real_row["capture"]["path"]).removeprefix("etl/data/raw/")
+        copied_capture = raw_root / relative
+        copied_capture.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(real_capture, copied_capture)
+        corrupted_row = dict(real_row)
+        corrupted_row["source_url_binding_status"] = "verified_retrieval_receipt"
+        corrupted_manifest = self.repo_root / "real-xlsx-lineage-corrupted.jsonl"
+        corrupted_manifest.write_text(
+            json.dumps(corrupted_row, ensure_ascii=True, sort_keys=True) + "\n",
+            encoding="utf-8",
+        )
+        work = create_work_database(self.repo_root / "xlsx-audit.sqlite")
+        try:
+            with self.assertRaisesRegex(
+                ProvenanceAuditError,
+                "missing retrieval receipt descriptor",
+            ):
+                load_xlsx_document_lineage_manifest(
+                    work,
+                    corrupted_manifest,
+                    repo_root=self.repo_root,
+                    inventory_root=raw_root,
+                )
+        finally:
+            work.close()
+
+    def test_verified_receipt_hash_corruption_fails_closed_on_real_xlsx(
+        self,
+    ) -> None:
+        if not REAL_XLSX_LINEAGE.is_file() or not REAL_XLSX_COHORT.is_file():
+            self.skipTest("real XLSX evidence is excluded from this test context")
+        real_row = next(
+            json.loads(line)
+            for line in REAL_XLSX_LINEAGE.read_text(encoding="utf-8").splitlines()
+            if line.strip()
+        )
+        real_capture = PROJECT_ROOT / str(real_row["capture"]["path"])
+        if not real_capture.is_file():
+            self.skipTest("real XLSX capture is excluded from this test context")
+        raw_root = self.repo_root / "etl/data/raw"
+        relative = str(real_row["capture"]["path"]).removeprefix("etl/data/raw/")
+        copied_capture = raw_root / relative
+        copied_capture.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(real_capture, copied_capture)
+        receipt_path = self.repo_root / "evidence/real-xlsx-cohort.json"
+        receipt_path.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(REAL_XLSX_COHORT, receipt_path)
+        corrupted_row = dict(real_row)
+        corrupted_row["source_url_binding_status"] = "verified_retrieval_receipt"
+        corrupted_row["retrieval_receipt"] = {
+            "path": receipt_path.relative_to(self.repo_root).as_posix(),
+            "bytes": receipt_path.stat().st_size,
+            "sha256": "0" * 64,
+        }
+        corrupted_manifest = self.repo_root / "real-xlsx-receipt-hash-corrupted.jsonl"
+        corrupted_manifest.write_text(
+            json.dumps(corrupted_row, ensure_ascii=True, sort_keys=True) + "\n",
+            encoding="utf-8",
+        )
+        work = create_work_database(self.repo_root / "xlsx-hash-audit.sqlite")
+        try:
+            with self.assertRaisesRegex(
+                ProvenanceAuditError,
+                "receipt descriptor mismatch",
+            ):
+                load_xlsx_document_lineage_manifest(
+                    work,
+                    corrupted_manifest,
+                    repo_root=self.repo_root,
+                    inventory_root=raw_root,
+                )
+        finally:
+            work.close()
 
     def test_reconciles_exact_and_content_addressed_paths_without_hiding_gaps(
         self,

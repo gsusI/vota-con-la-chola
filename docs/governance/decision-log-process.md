@@ -54,3 +54,16 @@ Cada entrada usa esta plantilla:
 - **Implementación:** `README.md`, `CONTRIBUTING.md`, `.github/ISSUE_TEMPLATE/*`, `.github/PULL_REQUEST_TEMPLATE.md`, `docs/ops/github-about.md`, `docs/governance/decision-log-process.md`.
 - **Seguimiento:** Sin evidencia pública adicional pendiente.
 - **Estado:** aprobada
+
+
+### 2026-09-05: prioridad de lanzamiento y reutilización comunitaria
+
+- **ID:** 2026-09-05-public-launch-focus
+- **Fecha:** 2026-09-05
+- **Decisor principal:** mantenedor del proyecto; recomendación operativa preparada por Dev.
+- **Decisión:** traducir la petición de foco y utilidad pública a [L0–L5 del roadmap canónico](../../ROADMAP.md#prioridad-inmediata-lanzamiento-útil-para-la-comunidad). PLACSP es la entrega recomendada, todavía sujeta al gate L0; no se presenta la elección como aprobación externa ni el plan como implementación.
+- **Alternativas descartadas para la primera entrega:** completar toda la escala documental, abrir más dominios, crear otra plataforma/SDK o condicionar el lanzamiento al apoyo de una persona concreta.
+- **Impacto:** prioriza reutilización y contribuciones sobre expansión; conserva misión ciudadana, backlog, requisitos de evidencia, publicación y estados incompletos. No autoriza mensajes a terceros ni da por aprobadas alegaciones.
+- **Implementación:** documentación local en ROADMAP, roadmap técnico y tracker; sin commit ni modificación remota.
+- **Seguimiento:** [auditoría pública del 2026-09-05](../etl/sprints/PUBLIC-LAUNCH-20260905/evidence/launch-audit.md), gates de lanzamiento y adopción definidos exclusivamente en ROADMAP.
+- **Estado:** en progreso; planificación preparada, L0 y lanzamiento pendientes.

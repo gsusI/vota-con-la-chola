@@ -1,4 +1,4 @@
-const PAGES_ORIGIN = "https://vota-con-la-chola.pages.dev";
+const RAW_ORIGIN = "https://raw.githubusercontent.com/gsusI/vota-con-la-chola/gh-pages";
 const ORIGIN_PREFIX = "/vota-con-la-chola";
 
 function normalizePathname(pathname) {
@@ -36,7 +36,7 @@ export default {
 
     const isDirectoryPath = normalizedPath.endsWith("/");
     const upstreamPath = isDirectoryPath ? `${normalizedPath}index.html` : normalizedPath;
-    const upstreamUrl = new URL(upstreamPath, PAGES_ORIGIN);
+    const upstreamUrl = new URL(`${RAW_ORIGIN}${upstreamPath}`);
 
     const upstreamResponse = await fetch(upstreamUrl, {
       method: request.method,
@@ -44,7 +44,7 @@ export default {
     });
 
     const headers = new Headers(upstreamResponse.headers);
-    headers.set("cache-control", "public, max-age=300");
+    headers.set("cache-control", upstreamResponse.ok ? "public, max-age=300" : "no-store");
     headers.set("x-vclc-origin", upstreamUrl.toString());
     headers.delete("content-security-policy");
     headers.delete("content-security-policy-report-only");

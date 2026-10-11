@@ -5,6 +5,13 @@ import tempfile
 import unittest
 from pathlib import Path
 
+from publicdata_docs.generation_manifest import (
+    iter_generation_rows,
+    load_index_bytes,
+    sha256_file,
+)
+from scripts.pack_real_document_origin import DATASET as PACK_DATASET
+from scripts.pack_real_document_origin import ROW_SCHEMA as PACK_ROW_SCHEMA
 from scripts.prepare_real_document_origin_release import (
     parse_args as parse_prepare_args,
 )
@@ -18,18 +25,27 @@ from scripts.publish_real_document_origin_hf import (
 from scripts.publish_real_document_origin_hf import (
     parse_args as parse_publish_args,
 )
+from scripts.replicate_real_document_origin import DATASET as ORIGIN_DATASET
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 EVIDENCE_ROOT = REPO_ROOT / "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence"
 UPLOAD_PLAN = EVIDENCE_ROOT / "real-document-origin-upload-plan.json"
 RELEASE_MANIFEST = EVIDENCE_ROOT / "real-document-origin-release-manifest.json"
 POINTER = EVIDENCE_ROOT / "real-document-origin-release-latest.json"
+ORIGIN_MANIFEST = REPO_ROOT / "etl/data/manifests/real-document-origin-replicas.json"
+PACK_MANIFEST = REPO_ROOT / "etl/data/manifests/real-document-origin-packs.json"
 
 
 class RealDocumentOriginReleaseTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        required = [UPLOAD_PLAN, RELEASE_MANIFEST, POINTER]
+        required = [
+            UPLOAD_PLAN,
+            RELEASE_MANIFEST,
+            POINTER,
+            ORIGIN_MANIFEST,
+            PACK_MANIFEST,
+        ]
         missing = [
             path.relative_to(REPO_ROOT).as_posix()
             for path in required
@@ -41,6 +57,20 @@ class RealDocumentOriginReleaseTest(unittest.TestCase):
                 + ", ".join(missing)
             )
         cls.validated = validate_local_upload_plan(UPLOAD_PLAN)
+        cls.origin_index = load_index_bytes(
+            ORIGIN_MANIFEST.read_bytes(), dataset=ORIGIN_DATASET
+        )
+        cls.pack_index = load_index_bytes(
+            PACK_MANIFEST.read_bytes(), dataset=PACK_DATASET
+        )
+        cls.pack_rows = list(
+            iter_generation_rows(
+                PACK_MANIFEST,
+                dataset=PACK_DATASET,
+                row_schema_version=PACK_ROW_SCHEMA,
+                allow_legacy_jsonl=False,
+            )
+        )
 
     def test_real_release_is_exact_and_retains_public_identity(self) -> None:
         manifest = json.loads(RELEASE_MANIFEST.read_text(encoding="utf-8"))
@@ -53,9 +83,62 @@ class RealDocumentOriginReleaseTest(unittest.TestCase):
             sum(int(item["bytes"]) for item in manifest["files"]),
             release_bytes,
         )
-        self.assertEqual(manifest["summary"]["packs"], 25)
-        self.assertEqual(manifest["summary"]["objects"], 240_226)
+        self.assertEqual(
+            manifest["source_origin_manifest"]["sha256"],
+            sha256_file(ORIGIN_MANIFEST),
+        )
+        self.assertEqual(
+            manifest["source_origin_manifest"]["logical_sha256"],
+            self.origin_index["logical_sha256"],
+        )
+        self.assertEqual(
+            manifest["pack_manifest"]["sha256"], sha256_file(PACK_MANIFEST)
+        )
+        self.assertEqual(
+            manifest["pack_manifest"]["logical_sha256"],
+            self.pack_index["logical_sha256"],
+        )
+        self.assertEqual(
+            manifest["summary"]["packs"], self.pack_index["totals"]["rows"]
+        )
+        self.assertEqual(manifest["summary"]["packs"], len(self.pack_rows))
+        self.assertEqual(
+            manifest["summary"]["objects"], self.origin_index["totals"]["rows"]
+        )
+        self.assertEqual(
+            manifest["summary"]["objects"],
+            sum(int(row["object_count"]) for row in self.pack_rows),
+        )
+        self.assertEqual(
+            manifest["summary"]["payload_bytes"],
+            sum(int(row["payload_bytes"]) for row in self.pack_rows),
+        )
+        self.assertEqual(
+            manifest["summary"]["archive_bytes"],
+            sum(int(row["archive_bytes"]) for row in self.pack_rows),
+        )
+        self.assertEqual(
+            manifest["summary"]["member_manifest_bytes"],
+            sum(int(row["member_manifest_bytes"]) for row in self.pack_rows),
+        )
         self.assertGreater(manifest["summary"]["payload_bytes"], 0)
+        pointer = json.loads(POINTER.read_text(encoding="utf-8"))
+        self.assertEqual(pointer["release_id"], manifest["release_id"])
+        self.assertEqual(
+            pointer["source_origin_manifest_sha256"],
+            manifest["source_origin_manifest"]["sha256"],
+        )
+        self.assertEqual(
+            pointer["pack_manifest_sha256"], manifest["pack_manifest"]["sha256"]
+        )
+        self.assertEqual(pointer["packs"], manifest["summary"]["packs"])
+        self.assertEqual(pointer["objects"], manifest["summary"]["objects"])
+        self.assertEqual(
+            pointer["payload_bytes"], manifest["summary"]["payload_bytes"]
+        )
+        self.assertEqual(
+            pointer["release_manifest_sha256"], sha256_file(RELEASE_MANIFEST)
+        )
         self.assertIs(
             manifest["policy"]["official_public_domain_personal_information_retained"],
             True,

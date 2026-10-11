@@ -11,7 +11,11 @@ from publicdata_docs.document_profile import (
     profile_document_content,
     safe_child,
 )
-from publicdata_docs.generation_manifest import iter_generation_rows, load_index_bytes
+from publicdata_docs.generation_manifest import (
+    iter_generation_rows,
+    load_index_bytes,
+    sha256_file,
+)
 from scripts.classify_real_document_profiles import DATASET, REPORT_SCHEMA, ROW_SCHEMA
 from scripts.validate_real_document_profiles import VALIDATION_SCHEMA
 
@@ -93,28 +97,108 @@ class RealDocumentProfileTest(unittest.TestCase):
         source_report = json.loads(PROFILE_REPORT.read_text(encoding="utf-8"))
         validation = json.loads(PROFILE_VALIDATION.read_text(encoding="utf-8"))
         lifecycle = json.loads(PROFILE_LIFECYCLE.read_text(encoding="utf-8"))
+        native_index = load_index_bytes(
+            NATIVE_MANIFEST.read_bytes(), dataset="native_text"
+        )
         index = load_index_bytes(PROFILE_MANIFEST.read_bytes(), dataset=DATASET)
         self.assertEqual(source_report["schema_version"], REPORT_SCHEMA)
         self.assertEqual(source_report["status"], "ok")
-        self.assertEqual(source_report["totals"]["file_instances"], 122_607)
-        self.assertEqual(source_report["totals"]["distinct_content_objects"], 120_757)
+        self.assertEqual(PROFILE_ALGORITHM_VERSION, "document_profile_v2")
         self.assertEqual(
-            source_report["by_format_file_instances"],
-            {"html": 13_128, "pdf": 1_437, "xml": 108_042},
+            source_report["configuration"]["profile_algorithm_version"],
+            PROFILE_ALGORITHM_VERSION,
         )
-        self.assertEqual(source_report["totals"]["office_format_file_instances"], 0)
+        totals = source_report["totals"]
+        self.assertEqual(totals["file_instances"], native_index["totals"]["rows"])
+        self.assertEqual(
+            totals["file_instances"],
+            totals["distinct_content_objects"] + totals["duplicate_file_instances"],
+        )
+        self.assertEqual(
+            sum(source_report["by_format_file_instances"].values()),
+            totals["file_instances"],
+        )
+        self.assertEqual(source_report["by_format_file_instances"]["xlsx"], 46)
+        self.assertEqual(totals["office_format_file_instances"], 46)
+        self.assertEqual(
+            source_report["by_encryption_status_file_instances"],
+            {
+                "encrypted": 1,
+                "not_applicable_office_archive": 46,
+                "not_applicable_plain_markup": 121_170,
+                "not_encrypted": 1_436,
+            },
+        )
+        self.assertEqual(
+            sum(source_report["by_encryption_status_file_instances"].values()),
+            totals["file_instances"],
+        )
         self.assertIs(
             source_report["format_coverage"][
                 "representative_office_format_cohort_present"
             ],
             False,
         )
+        self.assertEqual(
+            source_report["format_coverage"][
+                "representative_office_format_cohort_reason"
+            ],
+            "not_established_by_xlsx_only_cohort",
+        )
         self.assertIs(
             source_report["format_coverage"]["office_extraction_support_claimed"],
+            True,
+        )
+        self.assertIs(
+            source_report["format_coverage"][
+                "independent_office_extraction_validation_bound"
+            ],
             False,
         )
+        self.assertEqual(
+            source_report["format_coverage"]["reason"],
+            "observed_real_xlsx_cohort_extracted_only",
+        )
+        self.assertNotIn(
+            "validated", source_report["format_coverage"]["reason"]
+        )
+        self.assertNotIn("validation", source_report["inputs"])
+        self.assertTrue(
+            source_report["policy"][
+                "office_extraction_validation_requires_bound_validation_artifact"
+            ]
+        )
+        self.assertEqual(
+            source_report["format_coverage"]["observed_office_extensions"],
+            ["xlsx"],
+        )
+        self.assertEqual(
+            source_report["format_coverage"]["supported_office_extensions"],
+            ["xlsx"],
+        )
+        self.assertTrue(all(source_report["checks"].values()))
         self.assertEqual(index["row_schema_version"], ROW_SCHEMA)
-        self.assertEqual(index["totals"]["rows"], 122_607)
+        self.assertEqual(index["totals"]["rows"], totals["file_instances"])
+        self.assertEqual(
+            source_report["inputs"]["native_manifest"]["sha256"],
+            sha256_file(NATIVE_MANIFEST),
+        )
+        self.assertEqual(
+            validation["inputs"]["profile_manifest"]["logical_sha256"],
+            index["logical_sha256"],
+        )
+        self.assertEqual(
+            validation["inputs"]["native_manifest"]["sha256"],
+            sha256_file(NATIVE_MANIFEST),
+        )
+        self.assertEqual(
+            validation["inputs"]["profile_manifest"]["sha256"],
+            sha256_file(PROFILE_MANIFEST),
+        )
+        self.assertEqual(
+            validation["inputs"]["profile_report"]["sha256"],
+            sha256_file(PROFILE_REPORT),
+        )
         self.assertIs(index["policy"]["synthetic_or_mock_records_counted"], False)
         self.assertIs(
             index["policy"]["official_public_domain_personal_information_retained"],
@@ -123,9 +207,19 @@ class RealDocumentProfileTest(unittest.TestCase):
         self.assertEqual(validation["schema_version"], VALIDATION_SCHEMA)
         self.assertEqual(validation["status"], "ok")
         self.assertEqual(
-            validation["totals"]["content_objects_rehashed_and_reclassified"],
-            120_757,
+            validation["configuration"]["profile_algorithm_version"],
+            PROFILE_ALGORITHM_VERSION,
         )
+        self.assertEqual(validation["configuration"], source_report["configuration"])
+        self.assertEqual(
+            validation["totals"]["content_objects_rehashed_and_reclassified"],
+            totals["distinct_content_objects"],
+        )
+        self.assertEqual(
+            validation["totals"]["profile_file_instances"],
+            index["totals"]["rows"],
+        )
+        self.assertTrue(all(validation["checks"].values()))
         self.assertEqual(lifecycle["status"], "ok")
         self.assertTrue(all(lifecycle["checks"].values()))
 

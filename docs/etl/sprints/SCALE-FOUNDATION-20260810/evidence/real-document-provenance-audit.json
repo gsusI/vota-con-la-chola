@@ -39,9 +39,10 @@
       "verified_path_checksum": 1
     },
     "elections": {
-      "bytes": 44066769,
-      "files": 93,
+      "bytes": 52174567,
+      "files": 97,
       "files_with_public_url": 93,
+      "unlinked": 4,
       "verified_path_checksum": 93
     },
     "europarl_meps": {
@@ -74,10 +75,11 @@
       "verified_content_checksum": 2
     },
     "municipal_concejales": {
-      "bytes": 11338475,
-      "files": 4,
-      "files_with_public_url": 4,
-      "verified_path_checksum": 4
+      "bytes": 130405659,
+      "files": 46,
+      "files_with_public_url": 5,
+      "unlinked": 41,
+      "verified_path_checksum": 5
     },
     "official-captures": {
       "bytes": 115695,
@@ -174,7 +176,7 @@
     {
       "bytes": 1656840192,
       "path": "etl/data/staging/politicos-es.db",
-      "raw_metadata_rows": 216021,
+      "raw_metadata_rows": 216026,
       "status": "ok",
       "tables": {
         "document_fetches": {
@@ -182,15 +184,15 @@
           "text_metadata_rows": 0
         },
         "ingestion_runs": {
-          "raw_metadata_rows": 1,
+          "raw_metadata_rows": 2,
           "text_metadata_rows": 0
         },
         "raw_fetches": {
-          "raw_metadata_rows": 1,
+          "raw_metadata_rows": 4,
           "text_metadata_rows": 0
         },
         "run_fetches": {
-          "raw_metadata_rows": 1,
+          "raw_metadata_rows": 2,
           "text_metadata_rows": 0
         },
         "text_documents": {
@@ -260,10 +262,10 @@
     }
   ],
   "edge_manifest": {
-    "bytes": 254072528,
+    "bytes": 254074502,
     "path": "etl/data/manifests/real-document-provenance-edges.jsonl",
-    "rows": 337701,
-    "sha256": "05a30252ac0d8e5303709b84ff545f78bb85c2d82115778eac2f01939cb1a96b"
+    "rows": 337704,
+    "sha256": "d99fd854d3ca2e14fd963d11e5a279f652a08996076c2bc55c0581264d6e6c5d"
   },
   "embedded_official_urls": {
     "already_checksum_linked": 6890,
@@ -356,17 +358,17 @@
     ]
   },
   "file_manifest": {
-    "bytes": 62149654,
+    "bytes": 62170497,
     "path": "etl/data/manifests/real-document-provenance-files.jsonl",
-    "rows": 122607,
-    "sha256": "bf2f0483bdea7bf6e3bac9abbd636af5d87c862d1eba569c15315145b722f466"
+    "rows": 122653,
+    "sha256": "269e03ea766c9c7fd718efec83a9543ac6fc7fdae697f3bc26120815fe03b4b2"
   },
-  "generated_at": "2026-08-30T04:41:19.154663+00:00",
+  "generated_at": "2026-08-30T21:05:19.081550+00:00",
   "inventory": {
-    "bytes": 82987794,
+    "bytes": 109512983,
     "path": "etl/data/manifests/real-document-format-inventory.jsonl",
-    "rows": 122607,
-    "sha256": "4d11b77c8a2ac64b59baed5190fe52975d9d820fe76777585bf6799e8718a9ad"
+    "rows": 122653,
+    "sha256": "f3174670b45b9e2a06c4d1dd64b375e114362a615c479d0f09738cc3d14ffec7"
   },
   "limitations": [
     "The audit covers only the declared inventory, SQLite inputs, auxiliary provenance manifests, and checksum-verified published capture indexes.",
@@ -375,11 +377,21 @@
     "This reconciliation does not increase the document corpus row count or prove extraction accuracy."
   ],
   "metadata": {
-    "matched_metadata_edges": 333108,
-    "metadata_edges": 333148,
-    "unmatched_metadata_edges": 40,
+    "matched_metadata_edges": 333111,
+    "metadata_edges": 333153,
+    "unmatched_metadata_edges": 42,
     "unmatched_samples": [
       {
+        "path": "etl/data/object-origin/infoelectoral-elected-officials/30/35/303542e0e5e6a825bed6ad4d4fb66ecdb54e5cdca283c2b307709e51d937adb6.xlsx",
+        "source_id": "infoelectoral_elected_officials",
+        "table": "raw_fetches"
+      },
+      {
+        "path": "etl/data/object-origin/infoelectoral-elected-officials/ca/fc/cafc4e0f3fc53f01d1370dd47ac841c6cad43a5394e8a8d1afe2495897fbdad4.xlsx",
+        "source_id": "infoelectoral_elected_officials",
+        "table": "raw_fetches"
+      },
+      {
         "path": "etl/data/object-origin/placsp-contract-documents/2b/36/2b369e3647df5cede32dfa901bcb39f1c1750d0405f4d0f57e2b21e5e396ebdf.pdf",
         "source_id": "placsp_contract_docs",
         "table": "text_documents"
@@ -466,16 +478,6 @@
       },
       {
         "path": "etl/data/object-origin/placsp-contract-documents/5f/aa/5faa240343c4988c6ffd6b7f6004a22c6e61407c878f1091bf5d99a5976e6e47.pdf",
-        "source_id": "placsp_contract_docs",
-        "table": "document_fetches"
-      },
-      {
-        "path": "etl/data/object-origin/placsp-contract-documents/69/23/6923dda16c8836d83720696f19bfd2592c81c217694fba0fbcd2696504065b6b.pdf",
-        "source_id": "placsp_contract_docs",
-        "table": "text_documents"
-      },
-      {
-        "path": "etl/data/object-origin/placsp-contract-documents/69/23/6923dda16c8836d83720696f19bfd2592c81c217694fba0fbcd2696504065b6b.pdf",
         "source_id": "placsp_contract_docs",
         "table": "document_fetches"
       }
@@ -716,21 +718,21 @@
     "unique_paths": 6792
   },
   "totals": {
-    "bytes": 5524892735,
-    "files": 122607,
+    "bytes": 5652067717,
+    "files": 122653,
     "files_with_checksum_conflict": 0,
     "files_with_declared_bytes_conflict": 0,
-    "files_with_public_https_url": 118838,
-    "files_with_public_url": 122539,
+    "files_with_public_https_url": 118839,
+    "files_with_public_url": 122540,
     "inventory_non_ok_files": 0,
-    "provenance_edges": 337701,
-    "public_url_coverage": 0.999445,
-    "unlinked": 68,
-    "verified_checksum_coverage": 0.999445,
-    "verified_checksum_files": 122539,
+    "provenance_edges": 337704,
+    "public_url_coverage": 0.999079,
+    "unlinked": 113,
+    "verified_checksum_coverage": 0.999079,
+    "verified_checksum_files": 122540,
     "verified_content_checksum": 1336,
     "verified_embedded_url_checksum": 7374,
-    "verified_path_checksum": 113829
+    "verified_path_checksum": 113830
   },
   "wayback_document_lineage_manifests": [
     {
@@ -740,6 +742,19 @@
       "rows": 0,
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "status": "ok"
+    }
+  ],
+  "xlsx_document_lineage_manifests": [
+    {
+      "accepted_checksum_captures": 0,
+      "bytes": 32375,
+      "inferred_source_url_mappings": 46,
+      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-xlsx-source-lineage.jsonl",
+      "rows": 46,
+      "sha256": "841f7dc7205dc6b4996b9323bc3363556691106abd614a339d522c75c018744e",
+      "status": "partial",
+      "verified_retrieval_receipt_samples": [],
+      "verified_retrieval_receipts": 0
     }
   ]
 }

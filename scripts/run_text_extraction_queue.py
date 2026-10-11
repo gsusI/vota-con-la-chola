@@ -22,7 +22,11 @@ if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 from publicdata_core.util import now_utc_iso  # noqa: E402
-from publicdata_docs.extraction import DocumentExtraction, extract_document_path  # noqa: E402
+from publicdata_docs.extraction import (  # noqa: E402
+    DEFAULT_MAX_XLSX_TEXT_CHARS,
+    DocumentExtraction,
+    extract_document_path,
+)
 from publicdata_ops import (  # noqa: E402
     claim_work_items,
     collect_futures_with_heartbeat,
@@ -60,7 +64,9 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--max-items", type=int, default=0)
     parser.add_argument("--lease-seconds", type=int, default=900)
     parser.add_argument("--max-input-bytes", type=int, default=50 * 1024 * 1024)
-    parser.add_argument("--max-text-chars", type=int, default=2_000_000)
+    parser.add_argument(
+        "--max-text-chars", type=int, default=DEFAULT_MAX_XLSX_TEXT_CHARS
+    )
     parser.add_argument("--excerpt-chars", type=int, default=4_000)
     parser.add_argument("--retry-delay-seconds", type=int, default=60)
     parser.add_argument("--report-out", default="")

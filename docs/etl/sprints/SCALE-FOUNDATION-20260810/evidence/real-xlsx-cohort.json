@@ -1,0 +1,61 @@
+{
+  "bounded_execution": {
+    "distinct_content_tracking": "sqlite_disk_backed",
+    "inventory_input_ordering": "strict_path_order_verified",
+    "lineage_rows_materialized_in_memory": false,
+    "manifest_write": "streaming_atomic_replace"
+  },
+  "by_source_id": {
+    "andalucia_2026_budget_expenses": 2,
+    "andalucia_2026_budget_objectives_indicators": 2,
+    "municipal_concejales": 42
+  },
+  "checks": {
+    "every_capture_checksum_reverified": true,
+    "every_observed_xlsx_has_mapped_official_url": true,
+    "no_synthetic_or_mock_records": true,
+    "official_public_domain_personal_information_retained": true,
+    "real_budget_accountability_cohort_present": true,
+    "real_municipal_identity_cohort_present": true
+  },
+  "generated_at": "2026-08-30T21:01:01.755572+00:00",
+  "inputs": {
+    "inventory": {
+      "bytes": 109512983,
+      "path": "etl/data/manifests/real-document-format-inventory.jsonl",
+      "sha256": "f3174670b45b9e2a06c4d1dd64b375e114362a615c479d0f09738cc3d14ffec7"
+    }
+  },
+  "limitations": [
+    "This cohort proves XLSX extraction only; it does not claim support for other office formats.",
+    "Andalucia capture timestamps were not present in durable local metadata and remain explicitly unknown.",
+    "The current real cohort contains no observed formula cells; formula handling is implemented but is not empirically validated by this cohort.",
+    "Raw OOXML scalar values and typed phonetic annotations are extracted; workbook visual formatting, comments, charts, and embedded media remain outside the native-text claim.",
+    "Official endpoints are mapped from repository path contracts. These rows are not promoted to checksum-proven URL lineage because durable retrieval receipts are absent."
+  ],
+  "manifest": {
+    "bytes": 32375,
+    "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-xlsx-source-lineage.jsonl",
+    "rows": 46,
+    "sha256": "841f7dc7205dc6b4996b9323bc3363556691106abd614a339d522c75c018744e"
+  },
+  "next_action": "Capture immutable retrieval receipts binding source URL, retrieval time, checksum, and byte count for future XLSX downloads; retain existing mappings as inferred until equivalent primary evidence exists.",
+  "policy": {
+    "official_public_domain_personal_information_retained": true,
+    "official_real_workbooks_only": true,
+    "path_inferred_source_urls_are_not_checksum_proven_provenance": true,
+    "retrieval_receipt_required_for_provenance_promotion": true,
+    "synthetic_or_mock_records_counted": false,
+    "unknown_official_source_mapping_is_a_hard_failure": true
+  },
+  "schema_version": "real_xlsx_cohort_v2",
+  "status": "mapped_unverified",
+  "totals": {
+    "checksum_bound_retrieval_receipts": 0,
+    "distinct_content_objects": 44,
+    "duplicate_file_instances": 2,
+    "file_instances": 46,
+    "raw_bytes": 127174982,
+    "source_url_mappings": 46
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "command": [
+    "python3",
+    "scripts/ingest_placsp_archives.py",
+    "--db",
+    "etl/data/staging/placsp-minor-throughput-20260926.db",
+    "--pipeline-id",
+    "placsp-minor-202608-benchmark-20260926",
+    "--report-out",
+    "docs/etl/sprints/DINERO-NACIONAL-20260926/evidence/minor-download.json",
+    "work-archives",
+    "--max-items",
+    "1",
+    "--download-attempts",
+    "1",
+    "--timeout",
+    "60",
+    "--min-free-bytes",
+    "16106127360"
+  ],
+  "elapsed_seconds": 13.728773166891187,
+  "returncode": 0
+}

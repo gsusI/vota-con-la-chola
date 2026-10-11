@@ -1,11 +1,18 @@
 {
   "by_remediation_lane": {
     "europarl_source_manifest_recovery": 25,
+    "official_election_archive_manifest_recovery": 4,
     "primary_party_manifest_recovery": 25,
     "senate_session_capture_manifest_reconciliation": 1,
-    "source_manifest_recovery": 17
+    "source_manifest_recovery": 58
   },
   "by_source_group": {
+    "elections": {
+      "bytes": 8107798,
+      "checksum_lineage_gaps": 4,
+      "public_url_gaps": 4,
+      "rows": 4
+    },
     "europarl_meps": {
       "bytes": 4398347,
       "checksum_lineage_gaps": 25,
@@ -17,6 +24,12 @@
       "checksum_lineage_gaps": 1,
       "public_url_gaps": 1,
       "rows": 1
+    },
+    "municipal_concejales": {
+      "bytes": 116232647,
+      "checksum_lineage_gaps": 41,
+      "public_url_gaps": 41,
+      "rows": 41
     },
     "text_documents/boe_document_xml": {
       "bytes": 372401,
@@ -41,18 +54,18 @@
     "public_url_gap_count_matches_audit": true,
     "queue_rows_balance_gap_union": true
   },
-  "generated_at": "2026-08-30T04:41:36.051319+00:00",
+  "generated_at": "2026-08-30T21:05:21.566573+00:00",
   "inputs": {
     "audit_report": {
-      "bytes": 28372,
+      "bytes": 28922,
       "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-provenance-audit.json",
-      "sha256": "fa7cec80b25e2977b5449b33be4a9229cac49e28840fbfbfa9c8643599d9bac3"
+      "sha256": "2cdfec58d279b820a42bf8ac8a456d215be6714e7406419fbe24885dbe4fb3cd"
     },
     "file_manifest": {
-      "bytes": 62149654,
+      "bytes": 62170497,
       "path": "etl/data/manifests/real-document-provenance-files.jsonl",
-      "rows": 122607,
-      "sha256": "bf2f0483bdea7bf6e3bac9abbd636af5d87c862d1eba569c15315145b722f466"
+      "rows": 122653,
+      "sha256": "269e03ea766c9c7fd718efec83a9543ac6fc7fdae697f3bc26120815fe03b4b2"
     }
   },
   "next_action": "Process p0 lanes first; accept only exact source/capture manifests whose declared bytes and SHA-256 reconcile; then rerun the provenance audit and queue.",
@@ -63,20 +76,20 @@
     "synthetic_or_mock_records_counted": false
   },
   "queue": {
-    "bytes": 51703,
+    "bytes": 85025,
     "empty": false,
     "path": "etl/data/manifests/document-provenance-gap-queue.jsonl",
-    "rows": 68,
-    "sha256": "ab16fb203780fda618be84edd56d07808d1b7c17fb8c7a7246db62d70acc7264",
-    "source_bytes_requiring_remediation": 8687945
+    "rows": 113,
+    "sha256": "bea4a02cf70de6f7d87020c3526e60e9a6b734ec8f7b6cf7452eab00b8eb7949",
+    "source_bytes_requiring_remediation": 133028390
   },
   "schema_version": "document_provenance_gap_queue_v1",
   "status": "ok",
   "totals": {
-    "checksum_lineage_gaps": 68,
-    "files_scanned": 122607,
-    "public_url_gaps": 68,
-    "queue_bytes": 8687945,
-    "queue_rows": 68
+    "checksum_lineage_gaps": 113,
+    "files_scanned": 122653,
+    "public_url_gaps": 113,
+    "queue_bytes": 133028390,
+    "queue_rows": 113
   }
 }

@@ -4,38 +4,38 @@
   "inputs": {
     "public_artifact": {
       "path": "ui/gh-pages-next/public/transparency/data/document-factory-economics.json",
-      "bytes": 7413,
-      "sha256": "3cd366769abc9ea409e0e4b4de075ee32aebbaa18b3e05938a39b55d36fed35f"
+      "bytes": 8356,
+      "sha256": "8e142f8c64071a0ebec2994f400a733d229a1bd64ddef4419d71c2630f700e75"
     },
     "evidence_copy": {
       "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-factory-economics-20260829.json",
-      "bytes": 7413,
-      "sha256": "3cd366769abc9ea409e0e4b4de075ee32aebbaa18b3e05938a39b55d36fed35f"
+      "bytes": 8356,
+      "sha256": "8e142f8c64071a0ebec2994f400a733d229a1bd64ddef4419d71c2630f700e75"
     },
     "inventory": {
       "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-format-inventory.json",
-      "bytes": 10105,
-      "sha256": "3ecb49e23c8f23f0acb4d50999e403bcada01a8ed3ef93eba1ef07dc95525611"
+      "bytes": 11085,
+      "sha256": "67c432633504cc2934eab6cc5865b163479aaf7302f66512635a170c3a6d2f35"
     },
     "native_extraction": {
-      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-extraction-physical-20260829.json",
-      "bytes": 2932,
-      "sha256": "1ff8c7f0819f2febf67637c8ebfae721e7bf1eb0ef561a7561b51c51f0b7222d"
+      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-extraction.json",
+      "bytes": 4968,
+      "sha256": "e897f28e3c9027ccb0ab362ae8254d5b85220a039a92df89688b914ab00be4a1"
     },
     "native_validation": {
-      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-validation-physical-20260829.json",
-      "bytes": 2657,
-      "sha256": "37bc38a048397c8071c4ad1dca0c971c1fe35ded21117880dc62d051a0f0f833"
+      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-validation.json",
+      "bytes": 4066,
+      "sha256": "a8f78f4f97541f2ddd83b68c5098f790990631293106bf874d4c084615589be9"
     },
     "page_ocr": {
-      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-physical-20260829.json",
-      "bytes": 3234,
-      "sha256": "8e1c3d9f7b00030d09d0b8e3981b0eb294f24ad42b2442689eeb8d2949c72459"
+      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr.json",
+      "bytes": 4685,
+      "sha256": "d93be61e164ae0c0a478f3405c9ddbe5fa5bfb5779f4e8147b315b208f1e12b2"
     },
     "page_ocr_validation": {
-      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-validation-physical-20260829.json",
-      "bytes": 2494,
-      "sha256": "7fdae185f3eba95f72c7ad4eaa1e18b3c550c3eff60c46acafa95590dfa674f3"
+      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-validation.json",
+      "bytes": 2505,
+      "sha256": "336fd8670d6578a848946aa45411be9dd8f95aeda4c5f0de8cdeea6c127c459d"
     },
     "document_fetch_operations": {
       "path": "ui/gh-pages-next/public/transparency/data/document-fetch-operations.json",
@@ -56,9 +56,15 @@
     }
   },
   "checks": {
-    "file_size_bytes": 7413,
+    "file_size_bytes": 8356,
     "max_bytes": 500000,
-    "native_objects": 109558,
+    "native_objects": 120801,
+    "native_file_instances": 122653,
+    "native_counts_reconciled": true,
+    "native_current_full_physical_run_complete": true,
+    "native_cold_output_benchmark_available": false,
+    "ocr_current_full_physical_run_complete": true,
+    "ocr_cold_output_benchmark_available": false,
     "ocr_pages": 856,
     "fresh_acquisition_documents_succeeded": 10000,
     "fresh_acquisition_network_requests": 10000,

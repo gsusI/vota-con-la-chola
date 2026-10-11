@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 import re
@@ -15,6 +16,59 @@ from typing import Any
 
 HEX_64 = re.compile(r"^[0-9a-f]{64}$")
 ALLOWED_FRESHNESS = {"fresh", "aging", "stale", "future", "unknown"}
+ECONOMICS_OPTIONAL_BENCHMARK_CHECKS = {
+    "native_cold_output_benchmark_available",
+    "ocr_cold_output_benchmark_available",
+}
+ECONOMICS_REQUIRED_CHECKS = {
+    "official_real_documents_only",
+    "synthetic_or_mock_records_absent",
+    "public_domain_personal_information_retained",
+    "native_current_full_physical_run_complete",
+    "ocr_current_full_physical_run_complete",
+    "acquisition_queue_reconciled",
+    "fresh_acquisition_physical_run_complete",
+    "monetary_cost_not_fabricated",
+}
+REPO_ROOT = Path(__file__).resolve().parents[1]
+EXPECTED_ECONOMICS_SOURCE_PATH = Path(
+    "ui/gh-pages-next/public/transparency/data/document-factory-economics.json"
+)
+EXPECTED_ECONOMICS_SOURCE_URL = "/transparency/data/document-factory-economics.json"
+
+
+def sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def load_bound_economics_source(
+    source_ref: Any,
+) -> tuple[Path | None, dict[str, Any] | None, str | None]:
+    raw = str(source_ref or "").strip()
+    expected = EXPECTED_ECONOMICS_SOURCE_PATH.as_posix()
+    if raw != expected:
+        return None, None, f"document economics source_path must be {expected}"
+    relative = Path(raw)
+    if relative.is_absolute() or ".." in relative.parts:
+        return None, None, "document economics source_path is unsafe"
+    candidate = (REPO_ROOT / relative).resolve()
+    try:
+        candidate.relative_to(REPO_ROOT.resolve())
+    except ValueError:
+        return None, None, "document economics source_path escapes repository"
+    if not candidate.is_file():
+        return None, None, "document economics source artifact is missing"
+    try:
+        payload = json.loads(candidate.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        return None, None, f"document economics source artifact is invalid: {exc}"
+    if not isinstance(payload, dict):
+        return None, None, "document economics source artifact must be an object"
+    return candidate, payload, None
 
 
 def parse_iso(value: Any) -> bool:
@@ -270,14 +324,56 @@ def validate(path: Path, max_bytes: int) -> dict[str, Any]:
         errors.append("document economics makes unsupported million claim")
     if economics_claim.get("promoted_for_one_million_operation") is not False:
         errors.append("document economics makes unsupported promotion claim")
-    if not economics.get("checks") or not all(
-        value is True for value in (economics.get("checks") or {}).values()
-    ):
-        errors.append("document economics checks must all pass")
-    if not HEX_64.fullmatch(str(economics.get("source_sha256") or "")):
-        errors.append("document_factory_economics.source_sha256 invalid")
-    if not is_link(economics.get("source_url")):
-        errors.append("document_factory_economics.source_url missing")
+    economics_checks = economics.get("checks") or {}
+    if not isinstance(economics_checks, dict) or not economics_checks:
+        errors.append("document economics checks missing")
+    else:
+        missing_economics_checks = sorted(
+            (ECONOMICS_REQUIRED_CHECKS | ECONOMICS_OPTIONAL_BENCHMARK_CHECKS)
+            - economics_checks.keys()
+        )
+        if missing_economics_checks:
+            errors.append(
+                "document economics checks missing: "
+                + ", ".join(missing_economics_checks)
+            )
+        for key in sorted(ECONOMICS_REQUIRED_CHECKS):
+            if economics_checks.get(key) is not True:
+                errors.append(f"document economics integrity check failed: {key}")
+        for key in sorted(ECONOMICS_OPTIONAL_BENCHMARK_CHECKS):
+            if not isinstance(economics_checks.get(key), bool):
+                errors.append(f"document economics benchmark check invalid: {key}")
+    source_path, source_economics, source_error = load_bound_economics_source(
+        economics.get("source_path")
+    )
+    if source_error:
+        errors.append(source_error)
+    elif source_path is not None and source_economics is not None:
+        expected_source_sha256 = sha256_file(source_path)
+        if economics.get("source_sha256") != expected_source_sha256:
+            errors.append("document_factory_economics.source_sha256 mismatch")
+        expected_projection = {
+            "status": str((source_economics.get("meta") or {}).get("status") or ""),
+            "acquisition": source_economics.get("acquisition") or {},
+            "historical_acquisition_queue": source_economics.get(
+                "historical_acquisition_queue"
+            )
+            or {},
+            "native_extraction": source_economics.get("native_extraction") or {},
+            "page_ocr": source_economics.get("page_ocr") or {},
+            "storage": source_economics.get("storage") or {},
+            "monetary_cost": source_economics.get("monetary_cost") or {},
+            "measurement_gaps": source_economics.get("measurement_gaps") or [],
+            "checks": source_economics.get("checks") or {},
+            "scale_claim": source_economics.get("scale_claim") or {},
+        }
+        observed_projection = {
+            key: economics.get(key) for key in expected_projection
+        }
+        if observed_projection != expected_projection:
+            errors.append("document economics projection does not match bound source")
+    if economics.get("source_url") != EXPECTED_ECONOMICS_SOURCE_URL:
+        errors.append("document_factory_economics.source_url mismatch")
 
     releases = payload.get("recent_changes") or []
     release_ids: set[str] = set()

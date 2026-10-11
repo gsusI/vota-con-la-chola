@@ -2,6 +2,7 @@
   "checks": {
     "all_distinct_content_objects_terminal_success": true,
     "all_file_instances_manifested": true,
+    "effective_configuration_bound_before_state_reuse": true,
     "extraction_algorithm_version_bound": true,
     "inventory_and_provenance_inputs_bound_by_sha256": true,
     "no_dead_work": true,
@@ -9,64 +10,72 @@
     "no_synthetic_or_mock_records": true,
     "official_public_domain_personal_information_retained": true
   },
-  "extraction_algorithm_version": "document_extraction_v2_pdf_plain_text",
-  "generated_at": "2026-08-30T11:57:42.597830Z",
+  "effective_configuration": {
+    "extraction_algorithm_version": "document_extraction_v4_pdf_markup_xlsx_phonetic_bounded",
+    "max_attempts": 3,
+    "max_input_bytes": 134217728,
+    "max_text_chars": 33554432,
+    "schema_version": "real_document_text_extraction_effective_configuration_v1"
+  },
+  "effective_configuration_sha256": "782c81bbd366469f433e6da4c99aafae28c702e176b22b115780e569df67d44d",
+  "extraction_algorithm_version": "document_extraction_v4_pdf_markup_xlsx_phonetic_bounded",
+  "generated_at": "2026-08-30T21:16:58.093918Z",
   "inputs": {
     "inventory": {
-      "bytes": 82987794,
+      "bytes": 109512983,
       "path": "etl/data/manifests/real-document-format-inventory.jsonl",
-      "sha256": "4d11b77c8a2ac64b59baed5190fe52975d9d820fe76777585bf6799e8718a9ad"
+      "sha256": "f3174670b45b9e2a06c4d1dd64b375e114362a615c479d0f09738cc3d14ffec7"
     },
     "provenance": {
-      "bytes": 62149654,
+      "bytes": 62170497,
       "path": "etl/data/manifests/real-document-provenance-files.jsonl",
-      "sha256": "bf2f0483bdea7bf6e3bac9abbd636af5d87c862d1eba569c15315145b722f466"
+      "sha256": "269e03ea766c9c7fd718efec83a9543ac6fc7fdae697f3bc26120815fe03b4b2"
     }
   },
   "manifest": {
     "bytes": 5423,
-    "compressed_bytes": 13701409,
-    "logical_sha256": "2b022ccb276e3f9b8829673e747daf5bea9c0f6f4b50ad20d12d0cf41a2805c6",
+    "compressed_bytes": 13935845,
+    "logical_sha256": "f68d4b069efafea6a6adf9e952668efc57cfeb7c984de814918157ce20ce606f",
     "path": "etl/data/published/real-document-text-manifest-latest.jsonl",
     "publication": {
       "activated": true,
-      "active_history_path": "real-document-text-manifest-latest-history/e5e7aa2ec3d7f80d036885b2ff214da58b8ee9532dc647e5336cde1578a147a9.json",
-      "active_logical_sha256": "2b022ccb276e3f9b8829673e747daf5bea9c0f6f4b50ad20d12d0cf41a2805c6",
-      "active_manifest_sha256": "e5e7aa2ec3d7f80d036885b2ff214da58b8ee9532dc647e5336cde1578a147a9",
-      "active_receipt_path": "real-document-text-manifest-latest-receipts/e5e7aa2ec3d7f80d036885b2ff214da58b8ee9532dc647e5336cde1578a147a9.json",
+      "active_history_path": "real-document-text-manifest-latest-history/14d4eba78df49a291fdfff6f7d637773b699f78db8b71c56d9b634dd77a03cec.json",
+      "active_logical_sha256": "f68d4b069efafea6a6adf9e952668efc57cfeb7c984de814918157ce20ce606f",
+      "active_manifest_sha256": "14d4eba78df49a291fdfff6f7d637773b699f78db8b71c56d9b634dd77a03cec",
+      "active_receipt_path": "real-document-text-manifest-latest-receipts/14d4eba78df49a291fdfff6f7d637773b699f78db8b71c56d9b634dd77a03cec.json",
       "automatic_deletion_performed": false,
       "legacy_equivalent_jsonl_migrated": false,
-      "live_index_changed": false,
+      "live_index_changed": true,
       "live_index_switched_last": true,
-      "predecessor_manifest_sha256": "fea6dc86110ad94c190133077d2271130652f30475f6f561ad0ab5ca98e25024",
+      "predecessor_manifest_sha256": "ae41313c9de9e071191ceb1802b148f5f5409a4ad234f9a015826c79ddf439d0",
       "state_snapshot": {
-        "bytes": 166096896,
-        "compressed_bytes": 40121239,
-        "compressed_sha256": "9b70811410b31cc36cda2f6a2f82887d1c2d1c2d0efac33fe7d72afc68894314",
-        "path": "real-document-text-manifest-latest-state/0f513bd506f98ceaab077adb62757ab16ae65a5c11e19e459fd116b732ff2b49.sqlite.gz",
-        "sha256": "0f513bd506f98ceaab077adb62757ab16ae65a5c11e19e459fd116b732ff2b49",
+        "bytes": 167096320,
+        "compressed_bytes": 40254573,
+        "compressed_sha256": "a433eff0fff1b387f5028b45ec6517f4a907c9fcdf8122c46ffaa718fda7a61c",
+        "path": "real-document-text-manifest-latest-state/77a16b535a47f665ea7610622e2df4c77b12cf68715767ee8527a655d4b479bb.sqlite.gz",
+        "sha256": "77a16b535a47f665ea7610622e2df4c77b12cf68715767ee8527a655d4b479bb",
         "sqlite_quick_check": "ok"
       },
       "superseded_predecessor": true
     },
-    "rows": 122607,
-    "sha256": "e5e7aa2ec3d7f80d036885b2ff214da58b8ee9532dc647e5336cde1578a147a9",
+    "rows": 122653,
+    "sha256": "14d4eba78df49a291fdfff6f7d637773b699f78db8b71c56d9b634dd77a03cec",
     "shard_files": 13,
-    "uncompressed_bytes": 143582823
+    "uncompressed_bytes": 145845414
   },
   "next_action": "Independently validate every manifest row and text CAS object, then OCR every distinct empty or sparse PDF page without replacing native text.",
   "performance": {
     "claim_size": 48,
     "cold_state_and_output": false,
-    "cpu_seconds": 3.257941,
-    "elapsed_seconds": 4.147329,
-    "items_per_second": 0.0,
+    "cpu_seconds": 589.442165,
+    "elapsed_seconds": 656.56743,
+    "items_per_second": 183.988718,
     "measurement_scope": "seed_extract_and_manifest",
     "output_root_preexisting": true,
-    "peak_rss_bytes_child_max": 0,
-    "peak_rss_bytes_self": 41041920,
-    "raw_bytes_per_second": 0.0,
-    "state_db_preexisting": true,
+    "peak_rss_bytes_child_max": 245628928,
+    "peak_rss_bytes_self": 940376064,
+    "raw_bytes_per_second": 8279092.893779,
+    "state_db_preexisting": false,
     "workers": 12
   },
   "policy": {
@@ -76,44 +85,48 @@
     "official_real_documents_only": true,
     "pdf_plain_text_angle_brackets_retained": true,
     "raw_document_bytes_are_not_copied_into_work_rows": true,
-    "synthetic_or_mock_records_counted": false
+    "synthetic_or_mock_records_counted": false,
+    "xlsx_formula_extraction_implemented_but_not_observed_in_real_cohort": true,
+    "xlsx_observed_public_cell_values_retained": true,
+    "xlsx_public_phonetic_annotations_retained": true,
+    "xlsx_text_truncation_forbidden": true
   },
   "run": {
-    "claimed": 0,
+    "claimed": 120801,
     "dead": 0,
-    "raw_bytes_succeeded": 0,
+    "raw_bytes_succeeded": 5435782744,
     "retried": 0,
-    "succeeded": 0
+    "succeeded": 120801
   },
   "schema_version": "real_document_text_extraction_v1",
   "seed": {
-    "distinct_content_objects": 120757,
-    "file_instances": 122607
+    "distinct_content_objects": 120801,
+    "file_instances": 122653
   },
   "state": {
-    "database": "etl/data/staging/real-document-text-corpus-v7-20260830.db",
+    "database": "etl/data/staging/real-document-text-corpus-v10-20260830.db",
     "extraction_counts": {
-      "native_text_extracted": 120757
+      "native_text_extracted": 120801
     },
     "state_counts": {
-      "succeeded": 120757
+      "succeeded": 120801
     }
   },
   "status": "ok",
   "totals": {
-    "distinct_content_objects": 120757,
-    "duplicate_file_instances": 1850,
-    "file_instances": 122607,
+    "distinct_content_objects": 120801,
+    "duplicate_file_instances": 1852,
+    "file_instances": 122653,
     "native_no_text_objects": 0,
-    "native_text_chars": 2211254429,
+    "native_text_chars": 3192030152,
     "native_truncated_objects": 0,
     "ocr_candidate_pages": 856,
-    "provenance_gap_instances": 68,
-    "public_url_instances": 122539,
-    "raw_content_bytes": 5312661661,
-    "text_cas_bytes": 590202955,
-    "text_cas_bytes_observed_across_retained_generations": 591054063,
-    "text_cas_files": 119338,
-    "text_cas_files_observed_across_retained_generations": 119344
+    "provenance_gap_instances": 113,
+    "public_url_instances": 122540,
+    "raw_content_bytes": 5435782744,
+    "text_cas_bytes": 612345191,
+    "text_cas_bytes_observed_across_retained_generations": 613196299,
+    "text_cas_files": 119346,
+    "text_cas_files_observed_across_retained_generations": 119352
   }
 }

@@ -14,10 +14,15 @@
     "no_synthetic_or_mock_records": true,
     "normalized_spans_within_configured_bound": true,
     "official_public_domain_personal_information_retained": true,
-    "semantic_markup_sections_materialized": true
+    "semantic_markup_sections_materialized": true,
+    "xlsx_average_locator_fanout_within_million_scale_bound": true,
+    "xlsx_content_objects_accounted_for": true,
+    "xlsx_maximum_locator_fanout_within_bound": true,
+    "xlsx_row_groups_materialized": true,
+    "xlsx_row_groups_within_configured_bound": true
   },
   "configuration": {
-    "locator_algorithm_version": "document_text_locator_v3_major_markup_sections",
+    "locator_algorithm_version": "document_text_locator_v5_markup_sections_xlsx_coarse_row_groups",
     "markup_fallback_locator": "normalized_native_text_character_span",
     "markup_locator": "source_xpath_plus_bounded_native_text_span",
     "markup_section_max_depth": 1,
@@ -25,56 +30,59 @@
     "max_locators_per_content": 2000,
     "max_semantic_markup_bytes": 67108864,
     "max_span_chars": 8192,
-    "pdf_locator": "page_number"
+    "max_xlsx_locators_per_content": 10,
+    "max_xlsx_span_chars": 4194304,
+    "pdf_locator": "page_number",
+    "xlsx_locator": "worksheet_ordinal_plus_source_row_range_and_bounded_native_text_span"
   },
-  "generated_at": "2026-08-30T13:47:23.736058Z",
+  "generated_at": "2026-08-30T19:33:22.623586Z",
   "inputs": {
     "native_manifest": {
       "bytes": 5423,
       "path": "etl/data/published/real-document-text-manifest-latest.jsonl",
-      "sha256": "e5e7aa2ec3d7f80d036885b2ff214da58b8ee9532dc647e5336cde1578a147a9"
+      "sha256": "ae41313c9de9e071191ceb1802b148f5f5409a4ad234f9a015826c79ddf439d0"
     }
   },
   "manifest": {
     "bytes": 32720,
-    "compressed_bytes": 64886826,
-    "logical_sha256": "387a6ce263540f7ee86e5980026acf77eeb421c56c09d5378ad5b8b5f9143248",
+    "compressed_bytes": 64893301,
+    "logical_sha256": "6c7db3f4656d572bd9d6c07e874f446f97cde302c2016b52bef1c3a4b4328690",
     "path": "etl/data/published/real-document-text-locator-manifest-latest.jsonl",
     "publication": {
       "activated": true,
-      "active_history_path": "real-document-text-locator-manifest-latest-history/61bf8adfa5870cfde279bd6f4e20b0681ff172257975ec024e31a011297b9723.json",
-      "active_logical_sha256": "387a6ce263540f7ee86e5980026acf77eeb421c56c09d5378ad5b8b5f9143248",
-      "active_manifest_sha256": "61bf8adfa5870cfde279bd6f4e20b0681ff172257975ec024e31a011297b9723",
-      "active_receipt_path": "real-document-text-locator-manifest-latest-receipts/61bf8adfa5870cfde279bd6f4e20b0681ff172257975ec024e31a011297b9723.json",
+      "active_history_path": "real-document-text-locator-manifest-latest-history/f52971bdac98c9d99fd4adda2923b50413f05b2e5589f71c245e99b0647d485b.json",
+      "active_logical_sha256": "6c7db3f4656d572bd9d6c07e874f446f97cde302c2016b52bef1c3a4b4328690",
+      "active_manifest_sha256": "f52971bdac98c9d99fd4adda2923b50413f05b2e5589f71c245e99b0647d485b",
+      "active_receipt_path": "real-document-text-locator-manifest-latest-receipts/f52971bdac98c9d99fd4adda2923b50413f05b2e5589f71c245e99b0647d485b.json",
       "automatic_deletion_performed": false,
       "legacy_equivalent_jsonl_migrated": false,
-      "live_index_changed": false,
+      "live_index_changed": true,
       "live_index_switched_last": true,
-      "predecessor_manifest_sha256": "621b8b47c8e5f506a07900f474c7ca95a4df1395e13068f82a58a04a76c68eb9",
+      "predecessor_manifest_sha256": "aea48939990275c21f03220f077f277a0027832c4031a48eb843152476670fdb",
       "state_snapshot": {
-        "bytes": 432967680,
-        "compressed_bytes": 101513415,
-        "compressed_sha256": "03d0b492824bd5695c9f9e689d130c96a50d0c4bc9b40ed54ed2260d517ada18",
-        "path": "real-document-text-locator-manifest-latest-state/6a52a9dc5c2109f7aaaaad4e669fce6e84e8cfb2f4febfce54ee237e41486b52.sqlite.gz",
-        "sha256": "6a52a9dc5c2109f7aaaaad4e669fce6e84e8cfb2f4febfce54ee237e41486b52",
+        "bytes": 433152000,
+        "compressed_bytes": 101564455,
+        "compressed_sha256": "9080d6659f80418809755ffaeaaaada889a1a05ef143c3c2e96bcdcbee158153",
+        "path": "real-document-text-locator-manifest-latest-state/b3b3f0ebf4f195d4a6d5aea23586fc98440f406c92cc802b8a67e8bec5c2ff1d.sqlite.gz",
+        "sha256": "b3b3f0ebf4f195d4a6d5aea23586fc98440f406c92cc802b8a67e8bec5c2ff1d",
         "sqlite_quick_check": "ok"
       },
       "superseded_predecessor": true
     },
-    "rows": 879104,
-    "sha256": "61bf8adfa5870cfde279bd6f4e20b0681ff172257975ec024e31a011297b9723",
+    "rows": 879374,
+    "sha256": "f52971bdac98c9d99fd4adda2923b50413f05b2e5589f71c245e99b0647d485b",
     "shard_files": 88,
-    "uncompressed_bytes": 948116826
+    "uncompressed_bytes": 948410859
   },
-  "next_action": "Independently replay every raw/native object and page/section locator, then acquire a representative real office-format cohort before claiming office extraction support.",
+  "next_action": "Independently replay every raw/native object and page/section/row-group locator. XLSX support applies only to the observed official workbook cohort; acquire real DOC, ODT, legacy XLS, or presentation cohorts before claiming support for those formats.",
   "performance": {
-    "content_objects_per_second": 0.0,
-    "cpu_seconds": 16.78822,
-    "elapsed_seconds": 17.179425,
+    "content_objects_per_second": 292.124309,
+    "cpu_seconds": 484.403926,
+    "elapsed_seconds": 413.52601,
     "measurement_scope": "seed_rehash_locate_and_manifest",
-    "peak_rss_bytes_child_max": 0,
-    "peak_rss_bytes_self": 43679744,
-    "raw_bytes_per_second": 0.0
+    "peak_rss_bytes_child_max": 239435776,
+    "peak_rss_bytes_self": 1365377024,
+    "raw_bytes_per_second": 13144959.718495
   },
   "policy": {
     "locator_rows_copy_no_public_text": true,
@@ -84,48 +92,54 @@
     "official_real_documents_only": true,
     "pdf_locators_are_exact_pages": true,
     "synthetic_or_mock_records_counted": false,
-    "unproven_markup_structure_falls_back_to_exact_text_spans": true
+    "unproven_markup_structure_falls_back_to_exact_text_spans": true,
+    "xlsx_locators_are_exact_sheet_ordinals_and_row_ranges": true
   },
   "run": {
-    "claimed": 0,
+    "claimed": 120801,
     "dead": 0,
-    "locator_rows": 0,
-    "native_text_bytes_rehashed": 0,
-    "raw_bytes_rehashed": 0,
+    "locator_rows": 819042,
+    "native_text_bytes_rehashed": 3241990129,
+    "raw_bytes_rehashed": 5435782744,
     "retried": 0,
     "seeded": {
-      "distinct_content_objects": 120757,
-      "file_instances": 122607
+      "distinct_content_objects": 120801,
+      "file_instances": 122653
     },
-    "succeeded": 0
+    "succeeded": 120801
   },
   "schema_version": "real_document_text_locator_extraction_v1",
   "state": {
-    "database": "etl/data/staging/real-document-text-locators-v4-20260830.db",
+    "database": "etl/data/staging/real-document-text-locators-v7-20260830.db",
     "state_counts": {
-      "succeeded": 120757
+      "succeeded": 120801
     }
   },
   "status": "ok",
   "totals": {
-    "average_locator_rows_per_content": 6.780402,
-    "content_locator_rows": 818781,
-    "distinct_content_objects": 120757,
+    "average_locator_rows_per_content": 6.780093,
+    "average_xlsx_locator_rows_per_content": 5.931818,
+    "content_locator_rows": 819042,
+    "distinct_content_objects": 120801,
     "document_no_text_locators": 0,
     "fallback_markup_content_objects": 322,
-    "file_instances": 122607,
-    "instance_locator_rows": 879104,
-    "locator_text_chars": 2211224791,
-    "locators_with_text": 818747,
+    "file_instances": 122653,
+    "instance_locator_rows": 879374,
+    "locator_text_chars": 3192000514,
+    "locators_with_text": 819008,
     "markup_content_objects": 119795,
     "markup_section_locators": 782814,
     "max_locator_rows_per_content": 1568,
-    "native_text_bytes": 2256345242,
-    "native_text_chars": 2211254429,
+    "max_xlsx_locator_rows_per_content": 6,
+    "native_text_bytes": 3241990129,
+    "native_text_chars": 3192030152,
     "normalized_text_span_locators": 5333,
     "pdf_content_objects": 962,
     "pdf_page_locators": 30634,
-    "projected_content_locator_rows_at_one_million_documents": 6780402,
-    "semantic_markup_content_objects": 119473
+    "projected_content_locator_rows_at_one_million_documents": 6780093,
+    "projected_xlsx_locator_rows_at_one_million_xlsx_documents": 5931818,
+    "semantic_markup_content_objects": 119473,
+    "xlsx_content_objects": 44,
+    "xlsx_row_group_locators": 261
   }
 }

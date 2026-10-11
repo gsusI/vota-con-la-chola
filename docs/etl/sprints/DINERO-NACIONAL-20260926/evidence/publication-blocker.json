@@ -1,0 +1,17 @@
+{
+  "command": "DB_PATH=etl/data/staging/placsp-throughput-20260926.db SNAPSHOT_DATE=2026-09-26 just etl-publish-hf-dry-run",
+  "returncode": 1,
+  "failed_recipe": "etl-scale-readiness",
+  "failure": "document native_validation contract version mismatch",
+  "new_cohort_validators": "passed for main/minor/aggregated August 2026 and minor 2018",
+  "publication_attempted": false,
+  "public_api_rows_at_capture": 47397,
+  "next_action": "Reconcile the existing document native_validation contract and its evidence before rerunning the global publication gate; do not weaken the gate or promote these cohorts as published.",
+  "diagnosis": {
+    "expected_native_validation_schema": "real_document_text_validation_v2",
+    "actual_native_validation_schema": "real_document_text_validation_v1",
+    "native_validation_extraction_algorithm": "document_extraction_v3_pdf_markup_xlsx_public_values",
+    "current_extraction_algorithm": "document_extraction_v4_pdf_markup_xlsx_phonetic_bounded",
+    "interpretation": "Existing extraction and validation evidence belong to different generations; changing only the version label would not validate the data."
+  }
+}

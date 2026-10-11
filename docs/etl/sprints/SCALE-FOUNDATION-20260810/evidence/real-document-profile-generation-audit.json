@@ -1,5 +1,7 @@
 {
   "activation_chain": [
+    "a77a880f536471e63f865950c58f85130c802ad8f03a976e80cc171d7a5d8719",
+    "3b8925899d08e37510da016987185fe3d029a229e916b8faeb915964b8bccedf",
     "4dfeba473b16789a1e058567ec4f29ff3b2eff30925bbf753752947b3d2bc96b",
     "1b5d0902ece3855e0730ab88efc99de9d989bb1a1204c6540ebad2d96e4e53ec",
     "4b6b90feca7f0e27d0a18d8d0520eb3b0044b392cebbdcc7cd25290cd7fd283b"
@@ -21,12 +23,12 @@
     "retained_state_snapshots_checked_to_requested_depth": true
   },
   "dataset": "document_profile",
-  "generated_at": "2026-08-30T14:00:19.073116+00:00",
+  "generated_at": "2026-08-30T19:53:58.539692+00:00",
   "input": {
     "bytes": 5626,
-    "logical_sha256": "18c2c47fcc46900e51a1d24ac26147e24030760505ec57a96393c02594924705",
+    "logical_sha256": "035b004eef962ec6e9fd1480b1f0eb073b3a9e7fa781eb2360888a72b3272760",
     "path": "etl/data/published/real-document-profile-manifest-latest.jsonl",
-    "sha256": "4dfeba473b16789a1e058567ec4f29ff3b2eff30925bbf753752947b3d2bc96b"
+    "sha256": "a77a880f536471e63f865950c58f85130c802ad8f03a976e80cc171d7a5d8719"
   },
   "mode": {
     "full_shard_check": true,
@@ -50,19 +52,19 @@
   "schema_version": "real_document_generation_lifecycle_audit_v1",
   "status": "ok",
   "totals": {
-    "activation_chain_manifests": 3,
-    "activation_receipts": 3,
+    "activation_chain_manifests": 5,
+    "activation_receipts": 5,
     "automatic_deletions": 0,
     "interrupted_staging_directories": 0,
-    "manifest_archives": 3,
+    "manifest_archives": 5,
     "orphan_generation_directories": 0,
     "orphan_state_snapshots": 0,
-    "retained_compressed_manifest_bytes": 46593328,
-    "retained_compressed_state_bytes": 138584458,
-    "retained_shard_files": 39,
-    "retained_state_snapshots": 2,
-    "retained_unique_generations": 3,
-    "superseded_generations": 2,
+    "retained_compressed_manifest_bytes": 77611256,
+    "retained_compressed_state_bytes": 230019614,
+    "retained_shard_files": 65,
+    "retained_state_snapshots": 4,
+    "retained_unique_generations": 5,
+    "superseded_generations": 4,
     "unactivated_activation_receipts": 0,
     "unactivated_generation_directories": 0,
     "unactivated_manifest_archives": 0

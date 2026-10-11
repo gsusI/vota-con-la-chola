@@ -35,6 +35,7 @@ from publicdata_docs.generation_manifest import (
 )
 from scripts.locate_real_document_text import (
     DATASET,
+    EMPTY_TEXT_SHA256,
     NATIVE_DATASET,
     NATIVE_ROW_SCHEMA,
     REPORT_SCHEMA,
@@ -57,7 +58,7 @@ DEFAULT_REPORT = Path(
     "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/"
     "real-document-text-locator-validation.json"
 )
-VALIDATION_SCHEMA = "real_document_text_locator_validation_v1"
+VALIDATION_SCHEMA = "real_document_text_locator_validation_v2"
 
 
 class LocatorValidationError(RuntimeError):
@@ -138,6 +139,7 @@ def open_work_db(path: Path) -> sqlite3.Connection:
           bytes INTEGER NOT NULL,
           mime_type TEXT NOT NULL,
           page_count INTEGER,
+          native_extraction_status TEXT NOT NULL,
           native_text_sha256 TEXT NOT NULL,
           native_text_cas_path TEXT NOT NULL,
           native_text_chars INTEGER NOT NULL,
@@ -151,6 +153,7 @@ def open_work_db(path: Path) -> sqlite3.Connection:
           bytes INTEGER NOT NULL,
           mime_type TEXT NOT NULL,
           page_count INTEGER,
+          native_extraction_status TEXT NOT NULL,
           native_text_sha256 TEXT NOT NULL,
           native_text_cas_path TEXT NOT NULL,
           native_text_chars INTEGER NOT NULL,
@@ -169,6 +172,7 @@ def open_work_db(path: Path) -> sqlite3.Connection:
           text_chars INTEGER NOT NULL,
           text_sha256 TEXT NOT NULL,
           has_text INTEGER NOT NULL,
+          native_extraction_status TEXT NOT NULL,
           native_text_sha256 TEXT NOT NULL,
           native_text_cas_path TEXT NOT NULL,
           native_text_chars INTEGER NOT NULL,
@@ -202,29 +206,51 @@ def load_native(conn: sqlite3.Connection, manifest: Path) -> tuple[int, int]:
         row_schema_version=NATIVE_ROW_SCHEMA,
         allow_legacy_jsonl=False,
     ):
+        native_status = str(item.get("native_extraction_status") or "")
+        native_sha256 = str(item.get("native_text_sha256") or "")
+        native_cas_path = str(item.get("native_text_cas_path") or "")
+        native_chars = int(item.get("native_text_chars") or 0)
+        native_text_ready = (
+            native_status == "native_text_extracted"
+            and len(native_sha256) == 64
+            and bool(native_cas_path)
+            and native_chars > 0
+        )
+        native_no_text_ready = (
+            native_status == "native_no_text"
+            and not native_sha256
+            and not native_cas_path
+            and native_chars == 0
+        )
         if (
             item.get("work_state") != "succeeded"
-            or item.get("native_extraction_status") != "native_text_extracted"
             or item.get("native_text_truncated") is not False
             or item.get("synthetic_or_mock") is not False
             or item.get("official_public_domain_personal_information_retained")
             is not True
+            or not (native_text_ready or native_no_text_ready)
         ):
             raise LocatorValidationError("native manifest policy/state drifted")
+        if native_no_text_ready:
+            native_sha256 = EMPTY_TEXT_SHA256
         values = (
             str(item["path"]),
             str(item["content_sha256"]),
             int(item["bytes"]),
             str(item.get("mime_type") or ""),
             item.get("page_count"),
-            str(item["native_text_sha256"]),
-            str(item["native_text_cas_path"]),
-            int(item["native_text_chars"]),
+            native_status,
+            native_sha256,
+            native_cas_path,
+            native_chars,
             str(item["native_extraction_method"]),
         )
-        conn.execute("INSERT INTO instances VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", values)
         conn.execute(
-            "INSERT OR IGNORE INTO contents VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            "INSERT INTO instances VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            values,
+        )
+        conn.execute(
+            "INSERT OR IGNORE INTO contents VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
             (
                 values[1],
                 values[0],
@@ -235,6 +261,7 @@ def load_native(conn: sqlite3.Connection, manifest: Path) -> tuple[int, int]:
                 values[6],
                 values[7],
                 values[8],
+                values[9],
             ),
         )
         canonical = conn.execute(
@@ -247,7 +274,11 @@ def load_native(conn: sqlite3.Connection, manifest: Path) -> tuple[int, int]:
             str(canonical["native_text_cas_path"]),
             int(canonical["native_text_chars"]),
             str(canonical["native_extraction_method"]),
-        ) != (values[2], values[4], values[5], values[6], values[7], values[8]):
+            str(canonical["native_extraction_status"]),
+        ) != (
+            values[2], values[4], values[6], values[7], values[8], values[9],
+            values[5],
+        ):
             raise LocatorValidationError("duplicate native content metadata drifted")
         rows += 1
         if rows % 10_000 == 0:
@@ -279,7 +310,7 @@ def load_actual(conn: sqlite3.Connection, manifest: Path) -> int:
             raise LocatorValidationError("locator row policy/schema drifted")
         conn.execute(
             """
-            INSERT INTO actual VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            INSERT INTO actual VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
             (
                 str(item["path"]),
@@ -293,6 +324,7 @@ def load_actual(conn: sqlite3.Connection, manifest: Path) -> int:
                 int(item["text_chars"]),
                 str(item["text_sha256"]),
                 1 if item.get("has_text") is True else 0,
+                str(item["native_extraction_status"]),
                 str(item["native_text_sha256"]),
                 str(item["native_text_cas_path"]),
                 int(item["native_text_chars"]),
@@ -312,6 +344,8 @@ def replay_one(
     raw_root: Path,
     native_root: Path,
     max_span_chars: int,
+    max_xlsx_span_chars: int,
+    max_xlsx_locators_per_content: int,
     pdf_timeout_seconds: float,
     markup_section_max_depth: int,
     max_semantic_markup_bytes: int,
@@ -323,9 +357,18 @@ def replay_one(
         raise LocatorValidationError("raw representative missing or size-drifted")
     if sha256_path(raw_path) != content_sha256:
         raise LocatorValidationError("raw representative checksum drifted")
-    native_path = safe_child(native_root, str(row["native_text_cas_path"]))
-    with gzip.open(native_path, "rt", encoding="utf-8") as handle:
-        text = handle.read()
+    if str(row["native_extraction_status"]) == "native_no_text":
+        if (
+            str(row["native_text_sha256"]) != EMPTY_TEXT_SHA256
+            or str(row["native_text_cas_path"])
+            or int(row["native_text_chars"]) != 0
+        ):
+            raise LocatorValidationError("native no-text metadata drifted")
+        text = ""
+    else:
+        native_path = safe_child(native_root, str(row["native_text_cas_path"]))
+        with gzip.open(native_path, "rt", encoding="utf-8") as handle:
+            text = handle.read()
     text_bytes = text.encode("utf-8")
     if len(text) != int(row["native_text_chars"]):
         raise LocatorValidationError("native character count drifted")
@@ -338,6 +381,8 @@ def replay_one(
         extraction_method=str(row["native_extraction_method"]),
         expected_page_count=row["page_count"],
         max_span_chars=max_span_chars,
+        max_xlsx_span_chars=max_xlsx_span_chars,
+        max_xlsx_locators_per_content=max_xlsx_locators_per_content,
         pdf_timeout_seconds=pdf_timeout_seconds,
         markup_section_max_depth=markup_section_max_depth,
         max_semantic_markup_bytes=max_semantic_markup_bytes,
@@ -371,6 +416,8 @@ def full_replay(
     raw_root: Path,
     native_root: Path,
     max_span_chars: int,
+    max_xlsx_span_chars: int,
+    max_xlsx_locators_per_content: int,
     pdf_timeout_seconds: float,
     markup_section_max_depth: int,
     max_semantic_markup_bytes: int,
@@ -395,6 +442,8 @@ def full_replay(
                     raw_root=raw_root,
                     native_root=native_root,
                     max_span_chars=max_span_chars,
+                    max_xlsx_span_chars=max_xlsx_span_chars,
+                    max_xlsx_locators_per_content=max_xlsx_locators_per_content,
                     pdf_timeout_seconds=pdf_timeout_seconds,
                     markup_section_max_depth=markup_section_max_depth,
                     max_semantic_markup_bytes=max_semantic_markup_bytes,
@@ -472,6 +521,7 @@ def mismatch_counts(conn: sqlite3.Connection) -> dict[str, int]:
                OR a.text_chars <> r.text_chars
                OR a.text_sha256 <> r.text_sha256
                OR a.has_text <> r.has_text
+               OR a.native_extraction_status <> i.native_extraction_status
                OR a.native_text_sha256 <> i.native_text_sha256
                OR a.native_text_cas_path <> i.native_text_cas_path
                OR a.native_text_chars <> i.native_text_chars
@@ -527,11 +577,17 @@ def validate(args: argparse.Namespace) -> dict[str, Any]:
         raise LocatorValidationError("source locator report is not passing")
     configuration = source_report.get("configuration") or {}
     max_span_chars = int(configuration.get("max_span_chars") or 0)
+    max_xlsx_span_chars = int(configuration.get("max_xlsx_span_chars") or 0)
+    max_xlsx_locators_per_content = int(
+        configuration.get("max_xlsx_locators_per_content") or 0
+    )
     markup_section_max_depth = int(configuration.get("markup_section_max_depth") or 0)
     max_semantic_markup_bytes = int(configuration.get("max_semantic_markup_bytes") or 0)
     max_locators_per_content = int(configuration.get("max_locators_per_content") or 0)
     if (
         max_span_chars < 1
+        or max_xlsx_span_chars < 1
+        or max_xlsx_locators_per_content < 1
         or markup_section_max_depth < 0
         or max_semantic_markup_bytes < 1
         or max_locators_per_content < 1
@@ -574,6 +630,8 @@ def validate(args: argparse.Namespace) -> dict[str, Any]:
             raw_root=raw_root,
             native_root=native_root,
             max_span_chars=max_span_chars,
+            max_xlsx_span_chars=max_xlsx_span_chars,
+            max_xlsx_locators_per_content=max_xlsx_locators_per_content,
             pdf_timeout_seconds=float(args.pdf_timeout_seconds),
             markup_section_max_depth=markup_section_max_depth,
             max_semantic_markup_bytes=max_semantic_markup_bytes,

@@ -1,13 +1,13 @@
 {
   "failure": {
     "kind": "readiness_validation_failed",
-    "reason": "BOE document corpus checks failed"
+    "reason": "document native_validation contract version mismatch"
   },
   "foundation": {
     "meaning": "Current evidence validation failed; no prior readiness result remains authoritative.",
     "ready": false
   },
-  "generated_at": "2026-08-30T14:22:09.589998Z",
+  "generated_at": "2026-09-26T07:04:23.203499Z",
   "policy": {
     "classification_never_suppresses_public_domain_identity": true,
     "generated_test_records_count_toward_readiness": false,
@@ -20,9 +20,9 @@
   },
   "registry": {
     "available": true,
-    "bytes": 46081,
+    "bytes": 43198,
     "path": "docs/etl/real-corpus-registry.json",
-    "sha256": "a675fe896516ef3f6cf1f6d8faf4d0d8233b0b5d6c5cf190616cc6799c201d5f"
+    "sha256": "402bfa1a907e396082244e28bf5c00620b7cd4e4dbcbd9913e7b395e978eff2e"
   },
   "schema_version": "real-scale-readiness-v1",
   "status": "not_ready"

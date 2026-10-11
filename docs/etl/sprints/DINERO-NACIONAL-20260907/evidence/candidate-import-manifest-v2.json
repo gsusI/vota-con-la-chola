@@ -1,0 +1,149 @@
+{
+  "schema_version": "spending_import_plan_v2",
+  "version": "1879e6c91fa43dbc2888487d589591b62960fd15b55941364b0b4a63f4abfae9",
+  "rows": 128837,
+  "amount_cents": 8908050904021,
+  "batches": [
+    {
+      "path": "batch-0000.sql",
+      "sha256": "3cbbb524f2b5bb06786acf7fa793762a7c58588f32bb43f5617453e4003a6e82",
+      "bytes": 15989871,
+      "statements": 10000,
+      "write_budget": 20000
+    },
+    {
+      "path": "batch-0001.sql",
+      "sha256": "fdfdddc2cac79a4c0965966944482ed7b31fedd9222f9f5a03f80b6ce7c62782",
+      "bytes": 16033958,
+      "statements": 10000,
+      "write_budget": 20000
+    },
+    {
+      "path": "batch-0002.sql",
+      "sha256": "db7eb8b2b1b0c89b2bef420755eb00a147114f12c15a9e14d65a08e2bef056a1",
+      "bytes": 15850244,
+      "statements": 10000,
+      "write_budget": 20000
+    },
+    {
+      "path": "batch-0003.sql",
+      "sha256": "589c516613f114cfb18a00eb92ff25f97b77482f66c1e3d1d5a8496a909c6c3f",
+      "bytes": 16025793,
+      "statements": 10000,
+      "write_budget": 20000
+    },
+    {
+      "path": "batch-0004.sql",
+      "sha256": "3bbbab738af1a7bcd58e1c26c5f910b34e02bf1ba0772010b558a6a0d52c1529",
+      "bytes": 16014322,
+      "statements": 10000,
+      "write_budget": 20000
+    },
+    {
+      "path": "batch-0005.sql",
+      "sha256": "fa812e285209afef61af0a70913ba4dd79b762fc229ae10ca586816f8fad8afb",
+      "bytes": 15914503,
+      "statements": 10000,
+      "write_budget": 20000
+    },
+    {
+      "path": "batch-0006.sql",
+      "sha256": "1f8cab3bb177bc70e5b8de659e7e1a1fec3435acc17fda3581bd02d58f8aeb9a",
+      "bytes": 15934093,
+      "statements": 10000,
+      "write_budget": 20000
+    },
+    {
+      "path": "batch-0007.sql",
+      "sha256": "3bf33178d38b86411addd15fc461bebb43e5bb554e7a9a455faa39aa7c43c3f3",
+      "bytes": 15860212,
+      "statements": 10000,
+      "write_budget": 20000
+    },
+    {
+      "path": "batch-0008.sql",
+      "sha256": "dc0237dd1d971737fe72242d9b61892ffb917868959e0a1cebe41c4c89a96f5a",
+      "bytes": 15921117,
+      "statements": 10000,
+      "write_budget": 20000
+    },
+    {
+      "path": "batch-0009.sql",
+      "sha256": "c58753a3d041442db3b6be5cccb10661ff051daba0094bce65107c628dedb4c0",
+      "bytes": 16073262,
+      "statements": 10000,
+      "write_budget": 20000
+    },
+    {
+      "path": "batch-0010.sql",
+      "sha256": "abeb1f9d41cb2b3a9b7102a248040054622936d998cb1a5a1c1f16eff21312b1",
+      "bytes": 15942408,
+      "statements": 10000,
+      "write_budget": 20000
+    },
+    {
+      "path": "batch-0011.sql",
+      "sha256": "8f6a60277e291b3ad036832f28c08c3e363a7733034dae1cd832f27e3ca49946",
+      "bytes": 15853394,
+      "statements": 10000,
+      "write_budget": 20000
+    },
+    {
+      "path": "batch-0012.sql",
+      "sha256": "46a2b39d829307c47ae5f058c460eb7e5146b39ffe5e6f73875e40ede36aa028",
+      "bytes": 14269781,
+      "statements": 10000,
+      "write_budget": 20000
+    },
+    {
+      "path": "batch-0013.sql",
+      "sha256": "f00b267e3dfea40265e474c1f6a8d313de05ef1a8607a6304127c6dcbe07d115",
+      "bytes": 2212940,
+      "statements": 10000,
+      "write_budget": 20000
+    },
+    {
+      "path": "batch-0014.sql",
+      "sha256": "ee41410e5249a59022e086fda1a25f9b6da19571bfdfdb61f2d39fb48c2d6112",
+      "bytes": 1394531,
+      "statements": 10000,
+      "write_budget": 20000
+    },
+    {
+      "path": "batch-0015.sql",
+      "sha256": "3e3b9125db2a5e6d5873bb0e722f338c2ffb456498a811414aa31c9f3c94cb51",
+      "bytes": 1362912,
+      "statements": 10000,
+      "write_budget": 20000
+    },
+    {
+      "path": "batch-0016.sql",
+      "sha256": "7e0e48d87b320f7696ddb385f807237fd7570243e5b68373c621fee66f45f28b",
+      "bytes": 6084099,
+      "statements": 10000,
+      "write_budget": 20000
+    },
+    {
+      "path": "batch-0017.sql",
+      "sha256": "1c6609bdab65c1550e8d8874c38c1dc3a221c4f1d5d17aa4fe635ac75fdad76c",
+      "bytes": 72917565,
+      "statements": 10000,
+      "write_budget": 20000
+    },
+    {
+      "path": "batch-0018.sql",
+      "sha256": "053498c0ac487f86156a3c1a0458c6620c79f7e52aeb1055b3c2ebbda9b98129",
+      "bytes": 40743233,
+      "statements": 6298,
+      "write_budget": 12596
+    }
+  ],
+  "write_budget": 372596,
+  "requirements": [
+    "Use a new empty candidate database, never the active database.",
+    "Check remaining account-wide daily writes before each batch; budgets include a two-writes-per-statement allowance for this schema, not a provider guarantee.",
+    "Apply in order and record confirmed batch checksum and actual rows_written.",
+    "Batches are idempotent for the same candidate: inserts ignore existing keys, append chunks check completed Unicode length, and a database CHECK guard rejects a different candidate. Reconcile actual quota use before retries.",
+    "Do not promote until all batches and independent count, amount and query checks pass."
+  ]
+}

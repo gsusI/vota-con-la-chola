@@ -2,7 +2,62 @@
 
 Objetivo: **una sola lista** de trabajo operativo para completar el extremo a extremo (extract -> transform -> load -> publish) por tipo de dato.
 
-## Document factory: supply/plan `100k` cerrado, BOE físico bloqueado (`2026-08-30`)
+## Dinero público nacional: ejecución autorizada (`2026-09-07`)
+
+Estado: EN CURSO. Ahora: reconciliación física y de selección completada; detectada exclusión indebida de formalizaciones código 9. Destino y gates DN-01–DN-05: [ROADMAP](../../ROADMAP.md#ejecución-autorizada-dinero-público-nacional). Evidencia y comandos: [reconciliación](sprints/DINERO-NACIONAL-20260907/evidence/reconciliation.md). Siguiente: reconstrucción verificada de la selección corregida, resolución de discrepancias y publicación dentro del presupuesto gratuito; ampliar histórico. La validación externa y los umbrales de North Star siguen abiertos.
+
+## North Star competitiva: investigación para decisión (`2026-09-07`)
+
+Estado: investigación documental completada; elección de foco e implementación pendientes. Ahora: corpus de contratación parcial y sin denominador nacional; los hitos técnicos no acreditan competitividad. Destino propuesto y criterios medibles en [ROADMAP.md](../../ROADMAP.md#north-star-de-producto--propuesta-para-decisión-2026-09-07). Evidencia: [referentes por dimensión](../producto/referentes-north-star-20260907.md), con fuentes primarias, límites de verificación y pruebas comparables. Siguiente: decisión del mantenedor sobre foco, seguida de línea base de cobertura, usabilidad y coste para ese ámbito. No se modifica infraestructura, datos ni web pública con esta investigación.
+
+## REV-20: XLSX real y origin local actual cerrados; BOE sigue bloqueando readiness (`2026-08-30`)
+
+Donde estamos ahora:
+
+- inventario v6 reconcilia `122,653` instancias oficiales reales / `120,801` contenidos distintos / `5,652,067,717` bytes. Mix exacto: `108,042` XML, `13,128` HTML, `1,437` PDF y `46` XLSX (`44` contenidos XLSX distintos). No cuenta fixtures, samples ni capturas de fallo de transporte;
+- las `46` XLSX contienen `46` worksheets, `2,845,172` filas de instancia (`2,845,130` no vacías), `29,139,422` celdas no vacías y `0` fórmulas observadas. Extracción v3 conserva `3,192,030,152` caracteres públicos totales en `119,346` CAS, sin truncación/fallo/retry/dead. Validator independiente rehasha `122,653` raw + `119,346` CAS y replaya con `openpyxl 3.1.5` las `44/44` XLSX distintas: `2,827,577` filas no vacías / `28,615,639` celdas / `44` worksheets, cero mismatch. Fórmulas=`0` significa **corrección de fórmulas no probada**; no se introduce workbook sintético para cerrar ese gate;
+- lineage XLSX exporta `46` mappings `mapped_unverified` inferidas por path y cero retrieval receipts checksum-bound. El audit no les da crédito de provenance: corpus `122,540` checksum+URL / `113` gaps / `0` checksum o byte conflicts. Wayback `--no-network` clasifica `26` gaps seeded en tres targets y `87` unseeded, reutiliza checkpoint `43`, ejecuta `0` requests y no publica relación falsa;
+- locator v5 agrega `261` row groups XLSX sobre `44` contenidos. Fanout XLSX: media `5.931818`, máximo `6`, proyección `5,931,818` filas a `1M` workbooks, bajo hard ceiling `10M`. Generación completa: `819,042` locators de contenido / `879,374` de instancia (`30,634` PDF pages + `782,814` markup sections + `5,333` fallback spans + `261` XLSX row groups); full replay de `120,801/120,801` contenidos devuelve cero missing/unexpected/mismatch/failure;
+- perfil actual cubre `122,653` instancias: `122,334` machine-language candidates, `319` unknown y todo contenido `unreviewed`. Encryption status queda explícito: `1` PDF encrypted / `1,436` PDF unencrypted, `46` `not_applicable_office_archive`, `121,170` `not_applicable_plain_markup`. El cohort XLSX no establece soporte representativo de office ni quality humana;
+- origin local actual replica y restaura `240,278/240,278` objetos reales (`120,801` raw + `119,346` native CAS + `131` OCR CAS) / `6,048,142,788` payload bytes. Packaging produce `25` packs deterministas, máximo `10,000` objetos y `448 MiB` payload, y full validator rehasha todos los miembros. Release content-addressed `a891bbaba481eae6b77a9820340f1a58181f265eb933821a2b5e6d20a59ae663` fija `154` ficheros / `2,250,233,559` bytes;
+- release dry-run local y preflight live **read-only** sobre Hugging Face pasan sin conflicts/unexpected paths. Los `155` paths remotos de release esperados (`154` inventory files + sealed release manifest) y el pointer siguen ausentes; no hubo upload, commit, pointer update ni otra mutación. `durable_public_origin_proven=false` y remote restore siguen abiertos;
+- economics reconcilia adquisición física real `10,000`, native current-full `120,801` y OCR current-full `856`. Native/OCR actuales reutilizan output (`cold_state_and_output=false`): son telemetría warm-output, no benchmark cold. Coste monetario permanece `unknown`, nunca `0`. Validator del dashboard trata ambos flags cold en false como gaps opcionales de medición; required integrity checks continúan fail-closed;
+- readiness enforced consume los nuevos XLSX/locator/profile/origin/economics gates y se detiene honestamente en `BOE document corpus checks failed`: lineage activo referencia `1,156/1,166` summaries success; document queue sigue `100,051` success / `1` dead / `815` unfinished. No hay claim de `100k` físico representativo ni `1M`.
+
+Hacia donde vamos:
+
+1. lane controlable: mantener exactos los gates v6/v3/v5, cerrar mappings XLSX solo con receipts o manifests primarios checksum-bound, adquirir cohortes reales de fórmulas/otros formatos office antes de declarar soporte y ejecutar benchmark con state+output realmente vacíos;
+2. lane externa: sin nueva palanca BOE, registrar `no_new_lever` y no repetir probes. Con señal nueva, ejecutar un control acotado, cerrar `815` jobs y reconciliar `1,166/1,166` summaries dentro del lineage;
+3. regenerar inventario -> provenance -> native/OCR/profile/locators -> origin/restore -> packs -> release sobre el corpus BOE terminal; ningún status downstream puede reutilizar counts/hashes anteriores;
+4. resolver `DEC-01`, completar review humano `40/40` dual+adjudicated y medir quality por estrato;
+5. publicar origin solo con autorización explícita. Orden obligatorio: data -> release manifest -> remote parity -> latest pointer -> restore independiente. Read-only preflight no equivale a publish;
+6. abrir `1M` únicamente tras BOE, representatividad, human quality, durable remote restore y cold economics con tarifas reales.
+
+Qué sigue:
+
+```bash
+just etl-scale-inventory-documents
+just etl-scale-export-xlsx-lineage
+just etl-scale-audit-document-provenance
+just etl-scale-extract-document-text-corpus
+just etl-scale-validate-document-text-corpus
+just etl-scale-document-text-locators
+just etl-scale-document-language-encryption-profile
+just etl-scale-replicate-document-origin-local
+just etl-scale-restore-document-origin-local
+just etl-scale-pack-document-origin
+just etl-scale-validate-document-origin-packs
+just etl-scale-document-origin-hf-dry-run
+just etl-scale-document-origin-hf-preflight
+just document-factory-economics-export
+just etl-scale-readiness
+```
+
+Evidencia: `docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-format-inventory.json`, `real-xlsx-cohort.json`, `real-xlsx-source-lineage.jsonl`, `real-document-provenance-audit.json`, `document-provenance-gap-queue-20260812.json`, `wayback-document-lineage.json`, `real-document-text-extraction.json`, `real-document-text-validation.json`, `real-document-text-locator-extraction.json`, `real-document-text-locator-validation.json`, `real-document-language-encryption-profile.json`, `real-document-language-encryption-validation.json`, `real-document-origin-replication.json`, `real-document-origin-clean-restore.json`, `real-document-origin-packaging.json`, `real-document-origin-pack-validation.json`, `real-document-origin-release-preparation.json`, `real-document-origin-hf-publish-dry-run.json`, `document-factory-economics-20260829.json` y `document-factory-economics-validation-20260829.json`, todos bajo el mismo directorio de evidencia salvo manifest declarado. Readiness vigente: `etl/data/published/scale-readiness-latest.json`.
+
+## Snapshot anterior — document factory: supply/plan `100k` cerrado, BOE físico bloqueado (`2026-08-30`)
+
+Conservado como historial previo a `REV-20`; las cifras operativas vigentes están en la sección anterior.
 
 Donde estamos ahora:
 
@@ -2139,3 +2194,83 @@ Actualización operativa (2026-02-23, AI-OPS-62..AI-OPS-103):
 - Dirección: mantener publicación fail-closed, rutas inmutables antes de mover `latest`, trust roots fuera del dataset, checksum streaming, manifests bounded y diffs exactos. Mover custodia de la clave privada a un secret manager/job aislado de CI y rotar mediante revisión de dos mantenedores sin borrar firmas históricas.
 - Siguiente: `TODO 17`, Evidence API/export contract estable y paginado que incluya manifest, provenance y correction state. `W9-009` / `PUB-007` continúan abiertos hasta que un mantenedor externo reconstruya el release y publique una segunda attestation independiente; la firma del proyecto no se presenta como reproducción externa.
 - Evidencia: `docs/ops/reproducibility.md`, `docs/etl/sprints/REPRODUCIBILITY-20260819/evidence/signed-scale-publish-report.json`, `docs/etl/sprints/REPRODUCIBILITY-20260819/evidence/live-signed-snapshot-verification.json`, `docs/etl/sprints/REPRODUCIBILITY-20260819/evidence/live-scale-origin-parity.json`, `docs/etl/sprints/REPRODUCIBILITY-20260819/evidence/published-scale-manifest-diff.json`, `docs/etl/sprints/REPRODUCIBILITY-20260819/evidence/snapshot-reproducibility-validation.json`.
+
+
+## Lanzamiento comunitario con foco (2026-09-05)
+
+- **Ahora:** auditoría de entrada pública terminada; implementación `L0–L5` pendiente. GitHub/web/HF ya son públicos. La página de contratación ofrece veinte adjudicaciones fijas, el enlace SQL abre un índice y la revisión comunitaria sigue `0/5`. El índice HF de escala declara siete corpora; el readiness global local sigue `not_ready`. No se promociona ninguna lane ni se marca lanzamiento como DONE.
+- **Dirección:** [prioridad de lanzamiento en ROADMAP](../../ROADMAP.md#prioridad-inmediata-lanzamiento-útil-para-la-comunidad): una pregunta de contratación, descarga/consultas reproducibles, demo existente y contribuciones acotadas. Trabajo de expansión subordinado al corte.
+- **Siguiente:** `L0`, fijar release/cohorte y reconciliar anuncios, adjudicaciones, versiones, fechas e importes. PLACSP analítico y muestra web tienen universos distintos. No iniciar otra ingesta para sustituir esa comprobación.
+- **Evidencia:** [auditoría](sprints/PUBLIC-LAUNCH-20260905/evidence/launch-audit.md); [ejecución derivada](../roadmap-tecnico.md#lanzamiento-comunitario-primer-trabajo).
+- **Estado de entrega:** plan y diagnóstico locales preparados; sin nuevo snapshot, commit, release, publicación remota, mensaje o revisión externa. Preservados los cambios previos. Validación de esta entrega limitada a documentación y sus referencias.
+
+### Avance de implementación L0–L5
+
+Corte de 120 resultados validado contra 76 XML originales; paquete 399945 bytes y tres consultas reproducidas. Demo, filtros, CSV, enlace compartible, móvil y estado vacío comprobados. Cinco tests pasan. Build aislado sobre main remoto; overlay conserva 15110 archivos publicados ajenos por hash. Publicación/descarga remota en curso; revisión comunitaria 0/3 y reproducción externa 0/2. Evidencia y siguiente acción: [registro de ejecución](sprints/PUBLIC-LAUNCH-20260905/evidence/launch-execution.md).
+
+Defecto acotado detectado: un identificador cambia mayúsculas entre Parquet congelado y fuente. Excluido de la alfa; pendiente corregir productor en una nueva release del corpus, conservando la anterior y sus hashes. No marcar el corpus global íntegro por pasar este corte.
+
+### Cierre técnico de la alfa — 2026-09-05
+
+L0 corte publicado; L1 tres consultas verificadas desde descarga anónima; L2 web live con 88/88 assets exactos, enlace/filtros/móvil/CSV; L3 guía y seis tareas públicas; L4 validación técnica pasada y validación externa pendiente; L5 prerelease/vídeo publicados, convocatoria sin enviar y adopción abierta. Source `0d028cade3`, site `8d146beff0`, paquete `909fc46b…`, ZIP 399945 bytes. [Verificación live](sprints/PUBLIC-LAUNCH-20260905/evidence/live-verification.json). Próximo: 3 pruebas externas, 2 reproducciones y revisión de adopción a 14 días. No afirmar seis hitos socialmente cerrados ni promoción de escala.
+
+CI global de la publicación: fallos fuera del corte en artefactos de escala ausentes y frescura del recibo andaluz (29 días frente a 8); no se marca verde. Gate específico de alfa añadido: `PLACSP Launch Gate`, verificación de Git/paquete/SQL/XML/privacidad en checkout limpio. Mantener separados los gates del corte y los bloqueos globales.
+
+### 2026-09-05 · Spending filter usability
+
+Searchable authority/supplier selectors and a single two-click date range are implemented. Local and public browser checks, CSV parity, static build and privacy gates pass. Published in `95586e58ca`; canonical-domain verification complete. Next: external alpha usability feedback. Evidence: [filter UX verification](sprints/PUBLIC-LAUNCH-20260905/evidence/filter-ux-verification.md).
+
+Date refinement published in source 0163c87015 / site 2b892b1c19: separate editable Desde/Hasta inputs update either endpoint independently; the shared calendar retains its two-click range flow. Manual validation, reset, URL restore, mobile layout, static build, privacy gates and canonical-domain browser checks pass. Next: external alpha usability feedback. Evidence: [filter UX verification](sprints/PUBLIC-LAUNCH-20260905/evidence/filter-ux-verification.md#independent-date-editing-refinement).
+
+### 2026-09-05 · Cohorte PLACSP completa de enero
+
+- **Ahora:** eliminado el límite artificial de 120. La cohorte validada contiene 2.632 resultados, 47.744.719.885 céntimos EUR sin impuestos, decisiones del 1 al 31 de enero y 1.960 XML; ZIP 9.625.726 bytes. El frontend carga y verifica JSON fuera del HTML.
+- **Normalización:** 21 grupos duplicados de órganos y 111 de proveedores convergen mediante identificador o clave conservadora; el texto XML literal permanece por fila. Gas Natural `A61797536` aparece como una sola opción y reúne nueve filas con cuatro grafías fuente.
+- **Gates:** seis pruebas de release, build estático, privacidad, datos reales, tamaño y Playwright escritorio/móvil pasan. Release inmutable `aa4d6082…`; SHA-256 del ZIP `ffa5cd49…`.
+- **Publicación:** fuente `1925016eee`, sitio `1b2b62588a` y release estable `v0.2.0-placsp-january-2025` publicados. El dominio canónico y la descarga GitHub fueron verificados; bytes y SHA-256 coinciden. La alfa de 120 permanece como historial.
+- **Siguiente:** tres pruebas externas, dos reproducciones y expansión mensual solo con release fechada y validada.
+- **Evidencia:** [generación, normalización y QA](sprints/PUBLIC-LAUNCH-20260905/evidence/full-january-release.md).
+
+## Corrección de cobertura pública PLACSP — 2026-09-06
+
+Estado: DONE; publicado y verificado en dominio canónico. `/spending/` eliminó el recorte previo de enero: nueva selección de 47.397 adjudicaciones y 32.783 XML verificables. Galasa 1999–2027: 8 resultados, 5.505.965,94 EUR sin impuestos; enero: 1 resultado, 7.546,48 EUR. Pruebas de datos, privacidad e integridad Git pasan. Playwright público verifica rango amplio, enero, enlace reproducible, CSV, XML y móvil; release `0e55b071…`, sitio `5f7e1bbdf6`. Siguiente: mantener acceso a todo el histórico al incorporar nuevas capturas. Evidencia: [histórico disponible](sprints/PUBLIC-LAUNCH-20260905/evidence/full-history-release.md).
+
+- 2026-09-07: normalización de 11 años truncados en `/spending/`; calendario y CSV corregidos, fecha fuente conservada. Tests de casos y del corpus completo pasan; publicado en `a6dee879b4`, calendario y total verificados en navegador público. Siguiente: mantener normalización y trazabilidad en nuevas capturas. Evidencia: `sprints/PUBLIC-LAUNCH-20260905/evidence/truncated-decision-years.md`.
+
+- 2026-09-07: backend `/spending/` en Workers Free + D1; importación de 47.397 adjudicaciones y pruebas completas de paridad pasan. DONE: interfaz y API publicadas; navegador canónico sin descarga masiva, Galasa y CSV pasan. Assets movidos a Cloudflare tras detectar 429 de GitHub. Siguiente: nuevas capturas con límites gratuitos y paridad. Evidencia: `sprints/PUBLIC-LAUNCH-20260905/evidence/free-spending-backend.md`.
+
+### Migración de consulta a Hetzner — 2026-09-08
+
+API y frontend migrados y verificados: servicio blue/green aislado, HTTPS directo, mismo corpus público de 47.397 resultados, receta `just spending-api-deploy BUNDLE SLOT`. Green activo y blue preparado como reserva. Gates de capacidad, límites de contenedor y comprobación de servicios ajenos. Evidencia y límites: [registro de migración](sprints/DINERO-NACIONAL-20260907/evidence/hetzner-migration.md). Esta entrega elimina D1 del camino de consulta; no cierra DN-01/DN-02 ni acredita cobertura nacional.
+
+### DN-02 · 2026-09-08 · candidata con fechas explícitas
+
+Ahora: API local de 128.837 resultados pasa paginación completa, importes y CSV;
+producción permanece en 47.397. Destino: publicar la ampliación con cuatro fechas
+no resueltas accesibles y sin años inventados. Siguiente: interfaz y capturas de
+la misma versión antes de promoción blue/green. Evidencia y comandos:
+[representación de fechas v2](sprints/DINERO-NACIONAL-20260907/evidence/date-representation-v2.md).
+
+### DN-02 · candidata desplegada en blue, sin promoción
+
+La release corregida `ab964ef550781b61e62bef96fa000e251a9ae133d4e1894d6f6bbda1ad733147`
+conserva 128.837 filas. El paquete anterior tenía límites de extracción obsoletos
+y guía incompleta; se corrigió y se volvió a sellar sin cambiar XML ni filas.
+Los siete controles de paquete y la API candidata pasan. Primer apply abortó
+por disco inferior a 20 GiB, cero cambios; tras recuperación medida a 35 GiB,
+blue se desplegó y pasó consultas/CSV. Green continúa activo con 47.397.
+Siguiente: cerrar build/publicación, promover blue y comprobar web pública.
+[Recibo candidato](sprints/DINERO-NACIONAL-20260907/evidence/national-candidate-blue-20260908.json).
+
+## DN-02 · 2026-09-26 · adquisición y cobertura primero
+
+- Objetivo autorizado: adquisición histórica reanudable, cobertura y actualización antes de más infraestructura. La candidata de 128.837 es cierre de publicación, no nueva adquisición.
+- Ahora: catálogo oficial reproducible de 59 contenedores (23 principal, 17 menores, 19 agregación); tres cohortes de agosto de 2026 descargadas, normalizadas y exportadas: 98.412 versiones, 75.465 IDs de expediente distintos dentro de esas cohortes, sin solapamiento exacto entre familias. No se suman a la release pública ni se declaran contratos nacionales completos.
+- Medición: principal 150,26 s descarga + 116,33 s normalización + 13,12 s exportación; 51.998 versiones, 1.052.540.928 bytes SQLite, 73,09 MiB RSS durante ingestión. Menores 28.091 versiones; agregación 18.323. Parquet conjunto 12.581.470 bytes. Los manifests mantienen avisos/resultados separados. Agosto es estacional; no extrapolar a todo el histórico.
+- Controles: tres colas completas, hashes raw, integridad SQLite, FKs y validadores Parquet independientes pasan. Compresión del SQLite principal: 162.237.526 bytes, recuperación byte a byte verificada; tras revalidar ambos hashes, se retiró solo ese SQLite expandido creado en esta ejecución y se conserva su `.db.zst`. Reserva de adquisición 15 GiB; no se ha descomprimido la base histórica original de 7,998 GB ni alterado producción.
+- Entrega: `scripts/run_placsp_acquisition_batch.py` reanuda un contenedor oficial por familia/periodo/snapshot hasta Parquet validado, con bloqueo, contrato de inputs, recibos y estado `local_export_validated_not_published`. No mezcla otra pipeline en la base ni promueve automáticamente. `--plan-only` permite revisar comandos.
+- Historia: menores 2018 completo (164.000 versiones, 160.305 IDs fuente, 328/328 miembros; exportación y validación pasan). Menores 2019 completo (298.107 versiones, 293.982 IDs fuente, 597/597 miembros). Guard de 15 GiB pausó tras 207.107 versiones/415 miembros; tras compactar la cohorte nueva de agosto, reanudó exactamente los 182 pendientes. Ambos anuales pasan exportación/validación y se conservan además como SQLite zstd con WAL consolidado y recuperación byte a byte verificada. Cinco cohortes completas: 560.519 filas de versiones procesadas (no deduplicadas entre periodos), 84.864.607 bytes Parquet.
+- Publicación bloqueada: `just etl-publish-hf-dry-run` falla en `etl-scale-readiness`: `document native_validation contract version mismatch`. El gate global de privacidad pasó; la incoherencia documental impide llegar al empaquetado HF. No se ejecutó publicación ni se afirma origen durable de estas cohortes; API sigue en 47.397 resultados. Próximo gate: reconciliar contrato/evidencia documental y repetir publicación, conservando validadores de los nuevos datos. Evidencia: `sprints/DINERO-NACIONAL-20260926/evidence/publication-blocker.json`.
+- Evidencia y reproducción: [entrega](sprints/DINERO-NACIONAL-20260926/README.md), [resumen](sprints/DINERO-NACIONAL-20260926/evidence/execution-summary.json), [inventario](sprints/DINERO-NACIONAL-20260926/evidence/acquisition-inventory.json). El inventario inicial enlaza el cierre y las transiciones de almacenamiento posteriores. 19 tests pasan.
+- Próximo trabajo: reconciliar extracción documental v4 con validación v3/esquema v1 (el gate exige v2), reabrir publicación sin cambiar etiquetas a ciegas; después menores 2020 con presupuesto de staging medido. Al cierre ~16,3 GiB libres, ~1,3 sobre la reserva de ingestión; no iniciar histórico ilimitado. Frescura recurrente y conciliación con el corpus anterior siguen pendientes.
+- Límites: HEAD sin tamaños útiles y Range ignorado; no se confunde esa limitación del probe con bloqueo de GET. El runner del Python aislado necesitó el CA bundle verificado del runtime nativo para una descarga: no se desactivó TLS. Los restantes datasets PLACSP, fuentes regionales/locales directas y TED siguen como brechas explícitas. Reconciliación con la base antigua archivada, denominador nacional, frescura recurrente y adopción no están resueltos.

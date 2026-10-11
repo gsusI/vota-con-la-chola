@@ -10,6 +10,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 EVIDENCE_ROOT = REPO_ROOT / "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence"
+PROVENANCE_AUDIT = EVIDENCE_ROOT / "real-document-provenance-audit.json"
 
 
 class RealDocumentSourceUniverseTests(unittest.TestCase):
@@ -19,9 +20,10 @@ class RealDocumentSourceUniverseTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             report_path = Path(temporary) / "source-universe.json"
             validation_path = Path(temporary) / "source-universe-validation.json"
+            provenance = json.loads(PROVENANCE_AUDIT.read_text(encoding="utf-8"))
             common = [
                 "--provenance-audit",
-                str(EVIDENCE_ROOT / "real-document-provenance-audit.json"),
+                str(PROVENANCE_AUDIT),
                 "--host-health",
                 str(EVIDENCE_ROOT / "real-document-host-health-20260829.json"),
                 "--acquisition-validation",
@@ -68,7 +70,27 @@ class RealDocumentSourceUniverseTests(unittest.TestCase):
             report = json.loads(report_path.read_text(encoding="utf-8"))
             validation = json.loads(validation_path.read_text(encoding="utf-8"))
 
-        self.assertEqual(report["edge_counts"]["edge_rows"], 337_701)
+        edge_descriptor = provenance["edge_manifest"]
+        self.assertEqual(
+            report["edge_counts"]["edge_rows"], edge_descriptor["rows"]
+        )
+        self.assertEqual(
+            report["edge_counts"]["edge_rows"],
+            provenance["totals"]["provenance_edges"],
+        )
+        self.assertEqual(
+            report["edge_counts"]["edge_rows"],
+            report["edge_counts"]["public_https_edges"]
+            + report["edge_counts"]["public_http_edges"],
+        )
+        self.assertEqual(
+            report["inputs"]["edge_manifest"],
+            {
+                "path": edge_descriptor["path"],
+                "bytes": edge_descriptor["bytes"],
+                "sha256": edge_descriptor["sha256"],
+            },
+        )
         self.assertEqual(report["summary"]["unique_public_urls"], 115_246)
         self.assertEqual(report["summary"]["unique_https_urls"], 111_600)
         self.assertEqual(
@@ -83,6 +105,7 @@ class RealDocumentSourceUniverseTests(unittest.TestCase):
             "decision_required_dec_01",
         )
         self.assertEqual(report["status"], "ready_for_numeric_cohort_preparation")
+        self.assertTrue(all(report["checks"].values()))
         self.assertEqual(report["policy"]["network_requests_performed"], 0)
         self.assertFalse(report["policy"]["synthetic_or_mock_records_counted"])
         self.assertTrue(
@@ -115,7 +138,16 @@ class RealDocumentSourceUniverseTests(unittest.TestCase):
         self.assertEqual(validation["status"], "ok")
         self.assertEqual(validation["errors"], [])
         self.assertEqual(
-            validation["checks"]["unique_https_urls_replayed"], 111_600
+            validation["inputs"]["edge_manifest"],
+            report["inputs"]["edge_manifest"],
+        )
+        self.assertEqual(
+            validation["checks"]["edge_rows_replayed"],
+            report["edge_counts"]["edge_rows"],
+        )
+        self.assertEqual(
+            validation["checks"]["unique_https_urls_replayed"],
+            report["summary"]["unique_https_urls"],
         )
 
 

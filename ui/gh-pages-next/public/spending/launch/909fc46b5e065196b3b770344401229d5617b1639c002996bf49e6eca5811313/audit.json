@@ -1,0 +1,44 @@
+{
+  "ambiguous_contract_version_groups": 0,
+  "amount_cents": 604519346,
+  "amount_semantics": "EUR tax-exclusive awarded amount; integer cents for aggregation; lexical source decimal retained",
+  "capture_entries": 76,
+  "community_validation": {
+    "journey_testers": 0,
+    "query_reproducers": 0,
+    "status": "pending"
+  },
+  "corpus_fact_kinds": {
+    "contract_award": 141747,
+    "contract_notice": 121555
+  },
+  "corpus_rows": 263302,
+  "decision_date_max": "2025-01-03",
+  "decision_date_min": "2025-01-01",
+  "eligible_january_rows_before_source_result_check": 10394,
+  "evidence_serialization": "ET UTF-8 serialization of original captured Atom entry, matching ingest SHA-256; archive and member lineage retained",
+  "identity": "Names and identifiers retained as published; no name-only entity resolution",
+  "manifest_snapshot_label": "2025-03-31",
+  "observed_source_snapshot_dates": [
+    "2025-03-31",
+    "2025-06-30"
+  ],
+  "original_archives_rehashed": 6,
+  "original_members_rehashed": 37,
+  "rights_url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/legal/data-rights.md",
+  "schema_version": "placsp-launch-v1",
+  "scope": "First 120 eligible January 2025 award results ordered by decision date, source record id and fact id; latest unambiguous version inside frozen corpus only. Not complete procurement coverage.",
+  "selected_rows": 120,
+  "selection_exclusions": {
+    "missing_identity_or_eur_amount": 1611,
+    "not_awarded_or_tombstone": 243,
+    "outside_january_2025": 129742,
+    "source_parquet_semantic_mismatch": 1
+  },
+  "selection_limit": 120,
+  "status": "technical_alpha",
+  "unit": "award result, identified by source stable contract and award ordinal; not unique contract, lot, invoice or payment",
+  "upstream_base_url": "https://huggingface.co/datasets/JesusIC/vota-con-la-chola-data/resolve/main/scale/snapshots/2026-08-19/5d9ce557ed864de56f677a9f82c999a4ec0dfc494c086b1bfca0bb2e461272dd/",
+  "upstream_manifest_sha256": "b225f167d1fad027a0f8d3bac336ec96f9a5e06770f32db8c2f2af53810dda4b",
+  "upstream_release": "5d9ce557ed864de56f677a9f82c999a4ec0dfc494c086b1bfca0bb2e461272dd"
+}

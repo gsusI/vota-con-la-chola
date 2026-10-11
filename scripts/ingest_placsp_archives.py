@@ -38,9 +38,8 @@ from publicdata_connectors_es.money.placsp_bulk import (
     iter_placsp_atom_records,
 )
 from publicdata_connectors_es.money.placsp_catalog import (
-    DEFAULT_CATALOG_URL,
+    CATALOG_FAMILIES,
     DEFAULT_MAX_CATALOG_BYTES,
-    DEFAULT_START_YEAR,
     discover_catalog,
 )
 from publicdata_core.blobstore import StoredBlob, download_to_content_addressed_store
@@ -1316,9 +1315,11 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     subparsers = parser.add_subparsers(dest="command", required=True)
 
     discover = subparsers.add_parser("discover-archives")
-    discover.add_argument("--catalog-url", default=DEFAULT_CATALOG_URL)
+    discover.add_argument("--catalog-url")
+    discover.add_argument("--family", choices=tuple(CATALOG_FAMILIES), default="main")
+    discover.add_argument("--catalog-raw-out")
     discover.add_argument("--as-of-date", required=True)
-    discover.add_argument("--start-year", type=int, default=DEFAULT_START_YEAR)
+    discover.add_argument("--start-year", type=int)
     discover.add_argument("--timeout", type=int, default=30)
     discover.add_argument("--max-bytes", type=int, default=DEFAULT_MAX_CATALOG_BYTES)
     discover.add_argument("--ca-bundle", default="")
@@ -1393,6 +1394,8 @@ def main(argv: list[str] | None = None) -> int:
                 catalog_url=args.catalog_url,
                 as_of_date=date.fromisoformat(args.as_of_date),
                 start_year=args.start_year,
+                family=args.family,
+                raw_out=Path(args.catalog_raw_out) if args.catalog_raw_out else None,
                 timeout=args.timeout,
                 max_bytes=args.max_bytes,
                 ca_bundle=Path(args.ca_bundle) if args.ca_bundle else None,

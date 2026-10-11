@@ -10,60 +10,60 @@
     "pack_row_ceiling_respected": true
   },
   "durable_public_origin_proven": false,
-  "generated_at": "2026-08-30T12:05:59.507842Z",
+  "generated_at": "2026-08-30T20:02:30.802257Z",
   "inputs": {
     "max_objects_per_pack": "10000",
     "max_payload_bytes_per_pack": "469762048",
-    "origin_manifest_sha256": "12187efc092f50bc42f0c965b3dda5d1cb618702c4b128b715eb3c168fd7d443",
+    "origin_manifest_sha256": "53834363c57d753600c6e61abcecf494d67d60e9854ed07f653f4e4d0dd8aa45",
     "origin_root_contract": "etl/data/object-origin/real-document-corpus-v1"
   },
   "manifest": {
     "bytes": 1198,
-    "compressed_bytes": 6346,
-    "logical_sha256": "675d85b01befaf846e86ce4fb4a71a4e40e4742e45a4cb3da4b540b774c65ce2",
+    "compressed_bytes": 6377,
+    "logical_sha256": "378aae69ba93897171802ddf101498101e663e9eaf94796e9422f208272ba4df",
     "path": "etl/data/manifests/real-document-origin-packs.json",
     "publication": {
       "activated": true,
-      "active_history_path": "real-document-origin-packs-history/4272785719f81aca761ba2b86f141a8ddbc63b99baeaf19437b83ea842390179.json",
-      "active_logical_sha256": "675d85b01befaf846e86ce4fb4a71a4e40e4742e45a4cb3da4b540b774c65ce2",
-      "active_manifest_sha256": "4272785719f81aca761ba2b86f141a8ddbc63b99baeaf19437b83ea842390179",
-      "active_receipt_path": "real-document-origin-packs-receipts/4272785719f81aca761ba2b86f141a8ddbc63b99baeaf19437b83ea842390179.json",
+      "active_history_path": "real-document-origin-packs-history/6ca7815fbdb9679f222393a814c65b8594b59636f5f1347e3c9e781ab3113d5d.json",
+      "active_logical_sha256": "378aae69ba93897171802ddf101498101e663e9eaf94796e9422f208272ba4df",
+      "active_manifest_sha256": "6ca7815fbdb9679f222393a814c65b8594b59636f5f1347e3c9e781ab3113d5d",
+      "active_receipt_path": "real-document-origin-packs-receipts/6ca7815fbdb9679f222393a814c65b8594b59636f5f1347e3c9e781ab3113d5d.json",
       "automatic_deletion_performed": false,
       "legacy_equivalent_jsonl_migrated": false,
       "live_index_changed": true,
       "live_index_switched_last": true,
-      "predecessor_manifest_sha256": "56268796b95daa049741c58c7b243a6c7c6f5e7ddd2245f6135fa6e4d5013b30",
+      "predecessor_manifest_sha256": "4272785719f81aca761ba2b86f141a8ddbc63b99baeaf19437b83ea842390179",
       "state_snapshot": {
-        "bytes": 97771520,
-        "compressed_bytes": 23435334,
-        "compressed_sha256": "73061a823668ca63b1b795974cbd6e7462f55c8d2d54546e04b80abe09b1b8fe",
-        "path": "real-document-origin-packs-state/92b6324826eb679505238580ec61fb7fcdffc121905af3afbdc0d0173bd2e46c.sqlite.gz",
-        "sha256": "92b6324826eb679505238580ec61fb7fcdffc121905af3afbdc0d0173bd2e46c",
+        "bytes": 97796096,
+        "compressed_bytes": 23488758,
+        "compressed_sha256": "12d8ad4d63f03a81d8f658599eb9d1479b818e843c7d3b0400de075615d44b4c",
+        "path": "real-document-origin-packs-state/d1ab6b602675d442d9b5e17f2ac19c588410ff264265b2726ba7437505f7e5d4.sqlite.gz",
+        "sha256": "d1ab6b602675d442d9b5e17f2ac19c588410ff264265b2726ba7437505f7e5d4",
         "sqlite_quick_check": "ok"
       },
       "superseded_predecessor": true
     },
     "rows": 25,
-    "sha256": "4272785719f81aca761ba2b86f141a8ddbc63b99baeaf19437b83ea842390179",
+    "sha256": "6ca7815fbdb9679f222393a814c65b8594b59636f5f1347e3c9e781ab3113d5d",
     "shard_files": 1,
-    "uncompressed_bytes": 26376
+    "uncompressed_bytes": 26380
   },
   "next_action": "Run the full independent pack verifier. After explicit release authority, publish the immutable pack generation to a public origin without delete operations, then restore and rehash it from an independent clean machine.",
   "packed": {
-    "archive_bytes": 1793105638,
-    "member_manifest_bytes": 17893141
+    "archive_bytes": 1931740446,
+    "member_manifest_bytes": 17899083
   },
   "performance": {
-    "elapsed_seconds": 99.523126,
+    "elapsed_seconds": 107.645794,
     "gzip_level": 6,
     "workers": 2
   },
   "plan": {
     "max_objects": 10000,
-    "max_payload_bytes": 469745048,
-    "objects": 240226,
+    "max_payload_bytes": 469721202,
+    "objects": 240278,
     "packs": 25,
-    "payload_bytes": 5902879469
+    "payload_bytes": 6048142788
   },
   "policy": {
     "automatic_deletion_forbidden": true,

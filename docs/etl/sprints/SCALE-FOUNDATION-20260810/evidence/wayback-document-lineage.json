@@ -3,7 +3,7 @@
     "bytes": 22110,
     "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/wayback-document-checkpoint.jsonl",
     "rows": 43,
-    "sha256": "9efa4ef09304ccdf41cbb1d4b3843ed8f741b217b2e95a32c37fd1f22665c1ed"
+    "sha256": "a340d8344849cb25d2b5862563f8bb88ab54fa56ed8b116f4783e5996f4ff674"
   },
   "checks": {
     "every_target_is_real_and_checksum_verified": true,
@@ -27,7 +27,7 @@
     "retry_failed": false,
     "timeout_seconds": 30
   },
-  "generated_at": "2026-08-30T04:41:50.064415+00:00",
+  "generated_at": "2026-08-30T21:03:09.411555+00:00",
   "index_queries": [
     {
       "candidate_count": 5,
@@ -72,14 +72,14 @@
   ],
   "inputs": {
     "gap_queue": {
-      "bytes": 51703,
+      "bytes": 85025,
       "path": "etl/data/manifests/document-provenance-gap-queue.jsonl",
-      "sha256": "ab16fb203780fda618be84edd56d07808d1b7c17fb8c7a7246db62d70acc7264"
+      "sha256": "bea4a02cf70de6f7d87020c3526e60e9a6b734ec8f7b6cf7452eab00b8eb7949"
     },
     "inventory": {
-      "bytes": 82987794,
+      "bytes": 109512983,
       "path": "etl/data/manifests/real-document-format-inventory.jsonl",
-      "sha256": "4d11b77c8a2ac64b59baed5190fe52975d9d820fe76777585bf6799e8718a9ad"
+      "sha256": "f3174670b45b9e2a06c4d1dd64b375e114362a615c479d0f09738cc3d14ffec7"
     }
   },
   "manifest": {
@@ -115,7 +115,7 @@
     },
     "path": "etl/data/staging/wayback-document-lineage.db",
     "schema_version": 1,
-    "sha256": "e857e38ec64dd45c9f5f9fd4072be58c4d8e836ebab6e90a3a2a8a79347622e9"
+    "sha256": "f3d713ae32e18ae9c14d6e8d59b9710eac2ced1fa454af7504de31bfadce3bfc"
   },
   "status": "partial",
   "totals": {
@@ -129,6 +129,6 @@
     "exact_archive_relations": 0,
     "source_variants_not_queried_no_network": 0,
     "unique_expected_content_targets": 3,
-    "unseeded_gap_file_instances": 42
+    "unseeded_gap_file_instances": 87
   }
 }

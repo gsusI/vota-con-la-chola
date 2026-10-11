@@ -25,6 +25,8 @@ if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 from publicdata_docs.extraction import (
+    DEFAULT_MAX_XLSX_LOCATORS_PER_CONTENT,
+    DEFAULT_XLSX_LOCATOR_SPAN_CHARS,
     DEFAULT_MARKUP_SECTION_MAX_DEPTH,
     DEFAULT_MAX_SEMANTIC_MARKUP_BYTES,
     DOCUMENT_LOCATOR_ALGORITHM_VERSION,
@@ -50,11 +52,12 @@ DEFAULT_REPORT = Path(
     "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/"
     "real-document-text-locator-extraction.json"
 )
-ROW_SCHEMA = "real_document_text_locator_row_v1"
-REPORT_SCHEMA = "real_document_text_locator_extraction_v1"
+ROW_SCHEMA = "real_document_text_locator_row_v2"
+REPORT_SCHEMA = "real_document_text_locator_extraction_v2"
 DATASET = "native_text_locator"
 NATIVE_DATASET = "native_text"
 NATIVE_ROW_SCHEMA = "real_document_text_manifest_row_v1"
+EMPTY_TEXT_SHA256 = hashlib.sha256(b"").hexdigest()
 
 
 class LocatorRunError(RuntimeError):
@@ -123,6 +126,16 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--manifest-out", default=str(DEFAULT_MANIFEST))
     parser.add_argument("--report-out", default=str(DEFAULT_REPORT))
     parser.add_argument("--max-span-chars", type=int, default=8_192)
+    parser.add_argument(
+        "--max-xlsx-span-chars",
+        type=int,
+        default=DEFAULT_XLSX_LOCATOR_SPAN_CHARS,
+    )
+    parser.add_argument(
+        "--max-xlsx-locators-per-content",
+        type=int,
+        default=DEFAULT_MAX_XLSX_LOCATORS_PER_CONTENT,
+    )
     parser.add_argument("--max-average-locators-per-content", type=float, default=10.0)
     parser.add_argument("--max-locators-per-content", type=int, default=2_000)
     parser.add_argument(
@@ -177,6 +190,7 @@ def apply_schema(conn: sqlite3.Connection) -> None:
           mime_type TEXT NOT NULL,
           source_group TEXT NOT NULL,
           page_count INTEGER,
+          native_extraction_status TEXT NOT NULL,
           native_text_sha256 TEXT NOT NULL,
           native_text_cas_path TEXT NOT NULL,
           native_text_chars INTEGER NOT NULL,
@@ -194,6 +208,7 @@ def apply_schema(conn: sqlite3.Connection) -> None:
           bytes INTEGER NOT NULL,
           mime_type TEXT NOT NULL,
           page_count INTEGER,
+          native_extraction_status TEXT NOT NULL,
           native_text_sha256 TEXT NOT NULL,
           native_text_cas_path TEXT NOT NULL,
           native_text_chars INTEGER NOT NULL,
@@ -254,6 +269,8 @@ def seed_state(
     *,
     native_manifest: Path,
     max_span_chars: int,
+    max_xlsx_span_chars: int,
+    max_xlsx_locators_per_content: int,
     markup_section_max_depth: int,
     max_semantic_markup_bytes: int,
     max_attempts: int,
@@ -264,6 +281,10 @@ def seed_state(
         if (
             existing.get("native_manifest_sha256") != manifest_sha256
             or int(existing.get("max_span_chars") or 0) != max_span_chars
+            or int(existing.get("max_xlsx_span_chars") or 0)
+            != max_xlsx_span_chars
+            or int(existing.get("max_xlsx_locators_per_content") or 0)
+            != max_xlsx_locators_per_content
             or existing.get("locator_algorithm_version")
             != DOCUMENT_LOCATOR_ALGORITHM_VERSION
             or int(existing.get("markup_section_max_depth") or -1)
@@ -292,18 +313,32 @@ def seed_state(
         content_sha256 = str(item.get("content_sha256") or "")
         native_sha256 = str(item.get("native_text_sha256") or "")
         native_cas_path = str(item.get("native_text_cas_path") or "")
+        native_status = str(item.get("native_extraction_status") or "")
+        native_chars = int(item.get("native_text_chars") or 0)
+        native_text_ready = (
+            native_status == "native_text_extracted"
+            and len(native_sha256) == 64
+            and bool(native_cas_path)
+            and native_chars > 0
+        )
+        native_no_text_ready = (
+            native_status == "native_no_text"
+            and not native_sha256
+            and not native_cas_path
+            and native_chars == 0
+        )
         if (
             item.get("work_state") != "succeeded"
-            or item.get("native_extraction_status") != "native_text_extracted"
             or item.get("native_text_truncated") is not False
             or item.get("synthetic_or_mock") is not False
             or item.get("official_public_domain_personal_information_retained")
             is not True
             or len(content_sha256) != 64
-            or len(native_sha256) != 64
-            or not native_cas_path
+            or not (native_text_ready or native_no_text_ready)
         ):
             raise LocatorRunError(f"native row is not locator-ready: {path}")
+        if native_no_text_ready:
+            native_sha256 = EMPTY_TEXT_SHA256
         values = (
             path,
             content_sha256,
@@ -312,9 +347,10 @@ def seed_state(
             str(item.get("mime_type") or ""),
             str(item.get("source_group") or "unknown"),
             item.get("page_count"),
+            native_status,
             native_sha256,
             native_cas_path,
-            int(item["native_text_chars"]),
+            native_chars,
             str(item.get("native_extraction_method") or ""),
         )
         conn.execute(
@@ -322,18 +358,24 @@ def seed_state(
             INSERT INTO document_instances (
               path, content_sha256, bytes, extension, mime_type, source_group,
               page_count, native_text_sha256, native_text_cas_path,
-              native_text_chars, native_extraction_method
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+              native_text_chars, native_extraction_method,
+              native_extraction_status
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
-            values,
+            (
+                values[0], values[1], values[2], values[3], values[4],
+                values[5], values[6], values[8], values[9], values[10],
+                values[11], values[7],
+            ),
         )
         conn.execute(
             """
             INSERT OR IGNORE INTO locator_work (
               content_sha256, representative_path, bytes, mime_type, page_count,
               native_text_sha256, native_text_cas_path, native_text_chars,
-              native_extraction_method, max_attempts, updated_at
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+              native_extraction_method, native_extraction_status,
+              max_attempts, updated_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
             (
                 content_sha256,
@@ -343,8 +385,9 @@ def seed_state(
                 item.get("page_count"),
                 native_sha256,
                 native_cas_path,
-                int(item["native_text_chars"]),
+                native_chars,
                 str(item.get("native_extraction_method") or ""),
+                native_status,
                 max_attempts,
                 utc_now(),
             ),
@@ -352,7 +395,8 @@ def seed_state(
         canonical = conn.execute(
             """
             SELECT bytes, page_count, native_text_sha256, native_text_cas_path,
-                   native_text_chars, native_extraction_method
+                   native_text_chars, native_extraction_method,
+                   native_extraction_status
             FROM locator_work WHERE content_sha256 = ?
             """,
             (content_sha256,),
@@ -364,14 +408,16 @@ def seed_state(
             str(canonical["native_text_cas_path"]),
             int(canonical["native_text_chars"]),
             str(canonical["native_extraction_method"]),
+            str(canonical["native_extraction_status"]),
         )
         expected = (
             int(item["bytes"]),
             item.get("page_count"),
             native_sha256,
             native_cas_path,
-            int(item["native_text_chars"]),
+            native_chars,
             str(item.get("native_extraction_method") or ""),
+            native_status,
         )
         if observed != expected:
             raise LocatorRunError(
@@ -389,6 +435,11 @@ def seed_state(
         [
             ("native_manifest_sha256", manifest_sha256),
             ("max_span_chars", str(max_span_chars)),
+            ("max_xlsx_span_chars", str(max_xlsx_span_chars)),
+            (
+                "max_xlsx_locators_per_content",
+                str(max_xlsx_locators_per_content),
+            ),
             ("locator_algorithm_version", DOCUMENT_LOCATOR_ALGORITHM_VERSION),
             ("markup_section_max_depth", str(markup_section_max_depth)),
             ("max_semantic_markup_bytes", str(max_semantic_markup_bytes)),
@@ -465,6 +516,8 @@ def locate_one(
     raw_root: Path,
     native_root: Path,
     max_span_chars: int,
+    max_xlsx_span_chars: int,
+    max_xlsx_locators_per_content: int,
     pdf_timeout_seconds: float,
     markup_section_max_depth: int,
     max_semantic_markup_bytes: int,
@@ -477,14 +530,23 @@ def locate_one(
             raise LocatorRunError("raw representative is missing or size-drifted")
         if sha256_path(raw_path) != content_sha256:
             raise LocatorRunError("raw representative checksum drifted")
-        native_path = safe_child(native_root, str(row["native_text_cas_path"]))
-        if not native_path.is_file():
-            raise LocatorRunError("native text CAS is missing")
-        text = read_native_text(
-            native_path,
-            str(row["native_text_sha256"]),
-            int(row["native_text_chars"]),
-        )
+        if str(row["native_extraction_status"]) == "native_no_text":
+            if (
+                str(row["native_text_sha256"]) != EMPTY_TEXT_SHA256
+                or str(row["native_text_cas_path"])
+                or int(row["native_text_chars"]) != 0
+            ):
+                raise LocatorRunError("native no-text metadata drifted")
+            text = ""
+        else:
+            native_path = safe_child(native_root, str(row["native_text_cas_path"]))
+            if not native_path.is_file():
+                raise LocatorRunError("native text CAS is missing")
+            text = read_native_text(
+                native_path,
+                str(row["native_text_sha256"]),
+                int(row["native_text_chars"]),
+            )
         locators = build_document_text_locators(
             text,
             raw_path=raw_path,
@@ -492,6 +554,8 @@ def locate_one(
             extraction_method=str(row["native_extraction_method"]),
             expected_page_count=row["page_count"],
             max_span_chars=max_span_chars,
+            max_xlsx_span_chars=max_xlsx_span_chars,
+            max_xlsx_locators_per_content=max_xlsx_locators_per_content,
             pdf_timeout_seconds=pdf_timeout_seconds,
             markup_section_max_depth=markup_section_max_depth,
             max_semantic_markup_bytes=max_semantic_markup_bytes,
@@ -630,6 +694,8 @@ def run_worker(
     max_items: int,
     lease_seconds: int,
     max_span_chars: int,
+    max_xlsx_span_chars: int,
+    max_xlsx_locators_per_content: int,
     pdf_timeout_seconds: float,
     markup_section_max_depth: int,
     max_semantic_markup_bytes: int,
@@ -668,6 +734,8 @@ def run_worker(
                     raw_root=raw_root,
                     native_root=native_root,
                     max_span_chars=max_span_chars,
+                    max_xlsx_span_chars=max_xlsx_span_chars,
+                    max_xlsx_locators_per_content=max_xlsx_locators_per_content,
                     pdf_timeout_seconds=pdf_timeout_seconds,
                     markup_section_max_depth=markup_section_max_depth,
                     max_semantic_markup_bytes=max_semantic_markup_bytes,
@@ -707,6 +775,7 @@ def iter_manifest_rows(conn: sqlite3.Connection) -> Iterator[dict[str, Any]]:
         """
         SELECT i.path, i.content_sha256, i.source_group, i.mime_type,
                i.page_count AS document_page_count,
+               i.native_extraction_status,
                i.native_text_sha256, i.native_text_cas_path,
                i.native_text_chars, i.native_extraction_method,
                l.segment_index, l.locator_type, l.locator_value,
@@ -725,6 +794,7 @@ def iter_manifest_rows(conn: sqlite3.Connection) -> Iterator[dict[str, Any]]:
             "source_group": row["source_group"],
             "mime_type": row["mime_type"],
             "document_page_count": row["document_page_count"],
+            "native_extraction_status": row["native_extraction_status"],
             "native_text_sha256": row["native_text_sha256"],
             "native_text_cas_path": row["native_text_cas_path"],
             "native_text_chars": int(row["native_text_chars"]),
@@ -779,6 +849,8 @@ def build_report(
     state_db: Path,
     manifest: Mapping[str, Any],
     max_span_chars: int,
+    max_xlsx_span_chars: int,
+    max_xlsx_locators_per_content: int,
     markup_section_max_depth: int,
     max_semantic_markup_bytes: int,
     max_average_locators_per_content: float,
@@ -800,39 +872,70 @@ def build_report(
                COALESCE(SUM(native_text_bytes), 0) AS native_text_bytes,
                SUM(CASE WHEN mime_type LIKE '%pdf%' THEN 1 ELSE 0 END)
                  AS pdf_content_objects,
-               SUM(CASE WHEN mime_type NOT LIKE '%pdf%' THEN 1 ELSE 0 END)
+               SUM(CASE WHEN mime_type LIKE '%spreadsheetml.sheet%' THEN 1 ELSE 0 END)
+                 AS xlsx_content_objects,
+               SUM(CASE WHEN mime_type NOT LIKE '%pdf%'
+                         AND mime_type NOT LIKE '%spreadsheetml.sheet%'
+                        THEN 1 ELSE 0 END)
                  AS markup_content_objects,
                COALESCE(SUM(CASE WHEN mime_type LIKE '%pdf%'
                                  THEN page_count ELSE 0 END), 0)
                  AS expected_pdf_page_locators,
                COALESCE(AVG(locator_rows), 0) AS average_locator_rows_per_content,
-               COALESCE(MAX(locator_rows), 0) AS max_locator_rows_per_content
+               COALESCE(MAX(locator_rows), 0) AS max_locator_rows_per_content,
+               COALESCE(AVG(CASE WHEN mime_type LIKE '%spreadsheetml.sheet%'
+                                 THEN locator_rows END), 0)
+                 AS average_xlsx_locator_rows_per_content,
+               COALESCE(MAX(CASE WHEN mime_type LIKE '%spreadsheetml.sheet%'
+                                 THEN locator_rows END), 0)
+                 AS max_xlsx_locator_rows_per_content
         FROM locator_work
         """
     ).fetchone()
     locator_totals = conn.execute(
         """
         SELECT COUNT(*) AS locator_rows,
-               SUM(CASE WHEN locator_type = 'pdf_page' THEN 1 ELSE 0 END)
+               SUM(CASE WHEN l.locator_type = 'pdf_page' THEN 1 ELSE 0 END)
                  AS pdf_page_locators,
-               SUM(CASE WHEN locator_type = 'normalized_text_span' THEN 1 ELSE 0 END)
+               SUM(CASE WHEN l.locator_type = 'normalized_text_span' THEN 1 ELSE 0 END)
                  AS normalized_text_span_locators,
-               SUM(CASE WHEN locator_type = 'markup_section' THEN 1 ELSE 0 END)
+               SUM(CASE WHEN l.locator_type = 'markup_section' THEN 1 ELSE 0 END)
                  AS markup_section_locators,
-               SUM(CASE WHEN locator_type = 'document_no_text' THEN 1 ELSE 0 END)
+               SUM(CASE WHEN l.locator_type = 'xlsx_row_group' THEN 1 ELSE 0 END)
+                 AS xlsx_row_group_locators,
+               SUM(CASE WHEN l.locator_type = 'document_no_text' THEN 1 ELSE 0 END)
                  AS no_text_locators,
-               COUNT(DISTINCT CASE WHEN locator_type = 'markup_section'
-                                   THEN content_sha256 END)
+               COUNT(DISTINCT CASE WHEN l.locator_type = 'markup_section'
+                                   THEN l.content_sha256 END)
                  AS semantic_markup_content_objects,
-               COUNT(DISTINCT CASE WHEN locator_type = 'normalized_text_span'
-                                   THEN content_sha256 END)
+               COUNT(DISTINCT CASE WHEN l.locator_type = 'normalized_text_span'
+                                   THEN l.content_sha256 END)
                  AS fallback_markup_content_objects,
-               SUM(CASE WHEN has_text = 1 THEN 1 ELSE 0 END) AS locators_with_text,
-               COALESCE(SUM(text_chars), 0) AS locator_text_chars,
-               MAX(CASE WHEN locator_type IN (
+               COUNT(DISTINCT CASE
+                 WHEN l.locator_type = 'document_no_text'
+                  AND w.mime_type NOT LIKE '%pdf%'
+                  AND w.mime_type NOT LIKE '%spreadsheetml.sheet%'
+                 THEN l.content_sha256 END)
+                 AS no_text_markup_content_objects,
+               COUNT(DISTINCT CASE
+                 WHEN l.locator_type IN ('xlsx_row_group', 'document_no_text')
+                  AND w.mime_type LIKE '%spreadsheetml.sheet%'
+                 THEN l.content_sha256 END)
+                 AS xlsx_content_objects,
+               COUNT(DISTINCT CASE
+                 WHEN l.locator_type = 'document_no_text'
+                  AND w.mime_type LIKE '%spreadsheetml.sheet%'
+                 THEN l.content_sha256 END)
+                 AS no_text_xlsx_content_objects,
+               SUM(CASE WHEN l.has_text = 1 THEN 1 ELSE 0 END) AS locators_with_text,
+               COALESCE(SUM(l.text_chars), 0) AS locator_text_chars,
+               MAX(CASE WHEN l.locator_type IN (
                               'normalized_text_span', 'markup_section')
-                        THEN text_chars ELSE 0 END) AS max_span_chars
-        FROM content_locators
+                        THEN l.text_chars ELSE 0 END) AS max_span_chars,
+               MAX(CASE WHEN l.locator_type = 'xlsx_row_group'
+                        THEN l.text_chars ELSE 0 END) AS max_xlsx_span_chars
+        FROM content_locators l
+        JOIN locator_work w USING (content_sha256)
         """
     ).fetchone()
     file_instances = int(
@@ -866,10 +969,19 @@ def build_report(
             locator_totals["max_span_chars"] or 0
         )
         <= max_span_chars,
+        "xlsx_row_groups_within_configured_bound": int(
+            locator_totals["max_xlsx_span_chars"] or 0
+        )
+        <= max_xlsx_span_chars,
         "semantic_markup_sections_materialized": int(
             locator_totals["markup_section_locators"] or 0
         )
         > 0,
+        "xlsx_row_groups_materialized": (
+            int(totals["xlsx_content_objects"] or 0) == 0
+            or int(locator_totals["xlsx_content_objects"] or 0)
+            == int(totals["xlsx_content_objects"] or 0)
+        ),
         "average_locator_fanout_within_million_scale_bound": float(
             totals["average_locator_rows_per_content"] or 0
         )
@@ -878,12 +990,24 @@ def build_report(
             totals["max_locator_rows_per_content"] or 0
         )
         <= max_locators_per_content,
+        "xlsx_average_locator_fanout_within_million_scale_bound": float(
+            totals["average_xlsx_locator_rows_per_content"] or 0
+        )
+        <= max_xlsx_locators_per_content,
+        "xlsx_maximum_locator_fanout_within_bound": int(
+            totals["max_xlsx_locator_rows_per_content"] or 0
+        )
+        <= max_xlsx_locators_per_content,
         "markup_content_objects_accounted_for": (
             int(locator_totals["semantic_markup_content_objects"] or 0)
             + int(locator_totals["fallback_markup_content_objects"] or 0)
-            + int(locator_totals["no_text_locators"] or 0)
+            + int(locator_totals["no_text_markup_content_objects"] or 0)
         )
         == int(totals["markup_content_objects"] or 0),
+        "xlsx_content_objects_accounted_for": int(
+            locator_totals["xlsx_content_objects"] or 0
+        )
+        == int(totals["xlsx_content_objects"] or 0),
         "manifest_contains_every_instance_locator": instance_locator_rows
         == int(manifest.get("rows") or -1),
         "no_dead_work": state_counts.get("dead", 0) == 0,
@@ -912,11 +1036,14 @@ def build_report(
             "locator_rows_copy_no_public_text": True,
             "pdf_locators_are_exact_pages": True,
             "markup_sections_come_only_from_observed_source_structure": True,
+            "xlsx_locators_are_exact_sheet_and_row_endpoints": True,
             "unproven_markup_structure_falls_back_to_exact_text_spans": True,
         },
         "configuration": {
             "locator_algorithm_version": DOCUMENT_LOCATOR_ALGORITHM_VERSION,
             "max_span_chars": max_span_chars,
+            "max_xlsx_span_chars": max_xlsx_span_chars,
+            "max_xlsx_locators_per_content": max_xlsx_locators_per_content,
             "max_average_locators_per_content": max_average_locators_per_content,
             "max_locators_per_content": max_locators_per_content,
             "markup_section_max_depth": markup_section_max_depth,
@@ -924,6 +1051,7 @@ def build_report(
             "pdf_locator": "page_number",
             "markup_locator": "source_xpath_plus_bounded_native_text_span",
             "markup_fallback_locator": "normalized_native_text_character_span",
+            "xlsx_locator": "source_sheet_row_endpoints_plus_bounded_native_text_span",
         },
         "inputs": {
             "native_manifest": {
@@ -944,10 +1072,14 @@ def build_report(
             "content_locator_rows": int(locator_totals["locator_rows"] or 0),
             "instance_locator_rows": instance_locator_rows,
             "pdf_content_objects": int(totals["pdf_content_objects"] or 0),
+            "xlsx_content_objects": int(totals["xlsx_content_objects"] or 0),
             "markup_content_objects": int(totals["markup_content_objects"] or 0),
             "pdf_page_locators": int(locator_totals["pdf_page_locators"] or 0),
             "markup_section_locators": int(
                 locator_totals["markup_section_locators"] or 0
+            ),
+            "xlsx_row_group_locators": int(
+                locator_totals["xlsx_row_group_locators"] or 0
             ),
             "normalized_text_span_locators": int(
                 locator_totals["normalized_text_span_locators"] or 0
@@ -959,6 +1091,12 @@ def build_report(
                 locator_totals["fallback_markup_content_objects"] or 0
             ),
             "document_no_text_locators": int(locator_totals["no_text_locators"] or 0),
+            "xlsx_no_text_content_objects": int(
+                locator_totals["no_text_xlsx_content_objects"] or 0
+            ),
+            "markup_no_text_content_objects": int(
+                locator_totals["no_text_markup_content_objects"] or 0
+            ),
             "locators_with_text": int(locator_totals["locators_with_text"] or 0),
             "locator_text_chars": int(locator_totals["locator_text_chars"] or 0),
             "average_locator_rows_per_content": round(
@@ -967,15 +1105,26 @@ def build_report(
             "max_locator_rows_per_content": int(
                 totals["max_locator_rows_per_content"] or 0
             ),
+            "average_xlsx_locator_rows_per_content": round(
+                float(totals["average_xlsx_locator_rows_per_content"] or 0), 6
+            ),
+            "max_xlsx_locator_rows_per_content": int(
+                totals["max_xlsx_locator_rows_per_content"] or 0
+            ),
             "projected_content_locator_rows_at_one_million_documents": round(
                 float(totals["average_locator_rows_per_content"] or 0) * 1_000_000
+            ),
+            "projected_xlsx_locator_rows_at_one_million_xlsx_documents": round(
+                float(totals["average_xlsx_locator_rows_per_content"] or 0)
+                * 1_000_000
             ),
         },
         "checks": checks,
         "next_action": (
-            "Independently replay every raw/native object and page/section locator, "
-            "then acquire a representative real office-format cohort before claiming "
-            "office extraction support."
+            "Independently replay every raw/native object and page/section/row-group "
+            "locator. XLSX support applies only to the observed official workbook "
+            "cohort; acquire real DOC, ODT, legacy XLS, or presentation cohorts before "
+            "claiming support for those formats."
         ),
     }
 
@@ -998,6 +1147,8 @@ def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
     positive = (
         int(args.max_span_chars),
+        int(args.max_xlsx_span_chars),
+        int(args.max_xlsx_locators_per_content),
         int(args.max_semantic_markup_bytes),
         float(args.max_average_locators_per_content),
         int(args.max_locators_per_content),
@@ -1038,6 +1189,10 @@ def main(argv: list[str] | None = None) -> int:
                 conn,
                 native_manifest=native_manifest,
                 max_span_chars=int(args.max_span_chars),
+                max_xlsx_span_chars=int(args.max_xlsx_span_chars),
+                max_xlsx_locators_per_content=int(
+                    args.max_xlsx_locators_per_content
+                ),
                 markup_section_max_depth=int(args.markup_section_max_depth),
                 max_semantic_markup_bytes=int(args.max_semantic_markup_bytes),
                 max_attempts=int(args.max_attempts),
@@ -1051,6 +1206,10 @@ def main(argv: list[str] | None = None) -> int:
                 max_items=int(args.max_items),
                 lease_seconds=int(args.lease_seconds),
                 max_span_chars=int(args.max_span_chars),
+                max_xlsx_span_chars=int(args.max_xlsx_span_chars),
+                max_xlsx_locators_per_content=int(
+                    args.max_xlsx_locators_per_content
+                ),
                 pdf_timeout_seconds=float(args.pdf_timeout_seconds),
                 markup_section_max_depth=int(args.markup_section_max_depth),
                 max_semantic_markup_bytes=int(args.max_semantic_markup_bytes),
@@ -1096,6 +1255,10 @@ def main(argv: list[str] | None = None) -> int:
                 state_db=state_db,
                 manifest=manifest,
                 max_span_chars=int(args.max_span_chars),
+                max_xlsx_span_chars=int(args.max_xlsx_span_chars),
+                max_xlsx_locators_per_content=int(
+                    args.max_xlsx_locators_per_content
+                ),
                 markup_section_max_depth=int(args.markup_section_max_depth),
                 max_semantic_markup_bytes=int(args.max_semantic_markup_bytes),
                 max_average_locators_per_content=float(

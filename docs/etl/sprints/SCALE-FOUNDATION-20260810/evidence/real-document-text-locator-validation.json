@@ -9,7 +9,7 @@
     "source_locator_report_passed": true
   },
   "configuration": {
-    "locator_algorithm_version": "document_text_locator_v3_major_markup_sections",
+    "locator_algorithm_version": "document_text_locator_v5_markup_sections_xlsx_coarse_row_groups",
     "markup_fallback_locator": "normalized_native_text_character_span",
     "markup_locator": "source_xpath_plus_bounded_native_text_span",
     "markup_section_max_depth": 1,
@@ -17,26 +17,29 @@
     "max_locators_per_content": 2000,
     "max_semantic_markup_bytes": 67108864,
     "max_span_chars": 8192,
-    "pdf_locator": "page_number"
+    "max_xlsx_locators_per_content": 10,
+    "max_xlsx_span_chars": 4194304,
+    "pdf_locator": "page_number",
+    "xlsx_locator": "worksheet_ordinal_plus_source_row_range_and_bounded_native_text_span"
   },
   "failure_samples": [],
-  "generated_at": "2026-08-30T14:20:25.280519Z",
+  "generated_at": "2026-08-30T19:39:42.154956Z",
   "inputs": {
     "locator_manifest": {
       "bytes": 32720,
-      "logical_sha256": "387a6ce263540f7ee86e5980026acf77eeb421c56c09d5378ad5b8b5f9143248",
+      "logical_sha256": "6c7db3f4656d572bd9d6c07e874f446f97cde302c2016b52bef1c3a4b4328690",
       "path": "etl/data/published/real-document-text-locator-manifest-latest.jsonl",
-      "sha256": "61bf8adfa5870cfde279bd6f4e20b0681ff172257975ec024e31a011297b9723"
+      "sha256": "f52971bdac98c9d99fd4adda2923b50413f05b2e5589f71c245e99b0647d485b"
     },
     "locator_report": {
-      "bytes": 5477,
+      "bytes": 6380,
       "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-locator-extraction.json",
-      "sha256": "9d9d6d406d6d17488f097aa5583799777fcae47a1704f41bdff136e61d97bf61"
+      "sha256": "0d5e404e05524a930fb40a59acd12e071009be9c96b347370269ee5784474faf"
     },
     "native_manifest": {
       "bytes": 5423,
       "path": "etl/data/published/real-document-text-manifest-latest.jsonl",
-      "sha256": "e5e7aa2ec3d7f80d036885b2ff214da58b8ee9532dc647e5336cde1578a147a9"
+      "sha256": "ae41313c9de9e071191ceb1802b148f5f5409a4ad234f9a015826c79ddf439d0"
     }
   },
   "mode": {
@@ -47,11 +50,11 @@
   },
   "next_action": "Bind locator generation and lifecycle into central readiness, then use page/span addresses in evidence exports and citizen drill-downs.",
   "performance": {
-    "content_objects_per_second": 427.825414,
-    "cpu_seconds": 353.19995,
-    "elapsed_seconds": 282.257659,
-    "peak_rss_bytes_child_max": 239501312,
-    "peak_rss_bytes_self": 833257472
+    "content_objects_per_second": 322.242986,
+    "cpu_seconds": 472.66174,
+    "elapsed_seconds": 374.875498,
+    "peak_rss_bytes_child_max": 241991680,
+    "peak_rss_bytes_self": 1418248192
   },
   "policy": {
     "locator_rows_copy_no_public_text": true,
@@ -64,16 +67,16 @@
   "schema_version": "real_document_text_locator_validation_v1",
   "status": "ok",
   "totals": {
-    "content_objects_replayed": 120757,
-    "distinct_content_objects": 120757,
-    "expected_instance_locator_rows": 879104,
+    "content_objects_replayed": 120801,
+    "distinct_content_objects": 120801,
+    "expected_instance_locator_rows": 879374,
     "mismatched_rows": 0,
     "missing_rows": 0,
-    "native_file_instances": 122607,
-    "native_text_bytes_rehashed": 2256345242,
-    "observed_instance_locator_rows": 879104,
-    "raw_bytes_rehashed": 5312661661,
-    "replayed_content_locator_rows": 818781,
+    "native_file_instances": 122653,
+    "native_text_bytes_rehashed": 3241990129,
+    "observed_instance_locator_rows": 879374,
+    "raw_bytes_rehashed": 5435782744,
+    "replayed_content_locator_rows": 819042,
     "unexpected_rows": 0,
     "validation_failures": 0
   }

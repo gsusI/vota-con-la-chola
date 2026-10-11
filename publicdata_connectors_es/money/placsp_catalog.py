@@ -20,10 +20,12 @@ DEFAULT_CATALOG_URL = (
 )
 DEFAULT_START_YEAR = 2012
 DEFAULT_MAX_CATALOG_BYTES = 5 * 1024 * 1024
-_ARCHIVE_RE = re.compile(
-    r"licitacionesPerfilesContratanteCompleto3_(?P<period>\d{4}|\d{6})\.zip$",
-    re.IGNORECASE,
-)
+# Families are separate publication universes; never merge their period keys.
+CATALOG_FAMILIES = {
+    "main": ("licitacionescontratante.aspx", "licitacionesPerfilesContratanteCompleto3", 2012),
+    "minor": ("ContratosMenores.aspx", "contratosMenoresPerfilesContratantes", 2018),
+    "aggregated": ("LicitacionesAgregacion.aspx", "PlataformasAgregadasSinMenores", 2016),
+}
 
 
 @dataclass(frozen=True)
@@ -50,14 +52,18 @@ class _LinkParser(HTMLParser):
                 self.hrefs.append(value.strip())
 
 
-def parse_catalog_links(html_text: str, *, catalog_url: str) -> list[PlacspArchiveLink]:
+def parse_catalog_links(
+    html_text: str, *, catalog_url: str, family: str = "main"
+) -> list[PlacspArchiveLink]:
+    prefix = CATALOG_FAMILIES[family][1]
+    archive_re = re.compile(re.escape(prefix) + r"_(?P<period>\d{4}|\d{6})\.zip$", re.IGNORECASE)
     parser = _LinkParser()
     parser.feed(html_text)
     by_period: dict[str, PlacspArchiveLink] = {}
     for href in parser.hrefs:
         source_url = urljoin(catalog_url, href)
         parsed_url = urlparse(source_url)
-        match = _ARCHIVE_RE.search(parsed_url.path)
+        match = archive_re.search(parsed_url.path)
         if match is None:
             continue
         if parsed_url.scheme != "https":
@@ -113,13 +119,17 @@ def build_catalog_report(
     catalog_url: str,
     charset: str = "utf-8",
     as_of_date: date,
-    start_year: int = DEFAULT_START_YEAR,
+    start_year: int | None = None,
+    family: str = "main",
 ) -> dict[str, object]:
-    if start_year < DEFAULT_START_YEAR or start_year > as_of_date.year:
-        raise ValueError("start_year must be between 2012 and as_of year")
+    first_year = CATALOG_FAMILIES[family][2]
+    start_year = first_year if start_year is None else start_year
+    if start_year < first_year or start_year > as_of_date.year:
+        raise ValueError(f"start_year must be between {first_year} and as_of year")
     links = parse_catalog_links(
         html_bytes.decode(charset, errors="replace"),
         catalog_url=catalog_url,
+        family=family,
     )
     annual = {int(link.period): link for link in links if len(link.period) == 4}
     monthly = {
@@ -157,6 +167,7 @@ def build_catalog_report(
     status = "ok" if all(checks.values()) else "degraded"
     return {
         "schema_version": "placsp_archive_catalog_v1",
+        "family": family,
         "status": status,
         "catalog_url": catalog_url,
         "as_of_date": as_of_date.isoformat(),
@@ -198,13 +209,17 @@ def build_catalog_report(
 
 def discover_catalog(
     *,
-    catalog_url: str = DEFAULT_CATALOG_URL,
+    catalog_url: str | None = None,
     as_of_date: date,
-    start_year: int = DEFAULT_START_YEAR,
+    start_year: int | None = None,
+    family: str = "main",
+    raw_out: Path | None = None,
     timeout: int = 30,
     max_bytes: int = DEFAULT_MAX_CATALOG_BYTES,
     ca_bundle: Path | None = None,
 ) -> dict[str, object]:
+    if catalog_url is None:
+        catalog_url = DEFAULT_CATALOG_URL.rsplit("/", 1)[0] + "/" + CATALOG_FAMILIES[family][0]
     payload, charset = _fetch_catalog(
         catalog_url,
         timeout=timeout,
@@ -217,7 +232,11 @@ def discover_catalog(
         charset=charset,
         as_of_date=as_of_date,
         start_year=start_year,
+        family=family,
     )
+    if raw_out is not None:
+        raw_out.parent.mkdir(parents=True, exist_ok=True)
+        raw_out.write_bytes(payload)
     report["transport_security"] = (
         "verified_custom_ca" if ca_bundle else "verified_system_ca"
     )

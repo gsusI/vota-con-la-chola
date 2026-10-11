@@ -1,0 +1,129 @@
+{
+  "checks": {
+    "artifact_contract": {
+      "declared_sha256": "d7de5544cc277c85fb2a4ae6d1e4e2bb1867ddc35857502b73c3780834aef565",
+      "latest_sha256": "d7de5544cc277c85fb2a4ae6d1e4e2bb1867ddc35857502b73c3780834aef565",
+      "local_sha256": "d7de5544cc277c85fb2a4ae6d1e4e2bb1867ddc35857502b73c3780834aef565",
+      "recomputed_remote_sha256": "d7de5544cc277c85fb2a4ae6d1e4e2bb1867ddc35857502b73c3780834aef565",
+      "schema_version": "real-scale-artifact-contract-v1"
+    },
+    "corpus_contracts_match": true,
+    "declared_bundle_files": 8625,
+    "declared_data_files": 8597,
+    "declared_snapshot_path": "scale/snapshots/2026-08-19/5d9ce557ed864de56f677a9f82c999a4ec0dfc494c086b1bfca0bb2e461272dd",
+    "downloaded_manifest_sha256": "5d9ce557ed864de56f677a9f82c999a4ec0dfc494c086b1bfca0bb2e461272dd",
+    "expected_data_files": 8597,
+    "expected_immutable_snapshot_path": "scale/snapshots/2026-08-19/5d9ce557ed864de56f677a9f82c999a4ec0dfc494c086b1bfca0bb2e461272dd",
+    "immutable_snapshot_path": true,
+    "latest_manifest_sha256": "5d9ce557ed864de56f677a9f82c999a4ec0dfc494c086b1bfca0bb2e461272dd",
+    "latest_schema_version": "real-scale-origin-bundle-v2",
+    "local_corpora": [
+      {
+        "bytes": 1271649,
+        "files": 13,
+        "id": "accountability_ledger",
+        "rows": 126760
+      },
+      {
+        "bytes": 9236064,
+        "files": 108,
+        "id": "actor_mandates",
+        "rows": 88031
+      },
+      {
+        "bytes": 42955289,
+        "files": 14,
+        "id": "bdns_public_money",
+        "rows": 1360382
+      },
+      {
+        "bytes": 2083541,
+        "files": 2,
+        "id": "candidate_occurrences",
+        "rows": 10820
+      },
+      {
+        "bytes": 253373860,
+        "files": 37,
+        "id": "eurostat_indicators",
+        "rows": 1755809
+      },
+      {
+        "bytes": 170990631,
+        "files": 8373,
+        "id": "member_votes",
+        "rows": 1809222
+      },
+      {
+        "bytes": 20803781,
+        "files": 50,
+        "id": "placsp_public_money",
+        "rows": 263302
+      }
+    ],
+    "local_readiness_sha256": "8f3c613fb6fbca59a7c61d59581f0fc2c1aafeaeefc46082a2f211e06237ad1f",
+    "local_registry_sha256": "2757f1641ba5f71f4c05ee28d6894723fd0ec8964f427cafbc43c9b0765d0fd4",
+    "manifest_schema_version": "real-scale-origin-bundle-v2",
+    "metadata_freshness": true,
+    "metadata_warnings": [],
+    "promotion_states_match": true,
+    "remote_corpora": [
+      {
+        "bytes": 1271649,
+        "files": 13,
+        "id": "accountability_ledger",
+        "rows": 126760
+      },
+      {
+        "bytes": 9236064,
+        "files": 108,
+        "id": "actor_mandates",
+        "rows": 88031
+      },
+      {
+        "bytes": 42955289,
+        "files": 14,
+        "id": "bdns_public_money",
+        "rows": 1360382
+      },
+      {
+        "bytes": 2083541,
+        "files": 2,
+        "id": "candidate_occurrences",
+        "rows": 10820
+      },
+      {
+        "bytes": 253373860,
+        "files": 37,
+        "id": "eurostat_indicators",
+        "rows": 1755809
+      },
+      {
+        "bytes": 170990631,
+        "files": 8373,
+        "id": "member_votes",
+        "rows": 1809222
+      },
+      {
+        "bytes": 20803781,
+        "files": 50,
+        "id": "placsp_public_money",
+        "rows": 263302
+      }
+    ],
+    "remote_readiness_sha256": "8f3c613fb6fbca59a7c61d59581f0fc2c1aafeaeefc46082a2f211e06237ad1f",
+    "remote_registry_sha256": "2757f1641ba5f71f4c05ee28d6894723fd0ec8964f427cafbc43c9b0765d0fd4",
+    "required_policy_passed": true,
+    "snapshot_date": "2026-08-19"
+  },
+  "dataset_repo": "JesusIC/vota-con-la-chola-data",
+  "errors": [],
+  "passed": true,
+  "snapshot_date": "2026-08-19",
+  "status": "verified_current_scale_origin",
+  "urls": {
+    "latest": "https://huggingface.co/datasets/JesusIC/vota-con-la-chola-data/resolve/main/scale/latest.json",
+    "manifest": "https://huggingface.co/datasets/JesusIC/vota-con-la-chola-data/resolve/main/scale/snapshots/2026-08-19/5d9ce557ed864de56f677a9f82c999a4ec0dfc494c086b1bfca0bb2e461272dd/manifest.json"
+  },
+  "warnings": []
+}

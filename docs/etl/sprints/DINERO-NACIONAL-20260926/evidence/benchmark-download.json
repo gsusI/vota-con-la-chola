@@ -1,0 +1,89 @@
+{
+  "archive_queue": {
+    "active_workers": [],
+    "attempt_status_counts": {
+      "succeeded": 1
+    },
+    "attempts_total": 1,
+    "dead_letter_rate": 0.0,
+    "earliest_lease_expiry": null,
+    "generated_at": "2026-09-26T06:44:40+00:00",
+    "items_total": 1,
+    "max_attempts_observed": 1,
+    "oldest_pending_at": null,
+    "overdue_leases_total": 0,
+    "pipeline_id": "placsp-main-202608-benchmark-20260926:archives",
+    "retry_attempts_total": 0,
+    "schema_version": "pipeline_work_queue_observability_v1",
+    "state_counts": {
+      "dead": 0,
+      "leased": 0,
+      "pending": 0,
+      "succeeded": 1
+    },
+    "terminal_total": 1,
+    "top_errors": [],
+    "top_partitions": [
+      {
+        "partition_key": "period:2026",
+        "state": "succeeded",
+        "total": 1
+      }
+    ],
+    "unfinished_total": 0
+  },
+  "failed_attempts": 0,
+  "member_queue": {
+    "active_workers": [],
+    "attempt_status_counts": {},
+    "attempts_total": 0,
+    "dead_letter_rate": 0.0,
+    "earliest_lease_expiry": null,
+    "generated_at": "2026-09-26T06:44:40+00:00",
+    "items_total": 104,
+    "max_attempts_observed": 0,
+    "oldest_pending_at": "2026-09-26T06:44:40+00:00",
+    "overdue_leases_total": 0,
+    "pipeline_id": "placsp-main-202608-benchmark-20260926:members",
+    "retry_attempts_total": 0,
+    "schema_version": "pipeline_work_queue_observability_v1",
+    "state_counts": {
+      "dead": 0,
+      "leased": 0,
+      "pending": 104,
+      "succeeded": 0
+    },
+    "terminal_total": 0,
+    "top_errors": [],
+    "top_partitions": [
+      {
+        "partition_key": "archive:1",
+        "state": "pending",
+        "total": 104
+      }
+    ],
+    "unfinished_total": 104
+  },
+  "members_enqueued": 104,
+  "peak_rss_mb": 51.016,
+  "pipeline_id": "placsp-main-202608-benchmark-20260926",
+  "processed": 1,
+  "schema_version": "placsp_archive_worker_v2",
+  "status": "ok",
+  "stop_reason": "max_items_reached",
+  "storage_preflight": {
+    "free_after_reserve_bytes": 28388896768,
+    "free_bytes": 28925767680,
+    "headroom_bytes": 12282769408,
+    "min_free_bytes": 16106127360,
+    "path": "etl/data/object-origin/placsp-contracts",
+    "ready": true,
+    "required_free_bytes": 16642998272,
+    "reserve_bytes": 536870912,
+    "schema_version": "storage_capacity_preflight_v1",
+    "total_bytes": 994662584320,
+    "used_bytes": 965736816640
+  },
+  "succeeded": 1,
+  "worker_id": "placsp-archive-worker"
+}

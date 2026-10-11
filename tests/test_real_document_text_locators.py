@@ -13,7 +13,11 @@ from publicdata_docs.extraction import (
     build_document_text_locators,
     normalize_plain_text,
 )
-from publicdata_docs.generation_manifest import iter_generation_rows, load_index_bytes
+from publicdata_docs.generation_manifest import (
+    iter_generation_rows,
+    load_index_bytes,
+    sha256_file,
+)
 from scripts.locate_real_document_text import DATASET, REPORT_SCHEMA, ROW_SCHEMA
 from scripts.validate_real_document_text_locators import VALIDATION_SCHEMA
 
@@ -62,7 +66,7 @@ class RealDocumentTextLocatorTest(unittest.TestCase):
         cls.real_markup = next(
             row
             for row in rows
-            if row["extension"] != "pdf" and row["native_text_chars"]
+            if row["extension"] in {"html", "xml"} and row["native_text_chars"]
         )
         rows = iter_generation_rows(
             NATIVE_MANIFEST,
@@ -121,7 +125,7 @@ class RealDocumentTextLocatorTest(unittest.TestCase):
         )
         self.assertEqual(
             DOCUMENT_LOCATOR_ALGORITHM_VERSION,
-            "document_text_locator_v3_major_markup_sections",
+            "document_text_locator_v6_markup_sections_xlsx_cross_sheet_row_groups",
         )
         with self.assertRaisesRegex(ValueError, "fanout exceeds"):
             build_document_text_locators(
@@ -183,46 +187,116 @@ class RealDocumentTextLocatorTest(unittest.TestCase):
         source_report = json.loads(LOCATOR_REPORT.read_text(encoding="utf-8"))
         validation = json.loads(LOCATOR_VALIDATION.read_text(encoding="utf-8"))
         lifecycle = json.loads(LOCATOR_LIFECYCLE.read_text(encoding="utf-8"))
+        native_index = load_index_bytes(
+            NATIVE_MANIFEST.read_bytes(), dataset="native_text"
+        )
         index = load_index_bytes(LOCATOR_MANIFEST.read_bytes(), dataset=DATASET)
         self.assertEqual(source_report["schema_version"], REPORT_SCHEMA)
         self.assertEqual(source_report["status"], "ok")
         self.assertEqual(
+            DOCUMENT_LOCATOR_ALGORITHM_VERSION,
+            "document_text_locator_v6_markup_sections_xlsx_cross_sheet_row_groups",
+        )
+        self.assertEqual(
             source_report["configuration"]["locator_algorithm_version"],
             DOCUMENT_LOCATOR_ALGORITHM_VERSION,
         )
-        self.assertEqual(source_report["totals"]["file_instances"], 122_607)
-        self.assertEqual(source_report["totals"]["content_locator_rows"], 818_781)
-        self.assertEqual(source_report["totals"]["instance_locator_rows"], 879_104)
+        self.assertEqual(
+            source_report["configuration"]["max_xlsx_span_chars"],
+            4 * 1024 * 1024,
+        )
+        self.assertEqual(
+            source_report["configuration"]["max_xlsx_locators_per_content"],
+            10,
+        )
+        totals = source_report["totals"]
+        self.assertEqual(totals["file_instances"], native_index["totals"]["rows"])
+        self.assertEqual(
+            source_report["inputs"]["native_manifest"]["sha256"],
+            sha256_file(NATIVE_MANIFEST),
+        )
         self.assertEqual(source_report["totals"]["pdf_page_locators"], 30_634)
-        self.assertEqual(source_report["totals"]["markup_section_locators"], 782_814)
         self.assertEqual(
-            source_report["totals"]["normalized_text_span_locators"], 5_333
+            totals["markup_content_objects"],
+            totals["semantic_markup_content_objects"]
+            + totals["fallback_markup_content_objects"],
         )
         self.assertEqual(
-            source_report["totals"]["semantic_markup_content_objects"], 119_473
+            totals["content_locator_rows"],
+            totals["pdf_page_locators"]
+            + totals["markup_section_locators"]
+            + totals["normalized_text_span_locators"]
+            + totals["xlsx_row_group_locators"]
+            + totals["document_no_text_locators"],
         )
-        self.assertEqual(
-            source_report["totals"]["fallback_markup_content_objects"], 322
-        )
-        self.assertEqual(
-            source_report["totals"][
-                "projected_content_locator_rows_at_one_million_documents"
-            ],
-            6_780_402,
+        self.assertEqual(totals["xlsx_content_objects"], 44)
+        self.assertGreater(totals["xlsx_row_group_locators"], 0)
+        self.assertLessEqual(
+            totals["xlsx_row_group_locators"],
+            totals["xlsx_content_objects"]
+            * source_report["configuration"]["max_xlsx_locators_per_content"],
         )
         self.assertLessEqual(
-            source_report["totals"]["average_locator_rows_per_content"], 10
+            totals["average_xlsx_locator_rows_per_content"],
+            source_report["configuration"]["max_xlsx_locators_per_content"],
         )
         self.assertLessEqual(
-            source_report["totals"]["max_locator_rows_per_content"], 2_000
+            totals["max_xlsx_locator_rows_per_content"],
+            source_report["configuration"]["max_xlsx_locators_per_content"],
+        )
+        self.assertLessEqual(
+            totals["projected_xlsx_locator_rows_at_one_million_xlsx_documents"],
+            10_000_000,
+        )
+        self.assertLessEqual(
+            totals["average_locator_rows_per_content"],
+            source_report["configuration"]["max_average_locators_per_content"],
+        )
+        self.assertLessEqual(
+            totals["max_locator_rows_per_content"],
+            source_report["configuration"]["max_locators_per_content"],
+        )
+        self.assertLessEqual(
+            totals["projected_content_locator_rows_at_one_million_documents"],
+            10_000_000,
         )
         self.assertTrue(all(source_report["checks"].values()))
         self.assertEqual(index["row_schema_version"], ROW_SCHEMA)
-        self.assertEqual(index["totals"]["rows"], 879_104)
+        self.assertEqual(index["totals"]["rows"], totals["instance_locator_rows"])
         self.assertEqual(validation["schema_version"], VALIDATION_SCHEMA)
         self.assertEqual(validation["status"], "ok")
+        self.assertEqual(validation["configuration"], source_report["configuration"])
+        self.assertEqual(
+            validation["inputs"]["native_manifest"]["sha256"],
+            sha256_file(NATIVE_MANIFEST),
+        )
+        self.assertEqual(
+            validation["inputs"]["locator_manifest"]["sha256"],
+            sha256_file(LOCATOR_MANIFEST),
+        )
+        self.assertEqual(
+            validation["inputs"]["locator_manifest"]["logical_sha256"],
+            index["logical_sha256"],
+        )
+        self.assertEqual(
+            validation["totals"]["native_file_instances"],
+            native_index["totals"]["rows"],
+        )
+        self.assertEqual(
+            validation["totals"]["replayed_content_locator_rows"],
+            totals["content_locator_rows"],
+        )
+        self.assertEqual(
+            validation["totals"]["expected_instance_locator_rows"],
+            index["totals"]["rows"],
+        )
+        self.assertEqual(
+            validation["totals"]["observed_instance_locator_rows"],
+            index["totals"]["rows"],
+        )
         self.assertEqual(validation["totals"]["mismatched_rows"], 0)
         self.assertEqual(validation["totals"]["validation_failures"], 0)
+        self.assertTrue(all(validation["checks"].values()))
         self.assertEqual(lifecycle["status"], "ok")
         self.assertTrue(all(lifecycle["checks"].values()))
 

@@ -1,0 +1,127 @@
+{
+  "snapshot_date": "2026-09-26",
+  "cohort_period": "202608",
+  "publication_status": "local_validated_not_published",
+  "families": {
+    "main": {
+      "observed": {
+        "archive_bytes": 160085565,
+        "archives": 1,
+        "award_results": 46268,
+        "document_manifests": 511306,
+        "duplicate_version_sightings": 0,
+        "members": 104,
+        "peak_rss_mb": 73.094,
+        "record_versions": 51998,
+        "records_seen": 51998,
+        "stable_contracts": 34901,
+        "tombstones": 179,
+        "uncompressed_member_bytes": 1570294774
+      },
+      "source_contract_ids": 34901,
+      "database_bytes": 1052540928,
+      "download_seconds": 150.2619784581475,
+      "normalize_seconds": 116.33028124994598,
+      "export_seconds": 13.119266874855384,
+      "versions_per_second": 446.98593901168056,
+      "download_mib_per_second": 1.0160221057544931,
+      "database_bytes_per_version": 20241.950228854956,
+      "parquet_files": 34,
+      "parquet_bytes": 5550955,
+      "manifest": "docs/etl/sprints/DINERO-NACIONAL-20260926/evidence/benchmark-export-manifest.json",
+      "validation": "docs/etl/sprints/DINERO-NACIONAL-20260926/evidence/benchmark-export-validation.json",
+      "parquet_root": "etl/data/published/placsp-main-202608-acquisition",
+      "checks": {
+        "normalization": true,
+        "sqlite_integrity": true,
+        "foreign_keys": true,
+        "archive_sha256": true,
+        "export_validation": true
+      }
+    },
+    "minor": {
+      "observed": {
+        "archive_bytes": 16778544,
+        "archives": 1,
+        "award_results": 28313,
+        "document_manifests": 3738,
+        "duplicate_version_sightings": 0,
+        "members": 57,
+        "peak_rss_mb": 49.641,
+        "record_versions": 28091,
+        "records_seen": 28091,
+        "stable_contracts": 27758,
+        "tombstones": 48,
+        "uncompressed_member_bytes": 282238917
+      },
+      "source_contract_ids": 27758,
+      "database_bytes": 142553088,
+      "download_seconds": 13.728773166891187,
+      "normalize_seconds": 16.437235499965027,
+      "export_seconds": 7.078,
+      "versions_per_second": 1708.9856746324385,
+      "download_mib_per_second": 1.165527777680924,
+      "database_bytes_per_version": 5074.688975116585,
+      "parquet_files": 22,
+      "parquet_bytes": 4753472,
+      "manifest": "docs/etl/sprints/DINERO-NACIONAL-20260926/evidence/minor-run/manifest.json",
+      "validation": "docs/etl/sprints/DINERO-NACIONAL-20260926/evidence/minor-run/validation.json",
+      "parquet_root": "etl/data/published/placsp-minor-202608-acquisition",
+      "checks": {
+        "normalization": true,
+        "sqlite_integrity": true,
+        "foreign_keys": true,
+        "archive_sha256": true,
+        "export_validation": true
+      }
+    },
+    "aggregated": {
+      "observed": {
+        "archive_bytes": 10151362,
+        "archives": 1,
+        "award_results": 27939,
+        "document_manifests": 23435,
+        "duplicate_version_sightings": 0,
+        "members": 37,
+        "peak_rss_mb": 56.828,
+        "record_versions": 18323,
+        "records_seen": 18323,
+        "stable_contracts": 12806,
+        "tombstones": 1142,
+        "uncompressed_member_bytes": 199144794
+      },
+      "source_contract_ids": 12806,
+      "database_bytes": 134373376,
+      "download_seconds": 12.095052417134866,
+      "normalize_seconds": 13.478,
+      "export_seconds": 3.521,
+      "versions_per_second": 1359.474699510313,
+      "download_mib_per_second": 0.8004176321077645,
+      "database_bytes_per_version": 7333.590350925067,
+      "parquet_files": 26,
+      "parquet_bytes": 2277043,
+      "manifest": "docs/etl/sprints/DINERO-NACIONAL-20260926/evidence/aggregated-run/manifest.json",
+      "validation": "docs/etl/sprints/DINERO-NACIONAL-20260926/evidence/aggregated-run/validation.json",
+      "parquet_root": "etl/data/published/placsp-aggregated-202608-acquisition",
+      "checks": {
+        "normalization": true,
+        "sqlite_integrity": true,
+        "foreign_keys": true,
+        "archive_sha256": true,
+        "export_validation": true
+      }
+    }
+  },
+  "limitations": [
+    "August is seasonal; rates are measurements of this cohort, not nationwide capacity guarantees.",
+    "Publication/update month is not award month.",
+    "Facts contain separate notices and results, not an additive contract or payment count.",
+    "No national record denominator or historical completion estimate is established."
+  ],
+  "cross_family_identity": {
+    "sum_family_distinct_ids": 75465,
+    "union_distinct_source_ids": 75465,
+    "scope": "Only these three August archive cohorts; no fuzzy entity or prior-corpus reconciliation."
+  },
+  "free_bytes_after": 23264931840
+}

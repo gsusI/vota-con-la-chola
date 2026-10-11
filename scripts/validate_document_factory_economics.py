@@ -16,6 +16,44 @@ from typing import Any
 
 
 HEX_64 = re.compile(r"^[0-9a-f]{64}$")
+INVENTORY_SCHEMA_VERSION = "real_document_format_inventory_v7_xlsx_contract_bound"
+NATIVE_EXTRACTION_ALGORITHM_VERSION = (
+    "document_extraction_v4_pdf_markup_xlsx_phonetic_bounded"
+)
+NATIVE_CURRENT_FULL_CHECK = "native_current_full_physical_run_complete"
+NATIVE_COLD_OUTPUT_CHECK = "native_cold_output_benchmark_available"
+OCR_CURRENT_FULL_CHECK = "ocr_current_full_physical_run_complete"
+OCR_COLD_OUTPUT_CHECK = "ocr_cold_output_benchmark_available"
+COLD_OUTPUT_GAP = (
+    "Current full real native extraction completed against a pre-existing output "
+    "root; measured telemetry is valid for this warm-output run, but no current "
+    "cold-output benchmark is available."
+)
+COLD_OUTPUT_NEXT_GATE = (
+    "repeat current full real native extraction with empty state and output roots "
+    "to establish a cold-output benchmark"
+)
+OCR_COLD_OUTPUT_GAP = (
+    "Current full real page OCR completed against a pre-existing output root; "
+    "measured telemetry is valid for this warm-output run, but no current OCR "
+    "cold-output benchmark is available."
+)
+OCR_COLD_OUTPUT_NEXT_GATE = (
+    "repeat current full real page OCR with empty state and output roots to "
+    "establish a cold-output benchmark"
+)
+REQUIRED_INTEGRITY_CHECKS = frozenset(
+    {
+        "official_real_documents_only",
+        "synthetic_or_mock_records_absent",
+        "public_domain_personal_information_retained",
+        NATIVE_CURRENT_FULL_CHECK,
+        OCR_CURRENT_FULL_CHECK,
+        "acquisition_queue_reconciled",
+        "fresh_acquisition_physical_run_complete",
+        "monetary_cost_not_fabricated",
+    }
+)
 
 
 def read_json(path: Path) -> dict[str, Any]:
@@ -152,6 +190,24 @@ def validate(
     for key, expected in expected_policy.items():
         if policy.get(key) != expected:
             errors.append(f"policy.{key} mismatch")
+    if (
+        inventory.get("schema_version") != INVENTORY_SCHEMA_VERSION
+        or inventory.get("status") != "ok"
+    ):
+        errors.append("inventory schema or status mismatch")
+    if (
+        extraction.get("schema_version") != "real_document_text_extraction_v1"
+        or extraction.get("extraction_algorithm_version")
+        != NATIVE_EXTRACTION_ALGORITHM_VERSION
+    ):
+        errors.append("native extraction schema or algorithm mismatch")
+    if (
+        extraction_validation.get("schema_version")
+        != "real_document_text_validation_v2"
+        or extraction_validation.get("extraction_algorithm_version")
+        != NATIVE_EXTRACTION_ALGORITHM_VERSION
+    ):
+        errors.append("native validation schema or algorithm mismatch")
     if acquisition_run.get("schema_version") != "document_fetch_queue_run_v3":
         errors.append("fresh acquisition run schema mismatch")
     if acquisition_run.get("status") != "ok":
@@ -200,9 +256,13 @@ def validate(
     extraction_run = extraction.get("run") or {}
     extraction_totals = extraction.get("totals") or {}
     extraction_perf = extraction.get("performance") or {}
+    extraction_validation_totals = extraction_validation.get("totals") or {}
+    extraction_validation_checks = extraction_validation.get("checks") or {}
     ocr_run = ocr.get("run") or {}
     ocr_totals = ocr.get("totals") or {}
     ocr_perf = ocr.get("performance") or {}
+    ocr_validation_totals = ocr_validation.get("totals") or {}
+    ocr_validation_checks = ocr_validation.get("checks") or {}
     fetch_queue = fetch.get("queue") or {}
     fetch_docs = fetch.get("documents") or {}
     inventory_totals = inventory.get("totals") or {}
@@ -217,6 +277,61 @@ def validate(
 
     native = artifact.get("native_extraction") or {}
     native_denominator = int(extraction_run.get("succeeded") or 0)
+    inventory_file_instances = int(inventory_totals.get("files") or 0)
+    inventory_distinct_objects = int(
+        inventory_totals.get("distinct_content_objects") or 0
+    )
+    extraction_file_instances = int(extraction_totals.get("file_instances") or 0)
+    extraction_distinct_objects = int(
+        extraction_totals.get("distinct_content_objects") or 0
+    )
+    validation_file_instances = int(
+        extraction_validation_totals.get("file_instances") or 0
+    )
+    validation_distinct_objects = int(
+        extraction_validation_totals.get("distinct_content_objects") or 0
+    )
+    native_counts_reconcile = (
+        inventory_file_instances
+        == extraction_file_instances
+        == validation_file_instances
+        and inventory_distinct_objects
+        == extraction_distinct_objects
+        == validation_distinct_objects
+        == native_denominator
+        == int(extraction_run.get("claimed") or 0)
+    )
+    if not native_counts_reconcile:
+        errors.append(
+            "inventory, extraction, and native validation file/distinct counts "
+            "do not reconcile"
+        )
+    native_current_full_physical_run_complete = (
+        native_counts_reconcile
+        and extraction.get("status") == "ok"
+        and extraction_validation.get("status") == "ok"
+        and bool(extraction_validation_checks)
+        and all(value is True for value in extraction_validation_checks.values())
+        and int(extraction_run.get("dead") or 0) == 0
+        and int(extraction_run.get("retried") or 0) == 0
+    )
+    if not native_current_full_physical_run_complete:
+        errors.append("current full native physical run is incomplete")
+    native_cold_output_benchmark_available = (
+        extraction_perf.get("cold_state_and_output") is True
+    )
+    expected_native_measurement_status = (
+        "cold_physical_run"
+        if native_cold_output_benchmark_available
+        else "current_full_real_warm_output_run"
+    )
+    if native.get("measurement_status") != expected_native_measurement_status:
+        errors.append("native extraction measurement status mismatch")
+    if (
+        native.get("cold_state_and_output")
+        is not native_cold_output_benchmark_available
+    ):
+        errors.append("native cold-state telemetry mismatch")
     native_expected = {
         "raw_content_bytes_processed": int(
             extraction_run.get("raw_bytes_succeeded") or 0
@@ -246,11 +361,38 @@ def validate(
         errors.append("native peak RSS mismatch")
     if extraction.get("status") != "ok" or extraction_validation.get("status") != "ok":
         errors.append("native producer or independent validation is not ok")
-    if extraction_perf.get("cold_state_and_output") is not True:
-        errors.append("native run is not a cold physical run")
 
     page_ocr = artifact.get("page_ocr") or {}
     ocr_denominator = int(ocr_run.get("succeeded") or 0)
+    ocr_current_full_physical_run_complete = (
+        ocr.get("status") == "ok"
+        and ocr_validation.get("status") == "ok"
+        and bool(ocr_validation_checks)
+        and all(value is True for value in ocr_validation_checks.values())
+        and ocr_denominator == int(ocr_totals.get("candidate_pages") or 0)
+        and ocr_denominator
+        == int(ocr_validation_totals.get("candidate_pages") or 0)
+        and int(ocr_run.get("claimed") or 0) == ocr_denominator
+        and int(ocr_run.get("dead") or 0) == 0
+        and int(ocr_run.get("retried") or 0) == 0
+    )
+    if not ocr_current_full_physical_run_complete:
+        errors.append("current full OCR physical run is incomplete")
+    ocr_cold_output_benchmark_available = (
+        ocr_perf.get("cold_state_and_output") is True
+    )
+    expected_ocr_measurement_status = (
+        "cold_physical_run"
+        if ocr_cold_output_benchmark_available
+        else "current_full_real_warm_output_run"
+    )
+    if page_ocr.get("measurement_status") != expected_ocr_measurement_status:
+        errors.append("OCR measurement status mismatch")
+    if (
+        page_ocr.get("cold_state_and_output")
+        is not ocr_cold_output_benchmark_available
+    ):
+        errors.append("OCR cold-state telemetry mismatch")
     ocr_expected = {
         "ocr_text_chars": int(ocr_totals.get("ocr_text_chars") or 0),
         "ocr_text_cas_bytes": int(ocr_totals.get("ocr_text_cas_bytes") or 0),
@@ -274,8 +416,6 @@ def validate(
             errors.append(f"OCR {key} mismatch")
     if ocr.get("status") != "ok" or ocr_validation.get("status") != "ok":
         errors.append("OCR producer or independent validation is not ok")
-    if ocr_perf.get("cold_state_and_output") is not True:
-        errors.append("OCR run is not a cold physical run")
 
     acquisition = artifact.get("acquisition") or {}
     acquisition_denominator = int(acquisition_run_totals.get("succeeded") or 0)
@@ -392,8 +532,58 @@ def validate(
         errors.append("unverified rates or invoices claimed")
 
     checks = artifact.get("checks") or {}
-    if not checks or not all(value is True for value in checks.values()):
-        errors.append("producer checks must all pass")
+    if not isinstance(checks, dict) or not checks:
+        errors.append("producer checks missing")
+    else:
+        missing_integrity_checks = sorted(REQUIRED_INTEGRITY_CHECKS - checks.keys())
+        if missing_integrity_checks:
+            errors.append(
+                "producer integrity/completeness checks missing: "
+                + ", ".join(missing_integrity_checks)
+            )
+        if checks.get(NATIVE_CURRENT_FULL_CHECK) is not (
+            native_current_full_physical_run_complete
+        ):
+            errors.append("producer current-full native completion check mismatch")
+        if checks.get(NATIVE_COLD_OUTPUT_CHECK) is not (
+            native_cold_output_benchmark_available
+        ):
+            errors.append("producer cold-output benchmark check mismatch")
+        if checks.get(OCR_CURRENT_FULL_CHECK) is not (
+            ocr_current_full_physical_run_complete
+        ):
+            errors.append("producer current-full OCR completion check mismatch")
+        if checks.get(OCR_COLD_OUTPUT_CHECK) is not (
+            ocr_cold_output_benchmark_available
+        ):
+            errors.append("producer OCR cold-output benchmark check mismatch")
+        for key, value in checks.items():
+            if key in {NATIVE_COLD_OUTPUT_CHECK, OCR_COLD_OUTPUT_CHECK}:
+                continue
+            if value is not True:
+                errors.append(f"producer integrity/completeness check failed: {key}")
+
+    measurement_gaps = artifact.get("measurement_gaps")
+    if (
+        not isinstance(measurement_gaps, list)
+        or not measurement_gaps
+        or not all(
+            isinstance(value, str) and value.strip() for value in measurement_gaps
+        )
+    ):
+        errors.append("measurement gaps must be a non-empty string list")
+        measurement_gaps = []
+    if native_cold_output_benchmark_available:
+        if COLD_OUTPUT_GAP in measurement_gaps:
+            errors.append("cold-output gap contradicts cold native telemetry")
+    elif COLD_OUTPUT_GAP not in measurement_gaps:
+        errors.append("warm-output native run must disclose missing cold benchmark")
+    if ocr_cold_output_benchmark_available:
+        if OCR_COLD_OUTPUT_GAP in measurement_gaps:
+            errors.append("OCR cold-output gap contradicts cold telemetry")
+    elif OCR_COLD_OUTPUT_GAP not in measurement_gaps:
+        errors.append("warm-output OCR run must disclose missing cold benchmark")
+
     scale_claim = artifact.get("scale_claim") or {}
     if scale_claim.get("one_million_documents_processed") != (
         native_denominator >= 1_000_000
@@ -401,6 +591,19 @@ def validate(
         errors.append("one-million claim mismatch")
     if scale_claim.get("promoted_for_one_million_operation") is not False:
         errors.append("unsupported one-million promotion")
+    next_gate = str(scale_claim.get("next_gate") or "")
+    if native_cold_output_benchmark_available:
+        if COLD_OUTPUT_NEXT_GATE in next_gate:
+            errors.append("next gate contradicts available cold-output benchmark")
+    elif COLD_OUTPUT_NEXT_GATE not in next_gate:
+        errors.append("next gate omits required cold-output benchmark run")
+    if ocr_cold_output_benchmark_available:
+        if OCR_COLD_OUTPUT_NEXT_GATE in next_gate:
+            errors.append("next gate contradicts available OCR cold-output benchmark")
+    elif OCR_COLD_OUTPUT_NEXT_GATE not in next_gate:
+        errors.append("next gate omits required OCR cold-output benchmark run")
+    if "one million distinct real content objects" not in next_gate:
+        errors.append("next gate omits independently validated one-million real corpus")
 
     return {
         "schema_version": "document_factory_economics_validation_v1",
@@ -423,6 +626,12 @@ def validate(
             "file_size_bytes": size,
             "max_bytes": max_bytes,
             "native_objects": native_denominator,
+            "native_file_instances": inventory_file_instances,
+            "native_counts_reconciled": native_counts_reconcile,
+            NATIVE_CURRENT_FULL_CHECK: native_current_full_physical_run_complete,
+            NATIVE_COLD_OUTPUT_CHECK: native_cold_output_benchmark_available,
+            OCR_CURRENT_FULL_CHECK: ocr_current_full_physical_run_complete,
+            OCR_COLD_OUTPUT_CHECK: ocr_cold_output_benchmark_available,
             "ocr_pages": ocr_denominator,
             "fresh_acquisition_documents_succeeded": acquisition_denominator,
             "fresh_acquisition_network_requests": int(

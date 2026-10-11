@@ -63,6 +63,7 @@ DATASET = "document_profile"
 OFFICE_DOCUMENT_EXTENSIONS = frozenset(
     {"doc", "docx", "odt", "rtf", "xls", "xlsx", "ods", "ppt", "pptx", "odp"}
 )
+SUPPORTED_OFFICE_EXTRACTION_EXTENSIONS = frozenset({"xlsx"})
 
 _MACHINE_STATUS_ALIASES = {
     "detected": "candidate_threshold_passed",
@@ -874,6 +875,14 @@ def build_report(
         for extension, total in extension_counts.items()
         if extension.casefold().lstrip(".") in OFFICE_DOCUMENT_EXTENSIONS
     )
+    observed_office_extensions = sorted(
+        extension
+        for extension in extension_counts
+        if extension.casefold().lstrip(".") in OFFICE_DOCUMENT_EXTENSIONS
+    )
+    office_extraction_support_claimed = bool(observed_office_extensions) and set(
+        observed_office_extensions
+    ).issubset(SUPPORTED_OFFICE_EXTRACTION_EXTENSIONS)
     terminal = _terminal(conn)
     checks = {
         "inventory_and_native_generation_bound_by_sha256": (
@@ -931,6 +940,7 @@ def build_report(
             "classification_is_content_deduplicated": True,
             "raw_and_native_text_bytes_are_fully_rehashed": True,
             "unsupported_formats_are_not_claimed_from_absent_real_data": True,
+            "office_extraction_validation_requires_bound_validation_artifact": True,
         },
         "configuration": _configuration(args),
         "inputs": {
@@ -980,17 +990,26 @@ def build_report(
         "by_encryption_status_file_instances": encryption_counts,
         "by_format_file_instances": extension_counts,
         "format_coverage": {
-            "observed_office_extensions": sorted(
-                extension
-                for extension in extension_counts
-                if extension.casefold().lstrip(".") in OFFICE_DOCUMENT_EXTENSIONS
+            "observed_office_extensions": observed_office_extensions,
+            "supported_office_extensions": sorted(
+                SUPPORTED_OFFICE_EXTRACTION_EXTENSIONS
             ),
-            "representative_office_format_cohort_present": office_format_instances > 0,
-            "office_extraction_support_claimed": False,
+            "representative_office_format_cohort_present": False,
+            "representative_office_format_cohort_reason": (
+                "not_established_by_xlsx_only_cohort"
+                if office_format_instances > 0
+                else "real_office_format_cohort_absent"
+            ),
+            "office_extraction_support_claimed": office_extraction_support_claimed,
+            "independent_office_extraction_validation_bound": False,
             "reason": (
                 "real_office_format_cohort_absent"
                 if office_format_instances == 0
-                else "real_office_cohort_present_but_not_yet_quality_promoted"
+                else (
+                    "observed_real_xlsx_cohort_extracted_only"
+                    if office_extraction_support_claimed
+                    else "observed_office_extension_not_supported"
+                )
             ),
         },
         "checks": checks,
@@ -998,9 +1017,9 @@ def build_report(
             "Run the independent full-row/full-byte validator, then use the versioned "
             "machine-language/encryption distribution as an input to DEC-01. Treat "
             "every machine-only language label as an unreviewed candidate; human "
-            "review remains required before language-quality promotion. Acquire and "
-            "validate a representative real office-format cohort before claiming "
-            "office extraction support."
+            "review remains required before language-quality promotion. XLSX support "
+            "applies only to the observed real workbook cohort; acquire real cohorts "
+            "before claiming DOC, ODT, legacy XLS, or presentation support."
         ),
     }
 

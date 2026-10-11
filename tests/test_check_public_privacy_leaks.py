@@ -11,6 +11,22 @@ from scripts import check_public_privacy_leaks as script_checker
 
 
 class TestCheckPublicPrivacyLeaks(unittest.TestCase):
+    def test_vortal_public_login_is_not_a_workstation_path(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            public = "https://community.vortal.biz/PRODSTS/Users/Login/Index?SkinName=aytogijon"
+            for name in ("source.xml", "source.xml.gz"):
+                target = root / name
+                payload = public + " <tag>https://other.example/Users/alice/private.xml</tag> " + "/Users/alice/private.xml"
+                if name.endswith(".gz"):
+                    with gzip.open(target, "wt") as handle:
+                        handle.write(payload)
+                else:
+                    target.write_text(payload)
+            findings, _ = checker.collect_findings([root])
+            self.assertEqual(len(findings), 4)
+            self.assertTrue(all(f.kind == "local_user_path" for f in findings))
+
     def test_default_scan_paths_cover_next_public_tree(self) -> None:
         self.assertIn(Path("ui/gh-pages-next/public"), checker.DEFAULT_SCAN_PATHS)
         self.assertIs(script_checker.collect_findings, checker.collect_findings)

@@ -1,0 +1,32 @@
+{
+  "api": "https://api.votaconlachola.org",
+  "galasa_rows": 8,
+  "galasa_amount_cents": 550596594,
+  "january_rows": 1,
+  "january_amount_cents": 754648,
+  "csv_rows": 8,
+  "csv_amount_parity": true,
+  "tls_verified": true,
+  "version": "128c777217c83fcafa6502a1df842f4c598feff5e5229581296742b978715b62",
+  "browser_initial_load_passed": true,
+  "browser_galasa_1999_2027_rows": 8,
+  "browser_galasa_amount_cents": 550596594,
+  "frontend_build_commit": "008e517767",
+  "frontend_gh_pages_commit": "0fd0971d8a",
+  "static_asset_deployment": "740eda54-fa99-456c-b54e-faf7f3838c4f",
+  "runtime_code_commit": "eb96367ed6",
+  "active_slot": "green",
+  "runtime_bundle": "efca9a409f04f6e841d82d4dcece596c309f22fd9fe3f4933bfc183081833ff6",
+  "automated_frontend_fetch": "Python urllib received HTTP 403; authenticated normal browser rendered results successfully.",
+  "final_host_health": {
+    "available_memory_mib": 10020,
+    "free_disk_gib_displayed": 35,
+    "disk_used_percent": 77,
+    "failed_systemd_units": 0,
+    "slots_healthy": 2,
+    "active_slot": "green",
+    "unrelated_containers_with_unchanged_start": 22,
+    "other_application_deployments_observed": 2,
+    "oom_killed_containers": 0
+  }
+}

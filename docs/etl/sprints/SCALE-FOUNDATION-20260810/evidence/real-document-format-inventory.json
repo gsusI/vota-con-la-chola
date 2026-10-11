@@ -88,7 +88,16 @@
         "source_group": "text_documents/programas_partidos"
       }
     ],
+    "files_truncated": false,
     "policy": "Retain real transport-failure bytes as obstruction evidence; do not count them as successfully processed accountability documents."
+  },
+  "bounded_execution": {
+    "fetch_batch_rows": 256,
+    "filesystem_paths_materialized_in_memory": false,
+    "inventory_rows_materialized_in_memory": false,
+    "max_in_flight_per_worker": 2,
+    "ordering": "sqlite_path_order",
+    "xlsx_workers_max": 2
   },
   "by_extension": {
     "html": {
@@ -100,6 +109,11 @@
       "bytes": 718263944,
       "files": 1437,
       "ok": 1437
+    },
+    "xlsx": {
+      "bytes": 127174982,
+      "files": 46,
+      "ok": 46
     },
     "xml": {
       "bytes": 3797133635,
@@ -114,9 +128,9 @@
       "ok": 1
     },
     "elections": {
-      "bytes": 44066769,
-      "files": 93,
-      "ok": 93
+      "bytes": 52174567,
+      "files": 97,
+      "ok": 97
     },
     "europarl_meps": {
       "bytes": 8974025,
@@ -139,9 +153,9 @@
       "ok": 2
     },
     "municipal_concejales": {
-      "bytes": 11338475,
-      "files": 4,
-      "ok": 4
+      "bytes": 130405659,
+      "files": 46,
+      "ok": 46
     },
     "official-captures": {
       "bytes": 115695,
@@ -202,29 +216,34 @@
     "repo_relative_manifest_paths": true,
     "s1_100k_reached": true,
     "sample_content_fingerprints_excluded": true,
-    "transport_failures_excluded_from_accountability_scale": true
+    "transport_failures_excluded_from_accountability_scale": true,
+    "xlsx_text_respects_shared_extraction_ceiling": true
   },
-  "distinct_content_progress_to_s1_pct": 120.757,
+  "distinct_content_progress_to_s1_pct": 120.801,
   "failure_samples": [],
-  "file_instances_progress_to_s1_pct": 122.607,
-  "generated_at": "2026-08-30T03:18:34.232833+00:00",
+  "file_instances_progress_to_s1_pct": 122.653,
+  "generated_at": "2026-08-30T21:01:00.088348+00:00",
   "incremental_reuse": {
-    "file_instances_reinspected": 11208,
+    "file_instances_reinspected": 122662,
     "previous_manifest": "etl/data/manifests/real-document-format-inventory.jsonl",
-    "unchanged_file_instances_reused": 111408
+    "unchanged_file_instances_reused": 0
   },
+  "inventory_algorithm_version": "real_document_inventory_v7_xlsx_xml_phonetic_bounded",
   "limitations": [
     "This proves inventory of more than 100000 captured official document instances; it does not by itself prove representative source and format coverage or million-document operation.",
     "Sparse or empty PDF text marks an OCR candidate only; OCR was not run.",
     "Markup text counts are parser-based inventory metrics, not semantic extraction quality judgments.",
     "Transport-failure captures remain on disk for obstruction accountability but are excluded from successful-document scale metrics.",
-    "Office documents and additional languages require new representative source inventory."
+    "XLSX coverage proves raw OOXML scalar-value extraction for the observed real cohort only; DOC, ODT, legacy XLS, and presentation formats remain unsupported.",
+    "The real XLSX cohort contains zero observed formula cells. Formula handling is implemented but not empirically validated by this cohort.",
+    "XLSX scalar values and typed phonetic annotations are preserved with exact sheet/row/cell coordinates; visual formatting, comments, charts, and embedded media are not claimed as extracted text.",
+    "Additional languages require representative source inventory and review."
   ],
   "manifest": {
-    "bytes": 82987794,
+    "bytes": 109512983,
     "ref": "etl/data/manifests/real-document-format-inventory.jsonl",
-    "rows": 122607,
-    "sha256": "4d11b77c8a2ac64b59baed5190fe52975d9d820fe76777585bf6799e8718a9ad",
+    "rows": 122653,
+    "sha256": "f3174670b45b9e2a06c4d1dd64b375e114362a615c479d0f09738cc3d14ffec7",
     "storage_class": "local_generated_ignored"
   },
   "non_real_exclusions": {
@@ -262,38 +281,40 @@
         "reason": "fixture_or_sample_path",
         "sha256": "48a0718bdc659852611697a0a3401bf5ae03fa598163cbe761add87d427ff8f6"
       }
-    ]
+    ],
+    "samples_truncated": false
   },
   "quality_classes": {
     "empty_markup": 2935,
     "markup_with_text": 118235,
     "pdf_digital_text": 1379,
     "pdf_mixed_empty_pages": 9,
-    "pdf_mixed_sparse_pages": 49
+    "pdf_mixed_sparse_pages": 49,
+    "xlsx_public_cells_with_text": 46
   },
   "root": "etl/data/raw",
-  "schema_version": "real_document_format_inventory_v4",
+  "schema_version": "real_document_format_inventory_v7_xlsx_contract_bound",
   "size_buckets": {
     "100kb_to_1mb": 11239,
     "10kb_to_100kb": 46853,
-    "1mb_to_10mb": 320,
+    "1mb_to_10mb": 366,
     "gte_10mb": 22,
     "lt_10kb": 64173
   },
   "status": "ok",
   "target_files_s1": 100000,
   "totals": {
-    "bytes": 5524892735,
-    "distinct_content_objects": 120757,
-    "duplicate_file_instances": 1850,
+    "bytes": 5652067717,
+    "distinct_content_objects": 120801,
+    "duplicate_file_instances": 1852,
     "excluded_non_accountability_capture_bytes": 3561,
     "excluded_non_accountability_capture_files": 9,
     "excluded_non_real_bytes": 59488,
     "excluded_non_real_files": 5,
     "failed_or_unsupported": 0,
-    "files": 122607,
+    "files": 122653,
     "markup_text_chars": 1728145704,
-    "ok": 122607,
+    "ok": 122653,
     "pdf_files": 1437,
     "pdf_files_ok": 1437,
     "pdf_pages": 44927,
@@ -301,6 +322,19 @@
     "pdf_pages_sparse_ocr_candidate": 822,
     "pdf_pages_with_text": 44893,
     "pdf_text_chars": 124931187,
-    "raw_document_files_discovered": 122621
+    "raw_document_files_discovered": 122667,
+    "xlsx_files": 46,
+    "xlsx_files_ok": 46,
+    "xlsx_formula_cells": 0,
+    "xlsx_native_text_chars": 1013628145,
+    "xlsx_nonempty_cells": 29139422,
+    "xlsx_nonempty_worksheet_rows": 2845130,
+    "xlsx_worksheet_rows": 2845172,
+    "xlsx_worksheets": 46
+  },
+  "xlsx_contract": {
+    "blank_worksheets_preserve_workbook_sheet_count": true,
+    "empty_workbooks_are_eligible_native_no_text": true,
+    "max_text_chars": 33554432
   }
 }

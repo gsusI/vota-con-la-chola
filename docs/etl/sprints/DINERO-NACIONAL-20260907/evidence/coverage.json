@@ -1,0 +1,271 @@
+{
+  "schema_version": "spending_coverage_v1",
+  "generated_at": "2026-09-07T20:42:43.540265+00:00",
+  "status": "partial_coverage",
+  "checks": {
+    "frozen_award_selection_balances": true,
+    "release_matches_audit_count": true,
+    "release_matches_audit_amount": true,
+    "physical_result_count_matches_codes": true
+  },
+  "source_db": "placsp-contracts-real-s1-20260811.db",
+  "physical": {
+    "versions": 330577,
+    "distinct_contract_ids": 121555,
+    "first_update": "2024-12-30T14:16:12.623+01:00",
+    "last_update": "2025-06-30T16:59:36.153+02:00",
+    "result_rows_all_versions": 262558,
+    "results_by_source_code_all_versions": {
+      "2": 1,
+      "3": 19039,
+      "4": 1826,
+      "5": 297,
+      "8": 127842,
+      "9": 113553
+    },
+    "latest_unambiguous_results_by_source_code": [
+      {
+        "result_code": "2",
+        "results": 1,
+        "with_basic_fields": 1
+      },
+      {
+        "result_code": "3",
+        "results": 11164,
+        "with_basic_fields": 0
+      },
+      {
+        "result_code": "4",
+        "results": 1518,
+        "with_basic_fields": 0
+      },
+      {
+        "result_code": "5",
+        "results": 216,
+        "with_basic_fields": 0
+      },
+      {
+        "result_code": "8",
+        "results": 48027,
+        "with_basic_fields": 48019
+      },
+      {
+        "result_code": "9",
+        "results": 80820,
+        "with_basic_fields": 80817
+      }
+    ]
+  },
+  "acquired_archives": [
+    {
+      "period": "202501",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202501.zip",
+      "content_sha256": "bda70aa0a7437d031e5d3f6114e5a637920ea1a460e1aba67d200209ae5eab7f",
+      "bytes": 146382691,
+      "members_total": 94,
+      "status": "ok",
+      "fetched_at": "2026-08-11T15:36:38+00:00"
+    },
+    {
+      "period": "202502",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202502.zip",
+      "content_sha256": "afb36a7be4d261152e6018ba5a5dc8e71454cf8f696baca557dda84e04de1431",
+      "bytes": 143099154,
+      "members_total": 92,
+      "status": "ok",
+      "fetched_at": "2026-08-11T15:38:15+00:00"
+    },
+    {
+      "period": "202503",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202503.zip",
+      "content_sha256": "307a768056e7bacb0b62bbc62b7c37aa2d7ff1f6ddad25210b044d2db2728b89",
+      "bytes": 172859973,
+      "members_total": 111,
+      "status": "ok",
+      "fetched_at": "2026-08-11T15:40:17+00:00"
+    },
+    {
+      "period": "202504",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202504.zip",
+      "content_sha256": "c959b47677e4ecfd8820427c4cc3dfa787b548ddc8b0285578728e421d4dfb55",
+      "bytes": 173458430,
+      "members_total": 112,
+      "status": "ok",
+      "fetched_at": "2026-08-11T16:27:02+00:00"
+    },
+    {
+      "period": "202505",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202505.zip",
+      "content_sha256": "b1d56142fb0afd0b52753e99ffc388cc88c522f41b3233d240bfd0953d2e0d89",
+      "bytes": 197988819,
+      "members_total": 127,
+      "status": "ok",
+      "fetched_at": "2026-08-11T16:29:31+00:00"
+    },
+    {
+      "period": "202506",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202506.zip",
+      "content_sha256": "64735a08c5263e456d798a82f9f64dcef1db98c06a59ddbee1d84035367cd7f2",
+      "bytes": 204003438,
+      "members_total": 131,
+      "status": "ok",
+      "fetched_at": "2026-08-11T16:31:32+00:00"
+    }
+  ],
+  "official_catalog": {
+    "catalog_url": "https://www.hacienda.gob.es/es-ES/GobiernoAbierto/Datos%20Abiertos/Paginas/licitacionescontratante.aspx",
+    "as_of_date": "2026-09-07",
+    "expected": {
+      "closed_year_annual_archives": 14,
+      "current_year_monthly_archives": 9,
+      "selected_archives": 23
+    },
+    "missing": {
+      "annual_periods": [],
+      "monthly_periods": []
+    },
+    "archives": [
+      {
+        "archive_kind": "annual",
+        "period": "2012",
+        "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2012.zip"
+      },
+      {
+        "archive_kind": "annual",
+        "period": "2013",
+        "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2013.zip"
+      },
+      {
+        "archive_kind": "annual",
+        "period": "2014",
+        "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2014.zip"
+      },
+      {
+        "archive_kind": "annual",
+        "period": "2015",
+        "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2015.zip"
+      },
+      {
+        "archive_kind": "annual",
+        "period": "2016",
+        "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2016.zip"
+      },
+      {
+        "archive_kind": "annual",
+        "period": "2017",
+        "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2017.zip"
+      },
+      {
+        "archive_kind": "annual",
+        "period": "2018",
+        "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2018.zip"
+      },
+      {
+        "archive_kind": "annual",
+        "period": "2019",
+        "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2019.zip"
+      },
+      {
+        "archive_kind": "annual",
+        "period": "2020",
+        "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2020.zip"
+      },
+      {
+        "archive_kind": "annual",
+        "period": "2021",
+        "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2021.zip"
+      },
+      {
+        "archive_kind": "annual",
+        "period": "2022",
+        "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2022.zip"
+      },
+      {
+        "archive_kind": "annual",
+        "period": "2023",
+        "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2023.zip"
+      },
+      {
+        "archive_kind": "annual",
+        "period": "2024",
+        "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2024.zip"
+      },
+      {
+        "archive_kind": "annual",
+        "period": "2025",
+        "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2025.zip"
+      },
+      {
+        "archive_kind": "monthly",
+        "period": "202601",
+        "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202601.zip"
+      },
+      {
+        "archive_kind": "monthly",
+        "period": "202602",
+        "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202602.zip"
+      },
+      {
+        "archive_kind": "monthly",
+        "period": "202603",
+        "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202603.zip"
+      },
+      {
+        "archive_kind": "monthly",
+        "period": "202604",
+        "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202604.zip"
+      },
+      {
+        "archive_kind": "monthly",
+        "period": "202605",
+        "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202605.zip"
+      },
+      {
+        "archive_kind": "monthly",
+        "period": "202606",
+        "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202606.zip"
+      },
+      {
+        "archive_kind": "monthly",
+        "period": "202607",
+        "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202607.zip"
+      },
+      {
+        "archive_kind": "monthly",
+        "period": "202608",
+        "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202608.zip"
+      },
+      {
+        "archive_kind": "monthly",
+        "period": "202609",
+        "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202609.zip"
+      }
+    ]
+  },
+  "publication": {
+    "release": "0e55b07120bcb42731b45a78fd682813cd6a51793232faee805ddce46be32a90",
+    "rows": 47397,
+    "date_min_normalized": "2004-01-01",
+    "date_max_normalized": "2025-06-30",
+    "frozen_award_facts": 141747,
+    "exclusions": {
+      "missing_decision_date": 11,
+      "missing_identity_or_eur_amount": 12898,
+      "not_awarded_or_tombstone": 80819,
+      "source_parquet_semantic_mismatch": 622
+    },
+    "source_result_codes_selected": [
+      "8"
+    ]
+  },
+  "national_coverage_ratio": null,
+  "limitations": [
+    "Archive periods describe publications/updates, not exhaustive award-date coverage.",
+    "Catalog links are expected archive containers, not a national record denominator.",
+    "Physical result rows include versions and unsuccessful outcomes; they are not unique awards.",
+    "Latest result counts have not passed amount, identity, tombstone or source-parity gates.",
+    "Current release accepts TenderResult code 8 only; code 9 formalizations require inclusion review.",
+    "Formalizations must retain their stage and must never be counted as payments.",
+    "Regional, local, sectoral and TED overlaps remain unenumerated."
+  ]
+}

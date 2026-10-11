@@ -1,5 +1,7 @@
 {
   "activation_chain": [
+    "ae41313c9de9e071191ceb1802b148f5f5409a4ad234f9a015826c79ddf439d0",
+    "2b990dd866372d93f771e585d305ac65973c4b4e91a09d50000da400e4dfb886",
     "e5e7aa2ec3d7f80d036885b2ff214da58b8ee9532dc647e5336cde1578a147a9",
     "fea6dc86110ad94c190133077d2271130652f30475f6f561ad0ab5ca98e25024"
   ],
@@ -20,12 +22,12 @@
     "retained_state_snapshots_checked_to_requested_depth": true
   },
   "dataset": "native_text",
-  "generated_at": "2026-08-30T11:58:43.175909+00:00",
+  "generated_at": "2026-08-30T19:24:21.551530+00:00",
   "input": {
     "bytes": 5423,
-    "logical_sha256": "2b022ccb276e3f9b8829673e747daf5bea9c0f6f4b50ad20d12d0cf41a2805c6",
+    "logical_sha256": "fba8a2d56e21538380488a5f2a393226f968be18b7a23a1a4bd854f3887ebc2d",
     "path": "etl/data/published/real-document-text-manifest-latest.jsonl",
-    "sha256": "e5e7aa2ec3d7f80d036885b2ff214da58b8ee9532dc647e5336cde1578a147a9"
+    "sha256": "ae41313c9de9e071191ceb1802b148f5f5409a4ad234f9a015826c79ddf439d0"
   },
   "mode": {
     "full_shard_check": true,
@@ -49,19 +51,19 @@
   "schema_version": "real_document_generation_lifecycle_audit_v1",
   "status": "ok",
   "totals": {
-    "activation_chain_manifests": 2,
-    "activation_receipts": 2,
+    "activation_chain_manifests": 4,
+    "activation_receipts": 4,
     "automatic_deletions": 0,
     "interrupted_staging_directories": 0,
-    "manifest_archives": 2,
+    "manifest_archives": 4,
     "orphan_generation_directories": 0,
     "orphan_state_snapshots": 0,
-    "retained_compressed_manifest_bytes": 27430694,
-    "retained_compressed_state_bytes": 80271384,
-    "retained_shard_files": 26,
-    "retained_state_snapshots": 2,
-    "retained_unique_generations": 2,
-    "superseded_generations": 1,
+    "retained_compressed_manifest_bytes": 55298724,
+    "retained_compressed_state_bytes": 160595272,
+    "retained_shard_files": 52,
+    "retained_state_snapshots": 4,
+    "retained_unique_generations": 4,
+    "superseded_generations": 3,
     "unactivated_activation_receipts": 0,
     "unactivated_generation_directories": 0,
     "unactivated_manifest_archives": 0

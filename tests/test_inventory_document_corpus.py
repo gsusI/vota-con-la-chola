@@ -6,7 +6,9 @@ import unittest
 from pathlib import Path
 from unittest import mock
 
+from publicdata_docs.generation_manifest import sha256_file
 from scripts.inventory_document_corpus import (
+    INVENTORY_ALGORITHM_VERSION,
     _count_pdf_page_text,
     _size_bucket,
     inspect_document,
@@ -14,8 +16,139 @@ from scripts.inventory_document_corpus import (
     run_inventory,
 )
 
+REPO_ROOT = Path(__file__).resolve().parents[1]
+REAL_INVENTORY_REPORT = (
+    REPO_ROOT
+    / "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence"
+    / "real-document-format-inventory.json"
+)
+REAL_INVENTORY_MANIFEST = (
+    REPO_ROOT / "etl/data/manifests/real-document-format-inventory.jsonl"
+)
+
 
 class TestInventoryDocumentCorpus(unittest.TestCase):
+    def require_real_artifacts(self, *paths: Path) -> None:
+        if not all(path.is_file() for path in paths):
+            self.skipTest(
+                "real full-corpus artifacts are excluded from this test context"
+            )
+
+    def test_current_real_inventory_v7_reconciles_xlsx_manifest(self) -> None:
+        self.require_real_artifacts(REAL_INVENTORY_REPORT, REAL_INVENTORY_MANIFEST)
+        report = json.loads(REAL_INVENTORY_REPORT.read_text(encoding="utf-8"))
+        manifest = report["manifest"]
+        totals = report["totals"]
+
+        self.assertEqual(report["status"], "ok")
+        self.assertEqual(
+            report["schema_version"],
+            "real_document_format_inventory_v7_xlsx_contract_bound",
+        )
+        self.assertEqual(
+            report["inventory_algorithm_version"], INVENTORY_ALGORITHM_VERSION
+        )
+        self.assertEqual(report["xlsx_contract"]["max_text_chars"], 32 * 1024 * 1024)
+        self.assertTrue(
+            report["xlsx_contract"]["empty_workbooks_are_eligible_native_no_text"]
+        )
+        self.assertEqual(
+            report["bounded_execution"]["ordering"], "sqlite_path_order"
+        )
+        self.assertFalse(
+            report["bounded_execution"]["inventory_rows_materialized_in_memory"]
+        )
+        self.assertFalse(
+            report["bounded_execution"]["filesystem_paths_materialized_in_memory"]
+        )
+        self.assertEqual(report["bounded_execution"]["fetch_batch_rows"], 256)
+        self.assertEqual(
+            report["bounded_execution"]["max_in_flight_per_worker"], 2
+        )
+        self.assertTrue(all(report["checks"].values()))
+        self.assertGreaterEqual(totals["files"], 100_000)
+        self.assertEqual(totals["files"], totals["ok"])
+        self.assertEqual(totals["failed_or_unsupported"], 0)
+        self.assertEqual(
+            totals["raw_document_files_discovered"],
+            totals["files"]
+            + totals["excluded_non_real_files"]
+            + totals["excluded_non_accountability_capture_files"],
+        )
+        self.assertEqual(
+            manifest["ref"],
+            REAL_INVENTORY_MANIFEST.relative_to(REPO_ROOT).as_posix(),
+        )
+        self.assertEqual(manifest["rows"], totals["files"])
+        self.assertEqual(manifest["bytes"], REAL_INVENTORY_MANIFEST.stat().st_size)
+        self.assertEqual(manifest["sha256"], sha256_file(REAL_INVENTORY_MANIFEST))
+
+        observed_rows = 0
+        observed_bytes = 0
+        observed_hashes: set[str] = set()
+        observed_by_extension: dict[str, dict[str, int]] = {}
+        xlsx_rows = 0
+        xlsx_hashes: set[str] = set()
+        xlsx_worksheets = 0
+        xlsx_worksheet_rows = 0
+        xlsx_nonempty_rows = 0
+        xlsx_nonempty_cells = 0
+        xlsx_formula_cells = 0
+        xlsx_text_chars = 0
+        with REAL_INVENTORY_MANIFEST.open("r", encoding="utf-8") as handle:
+            for line in handle:
+                if not line.strip():
+                    continue
+                row = json.loads(line)
+                observed_rows += 1
+                observed_bytes += int(row["bytes"])
+                observed_hashes.add(str(row["sha256"]))
+                extension = str(row["extension"])
+                extension_totals = observed_by_extension.setdefault(
+                    extension, {"files": 0, "ok": 0, "bytes": 0}
+                )
+                extension_totals["files"] += 1
+                extension_totals["bytes"] += int(row["bytes"])
+                extension_totals["ok"] += int(row["status"] == "ok")
+                self.assertEqual(
+                    row["inventory_algorithm_version"], INVENTORY_ALGORITHM_VERSION
+                )
+                self.assertTrue(row["accountability_eligible"])
+                self.assertEqual(row["real_data_status"], "eligible_real_capture")
+                self.assertFalse(Path(str(row["path"])).is_absolute())
+                if extension != "xlsx":
+                    continue
+                xlsx_rows += 1
+                xlsx_hashes.add(str(row["sha256"]))
+                xlsx_worksheets += int(row["worksheet_count"])
+                xlsx_worksheet_rows += int(row["worksheet_rows"])
+                xlsx_nonempty_rows += int(row["nonempty_worksheet_rows"])
+                xlsx_nonempty_cells += int(row["nonempty_cells"])
+                xlsx_formula_cells += int(row["formula_cells"])
+                xlsx_text_chars += int(row["text_chars"])
+                self.assertEqual(row["quality_class"], "xlsx_public_cells_with_text")
+
+        self.assertEqual(observed_rows, totals["files"])
+        self.assertEqual(observed_bytes, totals["bytes"])
+        self.assertEqual(len(observed_hashes), totals["distinct_content_objects"])
+        self.assertEqual(
+            totals["duplicate_file_instances"],
+            totals["files"] - totals["distinct_content_objects"],
+        )
+        self.assertEqual(observed_by_extension, report["by_extension"])
+        self.assertEqual(xlsx_rows, totals["xlsx_files"])
+        self.assertGreater(len(xlsx_hashes), 0)
+        self.assertLessEqual(len(xlsx_hashes), xlsx_rows)
+        self.assertEqual(xlsx_worksheets, totals["xlsx_worksheets"])
+        self.assertEqual(xlsx_worksheet_rows, totals["xlsx_worksheet_rows"])
+        self.assertEqual(
+            xlsx_nonempty_rows, totals["xlsx_nonempty_worksheet_rows"]
+        )
+        self.assertEqual(xlsx_nonempty_cells, totals["xlsx_nonempty_cells"])
+        self.assertEqual(xlsx_formula_cells, totals["xlsx_formula_cells"])
+        self.assertEqual(xlsx_formula_cells, 0)
+        self.assertEqual(xlsx_text_chars, totals["xlsx_native_text_chars"])
+
     def test_markup_inventory_uses_relative_paths_and_visible_text(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:
             root = Path(temp_dir)

@@ -106,6 +106,43 @@ class TransparencyDashboardSnapshotTests(unittest.TestCase):
         self.assertEqual(self.payload["policy"]["placeholder_releases"], "forbidden")
         self.assertEqual(self.payload["policy"]["public_domain_personal_information"], "retained")
 
+    def test_missing_cold_benchmarks_do_not_mask_integrity_failure(self) -> None:
+        economics = self.payload["document_factory_economics"]
+        self.assertFalse(economics["checks"]["native_cold_output_benchmark_available"])
+        self.assertFalse(economics["checks"]["ocr_cold_output_benchmark_available"])
+
+        changed = json.loads(json.dumps(self.payload))
+        changed["document_factory_economics"]["checks"][
+            "native_current_full_physical_run_complete"
+        ] = False
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "transparency.json"
+            path.write_text(json.dumps(changed, ensure_ascii=False), encoding="utf-8")
+            report = validate(path, 1_000_000)
+
+        self.assertEqual(report["status"], "error")
+        self.assertIn(
+            "document economics integrity check failed: "
+            "native_current_full_physical_run_complete",
+            report["errors"],
+        )
+
+    def test_embedded_economics_must_match_checksum_bound_real_source(self) -> None:
+        changed = json.loads(json.dumps(self.payload))
+        changed["document_factory_economics"]["native_extraction"][
+            "distinct_content_objects"
+        ] += 1
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "transparency.json"
+            path.write_text(json.dumps(changed, ensure_ascii=False), encoding="utf-8")
+            report = validate(path, 1_000_000)
+
+        self.assertEqual(report["status"], "error")
+        self.assertIn(
+            "document economics projection does not match bound source",
+            report["errors"],
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -1,0 +1,18 @@
+{
+  "source": "etl/data/staging/placsp-minor-2019-20260926.db",
+  "compressed": "etl/data/staging/placsp-minor-2019-20260926.db.zst",
+  "source_sha256": "4d340fd9135922b44c830b6e93949ea0a9201b4abe751f95b732282bc13404f8",
+  "compressed_sha256": "d16054e28fe60a5bd574ec7ed9b8703906093bf4de7d0db2b6b4acb164265628",
+  "source_bytes": 1379409920,
+  "compressed_bytes": 185788408,
+  "sqlite_checkpoint": [
+    0,
+    0,
+    0
+  ],
+  "record_versions": 298107,
+  "roundtrip_verified": true,
+  "source_retained": false,
+  "compression_seconds": 0.8493222079705447,
+  "restore_command": "zstd -d --keep etl/data/staging/placsp-minor-2019-20260926.db.zst -o etl/data/staging/placsp-minor-2019-20260926.db"
+}

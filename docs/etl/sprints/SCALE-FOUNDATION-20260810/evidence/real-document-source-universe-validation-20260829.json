@@ -1,7 +1,7 @@
 {
   "schema_version": "real_document_source_universe_validation_v1",
   "status": "ok",
-  "generated_at": "2026-08-30T04:41:40.891619Z",
+  "generated_at": "2026-08-30T21:05:37.227729Z",
   "policy": {
     "official_real_urls_only": true,
     "synthetic_or_mock_records_counted": false,
@@ -12,17 +12,17 @@
     "report": {
       "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-source-universe-20260829.json",
       "bytes": 28752,
-      "sha256": "a287559b04f8b78313e04eca9a1e06d3e8f6f7104367af7d4b4eb48c10e71c46"
+      "sha256": "e04092e3b216a252dbbb4fda3c29252a358a2c65dfd0aa0d96e3b521d6b17966"
     },
     "edge_manifest": {
       "path": "etl/data/manifests/real-document-provenance-edges.jsonl",
-      "bytes": 254072528,
-      "sha256": "05a30252ac0d8e5303709b84ff545f78bb85c2d82115778eac2f01939cb1a96b"
+      "bytes": 254074502,
+      "sha256": "d99fd854d3ca2e14fd963d11e5a279f652a08996076c2bc55c0581264d6e6c5d"
     }
   },
   "checks": {
     "input_descriptors_exact": true,
-    "edge_rows_replayed": 337701,
+    "edge_rows_replayed": 337704,
     "unique_https_urls_replayed": 111600,
     "host_counts_exact": true,
     "contract_eligible_urls_exact": true,

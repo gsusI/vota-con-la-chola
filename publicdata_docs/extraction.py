@@ -11,6 +11,13 @@ from dataclasses import dataclass
 from io import BytesIO
 from pathlib import Path
 
+from publicdata_docs.xlsx import (
+    DEFAULT_MAX_TEXT_CHARS as DEFAULT_MAX_XLSX_TEXT_CHARS,
+    XlsxTextRow,
+    extract_xlsx_path,
+    is_xlsx_path,
+)
+
 TAG_RE = re.compile(r"<[^>]+>")
 WS_RE = re.compile(r"\s+")
 MARKUP_START_TAG_RE = re.compile(r"^<\s*(?P<tag>[A-Za-z_][\w:.-]*)")
@@ -19,10 +26,16 @@ XML_ENCODING_RE = re.compile(
     rb"encoding=['\"](?P<encoding>[^'\"]+)['\"]", re.IGNORECASE
 )
 HTML_CHARSET_RE = re.compile(rb"charset=(?P<charset>[A-Za-z0-9._-]+)", re.IGNORECASE)
-DOCUMENT_EXTRACTION_ALGORITHM_VERSION = "document_extraction_v2_pdf_plain_text"
-DOCUMENT_LOCATOR_ALGORITHM_VERSION = "document_text_locator_v3_major_markup_sections"
+DOCUMENT_EXTRACTION_ALGORITHM_VERSION = (
+    "document_extraction_v4_pdf_markup_xlsx_phonetic_bounded"
+)
+DOCUMENT_LOCATOR_ALGORITHM_VERSION = (
+    "document_text_locator_v6_markup_sections_xlsx_cross_sheet_row_groups"
+)
 DEFAULT_MARKUP_SECTION_MAX_DEPTH = 1
 DEFAULT_MAX_SEMANTIC_MARKUP_BYTES = 64 * 1024 * 1024
+DEFAULT_XLSX_LOCATOR_SPAN_CHARS = 4 * 1024 * 1024
+DEFAULT_MAX_XLSX_LOCATORS_PER_CONTENT = 10
 MAX_MARKUP_PATH_DEPTH = 16
 SEMANTIC_MARKUP_CONTAINER_NAMES = frozenset(
     {
@@ -429,6 +442,8 @@ def build_document_text_locators(
     markup_section_max_depth: int = DEFAULT_MARKUP_SECTION_MAX_DEPTH,
     max_semantic_markup_bytes: int = DEFAULT_MAX_SEMANTIC_MARKUP_BYTES,
     max_locators_per_content: int = 2_000,
+    max_xlsx_span_chars: int = DEFAULT_XLSX_LOCATOR_SPAN_CHARS,
+    max_xlsx_locators_per_content: int = DEFAULT_MAX_XLSX_LOCATORS_PER_CONTENT,
 ) -> list[DocumentTextLocator]:
     """Build exact page/section locators without copying public text."""
 
@@ -438,11 +453,187 @@ def build_document_text_locators(
         or markup_section_max_depth < 0
         or max_semantic_markup_bytes < 1
         or max_locators_per_content < 1
+        or max_xlsx_span_chars < 1
+        or max_xlsx_locators_per_content < 1
     ):
         raise ValueError("locator bounds must be positive")
 
     def encoded_digest(value: str) -> str:
         return hashlib.sha256(value.encode("utf-8")).hexdigest()
+
+    if is_xlsx_path(raw_path, content_type):
+        xlsx_span_chars = max_xlsx_span_chars
+        if extraction_method != "xlsx_openxml_path":
+            raise RuntimeError(
+                f"unsupported XLSX extraction method: {extraction_method}"
+            )
+        locator_specs: list[tuple[int, int, int, int, int, int]] = []
+        group_first_sheet: int | None = None
+        group_last_sheet = 0
+        group_first_row = 0
+        group_last_row = 0
+        group_start = 0
+        group_end = 0
+
+        def append_group(
+            first_sheet_index: int,
+            first_row: int,
+            last_sheet_index: int,
+            last_row: int,
+            start: int,
+            end: int,
+        ) -> None:
+            for part_start in range(start, end, xlsx_span_chars):
+                part_end = min(end, part_start + xlsx_span_chars)
+                locator_specs.append(
+                    (
+                        first_sheet_index,
+                        first_row,
+                        last_sheet_index,
+                        last_row,
+                        part_start,
+                        part_end,
+                    )
+                )
+                if len(locator_specs) > max_xlsx_locators_per_content:
+                    raise ValueError("XLSX locator fanout exceeds per-content bound")
+
+        def observe_row(row: XlsxTextRow, _fragment: str) -> None:
+            nonlocal group_first_sheet, group_last_sheet
+            nonlocal group_first_row, group_last_row, group_start, group_end
+            if group_first_sheet is None:
+                group_first_sheet = row.sheet_index
+                group_last_sheet = row.sheet_index
+                group_first_row = row.row_number
+                group_last_row = row.row_number
+                group_start = row.text_start_char
+                group_end = row.text_end_char
+                return
+            fits = row.text_end_char - group_start <= xlsx_span_chars
+            if fits:
+                group_last_sheet = row.sheet_index
+                group_last_row = row.row_number
+                group_end = row.text_end_char
+                return
+            append_group(
+                group_first_sheet,
+                group_first_row,
+                group_last_sheet,
+                group_last_row,
+                group_start,
+                group_end,
+            )
+            group_first_sheet = row.sheet_index
+            group_last_sheet = row.sheet_index
+            group_first_row = row.row_number
+            group_last_row = row.row_number
+            group_start = row.text_start_char
+            group_end = row.text_end_char
+
+        workbook = extract_xlsx_path(
+            raw_path,
+            max_text_chars=DEFAULT_MAX_XLSX_TEXT_CHARS,
+            retain_text=False,
+            retain_rows=False,
+            row_callback=observe_row,
+        )
+        native_sha256 = encoded_digest(native_text)
+        if (
+            workbook.text_chars != len(native_text)
+            or workbook.canonical_text_sha256 != native_sha256
+        ):
+            raise RuntimeError("XLSX rows do not reconstruct the native text CAS")
+        if group_first_sheet is None:
+            return [
+                DocumentTextLocator(
+                    segment_index=0,
+                    locator_type="document_no_text",
+                    locator_value="chars:000000000000-000000000000",
+                    page_number=None,
+                    text_start_char=0,
+                    text_end_char=0,
+                    text_chars=0,
+                    text_sha256=encoded_digest(""),
+                    has_text=False,
+                )
+            ]
+        append_group(
+            group_first_sheet,
+            group_first_row,
+            group_last_sheet,
+            group_last_row,
+            group_start,
+            group_end,
+        )
+
+        locators: list[DocumentTextLocator] = []
+        range_part_counts: dict[tuple[int, int, int, int], int] = {}
+        for (
+            first_sheet_index,
+            first_row,
+            last_sheet_index,
+            last_row,
+            _start,
+            _end,
+        ) in locator_specs:
+            key = (
+                first_sheet_index,
+                first_row,
+                last_sheet_index,
+                last_row,
+            )
+            range_part_counts[key] = range_part_counts.get(key, 0) + 1
+        range_part_seen: dict[tuple[int, int, int, int], int] = {}
+        for segment_index, (
+            first_sheet_index,
+            first_row,
+            last_sheet_index,
+            last_row,
+            start,
+            end,
+        ) in enumerate(locator_specs):
+            key = (
+                first_sheet_index,
+                first_row,
+                last_sheet_index,
+                last_row,
+            )
+            range_part_seen[key] = range_part_seen.get(key, 0) + 1
+            part_suffix = ""
+            if range_part_counts[key] > 1:
+                part_suffix = (
+                    f"#part:{range_part_seen[key]:06d}-"
+                    f"{range_part_counts[key]:06d}"
+                )
+            segment_text = native_text[start:end]
+            range_value = (
+                f"sheet:{first_sheet_index:04d}#rows:"
+                f"{first_row:09d}-{last_row:09d}"
+                if first_sheet_index == last_sheet_index
+                else (
+                    f"from:sheet:{first_sheet_index:04d}#row:{first_row:09d}"
+                    f"#to:sheet:{last_sheet_index:04d}#row:{last_row:09d}"
+                )
+            )
+            locators.append(
+                DocumentTextLocator(
+                    segment_index=segment_index,
+                    locator_type="xlsx_row_group",
+                    locator_value=f"{range_value}{part_suffix}",
+                    page_number=None,
+                    text_start_char=start,
+                    text_end_char=end,
+                    text_chars=len(segment_text),
+                    text_sha256=encoded_digest(segment_text),
+                    has_text=True,
+                )
+            )
+        if "".join(
+            native_text[item.text_start_char : item.text_end_char]
+            for item in locators
+        ) != native_text:
+            raise RuntimeError("XLSX locator ranges do not reconstruct native text")
+        return locators
 
     if should_parse_as_pdf(content_type, raw_path):
         if expected_page_count is None or expected_page_count < 1:
@@ -572,7 +763,7 @@ def extract_document_path(
     *,
     content_type: str = "",
     max_input_bytes: int = 50 * 1024 * 1024,
-    max_text_chars: int = 2_000_000,
+    max_text_chars: int = DEFAULT_MAX_XLSX_TEXT_CHARS,
 ) -> DocumentExtraction:
     """Extract bounded text from one local document without loading PDFs whole."""
 
@@ -581,6 +772,31 @@ def extract_document_path(
         raise ValueError("max_input_bytes and max_text_chars must be >= 1")
     if not path.is_file():
         raise FileNotFoundError(path)
+
+    if is_xlsx_path(path, content_type):
+        if int(max_text_chars) != DEFAULT_MAX_XLSX_TEXT_CHARS:
+            raise RuntimeError(
+                "XLSX max_text_chars must equal shared extraction contract: "
+                f"expected={DEFAULT_MAX_XLSX_TEXT_CHARS} actual={int(max_text_chars)}"
+            )
+        declared_size = path.stat().st_size
+        if declared_size > int(max_input_bytes):
+            raise RuntimeError(
+                "XLSX input exceeds max_input_bytes: "
+                f"bytes={declared_size} max={int(max_input_bytes)}"
+            )
+        workbook = extract_xlsx_path(
+            path,
+            max_text_chars=int(max_text_chars),
+            retain_rows=False,
+            max_workbook_bytes=int(max_input_bytes),
+        )
+        return DocumentExtraction(
+            text=workbook.text,
+            text_chars=workbook.text_chars,
+            method="xlsx_openxml_path",
+            truncated=False,
+        )
 
     if should_parse_as_pdf(content_type, path):
         reader = None

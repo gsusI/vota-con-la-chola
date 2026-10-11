@@ -1,0 +1,90 @@
+{
+  "schema_version": "placsp_acquisition_execution_v1",
+  "snapshot_date": "2026-09-26",
+  "cohorts": [
+    {
+      "family": "main",
+      "period": "202608",
+      "record_versions": 51998,
+      "distinct_source_contract_ids": 34901,
+      "parquet_rows": 67014,
+      "parquet_bytes": 5550955,
+      "state": "local_export_validated_not_published",
+      "manifest": "docs/etl/sprints/DINERO-NACIONAL-20260926/evidence/benchmark-export-manifest.json",
+      "validation": "docs/etl/sprints/DINERO-NACIONAL-20260926/evidence/benchmark-export-validation.json"
+    },
+    {
+      "family": "minor",
+      "period": "202608",
+      "record_versions": 28091,
+      "distinct_source_contract_ids": 27758,
+      "parquet_rows": 55740,
+      "parquet_bytes": 4753472,
+      "state": "local_export_validated_not_published",
+      "manifest": "docs/etl/sprints/DINERO-NACIONAL-20260926/evidence/minor-run/manifest.json",
+      "validation": "docs/etl/sprints/DINERO-NACIONAL-20260926/evidence/minor-run/validation.json"
+    },
+    {
+      "family": "aggregated",
+      "period": "202608",
+      "record_versions": 18323,
+      "distinct_source_contract_ids": 12806,
+      "parquet_rows": 30027,
+      "parquet_bytes": 2277043,
+      "state": "local_export_validated_not_published",
+      "manifest": "docs/etl/sprints/DINERO-NACIONAL-20260926/evidence/aggregated-run/manifest.json",
+      "validation": "docs/etl/sprints/DINERO-NACIONAL-20260926/evidence/aggregated-run/validation.json"
+    },
+    {
+      "family": "minor",
+      "period": "2018",
+      "record_versions": 164000,
+      "distinct_source_contract_ids": 160305,
+      "parquet_rows": 321986,
+      "parquet_bytes": 25612047,
+      "state": "local_export_validated_not_published",
+      "manifest": "docs/etl/sprints/DINERO-NACIONAL-20260926/evidence/minor-2018-run/manifest.json",
+      "validation": "docs/etl/sprints/DINERO-NACIONAL-20260926/evidence/minor-2018-run/validation.json",
+      "receipt": "docs/etl/sprints/DINERO-NACIONAL-20260926/evidence/minor-2018-run/run.json",
+      "storage_archive": "docs/etl/sprints/DINERO-NACIONAL-20260926/evidence/minor-2018-run/storage-archive.json"
+    },
+    {
+      "family": "minor",
+      "period": "2019",
+      "record_versions": 298107,
+      "distinct_source_contract_ids": 293982,
+      "parquet_rows": 589898,
+      "parquet_bytes": 46671090,
+      "state": "local_export_validated_not_published",
+      "manifest": "docs/etl/sprints/DINERO-NACIONAL-20260926/evidence/minor-2019-run/manifest.json",
+      "validation": "docs/etl/sprints/DINERO-NACIONAL-20260926/evidence/minor-2019-run/validation.json",
+      "receipt": "docs/etl/sprints/DINERO-NACIONAL-20260926/evidence/minor-2019-run/run.json",
+      "storage_archive": "docs/etl/sprints/DINERO-NACIONAL-20260926/evidence/minor-2019-run/storage-archive.json"
+    }
+  ],
+  "totals": {
+    "completed_cohorts": 5,
+    "processed_source_version_rows_not_cross_cohort_deduplicated": 560519,
+    "typed_notice_and_result_rows_not_contract_count": 1064665,
+    "parquet_bytes": 84864607
+  },
+  "source_identity_scope": "Per-cohort source IDs. Cross-period reconciliation with the old corpus is still required.",
+  "free_bytes_at_closeout": 14264967168,
+  "ingestion_min_free_bytes": 16106127360,
+  "public_api_rows": 47397,
+  "publication_state": "blocked_by_global_readiness",
+  "publication_blocker": "docs/etl/sprints/DINERO-NACIONAL-20260926/evidence/publication-blocker.json",
+  "checks": {
+    "cohort_queues_terminal": true,
+    "independent_parquet_validators": true,
+    "code_regression_tests": 19,
+    "resume_after_storage_stop_proven": true,
+    "compressed_sqlite_roundtrip_verified": true
+  },
+  "open": [
+    "Remaining historical archive cohorts and complementary source universe",
+    "Reconcile document validation/extraction generations before global HF publication",
+    "Recurring incremental ingestion and measured freshness",
+    "Cross-cohort and prior-release reconciliation before serving combined data"
+  ]
+}

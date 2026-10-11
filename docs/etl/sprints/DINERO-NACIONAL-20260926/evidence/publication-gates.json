@@ -1,0 +1,20 @@
+[
+  {
+    "gate": "privacy",
+    "command": [
+      "just",
+      "privacy-check-public-artifacts"
+    ],
+    "returncode": 0,
+    "elapsed_seconds": 242.142
+  },
+  {
+    "gate": "hf-dry-run",
+    "command": [
+      "just",
+      "etl-publish-hf-dry-run"
+    ],
+    "returncode": 1,
+    "elapsed_seconds": 297.744
+  }
+]

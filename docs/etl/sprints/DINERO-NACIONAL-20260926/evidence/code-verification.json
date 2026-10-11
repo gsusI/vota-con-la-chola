@@ -1,0 +1,12 @@
+{
+  "command": "python3 -m unittest tests.test_placsp_acquisition_inventory tests.test_placsp_archive_catalog tests.test_placsp_bulk_ingest tests.test_placsp_storage_preflight -q",
+  "tests": 19,
+  "status": "passed",
+  "scope": "catalog discovery, queue/ingestion regression, storage preflight, acquisition plan and ownership guards",
+  "git_diff_check": "passed",
+  "new_cohort_privacy": {
+    "status": "passed",
+    "files_scanned": 72
+  },
+  "new_cohorts_real_data_only": "passed"
+}

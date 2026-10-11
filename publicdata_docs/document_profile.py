@@ -321,6 +321,9 @@ def profile_document_content(
     normalized_extension = extension.casefold().lstrip(".")
     if normalized_extension == "pdf":
         encryption_status, declared_language = pdf_profile(raw_path, pdf_timeout)
+    elif normalized_extension == "xlsx":
+        encryption_status = "not_applicable_office_archive"
+        declared_language = None
     else:
         encryption_status = "not_applicable_plain_markup"
         declared_language = declared_markup_language(raw_path, normalized_extension)

@@ -1,0 +1,30 @@
+{
+  "command": [
+    "uv",
+    "run",
+    "--no-project",
+    "--python",
+    "3.12",
+    "--with",
+    "pyarrow>=18,<21",
+    "python",
+    "scripts/export_semantic_partitions.py",
+    "--lane",
+    "public_money_facts",
+    "--db",
+    "etl/data/staging/placsp-throughput-20260926.db",
+    "--output-root",
+    "etl/data/published/placsp-main-202608-acquisition",
+    "--snapshot-date",
+    "2026-09-26",
+    "--manifest-out",
+    "docs/etl/sprints/DINERO-NACIONAL-20260926/evidence/benchmark-export-manifest.json",
+    "--min-rows",
+    "1",
+    "--max-peak-rss-mb",
+    "1024",
+    "--enforce"
+  ],
+  "elapsed_seconds": 13.119266874855384,
+  "returncode": 0
+}

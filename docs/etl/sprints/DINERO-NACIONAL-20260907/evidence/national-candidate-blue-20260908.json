@@ -1,0 +1,47 @@
+{
+  "state": "candidate_deployed_not_promoted",
+  "active_slot": "green",
+  "candidate_slot": "blue",
+  "source_commit": "2841b0fa5c",
+  "release": "ab964ef550781b61e62bef96fa000e251a9ae133d4e1894d6f6bbda1ad733147",
+  "api_version": "ee3e6c8b2e02997ebfaa389f2f6b621209cf54cc7cbecc130deb30f78bf3281c",
+  "bundle": "b3c07b50fdce316acf8a4e0372031068cb67c5fdfaff612c4802635cc1efd3a9",
+  "rows": 128837,
+  "amount_cents": 8908050904021,
+  "dated_rows": 128833,
+  "undated_rows": 4,
+  "undated_amount_cents": 16280700,
+  "candidate_http_and_csv_verified": true,
+  "initial_apply": {
+    "failed_gate": "free_disk_above_20_GiB",
+    "changes": 0
+  },
+  "retry": {
+    "new_evidence": "disk recovered to 35 GiB",
+    "ansible_ok": 20,
+    "ansible_changed": 4,
+    "ansible_failed": 0
+  },
+  "production_coverage_unchanged": 47397,
+  "remaining": [
+    "finish final build and publication gates",
+    "publish source and immutable assets",
+    "promote verified blue slot",
+    "verify public browser and exports",
+    "publish reproducible data mirror"
+  ],
+  "final_build": {
+    "passed": true,
+    "package_tests": 7,
+    "package_test_seconds": 290.958,
+    "static_pages": 1427,
+    "privacy_findings": 0,
+    "privacy_files_scanned": 259543
+  },
+  "publication_review": {
+    "main_push": "rejected_by_automatic_approval_review",
+    "reason": "large default-branch public mutation; review branch or pull request required before approval",
+    "alternative_branch": "spending-national-128837-review",
+    "branch_push": "in_progress"
+  }
+}

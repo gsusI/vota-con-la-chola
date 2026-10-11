@@ -10,29 +10,29 @@
   },
   "clean_room_restore_mechanics_proven": true,
   "durable_public_origin_proven": false,
-  "generated_at": "2026-08-30T12:03:50.692078Z",
+  "generated_at": "2026-08-30T20:00:34.928039Z",
   "manifest": {
-    "bytes": 5902879469,
+    "bytes": 6048142788,
     "bytes_by_class": {
-      "native_text": 590202955,
+      "native_text": 612345191,
       "ocr_text": 14853,
-      "raw_document": 5312661661
+      "raw_document": 5435782744
     },
-    "inventory_sha256": "65c0659b5a445098deaa6edabfa0d213c89d222c99514c9c4b36e9de4d1431ce",
+    "inventory_sha256": "825471e2d465b0fda7e5b1c220add4d737f66b6914cbf7b5316975e85a8d391c",
     "max_object_bytes": 59735955,
     "objects_by_class": {
-      "native_text": 119338,
+      "native_text": 119346,
       "ocr_text": 131,
-      "raw_document": 120757
+      "raw_document": 120801
     },
     "path": "real-document-origin-replicas.json",
-    "rows": 240226,
-    "sha256": "12187efc092f50bc42f0c965b3dda5d1cb618702c4b128b715eb3c168fd7d443"
+    "rows": 240278,
+    "sha256": "53834363c57d753600c6e61abcecf494d67d60e9854ed07f653f4e4d0dd8aa45"
   },
   "next_action": "Repeat this exact full restore from an authorized immutable public origin. Filesystem-origin proof is local mechanics only, not durable recovery.",
   "performance": {
     "batch_size": 48,
-    "elapsed_seconds": 53.381888,
+    "elapsed_seconds": 58.344107,
     "workers": 12
   },
   "policy": {
@@ -43,18 +43,18 @@
   },
   "preflight": {
     "bounded_scratch_bytes": 716831460,
-    "free_bytes": 24283934720,
-    "headroom_bytes": 12829685020,
+    "free_bytes": 31444066304,
+    "headroom_bytes": 19989816604,
     "minimum_free_after_restore_bytes": 10737418240
   },
   "remote_publication_performed": false,
   "restored": {
-    "bytes": 5902879469,
-    "objects": 240226,
+    "bytes": 6048142788,
+    "objects": 240278,
     "objects_by_class": {
-      "native_text": 119338,
+      "native_text": 119346,
       "ocr_text": 131,
-      "raw_document": 120757
+      "raw_document": 120801
     }
   },
   "schema_version": "real_document_origin_clean_restore_v1",

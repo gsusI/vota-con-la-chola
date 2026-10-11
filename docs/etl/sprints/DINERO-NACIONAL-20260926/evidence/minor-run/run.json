@@ -1,0 +1,134 @@
+{
+  "schema_version": "placsp_acquisition_batch_v1",
+  "contract": {
+    "family": "minor",
+    "period": "202608",
+    "snapshot_date": "2026-09-26",
+    "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_1143/contratosMenoresPerfilesContratantes_202608.zip",
+    "database": "etl/data/staging/placsp-minor-throughput-20260926.db",
+    "pipeline_id": "placsp-minor-202608-benchmark-20260926",
+    "output_root": "etl/data/published/placsp-minor-202608-acquisition"
+  },
+  "attempts": [
+    {
+      "stage": "enqueue",
+      "started_at": "2026-09-26T06:52:17.291743+00:00",
+      "command": [
+        "python",
+        "scripts/ingest_placsp_archives.py",
+        "--db",
+        "etl/data/staging/placsp-minor-throughput-20260926.db",
+        "--pipeline-id",
+        "placsp-minor-202608-benchmark-20260926",
+        "--report-out",
+        "docs/etl/sprints/DINERO-NACIONAL-20260926/evidence/minor-run/enqueue.json",
+        "enqueue",
+        "--snapshot-date",
+        "2026-09-26",
+        "--archive",
+        "202608=https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_1143/contratosMenoresPerfilesContratantes_202608.zip"
+      ],
+      "state": "passed",
+      "elapsed_seconds": 0.232,
+      "returncode": 0
+    },
+    {
+      "stage": "download",
+      "started_at": "2026-09-26T06:52:17.524486+00:00",
+      "command": [
+        "python",
+        "scripts/ingest_placsp_archives.py",
+        "--db",
+        "etl/data/staging/placsp-minor-throughput-20260926.db",
+        "--pipeline-id",
+        "placsp-minor-202608-benchmark-20260926",
+        "--report-out",
+        "docs/etl/sprints/DINERO-NACIONAL-20260926/evidence/minor-run/download.json",
+        "work-archives",
+        "--max-items",
+        "1",
+        "--download-attempts",
+        "1",
+        "--timeout",
+        "60",
+        "--max-archive-bytes",
+        "536870912",
+        "--min-free-bytes",
+        "16106127360"
+      ],
+      "state": "passed",
+      "elapsed_seconds": 0.106,
+      "returncode": 0
+    },
+    {
+      "stage": "normalize",
+      "started_at": "2026-09-26T06:52:17.631137+00:00",
+      "command": [
+        "python",
+        "scripts/ingest_placsp_archives.py",
+        "--db",
+        "etl/data/staging/placsp-minor-throughput-20260926.db",
+        "--pipeline-id",
+        "placsp-minor-202608-benchmark-20260926",
+        "--report-out",
+        "docs/etl/sprints/DINERO-NACIONAL-20260926/evidence/minor-run/normalize.json",
+        "work-members",
+        "--claim-size",
+        "1",
+        "--min-free-bytes",
+        "16106127360"
+      ],
+      "state": "passed",
+      "elapsed_seconds": 0.75,
+      "returncode": 0
+    },
+    {
+      "stage": "export",
+      "started_at": "2026-09-26T06:52:19.095242+00:00",
+      "command": [
+        "python",
+        "scripts/export_semantic_partitions.py",
+        "--lane",
+        "public_money_facts",
+        "--db",
+        "etl/data/staging/placsp-minor-throughput-20260926.db",
+        "--output-root",
+        "etl/data/published/placsp-minor-202608-acquisition",
+        "--snapshot-date",
+        "2026-09-26",
+        "--manifest-out",
+        "docs/etl/sprints/DINERO-NACIONAL-20260926/evidence/minor-run/manifest.json",
+        "--max-peak-rss-mb",
+        "1024",
+        "--enforce"
+      ],
+      "state": "passed",
+      "elapsed_seconds": 7.078,
+      "returncode": 0
+    },
+    {
+      "stage": "validate",
+      "started_at": "2026-09-26T06:52:26.174164+00:00",
+      "command": [
+        "python",
+        "scripts/validate_semantic_partitions.py",
+        "--lane",
+        "public_money_facts",
+        "--root",
+        "etl/data/published/placsp-minor-202608-acquisition",
+        "--manifest",
+        "docs/etl/sprints/DINERO-NACIONAL-20260926/evidence/minor-run/manifest.json",
+        "--report-out",
+        "docs/etl/sprints/DINERO-NACIONAL-20260926/evidence/minor-run/validation.json",
+        "--enforce"
+      ],
+      "state": "passed",
+      "elapsed_seconds": 2.027,
+      "returncode": 0
+    }
+  ],
+  "state": "local_export_validated_not_published",
+  "database_bytes": 142553088,
+  "free_bytes": 24860221440,
+  "manifest_sha256": "6ed32c7722556ab8d92e1bd5b6b063ad38d33d2aa2ff0f4d0622b21b0ddc95ef"
+}

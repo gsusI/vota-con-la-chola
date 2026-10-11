@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import tempfile
 import unittest
+from pathlib import Path
 
 from scripts.report_scale_readiness import (
     REPO_ROOT,
@@ -15,6 +16,7 @@ from scripts.report_scale_readiness import (
     official_host,
     reject_disallowed_evidence,
     repo_path,
+    summarize_xlsx_lineage,
     validate_member_vote_shard,
 )
 
@@ -57,6 +59,53 @@ class RealScaleReadinessTests(unittest.TestCase):
             official_host("ftp://www.congreso.es/datos", {"www.congreso.es"})
         with self.assertRaisesRegex(RuntimeError, "allowlist"):
             official_host("https://www.senado.es/datos", {"www.congreso.es"})
+
+    def test_xlsx_lineage_summary_is_disk_backed_and_rejects_duplicate_paths(
+        self,
+    ) -> None:
+        base = {
+            "schema_version": "official_xlsx_source_mapping_v1",
+            "source_url_binding_status": (
+                "inferred_from_repository_path_contract_without_retrieval_receipt"
+            ),
+            "synthetic_or_mock_records_counted": False,
+            "official_public_domain_personal_information_retained": True,
+            "source_url": "https://datos.gob.es/public.xlsx",
+        }
+        first = {
+            **base,
+            "source_id": "official_a",
+            "capture": {
+                "path": "etl/data/raw/official/a.xlsx",
+                "bytes": 10,
+                "sha256": "a" * 64,
+            },
+        }
+        second = {
+            **base,
+            "source_id": "official_b",
+            "capture": {
+                "path": "etl/data/raw/official/b.xlsx",
+                "bytes": 20,
+                "sha256": "a" * 64,
+            },
+        }
+        with tempfile.TemporaryDirectory() as work_dir:
+            path = Path(work_dir) / "lineage.jsonl"
+            path.write_text(
+                "\n".join(json.dumps(row) for row in (first, second)) + "\n",
+                encoding="utf-8",
+            )
+            self.assertEqual(
+                summarize_xlsx_lineage(path),
+                (2, 1, 30, {"official_a": 1, "official_b": 1}),
+            )
+            path.write_text(
+                "\n".join(json.dumps(row) for row in (first, first)) + "\n",
+                encoding="utf-8",
+            )
+            with self.assertRaisesRegex(ReadinessError, "duplicate XLSX capture"):
+                summarize_xlsx_lineage(path)
 
     def test_validation_contract_requires_all_checks_and_ok_status(self) -> None:
         self.assertTrue(
@@ -120,7 +169,54 @@ class RealScaleReadinessTests(unittest.TestCase):
         gap = next(
             item for item in self.registry["gaps"] if item["id"] == "document_corpus"
         )
-        self.assertEqual(gap["current_real_rows"], 122_607)
+        contract = gap["evidence_contract"]
+        inventory = load_json(repo_path(contract["inventory"]))
+        xlsx_cohort = load_json(repo_path(contract["xlsx_cohort"]))
+        provenance = load_json(repo_path(contract["audit"]))
+        native_extraction = load_json(repo_path(contract["native_extraction"]))
+        native_validation = load_json(repo_path(contract["native_validation"]))
+        self.assertEqual(
+            inventory["schema_version"],
+            "real_document_format_inventory_v7_xlsx_contract_bound",
+        )
+        self.assertEqual(
+            inventory["inventory_algorithm_version"],
+            "real_document_inventory_v7_xlsx_xml_phonetic_bounded",
+        )
+        self.assertEqual(gap["current_real_rows"], inventory["totals"]["files"])
+        self.assertGreaterEqual(gap["current_real_rows"], 100_000)
+        self.assertEqual(
+            xlsx_cohort["totals"]["file_instances"],
+            inventory["totals"]["xlsx_files"],
+        )
+        self.assertEqual(xlsx_cohort["status"], "mapped_unverified")
+        self.assertEqual(
+            xlsx_cohort["totals"]["checksum_bound_retrieval_receipts"], 0
+        )
+        self.assertEqual(
+            provenance["xlsx_document_lineage_manifests"][0][
+                "accepted_checksum_captures"
+            ],
+            0,
+        )
+        self.assertEqual(
+            provenance["xlsx_document_lineage_manifests"][0][
+                "inferred_source_url_mappings"
+            ],
+            inventory["totals"]["xlsx_files"],
+        )
+        self.assertEqual(
+            native_extraction["extraction_algorithm_version"],
+            "document_extraction_v4_pdf_markup_xlsx_phonetic_bounded",
+        )
+        self.assertEqual(
+            native_validation["validation_scope"]["xlsx_raw_to_cas_validator"],
+            "openpyxl_semantic_plus_independent_openxml_phonetic_replay_v2",
+        )
+        self.assertEqual(
+            native_validation["totals"]["xlsx_file_instances"],
+            inventory["totals"]["xlsx_files"],
+        )
         with self.assertRaisesRegex(ReadinessError, "BOE document corpus checks failed"):
             audit_gap(gap)
 

@@ -1,0 +1,157 @@
+{
+  "schema_version": "placsp_archive_catalog_v1",
+  "family": "main",
+  "status": "ok",
+  "catalog_url": "https://www.hacienda.gob.es/es-ES/GobiernoAbierto/Datos%20Abiertos/Paginas/licitacionescontratante.aspx",
+  "as_of_date": "2026-09-26",
+  "discovered_at": "2026-09-26T06:43:03+00:00",
+  "catalog_content_sha256": "e91b19fe5b1fa949a54070cf3a84008fd71a741f4f444c5b8ab9d22222e403eb",
+  "catalog_bytes": 65672,
+  "selection_strategy": "closed_year_annual_plus_current_year_monthly",
+  "start_year": 2012,
+  "discovered": {
+    "archive_links": 36,
+    "annual_links": 15,
+    "monthly_links": 21
+  },
+  "expected": {
+    "closed_year_annual_archives": 14,
+    "current_year_monthly_archives": 9,
+    "selected_archives": 23
+  },
+  "missing": {
+    "annual_periods": [],
+    "monthly_periods": []
+  },
+  "archives": [
+    {
+      "period": "2012",
+      "archive_kind": "annual",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2012.zip"
+    },
+    {
+      "period": "2013",
+      "archive_kind": "annual",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2013.zip"
+    },
+    {
+      "period": "2014",
+      "archive_kind": "annual",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2014.zip"
+    },
+    {
+      "period": "2015",
+      "archive_kind": "annual",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2015.zip"
+    },
+    {
+      "period": "2016",
+      "archive_kind": "annual",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2016.zip"
+    },
+    {
+      "period": "2017",
+      "archive_kind": "annual",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2017.zip"
+    },
+    {
+      "period": "2018",
+      "archive_kind": "annual",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2018.zip"
+    },
+    {
+      "period": "2019",
+      "archive_kind": "annual",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2019.zip"
+    },
+    {
+      "period": "2020",
+      "archive_kind": "annual",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2020.zip"
+    },
+    {
+      "period": "2021",
+      "archive_kind": "annual",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2021.zip"
+    },
+    {
+      "period": "2022",
+      "archive_kind": "annual",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2022.zip"
+    },
+    {
+      "period": "2023",
+      "archive_kind": "annual",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2023.zip"
+    },
+    {
+      "period": "2024",
+      "archive_kind": "annual",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2024.zip"
+    },
+    {
+      "period": "2025",
+      "archive_kind": "annual",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2025.zip"
+    },
+    {
+      "period": "202601",
+      "archive_kind": "monthly",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202601.zip"
+    },
+    {
+      "period": "202602",
+      "archive_kind": "monthly",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202602.zip"
+    },
+    {
+      "period": "202603",
+      "archive_kind": "monthly",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202603.zip"
+    },
+    {
+      "period": "202604",
+      "archive_kind": "monthly",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202604.zip"
+    },
+    {
+      "period": "202605",
+      "archive_kind": "monthly",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202605.zip"
+    },
+    {
+      "period": "202606",
+      "archive_kind": "monthly",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202606.zip"
+    },
+    {
+      "period": "202607",
+      "archive_kind": "monthly",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202607.zip"
+    },
+    {
+      "period": "202608",
+      "archive_kind": "monthly",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202608.zip"
+    },
+    {
+      "period": "202609",
+      "archive_kind": "monthly",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202609.zip"
+    }
+  ],
+  "checks": {
+    "archive_links_found": true,
+    "closed_years_gap_free": true,
+    "current_year_months_gap_free": true,
+    "selected_periods_unique": true,
+    "selected_urls_https": true,
+    "history_starts_at_requested_year": true
+  },
+  "limitations": [
+    "Current-year monthly archives are mutable until their month closes.",
+    "Catalog discovery proves expected archive links, not downloaded content completeness.",
+    "Annual archives may contain repeated revisions; record-version reconciliation remains mandatory."
+  ],
+  "transport_security": "verified_system_ca"
+}

@@ -253,10 +253,10 @@ document_factory_economics_out := env_var_or_default("DOCUMENT_FACTORY_ECONOMICS
 document_factory_economics_evidence := env_var_or_default("DOCUMENT_FACTORY_ECONOMICS_EVIDENCE", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-factory-economics-20260829.json")
 document_factory_economics_validation := env_var_or_default("DOCUMENT_FACTORY_ECONOMICS_VALIDATION", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-factory-economics-validation-20260829.json")
 document_factory_economics_inventory := env_var_or_default("DOCUMENT_FACTORY_ECONOMICS_INVENTORY", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-format-inventory.json")
-document_factory_economics_native := env_var_or_default("DOCUMENT_FACTORY_ECONOMICS_NATIVE", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-extraction-physical-20260829.json")
-document_factory_economics_native_validation := env_var_or_default("DOCUMENT_FACTORY_ECONOMICS_NATIVE_VALIDATION", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-validation-physical-20260829.json")
-document_factory_economics_ocr := env_var_or_default("DOCUMENT_FACTORY_ECONOMICS_OCR", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-physical-20260829.json")
-document_factory_economics_ocr_validation := env_var_or_default("DOCUMENT_FACTORY_ECONOMICS_OCR_VALIDATION", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-validation-physical-20260829.json")
+document_factory_economics_native := env_var_or_default("DOCUMENT_FACTORY_ECONOMICS_NATIVE", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-extraction.json")
+document_factory_economics_native_validation := env_var_or_default("DOCUMENT_FACTORY_ECONOMICS_NATIVE_VALIDATION", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-validation.json")
+document_factory_economics_ocr := env_var_or_default("DOCUMENT_FACTORY_ECONOMICS_OCR", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr.json")
+document_factory_economics_ocr_validation := env_var_or_default("DOCUMENT_FACTORY_ECONOMICS_OCR_VALIDATION", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-validation.json")
 document_factory_acquisition_db := env_var_or_default("DOCUMENT_FACTORY_ACQUISITION_DB", "etl/data/staging/real-document-fetch-scale-cohort-v2-20260829.db")
 document_factory_acquisition_raw_root := env_var_or_default("DOCUMENT_FACTORY_ACQUISITION_RAW_ROOT", "etl/data/derived/real-document-fetch-scale-cohort-v2-20260829")
 document_factory_acquisition_manifest := env_var_or_default("DOCUMENT_FACTORY_ACQUISITION_MANIFEST", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-fetch-scale-cohort-v2-20260829.json")
@@ -545,25 +545,25 @@ scale_document_pipeline_evidence := env_var_or_default("SCALE_DOCUMENT_PIPELINE_
 scale_document_format_inventory := env_var_or_default("SCALE_DOCUMENT_FORMAT_INVENTORY", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-format-inventory.json")
 scale_pdf_ocr_routing_benchmark := env_var_or_default("SCALE_PDF_OCR_ROUTING_BENCHMARK", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/pdf-ocr-routing-benchmark.json")
 scale_document_workers := env_var_or_default("SCALE_DOCUMENT_WORKERS", "8")
-scale_document_text_state_db := env_var_or_default("SCALE_DOCUMENT_TEXT_STATE_DB", "etl/data/staging/real-document-text-corpus-v7-20260830.db")
-scale_document_ocr_state_db := env_var_or_default("SCALE_DOCUMENT_OCR_STATE_DB", "etl/data/staging/real-document-page-ocr-v9-20260830.db")
-scale_document_profile_state_db := env_var_or_default("SCALE_DOCUMENT_PROFILE_STATE_DB", "etl/data/staging/real-document-profile-v3-20260830.db")
+scale_document_text_state_db := env_var_or_default("SCALE_DOCUMENT_TEXT_STATE_DB", "etl/data/staging/real-document-text-corpus-v10-20260830.db")
+scale_document_ocr_state_db := env_var_or_default("SCALE_DOCUMENT_OCR_STATE_DB", "etl/data/staging/real-document-page-ocr-v11-20260830.db")
+scale_document_profile_state_db := env_var_or_default("SCALE_DOCUMENT_PROFILE_STATE_DB", "etl/data/staging/real-document-profile-v6-20260830.db")
 scale_document_profile_manifest := env_var_or_default("SCALE_DOCUMENT_PROFILE_MANIFEST", "etl/data/published/real-document-profile-manifest-latest.jsonl")
 scale_document_profile_report := env_var_or_default("SCALE_DOCUMENT_PROFILE_REPORT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-language-encryption-profile.json")
 scale_document_profile_validation := env_var_or_default("SCALE_DOCUMENT_PROFILE_VALIDATION", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-language-encryption-validation.json")
 scale_document_profile_generation_audit := env_var_or_default("SCALE_DOCUMENT_PROFILE_GENERATION_AUDIT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-profile-generation-audit.json")
-scale_document_locator_state_db := env_var_or_default("SCALE_DOCUMENT_LOCATOR_STATE_DB", "etl/data/staging/real-document-text-locators-v4-20260830.db")
+scale_document_locator_state_db := env_var_or_default("SCALE_DOCUMENT_LOCATOR_STATE_DB", "etl/data/staging/real-document-text-locators-v8-20260830.db")
 scale_document_locator_manifest := env_var_or_default("SCALE_DOCUMENT_LOCATOR_MANIFEST", "etl/data/published/real-document-text-locator-manifest-latest.jsonl")
 scale_document_locator_report := env_var_or_default("SCALE_DOCUMENT_LOCATOR_REPORT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-locator-extraction.json")
 scale_document_locator_validation := env_var_or_default("SCALE_DOCUMENT_LOCATOR_VALIDATION", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-locator-validation.json")
 scale_document_locator_generation_audit := env_var_or_default("SCALE_DOCUMENT_LOCATOR_GENERATION_AUDIT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-locator-generation-audit.json")
-scale_document_origin_state_db := env_var_or_default("SCALE_DOCUMENT_ORIGIN_STATE_DB", "etl/data/staging/real-document-origin-replication-v2-20260830.db")
+scale_document_origin_state_db := env_var_or_default("SCALE_DOCUMENT_ORIGIN_STATE_DB", "etl/data/staging/real-document-origin-replication-v4-20260830.db")
 scale_document_origin_filesystem_root := env_var_or_default("SCALE_DOCUMENT_ORIGIN_FILESYSTEM_ROOT", "etl/data/object-origin/real-document-corpus-v1")
 scale_document_origin_manifest := env_var_or_default("SCALE_DOCUMENT_ORIGIN_MANIFEST", "etl/data/manifests/real-document-origin-replicas.json")
 scale_document_origin_replication_report := env_var_or_default("SCALE_DOCUMENT_ORIGIN_REPLICATION_REPORT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-origin-replication.json")
 scale_document_origin_restore_report := env_var_or_default("SCALE_DOCUMENT_ORIGIN_RESTORE_REPORT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-origin-clean-restore.json")
 scale_document_origin_generation_audit := env_var_or_default("SCALE_DOCUMENT_ORIGIN_GENERATION_AUDIT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-origin-generation-audit.json")
-scale_document_pack_state_db := env_var_or_default("SCALE_DOCUMENT_PACK_STATE_DB", "etl/data/staging/real-document-origin-pack-v2-20260830.db")
+scale_document_pack_state_db := env_var_or_default("SCALE_DOCUMENT_PACK_STATE_DB", "etl/data/staging/real-document-origin-pack-v4-20260830.db")
 scale_document_pack_root := env_var_or_default("SCALE_DOCUMENT_PACK_ROOT", "etl/data/object-origin-packs/real-document-corpus-v1")
 scale_document_pack_manifest := env_var_or_default("SCALE_DOCUMENT_PACK_MANIFEST", "etl/data/manifests/real-document-origin-packs.json")
 scale_document_pack_report := env_var_or_default("SCALE_DOCUMENT_PACK_REPORT", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-origin-packaging.json")
@@ -2373,6 +2373,9 @@ etl-scale-eurostat-indicators-replay-validate:
 etl-scale-inventory-documents:
   python3 scripts/inventory_document_corpus.py --root etl/data/raw --workers {{scale_document_workers}}
 
+etl-scale-export-xlsx-lineage:
+  python3 scripts/export_real_xlsx_source_lineage.py --enforce
+
 etl-scale-audit-document-provenance:
   python3 scripts/audit_document_provenance.py --enforce-integrity
 
@@ -2462,6 +2465,7 @@ etl-scale-document-provenance-gap-queue:
 
 etl-scale-reconcile-documents:
   just etl-scale-inventory-documents
+  just etl-scale-export-xlsx-lineage
   just etl-scale-audit-document-provenance
   python3 scripts/export_document_provenance_gap_queue.py --enforce
 
@@ -2469,7 +2473,7 @@ etl-scale-benchmark-ocr-routing:
   python3 scripts/benchmark_pdf_ocr_routing.py --root etl/data/raw --manifest etl/data/manifests/real-document-format-inventory.jsonl --workers 4 --max-pages 20
 
 etl-scale-extract-document-text-corpus:
-  python3 scripts/extract_real_document_corpus.py --state-db {{scale_document_text_state_db}} --workers 12 --claim-size 48 --max-input-bytes 134217728 --max-text-chars 16000000 --enforce
+  python3 scripts/extract_real_document_corpus.py --state-db {{scale_document_text_state_db}} --workers 12 --claim-size 48 --max-input-bytes 134217728 --max-text-chars 33554432 --enforce
 
 etl-scale-validate-document-text-corpus:
   python3 scripts/validate_real_document_text_corpus.py --workers 12 --batch-size 128 --full-raw-check --enforce
@@ -4762,7 +4766,23 @@ explorer-bg-watch:
 explorer-datasette:
   python3 scripts/run_datasette_explorer.py --db "{{db_path}}" --host {{explorer_host}} --port 8011
 
+# Frozen publication renders already-reviewed public inputs without re-running ETL.
 cloudflare-pages-build:
+  if [ "${CLOUDFLARE_PAGES_FROZEN_INPUTS:-0}" = "1" ]; then just cloudflare-pages-build-frozen; else just cloudflare-pages-build-refresh; fi
+
+cloudflare-pages-build-frozen:
+  @just privacy-check-public-artifacts
+  python3 -m unittest tests.test_placsp_launch -v
+  node tests/test_spending_decision_dates.mjs
+  node scripts/build_spending_backend.mjs /tmp/vclc-spending-build-validation --plan-only
+  cp /tmp/vclc-spending-build-validation/release.json infra/cloudflare/spending-api/src/release.json
+  node tests/test_spending_backend.mjs /tmp/vclc-spending-build-validation/verify.db --published-release
+  cd "{{gh_pages_next_app_dir}}" && NEXT_PUBLIC_BASE_PATH="{{gh_pages_next_base_path}}" node node_modules/next/dist/bin/next build --webpack
+  python3 scripts/check_next_export_notfound_payloads.py --path "{{gh_pages_next_out_dir}}"
+  just cloudflare-pages-size-check
+  just privacy-check-public-artifacts
+
+cloudflare-pages-build-refresh:
   @just manifesto-promises-export
   @just placsp-spending-export
   @just moncloa-agreements-export
@@ -5136,6 +5156,10 @@ manifesto-promises-live-verify:
 
 # First canonical public-money path. It reads only the real official H1 2025
 # PLACSP corpus and preserves every source-published counterparty identity.
+# Reconcile acquired PLACSP records and published selection against the captured official catalog.
+spending-coverage-report:
+  python3 scripts/report_spending_coverage.py --db "{{placsp_spending_source_db}}" --catalog docs/etl/sprints/DINERO-NACIONAL-20260907/evidence/placsp-catalog.json --out docs/etl/sprints/DINERO-NACIONAL-20260907/evidence/coverage.json
+
 placsp-spending-export:
   python3 scripts/materialize_placsp_spending_sample.py \
     --source-db "{{placsp_spending_source_db}}" \
@@ -6582,6 +6606,14 @@ citizen-report-preset-contract-bundle-history-slo-digest-heartbeat-compact-windo
   if [ -n "{{citizen_preset_bundle_history_slo_digest_heartbeat_compact_window_digest_heartbeat_compact_window_out}}" ]; then out_arg="--json-out {{citizen_preset_bundle_history_slo_digest_heartbeat_compact_window_digest_heartbeat_compact_window_out}}"; fi; \
   node scripts/report_citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat_compaction_window.js --heartbeat-jsonl "{{citizen_preset_bundle_history_slo_digest_heartbeat_compact_window_digest_heartbeat_path}}" --compacted-jsonl "{{citizen_preset_bundle_history_slo_digest_heartbeat_compact_window_digest_heartbeat_compact_path}}" --last "{{citizen_preset_bundle_history_slo_digest_heartbeat_compact_window_digest_heartbeat_compact_window}}" --strict ${out_arg}
 
+# Deploy the spending API through the isolated Hetzner target and blue/green gates.
+[positional-arguments]
+spending-api-deploy bundle slot:
+  #!/usr/bin/env bash
+  set -euo pipefail
+  infra_repo="${VCLC_INFRA_REPO:-../first_hetzner}"
+  just --working-directory "$infra_repo" --justfile "$infra_repo/Justfile" spending-api-deploy "$1" "$2"
+
 cloudflare-pages-deploy:
   @just cloudflare-pages-build
   cd "{{gh_pages_next_app_dir}}" && npx wrangler pages deploy out --project-name "{{cloudflare_pages_project}}"
@@ -6608,7 +6640,20 @@ votaconlachola-gh-pages-publish:
   fi
 
 explorer-gh-pages-publish:
-  @just votaconlachola-gh-pages-publish
+  if [ "${PLACSP_LAUNCH_SCOPED_PUBLISH:-0}" = "1" ]; then just placsp-launch-scoped-publish; else just votaconlachola-gh-pages-publish; fi
+
+placsp-launch-scoped-publish:
+  #!/usr/bin/env bash
+  set -euo pipefail
+  CLOUDFLARE_PAGES_FROZEN_INPUTS=1 just cloudflare-pages-build
+  : "${PLACSP_PUBLISH_SITE:?Set a detached gh-pages checkout to preserve existing routes}"
+  python3 scripts/overlay_placsp_launch_site.py --build "{{gh_pages_next_out_dir}}" --site "$PLACSP_PUBLISH_SITE" --report docs/etl/sprints/PUBLIC-LAUNCH-20260905/evidence/scoped-publication.json
+  git -C "$PLACSP_PUBLISH_SITE" -c core.autocrlf=false add -- index.html index.txt spending _next
+  python3 scripts/verify_placsp_launch_git.py --repo "$PLACSP_PUBLISH_SITE" --prefix spending/launch --ref ""
+  git -C "$PLACSP_PUBLISH_SITE" commit -m "Publish PLACSP technical alpha from $(git rev-parse --short HEAD)"
+  git -C "$PLACSP_PUBLISH_SITE" push "{{gh_pages_remote}}" HEAD:"{{gh_pages_branch}}"
+  python3 scripts/publish_spending_static_assets.py --site "$PLACSP_PUBLISH_SITE"
+
 
 explorer-gh-pages:
   @just explorer-gh-pages-publish

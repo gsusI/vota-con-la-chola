@@ -66,6 +66,12 @@ DEFAULT_OFFICIAL_PATH_DOCUMENT_LINEAGE_MANIFESTS = (
         "official-path-document-lineage.jsonl"
     ),
 )
+DEFAULT_XLSX_DOCUMENT_LINEAGE_MANIFESTS = (
+    Path(
+        "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/"
+        "real-xlsx-source-lineage.jsonl"
+    ),
+)
 DEFAULT_PARTY_PROGRAM_SOURCE_MANIFEST_DIR = Path("etl/data/raw/programas_partidos")
 DEFAULT_REPORT = Path(
     "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/"
@@ -76,7 +82,7 @@ DEFAULT_DATABASES = (
     Path("etl/data/staging/parlamentario-es.db"),
     Path("etl/data/staging/placsp-contracts-real-s1-20260811.db"),
 )
-SUPPORTED_SUFFIXES = {".pdf", ".html", ".htm", ".xml"}
+SUPPORTED_SUFFIXES = {".pdf", ".html", ".htm", ".xml", ".xlsx"}
 DISALLOWED_PUBLIC_HOSTS = {
     "",
     "0.0.0.0",
@@ -88,6 +94,7 @@ DISALLOWED_PUBLIC_HOSTS = {
 }
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 EMBEDDED_METADATA_READ_LIMIT_BYTES = 16 * 1024 * 1024
+XLSX_RETRIEVAL_RECEIPT_MAX_BYTES = 1024 * 1024
 PLACSP_EMBEDDED_URL_SOURCE_GROUPS = {
     "placsp_autonomico_detail",
     "placsp_sindicacion_detail",
@@ -244,6 +251,11 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         "--official-path-document-lineage-manifest",
         action="append",
         dest="official_path_document_lineage_manifests",
+    )
+    parser.add_argument(
+        "--xlsx-document-lineage-manifest",
+        action="append",
+        dest="xlsx_document_lineage_manifests",
     )
     parser.add_argument("--file-manifest-out", default=str(DEFAULT_FILE_MANIFEST))
     parser.add_argument("--edge-manifest-out", default=str(DEFAULT_EDGE_MANIFEST))
@@ -594,6 +606,236 @@ def load_official_capture_sidecars(
         "sidecars_scanned": scanned,
         "accepted_checksum_captures": accepted,
         "status": "ok",
+    }
+
+
+def load_xlsx_document_lineage_manifest(
+    work: sqlite3.Connection,
+    manifest_path: Path,
+    *,
+    repo_root: Path,
+    inventory_root: Path,
+) -> dict[str, Any]:
+    """Load XLSX source mappings without promoting unproven retrieval lineage."""
+
+    if not manifest_path.is_file():
+        raise ProvenanceAuditError(
+            f"XLSX document lineage manifest missing: {manifest_path}"
+        )
+    manifest_ref = display_path(manifest_path, repo_root=repo_root)
+    rows = 0
+    accepted = 0
+    inferred = 0
+    verified_receipt_samples: list[dict[str, Any]] = []
+    with manifest_path.open("r", encoding="utf-8") as handle:
+        for line_number, line in enumerate(handle, start=1):
+            if not line.strip():
+                continue
+            rows += 1
+            try:
+                item = json.loads(line)
+            except json.JSONDecodeError as exc:
+                raise ProvenanceAuditError(
+                    f"invalid XLSX lineage JSON at line {line_number}: {exc}"
+                ) from exc
+            if not isinstance(item, dict):
+                raise ProvenanceAuditError(
+                    f"XLSX lineage row must be an object at line {line_number}"
+                )
+            capture = item.get("capture")
+            if not isinstance(capture, dict):
+                raise ProvenanceAuditError(
+                    f"missing XLSX capture at line {line_number}"
+                )
+            normalized_path = normalize_inventory_path(
+                capture.get("path"),
+                repo_root=repo_root,
+                inventory_root=inventory_root,
+            )
+            content_sha256 = str(capture.get("sha256") or "").lower()
+            declared_bytes = capture.get("bytes")
+            source_id = str(item.get("source_id") or "").strip()
+            source_url = str(item.get("source_url") or "").strip()
+            captured_at = str(item.get("captured_at") or "").strip() or None
+            binding_status = str(item.get("source_url_binding_status") or "")
+            if (
+                item.get("schema_version") != "official_xlsx_source_mapping_v1"
+                or item.get("synthetic_or_mock_records_counted") is not False
+                or item.get("official_public_domain_personal_information_retained")
+                is not True
+                or not normalized_path
+                or Path(normalized_path).suffix.casefold() != ".xlsx"
+                or not source_id
+                or public_url_kind(source_url) not in {"public_http", "public_https"}
+                or not SHA256_RE.fullmatch(content_sha256)
+                or not isinstance(declared_bytes, int)
+                or declared_bytes <= 0
+                or binding_status
+                not in {
+                    "verified_retrieval_receipt",
+                    "inferred_from_repository_path_contract_without_retrieval_receipt",
+                }
+            ):
+                raise ProvenanceAuditError(
+                    f"invalid XLSX lineage contract at line {line_number}"
+                )
+            capture_path = (inventory_root / normalized_path).resolve()
+            try:
+                capture_path.relative_to(inventory_root.resolve())
+            except ValueError as exc:
+                raise ProvenanceAuditError(
+                    f"XLSX capture escapes inventory root at line {line_number}"
+                ) from exc
+            if (
+                not capture_path.is_file()
+                or capture_path.stat().st_size != declared_bytes
+                or sha256_file(capture_path) != content_sha256
+            ):
+                raise ProvenanceAuditError(
+                    f"XLSX capture checksum mismatch at line {line_number}"
+                )
+            if binding_status != "verified_retrieval_receipt":
+                inferred += 1
+                continue
+            receipt_descriptor = item.get("retrieval_receipt")
+            if not isinstance(receipt_descriptor, dict):
+                raise ProvenanceAuditError(
+                    "verified XLSX lineage is missing retrieval receipt descriptor "
+                    f"at line {line_number}"
+                )
+            receipt_path_value = str(receipt_descriptor.get("path") or "").strip()
+            receipt_ref = normalize_repo_path(
+                receipt_path_value, repo_root=repo_root
+            )
+            receipt_sha256 = str(receipt_descriptor.get("sha256") or "").lower()
+            receipt_bytes = receipt_descriptor.get("bytes")
+            if (
+                not receipt_ref
+                or Path(receipt_path_value).is_absolute()
+                or Path(receipt_ref).suffix.casefold() != ".json"
+                or not SHA256_RE.fullmatch(receipt_sha256)
+                or not isinstance(receipt_bytes, int)
+                or receipt_bytes <= 0
+                or receipt_bytes > XLSX_RETRIEVAL_RECEIPT_MAX_BYTES
+            ):
+                raise ProvenanceAuditError(
+                    f"invalid XLSX retrieval receipt descriptor at line {line_number}"
+                )
+            receipt_path = safe_repo_path(receipt_ref, repo_root=repo_root)
+            if (
+                not receipt_path.is_file()
+                or receipt_path.stat().st_size != receipt_bytes
+                or sha256_file(receipt_path) != receipt_sha256
+            ):
+                raise ProvenanceAuditError(
+                    f"XLSX retrieval receipt descriptor mismatch at line {line_number}"
+                )
+            try:
+                receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+            except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+                raise ProvenanceAuditError(
+                    f"invalid XLSX retrieval receipt at line {line_number}: {exc}"
+                ) from exc
+            if not isinstance(receipt, dict):
+                raise ProvenanceAuditError(
+                    f"XLSX retrieval receipt must be an object at line {line_number}"
+                )
+            receipt_capture_path = normalize_inventory_path(
+                receipt.get("capture_path"),
+                repo_root=repo_root,
+                inventory_root=inventory_root,
+            )
+            receipt_fetched_at = str(receipt.get("fetched_at") or "").strip()
+            try:
+                parsed_fetched_at = datetime.fromisoformat(
+                    receipt_fetched_at.replace("Z", "+00:00")
+                )
+            except ValueError as exc:
+                raise ProvenanceAuditError(
+                    f"invalid XLSX retrieval timestamp at line {line_number}"
+                ) from exc
+            if (
+                receipt.get("schema_version")
+                != "official_xlsx_retrieval_receipt_v1"
+                or receipt.get("synthetic_or_mock_records_counted") is not False
+                or receipt.get(
+                    "official_public_domain_personal_information_retained"
+                )
+                is not True
+                or receipt_capture_path != normalized_path
+                or str(receipt.get("source_id") or "").strip() != source_id
+                or str(receipt.get("source_url") or "").strip() != source_url
+                or public_url_kind(receipt.get("source_url"))
+                not in {"public_http", "public_https"}
+                or not captured_at
+                or receipt_fetched_at != captured_at
+                or parsed_fetched_at.tzinfo is None
+                or receipt.get("response_bytes") != declared_bytes
+                or str(receipt.get("response_sha256") or "").lower()
+                != content_sha256
+                or not isinstance(receipt.get("http_status"), int)
+                or not 200 <= int(receipt["http_status"]) < 300
+            ):
+                raise ProvenanceAuditError(
+                    "XLSX retrieval receipt does not independently reconcile "
+                    f"URL/time/bytes/checksum at line {line_number}"
+                )
+            values = (
+                receipt_ref,
+                receipt_sha256,
+                "official_xlsx_retrieval_receipt",
+                normalized_path,
+                content_sha256,
+                source_id,
+                source_url,
+                captured_at,
+            )
+            work.execute(
+                """
+                INSERT OR IGNORE INTO provenance(
+                  edge_key, db_ref, table_name, raw_path, normalized_path,
+                  content_sha256, source_id, source_url, fetched_at,
+                  declared_bytes, url_kind
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    metadata_edge_key(values),
+                    receipt_ref,
+                    "official_xlsx_retrieval_receipt",
+                    normalized_path,
+                    normalized_path,
+                    content_sha256,
+                    source_id,
+                    source_url,
+                    captured_at,
+                    declared_bytes,
+                    public_url_kind(source_url),
+                ),
+            )
+            accepted += 1
+            if len(verified_receipt_samples) < 20:
+                verified_receipt_samples.append(
+                    {
+                        "path": receipt_ref,
+                        "bytes": receipt_bytes,
+                        "sha256": receipt_sha256,
+                    }
+                )
+    if rows == 0:
+        raise ProvenanceAuditError(
+            f"XLSX document lineage manifest is empty: {manifest_path}"
+        )
+    work.commit()
+    return {
+        "path": manifest_ref,
+        "bytes": manifest_path.stat().st_size,
+        "sha256": sha256_file(manifest_path),
+        "rows": rows,
+        "accepted_checksum_captures": accepted,
+        "inferred_source_url_mappings": inferred,
+        "verified_retrieval_receipts": accepted,
+        "verified_retrieval_receipt_samples": verified_receipt_samples,
+        "status": "ok" if inferred == 0 else "partial",
     }
 
 
@@ -3411,6 +3653,7 @@ def run_audit(
     file_manifest_out: Path,
     edge_manifest_out: Path,
     report_out: Path,
+    xlsx_document_lineage_manifest_paths: list[Path] | None = None,
 ) -> dict[str, Any]:
     if not inventory_root.is_dir():
         raise ProvenanceAuditError(f"inventory root missing: {inventory_root}")
@@ -3423,6 +3666,15 @@ def run_audit(
                 repo_root=repo_root,
                 inventory_root=inventory_root,
             )
+            xlsx_document_lineage_manifests = [
+                load_xlsx_document_lineage_manifest(
+                    work,
+                    path,
+                    repo_root=repo_root,
+                    inventory_root=inventory_root,
+                )
+                for path in (xlsx_document_lineage_manifest_paths or [])
+            ]
             databases = [
                 load_database_metadata(
                     work,
@@ -3572,6 +3824,7 @@ def run_audit(
             rows=inventory_rows,
         ),
         "official_capture_sidecars": official_capture_sidecars,
+        "xlsx_document_lineage_manifests": xlsx_document_lineage_manifests,
         "databases": databases,
         "auxiliary_provenance_manifests": auxiliary_provenance_manifests,
         "published_capture_indexes": published_capture_indexes,
@@ -3722,6 +3975,13 @@ def main(argv: list[str] | None = None) -> int:
                 or DEFAULT_OFFICIAL_PATH_DOCUMENT_LINEAGE_MANIFESTS
             )
         ]
+        xlsx_document_lineage_manifests = [
+            Path(value)
+            for value in (
+                args.xlsx_document_lineage_manifests
+                or DEFAULT_XLSX_DOCUMENT_LINEAGE_MANIFESTS
+            )
+        ]
         report = run_audit(
             repo_root=repo_root,
             inventory_root=safe_repo_path(args.inventory_root, repo_root=repo_root),
@@ -3777,6 +4037,10 @@ def main(argv: list[str] | None = None) -> int:
                 repo_root=repo_root,
             ),
             report_out=safe_repo_path(args.report_out, repo_root=repo_root),
+            xlsx_document_lineage_manifest_paths=[
+                safe_repo_path(path, repo_root=repo_root)
+                for path in xlsx_document_lineage_manifests
+            ],
         )
     except (OSError, sqlite3.DatabaseError, ProvenanceAuditError, ValueError) as exc:
         print(f"ERROR: {type(exc).__name__}: {exc}")

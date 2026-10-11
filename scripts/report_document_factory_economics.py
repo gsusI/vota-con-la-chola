@@ -13,6 +13,33 @@ from pathlib import Path
 from typing import Any
 
 
+INVENTORY_SCHEMA_VERSION = "real_document_format_inventory_v7_xlsx_contract_bound"
+NATIVE_EXTRACTION_ALGORITHM_VERSION = (
+    "document_extraction_v4_pdf_markup_xlsx_phonetic_bounded"
+)
+NATIVE_COLD_OUTPUT_CHECK = "native_cold_output_benchmark_available"
+OCR_CURRENT_FULL_CHECK = "ocr_current_full_physical_run_complete"
+OCR_COLD_OUTPUT_CHECK = "ocr_cold_output_benchmark_available"
+COLD_OUTPUT_GAP = (
+    "Current full real native extraction completed against a pre-existing output "
+    "root; measured telemetry is valid for this warm-output run, but no current "
+    "cold-output benchmark is available."
+)
+COLD_OUTPUT_NEXT_GATE = (
+    "repeat current full real native extraction with empty state and output roots "
+    "to establish a cold-output benchmark"
+)
+OCR_COLD_OUTPUT_GAP = (
+    "Current full real page OCR completed against a pre-existing output root; "
+    "measured telemetry is valid for this warm-output run, but no current OCR "
+    "cold-output benchmark is available."
+)
+OCR_COLD_OUTPUT_NEXT_GATE = (
+    "repeat current full real page OCR with empty state and output roots to "
+    "establish a cold-output benchmark"
+)
+
+
 def read_json(path: Path) -> dict[str, Any]:
     payload = json.loads(path.read_text(encoding="utf-8"))
     if not isinstance(payload, dict):
@@ -123,15 +150,25 @@ def build_payload(
     acquisition_run = read_json(acquisition_run_path)
     acquisition_validation = read_json(acquisition_validation_path)
 
-    if inventory.get("schema_version") != "real_document_format_inventory_v4":
+    if inventory.get("schema_version") != INVENTORY_SCHEMA_VERSION:
         raise ValueError("inventory schema mismatch")
     if extraction.get("schema_version") != "real_document_text_extraction_v1":
         raise ValueError("native extraction schema mismatch")
     if (
+        extraction.get("extraction_algorithm_version")
+        != NATIVE_EXTRACTION_ALGORITHM_VERSION
+    ):
+        raise ValueError("native extraction algorithm mismatch")
+    if (
         extraction_validation.get("schema_version")
-        != "real_document_text_validation_v1"
+        != "real_document_text_validation_v2"
     ):
         raise ValueError("native validation schema mismatch")
+    if (
+        extraction_validation.get("extraction_algorithm_version")
+        != NATIVE_EXTRACTION_ALGORITHM_VERSION
+    ):
+        raise ValueError("native validation algorithm mismatch")
     if ocr.get("schema_version") != "real_document_page_ocr_v1":
         raise ValueError("OCR schema mismatch")
     if ocr_validation.get("schema_version") != "real_document_page_ocr_validation_v1":
@@ -154,9 +191,13 @@ def build_payload(
     extraction_run = extraction.get("run") or {}
     extraction_totals = extraction.get("totals") or {}
     extraction_performance = extraction.get("performance") or {}
+    extraction_validation_totals = extraction_validation.get("totals") or {}
+    extraction_validation_checks = extraction_validation.get("checks") or {}
     ocr_run = ocr.get("run") or {}
     ocr_totals = ocr.get("totals") or {}
     ocr_performance = ocr.get("performance") or {}
+    ocr_validation_totals = ocr_validation.get("totals") or {}
+    ocr_validation_checks = ocr_validation.get("checks") or {}
     fetch_queue = fetch.get("queue") or {}
     fetch_documents = fetch.get("documents") or {}
     acquisition_totals = acquisition_run.get("totals") or {}
@@ -168,6 +209,19 @@ def build_payload(
     fetched_documents = int(fetch_documents.get("fetched_succeeded_total") or 0)
     acquisition_documents = int(acquisition_totals.get("succeeded") or 0)
     file_instances = int(inventory_totals.get("files") or 0)
+    inventory_distinct_objects = int(
+        inventory_totals.get("distinct_content_objects") or 0
+    )
+    extraction_file_instances = int(extraction_totals.get("file_instances") or 0)
+    extraction_distinct_objects = int(
+        extraction_totals.get("distinct_content_objects") or 0
+    )
+    validation_file_instances = int(
+        extraction_validation_totals.get("file_instances") or 0
+    )
+    validation_distinct_objects = int(
+        extraction_validation_totals.get("distinct_content_objects") or 0
+    )
     if (
         min(
             extracted_objects,
@@ -179,6 +233,20 @@ def build_payload(
         <= 0
     ):
         raise ValueError("real observed cohorts must all be non-empty")
+    if not (
+        file_instances
+        == extraction_file_instances
+        == validation_file_instances
+        and inventory_distinct_objects
+        == extraction_distinct_objects
+        == validation_distinct_objects
+        == extracted_objects
+        == int(extraction_run.get("claimed") or 0)
+    ):
+        raise ValueError(
+            "inventory, extraction, and native validation file/distinct counts "
+            "do not reconcile"
+        )
 
     native_failures = int(extraction_run.get("dead") or 0)
     ocr_failures = int(ocr_run.get("dead") or 0)
@@ -187,6 +255,22 @@ def build_payload(
     native_text_chars = int(extraction_totals.get("native_text_chars") or 0)
     native_text_cas_bytes = int(extraction_totals.get("text_cas_bytes") or 0)
     ocr_text_cas_bytes = int(ocr_totals.get("ocr_text_cas_bytes") or 0)
+    native_cold_output_benchmark_available = (
+        extraction_performance.get("cold_state_and_output") is True
+    )
+    native_measurement_status = (
+        "cold_physical_run"
+        if native_cold_output_benchmark_available
+        else "current_full_real_warm_output_run"
+    )
+    ocr_cold_output_benchmark_available = (
+        ocr_performance.get("cold_state_and_output") is True
+    )
+    ocr_measurement_status = (
+        "cold_physical_run"
+        if ocr_cold_output_benchmark_available
+        else "current_full_real_warm_output_run"
+    )
 
     checks = {
         "official_real_documents_only": all(
@@ -221,19 +305,31 @@ def build_payload(
             )
             is True
         ),
-        "native_physical_run_complete": (
-            extraction.get("status") == "ok"
+        "native_current_full_physical_run_complete": (
+            inventory.get("status") == "ok"
+            and extraction.get("status") == "ok"
             and extraction_validation.get("status") == "ok"
-            and extracted_objects
-            == int(extraction_totals.get("distinct_content_objects") or 0)
-            and bool(extraction_performance.get("cold_state_and_output"))
+            and all(value is True for value in extraction_validation_checks.values())
+            and bool(extraction_validation_checks)
+            and int(extraction_run.get("claimed") or 0) == extracted_objects
+            and extracted_objects == extraction_distinct_objects
+            and native_failures == 0
+            and int(extraction_run.get("retried") or 0) == 0
         ),
-        "ocr_physical_run_complete": (
+        NATIVE_COLD_OUTPUT_CHECK: native_cold_output_benchmark_available,
+        OCR_CURRENT_FULL_CHECK: (
             ocr.get("status") == "ok"
             and ocr_validation.get("status") == "ok"
+            and bool(ocr_validation_checks)
+            and all(value is True for value in ocr_validation_checks.values())
             and ocr_pages == int(ocr_totals.get("candidate_pages") or 0)
-            and bool(ocr_performance.get("cold_state_and_output"))
+            and ocr_pages
+            == int(ocr_validation_totals.get("candidate_pages") or 0)
+            and int(ocr_run.get("claimed") or 0) == ocr_pages
+            and ocr_failures == 0
+            and int(ocr_run.get("retried") or 0) == 0
         ),
+        OCR_COLD_OUTPUT_CHECK: ocr_cold_output_benchmark_available,
         "acquisition_queue_reconciled": (
             int(fetch_queue.get("items_total") or 0)
             == int(fetch_queue.get("terminal_total") or 0)
@@ -263,6 +359,55 @@ def build_payload(
         ),
         "monetary_cost_not_fabricated": True,
     }
+
+    official_hosts = sorted((acquisition_validation.get("hosts") or {}).keys())
+    missing_acquisition_gates = [
+        f"{target:,}"
+        for target in (1_000, 10_000, 100_000)
+        if acquisition_documents < target
+    ]
+    measurement_gaps = [
+        "No actual monetary meter or provider invoice is bound to the measured cohorts."
+    ]
+    if not native_cold_output_benchmark_available:
+        measurement_gaps.append(COLD_OUTPUT_GAP)
+    if not ocr_cold_output_benchmark_available:
+        measurement_gaps.append(OCR_COLD_OUTPUT_GAP)
+    if missing_acquisition_gates:
+        measurement_gaps.append(
+            f"Fresh acquisition telemetry covers {acquisition_documents:,} objects "
+            f"across {len(official_hosts):,} official hosts; representative "
+            f"{'/'.join(missing_acquisition_gates)} cohorts remain unmeasured."
+        )
+    measurement_gaps.extend(
+        [
+            (
+                f"Current stored corpus covers {file_instances:,} file instances and "
+                f"{inventory_distinct_objects:,} distinct content objects; "
+                "representativeness across every source, format, language, scan "
+                "quality, and host is not established."
+            ),
+            (
+                "Human OCR quality decisions are not bound to this economics "
+                "artifact; OCR promotion readiness remains outside this measurement."
+            ),
+        ]
+    )
+    next_gates = []
+    if not native_cold_output_benchmark_available:
+        next_gates.append(COLD_OUTPUT_NEXT_GATE)
+    if not ocr_cold_output_benchmark_available:
+        next_gates.append(OCR_COLD_OUTPUT_NEXT_GATE)
+    next_gates.extend(
+        [
+            "scale exact request telemetry through representative real acquisition cohorts",
+            "bind actual monetary cost",
+            (
+                "process and independently validate one million distinct real "
+                "content objects"
+            ),
+        ]
+    )
 
     return {
         "meta": {
@@ -296,7 +441,7 @@ def build_payload(
             "cohort_semantic_sha256": str(
                 acquisition_validation.get("cohort_semantic_sha256") or ""
             ),
-            "official_hosts": sorted((acquisition_validation.get("hosts") or {}).keys()),
+            "official_hosts": official_hosts,
             "documents_attempted": int(acquisition_totals.get("claimed") or 0),
             "documents_succeeded": acquisition_documents,
             "network_requests_started": int(
@@ -372,7 +517,8 @@ def build_payload(
             "bytes_received": int(fetch_documents.get("bytes_received") or 0),
         },
         "native_extraction": {
-            "measurement_status": "cold_physical_run",
+            "measurement_status": native_measurement_status,
+            "cold_state_and_output": native_cold_output_benchmark_available,
             "distinct_content_objects": extracted_objects,
             "file_instances": int(extraction_totals.get("file_instances") or 0),
             "failures": native_failures,
@@ -407,7 +553,8 @@ def build_payload(
             },
         },
         "page_ocr": {
-            "measurement_status": "cold_physical_run",
+            "measurement_status": ocr_measurement_status,
+            "cold_state_and_output": ocr_cold_output_benchmark_available,
             "documents": int(ocr_totals.get("documents") or 0),
             "candidate_pages": ocr_pages,
             "failures": ocr_failures,
@@ -473,18 +620,7 @@ def build_payload(
                 "bound to these physical local runs; zero would be fabricated."
             ),
         },
-        "measurement_gaps": [
-            "No actual monetary meter or provider invoice is bound to the measured cohorts.",
-            (
-                "Fresh acquisition telemetry covers 100 BOE objects on one official host, "
-                "not yet 1k/10k/100k cohorts across representative hosts and formats."
-            ),
-            (
-                "The 100k stored corpus is not yet representative across every source, "
-                "format, language, scan quality, and host."
-            ),
-            "Human OCR quality review remains incomplete at 0/40 decisions.",
-        ],
+        "measurement_gaps": measurement_gaps,
         "checks": checks,
         "scale_claim": {
             "capacity_class": str(inventory.get("capacity_class") or ""),
@@ -492,10 +628,7 @@ def build_payload(
             "physical_ocr_pages_measured": ocr_pages,
             "one_million_documents_processed": extracted_objects >= 1_000_000,
             "promoted_for_one_million_operation": False,
-            "next_gate": (
-                "scale exact request telemetry through representative 1000_10000_100000 "
-                "host cohorts and bind actual monetary cost before one million"
-            ),
+            "next_gate": "; ".join(next_gates),
         },
     }
 

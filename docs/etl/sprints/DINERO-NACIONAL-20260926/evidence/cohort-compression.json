@@ -1,0 +1,18 @@
+{
+  "schema_version": "placsp_cohort_compression_v1",
+  "source": "etl/data/staging/placsp-throughput-20260926.db",
+  "compressed": "etl/data/staging/placsp-throughput-20260926.db.zst",
+  "source_bytes": 1052540928,
+  "compressed_bytes": 162237526,
+  "source_sha256": "5cbd484565038e4ecaeab9d21a6001db30f0f96b254275413834bc23d8eea072",
+  "compressed_sha256": "ce4059679c7454f0438ececb0006a4657e3f78690f6c69420cc13c2a3bd1b57a",
+  "decompressed_sha256": "5cbd484565038e4ecaeab9d21a6001db30f0f96b254275413834bc23d8eea072",
+  "decompressed_bytes": 1052540928,
+  "compression_seconds": 0.8428157910238951,
+  "verify_seconds": 0.7509952918626368,
+  "source_retained": false,
+  "roundtrip_passed": true,
+  "storage_state": "verified_compressed_sqlite_retained",
+  "retired_only_task_created_database": true,
+  "restore_command": "zstd -d --keep etl/data/staging/placsp-throughput-20260926.db.zst -o etl/data/staging/placsp-throughput-20260926.db"
+}

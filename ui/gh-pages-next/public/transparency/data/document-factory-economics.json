@@ -1,7 +1,7 @@
 {
   "meta": {
     "schema_version": "document_factory_economics_v1",
-    "generated_at": "2026-08-29T16:24:10+00:00",
+    "generated_at": "2026-08-30T19:26:19+00:00",
     "status": "partial_measured_local",
     "measurement_basis": "physical_real_official_cohorts"
   },
@@ -15,28 +15,28 @@
   "inputs": {
     "inventory": {
       "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-format-inventory.json",
-      "bytes": 10105,
-      "sha256": "3ecb49e23c8f23f0acb4d50999e403bcada01a8ed3ef93eba1ef07dc95525611"
+      "bytes": 11085,
+      "sha256": "67c432633504cc2934eab6cc5865b163479aaf7302f66512635a170c3a6d2f35"
     },
     "native_extraction": {
-      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-extraction-physical-20260829.json",
-      "bytes": 2932,
-      "sha256": "1ff8c7f0819f2febf67637c8ebfae721e7bf1eb0ef561a7561b51c51f0b7222d"
+      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-extraction.json",
+      "bytes": 4968,
+      "sha256": "e897f28e3c9027ccb0ab362ae8254d5b85220a039a92df89688b914ab00be4a1"
     },
     "native_validation": {
-      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-validation-physical-20260829.json",
-      "bytes": 2657,
-      "sha256": "37bc38a048397c8071c4ad1dca0c971c1fe35ded21117880dc62d051a0f0f833"
+      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-validation.json",
+      "bytes": 4066,
+      "sha256": "a8f78f4f97541f2ddd83b68c5098f790990631293106bf874d4c084615589be9"
     },
     "page_ocr": {
-      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-physical-20260829.json",
-      "bytes": 3234,
-      "sha256": "8e1c3d9f7b00030d09d0b8e3981b0eb294f24ad42b2442689eeb8d2949c72459"
+      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr.json",
+      "bytes": 4685,
+      "sha256": "d93be61e164ae0c0a478f3405c9ddbe5fa5bfb5779f4e8147b315b208f1e12b2"
     },
     "page_ocr_validation": {
-      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-validation-physical-20260829.json",
-      "bytes": 2494,
-      "sha256": "7fdae185f3eba95f72c7ad4eaa1e18b3c550c3eff60c46acafa95590dfa674f3"
+      "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-page-ocr-validation.json",
+      "bytes": 2505,
+      "sha256": "336fd8670d6578a848946aa45411be9dd8f95aeda4c5f0de8cdeea6c127c459d"
     },
     "document_fetch_operations": {
       "path": "ui/gh-pages-next/public/transparency/data/document-fetch-operations.json",
@@ -98,57 +98,59 @@
     "bytes_received": 133219457
   },
   "native_extraction": {
-    "measurement_status": "cold_physical_run",
-    "distinct_content_objects": 109558,
-    "file_instances": 111408,
+    "measurement_status": "current_full_real_warm_output_run",
+    "cold_state_and_output": false,
+    "distinct_content_objects": 120801,
+    "file_instances": 122653,
     "failures": 0,
-    "raw_content_bytes_processed": 4880987405,
-    "native_text_chars": 1999902681,
-    "native_text_cas_bytes": 533125716,
-    "elapsed_seconds": 261.340691,
-    "cpu_seconds": 409.619259,
-    "peak_rss_bytes_self": 1073545216,
+    "raw_content_bytes_processed": 5435782744,
+    "native_text_chars": 3192030152,
+    "native_text_cas_bytes": 612345191,
+    "elapsed_seconds": 328.374241,
+    "cpu_seconds": 389.583991,
+    "peak_rss_bytes_self": 1385299968,
     "workers": 12,
     "per_1000_distinct_content_objects": {
-      "raw_content_bytes_processed": 44551629.31963,
-      "native_text_chars": 18254282.48964,
-      "native_text_cas_bytes": 4866150.495628,
-      "elapsed_seconds": 2.385409,
-      "cpu_seconds": 3.738835,
+      "raw_content_bytes_processed": 44997829.024594,
+      "native_text_chars": 26423871.92159,
+      "native_text_cas_bytes": 5069040.744696,
+      "elapsed_seconds": 2.718307,
+      "cpu_seconds": 3.225006,
       "failures": 0.0
     }
   },
   "page_ocr": {
-    "measurement_status": "cold_physical_run",
+    "measurement_status": "current_full_real_warm_output_run",
+    "cold_state_and_output": false,
     "documents": 58,
     "candidate_pages": 856,
     "failures": 0,
     "ocr_text_chars": 89632,
     "ocr_text_cas_bytes": 14853,
-    "elapsed_seconds": 109.875365,
-    "elapsed_worker_seconds": 598.8365,
-    "cpu_seconds_parent_and_children": 589.462222,
-    "peak_rss_bytes_self": 36503552,
-    "peak_rss_bytes_child_max": 203227136,
+    "elapsed_seconds": 107.933172,
+    "elapsed_worker_seconds": 588.9025,
+    "cpu_seconds_parent_and_children": 576.738795,
+    "peak_rss_bytes_self": 43024384,
+    "peak_rss_bytes_child_max": 203309056,
     "workers": 8,
     "per_1000_candidate_pages": {
       "ocr_text_chars": 104710.280374,
       "ocr_text_cas_bytes": 17351.635514,
-      "elapsed_seconds": 128.359071,
-      "elapsed_worker_seconds": 699.57535,
-      "cpu_seconds_parent_and_children": 688.624091,
+      "elapsed_seconds": 126.090154,
+      "elapsed_worker_seconds": 687.97021,
+      "cpu_seconds_parent_and_children": 673.760275,
       "failures": 0.0
     }
   },
   "storage": {
-    "file_instances": 111408,
-    "raw_document_bytes": 5093218479,
-    "native_text_cas_bytes": 533125716,
+    "file_instances": 122653,
+    "raw_document_bytes": 5652067717,
+    "native_text_cas_bytes": 612345191,
     "ocr_candidate_pages": 856,
     "ocr_text_cas_bytes": 14853,
     "per_1000_file_instances": {
-      "raw_document_bytes": 45716810.992029,
-      "native_text_cas_bytes": 4785345.002154
+      "raw_document_bytes": 46081773.107873,
+      "native_text_cas_bytes": 4992500.721548
     },
     "per_1000_ocr_candidate_pages": {
       "ocr_text_cas_bytes": 17351.635514
@@ -166,26 +168,30 @@
   },
   "measurement_gaps": [
     "No actual monetary meter or provider invoice is bound to the measured cohorts.",
-    "Fresh acquisition telemetry covers 100 BOE objects on one official host, not yet 1k/10k/100k cohorts across representative hosts and formats.",
-    "The 100k stored corpus is not yet representative across every source, format, language, scan quality, and host.",
-    "Human OCR quality review remains incomplete at 0/40 decisions."
+    "Current full real native extraction completed against a pre-existing output root; measured telemetry is valid for this warm-output run, but no current cold-output benchmark is available.",
+    "Current full real page OCR completed against a pre-existing output root; measured telemetry is valid for this warm-output run, but no current OCR cold-output benchmark is available.",
+    "Fresh acquisition telemetry covers 10,000 objects across 2 official hosts; representative 100,000 cohorts remain unmeasured.",
+    "Current stored corpus covers 122,653 file instances and 120,801 distinct content objects; representativeness across every source, format, language, scan quality, and host is not established.",
+    "Human OCR quality decisions are not bound to this economics artifact; OCR promotion readiness remains outside this measurement."
   ],
   "checks": {
     "official_real_documents_only": true,
     "synthetic_or_mock_records_absent": true,
     "public_domain_personal_information_retained": true,
-    "native_physical_run_complete": true,
-    "ocr_physical_run_complete": true,
+    "native_current_full_physical_run_complete": true,
+    "native_cold_output_benchmark_available": false,
+    "ocr_current_full_physical_run_complete": true,
+    "ocr_cold_output_benchmark_available": false,
     "acquisition_queue_reconciled": true,
     "fresh_acquisition_physical_run_complete": true,
     "monetary_cost_not_fabricated": true
   },
   "scale_claim": {
     "capacity_class": "s1_100k",
-    "physical_native_objects_measured": 109558,
+    "physical_native_objects_measured": 120801,
     "physical_ocr_pages_measured": 856,
     "one_million_documents_processed": false,
     "promoted_for_one_million_operation": false,
-    "next_gate": "scale exact request telemetry through representative 1000_10000_100000 host cohorts and bind actual monetary cost before one million"
+    "next_gate": "repeat current full real native extraction with empty state and output roots to establish a cold-output benchmark; repeat current full real page OCR with empty state and output roots to establish a cold-output benchmark; scale exact request telemetry through representative real acquisition cohorts; bind actual monetary cost; process and independently validate one million distinct real content objects"
   }
 }

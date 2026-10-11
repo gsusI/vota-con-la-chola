@@ -10,3 +10,6 @@
 *.js text eol=lf
 *.mjs text eol=lf
 *.css text eol=lf
+
+# Preserve exact bytes in content-addressed launch packages.
+ui/gh-pages-next/public/spending/launch/** -text -whitespace

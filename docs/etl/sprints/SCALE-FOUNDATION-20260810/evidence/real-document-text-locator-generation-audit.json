@@ -1,5 +1,7 @@
 {
   "activation_chain": [
+    "f52971bdac98c9d99fd4adda2923b50413f05b2e5589f71c245e99b0647d485b",
+    "aea48939990275c21f03220f077f277a0027832c4031a48eb843152476670fdb",
     "61bf8adfa5870cfde279bd6f4e20b0681ff172257975ec024e31a011297b9723",
     "621b8b47c8e5f506a07900f474c7ca95a4df1395e13068f82a58a04a76c68eb9"
   ],
@@ -20,12 +22,12 @@
     "retained_state_snapshots_checked_to_requested_depth": true
   },
   "dataset": "native_text_locator",
-  "generated_at": "2026-08-30T14:00:24.504816+00:00",
+  "generated_at": "2026-08-30T19:40:03.651224+00:00",
   "input": {
     "bytes": 32720,
-    "logical_sha256": "387a6ce263540f7ee86e5980026acf77eeb421c56c09d5378ad5b8b5f9143248",
+    "logical_sha256": "6c7db3f4656d572bd9d6c07e874f446f97cde302c2016b52bef1c3a4b4328690",
     "path": "etl/data/published/real-document-text-locator-manifest-latest.jsonl",
-    "sha256": "61bf8adfa5870cfde279bd6f4e20b0681ff172257975ec024e31a011297b9723"
+    "sha256": "f52971bdac98c9d99fd4adda2923b50413f05b2e5589f71c245e99b0647d485b"
   },
   "mode": {
     "full_shard_check": true,
@@ -49,19 +51,19 @@
   "schema_version": "real_document_generation_lifecycle_audit_v1",
   "status": "ok",
   "totals": {
-    "activation_chain_manifests": 2,
-    "activation_receipts": 2,
+    "activation_chain_manifests": 4,
+    "activation_receipts": 4,
     "automatic_deletions": 0,
     "interrupted_staging_directories": 0,
-    "manifest_archives": 2,
+    "manifest_archives": 4,
     "orphan_generation_directories": 0,
     "orphan_state_snapshots": 0,
-    "retained_compressed_manifest_bytes": 96937696,
-    "retained_compressed_state_bytes": 169004723,
-    "retained_shard_files": 126,
-    "retained_state_snapshots": 2,
-    "retained_unique_generations": 2,
-    "superseded_generations": 1,
+    "retained_compressed_manifest_bytes": 231090500,
+    "retained_compressed_state_bytes": 376529729,
+    "retained_shard_files": 309,
+    "retained_state_snapshots": 4,
+    "retained_unique_generations": 4,
+    "superseded_generations": 3,
     "unactivated_activation_receipts": 0,
     "unactivated_generation_directories": 0,
     "unactivated_manifest_archives": 0

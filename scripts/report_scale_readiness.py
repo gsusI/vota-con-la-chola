@@ -60,6 +60,117 @@ def load_json(file_path: Path) -> dict[str, Any]:
     return payload
 
 
+def summarize_xlsx_lineage(
+    lineage_path: Path,
+) -> tuple[int, int, int, dict[str, int]]:
+    """Validate a lineage stream with disk-backed uniqueness accounting."""
+
+    row_count = 0
+    raw_bytes = 0
+    with tempfile.TemporaryDirectory(prefix="vota-xlsx-readiness-") as work_dir:
+        conn = sqlite3.connect(Path(work_dir) / "lineage.sqlite")
+        try:
+            conn.execute("PRAGMA journal_mode=OFF")
+            conn.execute("PRAGMA synchronous=OFF")
+            conn.execute("PRAGMA temp_store=FILE")
+            conn.executescript(
+                """
+                CREATE TABLE capture_paths(path TEXT PRIMARY KEY) WITHOUT ROWID;
+                CREATE TABLE content_hashes(sha256 TEXT PRIMARY KEY) WITHOUT ROWID;
+                CREATE TABLE sources(
+                  source_id TEXT PRIMARY KEY,
+                  file_instances INTEGER NOT NULL
+                ) WITHOUT ROWID;
+                """
+            )
+            with lineage_path.open("r", encoding="utf-8") as handle:
+                for line_number, line in enumerate(handle, start=1):
+                    if not line.strip():
+                        continue
+                    try:
+                        row = json.loads(line)
+                    except json.JSONDecodeError as exc:
+                        raise ReadinessError(
+                            f"invalid XLSX source mapping at line {line_number}: {exc}"
+                        ) from exc
+                    if (
+                        not isinstance(row, dict)
+                        or row.get("schema_version")
+                        != "official_xlsx_source_mapping_v1"
+                        or row.get("source_url_binding_status")
+                        != "inferred_from_repository_path_contract_without_retrieval_receipt"
+                        or row.get("synthetic_or_mock_records_counted") is not False
+                        or row.get(
+                            "official_public_domain_personal_information_retained"
+                        )
+                        is not True
+                    ):
+                        raise ReadinessError(
+                            f"unsafe XLSX source mapping at line {line_number}"
+                        )
+                    capture = row.get("capture") or {}
+                    capture_path = str(capture.get("path") or "")
+                    capture_sha256 = str(capture.get("sha256") or "")
+                    capture_bytes = capture.get("bytes")
+                    source_id = str(row.get("source_id") or "")
+                    source_url = str(row.get("source_url") or "")
+                    parsed_source_url = urlparse(source_url)
+                    if (
+                        not capture_path.startswith("etl/data/raw/")
+                        or Path(capture_path).is_absolute()
+                        or ".." in Path(capture_path).parts
+                        or not SHA256_RE.fullmatch(capture_sha256)
+                        or isinstance(capture_bytes, bool)
+                        or not isinstance(capture_bytes, int)
+                        or capture_bytes <= 0
+                        or not source_id
+                        or parsed_source_url.scheme not in {"http", "https"}
+                        or not parsed_source_url.hostname
+                        or parsed_source_url.hostname.casefold() in DISALLOWED_HOSTS
+                    ):
+                        raise ReadinessError(
+                            f"invalid XLSX capture descriptor at line {line_number}"
+                        )
+                    try:
+                        conn.execute(
+                            "INSERT INTO capture_paths(path) VALUES (?)",
+                            (capture_path,),
+                        )
+                    except sqlite3.IntegrityError as exc:
+                        raise ReadinessError(
+                            f"duplicate XLSX capture path at line {line_number}"
+                        ) from exc
+                    conn.execute(
+                        "INSERT OR IGNORE INTO content_hashes(sha256) VALUES (?)",
+                        (capture_sha256,),
+                    )
+                    conn.execute(
+                        """
+                        INSERT INTO sources(source_id, file_instances) VALUES (?, 1)
+                        ON CONFLICT(source_id) DO UPDATE SET
+                          file_instances = file_instances + 1
+                        """,
+                        (source_id,),
+                    )
+                    raw_bytes += capture_bytes
+                    row_count += 1
+                    if row_count % 10_000 == 0:
+                        conn.commit()
+            conn.commit()
+            distinct_contents = int(
+                conn.execute("SELECT COUNT(*) FROM content_hashes").fetchone()[0]
+            )
+            by_source = {
+                str(row[0]): int(row[1])
+                for row in conn.execute(
+                    "SELECT source_id, file_instances FROM sources ORDER BY source_id"
+                )
+            }
+        finally:
+            conn.close()
+    return row_count, distinct_contents, raw_bytes, by_source
+
+
 def repo_path(value: str) -> Path:
     candidate = (REPO_ROOT / value).resolve()
     try:
@@ -602,6 +713,7 @@ def audit_document_provenance_gap(
         "inventory",
         "audit",
         "queue",
+        "xlsx_cohort",
         "wayback_recovery",
         "boe_corpus",
         "boe_manifest_validation",
@@ -645,6 +757,7 @@ def audit_document_provenance_gap(
         *json_keys,
         "wayback_manifest",
         "wayback_checkpoint",
+        "xlsx_lineage",
         "boe_manifest",
         "ocr_review_csv",
     )
@@ -656,6 +769,7 @@ def audit_document_provenance_gap(
     inventory = payloads["inventory"]
     audit = payloads["audit"]
     queue = payloads["queue"]
+    xlsx_cohort = payloads["xlsx_cohort"]
     wayback_recovery = payloads["wayback_recovery"]
     boe_corpus = payloads["boe_corpus"]
     boe_manifest_validation = payloads["boe_manifest_validation"]
@@ -697,12 +811,72 @@ def audit_document_provenance_gap(
     economics = payloads["economics"]
     economics_evidence = payloads["economics_evidence"]
     economics_validation = payloads["economics_validation"]
-    if inventory.get("schema_version") != "real_document_format_inventory_v4":
+    if (
+        inventory.get("schema_version")
+        != "real_document_format_inventory_v7_xlsx_contract_bound"
+        or inventory.get("inventory_algorithm_version")
+        != "real_document_inventory_v7_xlsx_xml_phonetic_bounded"
+    ):
         raise ReadinessError("document gap inventory contract version mismatch")
+    inventory_bounded = inventory.get("bounded_execution") or {}
+    if (
+        inventory_bounded.get("ordering") != "sqlite_path_order"
+        or inventory_bounded.get("inventory_rows_materialized_in_memory") is not False
+        or inventory_bounded.get("filesystem_paths_materialized_in_memory") is not False
+        or inventory_bounded.get("fetch_batch_rows") != 256
+        or inventory_bounded.get("max_in_flight_per_worker") != 2
+        or not isinstance(inventory_bounded.get("xlsx_workers_max"), int)
+        or isinstance(inventory_bounded.get("xlsx_workers_max"), bool)
+        or not 1 <= int(inventory_bounded["xlsx_workers_max"]) <= 2
+    ):
+        raise ReadinessError("document inventory bounded-execution contract failed")
     if audit.get("schema_version") != "real_document_provenance_audit_v13":
         raise ReadinessError("document gap audit contract version mismatch")
     if queue.get("schema_version") != "document_provenance_gap_queue_v1":
         raise ReadinessError("document gap queue contract version mismatch")
+    xlsx_lineage_path = evidence_paths["xlsx_lineage"]
+    xlsx_manifest = xlsx_cohort.get("manifest") or {}
+    xlsx_totals = xlsx_cohort.get("totals") or {}
+    xlsx_policy = xlsx_cohort.get("policy") or {}
+    xlsx_bounded = xlsx_cohort.get("bounded_execution") or {}
+    (
+        xlsx_lineage_rows,
+        xlsx_lineage_distinct_contents,
+        xlsx_lineage_raw_bytes,
+        xlsx_lineage_by_source,
+    ) = summarize_xlsx_lineage(xlsx_lineage_path)
+    if (
+        xlsx_cohort.get("schema_version") != "real_xlsx_cohort_v2"
+        or xlsx_cohort.get("status") != "mapped_unverified"
+        or not all(value is True for value in (xlsx_cohort.get("checks") or {}).values())
+        or xlsx_policy.get("synthetic_or_mock_records_counted") is not False
+        or xlsx_policy.get("official_public_domain_personal_information_retained")
+        is not True
+        or xlsx_policy.get(
+            "path_inferred_source_urls_are_not_checksum_proven_provenance"
+        )
+        is not True
+        or xlsx_bounded.get("inventory_input_ordering")
+        != "strict_path_order_verified"
+        or xlsx_bounded.get("lineage_rows_materialized_in_memory") is not False
+        or xlsx_bounded.get("distinct_content_tracking") != "sqlite_disk_backed"
+        or xlsx_bounded.get("manifest_write") != "streaming_atomic_replace"
+        or xlsx_manifest.get("path") != contract["xlsx_lineage"]
+        or xlsx_manifest.get("rows") != xlsx_lineage_rows
+        or xlsx_manifest.get("bytes") != xlsx_lineage_path.stat().st_size
+        or xlsx_manifest.get("sha256") != sha256_file(xlsx_lineage_path)
+        or xlsx_totals.get("checksum_bound_retrieval_receipts") != 0
+        or xlsx_totals.get("file_instances") != xlsx_lineage_rows
+        or xlsx_totals.get("distinct_content_objects")
+        != xlsx_lineage_distinct_contents
+        or xlsx_totals.get("duplicate_file_instances")
+        != xlsx_lineage_rows - xlsx_lineage_distinct_contents
+        or xlsx_totals.get("raw_bytes") != xlsx_lineage_raw_bytes
+        or xlsx_totals.get("source_url_mappings") != xlsx_lineage_rows
+        or xlsx_cohort.get("by_source_id")
+        != dict(sorted(xlsx_lineage_by_source.items()))
+    ):
+        raise ReadinessError("real XLSX cohort/source-mapping contract failed")
     if inventory.get("status") != "ok":
         raise ReadinessError("document gap inventory is not clean")
     if not (audit.get("checks") or {}).get("integrity_passed"):
@@ -732,6 +906,32 @@ def audit_document_provenance_gap(
     eligible_files = _require_nonnegative_int(
         inventory_totals.get("files"), "document inventory files"
     )
+    inventory_xlsx_instances = _require_nonnegative_int(
+        inventory_totals.get("xlsx_files"), "document inventory XLSX instances"
+    )
+    audit_xlsx_manifests = audit.get("xlsx_document_lineage_manifests") or []
+    if (
+        xlsx_lineage_rows != inventory_xlsx_instances
+        or inventory_totals.get("xlsx_formula_cells") != 0
+        or xlsx_totals.get("file_instances") != inventory_xlsx_instances
+        or xlsx_totals.get("source_url_mappings") != inventory_xlsx_instances
+        or _require_nonnegative_int(
+            xlsx_totals.get("distinct_content_objects"),
+            "XLSX distinct content objects",
+        )
+        > inventory_xlsx_instances
+        or len(audit_xlsx_manifests) != 1
+        or audit_xlsx_manifests[0].get("path") != contract["xlsx_lineage"]
+        or audit_xlsx_manifests[0].get("bytes") != xlsx_lineage_path.stat().st_size
+        or audit_xlsx_manifests[0].get("sha256")
+        != sha256_file(xlsx_lineage_path)
+        or audit_xlsx_manifests[0].get("rows") != inventory_xlsx_instances
+        or audit_xlsx_manifests[0].get("accepted_checksum_captures") != 0
+        or audit_xlsx_manifests[0].get("inferred_source_url_mappings")
+        != inventory_xlsx_instances
+        or audit_xlsx_manifests[0].get("status") != "partial"
+    ):
+        raise ReadinessError("real XLSX mapping/provenance totals drifted")
     compared_file_totals = {
         eligible_files,
         _require_nonnegative_int(audit_totals.get("files"), "document audit files"),
@@ -761,14 +961,14 @@ def audit_document_provenance_gap(
         raise ReadinessError("BOE document corpus real-data policy failed")
     processing_contracts = {
         "native_extraction": ("real_document_text_extraction_v1", {"ok"}),
-        "native_validation": ("real_document_text_validation_v1", {"ok"}),
+        "native_validation": ("real_document_text_validation_v2", {"ok"}),
         "native_generation_audit": (
             "real_document_generation_lifecycle_audit_v1",
             {"ok"},
         ),
-        "text_locators": ("real_document_text_locator_extraction_v1", {"ok"}),
+        "text_locators": ("real_document_text_locator_extraction_v2", {"ok"}),
         "text_locator_validation": (
-            "real_document_text_locator_validation_v1",
+            "real_document_text_locator_validation_v2",
             {"ok"},
         ),
         "text_locator_generation_audit": (
@@ -841,6 +1041,108 @@ def audit_document_provenance_gap(
             is not True
         ):
             raise ReadinessError(f"document {key} real-data policy failed")
+    if (
+        native_extraction.get("extraction_algorithm_version")
+        != "document_extraction_v4_pdf_markup_xlsx_phonetic_bounded"
+        or native_validation.get("extraction_algorithm_version")
+        != "document_extraction_v4_pdf_markup_xlsx_phonetic_bounded"
+        or (text_locators.get("configuration") or {}).get(
+            "locator_algorithm_version"
+        )
+        != "document_text_locator_v6_markup_sections_xlsx_cross_sheet_row_groups"
+        or (text_locator_validation.get("configuration") or {}).get(
+            "locator_algorithm_version"
+        )
+        != "document_text_locator_v6_markup_sections_xlsx_cross_sheet_row_groups"
+        or (text_locators.get("configuration") or {}).get(
+            "max_xlsx_span_chars"
+        )
+        != 4_194_304
+        or (text_locator_validation.get("configuration") or {}).get(
+            "max_xlsx_span_chars"
+        )
+        != 4_194_304
+        or (text_locators.get("configuration") or {}).get(
+            "max_xlsx_locators_per_content"
+        )
+        != 10
+        or (text_locator_validation.get("configuration") or {}).get(
+            "max_xlsx_locators_per_content"
+        )
+        != 10
+        or (document_profile.get("configuration") or {}).get(
+            "profile_algorithm_version"
+        )
+        != "document_profile_v2"
+        or (document_profile_validation.get("configuration") or {}).get(
+            "profile_algorithm_version"
+        )
+        != "document_profile_v2"
+        or (native_extraction.get("policy") or {}).get(
+            "xlsx_observed_public_cell_values_retained"
+        )
+        is not True
+        or (native_extraction.get("policy") or {}).get(
+            "xlsx_formula_extraction_implemented_but_not_observed_in_real_cohort"
+        )
+        is not True
+        or (native_extraction.get("policy") or {}).get(
+            "xlsx_public_phonetic_annotations_retained"
+        )
+        is not True
+        or (native_extraction.get("policy") or {}).get(
+            "xlsx_text_truncation_forbidden"
+        )
+        is not True
+        or "xlsx_public_cell_values_and_formulas_retained"
+        in (native_extraction.get("policy") or {})
+    ):
+        raise ReadinessError("document processing algorithm versions drifted")
+
+    native_validation_totals = native_validation.get("totals") or {}
+    native_validation_scope = native_validation.get("validation_scope") or {}
+    native_validation_policy = native_validation.get("policy") or {}
+    if (
+        native_validation_scope.get("xlsx_raw_to_cas_validator")
+        != "openpyxl_semantic_plus_independent_openxml_phonetic_replay_v2"
+        or native_validation_scope.get("xlsx_raw_to_cas_workers") != 2
+        or native_validation_scope.get("xlsx_raw_to_cas_fetch_batch_rows") != 4
+        or native_validation_scope.get("xlsx_raw_to_cas_max_in_flight") != 4
+        or native_validation_policy.get(
+            "xlsx_public_phonetic_annotations_independently_replayed"
+        )
+        is not True
+        or native_validation_policy.get("xlsx_formula_validation_status")
+        != "not_observed_in_real_cohort"
+        or native_validation_totals.get("xlsx_file_instances")
+        != inventory_xlsx_instances
+        or native_validation_totals.get("xlsx_distinct_content_objects")
+        != xlsx_totals.get("distinct_content_objects")
+        or native_validation_totals.get(
+            "xlsx_distinct_content_objects_raw_to_cas_replayed"
+        )
+        != xlsx_totals.get("distinct_content_objects")
+        or _require_nonnegative_int(
+            native_validation_totals.get("xlsx_worksheets_raw_to_cas_replayed"),
+            "independently replayed XLSX worksheets",
+        )
+        < 1
+        or _require_nonnegative_int(
+            native_validation_totals.get("xlsx_nonempty_rows_raw_to_cas_replayed"),
+            "independently replayed XLSX rows",
+        )
+        < 1
+        or _require_nonnegative_int(
+            native_validation_totals.get("xlsx_nonempty_cells_raw_to_cas_replayed"),
+            "independently replayed XLSX cells",
+        )
+        < 1
+        or native_validation_totals.get(
+            "xlsx_formula_cells_observed_in_real_cohort"
+        )
+        != 0
+    ):
+        raise ReadinessError("independent XLSX raw-to-CAS validation drifted")
 
     for key, payload, expected_dataset, producer in (
         (
@@ -919,9 +1221,18 @@ def audit_document_provenance_gap(
     restore_manifest = local_origin_clean_restore.get("manifest") or {}
     restored = local_origin_clean_restore.get("restored") or {}
     expected_origin_classes = {
-        "raw_document": 120_757,
-        "native_text": 119_338,
-        "ocr_text": 131,
+        "raw_document": _require_nonnegative_int(
+            (native_extraction.get("totals") or {}).get("distinct_content_objects"),
+            "native distinct content objects",
+        ),
+        "native_text": _require_nonnegative_int(
+            (native_extraction.get("totals") or {}).get("text_cas_files"),
+            "native text CAS files",
+        ),
+        "ocr_text": _require_nonnegative_int(
+            (page_ocr.get("totals") or {}).get("ocr_text_cas_files"),
+            "OCR text CAS files",
+        ),
     }
     if (
         local_origin_replication.get("backend") != "filesystem"
@@ -965,7 +1276,8 @@ def audit_document_provenance_gap(
         or local_origin_packaging.get("remote_publication_performed") is not False
         or pack_plan.get("objects") != sum(expected_origin_classes.values())
         or pack_plan.get("payload_bytes") != restore_manifest.get("bytes")
-        or pack_plan.get("packs") != 25
+        or _require_nonnegative_int(pack_plan.get("packs"), "origin pack count")
+        < max(1, (sum(expected_origin_classes.values()) + 9_999) // 10_000)
         or int(pack_plan.get("max_objects") or 0) > 10_000
         or int(pack_plan.get("max_payload_bytes") or 0) > 448 * 1024 * 1024
         or pack_states != {"succeeded": pack_plan.get("packs")}
@@ -1383,10 +1695,39 @@ def audit_document_provenance_gap(
 
     economics_meta = economics.get("meta") or {}
     economics_policy = economics.get("policy") or {}
+    economics_checks = economics.get("checks") or {}
+    native_economics_current = economics.get("native_extraction") or {}
+    ocr_economics_current = economics.get("page_ocr") or {}
+    economics_optional_benchmark_checks = {
+        "native_cold_output_benchmark_available",
+        "ocr_cold_output_benchmark_available",
+    }
     if (
         economics_meta.get("schema_version") != "document_factory_economics_v1"
         or economics_meta.get("status") != "partial_measured_local"
-        or not all(value is True for value in (economics.get("checks") or {}).values())
+        or not economics_checks
+        or any(
+            value is not True
+            for key, value in economics_checks.items()
+            if key not in economics_optional_benchmark_checks
+        )
+        or not economics_optional_benchmark_checks.issubset(economics_checks)
+        or economics_checks.get("native_cold_output_benchmark_available")
+        is not native_economics_current.get("cold_state_and_output")
+        or economics_checks.get("ocr_cold_output_benchmark_available")
+        is not ocr_economics_current.get("cold_state_and_output")
+        or native_economics_current.get("measurement_status")
+        != (
+            "cold_physical_run"
+            if native_economics_current.get("cold_state_and_output") is True
+            else "current_full_real_warm_output_run"
+        )
+        or ocr_economics_current.get("measurement_status")
+        != (
+            "cold_physical_run"
+            if ocr_economics_current.get("cold_state_and_output") is True
+            else "current_full_real_warm_output_run"
+        )
         or economics_policy.get("synthetic_or_mock_records") != "forbidden"
         or economics_policy.get("public_domain_personal_information") != "retained"
         or economics_policy.get("unmeasured_values") != "null_not_zero"
@@ -1401,6 +1742,33 @@ def audit_document_provenance_gap(
     ):
         raise ReadinessError("document economics independent validation failed")
     economics_validation_inputs = economics_validation.get("inputs") or {}
+    economics_inputs = economics.get("inputs") or {}
+    for key, current_path in {
+        "inventory": evidence_paths["inventory"],
+        "native_extraction": evidence_paths["native_extraction"],
+        "native_validation": evidence_paths["native_validation"],
+        "page_ocr": evidence_paths["page_ocr"],
+        "page_ocr_validation": evidence_paths["page_ocr_validation"],
+    }.items():
+        producer_descriptor = economics_inputs.get(key) or {}
+        validator_descriptor = economics_validation_inputs.get(key) or {}
+        expected_sha256 = sha256_file(current_path)
+        expected_bytes = current_path.stat().st_size
+        if (
+            producer_descriptor.get("sha256") != expected_sha256
+            or producer_descriptor.get("bytes") != expected_bytes
+            or validator_descriptor.get("sha256") != expected_sha256
+            or validator_descriptor.get("bytes") != expected_bytes
+        ):
+            raise ReadinessError(
+                f"document economics {key} input is not current-generation evidence"
+            )
+    if economics_inputs.get("document_fetch_operations") != (
+        economics_validation_inputs.get("document_fetch_operations")
+    ):
+        raise ReadinessError(
+            "document economics fetch-operation semantic input drifted"
+        )
     if (
         (economics_validation_inputs.get("public_artifact") or {}).get("sha256")
         != sha256_file(evidence_paths["economics"])
@@ -1844,6 +2212,32 @@ def audit_document_provenance_gap(
         locator_totals.get("markup_section_locators"),
         "native text semantic markup-section locators",
     )
+    locator_xlsx_rows = _require_nonnegative_int(
+        locator_totals.get("xlsx_row_group_locators"),
+        "native text XLSX row-group locators",
+    )
+    locator_xlsx_content_objects = _require_nonnegative_int(
+        locator_totals.get("xlsx_content_objects"),
+        "native text XLSX content objects",
+    )
+    locator_xlsx_average = locator_totals.get(
+        "average_xlsx_locator_rows_per_content"
+    )
+    if (
+        isinstance(locator_xlsx_average, bool)
+        or not isinstance(locator_xlsx_average, (int, float))
+    ):
+        raise ReadinessError("native text XLSX locator average is invalid")
+    locator_xlsx_maximum = _require_nonnegative_int(
+        locator_totals.get("max_xlsx_locator_rows_per_content"),
+        "native text maximum XLSX locators per content",
+    )
+    locator_xlsx_projection = _require_nonnegative_int(
+        locator_totals.get(
+            "projected_xlsx_locator_rows_at_one_million_xlsx_documents"
+        ),
+        "projected XLSX locator rows at one million contents",
+    )
     locator_no_text_rows = _require_nonnegative_int(
         locator_totals.get("document_no_text_locators"),
         "native text no-text locators",
@@ -1867,9 +2261,24 @@ def audit_document_provenance_gap(
             locator_pdf_pages
             + locator_markup_section_rows
             + locator_span_rows
+            + locator_xlsx_rows
             + locator_no_text_rows
         )
         or locator_markup_section_rows < 1
+        or locator_xlsx_rows < 1
+        or locator_xlsx_content_objects
+        != _require_nonnegative_int(
+            xlsx_totals.get("distinct_content_objects"),
+            "XLSX cohort distinct content objects",
+        )
+        or locator_xlsx_content_objects < 1
+        or locator_xlsx_rows > locator_xlsx_content_objects * 10
+        or round(locator_xlsx_rows / locator_xlsx_content_objects, 6)
+        != float(locator_xlsx_average)
+        or locator_xlsx_maximum > 10
+        or locator_xlsx_projection
+        != round(locator_xlsx_rows / locator_xlsx_content_objects * 1_000_000)
+        or locator_xlsx_projection > 10_000_000
         or locator_manifest.get("rows") != locator_instance_rows
         or locator_native_input.get("path") != native_current_manifest.get("path")
         or locator_native_input.get("sha256") != native_current_manifest.get("sha256")
@@ -1965,12 +2374,24 @@ def audit_document_provenance_gap(
             profile_format_counts.get("pdf"), "document profile PDF format count"
         )
         != profile_pdf_instances
-        or profile_office_instances != 0
-        or profile_format_coverage.get("observed_office_extensions") != []
+        or profile_office_instances != inventory_xlsx_instances
+        or _require_nonnegative_int(
+            profile_format_counts.get("xlsx"), "document profile XLSX format count"
+        )
+        != inventory_xlsx_instances
+        or profile_format_coverage.get("observed_office_extensions") != ["xlsx"]
+        or profile_format_coverage.get("supported_office_extensions") != ["xlsx"]
         or profile_format_coverage.get("representative_office_format_cohort_present")
         is not False
-        or profile_format_coverage.get("office_extraction_support_claimed") is not False
-        or profile_format_coverage.get("reason") != "real_office_format_cohort_absent"
+        or profile_format_coverage.get("representative_office_format_cohort_reason")
+        != "not_established_by_xlsx_only_cohort"
+        or profile_format_coverage.get("office_extraction_support_claimed") is not True
+        or profile_format_coverage.get(
+            "independent_office_extraction_validation_bound"
+        )
+        is not False
+        or profile_format_coverage.get("reason")
+        != "observed_real_xlsx_cohort_extracted_only"
         or profile_pdf_instances
         != _require_nonnegative_int(inventory_totals.get("pdf_files"), "PDF files")
         or profile_machine_candidates + profile_unknown_language != eligible_files
@@ -1997,6 +2418,16 @@ def audit_document_provenance_gap(
             encryption_counts.get("not_encrypted"), "unencrypted PDF instances"
         )
         != profile_pdf_instances
+        or _require_nonnegative_int(
+            encryption_counts.get("not_applicable_office_archive"),
+            "office-archive encryption-not-applicable instances",
+        )
+        != inventory_xlsx_instances
+        or _require_nonnegative_int(
+            encryption_counts.get("not_applicable_plain_markup"),
+            "plain-markup encryption-not-applicable instances",
+        )
+        != eligible_files - profile_pdf_instances - inventory_xlsx_instances
     ):
         raise ReadinessError("document language/encryption profile totals drifted")
     if (
@@ -2208,10 +2639,20 @@ def audit_document_provenance_gap(
     acquisition_economics = economics.get("acquisition") or {}
     monetary_economics = economics.get("monetary_cost") or {}
     if (
-        not isinstance(native_economics.get("distinct_content_objects"), int)
-        or native_economics.get("distinct_content_objects", 0) <= 0
-        or not isinstance(ocr_economics.get("candidate_pages"), int)
-        or ocr_economics.get("candidate_pages", 0) <= 0
+        native_economics.get("distinct_content_objects") != native_distinct_content
+        or native_economics.get("file_instances") != native_file_instances
+        or native_economics.get("native_text_chars") != native_chars
+        or native_economics.get("failures") != 0
+        or native_economics.get("cold_state_and_output")
+        is not ((native_extraction.get("performance") or {}).get(
+            "cold_state_and_output"
+        ) is True)
+        or ocr_economics.get("candidate_pages") != ocr_pages
+        or ocr_economics.get("documents") != ocr_documents
+        or ocr_economics.get("ocr_text_chars") != ocr_chars
+        or ocr_economics.get("failures") != 0
+        or ocr_economics.get("cold_state_and_output")
+        is not ((page_ocr.get("performance") or {}).get("cold_state_and_output") is True)
         or acquisition_economics.get("documents_succeeded") != fetch_expected_rows
         or int(acquisition_economics.get("network_requests_started") or 0)
         < fetch_expected_rows
@@ -2302,6 +2743,15 @@ def audit_document_provenance_gap(
         "native_text_locator_pdf_pages": locator_pdf_pages,
         "native_text_locator_markup_sections": locator_markup_section_rows,
         "native_text_locator_normalized_spans": locator_span_rows,
+        "native_text_locator_xlsx_content_objects": locator_xlsx_content_objects,
+        "native_text_locator_xlsx_row_groups": locator_xlsx_rows,
+        "native_text_locator_xlsx_average_rows_per_content": float(
+            locator_xlsx_average
+        ),
+        "native_text_locator_xlsx_max_rows_per_content": locator_xlsx_maximum,
+        "native_text_locator_xlsx_projected_rows_at_one_million": (
+            locator_xlsx_projection
+        ),
         "native_text_locator_replayed_content_objects": _require_nonnegative_int(
             locator_validation_totals.get("content_objects_replayed"),
             "native text locator replayed content objects",

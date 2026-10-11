@@ -1,0 +1,854 @@
+{
+  "schema_version": "placsp_acquisition_inventory_v1",
+  "generated_at": "2026-09-26T06:54:47.675805+00:00",
+  "catalogs": [
+    {
+      "family": "main",
+      "catalog_url": "https://www.hacienda.gob.es/es-ES/GobiernoAbierto/Datos%20Abiertos/Paginas/licitacionescontratante.aspx",
+      "as_of_date": "2026-09-26",
+      "discovered_at": "2026-09-26T06:43:03+00:00",
+      "status": "ok",
+      "expected": {
+        "closed_year_annual_archives": 14,
+        "current_year_monthly_archives": 9,
+        "selected_archives": 23
+      },
+      "missing": {
+        "annual_periods": [],
+        "monthly_periods": []
+      },
+      "report_sha256": "c34ac6c93b0873120f8e53c04c9e7169a2805afafa6082787bf08d3ba2c94980"
+    },
+    {
+      "family": "minor",
+      "catalog_url": "https://www.hacienda.gob.es/es-ES/GobiernoAbierto/Datos%20Abiertos/Paginas/ContratosMenores.aspx",
+      "as_of_date": "2026-09-26",
+      "discovered_at": "2026-09-26T06:43:03+00:00",
+      "status": "ok",
+      "expected": {
+        "closed_year_annual_archives": 8,
+        "current_year_monthly_archives": 9,
+        "selected_archives": 17
+      },
+      "missing": {
+        "annual_periods": [],
+        "monthly_periods": []
+      },
+      "report_sha256": "6f083fe983311f17766726e0141034672f7b93fe301041b321c57ff0b20efce9"
+    },
+    {
+      "family": "aggregated",
+      "catalog_url": "https://www.hacienda.gob.es/es-ES/GobiernoAbierto/Datos%20Abiertos/Paginas/LicitacionesAgregacion.aspx",
+      "as_of_date": "2026-09-26",
+      "discovered_at": "2026-09-26T06:43:03+00:00",
+      "status": "ok",
+      "expected": {
+        "closed_year_annual_archives": 10,
+        "current_year_monthly_archives": 9,
+        "selected_archives": 19
+      },
+      "missing": {
+        "annual_periods": [],
+        "monthly_periods": []
+      },
+      "report_sha256": "a221a11cedec69205ef1b31f0859695cfa96da33f0f4c02d2a93531ae5aff2c9"
+    }
+  ],
+  "archives": [
+    {
+      "period": "2012",
+      "archive_kind": "annual",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2012.zip",
+      "family": "main",
+      "period_closed": true,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "2013",
+      "archive_kind": "annual",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2013.zip",
+      "family": "main",
+      "period_closed": true,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "2014",
+      "archive_kind": "annual",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2014.zip",
+      "family": "main",
+      "period_closed": true,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "2015",
+      "archive_kind": "annual",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2015.zip",
+      "family": "main",
+      "period_closed": true,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "2016",
+      "archive_kind": "annual",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2016.zip",
+      "family": "main",
+      "period_closed": true,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "2017",
+      "archive_kind": "annual",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2017.zip",
+      "family": "main",
+      "period_closed": true,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "2018",
+      "archive_kind": "annual",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2018.zip",
+      "family": "main",
+      "period_closed": true,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "2019",
+      "archive_kind": "annual",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2019.zip",
+      "family": "main",
+      "period_closed": true,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "2020",
+      "archive_kind": "annual",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2020.zip",
+      "family": "main",
+      "period_closed": true,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "2021",
+      "archive_kind": "annual",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2021.zip",
+      "family": "main",
+      "period_closed": true,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "2022",
+      "archive_kind": "annual",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2022.zip",
+      "family": "main",
+      "period_closed": true,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "2023",
+      "archive_kind": "annual",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2023.zip",
+      "family": "main",
+      "period_closed": true,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "2024",
+      "archive_kind": "annual",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2024.zip",
+      "family": "main",
+      "period_closed": true,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "2025",
+      "archive_kind": "annual",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_2025.zip",
+      "family": "main",
+      "period_closed": true,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "202601",
+      "archive_kind": "monthly",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202601.zip",
+      "family": "main",
+      "period_closed": true,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "202602",
+      "archive_kind": "monthly",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202602.zip",
+      "family": "main",
+      "period_closed": true,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "202603",
+      "archive_kind": "monthly",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202603.zip",
+      "family": "main",
+      "period_closed": true,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "202604",
+      "archive_kind": "monthly",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202604.zip",
+      "family": "main",
+      "period_closed": true,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "202605",
+      "archive_kind": "monthly",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202605.zip",
+      "family": "main",
+      "period_closed": true,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "202606",
+      "archive_kind": "monthly",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202606.zip",
+      "family": "main",
+      "period_closed": true,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "202607",
+      "archive_kind": "monthly",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202607.zip",
+      "family": "main",
+      "period_closed": true,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "202608",
+      "archive_kind": "monthly",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202608.zip",
+      "family": "main",
+      "period_closed": true,
+      "local_captures": [
+        {
+          "period": "202608",
+          "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202608.zip",
+          "content_sha256": "8102117be989b4c8289f731281da12f8bd25eb102a403a3bd464f43989e51b05",
+          "bytes": 160085565,
+          "status": "ok",
+          "members_total": 104,
+          "uncompressed_bytes": 1570294774,
+          "fetched_at": "2026-09-26T06:44:40+00:00",
+          "raw_file_exists": true,
+          "database": "placsp-throughput-20260926.db"
+        }
+      ],
+      "acquisition_state": "captured_requires_member_reconciliation"
+    },
+    {
+      "period": "202609",
+      "archive_kind": "monthly",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202609.zip",
+      "family": "main",
+      "period_closed": false,
+      "local_captures": [
+        {
+          "period": "202609",
+          "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202609.zip",
+          "content_sha256": "116eae2a361ffead75045a95a396fdc9b9b75168a4aabb2aa992f33b31b16061",
+          "bytes": 23271981,
+          "status": "ok",
+          "members_total": 17,
+          "uncompressed_bytes": 240494734,
+          "fetched_at": "2026-09-07T20:43:23+00:00",
+          "raw_file_exists": true,
+          "database": "placsp-national-20260907.db"
+        }
+      ],
+      "acquisition_state": "captured_requires_member_reconciliation"
+    },
+    {
+      "period": "2018",
+      "archive_kind": "annual",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_1143/contratosMenoresPerfilesContratantes_2018.zip",
+      "family": "minor",
+      "period_closed": true,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "2019",
+      "archive_kind": "annual",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_1143/contratosMenoresPerfilesContratantes_2019.zip",
+      "family": "minor",
+      "period_closed": true,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "2020",
+      "archive_kind": "annual",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_1143/contratosMenoresPerfilesContratantes_2020.zip",
+      "family": "minor",
+      "period_closed": true,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "2021",
+      "archive_kind": "annual",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_1143/contratosMenoresPerfilesContratantes_2021.zip",
+      "family": "minor",
+      "period_closed": true,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "2022",
+      "archive_kind": "annual",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_1143/contratosMenoresPerfilesContratantes_2022.zip",
+      "family": "minor",
+      "period_closed": true,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "2023",
+      "archive_kind": "annual",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_1143/contratosMenoresPerfilesContratantes_2023.zip",
+      "family": "minor",
+      "period_closed": true,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "2024",
+      "archive_kind": "annual",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_1143/contratosMenoresPerfilesContratantes_2024.zip",
+      "family": "minor",
+      "period_closed": true,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "2025",
+      "archive_kind": "annual",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_1143/contratosMenoresPerfilesContratantes_2025.zip",
+      "family": "minor",
+      "period_closed": true,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "202601",
+      "archive_kind": "monthly",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_1143/contratosMenoresPerfilesContratantes_202601.zip",
+      "family": "minor",
+      "period_closed": true,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "202602",
+      "archive_kind": "monthly",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_1143/contratosMenoresPerfilesContratantes_202602.zip",
+      "family": "minor",
+      "period_closed": true,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "202603",
+      "archive_kind": "monthly",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_1143/contratosMenoresPerfilesContratantes_202603.zip",
+      "family": "minor",
+      "period_closed": true,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "202604",
+      "archive_kind": "monthly",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_1143/contratosMenoresPerfilesContratantes_202604.zip",
+      "family": "minor",
+      "period_closed": true,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "202605",
+      "archive_kind": "monthly",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_1143/contratosMenoresPerfilesContratantes_202605.zip",
+      "family": "minor",
+      "period_closed": true,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "202606",
+      "archive_kind": "monthly",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_1143/contratosMenoresPerfilesContratantes_202606.zip",
+      "family": "minor",
+      "period_closed": true,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "202607",
+      "archive_kind": "monthly",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_1143/contratosMenoresPerfilesContratantes_202607.zip",
+      "family": "minor",
+      "period_closed": true,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "202608",
+      "archive_kind": "monthly",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_1143/contratosMenoresPerfilesContratantes_202608.zip",
+      "family": "minor",
+      "period_closed": true,
+      "local_captures": [
+        {
+          "period": "202608",
+          "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_1143/contratosMenoresPerfilesContratantes_202608.zip",
+          "content_sha256": "bea1bb67dbd854bdaae7ce8e7be467fde9a75788b7fe0c19b02615d2d8221527",
+          "bytes": 16778544,
+          "status": "ok",
+          "members_total": 57,
+          "uncompressed_bytes": 282238917,
+          "fetched_at": "2026-09-26T06:47:41+00:00",
+          "raw_file_exists": true,
+          "database": "placsp-minor-throughput-20260926.db"
+        }
+      ],
+      "acquisition_state": "captured_requires_member_reconciliation"
+    },
+    {
+      "period": "202609",
+      "archive_kind": "monthly",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_1143/contratosMenoresPerfilesContratantes_202609.zip",
+      "family": "minor",
+      "period_closed": false,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "2016",
+      "archive_kind": "annual",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_1044/PlataformasAgregadasSinMenores_2016.zip",
+      "family": "aggregated",
+      "period_closed": true,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "2017",
+      "archive_kind": "annual",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_1044/PlataformasAgregadasSinMenores_2017.zip",
+      "family": "aggregated",
+      "period_closed": true,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "2018",
+      "archive_kind": "annual",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_1044/PlataformasAgregadasSinMenores_2018.zip",
+      "family": "aggregated",
+      "period_closed": true,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "2019",
+      "archive_kind": "annual",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_1044/PlataformasAgregadasSinMenores_2019.zip",
+      "family": "aggregated",
+      "period_closed": true,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "2020",
+      "archive_kind": "annual",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_1044/PlataformasAgregadasSinMenores_2020.zip",
+      "family": "aggregated",
+      "period_closed": true,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "2021",
+      "archive_kind": "annual",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_1044/PlataformasAgregadasSinMenores_2021.zip",
+      "family": "aggregated",
+      "period_closed": true,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "2022",
+      "archive_kind": "annual",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_1044/PlataformasAgregadasSinMenores_2022.zip",
+      "family": "aggregated",
+      "period_closed": true,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "2023",
+      "archive_kind": "annual",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_1044/PlataformasAgregadasSinMenores_2023.zip",
+      "family": "aggregated",
+      "period_closed": true,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "2024",
+      "archive_kind": "annual",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_1044/PlataformasAgregadasSinMenores_2024.zip",
+      "family": "aggregated",
+      "period_closed": true,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "2025",
+      "archive_kind": "annual",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_1044/PlataformasAgregadasSinMenores_2025.zip",
+      "family": "aggregated",
+      "period_closed": true,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "202601",
+      "archive_kind": "monthly",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_1044/PlataformasAgregadasSinMenores_202601.zip",
+      "family": "aggregated",
+      "period_closed": true,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "202602",
+      "archive_kind": "monthly",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_1044/PlataformasAgregadasSinMenores_202602.zip",
+      "family": "aggregated",
+      "period_closed": true,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "202603",
+      "archive_kind": "monthly",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_1044/PlataformasAgregadasSinMenores_202603.zip",
+      "family": "aggregated",
+      "period_closed": true,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "202604",
+      "archive_kind": "monthly",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_1044/PlataformasAgregadasSinMenores_202604.zip",
+      "family": "aggregated",
+      "period_closed": true,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "202605",
+      "archive_kind": "monthly",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_1044/PlataformasAgregadasSinMenores_202605.zip",
+      "family": "aggregated",
+      "period_closed": true,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "202606",
+      "archive_kind": "monthly",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_1044/PlataformasAgregadasSinMenores_202606.zip",
+      "family": "aggregated",
+      "period_closed": true,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "202607",
+      "archive_kind": "monthly",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_1044/PlataformasAgregadasSinMenores_202607.zip",
+      "family": "aggregated",
+      "period_closed": true,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    },
+    {
+      "period": "202608",
+      "archive_kind": "monthly",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_1044/PlataformasAgregadasSinMenores_202608.zip",
+      "family": "aggregated",
+      "period_closed": true,
+      "local_captures": [
+        {
+          "period": "202608",
+          "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_1044/PlataformasAgregadasSinMenores_202608.zip",
+          "content_sha256": "3d8c9fa8cfbdfadaa45d192db88f3cc782723eab46644570d7559a2698e73820",
+          "bytes": 10151362,
+          "status": "ok",
+          "members_total": 37,
+          "uncompressed_bytes": 199144794,
+          "fetched_at": "2026-09-26T06:49:43+00:00",
+          "raw_file_exists": true,
+          "database": "placsp-aggregated-throughput-20260926.db"
+        }
+      ],
+      "acquisition_state": "captured_requires_member_reconciliation"
+    },
+    {
+      "period": "202609",
+      "archive_kind": "monthly",
+      "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_1044/PlataformasAgregadasSinMenores_202609.zip",
+      "family": "aggregated",
+      "period_closed": false,
+      "local_captures": [],
+      "acquisition_state": "not_present_in_queried_databases"
+    }
+  ],
+  "holdings": [
+    {
+      "file": "placsp-national-20260907.db",
+      "bytes": 183963648,
+      "state": "queried_read_only",
+      "archives": [
+        {
+          "period": "202609",
+          "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202609.zip",
+          "content_sha256": "116eae2a361ffead75045a95a396fdc9b9b75168a4aabb2aa992f33b31b16061",
+          "bytes": 23271981,
+          "status": "ok",
+          "members_total": 17,
+          "uncompressed_bytes": 240494734,
+          "fetched_at": "2026-09-07T20:43:23+00:00",
+          "raw_file_exists": true
+        }
+      ],
+      "records": {
+        "versions": 8235,
+        "distinct_contract_ids": 7625,
+        "first_update": "2021-09-29T14:31:55.605+02:00",
+        "last_update": "2026-09-03T20:02:33.151+02:00"
+      },
+      "result_rows_all_versions": [
+        {
+          "result_code": "3",
+          "rows": 689
+        },
+        {
+          "result_code": "4",
+          "rows": 49
+        },
+        {
+          "result_code": "5",
+          "rows": 2
+        },
+        {
+          "result_code": "8",
+          "rows": 4562
+        },
+        {
+          "result_code": "9",
+          "rows": 4309
+        }
+      ]
+    },
+    {
+      "file": "placsp-contracts-real-s1-20260811.db.tar.zst",
+      "bytes": 1076212731,
+      "state": "archived_not_queried"
+    },
+    {
+      "file": "placsp-throughput-20260926.db",
+      "bytes": 1052540928,
+      "state": "queried_read_only",
+      "archives": [
+        {
+          "period": "202608",
+          "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202608.zip",
+          "content_sha256": "8102117be989b4c8289f731281da12f8bd25eb102a403a3bd464f43989e51b05",
+          "bytes": 160085565,
+          "status": "ok",
+          "members_total": 104,
+          "uncompressed_bytes": 1570294774,
+          "fetched_at": "2026-09-26T06:44:40+00:00",
+          "raw_file_exists": true
+        }
+      ],
+      "records": {
+        "versions": 51998,
+        "distinct_contract_ids": 34901,
+        "first_update": "2021-09-29T14:31:55.605+02:00",
+        "last_update": "2026-08-31T20:02:55.859+02:00"
+      },
+      "result_rows_all_versions": [
+        {
+          "result_code": "3",
+          "rows": 3298
+        },
+        {
+          "result_code": "4",
+          "rows": 316
+        },
+        {
+          "result_code": "5",
+          "rows": 52
+        },
+        {
+          "result_code": "8",
+          "rows": 22133
+        },
+        {
+          "result_code": "9",
+          "rows": 20469
+        }
+      ]
+    },
+    {
+      "file": "placsp-minor-throughput-20260926.db",
+      "bytes": 142553088,
+      "state": "queried_read_only",
+      "archives": [
+        {
+          "period": "202608",
+          "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_1143/contratosMenoresPerfilesContratantes_202608.zip",
+          "content_sha256": "bea1bb67dbd854bdaae7ce8e7be467fde9a75788b7fe0c19b02615d2d8221527",
+          "bytes": 16778544,
+          "status": "ok",
+          "members_total": 57,
+          "uncompressed_bytes": 282238917,
+          "fetched_at": "2026-09-26T06:47:41+00:00",
+          "raw_file_exists": true
+        }
+      ],
+      "records": {
+        "versions": 28091,
+        "distinct_contract_ids": 27758,
+        "first_update": "2026-07-30T17:57:38.495+02:00",
+        "last_update": "2026-08-31T20:24:57.103+02:00"
+      },
+      "result_rows_all_versions": [
+        {
+          "result_code": "3",
+          "rows": 163
+        },
+        {
+          "result_code": "4",
+          "rows": 11
+        },
+        {
+          "result_code": "5",
+          "rows": 11
+        },
+        {
+          "result_code": "8",
+          "rows": 27317
+        },
+        {
+          "result_code": "9",
+          "rows": 811
+        }
+      ]
+    },
+    {
+      "file": "placsp-aggregated-throughput-20260926.db",
+      "bytes": 134373376,
+      "state": "queried_read_only",
+      "archives": [
+        {
+          "period": "202608",
+          "source_url": "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_1044/PlataformasAgregadasSinMenores_202608.zip",
+          "content_sha256": "3d8c9fa8cfbdfadaa45d192db88f3cc782723eab46644570d7559a2698e73820",
+          "bytes": 10151362,
+          "status": "ok",
+          "members_total": 37,
+          "uncompressed_bytes": 199144794,
+          "fetched_at": "2026-09-26T06:49:43+00:00",
+          "raw_file_exists": true
+        }
+      ],
+      "records": {
+        "versions": 18323,
+        "distinct_contract_ids": 12806,
+        "first_update": "2026-07-30T13:41:48.388+02:00",
+        "last_update": "2026-09-01T02:00:22.307+02:00"
+      },
+      "result_rows_all_versions": [
+        {
+          "result_code": "3",
+          "rows": 1763
+        },
+        {
+          "result_code": "4",
+          "rows": 142
+        },
+        {
+          "result_code": "5",
+          "rows": 19
+        },
+        {
+          "result_code": "8",
+          "rows": 10128
+        },
+        {
+          "result_code": "9",
+          "rows": 15887
+        }
+      ]
+    }
+  ],
+  "capacity": {
+    "free_bytes": 23265550336,
+    "sized_archives": 0,
+    "selected_archives": 59,
+    "remote_compressed_bytes_known": 0
+  },
+  "national_record_denominator": null,
+  "limitations": [
+    "Catalog containers are not contracts, awards, or proof of national coverage.",
+    "HEAD size is transport planning evidence, not a downloaded checksum or completeness proof.",
+    "Mutable current-month captures require refresh even when a local archive exists.",
+    "Archived databases are preserved and not counted as currently queryable holdings.",
+    "Cross-family and cross-period identifiers require reconciliation before adding record counts.",
+    "Other PLACSP datasets, direct regional/local sources and TED remain separate universe gaps."
+  ],
+  "storage_transitions_after_inventory": [
+    "docs/etl/sprints/DINERO-NACIONAL-20260926/evidence/cohort-compression.json",
+    "docs/etl/sprints/DINERO-NACIONAL-20260926/evidence/minor-2018-run/storage-archive.json",
+    "docs/etl/sprints/DINERO-NACIONAL-20260926/evidence/minor-2019-run/storage-archive.json"
+  ],
+  "completed_cohorts_after_inventory": "docs/etl/sprints/DINERO-NACIONAL-20260926/evidence/execution-summary.json"
+}

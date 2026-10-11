@@ -34,3 +34,15 @@ object-store = ["boto3>=1.34"]
 [tool.setuptools.packages.find]
 include = ["publicdata_*", "publicdata_*.*"]
 exclude = ["etl*", "scripts*", "tests*", "ui*", "docs*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+norecursedirs = [
+  ".cache",
+  ".git",
+  "etl/data",
+  "node_modules",
+  "outputs",
+  "ui/gh-pages-next/.next",
+  "ui/gh-pages-next/out",
+]

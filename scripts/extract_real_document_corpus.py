@@ -25,6 +25,7 @@ if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 from publicdata_docs.extraction import (
+    DEFAULT_MAX_XLSX_TEXT_CHARS,
     DOCUMENT_EXTRACTION_ALGORITHM_VERSION,
     DocumentExtraction,
     extract_document_path,
@@ -47,6 +48,9 @@ DEFAULT_REPORT = Path(
 SHA256_HEX_LENGTH = 64
 DEFAULT_MANIFEST_SHARD_MAX_ROWS = 10_000
 DEFAULT_MANIFEST_SHARD_MAX_UNCOMPRESSED_BYTES = 64 * 1024 * 1024
+EXTRACTION_STATE_CONFIGURATION_SCHEMA = (
+    "real_document_text_extraction_effective_configuration_v1"
+)
 
 
 class CorpusExtractionError(RuntimeError):
@@ -135,7 +139,11 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--max-attempts", type=int, default=3)
     parser.add_argument("--lease-seconds", type=int, default=900)
     parser.add_argument("--max-input-bytes", type=int, default=128 * 1024 * 1024)
-    parser.add_argument("--max-text-chars", type=int, default=16_000_000)
+    parser.add_argument(
+        "--max-text-chars",
+        type=int,
+        default=DEFAULT_MAX_XLSX_TEXT_CHARS,
+    )
     parser.add_argument("--enforce", action="store_true")
     return parser.parse_args(argv)
 
@@ -250,6 +258,36 @@ def _insert_metadata(conn: sqlite3.Connection, values: Mapping[str, object]) -> 
     )
 
 
+def effective_extraction_configuration(
+    *,
+    max_attempts: int,
+    max_input_bytes: int,
+    max_text_chars: int,
+) -> dict[str, Any]:
+    """Return every setting that can change a persisted extraction outcome."""
+
+    return {
+        "schema_version": EXTRACTION_STATE_CONFIGURATION_SCHEMA,
+        "extraction_algorithm_version": DOCUMENT_EXTRACTION_ALGORITHM_VERSION,
+        "max_attempts": int(max_attempts),
+        "max_input_bytes": int(max_input_bytes),
+        "max_text_chars": int(max_text_chars),
+    }
+
+
+def canonical_configuration_json(configuration: Mapping[str, Any]) -> str:
+    return json.dumps(
+        configuration,
+        ensure_ascii=True,
+        sort_keys=True,
+        separators=(",", ":"),
+    )
+
+
+def configuration_sha256(configuration_json: str) -> str:
+    return hashlib.sha256(configuration_json.encode("utf-8")).hexdigest()
+
+
 def seed_state(
     conn: sqlite3.Connection,
     *,
@@ -257,9 +295,22 @@ def seed_state(
     inventory_path: Path,
     provenance_path: Path,
     max_attempts: int,
+    max_input_bytes: int,
+    max_text_chars: int,
 ) -> dict[str, int]:
     inventory_sha256 = sha256_path(inventory_path)
     provenance_sha256 = sha256_path(provenance_path)
+    effective_configuration = effective_extraction_configuration(
+        max_attempts=max_attempts,
+        max_input_bytes=max_input_bytes,
+        max_text_chars=max_text_chars,
+    )
+    effective_configuration_json = canonical_configuration_json(
+        effective_configuration
+    )
+    effective_configuration_sha256 = configuration_sha256(
+        effective_configuration_json
+    )
     metadata = _metadata(conn)
     if metadata:
         if (
@@ -267,9 +318,13 @@ def seed_state(
             or metadata.get("provenance_sha256") != provenance_sha256
             or metadata.get("extraction_algorithm_version")
             != DOCUMENT_EXTRACTION_ALGORITHM_VERSION
+            or metadata.get("effective_configuration_json")
+            != effective_configuration_json
+            or metadata.get("effective_configuration_sha256")
+            != effective_configuration_sha256
         ):
             raise CorpusExtractionError(
-                "state DB belongs to different inputs/extractor version; "
+                "state DB belongs to different inputs/effective configuration; "
                 "use a new --state-db so prior evidence remains immutable"
             )
         return {
@@ -419,10 +474,12 @@ def seed_state(
     _insert_metadata(
         conn,
         {
-            "schema_version": "real_document_text_extraction_state_v1",
+            "schema_version": "real_document_text_extraction_state_v2",
             "inventory_sha256": inventory_sha256,
             "provenance_sha256": provenance_sha256,
             "extraction_algorithm_version": DOCUMENT_EXTRACTION_ALGORITHM_VERSION,
+            "effective_configuration_json": effective_configuration_json,
+            "effective_configuration_sha256": effective_configuration_sha256,
             "file_instances": inventory_rows,
             "distinct_content_objects": int(distinct_contents),
             "seeded_at": utc_now(),
@@ -815,8 +872,15 @@ def build_report(
     manifest: dict[str, Any],
     run_totals: dict[str, int],
     performance: dict[str, Any],
+    effective_configuration: Mapping[str, Any],
 ) -> dict[str, Any]:
     metadata = _metadata(conn)
+    expected_configuration_json = canonical_configuration_json(
+        effective_configuration
+    )
+    expected_configuration_sha256 = configuration_sha256(
+        expected_configuration_json
+    )
     state_counts = {
         str(row["state"]): int(row["total"])
         for row in conn.execute(
@@ -891,6 +955,12 @@ def build_report(
             "extraction_algorithm_version"
         )
         == DOCUMENT_EXTRACTION_ALGORITHM_VERSION,
+        "effective_configuration_bound_before_state_reuse": (
+            metadata.get("effective_configuration_json")
+            == expected_configuration_json
+            and metadata.get("effective_configuration_sha256")
+            == expected_configuration_sha256
+        ),
         "all_file_instances_manifested": (
             int(instance_row["file_instances"]) == int(manifest["rows"])
         ),
@@ -921,8 +991,14 @@ def build_report(
             "raw_document_bytes_are_not_copied_into_work_rows": True,
             "content_deduplicated_processing": True,
             "pdf_plain_text_angle_brackets_retained": True,
+            "xlsx_observed_public_cell_values_retained": True,
+            "xlsx_public_phonetic_annotations_retained": True,
+            "xlsx_formula_extraction_implemented_but_not_observed_in_real_cohort": True,
+            "xlsx_text_truncation_forbidden": True,
         },
         "extraction_algorithm_version": DOCUMENT_EXTRACTION_ALGORITHM_VERSION,
+        "effective_configuration": dict(effective_configuration),
+        "effective_configuration_sha256": expected_configuration_sha256,
         "inputs": {
             "inventory": {
                 "path": display_path(inventory_path),
@@ -1030,6 +1106,8 @@ def main(argv: list[str] | None = None) -> int:
                 inventory_path=inventory_path,
                 provenance_path=provenance_path,
                 max_attempts=int(args.max_attempts),
+                max_input_bytes=int(args.max_input_bytes),
+                max_text_chars=int(args.max_text_chars),
             )
             run_totals = run_worker(
                 conn,
@@ -1091,6 +1169,11 @@ def main(argv: list[str] | None = None) -> int:
                 manifest=manifest,
                 run_totals=run_totals,
                 performance=performance,
+                effective_configuration=effective_extraction_configuration(
+                    max_attempts=int(args.max_attempts),
+                    max_input_bytes=int(args.max_input_bytes),
+                    max_text_chars=int(args.max_text_chars),
+                ),
             )
         report["seed"] = seeded
         write_json_atomic(report_out, report)

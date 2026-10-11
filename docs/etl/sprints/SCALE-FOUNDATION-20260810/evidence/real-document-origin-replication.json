@@ -10,9 +10,9 @@
   },
   "clean_room_restore_proven": false,
   "durable_public_origin_proven": false,
-  "generated_at": "2026-08-30T12:02:48.941649Z",
+  "generated_at": "2026-08-30T19:59:33.203105Z",
   "inputs": {
-    "native_manifest_sha256": "e5e7aa2ec3d7f80d036885b2ff214da58b8ee9532dc647e5336cde1578a147a9",
+    "native_manifest_sha256": "ae41313c9de9e071191ceb1802b148f5f5409a4ad234f9a015826c79ddf439d0",
     "native_root_contract": "etl/data/derived/real-document-text-corpus-v2",
     "ocr_manifest_sha256": "deb426b8928f336df15f256a5701bfe294add242bd0a9e688fbf31086fd97f67",
     "ocr_root_contract": "etl/data/derived/real-document-page-ocr-v2",
@@ -20,39 +20,39 @@
   },
   "manifest": {
     "bytes": 9512,
-    "compressed_bytes": 17796398,
-    "logical_sha256": "e415e5eb2e7a13c6c0c3abbda75a974e82b20bfb970a66f7fc96f7d33468e405",
+    "compressed_bytes": 17802184,
+    "logical_sha256": "dccf2a5fa6acea74e509e0706a6dfd32e716a6a6ea1e9a3a3720f0d38f6bd431",
     "path": "etl/data/manifests/real-document-origin-replicas.json",
     "publication": {
       "activated": true,
-      "active_history_path": "real-document-origin-replicas-history/12187efc092f50bc42f0c965b3dda5d1cb618702c4b128b715eb3c168fd7d443.json",
-      "active_logical_sha256": "e415e5eb2e7a13c6c0c3abbda75a974e82b20bfb970a66f7fc96f7d33468e405",
-      "active_manifest_sha256": "12187efc092f50bc42f0c965b3dda5d1cb618702c4b128b715eb3c168fd7d443",
-      "active_receipt_path": "real-document-origin-replicas-receipts/12187efc092f50bc42f0c965b3dda5d1cb618702c4b128b715eb3c168fd7d443.json",
+      "active_history_path": "real-document-origin-replicas-history/53834363c57d753600c6e61abcecf494d67d60e9854ed07f653f4e4d0dd8aa45.json",
+      "active_logical_sha256": "dccf2a5fa6acea74e509e0706a6dfd32e716a6a6ea1e9a3a3720f0d38f6bd431",
+      "active_manifest_sha256": "53834363c57d753600c6e61abcecf494d67d60e9854ed07f653f4e4d0dd8aa45",
+      "active_receipt_path": "real-document-origin-replicas-receipts/53834363c57d753600c6e61abcecf494d67d60e9854ed07f653f4e4d0dd8aa45.json",
       "automatic_deletion_performed": false,
       "legacy_equivalent_jsonl_migrated": false,
       "live_index_changed": true,
       "live_index_switched_last": true,
-      "predecessor_manifest_sha256": "83401a2eff6ad45a16e00e8b8352fe0f5430ad589e0064b9b431752c38705181",
+      "predecessor_manifest_sha256": "12187efc092f50bc42f0c965b3dda5d1cb618702c4b128b715eb3c168fd7d443",
       "state_snapshot": {
-        "bytes": 216473600,
-        "compressed_bytes": 58938999,
-        "compressed_sha256": "16ccc94a1c940260dfd94a0791a910c957ab573e212dc9a79bd9fc929083a4cb",
-        "path": "real-document-origin-replicas-state/def30a0de7371c7322124815725ab45682712c9e3a738d3de8075e10cbaa5ce4.sqlite.gz",
-        "sha256": "def30a0de7371c7322124815725ab45682712c9e3a738d3de8075e10cbaa5ce4",
+        "bytes": 216268800,
+        "compressed_bytes": 58892638,
+        "compressed_sha256": "9d572f76f3b848f26eb73ebe00c08c70c5200221fed4a86b960d3f671a63591d",
+        "path": "real-document-origin-replicas-state/36bcac5a08cd210b84a7eac8c4ef9c9e24e16446989c8ae8924a65050db5a88b.sqlite.gz",
+        "sha256": "36bcac5a08cd210b84a7eac8c4ef9c9e24e16446989c8ae8924a65050db5a88b",
         "sqlite_quick_check": "ok"
       },
       "superseded_predecessor": true
     },
-    "rows": 240226,
-    "sha256": "12187efc092f50bc42f0c965b3dda5d1cb618702c4b128b715eb3c168fd7d443",
+    "rows": 240278,
+    "sha256": "53834363c57d753600c6e61abcecf494d67d60e9854ed07f653f4e4d0dd8aa45",
     "shard_files": 25,
-    "uncompressed_bytes": 158489689
+    "uncompressed_bytes": 158525943
   },
   "next_action": "Run the full bounded clean-restore validator. Then replicate the same exact generation to an authorized immutable public origin; local filesystem proof must never be presented as durable public origin.",
   "performance": {
     "claim_size": 48,
-    "elapsed_seconds": 147.773152,
+    "elapsed_seconds": 177.214853,
     "workers": 12
   },
   "policy": {
@@ -65,20 +65,20 @@
     "terminal_only_manifest_activation": true
   },
   "run": {
-    "attempted": 240226,
+    "attempted": 240278,
     "failed": 0,
     "reclaimed_expired_leases": 0,
-    "succeeded": 240226
+    "succeeded": 240278
   },
   "schema_version": "real_document_origin_replication_v1",
   "seeded": {
-    "native_text": 119338,
+    "native_text": 119346,
     "ocr_text": 131,
-    "raw_document": 120757,
-    "total": 240226
+    "raw_document": 120801,
+    "total": 240278
   },
   "state_counts": {
-    "succeeded": 240226
+    "succeeded": 240278
   },
   "status": "ok"
 }

@@ -1,0 +1,21 @@
+{
+  "command": [
+    "python3",
+    "scripts/ingest_placsp_archives.py",
+    "--db",
+    "etl/data/staging/placsp-minor-throughput-20260926.db",
+    "--pipeline-id",
+    "placsp-minor-202608-benchmark-20260926",
+    "--report-out",
+    "docs/etl/sprints/DINERO-NACIONAL-20260926/evidence/minor-members.json",
+    "work-members",
+    "--max-items",
+    "57",
+    "--claim-size",
+    "1",
+    "--min-free-bytes",
+    "16106127360"
+  ],
+  "elapsed_seconds": 16.437235499965027,
+  "returncode": 0
+}

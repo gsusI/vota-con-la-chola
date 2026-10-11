@@ -1,0 +1,79 @@
+{
+  "mismatching_successful_rows": 2036,
+  "fields": {
+    "counterparty_identifier": 2036
+  },
+  "examples": [
+    {
+      "money_fact_id": "contract_award:00000000000000057228",
+      "fields": [
+        "counterparty_identifier"
+      ],
+      "string_whitespace_only": false
+    },
+    {
+      "money_fact_id": "contract_award:00000000000000057229",
+      "fields": [
+        "counterparty_identifier"
+      ],
+      "string_whitespace_only": false
+    },
+    {
+      "money_fact_id": "contract_award:00000000000000070613",
+      "fields": [
+        "counterparty_identifier"
+      ],
+      "string_whitespace_only": false
+    },
+    {
+      "money_fact_id": "contract_award:00000000000000252055",
+      "fields": [
+        "counterparty_identifier"
+      ],
+      "string_whitespace_only": false
+    },
+    {
+      "money_fact_id": "contract_award:00000000000000010083",
+      "fields": [
+        "counterparty_identifier"
+      ],
+      "string_whitespace_only": false
+    },
+    {
+      "money_fact_id": "contract_award:00000000000000052181",
+      "fields": [
+        "counterparty_identifier"
+      ],
+      "string_whitespace_only": false
+    },
+    {
+      "money_fact_id": "contract_award:00000000000000064607",
+      "fields": [
+        "counterparty_identifier"
+      ],
+      "string_whitespace_only": false
+    },
+    {
+      "money_fact_id": "contract_award:00000000000000064610",
+      "fields": [
+        "counterparty_identifier"
+      ],
+      "string_whitespace_only": false
+    },
+    {
+      "money_fact_id": "contract_award:00000000000000173579",
+      "fields": [
+        "counterparty_identifier"
+      ],
+      "string_whitespace_only": false
+    },
+    {
+      "money_fact_id": "contract_award:00000000000000245705",
+      "fields": [
+        "counterparty_identifier"
+      ],
+      "string_whitespace_only": false
+    }
+  ],
+  "scope": "frozen parquet successful codes 8 and 9 before full publication gates"
+}
