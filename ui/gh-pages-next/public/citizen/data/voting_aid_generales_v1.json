@@ -1,7 +1,7 @@
 {
  "meta": {
   "schema_version": "voting_aid_snapshot_v1",
-  "generated_at": "2026-10-11T20:21:50+00:00",
+  "generated_at": "2026-10-11T20:37:50+00:00",
   "election": "generales",
   "legislature": "15",
   "institution": "Congreso de los Diputados",
@@ -17,22 +17,23 @@
    "direction_balance": "Las afirmaciones se redactan en ambos sentidos para que responder siempre «de acuerdo» no favorezca a un bloque; se comprueba con el reparto PSOE/PP."
   },
   "votes_first_date": "2024-02-27",
-  "votes_last_date": "2026-02-12",
+  "votes_last_date": "2026-09-22",
   "quality": {
-   "statements_total": 27,
-   "votes_total": 31,
+   "statements_total": 32,
+   "votes_total": 39,
    "votes_missing": [],
-   "cells_total": 324,
+   "cells_total": 384,
    "cells_by_position": {
-    "abstain": 22,
-    "agree": 179,
-    "disagree": 116,
-    "mixed": 5,
+    "abstain": 29,
+    "agree": 213,
+    "disagree": 131,
+    "mixed": 9,
     "no_data": 2
    },
    "unmapped_member_votes": {
-    "José Luis Ábalos Meco": 30,
-    "Àgueda Micó Micó": 9
+    "Francisco Javier Ortega Smith-Molina": 2,
+    "José Luis Ábalos Meco": 31,
+    "Àgueda Micó Micó": 17
    },
    "direction_balance": {
     "reference_parties": [
@@ -40,8 +41,8 @@
      "pp"
     ],
     "agree_sides_only_with": {
-     "psoe": 10,
-     "pp": 10
+     "psoe": 14,
+     "pp": 12
     }
    }
   },
@@ -110,6 +111,10 @@
   {
    "member_name": "Àgueda Micó Micó",
    "reason": "Compromís; en el Grupo Mixto solo desde julio de 2025."
+  },
+  {
+   "member_name": "Francisco Javier Ortega Smith-Molina",
+   "reason": "Pasó del grupo VOX al Grupo Mixto el 2026-07-23 (cambio de group_code); no consta con qué partido concurrirá."
   }
  ],
  "statements": [
@@ -602,67 +607,67 @@
    "statement_id": "vivienda-okupacion",
    "concern_id": "vivienda",
    "text": "Hay que acelerar por ley el desalojo de viviendas ocupadas ilegalmente.",
-   "context": "Proposición orgánica de medidas urgentes frente a la ocupación ilegal.",
+   "context": "Proposiciones orgánicas de Junts (2025) y del PP (2026) contra la ocupación ilegal.",
    "cells": {
     "psoe": {
-     "position": "agree",
-     "votes_with_data": 1,
-     "votes_total": 1
+     "position": "mixed",
+     "votes_with_data": 2,
+     "votes_total": 2
     },
     "pp": {
      "position": "agree",
-     "votes_with_data": 1,
-     "votes_total": 1
+     "votes_with_data": 2,
+     "votes_total": 2
     },
     "vox": {
      "position": "agree",
-     "votes_with_data": 1,
-     "votes_total": 1
+     "votes_with_data": 2,
+     "votes_total": 2
     },
     "sumar": {
      "position": "disagree",
-     "votes_with_data": 1,
-     "votes_total": 1
+     "votes_with_data": 2,
+     "votes_total": 2
     },
     "podemos": {
      "position": "disagree",
-     "votes_with_data": 1,
-     "votes_total": 1
+     "votes_with_data": 2,
+     "votes_total": 2
     },
     "erc": {
      "position": "disagree",
-     "votes_with_data": 1,
-     "votes_total": 1
+     "votes_with_data": 2,
+     "votes_total": 2
     },
     "junts": {
-     "position": "agree",
-     "votes_with_data": 1,
-     "votes_total": 1
+     "position": "mixed",
+     "votes_with_data": 2,
+     "votes_total": 2
     },
     "bildu": {
      "position": "disagree",
-     "votes_with_data": 1,
-     "votes_total": 1
+     "votes_with_data": 2,
+     "votes_total": 2
     },
     "pnv": {
-     "position": "agree",
-     "votes_with_data": 1,
-     "votes_total": 1
+     "position": "mixed",
+     "votes_with_data": 2,
+     "votes_total": 2
     },
     "bng": {
      "position": "disagree",
-     "votes_with_data": 1,
-     "votes_total": 1
+     "votes_with_data": 2,
+     "votes_total": 2
     },
     "cc": {
      "position": "agree",
-     "votes_with_data": 1,
-     "votes_total": 1
+     "votes_with_data": 2,
+     "votes_total": 2
     },
     "upn": {
      "position": "agree",
-     "votes_with_data": 1,
-     "votes_total": 1
+     "votes_with_data": 2,
+     "votes_total": 2
     }
    },
    "votes": [
@@ -769,6 +774,306 @@
        "yes": 1,
        "no": 0,
        "abstain": 0,
+       "not_voting": 0
+      },
+      "upn": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 1,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      }
+     }
+    },
+    {
+     "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion179/20260519/Votacion001/VOT_20260519203502.json",
+     "found": true,
+     "vote_date": "2026-05-19",
+     "title": "Proposición de Ley del Grupo Parlamentario Popular en el Congreso, Orgánica contra la ocupación ilegal de inmuebles y para la convivencia vecinal y la protección de la seguridad de las personas y cosas en las comunidades de propietarios.",
+     "subgroup": "",
+     "totals": {
+      "yes": 171,
+      "no": 164,
+      "abstain": 11
+     },
+     "agree_vote": "Sí",
+     "note": "Toma en consideración de la proposición del PP contra la ocupación ilegal de inmuebles y por la convivencia vecinal (aprobada).",
+     "text_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-304-1.PDF",
+     "source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion179/20260519/Votacion001/VOT_20260519203502.json",
+     "explorer_member_votes": "../explorer/?t=parl_vote_member_votes&wc=vote_event_id&wv=url%3Ahttps%3A%2F%2Fwww.congreso.es%2Fwebpublica%2Fopendata%2Fvotaciones%2FLeg15%2FSesion179%2F20260519%2FVotacion001%2FVOT_20260519203502.json",
+     "party_votes": {
+      "psoe": {
+       "choice": "No",
+       "position": "disagree",
+       "yes": 0,
+       "no": 119,
+       "abstain": 0,
+       "not_voting": 2
+      },
+      "pp": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 136,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 1
+      },
+      "vox": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 33,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "sumar": {
+       "choice": "No",
+       "position": "disagree",
+       "yes": 0,
+       "no": 26,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "podemos": {
+       "choice": "No",
+       "position": "disagree",
+       "yes": 0,
+       "no": 4,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "erc": {
+       "choice": "No",
+       "position": "disagree",
+       "yes": 0,
+       "no": 7,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "junts": {
+       "choice": "Abstención",
+       "position": "abstain",
+       "yes": 0,
+       "no": 0,
+       "abstain": 6,
+       "not_voting": 1
+      },
+      "bildu": {
+       "choice": "No",
+       "position": "disagree",
+       "yes": 0,
+       "no": 6,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "pnv": {
+       "choice": "Abstención",
+       "position": "abstain",
+       "yes": 0,
+       "no": 0,
+       "abstain": 5,
+       "not_voting": 0
+      },
+      "bng": {
+       "choice": "No",
+       "position": "disagree",
+       "yes": 0,
+       "no": 1,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "cc": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 1,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "upn": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 1,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      }
+     }
+    }
+   ]
+  },
+  {
+   "statement_id": "vivienda-planes-urbanisticos",
+   "concern_id": "vivienda",
+   "text": "Habría que limitar quién puede recurrir los planes urbanísticos y evitar que una sentencia anule planes enteros, para construir vivienda más rápido.",
+   "context": "La proposición del PP restringe la acción pública en urbanismo y permite subsanar planes en lugar de anularlos en cascada.",
+   "cells": {
+    "psoe": {
+     "position": "disagree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "pp": {
+     "position": "agree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "vox": {
+     "position": "agree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "sumar": {
+     "position": "disagree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "podemos": {
+     "position": "disagree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "erc": {
+     "position": "disagree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "junts": {
+     "position": "agree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "bildu": {
+     "position": "disagree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "pnv": {
+     "position": "abstain",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "bng": {
+     "position": "disagree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "cc": {
+     "position": "abstain",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "upn": {
+     "position": "agree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    }
+   },
+   "votes": [
+    {
+     "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion173/20260421/Votacion001/VOT_20260421201008.json",
+     "found": true,
+     "vote_date": "2026-04-21",
+     "title": "Proposición de Ley del Grupo Parlamentario Popular en el Congreso, de medidas administrativas y procesales para la seguridad jurídica de la ordenación territorial y urbanística, el impulso del desarrollo urbano y la vivienda.",
+     "subgroup": "",
+     "totals": {
+      "yes": 178,
+      "no": 163,
+      "abstain": 6
+     },
+     "agree_vote": "Sí",
+     "note": "Toma en consideración de la proposición del PP de seguridad jurídica de la ordenación territorial y urbanística (aprobada).",
+     "text_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-303-1.PDF",
+     "source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion173/20260421/Votacion001/VOT_20260421201008.json",
+     "explorer_member_votes": "../explorer/?t=parl_vote_member_votes&wc=vote_event_id&wv=url%3Ahttps%3A%2F%2Fwww.congreso.es%2Fwebpublica%2Fopendata%2Fvotaciones%2FLeg15%2FSesion173%2F20260421%2FVotacion001%2FVOT_20260421201008.json",
+     "party_votes": {
+      "psoe": {
+       "choice": "No",
+       "position": "disagree",
+       "yes": 0,
+       "no": 119,
+       "abstain": 0,
+       "not_voting": 2
+      },
+      "pp": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 137,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "vox": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 33,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "sumar": {
+       "choice": "No",
+       "position": "disagree",
+       "yes": 0,
+       "no": 25,
+       "abstain": 0,
+       "not_voting": 1
+      },
+      "podemos": {
+       "choice": "No",
+       "position": "disagree",
+       "yes": 0,
+       "no": 4,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "erc": {
+       "choice": "No",
+       "position": "disagree",
+       "yes": 0,
+       "no": 7,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "junts": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 7,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "bildu": {
+       "choice": "No",
+       "position": "disagree",
+       "yes": 0,
+       "no": 6,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "pnv": {
+       "choice": "Abstención",
+       "position": "abstain",
+       "yes": 0,
+       "no": 0,
+       "abstain": 5,
+       "not_voting": 0
+      },
+      "bng": {
+       "choice": "No",
+       "position": "disagree",
+       "yes": 0,
+       "no": 1,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "cc": {
+       "choice": "Abstención",
+       "position": "abstain",
+       "yes": 0,
+       "no": 0,
+       "abstain": 1,
        "not_voting": 0
       },
       "upn": {
@@ -1315,6 +1620,191 @@
        "position": "disagree",
        "yes": 0,
        "no": 1,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "cc": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 1,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "upn": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 1,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      }
+     }
+    }
+   ]
+  },
+  {
+   "statement_id": "empleo-jubilacion-40-anos",
+   "concern_id": "empleo",
+   "text": "Quien ha cotizado 40 años debería poder jubilarse anticipadamente sin recorte en su pensión.",
+   "context": "La proposición elimina los coeficientes reductores de la jubilación anticipada tras 40 años cotizados.",
+   "cells": {
+    "psoe": {
+     "position": "agree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "pp": {
+     "position": "abstain",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "vox": {
+     "position": "disagree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "sumar": {
+     "position": "agree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "podemos": {
+     "position": "agree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "erc": {
+     "position": "agree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "junts": {
+     "position": "agree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "bildu": {
+     "position": "agree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "pnv": {
+     "position": "agree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "bng": {
+     "position": "agree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "cc": {
+     "position": "agree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "upn": {
+     "position": "agree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    }
+   },
+   "votes": [
+    {
+     "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion199/20260922/Votacion002/VOT_20260922205122.json",
+     "found": true,
+     "vote_date": "2026-09-22",
+     "title": "Proposición de Ley del Grupo Parlamentario Mixto, de jubilación sin penalización.",
+     "subgroup": "",
+     "totals": {
+      "yes": 178,
+      "no": 33,
+      "abstain": 136
+     },
+     "agree_vote": "Sí",
+     "note": "Toma en consideración de la proposición del Grupo Mixto de jubilación sin penalización (aprobada).",
+     "text_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-117-1.PDF",
+     "source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion199/20260922/Votacion002/VOT_20260922205122.json",
+     "explorer_member_votes": "../explorer/?t=parl_vote_member_votes&wc=vote_event_id&wv=url%3Ahttps%3A%2F%2Fwww.congreso.es%2Fwebpublica%2Fopendata%2Fvotaciones%2FLeg15%2FSesion199%2F20260922%2FVotacion002%2FVOT_20260922205122.json",
+     "party_votes": {
+      "psoe": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 121,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "pp": {
+       "choice": "Abstención",
+       "position": "abstain",
+       "yes": 0,
+       "no": 0,
+       "abstain": 136,
+       "not_voting": 1
+      },
+      "vox": {
+       "choice": "No",
+       "position": "disagree",
+       "yes": 0,
+       "no": 32,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "sumar": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 26,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "podemos": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 4,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "erc": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 7,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "junts": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 6,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 1
+      },
+      "bildu": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 6,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "pnv": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 4,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 1
+      },
+      "bng": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 1,
+       "no": 0,
        "abstain": 0,
        "not_voting": 0
       },
@@ -2082,67 +2572,67 @@
    "statement_id": "transporte-bonos",
    "concern_id": "transporte",
    "text": "El Estado debería seguir abaratando el transporte público con bonos y descuentos.",
-   "context": "Ambos decretos financian descuentos de transporte público colectivo para jóvenes.",
+   "context": "Los decretos financian descuentos en abonos de transporte público y para jóvenes en verano.",
    "cells": {
     "psoe": {
      "position": "agree",
-     "votes_with_data": 2,
-     "votes_total": 2
+     "votes_with_data": 4,
+     "votes_total": 4
     },
     "pp": {
      "position": "mixed",
-     "votes_with_data": 2,
-     "votes_total": 2
+     "votes_with_data": 4,
+     "votes_total": 4
     },
     "vox": {
      "position": "mixed",
-     "votes_with_data": 2,
-     "votes_total": 2
+     "votes_with_data": 4,
+     "votes_total": 4
     },
     "sumar": {
      "position": "agree",
-     "votes_with_data": 2,
-     "votes_total": 2
+     "votes_with_data": 4,
+     "votes_total": 4
     },
     "podemos": {
      "position": "agree",
-     "votes_with_data": 2,
-     "votes_total": 2
+     "votes_with_data": 4,
+     "votes_total": 4
     },
     "erc": {
      "position": "agree",
-     "votes_with_data": 2,
-     "votes_total": 2
+     "votes_with_data": 4,
+     "votes_total": 4
     },
     "junts": {
-     "position": "agree",
-     "votes_with_data": 2,
-     "votes_total": 2
+     "position": "mixed",
+     "votes_with_data": 4,
+     "votes_total": 4
     },
     "bildu": {
      "position": "agree",
-     "votes_with_data": 2,
-     "votes_total": 2
+     "votes_with_data": 4,
+     "votes_total": 4
     },
     "pnv": {
      "position": "agree",
-     "votes_with_data": 2,
-     "votes_total": 2
+     "votes_with_data": 4,
+     "votes_total": 4
     },
     "bng": {
      "position": "agree",
-     "votes_with_data": 2,
-     "votes_total": 2
+     "votes_with_data": 4,
+     "votes_total": 4
     },
     "cc": {
      "position": "agree",
-     "votes_with_data": 2,
-     "votes_total": 2
+     "votes_with_data": 4,
+     "votes_total": 4
     },
     "upn": {
      "position": "agree",
-     "votes_with_data": 2,
-     "votes_total": 2
+     "votes_with_data": 4,
+     "votes_total": 4
     }
    },
    "votes": [
@@ -2332,6 +2822,236 @@
        "yes": 7,
        "no": 0,
        "abstain": 0,
+       "not_voting": 0
+      },
+      "bildu": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 6,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "pnv": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 5,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "bng": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 1,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "cc": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 1,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "upn": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 1,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      }
+     }
+    },
+    {
+     "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion156/20260127/Votacion002/VOT_20260127153137.json",
+     "found": true,
+     "vote_date": "2026-01-27",
+     "title": "Real Decreto-ley 17/2025, de 23 de diciembre, de medidas de promoción del uso del transporte público mediante la bonificación de abonos y títulos multiviaje.",
+     "subgroup": "",
+     "totals": {
+      "yes": 179,
+      "no": 32,
+      "abstain": 137
+     },
+     "agree_vote": "Sí",
+     "note": "Convalidación del Real Decreto-ley 17/2025 de bonificación de abonos y títulos multiviaje (convalidado).",
+     "text_url": null,
+     "source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion156/20260127/Votacion002/VOT_20260127153137.json",
+     "explorer_member_votes": "../explorer/?t=parl_vote_member_votes&wc=vote_event_id&wv=url%3Ahttps%3A%2F%2Fwww.congreso.es%2Fwebpublica%2Fopendata%2Fvotaciones%2FLeg15%2FSesion156%2F20260127%2FVotacion002%2FVOT_20260127153137.json",
+     "party_votes": {
+      "psoe": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 120,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "pp": {
+       "choice": "Abstención",
+       "position": "abstain",
+       "yes": 0,
+       "no": 0,
+       "abstain": 137,
+       "not_voting": 0
+      },
+      "vox": {
+       "choice": "No",
+       "position": "disagree",
+       "yes": 0,
+       "no": 32,
+       "abstain": 0,
+       "not_voting": 1
+      },
+      "sumar": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 26,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "podemos": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 4,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "erc": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 7,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "junts": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 7,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "bildu": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 6,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "pnv": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 5,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "bng": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 1,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "cc": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 1,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "upn": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 1,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      }
+     }
+    },
+    {
+     "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion191/20260625/Votacion027/VOT_20260625150826.json",
+     "found": true,
+     "vote_date": "2026-06-25",
+     "title": "Real Decreto-ley 14/2026, de 9 de junio, de medidas de promoción del uso del transporte público colectivo por parte de la juventud para los viajes realizados en el periodo estival de 2026.",
+     "subgroup": "",
+     "totals": {
+      "yes": 173,
+      "no": 32,
+      "abstain": 144
+     },
+     "agree_vote": "Sí",
+     "note": "Convalidación del Real Decreto-ley 14/2026 de descuentos de transporte para jóvenes en verano de 2026 (convalidado).",
+     "text_url": null,
+     "source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion191/20260625/Votacion027/VOT_20260625150826.json",
+     "explorer_member_votes": "../explorer/?t=parl_vote_member_votes&wc=vote_event_id&wv=url%3Ahttps%3A%2F%2Fwww.congreso.es%2Fwebpublica%2Fopendata%2Fvotaciones%2FLeg15%2FSesion191%2F20260625%2FVotacion027%2FVOT_20260625150826.json",
+     "party_votes": {
+      "psoe": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 121,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "pp": {
+       "choice": "Abstención",
+       "position": "abstain",
+       "yes": 0,
+       "no": 0,
+       "abstain": 137,
+       "not_voting": 0
+      },
+      "vox": {
+       "choice": "No",
+       "position": "disagree",
+       "yes": 0,
+       "no": 32,
+       "abstain": 0,
+       "not_voting": 1
+      },
+      "sumar": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 26,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "podemos": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 4,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "erc": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 7,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "junts": {
+       "choice": "Abstención",
+       "position": "abstain",
+       "yes": 0,
+       "no": 0,
+       "abstain": 7,
        "not_voting": 0
       },
       "bildu": {
@@ -2741,6 +3461,191 @@
        "position": "agree",
        "yes": 1,
        "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      }
+     }
+    }
+   ]
+  },
+  {
+   "statement_id": "sanidad-eutanasia-recursos",
+   "concern_id": "sanidad",
+   "text": "Los recursos judiciales contra una eutanasia ya autorizada deberían resolverse por un procedimiento urgente.",
+   "context": "La proposición del Parlamento de Cataluña tramita esos recursos por el procedimiento especial y preferente de protección de derechos fundamentales.",
+   "cells": {
+    "psoe": {
+     "position": "agree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "pp": {
+     "position": "disagree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "vox": {
+     "position": "disagree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "sumar": {
+     "position": "agree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "podemos": {
+     "position": "agree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "erc": {
+     "position": "agree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "junts": {
+     "position": "agree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "bildu": {
+     "position": "agree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "pnv": {
+     "position": "agree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "bng": {
+     "position": "agree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "cc": {
+     "position": "agree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "upn": {
+     "position": "disagree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    }
+   },
+   "votes": [
+    {
+     "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion185/20260611/Votacion042/VOT_20260611145754.json",
+     "found": true,
+     "vote_date": "2026-06-11",
+     "title": "Proposición de Ley del Parlamento de Cataluña, de modificación de algunas disposiciones normativas procesales con relación al derecho de morir dignamente.",
+     "subgroup": "",
+     "totals": {
+      "yes": 178,
+      "no": 169,
+      "abstain": 0
+     },
+     "agree_vote": "Sí",
+     "note": "Toma en consideración de la proposición del Parlamento de Cataluña sobre el derecho a morir dignamente (aprobada).",
+     "text_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-333-1.PDF",
+     "source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion185/20260611/Votacion042/VOT_20260611145754.json",
+     "explorer_member_votes": "../explorer/?t=parl_vote_member_votes&wc=vote_event_id&wv=url%3Ahttps%3A%2F%2Fwww.congreso.es%2Fwebpublica%2Fopendata%2Fvotaciones%2FLeg15%2FSesion185%2F20260611%2FVotacion042%2FVOT_20260611145754.json",
+     "party_votes": {
+      "psoe": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 121,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "pp": {
+       "choice": "No",
+       "position": "disagree",
+       "yes": 0,
+       "no": 135,
+       "abstain": 0,
+       "not_voting": 2
+      },
+      "vox": {
+       "choice": "No",
+       "position": "disagree",
+       "yes": 0,
+       "no": 33,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "sumar": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 25,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 1
+      },
+      "podemos": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 4,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "erc": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 7,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "junts": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 7,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "bildu": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 6,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "pnv": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 5,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "bng": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 1,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "cc": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 1,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "upn": {
+       "choice": "No",
+       "position": "disagree",
+       "yes": 0,
+       "no": 1,
        "abstain": 0,
        "not_voting": 0
       }
@@ -4644,6 +5549,191 @@
    ]
   },
   {
+   "statement_id": "corrupcion-registro-lobbies",
+   "concern_id": "corrupcion",
+   "text": "La actividad de los lobbies (grupos de interés) debería regularse por ley, con un registro público obligatorio.",
+   "context": "Real Decreto-ley de transparencia e integridad de las actividades de los grupos de interés.",
+   "cells": {
+    "psoe": {
+     "position": "agree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "pp": {
+     "position": "disagree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "vox": {
+     "position": "disagree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "sumar": {
+     "position": "agree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "podemos": {
+     "position": "abstain",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "erc": {
+     "position": "agree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "junts": {
+     "position": "disagree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "bildu": {
+     "position": "agree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "pnv": {
+     "position": "abstain",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "bng": {
+     "position": "agree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "cc": {
+     "position": "agree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "upn": {
+     "position": "disagree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    }
+   },
+   "votes": [
+    {
+     "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion198/20260916/Votacion016/VOT_20260916195406.json",
+     "found": true,
+     "vote_date": "2026-09-16",
+     "title": "Real Decreto-ley 21/2026, de 25 de agosto, de transparencia e integridad de las actividades de los grupos de interés.",
+     "subgroup": "",
+     "totals": {
+      "yes": 155,
+      "no": 179,
+      "abstain": 12
+     },
+     "agree_vote": "Sí",
+     "note": "Convalidación del Real Decreto-ley 21/2026 de transparencia de los grupos de interés (derogado).",
+     "text_url": null,
+     "source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion198/20260916/Votacion016/VOT_20260916195406.json",
+     "explorer_member_votes": "../explorer/?t=parl_vote_member_votes&wc=vote_event_id&wv=url%3Ahttps%3A%2F%2Fwww.congreso.es%2Fwebpublica%2Fopendata%2Fvotaciones%2FLeg15%2FSesion198%2F20260916%2FVotacion016%2FVOT_20260916195406.json",
+     "party_votes": {
+      "psoe": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 120,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 1
+      },
+      "pp": {
+       "choice": "No",
+       "position": "disagree",
+       "yes": 0,
+       "no": 137,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "vox": {
+       "choice": "No",
+       "position": "disagree",
+       "yes": 0,
+       "no": 32,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "sumar": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 19,
+       "no": 1,
+       "abstain": 3,
+       "not_voting": 3
+      },
+      "podemos": {
+       "choice": "Abstención",
+       "position": "abstain",
+       "yes": 0,
+       "no": 0,
+       "abstain": 4,
+       "not_voting": 0
+      },
+      "erc": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 7,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "junts": {
+       "choice": "No",
+       "position": "disagree",
+       "yes": 0,
+       "no": 7,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "bildu": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 6,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "pnv": {
+       "choice": "Abstención",
+       "position": "abstain",
+       "yes": 0,
+       "no": 0,
+       "abstain": 5,
+       "not_voting": 0
+      },
+      "bng": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 1,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "cc": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 1,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "upn": {
+       "choice": "No",
+       "position": "disagree",
+       "yes": 0,
+       "no": 1,
+       "abstain": 0,
+       "not_voting": 0
+      }
+     }
+    }
+   ]
+  },
+  {
    "statement_id": "igualdad-paridad",
    "concern_id": "igualdad",
    "text": "Las listas electorales, el Gobierno y los consejos de las grandes empresas deberían tener por ley una presencia equilibrada de mujeres y hombres.",
@@ -4822,6 +5912,191 @@
        "yes": 0,
        "no": 1,
        "abstain": 0,
+       "not_voting": 0
+      }
+     }
+    }
+   ]
+  },
+  {
+   "statement_id": "igualdad-terapias-conversion",
+   "concern_id": "igualdad",
+   "text": "Las terapias de conversión que intentan cambiar la orientación sexual o la identidad de género deberían ser delito.",
+   "context": "Nuevo artículo 173 bis del Código Penal: prisión de seis meses a dos años por aplicar terapias de aversión o conversión.",
+   "cells": {
+    "psoe": {
+     "position": "agree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "pp": {
+     "position": "abstain",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "vox": {
+     "position": "disagree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "sumar": {
+     "position": "agree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "podemos": {
+     "position": "agree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "erc": {
+     "position": "agree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "junts": {
+     "position": "agree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "bildu": {
+     "position": "agree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "pnv": {
+     "position": "agree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "bng": {
+     "position": "agree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "cc": {
+     "position": "agree",
+     "votes_with_data": 1,
+     "votes_total": 1
+    },
+    "upn": {
+     "position": "abstain",
+     "votes_with_data": 1,
+     "votes_total": 1
+    }
+   },
+   "votes": [
+    {
+     "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion191/20260625/Votacion022/VOT_20260625150816.json",
+     "found": true,
+     "vote_date": "2026-06-25",
+     "title": "Proposición de Ley Orgánica por la que se modifica la Ley Orgánica 10/1995, de 23 de noviembre, del Código Penal, para penalizar las terapias de conversión dirigidas a eliminar o negar la orientación sexual, identidad sexual o expresión de género.",
+     "subgroup": "Votación de conjunto. Votación de conjunto de la Proposición de Ley Orgánica por la que se modifica la Ley Orgánica 10/1995, de 23 de noviembre, del Código Penal, para penalizar las terapias de conversión dirigidas a eliminar o negar la orientación sexual, identidad sexual o expresión de género, por tener la misma carácter orgánico.",
+     "totals": {
+      "yes": 178,
+      "no": 32,
+      "abstain": 138
+     },
+     "agree_vote": "Sí",
+     "note": "Votación de conjunto de la ley orgánica que penaliza las terapias de conversión (aprobada).",
+     "text_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-240-1.PDF",
+     "source_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion191/20260625/Votacion022/VOT_20260625150816.json",
+     "explorer_member_votes": "../explorer/?t=parl_vote_member_votes&wc=vote_event_id&wv=url%3Ahttps%3A%2F%2Fwww.congreso.es%2Fwebpublica%2Fopendata%2Fvotaciones%2FLeg15%2FSesion191%2F20260625%2FVotacion022%2FVOT_20260625150816.json",
+     "party_votes": {
+      "psoe": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 121,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "pp": {
+       "choice": "Abstención",
+       "position": "abstain",
+       "yes": 0,
+       "no": 0,
+       "abstain": 137,
+       "not_voting": 0
+      },
+      "vox": {
+       "choice": "No",
+       "position": "disagree",
+       "yes": 0,
+       "no": 32,
+       "abstain": 0,
+       "not_voting": 1
+      },
+      "sumar": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 25,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 1
+      },
+      "podemos": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 4,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "erc": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 7,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "junts": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 7,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "bildu": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 6,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "pnv": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 5,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "bng": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 1,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "cc": {
+       "choice": "Sí",
+       "position": "agree",
+       "yes": 1,
+       "no": 0,
+       "abstain": 0,
+       "not_voting": 0
+      },
+      "upn": {
+       "choice": "Abstención",
+       "position": "abstain",
+       "yes": 0,
+       "no": 0,
+       "abstain": 1,
        "not_voting": 0
       }
      }
