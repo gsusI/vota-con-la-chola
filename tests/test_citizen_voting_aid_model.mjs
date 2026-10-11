@@ -151,3 +151,19 @@ test("endless mode: merged questions, balanced order, share v2, milestones, reac
   const g = m.groupDetails([{ answer: "agree", position: "agree" }, { answer: "agree", position: "disagree" }]);
   assert.equal(g.match.length + g.clash.length, 2);
 });
+
+test("podium share text has no answers, only top three", async () => {
+  const { podiumShareText } = await import("../ui/gh-pages-next/app/citizen/vota/votingAidModel.mjs");
+  const text = podiumShareText(
+    [
+      { label: "A", match: 0.8 },
+      { label: "B", match: 0.6 },
+      { label: "C", match: 0.5 },
+      { label: "D", match: 0.4 },
+      { label: "E", match: null },
+    ],
+    42,
+    "https://example.invalid/vota/",
+  );
+  assert.equal(text, "Mi podio en «¿Con quién coincides?» tras 42 votaciones del Congreso:\n🥇 A 80%\n🥈 B 60%\n🥉 C 50%\nhttps://example.invalid/vota/");
+});

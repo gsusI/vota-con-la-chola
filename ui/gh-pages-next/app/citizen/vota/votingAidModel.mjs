@@ -338,3 +338,11 @@ export function decodeAnyShareCode(questions, code) {
     )
   );
 }
+
+/** Spoiler-free, shareable podium text (no answers, just the top parties and how many questions). */
+export function podiumShareText(results, answeredCount, url) {
+  const top = results.filter((r) => r.match !== null).slice(0, 3);
+  const medals = ["🥇", "🥈", "🥉"];
+  const lines = top.map((r, i) => `${medals[i]} ${r.label} ${formatMatch(r.match)}`);
+  return [`Mi podio en «¿Con quién coincides?» tras ${answeredCount} votaciones del Congreso:`, ...lines, url].filter(Boolean).join("\n");
+}

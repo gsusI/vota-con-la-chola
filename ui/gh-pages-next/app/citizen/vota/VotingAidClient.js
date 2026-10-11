@@ -20,6 +20,7 @@ import {
   nextQuestionId,
   partyReactions,
   playOrder,
+  podiumShareText,
   scoreParties,
   shareCodeFromHash,
 } from "./votingAidModel.mjs";
@@ -524,7 +525,7 @@ function PartyView({ row, questionsById, onBack, onEdit }) {
   );
 }
 
-function ResultsView({ results, answeredCount, fromShare, onParty, onPlay, onReview, onShare, onReset, onOwn, shareMessage, method, bestStreak }) {
+function ResultsView({ results, answeredCount, fromShare, onParty, onPlay, onReview, onShare, onSharePodium, onReset, onOwn, shareMessage, method, bestStreak }) {
   const provisional = answeredCount < MIN_ANSWERS_FOR_RANKING;
   return (
     <section aria-label="Resultados" className="votingAidResultsView">
@@ -583,6 +584,11 @@ function ResultsView({ results, answeredCount, fromShare, onParty, onPlay, onRev
             <button className="votingAidButton votingAidButton--primary" onClick={onPlay} type="button">
               Seguir jugando
             </button>
+            {answeredCount >= MIN_ANSWERS_FOR_RANKING ? (
+              <button className="votingAidButton" onClick={onSharePodium} type="button">
+                📣 Compartir mi podio
+              </button>
+            ) : null}
             <button className="votingAidButton" onClick={onReview} type="button">
               Revisar mis respuestas
             </button>
@@ -855,6 +861,21 @@ export default function VotingAidClient({ snapshot }) {
     }
   }
 
+  async function sharePodium() {
+    const url = `${window.location.origin}${window.location.pathname}`;
+    const text = podiumShareText(results, answeredCount, url);
+    try {
+      if (navigator.share) {
+        await navigator.share({ text });
+        return;
+      }
+      await navigator.clipboard.writeText(text);
+      setShareMessage("Podio copiado (sin tus respuestas). ¡Pégalo donde quieras!");
+    } catch {
+      setShareMessage(text);
+    }
+  }
+
   function reset() {
     if (answeredCount > 0 && !window.confirm("¿Borrar todas tus respuestas de este navegador?")) return;
     update({ ...cleanState(null), seed: newSeed() });
@@ -1030,6 +1051,7 @@ export default function VotingAidClient({ snapshot }) {
           onReset={reset}
           onReview={() => show("review")}
           onShare={share}
+          onSharePodium={sharePodium}
           results={results}
           shareMessage={shareMessage}
         />
