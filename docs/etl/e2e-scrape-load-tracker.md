@@ -2,6 +2,10 @@
 
 Objetivo: **una sola lista** de trabajo operativo para completar el extremo a extremo (extract -> transform -> load -> publish) por tipo de dato.
 
+## CI: suite completa de tests (`2026-10-11`)
+
+Estado: ACTIVO. Ahora: el job `full-test-suite` de `ETL Tracker Gate` ejecuta toda la suite pytest en checkout limpio (antes solo ~10 módulos elegidos a mano); verificado localmente en checkout limpio: `1400 passed, 185 skipped, 19 deselected`. Los tests que leen datos reales locales ignorados por git se saltan solo si su error nombra una ruta `etl/data/` ausente (`tests/conftest.py`; `VCLC_REQUIRE_REAL_DATA=1` / `just test-real` los vuelve fallo). Destino: cuarentena vacía. Siguiente: regenerar evidencia v2 (grupo A de `tests/ci_quarantine.txt`) y dar mensajes con ruta o `skipTest` explícito a los tests del grupo B; cada arreglo borra su entrada (las entradas obsoletas rompen CI).
+
 ## Incidente de privacidad: rutas de estación en docs versionados (`2026-10-11`)
 
 Estado: REMEDIADO en árbol de trabajo; historial git pendiente de decisión del mantenedor. Ahora: 384 archivos versionados bajo `docs/etl/sprints/**` y `docs/etl/runs/**` (generados feb–abr 2026) contenían rutas absolutas de la estación, incluida una cuenta personal en segmentos `GoogleDrive-*`; el gate de privacidad solo cubría `etl/data/published` y `ui/gh-pages-next/public`. Remediación: `scripts/scrub_workstation_paths.py` reescribe a rutas relativas al repo (`just privacy-scrub-docs`); `report_citizen_preset_contract_bundle_history.js` deja de emitir rutas absolutas; CI (`repo-root-hygiene`) y `just repo-hygiene-check` escanean `docs/` y los `.md` raíz con `check_public_privacy_leaks.py --skip-kind internal_db_path`. Siguiente: el repo es público y los commits anteriores conservan las rutas; reescritura con `git filter-repo` solo con aprobación explícita del mantenedor.

@@ -1766,6 +1766,14 @@ storage-dedupe:
 etl-test:
   docker compose run --rm --build etl "python3 -m unittest discover -s tests -v"
 
+# Same command as the CI full-test-suite job (missing local data -> skip; known exceptions in tests/ci_quarantine.txt).
+test-ci:
+  VCLC_CI_QUARANTINE=1 python3 -m pytest -q -p no:cacheprovider -rfE
+
+# Maintainer machines with the full local corpus: missing real data fails instead of skipping.
+test-real:
+  VCLC_REQUIRE_REAL_DATA=1 python3 -m pytest -q -p no:cacheprovider -rfE
+
 etl-audit-official-samples:
   python3 scripts/audit_official_sample_corpus.py --report-out docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/official-sample-corpus-audit.json
 

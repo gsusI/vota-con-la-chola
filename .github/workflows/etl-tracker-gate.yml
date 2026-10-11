@@ -7,6 +7,35 @@ on:
       - main
 
 jobs:
+  full-test-suite:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install system tools used by document tests
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -y -q --no-install-recommends poppler-utils tesseract-ocr tesseract-ocr-spa
+
+      - name: Install Python dependencies
+        run: python3 -m pip install -r requirements.txt
+
+      - name: Run full pytest suite
+        # Tests that need gitignored local data skip themselves (tests/conftest.py);
+        # tests/ci_quarantine.txt lists the remaining known exceptions with reasons.
+        env:
+          VCLC_CI_QUARANTINE: "1"
+        run: python3 -m pytest -q -p no:cacheprovider -rfE
+
   andalucia-water-community-review-contract:
     runs-on: ubuntu-latest
     timeout-minutes: 5
