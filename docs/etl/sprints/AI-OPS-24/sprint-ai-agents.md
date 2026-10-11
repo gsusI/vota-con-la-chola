@@ -86,7 +86,7 @@ flowchart TD
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Lock AI-OPS-24 scope and the precise meaning of “download them all”.
@@ -117,7 +117,7 @@ Artifact path:
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Harden the initiative-doc downloader for large-scale runs without retry loops.
@@ -150,7 +150,7 @@ Artifact path:
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Add measurable KPIs for initiative document coverage.
@@ -180,7 +180,7 @@ Artifact path:
 - `points`: `3`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Provide a deterministic URL export tool for manual/headful capture.
@@ -209,7 +209,7 @@ Artifact path:
 - `points`: `3`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Decide the Senado unblock policy for this sprint.
@@ -237,7 +237,7 @@ Artifact path:
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Ship a “Senado manual capture kit” runbook that is explicit and safe.
@@ -268,7 +268,7 @@ Artifact path:
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Ensure Explorer vote summaries show document availability consistently.
@@ -298,7 +298,7 @@ Artifact path:
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Define PASS/FAIL criteria for Senado lane given current 403 evidence.

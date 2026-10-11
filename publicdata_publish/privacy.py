@@ -73,6 +73,13 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         default=200,
         help="Maximum findings to print before truncating output.",
     )
+    parser.add_argument(
+        "--skip-kind",
+        action="append",
+        default=[],
+        choices=[kind for kind, _ in LEAK_PATTERNS],
+        help="Leak kind to ignore (repeatable), e.g. internal_db_path for internal docs evidence.",
+    )
     return parser.parse_args(argv)
 
 
@@ -260,6 +267,8 @@ def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
     targets = [Path(p) for p in args.path] if args.path else list(DEFAULT_SCAN_PATHS)
     findings, files_scanned = collect_findings(targets)
+    skip_kinds = set(args.skip_kind)
+    findings = [f for f in findings if f.kind not in skip_kinds]
     if not findings:
         print(f"OK publication hygiene scan: no findings (files_scanned={files_scanned})")
         return 0

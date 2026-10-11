@@ -1,7 +1,7 @@
 # AI-OPS-08 BOE Tracker Mapping Hardening
 
 Date: 2026-02-16
-Repository: `~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola`
+Repository: `.`
 
 ## Objective
 

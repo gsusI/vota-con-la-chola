@@ -4,7 +4,7 @@ Goal:
 - Provide deterministic commands to capture baseline + postrun evidence for AI-OPS-20.
 
 Repo context:
-- `~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola`
+- `.`
 
 Defaults:
 - `DB_PATH=etl/data/staging/politicos-es.db`

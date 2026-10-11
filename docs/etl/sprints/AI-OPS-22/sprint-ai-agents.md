@@ -64,7 +64,7 @@ Non-goals (explicit):
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Lock AI-OPS-22 scope + must-pass gates for "Citizen Alignment + Onboarding v0" (static, evidence-first, privacy-first).
@@ -103,7 +103,7 @@ artifact_path: docs/etl/sprints/AI-OPS-22/reports/scope-lock.md
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Produce baseline metrics + a deterministic query/run pack for AI-OPS-22 (alignment-ready).
@@ -141,7 +141,7 @@ artifact_path: docs/etl/sprints/AI-OPS-22/reports/query-pack-baseline.md
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Define the preference + alignment scoring contract so the UI stays honest and stable.
@@ -186,7 +186,7 @@ artifact_path: docs/etl/sprints/AI-OPS-22/reports/preferences-contract.md
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Write the UX spec for the alignment view (minimal, mobile-safe, evidence-first).
@@ -225,7 +225,7 @@ artifact_path: docs/etl/sprints/AI-OPS-22/reports/citizen-alignment-ux-spec.md
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Specify and implement the URL/state contract changes required for alignment, without leaking preferences.
@@ -266,7 +266,7 @@ artifact_path: docs/etl/sprints/AI-OPS-22/reports/url-contract.md
 - `points`: `13`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Implement `view=alignment` in the citizen app (static, audit-first, privacy-first).
@@ -310,7 +310,7 @@ artifact_path: docs/etl/sprints/AI-OPS-22/reports/implementation-notes.md
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Keep build + budgets + docs consistent after alignment UI changes.
@@ -346,7 +346,7 @@ artifact_path: docs/etl/sprints/AI-OPS-22/reports/build-integration.md
 - `points`: `2`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Write the FAST runbook for deterministic evidence generation and gate adjudication.
@@ -388,7 +388,7 @@ artifact_path: docs/etl/sprints/AI-OPS-22/reports/fast-runbook.md
 - `points`: `3`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Capture baseline metrics + generate a deterministic prefs sample for walkthrough/QA.
@@ -425,7 +425,7 @@ artifact_path: docs/etl/sprints/AI-OPS-22/evidence/baseline_metrics.json
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Run export + strict validation and capture GH Pages build evidence.
@@ -462,7 +462,7 @@ artifact_path: docs/etl/sprints/AI-OPS-22/evidence/gh-pages-build.log
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Generate link-check evidence for audit navigation (alignment uses existing explorer links).
@@ -499,7 +499,7 @@ artifact_path: docs/etl/sprints/AI-OPS-22/evidence/link-check.json
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Produce a citizen walkthrough for the alignment view, including a deterministic prefs sample.
@@ -539,7 +539,7 @@ artifact_path: docs/etl/sprints/AI-OPS-22/reports/citizen-alignment-walkthrough.
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Mobile + a11y smoke check for alignment view.
@@ -578,7 +578,7 @@ artifact_path: docs/etl/sprints/AI-OPS-22/evidence/mobile-a11y-smoke.md
 - `points`: `3`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Capture performance budget evidence (static payload sizes; no new artifacts).
@@ -615,7 +615,7 @@ artifact_path: docs/etl/sprints/AI-OPS-22/evidence/perf-budget.txt
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Validate URL restore and share-link behavior for alignment view across a small deterministic matrix.
@@ -657,7 +657,7 @@ artifact_path: docs/etl/sprints/AI-OPS-22/exports/url-matrix.csv
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Privacy audit: confirm local-first preference behavior and opt-in sharing.
@@ -694,7 +694,7 @@ artifact_path: docs/etl/sprints/AI-OPS-22/reports/privacy-audit.md
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Re-run strict tracker gate + publish/status parity evidence after UI work.
@@ -733,7 +733,7 @@ artifact_path: docs/etl/sprints/AI-OPS-22/evidence/tracker-gate-postrun.log
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Run test suite and capture evidence.
@@ -768,7 +768,7 @@ artifact_path: docs/etl/sprints/AI-OPS-22/evidence/tests.log
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Assemble an artifact index for AI-OPS-22 so closeout is fast and evidence-backed.
@@ -801,7 +801,7 @@ artifact_path: docs/etl/sprints/AI-OPS-22/reports/artifacts-index.md
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Update sprint navigation artifacts to include AI-OPS-22 and ensure pointer is correct.
@@ -838,7 +838,7 @@ artifact_path: docs/etl/sprint-ai-agents.md
 - `points`: `2`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Reconcile any doc/contract drift uncovered during implementation (truth-first).
@@ -874,7 +874,7 @@ artifact_path: docs/etl/sprints/AI-OPS-22/reports/doc-reconciliation.md
 - `points`: `2`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Adjudicate gates G1..G6 and record verdict + evidence links.
@@ -908,7 +908,7 @@ artifact_path: docs/etl/sprints/AI-OPS-22/reports/gate-adjudication.md
 - `points`: `1`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Write closeout with PASS/FAIL, visible outcome, and reproduction commands.
@@ -944,7 +944,7 @@ artifact_path: docs/etl/sprints/AI-OPS-22/closeout.md
 - `points`: `1`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Final review: confirm visible progress + no loops + privacy contract enforced.

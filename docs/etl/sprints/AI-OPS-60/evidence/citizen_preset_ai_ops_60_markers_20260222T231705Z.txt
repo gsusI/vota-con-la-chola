@@ -4,8 +4,8 @@ OK citizen-test-preset-codec
 out_arg=""; if [ -n "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_report_20260222T231705Z.json" ]; then out_arg="--json-out docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_report_20260222T231705Z.json"; fi; node scripts/report_citizen_preset_fixture_contract.js --fixture "tests/fixtures/citizen_preset_hash_matrix.json" --strict ${out_arg}
 {
   "generated_at": "2026-02-22T23:17:42.208Z",
-  "fixture_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/fixtures/citizen_preset_hash_matrix.json",
-  "codec_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/ui/citizen/preset_codec.js",
+  "fixture_path": "tests/fixtures/citizen_preset_hash_matrix.json",
+  "codec_path": "ui/citizen/preset_codec.js",
   "schema_version": "v2",
   "strict": true,
   "summary": {
@@ -99,8 +99,8 @@ OK citizen-report-preset-contract
 out_arg=""; if [ -n "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_codec_parity_report_20260222T231705Z.json" ]; then out_arg="--json-out docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_codec_parity_report_20260222T231705Z.json"; fi; node scripts/report_citizen_preset_codec_parity.js --source "ui/citizen/preset_codec.js" --published "docs/gh-pages/citizen/preset_codec.js" --strict ${out_arg}
 {
   "generated_at": "2026-02-22T23:17:42.254Z",
-  "source_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/ui/citizen/preset_codec.js",
-  "published_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/gh-pages/citizen/preset_codec.js",
+  "source_path": "ui/citizen/preset_codec.js",
+  "published_path": "docs/gh-pages/citizen/preset_codec.js",
   "strict": true,
   "summary": {
     "total_cases": 1,
@@ -128,8 +128,8 @@ OK citizen-report-preset-codec-parity
 out_arg=""; if [ -n "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_codec_sync_report_20260222T231705Z.json" ]; then out_arg="--json-out docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_codec_sync_report_20260222T231705Z.json"; fi; node scripts/report_citizen_preset_codec_sync_state.js --source "ui/citizen/preset_codec.js" --published "docs/gh-pages/citizen/preset_codec.js" --strict ${out_arg}
 {
   "generated_at": "2026-02-22T23:17:42.307Z",
-  "source_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/ui/citizen/preset_codec.js",
-  "published_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/gh-pages/citizen/preset_codec.js",
+  "source_path": "ui/citizen/preset_codec.js",
+  "published_path": "docs/gh-pages/citizen/preset_codec.js",
   "strict": true,
   "summary": {
     "total_cases": 1,
@@ -164,9 +164,9 @@ out_arg=""; if [ -n "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract
   "generated_at": "2026-02-22T23:17:42.446Z",
   "strict": true,
   "inputs": {
-    "fixture_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/fixtures/citizen_preset_hash_matrix.json",
-    "source_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/ui/citizen/preset_codec.js",
-    "published_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/gh-pages/citizen/preset_codec.js"
+    "fixture_path": "tests/fixtures/citizen_preset_hash_matrix.json",
+    "source_path": "ui/citizen/preset_codec.js",
+    "published_path": "docs/gh-pages/citizen/preset_codec.js"
   },
   "summary": {
     "sections_total": 3,
@@ -225,8 +225,8 @@ out_arg=""; if [ -n "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract
   "reports": {
     "fixture_contract": {
       "generated_at": "2026-02-22T23:17:42.375Z",
-      "fixture_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/fixtures/citizen_preset_hash_matrix.json",
-      "codec_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/ui/citizen/preset_codec.js",
+      "fixture_path": "tests/fixtures/citizen_preset_hash_matrix.json",
+      "codec_path": "ui/citizen/preset_codec.js",
       "schema_version": "v2",
       "strict": false,
       "summary": {
@@ -318,8 +318,8 @@ out_arg=""; if [ -n "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract
     },
     "codec_parity": {
       "generated_at": "2026-02-22T23:17:42.409Z",
-      "source_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/ui/citizen/preset_codec.js",
-      "published_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/gh-pages/citizen/preset_codec.js",
+      "source_path": "ui/citizen/preset_codec.js",
+      "published_path": "docs/gh-pages/citizen/preset_codec.js",
       "strict": false,
       "summary": {
         "total_cases": 1,
@@ -345,8 +345,8 @@ out_arg=""; if [ -n "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract
     },
     "codec_sync_state": {
       "generated_at": "2026-02-22T23:17:42.441Z",
-      "source_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/ui/citizen/preset_codec.js",
-      "published_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/gh-pages/citizen/preset_codec.js",
+      "source_path": "ui/citizen/preset_codec.js",
+      "published_path": "docs/gh-pages/citizen/preset_codec.js",
       "strict": false,
       "summary": {
         "total_cases": 1,
@@ -382,8 +382,8 @@ test -n "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_repo
 {
   "generated_at": "2026-02-22T23:17:42.487Z",
   "strict": true,
-  "bundle_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_report_20260222T231705Z.json",
-  "history_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/runs/citizen_preset_contract_bundle_history.jsonl",
+  "bundle_path": "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_report_20260222T231705Z.json",
+  "history_path": "docs/etl/runs/citizen_preset_contract_bundle_history.jsonl",
   "history_size_before": 11,
   "history_size_after": 12,
   "regression_detected": false,
@@ -436,7 +436,7 @@ out_arg=""; if [ -n "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract
 {
   "generated_at": "2026-02-22T23:17:42.528Z",
   "strict": true,
-  "history_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/runs/citizen_preset_contract_bundle_history.jsonl",
+  "history_path": "docs/etl/runs/citizen_preset_contract_bundle_history.jsonl",
   "window_last": 20,
   "entries_total": 12,
   "entries_in_window": 12,
@@ -458,8 +458,8 @@ out_arg=""; if [ -n "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract
 {
   "generated_at": "2026-02-22T23:17:42.572Z",
   "strict": true,
-  "history_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/runs/citizen_preset_contract_bundle_history.jsonl",
-  "compacted_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/runs/citizen_preset_contract_bundle_history.compacted.jsonl",
+  "history_path": "docs/etl/runs/citizen_preset_contract_bundle_history.jsonl",
+  "compacted_path": "docs/etl/runs/citizen_preset_contract_bundle_history.compacted.jsonl",
   "cadence": {
     "keep_recent": 20,
     "keep_mid_span": 100,
@@ -621,7 +621,7 @@ out_arg=""; if [ -n "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract
 {
   "generated_at": "2026-02-22T23:17:42.614Z",
   "strict": true,
-  "history_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/runs/citizen_preset_contract_bundle_history.jsonl",
+  "history_path": "docs/etl/runs/citizen_preset_contract_bundle_history.jsonl",
   "thresholds": {
     "max_regressions": 0,
     "max_regression_rate_pct": 0,
@@ -670,12 +670,12 @@ test -n "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_hist
 {
   "generated_at": "2026-02-22T23:17:42.656Z",
   "strict": true,
-  "input_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_report_20260222T231705Z.json",
+  "input_path": "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_report_20260222T231705Z.json",
   "digest": {
     "generated_at": "2026-02-22T23:17:42.657Z",
     "strict": true,
     "input": {
-      "slo_json_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_report_20260222T231705Z.json",
+      "slo_json_path": "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_report_20260222T231705Z.json",
       "slo_generated_at": "2026-02-22T23:17:42.614Z"
     },
     "status": "ok",
@@ -719,8 +719,8 @@ test -n "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_hist
 {
   "generated_at": "2026-02-22T23:17:42.697Z",
   "strict": true,
-  "input_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_digest_report_20260222T231705Z.json",
-  "heartbeat_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat.jsonl",
+  "input_path": "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_digest_report_20260222T231705Z.json",
+  "heartbeat_path": "docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat.jsonl",
   "history_size_before": 5,
   "history_size_after": 6,
   "appended": true,
@@ -729,7 +729,7 @@ test -n "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_hist
   "heartbeat": {
     "run_at": "2026-02-22T23:17:42.657Z",
     "heartbeat_id": "2026-02-22T23:17:42.614Z|2026-02-22T23:17:42.657Z|ok|green|0|12",
-    "digest_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_digest_report_20260222T231705Z.json",
+    "digest_path": "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_digest_report_20260222T231705Z.json",
     "digest_generated_at": "2026-02-22T23:17:42.657Z",
     "slo_generated_at": "2026-02-22T23:17:42.614Z",
     "status": "ok",
@@ -750,7 +750,7 @@ out_arg=""; if [ -n "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract
 {
   "generated_at": "2026-02-22T23:17:42.736Z",
   "strict": true,
-  "heartbeat_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat.jsonl",
+  "heartbeat_path": "docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat.jsonl",
   "window_last": 20,
   "thresholds": {
     "max_failed": 0,
@@ -798,8 +798,8 @@ out_arg=""; if [ -n "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract
 {
   "generated_at": "2026-02-22T23:17:42.778Z",
   "strict": true,
-  "heartbeat_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat.jsonl",
-  "compacted_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat.compacted.jsonl",
+  "heartbeat_path": "docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat.jsonl",
+  "compacted_path": "docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat.compacted.jsonl",
   "policy": {
     "keep_recent": 20,
     "keep_mid_span": 100,
@@ -925,8 +925,8 @@ out_arg=""; if [ -n "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract
 {
   "generated_at": "2026-02-22T23:17:42.818Z",
   "strict": true,
-  "heartbeat_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat.jsonl",
-  "compacted_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat.compacted.jsonl",
+  "heartbeat_path": "docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat.jsonl",
+  "compacted_path": "docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat.compacted.jsonl",
   "window_last": 20,
   "entries_total_raw": 6,
   "entries_total_compacted": 6,
@@ -982,15 +982,15 @@ test -n "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_hist
 {
   "generated_at": "2026-02-22T23:17:42.859Z",
   "strict": true,
-  "input_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_report_20260222T231705Z.json",
+  "input_path": "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_report_20260222T231705Z.json",
   "digest": {
     "generated_at": "2026-02-22T23:17:42.860Z",
     "strict": true,
     "input": {
-      "compaction_window_json_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_report_20260222T231705Z.json",
+      "compaction_window_json_path": "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_report_20260222T231705Z.json",
       "compaction_window_generated_at": "2026-02-22T23:17:42.818Z",
-      "heartbeat_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat.jsonl",
-      "compacted_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat.compacted.jsonl"
+      "heartbeat_path": "docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat.jsonl",
+      "compacted_path": "docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat.compacted.jsonl"
     },
     "status": "ok",
     "risk_level": "green",
@@ -1031,8 +1031,8 @@ test -n "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_hist
 {
   "generated_at": "2026-02-22T23:17:42.899Z",
   "strict": true,
-  "input_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_report_20260222T231705Z.json",
-  "heartbeat_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat.jsonl",
+  "input_path": "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_report_20260222T231705Z.json",
+  "heartbeat_path": "docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat.jsonl",
   "history_size_before": 1,
   "history_size_after": 2,
   "appended": true,
@@ -1041,7 +1041,7 @@ test -n "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_hist
   "heartbeat": {
     "run_at": "2026-02-22T23:17:42.860Z",
     "heartbeat_id": "2026-02-22T23:17:42.818Z|2026-02-22T23:17:42.860Z|ok|green|0|6",
-    "digest_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_report_20260222T231705Z.json",
+    "digest_path": "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_report_20260222T231705Z.json",
     "digest_generated_at": "2026-02-22T23:17:42.860Z",
     "compaction_window_generated_at": "2026-02-22T23:17:42.818Z",
     "status": "ok",
@@ -1063,7 +1063,7 @@ out_arg=""; if [ -n "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract
 {
   "generated_at": "2026-02-22T23:17:42.941Z",
   "strict": true,
-  "heartbeat_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat.jsonl",
+  "heartbeat_path": "docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat.jsonl",
   "window_last": 20,
   "thresholds": {
     "max_failed": 0,
@@ -1120,8 +1120,8 @@ out_arg=""; if [ -n "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract
 {
   "generated_at": "2026-02-22T23:17:42.981Z",
   "strict": true,
-  "heartbeat_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat.jsonl",
-  "compacted_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat.compacted.jsonl",
+  "heartbeat_path": "docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat.jsonl",
+  "compacted_path": "docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat.compacted.jsonl",
   "policy": {
     "keep_recent": 20,
     "keep_mid_span": 100,
@@ -1205,8 +1205,8 @@ out_arg=""; if [ -n "docs/etl/sprints/AI-OPS-60/evidence/citizen_preset_contract
 {
   "generated_at": "2026-02-22T23:17:43.023Z",
   "strict": true,
-  "heartbeat_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat.jsonl",
-  "compacted_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat.compacted.jsonl",
+  "heartbeat_path": "docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat.jsonl",
+  "compacted_path": "docs/etl/runs/citizen_preset_contract_bundle_history_slo_digest_heartbeat_compaction_window_digest_heartbeat.compacted.jsonl",
   "window_last": 20,
   "entries_total_raw": 2,
   "entries_total_compacted": 2,

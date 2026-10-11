@@ -1,7 +1,7 @@
 # Sprint AI-OPS-05 Prompt Pack
 
 Repository root:
-- `~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola`
+- `.`
 
 Sprint scope (single bottleneck class):
 - Operational truth reconciliation for source tracking and dashboard parity
@@ -43,7 +43,7 @@ goal:
 Lock AI-OPS-05 scope and acceptance gates using live baseline evidence.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Freeze the exact PASS/FAIL gates for tracker reconciliation sprint before implementation work starts.
@@ -94,7 +94,7 @@ goal:
 Implement tracker-source mapping and blocked-aware status semantics so tracker checks reflect current operational truth.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Remove false status drift by aligning e2e tracker checker + dashboard mapping with Moncloa rows and blocked-source behavior.
@@ -149,7 +149,7 @@ goal:
 Prepare deterministic probe matrix for Moncloa/Navarra/Galicia evidence refresh.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Create a reproducible command and artifact batch so throughput tasks run without ambiguity.
@@ -198,7 +198,7 @@ goal:
 Run Moncloa apply/recompute loop and refresh policy_events evidence.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Reconfirm Moncloa ingest reproducibility and ensure policy_events traceability remains complete after reconciliation work.
@@ -252,7 +252,7 @@ goal:
 Refresh blocker evidence for Navarra and Galicia without forcing false DONE transitions.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Produce fresh, reproducible blocker evidence that supports PARTIAL status and avoids ambiguous mismatch interpretation.
@@ -302,7 +302,7 @@ goal:
 Apply tracker reconciliation edits and publish updated status snapshot evidence.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Close the docs-vs-sql truth gap by updating tracker rows with evidence-backed wording and validating status outputs.
@@ -357,7 +357,7 @@ goal:
 Harden the default tracker gate so reconciliation drift fails fast.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Promote mismatch detection to standard operational gate once reconciliation is green.
@@ -405,7 +405,7 @@ goal:
 Run AI-OPS-05 closeout and issue PASS/FAIL decision.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Confirm all mandatory gates are green and publish explicit carryover only if a gate fails.

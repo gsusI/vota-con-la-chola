@@ -1,7 +1,7 @@
 # Sprint AI-OPS-03 Closeout
 
 Fecha: 2026-02-16  
-Repo: `~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola`  
+Repo: `.`  
 DB evaluada: `etl/data/staging/politicos-es.db`
 
 ## Resumen ejecutivo

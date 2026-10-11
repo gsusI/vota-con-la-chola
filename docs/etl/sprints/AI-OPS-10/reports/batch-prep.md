@@ -89,7 +89,7 @@ Per-row `ingest_command` hashes (also embedded in validated TSV as `command_sha2
 ## Environment details
 
 - `validated_at_utc=2026-02-17T10:27:02+00:00`
-- `cwd=~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola`
+- `cwd=.`
 - `shell=/bin/zsh`
 - `python=Python 3.11.14`
 - `platform=macOS-26.3-arm64-arm-64bit`

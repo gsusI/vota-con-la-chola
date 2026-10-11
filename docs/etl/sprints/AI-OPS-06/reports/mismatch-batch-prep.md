@@ -1,7 +1,7 @@
 # Mismatch batch prep report (AI-OPS-06)
 
 - Timestamp UTC: 2026-02-16T17:03:19Z
-- Repository: `~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola`
+- Repository: `.`
 - DB: `etl/data/staging/politicos-es.db`
 - Live inputs: `docs/etl/e2e-scrape-load-tracker.md`, `docs/etl/sprints/AI-OPS-05/evidence/tracker-reconciliation.md`, `ingestion_runs`/`run_fetches`
 

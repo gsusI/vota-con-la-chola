@@ -3,8 +3,8 @@ python3 -m unittest tests/test_validate_liberty_restrictions_seed.py tests/test_
   "generated_at": "2026-02-23T20:20:30+00:00",
   "strict": true,
   "input": {
-    "status_json": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tmp/aiops130/tmpv60xhcx_/status.json",
-    "changed_paths_file": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tmp/aiops130/tmpv60xhcx_/changed_paths.txt"
+    "status_json": "tmp/aiops130/tmpv60xhcx_/status.json",
+    "changed_paths_file": "tmp/aiops130/tmpv60xhcx_/changed_paths.txt"
   },
   "status_doc_status": "degraded",
   "focus_gate_passed": false,
@@ -44,8 +44,8 @@ python3 -m unittest tests/test_validate_liberty_restrictions_seed.py tests/test_
   "generated_at": "2026-02-23T20:20:30+00:00",
   "strict": true,
   "input": {
-    "status_json": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tmp/aiops130/tmp114ncycw/status.json",
-    "changed_paths_file": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tmp/aiops130/tmp114ncycw/changed_paths.txt"
+    "status_json": "tmp/aiops130/tmp114ncycw/status.json",
+    "changed_paths_file": "tmp/aiops130/tmp114ncycw/changed_paths.txt"
   },
   "status_doc_status": "degraded",
   "focus_gate_passed": false,
@@ -87,8 +87,8 @@ python3 -m unittest tests/test_validate_liberty_restrictions_seed.py tests/test_
   "generated_at": "2026-02-23T20:20:30+00:00",
   "strict": true,
   "input": {
-    "status_json": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tmp/aiops130/tmpl6snrxle/status.json",
-    "changed_paths_file": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tmp/aiops130/tmpl6snrxle/changed_paths.txt"
+    "status_json": "tmp/aiops130/tmpl6snrxle/status.json",
+    "changed_paths_file": "tmp/aiops130/tmpl6snrxle/changed_paths.txt"
   },
   "status_doc_status": "ok",
   "focus_gate_passed": null,
@@ -122,8 +122,8 @@ python3 -m unittest tests/test_validate_liberty_restrictions_seed.py tests/test_
   "generated_at": "2026-02-23T20:20:30+00:00",
   "strict": true,
   "input": {
-    "status_json": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tmp/aiops130/tmpd517r8a2/status.json",
-    "changed_paths_file": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tmp/aiops130/tmpd517r8a2/changed_paths.txt"
+    "status_json": "tmp/aiops130/tmpd517r8a2/status.json",
+    "changed_paths_file": "tmp/aiops130/tmpd517r8a2/changed_paths.txt"
   },
   "status_doc_status": "ok",
   "focus_gate_passed": true,
@@ -154,8 +154,8 @@ python3 -m unittest tests/test_validate_liberty_restrictions_seed.py tests/test_
 {
   "generated_at": "2026-02-23T20:20:30+00:00",
   "strict": true,
-  "input_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tmp/aiops130/tmp3aaqb9yz/status_ok.json",
-  "heartbeat_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tmp/aiops130/tmp3aaqb9yz/heartbeat.jsonl",
+  "input_path": "tmp/aiops130/tmp3aaqb9yz/status_ok.json",
+  "heartbeat_path": "tmp/aiops130/tmp3aaqb9yz/heartbeat.jsonl",
   "history_size_before": 0,
   "history_size_after": 1,
   "history_malformed_lines_before": 0,
@@ -166,7 +166,7 @@ python3 -m unittest tests/test_validate_liberty_restrictions_seed.py tests/test_
   "heartbeat": {
     "run_at": "2026-02-23T19:00:00+00:00",
     "heartbeat_id": "2026-02-23T19:00:00+00:00|ok|1.000000|1.000000|1.000000|1.000000|1|8|8|",
-    "status_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tmp/aiops130/tmp3aaqb9yz/status_ok.json",
+    "status_path": "tmp/aiops130/tmp3aaqb9yz/status_ok.json",
     "status_generated_at": "2026-02-23T19:00:00+00:00",
     "status": "ok",
     "norms_total": 8,
@@ -188,8 +188,8 @@ python3 -m unittest tests/test_validate_liberty_restrictions_seed.py tests/test_
 {
   "generated_at": "2026-02-23T20:20:30+00:00",
   "strict": true,
-  "input_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tmp/aiops130/tmp3aaqb9yz/status_ok.json",
-  "heartbeat_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tmp/aiops130/tmp3aaqb9yz/heartbeat.jsonl",
+  "input_path": "tmp/aiops130/tmp3aaqb9yz/status_ok.json",
+  "heartbeat_path": "tmp/aiops130/tmp3aaqb9yz/heartbeat.jsonl",
   "history_size_before": 1,
   "history_size_after": 1,
   "history_malformed_lines_before": 0,
@@ -200,7 +200,7 @@ python3 -m unittest tests/test_validate_liberty_restrictions_seed.py tests/test_
   "heartbeat": {
     "run_at": "2026-02-23T19:00:00+00:00",
     "heartbeat_id": "2026-02-23T19:00:00+00:00|ok|1.000000|1.000000|1.000000|1.000000|1|8|8|",
-    "status_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tmp/aiops130/tmp3aaqb9yz/status_ok.json",
+    "status_path": "tmp/aiops130/tmp3aaqb9yz/status_ok.json",
     "status_generated_at": "2026-02-23T19:00:00+00:00",
     "status": "ok",
     "norms_total": 8,
@@ -222,8 +222,8 @@ python3 -m unittest tests/test_validate_liberty_restrictions_seed.py tests/test_
 {
   "generated_at": "2026-02-23T20:20:30+00:00",
   "strict": true,
-  "input_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tmp/aiops130/tmpwdh04o1v/status_degraded.json",
-  "heartbeat_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tmp/aiops130/tmpwdh04o1v/heartbeat.jsonl",
+  "input_path": "tmp/aiops130/tmpwdh04o1v/status_degraded.json",
+  "heartbeat_path": "tmp/aiops130/tmpwdh04o1v/heartbeat.jsonl",
   "history_size_before": 0,
   "history_size_after": 1,
   "history_malformed_lines_before": 0,
@@ -234,7 +234,7 @@ python3 -m unittest tests/test_validate_liberty_restrictions_seed.py tests/test_
   "heartbeat": {
     "run_at": "2026-02-23T19:00:00+00:00",
     "heartbeat_id": "2026-02-23T19:00:00+00:00|degraded|0.750000|0.750000|0.750000|0.750000|0|8|8|",
-    "status_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tmp/aiops130/tmpwdh04o1v/status_degraded.json",
+    "status_path": "tmp/aiops130/tmpwdh04o1v/status_degraded.json",
     "status_generated_at": "2026-02-23T19:00:00+00:00",
     "status": "degraded",
     "norms_total": 8,
@@ -256,8 +256,8 @@ python3 -m unittest tests/test_validate_liberty_restrictions_seed.py tests/test_
 {
   "generated_at": "2026-02-23T20:20:30+00:00",
   "strict": true,
-  "input_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tmp/aiops130/tmpmlcy_ivb/status_failed.json",
-  "heartbeat_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tmp/aiops130/tmpmlcy_ivb/heartbeat.jsonl",
+  "input_path": "tmp/aiops130/tmpmlcy_ivb/status_failed.json",
+  "heartbeat_path": "tmp/aiops130/tmpmlcy_ivb/heartbeat.jsonl",
   "history_size_before": 0,
   "history_size_after": 1,
   "history_malformed_lines_before": 0,
@@ -271,7 +271,7 @@ python3 -m unittest tests/test_validate_liberty_restrictions_seed.py tests/test_
   "heartbeat": {
     "run_at": "2026-02-23T19:00:00+00:00",
     "heartbeat_id": "2026-02-23T19:00:00+00:00|failed|0.750000|0.750000|0.750000|0.750000|0|8|8|liberty_status_failed",
-    "status_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tmp/aiops130/tmpmlcy_ivb/status_failed.json",
+    "status_path": "tmp/aiops130/tmpmlcy_ivb/status_failed.json",
     "status_generated_at": "2026-02-23T19:00:00+00:00",
     "status": "failed",
     "norms_total": 8,
@@ -295,7 +295,7 @@ python3 -m unittest tests/test_validate_liberty_restrictions_seed.py tests/test_
 {
   "generated_at": "2026-02-23T20:20:30+00:00",
   "strict": true,
-  "heartbeat_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tmp/aiops130/tmpwrlsc5f2/heartbeat.jsonl",
+  "heartbeat_path": "tmp/aiops130/tmpwrlsc5f2/heartbeat.jsonl",
   "window_last": 2,
   "thresholds": {
     "max_failed": 0,
@@ -369,7 +369,7 @@ python3 -m unittest tests/test_validate_liberty_restrictions_seed.py tests/test_
 {
   "generated_at": "2026-02-23T20:20:30+00:00",
   "strict": true,
-  "heartbeat_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tmp/aiops130/tmpdzgpirfn/heartbeat.jsonl",
+  "heartbeat_path": "tmp/aiops130/tmpdzgpirfn/heartbeat.jsonl",
   "window_last": 3,
   "thresholds": {
     "max_failed": 0,
@@ -439,10 +439,10 @@ python3 -m unittest tests/test_validate_liberty_restrictions_seed.py tests/test_
   "generated_at": "2026-02-23T20:20:32+00:00",
   "strict": true,
   "input": {
-    "published_release_json": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tmp/aiops130/tmpiqp75j6b/published.json",
-    "gh_pages_release_json": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tmp/aiops130/tmpiqp75j6b/gh.json",
-    "continuity_json": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tmp/aiops130/tmpiqp75j6b/continuity.json",
-    "heartbeat_jsonl": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tmp/aiops130/tmpiqp75j6b/heartbeat.jsonl"
+    "published_release_json": "tmp/aiops130/tmpiqp75j6b/published.json",
+    "gh_pages_release_json": "tmp/aiops130/tmpiqp75j6b/gh.json",
+    "continuity_json": "tmp/aiops130/tmpiqp75j6b/continuity.json",
+    "heartbeat_jsonl": "tmp/aiops130/tmpiqp75j6b/heartbeat.jsonl"
   },
   "history_size_before": 0,
   "history_size_after": 1,
@@ -485,7 +485,7 @@ python3 -m unittest tests/test_validate_liberty_restrictions_seed.py tests/test_
       "fingerprint": "bd0b196a559a20ad93ef83265903458fda5123dd3cce52502d97ad1fba504aa4"
     },
     "hf": {
-      "source": "file:~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tmp/aiops130/tmpiqp75j6b/hf.json",
+      "source": "file:tmp/aiops130/tmpiqp75j6b/hf.json",
       "dataset_repo": "",
       "latest_url": "",
       "latest_snapshot_date": "",
@@ -505,7 +505,7 @@ python3 -m unittest tests/test_validate_liberty_restrictions_seed.py tests/test_
       }
     },
     "continuity": {
-      "path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tmp/aiops130/tmpiqp75j6b/continuity.json",
+      "path": "tmp/aiops130/tmpiqp75j6b/continuity.json",
       "status": "ok",
       "latest_snapshot_date": "2026-02-23",
       "latest_entry_id": "snap-2026-02-23",
@@ -543,10 +543,10 @@ python3 -m unittest tests/test_validate_liberty_restrictions_seed.py tests/test_
   "generated_at": "2026-02-23T20:20:32+00:00",
   "strict": true,
   "input": {
-    "published_release_json": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tmp/aiops130/tmpk6x30s86/published.json",
-    "gh_pages_release_json": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tmp/aiops130/tmpk6x30s86/gh.json",
-    "continuity_json": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tmp/aiops130/tmpk6x30s86/continuity.json",
-    "heartbeat_jsonl": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tmp/aiops130/tmpk6x30s86/heartbeat.jsonl"
+    "published_release_json": "tmp/aiops130/tmpk6x30s86/published.json",
+    "gh_pages_release_json": "tmp/aiops130/tmpk6x30s86/gh.json",
+    "continuity_json": "tmp/aiops130/tmpk6x30s86/continuity.json",
+    "heartbeat_jsonl": "tmp/aiops130/tmpk6x30s86/heartbeat.jsonl"
   },
   "history_size_before": 0,
   "history_size_after": 1,
@@ -612,7 +612,7 @@ python3 -m unittest tests/test_validate_liberty_restrictions_seed.py tests/test_
       }
     },
     "continuity": {
-      "path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tmp/aiops130/tmpk6x30s86/continuity.json",
+      "path": "tmp/aiops130/tmpk6x30s86/continuity.json",
       "status": "ok",
       "latest_snapshot_date": "2025-01-01",
       "latest_entry_id": "snap-2025-01-01",
@@ -656,10 +656,10 @@ python3 -m unittest tests/test_validate_liberty_restrictions_seed.py tests/test_
   "generated_at": "2026-02-23T20:20:34+00:00",
   "strict": true,
   "input": {
-    "published_release_json": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tmp/aiops130/tmpiujotkrx/published.json",
-    "gh_pages_release_json": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tmp/aiops130/tmpiujotkrx/gh.json",
-    "continuity_json": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tmp/aiops130/tmpiujotkrx/continuity.json",
-    "heartbeat_jsonl": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tmp/aiops130/tmpiujotkrx/heartbeat.jsonl"
+    "published_release_json": "tmp/aiops130/tmpiujotkrx/published.json",
+    "gh_pages_release_json": "tmp/aiops130/tmpiujotkrx/gh.json",
+    "continuity_json": "tmp/aiops130/tmpiujotkrx/continuity.json",
+    "heartbeat_jsonl": "tmp/aiops130/tmpiujotkrx/heartbeat.jsonl"
   },
   "history_size_before": 0,
   "history_size_after": 1,
@@ -699,7 +699,7 @@ python3 -m unittest tests/test_validate_liberty_restrictions_seed.py tests/test_
       "fingerprint": "1f9f45a713ae219639138361684ccb159f6104017410c5f22142e3b525b599d6"
     },
     "hf": {
-      "source": "file:~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tmp/aiops130/tmpiujotkrx/hf.json",
+      "source": "file:tmp/aiops130/tmpiujotkrx/hf.json",
       "dataset_repo": "",
       "latest_url": "",
       "latest_snapshot_date": "",
@@ -719,7 +719,7 @@ python3 -m unittest tests/test_validate_liberty_restrictions_seed.py tests/test_
       }
     },
     "continuity": {
-      "path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tmp/aiops130/tmpiujotkrx/continuity.json",
+      "path": "tmp/aiops130/tmpiujotkrx/continuity.json",
       "status": "ok",
       "latest_snapshot_date": "2026-02-23",
       "latest_entry_id": "snap-2026-02-23",
@@ -758,7 +758,7 @@ OK (skipped=1)
 {
   "generated_at": "2026-02-23T20:20:34+00:00",
   "strict": true,
-  "heartbeat_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tmp/aiops130/tmpzit0eabg/heartbeat.jsonl",
+  "heartbeat_path": "tmp/aiops130/tmpzit0eabg/heartbeat.jsonl",
   "window_last": 2,
   "thresholds": {
     "max_failed": 0,
@@ -830,7 +830,7 @@ OK (skipped=1)
 {
   "generated_at": "2026-02-23T20:20:34+00:00",
   "strict": true,
-  "heartbeat_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tmp/aiops130/tmpia773bzj/heartbeat.jsonl",
+  "heartbeat_path": "tmp/aiops130/tmpia773bzj/heartbeat.jsonl",
   "window_last": 2,
   "thresholds": {
     "max_failed": 0,

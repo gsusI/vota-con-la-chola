@@ -1,7 +1,7 @@
 # Moncloa Dashboard Parity — AI-OPS-04
 
 Date: 2026-02-16  
-Repository: `~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola`  
+Repository: `.`  
 DB: `etl/data/staging/politicos-es.db`
 
 ## Objective

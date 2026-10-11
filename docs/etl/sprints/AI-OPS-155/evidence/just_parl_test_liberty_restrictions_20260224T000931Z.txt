@@ -1570,7 +1570,7 @@ python3 -m unittest tests/test_validate_liberty_restrictions_seed.py tests/test_
 FAIL: test_report_ok_when_seeded (tests.test_report_liberty_restrictions_status.TestReportLibertyRestrictionsStatus.test_report_ok_when_seeded)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/test_report_liberty_restrictions_status.py", line 44, in test_report_ok_when_seeded
+  File "tests/test_report_liberty_restrictions_status.py", line 44, in test_report_ok_when_seeded
     self.assertEqual(str(got["status"]), "ok")
 AssertionError: 'degraded' != 'ok'
 - degraded

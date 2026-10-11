@@ -27,6 +27,22 @@ class TestCheckPublicPrivacyLeaks(unittest.TestCase):
             self.assertEqual(len(findings), 4)
             self.assertTrue(all(f.kind == "local_user_path" for f in findings))
 
+    def test_skip_kind_ignores_only_named_kind(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            (root / "evidence.json").write_text(
+                '{"db_path": "etl/data/staging/x.db", "log": "/Users/alice/repo/run.log"}', encoding="utf-8"
+            )
+            with mock.patch("builtins.print") as printed:
+                rc = checker.main(["--path", str(root), "--skip-kind", "internal_db_path"])
+            self.assertEqual(rc, 2)
+            output = "\n".join(str(c.args[0]) for c in printed.call_args_list)
+            self.assertIn("local_user_path", output)
+            self.assertNotIn("internal_db_path", output)
+            (root / "evidence.json").write_text('{"db_path": "etl/data/staging/x.db"}', encoding="utf-8")
+            with mock.patch("builtins.print"):
+                self.assertEqual(checker.main(["--path", str(root), "--skip-kind", "internal_db_path"]), 0)
+
     def test_default_scan_paths_cover_next_public_tree(self) -> None:
         self.assertIn(Path("ui/gh-pages-next/public"), checker.DEFAULT_SCAN_PATHS)
         self.assertIs(script_checker.collect_findings, checker.collect_findings)

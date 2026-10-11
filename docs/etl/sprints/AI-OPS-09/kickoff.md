@@ -1,7 +1,7 @@
 # AI-OPS-09 Kickoff
 
 Date: 2026-02-17  
-Repository: `~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola`
+Repository: `.`
 
 ## Sprint Focus
 

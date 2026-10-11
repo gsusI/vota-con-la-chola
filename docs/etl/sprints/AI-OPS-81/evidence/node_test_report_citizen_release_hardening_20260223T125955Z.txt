@@ -8,15 +8,15 @@ ok 1 - release hardening reporter passes strict mode on aligned source/published
 not ok 2 - release hardening reporter fails strict mode on parity drift and exposes failed asset id
   ---
   duration_ms: 35.3785
-  location: '~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/test_report_citizen_release_hardening.js:100:1'
+  location: 'tests/test_report_citizen_release_hardening.js:100:1'
   failureType: 'testCodeFailure'
   error: 'Unterminated string in JSON at position 8192'
   code: 'ERR_TEST_FAILURE'
   name: 'SyntaxError'
   stack: |-
     JSON.parse (<anonymous>)
-    parseStdoutJson (~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/test_report_citizen_release_hardening.js:18:15)
-    TestContext.<anonymous> (~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/test_report_citizen_release_hardening.js:121:15)
+    parseStdoutJson (tests/test_report_citizen_release_hardening.js:18:15)
+    TestContext.<anonymous> (tests/test_report_citizen_release_hardening.js:121:15)
     Test.runInAsyncScope (node:async_hooks:206:9)
     Test.run (node:internal/test_runner/test:796:25)
     Test.processPendingSubtests (node:internal/test_runner/test:526:18)

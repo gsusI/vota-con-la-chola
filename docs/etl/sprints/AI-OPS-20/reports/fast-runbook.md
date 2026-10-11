@@ -4,7 +4,7 @@ Goal:
 - Generate the full evidence packet to adjudicate gates G1..G6 with minimal ambiguity.
 
 Repo:
-- `~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola`
+- `.`
 
 ## Step 0: folders
 ```bash

@@ -1,7 +1,7 @@
 # AI-OPS-04 Moncloa -> policy_events Mapping (T6)
 
 Fecha: 2026-02-16  
-Repo: `~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola`  
+Repo: `.`  
 DB: `etl/data/staging/politicos-es.db`
 
 ## Objetivo

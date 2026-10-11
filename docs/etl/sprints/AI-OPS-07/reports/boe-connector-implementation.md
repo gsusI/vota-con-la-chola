@@ -1,7 +1,7 @@
 # AI-OPS-07 BOE Connector Implementation
 
 Date: 2026-02-16  
-Repository: `~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola`
+Repository: `.`
 
 ## Objective
 
@@ -145,8 +145,8 @@ Output:
 ```text
 run_id  source_url                                                                                                                                                             bytes
 ------  ---------------------------------------------------------------------------------------------------------------------------------------------------------------------  -----
-174     file://~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/etl/data/raw/samples/boe_api_legal_sample.xml  1946
-173     file://~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/etl/data/raw/samples/boe_api_legal_sample.xml  2515
+174     etl/data/raw/samples/boe_api_legal_sample.xml  1946
+173     etl/data/raw/samples/boe_api_legal_sample.xml  2515
 
 raw_fetches_rows  distinct_payloads
 ----------------  -----------------

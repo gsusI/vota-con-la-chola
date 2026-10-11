@@ -1,7 +1,7 @@
 # Sprint AI-OPS-02 Closeout
 
 Fecha de cierre: 2026-02-16
-Repositorio: `~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola`
+Repositorio: `.`
 
 ## Decision
 

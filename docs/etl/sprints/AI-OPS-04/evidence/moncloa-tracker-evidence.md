@@ -1,7 +1,7 @@
 # AI-OPS-04 Evidence Packet — Moncloa Tracker Reconciliation
 
 Date: 2026-02-16
-Repository: `~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola`
+Repository: `.`
 
 ## Scope
 Evidence packet for tracker row:

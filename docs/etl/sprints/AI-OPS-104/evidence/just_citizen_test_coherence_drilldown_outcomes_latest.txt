@@ -53,7 +53,7 @@ python3 -m unittest tests/test_report_citizen_coherence_drilldown_outcomes.py te
   "generated_at": "2026-02-23T15:40:42+00:00",
   "status": "ok",
   "paths": {
-    "events_jsonl": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/fixtures/citizen_coherence_drilldown_events_sample.jsonl"
+    "events_jsonl": "tests/fixtures/citizen_coherence_drilldown_events_sample.jsonl"
   },
   "telemetry": {
     "events_total": 22,
@@ -108,7 +108,7 @@ python3 -m unittest tests/test_report_citizen_coherence_drilldown_outcomes.py te
   "generated_at": "2026-02-23T15:40:42+00:00",
   "status": "failed",
   "paths": {
-    "events_jsonl": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/fixtures/citizen_coherence_drilldown_events_sample.jsonl"
+    "events_jsonl": "tests/fixtures/citizen_coherence_drilldown_events_sample.jsonl"
   },
   "telemetry": {
     "events_total": 22,

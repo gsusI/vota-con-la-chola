@@ -1,7 +1,7 @@
 # Sprint AI-OPS-06 Prompt Pack
 
 Repository root:
-- `~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola`
+- `.`
 
 Sprint scope (single bottleneck class):
 - Tracker/SQL contract reconciliation and strict gate recovery
@@ -45,7 +45,7 @@ goal:
 Lock AI-OPS-06 scope and decision policy for mismatch handling before implementation.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Freeze PASS/FAIL gates and approve the mismatch policy path so L2/L1 tasks execute deterministically.
@@ -98,7 +98,7 @@ goal:
 Implement explicit mismatch-policy contract in tracker checker with strict auditability.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Support deterministic, expiring mismatch waivers (if approved) so strict gate fails only on unwaived mismatches.
@@ -156,7 +156,7 @@ goal:
 Expose mismatch-policy visibility in explorer-sources payload for operational transparency.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Ensure waived vs unwaived mismatch state is visible in published status artifacts.
@@ -206,7 +206,7 @@ goal:
 Batch-prep mismatch candidate matrix and waiver proposal packets from live evidence.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Create deterministic input packets so apply/reconcile work is repeatable and auditable.
@@ -258,7 +258,7 @@ goal:
 Apply/recompute mismatch policy and rerun strict gate matrix.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Execute approved reconciliation path and verify strict gate behavior across normal and mismatch-fail modes.
@@ -310,7 +310,7 @@ goal:
 Reconcile tracker row wording with applied policy and current evidence.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Keep tracker human truth aligned with policy outcome (no stale blocker text, explicit next command).
@@ -362,7 +362,7 @@ goal:
 Publish final reconciliation evidence packet and snapshot parity proof.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Produce one reproducible packet proving strict gate pass/fail outcome and dashboard parity.
@@ -414,7 +414,7 @@ goal:
 Run AI-OPS-06 closeout and issue PASS/FAIL with explicit carryover.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Close the contract loop: strict gate behavior is explicit, auditable, and stable.

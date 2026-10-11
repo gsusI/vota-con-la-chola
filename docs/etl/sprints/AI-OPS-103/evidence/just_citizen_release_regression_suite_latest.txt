@@ -1317,7 +1317,7 @@ OK
   "generated_at": "2026-02-23T15:29:17+00:00",
   "status": "ok",
   "paths": {
-    "events_jsonl": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/fixtures/citizen_explainability_outcome_events_sample.jsonl"
+    "events_jsonl": "tests/fixtures/citizen_explainability_outcome_events_sample.jsonl"
   },
   "telemetry": {
     "events_total": 14,
@@ -1436,7 +1436,7 @@ OK
   "generated_at": "2026-02-23T15:29:17+00:00",
   "status": "failed",
   "paths": {
-    "events_jsonl": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/fixtures/citizen_explainability_outcome_events_sample.jsonl"
+    "events_jsonl": "tests/fixtures/citizen_explainability_outcome_events_sample.jsonl"
   },
   "telemetry": {
     "events_total": 14,
@@ -2919,7 +2919,7 @@ python3 -m unittest tests/test_report_citizen_coherence_drilldown_outcomes.py te
   "generated_at": "2026-02-23T15:29:21+00:00",
   "status": "ok",
   "paths": {
-    "events_jsonl": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/fixtures/citizen_coherence_drilldown_events_sample.jsonl"
+    "events_jsonl": "tests/fixtures/citizen_coherence_drilldown_events_sample.jsonl"
   },
   "telemetry": {
     "events_total": 22,
@@ -2974,7 +2974,7 @@ python3 -m unittest tests/test_report_citizen_coherence_drilldown_outcomes.py te
   "generated_at": "2026-02-23T15:29:21+00:00",
   "status": "failed",
   "paths": {
-    "events_jsonl": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/fixtures/citizen_coherence_drilldown_events_sample.jsonl"
+    "events_jsonl": "tests/fixtures/citizen_coherence_drilldown_events_sample.jsonl"
   },
   "telemetry": {
     "events_total": 22,
@@ -4336,8 +4336,8 @@ python3 -m unittest tests/test_report_citizen_concern_pack_outcomes.py
   "generated_at": "2026-02-23T15:29:22+00:00",
   "status": "ok",
   "paths": {
-    "events_jsonl": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/fixtures/citizen_concern_pack_outcome_events_sample.jsonl",
-    "concern_pack_quality_json": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/fixtures/citizen_concern_pack_quality_sample.json"
+    "events_jsonl": "tests/fixtures/citizen_concern_pack_outcome_events_sample.jsonl",
+    "concern_pack_quality_json": "tests/fixtures/citizen_concern_pack_quality_sample.json"
   },
   "telemetry": {
     "events_total": 33,
@@ -4417,8 +4417,8 @@ python3 -m unittest tests/test_report_citizen_concern_pack_outcomes.py
   "generated_at": "2026-02-23T15:29:22+00:00",
   "status": "failed",
   "paths": {
-    "events_jsonl": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/fixtures/citizen_concern_pack_outcome_events_sample.jsonl",
-    "concern_pack_quality_json": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/fixtures/citizen_concern_pack_quality_sample.json"
+    "events_jsonl": "tests/fixtures/citizen_concern_pack_outcome_events_sample.jsonl",
+    "concern_pack_quality_json": "tests/fixtures/citizen_concern_pack_quality_sample.json"
   },
   "telemetry": {
     "events_total": 33,
@@ -5006,7 +5006,7 @@ OK
   "generated_at": "2026-02-23T15:29:22+00:00",
   "status": "ok",
   "paths": {
-    "events_jsonl": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/fixtures/citizen_trust_action_nudge_events_sample.jsonl"
+    "events_jsonl": "tests/fixtures/citizen_trust_action_nudge_events_sample.jsonl"
   },
   "telemetry": {
     "events_total": 14,

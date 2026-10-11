@@ -53,10 +53,10 @@ Snapshot: 2026-02-17
 
 - rule: quarantine series with repeated failures and continue applying remaining rows
 - une_rt_a|freq=A|geo=ES|unit=PC_ACT (from-file): exit=1, reason=Traceback (most recent call last):
-  File "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/etl/politicos_es/connectors/eurostat_indicators.py", line 151, i
+  File "etl/politicos_es/connectors/eurostat_indicators.py", line 151, i
 - une_rt_a|freq=A|geo=ES|unit=PC_ACT (replay): exit=1, reason=Traceback (most recent call last):
-  File "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/etl/politicos_es/connectors/eurostat_indicators.py", line 151, i
+  File "etl/politicos_es/connectors/eurostat_indicators.py", line 151, i
 - une_rt_a|freq=A|geo=PT|unit=PC_ACT (from-file): exit=1, reason=Traceback (most recent call last):
-  File "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/etl/politicos_es/connectors/eurostat_indicators.py", line 151, i
+  File "etl/politicos_es/connectors/eurostat_indicators.py", line 151, i
 - une_rt_a|freq=A|geo=PT|unit=PC_ACT (replay): exit=1, reason=Traceback (most recent call last):
-  File "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/etl/politicos_es/connectors/eurostat_indicators.py", line 151, i
+  File "etl/politicos_es/connectors/eurostat_indicators.py", line 151, i

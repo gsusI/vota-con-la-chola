@@ -224,12 +224,15 @@ function main() {
 
   const bundlePath = path.resolve(args.bundleJson);
   const historyPath = path.resolve(args.historyJsonl);
+  // Reports and history are committed evidence: record cwd-relative paths, never workstation paths.
+  const bundlePathRel = path.relative(process.cwd(), bundlePath);
+  const historyPathRel = path.relative(process.cwd(), historyPath);
 
   const report = {
     generated_at: isoUtcNow(),
     strict: Boolean(args.strict),
-    bundle_path: bundlePath,
-    history_path: historyPath,
+    bundle_path: bundlePathRel,
+    history_path: historyPathRel,
     history_size_before: 0,
     history_size_after: 0,
     regression_detected: false,
@@ -244,7 +247,7 @@ function main() {
     report.history_size_before = entriesBefore.length;
 
     const previousEntry = entriesBefore.length > 0 ? entriesBefore[entriesBefore.length - 1] : {};
-    const currentEntry = buildEntry(bundle, bundlePath);
+    const currentEntry = buildEntry(bundle, bundlePathRel);
     const reasons = detectRegression(previousEntry, currentEntry);
 
     writeHistoryEntry(historyPath, currentEntry);

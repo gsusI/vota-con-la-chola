@@ -1,7 +1,7 @@
 # Sprint AI-OPS-10 Prompt Pack
 
 Repository root:
-- `~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola`
+- `.`
 
 Scale metadata:
 - `scale_mode`: `LONG_10X`
@@ -64,7 +64,7 @@ goal:
 Lock AI-OPS-10 scope, gates, and escalation policy for carryover contract debt.
 
 repository_context:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Freeze a deterministic acceptance contract before code edits and throughput runs start.
@@ -112,7 +112,7 @@ goal:
 Normalize strict/replay run snapshot schema so parity checks are machine-comparable.
 
 repository_context:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Eliminate `metric,value`-only artifacts for carryover source families by standardizing run snapshot columns.
@@ -160,7 +160,7 @@ goal:
 Create deterministic source probe matrix generation for the carryover source set.
 
 repository_context:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Generate a single canonical matrix of strict/from-file/replay commands and expected artifacts.
@@ -208,7 +208,7 @@ goal:
 Harden Eurostat strict/replay contract to remove replay drift.
 
 repository_context:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Ensure `eurostat_sdmx` replay/from-file paths load deterministic records when strict-network succeeds.
@@ -259,7 +259,7 @@ goal:
 Harden Banco de Espana series connector for deterministic replay.
 
 repository_context:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Unify strict/replay parsing and replay fixture behavior for `bde_series_api`.
@@ -310,7 +310,7 @@ goal:
 Harden AEMET connector replay path and error classification.
 
 repository_context:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Make `aemet_opendata_series` strict/replay behavior deterministic and clearly classified (`auth`, `contract`, `network`).
@@ -361,7 +361,7 @@ goal:
 Normalize PLACSP/BDNS run snapshots and replay artifact shape.
 
 repository_context:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Guarantee that PLACSP and BDNS evidence artifacts include replay-comparable counters.
@@ -406,7 +406,7 @@ goal:
 Ship deterministic strict-probe runner wrapper for L1 throughput wave.
 
 repository_context:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Provide one command entrypoint that executes matrix rows and writes logs/artifacts in canonical sprint paths.
@@ -452,7 +452,7 @@ goal:
 Add focused tests for strict/replay parity contract helpers and source hardening changes.
 
 repository_context:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Protect the new parity contract from regressions before L1 execution begins.
@@ -503,7 +503,7 @@ goal:
 Publish HI handoff runbook and frozen command matrix for FAST execution.
 
 repository_context:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Give L1 a deterministic packet to execute without code ambiguity.
@@ -549,7 +549,7 @@ goal:
 Execute batch-prep wave and verify matrix completeness before apply runs.
 
 repository_context:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Produce deterministic prep artifacts and preflight checks for all carryover sources.
@@ -594,7 +594,7 @@ goal:
 Run strict-network execution for PLACSP sources.
 
 repository_context:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Capture strict-network throughput and evidence artifacts for `placsp_autonomico` and `placsp_sindicacion`.
@@ -640,7 +640,7 @@ goal:
 Run replay/from-file parity execution for PLACSP sources.
 
 repository_context:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Demonstrate comparable strict vs replay counters for PLACSP rows.
@@ -685,7 +685,7 @@ goal:
 Run strict-network execution for BDNS sources.
 
 repository_context:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Capture strict-network throughput for `bdns_api_subvenciones` and `bdns_autonomico`.
@@ -731,7 +731,7 @@ goal:
 Run replay/from-file parity execution for BDNS sources.
 
 repository_context:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Produce replay parity evidence for both BDNS rows with comparable counters.
@@ -776,7 +776,7 @@ goal:
 Execute Eurostat strict/replay apply wave and collect parity outcomes.
 
 repository_context:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Validate that `eurostat_sdmx` strict/replay runs now produce deterministic counters.
@@ -821,7 +821,7 @@ goal:
 Execute Banco de Espana strict/replay apply wave.
 
 repository_context:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Validate deterministic behavior for `bde_series_api` under strict and replay modes.
@@ -866,7 +866,7 @@ goal:
 Execute AEMET strict/replay apply wave.
 
 repository_context:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Produce deterministic AEMET evidence with classified blocker signatures when failures occur.
@@ -911,7 +911,7 @@ goal:
 Recompute policy-event mapping for money sources after PLACSP/BDNS apply wave.
 
 repository_context:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Ensure policy-event totals and traceability are refreshed from latest carryover source runs.
@@ -957,7 +957,7 @@ goal:
 Recompute indicator harmonization and points after outcomes apply wave.
 
 repository_context:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Refresh indicator aggregates from Eurostat/BDE/AEMET runs and capture drift deltas.
@@ -1005,7 +1005,7 @@ goal:
 Collect consolidated SQL parity snapshots for all carryover source families.
 
 repository_context:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Create one parity SQL evidence set for strict/replay comparison per source.
@@ -1053,7 +1053,7 @@ goal:
 Run tracker status and strict gate after recompute wave and capture logs.
 
 repository_context:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Produce post-run gate evidence tied to refreshed source and indicator totals.
@@ -1101,7 +1101,7 @@ goal:
 Generate waiver-candidate matrix (if needed) from post-run mismatch evidence.
 
 repository_context:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Produce deterministic waiver candidate export without applying waivers automatically.
@@ -1146,7 +1146,7 @@ goal:
 Refresh explorer-sources status snapshot and verify SQL parity fields.
 
 repository_context:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Update published status payload so impact and tracker fields match current DB/tracker truth.
@@ -1192,7 +1192,7 @@ goal:
 Draft tracker row reconciliation patch plan from post-run evidence.
 
 repository_context:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Prepare evidence-backed row-by-row status proposal (`DONE/PARTIAL/TODO`) with blocker notes and next command.
@@ -1238,7 +1238,7 @@ goal:
 Refresh throughput blocker report using new parity evidence.
 
 repository_context:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Publish updated blocker taxonomy (`auth`, `contract`, `network`, `data_quality`) per carryover source.
@@ -1283,7 +1283,7 @@ goal:
 Assemble final L1 evidence packet for HI reconciliation and closeout.
 
 repository_context:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Bundle all run logs, SQL snapshots, reconciliation draft, and parity reports into one audit packet.
@@ -1329,7 +1329,7 @@ goal:
 Apply tracker/doc reconciliation patch from evidence packet.
 
 repository_context:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Update tracker rows and sprint reconciliation report with evidence-backed statuses only.
@@ -1374,7 +1374,7 @@ goal:
 Run final parity/integrity regression checks and publish close-wave report.
 
 repository_context:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Confirm tracker, DB integrity, and status export are aligned after reconciliation.
@@ -1418,7 +1418,7 @@ goal:
 Issue AI-OPS-10 closeout verdict and next-sprint trigger.
 
 repository_context:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Decide PASS/FAIL from gate evidence and document carryover status with no fake completion.

@@ -21,7 +21,7 @@ python3 scripts/validate_sanction_norms_seed.py --seed etl/data/seeds/sanction_n
 just parl-import-sanction-norms-seed
 python3 scripts/import_sanction_norms_seed.py --db etl/data/staging/politicos-es.aiops117.db --seed etl/data/seeds/sanction_norms_seed_v1.json --snapshot-date 2026-02-23 --source-id boe_api_legal --out docs/etl/sprints/AI-OPS-117/evidence/sanction_norms_seed_import_20260223T175951Z.json
 Traceback (most recent call last):
-  File "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/scripts/import_sanction_norms_seed.py", line 13, in <module>
+  File "scripts/import_sanction_norms_seed.py", line 13, in <module>
     from etl.parlamentario_es.db import apply_schema, open_db
 ModuleNotFoundError: No module named 'etl'
 error: Recipe `parl-import-sanction-norms-seed` failed on line 864 with exit code 1

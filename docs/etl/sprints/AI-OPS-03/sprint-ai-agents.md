@@ -7,7 +7,7 @@ Output contract for this sprint:
 - execution evidence must be written to markdown artifacts in this repo.
 
 Repository root for all prompts:
-- `~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola`
+- `.`
 
 ## Overall project context (why this sprint)
 
@@ -34,7 +34,7 @@ Sprint budget (points):
 You are the L3 Orchestrator for sprint AI-OPS-03.
 
 Repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 Objective:
 Freeze a baseline tied to overall roadmap outcomes before any implementation.
@@ -71,7 +71,7 @@ Acceptance check:
 You are an L2 Specialist Builder.
 
 Repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 Objective:
 Eliminate as_of_date drift in topic analytics/positions for congreso_intervenciones workflows.
@@ -100,7 +100,7 @@ Acceptance check:
 You are an L2 Specialist Builder.
 
 Repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 Objective:
 Improve declared stance signal quality for congreso_intervenciones without increasing false positives.
@@ -135,7 +135,7 @@ Acceptance check:
 You are an L1 Mechanical Executor. Use the $mturk-review-loop skill.
 
 Repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 Objective:
 Prepare targeted MTurk batches for unresolved high-value declared evidence in congreso_intervenciones.
@@ -165,7 +165,7 @@ Acceptance check:
 You are an L1 Mechanical Executor. Use the $mturk-review-loop skill.
 
 Repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 Objective:
 Apply adjudicated MTurk exports and keep queue health stable.
@@ -193,7 +193,7 @@ Acceptance check:
 You are an L2 Specialist Builder.
 
 Repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 Objective:
 Refresh dashboard publication so static explorer-sources matches live DB for AI-OPS-03 metrics.
@@ -221,7 +221,7 @@ Acceptance check:
 You are an L1 Mechanical Executor.
 
 Repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 Objective:
 Produce a reproducible evidence packet for analytics PARTIAL rows tied to this sprint.
@@ -248,7 +248,7 @@ Acceptance check:
 You are an L2 Specialist Builder.
 
 Repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 Objective:
 Reconcile tracker status text and roadmap visibility for the two analytics PARTIAL rows.
@@ -275,7 +275,7 @@ Acceptance check:
 You are the L3 Orchestrator.
 
 Repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 Objective:
 Run sprint closeout and decide PASS/FAIL for AI-OPS-03 with project-level framing.

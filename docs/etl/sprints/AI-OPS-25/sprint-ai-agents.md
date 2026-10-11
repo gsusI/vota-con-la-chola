@@ -172,7 +172,7 @@ flowchart TD
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Freeze scope, gates, and “done” criteria for the manual labour factory run.
@@ -200,7 +200,7 @@ Artifact path:
 - `points`: `13`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Materialize the common factory contract as reusable templates.
@@ -228,7 +228,7 @@ Artifact path:
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Build one deterministic validation checklist that all lanes must pass.
@@ -256,7 +256,7 @@ Artifact path:
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Export baseline lane-sized inputs for all lanes from current DB state.
@@ -285,7 +285,7 @@ Artifact path:
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Prepare Lane A batch for declared-stance pending queue.
@@ -314,7 +314,7 @@ Artifact path:
 - `points`: `13`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Run Lane A worker collection and produce raw worker labels.
@@ -342,7 +342,7 @@ Artifact path:
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Adjudicate Lane A into import-ready decisions.
@@ -371,7 +371,7 @@ Artifact path:
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Apply Lane A decisions to DB and emit before/after evidence.
@@ -400,7 +400,7 @@ Artifact path:
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Prepare Lane B unresolved-name resolution tasks.
@@ -429,7 +429,7 @@ Artifact path:
 - `points`: `13`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Execute Lane B first-pass mapping labels.
@@ -456,7 +456,7 @@ Artifact path:
 - `points`: `13`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Execute Lane B independent second-pass mapping labels.
@@ -482,7 +482,7 @@ Artifact path:
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Adjudicate Lane B pass1/pass2 to final mapping proposals.
@@ -510,7 +510,7 @@ Artifact path:
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Prepare Lane C missing excerpt extraction tasks.
@@ -539,7 +539,7 @@ Artifact path:
 - `points`: `13`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Produce Lane C excerpt extraction output.
@@ -567,7 +567,7 @@ Artifact path:
 - `points`: `13`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Produce Lane C quote + short summary output.
@@ -594,7 +594,7 @@ Artifact path:
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Adjudicate Lane C into final excerpt/quote/summary records.
@@ -622,7 +622,7 @@ Artifact path:
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Prepare Lane D concern-tagging tasks.
@@ -650,7 +650,7 @@ Artifact path:
 - `points`: `13`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Execute Lane D worker tagging and produce raw outputs.
@@ -677,7 +677,7 @@ Artifact path:
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Adjudicate Lane D concern tags.
@@ -705,7 +705,7 @@ Artifact path:
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Prepare Lane E policy-event annotation tasks from existing policy_events.
@@ -733,7 +733,7 @@ Artifact path:
 - `points`: `13`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Execute Lane E double-entry axis coding and adjudication.
@@ -763,7 +763,7 @@ Artifact path:
 - `points`: `13`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Produce Lane F/G manual-collection artifacts (program manifest expansion + blocked-source capture evidence).
@@ -794,7 +794,7 @@ Artifact path:
 - `points`: `13`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Consolidate all lane outputs into one import-ready package with explicit readiness status.
@@ -822,7 +822,7 @@ Artifact path:
 - `points`: `13`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Execute final gate check and publish closeout decision.

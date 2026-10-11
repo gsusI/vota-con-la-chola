@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -u
-cd "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola"
+cd "."
 round=0
 while true; do
   round=$((round+1))

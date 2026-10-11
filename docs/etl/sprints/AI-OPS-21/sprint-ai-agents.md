@@ -61,7 +61,7 @@ Non-goals (explicit):
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Lock AI-OPS-21 scope + must-pass gates for "Coverage + Coherence v1" (static, evidence-first).
@@ -96,7 +96,7 @@ artifact_path: docs/etl/sprints/AI-OPS-21/reports/scope-lock.md
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Produce baseline metrics + a deterministic query/run pack for the Coverage+Coherence view.
@@ -136,7 +136,7 @@ artifact_path: docs/etl/sprints/AI-OPS-21/reports/query-pack-baseline.md
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Write the UX spec for Coverage+Coherence view (citizen-first, static, audit-first).
@@ -179,7 +179,7 @@ artifact_path: docs/etl/sprints/AI-OPS-21/reports/citizen-ux-v4-spec.md
 - `points`: `3`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Extend the citizen URL state contract to support the new Coverage+Coherence view without breaking v3 URLs.
@@ -217,7 +217,7 @@ artifact_path: docs/etl/sprints/AI-OPS-21/reports/url-state-contract.md
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Decide the data contract for coherence computation (UI join vs new artifact) and document it.
@@ -257,7 +257,7 @@ artifact_path: docs/etl/sprints/AI-OPS-21/reports/citizen-coherence-data-contrac
 - `points`: `13`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Implement Coverage+Coherence view in the citizen app (static GH Pages).
@@ -302,7 +302,7 @@ artifact_path: docs/etl/sprints/AI-OPS-21/reports/citizen-ui-v4.md
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Integrate build outputs needed by Coverage+Coherence view and keep budgets strict.
@@ -341,7 +341,7 @@ artifact_path: docs/etl/sprints/AI-OPS-21/reports/build-integration.md
 - `points`: `3`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Write the FAST runbook for deterministic evidence generation and gate adjudication.

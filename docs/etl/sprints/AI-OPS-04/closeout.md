@@ -1,7 +1,7 @@
 # Sprint AI-OPS-04 Closeout
 
 Date: 2026-02-16  
-Repository: `~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola`  
+Repository: `.`  
 Sprint: `AI-OPS-04` (Moncloa critical-path slice)
 
 ## Decision

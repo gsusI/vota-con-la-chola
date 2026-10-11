@@ -1,7 +1,7 @@
 # Probe Batch Prep — AI-OPS-05 (P3)
 
 Date: 2026-02-16  
-Repository: `~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola`
+Repository: `.`
 
 ## Scope
 

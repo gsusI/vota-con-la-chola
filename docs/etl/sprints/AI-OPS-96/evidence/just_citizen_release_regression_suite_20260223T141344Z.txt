@@ -971,7 +971,7 @@ ok 2 - citizen UI wires glossary and help-copy interactions to explainability ou
   "generated_at": "2026-02-23T14:14:02+00:00",
   "status": "ok",
   "paths": {
-    "events_jsonl": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/fixtures/citizen_explainability_outcome_events_sample.jsonl"
+    "events_jsonl": "tests/fixtures/citizen_explainability_outcome_events_sample.jsonl"
   },
   "telemetry": {
     "events_total": 14,
@@ -1090,7 +1090,7 @@ ok 2 - citizen UI wires glossary and help-copy interactions to explainability ou
   "generated_at": "2026-02-23T14:14:02+00:00",
   "status": "failed",
   "paths": {
-    "events_jsonl": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/fixtures/citizen_explainability_outcome_events_sample.jsonl"
+    "events_jsonl": "tests/fixtures/citizen_explainability_outcome_events_sample.jsonl"
   },
   "telemetry": {
     "events_total": 14,
@@ -2751,8 +2751,8 @@ ok 2 - citizen UI records key concern-pack outcome events
   "generated_at": "2026-02-23T14:14:06+00:00",
   "status": "ok",
   "paths": {
-    "events_jsonl": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/fixtures/citizen_concern_pack_outcome_events_sample.jsonl",
-    "concern_pack_quality_json": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/fixtures/citizen_concern_pack_quality_sample.json"
+    "events_jsonl": "tests/fixtures/citizen_concern_pack_outcome_events_sample.jsonl",
+    "concern_pack_quality_json": "tests/fixtures/citizen_concern_pack_quality_sample.json"
   },
   "telemetry": {
     "events_total": 33,
@@ -2832,8 +2832,8 @@ ok 2 - citizen UI records key concern-pack outcome events
   "generated_at": "2026-02-23T14:14:06+00:00",
   "status": "failed",
   "paths": {
-    "events_jsonl": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/fixtures/citizen_concern_pack_outcome_events_sample.jsonl",
-    "concern_pack_quality_json": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/fixtures/citizen_concern_pack_quality_sample.json"
+    "events_jsonl": "tests/fixtures/citizen_concern_pack_outcome_events_sample.jsonl",
+    "concern_pack_quality_json": "tests/fixtures/citizen_concern_pack_quality_sample.json"
   },
   "telemetry": {
     "events_total": 33,
@@ -3053,7 +3053,7 @@ ok 5 - citizen UI exposes next-evidence nudge markers and click wiring
   "generated_at": "2026-02-23T14:14:06+00:00",
   "status": "ok",
   "paths": {
-    "events_jsonl": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/fixtures/citizen_trust_action_nudge_events_sample.jsonl"
+    "events_jsonl": "tests/fixtures/citizen_trust_action_nudge_events_sample.jsonl"
   },
   "telemetry": {
     "events_total": 14,

@@ -68,7 +68,7 @@ ok 2 - citizen UI wires glossary and help-copy interactions to explainability ou
   "generated_at": "2026-02-23T13:33:24+00:00",
   "status": "ok",
   "paths": {
-    "events_jsonl": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/fixtures/citizen_explainability_outcome_events_sample.jsonl"
+    "events_jsonl": "tests/fixtures/citizen_explainability_outcome_events_sample.jsonl"
   },
   "telemetry": {
     "events_total": 14,
@@ -187,7 +187,7 @@ ok 2 - citizen UI wires glossary and help-copy interactions to explainability ou
   "generated_at": "2026-02-23T13:33:24+00:00",
   "status": "failed",
   "paths": {
-    "events_jsonl": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/fixtures/citizen_explainability_outcome_events_sample.jsonl"
+    "events_jsonl": "tests/fixtures/citizen_explainability_outcome_events_sample.jsonl"
   },
   "telemetry": {
     "events_total": 14,

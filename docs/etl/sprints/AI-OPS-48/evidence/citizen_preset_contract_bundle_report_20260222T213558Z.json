@@ -2,9 +2,9 @@
   "generated_at": "2026-02-22T21:35:58.660Z",
   "strict": true,
   "inputs": {
-    "fixture_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/fixtures/citizen_preset_hash_matrix.json",
-    "source_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/ui/citizen/preset_codec.js",
-    "published_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/gh-pages/citizen/preset_codec.js"
+    "fixture_path": "tests/fixtures/citizen_preset_hash_matrix.json",
+    "source_path": "ui/citizen/preset_codec.js",
+    "published_path": "docs/gh-pages/citizen/preset_codec.js"
   },
   "summary": {
     "sections_total": 3,
@@ -63,8 +63,8 @@
   "reports": {
     "fixture_contract": {
       "generated_at": "2026-02-22T21:35:58.587Z",
-      "fixture_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/fixtures/citizen_preset_hash_matrix.json",
-      "codec_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/ui/citizen/preset_codec.js",
+      "fixture_path": "tests/fixtures/citizen_preset_hash_matrix.json",
+      "codec_path": "ui/citizen/preset_codec.js",
       "schema_version": "v2",
       "strict": false,
       "summary": {
@@ -156,8 +156,8 @@
     },
     "codec_parity": {
       "generated_at": "2026-02-22T21:35:58.620Z",
-      "source_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/ui/citizen/preset_codec.js",
-      "published_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/gh-pages/citizen/preset_codec.js",
+      "source_path": "ui/citizen/preset_codec.js",
+      "published_path": "docs/gh-pages/citizen/preset_codec.js",
       "strict": false,
       "summary": {
         "total_cases": 1,
@@ -183,8 +183,8 @@
     },
     "codec_sync_state": {
       "generated_at": "2026-02-22T21:35:58.654Z",
-      "source_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/ui/citizen/preset_codec.js",
-      "published_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/gh-pages/citizen/preset_codec.js",
+      "source_path": "ui/citizen/preset_codec.js",
+      "published_path": "docs/gh-pages/citizen/preset_codec.js",
       "strict": false,
       "summary": {
         "total_cases": 1,

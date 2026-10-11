@@ -2,7 +2,7 @@
 
 ## Snapshot
 - Timestamp UTC: 2026-02-16T21:13:50Z
-- Repository: `~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola`
+- Repository: `.`
 - DB: `etl/data/staging/politicos-es.db`
 - Inputs used: `just etl-tracker-status`, `python3 scripts/e2e_tracker_status.py`, `docs/etl/e2e-scrape-load-tracker.md`, `docs/etl/mismatch-waivers.json`
 

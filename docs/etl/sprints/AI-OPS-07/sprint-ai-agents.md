@@ -1,7 +1,7 @@
 # Sprint AI-OPS-07 Prompt Pack
 
 Repository root:
-- `~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola`
+- `.`
 
 Sprint scope (single bottleneck class):
 - Source bottleneck on executive action validation: Moncloa references are operational but still PARTIAL in tracker pending legal corroboration and waiver burn-down.
@@ -53,7 +53,7 @@ goal:
 Lock AI-OPS-07 baseline and gates for Moncloa-BOE dual-entry validation plus waiver burn-down.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Freeze PASS/FAIL conditions and execution order so L2/L1 can run deterministically with no gate ambiguity.
@@ -107,7 +107,7 @@ goal:
 Implement minimal BOE legal ingest connector for electoral/legal baseline with traceability and idempotence.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Create a reproducible BOE ingest slice that can be used as official corroboration input for Moncloa executive references.
@@ -160,7 +160,7 @@ goal:
 Map BOE legal records into `policy_events` and expose minimal Moncloa-BOE corroboration hooks.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Ensure BOE legal events are queryable in the same action model and can be cross-checked against Moncloa references without breaking traceability.
@@ -211,7 +211,7 @@ goal:
 Batch-prep deterministic Moncloa-BOE reconciliation candidates and waiver burn-down candidates.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Produce reproducible candidate files so reconciliation decisions are evidence-backed and repeatable.
@@ -263,7 +263,7 @@ goal:
 Run apply/recompute cycle for BOE+Moncloa and capture waiver-aware vs strict gate deltas.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Materialize fresh metrics and gate outputs after BOE integration so reconciliation decisions are based on current operational truth.
@@ -322,7 +322,7 @@ goal:
 Reconcile tracker wording for executive/legal rows using fresh BOE+Moncloa evidence.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Keep tracker semantics aligned with reproducible evidence and mismatch policy (one blocker + one next command when PARTIAL).
@@ -374,7 +374,7 @@ goal:
 Publish final evidence packet: dashboard parity + waiver governance + gate matrix.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Provide one reproducible packet proving whether AI-OPS-07 gate conditions are met.
@@ -429,7 +429,7 @@ goal:
 Run AI-OPS-07 closeout and issue PASS/FAIL with explicit carryover.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Close the sprint with project-level framing, strict auditability, and carryover only when a gate is red.

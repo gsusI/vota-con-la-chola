@@ -71,7 +71,7 @@ Non-goals (explicit):
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Lock AI-OPS-20 scope + must-pass gates for Citizen Dashboard v3 (static, evidence-first).
@@ -106,7 +106,7 @@ artifact_path: docs/etl/sprints/AI-OPS-20/reports/scope-lock.md
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Produce a baseline + command/query pack for the citizen v3 sprint so L1 can execute deterministic evidence tasks.
@@ -144,7 +144,7 @@ artifact_path: docs/etl/sprints/AI-OPS-20/reports/query-pack-baseline.md
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Write the Citizen Dashboard v3 UX spec (multi-concern, shareable, audit-first) grounded in current data constraints.
@@ -183,7 +183,7 @@ artifact_path: docs/etl/sprints/AI-OPS-20/reports/citizen-ux-v3-spec.md
 - `points`: `3`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Define a precise, backward-compatible URL state contract for citizen v3 (shareable links).
@@ -223,7 +223,7 @@ artifact_path: docs/etl/sprints/AI-OPS-20/reports/url-state-contract.md
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Define an additive citizen data contract v3 that supports method toggles + stable shareability without bloating artifacts.
@@ -259,7 +259,7 @@ artifact_path: docs/etl/sprints/AI-OPS-20/reports/citizen-data-contract-v3.md
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Implement the export/build changes required by citizen data contract v3 (multi-method artifacts + reproducibility).
@@ -303,7 +303,7 @@ artifact_path: docs/etl/sprints/AI-OPS-20/reports/citizen-export-v3-design.md
 - `points`: `13`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Implement Citizen Dashboard v3 UI (static, multi-concern + shareable URLs + method toggle), preserving auditability and honesty.
@@ -345,7 +345,7 @@ artifact_path: docs/etl/sprints/AI-OPS-20/reports/citizen-ui-v3.md
 - `points`: `1`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Produce a deterministic FAST-wave runbook for evidence generation and gate evaluation.
@@ -383,7 +383,7 @@ artifact_path: docs/etl/sprints/AI-OPS-20/reports/fast-runbook.md
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Capture a baseline evidence packet for citizen artifacts and current GH Pages build outputs.
@@ -420,7 +420,7 @@ artifact_path: docs/etl/sprints/AI-OPS-20/evidence/baseline_citizen_validate.jso
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Export and validate all citizen method artifacts (multi-method) and record size budgets.
@@ -461,7 +461,7 @@ artifact_path: docs/etl/sprints/AI-OPS-20/evidence/citizen-json-sizes.txt
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Build GH Pages output and capture reproducible build evidence.
@@ -499,7 +499,7 @@ artifact_path: docs/etl/sprints/AI-OPS-20/evidence/gh-pages-build.log
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Run a link-check gate for citizen v3: audit links must resolve to valid GH Pages targets.
@@ -538,7 +538,7 @@ artifact_path: docs/etl/sprints/AI-OPS-20/reports/link-check.md
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Produce a desktop walkthrough that validates the citizen v3 user journeys and captures expected results.
@@ -575,7 +575,7 @@ artifact_path: docs/etl/sprints/AI-OPS-20/reports/citizen-walkthrough.md
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Mobile + accessibility smoke test for the citizen v3 page (static).
@@ -615,7 +615,7 @@ artifact_path: docs/etl/sprints/AI-OPS-20/reports/citizen-mobile-a11y-smoke.md
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Produce a strict size/perf evidence packet (static budgets) for all citizen artifacts.
@@ -653,7 +653,7 @@ artifact_path: docs/etl/sprints/AI-OPS-20/evidence/citizen-json-budget.txt
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Validate shareable URL restoration behavior across a matrix of states.
@@ -694,7 +694,7 @@ artifact_path: docs/etl/sprints/AI-OPS-20/reports/shareable-url-matrix.md
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Run an honesty audit against the citizen UI to ensure we do not mislabel method/coverage/unknown.
@@ -732,7 +732,7 @@ artifact_path: docs/etl/sprints/AI-OPS-20/reports/honesty-audit.md
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Re-run strict tracker gate + status export parity checks and save evidence.
@@ -774,7 +774,7 @@ artifact_path: docs/etl/sprints/AI-OPS-20/evidence/status-parity-postrun.txt
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Run regression tests and capture results.
@@ -812,7 +812,7 @@ artifact_path: docs/etl/sprints/AI-OPS-20/evidence/tests.log
 - `points`: `1`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Compile an artifacts index for AI-OPS-20 so gates can be adjudicated quickly.
@@ -846,7 +846,7 @@ artifact_path: docs/etl/sprints/AI-OPS-20/reports/artifacts-index.md
 - `points`: `2`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Reconcile docs and navigation so the sprint is easy to audit and does not fork roadmaps.
@@ -881,7 +881,7 @@ artifact_path: docs/etl/sprints/AI-OPS-20/reports/doc-reconciliation.md
 - `points`: `3`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Adjudicate sprint gates G1-G6 using the produced evidence.
@@ -915,7 +915,7 @@ artifact_path: docs/etl/sprints/AI-OPS-20/reports/gate-adjudication.md
 - `points`: `1`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Draft the closeout narrative (verbatim paths to evidence + visible progress delta).
@@ -951,7 +951,7 @@ artifact_path: docs/etl/sprints/AI-OPS-20/reports/closeout-draft.md
 - `points`: `3`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Issue the final sprint verdict and update sprint navigation.

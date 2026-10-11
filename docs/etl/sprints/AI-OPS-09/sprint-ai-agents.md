@@ -1,7 +1,7 @@
 # Sprint AI-OPS-09 Prompt Pack
 
 Repository root:
-- `~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola`
+- `.`
 
 Scale metadata:
 - `scale_mode`: `LONG_10X`
@@ -70,7 +70,7 @@ goal:
 Lock scope, gates, and sequencing for AI-OPS-09 LONG_10X execution.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Freeze a deterministic acceptance contract for money/outcomes source expansion before implementation starts.
@@ -118,7 +118,7 @@ goal:
 Define the schema and source-contract foundation for the five new source families.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Create additive schema/source definitions and command contracts that make downstream L1 execution deterministic.
@@ -168,7 +168,7 @@ goal:
 Implement PLACSP connector slice for reproducible contracting ingest.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Ship a deterministic PLACSP minimal ingest path with traceable source_record ids and sample-backed tests.
@@ -218,7 +218,7 @@ goal:
 Implement BDNS/SNPSAP connector slice for reproducible subsidy ingest.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Ship deterministic BDNS ingest with stable ids and traceable amount/beneficiary fields (when present).
@@ -268,7 +268,7 @@ goal:
 Implement Eurostat connector slice for outcomes indicators.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Create deterministic Eurostat ingestion for a curated indicator manifest with versioned metadata.
@@ -318,7 +318,7 @@ goal:
 Implement Banco de Espana indicator connector slice.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Provide deterministic series ingest for curated Banco de Espana confounder indicators.
@@ -365,7 +365,7 @@ goal:
 Implement AEMET indicator connector slice.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Create deterministic ingest for selected AEMET confounder series and station metadata.
@@ -412,7 +412,7 @@ goal:
 Implement mapping/backfill from PLACSP + BDNS records into canonical action events.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Expose money-public action rows in `policy_events` with reproducible, traceable mappings.
@@ -462,7 +462,7 @@ goal:
 Implement harmonization/backfill path for outcome/confounder indicators.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Load Eurostat/BDE/AEMET series into canonical indicator tables with deterministic versioning.
@@ -514,7 +514,7 @@ goal:
 Integrate new source families into publish/tracker visibility and regression checks.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Ensure new sources are visible and auditable in status payloads, tracker reconciliation, and tests.
@@ -564,7 +564,7 @@ goal:
 Prepare deterministic PLACSP ingest batch inputs and command matrix.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Generate reproducible PLACSP prep artifacts for strict-network, fallback, and replay execution.
@@ -610,7 +610,7 @@ goal:
 Prepare deterministic BDNS ingest batch inputs and command matrix.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Generate reproducible BDNS prep artifacts for strict-network, fallback, and replay execution.
@@ -656,7 +656,7 @@ goal:
 Prepare Eurostat indicator manifest and execution matrix.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Lock deterministic series list and command set for ingest/replay.
@@ -702,7 +702,7 @@ goal:
 Prepare Banco de Espana series manifest and run matrix.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Create reproducible BDE execution inputs for apply/replay stages.
@@ -747,7 +747,7 @@ goal:
 Prepare AEMET station/series manifest and run matrix.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Create deterministic AEMET batch inputs with explicit token/quota handling notes.
@@ -792,7 +792,7 @@ goal:
 Execute PLACSP apply/replay runs and capture idempotence evidence.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Produce non-zero PLACSP ingestion evidence and deterministic replay parity.
@@ -839,7 +839,7 @@ goal:
 Execute BDNS apply/replay runs and capture idempotence evidence.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Produce non-zero BDNS ingestion evidence with deterministic replay parity.
@@ -886,7 +886,7 @@ goal:
 Execute Eurostat apply/replay runs across approved series manifest.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Populate indicator raw loads for Eurostat with reproducible per-series evidence.
@@ -933,7 +933,7 @@ goal:
 Execute Banco de Espana apply/replay runs.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Populate BDE indicator raw loads with reproducible replay checks.
@@ -979,7 +979,7 @@ goal:
 Execute AEMET apply/replay runs.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Populate AEMET indicator raw loads with deterministic replay evidence.
@@ -1025,7 +1025,7 @@ goal:
 Run money-domain policy_events recompute from newly ingested PLACSP/BDNS data.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Materialize non-zero, traceable money-domain policy events.
@@ -1072,7 +1072,7 @@ goal:
 Run indicator harmonization recompute from Eurostat/BDE/AEMET ingests.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Populate non-zero canonical indicator tables with source-level traceability.
@@ -1121,7 +1121,7 @@ goal:
 Build gate/integrity evidence packet after money+indicator recomputes.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Prove post-apply integrity and queue health with deterministic command evidence.
@@ -1168,7 +1168,7 @@ goal:
 Refresh publish artifacts and verify explorer-sources parity for new source families.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Confirm published status payload reflects tracker/sql truth for new connectors and non-zero impact counts.
@@ -1217,7 +1217,7 @@ goal:
 Draft tracker-row reconciliation recommendations from post-apply evidence.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Generate deterministic candidate status transitions (`TODO/PARTIAL/DONE`) backed by command evidence.
@@ -1263,7 +1263,7 @@ goal:
 Prepare direct-transcription tracker/doc patch set from approved reconciliation candidates.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Create a deterministic patch proposal that updates tracker text only from evidence-backed rows.
@@ -1307,7 +1307,7 @@ goal:
 Run duplicate/replay/schema audits across all new source apply outputs.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Validate deterministic replay behavior and schema/header consistency for all new source families.
@@ -1356,7 +1356,7 @@ goal:
 Build consolidated throughput and blocker summary for HI closeout.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Synthesize execution metrics, blocker evidence, and unresolved items in one deterministic handoff packet.
@@ -1403,7 +1403,7 @@ goal:
 Integrate approved reconciliation/doc updates and resolve any L1 surfaced defects.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Produce a clean pre-closeout state: tracker/docs aligned with evidence and no unresolved high-severity regressions.
@@ -1451,7 +1451,7 @@ goal:
 Run final PASS/FAIL closeout for AI-OPS-09 and publish decision with evidence.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Decide sprint outcome against must-pass gates and leave next-sprint trigger explicitly documented.

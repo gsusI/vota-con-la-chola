@@ -38,7 +38,7 @@
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Lock AI-OPS-16 scope, must-pass gates, and anti-loop policy boundaries.
@@ -74,7 +74,7 @@ artifact_path: docs/etl/sprints/AI-OPS-16/reports/scope-lock.md
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Produce the baseline SQL/CLI query pack for declared-signal and queue KPIs.
@@ -109,7 +109,7 @@ artifact_path: docs/etl/sprints/AI-OPS-16/reports/query-pack-baseline.md
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Implement declared-stance signal improvements (v3 rules) with explicit confidence policy.
@@ -145,7 +145,7 @@ artifact_path: docs/etl/sprints/AI-OPS-16/reports/declared-stance-v3-design.md
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Add/refresh deterministic tests for declared stance and review queue interactions.
@@ -180,7 +180,7 @@ artifact_path: docs/etl/sprints/AI-OPS-16/reports/declared-stance-v3-tests.md
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Build acceptance KPI pack for signal delta, coherence, and parity checks.
@@ -213,7 +213,7 @@ artifact_path: docs/etl/sprints/AI-OPS-16/reports/kpi-acceptance-pack.md
 - `points`: `3`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Approve setup wave readiness and lock execution order.
@@ -247,7 +247,7 @@ artifact_path: docs/etl/sprints/AI-OPS-16/reports/setup-wave-signoff.md
 - `points`: `3`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Create deterministic FAST-wave execution checklist for L1 operators.
@@ -280,7 +280,7 @@ artifact_path: docs/etl/sprints/AI-OPS-16/reports/fast-wave-checklist.md
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Capture baseline declared KPIs and tracker status before changes.
@@ -315,7 +315,7 @@ artifact_path: docs/etl/sprints/AI-OPS-16/exports/declared_kpi_baseline.csv
 - `points`: `3`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Run targeted tests for declared-stance v3 changes.
@@ -348,7 +348,7 @@ artifact_path: docs/etl/sprints/AI-OPS-16/evidence/declared-tests.log
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Execute declared stance backfill pass 1 (control threshold).
@@ -383,7 +383,7 @@ artifact_path: docs/etl/sprints/AI-OPS-16/exports/declared_pass1_metrics.csv
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Execute declared stance backfill pass 2 (candidate threshold).
@@ -418,7 +418,7 @@ artifact_path: docs/etl/sprints/AI-OPS-16/exports/declared_pass2_metrics.csv
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Apply deterministic threshold selection policy and run selected full backfill.
@@ -453,7 +453,7 @@ artifact_path: docs/etl/sprints/AI-OPS-16/exports/declared_selected_metrics.csv
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Produce baseline vs selected diff matrix for declared signal KPIs.
@@ -487,7 +487,7 @@ artifact_path: docs/etl/sprints/AI-OPS-16/exports/declared_diff_matrix.csv
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Snapshot review queue after selected backfill.
@@ -521,7 +521,7 @@ artifact_path: docs/etl/sprints/AI-OPS-16/exports/review_queue_snapshot.csv
 - `points`: `3`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Prepare review batch input (or no-op evidence if pending=0).
@@ -556,7 +556,7 @@ artifact_path: docs/etl/sprints/AI-OPS-16/evidence/review_batch_a_prep.log
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Apply review decisions batch A (or explicit no-op if batch empty).
@@ -590,7 +590,7 @@ artifact_path: docs/etl/sprints/AI-OPS-16/evidence/review_batch_a_apply.log
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Recompute positions/coherence artifacts after declared and review updates.
@@ -625,7 +625,7 @@ artifact_path: docs/etl/sprints/AI-OPS-16/evidence/recompute_positions.log
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Export post-run coherence and declared-signal packet.
@@ -660,7 +660,7 @@ artifact_path: docs/etl/sprints/AI-OPS-16/exports/coherence_post.csv
 - `points`: `3`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Run blocker lever checks and refresh no-new-lever matrix without blind retries.
@@ -695,7 +695,7 @@ artifact_path: docs/etl/sprints/AI-OPS-16/evidence/blocker-lever-check.log
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Run strict gate + postrun parity and draft tracker/doc reconciliation packet.
@@ -734,7 +734,7 @@ artifact_path: docs/etl/sprints/AI-OPS-16/reports/reconciliation-draft.md
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Convert reconciliation draft into policy-aligned apply report.
@@ -768,7 +768,7 @@ artifact_path: docs/etl/sprints/AI-OPS-16/reports/reconciliation-apply.md
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Adjudicate gate outcomes and decide sprint verdict prerequisites.
@@ -802,7 +802,7 @@ artifact_path: docs/etl/sprints/AI-OPS-16/reports/gate-adjudication.md
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Publish final gate+parity synthesis with baseline-to-final deltas.
@@ -836,7 +836,7 @@ artifact_path: docs/etl/sprints/AI-OPS-16/reports/final-gate-parity.md
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Finalize closeout decision and next sprint trigger.

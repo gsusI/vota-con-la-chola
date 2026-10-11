@@ -1,7 +1,7 @@
 # AI-OPS-06 Mismatch Policy Implementation
 
 Date: 2026-02-16  
-Repository: `~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola`
+Repository: `.`
 
 ## Objective
 

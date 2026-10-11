@@ -11,7 +11,7 @@ References:
 
 1. Agent: L2 Specialist Builder
 ```text
-Repo: ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+Repo: .
 Objective: Keep Senate tail retries deterministic while preventing anti-loop churn.
 Tasks:
 - Run exactly one bounded retry probe for senado tail when no new unblock lever exists.
@@ -28,7 +28,7 @@ Acceptance checks:
 
 2. Agent: L1 Mechanical Executor
 ```text
-Repo: ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+Repo: .
 Objective: Generate repetitive evidence packets for remaining Senate URLs.
 Tasks:
 - Export remaining missing URLs with status metadata.
@@ -43,7 +43,7 @@ Acceptance checks:
 
 3. Agent: L3 Orchestrator
 ```text
-Repo: ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+Repo: .
 Objective: Lock the next 10-sprint strategy with controllable-first policy and subagent boundaries.
 Tasks:
 - Finalize sprint sequence AI-OPS-27..AI-OPS-36 with explicit visible deltas.

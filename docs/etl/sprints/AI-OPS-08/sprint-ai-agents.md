@@ -1,7 +1,7 @@
 # Sprint AI-OPS-08 Prompt Pack
 
 Repository root:
-- `~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola`
+- `.`
 
 Sprint scope (single bottleneck class):
 - Pipeline bottleneck on tracker/governance reconciliation: core Moncloa-BOE sources are loaded in SQL, but operational gates still drift because `boe_api_legal` is untracked in checklist mapping and Navarra remains waiver-dependent.
@@ -61,7 +61,7 @@ goal:
 Lock AI-OPS-08 baseline and must-pass gates for tracker-contract reconciliation and waiver burn-down.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Freeze PASS/FAIL conditions and execution order so L2/L1 can execute without gate ambiguity.
@@ -116,7 +116,7 @@ goal:
 Implement tracker-source mapping hardening so BOE legal status is reconciled (not UNTRACKED) in checker and explorer payload.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Remove BOE tracker drift by mapping `Marco legal electoral` deterministically to `boe_api_legal` in the reconciliation path.
@@ -175,7 +175,7 @@ goal:
 Harden default tracker gate ergonomics with a canonical waiver registry path while preserving strict fail semantics.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Keep gate usage deterministic in daily operations: strict gate fails only on unwaived mismatches, expired waivers, or DONE_ZERO_REAL.
@@ -229,7 +229,7 @@ goal:
 Prepare deterministic waiver burn-down and tracker-contract candidate batches.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Generate reproducible candidate artifacts so status/waiver changes are evidence-backed and auditable.
@@ -282,7 +282,7 @@ goal:
 Run apply/recompute cycle for BOE tracker reconciliation and Navarra waiver burn-down attempt.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Refresh operational truth with reproducible commands and capture strict vs waiver-aware gate deltas.
@@ -338,7 +338,7 @@ goal:
 Reconcile tracker row text to current evidence for legal/executive and blocked-source rows.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Ensure tracker wording reflects operational truth with explicit blocker + next command semantics.
@@ -392,7 +392,7 @@ goal:
 Publish final reconciliation evidence packet and dashboard parity for mismatch-policy transparency.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Provide one gate-ready evidence packet proving tracker/sql/payload reconciliation state for closeout.
@@ -451,7 +451,7 @@ goal:
 Run AI-OPS-08 closeout and issue PASS/FAIL with explicit carryover.
 
 repository:
-~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+.
 
 objective:
 Close reconciliation sprint with project-level framing and deterministic carryover only when a gate is red.

@@ -62,7 +62,7 @@ Non-goals (explicit):
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Lock the citizen-first product scope, user journeys, and must-pass gates.
@@ -97,7 +97,7 @@ artifact_path: docs/etl/sprints/AI-OPS-18/reports/scope-lock.md
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Define the citizen snapshot data contract and the minimal pages/components.
@@ -132,7 +132,7 @@ artifact_path: docs/etl/sprints/AI-OPS-18/reports/citizen-data-contract.md
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Implement a deterministic export script for the citizen snapshot.
@@ -172,7 +172,7 @@ artifact_path: scripts/export_citizen_snapshot.py
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Define citizen-friendly concern groupings over the existing initiative-level topics.
@@ -208,7 +208,7 @@ artifact_path: ui/citizen/concerns_v1.json
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Implement the citizen-first GH Pages webapp UI (static, no backend).
@@ -251,7 +251,7 @@ artifact_path: ui/citizen/index.html
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Wire the citizen app + export into the existing GH Pages build pipeline.
@@ -290,7 +290,7 @@ artifact_path: docs/etl/sprints/AI-OPS-18/reports/gh-pages-integration.md
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Add a deterministic validator for the citizen snapshot and a size guardrail.
@@ -328,7 +328,7 @@ artifact_path: scripts/validate_citizen_snapshot.py
 - `points`: `3`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Setup wave signoff: confirm we can run FAST lane deterministically.
@@ -362,7 +362,7 @@ artifact_path: docs/etl/sprints/AI-OPS-18/reports/setup-wave-signoff.md
 - `points`: `1`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Capture baseline GH Pages build outputs (pre-citizen) for comparison.
@@ -397,7 +397,7 @@ artifact_path: docs/etl/sprints/AI-OPS-18/evidence/gh-pages-baseline-tree.txt
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Generate the citizen snapshot JSON and capture export evidence.
@@ -434,7 +434,7 @@ artifact_path: docs/gh-pages/citizen/data/citizen.json
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Build GH Pages outputs including the citizen app and capture build evidence.
@@ -469,7 +469,7 @@ artifact_path: docs/etl/sprints/AI-OPS-18/evidence/gh-pages-build-citizen.log
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Validate the citizen snapshot contract + size guardrails.
@@ -503,7 +503,7 @@ artifact_path: docs/etl/sprints/AI-OPS-18/evidence/citizen-validate.txt
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Local smoke test: citizen app renders and links are not broken.
@@ -538,7 +538,7 @@ artifact_path: docs/etl/sprints/AI-OPS-18/reports/smoke-test.md
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Create a citizen walkthrough evidence packet (3 concerns).
@@ -575,7 +575,7 @@ artifact_path: docs/etl/sprints/AI-OPS-18/reports/citizen-walkthrough.md
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Export citizen KPIs (counts + coverage) to keep us honest.
@@ -613,7 +613,7 @@ artifact_path: docs/etl/sprints/AI-OPS-18/exports/citizen_kpis.csv
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Check that drill-down links resolve to existing explorers.
@@ -647,7 +647,7 @@ artifact_path: docs/etl/sprints/AI-OPS-18/reports/link-check.md
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Accessibility + mobile sanity checklist (manual, deterministic checklist output).
@@ -684,7 +684,7 @@ artifact_path: docs/etl/sprints/AI-OPS-18/reports/a11y-mobile-checklist.md
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Landing integration evidence: citizens can discover the app.
@@ -717,7 +717,7 @@ artifact_path: docs/etl/sprints/AI-OPS-18/evidence/landing-link.txt
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Run strict tracker gate + status parity after UI export/build.
@@ -754,7 +754,7 @@ artifact_path: docs/etl/sprints/AI-OPS-18/evidence/tracker-gate-postrun.exit
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Publish the updated GH Pages site (citizen app included) using the canonical publish workflow.
@@ -787,7 +787,7 @@ artifact_path: docs/etl/sprints/AI-OPS-18/evidence/gh-pages-publish.log
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Fix any issues found in FAST wave evidence (polish pass), without expanding scope.
@@ -821,7 +821,7 @@ artifact_path: docs/etl/sprints/AI-OPS-18/reports/polish-notes.md
 - `points`: `3`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Add a citizen-facing "How this works" section (short, honest, link-heavy).
@@ -857,7 +857,7 @@ artifact_path: docs/etl/sprints/AI-OPS-18/reports/how-this-works.md
 - `points`: `2`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Assemble gate adjudication packet + closeout draft.
@@ -892,7 +892,7 @@ artifact_path: docs/etl/sprints/AI-OPS-18/reports/gate-adjudication.md
 - `points`: `3`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Final PASS/FAIL verdict.

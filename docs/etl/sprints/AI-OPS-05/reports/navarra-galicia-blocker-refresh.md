@@ -1,7 +1,7 @@
 # Navarra/Galicia Blocker Refresh — AI-OPS-05
 
 Date: 2026-02-16  
-Repository: `~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola`  
+Repository: `.`  
 DB: `etl/data/staging/politicos-es.db`
 
 ## Objective
@@ -47,9 +47,9 @@ sqlite3 etl/data/staging/politicos-es.db "WITH ranked AS (SELECT source_id, run_
 ```
 
 ```text
-parlamento_galicia_deputados|172|1|ok|75|file://~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/etl/data/raw/manual/galicia_deputado_profiles_20260212T141929Z/pages|Ingesta completada: 75/75 registros validos (from-dir)
+parlamento_galicia_deputados|172|1|ok|75|etl/data/raw/manual/galicia_deputado_profiles_20260212T141929Z/pages|Ingesta completada: 75/75 registros validos (from-dir)
 parlamento_galicia_deputados|171|2|error|0|https://www.parlamentodegalicia.gal/Composicion/Deputados|Error: HTTP Error 403: Forbidden
-parlamento_navarra_parlamentarios_forales|170|1|ok|50|file://~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/etl/data/raw/manual/navarra_persona_profiles_20260212T144911Z/pages|Ingesta completada: 50/50 registros validos (from-dir)
+parlamento_navarra_parlamentarios_forales|170|1|ok|50|etl/data/raw/manual/navarra_persona_profiles_20260212T144911Z/pages|Ingesta completada: 50/50 registros validos (from-dir)
 parlamento_navarra_parlamentarios_forales|169|2|error|0|https://parlamentodenavarra.es/es/composicion-organos/parlamentarios-forales|Error: HTTP Error 403: Forbidden
 ```
 

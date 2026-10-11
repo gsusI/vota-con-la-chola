@@ -59,7 +59,7 @@
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Lock AI-OPS-19 scope, gate contract, and anti-loop policy for external blockers.
@@ -95,7 +95,7 @@ artifact_path: docs/etl/sprints/AI-OPS-19/reports/scope-lock.md
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Produce baseline SQL/CLI query pack for the new programas lane.
@@ -130,7 +130,7 @@ artifact_path: docs/etl/sprints/AI-OPS-19/reports/query-pack-baseline.md
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Define the canonical source contract and manifest schema for party programs.
@@ -167,7 +167,7 @@ artifact_path: docs/etl/sprints/AI-OPS-19/reports/programas-source-contract.md
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Implement the first reproducible programas ingestion + extraction pipeline slice.
@@ -208,7 +208,7 @@ artifact_path: docs/etl/sprints/AI-OPS-19/reports/programas-pipeline-design.md
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Add deterministic tests for programas ingestion and idempotence contracts.
@@ -245,7 +245,7 @@ artifact_path: docs/etl/sprints/AI-OPS-19/reports/programas-pipeline-tests.md
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Build deterministic FAST-wave execution checklist for tasks 8-20.
@@ -280,7 +280,7 @@ artifact_path: docs/etl/sprints/AI-OPS-19/reports/fast-wave-checklist.md
 - `points`: `3`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Approve HI setup completion and lock FAST execution order.
@@ -314,7 +314,7 @@ artifact_path: docs/etl/sprints/AI-OPS-19/reports/setup-wave-signoff.md
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Capture baseline status and KPI packet before programas ingestion.
@@ -352,7 +352,7 @@ artifact_path: docs/etl/sprints/AI-OPS-19/exports/programas_kpi_baseline.csv
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Prepare first deterministic party-program manifest input batch.
@@ -395,7 +395,7 @@ artifact_path: docs/etl/sprints/AI-OPS-19/exports/program_manifest_input.csv
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Validate manifest quality before any network fetch.
@@ -432,7 +432,7 @@ artifact_path: docs/etl/sprints/AI-OPS-19/reports/program-manifest-validation.md
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Execute first programas ingestion run from manifest.
@@ -469,7 +469,7 @@ artifact_path: docs/etl/sprints/AI-OPS-19/evidence/programas_ingest.log
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Materialize text_documents coverage for programas_partidos evidence.
@@ -505,7 +505,7 @@ artifact_path: docs/etl/sprints/AI-OPS-19/exports/programas_textdocs_metrics.csv
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Run declared-stance pass1 (higher confidence threshold) for programas_partidos.
@@ -541,7 +541,7 @@ artifact_path: docs/etl/sprints/AI-OPS-19/exports/programas_stance_pass1_metrics
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Run declared-stance pass2 (broader threshold) for programas_partidos.
@@ -577,7 +577,7 @@ artifact_path: docs/etl/sprints/AI-OPS-19/exports/programas_stance_pass2_metrics
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Select deterministic threshold winner and apply selected stance state.
@@ -614,7 +614,7 @@ artifact_path: docs/etl/sprints/AI-OPS-19/reports/programas_threshold_selection.
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Snapshot review queue state after threshold selection.
@@ -651,7 +651,7 @@ artifact_path: docs/etl/sprints/AI-OPS-19/exports/programas_review_queue_snapsho
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Prepare deterministic review batch A input for manual/adjudicated loop.
@@ -688,7 +688,7 @@ artifact_path: docs/etl/sprints/AI-OPS-19/exports/programas_review_batch_a_input
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Apply adjudicated review decisions for batch A (or execute deterministic no-op path).
@@ -725,7 +725,7 @@ artifact_path: docs/etl/sprints/AI-OPS-19/evidence/programas_review_batch_apply.
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Recompute declared and combined positions after selection/review apply.
@@ -763,7 +763,7 @@ artifact_path: docs/etl/sprints/AI-OPS-19/exports/programas_topic_positions_post
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Run FAST-wave final gates and parity exports.
@@ -804,7 +804,7 @@ artifact_path: docs/etl/sprints/AI-OPS-19/reports/final-gate-parity.md
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Draft reconciliation decision for tracker line 74 using postrun evidence.
@@ -839,7 +839,7 @@ artifact_path: docs/etl/sprints/AI-OPS-19/reports/tracker-row74-reconciliation-d
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Apply tracker/doc updates and capture exact diff rationale.
@@ -876,7 +876,7 @@ artifact_path: docs/etl/sprints/AI-OPS-19/reports/tracker-row74-apply.md
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Assemble final gate adjudication packet and closeout draft.
@@ -913,7 +913,7 @@ artifact_path: docs/etl/sprints/AI-OPS-19/reports/gate-adjudication.md
 - `points`: `3`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Issue final PASS/FAIL verdict and lock AI-OPS-19 carryover policy.

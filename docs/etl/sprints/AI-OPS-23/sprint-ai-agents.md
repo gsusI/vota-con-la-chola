@@ -71,7 +71,7 @@ Non-goals (explicit):
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Lock AI-OPS-23 scope + must-pass gates for "Citizen Onboarding v1".
@@ -110,7 +110,7 @@ artifact_path: docs/etl/sprints/AI-OPS-23/reports/scope-lock.md
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Produce a baseline/query pack for onboarding v1 so we can measure "time-to-answer" and preserve determinism.
@@ -148,7 +148,7 @@ artifact_path: docs/etl/sprints/AI-OPS-23/reports/query-pack-baseline.md
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Define the onboarding UX spec that makes the citizen app usable in ~60 seconds.
@@ -193,7 +193,7 @@ artifact_path: docs/etl/sprints/AI-OPS-23/reports/citizen-onboarding-ux-spec.md
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Freeze the URL/state contract for onboarding v1 (what is shareable vs private).
@@ -233,7 +233,7 @@ artifact_path: docs/etl/sprints/AI-OPS-23/reports/url-contract.md
 - `points`: `13`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Implement onboarding v1 in the citizen app, consistent with the UX spec + URL contract.
@@ -277,7 +277,7 @@ artifact_path: ui/citizen/index.html
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Implement "share my setup" safely (URL params for view state, fragment for preferences).
@@ -315,7 +315,7 @@ artifact_path: ui/citizen/index.html
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Tighten onboarding copy + honesty and mobile/a11y polish for the new flow.
@@ -352,7 +352,7 @@ artifact_path: ui/citizen/index.html
 - `points`: `2`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Ensure GH Pages build wiring remains canonical and captures onboarding changes.
@@ -389,7 +389,7 @@ artifact_path: docs/etl/sprints/AI-OPS-23/reports/build-integration.md
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Run the canonical GH Pages build and capture evidence.
@@ -426,7 +426,7 @@ artifact_path: docs/etl/sprints/AI-OPS-23/evidence/gh-pages-build.log
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Validate citizen artifacts post-build and capture validator output.
@@ -462,7 +462,7 @@ artifact_path: docs/etl/sprints/AI-OPS-23/evidence/citizen-validate-post.log
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Capture citizen JSON size budgets as explicit evidence.
@@ -499,7 +499,7 @@ artifact_path: docs/etl/sprints/AI-OPS-23/evidence/citizen-json-budget.txt
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Run a pragmatic link check for citizen audit links (no broken internal targets).
@@ -534,7 +534,7 @@ artifact_path: docs/etl/sprints/AI-OPS-23/evidence/link-check.json
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Capture a minimal perf budget snapshot (pragmatic, not lab-grade).
@@ -569,7 +569,7 @@ artifact_path: docs/etl/sprints/AI-OPS-23/evidence/perf-budget.txt
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Privacy audit grep: ensure preferences are not written into URL query params.
@@ -602,7 +602,7 @@ artifact_path: docs/etl/sprints/AI-OPS-23/evidence/privacy-grep.txt
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Generate a shareable URL matrix for onboarding v1 (non-sensitive state + optional prefs fragment).
@@ -640,7 +640,7 @@ artifact_path: docs/etl/sprints/AI-OPS-23/exports/url-matrix.csv
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Run strict tracker gate after onboarding changes (should remain green).
@@ -676,7 +676,7 @@ artifact_path: docs/etl/sprints/AI-OPS-23/evidence/tracker-gate-postrun.log
 - `points`: `5`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Capture status snapshot and parity after sprint changes.
@@ -744,7 +744,7 @@ artifact_path: docs/etl/sprints/AI-OPS-23/evidence/status-parity-postrun.txt
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Run tests and capture evidence.
@@ -780,7 +780,7 @@ artifact_path: docs/etl/sprints/AI-OPS-23/evidence/tests.log
 - `points`: `8`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Publish updated static site to `gh-pages` branch and capture evidence.
@@ -816,7 +816,7 @@ artifact_path: docs/etl/sprints/AI-OPS-23/evidence/gh-pages-publish.log
 - `points`: `10`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Write the citizen onboarding walkthrough and artifacts index (user-visible verification).
@@ -858,7 +858,7 @@ artifact_path: docs/etl/sprints/AI-OPS-23/reports/citizen-walkthrough.md
 - `points`: `2`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Adjudicate sprint gates G1..G6 and write the gate decision.
@@ -892,7 +892,7 @@ artifact_path: docs/etl/sprints/AI-OPS-23/reports/gate-adjudication.md
 - `points`: `2`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Write sprint closeout with a clear verdict and carryover.
@@ -930,7 +930,7 @@ artifact_path: docs/etl/sprints/AI-OPS-23/closeout.md
 - `points`: `1`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Reconcile documentation pointers and avoid roadmap duplication.
@@ -964,7 +964,7 @@ artifact_path: docs/etl/sprints/AI-OPS-23/reports/doc-reconciliation.md
 - `points`: `1`
 ```text
 Repository path/context:
-- ~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola
+- .
 
 Objective:
 - Define the next sprint trigger to prevent looping and preserve visible progress.

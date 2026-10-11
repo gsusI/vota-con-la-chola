@@ -2,6 +2,10 @@
 
 Objetivo: **una sola lista** de trabajo operativo para completar el extremo a extremo (extract -> transform -> load -> publish) por tipo de dato.
 
+## Incidente de privacidad: rutas de estación en docs versionados (`2026-10-11`)
+
+Estado: REMEDIADO en árbol de trabajo; historial git pendiente de decisión del mantenedor. Ahora: 384 archivos versionados bajo `docs/etl/sprints/**` y `docs/etl/runs/**` (generados feb–abr 2026) contenían rutas absolutas de la estación, incluida una cuenta personal en segmentos `GoogleDrive-*`; el gate de privacidad solo cubría `etl/data/published` y `ui/gh-pages-next/public`. Remediación: `scripts/scrub_workstation_paths.py` reescribe a rutas relativas al repo (`just privacy-scrub-docs`); `report_citizen_preset_contract_bundle_history.js` deja de emitir rutas absolutas; CI (`repo-root-hygiene`) y `just repo-hygiene-check` escanean `docs/` y los `.md` raíz con `check_public_privacy_leaks.py --skip-kind internal_db_path`. Siguiente: el repo es público y los commits anteriores conservan las rutas; reescritura con `git filter-repo` solo con aprobación explícita del mantenedor.
+
 ## Dinero público nacional: ejecución autorizada (`2026-09-07`)
 
 Estado: EN CURSO. Ahora: reconciliación física y de selección completada; detectada exclusión indebida de formalizaciones código 9. Destino y gates DN-01–DN-05: [ROADMAP](../../ROADMAP.md#ejecución-autorizada-dinero-público-nacional). Evidencia y comandos: [reconciliación](sprints/DINERO-NACIONAL-20260907/evidence/reconciliation.md). Siguiente: reconstrucción verificada de la selección corregida, resolución de discrepancias y publicación dentro del presupuesto gratuito; ampliar histórico. La validación externa y los umbrales de North Star siguen abiertos.

@@ -1,9 +1,9 @@
 {
   "generated_at": "2026-02-23T11:40:10.206Z",
-  "source_root": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/ui/citizen",
-  "published_root": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/gh-pages/citizen",
-  "snapshot_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/gh-pages/citizen/data/citizen.json",
-  "concerns_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/ui/citizen/concerns_v1.json",
+  "source_root": "ui/citizen",
+  "published_root": "docs/gh-pages/citizen",
+  "snapshot_path": "docs/gh-pages/citizen/data/citizen.json",
+  "concerns_path": "ui/citizen/concerns_v1.json",
   "assets": [
     "index.html",
     "preset_codec.js",
@@ -44,22 +44,22 @@
       "id": "index.html",
       "ok": true,
       "error": "",
-      "path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/ui/citizen/index.html"
+      "path": "ui/citizen/index.html"
     },
     {
       "section": "asset_published",
       "id": "index.html",
       "ok": true,
       "error": "",
-      "path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/gh-pages/citizen/index.html"
+      "path": "docs/gh-pages/citizen/index.html"
     },
     {
       "section": "asset_parity",
       "id": "index.html",
       "ok": false,
       "error": "asset_parity_mismatch",
-      "source_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/ui/citizen/index.html",
-      "published_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/gh-pages/citizen/index.html",
+      "source_path": "ui/citizen/index.html",
+      "published_path": "docs/gh-pages/citizen/index.html",
       "source_bytes": 195726,
       "published_bytes": 154800,
       "source_sha256": "5adbab9f279bfcd5dbd48c0994ac6ab00d8749d812bf58b56fa7245b3755f429",
@@ -73,22 +73,22 @@
       "id": "preset_codec.js",
       "ok": true,
       "error": "",
-      "path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/ui/citizen/preset_codec.js"
+      "path": "ui/citizen/preset_codec.js"
     },
     {
       "section": "asset_published",
       "id": "preset_codec.js",
       "ok": true,
       "error": "",
-      "path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/gh-pages/citizen/preset_codec.js"
+      "path": "docs/gh-pages/citizen/preset_codec.js"
     },
     {
       "section": "asset_parity",
       "id": "preset_codec.js",
       "ok": false,
       "error": "asset_parity_mismatch",
-      "source_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/ui/citizen/preset_codec.js",
-      "published_path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/gh-pages/citizen/preset_codec.js",
+      "source_path": "ui/citizen/preset_codec.js",
+      "published_path": "docs/gh-pages/citizen/preset_codec.js",
       "source_bytes": 7406,
       "published_bytes": 5036,
       "source_sha256": "db68847af5ed756225401c8bfc701d753b30c4383ca35dd8a91147e90780f0dd",
@@ -102,56 +102,56 @@
       "id": "onboarding_funnel.js",
       "ok": true,
       "error": "",
-      "path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/ui/citizen/onboarding_funnel.js"
+      "path": "ui/citizen/onboarding_funnel.js"
     },
     {
       "section": "asset_published",
       "id": "onboarding_funnel.js",
       "ok": false,
       "error": "published_asset_missing",
-      "path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/gh-pages/citizen/onboarding_funnel.js"
+      "path": "docs/gh-pages/citizen/onboarding_funnel.js"
     },
     {
       "section": "asset_source",
       "id": "first_answer_accelerator.js",
       "ok": true,
       "error": "",
-      "path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/ui/citizen/first_answer_accelerator.js"
+      "path": "ui/citizen/first_answer_accelerator.js"
     },
     {
       "section": "asset_published",
       "id": "first_answer_accelerator.js",
       "ok": false,
       "error": "published_asset_missing",
-      "path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/gh-pages/citizen/first_answer_accelerator.js"
+      "path": "docs/gh-pages/citizen/first_answer_accelerator.js"
     },
     {
       "section": "asset_source",
       "id": "unknown_explainability.js",
       "ok": true,
       "error": "",
-      "path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/ui/citizen/unknown_explainability.js"
+      "path": "ui/citizen/unknown_explainability.js"
     },
     {
       "section": "asset_published",
       "id": "unknown_explainability.js",
       "ok": false,
       "error": "published_asset_missing",
-      "path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/gh-pages/citizen/unknown_explainability.js"
+      "path": "docs/gh-pages/citizen/unknown_explainability.js"
     },
     {
       "section": "asset_source",
       "id": "evidence_trust_panel.js",
       "ok": true,
       "error": "",
-      "path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/ui/citizen/evidence_trust_panel.js"
+      "path": "ui/citizen/evidence_trust_panel.js"
     },
     {
       "section": "asset_published",
       "id": "evidence_trust_panel.js",
       "ok": false,
       "error": "published_asset_missing",
-      "path": "~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/docs/gh-pages/citizen/evidence_trust_panel.js"
+      "path": "docs/gh-pages/citizen/evidence_trust_panel.js"
     },
     {
       "section": "snapshot",

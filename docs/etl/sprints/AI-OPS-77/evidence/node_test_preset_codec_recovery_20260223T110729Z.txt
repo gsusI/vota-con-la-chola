@@ -28,7 +28,7 @@ ok 5 - citizen UI exposes preset recovery banner actions
 not ok 6 - citizen UI normalizes canonical preset hash when needed
   ---
   duration_ms: 1.815667
-  location: '~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/test_citizen_preset_recovery_ui_contract.js:19:1'
+  location: 'tests/test_citizen_preset_recovery_ui_contract.js:19:1'
   failureType: 'testCodeFailure'
   error: |-
     The input did not match the regular expression /history\.replaceState\([^\n]+u\.pathname\$\{u\.search\}\$\{u\.hash\}/i. Input:
@@ -4788,7 +4788,7 @@ not ok 6 - citizen UI normalizes canonical preset hash when needed
     
   operator: 'match'
   stack: |-
-    TestContext.<anonymous> (~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola/tests/test_citizen_preset_recovery_ui_contract.js:22:10)
+    TestContext.<anonymous> (tests/test_citizen_preset_recovery_ui_contract.js:22:10)
     Test.runInAsyncScope (node:async_hooks:206:9)
     Test.run (node:internal/test_runner/test:796:25)
     Test.processPendingSubtests (node:internal/test_runner/test:526:18)

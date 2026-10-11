@@ -1,7 +1,7 @@
 # Evidence packet: analytics PARTIAL tracker rows (AI-OPS-02)
 
 Generated on: 2026-02-16
-Repository: `~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola`
+Repository: `.`
 DB: `etl/data/staging/politicos-es.db`
 
 ## Target rows in `docs/etl/e2e-scrape-load-tracker.md`

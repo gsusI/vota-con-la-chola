@@ -1,7 +1,7 @@
 # Moncloa Ingest Matrix — AI-OPS-04
 
 Date: 2026-02-16
-Repository: `~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola`
+Repository: `.`
 DB used for matrix: `etl/data/staging/moncloa-aiops04-matrix-20260216.db`
 Batch replay input: `etl/data/raw/manual/moncloa_exec/ai-ops-04-20260216`
 Depends on: `4`

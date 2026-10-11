@@ -1,7 +1,7 @@
 # Sprint AI-OPS-04 Kickoff
 
 Fecha de baseline: 2026-02-16  
-Repo: `~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola`  
+Repo: `.`  
 DB: `etl/data/staging/politicos-es.db`
 
 ## Objetivo del sprint (congelado)

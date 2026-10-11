@@ -1,7 +1,7 @@
 # Moncloa Apply/Recompute AI-OPS-05 (P4)
 
 Date: 2026-02-16
-Repository: `~/Library/CloudStorage/GoogleDrive-<redacted-account>/My Drive/CdC/Obsidian Vault/vota-con-la-chola`
+Repository: `.`
 
 ## Objective
 Reconfirm Moncloa reproducibility and verify `policy_events` traceability after apply/recompute loop for:
