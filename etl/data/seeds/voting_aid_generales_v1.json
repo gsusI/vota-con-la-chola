@@ -1,0 +1,506 @@
+{
+  "schema_version": "voting_aid_statements_v1",
+  "election": "generales",
+  "legislature": "15",
+  "institution": "Congreso de los Diputados",
+  "review": {
+    "status": "draft",
+    "reviewed_by": [],
+    "note": "Borrador. Cada afirmación y el sentido de cada voto ('agree_vote') deben revisarse por al menos dos personas antes de presentarlos como definitivos."
+  },
+  "method": {
+    "party_position": "Mayoría de los votos Sí/No/Abstención de los diputados asignados al partido en cada votación ('No vota' no cuenta).",
+    "statement_position": "agree si el partido votó 'agree_vote'; disagree si votó lo contrario; abstain si se abstuvo. Con varias votaciones: igual en todas -> esa posición; distintas -> mixed.",
+    "toma_en_consideracion": "Votar Sí a la toma en consideración apoya debatir la proposición; se interpreta como apoyo a su objetivo."
+  },
+  "parties": [
+    {
+      "party_id": "psoe",
+      "label": "PSOE",
+      "group_codes": [
+        "GS"
+      ]
+    },
+    {
+      "party_id": "pp",
+      "label": "PP",
+      "group_codes": [
+        "GP"
+      ]
+    },
+    {
+      "party_id": "vox",
+      "label": "VOX",
+      "group_codes": [
+        "GVOX"
+      ]
+    },
+    {
+      "party_id": "sumar",
+      "label": "Sumar",
+      "group_codes": [
+        "GSUMAR"
+      ]
+    },
+    {
+      "party_id": "podemos",
+      "label": "Podemos",
+      "members": [
+        "Ione Belarra Urteaga",
+        "Noemí Santana Perera",
+        "Javier Sánchez Serna",
+        "Martina Velarde Gómez",
+        "Lilith Verstrynge Revuelta"
+      ],
+      "note": "Elegidos en la lista de Sumar; votan en el Grupo Mixto desde el 12-12-2023 (cambio de group_code en parl_vote_member_votes)."
+    },
+    {
+      "party_id": "erc",
+      "label": "ERC",
+      "group_codes": [
+        "GR"
+      ]
+    },
+    {
+      "party_id": "junts",
+      "label": "Junts",
+      "group_codes": [
+        "GJxCAT"
+      ]
+    },
+    {
+      "party_id": "bildu",
+      "label": "EH Bildu",
+      "group_codes": [
+        "GEH Bildu"
+      ]
+    },
+    {
+      "party_id": "pnv",
+      "label": "PNV",
+      "group_codes": [
+        "GV (EAJ-PNV)"
+      ]
+    },
+    {
+      "party_id": "bng",
+      "label": "BNG",
+      "members": [
+        "Néstor Rego Candamil"
+      ]
+    },
+    {
+      "party_id": "cc",
+      "label": "Coalición Canaria",
+      "members": [
+        "Cristina Valido García"
+      ]
+    },
+    {
+      "party_id": "upn",
+      "label": "UPN",
+      "members": [
+        "Alberto Catalán Higueras"
+      ]
+    }
+  ],
+  "unmapped_members": [
+    {
+      "member_name": "José Luis Ábalos Meco",
+      "reason": "Diputado no adscrito a ningún partido que concurra a las elecciones (Grupo Mixto desde 2024)."
+    },
+    {
+      "member_name": "Àgueda Micó Micó",
+      "reason": "Compromís; en el Grupo Mixto solo desde julio de 2025."
+    }
+  ],
+  "statements": [
+    {
+      "statement_id": "vivienda-alquiler-temporada",
+      "concern_id": "vivienda",
+      "text": "Los alquileres de temporada y de habitaciones deberían tener las mismas protecciones para el inquilino que el alquiler de vivienda habitual.",
+      "context": "Las proposiciones incluyen los alquileres temporales y de habitaciones en la Ley de Arrendamientos Urbanos y exigen justificar la temporalidad.",
+      "votes": [
+        {
+          "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion059/20240917/Votacion001/VOT_20240917204416.json",
+          "agree_vote": "Sí",
+          "note": "Toma en consideración de la proposición de SUMAR sobre alquiler de temporada y habitaciones (rechazada).",
+          "text_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-134-1.PDF"
+        },
+        {
+          "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion086/20241217/Votacion001/VOT_20241217205720.json",
+          "agree_vote": "Sí",
+          "note": "Toma en consideración de la proposición de SUMAR, ERC, Bildu y Mixto que trata el alquiler temporal como alquiler de vivienda (aprobada).",
+          "text_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-154-1.PDF"
+        }
+      ]
+    },
+    {
+      "statement_id": "vivienda-pisos-turisticos",
+      "concern_id": "vivienda",
+      "text": "Las plataformas de alquiler turístico deberían estar obligadas a comprobar que cada piso tiene licencia antes de anunciarlo.",
+      "context": "La proposición impone a las plataformas obligaciones de verificación antes de publicar y contratar.",
+      "votes": [
+        {
+          "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion135/20251007/Votacion002/VOT_20251007214330.json",
+          "agree_vote": "Sí",
+          "note": "Toma en consideración de la proposición de EH Bildu sobre publicidad y contratación de pisos turísticos (aprobada).",
+          "text_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-256-1.PDF"
+        }
+      ]
+    },
+    {
+      "statement_id": "vivienda-okupacion",
+      "concern_id": "vivienda",
+      "text": "Hay que acelerar por ley el desalojo de viviendas ocupadas ilegalmente.",
+      "context": "Proposición orgánica de medidas urgentes frente a la ocupación ilegal.",
+      "votes": [
+        {
+          "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion099/20250318/Votacion001/VOT_20250318201321.json",
+          "agree_vote": "Sí",
+          "note": "Toma en consideración de la proposición de Junts contra la ocupación ilegal de inmuebles (aprobada).",
+          "text_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-173-1.PDF"
+        }
+      ]
+    },
+    {
+      "statement_id": "empleo-jornada-37-5",
+      "concern_id": "empleo",
+      "text": "La jornada laboral máxima debería bajar de 40 a 37,5 horas semanales.",
+      "context": "El proyecto del Gobierno reducía la jornada ordinaria máxima a 37,5 horas e implantaba registro de jornada digital.",
+      "votes": [
+        {
+          "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion130/20250910/Votacion010/VOT_20250910213544.json",
+          "agree_vote": "No",
+          "note": "Enmiendas a la totalidad de devolución al proyecto de ley de reducción de jornada; votar Sí era devolver el proyecto (aprobadas, el proyecto decayó)."
+        }
+      ]
+    },
+    {
+      "statement_id": "empleo-jornada-35",
+      "concern_id": "empleo",
+      "text": "La jornada laboral máxima debería bajar a 35 horas semanales.",
+      "context": "Proposición que modifica el Estatuto de los Trabajadores.",
+      "votes": [
+        {
+          "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion137/20251014/Votacion001/VOT_20251014202757.json",
+          "agree_vote": "Sí",
+          "note": "Toma en consideración de la proposición del Grupo Mixto para la jornada de 35 horas (rechazada).",
+          "text_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-182-1.PDF"
+        }
+      ]
+    },
+    {
+      "statement_id": "empleo-jubilacion-activa",
+      "concern_id": "empleo",
+      "text": "Los jubilados deberían poder seguir trabajando mientras cobran parte de su pensión.",
+      "context": "El decreto amplía la jubilación activa y la compatibilidad entre pensión y empleo.",
+      "votes": [
+        {
+          "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion089/20250122/Votacion003/VOT_20250122154429.json",
+          "agree_vote": "Sí",
+          "note": "Convalidación del Real Decreto-ley 11/2024 de compatibilidad de la pensión con el trabajo (convalidado)."
+        }
+      ]
+    },
+    {
+      "statement_id": "empleo-subsidio-desempleo",
+      "concern_id": "empleo",
+      "text": "El subsidio por desempleo debería llegar a más personas y poder cobrarse junto con un empleo.",
+      "context": "El decreto amplía colectivos beneficiarios y crea un complemento compatible con el empleo.",
+      "votes": [
+        {
+          "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion049/20240620/Votacion019/VOT_20240620132741.json",
+          "agree_vote": "Sí",
+          "note": "Convalidación del Real Decreto-ley 2/2024 de reforma del subsidio por desempleo (convalidado)."
+        }
+      ]
+    },
+    {
+      "statement_id": "coste-vida-impuesto-banca",
+      "concern_id": "coste_vida",
+      "text": "El impuesto extraordinario a la gran banca debería endurecerse y destinarse a construir vivienda pública.",
+      "context": "La proposición modifica el gravamen temporal a la banca (Ley 38/2022) y crea un fondo para vivienda pública de emergencia.",
+      "votes": [
+        {
+          "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion034/20240409/Votacion002/VOT_20240409210632.json",
+          "agree_vote": "Sí",
+          "note": "Toma en consideración de la proposición del Grupo Mixto sobre beneficios extraordinarios de la banca (rechazada).",
+          "text_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-65-1.PDF"
+        }
+      ]
+    },
+    {
+      "statement_id": "energia-impuesto-energeticas",
+      "concern_id": "energia",
+      "text": "Las grandes empresas energéticas deberían seguir pagando un impuesto temporal extraordinario.",
+      "context": "El decreto prorrogaba el gravamen a grandes energéticas durante 2025.",
+      "votes": [
+        {
+          "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion089/20250122/Votacion002/VOT_20250122154427.json",
+          "agree_vote": "Sí",
+          "note": "Convalidación del Real Decreto-ley 10/2024 del gravamen temporal energético para 2025 (derogado)."
+        }
+      ]
+    },
+    {
+      "statement_id": "energia-nuclear",
+      "concern_id": "energia",
+      "text": "Las centrales nucleares deberían poder seguir funcionando más allá del calendario de cierre previsto.",
+      "context": "La proposición liga el cese de cada central a la petición del titular, a la caducidad de su autorización o a razones de seguridad.",
+      "votes": [
+        {
+          "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion119/20250617/Votacion001/VOT_20250617203251.json",
+          "agree_vote": "Sí",
+          "note": "Toma en consideración de la proposición del PP sobre la energía nuclear (aprobada).",
+          "text_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-206-1.PDF"
+        }
+      ]
+    },
+    {
+      "statement_id": "transporte-bonos",
+      "concern_id": "transporte",
+      "text": "El Estado debería seguir abaratando el transporte público con bonos y descuentos.",
+      "context": "Ambos decretos financian descuentos de transporte público colectivo para jóvenes.",
+      "votes": [
+        {
+          "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion049/20240620/Votacion021/VOT_20240620132743.json",
+          "agree_vote": "Sí",
+          "note": "Convalidación del Real Decreto-ley 3/2024 de descuentos de transporte para jóvenes en verano de 2024 (convalidado)."
+        },
+        {
+          "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion124/20250626/Votacion011/VOT_20250626120540.json",
+          "agree_vote": "Sí",
+          "note": "Convalidación del Real Decreto-ley 5/2025 de descuentos de transporte para jóvenes en verano de 2025 (convalidado)."
+        }
+      ]
+    },
+    {
+      "statement_id": "transporte-alcohol-volante",
+      "concern_id": "transporte",
+      "text": "Habría que bajar la tasa máxima de alcohol permitida al volante.",
+      "context": "La proposición reduce la tasa máxima de alcohol y prohíbe difundir la ubicación de controles policiales.",
+      "votes": [
+        {
+          "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion099/20250318/Votacion002/VOT_20250318201322.json",
+          "agree_vote": "Sí",
+          "note": "Toma en consideración de la proposición del PSOE sobre tasa de alcohol y difusión de controles (aprobada).",
+          "text_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-157-1.PDF"
+        }
+      ]
+    },
+    {
+      "statement_id": "sanidad-ratios-enfermeras",
+      "concern_id": "sanidad",
+      "text": "Debería fijarse por ley un número máximo de pacientes por enfermera.",
+      "context": "Iniciativa legislativa popular sobre ratios enfermera-paciente.",
+      "votes": [
+        {
+          "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion083/20241210/Votacion001/VOT_20241210202031.json",
+          "agree_vote": "Sí",
+          "note": "Toma en consideración de la iniciativa legislativa popular sobre ratios de enfermeras (aprobada)."
+        }
+      ]
+    },
+    {
+      "statement_id": "educacion-educacion-especial",
+      "concern_id": "educacion",
+      "text": "Las familias de alumnos con necesidades educativas especiales deberían poder elegir un centro de educación especial.",
+      "context": "La proposición obliga a las administraciones a garantizar la elección de modelo y centro, incluidos los de educación especial.",
+      "votes": [
+        {
+          "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion129/20250909/Votacion001/VOT_20250909221758.json",
+          "agree_vote": "Sí",
+          "note": "Toma en consideración de la proposición del PP sobre escolarización de alumnado con necesidades especiales (rechazada).",
+          "text_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-222-1.PDF"
+        }
+      ]
+    },
+    {
+      "statement_id": "seguridad-multirreincidencia",
+      "concern_id": "seguridad_justicia",
+      "text": "Hay que endurecer las penas para quienes cometen delitos leves de forma repetida, como hurtos.",
+      "context": "Reforma del Código Penal para agravar la reincidencia en delitos leves.",
+      "votes": [
+        {
+          "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion059/20240917/Votacion002/VOT_20240917204417.json",
+          "agree_vote": "Sí",
+          "note": "Toma en consideración de la proposición de Junts sobre multirreincidencia (aprobada)."
+        },
+        {
+          "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion159/20260212/Votacion023/VOT_20260212114343.json",
+          "agree_vote": "Sí",
+          "note": "Votación de conjunto de la ley orgánica de multirreincidencia (aprobada)."
+        }
+      ]
+    },
+    {
+      "statement_id": "territorio-amnistia",
+      "concern_id": "seguridad_justicia",
+      "text": "La amnistía a los encausados por el proceso independentista catalán debía aprobarse.",
+      "context": "Ley Orgánica de amnistía para la normalización institucional, política y social en Cataluña.",
+      "votes": [
+        {
+          "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion030/20240314/Votacion001/VOT_20240314135323.json",
+          "agree_vote": "Sí",
+          "note": "Votación del nuevo dictamen de la Ley Orgánica de amnistía en el Congreso (aprobada)."
+        }
+      ]
+    },
+    {
+      "statement_id": "territorio-inmigracion-cataluna",
+      "concern_id": "inmigracion",
+      "text": "La Generalitat de Cataluña debería gestionar competencias de inmigración que hoy ejerce el Estado.",
+      "context": "La proposición delega en Cataluña la tramitación de autorizaciones de estancia y residencia, entre otras funciones.",
+      "votes": [
+        {
+          "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion133/20250923/Votacion001/VOT_20250923211048.json",
+          "agree_vote": "Sí",
+          "note": "Toma en consideración de la proposición del PSOE y Junts de delegación de competencias de inmigración (rechazada).",
+          "text_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-195-1.PDF"
+        }
+      ]
+    },
+    {
+      "statement_id": "inmigracion-regularizacion",
+      "concern_id": "inmigracion",
+      "text": "Debería hacerse una regularización extraordinaria de los inmigrantes que ya viven en España sin papeles.",
+      "context": "Iniciativa legislativa popular respaldada por firmas ciudadanas.",
+      "votes": [
+        {
+          "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion034/20240409/Votacion001/VOT_20240409210631.json",
+          "agree_vote": "Sí",
+          "note": "Toma en consideración de la iniciativa legislativa popular de regularización extraordinaria (aprobada)."
+        }
+      ]
+    },
+    {
+      "statement_id": "inmigracion-reparto-menores",
+      "concern_id": "inmigracion",
+      "text": "El reparto de menores migrantes no acompañados entre comunidades autónomas debería ser obligatorio.",
+      "context": "Ambas iniciativas crean un mecanismo obligatorio de reubicación de menores no acompañados.",
+      "votes": [
+        {
+          "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion056/20240723/Votacion063/VOT_20240723221735.json",
+          "agree_vote": "Sí",
+          "note": "Toma en consideración de la proposición del PSOE, SUMAR y Mixto de reforma de la ley de extranjería para la contingencia migratoria de menores (rechazada).",
+          "text_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-137-1.PDF"
+        },
+        {
+          "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion106/20250410/Votacion015/VOT_20250410155154.json",
+          "agree_vote": "Sí",
+          "note": "Convalidación del Real Decreto-ley 2/2025 sobre menores en contingencias migratorias extraordinarias (convalidado)."
+        }
+      ]
+    },
+    {
+      "statement_id": "inmigracion-nacionalidad-saharauis",
+      "concern_id": "inmigracion",
+      "text": "Los saharauis nacidos bajo la administración española deberían poder obtener la nacionalidad española por vía especial.",
+      "context": "Nacionalidad por carta de naturaleza para nacidos en el Sáhara Occidental antes de 1976, aun sin residencia legal.",
+      "votes": [
+        {
+          "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion094/20250225/Votacion001/VOT_20250225201645.json",
+          "agree_vote": "Sí",
+          "note": "Toma en consideración de la proposición de SUMAR sobre nacionalidad de saharauis (aprobada).",
+          "text_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-36-1.PDF"
+        }
+      ]
+    },
+    {
+      "statement_id": "corrupcion-oficina-prevencion",
+      "concern_id": "corrupcion",
+      "text": "Debería crearse una oficina independiente de prevención de la corrupción.",
+      "context": "Entidad con independencia orgánica y funcional para prevenir e investigar la corrupción y el uso ilegal de fondos públicos.",
+      "votes": [
+        {
+          "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion131/20250916/Votacion002/VOT_20250916211206.json",
+          "agree_vote": "Sí",
+          "note": "Toma en consideración de la proposición de SUMAR de creación de la Oficina de prevención de la corrupción (rechazada).",
+          "text_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-99-1.PDF"
+        }
+      ]
+    },
+    {
+      "statement_id": "corrupcion-secretos-oficiales",
+      "concern_id": "corrupcion",
+      "text": "Los secretos oficiales deberían desclasificarse automáticamente pasado un plazo.",
+      "context": "La proposición fija plazos de vigencia de la clasificación y la desclasificación automática al cumplirse.",
+      "votes": [
+        {
+          "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion024/20240227/Votacion001/VOT_20240227205807.json",
+          "agree_vote": "Sí",
+          "note": "Toma en consideración de la proposición del PNV de reforma de la Ley de secretos oficiales (aprobada).",
+          "text_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-4-1.PDF"
+        }
+      ]
+    },
+    {
+      "statement_id": "igualdad-paridad",
+      "concern_id": "igualdad",
+      "text": "Las listas electorales, el Gobierno y los consejos de las grandes empresas deberían tener por ley una presencia equilibrada de mujeres y hombres.",
+      "context": "Ley Orgánica de representación paritaria y presencia equilibrada de mujeres y hombres.",
+      "votes": [
+        {
+          "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion052/20240627/Votacion044/VOT_20240627130417.json",
+          "agree_vote": "Sí",
+          "note": "Votación de conjunto de la Ley Orgánica de representación paritaria (aprobada)."
+        }
+      ]
+    },
+    {
+      "statement_id": "cultura-tauromaquia",
+      "concern_id": null,
+      "text": "La tauromaquia debería dejar de estar protegida por ley como patrimonio cultural.",
+      "context": "Iniciativa legislativa popular para derogar la ley que declara la tauromaquia patrimonio cultural.",
+      "votes": [
+        {
+          "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion135/20251007/Votacion001/VOT_20251007214328.json",
+          "agree_vote": "Sí",
+          "note": "Toma en consideración de la iniciativa legislativa popular para derogar la Ley 18/2013 de la tauromaquia (rechazada)."
+        }
+      ]
+    },
+    {
+      "statement_id": "campo-lobo",
+      "concern_id": "campo_rural",
+      "text": "Debería permitirse controlar la población de lobos para proteger a la ganadería.",
+      "context": "La proposición cuestiona la inclusión de todo el lobo en el régimen de protección especial (Orden TED/980/2021).",
+      "votes": [
+        {
+          "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion036/20240423/Votacion002/VOT_20240423213513.json",
+          "agree_vote": "Sí",
+          "note": "Toma en consideración de la proposición del PP sobre el lobo y la ganadería extensiva (aprobada).",
+          "text_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-62-1.PDF"
+        }
+      ]
+    },
+    {
+      "statement_id": "campo-trasvase-tajo-segura",
+      "concern_id": "campo_rural",
+      "text": "Debería garantizarse por ley el trasvase Tajo-Segura con las reglas de 2014.",
+      "context": "La proposición fija las reglas de explotación del Real Decreto 773/2014 frente a los planes hidrológicos.",
+      "votes": [
+        {
+          "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion110/20250513/Votacion001/VOT_20250513201840.json",
+          "agree_vote": "Sí",
+          "note": "Toma en consideración de la proposición de la Asamblea Regional de Murcia sobre el trasvase (rechazada).",
+          "text_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-15-1.PDF"
+        }
+      ]
+    },
+    {
+      "statement_id": "exterior-armas-israel",
+      "concern_id": null,
+      "text": "España debería prohibir la compraventa de armas con Israel.",
+      "context": "El decreto incluye un embargo de armas a Israel y otras medidas de apoyo a la población palestina.",
+      "votes": [
+        {
+          "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion087/VOT_20251008195359.json",
+          "agree_vote": "Sí",
+          "note": "Convalidación del Real Decreto-ley 10/2025 de medidas contra el genocidio en Gaza (convalidado)."
+        }
+      ]
+    }
+  ]
+}

@@ -86,6 +86,25 @@ Ahora: contratación parcial; denominador nacional, actualización recurrente y 
 Siguiente acción: medir la base física y la selección publicada, recuperar el estado de adquisición histórica existente y ampliar una cohorte con controles de publicación. No reescribir bases originales ni reimportar D1 a ciegas. Dependencias externas de revisión y fuentes se registran; avanzar en trabajo controlable mientras se resuelven.
 
 
+## Ayuda al voto: elecciones generales (mandato 2026-10-11)
+
+Mandato del mantenedor: convertir `/citizen` en una ayuda útil para decidir el voto en las próximas generales. Concreta la experiencia **Alineamiento** de la North Star; no sustituye la prioridad de dinero público, corre como carril propio.
+
+**Ahora:** ~30 afirmaciones en lenguaje llano, cada una respaldada por 1–3 votaciones nominales del Congreso XV con el sentido de voto que significa «de acuerdo» y el texto oficial enlazado (`etl/data/seeds/voting_aid_generales_v1.json`, estado `draft`). `scripts/export_voting_aid_snapshot.py` calcula la posición de cada partido de la papeleta (Podemos, BNG, CC y UPN separados del Grupo Mixto) y publica `citizen/data/voting_aid_generales_v1.json`. Votos del Congreso solo hasta `2026-02-12`; votos por diputado ausentes desde `2025-11`.
+
+**Destino:** el usuario responde, pondera y ve su coincidencia por partido separando «votó como tú» de «prometió como tú», con cobertura visible y cada celda enlazada a la votación y al texto.
+
+| Paso | Gate |
+| --- | --- |
+| Afirmaciones y votos (borrador) | Cada voto existe en la base; `agree_vote` justificado con texto oficial; 0 votos ausentes |
+| Página interactiva estática | Preferencias solo en `localStorage`; compartir opt-in por fragmento `#`; `no_data` visible |
+| Revisión independiente | ≥2 revisores por afirmación; desacuerdos registrados; estado `reviewed` |
+| Datos frescos | Votos del Congreso hasta la disolución, votos por diputado sin huecos |
+| Programas 2027 | Posición declarada separada de la votada |
+| Prueba externa | 5 personas sin ayuda completan el cuestionario y explican un resultado |
+
+**Siguiente:** revisión independiente de las afirmaciones y refresco de votaciones del Congreso XV. No presentar resultados como recomendación: la herramienta muestra coincidencias con evidencia.
+
 ## Prioridad inmediata: lanzamiento útil para la comunidad
 
 Mandato 2026-09-07: mover consultas de `/spending/` a un backend gratuito con límites duros, filtros y paginación en servidor. Sustituye para esta superficie la restricción previa de no crear API. Ahora: 47.397 resultados consultables mediante Workers Free + D1, páginas de 12 filas, búsqueda y CSV explícito; arranque y assets desde Cloudflare verificados. Destino: ampliar cobertura conservando evidencia y cero sobrecostes. Siguiente: incorporar nuevas capturas con presupuestos de importación y paridad; sin prometer disponibilidad ilimitada al agotar cuotas.
