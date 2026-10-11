@@ -81,20 +81,20 @@ class TestVotingAidSnapshot(unittest.TestCase):
         snap = va.build_snapshot(_db(), _seed(), generated_at="2026-10-11T00:00:00+00:00")
         s1, s2 = snap["statements"]
         self.assertEqual({p: c["position"] for p, c in s1["cells"].items()}, {"a": "agree", "b": "disagree", "c": "agree"})
-        # s2: v1 with agree_vote=No flips; v2 gives A abstain, B tie (no_data), C absent (no_data).
+        # s2: v1 with agree_vote=No flips; v2 gives A abstain, B an even split (mixed), C absent (no_data).
         self.assertEqual(s2["cells"]["a"]["position"], "mixed")
-        self.assertEqual(s2["cells"]["b"], {"position": "agree", "votes_with_data": 1, "votes_total": 2})
-        self.assertEqual(s2["cells"]["c"]["position"], "disagree")
+        self.assertEqual(s2["cells"]["b"], {"position": "mixed", "votes_with_data": 2, "votes_total": 2})
+        self.assertEqual(s2["cells"]["c"], {"position": "disagree", "votes_with_data": 1, "votes_total": 2})
         v2_b = s2["votes"][1]["party_votes"]["b"]
-        self.assertEqual((v2_b["choice"], v2_b["position"], v2_b["not_voting"]), (None, "no_data", 1))
+        self.assertEqual((v2_b["choice"], v2_b["position"], v2_b["not_voting"]), (va.TIE, "mixed", 1))
         self.assertEqual(snap["meta"]["quality"]["unmapped_member_votes"], {"Sin partido": 1})
         self.assertEqual(snap["meta"]["quality"]["votes_missing"], [])
         self.assertIn("parl_vote_member_votes", s1["votes"][0]["explorer_member_votes"])
 
     def test_direction_balance_counts_one_sided_agreement(self) -> None:
         snap = va.build_snapshot(_db(), _seed(balance_reference_parties=["a", "b"]), generated_at="x")
-        # s1: A agree, B disagree -> A; s2: A mixed, B agree -> B.
-        self.assertEqual(snap["meta"]["quality"]["direction_balance"]["agree_sides_only_with"], {"a": 1, "b": 1})
+        # s1: A agree, B disagree -> A; s2: A and B both mixed -> neither.
+        self.assertEqual(snap["meta"]["quality"]["direction_balance"]["agree_sides_only_with"], {"a": 1, "b": 0})
 
     def test_statement_without_any_vote_data_is_no_data(self) -> None:
         self.assertEqual(va.combine_positions(["no_data", "no_data"]), "no_data")

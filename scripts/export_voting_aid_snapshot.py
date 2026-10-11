@@ -86,19 +86,27 @@ def party_resolver(seed: dict[str, Any]):
     return resolve
 
 
+TIE = "tie"
+
+
 def majority_choice(counts: Counter) -> str | None:
-    """Majority among Sí/No/Abstención; ties or no votes give None (no clear position)."""
+    """Majority among Sí/No/Abstención; None when nobody voted, TIE when the top choices are even."""
     ranked = [(counts.get(choice, 0), choice) for choice in CHOICES]
     ranked.sort(reverse=True)
     top_n, top_choice = ranked[0]
-    if top_n == 0 or ranked[1][0] == top_n:
+    if top_n == 0:
         return None
+    if ranked[1][0] == top_n:
+        return TIE
     return top_choice
 
 
 def vote_position(choice: str | None, agree_vote: str) -> str:
     if choice is None:
         return "no_data"
+    if choice == TIE:
+        # Deputies split evenly: a real but divided position, not missing data.
+        return "mixed"
     if choice == "Abstención":
         return "abstain"
     return "agree" if choice == agree_vote else "disagree"
