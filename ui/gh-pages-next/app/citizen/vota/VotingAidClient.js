@@ -281,7 +281,7 @@ export default function VotingAidClient({ snapshot, concernLabels = {} }) {
           </ol>
         </section>
 
-        <aside aria-label="Resultados" className="votingAidResults">
+        <aside aria-label="Resultados" className="votingAidResults" id="tu-coincidencia">
           <h2>Tu coincidencia</h2>
           {answeredCount === 0 ? (
             <p className="votingAidMuted">Responde al menos una afirmación para ver resultados.</p>
@@ -325,6 +325,11 @@ export default function VotingAidClient({ snapshot, concernLabels = {} }) {
           </details>
         </aside>
       </div>
+      {answeredCount > 0 ? (
+        <a className="votingAidJump" href="#tu-coincidencia">
+          Ver resultados · {answeredCount}/{statements.length}
+        </a>
+      ) : null}
     </main>
   );
 }

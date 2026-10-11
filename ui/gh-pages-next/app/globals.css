@@ -6449,9 +6449,32 @@ body:has(.responsibility-article) > .breadcrumbs {
   overflow-wrap: anywhere;
 }
 
+.votingAidJump {
+  display: none;
+}
+
 @media (max-width: 900px) {
   .votingAidLayout {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .votingAidJump {
+    display: block;
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    z-index: 10;
+    background: var(--accent-3);
+    color: #fff;
+    border-radius: 999px;
+    padding: 10px 16px;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: var(--shadow);
+  }
+
+  .votingAid {
+    padding-bottom: 56px;
   }
 
   .votingAidResults {
