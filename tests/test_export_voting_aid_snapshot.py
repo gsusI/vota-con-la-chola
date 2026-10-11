@@ -6,6 +6,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
+from scripts import export_voting_aid_review_sheet as review_sheet
 from scripts import export_voting_aid_snapshot as va
 
 REPO = Path(__file__).resolve().parent.parent
@@ -148,6 +149,13 @@ class TestVotingAidSnapshot(unittest.TestCase):
         # Answering "agree" to everything must not systematically favour one bloc.
         counts = published["meta"]["quality"]["direction_balance"]["agree_sides_only_with"]
         self.assertLessEqual(abs(counts["psoe"] - counts["pp"]), 3, counts)
+
+    def test_review_sheet_has_one_row_per_statement_vote(self) -> None:
+        snap = va.build_snapshot(_db(), _seed(), generated_at="x")
+        rows = review_sheet.rows_from_snapshot(snap)
+        self.assertEqual([(r["statement_id"], r["agree_vote"]) for r in rows], [("s1", "Sí"), ("s2", "No"), ("s2", "Sí")])
+        self.assertEqual(rows[0]["parties_agree"], "A, C")
+        self.assertEqual(rows[0]["verdict_agree_vote"], "")
 
 
 if __name__ == "__main__":
