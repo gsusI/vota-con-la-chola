@@ -9,9 +9,5 @@ export const metadata = {
 
 export default function VotingAidPage() {
   const snapshot = readPublicJson("citizen/data/voting_aid_generales_v1.json", { meta: {}, parties: [], statements: [] });
-  const concerns = readPublicJson("citizen/data/concerns_v1.json", { concerns: [] });
-  const concernLabels = Object.fromEntries(
-    (Array.isArray(concerns.concerns) ? concerns.concerns : []).map((c) => [c.id, c.label]),
-  );
-  return <VotingAidClient snapshot={snapshot} concernLabels={concernLabels} />;
+  return <VotingAidClient snapshot={snapshot} />;
 }

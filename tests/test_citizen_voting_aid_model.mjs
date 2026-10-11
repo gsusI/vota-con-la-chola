@@ -86,3 +86,21 @@ test("published snapshot is scorable end to end", () => {
   const code = encodeShareCode(published.statements, answers);
   assert.deepEqual(decodeShareCode(published.statements, code).answers, answers);
 });
+
+test("theme labels, agreement kinds and next unanswered", async () => {
+  const { themeLabel, agreementKind, nextUnansweredIndex } = await import(
+    "../ui/gh-pages-next/app/citizen/vota/votingAidModel.mjs"
+  );
+  assert.equal(themeLabel({ statement_id: "educacion-x", concern_id: "educacion" }), "Educación");
+  assert.equal(themeLabel({ statement_id: "territorio-amnistia", concern_id: "seguridad_justicia" }), "Modelo territorial");
+  assert.equal(themeLabel({ statement_id: "exterior-armas", concern_id: null }), "Política exterior");
+  assert.equal(themeLabel({ statement_id: "raro", concern_id: null }), "Otros");
+  assert.equal(agreementKind("agree", "agree"), "match");
+  assert.equal(agreementKind("agree", "disagree"), "clash");
+  assert.equal(agreementKind("neutral", "agree"), "partial");
+  assert.equal(agreementKind("agree", "no_data"), "none");
+  const sts = snapshot.statements;
+  assert.equal(nextUnansweredIndex(sts, { s1: "agree" }, 0), 1);
+  assert.equal(nextUnansweredIndex(sts, { s3: "agree" }, 2), 0);
+  assert.equal(nextUnansweredIndex(sts, { s1: "agree", s2: "agree", s3: "agree" }, 0), -1);
+});

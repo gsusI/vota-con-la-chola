@@ -117,3 +117,47 @@ export function formatMatch(value) {
   if (value === null || value === undefined || !Number.isFinite(value)) return "—";
   return `${Math.round(value * 100)}%`;
 }
+
+// Below this many answers a ranking is too noisy to read as a result.
+export const MIN_ANSWERS_FOR_RANKING = 8;
+
+const THEME_LABELS = {
+  vivienda: "Vivienda",
+  empleo: "Empleo y pensiones",
+  sanidad: "Sanidad",
+  educacion: "Educación",
+  coste_vida: "Coste de vida",
+  energia: "Energía y clima",
+  transporte: "Transporte",
+  seguridad_justicia: "Seguridad y justicia",
+  inmigracion: "Inmigración",
+  corrupcion: "Corrupción y transparencia",
+  campo_rural: "Campo y mundo rural",
+  igualdad: "Igualdad",
+};
+const PREFIX_THEMES = { cultura: "Cultura", exterior: "Política exterior", territorio: "Modelo territorial" };
+
+/** Human theme label for a statement: concern label, else its id prefix, else "Otros". */
+export function themeLabel(statement) {
+  const prefix = String(statement?.statement_id || "").split("-")[0];
+  return PREFIX_THEMES[prefix] || THEME_LABELS[statement?.concern_id] || "Otros";
+}
+
+/** How a user's answer relates to a party position: match, partial, clash or none (no data). */
+export function agreementKind(answer, position) {
+  if (ANSWER_VALUES[answer] === undefined || POSITION_VALUES[position] === undefined) return "none";
+  const sim = similarity(answer, position);
+  if (sim === 1) return "match";
+  if (sim === 0) return "clash";
+  return "partial";
+}
+
+/** Index of the first unanswered statement at or after `from` (wrapping); -1 when all are answered. */
+export function nextUnansweredIndex(statements, answers = {}, from = 0) {
+  const n = statements.length;
+  for (let k = 0; k < n; k += 1) {
+    const i = (from + k) % n;
+    if (answers[statements[i].statement_id] === undefined) return i;
+  }
+  return -1;
+}

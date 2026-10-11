@@ -46,6 +46,9 @@ function formatBreadcrumb(segment, index, segments) {
     indicators: "Indicadores",
     "actor-graph": "Grafo de actores",
     questions: "Q&A",
+    citizen: "Ciudadanía",
+    vota: "¿Con quién coincides?",
+    leaderboards: "Clasificaciones",
   };
 
   const direct = map[segment];
