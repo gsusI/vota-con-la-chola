@@ -27,6 +27,13 @@ from datetime import datetime, timezone
 from typing import Any
 
 
+REPO_ROOT = pathlib.Path(__file__).resolve().parents[1]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+from publicdata_core.storage import prune_browser_profile  # noqa: E402
+
+
 def now_iso() -> str:
     return datetime.now(timezone.utc).isoformat()
 
@@ -189,6 +196,7 @@ def main() -> int:
             sys.stdout.flush()
             time.sleep(5)
             ctx.close()
+            prune_browser_profile(pathlib.Path(user_data_dir))
             return 3
 
         for i in range(args.wait_seconds):
@@ -252,6 +260,7 @@ def main() -> int:
 
         time.sleep(2)
         ctx.close()
+        prune_browser_profile(pathlib.Path(user_data_dir))
 
     return 0
 

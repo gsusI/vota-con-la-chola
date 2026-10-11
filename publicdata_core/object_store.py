@@ -5,11 +5,12 @@ from __future__ import annotations
 import hashlib
 import os
 import re
-import shutil
 import uuid
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any, BinaryIO, Protocol
+
+from .storage import clone_or_copy
 
 
 DEFAULT_MAX_OBJECT_BYTES = 2 * 1024 * 1024 * 1024
@@ -90,7 +91,11 @@ def _verify_local_source(
 
 
 class FilesystemObjectStore:
-    """Durable-origin contract backed by another filesystem for local drills."""
+    """Durable-origin contract backed by another filesystem for local drills.
+
+    On the same APFS/reflink volume, objects are copy-on-write clones of the
+    source, so a local origin or restore costs no extra disk blocks.
+    """
 
     def __init__(self, root: Path) -> None:
         self.root = Path(root)
@@ -122,10 +127,7 @@ class FilesystemObjectStore:
             target.parent.mkdir(parents=True, exist_ok=True)
             partial = target.with_name(f".{target.name}.{uuid.uuid4().hex}.partial")
             try:
-                with Path(path).open("rb") as source, partial.open("xb") as destination:
-                    shutil.copyfileobj(source, destination, length=DEFAULT_CHUNK_BYTES)
-                    destination.flush()
-                    os.fsync(destination.fileno())
+                clone_or_copy(Path(path), partial)
                 _verify_local_source(
                     partial,
                     content_sha256=content_sha256,
@@ -165,10 +167,7 @@ class FilesystemObjectStore:
         destination.parent.mkdir(parents=True, exist_ok=True)
         partial = destination.with_name(f".{destination.name}.{uuid.uuid4().hex}.partial")
         try:
-            with source.open("rb") as source_handle, partial.open("xb") as target:
-                shutil.copyfileobj(source_handle, target, length=DEFAULT_CHUNK_BYTES)
-                target.flush()
-                os.fsync(target.fileno())
+            clone_or_copy(source, partial)
             _verify_local_source(
                 partial,
                 content_sha256=replica.content_sha256,

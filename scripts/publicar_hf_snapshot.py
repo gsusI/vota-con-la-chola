@@ -5,7 +5,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import shutil
 import sqlite3
 import sys
 import tempfile
@@ -17,6 +16,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
+from publicdata_core.storage import clone_or_copy
 from publicdata_core.util import now_utc_iso
 from publicdata_publish.hf_snapshot import (
     _read_json_or_gz,
@@ -943,7 +943,7 @@ def main() -> int:
         published_rel_paths: list[Path] = []
         for src in published_files:
             dst = published_dst_dir / src.name
-            shutil.copy2(src, dst)
+            clone_or_copy(src, dst, replace=True)
             rel_path = Path("published") / src.name
             published_rel_paths.append(rel_path)
             tracked_files.append(rel_path)

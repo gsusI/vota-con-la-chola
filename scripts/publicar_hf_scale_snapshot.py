@@ -7,7 +7,6 @@ import hashlib
 import json
 import os
 import re
-import shutil
 import sys
 import tempfile
 from pathlib import Path
@@ -17,6 +16,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
+from publicdata_core.storage import clone_or_copy
 from publicdata_publish.hf_snapshot import (
     ensure_iso_date,
     load_dotenv,
@@ -161,7 +161,8 @@ def stage_file(source: Path, destination: Path) -> str:
         os.link(source, destination)
         return "hardlink"
     except OSError:
-        shutil.copy2(source, destination)
+        if clone_or_copy(source, destination, replace=True):
+            return "clone"
         return "copy"
 
 

@@ -22,6 +22,12 @@ from urllib.request import Request, urlopen
 
 import sys
 
+REPO_ROOT = Path(__file__).resolve().parents[1]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+from publicdata_core.storage import prune_browser_profile  # noqa: E402
+
 
 UA = "Mozilla/5.0 (compatible; etl-script/1.0)"
 URL_RE = re.compile(r"/legis(?P<leg>\d+)/votaciones/")
@@ -170,6 +176,7 @@ class HeadfulFetcher:
                 self._context.close()
             except Exception:
                 pass
+            prune_browser_profile(Path(self.user_data_dir))
         if self._pw_mod is not None:
             try:
                 self._pw_mod.__exit__(None, None, None)

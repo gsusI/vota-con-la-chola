@@ -188,6 +188,13 @@ Parlamentario evidence backfills (votes -> "what was voted"):
   - Downloaded bytes + metadata live in `text_documents` with `source_id='parl_initiative_docs'`
   - Initiative->doc mapping lives in `parl_initiative_documents`
 
+### Disk Footprint
+- Never byte-copy local data that already exists on disk: use `publicdata_core.storage.clone_or_copy` (APFS clone / reflink, copy fallback) or a hardlink when the target is immutable.
+- `FilesystemObjectStore` put/restore and HF/semantic publish staging already clone; a same-volume local origin costs ~0 extra bytes.
+- Playwright capture scripts prune browser caches (`prune_browser_profile`) after closing the context; cookies/local storage are kept for profile reuse.
+- Reclaim existing duplicates losslessly with `just storage-dedupe-dry-run` / `just storage-dedupe` (host only; `du` double-counts clones, check `df`).
+- Cold snapshot DBs belong in `*.db.zst`; keep uncompressed only the DBs a recipe opens by default.
+
 ### Migrations On Existing DBs
 Old DBs may be missing columns that new schema indexes reference.
 - `apply_schema()` is responsible for forward-compat:

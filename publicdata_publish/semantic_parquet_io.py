@@ -4,9 +4,10 @@ from __future__ import annotations
 
 import hashlib
 import os
-import shutil
 from pathlib import Path
 from typing import Any
+
+from publicdata_core.storage import clone_or_copy
 
 from .semantic_contracts import SemanticLaneContract, safe_child, sha256_file
 
@@ -198,10 +199,10 @@ def reuse_partition_files(
                 os.link(source, destination)
                 modes["hardlink"] += 1
             except OSError:
-                shutil.copy2(source, destination)
+                clone_or_copy(source, destination, replace=True)
                 modes["copy"] += 1
         else:
-            shutil.copy2(source, destination)
+            clone_or_copy(source, destination, replace=True)
             modes["copy"] += 1
         if (
             int(destination.stat().st_size) != int(old_meta.get("bytes") or -1)

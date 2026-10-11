@@ -1755,6 +1755,14 @@ etl-backfill-money-contract-records:
 etl-backfill-money-subsidy-records:
   docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py backfill-money-subsidy-records --db {{db_path}}"
 
+# Lossless disk reclaim: byte-identical local data files become copy-on-write
+# clones (APFS/reflink). Runs on the host; Docker bind mounts cannot clone.
+storage-dedupe-dry-run:
+  python3 scripts/dedupe_local_storage.py etl/data ui/gh-pages-next
+
+storage-dedupe:
+  python3 scripts/dedupe_local_storage.py etl/data ui/gh-pages-next --apply
+
 etl-test:
   docker compose run --rm --build etl "python3 -m unittest discover -s tests -v"
 

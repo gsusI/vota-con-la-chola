@@ -16,6 +16,8 @@ from pathlib import Path
 from typing import Any, Iterator
 from urllib.parse import urlsplit
 
+from publicdata_core.storage import clone_or_copy
+
 from .sanitize import sanitize_url_for_public
 
 
@@ -553,7 +555,7 @@ def _reuse_partition_files(
             os.link(source, destination)
             modes["hardlink"] += 1
         except OSError:
-            shutil.copy2(source, destination)
+            clone_or_copy(source, destination, replace=True)
             modes["copy"] += 1
         file_meta = dict(old_meta)
         file_meta["path"] = destination_rel.as_posix()

@@ -22,6 +22,13 @@ from datetime import datetime, timezone
 from urllib.parse import urljoin, urlparse
 
 
+REPO_ROOT = pathlib.Path(__file__).resolve().parents[1]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+from publicdata_core.storage import prune_browser_profile  # noqa: E402
+
+
 def now_iso() -> str:
     return datetime.now(timezone.utc).isoformat()
 
@@ -245,6 +252,7 @@ def main() -> int:
                 save_meta()
                 print(f"[pw] failed to load start html file: {e!r}", file=sys.stderr)
                 ctx.close()
+                prune_browser_profile(profile_dir)
                 return 3
         else:
             try:
@@ -255,6 +263,7 @@ def main() -> int:
                 save_meta()
                 print(f"[pw] failed to open start url: {e!r}", file=sys.stderr)
                 ctx.close()
+                prune_browser_profile(profile_dir)
                 return 3
 
             time.sleep(max(0, args.wait_seconds_before_crawl))
@@ -376,6 +385,7 @@ def main() -> int:
         sys.stdout.flush()
         time.sleep(2)
         ctx.close()
+        prune_browser_profile(profile_dir)
 
     return 0
 
