@@ -13,3 +13,13 @@
 
 # Preserve exact bytes in content-addressed launch packages.
 ui/gh-pages-next/public/spending/launch/** -text -whitespace
+
+# Hash-cited evidence captured with CRLF: keep exact bytes.
+docs/etl/sprints/AI-OPS-553/evidence/congreso_vote_event_url_403_headers_*.txt -text
+# Hash-pinned evidence/samples whose recorded sha256 covers CRLF bytes.
+docs/etl/sprints/DINERO-NACIONAL-20260926/evidence/catalog-*.html -text
+docs/etl/sprints/SCALE-FOUNDATION-20260810/exports/boe-candidate-correction-review-queue.csv -text
+docs/etl/sprints/SCALE-FOUNDATION-20260810/exports/procurement-integrity-human-review.csv -text
+docs/etl/sprints/SCALE-FOUNDATION-20260810/exports/real-document-page-ocr-human-review.csv -text
+etl/data/raw/samples/moncloa_rss_referencias_sample.xml -text
+etl/data/raw/samples/senado_votaciones_sample.xml -text
