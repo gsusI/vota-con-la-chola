@@ -2,6 +2,10 @@
 
 Objetivo: **una sola lista** de trabajo operativo para completar el extremo a extremo (extract -> transform -> load -> publish) por tipo de dato.
 
+## Ciudadano: método combinado vuelve a incluir votos (`2026-10-11`)
+
+Estado: HECHO. Ahora: `backfill_topic_positions_combined` (`etl/parlamentario_es/combined_positions.py`) toma de cada método su último snapshot `<= as_of_date` por `topic_set` y sella las filas con `as_of_date`; antes exigía la misma fecha, y como `votes` se calculó el `2026-02-16` y `declared` el `2026-02-28`, el combinado del `2026-02-28` era solo declarado (`157` filas en `topic_set_id=1`). `/citizen` por defecto mostraba `1689/1776` celdas partido×tema `no_signal`; regenerado desde la base de marzo (`politicos-es-005.db.zst`): `68,528` posiciones de votos + `380` declaradas, celdas `oppose=859`, `support=605`, `unclear=211`, `no_signal=101`; `concern_pack_quality.json` pasa de `failed` a `ok`. El resultado del backfill expone `selected_from_votes`, `selected_from_declared` y `source_as_of_dates` (test `tests/test_parl_combined_positions.py`). Siguiente: refrescar votos del Congreso XV (datos hasta `2026-02-12`) y la ayuda al voto para generales ([ROADMAP](../../ROADMAP.md)).
+
 ## Explorer local: escritura solo desde el mismo origen (`2026-10-11`)
 
 Estado: HECHO. Ahora: `scripts/graph_ui_server.py` escucha por defecto en `127.0.0.1` y `docker compose` publica el puerto solo en loopback; `POST /api/topics/reviews/decision` exige `application/json` y rechaza `Origin`/`Sec-Fetch-Site` de otro sitio (`tests/test_graph_ui_server_write_guard.py`). Antes, cualquier equipo de la red o cualquier web abierta en el navegador podía escribir decisiones de revisión. Siguiente: si se expone en red, añadir autenticación explícita antes.

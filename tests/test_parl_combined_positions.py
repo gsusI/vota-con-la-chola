@@ -141,6 +141,71 @@ class TestParlCombinedPositions(unittest.TestCase):
                 conn.close()
 
 
+    def test_combined_reads_latest_snapshot_of_each_method_on_or_before_as_of(self) -> None:
+        # Votes and declared positions are computed on different days. Combined at the
+        # declared date must still pick the (older) votes snapshot, and never a newer one.
+        with tempfile.TemporaryDirectory() as td:
+            conn = open_db(Path(td) / "combined.db")
+            try:
+                apply_schema(conn, DEFAULT_SCHEMA)
+                seed_parl_sources(conn)
+                now = now_utc_iso()
+                person_ids = []
+                for name in ("Persona Votos", "Persona Solo Declarada"):
+                    ckey = canonical_key(full_name=name, birth_date=None, territory_code="")
+                    conn.execute(
+                        "INSERT INTO persons (full_name, canonical_key, created_at, updated_at) VALUES (?,?,?,?)",
+                        (name, ckey, now, now),
+                    )
+                    person_ids.append(int(conn.execute("SELECT person_id FROM persons WHERE canonical_key = ?", (ckey,)).fetchone()["person_id"]))
+                conn.execute(
+                    "INSERT INTO topic_sets (name, legislature, is_active, created_at, updated_at) VALUES (?,?,?,?,?)",
+                    ("Set Demo", "XV", 1, now, now),
+                )
+                topic_set_id = int(conn.execute("SELECT topic_set_id FROM topic_sets").fetchone()["topic_set_id"])
+                conn.execute(
+                    "INSERT INTO topics (canonical_key, label, created_at, updated_at) VALUES (?,?,?,?)",
+                    ("t_demo", "Tema demo", now, now),
+                )
+                topic_id = int(conn.execute("SELECT topic_id FROM topics").fetchone()["topic_id"])
+
+                def add(person_id: int, as_of: str, method: str, stance: str) -> None:
+                    conn.execute(
+                        """
+                        INSERT INTO topic_positions (
+                          topic_id, topic_set_id, person_id, as_of_date,
+                          stance, score, confidence, evidence_count, last_evidence_date,
+                          computed_method, computed_version, computed_at, created_at, updated_at
+                        ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+                        """,
+                        (topic_id, topic_set_id, person_id, as_of, stance, 0.5, 0.8, 2, as_of, method, "v1", now, now, now),
+                    )
+
+                votes_person, declared_person = person_ids
+                add(votes_person, "2026-02-16", "votes", "support")
+                add(votes_person, "2026-03-10", "votes", "oppose")  # after as_of: ignored
+                add(votes_person, "2026-02-28", "declared", "oppose")
+                add(declared_person, "2026-02-28", "declared", "oppose")
+                conn.commit()
+
+                result = backfill_topic_positions_combined(conn, as_of_date="2026-02-28", dry_run=False)
+                self.assertEqual(result["inserted"], 2)
+                self.assertEqual(result["selected_from_votes"], 1)
+                self.assertEqual(result["selected_from_declared"], 1)
+                self.assertEqual(result["source_as_of_dates"], {"declared": ["2026-02-28"], "votes": ["2026-02-16"]})
+
+                rows = {
+                    int(r["person_id"]): (r["stance"], r["as_of_date"])
+                    for r in conn.execute(
+                        "SELECT person_id, stance, as_of_date FROM topic_positions WHERE computed_method = 'combined'"
+                    )
+                }
+                self.assertEqual(rows[votes_person], ("support", "2026-02-28"))
+                self.assertEqual(rows[declared_person], ("oppose", "2026-02-28"))
+            finally:
+                conn.close()
+
+
 if __name__ == "__main__":
     unittest.main()
 
