@@ -27,6 +27,7 @@ export default function CitizenPage() {
     <main className="shell staticRoute staticRouteCitizen">
       <StaticRouteHero
         actions={[
+          { href: "/citizen/vota/", label: "¿Con quién coincides? (generales)" },
           { href: "/explorer-temas/", label: "Auditar evidencia" },
           { href: "/citizen/leaderboards/", label: "Clasificaciones" },
         ]}

@@ -36,6 +36,12 @@ export const siteSections = [
         cta: "Abrir comparaciones",
       },
       {
+        title: "Comparar tus opiniones con los votos",
+        note: "Responde afirmaciones y mira qué partidos votaron en el Congreso como tú, con cada voto enlazado.",
+        href: "/citizen/vota/",
+        cta: "Abrir ayuda al voto",
+      },
+      {
         title: "Ver un resumen guiado",
         note: "Si quieres una lectura más rápida, usa la vista ciudadana como resumen.",
         href: "/citizen/",
@@ -387,6 +393,14 @@ export const datasetCatalog = [
     path: "/citizen/data/citizen.json",
     note: "Archivo principal para el resumen guiado de temas y comparación.",
     confidence: "Publicado",
+  },
+  {
+    id: "voting-aid-generales",
+    sectionId: "topics",
+    label: "Ayuda al voto (generales)",
+    path: "/citizen/data/voting_aid_generales_v1.json",
+    note: "Afirmaciones respaldadas por votaciones del Congreso y posición de cada partido; borrador sin revisión independiente.",
+    confidence: "Borrador",
   },
   {
     id: "citizen-votes",
