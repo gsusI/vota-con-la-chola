@@ -161,3 +161,180 @@ export function nextUnansweredIndex(statements, answers = {}, from = 0) {
   }
   return -1;
 }
+
+// ---------------------------------------------------------------------------
+// Endless mode: curated statements + pool of real votes as one question list.
+
+export const POOL_ANSWER_LABELS = { agree: "Sí", neutral: "Me da igual", disagree: "No" };
+
+/**
+ * Merge curated statements and pool votes into one scorable list.
+ * Every question has: statement_id, source ("curated" | "pool"), text, theme, cells {party: {position}}.
+ */
+export function buildQuestions(snapshot, pool) {
+  const curated = (Array.isArray(snapshot?.statements) ? snapshot.statements : []).map((st) => ({
+    ...st,
+    source: "curated",
+    theme: themeLabel(st),
+  }));
+  const items = (Array.isArray(pool?.items) ? pool.items : []).map((it) => ({
+    statement_id: it.id,
+    source: "pool",
+    text: it.title,
+    question: it.question,
+    theme: it.theme,
+    kind: it.kind,
+    kind_label: it.kind_label,
+    proposer: it.proposer,
+    vote_date: it.vote_date,
+    approved: it.approved,
+    totals: it.totals,
+    source_url: it.source_url,
+    text_url: it.text_url,
+    side: it.side,
+    tier: it.tier,
+    counts: it.counts,
+    cells: Object.fromEntries(Object.entries(it.positions || {}).map(([pid, position]) => [pid, { position }])),
+  }));
+  return [...curated, ...items];
+}
+
+/** Small deterministic PRNG so each visitor gets a stable but personal order. */
+export function mulberry32(seed) {
+  let a = seed >>> 0;
+  return () => {
+    a = (a + 0x6d2b79f5) >>> 0;
+    let t = a;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+function shuffled(list, rand) {
+  const out = [...list];
+  for (let i = out.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(rand() * (i + 1));
+    [out[i], out[j]] = [out[j], out[i]];
+  }
+  return out;
+}
+
+/**
+ * Play order: curated statements first, then pool votes interleaving which bloc "Sí" favours
+ * (psoe / pp / cross) so answering "Sí" to everything does not drift towards one side.
+ * Divisive votes ("split") come before votes where a single party stood apart ("lone").
+ */
+export function playOrder(questions, seed = 1) {
+  const rand = mulberry32(seed);
+  const curated = questions.filter((q) => q.source === "curated").map((q) => q.statement_id);
+  const buckets = { psoe: [], pp: [], cross: [] };
+  for (const tier of ["split", "lone"]) {
+    for (const side of Object.keys(buckets)) {
+      const group = questions.filter((q) => q.source === "pool" && q.tier === tier && (q.side || "cross") === side);
+      buckets[side].push(...shuffled(group, rand).map((q) => q.statement_id));
+    }
+  }
+  const pool = [];
+  const sides = ["psoe", "pp", "cross"];
+  while (sides.some((s) => buckets[s].length)) {
+    for (const s of sides) if (buckets[s].length) pool.push(buckets[s].shift());
+  }
+  return [...curated, ...pool];
+}
+
+/** Next question to ask: first in play order that is neither answered nor skipped; then skipped ones again. */
+export function nextQuestionId(order, answers = {}, skipped = {}) {
+  const fresh = order.find((id) => answers[id] === undefined && !skipped[id]);
+  if (fresh) return fresh;
+  return order.find((id) => answers[id] === undefined) || null;
+}
+
+/** How each party voted relative to the user's answer on one question. */
+export function partyReactions(question, answer, parties) {
+  const out = { with: [], against: [], partial: [], none: [] };
+  for (const p of parties) {
+    const position = question?.cells?.[p.party_id]?.position || "no_data";
+    const kind = agreementKind(answer, position);
+    const bucket = kind === "match" ? "with" : kind === "clash" ? "against" : kind === "partial" ? "partial" : "none";
+    out[bucket].push({ ...p, position });
+  }
+  return out;
+}
+
+/** Split a party's score details into match / partial / clash / none lists. */
+export function groupDetails(details = []) {
+  const out = { match: [], partial: [], clash: [], none: [] };
+  for (const d of details) out[agreementKind(d.answer, d.position)].push(d);
+  return out;
+}
+
+export const MILESTONES = [
+  { at: 5, title: "Público en la tribuna", emoji: "👀" },
+  { at: 15, title: "Escaño novato", emoji: "🪑" },
+  { at: 33, title: "Portavocía adjunta", emoji: "🎤" },
+  { at: 60, title: "Portavocía", emoji: "📣" },
+  { at: 100, title: "Presidencia de comisión", emoji: "🏛️" },
+  { at: 200, title: "Presidencia de la Cámara", emoji: "🔔" },
+  { at: 300, title: "Memoria viva del hemiciclo", emoji: "📚" },
+];
+
+/** Current rank and the next one to unlock for a number of answers. */
+export function milestoneFor(count) {
+  let current = null;
+  for (const m of MILESTONES) if (count >= m.at) current = m;
+  const next = MILESTONES.find((m) => count < m.at) || null;
+  return { current, next };
+}
+
+// Share codes v2: sparse "<index base36><answer>" entries plus a checksum of the question ids,
+// so links survive hundreds of answers and are rejected if the question set changes.
+function idsChecksum(ids) {
+  let h = 0x811c9dc5;
+  for (const ch of ids.join("|")) {
+    h ^= ch.codePointAt(0);
+    h = Math.imul(h, 0x01000193) >>> 0;
+  }
+  return h.toString(36);
+}
+
+export function encodeShareCodeV2(questions, answers = {}, important = {}) {
+  const ids = questions.map((q) => q.statement_id);
+  const entries = [];
+  ids.forEach((id, i) => {
+    const code = ANSWER_CODES[answers[id]];
+    if (!code) return;
+    entries.push(i.toString(36) + (important[id] ? code.toUpperCase() : code));
+  });
+  return `v2.${idsChecksum(ids)}.${entries.join("-")}`;
+}
+
+export function decodeShareCodeV2(questions, code) {
+  const raw = String(code || "").trim();
+  const m = /^v2\.([0-9a-z]+)\.([0-9a-zA-Z-]*)$/u.exec(raw);
+  if (!m) return null;
+  const ids = questions.map((q) => q.statement_id);
+  if (m[1] !== idsChecksum(ids)) return null;
+  const answers = {};
+  const important = {};
+  for (const entry of m[2] ? m[2].split("-") : []) {
+    const ch = entry.slice(-1);
+    const idx = parseInt(entry.slice(0, -1), 36);
+    const answer = CODE_ANSWERS[ch.toLowerCase()];
+    if (!answer || !Number.isInteger(idx) || idx < 0 || idx >= ids.length) return null;
+    answers[ids[idx]] = answer;
+    if (ch !== ch.toLowerCase()) important[ids[idx]] = true;
+  }
+  return { answers, important };
+}
+
+/** Decode any supported share code: v2 over all questions, or legacy v1 over curated statements. */
+export function decodeAnyShareCode(questions, code) {
+  return (
+    decodeShareCodeV2(questions, code) ||
+    decodeShareCode(
+      questions.filter((q) => q.source === "curated"),
+      code,
+    )
+  );
+}

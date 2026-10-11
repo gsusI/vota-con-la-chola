@@ -104,3 +104,50 @@ test("theme labels, agreement kinds and next unanswered", async () => {
   assert.equal(nextUnansweredIndex(sts, { s3: "agree" }, 2), 0);
   assert.equal(nextUnansweredIndex(sts, { s1: "agree", s2: "agree", s3: "agree" }, 0), -1);
 });
+
+test("endless mode: merged questions, balanced order, share v2, milestones, reactions", async () => {
+  const m = await import("../ui/gh-pages-next/app/citizen/vota/votingAidModel.mjs");
+  const snap = JSON.parse(fs.readFileSync(publishedPath, "utf-8"));
+  const poolPath = path.join(here, "..", "ui", "gh-pages-next", "public", "citizen", "data", "voting_aid_pool_v1.json");
+  const pool = JSON.parse(fs.readFileSync(poolPath, "utf-8"));
+  const questions = m.buildQuestions(snap, pool);
+  assert.equal(questions.length, snap.statements.length + pool.items.length);
+  assert.equal(new Set(questions.map((q) => q.statement_id)).size, questions.length);
+
+  const order = m.playOrder(questions, 42);
+  assert.equal(order.length, questions.length);
+  assert.deepEqual(order.slice(0, snap.statements.length), snap.statements.map((s) => s.statement_id));
+  assert.deepEqual(m.playOrder(questions, 42), order, "same seed, same order");
+  // First 30 pool questions alternate sides: no side gets more than half.
+  const byId = Object.fromEntries(questions.map((q) => [q.statement_id, q]));
+  const firstPool = order.slice(snap.statements.length, snap.statements.length + 30).map((id) => byId[id].side);
+  for (const side of ["psoe", "pp"]) assert.ok(firstPool.filter((s) => s === side).length <= 15, side);
+
+  const answers = { [order[0]]: "agree" };
+  const skipped = { [order[1]]: true };
+  assert.equal(m.nextQuestionId(order, answers, skipped), order[2]);
+  const allAnswered = Object.fromEntries(order.map((id) => [id, "neutral"]));
+  assert.equal(m.nextQuestionId(order, allAnswered, {}), null);
+
+  // Share v2 round trip on a sparse set including pool questions, and rejection on a changed set.
+  const some = { [order[0]]: "agree", [order[200]]: "disagree", [order[333]]: "neutral" };
+  const code = m.encodeShareCodeV2(questions, some, { [order[200]]: true });
+  assert.deepEqual(m.decodeAnyShareCode(questions, code), { answers: some, important: { [order[200]]: true } });
+  assert.equal(m.decodeShareCodeV2(questions.slice(1), code), null);
+  assert.equal(m.decodeShareCodeV2(questions, code.replace(/\.[^.]*$/u, ".zzzzz")), null);
+
+  // Scores work over the merged list.
+  const rows = m.scoreParties({ parties: snap.parties, statements: questions }, some);
+  assert.ok(rows.every((r) => r.compared <= 3));
+
+  assert.deepEqual(m.milestoneFor(0), { current: null, next: m.MILESTONES[0] });
+  assert.equal(m.milestoneFor(34).current.at, 33);
+  assert.equal(m.milestoneFor(1000).next, null);
+
+  const q = { cells: { a: { position: "agree" }, b: { position: "disagree" }, c: { position: "abstain" }, d: { position: "no_data" } } };
+  const parties = ["a", "b", "c", "d"].map((id) => ({ party_id: id, label: id }));
+  const r = m.partyReactions(q, "agree", parties);
+  assert.deepEqual([r.with.map((p) => p.party_id), r.against.map((p) => p.party_id), r.partial.map((p) => p.party_id), r.none.map((p) => p.party_id)], [["a"], ["b"], ["c"], ["d"]]);
+  const g = m.groupDetails([{ answer: "agree", position: "agree" }, { answer: "agree", position: "disagree" }]);
+  assert.equal(g.match.length + g.clash.length, 2);
+});
