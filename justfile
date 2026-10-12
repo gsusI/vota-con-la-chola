@@ -87,6 +87,8 @@ domain_taxonomy_seed := env_var_or_default("DOMAIN_TAXONOMY_SEED", "docs/domain_
 policy_axes_tier1_seed := env_var_or_default("POLICY_AXES_TIER1_SEED", "docs/codebook_tier1_es.md")
 textdoc_limit := env_var_or_default("TEXTDOC_LIMIT", "900")
 textdoc_timeout := env_var_or_default("TEXTDOC_TIMEOUT", "25")
+# www.congreso.es open-data pages took ~55 s to answer on 2026-10-12; 25 s failed every daily run that day.
+live_parl_timeout := env_var_or_default("LIVE_PARL_TIMEOUT", "90")
 initdoc_limit := env_var_or_default("INITDOC_LIMIT", "200")
 initdoc_max_per := env_var_or_default("INITDOC_MAX_PER", "3")
 initdoc_timeout := env_var_or_default("INITDOC_TIMEOUT", "25")
@@ -1799,10 +1801,10 @@ etl-live:
 
 etl-live-parlamentario:
   # Upstream parliament endpoints time out now and then; ingests are idempotent upserts, so retry once.
-  for attempt in 1 2; do docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py ingest --db {{db_path}} --source congreso_votaciones --snapshot-date {{snapshot_date}} --timeout {{textdoc_timeout}} --congreso-legs {{live_parl_congreso_legs}} --max-votes {{live_parl_max_votes}}" && break; if [ "$attempt" = 2 ]; then exit 1; fi; echo "retrying after a failed attempt" >&2; sleep 30; done
-  for attempt in 1 2; do docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py ingest --db {{db_path}} --source congreso_iniciativas --snapshot-date {{snapshot_date}} --timeout {{textdoc_timeout}} --max-files {{live_parl_max_files}} --max-records {{live_parl_max_records}}" && break; if [ "$attempt" = 2 ]; then exit 1; fi; echo "retrying after a failed attempt" >&2; sleep 30; done
-  for attempt in 1 2; do docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py ingest --db {{db_path}} --source senado_votaciones --snapshot-date {{snapshot_date}} --timeout {{textdoc_timeout}} --senado-legs {{live_parl_senado_legs}} --max-votes {{live_parl_max_votes}} --senado-skip-details" && break; if [ "$attempt" = 2 ]; then exit 1; fi; echo "retrying after a failed attempt" >&2; sleep 30; done
-  for attempt in 1 2; do docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py ingest --db {{db_path}} --source senado_iniciativas --snapshot-date {{snapshot_date}} --timeout {{textdoc_timeout}} --senado-legs {{live_parl_senado_legs}} --max-records {{live_parl_max_records}}" && break; if [ "$attempt" = 2 ]; then exit 1; fi; echo "retrying after a failed attempt" >&2; sleep 30; done
+  for attempt in 1 2; do docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py ingest --db {{db_path}} --source congreso_votaciones --snapshot-date {{snapshot_date}} --timeout {{live_parl_timeout}} --congreso-legs {{live_parl_congreso_legs}} --max-votes {{live_parl_max_votes}}" && break; if [ "$attempt" = 2 ]; then exit 1; fi; echo "retrying after a failed attempt" >&2; sleep 30; done
+  for attempt in 1 2; do docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py ingest --db {{db_path}} --source congreso_iniciativas --snapshot-date {{snapshot_date}} --timeout {{live_parl_timeout}} --max-files {{live_parl_max_files}} --max-records {{live_parl_max_records}}" && break; if [ "$attempt" = 2 ]; then exit 1; fi; echo "retrying after a failed attempt" >&2; sleep 30; done
+  for attempt in 1 2; do docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py ingest --db {{db_path}} --source senado_votaciones --snapshot-date {{snapshot_date}} --timeout {{live_parl_timeout}} --senado-legs {{live_parl_senado_legs}} --max-votes {{live_parl_max_votes}} --senado-skip-details" && break; if [ "$attempt" = 2 ]; then exit 1; fi; echo "retrying after a failed attempt" >&2; sleep 30; done
+  for attempt in 1 2; do docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py ingest --db {{db_path}} --source senado_iniciativas --snapshot-date {{snapshot_date}} --timeout {{live_parl_timeout}} --senado-legs {{live_parl_senado_legs}} --max-records {{live_parl_max_records}}" && break; if [ "$attempt" = 2 ]; then exit 1; fi; echo "retrying after a failed attempt" >&2; sleep 30; done
 
 etl-elecciones:
   docker compose run --rm --build etl "python3 scripts/generar_proximas_elecciones_espana.py --today {{snapshot_date}} --timeout {{infoelectoral_timeout}} --public-json-out ui/site/public/calendario-electoral/data/election-calendar.json"
