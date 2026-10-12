@@ -4781,7 +4781,11 @@ explorer-datasette:
   python3 scripts/run_datasette_explorer.py --db "{{db_path}}" --host {{explorer_host}} --port 8011
 
 # Frozen publication renders already-reviewed public inputs without re-running ETL.
+# Holds the site lock (scripts/with_site_lock.sh) so concurrent sessions never rebuild out/ mid-upload.
 site-build:
+  @scripts/with_site_lock.sh just _site-build-unlocked
+
+_site-build-unlocked:
   if [ "${CLOUDFLARE_PAGES_FROZEN_INPUTS:-0}" = "1" ]; then just site-build-frozen; else just site-build-refresh; fi
 
 site-build-frozen:
@@ -6639,6 +6643,7 @@ cloudflare-pages-deploy:
 site-publish:
   #!/usr/bin/env bash
   set -euo pipefail
+  if [ "${VCLC_SITE_LOCK_HELD:-0}" != "1" ]; then exec scripts/with_site_lock.sh just site-publish; fi
   # Record what the build came from before building (the sync may run later); dotfiles are never published.
   commit="$(git rev-parse HEAD)"
   dirty=false; if [ -n "$(git status --porcelain --untracked-files=no -- ui/site)" ]; then dirty=true; fi
@@ -6651,6 +6656,7 @@ site-publish:
 site-origin-publish:
   #!/usr/bin/env bash
   set -euo pipefail
+  if [ "${VCLC_SITE_LOCK_HELD:-0}" != "1" ]; then exec scripts/with_site_lock.sh just site-origin-publish; fi
   site="{{site_out_dir}}"
   test -f "$site/index.html" || { echo "Missing $site; run just site-publish (or just site-build) first" >&2; exit 2; }
   # R2 credentials: env, else .env; account id: env, else the Worker's wrangler.toml (see make_client).

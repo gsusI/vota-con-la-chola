@@ -239,6 +239,47 @@ class TestPublishRecipes(unittest.TestCase):
         publish = text[text.index("\nsite-publish:"):text.index("\nsite-origin-publish:")]
         self.assertLess(publish.index("git rev-parse HEAD"), publish.index("just site-build"))
         self.assertLess(publish.index(".vclc-build.json"), publish.index("just site-origin-publish"))
+        for recipe in ("site-publish", "site-origin-publish"):
+            body = text[text.index(f"\n{recipe}:"):]
+            self.assertIn(f"with_site_lock.sh just {recipe}; fi", body[: body.index("\n\n")])
+        self.assertIn("@scripts/with_site_lock.sh just _site-build-unlocked", text)
+
+
+class TestSiteLock(unittest.TestCase):
+    LOCK = str(REPO_ROOT / "scripts/with_site_lock.sh")
+
+    def run_locked(self, lock: Path, cmd: str, **env: str) -> subprocess.Popen:
+        base = {k: v for k, v in os.environ.items() if k != "VCLC_SITE_LOCK_HELD"}
+        full = {**base, "VCLC_SITE_LOCK_DIR": str(lock), "VCLC_SITE_LOCK_POLL": "0.05", **env}
+        return subprocess.Popen([self.LOCK, "bash", "-c", cmd], env=full, stderr=subprocess.PIPE, text=True)
+
+    def test_concurrent_holders_run_one_after_another(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            lock, log = Path(tmp) / "lock", Path(tmp) / "log"
+            step = f'echo start >> {log}; sleep 0.4; echo end >> {log}'
+            procs = [self.run_locked(lock, step) for _ in range(2)]
+            for p in procs:
+                p.communicate(timeout=10)
+                self.assertEqual(p.returncode, 0)
+            self.assertEqual(log.read_text().split(), ["start", "end", "start", "end"])
+            self.assertFalse(lock.exists())
+
+    def test_stale_lock_is_reclaimed_and_nested_calls_do_not_wait(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            lock = Path(tmp) / "lock"
+            lock.mkdir()
+            dead = subprocess.Popen(["true"])
+            dead.wait()
+            (lock / "pid").write_text(str(dead.pid))
+            p = self.run_locked(lock, "exit 0")
+            _, err = p.communicate(timeout=10)
+            self.assertEqual(p.returncode, 0)
+            self.assertIn("stale lock", err)
+            lock.mkdir()
+            (lock / "pid").write_text(str(os.getpid()))  # held by a live process
+            nested = self.run_locked(lock, "exit 0", VCLC_SITE_LOCK_HELD="1")
+            nested.communicate(timeout=5)
+            self.assertEqual(nested.returncode, 0)
 
 
 if __name__ == "__main__":
