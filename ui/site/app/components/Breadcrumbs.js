@@ -48,6 +48,7 @@ function formatBreadcrumb(segment, index, segments) {
     questions: "Q&A",
     citizen: "Ciudadanía",
     vota: "¿Con quién coincides?",
+    metodologia: "Cómo se hizo",
     leaderboards: "Clasificaciones",
   };
 

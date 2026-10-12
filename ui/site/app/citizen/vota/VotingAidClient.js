@@ -456,7 +456,8 @@ function IntroView({ meta, questionsTotal, poolStatus, parties, answeredCount, o
       </ul>
       <p className="votingAidNotice" role="note">
         <strong>Versión en revisión.</strong> Los 33 temas clave aún deben revisarlos personas independientes; las votaciones del
-        modo infinito usan el título oficial tal cual. Úsalo para explorar, no como veredicto.
+        modo infinito usan el título oficial tal cual. Úsalo para explorar, no como veredicto.{" "}
+        <a href={withBasePath("/citizen/vota/metodologia/")}>Cómo se hizo (fuentes, IA y prompts)</a>
       </p>
       <p className="votingAidMuted">Partidos comparados: {parties.map((p) => p.label).join(", ")}.</p>
     </section>
@@ -993,6 +994,9 @@ function ResultsView({ results, answeredCount, fromShare, onParty, onPlay, onRev
             <li key={line}>{line}</li>
           ))}
         </ul>
+        <p>
+          <a href={withBasePath("/citizen/vota/metodologia/")}>Cómo se hizo: fuentes, modelos de IA, prompts y limitaciones →</a>
+        </p>
       </details>
     </section>
   );

@@ -7856,3 +7856,190 @@ body:has(.responsibility-article) > .breadcrumbs {
     transform: none;
   }
 }
+
+/* Voting-aid methodology page (/citizen/vota/metodologia/) */
+.vaMethod {
+  max-width: 920px;
+  line-height: 1.55;
+}
+
+.vaMethod h2 {
+  margin: 0 0 10px;
+  font-size: 1.25rem;
+}
+
+.vaMethod h3 {
+  margin: 18px 0 6px;
+  font-size: 1rem;
+}
+
+.vaMethod p {
+  margin: 8px 0;
+}
+
+.vaMethod a {
+  color: var(--accent-3);
+}
+
+.vaMethod code {
+  font-family: var(--mono);
+  font-size: 0.85em;
+  background: rgba(23, 25, 31, 0.05);
+  border-radius: 4px;
+  padding: 1px 4px;
+  overflow-wrap: anywhere;
+}
+
+.vaMethod__list {
+  margin: 8px 0;
+  padding-left: 1.2rem;
+  display: grid;
+  gap: 6px;
+}
+
+.vaMethod__num {
+  display: inline-grid;
+  place-items: center;
+  width: 1.7rem;
+  height: 1.7rem;
+  margin-right: 6px;
+  border-radius: 50%;
+  background: var(--accent-2);
+  color: #fff;
+  font-size: 0.9rem;
+  vertical-align: 2px;
+}
+
+.vaMethod__toc {
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  font-size: 0.88rem;
+}
+
+.chip.vaMethod__chipWarn {
+  border-color: #e7c66b;
+  background: #fff7dc;
+  color: #6b4e00;
+}
+
+.vaMethod__muted {
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+}
+
+.vaMethod__details {
+  margin: 8px 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.vaMethod__details > summary {
+  cursor: pointer;
+  padding: 10px 12px;
+  font-weight: 600;
+}
+
+.vaMethod__pre {
+  margin: 0;
+  padding: 12px;
+  max-height: 520px;
+  overflow: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  line-height: 1.5;
+  background: #f6f7f5;
+  border-top: 1px solid var(--line);
+  border-radius: 0 0 8px 8px;
+}
+
+#reproducir .vaMethod__pre {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.vaMethod__kpis {
+  margin: 12px 0;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+.vaMethod__kpi {
+  display: grid;
+  gap: 2px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.vaMethod__kpi strong {
+  font-size: 1.35rem;
+}
+
+.vaMethod__kpi span {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+}
+
+.vaMethod__kpi--warn {
+  border-color: #e7c66b;
+  background: #fff7dc;
+}
+
+.vaMethod__tableWrap {
+  overflow-x: auto;
+}
+
+.vaMethod__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.vaMethod__table th,
+.vaMethod__table td {
+  text-align: left;
+  vertical-align: top;
+  padding: 8px;
+  border-bottom: 1px solid var(--line);
+}
+
+.vaMethod__quotes li {
+  font-style: italic;
+}
+
+@media (max-width: 640px) {
+  .vaMethod h1 {
+    font-size: 2rem;
+  }
+
+  .vaMethod__table thead {
+    display: none;
+  }
+
+  .vaMethod__table,
+  .vaMethod__table tbody,
+  .vaMethod__table tr,
+  .vaMethod__table td {
+    display: block;
+  }
+
+  .vaMethod__table tr {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .vaMethod__table td {
+    padding: 2px 0;
+    border: 0;
+  }
+
+  .vaMethod__table td::before {
+    content: attr(data-label) ": ";
+    font-weight: 700;
+  }
+}
