@@ -167,3 +167,48 @@ test("podium share text has no answers, only top three", async () => {
   );
   assert.equal(text, "Mi podio en «¿Con quién coincides?» tras 42 votaciones del Congreso:\n🥇 A 80%\n🥈 B 60%\n🥉 C 50%\nhttps://example.invalid/vota/");
 });
+
+test("AI prompts carry exactly what was voted and never the user's answers", async () => {
+  const m = await import("../ui/gh-pages-next/app/citizen/vota/votingAidModel.mjs");
+  const snap = JSON.parse(fs.readFileSync(publishedPath, "utf-8"));
+  const poolPath = path.join(here, "..", "ui", "gh-pages-next", "public", "citizen", "data", "voting_aid_pool_v1.json");
+  const pool = JSON.parse(fs.readFileSync(poolPath, "utf-8"));
+  const questions = m.buildQuestions(snap, pool);
+  const poolQ = questions.find((q) => q.source === "pool" && q.text_url);
+  const curated = questions.find((q) => q.source === "curated" && q.votes.length > 1);
+
+  const why = m.buildAiPrompt(poolQ, snap.parties);
+  assert.ok(why.includes(poolQ.text));
+  assert.ok(why.includes(poolQ.source_url) && why.includes(poolQ.text_url));
+  assert.ok(why.includes(poolQ.proposer));
+  for (const p of snap.parties) assert.ok(why.includes(`${p.label}:`), p.label);
+
+  const explain = m.buildAiPrompt(poolQ, snap.parties, { mode: "explain" });
+  assert.ok(explain.includes(poolQ.text));
+  assert.ok(!explain.includes(poolQ.proposer), "explain mode must not reveal the proposer");
+  assert.ok(!/ sí, \d+ no/u.test(explain), "explain mode must not include results");
+  assert.ok(!snap.parties.some((p) => explain.includes(`${p.label}:`)), "explain mode must not include party votes");
+
+  const one = m.buildAiPrompt(curated, snap.parties, { partyId: "pp" });
+  assert.ok(one.includes(curated.text) && one.includes("Votación 2:"));
+  assert.ok(one.includes("PP:") && !one.includes("PSOE:"));
+
+  for (const prompt of [why, explain, one]) {
+    assert.ok(!/Tu respuesta|De acuerdo|En desacuerdo|Me da igual/u.test(prompt), "no user answer in prompt");
+    assert.ok(prompt.length < 4000, `prompt too long: ${prompt.length}`);
+  }
+  // Explain mode masks proposers named inside official titles and leaves out curated outcome notes.
+  const jornada = questions.find((q) => q.statement_id === "empleo-jornada-37-5");
+  const jornadaExplain = m.buildAiPrompt(jornada, snap.parties, { mode: "explain" });
+  assert.ok(!/Junts|VOX|Popular|decayó|aprobadas/u.test(jornadaExplain), jornadaExplain);
+  assert.equal(
+    m.maskProposers("Proposición de Ley del Grupo Parlamentario Socialista, sobre algo."),
+    "Proposición de Ley de un grupo parlamentario, sobre algo.",
+  );
+
+  const links = m.aiLinks(why);
+  assert.deepEqual(links.map((l) => l.id), ["chatgpt", "claude", "gemini"]);
+  assert.equal(decodeURIComponent(links[0].href.split("?q=")[1]), why);
+  assert.equal(decodeURIComponent(links[1].href.split("?q=")[1]), why);
+  assert.equal(links[2].prefill, false);
+});

@@ -7109,6 +7109,84 @@ body:has(.responsibility-article) > .breadcrumbs {
   display: inline;
 }
 
+/* Ask an AI */
+.votingAidAskAiToggle {
+  margin-top: 10px;
+}
+
+.votingAidAskAi {
+  margin-top: 6px;
+  padding: 12px 14px;
+  border: 1px dashed var(--line);
+  border-radius: 12px;
+  background: rgba(32, 60, 115, 0.04);
+}
+
+.votingAidAskAi__title {
+  margin: 0 0 8px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.votingAidAskAi__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.votingAidAskAi__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.votingAidAskAi__link:hover {
+  border-color: var(--accent-3);
+}
+
+.votingAidAskAi__note {
+  margin: 8px 0 0;
+}
+
+.votingAidAskAi__prompt {
+  margin-top: 8px;
+}
+
+.votingAidAskAi__prompt summary {
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: var(--accent-3);
+}
+
+.votingAidAskAi__prompt pre {
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  line-height: 1.45;
+  max-height: 240px;
+  overflow: auto;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.votingAidAskAi__disclaimer {
+  margin: 8px 0 0;
+  font-size: 0.8rem;
+}
+
 /* Swipe + mobile helpers */
 .votingAidCard--question {
   position: relative;

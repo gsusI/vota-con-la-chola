@@ -10,6 +10,8 @@ import {
   POSITION_LABELS,
   STORAGE_KEY,
   agreementKind,
+  aiLinks,
+  buildAiPrompt,
   buildQuestions,
   decodeAnyShareCode,
   encodeShareCode,
@@ -132,6 +134,83 @@ function QuestionLinks({ question }) {
         </a>
       ))}
     </span>
+  );
+}
+
+async function copyText(text) {
+  try {
+    await navigator.clipboard.writeText(text);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Links that open ChatGPT / Claude with the question already written, and Gemini after copying it.
+ * The prompt holds exactly what was voted (official title, date, result, party votes, official links),
+ * never the user's answers; it is shown in full before sending.
+ */
+function AskAi({ prompt, title }) {
+  const [note, setNote] = useState("");
+  const links = useMemo(() => aiLinks(prompt), [prompt]);
+  async function onOpen(link) {
+    const copied = await copyText(prompt);
+    if (!link.prefill) setNote(copied ? `Pregunta copiada: pégala en ${link.label}.` : `Copia la pregunta de abajo y pégala en ${link.label}.`);
+    else setNote("");
+  }
+  return (
+    <div className="votingAidAskAi">
+      <p className="votingAidAskAi__title">
+        <span aria-hidden="true">🤖</span> {title}
+      </p>
+      <div className="votingAidAskAi__links">
+        {links.map((link) => (
+          <a
+            className="votingAidAskAi__link"
+            href={link.href}
+            key={link.id}
+            onClick={() => onOpen(link)}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            {link.label}
+            {!link.prefill ? <span className="votingAidMuted"> (copia y pega)</span> : null}
+          </a>
+        ))}
+        <button
+          className="votingAidAskAi__link"
+          onClick={async () => setNote((await copyText(prompt)) ? "Pregunta copiada." : "No se pudo copiar: selecciónala abajo.")}
+          type="button"
+        >
+          Copiar pregunta
+        </button>
+      </div>
+      {note ? (
+        <p aria-live="polite" className="votingAidMuted votingAidAskAi__note">
+          {note}
+        </p>
+      ) : null}
+      <details className="votingAidAskAi__prompt">
+        <summary>Ver la pregunta que se envía</summary>
+        <pre>{prompt}</pre>
+      </details>
+      <p className="votingAidMuted votingAidAskAi__disclaimer">
+        Se abre en otra web con esta pregunta, sin tus respuestas. Las IA se equivocan: contrasta con los enlaces oficiales.
+      </p>
+    </div>
+  );
+}
+
+function AskAiToggle({ label, prompt, title }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="votingAidAskAiToggle">
+      <button aria-expanded={open} className="votingAidLinkButton" onClick={() => setOpen(!open)} type="button">
+        <span aria-hidden="true">🤖</span> {label}
+      </button>
+      {open ? <AskAi prompt={prompt} title={title} /> : null}
+    </div>
   );
 }
 
@@ -271,7 +350,7 @@ function useSwipe(onSwipe, resetKey) {
   return { dx, handlers };
 }
 
-function QuestionCard({ question, answer, important, onAnswer, onSkip, onImportant, showSwipeHint }) {
+function QuestionCard({ question, parties, answer, important, onAnswer, onSkip, onImportant, showSwipeHint }) {
   const headingRef = useRef(null);
   useEffect(() => {
     headingRef.current?.focus({ preventScroll: true });
@@ -347,6 +426,11 @@ function QuestionCard({ question, answer, important, onAnswer, onSkip, onImporta
           Saltar
         </button>
       </div>
+      <AskAiToggle
+        label="¿No lo entiendes? Que te lo explique una IA"
+        prompt={buildAiPrompt(question, parties, { mode: "explain" })}
+        title="Pide una explicación sencilla de lo que se vota (sin decirte qué votó cada partido):"
+      />
       {question.source === "curated" && question.context ? (
         <details className="votingAidDetails">
           <summary>¿Qué se votó en el Congreso?</summary>
@@ -393,7 +477,7 @@ function ReactionGroup({ kind, label, parties }) {
   );
 }
 
-function RevealCard({ question, answer, reactions, topBefore, onNext, onChange }) {
+function RevealCard({ question, parties, answer, reactions, topBefore, onNext, onChange }) {
   const msg = revealMessage(answer, reactions, topBefore);
   const nextRef = useRef(null);
   useEffect(() => {
@@ -434,6 +518,11 @@ function RevealCard({ question, answer, reactions, topBefore, onNext, onChange }
       <p className="votingAidLinksRow">
         <QuestionLinks question={question} />
       </p>
+      <AskAiToggle
+        label="¿Por qué votaron así? Pregúntale a una IA"
+        prompt={buildAiPrompt(question, parties)}
+        title="Pide que te expliquen qué se votó y los argumentos de cada partido:"
+      />
       <div className="votingAidActions votingAidStickyBar">
         <button className="votingAidButton votingAidButton--primary votingAidButton--big" onClick={onNext} ref={nextRef} type="button">
           Siguiente pregunta →
@@ -521,7 +610,7 @@ function themeStats(details, questionsById) {
     .sort((a, b) => b.match - a.match || b.n - a.n);
 }
 
-function PartyView({ row, questionsById, onBack, onEdit }) {
+function PartyView({ row, parties, questionsById, onBack, onEdit }) {
   const groups = useMemo(() => groupDetails(row.details), [row]);
   const [tab, setTab] = useState(groups.clash.length ? "clash" : "match");
   const [theme, setTheme] = useState("");
@@ -613,6 +702,11 @@ function PartyView({ row, questionsById, onBack, onEdit }) {
                       Cambiar mi respuesta
                     </button>
                   </p>
+                  <AskAiToggle
+                    label={`¿Por qué ${row.label} votó así?`}
+                    prompt={buildAiPrompt(q, parties, { partyId: row.partyId })}
+                    title={`Pide que te expliquen qué se votó y los argumentos de ${row.label}:`}
+                  />
                 </div>
               </li>
             );
@@ -1105,6 +1199,7 @@ export default function VotingAidClient({ snapshot }) {
                     setRevealId(null);
                   }}
                   onNext={() => goPlay()}
+                  parties={parties}
                   question={revealQuestion}
                   reactions={partyReactions(revealQuestion, state.answers[revealQuestion.statement_id], parties)}
                   topBefore={topBefore}
@@ -1116,6 +1211,7 @@ export default function VotingAidClient({ snapshot }) {
                   onAnswer={answer}
                   onImportant={(v) => setImportant(current.statement_id, v)}
                   onSkip={skip}
+                  parties={parties}
                   question={current}
                   showSwipeHint={answeredCount < 3}
                 />
@@ -1164,7 +1260,7 @@ export default function VotingAidClient({ snapshot }) {
       ) : null}
 
       {view === "party" && partyRow ? (
-        <PartyView key={partyRow.partyId} onBack={() => show("results")} onEdit={(id) => goPlay(id)} questionsById={questionsById} row={partyRow} />
+        <PartyView key={partyRow.partyId} parties={parties} onBack={() => show("results")} onEdit={(id) => goPlay(id)} questionsById={questionsById} row={partyRow} />
       ) : null}
 
       {view === "review" ? <ReviewView onAnswer={setAnswer} onOpen={(id) => goPlay(id)} questions={questions} state={state} /> : null}

@@ -346,3 +346,117 @@ export function podiumShareText(results, answeredCount, url) {
   const lines = top.map((r, i) => `${medals[i]} ${r.label} ${formatMatch(r.match)}`);
   return [`Mi podio en «¿Con quién coincides?» tras ${answeredCount} votaciones del Congreso:`, ...lines, url].filter(Boolean).join("\n");
 }
+
+// ---------------------------------------------------------------------------
+// "Ask an AI" links: a self-contained prompt with exactly what was voted, never the user's answers.
+
+const POSITION_WORDS = { agree: "a favor (Sí)", disagree: "en contra (No)", abstain: "abstención", mixed: "votos divididos", no_data: "sin datos" };
+
+function voteLines(question, parties) {
+  // One block per roll-call vote behind the question, with each party's majority vote and counts.
+  const votes =
+    question.source === "pool"
+      ? [
+          {
+            title: question.text,
+            date: question.vote_date,
+            kind: question.kind_label,
+            proposer: question.proposer,
+            totals: question.totals,
+            approved: question.approved,
+            source_url: question.source_url,
+            text_url: question.text_url,
+            agree_vote: "Sí",
+            party: Object.fromEntries(
+              parties.map((p) => [p.party_id, { position: question.cells?.[p.party_id]?.position || "no_data", counts: question.counts?.[p.party_id] }]),
+            ),
+          },
+        ]
+      : (question.votes || []).map((v) => ({
+          title: v.title,
+          date: v.vote_date,
+          kind: v.note,
+          totals: v.totals ? [v.totals.yes, v.totals.no, v.totals.abstain] : null,
+          approved: v.totals ? v.totals.yes > v.totals.no : null,
+          source_url: v.source_url,
+          text_url: v.text_url,
+          agree_vote: v.agree_vote,
+          party: Object.fromEntries(
+            parties.map((p) => {
+              const pv = v.party_votes?.[p.party_id];
+              return [p.party_id, { position: pv?.choice === "Sí" ? "agree" : pv?.choice === "No" ? "disagree" : pv?.position || "no_data", counts: pv ? [pv.yes, pv.no, pv.abstain] : null, raw: pv?.choice }];
+            }),
+          ),
+        }));
+  return votes;
+}
+
+// Before answering, the prompt must not say who proposed what (titles sometimes name the groups).
+const PROPOSER_PATTERNS = [
+  /,?\s*presentad[ao]s? por (?:el|los|la|las)? ?Grupos? Parlamentari[oa]s?[^.;]*/giu,
+  /\b(?:del|de los|de la) Grupos? Parlamentari[oa]s? [^,.;]*(?:,|(?=\s(?:sobre|relativa|para|de|por)\b))/giu,
+];
+
+export function maskProposers(text) {
+  let out = String(text || "");
+  out = out.replace(PROPOSER_PATTERNS[0], "");
+  out = out.replace(PROPOSER_PATTERNS[1], "de un grupo parlamentario,");
+  return out.replace(/,\s*,/gu, ",").replace(/\s+/gu, " ").trim();
+}
+
+/**
+ * Build the prompt for an AI assistant.
+ * mode "explain": what is being voted, in simple words, without how parties voted (used before answering).
+ * mode "why": what was voted and why each party (or `partyId`) voted as it did, with sources.
+ */
+export function buildAiPrompt(question, parties = [], { mode = "why", partyId = null } = {}) {
+  const votes = voteLines(question, parties);
+  const lines = [];
+  if (mode === "explain") {
+    lines.push("Explícame en términos sencillos, para alguien sin conocimientos de política, qué se votó en esta votación del Congreso de los Diputados de España y qué cambiaría en la práctica si se aprueba. No me digas qué votar ni cómo votó cada partido.");
+  } else if (partyId) {
+    const label = parties.find((p) => p.party_id === partyId)?.label || partyId;
+    lines.push(`Explícame en términos sencillos qué se votó en esta votación del Congreso de los Diputados de España y por qué ${label} votó como votó, según sus argumentos públicos (debate en el Pleno, notas de prensa, programa).`);
+  } else {
+    lines.push("Explícame en términos sencillos qué se votó en esta votación del Congreso de los Diputados de España y por qué cada partido votó como votó, según sus argumentos públicos (debate en el Pleno, notas de prensa, programa).");
+  }
+  lines.push("Distingue claramente los hechos comprobables de tus interpretaciones, cita fuentes oficiales cuando puedas y di si no estás seguro. Sé neutral.");
+  if (question.source === "curated") lines.push("", `Tema planteado: «${question.text}»`);
+  if (question.source === "curated" && question.context) lines.push(`Contexto: ${question.context}`);
+  votes.forEach((v, i) => {
+    lines.push("");
+    lines.push(votes.length > 1 ? `Votación ${i + 1}:` : "Votación:");
+    lines.push(`- Qué se votó (título oficial): ${mode === "explain" ? maskProposers(v.title) : v.title}`);
+    // Curated "kind" is our note, which can state the outcome: keep it out of the neutral explanation.
+    if (v.kind && (mode !== "explain" || question.source === "pool")) lines.push(`- Tipo: ${v.kind}`);
+    if (v.date) lines.push(`- Fecha: ${v.date}`);
+    if (mode !== "explain") {
+      if (v.proposer) lines.push(`- Propuesta por: ${v.proposer}`);
+      if (v.totals) lines.push(`- Resultado: ${v.approved ? "aprobada" : "rechazada"} (${v.totals[0]} sí, ${v.totals[1]} no, ${v.totals[2]} abst.)`);
+      const partyEntries = parties
+        .filter((p) => !partyId || p.party_id === partyId)
+        .map((p) => {
+          const pv = v.party[p.party_id];
+          if (!pv) return null;
+          const word = pv.raw ? `${pv.raw}` : POSITION_WORDS[pv.position] || pv.position;
+          return `${p.label}: ${word}${pv.counts ? ` (${pv.counts[0]} sí, ${pv.counts[1]} no, ${pv.counts[2]} abst.)` : ""}`;
+        })
+        .filter(Boolean);
+      if (partyEntries.length) lines.push(`- Voto de ${partyId ? "ese partido" : "los partidos"} (mayoría de sus diputados): ${partyEntries.join("; ")}`);
+    }
+    if (v.text_url) lines.push(`- Texto oficial (BOCG): ${v.text_url}`);
+    if (v.source_url) lines.push(`- Datos oficiales de la votación: ${v.source_url}`);
+  });
+  return lines.join("\n");
+}
+
+export const AI_TARGETS = [
+  { id: "chatgpt", label: "ChatGPT", url: (q) => `https://chatgpt.com/?q=${encodeURIComponent(q)}`, prefill: true },
+  { id: "claude", label: "Claude", url: (q) => `https://claude.ai/new?q=${encodeURIComponent(q)}`, prefill: true },
+  // Gemini has no supported way to prefill a prompt from a link: the page copies it first.
+  { id: "gemini", label: "Gemini", url: () => "https://gemini.google.com/app", prefill: false },
+];
+
+export function aiLinks(prompt) {
+  return AI_TARGETS.map((t) => ({ id: t.id, label: t.label, href: t.url(prompt), prefill: t.prefill }));
+}
