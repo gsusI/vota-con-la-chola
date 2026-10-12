@@ -8,6 +8,24 @@ Fecha: 2026-10-12 · Objetivo: `https://votaconlachola.org/citizen/vota/`
 - **Vamos**: que la gente lo juegue porque *le pica la curiosidad*, no porque se lo pidamos: «¿quién votó eso?» → revelación → «mira mi podio».
 - **Siguiente**: cerrar los 4 bloqueantes de la Fase 0 antes de gastar un euro o pegar una pegatina.
 
+## Mensaje central: vota por lo que hicieron, no por lo que prometen
+
+Es la idea que sostiene toda la campaña. Cada pieza, de la pegatina al vídeo, debe empujar hacia ella:
+
+1. **Prometer no obliga.** En España un programa electoral no es un contrato. La Constitución prohíbe el mandato imperativo (art. 67.2 CE): ningún diputado está obligado por lo que prometió, y no hay ningún mecanismo para exigir que se cumpla.
+2. **Cuentan con que se nos olvide.** Una legislatura dura cuatro años y la campaña dos semanas. Lo que se prometió se recuerda, lo que se votó no.
+3. **El voto queda registrado.** Cada votación nominal del Congreso es pública, con nombre y fecha. Es lo único que se puede comprobar.
+4. **El método:** ¿qué habría votado yo? Responde a lo que de verdad se votó y mira quién votó como tú. Ese es tu partido, digan lo que digan en campaña.
+
+Frases para piezas:
+- «Prometer no obliga. Votar queda registrado.»
+- «No les preguntes qué harán. Mira qué votaron.»
+- «Tú también habrías votado. Compara.»
+- «Su programa es una promesa. Su voto es un hecho.»
+- (Arriesgada, por el doble sentido) el refrán «Prometer hasta meter…», solo en canales informales.
+
+**Ejemplos de promesas incumplidas: siempre de varios partidos a la vez.** La amnistía es el caso más citado (se descartó antes de las elecciones de 2023 y se aprobó después), pero si es el único ejemplo, la campaña se lee como una campaña contra un partido y pierde la neutralidad. Regla: no se publica un ejemplo de promesa incumplida sin otro de un partido del bloque contrario, ambos con su fuente (declaración fechada + votación oficial). Antes de usarlos, hay que buscarlos y verificarlos (posible fuente: los datos de promesas en `/promises/`).
+
 ## Concepto
 
 **«Lo que votaron, no lo que dicen.»** Lema corto: *Vota con la chola, no con la tripa.*
