@@ -6677,6 +6677,7 @@ site-origin-publish:
   export R2_ACCOUNT_ID="${R2_ACCOUNT_ID:-${CLOUDFLARE_ACCOUNT_ID:-2a9c5bd32808734be6ee294d77e05ffb}}"
   report_arg=(); if [ -n "${SITE_ORIGIN_REPORT:-}" ]; then report_arg=(--report "$SITE_ORIGIN_REPORT"); fi
   uv run --no-project --with 'boto3>=1.34' python3 scripts/publish_site_origin.py --site "$site" --delete "${report_arg[@]}"
+  uv run --no-project --with 'boto3>=1.34' python3 scripts/publish_joined_archives.py --site "$site"
 
 # Mirror the latest HF dataset snapshot to votaconlachola.org/datasets/ (explorer reads it there).
 # Skips with a warning when no R2 credentials are available.

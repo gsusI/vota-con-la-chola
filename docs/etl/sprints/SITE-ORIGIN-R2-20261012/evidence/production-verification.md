@@ -16,3 +16,12 @@
 | Static shell `/` | `x-content-type-options: nosniff`, `referrer-policy: strict-origin-when-cross-origin` |
 
 Propagation: for ~1 minute after deploy some edges still served the previous version; 6/6 consecutive probes returned `r2` afterwards.
+
+## Steps 2–4 (2026-10-12 UTC)
+
+- Worker version `3e683cf7-c264-4c61-9d39-852da2f642ad`: fixed `content-range` (`bytes 0-15/2674405`, `bytes 2674400-2674404/2674405`, `bytes 2674397-2674404/2674405` for `0-15`, `2674400-`, `-8`); `stale-while-revalidate=86400` for browsers.
+- Brotli: `/graph/data/arena-mandates.json` 23,804,221 B served as 2,582,364 B.
+- `/datasets/latest.json` + `snapshots/2026-08-12` (163 files, 62,395,936 B) mirrored from HF; 162 verified against `checksums.sha256`, parity verified in R2.
+- `/downloads/0e55b07120bcb42731b45a78fd682813cd6a51793232faee805ddce46be32a90/placsp-launch.zip`: `200`, 182,758,699 B, `immutable`, downloaded sha256 `ce490104c5bd41ba9c23205c45395d6edf20b80b745cfac73212b4a32601606c` = `archive_sha256`.
+- Explorer (`/legacy/explorer/`, Chrome): table list in <10 s, `mandates` rows with FK labels, 0 requests to huggingface.co, no console errors. Single-table bind from the browser: 0.56 s origin vs 2.49 s HF.
+- Before the fix the static explorer failed in both origin and `?source=hf` modes with `Cannot read properties of null (reading 'conn')`.

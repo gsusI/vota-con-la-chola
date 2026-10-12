@@ -31,8 +31,8 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_BUCKET = "vclc-site"
 SITE_PREFIX = "site/"
 RELEASES_DIR = "releases/"
-# Subtrees written by other publishers (release manifests, dataset mirror); never synced or deleted here.
-RESERVED_DIRS = (RELEASES_DIR, "datasets/")
+# Subtrees written by other publishers (release manifests, dataset mirror, joined archives); never synced or deleted here.
+RESERVED_DIRS = (RELEASES_DIR, "datasets/", "downloads/")
 MANIFEST_SCHEMA = "vclc.site_release.v1"
 # Keep in sync with resolveContentType in infra/cloudflare/votaconlachola-worker/src/index.js.
 CONTENT_TYPES = {
