@@ -173,8 +173,9 @@ export default function VotingAidMethodologyPage() {
         </p>
         <ul className="vaMethod__list">
           <li>
-            <strong>Quién las redactó:</strong> un agente de IA (Claude Opus 5.5) a partir de las votaciones disponibles, dirigido por
-            el mantenedor del proyecto, que pidió una herramienta para decidir el voto en las generales. No hubo un panel de expertos.
+            <strong>Quién las redactó:</strong> un agente de IA (Claude Opus 5.5) a partir de las votaciones disponibles, con el objetivo
+            y los criterios que fijó el mantenedor del proyecto: una herramienta para decidir el voto en las generales basada en votos
+            reales. No hubo un panel de expertos.
           </li>
           <li>
             <strong>Sentido del voto:</strong> se comprobó contra el texto oficial (BOCG/BOE) que votar <code>agree_vote</code> equivale

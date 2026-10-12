@@ -8016,10 +8016,6 @@ body:has(.responsibility-article) > .breadcrumbs {
   border-bottom: 1px solid var(--line);
 }
 
-.vaMethod__quotes li {
-  font-style: italic;
-}
-
 @media (max-width: 640px) {
   .vaMethod h1 {
     font-size: 2rem;
