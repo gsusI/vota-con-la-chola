@@ -212,3 +212,47 @@ test("AI prompts carry exactly what was voted and never the user's answers", asy
   assert.equal(decodeURIComponent(links[1].href.split("?q=")[1]), why);
   assert.equal(links[2].prefill, false);
 });
+
+test("official-text highlights attach to questions, flag omnibus and reach AI prompts", async () => {
+  const m = await import("../ui/gh-pages-next/app/citizen/vota/votingAidModel.mjs");
+  const snap = JSON.parse(fs.readFileSync(publishedPath, "utf-8"));
+  const dataDir = path.join(here, "..", "ui", "gh-pages-next", "public", "citizen", "data");
+  const pool = JSON.parse(fs.readFileSync(path.join(dataDir, "voting_aid_pool_v1.json"), "utf-8"));
+  const highlights = JSON.parse(fs.readFileSync(path.join(dataDir, "voting_aid_highlights_v1.json"), "utf-8"));
+  const questions = m.attachHighlights(m.buildQuestions(snap, pool), highlights);
+  const withText = questions.filter((q) => q.highlights.length);
+  assert.ok(withText.length >= 80, `questions with official text: ${withText.length}`);
+  const omnibus = questions.filter((q) => q.omnibus);
+  assert.ok(omnibus.length >= 5);
+  for (const q of withText) for (const h of q.highlights) assert.match(h.doc.url, /^https:\/\/www\.(boe|congreso)\.es\//u);
+
+  const q = omnibus.find((x) => x.source === "pool");
+  const prompt = m.buildAiPrompt(q, snap.parties);
+  assert.ok(prompt.includes("votación ómnibus") && prompt.includes("encabezados literales"));
+  assert.ok(prompt.includes(q.highlights[0].doc.bullets[0]));
+  assert.ok(prompt.length < 6000, `prompt length ${prompt.length}`);
+  const explain = m.buildAiPrompt(q, snap.parties, { mode: "explain" });
+  assert.ok(explain.includes("enumera las principales"));
+  assert.ok(!snap.parties.some((p) => explain.includes(`${p.label}:`)));
+
+  // Questions without any official text still work.
+  const bare = questions.find((x) => !x.highlights.length);
+  assert.equal(bare.omnibus, false);
+  assert.ok(m.buildAiPrompt(bare, snap.parties).length > 0);
+});
+
+test("prefilled AI links stay under the URL budget for every question", async () => {
+  const m = await import("../ui/gh-pages-next/app/citizen/vota/votingAidModel.mjs");
+  const snap = JSON.parse(fs.readFileSync(publishedPath, "utf-8"));
+  const dataDir = path.join(here, "..", "ui", "gh-pages-next", "public", "citizen", "data");
+  const pool = JSON.parse(fs.readFileSync(path.join(dataDir, "voting_aid_pool_v1.json"), "utf-8"));
+  const highlights = JSON.parse(fs.readFileSync(path.join(dataDir, "voting_aid_highlights_v1.json"), "utf-8"));
+  const questions = m.attachHighlights(m.buildQuestions(snap, pool), highlights);
+  for (const q of questions) {
+    for (const opts of [{}, { mode: "explain" }, { partyId: "pp" }]) {
+      const p = m.linkPrompt(q, snap.parties, opts);
+      assert.ok(encodeURIComponent(p).length <= m.MAX_LINK_PROMPT_CHARS, `${q.statement_id} ${JSON.stringify(opts)}`);
+      assert.ok(p.includes(q.source === "pool" ? q.text.slice(0, 40) : q.text.slice(0, 40)));
+    }
+  }
+});

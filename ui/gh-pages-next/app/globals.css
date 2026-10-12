@@ -7176,6 +7176,89 @@ body:has(.responsibility-article) > .breadcrumbs {
   display: inline;
 }
 
+/* What is inside the voted text */
+.votingAidInside {
+  margin: 0 0 18px;
+}
+
+.votingAidInside__doc {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 10px 14px;
+  margin-top: 8px;
+  background: #fff;
+}
+
+.votingAidInside__title {
+  margin: 0 0 6px;
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.votingAidInside__list {
+  margin: 0;
+  padding-left: 1.2em;
+  display: grid;
+  gap: 4px;
+  font-size: 0.92rem;
+  line-height: 1.4;
+}
+
+.votingAidInside__norms,
+.votingAidInside__offtopic {
+  margin: 8px 0 0;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.votingAidInside__offtopic {
+  color: #8a4b00;
+}
+
+.votingAidInside__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 16px;
+  margin: 6px 0 0;
+  font-size: 0.88rem;
+}
+
+.votingAidScope {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 4px 0 6px;
+}
+
+.votingAidScope__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 999px;
+  padding: 3px 10px;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.votingAidScope__badge--omnibus {
+  background: #fff1d6;
+  color: #7a4a00;
+  border: 1px solid #f0c66b;
+}
+
+.votingAidScope__badge--offtopic {
+  background: #fde8e3;
+  color: #8a2a17;
+  border: 1px solid #f1b3a5;
+}
+
+.votingAidOmnibusToggle {
+  margin: 4px 0 12px;
+  align-items: flex-start;
+  line-height: 1.4;
+}
+
 /* Ask an AI */
 .votingAidAskAiToggle {
   margin-top: 10px;

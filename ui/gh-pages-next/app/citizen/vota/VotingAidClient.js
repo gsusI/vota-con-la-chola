@@ -11,6 +11,7 @@ import {
   STORAGE_KEY,
   agreementKind,
   aiLinks,
+  attachHighlights,
   buildAiPrompt,
   buildQuestions,
   decodeAnyShareCode,
@@ -18,6 +19,7 @@ import {
   encodeShareCodeV2,
   formatMatch,
   groupDetails,
+  linkPrompt,
   milestoneFor,
   nextQuestionId,
   partyReactions,
@@ -28,10 +30,11 @@ import {
 } from "./votingAidModel.mjs";
 
 const ANSWER_ORDER = ["agree", "neutral", "disagree"];
-const EMPTY_STATE = { answers: {}, important: {}, skipped: {}, history: [], seed: 0, streak: 0, bestStreak: 0, showReveal: true };
+const EMPTY_STATE = { answers: {}, important: {}, skipped: {}, history: [], seed: 0, streak: 0, bestStreak: 0, showReveal: true, excludeOmnibus: false };
 const AGREEMENT_LABELS = { match: "Coincidís", partial: "A medias", clash: "Discrepáis", none: "Sin datos" };
 const AGREEMENT_ICONS = { match: "✓", partial: "≈", clash: "✗", none: "–" };
 const POOL_PATH = "/citizen/data/voting_aid_pool_v1.json";
+const HIGHLIGHTS_PATH = "/citizen/data/voting_aid_highlights_v1.json";
 
 // ---------------------------------------------------------------------------
 // State persistence (local only; ids of questions the page has not loaded are kept, never dropped).
@@ -47,6 +50,7 @@ function cleanState(raw) {
   out.streak = Number.isInteger(raw.streak) ? raw.streak : 0;
   out.bestStreak = Number.isInteger(raw.bestStreak) ? raw.bestStreak : 0;
   out.showReveal = raw.showReveal !== false;
+  out.excludeOmnibus = raw.excludeOmnibus === true;
   return out;
 }
 
@@ -151,9 +155,9 @@ async function copyText(text) {
  * The prompt holds exactly what was voted (official title, date, result, party votes, official links),
  * never the user's answers; it is shown in full before sending.
  */
-function AskAi({ prompt, title }) {
+function AskAi({ prompt, linkText, title }) {
   const [note, setNote] = useState("");
-  const links = useMemo(() => aiLinks(prompt), [prompt]);
+  const links = useMemo(() => aiLinks(linkText || prompt), [linkText, prompt]);
   async function onOpen(link) {
     const copied = await copyText(prompt);
     if (!link.prefill) setNote(copied ? `Pregunta copiada: pégala en ${link.label}.` : `Copia la pregunta de abajo y pégala en ${link.label}.`);
@@ -202,15 +206,88 @@ function AskAi({ prompt, title }) {
   );
 }
 
-function AskAiToggle({ label, prompt, title }) {
+function AskAiToggle({ label, question, parties, opts, title }) {
   const [open, setOpen] = useState(false);
   return (
     <div className="votingAidAskAiToggle">
       <button aria-expanded={open} className="votingAidLinkButton" onClick={() => setOpen(!open)} type="button">
         <span aria-hidden="true">🤖</span> {label}
       </button>
-      {open ? <AskAi prompt={prompt} title={title} /> : null}
+      {open ? (
+        <AskAi linkText={linkPrompt(question, parties, opts)} prompt={buildAiPrompt(question, parties, opts)} title={title} />
+      ) : null}
     </div>
+  );
+}
+
+function ScopeBadges({ question }) {
+  if (!question.omnibus && !question.offtopic) return null;
+  const themes = [...new Set((question.highlights || []).flatMap((h) => h.doc.themes || []))];
+  return (
+    <p className="votingAidScope">
+      {question.omnibus ? (
+        <span className="votingAidScope__badge votingAidScope__badge--omnibus" title={themes.join(", ")}>
+          <span aria-hidden="true">🧺</span> Votación ómnibus: mezcla {themes.length} temas
+        </span>
+      ) : null}
+      {question.offtopic ? (
+        <span className="votingAidScope__badge votingAidScope__badge--offtopic">
+          <span aria-hidden="true">⚠️</span> También cambia leyes de otros temas
+        </span>
+      ) : null}
+    </p>
+  );
+}
+
+/** What the voted text really contains: literal headings from the official text, with its source. */
+function WhatsInside({ question }) {
+  const [open, setOpen] = useState(false);
+  const items = question.highlights || [];
+  if (!items.length) return null;
+  const many = items.length > 1;
+  return (
+    <section aria-label="Qué incluye según el texto oficial" className="votingAidInside">
+      <ScopeBadges question={question} />
+      {items.map((h) => {
+        const d = h.doc;
+        const shown = open ? d.bullets : d.bullets.slice(0, 3);
+        const hidden = (d.bullets_total || d.bullets.length) - shown.length;
+        return (
+          <div className="votingAidInside__doc" key={d.url}>
+            <p className="votingAidInside__title">
+              <span aria-hidden="true">📋</span> Qué incluye{many && h.vote_date ? ` (votación del ${formatDate(h.vote_date)})` : ""}
+              <span className="votingAidMuted"> · según el texto oficial ({d.source})</span>
+            </p>
+            <ul className="votingAidInside__list">
+              {shown.map((b) => (
+                <li key={b}>{b}</li>
+              ))}
+            </ul>
+            {open && d.modified_norms?.length && d.bullets_basis !== "normas" ? (
+              <p className="votingAidMuted votingAidInside__norms">
+                Modifica {d.modified_norms_total} {d.modified_norms_total === 1 ? "norma" : "normas"}: {d.modified_norms.join(" · ")}
+                {d.modified_norms_total > d.modified_norms.length ? " …" : ""}
+              </p>
+            ) : null}
+            {open && d.offtopic_riders?.length ? (
+              <p className="votingAidInside__offtopic">
+                <span aria-hidden="true">⚠️</span> En sus disposiciones finales también cambia: {d.offtopic_riders.join(" · ")}
+              </p>
+            ) : null}
+            <p className="votingAidInside__actions">
+              {hidden > 0 || (!open && (d.modified_norms?.length || d.offtopic_riders?.length)) ? (
+                <button aria-expanded={open} className="votingAidLinkButton" onClick={() => setOpen(!open)} type="button">
+                  {open ? "Ver menos" : hidden > 0 ? `Ver todo (${hidden} más)` : "Ver normas que modifica"}
+                </button>
+              ) : null}
+              <a href={d.url} rel="noopener noreferrer" target="_blank">
+                Texto completo ({d.source})
+              </a>
+            </p>
+          </div>
+        );
+      })}
+    </section>
   );
 }
 
@@ -389,6 +466,8 @@ function QuestionCard({ question, parties, answer, important, onAnswer, onSkip, 
         </h2>
       )}
 
+      <WhatsInside question={question} />
+
       <div aria-label="Tu respuesta" className="votingAidAnswers" role="group">
         {ANSWER_ORDER.map((value, i) => (
           <button
@@ -428,7 +507,9 @@ function QuestionCard({ question, parties, answer, important, onAnswer, onSkip, 
       </div>
       <AskAiToggle
         label="¿No lo entiendes? Que te lo explique una IA"
-        prompt={buildAiPrompt(question, parties, { mode: "explain" })}
+        opts={{ mode: "explain" }}
+        parties={parties}
+        question={question}
         title="Pide una explicación sencilla de lo que se vota (sin decirte qué votó cada partido):"
       />
       {question.source === "curated" && question.context ? (
@@ -488,7 +569,8 @@ function RevealCard({ question, parties, answer, reactions, topBefore, onNext, o
   return (
     <div aria-live="polite" className="votingAidCard votingAidReveal">
       <p className="votingAidTheme">{question.theme}</p>
-      <p className="votingAidReveal__q">{question.source === "pool" ? question.text : question.text}</p>
+      <p className="votingAidReveal__q">{question.text}</p>
+      <ScopeBadges question={question} />
       <p className="votingAidReveal__you">
         Tu respuesta: <strong>{answerLabel(question, answer)}</strong>
       </p>
@@ -520,7 +602,9 @@ function RevealCard({ question, parties, answer, reactions, topBefore, onNext, o
       </p>
       <AskAiToggle
         label="¿Por qué votaron así? Pregúntale a una IA"
-        prompt={buildAiPrompt(question, parties)}
+        opts={{}}
+        parties={parties}
+        question={question}
         title="Pide que te expliquen qué se votó y los argumentos de cada partido:"
       />
       <div className="votingAidActions votingAidStickyBar">
@@ -691,6 +775,7 @@ function PartyView({ row, parties, questionsById, onBack, onEdit }) {
                 <div className="votingAidBreakdown__body">
                   <p className="votingAidTheme votingAidTheme--small">{q.theme}</p>
                   <p className="votingAidBreakdown__text">{q.text}</p>
+                  <ScopeBadges question={q} />
                   <p className="votingAidMuted">
                     Tú: <strong>{answerLabel(q, d.answer)}</strong>
                     {d.weight > 1 ? " ★" : ""} · {row.label}: <PositionBadge position={d.position} />
@@ -704,7 +789,9 @@ function PartyView({ row, parties, questionsById, onBack, onEdit }) {
                   </p>
                   <AskAiToggle
                     label={`¿Por qué ${row.label} votó así?`}
-                    prompt={buildAiPrompt(q, parties, { partyId: row.partyId })}
+                    opts={{ partyId: row.partyId }}
+                    parties={parties}
+                    question={q}
                     title={`Pide que te expliquen qué se votó y los argumentos de ${row.label}:`}
                   />
                 </div>
@@ -717,7 +804,7 @@ function PartyView({ row, parties, questionsById, onBack, onEdit }) {
   );
 }
 
-function ResultsView({ results, answeredCount, fromShare, onParty, onPlay, onReview, onShare, onSharePodium, onReset, onOwn, shareMessage, method, bestStreak }) {
+function ResultsView({ results, answeredCount, fromShare, onParty, onPlay, onReview, onShare, onSharePodium, onReset, onOwn, shareMessage, method, bestStreak, excludeOmnibus, onExcludeOmnibus, omnibusAnswered }) {
   const provisional = answeredCount < MIN_ANSWERS_FOR_RANKING;
   return (
     <section aria-label="Resultados" className="votingAidResultsView">
@@ -747,6 +834,14 @@ function ResultsView({ results, answeredCount, fromShare, onParty, onPlay, onRev
             <p className="votingAidNotice" role="note">
               <strong>Resultado provisional.</strong> Con menos de {MIN_ANSWERS_FOR_RANKING} respuestas el orden baila mucho.
             </p>
+          ) : null}
+          {omnibusAnswered > 0 ? (
+            <label className="votingAidImportant votingAidOmnibusToggle">
+              <input checked={excludeOmnibus} onChange={(e) => onExcludeOmnibus(e.target.checked)} type="checkbox" />
+              <span>
+                No contar las votaciones ómnibus <span className="votingAidMuted">({omnibusAnswered} respondidas): mezclan tantos temas que el voto de un partido puede deberse a cualquiera de ellos.</span>
+              </span>
+            </label>
           ) : null}
           <ol className="votingAidResultList">
             {results.map((row, i) => {
@@ -882,6 +977,7 @@ export default function VotingAidClient({ snapshot }) {
   const meta = snapshot?.meta || {};
   const [pool, setPool] = useState(null);
   const [poolStatus, setPoolStatus] = useState("loading");
+  const [highlights, setHighlights] = useState(null);
   const [state, setState] = useState(() => cleanState(null));
   const [loaded, setLoaded] = useState(false);
   const [fromShare, setFromShare] = useState(false);
@@ -896,15 +992,37 @@ export default function VotingAidClient({ snapshot }) {
   const topRef = useRef(null);
   const toastTimer = useRef(null);
 
-  const questions = useMemo(() => buildQuestions(snapshot, pool), [snapshot, pool]);
+  const questions = useMemo(() => attachHighlights(buildQuestions(snapshot, pool), highlights), [snapshot, pool, highlights]);
+  const scoredQuestions = useMemo(
+    () => (state.excludeOmnibus ? questions.filter((q) => !q.omnibus) : questions),
+    [questions, state.excludeOmnibus],
+  );
   const questionsById = useMemo(() => Object.fromEntries(questions.map((q) => [q.statement_id, q])), [questions]);
   const curatedTotal = useMemo(() => questions.filter((q) => q.source === "curated").length, [questions]);
   const order = useMemo(() => playOrder(questions, state.seed || 1), [questions, state.seed]);
   const results = useMemo(
-    () => scoreParties({ parties, statements: questions }, state.answers, state.important),
-    [parties, questions, state.answers, state.important],
+    () => scoreParties({ parties, statements: scoredQuestions }, state.answers, state.important),
+    [parties, scoredQuestions, state.answers, state.important],
+  );
+  const omnibusAnswered = useMemo(
+    () => questions.filter((q) => q.omnibus && state.answers[q.statement_id]).length,
+    [questions, state.answers],
   );
   const answeredCount = useMemo(() => Object.keys(state.answers).filter((id) => questionsById[id]).length, [state.answers, questionsById]);
+
+  // Official-text highlights are optional: questions work without them.
+  useEffect(() => {
+    let cancelled = false;
+    fetch(withBasePath(HIGHLIGHTS_PATH))
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data) => {
+        if (!cancelled && data) setHighlights(data);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   // Load the pool of real votes (endless mode). The curated statements work even if this fails.
   useEffect(() => {
@@ -1254,6 +1372,9 @@ export default function VotingAidClient({ snapshot }) {
           onReview={() => show("review")}
           onShare={share}
           onSharePodium={sharePodium}
+          excludeOmnibus={state.excludeOmnibus}
+          onExcludeOmnibus={(v) => update({ ...state, excludeOmnibus: v })}
+          omnibusAnswered={omnibusAnswered}
           results={results}
           shareMessage={shareMessage}
         />

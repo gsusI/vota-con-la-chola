@@ -179,6 +179,7 @@ export function buildQuestions(snapshot, pool) {
   }));
   const items = (Array.isArray(pool?.items) ? pool.items : []).map((it) => ({
     statement_id: it.id,
+    vote_event_id: it.vote_event_id,
     source: "pool",
     text: it.title,
     question: it.question,
@@ -409,7 +410,7 @@ export function maskProposers(text) {
  * mode "explain": what is being voted, in simple words, without how parties voted (used before answering).
  * mode "why": what was voted and why each party (or `partyId`) voted as it did, with sources.
  */
-export function buildAiPrompt(question, parties = [], { mode = "why", partyId = null } = {}) {
+export function buildAiPrompt(question, parties = [], { mode = "why", partyId = null, compact = false } = {}) {
   const votes = voteLines(question, parties);
   const lines = [];
   if (mode === "explain") {
@@ -421,6 +422,13 @@ export function buildAiPrompt(question, parties = [], { mode = "why", partyId = 
     lines.push("Explícame en términos sencillos qué se votó en esta votación del Congreso de los Diputados de España y por qué cada partido votó como votó, según sus argumentos públicos (debate en el Pleno, notas de prensa, programa).");
   }
   lines.push("Distingue claramente los hechos comprobables de tus interpretaciones, cita fuentes oficiales cuando puedas y di si no estás seguro. Sé neutral.");
+  if (question.omnibus) {
+    lines.push(
+      mode === "explain"
+        ? "Ojo: es una votación ómnibus que mezcla varias materias; enumera las principales y no te quedes solo con el título."
+        : "Ojo: es una votación ómnibus que mezcla varias materias; explica qué partes concretas motivaron el voto de cada partido, no solo el título.",
+    );
+  }
   if (question.source === "curated") lines.push("", `Tema planteado: «${question.text}»`);
   if (question.source === "curated" && question.context) lines.push(`Contexto: ${question.context}`);
   votes.forEach((v, i) => {
@@ -447,6 +455,8 @@ export function buildAiPrompt(question, parties = [], { mode = "why", partyId = 
     if (v.text_url) lines.push(`- Texto oficial (BOCG): ${v.text_url}`);
     if (v.source_url) lines.push(`- Datos oficiales de la votación: ${v.source_url}`);
   });
+  const hl = highlightLines(question, compact);
+  if (hl.length) lines.push("", ...hl);
   return lines.join("\n");
 }
 
@@ -457,6 +467,74 @@ export const AI_TARGETS = [
   { id: "gemini", label: "Gemini", url: () => "https://gemini.google.com/app", prefill: false },
 ];
 
+// Keep prefilled links well under common URL limits; the full prompt is always available to copy.
+export const MAX_LINK_PROMPT_CHARS = 6000;
+
+/** Prompt to put in a link: the full one if it fits, else a compact one, else clipped with a note. */
+export function linkPrompt(question, parties, opts = {}) {
+  const full = buildAiPrompt(question, parties, opts);
+  if (encodeURIComponent(full).length <= MAX_LINK_PROMPT_CHARS) return full;
+  const compact = buildAiPrompt(question, parties, { ...opts, compact: true });
+  if (encodeURIComponent(compact).length <= MAX_LINK_PROMPT_CHARS) return compact;
+  let clipped = compact;
+  while (encodeURIComponent(clipped).length > MAX_LINK_PROMPT_CHARS - 200) clipped = clipped.slice(0, Math.floor(clipped.length * 0.9));
+  return `${clipped}\n[… recortado; consulta los enlaces oficiales para el texto completo]`;
+}
+
 export function aiLinks(prompt) {
   return AI_TARGETS.map((t) => ({ id: t.id, label: t.label, href: t.url(prompt), prefill: t.prefill }));
+}
+
+// ---------------------------------------------------------------------------
+// What is really inside each vote (from the official text): bullets, modified norms, omnibus flags.
+
+function questionVoteIds(question) {
+  if (question.source === "pool") return question.vote_event_id ? [question.vote_event_id] : [];
+  return (question.votes || []).map((v) => v.vote_event_id);
+}
+
+/** Attach official-text highlights to each question; `omnibus` is true if any of its votes is omnibus. */
+export function attachHighlights(questions, highlights) {
+  const byVote = highlights?.by_vote || {};
+  const docs = highlights?.docs || {};
+  return questions.map((q) => {
+    const items = questionVoteIds(q)
+      .map((vid) => {
+        const doc = docs[byVote[vid]];
+        if (!doc) return null;
+        const vote = q.source === "pool" ? { vote_date: q.vote_date, title: q.text } : (q.votes || []).find((v) => v.vote_event_id === vid) || {};
+        return { vote_event_id: vid, vote_date: vote.vote_date, title: vote.title, doc };
+      })
+      .filter(Boolean);
+    // Several votes on the same text (e.g. two stages of one bill) show it once.
+    const seen = new Set();
+    const unique = items.filter((h) => (seen.has(h.doc.url) ? false : seen.add(h.doc.url)));
+    return {
+      ...q,
+      highlights: unique,
+      omnibus: unique.some((h) => h.doc.omnibus),
+      offtopic: unique.some((h) => (h.doc.offtopic_riders || []).length > 0),
+    };
+  });
+}
+
+function highlightLines(question, compact = false) {
+  const lines = [];
+  const maxBullets = compact ? 4 : 10;
+  for (const h of question.highlights || []) {
+    const d = h.doc;
+    lines.push(`Contenido según el texto oficial (${d.source}${h.vote_date ? `, votación del ${h.vote_date}` : ""}; encabezados literales):`);
+    const bullets = (d.bullets || []).slice(0, maxBullets);
+    for (const b of bullets) lines.push(`  • ${b}`);
+    if (d.bullets_total > bullets.length) lines.push(`  • … y ${d.bullets_total - bullets.length} apartados más`);
+    if (!compact && (d.modified_norms || []).length && d.bullets_basis !== "normas") {
+      lines.push(`  Modifica ${d.modified_norms_total} normas, entre ellas: ${d.modified_norms.slice(0, 5).join("; ")}`);
+    }
+    if ((d.offtopic_riders || []).length) {
+      lines.push(`  También cambia, en disposiciones finales, normas de otros temas: ${d.offtopic_riders.slice(0, compact ? 2 : 10).join("; ")}`);
+    }
+    if (d.omnibus) lines.push(`  Es una votación ómnibus: abarca ${d.themes.join(", ")}.`);
+    lines.push(`  Fuente: ${d.url}`);
+  }
+  return lines;
 }
