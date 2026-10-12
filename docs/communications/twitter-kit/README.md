@@ -45,7 +45,7 @@ Enlaces (cámbialos por `/v/twitter/...` cuando exista la ruta):
 
 Archivo: `video/vota-con-la-chola-x.mp4`. Se regenera con `node docs/communications/twitter-kit/render-video.mjs`.
 
-Contenido: la legislatura se ha cerrado → «Prometer no obliga» → 4 preguntas con cuenta atrás y respuesta (trasvase, banca, regularización, pensiones; una por bloque y dos que incomodan a todos) → llamada a hacer el test. Sin audio: X reproduce los vídeos en silencio.
+Contenido: la legislatura se ha cerrado → «Prometer no obliga» → 4 preguntas con cuenta atrás y respuesta (trasvase, banca, regularización, pensiones; una por bloque y dos que incomodan a todos) → llamada a hacer el test. Música original sintetizada (sin derechos de terceros) y sincronizada con la imagen: bajón durante cada cuenta atrás, «tic» por segundo y campanilla al revelar. Se añade con `node docs/communications/twitter-kit/render-music.mjs` después de renderizar el vídeo. X reproduce los vídeos en silencio, así que el vídeo se entiende también sin sonido.
 
 Tweet:
 ```
