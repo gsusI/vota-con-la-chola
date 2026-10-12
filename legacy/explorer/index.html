@@ -1034,7 +1034,17 @@
         await initHfBackend();
       }
 
+      async function ensureHfViews(sql) {
+        const { conn, views, createdViews } = backend.hf;
+        for (const [name, createSql] of views) {
+          if (createdViews.has(name) || !sql.includes(quoteIdent(name))) continue;
+          await conn.query(createSql);
+          createdViews.add(name);
+        }
+      }
+
       async function hfQueryRows(sql) {
+        await ensureHfViews(sql);
         const result = await backend.hf.conn.query(sql);
         const rows = result && typeof result.toArray === "function" ? result.toArray() : [];
         return (rows || []).map((row) => normalizeRowObject(row));
@@ -1203,8 +1213,6 @@
         const conn = await db.connect();
         await conn.query("SET enable_http_metadata_cache=true");
         await conn.query("SET enable_object_cache=true");
-        backend.hf = { db, conn };
-
         const viewSql = (table) => {
           const tableName = String(table.table || "");
           const files = clampInt(table.files || 1, 1, 1, 10000);
@@ -1219,23 +1227,15 @@
           const urlsSql = urls.map((url) => quoteLiteral(url)).join(", ");
           return `CREATE OR REPLACE VIEW ${quoteIdent(tableName)} AS SELECT * FROM read_parquet([${urlsSql}])`;
         };
-        // Each view binds by reading Parquet metadata over HTTP; spread them over a few connections.
-        const pending = [...manifestTables];
-        await Promise.all(
-          Array.from({ length: 6 }, async () => {
-            const viewConn = await db.connect();
-            for (let table = pending.shift(); table; table = pending.shift()) {
-              await viewConn.query(viewSql(table));
-            }
-            await viewConn.close();
-          }),
-        );
+        // Creating a view reads Parquet metadata over HTTP (~0.5 s each), so views are created
+        // lazily by hfQueryRows when a query first references the table.
+        const views = new Map(manifestTables.map((table) => [String(table.table || ""), viewSql(table)]));
+        backend.hf = { db, conn, views, createdViews: new Set() };
 
         backend.sourceLabel = `${datasetLabel}/${snapshotDir}`;
         const built = await buildHfSchemaPayload(manifestTables, schemaContract, snapshotDir);
         backend.hf = {
-          db,
-          conn,
+          ...backend.hf,
           latest,
           manifest,
           snapshotDir,
