@@ -139,6 +139,7 @@ Nuevo gancho que da la disolución: **«La legislatura se ha cerrado. Ya no pued
 ### Fase 1 · Precampaña «Adivina quién votó» (19 oct – 12 nov)
 
 - **20 oct, lanzamiento digital**: Menéame y r/spain con un post honesto («la legislatura se ha cerrado: estas son sus votaciones convertidas en un test; datos abiertos; buscad errores»).
+- **Twitter/X**: tweets, calendario por parejas e imágenes en [`twitter-kit/`](twitter-kit/README.md).
 - **Vídeo corto** (TikTok / Reels / Shorts), un vídeo al día, tres formatos: *Calle* («¿quién crees que votó…?» → revelación), *Reacciono a mi podio* y *Abuela/o vs nieta/o*.
 - **Periodistas de datos y especiales electorales**: un gancho regional distinto para cada medio (Tajo-Segura → prensa murciana y manchega).
 - **Reto a los 12 partidos** (carta el 20 oct, plazo hasta el 6 nov, tabla pública el 9 nov): pedimos a un candidato de cada uno que haga el test *sin mirar* y publique su podio. Se publica antes de la campaña, cuando los equipos todavía contestan.
