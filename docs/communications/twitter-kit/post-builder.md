@@ -31,7 +31,7 @@ CÓMO ESTÁ HECHO (para builders)
 · Las afirmaciones están redactadas en los dos sentidos, para que contestar siempre «de acuerdo» no te empuje hacia un bloque. Lo mido: en 15 afirmaciones solo el PSOE queda del lado del «de acuerdo», y en 12 solo el PP.
 · La web es estática. Tus respuestas no salen de tu móvil: ni cuentas, ni base de datos de usuarios. Lo único que compartes, si quieres, es tu podio.
 · El código es abierto (licencia MIT) y los datos del test se pueden descargar tal cual desde la web.
-· Lo he construido con agentes de IA como equipo. La IA también ha revisado las afirmaciones: dos revisores independientes por afirmación, contra el texto oficial y sin ver cómo votó cada partido. Pero eso no basta, y la web lo dice en un banner: falta la revisión humana.
+· Lo he construido con agentes de IA como equipo. La IA también ha revisado las afirmaciones: dos revisores independientes por afirmación, contra el texto oficial y sin ver cómo votó cada partido. Pero eso no basta, y la web lo dice en un banner: falta la revisión humana. Todo el proceso, prompts incluidos, está publicado en la metodología.
 
 LO QUE ME HE ENCONTRADO
 
@@ -58,6 +58,7 @@ LO QUE NECESITO
 · Que lo compartáis antes del 29 de noviembre.
 
 Pruébalo (2 minutos): https://votaconlachola.org/citizen/vota/
+Metodología: https://votaconlachola.org/citizen/vota/metodologia/
 Código: https://github.com/gsusI/vota-con-la-chola
 ```
 
@@ -132,6 +133,7 @@ No te dice a quién votar ni es una encuesta. Es para explorar.
 
 Necesito que lo rompáis, revisores de ciencia política o periodismo de datos y builders que quieran meterle mano.
 
-https://votaconlachola.org/citizen/vota/
-https://github.com/gsusI/vota-con-la-chola
+Test: https://votaconlachola.org/citizen/vota/
+Metodología: https://votaconlachola.org/citizen/vota/metodologia/
+Código: https://github.com/gsusI/vota-con-la-chola
 ```
