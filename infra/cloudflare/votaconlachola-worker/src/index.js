@@ -2,7 +2,8 @@
 // Workers Static Assets (shell + hashed _next assets) are matched before this script runs.
 const SITE_PREFIX = "site/";
 const ORIGIN_PREFIX = "/vota-con-la-chola";
-const SHORT_CACHE = "public, max-age=300";
+// Mutable paths: browsers show the cached copy instantly and revalidate by ETag in the background.
+const SHORT_CACHE = "public, max-age=300, stale-while-revalidate=86400";
 const IMMUTABLE_CACHE = "public, max-age=31536000, immutable";
 // Content-addressed release directories (sha256 path segment) never change once published.
 const IMMUTABLE_SEGMENT = /\/[0-9a-f]{64}\//;
@@ -146,7 +147,11 @@ export default {
 
     const response = new Response(object.body, { status: 200, headers });
     if (cacheable && ctx && typeof ctx.waitUntil === "function") {
-      ctx.waitUntil(edgeCache.put(cacheKey, response.clone()));
+      // Edge copies never serve stale: a publish is visible everywhere within max-age.
+      const edgeCopy = response.clone();
+      const edgeHeaders = new Headers(edgeCopy.headers);
+      edgeHeaders.set("cache-control", edgeHeaders.get("cache-control").replace(/, stale-while-revalidate=\d+/, ""));
+      ctx.waitUntil(edgeCache.put(cacheKey, new Response(edgeCopy.body, { status: 200, headers: edgeHeaders })));
     }
     return response;
   },

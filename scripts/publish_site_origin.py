@@ -31,6 +31,8 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_BUCKET = "vclc-site"
 SITE_PREFIX = "site/"
 RELEASES_DIR = "releases/"
+# Subtrees written by other publishers (release manifests, dataset mirror); never synced or deleted here.
+RESERVED_DIRS = (RELEASES_DIR, "datasets/")
 MANIFEST_SCHEMA = "vclc.site_release.v1"
 # Keep in sync with resolveContentType in infra/cloudflare/votaconlachola-worker/src/index.js.
 CONTENT_TYPES = {
@@ -97,8 +99,9 @@ def scan_site(site: Path, *, workers: int = 8) -> list[LocalFile]:
 
     with ThreadPoolExecutor(max_workers=workers) as pool:
         files = list(pool.map(digest, paths))
-    if any(f.path.startswith(RELEASES_DIR) for f in files):
-        raise SystemExit(f"Site build must not contain {RELEASES_DIR}: that subtree is reserved for release manifests")
+    clashes = sorted({d for f in files for d in RESERVED_DIRS if f.path.startswith(d)})
+    if clashes:
+        raise SystemExit(f"Site build must not contain {clashes}: reserved for release manifests and dataset mirrors")
     return files
 
 
@@ -176,7 +179,7 @@ def sync(
     wanted = {SITE_PREFIX + f.path: f for f in files}
     to_upload = [f for key, f in wanted.items() if remote.get(key) != f.md5]
     stale = sorted(
-        key for key in remote if key not in wanted and not key.startswith(SITE_PREFIX + RELEASES_DIR)
+        key for key in remote if key not in wanted and not any(key.startswith(SITE_PREFIX + d) for d in RESERVED_DIRS)
     )
     if delete and remote and len(stale) > max_delete_ratio * len(remote):
         raise SystemExit(

@@ -28,7 +28,7 @@ const get=(path,init)=>router.fetch(new Request(`https://votaconlachola.org${pat
 const page=await get('/citizen/');
 assert.equal(page.status,200);assert.equal(await page.text(),'<h1>citizen</h1>');
 assert.equal(page.headers.get('content-type'),'text/html; charset=utf-8');
-assert.equal(page.headers.get('cache-control'),'public, max-age=300');
+assert.equal(page.headers.get('cache-control'),'public, max-age=300, stale-while-revalidate=86400');
 assert.equal(page.headers.get('x-vclc-origin'),'r2');
 assert.equal(page.headers.get('x-content-type-options'),'nosniff');
 assert.equal(page.headers.get('etag'),'"etag-site/citizen/index.html"');

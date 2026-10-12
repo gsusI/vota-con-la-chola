@@ -95,6 +95,7 @@ class PublishSiteOriginTests(unittest.TestCase):
         run(self.site, client)
         (self.site / "citizen/data/a.json").write_bytes(b'{"a":2}')
         client.objects["site/old.html"] = b"old"
+        client.objects["site/datasets/latest.json"] = b"{}"
         for i in range(10):
             client.objects[f"site/keep{i}.txt"] = b"x"
         for i in range(10):
@@ -104,6 +105,7 @@ class PublishSiteOriginTests(unittest.TestCase):
         self.assertEqual([k for k in client.puts if not k.startswith("site/releases/")], ["site/citizen/data/a.json"])
         self.assertEqual(client.deleted, ["site/old.html"])
         self.assertIn("site/releases/r1/manifest.json", client.objects)
+        self.assertIn("site/datasets/latest.json", client.objects)
         self.assertEqual(report["unchanged"], 11)
 
     def test_refuses_mass_delete(self) -> None:

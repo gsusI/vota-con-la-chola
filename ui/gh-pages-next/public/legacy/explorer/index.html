@@ -625,6 +625,9 @@
       const HF_DATASET_REPO = (APP_QUERY.get("dataset") || "JesusIC/vota-con-la-chola-data").trim();
       const HF_REF = (APP_QUERY.get("hf_ref") || "main").trim();
       const HF_SNAPSHOT_OVERRIDE = (APP_QUERY.get("snapshot") || "").trim();
+      // Dataset mirror served by the site origin (R2); ?source=hf reads Hugging Face directly.
+      const DATASET_SOURCE = (APP_QUERY.get("source") || "origin").trim().toLowerCase();
+      const ORIGIN_DATASETS_BASE = new URL("/datasets/", window.location.origin).toString();
       const HF_DUCKDB_ESM = "https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm@1.29.0/+esm";
       const LABEL_COLUMN_CANDIDATES = [
         "full_name",
@@ -711,10 +714,29 @@
         return normalized;
       }
 
+      let datasetBase = null;
+
       function hfUrl(path) {
         const rel = String(path || "").replace(/^\/+/, "");
+        if (datasetBase) return `${datasetBase}${rel}`;
         const ref = encodeURIComponent(HF_REF || "main");
         return `https://huggingface.co/datasets/${HF_DATASET_REPO}/resolve/${ref}/${rel}`;
+      }
+
+      async function resolveDatasetLatest() {
+        if (DATASET_SOURCE !== "hf" && !APP_QUERY.get("dataset")) {
+          try {
+            const resp = await fetch(`${ORIGIN_DATASETS_BASE}latest.json`);
+            if (resp.ok) {
+              datasetBase = ORIGIN_DATASETS_BASE;
+              return { latest: await resp.json(), label: "origin:/datasets" };
+            }
+          } catch {
+            // Mirror unavailable (e.g. preview host): fall back to Hugging Face below.
+          }
+        }
+        datasetBase = null;
+        return { latest: await fetchJson(hfUrl("latest.json")), label: `hf:${HF_DATASET_REPO}` };
       }
 
       async function fetchJson(url, opts = {}) {
@@ -1127,7 +1149,7 @@
         return {
           payload: {
             meta: {
-              db_path: `hf:${HF_DATASET_REPO}/${snapshotDir}`,
+              db_path: backend.sourceLabel,
               table_count: payloadTables.length,
               dataset_repo: HF_DATASET_REPO,
               snapshot_dir: snapshotDir,
@@ -1144,7 +1166,7 @@
           throw new Error("dataset HF vacío. Usa ?dataset=owner/name");
         }
 
-        const latest = await fetchJson(hfUrl("latest.json"));
+        const { latest, label: datasetLabel } = await resolveDatasetLatest();
         const snapshotDir = HF_SNAPSHOT_OVERRIDE
           ? `snapshots/${HF_SNAPSHOT_OVERRIDE}`
           : String(latest?.snapshot_dir || "");
@@ -1188,6 +1210,7 @@
           );
         }
 
+        backend.sourceLabel = `${datasetLabel}/${snapshotDir}`;
         const built = await buildHfSchemaPayload(manifestTables, schemaContract, snapshotDir);
         backend.hf = {
           db,
@@ -1198,7 +1221,6 @@
           schemaPayload: built.payload,
           schemaMap: built.schemaMap,
         };
-        backend.sourceLabel = `hf:${HF_DATASET_REPO}/${snapshotDir}`;
       }
 
       function hfOrderSql(meta) {

@@ -2084,6 +2084,7 @@ etl-publish-hf:
   if [ "{{hf_require_quality_report}}" = "1" ]; then quality_arg="--require-quality-report"; fi; \
   if [ "{{hf_require_liberty_atlas_release_latest}}" = "1" ]; then liberty_atlas_arg="--require-liberty-atlas-release-latest"; fi; \
   docker compose run --rm --build etl "python3 scripts/publicar_hf_snapshot.py --db {{db_path}} --snapshot-date {{snapshot_date}} --dataset-repo {{hf_dataset_repo_id}} --parquet-compression {{hf_parquet_compression}} --parquet-batch-rows {{hf_parquet_batch_rows}} --parquet-tables '{{hf_parquet_tables}}' --parquet-exclude-tables '{{hf_parquet_exclude_tables}}' ${sqlite_arg} ${sensitive_arg} ${quality_arg} ${liberty_atlas_arg}"
+  just site-dataset-mirror
 
 etl-publish-hf-dry-run:
   just etl-scale-readiness
@@ -6636,8 +6637,8 @@ spending-api-deploy bundle slot:
   just --working-directory "$infra_repo" --justfile "$infra_repo/Justfile" spending-api-deploy "$1" "$2"
 
 cloudflare-pages-deploy:
-  @just cloudflare-pages-build
-  cd "{{gh_pages_next_app_dir}}" && npx wrangler pages deploy out --project-name "{{cloudflare_pages_project}}"
+  @echo "RETIRED 2026-10-12: votaconlachola.org is served by the domain Worker + R2. Use just votaconlachola-gh-pages-publish (syncs R2) or just site-origin-publish." >&2
+  @exit 1
 
 votaconlachola-gh-pages-publish:
   @just cloudflare-pages-build
@@ -6649,6 +6650,7 @@ votaconlachola-gh-pages-publish:
   git fetch "{{gh_pages_remote}}" "{{gh_pages_branch}}"; \
   git worktree add --detach "$tmpdir" FETCH_HEAD; \
   rsync -a --delete --exclude .git "{{gh_pages_next_out_dir}}"/ "$tmpdir"/; \
+  find "$tmpdir" -name .DS_Store -not -path "*/.git/*" -delete; \
   touch "$tmpdir/.nojekyll"; \
   git -C "$tmpdir" add -A; \
   if git -C "$tmpdir" diff --cached --quiet; then \
@@ -6659,6 +6661,8 @@ votaconlachola-gh-pages-publish:
     git -C "$tmpdir" commit -m "Publish static site snapshot {{snapshot_date}}"; \
     git -C "$tmpdir" push "{{gh_pages_remote}}" HEAD:"{{gh_pages_branch}}"; \
   fi
+  # votaconlachola.org serves R2, not gh-pages: a publish is incomplete until the origin is synced.
+  just site-origin-publish
 
 # votaconlachola.org origin: sync the published gh-pages tree to R2 (changed files only)
 # and publish a sha256 release manifest at /releases/latest.json. Needs R2_* env (S3 API).
@@ -6669,8 +6673,20 @@ site-origin-publish:
   trap 'git worktree remove --force "$site" >/dev/null 2>&1 || rm -rf "$site"' EXIT
   git fetch "{{gh_pages_remote}}" "{{gh_pages_branch}}"
   git worktree add --detach "$site" FETCH_HEAD
+  if [ -z "${R2_ACCESS_KEY_ID:-}" ] && [ -f .env ]; then eval "$(grep -E '^R2_[A-Z_]+=' .env | sed 's/^/export /')"; fi
+  export R2_ACCOUNT_ID="${R2_ACCOUNT_ID:-${CLOUDFLARE_ACCOUNT_ID:-2a9c5bd32808734be6ee294d77e05ffb}}"
   report_arg=(); if [ -n "${SITE_ORIGIN_REPORT:-}" ]; then report_arg=(--report "$SITE_ORIGIN_REPORT"); fi
   uv run --no-project --with 'boto3>=1.34' python3 scripts/publish_site_origin.py --site "$site" --delete "${report_arg[@]}"
+
+# Mirror the latest HF dataset snapshot to votaconlachola.org/datasets/ (explorer reads it there).
+# Skips with a warning when no R2 credentials are available.
+site-dataset-mirror:
+  #!/usr/bin/env bash
+  set -euo pipefail
+  if [ -z "${R2_ACCESS_KEY_ID:-}" ] && [ -f .env ]; then eval "$(grep -E '^R2_[A-Z_]+=' .env | sed 's/^/export /')"; fi
+  export R2_ACCOUNT_ID="${R2_ACCOUNT_ID:-${CLOUDFLARE_ACCOUNT_ID:-2a9c5bd32808734be6ee294d77e05ffb}}"
+  if [ -z "${R2_ACCESS_KEY_ID:-}" ] || [ -z "${R2_SECRET_ACCESS_KEY:-}" ]; then echo "WARN: R2 credentials missing; /datasets/ keeps the previous snapshot" >&2; exit 0; fi
+  uv run --no-project --with 'boto3>=1.34' python3 scripts/mirror_dataset_snapshot.py --dataset-repo "{{hf_dataset_repo_id}}"
 
 # Deploy the domain Worker (static shell + R2 origin) with the wrangler OAuth login. Run after site-origin-publish.
 site-origin-worker-deploy:
@@ -6695,7 +6711,8 @@ placsp-launch-scoped-publish:
   python3 scripts/verify_placsp_launch_git.py --repo "$PLACSP_PUBLISH_SITE" --prefix spending/launch --ref ""
   git -C "$PLACSP_PUBLISH_SITE" commit -m "Publish PLACSP technical alpha from $(git rev-parse --short HEAD)"
   git -C "$PLACSP_PUBLISH_SITE" push "{{gh_pages_remote}}" HEAD:"{{gh_pages_branch}}"
-  python3 scripts/publish_spending_static_assets.py --site "$PLACSP_PUBLISH_SITE"
+  just site-origin-publish
+  env -u CLOUDFLARE_API_TOKEN -u CF_API_TOKEN python3 scripts/publish_spending_static_assets.py --site "$PLACSP_PUBLISH_SITE"
 
 
 explorer-gh-pages:
