@@ -455,7 +455,10 @@ export function buildAiPrompt(question, parties = [], { mode = "why", partyId = 
     if (v.text_url) lines.push(`- Texto oficial (BOCG): ${v.text_url}`);
     if (v.source_url) lines.push(`- Datos oficiales de la votación: ${v.source_url}`);
   });
-  const hl = highlightLines(question, compact);
+  // Plain-language bullets come first (they say what was voted); literal headings follow as evidence.
+  const wv = whatVotedLines(question, compact);
+  if (wv.length) lines.push("", ...wv);
+  const hl = highlightLines(question, compact, wv.length > 0);
   if (hl.length) lines.push("", ...hl);
   return lines.join("\n");
 }
@@ -493,10 +496,15 @@ function questionVoteIds(question) {
   return (question.votes || []).map((v) => v.vote_event_id);
 }
 
-/** Attach official-text highlights to each question; `omnibus` is true if any of its votes is omnibus. */
-export function attachHighlights(questions, highlights) {
+/**
+ * Attach official-text highlights to each question; `omnibus` is true if any of its votes is omnibus.
+ * With `bullets` (voting_aid_vote_bullets_v1.json), `whatVoted` lists, per vote, the plain-language
+ * «Qué se votaba» bullets (status "ok"), or "sin_texto_oficial" when there is no official text.
+ */
+export function attachHighlights(questions, highlights, bullets = null) {
   const byVote = highlights?.by_vote || {};
   const docs = highlights?.docs || {};
+  const bulletsByVote = bullets?.by_vote || {};
   return questions.map((q) => {
     const items = questionVoteIds(q)
       .map((vid) => {
@@ -509,20 +517,50 @@ export function attachHighlights(questions, highlights) {
     // Several votes on the same text (e.g. two stages of one bill) show it once.
     const seen = new Set();
     const unique = items.filter((h) => (seen.has(h.doc.url) ? false : seen.add(h.doc.url)));
+    const voted = questionVoteIds(q).map((vid) => {
+      const b = bulletsByVote[vid];
+      const vote = q.source === "pool" ? { vote_date: q.vote_date } : (q.votes || []).find((v) => v.vote_event_id === vid) || {};
+      const doc = docs[byVote[vid]];
+      if (b?.status === "ok") return { vote_event_id: vid, vote_date: vote.vote_date, ...b, doc };
+      return { vote_event_id: vid, vote_date: vote.vote_date, status: b ? b.status : "pending", bullets: [], doc };
+    });
+    const seenVoted = new Set();
+    const whatVoted = voted.filter((w) => (w.status !== "ok" ? true : seenVoted.has(w.url) ? false : seenVoted.add(w.url)));
     return {
       ...q,
       highlights: unique,
+      whatVoted,
       omnibus: unique.some((h) => h.doc.omnibus),
       offtopic: unique.some((h) => (h.doc.offtopic_riders || []).length > 0),
     };
   });
 }
 
-function highlightLines(question, compact = false) {
+/** «Qué se votaba» lines for AI prompts: plain-language bullets with their locators and source. */
+function whatVotedLines(question, compact = false) {
+  const items = (question.whatVoted || []).filter((w) => w.status === "ok");
+  if (!items.length) return [];
   const lines = [];
-  const maxBullets = compact ? 4 : 10;
+  for (const w of items) {
+    lines.push(`Qué se votaba (resumen en lenguaje llano del texto oficial${w.vote_date && items.length > 1 ? `, votación del ${w.vote_date}` : ""}; puede tener errores):`);
+    for (const b of w.bullets.slice(0, compact ? 4 : 6)) lines.push(compact ? `  • ${b.text}` : `  • ${b.text} [${b.locator}]`);
+    if (w.text_status_label) lines.push(`  (${w.text_status_label})`);
+    lines.push(`  Texto oficial: ${w.url}`);
+  }
+  return lines;
+}
+
+function highlightLines(question, compact = false, hasPlainBullets = false) {
+  const lines = [];
+  const maxBullets = compact ? (hasPlainBullets ? 0 : 4) : hasPlainBullets ? 6 : 10;
   for (const h of question.highlights || []) {
     const d = h.doc;
+    if (compact && hasPlainBullets) {
+      // The plain bullets already say what was voted: keep only the scope warnings.
+      if ((d.offtopic_riders || []).length) lines.push(`También cambia, en disposiciones finales, normas de otros temas: ${d.offtopic_riders.slice(0, 2).join("; ")}`);
+      if (d.omnibus) lines.push(`Es una votación ómnibus: abarca ${d.themes.join(", ")}.`);
+      continue;
+    }
     lines.push(`Contenido según el texto oficial (${d.source}${h.vote_date ? `, votación del ${h.vote_date}` : ""}; encabezados literales):`);
     const bullets = (d.bullets || []).slice(0, maxBullets);
     for (const b of bullets) lines.push(`  • ${b}`);

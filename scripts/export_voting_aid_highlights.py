@@ -7,8 +7,11 @@ own structure, literally: titles/chapters, article headings, the other laws it m
 in final provisions included) and an omnibus flag. No summarising or interpretation.
 
 Sources: decree-laws from the BOE (ELI XML, built from "Real Decreto-ley N/YYYY, de D de mes"),
-bills from the BOCG PDF linked to the vote. Raw downloads are cached under
-etl/data/raw/voting_aid_texts/ and every document records URL, SHA-256 and fetch time.
+bills from the BOCG PDF linked to the vote. Votes without a linked text (non-binding motions, motions,
+and bills whose vote carries no link) come from the seed written by scripts/voting_aid_motion_texts.py:
+for motions the literal points of the BOCG serie D text that was voted (approved text when published,
+otherwise the original, labelled), for bills the BOCG text listed on the initiative page. Raw downloads
+are cached under etl/data/raw/voting_aid_texts/ and every document records URL and SHA-256.
 """
 
 from __future__ import annotations
@@ -31,11 +34,13 @@ if str(BASE_DIR) not in sys.path:
 
 from etl.politicos_es.http import http_get_bytes  # noqa: E402
 from scripts.export_voting_aid_pool import theme_for  # noqa: E402
+from scripts import voting_aid_motion_texts as motions  # noqa: E402
 
 DEFAULT_SNAPSHOT = BASE_DIR / "ui/gh-pages-next/public/citizen/data/voting_aid_generales_v1.json"
 DEFAULT_POOL = BASE_DIR / "ui/gh-pages-next/public/citizen/data/voting_aid_pool_v1.json"
 DEFAULT_OUT = BASE_DIR / "ui/gh-pages-next/public/citizen/data/voting_aid_highlights_v1.json"
 DEFAULT_CACHE = BASE_DIR / "etl/data/raw/voting_aid_texts"
+DEFAULT_MOTION_SEED = motions.DEFAULT_SEED
 SCHEMA_VERSION = "voting_aid_highlights_v1"
 
 MONTHS = {
@@ -241,6 +246,50 @@ def classify_scope(parsed: dict[str, Any], title: str) -> dict[str, Any]:
     return {**parsed, "themes": themes, "omnibus": len(themes) >= OMNIBUS_MIN_THEMES, "offtopic_riders": offtopic}
 
 
+TEXT_STATUS_LABELS = {
+    **motions.TEXT_STATUS_LABELS,
+    "boe": "Texto publicado en el BOE",
+    "texto_inicial": "Texto inicial, tal como se presentó (antes de enmiendas)",
+    "texto_tramitado": "Texto tras su paso por la Comisión o aprobado por el Pleno",
+}
+
+
+def bocg_text_status(url: str) -> str:
+    # BOCG series A/B: "-1.PDF" is the text as presented; later numbers are reports, opinions and approvals.
+    return "texto_inicial" if re.search(r"/BOCG-\d+-[AB]-\d+-1\.PDF", url, re.I) else "texto_tramitado"
+
+
+def motion_highlight(entry: dict[str, Any], title: str, cache_dir: Path, *, timeout: int, offline: bool) -> dict[str, Any]:
+    doc = motions.motion_document(entry, cache_dir, timeout=timeout, offline=offline)
+    points = doc.pop("points")
+    bullets = [clip(f"{p['n']}. {p['text']}") for p in points]
+    # A motion is a list of requests, not a law carrying riders: it is never flagged omnibus
+    # (keyword themes over free-text points would be noise).
+    parsed = {
+        "bullets": bullets[:MAX_ITEMS], "bullets_basis": "puntos", "bullets_total": len(bullets),
+        "modified_norms": [], "modified_norms_total": 0, "riders": [], "riders_total": 0,
+        "block_themes": [], "stats": {"points": len(points)},
+    }
+    scoped = classify_scope(parsed, title)
+    return {**doc, **scoped, "points": points}
+
+
+def law_highlight(entry: dict[str, Any], title: str, cache_dir: Path, *, timeout: int, offline: bool) -> dict[str, Any]:
+    pick = (entry.get("final_stage_doc") if entry.get("kind") == "final" else None) or entry.get("original_doc") or entry.get("final_stage_doc")
+    if not pick:
+        raise ValueError(f"{entry.get('expediente')}: la ficha no lista ningún texto en el BOCG")
+    url = pick["pdf_url"]
+    path = motions.pdf_cache_path(url, cache_dir) if offline else motions.fetch_pdf(url, cache_dir, timeout)
+    data = path.read_bytes()
+    parsed = classify_scope(parse_bocg_text(pdf_to_text(str(path))), title)
+    status = bocg_text_status(url)
+    return {
+        "url": url, "source": "BOCG", "sha256": hashlib.sha256(data).hexdigest(), "bytes": len(data),
+        "expediente": entry.get("expediente"), "text_status": status, "text_status_label": TEXT_STATUS_LABELS[status],
+        **parsed,
+    }
+
+
 def vote_documents(snapshot: dict[str, Any], pool: dict[str, Any]) -> dict[str, dict[str, str]]:
     """vote_event_id -> {url, kind} for every vote behind a question that has an official text."""
     out: dict[str, dict[str, str]] = {}
@@ -266,6 +315,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--pool", default=str(DEFAULT_POOL))
     parser.add_argument("--out", default=str(DEFAULT_OUT))
     parser.add_argument("--cache-dir", default=str(DEFAULT_CACHE))
+    parser.add_argument("--motion-seed", default=str(DEFAULT_MOTION_SEED), help="Semilla de PNL/mociones y leyes sin enlace (voting_aid_motion_texts.py link)")
     parser.add_argument("--timeout", type=int, default=45)
     parser.add_argument("--sleep", type=float, default=0.4, help="Pausa entre descargas nuevas (cortesía con el origen)")
     parser.add_argument("--offline", action="store_true", help="Usar solo la caché local")
@@ -275,6 +325,12 @@ def main(argv: list[str] | None = None) -> int:
     pool = json.loads(Path(args.pool).read_text(encoding="utf-8"))
     targets = vote_documents(snapshot, pool)
     cache_dir = Path(args.cache_dir)
+    seed_path = Path(args.motion_seed)
+    seed_votes = json.loads(seed_path.read_text(encoding="utf-8")).get("votes", {}) if seed_path.exists() else {}
+    titles = {it["vote_event_id"]: it.get("title") or "" for it in pool.get("items") or []}
+    for st in snapshot.get("statements") or []:
+        for v in st.get("votes") or []:
+            titles.setdefault(v["vote_event_id"], v.get("title") or "")
 
     docs: dict[str, Any] = {}
     by_vote: dict[str, str] = {}
@@ -296,16 +352,36 @@ def main(argv: list[str] | None = None) -> int:
                 data, path_s, cached = fetch_cached(url, cache_dir, timeout=args.timeout, sleep=args.sleep)
             parsed = parse_boe_xml(data) if target["kind"] == "boe" else parse_bocg_text(pdf_to_text(path_s))
             parsed = classify_scope(parsed, target.get("title") or "")
+            public_url = url.replace("/dof/spa/xml", "") if target["kind"] == "boe" else url
+            status = "boe" if target["kind"] == "boe" else bocg_text_status(url)
             docs[key] = {
-                "url": url.replace("/dof/spa/xml", "") if target["kind"] == "boe" else url,
+                "url": public_url,
                 "source": "BOE" if target["kind"] == "boe" else "BOCG",
                 "sha256": hashlib.sha256(data).hexdigest(),
                 "bytes": len(data),
+                "text_status": status,
+                "text_status_label": TEXT_STATUS_LABELS[status],
                 **parsed,
             }
         except Exception as exc:  # noqa: BLE001
             failures.append({"vote_event_id": vid, "url": url, "error": f"{type(exc).__name__}: {exc}"[:200]})
             by_vote.pop(vid, None)
+
+    # Votes without a text link: motions (BOCG serie D points) and bills found on their initiative page.
+    for vid, entry in sorted(seed_votes.items()):
+        if vid in by_vote or not entry.get("expediente"):
+            if not entry.get("expediente"):
+                failures.append({"vote_event_id": vid, "url": "", "error": f"sin expediente ({entry.get('match')})"})
+            continue
+        builder = motion_highlight if entry.get("kind") in motions.MOTION_KINDS else law_highlight
+        try:
+            doc = builder(entry, titles.get(vid, ""), cache_dir, timeout=args.timeout, offline=args.offline)
+        except Exception as exc:  # noqa: BLE001
+            failures.append({"vote_event_id": vid, "url": entry.get("initiative_url") or "", "error": f"{type(exc).__name__}: {exc}"[:200]})
+            continue
+        key = hashlib.sha1(f"{doc['url']}|{entry['expediente']}".encode("utf-8")).hexdigest()[:12]
+        docs.setdefault(key, doc)
+        by_vote[vid] = key
 
     omnibus = sum(1 for d in docs.values() if d["omnibus"])
     payload = {
@@ -315,8 +391,11 @@ def main(argv: list[str] | None = None) -> int:
             "method": (
                 "Encabezados literales del texto oficial (títulos y capítulos, artículos, normas que modifica). "
                 f"Ómnibus: título, bloques y normas modificadas abarcan {OMNIBUS_MIN_THEMES} o más temas. "
-                "Cambios ajenos al título: leyes modificadas en disposiciones finales de otro tema."
+                "Cambios ajenos al título: leyes modificadas en disposiciones finales de otro tema. "
+                "PNL y mociones: puntos literales de la parte dispositiva publicada en el BOCG serie D "
+                "(texto aprobado si se publicó; si no, el original, con text_status indicando si se votó con enmiendas)."
             ),
+            "text_status_labels": TEXT_STATUS_LABELS,
             "votes_with_text": len(by_vote),
             "documents": len(docs),
             "omnibus_documents": omnibus,

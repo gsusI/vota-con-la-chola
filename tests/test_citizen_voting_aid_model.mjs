@@ -247,7 +247,8 @@ test("prefilled AI links stay under the URL budget for every question", async ()
   const dataDir = path.join(here, "..", "ui", "gh-pages-next", "public", "citizen", "data");
   const pool = JSON.parse(fs.readFileSync(path.join(dataDir, "voting_aid_pool_v1.json"), "utf-8"));
   const highlights = JSON.parse(fs.readFileSync(path.join(dataDir, "voting_aid_highlights_v1.json"), "utf-8"));
-  const questions = m.attachHighlights(m.buildQuestions(snap, pool), highlights);
+  const bullets = JSON.parse(fs.readFileSync(path.join(dataDir, "voting_aid_vote_bullets_v1.json"), "utf-8"));
+  const questions = m.attachHighlights(m.buildQuestions(snap, pool), highlights, bullets);
   for (const q of questions) {
     for (const opts of [{}, { mode: "explain" }, { partyId: "pp" }]) {
       const p = m.linkPrompt(q, snap.parties, opts);
@@ -255,4 +256,41 @@ test("prefilled AI links stay under the URL budget for every question", async ()
       assert.ok(p.includes(q.source === "pool" ? q.text.slice(0, 40) : q.text.slice(0, 40)));
     }
   }
+});
+
+test("«Qué se votaba» bullets attach per vote, reach prompts and never reveal votes before answering", async () => {
+  const m = await import("../ui/gh-pages-next/app/citizen/vota/votingAidModel.mjs");
+  const snap = JSON.parse(fs.readFileSync(publishedPath, "utf-8"));
+  const dataDir = path.join(here, "..", "ui", "gh-pages-next", "public", "citizen", "data");
+  const pool = JSON.parse(fs.readFileSync(path.join(dataDir, "voting_aid_pool_v1.json"), "utf-8"));
+  const highlights = JSON.parse(fs.readFileSync(path.join(dataDir, "voting_aid_highlights_v1.json"), "utf-8"));
+  const bullets = JSON.parse(fs.readFileSync(path.join(dataDir, "voting_aid_vote_bullets_v1.json"), "utf-8"));
+  const questions = m.attachHighlights(m.buildQuestions(snap, pool), highlights, bullets);
+  const withBullets = questions.filter((q) => q.whatVoted.some((w) => w.status === "ok"));
+  assert.ok(withBullets.length >= 250, `questions with bullets: ${withBullets.length}`);
+  for (const q of questions) {
+    assert.ok(q.whatVoted.length >= 1);
+    for (const w of q.whatVoted) {
+      assert.ok(["ok", "sin_texto_oficial"].includes(w.status), `${q.statement_id} ${w.status}`);
+      if (w.status !== "ok") continue;
+      assert.ok(w.bullets.length >= 1 && w.bullets.length <= 6);
+      for (const b of w.bullets) assert.ok(b.text && b.locator);
+      assert.match(w.url, /^https:\/\/www\.(boe|congreso)\.es\//u);
+    }
+  }
+  // Motions (PNL) now carry their official text too.
+  assert.ok(questions.filter((q) => q.kind === "pnl" && q.whatVoted[0].status === "ok").length >= 60);
+
+  const q = withBullets.find((x) => x.source === "pool");
+  const explain = m.buildAiPrompt(q, snap.parties, { mode: "explain" });
+  const first = q.whatVoted.find((w) => w.status === "ok").bullets[0];
+  assert.ok(explain.includes(first.text) && explain.includes(`[${first.locator}]`));
+  assert.ok(!snap.parties.some((p) => explain.includes(`${p.label}:`)));
+  assert.ok(!explain.includes(q.proposer || "\u0000"), "explain prompt must not name the proposer");
+  const compact = m.buildAiPrompt(q, snap.parties, { mode: "explain", compact: true });
+  assert.ok(compact.includes(first.text) && compact.length <= explain.length);
+
+  // Votes without official text are marked, never invented.
+  const bare = questions.find((x) => x.whatVoted.every((w) => w.status === "sin_texto_oficial"));
+  if (bare) assert.ok(!m.buildAiPrompt(bare, snap.parties).includes("Qué se votaba (resumen"));
 });

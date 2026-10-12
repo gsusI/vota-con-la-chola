@@ -35,6 +35,7 @@ const AGREEMENT_LABELS = { match: "Coincidís", partial: "A medias", clash: "Dis
 const AGREEMENT_ICONS = { match: "✓", partial: "≈", clash: "✗", none: "–" };
 const POOL_PATH = "/citizen/data/voting_aid_pool_v1.json";
 const HIGHLIGHTS_PATH = "/citizen/data/voting_aid_highlights_v1.json";
+const BULLETS_PATH = "/citizen/data/voting_aid_vote_bullets_v1.json";
 
 // ---------------------------------------------------------------------------
 // State persistence (local only; ids of questions the page has not loaded are kept, never dropped).
@@ -240,23 +241,26 @@ function ScopeBadges({ question }) {
 }
 
 /** What the voted text really contains: literal headings from the official text, with its source. */
-function WhatsInside({ question }) {
+function WhatsInside({ question, only = null, embedded = false }) {
   const [open, setOpen] = useState(false);
-  const items = question.highlights || [];
+  const items = only ? (question.highlights || []).filter((h) => h.doc === only) : question.highlights || [];
   if (!items.length) return null;
   const many = items.length > 1;
   return (
-    <section aria-label="Qué incluye según el texto oficial" className="votingAidInside">
-      <ScopeBadges question={question} />
+    <section aria-label="Qué incluye según el texto oficial" className={`votingAidInside${embedded ? " votingAidInside--embedded" : ""}`}>
+      {embedded ? null : <ScopeBadges question={question} />}
       {items.map((h) => {
         const d = h.doc;
-        const shown = open ? d.bullets : d.bullets.slice(0, 3);
-        const hidden = (d.bullets_total || d.bullets.length) - shown.length;
+        // Motions carry their literal points in full; other texts their (clipped) literal headings.
+        const lines = d.points?.length ? d.points.map((p) => `${p.n}. ${p.text}`) : d.bullets;
+        const shown = open ? lines : lines.slice(0, 3);
+        const hidden = (d.points?.length ? lines.length : d.bullets_total || lines.length) - shown.length;
         return (
           <div className="votingAidInside__doc" key={d.url}>
             <p className="votingAidInside__title">
-              <span aria-hidden="true">📋</span> Qué incluye{many && h.vote_date ? ` (votación del ${formatDate(h.vote_date)})` : ""}
-              <span className="votingAidMuted"> · según el texto oficial ({d.source})</span>
+              <span aria-hidden="true">📋</span> {d.bullets_basis === "puntos" ? "Puntos literales" : "Índice literal"}
+              {many && h.vote_date ? ` (votación del ${formatDate(h.vote_date)})` : ""}
+              <span className="votingAidMuted"> · texto oficial ({d.source})</span>
             </p>
             <ul className="votingAidInside__list">
               {shown.map((b) => (
@@ -280,13 +284,94 @@ function WhatsInside({ question }) {
                   {open ? "Ver menos" : hidden > 0 ? `Ver todo (${hidden} más)` : "Ver normas que modifica"}
                 </button>
               ) : null}
-              <a href={d.url} rel="noopener noreferrer" target="_blank">
-                Texto completo ({d.source})
-              </a>
+              {embedded ? null : (
+                <a href={d.url} rel="noopener noreferrer" target="_blank">
+                  Texto completo ({d.source})
+                </a>
+              )}
             </p>
           </div>
         );
       })}
+    </section>
+  );
+}
+
+/**
+ * «Qué se votaba»: plain-language bullets written from the official text (draft until reviewed), with a link
+ * to the full text, the literal headings/points as evidence and the AI explanation for more detail.
+ * Shown before answering, so it never names the proposer nor says how anyone voted.
+ */
+function WhatVoted({ question, parties }) {
+  const [literalFor, setLiteralFor] = useState(null);
+  const [expanded, setExpanded] = useState({});
+  const items = question.whatVoted || [];
+  const many = items.length > 1;
+  // Several votes behind one question: 3 bullets each until expanded, so the answers stay in reach.
+  const fold = many ? 3 : 6;
+  if (!items.length) return null;
+  return (
+    <section aria-label="Qué se votaba" className="votingAidVoted">
+      <ScopeBadges question={question} />
+      {items.map((w, i) => {
+        const doc = w.doc || null;
+        const url = w.url || doc?.url;
+        const label = w.text_status_label || doc?.text_status_label;
+        if (w.status === "pending" && !doc) return null; // bullets still loading, or not drafted yet
+        return (
+          <div className="votingAidVoted__doc" key={`${w.vote_event_id}-${i}`}>
+            <p className="votingAidVoted__title">
+              <span aria-hidden="true">🗳️</span> Qué se votaba{many && w.vote_date ? ` (votación del ${formatDate(w.vote_date)})` : ""}
+            </p>
+            {w.status === "ok" ? (
+              <ul className="votingAidVoted__list">
+                {(expanded[i] ? w.bullets : w.bullets.slice(0, fold)).map((b) => (
+                  <li key={b.text}>
+                    {b.text} <span className="votingAidVoted__loc">{b.locator}</span>
+                  </li>
+                ))}
+              </ul>
+            ) : doc ? null : (
+              <p className="votingAidMuted votingAidVoted__none">
+                <span aria-hidden="true">📭</span> Sin texto oficial enlazado: solo tenemos el título de la votación.
+              </p>
+            )}
+            {w.status === "ok" ? (
+              <p className="votingAidMuted votingAidVoted__src">
+                Resumen del texto oficial ({w.source || doc?.source}){label ? ` · ${label}` : ""}
+                {w.review === "draft" ? " · borrador sin revisar" : ""}
+              </p>
+            ) : null}
+            {doc && (w.status !== "ok" || literalFor === i) ? <WhatsInside embedded only={doc} question={question} /> : null}
+            {url || doc || (w.status === "ok" && w.bullets.length > fold) ? (
+              <p className="votingAidVoted__actions">
+                {w.status === "ok" && w.bullets.length > fold ? (
+                  <button aria-expanded={Boolean(expanded[i])} className="votingAidLinkButton" onClick={() => setExpanded({ ...expanded, [i]: !expanded[i] })} type="button">
+                    {expanded[i] ? "Ver menos" : `Ver ${w.bullets.length - fold} más`}
+                  </button>
+                ) : null}
+                {url ? (
+                  <a href={url} rel="noopener noreferrer" target="_blank">
+                    Ver texto completo ({w.source || doc?.source || "oficial"})
+                  </a>
+                ) : null}
+                {doc && w.status === "ok" ? (
+                  <button aria-expanded={literalFor === i} className="votingAidLinkButton" onClick={() => setLiteralFor(literalFor === i ? null : i)} type="button">
+                    {literalFor === i ? "Ocultar texto literal" : doc.bullets_basis === "puntos" ? "Ver puntos literales" : "Ver índice literal"}
+                  </button>
+                ) : null}
+              </p>
+            ) : null}
+          </div>
+        );
+      })}
+      <AskAiToggle
+        label="¿Quieres más detalle? Que te lo explique una IA"
+        opts={{ mode: "explain" }}
+        parties={parties}
+        question={question}
+        title="Pide una explicación sencilla de lo que se vota (sin decirte qué votó cada partido):"
+      />
     </section>
   );
 }
@@ -466,7 +551,7 @@ function QuestionCard({ question, parties, answer, important, onAnswer, onSkip, 
         </h2>
       )}
 
-      <WhatsInside question={question} />
+      <WhatVoted parties={parties} question={question} />
 
       <div aria-label="Tu respuesta" className="votingAidAnswers" role="group">
         {ANSWER_ORDER.map((value, i) => (
@@ -505,13 +590,6 @@ function QuestionCard({ question, parties, answer, important, onAnswer, onSkip, 
           Saltar
         </button>
       </div>
-      <AskAiToggle
-        label="¿No lo entiendes? Que te lo explique una IA"
-        opts={{ mode: "explain" }}
-        parties={parties}
-        question={question}
-        title="Pide una explicación sencilla de lo que se vota (sin decirte qué votó cada partido):"
-      />
       {question.source === "curated" && question.context ? (
         <details className="votingAidDetails">
           <summary>¿Qué se votó en el Congreso?</summary>
@@ -978,6 +1056,7 @@ export default function VotingAidClient({ snapshot }) {
   const [pool, setPool] = useState(null);
   const [poolStatus, setPoolStatus] = useState("loading");
   const [highlights, setHighlights] = useState(null);
+  const [voteBullets, setVoteBullets] = useState(null);
   const [state, setState] = useState(() => cleanState(null));
   const [loaded, setLoaded] = useState(false);
   const [fromShare, setFromShare] = useState(false);
@@ -992,7 +1071,10 @@ export default function VotingAidClient({ snapshot }) {
   const topRef = useRef(null);
   const toastTimer = useRef(null);
 
-  const questions = useMemo(() => attachHighlights(buildQuestions(snapshot, pool), highlights), [snapshot, pool, highlights]);
+  const questions = useMemo(
+    () => attachHighlights(buildQuestions(snapshot, pool), highlights, voteBullets),
+    [snapshot, pool, highlights, voteBullets],
+  );
   const scoredQuestions = useMemo(
     () => (state.excludeOmnibus ? questions.filter((q) => !q.omnibus) : questions),
     [questions, state.excludeOmnibus],
@@ -1010,13 +1092,19 @@ export default function VotingAidClient({ snapshot }) {
   );
   const answeredCount = useMemo(() => Object.keys(state.answers).filter((id) => questionsById[id]).length, [state.answers, questionsById]);
 
-  // Official-text highlights are optional: questions work without them.
+  // Official-text highlights and «Qué se votaba» bullets are optional: questions work without them.
   useEffect(() => {
     let cancelled = false;
     fetch(withBasePath(HIGHLIGHTS_PATH))
       .then((r) => (r.ok ? r.json() : null))
       .then((data) => {
         if (!cancelled && data) setHighlights(data);
+      })
+      .catch(() => {});
+    fetch(withBasePath(BULLETS_PATH))
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data) => {
+        if (!cancelled && data) setVoteBullets(data);
       })
       .catch(() => {});
     return () => {
