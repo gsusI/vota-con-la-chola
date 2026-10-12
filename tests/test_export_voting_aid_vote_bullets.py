@@ -48,6 +48,7 @@ class TestValidation(unittest.TestCase):
             "party": lambda s: s["votes"]["v1"]["bullets"][0].__setitem__("text", "Propuesta del Grupo Parlamentario Popular para bajar el IVA."),
             "invented": lambda s: s["votes"]["v2"].__setitem__("bullets", [{"text": "Algo", "locator": "Artículo 1"}]),
             "review": lambda s: s["votes"]["v1"].__setitem__("review", {}),
+            "unknown review": lambda s: s["votes"]["v1"].__setitem__("review", {"status": "ok"}),
         }
         for name, mutate in cases.items():
             seed = copy.deepcopy(FIXTURE)

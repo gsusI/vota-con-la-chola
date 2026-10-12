@@ -3,7 +3,9 @@
 
 The seed (etl/data/seeds/voting_aid_vote_bullets_v1.json) holds, per vote_event_id, up to six plain-language
 bullets written from the official text, each with a locator (article, point, section) plus the document's
-URL and SHA-256. Bullets are drafts until reviewed (``review.status``). Votes without an official text are
+URL and SHA-256. ``review.status`` says how far they were checked: ``draft`` (as written),
+``agent_reviewed`` (a second AI pass checked every bullet against the official text; no human yet) or
+``reviewed`` (checked by a person). Votes without an official text are
 kept explicitly as ``sin_texto_oficial`` with no bullets: nothing is invented.
 
 Validation is strict: max six bullets, locator on every bullet, URL + SHA-256 on every grounded vote, no
@@ -33,7 +35,7 @@ SCHEMA_VERSION = "voting_aid_vote_bullets_v1"
 MAX_BULLETS = 6
 MAX_BULLET_CHARS = 240
 STATUSES = {"ok", "sin_texto_oficial"}
-REVIEW_STATUSES = {"draft", "reviewed"}
+REVIEW_STATUSES = {"draft", "agent_reviewed", "reviewed"}
 URL_RE = re.compile(r"^https://www\.(boe|congreso)\.es/")
 SHA_RE = re.compile(r"^[0-9a-f]{64}$")
 # Bullets are shown before answering: they must not name who proposed or how anyone voted.
@@ -64,7 +66,7 @@ def validate_seed(seed: dict[str, Any], vote_ids: set[str] | None = None, highli
         if status not in STATUSES:
             errors.append(f"{where}: status inválido {status!r}")
         if (v.get("review") or {}).get("status") not in REVIEW_STATUSES:
-            errors.append(f"{where}: review.status debe ser draft o reviewed")
+            errors.append(f"{where}: review.status debe ser uno de {sorted(REVIEW_STATUSES)}")
         bullets = v.get("bullets") or []
         if status == "sin_texto_oficial":
             if bullets:
@@ -96,7 +98,7 @@ def validate_seed(seed: dict[str, Any], vote_ids: set[str] | None = None, highli
 def build_payload(seed: dict[str, Any], highlights: dict[str, Any] | None = None) -> dict[str, Any]:
     hl_by_url = {d["url"]: d for d in ((highlights or {}).get("docs") or {}).values()}
     by_vote: dict[str, Any] = {}
-    counts = {"ok": 0, "sin_texto_oficial": 0, "draft": 0, "reviewed": 0}
+    counts = {"ok": 0, "sin_texto_oficial": 0, **{s: 0 for s in sorted(REVIEW_STATUSES)}}
     for vid, v in sorted((seed.get("votes") or {}).items()):
         counts[v["status"]] += 1
         counts[v["review"]["status"]] += 1
@@ -126,7 +128,7 @@ def build_payload(seed: dict[str, Any], highlights: dict[str, Any] | None = None
             "votes": len(by_vote),
             "with_bullets": counts["ok"],
             "without_official_text": counts["sin_texto_oficial"],
-            "review": {"draft": counts["draft"], "reviewed": counts["reviewed"]},
+            "review": {s: counts[s] for s in sorted(REVIEW_STATUSES)},
         },
         "by_vote": by_vote,
     }

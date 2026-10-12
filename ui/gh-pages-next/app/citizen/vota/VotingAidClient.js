@@ -339,7 +339,7 @@ function WhatVoted({ question, parties }) {
             {w.status === "ok" ? (
               <p className="votingAidMuted votingAidVoted__src">
                 Resumen del texto oficial ({w.source || doc?.source}){label ? ` · ${label}` : ""}
-                {w.review === "draft" ? " · borrador sin revisar" : ""}
+                {w.review === "draft" ? " · borrador sin revisar" : w.review === "agent_reviewed" ? " · verificado con IA contra el texto, sin revisión humana" : ""}
               </p>
             ) : null}
             {doc && (w.status !== "ok" || literalFor === i) ? <WhatsInside embedded only={doc} question={question} /> : null}
