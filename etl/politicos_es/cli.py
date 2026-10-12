@@ -318,19 +318,30 @@ def cmd_ingest(args: argparse.Namespace) -> int:
 
         grand_seen = 0
         grand_loaded = 0
+        failed: list[tuple[str, str]] = []
         for source_id in source_ids:
             connector = connectors[source_id]
             from_file = Path(args.from_file) if args.from_file and args.source != "all" else None
-            seen, loaded, note = ingest_one_source(
-                conn=conn,
-                connector=connector,
-                raw_dir=raw_dir,
-                timeout=args.timeout,
-                from_file=from_file,
-                url_override=args.url if args.source != "all" else None,
-                snapshot_date=snapshot_date,
-                strict_network=bool(getattr(args, "strict_network")),
-            )
+            try:
+                seen, loaded, note = ingest_one_source(
+                    conn=conn,
+                    connector=connector,
+                    raw_dir=raw_dir,
+                    timeout=args.timeout,
+                    from_file=from_file,
+                    url_override=args.url if args.source != "all" else None,
+                    snapshot_date=snapshot_date,
+                    strict_network=bool(getattr(args, "strict_network")),
+                )
+            except Exception as exc:  # noqa: BLE001
+                # Real-data-only: a blocked or broken source is recorded as an error run
+                # (ingest_one_source already did) and the batch moves on; the tracker gate
+                # decides whether a missing source is acceptable. A single source still fails hard.
+                if args.source != "all":
+                    raise
+                failed.append((source_id, f"{type(exc).__name__}: {exc}"))
+                print(f"{source_id}: ERROR {type(exc).__name__}: {exc}", file=sys.stderr)
+                continue
             grand_seen += seen
             grand_loaded += loaded
             suffix = f" [{note}]" if note and note != "network" else ""
@@ -339,6 +350,10 @@ def cmd_ingest(args: argparse.Namespace) -> int:
         conn.close()
 
     print(f"Total: {grand_loaded}/{grand_seen} registros validos")
+    if failed:
+        print(f"Fuentes con error ({len(failed)}/{len(source_ids)}): {', '.join(s for s, _ in failed)}", file=sys.stderr)
+    if failed and len(failed) == len(source_ids):
+        return 1
     return 0
 
 
