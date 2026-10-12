@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       publish:
-        description: "Publish to Hugging Face and deploy Cloudflare when secrets are present"
+        description: "Deploy votaconlachola.org from committed data when R2 secrets are present"
         required: false
         default: false
         type: boolean
@@ -32,7 +32,6 @@ jobs:
     timeout-minutes: 180
     env:
       DB_PATH: etl/data/staging/politicos-es.live.db
-      HF_TOKEN: ${{ secrets.HF_TOKEN }}
       HF_USERNAME: ${{ secrets.HF_USERNAME }}
       HF_DATASET_REPO_ID: ${{ secrets.HF_DATASET_REPO_ID }}
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -115,22 +114,9 @@ jobs:
         if: env.LIVE_ETL_PUBLISH_REQUESTED != 'true'
         run: CLOUDFLARE_PAGES_FROZEN_INPUTS=1 just site-build
 
-      - name: Publish Hugging Face snapshot
-        if: env.LIVE_ETL_PUBLISH_REQUESTED == 'true' && env.SITE_ONLY_RELEASE != 'true'
-        run: |
-          if [ -z "$HF_TOKEN" ]; then
-            echo "HF_TOKEN missing; checked dry-run only."
-            exit 0
-          fi
-          if [ -z "$HF_DATASET_REPO_ID" ] && [ -z "$HF_USERNAME" ]; then
-            echo "HF_DATASET_REPO_ID/HF_USERNAME missing; checked dry-run only."
-            exit 0
-          fi
-          if ! just etl-scale-readiness; then
-            echo "::warning title=HF snapshot not published::etl-scale-readiness failed (scale foundation not ready); the site is still published"
-            exit 0
-          fi
-          just etl-publish-hf
+      # No HF publish here: the snapshot is regenerated from the DB, and this DB is a capped sample
+      # that would shrink the public dataset. HF snapshots are published from the full local DB with
+      # `just etl-publish-hf` (gate: etl-hf-snapshot-gate).
 
       - name: Publish votaconlachola.org (R2 origin)
         if: env.LIVE_ETL_PUBLISH_REQUESTED == 'true'

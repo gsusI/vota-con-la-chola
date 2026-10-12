@@ -2078,7 +2078,7 @@ etl-public-exports:
   python3 scripts/check_public_privacy_leaks.py --path etl/data/published
 
 etl-publish-hf:
-  just etl-scale-readiness
+  just etl-hf-snapshot-gate
   just etl-storage-health
   just etl-public-exports
   sqlite_arg="--skip-sqlite-gz"; \
@@ -2093,7 +2093,7 @@ etl-publish-hf:
   just site-dataset-mirror
 
 etl-publish-hf-dry-run:
-  just etl-scale-readiness
+  just etl-hf-snapshot-gate
   just etl-storage-health
   just etl-public-exports
   sqlite_arg="--skip-sqlite-gz"; \
@@ -2325,6 +2325,18 @@ parl-document-pipeline-scale:
   just parl-run-document-fetch-work
   just parl-enqueue-text-extraction-work
   just parl-run-text-extraction-work
+
+# Gate for the HF snapshot slice (politicos DB tables + published JSON). ROADMAP: a limited release
+# publishes with its own gates without promoting lanes or hiding global failures. So the snapshot
+# requires real-data-only and records the scale readiness report as-is (it ships in published/),
+# while etl-scale-readiness keeps enforcing foundation.ready for scale lanes and promotion.
+etl-hf-snapshot-gate:
+  just real-data-only-check
+  if docker compose run --rm etl "python3 scripts/report_scale_readiness.py --registry docs/etl/real-corpus-registry.json --out {{scale_readiness_report_out}} --enforce-foundation"; then \
+    echo "scale readiness: foundation ready"; \
+  else \
+    python3 -c 'import json, sys; r = json.load(open(sys.argv[1])); f = r.get("foundation") or {}; print("WARNING: scale foundation not ready (status=%s, reason=%s); the HF snapshot ships this report and promotes no scale lane" % (r.get("status"), (r.get("failure") or {}).get("reason")), file=sys.stderr); sys.exit(1 if f.get("ready") else 0)' "{{scale_readiness_report_out}}"; \
+  fi
 
 etl-scale-readiness:
   just real-data-only-check
