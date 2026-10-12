@@ -423,9 +423,11 @@ function IntroView({ meta, questionsTotal, poolStatus, parties, answeredCount, o
     <section className="votingAidIntro">
       <p className="votingAidEyebrow">Elecciones generales · Congreso de los Diputados</p>
       <h1>¿Con quién coincides?</h1>
+      <p className="votingAidPitch">Prometer no obliga. Votar queda registrado.</p>
       <p className="votingAidLead">
-        Responde preguntas sobre lo que de verdad se votó en el Congreso y descubre qué partidos votaron como tú. Juega todo lo que
-        quieras: hay {poolStatus === "ready" ? questionsTotal : "cientos de"} preguntas esperando.
+        Las promesas electorales no obligan a nada; lo que vota cada partido en el Congreso queda registrado. Responde qué habrías
+        votado tú en votaciones reales y descubre quién votó como tú. Juega todo lo que quieras: hay{" "}
+        {poolStatus === "ready" ? questionsTotal : "cientos de"} preguntas esperando.
       </p>
       <div className="votingAidActions votingAidActions--primary votingAidIntro__cta">
         <button className="votingAidButton votingAidButton--primary votingAidButton--big" onClick={onStart} type="button">
