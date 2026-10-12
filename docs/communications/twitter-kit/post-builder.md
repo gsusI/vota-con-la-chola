@@ -1,11 +1,13 @@
 # Post de builder (para acompañar el vídeo)
 
-Escrito en primera persona, para la comunidad tech o builder de X. Hay dos versiones: un post largo (X Premium) y un hilo. Las cifras salen del snapshot `voting_aid_generales_v1.json`, del registro de bloqueos de acceso y de la historia del repo (primer commit: 12-02-2026).
+Escrito en primera persona, para la comunidad tech o builder de X. Hay dos versiones: un post largo (X Premium) y un hilo. Las cifras salen del snapshot `voting_aid_generales_v1.json`, del registro de bloqueos de acceso y de la historia del repo (primer commit: 12-02-2026; commits en 27 días distintos; el test se montó el 11 y el 12 de octubre).
 
 ## Versión post largo
 
 ```
-Llevo 8 meses construyendo una herramienta para que nadie te tenga que contar qué votaron los partidos. Os cuento qué he hecho, por qué, y lo que me he encontrado por el camino 👇
+Llevo 8 meses, en ratos libres, explorando una idea: ¿se puede reconstruir qué hacen de verdad los políticos solo con datos públicos? Votaciones, cargos, parlamentos, contratos públicos…
+
+De esa exploración sale esto. El test lo he montado en dos días; lo que ha llevado meses es todo lo que hay debajo. Os lo cuento 👇
 
 EL PROBLEMA
 
@@ -23,6 +25,7 @@ Así nace «¿Con quién coincides?»: 33 afirmaciones sacadas de 41 votaciones 
 
 CÓMO ESTÁ HECHO (para builders)
 
+· El test es la punta del iceberg. Debajo hay ETL de cargos públicos, Congreso, Senado, parlamentos autonómicos y contratación pública, montados durante estos meses de exploración. Por eso el test ha salido en dos días.
 · Un ETL descarga los JSON oficiales de votaciones del Congreso y los mete en un único SQLite reproducible. Guardo el payload crudo de cada fuente: cualquier cifra se puede reconducir a su origen.
 · La posición de un partido es lo que votó la mayoría de sus diputados. Sin interpretación editorial.
 · Las afirmaciones están redactadas en los dos sentidos, para que contestar siempre «de acuerdo» no te empuje hacia un bloque. Lo mido: en 15 el «de acuerdo» coincide con el PSOE y en 12 con el PP.
@@ -62,11 +65,11 @@ Código: https://github.com/gsusI/vota-con-la-chola
 
 1/ (con el vídeo)
 ```
-Llevo 8 meses construyendo una herramienta para que nadie te tenga que contar qué votaron los partidos.
+Llevo 8 meses, en ratos libres, explorando si se puede reconstruir qué hacen de verdad los políticos solo con datos públicos.
 
-Respondes a lo que de verdad se votó en el Congreso y ves quién votó como tú.
+De ahí sale esto: respondes a lo que se votó en el Congreso y ves quién votó como tú.
 
-Os cuento qué he hecho, por qué y lo que me he encontrado 🧵
+El test, en dos días. Lo de debajo, meses 🧵
 ```
 2/
 ```
