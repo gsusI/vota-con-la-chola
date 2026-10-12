@@ -4,9 +4,9 @@ Fecha: 2026-10-12 · Objetivo: `https://votaconlachola.org/citizen/vota/`
 
 ## Dónde estamos / a dónde vamos / qué sigue
 
-- **Ahora**: el test funciona (33 temas clave + 334 votaciones en modo infinito, 12 partidos, cada voto con enlace oficial). Tiene botón «Compartir mi podio» (sin respuestas). Sin tráfico orgánico, sin vista previa al compartir y sin medición.
+- **Ahora**: el test funciona (33 temas clave + 334 votaciones en modo infinito, 12 partidos, cada voto con enlace oficial). Tiene botón «Compartir mi podio» (sin respuestas) y una página con vista previa para cada pregunta. Sin tráfico orgánico y sin medición.
 - **Vamos**: que la gente lo juegue porque *le pica la curiosidad*, no porque se lo pidamos: «¿quién votó eso?» → revelación → «mira mi podio».
-- **Siguiente**: cerrar los 4 bloqueantes de la Fase 0 antes de gastar un euro o pegar una pegatina.
+- **Siguiente**: elecciones generales el **29 de noviembre de 2026**. Cerrar la Fase 0 antes del 18 oct (revisión humana incluida) para lanzar el 20 oct.
 
 ## Mensaje central: vota por lo que hicieron, no por lo que prometen
 
@@ -113,40 +113,58 @@ Regla de oro (neutralidad): **nunca se publica una sorpresa incómoda para un bl
 
 ⚠️ Las 33 afirmaciones están revisadas con IA, **no por personas** (lo dice el propio banner). Ningún gancho se imprime ni se publica sin que una persona haya abierto el enlace oficial y confirmado el dato.
 
-## Fase 0 · Bloqueantes (13–26 oct)
+## Calendario: elecciones generales del 29 de noviembre de 2026
+
+Las Cortes se disolvieron el 6 de octubre (RD 806/2026). La campaña oficial va del **viernes 13 al viernes 27 de noviembre**, el 28 es jornada de reflexión y el 29 se vota. Quedan siete semanas: todo el plan se comprime para llegar antes del 29N.
+
+Nuevo gancho que da la disolución: **«La legislatura se ha cerrado. Ya no pueden cambiar lo que votaron.»** Los cuatro años de votos están fijos; ahora toca compararlos con lo que prometan en campaña.
+
+| Semana | Fase | Hito clave |
+|---|---|---|
+| 12–18 oct | 0 · Bloqueantes | Revisión humana cerrada el **18 oct**; pedido de imprenta el **19 oct** |
+| 19 oct – 12 nov | 1 · Precampaña «Adivina quién votó» | Lanzamiento digital el **20 oct**; reto a los partidos enviado el **20 oct**, tabla pública el **9 nov** |
+| 13–23 nov | 2 · Campaña «Dijeron / Votaron» | Cada promesa de mitin, contrastada con su votación en ≤ 24 h |
+| 24–27 nov | 3 · Recta final | Kit para el grupo familiar de WhatsApp; sin nada que parezca una encuesta |
+| 28–29 nov | Reflexión y votación | Pausa total: nada nuevo, nada en la calle; la web sigue abierta |
+| 30 nov – 23 dic | Después | «Guardamos sus promesas»: archivo para la nueva legislatura |
+
+### Fase 0 · Bloqueantes (12–18 oct)
 
 1. ✅ **Vista previa al compartir** (2026-10-12). `/citizen/vota/` tiene tarjeta OG (`/citizen/vota/og/inicio.png`) y cada uno de los 33 temas tiene su página `/citizen/vota/t/<statement_id>/` con su PNG (`/citizen/vota/og/<statement_id>.png`, insignia «Se decidió por N votos» si la diferencia es ≤ 5) que abre el juego en esa pregunta. Tras responder, «Retar a alguien con esta pregunta» comparte ese enlace sin la respuesta. La tarjeta nunca revela qué votó cada partido.
-2. **Revisión humana de los ganchos.** Dos personas independientes revisan al menos las 9 de la tabla. Convertirlo en campaña: «Cazadores de errores», invitar a periodistas de datos y politólogos a revisar en público; cada error encontrado se corrige y se agradece. Credibilidad > alcance.
-3. **Medición sin rastrear personas.** Cloudflare Web Analytics (sin cookies) + rutas cortas por canal que redirigen al test (`/v/bar`, `/v/campus`, `/v/tiktok`, `/v/prensa`…). Cada QR físico apunta a su ruta. Nada de datos de usuario en la URL.
-4. **Kit de prensa de una página**: qué es, método (mayoría del grupo en votación nominal), limitaciones, 3 ganchos, contacto.
+2. **Revisión humana en una semana.** Dos personas independientes revisan las 33 afirmaciones y las fichas «Dijeron / Votaron». Hay que reclutarlas hoy mismo (politólogos, periodistas de datos). «Cazadores de errores» pasa a ser una invitación pública permanente, no un requisito previo.
+3. **Medición sin rastrear personas.** Cloudflare Web Analytics (sin cookies) + rutas cortas por canal (`/v/bar`, `/v/campus`, `/v/tiktok`, `/v/prensa`…). Cada QR físico apunta a su ruta. Nada de datos de usuario en la URL.
+4. **Kit de prensa de una página**: qué es, método, limitaciones, 3 ganchos, contacto. Las redacciones cierran ahora sus especiales electorales: hay que estar en ellos.
+5. **Imprenta**: posavasos y pegatinas encargados el 19 oct (entrega en 5–7 días). Sin nombres ni logos de partidos en ninguna pieza física.
 
-## Fase 1 · «Adivina quién votó» digital (27 oct – 16 nov)
+### Fase 1 · Precampaña «Adivina quién votó» (19 oct – 12 nov)
 
-- **Vídeo corto (TikTok / Reels / Shorts)**, 3 formatos fijos, 1 vídeo/día:
-  - *Calle*: «¿Quién crees que votó en contra de subir el impuesto a la banca?» → respuesta → revelación en pantalla con el enlace oficial.
-  - *Reacciono a mi podio*: alguien juega 10 preguntas y reacciona a su resultado.
-  - *Abuela/o vs nieta/o*: dos generaciones, mismo test, comparan podios.
-- **Launch en comunidades de datos abiertos**: Menéame y r/spain con un post honesto («334 votaciones reales del Congreso convertidas en un test; código y datos abiertos; buscad errores»). La invitación a encontrar errores es el gancho para estas audiencias.
-- **Periodistas de datos** (Civio, Maldita, Newtral, secciones de datos de medios nacionales y regionales): pitch con un gancho regional distinto para cada medio (Tajo-Segura → prensa murciana y manchega).
-- **Respuesta factual a políticos**, solo desde la cuenta oficial del proyecto: cuando un partido presume o ataca sobre un tema que está en el test, responder con «Así votó cada partido: [enlace]». Sin opinión, sin adjetivos.
+- **20 oct, lanzamiento digital**: Menéame y r/spain con un post honesto («la legislatura se ha cerrado: estas son sus votaciones convertidas en un test; datos abiertos; buscad errores»).
+- **Vídeo corto** (TikTok / Reels / Shorts), un vídeo al día, tres formatos: *Calle* («¿quién crees que votó…?» → revelación), *Reacciono a mi podio* y *Abuela/o vs nieta/o*.
+- **Periodistas de datos y especiales electorales**: un gancho regional distinto para cada medio (Tajo-Segura → prensa murciana y manchega).
+- **Reto a los 12 partidos** (carta el 20 oct, plazo hasta el 6 nov, tabla pública el 9 nov): pedimos a un candidato de cada uno que haga el test *sin mirar* y publique su podio. Se publica antes de la campaña, cuando los equipos todavía contestan.
+- **Calle desde el 26 oct** (en cuanto llegue la imprenta): posavasos en bares con permiso, pegatinas en tablones de campus y bibliotecas, mesa «Juega 5 preguntas» en campus y mercados.
 
-## Fase 2 · Calle (17 nov – 14 dic)
+### Fase 2 · Campaña «Dijeron / Votaron» (13–23 nov)
 
-- **Posavasos de bar** (con permiso del bar): cara A «¿Discusión política en la barra? Resolvedla con datos.»; cara B una pregunta de la tabla + QR a `/v/bar`. ~5.000 uds ≈ 150 €.
-- **Pegatinas «Adivina quién»**: una pregunta + QR, solo en tablones de libre uso, campus (vía asociaciones de estudiantes), bibliotecas y comercios que lo permitan. Nunca en mobiliario urbano ni propiedad ajena sin permiso (multas por ordenanza y mala imagen).
-- **Mesa «Juega 5 preguntas»** en campus, mercados y ferias (con permiso): tablet, 5 preguntas, la persona se lleva su podio en el móvil. Foto del podio solo si quiere.
-- **Reto a los 12 partidos**: carta pública a cada partido: «¿Coinciden vuestros diputados con lo que votó vuestro grupo?» Pedimos a un candidato de cada uno que haga el test *sin mirar* y publique su podio. Tabla pública de quién aceptó y quién no (factual, sin adjetivos). Noticia garantizada y neutral por diseño.
+La campaña es la temporada alta de promesas: es el momento del mensaje central.
 
-## Fase 3 · «Kit anti-cuñado» navideño (15 dic – 6 ene)
+- **Promesa de mitin → votación en ≤ 24 h.** Cuando un partido promete algo sobre un tema del test, se publica la ficha «Dijeron / Votaron» con su votación oficial. Se aplica el filtro de señal y la regla de publicar por parejas de bloques.
+- **Debates de televisión**: hilo en directo con las votaciones de cada tema que salga («dicen esto; votaron esto»).
+- **Calle los fines de semana** (14–15 y 21–22 nov): mesas en mercados y ferias, con permiso.
+- **Respuesta factual a políticos**, solo desde la cuenta oficial del proyecto, sin opinión ni adjetivos.
 
-La cena de Navidad es la mayor discusión política del año. Pieza central: «Antes de discutir, juega 10 preguntas. Después, comparad podios.»
-- Tarjeta imprimible para la mesa (PDF) con 3 preguntas y QR.
-- Reel «Cómo ganar la discusión de Nochebuena con datos del Congreso».
-- Producto (opcional, si da tiempo): **modo duelo**, comparar mi enlace de respuestas con el de otra persona («coincidimos en un 64 %»).
+### Fase 3 · Recta final (24–27 nov)
 
-## Después: aprovechar la actualidad
+- **Kit para el grupo familiar de WhatsApp**: «Antes de votar, 10 preguntas. Después, comparad podios.» Una imagen + un enlace, pensada para reenviar el fin de semana anterior.
+- **Del 24 al 28 nov está prohibido publicar sondeos.** El test no es una encuesta, pero no se publica nada que lo parezca: nunca datos agregados del tipo «el X % de los usuarios coincide con…» (de todos modos no los recogemos).
 
-Cada votación sonada del Congreso se publica en el modo infinito en ≤ 48 h y sale como gancho («Esta semana se votó X. ¿Quién crees que votó a favor?»). Antes de las generales (como tarde, ago–sep 2027) se repite la campaña a mayor escala con la revisión humana ya cerrada.
+### Reflexión y votación (28–29 nov)
+
+Ni piezas nuevas, ni calle, ni respuestas a políticos. La web sigue abierta (es información, no propaganda), pero no se promociona. El 29, nada cerca de los colegios electorales.
+
+### Después (30 nov – 23 dic): «Guardamos sus promesas»
+
+Las nuevas Cortes se constituyen el 23 de diciembre. Durante la campaña se archivan las promesas con fecha y fuente (programas, mítines y debates) para compararlas con lo que voten en la nueva legislatura. Así la campaña se convierte en un seguimiento continuo: «Lo prometieron el 18 de noviembre. Así lo votaron.»
 
 ## Líneas rojas
 
@@ -156,11 +174,11 @@ Cada votación sonada del Congreso se publica en el modo infinito en ≤ 48 h y 
 - Cada dato con su enlace oficial; si hay un error, se corrige en público.
 - «Para explorar, no como veredicto»: nunca decir «tu partido es X».
 - Sin pegar en propiedad ajena ni mobiliario urbano.
-- Elecciones convocadas: revisar con la normativa electoral (LOREG) antes de cada acción en periodo de campaña.
+- Ley electoral (LOREG): neutralidad total, sin pedir el voto para nadie; nada que parezca un sondeo del 24 al 28 nov; pausa el 28 y el 29. Antes de la Fase 2 conviene una consulta rápida con alguien experto en derecho electoral (esto no es asesoría legal).
 
 ## Métricas (DoD de la campaña)
 
-| KPI | Cómo se mide | Objetivo a 6 semanas |
+| KPI | Cómo se mide | Objetivo al 29N |
 |---|---|---|
 | Visitas por canal | Rutas cortas `/v/*` + analítica sin cookies | 25.000 |
 | Canal ganador | Visitas por ruta / coste | identificar 2 canales a doblar |
@@ -175,5 +193,5 @@ Cada votación sonada del Congreso se publica en el modo infinito en ≤ 48 h y 
 | 5.000 posavasos | ~150 € |
 | 1.000 pegatinas | ~60 € |
 | Roll-up para la mesa | ~60 € |
-| Tarjetas Navidad (impresión casera / PDF) | 0 € |
+| Kit de WhatsApp (imagen + enlace) | 0 € |
 | **Total** | **~270 €** |
