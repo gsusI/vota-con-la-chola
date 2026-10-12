@@ -8,7 +8,7 @@ async function loadCatalog() {
     __dirname,
     "..",
     "ui",
-    "gh-pages-next",
+    "site",
     "app",
     "siteCatalog.mjs",
   );

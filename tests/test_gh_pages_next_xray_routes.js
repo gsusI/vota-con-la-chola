@@ -10,7 +10,7 @@ async function loadKinds() {
   const filePath = path.join(
     ROOT,
     "ui",
-    "gh-pages-next",
+    "site",
     "app",
     "people",
     "xray",
@@ -20,7 +20,7 @@ async function loadKinds() {
 }
 
 test("people xray hub route exists", () => {
-  const filePath = path.join(ROOT, "ui", "gh-pages-next", "app", "people", "xray", "page.js");
+  const filePath = path.join(ROOT, "ui", "site", "app", "people", "xray", "page.js");
   assert.equal(fs.existsSync(filePath), true);
 });
 
@@ -45,7 +45,7 @@ test("xray kind metadata and links stay aligned", async () => {
 
 test("people xray public data is split below Cloudflare Pages file limit", async () => {
   const kinds = await loadKinds();
-  const dataDir = path.join(ROOT, "ui", "gh-pages-next", "public", "people", "data");
+  const dataDir = path.join(ROOT, "ui", "site", "public", "people", "data");
   const maxCloudflarePagesBytes = 25 * 1024 * 1024;
   const manifestPath = path.join(dataDir, "xray.json");
 

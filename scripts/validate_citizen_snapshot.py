@@ -30,7 +30,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--path",
         required=True,
-        help="Ruta al citizen.json (p.ej. ui/gh-pages-next/public/citizen/data/citizen.json)",
+        help="Ruta al citizen.json (p.ej. ui/site/public/citizen/data/citizen.json)",
     )
     parser.add_argument(
         "--max-bytes",

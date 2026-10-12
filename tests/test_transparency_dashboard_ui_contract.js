@@ -10,8 +10,8 @@ function readRepoFile(relativePath) {
 }
 
 test("transparency dashboard renders all traced metrics and real releases", () => {
-  const page = readRepoFile("ui/gh-pages-next/app/transparency/page.js");
-  const feed = JSON.parse(readRepoFile("ui/gh-pages-next/public/transparency/data/transparency.json"));
+  const page = readRepoFile("ui/site/app/transparency/page.js");
+  const feed = JSON.parse(readRepoFile("ui/site/public/transparency/data/transparency.json"));
 
   assert.ok(feed.metrics.length > 0);
   assert.ok(feed.recent_changes.length > 0);
@@ -23,9 +23,9 @@ test("transparency dashboard renders all traced metrics and real releases", () =
 });
 
 test("transparency route exposes snapshot, freshness, obstruction and release-note flow", () => {
-  const page = readRepoFile("ui/gh-pages-next/app/transparency/page.js");
-  const home = readRepoFile("ui/gh-pages-next/app/page.js");
-  const catalog = readRepoFile("ui/gh-pages-next/app/siteCatalog.mjs");
+  const page = readRepoFile("ui/site/app/transparency/page.js");
+  const home = readRepoFile("ui/site/app/page.js");
+  const catalog = readRepoFile("ui/site/app/siteCatalog.mjs");
   const routeAudit = readRepoFile("scripts/audit_public_routes.js");
 
   assert.match(page, /Último snapshot público/);
@@ -39,8 +39,8 @@ test("transparency route exposes snapshot, freshness, obstruction and release-no
 });
 
 test("transparency dashboard has semantic selectors and motion-safe layout feedback", () => {
-  const page = readRepoFile("ui/gh-pages-next/app/transparency/page.js");
-  const styles = readRepoFile("ui/gh-pages-next/app/transparency/transparency.module.css");
+  const page = readRepoFile("ui/site/app/transparency/page.js");
+  const styles = readRepoFile("ui/site/app/transparency/transparency.module.css");
 
   assert.match(page, /transparency-dashboard-page/);
   assert.match(page, /transparency-metric-card__source/);

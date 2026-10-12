@@ -49,9 +49,9 @@ from etl.politicos_es.config import BASE_HEADERS  # noqa: E402
 
 SEED_SCHEMA_VERSION = "voting_aid_motion_texts_v1"
 DEFAULT_SEED = BASE_DIR / "etl/data/seeds/voting_aid_motion_texts_v1.json"
-DEFAULT_POOL = BASE_DIR / "ui/gh-pages-next/public/citizen/data/voting_aid_pool_v1.json"
-DEFAULT_SNAPSHOT = BASE_DIR / "ui/gh-pages-next/public/citizen/data/voting_aid_generales_v1.json"
-DEFAULT_HIGHLIGHTS = BASE_DIR / "ui/gh-pages-next/public/citizen/data/voting_aid_highlights_v1.json"
+DEFAULT_POOL = BASE_DIR / "ui/site/public/citizen/data/voting_aid_pool_v1.json"
+DEFAULT_SNAPSHOT = BASE_DIR / "ui/site/public/citizen/data/voting_aid_generales_v1.json"
+DEFAULT_HIGHLIGHTS = BASE_DIR / "ui/site/public/citizen/data/voting_aid_highlights_v1.json"
 DEFAULT_CACHE = BASE_DIR / "etl/data/raw/voting_aid_texts"
 CONGRESO = "https://www.congreso.es"
 SEARCH_URL = (

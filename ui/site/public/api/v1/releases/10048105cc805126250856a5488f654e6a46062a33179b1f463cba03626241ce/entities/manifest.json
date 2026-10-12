@@ -1,0 +1,59 @@
+{
+  "api_release_id": "10048105cc805126250856a5488f654e6a46062a33179b1f463cba03626241ce",
+  "api_version": "v1",
+  "collection": "entities",
+  "first": "/api/v1/releases/10048105cc805126250856a5488f654e6a46062a33179b1f463cba03626241ce/entities/pages/00000001-a11adb441a05396702e015d87746865504e238082d013958f4985598e412201c.json",
+  "item_count": 1147,
+  "page_count": 5,
+  "page_size": 250,
+  "pages": [
+    {
+      "bytes": 246765,
+      "first_key": "actor:institution_id:8163",
+      "href": "/api/v1/releases/10048105cc805126250856a5488f654e6a46062a33179b1f463cba03626241ce/entities/pages/00000001-a11adb441a05396702e015d87746865504e238082d013958f4985598e412201c.json",
+      "item_count": 250,
+      "last_key": "actor:person_id:259",
+      "page_number": 1,
+      "sha256": "a11adb441a05396702e015d87746865504e238082d013958f4985598e412201c"
+    },
+    {
+      "bytes": 246233,
+      "first_key": "actor:person_id:26",
+      "href": "/api/v1/releases/10048105cc805126250856a5488f654e6a46062a33179b1f463cba03626241ce/entities/pages/00000002-7b777de108f31d50af963c8fb977cec8537a4785f5a2b36076f52f7a4c526a0f.json",
+      "item_count": 250,
+      "last_key": "actor:person_id:550",
+      "page_number": 2,
+      "sha256": "7b777de108f31d50af963c8fb977cec8537a4785f5a2b36076f52f7a4c526a0f"
+    },
+    {
+      "bytes": 247419,
+      "first_key": "actor:person_id:551",
+      "href": "/api/v1/releases/10048105cc805126250856a5488f654e6a46062a33179b1f463cba03626241ce/entities/pages/00000003-db860cb3ec63c59646bd04c6578d3263f33be05a5c7ccd104b0ed9bb1e855105.json",
+      "item_count": 250,
+      "last_key": "actor:person_id:70557",
+      "page_number": 3,
+      "sha256": "db860cb3ec63c59646bd04c6578d3263f33be05a5c7ccd104b0ed9bb1e855105"
+    },
+    {
+      "bytes": 269655,
+      "first_key": "actor:person_id:70558",
+      "href": "/api/v1/releases/10048105cc805126250856a5488f654e6a46062a33179b1f463cba03626241ce/entities/pages/00000004-ee361c40c1c798f0d01521b0b3b810a7691e05a874e52e6c95dabb8d1aa5698d.json",
+      "item_count": 250,
+      "last_key": "issue:parl-initiative:senado:leg14:exp:610/000091",
+      "page_number": 4,
+      "sha256": "ee361c40c1c798f0d01521b0b3b810a7691e05a874e52e6c95dabb8d1aa5698d"
+    },
+    {
+      "bytes": 191959,
+      "first_key": "issue:parl-initiative:senado:leg14:exp:610/000092",
+      "href": "/api/v1/releases/10048105cc805126250856a5488f654e6a46062a33179b1f463cba03626241ce/entities/pages/00000005-190ac1322d2d16237ff5f3f4752a80ddab4deaafa3b7579b3305afa12efa67e1.json",
+      "item_count": 147,
+      "last_key": "issue:policy-event:boe:boe_api_legal:BOE-A-2026-3290",
+      "page_number": 5,
+      "sha256": "190ac1322d2d16237ff5f3f4752a80ddab4deaafa3b7579b3305afa12efa67e1"
+    }
+  ],
+  "pagination": "opaque seek cursor; follow page_info.next",
+  "schema_version": "evidence_api_collection_manifest_v1",
+  "sort": "id ascending, Unicode code-point order"
+}

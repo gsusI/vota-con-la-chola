@@ -27,7 +27,7 @@ MANIFEST_PATH = REPO_ROOT / (
 MANIFEST_SHA256 = "b8d8bde43f8e788f465ad980cea2c6803822a2ea71584ff7390d7fed6078ddbc"
 DEFAULT_DB = REPO_ROOT / "etl/data/staging/indicators-eurostat-gdp-mvp.db"
 DEFAULT_PUBLISHED = REPO_ROOT / "etl/data/published/indicators-eurostat-gdp-es.json"
-DEFAULT_PUBLIC = REPO_ROOT / "ui/gh-pages-next/public/indicators/data/eurostat-gdp-es.json"
+DEFAULT_PUBLIC = REPO_ROOT / "ui/site/public/indicators/data/eurostat-gdp-es.json"
 DEFAULT_REPORT = REPO_ROOT / (
     "docs/etl/sprints/INDICATORS-20260820/evidence/"
     "eurostat-gdp-validation.json"

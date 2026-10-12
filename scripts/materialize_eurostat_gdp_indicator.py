@@ -58,7 +58,7 @@ DEFAULT_SCHEMA = REPO_ROOT / "etl/load/sqlite_schema.sql"
 DEFAULT_OUT_DB = REPO_ROOT / "etl/data/staging/indicators-eurostat-gdp-mvp.db"
 DEFAULT_PUBLISHED = REPO_ROOT / "etl/data/published/indicators-eurostat-gdp-es.json"
 DEFAULT_PUBLIC = (
-    REPO_ROOT / "ui/gh-pages-next/public/indicators/data/eurostat-gdp-es.json"
+    REPO_ROOT / "ui/site/public/indicators/data/eurostat-gdp-es.json"
 )
 DEFAULT_REPORT = (
     REPO_ROOT

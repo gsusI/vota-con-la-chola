@@ -32,22 +32,22 @@ from publicdata_core.util import now_utc_iso, sha256_bytes
 
 
 DEFAULT_DB = Path("etl/data/staging/politicos-es.db")
-DEFAULT_OUT = Path("ui/gh-pages-next/public/elecciones/andalucia-2026/data/accountability.json")
+DEFAULT_OUT = Path("ui/site/public/elecciones/andalucia-2026/data/accountability.json")
 DEFAULT_PUBLISHED_OUT = Path("etl/data/published/andalucia-2026-accountability.json")
 DEFAULT_IMPACT_REVIEW_QUEUE_OUT = Path(
-    "ui/gh-pages-next/public/elecciones/andalucia-2026/data/boja-impact-review-queue.csv"
+    "ui/site/public/elecciones/andalucia-2026/data/boja-impact-review-queue.csv"
 )
 DEFAULT_PUBLISHED_IMPACT_REVIEW_QUEUE_OUT = Path(
     "etl/data/published/andalucia-2026-boja-impact-review-queue.csv"
 )
 DEFAULT_PARLIAMENT_VOTE_REVIEW_QUEUE_OUT = Path(
-    "ui/gh-pages-next/public/elecciones/andalucia-2026/data/parliament-vote-impact-review-queue.csv"
+    "ui/site/public/elecciones/andalucia-2026/data/parliament-vote-impact-review-queue.csv"
 )
 DEFAULT_PUBLISHED_PARLIAMENT_VOTE_REVIEW_QUEUE_OUT = Path(
     "etl/data/published/andalucia-2026-parliament-vote-impact-review-queue.csv"
 )
 DEFAULT_EXECUTION_EVIDENCE_QUEUE_OUT = Path(
-    "ui/gh-pages-next/public/elecciones/andalucia-2026/data/execution-evidence-queue.csv"
+    "ui/site/public/elecciones/andalucia-2026/data/execution-evidence-queue.csv"
 )
 DEFAULT_PUBLISHED_EXECUTION_EVIDENCE_QUEUE_OUT = Path(
     "etl/data/published/andalucia-2026-execution-evidence-queue.csv"
@@ -63,7 +63,7 @@ DEFAULT_BOJA_IMPACT_REVIEWS = Path("etl/data/seeds/andalucia_2026_boja_impact_re
 DEFAULT_PARLIAMENT_VOTE_REVIEWS = Path("etl/data/seeds/andalucia_2026_parliament_vote_reviews.json")
 DEFAULT_ISSUE_REVIEWS = Path("etl/data/seeds/andalucia_2026_issue_reviews.json")
 DEFAULT_EXECUTION_EVIDENCE_REVIEWS = Path("etl/data/seeds/andalucia_2026_execution_evidence_reviews.json")
-DEFAULT_ACCOUNTABILITY_EVIDENCE_API = Path("ui/gh-pages-next/public/accountability-evidence/data/evidence-api.json")
+DEFAULT_ACCOUNTABILITY_EVIDENCE_API = Path("ui/site/public/accountability-evidence/data/evidence-api.json")
 PUBLIC_PARLIAMENT_VOTE_EVENTS_LIMIT = 80
 PUBLIC_PARLIAMENT_VOTE_REVIEW_QUEUE_LIMIT = 120
 PUBLIC_PARLIAMENT_VOTE_REVIEW_QUEUE_TOPIC_LIMIT = 8

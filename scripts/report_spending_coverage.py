@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def report(db, release_path, catalog_path):
     release = json.loads(release_path.read_text())
-    public = ROOT / 'ui/gh-pages-next/public/spending/launch' / release['release']
+    public = ROOT / 'ui/site/public/spending/launch' / release['release']
     audit = json.loads((public / 'audit.json').read_text())
     catalog = json.loads(catalog_path.read_text())
     with sqlite3.connect(db.resolve().as_uri() + '?mode=ro', uri=True) as c:

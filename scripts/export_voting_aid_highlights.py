@@ -36,9 +36,9 @@ from etl.politicos_es.http import http_get_bytes  # noqa: E402
 from scripts.export_voting_aid_pool import theme_for  # noqa: E402
 from scripts import voting_aid_motion_texts as motions  # noqa: E402
 
-DEFAULT_SNAPSHOT = BASE_DIR / "ui/gh-pages-next/public/citizen/data/voting_aid_generales_v1.json"
-DEFAULT_POOL = BASE_DIR / "ui/gh-pages-next/public/citizen/data/voting_aid_pool_v1.json"
-DEFAULT_OUT = BASE_DIR / "ui/gh-pages-next/public/citizen/data/voting_aid_highlights_v1.json"
+DEFAULT_SNAPSHOT = BASE_DIR / "ui/site/public/citizen/data/voting_aid_generales_v1.json"
+DEFAULT_POOL = BASE_DIR / "ui/site/public/citizen/data/voting_aid_pool_v1.json"
+DEFAULT_OUT = BASE_DIR / "ui/site/public/citizen/data/voting_aid_highlights_v1.json"
 DEFAULT_CACHE = BASE_DIR / "etl/data/raw/voting_aid_texts"
 DEFAULT_MOTION_SEED = motions.DEFAULT_SEED
 SCHEMA_VERSION = "voting_aid_highlights_v1"

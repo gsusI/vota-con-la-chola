@@ -8,7 +8,7 @@ from scripts import voting_aid_motion_texts as mt
 
 REPO = Path(__file__).resolve().parent.parent
 SEED = REPO / "etl/data/seeds/voting_aid_motion_texts_v1.json"
-HIGHLIGHTS = REPO / "ui/gh-pages-next/public/citizen/data/voting_aid_highlights_v1.json"
+HIGHLIGHTS = REPO / "ui/site/public/citizen/data/voting_aid_highlights_v1.json"
 
 INITIATIVE_HTML = """
 <h3>Boletines</h3><ul class="boletines">

@@ -25,7 +25,7 @@ if str(REPO_ROOT) not in sys.path:
 
 from publicdata_core.storage import try_clone  # noqa: E402
 
-DEFAULT_ROOTS = ("etl/data", "ui/gh-pages-next")
+DEFAULT_ROOTS = ("etl/data", "ui/site")
 SKIP_DIR_NAMES = {".git", "node_modules", "__pycache__"}
 
 

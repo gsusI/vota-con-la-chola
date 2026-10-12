@@ -250,7 +250,7 @@ def main() -> int:
         Path("etl/data/raw"),
         Path("etl/data/derived"),
         Path("etl/data/published"),
-        Path("ui/gh-pages-next/public"),
+        Path("ui/site/public"),
     ]
     files_scanned, findings = scan_paths(artifact_paths)
     for db_path in db_paths:

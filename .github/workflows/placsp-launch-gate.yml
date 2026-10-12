@@ -9,7 +9,7 @@ on:
       - 'scripts/*placsp_launch*.py'
       - 'tests/test_placsp_launch.py'
       - 'docs/examples/placsp-launch/**'
-      - 'ui/gh-pages-next/public/spending/launch/**'
+      - 'ui/site/public/spending/launch/**'
   pull_request:
     paths:
       - '.gitattributes'
@@ -17,7 +17,7 @@ on:
       - 'scripts/*placsp_launch*.py'
       - 'tests/test_placsp_launch.py'
       - 'docs/examples/placsp-launch/**'
-      - 'ui/gh-pages-next/public/spending/launch/**'
+      - 'ui/site/public/spending/launch/**'
   workflow_dispatch:
 
 permissions:
@@ -38,4 +38,4 @@ jobs:
           python3 -m unittest tests.test_placsp_launch -v
       - name: Check public launch privacy
         run: |
-          python3 scripts/check_public_privacy_leaks.py --path ui/gh-pages-next/public/spending/launch --path docs/examples/placsp-launch
+          python3 scripts/check_public_privacy_leaks.py --path ui/site/public/spending/launch --path docs/examples/placsp-launch

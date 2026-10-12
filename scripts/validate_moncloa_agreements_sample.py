@@ -14,7 +14,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SOURCE_DB = REPO_ROOT / "etl/data/staging/moncloa-aiops04-matrix-20260216.db"
 DEFAULT_DB = REPO_ROOT / "etl/data/staging/agreements-moncloa-mvp.db"
 DEFAULT_PUBLISHED = REPO_ROOT / "etl/data/published/agreements-moncloa-sample.json"
-DEFAULT_PUBLIC = REPO_ROOT / "ui/gh-pages-next/public/agreements/data/moncloa-sample.json"
+DEFAULT_PUBLIC = REPO_ROOT / "ui/site/public/agreements/data/moncloa-sample.json"
 DEFAULT_REPORT = (
     REPO_ROOT
     / "docs/etl/sprints/AGREEMENTS-20260819/evidence/moncloa-agreements-validation.json"

@@ -9,7 +9,7 @@ from pathlib import Path
 from scripts import export_voting_aid_pool as pool
 
 REPO = Path(__file__).resolve().parent.parent
-PUBLISHED = REPO / "ui/gh-pages-next/public/citizen/data/voting_aid_pool_v1.json"
+PUBLISHED = REPO / "ui/site/public/citizen/data/voting_aid_pool_v1.json"
 PARTY_NAMES = re.compile(r"Grupo Parlamentario|Socialista|Popular en el|\bVOX\b|SUMAR|Junts|Republicano|Bildu|EAJ-PNV|Sra?\. [A-ZÁÉÍÓÚ]")
 
 

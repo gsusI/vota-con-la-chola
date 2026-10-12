@@ -13,7 +13,7 @@ from typing import Any
 from urllib.parse import quote
 
 
-DEFAULT_SOURCE_JSON = Path("ui/gh-pages-next/public/explorer-votaciones/data/votes-preview.json")
+DEFAULT_SOURCE_JSON = Path("ui/site/public/explorer-votaciones/data/votes-preview.json")
 DEFAULT_SITE_ORIGIN = "https://gsusI.github.io"
 DEFAULT_SITE_BASE_PATH = "/vota-con-la-chola"
 

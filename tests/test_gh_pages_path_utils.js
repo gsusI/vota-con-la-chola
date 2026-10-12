@@ -5,7 +5,7 @@ const path = require("node:path");
 const { pathToFileURL } = require("node:url");
 
 async function loadPathUtils() {
-  const filePath = path.join(__dirname, "..", "ui", "gh-pages-next", "app", "path-utils.mjs");
+  const filePath = path.join(__dirname, "..", "ui", "site", "app", "path-utils.mjs");
   return import(pathToFileURL(filePath).href);
 }
 
@@ -65,7 +65,7 @@ test("static route pages read published legacy data without iframe shells", () =
   };
 
   for (const [routeFile, expectedDataPath] of Object.entries(expectedRoutes)) {
-    const filePath = path.join(__dirname, "..", "ui", "gh-pages-next", "app", routeFile);
+    const filePath = path.join(__dirname, "..", "ui", "site", "app", routeFile);
     const source = fs.readFileSync(filePath, "utf8");
     assert.match(source, new RegExp(`readPublicJson\\("${expectedDataPath}"`));
     assert.doesNotMatch(source, /LegacyFrame|legacyPath|<iframe/u);

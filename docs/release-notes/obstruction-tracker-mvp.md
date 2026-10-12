@@ -72,7 +72,7 @@ Evidence:
 - `docs/etl/sprints/OBSTRUCTION-TRACKER-20260819/evidence/obstruction-tracker-validation.json`;
 - `docs/etl/sprints/OBSTRUCTION-TRACKER-20260819/evidence/local-route-audit.json`;
 - `docs/etl/sprints/OBSTRUCTION-TRACKER-20260819/evidence/live-route-audit.json`;
-- `ui/gh-pages-next/public/obstruction-tracker/evidence/manifest.json`.
+- `ui/site/public/obstruction-tracker/evidence/manifest.json`.
 
 ## Where we are going
 

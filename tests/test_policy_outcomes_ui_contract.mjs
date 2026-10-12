@@ -9,21 +9,21 @@ import {
   CURRENT_POLICY_OUTCOMES_MANIFEST_SHA256,
   resolvePolicyOutcomesEvidenceAssetPath,
   validatePolicyOutcomesPackage,
-} from "../ui/gh-pages-next/app/policy-outcomes/status-contract.mjs";
+} from "../ui/site/app/policy-outcomes/status-contract.mjs";
 import {
   POLICY_OUTCOMES_RUNTIME_STATUS_PATH,
   verifyPolicyOutcomesRuntimePackage,
-} from "../ui/gh-pages-next/app/policy-outcomes/runtime-verification.mjs";
+} from "../ui/site/app/policy-outcomes/runtime-verification.mjs";
 
 
 const TEST_DIR = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(TEST_DIR, "..");
-const PUBLIC_ROOT = path.join(REPO_ROOT, "ui/gh-pages-next/public");
+const PUBLIC_ROOT = path.join(REPO_ROOT, "ui/site/public");
 const STATUS_PATH = path.join(PUBLIC_ROOT, "policy-outcomes/data/policy-outcomes.json");
-const PAGE_SOURCE_PATH = path.join(REPO_ROOT, "ui/gh-pages-next/app/policy-outcomes/page.js");
+const PAGE_SOURCE_PATH = path.join(REPO_ROOT, "ui/site/app/policy-outcomes/page.js");
 const RUNTIME_GATE_SOURCE_PATH = path.join(
   REPO_ROOT,
-  "ui/gh-pages-next/app/policy-outcomes/PolicyOutcomesRuntimeGate.js",
+  "ui/site/app/policy-outcomes/PolicyOutcomesRuntimeGate.js",
 );
 const ROUTE_AUDITOR_PATH = path.join(REPO_ROOT, "scripts/audit_public_routes.js");
 

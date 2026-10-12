@@ -16,14 +16,14 @@ DEFAULT_SEED = ROOT / "etl/data/seeds/andalucia_2026_water_commitments.json"
 DEFAULT_OUT = ROOT / "etl/data/published/andalucia-2026-water-commitment-receipt.json"
 DEFAULT_PUBLIC_OUT = (
     ROOT
-    / "ui/gh-pages-next/public/elecciones/andalucia-2026/data/water-receipt.json"
+    / "ui/site/public/elecciones/andalucia-2026/data/water-receipt.json"
 )
 DEFAULT_ARCHIVE_DIR = (
     ROOT / "etl/data/published/andalucia-water-receipt/snapshots"
 )
 DEFAULT_PUBLIC_ARCHIVE_DIR = (
     ROOT
-    / "ui/gh-pages-next/public/elecciones/andalucia-2026/data/water-receipt/snapshots"
+    / "ui/site/public/elecciones/andalucia-2026/data/water-receipt/snapshots"
 )
 
 ALLOWED_STATUSES = {

@@ -5,7 +5,7 @@ const path = require("node:path");
 const { pathToFileURL } = require("node:url");
 
 const ROOT = path.join(__dirname, "..");
-const APP_ROOT = path.join(ROOT, "ui", "gh-pages-next", "app");
+const APP_ROOT = path.join(ROOT, "ui", "site", "app");
 
 test("Evidence API Q&A route helper builds stable shareable paths", async () => {
   const utilsPath = path.join(APP_ROOT, "accountability-evidence", "evidence-utils.mjs");

@@ -34,7 +34,7 @@ class RealDocumentSourceUniverseTests(unittest.TestCase):
                 "--obstruction-snapshot",
                 str(
                     REPO_ROOT
-                    / "ui/gh-pages-next/public/obstruction-tracker/data/obstructions.json"
+                    / "ui/site/public/obstruction-tracker/data/obstructions.json"
                 ),
             ]
             subprocess.run(

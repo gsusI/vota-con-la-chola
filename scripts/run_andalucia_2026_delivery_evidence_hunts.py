@@ -41,7 +41,7 @@ from publicdata_core.util import now_utc_iso  # noqa: E402
 
 DEFAULT_SNAPSHOT = Path("etl/data/published/andalucia-2026-accountability.json")
 DEFAULT_OUT = Path("etl/data/published/andalucia-2026-delivery-evidence-hunt-results.json")
-DEFAULT_PUBLIC_OUT = Path("ui/gh-pages-next/public/elecciones/andalucia-2026/data/delivery-evidence-hunt-results.json")
+DEFAULT_PUBLIC_OUT = Path("ui/site/public/elecciones/andalucia-2026/data/delivery-evidence-hunt-results.json")
 DEFAULT_MAX_TARGETS = 40
 DEFAULT_ROWS_PER_QUERY = 3
 DEFAULT_TIMEOUT = 12

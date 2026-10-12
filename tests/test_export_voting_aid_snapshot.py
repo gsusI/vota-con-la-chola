@@ -10,7 +10,7 @@ from scripts import export_voting_aid_review_sheet as review_sheet
 from scripts import export_voting_aid_snapshot as va
 
 REPO = Path(__file__).resolve().parent.parent
-PUBLISHED = REPO / "ui/gh-pages-next/public/citizen/data/voting_aid_generales_v1.json"
+PUBLISHED = REPO / "ui/site/public/citizen/data/voting_aid_generales_v1.json"
 
 
 def _seed(**overrides):

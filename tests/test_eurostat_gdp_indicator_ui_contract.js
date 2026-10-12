@@ -10,9 +10,9 @@ function readRepoFile(relativePath) {
 }
 
 test("indicator route exposes the complete bounded real Eurostat slice", () => {
-  const page = readRepoFile("ui/gh-pages-next/app/indicators/page.js");
+  const page = readRepoFile("ui/site/app/indicators/page.js");
   const feed = JSON.parse(
-    readRepoFile("ui/gh-pages-next/public/indicators/data/eurostat-gdp-es.json"),
+    readRepoFile("ui/site/public/indicators/data/eurostat-gdp-es.json"),
   );
 
   assert.equal(feed.policy.real_data_only, true);
@@ -31,10 +31,10 @@ test("indicator route exposes the complete bounded real Eurostat slice", () => {
 });
 
 test("indicator route states revision and causal limits in reader-facing language", () => {
-  const page = readRepoFile("ui/gh-pages-next/app/indicators/page.js");
-  const home = readRepoFile("ui/gh-pages-next/app/page.js");
-  const catalog = readRepoFile("ui/gh-pages-next/app/siteCatalog.mjs");
-  const breadcrumbs = readRepoFile("ui/gh-pages-next/app/components/Breadcrumbs.js");
+  const page = readRepoFile("ui/site/app/indicators/page.js");
+  const home = readRepoFile("ui/site/app/page.js");
+  const catalog = readRepoFile("ui/site/app/siteCatalog.mjs");
+  const breadcrumbs = readRepoFile("ui/site/app/components/Breadcrumbs.js");
   const routeAudit = readRepoFile("scripts/audit_public_routes.js");
 
   assert.match(page, /Un indicador no reparte mérito ni culpa/);
@@ -50,8 +50,8 @@ test("indicator route states revision and causal limits in reader-facing languag
 });
 
 test("indicator UI has stable semantic classes and motion-safe layout changes", () => {
-  const page = readRepoFile("ui/gh-pages-next/app/indicators/page.js");
-  const styles = readRepoFile("ui/gh-pages-next/app/indicators/indicators.module.css");
+  const page = readRepoFile("ui/site/app/indicators/page.js");
+  const styles = readRepoFile("ui/site/app/indicators/indicators.module.css");
 
   assert.match(page, /indicators-page/);
   assert.match(page, /indicator-history__item/);

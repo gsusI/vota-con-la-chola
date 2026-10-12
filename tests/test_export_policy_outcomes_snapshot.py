@@ -28,10 +28,10 @@ SEMANTIC_SOURCE = (
     "22f43918a8a6e54a3a8549f2f809abfcf98c3d04ef82dc37f634cd0fd71a980a/"
     "outcome-context-candidates-v1.json"
 )
-PAGE_SOURCE = REPO_ROOT / "ui/gh-pages-next/app/policy-outcomes/page.js"
-PAGE_STYLES = REPO_ROOT / "ui/gh-pages-next/app/policy-outcomes/policy-outcomes.module.css"
+PAGE_SOURCE = REPO_ROOT / "ui/site/app/policy-outcomes/page.js"
+PAGE_STYLES = REPO_ROOT / "ui/site/app/policy-outcomes/policy-outcomes.module.css"
 CONTRACT_SOURCE = (
-    REPO_ROOT / "ui/gh-pages-next/app/policy-outcomes/status-contract.mjs"
+    REPO_ROOT / "ui/site/app/policy-outcomes/status-contract.mjs"
 )
 
 

@@ -7,7 +7,7 @@ from pathlib import Path
 from scripts import export_voting_aid_highlights as hl
 
 REPO = Path(__file__).resolve().parent.parent
-PUBLISHED = REPO / "ui/gh-pages-next/public/citizen/data/voting_aid_highlights_v1.json"
+PUBLISHED = REPO / "ui/site/public/citizen/data/voting_aid_highlights_v1.json"
 
 BOE_XML = """<?xml version="1.0" encoding="UTF-8"?>
 <documento><metadatos><identificador>BOE-A-2024-1</identificador></metadatos><texto>

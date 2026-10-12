@@ -12,11 +12,11 @@ PUBLISHED_ARTIFACT = (
     REPO_ROOT / "etl/data/published/promise-action-comparisons-v1.json"
 )
 PUBLIC_ARTIFACT = (
-    REPO_ROOT / "ui/gh-pages-next/public/comparisons/data/comparisons.json"
+    REPO_ROOT / "ui/site/public/comparisons/data/comparisons.json"
 )
-BUILT_PAGE = REPO_ROOT / "ui/gh-pages-next/out/comparisons/index.html"
+BUILT_PAGE = REPO_ROOT / "ui/site/out/comparisons/index.html"
 BUILT_ARTIFACT = (
-    REPO_ROOT / "ui/gh-pages-next/out/comparisons/data/comparisons.json"
+    REPO_ROOT / "ui/site/out/comparisons/data/comparisons.json"
 )
 EXPECTED_RELEASE = "vclc:comparison-release:ea65f3b8104dd678cb7ebce724b78f86"
 EXPECTED_SEMANTIC_SHA256 = (

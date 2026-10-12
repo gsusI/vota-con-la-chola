@@ -48,4 +48,4 @@ def verify(repo,prefix,ref):
     print(json.dumps({'git_bytes_verified':True,'files':len(manifest['files'])+2,'release':pointer['release']}))
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--repo',default='.');p.add_argument('--prefix',default='ui/gh-pages-next/public/spending/launch');p.add_argument('--ref',default='HEAD');a=p.parse_args();verify(a.repo,a.prefix,a.ref)
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--repo',default='.');p.add_argument('--prefix',default='ui/site/public/spending/launch');p.add_argument('--ref',default='HEAD');a=p.parse_args();verify(a.repo,a.prefix,a.ref)

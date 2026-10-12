@@ -10,9 +10,9 @@ function readRepoFile(relativePath) {
 }
 
 test("agreements route renders every real record without truncation", () => {
-  const page = readRepoFile("ui/gh-pages-next/app/agreements/page.js");
+  const page = readRepoFile("ui/site/app/agreements/page.js");
   const feed = JSON.parse(
-    readRepoFile("ui/gh-pages-next/public/agreements/data/moncloa-sample.json"),
+    readRepoFile("ui/site/public/agreements/data/moncloa-sample.json"),
   );
 
   assert.equal(feed.real_data_only, true);
@@ -27,9 +27,9 @@ test("agreements route renders every real record without truncation", () => {
 });
 
 test("agreements route exposes actors, exact evidence, and inference limits", () => {
-  const page = readRepoFile("ui/gh-pages-next/app/agreements/page.js");
-  const home = readRepoFile("ui/gh-pages-next/app/page.js");
-  const catalog = readRepoFile("ui/gh-pages-next/app/siteCatalog.mjs");
+  const page = readRepoFile("ui/site/app/agreements/page.js");
+  const home = readRepoFile("ui/site/app/page.js");
+  const catalog = readRepoFile("ui/site/app/siteCatalog.mjs");
   const routeAudit = readRepoFile("scripts/audit_public_routes.js");
 
   assert.match(page, /Reunión no significa influencia/);
@@ -44,9 +44,9 @@ test("agreements route exposes actors, exact evidence, and inference limits", ()
 });
 
 test("agreements UI has semantic selectors and motion-safe feedback", () => {
-  const page = readRepoFile("ui/gh-pages-next/app/agreements/page.js");
+  const page = readRepoFile("ui/site/app/agreements/page.js");
   const styles = readRepoFile(
-    "ui/gh-pages-next/app/agreements/agreements.module.css",
+    "ui/site/app/agreements/agreements.module.css",
   );
 
   assert.match(page, /agreements-page/);

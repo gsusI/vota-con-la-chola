@@ -4,7 +4,7 @@ const path = require("node:path");
 const test = require("node:test");
 
 const pageSource = fs.readFileSync(
-  path.join(__dirname, "..", "ui", "gh-pages-next", "app", "page.js"),
+  path.join(__dirname, "..", "ui", "site", "app", "page.js"),
   "utf8",
 );
 
@@ -61,7 +61,7 @@ test("homepage routes avoid legacy iframe shells", () => {
     "graph/page.js",
   ]) {
     const source = fs.readFileSync(
-      path.join(__dirname, "..", "ui", "gh-pages-next", "app", ...routeFile.split("/")),
+      path.join(__dirname, "..", "ui", "site", "app", ...routeFile.split("/")),
       "utf8",
     );
     assert.doesNotMatch(source, /LegacyFrame|legacyPath|<iframe/u);

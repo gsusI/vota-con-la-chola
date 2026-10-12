@@ -53,7 +53,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--expected-artifact",
         type=Path,
-        default=Path("ui/gh-pages-next/public/actor-graph/data/graph.json"),
+        default=Path("ui/site/public/actor-graph/data/graph.json"),
     )
     parser.add_argument("--timeout", type=float, default=30.0)
     parser.add_argument(

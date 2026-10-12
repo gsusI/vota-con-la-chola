@@ -14,7 +14,7 @@ spec=importlib.util.spec_from_file_location('reproduce',ROOT/'docs/examples/plac
 reproduce=importlib.util.module_from_spec(spec);spec.loader.exec_module(reproduce)
 build_spec=importlib.util.spec_from_file_location('build_placsp_launch',ROOT/'scripts/build_placsp_launch.py')
 build_launch=importlib.util.module_from_spec(build_spec);build_spec.loader.exec_module(build_launch)
-PUBLIC=ROOT/'ui/gh-pages-next/public/spending/launch'
+PUBLIC=ROOT/'ui/site/public/spending/launch'
 
 def public_bytes(root, release, name):
     compressed = release.get('file_encodings', {}).get(name) == 'gzip' or (release.get('compressed_xml') and name.endswith('.xml'))

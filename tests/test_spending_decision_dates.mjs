@@ -1,13 +1,13 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import zlib from 'node:zlib';
-import { normalizeDecisionDate, classifyDecisionDates } from '../ui/gh-pages-next/app/spending/decision-dates.mjs';
+import { normalizeDecisionDate, classifyDecisionDates } from '../ui/site/app/spending/decision-dates.mjs';
 const sample = (decision_date, extra={}) => ({decision_date,source_snapshot_date:'2025-06-30',...extra});
 assert.equal(normalizeDecisionDate(sample('0023-03-16')).decision_date,'2023-03-16');
 assert.equal(normalizeDecisionDate(sample('0099-01-01')).decision_date,'1999-01-01');
 assert.equal(normalizeDecisionDate(sample('2023-03-16')).decision_date,'2023-03-16');
 assert.equal(normalizeDecisionDate(sample('0204-12-03')).decision_date,'0204-12-03');
-const base='ui/gh-pages-next/public/spending/launch/';
+const base='ui/site/public/spending/launch/';
 const release=JSON.parse(fs.readFileSync(base+'latest.json'));
 const parts=release.file_parts?.['awards.json']||[{path:'awards.json.gz'}];
 const rows=JSON.parse(zlib.gunzipSync(Buffer.concat(parts.map(part=>fs.readFileSync(base+release.release+'/'+part.path)))));

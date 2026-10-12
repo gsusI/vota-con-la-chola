@@ -29,7 +29,7 @@ DEFAULT_PUBLISHED = (
     REPO_ROOT / "etl/data/published/promise-action-comparisons-v1.json"
 )
 DEFAULT_PUBLIC = (
-    REPO_ROOT / "ui/gh-pages-next/public/comparisons/data/comparisons.json"
+    REPO_ROOT / "ui/site/public/comparisons/data/comparisons.json"
 )
 DEFAULT_REPORT = (
     REPO_ROOT

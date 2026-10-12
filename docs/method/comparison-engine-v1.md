@@ -875,7 +875,7 @@ El piloto `C1` produce:
 - `etl/data/staging/promise-action-comparisons-v1.db`;
 - `etl/data/published/promise-action-comparisons-v1.json`;
 - copia byte-identica en
-  `ui/gh-pages-next/public/comparisons/data/comparisons.json`;
+  `ui/site/public/comparisons/data/comparisons.json`;
 - validation report con reconciliacion, IDs, hashes y gates;
 - este contrato y release note enlazados.
 

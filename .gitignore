@@ -22,7 +22,7 @@ outputs/**/build_*.mjs
 node_modules/
 tmp/
 docs/gh-pages/
-ui/gh-pages-next/.static-data/
+ui/site/.static-data/
 
 # Accidental command artifacts (created by mis-quoted CLI runs)
 # Prefer deleting new junk files and relying on repo-hygiene-check over growing this list.

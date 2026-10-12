@@ -16,7 +16,7 @@ from urllib.request import Request, urlopen
 
 
 DEFAULT_EXPECTED_ARTIFACT = Path(
-    "ui/gh-pages-next/public/comparisons/data/comparisons.json"
+    "ui/site/public/comparisons/data/comparisons.json"
 )
 DEFAULT_REPORT = Path(
     "docs/etl/sprints/COMPARISON-ENGINE-20260820/evidence/"

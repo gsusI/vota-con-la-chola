@@ -22,7 +22,7 @@ DEFAULT_SCHEMA = REPO_ROOT / "etl/load/sqlite_schema.sql"
 DEFAULT_OUT_DB = REPO_ROOT / "etl/data/staging/geopolitics-moncloa-mvp.db"
 DEFAULT_PUBLISHED = REPO_ROOT / "etl/data/published/geopolitics-moncloa-sample.json"
 DEFAULT_PUBLIC = (
-    REPO_ROOT / "ui/gh-pages-next/public/geopolitics/data/moncloa-sample.json"
+    REPO_ROOT / "ui/site/public/geopolitics/data/moncloa-sample.json"
 )
 DEFAULT_REPORT = (
     REPO_ROOT

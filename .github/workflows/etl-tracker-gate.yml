@@ -83,8 +83,8 @@ jobs:
           git diff --exit-code -- \
             etl/data/published/andalucia-2026-water-commitment-receipt.json \
             etl/data/published/andalucia-water-receipt/snapshots \
-            ui/gh-pages-next/public/elecciones/andalucia-2026/data/water-receipt.json \
-            ui/gh-pages-next/public/elecciones/andalucia-2026/data/water-receipt/snapshots
+            ui/site/public/elecciones/andalucia-2026/data/water-receipt.json \
+            ui/site/public/elecciones/andalucia-2026/data/water-receipt/snapshots
 
   repo-root-hygiene:
     runs-on: ubuntu-latest
@@ -106,7 +106,7 @@ jobs:
             -q
           python3 scripts/check_public_privacy_leaks.py \
             --path etl/data/published \
-            --path ui/gh-pages-next/public
+            --path ui/site/public
           # Committed docs/evidence must not carry workstation paths either
           # (fix with: python3 scripts/scrub_workstation_paths.py docs).
           # Repo-relative db_path values in internal evidence are allowed here.
@@ -213,7 +213,7 @@ jobs:
         run: |
           node scripts/report_citizen_preset_codec_parity.js \
             --source ui/citizen/preset_codec.js \
-            --published ui/gh-pages-next/public/legacy/citizen/preset_codec.js \
+            --published ui/site/public/legacy/citizen/preset_codec.js \
             --strict \
             --json-out citizen_preset_codec_parity_ci.json
 
@@ -221,7 +221,7 @@ jobs:
         run: |
           node scripts/report_citizen_preset_codec_sync_state.js \
             --source ui/citizen/preset_codec.js \
-            --published ui/gh-pages-next/public/legacy/citizen/preset_codec.js \
+            --published ui/site/public/legacy/citizen/preset_codec.js \
             --strict \
             --json-out citizen_preset_codec_sync_ci.json
 
@@ -230,7 +230,7 @@ jobs:
           node scripts/report_citizen_preset_contract_bundle.js \
             --fixture tests/fixtures/citizen_preset_hash_matrix.json \
             --source ui/citizen/preset_codec.js \
-            --published ui/gh-pages-next/public/legacy/citizen/preset_codec.js \
+            --published ui/site/public/legacy/citizen/preset_codec.js \
             --strict \
             --json-out citizen_preset_contract_bundle_ci.json
 

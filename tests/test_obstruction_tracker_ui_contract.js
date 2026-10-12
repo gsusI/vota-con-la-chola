@@ -10,8 +10,8 @@ function readRepoFile(relativePath) {
 }
 
 test("obstruction tracker renders every real blocked source and scale gap", () => {
-  const page = readRepoFile("ui/gh-pages-next/app/obstruction-tracker/page.js");
-  const feed = JSON.parse(readRepoFile("ui/gh-pages-next/public/obstruction-tracker/data/obstructions.json"));
+  const page = readRepoFile("ui/site/app/obstruction-tracker/page.js");
+  const feed = JSON.parse(readRepoFile("ui/site/public/obstruction-tracker/data/obstructions.json"));
 
   assert.ok(feed.blocked_sources.length > 0);
   assert.ok(feed.incidents.length > 0);
@@ -24,9 +24,9 @@ test("obstruction tracker renders every real blocked source and scale gap", () =
 });
 
 test("obstruction tracker exposes source evidence, policy and machine-readable feed", () => {
-  const page = readRepoFile("ui/gh-pages-next/app/obstruction-tracker/page.js");
-  const home = readRepoFile("ui/gh-pages-next/app/page.js");
-  const catalog = readRepoFile("ui/gh-pages-next/app/siteCatalog.mjs");
+  const page = readRepoFile("ui/site/app/obstruction-tracker/page.js");
+  const home = readRepoFile("ui/site/app/page.js");
+  const catalog = readRepoFile("ui/site/app/siteCatalog.mjs");
   const routeAudit = readRepoFile("scripts/audit_public_routes.js");
 
   assert.match(page, /Solo registros oficiales reales/);
@@ -41,8 +41,8 @@ test("obstruction tracker exposes source evidence, policy and machine-readable f
 });
 
 test("obstruction tracker has semantic selectors and motion-safe layout feedback", () => {
-  const page = readRepoFile("ui/gh-pages-next/app/obstruction-tracker/page.js");
-  const styles = readRepoFile("ui/gh-pages-next/app/obstruction-tracker/obstruction-tracker.module.css");
+  const page = readRepoFile("ui/site/app/obstruction-tracker/page.js");
+  const styles = readRepoFile("ui/site/app/obstruction-tracker/obstruction-tracker.module.css");
 
   assert.match(page, /obstruction-tracker-page/);
   assert.match(page, /obstruction-source-card__incidents/);

@@ -59,4 +59,4 @@ Flujo recomendado:
 - test del contrato JSON y del routing canonico: `tests/test_export_vote_explainer_snapshot.py`
 - build source para la ruta estatica:
   - `scripts/export_vote_explainer_snapshot.py`
-  - `ui/gh-pages-next/app/vote-explainer/[publicVoteId]/page.js`
+  - `ui/site/app/vote-explainer/[publicVoteId]/page.js`

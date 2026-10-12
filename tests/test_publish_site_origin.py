@@ -235,7 +235,7 @@ class TestPublishRecipes(unittest.TestCase):
         text = (REPO_ROOT / "justfile").read_text(encoding="utf-8")
         block = text[text.index("\nsite-origin-publish:"):text.index("\nsite-dataset-mirror:")]
         self.assertIn('site="{{gh_pages_next_out_dir}}"', block)
-        self.assertNotIn("gh-pages", block.replace("gh-pages-next", ""))
+        self.assertNotIn("gh-pages", block)
         publish = text[text.index("\nsite-publish:"):text.index("\nvotaconlachola-gh-pages-publish:")]
         self.assertLess(publish.index("git rev-parse HEAD"), publish.index("just cloudflare-pages-build"))
         self.assertLess(publish.index(".vclc-build.json"), publish.index("just site-origin-publish"))

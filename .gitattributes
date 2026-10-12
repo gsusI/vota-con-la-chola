@@ -12,7 +12,7 @@
 *.css text eol=lf
 
 # Preserve exact bytes in content-addressed launch packages.
-ui/gh-pages-next/public/spending/launch/** -text -whitespace
+ui/site/public/spending/launch/** -text -whitespace
 
 # Hash-cited evidence captured with CRLF: keep exact bytes.
 docs/etl/sprints/AI-OPS-553/evidence/congreso_vote_event_url_403_headers_*.txt -text

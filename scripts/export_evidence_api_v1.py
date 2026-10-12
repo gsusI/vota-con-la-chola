@@ -25,7 +25,7 @@ DEFAULT_EVIDENCE = (
     REPO_ROOT / "etl/data/published/accountability-evidence-api-latest.json"
 )
 DEFAULT_SOURCE_HEALTH = (
-    REPO_ROOT / "ui/gh-pages-next/public/explorer-sources/data/status.json"
+    REPO_ROOT / "ui/site/public/explorer-sources/data/status.json"
 )
 DEFAULT_ORIGIN = (
     REPO_ROOT
@@ -36,7 +36,7 @@ DEFAULT_ATTESTATION = (
     / "docs/etl/sprints/REPRODUCIBILITY-20260819/evidence/live-signed-snapshot-verification.json"
 )
 DEFAULT_SCHEMA = REPO_ROOT / "docs/api/evidence-api-v1.schema.json"
-DEFAULT_OUT = REPO_ROOT / "ui/gh-pages-next/public/api/v1"
+DEFAULT_OUT = REPO_ROOT / "ui/site/public/api/v1"
 
 
 def canonical_bytes(value: Any, *, pretty: bool = False) -> bytes:

@@ -44,7 +44,7 @@ class TestCheckPublicPrivacyLeaks(unittest.TestCase):
                 self.assertEqual(checker.main(["--path", str(root), "--skip-kind", "internal_db_path"]), 0)
 
     def test_default_scan_paths_cover_next_public_tree(self) -> None:
-        self.assertIn(Path("ui/gh-pages-next/public"), checker.DEFAULT_SCAN_PATHS)
+        self.assertIn(Path("ui/site/public"), checker.DEFAULT_SCAN_PATHS)
         self.assertIs(script_checker.collect_findings, checker.collect_findings)
 
     def test_collect_findings_detects_local_paths_but_allows_public_email(self) -> None:

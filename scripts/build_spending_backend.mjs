@@ -12,7 +12,7 @@ const publicRootArg = process.argv.find(arg => arg.startsWith('--public-root='))
 for (const arg of process.argv.slice(3)) if (arg !== '--plan-only' && !arg.startsWith('--public-root=')) throw new Error('Unknown build argument');
 if (!output) throw new Error('Usage: node scripts/build_spending_backend.mjs OUTPUT_DIRECTORY');
 fs.mkdirSync(output, { recursive: true });
-const publicRoot = publicRootArg ? path.resolve(publicRootArg.slice('--public-root='.length)) : path.join(root, 'ui/gh-pages-next/public/spending/launch');
+const publicRoot = publicRootArg ? path.resolve(publicRootArg.slice('--public-root='.length)) : path.join(root, 'ui/site/public/spending/launch');
 const release = JSON.parse(fs.readFileSync(path.join(publicRoot, 'latest.json')));
 const releaseRoot=path.join(publicRoot,release.release);
 const compressed=release.file_encodings?.['awards.json']==='gzip'||fs.existsSync(path.join(releaseRoot,'awards.json.gz'));

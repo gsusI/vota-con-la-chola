@@ -20,7 +20,7 @@ DEFAULT_DB = Path("etl/data/staging/politicos-es.db")
 def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(description="Exporta snapshot (preview) para explorer-temas (Cloudflare Pages)")
     p.add_argument("--db", default=str(DEFAULT_DB), help="Ruta a la base SQLite")
-    p.add_argument("--out", required=True, help="Ruta de salida JSON (p.ej. ui/gh-pages-next/public/explorer-temas/data/temas-preview.json)")
+    p.add_argument("--out", required=True, help="Ruta de salida JSON (p.ej. ui/site/public/explorer-temas/data/temas-preview.json)")
     p.add_argument("--limit-topic-sets", type=int, default=250, help="Max filas a exportar de topic_sets")
     p.add_argument("--limit-topics", type=int, default=500, help="Max filas a exportar de topics")
     p.add_argument("--limit-topic-set-topics", type=int, default=2000, help="Max filas a exportar de topic_set_topics")

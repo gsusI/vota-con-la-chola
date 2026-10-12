@@ -21,7 +21,7 @@ from pathlib import Path
 from typing import Any
 
 DEFAULT_DB = Path("etl/data/staging/politicos-es.db")
-DEFAULT_OUT = Path("ui/gh-pages-next/public/elections-behavior/data/elections-behavior.json")
+DEFAULT_OUT = Path("ui/site/public/elections-behavior/data/elections-behavior.json")
 
 
 def parse_args() -> argparse.Namespace:

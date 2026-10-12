@@ -1092,7 +1092,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--public-out",
         type=Path,
-        default=Path("ui/gh-pages-next/public/promises/data/bng-2023.json"),
+        default=Path("ui/site/public/promises/data/bng-2023.json"),
     )
     parser.add_argument(
         "--report-out",

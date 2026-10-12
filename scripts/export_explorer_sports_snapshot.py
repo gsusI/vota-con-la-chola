@@ -98,7 +98,7 @@ def parse_args() -> argparse.Namespace:
     )
     p.add_argument(
         "--out-dir",
-        default="ui/gh-pages-next/public/explorer-sports/data",
+        default="ui/site/public/explorer-sports/data",
         help="Directorio de salida para JSON estáticos",
     )
     return p.parse_args()

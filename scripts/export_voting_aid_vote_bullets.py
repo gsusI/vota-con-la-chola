@@ -25,10 +25,10 @@ from typing import Any
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 DEFAULT_SEED = BASE_DIR / "etl/data/seeds/voting_aid_vote_bullets_v1.json"
-DEFAULT_SNAPSHOT = BASE_DIR / "ui/gh-pages-next/public/citizen/data/voting_aid_generales_v1.json"
-DEFAULT_POOL = BASE_DIR / "ui/gh-pages-next/public/citizen/data/voting_aid_pool_v1.json"
-DEFAULT_HIGHLIGHTS = BASE_DIR / "ui/gh-pages-next/public/citizen/data/voting_aid_highlights_v1.json"
-DEFAULT_OUT = BASE_DIR / "ui/gh-pages-next/public/citizen/data/voting_aid_vote_bullets_v1.json"
+DEFAULT_SNAPSHOT = BASE_DIR / "ui/site/public/citizen/data/voting_aid_generales_v1.json"
+DEFAULT_POOL = BASE_DIR / "ui/site/public/citizen/data/voting_aid_pool_v1.json"
+DEFAULT_HIGHLIGHTS = BASE_DIR / "ui/site/public/citizen/data/voting_aid_highlights_v1.json"
+DEFAULT_OUT = BASE_DIR / "ui/site/public/citizen/data/voting_aid_vote_bullets_v1.json"
 SEED_SCHEMA_VERSION = "voting_aid_vote_bullets_seed_v1"
 SCHEMA_VERSION = "voting_aid_vote_bullets_v1"
 

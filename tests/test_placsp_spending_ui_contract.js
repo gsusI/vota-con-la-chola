@@ -10,9 +10,9 @@ function readRepoFile(relativePath) {
 }
 
 test("spending route renders every real public award without truncation", () => {
-  const page = readRepoFile("ui/gh-pages-next/app/spending/page.js");
+  const page = readRepoFile("ui/site/app/spending/page.js");
   const feed = JSON.parse(
-    readRepoFile("ui/gh-pages-next/public/spending/data/placsp-sample.json"),
+    readRepoFile("ui/site/public/spending/data/placsp-sample.json"),
   );
 
   assert.equal(feed.real_data_only, true);
@@ -27,9 +27,9 @@ test("spending route renders every real public award without truncation", () => 
 });
 
 test("spending route exposes exact actors, amounts, and official evidence", () => {
-  const page = readRepoFile("ui/gh-pages-next/app/spending/page.js");
-  const home = readRepoFile("ui/gh-pages-next/app/page.js");
-  const catalog = readRepoFile("ui/gh-pages-next/app/siteCatalog.mjs");
+  const page = readRepoFile("ui/site/app/spending/page.js");
+  const home = readRepoFile("ui/site/app/page.js");
+  const catalog = readRepoFile("ui/site/app/siteCatalog.mjs");
   const routeAudit = readRepoFile("scripts/audit_public_routes.js");
 
   assert.match(page, /exactActorIdentifier/);
@@ -43,8 +43,8 @@ test("spending route exposes exact actors, amounts, and official evidence", () =
 });
 
 test("spending UI has semantic selectors and motion-safe physical feedback", () => {
-  const page = readRepoFile("ui/gh-pages-next/app/spending/page.js");
-  const styles = readRepoFile("ui/gh-pages-next/app/spending/spending.module.css");
+  const page = readRepoFile("ui/site/app/spending/page.js");
+  const styles = readRepoFile("ui/site/app/spending/spending.module.css");
 
   assert.match(page, /spending-page/);
   assert.match(page, /spending-award-card__actor-name/);

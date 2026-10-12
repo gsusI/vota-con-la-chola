@@ -23,7 +23,7 @@ El valor del sistema aumenta mucho cuando una persona puede abrir un perfil y en
 
 ## Contexto inicial
 
-- `ui/gh-pages-next/`
+- `ui/site/`
 - `ui/graph/`
 - `etl/data/published/`
 - `docs/roadmap/public-roadmap.md`

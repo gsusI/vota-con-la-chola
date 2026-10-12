@@ -25,7 +25,7 @@ DEFAULT_SOURCE_DB = REPO_ROOT / "etl/data/staging/placsp-contracts-real-s1-20260
 DEFAULT_SCHEMA = REPO_ROOT / "etl/load/sqlite_schema.sql"
 DEFAULT_OUT_DB = REPO_ROOT / "etl/data/staging/spending-placsp-mvp.db"
 DEFAULT_PUBLISHED = REPO_ROOT / "etl/data/published/spending-placsp-sample.json"
-DEFAULT_PUBLIC = REPO_ROOT / "ui/gh-pages-next/public/spending/data/placsp-sample.json"
+DEFAULT_PUBLIC = REPO_ROOT / "ui/site/public/spending/data/placsp-sample.json"
 DEFAULT_REPORT = (
     REPO_ROOT
     / "docs/etl/sprints/SPENDING-20260819/evidence/placsp-spending-materialization.json"

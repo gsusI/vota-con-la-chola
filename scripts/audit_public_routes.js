@@ -15,11 +15,11 @@ const REPO_ROOT = path.resolve(__dirname, "..");
 const POLICY_OUTCOMES_ASSET_PATH = "/policy-outcomes/data/policy-outcomes.json";
 const POLICY_OUTCOMES_LOCAL_ARTIFACT = path.join(
   REPO_ROOT,
-  "ui/gh-pages-next/public/policy-outcomes/data/policy-outcomes.json",
+  "ui/site/public/policy-outcomes/data/policy-outcomes.json",
 );
 const POLICY_OUTCOMES_CONTRACT_MODULE = path.join(
   REPO_ROOT,
-  "ui/gh-pages-next/app/policy-outcomes/status-contract.mjs",
+  "ui/site/app/policy-outcomes/status-contract.mjs",
 );
 
 const ROUTE_CONTENT_MARKERS = {
@@ -471,7 +471,7 @@ async function auditPolicyOutcomesAsset(baseUrl, timeoutMs) {
     }
     const localManifestPath = path.join(
       REPO_ROOT,
-      "ui/gh-pages-next/public",
+      "ui/site/public",
       ...localStatus.evidence_package.manifest_path.split("/").filter(Boolean),
     );
     localManifestRaw = fs.readFileSync(localManifestPath);

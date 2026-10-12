@@ -424,7 +424,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--generated-at", default=DEFAULT_GENERATED_AT)
     parser.add_argument("--out-db", default="etl/data/staging/actor-graph-v1.db")
     parser.add_argument("--published-out", default="etl/data/published/actor-graph-v1.json")
-    parser.add_argument("--public-out", default="ui/gh-pages-next/public/actor-graph/data/graph.json")
+    parser.add_argument("--public-out", default="ui/site/public/actor-graph/data/graph.json")
     parser.add_argument(
         "--report-out",
         default="docs/etl/sprints/ACTOR-GRAPH-20260820/evidence/actor-graph-materialization.json",

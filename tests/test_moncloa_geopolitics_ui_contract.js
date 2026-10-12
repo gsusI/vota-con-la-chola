@@ -10,10 +10,10 @@ function readRepoFile(relativePath) {
 }
 
 test("geopolitics route renders every real action without truncation", () => {
-  const page = readRepoFile("ui/gh-pages-next/app/geopolitics/page.js");
+  const page = readRepoFile("ui/site/app/geopolitics/page.js");
   const feed = JSON.parse(
     readRepoFile(
-      "ui/gh-pages-next/public/geopolitics/data/moncloa-sample.json",
+      "ui/site/public/geopolitics/data/moncloa-sample.json",
     ),
   );
 
@@ -31,11 +31,11 @@ test("geopolitics route renders every real action without truncation", () => {
 });
 
 test("geopolitics route exposes actors, source evidence, and legal-stage limits", () => {
-  const page = readRepoFile("ui/gh-pages-next/app/geopolitics/page.js");
-  const home = readRepoFile("ui/gh-pages-next/app/page.js");
-  const catalog = readRepoFile("ui/gh-pages-next/app/siteCatalog.mjs");
+  const page = readRepoFile("ui/site/app/geopolitics/page.js");
+  const home = readRepoFile("ui/site/app/page.js");
+  const catalog = readRepoFile("ui/site/app/siteCatalog.mjs");
   const breadcrumbs = readRepoFile(
-    "ui/gh-pages-next/app/components/Breadcrumbs.js",
+    "ui/site/app/components/Breadcrumbs.js",
   );
   const routeAudit = readRepoFile("scripts/audit_public_routes.js");
 
@@ -53,9 +53,9 @@ test("geopolitics route exposes actors, source evidence, and legal-stage limits"
 });
 
 test("geopolitics UI has semantic selectors and motion-safe feedback", () => {
-  const page = readRepoFile("ui/gh-pages-next/app/geopolitics/page.js");
+  const page = readRepoFile("ui/site/app/geopolitics/page.js");
   const styles = readRepoFile(
-    "ui/gh-pages-next/app/geopolitics/geopolitics.module.css",
+    "ui/site/app/geopolitics/geopolitics.module.css",
   );
 
   assert.match(page, /geopolitics-page/);

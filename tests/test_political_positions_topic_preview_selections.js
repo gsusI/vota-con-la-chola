@@ -8,7 +8,7 @@ async function loadHelpers() {
     __dirname,
     "..",
     "ui",
-    "gh-pages-next",
+    "site",
     "app",
     "political-positions",
     "topicPreviewSelections.mjs",

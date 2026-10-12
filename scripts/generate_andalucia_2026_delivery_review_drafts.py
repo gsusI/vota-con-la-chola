@@ -31,7 +31,7 @@ from scripts.generate_andalucia_2026_execution_review_drafts import (
 DEFAULT_HUNT_RESULTS = Path("etl/data/published/andalucia-2026-delivery-evidence-hunt-results.json")
 DEFAULT_EXISTING_REVIEWS = Path("etl/data/seeds/andalucia_2026_execution_evidence_reviews.json")
 DEFAULT_OUT = Path("etl/data/published/andalucia-2026-delivery-evidence-review-drafts.json")
-DEFAULT_PUBLIC_OUT = Path("ui/gh-pages-next/public/elecciones/andalucia-2026/data/delivery-evidence-review-drafts.json")
+DEFAULT_PUBLIC_OUT = Path("ui/site/public/elecciones/andalucia-2026/data/delivery-evidence-review-drafts.json")
 
 BROAD_BDNS_VARIANTS = {"concession_beneficiary_only"}
 

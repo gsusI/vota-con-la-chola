@@ -14,7 +14,7 @@ import json
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-DEFAULT_SNAPSHOT = BASE_DIR / "ui/gh-pages-next/public/citizen/data/voting_aid_generales_v1.json"
+DEFAULT_SNAPSHOT = BASE_DIR / "ui/site/public/citizen/data/voting_aid_generales_v1.json"
 DEFAULT_OUT = BASE_DIR / "etl/data/published/voting_aid_generales_v1_review_sheet.csv"
 
 COLUMNS = [

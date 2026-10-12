@@ -16,12 +16,12 @@ PUBLIC_BUILD_INPUTS = (
     ROOT / "etl/data/published/accountability-dossiers-latest.json",
     ROOT / "etl/data/published/accountability-ledger-latest.json",
     ROOT / "etl/data/published/accountability-evidence-api-latest.json",
-    ROOT / "ui/gh-pages-next/public/parliamentary-accountability/data/accountability.json",
-    ROOT / "ui/gh-pages-next/public/initiative-lifecycle/data/lifecycle.json",
-    ROOT / "ui/gh-pages-next/public/people/data/xray.json",
-    ROOT / "ui/gh-pages-next/public/legal-sanctions/data/legal-sanctions.json",
-    ROOT / "ui/gh-pages-next/public/policy-outcomes/data/policy-outcomes.json",
-    ROOT / "ui/gh-pages-next/public/responsibility-explainer/data",
+    ROOT / "ui/site/public/parliamentary-accountability/data/accountability.json",
+    ROOT / "ui/site/public/initiative-lifecycle/data/lifecycle.json",
+    ROOT / "ui/site/public/people/data/xray.json",
+    ROOT / "ui/site/public/legal-sanctions/data/legal-sanctions.json",
+    ROOT / "ui/site/public/policy-outcomes/data/policy-outcomes.json",
+    ROOT / "ui/site/public/responsibility-explainer/data",
 )
 
 

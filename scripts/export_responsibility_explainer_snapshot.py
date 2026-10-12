@@ -22,7 +22,7 @@ from typing import Any
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_DB = Path("etl/data/staging/parlamentario-es.db")
-DEFAULT_OUT_DIR = Path("ui/gh-pages-next/public/responsibility-explainer/data")
+DEFAULT_OUT_DIR = Path("ui/site/public/responsibility-explainer/data")
 DEFAULT_CASE_SEED = Path("etl/data/seeds/responsibility_explainer_cases_seed_v1.json")
 DEFAULT_SITE_ORIGIN = "https://gsusI.github.io"
 DEFAULT_BASE_PATH = "/vota-con-la-chola"

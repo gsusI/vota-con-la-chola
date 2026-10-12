@@ -1823,7 +1823,7 @@ PROJECT_WORKFLOWS = [
                 detail="Current collection, page, hash, cursor, identity-retention, and real-source reconciliation.",
             ),
             Evidence(
-                source="ui/gh-pages-next/public/api/v1/index.json",
+                source="ui/site/public/api/v1/index.json",
                 detail="Current public API pointer to the immutable release.",
             ),
         ],
@@ -1864,7 +1864,7 @@ PROJECT_WORKFLOWS = [
                 detail="Current real source, database, quote/page/hash, identity-retention, and public sample validation.",
             ),
             Evidence(
-                source="ui/gh-pages-next/public/promises/data/bng-2023.json",
+                source="ui/site/public/promises/data/bng-2023.json",
                 detail="Bounded public sample from the checksum-pinned official BNG 2023 manifesto.",
             ),
         ],
@@ -1910,7 +1910,7 @@ PROJECT_WORKFLOWS = [
                 detail="Live page, JSON release/hash, identity strata, and official PLACSP link verification.",
             ),
             Evidence(
-                source="ui/gh-pages-next/public/spending/data/placsp-sample.json",
+                source="ui/site/public/spending/data/placsp-sample.json",
                 detail="Bounded public view with exact public identities and award-not-payment caveats.",
             ),
         ],
@@ -1954,7 +1954,7 @@ PROJECT_WORKFLOWS = [
                 detail="Exact capture, excerpt, date, actors, topics, no-attendance, no-influence, FK, integrity, and real-only validation.",
             ),
             Evidence(
-                source="ui/gh-pages-next/public/agreements/data/moncloa-sample.json",
+                source="ui/site/public/agreements/data/moncloa-sample.json",
                 detail="Bounded public view of official Council of Ministers agreement summaries with explicit limits.",
             ),
         ],

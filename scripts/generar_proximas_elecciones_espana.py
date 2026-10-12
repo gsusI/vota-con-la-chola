@@ -110,7 +110,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--public-json-out",
         default="",
-        help="Ruta adicional para UI estática, por ejemplo ui/gh-pages-next/public/...",
+        help="Ruta adicional para UI estática, por ejemplo ui/site/public/...",
     )
     parser.add_argument(
         "--raw-dir",

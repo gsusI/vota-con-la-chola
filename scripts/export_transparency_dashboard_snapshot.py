@@ -14,18 +14,18 @@ from typing import Any
 from urllib.parse import quote
 
 
-DEFAULT_STATUS_JSON = Path("ui/gh-pages-next/public/explorer-sources/data/status.json")
-DEFAULT_OBSTRUCTION_JSON = Path("ui/gh-pages-next/public/obstruction-tracker/data/obstructions.json")
+DEFAULT_STATUS_JSON = Path("ui/site/public/explorer-sources/data/status.json")
+DEFAULT_OBSTRUCTION_JSON = Path("ui/site/public/obstruction-tracker/data/obstructions.json")
 DEFAULT_READINESS_JSON = Path("etl/data/published/scale-readiness-latest.json")
 DEFAULT_ORIGIN_VERIFICATION_JSON = Path(
     "docs/etl/sprints/REPRODUCIBILITY-20260819/evidence/live-scale-origin-parity.json"
 )
 DEFAULT_RELEASE_REGISTRY_JSON = Path("docs/release-notes/releases.json")
 DEFAULT_DOCUMENT_FETCH_OPERATIONS_JSON = Path(
-    "ui/gh-pages-next/public/transparency/data/document-fetch-operations.json"
+    "ui/site/public/transparency/data/document-fetch-operations.json"
 )
 DEFAULT_DOCUMENT_FACTORY_ECONOMICS_JSON = Path(
-    "ui/gh-pages-next/public/transparency/data/document-factory-economics.json"
+    "ui/site/public/transparency/data/document-factory-economics.json"
 )
 DEFAULT_REPO_BLOB_BASE = "https://github.com/gsusI/vota-con-la-chola/blob/main"
 DEFAULT_PUBLIC_STATUS_URL = "/explorer-sources/data/status.json"
@@ -231,7 +231,7 @@ def build_payload(
 ) -> dict[str, Any]:
     status_summary = status.get("summary") or {}
     obstruction_summary = (obstruction.get("summary") or {}).get("obstruction") or {}
-    obstruction_manifest_path = "ui/gh-pages-next/public/obstruction-tracker/evidence/manifest.json"
+    obstruction_manifest_path = "ui/site/public/obstruction-tracker/evidence/manifest.json"
     obstruction_manifest = read_json(Path(obstruction_manifest_path))
     readiness_summary = readiness.get("summary") or {}
     checks = origin.get("checks") or {}

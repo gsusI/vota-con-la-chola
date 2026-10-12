@@ -62,7 +62,7 @@ def parse_args() -> argparse.Namespace:
     p.add_argument(
         "--out",
         required=True,
-        help="Ruta de salida JSON (p.ej. ui/gh-pages-next/public/citizen/data/citizen.json)",
+        help="Ruta de salida JSON (p.ej. ui/site/public/citizen/data/citizen.json)",
     )
     p.add_argument("--topic-set-id", type=int, default=DEFAULT_TOPIC_SET_ID)
     p.add_argument(

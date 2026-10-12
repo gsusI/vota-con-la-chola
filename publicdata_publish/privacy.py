@@ -13,8 +13,8 @@ from typing import Iterable, TextIO
 
 DEFAULT_SCAN_PATHS = (
     Path("etl/data/published"),
-    Path("ui/gh-pages-next/public"),
-    Path("ui/gh-pages-next/out"),
+    Path("ui/site/public"),
+    Path("ui/site/out"),
 )
 SKIP_SUFFIXES = {
     ".db",

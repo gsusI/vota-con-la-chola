@@ -8,7 +8,7 @@ async function loadHelper() {
     __dirname,
     "..",
     "ui",
-    "gh-pages-next",
+    "site",
     "app",
     "political-positions",
     "chunkSummaryDisplay.mjs",

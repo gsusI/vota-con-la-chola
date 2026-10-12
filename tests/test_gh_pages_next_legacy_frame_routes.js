@@ -4,8 +4,8 @@ const fs = require("node:fs");
 const path = require("node:path");
 
 const ROOT = path.join(__dirname, "..");
-const APP_ROOT = path.join(ROOT, "ui", "gh-pages-next", "app");
-const PUBLIC_ROOT = path.join(ROOT, "ui", "gh-pages-next", "public");
+const APP_ROOT = path.join(ROOT, "ui", "site", "app");
+const PUBLIC_ROOT = path.join(ROOT, "ui", "site", "public");
 
 function resolveLegacyPathTarget(legacyPath) {
   const relativePath = legacyPath.replace(/^\//u, "");

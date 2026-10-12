@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import {pathToFileURL} from 'node:url';
-const candidate = process.argv[3] === '--national-candidate' || (process.argv[3] === '--published-release' && JSON.parse(fs.readFileSync('ui/gh-pages-next/public/spending/launch/latest.json')).rows === 128837);
+const candidate = process.argv[3] === '--national-candidate' || (process.argv[3] === '--published-release' && JSON.parse(fs.readFileSync('ui/site/public/spending/launch/latest.json')).rows === 128837);
 let workerUrl = new URL('../infra/cloudflare/spending-api/src/index.mjs', import.meta.url);
 let temporary;
 if (candidate) {

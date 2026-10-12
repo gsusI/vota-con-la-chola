@@ -23,7 +23,7 @@ if str(REPO_ROOT) not in sys.path:
 from publicdata_publish.sanitize import redact_sensitive_text
 
 
-DEFAULT_STATUS_JSON = Path("ui/gh-pages-next/public/explorer-sources/data/status.json")
+DEFAULT_STATUS_JSON = Path("ui/site/public/explorer-sources/data/status.json")
 DEFAULT_BLOCKERS_LOG = Path("docs/etl/name-and-shame-access-blockers.md")
 DEFAULT_READINESS_JSON = Path("etl/data/published/scale-readiness-latest.json")
 DEFAULT_REPO_BLOB_BASE = "https://github.com/gsusI/vota-con-la-chola/blob/main"

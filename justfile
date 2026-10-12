@@ -34,9 +34,9 @@ andalucia_execution_source_max_topic_terms := env_var_or_default("ANDALUCIA_EXEC
 andalucia_execution_source_probe_timeout := env_var_or_default("ANDALUCIA_EXECUTION_SOURCE_PROBE_TIMEOUT", "6")
 andalucia_execution_source_max_resource_probes := env_var_or_default("ANDALUCIA_EXECUTION_SOURCE_MAX_RESOURCE_PROBES", "12")
 andalucia_delivery_hunt_results_out := env_var_or_default("ANDALUCIA_DELIVERY_HUNT_RESULTS_OUT", "etl/data/published/andalucia-2026-delivery-evidence-hunt-results.json")
-andalucia_delivery_hunt_public_out := env_var_or_default("ANDALUCIA_DELIVERY_HUNT_PUBLIC_OUT", "ui/gh-pages-next/public/elecciones/andalucia-2026/data/delivery-evidence-hunt-results.json")
+andalucia_delivery_hunt_public_out := env_var_or_default("ANDALUCIA_DELIVERY_HUNT_PUBLIC_OUT", "ui/site/public/elecciones/andalucia-2026/data/delivery-evidence-hunt-results.json")
 andalucia_delivery_review_drafts_out := env_var_or_default("ANDALUCIA_DELIVERY_REVIEW_DRAFTS_OUT", "etl/data/published/andalucia-2026-delivery-evidence-review-drafts.json")
-andalucia_delivery_review_drafts_public_out := env_var_or_default("ANDALUCIA_DELIVERY_REVIEW_DRAFTS_PUBLIC_OUT", "ui/gh-pages-next/public/elecciones/andalucia-2026/data/delivery-evidence-review-drafts.json")
+andalucia_delivery_review_drafts_public_out := env_var_or_default("ANDALUCIA_DELIVERY_REVIEW_DRAFTS_PUBLIC_OUT", "ui/site/public/elecciones/andalucia-2026/data/delivery-evidence-review-drafts.json")
 andalucia_delivery_hunt_max_targets := env_var_or_default("ANDALUCIA_DELIVERY_HUNT_MAX_TARGETS", "40")
 andalucia_delivery_hunt_rows_per_query := env_var_or_default("ANDALUCIA_DELIVERY_HUNT_ROWS_PER_QUERY", "3")
 andalucia_delivery_hunt_timeout := env_var_or_default("ANDALUCIA_DELIVERY_HUNT_TIMEOUT", "12")
@@ -67,8 +67,8 @@ senado_tail_archive_fallback := env_var_or_default("SENADO_TAIL_ARCHIVE_FALLBACK
 senado_tail_archive_timeout := env_var_or_default("SENADO_TAIL_ARCHIVE_TIMEOUT", "12")
 explorer_host := env_var_or_default("EXPLORER_HOST", "127.0.0.1")
 explorer_port := env_var_or_default("EXPLORER_PORT", "9010")
-gh_pages_dir := env_var_or_default("STATIC_BUILD_DATA_DIR", "ui/gh-pages-next/.static-data")
-gh_pages_next_app_dir := env_var_or_default("GH_PAGES_NEXT_APP_DIR", "ui/gh-pages-next")
+gh_pages_dir := env_var_or_default("STATIC_BUILD_DATA_DIR", "ui/site/.static-data")
+gh_pages_next_app_dir := env_var_or_default("GH_PAGES_NEXT_APP_DIR", "ui/site")
 gh_pages_next_out_dir := gh_pages_next_app_dir + "/out"
 gh_pages_next_port := env_var_or_default("GH_PAGES_NEXT_PORT", "3000")
 gh_pages_next_container := env_var_or_default("GH_PAGES_NEXT_CONTAINER", "vota-gh-pages-next")
@@ -230,23 +230,23 @@ text_extraction_queue_summary_out := env_var_or_default("TEXT_EXTRACTION_QUEUE_S
 scale_queue_enqueue_batch_size := env_var_or_default("SCALE_QUEUE_ENQUEUE_BATCH_SIZE", "5000")
 scale_queue_claim_batch_size := env_var_or_default("SCALE_QUEUE_CLAIM_BATCH_SIZE", "2000")
 scale_readiness_report_out := env_var_or_default("SCALE_READINESS_REPORT_OUT", "etl/data/published/scale-readiness-latest.json")
-obstruction_tracker_status_json := env_var_or_default("OBSTRUCTION_TRACKER_STATUS_JSON", "ui/gh-pages-next/public/explorer-sources/data/status.json")
+obstruction_tracker_status_json := env_var_or_default("OBSTRUCTION_TRACKER_STATUS_JSON", "ui/site/public/explorer-sources/data/status.json")
 obstruction_tracker_readiness_json := env_var_or_default("OBSTRUCTION_TRACKER_READINESS_JSON", scale_readiness_report_out)
-obstruction_tracker_out := env_var_or_default("OBSTRUCTION_TRACKER_OUT", "ui/gh-pages-next/public/obstruction-tracker/data/obstructions.json")
-obstruction_tracker_evidence_dir := env_var_or_default("OBSTRUCTION_TRACKER_EVIDENCE_DIR", "ui/gh-pages-next/public/obstruction-tracker/evidence")
+obstruction_tracker_out := env_var_or_default("OBSTRUCTION_TRACKER_OUT", "ui/site/public/obstruction-tracker/data/obstructions.json")
+obstruction_tracker_evidence_dir := env_var_or_default("OBSTRUCTION_TRACKER_EVIDENCE_DIR", "ui/site/public/obstruction-tracker/evidence")
 obstruction_tracker_max_bytes := env_var_or_default("OBSTRUCTION_TRACKER_MAX_BYTES", "5000000")
 transparency_dashboard_status_json := env_var_or_default("TRANSPARENCY_DASHBOARD_STATUS_JSON", obstruction_tracker_status_json)
 transparency_dashboard_obstruction_json := env_var_or_default("TRANSPARENCY_DASHBOARD_OBSTRUCTION_JSON", obstruction_tracker_out)
 transparency_dashboard_readiness_json := env_var_or_default("TRANSPARENCY_DASHBOARD_READINESS_JSON", scale_readiness_report_out)
 transparency_dashboard_origin_verification_json := env_var_or_default("TRANSPARENCY_DASHBOARD_ORIGIN_VERIFICATION_JSON", "docs/etl/sprints/REPRODUCIBILITY-20260819/evidence/live-scale-origin-parity.json")
 transparency_dashboard_release_registry_json := env_var_or_default("TRANSPARENCY_DASHBOARD_RELEASE_REGISTRY_JSON", "docs/release-notes/releases.json")
-transparency_dashboard_out := env_var_or_default("TRANSPARENCY_DASHBOARD_OUT", "ui/gh-pages-next/public/transparency/data/transparency.json")
+transparency_dashboard_out := env_var_or_default("TRANSPARENCY_DASHBOARD_OUT", "ui/site/public/transparency/data/transparency.json")
 transparency_dashboard_max_bytes := env_var_or_default("TRANSPARENCY_DASHBOARD_MAX_BYTES", "1000000")
-document_fetch_operations_out := env_var_or_default("DOCUMENT_FETCH_OPERATIONS_OUT", "ui/gh-pages-next/public/transparency/data/document-fetch-operations.json")
+document_fetch_operations_out := env_var_or_default("DOCUMENT_FETCH_OPERATIONS_OUT", "ui/site/public/transparency/data/document-fetch-operations.json")
 document_fetch_operations_evidence := env_var_or_default("DOCUMENT_FETCH_OPERATIONS_EVIDENCE", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-fetch-operations-20260829.json")
 document_fetch_operations_validation := env_var_or_default("DOCUMENT_FETCH_OPERATIONS_VALIDATION", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-fetch-operations-validation-20260829.json")
 document_fetch_operations_max_bytes := env_var_or_default("DOCUMENT_FETCH_OPERATIONS_MAX_BYTES", "500000")
-document_factory_economics_out := env_var_or_default("DOCUMENT_FACTORY_ECONOMICS_OUT", "ui/gh-pages-next/public/transparency/data/document-factory-economics.json")
+document_factory_economics_out := env_var_or_default("DOCUMENT_FACTORY_ECONOMICS_OUT", "ui/site/public/transparency/data/document-factory-economics.json")
 document_factory_economics_evidence := env_var_or_default("DOCUMENT_FACTORY_ECONOMICS_EVIDENCE", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-factory-economics-20260829.json")
 document_factory_economics_validation := env_var_or_default("DOCUMENT_FACTORY_ECONOMICS_VALIDATION", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/document-factory-economics-validation-20260829.json")
 document_factory_economics_inventory := env_var_or_default("DOCUMENT_FACTORY_ECONOMICS_INVENTORY", "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-format-inventory.json")
@@ -296,7 +296,7 @@ evidence_api_v1_source_health_json := env_var_or_default("EVIDENCE_API_V1_SOURCE
 evidence_api_v1_origin_verification_json := env_var_or_default("EVIDENCE_API_V1_ORIGIN_VERIFICATION_JSON", transparency_dashboard_origin_verification_json)
 evidence_api_v1_attestation_verification_json := env_var_or_default("EVIDENCE_API_V1_ATTESTATION_VERIFICATION_JSON", "docs/etl/sprints/REPRODUCIBILITY-20260819/evidence/live-signed-snapshot-verification.json")
 evidence_api_v1_schema_json := env_var_or_default("EVIDENCE_API_V1_SCHEMA_JSON", "docs/api/evidence-api-v1.schema.json")
-evidence_api_v1_out_root := env_var_or_default("EVIDENCE_API_V1_OUT_ROOT", "ui/gh-pages-next/public/api/v1")
+evidence_api_v1_out_root := env_var_or_default("EVIDENCE_API_V1_OUT_ROOT", "ui/site/public/api/v1")
 evidence_api_v1_page_size := env_var_or_default("EVIDENCE_API_V1_PAGE_SIZE", "250")
 evidence_api_v1_export_report := env_var_or_default("EVIDENCE_API_V1_EXPORT_REPORT", "docs/etl/sprints/EVIDENCE-API-20260819/evidence/evidence-api-v1-export.json")
 evidence_api_v1_validation_report := env_var_or_default("EVIDENCE_API_V1_VALIDATION_REPORT", "docs/etl/sprints/EVIDENCE-API-20260819/evidence/evidence-api-v1-validation.json")
@@ -304,7 +304,7 @@ evidence_api_v1_live_verification_report := env_var_or_default("EVIDENCE_API_V1_
 manifesto_promises_db_path := env_var_or_default("MANIFESTO_PROMISES_DB_PATH", "etl/data/staging/promises-bng-2023.db")
 manifesto_promises_pdf := env_var_or_default("MANIFESTO_PROMISES_PDF", "etl/data/raw/text_documents/programas_partidos/b8994deec0bbc45cdcbef5d7c5395cabf30b0509706303c3d8e76058c48eebfd.pdf")
 manifesto_promises_published_out := env_var_or_default("MANIFESTO_PROMISES_PUBLISHED_OUT", "etl/data/published/promises-bng-2023.json")
-manifesto_promises_public_out := env_var_or_default("MANIFESTO_PROMISES_PUBLIC_OUT", "ui/gh-pages-next/public/promises/data/bng-2023.json")
+manifesto_promises_public_out := env_var_or_default("MANIFESTO_PROMISES_PUBLIC_OUT", "ui/site/public/promises/data/bng-2023.json")
 manifesto_promises_ingest_report := env_var_or_default("MANIFESTO_PROMISES_INGEST_REPORT", "docs/etl/sprints/PROMISES-20260819/evidence/promises-bng-2023-ingest.json")
 manifesto_promises_validation_report := env_var_or_default("MANIFESTO_PROMISES_VALIDATION_REPORT", "docs/etl/sprints/PROMISES-20260819/evidence/promises-bng-2023-validation.json")
 manifesto_promises_publish_limit := env_var_or_default("MANIFESTO_PROMISES_PUBLISH_LIMIT", "20")
@@ -313,7 +313,7 @@ placsp_spending_source_db := env_var_or_default("PLACSP_SPENDING_SOURCE_DB", "et
 placsp_spending_schema := env_var_or_default("PLACSP_SPENDING_SCHEMA", "etl/load/sqlite_schema.sql")
 placsp_spending_db_path := env_var_or_default("PLACSP_SPENDING_DB_PATH", "etl/data/staging/spending-placsp-mvp.db")
 placsp_spending_published_out := env_var_or_default("PLACSP_SPENDING_PUBLISHED_OUT", "etl/data/published/spending-placsp-sample.json")
-placsp_spending_public_out := env_var_or_default("PLACSP_SPENDING_PUBLIC_OUT", "ui/gh-pages-next/public/spending/data/placsp-sample.json")
+placsp_spending_public_out := env_var_or_default("PLACSP_SPENDING_PUBLIC_OUT", "ui/site/public/spending/data/placsp-sample.json")
 placsp_spending_materialization_report := env_var_or_default("PLACSP_SPENDING_MATERIALIZATION_REPORT", "docs/etl/sprints/SPENDING-20260819/evidence/placsp-spending-materialization.json")
 placsp_spending_validation_report := env_var_or_default("PLACSP_SPENDING_VALIDATION_REPORT", "docs/etl/sprints/SPENDING-20260819/evidence/placsp-spending-validation.json")
 placsp_spending_live_verification_report := env_var_or_default("PLACSP_SPENDING_LIVE_VERIFICATION_REPORT", "docs/etl/sprints/SPENDING-20260819/evidence/live-placsp-spending-verification.json")
@@ -321,7 +321,7 @@ moncloa_agreements_source_db := env_var_or_default("MONCLOA_AGREEMENTS_SOURCE_DB
 moncloa_agreements_schema := env_var_or_default("MONCLOA_AGREEMENTS_SCHEMA", "etl/load/sqlite_schema.sql")
 moncloa_agreements_db_path := env_var_or_default("MONCLOA_AGREEMENTS_DB_PATH", "etl/data/staging/agreements-moncloa-mvp.db")
 moncloa_agreements_published_out := env_var_or_default("MONCLOA_AGREEMENTS_PUBLISHED_OUT", "etl/data/published/agreements-moncloa-sample.json")
-moncloa_agreements_public_out := env_var_or_default("MONCLOA_AGREEMENTS_PUBLIC_OUT", "ui/gh-pages-next/public/agreements/data/moncloa-sample.json")
+moncloa_agreements_public_out := env_var_or_default("MONCLOA_AGREEMENTS_PUBLIC_OUT", "ui/site/public/agreements/data/moncloa-sample.json")
 moncloa_agreements_materialization_report := env_var_or_default("MONCLOA_AGREEMENTS_MATERIALIZATION_REPORT", "docs/etl/sprints/AGREEMENTS-20260819/evidence/moncloa-agreements-materialization.json")
 moncloa_agreements_validation_report := env_var_or_default("MONCLOA_AGREEMENTS_VALIDATION_REPORT", "docs/etl/sprints/AGREEMENTS-20260819/evidence/moncloa-agreements-validation.json")
 moncloa_agreements_live_verification_report := env_var_or_default("MONCLOA_AGREEMENTS_LIVE_VERIFICATION_REPORT", "docs/etl/sprints/AGREEMENTS-20260819/evidence/live-moncloa-agreements-verification.json")
@@ -329,14 +329,14 @@ moncloa_geopolitics_source_db := env_var_or_default("MONCLOA_GEOPOLITICS_SOURCE_
 moncloa_geopolitics_schema := env_var_or_default("MONCLOA_GEOPOLITICS_SCHEMA", "etl/load/sqlite_schema.sql")
 moncloa_geopolitics_db_path := env_var_or_default("MONCLOA_GEOPOLITICS_DB_PATH", "etl/data/staging/geopolitics-moncloa-mvp.db")
 moncloa_geopolitics_published_out := env_var_or_default("MONCLOA_GEOPOLITICS_PUBLISHED_OUT", "etl/data/published/geopolitics-moncloa-sample.json")
-moncloa_geopolitics_public_out := env_var_or_default("MONCLOA_GEOPOLITICS_PUBLIC_OUT", "ui/gh-pages-next/public/geopolitics/data/moncloa-sample.json")
+moncloa_geopolitics_public_out := env_var_or_default("MONCLOA_GEOPOLITICS_PUBLIC_OUT", "ui/site/public/geopolitics/data/moncloa-sample.json")
 moncloa_geopolitics_materialization_report := env_var_or_default("MONCLOA_GEOPOLITICS_MATERIALIZATION_REPORT", "docs/etl/sprints/GEOPOLITICS-20260819/evidence/moncloa-geopolitics-materialization.json")
 moncloa_geopolitics_validation_report := env_var_or_default("MONCLOA_GEOPOLITICS_VALIDATION_REPORT", "docs/etl/sprints/GEOPOLITICS-20260819/evidence/moncloa-geopolitics-validation.json")
 moncloa_geopolitics_live_verification_report := env_var_or_default("MONCLOA_GEOPOLITICS_LIVE_VERIFICATION_REPORT", "docs/etl/sprints/GEOPOLITICS-20260819/evidence/live-moncloa-geopolitics-verification.json")
 eurostat_gdp_indicator_schema := env_var_or_default("EUROSTAT_GDP_INDICATOR_SCHEMA", "etl/load/sqlite_schema.sql")
 eurostat_gdp_indicator_db := env_var_or_default("EUROSTAT_GDP_INDICATOR_DB", "etl/data/staging/indicators-eurostat-gdp-mvp.db")
 eurostat_gdp_indicator_published_out := env_var_or_default("EUROSTAT_GDP_INDICATOR_PUBLISHED_OUT", "etl/data/published/indicators-eurostat-gdp-es.json")
-eurostat_gdp_indicator_public_out := env_var_or_default("EUROSTAT_GDP_INDICATOR_PUBLIC_OUT", "ui/gh-pages-next/public/indicators/data/eurostat-gdp-es.json")
+eurostat_gdp_indicator_public_out := env_var_or_default("EUROSTAT_GDP_INDICATOR_PUBLIC_OUT", "ui/site/public/indicators/data/eurostat-gdp-es.json")
 eurostat_gdp_indicator_materialization_report := env_var_or_default("EUROSTAT_GDP_INDICATOR_MATERIALIZATION_REPORT", "docs/etl/sprints/INDICATORS-20260820/evidence/eurostat-gdp-materialization.json")
 eurostat_gdp_indicator_validation_report := env_var_or_default("EUROSTAT_GDP_INDICATOR_VALIDATION_REPORT", "docs/etl/sprints/INDICATORS-20260820/evidence/eurostat-gdp-validation.json")
 eurostat_gdp_indicator_live_verification_report := env_var_or_default("EUROSTAT_GDP_INDICATOR_LIVE_VERIFICATION_REPORT", "docs/etl/sprints/INDICATORS-20260820/evidence/live-eurostat-gdp-verification.json")
@@ -345,7 +345,7 @@ actor_graph_snapshot_date := env_var_or_default("ACTOR_GRAPH_SNAPSHOT_DATE", "20
 actor_graph_db := env_var_or_default("ACTOR_GRAPH_DB", "etl/data/staging/actor-graph-v1.db")
 actor_graph_actor_manifest := env_var_or_default("ACTOR_GRAPH_ACTOR_MANIFEST", "etl/data/published/actor-mandate-semantic-partition-manifest-latest.json")
 actor_graph_published_out := env_var_or_default("ACTOR_GRAPH_PUBLISHED_OUT", "etl/data/published/actor-graph-v1.json")
-actor_graph_public_out := env_var_or_default("ACTOR_GRAPH_PUBLIC_OUT", "ui/gh-pages-next/public/actor-graph/data/graph.json")
+actor_graph_public_out := env_var_or_default("ACTOR_GRAPH_PUBLIC_OUT", "ui/site/public/actor-graph/data/graph.json")
 actor_graph_materialization_report := env_var_or_default("ACTOR_GRAPH_MATERIALIZATION_REPORT", "docs/etl/sprints/ACTOR-GRAPH-20260820/evidence/actor-graph-materialization.json")
 actor_graph_validation_report := env_var_or_default("ACTOR_GRAPH_VALIDATION_REPORT", "docs/etl/sprints/ACTOR-GRAPH-20260820/evidence/actor-graph-validation.json")
 actor_graph_live_verification_report := env_var_or_default("ACTOR_GRAPH_LIVE_VERIFICATION_REPORT", "docs/etl/sprints/ACTOR-GRAPH-20260820/evidence/live-actor-graph-verification.json")
@@ -354,7 +354,7 @@ comparison_engine_schema := env_var_or_default("COMPARISON_ENGINE_SCHEMA", "etl/
 comparison_engine_reviewed_mappings := env_var_or_default("COMPARISON_ENGINE_REVIEWED_MAPPINGS", "etl/data/manual/promise_action_comparisons/reviewed_mappings_v1.json")
 comparison_engine_db := env_var_or_default("COMPARISON_ENGINE_DB", "etl/data/staging/promise-action-comparisons-v1.db")
 comparison_engine_published_out := env_var_or_default("COMPARISON_ENGINE_PUBLISHED_OUT", "etl/data/published/promise-action-comparisons-v1.json")
-comparison_engine_public_out := env_var_or_default("COMPARISON_ENGINE_PUBLIC_OUT", "ui/gh-pages-next/public/comparisons/data/comparisons.json")
+comparison_engine_public_out := env_var_or_default("COMPARISON_ENGINE_PUBLIC_OUT", "ui/site/public/comparisons/data/comparisons.json")
 comparison_engine_materialization_report := env_var_or_default("COMPARISON_ENGINE_MATERIALIZATION_REPORT", "docs/etl/sprints/COMPARISON-ENGINE-20260820/evidence/comparison-materialization.json")
 comparison_engine_validation_report := env_var_or_default("COMPARISON_ENGINE_VALIDATION_REPORT", "docs/etl/sprints/COMPARISON-ENGINE-20260820/evidence/promise-action-comparisons-validation.json")
 comparison_engine_live_verification_report := env_var_or_default("COMPARISON_ENGINE_LIVE_VERIFICATION_REPORT", "docs/etl/sprints/COMPARISON-ENGINE-20260820/evidence/live-promise-action-comparisons-verification.json")
@@ -1079,7 +1079,7 @@ liberty_atlas_publish_diff_json := env_var_or_default("LIBERTY_ATLAS_PUBLISH_DIF
 liberty_atlas_publish_changelog_entry_json := env_var_or_default("LIBERTY_ATLAS_PUBLISH_CHANGELOG_ENTRY_JSON", "docs/etl/sprints/AI-OPS-124/evidence/liberty_restrictions_snapshot_changelog_latest.json")
 liberty_atlas_publish_changelog_history_jsonl := env_var_or_default("LIBERTY_ATLAS_PUBLISH_CHANGELOG_HISTORY_JSONL", "docs/etl/runs/liberty_restrictions_snapshot_changelog.jsonl")
 liberty_atlas_published_dir := env_var_or_default("LIBERTY_ATLAS_PUBLISHED_DIR", "etl/data/published")
-liberty_atlas_publish_gh_pages_out := env_var_or_default("LIBERTY_ATLAS_PUBLISH_GH_PAGES_OUT", "ui/gh-pages-next/public/explorer-sources/data/liberty-atlas-release.json")
+liberty_atlas_publish_gh_pages_out := env_var_or_default("LIBERTY_ATLAS_PUBLISH_GH_PAGES_OUT", "ui/site/public/explorer-sources/data/liberty-atlas-release.json")
 liberty_atlas_publish_out := env_var_or_default("LIBERTY_ATLAS_PUBLISH_OUT", "docs/etl/sprints/AI-OPS-125/evidence/liberty_atlas_publish_latest.json")
 liberty_atlas_publish_allow_missing := env_var_or_default("LIBERTY_ATLAS_PUBLISH_ALLOW_MISSING", "0")
 liberty_atlas_release_latest_json := env_var_or_default("LIBERTY_ATLAS_RELEASE_LATEST_JSON", "etl/data/published/liberty-restrictions-atlas-release-latest.json")
@@ -1348,10 +1348,10 @@ hf_scale_rollback_plan_out := env_var_or_default("HF_SCALE_ROLLBACK_PLAN_OUT", "
 citizen_preset_contract_fixture := env_var_or_default("CITIZEN_PRESET_CONTRACT_FIXTURE", "tests/fixtures/citizen_preset_hash_matrix.json")
 citizen_preset_contract_out := env_var_or_default("CITIZEN_PRESET_CONTRACT_OUT", "")
 citizen_preset_parity_source := env_var_or_default("CITIZEN_PRESET_PARITY_SOURCE", "ui/citizen/preset_codec.js")
-citizen_preset_parity_published := env_var_or_default("CITIZEN_PRESET_PARITY_PUBLISHED", "ui/gh-pages-next/public/legacy/citizen/preset_codec.js")
+citizen_preset_parity_published := env_var_or_default("CITIZEN_PRESET_PARITY_PUBLISHED", "ui/site/public/legacy/citizen/preset_codec.js")
 citizen_preset_parity_out := env_var_or_default("CITIZEN_PRESET_PARITY_OUT", "")
 citizen_preset_sync_source := env_var_or_default("CITIZEN_PRESET_SYNC_SOURCE", "ui/citizen/preset_codec.js")
-citizen_preset_sync_published := env_var_or_default("CITIZEN_PRESET_SYNC_PUBLISHED", "ui/gh-pages-next/public/legacy/citizen/preset_codec.js")
+citizen_preset_sync_published := env_var_or_default("CITIZEN_PRESET_SYNC_PUBLISHED", "ui/site/public/legacy/citizen/preset_codec.js")
 citizen_preset_sync_out := env_var_or_default("CITIZEN_PRESET_SYNC_OUT", "")
 citizen_preset_bundle_out := env_var_or_default("CITIZEN_PRESET_BUNDLE_OUT", "")
 citizen_preset_bundle_history_path := env_var_or_default("CITIZEN_PRESET_BUNDLE_HISTORY_PATH", "docs/etl/runs/citizen_preset_contract_bundle_history.jsonl")
@@ -1404,7 +1404,7 @@ citizen_preset_bundle_history_slo_digest_heartbeat_compact_window_digest_heartbe
 citizen_preset_bundle_history_slo_digest_heartbeat_compact_window_digest_heartbeat_compact_out := env_var_or_default("CITIZEN_PRESET_BUNDLE_HISTORY_SLO_DIGEST_HEARTBEAT_COMPACT_WINDOW_DIGEST_HEARTBEAT_COMPACT_OUT", "")
 citizen_preset_bundle_history_slo_digest_heartbeat_compact_window_digest_heartbeat_compact_window := env_var_or_default("CITIZEN_PRESET_BUNDLE_HISTORY_SLO_DIGEST_HEARTBEAT_COMPACT_WINDOW_DIGEST_HEARTBEAT_COMPACT_WINDOW", "20")
 citizen_preset_bundle_history_slo_digest_heartbeat_compact_window_digest_heartbeat_compact_window_out := env_var_or_default("CITIZEN_PRESET_BUNDLE_HISTORY_SLO_DIGEST_HEARTBEAT_COMPACT_WINDOW_DIGEST_HEARTBEAT_COMPACT_WINDOW_OUT", "")
-citizen_product_kpi_snapshot := env_var_or_default("CITIZEN_PRODUCT_KPI_SNAPSHOT", "ui/gh-pages-next/public/citizen/data/citizen.json")
+citizen_product_kpi_snapshot := env_var_or_default("CITIZEN_PRODUCT_KPI_SNAPSHOT", "ui/site/public/citizen/data/citizen.json")
 citizen_product_kpi_events := env_var_or_default("CITIZEN_PRODUCT_KPI_EVENTS", "")
 citizen_product_kpi_summary := env_var_or_default("CITIZEN_PRODUCT_KPI_SUMMARY", "")
 citizen_product_kpi_out := env_var_or_default("CITIZEN_PRODUCT_KPI_OUT", "docs/etl/sprints/AI-OPS-72/evidence/citizen_product_kpis_latest.json")
@@ -1441,7 +1441,7 @@ citizen_product_kpi_heartbeat_compact_window_last := env_var_or_default("CITIZEN
 citizen_product_kpi_heartbeat_compact_window_out := env_var_or_default("CITIZEN_PRODUCT_KPI_HEARTBEAT_COMPACT_WINDOW_OUT", "docs/etl/sprints/AI-OPS-107/evidence/citizen_product_kpis_heartbeat_compaction_window_latest.json")
 citizen_mobile_perf_ui_html := env_var_or_default("CITIZEN_MOBILE_PERF_UI_HTML", "ui/citizen/index.html")
 citizen_mobile_perf_ui_assets := env_var_or_default("CITIZEN_MOBILE_PERF_UI_ASSETS", "ui/citizen/preset_codec.js,ui/citizen/onboarding_funnel.js,ui/citizen/first_answer_accelerator.js,ui/citizen/unknown_explainability.js,ui/citizen/cross_method_stability.js,ui/citizen/evidence_trust_panel.js")
-citizen_mobile_perf_snapshot := env_var_or_default("CITIZEN_MOBILE_PERF_SNAPSHOT", "ui/gh-pages-next/public/citizen/data/citizen.json")
+citizen_mobile_perf_snapshot := env_var_or_default("CITIZEN_MOBILE_PERF_SNAPSHOT", "ui/site/public/citizen/data/citizen.json")
 citizen_mobile_perf_out := env_var_or_default("CITIZEN_MOBILE_PERF_OUT", "docs/etl/sprints/AI-OPS-76/evidence/citizen_mobile_performance_budget_latest.json")
 citizen_mobile_perf_max_ui_html_bytes := env_var_or_default("CITIZEN_MOBILE_PERF_MAX_UI_HTML_BYTES", "220000")
 citizen_mobile_perf_max_ui_assets_total_bytes := env_var_or_default("CITIZEN_MOBILE_PERF_MAX_UI_ASSETS_TOTAL_BYTES", "60000")
@@ -1481,10 +1481,10 @@ citizen_tailwind_md3_min_chip_markers := env_var_or_default("CITIZEN_TAILWIND_MD
 citizen_tailwind_md3_min_button_markers := env_var_or_default("CITIZEN_TAILWIND_MD3_MIN_BUTTON_MARKERS", "20")
 citizen_tailwind_md3_min_tab_markers := env_var_or_default("CITIZEN_TAILWIND_MD3_MIN_TAB_MARKERS", "6")
 citizen_tailwind_md3_drift_contract := env_var_or_default("CITIZEN_TAILWIND_MD3_DRIFT_CONTRACT", "docs/etl/sprints/AI-OPS-96/evidence/citizen_tailwind_md3_contract_latest.json")
-citizen_tailwind_md3_drift_published_tokens := env_var_or_default("CITIZEN_TAILWIND_MD3_DRIFT_PUBLISHED_TOKENS", "ui/gh-pages-next/public/citizen/tailwind_md3.tokens.json")
-citizen_tailwind_md3_drift_published_data_tokens := env_var_or_default("CITIZEN_TAILWIND_MD3_DRIFT_PUBLISHED_DATA_TOKENS", "ui/gh-pages-next/public/citizen/data/tailwind_md3.tokens.json")
-citizen_tailwind_md3_drift_published_css := env_var_or_default("CITIZEN_TAILWIND_MD3_DRIFT_PUBLISHED_CSS", "ui/gh-pages-next/public/citizen/tailwind_md3.generated.css")
-citizen_tailwind_md3_drift_published_ui_html := env_var_or_default("CITIZEN_TAILWIND_MD3_DRIFT_PUBLISHED_UI_HTML", "ui/gh-pages-next/public/citizen/index.html")
+citizen_tailwind_md3_drift_published_tokens := env_var_or_default("CITIZEN_TAILWIND_MD3_DRIFT_PUBLISHED_TOKENS", "ui/site/public/citizen/tailwind_md3.tokens.json")
+citizen_tailwind_md3_drift_published_data_tokens := env_var_or_default("CITIZEN_TAILWIND_MD3_DRIFT_PUBLISHED_DATA_TOKENS", "ui/site/public/citizen/data/tailwind_md3.tokens.json")
+citizen_tailwind_md3_drift_published_css := env_var_or_default("CITIZEN_TAILWIND_MD3_DRIFT_PUBLISHED_CSS", "ui/site/public/citizen/tailwind_md3.generated.css")
+citizen_tailwind_md3_drift_published_ui_html := env_var_or_default("CITIZEN_TAILWIND_MD3_DRIFT_PUBLISHED_UI_HTML", "ui/site/public/citizen/index.html")
 citizen_tailwind_md3_drift_out := env_var_or_default("CITIZEN_TAILWIND_MD3_DRIFT_OUT", "docs/etl/sprints/AI-OPS-96/evidence/citizen_tailwind_md3_visual_drift_digest_latest.json")
 citizen_tailwind_md3_drift_heartbeat_path := env_var_or_default("CITIZEN_TAILWIND_MD3_DRIFT_HEARTBEAT_PATH", "docs/etl/runs/citizen_tailwind_md3_visual_drift_digest_heartbeat.jsonl")
 citizen_tailwind_md3_drift_heartbeat_out := env_var_or_default("CITIZEN_TAILWIND_MD3_DRIFT_HEARTBEAT_OUT", "docs/etl/sprints/AI-OPS-103/evidence/citizen_tailwind_md3_visual_drift_digest_heartbeat_latest.json")
@@ -1511,8 +1511,8 @@ citizen_tailwind_md3_drift_heartbeat_compact_out := env_var_or_default("CITIZEN_
 citizen_tailwind_md3_drift_heartbeat_compact_window_last := env_var_or_default("CITIZEN_TAILWIND_MD3_DRIFT_HEARTBEAT_COMPACT_WINDOW_LAST", "20")
 citizen_tailwind_md3_drift_heartbeat_compact_window_out := env_var_or_default("CITIZEN_TAILWIND_MD3_DRIFT_HEARTBEAT_COMPACT_WINDOW_OUT", "docs/etl/sprints/AI-OPS-108/evidence/citizen_tailwind_md3_visual_drift_digest_heartbeat_compaction_window_latest.json")
 citizen_release_source_root := env_var_or_default("CITIZEN_RELEASE_SOURCE_ROOT", "ui/citizen")
-citizen_release_published_root := env_var_or_default("CITIZEN_RELEASE_PUBLISHED_ROOT", "ui/gh-pages-next/out/citizen")
-citizen_release_snapshot := env_var_or_default("CITIZEN_RELEASE_SNAPSHOT", "ui/gh-pages-next/public/citizen/data/citizen.json")
+citizen_release_published_root := env_var_or_default("CITIZEN_RELEASE_PUBLISHED_ROOT", "ui/site/out/citizen")
+citizen_release_snapshot := env_var_or_default("CITIZEN_RELEASE_SNAPSHOT", "ui/site/public/citizen/data/citizen.json")
 citizen_release_concerns := env_var_or_default("CITIZEN_RELEASE_CONCERNS", "ui/citizen/concerns_v1.json")
 citizen_release_assets := env_var_or_default("CITIZEN_RELEASE_ASSETS", "index.html,preset_codec.js,onboarding_funnel.js,first_answer_accelerator.js,unknown_explainability.js,cross_method_stability.js,evidence_trust_panel.js,tailwind_md3.generated.css,tailwind_md3.tokens.json")
 citizen_release_max_snapshot_bytes := env_var_or_default("CITIZEN_RELEASE_MAX_SNAPSHOT_BYTES", "5000000")
@@ -1540,7 +1540,7 @@ citizen_release_trace_heartbeat_compact_min_raw := env_var_or_default("CITIZEN_R
 citizen_release_trace_heartbeat_compact_out := env_var_or_default("CITIZEN_RELEASE_TRACE_HEARTBEAT_COMPACT_OUT", "docs/etl/sprints/AI-OPS-102/evidence/citizen_release_trace_digest_heartbeat_compaction_latest.json")
 citizen_release_trace_heartbeat_compact_window_last := env_var_or_default("CITIZEN_RELEASE_TRACE_HEARTBEAT_COMPACT_WINDOW_LAST", "20")
 citizen_release_trace_heartbeat_compact_window_out := env_var_or_default("CITIZEN_RELEASE_TRACE_HEARTBEAT_COMPACT_WINDOW_OUT", "docs/etl/sprints/AI-OPS-102/evidence/citizen_release_trace_digest_heartbeat_compaction_window_latest.json")
-citizen_pack_quality_snapshot := env_var_or_default("CITIZEN_PACK_QUALITY_SNAPSHOT", "ui/gh-pages-next/public/citizen/data/citizen.json")
+citizen_pack_quality_snapshot := env_var_or_default("CITIZEN_PACK_QUALITY_SNAPSHOT", "ui/site/public/citizen/data/citizen.json")
 citizen_pack_quality_concerns := env_var_or_default("CITIZEN_PACK_QUALITY_CONCERNS", "ui/citizen/concerns_v1.json")
 citizen_pack_quality_out := env_var_or_default("CITIZEN_PACK_QUALITY_OUT", "docs/etl/sprints/AI-OPS-78/evidence/citizen_concern_pack_quality_latest.json")
 citizen_pack_quality_min_topics_per_pack := env_var_or_default("CITIZEN_PACK_QUALITY_MIN_TOPICS_PER_PACK", "10")
@@ -1755,10 +1755,10 @@ etl-backfill-money-subsidy-records:
 # Lossless disk reclaim: byte-identical local data files become copy-on-write
 # clones (APFS/reflink). Runs on the host; Docker bind mounts cannot clone.
 storage-dedupe-dry-run:
-  python3 scripts/dedupe_local_storage.py etl/data ui/gh-pages-next
+  python3 scripts/dedupe_local_storage.py etl/data ui/site
 
 storage-dedupe:
-  python3 scripts/dedupe_local_storage.py etl/data ui/gh-pages-next --apply
+  python3 scripts/dedupe_local_storage.py etl/data ui/site --apply
 
 etl-test:
   docker compose run --rm --build etl "python3 -m unittest discover -s tests -v"
@@ -1804,7 +1804,7 @@ etl-live-parlamentario:
   docker compose run --rm --build etl "python3 scripts/ingestar_parlamentario_es.py ingest --db {{db_path}} --source senado_iniciativas --snapshot-date {{snapshot_date}} --timeout {{textdoc_timeout}} --senado-legs {{live_parl_senado_legs}} --max-records {{live_parl_max_records}}"
 
 etl-elecciones:
-  docker compose run --rm --build etl "python3 scripts/generar_proximas_elecciones_espana.py --today {{snapshot_date}} --timeout {{infoelectoral_timeout}} --public-json-out ui/gh-pages-next/public/calendario-electoral/data/election-calendar.json"
+  docker compose run --rm --build etl "python3 scripts/generar_proximas_elecciones_espana.py --today {{snapshot_date}} --timeout {{infoelectoral_timeout}} --public-json-out ui/site/public/calendario-electoral/data/election-calendar.json"
 
 etl-publish-representantes:
   docker compose run --rm --build etl "python3 scripts/publicar_representantes_es.py --db {{db_path}} --snapshot-date {{snapshot_date}}"
@@ -5662,7 +5662,7 @@ cloudflare-pages-refresh-data:
   cp ui/graph/explorer-temas.html {{gh_pages_dir}}/legacy/explorer-temas/index.html
   cp ui/graph/explorer-votaciones.html {{gh_pages_dir}}/legacy/explorer-votaciones/index.html
   cp ui/graph/explorer-sports.html {{gh_pages_dir}}/legacy/explorer-politico/index.html
-  cp ui/gh-pages-next/public/legacy/index.html {{gh_pages_dir}}/legacy/index.html
+  cp ui/site/public/legacy/index.html {{gh_pages_dir}}/legacy/index.html
   cp ui/citizen/tailwind_md3.tokens.json {{gh_pages_dir}}/citizen/data/tailwind_md3.tokens.json
   cp ui/citizen/concerns_v1.json {{gh_pages_dir}}/citizen/data/concerns_v1.json
   python3 scripts/validate_citizen_concerns.py \
@@ -5789,9 +5789,9 @@ cloudflare-pages-refresh-data:
   citizen_fallback_declared="$(mktemp)"; \
   cleanup() { rm -f "$citizen_fallback_auto" "$citizen_fallback_votes" "$citizen_fallback_declared"; }; \
   trap cleanup EXIT; \
-  git show HEAD:ui/gh-pages-next/public/citizen/data/citizen.json > "$citizen_fallback_auto" 2>/dev/null || true; \
-  git show HEAD:ui/gh-pages-next/public/citizen/data/citizen_votes.json > "$citizen_fallback_votes" 2>/dev/null || true; \
-  git show HEAD:ui/gh-pages-next/public/citizen/data/citizen_declared.json > "$citizen_fallback_declared" 2>/dev/null || true; \
+  git show HEAD:ui/site/public/citizen/data/citizen.json > "$citizen_fallback_auto" 2>/dev/null || true; \
+  git show HEAD:ui/site/public/citizen/data/citizen_votes.json > "$citizen_fallback_votes" 2>/dev/null || true; \
+  git show HEAD:ui/site/public/citizen/data/citizen_declared.json > "$citizen_fallback_declared" 2>/dev/null || true; \
   python3 scripts/export_citizen_snapshot.py \
     --db "$citizen_db" \
     --out "{{gh_pages_dir}}/citizen/data/citizen.json" \
@@ -6639,13 +6639,13 @@ cloudflare-pages-deploy:
   @exit 1
 
 # gh-pages is retired as the publish record (2026-10-12): R2 + /releases/<id>/manifest.json are the record.
-# Build the static site and publish ui/gh-pages-next/out straight to the R2 origin of votaconlachola.org.
+# Build the static site and publish ui/site/out straight to the R2 origin of votaconlachola.org.
 site-publish:
   #!/usr/bin/env bash
   set -euo pipefail
   # Record what the build came from before building (the sync may run later); dotfiles are never published.
   commit="$(git rev-parse HEAD)"
-  dirty=false; if [ -n "$(git status --porcelain --untracked-files=no -- ui/gh-pages-next)" ]; then dirty=true; fi
+  dirty=false; if [ -n "$(git status --porcelain --untracked-files=no -- ui/site)" ]; then dirty=true; fi
   just cloudflare-pages-build
   printf '{"source_commit": "%s", "source_dirty": %s, "built_at": "%s"}\n' "$commit" "$dirty" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > "{{gh_pages_next_out_dir}}/.vclc-build.json"
   just site-origin-publish
@@ -6656,7 +6656,7 @@ votaconlachola-gh-pages-publish:
   @just site-publish
 
 # Needs R2_* env (S3 API); also publishes a sha256 release manifest at /releases/latest.json.
-# Sync the built site (ui/gh-pages-next/out) to the votaconlachola.org R2 origin, changed files only.
+# Sync the built site (ui/site/out) to the votaconlachola.org R2 origin, changed files only.
 site-origin-publish:
   #!/usr/bin/env bash
   set -euo pipefail

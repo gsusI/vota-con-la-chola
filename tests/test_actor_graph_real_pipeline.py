@@ -10,7 +10,7 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 GRAPH_DB = REPO_ROOT / "etl/data/staging/actor-graph-v1.db"
 PUBLISHED = REPO_ROOT / "etl/data/published/actor-graph-v1.json"
-PUBLIC = REPO_ROOT / "ui/gh-pages-next/public/actor-graph/data/graph.json"
+PUBLIC = REPO_ROOT / "ui/site/public/actor-graph/data/graph.json"
 MAIN_DB = REPO_ROOT / "etl/data/staging/politicos-es.db"
 EXPECTED_RELEASE_ID = "e52dd7fac6f29570d23756e927e0b9cfe73d1bf2f7c30fa01de75d4dc3a6f4a5"
 EXPECTED_ARTIFACT_SHA256 = (

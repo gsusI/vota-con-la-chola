@@ -32,7 +32,7 @@ ECONOMICS_REQUIRED_CHECKS = {
 }
 REPO_ROOT = Path(__file__).resolve().parents[1]
 EXPECTED_ECONOMICS_SOURCE_PATH = Path(
-    "ui/gh-pages-next/public/transparency/data/document-factory-economics.json"
+    "ui/site/public/transparency/data/document-factory-economics.json"
 )
 EXPECTED_ECONOMICS_SOURCE_URL = "/transparency/data/document-factory-economics.json"
 

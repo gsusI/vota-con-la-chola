@@ -39,7 +39,7 @@ DEFAULT_VALIDATION_REPORT = (
     / "docs/etl/sprints/OUTCOME-CONTEXT-20260820/evidence/"
     "outcome-context-validation.json"
 )
-DEFAULT_OUT = REPO_ROOT / "ui/gh-pages-next/public/policy-outcomes/data/policy-outcomes.json"
+DEFAULT_OUT = REPO_ROOT / "ui/site/public/policy-outcomes/data/policy-outcomes.json"
 DEFAULT_SIGNED_SCALE_MANIFEST = (
     REPO_ROOT
     / "docs/etl/sprints/REPRODUCIBILITY-20260819/evidence/"

@@ -28,7 +28,7 @@ if str(ROOT_DIR) not in sys.path:
 from etl.parlamentario_es.db import open_db
 
 DEFAULT_DB = Path("etl/data/staging/politicos-es.db")
-DEFAULT_OUT = Path("ui/gh-pages-next/public/legal-sanctions/data/legal-sanctions.json")
+DEFAULT_OUT = Path("ui/site/public/legal-sanctions/data/legal-sanctions.json")
 
 
 def parse_args() -> argparse.Namespace:

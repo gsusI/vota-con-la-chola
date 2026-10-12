@@ -10,9 +10,9 @@ function readRepoFile(relativePath) {
 }
 
 test("promises route renders every reviewed real public item", () => {
-  const page = readRepoFile("ui/gh-pages-next/app/promises/page.js");
+  const page = readRepoFile("ui/site/app/promises/page.js");
   const feed = JSON.parse(
-    readRepoFile("ui/gh-pages-next/public/promises/data/bng-2023.json"),
+    readRepoFile("ui/site/public/promises/data/bng-2023.json"),
   );
 
   assert.equal(feed.real_data_only, true);
@@ -25,9 +25,9 @@ test("promises route renders every reviewed real public item", () => {
 });
 
 test("promises route exposes official evidence and public machine-readable data", () => {
-  const page = readRepoFile("ui/gh-pages-next/app/promises/page.js");
-  const home = readRepoFile("ui/gh-pages-next/app/page.js");
-  const catalog = readRepoFile("ui/gh-pages-next/app/siteCatalog.mjs");
+  const page = readRepoFile("ui/site/app/promises/page.js");
+  const home = readRepoFile("ui/site/app/page.js");
+  const catalog = readRepoFile("ui/site/app/siteCatalog.mjs");
   const routeAudit = readRepoFile("scripts/audit_public_routes.js");
 
   assert.match(page, /Abrir PDF oficial/);
@@ -40,8 +40,8 @@ test("promises route exposes official evidence and public machine-readable data"
 });
 
 test("promises UI has semantic selectors and motion-safe physical feedback", () => {
-  const page = readRepoFile("ui/gh-pages-next/app/promises/page.js");
-  const styles = readRepoFile("ui/gh-pages-next/app/promises/promises.module.css");
+  const page = readRepoFile("ui/site/app/promises/page.js");
+  const styles = readRepoFile("ui/site/app/promises/promises.module.css");
 
   assert.match(page, /promises-page/);
   assert.match(page, /promise-evidence-card__quote/);

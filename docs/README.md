@@ -52,5 +52,5 @@ Otros:
 - `docs/examples/actor-graph-evidence.sql` (consulta reproducible actor -> relación temporal -> contexto -> evidencia, sin merge por nombre ni inferencia causal).
 - `CODE_OF_CONDUCT.md`, `SECURITY.md` y `CITATION.cff` (confianza y reutilización comunitaria).
 - `docs/proximas-elecciones-espana.md` (se genera junto a `etl/data/published/proximas-elecciones-espana.json`).
-- `ui/gh-pages-next/` es la app Next.js estática que genera el sitio público de Cloudflare Pages con `just cloudflare-pages-build`.
-- `ui/gh-pages-next/out/` es salida generada para Cloudflare Pages; no editar a mano ni versionar.
+- `ui/site/` es la app Next.js estática que genera el sitio público de Cloudflare Pages con `just cloudflare-pages-build`.
+- `ui/site/out/` es salida generada para Cloudflare Pages; no editar a mano ni versionar.

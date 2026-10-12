@@ -29,8 +29,8 @@ Contrato máquina:
 
 | Bloque | Fuente | Regla |
 | --- | --- | --- |
-| salud y último refresco | `ui/gh-pages-next/public/explorer-sources/data/status.json` | no recalcular desde copy de UI |
-| obstrucciones | `ui/gh-pages-next/public/obstruction-tracker/data/obstructions.json` y su manifest | conservar incidentes y caveat de no atribución |
+| salud y último refresco | `ui/site/public/explorer-sources/data/status.json` | no recalcular desde copy de UI |
+| obstrucciones | `ui/site/public/obstruction-tracker/data/obstructions.json` y su manifest | conservar incidentes y caveat de no atribución |
 | readiness local | `etl/data/published/scale-readiness-latest.json` | `0` promociones sigue siendo resultado válido |
 | snapshot durable | verificación live de HF registrada en `docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/hf-scale-origin-live-verification-20260812.json` | mostrar warnings de drift, no ocultarlos |
 | cambios | `docs/release-notes/releases.json` | solo releases reales con nota y evidencia existentes |

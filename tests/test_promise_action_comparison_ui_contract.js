@@ -10,12 +10,12 @@ function readRepoFile(relativePath) {
 }
 
 test("comparison route renders the complete bounded real slice", () => {
-  const page = readRepoFile("ui/gh-pages-next/app/comparisons/page.js");
+  const page = readRepoFile("ui/site/app/comparisons/page.js");
   const published = readRepoFile(
     "etl/data/published/promise-action-comparisons-v1.json",
   );
   const publicCopy = readRepoFile(
-    "ui/gh-pages-next/public/comparisons/data/comparisons.json",
+    "ui/site/public/comparisons/data/comparisons.json",
   );
   const snapshot = JSON.parse(publicCopy);
 
@@ -48,9 +48,9 @@ test("comparison route renders the complete bounded real slice", () => {
 });
 
 test("comparison copy makes uncertainty, capacity, and non-causal limits visible", () => {
-  const page = readRepoFile("ui/gh-pages-next/app/comparisons/page.js");
+  const page = readRepoFile("ui/site/app/comparisons/page.js");
   const snapshot = JSON.parse(
-    readRepoFile("ui/gh-pages-next/public/comparisons/data/comparisons.json"),
+    readRepoFile("ui/site/public/comparisons/data/comparisons.json"),
   );
 
   assert.match(page, /Comparar no es sentenciar/);
@@ -74,13 +74,13 @@ test("comparison copy makes uncertainty, capacity, and non-causal limits visible
 });
 
 test("comparison route is discoverable, auditable, semantic, and motion-safe", () => {
-  const page = readRepoFile("ui/gh-pages-next/app/comparisons/page.js");
+  const page = readRepoFile("ui/site/app/comparisons/page.js");
   const styles = readRepoFile(
-    "ui/gh-pages-next/app/comparisons/comparisons.module.css",
+    "ui/site/app/comparisons/comparisons.module.css",
   );
-  const home = readRepoFile("ui/gh-pages-next/app/page.js");
-  const catalog = readRepoFile("ui/gh-pages-next/app/siteCatalog.mjs");
-  const breadcrumbs = readRepoFile("ui/gh-pages-next/app/components/Breadcrumbs.js");
+  const home = readRepoFile("ui/site/app/page.js");
+  const catalog = readRepoFile("ui/site/app/siteCatalog.mjs");
+  const breadcrumbs = readRepoFile("ui/site/app/components/Breadcrumbs.js");
   const routeAudit = readRepoFile("scripts/audit_public_routes.js");
 
   assert.match(home, /href: "\/comparisons\/"/);

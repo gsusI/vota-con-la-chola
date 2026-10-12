@@ -1,0 +1,115 @@
+{
+  "api_release_id": "10048105cc805126250856a5488f654e6a46062a33179b1f463cba03626241ce",
+  "api_version": "v1",
+  "collections": [
+    {
+      "first": "/api/v1/releases/10048105cc805126250856a5488f654e6a46062a33179b1f463cba03626241ce/entities/pages/00000001-a11adb441a05396702e015d87746865504e238082d013958f4985598e412201c.json",
+      "id": "entities",
+      "item_count": 1147,
+      "manifest": "/api/v1/releases/10048105cc805126250856a5488f654e6a46062a33179b1f463cba03626241ce/entities/manifest.json",
+      "manifest_bytes": 2904,
+      "manifest_sha256": "3c8007763cf05ed78303fc94c7bf96a0306c2de4ec1e10edf292c57ea47d4819",
+      "page_count": 5,
+      "page_size": 250
+    },
+    {
+      "first": "/api/v1/releases/10048105cc805126250856a5488f654e6a46062a33179b1f463cba03626241ce/evidence-chains/pages/00000001-39d1b605dff65128f07ca47f9010c52935e3391c04b4e4d69873dcc292ae9130.json",
+      "id": "evidence-chains",
+      "item_count": 1105,
+      "manifest": "/api/v1/releases/10048105cc805126250856a5488f654e6a46062a33179b1f463cba03626241ce/evidence-chains/manifest.json",
+      "manifest_bytes": 3451,
+      "manifest_sha256": "81cb4813f8acd1230c4506fbbdfef536795043141c17270022fe4513bf421244",
+      "page_count": 5,
+      "page_size": 250
+    },
+    {
+      "first": "/api/v1/releases/10048105cc805126250856a5488f654e6a46062a33179b1f463cba03626241ce/source-health/pages/00000001-b7f6134b1b36bee07fc46a904db9872f318b519695e5e771d36142ff94d2ab12.json",
+      "id": "source-health",
+      "item_count": 48,
+      "manifest": "/api/v1/releases/10048105cc805126250856a5488f654e6a46062a33179b1f463cba03626241ce/source-health/manifest.json",
+      "manifest_bytes": 1052,
+      "manifest_sha256": "57f50e314688209952d1a16b63a4e7d8b98c3a1a737b7e4d9d98b0770de4231f",
+      "page_count": 1,
+      "page_size": 250
+    },
+    {
+      "first": "/api/v1/releases/10048105cc805126250856a5488f654e6a46062a33179b1f463cba03626241ce/question-results/pages/00000001-63eb428bfa705c4eb0cdbadb495be318af9501f9c170c2a1a33e0592a0718f7f.json",
+      "id": "question-results",
+      "item_count": 3530,
+      "manifest": "/api/v1/releases/10048105cc805126250856a5488f654e6a46062a33179b1f463cba03626241ce/question-results/manifest.json",
+      "manifest_bytes": 9279,
+      "manifest_sha256": "0ec97c4af20e5100ae08302c839521a4d81709c2ff1c33cadb479ce9704e8390",
+      "page_count": 15,
+      "page_size": 250
+    }
+  ],
+  "compatibility": {
+    "breaking_changes": "new major path required",
+    "contract": "additive within v1",
+    "deprecation_window_days": 180,
+    "minimum_parallel_public_releases": 2,
+    "pagination": "opaque seek cursor; offset pagination is not part of v1"
+  },
+  "data_snapshot_date": "2026-08-12",
+  "exporter_version": "1.0.0",
+  "links": {
+    "current": "/api/v1/index.json",
+    "documentation": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/api/evidence-api-v1.md",
+    "schema": "/api/v1/schema.json",
+    "self": "/api/v1/releases/10048105cc805126250856a5488f654e6a46062a33179b1f463cba03626241ce/index.json"
+  },
+  "policy": {
+    "official_real_records_only": true,
+    "public_domain_personal_information": "retained",
+    "read_only": true,
+    "synthetic_or_mock_records": "forbidden",
+    "unknown_states_explicit": true
+  },
+  "schema_version": "evidence_api_release_index_v1",
+  "source_artifacts": [
+    {
+      "bytes": 6488,
+      "path": "docs/api/evidence-api-v1.schema.json",
+      "schema_version": "evidence_api_json_schema_v1",
+      "sha256": "a246c0ccdd98f887385e3f534aaaf3eb59affb7ef8c75ec028ede189806e6400"
+    },
+    {
+      "bytes": 4108,
+      "path": "docs/etl/sprints/REPRODUCIBILITY-20260819/evidence/live-scale-origin-parity.json",
+      "schema_version": "scale_origin_live_verification_v1",
+      "sha256": "dc6ed2b6d5e2fbe30a09bc98a52d90f022bfbb73da51a6422319bb43b0af2fa1"
+    },
+    {
+      "bytes": 2052,
+      "path": "docs/etl/sprints/REPRODUCIBILITY-20260819/evidence/live-signed-snapshot-verification.json",
+      "schema_version": "vclc_live_snapshot_attestation_verification_v1",
+      "sha256": "2dd1934b96c7cd8a5003e7a3ff1bd5919069a354a24f1bcb12a842e33a771b6a"
+    },
+    {
+      "bytes": 6653189,
+      "path": "etl/data/published/accountability-evidence-api-latest.json",
+      "schema_version": "accountability_evidence_api_v1",
+      "sha256": "637a819b165ebbe61b40b127b773d69ebcd8337c8aeb74d4c6fb49e70c62f141"
+    },
+    {
+      "bytes": 28150,
+      "path": "scripts/export_evidence_api_v1.py",
+      "schema_version": "evidence_api_exporter_1.0.0",
+      "sha256": "117eca17e3a558fd027759be13131fbf3e9b33921f3fd894eaf09bda60934c7a"
+    },
+    {
+      "bytes": 1098605,
+      "path": "ui/site/public/explorer-sources/data/status.json",
+      "schema_version": "source_status_v1",
+      "sha256": "fc04e436561c63edcf21696743d74bae8fb7517edcfd310dccc7567f6cb57640"
+    }
+  ],
+  "upstream_scale_release": {
+    "attestation": "https://huggingface.co/datasets/JesusIC/vota-con-la-chola-data/resolve/main/scale/snapshots/2026-08-19/5d9ce557ed864de56f677a9f82c999a4ec0dfc494c086b1bfca0bb2e461272dd/attestation/attestation.json",
+    "manifest": "https://huggingface.co/datasets/JesusIC/vota-con-la-chola-data/resolve/main/scale/snapshots/2026-08-19/5d9ce557ed864de56f677a9f82c999a4ec0dfc494c086b1bfca0bb2e461272dd/manifest.json",
+    "release_id": "5d9ce557ed864de56f677a9f82c999a4ec0dfc494c086b1bfca0bb2e461272dd",
+    "schema_version": "real-scale-origin-bundle-v2",
+    "signature_verified": true,
+    "snapshot_date": "2026-08-19"
+  }
+}

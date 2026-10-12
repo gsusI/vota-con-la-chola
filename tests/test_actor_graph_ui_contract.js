@@ -10,9 +10,9 @@ function readRepoFile(relativePath) {
 }
 
 test("actor graph route uses only real public data and exposes bounded samples", () => {
-  const page = readRepoFile("ui/gh-pages-next/app/actor-graph/page.js");
+  const page = readRepoFile("ui/site/app/actor-graph/page.js");
   const graph = JSON.parse(
-    readRepoFile("ui/gh-pages-next/public/actor-graph/data/graph.json"),
+    readRepoFile("ui/site/public/actor-graph/data/graph.json"),
   );
 
   assert.equal(graph.meta.real_data_only, true);
@@ -33,10 +33,10 @@ test("actor graph route uses only real public data and exposes bounded samples",
 });
 
 test("actor graph route states identity and causal limits in citizen-facing language", () => {
-  const page = readRepoFile("ui/gh-pages-next/app/actor-graph/page.js");
-  const home = readRepoFile("ui/gh-pages-next/app/page.js");
-  const catalog = readRepoFile("ui/gh-pages-next/app/siteCatalog.mjs");
-  const breadcrumbs = readRepoFile("ui/gh-pages-next/app/components/Breadcrumbs.js");
+  const page = readRepoFile("ui/site/app/actor-graph/page.js");
+  const home = readRepoFile("ui/site/app/page.js");
+  const catalog = readRepoFile("ui/site/app/siteCatalog.mjs");
+  const breadcrumbs = readRepoFile("ui/site/app/components/Breadcrumbs.js");
   const routeAudit = readRepoFile("scripts/audit_public_routes.js");
 
   assert.match(page, /Mismo nombre no significa misma persona/);
@@ -54,8 +54,8 @@ test("actor graph route states identity and causal limits in citizen-facing lang
 });
 
 test("actor graph UI has stable semantic classes and motion-safe layout changes", () => {
-  const page = readRepoFile("ui/gh-pages-next/app/actor-graph/page.js");
-  const styles = readRepoFile("ui/gh-pages-next/app/actor-graph/actor-graph.module.css");
+  const page = readRepoFile("ui/site/app/actor-graph/page.js");
+  const styles = readRepoFile("ui/site/app/actor-graph/actor-graph.module.css");
 
   assert.match(page, /actor-graph-page/);
   assert.match(page, /actor-sample-card__name/);

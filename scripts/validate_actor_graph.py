@@ -28,7 +28,7 @@ DEFAULT_MANIFEST = (
     / "etl/data/published/actor-mandate-semantic-partition-manifest-latest.json"
 )
 DEFAULT_PUBLISHED = REPO_ROOT / "etl/data/published/actor-graph-v1.json"
-DEFAULT_PUBLIC = REPO_ROOT / "ui/gh-pages-next/public/actor-graph/data/graph.json"
+DEFAULT_PUBLIC = REPO_ROOT / "ui/site/public/actor-graph/data/graph.json"
 DEFAULT_MATERIALIZATION_REPORT = (
     REPO_ROOT
     / "docs/etl/sprints/ACTOR-GRAPH-20260820/evidence/actor-graph-materialization.json"

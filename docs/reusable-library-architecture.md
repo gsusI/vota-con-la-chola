@@ -135,7 +135,7 @@ Configured sources from `etl/politicos_es/config.py`, `etl/parlamentario_es/conf
 | Policy/action modeling | `policy_events.py`, `government_org.py`, `indicator_backfill.py`, seed imports | policy events, instruments, org units, indicators |
 | Quality gates | `quality.py`, `report_*`, `validate_*`, `etl-tracker-gate` | measurable gates and public blocker evidence |
 | Publish | `publish.py`, `publicar_*`, `export_*_snapshot.py`, `publicar_hf_snapshot.py` | JSON/Parquet/HF/static snapshots with privacy checks |
-| Product/UI | `scripts/graph_ui_server.py`, `ui/graph/*`, `ui/citizen/*`, `ui/gh-pages-next/*` | stays in Vota; consumes library outputs |
+| Product/UI | `scripts/graph_ui_server.py`, `ui/graph/*`, `ui/citizen/*`, `ui/site/*` | stays in Vota; consumes library outputs |
 
 ## Workflow contracts
 

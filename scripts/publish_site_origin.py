@@ -289,11 +289,11 @@ def sync(
 
 
 # Sources that end up in the static build: uncommitted changes there make the release not reproducible from its commit.
-SITE_SOURCE_PATHS = ("ui/gh-pages-next",)
+SITE_SOURCE_PATHS = ("ui/site",)
 
 
 def git_head(site: Path) -> str:
-    """Commit the build came from: the site's own repo if it is one, else this repo's HEAD (``ui/gh-pages-next/out``)."""
+    """Commit the build came from: the site's own repo if it is one, else this repo's HEAD (``ui/site/out``)."""
     for repo in (site, REPO_ROOT):
         result = subprocess.run(["git", "-C", str(repo), "rev-parse", "--show-toplevel", "HEAD"], capture_output=True, text=True)
         if result.returncode == 0:
@@ -324,7 +324,7 @@ def git_dirty(paths: Iterable[str] = SITE_SOURCE_PATHS) -> bool:
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--site", required=True, type=Path, help="Built site directory (ui/gh-pages-next/out)")
+    parser.add_argument("--site", required=True, type=Path, help="Built site directory (ui/site/out)")
     parser.add_argument("--bucket", default=DEFAULT_BUCKET)
     parser.add_argument("--release-id", default="", help="Defaults to <UTC timestamp>-<source commit[:12]>")
     parser.add_argument("--source-commit", default="", help="Defaults to git HEAD of --site, else of this repo")

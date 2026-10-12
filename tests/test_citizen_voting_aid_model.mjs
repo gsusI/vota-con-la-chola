@@ -11,10 +11,10 @@ import {
   sanitizeState,
   scoreParties,
   shareCodeFromHash,
-} from "../ui/gh-pages-next/app/citizen/vota/votingAidModel.mjs";
+} from "../ui/site/app/citizen/vota/votingAidModel.mjs";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
-const publishedPath = path.join(here, "..", "ui", "gh-pages-next", "public", "citizen", "data", "voting_aid_generales_v1.json");
+const publishedPath = path.join(here, "..", "ui", "site", "public", "citizen", "data", "voting_aid_generales_v1.json");
 
 const snapshot = {
   parties: [
@@ -89,7 +89,7 @@ test("published snapshot is scorable end to end", () => {
 
 test("theme labels, agreement kinds and next unanswered", async () => {
   const { themeLabel, agreementKind, nextUnansweredIndex } = await import(
-    "../ui/gh-pages-next/app/citizen/vota/votingAidModel.mjs"
+    "../ui/site/app/citizen/vota/votingAidModel.mjs"
   );
   assert.equal(themeLabel({ statement_id: "educacion-x", concern_id: "educacion" }), "Educación");
   assert.equal(themeLabel({ statement_id: "territorio-amnistia", concern_id: "seguridad_justicia" }), "Modelo territorial");
@@ -106,9 +106,9 @@ test("theme labels, agreement kinds and next unanswered", async () => {
 });
 
 test("endless mode: merged questions, balanced order, share v2, milestones, reactions", async () => {
-  const m = await import("../ui/gh-pages-next/app/citizen/vota/votingAidModel.mjs");
+  const m = await import("../ui/site/app/citizen/vota/votingAidModel.mjs");
   const snap = JSON.parse(fs.readFileSync(publishedPath, "utf-8"));
-  const poolPath = path.join(here, "..", "ui", "gh-pages-next", "public", "citizen", "data", "voting_aid_pool_v1.json");
+  const poolPath = path.join(here, "..", "ui", "site", "public", "citizen", "data", "voting_aid_pool_v1.json");
   const pool = JSON.parse(fs.readFileSync(poolPath, "utf-8"));
   const questions = m.buildQuestions(snap, pool);
   assert.equal(questions.length, snap.statements.length + pool.items.length);
@@ -153,7 +153,7 @@ test("endless mode: merged questions, balanced order, share v2, milestones, reac
 });
 
 test("podium share text has no answers, only top three", async () => {
-  const { podiumShareText } = await import("../ui/gh-pages-next/app/citizen/vota/votingAidModel.mjs");
+  const { podiumShareText } = await import("../ui/site/app/citizen/vota/votingAidModel.mjs");
   const text = podiumShareText(
     [
       { label: "A", match: 0.8 },
@@ -169,9 +169,9 @@ test("podium share text has no answers, only top three", async () => {
 });
 
 test("AI prompts carry exactly what was voted and never the user's answers", async () => {
-  const m = await import("../ui/gh-pages-next/app/citizen/vota/votingAidModel.mjs");
+  const m = await import("../ui/site/app/citizen/vota/votingAidModel.mjs");
   const snap = JSON.parse(fs.readFileSync(publishedPath, "utf-8"));
-  const poolPath = path.join(here, "..", "ui", "gh-pages-next", "public", "citizen", "data", "voting_aid_pool_v1.json");
+  const poolPath = path.join(here, "..", "ui", "site", "public", "citizen", "data", "voting_aid_pool_v1.json");
   const pool = JSON.parse(fs.readFileSync(poolPath, "utf-8"));
   const questions = m.buildQuestions(snap, pool);
   const poolQ = questions.find((q) => q.source === "pool" && q.text_url);
@@ -214,9 +214,9 @@ test("AI prompts carry exactly what was voted and never the user's answers", asy
 });
 
 test("official-text highlights attach to questions, flag omnibus and reach AI prompts", async () => {
-  const m = await import("../ui/gh-pages-next/app/citizen/vota/votingAidModel.mjs");
+  const m = await import("../ui/site/app/citizen/vota/votingAidModel.mjs");
   const snap = JSON.parse(fs.readFileSync(publishedPath, "utf-8"));
-  const dataDir = path.join(here, "..", "ui", "gh-pages-next", "public", "citizen", "data");
+  const dataDir = path.join(here, "..", "ui", "site", "public", "citizen", "data");
   const pool = JSON.parse(fs.readFileSync(path.join(dataDir, "voting_aid_pool_v1.json"), "utf-8"));
   const highlights = JSON.parse(fs.readFileSync(path.join(dataDir, "voting_aid_highlights_v1.json"), "utf-8"));
   const questions = m.attachHighlights(m.buildQuestions(snap, pool), highlights);
@@ -242,9 +242,9 @@ test("official-text highlights attach to questions, flag omnibus and reach AI pr
 });
 
 test("prefilled AI links stay under the URL budget for every question", async () => {
-  const m = await import("../ui/gh-pages-next/app/citizen/vota/votingAidModel.mjs");
+  const m = await import("../ui/site/app/citizen/vota/votingAidModel.mjs");
   const snap = JSON.parse(fs.readFileSync(publishedPath, "utf-8"));
-  const dataDir = path.join(here, "..", "ui", "gh-pages-next", "public", "citizen", "data");
+  const dataDir = path.join(here, "..", "ui", "site", "public", "citizen", "data");
   const pool = JSON.parse(fs.readFileSync(path.join(dataDir, "voting_aid_pool_v1.json"), "utf-8"));
   const highlights = JSON.parse(fs.readFileSync(path.join(dataDir, "voting_aid_highlights_v1.json"), "utf-8"));
   const bullets = JSON.parse(fs.readFileSync(path.join(dataDir, "voting_aid_vote_bullets_v1.json"), "utf-8"));
@@ -259,9 +259,9 @@ test("prefilled AI links stay under the URL budget for every question", async ()
 });
 
 test("«Qué se votaba» bullets attach per vote, reach prompts and never reveal votes before answering", async () => {
-  const m = await import("../ui/gh-pages-next/app/citizen/vota/votingAidModel.mjs");
+  const m = await import("../ui/site/app/citizen/vota/votingAidModel.mjs");
   const snap = JSON.parse(fs.readFileSync(publishedPath, "utf-8"));
-  const dataDir = path.join(here, "..", "ui", "gh-pages-next", "public", "citizen", "data");
+  const dataDir = path.join(here, "..", "ui", "site", "public", "citizen", "data");
   const pool = JSON.parse(fs.readFileSync(path.join(dataDir, "voting_aid_pool_v1.json"), "utf-8"));
   const highlights = JSON.parse(fs.readFileSync(path.join(dataDir, "voting_aid_highlights_v1.json"), "utf-8"));
   const bullets = JSON.parse(fs.readFileSync(path.join(dataDir, "voting_aid_vote_bullets_v1.json"), "utf-8"));

@@ -9,7 +9,7 @@ from scripts import export_voting_aid_vote_bullets as vb
 
 REPO = Path(__file__).resolve().parent.parent
 SEED = REPO / "etl/data/seeds/voting_aid_vote_bullets_v1.json"
-DATA = REPO / "ui/gh-pages-next/public/citizen/data"
+DATA = REPO / "ui/site/public/citizen/data"
 SHA = "a" * 64
 
 FIXTURE = {

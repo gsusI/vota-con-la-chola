@@ -7,7 +7,7 @@ const root = path.join(__dirname, "..");
 const pagePath = path.join(
   root,
   "ui",
-  "gh-pages-next",
+  "site",
   "app",
   "elecciones",
   "andalucia-2026",
@@ -16,7 +16,7 @@ const pagePath = path.join(
 const dataPath = path.join(
   root,
   "ui",
-  "gh-pages-next",
+  "site",
   "public",
   "elecciones",
   "andalucia-2026",
@@ -124,7 +124,7 @@ test("election index points to the current receipt, not stale election metadata"
     path.join(
       root,
       "ui",
-      "gh-pages-next",
+      "site",
       "app",
       "elecciones",
       "page.js",
@@ -141,7 +141,7 @@ test("election index points to the current receipt, not stale election metadata"
 
 test("homepage exposes the focused receipt", () => {
   const homeSource = fs.readFileSync(
-    path.join(root, "ui", "gh-pages-next", "app", "page.js"),
+    path.join(root, "ui", "site", "app", "page.js"),
     "utf8",
   );
 
@@ -171,7 +171,7 @@ test("current receipt matches its immutable snapshot and preserves the baseline"
   const snapshotDirectory = path.join(
     root,
     "ui",
-    "gh-pages-next",
+    "site",
     "public",
     "elecciones",
     "andalucia-2026",

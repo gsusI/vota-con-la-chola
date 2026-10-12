@@ -28,7 +28,7 @@ from pathlib import Path
 from typing import Any
 
 DEFAULT_DB = Path("etl/data/staging/politicos-es.db")
-DEFAULT_OUT = Path("ui/gh-pages-next/public/parliamentary-accountability/data/accountability.json")
+DEFAULT_OUT = Path("ui/site/public/parliamentary-accountability/data/accountability.json")
 MAX_INITIATIVE_MEASURE_PREVIEW = 3
 
 
@@ -51,7 +51,7 @@ def parse_args() -> argparse.Namespace:
     p.add_argument(
         "--out",
         default=str(DEFAULT_OUT),
-        help="Ruta de salida JSON (ej. ui/gh-pages-next/public/parliamentary-accountability/data/accountability.json)",
+        help="Ruta de salida JSON (ej. ui/site/public/parliamentary-accountability/data/accountability.json)",
     )
     p.add_argument(
         "--initiative-measures-db",
