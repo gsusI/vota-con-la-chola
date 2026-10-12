@@ -646,6 +646,33 @@ function ReactionGroup({ kind, label, parties }) {
   );
 }
 
+/** Challenge someone with this question: link to its hook page (own OG card), never the user's answer. */
+function ShareQuestionButton({ question }) {
+  const [note, setNote] = useState("");
+  if (question.source !== "curated") return null;
+  async function onShare() {
+    const url = `${window.location.origin}${withBasePath(`/citizen/vota/t/${question.statement_id}/`)}`;
+    const text = `«${question.text}» ¿De acuerdo? Adivina qué partidos votaron como tú en el Congreso:`;
+    try {
+      if (navigator.share) {
+        await navigator.share({ text, url });
+        return;
+      }
+    } catch (error) {
+      if (error?.name === "AbortError") return;
+    }
+    setNote((await copyText(`${text} ${url}`)) ? "Pregunta copiada (sin tu respuesta)." : url);
+  }
+  return (
+    <>
+      <button className="votingAidLinkButton" onClick={onShare} type="button">
+        📣 Retar a alguien con esta pregunta
+      </button>
+      {note ? <span className="votingAidMuted">{note}</span> : null}
+    </>
+  );
+}
+
 function RevealCard({ question, parties, answer, reactions, topBefore, onNext, onChange }) {
   const msg = revealMessage(answer, reactions, topBefore);
   const nextRef = useRef(null);
@@ -695,6 +722,9 @@ function RevealCard({ question, parties, answer, reactions, topBefore, onNext, o
         question={question}
         title="Pide que te expliquen qué se votó y los argumentos de cada partido:"
       />
+      <p className="votingAidLinksRow">
+        <ShareQuestionButton question={question} />
+      </p>
       <div className="votingAidActions votingAidStickyBar">
         <button className="votingAidButton votingAidButton--primary votingAidButton--big" onClick={onNext} ref={nextRef} type="button">
           Siguiente pregunta →
@@ -1063,7 +1093,7 @@ function ReviewView({ questions, state, onAnswer, onOpen }) {
 // ---------------------------------------------------------------------------
 // Page
 
-export default function VotingAidClient({ snapshot }) {
+export default function VotingAidClient({ snapshot, startStatementId = null }) {
   const parties = useMemo(() => (Array.isArray(snapshot?.parties) ? snapshot.parties : []), [snapshot]);
   const meta = snapshot?.meta || {};
   const [pool, setPool] = useState(null);
@@ -1083,6 +1113,7 @@ export default function VotingAidClient({ snapshot }) {
   const [topBefore, setTopBefore] = useState(null);
   const topRef = useRef(null);
   const toastTimer = useRef(null);
+  const startedAt = useRef(false);
 
   const questions = useMemo(
     () => attachHighlights(buildQuestions(snapshot, pool), highlights, voteBullets),
@@ -1157,6 +1188,11 @@ export default function VotingAidClient({ snapshot }) {
         const stored = readStoredState();
         if (!stored.seed) stored.seed = newSeed();
         setState(stored);
+        if (startStatementId && !startedAt.current && questions.some((q) => q.statement_id === startStatementId)) {
+          startedAt.current = true;
+          setCurrentId(startStatementId);
+          setView("play");
+        }
       }
       setLoaded(true);
     }
@@ -1164,7 +1200,7 @@ export default function VotingAidClient({ snapshot }) {
     load(true);
     window.addEventListener("hashchange", onHashChange);
     return () => window.removeEventListener("hashchange", onHashChange);
-  }, [poolStatus, questions]);
+  }, [poolStatus, questions, startStatementId]);
 
   useEffect(() => {
     if (loaded && !fromShare) writeStoredState(state);
