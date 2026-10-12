@@ -103,9 +103,8 @@ jobs:
           if [ "$SITE_ONLY_RELEASE" = "true" ]; then
             GH_PAGES_NEXT_PRIME_EXPORT=0 just cloudflare-pages-build
           else
-            HF_DATASET_REPO_ID="${HF_DATASET_REPO_ID:-local/vota-con-la-chola-data}" \
-              HF_USERNAME="${HF_USERNAME:-local}" \
-              just etl-publish-hf-dry-run
+            # The site needs only the public exports; the HF snapshot keeps its scale gate below.
+            just etl-public-exports
             just cloudflare-pages-refresh-data
           fi
 
@@ -118,6 +117,10 @@ jobs:
           fi
           if [ -z "$HF_DATASET_REPO_ID" ] && [ -z "$HF_USERNAME" ]; then
             echo "HF_DATASET_REPO_ID/HF_USERNAME missing; checked dry-run only."
+            exit 0
+          fi
+          if ! just etl-scale-readiness; then
+            echo "::warning title=HF snapshot not published::etl-scale-readiness failed (scale foundation not ready); the site is still published"
             exit 0
           fi
           just etl-publish-hf

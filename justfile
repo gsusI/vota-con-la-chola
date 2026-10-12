@@ -2062,9 +2062,9 @@ etl-run-source-scrape-queue-prefect:
     --only-repeatable-now \
     --summary-out "docs/etl/runs/source-scrape-queue-prefect-run-{{snapshot_date}}.json"
 
-etl-publish-hf:
-  just etl-scale-readiness
-  just etl-storage-health
+# Public exports shared by the site build and the HF snapshot. Not gated on scale readiness, so the
+# daily site publish does not wait for the HF scale foundation.
+etl-public-exports:
   if [ "{{hf_require_quality_report}}" = "1" ]; then just parl-quality-report-hf; fi
   just etl-export-source-catalog
   just etl-export-source-scrape-queue
@@ -2073,6 +2073,11 @@ etl-publish-hf:
   just etl-export-accountability-evidence-api
   just etl-validate-accountability-artifacts
   python3 scripts/check_public_privacy_leaks.py --path etl/data/published
+
+etl-publish-hf:
+  just etl-scale-readiness
+  just etl-storage-health
+  just etl-public-exports
   sqlite_arg="--skip-sqlite-gz"; \
   sensitive_arg=""; \
   quality_arg=""; \
@@ -2087,14 +2092,7 @@ etl-publish-hf:
 etl-publish-hf-dry-run:
   just etl-scale-readiness
   just etl-storage-health
-  if [ "{{hf_require_quality_report}}" = "1" ]; then just parl-quality-report-hf; fi
-  just etl-export-source-catalog
-  just etl-export-source-scrape-queue
-  just etl-export-accountability-ledger
-  just etl-export-accountability-dossiers
-  just etl-export-accountability-evidence-api
-  just etl-validate-accountability-artifacts
-  python3 scripts/check_public_privacy_leaks.py --path etl/data/published
+  just etl-public-exports
   sqlite_arg="--skip-sqlite-gz"; \
   sensitive_arg=""; \
   quality_arg=""; \
