@@ -4800,13 +4800,29 @@ site-build-frozen:
   just cloudflare-pages-size-check
   just privacy-check-public-artifacts
 
+# Rebuild an export from its local-only inputs (staging DBs, raw captures), or keep the committed
+# public artifact when an input is not on disk (CI checkouts, cold *.db.zst snapshots). The kept
+# artifact must be tracked by git and parse as JSON, so a missing input never ships a broken page.
+_export-or-keep-committed recipe inputs artifact:
+  #!/usr/bin/env bash
+  set -euo pipefail
+  for input in {{inputs}}; do
+    if [ ! -e "$input" ]; then
+      git ls-files --error-unmatch "{{artifact}}" >/dev/null
+      python3 -c 'import json, sys; json.load(open(sys.argv[1], encoding="utf-8"))' "{{artifact}}"
+      echo "{{recipe}}: $input not on disk; keeping the committed {{artifact}}" >&2
+      exit 0
+    fi
+  done
+  just {{recipe}}
+
 site-build-refresh:
-  @just manifesto-promises-export
+  @just _export-or-keep-committed manifesto-promises-export "{{manifesto_promises_pdf}}" "{{manifesto_promises_public_out}}"
   @just placsp-spending-export
-  @just moncloa-agreements-export
-  @just moncloa-geopolitics-export
-  @just eurostat-gdp-indicator-export
-  @just actor-graph-export
+  @just _export-or-keep-committed moncloa-agreements-export "{{moncloa_agreements_source_db}}" "{{moncloa_agreements_public_out}}"
+  @just _export-or-keep-committed moncloa-geopolitics-export "{{moncloa_geopolitics_source_db}}" "{{moncloa_geopolitics_public_out}}"
+  @just _export-or-keep-committed eurostat-gdp-indicator-export "etl/data/object-origin/eurostat-indicators/85/84/8584b2c144ad608be5f28e2fc028517ba7c583a6245ca65bdc87238f1e1cf491.json" "{{eurostat_gdp_indicator_public_out}}"
+  @just _export-or-keep-committed actor-graph-export "{{manifesto_promises_db_path}} {{placsp_spending_db_path}} {{moncloa_agreements_db_path}} {{moncloa_geopolitics_db_path}}" "{{actor_graph_public_out}}"
   @just comparison-engine-export
   @just outcome-context-export
   @just obstruction-tracker-export
@@ -5646,12 +5662,12 @@ cloudflare-pages-refresh-data:
     {{static_data_dir}}/legacy/explorer-votaciones {{static_data_dir}}/legacy/explorer-votaciones/data \
     {{static_data_dir}}/legacy/explorer-politico {{static_data_dir}}/legacy/explorer-politico/data
   python3 scripts/build_citizen_tailwind_md3_css.py --tokens "{{citizen_tailwind_md3_tokens}}" --out "{{citizen_tailwind_md3_css}}"
-  @just manifesto-promises-export
+  @just _export-or-keep-committed manifesto-promises-export "{{manifesto_promises_pdf}}" "{{manifesto_promises_public_out}}"
   @just placsp-spending-export
-  @just moncloa-agreements-export
-  @just moncloa-geopolitics-export
-  @just eurostat-gdp-indicator-export
-  @just actor-graph-export
+  @just _export-or-keep-committed moncloa-agreements-export "{{moncloa_agreements_source_db}}" "{{moncloa_agreements_public_out}}"
+  @just _export-or-keep-committed moncloa-geopolitics-export "{{moncloa_geopolitics_source_db}}" "{{moncloa_geopolitics_public_out}}"
+  @just _export-or-keep-committed eurostat-gdp-indicator-export "etl/data/object-origin/eurostat-indicators/85/84/8584b2c144ad608be5f28e2fc028517ba7c583a6245ca65bdc87238f1e1cf491.json" "{{eurostat_gdp_indicator_public_out}}"
+  @just _export-or-keep-committed actor-graph-export "{{manifesto_promises_db_path}} {{placsp_spending_db_path}} {{moncloa_agreements_db_path}} {{moncloa_geopolitics_db_path}}" "{{actor_graph_public_out}}"
   mkdir -p /tmp/vclc-npm-cache /tmp/vclc-npm-logs
   if [ ! -f "{{site_app_dir}}/node_modules/next/dist/bin/next" ]; then \
     npm --prefix "{{site_app_dir}}" --cache /tmp/vclc-npm-cache --logs-dir /tmp/vclc-npm-logs ci --no-audit --no-fund; \
