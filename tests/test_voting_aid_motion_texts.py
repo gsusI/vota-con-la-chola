@@ -179,6 +179,12 @@ class TestBocgExtraction(unittest.TestCase):
         out = mt.split_points(mt.dispositive_text(seg, "approval"))
         self.assertEqual([p["n"] for p in out["points"]], ["1", "2"])
 
+    def test_mixed_quote_styles_do_not_cut_the_block(self) -> None:
+        text = "«El Congreso insta al Gobierno a:\n1. Cumplir su artículo 5 “Objetivos» y promover «la atención”.\n2. Educar.»\nSe ordena la publicación."
+        out = mt.split_points(mt.quoted_block(text, 0))
+        self.assertEqual([p["n"] for p in out["points"]], ["1", "2"])
+        self.assertEqual(out["points"][1]["text"], "Educar.")
+
     def test_missing_expediente_gives_nothing(self) -> None:
         self.assertEqual(mt.expediente_segment(ORIGINAL_PAGES, "162/999999"), [])
 

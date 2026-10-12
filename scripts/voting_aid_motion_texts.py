@@ -309,13 +309,16 @@ def quoted_block(text: str, start: int) -> str | None:
     stop = sig if sig > 0 else len(text)
     depth = 0
     for j in range(i, stop):
-        if text[j] == "«":
+        # Inner quotes mix styles (“… », «… ”): count both families together so they stay balanced.
+        if text[j] in "«“":
             depth += 1
-        elif text[j] == "»":
+        elif text[j] in "»”":
             depth -= 1
             if depth == 0:
-                # A quote closed inside a spilled footnote is followed by more numbered points: keep going.
-                if re.match(r"\s*:?\s*(?:\S*https?://[^\n]*)?\n\s*\d{1,2}\.\s", text[j + 1:j + 240]):
+                # Not the end of the block if more numbered points follow (quote closed inside a spilled
+                # footnote) or the sentence goes on (an inner “… » mixing quote styles).
+                after = text[j + 1:j + 240]
+                if re.match(r"[.,;]?\s*:?\s*(?:\S*https?://[^\n]*)?\n\s*\d{1,2}\.\s", after) or re.match(r" [a-záéíóúñü]", after):
                     depth = 1
                     continue
                 return text[i + 1:j]
