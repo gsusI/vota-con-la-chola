@@ -1,13 +1,13 @@
 # Post de builder (para acompañar el vídeo)
 
-Escrito en primera persona, para la comunidad tech o builder de X. Hay dos versiones: un post largo (X Premium) y un hilo. Las cifras salen del snapshot `voting_aid_generales_v1.json`, del registro de bloqueos de acceso y de la historia del repo (primer commit: 12-02-2026; commits en 27 días distintos; el test se montó el 11 y el 12 de octubre).
+Escrito en primera persona, para la comunidad tech o builder de X. Hay dos versiones: un post largo (X Premium) y un hilo. Las cifras salen del snapshot `voting_aid_generales_v1.json`, del registro de bloqueos de acceso y de la historia del repo (primer commit: 12-02-2026; commits en 27 días distintos; el test se montó el 11 y el 12 de octubre). Procedencia de los votos del test: 34 de 41 están en la base del 18-03-2026 (`politicos-es-005`), descargados con el ETL de votaciones del Congreso de los días 12 y 13 de febrero; los 7 más recientes (de abril a septiembre de 2026) se descargaron el 11 de octubre con ese mismo ETL. Bloqueos del Congreso: vistos el 25 de febrero y el 8 de marzo y resueltos el 11 de octubre; no hay pruebas de un bloqueo continuo durante meses.
 
 ## Versión post largo
 
 ```
 Llevo 8 meses, en ratos libres, explorando una idea: ¿se puede reconstruir qué hacen de verdad los políticos solo con datos públicos? Votaciones, cargos, parlamentos, contratos públicos…
 
-De esa exploración sale esto. El test lo he montado en dos días; lo que ha llevado meses es todo lo que hay debajo. Os lo cuento 👇
+De esa exploración sale esto. El test lo he montado en dos días, reutilizando las votaciones del Congreso que ya tenía descargadas. Os lo cuento 👇
 
 EL PROBLEMA
 
@@ -25,17 +25,17 @@ Así nace «¿Con quién coincides?»: 33 afirmaciones sacadas de 41 votaciones 
 
 CÓMO ESTÁ HECHO (para builders)
 
-· El test es la punta del iceberg. Debajo hay ETL de cargos públicos, Congreso, Senado, parlamentos autonómicos y contratación pública, montados durante estos meses de exploración. Por eso el test ha salido en dos días.
+· El test reutiliza lo que ya tenía. El ETL de votaciones del Congreso fue de lo primero que hice, en febrero: 34 de las 41 votaciones del test salen de aquella descarga, y las 7 más recientes las he bajado ahora con el mismo código. El resto de estos meses se ha ido en explorar otras fuentes (Senado, parlamentos autonómicos, contratación pública) que el test no usa.
 · Un ETL descarga los JSON oficiales de votaciones del Congreso y los mete en un único SQLite reproducible. Guardo el payload crudo de cada fuente: cualquier cifra se puede reconducir a su origen.
 · La posición de un partido es lo que votó la mayoría de sus diputados. Sin interpretación editorial.
-· Las afirmaciones están redactadas en los dos sentidos, para que contestar siempre «de acuerdo» no te empuje hacia un bloque. Lo mido: en 15 el «de acuerdo» coincide con el PSOE y en 12 con el PP.
+· Las afirmaciones están redactadas en los dos sentidos, para que contestar siempre «de acuerdo» no te empuje hacia un bloque. Lo mido: en 15 afirmaciones solo el PSOE queda del lado del «de acuerdo», y en 12 solo el PP.
 · La web es estática. Tus respuestas no salen de tu móvil: ni cuentas, ni base de datos de usuarios. Lo único que compartes, si quieres, es tu podio.
-· Datos abiertos en Hugging Face y código con licencia MIT.
+· El código es abierto (licencia MIT) y los datos del test se pueden descargar tal cual desde la web.
 · Lo he construido con agentes de IA como equipo. La IA también ha revisado las afirmaciones: dos revisores independientes por afirmación, contra el texto oficial y sin ver cómo votó cada partido. Pero eso no basta, y la web lo dice en un banner: falta la revisión humana.
 
 LO QUE ME HE ENCONTRADO
 
-Que los datos públicos no siempre son públicos. El Congreso me devolvió errores 403 durante meses (ahora funciona). El Senado y los parlamentos de Galicia y Navarra siguen bloqueando el acceso automatizado. Lo apunto todo en un registro público con fechas y evidencia, porque bloquear datos que tienen que ser públicos también es noticia.
+Que los datos públicos no siempre son públicos. En febrero y marzo, los datos abiertos de votaciones del Congreso me devolvían errores 403 (hoy funcionan). El Senado y los parlamentos de Galicia y Navarra también me bloquearon el acceso automatizado. Lo apunto todo en un registro público con fechas y evidencia, porque bloquear datos que tienen que ser públicos también es noticia.
 
 Y que la realidad es más interesante que los bloques:
 
@@ -69,7 +69,7 @@ Llevo 8 meses, en ratos libres, explorando si se puede reconstruir qué hacen de
 
 De ahí sale esto: respondes a lo que se votó en el Congreso y ves quién votó como tú.
 
-El test, en dos días. Lo de debajo, meses 🧵
+El test, en dos días, con datos que ya tenía 🧵
 ```
 2/
 ```
@@ -97,11 +97,11 @@ Para builders:
 · ETL con los JSON oficiales del Congreso → un único SQLite reproducible
 · Guardo el payload crudo: cualquier cifra se reconduce a su origen
 · Posición de partido = lo que votó la mayoría de sus diputados
-· Web estática, datos abiertos en Hugging Face, código MIT
+· Web estática, código abierto (MIT)
 ```
 6/
 ```
-Sesgo: las afirmaciones están redactadas en los dos sentidos, para que contestar siempre «de acuerdo» no te empuje hacia un bloque. En 15 el «sí» coincide con el PSOE y en 12 con el PP.
+Sesgo: las afirmaciones están redactadas en los dos sentidos, para que decir siempre «sí» no te empuje hacia un bloque. En 15 solo el PSOE queda del lado del «sí»; en 12, solo el PP.
 
 Privacidad: tus respuestas no salen de tu móvil. Sin cuentas ni base de datos de usuarios.
 ```
@@ -115,7 +115,7 @@ No basta, y la web lo dice en un banner: falta la revisión humana. Ahí entrái
 ```
 Lo que me he encontrado: los datos públicos no siempre son públicos.
 
-El Congreso me devolvió errores 403 durante meses (ya funciona). El Senado, Galicia y Navarra siguen bloqueando el acceso automatizado. Lo apunto en un registro público con fecha y evidencia.
+En febrero y marzo el Congreso me devolvía errores 403 (hoy funciona). El Senado, Galicia y Navarra también me bloquearon. Lo apunto en un registro público con fecha y evidencia.
 ```
 9/
 ```
