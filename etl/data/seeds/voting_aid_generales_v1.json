@@ -4,9 +4,14 @@
   "legislature": "15",
   "institution": "Congreso de los Diputados",
   "review": {
-    "status": "draft",
-    "reviewed_by": [],
-    "note": "Borrador. Cada afirmación y el sentido de cada voto ('agree_vote') deben revisarse por al menos dos personas antes de presentarlos como definitivos."
+    "status": "agent_reviewed",
+    "reviewed_by": [
+      "claude-sonnet-5-5 (dos revisores independientes por afirmación, contra el texto oficial, sin ver votos de partidos)"
+    ],
+    "reviewed_at": "2026-10-12",
+    "human_reviewed": false,
+    "result": "82 comprobaciones de sentido de voto (41 votaciones × 2): 78 correctas, 0 erróneas, 4 dudosas (pacto verde, reescrita; embargo de armas 2025, anotada). 7 afirmaciones reescritas por doble afirmación o por ir más allá de lo votado.",
+    "note": "Revisada con IA; sigue pendiente la revisión por al menos dos personas antes de presentarla como definitiva."
   },
   "method": {
     "party_position": "Mayoría de los votos Sí/No/Abstención de los diputados asignados al partido en cada votación ('No vota' no cuenta).",
@@ -181,7 +186,7 @@
     {
       "statement_id": "vivienda-planes-urbanisticos",
       "concern_id": "vivienda",
-      "text": "Habría que limitar quién puede recurrir los planes urbanísticos y evitar que una sentencia anule planes enteros, para construir vivienda más rápido.",
+      "text": "Debería limitarse por ley quién puede recurrir los planes urbanísticos.",
       "context": "La proposición del PP restringe la acción pública en urbanismo y permite subsanar planes en lugar de anularlos en cascada.",
       "votes": [
         {
@@ -249,7 +254,7 @@
     {
       "statement_id": "empleo-subsidio-desempleo",
       "concern_id": "empleo",
-      "text": "El subsidio por desempleo debería llegar a más personas y poder cobrarse junto con un empleo.",
+      "text": "El subsidio por desempleo debería llegar a más personas que hoy no pueden cobrarlo.",
       "context": "El decreto amplía colectivos beneficiarios y crea un complemento compatible con el empleo.",
       "votes": [
         {
@@ -262,7 +267,7 @@
     {
       "statement_id": "coste-vida-impuesto-banca",
       "concern_id": "coste_vida",
-      "text": "El impuesto extraordinario a la gran banca debería endurecerse y destinarse a construir vivienda pública.",
+      "text": "El impuesto extraordinario a la gran banca debería subir.",
       "context": "La proposición modifica el gravamen temporal a la banca (Ley 38/2022) y crea un fondo para vivienda pública de emergencia.",
       "votes": [
         {
@@ -276,7 +281,7 @@
     {
       "statement_id": "energia-impuesto-energeticas",
       "concern_id": "energia",
-      "text": "El impuesto extraordinario a las grandes empresas energéticas debería desaparecer.",
+      "text": "El gravamen temporal a las grandes empresas energéticas no debería mantenerse.",
       "context": "El decreto prorrogaba el gravamen a grandes energéticas durante 2025.",
       "votes": [
         {
@@ -301,15 +306,15 @@
       ]
     },
     {
-      "statement_id": "energia-pacto-verde",
+      "statement_id": "energia-pacto-verde-seguir",
       "concern_id": "energia",
-      "text": "España debería pedir que se rebajen los objetivos climáticos del Pacto Verde Europeo.",
+      "text": "España debería seguir aplicando las políticas del Pacto Verde Europeo.",
       "context": "Proposición no de ley del PSOE en defensa del Pacto Verde Europeo; no tiene efecto legal, expresa la posición de la Cámara.",
       "votes": [
         {
           "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion111/20250514/Votacion001/VOT_20250514165626.json",
-          "agree_vote": "No",
-          "note": "Proposición no de ley del PSOE en defensa del Pacto Verde Europeo (aprobada); votar No es rechazar esa defensa."
+          "agree_vote": "Sí",
+          "note": "Proposición no de ley del PSOE en defensa del Pacto Verde Europeo (aprobada); votar Sí es respaldar esa defensa."
         }
       ]
     },
@@ -430,7 +435,7 @@
     {
       "statement_id": "territorio-inmigracion-cataluna",
       "concern_id": "inmigracion",
-      "text": "Las competencias de inmigración deberían seguir siendo exclusivamente del Estado.",
+      "text": "La tramitación de los permisos de estancia y residencia de extranjeros debería seguir en manos del Estado, sin delegarla en Cataluña.",
       "context": "La proposición delega en Cataluña la tramitación de autorizaciones de estancia y residencia, entre otras funciones.",
       "votes": [
         {
@@ -531,7 +536,7 @@
     {
       "statement_id": "igualdad-paridad",
       "concern_id": "igualdad",
-      "text": "Las listas electorales, el Gobierno y los consejos de las grandes empresas deberían tener por ley una presencia equilibrada de mujeres y hombres.",
+      "text": "Las listas electorales deberían tener por ley una presencia equilibrada de mujeres y hombres.",
       "context": "Ley Orgánica de representación paritaria y presencia equilibrada de mujeres y hombres.",
       "votes": [
         {
@@ -605,7 +610,7 @@
         {
           "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion112/20250520/Votacion002/VOT_20250520203911.json",
           "agree_vote": "Sí",
-          "note": "Toma en consideración de la proposición de SUMAR y Mixto que crea el embargo de armas en la ley de comercio exterior de material de defensa, citando Gaza (aprobada).",
+          "note": "Toma en consideración de la proposición de SUMAR y Mixto que crea el embargo de armas en la ley de comercio exterior de material de defensa, citando Gaza (aprobada). El articulado crea un embargo genérico (no nombra a Israel); se cuenta porque apunta en el mismo sentido.",
           "text_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-138-1.PDF"
         },
         {

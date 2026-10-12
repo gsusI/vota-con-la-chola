@@ -4,7 +4,7 @@
   "generated_at": "2026-10-12T07:11:09+00:00",
   "method": "Expediente buscado en el buscador de iniciativas del Congreso (XV) y confirmado porque la ficha de la iniciativa enlaza la misma votación nominal. Boletines BOCG serie D y Diarios de Sesiones tal y como los lista la ficha.",
   "votes": 248,
-  "linked": 243
+  "linked": 248
  },
  "votes": {
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion003/20230921/Votacion004/VOT_20230921120100.json": {
@@ -7444,13 +7444,86 @@
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion106/20250410/Votacion020/VOT_20250410155201.json": {
    "kind": "final",
-   "expediente": null,
+   "expediente": "121/000051",
    "vote_date": "2025-04-10",
    "approved": true,
    "voted_terms": "",
    "object": "por la que se modifica la Ley 12/2002, de 23 de mayo, por la que se aprueba el Concierto Económico con la Comunidad Autónoma del País Vasco, por tramitarse en lectura única, teniendo en cuenta las observaciones técnicas distribuidas.",
-   "candidates": [],
-   "match": "not_found"
+   "initiative_url": "https://www.congreso.es/es/busqueda-de-iniciativas?p_p_id=iniciativas&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_iniciativas_mode=mostrarDetalle&_iniciativas_legislatura=XV&_iniciativas_id=121/000051",
+   "match": "vote_listed_on_initiative_page",
+   "boletines": [
+    {
+     "bocg": "A-51-1",
+     "date": "2025-03-21",
+     "page": 1,
+     "label": "Iniciativa",
+     "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/A/BOCG-15-A-51-1.PDF"
+    },
+    {
+     "bocg": "A-51-2",
+     "date": "2025-04-07",
+     "page": 1,
+     "label": "Enmiendas a la totalidad",
+     "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/A/BOCG-15-A-51-2.PDF"
+    },
+    {
+     "bocg": "A-51-3",
+     "date": "2025-04-14",
+     "page": 1,
+     "label": "Acuerdo de tramitación directa y en lectura única",
+     "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/A/BOCG-15-A-51-3.PDF"
+    },
+    {
+     "bocg": "A-51-4",
+     "date": "2025-04-16",
+     "page": 1,
+     "label": "Aprobación por el Pleno",
+     "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/A/BOCG-15-A-51-4.PDF"
+    }
+   ],
+   "diarios": [
+    {
+     "ds": "108",
+     "date": "2025-04-08",
+     "page": 32,
+     "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-108.PDF"
+    },
+    {
+     "ds": "110",
+     "date": "2025-04-10",
+     "page": 67,
+     "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-110.PDF"
+    }
+   ],
+   "original_doc": {
+    "bocg": "A-51-1",
+    "date": "2025-03-21",
+    "page": 1,
+    "label": "Iniciativa",
+    "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/A/BOCG-15-A-51-1.PDF"
+   },
+   "approval_doc": {
+    "bocg": "A-51-4",
+    "date": "2025-04-16",
+    "page": 1,
+    "label": "Aprobación por el Pleno",
+    "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/A/BOCG-15-A-51-4.PDF"
+   },
+   "rejection_doc": null,
+   "amendments_doc": {
+    "bocg": "A-51-2",
+    "date": "2025-04-07",
+    "page": 1,
+    "label": "Enmiendas a la totalidad",
+    "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/A/BOCG-15-A-51-2.PDF"
+   },
+   "final_stage_doc": {
+    "bocg": "A-51-4",
+    "date": "2025-04-16",
+    "page": 1,
+    "label": "Aprobación por el Pleno",
+    "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/A/BOCG-15-A-51-4.PDF"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion109/20250508/Votacion007/VOT_20250508130749.json": {
    "kind": "pnl",
@@ -9051,13 +9124,86 @@
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion124/20250626/Votacion014/VOT_20250626120543.json": {
    "kind": "final",
-   "expediente": null,
+   "expediente": "121/000061",
    "vote_date": "2025-06-26",
    "approved": true,
    "voted_terms": "",
    "object": "por la que se modifica la Ley 28/1990, de 26 de diciembre, por la que se aprueba el Convenio Económico entre el Estado y la Comunidad Foral de Navarra, por tramitarse en lectura única, teniendo en cuenta las observaciones técnicas distribuidas.",
-   "candidates": [],
-   "match": "not_found"
+   "initiative_url": "https://www.congreso.es/es/busqueda-de-iniciativas?p_p_id=iniciativas&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_iniciativas_mode=mostrarDetalle&_iniciativas_legislatura=XV&_iniciativas_id=121/000061",
+   "match": "vote_listed_on_initiative_page",
+   "boletines": [
+    {
+     "bocg": "A-61-1",
+     "date": "2025-06-13",
+     "page": 1,
+     "label": "Iniciativa",
+     "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/A/BOCG-15-A-61-1.PDF"
+    },
+    {
+     "bocg": "A-61-2",
+     "date": "2025-06-26",
+     "page": 1,
+     "label": "Enmiendas a la totalidad",
+     "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/A/BOCG-15-A-61-2.PDF"
+    },
+    {
+     "bocg": "A-61-3",
+     "date": "2025-06-30",
+     "page": 1,
+     "label": "Acuerdo de tramitación directa y en lectura única",
+     "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/A/BOCG-15-A-61-3.PDF"
+    },
+    {
+     "bocg": "A-61-4",
+     "date": "2025-07-03",
+     "page": 1,
+     "label": "Aprobación por el Pleno",
+     "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/A/BOCG-15-A-61-4.PDF"
+    }
+   ],
+   "diarios": [
+    {
+     "ds": "126",
+     "date": "2025-06-24",
+     "page": 31,
+     "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-126.PDF"
+    },
+    {
+     "ds": "128",
+     "date": "2025-06-26",
+     "page": 22,
+     "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-128.PDF"
+    }
+   ],
+   "original_doc": {
+    "bocg": "A-61-1",
+    "date": "2025-06-13",
+    "page": 1,
+    "label": "Iniciativa",
+    "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/A/BOCG-15-A-61-1.PDF"
+   },
+   "approval_doc": {
+    "bocg": "A-61-4",
+    "date": "2025-07-03",
+    "page": 1,
+    "label": "Aprobación por el Pleno",
+    "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/A/BOCG-15-A-61-4.PDF"
+   },
+   "rejection_doc": null,
+   "amendments_doc": {
+    "bocg": "A-61-2",
+    "date": "2025-06-26",
+    "page": 1,
+    "label": "Enmiendas a la totalidad",
+    "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/A/BOCG-15-A-61-2.PDF"
+   },
+   "final_stage_doc": {
+    "bocg": "A-61-4",
+    "date": "2025-07-03",
+    "page": 1,
+    "label": "Aprobación por el Pleno",
+    "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/A/BOCG-15-A-61-4.PDF"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion130/20250910/Votacion006/VOT_20250910213539.json": {
    "kind": "pnl",
@@ -11353,15 +11499,55 @@
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion152/20251209/Votacion001/VOT_20251209205650.json": {
    "kind": "toma",
-   "expediente": null,
+   "expediente": "125/000010",
    "vote_date": "2025-12-09",
    "approved": true,
    "voted_terms": "",
    "object": "del Parlamento de Cantabria, de modificación del Real Decreto Legislativo 5/2015, de 30 de octubre, por el que se aprueba el texto refundido de la Ley del Estatuto Básico del Empleado Público.",
-   "candidates": [
-    "121/000069"
+   "initiative_url": "https://www.congreso.es/es/busqueda-de-iniciativas?p_p_id=iniciativas&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_iniciativas_mode=mostrarDetalle&_iniciativas_legislatura=XV&_iniciativas_id=125/000010",
+   "match": "vote_listed_on_initiative_page",
+   "boletines": [
+    {
+     "bocg": "B-165-1",
+     "date": "2024-12-13",
+     "page": 1,
+     "label": "Iniciativa",
+     "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-165-1.PDF"
+    },
+    {
+     "bocg": "B-165-2",
+     "date": "2025-12-15",
+     "page": 1,
+     "label": "Toma en consideración",
+     "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-165-2.PDF"
+    },
+    {
+     "bocg": "B-165-3",
+     "date": "2025-12-19",
+     "page": 1,
+     "label": "Acuerdo subsiguiente a la toma en consideración",
+     "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-165-3.PDF"
+    }
    ],
-   "match": "not_found"
+   "diarios": [
+    {
+     "ds": "157",
+     "date": "2025-12-09",
+     "page": 6,
+     "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-157.PDF"
+    }
+   ],
+   "original_doc": {
+    "bocg": "B-165-1",
+    "date": "2024-12-13",
+    "page": 1,
+    "label": "Iniciativa",
+    "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-165-1.PDF"
+   },
+   "approval_doc": null,
+   "rejection_doc": null,
+   "amendments_doc": null,
+   "final_stage_doc": null
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion152/20251209/Votacion002/VOT_20251209205652.json": {
    "kind": "toma",
@@ -11710,13 +11896,120 @@
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion157/20260210/Votacion001/VOT_20260210205703.json": {
    "kind": "toma",
-   "expediente": null,
+   "expediente": "101/000002",
    "vote_date": "2026-02-10",
    "approved": true,
    "voted_terms": "",
    "object": "del Parlamento de las Illes Balears, de Ley para la reforma del artículo 69.3 de la Constitución española a los efectos de que la isla de Formentera elija un senador propio, con independencia del que elija la isla de Eivissa.",
-   "candidates": [],
-   "match": "not_found"
+   "initiative_url": "https://www.congreso.es/es/busqueda-de-iniciativas?p_p_id=iniciativas&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_iniciativas_mode=mostrarDetalle&_iniciativas_legislatura=XV&_iniciativas_id=101/000002",
+   "match": "vote_listed_on_initiative_page",
+   "boletines": [
+    {
+     "bocg": "B-6-1",
+     "date": "2023-09-08",
+     "page": 1,
+     "label": "Iniciativa",
+     "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-6-1.PDF"
+    },
+    {
+     "bocg": "B-6-2",
+     "date": "2026-02-16",
+     "page": 1,
+     "label": "Toma en consideración",
+     "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-6-2.PDF"
+    },
+    {
+     "bocg": "B-6-3",
+     "date": "2026-02-20",
+     "page": 1,
+     "label": "Acuerdo subsiguiente a la toma en consideración",
+     "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-6-3.PDF"
+    },
+    {
+     "bocg": "B-6-4",
+     "date": "2026-03-23",
+     "page": 1,
+     "label": "Acuerdo de tramitación directa y en lectura única",
+     "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-6-4.PDF"
+    },
+    {
+     "bocg": "B-6-5",
+     "date": "2026-03-30",
+     "page": 1,
+     "label": "Enmiendas al articulado",
+     "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-6-5.PDF"
+    },
+    {
+     "bocg": "B-6-6",
+     "date": "2026-04-01",
+     "page": 1,
+     "label": "Aprobación por el Pleno",
+     "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-6-6.PDF"
+    },
+    {
+     "bocg": "B-6-7",
+     "date": "2026-04-23",
+     "page": 1,
+     "label": "Apertura del plazo previsto en el artículo 167 de la Constitución Española.",
+     "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-6-7.PDF"
+    },
+    {
+     "bocg": "B-6-8",
+     "date": "2026-05-19",
+     "page": 1,
+     "label": "Aprobación definitiva",
+     "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-6-8.PDF"
+    }
+   ],
+   "diarios": [
+    {
+     "ds": "163",
+     "date": "2026-02-10",
+     "page": 5,
+     "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-163-C1.PDF"
+    },
+    {
+     "ds": "172",
+     "date": "2026-03-18",
+     "page": 81,
+     "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-172.PDF"
+    },
+    {
+     "ds": "175",
+     "date": "2026-03-26",
+     "page": 23,
+     "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-175.PDF"
+    }
+   ],
+   "original_doc": {
+    "bocg": "B-6-1",
+    "date": "2023-09-08",
+    "page": 1,
+    "label": "Iniciativa",
+    "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-6-1.PDF"
+   },
+   "approval_doc": {
+    "bocg": "B-6-6",
+    "date": "2026-04-01",
+    "page": 1,
+    "label": "Aprobación por el Pleno",
+    "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-6-6.PDF"
+   },
+   "rejection_doc": null,
+   "amendments_doc": {
+    "bocg": "B-6-5",
+    "date": "2026-03-30",
+    "page": 1,
+    "label": "Enmiendas al articulado",
+    "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-6-5.PDF"
+   },
+   "final_stage_doc": {
+    "bocg": "B-6-8",
+    "date": "2026-05-19",
+    "page": 1,
+    "label": "Aprobación definitiva",
+    "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-6-8.PDF"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion159/20260212/Votacion004/VOT_20260212114310.json": {
    "kind": "pnl",
@@ -14113,17 +14406,133 @@
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion181/20260526/Votacion003/VOT_20260526210644.json": {
    "kind": "toma",
-   "expediente": null,
+   "expediente": "410/000011",
    "vote_date": "2026-05-26",
    "approved": true,
    "voted_terms": "",
    "object": "del Sr. Álvaro Vidal y otros 20 Diputados, de reforma del Reglamento del Congreso.",
-   "candidates": [
-    "410/000005",
-    "410/000001",
-    "410/000007"
+   "initiative_url": "https://www.congreso.es/es/busqueda-de-iniciativas?p_p_id=iniciativas&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_iniciativas_mode=mostrarDetalle&_iniciativas_legislatura=XV&_iniciativas_id=410/000011",
+   "match": "vote_listed_on_initiative_page",
+   "boletines": [
+    {
+     "bocg": "B-312-1",
+     "date": "2026-03-13",
+     "page": 1,
+     "label": "Iniciativa",
+     "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-312-1.PDF"
+    },
+    {
+     "bocg": "B-312-2",
+     "date": "2026-06-01",
+     "page": 1,
+     "label": "Toma en consideración",
+     "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-312-2.PDF"
+    },
+    {
+     "bocg": "B-312-3",
+     "date": "2026-06-05",
+     "page": 1,
+     "label": "Acuerdo subsiguiente a la toma en consideración",
+     "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-312-3.PDF"
+    },
+    {
+     "bocg": "B-312-4",
+     "date": "2026-06-22",
+     "page": 1,
+     "label": "Enmiendas a la totalidad",
+     "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-312-4.PDF"
+    },
+    {
+     "bocg": "B-312-5",
+     "date": "2026-07-08",
+     "page": 1,
+     "label": "Enmiendas e índice de enmiendas al articulado",
+     "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-312-5.PDF"
+    },
+    {
+     "bocg": "B-312-6",
+     "date": "2026-07-10",
+     "page": 1,
+     "label": "Acuerdo de la Mesa de la Comisión",
+     "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-312-6.PDF"
+    },
+    {
+     "bocg": "B-312-7",
+     "date": "2026-07-20",
+     "page": 1,
+     "label": "Informe de la Ponencia",
+     "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-312-7.PDF"
+    },
+    {
+     "bocg": "B-312-8",
+     "date": "2026-07-22",
+     "page": 1,
+     "label": "Dictamen de la Comisión y escritos de mantenimiento de enmiendas para su defensa ante el Pleno",
+     "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-312-8.PDF"
+    },
+    {
+     "bocg": "B-312-9",
+     "date": "2026-07-28",
+     "page": 1,
+     "label": "Aprobación por el Pleno",
+     "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-312-9.PDF"
+    }
    ],
-   "match": "not_found"
+   "diarios": [
+    {
+     "ds": "187",
+     "date": "2026-05-26",
+     "page": 38,
+     "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-187.PDF"
+    },
+    {
+     "ds": "197",
+     "date": "2026-06-25",
+     "page": 43,
+     "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-197.PDF"
+    },
+    {
+     "ds": "605",
+     "date": "2026-07-14",
+     "page": 3,
+     "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/CO/DSCD-15-CO-605.PDF"
+    },
+    {
+     "ds": "199",
+     "date": "2026-07-23",
+     "page": 55,
+     "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    }
+   ],
+   "original_doc": {
+    "bocg": "B-312-1",
+    "date": "2026-03-13",
+    "page": 1,
+    "label": "Iniciativa",
+    "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-312-1.PDF"
+   },
+   "approval_doc": {
+    "bocg": "B-312-9",
+    "date": "2026-07-28",
+    "page": 1,
+    "label": "Aprobación por el Pleno",
+    "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-312-9.PDF"
+   },
+   "rejection_doc": null,
+   "amendments_doc": {
+    "bocg": "B-312-4",
+    "date": "2026-06-22",
+    "page": 1,
+    "label": "Enmiendas a la totalidad",
+    "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-312-4.PDF"
+   },
+   "final_stage_doc": {
+    "bocg": "B-312-9",
+    "date": "2026-07-28",
+    "page": 1,
+    "label": "Aprobación por el Pleno",
+    "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-312-9.PDF"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion183/20260528/Votacion002/VOT_20260528125336.json": {
    "kind": "pnl",

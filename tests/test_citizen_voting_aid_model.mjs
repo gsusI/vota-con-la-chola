@@ -235,8 +235,9 @@ test("official-text highlights attach to questions, flag omnibus and reach AI pr
   assert.ok(explain.includes("enumera las principales"));
   assert.ok(!snap.parties.some((p) => explain.includes(`${p.label}:`)));
 
-  // Questions without any official text still work.
-  const bare = questions.find((x) => !x.highlights.length);
+  // Questions without any official text still work (every published vote has one today, so strip it).
+  const bare = m.attachHighlights(m.buildQuestions(snap, pool), { docs: {}, by_vote: {} })[0];
+  assert.equal(bare.highlights.length, 0);
   assert.equal(bare.omnibus, false);
   assert.ok(m.buildAiPrompt(bare, snap.parties).length > 0);
 });

@@ -423,6 +423,37 @@ SPILL_RE = re.compile(r"(\S+)\.\s+(?![a-zñ][.)]\s)[a-záéíóúñü]{2,}")
 ABBREVIATIONS = {"art", "arts", "núm", "pág", "etc", "sr", "sra", "ss", "apdo", "cap", "vol", "pp", "ej", "aprox", "uu", "dña", "vid"}
 
 
+MONTHS = {m: i for i, m in enumerate(
+    "enero febrero marzo abril mayo junio julio agosto septiembre octubre noviembre diciembre".split(), 1)}
+RELOCATED_NOTE_RE = re.compile(
+    r"publicada en el «BOCG\. Congreso de los Diputados», serie D, núm\. (\d+), de (\d{1,2}) de (\w+) de (\d{4})")
+
+
+def relocated_original(page_text: str, expediente: str) -> dict[str, Any] | None:
+    """A «debate en Pleno» notice renumbers a committee PNL (161/… -> 162/…) and only points to where the
+    text was first published: return that bulletin and the old expediente."""
+    flat = " ".join(page_text.split())
+    m = re.search(r"(\d{3}/\d{6}), " + re.escape(expediente) + r"\b", flat)
+    if not m or f"nuevo número de expediente {expediente}" not in flat:
+        return None
+    note = RELOCATED_NOTE_RE.search(flat, m.end())
+    if not note or note.group(3).lower() not in MONTHS:
+        return None
+    num, day, month, year = note.groups()
+    return {
+        "expediente": m.group(1), "bocg": f"D-{num}",
+        "date": f"{year}-{MONTHS[month.lower()]:02d}-{int(day):02d}",
+        "pdf_url": f"https://www.congreso.es/public_oficiales/L15/CONG/BOCG/D/BOCG-15-D-{num}.PDF",
+    }
+
+
+def expediente_page(pdf_path: Path, expediente: str) -> int | None:
+    for i, page in enumerate(pdf_pages_text(pdf_path, 1, 9999).split("\f"), 1):
+        if any((m := EXPEDIENTE_LINE_RE.match(ln)) and m.group(1) == expediente for ln in page.split("\n")):
+            return i
+    return None
+
+
 def extract_motion_text(pdf_path: Path, page: int, expediente: str, mode: str, span: int = 14, back: int = 12) -> dict[str, Any] | None:
     first = max(1, page - back)
     seg = expediente_segment(pdf_pages_text(pdf_path, first, page + span), expediente, page - first)
@@ -658,6 +689,13 @@ def motion_document(entry: dict[str, Any], cache_dir: Path, *, timeout: int = 60
         path = pdf_cache_path(original["pdf_url"], cache_dir) if offline else fetch_pdf(original["pdf_url"], cache_dir, timeout)
         extracted = extract_motion_text(path, original["page"], exp, "original")
         doc = original
+        moved = None if extracted else relocated_original(pdf_pages_text(path, original["page"], original["page"] + 1), exp)
+        if moved:
+            path = pdf_cache_path(moved["pdf_url"], cache_dir) if offline else fetch_pdf(moved["pdf_url"], cache_dir, timeout)
+            page = expediente_page(path, moved["expediente"])
+            if page:
+                extracted = extract_motion_text(path, page, moved["expediente"], "original")
+                doc = {**moved, "page": page, "label": "Iniciativa (publicada como " + moved["expediente"] + ")"}
     if not extracted or not extracted["points"]:
         raise ValueError(f"{exp}: no se encontró la parte dispositiva en {doc['bocg']} pág. {doc['page']}")
     data = path.read_bytes()

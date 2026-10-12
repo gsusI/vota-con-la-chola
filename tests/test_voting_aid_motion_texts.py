@@ -188,6 +188,20 @@ class TestBocgExtraction(unittest.TestCase):
     def test_missing_expediente_gives_nothing(self) -> None:
         self.assertEqual(mt.expediente_segment(ORIGINAL_PAGES, "162/999999"), [])
 
+    def test_pleno_transfer_points_to_the_first_publication(self) -> None:
+        page = """              161/002164, 162/000521
+              Solicitud de que su Proposición no de Ley en defensa de X, sea debatida en Pleno.
+              Aceptar la declaración de voluntad (nuevo número de
+              expediente 162/000521).
+                  Nota.—La iniciativa de referencia fue publicada en el «BOCG. Congreso de los Diputados», serie D,
+              núm. 344, de 27 de mayo de 2025."""
+        self.assertEqual(mt.relocated_original(page, "162/000521"), {
+            "expediente": "161/002164", "bocg": "D-344", "date": "2025-05-27",
+            "pdf_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/D/BOCG-15-D-344.PDF",
+        })
+        self.assertIsNone(mt.relocated_original(page, "162/000999"))
+        self.assertIsNone(mt.relocated_original(page.replace("nuevo número de", "número de"), "162/000521"))
+
 
 class TestPublishedMotionTexts(unittest.TestCase):
     def test_seed_and_published_docs_are_traceable(self) -> None:

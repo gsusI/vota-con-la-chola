@@ -1205,7 +1205,7 @@
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion111/20250514/Votacion001/VOT_20250514165626.json": {
    "status": "ok",
-   "question_id": "energia-pacto-verde",
+   "question_id": "energia-pacto-verde-seguir",
    "source": {
     "url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/D/BOCG-15-D-341.PDF#page=5",
     "sha256": "ed96d102cb43d8bcf7543875246a7f6818eddc8fdae038c08e8bc500080a982e",
@@ -7136,16 +7136,70 @@
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion181/20260526/Votacion003/VOT_20260526210644.json": {
-   "status": "sin_texto_oficial",
+   "status": "ok",
    "question_id": "v-5f841d66f0",
-   "source": null,
-   "bullets": [],
-   "notes": "Sin texto oficial enlazado: no se redactan viñetas.",
+   "source": {
+    "url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-312-1.PDF",
+    "sha256": "fadc488c890e0d5e61e12f655977adf734da270193fc64c04f65aab5e2040f4c",
+    "source": "BOCG",
+    "doc_key": "3eef420f0462",
+    "text_status": "texto_inicial",
+    "text_status_label": "Texto inicial, tal como se presentó (antes de enmiendas)"
+   },
+   "bullets": [
+    {
+     "text": "Se permitiría formar grupo parlamentario con 15 o más diputados.",
+     "locator": "Artículo único, artículo 23, apartado 1"
+    },
+    {
+     "text": "Se permitiría también con al menos 5 diputados si su formación logra el 10 % de los votos donde presentó candidatura o el 3 % de los emitidos en toda España.",
+     "locator": "Artículo único, artículo 23, apartado 1"
+    },
+    {
+     "text": "Quienes pertenezcan a un mismo partido no podrían formar grupos separados; tampoco quienes, al tiempo de las elecciones, pertenecieran a formaciones que no se enfrentaron ante el electorado.",
+     "locator": "Artículo único, artículo 23, apartado 2"
+    },
+    {
+     "text": "La reforma del Reglamento entraría en vigor el día siguiente a su publicación en el Boletín Oficial de las Cortes Generales.",
+     "locator": "Disposición final"
+    }
+   ],
+   "simple": "Se permitiría formar grupo parlamentario con 15 o más diputados, o con al menos 5 si su formación logra el 10 % de votos donde se presentó o el 3 % del total nacional.",
+   "notes": "Texto inicial (antes de enmiendas). Las cifras del Reglamento vigente (15 % y 5 %) no figuran en este texto; la rebaja a 10 % y 3 % se deduce de compararlo con el Reglamento actual, que reproduce el art. 23.1 con esos porcentajes.",
    "review": {
-    "status": "draft",
-    "drafted_by": "export (automático)",
+    "status": "agent_reviewed",
+    "drafted_by": "claude-sonnet-5-5 (subagente, lote revisable)",
     "drafted_at": "2026-10-12",
-    "reviewed_by": null
+    "reviewed_by": "claude-sonnet-5-5 (subagente revisor, contra el texto oficial)",
+    "reviewed_at": "2026-10-12",
+    "human_reviewed": false,
+    "verdict": "corregido",
+    "changes": [
+     "viñeta 2: «solo con 5» pasa a «al menos 5» (el texto dice número de escaños no inferior a cinco) y se precisa que el 3 % es de los votos emitidos en toda España; no hay comparación con el Reglamento vigente",
+     "viñeta 3: se ajusta a la redacción del texto (formaciones que no se hayan enfrentado ante el electorado) en lugar de «no compitieron entre sí»",
+     "simple: «15 diputados» pasa a «15 o más» y «5» a «al menos 5»"
+    ],
+    "issues": [
+     "Ninguna viñeta ni el resumen compara con el Reglamento vigente: el texto no da los umbrales anteriores (15 % y 5 %), así que no se afirma rebaja alguna, solo los umbrales propuestos (10 % y 3 %)."
+    ],
+    "draft_bullets": [
+     {
+      "text": "Se permitiría formar grupo parlamentario con 15 o más diputados.",
+      "locator": "Artículo único, artículo 23, apartado 1"
+     },
+     {
+      "text": "Se permitiría también con solo 5 diputados si su formación logra el 10 % de los votos donde se presentó o el 3 % del total nacional.",
+      "locator": "Artículo único, artículo 23, apartado 1"
+     },
+     {
+      "text": "Quienes pertenezcan a un mismo partido, o a formaciones que no compitieron entre sí en las elecciones, no podrían formar grupos separados.",
+      "locator": "Artículo único, artículo 23, apartado 2"
+     },
+     {
+      "text": "La reforma del Reglamento entraría en vigor el día siguiente a su publicación en el Boletín Oficial de las Cortes Generales.",
+      "locator": "Disposición final"
+     }
+    ]
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion047/20240618/Votacion002/VOT_20240618211339.json": {
@@ -13012,16 +13066,85 @@
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion121/20250619/Votacion002/VOT_20250619120738.json": {
-   "status": "sin_texto_oficial",
+   "status": "ok",
    "question_id": "v-6cb36f32ee",
-   "source": null,
-   "bullets": [],
-   "notes": "Sin texto oficial enlazado: no se redactan viñetas.",
+   "source": {
+    "url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/D/BOCG-15-D-344.PDF#page=14",
+    "sha256": "ea874ee437d730951576ed5cc26fe76ac27118ebf0caec51347f314314cdc6d1",
+    "source": "BOCG",
+    "doc_key": "b358ec3973c3",
+    "text_status": "original_votado",
+    "text_status_label": "Texto original, votado en sus términos"
+   },
+   "bullets": [
+    {
+     "text": "Derogar la Ley Orgánica 1/2024, de amnistía, por considerarla contraria a la igualdad ante la ley y a la seguridad jurídica.",
+     "locator": "Punto 1"
+    },
+    {
+     "text": "Promover el cese del Fiscal General del Estado por incumplimiento grave y reiterado de sus funciones, y un modelo de elección independiente y profesional que garantice la imparcialidad fiscal.",
+     "locator": "Punto 2"
+    },
+    {
+     "text": "Atender las advertencias de la presidenta del CGPJ y del Tribunal Supremo y proteger la independencia judicial.",
+     "locator": "Punto 3"
+    },
+    {
+     "text": "Rechazar cualquier cesión futura a las comunidades autónomas de competencias en extranjería, control de fronteras o seguridad nacional.",
+     "locator": "Punto 6"
+    },
+    {
+     "text": "Garantizar la neutralidad de los medios públicos con órganos de gobierno independientes y mandatos blindados, y revertir su «ocupación partidista».",
+     "locator": "Punto 5"
+    },
+    {
+     "text": "Respetar los derechos de la oposición (presentar los Presupuestos, art. 134 CE; contestar a sus preguntas, art. 188.3 del Reglamento) y promover transparencia y rendición de cuentas.",
+     "locator": "Puntos 4 y 7"
+    }
+   ],
+   "simple": "Insta al Gobierno a derogar la ley de amnistía, promover el cese del Fiscal General, proteger la independencia judicial y no ceder a las comunidades competencias de fronteras.",
+   "notes": "Texto original, votado en sus términos. Los puntos 6 y 7 se agrupan en una viñeta.",
    "review": {
-    "status": "draft",
-    "drafted_by": "export (automático)",
+    "status": "agent_reviewed",
+    "drafted_by": "claude-sonnet-5-5 (subagente, lote revisable)",
     "drafted_at": "2026-10-12",
-    "reviewed_by": null
+    "reviewed_by": "claude-sonnet-5-5 (subagente revisor, contra el texto oficial)",
+    "reviewed_at": "2026-10-12",
+    "human_reviewed": false,
+    "verdict": "corregido",
+    "changes": [
+     "viñeta 2: se añade el objetivo del modelo de elección (garantizar la imparcialidad del Ministerio Fiscal)",
+     "viñeta 4: ahora solo el punto 6 (antes se mezclaba con el 7), con «o» en lugar de «y/o»",
+     "viñeta 5: la «ocupación partidista» se entrecomilla como expresión del texto y se pone primero lo que se pide (neutralidad)",
+     "viñeta 6: el punto 7 (transparencia y rendición de cuentas) se une al punto 4 (derechos de la oposición), citando el art. 188.3 del Reglamento"
+    ],
+    "issues": [],
+    "draft_bullets": [
+     {
+      "text": "Derogar la Ley Orgánica 1/2024, de amnistía, por considerarla contraria a la igualdad ante la ley y a la seguridad jurídica.",
+      "locator": "Punto 1"
+     },
+     {
+      "text": "Promover el cese del Fiscal General del Estado por incumplimiento grave y reiterado de sus funciones, y un modelo de elección independiente y profesional.",
+      "locator": "Punto 2"
+     },
+     {
+      "text": "Atender las advertencias de la presidenta del CGPJ y del Tribunal Supremo, y proteger la independencia judicial.",
+      "locator": "Punto 3"
+     },
+     {
+      "text": "Presentar los Presupuestos Generales del Estado (art. 134 CE) y contestar a las preguntas de la oposición en las sesiones de control.",
+      "locator": "Punto 4"
+     },
+     {
+      "text": "Revertir la ocupación partidista de los medios públicos y garantizar su neutralidad con órganos de gobierno independientes y mandatos blindados.",
+      "locator": "Punto 5"
+     },
+     {
+      "text": "Rechazar cesiones a comunidades autónomas de competencias en extranjería, fronteras y seguridad nacional; y promover transparencia y rendición de cuentas.",
+      "locator": "Puntos 6 y 7"
+     }
+    ]
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion121/20250619/Votacion005/VOT_20250619120742.json": {
@@ -14762,16 +14885,88 @@
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion106/20250410/Votacion020/VOT_20250410155201.json": {
-   "status": "sin_texto_oficial",
+   "status": "ok",
    "question_id": "v-b4c649e6d7",
-   "source": null,
-   "bullets": [],
-   "notes": "Sin texto oficial enlazado: no se redactan viñetas.",
+   "source": {
+    "url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/A/BOCG-15-A-51-4.PDF",
+    "sha256": "36aaf6f47fb294250c420ab45aa5980ec8fb8b1a196bda6588df67e8ed841b9a",
+    "source": "BOCG",
+    "doc_key": "e9b99a6911ea",
+    "text_status": "texto_tramitado",
+    "text_status_label": "Texto tras su paso por la Comisión o aprobado por el Pleno"
+   },
+   "bullets": [
+    {
+     "text": "Desde el 1 de enero de 2026, un umbral de 12 millones de euros de operaciones reparte Sociedades, IVA y la inspección del juego entre País Vasco y Estado (regla del 75 % en Sociedades y juego).",
+     "locator": "Anexo, apartados Uno a Tres, Catorce, Veintidós y Veintiséis"
+    },
+    {
+     "text": "Incorpora al Concierto el Impuesto Complementario (grupos multinacionales y nacionales de gran magnitud) y el impuesto sobre el margen de intereses y comisiones de ciertas entidades financieras.",
+     "locator": "Anexo, apartados Cuatro y Cinco"
+    },
+    {
+     "text": "Para operadores de juego con residencia fiscal vasca, el País Vasco podría elevar los tipos hasta un máximo del 20 % de los del Estado, solo sobre la base de residentes vascos.",
+     "locator": "Anexo, apartado Veintidós"
+    },
+    {
+     "text": "Fija un ajuste entre capacidad recaudatoria y consumo del País Vasco en los impuestos especiales de fabricación (alcohol, cerveza, hidrocarburos, tabaco y líquidos de vapeo).",
+     "locator": "Anexo, apartado Veintitrés"
+    },
+    {
+     "text": "En depósitos, energía, IVA, seguros, plásticos, impuestos especiales y otros, el País Vasco aplica las normas del Estado y fija modelos y plazos; en algunos, tipos dentro de límites estatales.",
+     "locator": "Anexo, apartados Nueve a Trece y Dieciséis a Veintiuno"
+    },
+    {
+     "text": "Concreta qué normativa e inspección se aplican a las rentas de no residentes: sin establecimiento permanente, la vasca si la renta se obtiene en el País Vasco.",
+     "locator": "Anexo, apartados Seis a Ocho"
+    }
+   ],
+   "simple": "Actualiza el Concierto Económico vasco: umbral de 12 millones de euros de operaciones entre País Vasco y Estado, dos impuestos nuevos, tipos del juego y ajuste de especiales.",
+   "notes": "Votación de conjunto de un proyecto en lectura única; el texto es el aprobado por el Pleno (BOCG A-51-4). La ley es el artículo único que aprueba el anexo; el contenido está en el anexo. Impuesto de juego: incluye que el País Vasco podría elevar los tipos hasta un 20 % para operadores residentes (apartado Veintidós), y la inspección se rige por el mismo umbral de 12 millones. La viñeta 4 resume apartados con redacción repetitiva.",
    "review": {
-    "status": "draft",
-    "drafted_by": "export (automático)",
+    "status": "agent_reviewed",
+    "drafted_by": "claude-sonnet-5-5 (subagente, lote revisable)",
     "drafted_at": "2026-10-12",
-    "reviewed_by": null
+    "reviewed_by": "claude-sonnet-5-5 (subagente revisor, contra el texto oficial)",
+    "reviewed_at": "2026-10-12",
+    "human_reviewed": false,
+    "verdict": "corregido",
+    "changes": [
+     "viñeta 1: el umbral decide también la normativa en Sociedades y solo la inspección en el juego (no la gestión); la regla del 75 % solo rige en Sociedades y juego, no en IVA; se añade la fecha de aplicación (1 de enero de 2026, disposición transitoria primera, apartado Veintiséis) y se amplía el localizador",
+     "viñeta 2: «grupos nacionales de gran magnitud» y «determinadas entidades financieras», como dice el texto",
+     "nueva viñeta 3: tipos del juego (hasta un máximo del 20 % de los del Estado para operadores con residencia fiscal vasca, solo sobre la parte de base de residentes vascos); la omisión era relevante",
+     "viñeta de impuestos especiales: se describe el ajuste entre índices de capacidad recaudatoria y de consumo, sin hablar de «recaudación y consumo» genéricos",
+     "viñeta de resto de impuestos: se retira Quince (Transmisiones Patrimoniales, que es de normativa autónoma salvo operaciones societarias, letras de cambio, etc.) del localizador porque la viñeta no lo describe; se concreta que los tipos de límites son los estatales",
+     "viñeta de no residentes: se precisa «sin establecimiento permanente»; con establecimiento permanente se aplica el artículo 14",
+     "eliminada la viñeta final (Comisión Mixta en 30 días, diferimiento del IVA de aduanas), menor que las añadidas; la fecha 1-1-2026 se ha pasado a la viñeta 1"
+    ],
+    "issues": [],
+    "draft_bullets": [
+     {
+      "text": "Fija en 12 millones de euros de operaciones el umbral que decide si Sociedades, IVA y juego los gestiona el País Vasco, el Estado o ambos; con reglas del 75 %.",
+      "locator": "Anexo, apartados Uno a Tres, Catorce y Veintidós"
+     },
+     {
+      "text": "Incorpora al Concierto el Impuesto Complementario (grupos multinacionales y de gran magnitud) y el impuesto sobre el margen de intereses y comisiones de entidades financieras.",
+      "locator": "Anexo, apartados Cuatro y Cinco"
+     },
+     {
+      "text": "Concreta qué normativa e inspección se aplican a las rentas de no residentes: la vasca si las rentas se obtienen en el País Vasco.",
+      "locator": "Anexo, apartados Seis a Ocho"
+     },
+     {
+      "text": "En depósitos, energía, IVA, tabaco, alcohol, plásticos, seguros y otros, el País Vasco aplica las normas del Estado y fija modelos y plazos; en algunos, tipos dentro de límites.",
+      "locator": "Anexo, apartados Nueve a Trece y Quince a Veintiuno"
+     },
+     {
+      "text": "Fija una fórmula de ajuste entre recaudación y consumo para los impuestos especiales de fabricación (alcohol, cerveza, hidrocarburos, tabaco y líquidos de vapeo).",
+      "locator": "Anexo, apartado Veintitrés"
+     },
+     {
+      "text": "La Comisión Mixta se reuniría en 30 días ante reformas fiscales; se prevé facilitar el diferimiento del IVA de aduanas; los cambios de umbral rigen desde el 1 de enero de 2026.",
+      "locator": "Anexo, apartados Veinticuatro a Veintisiete"
+     }
+    ]
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion121/20250619/Votacion004/VOT_20250619120741.json": {
@@ -17653,16 +17848,76 @@
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion152/20251209/Votacion001/VOT_20251209205650.json": {
-   "status": "sin_texto_oficial",
+   "status": "ok",
    "question_id": "v-832e3e3b51",
-   "source": null,
-   "bullets": [],
-   "notes": "Sin texto oficial enlazado: no se redactan viñetas.",
+   "source": {
+    "url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-165-1.PDF",
+    "sha256": "b9a92369a5fe93a3666ff61191872d28a2b9c517778fc16ea0c94a43b522faad",
+    "source": "BOCG",
+    "doc_key": "13e305eb0ac4",
+    "text_status": "texto_inicial",
+    "text_status_label": "Texto inicial, tal como se presentó (antes de enmiendas)"
+   },
+   "bullets": [
+    {
+     "text": "El acceso a los cuerpos y escalas del Grupo A exigiría estar en posesión del título universitario de Grado o equivalente.",
+     "locator": "Artículo único, artículo 76"
+    },
+    {
+     "text": "Si las titulaciones exigidas fueran de Grado o equivalente de 6 años (360 créditos ECTS), se reconocería un plus dentro del grupo A (el texto publicado se corta ahí).",
+     "locator": "Artículo único, artículo 76"
+    },
+    {
+     "text": "La clasificación de los cuerpos y escalas del Grupo A dependería del nivel de responsabilidad de sus funciones y de las características de las pruebas de acceso.",
+     "locator": "Artículo único, artículo 76"
+    },
+    {
+     "text": "Cuando una ley exija otro título universitario, sería ese el que se tendría en cuenta.",
+     "locator": "Artículo único, artículo 76"
+    },
+    {
+     "text": "La ley entraría en vigor el día siguiente a su publicación en el Boletín Oficial del Estado.",
+     "locator": "Disposición final única"
+    }
+   ],
+   "simple": "Se reformaría el artículo 76 del Estatuto del Empleado Público: el Grupo A exigiría título de Grado y se reconocería un plus dentro de ese grupo a las titulaciones de 6 años.",
+   "notes": "Texto inicial (antes de enmiendas). El texto publicado del nuevo artículo 76 aparece truncado con «[...]», por lo que no se describe qué ocurre con los subgrupos A1 y A2 ni con otros grupos.",
    "review": {
-    "status": "draft",
-    "drafted_by": "export (automático)",
+    "status": "agent_reviewed",
+    "drafted_by": "claude-sonnet-5-5 (subagente, lote revisable)",
     "drafted_at": "2026-10-12",
-    "reviewed_by": null
+    "reviewed_by": "claude-sonnet-5-5 (subagente revisor, contra el texto oficial)",
+    "reviewed_at": "2026-10-12",
+    "human_reviewed": false,
+    "verdict": "corregido",
+    "changes": [
+     "viñeta 1: se ciñe al texto (acceso al Grupo A) y no presenta la reforma como clasificación general",
+     "viñeta del plus: pasa a segundo lugar (es lo más relevante) y se advierte que el texto publicado se interrumpe con «[...]»; no se afirma nada sobre lo omitido",
+     "viñeta de clasificación: se acota al Grupo A, no a «ese grupo» de forma genérica",
+     "añadida viñeta sobre el supuesto en que la ley exija otro título universitario (texto dispositivo del Grupo A)",
+     "simple: reescrito para no sugerir que la responsabilidad determina el requisito del Grado"
+    ],
+    "issues": [
+     "El nuevo artículo 76 aparece truncado con «[...]» en el texto disponible: no se describe nada sobre subgrupos A1/A2 ni otros grupos, ni en qué consiste el plus."
+    ],
+    "draft_bullets": [
+     {
+      "text": "Se reformaría la clasificación del personal funcionario de carrera: el Grupo A exigiría el título universitario de Grado o equivalente.",
+      "locator": "Artículo único, artículo 76"
+     },
+     {
+      "text": "Dentro de ese grupo, los cuerpos y escalas se clasificarían según el nivel de responsabilidad de sus funciones y las pruebas de acceso.",
+      "locator": "Artículo único, artículo 76"
+     },
+     {
+      "text": "Para titulaciones de Grado o equivalente de 6 años (360 créditos ECTS) se reconocería un plus dentro del grupo A.",
+      "locator": "Artículo único, artículo 76"
+     },
+     {
+      "text": "La ley entraría en vigor el día siguiente a su publicación en el Boletín Oficial del Estado.",
+      "locator": "Disposición final única"
+     }
+    ]
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion023/20240222/Votacion001/VOT_20240222110730.json": {
@@ -20960,16 +21215,72 @@
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion157/20260210/Votacion001/VOT_20260210205703.json": {
-   "status": "sin_texto_oficial",
+   "status": "ok",
    "question_id": "v-8e5a03618b",
-   "source": null,
-   "bullets": [],
-   "notes": "Sin texto oficial enlazado: no se redactan viñetas.",
+   "source": {
+    "url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-6-1.PDF",
+    "sha256": "a73af8b4b0e82ea33f3dc16c458e5a83ce8d2c35f65f02aece197d6aa0e124d3",
+    "source": "BOCG",
+    "doc_key": "20338ac0a4b2",
+    "text_status": "texto_inicial",
+    "text_status_label": "Texto inicial, tal como se presentó (antes de enmiendas)"
+   },
+   "bullets": [
+    {
+     "text": "Se reformaría el artículo 69.3 de la Constitución para que Formentera elija un senador propio, separado del de Eivissa.",
+     "locator": "Artículo único"
+    },
+    {
+     "text": "En las provincias insulares, cada isla con cabildo o consejo sería una circunscripción para elegir senadores.",
+     "locator": "Artículo único, artículo 69, apartado 3"
+    },
+    {
+     "text": "Gran Canaria, Mallorca y Tenerife elegirían tres senadores cada una; Eivissa, Formentera, Menorca, Fuerteventura, La Gomera, El Hierro, Lanzarote y La Palma, uno cada una.",
+     "locator": "Artículo único, artículo 69, apartado 3"
+    },
+    {
+     "text": "La nueva circunscripción de Formentera se aplicaría desde las primeras elecciones al Senado posteriores a la entrada en vigor de la reforma.",
+     "locator": "Disposición adicional única"
+    },
+    {
+     "text": "La reforma entraría en vigor el día de su publicación en el BOE, que se haría también en las otras lenguas de España.",
+     "locator": "Disposición final única"
+    }
+   ],
+   "simple": "Se reformaría la Constitución para que Formentera elija un senador propio, separado del de Eivissa, a partir de las primeras elecciones al Senado tras la reforma.",
+   "notes": "Texto inicial (antes de enmiendas) de una proposición de reforma constitucional.",
    "review": {
-    "status": "draft",
-    "drafted_by": "export (automático)",
+    "status": "agent_reviewed",
+    "drafted_by": "claude-sonnet-5-5 (subagente, lote revisable)",
     "drafted_at": "2026-10-12",
-    "reviewed_by": null
+    "reviewed_by": "claude-sonnet-5-5 (subagente revisor, contra el texto oficial)",
+    "reviewed_at": "2026-10-12",
+    "human_reviewed": false,
+    "verdict": "ok",
+    "changes": [],
+    "issues": [],
+    "draft_bullets": [
+     {
+      "text": "Se reformaría el artículo 69.3 de la Constitución para que Formentera elija un senador propio, separado del de Eivissa.",
+      "locator": "Artículo único"
+     },
+     {
+      "text": "En las provincias insulares, cada isla con cabildo o consejo sería una circunscripción para elegir senadores.",
+      "locator": "Artículo único, artículo 69, apartado 3"
+     },
+     {
+      "text": "Gran Canaria, Mallorca y Tenerife elegirían tres senadores cada una; Eivissa, Formentera, Menorca, Fuerteventura, La Gomera, El Hierro, Lanzarote y La Palma, uno cada una.",
+      "locator": "Artículo único, artículo 69, apartado 3"
+     },
+     {
+      "text": "La nueva circunscripción de Formentera se aplicaría desde las primeras elecciones al Senado posteriores a la entrada en vigor de la reforma.",
+      "locator": "Disposición adicional única"
+     },
+     {
+      "text": "La reforma entraría en vigor el día de su publicación en el BOE, que se haría también en las otras lenguas de España.",
+      "locator": "Disposición final única"
+     }
+    ]
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion110/20250513/Votacion002/VOT_20250513201842.json": {
@@ -25561,16 +25872,89 @@
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion124/20250626/Votacion014/VOT_20250626120543.json": {
-   "status": "sin_texto_oficial",
+   "status": "ok",
    "question_id": "v-1a8e6a97a6",
-   "source": null,
-   "bullets": [],
-   "notes": "Sin texto oficial enlazado: no se redactan viñetas.",
+   "source": {
+    "url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/A/BOCG-15-A-61-4.PDF",
+    "sha256": "56668f258850561494209e478243543682026f1b7c5a4180b8961426908cda9c",
+    "source": "BOCG",
+    "doc_key": "bea011850dbf",
+    "text_status": "texto_tramitado",
+    "text_status_label": "Texto tras su paso por la Comisión o aprobado por el Pleno"
+   },
+   "bullets": [
+    {
+     "text": "Desde el 1 de enero de 2026, un umbral de 12 millones de euros de operaciones reparte Sociedades, IVA y la inspección del juego entre Navarra y el Estado.",
+     "locator": "Anexo, apartados Uno, Trece, Diecinueve y Veinticuatro"
+    },
+    {
+     "text": "Incorpora al Convenio el Impuesto Complementario (grupos multinacionales y nacionales de gran magnitud) y el impuesto sobre el margen de intereses y comisiones de ciertas entidades financieras.",
+     "locator": "Anexo, apartados Dos y Tres"
+    },
+    {
+     "text": "Para operadores de juego con residencia fiscal en Navarra, esta podría elevar los tipos hasta un máximo del 20 % de los del Estado, solo sobre la base de residentes en Navarra.",
+     "locator": "Anexo, apartado Diecinueve"
+    },
+    {
+     "text": "Fija una fórmula de ajuste en la recaudación navarra de los impuestos especiales de fabricación (alcohol, cerveza, hidrocarburos, tabaco y líquidos de vapeo).",
+     "locator": "Anexo, apartado Veintidós"
+    },
+    {
+     "text": "En energía, depósitos bancarios, IVA, impuestos especiales, plásticos y otros, Navarra aplica las normas del Estado y fija modelos y plazos; en algunos, tipos dentro de límites estatales.",
+     "locator": "Anexo, apartados Ocho a Doce, Catorce a Diecisiete, Veinte y Veintiuno"
+    },
+    {
+     "text": "Concreta qué normativa e inspección se aplican a las rentas de no residentes: sin establecimiento permanente, la navarra si la renta se obtiene en Navarra.",
+     "locator": "Anexo, apartados Cuatro a Seis"
+    }
+   ],
+   "simple": "Actualiza el Convenio Económico con Navarra: umbral de 12 millones de euros de operaciones entre Navarra y Estado, dos impuestos nuevos, tipos del juego y ajuste de especiales.",
+   "notes": "Votación de conjunto de un proyecto en lectura única; texto aprobado por el Pleno (BOCG A-61-4). La ley es el artículo único que aprueba el anexo. Juego (apartado Diecinueve): Navarra podría elevar los tipos hasta un 20 % para operadores residentes. La referencia a la Ley 6/2023 de Mercados de Valores está en los apartados Siete y Dieciocho (artículos 31.1.b y 38.1.A.1º); se cita en la viñeta 6 por brevedad.",
    "review": {
-    "status": "draft",
-    "drafted_by": "export (automático)",
+    "status": "agent_reviewed",
+    "drafted_by": "claude-sonnet-5-5 (subagente, lote revisable)",
     "drafted_at": "2026-10-12",
-    "reviewed_by": null
+    "reviewed_by": "claude-sonnet-5-5 (subagente revisor, contra el texto oficial)",
+    "reviewed_at": "2026-10-12",
+    "human_reviewed": false,
+    "verdict": "corregido",
+    "changes": [
+     "viñeta 1: la fecha de aplicación (1 de enero de 2026, disposición transitoria primera) pasa a esta viñeta; en el juego el umbral solo afecta a la inspección, no a la gestión; se amplía el localizador",
+     "viñeta 2: «grupos nacionales de gran magnitud» y «determinadas entidades financieras», como dice el texto",
+     "nueva viñeta 3: tipos del juego (hasta un máximo del 20 % de los del Estado para operadores con residencia fiscal en Navarra, solo sobre la parte de base de residentes navarros); la omisión era relevante",
+     "viñeta de resto de impuestos: se retira Siete (donaciones: punto de conexión, no aplica normas del Estado) del localizador y se añade Diecisiete (art. 37.5); se saca el juego de la lista, ya cubierto en su propia viñeta",
+     "viñeta de no residentes: se precisa «sin establecimiento permanente»",
+     "eliminada la viñeta final (diferimiento del IVA de aduanas), menor; la fecha se ha pasado a la viñeta 1"
+    ],
+    "issues": [
+     "Los apartados Siete y Dieciocho (donaciones y transmisiones onerosas: ciertos valores del art. 338 de la Ley 6/2023 se tratan como inmuebles) no se resumen por ser técnicos; el aviso del redactor decía que iban en la viñeta 6, pero esa viñeta no los mencionaba."
+    ],
+    "draft_bullets": [
+     {
+      "text": "Fija en 12 millones de euros de operaciones el umbral que decide si Sociedades, IVA y juego los gestiona Navarra, el Estado o ambos.",
+      "locator": "Anexo, apartados Uno, Trece y Diecinueve"
+     },
+     {
+      "text": "Incorpora al Convenio el Impuesto Complementario (grupos multinacionales y de gran magnitud) y el impuesto sobre el margen de intereses y comisiones de entidades financieras.",
+      "locator": "Anexo, apartados Dos y Tres"
+     },
+     {
+      "text": "Concreta qué normativa e inspección se aplican a las rentas de no residentes: la navarra si las rentas se obtienen en Navarra.",
+      "locator": "Anexo, apartados Cuatro a Seis"
+     },
+     {
+      "text": "En energía, depósitos bancarios, IVA, tabaco, alcohol, plásticos, juego y otros, Navarra aplica las normas del Estado y fija modelos y plazos; en algunos, tipos dentro de límites.",
+      "locator": "Anexo, apartados Siete a Doce, Catorce a Dieciséis, Veinte y Veintiuno"
+     },
+     {
+      "text": "Fija una fórmula de ajuste en la recaudación navarra de los impuestos especiales de fabricación (alcohol, cerveza, hidrocarburos, tabaco y líquidos de vapeo).",
+      "locator": "Anexo, apartado Veintidós"
+     },
+     {
+      "text": "Se prevé facilitar el diferimiento del IVA de aduanas; los cambios de umbral rigen desde el 1 de enero de 2026.",
+      "locator": "Anexo, apartados Veintitrés a Veintiséis"
+     }
+    ]
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion011/20231212/Votacion002/VOT_20231212230023.json": {

@@ -1,0 +1,1340 @@
+{
+ "schema": "voting_aid_statement_review_v1",
+ "reviewed_at": "2026-10-12",
+ "method": "Dos revisores IA independientes (claude-sonnet-5-5) por afirmación; cada uno leyó el texto oficial (BOCG/BOE) de cada votación y juzgó si votar agree_vote equivale a estar de acuerdo con la afirmación, y si la redacción es neutral y de una sola idea. No vieron cómo votaron los partidos. Sin revisión humana.",
+ "statements": {
+  "vivienda-alquiler-temporada": {
+   "text_reviewed": "Los alquileres de temporada y de habitaciones deberían tener las mismas protecciones para el inquilino que el alquiler de vivienda habitual.",
+   "reviews": [
+    {
+     "reviewer": "IA-0A",
+     "wording_verdict": "ok",
+     "wording_issue": "",
+     "suggested_text": "",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion059/20240917/Votacion001/VOT_20240917204416.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOCG-15-B-134-1, p.3, art. 2 LAU (apartados 1 y 3 propuestos)",
+       "evidence_quote": "tendrán esta consideración los arrendamientos de fincas urbanas destinados a la vivienda por motivos temporales",
+       "comment": "Sí a la toma en consideración apoya equiparar temporada y habitaciones al arrendamiento de vivienda (LAU título II). Nota: el texto lo presentaron SUMAR, EH Bildu, ERC y Mixto, no solo SUMAR. La equiparación se condiciona a que no se acredite causa justificada de temporalidad."
+      },
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion086/20241217/Votacion001/VOT_20241217205720.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOCG-15-B-154-1, p.3, art. único.1 (nuevo art. 2.2 LAU)",
+       "evidence_quote": "Asimismo, tendrán esta consideración los arrendamientos temporales.",
+       "comment": "Mismo planteamiento; incluye también el arrendamiento parcial de una habitación en el concepto de vivienda. Si el arrendador no justifica la temporalidad, el contrato se considera de vivienda habitual."
+      }
+     ]
+    },
+    {
+     "reviewer": "IA-0B",
+     "wording_verdict": "ok",
+     "wording_issue": "",
+     "suggested_text": "",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion059/20240917/Votacion001/VOT_20240917204416.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOCG-15-B-134-1, p. 3, art. 2.3 LAU propuesto",
+       "evidence_quote": "tendrán esta consideración los arrendamientos de fincas urbanas destinados a la vivienda por motivos temporales",
+       "comment": "Equipara los arrendamientos de temporada y de habitaciones al arrendamiento de vivienda (LAU título II) y presume vivienda habitual si no se justifica la temporalidad. Sí a la toma en consideración apoya ese objetivo."
+      },
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion086/20241217/Votacion001/VOT_20241217205720.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOCG-15-B-154-1, p. 3, artículo único, apartado 1 (art. 2.2 LAU)",
+       "evidence_quote": "Asimismo, tendrán esta consideración los arrendamientos temporales.",
+       "comment": "Mismo objetivo que la anterior (texto algo distinto): temporales y habitaciones tratados como arrendamiento de vivienda."
+      }
+     ]
+    }
+   ],
+   "text_published": "Los alquileres de temporada y de habitaciones deberían tener las mismas protecciones para el inquilino que el alquiler de vivienda habitual.",
+   "statement_id_published": "vivienda-alquiler-temporada"
+  },
+  "empleo-jubilacion-activa": {
+   "text_reviewed": "Los jubilados deberían poder seguir trabajando mientras cobran parte de su pensión.",
+   "reviews": [
+    {
+     "reviewer": "IA-0A",
+     "wording_verdict": "ok",
+     "wording_issue": "",
+     "suggested_text": "",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion089/20250122/Votacion003/VOT_20250122154429.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "RDL 11/2024, art. primero (nuevo art. 214.1 LGSS)",
+       "evidence_quote": "será compatible con la realización de cualquier trabajo por cuenta ajena, a tiempo completo o a tiempo parcial, o por cuenta propia del pensionista",
+       "comment": "El decreto amplía la jubilación activa (pensión del 45% al 100% según años de demora, compatible con trabajo). Convalidar (Sí) apoya la medida; la afirmación es fiel al contenido."
+      }
+     ]
+    },
+    {
+     "reviewer": "IA-0B",
+     "wording_verdict": "ok",
+     "wording_issue": "",
+     "suggested_text": "",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion089/20250122/Votacion003/VOT_20250122154429.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOE-A-2024-26917, art. primero apartado tres (art. 214.1 LGSS)",
+       "evidence_quote": "la percepción de la pensión de jubilación, en su modalidad contributiva, será compatible con la realización de cualquier trabajo por cuenta ajena",
+       "comment": "Art. 214.2 fija el cobro de un porcentaje de la pensión (45%-100% según años de demora), de modo que «parte de su pensión» es fiel. Sí a la convalidación respalda el decreto."
+      }
+     ]
+    }
+   ],
+   "text_published": "Los jubilados deberían poder seguir trabajando mientras cobran parte de su pensión.",
+   "statement_id_published": "empleo-jubilacion-activa"
+  },
+  "energia-pacto-verde": {
+   "text_reviewed": "España debería pedir que se rebajen los objetivos climáticos del Pacto Verde Europeo.",
+   "reviews": [
+    {
+     "reviewer": "IA-0A",
+     "wording_verdict": "issue",
+     "wording_issue": "El texto votado no pide rebajar objetivos climáticos: respalda el Pacto Verde y la neutralidad climática 2050. Votar No solo rechaza esa defensa (puede deberse a motivos muy distintos, incluido querer derogarlo o un simple reequilibrio), así que la afirmación sobrepasa lo que decidio la votación. Además el contexto menciona al partido proponente.",
+     "suggested_text": "España debería seguir desplegando las políticas del Pacto Verde Europeo y reafirmarse en la descarbonización.",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion111/20250514/Votacion001/VOT_20250514165626.json",
+       "agree_vote_verdict": "unclear",
+       "evidence_locator": "BOCG-15-D-341, pp.5-6, texto aprobado de la PNL 162/000478, punto 1",
+       "evidence_quote": "Seguir desplegando las políticas que deben desarrollar el Pacto Verde europeo, garantizando que España continúe impulsando la transición energética",
+       "comment": "No equivale a pedir que se rebajen los objetivos: el texto no menciona rebaja. Con la redacción sugerida (sentido favorable) el agree_vote pasaría a Sí. Si se conserva la afirmación original, el mapeo No->de acuerdo es una inferencia, no una equivalencia. Hubo una enmienda del PP (reequilibrio del Pacto Verde) y el texto se aprobó en sus propios términos, sin la enmienda."
+      }
+     ]
+    },
+    {
+     "reviewer": "IA-0B",
+     "wording_verdict": "issue",
+     "wording_issue": "Sobrepasa lo votado: la PNL no trata de rebajar objetivos; vota No a una defensa del Pacto Verde, y un No puede responder a otros motivos. Afirmación más fuerte que el texto y que resulta de una votación negativa.",
+     "suggested_text": "España no debería comprometerse a seguir desplegando las políticas del Pacto Verde Europeo. (Alternativa más limpia: «España debería seguir desplegando las políticas del Pacto Verde Europeo» con agree_vote = Sí.)",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion111/20250514/Votacion001/VOT_20250514165626.json",
+       "agree_vote_verdict": "unclear",
+       "evidence_locator": "BOCG-D-341, p. 5, parte dispositiva punto 1 (PNL aprobada)",
+       "evidence_quote": "Seguir desplegando las políticas que deben desarrollar el Pacto Verde europeo",
+       "comment": "El texto aprobado respalda el Pacto Verde y la neutralidad climática 2050; no menciona pedir a la UE rebajar objetivos. Votar No rechaza ese respaldo, pero no equivale necesariamente a pedir una rebaja. El texto no apoya ni contradice claramente la afirmación tal como está redactada."
+      }
+     ]
+    }
+   ],
+   "text_published": "España debería seguir aplicando las políticas del Pacto Verde Europeo.",
+   "statement_id_published": "energia-pacto-verde-seguir"
+  },
+  "seguridad-multirreincidencia": {
+   "text_reviewed": "Hay que endurecer las penas para quienes cometen delitos leves de forma repetida, como hurtos.",
+   "reviews": [
+    {
+     "reviewer": "IA-0A",
+     "wording_verdict": "ok",
+     "wording_issue": "",
+     "suggested_text": "",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion059/20240917/Votacion002/VOT_20240917204417.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOCG-15-B-97-1, p.4, artículo uno (art. 234.2 CP)",
+       "evidence_quote": "aunque fueran de carácter leve, siempre que sean de la misma naturaleza, se impondrá la pena del apartado 1 de este artículo",
+       "comment": "La proposición agrava la pena de hurtos leves reiterados (tres condenas previas) y añade agravantes. Sí a la toma en consideración apoya ese objetivo."
+      },
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion159/20260212/Votacion023/VOT_20260212114343.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOCG-15-B-97-1, p.4, artículo uno (art. 234.2 CP) [texto inicial]",
+       "evidence_quote": "aunque fueran de carácter leve, siempre que sean de la misma naturaleza, se impondrá la pena del apartado 1 de este artículo",
+       "comment": "Votación de conjunto de la misma ley. El texto comprobado es el inicial (BOCG 97-1); el texto final tras enmiendas puede diferir, pero el objetivo (endurecer la respuesta penal a la multirreincidencia) se mantiene. Convendría contrastar con el texto final si se dispone de él."
+      }
+     ]
+    },
+    {
+     "reviewer": "IA-0B",
+     "wording_verdict": "ok",
+     "wording_issue": "",
+     "suggested_text": "",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion059/20240917/Votacion002/VOT_20240917204417.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOCG-15-B-97-1, p. 4, artículo uno (art. 234.2 CP)",
+       "evidence_quote": "el culpable hubiera sido condenado ejecutoriamente al menos por tres delitos comprendidos en este título, aunque fueran de carácter leve",
+       "comment": "Pasa de multa a la pena de prisión del art. 234.1 en hurtos leves con tres condenas previas, y endurece agravantes (arts. 22, 235). Sí a la toma en consideración apoya ese objetivo."
+      },
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion159/20260212/Votacion023/VOT_20260212114343.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOCG-15-B-97-1, p. 4, artículo uno (texto inicial; art. 234.2 CP)",
+       "evidence_quote": "el culpable hubiera sido condenado ejecutoriamente al menos por tres delitos comprendidos en este título, aunque fueran de carácter leve",
+       "comment": "Limitación: solo hay texto inicial; el texto final de la votación de conjunto (97-x) devolvió HTTP 403 y no pude verificarlo. Mismo título y finalidad (multirreincidencia, CP), por lo que Sí es coherente, pero conviene confirmar contra el texto aprobado."
+      }
+     ]
+    }
+   ],
+   "text_published": "Hay que endurecer las penas para quienes cometen delitos leves de forma repetida, como hurtos.",
+   "statement_id_published": "seguridad-multirreincidencia"
+  },
+  "corrupcion-oficina-prevencion": {
+   "text_reviewed": "Debería crearse una oficina independiente de prevención de la corrupción.",
+   "reviews": [
+    {
+     "reviewer": "IA-0A",
+     "wording_verdict": "ok",
+     "wording_issue": "",
+     "suggested_text": "",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion131/20250916/Votacion002/VOT_20250916211206.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOCG-15-B-99-1, p.5, art. 1.1",
+       "evidence_quote": "la creación de la Oficina de prevención de la corrupción como entidad de derecho público, con personalidad jurídica propia, independencia orgánica y funcional",
+       "comment": "Los arts. 9 y 14 atribuyen funciones de investigación. Sí a la toma en consideración apoya crear la oficina."
+      }
+     ]
+    },
+    {
+     "reviewer": "IA-0B",
+     "wording_verdict": "ok",
+     "wording_issue": "",
+     "suggested_text": "",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion131/20250916/Votacion002/VOT_20250916211206.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOCG-15-B-99-1, p. 5, art. 1.1",
+       "evidence_quote": "la creación de la Oficina de prevención de la corrupción como entidad de derecho público, con personalidad jurídica propia, independencia orgánica y funcional",
+       "comment": "Art. 1.2 incluye prevención, detección e investigación; coincide con el contexto del enunciado."
+      }
+     ]
+    }
+   ],
+   "text_published": "Debería crearse una oficina independiente de prevención de la corrupción.",
+   "statement_id_published": "corrupcion-oficina-prevencion"
+  },
+  "campo-lobo": {
+   "text_reviewed": "Debería permitirse controlar la población de lobos para proteger a la ganadería.",
+   "reviews": [
+    {
+     "reviewer": "IA-0A",
+     "wording_verdict": "ok",
+     "wording_issue": "",
+     "suggested_text": "",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion036/20240423/Votacion002/VOT_20240423213513.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOCG-15-B-62-1, Exposición de motivos I, p.3; art. 3 y disp. derogatoria (pp.5-6)",
+       "evidence_quote": "adoptar las medidas de control de poblaciones de lobos, con el fin de permitir la coexistencia con la actividad ganadera",
+       "comment": "La proposición mantiene el lobo en el LESPRE solo al sur del Duero y deroga la Orden TED/980/2021, permitiendo la gestión al norte; el articulado no regula explícitamente el control de poblaciones, lo deja a la gestión autonómica. Apoyo razonable pero algo inferido."
+      }
+     ]
+    },
+    {
+     "reviewer": "IA-0B",
+     "wording_verdict": "ok",
+     "wording_issue": "",
+     "suggested_text": "",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion036/20240423/Votacion002/VOT_20240423213513.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOCG-15-B-62-1, p. 2 (exposición de motivos) y p. 5-6 (art. 3, disp. derogatoria: deroga Orden TED/980/2021)",
+       "evidence_quote": "marcos legales no adaptados que impiden la gestión de la especie de forma que se puedan prevenir los conflictos con actividades como la ganadería",
+       "comment": "Los artículos no autorizan literalmente matar lobos: derogan la Orden TED/980/2021 y mantienen el listado solo al sur del Duero, devolviendo la gestión (anexo V) al norte. El enunciado es una lectura razonable del objetivo, algo más explícita que el articulado."
+      }
+     ]
+    }
+   ],
+   "text_published": "Debería permitirse controlar la población de lobos para proteger a la ganadería.",
+   "statement_id_published": "campo-lobo"
+  },
+  "vivienda-pisos-turisticos": {
+   "text_reviewed": "Las plataformas de alquiler turístico deberían estar obligadas a comprobar que cada piso tiene licencia antes de anunciarlo.",
+   "reviews": [
+    {
+     "reviewer": "IA-1A",
+     "wording_verdict": "ok",
+     "wording_issue": "",
+     "suggested_text": "",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion135/20251007/Votacion002/VOT_20251007214330.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOCG-15-B-256-1, art. 9.1 y art. 11 (pág. 11-12)",
+       "evidence_quote": "Las Viviendas de Uso Turístico que se publiciten, publiquen y contraten cuentan con la licencia o número de registro en vigor",
+       "comment": "Sí a la toma en consideración apoya la obligación de verificar licencia/número de registro antes de publicar y contratar (arts. 5, 9, 11). La afirmación dice «licencia»; el texto dice «licencia o número de registro»: equivalente a efectos de la afirmación."
+      }
+     ]
+    },
+    {
+     "reviewer": "IA-1B",
+     "wording_verdict": "ok",
+     "wording_issue": "",
+     "suggested_text": "",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion135/20251007/Votacion002/VOT_20251007214330.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOCG-15-B-256-1, art. 11 (pág. 8-9) y art. 5",
+       "evidence_quote": "no se podrán publicitar, publicar ni contratar las Viviendas de Uso Turístico.",
+       "comment": "Art. 11: sin verificación previa de licencias/números de registro no se puede publicar ni contratar; Sí a la toma en consideración apoya esa obligación para las plataformas."
+      }
+     ]
+    }
+   ],
+   "text_published": "Las plataformas de alquiler turístico deberían estar obligadas a comprobar que cada piso tiene licencia antes de anunciarlo.",
+   "statement_id_published": "vivienda-pisos-turisticos"
+  },
+  "empleo-jubilacion-40-anos": {
+   "text_reviewed": "Quien ha cotizado 40 años debería poder jubilarse anticipadamente sin recorte en su pensión.",
+   "reviews": [
+    {
+     "reviewer": "IA-1A",
+     "wording_verdict": "ok",
+     "wording_issue": "",
+     "suggested_text": "",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion199/20260922/Votacion002/VOT_20260922205122.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOCG-15-B-117-1, art. 207.3 y 208.4 (pág. 3 y 7)",
+       "evidence_quote": "No procederá aplicar reducción alguna cuando el trabajador acredite un período de cotización de 40 años.",
+       "comment": "Ambos artículos (jubilación anticipada involuntaria y voluntaria) eliminan la reducción con 40 años cotizados; el texto además se aplica con recálculo a ya jubilados (disp. adicional única)."
+      }
+     ]
+    },
+    {
+     "reviewer": "IA-1B",
+     "wording_verdict": "ok",
+     "wording_issue": "",
+     "suggested_text": "",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion199/20260922/Votacion002/VOT_20260922205122.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOCG-15-B-117-1, art. único, apartados Uno (art. 207.3) y Dos (art. 208.4) (págs. 3 y 7)",
+       "evidence_quote": "No procederá aplicar reducción alguna cuando el trabajador acredite un período de cotización de 40 años.",
+       "comment": "Coincide con el enunciado; además la disposición adicional permite recalcular pensiones ya reconocidas (no afecta a la formulación)."
+      }
+     ]
+    }
+   ],
+   "text_published": "Quien ha cotizado 40 años debería poder jubilarse anticipadamente sin recorte en su pensión.",
+   "statement_id_published": "empleo-jubilacion-40-anos"
+  },
+  "transporte-bonos": {
+   "text_reviewed": "El Estado debería seguir abaratando el transporte público con bonos y descuentos.",
+   "reviews": [
+    {
+     "reviewer": "IA-1A",
+     "wording_verdict": "ok",
+     "wording_issue": "",
+     "suggested_text": "",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion049/20240620/Votacion021/VOT_20240620132743.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "RDL 3/2024, art. 1 y arts. 2-4 (BOE-A-2024-11373)",
+       "evidence_quote": "El descuento se aplicará sobre el precio de los billetes que tengan fecha de viaje entre el 1 de julio de 2024 y el 30 de septiembre de 2024.",
+       "comment": "Convalidación de descuentos de billetes para jóvenes en verano; Sí = apoyar abaratar el transporte público. Alcance limitado (jóvenes, verano), pero encaja con la afirmación genérica."
+      },
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion124/20250626/Votacion011/VOT_20250626120540.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "RDL 5/2025, art. 1 y arts. 2-4",
+       "evidence_quote": "El descuento se aplicará sobre el precio de los billetes que tengan fecha de viaje entre el 1 de julio de 2025 y el 30 de septiembre de 2025.",
+       "comment": "Igual que el anterior para el verano de 2025."
+      },
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion156/20260127/Votacion002/VOT_20260127153137.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "RDL 17/2025, arts. 1, 3, 5-8 (BOE)",
+       "evidence_quote": "con descuento del 100 % calculado sobre la tarifa máxima admisible para el origen destino",
+       "comment": "Bonificación de abonos y títulos multiviaje (gratuidad infantil, descuentos joven y recurrentes) en 2026; Sí apoya abaratar el transporte público."
+      },
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion191/20260625/Votacion027/VOT_20260625150826.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "RDL 14/2026, art. 1 y arts. 2-4",
+       "evidence_quote": "El descuento se aplicará sobre el precio de los billetes que tengan fecha de viaje entre el 1 de julio de 2026 y el 30 de septiembre de 2026.",
+       "comment": "Igual que los de verano anteriores, para 2026."
+      }
+     ]
+    },
+    {
+     "reviewer": "IA-1B",
+     "wording_verdict": "ok",
+     "wording_issue": "",
+     "suggested_text": "",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion049/20240620/Votacion021/VOT_20240620132743.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "RDL 3/2024, cap. I, arts. 1-5 y art. 6 (Interrail)",
+       "evidence_quote": "Los descuentos a aplicar en el precio de los billetes en los servicios de transporte público colectivo terrestre",
+       "comment": "Descuentos a jóvenes en transporte público estatal en verano 2024; convalidar = apoyar. Texto sin medidas ajenas relevantes."
+      },
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion124/20250626/Votacion011/VOT_20250626120540.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "RDL 5/2025, art. sobre descuentos Renfe (apdo. 1) y art. 6 Interrail",
+       "evidence_quote": "un descuento del 90 % sobre el precio del billete sencillo y el billete de ida y vuelta",
+       "comment": "Descuentos verano 2025 para jóvenes. La DF 1ª modifica el art. 64.2 del RDL 8/2023 (régimen de ayudas): accesoria."
+      },
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion156/20260127/Votacion002/VOT_20260127153137.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "RDL 17/2025, cap. I art. 1 (carretera) y capítulos de abonos Renfe/ayudas CCAA/EELL",
+       "evidence_quote": "Los usuarios recurrentes de los servicios públicos de transporte por carretera de competencia de la Administración General del Estado tendrán derecho a las bonificaciones",
+       "comment": "Bonificación de abonos y títulos multiviaje, gratuidad infantil y ayudas a CCAA/EELL; encaja con 'seguir abaratando con bonos y descuentos'."
+      },
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion191/20260625/Votacion027/VOT_20260625150826.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "RDL 14/2026, cap. I, descuentos Renfe (apdo. 1) y art. 6 Interrail",
+       "evidence_quote": "un descuento del 90 % sobre el precio del billete sencillo y el billete de ida y vuelta",
+       "comment": "Descuentos verano 2026 para jóvenes. Las DF 1ª y 2ª (reglamento LOTT; exención de prestación en RDL 7/2026) son accesorias y no cambian el sentido."
+      }
+     ]
+    }
+   ],
+   "text_published": "El Estado debería seguir abaratando el transporte público con bonos y descuentos.",
+   "statement_id_published": "transporte-bonos"
+  },
+  "territorio-amnistia": {
+   "text_reviewed": "La amnistía a los encausados por el proceso independentista catalán no debió aprobarse.",
+   "reviews": [
+    {
+     "reviewer": "IA-1A",
+     "wording_verdict": "ok",
+     "wording_issue": "",
+     "suggested_text": "",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion030/20240314/Votacion001/VOT_20240314135323.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOCG-15-B-32-1, art. 1.1 (texto inicial; el dictamen final no está en el fichero local)",
+       "evidence_quote": "Quedan amnistiados los siguientes actos determinantes de responsabilidad penal, administrativa o contable",
+       "comment": "Votar No a la ley de amnistía equivale a considerar que no debió aprobarse. Aviso: el fichero local es el texto inicial de la proposición, no el nuevo dictamen votado, aunque el objeto (amnistía del proceso independentista) coincide. La afirmación está redactada en negativo («no debió aprobarse»), aceptable porque el voto No se corresponde directamente."
+      }
+     ]
+    },
+    {
+     "reviewer": "IA-1B",
+     "wording_verdict": "ok",
+     "wording_issue": "",
+     "suggested_text": "",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion030/20240314/Votacion001/VOT_20240314135323.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOCG-15-B-32-1, art. 1 (pág. 9-10)",
+       "evidence_quote": "Quedan amnistiados los siguientes actos determinantes de responsabilidad penal, administrativa o contable",
+       "comment": "Votar No al dictamen de la ley de amnistía equivale a considerar que no debía aprobarse. Nota: el PDF es el texto inicial de la proposición; el voto es sobre el nuevo dictamen (texto enmendado), mismo objeto."
+      }
+     ]
+    }
+   ],
+   "text_published": "La amnistía a los encausados por el proceso independentista catalán no debió aprobarse.",
+   "statement_id_published": "territorio-amnistia"
+  },
+  "corrupcion-secretos-oficiales": {
+   "text_reviewed": "Los secretos oficiales deberían desclasificarse automáticamente pasado un plazo.",
+   "reviews": [
+    {
+     "reviewer": "IA-1A",
+     "wording_verdict": "ok",
+     "wording_issue": "",
+     "suggested_text": "",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion024/20240227/Votacion001/VOT_20240227205807.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOCG-15-B-4-1, art. único, apartado Tercero (nuevo art. 7.1) y Segundo (art. 4.2) (pág. 3)",
+       "evidence_quote": "El transcurso del plazo de vigencia de clasificación de una materia determinará su cancelación automática",
+       "comment": "Sí a la toma en consideración apoya fijar plazos máximos (25 años secretas, 10 reservadas) y cancelación automática al vencer. Matiz: el Consejo de Ministros puede prorrogar una vez las secretas; no contradice la afirmación general."
+      }
+     ]
+    },
+    {
+     "reviewer": "IA-1B",
+     "wording_verdict": "ok",
+     "wording_issue": "",
+     "suggested_text": "",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion024/20240227/Votacion001/VOT_20240227205807.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOCG-15-B-4-1, art. único, apartado Tercero (nuevo art. 7.1 Ley 9/1968) y Segundo (art. 4.2)",
+       "evidence_quote": "El transcurso del plazo de vigencia de clasificación de una materia determinará su cancelación automática",
+       "comment": "Toda clasificación fija plazo (máx. 25 años secretas, 10 reservadas) con cancelación automática; el Consejo de Ministros puede prorrogar 10 años las secretas, matiz menor que no invalida el enunciado."
+      }
+     ]
+    }
+   ],
+   "text_published": "Los secretos oficiales deberían desclasificarse automáticamente pasado un plazo.",
+   "statement_id_published": "corrupcion-secretos-oficiales"
+  },
+  "campo-trasvase-tajo-segura": {
+   "text_reviewed": "Debería garantizarse por ley el trasvase Tajo-Segura con las reglas de 2014.",
+   "reviews": [
+    {
+     "reviewer": "IA-1A",
+     "wording_verdict": "ok",
+     "wording_issue": "Ligeramente más amplia que el texto (la ley valida las reglas de explotación del RD 773/2014 y obliga a los planes hidrológicos a ajustarse, no «garantiza» caudales), pero coincide con el objetivo declarado en la exposición de motivos.",
+     "suggested_text": "",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion110/20250513/Votacion001/VOT_20250513201840.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOCG-15-B-15-1, art. único (pág. 3)",
+       "evidence_quote": "serán válidas las determinaciones establecidas a este respecto en el Real Decreto 773/2014 [...] a las que deberán ajustarse los planes hidrológicos",
+       "comment": "Sí a la toma en consideración apoya fijar por ley las reglas de 2014 sobre los planes hidrológicos. Alternativa opcional más precisa: «Las reglas de explotación del trasvase Tajo-Segura de 2014 deberían fijarse por ley»."
+      }
+     ]
+    },
+    {
+     "reviewer": "IA-1B",
+     "wording_verdict": "ok",
+     "wording_issue": "",
+     "suggested_text": "",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion110/20250513/Votacion001/VOT_20250513201840.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOCG-15-B-15-1, artículo único (pág. 3)",
+       "evidence_quote": "serán válidas las determinaciones establecidas a este respecto en el Real Decreto 773/2014",
+       "comment": "Ley que fija por rango legal las reglas de explotación del RD 773/2014, a las que deberán ajustarse los planes hidrológicos; coincide con el enunciado."
+      }
+     ]
+    }
+   ],
+   "text_published": "Debería garantizarse por ley el trasvase Tajo-Segura con las reglas de 2014.",
+   "statement_id_published": "campo-trasvase-tajo-segura"
+  },
+  "vivienda-okupacion": {
+   "text_reviewed": "Hay que acelerar por ley el desalojo de viviendas ocupadas ilegalmente.",
+   "reviews": [
+    {
+     "reviewer": "IA-2A",
+     "wording_verdict": "ok",
+     "wording_issue": "",
+     "suggested_text": "",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion099/20250318/Votacion001/VOT_20250318201321.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOCG-15-B-173-1, Exposición de motivos, p. 2; art. 544 sexies LECrim, pp. 4-5",
+       "evidence_quote": "Con esta propuesta se prioriza un desalojo rápido.",
+       "comment": "Toma en consideración: Sí apoya el objetivo de agilizar desalojos (medida cautelar de desalojo, plazo de 48 h para acreditar título)."
+      },
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion179/20260519/Votacion001/VOT_20260519203502.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOCG-15-B-304-1, art. 5 (nuevo art. 764 bis LECrim, apdo. 3), p. 8",
+       "evidence_quote": "el Juez ordenará a la Policía Judicial el desalojo inmediato del inmueble, si no se hubiera producido el desalojo voluntario",
+       "comment": "Sí apoya el objetivo de acelerar desalojos; la proposición contiene además otras medidas (penales, padrón, propiedad horizontal) que la afirmación no cubre, pero el sentido es el mismo."
+      }
+     ]
+    },
+    {
+     "reviewer": "IA-2B",
+     "wording_verdict": "ok",
+     "wording_issue": "",
+     "suggested_text": "",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion099/20250318/Votacion001/VOT_20250318201321.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOCG B-173-1, Exposición de motivos, pág. 2; arts. 544 sexies LECrim y 962 (pág. 4-5)",
+       "evidence_quote": "Con esta propuesta se prioriza un desalojo rápido.",
+       "comment": "Sí a la toma en consideración apoya la proposición, cuyo objetivo declarado es acelerar desocupación y lanzamiento de inmuebles ocupados (desalojo en 48 h). Incluye además medidas sobre vulnerabilidad en el art. 1 bis RDL 11/2020, pero el núcleo es el desalojo rápido."
+      },
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion179/20260519/Votacion001/VOT_20260519203502.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOCG B-304-1, art. 5 (nuevo art. 764 bis LECrim, apdo. 3), pág. ~13; Exposición de motivos II",
+       "evidence_quote": "el Juez ordenará a la Policía Judicial el desalojo inmediato del inmueble, si no se hubiera producido el desalojo voluntario",
+       "comment": "La proposición agiliza el desalojo (requerimiento de 24 h, desalojo inmediato, ampliación de legitimación en art. 250.1.4 LEC). Incluye también otras medidas (penas, padrón, propiedad horizontal) que el enunciado no recoge, pero no lo contradicen."
+      }
+     ]
+    }
+   ],
+   "text_published": "Hay que acelerar por ley el desalojo de viviendas ocupadas ilegalmente.",
+   "statement_id_published": "vivienda-okupacion"
+  },
+  "empleo-subsidio-desempleo": {
+   "text_reviewed": "El subsidio por desempleo debería llegar a más personas y poder cobrarse junto con un empleo.",
+   "reviews": [
+    {
+     "reviewer": "IA-2A",
+     "wording_verdict": "issue",
+     "wording_issue": "Afirmación doble: (1) ampliar el acceso al subsidio y (2) compatibilizarlo con un empleo. Un usuario puede estar de acuerdo con una y no con la otra. Además el decreto limita la compatibilidad a un máximo de 180 días.",
+     "suggested_text": "El subsidio por desempleo debería poder cobrarse temporalmente junto con un empleo.",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion049/20240620/Votacion019/VOT_20240620132741.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "RDL 2/2024, exposición de motivos (apartados sobre ampliación de cobertura y compatibilidad); art. segundo, nuevo art. 274 LGSS",
+       "evidence_quote": "Se amplía la cobertura del nivel asistencial en algunos tramos de edad anteriormente excluidos",
+       "comment": "Convalidar (Sí) apoya ambas medidas: más beneficiarios (menores de 45 sin cargas, cotización <6 meses) y complemento de apoyo al empleo (compatibilidad hasta 180 días). El decreto es además ómnibus (transposición Directiva 2019/1158, IMV, etc.)."
+      }
+     ]
+    },
+    {
+     "reviewer": "IA-2B",
+     "wording_verdict": "issue",
+     "wording_issue": "Doble afirmación: (1) ampliar la cobertura y (2) compatibilidad con empleo. Quien apoye solo una no puede responder con fidelidad.",
+     "suggested_text": "El subsidio por desempleo debería ampliarse a más personas que hoy no pueden acceder a él.",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion049/20240620/Votacion019/VOT_20240620132741.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "RDL 2/2024, Preámbulo (párrafo sobre nivel asistencial) y arts. 274 y ss. LGSS (artículo segundo)",
+       "evidence_quote": "Se amplía la cobertura del nivel asistencial en algunos tramos de edad anteriormente excluidos",
+       "comment": "Sí = convalidar. El texto también establece la compatibilidad del subsidio con el trabajo hasta 180 días como complemento de apoyo al empleo, por lo que respalda ambas mitades. Es un decreto ómnibus (también representación sindical, permisos de conciliación, cuantía decreciente del subsidio), de modo que el voto no es exclusivo sobre el subsidio."
+      }
+     ]
+    }
+   ],
+   "text_published": "El subsidio por desempleo debería llegar a más personas que hoy no pueden cobrarlo.",
+   "statement_id_published": "empleo-subsidio-desempleo"
+  },
+  "transporte-alcohol-volante": {
+   "text_reviewed": "Habría que bajar la tasa máxima de alcohol permitida al volante.",
+   "reviews": [
+    {
+     "reviewer": "IA-2A",
+     "wording_verdict": "ok",
+     "wording_issue": "",
+     "suggested_text": "",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion099/20250318/Votacion002/VOT_20250318201322.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOCG-15-B-157-1, art. único, apdo. Dos (art. 76 z4) y Tres (art. 77 c), p. 4",
+       "evidence_quote": "Conducir con tasas de alcohol superiores a 0,1 miligramos por litro de aire espirado o 0,2 gramos por litro en sangre",
+       "comment": "La proposición reduce la tasa a 0,1 mg/l (0,2 g/l) para todos los conductores. Sí también apoya la prohibición de difundir ubicación de controles (segunda medida del mismo texto), que la afirmación no menciona."
+      }
+     ]
+    },
+    {
+     "reviewer": "IA-2B",
+     "wording_verdict": "ok",
+     "wording_issue": "",
+     "suggested_text": "",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion099/20250318/Votacion002/VOT_20250318201322.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOCG B-157-1, artículo único, apdo. Dos y Tres (arts. 76 z4 y 77 c TRLTSV), pág. 4",
+       "evidence_quote": "Conducir con tasas de alcohol superiores a 0,1 miligramos por litro de aire espirado o 0,2 gramos por litro en sangre",
+       "comment": "Baja el umbral sancionable de 0,25 a 0,1 mg/l aire espirado para todos los conductores. La misma proposición prohíbe difundir la ubicación de controles (art. 13.7), medida no recogida en el enunciado; el voto es conjunto."
+      }
+     ]
+    }
+   ],
+   "text_published": "Habría que bajar la tasa máxima de alcohol permitida al volante.",
+   "statement_id_published": "transporte-alcohol-volante"
+  },
+  "territorio-inmigracion-cataluna": {
+   "text_reviewed": "Las competencias de inmigración deberían seguir siendo exclusivamente del Estado.",
+   "reviews": [
+    {
+     "reviewer": "IA-2A",
+     "wording_verdict": "issue",
+     "wording_issue": "Sobrepasa lo votado: la proposición no transfiere la titularidad sino que delega en Cataluña la ejecución de la normativa estatal (art. 150.2 CE); el voto afecta solo a Cataluña, no a las competencias de inmigración en general. 'Exclusivamente' no figura en el texto votado.",
+     "suggested_text": "El Estado no debería delegar en Cataluña la tramitación de las autorizaciones de estancia y residencia de personas extranjeras.",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion133/20250923/Votacion001/VOT_20250923211048.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOCG-15-B-195-1, art. 3.1, p. 4",
+       "evidence_quote": "Se delega en la Comunidad Autónoma de Catalunya la ejecución de la normativa del Estado en materia de iniciación, instrucción, resolución y notificación",
+       "comment": "Votar No a la toma en consideración rechaza la delegación en Cataluña; coherente con mantener la gestión en el Estado. Matiz: la delegación no cambia la titularidad estatal."
+      }
+     ]
+    },
+    {
+     "reviewer": "IA-2B",
+     "wording_verdict": "issue",
+     "wording_issue": "'Exclusivamente del Estado' sobrepasa lo votado: la proposición delega la ejecución (art. 150.2 CE) de ciertos trámites, no transfiere la titularidad, y el art. 1.2 reconoce que Cataluña ya tiene competencias propias (p. ej. acogida e integración).",
+     "suggested_text": "La tramitación de las autorizaciones de estancia y residencia de extranjeros debería seguir en manos de la Administración del Estado, sin delegarla a una comunidad autónoma.",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion133/20250923/Votacion001/VOT_20250923211048.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOCG B-195-1, art. 1.1 y arts. 2-10, pág. 4 y ss.",
+       "evidence_quote": "la delegación de competencias estatales a la Comunidad Autónoma de Catalunya en materia de inmigración",
+       "comment": "No a la toma en consideración = rechazar la delegación, coherente con mantener la gestión en el Estado. Matiz: el texto delega ejecución, no la competencia legislativa; el No no equivale a rechazar competencias autonómicas ya existentes."
+      }
+     ]
+    }
+   ],
+   "text_published": "La tramitación de los permisos de estancia y residencia de extranjeros debería seguir en manos del Estado, sin delegarla en Cataluña.",
+   "statement_id_published": "territorio-inmigracion-cataluna"
+  },
+  "corrupcion-registro-lobbies": {
+   "text_reviewed": "La actividad de los lobbies (grupos de interés) debería regularse por ley, con un registro público obligatorio.",
+   "reviews": [
+    {
+     "reviewer": "IA-2A",
+     "wording_verdict": "ok",
+     "wording_issue": "",
+     "suggested_text": "",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion198/20260916/Votacion016/VOT_20260916195406.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "RDL 21/2026, art. 1 y art. 5.1",
+       "evidence_quote": "crea y regula un registro de ámbito estatal, público y obligatorio, de grupos de interés.",
+       "comment": "Sí = convalidar el decreto que regula la relación con grupos de interés y crea el registro obligatorio (ámbito AGE y sector público institucional). Nota: el decreto se derogó al no convalidarse; no afecta al sentido del voto. Ligeramente doble (ley + registro) pero forman un solo paquete."
+      }
+     ]
+    },
+    {
+     "reviewer": "IA-2B",
+     "wording_verdict": "ok",
+     "wording_issue": "Marginal: 'por ley' y 'registro público obligatorio' son dos rasgos de una misma regulación; se considera una sola afirmación. El instrumento votado es un real decreto-ley (norma con rango de ley).",
+     "suggested_text": "",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion198/20260916/Votacion016/VOT_20260916195406.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "RDL 21/2026, Preámbulo (resumen de contenido) y arts. 5-7 (art. 7.5)",
+       "evidence_quote": "crea y regula un registro de ámbito estatal, público y obligatorio, de grupos de interés",
+       "comment": "Sí = convalidar el decreto-ley que crea el registro y exige inscripción previa para reunirse con cargos públicos (art. 7.5) y prevé régimen sancionador. Nota: la nota del repositorio indica que fue derogado; el voto Sí sigue significando apoyo al contenido."
+      }
+     ]
+    }
+   ],
+   "text_published": "La actividad de los lobbies (grupos de interés) debería regularse por ley, con un registro público obligatorio.",
+   "statement_id_published": "corrupcion-registro-lobbies"
+  },
+  "exterior-armas-israel": {
+   "text_reviewed": "España debería prohibir la compraventa de armas con Israel.",
+   "reviews": [
+    {
+     "reviewer": "IA-2A",
+     "wording_verdict": "ok",
+     "wording_issue": "",
+     "suggested_text": "",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion112/20250520/Votacion002/VOT_20250520203911.json",
+       "agree_vote_verdict": "unclear",
+       "evidence_locator": "BOCG-15-B-138-1, art. 16.1 (nuevo), p. 6; disposición final primera, p. 8",
+       "evidence_quote": "se aplicará de manera automática a los Estados que estén siendo juzgados por un Tribunal internacional competente",
+       "comment": "El articulado crea un embargo genérico y automático (sin nombrar a Israel); Israel solo aparece en la exposición de motivos como ejemplo (p. 4). Sí apunta en el mismo sentido, pero la afirmación sobre Israel va más allá del texto votado."
+      },
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion087/VOT_20251008195359.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "RDL 10/2025, art. 1.1",
+       "evidence_quote": "Se prohíben las exportaciones destinadas a Israel y las importaciones originarias de Israel del material incluido en los anexos",
+       "comment": "Prohíbe exportaciones e importaciones de material de defensa y doble uso con Israel. Existe cláusula de excepción por el Consejo de Ministros (disposición adicional) que no cambia el sentido."
+      }
+     ]
+    },
+    {
+     "reviewer": "IA-2B",
+     "wording_verdict": "ok",
+     "wording_issue": "",
+     "suggested_text": "",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion112/20250520/Votacion002/VOT_20250520203911.json",
+       "agree_vote_verdict": "unclear",
+       "evidence_locator": "BOCG B-138-1, artículo único, apdo. Uno (art. 3.17 Ley 53/2007) y art. 15, pág. 5-6",
+       "evidence_quote": "Embargo: Cancelación automática, inmediata e indefinida en el tiempo de todas las transferencias o tránsitos recogidos en el capítulo III",
+       "comment": "El articulado es genérico: embargo automático a cualquier Estado demandado ante un tribunal internacional por genocidio/crímenes de guerra; Israel solo aparece en la exposición de motivos como ejemplo. Sí apoya el mecanismo, no nombra a Israel; el enunciado va más lejos que el texto."
+      },
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion087/VOT_20251008195359.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "RDL 10/2025, art. 1.1",
+       "evidence_quote": "Se prohíben las exportaciones destinadas a Israel y las importaciones originarias de Israel del material incluido en los anexos del Reglamento",
+       "comment": "Sí = convalidar la prohibición explícita de transferencias de material de defensa y doble uso con Israel (exportación e importación). El decreto incluye otras medidas (combustibles, asentamientos, publicidad) no recogidas en el enunciado."
+      }
+     ]
+    }
+   ],
+   "text_published": "España debería prohibir la compraventa de armas con Israel.",
+   "statement_id_published": "exterior-armas-israel"
+  },
+  "vivienda-planes-urbanisticos": {
+   "text_reviewed": "Habría que limitar quién puede recurrir los planes urbanísticos y evitar que una sentencia anule planes enteros, para construir vivienda más rápido.",
+   "reviews": [
+    {
+     "reviewer": "IA-3A",
+     "wording_verdict": "issue",
+     "wording_issue": "Doble afirmación (limitar quién puede recurrir + evitar anulación de planes enteros) y añade una finalidad causal («para construir vivienda más rápido») que el texto declara pero la votación no acredita.",
+     "suggested_text": "La acción pública para recurrir planes urbanísticos debería limitarse a asociaciones sin ánimo de lucro con fines ambientales o urbanísticos.",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion173/20260421/Votacion001/VOT_20260421201008.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOCG B-303-1, art. 1.Seis (nuevo art. 62 TRLSRU, acción pública), p. 10; art. 1.Cinco (art. 55), pp. 8-9",
+       "evidence_quote": "podrán impugnarse, además de por quienes estén legitimados..., por personas jurídicas sin ánimo de lucro que cumplan los requisitos siguientes",
+       "comment": "Sí a la toma en consideración apoya ambas medidas: restringe la acción pública (art. 62) y convierte en anulables/subsanables vicios formales (art. 55.6-7; la nulidad no arrastra actos de desarrollo). El fin 'construir vivienda más rápido' es el declarado en el título/exposición, no un efecto comprobado."
+      }
+     ]
+    },
+    {
+     "reviewer": "IA-3B",
+     "wording_verdict": "issue",
+     "wording_issue": "Doble afirmación (limitar la legitimación para recurrir y evitar anulaciones de planes enteros) y añade una finalidad ('para construir vivienda más rápido') que es la justificación declarada por el proponente, no algo que el voto decida. La proposición además contiene otras medidas (silencio positivo en licencias, plazos de informes sectoriales) que el enunciado no recoge.",
+     "suggested_text": "Debería limitarse por ley quién puede recurrir los planes urbanísticos mediante la acción pública.",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion173/20260421/Votacion001/VOT_20260421201008.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOCG-15-B-303-1, pág. 10, art. 1.Seis (nuevo art. 62 TRLSRU, acción pública); pág. 13, art. 2 (art. 71 LJCA: anulación parcial y subsanación)",
+       "evidence_quote": "podrán impugnarse, además de por quienes estén legitimados para ello según la legislación reguladora de la jurisdicción contencioso-administrativa, por personas jurídicas sin ánimo de lucro que cumplan los requisitos siguientes",
+       "comment": "Sí a la toma en consideración apoya ambos objetivos del texto (restringir la acción pública a entidades sin ánimo de lucro con 2 años de antigüedad; anulación parcial y subsanación en plazo de un año ante vicios formales: art. 71 LJCA). Correcto con la regla de toma en consideración, aunque 'evitar que se anulen planes enteros' es una simplificación: la anulación sigue siendo posible, pero parcial/subsanable."
+      }
+     ]
+    }
+   ],
+   "text_published": "Debería limitarse por ley quién puede recurrir los planes urbanísticos.",
+   "statement_id_published": "vivienda-planes-urbanisticos"
+  },
+  "coste-vida-impuesto-banca": {
+   "text_reviewed": "El impuesto extraordinario a la gran banca debería endurecerse y destinarse a construir vivienda pública.",
+   "reviews": [
+    {
+     "reviewer": "IA-3A",
+     "wording_verdict": "issue",
+     "wording_issue": "Doble afirmación: endurecer el impuesto y destinarlo a vivienda pública son dos medidas distintas. Además 'construir vivienda pública' simplifica: el fondo concede crédito a entes locales para vivienda en alquiler social temporal y de emergencia.",
+     "suggested_text": "Los ingresos del impuesto extraordinario a la banca deberían destinarse a un fondo para vivienda pública de alquiler social.",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion034/20240409/Votacion002/VOT_20240409210632.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOCG B-65-1, art. 1 (nuevo art. 2.4 y 2.10 Ley 38/2022), pp. 4-5",
+       "evidence_quote": "el importe del gravamen sobre márgenes extraordinarios... el porcentaje del 75 %",
+       "comment": "Sí a la toma en consideración apoya endurecer el gravamen (se duplica el gravamen temporal, +75% sobre márgenes extraordinarios) y destinar el rendimiento (art. 2.10) a 'un fondo extraordinario... para la construcción de vivienda pública en régimen de alquiler social temporal y de emergencia'."
+      }
+     ]
+    },
+    {
+     "reviewer": "IA-3B",
+     "wording_verdict": "issue",
+     "wording_issue": "Doble afirmación: (1) endurecer el gravamen y (2) destinar lo recaudado a vivienda pública. Además el destino concreto es un fondo para crédito a entes locales para vivienda pública de alquiler social/emergencia, no construcción directa genérica.",
+     "suggested_text": "El impuesto extraordinario a la gran banca debería subirse.",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion034/20240409/Votacion002/VOT_20240409210632.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOCG-15-B-65-1, pág. 3, título del artículo 1; pág. 5, art. 2 Ley 38/2022 modificado, apartado 10",
+       "evidence_quote": "creación de un fondo extraordinario para construcción de vivienda pública de emergencia",
+       "comment": "El texto eleva el gravamen (exposición de motivos, pág. 3: 'se duplica el gravamen temporal'; 75 % sobre márgenes extraordinarios) y destina la recaudación a un fondo para vivienda pública (apdo. 10, crédito a entes locales para alquiler social). Votar Sí apoya ambas cosas."
+      }
+     ]
+    }
+   ],
+   "text_published": "El impuesto extraordinario a la gran banca debería subir.",
+   "statement_id_published": "coste-vida-impuesto-banca"
+  },
+  "sanidad-ratios-enfermeras": {
+   "text_reviewed": "Debería fijarse por ley un número máximo de pacientes por enfermera.",
+   "reviews": [
+    {
+     "reviewer": "IA-3A",
+     "wording_verdict": "ok",
+     "wording_issue": "",
+     "suggested_text": "",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion083/20241210/Votacion001/VOT_20241210202031.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOCG B-10-1, art. 5.1, p. 4",
+       "evidence_quote": "se asignará un máximo de 6 pacientes por cada enfermera, pudiéndose asignar hasta 8 pacientes",
+       "comment": "Sí a la toma en consideración de la ILP apoya fijar por ley ratios máximas (art. 2 objeto; arts. 5-6 cifras concretas). Afirmación fiel y neutra."
+      }
+     ]
+    },
+    {
+     "reviewer": "IA-3B",
+     "wording_verdict": "ok",
+     "wording_issue": "",
+     "suggested_text": "",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion083/20241210/Votacion001/VOT_20241210202031.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOCG-15-B-10-1, pág. 4, art. 5.1 (también art. 5.2, art. 6)",
+       "evidence_quote": "como regla general en unidades de hospitalización, se asignará un máximo de 6 pacientes por cada enfermera",
+       "comment": "La ILP fija por ley ratios (máximo de pacientes por enfermera en hospitalización, UCI, reanimación; 1.500 habitantes por enfermera en primaria). Sí a la toma en consideración apoya el objetivo. El enunciado es equivalente a la 'ratio mínima de enfermeras' del texto."
+      }
+     ]
+    }
+   ],
+   "text_published": "Debería fijarse por ley un número máximo de pacientes por enfermera.",
+   "statement_id_published": "sanidad-ratios-enfermeras"
+  },
+  "inmigracion-regularizacion": {
+   "text_reviewed": "Debería hacerse una regularización extraordinaria de los inmigrantes que ya viven en España sin papeles.",
+   "reviews": [
+    {
+     "reviewer": "IA-3A",
+     "wording_verdict": "ok",
+     "wording_issue": "",
+     "suggested_text": "",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion034/20240409/Votacion001/VOT_20240409210631.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOCG B-11-1, artículo único (disp. transitoria primera LO 4/2000), p. 4",
+       "evidence_quote": "establecerá, en el plazo de 6 meses, un procedimiento para la regularización de los extranjeros que se encuentren en territorio español antes del día 1 de noviembre de 2021",
+       "comment": "Sí a la toma en consideración apoya el objetivo (regularización extraordinaria). Matiz menor: el texto limita a quienes estaban en España antes del 1-11-2021 y ordena al Gobierno un procedimiento por real decreto; el enunciado 'que ya viven... sin papeles' es una simplificación aceptable."
+      }
+     ]
+    },
+    {
+     "reviewer": "IA-3B",
+     "wording_verdict": "ok",
+     "wording_issue": "",
+     "suggested_text": "",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion034/20240409/Votacion001/VOT_20240409210631.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOCG-15-B-11-1, pág. 4, artículo único (nueva disposición transitoria primera LO 4/2000)",
+       "evidence_quote": "establecerá, en el plazo de 6 meses, un procedimiento para la regularización de los extranjeros que se encuentren en territorio español",
+       "comment": "El texto ordena al Gobierno un proceso de regularización extraordinaria para quienes estuvieran en España antes del 1-11-2021 (el enunciado 'que ya viven' es algo más amplio en fecha, pero fiel en lo esencial). Sí a la toma en consideración apoya el objetivo."
+      }
+     ]
+    }
+   ],
+   "text_published": "Debería hacerse una regularización extraordinaria de los inmigrantes que ya viven en España sin papeles.",
+   "statement_id_published": "inmigracion-regularizacion"
+  },
+  "igualdad-paridad": {
+   "text_reviewed": "Las listas electorales, el Gobierno y los consejos de las grandes empresas deberían tener por ley una presencia equilibrada de mujeres y hombres.",
+   "reviews": [
+    {
+     "reviewer": "IA-3A",
+     "wording_verdict": "issue",
+     "wording_issue": "Triple afirmación (listas, Gobierno, consejos de empresas) en una sola frase; quien está de acuerdo con una parte y no con otra no puede responder con fidelidad. 'Grandes empresas' omite que se aplica a cotizadas y entidades de interés público grandes.",
+     "suggested_text": "Las listas electorales deberían tener por ley una composición paritaria de mujeres y hombres.",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion052/20240627/Votacion044/VOT_20240627130417.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOCG A-1-1 (texto inicial del proyecto), art. primero (art. 44 bis LOREG), p. 11-12; art. séptimo (art. 12.2 bis Ley 50/1997), p. 14; art. 529 bis y disp. adic. 16ª LSC, pp. 15-16",
+       "evidence_quote": "deberán tener una composición paritaria de mujeres y hombres, integrándose las listas por personas de uno y otro sexo ordenados de forma alternativa",
+       "comment": "Sí en la votación de conjunto apoya la ley: listas paritarias, Gobierno con mínimo 40% de cada sexo (art. 12.2 bis) y consejos de cotizadas y entidades de interés público grandes con 40% (art. 529 bis y DA 16ª). Las tres partes del enunciado están cubiertas. Nota: el texto local es el proyecto inicial (diciembre 2023), no el dictamen votado en junio 2024; el contenido básico coincide pero no se ha verificado cada enmienda."
+      }
+     ]
+    },
+    {
+     "reviewer": "IA-3B",
+     "wording_verdict": "issue",
+     "wording_issue": "Triple afirmación (listas electorales, Gobierno y consejos de empresas). Además 'grandes empresas' simplifica: el texto exige 40 % en consejos de sociedades cotizadas y extiende obligaciones a grandes empresas no cotizadas; para el Gobierno exige mínimo 40 % de cada sexo, no paridad exacta.",
+     "suggested_text": "Debería exigirse por ley una presencia equilibrada de mujeres y hombres en las listas electorales.",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion052/20240627/Votacion044/VOT_20240627130417.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOCG-15-A-1-1 (proyecto inicial), pág. 11 art. 1 (art. 44 bis LOREG), pág. 13 art. 7 (art. 12.2 bis Ley del Gobierno), art. 9 (art. 529 bis LSC)",
+       "evidence_quote": "deberán tener una composición paritaria de mujeres y hombres, integrándose las listas por personas de uno y otro sexo ordenados de forma alternativa",
+       "comment": "Sí en la votación de conjunto aprueba la ley. El texto local es el proyecto inicial del Gobierno (Serie A), no el dictamen final votado; el contenido de las tres áreas (listas, Gobierno, consejos de administración con mínimo 40 % del sexo menos representado) consta en él, pero no se ha verificado contra el texto final tras enmiendas."
+      }
+     ]
+    }
+   ],
+   "text_published": "Las listas electorales deberían tener por ley una presencia equilibrada de mujeres y hombres.",
+   "statement_id_published": "igualdad-paridad"
+  },
+  "empleo-jornada-37-5": {
+   "text_reviewed": "La jornada laboral máxima debería seguir siendo de 40 horas semanales.",
+   "reviews": [
+    {
+     "reviewer": "IA-4A",
+     "wording_verdict": "ok",
+     "wording_issue": "",
+     "suggested_text": "",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion130/20250910/Votacion010/VOT_20250910213544.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOCG-15-A-58-1, pág. 9, artículo único, apartado Tres (nuevo art. 34.1 ET)",
+       "evidence_quote": "La duración máxima de la jornada ordinaria de trabajo será de treinta y siete horas y media semanales de trabajo efectivo de promedio en cómputo anual.",
+       "comment": "Sí a las enmiendas de devolución = rechazar el proyecto que baja el máximo legal de 40 a 37,5 h (la exposición de motivos, pág. 4, recuerda que el máximo vigente es 40 h desde 1983). Se vota el texto inicial del proyecto, no el texto de las enmiendas; la lectura es procedimental pero coherente con la afirmación. El proyecto incluye también registro de jornada y desconexión, que la afirmación no cubre; aceptable porque la afirmación se limita al máximo semanal."
+      }
+     ]
+    },
+    {
+     "reviewer": "IA-4B",
+     "wording_verdict": "ok",
+     "wording_issue": "",
+     "suggested_text": "",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion130/20250910/Votacion010/VOT_20250910213544.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOCG-15-A-58-1, artículo único, apartado Tres (art. 34.1 ET), p. 9; exposición de motivos (40 h vigentes desde 1983)",
+       "evidence_quote": "La duración máxima de la jornada ordinaria de trabajo será de treinta y siete horas y media semanales de trabajo efectivo de promedio en cómputo anual.",
+       "comment": "Sí = devolver al Gobierno el proyecto que fija 37,5 h; su efecto es mantener las 40 h vigentes. El texto local es el proyecto original, no los textos de las enmiendas de totalidad (que pueden tener motivaciones distintas), pero el efecto de la votación sobre la jornada máxima es inequívoco. La votación es conjunta de tres enmiendas."
+      }
+     ]
+    }
+   ],
+   "text_published": "La jornada laboral máxima debería seguir siendo de 40 horas semanales.",
+   "statement_id_published": "empleo-jornada-37-5"
+  },
+  "energia-impuesto-energeticas": {
+   "text_reviewed": "El impuesto extraordinario a las grandes empresas energéticas debería desaparecer.",
+   "reviews": [
+    {
+     "reviewer": "IA-4A",
+     "wording_verdict": "issue",
+     "wording_issue": "Imprecisión: el texto califica el gravamen como prestación patrimonial de carácter público no tributario (no es un impuesto) y la votación solo decidía convalidar el gravamen de 2025; 'debería desaparecer' generaliza más allá de ese año.",
+     "suggested_text": "El gravamen temporal a las grandes empresas energéticas no debería mantenerse en 2025.",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion089/20250122/Votacion002/VOT_20250122154427.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "RDL 10/2024, artículo único, apartados 1 y 3",
+       "evidence_quote": "deberán satisfacer un gravamen energético con carácter temporal durante el año 2025",
+       "comment": "Convalidar el RDL mantiene el gravamen para 2025; votar No = rechazarlo, coherente con que desaparezca. Matices: es 'prestación patrimonial de carácter público no tributario' (apdo. 3) y afecta solo a operadores principales energéticos de gran tamaño. La nota 'derogado' es consistente con los metadatos del BOE (derogado por Resolución de 22/01/2025)."
+      }
+     ]
+    },
+    {
+     "reviewer": "IA-4B",
+     "wording_verdict": "issue",
+     "wording_issue": "El texto oficial lo califica de «gravamen temporal energético» con naturaleza de prestación patrimonial de carácter público no tributario, no de impuesto; además la votación fue sobre el gravamen de 2025, no sobre cualquier impuesto extraordinario futuro. Imprecisión menor.",
+     "suggested_text": "El gravamen temporal a las grandes empresas energéticas no debería mantenerse.",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion089/20250122/Votacion002/VOT_20250122154427.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "RDL 10/2024, artículo único, apartados 1 y 3 (BOE núm. 309, p. 179366 ss.)",
+       "evidence_quote": "El gravamen temporal energético tendrá la naturaleza jurídica de prestación patrimonial de carácter público no tributario",
+       "comment": "Votar No a la convalidación del RDL impide que el gravamen de 2025 siga adelante; coherente con «debería desaparecer». El RDL fue finalmente derogado (BOE 23/01/2025)."
+      }
+     ]
+    }
+   ],
+   "text_published": "El gravamen temporal a las grandes empresas energéticas no debería mantenerse.",
+   "statement_id_published": "energia-impuesto-energeticas"
+  },
+  "sanidad-eutanasia-recursos": {
+   "text_reviewed": "Los recursos judiciales contra una eutanasia ya autorizada deberían resolverse por un procedimiento urgente.",
+   "reviews": [
+    {
+     "reviewer": "IA-4A",
+     "wording_verdict": "ok",
+     "wording_issue": "",
+     "suggested_text": "",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion185/20260611/Votacion042/VOT_20260611145754.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOCG-15-B-333-1, pág. 4, art. 2.4 (nuevo art. 122 quinquies LJCA) y art. 1",
+       "evidence_quote": "El Tribunal deberá resolver en el plazo improrrogable de tres días desde la celebración de la audiencia",
+       "comment": "Toma en consideración: Sí = apoyar debatir la proposición, cuyo objetivo es un procedimiento especial, sumario, preferente y de plazos abreviados para estos recursos. 'Urgente' es una síntesis razonable. La proposición añade otros elementos (instancia única, sin recurso salvo amparo, competencia del TSJ) que la afirmación no menciona. El 'contexto' dice que se tramita por el procedimiento preferente de derechos fundamentales; en realidad crea un procedimiento especial nuevo (art. 122 quinquies), matiz menor."
+      }
+     ]
+    },
+    {
+     "reviewer": "IA-4B",
+     "wording_verdict": "ok",
+     "wording_issue": "Menor: la proposición cubre los recursos contra cualquier resolución de las Comisiones de Garantía y Evaluación (favorable o desfavorable), no solo contra eutanasias ya autorizadas; la formulación es una simplificación aceptable. También prevé instancia única y sin recurso, no mencionado.",
+     "suggested_text": "",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion185/20260611/Votacion042/VOT_20260611145754.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOCG-15-B-333-1, art. 2.4 (nuevo art. 122 quinquies Ley 29/1998), apartados 1 y 6, pp. 4-5",
+       "evidence_quote": "El Tribunal deberá resolver en el plazo improrrogable de tres días desde la celebración de la audiencia",
+       "comment": "Toma en consideración: Sí = apoyar el objetivo de procedimiento especial y abreviado (recurso en 3 días, audiencia en 10, resolución en 3). La toma en consideración no fija el texto final."
+      }
+     ]
+    }
+   ],
+   "text_published": "Los recursos judiciales contra una eutanasia ya autorizada deberían resolverse por un procedimiento urgente.",
+   "statement_id_published": "sanidad-eutanasia-recursos"
+  },
+  "inmigracion-reparto-menores": {
+   "text_reviewed": "Cada comunidad autónoma debería decidir cuántos menores migrantes no acompañados acoge, sin reparto obligatorio.",
+   "reviews": [
+    {
+     "reviewer": "IA-4A",
+     "wording_verdict": "ok",
+     "wording_issue": "Ligera combinación de dos ideas (decisión autonómica y ausencia de reparto obligatorio), pero forman una sola postura coherente; no se considera doble afirmación. Votar No solo rechaza el mecanismo obligatorio, no prueba apoyo a que decida cada comunidad.",
+     "suggested_text": "",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion056/20240723/Votacion063/VOT_20240723221735.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOCG-15-B-137-1, exposición de motivos pág. 6-7 (art. 35 quinquies)",
+       "evidence_quote": "con carácter obligatorio para todas las comunidades autónomas en ejercicio de las funciones de coordinación de la Administración General del Estado",
+       "comment": "La proposición crea redistribución territorial obligatoria de menores no acompañados en contingencia migratoria extraordinaria (la AGE acuerda la ubicación, vinculante para las CCAA). Toma en consideración: No = rechazar ese mecanismo, coherente con la afirmación."
+      },
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion106/20250410/Votacion015/VOT_20250410155154.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "RDL 2/2025, art. 35 quinquies.1 (LOEx), añadido por el artículo único",
+       "evidence_quote": "deberán realizar las actuaciones necesarias para garantizar la atención a las personas menores de edad extranjeras no acompañadas que deban ubicarse en su territorio",
+       "comment": "El RDL obliga a las CCAA a acoger a los menores reubicados según los criterios de la Conferencia Sectorial (en defecto de unanimidad), con declaración de contingencia cuando se triplica la capacidad ordinaria (DA 11ª). Convalidación: No = rechazar el reparto obligatorio. El RDL incluye además un fondo de financiación, que la afirmación no aborda."
+      }
+     ]
+    },
+    {
+     "reviewer": "IA-4B",
+     "wording_verdict": "ok",
+     "wording_issue": "Menor: «decidir cuántos menores acoge» es algo más fuerte que rechazar el reparto obligatorio; ambos textos mantienen un papel de la Conferencia Sectorial/acuerdo unánime. Aceptable.",
+     "suggested_text": "",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion056/20240723/Votacion063/VOT_20240723221735.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOCG-15-B-137-1, art. 35 quinquies (apartado Cuatro), p. 11",
+       "evidence_quote": "serán adoptados en el seno de la Conferencia Sectorial de Infancia y Adolescencia con carácter obligatorio para todas las comunidades autónomas",
+       "comment": "No a la toma en consideración = rechazar debatir una redistribución territorial obligatoria de menores; coincide con la afirmación."
+      },
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion106/20250410/Votacion015/VOT_20250410155154.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "RDL 2/2025, art. 35 quinquies y disposición adicional undécima (BOE)",
+       "evidence_quote": "serán adoptados en el seno de la Conferencia Sectorial de Infancia y Adolescencia con carácter obligatorio para todas las comunidades o ciudades autónomas",
+       "comment": "No a la convalidación = rechazar la reubicación obligatoria. Matiz: el RDL prevé acuerdo unánime de la Conferencia Sectorial como vía preferente y limita la obligatoriedad en el tiempo, pero el mecanismo obligatorio subsidiario existe."
+      }
+     ]
+    }
+   ],
+   "text_published": "Cada comunidad autónoma debería decidir cuántos menores migrantes no acompañados acoge, sin reparto obligatorio.",
+   "statement_id_published": "inmigracion-reparto-menores"
+  },
+  "igualdad-terapias-conversion": {
+   "text_reviewed": "Las terapias de conversión que intentan cambiar la orientación sexual o la identidad de género deberían ser delito.",
+   "reviews": [
+    {
+     "reviewer": "IA-4A",
+     "wording_verdict": "ok",
+     "wording_issue": "",
+     "suggested_text": "",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion191/20260625/Votacion022/VOT_20260625150816.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOCG-15-B-240-1, pág. 3, artículo único, apartado Uno (nuevo art. 173 bis CP)",
+       "evidence_quote": "Será castigado con la pena de prisión de seis meses a dos años, el que aplique o practique sobre una persona actos, métodos, programas, técnicas o procedimientos de aversión o conversión",
+       "comment": "El texto disponible es el inicial (13/06/2025); la votación de conjunto de 25/06/2026 se refiere al texto final tras la tramitación, que podría diferir en detalles, pero el título votado ('para penalizar las terapias de conversión') confirma el objetivo. El tipo exige afectación de la integridad o la salud o menoscabo grave de la integridad moral; la afirmación lo simplifica, sin contradecirlo. Votación de conjunto: Sí = aprobar la ley."
+      }
+     ]
+    },
+    {
+     "reviewer": "IA-4B",
+     "wording_verdict": "ok",
+     "wording_issue": "",
+     "suggested_text": "",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion191/20260625/Votacion022/VOT_20260625150816.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOCG-15-B-240-1, artículo único, Uno (art. 173 bis CP), p. 3",
+       "evidence_quote": "Será castigado con la pena de prisión de seis meses a dos años, el que aplique o practique sobre una persona actos, métodos, programas, técnicas o procedimientos de aversión o conversión",
+       "comment": "Votación de conjunto: Sí = aprobar tipificar como delito. El texto local es el inicial; el texto final tras enmiendas puede diferir en detalles pero la finalidad penal es la misma. El tipo exige afectación de integridad o salud, matiz que la afirmación omite sin contradecirla."
+      }
+     ]
+    }
+   ],
+   "text_published": "Las terapias de conversión que intentan cambiar la orientación sexual o la identidad de género deberían ser delito.",
+   "statement_id_published": "igualdad-terapias-conversion"
+  },
+  "empleo-jornada-35": {
+   "text_reviewed": "La jornada laboral máxima debería bajar a 35 horas semanales.",
+   "reviews": [
+    {
+     "reviewer": "IA-5A",
+     "wording_verdict": "ok",
+     "wording_issue": "",
+     "suggested_text": "",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion137/20251014/Votacion001/VOT_20251014202757.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOCG-15-B-182-1, art. primero, apartado Tres (art. 34.1 ET), pág. 5-6",
+       "evidence_quote": "La duración máxima de la jornada de trabajo será de treinta y cinco horas semanales de trabajo efectivo.",
+       "comment": "Sí a la toma en consideración apoya la reducción a 35 h. La proposición incluye además registro de jornada y desconexión, pero el eje es la jornada máxima."
+      }
+     ]
+    },
+    {
+     "reviewer": "IA-5B",
+     "wording_verdict": "ok",
+     "wording_issue": "",
+     "suggested_text": "",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion137/20251014/Votacion001/VOT_20251014202757.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "Art. único, apartado Tres (art. 34.1 ET), pág. 7 del BOCG 182-1",
+       "evidence_quote": "La duración máxima de la jornada de trabajo será de treinta y cinco horas semanales de trabajo efectivo.",
+       "comment": "Sí a la toma en consideración apoya reducir el máximo legal a 35 h."
+      }
+     ]
+    }
+   ],
+   "text_published": "La jornada laboral máxima debería bajar a 35 horas semanales.",
+   "statement_id_published": "empleo-jornada-35"
+  },
+  "energia-nuclear": {
+   "text_reviewed": "Las centrales nucleares deberían poder seguir funcionando más allá del calendario de cierre previsto.",
+   "reviews": [
+    {
+     "reviewer": "IA-5A",
+     "wording_verdict": "ok",
+     "wording_issue": "",
+     "suggested_text": "",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion119/20250617/Votacion001/VOT_20250617203251.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOCG-15-B-206-1, art. 1.1 y art. 3, págs. 11-12",
+       "evidence_quote": "La operación de las instalaciones de generación nuclear se extenderá hasta el cese de la actividad de producción",
+       "comment": "El cese solo por solicitud del titular, expiración de autorización sin prórroga o informe desfavorable del CSN; art. 3 insta a no contemplar el cierre de ninguna instalación. Sí = apoyar la continuidad más allá del calendario."
+      }
+     ]
+    },
+    {
+     "reviewer": "IA-5B",
+     "wording_verdict": "ok",
+     "wording_issue": "",
+     "suggested_text": "",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion119/20250617/Votacion001/VOT_20250617203251.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "Artículo 1.1 (pág. 11 del BOCG 206-1)",
+       "evidence_quote": "La operación de las instalaciones de generación nuclear se extenderá hasta el cese de la actividad de producción",
+       "comment": "El cese depende de petición del titular, caducidad de la autorización o informe desfavorable del CSN, no del calendario del Protocolo de 2019; el art. 3 insta además a no contemplar cierres en el PNIEC."
+      }
+     ]
+    }
+   ],
+   "text_published": "Las centrales nucleares deberían poder seguir funcionando más allá del calendario de cierre previsto.",
+   "statement_id_published": "energia-nuclear"
+  },
+  "educacion-educacion-especial": {
+   "text_reviewed": "Las familias de alumnos con necesidades educativas especiales deberían poder elegir un centro de educación especial.",
+   "reviews": [
+    {
+     "reviewer": "IA-5A",
+     "wording_verdict": "ok",
+     "wording_issue": "",
+     "suggested_text": "",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion129/20250909/Votacion001/VOT_20250909221758.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOCG-15-B-222-1, artículo único (art. 74.1 LOE), pág. 3",
+       "evidence_quote": "Las Administraciones educativas garantizarán el derecho de los padres o tutores a la elección del modelo educativo y del centro docente para estos alumnos.",
+       "comment": "Las modalidades incluyen expresamente centros de educación especial."
+      }
+     ]
+    },
+    {
+     "reviewer": "IA-5B",
+     "wording_verdict": "ok",
+     "wording_issue": "",
+     "suggested_text": "",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion129/20250909/Votacion001/VOT_20250909221758.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "Artículo único, nuevo art. 74.1, pág. 3 del BOCG 222-1",
+       "evidence_quote": "Las Administraciones educativas garantizarán el derecho de los padres o tutores a la elección del modelo educativo y del centro docente para estos alumnos.",
+       "comment": "La propuesta cita explícitamente centros de educación especial entre las modalidades de escolarización."
+      }
+     ]
+    }
+   ],
+   "text_published": "Las familias de alumnos con necesidades educativas especiales deberían poder elegir un centro de educación especial.",
+   "statement_id_published": "educacion-educacion-especial"
+  },
+  "inmigracion-nacionalidad-saharauis": {
+   "text_reviewed": "Los saharauis nacidos bajo la administración española deberían poder obtener la nacionalidad española por vía especial.",
+   "reviews": [
+    {
+     "reviewer": "IA-5A",
+     "wording_verdict": "ok",
+     "wording_issue": "",
+     "suggested_text": "",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion094/20250225/Votacion001/VOT_20250225201645.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOCG-15-B-36-1, art. 1.1, pág. 3",
+       "evidence_quote": "tales circunstancias concurren en las saharauis y los saharauis nacidos en el territorio del Sahara Occidental antes del 26 de febrero de 1976",
+       "comment": "Nacionalidad por carta de naturaleza (vía especial), aun sin residencia legal."
+      }
+     ]
+    },
+    {
+     "reviewer": "IA-5B",
+     "wording_verdict": "ok",
+     "wording_issue": "",
+     "suggested_text": "",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion094/20250225/Votacion001/VOT_20250225201645.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "Artículo 1.1 (pág. 3 del BOCG 36-1)",
+       "evidence_quote": "nacidos en el territorio del Sahara Occidental antes del 26 de febrero de 1976, aun cuando no tengan residencia legal en nuestro país.",
+       "comment": "Carta de naturaleza = vía especial; el texto fija el límite temporal en 1976."
+      }
+     ]
+    }
+   ],
+   "text_published": "Los saharauis nacidos bajo la administración española deberían poder obtener la nacionalidad española por vía especial.",
+   "statement_id_published": "inmigracion-nacionalidad-saharauis"
+  },
+  "cultura-tauromaquia": {
+   "text_reviewed": "La tauromaquia debería dejar de estar protegida por ley como patrimonio cultural.",
+   "reviews": [
+    {
+     "reviewer": "IA-5A",
+     "wording_verdict": "ok",
+     "wording_issue": "",
+     "suggested_text": "",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion135/20251007/Votacion001/VOT_20251007214328.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "BOCG-15-B-214-1, artículo primero, pág. 2",
+       "evidence_quote": "Queda derogada la Ley 18/2013, de 12 de noviembre, para la regulación de la Tauromaquia como patrimonio cultural.",
+       "comment": "Derogar la Ley 18/2013 equivale a que la tauromaquia deje de estar protegida por esa ley como patrimonio cultural."
+      }
+     ]
+    },
+    {
+     "reviewer": "IA-5B",
+     "wording_verdict": "ok",
+     "wording_issue": "",
+     "suggested_text": "",
+     "votes": [
+      {
+       "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion135/20251007/Votacion001/VOT_20251007214328.json",
+       "agree_vote_verdict": "correct",
+       "evidence_locator": "Artículo primero (pág. 2 del BOCG 214-1)",
+       "evidence_quote": "Queda derogada la Ley 18/2013, de 12 de noviembre, para la regulación de la Tauromaquia como patrimonio cultural.",
+       "comment": "Sí a la toma en consideración de una ILP derogatoria equivale a apoyar el fin de esa protección legal estatal."
+      }
+     ]
+    }
+   ],
+   "text_published": "La tauromaquia debería dejar de estar protegida por ley como patrimonio cultural.",
+   "statement_id_published": "cultura-tauromaquia"
+  }
+ }
+}
