@@ -39,7 +39,37 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--published", type=Path, default=DEFAULT_PUBLISHED)
     parser.add_argument("--public", type=Path, default=DEFAULT_PUBLIC)
     parser.add_argument("--report-out", type=Path, default=DEFAULT_REPORT)
+    parser.add_argument(
+        "--frozen",
+        action="store_true",
+        help=(
+            "The source DB is a frozen snapshot that may be archived off disk: verify the "
+            "committed artifacts against the last full validation report instead."
+        ),
+    )
     return parser.parse_args()
+
+
+def verify_frozen(args: argparse.Namespace) -> int:
+    """Without the source DB, the artifacts must be byte-identical to what the last full run validated."""
+    missing = [str(path) for path in (args.published, args.public, args.report_out) if not path.is_file()]
+    if missing:
+        raise SystemExit(f"missing frozen artifacts: {missing}")
+    report = json.loads(args.report_out.read_text(encoding="utf-8"))
+    published_bytes = args.published.read_bytes()
+    payload = json.loads(published_bytes)
+    release = payload.pop("release_id", None)
+    errors: list[str] = []
+    if report.get("status") != "ok":
+        errors.append(f"last full validation status={report.get('status')!r}")
+    if published_bytes != args.public.read_bytes():
+        errors.append("published and static public JSON differ")
+    if sha256_bytes(published_bytes) != report.get("artifact_sha256"):
+        errors.append("artifact sha256 differs from the last full validation")
+    if release != report.get("release_id") or release != sha256_bytes(canonical_json(payload).encode("utf-8")):
+        errors.append("release_id does not match the artifact or the last full validation")
+    print(json.dumps({"mode": "frozen", "source_db": str(args.source_db), "release_id": release, "errors": errors}, indent=2))
+    return 0 if not errors else 1
 
 
 def canonical_json(value: Any) -> str:
@@ -374,6 +404,8 @@ def validate_archives(
 
 def main() -> int:
     args = parse_args()
+    if args.frozen and not args.source_db.is_file():
+        return verify_frozen(args)
     errors: list[str] = []
     required = (args.source_db, args.db, args.published, args.public)
     missing = [str(path) for path in required if not path.is_file()]

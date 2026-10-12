@@ -5179,6 +5179,18 @@ spending-coverage-report:
   python3 scripts/report_spending_coverage.py --db "{{placsp_spending_source_db}}" --catalog docs/etl/sprints/DINERO-NACIONAL-20260907/evidence/placsp-catalog.json --out docs/etl/sprints/DINERO-NACIONAL-20260907/evidence/coverage.json
 
 placsp-spending-export:
+  #!/usr/bin/env bash
+  set -euo pipefail
+  if [ ! -f "{{placsp_spending_source_db}}" ]; then
+    # The source is a frozen snapshot, archived as *.db.tar.zst when cold: check the committed artifacts instead.
+    echo "placsp-spending-export: {{placsp_spending_source_db}} not on disk; verifying committed artifacts (frozen)"
+    python3 scripts/validate_placsp_spending_sample.py --frozen \
+      --source-db "{{placsp_spending_source_db}}" \
+      --published "{{placsp_spending_published_out}}" \
+      --public "{{placsp_spending_public_out}}" \
+      --report-out "{{placsp_spending_validation_report}}"
+    exit 0
+  fi
   python3 scripts/materialize_placsp_spending_sample.py \
     --source-db "{{placsp_spending_source_db}}" \
     --schema "{{placsp_spending_schema}}" \
