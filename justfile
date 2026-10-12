@@ -6668,6 +6668,9 @@ cloudflare-pages-deploy:
 
 # gh-pages is retired as the publish record (2026-10-12): R2 + /releases/<id>/manifest.json are the record.
 # Build the static site and publish ui/site/out straight to the R2 origin of votaconlachola.org.
+# Publishes the public exports already on disk (frozen inputs) by default: regenerating them from the
+# local staging DBs is a data change that must be reviewed and committed first (just site-build-refresh),
+# and a drifted local DB fails the pinned outcome-context check. CLOUDFLARE_PAGES_FROZEN_INPUTS=0 refreshes.
 site-publish:
   #!/usr/bin/env bash
   set -euo pipefail
@@ -6675,7 +6678,7 @@ site-publish:
   # Record what the build came from before building (the sync may run later); dotfiles are never published.
   commit="$(git rev-parse HEAD)"
   dirty=false; if [ -n "$(git status --porcelain --untracked-files=no -- ui/site)" ]; then dirty=true; fi
-  just site-build
+  CLOUDFLARE_PAGES_FROZEN_INPUTS="${CLOUDFLARE_PAGES_FROZEN_INPUTS:-1}" just site-build
   printf '{"source_commit": "%s", "source_dirty": %s, "built_at": "%s"}\n' "$commit" "$dirty" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > "{{site_out_dir}}/.vclc-build.json"
   just site-origin-publish
 
