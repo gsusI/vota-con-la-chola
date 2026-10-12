@@ -24,6 +24,8 @@ from publicdata_core.util import (
 from publicdata_core.connectors import BaseConnector
 
 
+# www.ccyl.es serves only its leaf certificate (no intermediate; openssl verify code 21, 2026-10-12),
+# so verification fails in CI and containers: unverified TLS scoped to this host only.
 CCYL_BASE = "https://www.ccyl.es"
 CCYL_LIST_URL = f"{CCYL_BASE}/Organizacion/PlenoAlfabetico"
 
@@ -148,7 +150,7 @@ def parse_ccyl_procuradores_list(html: str) -> list[dict[str, Any]]:
 
 
 def build_cortes_cyl_records(timeout: int) -> list[dict[str, Any]]:
-    payload, ct = http_get_bytes(CCYL_LIST_URL, timeout)
+    payload, ct = http_get_bytes(CCYL_LIST_URL, timeout, insecure_ssl=True)
     html = decode_ccyl_html(payload, ct)
     records = parse_ccyl_procuradores_list(html)
     # Current legislature has 81 procuradores; be conservative.

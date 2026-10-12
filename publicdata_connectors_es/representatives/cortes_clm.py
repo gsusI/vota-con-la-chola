@@ -25,6 +25,8 @@ from publicdata_core.util import (
 from publicdata_core.connectors import BaseConnector
 
 
+# www.cortesclm.es serves only its leaf certificate (no intermediate; openssl verify code 21, 2026-10-12),
+# so verification fails in CI and containers: unverified TLS scoped to this host only.
 CCLM_BASE = "https://www.cortesclm.es"
 CCLM_LIST_URL = f"{CCLM_BASE}/web2/paginas/resul_diputados.php?legislatura=11"
 CCLM_DETAIL_URL = f"{CCLM_BASE}/web2/paginas/detalle_diputado.php"
@@ -111,7 +113,7 @@ def parse_cclm_list_rows(list_html: str) -> list[dict[str, Any]]:
 
 def parse_cclm_detail(dip_id: str, timeout: int) -> dict[str, Any]:
     url = f"{CCLM_DETAIL_URL}?id={dip_id}"
-    payload, ct = http_get_bytes(url, timeout)
+    payload, ct = http_get_bytes(url, timeout, insecure_ssl=True)
     html = decode_cclm_html(payload, ct)
 
     m = re.search(r"<h1[^>]*>(.*?)</h1>", html, flags=re.I | re.S)
@@ -154,7 +156,7 @@ def parse_cclm_detail(dip_id: str, timeout: int) -> dict[str, Any]:
 
 
 def build_cclm_diputados_records(timeout: int) -> list[dict[str, Any]]:
-    payload, ct = http_get_bytes(CCLM_LIST_URL, timeout)
+    payload, ct = http_get_bytes(CCLM_LIST_URL, timeout, insecure_ssl=True)
     html = decode_cclm_html(payload, ct)
     base_rows = parse_cclm_list_rows(html)
     if not base_rows:

@@ -1797,6 +1797,7 @@ etl-contributor-gates:
 
 etl-live:
   docker compose run --rm --build etl "python3 scripts/ingestar_politicos_es.py ingest --db {{db_path}} --source all --snapshot-date {{snapshot_date}} --timeout {{municipal_timeout}}"
+  INFOELECTORAL_ELECTED_REPORT=etl/data/staging/infoelectoral-elected-officials-live.json just etl-extract-infoelectoral-elected-officials
   @just etl-live-parlamentario
 
 etl-live-parlamentario:
