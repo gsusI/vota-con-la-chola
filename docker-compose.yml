@@ -5,9 +5,13 @@ services:
       dockerfile: Dockerfile
     image: vota-con-la-chola-etl:local
     working_dir: /workspace
+    # Root by default; CI sets ETL_UID/ETL_GID/ETL_HOME so files written to the bind mount
+    # stay owned by the runner and host-side steps can open them.
+    user: "${ETL_UID:-0}:${ETL_GID:-0}"
     volumes:
       - ./:/workspace
     environment:
+      - HOME=${ETL_HOME:-/root}
       - PYTHONDONTWRITEBYTECODE=1
       - PYTHONUNBUFFERED=1
       - TZ=UTC
