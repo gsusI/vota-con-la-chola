@@ -4,64 +4,37 @@ Escrito en primera persona, para la comunidad tech o builder de X. Hay dos versi
 
 ## Versión post largo
 
-Copia lista para pegar: [post-largo.md](post-largo.md). Prioriza la claridad: frases cortas y datos antes que tono.
+Copia lista para pegar: [post-largo.md](post-largo.md). Hilo conductor: la pregunta personal → por qué las votaciones → el trabajo y los bloqueos → las elecciones lo vuelven concreto → el test → el espejo («si eres como yo…») → por qué fiarse → qué pido.
 
 ```
-He hecho un test para comparar tus opiniones con lo que votaron los partidos en el Congreso.
+Llevo 8 meses dedicando ratos libres a explorar una idea: ¿se puede saber qué hacen de verdad los políticos usando solo datos públicos?
 
-Respondes a 33 afirmaciones. Cada una corresponde a una votación real de la última legislatura. Al final ves qué partidos votaron como tú. Cada voto enlaza a su fuente oficial en congreso.es.
+La pregunta viene de algo que me pasa en cada elección. Decido mi voto con lo que recuerdo de la campaña: promesas, debates, titulares. Y las promesas no obligan a nada. La Constitución prohíbe el mandato imperativo (art. 67.2): ningún diputado está obligado a cumplir su programa.
 
-Pruébalo: https://votaconlachola.org/citizen/vota/
+Pero hay algo que sí queda. Cada votación nominal del Congreso es pública: qué se votó, cuándo y qué votó cada diputado. El problema es que casi nadie la consulta, porque está repartida en miles de archivos en la web del Congreso.
 
-Por qué votaciones y no programas
+Así que empecé por ahí. En febrero escribí un programa que descarga esas votaciones y las guarda en una base de datos junto con el archivo original, para poder comprobar cualquier cifra. Y fui tirando del hilo hacia otras fuentes: cargos públicos, Senado, parlamentos autonómicos, contratos.
 
-Un programa electoral no obliga. La Constitución prohíbe el mandato imperativo (art. 67.2), así que nadie puede exigir que se cumpla. Las votaciones nominales, en cambio, quedan registradas con su fecha y el voto de cada diputado. Son el dato más fiable de lo que hace cada partido.
+Por el camino descubrí que los datos públicos no siempre son accesibles. En febrero y marzo, el Congreso me devolvía errores 403 al descargar sus datos abiertos (ahora funcionan). El Senado y los parlamentos de Galicia y Navarra también me bloquearon. Lo registro todo, con fechas y pruebas, en un documento público.
 
-Qué incluye
+El 6 de octubre se disolvieron las Cortes y hay elecciones el 29 de noviembre. Ahí la idea se volvió concreta: en lugar de preguntarte qué opinas de cada partido, ¿por qué no preguntarte qué habrías votado tú, y compararlo con lo que votaron ellos?
 
-· 33 afirmaciones basadas en 41 votaciones nominales del Congreso, de febrero de 2024 a septiembre de 2026.
-· 12 partidos.
-· Un modo sin fin con 334 votaciones, para quien quiera seguir.
+Eso es el test. Lo he montado en dos días, reutilizando las votaciones que ya tenía. Respondes a 33 afirmaciones, cada una basada en votaciones reales de la legislatura que acaba de terminar, y al final ves qué partidos votaron como tú. Cada voto enlaza a su fuente oficial en congreso.es. Si te quedas con ganas, hay un modo sin fin con 334 votaciones.
 
-Cómo se calcula
+Si eres como yo, crees saber más o menos dónde está cada partido. Los datos tienen sorpresas para todos:
 
-· La posición de un partido en una votación es lo que votó la mayoría de sus diputados.
-· Las afirmaciones están redactadas en los dos sentidos, para que contestar siempre «de acuerdo» no favorezca a ningún bloque. En 15 afirmaciones solo el PSOE está del lado del «de acuerdo»; en 12, solo el PP.
-· Si no hay datos de un partido en una votación, aparece como «sin datos». No se rellena.
-
-Privacidad
-
-La web es estática. Tus respuestas se quedan en tu navegador: no hay cuentas ni base de datos de usuarios. Solo se comparte tu podio, y solo si tú quieres.
-
-Cómo lo he hecho
-
-Es un proyecto personal en el que llevo 8 meses, en ratos libres. La pregunta de fondo es si se puede reconstruir lo que hacen los políticos solo con datos públicos: votaciones, cargos, parlamentos, contratos.
-
-El test lo he montado en dos días. Reutiliza el programa que escribí en febrero para descargar las votaciones del Congreso: 34 de las 41 votaciones salen de aquella descarga, y las 7 más recientes las he descargado ahora con el mismo programa. Todo se guarda en una base SQLite junto con la respuesta original de cada fuente, para poder comprobar cualquier cifra.
-
-He trabajado con agentes de IA. La IA también ha revisado las afirmaciones: dos revisiones independientes por afirmación, contrastadas con el texto oficial y sin ver cómo votó cada partido. Falta una revisión humana, y la web lo avisa. La metodología completa, con los prompts, está publicada.
-
-Accesos bloqueados
-
-En febrero y marzo, el Congreso me devolvía errores 403 al descargar sus datos abiertos de votaciones. Ahora funcionan. El Senado y los parlamentos de Galicia y Navarra también me bloquearon el acceso automatizado. Lo registro todo, con fechas y pruebas, en un documento público del repositorio.
-
-Algunos resultados
-
-· Trasvase Tajo-Segura (mayo de 2025): la proposición de ley para mantenerlo se rechazó por 170 votos a favor y 171 en contra. Podemos se abstuvo; con sus 4 votos a favor, se habría aprobado.
+· Trasvase Tajo-Segura (mayo de 2025): la proposición de ley para mantenerlo se rechazó por un voto, 170 a 171. Podemos se abstuvo; con sus 4 votos a favor, habría salido adelante.
 · Cobrar parte de la pensión y seguir trabajando (enero de 2025): Vox y Podemos votaron lo mismo, en contra.
 · Impuesto a los beneficios extraordinarios de la gran banca (abril de 2024): PSOE y PP votaron igual, en contra de la proposición.
 · Regularización de inmigrantes sin papeles (abril de 2024): el PP votó a favor de tramitarla. Solo Vox votó en contra.
 
-Lo que no es
+He intentado que sea justo y comprobable. La posición de un partido es lo que votó la mayoría de sus diputados. Las afirmaciones están redactadas en los dos sentidos, para que contestar siempre «de acuerdo» no te empuje hacia ningún bloque. Si falta un dato, aparece como «sin datos». Y tus respuestas se quedan en tu navegador: no hay cuentas ni base de datos de usuarios.
 
-No recomienda a quién votar y no es una encuesta. Sirve para comparar tus respuestas con votaciones concretas.
+He trabajado con agentes de IA, que también han revisado cada afirmación contra el texto oficial, sin ver cómo votó cada partido. Pero falta una revisión humana, y la web lo avisa. La metodología completa, con los prompts, está publicada.
 
-Lo que busco
+No te dice a quién votar. Te enseña lo que votaron, para que lo compares con lo que te prometan estas semanas.
 
-· Que me digáis los errores que encontréis. Los corregiré en público.
-· Personas de ciencia política o periodismo de datos que quieran hacer la revisión humana.
-· Desarrolladores que quieran colaborar.
-· Que lo compartáis antes de las elecciones del 29 de noviembre.
+Es un proyecto personal, así que tendrá errores. Si encuentras uno, dímelo y lo corrijo en público. Si sabes de ciencia política o periodismo de datos y quieres ayudar con la revisión, o eres desarrollador y quieres colaborar, escríbeme. Y si te parece útil, compártelo antes del 29 de noviembre.
 
 Test: https://votaconlachola.org/citizen/vota/
 Metodología: https://votaconlachola.org/citizen/vota/metodologia/
