@@ -65,6 +65,16 @@ jobs:
       - name: Install Python dependencies
         run: python3 -m pip install -r requirements.txt uv
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: ui/site/package-lock.json
+
+      - name: Install site dependencies
+        run: npm ci --no-audit --no-fund --prefix ui/site
+
       - name: Normalize snapshot date
         run: |
           echo "SNAPSHOT_DATE=$(date -u +%F)" >> "$GITHUB_ENV"
@@ -98,15 +108,12 @@ jobs:
             --allow-stale
           node --test tests/test_andalucia_2026_water_receipt.js
 
-      - name: Build public static artifacts
-        run: |
-          if [ "$SITE_ONLY_RELEASE" = "true" ]; then
-            SITE_PRIME_EXPORT=0 just site-build
-          else
-            # The site needs only the public exports; the HF snapshot keeps its scale gate below.
-            just etl-public-exports
-            just cloudflare-pages-refresh-data
-          fi
+      - name: Build the site from committed data
+        # The live DB above is a capped sample (e.g. 80 votes): CI checks sources but never regenerates
+        # published site data, which is refreshed locally from the full DB and committed. A publish run
+        # builds the same frozen site inside site-publish, so this step only validates non-publish runs.
+        if: env.LIVE_ETL_PUBLISH_REQUESTED != 'true'
+        run: CLOUDFLARE_PAGES_FROZEN_INPUTS=1 just site-build
 
       - name: Publish Hugging Face snapshot
         if: env.LIVE_ETL_PUBLISH_REQUESTED == 'true' && env.SITE_ONLY_RELEASE != 'true'
