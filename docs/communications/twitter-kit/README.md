@@ -1,6 +1,6 @@
 # Kit de Twitter/X: campaña «¿Con quién coincides?»
 
-Parte de la [campaña guerrilla](../campana-guerrilla-vota.md). Imágenes en `img/` (1200×675, el formato que X muestra sin recortar). Se regeneran con `node docs/communications/twitter-kit/render.mjs`.
+Parte de la [campaña guerrilla](../campana-guerrilla-vota.md). Post largo de builder para acompañar el vídeo: [post-builder.md](post-builder.md). Imágenes en `img/` (1200×675, el formato que X muestra sin recortar). Se regeneran con `node docs/communications/twitter-kit/render.mjs`.
 
 ## Dónde estamos / a dónde vamos / qué sigue
 
