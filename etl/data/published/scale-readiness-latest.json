@@ -7,7 +7,7 @@
     "meaning": "Current evidence validation failed; no prior readiness result remains authoritative.",
     "ready": false
   },
-  "generated_at": "2026-09-26T07:04:23.203499Z",
+  "generated_at": "2026-10-12T17:39:12.298869Z",
   "policy": {
     "classification_never_suppresses_public_domain_identity": true,
     "generated_test_records_count_toward_readiness": false,
@@ -20,9 +20,9 @@
   },
   "registry": {
     "available": true,
-    "bytes": 43198,
+    "bytes": 43302,
     "path": "docs/etl/real-corpus-registry.json",
-    "sha256": "402bfa1a907e396082244e28bf5c00620b7cd4e4dbcbd9913e7b395e978eff2e"
+    "sha256": "d97b1160272b886cd450e87ca83fff057d82a4540dbdb10c5a53d4d0f98d1f67"
   },
   "schema_version": "real-scale-readiness-v1",
   "status": "not_ready"

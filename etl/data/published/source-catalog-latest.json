@@ -1,28 +1,28 @@
 {
   "catalog_version": "v1",
-  "generated_at": "2026-08-12T14:43:29+00:00",
-  "snapshot_date": "2026-08-12",
+  "generated_at": "2026-10-12T17:39:19+00:00",
+  "snapshot_date": "2026-10-12",
   "summary": {
-    "sources_total": 48,
+    "sources_total": 51,
     "desired_total": 48,
-    "in_db_total": 48,
-    "active_total": 48,
+    "in_db_total": 51,
+    "active_total": 51,
     "with_network_total": 30,
     "with_any_data_total": 30,
     "sample_backed_total": 30,
-    "blocked_total": 2,
-    "tracker_done_total": 16,
+    "blocked_total": 3,
+    "tracker_done_total": 15,
     "sql_done_total": 30,
     "ops_ok_total": 29,
-    "available_total": 30,
+    "available_total": 29,
     "stale_total": 0,
-    "missing_total": 16,
+    "missing_total": 19,
     "under_threshold_total": 0,
     "done_zero_real_total": 0,
-    "mismatch_total": 35,
+    "mismatch_total": 39,
     "missing_source_ids_total": 0,
     "legal_status_counts": {
-      "pending_review": 26,
+      "pending_review": 29,
       "verified": 18,
       "partially_verified": 3,
       "not_verified": 1
@@ -59,10 +59,22 @@
         "in_db_total": 37,
         "active_total": 37,
         "with_network_total": 24,
-        "tracker_done_total": 13,
+        "tracker_done_total": 12,
         "sql_done_total": 24,
-        "blocked_total": 2,
-        "mismatch_total": 26
+        "blocked_total": 3,
+        "mismatch_total": 27
+      },
+      {
+        "key": "unknown",
+        "sources_total": 3,
+        "desired_total": 0,
+        "in_db_total": 3,
+        "active_total": 3,
+        "with_network_total": 0,
+        "tracker_done_total": 0,
+        "sql_done_total": 0,
+        "blocked_total": 0,
+        "mismatch_total": 3
       }
     ],
     "by_scope": [
@@ -73,10 +85,10 @@
         "in_db_total": 19,
         "active_total": 19,
         "with_network_total": 17,
-        "tracker_done_total": 8,
+        "tracker_done_total": 7,
         "sql_done_total": 17,
-        "blocked_total": 1,
-        "mismatch_total": 11
+        "blocked_total": 2,
+        "mismatch_total": 12
       },
       {
         "key": "dinero",
@@ -152,15 +164,15 @@
       },
       {
         "key": "nacional",
-        "sources_total": 9,
+        "sources_total": 12,
         "desired_total": 9,
-        "in_db_total": 9,
-        "active_total": 9,
+        "in_db_total": 12,
+        "active_total": 12,
         "with_network_total": 6,
         "tracker_done_total": 3,
         "sql_done_total": 6,
         "blocked_total": 0,
-        "mismatch_total": 7
+        "mismatch_total": 10
       },
       {
         "key": "organigrama",
@@ -191,12 +203,12 @@
       "items_total": 301,
       "unmapped": 254,
       "todo": 27,
-      "partial": 48,
-      "done": 225,
-      "mismatch": 26,
+      "partial": 50,
+      "done": 223,
+      "mismatch": 27,
       "waived_mismatch": 0,
       "done_zero_real": 0,
-      "untracked_sources": 9,
+      "untracked_sources": 12,
       "waivers_active": 0,
       "waivers_expired": 0,
       "waivers_error": ""
@@ -797,7 +809,7 @@
             "status": "PARTIAL",
             "dominio": "Outcomes",
             "scope": "outcomes",
-            "bloque": "Done now: NO para live-clean. Live ETL `2026-05-11` carg\u00f3 solo fallback (`2/2`) tras `HTTP 404` en red real (`max_net=0`, `net/fallback_fetches=0/1`), as\u00ed que queda `PARTIAL` hasta corregir endpoint/query o confirmar contrato alternativo. Evidencia: `docs/etl/sprints/COMMUNITY-LIVE-ETL/evidence/live_etl_publish_tracker_truth_20260511.md`. Siguiente comando: `python3 scripts/ingestar_politicos_es.py ingest --db <db> --source eurostat_sdmx --snapshot-date <YYYY-MM-DD> --strict-network --timeout 30`.",
+            "bloque": "Done now: YES para el primer slice can\u00f3nico p\u00fablico; NO para representatividad/promotion. La ruta legacy estrecha de `2026-05-11` fall\u00f3 y no cuenta. El corpus oficial vigente contiene `1.755.809` observaciones / `155.435` series / `37` Parquet; durable-origin, restore y replay pasan. El release p\u00fablico `a5d27828...` materializa exhaustivamente la familia `nama_10r_3gdp`, unidad `PPS_EU27_2020_HAB`, geograf\u00edas `ES*`: `86` series / `2.091` observaciones / `2.091` evidencias / `113` provisionales; JSON live exacto, sin causalidad, m\u00e9rito ni culpa. Evidencia: `docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/eurostat-indicator-real-s2-semantic-validation.json`, `docs/etl/sprints/INDICATORS-20260820/evidence/eurostat-gdp-validation.json`, `live-eurostat-gdp-verification.json`. Siguiente gate: segunda captura oficial y codebook representativa; no promotion antes del delta de revisiones.",
             "source_ids": [
               "eurostat_sdmx"
             ]
@@ -1416,6 +1428,20 @@
       "kind": "tracker_item",
       "priority": "P1",
       "scope": "autonomico",
+      "title": "PARTIAL: Asamblea Regional de Murcia: diputados (listado + fichas)",
+      "details": "Bloqueado desde `2026-10-12`: `HTTP 403` del WAF F5 (`server: volt-adc`) en `--strict-network`, desde GitHub Actions y desde el runtime del mantenedor. Evidencia: `docs/etl/sprints/CI-LIVE-ETL-20261012/evidence/asamblea-murcia-403.md`; incidente `nso-2026-10-murcia-diputados-403`. Antes DONE (parsing endurecido y umbral m\u00ednimo); vuelve a DONE con un run de red real.",
+      "source_ids": [
+        "asamblea_murcia_diputados"
+      ],
+      "commands": [
+        "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source asamblea_murcia_diputados --strict-network",
+        "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
+      ]
+    },
+    {
+      "kind": "tracker_item",
+      "priority": "P1",
+      "scope": "autonomico",
       "title": "PARTIAL: Asamblea de Ceuta: miembros (2023/2027)",
       "details": "Done now: NO para live-clean. GitHub Actions `30175083036` (`2026-07-25`) agot\u00f3 el timeout de red en `asamblea_ceuta_diputados`. Mantener evidencia previa como hist\u00f3rica hasta recuperar strict-network reproducible. Siguiente comando: `python3 scripts/ingestar_politicos_es.py ingest --db <db> --source asamblea_ceuta_diputados --snapshot-date <YYYY-MM-DD> --strict-network --timeout 30`.",
       "source_ids": [
@@ -1668,8 +1694,8 @@
       "kind": "tracker_item",
       "priority": "P1",
       "scope": "outcomes",
-      "title": "PARTIAL: Eurostat (API/SDMX)",
-      "details": "Done now: NO para live-clean. Live ETL `2026-05-11` carg\u00f3 solo fallback (`2/2`) tras `HTTP 404` en red real (`max_net=0`, `net/fallback_fetches=0/1`), as\u00ed que queda `PARTIAL` hasta corregir endpoint/query o confirmar contrato alternativo. Evidencia: `docs/etl/sprints/COMMUNITY-LIVE-ETL/evidence/live_etl_publish_tracker_truth_20260511.md`. Siguiente comando: `python3 scripts/ingestar_politicos_es.py ingest --db <db> --source eurostat_sdmx --snapshot-date <YYYY-MM-DD> --strict-network --timeout 30`.",
+      "title": "PARTIAL: Eurostat API JSON-stat + corpus Parquet",
+      "details": "Done now: YES para el primer slice can\u00f3nico p\u00fablico; NO para representatividad/promotion. La ruta legacy estrecha de `2026-05-11` fall\u00f3 y no cuenta. El corpus oficial vigente contiene `1.755.809` observaciones / `155.435` series / `37` Parquet; durable-origin, restore y replay pasan. El release p\u00fablico `a5d27828...` materializa exhaustivamente la familia `nama_10r_3gdp`, unidad `PPS_EU27_2020_HAB`, geograf\u00edas `ES*`: `86` series / `2.091` observaciones / `2.091` evidencias / `113` provisionales; JSON live exacto, sin causalidad, m\u00e9rito ni culpa. Evidencia: `docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/eurostat-indicator-real-s2-semantic-validation.json`, `docs/etl/sprints/INDICATORS-20260820/evidence/eurostat-gdp-validation.json`, `live-eurostat-gdp-verification.json`. Siguiente gate: segunda captura oficial y codebook representativa; no promotion antes del delta de revisiones.",
       "source_ids": [
         "eurostat_sdmx"
       ],
@@ -1677,6 +1703,15 @@
         "python3 scripts/ingestar_politicos_es.py ingest --db <db> --source eurostat_sdmx --strict-network",
         "python3 scripts/e2e_tracker_status.py --db <db> --tracker docs/etl/e2e-scrape-load-tracker.md"
       ]
+    },
+    {
+      "kind": "tracker_item",
+      "priority": "P1",
+      "scope": "nacional",
+      "title": "PARTIAL: Hugging Face Datasets (dataset publico)",
+      "details": "La release remota existente sigue reproducible, pero la pol\u00edtica local se endureci\u00f3 el `2026-08-13`: s\u00f3lo `raw_fetches,run_fetches,lost_and_found` quedan excluidas por defecto por contener estado operativo/privado; `source_records` pasa a Parquet p\u00fablico para conservar el payload oficial exacto y toda identidad personal p\u00fablica. `audit_public_source_records_for_publish` recorre cada fila antes del empaquetado, exige identidad de registro, checksum y origen HTTPS configurado/embebido, falla ante secretos/sesiones/trazas locales y declara `identity_fields_removed=0`; no redacta el payload. La modificaci\u00f3n a\u00fan no se ha publicado remotamente porque no existe autorizaci\u00f3n de publish en esta slice. El paquete por fecha sigue incluyendo `published/*`, `manifest.json`, `checksums.sha256`, `latest.json` y Parquet navegable; `politicos-es.sqlite.gz` permanece desactivado salvo override. Siguiente gate: completar el corpus BOE en curso, ejecutar dry-run local con el audit sobre todo `source_records`, verificar Parquet/conteos/checksums y publicar s\u00f3lo con autorizaci\u00f3n expl\u00edcita.",
+      "source_ids": [],
+      "commands": []
     },
     {
       "kind": "tracker_item",
@@ -2265,14 +2300,14 @@
       "desired": true,
       "in_db": true,
       "active": true,
-      "tracker_status": "DONE",
+      "tracker_status": "PARTIAL",
       "tracker_tipo_dato": "Representantes y mandatos (Asamblea Murcia)",
       "tracker_fuentes_objetivo": "Asamblea Regional de Murcia: diputados (listado + fichas)",
-      "tracker_block_note": "Hardening de parsing y umbral minimo",
+      "tracker_block_note": "Bloqueado desde `2026-10-12`: `HTTP 403` del WAF F5 (`server: volt-adc`) en `--strict-network`, desde GitHub Actions y desde el runtime del mantenedor. Evidencia: `docs/etl/sprints/CI-LIVE-ETL-20261012/evidence/asamblea-murcia-403.md`; incidente `nso-2026-10-murcia-diputados-403`. Antes DONE (parsing endurecido y umbral m\u00ednimo); vuelve a DONE con un run de red real.",
       "sql_status": "DONE",
       "ops_state": "ok",
-      "catalog_state": "available",
-      "mismatch_state": "MATCH",
+      "catalog_state": "blocked",
+      "mismatch_state": "MISMATCH",
       "mismatch_waived": false,
       "waiver_expiry": "",
       "runs_total": 1,
@@ -2286,7 +2321,7 @@
       "last_seen_at": "2026-02-12T12:09:10+00:00",
       "latest_snapshot": "2026-02-12T12:09:10+00:00",
       "last_message": "Ingesta completada: 54/54 registros validos",
-      "blocker_reason": "",
+      "blocker_reason": "Bloqueado desde `2026-10-12`: `HTTP 403` del WAF F5 (`server: volt-adc`) en `--strict-network`, desde GitHub Actions y desde el runtime del mantenedor. Evidencia: `docs/etl/sprints/CI-LIVE-ETL-20261012/evidence/asamblea-murcia-403.md`; incidente `nso-2026-10-murcia-diputados-403`. Antes DONE (parsing endurecido y umbral m\u00ednimo); vuelve a DONE con un run de red real.",
       "progress": {
         "loaded": 54,
         "target": 35,
@@ -2315,7 +2350,7 @@
         "done_zero_real": false,
         "has_network": true,
         "has_any": true,
-        "blocked_note": false
+        "blocked_note": true
       },
       "legal": {
         "verification_status": "pending_review",
@@ -5636,8 +5671,8 @@
       "active": true,
       "tracker_status": "PARTIAL",
       "tracker_tipo_dato": "Indicadores (outcomes): Eurostat",
-      "tracker_fuentes_objetivo": "Eurostat (API/SDMX)",
-      "tracker_block_note": "Done now: NO para live-clean. Live ETL `2026-05-11` carg\u00f3 solo fallback (`2/2`) tras `HTTP 404` en red real (`max_net=0`, `net/fallback_fetches=0/1`), as\u00ed que queda `PARTIAL` hasta corregir endpoint/query o confirmar contrato alternativo. Evidencia: `docs/etl/sprints/COMMUNITY-LIVE-ETL/evidence/live_etl_publish_tracker_truth_20260511.md`. Siguiente comando: `python3 scripts/ingestar_politicos_es.py ingest --db <db> --source eurostat_sdmx --snapshot-date <YYYY-MM-DD> --strict-network --timeout 30`.",
+      "tracker_fuentes_objetivo": "Eurostat API JSON-stat + corpus Parquet",
+      "tracker_block_note": "Done now: YES para el primer slice can\u00f3nico p\u00fablico; NO para representatividad/promotion. La ruta legacy estrecha de `2026-05-11` fall\u00f3 y no cuenta. El corpus oficial vigente contiene `1.755.809` observaciones / `155.435` series / `37` Parquet; durable-origin, restore y replay pasan. El release p\u00fablico `a5d27828...` materializa exhaustivamente la familia `nama_10r_3gdp`, unidad `PPS_EU27_2020_HAB`, geograf\u00edas `ES*`: `86` series / `2.091` observaciones / `2.091` evidencias / `113` provisionales; JSON live exacto, sin causalidad, m\u00e9rito ni culpa. Evidencia: `docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/eurostat-indicator-real-s2-semantic-validation.json`, `docs/etl/sprints/INDICATORS-20260820/evidence/eurostat-gdp-validation.json`, `live-eurostat-gdp-verification.json`. Siguiente gate: segunda captura oficial y codebook representativa; no promotion antes del delta de revisiones.",
       "sql_status": "DONE",
       "ops_state": "ok",
       "catalog_state": "available",
@@ -5697,6 +5732,237 @@
         ],
         "notes": "Revisar excepciones de terceros por dataset antes de etiquetar como libre comercial sin reservas.",
         "personal_data_notes": "No aplica normalmente (series agregadas).",
+        "reviewed_on": "2026-02-21"
+      }
+    },
+    {
+      "source_id": "boe_election_candidates",
+      "source_name": "Candidaturas electorales proclamadas en el BOE",
+      "domain": "",
+      "scope": "nacional",
+      "level": "",
+      "institution_name": "",
+      "role_title": "",
+      "format": "xml",
+      "default_url": "https://www.boe.es/diario_boe/xml.php",
+      "desired": false,
+      "in_db": true,
+      "active": true,
+      "tracker_status": "",
+      "tracker_tipo_dato": "",
+      "tracker_fuentes_objetivo": "",
+      "tracker_block_note": "",
+      "sql_status": "TODO",
+      "ops_state": "not_in_catalog",
+      "catalog_state": "missing",
+      "mismatch_state": "UNTRACKED",
+      "mismatch_waived": false,
+      "waiver_expiry": "",
+      "runs_total": 0,
+      "runs_ok": 0,
+      "last_status": "",
+      "last_loaded": 0,
+      "max_loaded_any": 0,
+      "max_loaded_network": 0,
+      "network_fetches": 0,
+      "fallback_fetches": 0,
+      "last_seen_at": "",
+      "latest_snapshot": "",
+      "last_message": "",
+      "blocker_reason": "",
+      "progress": {
+        "loaded": 0,
+        "target": 0,
+        "percent": null
+      },
+      "warehouse": {
+        "primary_table": "",
+        "primary_rows": 0,
+        "counts": {
+          "mandates": 0,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "execution": {
+        "runner_script": "",
+        "strict_target": 0,
+        "fallback_file": "",
+        "sample_url": "",
+        "sample_available": false
+      },
+      "flags": {
+        "under_threshold": false,
+        "done_zero_real": false,
+        "has_network": false,
+        "has_any": false,
+        "blocked_note": false
+      },
+      "legal": {
+        "verification_status": "pending_review",
+        "reuse_basis": "Sin verificaci\u00f3n documental espec\u00edfica en este snapshot",
+        "terms_url": "https://www.boe.es/diario_boe/xml.php",
+        "obligations": [
+          "Verificar aviso legal/licencia del dominio de origen antes de redistribuci\u00f3n comercial."
+        ],
+        "notes": "Fuente sin ficha legal espec\u00edfica en esta versi\u00f3n. Revisi\u00f3n manual requerida antes de redistribuci\u00f3n comercial.",
+        "personal_data_notes": "Conservar \u00edntegramente los datos personales que la fuente oficial publique como registro p\u00fablico de rendici\u00f3n de cuentas; no a\u00f1adir datos no p\u00fablicos ni deshacer el enmascarado del origen.",
+        "reviewed_on": "2026-02-21"
+      }
+    },
+    {
+      "source_id": "boe_document_xml",
+      "source_name": "Documentos individuales oficiales del BOE",
+      "domain": "",
+      "scope": "nacional",
+      "level": "",
+      "institution_name": "",
+      "role_title": "",
+      "format": "xml",
+      "default_url": "https://www.boe.es/diario_boe/xml.php",
+      "desired": false,
+      "in_db": true,
+      "active": true,
+      "tracker_status": "",
+      "tracker_tipo_dato": "",
+      "tracker_fuentes_objetivo": "",
+      "tracker_block_note": "",
+      "sql_status": "TODO",
+      "ops_state": "not_in_catalog",
+      "catalog_state": "missing",
+      "mismatch_state": "UNTRACKED",
+      "mismatch_waived": false,
+      "waiver_expiry": "",
+      "runs_total": 0,
+      "runs_ok": 0,
+      "last_status": "",
+      "last_loaded": 0,
+      "max_loaded_any": 0,
+      "max_loaded_network": 0,
+      "network_fetches": 0,
+      "fallback_fetches": 0,
+      "last_seen_at": "",
+      "latest_snapshot": "",
+      "last_message": "",
+      "blocker_reason": "",
+      "progress": {
+        "loaded": 0,
+        "target": 0,
+        "percent": null
+      },
+      "warehouse": {
+        "primary_table": "",
+        "primary_rows": 0,
+        "counts": {
+          "mandates": 0,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "execution": {
+        "runner_script": "",
+        "strict_target": 0,
+        "fallback_file": "",
+        "sample_url": "",
+        "sample_available": false
+      },
+      "flags": {
+        "under_threshold": false,
+        "done_zero_real": false,
+        "has_network": false,
+        "has_any": false,
+        "blocked_note": false
+      },
+      "legal": {
+        "verification_status": "pending_review",
+        "reuse_basis": "Sin verificaci\u00f3n documental espec\u00edfica en este snapshot",
+        "terms_url": "https://www.boe.es/diario_boe/xml.php",
+        "obligations": [
+          "Verificar aviso legal/licencia del dominio de origen antes de redistribuci\u00f3n comercial."
+        ],
+        "notes": "Fuente sin ficha legal espec\u00edfica en esta versi\u00f3n. Revisi\u00f3n manual requerida antes de redistribuci\u00f3n comercial.",
+        "personal_data_notes": "Conservar \u00edntegramente los datos personales que la fuente oficial publique como registro p\u00fablico de rendici\u00f3n de cuentas; no a\u00f1adir datos no p\u00fablicos ni deshacer el enmascarado del origen.",
+        "reviewed_on": "2026-02-21"
+      }
+    },
+    {
+      "source_id": "boe_daily_summaries",
+      "source_name": "Sumarios diarios oficiales del BOE",
+      "domain": "",
+      "scope": "nacional",
+      "level": "",
+      "institution_name": "",
+      "role_title": "",
+      "format": "json",
+      "default_url": "https://www.boe.es/datosabiertos/api/boe/sumario",
+      "desired": false,
+      "in_db": true,
+      "active": true,
+      "tracker_status": "",
+      "tracker_tipo_dato": "",
+      "tracker_fuentes_objetivo": "",
+      "tracker_block_note": "",
+      "sql_status": "TODO",
+      "ops_state": "not_in_catalog",
+      "catalog_state": "missing",
+      "mismatch_state": "UNTRACKED",
+      "mismatch_waived": false,
+      "waiver_expiry": "",
+      "runs_total": 0,
+      "runs_ok": 0,
+      "last_status": "",
+      "last_loaded": 0,
+      "max_loaded_any": 0,
+      "max_loaded_network": 0,
+      "network_fetches": 0,
+      "fallback_fetches": 0,
+      "last_seen_at": "",
+      "latest_snapshot": "",
+      "last_message": "",
+      "blocker_reason": "",
+      "progress": {
+        "loaded": 0,
+        "target": 0,
+        "percent": null
+      },
+      "warehouse": {
+        "primary_table": "",
+        "primary_rows": 0,
+        "counts": {
+          "mandates": 0,
+          "parl_vote_events": 0,
+          "parl_initiatives": 0,
+          "infoelectoral_convocatoria_tipos": 0,
+          "infoelectoral_procesos": 0
+        }
+      },
+      "execution": {
+        "runner_script": "",
+        "strict_target": 0,
+        "fallback_file": "",
+        "sample_url": "",
+        "sample_available": false
+      },
+      "flags": {
+        "under_threshold": false,
+        "done_zero_real": false,
+        "has_network": false,
+        "has_any": false,
+        "blocked_note": false
+      },
+      "legal": {
+        "verification_status": "pending_review",
+        "reuse_basis": "Sin verificaci\u00f3n documental espec\u00edfica en este snapshot",
+        "terms_url": "https://www.boe.es/datosabiertos/api/boe/sumario",
+        "obligations": [
+          "Verificar aviso legal/licencia del dominio de origen antes de redistribuci\u00f3n comercial."
+        ],
+        "notes": "Fuente sin ficha legal espec\u00edfica en esta versi\u00f3n. Revisi\u00f3n manual requerida antes de redistribuci\u00f3n comercial.",
+        "personal_data_notes": "Conservar \u00edntegramente los datos personales que la fuente oficial publique como registro p\u00fablico de rendici\u00f3n de cuentas; no a\u00f1adir datos no p\u00fablicos ni deshacer el enmascarado del origen.",
         "reviewed_on": "2026-02-21"
       }
     }
