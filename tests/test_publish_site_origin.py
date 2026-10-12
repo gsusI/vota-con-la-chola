@@ -234,7 +234,7 @@ class TestPublishRecipes(unittest.TestCase):
     def test_site_publish_syncs_the_build_not_gh_pages(self) -> None:
         text = (REPO_ROOT / "justfile").read_text(encoding="utf-8")
         block = text[text.index("\nsite-origin-publish:"):text.index("\nsite-dataset-mirror:")]
-        self.assertIn('site="{{gh_pages_next_out_dir}}"', block)
+        self.assertIn('site="{{site_out_dir}}"', block)
         self.assertNotIn("gh-pages", block)
         publish = text[text.index("\nsite-publish:"):text.index("\nvotaconlachola-gh-pages-publish:")]
         self.assertLess(publish.index("git rev-parse HEAD"), publish.index("just cloudflare-pages-build"))

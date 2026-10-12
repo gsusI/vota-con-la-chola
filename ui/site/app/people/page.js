@@ -528,7 +528,7 @@ export default function PeoplePage() {
           <p className="people-directory-error__hint sub">
             Asegura regenerar <code>ui/site/public/people/data/profiles.json</code> con{" "}
             <code>just cloudflare-pages-build</code> o con{" "}
-            <code>GH_PAGES_NEXT_PRIME_EXPORT=1 just gh-pages-next</code>.
+            <code>SITE_PRIME_EXPORT=1 just site-dev</code>.
           </p>
         </section>
       </main>
