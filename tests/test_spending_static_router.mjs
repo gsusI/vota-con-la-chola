@@ -13,7 +13,7 @@ function fakeBucket(objects) {
    const h=opts.onlyIf;
    if(h&&h.get&&h.get('if-none-match')===m.httpEtag)return m;
    const r=opts.range&&opts.range.get&&opts.range.get('range');
-   if(r){const [s,e]=r.replace('bytes=','').split('-').map(Number);return {...m,range:{offset:s,length:e-s+1},body:body.slice(s,e+1)};}
+   if(r){const [a,b]=r.replace('bytes=','').split('-');const s=Number(a);const open=b==='';const e=open?body.length-1:Number(b);return {...m,range:open?{offset:s,suffix:undefined}:{offset:s,length:e-s+1,suffix:undefined},body:body.slice(s,e+1)};}
    return {...m,body};}};
 }
 const env={SITE:fakeBucket({
@@ -44,6 +44,9 @@ assert.equal(missing.status,404);assert.equal(await missing.text(),'<h1>missing<
 
 const partial=await get('/data/table.parquet',{headers:{range:'bytes=2-5'}});
 assert.equal(partial.status,206);assert.equal(partial.headers.get('content-range'),'bytes 2-5/10');assert.equal(await partial.text(),'2345');
+
+const tail=await get('/data/table.parquet',{headers:{range:'bytes=8-'}});
+assert.equal(tail.status,206);assert.equal(tail.headers.get('content-range'),'bytes 8-9/10');
 
 const notModified=await get('/citizen/',{headers:{'if-none-match':'"etag-site/citizen/index.html"'}});
 assert.equal(notModified.status,304);

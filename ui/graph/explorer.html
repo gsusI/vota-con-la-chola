@@ -1069,7 +1069,17 @@
           const tableName = String(mt.table || "");
           if (!tableName) continue;
 
-          const fallbackColumns = await describeHfTable(tableName);
+          const fromContract = contractMap.get(tableName) || {};
+          // The published schema contract already lists columns; DESCRIBE (a network read) only as fallback.
+          const contractColumns = Array.isArray(fromContract.columns) && fromContract.columns.length ? fromContract.columns : null;
+          const fallbackColumns = contractColumns
+            ? contractColumns.map((col) => ({
+                name: String(col.name || ""),
+                type: String(col.type || ""),
+                notnull: Boolean(col.notnull),
+                pk_order: Number(col.pk_order || 0),
+              }))
+            : await describeHfTable(tableName);
           const fallbackNames = fallbackColumns.map((col) => col.name);
           const fallbackMeta = {
             name: tableName,
@@ -1086,7 +1096,6 @@
             foreign_keys_in: [],
           };
 
-          const fromContract = contractMap.get(tableName) || {};
           const merged = {
             ...fallbackMeta,
             ...fromContract,
@@ -1192,8 +1201,11 @@
         await db.instantiate(bundle.mainModule, bundle.pthreadWorker);
         URL.revokeObjectURL(workerUrl);
         const conn = await db.connect();
+        await conn.query("SET enable_http_metadata_cache=true");
+        await conn.query("SET enable_object_cache=true");
+        backend.hf = { db, conn };
 
-        for (const table of manifestTables) {
+        const viewSql = (table) => {
           const tableName = String(table.table || "");
           const files = clampInt(table.files || 1, 1, 1, 10000);
           const relDir = String(table.path_glob || "")
@@ -1205,10 +1217,19 @@
             urls.push(hfUrl(`${snapshotDir}/${relPath}`));
           }
           const urlsSql = urls.map((url) => quoteLiteral(url)).join(", ");
-          await conn.query(
-            `CREATE OR REPLACE VIEW ${quoteIdent(tableName)} AS SELECT * FROM read_parquet([${urlsSql}])`,
-          );
-        }
+          return `CREATE OR REPLACE VIEW ${quoteIdent(tableName)} AS SELECT * FROM read_parquet([${urlsSql}])`;
+        };
+        // Each view binds by reading Parquet metadata over HTTP; spread them over a few connections.
+        const pending = [...manifestTables];
+        await Promise.all(
+          Array.from({ length: 6 }, async () => {
+            const viewConn = await db.connect();
+            for (let table = pending.shift(); table; table = pending.shift()) {
+              await viewConn.query(viewSql(table));
+            }
+            await viewConn.close();
+          }),
+        );
 
         backend.sourceLabel = `${datasetLabel}/${snapshotDir}`;
         const built = await buildHfSchemaPayload(manifestTables, schemaContract, snapshotDir);

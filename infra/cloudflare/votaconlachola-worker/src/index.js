@@ -60,13 +60,14 @@ function plainResponse(status, body, extra = {}) {
 
 function contentRange(range, size) {
   if (!range) return null;
-  if ("suffix" in range) {
+  // R2 may include unset keys (e.g. suffix: undefined), so check types, not key presence.
+  if (typeof range.suffix === "number") {
     const start = Math.max(size - range.suffix, 0);
     return { start, end: size - 1 };
   }
-  const start = range.offset ?? 0;
-  const length = range.length ?? size - start;
-  return { start, end: start + length - 1 };
+  const start = typeof range.offset === "number" ? range.offset : 0;
+  const length = typeof range.length === "number" ? range.length : size - start;
+  return { start, end: Math.min(start + length, size) - 1 };
 }
 
 async function notFound(env, method) {
