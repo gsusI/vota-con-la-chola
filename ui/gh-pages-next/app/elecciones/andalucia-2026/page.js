@@ -353,6 +353,10 @@ export default function Andalucia2026WaterReceiptPage() {
   const evidenceCheck = receipt.evidence_check || {};
   const method = receipt.method || {};
   const history = receipt.history || {};
+  // Built daily: once the review window lapses, present the receipt as a historical cut, not live tracking.
+  const freshness = receipt.freshness || {};
+  const buildDate = new Date().toISOString().slice(0, 10);
+  const isStale = Boolean(freshness.stale_after_date) && buildDate >= freshness.stale_after_date;
   const ownerSource = sourcesById.get("government-structure-2026-07-09");
   const lawSource = sourcesById.get("water-law-consolidated-2026-06-20");
   const immutableSnapshotHref = withBasePath(
@@ -379,6 +383,12 @@ export default function Andalucia2026WaterReceiptPage() {
         <p className={classes(styles.question, "water-receipt-question")}>
           {receipt.question}
         </p>
+        {isStale ? (
+          <p className={classes(styles.staleNotice, "water-receipt-stale-notice")} role="note">
+            Corte histórico: este recibo no se revisa desde el {formatDate(receipt.snapshot_date)} y no es un
+            seguimiento vigente. Lo ocurrido después no está reflejado.
+          </p>
+        ) : null}
       </header>
 
       <section className={classes(styles.answer, "water-receipt-answer")} aria-labelledby="water-answer-title">
@@ -392,7 +402,7 @@ export default function Andalucia2026WaterReceiptPage() {
         </div>
         <div className={classes(styles.answerCopyBlock, "water-receipt-answer-copy-block")}>
           <h2 className={classes(styles.answerTitle, "water-receipt-answer-title")} id="water-answer-title">
-            La respuesta, hoy
+            {isStale ? `La respuesta, al ${formatDate(receipt.snapshot_date)}` : "La respuesta, hoy"}
           </h2>
           <p className={classes(styles.answerCopy, "water-receipt-answer-copy")}>
             {context.answer}
@@ -438,7 +448,7 @@ export default function Andalucia2026WaterReceiptPage() {
                 Próximo control
               </dt>
               <dd className={classes(styles.changeSummaryValue, "water-receipt-change-summary-value")}>
-                {formatDate(method.next_check)}
+                {isStale ? "Sin revisión programada" : formatDate(method.next_check)}
               </dd>
             </div>
             <div className={classes(styles.changeSummaryFact, "water-receipt-change-summary-fact")}>

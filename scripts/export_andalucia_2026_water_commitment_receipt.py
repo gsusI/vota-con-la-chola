@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 from datetime import date, timedelta
 from pathlib import Path
 from urllib.parse import urlparse
@@ -483,32 +484,47 @@ def parse_args() -> argparse.Namespace:
         type=int,
         default=DEFAULT_MAX_AGE_DAYS,
     )
+    parser.add_argument(
+        "--allow-stale",
+        action="store_true",
+        help=(
+            "Export a stale receipt instead of failing; the page then labels it a historical cut. "
+            "For the daily pipeline only: refreshing the receipt is a manual evidence review."
+        ),
+    )
     return parser.parse_args()
 
 
 def main() -> int:
     args = parse_args()
+    stale_warning = None
+    if args.allow_stale:
+        seed = json.loads(args.seed.read_text(encoding="utf-8"))
+        try:
+            check_freshness(seed, as_of_date=args.as_of_date, max_age_days=args.max_age_days)
+        except ValueError as exc:
+            stale_warning = str(exc)
     payload = export_receipt(
         args.seed,
         [args.out, args.public_out],
         archive_dirs=[args.archive_dir, args.public_archive_dir],
         previous_path=args.previous,
-        as_of_date=args.as_of_date,
+        as_of_date=None if stale_warning else args.as_of_date,
         max_age_days=args.max_age_days,
     )
     summary = payload["summary"]
     history = payload["history"]
-    freshness = check_freshness(
-        payload,
-        as_of_date=args.as_of_date,
-        max_age_days=args.max_age_days,
-    )
+    if stale_warning:
+        print(f"WARNING: {stale_warning}; exported as a historical cut (the page says so)", file=sys.stderr)
+        age = "stale"
+    else:
+        age = check_freshness(payload, as_of_date=args.as_of_date, max_age_days=args.max_age_days)["age_days"]
     print(
         "Andalucía water receipt exported: "
         f"{summary['commitments_total']} commitments, "
         f"{summary['post_investiture_actions_total']} post-investiture actions, "
         f"history={history['status']}, "
-        f"freshness_age_days={freshness['age_days']}"
+        f"freshness_age_days={age}"
     )
     return 0
 
