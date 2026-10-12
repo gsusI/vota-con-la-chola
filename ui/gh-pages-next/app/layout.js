@@ -1,5 +1,6 @@
 import "./globals.css";
 import Breadcrumbs from "./components/Breadcrumbs";
+import VotingAidBanner from "./components/VotingAidBanner";
 import { Suspense } from "react";
 import { resolveBasePath } from "./path-utils.mjs";
 
@@ -18,6 +19,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="es">
       <body>
+        <VotingAidBanner />
         <Suspense fallback={null}>
           <Breadcrumbs />
         </Suspense>

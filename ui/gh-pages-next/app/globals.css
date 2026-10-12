@@ -58,6 +58,73 @@ body {
   flex: 0 0 auto;
 }
 
+.voting-aid-banner {
+  background: var(--accent-3);
+  color: #fff;
+  border-bottom: 3px solid var(--accent);
+}
+
+.voting-aid-banner__link {
+  width: min(1600px, calc(100% - 32px));
+  margin: 0 auto;
+  min-height: 48px;
+  padding: 8px 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.voting-aid-banner__badge {
+  flex: 0 0 auto;
+  font-size: 1.3rem;
+  line-height: 1;
+}
+
+.voting-aid-banner__text {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: 0.98rem;
+  line-height: 1.3;
+}
+
+.voting-aid-banner__note {
+  opacity: 0.85;
+}
+
+.voting-aid-banner__cta {
+  flex: 0 0 auto;
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: var(--accent);
+  font-weight: 700;
+  font-size: 0.92rem;
+  white-space: nowrap;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.voting-aid-banner__link:hover .voting-aid-banner__cta,
+.voting-aid-banner__link:focus-visible .voting-aid-banner__cta {
+  background: #b93a25;
+  transform: translateX(2px);
+}
+
+.voting-aid-banner__link:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+@media (max-width: 640px) {
+  .voting-aid-banner__link {
+    gap: 10px;
+  }
+
+  .voting-aid-banner__note {
+    display: none;
+  }
+}
+
 .shell {
   width: calc(100% - 28px);
   max-width: 1600px;
