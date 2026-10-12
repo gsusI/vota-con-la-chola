@@ -3,7 +3,9 @@ from __future__ import annotations
 import argparse
 import datetime as dt
 import json
+import os
 import sys
+import time
 from pathlib import Path
 
 from .config import DEFAULT_DB, DEFAULT_RAW_DIR, DEFAULT_SCHEMA, DEFAULT_TIMEOUT
@@ -319,7 +321,16 @@ def cmd_ingest(args: argparse.Namespace) -> int:
         grand_seen = 0
         grand_loaded = 0
         failed: list[tuple[str, str]] = []
-        for source_id in source_ids:
+        # Batch runs retry each failed source once at the end: official endpoints time out now and then
+        # and upserts are idempotent. Persistent blocks still end up as error runs.
+        retry_delay = float(os.environ.get("INGEST_RETRY_DELAY_SECONDS", "30"))
+        attempts = [(source_id, 1) for source_id in source_ids]
+        waited = False
+        while attempts:
+            source_id, attempt = attempts.pop(0)
+            if attempt == 2 and not waited:
+                time.sleep(retry_delay)
+                waited = True
             connector = connectors[source_id]
             from_file = Path(args.from_file) if args.from_file and args.source != "all" else None
             try:
@@ -339,8 +350,11 @@ def cmd_ingest(args: argparse.Namespace) -> int:
                 # decides whether a missing source is acceptable. A single source still fails hard.
                 if args.source != "all":
                     raise
-                failed.append((source_id, f"{type(exc).__name__}: {exc}"))
                 print(f"{source_id}: ERROR {type(exc).__name__}: {exc}", file=sys.stderr)
+                if attempt == 1:
+                    attempts.append((source_id, 2))
+                else:
+                    failed.append((source_id, f"{type(exc).__name__}: {exc}"))
                 continue
             grand_seen += seen
             grand_loaded += loaded
