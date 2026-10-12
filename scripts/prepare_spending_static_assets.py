@@ -14,6 +14,6 @@ if len(files)>19000:raise SystemExit('Workers Free static file budget exceeded')
 for f in files:
  if f.stat().st_size>25_000_000:raise SystemExit('Static asset too large')
  out=dest/f.relative_to(site);out.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(f,out)
-(dest/'_headers').write_text('/_next/static/*\n  Cache-Control: public, max-age=31536000, immutable\n/spending/\n  Cache-Control: no-cache\n/\n  Cache-Control: no-cache\n')
+(dest/'_headers').write_text('/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n/_next/static/*\n  Cache-Control: public, max-age=31536000, immutable\n/spending/\n  Cache-Control: no-cache\n/\n  Cache-Control: no-cache\n')
 if sum(1 for f in dest.rglob('*') if f.is_file())>19000:raise SystemExit('Accumulated static assets exceed free budget')
 print(json.dumps({'files':len(files),'bytes':sum(f.stat().st_size for f in files),'source':'reviewed gh-pages checkout','copied_bulk_awards':False}))

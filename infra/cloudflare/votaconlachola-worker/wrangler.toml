@@ -8,8 +8,7 @@ routes = [
   { pattern = "votaconlachola.org/*", zone_name = "votaconlachola.org" }
 ]
 
-
-# Static shell and hashed assets bypass the legacy GitHub proxy.
+# Static shell and hashed assets are served first; every other path is read from R2.
 workers_dev = false
 preview_urls = false
 
@@ -17,3 +16,8 @@ preview_urls = false
 directory = "./public"
 html_handling = "auto-trailing-slash"
 not_found_handling = "none"
+
+# Published site origin (synced by scripts/publish_site_origin.py).
+[[r2_buckets]]
+binding = "SITE"
+bucket_name = "vclc-site"

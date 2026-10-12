@@ -86,6 +86,23 @@ Ahora: contratación parcial; denominador nacional, actualización recurrente y 
 Siguiente acción: medir la base física y la selección publicada, recuperar el estado de adquisición histórica existente y ampliar una cohorte con controles de publicación. No reescribir bases originales ni reimportar D1 a ciegas. Dependencias externas de revisión y fuentes se registran; avanzar en trabajo controlable mientras se resuelven.
 
 
+## Origen propio de la web: Cloudflare R2 (mandato 2026-10-12)
+
+Mandato del mantenedor: la web debe ser usable y fiable con un origen que controlemos, sin depender de terceros en tiempo de ejecución, y siguiendo en el plan gratuito de Cloudflare. Nota: el bucket se llama «origen R2» para no confundirlo con la clase de escala `R2` de §4.1.
+
+**Ahora:** `votaconlachola.org` sirve el esqueleto y `_next` desde Workers Static Assets y el resto (≈50k ficheros, 1,1 GB) como proxy de `raw.githubusercontent.com` (rama `gh-pages`); el explorador antiguo lee Parquet de HF. Hay además un proyecto Pages paralelo que no sirve el dominio.
+
+**Destino:** un Worker en el dominio (shell estático) + bucket R2 `vclc-site` como origen + D1 solo para consultas; HF y `gh-pages` quedan como réplica y registro auditable. Cada publicación deja `/releases/latest.json` y un manifest con sha256 por fichero y commit de origen.
+
+| Paso | Gate |
+| --- | --- |
+| 1. Origen R2 del sitio completo | Paridad de ETag de todos los ficheros tras la subida; tests del Worker; `x-vclc-origin: r2` en producción; sin peticiones a GitHub |
+| 2. Datos fuera del shell | Datos grandes en releases inmutables con caché larga, sin trocear ficheros a 20 MB; ficheros estáticos ≤ 19k |
+| 3. Explorador sin HF en ejecución | Parquet servido desde el origen propio con peticiones por rango |
+| 4. Retirar Pages paralelo | Un solo destino de despliegue |
+
+Presupuesto gratuito: R2 ≤ 10 GB (pocas releases completas; históricas en HF), subidas solo de ficheros cambiados, lecturas servidas desde caché. **Siguiente:** paso 1 (credenciales R2 y primera sincronización).
+
 ## Ayuda al voto: elecciones generales (mandato 2026-10-11)
 
 Mandato del mantenedor: convertir `/citizen` en una ayuda útil para decidir el voto en las próximas generales. Concreta la experiencia **Alineamiento** de la North Star; no sustituye la prioridad de dinero público, corre como carril propio.

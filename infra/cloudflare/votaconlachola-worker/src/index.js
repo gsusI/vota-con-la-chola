@@ -1,5 +1,15 @@
-const RAW_ORIGIN = "https://raw.githubusercontent.com/gsusI/vota-con-la-chola/gh-pages";
+// Origin: the published site lives in the R2 bucket bound as SITE under SITE_PREFIX.
+// Workers Static Assets (shell + hashed _next assets) are matched before this script runs.
+const SITE_PREFIX = "site/";
 const ORIGIN_PREFIX = "/vota-con-la-chola";
+const SHORT_CACHE = "public, max-age=300";
+const IMMUTABLE_CACHE = "public, max-age=31536000, immutable";
+// Content-addressed release directories (sha256 path segment) never change once published.
+const IMMUTABLE_SEGMENT = /\/[0-9a-f]{64}\//;
+const SECURITY_HEADERS = {
+  "x-content-type-options": "nosniff",
+  "referrer-policy": "strict-origin-when-cross-origin",
+};
 
 function normalizePathname(pathname) {
   if (pathname === ORIGIN_PREFIX) {
@@ -22,10 +32,57 @@ function canonicalizeTrailingSlash(pathname) {
   return `${pathname}/`;
 }
 
+export function objectKeyForPath(pathname) {
+  const sitePath = pathname.endsWith("/") ? `${pathname}index.html` : pathname;
+  const decoded = decodeURIComponent(sitePath).replace(/^\/+/, "");
+  if (decoded.split("/").some((segment) => segment === ".." || segment === ".")) {
+    throw new URIError("dot segment");
+  }
+  return `${SITE_PREFIX}${decoded}`;
+}
+
+function cacheControlFor(pathname) {
+  return IMMUTABLE_SEGMENT.test(pathname) ? IMMUTABLE_CACHE : SHORT_CACHE;
+}
+
+function baseHeaders() {
+  return new Headers(SECURITY_HEADERS);
+}
+
+function plainResponse(status, body, extra = {}) {
+  const headers = baseHeaders();
+  headers.set("content-type", "text/plain; charset=utf-8");
+  headers.set("cache-control", "no-store");
+  for (const [name, value] of Object.entries(extra)) headers.set(name, value);
+  return new Response(body, { status, headers });
+}
+
+function contentRange(range, size) {
+  if (!range) return null;
+  if ("suffix" in range) {
+    const start = Math.max(size - range.suffix, 0);
+    return { start, end: size - 1 };
+  }
+  const start = range.offset ?? 0;
+  const length = range.length ?? size - start;
+  return { start, end: start + length - 1 };
+}
+
+async function notFound(env, method) {
+  const page = await env.SITE.get(`${SITE_PREFIX}404.html`);
+  if (!page) {
+    return plainResponse(404, method === "HEAD" ? null : "404: Not Found");
+  }
+  const headers = baseHeaders();
+  headers.set("content-type", "text/html; charset=utf-8");
+  headers.set("cache-control", "no-store");
+  return new Response(method === "HEAD" ? null : page.body, { status: 404, headers });
+}
+
 export default {
-  async fetch(request) {
+  async fetch(request, env, ctx) {
     if (request.method !== "GET" && request.method !== "HEAD") {
-      return new Response("Method Not Allowed", { status: 405 });
+      return plainResponse(405, "Method Not Allowed", { allow: "GET, HEAD" });
     }
 
     const requestUrl = new URL(request.url);
@@ -34,49 +91,83 @@ export default {
       return Response.redirect(`${requestUrl.origin}${normalizedPath}${requestUrl.search}`, 308);
     }
 
-    const isDirectoryPath = normalizedPath.endsWith("/");
-    const upstreamPath = isDirectoryPath ? `${normalizedPath}index.html` : normalizedPath;
-    const upstreamUrl = new URL(`${RAW_ORIGIN}${upstreamPath}`);
-
-    const upstreamResponse = await fetch(upstreamUrl, {
-      method: request.method,
-      redirect: "follow",
-    });
-
-    const headers = new Headers(upstreamResponse.headers);
-    headers.set("cache-control", upstreamResponse.ok ? "public, max-age=300" : "no-store");
-    headers.set("x-vclc-origin", upstreamUrl.toString());
-    headers.delete("content-security-policy");
-    headers.delete("content-security-policy-report-only");
-    headers.delete("x-frame-options");
-
-    const contentType = resolveContentType(upstreamUrl.pathname, upstreamResponse.headers.get("content-type"));
-    if (contentType) {
-      headers.set("content-type", contentType);
+    if (!env || !env.SITE) {
+      return plainResponse(503, "Site origin unavailable");
     }
 
-    return new Response(upstreamResponse.body, {
-      status: upstreamResponse.status,
-      statusText: upstreamResponse.statusText,
-      headers,
-    });
+    let key;
+    try {
+      key = objectKeyForPath(normalizedPath);
+    } catch {
+      return plainResponse(400, "Bad Request");
+    }
+
+    const hasRange = request.headers.has("range");
+    const edgeCache = typeof caches !== "undefined" ? caches.default : null;
+    const cacheable = request.method === "GET" && !hasRange && edgeCache;
+    const cacheKey = new Request(`${requestUrl.origin}${normalizedPath}`, { method: "GET" });
+    if (cacheable) {
+      const cached = await edgeCache.match(cacheKey);
+      if (cached) return cached;
+    }
+
+    const object =
+      request.method === "HEAD"
+        ? await env.SITE.head(key)
+        : await env.SITE.get(key, { range: request.headers, onlyIf: request.headers });
+    if (!object) {
+      return notFound(env, request.method);
+    }
+
+    const headers = baseHeaders();
+    object.writeHttpMetadata(headers);
+    headers.set("content-type", resolveContentType(key, headers.get("content-type")));
+    headers.set("cache-control", cacheControlFor(normalizedPath));
+    headers.set("etag", object.httpEtag);
+    headers.set("accept-ranges", "bytes");
+    headers.set("x-vclc-origin", "r2");
+
+    if (request.method === "HEAD") {
+      headers.set("content-length", String(object.size));
+      return new Response(null, { status: 200, headers });
+    }
+
+    // R2 returns metadata without a body when an onlyIf precondition fails.
+    if (!("body" in object)) {
+      const conditional = request.headers.has("if-none-match") || request.headers.has("if-modified-since");
+      return new Response(null, { status: conditional ? 304 : 412, headers });
+    }
+
+    if (hasRange && object.range) {
+      const { start, end } = contentRange(object.range, object.size);
+      headers.set("content-range", `bytes ${start}-${end}/${object.size}`);
+      return new Response(object.body, { status: 206, headers });
+    }
+
+    const response = new Response(object.body, { status: 200, headers });
+    if (cacheable && ctx && typeof ctx.waitUntil === "function") {
+      ctx.waitUntil(edgeCache.put(cacheKey, response.clone()));
+    }
+    return response;
   },
 };
 
-function resolveContentType(pathname, fallback) {
+export function resolveContentType(pathname, fallback) {
   const lower = String(pathname || "").toLowerCase();
   if (lower.endsWith(".html")) return "text/html; charset=utf-8";
   if (lower.endsWith(".css")) return "text/css; charset=utf-8";
-  if (lower.endsWith(".js")) return "application/javascript; charset=utf-8";
+  if (lower.endsWith(".js") || lower.endsWith(".mjs")) return "application/javascript; charset=utf-8";
   if (lower.endsWith(".json")) return "application/json; charset=utf-8";
   if (lower.endsWith(".svg")) return "image/svg+xml";
   if (lower.endsWith(".xml")) return "application/xml; charset=utf-8";
   if (lower.endsWith(".txt")) return "text/plain; charset=utf-8";
+  if (lower.endsWith(".csv")) return "text/csv; charset=utf-8";
   if (lower.endsWith(".ico")) return "image/x-icon";
   if (lower.endsWith(".png")) return "image/png";
   if (lower.endsWith(".jpg") || lower.endsWith(".jpeg")) return "image/jpeg";
   if (lower.endsWith(".webp")) return "image/webp";
   if (lower.endsWith(".woff2")) return "font/woff2";
   if (lower.endsWith(".woff")) return "font/woff";
+  if (lower.endsWith(".wasm")) return "application/wasm";
   return fallback || "application/octet-stream";
 }
