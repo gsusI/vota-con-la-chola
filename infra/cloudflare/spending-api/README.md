@@ -76,7 +76,7 @@ wrangler d1 execute vclc-spending --remote --config infra/cloudflare/spending-ap
 just spending-api-deploy
 ```
 
-Después de verificar la API: publicar frontend mediante `PLACSP_LAUNCH_SCOPED_PUBLISH=1 PLACSP_PUBLISH_SITE=<checkout-gh-pages> just explorer-gh-pages-publish`. Comprobar navegador, Galasa, CSV, evidencia y ausencia de carga automática de `awards.json`.
+Después de verificar la API: publicar frontend mediante `just site-publish`. Comprobar navegador, Galasa, CSV, evidencia y ausencia de carga automática de `awards.json`.
 
 Rollback: desplegar la versión anterior de Worker con su base compatible; para volver temporalmente a la interfaz anterior, publicar el commit previo del componente. No modificar paquetes originales.
 

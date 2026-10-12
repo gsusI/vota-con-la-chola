@@ -82,11 +82,11 @@ test("legacy iframe publish recipe copies route-local data", () => {
   ];
 
   for (const route of dataRoutes) {
-    assert.match(justfile, new RegExp(`\\{\\{gh_pages_dir\\}\\}/legacy/${route}/data`));
+    assert.match(justfile, new RegExp(`\\{\\{static_data_dir\\}\\}/legacy/${route}/data`));
     assert.match(
       justfile,
       new RegExp(
-        `cp -R "\\{\\{gh_pages_dir\\}\\}/${route}/data/\\." "\\{\\{gh_pages_dir\\}\\}/legacy/${route}/data/"`,
+        `cp -R "\\{\\{static_data_dir\\}\\}/${route}/data/\\." "\\{\\{static_data_dir\\}\\}/legacy/${route}/data/"`,
       ),
     );
   }

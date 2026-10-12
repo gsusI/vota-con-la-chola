@@ -67,7 +67,7 @@ senado_tail_archive_fallback := env_var_or_default("SENADO_TAIL_ARCHIVE_FALLBACK
 senado_tail_archive_timeout := env_var_or_default("SENADO_TAIL_ARCHIVE_TIMEOUT", "12")
 explorer_host := env_var_or_default("EXPLORER_HOST", "127.0.0.1")
 explorer_port := env_var_or_default("EXPLORER_PORT", "9010")
-gh_pages_dir := env_var_or_default("STATIC_BUILD_DATA_DIR", "ui/site/.static-data")
+static_data_dir := env_var_or_default("STATIC_BUILD_DATA_DIR", "ui/site/.static-data")
 site_app_dir := env_var_or_default("SITE_APP_DIR", "ui/site")
 site_out_dir := site_app_dir + "/out"
 site_port := env_var_or_default("SITE_PORT", "3000")
@@ -76,7 +76,7 @@ site_docker_image := env_var_or_default("SITE_DOCKER_IMAGE", "node:22-alpine")
 site_node_modules_volume := env_var_or_default("SITE_NODE_MODULES_VOLUME", "vota-site-node_modules")
 site_next_dir_volume := env_var_or_default("SITE_NEXT_DIR_VOLUME", "vota-site-nextdir")
 site_prime_export := env_var_or_default("SITE_PRIME_EXPORT", "1")
-gh_pages_reuse_people_exports := env_var_or_default("GH_PAGES_REUSE_PEOPLE_EXPORTS", "1")
+site_reuse_people_exports := env_var_or_default("SITE_REUSE_PEOPLE_EXPORTS", "1")
 site_base_path := env_var_or_default("SITE_BASE_PATH", "")
 cloudflare_pages_project := env_var_or_default("CLOUDFLARE_PAGES_PROJECT", "vota-con-la-chola")
 cloudflare_pages_max_file_bytes := env_var_or_default("CLOUDFLARE_PAGES_MAX_FILE_BYTES", "25000000")
@@ -1079,7 +1079,7 @@ liberty_atlas_publish_diff_json := env_var_or_default("LIBERTY_ATLAS_PUBLISH_DIF
 liberty_atlas_publish_changelog_entry_json := env_var_or_default("LIBERTY_ATLAS_PUBLISH_CHANGELOG_ENTRY_JSON", "docs/etl/sprints/AI-OPS-124/evidence/liberty_restrictions_snapshot_changelog_latest.json")
 liberty_atlas_publish_changelog_history_jsonl := env_var_or_default("LIBERTY_ATLAS_PUBLISH_CHANGELOG_HISTORY_JSONL", "docs/etl/runs/liberty_restrictions_snapshot_changelog.jsonl")
 liberty_atlas_published_dir := env_var_or_default("LIBERTY_ATLAS_PUBLISHED_DIR", "etl/data/published")
-liberty_atlas_publish_gh_pages_out := env_var_or_default("LIBERTY_ATLAS_PUBLISH_GH_PAGES_OUT", "ui/site/public/explorer-sources/data/liberty-atlas-release.json")
+liberty_atlas_publish_site_out := env_var_or_default("LIBERTY_ATLAS_PUBLISH_SITE_OUT", "ui/site/public/explorer-sources/data/liberty-atlas-release.json")
 liberty_atlas_publish_out := env_var_or_default("LIBERTY_ATLAS_PUBLISH_OUT", "docs/etl/sprints/AI-OPS-125/evidence/liberty_atlas_publish_latest.json")
 liberty_atlas_publish_allow_missing := env_var_or_default("LIBERTY_ATLAS_PUBLISH_ALLOW_MISSING", "0")
 liberty_atlas_release_latest_json := env_var_or_default("LIBERTY_ATLAS_RELEASE_LATEST_JSON", "etl/data/published/liberty-restrictions-atlas-release-latest.json")
@@ -1823,7 +1823,7 @@ etl-export-source-catalog:
   python3 scripts/export_source_catalog_snapshot.py \
     --db "{{db_path}}" \
     --snapshot-date "{{snapshot_date}}" \
-    --out "{{gh_pages_dir}}/explorer-sources/data/catalog.json" \
+    --out "{{static_data_dir}}/explorer-sources/data/catalog.json" \
     --published-out "etl/data/published/source-catalog-{{snapshot_date}}.json" \
     --latest-out "etl/data/published/source-catalog-latest.json"
 
@@ -1900,7 +1900,7 @@ etl-andalucia-2026-accountability-apply-safe:
 
 etl-andalucia-2026-accountability-apply-safe-prime:
   just etl-andalucia-2026-accountability-apply-safe
-  mkdir -p "{{gh_pages_dir}}/elecciones/andalucia-2026/data"
+  mkdir -p "{{static_data_dir}}/elecciones/andalucia-2026/data"
   mkdir -p "{{site_app_dir}}/public/elecciones/andalucia-2026/data"
   for item in \\
     accountability.json \\
@@ -1910,7 +1910,7 @@ etl-andalucia-2026-accountability-apply-safe-prime:
     parliament-vote-impact-review-queue.csv \\
     execution-evidence-queue.csv; do \\
       src="{{site_app_dir}}/public/elecciones/andalucia-2026/data/$item"; \\
-      fallback="{{gh_pages_dir}}/elecciones/andalucia-2026/data/$item"; \\
+      fallback="{{static_data_dir}}/elecciones/andalucia-2026/data/$item"; \\
       if [ -f "$src" ]; then cp -f "$src" "$fallback"; \\
       elif [ -f "$fallback" ]; then :; \\
       else echo "warn: missing andalu data artifact $item"; fi; \\
@@ -1927,7 +1927,7 @@ etl-export-source-scrape-queue:
   python3 scripts/export_source_scrape_queue_snapshot.py \
     --db "{{db_path}}" \
     --snapshot-date "{{snapshot_date}}" \
-    --out "{{gh_pages_dir}}/explorer-sources/data/scrape-queue.json" \
+    --out "{{static_data_dir}}/explorer-sources/data/scrape-queue.json" \
     --published-out "etl/data/published/source-scrape-queue-{{snapshot_date}}.json" \
     --latest-out "etl/data/published/source-scrape-queue-latest.json"
 
@@ -4015,10 +4015,10 @@ parl-export-liberty-restrictions-snapshot:
 parl-publish-liberty-atlas-artifacts:
   @set -euo pipefail; \
   allow_missing_arg=""; \
-  gh_pages_arg=""; \
+  site_out_arg=""; \
   if [ "{{liberty_atlas_publish_allow_missing}}" = "1" ]; then allow_missing_arg=" --allow-missing"; fi; \
-  if [ -n "{{liberty_atlas_publish_gh_pages_out}}" ]; then gh_pages_arg=" --gh-pages-out {{liberty_atlas_publish_gh_pages_out}}"; fi; \
-  python3 scripts/publish_liberty_atlas_artifacts.py --snapshot-json {{liberty_atlas_publish_snapshot_json}} --irlc-parquet {{liberty_atlas_publish_irlc_parquet}} --accountability-parquet {{liberty_atlas_publish_accountability_parquet}} --diff-json {{liberty_atlas_publish_diff_json}} --changelog-entry-json {{liberty_atlas_publish_changelog_entry_json}} --changelog-history-jsonl {{liberty_atlas_publish_changelog_history_jsonl}} --snapshot-date {{snapshot_date}} --published-dir {{liberty_atlas_published_dir}} --out {{liberty_atlas_publish_out}}${gh_pages_arg}${allow_missing_arg}
+  if [ -n "{{liberty_atlas_publish_site_out}}" ]; then site_out_arg=" --gh-pages-out {{liberty_atlas_publish_site_out}}"; fi; \
+  python3 scripts/publish_liberty_atlas_artifacts.py --snapshot-json {{liberty_atlas_publish_snapshot_json}} --irlc-parquet {{liberty_atlas_publish_irlc_parquet}} --accountability-parquet {{liberty_atlas_publish_accountability_parquet}} --diff-json {{liberty_atlas_publish_diff_json}} --changelog-entry-json {{liberty_atlas_publish_changelog_entry_json}} --changelog-history-jsonl {{liberty_atlas_publish_changelog_history_jsonl}} --snapshot-date {{snapshot_date}} --published-dir {{liberty_atlas_published_dir}} --out {{liberty_atlas_publish_out}}${site_out_arg}${allow_missing_arg}
 
 parl-report-liberty-atlas-changelog-continuity:
   python3 scripts/report_liberty_atlas_changelog_continuity.py --changelog-jsonl {{liberty_atlas_publish_changelog_history_jsonl}} --snapshot-date {{snapshot_date}} --release-json {{liberty_atlas_release_latest_json}} --out {{liberty_atlas_changelog_continuity_out}}
@@ -4040,7 +4040,7 @@ parl-report-liberty-atlas-release-heartbeat:
   if [ -n "{{liberty_atlas_release_hf_latest_url}}" ]; then hf_url_arg=" --hf-release-json-url {{liberty_atlas_release_hf_latest_url}}"; fi; \
   if [ -n "{{liberty_atlas_release_hf_dataset_repo}}" ]; then hf_repo_arg=" --hf-dataset-repo {{liberty_atlas_release_hf_dataset_repo}}"; fi; \
   if [ -n "{{liberty_atlas_release_hf_username}}" ]; then hf_username_arg=" --hf-username {{liberty_atlas_release_hf_username}}"; fi; \
-  python3 scripts/report_liberty_atlas_release_heartbeat.py --published-release-json {{liberty_atlas_release_latest_json}} --gh-pages-release-json {{liberty_atlas_publish_gh_pages_out}} --continuity-json {{liberty_atlas_changelog_continuity_out}} --heartbeat-jsonl {{liberty_atlas_release_heartbeat_path}} --max-snapshot-age-days {{liberty_atlas_release_max_snapshot_age_days}} --hf-timeout {{liberty_atlas_release_hf_timeout}} --strict --out {{liberty_atlas_release_heartbeat_out}}${allow_hf_unavailable_arg}${expected_snapshot_arg}${hf_json_arg}${hf_url_arg}${hf_repo_arg}${hf_username_arg}
+  python3 scripts/report_liberty_atlas_release_heartbeat.py --published-release-json {{liberty_atlas_release_latest_json}} --gh-pages-release-json {{liberty_atlas_publish_site_out}} --continuity-json {{liberty_atlas_changelog_continuity_out}} --heartbeat-jsonl {{liberty_atlas_release_heartbeat_path}} --max-snapshot-age-days {{liberty_atlas_release_max_snapshot_age_days}} --hf-timeout {{liberty_atlas_release_hf_timeout}} --strict --out {{liberty_atlas_release_heartbeat_out}}${allow_hf_unavailable_arg}${expected_snapshot_arg}${hf_json_arg}${hf_url_arg}${hf_repo_arg}${hf_username_arg}
 
 parl-check-liberty-atlas-release-heartbeat-window:
   @set -euo pipefail; \
@@ -4419,8 +4419,8 @@ site-watch:
       npm run dev -- --hostname 0.0.0.0 --port {{site_port}}'
 
 accountability-dossiers-next-prime:
-  mkdir -p "{{gh_pages_dir}}/accountability-dossiers/data"
-  mkdir -p "{{gh_pages_dir}}/accountability-evidence/data"
+  mkdir -p "{{static_data_dir}}/accountability-dossiers/data"
+  mkdir -p "{{static_data_dir}}/accountability-evidence/data"
   mkdir -p "{{site_app_dir}}/public/accountability-dossiers/data"
   mkdir -p "{{site_app_dir}}/public/accountability-evidence/data"
   set -e; \
@@ -4430,20 +4430,20 @@ accountability-dossiers-next-prime:
     python3 scripts/export_accountability_dossier_snapshot.py \
       --db "$accountability_db" \
       --snapshot-date "{{snapshot_date}}" \
-      --out "{{gh_pages_dir}}/accountability-dossiers/data/dossiers.json" \
+      --out "{{static_data_dir}}/accountability-dossiers/data/dossiers.json" \
       --max-issues-per-actor "{{accountability_dossiers_max_issues_per_actor}}" \
       --max-actors-per-issue "{{accountability_dossiers_max_actors_per_issue}}"; \
     python3 scripts/export_accountability_ledger_snapshot.py \
       --db "$accountability_db" \
       --snapshot-date "{{snapshot_date}}" \
-      --out "{{gh_pages_dir}}/accountability-dossiers/data/ledger.json" \
+      --out "{{static_data_dir}}/accountability-dossiers/data/ledger.json" \
       --max-entries-per-issue "{{accountability_ledger_max_entries_per_issue}}" \
       --max-sample-entries-per-actor "{{accountability_ledger_max_sample_entries_per_actor}}"; \
     python3 scripts/export_accountability_evidence_api_snapshot.py \
-      --dossiers "{{gh_pages_dir}}/accountability-dossiers/data/dossiers.json" \
-      --ledger "{{gh_pages_dir}}/accountability-dossiers/data/ledger.json" \
+      --dossiers "{{static_data_dir}}/accountability-dossiers/data/dossiers.json" \
+      --ledger "{{static_data_dir}}/accountability-dossiers/data/ledger.json" \
       --snapshot-date "{{snapshot_date}}" \
-      --out "{{gh_pages_dir}}/accountability-evidence/data/evidence-api.json"; \
+      --out "{{static_data_dir}}/accountability-evidence/data/evidence-api.json"; \
   else \
     dossiers_source="etl/data/published/accountability-dossiers-latest.json"; \
     ledger_source="etl/data/published/accountability-ledger-latest.json"; \
@@ -4455,228 +4455,228 @@ accountability-dossiers-next-prime:
       --path "$dossiers_source" \
       --path "$ledger_source" \
       --path "$evidence_source"; \
-    cp -f "$dossiers_source" "{{gh_pages_dir}}/accountability-dossiers/data/dossiers.json"; \
-    cp -f "$ledger_source" "{{gh_pages_dir}}/accountability-dossiers/data/ledger.json"; \
-    cp -f "$evidence_source" "{{gh_pages_dir}}/accountability-evidence/data/evidence-api.json"; \
+    cp -f "$dossiers_source" "{{static_data_dir}}/accountability-dossiers/data/dossiers.json"; \
+    cp -f "$ledger_source" "{{static_data_dir}}/accountability-dossiers/data/ledger.json"; \
+    cp -f "$evidence_source" "{{static_data_dir}}/accountability-evidence/data/evidence-api.json"; \
   fi; \
   python3 scripts/validate_accountability_artifacts.py \
-    --ledger "{{gh_pages_dir}}/accountability-dossiers/data/ledger.json" \
-    --dossiers "{{gh_pages_dir}}/accountability-dossiers/data/dossiers.json" \
-    --evidence-api "{{gh_pages_dir}}/accountability-evidence/data/evidence-api.json" \
+    --ledger "{{static_data_dir}}/accountability-dossiers/data/ledger.json" \
+    --dossiers "{{static_data_dir}}/accountability-dossiers/data/dossiers.json" \
+    --evidence-api "{{static_data_dir}}/accountability-evidence/data/evidence-api.json" \
     --infer-snapshot-date; \
   python3 scripts/validate_real_public_json.py \
-    --path "{{gh_pages_dir}}/accountability-dossiers/data/dossiers.json" \
-    --path "{{gh_pages_dir}}/accountability-dossiers/data/ledger.json" \
-    --path "{{gh_pages_dir}}/accountability-evidence/data/evidence-api.json"; \
-  cp -f "{{gh_pages_dir}}/accountability-dossiers/data/dossiers.json" "{{site_app_dir}}/public/accountability-dossiers/data/dossiers.json"; \
-  cp -f "{{gh_pages_dir}}/accountability-dossiers/data/ledger.json" "{{site_app_dir}}/public/accountability-dossiers/data/ledger.json"; \
-  cp -f "{{gh_pages_dir}}/accountability-evidence/data/evidence-api.json" "{{site_app_dir}}/public/accountability-evidence/data/evidence-api.json"
+    --path "{{static_data_dir}}/accountability-dossiers/data/dossiers.json" \
+    --path "{{static_data_dir}}/accountability-dossiers/data/ledger.json" \
+    --path "{{static_data_dir}}/accountability-evidence/data/evidence-api.json"; \
+  cp -f "{{static_data_dir}}/accountability-dossiers/data/dossiers.json" "{{site_app_dir}}/public/accountability-dossiers/data/dossiers.json"; \
+  cp -f "{{static_data_dir}}/accountability-dossiers/data/ledger.json" "{{site_app_dir}}/public/accountability-dossiers/data/ledger.json"; \
+  cp -f "{{static_data_dir}}/accountability-evidence/data/evidence-api.json" "{{site_app_dir}}/public/accountability-evidence/data/evidence-api.json"
 
 site-prime:
-  mkdir -p "{{gh_pages_dir}}"/parliamentary-accountability/data
+  mkdir -p "{{static_data_dir}}"/parliamentary-accountability/data
   mkdir -p "{{site_app_dir}}/public/parliamentary-accountability/data"
-  mkdir -p "{{gh_pages_dir}}"/accountability-dossiers/data
+  mkdir -p "{{static_data_dir}}"/accountability-dossiers/data
   mkdir -p "{{site_app_dir}}/public/accountability-dossiers/data"
-  mkdir -p "{{gh_pages_dir}}"/responsibility-explainer/data
+  mkdir -p "{{static_data_dir}}"/responsibility-explainer/data
   mkdir -p "{{site_app_dir}}/public/responsibility-explainer/data"
-  mkdir -p "{{gh_pages_dir}}"/people/data
+  mkdir -p "{{static_data_dir}}"/people/data
   mkdir -p "{{site_app_dir}}/public/people/data"
-  mkdir -p "{{gh_pages_dir}}"/initiative-lifecycle/data
+  mkdir -p "{{static_data_dir}}"/initiative-lifecycle/data
   mkdir -p "{{site_app_dir}}/public/initiative-lifecycle/data"
-  mkdir -p "{{gh_pages_dir}}"/political-positions/data
+  mkdir -p "{{static_data_dir}}"/political-positions/data
   mkdir -p "{{site_app_dir}}/public/political-positions/data"
-  mkdir -p "{{gh_pages_dir}}"/elections-behavior/data
+  mkdir -p "{{static_data_dir}}"/elections-behavior/data
   mkdir -p "{{site_app_dir}}"/public/elections-behavior/data
-  mkdir -p "{{gh_pages_dir}}"/elecciones/andalucia-2026/data
+  mkdir -p "{{static_data_dir}}"/elecciones/andalucia-2026/data
   mkdir -p "{{site_app_dir}}"/public/elecciones/andalucia-2026/data
-  mkdir -p "{{gh_pages_dir}}"/legal-sanctions/data
+  mkdir -p "{{static_data_dir}}"/legal-sanctions/data
   mkdir -p "{{site_app_dir}}"/public/legal-sanctions/data
-  mkdir -p "{{gh_pages_dir}}"/policy-outcomes/data
+  mkdir -p "{{static_data_dir}}"/policy-outcomes/data
   mkdir -p "{{site_app_dir}}"/public/policy-outcomes/data
   if [ "{{site_prime_export}}" = "1" ]; then \
     python3 scripts/export_parliamentary_accountability_snapshot.py \
       --db "{{db_path}}" \
-      --out "{{gh_pages_dir}}/parliamentary-accountability/data/accountability.json"; \
-  elif [ ! -s "{{gh_pages_dir}}/parliamentary-accountability/data/accountability.json" ]; then \
+      --out "{{static_data_dir}}/parliamentary-accountability/data/accountability.json"; \
+  elif [ ! -s "{{static_data_dir}}/parliamentary-accountability/data/accountability.json" ]; then \
     if [ ! -s "{{site_app_dir}}/public/parliamentary-accountability/data/accountability.json" ]; then \
       echo "ERROR: missing real parliamentary accountability artifact; set SITE_PRIME_EXPORT=1" >&2; \
       exit 2; \
     fi; \
     cp -f "{{site_app_dir}}/public/parliamentary-accountability/data/accountability.json" \
-      "{{gh_pages_dir}}/parliamentary-accountability/data/accountability.json"; \
+      "{{static_data_dir}}/parliamentary-accountability/data/accountability.json"; \
   fi
   if [ "{{site_prime_export}}" = "1" ]; then \
     python3 scripts/export_initiative_lifecycle_snapshot.py \
       --db "{{db_path}}" \
-      --out "{{gh_pages_dir}}/initiative-lifecycle/data/lifecycle.json" \
+      --out "{{static_data_dir}}/initiative-lifecycle/data/lifecycle.json" \
       --max-initiatives 200 \
       --max-votes-per-initiative 80 \
       --min-committee-sample 4; \
-  elif [ ! -s "{{gh_pages_dir}}/initiative-lifecycle/data/lifecycle.json" ]; then \
+  elif [ ! -s "{{static_data_dir}}/initiative-lifecycle/data/lifecycle.json" ]; then \
     if [ ! -s "{{site_app_dir}}/public/initiative-lifecycle/data/lifecycle.json" ]; then \
       echo "ERROR: missing real initiative lifecycle artifact; set SITE_PRIME_EXPORT=1" >&2; \
       exit 2; \
     fi; \
     cp -f "{{site_app_dir}}/public/initiative-lifecycle/data/lifecycle.json" \
-      "{{gh_pages_dir}}/initiative-lifecycle/data/lifecycle.json"; \
+      "{{static_data_dir}}/initiative-lifecycle/data/lifecycle.json"; \
   fi
   if [ "{{site_prime_export}}" = "1" ]; then \
-    mkdir -p "{{gh_pages_dir}}/people/data"; \
-    if [ "{{gh_pages_reuse_people_exports}}" = "1" ] && \
-      python3 scripts/check_static_snapshot_date.py --path "{{gh_pages_dir}}/people/data/profiles.json" --snapshot-date "{{snapshot_date}}" >/dev/null 2>&1 && \
-      python3 scripts/check_static_snapshot_date.py --path "{{gh_pages_dir}}/people/data/xray.json" --snapshot-date "{{snapshot_date}}" >/dev/null 2>&1; then \
+    mkdir -p "{{static_data_dir}}/people/data"; \
+    if [ "{{site_reuse_people_exports}}" = "1" ] && \
+      python3 scripts/check_static_snapshot_date.py --path "{{static_data_dir}}/people/data/profiles.json" --snapshot-date "{{snapshot_date}}" >/dev/null 2>&1 && \
+      python3 scripts/check_static_snapshot_date.py --path "{{static_data_dir}}/people/data/xray.json" --snapshot-date "{{snapshot_date}}" >/dev/null 2>&1; then \
       echo "Reusing existing people exports for snapshot {{snapshot_date}}"; \
     else \
       python3 scripts/export_people_profiles_snapshot.py \
         --db "{{db_path}}" \
-        --out "{{gh_pages_dir}}/people/data/profiles.json" \
+        --out "{{static_data_dir}}/people/data/profiles.json" \
         --snapshot-date "{{snapshot_date}}"; \
       python3 scripts/export_people_xray_snapshot.py \
         --db "{{db_path}}" \
-        --out "{{gh_pages_dir}}/people/data/xray.json" \
+        --out "{{static_data_dir}}/people/data/xray.json" \
         --snapshot-date "{{snapshot_date}}"; \
     fi; \
     python3 scripts/export_political_positions_snapshot.py \
       --db "{{db_path}}" \
-      --out "{{gh_pages_dir}}/political-positions/data/stances.json" \
+      --out "{{static_data_dir}}/political-positions/data/stances.json" \
       --snapshot-date "{{snapshot_date}}"; \
     python3 scripts/export_elections_behavior_snapshot.py \
       --db "{{db_path}}" \
-      --out "{{gh_pages_dir}}/elections-behavior/data/elections-behavior.json" \
+      --out "{{static_data_dir}}/elections-behavior/data/elections-behavior.json" \
       --window-days 365 \
       --min-directional-votes 18; \
     python3 scripts/export_andalucia_2026_accountability_snapshot.py \
       --db "{{db_path}}" \
-      --out "{{gh_pages_dir}}/elecciones/andalucia-2026/data/accountability.json" \
+      --out "{{static_data_dir}}/elecciones/andalucia-2026/data/accountability.json" \
       --published-out "etl/data/published/andalucia-2026-accountability.json" \
       --timeout "{{infoelectoral_timeout}}" \
       --refresh-outcome-series; \
     python3 scripts/run_andalucia_2026_delivery_evidence_hunts.py \
-      --snapshot "{{gh_pages_dir}}/elecciones/andalucia-2026/data/accountability.json" \
+      --snapshot "{{static_data_dir}}/elecciones/andalucia-2026/data/accountability.json" \
       --out "etl/data/published/andalucia-2026-delivery-evidence-hunt-results.json" \
-      --public-out "{{gh_pages_dir}}/elecciones/andalucia-2026/data/delivery-evidence-hunt-results.json" \
+      --public-out "{{static_data_dir}}/elecciones/andalucia-2026/data/delivery-evidence-hunt-results.json" \
       --max-targets "{{andalucia_delivery_hunt_max_targets}}" \
       --rows-per-query "{{andalucia_delivery_hunt_rows_per_query}}" \
       --timeout "{{andalucia_delivery_hunt_timeout}}"; \
     python3 scripts/generate_andalucia_2026_delivery_review_drafts.py \
       --hunt-results "etl/data/published/andalucia-2026-delivery-evidence-hunt-results.json" \
       --out "etl/data/published/andalucia-2026-delivery-evidence-review-drafts.json" \
-      --public-out "{{gh_pages_dir}}/elecciones/andalucia-2026/data/delivery-evidence-review-drafts.json"; \
+      --public-out "{{static_data_dir}}/elecciones/andalucia-2026/data/delivery-evidence-review-drafts.json"; \
     python3 scripts/export_legal_sanctions_snapshot.py \
       --db "{{db_path}}" \
-      --out "{{gh_pages_dir}}/legal-sanctions/data/legal-sanctions.json"; \
+      --out "{{static_data_dir}}/legal-sanctions/data/legal-sanctions.json"; \
     just outcome-context-export; \
     cp -f "{{outcome_context_public_status_out}}" \
-      "{{gh_pages_dir}}/policy-outcomes/data/policy-outcomes.json"; \
+      "{{static_data_dir}}/policy-outcomes/data/policy-outcomes.json"; \
   fi
-  if [ ! -s "{{gh_pages_dir}}/people/data/xray.json" ]; then \
+  if [ ! -s "{{static_data_dir}}/people/data/xray.json" ]; then \
     if [ ! -s "{{site_app_dir}}/public/people/data/xray.json" ]; then \
       echo "ERROR: missing real people xray artifact; set SITE_PRIME_EXPORT=1" >&2; \
       exit 2; \
     fi; \
     cp -f "{{site_app_dir}}/public/people/data/xray.json" \
-      "{{gh_pages_dir}}/people/data/xray.json"; \
+      "{{static_data_dir}}/people/data/xray.json"; \
   fi
-  if [ ! -s "{{gh_pages_dir}}/legal-sanctions/data/legal-sanctions.json" ]; then \
+  if [ ! -s "{{static_data_dir}}/legal-sanctions/data/legal-sanctions.json" ]; then \
     if [ ! -s "{{site_app_dir}}/public/legal-sanctions/data/legal-sanctions.json" ]; then \
       echo "ERROR: missing real legal sanctions artifact; set SITE_PRIME_EXPORT=1" >&2; \
       exit 2; \
     fi; \
     cp -f "{{site_app_dir}}/public/legal-sanctions/data/legal-sanctions.json" \
-      "{{gh_pages_dir}}/legal-sanctions/data/legal-sanctions.json"; \
+      "{{static_data_dir}}/legal-sanctions/data/legal-sanctions.json"; \
   fi
-  if [ ! -s "{{gh_pages_dir}}/policy-outcomes/data/policy-outcomes.json" ]; then \
+  if [ ! -s "{{static_data_dir}}/policy-outcomes/data/policy-outcomes.json" ]; then \
     if [ ! -s "{{site_app_dir}}/public/policy-outcomes/data/policy-outcomes.json" ]; then \
       echo "ERROR: missing real policy outcomes artifact; set SITE_PRIME_EXPORT=1" >&2; \
       exit 2; \
     fi; \
     cp -f "{{site_app_dir}}/public/policy-outcomes/data/policy-outcomes.json" \
-      "{{gh_pages_dir}}/policy-outcomes/data/policy-outcomes.json"; \
+      "{{static_data_dir}}/policy-outcomes/data/policy-outcomes.json"; \
   fi
   python3 scripts/validate_real_public_json.py \
-    --path "{{gh_pages_dir}}/parliamentary-accountability/data/accountability.json" \
-    --path "{{gh_pages_dir}}/initiative-lifecycle/data/lifecycle.json" \
-    --path "{{gh_pages_dir}}/people/data/xray.json" \
-    --path "{{gh_pages_dir}}/legal-sanctions/data/legal-sanctions.json" \
-    --path "{{gh_pages_dir}}/policy-outcomes/data/policy-outcomes.json"
+    --path "{{static_data_dir}}/parliamentary-accountability/data/accountability.json" \
+    --path "{{static_data_dir}}/initiative-lifecycle/data/lifecycle.json" \
+    --path "{{static_data_dir}}/people/data/xray.json" \
+    --path "{{static_data_dir}}/legal-sanctions/data/legal-sanctions.json" \
+    --path "{{static_data_dir}}/policy-outcomes/data/policy-outcomes.json"
   @just accountability-dossiers-next-prime
   @just responsibility-explainer-next-prime
-  if [ -f "{{gh_pages_dir}}/parliamentary-accountability/data/accountability.json" ]; then \
-    cp -f "{{gh_pages_dir}}/parliamentary-accountability/data/accountability.json" \
+  if [ -f "{{static_data_dir}}/parliamentary-accountability/data/accountability.json" ]; then \
+    cp -f "{{static_data_dir}}/parliamentary-accountability/data/accountability.json" \
       "{{site_app_dir}}/public/parliamentary-accountability/data/accountability.json"; \
   fi
-  if [ -f "{{gh_pages_dir}}/initiative-lifecycle/data/lifecycle.json" ]; then \
-    cp -f "{{gh_pages_dir}}/initiative-lifecycle/data/lifecycle.json" \
+  if [ -f "{{static_data_dir}}/initiative-lifecycle/data/lifecycle.json" ]; then \
+    cp -f "{{static_data_dir}}/initiative-lifecycle/data/lifecycle.json" \
       "{{site_app_dir}}/public/initiative-lifecycle/data/lifecycle.json"; \
   fi
-  if [ -f "{{gh_pages_dir}}/people/data/profiles.json" ]; then \
-    for src in "{{gh_pages_dir}}"/people/data/*.json; do \
+  if [ -f "{{static_data_dir}}/people/data/profiles.json" ]; then \
+    for src in "{{static_data_dir}}"/people/data/*.json; do \
       [ -f "$src" ] || continue; \
       cp -f "$src" "{{site_app_dir}}/public/people/data/"; \
     done; \
   fi
-  if [ -f "{{gh_pages_dir}}/political-positions/data/stances.json" ]; then \
-    cp -f "{{gh_pages_dir}}/political-positions/data/stances.json" \
+  if [ -f "{{static_data_dir}}/political-positions/data/stances.json" ]; then \
+    cp -f "{{static_data_dir}}/political-positions/data/stances.json" \
       "{{site_app_dir}}/public/political-positions/data/stances.json"; \
-    if [ -f "{{gh_pages_dir}}/political-positions/data/person-default-rows.json" ]; then \
-      cp -f "{{gh_pages_dir}}/political-positions/data/person-default-rows.json" \
+    if [ -f "{{static_data_dir}}/political-positions/data/person-default-rows.json" ]; then \
+      cp -f "{{static_data_dir}}/political-positions/data/person-default-rows.json" \
         "{{site_app_dir}}/public/political-positions/data/person-default-rows.json"; \
     fi; \
-    if [ -f "{{gh_pages_dir}}/political-positions/data/person-search-index.json" ]; then \
-      cp -f "{{gh_pages_dir}}/political-positions/data/person-search-index.json" \
+    if [ -f "{{static_data_dir}}/political-positions/data/person-search-index.json" ]; then \
+      cp -f "{{static_data_dir}}/political-positions/data/person-search-index.json" \
         "{{site_app_dir}}/public/political-positions/data/person-search-index.json"; \
     fi; \
-    if [ -f "{{gh_pages_dir}}/political-positions/data/topic-search-index.json" ]; then \
-      cp -f "{{gh_pages_dir}}/political-positions/data/topic-search-index.json" \
+    if [ -f "{{static_data_dir}}/political-positions/data/topic-search-index.json" ]; then \
+      cp -f "{{static_data_dir}}/political-positions/data/topic-search-index.json" \
         "{{site_app_dir}}/public/political-positions/data/topic-search-index.json"; \
     fi; \
-    if [ -d "{{gh_pages_dir}}/political-positions/data/person-sort-previews" ]; then \
+    if [ -d "{{static_data_dir}}/political-positions/data/person-sort-previews" ]; then \
       rm -rf "{{site_app_dir}}/public/political-positions/data/person-sort-previews"; \
-      cp -R "{{gh_pages_dir}}/political-positions/data/person-sort-previews" \
+      cp -R "{{static_data_dir}}/political-positions/data/person-sort-previews" \
         "{{site_app_dir}}/public/political-positions/data/person-sort-previews"; \
     fi; \
-    for src in "{{gh_pages_dir}}"/political-positions/data/*-trajectories.json; do \
+    for src in "{{static_data_dir}}"/political-positions/data/*-trajectories.json; do \
       [ -f "$src" ] || continue; \
       cp -f "$src" "{{site_app_dir}}/public/political-positions/data/"; \
     done; \
-    if [ -d "{{gh_pages_dir}}/political-positions/data/person-trajectory-chunks" ]; then \
+    if [ -d "{{static_data_dir}}/political-positions/data/person-trajectory-chunks" ]; then \
       rm -rf "{{site_app_dir}}/public/political-positions/data/person-trajectory-chunks"; \
-      cp -R "{{gh_pages_dir}}/political-positions/data/person-trajectory-chunks" \
+      cp -R "{{static_data_dir}}/political-positions/data/person-trajectory-chunks" \
         "{{site_app_dir}}/public/political-positions/data/person-trajectory-chunks"; \
     fi; \
-    if [ -d "{{gh_pages_dir}}/political-positions/data/person-details" ]; then \
+    if [ -d "{{static_data_dir}}/political-positions/data/person-details" ]; then \
       rm -rf "{{site_app_dir}}/public/political-positions/data/person-details"; \
-      cp -R "{{gh_pages_dir}}/political-positions/data/person-details" \
+      cp -R "{{static_data_dir}}/political-positions/data/person-details" \
         "{{site_app_dir}}/public/political-positions/data/person-details"; \
     fi; \
-    if [ -d "{{gh_pages_dir}}/political-positions/data/topic-person-rows" ]; then \
+    if [ -d "{{static_data_dir}}/political-positions/data/topic-person-rows" ]; then \
       rm -rf "{{site_app_dir}}/public/political-positions/data/topic-person-rows"; \
-      cp -R "{{gh_pages_dir}}/political-positions/data/topic-person-rows" \
+      cp -R "{{static_data_dir}}/political-positions/data/topic-person-rows" \
         "{{site_app_dir}}/public/political-positions/data/topic-person-rows"; \
     fi; \
   fi
-  if [ -f "{{gh_pages_dir}}/elections-behavior/data/elections-behavior.json" ]; then \
-    cp -f "{{gh_pages_dir}}/elections-behavior/data/elections-behavior.json" \
+  if [ -f "{{static_data_dir}}/elections-behavior/data/elections-behavior.json" ]; then \
+    cp -f "{{static_data_dir}}/elections-behavior/data/elections-behavior.json" \
       "{{site_app_dir}}/public/elections-behavior/data/elections-behavior.json"; \
   fi
-  if [ -f "{{gh_pages_dir}}/legal-sanctions/data/legal-sanctions.json" ]; then \
-    cp -f "{{gh_pages_dir}}/legal-sanctions/data/legal-sanctions.json" \
+  if [ -f "{{static_data_dir}}/legal-sanctions/data/legal-sanctions.json" ]; then \
+    cp -f "{{static_data_dir}}/legal-sanctions/data/legal-sanctions.json" \
       "{{site_app_dir}}/public/legal-sanctions/data/legal-sanctions.json"; \
   fi
-  if [ -f "{{gh_pages_dir}}/policy-outcomes/data/policy-outcomes.json" ]; then \
-    cp -f "{{gh_pages_dir}}/policy-outcomes/data/policy-outcomes.json" \
+  if [ -f "{{static_data_dir}}/policy-outcomes/data/policy-outcomes.json" ]; then \
+    cp -f "{{static_data_dir}}/policy-outcomes/data/policy-outcomes.json" \
       "{{site_app_dir}}/public/policy-outcomes/data/policy-outcomes.json"; \
   fi
-  if [ -d "{{gh_pages_dir}}/legacy" ]; then \
+  if [ -d "{{static_data_dir}}/legacy" ]; then \
     mkdir -p "{{site_app_dir}}/public"; \
-    cp -R "{{gh_pages_dir}}"/legacy "{{site_app_dir}}/public/" || true; \
-    cp -R "{{gh_pages_dir}}"/parliamentary-accountability "{{site_app_dir}}/public/" 2>/dev/null || true; \
+    cp -R "{{static_data_dir}}"/legacy "{{site_app_dir}}/public/" || true; \
+    cp -R "{{static_data_dir}}"/parliamentary-accountability "{{site_app_dir}}/public/" 2>/dev/null || true; \
   fi
   @just vote-explainer-next-prime
   @just evidence-api-v1-export
 
 responsibility-explainer-next-prime:
-  mkdir -p "{{gh_pages_dir}}/responsibility-explainer/data"
+  mkdir -p "{{static_data_dir}}/responsibility-explainer/data"
   mkdir -p "{{site_app_dir}}/public/responsibility-explainer/data"
   set -e; \
   responsibility_explainer_db="{{db_path}}"; \
@@ -4708,41 +4708,41 @@ responsibility-explainer-next-prime:
       --in-dir "{{responsibility_explainer_reviewed_ledger_dir}}"; \
     python3 scripts/export_responsibility_explainer_snapshot.py \
       --db "$responsibility_explainer_db" \
-      --out-dir "{{gh_pages_dir}}/responsibility-explainer/data"; \
-  elif [ ! -s "{{gh_pages_dir}}/responsibility-explainer/data/manifest.json" ]; then \
+      --out-dir "{{static_data_dir}}/responsibility-explainer/data"; \
+  elif [ ! -s "{{static_data_dir}}/responsibility-explainer/data/manifest.json" ]; then \
     if [ ! -s "{{site_app_dir}}/public/responsibility-explainer/data/manifest.json" ]; then \
       echo "ERROR: missing real responsibility explainer artifact; set SITE_PRIME_EXPORT=1" >&2; \
       exit 2; \
     fi; \
     cp -R "{{site_app_dir}}/public/responsibility-explainer/data/." \
-      "{{gh_pages_dir}}/responsibility-explainer/data/"; \
+      "{{static_data_dir}}/responsibility-explainer/data/"; \
   fi
   python3 scripts/validate_real_public_json.py \
-    --path "{{gh_pages_dir}}/responsibility-explainer/data"
-  if [ -f "{{gh_pages_dir}}/responsibility-explainer/data/manifest.json" ]; then \
+    --path "{{static_data_dir}}/responsibility-explainer/data"
+  if [ -f "{{static_data_dir}}/responsibility-explainer/data/manifest.json" ]; then \
     find "{{site_app_dir}}/public/responsibility-explainer/data" -mindepth 1 -maxdepth 1 -type f -name '*.json' -delete; \
-    cp -R "{{gh_pages_dir}}/responsibility-explainer/data/." "{{site_app_dir}}/public/responsibility-explainer/data/"; \
+    cp -R "{{static_data_dir}}/responsibility-explainer/data/." "{{site_app_dir}}/public/responsibility-explainer/data/"; \
   fi
 
 vote-explainer-next-prime:
-  mkdir -p "{{gh_pages_dir}}/explorer-votaciones/data"
-  mkdir -p "{{gh_pages_dir}}/vote-explainer/data"
+  mkdir -p "{{static_data_dir}}/explorer-votaciones/data"
+  mkdir -p "{{static_data_dir}}/vote-explainer/data"
   mkdir -p "{{site_app_dir}}/public/vote-explainer/data"
   python3 scripts/export_explorer_votaciones_snapshot.py \
     --db "{{db_path}}" \
     --limit {{vote_explainer_limit}} \
-    --out "{{gh_pages_dir}}/explorer-votaciones/data/votes-preview.json"
+    --out "{{static_data_dir}}/explorer-votaciones/data/votes-preview.json"
   set -e; \
   tmp_vote_dir=$(mktemp -d); \
   cleanup() { rm -rf "$tmp_vote_dir"; }; \
   trap cleanup EXIT; \
   python3 scripts/export_vote_explainer_snapshot.py \
-    --source-json "{{gh_pages_dir}}/explorer-votaciones/data/votes-preview.json" \
+    --source-json "{{static_data_dir}}/explorer-votaciones/data/votes-preview.json" \
     --out-dir "$tmp_vote_dir" \
     --snapshot-as-of-date "{{snapshot_date}}"; \
   VOTE_EXPLAINER_ALLOW_EMPTY="{{vote_explainer_allow_empty}}" python3 -c 'import json, os, pathlib, sys; manifest=pathlib.Path("'"$tmp_vote_dir"'")/"manifest.json"; votes=len(json.loads(manifest.read_text()).get("votes", [])); print(f"vote explainer manifest votes={votes}"); sys.exit(0 if votes or os.environ.get("VOTE_EXPLAINER_ALLOW_EMPTY") == "1" else 1)'; \
-  find "{{gh_pages_dir}}/vote-explainer/data" -mindepth 1 -maxdepth 1 -type f -name '*.json' -delete; \
-  cp -R "$tmp_vote_dir/." "{{gh_pages_dir}}/vote-explainer/data/"; \
+  find "{{static_data_dir}}/vote-explainer/data" -mindepth 1 -maxdepth 1 -type f -name '*.json' -delete; \
+  cp -R "$tmp_vote_dir/." "{{static_data_dir}}/vote-explainer/data/"; \
   find "{{site_app_dir}}/public/vote-explainer/data" -mindepth 1 -maxdepth 1 -type f -name '*.json' -delete; \
   cp -R "$tmp_vote_dir/." "{{site_app_dir}}/public/vote-explainer/data/"
 
@@ -5596,42 +5596,39 @@ cloudflare-pages-size-check:
   fi; \
   echo "OK Cloudflare Pages file size budget: no files over {{cloudflare_pages_max_file_bytes}} bytes"
 
-explorer-gh-pages-build:
-  @echo "DEPRECATED: explorer-gh-pages-build está desactivado como flujo de publicación. Usa just cloudflare-pages-build."
-  @just cloudflare-pages-build
 
 cloudflare-pages-refresh-data:
-  rm -rf {{gh_pages_dir}}/_next {{gh_pages_dir}}/legacy {{gh_pages_dir}}/explorer {{gh_pages_dir}}/graph {{gh_pages_dir}}/explorer-politico {{gh_pages_dir}}/explorer-temas {{gh_pages_dir}}/explorer-votaciones {{gh_pages_dir}}/explorer-sources {{gh_pages_dir}}/obstruction-tracker {{gh_pages_dir}}/vote-explainer {{gh_pages_dir}}/responsibility-explainer {{gh_pages_dir}}/citizen {{gh_pages_dir}}/parliamentary-accountability {{gh_pages_dir}}/accountability-dossiers {{gh_pages_dir}}/initiative-lifecycle {{gh_pages_dir}}/political-positions {{gh_pages_dir}}/elections-behavior {{gh_pages_dir}}/elecciones {{gh_pages_dir}}/calendario-electoral {{gh_pages_dir}}/people {{gh_pages_dir}}/legal-sanctions {{gh_pages_dir}}/policy-outcomes {{gh_pages_dir}}/geopolitics {{gh_pages_dir}}/indicators {{gh_pages_dir}}/actor-graph {{gh_pages_dir}}/index.html {{gh_pages_dir}}/404.html
+  rm -rf {{static_data_dir}}/_next {{static_data_dir}}/legacy {{static_data_dir}}/explorer {{static_data_dir}}/graph {{static_data_dir}}/explorer-politico {{static_data_dir}}/explorer-temas {{static_data_dir}}/explorer-votaciones {{static_data_dir}}/explorer-sources {{static_data_dir}}/obstruction-tracker {{static_data_dir}}/vote-explainer {{static_data_dir}}/responsibility-explainer {{static_data_dir}}/citizen {{static_data_dir}}/parliamentary-accountability {{static_data_dir}}/accountability-dossiers {{static_data_dir}}/initiative-lifecycle {{static_data_dir}}/political-positions {{static_data_dir}}/elections-behavior {{static_data_dir}}/elecciones {{static_data_dir}}/calendario-electoral {{static_data_dir}}/people {{static_data_dir}}/legal-sanctions {{static_data_dir}}/policy-outcomes {{static_data_dir}}/geopolitics {{static_data_dir}}/indicators {{static_data_dir}}/actor-graph {{static_data_dir}}/index.html {{static_data_dir}}/404.html
   mkdir -p \
-    {{gh_pages_dir}}/citizen {{gh_pages_dir}}/citizen/data \
-    {{gh_pages_dir}}/graph {{gh_pages_dir}}/graph/data \
-    {{gh_pages_dir}}/explorer-politico {{gh_pages_dir}}/explorer-politico/data \
-    {{gh_pages_dir}}/explorer-sources {{gh_pages_dir}}/explorer-sources/data \
-    {{gh_pages_dir}}/obstruction-tracker {{gh_pages_dir}}/obstruction-tracker/data {{gh_pages_dir}}/obstruction-tracker/evidence \
-    {{gh_pages_dir}}/explorer-temas {{gh_pages_dir}}/explorer-temas/data \
-    {{gh_pages_dir}}/explorer-votaciones {{gh_pages_dir}}/explorer-votaciones/data \
-    {{gh_pages_dir}}/vote-explainer {{gh_pages_dir}}/vote-explainer/data \
-    {{gh_pages_dir}}/responsibility-explainer {{gh_pages_dir}}/responsibility-explainer/data \
-    {{gh_pages_dir}}/parliamentary-accountability {{gh_pages_dir}}/parliamentary-accountability/data \
-    {{gh_pages_dir}}/accountability-dossiers {{gh_pages_dir}}/accountability-dossiers/data \
-    {{gh_pages_dir}}/initiative-lifecycle {{gh_pages_dir}}/initiative-lifecycle/data \
-    {{gh_pages_dir}}/political-positions {{gh_pages_dir}}/political-positions/data \
-    {{gh_pages_dir}}/elections-behavior {{gh_pages_dir}}/elections-behavior/data \
-    {{gh_pages_dir}}/elecciones {{gh_pages_dir}}/elecciones/andalucia-2026 {{gh_pages_dir}}/elecciones/andalucia-2026/data \
-    {{gh_pages_dir}}/calendario-electoral {{gh_pages_dir}}/calendario-electoral/data \
-    {{gh_pages_dir}}/people {{gh_pages_dir}}/people/data \
-    {{gh_pages_dir}}/legal-sanctions {{gh_pages_dir}}/legal-sanctions/data \
-    {{gh_pages_dir}}/policy-outcomes {{gh_pages_dir}}/policy-outcomes/data \
-    {{gh_pages_dir}}/geopolitics {{gh_pages_dir}}/geopolitics/data \
-    {{gh_pages_dir}}/indicators {{gh_pages_dir}}/indicators/data \
-    {{gh_pages_dir}}/actor-graph {{gh_pages_dir}}/actor-graph/data \
-    {{gh_pages_dir}}/legacy {{gh_pages_dir}}/legacy/citizen {{gh_pages_dir}}/legacy/citizen/data \
-    {{gh_pages_dir}}/legacy/graph {{gh_pages_dir}}/legacy/graph/data \
-    {{gh_pages_dir}}/legacy/explorer {{gh_pages_dir}}/legacy/explorer/data \
-    {{gh_pages_dir}}/legacy/explorer-sources {{gh_pages_dir}}/legacy/explorer-sources/data \
-    {{gh_pages_dir}}/legacy/explorer-temas {{gh_pages_dir}}/legacy/explorer-temas/data \
-    {{gh_pages_dir}}/legacy/explorer-votaciones {{gh_pages_dir}}/legacy/explorer-votaciones/data \
-    {{gh_pages_dir}}/legacy/explorer-politico {{gh_pages_dir}}/legacy/explorer-politico/data
+    {{static_data_dir}}/citizen {{static_data_dir}}/citizen/data \
+    {{static_data_dir}}/graph {{static_data_dir}}/graph/data \
+    {{static_data_dir}}/explorer-politico {{static_data_dir}}/explorer-politico/data \
+    {{static_data_dir}}/explorer-sources {{static_data_dir}}/explorer-sources/data \
+    {{static_data_dir}}/obstruction-tracker {{static_data_dir}}/obstruction-tracker/data {{static_data_dir}}/obstruction-tracker/evidence \
+    {{static_data_dir}}/explorer-temas {{static_data_dir}}/explorer-temas/data \
+    {{static_data_dir}}/explorer-votaciones {{static_data_dir}}/explorer-votaciones/data \
+    {{static_data_dir}}/vote-explainer {{static_data_dir}}/vote-explainer/data \
+    {{static_data_dir}}/responsibility-explainer {{static_data_dir}}/responsibility-explainer/data \
+    {{static_data_dir}}/parliamentary-accountability {{static_data_dir}}/parliamentary-accountability/data \
+    {{static_data_dir}}/accountability-dossiers {{static_data_dir}}/accountability-dossiers/data \
+    {{static_data_dir}}/initiative-lifecycle {{static_data_dir}}/initiative-lifecycle/data \
+    {{static_data_dir}}/political-positions {{static_data_dir}}/political-positions/data \
+    {{static_data_dir}}/elections-behavior {{static_data_dir}}/elections-behavior/data \
+    {{static_data_dir}}/elecciones {{static_data_dir}}/elecciones/andalucia-2026 {{static_data_dir}}/elecciones/andalucia-2026/data \
+    {{static_data_dir}}/calendario-electoral {{static_data_dir}}/calendario-electoral/data \
+    {{static_data_dir}}/people {{static_data_dir}}/people/data \
+    {{static_data_dir}}/legal-sanctions {{static_data_dir}}/legal-sanctions/data \
+    {{static_data_dir}}/policy-outcomes {{static_data_dir}}/policy-outcomes/data \
+    {{static_data_dir}}/geopolitics {{static_data_dir}}/geopolitics/data \
+    {{static_data_dir}}/indicators {{static_data_dir}}/indicators/data \
+    {{static_data_dir}}/actor-graph {{static_data_dir}}/actor-graph/data \
+    {{static_data_dir}}/legacy {{static_data_dir}}/legacy/citizen {{static_data_dir}}/legacy/citizen/data \
+    {{static_data_dir}}/legacy/graph {{static_data_dir}}/legacy/graph/data \
+    {{static_data_dir}}/legacy/explorer {{static_data_dir}}/legacy/explorer/data \
+    {{static_data_dir}}/legacy/explorer-sources {{static_data_dir}}/legacy/explorer-sources/data \
+    {{static_data_dir}}/legacy/explorer-temas {{static_data_dir}}/legacy/explorer-temas/data \
+    {{static_data_dir}}/legacy/explorer-votaciones {{static_data_dir}}/legacy/explorer-votaciones/data \
+    {{static_data_dir}}/legacy/explorer-politico {{static_data_dir}}/legacy/explorer-politico/data
   python3 scripts/build_citizen_tailwind_md3_css.py --tokens "{{citizen_tailwind_md3_tokens}}" --out "{{citizen_tailwind_md3_css}}"
   @just manifesto-promises-export
   @just placsp-spending-export
@@ -5652,33 +5649,33 @@ cloudflare-pages-refresh-data:
   python3 scripts/check_next_export_notfound_payloads.py --path "{{site_out_dir}}"
   @just outcome-context-built-check
   just cloudflare-pages-size-check
-  cp -R "{{site_out_dir}}"/. "{{gh_pages_dir}}"/
-  touch "{{gh_pages_dir}}/.nojekyll"
-  cp -R ui/citizen/. {{gh_pages_dir}}/legacy/citizen/
-  cp ui/graph/index.html {{gh_pages_dir}}/legacy/graph/index.html
-  cp ui/graph/explorer.html {{gh_pages_dir}}/legacy/explorer/index.html
-  cp ui/graph/explorer-sources.html {{gh_pages_dir}}/legacy/explorer-sources/index.html
-  cp ui/graph/explorer-temas.html {{gh_pages_dir}}/legacy/explorer-temas/index.html
-  cp ui/graph/explorer-votaciones.html {{gh_pages_dir}}/legacy/explorer-votaciones/index.html
-  cp ui/graph/explorer-sports.html {{gh_pages_dir}}/legacy/explorer-politico/index.html
-  cp ui/site/public/legacy/index.html {{gh_pages_dir}}/legacy/index.html
-  cp ui/citizen/tailwind_md3.tokens.json {{gh_pages_dir}}/citizen/data/tailwind_md3.tokens.json
-  cp ui/citizen/concerns_v1.json {{gh_pages_dir}}/citizen/data/concerns_v1.json
+  cp -R "{{site_out_dir}}"/. "{{static_data_dir}}"/
+  touch "{{static_data_dir}}/.nojekyll"
+  cp -R ui/citizen/. {{static_data_dir}}/legacy/citizen/
+  cp ui/graph/index.html {{static_data_dir}}/legacy/graph/index.html
+  cp ui/graph/explorer.html {{static_data_dir}}/legacy/explorer/index.html
+  cp ui/graph/explorer-sources.html {{static_data_dir}}/legacy/explorer-sources/index.html
+  cp ui/graph/explorer-temas.html {{static_data_dir}}/legacy/explorer-temas/index.html
+  cp ui/graph/explorer-votaciones.html {{static_data_dir}}/legacy/explorer-votaciones/index.html
+  cp ui/graph/explorer-sports.html {{static_data_dir}}/legacy/explorer-politico/index.html
+  cp ui/site/public/legacy/index.html {{static_data_dir}}/legacy/index.html
+  cp ui/citizen/tailwind_md3.tokens.json {{static_data_dir}}/citizen/data/tailwind_md3.tokens.json
+  cp ui/citizen/concerns_v1.json {{static_data_dir}}/citizen/data/concerns_v1.json
   python3 scripts/validate_citizen_concerns.py \
-    --path "{{gh_pages_dir}}/citizen/data/concerns_v1.json"
+    --path "{{static_data_dir}}/citizen/data/concerns_v1.json"
   python3 scripts/export_explorer_sports_snapshot.py \
     --db "{{db_path}}" \
     --snapshot-date {{snapshot_date}} \
-    --out-dir "{{gh_pages_dir}}/explorer-politico/data"
+    --out-dir "{{static_data_dir}}/explorer-politico/data"
   python3 scripts/export_graph_snapshot.py \
     --db "{{db_path}}" \
     --limit 350 \
     --include-inactive \
-    --out "{{gh_pages_dir}}/graph/data/graph.json"
+    --out "{{static_data_dir}}/graph/data/graph.json"
   python3 scripts/export_explorer_votaciones_snapshot.py \
     --db "{{db_path}}" \
     --limit 200 \
-    --out "{{gh_pages_dir}}/explorer-votaciones/data/votes-preview.json"
+    --out "{{static_data_dir}}/explorer-votaciones/data/votes-preview.json"
   accountability_db="{{db_path}}"; \
   if [ -n "{{parliamentary_accountability_db_path}}" ]; then \
     accountability_db="{{parliamentary_accountability_db_path}}"; \
@@ -5690,94 +5687,94 @@ cloudflare-pages-refresh-data:
   python3 scripts/export_parliamentary_accountability_snapshot.py \
     --db "$accountability_db" \
     $extra_accountability_args \
-    --out "{{gh_pages_dir}}/parliamentary-accountability/data/accountability.json" \
+    --out "{{static_data_dir}}/parliamentary-accountability/data/accountability.json" \
     --max-rows-events 700 \
     --min-shared-events 12 \
     --min-events-per-party 12 \
     --min-events-topic-pairs 8
   python3 scripts/export_initiative_lifecycle_snapshot.py \
     --db "{{db_path}}" \
-    --out "{{gh_pages_dir}}/initiative-lifecycle/data/lifecycle.json" \
+    --out "{{static_data_dir}}/initiative-lifecycle/data/lifecycle.json" \
     --min-committee-sample 6
   python3 scripts/export_political_positions_snapshot.py \
     --db "{{db_path}}" \
-    --out "{{gh_pages_dir}}/political-positions/data/stances.json" \
+    --out "{{static_data_dir}}/political-positions/data/stances.json" \
     --topic-set-id 1 \
     --snapshot-date "{{snapshot_date}}"
   python3 scripts/export_elections_behavior_snapshot.py \
     --db "{{db_path}}" \
-    --out "{{gh_pages_dir}}/elections-behavior/data/elections-behavior.json" \
+    --out "{{static_data_dir}}/elections-behavior/data/elections-behavior.json" \
     --window-days 365 \
     --min-directional-votes 18
   python3 scripts/export_andalucia_2026_accountability_snapshot.py \
     --db "{{db_path}}" \
-    --out "{{gh_pages_dir}}/elecciones/andalucia-2026/data/accountability.json" \
+    --out "{{static_data_dir}}/elecciones/andalucia-2026/data/accountability.json" \
     --published-out "etl/data/published/andalucia-2026-accountability.json" \
     --timeout "{{infoelectoral_timeout}}" \
     --refresh-outcome-series
   python3 scripts/run_andalucia_2026_delivery_evidence_hunts.py \
-    --snapshot "{{gh_pages_dir}}/elecciones/andalucia-2026/data/accountability.json" \
+    --snapshot "{{static_data_dir}}/elecciones/andalucia-2026/data/accountability.json" \
     --out "etl/data/published/andalucia-2026-delivery-evidence-hunt-results.json" \
-    --public-out "{{gh_pages_dir}}/elecciones/andalucia-2026/data/delivery-evidence-hunt-results.json" \
+    --public-out "{{static_data_dir}}/elecciones/andalucia-2026/data/delivery-evidence-hunt-results.json" \
     --max-targets "{{andalucia_delivery_hunt_max_targets}}" \
     --rows-per-query "{{andalucia_delivery_hunt_rows_per_query}}" \
     --timeout "{{andalucia_delivery_hunt_timeout}}"
   python3 scripts/generate_andalucia_2026_delivery_review_drafts.py \
     --hunt-results "etl/data/published/andalucia-2026-delivery-evidence-hunt-results.json" \
     --out "etl/data/published/andalucia-2026-delivery-evidence-review-drafts.json" \
-    --public-out "{{gh_pages_dir}}/elecciones/andalucia-2026/data/delivery-evidence-review-drafts.json"
+    --public-out "{{static_data_dir}}/elecciones/andalucia-2026/data/delivery-evidence-review-drafts.json"
   python3 scripts/generar_proximas_elecciones_espana.py \
     --today "{{snapshot_date}}" \
     --timeout "{{infoelectoral_timeout}}" \
     --json-out "etl/data/published/proximas-elecciones-espana.json" \
-    --public-json-out "{{gh_pages_dir}}/calendario-electoral/data/election-calendar.json"
+    --public-json-out "{{static_data_dir}}/calendario-electoral/data/election-calendar.json"
   python3 scripts/export_legal_sanctions_snapshot.py \
     --db "{{db_path}}" \
-    --out "{{gh_pages_dir}}/legal-sanctions/data/legal-sanctions.json"
+    --out "{{static_data_dir}}/legal-sanctions/data/legal-sanctions.json"
   just outcome-context-export
   cp -f "{{outcome_context_public_status_out}}" \
-    "{{gh_pages_dir}}/policy-outcomes/data/policy-outcomes.json"
-  set -e; if [ "{{gh_pages_reuse_people_exports}}" = "1" ] && \
-    python3 scripts/check_static_snapshot_date.py --path "{{gh_pages_dir}}/people/data/profiles.json" --snapshot-date "{{snapshot_date}}" >/dev/null 2>&1 && \
-    python3 scripts/check_static_snapshot_date.py --path "{{gh_pages_dir}}/people/data/xray.json" --snapshot-date "{{snapshot_date}}" >/dev/null 2>&1; then \
+    "{{static_data_dir}}/policy-outcomes/data/policy-outcomes.json"
+  set -e; if [ "{{site_reuse_people_exports}}" = "1" ] && \
+    python3 scripts/check_static_snapshot_date.py --path "{{static_data_dir}}/people/data/profiles.json" --snapshot-date "{{snapshot_date}}" >/dev/null 2>&1 && \
+    python3 scripts/check_static_snapshot_date.py --path "{{static_data_dir}}/people/data/xray.json" --snapshot-date "{{snapshot_date}}" >/dev/null 2>&1; then \
     echo "Reusing existing people exports for snapshot {{snapshot_date}}"; \
   else \
     python3 scripts/export_people_profiles_snapshot.py \
       --db "{{db_path}}" \
-      --out "{{gh_pages_dir}}/people/data/profiles.json" \
+      --out "{{static_data_dir}}/people/data/profiles.json" \
       --snapshot-date {{snapshot_date}}; \
     python3 scripts/export_people_xray_snapshot.py \
       --db "{{db_path}}" \
-      --out "{{gh_pages_dir}}/people/data/xray.json" \
+      --out "{{static_data_dir}}/people/data/xray.json" \
       --snapshot-date {{snapshot_date}}; \
   fi
   python3 scripts/export_explorer_sources_snapshot.py \
     --db "{{db_path}}" \
-    --out "{{gh_pages_dir}}/explorer-sources/data/status.json"
+    --out "{{static_data_dir}}/explorer-sources/data/status.json"
   python3 scripts/export_obstruction_tracker_snapshot.py \
-    --status-json "{{gh_pages_dir}}/explorer-sources/data/status.json" \
+    --status-json "{{static_data_dir}}/explorer-sources/data/status.json" \
     --readiness-json "{{obstruction_tracker_readiness_json}}" \
-    --evidence-dir "{{gh_pages_dir}}/obstruction-tracker/evidence" \
-    --out "{{gh_pages_dir}}/obstruction-tracker/data/obstructions.json"
+    --evidence-dir "{{static_data_dir}}/obstruction-tracker/evidence" \
+    --out "{{static_data_dir}}/obstruction-tracker/data/obstructions.json"
   python3 scripts/validate_obstruction_tracker_snapshot.py \
-    --path "{{gh_pages_dir}}/obstruction-tracker/data/obstructions.json" \
-    --evidence-root "{{gh_pages_dir}}/obstruction-tracker/evidence" \
+    --path "{{static_data_dir}}/obstruction-tracker/data/obstructions.json" \
+    --evidence-root "{{static_data_dir}}/obstruction-tracker/evidence" \
     --max-bytes "{{obstruction_tracker_max_bytes}}"
   python3 scripts/export_source_catalog_snapshot.py \
     --db "{{db_path}}" \
     --snapshot-date "{{snapshot_date}}" \
-    --out "{{gh_pages_dir}}/explorer-sources/data/catalog.json" \
+    --out "{{static_data_dir}}/explorer-sources/data/catalog.json" \
     --published-out "etl/data/published/source-catalog-{{snapshot_date}}.json" \
     --latest-out "etl/data/published/source-catalog-latest.json"
   python3 scripts/export_source_scrape_queue_snapshot.py \
     --db "{{db_path}}" \
     --snapshot-date "{{snapshot_date}}" \
-    --out "{{gh_pages_dir}}/explorer-sources/data/scrape-queue.json" \
+    --out "{{static_data_dir}}/explorer-sources/data/scrape-queue.json" \
     --published-out "etl/data/published/source-scrape-queue-{{snapshot_date}}.json" \
     --latest-out "etl/data/published/source-scrape-queue-latest.json"
   python3 scripts/export_explorer_temas_snapshot.py \
     --db "{{db_path}}" \
-    --out "{{gh_pages_dir}}/explorer-temas/data/temas-preview.json"
+    --out "{{static_data_dir}}/explorer-temas/data/temas-preview.json"
   set -e; \
   citizen_db="{{db_path}}"; \
   if [ -n "{{citizen_db_path}}" ]; then \
@@ -5793,66 +5790,66 @@ cloudflare-pages-refresh-data:
   git show HEAD:ui/site/public/citizen/data/citizen_declared.json > "$citizen_fallback_declared" 2>/dev/null || true; \
   python3 scripts/export_citizen_snapshot.py \
     --db "$citizen_db" \
-    --out "{{gh_pages_dir}}/citizen/data/citizen.json" \
+    --out "{{static_data_dir}}/citizen/data/citizen.json" \
     --topic-set-id 1 \
     --computed-method auto \
     --fallback-snapshot "$citizen_fallback_auto" \
     --max-bytes 5000000; \
   python3 scripts/export_citizen_snapshot.py \
     --db "$citizen_db" \
-    --out "{{gh_pages_dir}}/citizen/data/citizen_votes.json" \
+    --out "{{static_data_dir}}/citizen/data/citizen_votes.json" \
     --topic-set-id 1 \
     --computed-method votes \
     --fallback-snapshot "$citizen_fallback_votes" \
     --max-bytes 5000000; \
   python3 scripts/export_citizen_snapshot.py \
     --db "$citizen_db" \
-    --out "{{gh_pages_dir}}/citizen/data/citizen_declared.json" \
+    --out "{{static_data_dir}}/citizen/data/citizen_declared.json" \
     --topic-set-id 1 \
     --computed-method declared \
     --fallback-snapshot "$citizen_fallback_declared" \
     --max-bytes 5000000
-  cp -R "{{gh_pages_dir}}/citizen/data/." "{{gh_pages_dir}}/legacy/citizen/data/"
-  cp -R "{{gh_pages_dir}}/graph/data/." "{{gh_pages_dir}}/legacy/graph/data/"
-  cp -R "{{gh_pages_dir}}/explorer-temas/data/." "{{gh_pages_dir}}/legacy/graph/data/"
-  cp -R "{{gh_pages_dir}}/explorer-votaciones/data/." "{{gh_pages_dir}}/legacy/graph/data/"
-  cp -R "{{gh_pages_dir}}/explorer-sources/data/." "{{gh_pages_dir}}/legacy/graph/data/"
-  cp -R "{{gh_pages_dir}}/explorer-politico/data/." "{{gh_pages_dir}}/legacy/graph/data/"
-  cp -R "{{gh_pages_dir}}/explorer-temas/data/." "{{gh_pages_dir}}/legacy/explorer-temas/data/"
-  cp -R "{{gh_pages_dir}}/explorer-votaciones/data/." "{{gh_pages_dir}}/legacy/explorer-votaciones/data/"
-  cp -R "{{gh_pages_dir}}/explorer-sources/data/." "{{gh_pages_dir}}/legacy/explorer-sources/data/"
-  cp -R "{{gh_pages_dir}}/explorer-politico/data/." "{{gh_pages_dir}}/legacy/explorer-politico/data/"
+  cp -R "{{static_data_dir}}/citizen/data/." "{{static_data_dir}}/legacy/citizen/data/"
+  cp -R "{{static_data_dir}}/graph/data/." "{{static_data_dir}}/legacy/graph/data/"
+  cp -R "{{static_data_dir}}/explorer-temas/data/." "{{static_data_dir}}/legacy/graph/data/"
+  cp -R "{{static_data_dir}}/explorer-votaciones/data/." "{{static_data_dir}}/legacy/graph/data/"
+  cp -R "{{static_data_dir}}/explorer-sources/data/." "{{static_data_dir}}/legacy/graph/data/"
+  cp -R "{{static_data_dir}}/explorer-politico/data/." "{{static_data_dir}}/legacy/graph/data/"
+  cp -R "{{static_data_dir}}/explorer-temas/data/." "{{static_data_dir}}/legacy/explorer-temas/data/"
+  cp -R "{{static_data_dir}}/explorer-votaciones/data/." "{{static_data_dir}}/legacy/explorer-votaciones/data/"
+  cp -R "{{static_data_dir}}/explorer-sources/data/." "{{static_data_dir}}/legacy/explorer-sources/data/"
+  cp -R "{{static_data_dir}}/explorer-politico/data/." "{{static_data_dir}}/legacy/explorer-politico/data/"
   python3 scripts/validate_citizen_snapshot.py \
-    --path "{{gh_pages_dir}}/citizen/data/citizen.json" \
+    --path "{{static_data_dir}}/citizen/data/citizen.json" \
     --max-bytes 5000000 \
     --strict-grid
   python3 scripts/validate_citizen_snapshot.py \
-    --path "{{gh_pages_dir}}/citizen/data/citizen_votes.json" \
+    --path "{{static_data_dir}}/citizen/data/citizen_votes.json" \
     --max-bytes 5000000 \
     --strict-grid
   python3 scripts/validate_citizen_snapshot.py \
-    --path "{{gh_pages_dir}}/citizen/data/citizen_declared.json" \
+    --path "{{static_data_dir}}/citizen/data/citizen_declared.json" \
     --max-bytes 5000000 \
     --strict-grid
   python3 scripts/report_citizen_concern_pack_quality.py \
-    --snapshot "{{gh_pages_dir}}/citizen/data/citizen.json" \
-    --concerns-config "{{gh_pages_dir}}/citizen/data/concerns_v1.json" \
-    --out "{{gh_pages_dir}}/citizen/data/concern_pack_quality.json"
+    --snapshot "{{static_data_dir}}/citizen/data/citizen.json" \
+    --concerns-config "{{static_data_dir}}/citizen/data/concerns_v1.json" \
+    --out "{{static_data_dir}}/citizen/data/concern_pack_quality.json"
   python3 scripts/report_citizen_concern_pack_quality.py \
-    --snapshot "{{gh_pages_dir}}/citizen/data/citizen_votes.json" \
-    --concerns-config "{{gh_pages_dir}}/citizen/data/concerns_v1.json" \
-    --out "{{gh_pages_dir}}/citizen/data/concern_pack_quality_votes.json"
+    --snapshot "{{static_data_dir}}/citizen/data/citizen_votes.json" \
+    --concerns-config "{{static_data_dir}}/citizen/data/concerns_v1.json" \
+    --out "{{static_data_dir}}/citizen/data/concern_pack_quality_votes.json"
   python3 scripts/report_citizen_concern_pack_quality.py \
-    --snapshot "{{gh_pages_dir}}/citizen/data/citizen_declared.json" \
-    --concerns-config "{{gh_pages_dir}}/citizen/data/concerns_v1.json" \
-    --out "{{gh_pages_dir}}/citizen/data/concern_pack_quality_declared.json"
-  cp "{{gh_pages_dir}}/citizen/data/concern_pack_quality.json" "{{gh_pages_dir}}/legacy/citizen/data/concern_pack_quality.json"
+    --snapshot "{{static_data_dir}}/citizen/data/citizen_declared.json" \
+    --concerns-config "{{static_data_dir}}/citizen/data/concerns_v1.json" \
+    --out "{{static_data_dir}}/citizen/data/concern_pack_quality_declared.json"
+  cp "{{static_data_dir}}/citizen/data/concern_pack_quality.json" "{{static_data_dir}}/legacy/citizen/data/concern_pack_quality.json"
   mkdir -p "{{site_app_dir}}/public/legacy/citizen" "{{site_app_dir}}/public/legacy/citizen/data"
   cp -R ui/citizen/. "{{site_app_dir}}/public/legacy/citizen/"
-  cp -R "{{gh_pages_dir}}/citizen/data/." "{{site_app_dir}}/public/legacy/citizen/data/"
+  cp -R "{{static_data_dir}}/citizen/data/." "{{site_app_dir}}/public/legacy/citizen/data/"
   mkdir -p "{{site_app_dir}}/public/legacy/graph" "{{site_app_dir}}/public/legacy/graph/data"
   cp ui/graph/index.html "{{site_app_dir}}/public/legacy/graph/index.html"
-  cp -R "{{gh_pages_dir}}/legacy/graph/data/." "{{site_app_dir}}/public/legacy/graph/data/"
+  cp -R "{{static_data_dir}}/legacy/graph/data/." "{{site_app_dir}}/public/legacy/graph/data/"
   mkdir -p \
     "{{site_app_dir}}/public/legacy/explorer" "{{site_app_dir}}/public/legacy/explorer/data" \
     "{{site_app_dir}}/public/legacy/explorer-sources" "{{site_app_dir}}/public/legacy/explorer-sources/data" \
@@ -5864,59 +5861,59 @@ cloudflare-pages-refresh-data:
   cp ui/graph/explorer-temas.html "{{site_app_dir}}/public/legacy/explorer-temas/index.html"
   cp ui/graph/explorer-votaciones.html "{{site_app_dir}}/public/legacy/explorer-votaciones/index.html"
   cp ui/graph/explorer-sports.html "{{site_app_dir}}/public/legacy/explorer-politico/index.html"
-  cp -R "{{gh_pages_dir}}/explorer-temas/data/." "{{site_app_dir}}/public/legacy/explorer-temas/data/"
-  cp -R "{{gh_pages_dir}}/explorer-votaciones/data/." "{{site_app_dir}}/public/legacy/explorer-votaciones/data/"
-  cp -R "{{gh_pages_dir}}/explorer-sources/data/." "{{site_app_dir}}/public/legacy/explorer-sources/data/"
-  cp -R "{{gh_pages_dir}}/explorer-politico/data/." "{{site_app_dir}}/public/legacy/explorer-politico/data/"
+  cp -R "{{static_data_dir}}/explorer-temas/data/." "{{site_app_dir}}/public/legacy/explorer-temas/data/"
+  cp -R "{{static_data_dir}}/explorer-votaciones/data/." "{{site_app_dir}}/public/legacy/explorer-votaciones/data/"
+  cp -R "{{static_data_dir}}/explorer-sources/data/." "{{site_app_dir}}/public/legacy/explorer-sources/data/"
+  cp -R "{{static_data_dir}}/explorer-politico/data/." "{{site_app_dir}}/public/legacy/explorer-politico/data/"
   mkdir -p "{{site_app_dir}}/public/legal-sanctions/data"
-  cp -f "{{gh_pages_dir}}/legal-sanctions/data/legal-sanctions.json" "{{site_app_dir}}/public/legal-sanctions/data/legal-sanctions.json"
-  cp -f "{{gh_pages_dir}}/parliamentary-accountability/data/accountability.json" "{{site_app_dir}}/public/parliamentary-accountability/data/accountability.json"
-  cp -f "{{gh_pages_dir}}/initiative-lifecycle/data/lifecycle.json" "{{site_app_dir}}/public/initiative-lifecycle/data/lifecycle.json"
-  cp -f "{{gh_pages_dir}}/political-positions/data/stances.json" "{{site_app_dir}}/public/political-positions/data/stances.json"
-  if [ -f "{{gh_pages_dir}}/political-positions/data/person-default-rows.json" ]; then \
-    cp -f "{{gh_pages_dir}}/political-positions/data/person-default-rows.json" "{{site_app_dir}}/public/political-positions/data/person-default-rows.json"; \
+  cp -f "{{static_data_dir}}/legal-sanctions/data/legal-sanctions.json" "{{site_app_dir}}/public/legal-sanctions/data/legal-sanctions.json"
+  cp -f "{{static_data_dir}}/parliamentary-accountability/data/accountability.json" "{{site_app_dir}}/public/parliamentary-accountability/data/accountability.json"
+  cp -f "{{static_data_dir}}/initiative-lifecycle/data/lifecycle.json" "{{site_app_dir}}/public/initiative-lifecycle/data/lifecycle.json"
+  cp -f "{{static_data_dir}}/political-positions/data/stances.json" "{{site_app_dir}}/public/political-positions/data/stances.json"
+  if [ -f "{{static_data_dir}}/political-positions/data/person-default-rows.json" ]; then \
+    cp -f "{{static_data_dir}}/political-positions/data/person-default-rows.json" "{{site_app_dir}}/public/political-positions/data/person-default-rows.json"; \
   fi
-  if [ -f "{{gh_pages_dir}}/political-positions/data/person-search-index.json" ]; then \
-    cp -f "{{gh_pages_dir}}/political-positions/data/person-search-index.json" "{{site_app_dir}}/public/political-positions/data/person-search-index.json"; \
+  if [ -f "{{static_data_dir}}/political-positions/data/person-search-index.json" ]; then \
+    cp -f "{{static_data_dir}}/political-positions/data/person-search-index.json" "{{site_app_dir}}/public/political-positions/data/person-search-index.json"; \
   fi
-  if [ -f "{{gh_pages_dir}}/political-positions/data/topic-search-index.json" ]; then \
-    cp -f "{{gh_pages_dir}}/political-positions/data/topic-search-index.json" "{{site_app_dir}}/public/political-positions/data/topic-search-index.json"; \
+  if [ -f "{{static_data_dir}}/political-positions/data/topic-search-index.json" ]; then \
+    cp -f "{{static_data_dir}}/political-positions/data/topic-search-index.json" "{{site_app_dir}}/public/political-positions/data/topic-search-index.json"; \
   fi
-  if [ -d "{{gh_pages_dir}}/political-positions/data/person-sort-previews" ]; then \
+  if [ -d "{{static_data_dir}}/political-positions/data/person-sort-previews" ]; then \
     rm -rf "{{site_app_dir}}/public/political-positions/data/person-sort-previews"; \
-    cp -R "{{gh_pages_dir}}/political-positions/data/person-sort-previews" "{{site_app_dir}}/public/political-positions/data/person-sort-previews"; \
+    cp -R "{{static_data_dir}}/political-positions/data/person-sort-previews" "{{site_app_dir}}/public/political-positions/data/person-sort-previews"; \
   fi
-  for src in "{{gh_pages_dir}}"/political-positions/data/*-trajectories.json; do \
+  for src in "{{static_data_dir}}"/political-positions/data/*-trajectories.json; do \
     [ -f "$src" ] || continue; \
     cp -f "$src" "{{site_app_dir}}/public/political-positions/data/"; \
   done
-  if [ -d "{{gh_pages_dir}}/political-positions/data/person-trajectory-chunks" ]; then \
+  if [ -d "{{static_data_dir}}/political-positions/data/person-trajectory-chunks" ]; then \
     rm -rf "{{site_app_dir}}/public/political-positions/data/person-trajectory-chunks"; \
-    cp -R "{{gh_pages_dir}}/political-positions/data/person-trajectory-chunks" "{{site_app_dir}}/public/political-positions/data/person-trajectory-chunks"; \
+    cp -R "{{static_data_dir}}/political-positions/data/person-trajectory-chunks" "{{site_app_dir}}/public/political-positions/data/person-trajectory-chunks"; \
   fi
-  if [ -d "{{gh_pages_dir}}/political-positions/data/person-details" ]; then \
+  if [ -d "{{static_data_dir}}/political-positions/data/person-details" ]; then \
     rm -rf "{{site_app_dir}}/public/political-positions/data/person-details"; \
-    cp -R "{{gh_pages_dir}}/political-positions/data/person-details" "{{site_app_dir}}/public/political-positions/data/person-details"; \
+    cp -R "{{static_data_dir}}/political-positions/data/person-details" "{{site_app_dir}}/public/political-positions/data/person-details"; \
   fi
-  if [ -d "{{gh_pages_dir}}/political-positions/data/topic-person-rows" ]; then \
+  if [ -d "{{static_data_dir}}/political-positions/data/topic-person-rows" ]; then \
     rm -rf "{{site_app_dir}}/public/political-positions/data/topic-person-rows"; \
-    cp -R "{{gh_pages_dir}}/political-positions/data/topic-person-rows" "{{site_app_dir}}/public/political-positions/data/topic-person-rows"; \
+    cp -R "{{static_data_dir}}/political-positions/data/topic-person-rows" "{{site_app_dir}}/public/political-positions/data/topic-person-rows"; \
   fi
-  cp -f "{{gh_pages_dir}}/elections-behavior/data/elections-behavior.json" "{{site_app_dir}}/public/elections-behavior/data/elections-behavior.json"
+  cp -f "{{static_data_dir}}/elections-behavior/data/elections-behavior.json" "{{site_app_dir}}/public/elections-behavior/data/elections-behavior.json"
   mkdir -p "{{site_app_dir}}/public/elecciones/andalucia-2026/data"
-  cp -f "{{gh_pages_dir}}/elecciones/andalucia-2026/data/accountability.json" "{{site_app_dir}}/public/elecciones/andalucia-2026/data/accountability.json"
-  cp -f "{{gh_pages_dir}}/elecciones/andalucia-2026/data/delivery-evidence-hunt-results.json" "{{site_app_dir}}/public/elecciones/andalucia-2026/data/delivery-evidence-hunt-results.json"
-  cp -f "{{gh_pages_dir}}/elecciones/andalucia-2026/data/delivery-evidence-review-drafts.json" "{{site_app_dir}}/public/elecciones/andalucia-2026/data/delivery-evidence-review-drafts.json"
+  cp -f "{{static_data_dir}}/elecciones/andalucia-2026/data/accountability.json" "{{site_app_dir}}/public/elecciones/andalucia-2026/data/accountability.json"
+  cp -f "{{static_data_dir}}/elecciones/andalucia-2026/data/delivery-evidence-hunt-results.json" "{{site_app_dir}}/public/elecciones/andalucia-2026/data/delivery-evidence-hunt-results.json"
+  cp -f "{{static_data_dir}}/elecciones/andalucia-2026/data/delivery-evidence-review-drafts.json" "{{site_app_dir}}/public/elecciones/andalucia-2026/data/delivery-evidence-review-drafts.json"
   mkdir -p "{{site_app_dir}}/public/calendario-electoral/data"
-  cp -f "{{gh_pages_dir}}/calendario-electoral/data/election-calendar.json" "{{site_app_dir}}/public/calendario-electoral/data/election-calendar.json"
-  cp -f "{{gh_pages_dir}}/policy-outcomes/data/policy-outcomes.json" "{{site_app_dir}}/public/policy-outcomes/data/policy-outcomes.json"
+  cp -f "{{static_data_dir}}/calendario-electoral/data/election-calendar.json" "{{site_app_dir}}/public/calendario-electoral/data/election-calendar.json"
+  cp -f "{{static_data_dir}}/policy-outcomes/data/policy-outcomes.json" "{{site_app_dir}}/public/policy-outcomes/data/policy-outcomes.json"
   for rel in citizen/data graph/data explorer-politico/data explorer-sources/data obstruction-tracker/data obstruction-tracker/evidence explorer-temas/data explorer-votaciones/data calendario-electoral/data people/data; do \
     rm -rf "{{site_app_dir}}/public/$rel"; \
     mkdir -p "{{site_app_dir}}/public/$rel"; \
-    cp -R "{{gh_pages_dir}}/$rel/." "{{site_app_dir}}/public/$rel/"; \
+    cp -R "{{static_data_dir}}/$rel/." "{{site_app_dir}}/public/$rel/"; \
   done
-  cp docs/ideal_sources_say_do.json "{{gh_pages_dir}}/explorer-sources/data/ideal.json"
-  cp docs/ideal_sources_say_do.json "{{gh_pages_dir}}/legacy/graph/data/ideal.json"
+  cp docs/ideal_sources_say_do.json "{{static_data_dir}}/explorer-sources/data/ideal.json"
+  cp docs/ideal_sources_say_do.json "{{static_data_dir}}/legacy/graph/data/ideal.json"
   cp docs/ideal_sources_say_do.json "{{site_app_dir}}/public/explorer-sources/data/ideal.json"
   cp docs/ideal_sources_say_do.json "{{site_app_dir}}/public/legacy/graph/data/ideal.json"
   cd "{{site_app_dir}}" && NEXT_PUBLIC_BASE_PATH="{{site_base_path}}" node node_modules/next/dist/bin/next build --webpack
@@ -5927,7 +5924,7 @@ cloudflare-pages-refresh-data:
 
 privacy-check-public-artifacts:
   just real-data-only-check
-  python3 scripts/check_public_privacy_leaks.py --path "{{site_out_dir}}" --path "{{gh_pages_dir}}" --path etl/data/published --path "{{site_app_dir}}/public"
+  python3 scripts/check_public_privacy_leaks.py --path "{{site_out_dir}}" --path "{{static_data_dir}}" --path etl/data/published --path "{{site_app_dir}}/public"
 
 repo-hygiene-check:
   python3 scripts/check_repo_root_hygiene.py
@@ -6649,11 +6646,6 @@ site-publish:
   printf '{"source_commit": "%s", "source_dirty": %s, "built_at": "%s"}\n' "$commit" "$dirty" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > "{{site_out_dir}}/.vclc-build.json"
   just site-origin-publish
 
-# Deprecated names kept so older docs, scripts and sessions keep working.
-votaconlachola-gh-pages-publish:
-  @echo "votaconlachola-gh-pages-publish is now just site-publish (gh-pages is no longer published)" >&2
-  @just site-publish
-
 # Needs R2_* env (S3 API); also publishes a sha256 release manifest at /releases/latest.json.
 # Sync the built site (ui/site/out) to the votaconlachola.org R2 origin, changed files only.
 site-origin-publish:
@@ -6683,16 +6675,10 @@ site-origin-worker-deploy:
   test -f "$site/index.html" || { echo "Missing $site; run just cloudflare-pages-build first" >&2; exit 2; }
   env -u CLOUDFLARE_API_TOKEN -u CF_API_TOKEN python3 scripts/publish_spending_static_assets.py --site "$site"
 
-explorer-gh-pages-publish:
-  @just site-publish
-
 placsp-launch-scoped-publish:
   @echo "RETIRED 2026-10-12: the scoped PLACSP overlay needed the gh-pages tree; full builds include /spending/. Use just site-publish." >&2
   @exit 1
 
-
-explorer-gh-pages:
-  @just explorer-gh-pages-publish
 
 explorer-stop:
   @pid_file=/tmp/vota-explorer-ui.pid; \

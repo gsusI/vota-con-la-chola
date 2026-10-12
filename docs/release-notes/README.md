@@ -12,7 +12,7 @@ Este directorio registra cambios públicos reales. `releases.json` es el índice
 3. Añadir la entrada correspondiente a `docs/release-notes/releases.json`, en orden descendente.
 4. Ejecutar `just transparency-dashboard-export`; el exporter falla si falta la nota, una evidencia, una ruta pública o si el título no coincide con el H1.
 5. Ejecutar los tests del slice y `just cloudflare-pages-build`.
-6. Publicar el frontend mediante `just explorer-gh-pages-publish`.
+6. Publicar el frontend mediante `just site-publish`.
 7. Ejecutar `node scripts/audit_public_routes.js --base-url https://votaconlachola.org`.
 8. Si el audit live falla, no declarar el cambio terminado. Corregir, regenerar, republicar y conservar evidencia del fallo y la reparación.
 

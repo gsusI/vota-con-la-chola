@@ -35,7 +35,7 @@ This repo is intentionally ultra-lean. When expanding ETL/schema/UI, optimize fo
   - if they appear in logs/evidence, redact before commit
 - Public artifact gate is mandatory before publish:
   - run `just privacy-check-public-artifacts`
-  - this check must pass before `just explorer-gh-pages-build`, `just etl-publish-hf-dry-run`, and `just etl-publish-hf`
+  - this check must pass before `just cloudflare-pages-build`, `just etl-publish-hf-dry-run`, and `just etl-publish-hf`
 - If a leak is detected in public outputs (`docs/gh-pages` or `etl/data/published`):
   - stop the publish
   - fix the generator/sanitizer (not just the generated file)
@@ -108,7 +108,7 @@ This repo is intentionally ultra-lean. When expanding ETL/schema/UI, optimize fo
   - every stance shown in the citizen UI must link to a concrete explorer drill-down (SQL/evidence/tema)
   - render `unknown/no_signal` explicitly (never silently impute)
 - Enforce performance budgets:
-  - citizen snapshot JSON must remain bounded (target <= `5MB`), validated in `just explorer-gh-pages-build`
+  - citizen snapshot JSON must remain bounded (target <= `5MB`), validated in `just cloudflare-pages-build`
   - prefer pre-aggregation (small grids) over shipping raw evidence blobs to the browser
 
 ### Name & Shame Protocol (Public-Data Access Obstruction)

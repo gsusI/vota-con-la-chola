@@ -1426,7 +1426,7 @@ PROJECT_WORKFLOWS = [
             "just eurostat-gdp-indicator-check",
             "just privacy-check-public-artifacts",
             "just cloudflare-pages-build",
-            "just explorer-gh-pages-publish",
+            "just site-publish",
             "just eurostat-gdp-indicator-live-verify",
         ],
         evidence=[
@@ -1495,7 +1495,7 @@ PROJECT_WORKFLOWS = [
             "Run just etl-refresh-accountability-ledger with DB_PATH and SNAPSHOT_DATE set.",
             "Validate accountability artifacts before packaging.",
             "Run just etl-publish-hf-dry-run and verify non-zero artifacts before just etl-publish-hf.",
-            "If a public UI surface changes, run just explorer-gh-pages-publish after merge-ready changes.",
+            "If a public UI surface changes, run just site-publish after merge-ready changes.",
         ],
         validation=[
             "just etl-validate-accountability-artifacts",
@@ -1570,7 +1570,7 @@ PROJECT_WORKFLOWS = [
             "Run just obstruction-tracker-export to expand repository evidence references into deterministic inert .txt files with source and public bytes plus SHA-256.",
             "Require the exporter and independent validator to reconcile every incident, blocked source, scale corpus, gap, evidence file, and identity-retention policy.",
             "Run the full static build so real-data-only and publication-hygiene gates cover the feed and evidence bundle.",
-            "Publish with just explorer-gh-pages-publish after merge-ready frontend changes.",
+            "Publish with just site-publish after merge-ready frontend changes.",
             "Run the live route audit and require every route, critical asset, and evidence object to return exact manifest bytes and SHA-256 before marking the roadmap item DONE.",
         ],
         validation=[
@@ -1616,7 +1616,7 @@ PROJECT_WORKFLOWS = [
             "Register only a real release whose Markdown note, public routes, and non-self-referential evidence paths exist; keep newest entries first in docs/release-notes/releases.json.",
             "Run just transparency-dashboard-export and require metric, source-state, snapshot, release, checksum, freshness, and identity-retention reconciliation.",
             "Run focused Python and Node contract tests, then the full static build with real-only and publication-hygiene gates.",
-            "Inspect desktop and mobile rendering, publish with just explorer-gh-pages-publish, and require the live route audit to pass.",
+            "Inspect desktop and mobile rendering, publish with just site-publish, and require the live route audit to pass.",
             "If the operational tracker changed, regenerate the obstruction bundle before transparency because the tracker is itself public obstruction evidence.",
         ],
         validation=[
@@ -2123,7 +2123,7 @@ PROJECT_WORKFLOWS = [
             "just actor-graph-check",
             "just privacy-check-public-artifacts",
             "just cloudflare-pages-build",
-            "just explorer-gh-pages-publish",
+            "just site-publish",
             "just actor-graph-live-verify",
         ],
         evidence=[
