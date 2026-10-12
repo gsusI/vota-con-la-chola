@@ -17,7 +17,7 @@ Publicar:
 just votaconlachola-gh-pages-publish
 ```
 
-Construye, publica `gh-pages` y sincroniza R2 (`just site-origin-publish`; solo sube ficheros cambiados y verifica paridad antes de borrar). Necesita `R2_ACCESS_KEY_ID`/`R2_SECRET_ACCESS_KEY` en el entorno o en `.env`; sin ellas falla, porque una publicación no está completa hasta que el origen está sincronizado. `just etl-publish-hf` replica además el snapshot de HF en `/datasets/` (`just site-dataset-mirror`).
+Construye, publica `gh-pages` y sincroniza R2 (`just site-origin-publish`; solo sube ficheros cambiados y verifica paridad antes de borrar). Necesita `R2_ACCESS_KEY_ID`/`R2_SECRET_ACCESS_KEY` en el entorno o en `.env` (el entorno gana; la cuenta sale de `R2_ACCOUNT_ID`/`CLOUDFLARE_ACCOUNT_ID` o, si faltan, del `account_id` de `infra/cloudflare/votaconlachola-worker/wrangler.toml`); sin ellas falla, porque una publicación no está completa hasta que el origen está sincronizado. `just etl-publish-hf` replica además el snapshot de HF en `/datasets/` (`just site-dataset-mirror`).
 
 El Worker cambia poco y se despliega a mano con la sesión OAuth de wrangler:
 

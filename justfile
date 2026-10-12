@@ -6673,10 +6673,10 @@ site-origin-publish:
   trap 'git worktree remove --force "$site" >/dev/null 2>&1 || rm -rf "$site"' EXIT
   git fetch "{{gh_pages_remote}}" "{{gh_pages_branch}}"
   git worktree add --detach "$site" FETCH_HEAD
-  if [ -z "${R2_ACCESS_KEY_ID:-}" ] && [ -f .env ]; then eval "$(grep -E '^R2_[A-Z_]+=' .env | sed 's/^/export /')"; fi
-  export R2_ACCOUNT_ID="${R2_ACCOUNT_ID:-${CLOUDFLARE_ACCOUNT_ID:-2a9c5bd32808734be6ee294d77e05ffb}}"
+  # R2 credentials: env, else .env; account id: env, else the Worker's wrangler.toml (see make_client).
+  # ${arr[@]+...} keeps an empty array safe under set -u on macOS bash 3.2.
   report_arg=(); if [ -n "${SITE_ORIGIN_REPORT:-}" ]; then report_arg=(--report "$SITE_ORIGIN_REPORT"); fi
-  uv run --no-project --with 'boto3>=1.34' python3 scripts/publish_site_origin.py --site "$site" --delete "${report_arg[@]}"
+  uv run --no-project --with 'boto3>=1.34' python3 scripts/publish_site_origin.py --site "$site" --delete ${report_arg[@]+"${report_arg[@]}"}
   uv run --no-project --with 'boto3>=1.34' python3 scripts/publish_joined_archives.py --site "$site"
 
 # Mirror the latest HF dataset snapshot to votaconlachola.org/datasets/ (explorer reads it there).
@@ -6684,9 +6684,7 @@ site-origin-publish:
 site-dataset-mirror:
   #!/usr/bin/env bash
   set -euo pipefail
-  if [ -z "${R2_ACCESS_KEY_ID:-}" ] && [ -f .env ]; then eval "$(grep -E '^R2_[A-Z_]+=' .env | sed 's/^/export /')"; fi
-  export R2_ACCOUNT_ID="${R2_ACCOUNT_ID:-${CLOUDFLARE_ACCOUNT_ID:-2a9c5bd32808734be6ee294d77e05ffb}}"
-  if [ -z "${R2_ACCESS_KEY_ID:-}" ] || [ -z "${R2_SECRET_ACCESS_KEY:-}" ]; then echo "WARN: R2 credentials missing; /datasets/ keeps the previous snapshot" >&2; exit 0; fi
+  if ! python3 -c 'import sys; sys.path.insert(0, "scripts"); import publish_site_origin as o; o.resolve_r2_settings()' 2>/dev/null; then echo "WARN: R2 credentials missing; /datasets/ keeps the previous snapshot" >&2; exit 0; fi
   uv run --no-project --with 'boto3>=1.34' python3 scripts/mirror_dataset_snapshot.py --dataset-repo "{{hf_dataset_repo_id}}"
 
 # Deploy the domain Worker (static shell + R2 origin) with the wrangler OAuth login. Run after site-origin-publish.

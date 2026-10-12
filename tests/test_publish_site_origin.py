@@ -2,6 +2,10 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
+import re
+import shutil
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -10,6 +14,8 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 
 import publish_site_origin as pso  # noqa: E402
+
+REPO_ROOT = Path(__file__).resolve().parents[1]
 
 
 class FakeS3:
@@ -123,6 +129,76 @@ class PublishSiteOriginTests(unittest.TestCase):
         write_site(self.site, {"releases/x.json": b"{}"})
         with self.assertRaises(SystemExit):
             run(self.site, FakeS3(), "--dry-run")
+
+    def test_parity_failure_suggests_rerun_when_bucket_changes_mid_sync(self) -> None:
+        class RacingS3(FakeS3):
+            def put_object(self, **kwargs):
+                super().put_object(**kwargs)
+                if kwargs["Key"] == "site/index.html":
+                    self.objects["site/index.html"] = b"<h1>newer publish</h1>"
+
+        client = RacingS3({"site/old.html": b"old", **{f"site/keep{i}.txt": b"x" for i in range(10)}})
+        write_site(self.site, {f"keep{i}.txt": b"x" for i in range(10)})
+        with self.assertRaises(SystemExit) as ctx:
+            run(self.site, client, "--delete")
+        message = str(ctx.exception)
+        self.assertIn("Parity check failed for 1 objects", message)
+        self.assertIn("re-run `just site-origin-publish`", message)
+        self.assertEqual(client.deleted, [])
+
+
+class R2SettingsTests(unittest.TestCase):
+    def setUp(self) -> None:
+        self.tmp = Path(tempfile.mkdtemp())
+        self.addCleanup(shutil.rmtree, self.tmp)
+        self.env_file = self.tmp / ".env"
+        self.wrangler = self.tmp / "wrangler.toml"
+        self.wrangler.write_text('name = "w"\naccount_id = "abc123"\n')
+
+    def resolve(self, environ: dict[str, str]) -> dict[str, str]:
+        return pso.resolve_r2_settings(environ, env_file=self.env_file, wrangler_toml=self.wrangler)
+
+    def test_dotenv_credentials_and_wrangler_account_fallback(self) -> None:
+        self.env_file.write_text("HF_TOKEN=x\nexport R2_ACCESS_KEY_ID='key'\nR2_SECRET_ACCESS_KEY=\"secret\"\n")
+        settings = self.resolve({})
+        self.assertEqual(settings["R2_ACCESS_KEY_ID"], "key")
+        self.assertEqual(settings["R2_SECRET_ACCESS_KEY"], "secret")
+        self.assertEqual(settings["R2_ENDPOINT_URL"], "https://abc123.r2.cloudflarestorage.com")
+
+    def test_environment_wins_over_dotenv_and_wrangler(self) -> None:
+        self.env_file.write_text("R2_ACCESS_KEY_ID=file\nR2_SECRET_ACCESS_KEY=file\nR2_ACCOUNT_ID=fromfile\n")
+        settings = self.resolve({"R2_ACCESS_KEY_ID": "env", "CLOUDFLARE_ACCOUNT_ID": "ignored", "R2_ACCOUNT_ID": "fromenv"})
+        self.assertEqual(settings["R2_ACCESS_KEY_ID"], "env")
+        self.assertEqual(settings["R2_SECRET_ACCESS_KEY"], "file")
+        self.assertEqual(settings["R2_ENDPOINT_URL"], "https://fromenv.r2.cloudflarestorage.com")
+
+    def test_missing_credentials_fail(self) -> None:
+        with self.assertRaises(SystemExit) as ctx:
+            self.resolve({"R2_ACCESS_KEY_ID": "k"})
+        self.assertIn("R2_SECRET_ACCESS_KEY", str(ctx.exception))
+
+    def test_repo_wrangler_toml_has_account_id(self) -> None:
+        self.assertRegex(pso.wrangler_account_id(pso.WRANGLER_TOML), r"^[0-9a-f]{32}$")
+
+
+class SiteOriginRecipeTests(unittest.TestCase):
+    def recipe_command(self) -> str:
+        recipe = (REPO_ROOT / "justfile").read_text().split("\nsite-origin-publish:\n", 1)[1]
+        lines = [line.strip() for line in recipe.splitlines()]
+        start = next(i for i, line in enumerate(lines) if line.startswith("report_arg=()"))
+        call = re.sub(r"^.*?publish_site_origin\.py", "printf '<%s>'", lines[start + 1])
+        return f"set -euo pipefail; site=S; {lines[start]}; {call}"
+
+    def run_recipe(self, report: str | None) -> str:
+        env = {k: v for k, v in os.environ.items() if k != "SITE_ORIGIN_REPORT"}
+        if report is not None:
+            env["SITE_ORIGIN_REPORT"] = report
+        bash = "/bin/bash" if Path("/bin/bash").exists() else "bash"
+        return subprocess.run([bash, "-c", self.recipe_command()], env=env, capture_output=True, text=True, check=True).stdout
+
+    def test_report_arg_is_optional_under_set_u(self) -> None:
+        self.assertEqual(self.run_recipe(None), "<--site><S><--delete>")
+        self.assertEqual(self.run_recipe("out dir/r.json"), "<--site><S><--delete><--report><out dir/r.json>")
 
 
 if __name__ == "__main__":

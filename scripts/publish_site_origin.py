@@ -6,9 +6,11 @@ verified by re-listing before stale objects are deleted. Each run writes a
 public release manifest (path, size, sha256) under ``site/releases/`` so anyone
 can check that what the site serves matches the published release.
 
-Credentials come from the environment (S3-compatible API, so the same script
-works against any S3 origin): R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY and
-R2_ACCOUNT_ID (or R2_ENDPOINT_URL).
+Credentials come from the environment, falling back to the repo ``.env``
+(S3-compatible API, so the same script works against any S3 origin):
+R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY and R2_ACCOUNT_ID (or R2_ENDPOINT_URL).
+The account id falls back to CLOUDFLARE_ACCOUNT_ID, then to ``account_id`` in
+the domain Worker's wrangler.toml.
 """
 
 from __future__ import annotations
@@ -19,6 +21,7 @@ import hashlib
 import json
 import mimetypes
 import os
+import re
 import subprocess
 import sys
 from concurrent.futures import ThreadPoolExecutor
@@ -29,6 +32,9 @@ from typing import Any, Iterable
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_BUCKET = "vclc-site"
+ENV_FILE = REPO_ROOT / ".env"
+WRANGLER_TOML = REPO_ROOT / "infra/cloudflare/votaconlachola-worker/wrangler.toml"
+ENV_KEYS = ("R2_ACCESS_KEY_ID", "R2_SECRET_ACCESS_KEY", "R2_ACCOUNT_ID", "R2_ENDPOINT_URL", "CLOUDFLARE_ACCOUNT_ID")
 SITE_PREFIX = "site/"
 RELEASES_DIR = "releases/"
 # Subtrees written by other publishers (release manifests, dataset mirror, joined archives); never synced or deleted here.
@@ -117,23 +123,57 @@ def build_manifest(files: list[LocalFile], *, release_id: str, source_commit: st
     }
 
 
+def read_dotenv(path: Path) -> dict[str, str]:
+    values: dict[str, str] = {}
+    if not path.is_file():
+        return values
+    for raw in path.read_text(encoding="utf-8").splitlines():
+        line = raw.strip()
+        if line.startswith("export "):
+            line = line[7:].strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, value = (part.strip() for part in line.split("=", 1))
+        if len(value) >= 2 and value[0] == value[-1] and value[0] in "'\"":
+            value = value[1:-1]
+        values[key] = value
+    return values
+
+
+def wrangler_account_id(path: Path) -> str:
+    if not path.is_file():
+        return ""
+    match = re.search(r'^account_id\s*=\s*"([0-9a-f]+)"', path.read_text(encoding="utf-8"), re.MULTILINE)
+    return match.group(1) if match else ""
+
+
+def resolve_r2_settings(
+    environ: dict[str, str] | None = None, *, env_file: Path = ENV_FILE, wrangler_toml: Path = WRANGLER_TOML
+) -> dict[str, str]:
+    """Environment wins over .env; the account id finally falls back to the Worker's wrangler.toml."""
+    environ = os.environ if environ is None else environ
+    dotenv = read_dotenv(env_file)
+    settings = {key: (environ.get(key) or dotenv.get(key) or "").strip() for key in ENV_KEYS}
+    if not settings["R2_ENDPOINT_URL"]:
+        account = settings["R2_ACCOUNT_ID"] or settings["CLOUDFLARE_ACCOUNT_ID"] or wrangler_account_id(wrangler_toml)
+        if not account:
+            raise SystemExit(f"Set R2_ENDPOINT_URL or R2_ACCOUNT_ID (env or {env_file.name})")
+        settings["R2_ENDPOINT_URL"] = f"https://{account}.r2.cloudflarestorage.com"
+    for name in ("R2_ACCESS_KEY_ID", "R2_SECRET_ACCESS_KEY"):
+        if not settings[name]:
+            raise SystemExit(f"Missing {name} (set it in the environment or {env_file.name})")
+    return settings
+
+
 def make_client() -> Any:
     import boto3  # type: ignore[import-not-found]
 
-    endpoint = os.environ.get("R2_ENDPOINT_URL")
-    if not endpoint:
-        account = os.environ.get("R2_ACCOUNT_ID") or os.environ.get("CLOUDFLARE_ACCOUNT_ID")
-        if not account:
-            raise SystemExit("Set R2_ENDPOINT_URL or R2_ACCOUNT_ID")
-        endpoint = f"https://{account}.r2.cloudflarestorage.com"
-    for name in ("R2_ACCESS_KEY_ID", "R2_SECRET_ACCESS_KEY"):
-        if not os.environ.get(name):
-            raise SystemExit(f"Missing {name}")
+    settings = resolve_r2_settings()
     return boto3.client(
         "s3",
-        endpoint_url=endpoint,
-        aws_access_key_id=os.environ["R2_ACCESS_KEY_ID"],
-        aws_secret_access_key=os.environ["R2_SECRET_ACCESS_KEY"],
+        endpoint_url=settings["R2_ENDPOINT_URL"],
+        aws_access_key_id=settings["R2_ACCESS_KEY_ID"],
+        aws_secret_access_key=settings["R2_SECRET_ACCESS_KEY"],
         region_name="auto",
     )
 
@@ -196,7 +236,13 @@ def sync(
     after = list_remote(client, bucket, SITE_PREFIX)
     mismatched = sorted(key for key, f in wanted.items() if after.get(key) != f.md5)
     if mismatched:
-        raise SystemExit(f"Parity check failed for {len(mismatched)} objects, e.g. {mismatched[:5]}")
+        missing = sum(1 for key in mismatched if key not in after)
+        raise SystemExit(
+            f"Parity check failed for {len(mismatched)} objects ({missing} missing, "
+            f"{len(mismatched) - missing} with different content), e.g. {mismatched[:5]}. "
+            "If another publish ran concurrently, the bucket changed during this sync: nothing was deleted; "
+            "re-run `just site-origin-publish` once it finishes (it re-fetches gh-pages and uploads only diffs)."
+        )
 
     deleted = 0
     if delete:
