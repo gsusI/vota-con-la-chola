@@ -99,6 +99,8 @@ etl/data/rebuilt/
 
 # SQLite artifacts anywhere in the project
 *.db
+# Published evidence bundles link these SQLite assets; CI deploys only tracked files, so keep them in git.
+!ui/site/public/policy-outcomes/evidence/*/assets/*.db
 *.sqlite
 *.sqlite3
 
