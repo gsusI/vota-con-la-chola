@@ -32,7 +32,7 @@ Investigación del 2026-10-12. Los votos salen de las votaciones nominales ofici
 
 ### Filtro de señal: un caso solo se publica si pasa las cuatro pruebas
 
-1. **Lo dicho es concreto y tiene fecha**: programa, acuerdo firmado o declaración literal. «Defiende X» en general no vale.
+1. **Lo dicho es concreto y tiene fecha**: programa, acuerdo firmado, declaración literal o un voto anterior suyo sobre lo mismo. «Defiende X» en general no vale.
 2. **Lo votado es el mismo asunto**: votación nominal o acto oficial (BOE, contrato). Una votación sobre un tema parecido no vale.
 3. **El voto de cada diputado es público**: votación nominal, no asentimiento.
 4. **Toca la vida diaria**: agua, vivienda, impuestos, migración, pensiones, modelo territorial.
@@ -41,6 +41,7 @@ Cada ficha incluye **su defensa en una línea**: lo que el partido dijo para jus
 
 Veredictos posibles:
 - **Contradicción**: dijo X y votó o hizo lo contrario.
+- **Cambio de voto**: votó distinto sobre la misma medida en poco tiempo.
 - **Doble discurso territorial**: dice X en una comunidad y lo contrario en otra, y en el Congreso vota en bloque con su grupo.
 - **Coherente, aunque sorprenda**: también es señal.
 - **Ruido**: no se publica como incumplimiento (ómnibus, promesa votada a favor que se perdió, ausencias que no cambian nada).
@@ -60,21 +61,45 @@ Toma en consideración de la ley de la Asamblea Regional de Murcia para mantener
 - Lo dijo el propio Podemos en tribuna: PP y PSOE dicen una cosa en Murcia y la contraria en Castilla-La Mancha. Y su propia abstención decidió la votación. Ningún partido sale limpio, y por eso es el mejor caso de la campaña.
 - Enlace: `/citizen/vota/t/campo-trasvase-tajo-segura/`
 
+### Caso estrella 2: los 40 años cotizados (junio → septiembre de 2026). Neutral por diseño
+
+La medida es la misma en las dos votaciones: eliminar el recorte de la pensión a quien se jubila anticipadamente con 40 años o más cotizados. Las dos son votaciones nominales oficiales.
+
+| Partido | 11-06-2026: enmienda de Podemos a la ley de mutualistas (rechazada 54 a 260, 33 abst.) | 22-09-2026: proposición de ley de Podemos (aprobada 178 a 33, 136 abst.) | Su defensa |
+|---|---|---|---|
+| PSOE | No (121) | **Sí (121)** | En junio era una enmienda sin relación directa con la ley de mutualistas, no una ley propia |
+| PP | No (137) | **Abstención (136)** | Rechaza que incluya las prejubilaciones voluntarias y que sea retroactiva |
+| Vox | Abstención (33) | **No (32)** | El límite de 40 años es arbitrario (con 39 años y 11 meses se mantiene el recorte); lo llamó «paripé» |
+| PNV | 4 sí, 1 no | 4 sí | Coherente |
+
+- **El mensaje**: «Misma medida, tres meses de diferencia: tres partidos cambiaron su voto». Ninguno sale limpio y por eso es neutral. Afecta a unos 900.000 jubilados, con un coste estimado de 3.358 millones al año.
+- La defensa del PSOE es procedimental y es real: hay que publicarla. No se atribuyen motivos (como la cercanía de las elecciones) que los datos no prueban.
+- Enlace: `/citizen/vota/t/empleo-jubilacion-40-anos/`
+- Pendiente de revisión humana: confirmar en el BOCG que la enmienda 1 de Podemos es la de los 40 años. Ahora está identificada porque su reparto de votos coincide con el que publicaron Newtral y El Conciso.
+
 ### Contradicciones verificadas (se publican por parejas de bloques)
 
 | Tema | Dijeron | Votaron / hicieron | Su defensa | En el test |
 |---|---|---|---|---|
 | Amnistía (PSOE) | Antes del 23-J de 2023, Sánchez y el PSOE sostenían que la amnistía no cabía en la Constitución | 14-03-2024: el PSOE vota sí; aprobada 178 a 172 | Sánchez reconoció en enero de 2024 un «cambio de opinión» porque la situación en Cataluña había evolucionado | `territorio-amnistia` |
 | Regularización de inmigrantes (PP) | 09-04-2024: los 136 diputados presentes del PP votan sí a tramitar la ILP; aprobada 310 a 33, solo Vox en contra | Septiembre de 2024: enmiendas restrictivas. En 2026 Feijóo critica la regularización y estudia recurrir el decreto | Su sí era a debatirla con condiciones (caso a caso, sin antecedentes penales) | `inmigracion-regularizacion` |
+| Pensiones (Vox) | Programa de 2019: «una pensión mínima que se revalorice con el coste de la vida» | 26-02-2026: el decreto que solo revalorizaba las pensiones (2,7 % las contributivas y más de un 7 % las mínimas) sale por 317 a 33; **los 33 votos en contra son de Vox**, el único grupo en contra | La sostenibilidad del sistema. Matiz: en la campaña de 2023 Vox ya condicionó las subidas a «ir reduciendo el gasto estructural», así que contradice su programa de 2019 pero es coherente con lo que dijo en 2023 | No (decreto fuera del test; candidato a añadir) |
 | Armas con Israel (Gobierno, Interior) | Compromiso oficial de no comprar ni vender armamento a Israel desde la guerra de Gaza (nota de Interior, oct. 2024) | Abril de 2025: se formaliza un contrato de munición con IMI Systems; se rescinde días después tras la presión de IU/Sumar | La Abogacía del Estado desaconsejaba rescindir en esa fase | `exterior-armas-israel` (acto de Gobierno, no votación: indicarlo) |
 
-Pareja para publicar el mismo día: Amnistía (PSOE) + Regularización (PP).
+Parejas para publicar el mismo día: Amnistía (PSOE) + Regularización (PP); Armas con Israel (Gobierno) + Pensiones (Vox).
 
 Se descarta por el filtro: **Sáhara (PSOE)**. El cambio de 2022 (de la autodeterminación al plan de autonomía marroquí) es un acto de Gobierno, y la votación del test sobre la nacionalidad de los saharauis es otro asunto (no pasa la prueba 2). Puede ir en una pieza propia, pero no como «votó contra lo que prometió».
 
 ### Coherente, aunque sorprenda
 
 - **Junts y la jornada de 37,5 horas** (10-09-2025: la ley se devolvió al Gobierno por 178 a 170). Junts votó con PP y Vox, pero lo había anunciado y lo justificó: la jornada debe negociarse convenio a convenio, no por ley. No es una promesa incumplida. Sí es información útil para quien votó a Junts pensando lo contrario.
+
+- **El PNV, coherente en todo lo revisado.** Para sus votantes, la señal es saber qué vota, no que haya cambiado:
+  - **Ratios de enfermeras** (10-12-2024, 316 a 5): el PNV fue el único grupo en contra. Lo considera una invasión de competencias autonómicas y mantiene esa postura desde 2020.
+  - **Impuesto a las energéticas**: se abstuvo en la ley de 2022 («compartimos la filosofía, pero el diseño es deficiente») y votó en contra de prorrogarlo en enero de 2025 (165 a 183). Su argumento es el mismo las dos veces: un «gravamen» no se puede concertar con las haciendas forales. Junto con Junts, PP y Vox, lo tumbó.
+  - **Decreto de lobbies** (16-09-2026, derogado 155 a 179): se abstuvo, por la vía del decreto con un proyecto de ley ya en tramitación.
+  - **Nuclear**: en contra de alargar las centrales, en junio y en noviembre de 2025. Coherente.
+  - Se descarta como motivo cualquier acusación sin pruebas (por ejemplo, «lo hace por Petronor»).
 
 ### Ruido: lo que NO es una promesa incumplida (y hay que explicarlo)
 
@@ -84,10 +109,12 @@ Se descarta por el filtro: **Sáhara (PSOE)**. El cambio de 2022 (de la autodete
 
 ### Pendiente
 
-- **Vox y PNV**: todavía no hay ningún caso que pase el filtro. Hay que comparar el programa de 2023 con las votaciones nominales. Hasta tenerlo no se publica nada de ellos; tampoco se rellena el hueco con casos flojos.
+- **Vox**: ✅ pensiones (2026) y 40 años. Falta conseguir el texto de su programa de 2023 sobre pensiones (la cita de 2019 sale de un resumen del Instituto Santa Lucía; mejor el PDF original).
+- **PNV**: ningún caso de contradicción pasa el filtro; queda como «coherente». No se fuerza ninguno.
+- **Votaciones fuera del test**: añadir al juego el RDL 3/2026 de pensiones como pregunta clave.
 - **Producto**: ficha «Dijeron / Votaron» en la página de cada pregunta (`/citizen/vota/t/<id>/`), tras la revisión humana.
 
-Fuentes: votaciones nominales oficiales del Congreso (Leg. 15: sesión 110, 13-05-2025, votación 1; sesión 34, 09-04-2024, votación 1); [Diario de Sesiones nº 114](https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-114.PDF); [Maldita, hemeroteca de la amnistía](https://maldita.es/malditahemeroteca/20250627/pedro-sanchez-amnistia-constitucion/); [elDiario.es, Feijóo y la regularización](https://www.eldiario.es/politica/feijoo-critica-ahora-regularizacion-personas-migrantes-defender-podian-tranquilos_1_12938361.html); [Interior, rescisión del contrato de munición](https://www.interior.gob.es/opencms/ca/detalle/articulo/Interior-inicia-el-proceso-para-rescindir-el-contrato-de-compra-de-municion-a-una-empresa-israeli/); [El Independiente, formalización del contrato](https://www.elindependiente.com/espana/2025/04/23/interior-se-ve-obligado-a-comprar-armas-a-israel-a-pesar-de-que-marlaska-ordeno-no-hacerlo/); [Moncloa.com, el PP y el Pacto del Agua de CLM](https://www.moncloa.com/2024/04/24/pp-pacto-agua-castilla-mancha-2568128/); [iAgua, el PSOE de Murcia y el trasvase](https://www.iagua.es/noticias/europa-press/psoe-murcia-apuesta-complementar-trasvase-desalacion-y-modernizacion-regadios); [Maldita, el decreto ómnibus](https://maldita.es/malditobulo/20250128/decreto-omnibus-medidas-por-separado/); [elDiario.es, la convalidación de las pensiones](https://www.eldiario.es/politica/congreso-convalida-revalorizacion-pensiones-ayudas-transporte-publico-segundo_1_12047053.amp.html); [El Salto, Junts y la jornada](https://www.elsaltodiario.com/reduccion-jornada/junts-traslada-yolanda-diaz-no-reduccion-jornada-peligra-posible-aprobacion); [Menorca.info, el PSOE y el Sáhara](https://www.menorca.info/actualidad/nacional/2022/03/25/1714563/psoe-sahara-autodeterminacion-plan-autonomia-marruecos.html).
+Fuentes: votaciones nominales oficiales del Congreso (Leg. 15: sesión 110, 13-05-2025, votación 1; sesión 34, 09-04-2024, votación 1; sesión 164, 26-02-2026, votación 23; sesión 185, 11-06-2026, votación 3; sesión 199, 22-09-2026, votación 2); [Diario de Sesiones nº 114](https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-114.PDF); [Maldita, hemeroteca de la amnistía](https://maldita.es/malditahemeroteca/20250627/pedro-sanchez-amnistia-constitucion/); [elDiario.es, Feijóo y la regularización](https://www.eldiario.es/politica/feijoo-critica-ahora-regularizacion-personas-migrantes-defender-podian-tranquilos_1_12938361.html); [Interior, rescisión del contrato de munición](https://www.interior.gob.es/opencms/ca/detalle/articulo/Interior-inicia-el-proceso-para-rescindir-el-contrato-de-compra-de-municion-a-una-empresa-israeli/); [El Independiente, formalización del contrato](https://www.elindependiente.com/espana/2025/04/23/interior-se-ve-obligado-a-comprar-armas-a-israel-a-pesar-de-que-marlaska-ordeno-no-hacerlo/); [Moncloa.com, el PP y el Pacto del Agua de CLM](https://www.moncloa.com/2024/04/24/pp-pacto-agua-castilla-mancha-2568128/); [iAgua, el PSOE de Murcia y el trasvase](https://www.iagua.es/noticias/europa-press/psoe-murcia-apuesta-complementar-trasvase-desalacion-y-modernizacion-regadios); [Maldita, el decreto ómnibus](https://maldita.es/malditobulo/20250128/decreto-omnibus-medidas-por-separado/); [elDiario.es, la convalidación de las pensiones](https://www.eldiario.es/politica/congreso-convalida-revalorizacion-pensiones-ayudas-transporte-publico-segundo_1_12047053.amp.html); [El Salto, Junts y la jornada](https://www.elsaltodiario.com/reduccion-jornada/junts-traslada-yolanda-diaz-no-reduccion-jornada-peligra-posible-aprobacion); [Menorca.info, el PSOE y el Sáhara](https://www.menorca.info/actualidad/nacional/2022/03/25/1714563/psoe-sahara-autodeterminacion-plan-autonomia-marruecos.html).
 
 ## Concepto
 
@@ -195,4 +222,4 @@ Las nuevas Cortes se constituyen el 23 de diciembre. Durante la campaña se arch
 | 1.000 pegatinas | ~60 € |
 | Roll-up para la mesa | ~60 € |
 | Kit de WhatsApp (imagen + enlace) | 0 € |
-| **Total** | **~270 €** |
+| **Total** | **~270 €** | [Newtral, PP y PSOE y los 40 años](https://www.newtral.es/pp-psoe-jubilacion-anticipada/20260615/); [Infobae, votación del 22-09-2026](https://www.infobae.com/espana/agencias/2026/09/22/el-congreso-aprueba-tramitar-no-penalizar-la-jubilacion-anticipada-con-40-anos-cotizados/); [Newtral, revalorización de 2026](https://www.newtral.es/revalorizacion-pensiones-congreso/20260226/); [Deia, defensa de Vox](https://www.deia.eus/economia/2026/02/26/congreso-convalida-subida-pensiones-2026-vox-10751901.html); [Instituto Santa Lucía, programas de 2019](https://institutosantalucia.es/actualidad/sin-categoria/elecciones-generales-28a-propuestas-electorales-en-materia-de-pensiones); [elDiario.es, Vox y las pensiones en 2023](https://www.eldiario.es/1_9e5c74); [Redacción Médica, ratios de enfermeras](https://www.redaccionmedica.com/politica/20241210/el-congreso-aprueba-la-ley-de-ratios-enfermera-con-incognita-economica/236922_0.html); [El Independiente, el PNV y las energéticas](https://www.elindependiente.com/espana/2024/12/19/el-pnv-no-apoyara-un-nuevo-decreto-contra-las-energeticas-e-insta-al-gobierno-a-modificar-el-impuesto-de-sociedades/); [Noticias de Navarra, ley de 2022](https://www.noticiasdenavarra.com/politica/2022/11/24/pleno-congreso-aprueba-impuestos-banca-6255443.html); [The Objective, decreto de lobbies](https://theobjective.com/espana/politica/2026-09-16/decreto-lobbies-gobierno-pp-junts-vox/).
