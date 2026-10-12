@@ -6619,6 +6619,7 @@ body:has(.responsibility-article) > .breadcrumbs {
 }
 
 .votingAidMark {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -7108,6 +7109,339 @@ body:has(.responsibility-article) > .breadcrumbs {
   display: inline;
 }
 
+/* Swipe + mobile helpers */
+.votingAidCard--question {
+  position: relative;
+  touch-action: pan-y;
+  transition: transform 0.22s ease;
+}
+
+.votingAidSwipeStamp {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  z-index: 2;
+  padding: 6px 14px;
+  border: 3px solid currentColor;
+  border-radius: 10px;
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  transform: rotate(8deg);
+  pointer-events: none;
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.votingAidSwipeStamp--agree {
+  color: #0b5a40;
+  left: 18px;
+  right: auto;
+  transform: rotate(-8deg);
+}
+
+.votingAidSwipeStamp--disagree {
+  color: #8a2a17;
+}
+
+.votingAidSwipeHint {
+  display: none;
+  margin: 12px 0 0;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+.votingAidPodiumStrip {
+  display: none;
+}
+
+@media (pointer: coarse) {
+  .votingAidSwipeHint {
+    display: block;
+  }
+}
+
+@media (hover: none) {
+  .votingAidShortcuts,
+  .votingAidAnswer__key {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .votingAidMini {
+    display: none;
+  }
+
+  .votingAidPodiumStrip {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+    margin: 0 0 12px;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--card);
+    font: inherit;
+    font-size: 0.88rem;
+    color: var(--ink);
+    text-align: left;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+    cursor: pointer;
+  }
+
+  .votingAidPodiumStrip::-webkit-scrollbar {
+    display: none;
+  }
+
+  .votingAidPodiumStrip__more {
+    margin-left: auto;
+    color: var(--ink-muted);
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .votingAid {
+    width: calc(100% - 24px);
+    padding-bottom: calc(96px + env(safe-area-inset-bottom));
+  }
+
+  .votingAid h1 {
+    font-size: 2rem;
+  }
+
+  .votingAidLead {
+    font-size: 1rem;
+  }
+
+  .votingAidIntro__cta .votingAidButton {
+    flex: 1 1 100%;
+  }
+
+  .votingAidFacts {
+    gap: 6px;
+  }
+
+  .votingAidFacts li {
+    padding: 8px 12px;
+    font-size: 0.93rem;
+  }
+
+  /* Bottom tab bar within thumb reach. */
+  .votingAidTabs--main {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 40;
+    margin: 0;
+    padding: 4px 8px calc(4px + env(safe-area-inset-bottom));
+    gap: 0;
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(8px);
+    border-top: 1px solid var(--line);
+    border-bottom: 0;
+    box-shadow: 0 -6px 18px rgba(23, 25, 31, 0.06);
+  }
+
+  .votingAidTabs--main button {
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    min-height: 56px;
+    padding: 6px 4px;
+    font-size: 0.75rem;
+    border-bottom: 0;
+    border-top: 3px solid transparent;
+    position: relative;
+  }
+
+  .votingAidTabs--main button[aria-current="page"] {
+    border-top-color: var(--accent-3);
+    border-bottom-color: transparent;
+  }
+
+  .votingAidTabs__icon {
+    font-size: 1.25rem;
+    line-height: 1;
+  }
+
+  .votingAidTabs__count {
+    position: absolute;
+    top: 4px;
+    left: calc(50% + 8px);
+    min-width: 18px;
+    padding: 0 5px;
+    border-radius: 999px;
+    background: var(--accent-3);
+    color: #fff;
+    font-size: 0.68rem;
+    line-height: 18px;
+  }
+
+  .votingAidHud {
+    margin-top: 8px;
+    font-size: 0.85rem;
+  }
+
+  .votingAidHud .votingAidRank .votingAidMuted {
+    display: none;
+  }
+
+  .votingAidProgress {
+    margin: 6px 0 8px;
+  }
+
+  .votingAidPhase {
+    margin: 0 0 10px;
+    font-size: 0.8rem;
+  }
+
+  .votingAidCard {
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  .votingAidStatement__text {
+    font-size: 1.35rem;
+    margin-bottom: 14px;
+  }
+
+  .votingAidQuote {
+    margin: -4px 0 14px;
+    padding: 10px 12px;
+    font-size: 0.98rem;
+  }
+
+  /* Answers stay reachable above the tab bar while the card scrolls. */
+  .votingAidAnswers {
+    position: sticky;
+    bottom: calc(68px + env(safe-area-inset-bottom));
+    z-index: 5;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    margin: 0 -8px;
+    padding: 8px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(6px);
+  }
+
+  .votingAidAnswer {
+    min-height: 54px;
+    padding: 6px 4px;
+    font-size: 0.92rem;
+    line-height: 1.15;
+  }
+
+  .votingAidStickyBar {
+    position: sticky;
+    bottom: calc(68px + env(safe-area-inset-bottom));
+    z-index: 5;
+    margin: 12px -8px 0;
+    padding: 8px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(6px);
+  }
+
+  .votingAidStickyBar .votingAidButton {
+    flex: 1 1 100%;
+  }
+
+  .votingAidStickyBar .votingAidLinkButton {
+    margin: 0 auto;
+  }
+
+  .votingAidQuestion__extras {
+    margin-top: 10px;
+    flex-wrap: nowrap;
+  }
+
+  .votingAidHideMobile {
+    display: none;
+  }
+
+  .votingAidLinkButton {
+    min-height: 44px;
+    padding: 10px 4px;
+  }
+
+  .votingAidStarToggle {
+    min-height: 44px;
+  }
+
+  .votingAidReveal__msg {
+    font-size: 1.2rem;
+  }
+
+  .votingAidReactions {
+    gap: 8px;
+    margin: 10px 0;
+  }
+
+  .votingAidChip {
+    font-size: 0.85rem;
+  }
+
+  .votingAidToast {
+    bottom: calc(84px + env(safe-area-inset-bottom));
+    width: max-content;
+    max-width: calc(100% - 32px);
+    white-space: normal;
+  }
+
+  /* Party view: filters scroll sideways instead of stacking. */
+  .votingAidTabs--inner,
+  .votingAidThemeFilter {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+    margin-left: -12px;
+    margin-right: -12px;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .votingAidTabs--inner::-webkit-scrollbar,
+  .votingAidThemeFilter::-webkit-scrollbar {
+    display: none;
+  }
+
+  .votingAidTabs--inner button,
+  .votingAidThemeFilter button {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    min-height: 40px;
+  }
+
+  .votingAidBreakdown li {
+    grid-template-columns: 1.6rem minmax(0, 1fr);
+    gap: 8px;
+  }
+
+  .votingAidResultList .votingAidResult__head {
+    min-height: 52px;
+  }
+
+  .votingAidSegmented {
+    width: 100%;
+  }
+
+  .votingAidSegmented button {
+    flex: 1 1 0;
+    min-height: 44px;
+  }
+}
+
 @keyframes votingAidPop {
   from {
     opacity: 0;
@@ -7142,16 +7476,6 @@ body:has(.responsibility-article) > .breadcrumbs {
 }
 
 @media (max-width: 640px) {
-  .votingAidTabs button {
-    flex: 1 1 0;
-    padding: 10px 4px;
-    font-size: 0.92rem;
-  }
-
-  .votingAidAnswers {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
   .votingAidPager__hint {
     display: none;
   }
@@ -7180,6 +7504,7 @@ body:has(.responsibility-article) > .breadcrumbs {
   .votingAidResult__bar span,
   .votingAidMini__bar span,
   .votingAidToast,
+  .votingAidCard--question,
   .votingAidAnswer {
     transition: none;
   }

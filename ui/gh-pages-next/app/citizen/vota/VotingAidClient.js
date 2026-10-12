@@ -177,6 +177,16 @@ function IntroView({ meta, questionsTotal, poolStatus, parties, answeredCount, o
         Responde preguntas sobre lo que de verdad se votó en el Congreso y descubre qué partidos votaron como tú. Juega todo lo que
         quieras: hay {poolStatus === "ready" ? questionsTotal : "cientos de"} preguntas esperando.
       </p>
+      <div className="votingAidActions votingAidActions--primary votingAidIntro__cta">
+        <button className="votingAidButton votingAidButton--primary votingAidButton--big" onClick={onStart} type="button">
+          {answeredCount ? `Seguir jugando (${answeredCount} respondidas)` : "¡Empezar!"}
+        </button>
+        {answeredCount > 0 ? (
+          <button className="votingAidButton votingAidButton--big" onClick={onResults} type="button">
+            Ver mis resultados
+          </button>
+        ) : null}
+      </div>
       <ul className="votingAidFacts">
         <li>
           <span aria-hidden="true">🎯</span> <strong>Empieza con 33 temas clave</strong> y sigue en modo infinito con votaciones
@@ -198,16 +208,6 @@ function IntroView({ meta, questionsTotal, poolStatus, parties, answeredCount, o
         <strong>Versión en revisión.</strong> Los 33 temas clave aún deben revisarlos personas independientes; las votaciones del
         modo infinito usan el título oficial tal cual. Úsalo para explorar, no como veredicto.
       </p>
-      <div className="votingAidActions votingAidActions--primary">
-        <button className="votingAidButton votingAidButton--primary votingAidButton--big" onClick={onStart} type="button">
-          {answeredCount ? `Seguir jugando (${answeredCount} respondidas)` : "¡Empezar!"}
-        </button>
-        {answeredCount > 0 ? (
-          <button className="votingAidButton votingAidButton--big" onClick={onResults} type="button">
-            Ver mis resultados
-          </button>
-        ) : null}
-      </div>
       <p className="votingAidMuted">Partidos comparados: {parties.map((p) => p.label).join(", ")}.</p>
     </section>
   );
@@ -216,14 +216,83 @@ function IntroView({ meta, questionsTotal, poolStatus, parties, answeredCount, o
 // ---------------------------------------------------------------------------
 // Play: one question, then the reveal
 
-function QuestionCard({ question, answer, important, onAnswer, onSkip, onImportant }) {
+const SWIPE_THRESHOLD = 90;
+
+/** Horizontal swipe on touch screens: right = agree, left = disagree. Vertical scrolling is untouched. */
+function useSwipe(onSwipe, resetKey) {
+  const start = useRef(null);
+  const [dx, setDx] = useState(0);
+  const dragging = useRef(false);
+  useEffect(() => {
+    setDx(0);
+    start.current = null;
+    dragging.current = false;
+  }, [resetKey]);
+  const handlers = {
+    onPointerDown(e) {
+      if (e.pointerType === "mouse") return;
+      start.current = { x: e.clientX, y: e.clientY, id: e.pointerId };
+      dragging.current = false;
+    },
+    onPointerMove(e) {
+      const s = start.current;
+      if (!s || s.id !== e.pointerId) return;
+      const mx = e.clientX - s.x;
+      const my = e.clientY - s.y;
+      if (!dragging.current) {
+        if (Math.abs(mx) < 12 || Math.abs(mx) < Math.abs(my) * 1.3) return;
+        dragging.current = true;
+      }
+      setDx(mx);
+    },
+    onPointerUp(e) {
+      const s = start.current;
+      start.current = null;
+      if (!s || !dragging.current) return;
+      const mx = e.clientX - s.x;
+      if (mx > SWIPE_THRESHOLD) onSwipe("agree");
+      else if (mx < -SWIPE_THRESHOLD) onSwipe("disagree");
+      setDx(0);
+    },
+    onPointerCancel() {
+      start.current = null;
+      dragging.current = false;
+      setDx(0);
+    },
+    onClickCapture(e) {
+      // A drag that ended over a button must not also count as a tap.
+      if (dragging.current) {
+        e.preventDefault();
+        e.stopPropagation();
+        dragging.current = false;
+      }
+    },
+  };
+  return { dx, handlers };
+}
+
+function QuestionCard({ question, answer, important, onAnswer, onSkip, onImportant, showSwipeHint }) {
   const headingRef = useRef(null);
   useEffect(() => {
     headingRef.current?.focus({ preventScroll: true });
   }, [question.statement_id]);
   const labels = question.source === "pool" ? POOL_ANSWER_LABELS : ANSWER_LABELS;
+  const { dx, handlers } = useSwipe(onAnswer, question.statement_id);
+  const tilt = Math.max(-1, Math.min(1, dx / SWIPE_THRESHOLD));
+  const style = dx
+    ? { transform: `translateX(${dx}px) rotate(${(dx / 24).toFixed(1)}deg)`, transition: "none" }
+    : undefined;
   return (
-    <div className="votingAidCard votingAidCard--question" key={question.statement_id}>
+    <div className="votingAidCard votingAidCard--question" key={question.statement_id} style={style} {...handlers}>
+      {dx ? (
+        <span
+          aria-hidden="true"
+          className={`votingAidSwipeStamp votingAidSwipeStamp--${tilt > 0 ? "agree" : "disagree"}`}
+          style={{ opacity: Math.abs(tilt) }}
+        >
+          {tilt > 0 ? labels.agree : labels.disagree}
+        </span>
+      ) : null}
       <p className="votingAidTheme">
         {question.theme}
         {question.source === "pool" ? <span className="votingAidKind"> · {question.kind_label}</span> : null}
@@ -259,6 +328,11 @@ function QuestionCard({ question, answer, important, onAnswer, onSkip, onImporta
         ))}
       </div>
 
+      {showSwipeHint ? (
+        <p aria-hidden="true" className="votingAidSwipeHint">
+          👈 {labels.disagree} · desliza · {labels.agree} 👉
+        </p>
+      ) : null}
       <div className="votingAidQuestion__extras">
         <button
           aria-pressed={Boolean(important)}
@@ -266,7 +340,8 @@ function QuestionCard({ question, answer, important, onAnswer, onSkip, onImporta
           onClick={() => onImportant(!important)}
           type="button"
         >
-          <span aria-hidden="true">{important ? "★" : "☆"}</span> Me importa mucho <span className="votingAidMuted">(cuenta doble)</span>
+          <span aria-hidden="true">{important ? "★" : "☆"}</span> Me importa mucho{" "}
+          <span className="votingAidMuted votingAidHideMobile">(cuenta doble)</span>
         </button>
         <button className="votingAidLinkButton" onClick={onSkip} type="button">
           Saltar
@@ -359,7 +434,7 @@ function RevealCard({ question, answer, reactions, topBefore, onNext, onChange }
       <p className="votingAidLinksRow">
         <QuestionLinks question={question} />
       </p>
-      <div className="votingAidActions">
+      <div className="votingAidActions votingAidStickyBar">
         <button className="votingAidButton votingAidButton--primary votingAidButton--big" onClick={onNext} ref={nextRef} type="button">
           Siguiente pregunta →
         </button>
@@ -406,6 +481,28 @@ function MiniLeaderboard({ results, previousRanks, onOpen }) {
   );
 }
 
+function PodiumStrip({ results, previousRanks, onOpen }) {
+  const top = results.filter((r) => r.match !== null).slice(0, 3);
+  if (!top.length) return null;
+  return (
+    <button aria-label="Ver clasificación completa" className="votingAidPodiumStrip" onClick={onOpen} type="button">
+      {top.map((row, i) => {
+        const before = previousRanks[row.partyId];
+        const delta = before === undefined ? 0 : before - i;
+        return (
+          <span className="votingAidPodiumStrip__item" key={row.partyId}>
+            <span aria-hidden="true">{["🥇", "🥈", "🥉"][i]}</span> <strong>{row.label}</strong> {formatMatch(row.match)}
+            {delta > 0 ? <span className="votingAidMini__delta is-up"> ▲</span> : null}
+          </span>
+        );
+      })}
+      <span aria-hidden="true" className="votingAidPodiumStrip__more">
+        ›
+      </span>
+    </button>
+  );
+}
+
 // ---------------------------------------------------------------------------
 // Results and per-party breakdown
 
@@ -431,7 +528,8 @@ function PartyView({ row, questionsById, onBack, onEdit }) {
   const themes = useMemo(() => themeStats(row.details, questionsById), [row, questionsById]);
   const ranked = themes.filter((t) => t.n >= 2 && t.theme !== "Otros");
   const best = ranked.slice(0, 2);
-  const worst = ranked.length > 2 ? ranked.slice(-2).reverse() : [];
+  // Worst themes come only from those not already listed as best.
+  const worst = ranked.slice(best.length).slice(-2).reverse();
   const list = groups[tab].filter((d) => !theme || questionsById[d.statementId]?.theme === theme);
   const tabs = [
     ["match", "Coincidís"],
@@ -790,6 +888,11 @@ export default function VotingAidClient({ snapshot }) {
   function answer(value) {
     const id = currentId;
     if (!id) return;
+    try {
+      if (window.matchMedia("(pointer: coarse)").matches && !reducedMotion()) navigator.vibrate?.(8);
+    } catch {
+      // Vibration is optional.
+    }
     const before = results;
     setPreviousRanks(Object.fromEntries(before.filter((r) => r.match !== null).map((r, i) => [r.partyId, i])));
     setTopBefore(before.find((r) => r.match !== null) || null);
@@ -936,19 +1039,20 @@ export default function VotingAidClient({ snapshot }) {
     <main className="shell staticRoute votingAid" ref={topRef}>
       <Toast toast={toast} />
       {view !== "intro" ? (
-        <nav aria-label="Secciones" className="votingAidTabs">
+        <nav aria-label="Secciones" className="votingAidTabs votingAidTabs--main">
           <button
             aria-current={view === "play" ? "page" : undefined}
             onClick={() => goPlay(currentId && !state.answers[currentId] ? currentId : null)}
             type="button"
           >
-            🎮 Jugar
+            <span aria-hidden="true" className="votingAidTabs__icon">🎮</span> Jugar
           </button>
           <button aria-current={view === "results" || view === "party" ? "page" : undefined} onClick={() => show("results")} type="button">
-            🏆 Resultados
+            <span aria-hidden="true" className="votingAidTabs__icon">🏆</span> Resultados
           </button>
           <button aria-current={view === "review" ? "page" : undefined} onClick={() => show("review")} type="button">
-            📝 Respuestas <span className="votingAidMuted">{answeredCount}</span>
+            <span aria-hidden="true" className="votingAidTabs__icon">📝</span> Respuestas{" "}
+            {answeredCount ? <span className="votingAidTabs__count">{answeredCount}</span> : null}
           </button>
         </nav>
       ) : null}
@@ -990,6 +1094,7 @@ export default function VotingAidClient({ snapshot }) {
                   ? "No se pudieron cargar más votaciones ahora mismo."
                   : "Cargando votaciones…"}
           </p>
+          <PodiumStrip onOpen={() => show("results")} previousRanks={previousRanks} results={results} />
           <div className="votingAidPlay__grid">
             <div>
               {revealQuestion ? (
@@ -1012,6 +1117,7 @@ export default function VotingAidClient({ snapshot }) {
                   onImportant={(v) => setImportant(current.statement_id, v)}
                   onSkip={skip}
                   question={current}
+                  showSwipeHint={answeredCount < 3}
                 />
               ) : (
                 <div className="votingAidCard votingAidEmpty">
