@@ -2336,9 +2336,10 @@ etl-storage-health:
     --lane placsp_history={{storage_health_placsp_evidence}} \
     --out {{storage_health_out}}
 
+# REAL_DATA_ONLY_SKIP_DB=1 scans artifacts only: for frozen site builds without a local DB (CI site-only).
 real-data-only-check:
   python3 scripts/check_real_data_only.py \
-    --db "{{db_path}}" \
+    --db "{{db_path}}" $([ "${REAL_DATA_ONLY_SKIP_DB:-0}" = "1" ] && echo --no-db) \
     --path etl/data/raw \
     --path etl/data/derived \
     --path etl/data/published \

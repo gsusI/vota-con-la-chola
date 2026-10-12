@@ -134,4 +134,7 @@ jobs:
 
       - name: Publish votaconlachola.org (R2 origin)
         if: env.LIVE_ETL_PUBLISH_REQUESTED == 'true'
-        run: just site-publish
+        run: |
+          # Site-only releases skip the ETL, so there is no DB to scan; artifacts are still scanned.
+          if [ "$SITE_ONLY_RELEASE" = "true" ]; then export REAL_DATA_ONLY_SKIP_DB=1; fi
+          just site-publish

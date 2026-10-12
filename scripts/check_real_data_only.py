@@ -235,6 +235,11 @@ def scan_db(path: Path) -> list[dict[str, Any]]:
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--db", action="append", default=[])
+    parser.add_argument(
+        "--no-db",
+        action="store_true",
+        help="Scan artifacts only (frozen site builds export nothing from a DB); recorded in the report.",
+    )
     parser.add_argument("--path", action="append", default=[])
     parser.add_argument("--out", default="")
     parser.add_argument("--enforce", action="store_true")
@@ -243,7 +248,7 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> int:
     args = parse_args()
-    db_paths = [Path(value) for value in args.db] or [
+    db_paths = [] if args.no_db else [Path(value) for value in args.db] or [
         Path("etl/data/staging/politicos-es.db")
     ]
     artifact_paths = [Path(value) for value in args.path] or [
