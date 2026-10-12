@@ -464,7 +464,7 @@ Los probes de red son explícitos y solo se repiten si cambia el endpoint, exist
 Semana 1 — cerrar publicación local -> live:
 
 - ejecutar checks de actor graph, comparison engine y outcome context sobre sus inputs reales actuales;
-- rerun `cloudflare-pages-build`; exigir paridad exacta entre artifacts fuente, `public/` y `out/`, real-only, higiene y budgets;
+- rerun `site-build`; exigir paridad exacta entre artifacts fuente, `public/` y `out/`, real-only, higiene y budgets;
 - publicar primero source/main y después `gh-pages`; verificar `/actor-graph/`, `/comparisons/`, `/policy-outcomes/`, assets exactos, hashes, browser desktop/móvil y audit global;
 - no cambiar `pending publication` a `DONE` sin evidencia live.
 
@@ -608,7 +608,7 @@ just outcome-review-control-c2c-validate
 just outcome-review-control-c2c-check
 
 # Build local y paridad del output
-just cloudflare-pages-build
+just site-build
 just comparison-engine-built-check
 just outcome-context-built-check
 

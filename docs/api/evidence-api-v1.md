@@ -186,7 +186,7 @@ cuando el modelo los tenga.
 
 ```bash
 just evidence-api-v1-check
-just cloudflare-pages-build
+just site-build
 just site-publish
 ```
 

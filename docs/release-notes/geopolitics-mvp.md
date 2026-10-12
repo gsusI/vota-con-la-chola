@@ -92,7 +92,7 @@ just moncloa-geopolitics-check
 sqlite3 -header -column etl/data/staging/geopolitics-moncloa-mvp.db \
   < docs/examples/moncloa-geopolitical-action-evidence.sql
 just privacy-check-public-artifacts
-just cloudflare-pages-build
+just site-build
 just moncloa-geopolitics-live-verify
 ```
 

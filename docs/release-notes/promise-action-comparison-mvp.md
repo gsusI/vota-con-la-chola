@@ -113,7 +113,7 @@ UV_CACHE_DIR=/tmp/vclc-uv-cache \
   tests/test_promise_action_comparison_real_pipeline.py
 node --test tests/test_promise_action_comparison_ui_contract.js
 just privacy-check-public-artifacts
-just cloudflare-pages-build
+just site-build
 ```
 
 El materializador, validator independiente, replay real y contrato UI pasan en

@@ -42,7 +42,7 @@ El corte muestra:
 just transparency-dashboard-export
 python3 -m unittest tests.test_transparency_dashboard_snapshot
 node --test tests/test_transparency_dashboard_ui_contract.js
-just cloudflare-pages-build
+just site-build
 node scripts/audit_public_routes.js --base-url http://127.0.0.1:8765
 node scripts/audit_public_routes.js --base-url https://votaconlachola.org
 ```

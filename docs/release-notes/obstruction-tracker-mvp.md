@@ -45,7 +45,7 @@ Commands:
 just obstruction-tracker-export
 python3 -m unittest tests.test_obstruction_tracker_snapshot
 node --test tests/test_obstruction_tracker_ui_contract.js
-just cloudflare-pages-build
+just site-build
 node scripts/audit_public_routes.js --base-url http://127.0.0.1:8765
 node scripts/audit_public_routes.js --base-url https://votaconlachola.org --json-out docs/etl/sprints/OBSTRUCTION-TRACKER-20260819/evidence/live-route-audit.json
 ```

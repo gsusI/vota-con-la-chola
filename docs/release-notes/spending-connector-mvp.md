@@ -93,7 +93,7 @@ just placsp-spending-check
 sqlite3 -header -column etl/data/staging/spending-placsp-mvp.db \
   < docs/examples/placsp-actor-spending-evidence.sql
 just privacy-check-public-artifacts
-just cloudflare-pages-build
+just site-build
 just placsp-spending-live-verify
 ```
 

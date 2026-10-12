@@ -111,7 +111,7 @@ just eurostat-gdp-indicator-check
 sqlite3 -header -column etl/data/staging/indicators-eurostat-gdp-mvp.db \
   < docs/examples/eurostat-indicator-observation-evidence.sql
 just privacy-check-public-artifacts
-just cloudflare-pages-build
+just site-build
 just eurostat-gdp-indicator-live-verify
 ```
 

@@ -4781,10 +4781,10 @@ explorer-datasette:
   python3 scripts/run_datasette_explorer.py --db "{{db_path}}" --host {{explorer_host}} --port 8011
 
 # Frozen publication renders already-reviewed public inputs without re-running ETL.
-cloudflare-pages-build:
-  if [ "${CLOUDFLARE_PAGES_FROZEN_INPUTS:-0}" = "1" ]; then just cloudflare-pages-build-frozen; else just cloudflare-pages-build-refresh; fi
+site-build:
+  if [ "${CLOUDFLARE_PAGES_FROZEN_INPUTS:-0}" = "1" ]; then just site-build-frozen; else just site-build-refresh; fi
 
-cloudflare-pages-build-frozen:
+site-build-frozen:
   @just privacy-check-public-artifacts
   python3 -m unittest tests.test_placsp_launch -v
   node tests/test_spending_decision_dates.mjs
@@ -4796,7 +4796,7 @@ cloudflare-pages-build-frozen:
   just cloudflare-pages-size-check
   just privacy-check-public-artifacts
 
-cloudflare-pages-build-refresh:
+site-build-refresh:
   @just manifesto-promises-export
   @just placsp-spending-export
   @just moncloa-agreements-export
@@ -5314,7 +5314,7 @@ comparison-engine-check:
   UV_CACHE_DIR=/tmp/vclc-uv-cache UV_PROJECT_ENVIRONMENT=/tmp/vclc-comparison-env uv run --with pytest python -m pytest -q tests/test_verify_live_promise_action_comparisons.py -k real_generated_comparison_artifact
   node --test tests/test_promise_action_comparison_ui_contract.js
 
-# Run only after cloudflare-pages-build; this also checks the exact built copy.
+# Run only after site-build; this also checks the exact built copy.
 comparison-engine-built-check:
   UV_CACHE_DIR=/tmp/vclc-uv-cache UV_PROJECT_ENVIRONMENT=/tmp/vclc-comparison-env uv run --with pytest python -m pytest -q tests/test_verify_live_promise_action_comparisons.py
 
@@ -6642,7 +6642,7 @@ site-publish:
   # Record what the build came from before building (the sync may run later); dotfiles are never published.
   commit="$(git rev-parse HEAD)"
   dirty=false; if [ -n "$(git status --porcelain --untracked-files=no -- ui/site)" ]; then dirty=true; fi
-  just cloudflare-pages-build
+  just site-build
   printf '{"source_commit": "%s", "source_dirty": %s, "built_at": "%s"}\n' "$commit" "$dirty" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > "{{site_out_dir}}/.vclc-build.json"
   just site-origin-publish
 
@@ -6652,7 +6652,7 @@ site-origin-publish:
   #!/usr/bin/env bash
   set -euo pipefail
   site="{{site_out_dir}}"
-  test -f "$site/index.html" || { echo "Missing $site; run just site-publish (or just cloudflare-pages-build) first" >&2; exit 2; }
+  test -f "$site/index.html" || { echo "Missing $site; run just site-publish (or just site-build) first" >&2; exit 2; }
   # R2 credentials: env, else .env; account id: env, else the Worker's wrangler.toml (see make_client).
   # ${arr[@]+...} keeps an empty array safe under set -u on macOS bash 3.2.
   report_arg=(); if [ -n "${SITE_ORIGIN_REPORT:-}" ]; then report_arg=(--report "$SITE_ORIGIN_REPORT"); fi
@@ -6672,7 +6672,7 @@ site-origin-worker-deploy:
   #!/usr/bin/env bash
   set -euo pipefail
   site="{{site_out_dir}}"
-  test -f "$site/index.html" || { echo "Missing $site; run just cloudflare-pages-build first" >&2; exit 2; }
+  test -f "$site/index.html" || { echo "Missing $site; run just site-build first" >&2; exit 2; }
   env -u CLOUDFLARE_API_TOKEN -u CF_API_TOKEN python3 scripts/publish_spending_static_assets.py --site "$site"
 
 placsp-launch-scoped-publish:

@@ -1425,7 +1425,7 @@ PROJECT_WORKFLOWS = [
         validation=[
             "just eurostat-gdp-indicator-check",
             "just privacy-check-public-artifacts",
-            "just cloudflare-pages-build",
+            "just site-build",
             "just site-publish",
             "just eurostat-gdp-indicator-live-verify",
         ],
@@ -1577,7 +1577,7 @@ PROJECT_WORKFLOWS = [
             "just obstruction-tracker-export",
             "python3 -m unittest tests.test_obstruction_tracker_snapshot",
             "node --test tests/test_obstruction_tracker_ui_contract.js",
-            "just cloudflare-pages-build",
+            "just site-build",
             "node scripts/audit_public_routes.js --base-url https://votaconlachola.org",
         ],
         evidence=[
@@ -1623,7 +1623,7 @@ PROJECT_WORKFLOWS = [
             "just transparency-dashboard-export",
             "python3 -m unittest tests.test_transparency_dashboard_snapshot",
             "node --test tests/test_transparency_dashboard_ui_contract.js",
-            "just cloudflare-pages-build",
+            "just site-build",
             "node scripts/audit_public_routes.js --base-url https://votaconlachola.org",
         ],
         evidence=[
@@ -1810,7 +1810,7 @@ PROJECT_WORKFLOWS = [
         validation=[
             "just evidence-api-v1-check",
             "just privacy-check-public-artifacts",
-            "just cloudflare-pages-build",
+            "just site-build",
             "node scripts/audit_public_routes.js --base-url https://votaconlachola.org",
         ],
         evidence=[
@@ -1851,7 +1851,7 @@ PROJECT_WORKFLOWS = [
         validation=[
             "just manifesto-promises-check",
             "just privacy-check-public-artifacts",
-            "just cloudflare-pages-build",
+            "just site-build",
             "just manifesto-promises-live-verify",
         ],
         evidence=[
@@ -1893,7 +1893,7 @@ PROJECT_WORKFLOWS = [
             "just placsp-spending-check",
             "sqlite3 -header -column etl/data/staging/spending-placsp-mvp.db < docs/examples/placsp-actor-spending-evidence.sql",
             "just privacy-check-public-artifacts",
-            "just cloudflare-pages-build",
+            "just site-build",
             "just placsp-spending-live-verify",
         ],
         evidence=[
@@ -1941,7 +1941,7 @@ PROJECT_WORKFLOWS = [
             "just moncloa-agreements-check",
             "sqlite3 -header -column etl/data/staging/agreements-moncloa-mvp.db < docs/examples/moncloa-actor-agreement-evidence.sql",
             "just privacy-check-public-artifacts",
-            "just cloudflare-pages-build",
+            "just site-build",
             "just moncloa-agreements-live-verify",
         ],
         evidence=[
@@ -2122,7 +2122,7 @@ PROJECT_WORKFLOWS = [
         validation=[
             "just actor-graph-check",
             "just privacy-check-public-artifacts",
-            "just cloudflare-pages-build",
+            "just site-build",
             "just site-publish",
             "just actor-graph-live-verify",
         ],

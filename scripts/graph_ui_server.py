@@ -7456,7 +7456,7 @@ def create_handler(config: AppConfig) -> type[BaseHTTPRequestHandler]:
                 if not src_path.exists():
                     self.write_json(
                         {
-                            "error": f"{filename} no encontrado. Ejecuta `just cloudflare-pages-build` para generarlo.",
+                            "error": f"{filename} no encontrado. Ejecuta `just site-build` para generarlo.",
                             "expected_path": str(src_path),
                         },
                         status=HTTPStatus.NOT_FOUND,

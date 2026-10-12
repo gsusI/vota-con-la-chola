@@ -169,7 +169,7 @@ function main() {
       first_diff_line: diff.line,
       first_diff_source_line: diff.source_line,
       first_diff_published_line: diff.published_line,
-      recommended_command: wouldChange ? "just cloudflare-pages-build" : "",
+      recommended_command: wouldChange ? "just site-build" : "",
     });
   } catch (err) {
     report.results.push({

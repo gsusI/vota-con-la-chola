@@ -237,7 +237,7 @@ class TestPublishRecipes(unittest.TestCase):
         self.assertIn('site="{{site_out_dir}}"', block)
         self.assertNotIn("gh-pages", block)
         publish = text[text.index("\nsite-publish:"):text.index("\nsite-origin-publish:")]
-        self.assertLess(publish.index("git rev-parse HEAD"), publish.index("just cloudflare-pages-build"))
+        self.assertLess(publish.index("git rev-parse HEAD"), publish.index("just site-build"))
         self.assertLess(publish.index(".vclc-build.json"), publish.index("just site-origin-publish"))
 
 

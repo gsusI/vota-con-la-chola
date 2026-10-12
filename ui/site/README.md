@@ -18,5 +18,5 @@ npm run build
 La salida de build se escribe en `out/`. El flujo canónico desde la raíz del repo es:
 
 ```bash
-just cloudflare-pages-build
+just site-build
 ```

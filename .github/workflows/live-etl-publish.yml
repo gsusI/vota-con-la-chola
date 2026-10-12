@@ -101,7 +101,7 @@ jobs:
       - name: Build public static artifacts
         run: |
           if [ "$SITE_ONLY_RELEASE" = "true" ]; then
-            SITE_PRIME_EXPORT=0 just cloudflare-pages-build
+            SITE_PRIME_EXPORT=0 just site-build
           else
             # The site needs only the public exports; the HF snapshot keeps its scale gate below.
             just etl-public-exports

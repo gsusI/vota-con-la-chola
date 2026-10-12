@@ -527,7 +527,7 @@ export default function PeoplePage() {
           <p className="people-directory-error__message sub">Error: {manifestError || "sin datos"}</p>
           <p className="people-directory-error__hint sub">
             Asegura regenerar <code>ui/site/public/people/data/profiles.json</code> con{" "}
-            <code>just cloudflare-pages-build</code> o con{" "}
+            <code>just site-build</code> o con{" "}
             <code>SITE_PRIME_EXPORT=1 just site-dev</code>.
           </p>
         </section>

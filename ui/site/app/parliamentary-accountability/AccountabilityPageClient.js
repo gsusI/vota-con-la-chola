@@ -949,7 +949,7 @@ export default function AccountabilityPageClient({ view = "all" }) {
           <p className="accountability-empty-state__message sub">No pude cargar el corte estático de rendición de cuentas.</p>
           <p className="accountability-empty-state__message sub">Error: {error || "sin datos"}</p>
           <p className="accountability-empty-state__hint sub">
-            Asegura ejecutar <code>just cloudflare-pages-build</code> para regenerar <code>ui/site/public/parliamentary-accountability/data/accountability.json</code>.
+            Asegura ejecutar <code>just site-build</code> para regenerar <code>ui/site/public/parliamentary-accountability/data/accountability.json</code>.
           </p>
         </section>
       </main>

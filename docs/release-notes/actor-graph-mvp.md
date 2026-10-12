@@ -136,7 +136,7 @@ just etl-scale-validate-semantic-actor-graph
 sqlite3 etl/data/staging/actor-graph-v1.db \
   < docs/examples/actor-graph-evidence.sql
 just privacy-check-public-artifacts
-just cloudflare-pages-build
+just site-build
 ```
 
 Evidencia:

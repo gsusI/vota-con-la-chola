@@ -1,7 +1,7 @@
 # Sitio público
 
 Estado actual (`2026-10-12`):
-- La app pública vive en `ui/site`; el build canónico es `just cloudflare-pages-build` (el nombre es histórico) y la salida está en `ui/site/out/`.
+- La app pública vive en `ui/site`; el build canónico es `just site-build` (el nombre es histórico) y la salida está en `ui/site/out/`.
 - `https://votaconlachola.org/` lo sirve el Worker `infra/cloudflare/votaconlachola-worker/`: shell y `_next` desde Workers Static Assets; todo lo demás desde el bucket R2 `vclc-site` (prefijo `site/`). Sin dependencias de GitHub ni Hugging Face en tiempo de ejecución.
 - La rama `gh-pages` se retiró el `2026-10-12` (archivada en el tag `archive/gh-pages-20261012`; GitHub Pages despublicado): `just site-publish` sube `ui/site/out/` directamente a R2. El registro de cada publicación son los manifests de R2.
 - Cada sincronización publica `/releases/latest.json` y `/releases/<id>/manifest.json` (sha256 por fichero, commit de `main` del que salió el build y `source_dirty` si había cambios sin commitear en `ui/site`).

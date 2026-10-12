@@ -57,7 +57,7 @@ SHA-256 del JSON público:
 ```bash
 just manifesto-promises-check
 just privacy-check-public-artifacts
-just cloudflare-pages-build
+just site-build
 just manifesto-promises-live-verify
 ```
 

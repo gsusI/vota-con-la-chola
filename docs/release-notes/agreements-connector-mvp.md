@@ -90,7 +90,7 @@ just moncloa-agreements-check
 sqlite3 -header -column etl/data/staging/agreements-moncloa-mvp.db \
   < docs/examples/moncloa-actor-agreement-evidence.sql
 just privacy-check-public-artifacts
-just cloudflare-pages-build
+just site-build
 just moncloa-agreements-live-verify
 ```
 
