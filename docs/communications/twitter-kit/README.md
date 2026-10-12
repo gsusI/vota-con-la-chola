@@ -41,6 +41,34 @@ Enlaces (cámbialos por `/v/twitter/...` cuando exista la ruta):
 
 ---
 
+## 0. Vídeo (horizontal, 1920×1080, 62 s)
+
+Archivo: `video/vota-con-la-chola-x.mp4`. Se regenera con `node docs/communications/twitter-kit/render-video.mjs`.
+
+Contenido: la legislatura se ha cerrado → «Prometer no obliga» → 4 preguntas con cuenta atrás y respuesta (trasvase, banca, regularización, pensiones; una por bloque y dos que incomodan a todos) → llamada a hacer el test. Sin audio: X reproduce los vídeos en silencio.
+
+Tweet:
+```
+La legislatura se ha cerrado. Ya no pueden cambiar lo que votaron.
+
+4 votaciones reales del Congreso. ¿Aciertas quién votó qué antes de que salga la respuesta?
+
+#29N
+```
+Respuesta (con el enlace):
+```
+Haz el test completo y mira con quién coincides tú. 2 minutos, sin registro:
+https://votaconlachola.org/citizen/vota/
+
+Cada voto lleva su enlace oficial a congreso.es. Si ves un error, dínoslo y lo corregimos en público.
+```
+Variante corta, si se publica solo el vídeo:
+```
+Prometer no obliga. Votar queda registrado.
+
+¿Aciertas quién votó qué? 👇 https://votaconlachola.org/citizen/vota/
+```
+
 ## 1. Hilo de lanzamiento (20 oct)
 
 **1/5**, imagen `01-lanzamiento.png`
