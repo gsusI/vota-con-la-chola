@@ -1,7 +1,7 @@
 {
  "meta": {
   "schema_version": "voting_aid_vote_bullets_seed_v1",
-  "description": "Viñetas «Qué se votaba» por votación (vote_event_id): hasta 6, en lenguaje llano, cada una con localizador en el texto oficial (url + sha256). Neutrales: sin proponente ni resultado. Borradores hasta revisión humana.",
+  "description": "Viñetas «Qué se votaba» por votación (vote_event_id): hasta 6, en lenguaje llano, cada una con localizador en el texto oficial (url + sha256). Neutrales: sin proponente ni resultado. Borradores hasta revisión humana. «simple»: las mismas viñetas en una sola frase llana (≤180 caracteres), sin añadir nada que no digan.",
   "rules": [
    "max 6 viñetas",
    "localizador obligatorio",
@@ -50,6 +50,7 @@
      "locator": "Artículo 36, apartado 5"
     }
    ],
+   "simple": "Tratar los alquileres por temporada y de habitaciones como alquiler de vivienda normal, con más protección para el inquilino.",
    "notes": "Texto inicial publicado en el BOCG (5 jul 2024), no el texto final tras enmiendas. Omitido por espacio: art. 8 (en contratos temporales la cesión y el subarriendo bastan con comunicar al arrendador).",
    "review": {
     "status": "agent_reviewed",
@@ -133,6 +134,7 @@
      "locator": "Artículo único, apartado 8 (disposición adicional duodécima)"
     }
    ],
+   "simple": "Tratar los alquileres temporales y de habitaciones como alquiler de vivienda, con un máximo de nueve meses por contrato.",
    "notes": "Texto inicial publicado en el BOCG (31 oct 2024), no el texto final tras enmiendas. El apartado 2 del artículo único también permite que las administraciones de vivienda comprueben las causas de temporalidad alegadas.",
    "review": {
     "status": "agent_reviewed",
@@ -215,6 +217,7 @@
      "locator": "Artículo 25; Disposición adicional tercera"
     }
    ],
+   "simple": "Obligar a las webs de pisos turísticos a comprobar que cada piso tiene licencia, con multas de hasta un millón si no lo hacen.",
    "notes": "Texto inicial publicado en el BOCG (24 jul 2025). Las sanciones recaen sobre las empresas prestadoras de servicios (plataformas), no sobre los anfitriones (arts. 15 y 16).",
    "review": {
     "status": "agent_reviewed",
@@ -299,6 +302,7 @@
      "locator": "Artículo uno, apartado Cuatro; Artículo tres"
     }
    ],
+   "simple": "Desalojar mucho más rápido a quien ocupa una casa sin permiso, en horas o pocos días.",
    "notes": "El documento incluye el texto en castellano y, a continuación, la versión en catalán; se ha usado el castellano. Texto inicial publicado en el BOCG (31 ene 2025). El artículo dos usa fechas ya vencidas (31 dic 2025).",
    "review": {
     "status": "agent_reviewed",
@@ -385,6 +389,7 @@
      "locator": "Artículo 8"
     }
    ],
+   "simple": "Castigar con cárcel la ocupación de inmuebles y obligar a los ocupantes a irse en 24 horas.",
    "notes": "Texto inicial publicado en el BOCG (13 feb 2026). Omitido por espacio: art. 4, apartado Uno (la interrupción de suministros en una finca ocupada no es delito de coacciones) y disposición final segunda (en dos meses el Gobierno modificará la normativa tributaria para devolver al propietario IBI e Impuesto sobre el Patrimonio del periodo de ocupación).",
    "review": {
     "status": "agent_reviewed",
@@ -470,6 +475,7 @@
      "locator": "Disposición derogatoria única"
     }
    ],
+   "simple": "Poner más difícil anular planes urbanísticos en los tribunales, agilizar licencias y acortar la suspensión de desahucios.",
    "notes": "Texto inicial publicado en el BOCG (13 feb 2026). Omitidos por espacio: art. 3 (informes estatales en tres meses, favorables si no se emiten), art. 2 apartado Tres, art. 4 apartado Tres (umbral de vulnerabilidad de 1,5 veces el IPREM) y disposición transitoria única. La exposición de motivos indica que los artículos derogados de la Ley 12/2023 incluyen las zonas de mercado tensionado y los índices de precios del alquiler.",
    "review": {
     "status": "agent_reviewed",
@@ -557,6 +563,7 @@
      "locator": "Disposición final primera, apartados Uno y Cuatro"
     }
    ],
+   "simple": "Bajar la jornada laboral máxima a 37,5 horas semanales sin bajar el sueldo, con registro digital de horas.",
    "notes": "La votación es sobre enmiendas a la totalidad de devolución; las viñetas describen el proyecto de ley inicial que se habría tramitado. Además, la disposición final segunda adapta la jornada y el registro del servicio del hogar familiar (no incluida por límite de viñetas).",
    "review": {
     "status": "agent_reviewed",
@@ -642,6 +649,7 @@
      "locator": "Artículo primero, apartado Uno (artículo 12.4)"
     }
    ],
+   "simple": "Bajar la jornada laboral máxima a 35 horas semanales sin bajar el sueldo.",
    "notes": "Texto inicial publicado en el BOCG (21 feb 2025); incluye también la versión en gallego. Omitido por espacio: art. 34.2 (la distribución irregular del 10 % de la jornada solo por convenio o acuerdo con la representación de los trabajadores) y disposición adicional segunda (contratos a tiempo parcial en el sector público).",
    "review": {
     "status": "agent_reviewed",
@@ -726,6 +734,7 @@
      "locator": "Artículo tercero (artículo 33.2 y 33.3 de la Ley de Clases Pasivas)"
     }
    ],
+   "simple": "Facilitar cobrar la pensión mientras sigues trabajando, más cuanto más retrases la jubilación.",
    "notes": "Texto consolidado del BOE (RDL 11/2024). Según la disposición final tercera, entra en vigor el 1 de abril de 2025 salvo los apartados ocho y nueve del artículo primero. Omitidos por espacio: comisión de seguimiento de mutuas e incapacidad temporal (apartado Ocho), régimen transitorio de la jubilación parcial hasta 2030 (apartados Nueve y Diez) y evaluaciones (disposiciones adicionales).",
    "review": {
     "status": "agent_reviewed",
@@ -810,6 +819,7 @@
      "locator": "Disposición adicional única"
     }
    ],
+   "simple": "Jubilarse antes sin recorte en la pensión si has cotizado 40 años.",
    "notes": "Texto inicial publicado en el BOCG (31 may 2024), no el texto final. El 21 % o 19 % del ejemplo corresponde a las dos columnas de la tabla del artículo 208.2 (menos de 38 años y 6 meses cotizados / entre 38 años y 6 meses y 40). La entrada en vigor es en el momento de su publicación en el BOE.",
    "review": {
     "status": "agent_reviewed",
@@ -892,6 +902,7 @@
      "locator": "Artículo segundo, apartados Veintiuno y Veintidós (disp. adic. 57.ª y 58.ª LGSS)"
     }
    ],
+   "simple": "Reformar el subsidio de paro: quién lo cobra, cuánto (95 % del IPREM al principio) y poder compatibilizarlo con un trabajo.",
    "notes": "Texto ómnibus del BOE (RDL 2/2024). Las tablas de duración del subsidio y de cuantía del complemento no aparecen en el texto extraído, por eso no se citan cifras. Quedan fuera por límite de viñetas: paso del subsidio agotado al ingreso mínimo vital con consentimiento (Disposición final cuarta, apartado Ocho), cambio en la composición del CES (Disposición final primera), ampliación de la lactancia hasta 12 meses si ambos progenitores la ejercen (Artículo primero, apartado Uno), prioridad de convenios autonómicos (Artículo primero, apartado Dos) y flexibilidad horaria de empleados públicos (Artículo tercero).",
    "review": {
     "status": "agent_reviewed",
@@ -978,6 +989,7 @@
      "locator": "Artículo 1, apartado 12"
     }
    ],
+   "simple": "Cobrar un impuesto temporal a los grandes bancos en 2023, 2024 y 2025, sin que puedan repercutirlo a los clientes.",
    "notes": "Texto inicial de la proposición de ley (BOCG de 23-02-2024). El título del artículo habla de «primer trimestre de 2022» pero el apartado 4 dice «primer semestre de 2022»; se sigue el articulado. Modifica el artículo 2 de la Ley 38/2022.",
    "review": {
     "status": "agent_reviewed",
@@ -1060,6 +1072,7 @@
      "locator": "Artículo único, apartados 12 y 14"
     }
    ],
+   "simple": "Cobrar en 2025 un impuesto temporal a las grandes energéticas (1,2 % de lo que facturan), sin que puedan repercutirlo.",
    "notes": "Texto del BOE del RDL 10/2024. La disposición adicional primera condiciona la minoración por inversiones a la autorización de la Comisión Europea.",
    "review": {
     "status": "agent_reviewed",
@@ -1141,6 +1154,7 @@
      "locator": "Artículos 3 y 4"
     }
    ],
+   "simple": "Alargar la vida de las centrales nucleares y frenar el calendario de cierre pactado.",
    "notes": "Texto inicial de la proposición de ley (BOCG de 11-04-2025), no necesariamente el texto final. La derogatoria única también deroga lo que contradiga el Real Decreto 1217/2024 (reglamento de instalaciones nucleares).",
    "review": {
     "status": "agent_reviewed",
@@ -1218,6 +1232,7 @@
      "locator": "Punto 3"
     }
    ],
+   "simple": "Apoyar el Pacto Verde europeo y la neutralidad climática en 2050.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -1293,6 +1308,7 @@
      "locator": "Artículo 1, apartado 3; Artículo 2, apartados 4 y 5; Artículo 6, apartado 3"
     }
    ],
+   "simple": "Descuentos de verano 2024 en tren y autobús para jóvenes: hasta un 90 % y medio precio en el Interrail.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -1373,6 +1389,7 @@
      "locator": "Artículo 2, apartados 4 y 5"
     }
    ],
+   "simple": "Descuentos de verano 2025 en tren y autobús para jóvenes: hasta un 90 % y medio precio en el Interrail.",
    "notes": "El apartado 2 del artículo 4 dice «47,5 millones de millones de euros» (errata del propio texto); se interpreta como 47,5 millones.",
    "review": {
     "status": "agent_reviewed",
@@ -1455,6 +1472,7 @@
      "locator": "Artículo 23, apartados 1 y 2"
     }
    ],
+   "simple": "Abonos de transporte baratos en 2026: Cercanías a 20 €, gratis para niños y descuentos en autobús y media distancia.",
    "notes": "Las ayudas se declaran fuera de la Ley General de Subvenciones (Artículo 24). La gratuidad en servicios autonómicos de Cataluña y País Vasco exige su aceptación expresa (Artículo 3, apartado 8).",
    "review": {
     "status": "agent_reviewed",
@@ -1540,6 +1558,7 @@
      "locator": "Disposición final primera, apartados Uno y Dos"
     }
    ],
+   "simple": "Descuentos de verano 2026 en tren y autobús para jóvenes: hasta un 90 % y medio precio en el Interrail.",
    "notes": "La disposición final segunda también modifica un periodo de exención de pago (prestación) del Real Decreto-ley 7/2026 sobre permisos de acceso y conexión; no se incluye por límite de viñetas y por ser ajena al transporte de viajeros.",
    "review": {
     "status": "agent_reviewed",
@@ -1621,6 +1640,7 @@
      "locator": "Artículo único, apartado Cinco; Disposición final única"
     }
    ],
+   "simple": "Endurecer las sanciones por conducir con alcohol (desde 0,10 mg/l) y prohibir avisar de controles policiales.",
    "notes": "Texto inicial de la proposición de ley (BOCG de 8-11-2024), no necesariamente el texto final. Las cuantías de multa del resto de tasas no figuran en el texto.",
    "review": {
     "status": "agent_reviewed",
@@ -1673,6 +1693,7 @@
      "locator": "Artículos 13 a 16"
     }
    ],
+   "simple": "Fijar por ley cuántos pacientes puede atender como máximo cada enfermera, en hospitales públicos y privados.",
    "notes": "Texto inicial de una iniciativa legislativa popular, antes de enmiendas.",
    "review": {
     "status": "agent_reviewed",
@@ -1756,6 +1777,7 @@
      "locator": "Disposición transitoria; Disposición final segunda"
     }
    ],
+   "simple": "Crear un recurso judicial rápido contra las decisiones sobre solicitudes de eutanasia.",
    "notes": "Texto inicial publicado en el BOCG (proposición de ley); no es el texto definitivo.",
    "review": {
     "status": "agent_reviewed",
@@ -1840,6 +1862,7 @@
      "locator": "Disposición derogatoria única"
     }
    ],
+   "simple": "Que las familias puedan elegir colegio ordinario o de educación especial para alumnos con necesidades especiales.",
    "notes": "Texto inicial publicado en el BOCG. La referencia de la disposición adicional cuarta a los centros de educación especial procede de la exposición de motivos.",
    "review": {
     "status": "agent_reviewed",
@@ -1923,6 +1946,7 @@
      "locator": "Artículos seis y siete; Disposiciones adicionales segunda y tercera"
     }
    ],
+   "simple": "Castigar con cárcel a quien roba de forma reiterada, aunque sean hurtos pequeños, y el robo de móviles.",
    "notes": "Texto inicial (abril de 2024). La votación de 2026 se refiere a una versión posterior del texto, que puede diferir de estas viñetas.",
    "review": {
     "status": "agent_reviewed",
@@ -2008,6 +2032,7 @@
      "locator": "Artículos seis y siete; Disposiciones adicionales segunda y tercera"
     }
    ],
+   "simple": "Castigar con cárcel a quien roba de forma reiterada, aunque sean hurtos pequeños, y el robo de móviles.",
    "notes": "Texto inicial (abril de 2024). La votación de 2026 se refiere a una versión posterior del texto, que puede diferir de estas viñetas.",
    "review": {
     "status": "agent_reviewed",
@@ -2093,6 +2118,7 @@
      "locator": "Artículos 9 a 11 y Disposiciones adicionales primera y segunda"
     }
    ],
+   "simple": "Amnistiar los delitos ligados al proceso independentista catalán entre 2012 y 2023.",
    "notes": "Texto inicial de la proposición de ley, antes de enmiendas; el texto finalmente tramitado fue distinto.",
    "review": {
     "status": "agent_reviewed",
@@ -2178,6 +2204,7 @@
      "locator": "Disposición adicional segunda; Artículo 13, apartados 1 y 4"
     }
    ],
+   "simple": "Pasar a Cataluña la gestión de la inmigración en su territorio: permisos, sanciones, CIE y control en puertos y aeropuertos.",
    "notes": "El documento contiene el articulado en castellano seguido de una versión en catalán; las viñetas se basan en la parte en castellano. Es el texto inicial (proposición de ley orgánica).",
    "review": {
     "status": "agent_reviewed",
@@ -2245,6 +2272,7 @@
      "locator": "Artículo único (disposición transitoria primera de la Ley Orgánica 4/2000)"
     }
    ],
+   "simple": "Obligar al Gobierno a regularizar a los extranjeros que ya estaban en España antes de noviembre de 2021.",
    "notes": "Texto inicial de una iniciativa legislativa popular. El texto dispositivo es una única modificación; el resto es exposición de motivos.",
    "review": {
     "status": "agent_reviewed",
@@ -2306,6 +2334,7 @@
      "locator": "Artículo único, apartados Cinco y Seis"
     }
    ],
+   "simple": "Repartir obligatoriamente por otras comunidades a los menores migrantes cuando Canarias, Ceuta y Melilla estén desbordadas.",
    "notes": "Texto inicial publicado en el BOCG (proposición de ley), no el real decreto-ley convalidado.",
    "review": {
     "status": "agent_reviewed",
@@ -2389,6 +2418,7 @@
      "locator": "Artículo único, apartado Siete (disp. adicional duodécima)"
     }
    ],
+   "simple": "Repartir menores migrantes entre comunidades cuando una supera tres veces su capacidad, con un fondo de 100 millones.",
    "notes": "'Otros 6 %' agrupa tres criterios del 2 % (ciudad fronteriza, insularidad, dispersión de la población).",
    "review": {
     "status": "agent_reviewed",
@@ -2471,6 +2501,7 @@
      "locator": "Disposición final primera"
     }
    ],
+   "simple": "Dar la nacionalidad española a los saharauis nacidos en el Sáhara antes de 1976 y facilitarla a sus hijos.",
    "notes": "Texto inicial publicado en el BOCG (proposición de ley).",
    "review": {
     "status": "agent_reviewed",
@@ -2555,6 +2586,7 @@
      "locator": "Artículos 48 y 49"
     }
    ],
+   "simple": "Crear una oficina independiente contra la corrupción que investigue el uso de dinero público y pueda multar.",
    "notes": "Texto inicial publicado en el BOCG. Las disposiciones finales primera a tercera retocan las leyes 39/2015, 9/2017 y 2/2023 sobre denuncias e identidad del denunciante (no incluidas en las viñetas por el límite de seis).",
    "review": {
     "status": "agent_reviewed",
@@ -2640,6 +2672,7 @@
      "locator": "Artículo único, apartado Cuarto (art. 10, ap. 2)"
     }
    ],
+   "simple": "Poner fecha de caducidad a los secretos oficiales: como máximo 25 años para lo secreto y 10 para lo reservado.",
    "notes": "Texto inicial publicado en el BOCG (proposición de ley).",
    "review": {
     "status": "agent_reviewed",
@@ -2720,6 +2753,7 @@
      "locator": "Disposición final primera (art. 15, ap. 3 bis de la Ley 3/2015)"
     }
    ],
+   "simple": "Crear un registro obligatorio de lobbies y hacer públicas sus reuniones con cargos públicos.",
    "notes": "Además, la disposición final tercera retrasa al 31 de diciembre de 2026 los efectos de parte del Real Decreto 611/2026 (descarbonización del transporte) y la segunda crea una subdirección en el Consejo de Transparencia; no caben en seis viñetas.",
    "review": {
     "status": "agent_reviewed",
@@ -2804,6 +2838,7 @@
      "locator": "Artículo undécimo (art. 15.2 Ley 2/1974) y Disposición adicional primera"
     }
    ],
+   "simple": "Exigir paridad entre mujeres y hombres en listas electorales, Gobierno, altos cargos y consejos de grandes empresas.",
    "notes": "Texto inicial del proyecto de ley, antes de enmiendas. Incorpora además la Directiva (UE) 2022/2381 sobre consejos de sociedades cotizadas.",
    "review": {
     "status": "agent_reviewed",
@@ -2885,6 +2920,7 @@
      "locator": "Artículo único, apartado Dos"
     }
    ],
+   "simple": "Castigar con cárcel las terapias que intentan cambiar la orientación sexual o la identidad de género.",
    "notes": "Versión inicial de la proposición (BOCG de presentación), no un texto final enmendado. Las penas de las letras b) a g) del art. 33.7 del Código Penal solo se citan por remisión.",
    "review": {
     "status": "agent_reviewed",
@@ -2957,6 +2993,7 @@
      "locator": "Disposición final única"
     }
    ],
+   "simple": "Quitar a la tauromaquia su protección legal como patrimonio cultural.",
    "notes": "Texto inicial de una iniciativa legislativa popular. La disposición final sexta de la Ley 10/2015 que se suprime no figura en el texto, por lo que su contenido no se detalla.",
    "review": {
     "status": "agent_reviewed",
@@ -3021,6 +3058,7 @@
      "locator": "Artículo 2"
     }
    ],
+   "simple": "Rebajar la protección del lobo al norte del Duero para permitir medidas de gestión de la especie.",
    "notes": "Versión inicial de la proposición. El texto no regula expresamente cuántos lobos pueden capturarse ni cómo; su efecto práctico depende de la tabla del artículo 3 y de la disposición transitoria.",
    "review": {
     "status": "agent_reviewed",
@@ -3086,6 +3124,7 @@
      "locator": "Disposición derogatoria única"
     }
    ],
+   "simple": "Blindar por ley las reglas actuales del trasvase Tajo-Segura.",
    "notes": "Texto muy breve: un único artículo dispositivo. Es la versión presentada, no una versión enmendada.",
    "review": {
     "status": "agent_reviewed",
@@ -3138,6 +3177,7 @@
      "locator": "Artículo único, apartado Seis (artículo 17)"
     }
    ],
+   "simple": "Embargar automáticamente la venta de armas a países denunciados por genocidio o crímenes de guerra.",
    "notes": "Versión inicial de la proposición. La disposición final primera aplica la ley de forma automática a Estados que, al entrar en vigor, ya estén siendo juzgados ante un tribunal internacional competente.",
    "review": {
     "status": "agent_reviewed",
@@ -3224,6 +3264,7 @@
      "locator": "Disposición final tercera"
     }
    ],
+   "simple": "Prohibir la compraventa de armas con Israel y los productos de los asentamientos israelíes en Palestina.",
    "notes": "Texto oficial del BOE del real decreto-ley tal como se publicó.",
    "review": {
     "status": "agent_reviewed",
@@ -3306,6 +3347,7 @@
      "locator": "Disposición final primera, apartado Cinco (artículo 47.1.b de la Ley de Infracciones y Sanciones)"
     }
    ],
+   "simple": "Reformar el subsidio de paro (cuantías, requisitos, mayores de 52) y ampliar el permiso de lactancia.",
    "notes": "Texto largo y de contenido variado; se han priorizado los bloques principales. No recogidos por el límite de 6 viñetas: art. 47 del Estatuto Básico del Empleado Público (flexibilidad horaria por conciliación, Artículo tercero), subsidio para mayores de 52 años (Artículo segundo, Diez), régimen transitorio para quienes ya cobran el subsidio a 1 de junio de 2024 (Disposición transitoria primera), prórroga hasta el 30 de junio de 2024 de la reducción de jornadas para el subsidio agrario en Andalucía y Extremadura (Disposición adicional segunda) y acceso a la prestación de trabajadores transfronterizos en Ceuta y Melilla (Artículo segundo, Veinte). En la viñeta de rentas, el límite por unidad familiar no se cita porque no se leyó completo.",
    "review": {
     "status": "agent_reviewed",
@@ -3392,6 +3434,7 @@
      "locator": "Punto 8"
     }
    ],
+   "simple": "Mejorar la seguridad y el servicio de los trenes ante incidencias y destituir al ministro de Transportes.",
    "notes": "El texto extraído incluye notas al pie con enlaces de prensa antes del punto 1; no se han usado.",
    "review": {
     "status": "agent_reviewed",
@@ -3426,6 +3469,7 @@
      "locator": "Punto 1"
     }
    ],
+   "simple": "Crear un impuesto a los jets privados y yates de lujo para financiar el tren.",
    "notes": "Se votó una enmienda transaccional que no se publicó; las viñetas reflejan el texto original.",
    "review": {
     "status": "agent_reviewed",
@@ -3491,6 +3535,7 @@
      "locator": "Punto 11"
     }
    ],
+   "simple": "Crear una red social pública europea y endurecer las sanciones a las grandes plataformas digitales.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -3557,6 +3602,7 @@
      "locator": "Disposición derogatoria única; disposiciones finales segunda y tercera"
     }
    ],
+   "simple": "Que el Ejército también apoye a la policía en la lucha contra la inmigración ilegal.",
    "notes": "Versión inicial de la proposición. La reforma es breve (dos modificaciones). El texto no detalla qué operaciones concretas podrían realizar las Fuerzas Armadas ni dónde.",
    "review": {
     "status": "agent_reviewed",
@@ -3619,6 +3665,7 @@
      "locator": "Punto 4"
     }
    ],
+   "simple": "Crear una empresa pública de energía hidroeléctrica con las presas cuyas concesiones terminen.",
    "notes": "Se votó una enmienda transaccional que no se publicó; las viñetas reflejan el texto original.",
    "review": {
     "status": "agent_reviewed",
@@ -3687,6 +3734,7 @@
      "locator": "Artículo 1, apartados Cuatro, Seis, Nueve; Disposición derogatoria única"
     }
    ],
+   "simple": "Dar a la CNMC el poder de vigilar y multar a las plataformas digitales según la ley europea.",
    "notes": "Versión inicial de la proposición. El texto solo nombra los arts. 14 a 17 de la Ley 34/2002 en la derogación, sin reproducirlos; el art. 13.2 reformado remite la responsabilidad de intermediarios al Reglamento (UE) 2022/2065. Sin viñeta propia por el límite: Artículo 2, apartado Tres (cinco direcciones de instrucción, entre ellas la de Servicios Digitales).",
    "review": {
     "status": "agent_reviewed",
@@ -3770,6 +3818,7 @@
      "locator": "Puntos 5, 10, 11, 13 y 14"
     }
    ],
+   "simple": "Declarar la emergencia migratoria, reforzar las fronteras y exigir visados de tránsito.",
    "notes": "El punto 14 pide además analizar el posible traslado de migrantes a otros Estados de la UE (Mecanismo Voluntario de Solidaridad); no cabe en la viñeta 6 por longitud.",
    "review": {
     "status": "agent_reviewed",
@@ -3850,6 +3899,7 @@
      "locator": "Artículo único, apartado Uno"
     }
    ],
+   "simple": "Limitar las prórrogas de los plazos de enmiendas para que las leyes no se queden atascadas en el Congreso.",
    "notes": "Texto inicial de la reforma del Reglamento, antes de enmiendas.",
    "review": {
     "status": "agent_reviewed",
@@ -3926,6 +3976,7 @@
      "locator": "Artículo único, apartados Cuarto y Quinto"
     }
    ],
+   "simple": "Reforzar el poder del Tribunal Constitucional para hacer cumplir sus sentencias, con multas a quien no las cumpla.",
    "notes": "Texto inicial presentado en septiembre de 2023, antes de enmiendas. La exposición de motivos indica que la reforma deja de facto sin efecto las leyes orgánicas 12/2015 y 15/2015.",
    "review": {
     "status": "agent_reviewed",
@@ -3999,6 +4050,7 @@
      "locator": "Punto 5"
     }
    ],
+   "simple": "Apoyar a Ucrania y a la OTAN, y que el Congreso vote cualquier decisión de España sobre esa guerra.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -4076,6 +4128,7 @@
      "locator": "Puntos 5, 8 a 10 y 12"
     }
    ],
+   "simple": "Bajar impuestos y cuotas a autónomos: sin cuota si ganan menos que el salario mínimo e IRPF al 15 % o 25 %.",
    "notes": "El punto 6 (reconocer el papel de autónomos y pymes) no tiene contenido operativo y no se resume.",
    "review": {
     "status": "agent_reviewed",
@@ -4154,6 +4207,7 @@
      "locator": "Disposición adicional"
     }
    ],
+   "simple": "Gravar a quien compra su tercera vivienda o más y quitar ventajas fiscales a las grandes inmobiliarias (SOCIMI).",
    "notes": "Texto inicial, antes de enmiendas. El documento incluye también la versión en catalán.",
    "review": {
     "status": "agent_reviewed",
@@ -4236,6 +4290,7 @@
      "locator": "Artículo único (art. 188), apartado 4"
     }
    ],
+   "simple": "Obligar a los ministros a justificar sus ausencias en la sesión de control y a responder sin evasivas.",
    "notes": "Texto inicial de la reforma del Reglamento, antes de enmiendas. El texto reproduce el artículo 188 completo; no distingue qué apartados son nuevos salvo el 5.",
    "review": {
     "status": "agent_reviewed",
@@ -4284,6 +4339,7 @@
      "locator": "Artículo único (art. 10), apartado 2"
     }
    ],
+   "simple": "Que solo las personas, y no empresas o fondos, puedan comprar viviendas, salvo excepciones.",
    "notes": "Texto inicial, antes de enmiendas.",
    "review": {
     "status": "agent_reviewed",
@@ -4361,6 +4417,7 @@
      "locator": "Artículo único, apartado Tres (artículo 87 ter.5)"
     }
    ],
+   "simple": "Más protección judicial para víctimas de violencia de género y sexual, con abogado gratis inmediato.",
    "notes": "Versión inicial de la proposición. Mención a 'artículo 3' de la Ley Orgánica 10/2022: el texto remite a los apartados 3.1 (párrafo segundo) y 3.2 sin reproducirlos, así que la viñeta no precisa a qué víctimas ni delitos se refieren.",
    "review": {
     "status": "agent_reviewed",
@@ -4442,6 +4499,7 @@
      "locator": "Punto 6"
     }
    ],
+   "simple": "Pedir responsabilidades por acoso y corrupción en el Gobierno y respetar la condena del Fiscal General.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -4492,6 +4550,7 @@
      "locator": "Punto 7"
     }
    ],
+   "simple": "Subir de categoría y sueldo a técnicos sanitarios (TCAE), celadores y personal administrativo de la sanidad.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -4538,6 +4597,7 @@
      "locator": "Disposición final única"
     }
    ],
+   "simple": "Endurecer las multas y la pérdida de puntos por conducir con alcohol desde 0,10 mg/l.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -4614,6 +4674,7 @@
      "locator": "Punto 1"
     }
    ],
+   "simple": "Que los jueces elijan a los vocales judiciales del CGPJ y retirar las reformas judiciales del Gobierno.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -4672,6 +4733,7 @@
      "locator": "Punto 1"
     }
    ],
+   "simple": "Desclasificar y hacer públicos los documentos del Gobierno sobre el golpe de Estado del 23-F.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -4730,6 +4792,7 @@
      "locator": "Capítulo V, artículos 16 a 18"
     }
    ],
+   "simple": "Alargar a 2026 el freno a los desahucios de familias vulnerables, el bono social eléctrico y varias deducciones fiscales.",
    "notes": "Texto ómnibus. No se han destacado: art. 3 (referencia de la Ley 12/2023 pasa a 31-12-2026), art. 7 (energía no es causa objetiva de despido en empresas con ayudas), arts. 12 a 15 (exenciones y ayudas por incendios y DANA) y disposiciones adicionales sobre pérdidas de sociedades, telefonía móvil y sistemas eléctricos no peninsulares.",
    "review": {
     "status": "agent_reviewed",
@@ -4806,6 +4869,7 @@
      "locator": "Punto 3"
     }
    ],
+   "simple": "Estudiar cómo dar una jubilación digna a abogados y procuradores de mutualidades, incluido pasar al régimen de autónomos.",
    "notes": "Texto aprobado publicado tras la votación.",
    "review": {
     "status": "agent_reviewed",
@@ -4877,6 +4941,7 @@
      "locator": "Artículo 5; Disposición adicional primera"
     }
    ],
+   "simple": "Medidas para La Palma tras el volcán y más margen a las comunidades para invertir sus superávits.",
    "notes": "Texto ómnibus de medidas fiscales, financieras y de empleo para La Palma y de financiación autonómica.",
    "review": {
     "status": "agent_reviewed",
@@ -4948,6 +5013,7 @@
      "locator": "Punto 3"
     }
    ],
+   "simple": "Defender la ley de memoria democrática frente a las leyes autonómicas de «concordia» que buscan derogarla.",
    "notes": "Texto aprobado publicado tras la votación.",
    "review": {
     "status": "agent_reviewed",
@@ -5003,6 +5069,7 @@
      "locator": "Punto 3"
     }
    ],
+   "simple": "Pedir responsabilidades por los escándalos de corrupción y que se pueda elegir cuanto antes un nuevo Gobierno.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -5071,6 +5138,7 @@
      "locator": "Disposición adicional única y Disposición transitoria única"
     }
    ],
+   "simple": "Obligar a la SAREB a ceder la mayoría de sus viviendas y suelos a las administraciones para vivienda pública.",
    "notes": "Texto inicial de la proposición de ley (antes de enmiendas), no el texto final.",
    "review": {
     "status": "agent_reviewed",
@@ -5149,6 +5217,7 @@
      "locator": "Disposición final segunda"
     }
    ],
+   "simple": "Que los inquilinos puedan alargar su contrato hasta dos años más y limitar la subida del alquiler al 2 % hasta 2027.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -5217,6 +5286,7 @@
      "locator": "Punto 4"
     }
    ],
+   "simple": "Mantener la caja única de la Seguridad Social y rechazar pactos que, según el texto, rompen la igualdad entre españoles.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -5255,6 +5325,7 @@
      "locator": "Punto 3"
     }
    ],
+   "simple": "Llevar la alta velocidad a Pamplona en 2030 y terminar la autovía A-15 en Navarra.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -5322,6 +5393,7 @@
      "locator": "Punto 8"
     }
    ],
+   "simple": "Obligar a los portales inmobiliarios a explicar y auditar los algoritmos con los que ordenan los anuncios.",
    "notes": "Se votó una enmienda transaccional no publicada; el resumen refleja el texto original.",
    "review": {
     "status": "agent_reviewed",
@@ -5366,6 +5438,7 @@
      "locator": "Disposición final segunda"
     }
    ],
+   "simple": "Exigir licencia de la federación española para competir en pruebas oficiales estatales e internacionales.",
    "notes": "El texto no reproduce el apartado 2 del artículo 48 que se suprime; su contenido no consta en el documento.",
    "review": {
     "status": "agent_reviewed",
@@ -5441,6 +5514,7 @@
      "locator": "Disposición final segunda"
     }
    ],
+   "simple": "Reconocer a los funcionarios de prisiones como agentes de la autoridad, con más protección legal.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -5520,6 +5594,7 @@
      "locator": "Artículo primero, apartado Cinco"
     }
    ],
+   "simple": "Dar al Instituto de las Mujeres más funciones contra la discriminación por sexo, incluido llevar casos a los tribunales.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -5589,6 +5664,7 @@
      "locator": "Punto 2"
     }
    ],
+   "simple": "Medidas urgentes para cubrir la falta de médicos en atención primaria en verano, incluidos MIR de último año.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -5652,6 +5728,7 @@
      "locator": "Disposición transitoria única"
     }
    ],
+   "simple": "Permitir a concejales y cargos locales votar a distancia en casos como embarazo, enfermedad o cuidado de familiares.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -5711,6 +5788,7 @@
      "locator": "Punto 1"
     }
    ],
+   "simple": "Impulsar en Europa que las energéticas aporten parte de sus beneficios extraordinarios por la guerra.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -5766,6 +5844,7 @@
      "locator": "Punto 4"
     }
    ],
+   "simple": "Exigir al Gobierno colaborar con las investigaciones sobre su gestión y cumplir la ley de transparencia.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -5796,6 +5875,7 @@
      "locator": "Punto 1"
     }
    ],
+   "simple": "Aprobar ya la Ley de Familias: reconocimiento de la diversidad familiar, protección social y conciliación.",
    "notes": "Se votó con una enmienda incorporada que no figura en este texto; el resumen refleja el texto original.",
    "review": {
     "status": "agent_reviewed",
@@ -5856,6 +5936,7 @@
      "locator": "Disposiciones adicionales segunda y tercera"
     }
    ],
+   "simple": "Crear un consorcio entre el Estado y la Generalitat para planificar y ejecutar las inversiones del Estado en Cataluña.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -5927,6 +6008,7 @@
      "locator": "Punto 2"
     }
    ],
+   "simple": "Devolver a sus países a los menores migrantes no acompañados y paralizar su reparto por España.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -5994,6 +6076,7 @@
      "locator": "Disposición final tercera"
     }
    ],
+   "simple": "Reconocer a los funcionarios de prisiones como agentes de la autoridad y protegerlos más ante agresiones.",
    "notes": "Texto inicial, tal como se presentó (antes de enmiendas). La disposición final segunda (título competencial) es técnica y no se resume.",
    "review": {
     "status": "agent_reviewed",
@@ -6061,6 +6144,7 @@
      "locator": "Punto 2"
     }
    ],
+   "simple": "Prohibir que empresas y fondos compren viviendas y subirles los impuestos.",
    "notes": "Texto original; se votó una enmienda transaccional que no se publicó.",
    "review": {
     "status": "agent_reviewed",
@@ -6117,6 +6201,7 @@
      "locator": "Disposición final segunda"
     }
    ],
+   "simple": "Ampliar la prisión permanente revisable a asesinos que oculten el cadáver o reincidan.",
    "notes": "Texto inicial de la proposición de ley tal como se publicó en el BOCG.",
    "review": {
     "status": "agent_reviewed",
@@ -6159,6 +6244,7 @@
      "locator": "Punto 4"
     }
    ],
+   "simple": "Anular una compra de material militar de 1.129 millones y cortar todo comercio de armas con Israel.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -6209,6 +6295,7 @@
      "locator": "Punto 2"
     }
    ],
+   "simple": "Reafirmar la pertenencia a la UE y pedir que el euskera, el gallego y el catalán sean lenguas oficiales europeas.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -6287,6 +6374,7 @@
      "locator": "Disposición final primera"
     }
    ],
+   "simple": "Reconocimiento médico anual y controles de alcohol y drogas para conductores profesionales.",
    "notes": "Texto inicial de la proposición. El artículo 3 reproduce el artículo 54 del Estatuto de los Trabajadores (despido disciplinario) sin que el texto permita identificar con claridad qué cambia; no se resume.",
    "review": {
     "status": "agent_reviewed",
@@ -6360,6 +6448,7 @@
      "locator": "Disposición final"
     }
    ],
+   "simple": "Permitir las juntas de vecinos por videoconferencia y las notificaciones por correo electrónico.",
    "notes": "Texto inicial, tal como se presentó (antes de enmiendas). Modifica la Ley 49/1960 de propiedad horizontal.",
    "review": {
     "status": "agent_reviewed",
@@ -6406,6 +6495,7 @@
      "locator": "Punto 5"
     }
    ],
+   "simple": "Implantar la educación sexual obligatoria desde infantil hasta bachillerato y FP.",
    "notes": "Texto original; se votó una enmienda transaccional que no se publicó. El texto disponible termina el punto 5 sin punto final.",
    "review": {
     "status": "agent_reviewed",
@@ -6450,6 +6540,7 @@
      "locator": "Punto 4"
     }
    ],
+   "simple": "Que los jueces elijan a los vocales judiciales del CGPJ y cesar al fiscal general del Estado.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -6507,6 +6598,7 @@
      "locator": "Punto 1"
     }
    ],
+   "simple": "Renovar la vía de tren Pamplona-Vitoria-Burgos para alta velocidad, mercancías y cercanías.",
    "notes": "El texto usa los nombres vascos (Iruñea, Gasteiz); se han escrito en castellano.",
    "review": {
     "status": "agent_reviewed",
@@ -6557,6 +6649,7 @@
      "locator": "Disposiciones finales segunda y tercera"
     }
    ],
+   "simple": "Indemnizar con 250.000 euros a las familias de quienes murieron defendiendo la democracia entre 1968 y 1978.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -6630,6 +6723,7 @@
      "locator": "Artículo único (artículo 172 bis, letra d)"
     }
    ],
+   "simple": "Castigar con cárcel obligar a alguien a casarse, con más pena si es menor.",
    "notes": "Texto inicial de la proposición de ley tal como se publicó en el BOCG.",
    "review": {
     "status": "agent_reviewed",
@@ -6685,6 +6779,7 @@
      "locator": "Punto 1"
     }
    ],
+   "simple": "Hacer fijos a los empleados públicos que llevan demasiado tiempo como temporales, incluidos los ya cesados.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -6735,6 +6830,7 @@
      "locator": "Ley 9/2017, artículos 1, 122 y 145; Ley 13/2022, disposición adicional quinta; Tráfico, artículo 56"
     }
    ],
+   "simple": "Más uso de las lenguas cooficiales en juzgados, administración, colegios y comercios, y exigirlas a jueces y funcionarios.",
    "notes": "Texto inicial (antes de enmiendas), ómnibus: también modifica fuerzas y cuerpos de seguridad, cine, RTVE, deporte, educación (disposición adicional trigésima octava) y la Ley del Gobierno (informe de impacto lingüístico, artículo 26). Una disposición final obliga a adaptar normas estatales en un año y otra exige dotación económica.",
    "review": {
     "status": "agent_reviewed",
@@ -6820,6 +6916,7 @@
      "locator": "Disposiciones adicionales primera y tercera"
     }
    ],
+   "simple": "Más ayudas a familias: permisos más flexibles, deducciones por hijos y avanzar hacia la escuela 0-3 gratuita.",
    "notes": "Texto inicial, tal como se presentó. Además incluye medidas para familias de acogida, con discapacidad y rurales (artículos 12, 13 y 15), un portal de conciliación (artículo 16) y cambios en la Ley de Familias Numerosas (disposición final segunda).",
    "review": {
     "status": "agent_reviewed",
@@ -6891,6 +6988,7 @@
      "locator": "Punto 2"
     }
    ],
+   "simple": "Acelerar las obras de la segunda fase del Canal de Navarra.",
    "notes": "Texto aprobado publicado en el BOCG.",
    "review": {
     "status": "agent_reviewed",
@@ -6953,6 +7051,7 @@
      "locator": "Disposiciones finales segunda y tercera"
     }
    ],
+   "simple": "Que el Estado compense a RTVE por los impuestos que no puede deducirse.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -6991,6 +7090,7 @@
      "locator": "Punto 3"
     }
    ],
+   "simple": "Quitar la obligación de que todos los ayuntamientos cobren una tasa de basuras.",
    "notes": "Texto original votado en sus términos.",
    "review": {
     "status": "agent_reviewed",
@@ -7021,6 +7121,7 @@
      "locator": "Punto 1"
     }
    ],
+   "simple": "Reconocer a Kosovo como Estado.",
    "notes": "Texto original votado en sus términos; un único punto.",
    "review": {
     "status": "agent_reviewed",
@@ -7080,6 +7181,7 @@
      "locator": "Disposición final única"
     }
    ],
+   "simple": "Multar más a quien dañe o ponga en riesgo bienes del patrimonio histórico, como obras de museos.",
    "notes": "Texto inicial, tal como se presentó (antes de enmiendas).",
    "review": {
     "status": "agent_reviewed",
@@ -7136,6 +7238,7 @@
      "locator": "Punto 1"
     }
    ],
+   "simple": "Regularizar en dos meses a los extranjeros sin papeles que ya estaban en España antes de noviembre de 2021.",
    "notes": "Texto original; el aviso de la interfaz indica que se votó con una enmienda incorporada que no figura en este texto.",
    "review": {
     "status": "agent_reviewed",
@@ -7180,6 +7283,7 @@
      "locator": "Artículo único, apartado Tres (artículo 51.b)"
     }
    ],
+   "simple": "Que los deportistas puedan decidir libremente si acuden o no a la selección cuando los convocan.",
    "notes": "Texto inicial de la proposición. El apartado Tres reproduce el artículo 51 completo; el texto no señala qué frase es nueva, por lo que la viñeta describe lo que el artículo dice y no afirma que sea un cambio concreto.",
    "review": {
     "status": "agent_reviewed",
@@ -7252,6 +7356,7 @@
      "locator": "Artículo 1.º, apartado Segundo (disposición adicional octava)"
     }
    ],
+   "simple": "Más dureza contra el terrorismo de ETA: investigar atentados sin resolver y prohibir homenajes a condenados.",
    "notes": "Texto inicial, tal como se presentó (antes de enmiendas). Los artículos 2.º a 5.º tienen rango de ley orgánica.",
    "review": {
     "status": "agent_reviewed",
@@ -7338,6 +7443,7 @@
      "locator": "Artículo segundo, apartados Uno y Dos (artículos 28 y 29 del Estatuto del Ministerio Fiscal)"
     }
    ],
+   "simple": "Cambiar cómo se eligen jueces del Supremo, vocales del CGPJ y fiscal general para separarlos de la política.",
    "notes": "El documento es la versión inicial de la proposición (BOCG B-130-1), no el texto final votado en la votación de conjunto. No se resume la disposición adicional (informe del CGPJ en seis meses sobre la elección de vocales judiciales) por el límite de seis viñetas.",
    "review": {
     "status": "agent_reviewed",
@@ -7423,6 +7529,7 @@
      "locator": "Punto 8"
     }
    ],
+   "simple": "Esclarecer los sucesos de San Fermín de 1978 y reconocer a sus víctimas.",
    "notes": "Texto aprobado publicado en el BOCG.",
    "review": {
     "status": "agent_reviewed",
@@ -7497,6 +7604,7 @@
      "locator": "Punto 5"
     }
    ],
+   "simple": "Renunciar a la amnistía del «procés» y recuperar los delitos de sedición y malversación como estaban.",
    "notes": "Texto original votado en sus términos.",
    "review": {
     "status": "agent_reviewed",
@@ -7539,6 +7647,7 @@
      "locator": "Punto 4"
     }
    ],
+   "simple": "Priorizar la Y vasca para los trenes de mercancías y reducir el ruido y las molestias en los pueblos.",
    "notes": "Texto aprobado publicado en el BOCG.",
    "review": {
     "status": "agent_reviewed",
@@ -7591,6 +7700,7 @@
      "locator": "Punto 10"
     }
    ],
+   "simple": "Menos niños por educadora en escuelas infantiles de 0 a 3 años y una red pública suficiente.",
    "notes": "Texto original; se votó una enmienda transaccional que no se publicó, así que el texto votado puede diferir.",
    "review": {
     "status": "agent_reviewed",
@@ -7643,6 +7753,7 @@
      "locator": "Punto 7"
     }
    ],
+   "simple": "Reforzar la independencia de jueces, instituciones y medios, y presionar por una transición en Venezuela.",
    "notes": "Texto original; se votó una enmienda transaccional que no se publicó, así que el texto votado puede diferir. El punto 7 aparece cortado al final en el texto disponible.",
    "review": {
     "status": "agent_reviewed",
@@ -7723,6 +7834,7 @@
      "locator": "Artículo segundo, apartados Ocho y Nueve"
     }
    ],
+   "simple": "Castigar más a los multirreincidentes en hurtos y estafas, y el robo de móviles.",
    "notes": "El título de la votación cita también la Ley Orgánica 4/2000 (extranjería), pero el texto disponible (aprobación definitiva, BOCG B-97-10) solo modifica la Ley de Enjuiciamiento Criminal y el Código Penal. Además incluye la Disposición final primera: al menos un juez o jueza de adscripción territorial por cada cien mil habitantes en cada Tribunal Superior de Justicia en dos años (no cabe en 6 viñetas).",
    "review": {
     "status": "agent_reviewed",
@@ -7808,6 +7920,7 @@
      "locator": "Puntos 9 y 10"
     }
    ],
+   "simple": "Reconocer como víctimas del franquismo a las mujeres internadas en el Patronato de Protección a la Mujer.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -7888,6 +8001,7 @@
      "locator": "Disposición transitoria única"
     }
    ],
+   "simple": "Permitir recurrir al Constitucional leyes orgánicas y estatutos antes de que entren en vigor.",
    "notes": "Texto inicial de la proposición de ley orgánica tal como se publicó en el BOCG.",
    "review": {
     "status": "agent_reviewed",
@@ -7953,6 +8067,7 @@
      "locator": "Punto 1"
     }
    ],
+   "simple": "Pasar a la Xunta las viviendas y suelos de la SAREB en Galicia para crear vivienda pública.",
    "notes": "Texto original; se votó con una enmienda incorporada que este texto no recoge.",
    "review": {
     "status": "agent_reviewed",
@@ -8018,6 +8133,7 @@
      "locator": "Disposiciones finales segunda, novena y decimonovena"
     }
    ],
+   "simple": "Reorganizar los juzgados en tribunales de instancia y exigir intentar negociar antes de ir a juicio civil.",
    "notes": "El documento es la versión inicial del proyecto (BOCG A-16-1, 22-03-2024), no el texto final votado. El título de la votación omite la mención a las acciones colectivas, así que ese bloque puede no estar en el texto final. En la disposición final decimonovena el texto extraído omite el contenido del artículo 50 del Estatuto de los Trabajadores, por eso solo se indica el tema.",
    "review": {
     "status": "agent_reviewed",
@@ -8102,6 +8218,7 @@
      "locator": "Parte dispositiva, 1.º, apartado 3"
     }
    ],
+   "simple": "Endurecer los requisitos del permiso de paternidad cuando el hijo nace en el extranjero.",
    "notes": "La numeración del texto original se repite (1, 2, 3...) en listas anidadas; los localizadores son orientativos.",
    "review": {
     "status": "agent_reviewed",
@@ -8162,6 +8279,7 @@
      "locator": "Punto 1"
     }
    ],
+   "simple": "Que la Generalitat recaude todos los impuestos en Cataluña y luego pague al Estado por sus servicios.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -8209,6 +8327,7 @@
      "locator": "Punto 1"
     }
    ],
+   "simple": "Subir la indemnización por despido improcedente para que sea realmente disuasoria.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -8256,6 +8375,7 @@
      "locator": "Punto 2"
     }
    ],
+   "simple": "Una financiación autonómica justa y un plan fiscal para reducir la deuda pública.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -8319,6 +8439,7 @@
      "locator": "Artículo único, apartado Cuatro"
     }
    ],
+   "simple": "Castigar más a los multirreincidentes en hurtos y estafas, y el robo de móviles y aparatos electrónicos.",
    "notes": "Texto inicial de la proposición, antes de enmiendas.",
    "review": {
     "status": "agent_reviewed",
@@ -8402,6 +8523,7 @@
      "locator": "Punto 7"
     }
    ],
+   "simple": "Exigir al Gobierno que cumpla y rinda cuentas de la ley de memoria democrática: símbolos franquistas, bienes expoliados, víctimas.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -8444,6 +8566,7 @@
      "locator": "Punto 4"
     }
    ],
+   "simple": "No presionar a la nueva Fiscal General, no dar cargos al anterior y no promover protestas contra el Supremo.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -8515,6 +8638,7 @@
      "locator": "Punto 6"
     }
    ],
+   "simple": "Medidas de vivienda: regular el alquiler temporal, gravar pisos vacíos y turísticos y compras de no residentes extracomunitarios.",
    "notes": "El punto 6 no concreta qué compras grava; la moción trata de vivienda y compras de inmuebles con fines especulativos.",
    "review": {
     "status": "agent_reviewed",
@@ -8553,6 +8677,7 @@
      "locator": "Punto 2"
     }
    ],
+   "simple": "Publicar cada trimestre datos de márgenes empresariales para ayudar a negociar los convenios laborales.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -8608,6 +8733,7 @@
      "locator": "Punto 3"
     }
    ],
+   "simple": "Reprobar a la ministra de Igualdad y pedir su cese por los fallos de las pulseras antimaltrato.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -8670,6 +8796,7 @@
      "locator": "Disposición final única"
     }
    ],
+   "simple": "Que solo las personas, y no empresas o fondos, puedan comprar viviendas, salvo excepciones.",
    "notes": "Texto inicial. El documento se redacta como «Se insta al Gobierno a modificar el artículo 10» de la Ley 12/2023; el apartado 1 y 2 reproducen facultades y medidas públicas ya existentes y se omiten.",
    "review": {
     "status": "agent_reviewed",
@@ -8732,6 +8859,7 @@
      "locator": "Punto 2"
     }
    ],
+   "simple": "Estudiar y divulgar la destrucción de libros durante el franquismo y reconocer a libreros, editores y autores.",
    "notes": "Texto aprobado publicado en el BOCG; PNL con dos puntos.",
    "review": {
     "status": "agent_reviewed",
@@ -8799,6 +8927,7 @@
      "locator": "Disposiciones finales cuarta y quinta"
     }
    ],
+   "simple": "Que el Congreso tenga que autorizar las misiones militares en el exterior y el envío de armas a zonas en guerra.",
    "notes": "Texto inicial, tal como se presentó. El apartado 2 y 3 del artículo 17 no se reproducen en el documento («[…]»).",
    "review": {
     "status": "agent_reviewed",
@@ -8870,6 +8999,7 @@
      "locator": "Punto 2"
     }
    ],
+   "simple": "Revocar el plan de rearme y destinar esos 10.500 millones a educación pública.",
    "notes": "El texto disponible es el original; se votó con una enmienda incorporada que no está reflejada aquí.",
    "review": {
     "status": "agent_reviewed",
@@ -8938,6 +9068,7 @@
      "locator": "Título IV, artículos 51 y 55"
     }
    ],
+   "simple": "Paquete anticrisis 2024: IVA 0 % en alimentos básicos, subida de pensiones del 3,8 %, ayudas al transporte y freno a desahucios.",
    "notes": "Texto ómnibus muy extenso. Se omiten por espacio, entre otras, la suspensión de comisiones por amortización anticipada de hipotecas variables (artículo 1), la prórroga del bono social (artículo 35), la prórroga del impuesto de grandes fortunas (disposición adicional quinta) y las medidas fiscales y energéticas.",
    "review": {
     "status": "agent_reviewed",
@@ -9020,6 +9151,7 @@
      "locator": "Disposición final"
     }
    ],
+   "simple": "Impedir presentarse a elecciones a condenados por terrorismo que no rechacen el terrorismo ni pidan perdón a las víctimas.",
    "notes": "Texto inicial, tal como se presentó.",
    "review": {
     "status": "agent_reviewed",
@@ -9095,6 +9227,7 @@
      "locator": "Disposición transitoria única"
     }
    ],
+   "simple": "Reconocer a los funcionarios de prisiones como agentes de la autoridad, con más protección legal.",
    "notes": "Texto tras su paso por el Pleno (BOCG 102-7). Los apartados Tres y Cuatro del artículo 80 (selección y formación) se reproducen sin cambio sustancial y se omiten.",
    "review": {
     "status": "agent_reviewed",
@@ -9176,6 +9309,7 @@
      "locator": "Disposición adicional cuarta"
     }
    ],
+   "simple": "Ayudas y avales de hasta 5.000 millones a empresas afectadas por los aranceles de Estados Unidos.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -9252,6 +9386,7 @@
      "locator": "Punto 1, letra d)"
     }
    ],
+   "simple": "Pedir unos presupuestos de 2026 con ayudas a familias, escuela 0-3 gratuita y deflactar el IRPF.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -9286,6 +9421,7 @@
      "locator": "Punto 2"
     }
    ],
+   "simple": "Apoyar la ampliación norte del Puerto de Valencia.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -9333,6 +9469,7 @@
      "locator": "Punto 2"
     }
    ],
+   "simple": "Defender el derecho internacional, la paz y el multilateralismo en la política exterior.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -9379,6 +9516,7 @@
      "locator": "Entrada en vigor"
     }
    ],
+   "simple": "Que el seguro agrario cubra también caídas de ingresos por precios o mercados, no solo daños del clima.",
    "notes": "Versión inicial de la proposición publicada en el BOCG; no es un texto final.",
    "review": {
     "status": "agent_reviewed",
@@ -9448,6 +9586,7 @@
      "locator": "Artículo 4, apartado 2"
     }
    ],
+   "simple": "Actualizar el dinero que el Estado adelanta a comunidades y ayuntamientos en 2025.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -9508,6 +9647,7 @@
      "locator": "Punto 1"
     }
    ],
+   "simple": "Combatir el negacionismo de la violencia de género.",
    "notes": "El PDF enlazado (BOCG D-445) contiene varias iniciativas; se ha usado solo la de esta votación.",
    "review": {
     "status": "agent_reviewed",
@@ -9570,6 +9710,7 @@
      "locator": "Puntos 8, 9 y 12"
     }
    ],
+   "simple": "Equiparar sueldos de Policía y Guardia Civil, reconocerles profesión de riesgo y endurecer penas por agredir a agentes.",
    "notes": "Moción con 12 puntos agrupados en 6 viñetas. El PDF enlazado (BOCG D-445) contiene varias iniciativas; se ha usado solo la de esta votación.",
    "review": {
     "status": "agent_reviewed",
@@ -9645,6 +9786,7 @@
      "locator": "Artículo único, apartados 5 y 6 del artículo 307"
     }
    ],
+   "simple": "Reformar el curso de formación de los futuros jueces, con más prácticas.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -9719,6 +9861,7 @@
      "locator": "Artículos 21 a 23"
     }
    ],
+   "simple": "Alargar a 2026 el freno a desahucios y el bono social, y subir las pensiones un 2,7 %.",
    "notes": "Texto ómnibus. Se omiten, entre otras, las ayudas por la DANA (artículos 19 y 20), la cotización adicional de bomberos forestales (disposición adicional tercera) y la tarifa de primas por accidentes de trabajo (disposición final primera).",
    "review": {
     "status": "agent_reviewed",
@@ -9801,6 +9944,7 @@
      "locator": "Punto 8"
     }
    ],
+   "simple": "Desbloquear inversiones del Estado en León: carreteras, tren y proyectos en la ciudad.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -9879,6 +10023,7 @@
      "locator": "Artículo único, apartado Tres (disposición adicional decimoquinta, apartados 1 y 9)"
     }
    ],
+   "simple": "Permitir usar un beneficio fiscal de Canarias para comprar o construir viviendas de alquiler, no turísticas.",
    "notes": "Texto inicial de la proposición (antes de enmiendas). El artículo único aplica los cambios a periodos impositivos iniciados desde el 1 de enero de 2025; la nueva disposición adicional fija efectos desde el 1 de enero de 2024.",
    "review": {
     "status": "agent_reviewed",
@@ -9964,6 +10109,7 @@
      "locator": "Artículo primero, apartado Diez (artículo 11.2)"
     }
    ],
+   "simple": "Exigir que tres jueces del Supremo autoricen las escuchas y registros del CNI.",
    "notes": "Texto inicial (antes de enmiendas). El articulado también redefine la composición de la Comisión Delegada del Gobierno para Asuntos de Inteligencia (Artículo primero, apartado Siete) y renombra la Ley Orgánica 2/2002 como «del control judicial». La exposición de motivos habla de que la comisión parlamentaria conozca los medios de intervención, pero eso no aparece en el articulado.",
    "review": {
     "status": "agent_reviewed",
@@ -10039,6 +10185,7 @@
      "locator": "Disposición adicional única"
     }
    ],
+   "simple": "Dar prioridad en emergencias a los pueblos pequeños sin servicios básicos garantizados.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -10111,6 +10258,7 @@
      "locator": "Puntos 14 y 15"
     }
    ],
+   "simple": "Defender la PAC y a los agricultores frente a normas climáticas de la UE y el acuerdo con Mercosur.",
    "notes": "El punto 13 (reconocimiento del papel de agricultores, ganaderos y pescadores) no tiene viñeta propia por el límite de 6. El texto extraído incluye notas a pie de página mezcladas en el punto 4.",
    "review": {
     "status": "agent_reviewed",
@@ -10191,6 +10339,7 @@
      "locator": "Artículo único, apartado Dos (disposición adicional vigésima novena, apdos. 2 y 3)"
     }
    ],
+   "simple": "Impedir despidos en empresas que se van fuera de la UE y obligarlas a devolver ayudas recibidas.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -10272,6 +10421,7 @@
      "locator": "Artículo tercero"
     }
    ],
+   "simple": "Reforzar con jueces especializados los juzgados de violencia sobre la mujer.",
    "notes": "Texto inicial (antes de enmiendas). El texto deja sin contenido la letra h del artículo 89.5 sin transcribir su contenido anterior; la exposición de motivos la relaciona con la ampliación de competencias sobre delitos contra la libertad sexual.",
    "review": {
     "status": "agent_reviewed",
@@ -10344,6 +10494,7 @@
      "locator": "Disposición final única"
     }
    ],
+   "simple": "Que Formentera elija su propio senador, separada de Ibiza.",
    "notes": "Texto aprobado por el Pleno en lectura única (BOCG B-329-6). El preámbulo lo vincula a la reforma del artículo 69.3 de la Constitución.",
    "review": {
     "status": "agent_reviewed",
@@ -10407,6 +10558,7 @@
      "locator": "Disposición final"
     }
    ],
+   "simple": "Sanciones y expulsiones más duras para diputados que insulten o se comporten mal en el Congreso.",
    "notes": "Texto inicial (antes de enmiendas). El artículo 101 se reproduce entero; solo se identifica con claridad como novedad el supuesto 4.º, por lo que no se resumen los demás supuestos.",
    "review": {
     "status": "agent_reviewed",
@@ -10471,6 +10623,7 @@
      "locator": "Artículo segundo"
     }
    ],
+   "simple": "Prohibir que el Gobierno mueva dinero entre partidas del presupuesto sin pasar por el Congreso.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -10537,6 +10690,7 @@
      "locator": "Disposición final tercera"
     }
    ],
+   "simple": "Subir las ayudas mínimas del Estado para personas en situación de dependencia.",
    "notes": "El cuadro con las cuantías mensuales por grado no figura en el texto extraído; solo se recoge la cifra de grado III+.",
    "review": {
     "status": "agent_reviewed",
@@ -10602,6 +10756,7 @@
      "locator": "Punto 3"
     }
    ],
+   "simple": "Seguir impulsando la Agenda 2030.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -10648,6 +10803,7 @@
      "locator": "Punto 1"
     }
    ],
+   "simple": "Pedir al Gobierno que colabore con la justicia en los casos de corrupción que le afectan.",
    "notes": "Un único punto. Se omite la mención que hace el texto a un partido concreto.",
    "review": {
     "status": "agent_reviewed",
@@ -10708,6 +10864,7 @@
      "locator": "Punto 9"
     }
    ],
+   "simple": "Endurecer la política migratoria: expulsiones, repatriar menores y retirar ayudas a ONG.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -10758,6 +10915,7 @@
      "locator": "Disposición adicional segunda; disposiciones finales primera, cuarta y quinta"
     }
    ],
+   "simple": "Prorrogar en 2025 descuentos al transporte, subida de pensiones y freno a desahucios, entre otras medidas.",
    "notes": "Texto ómnibus muy extenso (50+ materias); se resumen los bloques principales.",
    "review": {
     "status": "agent_reviewed",
@@ -10843,6 +11001,7 @@
      "locator": "Puntos 10 a 12"
     }
    ],
+   "simple": "Proteger los colegios de educación especial, más apoyo al profesorado y otras medidas educativas.",
    "notes": "El texto extraído incluye notas a pie de página mezcladas en el punto 5.",
    "review": {
     "status": "agent_reviewed",
@@ -10921,6 +11080,7 @@
      "locator": "Puntos 11 y 12"
     }
    ],
+   "simple": "Endurecer la ley de extranjería: más expulsiones, menos ayudas y devolver a menores no acompañados.",
    "notes": "El texto extraído incluye notas a pie de página mezcladas en el punto 1.",
    "review": {
     "status": "agent_reviewed",
@@ -10999,6 +11159,7 @@
      "locator": "Punto 7"
     }
    ],
+   "simple": "Defender en Europa un presupuesto mayor y que no se recorten las ayudas al campo y la pesca.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -11049,6 +11210,7 @@
      "locator": "Puntos 7 y 11 a 13"
     }
    ],
+   "simple": "Medidas urgentes contra la peste porcina africana: mando único, ayudas al sector y control del jabalí.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -11087,6 +11249,7 @@
      "locator": "Punto 3"
     }
    ],
+   "simple": "Promover y apoyar a las asociaciones de vecinos.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -11153,6 +11316,7 @@
      "locator": "Artículos 17 y 18"
     }
    ],
+   "simple": "Limitar la publicidad de comida poco sana dirigida a menores y prohibirles bebidas energéticas.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -11229,6 +11393,7 @@
      "locator": "Disposición derogatoria única, letra b)"
     }
    ],
+   "simple": "Recuperar las rebajas de cotizaciones para empresas de Ceuta y Melilla que se quitaron en 2023.",
    "notes": "Versión inicial de la proposición de ley. La disposición adicional 23.ª de la Ley General de la Seguridad Social y el contenido del Real Decreto 660/2023 no se detallan en el texto votado.",
    "review": {
     "status": "agent_reviewed",
@@ -11305,6 +11470,7 @@
      "locator": "Disposiciones finales primera a cuarta"
     }
    ],
+   "simple": "Actualizar el dinero que el Estado adelanta a comunidades y ayuntamientos en 2026.",
    "notes": "Los importes de las tablas de suplementos de crédito no figuran en el texto extraído.",
    "review": {
     "status": "agent_reviewed",
@@ -11386,6 +11552,7 @@
      "locator": "Disposiciones finales primera, segunda y quinta"
     }
    ],
+   "simple": "Paridad entre mujeres y hombres en listas electorales, instituciones, empresas y colegios profesionales.",
    "notes": "Texto ómnibus tras su paso por la Comisión. Otras disposiciones finales tocan permisos de víctimas de violencia de género o sexual (Estatuto de los Trabajadores, DF novena), ayudas a víctimas y estabilidad presupuestaria (DF cuarta); no caben en las seis viñetas.",
    "review": {
     "status": "agent_reviewed",
@@ -11471,6 +11638,7 @@
      "locator": "Artículo único, apartados Once, Doce y Catorce (artículos 573, 574 y 575)"
     }
    ],
+   "simple": "Que los jueces elijan directamente a 12 de los 20 vocales del CGPJ.",
    "notes": "Versión inicial de la proposición de ley orgánica, antes de enmiendas.",
    "review": {
     "status": "agent_reviewed",
@@ -11553,6 +11721,7 @@
      "locator": "Artículo primero (artículo 57.4 de la Ley 16/2003)"
     }
    ],
+   "simple": "Tarjeta sanitaria válida en toda España y derecho a tener tu historia clínica en español.",
    "notes": "Texto de la proposición tal como se publicó al admitirla a trámite.",
    "review": {
     "status": "agent_reviewed",
@@ -11629,6 +11798,7 @@
      "locator": "Punto 5"
     }
    ],
+   "simple": "Rechazar las sanciones de Estados Unidos contra Cuba y pedir el fin del bloqueo.",
    "notes": "Texto original; se votó con una enmienda incorporada que no figura en este texto.",
    "review": {
     "status": "agent_reviewed",
@@ -11673,6 +11843,7 @@
      "locator": "Disposición final segunda"
     }
    ],
+   "simple": "Prohibir el burka y el nicab en espacios públicos.",
    "notes": "Texto de la proposición tal como se publicó al admitirla a trámite.",
    "review": {
     "status": "agent_reviewed",
@@ -11746,6 +11917,7 @@
      "locator": "Disposición adicional segunda"
     }
    ],
+   "simple": "Prorrogar en 2025 descuentos al transporte, subida de pensiones y freno a desahucios, y avales al alquiler para jóvenes.",
    "notes": "Texto ómnibus; se resumen los bloques principales.",
    "review": {
     "status": "agent_reviewed",
@@ -11831,6 +12003,7 @@
      "locator": "Disposiciones adicionales primera y tercera"
     }
    ],
+   "simple": "Traspasar a Galicia la autopista AP-9 y la potestad de fijar sus peajes.",
    "notes": "Texto de la proposición tal como la presentó el Parlamento de Galicia; la votación de conjunto pudo referirse a un texto modificado durante la tramitación.",
    "review": {
     "status": "agent_reviewed",
@@ -11894,6 +12067,7 @@
      "locator": "Punto 1"
     }
    ],
+   "simple": "Exigir al Gobierno que asuma su responsabilidad política por un caso que el texto llama «organización criminal».",
    "notes": "El texto disponible es solo el punto 1 y se refiere a la «antedicha organización criminal» sin identificarla; puede haber más puntos en la moción no recogidos en este extracto.",
    "review": {
     "status": "agent_reviewed",
@@ -11954,6 +12128,7 @@
      "locator": "Punto 6"
     }
    ],
+   "simple": "Mejorar la sanidad pública: ley para la ELA, enfermedades raras y tarjeta sanitaria única.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -12004,6 +12179,7 @@
      "locator": "Disposición final primera"
     }
    ],
+   "simple": "Regular el testamento vital: dejar por escrito qué cuidados quieres al final de la vida, incluida la eutanasia.",
    "notes": "Texto de la proposición tal como se publicó al admitirla a trámite.",
    "review": {
     "status": "agent_reviewed",
@@ -12066,6 +12242,7 @@
      "locator": "Punto 2"
     }
    ],
+   "simple": "Pedir un calendario concreto para las obras de la segunda fase del Canal de Navarra.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -12116,6 +12293,7 @@
      "locator": "Punto 9, letras A, B, D y E"
     }
    ],
+   "simple": "Apostar por la nuclear, bajar impuestos a la energía y derogar la ley de cambio climático.",
    "notes": "El punto 9 incluye además exigir más interconexiones eléctricas con Francia y Portugal (letra F), no recogido por límite de viñetas.",
    "review": {
     "status": "agent_reviewed",
@@ -12198,6 +12376,7 @@
      "locator": "Artículo único, apartado Nueve (artículo 538.2)"
     }
    ],
+   "simple": "Despenalizar las injurias a la Corona, las ofensas religiosas o a España y el enaltecimiento del terrorismo.",
    "notes": "Versión inicial de la proposición de ley orgánica. Los nombres de los delitos suprimidos proceden de la exposición de motivos; el articulado solo indica el número de artículo.",
    "review": {
     "status": "agent_reviewed",
@@ -12265,6 +12444,7 @@
      "locator": "Punto 1"
     }
    ],
+   "simple": "Ajustar el IRPF a la inflación para que no se paguen más impuestos solo por subir precios.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -12327,6 +12507,7 @@
      "locator": "Disposición adicional única"
     }
    ],
+   "simple": "Poder conservar óvulos y semen congelados toda la vida y revisar la ley de reproducción asistida.",
    "notes": "Texto inicial de la proposición de ley (antes de enmiendas).",
    "review": {
     "status": "agent_reviewed",
@@ -12400,6 +12581,7 @@
      "locator": "Disposición adicional única"
     }
    ],
+   "simple": "Castigar el proxenetismo y multar a quien paga por sexo, sin sancionar nunca a quien ejerce la prostitución.",
    "notes": "Versión inicial publicada en el BOCG (texto presentado, no el final).",
    "review": {
     "status": "agent_reviewed",
@@ -12477,6 +12659,7 @@
      "locator": "Disposición final primera"
     }
    ],
+   "simple": "Endurecer la ley de extranjería: sin antecedentes penales para tener permiso y expulsión por delitos o estancia irregular.",
    "notes": "Texto inicial (antes de enmiendas). Omitido el apartado Doce (suprime los artículos 69 a 72) y la inadmisión de solicitudes con expediente de expulsión (apartado Trece) por límite de viñetas.",
    "review": {
     "status": "agent_reviewed",
@@ -12562,6 +12745,7 @@
      "locator": "Punto 2, letras h), i) y j)"
     }
    ],
+   "simple": "Reprobar al ministro del Interior, pedir su cese y endurecer la política migratoria.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -12636,6 +12820,7 @@
      "locator": "Punto 3"
     }
    ],
+   "simple": "Reducir la jornada laboral sin bajar sueldos y volver a jubilarse a los 65 años.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -12670,6 +12855,7 @@
      "locator": "Punto 2"
     }
    ],
+   "simple": "Que la Seguridad Social pague las 8 semanas de permiso parental y 16 para familias monomarentales.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -12733,6 +12919,7 @@
      "locator": "Puntos 14 a 16"
     }
    ],
+   "simple": "Derogar la ley educativa actual, volver al esfuerzo y mérito y garantizar el español como lengua vehicular.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -12798,6 +12985,7 @@
      "locator": "Punto 2"
     }
    ],
+   "simple": "Que todos los diputados y el jefe de la oposición declaren todo su patrimonio, ingresos y regalos.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -12873,6 +13061,7 @@
      "locator": "Puntos 3 y 7"
     }
    ],
+   "simple": "Suprimir la enseñanza de árabe y cultura marroquí y prohibir el velo islámico en colegios y universidades.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -12936,6 +13125,7 @@
      "locator": "Punto 1"
     }
    ],
+   "simple": "Subir la indemnización por despido improcedente a como era antes de la reforma laboral de 2012.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -12999,6 +13189,7 @@
      "locator": "Puntos 7 a 9"
     }
    ],
+   "simple": "Plan energético: más renovables, alargar las nucleares, no crear nuevos impuestos a la energía y apoyar el coche eléctrico.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -13078,6 +13269,7 @@
      "locator": "Punto 8"
     }
    ],
+   "simple": "Dar prioridad a los españoles en ayudas, vivienda y sanidad, y repatriar a los inmigrantes ilegales.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -13157,6 +13349,7 @@
      "locator": "Disposición final quinta"
     }
    ],
+   "simple": "Digitalizar la justicia y reformar el empleo público, los ayuntamientos, el mecenazgo y la seguridad del 5G.",
    "notes": "Texto ómnibus muy extenso (667.000 caracteres): se ha leído la estructura y los artículos clave de cada libro y de las disposiciones finales, no cada artículo del Libro primero.",
    "review": {
     "status": "agent_reviewed",
@@ -13236,6 +13429,7 @@
      "locator": "Artículo único, apartados Cuatro y Cinco"
     }
    ],
+   "simple": "Crear dentro de la Fiscalía una unidad independiente que vigile cómo usa los datos personales.",
    "notes": "Versión inicial publicada en el BOCG. La etiqueta de tema «Impuestos y economía» no se corresponde con el contenido (Ministerio Fiscal y protección de datos).",
    "review": {
     "status": "agent_reviewed",
@@ -13314,6 +13508,7 @@
      "locator": "Punto 8"
     }
    ],
+   "simple": "Más expulsiones, devolver menores no acompañados y suspender ayudas a países que no frenen la inmigración ilegal.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -13393,6 +13588,7 @@
      "locator": "Punto 10"
     }
    ],
+   "simple": "Formar al profesorado y apoyar a las familias en educación afectivo-sexual e igualdad.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -13473,6 +13669,7 @@
      "locator": "Puntos 8 y 10"
     }
    ],
+   "simple": "Reprobar al ministro de Transportes, pedir su cese y auditar y reforzar la seguridad de la red ferroviaria.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -13547,6 +13744,7 @@
      "locator": "Disposición final única"
     }
    ],
+   "simple": "Reformar la Constitución para que Formentera elija su propio senador, separada de Ibiza.",
    "notes": "Texto definitivo publicado tras la aprobación de Congreso y Senado; coincide con el texto votado.",
    "review": {
     "status": "agent_reviewed",
@@ -13601,6 +13799,7 @@
      "locator": "Punto 1"
     }
    ],
+   "simple": "Abrir un diálogo social para reducir la jornada laboral, empezando por 38,5 horas en 2024.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -13651,6 +13850,7 @@
      "locator": "Puntos 12 a 16"
     }
    ],
+   "simple": "Reprobar al ministro de Transportes y lanzar un plan de inversión y seguridad en trenes y carreteras.",
    "notes": "Moción de 16 puntos más dos apartados previos (A y B); agrupados en 6 viñetas. El texto incluye restos de notas a pie de página en el punto 3, ignorados.",
    "review": {
     "status": "agent_reviewed",
@@ -13733,6 +13933,7 @@
      "locator": "Disposición adicional tercera"
     }
    ],
+   "simple": "Que la prueba del talón detecte las mismas 12 enfermedades a todos los bebés, en toda España.",
    "notes": "Texto inicial de la proposición de ley, antes de enmiendas.",
    "review": {
     "status": "agent_reviewed",
@@ -13805,6 +14006,7 @@
      "locator": "Disposición final"
     }
    ],
+   "simple": "Pasar a Navarra la gestión y vigilancia del tráfico en su territorio.",
    "notes": "Texto ratificado por el Pleno tras el veto del Senado.",
    "review": {
     "status": "agent_reviewed",
@@ -13847,6 +14049,7 @@
      "locator": "Punto 4"
     }
    ],
+   "simple": "Planes contra el aumento de delitos, más policías y leyes más duras contra la multirreincidencia.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -13901,6 +14104,7 @@
      "locator": "Punto 2"
     }
    ],
+   "simple": "Promover un lenguaje responsable sobre el cáncer en medios y centros educativos.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -13966,6 +14170,7 @@
      "locator": "Disposición transitoria única, apartados 1 y 2"
     }
    ],
+   "simple": "Que los planes urbanísticos no se anulen por defectos de forma menores y sea más difícil recurrirlos.",
    "notes": "Versión inicial publicada en el BOCG (texto presentado, no el final).",
    "review": {
     "status": "agent_reviewed",
@@ -14052,6 +14257,7 @@
      "locator": "Disposición final segunda"
     }
    ],
+   "simple": "Actualizar qué delitos graves (narcotráfico, blanqueo, trata, terrorismo) juzga la Audiencia Nacional.",
    "notes": "Texto inicial de la proposición de ley, antes de enmiendas. No se compara con la redacción vigente del artículo 65, por lo que no se indica qué letras son nuevas.",
    "review": {
     "status": "agent_reviewed",
@@ -14125,6 +14331,7 @@
      "locator": "Disposición final"
     }
    ],
+   "simple": "Que Ibiza y Formentera elijan senadores por separado.",
    "notes": "Texto inicial de la proposición de ley, antes de enmiendas.",
    "review": {
     "status": "agent_reviewed",
@@ -14187,6 +14394,7 @@
      "locator": "Disposición transitoria única"
     }
    ],
+   "simple": "Recuperar la justicia universal: que España pueda juzgar genocidios y crímenes de guerra cometidos fuera.",
    "notes": "Versión inicial publicada en el BOCG (texto presentado, no el final).",
    "review": {
     "status": "agent_reviewed",
@@ -14260,6 +14468,7 @@
      "locator": "Puntos 10 y 11"
     }
    ],
+   "simple": "Bajar impuestos: IVA de funerarias y residencias, sucesiones, IRPF y más deducciones para autónomos.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -14338,6 +14547,7 @@
      "locator": "Artículo 2 (regla 3.ª del artículo 770 de la Ley de Enjuiciamiento Civil)"
     }
    ],
+   "simple": "No obligar a intentar una mediación antes de ir a juicio en divorcios y otros casos con menores.",
    "notes": "Texto inicial de la proposición de ley (toma en consideración), no un texto final.",
    "review": {
     "status": "agent_reviewed",
@@ -14421,6 +14631,7 @@
      "locator": "Artículo 28"
     }
    ],
+   "simple": "Medidas tras el apagón de 2025: vigilar mejor la red eléctrica e impulsar baterías y autoconsumo.",
    "notes": "Real decreto-ley tal como se publicó en el BOE.",
    "review": {
     "status": "agent_reviewed",
@@ -14506,6 +14717,7 @@
      "locator": "Puntos 6 y 7"
     }
    ],
+   "simple": "Frenar la subida de los alimentos: IVA 0 % en básicos, carne y pescado, y más ayudas al campo.",
    "notes": "Texto original; se votó una enmienda transaccional no publicada, por lo que el texto votado puede diferir.",
    "review": {
     "status": "agent_reviewed",
@@ -14599,6 +14811,7 @@
      "locator": "Puntos 8 y 9"
     }
    ],
+   "simple": "Ayudar a la industria a pasarse del gas a la electricidad y ampliar la inversión en redes eléctricas.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -14633,6 +14846,7 @@
      "locator": "Punto 2"
     }
    ],
+   "simple": "Bajar temporalmente el IVA de los alimentos básicos al 0 % y el de carne y pescado al 4 %.",
    "notes": "El texto no fija la duración de las rebajas: dice solo «temporalmente».",
    "review": {
     "status": "agent_reviewed",
@@ -14695,6 +14909,7 @@
      "locator": "Punto 16"
     }
    ],
+   "simple": "Derogar la ley de vivienda y bajar impuestos a la compra de la primera vivienda.",
    "notes": "El texto tiene 18 puntos; los puntos 6, 12, 14 y 17 (incentivos en zonas poco pobladas, defensa de la propiedad, protección temporal a deudores e inquilinos, seguridad jurídica) quedan sin viñeta propia por el límite de 6.",
    "review": {
     "status": "agent_reviewed",
@@ -14773,6 +14988,7 @@
      "locator": "Puntos 10 y 11"
     }
    ],
+   "simple": "Proteger a las víctimas de las terapias de conversión y prohibir su publicidad.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -14844,6 +15060,7 @@
      "locator": "Punto 4"
     }
    ],
+   "simple": "Impedir pactos políticos que den impunidad a prófugos o condenados y limitar los indultos.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -14915,6 +15132,7 @@
      "locator": "Punto 5, letras D a H"
     }
    ],
+   "simple": "Derogar la ley de vivienda, construir más y dar prioridad a los españoles en la vivienda pública.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -14989,6 +15207,7 @@
      "locator": "Disposición final primera (apartados 2, 4, 5, 8 y 9)"
     }
    ],
+   "simple": "Garantizar prácticas a todos los universitarios y crear espacios para probar proyectos de innovación.",
    "notes": "Versión inicial publicada en el BOCG (texto presentado, no el final).",
    "review": {
     "status": "agent_reviewed",
@@ -15052,6 +15271,7 @@
      "locator": "Disposición adicional única"
     }
    ],
+   "simple": "Castigar con cárcel almacenar o transportar combustible de forma peligrosa (el «petaqueo»).",
    "notes": "Versión inicial publicada en el BOCG. El texto articulado no menciona expresamente el narcotráfico; el límite de carburante queda a un reglamento posterior.",
    "review": {
     "status": "agent_reviewed",
@@ -15126,6 +15346,7 @@
      "locator": "Artículos quinto y sexto"
     }
    ],
+   "simple": "Ilegalizar partidos que busquen la independencia, prohibir referéndums sobre la unidad y recuperar la sedición.",
    "notes": "Versión inicial publicada en el BOCG (texto presentado, no el final). Texto ómnibus: partidos, Código Penal, referéndum, régimen electoral, ingreso mínimo vital y régimen local.",
    "review": {
     "status": "agent_reviewed",
@@ -15210,6 +15431,7 @@
      "locator": "Punto 6"
     }
    ],
+   "simple": "Defender la libertad de prensa y proteger a las periodistas del acoso en redes.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -15260,6 +15482,7 @@
      "locator": "Puntos 10 a 12"
     }
    ],
+   "simple": "Más medios y protección para la Guardia Civil contra el narcotráfico y reconocerla como profesión de riesgo.",
    "notes": "La parte dispositiva incluye también un párrafo inicial de homenaje a las Fuerzas y Cuerpos de Seguridad.",
    "review": {
     "status": "agent_reviewed",
@@ -15306,6 +15529,7 @@
      "locator": "Punto 5"
     }
    ],
+   "simple": "Dar prioridad a los españoles en ayudas sociales y vivienda y más apoyo a familias y dependencia.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -15370,6 +15594,7 @@
      "locator": "Disposición final"
     }
    ],
+   "simple": "Medir de antemano el impacto de las políticas públicas en igualdad, infancia y reto demográfico.",
    "notes": "Texto inicial publicado en el BOCG (proposición de ley), no el texto final. Solo dos modificaciones de la Ley 27/2022.",
    "review": {
     "status": "agent_reviewed",
@@ -15421,6 +15646,7 @@
      "locator": "Punto 1"
     }
    ],
+   "simple": "Recuperar las devoluciones de Renfe por retrasos: 50 % a los 15 minutos y 100 % a los 30.",
    "notes": "El texto tiene un único punto; se separa en dos viñetas por claridad.",
    "review": {
     "status": "agent_reviewed",
@@ -15483,6 +15709,7 @@
      "locator": "Puntos 9 a 11"
     }
    ],
+   "simple": "Más policía contra el narcotráfico, la inmigración ilegal y el yihadismo.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -15561,6 +15788,7 @@
      "locator": "Artículo único, apartado septuagésimo primero (disposición adicional nueva)"
     }
    ],
+   "simple": "Reformar la «ley mordaza»: límites a las identificaciones policiales, multas más bajas y menos balas de goma.",
    "notes": "Texto inicial, antes de enmiendas. Además: las organizaciones de manifestaciones responden subsidiariamente de los daños de los participantes salvo que hayan puesto medidas de seguridad (Disposición final primera); nueva disposición adicional sobre mediación policial y otra sobre estadísticas anuales de actuación (apartados sexagésimo séptimo y sexagésimo octavo).",
    "review": {
     "status": "agent_reviewed",
@@ -15629,6 +15857,7 @@
      "locator": "Punto 2"
     }
    ],
+   "simple": "Licitar en 2026 las obras de la segunda fase del Canal de Navarra.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -15675,6 +15904,7 @@
      "locator": "Artículo 3"
     }
    ],
+   "simple": "Ventajas fiscales a quien patrocine 28 eventos culturales y deportivos, como el Jacobeo 2027.",
    "notes": "Convalidación de un real decreto-ley; el texto lista los eventos por letras (a a aa).",
    "review": {
     "status": "agent_reviewed",
@@ -15748,6 +15978,7 @@
      "locator": "Artículo único, apartado 2"
     }
    ],
+   "simple": "Permitir a Renfe, Puertos, ICEX y Salvamento Marítimo endeudarse más en 2026.",
    "notes": "Importes del texto en miles de euros, convertidos a millones.",
    "review": {
     "status": "agent_reviewed",
@@ -15786,6 +16017,7 @@
      "locator": "Punto 3"
     }
    ],
+   "simple": "Reprobar al ministro Óscar Puente y auditar la seguridad de las vías de alta velocidad.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -15853,6 +16085,7 @@
      "locator": "Artículo único, apartados Ocho (art. 25) y Nueve (art. 26.2)"
     }
    ],
+   "simple": "Endurecer la nacionalidad: 15 años de residencia, examen, renunciar a la anterior y poder perderla por delitos.",
    "notes": "Texto inicial de la proposición de ley orgánica. También ajusta plazos de opción a la nacionalidad (apartados Uno a Tres) y no se aplica a procedimientos ya iniciados (Disposición transitoria única).",
    "review": {
     "status": "agent_reviewed",
@@ -15936,6 +16169,7 @@
      "locator": "Disposición adicional única"
     }
    ],
+   "simple": "Facilitar la jubilación parcial del personal laboral de las administraciones con un relevista fijo.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -16014,6 +16248,7 @@
      "locator": "Artículo tercero (nuevo apartado 6 bis del artículo 13)"
     }
    ],
+   "simple": "Prohibir a condenados por terrorismo trabajar con menores en puestos públicos o proyectos subvencionados.",
    "notes": "Texto inicial de la proposición de ley, no el texto final.",
    "review": {
     "status": "agent_reviewed",
@@ -16089,6 +16324,7 @@
      "locator": "Artículo único, apartado Dos"
     }
    ],
+   "simple": "Castigar con cárcel las terapias que intentan cambiar la orientación sexual o la identidad de género.",
    "notes": "Versión inicial de la proposición (BOCG de presentación), no un texto final enmendado. Las penas de las letras b) a g) del art. 33.7 del Código Penal solo se citan por remisión.",
    "review": {
     "status": "agent_reviewed",
@@ -16169,6 +16405,7 @@
      "locator": "Disposición final tercera"
     }
    ],
+   "simple": "Permitir a ayuntamientos y comunidades seguir invirtiendo su superávit de 2024 en 2025-2027.",
    "notes": "Texto con bloques de temas distintos: superávit local y autonómico, calendario de facturación electrónica y funcionarios locales en Cataluña.",
    "review": {
     "status": "agent_reviewed",
@@ -16245,6 +16482,7 @@
      "locator": "Puntos 5 y 8"
     }
    ],
+   "simple": "Alargar la vida de las centrales nucleares y derogar el artículo de la ley de clima que limita la energía nuclear.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -16322,6 +16560,7 @@
      "locator": "Disposición final tercera"
     }
    ],
+   "simple": "Contar por separado los votos por correo y los presenciales en cada mesa electoral.",
    "notes": "Texto inicial de la proposición de ley orgánica, no el texto final.",
    "review": {
     "status": "agent_reviewed",
@@ -16392,6 +16631,7 @@
      "locator": "Disposición adicional primera"
     }
    ],
+   "simple": "Permitir usar catalán, euskera y gallego en el Congreso, con traducción.",
    "notes": "Texto tramitado aprobado por el Pleno. La disposición adicional primera también encarga revisar el Reglamento para adecuarlo al lenguaje inclusivo.",
    "review": {
     "status": "agent_reviewed",
@@ -16472,6 +16712,7 @@
      "locator": "Disposiciones adicionales primera y segunda"
     }
    ],
+   "simple": "Proteger al personal sanitario frente a agresiones, con registro nacional y apoyo legal.",
    "notes": "Texto inicial, tal como se presentó (antes de enmiendas).",
    "review": {
     "status": "agent_reviewed",
@@ -16546,6 +16787,7 @@
      "locator": "Punto 4"
     }
    ],
+   "simple": "Homenajear y divulgar la historia de las mujeres que redactaron la Constitución.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -16617,6 +16859,7 @@
      "locator": "Disposiciones adicionales primera y segunda; Disposición transitoria única"
     }
    ],
+   "simple": "Prohibir subir precios en emergencias por encima de lo que costaban el mes anterior, con devolución automática si se cobra de más.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -16683,6 +16926,7 @@
      "locator": "Punto 2"
     }
    ],
+   "simple": "Condenar los homenajes a miembros de ETA y pedir sancionarlos.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -16733,6 +16977,7 @@
      "locator": "Disposiciones finales cuarta y quinta"
     }
    ],
+   "simple": "Ayudas por la DANA: sin cortes de luz ni gas, protección del empleo y ayudas a agricultores y damnificados.",
    "notes": "Texto ómnibus muy extenso (89 artículos y 14 disposiciones finales). No se resumen ayudas al agua (art. 56, unos 500 millones), cultura, educación, servicios sociales (art. 80), código de buenas prácticas hipotecario ampliado a 42 meses (DF séptima) ni los cambios de ayudas personales por daños en vivienda (DF octava).",
    "review": {
     "status": "agent_reviewed",
@@ -16818,6 +17063,7 @@
      "locator": "Punto 7"
     }
    ],
+   "simple": "Apoyar a la UNRWA, la agencia de la ONU para los refugiados palestinos, y aumentar sus fondos.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -16852,6 +17098,7 @@
      "locator": "Punto 2"
     }
    ],
+   "simple": "Un plan urgente con calendario y dinero para terminar las obras de agua pendientes en Andalucía.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -16915,6 +17162,7 @@
      "locator": "Artículos 34, 35, 39 y 40"
     }
    ],
+   "simple": "Ayudas directas, rebajas fiscales y ERTE para autónomos y empresas de Ceuta por la crisis.",
    "notes": "Texto ómnibus. No se resumen medidas de seguridad en centros docentes (art. 30), asistencia jurídica gratuita en protección internacional (art. 31) ni subvenciones a entidades de infancia (art. 29). La cifra de 62,96 millones es el crédito extraordinario del art. 21 (62.958.000 euros).",
    "review": {
     "status": "agent_reviewed",
@@ -16999,6 +17247,7 @@
      "locator": "Artículos 14 y 15"
     }
    ],
+   "simple": "Rebajar impuestos a carburantes, luz y gas en verano de 2026 y ayudas al gasóleo de transportistas, agricultores y pescadores.",
    "notes": "Texto ómnibus. No se resumen cambios en bombeo de sistemas insulares (art. 1), prohibición de despido hasta 30-09-2026 para empresas con ayudas (art. 31), estudios sobre las rías gallegas (DA octava) ni el régimen transitorio del enlace Península-Ceuta (DT primera).",
    "review": {
     "status": "agent_reviewed",
@@ -17085,6 +17334,7 @@
      "locator": "Punto 6"
     }
    ],
+   "simple": "Reprobar al ministro Óscar Puente y exigir planes de atención a viajeros y de choque ferroviario.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -17160,6 +17410,7 @@
      "locator": "Punto 4"
     }
    ],
+   "simple": "Dar prioridad a los españoles en la contratación, con bonificaciones, y facilitar que vuelvan los que emigraron.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -17235,6 +17486,7 @@
      "locator": "Artículos 218 y 219"
     }
    ],
+   "simple": "Crear un registro de lobbies en el Congreso y publicar con quién se reúnen los diputados.",
    "notes": "Texto inicial de la proposición de reforma del Reglamento, antes de enmiendas. Quedan fuera: regímenes específicos de inscripción (Disposición adicional primera), contenido del código de conducta, que incluye vetar durante 2 años como representantes a ex miembros de las Cortes y ex altos cargos (Disposición adicional segunda), y entrada en vigor a los 4 meses (Disposición final segunda).",
    "review": {
     "status": "agent_reviewed",
@@ -17304,6 +17556,7 @@
      "locator": "Disposición final"
     }
    ],
+   "simple": "Quitar la norma que permite papeletas solo con partidos regionales en ciertas zonas.",
    "notes": "Texto inicial de la proposición (versión publicada al admitirse a trámite). El contenido del artículo 222 se toma de la exposición de motivos, que lo cita.",
    "review": {
     "status": "agent_reviewed",
@@ -17365,6 +17618,7 @@
      "locator": "Disposición final"
     }
    ],
+   "simple": "Avisar en la tienda cuando un producto trae menos cantidad pero cuesta más («reduflación»).",
    "notes": "Texto inicial de la proposición. Añade un párrafo a la letra c) del apartado 1 del artículo 20 de la Ley General para la Defensa de los Consumidores y Usuarios.",
    "review": {
     "status": "agent_reviewed",
@@ -17432,6 +17686,7 @@
      "locator": "Punto 2"
     }
    ],
+   "simple": "Exigir a Francia que proteja a transportistas y agricultores españoles de los ataques en la frontera.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -17494,6 +17749,7 @@
      "locator": "Artículo único, apartado Diez (art. 15)"
     }
    ],
+   "simple": "Endurecer la ley penal del menor: desde los 12 años, penas más largas y expulsión de menores extranjeros.",
    "notes": "Texto inicial de la proposición. No se resumen el régimen disciplinario en centros (apartado Doce), la sustitución de «falta» por «delito leve» (Uno) ni la disposición transitoria (hechos anteriores se rigen por la ley vigente al cometerse). Entrada en vigor a los dos meses de su publicación.",
    "review": {
     "status": "agent_reviewed",
@@ -17579,6 +17835,7 @@
      "locator": "Artículo único (artículo 102, apartado 9)"
     }
    ],
+   "simple": "Cambiar cuánto paga cada uno por los medicamentos según su renta, con topes mensuales.",
    "notes": "El real decreto-ley reescribe el artículo 102 completo; no se compara con la redacción anterior porque no está en el documento.",
    "review": {
     "status": "agent_reviewed",
@@ -17660,6 +17917,7 @@
      "locator": "Puntos 6 y 7"
     }
    ],
+   "simple": "Crisis de Ceuta: expulsiones, más control de fronteras, firmeza con Marruecos y un plan económico.",
    "notes": "Texto original; se votó con una enmienda incorporada que no consta en este texto.",
    "review": {
     "status": "agent_reviewed",
@@ -17721,6 +17979,7 @@
      "locator": "Punto 1"
     }
    ],
+   "simple": "Que el Estado pague con Canarias la atención sanitaria a los migrantes que llegan a sus costas.",
    "notes": "El texto no indica importes ni plazos.",
    "review": {
     "status": "agent_reviewed",
@@ -17763,6 +18022,7 @@
      "locator": "Punto 2, letras D y E"
     }
    ],
+   "simple": "Un plan para rehabilitar barrios con viviendas antiguas y vecinos de menos renta.",
    "notes": "El título de la votación habla de cortes de suministro eléctrico, pero el texto aprobado trata de rehabilitación de barrios; solo alude a que las suministradoras garanticen un servicio de calidad.",
    "review": {
     "status": "agent_reviewed",
@@ -17819,6 +18079,7 @@
      "locator": "Punto segundo"
     }
    ],
+   "simple": "Reprobar al ministro del Interior y pedir su destitución por el asesinato de dos guardias civiles en Barbate.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -17877,6 +18138,7 @@
      "locator": "Disposición final primera"
     }
    ],
+   "simple": "Ventajas fiscales a quien patrocine 26 eventos (como la Ryder Cup o la final de la Champions de 2027).",
    "notes": "Las iniciativas del artículo 1 incluyen también festivales, aniversarios, el viaje del Papa a España y programas de investigación e infancia; solo se citan ejemplos.",
    "review": {
     "status": "agent_reviewed",
@@ -17952,6 +18214,7 @@
      "locator": "Punto 6"
     }
    ],
+   "simple": "Medidas contra el racismo, el machismo y el odio en el deporte.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -18015,6 +18278,7 @@
      "locator": "Punto 2"
     }
    ],
+   "simple": "Revisar cómo se cumple el régimen económico y fiscal especial de Canarias.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -18065,6 +18329,7 @@
      "locator": "Puntos 12 y 13"
     }
    ],
+   "simple": "Salir del Acuerdo de París, derogar la ley de clima y apostar por la nuclear y nuevos embalses.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -18125,6 +18390,7 @@
      "locator": "Punto 1"
     }
    ],
+   "simple": "Bajar la tasa máxima de alcohol al volante a 0,2 g/l para todos los conductores.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -18167,6 +18433,7 @@
      "locator": "Punto 4"
     }
    ],
+   "simple": "Retirar el nuevo mapa de autobuses interurbanos estatales y rehacerlo con las comunidades.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -18217,6 +18484,7 @@
      "locator": "Punto 5, letras a, b y d"
     }
    ],
+   "simple": "Recentralizar competencias, derogar la ley de clima, bajar impuestos a la energía e ilegalizar partidos independentistas.",
    "notes": "Texto muy amplio: no caben todas las letras. Quedan fuera, entre otras, las medidas sobre inmigración y sobre el Consejo de Ministros (Punto 1, letras d, h e i), derogar leyes que sitúan tribunales internacionales sobre los españoles y investigar crímenes de ETA (Punto 4, letras a y c).",
    "review": {
     "status": "agent_reviewed",
@@ -18289,6 +18557,7 @@
      "locator": "Punto 3"
     }
    ],
+   "simple": "Más fondos para atraer y retener científicos, con condiciones laborales dignas.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -18339,6 +18608,7 @@
      "locator": "Disposición final primera, apartado Dos"
     }
    ],
+   "simple": "Sacar de la protección de costas edificios con valor cultural o etnológico junto al mar.",
    "notes": "Texto inicial de la proposición. Modifica la Ley de Costas y el Reglamento General de Costas (la disposición final tercera permite hacerlo por real decreto).",
    "review": {
     "status": "agent_reviewed",
@@ -18422,6 +18692,7 @@
      "locator": "Punto 9"
     }
    ],
+   "simple": "Expulsiones inmediatas, devolver menores no acompañados y suspender el tratado de amistad con Marruecos.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -18500,6 +18771,7 @@
      "locator": "Disposición adicional única y Disposición transitoria única"
     }
    ],
+   "simple": "Cambiar cómo se elige el consejo de RTVE: 15 miembros elegidos por Congreso y Senado.",
    "notes": "Texto del real decreto-ley publicado en el BOE.",
    "review": {
     "status": "agent_reviewed",
@@ -18573,6 +18845,7 @@
      "locator": "Punto cuarto"
     }
    ],
+   "simple": "Depurar responsabilidades por el «caso Koldo» de las mascarillas y auditar los rescates de empresas.",
    "notes": "La numeración del texto extraído está desordenada por el maquetado del PDF; los cuatro puntos son Primero a Cuarto.",
    "review": {
     "status": "agent_reviewed",
@@ -18644,6 +18917,7 @@
      "locator": "Artículos 8 y 9"
     }
    ],
+   "simple": "Ayudas a trabajadores, autónomos y empresas afectados por los incendios de 2026.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -18730,6 +19004,7 @@
      "locator": "Artículos 14, 18 y 34"
     }
    ],
+   "simple": "Bono social, rebajas de IVA en energía y ayudas al gasóleo en 2026, prohibiendo despidos a quien reciba ayudas.",
    "notes": "Texto ómnibus muy extenso (plan de respuesta a la crisis en Oriente Medio). Se resumen los bloques principales; hay más medidas (Programa Auto+, reavales al transporte, ayudas al transporte marítimo, reformas del sector eléctrico en las disposiciones finales octava a decimosexta).",
    "review": {
     "status": "agent_reviewed",
@@ -18815,6 +19090,7 @@
      "locator": "Puntos 11 y 12"
     }
    ],
+   "simple": "Una reforma de la financiación autonómica negociada con todas las comunidades a la vez, no una a una.",
    "notes": "Moción con 12 puntos; texto original votado en sus términos.",
    "review": {
     "status": "agent_reviewed",
@@ -18896,6 +19172,7 @@
      "locator": "Puntos 10 y 11"
     }
    ],
+   "simple": "Frenar las macroplantas renovables, mantener las nucleares y derogar la ley de clima.",
    "notes": "Moción con 11 puntos; agrupados en 6 viñetas. El punto 3 del documento arrastra notas al pie de otro texto (ignoradas).",
    "review": {
     "status": "agent_reviewed",
@@ -18976,6 +19253,7 @@
      "locator": "Artículo 1, apartado 4; Artículo 2, apartado 3"
     }
    ],
+   "simple": "Reconocer a biólogos y trabajadores sociales como profesión sanitaria cuando trabajan en sanidad.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -19042,6 +19320,7 @@
      "locator": "Punto 2"
     }
    ],
+   "simple": "Renunciar a la regularización masiva de inmigrantes y expulsar a extranjeros que cometan delitos graves.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -19110,6 +19389,7 @@
      "locator": "Disposiciones finales primera y segunda"
     }
    ],
+   "simple": "Más ayudas por la DANA: cambiar coches dañados, préstamos a empresas y permisos laborales.",
    "notes": "Texto ómnibus de medidas complementarias por la DANA de 2024; se resumen los bloques principales.",
    "review": {
     "status": "agent_reviewed",
@@ -19187,6 +19467,7 @@
      "locator": "Punto 4"
     }
    ],
+   "simple": "Simplificar el bono social eléctrico y darlo automáticamente a quien cobra el Ingreso Mínimo Vital.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -19237,6 +19518,7 @@
      "locator": "Puntos 8 y 9"
     }
    ],
+   "simple": "Reconocer a Edmundo González como presidente electo de Venezuela.",
    "notes": "El punto 1 incluye una justificación del reconocimiento (actas publicadas, pronunciamientos internacionales) que no se ha resumido.",
    "review": {
     "status": "agent_reviewed",
@@ -19316,6 +19598,7 @@
      "locator": "Punto 7"
     }
    ],
+   "simple": "Bajar el IVA (general al 18 %), IVA 0 % en alimentos y rebajar el IRPF.",
    "notes": "Al final del punto 1 el texto trae notas al pie ajenas al contenido (ignoradas). La viñeta 3 agrupa los puntos 3 y 4.",
    "review": {
     "status": "agent_reviewed",
@@ -19397,6 +19680,7 @@
      "locator": "Punto 1"
     }
    ],
+   "simple": "Controlar a las empresas de créditos rápidos y frenar sus intereses abusivos.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -19467,6 +19751,7 @@
      "locator": "Punto 4"
     }
    ],
+   "simple": "Acelerar la alta velocidad en el País Vasco (Y vasca) y conectarla con Navarra.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -19533,6 +19818,7 @@
      "locator": "Disposición final primera"
     }
    ],
+   "simple": "Multar más a las empresas que no reservan puestos para personas con discapacidad.",
    "notes": "Versión inicial de la proposición, tal como se publicó en el BOCG.",
    "review": {
     "status": "agent_reviewed",
@@ -19609,6 +19895,7 @@
      "locator": "Punto 5"
     }
    ],
+   "simple": "Proteger a las personas con discapacidad frente a discriminaciones de la inteligencia artificial.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -19684,6 +19971,7 @@
      "locator": "Disposición final única"
     }
    ],
+   "simple": "Que solo los menores españoles puedan cobrar el subsidio al salir de un centro de internamiento.",
    "notes": "Versión inicial de la proposición, tal como se publicó en el BOCG.",
    "review": {
     "status": "agent_reviewed",
@@ -19756,6 +20044,7 @@
      "locator": "Artículos 4 y 5 y Disposición adicional octava"
     }
    ],
+   "simple": "Ayudas por la DANA: indemnizaciones, ayudas a empresas, exenciones fiscales y moratoria de préstamos.",
    "notes": "Texto ómnibus de la primera respuesta a la DANA de 2024; se resumen los bloques principales.",
    "review": {
     "status": "agent_reviewed",
@@ -19829,6 +20118,7 @@
      "locator": "Punto 3"
     }
    ],
+   "simple": "Garantizar el acceso al aborto en la sanidad pública y regular los objetores de conciencia.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -19898,6 +20188,7 @@
      "locator": "Punto 6"
     }
    ],
+   "simple": "Garantizar la independencia del fiscal general y de los jueces y retirar las reformas judiciales del Gobierno.",
    "notes": "El punto 1 aparece como «[…]» en el texto extraído, por lo que no se resume.",
    "review": {
     "status": "agent_reviewed",
@@ -19980,6 +20271,7 @@
      "locator": "Puntos 2, 7 y 9"
     }
    ],
+   "simple": "Que el Estado pague con Canarias la atención sanitaria a los migrantes que llegan a sus costas.",
    "notes": "13 puntos; agrupados en 6 viñetas. Las notas al pie insertadas en el punto 1 se han ignorado. El punto 11 (incentivos a fabricantes de turismos de siete plazas) no se ha incluido.",
    "review": {
     "status": "agent_reviewed",
@@ -20046,6 +20338,7 @@
      "locator": "Punto 1"
     }
    ],
+   "simple": "Impulsar obras de accesibilidad en comunidades de vecinos.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -20098,6 +20391,7 @@
      "locator": "Punto 3"
     }
    ],
+   "simple": "Rechazar la injerencia política en la administración y aplicar las recomendaciones anticorrupción europeas.",
    "notes": "En el punto 3 se omiten nombres propios y partido citados en el texto.",
    "review": {
     "status": "agent_reviewed",
@@ -20159,6 +20453,7 @@
      "locator": "Disposición final segunda"
     }
    ],
+   "simple": "Reorganizar las comisiones del Congreso (23 en total).",
    "notes": "El PDF reúne toma en consideración, enmienda a la totalidad con texto alternativo y texto aprobado por el Pleno en lectura única. Se resume solo el texto aprobado (última parte del documento), no las enmiendas.",
    "review": {
     "status": "agent_reviewed",
@@ -20211,6 +20506,7 @@
      "locator": "Punto 6"
     }
    ],
+   "simple": "Regular la inteligencia artificial para proteger derechos y fijar pautas de acceso de menores a redes.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -20290,6 +20586,7 @@
      "locator": "Artículo único, apartados Cuatro y Cinco (artículos 570 y 570 bis)"
     }
    ],
+   "simple": "Que los jueces elijan a 12 de los 20 vocales del CGPJ por voto directo y secreto.",
    "notes": "Versión inicial de la proposición, tal como se publicó en el BOCG.",
    "review": {
     "status": "agent_reviewed",
@@ -20374,6 +20671,7 @@
      "locator": "Puntos 9 y 10"
     }
    ],
+   "simple": "Proteger a menores y familias de los riesgos de las redes sociales, como el «scroll infinito».",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -20454,6 +20752,7 @@
      "locator": "Artículos 35 a 38 y 28 a 33"
     }
    ],
+   "simple": "Medidas anticrisis 2024: IVA 0 % en alimentos básicos, bono social eléctrico y subida de sueldos públicos.",
    "notes": "Texto omnibus: no caben todos los bloques. No se resumen la modificacion de la tarifa de ultimo recurso del gas (art. 25), las disposiciones adicionales sobre superavit electrico ni las disposiciones finales de ajuste de otros reales decretos-ley.",
    "review": {
     "status": "agent_reviewed",
@@ -20537,6 +20836,7 @@
      "locator": "Punto Sexto"
     }
    ],
+   "simple": "Medidas tras el apagón: auditoría europea, más seguridad energética e interconexiones.",
    "notes": "El texto en el BOCG tiene cortes de línea irregulares; los puntos se numeran Primero a Sexto.",
    "review": {
     "status": "agent_reviewed",
@@ -20616,6 +20916,7 @@
      "locator": "Punto 2, letras d) y e)"
     }
    ],
+   "simple": "Construir más vivienda, derogar la ley de vivienda y dar prioridad a los españoles en ayudas.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -20708,6 +21009,7 @@
      "locator": "Artículo único, apartado Uno (artículo 10.3)"
     }
    ],
+   "simple": "Que el presidente del CIS no venga de la política y que el CIS no haga estimación de voto.",
    "notes": "Texto de la proposicion de ley tal como se presento (version inicial), no un texto final aprobado.",
    "review": {
     "status": "agent_reviewed",
@@ -20777,6 +21079,7 @@
      "locator": "Punto 4"
     }
    ],
+   "simple": "Celebrar los 40 años de la Ley General de Sanidad y defender la sanidad pública universal.",
    "notes": "Texto declarativo y simbólico; no fija medidas con plazo ni presupuesto.",
    "review": {
     "status": "agent_reviewed",
@@ -20823,6 +21126,7 @@
      "locator": "Punto 4"
     }
    ],
+   "simple": "Luchar contra el matrimonio forzado de niñas en la cooperación internacional española.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -20865,6 +21169,7 @@
      "locator": "Punto 3"
     }
    ],
+   "simple": "Acelerar las estaciones de alta velocidad de Pamplona y Tudela para que funcionen en 2030.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -20936,6 +21241,7 @@
      "locator": "Puntos 14, 16, 17 y 18"
     }
    ],
+   "simple": "Rechazar la nueva PAC y el Pacto Verde, frenar importaciones agrícolas y controlar al lobo.",
    "notes": "Texto largo de 29 puntos; se han agrupado los afines. Quedan sin viñeta propia los puntos 4, 26 a 29 (suelos agrícolas y renovables, fitosanitarios excepcionales, edición genómica, fondo de contingencia por plagas, planes escolares).",
    "review": {
     "status": "agent_reviewed",
@@ -21016,6 +21322,7 @@
      "locator": "Punto 5"
     }
    ],
+   "simple": "Apoyar la bicicleta y la movilidad sostenible y rechazar que ayuntamientos den marcha atrás.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -21058,6 +21365,7 @@
      "locator": "Punto 4"
     }
    ],
+   "simple": "Reprobar al ministro de Transportes y exigir un plan de choque para Cercanías, Rodalies y trenes.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -21100,6 +21408,7 @@
      "locator": "Disposición final"
     }
    ],
+   "simple": "Celebrar cada año un debate sobre el estado de la Nación en el Congreso.",
    "notes": "Texto inicial de la proposición, antes de enmiendas.",
    "review": {
     "status": "agent_reviewed",
@@ -21166,6 +21475,7 @@
      "locator": "Punto 5"
     }
    ],
+   "simple": "Mantener y reforzar la cooperación al desarrollo frente a los recortes.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -21212,6 +21522,7 @@
      "locator": "Punto 6"
     }
    ],
+   "simple": "Aplicar ya el Pacto Europeo de Migración y Asilo, con más medios en frontera.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -21250,6 +21561,7 @@
      "locator": "Punto 3"
     }
    ],
+   "simple": "Dar prioridad a los españoles en la contratación, con bonificaciones, y facilitar que vuelvan los que emigraron.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -21308,6 +21620,7 @@
      "locator": "Disposición final"
     }
    ],
+   "simple": "Poder disolver judicialmente asociaciones que hagan apología del franquismo y humillen a sus víctimas.",
    "notes": "Texto de la proposicion de ley organica tal como se presento (version inicial); la votacion es de conjunto y el texto final pudo cambiar durante la tramitacion.",
    "review": {
     "status": "agent_reviewed",
@@ -21377,6 +21690,7 @@
      "locator": "Disposiciones finales primera y tercera"
     }
    ],
+   "simple": "Cambiar cómo se nombran ciertos magistrados de los tribunales superiores autonómicos.",
    "notes": "Texto inicial de la proposición, antes de enmiendas.",
    "review": {
     "status": "agent_reviewed",
@@ -21448,6 +21762,7 @@
      "locator": "Disposición final segunda, apartado Uno (artículo 58.2.c del RDL 7/2026)"
     }
    ],
+   "simple": "Revisar el precio del transporte por carretera según el gasóleo y ayudar al transporte de mercancías.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -21527,6 +21842,7 @@
      "locator": "Disposición final única"
     }
    ],
+   "simple": "Que sea delito conducir a más de 50 km/h por encima del límite en ciudad o 70 en carretera.",
    "notes": "El articulado solo da los nuevos umbrales (50 y 70 km/h). La exposicion de motivos indica que los actuales son 60 km/h en via urbana y 80 en interurbana.",
    "review": {
     "status": "agent_reviewed",
@@ -21592,6 +21908,7 @@
      "locator": "Disposición final segunda"
     }
    ],
+   "simple": "Impedir empadronarse en una vivienda sin título para ocuparla y anotar en el padrón la estancia ilegal.",
    "notes": "Modifica la Ley 7/1985 de Bases del Regimen Local.",
    "review": {
     "status": "agent_reviewed",
@@ -21663,6 +21980,7 @@
      "locator": "Artículo 28"
     }
    ],
+   "simple": "Ayudas por inundaciones a familias, ayuntamientos, agricultores y empresas, y una deducción en el IRPF.",
    "notes": "Texto omnibus: no caben todos los bloques. No se resumen obras de emergencia hidraulicas y reposicion de infraestructuras de transporte (arts. 42 a 44, 163 millones en transporte), medidas de consumo (arts. 45 y 46), financiacion de entidades locales y superavit (arts. 25 a 30) ni las disposiciones adicionales (refuerzo de plantillas de 40 millones).",
    "review": {
     "status": "agent_reviewed",
@@ -21737,6 +22055,7 @@
      "locator": "Disposición final"
     }
    ],
+   "simple": "Obligar a las compañías de luz y gas a aceptar un sistema de reclamaciones extrajudicial vinculante.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -21791,6 +22110,7 @@
      "locator": "Punto 2"
     }
    ],
+   "simple": "Pedir responsabilidades al ministro de Política Territorial por un presunto caso de corrupción.",
    "notes": "El título de la votación habla de material sanitario en la pandemia; el texto dispositivo no lo detalla, solo alude a un presunto caso de corrupción.",
    "review": {
     "status": "agent_reviewed",
@@ -21843,6 +22163,7 @@
      "locator": "Puntos 9 y 10"
     }
    ],
+   "simple": "Quitar la sanidad pública a extranjeros sin papeles (salvo urgencias) y dar prioridad a los españoles.",
    "notes": "El texto incluye notas al pie con enlaces mezcladas al inicio; se ignoran.",
    "review": {
     "status": "agent_reviewed",
@@ -21919,6 +22240,7 @@
      "locator": "Punto 7"
     }
    ],
+   "simple": "Un gran acuerdo contra los discursos de odio, con educación y apoyo a las víctimas.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -21985,6 +22307,7 @@
      "locator": "Punto 2"
     }
    ],
+   "simple": "Pedir al Gobierno que asuma responsabilidades por presunta corrupción y critica que no haya presupuestos.",
    "notes": "Texto con valoraciones políticas (declaraciones, no medidas concretas salvo el punto 4); se resume con atribución «según el texto».",
    "review": {
     "status": "agent_reviewed",
@@ -22056,6 +22379,7 @@
      "locator": "Punto 5"
     }
    ],
+   "simple": "Reprobar a Yolanda Díaz, revocar el reconocimiento de Palestina y apoyar a Israel.",
    "notes": "El título de la votación habla del mercado laboral; el texto dispositivo no contiene medidas laborales.",
    "review": {
     "status": "agent_reviewed",
@@ -22104,6 +22428,7 @@
      "locator": "Punto 5"
     }
    ],
+   "simple": "Más 5G, teletrabajo y coworking para frenar la despoblación rural.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -22174,6 +22499,7 @@
      "locator": "Puntos 7 y 8"
     }
    ],
+   "simple": "Defender el legado español en Iberoamérica y un currículo de Historia sin ideología.",
    "notes": "Se votó con una enmienda incorporada que no figura en este texto.",
    "review": {
     "status": "agent_reviewed",
@@ -22226,6 +22552,7 @@
      "locator": "Puntos 5 y 11"
     }
    ],
+   "simple": "Medidas contra la violencia de género en internet y redes sociales.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -22306,6 +22633,7 @@
      "locator": "Disposición final primera"
     }
    ],
+   "simple": "Ampliar el comercio de derechos de CO2 a edificios, transporte por carretera y barcos.",
    "notes": "Versión inicial (texto presentado, antes de enmiendas). Es una reforma muy técnica de la Ley 1/2005 que transpone dos directivas europeas. No se han incluido por límite de viñetas: designación de la autoridad nacional para el Acuerdo de París (disposición adicional segunda), medidas sobre incineradoras de residuos urbanos (disposición adicional octava) y la disposición final segunda (colaboración de la administración tributaria para identificar a las entidades reguladas).",
    "review": {
     "status": "agent_reviewed",
@@ -22383,6 +22711,7 @@
      "locator": "Disposición final segunda"
     }
    ],
+   "simple": "Que el CGPJ elija a los candidatos españoles para tribunales europeos e internacionales.",
    "notes": "Modifica la Ley Organica 6/1985 del Poder Judicial.",
    "review": {
     "status": "agent_reviewed",
@@ -22454,6 +22783,7 @@
      "locator": "Puntos 7, 8 y 9"
     }
    ],
+   "simple": "Más investigación, información y atención sanitaria sobre la menopausia.",
    "notes": "El texto disponible del punto 7 aparece cortado tras citar el artículo 5 de la Ley Orgánica 1/2023; la viñeta se limita a lo legible.",
    "review": {
     "status": "agent_reviewed",
@@ -22535,6 +22865,7 @@
      "locator": "Disposición final primera, apartado 3"
     }
    ],
+   "simple": "Ayudas de 400 millones y deducciones fiscales para comprar coche eléctrico y puntos de recarga en 2025.",
    "notes": "Texto final publicado en el BOE.",
    "review": {
     "status": "agent_reviewed",
@@ -22612,6 +22943,7 @@
      "locator": "Puntos 5 a 7"
     }
    ],
+   "simple": "Ampliar los casos en que no hace falta intentar mediación antes de ir a juicio.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -22680,6 +23012,7 @@
      "locator": "Puntos 9 y 10"
     }
    ],
+   "simple": "Defender la libertad de expresión y rechazar la censura y la «cultura de la cancelación».",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -22747,6 +23080,7 @@
      "locator": "Punto 6"
     }
    ],
+   "simple": "Condenar la prohibición del Orgullo LGTBI en Hungría y pedir sanciones de la UE.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -22781,6 +23115,7 @@
      "locator": "Punto 2"
     }
    ],
+   "simple": "Ajustar el IRPF a la inflación acumulada desde 2021 para bajar la carga fiscal.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -22831,6 +23166,7 @@
      "locator": "Punto 5"
     }
    ],
+   "simple": "Salir del Acuerdo de París, apostar por la nuclear y bajar impuestos a la luz.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -22912,6 +23248,7 @@
      "locator": "Disposición final segunda"
     }
    ],
+   "simple": "Ayudas a agricultores en crisis, mejores seguros agrarios y permitir quemar restos vegetales.",
    "notes": "Versión inicial (antes de enmiendas). No incluidas por límite de viñetas: impulso de la agricultura del carbono (artículo 8), medidas para reforzar la posición de los productores (artículo 9), revisión de planes hidrológicos y de sequía (disposición adicional primera) y la nueva valoración de impacto rural en normas del Gobierno (disposición final tercera).",
    "review": {
     "status": "agent_reviewed",
@@ -22997,6 +23334,7 @@
      "locator": "Puntos 3 (letra f), 4 y 5"
     }
    ],
+   "simple": "Gran bajada de impuestos: IRPF, IVA, cuotas de autónomos y vivienda, con prioridad nacional.",
    "notes": "El punto 6 (impulsar una toma de conciencia sobre el servicio a la comunidad en los cargos públicos) no cabe en las seis viñetas.",
    "review": {
     "status": "agent_reviewed",
@@ -23077,6 +23415,7 @@
      "locator": "Punto 3"
     }
    ],
+   "simple": "Dar prioridad en ayudas y vivienda pública a quien lleve años empadronado y haya cotizado.",
    "notes": "Texto original; se votó con una enmienda incorporada que no figura en este texto.",
    "review": {
     "status": "agent_reviewed",
@@ -23160,6 +23499,7 @@
      "locator": "Disposición transitoria única"
     }
    ],
+   "simple": "Que sea un juez, y no la administración, quien decida retirar la tutela de un menor a sus padres.",
    "notes": "Documento: texto inicial de la proposición de ley publicado en el BOCG, no una versión final. El texto no permite comparar con la redacción vigente de los indicadores de riesgo del artículo 17.2 de la Ley Orgánica 1/1996, por lo que no se resume ese punto.",
    "review": {
     "status": "agent_reviewed",
@@ -23237,6 +23577,7 @@
      "locator": "Punto 4"
     }
    ],
+   "simple": "Anular la prórroga de la concesión de la AP-9, quitar sus peajes y traspasarla a Galicia.",
    "notes": "Los tres primeros puntos se plantean en coherencia con el procedimiento abierto por la Comisión Europea, según la introducción del texto.",
    "review": {
     "status": "agent_reviewed",
@@ -23309,6 +23650,7 @@
      "locator": "Disposición adicional tercera; disposición final primera, apartado Cuatro"
     }
    ],
+   "simple": "Subir las pensiones un 2,7 % en 2026 y fijar la pensión máxima y las cotizaciones.",
    "notes": "La disposición final primera, apartados Uno y Dos, también suprime la letra k) de los artículos 271.1 y 299.1 de la Ley General de la Seguridad Social (el preámbulo la relaciona con la obligación de declarar el IRPF de quienes cobran desempleo); no cabe en las 6 viñetas. Las tablas de cuantías de los anexos no se han conservado en el texto extraído.",
    "review": {
     "status": "agent_reviewed",
@@ -23391,6 +23733,7 @@
      "locator": "Puntos 1 y 3"
     }
    ],
+   "simple": "Oponerse a los recortes europeos en las ayudas al campo y la pesca.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -23441,6 +23784,7 @@
      "locator": "Punto 4"
     }
    ],
+   "simple": "Más presas y embalses tras la DANA, apostar por la nuclear y frenar las políticas climáticas.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -23521,6 +23865,7 @@
      "locator": "Puntos 9 y 10"
     }
    ],
+   "simple": "Auditar los fallos de las pulseras antimaltrato y sustituirlas si no son fiables.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -23600,6 +23945,7 @@
      "locator": "Puntos 9 a 11"
     }
    ],
+   "simple": "Prioridad a españoles en vivienda pública, más deportaciones y bajar impuestos a la primera vivienda.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -23668,6 +24014,7 @@
      "locator": "Punto 2"
     }
    ],
+   "simple": "Comprometerse a que el Congreso pueda legislar con normalidad.",
    "notes": "Texto declarativo: no obliga al Gobierno a hacer nada concreto, solo expresa un compromiso de la Cámara.",
    "review": {
     "status": "agent_reviewed",
@@ -23718,6 +24065,7 @@
      "locator": "Punto 7"
     }
    ],
+   "simple": "Repatriar a los inmigrantes ilegales, suprimir el Ministerio de Igualdad y perseguir el burka.",
    "notes": "El punto 1 del documento incluye notas al pie de la exposición que se han ignorado.",
    "review": {
     "status": "agent_reviewed",
@@ -23796,6 +24144,7 @@
      "locator": "Punto 2, apartados 2.10 a 2.13"
     }
    ],
+   "simple": "Mejorar carreteras y trenes en Galicia y traspasar la AP-9.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -23868,6 +24217,7 @@
      "locator": "Punto 4"
     }
    ],
+   "simple": "Terminar la modernización de la vía Sagunto-Canfranc y reabrir el tren con Francia.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -23914,6 +24264,7 @@
      "locator": "Punto 9"
     }
    ],
+   "simple": "Dar prioridad a las mercancías en el Corredor Mediterráneo ferroviario.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -23989,6 +24340,7 @@
      "locator": "Punto 9"
     }
    ],
+   "simple": "Devolver la educación al Estado y garantizar estudiar en español en toda España.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -24059,6 +24411,7 @@
      "locator": "Punto 7"
     }
    ],
+   "simple": "Movilizar 15.000 millones más para la reconstrucción tras la DANA.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -24109,6 +24462,7 @@
      "locator": "Artículo 8 y Disposición adicional"
     }
    ],
+   "simple": "Proteger a quien tenga hipotecas con fórmulas de cuota confusas o con errores.",
    "notes": "Texto inicial de la proposición de ley publicado en el BOCG.",
    "review": {
     "status": "agent_reviewed",
@@ -24189,6 +24543,7 @@
      "locator": "Punto 6"
     }
    ],
+   "simple": "Defender a agricultores ante los aranceles de Estados Unidos y en la nueva PAC.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -24227,6 +24582,7 @@
      "locator": "Disposición final segunda"
     }
    ],
+   "simple": "Que el presidente informe al Congreso antes de cada Consejo Europeo y de cambios en política exterior.",
    "notes": "Texto inicial de la proposición de ley publicado en el BOCG.",
    "review": {
     "status": "agent_reviewed",
@@ -24277,6 +24633,7 @@
      "locator": "Puntos 9, 10 y 12"
     }
    ],
+   "simple": "Medidas para Canarias y Baleares ante el impacto del conflicto en Oriente Medio.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -24351,6 +24708,7 @@
      "locator": "Artículo 3, apartados 1 y 2"
     }
    ],
+   "simple": "Subir el sueldo de los empleados públicos un 2,5 % en 2025 y hasta un 2 % en 2026.",
    "notes": "Texto final publicado en el BOE.",
    "review": {
     "status": "agent_reviewed",
@@ -24428,6 +24786,7 @@
      "locator": "Disposición adicional única, apartado 3"
     }
    ],
+   "simple": "Prohibir el burka y el nicab en espacios públicos y delegar en la Generalitat el control de puertos, aeropuertos y fronteras.",
    "notes": "Texto inicial de la proposición de ley orgánica en el BOCG; se publica en castellano y catalán, se ha usado la versión en castellano.",
    "review": {
     "status": "agent_reviewed",
@@ -24505,6 +24864,7 @@
      "locator": "Disposición final"
     }
    ],
+   "simple": "Que los delitos sexuales graves contra menores no prescriban nunca.",
    "notes": "El documento es el texto inicial publicado, antes de enmiendas. Los artículos 1 y 2 modifican el Código Penal y la Ley Orgánica 5/2000.",
    "review": {
     "status": "agent_reviewed",
@@ -24581,6 +24941,7 @@
      "locator": "Insta al Gobierno, puntos 8 y 9"
     }
    ],
+   "simple": "Devolver a Marruecos a quienes entraron en Ceuta y desplegar el Ejército en la frontera.",
    "notes": "El documento tiene dos partes numeradas por separado: una declarativa (puntos 1 a 5) y otra que insta al Gobierno (puntos 1 a 9). Quedan sin viñeta propia el reproche al Gobierno por las consecuencias de la permanencia de esas personas (declarativa, punto 1) y el reconocimiento a las fuerzas desplegadas (punto 2).",
    "review": {
     "status": "agent_reviewed",
@@ -24659,6 +25020,7 @@
      "locator": "Punto 4"
     }
    ],
+   "simple": "Más embalses, IVA 0 % y exenciones fiscales para la reconstrucción tras la DANA.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -24742,6 +25104,7 @@
      "locator": "Punto 13"
     }
    ],
+   "simple": "Reformar el protocolo contra el acoso sexual del CSIC para proteger mejor a las víctimas.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -24824,6 +25187,7 @@
      "locator": "Puntos 10 y 11"
     }
    ],
+   "simple": "Deportaciones, revisar nacionalidades concedidas y prioridad nacional en ayudas y vivienda.",
    "notes": "Moción con 11 puntos; texto original votado en sus términos.",
    "review": {
     "status": "agent_reviewed",
@@ -24906,6 +25270,7 @@
      "locator": "Punto 7"
     }
    ],
+   "simple": "Derogar la ley de vivienda, construir más, bajar impuestos a la compra y dar prioridad a los españoles.",
    "notes": "Queda sin viñeta propia el punto 7 (reforma legal de la SAREB: reforzar su carácter social, prohibir vender activos por debajo del valor catastral de referencia y evitar que especule).",
    "review": {
     "status": "agent_reviewed",
@@ -24986,6 +25351,7 @@
      "locator": "Punto 6"
     }
    ],
+   "simple": "Quitar la sanidad pública a extranjeros sin papeles (salvo urgencias) y dar prioridad a los españoles.",
    "notes": "El punto 3 del texto extraído arrastra notas al pie ajenas a la parte dispositiva; se han ignorado.",
    "review": {
     "status": "agent_reviewed",
@@ -25065,6 +25431,7 @@
      "locator": "Capítulo V, artículos 12 y 13"
     }
    ],
+   "simple": "Más préstamos, avales y ayudas para afectados por emergencias como la DANA.",
    "notes": "Texto ómnibus (más de 140.000 caracteres); resumidos los bloques principales a partir del articulado. Además: la disposición adicional primera regula la baja definitiva de vehículos afectados y la disposición final primera ajusta la Ley 17/2015 de Protección Civil para permitir líneas de avales y préstamos del ICO.",
    "review": {
     "status": "agent_reviewed",
@@ -25149,6 +25516,7 @@
      "locator": "Punto 6"
     }
    ],
+   "simple": "Cesar a la ministra de Hacienda por sospechas de corrupción y bajar IRPF e IVA.",
    "notes": "",
    "review": {
     "status": "agent_reviewed",
@@ -25242,6 +25610,7 @@
      "locator": "Artículo único, apartado Veintidós (artículo 194 ter)"
     }
    ],
+   "simple": "Endurecer las penas por delitos sexuales, sobre todo contra menores, con prisión permanente para violaciones en grupo.",
    "notes": "Texto inicial de la proposición de ley orgánica publicado en el BOCG, no una versión final. Las penas se transcriben del articulado propuesto.",
    "review": {
     "status": "agent_reviewed",

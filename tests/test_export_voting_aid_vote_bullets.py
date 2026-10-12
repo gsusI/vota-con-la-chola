@@ -22,6 +22,7 @@ FIXTURE = {
                 {"text": "Prorroga hasta 2025 la suspensión de desahucios de hogares vulnerables.", "locator": "Artículo 1"},
                 {"text": "Sube las pensiones un 2,8 %.", "locator": "Disposición final segunda"},
             ],
+            "simple": "Alarga la protección contra desahucios y sube las pensiones.",
             "review": {"status": "draft"},
         },
         "v2": {"status": "sin_texto_oficial", "bullets": [], "source": None, "review": {"status": "draft"}},
@@ -37,6 +38,8 @@ class TestValidation(unittest.TestCase):
         self.assertEqual(out["meta"]["without_official_text"], 1)
         self.assertEqual(out["by_vote"]["v1"]["bullets"][1], {"text": "Sube las pensiones un 2,8 %.", "locator": "Disposición final segunda"})
         self.assertEqual(out["by_vote"]["v1"]["source"], "BOE")
+        self.assertEqual(out["by_vote"]["v1"]["simple"], "Alarga la protección contra desahucios y sube las pensiones.")
+        self.assertEqual(out["meta"]["with_simple"], 1)
         self.assertEqual(out["by_vote"]["v2"], {"status": "sin_texto_oficial", "review": "draft"})
 
     def test_rejects_ungrounded_or_biased_bullets(self) -> None:
@@ -46,6 +49,9 @@ class TestValidation(unittest.TestCase):
             "no url": lambda s: s["votes"]["v1"]["source"].__setitem__("url", ""),
             "no sha": lambda s: s["votes"]["v1"]["source"].__setitem__("sha256", None),
             "party": lambda s: s["votes"]["v1"]["bullets"][0].__setitem__("text", "Propuesta del Grupo Parlamentario Popular para bajar el IVA."),
+            "simple party": lambda s: s["votes"]["v1"].__setitem__("simple", "Lo que pide Vox sobre el IVA."),
+            "simple long": lambda s: s["votes"]["v1"].__setitem__("simple", "x" * (vb.MAX_SIMPLE_CHARS + 1)),
+            "simple empty": lambda s: s["votes"]["v1"].__setitem__("simple", " "),
             "invented": lambda s: s["votes"]["v2"].__setitem__("bullets", [{"text": "Algo", "locator": "Artículo 1"}]),
             "review": lambda s: s["votes"]["v1"].__setitem__("review", {}),
             "unknown review": lambda s: s["votes"]["v1"].__setitem__("review", {"status": "ok"}),

@@ -6433,10 +6433,28 @@ body:has(.responsibility-article) > .breadcrumbs {
   outline: none;
 }
 
+/* Answers (and «Siguiente» after the reveal) stay in reach while a long card scrolls; mobile lifts them above the tab bar. */
+.votingAidAnswers,
+.votingAidStickyBar {
+  position: sticky;
+  bottom: 12px;
+  z-index: 5;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(6px);
+}
+
 .votingAidAnswers {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10px;
+  margin: 0 -10px;
+  padding: 10px;
+}
+
+.votingAidStickyBar {
+  margin: 12px -10px 0;
+  padding: 10px;
 }
 
 .votingAidAnswer {
@@ -7243,6 +7261,20 @@ body:has(.responsibility-article) > .breadcrumbs {
   margin: 0 0 6px;
   font-weight: 700;
   font-size: 0.95rem;
+}
+
+.votingAidVoted__simple {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.45;
+}
+
+.votingAidVoted__simpleLabel {
+  font-weight: 700;
+}
+
+.votingAidVoted__simple + .votingAidVoted__list {
+  margin-top: 8px;
 }
 
 .votingAidVoted__list {

@@ -323,9 +323,14 @@ function WhatVoted({ question, parties }) {
             <p className="votingAidVoted__title">
               <span aria-hidden="true">🗳️</span> Qué se votaba{many && w.vote_date ? ` (votación del ${formatDate(w.vote_date)})` : ""}
             </p>
-            {w.status === "ok" ? (
+            {w.status === "ok" && w.simple ? (
+              <p className="votingAidVoted__simple">
+                <span className="votingAidVoted__simpleLabel">En pocas palabras:</span> {w.simple}
+              </p>
+            ) : null}
+            {w.status === "ok" && (!w.simple || expanded[i]) ? (
               <ul className="votingAidVoted__list">
-                {(expanded[i] ? w.bullets : w.bullets.slice(0, fold)).map((b) => (
+                {(expanded[i] || w.simple ? w.bullets : w.bullets.slice(0, fold)).map((b) => (
                   <li key={b.text}>
                     {b.text} <span className="votingAidVoted__loc">{b.locator}</span>
                   </li>
@@ -336,17 +341,21 @@ function WhatVoted({ question, parties }) {
                 <span aria-hidden="true">📭</span> Sin texto oficial enlazado: solo tenemos el título de la votación.
               </p>
             )}
-            {w.status === "ok" ? (
+            {w.status === "ok" && (!w.simple || expanded[i]) ? (
               <p className="votingAidMuted votingAidVoted__src">
                 Resumen del texto oficial ({w.source || doc?.source}){label ? ` · ${label}` : ""}
                 {w.review === "draft" ? " · borrador sin revisar" : w.review === "agent_reviewed" ? " · verificado con IA contra el texto, sin revisión humana" : ""}
               </p>
             ) : null}
             {doc && (w.status !== "ok" || literalFor === i) ? <WhatsInside embedded only={doc} question={question} /> : null}
-            {url || doc || (w.status === "ok" && w.bullets.length > fold) ? (
+            {url || doc || (w.status === "ok" && (w.simple || w.bullets.length > fold)) ? (
               <p className="votingAidVoted__actions">
-                {w.status === "ok" && w.bullets.length > fold ? (
-                  <button aria-expanded={Boolean(expanded[i])} className="votingAidLinkButton" onClick={() => setExpanded({ ...expanded, [i]: !expanded[i] })} type="button">
+                {w.status === "ok" && w.simple ? (
+                  <button aria-expanded={Boolean(expanded[i])} className="votingAidLinkButton" onClick={() => setExpanded((e) => ({ ...e, [i]: !e[i] }))} type="button">
+                    {expanded[i] ? "Ocultar detalle" : `Ver en detalle (${w.bullets.length} ${w.bullets.length === 1 ? "punto" : "puntos"})`}
+                  </button>
+                ) : w.status === "ok" && w.bullets.length > fold ? (
+                  <button aria-expanded={Boolean(expanded[i])} className="votingAidLinkButton" onClick={() => setExpanded((e) => ({ ...e, [i]: !e[i] }))} type="button">
                     {expanded[i] ? "Ver menos" : `Ver ${w.bullets.length - fold} más`}
                   </button>
                 ) : null}

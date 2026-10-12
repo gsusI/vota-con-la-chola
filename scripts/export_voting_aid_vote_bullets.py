@@ -5,7 +5,8 @@ The seed (etl/data/seeds/voting_aid_vote_bullets_v1.json) holds, per vote_event_
 bullets written from the official text, each with a locator (article, point, section) plus the document's
 URL and SHA-256. ``review.status`` says how far they were checked: ``draft`` (as written),
 ``agent_reviewed`` (a second AI pass checked every bullet against the official text; no human yet) or
-``reviewed`` (checked by a person). Votes without an official text are
+``reviewed`` (checked by a person). ``simple`` is an optional one-sentence version of the same bullets
+(«En pocas palabras»), shown first so the card reads at a glance. Votes without an official text are
 kept explicitly as ``sin_texto_oficial`` with no bullets: nothing is invented.
 
 Validation is strict: max six bullets, locator on every bullet, URL + SHA-256 on every grounded vote, no
@@ -34,6 +35,7 @@ SCHEMA_VERSION = "voting_aid_vote_bullets_v1"
 
 MAX_BULLETS = 6
 MAX_BULLET_CHARS = 240
+MAX_SIMPLE_CHARS = 180
 STATUSES = {"ok", "sin_texto_oficial"}
 REVIEW_STATUSES = {"draft", "agent_reviewed", "reviewed"}
 URL_RE = re.compile(r"^https://www\.(boe|congreso)\.es/")
@@ -82,6 +84,15 @@ def validate_seed(seed: dict[str, Any], vote_ids: set[str] | None = None, highli
         doc = hl_by_url.get(src.get("url"))
         if doc and doc.get("sha256") != src.get("sha256"):
             errors.append(f"{where}: sha256 distinto del documento publicado en highlights")
+        simple = v.get("simple")
+        if simple is not None:
+            simple = str(simple).strip()
+            if not simple:
+                errors.append(f"{where}: simple vacío")
+            if len(simple) > MAX_SIMPLE_CHARS:
+                errors.append(f"{where}: simple con {len(simple)} caracteres (máx. {MAX_SIMPLE_CHARS})")
+            if PARTY_RE.search(simple):
+                errors.append(f"{where}: simple nombra un partido o grupo")
         for i, b in enumerate(bullets, 1):
             text, loc = str(b.get("text") or "").strip(), str(b.get("locator") or "").strip()
             if not text:
@@ -116,6 +127,8 @@ def build_payload(seed: dict[str, Any], highlights: dict[str, Any] | None = None
             "text_status_label": src.get("text_status_label") or doc.get("text_status_label") or "",
             "review": v["review"]["status"],
         }
+        if v.get("simple"):
+            by_vote[vid]["simple"] = v["simple"].strip()
     return {
         "meta": {
             "schema_version": SCHEMA_VERSION,
@@ -123,10 +136,12 @@ def build_payload(seed: dict[str, Any], highlights: dict[str, Any] | None = None
             "method": (
                 "Hasta 6 viñetas en lenguaje llano por votación, redactadas a partir del texto oficial (parte dispositiva), "
                 "cada una con su localizador (artículo, punto o apartado) y la url y el sha256 del documento. "
-                "Neutrales: no nombran al proponente ni dicen el resultado. Sin texto oficial no hay viñetas."
+                "Neutrales: no nombran al proponente ni dicen el resultado. Sin texto oficial no hay viñetas. "
+                "«simple»: las mismas viñetas en una sola frase, sin añadir nada que no digan."
             ),
             "votes": len(by_vote),
             "with_bullets": counts["ok"],
+            "with_simple": sum(1 for v in by_vote.values() if v.get("simple")),
             "without_official_text": counts["sin_texto_oficial"],
             "review": {s: counts[s] for s in sorted(REVIEW_STATUSES)},
         },

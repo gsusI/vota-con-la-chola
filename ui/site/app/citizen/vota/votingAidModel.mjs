@@ -543,6 +543,7 @@ function whatVotedLines(question, compact = false) {
   const lines = [];
   for (const w of items) {
     lines.push(`Qué se votaba (resumen en lenguaje llano del texto oficial${w.vote_date && items.length > 1 ? `, votación del ${w.vote_date}` : ""}; puede tener errores):`);
+    if (w.simple) lines.push(`  En pocas palabras: ${w.simple}`);
     for (const b of w.bullets.slice(0, compact ? 4 : 6)) lines.push(compact ? `  • ${b.text}` : `  • ${b.text} [${b.locator}]`);
     if (w.text_status_label) lines.push(`  (${w.text_status_label})`);
     lines.push(`  Texto oficial: ${w.url}`);
