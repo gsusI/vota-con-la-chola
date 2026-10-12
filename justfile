@@ -6672,7 +6672,7 @@ site-origin-publish:
   report_arg=(); if [ -n "${SITE_ORIGIN_REPORT:-}" ]; then report_arg=(--report "$SITE_ORIGIN_REPORT"); fi
   uv run --no-project --with 'boto3>=1.34' python3 scripts/publish_site_origin.py --site "$site" --delete "${report_arg[@]}"
 
-# Deploy the domain Worker (static shell + R2 origin). Run after site-origin-publish.
+# Deploy the domain Worker (static shell + R2 origin) with the wrangler OAuth login. Run after site-origin-publish.
 site-origin-worker-deploy:
   #!/usr/bin/env bash
   set -euo pipefail
@@ -6680,7 +6680,7 @@ site-origin-worker-deploy:
   trap 'git worktree remove --force "$site" >/dev/null 2>&1 || rm -rf "$site"' EXIT
   git fetch "{{gh_pages_remote}}" "{{gh_pages_branch}}"
   git worktree add --detach "$site" FETCH_HEAD
-  python3 scripts/publish_spending_static_assets.py --site "$site"
+  env -u CLOUDFLARE_API_TOKEN -u CF_API_TOKEN python3 scripts/publish_spending_static_assets.py --site "$site"
 
 explorer-gh-pages-publish:
   if [ "${PLACSP_LAUNCH_SCOPED_PUBLISH:-0}" = "1" ]; then just placsp-launch-scoped-publish; else just votaconlachola-gh-pages-publish; fi

@@ -101,7 +101,7 @@ Mandato del mantenedor: la web debe ser usable y fiable con un origen que contro
 | 3. Explorador sin HF en ejecución | Parquet servido desde el origen propio con peticiones por rango |
 | 4. Retirar Pages paralelo | Un solo destino de despliegue |
 
-Presupuesto gratuito: R2 ≤ 10 GB (pocas releases completas; históricas en HF), subidas solo de ficheros cambiados, lecturas servidas desde caché. **Siguiente:** paso 1 (credenciales R2 y primera sincronización).
+Presupuesto gratuito: R2 ≤ 10 GB (pocas releases completas; históricas en HF), subidas solo de ficheros cambiados, lecturas servidas desde caché. **Estado 2026-10-12:** paso 1 HECHO (`x-vclc-origin: r2` en producción, `/releases/latest.json` publicado). **Siguiente:** paso 2.
 
 ## Ayuda al voto: elecciones generales (mandato 2026-10-11)
 
