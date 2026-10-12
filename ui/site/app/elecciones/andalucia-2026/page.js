@@ -1,5 +1,5 @@
 import { readPublicJson } from "../../static-snapshot.mjs";
-import { withBasePath } from "../../path-utils.mjs";
+import { siteCardImage, withBasePath } from "../../path-utils.mjs";
 import styles from "./water-receipt.module.css";
 
 export const metadata = {
@@ -12,9 +12,11 @@ export const metadata = {
       "Tres compromisos de investidura, su estado verificable y las fuentes oficiales revisadas.",
     type: "article",
     url: "/elecciones/andalucia-2026/",
+    images: [siteCardImage()],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
+    images: [siteCardImage().url],
     title: "El recibo del agua de Andalucía",
     description:
       "Qué se prometió, qué acto oficial existe y qué sigue sin probarse.",

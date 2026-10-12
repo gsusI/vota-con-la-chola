@@ -74,8 +74,8 @@ class TestExportVoteExplainerSnapshot(unittest.TestCase):
                 snapshot_as_of_date="2026-04-02",
                 generated_at="2026-04-04T12:00:00+00:00",
                 source_snapshot_path="/explorer-votaciones/data/votes-preview.json",
-                site_origin="https://gsusI.github.io",
-                site_base_path="/vota-con-la-chola",
+                site_origin="https://votaconlachola.org",
+                site_base_path="",
             )
 
             self.assertEqual(len(payloads), 1)
@@ -89,7 +89,7 @@ class TestExportVoteExplainerSnapshot(unittest.TestCase):
             self.assertEqual(detail["meta"]["canonical_path"], f"/vote-explainer/{public_vote_id}/")
             self.assertEqual(detail["result"]["status"], "approved")
             self.assertEqual(detail["result"]["confidence"], "medium")
-            self.assertEqual(detail["social"]["canonical_url"], f"https://gsusI.github.io/vota-con-la-chola/vote-explainer/{public_vote_id}/")
+            self.assertEqual(detail["social"]["canonical_url"], f"https://votaconlachola.org/vote-explainer/{public_vote_id}/")
             self.assertEqual(manifest["votes"][0]["canonical_path"], f"/vote-explainer/{public_vote_id}/")
             self.assertEqual(manifest["votes"][0]["top_caveat"]["code"], "initiative_missing")
             self.assertEqual(manifest["votes"][0]["top_caveat"]["label"], "Iniciativa oficial no enlazada")

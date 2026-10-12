@@ -1,9 +1,11 @@
 import { notFound } from "next/navigation";
 import {
+  absoluteSiteUrl,
   formatDate,
   formatInt,
   loadResponsibilityExplainerCasePayload,
   loadResponsibilityExplainerManifest,
+  siteCardImage,
   withBasePath,
 } from "../pageData.mjs";
 
@@ -24,12 +26,17 @@ export async function generateMetadata({ params }) {
     };
   }
 
+  const title = `${payload.case?.title || payload.case?.short_label || "Caso de responsabilidad"} | Vota Con La Chola`;
+  const description = payload.case?.summary || "Página pública y auditable de un caso de responsabilidad.";
+  // Built from the path at build time: the exported canonical_url may carry a retired origin.
+  const url = absoluteSiteUrl(payload.case?.canonical_path || `/responsibility-explainer/${caseId}/`);
+  const image = siteCardImage();
   return {
-    title: `${payload.case?.title || payload.case?.short_label || "Caso de responsabilidad"} | Vota Con La Chola`,
-    description: payload.case?.summary || "Página pública y auditable de un caso de responsabilidad.",
-    alternates: {
-      canonical: payload.case?.canonical_url || undefined,
-    },
+    title,
+    description,
+    alternates: { canonical: url },
+    openGraph: { title, description, url, type: "article", siteName: "Vota Con La Chola", locale: "es_ES", images: [image] },
+    twitter: { card: "summary_large_image", title, description, images: [image.url] },
   };
 }
 

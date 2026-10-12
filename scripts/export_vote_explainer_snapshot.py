@@ -14,8 +14,8 @@ from urllib.parse import quote
 
 
 DEFAULT_SOURCE_JSON = Path("ui/site/public/explorer-votaciones/data/votes-preview.json")
-DEFAULT_SITE_ORIGIN = "https://gsusI.github.io"
-DEFAULT_SITE_BASE_PATH = "/vota-con-la-chola"
+DEFAULT_SITE_ORIGIN = "https://votaconlachola.org"
+DEFAULT_SITE_BASE_PATH = ""
 
 
 def safe_text(value: Any) -> str:

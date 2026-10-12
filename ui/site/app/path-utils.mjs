@@ -1,3 +1,6 @@
+// Public origin of the live site (served from R2). Override with NEXT_PUBLIC_SITE_ORIGIN for previews.
+export const SITE_ORIGIN = (process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://votaconlachola.org").replace(/\/+$/u, "");
+
 export function normalizeBasePath(value) {
   const raw = String(value ?? "").trim();
   if (!raw || raw === "/") {
@@ -48,4 +51,16 @@ export function withBasePath(pathname, basePath = resolveBasePath()) {
     return normalizedPath;
   }
   return `${normalizedBasePath}${normalizedPath}`;
+}
+
+// Absolute public URL for a site path (canonical/og:url/og:image need absolute URLs).
+export function absoluteSiteUrl(pathname, basePath = resolveBasePath()) {
+  return `${SITE_ORIGIN}${withBasePath(pathname, basePath)}`;
+}
+
+// Generic 1200x630 PNG share card rendered by app/og/[file]/route.js; SVG favicons are not rendered by WhatsApp/X/Telegram.
+export const SITE_CARD_IMAGE = { width: 1200, height: 630, alt: "Vota Con La Chola" };
+
+export function siteCardImage(basePath = resolveBasePath()) {
+  return { url: absoluteSiteUrl("/og/site.png", basePath), ...SITE_CARD_IMAGE };
 }

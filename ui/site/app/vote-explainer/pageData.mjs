@@ -1,9 +1,9 @@
 import fs from "node:fs";
 import path from "node:path";
-import { resolveBasePath, withBasePath } from "../path-utils.mjs";
+import { SITE_ORIGIN, absoluteSiteUrl, resolveBasePath, siteCardImage, withBasePath } from "../path-utils.mjs";
 
-export const DEFAULT_SITE_ORIGIN = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://gsusI.github.io";
-export { resolveBasePath, withBasePath };
+export const DEFAULT_SITE_ORIGIN = SITE_ORIGIN;
+export { absoluteSiteUrl, resolveBasePath, siteCardImage, withBasePath };
 
 function resolveDataDir() {
   return path.resolve(process.cwd(), "public", "vote-explainer", "data");
@@ -89,10 +89,6 @@ export function freshnessToneClass(tier) {
     return "votePillWarn";
   }
   return "votePillNeutral";
-}
-
-export function buildSiteImageUrl() {
-  return `${DEFAULT_SITE_ORIGIN}${resolveBasePath()}/favicon.svg`;
 }
 
 export function buildOfficialLinks(payload) {

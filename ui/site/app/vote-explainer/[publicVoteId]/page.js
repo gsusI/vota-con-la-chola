@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import {
+  absoluteSiteUrl,
   buildOfficialLinks,
-  buildSiteImageUrl,
   caveatSeverityClass,
   formatInt,
   formatVoteDate,
@@ -10,6 +10,7 @@ import {
   loadVoteExplainerPayload,
   percentWidth,
   resultToneClass,
+  siteCardImage,
   topVisibleCaveat,
   withBasePath,
 } from "../pageData.mjs";
@@ -30,26 +31,29 @@ export async function generateMetadata({ params }) {
       description: "No encontramos esa votación en el corte público actual.",
     };
   }
+  const title = payload.social?.title || "Explicador de votos | Vota Con La Chola";
+  const description = payload.social?.description || "Página pública y auditable de una votación concreta.";
+  // Built from the path at build time: the exported canonical_url may carry a retired origin.
+  const url = absoluteSiteUrl(payload.meta?.canonical_path || `/vote-explainer/${publicVoteId}/`);
+  const image = siteCardImage();
   return {
-    title: payload.social?.title || "Explicador de votos | Vota Con La Chola",
-    description: payload.social?.description || "Página pública y auditable de una votación concreta.",
-    alternates: {
-      canonical: payload.social?.canonical_url || undefined,
-    },
+    title,
+    description,
+    alternates: { canonical: url },
     openGraph: {
-      title: payload.social?.title || "Explicador de votos | Vota Con La Chola",
-      description: payload.social?.description || "Página pública y auditable de una votación concreta.",
-      url: payload.social?.canonical_url || undefined,
+      title,
+      description,
+      url,
       type: "article",
       siteName: "Vota Con La Chola",
       locale: "es_ES",
-      images: [buildSiteImageUrl()],
+      images: [image],
     },
     twitter: {
-      card: "summary",
-      title: payload.social?.title || "Explicador de votos | Vota Con La Chola",
-      description: payload.social?.description || "Página pública y auditable de una votación concreta.",
-      images: [buildSiteImageUrl()],
+      card: "summary_large_image",
+      title,
+      description,
+      images: [image.url],
     },
   };
 }
