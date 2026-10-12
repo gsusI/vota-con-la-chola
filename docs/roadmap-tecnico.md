@@ -613,7 +613,7 @@ just comparison-engine-built-check
 just outcome-context-built-check
 
 # Publicación y verificación live
-just votaconlachola-gh-pages-publish
+just site-publish
 just actor-graph-live-verify
 just comparison-engine-live-verify
 node scripts/audit_public_routes.js --base-url https://votaconlachola.org

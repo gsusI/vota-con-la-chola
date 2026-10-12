@@ -115,6 +115,6 @@ jobs:
           fi
           just etl-publish-hf
 
-      - name: Publish votaconlachola.org (gh-pages record + R2 origin)
+      - name: Publish votaconlachola.org (R2 origin)
         if: env.LIVE_ETL_PUBLISH_REQUESTED == 'true'
-        run: just votaconlachola-gh-pages-publish
+        run: just site-publish

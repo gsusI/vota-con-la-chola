@@ -111,11 +111,14 @@ def scan_site(site: Path, *, workers: int = 8) -> list[LocalFile]:
     return files
 
 
-def build_manifest(files: list[LocalFile], *, release_id: str, source_commit: str, generated_at: str) -> dict[str, Any]:
+def build_manifest(
+    files: list[LocalFile], *, release_id: str, source_commit: str, generated_at: str, source_dirty: bool = False
+) -> dict[str, Any]:
     return {
         "schema": MANIFEST_SCHEMA,
         "release_id": release_id,
         "source_commit": source_commit,
+        "source_dirty": source_dirty,
         "generated_at": generated_at,
         "file_count": len(files),
         "total_bytes": sum(f.size for f in files),
@@ -241,7 +244,7 @@ def sync(
             f"Parity check failed for {len(mismatched)} objects ({missing} missing, "
             f"{len(mismatched) - missing} with different content), e.g. {mismatched[:5]}. "
             "If another publish ran concurrently, the bucket changed during this sync: nothing was deleted; "
-            "re-run `just site-origin-publish` once it finishes (it re-fetches gh-pages and uploads only diffs)."
+            "re-run `just site-origin-publish` once it finishes (it uploads only diffs)."
         )
 
     deleted = 0
@@ -285,17 +288,46 @@ def sync(
     }
 
 
+# Sources that end up in the static build: uncommitted changes there make the release not reproducible from its commit.
+SITE_SOURCE_PATHS = ("ui/gh-pages-next",)
+
+
 def git_head(site: Path) -> str:
-    result = subprocess.run(["git", "-C", str(site), "rev-parse", "HEAD"], capture_output=True, text=True)
-    return result.stdout.strip() if result.returncode == 0 else "unknown"
+    """Commit the build came from: the site's own repo if it is one, else this repo's HEAD (``ui/gh-pages-next/out``)."""
+    for repo in (site, REPO_ROOT):
+        result = subprocess.run(["git", "-C", str(repo), "rev-parse", "--show-toplevel", "HEAD"], capture_output=True, text=True)
+        if result.returncode == 0:
+            top, head = result.stdout.split()
+            if Path(top).resolve() == Path(repo).resolve() or repo == REPO_ROOT:
+                return head
+    return "unknown"
+
+
+BUILD_STAMP = ".vclc-build.json"
+
+
+def read_build_stamp(site: Path) -> dict[str, Any]:
+    """``just site-publish`` writes the commit the build came from into the (unpublished) dotfile ``.vclc-build.json``."""
+    try:
+        return json.loads((site / BUILD_STAMP).read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+
+
+def git_dirty(paths: Iterable[str] = SITE_SOURCE_PATHS) -> bool:
+    result = subprocess.run(
+        ["git", "-C", str(REPO_ROOT), "status", "--porcelain", "--untracked-files=no", "--", *paths],
+        capture_output=True, text=True,
+    )
+    return result.returncode == 0 and bool(result.stdout.strip())
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--site", required=True, type=Path, help="Built site directory (e.g. a gh-pages checkout)")
+    parser.add_argument("--site", required=True, type=Path, help="Built site directory (ui/gh-pages-next/out)")
     parser.add_argument("--bucket", default=DEFAULT_BUCKET)
     parser.add_argument("--release-id", default="", help="Defaults to <UTC timestamp>-<source commit[:12]>")
-    parser.add_argument("--source-commit", default="", help="Defaults to git HEAD of --site")
+    parser.add_argument("--source-commit", default="", help="Defaults to git HEAD of --site, else of this repo")
     parser.add_argument("--workers", type=int, default=16)
     parser.add_argument("--delete", action="store_true", help="Delete objects no longer in the site build")
     parser.add_argument("--max-delete-ratio", type=float, default=0.2)
@@ -318,13 +350,20 @@ def main(argv: list[str] | None = None, *, client: Any = None) -> int:
 
     files = scan_site(site)
     now = datetime.now(timezone.utc)
-    source_commit = args.source_commit or git_head(site)
+    stamp = read_build_stamp(site)
+    source_commit = args.source_commit or stamp.get("source_commit") or git_head(site)
+    source_dirty = False if args.source_commit else bool(stamp["source_dirty"]) if "source_dirty" in stamp else git_dirty()
+    if not args.source_commit and not stamp:
+        print(f"WARN: {site}/{BUILD_STAMP} missing (build not made by `just site-publish`); using current HEAD", file=sys.stderr)
     release_id = args.release_id or f"{now.strftime('%Y%m%dT%H%M%SZ')}-{source_commit[:12]}"
-    manifest = build_manifest(files, release_id=release_id, source_commit=source_commit, generated_at=now.isoformat())
+    manifest = build_manifest(
+        files, release_id=release_id, source_commit=source_commit, generated_at=now.isoformat(), source_dirty=source_dirty
+    )
 
     report: dict[str, Any] = {
         "release_id": release_id,
         "source_commit": source_commit,
+        "source_dirty": source_dirty,
         "bucket": args.bucket,
         "file_count": manifest["file_count"],
         "total_bytes": manifest["total_bytes"],

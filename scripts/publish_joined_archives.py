@@ -2,7 +2,7 @@
 """Publish single-file copies of archives that the site ships split into parts.
 
 Releases such as ``spending/launch/<sha>/placsp-launch.zip.part-NNNN`` are split
-because the git record (``gh-pages``) caps file sizes. The R2 origin has no such
+because the static build caps file sizes (25 MB per file). The R2 origin has no such
 limit, so this joins the parts, verifies every part and the whole archive
 against ``spending/launch/latest.json``, and uploads one file to
 ``/downloads/<release>/<archive>``. The hash-pinned release itself is untouched.

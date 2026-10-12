@@ -68,9 +68,6 @@ senado_tail_archive_timeout := env_var_or_default("SENADO_TAIL_ARCHIVE_TIMEOUT",
 explorer_host := env_var_or_default("EXPLORER_HOST", "127.0.0.1")
 explorer_port := env_var_or_default("EXPLORER_PORT", "9010")
 gh_pages_dir := env_var_or_default("STATIC_BUILD_DATA_DIR", "ui/gh-pages-next/.static-data")
-gh_pages_remote := env_var_or_default("GH_PAGES_REMOTE", "origin")
-gh_pages_branch := env_var_or_default("GH_PAGES_BRANCH", "gh-pages")
-gh_pages_tmp_branch := env_var_or_default("GH_PAGES_TMP_BRANCH", "gh-pages-tmp")
 gh_pages_next_app_dir := env_var_or_default("GH_PAGES_NEXT_APP_DIR", "ui/gh-pages-next")
 gh_pages_next_out_dir := gh_pages_next_app_dir + "/out"
 gh_pages_next_port := env_var_or_default("GH_PAGES_NEXT_PORT", "3000")
@@ -6638,42 +6635,33 @@ spending-api-deploy bundle slot:
   just --working-directory "$infra_repo" --justfile "$infra_repo/Justfile" spending-api-deploy "$1" "$2"
 
 cloudflare-pages-deploy:
-  @echo "RETIRED 2026-10-12: votaconlachola.org is served by the domain Worker + R2. Use just votaconlachola-gh-pages-publish (syncs R2) or just site-origin-publish." >&2
+  @echo "RETIRED 2026-10-12: votaconlachola.org is served by the domain Worker + R2. Use just site-publish." >&2
   @exit 1
 
-votaconlachola-gh-pages-publish:
-  @just cloudflare-pages-build
-  set -e; \
-  test -d "{{gh_pages_next_out_dir}}" || (echo "Missing {{gh_pages_next_out_dir}}; run just cloudflare-pages-build first" >&2; exit 2); \
-  tmpdir="$(mktemp -d)"; \
-  cleanup() { git worktree remove --force "$tmpdir" >/dev/null 2>&1 || rm -rf "$tmpdir"; }; \
-  trap cleanup EXIT; \
-  git fetch "{{gh_pages_remote}}" "{{gh_pages_branch}}"; \
-  git worktree add --detach "$tmpdir" FETCH_HEAD; \
-  rsync -a --delete --exclude .git "{{gh_pages_next_out_dir}}"/ "$tmpdir"/; \
-  find "$tmpdir" -name .DS_Store -not -path "*/.git/*" -delete; \
-  touch "$tmpdir/.nojekyll"; \
-  git -C "$tmpdir" add -A; \
-  if git -C "$tmpdir" diff --cached --quiet; then \
-    echo "No gh-pages changes to publish"; \
-  else \
-    git -C "$tmpdir" config user.name "${GIT_AUTHOR_NAME:-vclc-publisher}"; \
-    git -C "$tmpdir" config user.email "${GIT_AUTHOR_EMAIL:-actions@users.noreply.github.com}"; \
-    git -C "$tmpdir" commit -m "Publish static site snapshot {{snapshot_date}}"; \
-    git -C "$tmpdir" push "{{gh_pages_remote}}" HEAD:"{{gh_pages_branch}}"; \
-  fi
-  # votaconlachola.org serves R2, not gh-pages: a publish is incomplete until the origin is synced.
+# gh-pages is retired as the publish record (2026-10-12): R2 + /releases/<id>/manifest.json are the record.
+# Build the static site and publish ui/gh-pages-next/out straight to the R2 origin of votaconlachola.org.
+site-publish:
+  #!/usr/bin/env bash
+  set -euo pipefail
+  # Record what the build came from before building (the sync may run later); dotfiles are never published.
+  commit="$(git rev-parse HEAD)"
+  dirty=false; if [ -n "$(git status --porcelain --untracked-files=no -- ui/gh-pages-next)" ]; then dirty=true; fi
+  just cloudflare-pages-build
+  printf '{"source_commit": "%s", "source_dirty": %s, "built_at": "%s"}\n' "$commit" "$dirty" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > "{{gh_pages_next_out_dir}}/.vclc-build.json"
   just site-origin-publish
 
-# votaconlachola.org origin: sync the published gh-pages tree to R2 (changed files only)
-# and publish a sha256 release manifest at /releases/latest.json. Needs R2_* env (S3 API).
+# Deprecated names kept so older docs, scripts and sessions keep working.
+votaconlachola-gh-pages-publish:
+  @echo "votaconlachola-gh-pages-publish is now just site-publish (gh-pages is no longer published)" >&2
+  @just site-publish
+
+# Needs R2_* env (S3 API); also publishes a sha256 release manifest at /releases/latest.json.
+# Sync the built site (ui/gh-pages-next/out) to the votaconlachola.org R2 origin, changed files only.
 site-origin-publish:
   #!/usr/bin/env bash
   set -euo pipefail
-  site="$(mktemp -d)"
-  trap 'git worktree remove --force "$site" >/dev/null 2>&1 || rm -rf "$site"' EXIT
-  git fetch "{{gh_pages_remote}}" "{{gh_pages_branch}}"
-  git worktree add --detach "$site" FETCH_HEAD
+  site="{{gh_pages_next_out_dir}}"
+  test -f "$site/index.html" || { echo "Missing $site; run just site-publish (or just cloudflare-pages-build) first" >&2; exit 2; }
   # R2 credentials: env, else .env; account id: env, else the Worker's wrangler.toml (see make_client).
   # ${arr[@]+...} keeps an empty array safe under set -u on macOS bash 3.2.
   report_arg=(); if [ -n "${SITE_ORIGIN_REPORT:-}" ]; then report_arg=(--report "$SITE_ORIGIN_REPORT"); fi
@@ -6688,31 +6676,20 @@ site-dataset-mirror:
   if ! python3 -c 'import sys; sys.path.insert(0, "scripts"); import publish_site_origin as o; o.resolve_r2_settings()' 2>/dev/null; then echo "WARN: R2 credentials missing; /datasets/ keeps the previous snapshot" >&2; exit 0; fi
   uv run --no-project --with 'boto3>=1.34' python3 scripts/mirror_dataset_snapshot.py --dataset-repo "{{hf_dataset_repo_id}}"
 
-# Deploy the domain Worker (static shell + R2 origin) with the wrangler OAuth login. Run after site-origin-publish.
+# Deploy the domain Worker (static shell + R2 origin) with the wrangler OAuth login. Run after site-publish.
 site-origin-worker-deploy:
   #!/usr/bin/env bash
   set -euo pipefail
-  site="$(mktemp -d)"
-  trap 'git worktree remove --force "$site" >/dev/null 2>&1 || rm -rf "$site"' EXIT
-  git fetch "{{gh_pages_remote}}" "{{gh_pages_branch}}"
-  git worktree add --detach "$site" FETCH_HEAD
+  site="{{gh_pages_next_out_dir}}"
+  test -f "$site/index.html" || { echo "Missing $site; run just cloudflare-pages-build first" >&2; exit 2; }
   env -u CLOUDFLARE_API_TOKEN -u CF_API_TOKEN python3 scripts/publish_spending_static_assets.py --site "$site"
 
 explorer-gh-pages-publish:
-  if [ "${PLACSP_LAUNCH_SCOPED_PUBLISH:-0}" = "1" ]; then just placsp-launch-scoped-publish; else just votaconlachola-gh-pages-publish; fi
+  @just site-publish
 
 placsp-launch-scoped-publish:
-  #!/usr/bin/env bash
-  set -euo pipefail
-  CLOUDFLARE_PAGES_FROZEN_INPUTS=1 just cloudflare-pages-build
-  : "${PLACSP_PUBLISH_SITE:?Set a detached gh-pages checkout to preserve existing routes}"
-  python3 scripts/overlay_placsp_launch_site.py --build "{{gh_pages_next_out_dir}}" --site "$PLACSP_PUBLISH_SITE" --report docs/etl/sprints/PUBLIC-LAUNCH-20260905/evidence/scoped-publication.json
-  git -C "$PLACSP_PUBLISH_SITE" -c core.autocrlf=false add -- index.html index.txt spending _next
-  python3 scripts/verify_placsp_launch_git.py --repo "$PLACSP_PUBLISH_SITE" --prefix spending/launch --ref ""
-  git -C "$PLACSP_PUBLISH_SITE" commit -m "Publish PLACSP technical alpha from $(git rev-parse --short HEAD)"
-  git -C "$PLACSP_PUBLISH_SITE" push "{{gh_pages_remote}}" HEAD:"{{gh_pages_branch}}"
-  just site-origin-publish
-  env -u CLOUDFLARE_API_TOKEN -u CF_API_TOKEN python3 scripts/publish_spending_static_assets.py --site "$PLACSP_PUBLISH_SITE"
+  @echo "RETIRED 2026-10-12: the scoped PLACSP overlay needed the gh-pages tree; full builds include /spending/. Use just site-publish." >&2
+  @exit 1
 
 
 explorer-gh-pages:

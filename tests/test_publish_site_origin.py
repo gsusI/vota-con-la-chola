@@ -201,5 +201,45 @@ class SiteOriginRecipeTests(unittest.TestCase):
         self.assertEqual(self.run_recipe("out dir/r.json"), "<--site><S><--delete><--report><out dir/r.json>")
 
 
+class TestSourceCommit(unittest.TestCase):
+    def test_build_dir_inside_repo_reports_repo_head(self) -> None:
+        head = subprocess.run(["git", "-C", str(REPO_ROOT), "rev-parse", "HEAD"], capture_output=True, text=True, check=True).stdout.strip()
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT / "scripts") as tmp:  # not a repo of its own
+            self.assertEqual(pso.git_head(Path(tmp)), head)
+
+    def test_standalone_git_checkout_reports_its_own_head(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            run_git = lambda *a: subprocess.run(["git", "-C", tmp, *a], capture_output=True, text=True, check=True)  # noqa: E731
+            run_git("init", "-q")
+            Path(tmp, "index.html").write_text("x")
+            run_git("add", "index.html")
+            run_git("-c", "user.name=t", "-c", "user.email=t@t", "commit", "-qm", "x")
+            self.assertEqual(pso.git_head(Path(tmp)), run_git("rev-parse", "HEAD").stdout.strip())
+
+    def test_build_stamp_wins_and_is_not_published(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            site = Path(tmp)
+            (site / "index.html").write_text("x")
+            (site / pso.BUILD_STAMP).write_text('{"source_commit": "abc123", "source_dirty": true}')
+            self.assertEqual(pso.read_build_stamp(site)["source_commit"], "abc123")
+            self.assertEqual([f.path for f in pso.scan_site(site)], ["index.html"])
+            self.assertEqual(pso.read_build_stamp(site / "missing"), {})
+
+    def test_manifest_records_dirty_sources(self) -> None:
+        manifest = pso.build_manifest([], release_id="r", source_commit="abc", generated_at="t", source_dirty=True)
+        self.assertTrue(manifest["source_dirty"])
+
+
+class TestPublishRecipes(unittest.TestCase):
+    def test_site_publish_syncs_the_build_not_gh_pages(self) -> None:
+        text = (REPO_ROOT / "justfile").read_text(encoding="utf-8")
+        block = text[text.index("\nsite-origin-publish:"):text.index("\nsite-dataset-mirror:")]
+        self.assertIn('site="{{gh_pages_next_out_dir}}"', block)
+        self.assertNotIn("gh-pages", block.replace("gh-pages-next", ""))
+        publish = text[text.index("\nsite-publish:"):text.index("\nvotaconlachola-gh-pages-publish:")]
+        self.assertLess(publish.index("git rev-parse HEAD"), publish.index("just cloudflare-pages-build"))
+        self.assertLess(publish.index(".vclc-build.json"), publish.index("just site-origin-publish"))
+
+
 if __name__ == "__main__":
     unittest.main()
