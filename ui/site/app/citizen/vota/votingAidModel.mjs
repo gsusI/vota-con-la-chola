@@ -393,16 +393,23 @@ function voteLines(question, parties) {
 }
 
 // Before answering, the prompt must not say who proposed what (titles sometimes name the groups).
-const PROPOSER_PATTERNS = [
-  /,?\s*presentad[ao]s? por (?:el|los|la|las)? ?Grupos? Parlamentari[oa]s?[^.;]*/giu,
-  /\b(?:del|de los|de la) Grupos? Parlamentari[oa]s? [^,.;]*(?:,|(?=\s(?:sobre|relativa|para|de|por)\b))/giu,
-];
+// Mirrors anonymize_title in scripts/export_voting_aid_pool.py: the proposer runs from "Grupo(s)
+// Parlamentario(s)" up to the purpose clause, so lists like "SUMAR, Republicano, ... y Mixto, para ..." go whole.
+const PURPOSE_END = String.raw`(?:(,)\s+(?=(?:orgánica|relativ|referid|sobre|para|de |del |por |en |a |al |que |contra|reguladora|con |acerca|ante))|\s+(?=(?:sobre|relativa|relativo|para la|para el|por la que|de medidas)\b)|(?=[.;]|$))`;
+const PRESENTED_BY_RE = new RegExp(String.raw`,?\s*presentad[ao]s? por (?:el|los|la|las)? ?Grupos? Parlamentari[oa]s?[^.;]*?` + PURPOSE_END, "giu");
+const PROPOSER_RE = new RegExp(String.raw`\b(?:del|de los|de las|de la) (Grupos? Parlamentari[oa]s?)\s[^.;]*?` + PURPOSE_END, "giu");
+// Safety net for any other mention ("el Grupo Parlamentario X").
+const GROUP_MENTION_RE = /\b(?:(?:el|los|del?|de los|de las|de la)\s+)?Grupos? Parlamentari[oa]s?\s+[^,.;]*/gu;
 
 export function maskProposers(text) {
   let out = String(text || "");
-  out = out.replace(PROPOSER_PATTERNS[0], "");
-  out = out.replace(PROPOSER_PATTERNS[1], "de un grupo parlamentario,");
-  return out.replace(/,\s*,/gu, ",").replace(/\s+/gu, " ").trim();
+  out = out.replace(PRESENTED_BY_RE, (_, comma) => (comma ? ", " : " "));
+  out = out.replace(PROPOSER_RE, (_, group, comma) => {
+    const label = /^grupos/iu.test(group) ? "de varios grupos parlamentarios" : "de un grupo parlamentario";
+    return `${label}${comma || ""} `;
+  });
+  out = out.replace(GROUP_MENTION_RE, (match) => (/^de/iu.test(match) ? "de un grupo parlamentario" : "un grupo parlamentario"));
+  return out.replace(/,\s*,/gu, ",").replace(/\s+([.,;])/gu, "$1").replace(/\s+/gu, " ").trim();
 }
 
 /**

@@ -205,6 +205,27 @@ test("AI prompts carry exactly what was voted and never the user's answers", asy
     m.maskProposers("Proposición de Ley del Grupo Parlamentario Socialista, sobre algo."),
     "Proposición de Ley de un grupo parlamentario, sobre algo.",
   );
+  // Compound proposer lists go whole, up to the purpose clause (real title, vivienda-alquiler-temporada 2024-12-17).
+  assert.equal(
+    m.maskProposers(
+      "Proposición de Ley de los Grupos Parlamentarios Plurinacional SUMAR, Republicano, Euskal Herria Bildu y Mixto, para la regulación de los contratos de alquiler temporales y alquiler de habitaciones.",
+    ),
+    "Proposición de Ley de varios grupos parlamentarios, para la regulación de los contratos de alquiler temporales y alquiler de habitaciones.",
+  );
+  assert.equal(
+    m.maskProposers("Proposición no de Ley del Grupo Parlamentario Popular en el Congreso relativa a la vivienda."),
+    "Proposición no de Ley de un grupo parlamentario relativa a la vivienda.",
+  );
+  assert.equal(m.maskProposers("Proposición presentada por el Grupo Parlamentario VOX sobre algo."), "Proposición sobre algo.");
+  // No curated or pool vote title names a group after masking ("País Vasco" is a place, not EAJ-PNV).
+  const groupName = /SUMAR|Republicano|Bildu|Mixto|Socialista|Popular|VOX|Junts|Grupo Parlamentario Vasco|EAJ|PNV/u;
+  const titles = [
+    ...snap.statements.flatMap((s) => (s.votes || []).map((v) => v.title)),
+    ...pool.items.map((it) => it.title),
+    ...questions.flatMap((q) => m.buildAiPrompt(q, snap.parties, { mode: "explain" }).split("\n").filter((l) => l.startsWith("- Qué se votó"))),
+  ].filter(Boolean);
+  assert.ok(titles.length >= 300, `titles scanned: ${titles.length}`);
+  for (const t of titles) assert.ok(!groupName.test(m.maskProposers(t)), m.maskProposers(t));
 
   const links = m.aiLinks(why);
   assert.deepEqual(links.map((l) => l.id), ["chatgpt", "claude", "gemini"]);
