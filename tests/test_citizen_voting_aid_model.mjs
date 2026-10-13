@@ -324,7 +324,12 @@ test("«Ramificaciones» attach official figures and both-sided effects, and rea
   const pool = read("voting_aid_pool_v1.json");
   const highlights = read("voting_aid_highlights_v1.json");
   const bullets = read("voting_aid_vote_bullets_v1.json");
-  const impacts = read("voting_aid_vote_impacts_v1.json");
+  const index = read("voting_aid_vote_impacts_v1.json");
+  const shardFiles = fs.readdirSync(path.join(dataDir, index.meta.shards.dir));
+  assert.ok(shardFiles.length > 1 && shardFiles.length <= m.IMPACT_SHARDS);
+  const impacts = m.mergeImpacts(index, shardFiles.map((f) => read(`${index.meta.shards.dir}/${f}`)));
+  // Every vote sits in the shard the browser will ask for.
+  for (const f of shardFiles) for (const vid of Object.keys(read(`${index.meta.shards.dir}/${f}`).by_vote)) assert.equal(`${m.impactShardKey(vid)}.json`, f);
   for (const version of ["v1", "v2"]) {
     const snap = read(`voting_aid_generales_${version}.json`);
     const questions = m.attachHighlights(m.buildQuestions(snap, pool), highlights, bullets, impacts);

@@ -17,6 +17,10 @@ Every question must say who it affects, at both levels: each statement (``statem
 (``votes``), including the endless-mode pool. Work is drafted one question at a time into part files under
 ``voting_aid_vote_impacts_v1.d/`` (same shape as the seed); they are merged here, and ``--require-complete``
 fails while any question or vote has no official figure.
+
+Published split so /citizen/vota/ does not download every vote up front: ``voting_aid_vote_impacts_v1.json`` is the
+index (meta, statement-level figures) and ``voting_aid_vote_impacts_v1/<kk>.json`` hold each vote's figures and
+effects, bucketed by ``shard_key`` (FNV-1a of the vote id, mirrored by ``impactShardKey`` in votingAidModel.mjs).
 """
 
 from __future__ import annotations
@@ -46,6 +50,7 @@ MAX_DIRECT = 4
 MAX_INDIRECT = 6
 MAX_TEXT_CHARS = 260
 MAX_GAPS_CHARS = 300
+SHARDS = 128
 KINDS = ("beneficio_esperado", "riesgo_senalado")
 EVIDENCE = {"organismo_publico", "estudio", "debate"}
 URL_RE = re.compile(r"^https://")
@@ -227,6 +232,27 @@ def build_payload(seed: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def shard_key(vote_id: str) -> str:
+    h = 0x811C9DC5
+    for b in vote_id.encode("utf-8"):
+        h = ((h ^ b) * 0x01000193) & 0xFFFFFFFF
+    return f"{h % SHARDS:02x}"
+
+
+def split_payload(payload: dict[str, Any]) -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
+    """Index (meta + statement figures) and per-shard {facts, by_vote}, each carrying only the figures it cites."""
+    facts = payload["facts"]
+    shards: dict[str, dict[str, Any]] = {}
+    for vid, v in payload["by_vote"].items():
+        shard = shards.setdefault(shard_key(vid), {"facts": {}, "by_vote": {}})
+        shard["by_vote"][vid] = v
+        shard["facts"].update({fid: facts[fid] for fid in v["facts"]})
+    used = {fid for st in payload["by_statement"].values() for fid in st["facts"]}
+    meta = {**payload["meta"], "shards": {"count": SHARDS, "dir": "voting_aid_vote_impacts_v1"}}
+    index = {"meta": meta, "facts": {fid: facts[fid] for fid in sorted(used)}, "by_statement": payload["by_statement"]}
+    return index, dict(sorted(shards.items()))
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--seed", default=str(DEFAULT_SEED))
@@ -264,10 +290,19 @@ def main(argv: list[str] | None = None) -> int:
     payload["meta"]["coverage"] = {"statements": cov["statements"], "votes": cov["votes"]}
     out = Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text(json.dumps(payload, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")
+    index, shards = split_payload(payload)
+    dump = lambda obj: json.dumps(obj, ensure_ascii=False, separators=(",", ":")) + "\n"
+    out.write_text(dump(index), encoding="utf-8")
+    shard_dir = out.parent / index["meta"]["shards"]["dir"]
+    shard_dir.mkdir(exist_ok=True)
+    for stale in shard_dir.glob("*.json"):
+        if stale.stem not in shards:
+            stale.unlink()
+    for key, shard in shards.items():
+        (shard_dir / f"{key}.json").write_text(dump(shard), encoding="utf-8")
     m = payload["meta"]
     shown = out.resolve().relative_to(BASE_DIR) if out.resolve().is_relative_to(BASE_DIR) else out
-    print(f"OK impacts -> {shown} (votes={m['votes']} statements={m['statements']} facts={m['facts']} evidence={m['indirect_by_evidence']})")
+    print(f"OK impacts -> {shown} (votes={m['votes']} statements={m['statements']} facts={m['facts']} evidence={m['indirect_by_evidence']}) + {len(shards)} shards")
     return 0
 
 

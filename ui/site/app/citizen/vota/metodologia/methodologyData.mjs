@@ -3,7 +3,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { readPublicJson } from "../../../static-snapshot.mjs";
-import { attachHighlights, buildAiPrompt, buildQuestions } from "../votingAidModel.mjs";
+import { attachHighlights, buildAiPrompt, buildQuestions, mergeImpacts } from "../votingAidModel.mjs";
 
 export const REPO_URL = "https://github.com/gsusI/vota-con-la-chola";
 const REPO_ROOT = path.resolve(process.cwd(), "../..");
@@ -125,7 +125,10 @@ export function loadMethodology() {
   const pool = readPublicJson("citizen/data/voting_aid_pool_v1.json", { meta: {}, items: [] });
   const highlights = readPublicJson("citizen/data/voting_aid_highlights_v1.json", { meta: {} });
   const bullets = readPublicJson("citizen/data/voting_aid_vote_bullets_v1.json", { meta: {} });
-  const impacts = readPublicJson("citizen/data/voting_aid_vote_impacts_v1.json", { meta: {} });
+  const impactsIndex = readPublicJson("citizen/data/voting_aid_vote_impacts_v1.json", { meta: {} });
+  const shardDir = impactsIndex.meta?.shards?.dir;
+  const shardKeys = Array.from({ length: impactsIndex.meta?.shards?.count || 0 }, (_, i) => i.toString(16).padStart(2, "0"));
+  const impacts = mergeImpacts(impactsIndex, shardKeys.map((k) => readPublicJson(`citizen/data/${shardDir}/${k}.json`, {})));
   const seed = readRepoJson(STATEMENTS_SEED) || {};
   const bulletSeed = readRepoJson(BULLETS_SEED);
   const evidence = readRepoJson(STATEMENT_REVIEW);

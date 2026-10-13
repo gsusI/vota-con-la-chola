@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { withBasePath } from "../../path-utils.mjs";
 import {
   ANSWER_LABELS,
@@ -18,6 +18,8 @@ import {
   encodeShareCodeV2,
   formatMatch,
   groupDetails,
+  impactShardKeys,
+  mergeImpacts,
   linkPrompt,
   milestoneFor,
   nextInTopic,
@@ -45,6 +47,9 @@ const POOL_PATH = "/citizen/data/voting_aid_pool_v1.json";
 const HIGHLIGHTS_PATH = "/citizen/data/voting_aid_highlights_v1.json";
 const BULLETS_PATH = "/citizen/data/voting_aid_vote_bullets_v1.json";
 const IMPACTS_PATH = "/citizen/data/voting_aid_vote_impacts_v1.json";
+const IMPACTS_SHARD_DIR = "/citizen/data/voting_aid_vote_impacts_v1";
+// Asks for the per-vote «Ramificaciones» shards of a question when it is shown (the index only has statement figures).
+const NeedImpactsContext = createContext(() => {});
 
 // ---------------------------------------------------------------------------
 // State persistence (local only; ids of questions the page has not loaded are kept, never dropped).
@@ -587,6 +592,8 @@ function SourceLink({ href, children }) {
  */
 function Ramifications({ question }) {
   const [open, setOpen] = useState(false);
+  const needImpacts = useContext(NeedImpactsContext);
+  useEffect(() => needImpacts(question), [needImpacts, question.statement_id]);
   const r = question.ramifications;
   if (!r) return null;
   const votes = r.votes.filter((v) => v.direct.length || v.indirect.length || v.gaps);
@@ -1916,6 +1923,19 @@ export default function VotingAidClient({ snapshot, startStatementId = null, ver
   const [highlights, setHighlights] = useState(null);
   const [voteBullets, setVoteBullets] = useState(null);
   const [voteImpacts, setVoteImpacts] = useState(null);
+  const [impactShards, setImpactShards] = useState({});
+  const requestedShards = useRef(new Set());
+  const needImpacts = useCallback((question) => {
+    for (const key of impactShardKeys(question)) {
+      if (requestedShards.current.has(key)) continue;
+      requestedShards.current.add(key);
+      fetch(withBasePath(`${IMPACTS_SHARD_DIR}/${key}.json`))
+        .then((r) => (r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`))))
+        .then((data) => setImpactShards((prev) => ({ ...prev, [key]: data })))
+        .catch(() => requestedShards.current.delete(key));
+    }
+  }, []);
+  const impacts = useMemo(() => mergeImpacts(voteImpacts, Object.values(impactShards)), [voteImpacts, impactShards]);
   const [state, setState] = useState(() => cleanState(null));
   const [loaded, setLoaded] = useState(false);
   const [fromShare, setFromShare] = useState(false);
@@ -1934,8 +1954,8 @@ export default function VotingAidClient({ snapshot, startStatementId = null, ver
   const startedAt = useRef(false);
 
   const questions = useMemo(
-    () => attachHighlights(buildQuestions(snapshot, pool), highlights, voteBullets, voteImpacts),
-    [snapshot, pool, highlights, voteBullets, voteImpacts],
+    () => attachHighlights(buildQuestions(snapshot, pool), highlights, voteBullets, impacts),
+    [snapshot, pool, highlights, voteBullets, impacts],
   );
   const scoredQuestions = useMemo(
     () => (state.excludeOmnibus ? questions.filter((q) => !q.omnibus) : questions),
@@ -2270,187 +2290,189 @@ export default function VotingAidClient({ snapshot, startStatementId = null, ver
   const curatedLeft = questions.filter((q) => q.source === "curated" && !state.answers[q.statement_id] && !state.split?.[q.statement_id]).length;
 
   return (
-    <main className="shell staticRoute votingAid" ref={topRef}>
-      <Toast toast={toast} />
-      <VersionBanner onIntro={view === "intro"} version={version} />
-      {staleShare ? (
-        <p className="votingAidNotice" role="note">
-          Este enlace compartido es de otra versión del test. Ábrelo en:{" "}
-          {otherVersions(version.id).map((v, i) => (
-            <span key={v.id}>
-              {i ? " · " : ""}
-              <a href={`${withBasePath(v.path)}${typeof window !== "undefined" ? window.location.hash : ""}`}>
-                {v.label} ({formatReleased(v.released)})
-              </a>
-            </span>
-          ))}
-        </p>
-      ) : null}
-      {view !== "intro" ? (
-        <nav aria-label="Secciones" className="votingAidTabs votingAidTabs--main">
-          <button
-            aria-current={view === "play" ? "page" : undefined}
-            onClick={() => goPlay(currentId && !state.answers[currentId] ? currentId : null)}
-            type="button"
-          >
-            <span aria-hidden="true" className="votingAidTabs__icon">🎮</span> Jugar
-          </button>
-          <button aria-current={view === "results" || view === "party" ? "page" : undefined} onClick={() => show("results")} type="button">
-            <span aria-hidden="true" className="votingAidTabs__icon">🏆</span> Resultados
-          </button>
-          <button aria-current={view === "review" ? "page" : undefined} onClick={() => show("review")} type="button">
-            <span aria-hidden="true" className="votingAidTabs__icon">📝</span> Respuestas{" "}
-            {answeredCount ? <span className="votingAidTabs__count">{answeredCount}</span> : null}
-          </button>
-        </nav>
-      ) : null}
-
-      {view === "intro" ? (
-        <IntroView
-          answeredCount={answeredCount}
-          curatedTotal={curatedTotal}
-          meta={meta}
-          onResults={() => show("results")}
-          onStart={() => goPlay()}
-          parties={parties}
-          poolStatus={poolStatus}
-          questionsTotal={questions.length}
-        />
-      ) : null}
-
-      {view === "play" ? (
-        <section aria-label="Jugar" className="votingAidPlay">
-          <div className="votingAidHud">
-            <RankBadge count={answeredCount} />
-            <span className="votingAidHud__stats">
-              <span title="Respuestas seguidas sin saltar">🔥 {state.streak || 0}</span>
-              {curatedLeft ? (
-                <span className="votingAidMuted" title="Preguntas clave respondidas">
-                  {curatedTotal - curatedLeft}/{curatedTotal}
-                </span>
-              ) : (
-                <span className="votingAidMuted" title="Preguntas respondidas">
-                  {answeredCount}/{questions.length}
-                </span>
-              )}
-            </span>
-          </div>
-          <ProgressBar
-            label={curatedLeft ? `Preguntas clave: ${curatedTotal - curatedLeft} de ${curatedTotal}` : `${answeredCount} de ${questions.length}`}
-            max={curatedLeft ? curatedTotal : questions.length}
-            value={curatedLeft ? curatedTotal - curatedLeft : answeredCount}
-          />
-          <p className="votingAidMuted votingAidPhase">
-            {focusTopic ? (
-              <>
-                Solo <strong>{focusTopic}</strong>: {topicLeftLabel(topics, focusTopic, questionsById, state.answers, state.split)}. Al terminarlo, sigues con todos los temas.{" "}
-                <button className="votingAidLinkButton" onClick={() => chooseTopic(null)} type="button">
-                  Mezclar todos los temas
-                </button>
-              </>
-            ) : curatedLeft
-              ? `Fase 1 · Preguntas clave: ${curatedTotal - curatedLeft} de ${curatedTotal} (quedan ${curatedLeft}). Después: modo infinito con votaciones reales.`
-              : poolStatus === "ready"
-                ? "♾️ Modo infinito · votaciones reales del Congreso. Para cuando quieras."
-                : poolStatus === "error"
-                  ? "No se pudieron cargar más votaciones ahora mismo."
-                  : "Cargando votaciones…"}
+    <NeedImpactsContext.Provider value={needImpacts}>
+      <main className="shell staticRoute votingAid" ref={topRef}>
+        <Toast toast={toast} />
+        <VersionBanner onIntro={view === "intro"} version={version} />
+        {staleShare ? (
+          <p className="votingAidNotice" role="note">
+            Este enlace compartido es de otra versión del test. Ábrelo en:{" "}
+            {otherVersions(version.id).map((v, i) => (
+              <span key={v.id}>
+                {i ? " · " : ""}
+                <a href={`${withBasePath(v.path)}${typeof window !== "undefined" ? window.location.hash : ""}`}>
+                  {v.label} ({formatReleased(v.released)})
+                </a>
+              </span>
+            ))}
           </p>
-          <PodiumStrip onOpen={() => show("results")} previousRanks={previousRanks} results={results} />
-          <div className="votingAidPlay__grid">
-            <div>
-              {revealQuestion || current ? (
-                <TopicNav
-                  answers={state.answers}
-                  currentId={(revealQuestion || current).statement_id}
-                  focusTopic={focusTopic}
-                  onQuestion={(id) => goPlay(id)}
-                  onTopic={chooseTopic}
-                  questionsById={questionsById}
-                  skipped={state.skipped}
-                  split={state.split}
-                  topics={topics}
-                />
-              ) : null}
-              {revealQuestion ? (
-                <RevealCard
-                  answer={state.answers[revealQuestion.statement_id]}
-                  onChange={() => {
-                    setCurrentId(revealQuestion.statement_id);
-                    setRevealId(null);
-                  }}
-                  onNext={() => goPlay()}
-                  onSplit={() => splitStatement(revealQuestion.statement_id)}
-                  parties={parties}
-                  question={revealQuestion}
-                  reactions={partyReactions(revealQuestion, state.answers[revealQuestion.statement_id], parties)}
-                  topBefore={topBefore}
-                />
-              ) : current ? (
-                <QuestionCard
-                  answer={state.answers[current.statement_id]}
-                  important={state.important[current.statement_id]}
-                  onAnswer={answer}
-                  onImportant={(v) => setImportant(current.statement_id, v)}
-                  onSkip={skip}
-                  onSplit={() => splitStatement(current.statement_id)}
-                  parties={parties}
-                  question={current}
-                  showSwipeHint={answeredCount < 3}
-                />
-              ) : (
-                <div className="votingAidCard votingAidEmpty">
-                  <p aria-hidden="true" className="votingAidReveal__emoji">
-                    🏆
-                  </p>
-                  <h2>¡Lo has respondido todo!</h2>
-                  <p>{answeredCount} preguntas. Eres oficialmente una enciclopedia andante del Congreso.</p>
-                  <button className="votingAidButton votingAidButton--primary" onClick={() => show("results")} type="button">
-                    Ver mis resultados
-                  </button>
-                </div>
-              )}
-              <label className="votingAidImportant votingAidRevealToggle">
-                <input checked={state.showReveal !== false} onChange={(e) => update({ ...state, showReveal: e.target.checked })} type="checkbox" />
-                Mostrar cómo votó cada partido después de responder
-              </label>
-              <p className="votingAidMuted votingAidShortcuts">Atajos: 1 · 2 · 3 para responder, 4 «depende», S para saltar, Intro para seguir, ← → para ir a la pregunta anterior o siguiente.</p>
+        ) : null}
+        {view !== "intro" ? (
+          <nav aria-label="Secciones" className="votingAidTabs votingAidTabs--main">
+            <button
+              aria-current={view === "play" ? "page" : undefined}
+              onClick={() => goPlay(currentId && !state.answers[currentId] ? currentId : null)}
+              type="button"
+            >
+              <span aria-hidden="true" className="votingAidTabs__icon">🎮</span> Jugar
+            </button>
+            <button aria-current={view === "results" || view === "party" ? "page" : undefined} onClick={() => show("results")} type="button">
+              <span aria-hidden="true" className="votingAidTabs__icon">🏆</span> Resultados
+            </button>
+            <button aria-current={view === "review" ? "page" : undefined} onClick={() => show("review")} type="button">
+              <span aria-hidden="true" className="votingAidTabs__icon">📝</span> Respuestas{" "}
+              {answeredCount ? <span className="votingAidTabs__count">{answeredCount}</span> : null}
+            </button>
+          </nav>
+        ) : null}
+
+        {view === "intro" ? (
+          <IntroView
+            answeredCount={answeredCount}
+            curatedTotal={curatedTotal}
+            meta={meta}
+            onResults={() => show("results")}
+            onStart={() => goPlay()}
+            parties={parties}
+            poolStatus={poolStatus}
+            questionsTotal={questions.length}
+          />
+        ) : null}
+
+        {view === "play" ? (
+          <section aria-label="Jugar" className="votingAidPlay">
+            <div className="votingAidHud">
+              <RankBadge count={answeredCount} />
+              <span className="votingAidHud__stats">
+                <span title="Respuestas seguidas sin saltar">🔥 {state.streak || 0}</span>
+                {curatedLeft ? (
+                  <span className="votingAidMuted" title="Preguntas clave respondidas">
+                    {curatedTotal - curatedLeft}/{curatedTotal}
+                  </span>
+                ) : (
+                  <span className="votingAidMuted" title="Preguntas respondidas">
+                    {answeredCount}/{questions.length}
+                  </span>
+                )}
+              </span>
             </div>
-            <MiniLeaderboard onOpen={() => show("results")} previousRanks={previousRanks} results={results} />
-          </div>
-        </section>
-      ) : null}
+            <ProgressBar
+              label={curatedLeft ? `Preguntas clave: ${curatedTotal - curatedLeft} de ${curatedTotal}` : `${answeredCount} de ${questions.length}`}
+              max={curatedLeft ? curatedTotal : questions.length}
+              value={curatedLeft ? curatedTotal - curatedLeft : answeredCount}
+            />
+            <p className="votingAidMuted votingAidPhase">
+              {focusTopic ? (
+                <>
+                  Solo <strong>{focusTopic}</strong>: {topicLeftLabel(topics, focusTopic, questionsById, state.answers, state.split)}. Al terminarlo, sigues con todos los temas.{" "}
+                  <button className="votingAidLinkButton" onClick={() => chooseTopic(null)} type="button">
+                    Mezclar todos los temas
+                  </button>
+                </>
+              ) : curatedLeft
+                ? `Fase 1 · Preguntas clave: ${curatedTotal - curatedLeft} de ${curatedTotal} (quedan ${curatedLeft}). Después: modo infinito con votaciones reales.`
+                : poolStatus === "ready"
+                  ? "♾️ Modo infinito · votaciones reales del Congreso. Para cuando quieras."
+                  : poolStatus === "error"
+                    ? "No se pudieron cargar más votaciones ahora mismo."
+                    : "Cargando votaciones…"}
+            </p>
+            <PodiumStrip onOpen={() => show("results")} previousRanks={previousRanks} results={results} />
+            <div className="votingAidPlay__grid">
+              <div>
+                {revealQuestion || current ? (
+                  <TopicNav
+                    answers={state.answers}
+                    currentId={(revealQuestion || current).statement_id}
+                    focusTopic={focusTopic}
+                    onQuestion={(id) => goPlay(id)}
+                    onTopic={chooseTopic}
+                    questionsById={questionsById}
+                    skipped={state.skipped}
+                    split={state.split}
+                    topics={topics}
+                  />
+                ) : null}
+                {revealQuestion ? (
+                  <RevealCard
+                    answer={state.answers[revealQuestion.statement_id]}
+                    onChange={() => {
+                      setCurrentId(revealQuestion.statement_id);
+                      setRevealId(null);
+                    }}
+                    onNext={() => goPlay()}
+                    onSplit={() => splitStatement(revealQuestion.statement_id)}
+                    parties={parties}
+                    question={revealQuestion}
+                    reactions={partyReactions(revealQuestion, state.answers[revealQuestion.statement_id], parties)}
+                    topBefore={topBefore}
+                  />
+                ) : current ? (
+                  <QuestionCard
+                    answer={state.answers[current.statement_id]}
+                    important={state.important[current.statement_id]}
+                    onAnswer={answer}
+                    onImportant={(v) => setImportant(current.statement_id, v)}
+                    onSkip={skip}
+                    onSplit={() => splitStatement(current.statement_id)}
+                    parties={parties}
+                    question={current}
+                    showSwipeHint={answeredCount < 3}
+                  />
+                ) : (
+                  <div className="votingAidCard votingAidEmpty">
+                    <p aria-hidden="true" className="votingAidReveal__emoji">
+                      🏆
+                    </p>
+                    <h2>¡Lo has respondido todo!</h2>
+                    <p>{answeredCount} preguntas. Eres oficialmente una enciclopedia andante del Congreso.</p>
+                    <button className="votingAidButton votingAidButton--primary" onClick={() => show("results")} type="button">
+                      Ver mis resultados
+                    </button>
+                  </div>
+                )}
+                <label className="votingAidImportant votingAidRevealToggle">
+                  <input checked={state.showReveal !== false} onChange={(e) => update({ ...state, showReveal: e.target.checked })} type="checkbox" />
+                  Mostrar cómo votó cada partido después de responder
+                </label>
+                <p className="votingAidMuted votingAidShortcuts">Atajos: 1 · 2 · 3 para responder, 4 «depende», S para saltar, Intro para seguir, ← → para ir a la pregunta anterior o siguiente.</p>
+              </div>
+              <MiniLeaderboard onOpen={() => show("results")} previousRanks={previousRanks} results={results} />
+            </div>
+          </section>
+        ) : null}
 
-      {view === "results" ? (
-        <ResultsView
-          answeredCount={answeredCount}
-          bestStreak={state.bestStreak || 0}
-          fromShare={fromShare}
-          method={meta.honesty || []}
-          onOwn={ownAnswers}
-          onParty={(id) => {
-            setPartyId(id);
-            show("party");
-          }}
-          onPlay={() => goPlay()}
-          onReset={reset}
-          onReview={() => show("review")}
-          onShare={share}
-          onSharePodium={sharePodium}
-          excludeOmnibus={state.excludeOmnibus}
-          onExcludeOmnibus={(v) => update({ ...state, excludeOmnibus: v })}
-          omnibusAnswered={omnibusAnswered}
-          results={results}
-          shareMessage={shareMessage}
-        />
-      ) : null}
-      {view === "results" && !fromShare && pool ? <OtherVersionResults pool={pool} version={version} /> : null}
+        {view === "results" ? (
+          <ResultsView
+            answeredCount={answeredCount}
+            bestStreak={state.bestStreak || 0}
+            fromShare={fromShare}
+            method={meta.honesty || []}
+            onOwn={ownAnswers}
+            onParty={(id) => {
+              setPartyId(id);
+              show("party");
+            }}
+            onPlay={() => goPlay()}
+            onReset={reset}
+            onReview={() => show("review")}
+            onShare={share}
+            onSharePodium={sharePodium}
+            excludeOmnibus={state.excludeOmnibus}
+            onExcludeOmnibus={(v) => update({ ...state, excludeOmnibus: v })}
+            omnibusAnswered={omnibusAnswered}
+            results={results}
+            shareMessage={shareMessage}
+          />
+        ) : null}
+        {view === "results" && !fromShare && pool ? <OtherVersionResults pool={pool} version={version} /> : null}
 
-      {view === "party" && partyRow ? (
-        <PartyView key={partyRow.partyId} parties={parties} onBack={() => show("results")} onEdit={(id) => goPlay(id)} questionsById={questionsById} row={partyRow} />
-      ) : null}
+        {view === "party" && partyRow ? (
+          <PartyView key={partyRow.partyId} parties={parties} onBack={() => show("results")} onEdit={(id) => goPlay(id)} questionsById={questionsById} row={partyRow} />
+        ) : null}
 
-      {view === "review" ? <ReviewView onAnswer={setAnswer} onOpen={(id) => goPlay(id)} questions={questions} state={state} /> : null}
-    </main>
+        {view === "review" ? <ReviewView onAnswer={setAnswer} onOpen={(id) => goPlay(id)} questions={questions} state={state} /> : null}
+      </main>
+    </NeedImpactsContext.Provider>
   );
 }

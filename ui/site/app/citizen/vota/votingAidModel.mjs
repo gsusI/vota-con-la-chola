@@ -725,6 +725,33 @@ function questionVoteIds(question) {
   return (question.votes || []).map((v) => v.vote_event_id);
 }
 
+// voting_aid_vote_impacts_v1.json is an index (statement figures); each vote's figures and effects live in
+// voting_aid_vote_impacts_v1/<key>.json, bucketed like shard_key() in scripts/export_voting_aid_vote_impacts.py.
+export const IMPACT_SHARDS = 128;
+
+export function impactShardKey(voteId) {
+  let h = 0x811c9dc5;
+  for (const b of new TextEncoder().encode(voteId)) h = Math.imul(h ^ b, 0x01000193) >>> 0;
+  return (h % IMPACT_SHARDS).toString(16).padStart(2, "0");
+}
+
+/** Shard files a question needs for its «Ramificaciones» (none for multi-vote statements: the index has them). */
+export function impactShardKeys(question) {
+  return [...new Set(questionVoteIds(question).map(impactShardKey))];
+}
+
+/** Index plus the loaded shards, in the shape ramificationsFor() reads. */
+export function mergeImpacts(index, shards) {
+  if (!index) return null;
+  const facts = { ...(index.facts || {}) };
+  const byVote = {};
+  for (const s of shards) {
+    Object.assign(facts, s.facts || {});
+    Object.assign(byVote, s.by_vote || {});
+  }
+  return { ...index, facts, by_vote: byVote };
+}
+
 // At most this many official figures in «A quién afecta», so the answers stay in reach.
 const MAX_RAMIFICATION_FACTS = 3;
 

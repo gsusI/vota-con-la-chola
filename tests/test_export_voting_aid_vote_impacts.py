@@ -46,6 +46,16 @@ class TestValidation(unittest.TestCase):
         self.assertEqual(v["gaps"], "No lleva memoria de impacto.")
         self.assertEqual(out["meta"]["indirect_by_evidence"]["debate"], 1)
 
+    def test_split_keeps_vote_details_out_of_the_index(self) -> None:
+        index, shards = vi.split_payload(vi.build_payload(FIXTURE))
+        self.assertNotIn("by_vote", index)
+        self.assertEqual(index["facts"], {"hogares": vi.build_payload(FIXTURE)["facts"]["hogares"]})
+        shard = shards[vi.shard_key("v1")]
+        self.assertEqual(list(shard["by_vote"]), ["v1"])
+        self.assertIn("hogares", shard["facts"])
+        # Mirrored by impactShardKey() in votingAidModel.mjs (checked against the published shards in the node test).
+        self.assertRegex(vi.shard_key("v1"), r"^[0-9a-f]{2}$")
+
     def test_accepts_diary_supplement(self) -> None:
         seed = copy.deepcopy(FIXTURE)
         seed["votes"]["v1"]["indirect_effects"][0]["url"] = DS.replace("PL-62.PDF", "PL-163-C1.PDF")

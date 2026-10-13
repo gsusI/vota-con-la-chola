@@ -500,7 +500,8 @@ export default function VotingAidMethodologyPage() {
           </li>
         </ul>
         <p>
-          Piloto: {fmt(m.impactsMeta.votes)} votaciones de vivienda y {fmt(m.impactsMeta.facts)} cifras oficiales; de los efectos
+          Cubre {fmt(m.impactsMeta.votes)} votaciones y {fmt(m.impactsMeta.statements)} preguntas con {fmt(m.impactsMeta.facts)} cifras oficiales,
+          en borrador sin revisión humana; de los efectos
           indirectos, {fmt(m.impactsMeta.indirect_by_evidence?.debate)} vienen del debate, {fmt(m.impactsMeta.indirect_by_evidence?.organismo_publico)}{" "}
           de organismos públicos y {fmt(m.impactsMeta.indirect_by_evidence?.estudio)} de estudios. Las proposiciones de ley de los grupos
           no llevan memoria oficial de impacto, y la tarjeta lo dice. Las preguntas a la IA piden lo mismo: escala, efectos por colectivo
