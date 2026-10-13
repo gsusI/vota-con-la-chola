@@ -622,7 +622,7 @@ function Ramifications({ question }) {
       {votes.length ? (
         <p className="votingAidVoted__actions">
           <button aria-expanded={open} className="votingAidLinkButton" onClick={() => setOpen((o) => !o)} type="button">
-            {open ? "Ocultar consecuencias" : "Ver qué cambia para cada colectivo y posibles consecuencias"}
+            {open ? "Ocultar" : votes.some((v) => v.indirect.length) ? "Ver qué cambia para cada colectivo y posibles consecuencias" : "Ver qué cambia para cada colectivo"}
           </button>
         </p>
       ) : null}
@@ -677,7 +677,7 @@ function Ramifications({ question }) {
         : null}
       <p className="votingAidMuted votingAidVoted__src">
         Cifras de fuentes oficiales.
-        {votes.length ? " Los efectos indirectos son previsiones con su fuente, no hechos; los del debate se resumen sin decir quién los dijo." : ""}
+        {votes.some((v) => v.indirect.length) ? " Los efectos indirectos son previsiones con su fuente, no hechos; los del debate se resumen sin decir quién los dijo." : ""}
         {review}
       </p>
     </div>

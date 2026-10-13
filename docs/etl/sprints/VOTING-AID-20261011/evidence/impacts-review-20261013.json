@@ -1,0 +1,319 @@
+{
+ "generated": "2026-10-13",
+ "sample": "docs/etl/sprints/VOTING-AID-20261011/evidence/impacts-human-review-sample-20261013.md",
+ "reviewer": "Claude Sonnet 5.5 (subagente), comprobación puntual de V6 y V15 por el agente principal",
+ "rule": "si 4 o más de 20 votaciones tienen indirectos que no aguantan, se retiran de la publicación",
+ "summary": {
+  "votes": {
+   "ok": 8,
+   "corregir": 8,
+   "quitar_indirectos": 4,
+   "quitar_todo": 0
+  },
+  "effects": {
+   "ok": 68,
+   "no_aplica": 16,
+   "flojo": 7,
+   "partidista": 1,
+   "no_en_pagina": 0
+  },
+  "facts_desajuste": 1,
+  "direct_dudoso": 1
+ },
+ "decision": "indirectos retirados de la publicación (PUBLISH_INDIRECT=False); se mantienen en las semillas",
+ "main_failure": "en votaciones por puntos o enmiendas, los efectos recogen argumentos sobre otros puntos o sobre la iniciativa entera",
+ "items": [
+  {
+   "n": 1,
+   "id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion185/20260611/Votacion023/VOT_20260611145729.json",
+   "verdict": "ok",
+   "facts": "ok",
+   "direct": "ok",
+   "effects": {
+    "E1": "ok",
+    "E2": "ok",
+    "E3": "ok",
+    "E4": "ok",
+    "E5": "ok",
+    "E6": "ok"
+   },
+   "note": "Equilibrado: tres beneficios y tres riesgos, todos respaldados en el debate."
+  },
+  {
+   "n": 2,
+   "id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion137/20251014/Votacion002/VOT_20251014202758.json",
+   "verdict": "corregir",
+   "facts": "ok",
+   "direct": "ok",
+   "effects": {
+    "E1": "flojo",
+    "E2": "ok",
+    "E3": "ok",
+    "E4": "ok",
+    "E5": "ok"
+   },
+   "note": "E1 repite el eslogan de la ponente ('no gasta más, invierte mejor') como si fuera esperable; reescribir como 'el grupo proponente defendió que...'."
+  },
+  {
+   "n": 3,
+   "id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion068/20241016/Votacion005/VOT_20241017130155.json",
+   "verdict": "corregir",
+   "facts": "ok",
+   "direct": "ok",
+   "effects": {
+    "E1": "ok",
+    "E2": "flojo",
+    "E3": "no_aplica",
+    "E4": "ok",
+    "E5": "ok",
+    "E6": "ok"
+   },
+   "note": "E3: la CNMC la pide el PP contra el Gobierno, no figura en la PNL votada: quitar. E2: la pág. solo dice que el Estado puede regular; 'reducir difusión' es deducción."
+  },
+  {
+   "n": 4,
+   "id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion174/20260422/Votacion017/VOT_20260422152006.json",
+   "verdict": "ok",
+   "facts": "desajuste",
+   "direct": "ok",
+   "effects": {
+    "E1": "ok",
+    "E2": "ok",
+    "E3": "ok",
+    "E4": "ok",
+    "E5": "ok"
+   },
+   "note": "F2 (población por CCAA) no mide a quien afecta el Canal de Navarra: quitar. Efectos equilibrados y respaldados."
+  },
+  {
+   "n": 5,
+   "id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion111/20250514/Votacion001/VOT_20250514165626.json",
+   "verdict": "ok",
+   "facts": "ok",
+   "direct": "ok",
+   "effects": {
+    "E1": "ok",
+    "E2": "ok",
+    "E3": "ok",
+    "E4": "ok",
+    "E5": "ok"
+   },
+   "note": "Respaldados por el debate; hay tres beneficios y dos riesgos."
+  },
+  {
+   "n": 6,
+   "id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion142/20251028/Votacion014/VOT_20251028204600.json",
+   "verdict": "quitar_indirectos",
+   "facts": "ok",
+   "direct": "ok",
+   "effects": {
+    "E1": "no_aplica",
+    "E2": "partidista"
+   },
+   "note": "E1 es otro punto de la moción (pasar a Interior), no el punto 6 votado. E2 acusa a VOX de bulos y alimentar discurso misógino. Quitar ambos."
+  },
+  {
+   "n": 7,
+   "id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion040/20240523/Votacion036/VOT_20240523141006.json",
+   "verdict": "quitar_indirectos",
+   "facts": "ok",
+   "direct": "ok",
+   "effects": {
+    "E1": "no_aplica",
+    "E2": "no_aplica",
+    "E3": "no_aplica",
+    "E4": "no_aplica",
+    "E5": "no_aplica",
+    "E6": "no_aplica"
+   },
+   "note": "Todos hablan de la ley entera, no de la enmienda al art. 43 (centro elegido/demanda social). E6 cita otro Diario (DSCD-15-PL-31, otra fase). E4 sí consta en pág. 49, pero es de la ley."
+  },
+  {
+   "n": 8,
+   "id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion040/VOT_20251008195304.json",
+   "verdict": "quitar_indirectos",
+   "facts": "ok",
+   "direct": "ok",
+   "effects": {
+    "E1": "no_aplica",
+    "E2": "no_aplica",
+    "E3": "ok",
+    "E4": "ok",
+    "E5": "flojo"
+   },
+   "note": "E1 y E2 son enmiendas del BNG sobre Galicia, ajenas a lo votado. E5: Junts dice que lo centralista se corrigió con sus enmiendas. Diarios de sesiones distintos (PL-141 y PL-151)."
+  },
+  {
+   "n": 9,
+   "id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion188/20260618/Votacion012/VOT_20260618162224.json",
+   "verdict": "corregir",
+   "facts": "ok",
+   "direct": "ok",
+   "effects": {
+    "E1": "ok",
+    "E2": "flojo",
+    "E3": "ok",
+    "E4": "ok",
+    "E5": "ok"
+   },
+   "note": "E2 deduce que dar prioridad a nacionales en vivienda pública baja los precios; el orador habla de menos inmigración. Quitar o reformular como 'VOX defendió'."
+  },
+  {
+   "n": 10,
+   "id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion186/20260616/Votacion002/VOT_20260616202226.json",
+   "verdict": "ok",
+   "facts": "ok",
+   "direct": "ok",
+   "effects": {
+    "E1": "ok",
+    "E2": "ok",
+    "E3": "ok",
+    "E4": "ok",
+    "E5": "ok"
+   },
+   "note": "Respaldados, de varios grupos y con tono neutro."
+  },
+  {
+   "n": 11,
+   "id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion183/20260528/Votacion007/VOT_20260528125343.json",
+   "verdict": "ok",
+   "facts": "ok",
+   "direct": "ok",
+   "effects": {
+    "E1": "ok",
+    "E2": "ok",
+    "E3": "ok"
+   },
+   "note": "Un beneficio y dos riesgos, respaldados por pág. 85, 89 y 90."
+  },
+  {
+   "n": 12,
+   "id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion034/20240409/Votacion002/VOT_20240409210632.json",
+   "verdict": "corregir",
+   "facts": "ok",
+   "direct": "ok",
+   "effects": {
+    "E1": "ok",
+    "E2": "no_aplica",
+    "E3": "ok",
+    "E4": "ok",
+    "E5": "ok"
+   },
+   "note": "E2: el PNV propone convertirlo en impuesto permanente; la PL votada crea un gravamen temporal no tributario. Quitar."
+  },
+  {
+   "n": 13,
+   "id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion085/20241212/Votacion004/VOT_20241212130543.json",
+   "verdict": "corregir",
+   "facts": "ok",
+   "direct": "ok",
+   "effects": {
+    "E1": "flojo",
+    "E2": "ok"
+   },
+   "note": "E1 es deducción: el debate dice que los informes no necesitan respaldo. Los dos efectos no tratan lo votado (orden de arresto de la CPI)."
+  },
+  {
+   "n": 14,
+   "id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion180/20260520/Votacion005/VOT_20260520142326.json",
+   "verdict": "corregir",
+   "facts": "ok",
+   "direct": "ok",
+   "effects": {
+    "E1": "ok",
+    "E2": "ok",
+    "E3": "flojo",
+    "E4": "ok",
+    "E5": "ok",
+    "E6": "ok"
+   },
+   "note": "E3 habla de límites a precios, que no están en la PNL (prohibir compra, derogar SOCIMI, fiscalidad). Quitar o reescribir."
+  },
+  {
+   "n": 15,
+   "id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion036/20240423/Votacion014/VOT_20240423213525.json",
+   "verdict": "quitar_indirectos",
+   "facts": "ok",
+   "direct": "ok",
+   "effects": {
+    "E1": "no_aplica",
+    "E2": "no_aplica",
+    "E3": "no_aplica",
+    "E4": "no_aplica",
+    "E5": "no_aplica"
+   },
+   "note": "Lo votado es reforzar personal de asilo (punto 11). Todos los efectos son de otros puntos de la PNL: control de entrada, acuerdos bilaterales, Pacto Europeo. Ninguno se refiere al punto 11."
+  },
+  {
+   "n": 16,
+   "id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion018/20240130/Votacion009/VOT_20240130183906.json",
+   "verdict": "ok",
+   "facts": "ok",
+   "direct": "ok",
+   "effects": {
+    "E1": "ok",
+    "E2": "ok",
+    "E3": "ok",
+    "E4": "ok",
+    "E5": "ok",
+    "E6": "ok"
+   },
+   "note": "Equilibrado. Los extractos son del debate del 30-may-2024 (aprobación final), no del 30-ene, aunque es la misma ley."
+  },
+  {
+   "n": 17,
+   "id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion079/20241121/Votacion027/VOT_20241121173825.json",
+   "verdict": "ok",
+   "facts": "ok",
+   "direct": "ok",
+   "effects": {
+    "E1": "ok",
+    "E2": "ok",
+    "E3": "ok"
+   },
+   "note": "Respaldados por las págs. 53 y 58-59; equilibrio beneficio/riesgo aceptable."
+  },
+  {
+   "n": 18,
+   "id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion174/20260422/Votacion014/VOT_20260422152001.json",
+   "verdict": "ok",
+   "facts": "ok",
+   "direct": "ok",
+   "effects": {
+    "E1": "ok",
+    "E2": "ok",
+    "E3": "ok",
+    "E4": "ok"
+   },
+   "note": "E3 verificado en pág. 63 (Micó) y E4 en pág. 65 (PNV). Equilibrado."
+  },
+  {
+   "n": 19,
+   "id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion172/20260415/Votacion001/VOT_20260415133904.json",
+   "verdict": "corregir",
+   "facts": "ok",
+   "direct": "dudoso",
+   "effects": {
+    "E1": "ok",
+    "E2": "ok",
+    "E3": "ok",
+    "E4": "ok",
+    "E5": "ok",
+    "E6": "ok"
+   },
+   "note": "D4 (entidades religiosas) es una extrapolación no deducible de los puntos 5 a 7: quitar. Los efectos aguantan."
+  },
+  {
+   "n": 20,
+   "id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion043/20240530/Votacion036/VOT_20240530120030.json",
+   "verdict": "corregir",
+   "facts": "ok",
+   "direct": "ok",
+   "effects": {
+    "E1": "ok",
+    "E2": "flojo"
+   },
+   "note": "E2 habla de rechazar el Pacto Verde en general, no de la Ley de Restauración (punto 11); el orador la usa con insultos (negacionismo, fascismo). Reformular o quitar."
+  }
+ ]
+}

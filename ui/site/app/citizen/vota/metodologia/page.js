@@ -508,6 +508,12 @@ export default function VotingAidMethodologyPage() {
           y consecuencias en ambos sentidos. Datos y reglas en <Code rel={IMPACTS_SEED} />; validador en{" "}
           <Code rel="scripts/export_voting_aid_vote_impacts.py" />.
         </p>
+        {m.impactsMeta.indirect_published === false ? (
+          <p>
+            <strong>Las posibles consecuencias no se muestran ahora mismo.</strong> {m.impactsMeta.indirect_hidden_reason} Revisión en{" "}
+            <Code rel="docs/etl/sprints/VOTING-AID-20261011/evidence/impacts-review-20261013.json" />.
+          </p>
+        ) : null}
       </Step>
 
       <Step n={8} title="Revisión independiente de las afirmaciones (primera versión)">

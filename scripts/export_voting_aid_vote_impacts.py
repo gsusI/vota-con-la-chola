@@ -51,6 +51,14 @@ MAX_INDIRECT = 6
 MAX_TEXT_CHARS = 260
 MAX_GAPS_CHARS = 300
 SHARDS = 128
+# Indirect effects stay in the seed but are not published: a 20-vote human-review sample (2026-10-13) found
+# 4 votes whose effects did not hold, mostly debate arguments about other points of the initiative than the one
+# voted. See docs/etl/sprints/VOTING-AID-20261011/evidence/impacts-review-20261013.json.
+PUBLISH_INDIRECT = False
+INDIRECT_HIDDEN_REASON = (
+    "Efectos indirectos retirados de la publicación tras una revisión de 20 votaciones al azar: en 4 no aguantaban "
+    "(argumentos del debate sobre otros puntos de la iniciativa que el votado). Se publicarán cuando se corrijan."
+)
 KINDS = ("beneficio_esperado", "riesgo_senalado")
 EVIDENCE = {"organismo_publico", "estudio", "debate"}
 URL_RE = re.compile(r"^https://")
@@ -184,7 +192,7 @@ def validate_seed(seed: dict[str, Any], vote_ids: set[str] | None = None, statem
     return errors
 
 
-def build_payload(seed: dict[str, Any]) -> dict[str, Any]:
+def build_payload(seed: dict[str, Any], publish_indirect: bool = True) -> dict[str, Any]:
     facts = {
         fid: {k: str(f[k]).strip() for k in ("text", "period", "source", "url")}
         for fid, f in sorted((seed.get("facts") or {}).items())
@@ -204,7 +212,7 @@ def build_payload(seed: dict[str, Any]) -> dict[str, Any]:
                 {k: str(e[k]).strip() for k in ("kind", "text", "evidence", "source", "locator", "url")}
                 for kind in KINDS
                 for e in v.get("indirect_effects") or []
-                if e["kind"] == kind
+                if e["kind"] == kind and publish_indirect
             ],
             "review": v["review"]["status"],
         }
@@ -224,6 +232,7 @@ def build_payload(seed: dict[str, Any]) -> dict[str, Any]:
             "statements": len(seed.get("statements") or {}),
             "facts": len(facts),
             "indirect_by_evidence": evidence,
+            "indirect_published": publish_indirect,
             "review": review,
         },
         "facts": facts,
@@ -286,7 +295,9 @@ def main(argv: list[str] | None = None) -> int:
             print(f"ERROR {e}", file=sys.stderr)
         print(f"FAIL {len(errors)} errores en la semilla", file=sys.stderr)
         return 1
-    payload = build_payload(seed)
+    payload = build_payload(seed, publish_indirect=PUBLISH_INDIRECT)
+    if not PUBLISH_INDIRECT:
+        payload["meta"]["indirect_hidden_reason"] = INDIRECT_HIDDEN_REASON
     payload["meta"]["coverage"] = {"statements": cov["statements"], "votes": cov["votes"]}
     out = Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)
