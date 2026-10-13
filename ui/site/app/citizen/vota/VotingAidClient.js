@@ -30,6 +30,9 @@ import {
   shareCodeFromHash,
 } from "./votingAidModel.mjs";
 import { formatReleased, otherVersions, versionById } from "./votingAidVersions.mjs";
+import SidePanel from "./SidePanel";
+import { DirectionBar, PoleLegend, VoteRow } from "./temas/VoteAtlasClient";
+import { ATLAS_PATH, directionText, indexAtlas, votesForAxis } from "./voteAtlasModel.mjs";
 
 const ANSWER_ORDER = ["agree", "neutral", "disagree"];
 const EMPTY_STATE = { answers: {}, important: {}, skipped: {}, split: {}, history: [], seed: 0, streak: 0, bestStreak: 0, showReveal: true, excludeOmnibus: false };
@@ -143,12 +146,36 @@ function axisMapHref(question) {
   return withBasePath(`/citizen/vota/temas/#eje=${encodeURIComponent(question.axis_id)}`);
 }
 
+function EvidenceVote({ vote: v }) {
+  return (
+    <li>
+      {v.agree_vote === "Sí" ? "A favor de: " : "En contra de: "}
+      {v.summary_yes || v.title}{" "}
+      <span className="votingAidVoted__loc">
+        {formatDate(v.vote_date)} ·{" "}
+        <a href={v.source_url} rel="noopener noreferrer" target="_blank">
+          votación
+        </a>
+        {v.text_url ? (
+          <>
+            {" · "}
+            <a href={v.text_url} rel="noopener noreferrer" target="_blank">
+              texto
+            </a>
+          </>
+        ) : null}
+      </span>
+    </li>
+  );
+}
+
 /**
  * Evidence for a multi-vote statement, shown before answering: what kind of votes back it (plain summaries,
  * dates, official links), never how anyone voted. The full list with party votes lives in the topic map.
  */
 function AxisEvidence({ question, parties }) {
-  const [shown, setShown] = useState(3);
+  const [panelOpen, setPanelOpen] = useState(false);
+  const closePanel = useCallback(() => setPanelOpen(false), []);
   const votes = question.votes || [];
   return (
     <section aria-label="Qué se votó" className="votingAidVoted votingAidAxisEvidence">
@@ -157,34 +184,29 @@ function AxisEvidence({ question, parties }) {
         {question.initiatives_total === 1 ? "iniciativa" : "iniciativas"} en el Congreso. Algunas:
       </p>
       <ul className="votingAidVoted__list">
-        {votes.slice(0, shown).map((v) => (
-          <li key={v.id}>
-            {v.agree_vote === "Sí" ? "A favor de: " : "En contra de: "}
-            {v.summary_yes || v.title}{" "}
-            <span className="votingAidVoted__loc">
-              {formatDate(v.vote_date)} ·{" "}
-              <a href={v.source_url} rel="noopener noreferrer" target="_blank">
-                votación
-              </a>
-              {v.text_url ? (
-                <>
-                  {" · "}
-                  <a href={v.text_url} rel="noopener noreferrer" target="_blank">
-                    texto
-                  </a>
-                </>
-              ) : null}
-            </span>
-          </li>
+        {votes.slice(0, 3).map((v) => (
+          <EvidenceVote key={v.id} vote={v} />
         ))}
       </ul>
-      <p className="votingAidVoted__actions">
-        {votes.length > shown ? (
-          <button className="votingAidLinkButton" onClick={() => setShown(Math.min(votes.length, shown + 7))} type="button">
-            Ver más ejemplos
+      {votes.length > 3 ? (
+        <p className="votingAidVoted__actions">
+          <button aria-expanded={panelOpen} className="votingAidLinkButton" onClick={() => setPanelOpen(true)} type="button">
+            Ver más ejemplos ({votes.length})
           </button>
-        ) : null}
-      </p>
+        </p>
+      ) : null}
+      <SidePanel onClose={closePanel} open={panelOpen} title="Ejemplos de lo que se votó">
+        <p className="sidePanel__lead">«{question.text}»</p>
+        <p className="votingAidMuted">
+          {votes.length < question.votes_total ? `${votes.length} de las ${question.votes_total}` : `Las ${votes.length}`} votaciones que resume
+          esta afirmación. Sin decir qué votó cada partido: lo verás al responder.
+        </p>
+        <ul className="votingAidVoted__list">
+          {votes.map((v) => (
+            <EvidenceVote key={v.id} vote={v} />
+          ))}
+        </ul>
+      </SidePanel>
       <p className="votingAidMuted votingAidVoted__src">
         «A favor de» y «en contra de» indican qué voto cuenta como estar de acuerdo con la afirmación. Qué votación va a cada tema lo
         decidió una IA leyendo el texto oficial; falta la revisión humana.
@@ -197,6 +219,74 @@ function AxisEvidence({ question, parties }) {
         title="Pide una explicación sencilla de lo que se votó (sin decirte qué votó cada partido):"
       />
     </section>
+  );
+}
+
+// The topic map (~1 MB) is fetched once, the first time someone opens an axis panel.
+let atlasPromise = null;
+function loadAtlas() {
+  atlasPromise ||= fetch(withBasePath(ATLAS_PATH))
+    .then((r) => (r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`))))
+    .catch((err) => {
+      atlasPromise = null;
+      throw err;
+    });
+  return atlasPromise;
+}
+
+const AXIS_PAGE = 15;
+
+/** The axis of a statement as in the topic map: where each party pushed, and every vote with party choices. */
+function AxisVotesPanel({ question }) {
+  const [atlas, setAtlas] = useState(null);
+  const [failed, setFailed] = useState(false);
+  const [shown, setShown] = useState(AXIS_PAGE);
+  useEffect(() => {
+    let cancelled = false;
+    loadAtlas()
+      .then((data) => !cancelled && setAtlas(data))
+      .catch(() => !cancelled && setFailed(true));
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+  const axis = useMemo(() => (atlas ? indexAtlas(atlas).axisById[question.axis_id] : null), [atlas, question.axis_id]);
+  const votes = useMemo(() => (axis ? votesForAxis(atlas, axis.axis_id) : []), [atlas, axis]);
+  if (failed) return <p className="votingAidNotice">No se pudieron cargar las votaciones. Inténtalo de nuevo más tarde.</p>;
+  if (!atlas) return <p className="votingAidMuted">Cargando votaciones…</p>;
+  if (!axis) return <p className="votingAidMuted">Este tema ya no está en el mapa de temas.</p>;
+  return (
+    <>
+      <p className="sidePanel__lead">{axis.label}</p>
+      <PoleLegend axis={axis} />
+      <div className="atlasAxis__bars">
+        {(atlas.parties || []).map((p) => {
+          const cell = atlas.party_axes?.[p.party_id]?.[axis.axis_id];
+          const score = cell && Number.isFinite(cell.score) ? cell.score : NaN;
+          return (
+            <DirectionBar
+              key={p.party_id}
+              label={p.label}
+              score={score}
+              sub={cell ? `${directionText(axis, score)} · ${cell.votes} vot.` : "Sin votaciones"}
+            />
+          );
+        })}
+      </div>
+      <p className="votingAidMuted">
+        {votes.length} votaciones, de la más reciente a la más antigua. <a href={axisMapHref(question)}>Abrir en el mapa de temas</a>
+      </p>
+      <ul className="atlasVotes">
+        {votes.slice(0, shown).map((v) => (
+          <VoteRow atlas={atlas} axis={axis} key={v.id} kindLabels={atlas.kind_labels} vote={v} />
+        ))}
+      </ul>
+      {votes.length > shown ? (
+        <button className="votingAidButton" onClick={() => setShown(shown + AXIS_PAGE)} type="button">
+          Ver más ({votes.length - shown})
+        </button>
+      ) : null}
+    </>
   );
 }
 
@@ -219,6 +309,8 @@ function ProgressBar({ value, max, label }) {
 }
 
 function QuestionLinks({ question }) {
+  const [panelOpen, setPanelOpen] = useState(false);
+  const closePanel = useCallback(() => setPanelOpen(false), []);
   const links = [];
   if (question.axis_id) {
     links.push({ href: axisMapHref(question), label: `Ver las ${question.votes_total} votaciones y cómo votó cada partido`, internal: true });
@@ -236,7 +328,16 @@ function QuestionLinks({ question }) {
     <span className="votingAidLinks">
       {links.map((l) =>
         l.internal ? (
-          <a href={l.href} key={l.href + l.label}>
+          <a
+            aria-expanded={panelOpen}
+            href={l.href}
+            key={l.href + l.label}
+            onClick={(e) => {
+              if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+              e.preventDefault();
+              setPanelOpen(true);
+            }}
+          >
             {l.label}
           </a>
         ) : (
@@ -245,6 +346,11 @@ function QuestionLinks({ question }) {
           </a>
         ),
       )}
+      {question.axis_id ? (
+        <SidePanel onClose={closePanel} open={panelOpen} title="Cómo votó cada partido">
+          <AxisVotesPanel question={question} />
+        </SidePanel>
+      ) : null}
     </span>
   );
 }

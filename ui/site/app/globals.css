@@ -8426,3 +8426,118 @@ body:has(.responsibility-article) > .breadcrumbs {
   margin-top: 0;
   font-size: 1.15rem;
 }
+
+/* Side panel ("ver más"): docked sidebar on desktop, modal drawer from the right on mobile (SidePanel.js). */
+:root {
+  --side-panel-w: min(440px, 38vw);
+}
+
+html.has-sidePanel body {
+  padding-right: var(--side-panel-w);
+}
+
+html.has-sideDrawer {
+  overflow: hidden;
+}
+
+.sidePanel {
+  position: fixed;
+  inset: 0 0 0 auto;
+  z-index: 60;
+  width: var(--side-panel-w);
+  max-width: 100%;
+  height: 100dvh;
+  max-height: 100dvh;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-left: 1px solid var(--line);
+  background: #fff;
+  color: var(--ink);
+  box-shadow: -10px 0 30px rgba(23, 25, 31, 0.08);
+  transform: translateX(0);
+  transition: transform 0.22s ease, overlay 0.22s allow-discrete, display 0.22s allow-discrete;
+}
+
+.sidePanel:not([open]) {
+  transform: translateX(100%);
+}
+
+@starting-style {
+  .sidePanel[open] {
+    transform: translateX(100%);
+  }
+}
+
+.sidePanel::backdrop {
+  background: rgba(23, 25, 31, 0.45);
+}
+
+.sidePanel__inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.sidePanel__head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px 14px 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.sidePanel__title {
+  flex: 1;
+  margin: 0;
+  font-family: var(--display);
+  font-size: 1.35rem;
+  line-height: 1.2;
+}
+
+.sidePanel__close {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--ink-soft);
+  font: inherit;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.sidePanel__close:hover {
+  color: var(--ink);
+  border-color: var(--ink-muted);
+}
+
+.sidePanel__body {
+  flex: 1;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 16px 20px calc(24px + env(safe-area-inset-bottom));
+}
+
+.sidePanel__lead {
+  margin: 0 0 8px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.sidePanel .votingAidVoted__list {
+  margin-top: 12px;
+}
+
+@media (max-width: 900px) {
+  .sidePanel {
+    width: min(92vw, 440px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sidePanel {
+    transition: none;
+  }
+}
