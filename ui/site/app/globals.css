@@ -6767,7 +6767,7 @@ a.votingAidButton {
 /* Desktop: answers sit right under the statement in a dock that sticks to the top while the evidence scrolls.
    Docked, it floats as a raised bar and recalls the statement in one line (its slot is reserved, so nothing jumps). */
 .votingAidCard--answersFirst .votingAidStatement__text {
-  margin-bottom: 0;
+  margin-bottom: 20px;
 }
 
 .votingAidDock {
