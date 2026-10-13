@@ -34,8 +34,8 @@ This repo is intentionally ultra-lean. When expanding ETL/schema/UI, optimize fo
   - API tokens, Bearer headers, cookies, `.env` values, private keys
   - if they appear in logs/evidence, redact before commit
 - Public artifact gate is mandatory before publish:
-  - run `just privacy-check-public-artifacts`
-  - this check must pass before `just site-build`, `just etl-publish-hf-dry-run`, and `just etl-publish-hf`
+  - `just privacy-check-public-artifacts` (ETL-wide) must pass before `just site-build-refresh`, `just etl-publish-hf-dry-run`, and `just etl-publish-hf`
+  - frozen site builds (`just site-publish`) gate exactly what they ship with `just site-artifact-gate` (real-data markers + leak scan over `ui/site/out`); it runs inside `site-build-frozen`
 - If a leak is detected in public outputs (`docs/gh-pages` or `etl/data/published`):
   - stop the publish
   - fix the generator/sanitizer (not just the generated file)

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import hashlib
+import io
 import json
 import os
 import re
@@ -38,6 +39,9 @@ class FakeS3:
                     yield {"Contents": [{"Key": k, "ETag": f'"{hashlib.md5(fake.objects[k]).hexdigest()}"'} for k in chunk]}
 
         return Paginator()
+
+    def get_object(self, *, Bucket, Key):
+        return {"Body": io.BytesIO(self.objects[Key])}
 
     def put_object(self, *, Bucket, Key, Body, ContentType, ContentMD5, Metadata):
         self.objects[Key] = Body
@@ -290,10 +294,32 @@ class PruneOnlyTests(unittest.TestCase):
             client.objects["site/spending/launch/a/f.json"] = b"1"
             argv = ["--site", str(site), "--skip-privacy-check", "--r2-only", "--prune-only", "--release-id", "r", "--source-commit", "c"]
             pso.main(argv, client=client)
-            self.assertEqual(sorted(client.objects), ["site/spending/launch/a/f.json"])
+            self.assertEqual(sorted(client.objects), ["site/releases/r2-scope.json", "site/spending/launch/a/f.json"])
             client.objects.update({f"site/spending/launch/old{i}.json": b"o" for i in range(5)})
             with self.assertRaises(SystemExit):
-                pso.main(argv, client=client)
+                pso.main([*argv, "--full-sync"], client=client)
+
+    def test_unchanged_r2_scope_skips_listing_until_it_changes(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            site = write_site(Path(tmp) / "site", {"index.html": b"x", "spending/launch/a/f.json": b"1"})
+            client = FakeS3({"site/stale.html": b"s"})
+            base = ["--site", str(site), "--skip-privacy-check", "--r2-only", "--release-id", "r", "--source-commit", "c"]
+            pso.main(base, client=client)
+            pso.main([*base, "--prune-only"], client=client)
+            self.assertNotIn("site/stale.html", client.objects)
+
+            listings = []
+            client.get_paginator = lambda name, real=client.get_paginator: listings.append(name) or real(name)  # type: ignore[method-assign]
+            client.puts.clear()
+            pso.main(base, client=client)
+            pso.main([*base, "--prune-only"], client=client)
+            self.assertEqual(listings, [])
+            self.assertEqual(sorted(client.puts), ["site/releases/latest.json", "site/releases/r/manifest.json"])
+
+            (site / "spending/launch/a/f.json").write_bytes(b"2")
+            pso.main(base, client=client)
+            self.assertEqual(client.objects["site/spending/launch/a/f.json"], b"2")
+            self.assertEqual(len(listings), 2)  # diff + parity re-list
 
 
 if __name__ == "__main__":

@@ -7,7 +7,10 @@ import argparse
 import gzip
 import hashlib
 import json
+import os
+import shutil
 import sqlite3
+import subprocess
 from collections.abc import Iterable
 from datetime import UTC, datetime
 from pathlib import Path
@@ -100,13 +103,38 @@ def _sample_fingerprint_index(paths: Iterable[Path]) -> dict[str, list[str]]:
     return fingerprints
 
 
+def _marker_candidates(paths: list[Path]) -> set[str] | None:
+    """Files that may contain a marker, via ripgrep (GBs in seconds); None means read every file.
+
+    A sample-fingerprint hit implies a marker hit (only marker-bearing samples are indexed),
+    so files ripgrep rules out need no reading at all.
+    """
+    rg = shutil.which("rg")
+    roots = [str(p) for p in paths if p.exists()]
+    if not rg or not roots:
+        return None
+    cmd = [rg, "--files-with-matches", "--fixed-strings", "--ignore-case", "--search-zip", "--text",
+           "--follow", "--no-ignore", "--hidden", "--no-messages", "--glob-case-insensitive"]
+    for pattern in [*(f"*{suffix}" for suffix in sorted(TEXT_SUFFIXES)), "*.json.gz"]:
+        cmd += ["--glob", pattern]
+    for marker in PROHIBITED_MARKERS:
+        cmd += ["-e", marker.decode("utf-8")]
+    result = subprocess.run([*cmd, "--", *roots], capture_output=True)
+    if result.returncode not in (0, 1):  # 2: some file was unreadable; let the full scan report it
+        return None
+    return {os.path.normpath(line) for line in result.stdout.decode("utf-8", "surrogateescape").splitlines()}
+
+
 def scan_paths(paths: Iterable[Path]) -> tuple[int, list[dict[str, Any]]]:
     path_list = list(paths)
     sample_fingerprints = _sample_fingerprint_index(path_list)
+    candidates = _marker_candidates(path_list)
     findings: list[dict[str, Any]] = []
     files_scanned = 0
     for path in _iter_files(path_list):
         files_scanned += 1
+        if candidates is not None and os.path.normpath(path) not in candidates:
+            continue
         try:
             raw_bytes = _read_scan_bytes(path)
             folded = raw_bytes.lower()

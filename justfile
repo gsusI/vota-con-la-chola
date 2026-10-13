@@ -4823,7 +4823,14 @@ site-build-frozen:
   cd "{{site_app_dir}}" && NEXT_PUBLIC_BASE_PATH="{{site_base_path}}" node node_modules/next/dist/bin/next build --webpack
   python3 scripts/check_next_export_notfound_payloads.py --path "{{site_out_dir}}"
   just cloudflare-pages-size-check
-  just privacy-check-public-artifacts
+  just site-artifact-gate
+
+# Public artifact gate for a frozen build: scan exactly what the site ships (ui/site/out) for invented
+# records and workstation/secret leaks, in seconds. Nothing is exported from a DB here, so no DB scan;
+# the ETL-wide privacy-check-public-artifacts still gates refresh builds and HF publishes.
+site-artifact-gate:
+  python3 scripts/check_real_data_only.py --no-db --path "{{site_out_dir}}" --enforce
+  python3 scripts/check_public_privacy_leaks.py --path "{{site_out_dir}}"
 
 # Rebuild an export from its local-only inputs (staging DBs, raw captures), or keep the committed
 # public artifact when an input is not on disk (CI checkouts, cold *.db.zst snapshots). The kept
@@ -6700,6 +6707,14 @@ site-publish:
   #!/usr/bin/env bash
   set -euo pipefail
   if [ "${VCLC_SITE_LOCK_HELD:-0}" != "1" ]; then exec scripts/with_site_lock.sh just site-publish; fi
+  # Sessions that queued behind the lock share this checkout: once one of them has shipped these exact
+  # site inputs, the rest have nothing to deploy. Changes outside ui/site and the Worker: SITE_PUBLISH_FORCE=1.
+  inputs="$(scripts/site_inputs_fingerprint.sh)"
+  shipped="$(git rev-parse --git-common-dir)/vclc-site-shipped"
+  if [ "${SITE_PUBLISH_FORCE:-0}" != "1" ] && [ "$(cat "$shipped" 2>/dev/null)" = "$inputs" ]; then
+    echo "site-publish: these site inputs are already live; nothing to deploy (SITE_PUBLISH_FORCE=1 redeploys)"; exit 0
+  fi
+  start=$SECONDS
   # Record what the build came from before building (the sync may run later); dotfiles are never published.
   commit="$(git rev-parse HEAD)"
   dirty=false; if [ -n "$(git status --porcelain --untracked-files=no -- ui/site)" ]; then dirty=true; fi
@@ -6709,10 +6724,13 @@ site-publish:
   owner="${GITHUB_RUN_ID:+ci-$GITHUB_RUN_ID}"; owner="${owner:-local-$(hostname -s)-$$}"
   uv run --no-project --with 'boto3>=1.34' python3 scripts/r2_publish_lock.py acquire --owner "$owner"
   trap 'uv run --no-project --with "boto3>=1.34" python3 scripts/r2_publish_lock.py release --owner "$owner"' EXIT
-  just site-origin-publish
+  # site-build already ran site-artifact-gate on this exact out/: the steps below skip re-scanning it.
+  SITE_ARTIFACTS_GATED=1 just site-origin-publish
   # Pages and their data are served as Worker static assets (no Worker requests); R2 keeps the bulk.
-  just site-origin-worker-deploy
+  SITE_ARTIFACTS_GATED=1 just site-origin-worker-deploy
   just site-origin-prune
+  echo "$inputs" > "$shipped"
+  echo "site-publish: live in $((SECONDS - start)) s"
 
 # Needs R2_* env (S3 API); also publishes a sha256 release manifest at /releases/latest.json.
 # Sync the built site (ui/site/out) to the votaconlachola.org R2 origin, changed files only.
@@ -6726,7 +6744,7 @@ site-origin-publish:
   # ${arr[@]+...} keeps an empty array safe under set -u on macOS bash 3.2.
   # Upload only what R2 serves (spending/launch, oversized files); pages ship as Worker static assets.
   # Stale objects are pruned by site-origin-prune after the Worker deploy, so nothing 404s mid-publish.
-  report_arg=(); if [ -n "${SITE_ORIGIN_REPORT:-}" ]; then report_arg=(--report "$SITE_ORIGIN_REPORT"); fi
+  report_arg=(); if [ -n "${SITE_ORIGIN_REPORT:-}" ]; then report_arg=(--report "$SITE_ORIGIN_REPORT"); fi; if [ "${SITE_ARTIFACTS_GATED:-0}" = "1" ]; then report_arg+=(--skip-privacy-check); fi
   uv run --no-project --with 'boto3>=1.34' python3 scripts/publish_site_origin.py --site "$site" --r2-only ${report_arg[@]+"${report_arg[@]}"}
   uv run --no-project --with 'boto3>=1.34' python3 scripts/publish_joined_archives.py --site "$site"
 
@@ -6749,7 +6767,8 @@ site-origin-worker-deploy:
   site="{{site_out_dir}}"
   test -f "$site/index.html" || { echo "Missing $site; run just site-build first" >&2; exit 2; }
   # Locally: the wrangler OAuth login (the repo .env token lacks Workers permissions). CI: its API token.
-  if [ -n "${CI:-}" ]; then python3 scripts/publish_site_static_assets.py --site "$site"; else env -u CLOUDFLARE_API_TOKEN -u CF_API_TOKEN python3 scripts/publish_site_static_assets.py --site "$site"; fi
+  gated=(); if [ "${SITE_ARTIFACTS_GATED:-0}" = "1" ]; then gated=(--skip-privacy-check); fi
+  if [ -n "${CI:-}" ]; then python3 scripts/publish_site_static_assets.py --site "$site" ${gated[@]+"${gated[@]}"}; else env -u CLOUDFLARE_API_TOKEN -u CF_API_TOKEN python3 scripts/publish_site_static_assets.py --site "$site" ${gated[@]+"${gated[@]}"}; fi
 
 placsp-launch-scoped-publish:
   @echo "RETIRED 2026-10-12: the scoped PLACSP overlay needed the gh-pages tree; full builds include /spending/. Use just site-publish." >&2

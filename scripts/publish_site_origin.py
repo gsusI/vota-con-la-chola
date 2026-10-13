@@ -28,7 +28,7 @@ from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Iterable
+from typing import Any, Callable, Iterable
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_BUCKET = "vclc-site"
@@ -40,6 +40,9 @@ RELEASES_DIR = "releases/"
 # Subtrees written by other publishers (release manifests, dataset mirror, joined archives); never synced or deleted here.
 RESERVED_DIRS = (RELEASES_DIR, "datasets/", "downloads/")
 MANIFEST_SCHEMA = "vclc.site_release.v1"
+# Fingerprint of the R2-served file set as of the last completed prune: while it matches the build,
+# R2 already holds exactly that set, so publish and prune skip listing ~35k keys (~70 s per publish).
+SCOPE_STATE_KEY = f"{SITE_PREFIX}{RELEASES_DIR}r2-scope.json"
 # Keep in sync with resolveContentType in infra/cloudflare/votaconlachola-worker/src/index.js.
 CONTENT_TYPES = {
     ".html": "text/html; charset=utf-8",
@@ -88,15 +91,15 @@ def is_published(rel: Path) -> bool:
     return not any(part.startswith(".") for part in rel.parts)
 
 
-def scan_site(site: Path, *, workers: int = 8, hashes: bool = True) -> list[LocalFile]:
+def scan_site(site: Path, *, workers: int = 8, hashes: bool | Callable[[str, int], bool] = True) -> list[LocalFile]:
     paths = sorted(
         p for p in site.rglob("*") if p.is_file() and not p.is_symlink() and is_published(p.relative_to(site))
     )
 
     def digest(path: Path) -> LocalFile:
-        if not hashes:  # prune only needs paths and sizes
-            rel = path.relative_to(site).as_posix()
-            return LocalFile(rel, path.stat().st_size, "", "", content_type_for(rel))
+        rel, size = path.relative_to(site).as_posix(), path.stat().st_size
+        if not (hashes is True or (hashes and hashes(rel, size))):  # prune needs only the R2 scope's hashes
+            return LocalFile(rel, size, "", "", content_type_for(rel))
         md5 = hashlib.md5(usedforsecurity=False)
         sha = hashlib.sha256()
         with path.open("rb") as handle:
@@ -197,6 +200,28 @@ def list_remote(client: Any, bucket: str, prefix: str) -> dict[str, str]:
     return remote
 
 
+def scope_fingerprint(wanted: dict[str, LocalFile]) -> str:
+    """Hash of the R2-served (key, md5) set; empty when some md5 was not computed."""
+    if not all(f.md5 for f in wanted.values()):
+        return ""
+    digest = hashlib.sha256()
+    for key in sorted(wanted):
+        digest.update(f"{key}\t{wanted[key].md5}\n".encode())
+    return digest.hexdigest()
+
+
+def read_scope_state(client: Any, bucket: str) -> str:
+    try:
+        return json.loads(client.get_object(Bucket=bucket, Key=SCOPE_STATE_KEY)["Body"].read())["fingerprint"]
+    except Exception:  # missing or unreadable state only costs a full sync
+        return ""
+
+
+def write_scope_state(client: Any, bucket: str, fingerprint: str) -> None:
+    body = json.dumps({"fingerprint": fingerprint}).encode()
+    put_bytes(client, bucket, SCOPE_STATE_KEY, body, CONTENT_TYPES[".json"], hashlib.sha256(body).hexdigest())
+
+
 def put_bytes(client: Any, bucket: str, key: str, body: bytes, content_type: str, sha256: str) -> None:
     md5_b64 = base64.b64encode(hashlib.md5(body, usedforsecurity=False).digest()).decode()
     client.put_object(
@@ -226,10 +251,17 @@ def sync(
     max_delete_ratio: float,
     r2_scope: Any = None,
     prune_only: bool = False,
+    full_sync: bool = False,
 ) -> dict[str, Any]:
-    remote = list_remote(client, bucket, SITE_PREFIX)
     # The manifest covers the whole build; R2 only stores what it serves (see --r2-only).
     wanted = {SITE_PREFIX + f.path: f for f in files if r2_scope is None or r2_scope(f)}
+    fingerprint = "" if full_sync else scope_fingerprint(wanted)
+    in_sync = bool(fingerprint) and read_scope_state(client, bucket) == fingerprint
+    if prune_only and in_sync:
+        return {"r2_scope_unchanged": True, "deleted": 0}
+    if in_sync and not delete:
+        return {"r2_scope_unchanged": True, "uploaded": 0, "unchanged": len(wanted)} | publish_release(client, bucket, manifest)
+    remote = list_remote(client, bucket, SITE_PREFIX)
     if prune_only:
         stale = sorted(
             key for key in remote if key not in wanted and not any(key.startswith(SITE_PREFIX + d) for d in RESERVED_DIRS)
@@ -244,6 +276,8 @@ def sync(
             raise SystemExit(f"Refusing to delete {len(stale_served)}/{len(served)} R2-served objects (> {max_delete_ratio:.0%})")
         for batch in chunked(stale, 1000):
             client.delete_objects(Bucket=bucket, Delete={"Objects": [{"Key": k} for k in batch], "Quiet": True})
+        if fingerprint:
+            write_scope_state(client, bucket, fingerprint)
         return {"remote_before": len(remote), "deleted": len(stale)}
     to_upload = [f for key, f in wanted.items() if remote.get(key) != f.md5]
     stale = sorted(
@@ -278,7 +312,21 @@ def sync(
         for batch in chunked(stale, 1000):
             client.delete_objects(Bucket=bucket, Delete={"Objects": [{"Key": k} for k in batch], "Quiet": True})
             deleted += len(batch)
+        if fingerprint:
+            write_scope_state(client, bucket, fingerprint)
 
+    return {
+        "remote_before": len(remote),
+        "uploaded": len(to_upload),
+        "uploaded_bytes": sum(f.size for f in to_upload),
+        "unchanged": len(wanted) - len(to_upload),
+        "stale": len(stale),
+        "deleted": deleted,
+        "parity_verified": len(wanted),
+    } | publish_release(client, bucket, manifest)
+
+
+def publish_release(client: Any, bucket: str, manifest: dict[str, Any]) -> dict[str, Any]:
     manifest_body = json.dumps(manifest, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode()
     manifest_sha = hashlib.sha256(manifest_body).hexdigest()
     release_dir = f"{SITE_PREFIX}{RELEASES_DIR}{manifest['release_id']}/"
@@ -302,16 +350,7 @@ def sync(
         CONTENT_TYPES[".json"],
         hashlib.sha256(latest_body).hexdigest(),
     )
-    return {
-        "remote_before": len(remote),
-        "uploaded": len(to_upload),
-        "uploaded_bytes": sum(f.size for f in to_upload),
-        "unchanged": len(wanted) - len(to_upload),
-        "stale": len(stale),
-        "deleted": deleted,
-        "parity_verified": len(wanted),
-        "manifest_sha256": manifest_sha,
-    }
+    return {"manifest_sha256": manifest_sha}
 
 
 # Sources that end up in the static build: uncommitted changes there make the release not reproducible from its commit.
@@ -367,6 +406,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         action="store_true",
         help="Only delete objects R2 no longer needs (run after the Worker deploy); no upload, no manifest",
     )
+    parser.add_argument("--full-sync", action="store_true", help="List and diff the bucket even if the R2 scope looks unchanged")
     parser.add_argument("--dry-run", action="store_true", help="Hash and report locally; no network")
     parser.add_argument("--skip-privacy-check", action="store_true", help="Only for tests")
     parser.add_argument("--report", type=Path, help="Write a JSON run report here")
@@ -390,7 +430,8 @@ def main(argv: list[str] | None = None, *, client: Any = None) -> int:
             check=True,
         )
 
-    files = scan_site(site, hashes=not args.prune_only)
+    scope = r2_scope() if args.r2_only else None
+    files = scan_site(site, hashes=(lambda rel, size: scope(LocalFile(rel, size, "", "", ""))) if args.prune_only and scope else not args.prune_only)
     now = datetime.now(timezone.utc)
     stamp = read_build_stamp(site)
     source_commit = args.source_commit or stamp.get("source_commit") or git_head(site)
@@ -422,8 +463,9 @@ def main(argv: list[str] | None = None, *, client: Any = None) -> int:
             workers=args.workers,
             delete=args.delete,
             max_delete_ratio=args.max_delete_ratio,
-            r2_scope=r2_scope() if args.r2_only else None,
+            r2_scope=scope,
             prune_only=args.prune_only,
+            full_sync=args.full_sync,
         )
     text = json.dumps(report, indent=2, ensure_ascii=False)
     print(text)
