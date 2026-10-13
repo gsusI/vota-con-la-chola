@@ -44,7 +44,7 @@ This repo is intentionally ultra-lean. When expanding ETL/schema/UI, optimize fo
 - If sensitive data was already committed, do not ignore it:
   - open a follow-up to scrub affected files
   - if needed, plan history rewrite (`git filter-repo`) with explicit maintainer approval
-- Frontend publish rule: when you modify any frontend artifact (`ui/**` or static/public UI files), commit and push first, then run `just site-publish` (builds `ui/site/out` from the public exports already on disk and syncs it to the R2 origin of votaconlachola.org), so `main` and the live site stay in sync. Regenerating exports from local staging DBs is a separate data change (`just site-build-refresh`, review, commit) or `CLOUDFLARE_PAGES_FROZEN_INPUTS=0 just site-publish`. The `gh-pages` branch is no longer published.
+- Frontend publish rule: when you modify any frontend artifact (`ui/**` or static/public UI files), commit and push to `main`: the `Site deploy` workflow (`.github/workflows/site-deploy.yml`) publishes every push that touches `ui/site/**` or the Worker, newest push wins (follow it with `gh run watch`). Run `just site-publish` locally (builds `ui/site/out` from the public exports already on disk and syncs it to the R2 origin of votaconlachola.org) only to ship something not on `main` or when CI is down. Regenerating exports from local staging DBs is a separate data change (`just site-build-refresh`, review, commit) or `CLOUDFLARE_PAGES_FROZEN_INPUTS=0 just site-publish`. The `gh-pages` branch is no longer published.
 
 ### Structuring Complexity
 - Build in thin vertical slices, not big-bang layers.

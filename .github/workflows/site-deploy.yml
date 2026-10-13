@@ -1,0 +1,77 @@
+name: Site deploy
+
+# Every push to main that changes what the site ships goes live: no local `just site-publish` needed.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "ui/site/**"
+      - "infra/cloudflare/votaconlachola-worker/**"
+  workflow_dispatch:
+
+# One deploy at a time. While one runs, only the newest push waits (GitHub supersedes older pending
+# runs), so a burst of pushes ships once, from the latest main. Local publishes and the nightly ETL
+# publish share the R2 publish lock with this job.
+concurrency:
+  group: site-deploy
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+      R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+      NEXT_BUILD_CPUS: "4"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install just
+        uses: extractions/setup-just@v2
+
+      - name: Install ripgrep (fast artifact gate)
+        run: sudo apt-get install -y --no-install-recommends ripgrep
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install Python dependencies
+        run: python3 -m pip install -r requirements.txt uv
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: ui/site/package-lock.json
+
+      - name: Install site dependencies
+        run: npm ci --no-audit --no-fund --prefix ui/site
+
+      - name: Restore Next build cache
+        uses: actions/cache@v4
+        with:
+          path: ui/site/.next/cache
+          key: next-${{ hashFiles('ui/site/package-lock.json') }}-${{ github.sha }}
+          restore-keys: next-${{ hashFiles('ui/site/package-lock.json') }}-
+
+      - name: Restore verification cache
+        # The immutable PLACSP launch release is verified once per release (see just placsp-launch-verify).
+        uses: actions/cache@v4
+        with:
+          path: etl/data/cache
+          key: placsp-launch-${{ hashFiles('ui/site/public/spending/launch/latest.json', 'tests/test_placsp_launch.py', 'docs/examples/placsp-launch/reproduce.py', 'scripts/build_placsp_launch.py') }}
+
+      - name: Publish votaconlachola.org
+        run: just site-publish
