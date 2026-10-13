@@ -4,11 +4,13 @@ import { usePathname } from "next/navigation";
 import { stripBasePath, withBasePath } from "../path-utils.mjs";
 
 const VOTING_AID_PATH = "/citizen/vota/";
+// The test itself: current version, earlier versions (/v1/) and the per-question share pages (/t/<id>/).
+const TEST_PAGE = /^\/citizen\/vota\/(?:(?:v\d+|t(?:\/[^/]+)?)\/)?$/u;
 
 export default function VotingAidBanner() {
   const pathname = stripBasePath(usePathname() || "/");
-  // The tool itself does not need an ad for itself.
-  if (pathname.replace(/\/?$/u, "/") === VOTING_AID_PATH) {
+  // The tool does not need an ad for itself (and a share page must not lure people off its question).
+  if (TEST_PAGE.test(pathname.replace(/\/?$/u, "/"))) {
     return null;
   }
 

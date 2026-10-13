@@ -80,6 +80,24 @@ export function groupLabel(code) {
   return GROUP_LABELS[code] || code || "Sin grupo";
 }
 
+// Short names, so a XIV-only deputy reads «PP (XIV)» next to the XV ones listed by party («PP»).
+const GROUP_SHORT = {
+  GS: "PSOE",
+  GP: "PP",
+  GVOX: "VOX",
+  GR: "ERC",
+  "GEH Bildu": "EH Bildu",
+  "GV (EAJ-PNV)": "PNV",
+  "GCUP-EC-GC": "Unidas Podemos",
+  GCs: "Ciudadanos",
+  GSUMAR: "Sumar",
+  GJxCAT: "Junts",
+};
+
+export function groupShortLabel(code) {
+  return GROUP_SHORT[code] || groupLabel(code);
+}
+
 /**
  * Votes placed on an axis (any confidence), newest first, with the sign of a Sí vote.
  * Earlier legislatures (`leg`) count only for deputies, so the party map leaves them out unless asked.
@@ -162,6 +180,11 @@ export function formatDate(value) {
   if (!value) return "";
   const [y, m, d] = String(value).split("-");
   return d && m && y ? `${Number(d)}/${Number(m)}/${y}` : String(value);
+}
+
+/** Whole numbers with a thousands dot. es-ES leaves 4-digit ones ungrouped («1023»); the site writes «1.023» everywhere. */
+export function formatCount(value) {
+  return Number.isFinite(value) ? String(Math.trunc(value)).replace(/\B(?=(\d{3})+(?!\d))/gu, ".") : "—";
 }
 
 /** Read "#k=v&k2=v2" into an object (shareable view state; never user preferences). */

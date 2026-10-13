@@ -50,7 +50,20 @@ function formatBreadcrumb(segment, index, segments) {
     vota: "¿Con quién coincides?",
     metodologia: "Cómo se hizo",
     leaderboards: "Clasificaciones",
+    temas: "Mapa por temas",
+    diputados: "Diputados",
   };
+
+  // Voting-aid version and share pages: /citizen/vota/v1/ and /citizen/vota/t/<statement>/.
+  if (segments[index - 1] === "vota" && /^v\d+$/u.test(segment)) {
+    return `Versión ${segment.slice(1)}`;
+  }
+  if (segments[index - 1] === "vota" && segment === "t") {
+    return "Pregunta";
+  }
+  if (segments[index - 1] === "t" && segments[index - 2] === "vota") {
+    return null;
+  }
 
   const direct = map[segment];
   if (direct) {
@@ -95,9 +108,12 @@ export default function Breadcrumbs() {
     let cumulative = "";
     for (const [index, segment] of withDynamic.entries()) {
       cumulative += `/${segment}`;
+      const label = formatBreadcrumb(segment, index, withDynamic);
+      // null: a slug with no readable name (the page itself shows it), so the trail stops at its parent.
+      if (label === null) continue;
       out.push({
         href: withBasePath(cumulative, basePath),
-        label: formatBreadcrumb(segment, index, withDynamic),
+        label,
       });
     }
 
@@ -107,9 +123,11 @@ export default function Breadcrumbs() {
   if (crumbs.length <= 1) {
     return null;
   }
+  // The citizen pages (voting aid included) use a narrower column; line the trail up with it.
+  const narrow = /^\/citizen(\/|$)/u.test(stripBasePath(pathname || "", basePath));
 
   return (
-    <nav className="breadcrumbs site-breadcrumbs" aria-label="Miga de pan">
+    <nav className={`breadcrumbs site-breadcrumbs${narrow ? " site-breadcrumbs--narrow" : ""}`} aria-label="Miga de pan">
       <ol className="site-breadcrumbs__list">
         {crumbs.map((crumb, index) => {
           const isLast = index === crumbs.length - 1;

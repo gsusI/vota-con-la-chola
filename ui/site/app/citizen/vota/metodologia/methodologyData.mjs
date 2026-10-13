@@ -60,7 +60,7 @@ const PROMPT_FILES = [
   },
   {
     file: "afirmaciones-revision.md",
-    title: "Revisión independiente de las afirmaciones",
+    title: "Revisión independiente de las afirmaciones (primera versión)",
     who: "Claude Sonnet 5.5 (dos revisores por afirmación, sin ver los votos de los partidos)",
   },
   {

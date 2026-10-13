@@ -9,6 +9,7 @@ import {
   CONFIDENCE_LABELS,
   axisParties,
   directionText,
+  formatCount,
   formatDate,
   indexAtlas,
   officialVoteUrl,
@@ -117,7 +118,7 @@ function AxisCard({ atlas, axis, open, onToggle, highlight, kindLabels }) {
               key={p.party_id}
               label={p.label}
               score={r ? r.score : NaN}
-              sub={r ? `${directionText(axis, r.score)} · ${r.votes} vot.` : "Sin votaciones"}
+              sub={r ? `${directionText(axis, r.score)} · ${r.votes}\u00a0vot.` : "Sin votaciones"}
             />
           );
         })}
@@ -214,13 +215,13 @@ export default function VoteAtlasClient() {
         <>
           <ul className="votingAidFacts atlasFacts">
             <li>
-              <strong>{(cov.events_total || 0).toLocaleString("es-ES")}</strong> votaciones nominales del Pleno entre {formatDate(meta.votes_first_date)} y{" "}
-              {formatDate(meta.votes_last_date)}; <strong>{(cov.scored_votes || 0).toLocaleString("es-ES")}</strong> cuentan en algún eje.
+              <strong>{formatCount(cov.events_total || 0)}</strong> votaciones nominales del Pleno entre {formatDate(meta.votes_first_date)} y{" "}
+              {formatDate(meta.votes_last_date)}; <strong>{formatCount(cov.scored_votes || 0)}</strong> cuentan en algún eje.
             </li>
             <li>
               Las enmiendas también cuentan: su texto se buscó en el BOCG (
-              {((meta.amendments?.votes || 0) - (meta.amendments?.by_resolution?.sin_texto || 0)).toLocaleString("es-ES")} de{" "}
-              {(meta.amendments?.votes || 0).toLocaleString("es-ES")} localizadas, XIV y XV) y todas las de una misma ley pesan como una sola
+              {formatCount((meta.amendments?.votes || 0) - (meta.amendments?.by_resolution?.sin_texto || 0))} de{" "}
+              {formatCount(meta.amendments?.votes || 0)} localizadas, XIV y XV) y todas las de una misma ley pesan como una sola
               iniciativa. Puedes ocultarlas en la lista de votaciones de cada eje.
             </li>
             <li>

@@ -48,7 +48,8 @@ export function formatInt(value) {
   if (!Number.isFinite(parsed)) {
     return "0";
   }
-  return Math.trunc(parsed).toLocaleString("es-ES");
+  // es-ES leaves 4-digit numbers ungrouped («1648»); group them like the rest («1.648»).
+  return Math.trunc(parsed).toLocaleString("es-ES", { useGrouping: "always" });
 }
 
 export function formatPct(value) {
@@ -62,6 +63,18 @@ export function formatPct(value) {
 export function formatDate(value) {
   const raw = String(value || "").trim();
   return raw || "sin fecha";
+}
+
+/** "2026-09-30" -> "30/9/2026", as the citizen pages write dates. */
+export function formatDayEs(value) {
+  const [y, m, d] = String(value || "").split("-");
+  return d && m && y ? `${Number(d)}/${Number(m)}/${y}` : formatDate(value);
+}
+
+/** Plain-language name of a citizen computed method (what the stances are built from). */
+export function citizenMethodLabel(value) {
+  const key = String(value || "").toLowerCase().trim();
+  return { combined: "Votos y declaraciones", votes: "Solo votos", declared: "Solo declaraciones" }[key] || formatMethod(value);
 }
 
 export function formatMethod(value) {

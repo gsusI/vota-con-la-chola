@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { withBasePath } from "../../../siteCatalog.mjs";
+import { formatCount } from "../voteAtlasModel.mjs";
 import { MIN_ANSWERS_FOR_RANKING } from "../votingAidModel.mjs";
 import { VOTING_AID_VERSIONS, formatReleased } from "../votingAidVersions.mjs";
 import {
@@ -29,7 +30,9 @@ export const metadata = {
     "Proceso completo de la ayuda al voto: fuentes oficiales, cálculo, modelos de IA usados, prompts literales, revisiones, limitaciones y cómo mejorarlo.",
 };
 
-const fmt = (n) => (Number.isFinite(n) ? n.toLocaleString("es-ES") : "—");
+const fmt = formatCount;
+// Step 8 reviewed the statements of this version (its evidence file is from the v1 sprint).
+const REVIEWED_VERSION = VOTING_AID_VERSIONS.find((v) => v.id === "v1");
 
 function Ext({ href, children }) {
   return (
@@ -506,7 +509,12 @@ export default function VotingAidMethodologyPage() {
         </p>
       </Step>
 
-      <Step n={8} title="Revisión independiente de las afirmaciones">
+      <Step n={8} title="Revisión independiente de las afirmaciones (primera versión)">
+        <p className="vaMethod__muted">
+          Esta revisión se hizo sobre las afirmaciones de la {REVIEWED_VERSION.label.toLowerCase()} del test (
+          {formatReleased(REVIEWED_VERSION.released)}), que sigue online. Las preguntas clave de la versión actual resumen los ejes del
+          paso 3, cuya clasificación se contrastó con un segundo clasificador independiente.
+        </p>
         <p>
           {m.statementReviewMethod ||
             "Dos revisores IA independientes por afirmación leyeron el texto oficial y juzgaron el sentido del voto y la redacción, sin ver cómo votaron los partidos."}

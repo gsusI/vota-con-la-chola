@@ -1,4 +1,4 @@
-import { formatDate, formatInt, formatMethod, formatPct, readPublicJson } from "../../static-snapshot.mjs";
+import { citizenMethodLabel, formatDayEs, formatInt, formatPct, readPublicJson } from "../../static-snapshot.mjs";
 import {
   StaticRouteHero,
   StaticRouteLink,
@@ -75,24 +75,24 @@ export default function CitizenLeaderboardPage() {
         ]}
         eyebrow="Clasificaciones"
         meta={[
-          { label: "Corte", value: formatDate(citizen.meta?.as_of_date) },
-          { label: "Método", value: formatMethod(citizen.meta?.computed_method || "combined") },
+          { label: "Datos hasta", value: formatDayEs(citizen.meta?.as_of_date) },
+          { label: "Basado en", value: citizenMethodLabel(citizen.meta?.computed_method || "combined") },
         ]}
-        summary="Clasificación estática por partido y calidad de paquetes. Muestra señal clara e incertidumbre sin inventar certezas."
+        summary="Qué partidos tienen más posiciones claras y qué bloques de temas tienen datos suficientes. Lo que no está claro se cuenta aparte, sin inventar certezas."
         title="Clasificaciones"
       />
 
       <StaticRouteMetrics
         metrics={[
           { label: "Partidos", value: formatInt(parties.length) },
-          { label: "Celdas", value: formatInt(positions.length) },
+          { label: "Partido × tema", value: formatInt(positions.length) },
           { label: "Señal clara", value: formatPct(citizen.meta?.quality?.clear_pct) },
           { label: "Sin clasificar", value: formatPct(citizen.meta?.quality?.unknown_pct) },
         ]}
       />
 
       <StaticRoutePanelGrid>
-        <StaticRoutePanel note="Ordenado por número de posturas claras." title="Partidos">
+        <StaticRoutePanel note="Ordenado por número de posiciones claras. Las federaciones del PSOE cuentan aparte." title="Partidos">
           <StaticRouteList
             items={partyRows.slice(0, 16)}
             renderItem={(party) => (
@@ -105,14 +105,14 @@ export default function CitizenLeaderboardPage() {
           />
         </StaticRoutePanel>
 
-        <StaticRoutePanel note="Calidad de cada paquete ciudadano." title="Paquetes">
+        <StaticRoutePanel note="Cuántos datos hay en cada bloque de temas." title="Bloques de temas">
           <StaticRouteList
             items={packs}
             renderItem={(pack) => (
               <>
                 <strong>{pack.pack_label || pack.pack_id}</strong>
                 <span>Claras {formatPct(pack.clear_cells_pct)} · sin clasificar {formatPct(pack.unknown_cells_pct)}</span>
-                <StaticRouteStatusPill value={{ className: pack.weak ? "staticRouteStatusPill--warn" : "staticRouteStatusPill--ok", label: pack.weak ? "débil" : "ok" }} />
+                <StaticRouteStatusPill value={{ className: pack.weak ? "staticRouteStatusPill--warn" : "staticRouteStatusPill--ok", label: pack.weak ? "Datos escasos" : "Datos suficientes" }} />
                 <StaticRouteLink href="/citizen/">Ver contexto</StaticRouteLink>
               </>
             )}

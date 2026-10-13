@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { withBasePath } from "../../path-utils.mjs";
 import {
   ANSWER_LABELS,
@@ -32,7 +32,7 @@ import {
 import { formatReleased, otherVersions, versionById } from "./votingAidVersions.mjs";
 import SidePanel from "./SidePanel";
 import { DirectionBar, PoleLegend, VoteRow } from "./temas/VoteAtlasClient";
-import { ATLAS_PATH, directionText, indexAtlas, votesForAxis } from "./voteAtlasModel.mjs";
+import { ATLAS_PATH, directionText, formatCount, indexAtlas, votesForAxis } from "./voteAtlasModel.mjs";
 
 const ANSWER_ORDER = ["agree", "neutral", "disagree"];
 const EMPTY_STATE = { answers: {}, important: {}, skipped: {}, split: {}, history: [], seed: 0, streak: 0, bestStreak: 0, showReveal: true, excludeOmnibus: false };
@@ -116,11 +116,37 @@ function formatDate(value) {
 }
 
 function reducedMotion() {
+  return mediaMatches("(prefers-reduced-motion: reduce)");
+}
+
+function mediaMatches(query) {
   try {
-    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    return window.matchMedia(query).matches;
   } catch {
     return false;
   }
+}
+
+// Desktop with a mouse: same breakpoint as the two-column play grid in globals.css.
+const WIDE_QUERY = "(min-width: 901px)";
+const FINE_POINTER_QUERY = "(hover: hover) and (pointer: fine)";
+
+function useMediaQuery(query) {
+  const [matches, setMatches] = useState(false);
+  // Layout effect: the card is laid out for the right width before the first paint, without a jump.
+  useLayoutEffect(() => {
+    let mql;
+    try {
+      mql = window.matchMedia(query);
+    } catch {
+      return undefined;
+    }
+    const sync = () => setMatches(mql.matches);
+    sync();
+    mql.addEventListener?.("change", sync);
+    return () => mql.removeEventListener?.("change", sync);
+  }, [query]);
+  return matches;
 }
 
 function answerLabel(question, answer) {
@@ -776,7 +802,7 @@ function IntroView({ meta, questionsTotal, curatedTotal, poolStatus, parties, an
       <ul className="votingAidFacts">
         <li>
           <span aria-hidden="true">🎯</span> <strong>Empieza con {curatedTotal} preguntas clave</strong>
-          {keyVotes ? `, que resumen ${keyVotes.toLocaleString("es-ES")} votaciones del Congreso,` : ""} y sigue en modo infinito con
+          {keyVotes ? `, que resumen ${formatCount(keyVotes)} votaciones del Congreso,` : ""} y sigue en modo infinito con
           votaciones reales una a una.
         </li>
         <li>
@@ -862,10 +888,12 @@ function useSwipe(onSwipe, resetKey) {
 }
 
 /** Which version of the test this is, with links to the others (they all stay online). */
-function VersionBanner({ version }) {
+function VersionBanner({ version, onIntro }) {
   const others = otherVersions(version.id);
   if (!others.length) return null;
   if (version.current) {
+    // The pointer to older versions belongs on the start page, not above every question.
+    if (!onIntro) return null;
     return (
       <p className="votingAidVersion votingAidMuted">
         Versión actual del test ({formatReleased(version.released)}). ¿Hiciste una anterior? Tus respuestas siguen ahí:{" "}
@@ -959,8 +987,17 @@ function QuestionCard({ question, parties, answer, important, onAnswer, onSkip, 
   const style = dx
     ? { transform: `translateX(${dx}px) rotate(${(dx / 24).toFixed(1)}deg)`, transition: "none" }
     : undefined;
+  // Desktop: the answers go right under the statement and the evidence follows, so nothing has to float over it.
+  // Mobile keeps the evidence first, with the answers stuck to the bottom of the screen.
+  const answersFirst = useMediaQuery(WIDE_QUERY);
+  const evidence = <WhatVoted parties={parties} question={question} />;
   return (
-    <div className="votingAidCard votingAidCard--question" key={question.statement_id} style={style} {...handlers}>
+    <div
+      className={`votingAidCard votingAidCard--question${answersFirst ? " votingAidCard--answersFirst" : ""}`}
+      key={question.statement_id}
+      style={style}
+      {...handlers}
+    >
       {dx ? (
         <span
           aria-hidden="true"
@@ -987,7 +1024,7 @@ function QuestionCard({ question, parties, answer, important, onAnswer, onSkip, 
         </h2>
       )}
 
-      <WhatVoted parties={parties} question={question} />
+      {answersFirst ? null : evidence}
 
       <div aria-label="Tu respuesta" className="votingAidAnswers" role="group">
         {ANSWER_ORDER.map((value, i) => (
@@ -1044,6 +1081,7 @@ function QuestionCard({ question, parties, answer, important, onAnswer, onSkip, 
           Saltar
         </button>
       </div>
+      {answersFirst ? evidence : null}
       {question.parent && parentLabel(question) ? <p className="votingAidMuted votingAidSplit">{parentLabel(question)}</p> : null}
       {question.source === "curated" && question.context && !question.axis_id ? (
         <details className="votingAidDetails">
@@ -1127,12 +1165,13 @@ const AUTO_NEXT_MS = 5000;
 
 /**
  * Waze-style auto-advance: the «Siguiente» border fills up and then moves on by itself.
- * Any touch, scroll or key press stops it (the user wants to read); reduced motion never auto-advances.
+ * Any touch, scroll or key press stops it (the user wants to read). Never with reduced motion, nor with a mouse:
+ * on desktop people read the reveal without touching anything, and «Siguiente» already has focus (Intro).
  */
 function useAutoNext(resetKey) {
   const [auto, setAuto] = useState(false);
   useEffect(() => {
-    if (reducedMotion()) return undefined;
+    if (reducedMotion() || mediaMatches(FINE_POINTER_QUERY)) return undefined;
     setAuto(true);
     const stop = () => setAuto(false);
     const events = ["pointerdown", "wheel", "touchmove", "keydown"];
@@ -1422,8 +1461,17 @@ function PartyView({ row, parties, questionsById, onBack, onEdit }) {
   );
 }
 
+const TIE_MARGIN = 0.05;
+
+function listJoin(items) {
+  return items.length > 1 ? `${items.slice(0, -1).join(", ")} y ${items[items.length - 1]}` : items.join("");
+}
+
 function ResultsView({ results, answeredCount, fromShare, onParty, onPlay, onReview, onShare, onSharePodium, onReset, onOwn, shareMessage, method, bestStreak, excludeOmnibus, onExcludeOmnibus, omnibusAnswered }) {
   const provisional = answeredCount < MIN_ANSWERS_FOR_RANKING;
+  // Parties within a few points of the leader are a statistical tie: say so instead of letting the medals decide.
+  const scored = results.filter((r) => r.match !== null);
+  const tied = scored.filter((r) => scored[0].match - r.match < TIE_MARGIN);
   return (
     <section aria-label="Resultados" className="votingAidResultsView">
       {fromShare ? (
@@ -1451,6 +1499,11 @@ function ResultsView({ results, answeredCount, fromShare, onParty, onPlay, onRev
           {provisional ? (
             <p className="votingAidNotice" role="note">
               <strong>Resultado provisional.</strong> Con menos de {MIN_ANSWERS_FOR_RANKING} respuestas el orden baila mucho.
+            </p>
+          ) : tied.length > 1 ? (
+            <p className="votingAidNotice votingAidNotice--info" role="note">
+              <strong>Empate técnico.</strong> {listJoin(tied.map((r) => r.label))} quedan a menos de {Math.round(TIE_MARGIN * 100)} puntos
+              del primero: con {answeredCount} respuestas esa diferencia no dice mucho. Responde más para separarlos.
             </p>
           ) : null}
           {omnibusAnswered > 0 ? (
@@ -1924,7 +1977,7 @@ export default function VotingAidClient({ snapshot, startStatementId = null, ver
   return (
     <main className="shell staticRoute votingAid" ref={topRef}>
       <Toast toast={toast} />
-      <VersionBanner version={version} />
+      <VersionBanner onIntro={view === "intro"} version={version} />
       {staleShare ? (
         <p className="votingAidNotice" role="note">
           Este enlace compartido es de otra versión del test. Ábrelo en:{" "}
@@ -1976,9 +2029,15 @@ export default function VotingAidClient({ snapshot, startStatementId = null, ver
             <RankBadge count={answeredCount} />
             <span className="votingAidHud__stats">
               <span title="Respuestas seguidas sin saltar">🔥 {state.streak || 0}</span>
-              <span className="votingAidMuted">
-                {answeredCount}/{questions.length}
-              </span>
+              {curatedLeft ? (
+                <span className="votingAidMuted" title="Temas clave respondidos">
+                  {curatedTotal - curatedLeft}/{curatedTotal}
+                </span>
+              ) : (
+                <span className="votingAidMuted" title="Preguntas respondidas">
+                  {answeredCount}/{questions.length}
+                </span>
+              )}
             </span>
           </div>
           <ProgressBar

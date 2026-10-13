@@ -58,6 +58,25 @@ body {
   flex: 0 0 auto;
 }
 
+.breadcrumbs > ol > li + li::before {
+  content: "›";
+  margin-right: 10px;
+  color: var(--ink-muted);
+}
+
+.breadcrumbs a {
+  color: var(--accent-3);
+  text-underline-offset: 2px;
+}
+
+.site-breadcrumbs__current {
+  color: var(--ink-soft);
+}
+
+.site-breadcrumbs--narrow {
+  width: min(1040px, calc(100% - 32px));
+}
+
 .voting-aid-banner {
   background: var(--accent-3);
   color: #fff;
@@ -1090,6 +1109,20 @@ h1 {
   display: grid;
   gap: 5px;
   min-width: 0;
+}
+
+/* Long official titles (whole law names) stop after three lines; the full title is in the tooltip. */
+.staticRouteList__clamp {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+/* The citizen pages share the voting aid's column instead of the 1600px dashboard width. */
+.shell.staticRouteCitizen,
+.shell.staticRouteCitizenLeaderboard {
+  max-width: 1040px;
 }
 
 .staticRouteList__item:first-child {
@@ -6256,6 +6289,7 @@ body:has(.responsibility-article) > .breadcrumbs {
   font-size: 1.1rem;
   line-height: 1.5;
   margin: 0 0 16px;
+  max-width: 72ch;
 }
 
 .votingAidMuted {
@@ -6288,6 +6322,13 @@ body:has(.responsibility-article) > .breadcrumbs {
   line-height: 1.45;
 }
 
+/* Desktop: the four facts as a 2×2 grid instead of four thin full-width rows. */
+@media (min-width: 901px) {
+  .votingAidIntro .votingAidFacts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 .votingAidNotice {
   border-left: 4px solid var(--accent);
   background: var(--card);
@@ -6311,6 +6352,13 @@ body:has(.responsibility-article) > .breadcrumbs {
   padding: 10px 16px;
   min-height: 44px;
   cursor: pointer;
+}
+
+/* Links styled as buttons (e.g. «Haz el test») look like the real buttons, not underlined text. */
+a.votingAidButton {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
 }
 
 .votingAidButton:hover:not(:disabled) {
@@ -6347,6 +6395,12 @@ body:has(.responsibility-article) > .breadcrumbs {
   cursor: pointer;
   font: inherit;
   font-size: 0.9rem;
+}
+
+/* Plain text links share the navy of the link-buttons next to them (not the browser's default blue). */
+.votingAid a:not([class]) {
+  color: var(--accent-3);
+  text-underline-offset: 2px;
 }
 
 .votingAid button:focus-visible,
@@ -6506,6 +6560,24 @@ body:has(.responsibility-article) > .breadcrumbs {
   align-items: center;
   gap: 8px 16px;
   margin-top: 14px;
+}
+
+/* Desktop: answers sit right under the statement, in the flow; the evidence follows below a divider. */
+.votingAidCard--answersFirst .votingAidAnswers {
+  position: static;
+  margin: 0;
+  padding: 0;
+  background: none;
+  backdrop-filter: none;
+}
+
+.votingAidCard--answersFirst .votingAidQuestion__extras {
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+}
+
+.votingAidCard--answersFirst .votingAidVoted {
+  margin: 18px 0 0;
 }
 
 .votingAidImportant {
@@ -6709,6 +6781,8 @@ body:has(.responsibility-article) > .breadcrumbs {
   display: flex;
   gap: 16px;
   flex-wrap: wrap;
+  align-items: baseline;
+  font-size: 0.9rem;
 }
 
 .votingAidMark {
@@ -6844,6 +6918,7 @@ body:has(.responsibility-article) > .breadcrumbs {
 
 .votingAidHud__stats {
   display: inline-flex;
+  align-items: baseline;
   gap: 14px;
   font-weight: 600;
   font-family: var(--mono);
@@ -7451,6 +7526,11 @@ body:has(.responsibility-article) > .breadcrumbs {
   margin-top: 10px;
 }
 
+/* In the per-party list it is one more action of the row above, not a new block. */
+.votingAidBreakdown .votingAidAskAiToggle {
+  margin-top: 0;
+}
+
 .votingAidAskAi {
   margin-top: 6px;
   padding: 12px 14px;
@@ -7937,9 +8017,15 @@ body:has(.responsibility-article) > .breadcrumbs {
 }
 
 /* Voting-aid methodology page (/citizen/vota/metodologia/) */
+/* Same column as the rest of the voting aid; running text keeps a readable measure inside it. */
 .vaMethod {
-  max-width: 920px;
+  max-width: 1040px;
   line-height: 1.55;
+}
+
+.vaMethod p,
+.vaMethod__list {
+  max-width: 80ch;
 }
 
 .vaMethod h2 {
@@ -8130,6 +8216,11 @@ body:has(.responsibility-article) > .breadcrumbs {
   margin: 28px 0 8px;
 }
 
+/* The axis title opens its card: the card padding is enough space above it. */
+.atlas .atlasAxis__title {
+  margin: 0 0 4px;
+}
+
 .atlasFacts--grid {
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
 }
@@ -8151,6 +8242,14 @@ body:has(.responsibility-article) > .breadcrumbs {
 
 .atlasTopics {
   flex: 1 1 100%;
+}
+
+/* Desktop: every topic visible (wrapping) instead of a strip that silently clips the last one. */
+@media (min-width: 901px) {
+  .atlasTopics {
+    flex-wrap: wrap;
+    overflow-x: visible;
+  }
 }
 
 .atlasTopics button[aria-selected="true"] {
@@ -8460,8 +8559,9 @@ body:has(.responsibility-article) > .breadcrumbs {
 }
 
 @media (min-width: 900px) {
+  /* Wide enough for «Coalición Canaria» without an ellipsis. */
   .atlasAxis .atlasBar {
-    grid-template-columns: 110px minmax(0, 1fr) 48px 290px;
+    grid-template-columns: 150px minmax(0, 1fr) 48px 290px;
     grid-template-areas: "label track value sub";
   }
 }

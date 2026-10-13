@@ -11,8 +11,10 @@ import {
   classifiedById,
   directionText,
   filterPeople,
+  formatCount,
   formatDate,
   groupLabel,
+  groupShortLabel,
   indexAtlas,
   LEG_LABELS,
   officialVoteUrl,
@@ -60,7 +62,7 @@ function useJson(path) {
 function partyLabel(person, partiesById) {
   if (person.party_id) return partiesById[person.party_id]?.label || person.party_id;
   const onlyEarlier = (person.legislatures || []).every((lg) => lg !== "15");
-  if (onlyEarlier) return `${groupLabel(person.last_group)} (${(person.legislatures || []).map((lg) => LEG_LABELS[lg] || lg).join(", ")})`;
+  if (onlyEarlier) return `${groupShortLabel(person.last_group)} (${(person.legislatures || []).map((lg) => LEG_LABELS[lg] || lg).join(", ")})`;
   return person.last_group === "GMx" ? "Grupo Mixto (sin partido de papeleta)" : groupLabel(person.last_group);
 }
 
@@ -166,7 +168,7 @@ function PersonView({ person, people, atlas, partiesById, onBack }) {
       <ul className="votingAidFacts atlasFacts atlasFacts--grid">
         <li>
           <strong>{percent(person.participation)}</strong>
-          <span className="votingAidMuted"> de participación ({person.seated.toLocaleString("es-ES")} votaciones)</span>
+          <span className="votingAidMuted"> de participación ({formatCount(person.seated)} votaciones)</span>
         </li>
         <li>
           <strong>{percent1(person.loyalty)}</strong>
@@ -176,11 +178,11 @@ function PersonView({ person, people, atlas, partiesById, onBack }) {
             {!person.party_id && person.party_history?.length
               ? ` (mientras estuvo en ${person.party_history.map((p) => partiesById[p]?.label || p).join(", ")})`
               : ""}{" "}
-            ({(person.loyalty_votes || 0).toLocaleString("es-ES")} votaciones)
+            ({formatCount(person.loyalty_votes || 0)} votaciones)
           </span>
         </li>
         <li>
-          <strong>{(person.rebels || []).length.toLocaleString("es-ES")}</strong>
+          <strong>{formatCount((person.rebels || []).length)}</strong>
           <span className="votingAidMuted"> votos distintos de su {(person.legislatures || []).includes("15") ? "partido" : "grupo"}</span>
         </li>
       </ul>
