@@ -17,6 +17,7 @@ export const CLASSIFICATIONS_SEED = "etl/data/seeds/vote_atlas_classifications_v
 export const TEXTS_SEED = "etl/data/seeds/vote_atlas_texts_v1.json";
 export const ATLAS_PROMPTS_DIR = "docs/etl/sprints/VOTE-ATLAS-20261013/prompts";
 export const ATLAS_QA = "docs/etl/sprints/VOTE-ATLAS-20261013/evidence/vote-atlas-classification-agreement.json";
+export const ATLAS_QA_XIV = "docs/etl/sprints/VOTE-ATLAS-20261013/evidence/vote-atlas-classification-agreement-xiv.json";
 export const SENADO_EVIDENCE = "docs/etl/sprints/VOTE-ATLAS-20261013/evidence/senado-votos-por-senador-probe-20261013.md";
 export const BULLETS_SEED = "etl/data/seeds/voting_aid_vote_bullets_v1.json";
 

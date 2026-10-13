@@ -4,6 +4,7 @@ import { MIN_ANSWERS_FOR_RANKING } from "../votingAidModel.mjs";
 import { VOTING_AID_VERSIONS, formatReleased } from "../votingAidVersions.mjs";
 import {
   ATLAS_QA,
+  ATLAS_QA_XIV,
   AXES_SEED,
   BULLETS_SEED,
   CLASSIFICATIONS_SEED,
@@ -68,6 +69,7 @@ export default function VotingAidMethodologyPage() {
   const am = m.atlasMeta || {};
   const cov = am.coverage || {};
   const qa = am.review?.qa || {};
+  const qa14 = am.review?.qa_by_legislature?.["14"] || {};
   const pct = (x) => (Number.isFinite(x) ? `${Math.round(x * 100)} %` : "—");
   const individualParties = (m.seed.parties || []).filter((p) => !p.group_codes?.length);
 
@@ -297,7 +299,15 @@ export default function VotingAidMethodologyPage() {
           <li>
             <strong>Final de la XIV legislatura (desde el {am.earlier_legislatures?.["14"]?.since || "1 de octubre de 2022"}):</strong>{" "}
             {fmt(am.earlier_legislatures?.["14"]?.events_total)} votaciones más, con el mismo método (textos enlazados y{" "}
-            {fmt(am.earlier_legislatures?.["14"]?.by_status?.con_eje)} clasificadas con eje), para cubrir los últimos cuatro años. Solo
+            {fmt(am.earlier_legislatures?.["14"]?.by_status?.con_eje)} clasificadas con eje), para cubrir los últimos cuatro años.
+            {qa14.votes_compared ? (
+              <>
+                {" "}
+                Su propia muestra de control a ciegas ({fmt(qa14.votes_compared)} votaciones al azar, reclasificadas por otros 2
+                subagentes): {pct(qa14.same_primary_axis)} mismo eje principal y {pct(qa14.same_sign_when_axis_shared)} mismo sentido
+                cuando coinciden en el eje (<Code rel={ATLAS_QA_XIV} />).
+              </>
+            ) : null} Solo
             cuentan en la ficha de cada diputado/a: los grupos de entonces (Unidas Podemos, Ciudadanos, Plural…) no equivalen a los partidos
             de la papeleta de hoy, así que el mapa por partidos y el test usan solo la XV. En la XIV, «votar distinto» se mide frente a su
             grupo parlamentario, salvo los grupos Mixto y Plural, que reunían a varios partidos. Una misma persona en las dos legislaturas

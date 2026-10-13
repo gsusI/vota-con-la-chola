@@ -557,7 +557,7 @@ def cmd_merge(args: argparse.Namespace) -> int:
         "schema_version": "vote_atlas_classifications_v1",
         "review": {
             # Quality checks measured on earlier merges stay attached to the seed.
-            **{k: previous_review[k] for k in ("qa", "agreement") if k in previous_review},
+            **{k: previous_review[k] for k in ("qa", "agreement", "qa_by_legislature") if k in previous_review},
             "status": "agent_classified",
             "classified_by": sorted(classifiers),
             "model": args.model,
@@ -629,7 +629,7 @@ def cmd_qa(args: argparse.Namespace) -> int:
         for item in json.loads(f.read_text(encoding="utf-8")).get("items") or []:
             second[item["vote_event_id"]] = item
     result = {"generated_at": datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
-              "method": "Muestra aleatoria (semilla 20261013) reclasificada por otros agentes sin ver la primera clasificación.",
+              "method": f"Muestra aleatoria (semilla {args.sample_seed}) reclasificada por otros agentes sin ver la primera clasificación.",
               **agreement(main_cls, second)}
     Path(args.out).parent.mkdir(parents=True, exist_ok=True)
     Path(args.out).write_text(json.dumps(result, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
@@ -670,6 +670,7 @@ def main(argv: list[str] | None = None) -> int:
     qa.add_argument("--classifications", default=str(BASE_DIR / "etl/data/seeds/vote_atlas_classifications_v1.json"))
     qa.add_argument("--qa-dir", required=True)
     qa.add_argument("--out", required=True)
+    qa.add_argument("--sample-seed", default="20261013", help="Semilla con la que se sacó la muestra (se anota en la evidencia)")
     args = parser.parse_args(argv)
     return {"link-texts": cmd_link_texts, "units": cmd_units, "merge": cmd_merge, "qa": cmd_qa}[args.cmd](args)
 
