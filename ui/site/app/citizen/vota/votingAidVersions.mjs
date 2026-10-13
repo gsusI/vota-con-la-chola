@@ -15,7 +15,7 @@ export const VOTING_AID_VERSIONS = [
     seedFrom: "v1",
     released: "2026-10-13",
     label: "Por temas",
-    summary: "29 preguntas clave que resumen 784 votaciones, cada una divisible en votaciones concretas",
+    summary: "29 preguntas clave que resumen 1.023 votaciones, cada una divisible en votaciones concretas",
   },
   {
     id: "v1",
