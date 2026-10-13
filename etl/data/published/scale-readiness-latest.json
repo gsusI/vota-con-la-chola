@@ -1,13 +1,13 @@
 {
   "failure": {
     "kind": "readiness_validation_failed",
-    "reason": "document native_validation contract version mismatch"
+    "reason": "document local origin and clean-restore contract failed"
   },
   "foundation": {
     "meaning": "Current evidence validation failed; no prior readiness result remains authoritative.",
     "ready": false
   },
-  "generated_at": "2026-10-12T17:39:12.298869Z",
+  "generated_at": "2026-10-13T08:53:08.143514Z",
   "policy": {
     "classification_never_suppresses_public_domain_identity": true,
     "generated_test_records_count_toward_readiness": false,

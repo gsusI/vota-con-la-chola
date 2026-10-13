@@ -16,6 +16,7 @@
     "text_cas_checksums_and_character_counts_match": true,
     "text_cas_inventory_is_exact_across_retained_generations": true,
     "xlsx_formula_validation_not_overclaimed": true,
+    "xlsx_public_phonetic_annotations_replayed_exactly": true,
     "xlsx_raw_to_cas_semantic_replay_has_no_failures": true
   },
   "diagnostics": {
@@ -25,23 +26,23 @@
     "text_error_samples": [],
     "xlsx_raw_to_cas_error_samples": []
   },
-  "extraction_algorithm_version": "document_extraction_v3_pdf_markup_xlsx_public_values",
-  "generated_at": "2026-08-30T19:24:12.553678Z",
+  "extraction_algorithm_version": "document_extraction_v4_pdf_markup_xlsx_phonetic_bounded",
+  "generated_at": "2026-10-13T08:25:46.001635Z",
   "inputs": {
     "extraction_report": {
-      "bytes": 4968,
+      "bytes": 5491,
       "path": "docs/etl/sprints/SCALE-FOUNDATION-20260810/evidence/real-document-text-extraction.json",
-      "sha256": "e897f28e3c9027ccb0ab362ae8254d5b85220a039a92df89688b914ab00be4a1"
+      "sha256": "093a32696d149de95a810a9180fbe96b2184ab37744dbe9a77ac66090dc1a2a9"
     },
     "inventory": {
       "path": "etl/data/manifests/real-document-format-inventory.jsonl",
-      "sha256": "6c95663e7952f31125b9f9179689d30671857a1f6d360c67e5639bb3337fcedf"
+      "sha256": "f3174670b45b9e2a06c4d1dd64b375e114362a615c479d0f09738cc3d14ffec7"
     },
     "manifest": {
       "bytes": 5423,
       "path": "etl/data/published/real-document-text-manifest-latest.jsonl",
       "rows": 122653,
-      "sha256": "ae41313c9de9e071191ceb1802b148f5f5409a4ad234f9a015826c79ddf439d0"
+      "sha256": "14d4eba78df49a291fdfff6f7d637773b699f78db8b71c56d9b634dd77a03cec"
     },
     "provenance": {
       "path": "etl/data/manifests/real-document-provenance-files.jsonl",
@@ -56,9 +57,10 @@
     "pdf_plain_text_angle_brackets_retained": true,
     "synthetic_or_mock_records_counted": false,
     "xlsx_formula_validation_status": "not_observed_in_real_cohort",
-    "xlsx_raw_to_cas_independent_parser": "openpyxl_read_only_semantic_replay"
+    "xlsx_public_phonetic_annotations_independently_replayed": true,
+    "xlsx_raw_to_cas_independent_parser": "openpyxl_semantic_plus_independent_openxml_phonetic_replay_v2"
   },
-  "schema_version": "real_document_text_validation_v1",
+  "schema_version": "real_document_text_validation_v2",
   "status": "ok",
   "totals": {
     "distinct_content_objects": 120801,
@@ -70,7 +72,7 @@
     "provenance_gap_instances": 113,
     "public_url_instances": 122540,
     "raw_files_checksum_verified": 122653,
-    "retained_native_generation_manifests_checked": 4,
+    "retained_native_generation_manifests_checked": 5,
     "retained_superseded_text_cas_objects_checksum_verified": 6,
     "text_cas_files_expected_across_retained_generations": 119352,
     "text_cas_files_observed": 119346,
@@ -82,13 +84,17 @@
     "xlsx_formula_cells_observed_in_real_cohort": 0,
     "xlsx_nonempty_cells_raw_to_cas_replayed": 28615639,
     "xlsx_nonempty_rows_raw_to_cas_replayed": 2827577,
+    "xlsx_phonetic_annotations_observed_in_real_cohort": 0,
+    "xlsx_phonetic_annotations_raw_to_cas_replayed": 0,
     "xlsx_worksheets_raw_to_cas_replayed": 44
   },
   "validation_scope": {
     "batch_size": 128,
     "full_raw_file_instance_checksums": true,
     "workers": 12,
-    "xlsx_raw_to_cas_validator": "openpyxl_read_only_semantic_replay",
+    "xlsx_raw_to_cas_fetch_batch_rows": 4,
+    "xlsx_raw_to_cas_max_in_flight": 4,
+    "xlsx_raw_to_cas_validator": "openpyxl_semantic_plus_independent_openxml_phonetic_replay_v2",
     "xlsx_raw_to_cas_validator_version": "3.1.5",
     "xlsx_raw_to_cas_workers": 2
   }
