@@ -1380,7 +1380,15 @@ function revealMessage(answer, reactions, topBefore) {
 
 const fillPct = (f) => `${Math.round(f * 100)}%`;
 
-/** «A medias» pills fill green (for) / grey (abstention) / red (against) in proportion to how the party voted. */
+/** Diverging fill: abstention grey centred on the pill, «for» green to its left, «against» red to its right, all in
+    proportion and scaled so the longer side reaches the edge. */
+function mixStops({ yes, abstain, no }) {
+  const scale = 0.5 / Math.max(yes + abstain / 2, no + abstain / 2);
+  const at = (f) => `${(50 + f * scale * 100).toFixed(1)}%`;
+  return { "--l": at(-(yes + abstain / 2)), "--a0": at(-abstain / 2), "--a1": at(abstain / 2), "--r": at(no + abstain / 2) };
+}
+
+/** «A medias» pills show how the party voted: green (for) / grey (abstention, centred) / red (against). */
 function ReactionGroup({ kind, label, parties }) {
   if (!parties.length) return null;
   return (
@@ -1399,7 +1407,7 @@ function ReactionGroup({ kind, label, parties }) {
             <li
               className={`votingAidChip${mix ? " votingAidChip--mix" : ""}`}
               key={p.party_id}
-              style={mix ? { "--yes": fillPct(mix.yes), "--abst": fillPct(mix.yes + mix.abstain) } : undefined}
+              style={mix ? mixStops(mix) : undefined}
               title={title.length ? title.join(". ") : undefined}
             >
               {p.label}

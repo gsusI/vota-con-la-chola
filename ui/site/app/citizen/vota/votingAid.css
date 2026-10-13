@@ -1073,9 +1073,11 @@ a.votingAidButton {
 .votingAidChip--mix {
   background: linear-gradient(
     to right,
-    #bfe5cc 0 var(--yes),
-    #dfe1e5 var(--yes) var(--abst),
-    #f4c6bc var(--abst) 100%
+    #fff 0 var(--l),
+    #bfe5cc var(--l) var(--a0),
+    #dfe1e5 var(--a0) var(--a1),
+    #f4c6bc var(--a1) var(--r),
+    #fff var(--r) 100%
   );
 }
 
