@@ -433,9 +433,34 @@ export function partyReactions(question, answer, parties) {
     const score = Number.isFinite(cell.score) ? cell.score : null;
     const kind = agreementKind(answer, position, score);
     const bucket = kind === "match" ? "with" : kind === "clash" ? "against" : kind === "partial" ? "partial" : "none";
-    out[bucket].push({ ...p, position, score });
+    out[bucket].push({ ...p, position, score, mix: voteMix(question, p.party_id) });
   }
   return out;
+}
+
+/** A party's split behind a question as fractions { yes, abstain, no }: deputies for one vote, votes for an axis
+    («yes» = voted the way that supports the statement; split party votes count as abstain). Null without data. */
+export function voteMix(question, partyId) {
+  let yes = 0;
+  let no = 0;
+  let abstain = 0;
+  const counts = question?.counts?.[partyId];
+  if (Array.isArray(counts)) [yes, no, abstain] = counts.map((n) => Number(n) || 0);
+  else if (question?.axis_id) {
+    const i = Object.keys(question.cells || {}).indexOf(partyId); // vote codes follow the cells' party order
+    for (const v of i < 0 ? [] : question.votes || []) {
+      const code = String(v.parties || "")[i];
+      if (code === "S" || code === "N") (code === "S") === (v.agree_vote !== "No") ? yes++ : no++;
+      else if (code === "A" || code === "=") abstain++;
+    }
+  } else {
+    const position = question?.cells?.[partyId]?.position;
+    if (position === "agree") yes = 1;
+    else if (position === "disagree") no = 1;
+    else if (position === "abstain" || position === "mixed") abstain = 1;
+  }
+  const total = yes + no + abstain;
+  return total ? { yes: yes / total, abstain: abstain / total, no: no / total } : null;
 }
 
 /** Split a party's score details into match / partial / clash / none lists. */

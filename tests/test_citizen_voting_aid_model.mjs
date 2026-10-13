@@ -148,6 +148,23 @@ test("endless mode: merged questions, balanced order, share v2, milestones, reac
   const parties = ["a", "b", "c", "d"].map((id) => ({ party_id: id, label: id }));
   const r = m.partyReactions(q, "agree", parties);
   assert.deepEqual([r.with.map((p) => p.party_id), r.against.map((p) => p.party_id), r.partial.map((p) => p.party_id), r.none.map((p) => p.party_id)], [["a"], ["b"], ["c"], ["d"]]);
+  assert.deepEqual(r.partial[0].mix, { yes: 0, abstain: 1, no: 0 });
+
+  // Pill fill: deputies for one vote; for an axis, votes counted in the direction that supports the statement.
+  assert.deepEqual(m.voteMix({ counts: { a: [2, 1, 1] } }, "a"), { yes: 0.5, abstain: 0.25, no: 0.25 });
+  const axis = {
+    axis_id: "x",
+    cells: { a: {}, b: {} },
+    votes: [
+      { parties: "SN", agree_vote: "Sí" },
+      { parties: "SA", agree_vote: "No" },
+      { parties: "N=", agree_vote: "No" },
+      { parties: "S", agree_vote: "Sí" },
+    ],
+  };
+  assert.deepEqual(m.voteMix(axis, "a"), { yes: 0.75, abstain: 0, no: 0.25 });
+  assert.deepEqual(m.voteMix(axis, "b"), { yes: 0, abstain: 2 / 3, no: 1 / 3 });
+  assert.equal(m.voteMix(axis, "zz"), null);
   const g = m.groupDetails([{ answer: "agree", position: "agree" }, { answer: "agree", position: "disagree" }]);
   assert.equal(g.match.length + g.clash.length, 2);
 });

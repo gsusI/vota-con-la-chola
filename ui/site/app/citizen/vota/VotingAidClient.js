@@ -1344,7 +1344,7 @@ function QuestionCard({ question, parties, answer, important, onAnswer, onSkip, 
             <span className="votingAidMuted votingAidHideMobile">(cuenta doble)</span>
           </button>
           <button className="votingAidLinkButton" onClick={onSkip} type="button">
-            Saltar
+            No lo sé · Saltar
           </button>
         </div>
       </DockWrap>
@@ -1378,6 +1378,9 @@ function revealMessage(answer, reactions, topBefore) {
   return { emoji: "⚖️", text: "Tema que divide: el Congreso se partió en dos." };
 }
 
+const fillPct = (f) => `${Math.round(f * 100)}%`;
+
+/** «A medias» pills fill green (for) / grey (abstention) / red (against) in proportion to how the party voted. */
 function ReactionGroup({ kind, label, parties }) {
   if (!parties.length) return null;
   return (
@@ -1386,12 +1389,24 @@ function ReactionGroup({ kind, label, parties }) {
         <AgreementMark kind={kind} /> {label}
       </p>
       <ul className="votingAidChips">
-        {parties.map((p) => (
-          <li className="votingAidChip" key={p.party_id} title={scorePercent(p.score) === null ? undefined : "Porcentaje de su empuje en el sentido de la afirmación"}>
-            {p.label}
-            {scorePercent(p.score) === null ? "" : <span className="votingAidMuted"> {scorePercent(p.score)} %</span>}
-          </li>
-        ))}
+        {parties.map((p) => {
+          const mix = kind === "partial" ? p.mix : null;
+          const title = [
+            scorePercent(p.score) === null ? null : "Porcentaje de su empuje en el sentido de la afirmación",
+            mix ? `${fillPct(mix.yes)} a favor · ${fillPct(mix.abstain)} abstención · ${fillPct(mix.no)} en contra` : null,
+          ].filter(Boolean);
+          return (
+            <li
+              className={`votingAidChip${mix ? " votingAidChip--mix" : ""}`}
+              key={p.party_id}
+              style={mix ? { "--yes": fillPct(mix.yes), "--abst": fillPct(mix.yes + mix.abstain) } : undefined}
+              title={title.length ? title.join(". ") : undefined}
+            >
+              {p.label}
+              {scorePercent(p.score) === null ? "" : <span className="votingAidMuted"> {scorePercent(p.score)} %</span>}
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
@@ -1836,6 +1851,7 @@ function ResultsView({ results, answeredCount, fromShare, onParty, onPlay, onRev
             desacuerdo −1.
           </li>
           <li>Coincidencia por pregunta = 1 − |tú − partido| / 2. «Me importa mucho» cuenta doble. Sin datos del partido, no cuenta.</li>
+          <li>Si dudas, salta: «Me da igual» cuenta como neutral (coincide con quien se abstuvo); una pregunta saltada no cuenta.</li>
           <li>
             En el modo infinito, «Sí» significa apoyar lo votado (tramitar la ley, convalidar el decreto, aprobar la moción). Se alternan
             votaciones donde el «sí» favorece a bloques distintos y se oculta quién lo propuso hasta que respondes.

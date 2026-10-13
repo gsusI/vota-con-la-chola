@@ -7325,6 +7325,15 @@ a.votingAidButton {
   font-size: 0.9rem;
 }
 
+.votingAidChip--mix {
+  background: linear-gradient(
+    to right,
+    #bfe5cc 0 var(--yes),
+    #dfe1e5 var(--yes) var(--abst),
+    #f4c6bc var(--abst) 100%
+  );
+}
+
 .votingAidLinksRow {
   margin: 4px 0;
 }
