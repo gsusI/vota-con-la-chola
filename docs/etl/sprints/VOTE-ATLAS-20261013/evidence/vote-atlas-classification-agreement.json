@@ -1,0 +1,83 @@
+{
+ "generated_at": "2026-10-13T08:38:00+00:00",
+ "method": "Muestra aleatoria (semilla 20261013) reclasificada por otros agentes sin ver la primera clasificación.",
+ "votes_compared": 150,
+ "same_has_axis": 0.96,
+ "same_primary_axis": 0.922,
+ "axis_overlap": 0.974,
+ "same_sign_when_axis_shared": 1.0,
+ "scored_primary_axis_found_in_second": 0.989,
+ "scored_primary_same_sign": 1.0,
+ "counts": {
+  "n": 150,
+  "same_has_axis": 144,
+  "both_axis": 116,
+  "same_primary": 107,
+  "overlap": 113,
+  "overlap_same_sign": 113,
+  "scored": 95,
+  "scored_axis_found": 94,
+  "scored_same_sign": 94
+ },
+ "disagreements": [
+  {
+   "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion043/20240530/Votacion008/VOT_20240530120003.json",
+   "type": "axis",
+   "main": [
+    {
+     "axis_id": "control_gobierno",
+     "yes_pushes": "-",
+     "confidence": "media"
+    },
+    {
+     "axis_id": "seguridad_penal",
+     "yes_pushes": "-",
+     "confidence": "baja"
+    }
+   ],
+   "second": [
+    {
+     "axis_id": "anticorrupcion",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    }
+   ]
+  },
+  {
+   "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion188/20260618/Votacion005/VOT_20260618162211.json",
+   "type": "axis",
+   "main": [
+    {
+     "axis_id": "control_gobierno",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    }
+   ],
+   "second": [
+    {
+     "axis_id": "transporte_publico",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    }
+   ]
+  },
+  {
+   "vote_event_id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion029/20240314/Votacion041/VOT_20240314123754.json",
+   "type": "axis",
+   "main": [
+    {
+     "axis_id": "clima_transicion",
+     "yes_pushes": "-",
+     "confidence": "baja"
+    }
+   ],
+   "second": [
+    {
+     "axis_id": "campo_ambiente",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    }
+   ]
+  }
+ ]
+}

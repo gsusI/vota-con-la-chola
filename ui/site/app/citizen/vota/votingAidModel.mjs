@@ -16,9 +16,18 @@ const ANSWER_CODES = { agree: "a", neutral: "n", disagree: "d" };
 const CODE_ANSWERS = { a: "agree", n: "neutral", d: "disagree" };
 const SHARE_PREFIX = "v1.";
 
+/**
+ * Numeric value of a party cell on -1..1: the continuous `score` of a multi-vote statement when present
+ * (how consistently the party pushed towards the statement), else the value of its discrete position.
+ */
+export function cellValue(position, score = null) {
+  if (Number.isFinite(score) && position !== "no_data") return Math.max(-1, Math.min(1, score));
+  return POSITION_VALUES[position];
+}
+
 // Similarity in [0, 1] between a user answer and a party position (both on -1..1).
-function similarity(answer, position) {
-  return 1 - Math.abs(ANSWER_VALUES[answer] - POSITION_VALUES[position]) / 2;
+function similarity(answer, position, score = null) {
+  return 1 - Math.abs(ANSWER_VALUES[answer] - cellValue(position, score)) / 2;
 }
 
 /**
@@ -36,16 +45,18 @@ export function scoreParties(snapshot, answers = {}, important = {}) {
     const details = [];
     for (const st of answered) {
       const answer = answers[st.statement_id];
-      const position = st.cells?.[party.party_id]?.position || "no_data";
+      const cell = st.cells?.[party.party_id] || {};
+      const position = cell.position || "no_data";
+      const score = Number.isFinite(cell.score) ? cell.score : null;
       const weight = important[st.statement_id] ? 2 : 1;
-      if (POSITION_VALUES[position] === undefined) {
-        details.push({ statementId: st.statement_id, answer, position, weight, similarity: null });
+      if (cellValue(position, score) === undefined) {
+        details.push({ statementId: st.statement_id, answer, position, score, weight, similarity: null });
         continue;
       }
-      const sim = similarity(answer, position);
+      const sim = similarity(answer, position, score);
       weighted += sim * weight;
       weightTotal += weight;
-      details.push({ statementId: st.statement_id, answer, position, weight, similarity: sim });
+      details.push({ statementId: st.statement_id, answer, position, score, weight, similarity: sim });
     }
     const compared = details.filter((d) => d.similarity !== null).length;
     return {
@@ -143,13 +154,21 @@ export function themeLabel(statement) {
   return PREFIX_THEMES[prefix] || THEME_LABELS[statement?.concern_id] || "Otros";
 }
 
-/** How a user's answer relates to a party position: match, partial, clash or none (no data). */
-export function agreementKind(answer, position) {
-  if (ANSWER_VALUES[answer] === undefined || POSITION_VALUES[position] === undefined) return "none";
-  const sim = similarity(answer, position);
-  if (sim === 1) return "match";
-  if (sim === 0) return "clash";
+/**
+ * How a user's answer relates to a party position: match, partial, clash or none (no data).
+ * With a continuous score, "match" means the party pushed that way in most votes (similarity ≥ 0.8).
+ */
+export function agreementKind(answer, position, score = null) {
+  if (ANSWER_VALUES[answer] === undefined || cellValue(position, score) === undefined) return "none";
+  const sim = similarity(answer, position, score);
+  if (sim >= 0.8) return "match";
+  if (sim <= 0.2) return "clash";
   return "partial";
+}
+
+/** Share (0-100) of a multi-vote statement's push that went towards it: score -1..1 -> 0..100. */
+export function scorePercent(score) {
+  return Number.isFinite(score) ? Math.round(((score + 1) / 2) * 100) : null;
 }
 
 /** Index of the first unanswered statement at or after `from` (wrapping); -1 when all are answered. */
@@ -175,7 +194,8 @@ export function buildQuestions(snapshot, pool) {
   const curated = (Array.isArray(snapshot?.statements) ? snapshot.statements : []).map((st) => ({
     ...st,
     source: "curated",
-    theme: themeLabel(st),
+    multi: Boolean(st.axis_id),
+    theme: st.theme || themeLabel(st),
   }));
   const items = (Array.isArray(pool?.items) ? pool.items : []).map((it) => ({
     statement_id: it.id,
@@ -197,7 +217,75 @@ export function buildQuestions(snapshot, pool) {
     counts: it.counts,
     cells: Object.fromEntries(Object.entries(it.positions || {}).map(([pid, position]) => [pid, { position }])),
   }));
-  return [...curated, ...items];
+  return [...curated, ...items, ...attachSubQuestions(curated, items)];
+}
+
+// A multi-vote statement can be answered "por partes": a few concrete votes from different initiatives.
+export const MAX_SUB_QUESTIONS = 6;
+const CODE_POSITIONS = { S: "agree", N: "disagree", A: "abstain", "=": "mixed" };
+
+/**
+ * Give each multi-vote statement `subIds` (concrete votes, one per initiative) and return the sub-questions
+ * that are not already pool items. A vote that is also in the endless pool reuses that pool question, so the
+ * same vote is never answered twice. Sub-questions have no tier, so they stay out of the play order.
+ */
+function attachSubQuestions(curated, items) {
+  const poolByVote = new Map(items.map((it) => [it.vote_event_id, it]));
+  const created = [];
+  for (const st of curated) {
+    if (!st.axis_id) continue;
+    const seen = new Set();
+    st.subIds = [];
+    for (const v of st.votes || []) {
+      if (st.subIds.length >= MAX_SUB_QUESTIONS) break;
+      if (!v.summary_yes || seen.has(v.g || v.id)) continue;
+      seen.add(v.g || v.id);
+      const pooled = poolByVote.get(v.vote_event_id);
+      if (pooled) {
+        pooled.parent = pooled.parent || st.statement_id;
+        pooled.parentText = pooled.parentText || st.text;
+        st.subIds.push(pooled.statement_id);
+        continue;
+      }
+      const codes = String(v.parties || "");
+      const cells = {};
+      Object.keys(st.cells || {}).forEach((pid, i) => {
+        cells[pid] = { position: CODE_POSITIONS[codes[i]] || "no_data" };
+      });
+      const sub = {
+        statement_id: `${st.statement_id}~${v.id}`,
+        parent: st.statement_id,
+        parentText: st.text,
+        vote_event_id: v.vote_event_id,
+        source: "pool",
+        text: v.summary_yes,
+        official_title: v.title,
+        question: "¿Habrías votado Sí?",
+        theme: st.theme,
+        kind: v.kind,
+        kind_label: "Votación concreta",
+        vote_date: v.vote_date,
+        approved: v.approved,
+        totals: v.totals,
+        source_url: v.source_url,
+        text_url: v.text_url,
+        cells,
+      };
+      st.subIds.push(sub.statement_id);
+      created.push(sub);
+    }
+  }
+  return created;
+}
+
+/** First unanswered (and not skipped) sub-question of the statements the user chose to split, in that order. */
+export function pendingSubId(questionsById, split = {}, answers = {}, skipped = {}) {
+  for (const parentId of Object.keys(split)) {
+    const parent = questionsById[parentId];
+    const id = (parent?.subIds || []).find((sid) => answers[sid] === undefined && !skipped[sid]);
+    if (id) return id;
+  }
+  return null;
 }
 
 /** Small deterministic PRNG so each visitor gets a stable but personal order. */
@@ -255,10 +343,12 @@ export function nextQuestionId(order, answers = {}, skipped = {}) {
 export function partyReactions(question, answer, parties) {
   const out = { with: [], against: [], partial: [], none: [] };
   for (const p of parties) {
-    const position = question?.cells?.[p.party_id]?.position || "no_data";
-    const kind = agreementKind(answer, position);
+    const cell = question?.cells?.[p.party_id] || {};
+    const position = cell.position || "no_data";
+    const score = Number.isFinite(cell.score) ? cell.score : null;
+    const kind = agreementKind(answer, position, score);
     const bucket = kind === "match" ? "with" : kind === "clash" ? "against" : kind === "partial" ? "partial" : "none";
-    out[bucket].push({ ...p, position });
+    out[bucket].push({ ...p, position, score });
   }
   return out;
 }
@@ -266,7 +356,7 @@ export function partyReactions(question, answer, parties) {
 /** Split a party's score details into match / partial / clash / none lists. */
 export function groupDetails(details = []) {
   const out = { match: [], partial: [], clash: [], none: [] };
-  for (const d of details) out[agreementKind(d.answer, d.position)].push(d);
+  for (const d of details) out[agreementKind(d.answer, d.position, d.score)].push(d);
   return out;
 }
 
@@ -353,6 +443,9 @@ export function podiumShareText(results, answeredCount, url) {
 
 const POSITION_WORDS = { agree: "a favor (Sí)", disagree: "en contra (No)", abstain: "abstención", mixed: "votos divididos", no_data: "sin datos" };
 
+// Multi-vote statements can rest on 80+ votes: the AI prompt lists the most recent ones and says how many.
+const MAX_PROMPT_VOTES = 6;
+
 function voteLines(question, parties) {
   // One block per roll-call vote behind the question, with each party's majority vote and counts.
   const votes =
@@ -373,6 +466,23 @@ function voteLines(question, parties) {
             ),
           },
         ]
+      : question.axis_id
+      ? (question.votes || []).slice(0, MAX_PROMPT_VOTES).map((v) => ({
+          title: v.summary_yes ? `${v.summary_yes} (${v.title}${v.subgroup ? `, ${v.subgroup}` : ""})` : v.title,
+          date: v.vote_date,
+          totals: v.totals,
+          approved: v.approved,
+          source_url: v.source_url,
+          text_url: v.text_url,
+          agree_vote: v.agree_vote,
+          party: Object.fromEntries(
+            parties.map((p, i) => {
+              const code = String(v.parties || "")[i];
+              const raw = code === "S" ? "Sí" : code === "N" ? "No" : code === "A" ? "Abstención" : null;
+              return [p.party_id, raw ? { position: raw === v.agree_vote ? "agree" : raw === "Abstención" ? "abstain" : "disagree", raw } : { position: "no_data" }];
+            }),
+          ),
+        }))
       : (question.votes || []).map((v) => ({
           title: v.title,
           date: v.vote_date,
@@ -438,6 +548,20 @@ export function buildAiPrompt(question, parties = [], { mode = "why", partyId = 
   }
   if (question.source === "curated") lines.push("", `Tema planteado: «${question.text}»`);
   if (question.source === "curated" && question.context) lines.push(`Contexto: ${question.context}`);
+  if (question.axis_id && question.votes_total) {
+    lines.push(
+      `Esta afirmación resume ${question.votes_total} votaciones del Congreso (XV legislatura); abajo van las ${Math.min(MAX_PROMPT_VOTES, question.votes_total)} más recientes.`,
+    );
+    if (mode !== "explain") {
+      const dir = parties
+        .map((p) => {
+          const pct = scorePercent(question.cells?.[p.party_id]?.score);
+          return pct === null ? null : `${p.label}: ${pct} %`;
+        })
+        .filter(Boolean);
+      if (dir.length) lines.push(`Cuánto empujó cada partido en el sentido de la afirmación (0 % = siempre en contra, 100 % = siempre a favor): ${dir.join("; ")}`);
+    }
+  }
   votes.forEach((v, i) => {
     lines.push("");
     lines.push(votes.length > 1 ? `Votación ${i + 1}:` : "Votación:");
@@ -500,6 +624,8 @@ export function aiLinks(prompt) {
 
 function questionVoteIds(question) {
   if (question.source === "pool") return question.vote_event_id ? [question.vote_event_id] : [];
+  // Multi-vote statements summarise dozens of votes: their evidence is the vote list, not per-vote bullets.
+  if (question.axis_id) return [];
   return (question.votes || []).map((v) => v.vote_event_id);
 }
 

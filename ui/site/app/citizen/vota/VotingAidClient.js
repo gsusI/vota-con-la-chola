@@ -23,14 +23,16 @@ import {
   milestoneFor,
   nextQuestionId,
   partyReactions,
+  pendingSubId,
   playOrder,
   podiumShareText,
   scoreParties,
+  scorePercent,
   shareCodeFromHash,
 } from "./votingAidModel.mjs";
 
 const ANSWER_ORDER = ["agree", "neutral", "disagree"];
-const EMPTY_STATE = { answers: {}, important: {}, skipped: {}, history: [], seed: 0, streak: 0, bestStreak: 0, showReveal: true, excludeOmnibus: false };
+const EMPTY_STATE = { answers: {}, important: {}, skipped: {}, split: {}, history: [], seed: 0, streak: 0, bestStreak: 0, showReveal: true, excludeOmnibus: false };
 const AGREEMENT_LABELS = { match: "Coincidís", partial: "A medias", clash: "Discrepáis", none: "Sin datos" };
 const AGREEMENT_ICONS = { match: "✓", partial: "≈", clash: "✗", none: "–" };
 const POOL_PATH = "/citizen/data/voting_aid_pool_v1.json";
@@ -41,11 +43,13 @@ const BULLETS_PATH = "/citizen/data/voting_aid_vote_bullets_v1.json";
 // State persistence (local only; ids of questions the page has not loaded are kept, never dropped).
 
 function cleanState(raw) {
-  const out = { ...EMPTY_STATE, answers: {}, important: {}, skipped: {} };
+  const out = { ...EMPTY_STATE, answers: {}, important: {}, skipped: {}, split: {} };
   if (!raw || typeof raw !== "object") return out;
   for (const [id, v] of Object.entries(raw.answers || {})) if (ANSWER_VALUES[v] !== undefined) out.answers[id] = v;
   for (const [id, v] of Object.entries(raw.important || {})) if (v === true && out.answers[id]) out.important[id] = true;
   for (const [id, v] of Object.entries(raw.skipped || {})) if (v === true) out.skipped[id] = true;
+  // Multi-vote statements the user chose to answer "por partes" (their own answer is cleared).
+  for (const [id, v] of Object.entries(raw.split || {})) if (v === true && !out.answers[id]) out.split[id] = true;
   out.history = Array.isArray(raw.history) ? raw.history.filter((id) => out.answers[id]).slice(-500) : Object.keys(out.answers);
   out.seed = Number.isInteger(raw.seed) && raw.seed > 0 ? raw.seed : 0;
   out.streak = Number.isInteger(raw.streak) ? raw.streak : 0;
@@ -97,8 +101,78 @@ function answerLabel(question, answer) {
 // ---------------------------------------------------------------------------
 // Small pieces
 
-function PositionBadge({ position }) {
-  return <span className={`votingAidBadge votingAidBadge--${position}`}>{POSITION_LABELS[position] || position}</span>;
+function PositionBadge({ position, score = null }) {
+  const pct = scorePercent(score);
+  return (
+    <span
+      className={`votingAidBadge votingAidBadge--${position}`}
+      title={pct === null ? undefined : `En el ${pct} % de sus votos empujó en el sentido de la afirmación`}
+    >
+      {POSITION_LABELS[position] || position}
+      {pct === null ? "" : ` · ${pct} %`}
+    </span>
+  );
+}
+
+function axisMapHref(question) {
+  return withBasePath(`/citizen/vota/temas/#eje=${encodeURIComponent(question.axis_id)}`);
+}
+
+/**
+ * Evidence for a multi-vote statement, shown before answering: what kind of votes back it (plain summaries,
+ * dates, official links), never how anyone voted. The full list with party votes lives in the topic map.
+ */
+function AxisEvidence({ question, parties }) {
+  const [shown, setShown] = useState(3);
+  const votes = question.votes || [];
+  return (
+    <section aria-label="Qué se votó" className="votingAidVoted votingAidAxisEvidence">
+      <p className="votingAidVoted__title">
+        <span aria-hidden="true">🗳️</span> Resume <strong>{question.votes_total} votaciones</strong> de {question.initiatives_total}{" "}
+        {question.initiatives_total === 1 ? "iniciativa" : "iniciativas"} en el Congreso. Algunas:
+      </p>
+      <ul className="votingAidVoted__list">
+        {votes.slice(0, shown).map((v) => (
+          <li key={v.id}>
+            {v.agree_vote === "Sí" ? "A favor de: " : "En contra de: "}
+            {v.summary_yes || v.title}{" "}
+            <span className="votingAidVoted__loc">
+              {formatDate(v.vote_date)} ·{" "}
+              <a href={v.source_url} rel="noopener noreferrer" target="_blank">
+                votación
+              </a>
+              {v.text_url ? (
+                <>
+                  {" · "}
+                  <a href={v.text_url} rel="noopener noreferrer" target="_blank">
+                    texto
+                  </a>
+                </>
+              ) : null}
+            </span>
+          </li>
+        ))}
+      </ul>
+      <p className="votingAidVoted__actions">
+        {votes.length > shown ? (
+          <button className="votingAidLinkButton" onClick={() => setShown(Math.min(votes.length, shown + 7))} type="button">
+            Ver más ejemplos
+          </button>
+        ) : null}
+      </p>
+      <p className="votingAidMuted votingAidVoted__src">
+        «A favor de» y «en contra de» indican qué voto cuenta como estar de acuerdo con la afirmación. Qué votación va a cada tema lo
+        decidió una IA leyendo el texto oficial; falta la revisión humana.
+      </p>
+      <AskAiToggle
+        label="¿Quieres más detalle? Que te lo explique una IA"
+        opts={{ mode: "explain" }}
+        parties={parties}
+        question={question}
+        title="Pide una explicación sencilla de lo que se votó (sin decirte qué votó cada partido):"
+      />
+    </section>
+  );
 }
 
 function AgreementMark({ kind }) {
@@ -121,7 +195,9 @@ function ProgressBar({ value, max, label }) {
 
 function QuestionLinks({ question }) {
   const links = [];
-  if (question.source === "pool") {
+  if (question.axis_id) {
+    links.push({ href: axisMapHref(question), label: `Ver las ${question.votes_total} votaciones y cómo votó cada partido`, internal: true });
+  } else if (question.source === "pool") {
     if (question.source_url) links.push({ href: question.source_url, label: "Votación oficial" });
     if (question.text_url) links.push({ href: question.text_url, label: "Texto (BOCG)" });
   } else {
@@ -133,11 +209,17 @@ function QuestionLinks({ question }) {
   if (!links.length) return null;
   return (
     <span className="votingAidLinks">
-      {links.map((l) => (
-        <a href={l.href} key={l.href + l.label} rel="noopener noreferrer" target="_blank">
-          {l.label}
-        </a>
-      ))}
+      {links.map((l) =>
+        l.internal ? (
+          <a href={l.href} key={l.href + l.label}>
+            {l.label}
+          </a>
+        ) : (
+          <a href={l.href} key={l.href + l.label} rel="noopener noreferrer" target="_blank">
+            {l.label}
+          </a>
+        ),
+      )}
     </span>
   );
 }
@@ -306,6 +388,7 @@ function WhatVoted({ question, parties }) {
   const [literalFor, setLiteralFor] = useState(null);
   const [expanded, setExpanded] = useState({});
   const items = question.whatVoted || [];
+  if (question.axis_id) return <AxisEvidence parties={parties} question={question} />;
   const many = items.length > 1;
   // Several votes behind one question: 3 bullets each until expanded, so the answers stay in reach.
   const fold = many ? 3 : 6;
@@ -418,7 +501,8 @@ function Toast({ toast }) {
 // ---------------------------------------------------------------------------
 // Intro
 
-function IntroView({ meta, questionsTotal, poolStatus, parties, answeredCount, onStart, onResults }) {
+function IntroView({ meta, questionsTotal, curatedTotal, poolStatus, parties, answeredCount, onStart, onResults }) {
+  const keyVotes = meta?.quality?.votes_total;
   return (
     <section className="votingAidIntro">
       <p className="votingAidEyebrow">Elecciones generales · Congreso de los Diputados</p>
@@ -441,8 +525,9 @@ function IntroView({ meta, questionsTotal, poolStatus, parties, answeredCount, o
       </div>
       <ul className="votingAidFacts">
         <li>
-          <span aria-hidden="true">🎯</span> <strong>Empieza con 33 temas clave</strong> y sigue en modo infinito con votaciones
-          reales.
+          <span aria-hidden="true">🎯</span> <strong>Empieza con {curatedTotal} preguntas clave</strong>
+          {keyVotes ? `, que resumen ${keyVotes.toLocaleString("es-ES")} votaciones del Congreso,` : ""} y sigue en modo infinito con
+          votaciones reales una a una.
         </li>
         <li>
           <span aria-hidden="true">🗳️</span> <strong>Tras cada respuesta, la revelación:</strong> quién votó como tú, quién en
@@ -457,8 +542,10 @@ function IntroView({ meta, questionsTotal, poolStatus, parties, answeredCount, o
         </li>
       </ul>
       <p className="votingAidNotice" role="note">
-        <strong>Versión en revisión.</strong> Los 33 temas clave aún deben revisarlos personas independientes; las votaciones del
-        modo infinito usan el título oficial tal cual. Úsalo para explorar, no como veredicto.{" "}
+        <strong>Versión en revisión.</strong> Qué votación va a cada pregunta lo decidió una IA leyendo el texto oficial y aún deben
+        revisarlo personas independientes; las votaciones del modo infinito usan el título oficial tal cual. Úsalo para explorar, no
+        como veredicto. <a href={withBasePath("/citizen/vota/temas/")}>Mapa por temas</a> ·{" "}
+        <a href={withBasePath("/citizen/vota/diputados/")}>Tu diputado/a</a> ·{" "}
         <a href={withBasePath("/citizen/vota/metodologia/")}>Cómo se hizo (fuentes, IA y prompts)</a>
       </p>
       <p className="votingAidMuted">Partidos comparados: {parties.map((p) => p.label).join(", ")}.</p>
@@ -524,7 +611,32 @@ function useSwipe(onSwipe, resetKey) {
   return { dx, handlers };
 }
 
-function QuestionCard({ question, parties, answer, important, onAnswer, onSkip, onImportant, showSwipeHint }) {
+function SplitOffer({ question, onSplit, prominent = false }) {
+  const n = question.subIds?.length || 0;
+  if (!n || !onSplit) return null;
+  if (!prominent) {
+    return (
+      <p className="votingAidSplit">
+        <button className="votingAidLinkButton" onClick={onSplit} type="button">
+          ¿Depende? Responde por partes ({n} votaciones concretas)
+        </button>
+      </p>
+    );
+  }
+  return (
+    <div className="votingAidNotice votingAidNotice--info votingAidSplit votingAidSplit--prominent">
+      <p>
+        <strong>¿Te da igual o depende del caso?</strong> Esta pregunta resume {question.votes_total} votaciones. Responde {n} concretas, de
+        iniciativas distintas, y afinamos tu resultado. Tu «neutral» aquí dejará de contar.
+      </p>
+      <button className="votingAidButton" onClick={onSplit} type="button">
+        Responder por partes →
+      </button>
+    </div>
+  );
+}
+
+function QuestionCard({ question, parties, answer, important, onAnswer, onSkip, onImportant, onSplit, showSwipeHint }) {
   const headingRef = useRef(null);
   useEffect(() => {
     headingRef.current?.focus({ preventScroll: true });
@@ -602,7 +714,9 @@ function QuestionCard({ question, parties, answer, important, onAnswer, onSkip, 
           Saltar
         </button>
       </div>
-      {question.source === "curated" && question.context ? (
+      <SplitOffer onSplit={onSplit} question={question} />
+      {question.parent && parentLabel(question) ? <p className="votingAidMuted votingAidSplit">{parentLabel(question)}</p> : null}
+      {question.source === "curated" && question.context && !question.axis_id ? (
         <details className="votingAidDetails">
           <summary>¿Qué se votó en el Congreso?</summary>
           <p>{question.context}</p>
@@ -639,8 +753,9 @@ function ReactionGroup({ kind, label, parties }) {
       </p>
       <ul className="votingAidChips">
         {parties.map((p) => (
-          <li className="votingAidChip" key={p.party_id}>
+          <li className="votingAidChip" key={p.party_id} title={scorePercent(p.score) === null ? undefined : "Porcentaje de su empuje en el sentido de la afirmación"}>
             {p.label}
+            {scorePercent(p.score) === null ? "" : <span className="votingAidMuted"> {scorePercent(p.score)} %</span>}
           </li>
         ))}
       </ul>
@@ -675,7 +790,11 @@ function ShareQuestionButton({ question }) {
   );
 }
 
-function RevealCard({ question, parties, answer, reactions, topBefore, onNext, onChange }) {
+function parentLabel(question) {
+  return question.parentText ? `Parte de: «${question.parentText}»` : null;
+}
+
+function RevealCard({ question, parties, answer, reactions, topBefore, onNext, onChange, onSplit }) {
   const msg = revealMessage(answer, reactions, topBefore);
   const nextRef = useRef(null);
   useEffect(() => {
@@ -691,6 +810,7 @@ function RevealCard({ question, parties, answer, reactions, topBefore, onNext, o
       <p className="votingAidReveal__you">
         Tu respuesta: <strong>{answerLabel(question, answer)}</strong>
       </p>
+      {answer === "neutral" ? <SplitOffer onSplit={onSplit} prominent question={question} /> : null}
       <p className="votingAidReveal__msg">
         <span aria-hidden="true" className="votingAidReveal__emoji">
           {msg.emoji}
@@ -708,10 +828,16 @@ function RevealCard({ question, parties, answer, reactions, topBefore, onNext, o
           {margin !== null && margin <= 6 ? <strong> ¡Por los pelos!</strong> : null}
         </p>
       ) : null}
+      {question.axis_id ? (
+        <p className="votingAidMuted">
+          Según {question.votes_total} votaciones. El porcentaje es cuánto empujó cada partido hacia la afirmación (100 % = siempre a favor,
+          0 % = siempre en contra).
+        </p>
+      ) : null}
       <div className="votingAidReactions">
-        <ReactionGroup kind="match" label="Votaron como tú" parties={reactions.with} />
-        <ReactionGroup kind="partial" label="A medias (abstención o votos divididos)" parties={reactions.partial} />
-        <ReactionGroup kind="clash" label="Votaron lo contrario" parties={reactions.against} />
+        <ReactionGroup kind="match" label={question.axis_id ? "Votaron casi siempre como tú" : "Votaron como tú"} parties={reactions.with} />
+        <ReactionGroup kind="partial" label={question.axis_id ? "A veces sí, a veces no (o abstención)" : "A medias (abstención o votos divididos)"} parties={reactions.partial} />
+        <ReactionGroup kind="clash" label={question.axis_id ? "Votaron casi siempre lo contrario" : "Votaron lo contrario"} parties={reactions.against} />
         <ReactionGroup kind="none" label="Sin datos" parties={reactions.none} />
       </div>
       <p className="votingAidLinksRow">
@@ -891,14 +1017,14 @@ function PartyView({ row, parties, questionsById, onBack, onEdit }) {
             const counts = q.source === "pool" ? q.counts?.[row.partyId] : null;
             return (
               <li key={d.statementId}>
-                <AgreementMark kind={agreementKind(d.answer, d.position)} />
+                <AgreementMark kind={agreementKind(d.answer, d.position, d.score)} />
                 <div className="votingAidBreakdown__body">
                   <p className="votingAidTheme votingAidTheme--small">{q.theme}</p>
                   <p className="votingAidBreakdown__text">{q.text}</p>
                   <ScopeBadges question={q} />
                   <p className="votingAidMuted">
                     Tú: <strong>{answerLabel(q, d.answer)}</strong>
-                    {d.weight > 1 ? " ★" : ""} · {row.label}: <PositionBadge position={d.position} />
+                    {d.weight > 1 ? " ★" : ""} · {row.label}: <PositionBadge position={d.position} score={d.score} />
                     {counts ? ` (${counts[0]} sí · ${counts[1]} no · ${counts[2]} abst.)` : ""}
                   </p>
                   <p className="votingAidBreakdown__actions">
@@ -1228,8 +1354,15 @@ export default function VotingAidClient({ snapshot, startStatementId = null }) {
     toastTimer.current = setTimeout(() => setToast(null), 3200);
   }
 
-  function goPlay(nextId, answers = state.answers, skipped = state.skipped) {
-    const id = nextId || nextQuestionId(order, answers, skipped);
+  function goPlay(nextId, answers = state.answers, skipped = state.skipped, split = state.split) {
+    const id =
+      nextId ||
+      pendingSubId(questionsById, split, answers, skipped) ||
+      nextQuestionId(
+        order.filter((qid) => !split?.[qid]),
+        answers,
+        skipped,
+      );
     setRevealId(null);
     setCurrentId(id);
     setView("play");
@@ -1269,6 +1402,21 @@ export default function VotingAidClient({ snapshot, startStatementId = null }) {
     }
     if (state.showReveal) setRevealId(id);
     else goPlay(nextQuestionId(order, answers, skipped), answers, skipped);
+  }
+
+  /** Answer a multi-vote statement "por partes": clear its own answer and play its concrete votes next. */
+  function splitStatement(id) {
+    const q = questionsById[id];
+    if (!q?.subIds?.length) return;
+    const answers = { ...state.answers };
+    delete answers[id];
+    const important = { ...state.important };
+    delete important[id];
+    const skipped = { ...state.skipped };
+    delete skipped[id];
+    const split = { ...(state.split || {}), [id]: true };
+    update({ ...state, answers, important, skipped, split, history: state.history.filter((h) => h !== id) });
+    goPlay(null, answers, skipped, split);
   }
 
   function skip() {
@@ -1384,7 +1532,7 @@ export default function VotingAidClient({ snapshot, startStatementId = null }) {
   const current = currentId ? questionsById[currentId] : null;
   const revealQuestion = revealId ? questionsById[revealId] : null;
   const partyRow = partyId ? results.find((r) => r.partyId === partyId) : null;
-  const curatedLeft = questions.filter((q) => q.source === "curated" && !state.answers[q.statement_id]).length;
+  const curatedLeft = questions.filter((q) => q.source === "curated" && !state.answers[q.statement_id] && !state.split?.[q.statement_id]).length;
 
   return (
     <main className="shell staticRoute votingAid" ref={topRef}>
@@ -1411,6 +1559,7 @@ export default function VotingAidClient({ snapshot, startStatementId = null }) {
       {view === "intro" ? (
         <IntroView
           answeredCount={answeredCount}
+          curatedTotal={curatedTotal}
           meta={meta}
           onResults={() => show("results")}
           onStart={() => goPlay()}
@@ -1456,6 +1605,7 @@ export default function VotingAidClient({ snapshot, startStatementId = null }) {
                     setRevealId(null);
                   }}
                   onNext={() => goPlay()}
+                  onSplit={() => splitStatement(revealQuestion.statement_id)}
                   parties={parties}
                   question={revealQuestion}
                   reactions={partyReactions(revealQuestion, state.answers[revealQuestion.statement_id], parties)}
@@ -1468,6 +1618,7 @@ export default function VotingAidClient({ snapshot, startStatementId = null }) {
                   onAnswer={answer}
                   onImportant={(v) => setImportant(current.statement_id, v)}
                   onSkip={skip}
+                  onSplit={() => splitStatement(current.statement_id)}
                   parties={parties}
                   question={current}
                   showSwipeHint={answeredCount < 3}

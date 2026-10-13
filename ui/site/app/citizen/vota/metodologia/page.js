@@ -1,7 +1,21 @@
 import Link from "next/link";
 import { withBasePath } from "../../../siteCatalog.mjs";
 import { MIN_ANSWERS_FOR_RANKING } from "../votingAidModel.mjs";
-import { BULLETS_SEED, PROMPTS_DIR, REPO_URL, STATEMENTS_SEED, STATEMENT_REVIEW, loadMethodology, repoLink } from "./methodologyData.mjs";
+import {
+  ATLAS_QA,
+  AXES_SEED,
+  BULLETS_SEED,
+  CLASSIFICATIONS_SEED,
+  PROMPTS_DIR,
+  REPO_URL,
+  SENADO_EVIDENCE,
+  STATEMENTS_SEED,
+  STATEMENTS_SEED_V2,
+  STATEMENT_REVIEW,
+  TEXTS_SEED,
+  loadMethodology,
+  repoLink,
+} from "./methodologyData.mjs";
 
 export const metadata = {
   title: "Cómo se hizo «¿Con quién coincides?» | Vota Con La Chola",
@@ -49,7 +63,11 @@ export default function VotingAidMethodologyPage() {
   const bs = m.bulletStats;
   const ss = m.statementStats;
   const totalQuestions = (quality.statements_total || 0) + (poolMeta.items_total || 0);
-  const sample = m.sampleStatement;
+  const sample = (m.snapshot.statements || [])[0] || null;
+  const am = m.atlasMeta || {};
+  const cov = am.coverage || {};
+  const qa = am.review?.qa || {};
+  const pct = (x) => (Number.isFinite(x) ? `${Math.round(x * 100)} %` : "—");
   const individualParties = (m.seed.parties || []).filter((p) => !p.group_codes?.length);
 
   return (
@@ -76,11 +94,13 @@ export default function VotingAidMethodologyPage() {
         <h2>En 30 segundos</h2>
         <ul className="vaMethod__list">
           <li>
-            <strong>Lo que comparas son votos, no promesas.</strong> Cada pregunta es una o varias votaciones nominales del Congreso
-            (legislatura XV). La posición de un partido es lo que votó la mayoría de sus diputados.
+            <strong>Lo que comparas son votos, no promesas.</strong> Cada pregunta clave resume todas las votaciones nominales del
+            Congreso (legislatura XV) sobre un mismo eje temático —{fmt(quality.votes_total)} votaciones de{" "}
+            {fmt(quality.initiatives_total)} iniciativas en {fmt(quality.statements_total)} preguntas—; la posición de un partido es
+            hacia dónde empujaron sus diputados en todas ellas.
           </li>
           <li>
-            <strong>{fmt(quality.statements_total)} afirmaciones curadas + {fmt(poolMeta.items_total)} votaciones reales</strong> (
+            <strong>{fmt(quality.statements_total)} preguntas clave + {fmt(poolMeta.items_total)} votaciones reales una a una</strong> (
             {fmt(totalQuestions)} preguntas en total), de {poolMeta.votes_first_date || "—"} a{" "}
             {meta.votes_last_date > (poolMeta.votes_last_date || "") ? meta.votes_last_date : poolMeta.votes_last_date || "—"}.
           </li>
@@ -90,7 +110,8 @@ export default function VotingAidMethodologyPage() {
           </li>
           <li>
             <strong>La IA se usó para escribir</strong> (código, redacción de afirmaciones y resúmenes en lenguaje llano del texto
-            oficial) <strong>y para revisar</strong> esos textos contra el BOCG/BOE. Nunca para decidir cómo votó un partido.
+            oficial), <strong>para clasificar</strong> cada votación en un tema leyendo el texto oficial (sin ver los votos){" "}
+            <strong>y para revisar</strong>. Nunca para decidir cómo votó un partido: eso sale de los datos oficiales.
           </li>
           <li>
             <strong>Estado honesto:</strong> todo está revisado por IA, pero{" "}
@@ -101,7 +122,8 @@ export default function VotingAidMethodologyPage() {
         <nav aria-label="Índice" className="vaMethod__toc">
           <a href="#paso-1">1. Datos</a>
           <a href="#paso-2">2. Partidos</a>
-          <a href="#paso-3">3. Afirmaciones</a>
+          <a href="#paso-3">3. Preguntas clave</a>
+          <a href="#mapa">Mapa por temas</a>
           <a href="#paso-4">4. Modo infinito</a>
           <a href="#paso-5">5. Texto oficial</a>
           <a href="#paso-6">6. «Qué se votaba»</a>
@@ -165,39 +187,99 @@ export default function VotingAidMethodologyPage() {
         </ul>
       </Step>
 
-      <Step n={3} title={`Las ${fmt(quality.statements_total)} afirmaciones curadas`}>
+      <Step n={3} title={`Las ${fmt(quality.statements_total)} preguntas clave: una por tema, muchas votaciones cada una`}>
         <p>
-          Son frases en lenguaje llano («Los alquileres de temporada… deberían…») sobre las 12 preocupaciones ciudadanas del proyecto más
-          cultura, política exterior y modelo territorial. Cada una se apoya en 1 a 3 votaciones ({fmt(quality.votes_total)} en total) y
-          declara qué voto significa «de acuerdo» (<code>agree_vote</code>).
+          Cada afirmación («Hay que bajar impuestos…», «España debería presionar más a Israel…») corresponde a un{" "}
+          <strong>eje temático</strong> del codebook (<Code rel={AXES_SEED} />) y la respaldan{" "}
+          <strong>todas las votaciones cuyo tema principal es ese eje</strong>, con confianza alta o media: hoy{" "}
+          {fmt(quality.votes_total)} votaciones de {fmt(quality.initiatives_total)} iniciativas. Así se cubre más terreno con menos
+          preguntas que con una votación por pregunta.
         </p>
         <ul className="vaMethod__list">
           <li>
-            <strong>Quién las redactó:</strong> un agente de IA (Claude Opus 5.5) a partir de las votaciones disponibles, con el objetivo
-            y los criterios que fijó el mantenedor del proyecto: una herramienta para decidir el voto en las generales basada en votos
-            reales. No hubo un panel de expertos.
+            <strong>Posición del partido</strong> = media, sobre esas votaciones, de signo × (Sí − No) / (Sí + No + Abstención) de sus
+            diputados, orientada hacia la afirmación. Va de −1 (siempre en contra) a +1 (siempre a favor) y se muestra como porcentaje
+            (0 % a 100 %). Los puntos de una misma moción votada por partes comparten un solo peso.
           </li>
           <li>
-            <strong>Sentido del voto:</strong> se comprobó contra el texto oficial (BOCG/BOE) que votar <code>agree_vote</code> equivale
-            a estar de acuerdo con la frase. Regla explícita: votar Sí a una <em>toma en consideración</em> (aceptar debatir una ley) se
-            interpreta como apoyo a su objetivo.
+            <strong>Quién las redactó:</strong> Claude Opus 5.5, una por eje, a partir de las votaciones clasificadas en él. Borrador sin
+            revisión humana. Definición en <Code rel={STATEMENTS_SEED_V2} />.
           </li>
           <li>
-            <strong>Sesgo de aquiescencia:</strong> mucha gente tiende a decir «sí» a todo. Por eso las frases se redactan en ambos
-            sentidos y se comprueba que «de acuerdo» no favorezca a un bloque: hoy coincide solo con el PSOE (y no con el PP) en{" "}
-            {fmt(balance.psoe)} afirmaciones y solo con el PP en {fmt(balance.pp)}. El test exige una diferencia de 3 como máximo.
+            <strong>Sesgo de aquiescencia:</strong> las frases se redactan en ambos sentidos para que responder siempre «de acuerdo» no
+            favorezca a un bloque: hoy coincide solo con el PSOE (y no con el PP) en {fmt(balance.psoe)} preguntas y solo con el PP en{" "}
+            {fmt(balance.pp)}.
           </li>
           <li>
-            Cada afirmación lleva una nota de contexto y el enlace al texto votado. Todo está en <Code rel={STATEMENTS_SEED} />.
+            Antes de responder ves ejemplos de lo votado (sin decir quién votó qué); después, el porcentaje de cada partido y el enlace
+            al mapa con todas las votaciones.
+          </li>
+          <li>
+            La versión anterior ({fmt(m.snapshotV1.meta?.quality?.statements_total)} afirmaciones con 1 a 3 votaciones cada una,{" "}
+            <Code rel={STATEMENTS_SEED} />) sigue publicada para que los enlaces compartidos funcionen; su revisión está en el paso 7.
           </li>
         </ul>
         {sample ? (
           <details className="vaMethod__details">
-            <summary>Ver cómo está definida una afirmación (dato real)</summary>
-            <pre className="vaMethod__pre">{JSON.stringify(sample, null, 2)}</pre>
+            <summary>Ver cómo está definida una pregunta clave (dato real, primeras votaciones)</summary>
+            <pre className="vaMethod__pre">{JSON.stringify({ ...sample, votes: (sample.votes || []).slice(0, 2) }, null, 2)}</pre>
           </details>
         ) : null}
       </Step>
+
+      <section className="card block vaMethod__step" id="mapa">
+        <h2>
+          <span className="vaMethod__num">★</span> El mapa de votaciones por temas y por diputado
+        </h2>
+        <p>
+          Las preguntas clave salen de un trabajo más grande: leer <strong>todas</strong> las votaciones nominales del Pleno del Congreso
+          XV ({fmt(cov.events_total)} entre {am.votes_first_date || "—"} y {am.votes_last_date || "—"}) y colocar cada una en ejes por
+          tema. El resultado se puede explorar en el <Link href={withBasePath("/citizen/vota/temas/")}>mapa por temas</Link> (hacia dónde
+          empujó cada partido) y en la <Link href={withBasePath("/citizen/vota/diputados/")}>ficha de cada diputado/a</Link>.
+        </p>
+        <ol className="vaMethod__list">
+          <li>
+            <strong>Qué se clasifica:</strong> las votaciones con partidos enfrentados (al menos uno vota Sí y otro No) que no son
+            enmiendas ni trámites: tomas en consideración, votaciones finales, decretos ley, enmiendas a la totalidad, proposiciones no de
+            ley y mociones (también punto por punto). Las {fmt(cov.by_status?.enmienda_sin_texto)} votaciones de enmiendas no se
+            clasifican porque los datos solo dan su número, no su texto.
+          </li>
+          <li>
+            <strong>Texto oficial:</strong> para cada moción y PNL votada se localizó su expediente en el buscador del Congreso (confirmado
+            porque la ficha enlaza esa misma votación) y se extrajo el texto literal de cada punto del BOCG (<Code rel={TEXTS_SEED} />).
+          </li>
+          <li>
+            <strong>Codebook:</strong> {fmt(m.axes.length)} ejes en 14 temas, cada uno con dos polos descritos en lenguaje llano (
+            <Code rel={AXES_SEED} />).
+          </li>
+          <li>
+            <strong>Clasificación:</strong> 14 subagentes de Claude Opus 5.5 leyeron cada votación y decidieron hasta dos ejes, hacia qué
+            polo empuja votar Sí y con qué confianza, <strong>sin ver cómo votó ningún partido</strong>. Resultado: {fmt(cov.by_status?.con_eje)}{" "}
+            con eje y {fmt(cov.scored_votes)} que cuentan (confianza alta o media) (<Code rel={CLASSIFICATIONS_SEED} />).
+          </li>
+          <li>
+            <strong>Control de calidad:</strong> otros 3 subagentes reclasificaron a ciegas una muestra aleatoria de{" "}
+            {fmt(qa.votes_compared)} votaciones. Coincidieron en el eje principal en el {pct(qa.same_primary_axis)} de los casos y en el
+            sentido del voto en el {pct(qa.same_sign_when_axis_shared)} cuando coincidían en el eje; de las votaciones que cuentan, el{" "}
+            {pct(qa.scored_primary_axis_found_in_second)} recibió el mismo eje en la segunda lectura (<Code rel={ATLAS_QA} />). Falta la
+            revisión humana.
+          </li>
+          <li>
+            <strong>Diputados:</strong> la misma cuenta con el voto de cada persona, más su participación y cuántas veces votó distinto de
+            la mayoría de su partido (incluidas las enmiendas).
+          </li>
+        </ol>
+        {m.axesRules.length ? (
+          <details className="vaMethod__details">
+            <summary>Reglas de clasificación</summary>
+            <ul className="vaMethod__list">
+              {m.axesRules.map((r) => (
+                <li key={r}>{r}</li>
+              ))}
+            </ul>
+          </details>
+        ) : null}
+      </section>
 
       <Step n={4} title={`El modo infinito: ${fmt(poolMeta.items_total)} votaciones reales`}>
         <ul className="vaMethod__list">
@@ -346,11 +428,12 @@ export default function VotingAidMethodologyPage() {
         <ul className="vaMethod__list">
           <li>Tus respuestas: de acuerdo / sí = +1, neutral / me da igual = 0, en desacuerdo / no = −1.</li>
           <li>
-            Partido: a favor = +1, en contra = −1, abstención o votos distintos = 0. Si una afirmación tiene varias votaciones y el
-            partido votó igual en todas, esa es su posición; si no, «votos distintos».
+            Partido en una pregunta clave: su dirección de −1 a +1 sobre todas las votaciones del eje (paso 3). En el modo infinito: a
+            favor = +1, en contra = −1, abstención o votos divididos = 0.
           </li>
           <li>
-            Coincidencia en una pregunta = <code>1 − |tú − partido| / 2</code> (1 si coincidís, 0,5 a medias, 0 si sois opuestos).
+            Coincidencia en una pregunta = <code>1 − |tú − partido| / 2</code> (1 si coincidís del todo, 0 si sois opuestos). Un
+            partido que empujó a favor en el 80 % de los casos coincide más contigo que uno que lo hizo en el 60 %.
           </li>
           <li>Coincidencia total = media ponderada; las que marcas como «me importa mucho» cuentan doble.</li>
           <li>Las preguntas que saltas y las celdas sin datos no cuentan. Ves con cuántas preguntas se ha comparado cada partido.</li>
@@ -403,9 +486,21 @@ export default function VotingAidMethodologyPage() {
                 <td data-label="Comprobación">Tests, revisión del mantenedor</td>
               </tr>
               <tr>
-                <td data-label="Tarea">Redactar las {fmt(quality.statements_total)} afirmaciones y su sentido de voto</td>
+                <td data-label="Tarea">Redactar las afirmaciones de la versión anterior y su sentido de voto</td>
                 <td data-label="Quién">Claude Opus 5.5</td>
                 <td data-label="Comprobación">2 revisores Claude Sonnet 5.5 independientes · falta revisión humana</td>
+              </tr>
+              <tr>
+                <td data-label="Tarea">Clasificar cada votación en un eje temático ({fmt(cov.by_status?.con_eje)} con eje)</td>
+                <td data-label="Quién">Claude Opus 5.5 (14 subagentes, sin ver votos)</td>
+                <td data-label="Comprobación">
+                  Reclasificación a ciegas de {fmt(qa.votes_compared)} votaciones: {pct(qa.same_primary_axis)} mismo eje · falta revisión humana
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Tarea">Redactar las {fmt(quality.statements_total)} preguntas clave (una por eje)</td>
+                <td data-label="Quién">Claude Opus 5.5</td>
+                <td data-label="Comprobación">Equilibrio PSOE/PP automático · falta revisión humana</td>
               </tr>
               <tr>
                 <td data-label="Tarea">Viñetas «Qué se votaba»</td>
@@ -552,6 +647,18 @@ export default function VotingAidMethodologyPage() {
             revisando a otra reduce errores, pero comparte puntos ciegos.
           </li>
           <li>
+            <strong>Qué votación va a cada tema lo decide una IA.</strong> La segunda lectura a ciegas coincide en el eje principal el{" "}
+            {pct(qa.same_primary_axis)} de las veces; el resto son casos frontera. Cada votación enlaza a su texto para comprobarlo.
+          </li>
+          <li>
+            <strong>Las enmiendas no están clasificadas</strong> ({fmt(cov.by_status?.enmienda_sin_texto)} votaciones): buena parte del
+            trabajo legislativo fino queda fuera de las direcciones por tema.
+          </li>
+          <li>
+            <strong>Senado sin voto por senador:</strong> sus datos abiertos enlazan los ficheros de votación de la XV, pero el servidor
+            responde 404/500 (<Code rel={SENADO_EVIDENCE} />). Por eso solo hay diputados.
+          </li>
+          <li>
             <strong>Votar no es lo mismo que pensar.</strong> Un partido puede votar en contra de algo con lo que está de acuerdo por
             cómo está redactado, por táctica o por disciplina de bloque. La herramienta mide votos, no intenciones ni programas.
           </li>
@@ -590,6 +697,10 @@ export default function VotingAidMethodologyPage() {
         <h2>Cómo reproducirlo</h2>
         <p>Con el repositorio y una base SQLite con las votaciones del Congreso XV:</p>
         <pre className="vaMethod__pre">{`python3 scripts/ingestar_parlamentario_es.py ingest --db <db> --source congreso_votaciones --congreso-legs 15 --strict-network
+python3 scripts/vote_atlas.py link-texts --db <db>
+python3 scripts/vote_atlas.py units --db <db> --out-dir <lotes>   # lotes para clasificar (personas o IA)
+python3 scripts/vote_atlas.py merge --units-dir <lotes> --classified-dir <clasificados>
+python3 scripts/export_vote_atlas.py --db <db> --out-dir ui/site/public/citizen/data
 python3 scripts/export_voting_aid_snapshot.py --db <db> --out ui/site/public/citizen/data/voting_aid_generales_v1.json
 python3 scripts/export_voting_aid_pool.py --db <db> --out ui/site/public/citizen/data/voting_aid_pool_v1.json
 python3 scripts/voting_aid_motion_texts.py link --db <db>

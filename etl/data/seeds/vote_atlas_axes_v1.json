@@ -1,0 +1,497 @@
+{
+ "schema_version": "vote_atlas_axes_v1",
+ "description": "Codebook de ejes por tema. Cada votación clasificada indica hacia qué polo empuja votar Sí (+ = polo positivo, - = polo negativo). La dirección de un partido o diputado en un eje es la media de esos empujes; nunca se imputa cuando no hay votaciones.",
+ "rules": [
+  "Clasificar por el contenido de lo votado (texto oficial, título y punto), no por quién lo propone ni por cómo votaron los partidos.",
+  "Una votación puede tocar como máximo dos ejes (principal y secundario); si no encaja en ninguno, eje null con motivo.",
+  "yes_pushes = '+' si votar Sí empuja hacia el polo positivo, '-' si empuja hacia el negativo.",
+  "Las enmiendas a la totalidad: votar Sí devuelve el proyecto al Gobierno (o propone un texto alternativo), así que empuja contra el contenido del proyecto.",
+  "Peticiones territoriales concretas (una carretera, un tren de una provincia) sin componente ideológico van a eje null con motivo 'demanda_local', salvo que el texto lo plantee como política general.",
+  "Si el texto mezcla medidas en direcciones distintas, elegir la dominante y bajar la confianza; si no hay dominante, eje null con motivo 'mixto'."
+ ],
+ "topics": [
+  {
+   "topic_id": "vivienda",
+   "label": "Vivienda",
+   "concern_id": "vivienda"
+  },
+  {
+   "topic_id": "empleo",
+   "label": "Empleo y protección social",
+   "concern_id": "empleo"
+  },
+  {
+   "topic_id": "economia",
+   "label": "Impuestos y economía",
+   "concern_id": "coste_vida"
+  },
+  {
+   "topic_id": "sanidad",
+   "label": "Sanidad",
+   "concern_id": "sanidad"
+  },
+  {
+   "topic_id": "educacion",
+   "label": "Educación y lenguas",
+   "concern_id": "educacion"
+  },
+  {
+   "topic_id": "clima",
+   "label": "Energía, clima y transporte",
+   "concern_id": "energia"
+  },
+  {
+   "topic_id": "campo",
+   "label": "Campo y medio rural",
+   "concern_id": "campo_rural"
+  },
+  {
+   "topic_id": "seguridad",
+   "label": "Seguridad y justicia",
+   "concern_id": "seguridad_justicia"
+  },
+  {
+   "topic_id": "inmigracion",
+   "label": "Inmigración",
+   "concern_id": "inmigracion"
+  },
+  {
+   "topic_id": "corrupcion",
+   "label": "Corrupción y control del Gobierno",
+   "concern_id": "corrupcion"
+  },
+  {
+   "topic_id": "igualdad",
+   "label": "Igualdad y derechos civiles",
+   "concern_id": "igualdad"
+  },
+  {
+   "topic_id": "territorial",
+   "label": "Modelo territorial",
+   "concern_id": null
+  },
+  {
+   "topic_id": "memoria",
+   "label": "Memoria e instituciones",
+   "concern_id": null
+  },
+  {
+   "topic_id": "exterior",
+   "label": "Política exterior y defensa",
+   "concern_id": null
+  }
+ ],
+ "axes": [
+  {
+   "axis_id": "vivienda_intervencion",
+   "topic_id": "vivienda",
+   "label": "Intervención en el mercado de la vivienda",
+   "pos": "Más intervención pública: limitar precios del alquiler, más protección del inquilino, regular el alquiler turístico y de temporada, más vivienda pública y social, gravar a grandes tenedores.",
+   "neg": "Más mercado y seguridad para el propietario: quitar topes y zonas tensionadas, incentivos fiscales a la oferta privada, liberar suelo, menos obligaciones a caseros.",
+   "examples": [
+    "Ley que trata el alquiler de temporada como vivienda habitual: Sí = +",
+    "Moción para derogar la ley de vivienda y sus topes: Sí = -"
+   ],
+   "pos_short": "Más intervención pública",
+   "neg_short": "Más mercado"
+  },
+  {
+   "axis_id": "vivienda_okupacion",
+   "topic_id": "vivienda",
+   "label": "Ocupación ilegal y desahucios",
+   "pos": "Endurecer y acelerar el desalojo de viviendas ocupadas ilegalmente y las penas por ocupación.",
+   "neg": "Proteger a hogares vulnerables frente a desahucios (moratorias, alternativa habitacional antes del lanzamiento).",
+   "examples": [
+    "Proposición para desalojar ocupaciones en 24-48 horas: Sí = +",
+    "Prórroga del escudo antidesahucios: Sí = -"
+   ],
+   "pos_short": "Desalojo más rápido",
+   "neg_short": "Proteger a vulnerables"
+  },
+  {
+   "axis_id": "empleo_derechos",
+   "topic_id": "empleo",
+   "label": "Derechos laborales frente a flexibilidad",
+   "pos": "Más protección del trabajador: reducir la jornada, subir el SMI, encarecer el despido, registro horario, reforzar sindicatos e inspección.",
+   "neg": "Más flexibilidad y menos costes para las empresas: rebajar cotizaciones, compensar a empresas por subidas, menos obligaciones laborales.",
+   "examples": [
+    "Reducción de la jornada a 37,5 horas: Sí = +",
+    "Moción para que el Estado asuma el coste del SMI a las pymes: Sí = -"
+   ],
+   "pos_short": "Más derechos laborales",
+   "neg_short": "Más flexibilidad"
+  },
+  {
+   "axis_id": "proteccion_social",
+   "topic_id": "empleo",
+   "label": "Prestaciones y gasto social",
+   "pos": "Ampliar prestaciones y gasto social: subsidio de desempleo, ingreso mínimo vital, dependencia, pensiones mínimas, ayudas a familias.",
+   "neg": "Contener o condicionar prestaciones: endurecer requisitos, priorizar la contención del gasto.",
+   "examples": [
+    "Reforma que amplía el subsidio por desempleo: Sí = +"
+   ],
+   "pos_short": "Más prestaciones",
+   "neg_short": "Contener prestaciones"
+  },
+  {
+   "axis_id": "autonomos_empresa",
+   "topic_id": "empleo",
+   "label": "Cargas a autónomos y pymes",
+   "pos": "Aliviar cargas a autónomos y pymes: cuotas más bajas, tarifa plana, menos burocracia y obligaciones (p. ej. facturación electrónica obligatoria, Verifactu).",
+   "neg": "Mantener o aumentar obligaciones y cotizaciones de autónomos y pymes.",
+   "examples": [
+    "Moción para congelar la cuota de autónomos: Sí = +"
+   ],
+   "pos_short": "Menos cargas a autónomos",
+   "neg_short": "Mantener cargas"
+  },
+  {
+   "axis_id": "fiscalidad",
+   "topic_id": "economia",
+   "label": "Impuestos",
+   "pos": "Subir impuestos, sobre todo a rentas altas, grandes empresas, banca, energéticas y patrimonio; nuevas figuras tributarias.",
+   "neg": "Bajar impuestos: deflactar el IRPF, rebajar IVA, sucesiones, patrimonio o sociedades; suprimir gravámenes.",
+   "examples": [
+    "Prórroga del gravamen a la banca: Sí = +",
+    "Deflactar la tarifa del IRPF: Sí = -"
+   ],
+   "pos_short": "Subir impuestos",
+   "neg_short": "Bajar impuestos"
+  },
+  {
+   "axis_id": "regulacion_economica",
+   "topic_id": "economia",
+   "label": "Regulación de empresas y mercados",
+   "pos": "Más regulación y control público de empresas y mercados: protección del consumidor, control de precios, participación pública en empresas estratégicas.",
+   "neg": "Menos regulación y más libertad empresarial: simplificar trámites, liberalizar, privatizar.",
+   "examples": [
+    "Ley de servicios de atención a la clientela con plazos obligatorios: Sí = +"
+   ],
+   "pos_short": "Más regulación",
+   "neg_short": "Más libertad empresarial"
+  },
+  {
+   "axis_id": "sanidad_publica",
+   "topic_id": "sanidad",
+   "label": "Sanidad pública frente a privada",
+   "pos": "Reforzar la gestión pública de la sanidad y limitar la privada: blindar la gestión directa, revertir conciertos, integrar MUFACE en el sistema público.",
+   "neg": "Colaboración público-privada y libertad de elección: conciertos, mutualidades, derivación a la privada.",
+   "examples": [
+    "Ley de gestión pública e integridad del SNS: Sí = +",
+    "Mantener MUFACE con aseguradoras privadas: Sí = -"
+   ],
+   "pos_short": "Gestión pública",
+   "neg_short": "Colaboración privada"
+  },
+  {
+   "axis_id": "educacion_modelo",
+   "topic_id": "educacion",
+   "label": "Escuela pública frente a libertad de elección",
+   "pos": "Priorizar la escuela pública y laica: más recursos públicos, menos conciertos, menos peso de la religión.",
+   "neg": "Libertad de elección de centro: concertada, educación especial y diferenciada, religión en la escuela, cheque escolar.",
+   "examples": [
+    "Moción para garantizar la educación especial y la elección de centro: Sí = -"
+   ],
+   "pos_short": "Escuela pública",
+   "neg_short": "Libertad de elección"
+  },
+  {
+   "axis_id": "lenguas",
+   "topic_id": "educacion",
+   "label": "Lenguas cooficiales",
+   "pos": "Promover las lenguas cooficiales: uso en el Congreso y en la UE, inmersión lingüística, requisitos lingüísticos.",
+   "neg": "Proteger el castellano: lengua vehicular en la escuela, sin requisitos de lengua cooficial.",
+   "examples": [
+    "Reforma del Reglamento para usar las lenguas cooficiales: Sí = +"
+   ],
+   "pos_short": "Lenguas cooficiales",
+   "neg_short": "Castellano"
+  },
+  {
+   "axis_id": "clima_transicion",
+   "topic_id": "clima",
+   "label": "Transición ecológica",
+   "pos": "Acelerar la transición ecológica: objetivos climáticos, renovables, zonas de bajas emisiones, restringir combustibles fósiles, transporte público frente al coche.",
+   "neg": "Frenar o flexibilizar la regulación ambiental por su coste: retrasar objetivos, proteger combustibles fósiles, rebajar exigencias.",
+   "examples": [
+    "PNL que defiende el Pacto Verde Europeo: Sí = +",
+    "Moción para eliminar las zonas de bajas emisiones obligatorias: Sí = -"
+   ],
+   "pos_short": "Acelerar la transición",
+   "neg_short": "Frenar regulación ambiental"
+  },
+  {
+   "axis_id": "nuclear",
+   "topic_id": "clima",
+   "label": "Energía nuclear",
+   "pos": "Mantener o ampliar la energía nuclear: alargar la vida de las centrales, revisar el calendario de cierre, bajar impuestos a la nuclear.",
+   "neg": "Cerrar las centrales nucleares según el calendario previsto o antes.",
+   "examples": [
+    "Proposición para prolongar la vida de las nucleares: Sí = +"
+   ],
+   "pos_short": "Mantener nucleares",
+   "neg_short": "Cierre nuclear"
+  },
+  {
+   "axis_id": "transporte_publico",
+   "topic_id": "clima",
+   "label": "Transporte público",
+   "pos": "Subvencionar y abaratar el transporte público (bonos, descuentos, ferrocarril de cercanías) como política general.",
+   "neg": "Retirar o recortar ayudas generales al transporte público.",
+   "examples": [
+    "Convalidación de un decreto que prorroga los descuentos al transporte: Sí = +"
+   ],
+   "pos_short": "Abaratar transporte público",
+   "neg_short": "Recortar ayudas"
+  },
+  {
+   "axis_id": "campo_ambiente",
+   "topic_id": "campo",
+   "label": "Agricultura frente a restricciones ambientales",
+   "pos": "Priorizar al sector agrario y ganadero frente a restricciones ambientales: control del lobo, garantizar trasvases y regadío, flexibilizar normas ambientales de la PAC.",
+   "neg": "Priorizar la protección ambiental: conservación de especies, caudales ecológicos, límites al regadío y a la ganadería intensiva.",
+   "examples": [
+    "Sacar al lobo del listado de especies protegidas: Sí = +"
+   ],
+   "pos_short": "Prioridad agraria",
+   "neg_short": "Prioridad ambiental"
+  },
+  {
+   "axis_id": "campo_comercio",
+   "topic_id": "campo",
+   "label": "Libre comercio agrario",
+   "pos": "Abrir el comercio: apoyar acuerdos como Mercosur, menos aranceles.",
+   "neg": "Proteger la producción nacional: rechazar Mercosur, cláusulas espejo, controles a importaciones.",
+   "examples": [
+    "Moción para rechazar el acuerdo UE-Mercosur: Sí = -"
+   ],
+   "pos_short": "Libre comercio",
+   "neg_short": "Proteccionismo"
+  },
+  {
+   "axis_id": "bienestar_animal",
+   "topic_id": "campo",
+   "label": "Protección animal y tradiciones",
+   "pos": "Más protección animal: ley de bienestar animal, restricciones a la caza y a la tauromaquia.",
+   "neg": "Proteger la caza, la tauromaquia y los usos tradicionales frente a esas restricciones.",
+   "examples": [
+    "Quitar la protección legal de la tauromaquia como patrimonio: Sí = +"
+   ],
+   "pos_short": "Más protección animal",
+   "neg_short": "Caza y tradiciones"
+  },
+  {
+   "axis_id": "seguridad_penal",
+   "topic_id": "seguridad",
+   "label": "Mano dura frente a enfoque garantista",
+   "pos": "Endurecer el castigo y reforzar a las fuerzas de seguridad: más penas, multirreincidencia, prisión permanente, más medios y competencias policiales, mantener la ley de seguridad ciudadana.",
+   "neg": "Enfoque garantista y de reinserción: limitar poderes policiales (derogar o reformar la 'ley mordaza'), rebajar o revisar tipos penales, beneficios penitenciarios.",
+   "examples": [
+    "Ley contra la multirreincidencia: Sí = +",
+    "Reforma de la ley de seguridad ciudadana que limita las pelotas de goma: Sí = -"
+   ],
+   "pos_short": "Mano dura",
+   "neg_short": "Enfoque garantista"
+  },
+  {
+   "axis_id": "justicia_independencia",
+   "topic_id": "seguridad",
+   "label": "Poder judicial y Fiscalía",
+   "pos": "Más independencia del poder judicial y de la Fiscalía frente al Gobierno: que los jueces elijan a los jueces del CGPJ, limitar el control del Gobierno sobre la Fiscalía, defender a jueces frente a críticas del Gobierno.",
+   "neg": "Reformas de la justicia impulsadas por la mayoría de Gobierno: cambios en el acceso a la carrera, en el CGPJ o en la instrucción de causas por los fiscales; críticas a la actuación de jueces ('lawfare').",
+   "examples": [
+    "Moción que pide que los jueces elijan a 12 vocales del CGPJ: Sí = +"
+   ],
+   "pos_short": "Independencia judicial",
+   "neg_short": "Reformas del Gobierno"
+  },
+  {
+   "axis_id": "inmigracion",
+   "topic_id": "inmigracion",
+   "label": "Política migratoria",
+   "pos": "Políticas migratorias más abiertas: regularización, acogida y reparto de menores migrantes, más derechos y vías legales.",
+   "neg": "Políticas migratorias más restrictivas: más control de fronteras, expulsiones, endurecer la nacionalidad, ceder competencias de control a comunidades.",
+   "examples": [
+    "Toma en consideración de la ILP de regularización: Sí = +",
+    "Moción para expulsar a inmigrantes que cometan delitos: Sí = -"
+   ],
+   "pos_short": "Más abierta",
+   "neg_short": "Más restrictiva"
+  },
+  {
+   "axis_id": "anticorrupcion",
+   "topic_id": "corrupcion",
+   "label": "Medidas estructurales contra la corrupción",
+   "pos": "Reglas generales de transparencia y anticorrupción: registro de lobbies, oficina antifraude, desclasificar secretos, endurecer penas por corrupción, financiación de partidos.",
+   "neg": "Rechazar o rebajar esas reglas.",
+   "examples": [
+    "Ley de transparencia de los grupos de interés: Sí = +"
+   ],
+   "pos_short": "Más reglas anticorrupción",
+   "neg_short": "Menos reglas"
+  },
+  {
+   "axis_id": "control_gobierno",
+   "topic_id": "corrupcion",
+   "label": "Control y censura al Gobierno",
+   "pos": "Exigir responsabilidades al Gobierno de Sánchez: comisiones de investigación, reprobaciones, comparecencias, dimisiones, críticas al 'deterioro democrático' o a casos de corrupción que afectan al Gobierno.",
+   "neg": "Respaldar al Gobierno frente a esas iniciativas o investigar a la oposición.",
+   "examples": [
+    "Moción del PP sobre la corrupción que afecta al Gobierno: Sí = +",
+    "Comisión de investigación sobre la 'Operación Cataluña' del Gobierno de Rajoy: Sí = -"
+   ],
+   "pos_short": "Exigir cuentas al Gobierno",
+   "neg_short": "Respaldar al Gobierno"
+  },
+  {
+   "axis_id": "igualdad_genero",
+   "topic_id": "igualdad",
+   "label": "Igualdad de género y diversidad",
+   "pos": "Más políticas de igualdad de género, contra la violencia machista y por los derechos LGTBI: paridad, prohibir terapias de conversión, ley trans.",
+   "neg": "Reducir o cuestionar esas políticas: 'violencia intrafamiliar' en vez de machista, derogar leyes de igualdad, limitar la ley trans.",
+   "examples": [
+    "Ley de paridad: Sí = +"
+   ],
+   "pos_short": "Más políticas de igualdad",
+   "neg_short": "Menos políticas de igualdad"
+  },
+  {
+   "axis_id": "bioetica",
+   "topic_id": "igualdad",
+   "label": "Aborto y eutanasia",
+   "pos": "Ampliar o blindar el derecho al aborto y a la eutanasia.",
+   "neg": "Restringirlos o reforzar la objeción y la protección del no nacido.",
+   "examples": [
+    "Reforma constitucional para blindar el aborto: Sí = +"
+   ],
+   "pos_short": "Ampliar aborto y eutanasia",
+   "neg_short": "Restringirlos"
+  },
+  {
+   "axis_id": "territorial_autogobierno",
+   "topic_id": "territorial",
+   "label": "Autogobierno de las comunidades",
+   "pos": "Más autogobierno y bilateralidad: traspasos, financiación singular, condonación de deuda autonómica, conciertos, cesión de tributos, reconocer naciones.",
+   "neg": "Igualdad entre territorios y recentralización: financiación multilateral, rechazar traspasos o cupos, reforzar competencias del Estado.",
+   "examples": [
+    "Condonación de parte de la deuda autonómica: Sí = +",
+    "Moción contra la financiación singular de Cataluña: Sí = -"
+   ],
+   "pos_short": "Más autogobierno",
+   "neg_short": "Más Estado central"
+  },
+  {
+   "axis_id": "amnistia_proces",
+   "topic_id": "territorial",
+   "label": "Amnistía y acuerdos con independentistas",
+   "pos": "Desjudicializar el 'procés' y pactar con independentistas: amnistía, indultos, reforma de la malversación, mediador internacional.",
+   "neg": "Rechazar esas medidas y exigir el cumplimiento de las condenas.",
+   "examples": [
+    "Ley de amnistía: Sí = +"
+   ],
+   "pos_short": "Amnistía y pactos",
+   "neg_short": "Rechazo"
+  },
+  {
+   "axis_id": "memoria_democratica",
+   "topic_id": "memoria",
+   "label": "Memoria democrática",
+   "pos": "Políticas de memoria democrática: exhumaciones, resignificación del Valle de Cuelgamuros, reconocer víctimas del franquismo, retirar símbolos.",
+   "neg": "Derogar o limitar las leyes de memoria ('concordia'), proteger símbolos.",
+   "examples": [
+    "Decreto que amplía la ley de memoria democrática: Sí = +"
+   ],
+   "pos_short": "Más memoria democrática",
+   "neg_short": "Derogar o limitar"
+  },
+  {
+   "axis_id": "instituciones_reglas",
+   "topic_id": "memoria",
+   "label": "Reglas institucionales",
+   "pos": "Reforzar contrapesos al Gobierno: limitar decretos ley, reforzar la independencia de RTVE y de organismos, garantizar el control parlamentario y del Senado.",
+   "neg": "Reformas que amplían el margen de la mayoría de Gobierno en las instituciones (RTVE, organismos, procedimiento parlamentario).",
+   "examples": [
+    "Reforma de RTVE que permite elegir el consejo por mayoría absoluta: Sí = -"
+   ],
+   "pos_short": "Más contrapesos",
+   "neg_short": "Más margen del Gobierno"
+  },
+  {
+   "axis_id": "monarquia",
+   "topic_id": "memoria",
+   "label": "Monarquía",
+   "pos": "Cuestionar la monarquía: referéndum, investigar al rey emérito, quitar la inviolabilidad.",
+   "neg": "Defender la monarquía parlamentaria.",
+   "examples": [
+    "Reforma constitucional para limitar la inviolabilidad del rey: Sí = +"
+   ],
+   "pos_short": "Cuestionar la monarquía",
+   "neg_short": "Defender la monarquía"
+  },
+  {
+   "axis_id": "israel_palestina",
+   "topic_id": "exterior",
+   "label": "Israel y Palestina",
+   "pos": "Presionar a Israel por Gaza: embargo de armas, sanciones, reconocer y apoyar a Palestina.",
+   "neg": "Rechazar esas medidas o reforzar la relación con Israel.",
+   "examples": [
+    "Embargo de armas a Israel: Sí = +"
+   ],
+   "pos_short": "Presionar a Israel",
+   "neg_short": "Rechazar presión"
+  },
+  {
+   "axis_id": "defensa_otan",
+   "topic_id": "exterior",
+   "label": "Gasto militar y OTAN",
+   "pos": "Más gasto y compromiso militar: cumplir el objetivo de la OTAN, apoyo militar a Ucrania, más medios para las Fuerzas Armadas.",
+   "neg": "Menos gasto militar, salir de la OTAN o no enviar armas.",
+   "examples": [
+    "Moción para llegar al 2 % del PIB en defensa: Sí = +"
+   ],
+   "pos_short": "Más gasto militar",
+   "neg_short": "Menos gasto militar"
+  },
+  {
+   "axis_id": "sahara_marruecos",
+   "topic_id": "exterior",
+   "label": "Sáhara y Marruecos",
+   "pos": "Defender la autodeterminación del Sáhara Occidental y ser más exigentes con Marruecos.",
+   "neg": "Apoyar el plan de autonomía marroquí y la relación actual con Marruecos.",
+   "examples": [
+    "PNL para volver a la neutralidad sobre el Sáhara: Sí = +"
+   ],
+   "pos_short": "Autodeterminación saharaui",
+   "neg_short": "Plan marroquí"
+  },
+  {
+   "axis_id": "venezuela_latam",
+   "topic_id": "exterior",
+   "label": "Venezuela y regímenes latinoamericanos",
+   "pos": "Más presión a los Gobiernos de Venezuela, Cuba o Nicaragua: reconocer a la oposición venezolana, sanciones, condenas.",
+   "neg": "Rechazar esa presión o mantener la vía del diálogo.",
+   "examples": [
+    "Reconocer a Edmundo González como presidente electo: Sí = +"
+   ],
+   "pos_short": "Más presión a regímenes",
+   "neg_short": "Diálogo"
+  },
+  {
+   "axis_id": "union_europea",
+   "topic_id": "exterior",
+   "label": "Integración europea",
+   "pos": "Más integración y compromiso con la UE: ceder competencias, apoyar políticas comunes.",
+   "neg": "Más soberanía nacional frente a Bruselas.",
+   "examples": [],
+   "pos_short": "Más integración UE",
+   "neg_short": "Más soberanía"
+  }
+ ],
+ "null_reasons": {
+  "procedimiento": "Trámite parlamentario sin contenido de política (prórrogas, avocaciones, correcciones).",
+  "demanda_local": "Petición concreta para un territorio o una infraestructura, sin dirección ideológica general.",
+  "mixto": "Mezcla medidas en direcciones distintas sin una dominante.",
+  "sin_eje": "Tiene contenido político pero no encaja en ningún eje del codebook.",
+  "sin_texto": "No hay texto suficiente para saber qué se votaba (p. ej. una enmienda identificada solo por su número)."
+ }
+}

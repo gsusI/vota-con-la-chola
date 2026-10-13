@@ -107,7 +107,7 @@ Presupuesto gratuito: R2 ≤ 10 GB (pocas releases completas; históricas en HF)
 
 Mandato del mantenedor: convertir `/citizen` en una ayuda útil para decidir el voto en las próximas generales. Concreta la experiencia **Alineamiento** de la North Star; no sustituye la prioridad de dinero público, corre como carril propio.
 
-**Ahora:** ~30 afirmaciones en lenguaje llano, cada una respaldada por 1–3 votaciones nominales del Congreso XV con el sentido de voto que significa «de acuerdo» y el texto oficial enlazado (`etl/data/seeds/voting_aid_generales_v1.json`, estado `draft`). `scripts/export_voting_aid_snapshot.py` calcula la posición de cada partido de la papeleta (Podemos, BNG, CC y UPN separados del Grupo Mixto) y publica `citizen/data/voting_aid_generales_v1.json`. Votos del Congreso solo hasta `2026-02-12`; votos por diputado ausentes desde `2025-11`.
+**Ahora:** todas las votaciones nominales del Pleno del Congreso XV (`2,175`, sep 2023–sep 2026) con partidos enfrentados están leídas y colocadas en `33` ejes temáticos por IA con control a ciegas (`etl/data/seeds/vote_atlas_classifications_v1.json`). De ahí salen el mapa por temas (`/citizen/vota/temas/`), la ficha de cada diputado (`/citizen/vota/diputados/`) y `29` preguntas clave, una por eje, respaldadas por `784` votaciones (`etl/data/seeds/voting_aid_generales_v2.json`), que se pueden responder «por partes». Sin revisión humana todavía; Senado sin voto por senador (bloqueo registrado); enmiendas sin clasificar.
 
 **Destino:** el usuario responde, pondera y ve su coincidencia por partido separando «votó como tú» de «prometió como tú», con cobertura visible y cada celda enlazada a la votación y al texto.
 

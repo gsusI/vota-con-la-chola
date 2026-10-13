@@ -8047,3 +8047,368 @@ body:has(.responsibility-article) > .breadcrumbs {
     font-weight: 700;
   }
 }
+
+/* Vote atlas: /citizen/vota/temas/ and /citizen/vota/diputados/ */
+.atlas h2 {
+  font-family: var(--display);
+  font-size: clamp(1.4rem, 4vw, 1.9rem);
+  margin: 32px 0 12px;
+}
+
+.atlas h3 {
+  margin: 28px 0 8px;
+}
+
+.atlasFacts--grid {
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.atlasNav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 8px;
+}
+
+.atlasControls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  align-items: center;
+  margin: 8px 0 4px;
+}
+
+.atlasTopics {
+  flex: 1 1 100%;
+}
+
+.atlasTopics button[aria-selected="true"] {
+  color: var(--ink);
+  font-weight: 600;
+  border-bottom-color: var(--accent-3);
+}
+
+.atlasSelect {
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+}
+
+.atlasSelect select,
+.atlasSearch input {
+  font: inherit;
+  color: var(--ink);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 6px 10px;
+  max-width: 100%;
+}
+
+.atlasSearch {
+  flex: 1 1 240px;
+}
+
+.atlasSearch input {
+  width: 100%;
+  font-size: 1rem;
+  padding: 10px 12px;
+}
+
+.atlasAxis {
+  margin: 0 0 16px;
+}
+
+.atlasAxis__title {
+  margin: 0 0 4px;
+  font-size: 1.1rem;
+}
+
+.atlasPoles {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 0 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.atlasPoles__neg {
+  color: #8a5a12;
+}
+
+.atlasPoles__pos {
+  color: #234f8f;
+  text-align: right;
+}
+
+.atlasAxis__bars {
+  display: grid;
+  gap: 2px;
+}
+
+.atlasBar {
+  display: grid;
+  grid-template-columns: minmax(64px, 120px) 1fr 44px;
+  grid-template-areas: "label track value" ". sub sub";
+  align-items: center;
+  column-gap: 8px;
+  padding: 3px 4px;
+  border-radius: 6px;
+}
+
+.atlasBar--highlight {
+  background: rgba(216, 74, 50, 0.08);
+  outline: 1px solid rgba(216, 74, 50, 0.35);
+}
+
+.atlasBar__label {
+  grid-area: label;
+  font-size: 0.86rem;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.atlasBar__track {
+  grid-area: track;
+  position: relative;
+  height: 12px;
+  background: #eef0ee;
+  border-radius: 6px;
+}
+
+.atlasBar__zero {
+  position: absolute;
+  left: 50%;
+  top: -3px;
+  bottom: -3px;
+  width: 1px;
+  background: var(--ink-muted);
+}
+
+.atlasBar__fill {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+
+.atlasBar__fill--pos {
+  background: #3b6fb6;
+  border-radius: 0 6px 6px 0;
+}
+
+.atlasBar__fill--neg {
+  background: #c08a2d;
+  border-radius: 6px 0 0 6px;
+}
+
+.atlasBar__marker {
+  position: absolute;
+  top: -4px;
+  bottom: -4px;
+  width: 3px;
+  margin-left: -1px;
+  background: var(--ink);
+  border-radius: 2px;
+}
+
+.atlasBar__value {
+  grid-area: value;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  text-align: right;
+}
+
+.atlasBar__sub {
+  grid-area: sub;
+  font-size: 0.76rem;
+  color: var(--ink-soft);
+}
+
+.atlasAxis__count {
+  margin: 10px 0 0;
+}
+
+.atlasAxis__poles {
+  margin: 10px 0;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.atlasVotes {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 12px;
+  display: grid;
+  gap: 10px;
+}
+
+.atlasVote {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.atlasVote p {
+  margin: 0 0 4px;
+}
+
+.atlasVote__meta {
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+}
+
+.atlasVote__summary {
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.atlasVote__push {
+  font-size: 0.88rem;
+}
+
+.atlasVote__title {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  line-height: 1.35;
+}
+
+.atlasVote__links {
+  font-size: 0.82rem;
+}
+
+.atlasChips {
+  list-style: none;
+  padding: 0;
+  margin: 6px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.atlasChip {
+  font-size: 0.74rem;
+  border-radius: 4px;
+  padding: 1px 6px;
+  border: 1px solid var(--line);
+  background: #f4f5f3;
+  color: #3b4250;
+}
+
+.atlasChip--pos {
+  background: #dde7f6;
+  color: #234f8f;
+  border-color: #b8cbe8;
+}
+
+.atlasChip--neg {
+  background: #f5e8d2;
+  color: #8a5a12;
+  border-color: #e6cfa6;
+}
+
+.atlasHonesty {
+  margin-top: 28px;
+}
+
+.atlasHonesty h2 {
+  margin-top: 0;
+  font-size: 1.2rem;
+}
+
+.atlasPeople {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 16px;
+  display: grid;
+  gap: 4px;
+}
+
+.atlasPeople__row {
+  display: grid;
+  grid-template-columns: 2fr 1.3fr 1fr 1fr;
+  gap: 4px 12px;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--card);
+  color: var(--ink);
+  text-decoration: none;
+  align-items: center;
+}
+
+.atlasPeople__row:hover,
+.atlasPeople__row:focus-visible {
+  border-color: var(--accent-3);
+}
+
+.atlasPeople__name {
+  font-weight: 600;
+}
+
+.atlasPeople__party,
+.atlasPeople__stat {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+.atlasPerson__name {
+  margin-top: 12px;
+}
+
+.atlasPerson__axes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 12px 20px;
+}
+
+.atlasPerson__axis .atlasBar {
+  grid-template-columns: 0 1fr 44px;
+  column-gap: 0;
+}
+
+.atlasPerson__axisTitle {
+  margin: 0 0 2px;
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  .atlasPeople__row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .atlasBar {
+    grid-template-columns: 72px 1fr 40px;
+  }
+
+  .atlasPerson__axes {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 900px) {
+  .atlasAxis .atlasBar {
+    grid-template-columns: 110px minmax(0, 1fr) 48px 290px;
+    grid-template-areas: "label track value sub";
+  }
+}
+
+.votingAidSplit {
+  margin: 10px 0 0;
+}
+
+.votingAidSplit--prominent {
+  display: grid;
+  gap: 10px;
+  margin: 12px 0;
+}
+
+.votingAidSplit--prominent p {
+  margin: 0;
+}
+
+.votingAidSplit--prominent .votingAidButton {
+  justify-self: start;
+}

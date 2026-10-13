@@ -11,6 +11,13 @@ const REPO_ROOT = path.resolve(process.cwd(), "../..");
 export const PROMPTS_DIR = "docs/etl/sprints/VOTING-AID-20261011/prompts";
 export const STATEMENT_REVIEW = "docs/etl/sprints/VOTING-AID-20261011/evidence/voting-aid-statement-review-20261012.json";
 export const STATEMENTS_SEED = "etl/data/seeds/voting_aid_generales_v1.json";
+export const STATEMENTS_SEED_V2 = "etl/data/seeds/voting_aid_generales_v2.json";
+export const AXES_SEED = "etl/data/seeds/vote_atlas_axes_v1.json";
+export const CLASSIFICATIONS_SEED = "etl/data/seeds/vote_atlas_classifications_v1.json";
+export const TEXTS_SEED = "etl/data/seeds/vote_atlas_texts_v1.json";
+export const ATLAS_PROMPTS_DIR = "docs/etl/sprints/VOTE-ATLAS-20261013/prompts";
+export const ATLAS_QA = "docs/etl/sprints/VOTE-ATLAS-20261013/evidence/vote-atlas-classification-agreement.json";
+export const SENADO_EVIDENCE = "docs/etl/sprints/VOTE-ATLAS-20261013/evidence/senado-votos-por-senador-probe-20261013.md";
 export const BULLETS_SEED = "etl/data/seeds/voting_aid_vote_bullets_v1.json";
 
 export function repoLink(rel) {
@@ -45,6 +52,12 @@ const PROMPT_FILES = [
     file: "afirmaciones-revision.md",
     title: "Revisión independiente de las afirmaciones",
     who: "Claude Sonnet 5.5 (dos revisores por afirmación, sin ver los votos de los partidos)",
+  },
+  {
+    file: "clasificar-votaciones.md",
+    dir: ATLAS_PROMPTS_DIR,
+    title: "Clasificación de cada votación en un eje temático (mapa y preguntas clave)",
+    who: "Claude Opus 5.5 (14 subagentes por lotes + 3 para la muestra de control, sin ver los votos de los partidos)",
   },
   {
     file: "encargos-subagentes.md",
@@ -89,7 +102,10 @@ function statementReviewStats(evidence) {
 }
 
 export function loadMethodology() {
-  const snapshot = readPublicJson("citizen/data/voting_aid_generales_v1.json", { meta: {}, parties: [], statements: [] });
+  const snapshot = readPublicJson("citizen/data/voting_aid_generales_v2.json", { meta: {}, parties: [], statements: [] });
+  const snapshotV1 = readPublicJson("citizen/data/voting_aid_generales_v1.json", { meta: {}, parties: [], statements: [] });
+  const atlas = readPublicJson("citizen/data/vote_atlas_v1.json", { meta: {}, axes: [], votes: [] });
+  const axesSeed = readRepoJson(AXES_SEED) || { axes: [] };
   const pool = readPublicJson("citizen/data/voting_aid_pool_v1.json", { meta: {}, items: [] });
   const highlights = readPublicJson("citizen/data/voting_aid_highlights_v1.json", { meta: {} });
   const bullets = readPublicJson("citizen/data/voting_aid_vote_bullets_v1.json", { meta: {} });
@@ -116,6 +132,11 @@ export function loadMethodology() {
 
   return {
     snapshot,
+    snapshotV1,
+    atlasMeta: atlas.meta || {},
+    axes: atlas.axes || [],
+    axesRules: axesSeed.rules || [],
+    sampleAxis: (axesSeed.axes || [])[0] || null,
     pool,
     highlights,
     bullets,
@@ -124,7 +145,7 @@ export function loadMethodology() {
     bulletStats: bulletSeed ? bulletReviewStats(bulletSeed) : null,
     statementStats: evidence ? statementReviewStats(evidence) : null,
     statementReviewMethod: evidence?.method || null,
-    prompts: PROMPT_FILES.map((p) => ({ ...p, path: `${PROMPTS_DIR}/${p.file}`, text: readRepoText(`${PROMPTS_DIR}/${p.file}`) })),
+    prompts: PROMPT_FILES.map((p) => ({ ...p, path: `${p.dir || PROMPTS_DIR}/${p.file}`, text: readRepoText(`${p.dir || PROMPTS_DIR}/${p.file}`) })),
     examples,
   };
 }

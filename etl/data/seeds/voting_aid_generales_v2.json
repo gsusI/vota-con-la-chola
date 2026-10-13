@@ -1,0 +1,196 @@
+{
+ "schema_version": "voting_aid_statements_v2",
+ "election": "generales",
+ "legislature": "15",
+ "institution": "Congreso de los Diputados",
+ "review": {
+  "status": "draft",
+  "written_by": "claude-opus-5-5, a partir de las votaciones clasificadas en cada eje (etl/data/seeds/vote_atlas_classifications_v1.json)",
+  "written_at": "2026-10-13",
+  "human_reviewed": false,
+  "note": "Borrador: cada afirmación resume un eje del codebook; falta la revisión humana de la redacción."
+ },
+ "method": {
+  "statement_votes": "Una afirmación = un eje del codebook. La respaldan todas las votaciones nominales cuyo eje PRINCIPAL es ese, con confianza alta o media.",
+  "party_position": "score = media ponderada de signo × (Sí − No) / (Sí + No + Abstención) de los diputados del partido, orientada hacia el polo de la afirmación. Los puntos de una misma moción comparten un peso. agree si score ≥ 0,33; disagree si ≤ −0,33; mixed si está entre medias.",
+  "matching": "La coincidencia usa el score continuo (−1 a 1), no solo la etiqueta: un partido que empujó casi siempre hacia el polo de la afirmación coincide más que uno que lo hizo a veces.",
+  "direction_balance": "Las afirmaciones se redactan en ambos sentidos para que responder siempre «de acuerdo» no favorezca a un bloque; se comprueba con el reparto PSOE/PP."
+ },
+ "min_votes": 4,
+ "statements": [
+  {
+   "statement_id": "eje-vivienda-intervencion",
+   "axis_id": "vivienda_intervencion",
+   "pole": "+",
+   "text": "El Estado debería intervenir más en el alquiler: limitar precios, proteger más al inquilino y regular el alquiler turístico y de temporada."
+  },
+  {
+   "statement_id": "eje-vivienda-okupacion",
+   "axis_id": "vivienda_okupacion",
+   "pole": "-",
+   "text": "Antes de desalojar a una familia vulnerable de una vivienda ocupada debería garantizarse una alternativa habitacional, en vez de acelerar los desalojos."
+  },
+  {
+   "statement_id": "eje-empleo-derechos",
+   "axis_id": "empleo_derechos",
+   "pole": "-",
+   "text": "Para crear empleo es mejor rebajar costes y obligaciones a las empresas que ampliar derechos laborales como reducir la jornada."
+  },
+  {
+   "statement_id": "eje-proteccion-social",
+   "axis_id": "proteccion_social",
+   "pole": "+",
+   "text": "Hay que ampliar las prestaciones sociales, como el subsidio de desempleo, las pensiones o el ingreso mínimo."
+  },
+  {
+   "statement_id": "eje-autonomos-empresa",
+   "axis_id": "autonomos_empresa",
+   "pole": "+",
+   "text": "Los autónomos que ganan menos del salario mínimo no deberían pagar cuota, o pagar mucho menos."
+  },
+  {
+   "statement_id": "eje-fiscalidad",
+   "axis_id": "fiscalidad",
+   "pole": "+",
+   "text": "Antes que bajar impuestos, hay que mantener la recaudación para financiar los servicios públicos, y que paguen más la banca, las energéticas y las rentas altas."
+  },
+  {
+   "statement_id": "eje-regulacion-economica",
+   "axis_id": "regulacion_economica",
+   "pole": "+",
+   "text": "El Estado debería regular y supervisar más a las empresas y los mercados para proteger a los consumidores."
+  },
+  {
+   "statement_id": "eje-educacion-modelo",
+   "axis_id": "educacion_modelo",
+   "pole": "-",
+   "text": "Las familias deberían poder elegir centro, incluida la escuela concertada y la educación especial, con fondos públicos."
+  },
+  {
+   "statement_id": "eje-lenguas",
+   "axis_id": "lenguas",
+   "pole": "+",
+   "text": "Las lenguas cooficiales deberían poder usarse más en las instituciones del Estado, como el Congreso o los juzgados."
+  },
+  {
+   "statement_id": "eje-clima-transicion",
+   "axis_id": "clima_transicion",
+   "pole": "-",
+   "text": "España debería frenar o revisar las políticas climáticas del Pacto Verde Europeo por su coste."
+  },
+  {
+   "statement_id": "eje-nuclear",
+   "axis_id": "nuclear",
+   "pole": "+",
+   "text": "Las centrales nucleares deberían seguir funcionando más allá del calendario de cierre previsto."
+  },
+  {
+   "statement_id": "eje-transporte-publico",
+   "axis_id": "transporte_publico",
+   "pole": "+",
+   "text": "El Estado debería seguir abaratando el transporte público con descuentos y abonos."
+  },
+  {
+   "statement_id": "eje-campo-ambiente",
+   "axis_id": "campo_ambiente",
+   "pole": "-",
+   "text": "Hay que proteger el medio ambiente, como el agua o especies como el lobo, aunque eso limite al regadío y a la ganadería."
+  },
+  {
+   "statement_id": "eje-campo-comercio",
+   "axis_id": "campo_comercio",
+   "pole": "-",
+   "text": "Hay que proteger más al campo español frente a las importaciones, con aranceles, cupos o más controles."
+  },
+  {
+   "statement_id": "eje-seguridad-penal",
+   "axis_id": "seguridad_penal",
+   "pole": "-",
+   "text": "Hay que revisar las leyes penales y de seguridad para proteger más las libertades, por ejemplo reformando la «ley mordaza», aunque eso limite a la policía."
+  },
+  {
+   "statement_id": "eje-justicia-independencia",
+   "axis_id": "justicia_independencia",
+   "pole": "+",
+   "text": "El Gobierno debería tener menos influencia sobre los jueces y la Fiscalía; por ejemplo, que los jueces elijan a los jueces del CGPJ."
+  },
+  {
+   "statement_id": "eje-inmigracion",
+   "axis_id": "inmigracion",
+   "pole": "-",
+   "text": "España debería endurecer su política migratoria, con más control de fronteras y más expulsiones."
+  },
+  {
+   "statement_id": "eje-anticorrupcion",
+   "axis_id": "anticorrupcion",
+   "pole": "+",
+   "text": "Hacen falta más reglas contra la corrupción: desclasificar secretos, vetar a empresas corruptoras y frenar las puertas giratorias."
+  },
+  {
+   "statement_id": "eje-control-gobierno",
+   "axis_id": "control_gobierno",
+   "pole": "+",
+   "text": "El Congreso debería exigir más responsabilidades al Gobierno actual por los casos de corrupción y por su gestión."
+  },
+  {
+   "statement_id": "eje-igualdad-genero",
+   "axis_id": "igualdad_genero",
+   "pole": "+",
+   "text": "Hacen falta más leyes de igualdad entre mujeres y hombres y de protección de las personas LGTBI."
+  },
+  {
+   "statement_id": "eje-bioetica",
+   "axis_id": "bioetica",
+   "pole": "+",
+   "text": "El derecho al aborto y a la eutanasia debería reforzarse y garantizarse en la sanidad pública."
+  },
+  {
+   "statement_id": "eje-territorial-autogobierno",
+   "axis_id": "territorial_autogobierno",
+   "pole": "-",
+   "text": "El Estado debería reforzar sus competencias y la igualdad entre territorios en lugar de ceder más autogobierno a las comunidades."
+  },
+  {
+   "statement_id": "eje-amnistia-proces",
+   "axis_id": "amnistia_proces",
+   "pole": "-",
+   "text": "El Gobierno no debería pactar con los independentistas catalanes medidas como la amnistía."
+  },
+  {
+   "statement_id": "eje-memoria-democratica",
+   "axis_id": "memoria_democratica",
+   "pole": "+",
+   "text": "Hay que seguir aplicando la ley de memoria democrática, incluido disolver asociaciones que hagan apología del franquismo."
+  },
+  {
+   "statement_id": "eje-instituciones-reglas",
+   "axis_id": "instituciones_reglas",
+   "pole": "+",
+   "text": "Hay que obligar más al Gobierno a rendir cuentas ante el Congreso y a cumplir lo que aprueba la Cámara."
+  },
+  {
+   "statement_id": "eje-israel-palestina",
+   "axis_id": "israel_palestina",
+   "pole": "+",
+   "text": "España debería presionar más a Israel por Gaza, con embargo de armas y sanciones."
+  },
+  {
+   "statement_id": "eje-defensa-otan",
+   "axis_id": "defensa_otan",
+   "pole": "+",
+   "text": "España debería aumentar el gasto militar para cumplir con la OTAN y seguir ayudando militarmente a Ucrania."
+  },
+  {
+   "statement_id": "eje-sahara-marruecos",
+   "axis_id": "sahara_marruecos",
+   "pole": "+",
+   "text": "España debería volver a la neutralidad sobre el Sáhara Occidental y ser más exigente con Marruecos."
+  },
+  {
+   "statement_id": "eje-venezuela-latam",
+   "axis_id": "venezuela_latam",
+   "pole": "+",
+   "text": "España debería presionar más a los Gobiernos de Venezuela, Cuba y Nicaragua, con condenas y sanciones."
+  }
+ ]
+}

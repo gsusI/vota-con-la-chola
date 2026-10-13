@@ -4,7 +4,9 @@ import { readPublicJson } from "../../static-snapshot.mjs";
 import { resolveBasePath } from "../../path-utils.mjs";
 
 export const SITE_ORIGIN = (process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://votaconlachola.org").replace(/\/+$/u, "");
-export const SNAPSHOT_PATH = "citizen/data/voting_aid_generales_v1.json";
+export const SNAPSHOT_PATH = "citizen/data/voting_aid_generales_v2.json";
+// v1: the earlier one-vote-per-statement set; kept so shared /citizen/vota/t/<id>/ links keep working.
+export const LEGACY_SNAPSHOT_PATH = "citizen/data/voting_aid_generales_v1.json";
 // A vote decided by this many votes or fewer gets the "se decidió por N votos" badge.
 const CLOSE_MARGIN = 5;
 
@@ -37,7 +39,7 @@ export function statementHook(statement) {
   return {
     id: statement.statement_id,
     text: statement.text,
-    concern: CONCERN_LABELS[statement.concern_id || String(statement.statement_id).split("-")[0]] || null,
+    concern: statement.theme || CONCERN_LABELS[statement.concern_id || String(statement.statement_id).split("-")[0]] || null,
     closeMargin: margin !== null && margin <= CLOSE_MARGIN ? margin : null,
   };
 }
@@ -55,5 +57,9 @@ export function hookImagePath(id) {
 }
 
 export function hookStatements(snapshot = loadVotingAidSnapshot()) {
-  return (snapshot.statements || []).filter((st) => st.statement_id && st.text);
+  const legacy = readPublicJson(LEGACY_SNAPSHOT_PATH, { statements: [] });
+  const seen = new Set();
+  return [...(snapshot.statements || []), ...(legacy.statements || [])].filter(
+    (st) => st.statement_id && st.text && !seen.has(st.statement_id) && seen.add(st.statement_id),
+  );
 }
