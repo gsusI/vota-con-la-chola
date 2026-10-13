@@ -615,6 +615,24 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Inquilinos",
+     "text": "El Gobierno tendría que rebajar por ley un 40 % la cuantía de todos los alquileres respecto a los precios actuales.",
+     "locator": "Punto 1 (BOCG D-590, pág. 31)"
+    },
+    {
+     "actor": "Propietarios que alquilan",
+     "text": "Los alquileres de sus viviendas bajarían un 40 % por ley respecto a los precios actuales.",
+     "locator": "Punto 1 (BOCG D-590, pág. 31)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion180/20260520/Votacion002/VOT_20260520142321.json": {
@@ -628,6 +646,19 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Quienes viven en vivienda protegida",
+     "text": "La vivienda protegida se destinaría solo a residencia habitual y ocupada, salvo alojamientos temporales autorizados por las administraciones competentes.",
+     "locator": "Punto 3 del texto presentado (BOCG Congreso D-523 (2026-05-04), pág. 7)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "El lote asigna 'punto 3', pero el sí significa y el texto aprobado sitúan la residencia habitual en el Punto 2 del BOCG publicado (numeración tras transacción).",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion180/20260520/Votacion007/VOT_20260520142329.json": {
@@ -647,6 +678,24 @@
     "note": "política general de oferta; cifras adecuadas",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Personas que buscan vivienda",
+     "text": "La política de vivienda se orientaría a aumentar la oferta de vivienda.",
+     "locator": "Punto 1 del texto presentado (BOCG Congreso D-538 (2026-05-28), pág. 16)"
+    },
+    {
+     "actor": "Gobierno",
+     "text": "Tendría que garantizar la seguridad jurídica, reducir la burocracia y evitar medidas propagandísticas vacías que consumen recursos públicos.",
+     "locator": "Punto 1 del texto presentado (BOCG Congreso D-538 (2026-05-28), pág. 16)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion011/VOT_20260326165039.json": {
@@ -660,6 +709,24 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Generalitat y ayuntamientos catalanes",
+     "text": "El Gobierno tendría que cederles de inmediato los suelos residenciales, solares y viviendas de la SAREB situados en Cataluña, con financiación para rehabilitarlos.",
+     "locator": "Punto 4 del texto presentado (BOCG Congreso D-493 (2026-03-13), pág. 31)"
+    },
+    {
+     "actor": "Personas que buscan vivienda social",
+     "text": "Esas viviendas se destinarían a uso social o asequible en Cataluña.",
+     "locator": "Punto 4 del texto presentado (BOCG Congreso D-493 (2026-03-13), pág. 31)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "La numeración del texto aprobado (D-507 pág. 7) no coincide con la del voto; se usó el texto original de D-507 con la numeración votada.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion038/VOT_20260326165118.json": {
@@ -674,6 +741,24 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Personas que necesitan vivienda asequible",
+     "text": "El Gobierno tendría que subir los fondos de vivienda al 0,6 % del PIB y financiar la rehabilitación de suelos y viviendas para uso social o asequible.",
+     "locator": "Punto 2 (BOCG D-507, pág. 16)"
+    },
+    {
+     "actor": "Generalitat, municipios y consejos comarcales",
+     "text": "El Gobierno tendría que ceder de inmediato los suelos residenciales, solares y viviendas de la SAREB situados en Cataluña.",
+     "locator": "Punto 2 (BOCG D-507, pág. 16)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion161/20260218/Votacion005/VOT_20260218141924.json": {
@@ -688,6 +773,24 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Demandantes de vivienda",
+     "text": "Se pediría crear condiciones para iniciar un millón de viviendas en cuatro años, en las zonas de mayor demanda, para eliminar el déficit acumulado.",
+     "locator": "Punto 1 (BOCG D-484, pág. 15)"
+    },
+    {
+     "actor": "Sector público y privado",
+     "text": "El Gobierno tendría que generar condiciones favorables para que entre ambos sectores se inicie esa construcción.",
+     "locator": "Punto 1 (BOCG D-484, pág. 15)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion089/VOT_20251008195401.json": {
@@ -702,6 +805,29 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Compradores especulativos",
+     "text": "El Gobierno tendría que impulsar leyes que penalicen la compra especulativa de vivienda, iniciando su tramitación en tres meses.",
+     "locator": "Punto 1 (BOCG D-399, pág. 28)"
+    },
+    {
+     "actor": "Inquilinos de alquiler de temporada",
+     "text": "Se pediría regular de forma efectiva los alquileres de temporada, con tramitación a iniciar en un máximo de tres meses.",
+     "locator": "Punto 1 (BOCG D-399, pág. 28)"
+    },
+    {
+     "actor": "Administraciones competentes en vivienda",
+     "text": "Tendrían recursos garantizados para alcanzar la media europea de vivienda protegida en un máximo de tres años.",
+     "locator": "Punto 1 (BOCG D-399, pág. 28)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion132/20250917/Votacion016/VOT_20250917194038.json": {
@@ -715,6 +841,19 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Inquilinos y propietarios",
+     "text": "El Gobierno tendría que derogar la Ley 12/2023 por el derecho a la vivienda, que el texto califica de intervencionista.",
+     "locator": "Punto 1 del texto presentado (BOCG Congreso D-398 (2025-09-25), pág. 20)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion093/20250219/Votacion005/VOT_20250219135536.json": {
@@ -729,6 +868,24 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Inquilinos",
+     "text": "Todos los alquileres bajarían un 40% respecto a los precios actuales, por ley.",
+     "locator": "Punto 1 (BOCG D-291, pág. 6)"
+    },
+    {
+     "actor": "Propietarios que alquilan",
+     "text": "Tendrían que rebajar la cuantía de todos sus alquileres un 40% respecto a los precios actuales.",
+     "locator": "Punto 1 (BOCG D-291, pág. 6)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion093/20250219/Votacion012/VOT_20250219135549.json": {
@@ -748,6 +905,24 @@
     "note": "déficit y oferta de vivienda ya miden",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Administraciones públicas",
+     "text": "El Gobierno tendría que agilizar sus mecanismos para que los informes sectoriales se emitan en el plazo establecido.",
+     "locator": "Punto 2 (BOCG D-291, pág. 13)"
+    },
+    {
+     "actor": "Quienes construyen vivienda",
+     "text": "Se aceleraría la transformación del suelo finalista para construir vivienda, reduciendo los plazos de 10-12 años a la mitad.",
+     "locator": "Punto 2 (BOCG D-291, pág. 13)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion049/20240620/Votacion014/VOT_20240620132736.json": {
@@ -761,6 +936,19 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Compradores no residentes",
+     "text": "Se pediría al Gobierno una reforma legal que limite la compra de viviendas por parte de personas no residentes.",
+     "locator": "Punto 1 (BOCG D-170, pág. 14)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion034/20240409/Votacion003/VOT_20240409210633.json": {
@@ -774,6 +962,24 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Administraciones públicas",
+     "text": "Se declararía la emergencia habitacional y se les pediría tomar el derecho a la vivienda como eje prioritario, con leyes y planes de vivienda ambiciosos.",
+     "locator": "Punto 1 (BOCG D-111, pág. 21)"
+    },
+    {
+     "actor": "Personas sin acceso a vivienda digna",
+     "text": "El objetivo sería asegurar el derecho subjetivo a una vivienda digna y asequible para todas las personas.",
+     "locator": "Punto 1 (BOCG D-111, pág. 21)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion198/20260916/Votacion004/VOT_20260916195343.json": {
@@ -792,6 +998,24 @@
     "verdict": "keep",
     "note": "anuncios ilegales y total turísticas ya miden",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Propietarios de viviendas turísticas ilegales",
+     "text": "El Gobierno tendría que expropiarles el uso de esas viviendas para incorporarlas al parque público de vivienda.",
+     "locator": "Punto 2 (BOCG D-590, pág. 31)"
+    },
+    {
+     "actor": "Demandantes de vivienda",
+     "text": "Las viviendas turísticas ilegales expropiadas pasarían a formar parte del parque público de vivienda.",
+     "locator": "Punto 2 (BOCG D-590, pág. 31)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -812,6 +1036,24 @@
     "note": "grandes tenedores y vacías ya miden",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Grandes propietarios de vivienda",
+     "text": "El Gobierno tendría que expropiar el uso de 650.000 viviendas en manos de grandes propietarios.",
+     "locator": "Punto 3 (BOCG D-590, pág. 31)"
+    },
+    {
+     "actor": "Demandantes de vivienda",
+     "text": "Esas 650.000 viviendas se incorporarían al parque público de vivienda.",
+     "locator": "Punto 3 (BOCG D-590, pág. 31)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion180/20260520/Votacion004/VOT_20260520142324.json": {
@@ -825,6 +1067,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "El texto del lote es solo el aprobado (3 puntos); el resto rechazado no figura en el lote y no se puede citar literal.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion180/20260520/Votacion009/VOT_20260520142333.json": {
@@ -844,6 +1092,24 @@
     "note": "sin cifra oficial de licencias sin respuesta",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Solicitantes de licencias de vivienda",
+     "text": "Si no hay respuesta a licencias e informes sectoriales en el plazo establecido, se aplicaría el silencio administrativo positivo.",
+     "locator": "Punto 3 del texto presentado (BOCG Congreso D-538 (2026-05-28), pág. 16)"
+    },
+    {
+     "actor": "Administraciones que tramitan licencias",
+     "text": "Si no responden a licencias e informes sectoriales en plazo, se aplicaría silencio administrativo positivo.",
+     "locator": "Punto 3 del texto presentado (BOCG Congreso D-538 (2026-05-28), pág. 16)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion161/20260218/Votacion008/VOT_20260218141929.json": {
@@ -857,6 +1123,19 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Ayuntamientos",
+     "text": "El Gobierno tendría que permitirles usar sus remanentes en inversión en vivienda asequible, adaptando los plazos para que las obras sean viables.",
+     "locator": "Punto 4 (BOCG D-484, pág. 15)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion161/20260218/Votacion009/VOT_20260218141931.json": {
@@ -876,6 +1155,24 @@
     "note": "oferta y déficit de vivienda ya miden",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Promotores y constructores",
+     "text": "Habría un plan de reducción de trabas y reformas para pasar de 10 a 4 años de plazo medio en producir vivienda y suelo, con seguridad jurídica.",
+     "locator": "Punto 5 (BOCG D-484, pág. 15)"
+    },
+    {
+     "actor": "Administración del Estado",
+     "text": "Los informes sectoriales estatales se centralizarían en la Delegación o Subdelegación del Gobierno.",
+     "locator": "Punto 5 (BOCG D-484, pág. 15)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion161/20260218/Votacion012/VOT_20260218141936.json": {
@@ -889,6 +1186,24 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Familias en riesgo de pobreza",
+     "text": "El Estado apoyaría a las familias con problemas para pagar su vivienda o con importantes necesidades sociales.",
+     "locator": "Punto 8 (BOCG D-484, pág. 15)"
+    },
+    {
+     "actor": "Propietarios de vivienda",
+     "text": "Se les devolvería la seguridad jurídica perdida y no se les cargaría la responsabilidad de atender esas situaciones, que asumiría el Estado.",
+     "locator": "Punto 8 (BOCG D-484, pág. 15)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion090/VOT_20251008195402.json": {
@@ -902,6 +1217,24 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Propietarios de tres o más viviendas",
+     "text": "El Gobierno tendría que iniciar el trámite de un impuesto sobre la acumulación de viviendas, aplicable desde el tercer inmueble.",
+     "locator": "Punto 2 (BOCG D-399, pág. 28)"
+    },
+    {
+     "actor": "Comunidades autónomas",
+     "text": "Recibirían íntegramente la recaudación de ese impuesto sobre la acumulación de viviendas.",
+     "locator": "Punto 2 (BOCG D-399, pág. 28)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion091/VOT_20251008195403.json": {
@@ -920,6 +1253,19 @@
     "verdict": "keep",
     "note": "Cifras actuales ya miden esta medida",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Propietarios de viviendas turísticas",
+     "text": "Se pediría reformar la Ley del IVA para aplicar un tipo del 21 % a las viviendas destinadas a uso turístico, en un máximo de tres meses.",
+     "locator": "Punto 3 (BOCG D-399, pág. 28)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -940,6 +1286,29 @@
     "note": "Cifras actuales ya miden esta medida",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Grandes tenedores de vivienda",
+     "text": "Los municipios podrían establecer recargos específicos del IBI a los grandes tenedores, si el Gobierno presenta la reforma en tres meses.",
+     "locator": "Punto 4 (BOCG D-399, pág. 28)"
+    },
+    {
+     "actor": "Propietarios de viviendas turísticas",
+     "text": "Los municipios podrían aplicar recargos específicos del IBI a las viviendas de uso turístico.",
+     "locator": "Punto 4 (BOCG D-399, pág. 28)"
+    },
+    {
+     "actor": "Ayuntamientos",
+     "text": "Tendrían la facultad de fijar esos recargos del IBI a grandes tenedores y viviendas de uso turístico.",
+     "locator": "Punto 4 (BOCG D-399, pág. 28)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion094/VOT_20251008195407.json": {
@@ -953,6 +1322,24 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Inquilinos de temporada y de habitaciones",
+     "text": "Se extenderían de inmediato los topes al precio del alquiler de zonas tensionadas a los arrendamientos temporales y de habitaciones.",
+     "locator": "Punto 6 (BOCG D-399, pág. 28)"
+    },
+    {
+     "actor": "Arrendadores de temporada y de habitaciones",
+     "text": "Quedarían sujetos a los topes de precio vigentes en las zonas de mercado residencial tensionado.",
+     "locator": "Punto 6 (BOCG D-399, pág. 28)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion095/VOT_20251008195408.json": {
@@ -966,6 +1353,19 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Compradores sin residencia acreditada en España",
+     "text": "Se pediría prohibirles comprar vivienda, sean personas físicas o jurídicas, mediante una propuesta legislativa en un máximo de tres meses.",
+     "locator": "Punto 7 (BOCG D-399, pág. 28)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion096/VOT_20251008195409.json": {
@@ -979,6 +1379,24 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Comunidades autónomas y ayuntamientos",
+     "text": "Recibirían gratis y de inmediato la titularidad de las viviendas de la SAREB y SEPES, en un máximo de tres meses.",
+     "locator": "Punto 8 (BOCG D-399, pág. 28)"
+    },
+    {
+     "actor": "Personas que buscan vivienda pública",
+     "text": "El parque público de vivienda se ampliaría con las viviendas de la SAREB y SEPES transferidas.",
+     "locator": "Punto 8 (BOCG D-399, pág. 28)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion097/VOT_20251008195409.json": {
@@ -992,6 +1410,24 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Comunidades autónomas y ayuntamientos",
+     "text": "El Gobierno tendría que transferirles recursos suficientes para ejercer tanteo y retracto y construir vivienda protegida, en tres meses.",
+     "locator": "Punto 9 (BOCG D-399, pág. 28)"
+    },
+    {
+     "actor": "Personas que buscan vivienda protegida",
+     "text": "Se fijaría el objetivo de llegar al 5 % de parque protegido en 2026 y al 9 % en 2027.",
+     "locator": "Punto 9 (BOCG D-399, pág. 28)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion093/20250219/Votacion006/VOT_20250219135538.json": {
@@ -1005,6 +1441,24 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Compradores de vivienda",
+     "text": "Solo podrían comprar vivienda para fijar su residencia o la de sus familiares directos.",
+     "locator": "Punto 2 (BOCG D-291, pág. 6)"
+    },
+    {
+     "actor": "Quienes compran para otros fines",
+     "text": "Quedaría prohibida la compra de vivienda con fines distintos a la residencia del adquirente o sus familiares directos.",
+     "locator": "Punto 2 (BOCG D-291, pág. 6)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion093/20250219/Votacion008/VOT_20250219135542.json": {
@@ -1018,6 +1472,24 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Inquilinos",
+     "text": "Los contratos de arrendamiento de vivienda pasarían de cinco o siete años de duración legal a ser indefinidos.",
+     "locator": "Punto 4 (BOCG D-291, pág. 6)"
+    },
+    {
+     "actor": "Propietarios que alquilan",
+     "text": "Se modificaría la duración legal de los contratos de alquiler de vivienda, que dejaría de tener plazo.",
+     "locator": "Punto 4 (BOCG D-291, pág. 6)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion093/20250219/Votacion009/VOT_20250219135543.json": {
@@ -1036,6 +1508,24 @@
     "verdict": "keep",
     "note": "alquiler temporada y hogares inquilinos ya miden",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Inquilinos de temporada y de habitaciones",
+     "text": "Los alquileres de temporada y de habitaciones pasarían de inmediato a estar regulados como vivienda en la Ley de Arrendamientos Urbanos.",
+     "locator": "Punto 5 (BOCG D-291, pág. 6)"
+    },
+    {
+     "actor": "Propietarios de alquiler de temporada",
+     "text": "Sus alquileres de temporada y de habitaciones quedarían sometidos a la regulación de vivienda de la Ley de Arrendamientos Urbanos.",
+     "locator": "Punto 5 (BOCG D-291, pág. 6)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1056,6 +1546,19 @@
     "note": "viviendas turísticas ya miden la moratoria",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Quienes quieran abrir viviendas turísticas",
+     "text": "El Gobierno tendría que establecer una moratoria: no se concedería ninguna licencia nueva de vivienda turística hasta el 1 de enero de 2028.",
+     "locator": "Punto 2 (BOCG D-170, pág. 14)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion034/20240409/Votacion004/VOT_20240409210634.json": {
@@ -1074,6 +1577,24 @@
     "note": "Cifras actuales ya miden esta medida",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Inquilinos de temporada",
+     "text": "El Gobierno tendría que regular el alquiler de temporada ajustándolo a su casuística, con las mismas obligaciones y regulaciones que el alquiler de vivienda habitual.",
+     "locator": "Punto 2.1 (BOCG D-111, pág. 21)"
+    },
+    {
+     "actor": "Arrendadores de temporada",
+     "text": "Sus contratos quedarían sujetos a las mismas obligaciones y regulaciones que los arrendamientos de vivienda habitual.",
+     "locator": "Punto 2.1 (BOCG D-111, pág. 21)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion034/20240409/Votacion005/VOT_20240409210635.json": {
@@ -1087,6 +1608,24 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Inquilinos de habitaciones",
+     "text": "El Gobierno tendría que regular el alquiler por habitaciones con los mismos criterios que la vivienda completa habitual.",
+     "locator": "Punto 2.2 (BOCG D-111, págs. 21-22)"
+    },
+    {
+     "actor": "Arrendadores por habitaciones",
+     "text": "La suma de las rentas por habitación no podría superar el precio máximo de renta estipulado para la misma vivienda en alquiler completo.",
+     "locator": "Punto 2.2 (BOCG D-111, págs. 21-22)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion034/20240409/Votacion006/VOT_20240409210636.json": {
@@ -1106,6 +1645,24 @@
     "note": "Cifras actuales ya miden esta medida",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Inquilinos de temporada y de habitaciones",
+     "text": "El Gobierno tendría que aumentar los medios de control del fraude y crear mecanismos para facilitar la denuncia y su protección frente a situaciones fraudulentas o abusivas.",
+     "locator": "Punto 2.3 (BOCG D-111, pág. 22)"
+    },
+    {
+     "actor": "Arrendadores de temporada y de habitaciones",
+     "text": "Estas modalidades de alquiler tendrían más medios de control para atajar el fraude.",
+     "locator": "Punto 2.3 (BOCG D-111, pág. 22)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion034/20240409/Votacion007/VOT_20240409210637.json": {
@@ -1119,6 +1676,24 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Inquilinos",
+     "text": "El Gobierno tendría que publicar en 6 meses un nuevo índice anual de actualización de la renta que sustituya al IPC y quede por debajo de este.",
+     "locator": "Punto 2.4 (BOCG D-111, pág. 22)"
+    },
+    {
+     "actor": "Arrendadores",
+     "text": "La renta de sus contratos se actualizaría con un índice por debajo del IPC, con el objetivo de contener precios.",
+     "locator": "Punto 2.4 (BOCG D-111, pág. 22)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   }
  }

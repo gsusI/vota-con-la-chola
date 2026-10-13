@@ -549,6 +549,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "Enmienda a la totalidad de texto alternativo sin texto articulado extraído; un intento con kit fetch sobre B-11-4 solo devolvió la exposición de motivos. Sin efectos verificables.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion034/20240409/Votacion001/VOT_20240409210631.json": {
@@ -1380,6 +1386,12 @@
     "note": "Militares desplegados en Ceuta y población",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "bloque, «resto de enmiendas», transaccional o sin texto votado identificable: no se puede atribuir el efecto con certeza",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion200/20260923/Votacion006/VOT_20260923145121.json": {
@@ -1399,6 +1411,24 @@
     "verdict": "improved",
     "note": "Cifras específicas de Ceuta: retornos y menores",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Personas que entraron ilegalmente en Ceuta",
+     "text": "El Gobierno tendría que adoptar las medidas necesarias para hacer efectivo su retorno o devolución.",
+     "locator": "Punto 1 (BOCG D-594, pág. 20)"
+    },
+    {
+     "actor": "Menores extranjeros en Ceuta",
+     "text": "Tras identificarlos, fijar su edad y localizar a sus familias, volverían a su entorno familiar o pasarían a servicios de protección de su país, según su interés superior.",
+     "locator": "Punto 1 (BOCG D-594, pág. 20)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1420,6 +1450,24 @@
     "note": "Cifras específicas de Ceuta: retornos y menores",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Personas que entraron ilegalmente en Ceuta",
+     "text": "El Gobierno tendría que hacer efectivo su retorno o devolución y reforzar con urgencia los medios para tramitar devoluciones, retornos o asilo.",
+     "locator": "Punto 2 del texto presentado (BOCG Congreso D-590 (2026-09-24), pág. 38)"
+    },
+    {
+     "actor": "Menores extranjeros no acompañados",
+     "text": "Se priorizaría identificarlos, fijar su edad y localizar a sus familias para devolverlos a su entorno familiar o a la protección de su país de origen.",
+     "locator": "Punto 2 del texto presentado (BOCG Congreso D-590 (2026-09-24), pág. 38)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion164/20260226/Votacion002/VOT_20260226153358.json": {
@@ -1437,6 +1485,19 @@
     "verdict": "improved",
     "note": "Órdenes y retornos miden la ejecución; quitada llegadas",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Extranjeros con orden de expulsión",
+     "text": "El Gobierno tendría que garantizar la ejecución efectiva de las órdenes de expulsión de nacionales de terceros países sin derecho a permanecer en España.",
+     "locator": "Punto 1 del texto presentado (BOCG Congreso D-467 (2026-01-30), pág. 41)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1457,6 +1518,29 @@
     "note": "cifras actuales ya miden la medida",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Extranjeros en situación irregular",
+     "text": "El Gobierno tendría que garantizar retornos y expulsiones rápidos y efectivos, aplicando el futuro Reglamento de Retorno de la UE.",
+     "locator": "Punto 3 (BOCG D-426, pág. 11)"
+    },
+    {
+     "actor": "Extranjeros condenados",
+     "text": "La expulsión sería la regla general ante delitos graves o reincidencia dolosa.",
+     "locator": "Punto 3 (BOCG D-426, pág. 11)"
+    },
+    {
+     "actor": "Países de origen",
+     "text": "Se revisarían los acuerdos con terceros países, con consecuencias diplomáticas o económicas para quien incumpla.",
+     "locator": "Punto 3 (BOCG D-426, pág. 11)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion115/VOT_20251008195429.json": {
@@ -1470,6 +1554,24 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Empleadores de zonas rurales",
+     "text": "El Gobierno tendría que revisar la regulación social y laboral que impide el acceso a mano de obra en las zonas rurales.",
+     "locator": "Punto 9 (BOCG D-411, pág. 14)"
+    },
+    {
+     "actor": "Inmigrantes regulares",
+     "text": "Se facilitaría su contratación en origen para trabajar en las zonas rurales.",
+     "locator": "Punto 9 (BOCG D-411, pág. 14)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "Texto hallado en BOCG D-411 pág. 14 con kit fetch (no venía en el lote).",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion101/20250320/Votacion015/VOT_20250320125716.json": {
@@ -1488,6 +1590,24 @@
     "verdict": "keep",
     "note": "Llegadas y retornos ya miden esta medida",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Personas migrantes",
+     "text": "El Gobierno tendría que controlar los flujos migratorios y luchar contra la inmigración ilegal, incluidas las fronteras marítimas y terrestres de todos los territorios.",
+     "locator": "Punto 2 (BOCG D-311, pág. 10)"
+    },
+    {
+     "actor": "Gobierno",
+     "text": "Tendría que promover una política migratoria ordenada y comparable a la de las grandes potencias europeas.",
+     "locator": "Punto 2 (BOCG D-311, pág. 10)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1509,6 +1629,24 @@
     "note": "Llegadas por territorio ya miden control fronterizo",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Personas migrantes",
+     "text": "El Gobierno tendría que ejercer sus funciones de control y ordenación de los flujos migratorios en todos los territorios del Estado.",
+     "locator": "Punto 2 (BOCG D-282, pág. 12)"
+    },
+    {
+     "actor": "Territorios con frontera marítima o terrestre",
+     "text": "El Gobierno tendría que ejercer el control de las fronteras marítimas y terrestres en todos los territorios del Estado.",
+     "locator": "Punto 2 (BOCG D-282, pág. 12)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion070/20241023/Votacion028/VOT_20241023184409.json": {
@@ -1523,6 +1661,29 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Inmigrantes que llegan legalmente",
+     "text": "El Gobierno tendría que garantizar una inmigración legal ordenada y adaptada a la economía, con empleo para quienes llegan legalmente y se integran.",
+     "locator": "Punto 8 (BOCG D-227, pág. 58)"
+    },
+    {
+     "actor": "Inmigración ilegal",
+     "text": "Se pediría al Gobierno rechazar en todo caso la inmigración ilegal masiva.",
+     "locator": "Punto 8 (BOCG D-227, pág. 58)"
+    },
+    {
+     "actor": "Trabajadores españoles",
+     "text": "El Gobierno tendría que asegurar el empleo de los españoles al ordenar la inmigración legal.",
+     "locator": "Punto 8 (BOCG D-227, pág. 58)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion036/20240423/Votacion004/VOT_20240423213515.json": {
@@ -1541,6 +1702,19 @@
     "verdict": "keep",
     "note": "Cifras actuales miden bien el colectivo",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Inmigrantes que entran ilegalmente",
+     "text": "El Gobierno tendría que tramitar de forma preferente y urgente la expulsión inmediata de todos los que accedan ilegalmente al país.",
+     "locator": "Punto 1 (BOCG D-82, pág. 31)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1561,6 +1735,24 @@
     "note": "sin cifra oficial de saharauis beneficiarios",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Saharauis y nacidos en el Sáhara Occidental antes de 1976",
+     "text": "Habría bastado con dos años de residencia para obtener la nacionalidad, en lugar de la concesión directa prevista en la proposición.",
+     "locator": "Enmiendas núm. 25, 26 y 30 (BOCG B-84-4, págs. 27-31)"
+    },
+    {
+     "actor": "Hijos de nacidos en el Sáhara Occidental",
+     "text": "Sus descendientes en primer grado habrían podido acceder también a la nacionalidad con dos años de residencia.",
+     "locator": "Enmiendas núm. 25, 26 y 30 (BOCG B-84-4, págs. 27-31)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion003/VOT_20260326165025.json": {
@@ -1579,6 +1771,19 @@
     "verdict": "improved",
     "note": "hurtos condenados como delito típico de reiteración",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Personas extranjeras",
+     "text": "El título de la ley habría incluido también la reforma de la ley de extranjería, para completar la reforma con esa norma.",
+     "locator": "Enmienda al Título (BOCG B-97-9, pág. 2)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1599,6 +1804,12 @@
     "note": "sin cifra oficial de saharauis beneficiarios",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "Votación del resto de enmiendas sin número ni texto en el lote. Un intento con kit fetch en B-84-4 solo muestra que se suprimen artículos y disposiciones, sin el contenido de lo suprimido ni cuáles se votaron.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion164/20260226/Votacion003/VOT_20260226153400.json": {
@@ -1617,6 +1828,29 @@
     "verdict": "keep",
     "note": "Condenados extranjeros y órdenes ya miden la medida",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Extranjeros condenados por delitos graves o reincidentes",
+     "text": "El Gobierno tendría que impulsar los cambios legales necesarios para expulsar a extranjeros de terceros países sin derecho a permanecer en la UE condenados por delitos graves o reincidencia dolosa.",
+     "locator": "Punto 2 del texto presentado (BOCG D-467, pág. 41)"
+    },
+    {
+     "actor": "Extranjeros expulsados por delitos graves",
+     "text": "Se les impediría el retorno y la residencia en España tras la expulsión.",
+     "locator": "Punto 2 del texto presentado (BOCG D-467, pág. 41)"
+    },
+    {
+     "actor": "Autores de delitos contra la libertad sexual",
+     "text": "La medida se aplicaría con especial atención a quienes sean condenados por delitos contra la libertad sexual.",
+     "locator": "Punto 2 del texto presentado (BOCG D-467, pág. 41)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "El texto disponible (BOCG D-489, pág. 63) es el aprobado con modificaciones y renumerado; no recoge el punto original votado y no se localizó en la búsqueda del boletín. | numeración verificada y reescrita desde el texto presentado",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1637,6 +1871,29 @@
     "note": "Condenados extranjeros y órdenes ya miden la medida",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Extranjeros condenados por delitos graves o reincidentes",
+     "text": "El Gobierno tendría que impulsar los cambios legales necesarios para expulsar a extranjeros de terceros países sin derecho a permanecer en la UE condenados por delitos graves o reincidencia dolosa.",
+     "locator": "Punto 2 del texto presentado (BOCG D-467, pág. 41)"
+    },
+    {
+     "actor": "Extranjeros expulsados por delitos graves",
+     "text": "Se les impediría el retorno y la residencia en España tras la expulsión.",
+     "locator": "Punto 2 del texto presentado (BOCG D-467, pág. 41)"
+    },
+    {
+     "actor": "Autores de delitos contra la libertad sexual",
+     "text": "La medida se aplicaría con especial atención a quienes sean condenados por delitos contra la libertad sexual.",
+     "locator": "Punto 2 del texto presentado (BOCG D-467, pág. 41)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "El texto disponible (BOCG D-489, pág. 63) es el aprobado con modificaciones y renumerado; no recoge el punto original votado y no se localizó en la búsqueda del boletín. | numeración verificada y reescrita desde el texto presentado",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion164/20260226/Votacion005/VOT_20260226153403.json": {
@@ -1656,6 +1913,29 @@
     "note": "Condenados extranjeros y órdenes ya miden la medida",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Extranjeros condenados por delitos graves o reincidentes",
+     "text": "El Gobierno tendría que impulsar los cambios legales necesarios para expulsar a extranjeros de terceros países sin derecho a permanecer en la UE condenados por delitos graves o reincidencia dolosa.",
+     "locator": "Punto 2 del texto presentado (BOCG D-467, pág. 41)"
+    },
+    {
+     "actor": "Extranjeros expulsados por delitos graves",
+     "text": "Se les impediría el retorno y la residencia en España tras la expulsión.",
+     "locator": "Punto 2 del texto presentado (BOCG D-467, pág. 41)"
+    },
+    {
+     "actor": "Autores de delitos contra la libertad sexual",
+     "text": "La medida se aplicaría con especial atención a quienes sean condenados por delitos contra la libertad sexual.",
+     "locator": "Punto 2 del texto presentado (BOCG D-467, pág. 41)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "El texto disponible (BOCG D-489, pág. 63) es el aprobado con modificaciones y renumerado; no recoge el punto original votado y no se localizó en la búsqueda del boletín. | numeración verificada y reescrita desde el texto presentado",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion164/20260226/Votacion006/VOT_20260226153404.json": {
@@ -1674,6 +1954,12 @@
     "note": "Expulsiones ordenadas y ejecutadas; quitada llegadas",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "Sin texto extraído del punto 3 original; la búsqueda en el BOCG D-489 no lo localizó (el texto publicado es el aprobado con modificaciones).",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion164/20260226/Votacion007/VOT_20260226153405.json": {
@@ -1687,6 +1973,24 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Países de origen y tránsito de inmigración",
+     "text": "El Gobierno tendría que impulsar la revisión de los acuerdos con ellos, con consecuencias diplomáticas o económicas si los incumplen.",
+     "locator": "Punto 2 del texto aprobado (BOCG D-489, pág. 63)"
+    },
+    {
+     "actor": "Extranjeros con orden de expulsión",
+     "text": "Se pediría asegurar que esos países cumplan los acuerdos con España sobre inmigración ilegal.",
+     "locator": "Punto 2 del texto aprobado (BOCG D-489, pág. 63)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion164/20260226/Votacion008/VOT_20260226153407.json": {
@@ -1706,6 +2010,12 @@
     "note": "Llegadas y cruces Frontex miden la vigilancia",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "Sin texto extraído del punto 5 original; la búsqueda en el BOCG D-489 no lo localizó (el texto publicado es el aprobado con modificaciones).",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion142/20251028/Votacion020/VOT_20251028204608.json": {
@@ -1719,6 +2029,29 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Extranjeros que piden arraigo",
+     "text": "Se pediría reformar la Ley de Extranjería para recuperar el carácter excepcional del arraigo.",
+     "locator": "Punto 4 (BOCG D-426, pág. 11)"
+    },
+    {
+     "actor": "Familias de extranjeros residentes",
+     "text": "Se revisarían los requisitos de la reagrupación familiar y se reforzarían los controles antifraude.",
+     "locator": "Punto 4 (BOCG D-426, pág. 11)"
+    },
+    {
+     "actor": "Solicitantes de residencia y trabajo",
+     "text": "Se eliminaría el silencio administrativo positivo y se exigiría no tener antecedentes penales.",
+     "locator": "Punto 4 (BOCG D-426, pág. 11)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion142/20251028/Votacion022/VOT_20251028204611.json": {
@@ -1737,6 +2070,24 @@
     "verdict": "keep",
     "note": "cifras actuales ya miden la medida",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Menores migrantes no acompañados",
+     "text": "Su edad se determinaría en un máximo de 72 horas y se promovería su retorno y reunificación familiar mediante acuerdos con los países de origen.",
+     "locator": "Punto 6 (BOCG D-426, pág. 11)"
+    },
+    {
+     "actor": "Personas que declaren ser menores",
+     "text": "El fraude de edad se tipificaría penalmente.",
+     "locator": "Punto 6 (BOCG D-426, pág. 11)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1757,6 +2108,24 @@
     "note": "cifras actuales ya miden la medida",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Fuerzas y Cuerpos de Seguridad del Estado",
+     "text": "Se reforzarían sus medios humanos y tecnológicos, con Frontex como apoyo y sistemas marítimos, aéreos y satelitales interoperables.",
+     "locator": "Punto 8 (BOCG D-426, pág. 11)"
+    },
+    {
+     "actor": "Personas que llegan de forma irregular",
+     "text": "El refuerzo tendría como objetivo prevenir la inmigración ilegal.",
+     "locator": "Punto 8 (BOCG D-426, pág. 11)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion142/20251028/Votacion025/VOT_20251028204615.json": {
@@ -1775,6 +2144,19 @@
     "verdict": "keep",
     "note": "cifras actuales ya miden la medida",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Solicitantes de nacionalidad española",
+     "text": "El Gobierno tendría que reformar la concesión para que deje de ser un mero trámite y reconozca el compromiso con España, su historia, su lengua y sus valores.",
+     "locator": "Punto 9 (BOCG D-426, pág. 11)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1795,6 +2177,24 @@
     "note": "Llegadas a Canarias y Frontex ya adecuadas",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Personas migrantes en la ruta canaria",
+     "text": "Se pediría desplegar de inmediato efectivos de Frontex en la ruta canaria y recopilar información sobre las redes de tráfico de inmigrantes.",
+     "locator": "Punto 3 (BOCG D-311, pág. 10)"
+    },
+    {
+     "actor": "Fuerzas y Cuerpos de Seguridad del Estado",
+     "text": "Recibirían el apoyo de Frontex en la gestión de la crisis migratoria.",
+     "locator": "Punto 3 (BOCG D-311, pág. 10)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion101/20250320/Votacion017/VOT_20250320125719.json": {
@@ -1813,6 +2213,24 @@
     "verdict": "keep",
     "note": "Llegadas y Frontex ya miden la política",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Redes que trafican con personas",
+     "text": "El Gobierno tendría que coordinarse con las autoridades europeas para aplicar una política firme contra las mafias que trafican con personas.",
+     "locator": "Punto 4 (BOCG D-311, pág. 10)"
+    },
+    {
+     "actor": "Personas migrantes",
+     "text": "La política buscaría evitar el efecto llamada con una respuesta integral y coordinada a la crisis migratoria.",
+     "locator": "Punto 4 (BOCG D-311, pág. 10)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1833,6 +2251,24 @@
     "note": "Llegadas y regularización ya adecuadas",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Gobierno",
+     "text": "Tendría que poner fin a las políticas de efecto llamada, a la política de fronteras abiertas y a la connivencia con la inmigración ilegal.",
+     "locator": "Punto 5 (BOCG D-311, pág. 10)"
+    },
+    {
+     "actor": "Personas migrantes",
+     "text": "Se endurecería la política migratoria frente a la inmigración ilegal.",
+     "locator": "Punto 5 (BOCG D-311, pág. 10)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion036/20240423/Votacion005/VOT_20240423213516.json": {
@@ -1852,6 +2288,19 @@
     "note": "Cifras actuales miden bien el colectivo",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Personas que quieren migrar a Europa",
+     "text": "El Gobierno tendría que acabar con las políticas de efecto llamada, que según el texto alimentan falsas promesas de un futuro mejor en Europa.",
+     "locator": "Punto 2 (BOCG D-82, pág. 31)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion036/20240423/Votacion006/VOT_20240423213517.json": {
@@ -1866,6 +2315,19 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Inmigrantes que entran ilegalmente",
+     "text": "Todas las administraciones tendrían que transmitir que quien entre ilegalmente nunca podrá regularizar su situación ni recibir ningún tipo de ayuda pública.",
+     "locator": "Punto 3 (BOCG D-82, pág. 31)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion036/20240423/Votacion007/VOT_20240423213518.json": {
@@ -1885,6 +2347,24 @@
     "note": "Sin cifra oficial vigente de subvenciones ONG",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "ONG y asociaciones del sector",
+     "text": "El Gobierno tendría que eliminar las subvenciones a las entidades que promuevan o faciliten de cualquier forma la inmigración ilegal o el tráfico de personas.",
+     "locator": "Punto 4 (BOCG D-82, pág. 31)"
+    },
+    {
+     "actor": "Mafias de inmigración ilegal",
+     "text": "Se pediría endurecer las penas contra las mafias de la inmigración ilegal y todos sus colaboradores.",
+     "locator": "Punto 4 (BOCG D-82, pág. 31)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion036/20240423/Votacion008/VOT_20240423213519.json": {
@@ -1898,6 +2378,19 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Solicitantes de asilo de países listados",
+     "text": "El Gobierno tendría que aprobar con urgencia una lista de países seguros (por ejemplo Marruecos, Argelia o Senegal), con la Directiva 2013/32/UE como base.",
+     "locator": "Punto 5 (BOCG D-82, pág. 31)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion036/20240423/Votacion009/VOT_20240423213520.json": {
@@ -1911,6 +2404,19 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Senegal y países que no colaboran",
+     "text": "El Gobierno tendría que suspender la cooperación al desarrollo con Senegal u otros países que no colaboren en gestionar los flujos migratorios, hasta que cumplan los acuerdos.",
+     "locator": "Punto 6 (BOCG D-82, pág. 31)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion036/20240423/Votacion010/VOT_20240423213521.json": {
@@ -1924,6 +2430,19 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Argelia, Marruecos y países similares",
+     "text": "El Gobierno tendría que suspender la cooperación al desarrollo con los países que mantienen paralizadas las negociaciones de acuerdos de readmisión con la UE.",
+     "locator": "Punto 7 (BOCG D-82, pág. 31)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion036/20240423/Votacion011/VOT_20240423213522.json": {
@@ -1943,6 +2462,19 @@
     "note": "Cifras actuales miden bien el colectivo",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Solicitantes de asilo y extranjería",
+     "text": "El Gobierno tendría que hacer las reformas legales necesarias para impedir el fraude de ley en la tramitación de expedientes de extranjería o peticiones de asilo.",
+     "locator": "Punto 8 (BOCG D-82, pág. 31)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion036/20240423/Votacion012/VOT_20240423213523.json": {
@@ -1956,6 +2488,19 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Extranjeros con orden de expulsión",
+     "text": "El Gobierno tendría que transponer bien la Directiva de retorno y regular el internamiento en centros de extranjeros, y sus prórrogas, para quienes tengan pendiente una expulsión.",
+     "locator": "Punto 9 (BOCG D-82, pág. 31)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion036/20240423/Votacion013/VOT_20240423213524.json": {
@@ -1970,6 +2515,24 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Solicitantes de protección internacional",
+     "text": "El Gobierno tendría que acordar su internamiento al llegar, para comprobar causas de exclusión o denegación de la protección.",
+     "locator": "Punto 10 (BOCG D-82, pág. 31)"
+    },
+    {
+     "actor": "Solicitantes de Marruecos, Argelia y otros países seguros",
+     "text": "Se les negaría la protección internacional por el criterio de país seguro; hasta aprobar la lista, valdría el considerado seguro por cualquier Estado de la UE.",
+     "locator": "Punto 10 (BOCG D-82, pág. 31)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion036/20240423/Votacion014/VOT_20240423213525.json": {
@@ -1984,6 +2547,19 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Solicitantes de asilo y extranjería",
+     "text": "El Gobierno tendría que reforzar de inmediato el personal que tramita asilo y expedientes de extranjería, para agilizar los trámites y evitar retrasos.",
+     "locator": "Punto 11 (BOCG D-82, pág. 31)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion036/20240423/Votacion015/VOT_20240423213526.json": {
@@ -2002,6 +2578,24 @@
     "verdict": "keep",
     "note": "Cifras actuales miden bien el colectivo",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Ayuntamientos",
+     "text": "El Gobierno tendría que favorecer que todos los municipios estudien una ordenanza sancionadora por incumplir obligaciones con el Padrón, para que los inmigrantes irregulares no puedan empadronarse.",
+     "locator": "Punto 12 (BOCG D-82, pág. 31)"
+    },
+    {
+     "actor": "Inmigrantes en situación irregular",
+     "text": "No podrían empadronarse en su municipio, al promoverse en todos los municipios ordenanzas con ese fin.",
+     "locator": "Punto 12 (BOCG D-82, pág. 31)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -2022,6 +2616,19 @@
     "note": "Cifras actuales miden bien el colectivo",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Inmigrantes irregulares sin solicitud de asilo",
+     "text": "El Gobierno tendría que poner fin de inmediato a su reubicación en el territorio municipal o regional.",
+     "locator": "Punto 13 (BOCG D-82, pág. 31)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion036/20240423/Votacion017/VOT_20240423213528.json": {
@@ -2035,6 +2642,19 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Solicitantes de protección internacional",
+     "text": "Se cesaría su reubicación hasta que el Ministerio certifique que se examinaron todos los motivos de inadmisión, exclusión y denegación y que no proceden de un país seguro.",
+     "locator": "Punto 14 (BOCG D-82, pág. 31)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion036/20240423/Votacion018/VOT_20240423213529.json": {
@@ -2054,6 +2674,24 @@
     "note": "Cifras actuales miden bien el colectivo",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Vecinos de localidades receptoras",
+     "text": "El Gobierno tendría que reforzar con agentes de los Cuerpos y Fuerzas de Seguridad del Estado las localidades que reciban inmigrantes reubicados.",
+     "locator": "Punto 15 (BOCG D-82, pág. 31)"
+    },
+    {
+     "actor": "Inmigrantes irregulares reubicados",
+     "text": "Los agentes los tendrían controlados mientras se tramitan sus expedientes de expulsión.",
+     "locator": "Punto 15 (BOCG D-82, pág. 31)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion036/20240423/Votacion020/VOT_20240423213530.json": {
@@ -2072,6 +2710,19 @@
     "verdict": "keep",
     "note": "Cifras actuales miden bien el colectivo",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Inmigrantes irregulares",
+     "text": "El Gobierno tendría que impulsar medidas para que ninguna partida presupuestaria pública se destine a su reubicación en España.",
+     "locator": "Punto 17 (BOCG D-82, pág. 31)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   }

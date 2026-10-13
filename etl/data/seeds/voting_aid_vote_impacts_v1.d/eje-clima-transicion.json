@@ -417,6 +417,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "Enmienda a la totalidad sin expediente ni texto extraído.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion063/20240926/Votacion006/VOT_20240926161658.json": {
@@ -430,6 +436,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "enmienda a la totalidad de devolución sin texto extraído ni en A-9-4 (kit fetch sin coincidencias); devolver el proyecto no fija medidas concretas para colectivos",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion052/VOT_20260326165138.json": {
@@ -1053,6 +1065,24 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Operadores de autobuses interurbanos",
+     "text": "Habría un programa de ayudas, por real decreto en seis meses, para sustituir y ampliar vehículos de líneas regulares estatales y autonómicas, en subvención o financiación diferida.",
+     "locator": "Artículo 110 (nuevo) (BOCG A-9-10, pág. 198)"
+    },
+    {
+     "actor": "Comunidades autónomas",
+     "text": "Resolverían las ayudas de las concesiones de su competencia, con sus propios procedimientos y según el real decreto.",
+     "locator": "Artículo 110 (nuevo), apdo. 3 (BOCG A-9-10, pág. 198)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion132/20250917/Votacion023/VOT_20250917194050.json": {
@@ -1072,6 +1102,24 @@
     "note": "Plan afecta a toda la aviación, no solo vuelos interiores",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Gobierno y ministerios de Transportes y Transición Ecológica",
+     "text": "El Gobierno dispondrá de un Plan nacional de Descarbonización del Transporte Aéreo, elaborado y puesto en marcha por esos dos ministerios y aprobado por el Consejo de Ministros.",
+     "locator": "Disposición adicional decimotercera (BOCG A-20-9, pág. 63)"
+    },
+    {
+     "actor": "Sector del transporte aéreo",
+     "text": "El plan incluirá mecanismos de gobernanza y de financiación, y criterios e indicadores para seguir su evolución.",
+     "locator": "Disposición adicional decimotercera, apartado 2 (BOCG A-20-9, pág. 63)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion026/20240229/Votacion018/VOT_20240229115100.json": {
@@ -1084,6 +1132,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "Propuesta sin expediente ni texto extraído.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion146/20251113/Votacion095/VOT_20251113131418.json": {
@@ -1102,6 +1156,24 @@
     "verdict": "keep",
     "note": "Vuelos interiores ya miden las rutas afectadas",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Viajeros de vuelos nacionales cortos",
+     "text": "Se habría suprimido el impulso a reducir vuelos domésticos donde hay tren de menos de dos horas y media; al rechazarse la enmienda, la disposición se mantiene.",
+     "locator": "Disposición adicional decimoséptima (BOCG A-9-10, pág. 211)"
+    },
+    {
+     "actor": "Aerolíneas",
+     "text": "Se habría eliminado el estudio técnico sobre racionalizar el uso de vuelos cortos para reducir emisiones del modo aéreo; al rechazarse, se mantiene.",
+     "locator": "Disposición adicional decimoséptima, apdo. 2 (BOCG A-9-10, pág. 211)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1122,6 +1194,24 @@
     "note": "Municipios desde 10.000 habitantes ya medidos",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Municipios de 10.000 a 20.000 habitantes",
+     "text": "Habrían tenido que dotarse de un plan de movilidad sostenible simplificado en el plazo de un año; el texto del proyecto lo exige desde 20.000 habitantes.",
+     "locator": "Enmienda núm. 85 (BOCG A-9-4, pág. 60)"
+    },
+    {
+     "actor": "Empresas de transporte de mercancías",
+     "text": "Habría reparto de última milla con criterio de cero emisiones desde 2030 y renovación de flotas con vehículos eléctricos a batería o de hidrógeno verde.",
+     "locator": "Enmienda núm. 137 (BOCG A-9-4, pág. 116)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "La enmienda 77 solo cambia la rúbrica de la ley (mejora técnica).",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion002/VOT_20251008195216.json": {
@@ -1135,6 +1225,34 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Empresas y administraciones con grandes centros de trabajo",
+     "text": "Habrían tenido que tener plan de movilidad al trabajo en 24 meses los centros con más de 500 personas (o 250 por turno), con un gestor de movilidad designado.",
+     "locator": "Enmienda núm. 90 (BOCG A-9-4, pág. 72)"
+    },
+    {
+     "actor": "Polígonos y grandes centros de actividad",
+     "text": "Para fijar qué centros necesitan plan de movilidad se habría sumado la actividad de las empresas que comparten espacio, como los polígonos industriales.",
+     "locator": "Enmienda núm. 89 (BOCG A-9-4, pág. 71)"
+    },
+    {
+     "actor": "Ciudadanía y profesionales del transporte",
+     "text": "Los planes estratégicos de movilidad habrían incluido un programa de sensibilización y formación en movilidad sostenible, revisado cada dos años.",
+     "locator": "Enmienda núm. 80 (BOCG A-9-4, pág. 53)"
+    },
+    {
+     "actor": "Administraciones que planifican",
+     "text": "Se habrían exigido informes de impacto medioambiental y sobre la movilidad sostenible a los instrumentos de planificación.",
+     "locator": "Enmienda núm. 78 (BOCG A-9-4, pág. 52)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion004/VOT_20251008195218.json": {
@@ -1148,6 +1266,24 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Alumnado",
+     "text": "El currículo de enseñanza básica y postobligatoria habría incluido movilidad sostenible, educación vial y formación en el cálculo del impacto ambiental.",
+     "locator": "Enmienda núm. 83 (BOCG A-9-4, pág. 57)"
+    },
+    {
+     "actor": "Administraciones educativas",
+     "text": "Habrían tenido que garantizar, y no solo establecer, el tratamiento de la movilidad sostenible en el currículo de las enseñanzas no universitarias.",
+     "locator": "Enmienda núm. 83 (BOCG A-9-4, pág. 58)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion005/VOT_20251008195219.json": {
@@ -1167,6 +1303,34 @@
     "note": "Sin cifra oficial específica de planes y carriles",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Personas trabajadoras",
+     "text": "Los planes de movilidad al trabajo habrían incluido datos por sexo, edad y grupo profesional, accesibles a la representación legal de la plantilla que los pida.",
+     "locator": "Enmienda núm. 91 (BOCG A-9-4, pág. 74)"
+    },
+    {
+     "actor": "Usuarios de transporte público y bicicleta",
+     "text": "Se habrían promovido carriles reservados en los accesos a núcleos urbanos, sin limitarlo a municipios de más de 300.000 habitantes.",
+     "locator": "Enmienda núm. 101 (BOCG A-9-4, pág. 85)"
+    },
+    {
+     "actor": "Promotores de nuevas carreteras",
+     "text": "Antes de aprobar vías para el vehículo privado, habrían tenido que acreditar con un estudio que no se podía resolver la conexión con transporte público.",
+     "locator": "Enmienda núm. 128 (BOCG A-9-4, pág. 109)"
+    },
+    {
+     "actor": "Usuarios de servicios ferroviarios públicos",
+     "text": "Las comunidades autónomas, con acuerdo de los municipios, podrían haber pedido modificar, reducir o suprimir un servicio ferroviario declarado obligación de servicio público.",
+     "locator": "Enmienda núm. 136 (BOCG A-9-4, pág. 115)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "Votación de 13 enmiendas; se resumen las de mayor efecto. Varias son técnicas o solo reescriben artículos (88, 93, 96, etc.) y no se detallan.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion006/VOT_20251008195220.json": {
@@ -1180,6 +1344,29 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Peatones y ciclistas",
+     "text": "En los entornos urbanos se habría favorecido en primer lugar la movilidad activa: a pie, en bicicleta y de personas con movilidad reducida.",
+     "locator": "Enmienda núm. 92 (BOCG A-9-4, pág. 75)"
+    },
+    {
+     "actor": "Usuarios del transporte público",
+     "text": "El transporte público colectivo habría sido el segundo modo a favorecer por las administraciones, tras la movilidad activa.",
+     "locator": "Enmienda núm. 92 (BOCG A-9-4, pág. 75)"
+    },
+    {
+     "actor": "Conductores de vehículo privado",
+     "text": "Entre los vehículos privados se habrían primado los de menores emisiones y menor ocupación del espacio público, en último lugar del orden.",
+     "locator": "Enmienda núm. 92 (BOCG A-9-4, pág. 75)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion007/VOT_20251008195222.json": {
@@ -1199,6 +1386,24 @@
     "note": "Sistema portuario estatal: 28 autoridades, 46 puertos",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Autoridades portuarias",
+     "text": "Habrían tenido la obligación de promover medidas para reducir emisiones y de dotar los puertos con suministro de energía de cero emisiones para los buques atracados.",
+     "locator": "Enmienda núm. 107 (BOCG A-9-4, pág. 92)"
+    },
+    {
+     "actor": "Operadores y usuarios de puertos",
+     "text": "Las medidas de reducción de emisiones se habrían aplicado a las actividades de operadores y personas usuarias de los puertos.",
+     "locator": "Enmienda núm. 107 (BOCG A-9-4, pág. 92)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion008/VOT_20251008195223.json": {
@@ -1212,6 +1417,24 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Conductores de la Red de Carreteras del Estado",
+     "text": "El Gobierno habría presentado en un año un estudio para financiar el mantenimiento con un sistema de pago por uso, al menos en las carreteras de altas prestaciones.",
+     "locator": "Enmienda núm. 125 (BOCG A-9-4, pág. 107)"
+    },
+    {
+     "actor": "Propietarios de vehículos eléctricos",
+     "text": "El mecanismo de financiación habría incluido de forma prioritaria descuentos para los vehículos eléctricos de cero emisiones.",
+     "locator": "Enmienda núm. 125 (BOCG A-9-4, pág. 108)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "La enmienda 113 solo cambia la rúbrica de un capítulo (mejora técnica).",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion009/VOT_20251008195224.json": {
@@ -1230,6 +1453,19 @@
     "note": "Pasajeros aéreos con la UE, no solo interiores",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Viajeros entre ciudades europeas",
+     "text": "El Gobierno habría llevado a cabo una política de nuevas conexiones con países vecinos, con atención a horarios nocturnos que sustituyan desplazamientos en avión.",
+     "locator": "Enmienda núm. 126 (BOCG A-9-4, pág. 108)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion042/VOT_20251008195306.json": {
@@ -1243,6 +1479,24 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Conductores de vías de altas prestaciones",
+     "text": "El Gobierno habría presentado en un año un estudio de alternativas para financiar el mantenimiento con pago por uso, al menos en carreteras de altas prestaciones.",
+     "locator": "Enmienda núm. 727 (BOCG A-9-4, pág. 609)"
+    },
+    {
+     "actor": "Propietarios de vehículos eléctricos",
+     "text": "El mecanismo habría incluido de forma prioritaria descuentos para los vehículos eléctricos de cero emisiones.",
+     "locator": "Enmienda núm. 727 (BOCG A-9-4, pág. 609)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "La enmienda 626 solo define 'vía de altas prestaciones' y 'servicio integrado' para una regulación futura.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion043/VOT_20251008195307.json": {
@@ -1256,6 +1510,29 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Empresas y administraciones con centros de trabajo",
+     "text": "Habría planes de movilidad al trabajo con movilidad activa, transporte colectivo, teletrabajo y posible compensación de la huella de carbono.",
+     "locator": "Enmienda núm. 658 (BOCG A-9-4, pág. 556)"
+    },
+    {
+     "actor": "Trabajadores, visitantes y proveedores",
+     "text": "Los planes incluirían medidas de seguridad y prevención de accidentes en los desplazamientos al centro, también para visitantes y proveedores.",
+     "locator": "Enmienda núm. 658 (BOCG A-9-4, pág. 556)"
+    },
+    {
+     "actor": "Centros de más de 1.000 trabajadores",
+     "text": "En grandes ciudades tendrían que incluir medidas para reducir la movilidad en horas punta y facilitar la recarga de vehículos de bajas o cero emisiones.",
+     "locator": "Enmienda núm. 658 (BOCG A-9-4, pág. 557)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion044/VOT_20251008195309.json": {
@@ -1269,6 +1546,34 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Comunidades autónomas",
+     "text": "Podrían pedir la aplicación de sistemas viarios de altas prestaciones, y el Estado tendría que iniciar las actuaciones necesarias a su petición.",
+     "locator": "Enmienda núm. 723 (BOCG A-9-4, pág. 606)"
+    },
+    {
+     "actor": "Conductores",
+     "text": "Se regularía por ley la tarificación por el uso de vías de altas prestaciones, y las comunidades podrían regular cobros para ingresos propios.",
+     "locator": "Enmienda núm. 724 (BOCG A-9-4, pág. 607)"
+    },
+    {
+     "actor": "Empresas de transporte y personas usuarias",
+     "text": "Las empresas tendrían que calcular las emisiones del servicio y las personas usuarias recibirían ese dato y el de la alternativa menos emisora.",
+     "locator": "Enmienda núm. 672 (BOCG A-9-4, pág. 568)"
+    },
+    {
+     "actor": "Entidades con planes de movilidad",
+     "text": "Tendrían que comunicar sus planes a la comunidad autónoma en tres meses; serían de acceso público si la entidad es una administración.",
+     "locator": "Enmienda núm. 661 (BOCG A-9-4, pág. 560)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion049/VOT_20251008195315.json": {
@@ -1282,6 +1587,24 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Ayuntamientos",
+     "text": "Podrían cobrar una tasa a los vehículos que circulen por zonas de bajas emisiones superando los límites o categorías máximas permitidos.",
+     "locator": "Enmienda núm. 710 (BOCG A-9-4, pág. 592)"
+    },
+    {
+     "actor": "Conductores de vehículos que superan los límites",
+     "text": "Pagarían una tasa por circular por zonas de bajas emisiones, que podría calcularse según lo que costaría aparcar ese vehículo en un aparcamiento público.",
+     "locator": "Enmienda núm. 710 (BOCG A-9-4, pág. 593)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion051/VOT_20251008195319.json": {
@@ -1295,6 +1618,24 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Empresas distribuidoras de electricidad",
+     "text": "En seis meses tendrán que dar al Ministerio información sobre las características y la capacidad de la red en lugares habilitados para puntos de recarga.",
+     "locator": "Enmienda núm. 736 (BOCG A-9-4, pág. 622)"
+    },
+    {
+     "actor": "Empresas que instalan puntos de recarga",
+     "text": "El Ministerio publicará en seis meses un mapa nacional con la red eléctrica y las zonas con más capacidad disponible para instalar puntos de recarga.",
+     "locator": "Enmienda núm. 736 (BOCG A-9-4, pág. 622)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion052/VOT_20251008195320.json": {
@@ -1308,6 +1649,24 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Sectores de energía, industria, transporte y edificación",
+     "text": "Habría que destinar el 100 % de los ingresos de las subastas de derechos de emisión a políticas y medidas en estos sectores mientras no se logren los objetivos.",
+     "locator": "Enmienda núm. 745 (BOCG A-9-4, pág. 634)"
+    },
+    {
+     "actor": "Transporte e infraestructuras de transporte",
+     "text": "Se crearía un Fondo de carbono para fomentar la descarbonización del transporte y la resiliencia de sus infraestructuras.",
+     "locator": "Enmienda núm. 745 (BOCG A-9-4, pág. 634)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion053/VOT_20251008195322.json": {
@@ -1327,6 +1686,24 @@
     "note": "REPOTEN 2 mide la repotenciación concreta",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Titulares de instalaciones renovables antiguas",
+     "text": "Se promovería y facilitaría renovar instalaciones al final de su vida útil, con posible aumento de potencia; un reglamento fijaría criterios y trámites.",
+     "locator": "Enmienda núm. 748 (BOCG A-9-4, pág. 638)"
+    },
+    {
+     "actor": "Titulares de instalaciones renovables antiguas",
+     "text": "Las normas nacionales que impidan o dificulten los proyectos de repotenciación previstos en la directiva europea no se aplicarían a estas instalaciones.",
+     "locator": "Enmienda núm. 748 (BOCG A-9-4, pág. 638)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion055/VOT_20251008195324.json": {
@@ -1341,6 +1718,24 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Sector de carreteras, puertos y aeropuertos",
+     "text": "La planificación estatal tendría que aspirar a dejar de invertir en ellos y cesar la financiación de nuevas vías de alta capacidad y aeropuertos en 2028.",
+     "locator": "Enmienda núm. 305 (BOCG A-9-4, pág. 266)"
+    },
+    {
+     "actor": "Viajeros en tren",
+     "text": "La planificación favorecería los transportes de menor huella de carbono, en especial las infraestructuras para trayectos de pasajeros transfronterizos en tren.",
+     "locator": "Enmienda núm. 305 (BOCG A-9-4, pág. 266)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion056/VOT_20251008195325.json": {
@@ -1359,6 +1754,19 @@
     "note": "Municipios de 10.000 a 50.000 habitantes",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Municipios de 10.000 a 50.000 habitantes",
+     "text": "Tendrían que dotarse en un año de un plan de movilidad sostenible simplificado y revisarlo al menos cada seis años, salvo otra periodicidad autonómica.",
+     "locator": "Enmienda núm. 306 (BOCG A-9-4, pág. 266)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion057/VOT_20251008195327.json": {
@@ -1372,6 +1780,29 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Empresas y entidades del sector público",
+     "text": "Tendrían 18 meses (en vez de 24) para tener planes de movilidad al trabajo en centros con más de 100 personas trabajadoras, o 50 por turno (antes 500 y 250).",
+     "locator": "Enmienda núm. 525 (BOCG A-9-4, pág. 455)"
+    },
+    {
+     "actor": "Centros de trabajo obligados a tener plan",
+     "text": "Tendrían que designar un gestor de movilidad para la ejecución, control y seguimiento del plan y la relación con la autoridad pública.",
+     "locator": "Enmienda núm. 525 (BOCG A-9-4, pág. 455)"
+    },
+    {
+     "actor": "Centros de más de 250 trabajadores en ciudades grandes",
+     "text": "En municipios de más de 200.000 habitantes (antes 500.000) tendrían que incluir medidas para reducir la movilidad en horas punta.",
+     "locator": "Enmienda núm. 525 (BOCG A-9-4, pág. 456)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion059/VOT_20251008195329.json": {
@@ -1384,6 +1815,24 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Transporte ferroviario de mercancías",
+     "text": "Se adoptarían medidas para elevar su cuota del transporte de mercancías del 4 % actual al 10 % en 2030 y al menos al 35 % en 2040.",
+     "locator": "Enmienda núm. 293 (BOCG A-9-4, pág. 255)"
+    },
+    {
+     "actor": "Sector del transporte de mercancías",
+     "text": "Se revisaría la estrategia de impulso del ferrocarril de mercancías en menos de un año tras aprobar la ley, para mejorar eficiencia energética y competitividad.",
+     "locator": "Enmienda núm. 293 (BOCG A-9-4, pág. 256)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion060/VOT_20251008195330.json": {
@@ -1402,6 +1851,19 @@
     "note": "Pasajeros aéreos con la UE, no solo interiores",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Viajeros entre ciudades europeas",
+     "text": "El Gobierno tendría que recuperar y crear conexiones con países europeos vecinos, con horarios nocturnos para sustituir desplazamientos en avión.",
+     "locator": "Enmienda núm. 294 (BOCG A-9-4, pág. 256)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion063/VOT_20251008195334.json": {
@@ -1416,6 +1878,34 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Empresas con más de 50 vehículos",
+     "text": "Tendrían que incorporar vehículos cero emisiones a su flota (30 % en 2026, 60 % en 2028, 100 % en 2030), con sanciones por incumplir.",
+     "locator": "Enmienda núm. 307 (BOCG A-9-4, pág. 267)"
+    },
+    {
+     "actor": "Conductores de diésel y compradores de coches contaminantes",
+     "text": "Habría que subir el impuesto del diésel hasta igualarlo al de la gasolina y modificar el de matriculación para desincentivar los vehículos más contaminantes.",
+     "locator": "Enmienda núm. 311 (BOCG A-9-4, pág. 269)"
+    },
+    {
+     "actor": "Conductores en zonas de bajas emisiones",
+     "text": "Se endurecerían los requisitos comunes de estas zonas y circular con vehículos no admitidos por el municipio se consideraría aprovechamiento especial, que podría gravarse.",
+     "locator": "Enmienda núm. 313 (BOCG A-9-4, pág. 271)"
+    },
+    {
+     "actor": "Usuarios del transporte colectivo",
+     "text": "El Estado contribuiría a financiar el transporte colectivo urbano y metropolitano gestionado por autoridades metropolitanas, con un fondo nutrido por nuevos impuestos.",
+     "locator": "Enmienda núm. 310 (BOCG A-9-4, pág. 269)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion065/VOT_20251008195336.json": {
@@ -1429,6 +1919,34 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Ayuntamientos",
+     "text": "Los municipios no podrían crear la tasa por circular con vehículos que superen los límites de las zonas de bajas emisiones.",
+     "locator": "Enmienda núm. 268 (BOCG A-9-4, pág. 226)"
+    },
+    {
+     "actor": "Usuarios del coche en ciudad",
+     "text": "Se suprimiría el orden obligatorio de prioridad entre modos de transporte urbano (a pie, bici, transporte público y vehículo privado).",
+     "locator": "Enmienda núm. 275 (BOCG A-9-4, pág. 233)"
+    },
+    {
+     "actor": "Usuarios de transporte interurbano",
+     "text": "El fondo estatal de movilidad financiaría también servicios de transporte colectivo interurbano gestionados por una autoridad metropolitana.",
+     "locator": "Enmienda núm. 277 (BOCG A-9-4, pág. 235)"
+    },
+    {
+     "actor": "Empresas concesionarias de autobús",
+     "text": "Habría un nuevo mapa concesional estatal en un año y las concesiones adjudicadas en dos años; las comunidades asumirían los tráficos autonómicos.",
+     "locator": "Enmienda núm. 281 (BOCG A-9-4, pág. 238)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion071/VOT_20251008195343.json": {
@@ -1446,6 +1964,29 @@
     "verdict": "keep",
     "note": "Municipios obligados por la ley ya medidos",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Municipios de 20.000 a 50.000 habitantes",
+     "text": "Tendrían dos años, en vez de uno, para dotarse de un plan de movilidad sostenible simplificado.",
+     "locator": "Enmienda núm. 553 (BOCG A-9-4, pág. 476)"
+    },
+    {
+     "actor": "Ayuntamientos",
+     "text": "Los planes de movilidad vigentes valdrían y tendrían cinco años para adaptarlos; el Estado tendría que dotar de financiación suficiente.",
+     "locator": "Enmienda núm. 553 (BOCG A-9-4, pág. 476)"
+    },
+    {
+     "actor": "Comunidades autónomas",
+     "text": "Sus planes de transporte vigentes serían válidos, con cinco años para adaptarlos, y el Estado tendría que aportar dotación económica suficiente.",
+     "locator": "Enmienda núm. 552 (BOCG A-9-4, pág. 475)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1516,6 +2057,24 @@
     "verdict": "improved",
     "note": "Plan afecta a toda la aviación, no solo vuelos interiores",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Gobierno y ministerios de Transportes y Transición Ecológica",
+     "text": "Habría un Plan nacional de Descarbonización del Transporte Aéreo, elaborado por esos dos ministerios y aprobado por el Consejo de Ministros.",
+     "locator": "Enmienda núm. 64 (BOCG A-20-2, pág. 68)"
+    },
+    {
+     "actor": "Sector del transporte aéreo",
+     "text": "El plan habría incluido mecanismos de gobernanza y financiación, y criterios e indicadores de seguimiento.",
+     "locator": "Enmienda núm. 64, apartado 2 (BOCG A-20-2, pág. 68)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },

@@ -275,6 +275,12 @@
     "note": "cifra específica añadida",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "Sin texto extraído; B-57-2 (toma en consideración) solo trae el título, sin articulado. Un intento de fetch sin resultado útil.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion154/20251211/Votacion014/VOT_20251211175058.json": {
@@ -423,6 +429,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "Enmiendas a la totalidad de devolución sin texto propio extraído; un intento con kit fetch sobre A-79-1 solo dio el proyecto de ley, no las enmiendas. Sin efectos verificables.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion175/20260428/Votacion001/VOT_20260428200327.json": {
@@ -678,6 +690,12 @@
     "verdict": "improved",
     "note": "Cifras oficiales de la AP-9",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "Toma en consideración; sin texto articulado extraído. Mismo fetch (B-57-2) sin contenido sustantivo.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1221,6 +1239,19 @@
     "note": "Coste de 904,7 M es de informe universitario, no oficial",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Comunidad Autónoma de Galicia",
+     "text": "El Congreso manifiesta su compromiso de impulsar la tramitación de la ley orgánica que le transferiría la titularidad y competencias de la AP-9.",
+     "locator": "Punto 3 del texto presentado (BOCG Congreso D-222 (2024-10-24), pág. 13)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion066/20241010/Votacion008/VOT_20241010194924.json": {
@@ -1355,6 +1386,19 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Comunidades autónomas",
+     "text": "La ley y su desarrollo se aplicarían sin perjuicio de las competencias en discapacidad y dependencia de la Comunidad Foral de Navarra y del resto de comunidades.",
+     "locator": "Enmienda núm. 3 (BOCG A-64-5, pág. 2)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion185/20260611/Votacion001/VOT_20260611145700.json": {
@@ -1373,6 +1417,24 @@
     "verdict": "improved",
     "note": "cifra específica añadida",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Funcionarios de prisiones",
+     "text": "La Administración habría tenido que resarcirles por daños personales o materiales en acto de servicio, salvo dolo, negligencia o impericia graves.",
+     "locator": "Enmienda núm. 14 (BOCG B-102-4, pág. 15)"
+    },
+    {
+     "actor": "Generalitat de Catalunya",
+     "text": "El Gobierno habría asumido las cuantías derivadas de esa indemnidad y las habría traspasado a la Generalitat.",
+     "locator": "Enmienda núm. 14 (BOCG B-102-4, pág. 15)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1393,6 +1455,24 @@
     "note": "sin cifra oficial específica de Policía Canaria",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Policía Canaria",
+     "text": "Habría ejercido las funciones generales de Policía Judicial y se habría regido por el Estatuto de Autonomía de Canarias, con la ley estatal como supletoria.",
+     "locator": "Enmienda núm. 1 (BOCG B-97-4, págs. 1-2)"
+    },
+    {
+     "actor": "Jueces y fiscales",
+     "text": "Habrían podido contar con unidades de Policía Judicial de la Policía Canaria, dependientes funcionalmente de ellos en la investigación.",
+     "locator": "Enmienda núm. 1 (BOCG B-97-4, pág. 2)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion024/VOT_20251008195246.json": {
@@ -1411,6 +1491,19 @@
     "verdict": "keep",
     "note": "Foro estatal; sin cifra específica oficial",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Comunidades autónomas",
+     "text": "Se habría quitado al foro estatal de movilidad la función de informar sobre los criterios de los grandes centros que deben tener plan de movilidad.",
+     "locator": "Enmienda núm. 427 (BOCG A-9-4, pág. 368)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1431,6 +1524,24 @@
     "note": "Pasajeros de los aeropuertos de Euskadi",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Comunidad Autónoma de Euskadi",
+     "text": "Podría participar en una filial de AENA que gestionaría los tres aeropuertos de interés general de su territorio.",
+     "locator": "Enmienda núm. 31 (BOCG A-20-2, pág. 37)"
+    },
+    {
+     "actor": "AENA",
+     "text": "Quedaría autorizada a crear esa filial, que el Consejo de Ministros constituiría como gestora aeroportuaria de los aeropuertos de Euskadi.",
+     "locator": "Enmienda núm. 31 (BOCG A-20-2, pág. 37)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion088/20241219/Votacion013/VOT_20241219162714.json": {
@@ -1443,6 +1554,24 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Comunidades autónomas",
+     "text": "Tendrían que dotarse de planes propios de inspección y control del desperdicio, con controles sistemáticos y frecuentes en toda la cadena.",
+     "locator": "Enmienda núm. 126 (BOCG A-4-3, pág. 117)"
+    },
+    {
+     "actor": "Administración General del Estado",
+     "text": "El plan estatal solo fijaría objetivos y prioridades generales de control; se eliminaría el control equivalente sobre los servicios autonómicos.",
+     "locator": "Enmienda núm. 126 (BOCG A-4-3, pág. 117)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion079/20241121/Votacion065/VOT_20241121173902.json": {
@@ -1456,6 +1585,19 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Comunidad Foral de Navarra",
+     "text": "Asumiría la competencia de vigilancia y control del tráfico dentro de su territorio, con la modificación de su ley de Amejoramiento.",
+     "locator": "Artículo único (BOCG A-30-1, pág. 2)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion056/20240723/Votacion015/VOT_20240723221643.json": {
@@ -1468,6 +1610,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "bloque, «resto de enmiendas», transaccional o sin texto votado identificable: no se puede atribuir el efecto con certeza",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion052/20240627/Votacion003/VOT_20240627130335.json": {
@@ -1480,6 +1628,19 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Colegios profesionales",
+     "text": "Podrían omitir en su memoria anual la composición por sexo de la Junta de Gobierno, las explicaciones del desequilibrio y las quejas desagregadas por sexo.",
+     "locator": "Enmienda núm. 24 (BOCG A-1-2, págs. 29-30)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion040/20240523/Votacion045/VOT_20240523141015.json": {
@@ -1493,6 +1654,19 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Estado (Alta Inspección de Educación)",
+     "text": "Habría quedado recogido que le corresponde garantizar sus facultades en enseñanza y la observancia de los principios constitucionales, en particular la igualdad entre españoles.",
+     "locator": "Enmienda al artículo 59, párrafo cuarto (BOCG A-5-7, pág. 71)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion011/VOT_20260714201948.json": {
@@ -1506,6 +1680,29 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Personas con discapacidad",
+     "text": "Habría un Fondo estatal para financiar intervenciones de accesibilidad universal en entornos y servicios públicos.",
+     "locator": "Enmienda núm. 11 (BOCG A-64-5, pág. 8)"
+    },
+    {
+     "actor": "Comunidades autónomas",
+     "text": "Gestionarían el Fondo junto al Estado; el reparto de recursos y la elección de proyectos se harían en los órganos de cooperación de servicios sociales.",
+     "locator": "Enmienda núm. 11 (BOCG A-64-5, pág. 8)"
+    },
+    {
+     "actor": "Organizaciones de personas con discapacidad",
+     "text": "Se contaría con su opinión para determinar las áreas prioritarias de financiación del Fondo.",
+     "locator": "Enmienda núm. 11 (BOCG A-64-5, pág. 8)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion013/VOT_20260714201953.json": {
@@ -1524,6 +1721,19 @@
     "note": "Cifras de dependencia ya miden el colectivo",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Comunidades autónomas",
+     "text": "El Consejo Territorial solo podría proponer, y no fijar, criterios de acreditación de la calidad de centros y servicios de dependencia, sin perjuicio de sus competencias.",
+     "locator": "Enmienda núm. 19 (BOCG A-64-5, pág. 16)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion019/VOT_20260714202003.json": {
@@ -1537,6 +1747,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "sin texto extraído: votación en bloque de «resto de enmiendas» sin numerar; no se puede atribuir contenido a cada una",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion026/VOT_20260714202015.json": {
@@ -1555,6 +1771,34 @@
     "note": "Cifras de dependencia ya miden el colectivo",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Personas en situación de dependencia",
+     "text": "La exposición de motivos habría recogido la ayuda a domicilio organizada en colectivo para un grupo reducido de personas cercanas que lo soliciten voluntariamente.",
+     "locator": "Enmienda núm. 160 (BOCG A-64-5, pág. 154)"
+    },
+    {
+     "actor": "Personas en situación de dependencia",
+     "text": "Se habría aclarado que suprimir el régimen estatal de incompatibilidades de prestaciones no cambia las incompatibilidades que ya fijan las comunidades autónomas.",
+     "locator": "Enmienda núm. 164 (BOCG A-64-5, pág. 158)"
+    },
+    {
+     "actor": "Comunidades autónomas",
+     "text": "Sus regímenes propios de incompatibilidad entre prestaciones de dependencia se habrían mantenido vigentes, según el texto de la exposición de motivos.",
+     "locator": "Enmienda núm. 164 (BOCG A-64-5, pág. 158)"
+    },
+    {
+     "actor": "Personas con discapacidad",
+     "text": "La ley habría definido inclusión, ajustes razonables, capacitismo y desinstitucionalización; negar un ajuste razonable contaría como discriminación.",
+     "locator": "Enmienda núm. 169 (BOCG A-64-5, pág. 162)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion041/VOT_20260714202038.json": {
@@ -1572,6 +1816,24 @@
     "verdict": "improved",
     "note": "Personas con discapacidad reconocida",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Comunidades autónomas",
+     "text": "Habrían desarrollado y tipificado su propio régimen de infracciones y sanciones en discapacidad, con el régimen estatal solo como norma supletoria.",
+     "locator": "Enmienda núm. 112 (BOCG A-64-5, pág. 113)"
+    },
+    {
+     "actor": "Personas con discapacidad",
+     "text": "Mientras una comunidad no tuviera régimen propio, se habría aplicado el régimen común del Estado para evitar situaciones de impunidad.",
+     "locator": "Enmienda núm. 112 (BOCG A-64-5, pág. 113)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1665,6 +1927,24 @@
     "note": "cifra específica añadida",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Vecinos de Barcelona",
+     "text": "Se habría podido implantar una Justicia de Proximidad en Barcelona, según lo que disponga la Ley Orgánica del Poder Judicial.",
+     "locator": "Enmienda núm. 33 (BOCG B-97-4, pág. 21)"
+    },
+    {
+     "actor": "Personas que litigan en Barcelona",
+     "text": "Habría sido un modelo basado en inmediatez, oralidad, no formalidad y gratuidad, con uso del catalán según la legislación vigente en Cataluña.",
+     "locator": "Enmienda núm. 33 (BOCG B-97-4, pág. 21)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion154/20251211/Votacion009/VOT_20251211175052.json": {
@@ -1704,6 +1984,19 @@
     "note": "Títulos competenciales; cifra de transporte general vale",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Comunidades autónomas",
+     "text": "Se habría retirado de la ley la referencia a los apartados 1.ª y 13.ª del artículo 149.1 de la Constitución como base de la competencia del Estado.",
+     "locator": "Enmienda núm. 483 (BOCG A-9-4, pág. 408)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion029/VOT_20251008195251.json": {
@@ -1722,6 +2015,12 @@
     "verdict": "keep",
     "note": "Resto enmiendas genéricas; sin cifra específica",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "Votación sin texto de enmiendas individuales (resto de enmiendas, sin número): no se puede determinar qué cambia para cada colectivo.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1742,6 +2041,29 @@
     "note": "Ayudas estatales transporte urbano: 735 M€",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Entidades locales",
+     "text": "Habría dos vocalías en el foro de movilidad para la entidad más representativa del País Vasco y dos para la asociación catalana de municipios.",
+     "locator": "Enmienda núm. 341 (BOCG A-9-4, pág. 295)"
+    },
+    {
+     "actor": "Comunidades autónomas",
+     "text": "Se habría suprimido el artículo 21 de la ley, con el fin de proteger las competencias de las comunidades.",
+     "locator": "Enmienda núm. 354 (BOCG A-9-4, pág. 305)"
+    },
+    {
+     "actor": "Transporte público urbano",
+     "text": "Las subvenciones a los costes operativos se concederían por un mínimo de tres años, con liquidaciones anuales.",
+     "locator": "Enmienda núm. 391 (BOCG A-9-4, pág. 332)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion032/VOT_20251008195254.json": {
@@ -1760,6 +2082,29 @@
     "verdict": "improved",
     "note": "Autobús interurbano y flota eléctrica",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Comunidades autónomas",
+     "text": "Los datos de movilidad de su territorio recogidos por el espacio de datos estatal se gestionarían de forma compartida con ellas.",
+     "locator": "Enmienda núm. 344 (BOCG A-9-4, pág. 297)"
+    },
+    {
+     "actor": "Comunidades y entidades locales",
+     "text": "Participarían en la planificación y definición de actuaciones ferroviarias y viarias que les correspondan por titularidad.",
+     "locator": "Enmienda núm. 379 (BOCG A-9-4, pág. 324)"
+    },
+    {
+     "actor": "Operadores de autobús interurbano",
+     "text": "Habría un programa plurianual de ayudas, creado por real decreto en 6 meses, para renovar flotas y llegar al 50 % de vehículos de cero emisiones.",
+     "locator": "Enmienda núm. 396 (BOCG A-9-4, pág. 336)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1780,6 +2125,19 @@
     "note": "Contribución estatal movilidad urbana",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Comunidades autónomas",
+     "text": "La contribución estatal a la movilidad urbana se repartiría según sus prioridades y con criterios objetivos de necesidad territorial y demográfica.",
+     "locator": "Enmienda núm. 383 (BOCG A-9-4, pág. 326)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion036/VOT_20251008195259.json": {
@@ -1799,6 +2157,19 @@
     "note": "Subvenciones estatales movilidad urbana",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Comunidades autónomas",
+     "text": "Las subvenciones a proyectos de movilidad urbana que aprueben y que tengan financiación estatal se les transferirían directamente.",
+     "locator": "Enmienda núm. 392 (BOCG A-9-4, pág. 334)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion037/VOT_20251008195300.json": {
@@ -1813,6 +2184,24 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Generalitat de Catalunya",
+     "text": "Recibiría la titularidad y gestión de todas las Cercanías y de los trenes de media y larga distancia en Cataluña, con infraestructuras, estaciones y trenes.",
+     "locator": "Enmienda núm. 407 (BOCG A-9-4, pág. 346)"
+    },
+    {
+     "actor": "Presupuestos del Estado",
+     "text": "Tendrían que transferir fondos permanentes, actualizados con el IPC, para el mantenimiento, y 35.000 millones de euros de compensación por 2009-2023.",
+     "locator": "Enmienda núm. 407 (BOCG A-9-4, pág. 346)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion039/VOT_20251008195302.json": {
@@ -1831,6 +2220,12 @@
     "verdict": "keep",
     "note": "Sistema nacional de movilidad; cifra general vale",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "Votación sin texto de enmiendas individuales (resto de enmiendas, sin número): no se puede determinar qué cambia para cada colectivo.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1851,6 +2246,34 @@
     "note": "Financiación estatal transporte urbano",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Comunidades autónomas",
+     "text": "Habrían participado siempre en fijar obligaciones de servicio público en transportes estatales que les afectan, y podrían proponerlas ellas mismas.",
+     "locator": "Enmienda núm. 678 (BOCG A-9-4, pág. 571)"
+    },
+    {
+     "actor": "Administraciones territoriales de transporte",
+     "text": "Podrían declarar nodos logísticos de importancia estratégica en su territorio, en lugar de depender solo de un acuerdo del Consejo de Ministros.",
+     "locator": "Enmienda núm. 698 (BOCG A-9-4, pág. 583)"
+    },
+    {
+     "actor": "Empresas y plantillas",
+     "text": "Habría planes de movilidad al trabajo en 24 meses en centros con más de 500 personas (o 250 por turno), negociados con la representación de los trabajadores.",
+     "locator": "Enmienda núm. 659 (BOCG A-9-4, pág. 558)"
+    },
+    {
+     "actor": "Navieras (buques de pasaje y portacontenedores)",
+     "text": "Las autoridades portuarias podrían obligarles, por ordenanza, a conectarse a la electricidad de tierra en el muelle y a usarla para toda su demanda.",
+     "locator": "Enmienda núm. 669 (BOCG A-9-4, pág. 565)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "Enmiendas 623, 624, 641 y 708 no se recogen: 623/624 son definiciones o de mejora técnica y 641 y 708 se leen truncados en el lote.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion041/VOT_20251008195305.json": {
@@ -1869,6 +2292,24 @@
     "verdict": "improved",
     "note": "Tarifas integradas y autobuses urbanos",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Operadores de autobús interurbano",
+     "text": "Habría un programa de ayudas, por Real Decreto en 6 meses, para sustituir y ampliar flotas con vehículos de emisiones cero, en subvención o financiación diferida.",
+     "locator": "Enmienda núm. 716 (BOCG A-9-4, pág. 599)"
+    },
+    {
+     "actor": "Administraciones con competencias en transporte",
+     "text": "La promoción de la bicicleta correspondería a cada administración competente en su ámbito, y no a un plan nacional del Ministerio.",
+     "locator": "Enmienda núm. 703 (BOCG A-9-4, pág. 585)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "Enmiendas 625, 691 y 702 son definiciones o cambios de rúbrica sin efecto directo para colectivos.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1889,6 +2330,12 @@
     "note": "Transporte de titularidad estatal",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "cambio técnico sin efecto para colectivos: la enmienda 673 solo cambia la rúbrica del Capítulo I del Título III.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion046/VOT_20251008195311.json": {
@@ -1907,6 +2354,24 @@
     "verdict": "improved",
     "note": "Servicios estatales y tarifas integradas",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Administraciones titulares de servicios de transporte",
+     "text": "El deber de coordinar los servicios de carretera y ferrocarril recaería solo en los titulares de servicios de competencia estatal, y no en todas las administraciones.",
+     "locator": "Enmienda núm. 674 (BOCG A-9-4, pág. 569)"
+    },
+    {
+     "actor": "Personas usuarias del transporte público",
+     "text": "Se fomentaría la interoperabilidad, la integración tarifaria y herramientas digitales de pago en los servicios de competencia estatal.",
+     "locator": "Enmienda núm. 674 (BOCG A-9-4, pág. 569)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -2003,6 +2468,19 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Administraciones con competencia en agentes forestales",
+     "text": "La ley no condicionaría la estructura jerárquica ni competencial que cada administración quiera fijar para sus agentes forestales y medioambientales.",
+     "locator": "Enmienda núm. 135 (BOCG A-14-3, pág. 127)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion029/20240314/Votacion004/VOT_20240314123712.json": {
@@ -2016,6 +2494,29 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Comunidad educativa de los centros",
+     "text": "Tendría presencia mayoritaria en el proceso de selección de la dirección del centro, que regularían las administraciones educativas autonómicas.",
+     "locator": "Enmienda núm. 59 (BOCG A-5-3, pág. 57)"
+    },
+    {
+     "actor": "Profesorado funcionario de carrera",
+     "text": "Sus candidaturas a dirigir el centro se valorarían especialmente, con prioridad para méritos de docencia, gestión, investigación y creación artística.",
+     "locator": "Enmienda núm. 59 (BOCG A-5-3, pág. 57)"
+    },
+    {
+     "actor": "Aspirantes a la dirección",
+     "text": "Quien superase la selección tendría que completar antes del nombramiento un programa de formación en competencias directivas.",
+     "locator": "Enmienda núm. 59 (BOCG A-5-3, pág. 57)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion029/20240314/Votacion007/VOT_20240314123715.json": {
@@ -2029,6 +2530,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "Votación en bloque del resto de enmiendas de un diputado sin números concretos; un intento con kit fetch en A-5-3 no permite identificar cuáles son. Sin texto votado identificable.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion029/20240314/Votacion009/VOT_20240314123717.json": {
@@ -2042,6 +2549,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "Votación en bloque del resto de enmiendas de un grupo (más de 100 coincidencias en A-5-3); no se puede identificar cuáles se votaron. Sin texto votado identificable.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion029/20240314/Votacion011/VOT_20240314123720.json": {
@@ -2055,6 +2568,29 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Centros públicos y privados",
+     "text": "Todos tendrían competencia para definir sus objetivos, oferta, pruebas de acceso, planes de estudio y procedimientos de admisión de su estudiantado.",
+     "locator": "Enmienda núm. 94 (BOCG A-5-3, pág. 90)"
+    },
+    {
+     "actor": "Comunidades autónomas",
+     "text": "Regularían los órganos de gobierno de los centros públicos, y el Consejo de Centro y el Claustro pasarían de obligatorios a posibles («podrán contar»).",
+     "locator": "Enmienda núm. 96 (BOCG A-5-3, pág. 91)"
+    },
+    {
+     "actor": "Centros de enseñanzas artísticas superiores",
+     "text": "Se habría suprimido el artículo 14 (estrategia de innovación docente), de modo que cada centro decidiría cómo desarrollar la innovación docente.",
+     "locator": "Enmienda núm. 87 (BOCG A-5-3, pág. 86)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion029/20240314/Votacion015/VOT_20240314123724.json": {
@@ -2068,6 +2604,19 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Centros de enseñanzas artísticas superiores",
+     "text": "Se habría suprimido el artículo 56 (capítulo XI), para evitar solapes entre las agencias de evaluación de la calidad y la inspección educativa.",
+     "locator": "Enmienda núm. 103 (BOCG A-5-3, pág. 96)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion029/20240314/Votacion016/VOT_20240314123725.json": {
@@ -2081,6 +2630,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "Votación en bloque del resto de enmiendas de un grupo, sin números identificables; sin texto votado extraído. No se intentó adivinar cuáles eran.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   }
  }

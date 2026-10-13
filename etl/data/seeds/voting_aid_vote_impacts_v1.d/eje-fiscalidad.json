@@ -968,7 +968,18 @@
     "eje-fiscalidad--hacienda-2024-gravamenes-banca-energeticas",
     "eje-fiscalidad--eurostat-2025-ingresos-gasto"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Grandes empresas energéticas y petroleras",
+     "text": "Tendrían que pagar un impuesto permanente sobre sus beneficios extraordinarios, equivalente a los obtenidos desde el inicio de la crisis energética de 2022.",
+     "locator": "Punto 1 (BOCG D-599, pág. 15)"
+    },
+    {
+     "actor": "Arcas públicas",
+     "text": "Recuperarían una cuantía equivalente a los beneficios extraordinarios de las energéticas y petroleras desde 2022.",
+     "locator": "Punto 1 (BOCG D-599, pág. 15)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -980,6 +991,12 @@
     "note": "gravámenes temporales ya miden la recaudación afectada",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion180/20260520/Votacion010/VOT_20260520142334.json": {
@@ -989,7 +1006,18 @@
     "w018--eurostat-2025-edad-emancipacion",
     "eje-fiscalidad--boe-iva-tipos"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Jóvenes",
+     "text": "Tendrían avales públicos para facilitar su acceso a la vivienda y deducciones que faciliten el alquiler.",
+     "locator": "Punto 4 del texto presentado (BOCG Congreso D-538 (2026-05-28), pág. 16)"
+    },
+    {
+     "actor": "Compradores de vivienda nueva y rehabilitación",
+     "text": "El IVA de la vivienda nueva y de la rehabilitación bajaría al 4 %.",
+     "locator": "Punto 4 del texto presentado (BOCG Congreso D-538 (2026-05-28), pág. 16)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1001,6 +1029,12 @@
     "note": "Vivienda nueva vendida, IVA actual y emancipación",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion177/20260430/Votacion006/VOT_20260430125150.json": {
@@ -1010,7 +1044,18 @@
     "eje-fiscalidad--aeat-irpf-2023-tramos",
     "eje-fiscalidad--aeat-2025-ingresos"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Clases medias",
+     "text": "El Gobierno tendría que revisar la política económica para aliviarlas y corregir la subida silenciosa de impuestos vía inflación.",
+     "locator": "Punto 2 del texto presentado (BOCG Congreso D-527 (2026-05-08), pág. 19)"
+    },
+    {
+     "actor": "Trabajo, ahorro e inversión productiva",
+     "text": "El sistema tributario se orientaría a incentivarlos.",
+     "locator": "Punto 2 del texto presentado (BOCG Congreso D-527 (2026-05-08), pág. 19)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1021,6 +1066,12 @@
     "verdict": "keep",
     "note": "Sin cifra oficial específica de la medida",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1030,7 +1081,13 @@
     "eje-fiscalidad--ine-ipc-2021-2025-acumulado",
     "eje-fiscalidad--aeat-irpf-2023-tramos"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Contribuyentes del IRPF",
+     "text": "El Gobierno tendría que deflactar el IRPF para adaptarlo al aumento de precios y salarios y compensar la pérdida de poder adquisitivo.",
+     "locator": "Punto 1 del texto presentado (BOCG Congreso D-522 (2026-04-30), pág. 20)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1042,6 +1099,12 @@
     "note": "Sin cifra oficial específica de la medida",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion008/VOT_20260326165034.json": {
@@ -1050,7 +1113,18 @@
     "w020--ine-epf-2025-electricidad-gas",
     "eje-fiscalidad--aeat-2025-iva-vuelta-tipos"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Hogares",
+     "text": "El Gobierno tendría que reducir al 5 % el IVA del gas natural, de los combustibles de calefacción doméstica (biomasa, leña) y de la factura eléctrica.",
+     "locator": "Punto 1 del texto presentado (BOCG Congreso D-493 (2026-03-13), pág. 31)"
+    },
+    {
+     "actor": "Pymes",
+     "text": "El Gobierno tendría que aplicar también el IVA reducido del 5 % a la factura eléctrica de las pequeñas empresas.",
+     "locator": "Punto 1 del texto presentado (BOCG Congreso D-493 (2026-03-13), pág. 31)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1062,6 +1136,12 @@
     "note": "Gasto de hogares en luz y gas; recaudación IVA energía",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "Texto de Punto 1 truncado en el lote; resumido con el aprobado.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion039/VOT_20260326165120.json": {
@@ -1071,7 +1151,23 @@
     "eje-fiscalidad--ine-ipc-2026-energia",
     "eje-fiscalidad--aeat-2025-iva-vuelta-tipos"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Hogares consumidores de energía",
+     "text": "El Gobierno tendría que bajar el IVA al 5 % en la factura eléctrica y el gas natural, y al 5 % en el combustible de calefacción doméstica.",
+     "locator": "Punto 3 (BOCG D-507, pág. 16)"
+    },
+    {
+     "actor": "Pymes",
+     "text": "El Gobierno tendría que aplicar el IVA reducido del 5 % en la factura eléctrica, dando prioridad a consumidores domésticos y pequeñas empresas.",
+     "locator": "Punto 3 (BOCG D-507, pág. 16)"
+    },
+    {
+     "actor": "Conductores y usuarios de hidrocarburos",
+     "text": "El Gobierno tendría que fijar el IVA de los hidrocarburos en el 10 %.",
+     "locator": "Punto 3 (BOCG D-507, pág. 16)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1083,6 +1179,12 @@
     "note": "gasto en energía y transporte ya cubre la medida",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion048/VOT_20260326165133.json": {
@@ -1092,7 +1194,23 @@
     "eje-fiscalidad--aeat-2025-hidrocarburos",
     "eje-fiscalidad--aeat-2025-iva-vuelta-tipos"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Hogares y consumidores de energía",
+     "text": "El Gobierno tendría que rebajar al 10 % el IVA de la electricidad (hasta 10 kW o bono social vulnerable), del gas natural, de pellets y leña, y de gasolina y gasóleo.",
+     "locator": "Punto 2 del texto presentado (BOCG Congreso D-507 (2026-04-06), pág. 37)"
+    },
+    {
+     "actor": "Empresas generadoras de electricidad",
+     "text": "El Gobierno tendría que suprimir de forma permanente el impuesto al valor de la producción de energía eléctrica.",
+     "locator": "Punto 2 del texto presentado (BOCG Congreso D-507 (2026-04-06), pág. 37)"
+    },
+    {
+     "actor": "Agricultores",
+     "text": "El Gobierno tendría que rebajar al 10 % el IVA del gasóleo agrícola destinado al consumo en España, por 3 meses ampliables.",
+     "locator": "Punto 2 del texto presentado (BOCG Congreso D-507 (2026-04-06), pág. 37)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1104,6 +1222,12 @@
     "note": "recaudación de luz, carburantes y IVA energía",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion164/20260226/Votacion009/VOT_20260226153409.json": {
@@ -1113,7 +1237,28 @@
     "eje-fiscalidad--ine-ipc-2021-2025-acumulado",
     "eje-fiscalidad--aeat-irpf-2023-tramos"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Contribuyentes del IRPF",
+     "text": "El Gobierno tendría que presentar unos Presupuestos 2026 que ajusten a la inflación al menos los 3 primeros tramos del IRPF.",
+     "locator": "Punto 1 (BOCG D-489, pág. 64)"
+    },
+    {
+     "actor": "Familias",
+     "text": "Los Presupuestos incluirían revisar la deducción por maternidad y las de familia numerosa o personas con incapacidad a cargo.",
+     "locator": "Punto 1 (BOCG D-489, pág. 64)"
+    },
+    {
+     "actor": "Personas con enfermedad celíaca",
+     "text": "Los Presupuestos incluirían una ayuda de 600 euros para compensar el sobrecoste económico que asumen.",
+     "locator": "Punto 1 (BOCG D-489, pág. 64)"
+    },
+    {
+     "actor": "Comunidades autónomas y entidades locales",
+     "text": "Sus entregas a cuenta se actualizarían con las previsiones de ingresos de 2026, mediante un Real Decreto sin otras medidas.",
+     "locator": "Punto 2 (BOCG D-489, pág. 64)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1125,6 +1270,12 @@
     "note": "entregas a cuenta 2026 a CCAA y ayuntamientos",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion161/20260218/Votacion010/VOT_20260218141933.json": {
@@ -1133,7 +1284,18 @@
     "eje-fiscalidad--ine-etdp-2025-compraventas",
     "eje-fiscalidad--boe-iva-tipos"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Compradores de primera vivienda nueva",
+     "text": "El IVA de su compra bajaría del 10 % al 4 % y podrían fraccionar IVA e impuesto de transmisiones al ritmo de pago de la hipoteca.",
+     "locator": "Punto 6 (BOCG D-484, pág. 15)"
+    },
+    {
+     "actor": "Comunidades autónomas",
+     "text": "Se pediría al Gobierno un IVA del 4 %, como han hecho muchas comunidades reduciendo en igual medida el ITP.",
+     "locator": "Punto 6 (BOCG D-484, pág. 15)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1145,6 +1307,12 @@
     "note": "vivienda nueva y tipos de IVA; sin cifra oficial más fina",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion159/20260212/Votacion020/VOT_20260212114339.json": {
@@ -1153,7 +1321,23 @@
     "eje-fiscalidad--aeat-irpf-2023-tramos",
     "eje-fiscalidad--aeat-2025-ingresos"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Contribuyentes con rentas bajas",
+     "text": "El Gobierno tendría que reducir un 5 % el tramo estatal del IRPF para rentas inferiores a 25.000 euros.",
+     "locator": "Punto 12 (BOCG D-479, pág. 20)"
+    },
+    {
+     "actor": "Grandes empresas",
+     "text": "El impuesto de sociedades subiría entre un 5 y un 7 % para empresas con más de 4 millones de euros de facturación.",
+     "locator": "Punto 12 (BOCG D-479, pág. 20)"
+    },
+    {
+     "actor": "Contribuyentes con gastos deducibles",
+     "text": "El Gobierno tendría que ampliar los gastos deducibles reales.",
+     "locator": "Punto 12 (BOCG D-479, pág. 20)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1165,6 +1349,12 @@
     "note": "Sin cifra oficial específica de la medida",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion154/20251211/Votacion007/VOT_20251211175049.json": {
@@ -1173,12 +1363,24 @@
     "eje-fiscalidad--aeat-irpf-2023-tramos",
     "eje-fiscalidad--ine-ecv-2025-pobreza"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Contribuyentes con más capacidad económica",
+     "text": "El Gobierno tendría que apostar por un sistema tributario más justo, equitativo y redistributivo, en el que contribuya más quien tiene más capacidad económica.",
+     "locator": "Punto 3 del texto presentado (BOCG D-453, pág. 17)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "numeración verificada y reescrita desde el texto presentado",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion141/20251022/Votacion005/VOT_20251022134521.json": {
@@ -1188,12 +1390,34 @@
     "eje-fiscalidad--ine-epa-2025-cuenta-propia",
     "eje-fiscalidad--aeat-irpf-2023-tramos"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Contribuyentes del IRPF",
+     "text": "El Gobierno tendría que ajustar el IRPF a la inflación para compensar la pérdida de poder adquisitivo por la «progresividad en frío».",
+     "locator": "Punto 1 del texto presentado (BOCG Congreso D-421 (2025-10-30), pág. 13)"
+    },
+    {
+     "actor": "Personas con el salario mínimo",
+     "text": "El Gobierno tendría que eximir de tributación el Salario Mínimo Interprofesional en la declaración del IRPF de 2026.",
+     "locator": "Punto 1 del texto presentado (BOCG Congreso D-421 (2025-10-30), pág. 13)"
+    },
+    {
+     "actor": "Autónomos",
+     "text": "El Gobierno tendría que no aplicar en 2026 la subida de cuotas de hasta el 35 % y trasponer ya la directiva del IVA franquiciado (menos de 85.000 € al año).",
+     "locator": "Punto 1 del texto presentado (BOCG Congreso D-421 (2025-10-30), pág. 13)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion139/20251016/Votacion017/VOT_20251016123511.json": {
@@ -1202,7 +1426,18 @@
     "eje-campo-ambiente--mapa-flota-2025",
     "eje-fiscalidad--ine-epa-2025-agrario"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Consumidores y familias",
+     "text": "El Gobierno tendría que reducir al 0 % el IVA del pescado y los productos pesqueros, que el texto trata como alimento básico.",
+     "locator": "Punto 10 (BOCG D-416, pág. 23)"
+    },
+    {
+     "actor": "Sector pesquero",
+     "text": "El texto busca que esa rebaja del IVA dinamice económicamente el sector de la pesca.",
+     "locator": "Punto 10 (BOCG D-416, pág. 23)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1214,6 +1449,12 @@
     "note": "flota pesquera gallega y empleo en pesca",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion093/VOT_20251008195406.json": {
@@ -1222,7 +1463,13 @@
     "ine-ecv-2025-tenencia",
     "eje-fiscalidad--ine-ipv-2026t2-precios"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "SOCIMIs",
+     "text": "Se pediría al Gobierno impulsar la supresión de los privilegios fiscales de las SOCIMI, en un plazo máximo de tres meses.",
+     "locator": "Punto 5 (BOCG D-399, pág. 28)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1234,6 +1481,12 @@
     "note": "Sin cifra oficial específica de SOCIMI hallada",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion109/VOT_20251008195422.json": {
@@ -1242,12 +1495,29 @@
     "eje-fiscalidad--ine-epa-2025-agrario",
     "eje-fiscalidad--aeat-2025-hidrocarburos"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Actividades económicas del mundo rural",
+     "text": "El Gobierno tendría que aprobar una ley de fiscalidad agraria diferenciada que las trate de forma favorable frente a otros ámbitos.",
+     "locator": "Punto 3 del texto presentado (BOCG Congreso D-411 (2025-10-16), pág. 12)"
+    },
+    {
+     "actor": "Jóvenes del medio rural",
+     "text": "Esa ley fomentaría su incorporación y mejoraría la atractividad socioeconómica del entorno rural.",
+     "locator": "Punto 3 del texto presentado (BOCG Congreso D-411 (2025-10-16), pág. 12)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion132/20250917/Votacion017/VOT_20250917194039.json": {
@@ -1257,7 +1527,13 @@
     "eje-fiscalidad--ine-etdp-2025-compraventas",
     "eje-fiscalidad--ine-ipv-2026t2-precios"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Jóvenes que buscan primera vivienda",
+     "text": "El Gobierno tendría que establecer medidas fiscales que faciliten acceder a una primera vivienda más asequible y reduzcan la edad media de emancipación.",
+     "locator": "Punto 2 del texto presentado (BOCG Congreso D-398 (2025-09-25), pág. 20)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1269,6 +1545,12 @@
     "note": "Edad de emancipación como escala de jóvenes",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion118/20250612/Votacion010/VOT_20250612132251.json": {
@@ -1278,12 +1560,34 @@
     "eje-fiscalidad--aeat-2025-hidrocarburos",
     "eje-fiscalidad--ine-epf-2025-gasto-hogares"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Familias e industrias",
+     "text": "El Gobierno tendría que bajar de forma permanente el IVA de la electricidad al 4 % y suprimir el impuesto especial sobre la electricidad y el de hidrocarburos.",
+     "locator": "Punto 3 (BOCG D-360, pág. 8)"
+    },
+    {
+     "actor": "Productores de electricidad",
+     "text": "Se suprimiría el impuesto sobre el valor de la producción de energía eléctrica.",
+     "locator": "Punto 3 (BOCG D-360, pág. 8)"
+    },
+    {
+     "actor": "Sector nuclear",
+     "text": "Se reducirían la tasa Enresa y los impuestos sobre el combustible nuclear gastado y los residuos radiactivos.",
+     "locator": "Punto 3 (BOCG D-360, pág. 8)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "Texto del punto truncado en el lote en el apartado d (supresión de fiscalidad territorial); no se ha usado.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion098/20250313/Votacion010/VOT_20250313133902.json": {
@@ -1292,7 +1596,13 @@
     "eje-fiscalidad--aeat-2025-iva-vuelta-tipos",
     "eje-fiscalidad--ine-epf-2025-gasto-hogares"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Hogares (compra de alimentos básicos)",
+     "text": "El Gobierno tendría que recuperar el IVA del 2 % en los alimentos básicos hasta el 31 de diciembre de 2025.",
+     "locator": "Punto 1 del texto presentado (BOCG Congreso D-306 (2025-03-20), pág. 20)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1304,6 +1614,12 @@
     "note": "IVA alimentación básica primero",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion093/20250219/Votacion015/VOT_20250219135555.json": {
@@ -1312,7 +1628,13 @@
     "eje-fiscalidad--ine-etdp-2025-compraventas",
     "eje-fiscalidad--boe-iva-tipos"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Menores de 40 años que compren su primera vivienda nueva",
+     "text": "Se pediría al Gobierno reducir al 4 % el IVA de esa compra.",
+     "locator": "Punto 5 (BOCG D-291, pág. 13)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1324,6 +1646,12 @@
     "note": "vivienda nueva y tipos de IVA; sin cifra de menores de 40",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion068/20241016/Votacion007/VOT_20241017130157.json": {
@@ -1332,7 +1660,28 @@
     "eje-fiscalidad--aeat-irpf-2023-tramos",
     "eje-autonomos-empresa--aeat-irpf-2025-escala-estatal"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Contribuyentes con rentas inferiores a 22.000 euros",
+     "text": "Quedarían exentas de IRPF.",
+     "locator": "Punto 2 (BOCG D-222, pág. 9)"
+    },
+    {
+     "actor": "Contribuyentes con rentas de 22.000 a 70.000 euros",
+     "text": "Su base liquidable tributaría al 15 %.",
+     "locator": "Punto 2 (BOCG D-222, pág. 9)"
+    },
+    {
+     "actor": "Contribuyentes con rentas superiores a 70.000 euros",
+     "text": "Su base liquidable tributaría al 25 %.",
+     "locator": "Punto 2 (BOCG D-222, pág. 9)"
+    },
+    {
+     "actor": "Familias con hijos",
+     "text": "Los tipos de ambos tramos bajarían cuatro puntos por cada hijo.",
+     "locator": "Punto 2 (BOCG D-222, pág. 9)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1344,6 +1693,12 @@
     "note": "Cifras de tramos y escala del IRPF; quitado total genérico",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion066/20241010/Votacion011/VOT_20241010194926.json": {
@@ -1352,7 +1707,18 @@
     "eje-educacion-modelo--mefd-infantil-0-2",
     "eje-educacion-modelo--mefd-infantil1-titularidad"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Familias con hijos escolarizados",
+     "text": "El Gobierno tendría que establecer deducciones fiscales iguales en toda España: educación reglada, material escolar, comedor, transporte y extraescolares.",
+     "locator": "Punto 4 (BOCG D-217, pág. 14)"
+    },
+    {
+     "actor": "Familias con hijos de 0 a 3 años",
+     "text": "El Gobierno tendría que garantizar la gratuidad de la etapa escolar de 0 a 3 años.",
+     "locator": "Punto 4 (BOCG D-217, pág. 14)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1364,6 +1730,12 @@
     "note": "Alumnado 0-2 años afectado por la gratuidad",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion052/20240627/Votacion032/VOT_20240627130404.json": {
@@ -1373,7 +1745,23 @@
     "eje-fiscalidad--ine-ipc-2021-2025-acumulado",
     "eje-fiscalidad--ine-epa-2026t2-ocupados-jovenes"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Consumidores",
+     "text": "El Gobierno tendría que presentar unos Presupuestos 2025 que mantengan la rebaja del IVA de productos básicos y la amplíen al menos a carne, pescado y conservas.",
+     "locator": "Punto 4 del texto presentado (BOCG Congreso D-175 (2024-07-04), pág. 17)"
+    },
+    {
+     "actor": "Contribuyentes del IRPF",
+     "text": "El Gobierno tendría que incluir en los Presupuestos 2025 la deflactación del IRPF.",
+     "locator": "Punto 4 del texto presentado (BOCG Congreso D-175 (2024-07-04), pág. 17)"
+    },
+    {
+     "actor": "Jóvenes de 18 a 34 años",
+     "text": "El Gobierno tendría que incluir en los Presupuestos 2025 exenciones fiscales para jóvenes en los primeros años de su vida laboral.",
+     "locator": "Punto 4 del texto presentado (BOCG Congreso D-175 (2024-07-04), pág. 17)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1385,6 +1773,12 @@
     "note": "Sin cifra oficial específica de la medida",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion049/20240620/Votacion013/VOT_20240620132736.json": {
@@ -1392,12 +1786,29 @@
    "facts": [
     "eje-fiscalidad--ine-epa-2025-asalariados"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Empresas que contratan",
+     "text": "El Gobierno tendría que establecer incentivos fiscales para la contratación indefinida.",
+     "locator": "Punto 5 (BOCG D-170, pág. 11)"
+    },
+    {
+     "actor": "Personas que buscan empleo",
+     "text": "Los incentivos buscan fomentar la creación de empleo de calidad.",
+     "locator": "Punto 5 (BOCG D-170, pág. 11)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion043/20240530/Votacion022/VOT_20240530120017.json": {
@@ -1407,12 +1818,29 @@
     "eje-fiscalidad--aeat-irpf-2023-tramos",
     "eje-fiscalidad--ine-ecv-2025-pobreza"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Jóvenes de 18 a 34 años",
+     "text": "El Gobierno tendría que eximirles del pago de impuestos durante los primeros 4 años de su vida laboral.",
+     "locator": "Punto 1 del texto presentado (BOCG Congreso D-155 (2024-06-06), pág. 7)"
+    },
+    {
+     "actor": "Jóvenes con primeros ingresos laborales",
+     "text": "La cuota tributaria se bonificaría hasta los primeros 30.000 euros: 100 % el primer año, 75 % el segundo, 50 % el tercero y 25 % el cuarto.",
+     "locator": "Punto 1 del texto presentado (BOCG Congreso D-155 (2024-06-06), pág. 7)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion040/20240523/Votacion002/VOT_20240523140932.json": {
@@ -1421,12 +1849,29 @@
     "eje-fiscalidad--ine-epf-2025-gasto-hogares",
     "eje-fiscalidad--eurostat-2024-residuos-municipales"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Consumidores de alimentos",
+     "text": "El Gobierno tendría que revisar las medidas que han contribuido a subir los precios y a reducir el consumo.",
+     "locator": "Punto 2 (BOCG D-63, pág. 143)"
+    },
+    {
+     "actor": "Empresas sujetas al impuesto al plástico",
+     "text": "Se pediría revisar, en especial, su aplicación anticipada respecto al resto de la UE.",
+     "locator": "Punto 2 (BOCG D-63, pág. 143)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion040/20240523/Votacion018/VOT_20240523140949.json": {
@@ -1435,7 +1880,23 @@
     "eje-fiscalidad--aeat-irpf-2023-tramos",
     "eje-autonomos-empresa--aeat-irpf-2025-escala-estatal"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Contribuyentes con rentas bajas",
+     "text": "El Gobierno tendría que dejar exentas del IRPF las rentas inferiores a 22.000 euros.",
+     "locator": "Punto 6 (BOCG D-150, pág. 13)"
+    },
+    {
+     "actor": "Contribuyentes de 22.000 a 70.000 euros",
+     "text": "Se pediría un tramo del 15 % de 22.000 a 70.000 euros de base liquidable, con otro del 25 % por encima de 70.000.",
+     "locator": "Punto 6 (BOCG D-150, pág. 13)"
+    },
+    {
+     "actor": "Familias con hijos",
+     "text": "Se pediría reducir ambos tipos cuatro puntos por hijo: del 15 % al 7 % con dos hijos y sin pagar con cuatro.",
+     "locator": "Punto 6 (BOCG D-150, pág. 13)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1447,6 +1908,12 @@
     "note": "Cifras de tramos y escala del IRPF; quitado total genérico",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion132/20250917/Votacion025/VOT_20250917194052.json": {
@@ -1455,12 +1922,24 @@
     "eje-fiscalidad--eurostat-2025-pasajeros-aereos",
     "eje-fiscalidad--aeat-2025-ingresos"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Empresas que invierten en descarbonizar la aviación",
+     "text": "Habría una deducción en el impuesto de sociedades por inversiones en tecnologías de descarbonización del transporte aéreo.",
+     "locator": "Disposición final tercera.bis (BOCG A-20-9, pág. 72)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion088/20241219/Votacion005/VOT_20241219162703.json": {
@@ -1468,7 +1947,18 @@
    "facts": [
     "eje-regulacion-economica--mapa-2024-desperdicio"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Donantes de bienes",
+     "text": "Habría un mecanismo para aplicar cuanto antes el tipo del 0 % de IVA a las entregas de bienes donadas a entidades sin fines lucrativos.",
+     "locator": "Enmienda núm. 39 (BOCG A-4-3, pág. 34)"
+    },
+    {
+     "actor": "Entidades sin ánimo de lucro",
+     "text": "El Gobierno habría tenido que establecer, en el menor tiempo posible, ese IVA del 0 % para los bienes que reciben como donativo.",
+     "locator": "Enmienda núm. 39 (BOCG A-4-3, pág. 34)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1480,6 +1970,12 @@
     "note": "Desperdicio alimentario oficial sustituye cifras genéricas de IVA y gasto",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion088/20241219/Votacion093/VOT_20241219162849.json": {
@@ -1488,12 +1984,29 @@
     "eje-fiscalidad--boe-ley-7-2024-minimo-global-banca",
     "eje-fiscalidad--aeat-2025-ingresos"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Cooperativas",
+     "text": "Las cooperativas habrían quedado entre las entidades excluidas del impuesto complementario, por tener un régimen fiscal específico.",
+     "locator": "Enmienda al art. 7, apartado c) (BOCG A-23-7, pág. 3)"
+    },
+    {
+     "actor": "Empresas y contribuyentes en Canarias",
+     "text": "Habría nuevos párrafos en el artículo 14 para atender la consideración de Canarias como región ultraperiférica.",
+     "locator": "Enmienda al art. 14, apartados 3.b) y 4.b) (BOCG A-23-7, pág. 3)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion079/20241121/Votacion001/VOT_20241121173755.json": {
@@ -1502,7 +2015,13 @@
     "eje-fiscalidad--aeat-2025-margen-intereses",
     "eje-fiscalidad--hacienda-2024-gravamenes-banca-energeticas"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Grandes bancos",
+     "text": "Las entidades de crédito con 800 millones de euros o más en ingresos por intereses y comisiones habrían pagado un gravamen del 10 % sobre su margen.",
+     "locator": "Enmienda núm. 23 (BOCG A-23-3, pág. 32)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1514,6 +2033,12 @@
     "note": "Impuesto bancario primero; recaudación 2024 de banca incluida",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion009/VOT_20260326165035.json": {
@@ -1522,12 +2047,24 @@
     "eje-fiscalidad--eurostat-2024-impuestos-capital",
     "eje-fiscalidad--eurostat-2025-ingresos-gasto"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Herederos y donatarios",
+     "text": "El Gobierno tendría que derogar la ley del Impuesto sobre Sucesiones y Donaciones, suprimiendo el impuesto del ordenamiento tributario.",
+     "locator": "Punto 2 del texto presentado (BOCG Congreso D-493 (2026-03-13), pág. 31)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion010/VOT_20260326165037.json": {
@@ -1536,7 +2073,13 @@
     "eje-fiscalidad--ine-ipc-2021-2025-acumulado",
     "eje-fiscalidad--aeat-irpf-2023-tramos"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Contribuyentes del IRPF",
+     "text": "El Gobierno tendría que deflactar con la inflación los tres primeros tramos estatales del IRPF y aumentar su mínimo exento.",
+     "locator": "Punto 3 del texto presentado (BOCG Congreso D-493 (2026-03-13), pág. 31)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1548,6 +2091,12 @@
     "note": "Declarantes IRPF por tramos ya miden el colectivo",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion013/VOT_20260326165041.json": {
@@ -1556,7 +2105,13 @@
     "w020--ine-etdp-2025-vivienda-nueva",
     "eje-fiscalidad--ine-epa-2026t2-ocupados-jovenes"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Jóvenes de hasta 35 años",
+     "text": "El Gobierno tendría que aplicar un IVA del 0 % a la compra de la vivienda que sea su residencia habitual.",
+     "locator": "Punto 6 del texto presentado (BOCG D-493, pág. 31)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1568,6 +2123,12 @@
     "note": "Viviendas nuevas pagan IVA; ocupados jóvenes como colectivo",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "La numeración del texto aprobado (D-507 pág. 7) no coincide con la del voto; se usó el texto original de D-507 con la numeración votada. | numeración verificada y reescrita desde el texto presentado",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion015/VOT_20260326165044.json": {
@@ -1576,7 +2137,18 @@
     "eje-fiscalidad--aeat-2025-impuestos-electricos",
     "w020--ine-epf-2025-electricidad-gas"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Familias y empresas",
+     "text": "El Gobierno tendría que suprimir con carácter general el gravamen del 7 % sobre la producción de energía eléctrica para reducir la factura.",
+     "locator": "Punto 8 del texto presentado (BOCG Congreso D-493 (2026-03-13), pág. 31)"
+    },
+    {
+     "actor": "Consumidores de electricidad",
+     "text": "Cualquier rebaja fiscal tendría que notarse de forma verificable en la factura final, con mecanismos públicos de transparencia y seguimiento.",
+     "locator": "Punto 8 del texto presentado (BOCG Congreso D-493 (2026-03-13), pág. 31)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1588,6 +2160,12 @@
     "note": "Recaudación del impuesto; gasto de hogares en electricidad",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "La numeración del texto aprobado (D-507 pág. 7) no coincide con la del voto; se usó el texto original de D-507 con la numeración votada.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion017/VOT_20260326165046.json": {
@@ -1596,12 +2174,24 @@
     "eje-fiscalidad--ine-epa-2025-cuenta-propia",
     "eje-fiscalidad--aeat-2025-ingresos"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Pymes",
+     "text": "El Gobierno tendría que dejarles deducir de la cuota del Impuesto sobre Sociedades lo pagado por el IAE, hasta el límite de la cuota; el exceso, en los diez ejercicios siguientes.",
+     "locator": "Punto 10 (BOCG D-507, pág. 6)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion018/VOT_20260326165047.json": {
@@ -1610,12 +2200,24 @@
     "eje-fiscalidad--ine-epa-2025-cuenta-propia",
     "eje-fiscalidad--aeat-2025-ingresos"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Empresas que pagan el IAE",
+     "text": "El Gobierno tendría que excluir de la potencia instalada tributable en el IAE lo no afecto a la producción: calefacción, iluminación y sistemas de suministro redundantes.",
+     "locator": "Punto 11 (BOCG D-507, pág. 6)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion027/VOT_20260326165102.json": {
@@ -1624,7 +2226,13 @@
     "eje-campo-ambiente--mapa-esyrce-2025-regadio",
     "eje-fiscalidad--ine-epa-2025-agrario"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Regantes y actividades estacionales",
+     "text": "El Gobierno tendría que aplicar un tipo reducido de IVA a su electricidad, sin límite de potencia contratada ni de nivel de tensión.",
+     "locator": "Punto 20 (BOCG D-507, pág. 7)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1636,6 +2244,12 @@
     "note": "Hectáreas de regadío; ocupados agrarios",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion028/VOT_20260326165103.json": {
@@ -1644,12 +2258,24 @@
     "eje-fiscalidad--ine-epa-2025-agrario",
     "eje-fiscalidad--aeat-2025-hidrocarburos"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Agricultores y ganaderos",
+     "text": "El Gobierno tendría que incrementar a 120 € por cada 1.000 litros la devolución parcial del impuesto sobre hidrocarburos que soportan.",
+     "locator": "Punto 21 (BOCG D-507, pág. 7)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion029/VOT_20260326165105.json": {
@@ -1659,12 +2285,24 @@
     "eje-fiscalidad--boe-iva-tipos",
     "eje-fiscalidad--aeat-2025-hidrocarburos"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Agricultores",
+     "text": "El Gobierno tendría que modificar la Ley del IVA para aplicar el tipo superreducido del 4 % al gasóleo agrícola.",
+     "locator": "Punto 22 (BOCG D-507, pág. 7)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion040/VOT_20260326165122.json": {
@@ -1674,7 +2312,13 @@
     "eje-fiscalidad--ine-epa-2026t2-ocupados-jovenes",
     "eje-fiscalidad--ine-ipv-2026t2-precios"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Jóvenes hasta 35 años",
+     "text": "El Gobierno tendría que aplicar un IVA del 0 % a la compra de la vivienda que sea su residencia habitual.",
+     "locator": "Punto 4 (BOCG D-507, pág. 16)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1686,6 +2330,12 @@
     "note": "sin cifra oficial de compradores jóvenes de vivienda",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion041/VOT_20260326165124.json": {
@@ -1695,7 +2345,13 @@
     "eje-fiscalidad--ine-etdp-2025-compraventas",
     "eje-fiscalidad--ine-ipv-2026t2-precios"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Jóvenes que quieren emanciparse",
+     "text": "El Gobierno tendría que bonificar o reducir la fiscalidad de las cuentas de ahorro destinadas a comprar la primera vivienda.",
+     "locator": "Punto 5 (BOCG D-507, pág. 16)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1707,6 +2363,12 @@
     "note": "sin cifra oficial de cuentas ahorro vivienda",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion042/VOT_20260326165125.json": {
@@ -1716,7 +2378,13 @@
     "eje-fiscalidad--ine-ipv-2026t2-precios",
     "eje-fiscalidad--boe-iva-tipos"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Compradores de vivienda habitual",
+     "text": "El Gobierno tendría que eximir de IVA la compra de la vivienda habitual con un límite de hasta 500.000 euros.",
+     "locator": "Punto 6 (BOCG D-507, pág. 16)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1728,6 +2396,12 @@
     "note": "compraventas nuevas ya cubren la exención de IVA",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion043/VOT_20260326165127.json": {
@@ -1736,7 +2410,23 @@
     "eje-proteccion-social--imserso-2026-07-dependencia",
     "eje-fiscalidad--aeat-2025-impuestos-electricos"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Familias y empresas",
+     "text": "El Gobierno tendría que suprimir el gravamen del 7 % a la producción eléctrica y garantizar que cualquier rebaja fiscal se note en la factura final.",
+     "locator": "Punto 7 (BOCG D-507, pág. 16)"
+    },
+    {
+     "actor": "Empresas productoras de electricidad",
+     "text": "El Gobierno tendría que suprimir con carácter general el gravamen del 7 % sobre el valor de la producción de energía eléctrica.",
+     "locator": "Punto 7 (BOCG D-507, pág. 16)"
+    },
+    {
+     "actor": "Personas con gran invalidez o dependencia extrema",
+     "text": "El Gobierno tendría que evitar reducciones o ajustes del complemento de gran invalidez, la dependencia grado III+ o la pensión no contributiva por invalidez.",
+     "locator": "Punto 13 (BOCG D-507, pág. 16)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1748,6 +2438,12 @@
     "note": "dependencia añadida; gran invalidez sin cifra oficial hallada",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion044/VOT_20260326165128.json": {
@@ -1756,7 +2452,18 @@
     "w016--moncloa-2023-talidomida-ayudas",
     "eje-fiscalidad--aeat-2025-impuestos-electricos"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Familias y empresas",
+     "text": "El Gobierno tendría que suprimir el gravamen del 7 % a la producción eléctrica y garantizar que cualquier rebaja fiscal se note en la factura final.",
+     "locator": "Punto 7 (BOCG D-507, pág. 16)"
+    },
+    {
+     "actor": "Afectados por la talidomida",
+     "text": "El Gobierno tendría que declarar exentas del IRPF las ayudas por daños personales y devolver lo tributado antes por ese concepto.",
+     "locator": "Punto 14 (BOCG D-507, pág. 16)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1768,6 +2475,12 @@
     "note": "talidomida: 130 personas, 24,4 millones máx.",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion045/VOT_20260326165129.json": {
@@ -1777,7 +2490,18 @@
     "eje-fiscalidad--aeat-2025-impuestos-electricos",
     "eje-fiscalidad--boe-iva-tipos"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Familias y empresas",
+     "text": "El Gobierno tendría que suprimir el gravamen del 7 % a la producción eléctrica y garantizar que cualquier rebaja fiscal se note en la factura final.",
+     "locator": "Punto 7 (BOCG D-507, pág. 16)"
+    },
+    {
+     "actor": "Personas con discapacidad",
+     "text": "El Gobierno tendría que aplicar un IVA del 4 % a los productos de apoyo y ayuda técnica: equipos ortopédicos y dispositivos de autonomía, seguridad y comunicación.",
+     "locator": "Punto 15 (BOCG D-507, pág. 16)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1789,6 +2513,12 @@
     "note": "personas con discapacidad reconocida",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion049/VOT_20260326165134.json": {
@@ -1798,12 +2528,29 @@
     "eje-fiscalidad--aeat-irpf-2023-tramos",
     "eje-fiscalidad--ine-ecv-2025-pobreza"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Contribuyentes del IRPF",
+     "text": "El Gobierno tendría que actualizar a la inflación los parámetros del IRPF, incluidos los 3 primeros tramos y los mínimos personales.",
+     "locator": "Punto 3 del texto presentado (BOCG Congreso D-507 (2026-04-06), pág. 37)"
+    },
+    {
+     "actor": "Familias con hijos",
+     "text": "El Gobierno tendría que duplicar los mínimos por descendientes para ayudar más a las familias con hijos.",
+     "locator": "Punto 3 del texto presentado (BOCG Congreso D-507 (2026-04-06), pág. 37)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion161/20260218/Votacion011/VOT_20260218141935.json": {
@@ -1812,7 +2559,13 @@
     "eje-fiscalidad--ine-epa-2026t2-ocupados-jovenes",
     "eje-fiscalidad--aeat-irpf-2023-tramos"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Jóvenes trabajadores",
+     "text": "El Gobierno tendría que eliminar o bonificar su IRPF, de forma progresiva, durante los primeros cuatro años de vida laboral, para ahorrar para comprar o alquilar vivienda.",
+     "locator": "Punto 7 (BOCG D-484, pág. 15)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1824,6 +2577,12 @@
     "note": "sin cifra oficial de inicio de vida laboral",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion109/20250508/Votacion006/VOT_20250508130747.json": {
@@ -1832,12 +2591,29 @@
     "eje-fiscalidad--eurostat-2025-pasajeros-aereos",
     "eje-fiscalidad--aeat-2025-ingresos"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Empresas que invierten en descarbonizar la aviación",
+     "text": "Serían deducibles en el impuesto de sociedades las inversiones en I+D+i para la transición ecológica del aéreo, incluidos los combustibles sostenibles (SAF), si se hacen en España.",
+     "locator": "Enmienda núm. 65 (BOCG A-20-2, pág. 69)"
+    },
+    {
+     "actor": "Gobierno",
+     "text": "El Ministerio de Transportes tendría que remitir a las Cortes en seis meses un proyecto de ley que desarrolle esta deducción.",
+     "locator": "Enmienda núm. 65 (BOCG A-20-2, pág. 69)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion098/20250313/Votacion011/VOT_20250313133903.json": {
@@ -1846,7 +2622,18 @@
     "eje-fiscalidad--aeat-2025-impuestos-electricos",
     "eje-fiscalidad--aeat-2025-iva-vuelta-tipos"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Hogares (recibo de luz y gas)",
+     "text": "El Gobierno tendría que recuperar las rebajas fiscales de la electricidad, reduciendo el IVA de la electricidad y el gas.",
+     "locator": "Punto 2 del texto presentado (BOCG Congreso D-306 (2025-03-20), pág. 20)"
+    },
+    {
+     "actor": "Productores de electricidad",
+     "text": "El Gobierno tendría que fijar al 0 % el impuesto sobre el valor de la producción eléctrica mientras el sistema no genere déficit de tarifa.",
+     "locator": "Punto 2 del texto presentado (BOCG Congreso D-306 (2025-03-20), pág. 20)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1858,6 +2645,12 @@
     "note": "impuesto eléctrico e IVA luz y gas",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion098/20250313/Votacion012/VOT_20250313133904.json": {
@@ -1866,7 +2659,13 @@
     "eje-fiscalidad--ine-ipc-2021-2025-acumulado",
     "eje-fiscalidad--aeat-irpf-2023-tramos"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Contribuyentes del IRPF",
+     "text": "El Gobierno tendría que ajustar la tarifa a la inflación (al menos los 3 primeros tramos), los mínimos personales y las deducciones familiares y personales.",
+     "locator": "Punto 3 del texto presentado (BOCG Congreso D-306 (2025-03-20), pág. 20)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1878,6 +2677,12 @@
     "note": "IPC acumulado y tramos IRPF miden la medida",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion098/20250313/Votacion013/VOT_20250313133906.json": {
@@ -1886,7 +2691,13 @@
     "eje-empleo-derechos--boe-smi-2026",
     "eje-fiscalidad--aeat-irpf-2023-tramos"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Personas que cobran el salario mínimo",
+     "text": "El Gobierno tendría que elevar el mínimo exento y modificar las retenciones para que quien cobra el SMI (16.576 euros brutos) no tribute por IRPF.",
+     "locator": "Punto 4 del texto presentado (BOCG Congreso D-306 (2025-03-20), pág. 20)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1897,6 +2708,12 @@
     "verdict": "improved",
     "note": "SMI 2026 como umbral de la medida",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1932,12 +2749,24 @@
     "eje-fiscalidad--eurostat-2025-pasajeros-aereos",
     "eje-fiscalidad--aeat-2025-ingresos"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Aerolíneas",
+     "text": "Las empresas de transporte aéreo habrían pagado 10,75 euros por gigajulio de energía generado con queroseno.",
+     "locator": "Enmienda núm. 25 (BOCG A-23-3, pág. 34)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion079/20241121/Votacion004/VOT_20241121173758.json": {
@@ -1946,12 +2775,29 @@
     "eje-fiscalidad--eurostat-2025-pasajeros-aereos",
     "eje-fiscalidad--aeat-2025-ingresos"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Pasajeros de avión",
+     "text": "Habría un impuesto especial de 7,85 euros por billete, que las aerolíneas incorporarían al precio.",
+     "locator": "Enmienda núm. 27 (BOCG A-23-3, pág. 36)"
+    },
+    {
+     "actor": "Aerolíneas",
+     "text": "Tendrían que ingresar trimestralmente la recaudación del impuesto, en los plazos de las declaraciones trimestrales del IVA.",
+     "locator": "Enmienda núm. 27 (BOCG A-23-3, pág. 36)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion079/20241121/Votacion005/VOT_20241121173759.json": {
@@ -1959,7 +2805,23 @@
    "facts": [
     "eje-fiscalidad--hacienda-2024-gravamenes-banca-energeticas"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Grandes empresas energéticas",
+     "text": "Se habría prorrogado a 2024 el gravamen temporal energético para los operadores principales del sector.",
+     "locator": "Enmienda núm. 2 (BOCG A-23-3, pág. 4)"
+    },
+    {
+     "actor": "Bancos y establecimientos financieros de crédito",
+     "text": "Se habría prorrogado a 2024 el gravamen temporal sobre entidades de crédito y establecimientos financieros de crédito.",
+     "locator": "Enmienda núm. 2 (BOCG A-23-3, pág. 4)"
+    },
+    {
+     "actor": "Grandes fortunas",
+     "text": "Se habría prorrogado a 2024 el impuesto temporal de solidaridad de las grandes fortunas.",
+     "locator": "Enmienda núm. 2 (BOCG A-23-3, pág. 4)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1970,6 +2832,12 @@
     "verdict": "improved",
     "note": "Prórroga 2024 mide con recaudación de gravámenes; quitado genérico",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1985,6 +2853,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "Votación del «resto de las enmiendas»: sin texto de las enmiendas en el lote; un intento de kit fetch sobre BOCG A-23-3 solo devolvió rúbricas y el índice de enmiendas, sin su contenido.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion079/20241121/Votacion008/VOT_20241121173804.json": {
@@ -1993,7 +2867,18 @@
     "eje-fiscalidad--aeat-2025-margen-intereses",
     "eje-fiscalidad--hacienda-2024-gravamenes-banca-energeticas"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Bancos y establecimientos financieros de crédito",
+     "text": "Habrían pagado un nuevo impuesto directo sobre el margen de intereses y comisiones obtenido en España, desde los periodos que empiecen el 1 de enero de 2024.",
+     "locator": "Enmienda núm. 36 (BOCG A-23-3, pág. 50)"
+    },
+    {
+     "actor": "Empresas del sector energético",
+     "text": "Habrían pagado un nuevo impuesto directo sobre el beneficio operativo de sus actividades de producción, distribución o comercialización de energía en España.",
+     "locator": "Enmienda núm. 37 (BOCG A-23-3, pág. 55)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -2004,6 +2889,12 @@
     "verdict": "improved",
     "note": "Banca primero; recaudación energéticas 2024 como contexto",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -2025,6 +2916,12 @@
     "note": "Primas seguros salud y viviendas turísticas",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "Votación del «resto de las enmiendas»: sin texto de las enmiendas en el lote; un intento de kit fetch sobre BOCG A-23-3 solo devolvió rúbricas y el índice de enmiendas, sin su contenido.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion079/20241121/Votacion010/VOT_20241121173807.json": {
@@ -2033,7 +2930,18 @@
     "w022--aeat-irpf-2023-base-ahorro",
     "eje-fiscalidad--aeat-irpf-2023-tramos"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Contribuyentes con rentas del ahorro altas",
+     "text": "Desde 2025 la escala del ahorro del IRPF subiría hasta el 17 % en el tramo superior (más de 300.000 euros de base del ahorro).",
+     "locator": "Enmienda núm. 28 (BOCG A-23-3, pág. 37)"
+    },
+    {
+     "actor": "Contribuyentes con residencia habitual en el extranjero",
+     "text": "Su base del ahorro tributaría con una escala del 19 % al 34 %, siendo el 34 % el tramo superior.",
+     "locator": "Enmienda núm. 28 (BOCG A-23-3, pág. 37)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -2045,6 +2953,12 @@
     "note": "Base del ahorro como colectivo; sin tramo >300.000 € oficial",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion079/20241121/Votacion011/VOT_20241121173808.json": {
@@ -2054,12 +2968,34 @@
     "ine-ecv-2025-tenencia",
     "eje-fiscalidad--aeat-2025-ingresos"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Propietarios de aviones privados, yates y coches de lujo",
+     "text": "El Gobierno habría puesto en marcha en un mes un gravamen de solidaridad ambiental sobre la posesión de estos bienes, con efectos desde 2025.",
+     "locator": "Enmienda núm. 113 (BOCG A-23-3, pág. 196)"
+    },
+    {
+     "actor": "Arrendadores de vivienda",
+     "text": "Se habría modificado la exención de IVA de los arrendamientos de vivienda (art. 20 de la Ley del IVA).",
+     "locator": "Enmienda núm. 118 (BOCG A-23-3, pág. 208)"
+    },
+    {
+     "actor": "Sociedades inmobiliarias cotizadas (SOCIMI)",
+     "text": "Se habría modificado su artículo de requisitos de inversión, que exige al menos el 80 % del activo en inmuebles urbanos de alquiler.",
+     "locator": "Enmienda núm. 120 (BOCG A-23-3, pág. 216)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion079/20241121/Votacion012/VOT_20241121173809.json": {
@@ -2075,6 +3011,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "Votación del «resto de las enmiendas»: sin texto de las enmiendas en el lote; un intento de kit fetch sobre BOCG A-23-3 solo devolvió rúbricas y el índice de enmiendas, sin su contenido.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion079/20241121/Votacion013/VOT_20241121173810.json": {
@@ -2089,6 +3031,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "Votación en bloque de enmiendas: sin texto de las enmiendas en el lote; un intento de kit fetch sobre BOCG A-23-3 solo devolvió rúbricas y el índice de enmiendas, sin su contenido.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion079/20241121/Votacion018/VOT_20241121173815.json": {
@@ -2109,6 +3057,12 @@
     "note": "Cifras ya miden el impuesto bancario",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "Enmienda transaccional en Comisión sin texto extraído; un intento en BOCG A-23-3 (enmienda 108) solo devuelve el encabezado y el índice, no el texto transaccional.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion068/20241016/Votacion009/VOT_20241017130200.json": {
@@ -2118,7 +3072,23 @@
     "eje-fiscalidad--aeat-2025-iva-vuelta-tipos",
     "eje-fiscalidad--ine-epf-2025-gasto-hogares"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Consumidores",
+     "text": "El IVA general bajaría del 21 % al 18 % y el reducido del 10 % al 8 %.",
+     "locator": "Punto 4 (BOCG D-222, pág. 9)"
+    },
+    {
+     "actor": "Hogares",
+     "text": "Pagarían un IVA permanente del 4 % en las facturas de luz, gas y agua, y del 0 % en alimentos básicos.",
+     "locator": "Punto 4 (BOCG D-222, pág. 9)"
+    },
+    {
+     "actor": "Personas mayores, bebés y dependientes",
+     "text": "Pañales, biberones, leches pediátricas, teleasistencia, ayuda a domicilio, centros de día y residencias, y farmacia infantil y geriátrica, a IVA superreducido.",
+     "locator": "Punto 4 (BOCG D-222, pág. 9)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -2130,6 +3100,12 @@
     "note": "Coste de los tipos reducidos de IVA",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion068/20241016/Votacion010/VOT_20241017130201.json": {
@@ -2139,12 +3115,24 @@
     "eje-fiscalidad--aeat-2025-hidrocarburos",
     "eje-fiscalidad--ine-epf-2025-gasto-hogares"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Hogares",
+     "text": "Dejarían de pagar el Impuesto Especial sobre la Electricidad y el Impuesto sobre Hidrocarburos en las facturas de luz y gas.",
+     "locator": "Punto 5 (BOCG D-222, pág. 9)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion040/20240523/Votacion003/VOT_20240523140933.json": {
@@ -2154,7 +3142,13 @@
     "w020--ine-epf-2025-carne-pescado",
     "w020--ine-epf-2025-alimentos"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Consumidores de alimentos básicos",
+     "text": "El Gobierno tendría que mantener la reducción del IVA de los productos básicos y ampliarla, al menos, a carne, pescado y conservas.",
+     "locator": "Punto 3 (BOCG D-63, pág. 143)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -2166,6 +3160,12 @@
     "note": "Gasto de hogares en alimentos, carne y pescado",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion040/20240523/Votacion019/VOT_20240523140950.json": {
@@ -2174,12 +3174,24 @@
     "eje-fiscalidad--ine-ecv-2025-pobreza",
     "eje-fiscalidad--aeat-irpf-2023-tramos"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Familias con hijos",
+     "text": "El Gobierno tendría que subir la deducción del IRPF por nacimiento o adopción: 1.200 euros por el primer hijo, 1.600 por el segundo, 2.500 por el tercero y 2.750 desde el cuarto.",
+     "locator": "Punto 7 (BOCG D-150, pág. 13)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion040/20240523/Votacion020/VOT_20240523140951.json": {
@@ -2188,7 +3200,13 @@
     "w019--hacienda-pbf2023-deduccion-vivienda",
     "eje-fiscalidad--ine-etdp-2025-compraventas"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Compradores de vivienda habitual",
+     "text": "Se pediría recuperar la deducción del IRPF por inversión en vivienda habitual, suprimida por la Ley 16/2012.",
+     "locator": "Punto 8 (BOCG D-150, pág. 13)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -2200,6 +3218,12 @@
     "note": "Beneficiarios y coste de la deducción transitoria",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion040/20240523/Votacion021/VOT_20240523140951.json": {
@@ -2208,7 +3232,13 @@
     "w019--hacienda-pbf2023-deduccion-alquiler",
     "ine-ecv-2025-tenencia"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Inquilinos de vivienda habitual",
+     "text": "El Gobierno tendría que recuperar en todo el país la deducción del IRPF por alquiler de vivienda habitual, suprimida por la Ley 26/2024.",
+     "locator": "Punto 9 (BOCG D-150, pág. 13)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -2219,6 +3249,12 @@
     "verdict": "improved",
     "note": "Beneficiarios y coste de la deducción transitoria",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -2229,7 +3265,23 @@
     "eje-fiscalidad--aeat-2025-iva-vuelta-tipos",
     "eje-fiscalidad--ine-epf-2025-gasto-hogares"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Consumidores",
+     "text": "Se pediría bajar el IVA general del 21 % al 18 % y el reducido del 10 % al 8 %, y mantener el IVA del 0 % en alimentos básicos, ampliado a aceites, pastas, carnes y pescados.",
+     "locator": "Punto 10 (BOCG D-150, pág. 13)"
+    },
+    {
+     "actor": "Familias, mayores y dependientes",
+     "text": "Tendrían IVA superreducido pañales, leches pediátricas, teleasistencia, ayuda a domicilio, centros de día y residencias, y fármacos infantiles y geriátricos.",
+     "locator": "Punto 10 (BOCG D-150, pág. 13)"
+    },
+    {
+     "actor": "Compradores de primera vivienda",
+     "text": "Se pediría eliminar el IVA en la compra de la primera vivienda habitual y bajar de forma permanente los tipos de los suministros del hogar.",
+     "locator": "Punto 10 (BOCG D-150, pág. 13)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -2241,6 +3293,12 @@
     "note": "Coste de los tipos reducidos de IVA",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion040/20240523/Votacion023/VOT_20240523140953.json": {
@@ -2249,12 +3307,34 @@
     "eje-fiscalidad--eurostat-2024-impuestos-capital",
     "eje-fiscalidad--eurostat-2025-ingresos-gasto"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Titulares de patrimonio",
+     "text": "El Gobierno tendría que suprimir en todo el territorio el Impuesto sobre el Patrimonio.",
+     "locator": "Punto 11 (BOCG D-150, pág. 13)"
+    },
+    {
+     "actor": "Herederos y donatarios",
+     "text": "Se pediría suprimir en toda España el Impuesto sobre Sucesiones y Donaciones.",
+     "locator": "Punto 11 (BOCG D-150, pág. 13)"
+    },
+    {
+     "actor": "Vendedores de terrenos urbanos",
+     "text": "Se pediría suprimir el impuesto sobre el incremento de valor de los terrenos urbanos (plusvalía municipal).",
+     "locator": "Punto 11 (BOCG D-150, pág. 13)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   }
  }

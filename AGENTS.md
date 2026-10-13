@@ -170,7 +170,10 @@ Mandatory loop for any large subagent job (do not launch a full wave blind):
 Reference costs (2026-10-13): drafting old prompt ~0.7 M input tokens per vote; efficient mode ~0.15–0.4 M;
 derived-figure review: pilot 0.7 M per figure → 0.35 M after the first fixes → 0.15–0.25 M
 once the kit fetched+computed in one python call (outliers were TLS-broken hosts and xlsx sources, then added to the kit);
-generic-scale review: pilot 0.23 M per vote → 0.14–0.17 M at scale (50 agents, 447 votes, 74 M total).
+generic-scale review: pilot 0.23 M per vote → 0.14–0.17 M at scale (50 agents, 447 votes, 74 M total);
+direct effects from official text: 0.05 M per vote (37 agents, 475 votes, 25 M) because a deterministic step reused
+the repo's own extractor to put the literal voted text in each worklist. Check pre-extracted inputs for traps before
+scaling (e.g. approved motions are renumbered: point N voted ≠ point N published).
 
 ## Working Agreement
 

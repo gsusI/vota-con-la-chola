@@ -319,12 +319,24 @@
     "eje-autonomos-empresa--dgsfp-2023-mutualidades-alternativas",
     "eje-autonomos-empresa--congreso-2026-mutualidades-ley"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Autónomos con actividad en mutualidad alternativa",
+     "text": "Habría quedado fuera de su base de cotización en el RETA el rendimiento de las actividades por las que cotizan en la mutualidad alternativa, evitando cotizar dos veces.",
+     "locator": "Enmienda núm. 35 (BOCG B-162-6, pág. 67)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion088/20241219/Votacion016/VOT_20241219162718.json": {
@@ -333,12 +345,24 @@
     "eje-autonomos-empresa--ine-dirce-2025-estratos",
     "eje-autonomos-empresa--boe-ley-1-2025-microempresas"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Microempresas",
+     "text": "Habrían quedado excluidas de las obligaciones de los apartados 3 y 5 del artículo 6, que se aplican a todos los agentes de la cadena alimentaria.",
+     "locator": "Enmienda núm. 54 (BOCG A-4-3, pág. 45)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion016/VOT_20260326165045.json": {

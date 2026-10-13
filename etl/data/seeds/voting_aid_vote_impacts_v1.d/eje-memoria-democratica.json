@@ -141,6 +141,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "sin texto extraído del dictamen; una consulta al BOCG B-141-7 no devolvió coincidencias (disoluci|apolog)",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion172/20260415/Votacion001/VOT_20260415133904.json": {
@@ -184,12 +190,29 @@
     "eje-memoria-democratica--mpt-2025-lugares-memoria",
     "eje-memoria-democratica--mpt-2025-reconocimientos"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Jóvenes",
+     "text": "El Gobierno tendría que estudiar y documentar el «bibliocausto español» y difundirlo entre los jóvenes con iniciativas educativas y de divulgación.",
+     "locator": "Puntos 1 y 2 (BOCG D-330, pág. 9)"
+    },
+    {
+     "actor": "Libreros, bibliotecarios, editores y autores",
+     "text": "El Gobierno tendría que reconocer su compromiso con la cultura durante el golpe de estado y la dictadura franquista.",
+     "locator": "Puntos 1 y 2 (BOCG D-330, pág. 9)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion124/20250626/Votacion001/VOT_20250626120527.json": {
@@ -298,12 +321,24 @@
    "facts": [
     "eje-memoria-democratica--ine-2025-condenas-derechos-fundamentales"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Quienes enaltezcan el fascismo o el nazismo",
+     "text": "El Gobierno tendría que impulsar las reformas legales necesarias para prohibir el enaltecimiento del fascismo y del nazismo.",
+     "locator": "Punto 13 (BOCG D-142, pág. 3)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion106/20250410/Votacion001/VOT_20250410155136.json": {
@@ -311,12 +346,29 @@
    "facts": [
     "eje-memoria-democratica--boe-2015-asociaciones-registro"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Asociaciones",
+     "text": "Habría una nueva causa de disolución, por resolución judicial: hacer apología del franquismo o el fascismo con menosprecio y humillación de las víctimas, o incitando al odio o la violencia contra ellas.",
+     "locator": "Enmienda núm. 8 (BOCG B-141-5, pág. 9-10)"
+    },
+    {
+     "actor": "Víctimas del franquismo y del fascismo",
+     "text": "Las asociaciones que ensalzaran el golpe de 1936 o la dictadura, humillando a las víctimas o incitando al odio contra ellas, podrían ser disueltas por un juez civil.",
+     "locator": "Enmienda núm. 8 (BOCG B-141-5, pág. 9-10)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion172/20260415/Votacion003/VOT_20260415133907.json": {
@@ -325,12 +377,29 @@
     "eje-memoria-democratica--mpt-2025-lugares-memoria",
     "eje-memoria-democratica--mpt-2025-reconocimientos"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Jóvenes",
+     "text": "El Gobierno tendría que estudiar y documentar el «bibliocausto español» y difundirlo entre los jóvenes con iniciativas educativas y de divulgación.",
+     "locator": "Puntos 1 y 2 (BOCG D-330, pág. 9)"
+    },
+    {
+     "actor": "Libreros, bibliotecarios, editores y autores",
+     "text": "El Gobierno tendría que reconocer su compromiso con la cultura durante el golpe de estado y la dictadura franquista.",
+     "locator": "Puntos 1 y 2 (BOCG D-330, pág. 9)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion172/20260415/Votacion004/VOT_20260415133908.json": {
@@ -363,12 +432,34 @@
    "facts": [
     "eje-memoria-democratica--boe-2015-asociaciones-registro"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Asociaciones",
+     "text": "Podrían ser disueltas por un juez civil si hicieran apología del franquismo con menosprecio de las víctimas o incitación al odio o la violencia contra ellas.",
+     "locator": "Enmienda núm. 3 (BOCG B-141-5, pág. 3-4)"
+    },
+    {
+     "actor": "Ministerio Fiscal",
+     "text": "Le correspondería ejercer la acción judicial para disolver estas asociaciones.",
+     "locator": "Enmienda núm. 3 (BOCG B-141-5, pág. 3-4)"
+    },
+    {
+     "actor": "Víctimas del franquismo",
+     "text": "Se reconocería como causa de disolución de asociaciones la apología del golpe de 1936 y de la dictadura que humille su dignidad.",
+     "locator": "Enmienda núm. 3 (BOCG B-141-5, pág. 3-4)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion106/20250410/Votacion004/VOT_20250410155141.json": {
@@ -377,12 +468,29 @@
     "eje-memoria-democratica--mpt-2025-fosas",
     "eje-memoria-democratica--mpt-2025-exhumaciones"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Víctimas del franquismo y sus familias",
+     "text": "Quedarían derogados los apartados e) y f) del artículo 2 de la Ley de Amnistía de 1977, por ser contrarios al Derecho Internacional sobre crímenes de lesa humanidad.",
+     "locator": "Enmienda núm. 5 (BOCG B-141-5, pág. 6-7)"
+    },
+    {
+     "actor": "Jueces y tribunales",
+     "text": "Podrían investigar y enjuiciar crímenes de lesa humanidad del franquismo sin los límites de los apartados e) y f) del artículo 2 de la Ley de Amnistía.",
+     "locator": "Enmienda núm. 5 (BOCG B-141-5, pág. 6-7)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion106/20250410/Votacion005/VOT_20250410155142.json": {
@@ -391,12 +499,29 @@
     "eje-memoria-democratica--mpt-2025-fosas",
     "eje-memoria-democratica--mpt-2025-exhumaciones"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Víctimas del franquismo y sus familiares",
+     "text": "Se les reconocería el acceso a la justicia: el Código Penal permitiría juzgar crímenes contra la humanidad según el derecho internacional vigente al cometerse.",
+     "locator": "Enmienda núm. 6 (BOCG B-141-5, pág. 7-8)"
+    },
+    {
+     "actor": "Personas acusadas de crímenes contra la humanidad",
+     "text": "Podrían ser juzgadas y condenadas por actos que el derecho internacional ya consideraba delito al cometerlos, aunque el Código Penal español no los tipificara entonces.",
+     "locator": "Enmienda núm. 6 (BOCG B-141-5, pág. 7-8)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion106/20250410/Votacion006/VOT_20250410155144.json": {
@@ -404,12 +529,29 @@
    "facts": [
     "eje-memoria-democratica--boe-2015-asociaciones-registro"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Asociaciones",
+     "text": "La causa de disolución judicial sería la apología de cualquier sistema político o régimen que haya vulnerado los principios democráticos, no solo del franquismo.",
+     "locator": "Enmienda núm. 10 (BOCG B-141-5, pág. 12-13)"
+    },
+    {
+     "actor": "Víctimas de regímenes antidemocráticos",
+     "text": "La disolución se aplicaría si se humilla su dignidad o se incita al odio o la violencia contra ellas; la acción correspondería al Ministerio Fiscal.",
+     "locator": "Enmienda núm. 10 (BOCG B-141-5, pág. 12-13)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion106/20250410/Votacion018/VOT_20250410155158.json": {

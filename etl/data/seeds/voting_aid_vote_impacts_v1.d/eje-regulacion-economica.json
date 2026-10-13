@@ -437,6 +437,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "Enmienda a la totalidad de devolución sin texto de la enmienda extraído; un intento con kit fetch sobre A-18-1 solo devolvió el índice del proyecto. Sin efectos verificables.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion077/20241119/Votacion001/VOT_20241119211707.json": {
@@ -708,7 +714,18 @@
     "eje-regulacion-economica--eurostat-2025s2-precio-luz",
     "eje-regulacion-economica--cnmc-2025-puntos-suministro"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Consumidores de carburantes y electricidad",
+     "text": "El Gobierno tendría que establecer mecanismos de intervención y limitación de los precios de los carburantes y de la electricidad.",
+     "locator": "Punto 2 (BOCG D-599, pág. 15)"
+    },
+    {
+     "actor": "Empresas de carburantes y electricidad",
+     "text": "Sus precios quedarían sometidos a mecanismos de intervención y limitación.",
+     "locator": "Punto 2 (BOCG D-599, pág. 15)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -720,6 +737,12 @@
     "note": "Precios, luz y suministros miden la medida; sin cifra carburantes",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion198/20260916/Votacion006/VOT_20260916195347.json": {
@@ -728,7 +751,18 @@
     "eje-regulacion-economica--ine-ipc-2026-08",
     "eje-regulacion-economica--ine-dirce-2025-comercio-alimentacion"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Grandes distribuidoras de alimentos",
+     "text": "El Gobierno tendría que establecer mecanismos para topar sus márgenes de beneficio, sobre todo en productos básicos o esenciales.",
+     "locator": "Punto 4 (BOCG D-590, pág. 31)"
+    },
+    {
+     "actor": "Familias consumidoras",
+     "text": "Se buscaría garantizar precios asequibles de los alimentos básicos para las familias.",
+     "locator": "Punto 4 (BOCG D-590, pág. 31)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -740,6 +774,12 @@
     "note": "Sin cifra oficial de distribuidoras; INE gasto sin tabla",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion188/20260618/Votacion006/VOT_20260618162212.json": {
@@ -747,7 +787,18 @@
    "facts": [
     "eje-transporte-publico--ine-tv-2025-ferrocarril-larga-distancia"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Viajeros de Renfe",
+     "text": "El Gobierno tendría que recuperar los compromisos de puntualidad y devoluciones anteriores a julio de 2024: indemnización del 50 % por 15 minutos de retraso y del 100 % por 30.",
+     "locator": "Punto 5 del texto presentado (BOCG Congreso D-535 (2026-05-22), pág. 8)"
+    },
+    {
+     "actor": "Renfe",
+     "text": "Tendría que cumplir la disposición adicional trigésima primera de la Ley de Movilidad Sostenible, cuyo plazo legal del 1 de enero se incumplió.",
+     "locator": "Punto 5 del texto presentado (BOCG Congreso D-535 (2026-05-22), pág. 8)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -759,6 +810,12 @@
     "note": "Viajeros de larga distancia y alta velocidad",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion177/20260430/Votacion007/VOT_20260430125151.json": {
@@ -767,12 +824,29 @@
     "eje-regulacion-economica--ine-dirce-2025-tamano",
     "eje-regulacion-economica--ine-epa-2025-cuenta-propia"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Empresas y autónomos",
+     "text": "Se pediría reducir drásticamente la burocracia y limitar el intervencionismo para que puedan crecer, invertir y generar empleo.",
+     "locator": "Punto 3 del texto presentado (BOCG Congreso D-527 (2026-05-08), pág. 19)"
+    },
+    {
+     "actor": "Gobierno",
+     "text": "Tendría que reforzar la seguridad jurídica y garantizar un entorno estable para empresas y autónomos.",
+     "locator": "Punto 3 del texto presentado (BOCG Congreso D-527 (2026-05-08), pág. 19)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion141/20251022/Votacion007/VOT_20251022134523.json": {
@@ -781,12 +855,24 @@
     "eje-regulacion-economica--ine-dirce-2025-tamano",
     "eje-regulacion-economica--ine-epa-2025-cuenta-propia"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Empresas e inversores",
+     "text": "El Gobierno tendría que impulsar una reforma que reduzca trámites y cargas, simplifique obligaciones fiscales y agilice permisos y procedimientos.",
+     "locator": "Punto 3 del texto presentado (BOCG Congreso D-421 (2025-10-30), pág. 13)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion132/20250917/Votacion018/VOT_20250917194041.json": {
@@ -801,6 +887,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "Sin texto extraído del punto 3; una búsqueda en el BOCG D-398 no halló el texto votado. No se puede determinar el efecto.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion111/20250514/Votacion003/VOT_20250514165629.json": {
@@ -809,12 +901,29 @@
     "eje-regulacion-economica--cnmc-2025-concentracion",
     "eje-regulacion-economica--cnmc-2025-puntos-suministro"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Empresas generadoras de energía",
+     "text": "El Gobierno tendría que prohibirles repartir dividendos hasta que den toda la información sobre el apagón y adopten, a su coste, las medidas de estabilidad de la red.",
+     "locator": "Punto 1 (BOCG D-341, pág. 6)"
+    },
+    {
+     "actor": "Accionistas de las generadoras",
+     "text": "No cobrarían dividendos mientras la empresa no cumpliera esas condiciones.",
+     "locator": "Punto 1 (BOCG D-341, pág. 6)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion088/20241219/Votacion068/VOT_20241219162819.json": {
@@ -823,12 +932,29 @@
     "eje-regulacion-economica--ine-dirce-2025-transporte",
     "eje-regulacion-economica--ine-ipc-2026-08"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Transportistas de mercancías por carretera",
+     "text": "El Gobierno tendría que establecer que los servicios de transporte de mercancías no se paguen por debajo de los costes reales.",
+     "locator": "Punto 2 (BOCG D-262, pág. 23)"
+    },
+    {
+     "actor": "Quienes contratan transporte de mercancías",
+     "text": "El observatorio de costes del Ministerio de Transportes sería referencia obligatoria y no cabrían pactos en contra.",
+     "locator": "Punto 2 (BOCG D-262, pág. 23)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion079/20241121/Votacion035/VOT_20241121173832.json": {
@@ -836,7 +962,13 @@
    "facts": [
     "eje-transporte-publico--ine-tv-2025-ferrocarril-larga-distancia"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Operadores ferroviarios privados",
+     "text": "Se les habría exigido, además de pagar los cánones, mantener intervalos operativos adecuados para evitar la saturación y cuidar la infraestructura.",
+     "locator": "Punto 3 (BOCG D-249, pág. 47)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -847,6 +979,12 @@
     "verdict": "improved",
     "note": "Viajeros de larga distancia y alta velocidad",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -855,12 +993,29 @@
    "facts": [
     "eje-regulacion-economica--ine-dirce-2025-turismo"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Hoteles y alquiladoras de coches",
+     "text": "Se prolongaría la suspensión de las obligaciones de registro documental del Real Decreto 933/2021 hasta revisarlo con los subsectores turísticos.",
+     "locator": "Punto 1 (BOCG D-227, pág. 18)"
+    },
+    {
+     "actor": "Gobierno",
+     "text": "Tendría que mantener suspendida la aplicación del Real Decreto mientras se revisa en profundidad y de forma proporcionada.",
+     "locator": "Punto 1 (BOCG D-227, pág. 18)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion070/20241023/Votacion023/VOT_20241023184404.json": {
@@ -869,12 +1024,29 @@
     "eje-regulacion-economica--ine-dirce-2025-tamano",
     "eje-regulacion-economica--ine-epa-2025-cuenta-propia"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Empresas",
+     "text": "El Gobierno tendría que impulsar la contratación reduciendo drásticamente las cargas impositivas, burocráticas y de otro tipo sobre las empresas.",
+     "locator": "Punto 3 (BOCG D-227, pág. 58)"
+    },
+    {
+     "actor": "Trabajadores",
+     "text": "El Gobierno tendría que reducir drásticamente las cargas impositivas, burocráticas y de otro tipo sobre los trabajadores para generar empleo de calidad.",
+     "locator": "Punto 3 (BOCG D-227, pág. 58)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion066/20241010/Votacion003/VOT_20241010194919.json": {
@@ -882,7 +1054,18 @@
    "facts": [
     "eje-transporte-publico--ine-tv-2025-ferrocarril-larga-distancia"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Viajeros de Renfe",
+     "text": "El Gobierno tendría que restablecer los compromisos de puntualidad y devoluciones que existían antes del 1 de julio.",
+     "locator": "Punto 1 del texto presentado (BOCG Congreso D-194 (2024-09-13), pág. 17)"
+    },
+    {
+     "actor": "Renfe",
+     "text": "Tendría que revertir de inmediato sus actuales compromisos de puntualidad y devoluciones.",
+     "locator": "Punto 1 del texto presentado (BOCG Congreso D-194 (2024-09-13), pág. 17)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -894,6 +1077,12 @@
     "note": "Viajeros de larga distancia y alta velocidad",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion046/20240613/Votacion002/VOT_20240613125214.json": {
@@ -901,12 +1090,29 @@
    "facts": [
     "eje-regulacion-economica--ine-tich-2025-menores"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "CNMC",
+     "text": "Se reformarían sus estatutos para darle las competencias adecuadas como Coordinador de Servicios Digitales.",
+     "locator": "Punto 2 del texto presentado (BOCG Congreso D-117 (2024-04-05), pág. 21)"
+    },
+    {
+     "actor": "Plataformas y servicios digitales",
+     "text": "Quedarían bajo una supervisión del entorno digital que se quiere efectiva y coherente, conforme a las directrices europeas.",
+     "locator": "Punto 2 del texto presentado (BOCG Congreso D-117 (2024-04-05), pág. 21)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion029/20240314/Votacion035/VOT_20240314123747.json": {
@@ -915,12 +1121,29 @@
     "eje-regulacion-economica--ine-eea-2023-explotaciones",
     "eje-regulacion-economica--ine-ipc-2026-08"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Comunidades Autónomas",
+     "text": "Se les pediría cumplir la Ley de la Cadena Alimentaria y poner en marcha observatorios de precios que publiquen los índices de costes de cada producción.",
+     "locator": "Punto 2 (BOCG D-110, pág. 14)"
+    },
+    {
+     "actor": "Productores agrarios",
+     "text": "Se prohibiría vender a pérdidas y los precios que se les pagan tendrían que tener en cuenta los costes de producción.",
+     "locator": "Punto 2 (BOCG D-110, pág. 14)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion154/20251211/Votacion022/VOT_20251211175108.json": {
@@ -928,7 +1151,18 @@
    "facts": [
     "w040--mcons-2024-juego-online-publicidad"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Menores y personas vulnerables al juego",
+     "text": "Se elimina de la ley la reforma de la Ley del juego que orientaba la regulación de la publicidad de apuestas a proteger la salud, con atención a la infancia, la juventud y colectivos vulnerables.",
+     "locator": "Disposición final cuarta (BOCG A-12-8, pág. 6)"
+    },
+    {
+     "actor": "Operadores de juego y apuestas",
+     "text": "Dejan de aplicárseles, vía esta ley, las nuevas condiciones a su publicidad y promociones previstas en esa reforma de la Ley del juego.",
+     "locator": "Disposición final cuarta (BOCG A-12-8, pág. 6)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -940,6 +1174,12 @@
     "note": "Cifra DGOJ vista en nota del Ministerio de Consumo",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion146/20251113/Votacion001/VOT_20251113131219.json": {
@@ -948,7 +1188,18 @@
     "w039--boe-ley10-2025-ambito",
     "eje-regulacion-economica--ine-dirce-2025-tamano"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Clientes",
+     "text": "Podrían presentar consultas y quejas por el mismo canal con el que contrataron, además de por correo postal, teléfono y medio electrónico.",
+     "locator": "Enmienda núm. 79 (BOCG A-12-3, pág. 87)"
+    },
+    {
+     "actor": "Empresas con tiendas o locales abiertos al público",
+     "text": "Sus establecimientos, propios o franquiciados, tendrían que aceptar consultas y quejas de clientes y entregarles la clave identificativa correspondiente.",
+     "locator": "Enmienda núm. 79 (BOCG A-12-3, pág. 88)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -960,6 +1211,12 @@
     "note": "Ámbito legal de la ley en vez de test CNMC solo energía",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion101/20250320/Votacion032/VOT_20250320125736.json": {
@@ -968,7 +1225,13 @@
     "eje-regulacion-economica--mapa-2024-desperdicio",
     "eje-regulacion-economica--ine-dirce-2025-comercio-alimentacion"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Comercio e industria de transformación",
+     "text": "Determinadas actividades de comercialización y transformación habrían quedado excluidas de la jerarquía de prioridades contra el desperdicio (nuevo apartado 4 del artículo 5).",
+     "locator": "Enmienda núm. 78 (BOCG A-4-8, pág. 4)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -980,6 +1243,12 @@
     "note": "cifras generales ya miden la obligación general",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion202/20260930/Votacion005/VOT_20260930153557.json": {
@@ -988,12 +1257,29 @@
     "eje-regulacion-economica--cnmc-2025-concentracion",
     "eje-regulacion-economica--cnmc-2025-puntos-suministro"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Consumidores de energía",
+     "text": "Se impulsarían reformas para crear una empresa pública de generación de energía, con control público hasta que la energía llegue a los consumidores.",
+     "locator": "Punto 3 (BOCG D-599, pág. 15)"
+    },
+    {
+     "actor": "Empresas del sector energético",
+     "text": "El control público abarcaría todo el proceso, desde la generación hasta el consumidor.",
+     "locator": "Punto 3 (BOCG D-599, pág. 15)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion198/20260916/Votacion007/VOT_20260916195348.json": {
@@ -1002,7 +1288,18 @@
     "eje-regulacion-economica--ine-ipc-2026-08",
     "eje-regulacion-economica--ine-dirce-2025-comercio-alimentacion"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Consumidores",
+     "text": "El Gobierno tendría que crear un supermercado público para garantizar el acceso a alimentos básicos a precios asequibles.",
+     "locator": "Punto 5 (BOCG D-590, pág. 31)"
+    },
+    {
+     "actor": "Empresas de distribución alimentaria",
+     "text": "Una empresa pública de distribución introduciría competencia pública en el mercado de la distribución alimentaria y en el control de precios.",
+     "locator": "Punto 5 (BOCG D-590, pág. 31)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1014,6 +1311,12 @@
     "note": "Sin cifra oficial de distribución alimentaria específica",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion146/20251113/Votacion002/VOT_20251113131221.json": {
@@ -1022,7 +1325,18 @@
     "eje-regulacion-economica--bde-2025-reclamaciones",
     "eje-regulacion-economica--ine-dirce-2025-tamano"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Entidades financieras y aseguradoras",
+     "text": "Bancos, aseguradoras, correduría de seguros, entidades de pago y otras tendrían que contar con un departamento de atención a la clientela que atienda y resuelva quejas y reclamaciones.",
+     "locator": "Enmienda núm. 90 (BOCG A-12-3, pág. 96)"
+    },
+    {
+     "actor": "Clientes de servicios financieros",
+     "text": "Podrían presentar quejas y reclamaciones sobre sus derechos e intereses, incluidas las derivadas de consultas no resueltas por la oficina que les atendió.",
+     "locator": "Enmienda núm. 90 (BOCG A-12-3, pág. 97)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1033,6 +1347,12 @@
     "verdict": "keep",
     "note": "Cifras ya miden el sector afectado",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1054,6 +1374,12 @@
     "note": "Ámbito legal de la ley en vez de test CNMC solo energía",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "Votación de «resto de las enmiendas» sin números ni texto extraído; no se identifican las enmiendas concretas votadas, así que no se puede redactar el efecto sin inventar.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion146/20251113/Votacion004/VOT_20251113131223.json": {
@@ -1062,7 +1388,23 @@
     "w039--boe-ley10-2025-ambito",
     "eje-regulacion-economica--ine-dirce-2025-tamano"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Clientes",
+     "text": "Tendrían atención presencial en establecimientos repartidos por el territorio, y la llamada de atención telefónica sería gratuita y no podría derivarse a números de pago.",
+     "locator": "Enmienda núm. 64 (BOCG A-12-3, pág. 66)"
+    },
+    {
+     "actor": "Empresas de servicios básicos y grandes empresas",
+     "text": "Tendrían que mantener un número mínimo de establecimientos de atención presencial y asegurar que la atención telefónica no suponga ningún coste.",
+     "locator": "Enmienda núm. 43 (BOCG A-12-3, pág. 34)"
+    },
+    {
+     "actor": "Clientes de telecomunicaciones",
+     "text": "El servicio de atención a la clientela de los operadores tendría que ser gratuito para los usuarios finales.",
+     "locator": "Enmienda núm. 54 (BOCG A-12-3, pág. 56)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1073,6 +1415,12 @@
     "verdict": "improved",
     "note": "Ámbito legal de la ley en vez de test CNMC solo energía",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1082,7 +1430,23 @@
     "w039--boe-ley10-2025-ambito",
     "eje-regulacion-economica--ine-dirce-2025-tamano"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Clientes",
+     "text": "Tendrían un mínimo de atención presencial en oficinas abiertas al público distribuidas por el territorio según el número de personas consumidoras.",
+     "locator": "Enmienda núm. 46 (BOCG A-12-3, pág. 41)"
+    },
+    {
+     "actor": "Empresas con atención a la clientela",
+     "text": "Tendrían que garantizar lugares de atención presencial repartidos territorialmente, además de la vía postal, telefónica y electrónica.",
+     "locator": "Enmienda núm. 48 (BOCG A-12-3, pág. 47)"
+    },
+    {
+     "actor": "Personas cuyos datos tratan las empresas",
+     "text": "Cuando la atención se prestase desde países de fuera de la UE, la empresa tendría que acreditar que cumple la normativa de protección de datos.",
+     "locator": "Enmienda núm. 74 (BOCG A-12-3, pág. 79)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1093,6 +1457,12 @@
     "verdict": "improved",
     "note": "Ámbito legal de la ley en vez de test CNMC solo energía",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1102,7 +1472,23 @@
     "w039--boe-ley10-2025-ambito",
     "eje-regulacion-economica--ine-dirce-2025-tamano"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Empresas que deslocalizan",
+     "text": "Tendrían que devolver antes las ayudas o subvenciones públicas recibidas en los últimos ocho años si deslocalizan la empresa o su atención a la clientela.",
+     "locator": "Enmienda núm. 55 (BOCG A-12-3, pág. 57)"
+    },
+    {
+     "actor": "Clientes que reclaman",
+     "text": "Se prohibiría atender solo con contestadores automáticos, podrían pedir atención personalizada y las incidencias de corte del servicio se responderían en dos horas.",
+     "locator": "Enmienda núm. 60 (BOCG A-12-3, pág. 61)"
+    },
+    {
+     "actor": "Empresas con atención a la clientela",
+     "text": "No podrían aprovechar una queja para ofrecer ofertas comerciales, salvo que mejoren las condiciones, y tendrían que separar ese servicio del resto de áreas.",
+     "locator": "Enmienda núm. 73 (BOCG A-12-3, pág. 78)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1113,6 +1499,12 @@
     "verdict": "improved",
     "note": "Ámbito legal de la ley en vez de test CNMC solo energía",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1122,7 +1514,23 @@
     "w039--boe-ley10-2025-ambito",
     "eje-regulacion-economica--ine-dirce-2025-tamano"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Usuarios de servicios públicos",
+     "text": "La ley también cubriría a las empresas que presten servicios públicos de las Administraciones cuando haya relación de consumo con su clientela.",
+     "locator": "Enmienda núm. 57 (BOCG A-12-3, pág. 59)"
+    },
+    {
+     "actor": "Clientes de servicios temporalmente gratuitos",
+     "text": "Quedarían dentro de la ley los servicios gratuitos por una oferta, promoción o estrategia comercial análoga.",
+     "locator": "Enmienda núm. 57 (BOCG A-12-3, pág. 59)"
+    },
+    {
+     "actor": "Administraciones públicas",
+     "text": "En los servicios que presten directamente, tendrían que incorporar a sus normas de funcionamiento los mismos principios y derechos de la ley.",
+     "locator": "Enmienda núm. 57 (BOCG A-12-3, pág. 59)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1133,6 +1541,12 @@
     "verdict": "improved",
     "note": "Ámbito legal de la ley en vez de test CNMC solo energía",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1142,7 +1556,23 @@
     "w039--boe-ley10-2025-ambito",
     "eje-regulacion-economica--ine-dirce-2025-tamano"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Clientes que reclaman",
+     "text": "Tendrían atención personalizada a petición y se garantizaría que fuese siempre la misma persona quien responda las consultas siguientes sobre su queja.",
+     "locator": "Enmienda núm. 59 (BOCG A-12-3, pág. 60)"
+    },
+    {
+     "actor": "Personal de atención a la clientela",
+     "text": "Recibiría formación especializada y continuada, con formación previa específica en atención a personas vulnerables, con discapacidad o de edad avanzada.",
+     "locator": "Enmienda núm. 61 (BOCG A-12-3, pág. 63)"
+    },
+    {
+     "actor": "Empresas con atención a la clientela",
+     "text": "Tendrían que someterse a una auditoría anual de la fiabilidad de las mediciones de calidad de su atención; las más pequeñas podrían hacerla cada dos años.",
+     "locator": "Enmienda núm. 75 (BOCG A-12-3, pág. 80)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1154,6 +1584,12 @@
     "note": "Ámbito legal de la ley en vez de test CNMC solo energía",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion146/20251113/Votacion010/VOT_20251113131231.json": {
@@ -1162,7 +1598,18 @@
     "w039--boe-ley10-2025-ambito",
     "eje-regulacion-economica--ine-dirce-2025-tamano"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Clientes que reclaman",
+     "text": "Recibirían respuestas motivadas a todas sus cuestiones, un plazo mínimo de diez días para corregir una queja incompleta y copia de la resolución en formato duradero.",
+     "locator": "Enmienda núm. 67 (BOCG A-12-3, pág. 70)"
+    },
+    {
+     "actor": "Empresas con atención a la clientela",
+     "text": "Si alegasen que el plazo venció por causa del cliente, tendrían que probarlo; y si cierran la queja por teléfono, grabar la llamada.",
+     "locator": "Enmienda núm. 67 (BOCG A-12-3, pág. 70)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1173,6 +1620,12 @@
     "verdict": "improved",
     "note": "Ámbito legal de la ley en vez de test CNMC solo energía",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1194,6 +1647,12 @@
     "note": "Ámbito legal de la ley en vez de test CNMC solo energía",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "Votación de «resto de las enmiendas» sin números ni texto extraído; no se identifican las enmiendas concretas votadas, así que no se puede redactar el efecto sin inventar.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion146/20251113/Votacion012/VOT_20251113131233.json": {
@@ -1202,7 +1661,18 @@
     "eje-regulacion-economica--cnmc-2025-puntos-suministro",
     "eje-regulacion-economica--cnmc-2025-atencion-cliente"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Empresas de agua, energía y telecomunicaciones",
+     "text": "Las averías que afecten a la vez a muchos clientes no contarían como incidencias a efectos de gestión de su resolución y respuesta.",
+     "locator": "Enmienda núm. 37 (BOCG A-12-3, pág. 30)"
+    },
+    {
+     "actor": "Clientes afectados por averías masivas",
+     "text": "Quedarían fuera de la gestión y respuesta a incidencias que fija la ley cuando su avería de agua, energía o telecomunicaciones afecte a muchos clientes a la vez.",
+     "locator": "Enmienda núm. 37 (BOCG A-12-3, pág. 30)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1213,6 +1683,12 @@
     "verdict": "keep",
     "note": "Cifras ya miden el sector afectado",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1222,7 +1698,23 @@
     "w039--boe-ley10-2025-ambito",
     "eje-regulacion-economica--ine-dirce-2025-tamano"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Clientes que llaman a atención telefónica",
+     "text": "Las empresas tendrían que atender al 95 % de las llamadas en menos de tres minutos, contados desde que el cliente espera para hablar con una persona.",
+     "locator": "Enmienda núm. 19 (BOCG A-12-3, pág. 17)"
+    },
+    {
+     "actor": "Empresas con atención telefónica",
+     "text": "El plazo de tres minutos empezaría a contar más tarde, cuando el cliente ya espera atención personal, tras el menú automático.",
+     "locator": "Enmienda núm. 19 (BOCG A-12-3, pág. 17)"
+    },
+    {
+     "actor": "Usuarios de transporte aéreo, ferroviario y marítimo",
+     "text": "Su atención al cliente se consideraría disponible en el horario de actividad del servicio, no las 24 horas.",
+     "locator": "Enmienda núm. 27 (BOCG A-12-3, pág. 21)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1233,6 +1725,12 @@
     "verdict": "improved",
     "note": "Ámbito legal de la ley en vez de test CNMC solo energía",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1242,7 +1740,18 @@
     "w039--boe-ley10-2025-ambito",
     "eje-regulacion-economica--ine-dirce-2025-tamano"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Clientes que presentan una queja",
+     "text": "Habría prohibición total de aprovechar una consulta o queja para ofrecerles productos, sin la excepción de ofertas relacionadas que mejoren condiciones o precio.",
+     "locator": "Enmienda núm. 29 (BOCG A-12-3, pág. 22)"
+    },
+    {
+     "actor": "Empresas reclamadas",
+     "text": "No podrían hacer ofertas comerciales al cliente que reclama, ni siquiera relacionadas con la queja.",
+     "locator": "Enmienda núm. 29 (BOCG A-12-3, pág. 22)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1253,6 +1762,12 @@
     "verdict": "improved",
     "note": "Ámbito legal de la ley en vez de test CNMC solo energía",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1262,7 +1777,13 @@
     "eje-regulacion-economica--ine-tf-2025-viajeros",
     "eje-regulacion-economica--ine-dirce-2025-tamano"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Aerolíneas, navieras y ferroviarias",
+     "text": "Se regirían por la normativa europea aplicable y no por lo que la ley establece sobre la auditoría del sistema de evaluación de la atención al cliente.",
+     "locator": "Enmienda núm. 32 (BOCG A-12-3, pág. 25)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1273,6 +1794,12 @@
     "verdict": "keep",
     "note": "Cifras ya miden el sector afectado",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1282,7 +1809,18 @@
     "eje-regulacion-economica--bde-2025-reclamaciones",
     "eje-regulacion-economica--ine-dirce-2025-tamano"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Consumidores y usuarios",
+     "text": "Entre la ley general y la normativa sectorial se aplicaría siempre la norma más favorable a sus derechos.",
+     "locator": "Enmienda núm. 95 (BOCG A-12-3, pág. 109)"
+    },
+    {
+     "actor": "Clientes de bancos y aseguradoras",
+     "text": "Estas entidades tendrían que contar con un departamento de atención a la clientela que atienda y resuelva sus quejas y reclamaciones.",
+     "locator": "Enmienda núm. 116 (BOCG A-12-3, pág. 125)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1294,6 +1832,12 @@
     "note": "Cifras ya miden el sector afectado",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion146/20251113/Votacion023/VOT_20251113131248.json": {
@@ -1302,7 +1846,18 @@
     "w039--boe-ley10-2025-ambito",
     "eje-regulacion-economica--ine-dirce-2025-tamano"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Clientes de cualquier empresa",
+     "text": "El servicio de atención tendría que dar constancia escrita de cada queja con clave identificativa y, si procede, permitir la devolución del precio.",
+     "locator": "Enmienda núm. 101 (BOCG A-12-3, pág. 114)"
+    },
+    {
+     "actor": "Clientes de empresas de servicios",
+     "text": "Podrían obtener información veraz sobre incidencias y conocer los niveles mínimos de calidad ofrecidos, y hacerlos valer.",
+     "locator": "Enmienda núm. 101 (BOCG A-12-3, pág. 115)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1313,6 +1868,12 @@
     "verdict": "improved",
     "note": "Ámbito legal de la ley en vez de test CNMC solo energía",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1334,6 +1895,12 @@
     "note": "Ámbito legal de la ley en vez de test CNMC solo energía",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "Votación del resto de enmiendas de un grupo, sin texto extraído ni enmiendas identificadas; no se puede atribuir ningún efecto concreto.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion146/20251113/Votacion026/VOT_20251113131251.json": {
@@ -1342,7 +1909,18 @@
     "eje-regulacion-economica--bde-2025-reclamaciones",
     "eje-regulacion-economica--ine-dirce-2025-tamano"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Consumidores y usuarios",
+     "text": "Se considerarían cláusulas abusivas también las prácticas no consentidas expresamente que causen un desequilibrio importante en su perjuicio.",
+     "locator": "Enmienda núm. 131 (BOCG A-12-3, pág. 155)"
+    },
+    {
+     "actor": "Empresas",
+     "text": "Podrían ver anuladas prácticas no consentidas expresamente por el cliente, no solo cláusulas pactadas en el contrato.",
+     "locator": "Enmienda núm. 131 (BOCG A-12-3, pág. 155)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1354,6 +1932,12 @@
     "note": "Cifras ya miden el sector afectado",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion146/20251113/Votacion027/VOT_20251113131252.json": {
@@ -1362,7 +1946,23 @@
     "w039--boe-ley10-2025-ambito",
     "eje-regulacion-economica--ine-dirce-2025-tamano"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Clientes que piden una baja o reclaman un cobro",
+     "text": "Cobrarían una compensación automática, al menos el doble de lo cobrado tras la baja o tras 5 días hábiles sin tramitar la reclamación.",
+     "locator": "Enmienda núm. 132 (BOCG A-12-3, pág. 157)"
+    },
+    {
+     "actor": "Clientes con quejas sin resolver a tiempo",
+     "text": "Cobrarían al menos 50 euros si la empresa incumple los plazos de resolución de quejas, reclamaciones e incidencias.",
+     "locator": "Enmienda núm. 132 (BOCG A-12-3, pág. 157)"
+    },
+    {
+     "actor": "Empresas de servicios",
+     "text": "Tendrían que pagar compensaciones automáticas además de devolver los importes cobrados indebidamente.",
+     "locator": "Enmienda núm. 132 (BOCG A-12-3, pág. 157)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1373,6 +1973,12 @@
     "verdict": "improved",
     "note": "Ámbito legal de la ley en vez de test CNMC solo energía",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1382,7 +1988,18 @@
     "w039--boe-ley10-2025-ambito",
     "eje-regulacion-economica--ine-dirce-2025-tamano"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Consumidores y usuarios",
+     "text": "Los empresarios tendrían que ofrecer vía postal, telefónica y electrónica para reclamar, e informar del medio con el que empezó la relación contractual.",
+     "locator": "Enmienda núm. 143 (BOCG A-12-3, pág. 168)"
+    },
+    {
+     "actor": "Empresas",
+     "text": "Tendrían que responder a las reclamaciones en un máximo de quince días y comunicar al Registro Mercantil sus medios de atención.",
+     "locator": "Enmienda núm. 143 (BOCG A-12-3, pág. 168)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1393,6 +2010,12 @@
     "verdict": "improved",
     "note": "Ámbito legal de la ley en vez de test CNMC solo energía",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1402,7 +2025,18 @@
     "w039--boe-ley10-2025-ambito",
     "eje-regulacion-economica--ine-dirce-2025-tamano"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Familias que alquilan vehículos",
+     "text": "Serían abusivos los recargos por accesorios que la norma exige, como asientos infantiles, si no pueden resolverse de otro modo razonable.",
+     "locator": "Enmienda núm. 145 (BOCG A-12-3, pág. 170)"
+    },
+    {
+     "actor": "Empresas con servicios accesorios obligatorios",
+     "text": "No podrían cobrar recargos por servicios accesorios impuestos por la normativa cuando el cliente no pueda obtenerlos por su cuenta.",
+     "locator": "Enmienda núm. 145 (BOCG A-12-3, pág. 170)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1414,6 +2048,12 @@
     "note": "Ámbito legal de la ley en vez de test CNMC solo energía",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion146/20251113/Votacion030/VOT_20251113131256.json": {
@@ -1422,7 +2062,18 @@
     "w039--boe-ley10-2025-ambito",
     "eje-regulacion-economica--ine-dirce-2025-tamano"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Clientes de servicios de atención telefónica",
+     "text": "Tendrían números de teléfono propios, distintos de los comerciales, para la atención a la clientela, sin coste para ellos.",
+     "locator": "Enmienda núm. 146 (BOCG A-12-3, pág. 171)"
+    },
+    {
+     "actor": "Gobierno y compañías",
+     "text": "El Gobierno tendría un año tras la entrada en vigor de la ley para modificar el Plan Nacional de Numeración con códigos diferenciados.",
+     "locator": "Enmienda núm. 146 (BOCG A-12-3, pág. 171)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1433,6 +2084,12 @@
     "verdict": "improved",
     "note": "Ámbito legal de la ley en vez de test CNMC solo energía",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1454,6 +2111,12 @@
     "note": "Ámbito legal de la ley en vez de test CNMC solo energía",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "Votación del resto de enmiendas de un grupo, sin texto extraído ni enmiendas identificadas; no se puede atribuir ningún efecto concreto.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion146/20251113/Votacion035/VOT_20251113131303.json": {
@@ -1462,7 +2125,23 @@
     "eje-regulacion-economica--cnmc-2025-puntos-suministro",
     "eje-regulacion-economica--cnmc-2025-atencion-cliente"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Personas consumidoras",
+     "text": "Habría que acudir a mediación sin que ello suspendiera de forma automática el cobro ni el corte del servicio: la suspensión pasaría a ser posible, no obligada.",
+     "locator": "Enmienda núm. 222 (BOCG A-12-3, pág. 227)"
+    },
+    {
+     "actor": "Empresas",
+     "text": "Podrían seguir gestionando el cobro o cortando el servicio mientras el cliente va a mediación, salvo riesgo para personas o cosas.",
+     "locator": "Enmienda núm. 222 (BOCG A-12-3, pág. 227)"
+    },
+    {
+     "actor": "Personas que hacen una consulta",
+     "text": "Las consultas que se resuelven al momento quedarían exentas de constancia y seguimiento; las que requieren acciones posteriores se tratarían como quejas o reclamaciones.",
+     "locator": "Enmienda núm. 187 (BOCG A-12-3, pág. 206)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1474,6 +2153,12 @@
     "note": "Cifras ya miden el sector afectado",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "Enmiendas 178 y 181 son de redacción técnica (terminología y exposición de motivos), sin efecto para colectivos.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion146/20251113/Votacion040/VOT_20251113131310.json": {
@@ -1482,7 +2167,18 @@
     "w039--boe-ley10-2025-ambito",
     "eje-regulacion-economica--ine-dirce-2025-tamano"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Empresas nativas digitales",
+     "text": "Les bastaría con ofrecer un canal electrónico para consultas, quejas y reclamaciones, sin tener que admitir también la vía postal o telefónica.",
+     "locator": "Enmienda núm. 203 (BOCG A-12-3, pág. 216)"
+    },
+    {
+     "actor": "Clientes de empresas nativas digitales",
+     "text": "Podrían encontrarse con que solo se pueda reclamar por vía electrónica, sin opción postal ni telefónica.",
+     "locator": "Enmienda núm. 203 (BOCG A-12-3, pág. 216)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1493,6 +2189,12 @@
     "verdict": "improved",
     "note": "Ámbito legal de la ley en vez de test CNMC solo energía",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1502,7 +2204,28 @@
     "w039--boe-ley10-2025-ambito",
     "eje-regulacion-economica--ine-dirce-2025-tamano"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Clientes de comunidades con lengua cooficial",
+     "text": "La respuesta tendría que darse en la lengua en que se presentó la queja y, si el cliente lo pide, al menos en castellano.",
+     "locator": "Enmienda núm. 221 (BOCG A-12-3, pág. 226)"
+    },
+    {
+     "actor": "Empresas",
+     "text": "Dejaría de estar prohibido pasar encuestas de satisfacción antes de resolver la queja, y la colaboración con asociaciones de consumidores pasaría de obligación a posibilidad.",
+     "locator": "Enmienda núm. 227 (BOCG A-12-3, pág. 230)"
+    },
+    {
+     "actor": "Asociaciones de consumidores",
+     "text": "Las empresas podrían, pero ya no tendrían que, establecer marcos estables de colaboración con ellas.",
+     "locator": "Enmienda núm. 228 (BOCG A-12-3, pág. 230)"
+    },
+    {
+     "actor": "Personas con una queja abierta",
+     "text": "Podrían recibir una encuesta de satisfacción antes de que se resuelva su consulta, queja o reclamación.",
+     "locator": "Enmienda núm. 227 (BOCG A-12-3, pág. 230)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1513,6 +2236,12 @@
     "verdict": "improved",
     "note": "Ámbito legal de la ley en vez de test CNMC solo energía",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "Enmiendas 204 y 218 son de redacción sin efecto claro para colectivos.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1522,7 +2251,23 @@
     "w039--boe-ley10-2025-ambito",
     "eje-regulacion-economica--ine-dirce-2025-tamano"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Clientes en tiendas",
+     "text": "En la tienda, la empresa podría remitirles a su servicio centralizado y gratuito; la clave identificativa de la queja se entregaría si el cliente la pide.",
+     "locator": "Enmienda núm. 205 (BOCG A-12-3, pág. 217)"
+    },
+    {
+     "actor": "Empresas con establecimientos y servicio centralizado",
+     "text": "Podrían facilitar en sus tiendas el acceso a su servicio centralizado de atención en lugar de gestionar ellas la queja.",
+     "locator": "Enmienda núm. 205 (BOCG A-12-3, pág. 217)"
+    },
+    {
+     "actor": "Personal de atención a la clientela",
+     "text": "Se modificaría la redacción de la formación que la empresa les da, que incluye accesibilidad y atención a personas con discapacidad o de edad avanzada.",
+     "locator": "Enmienda núm. 211 (BOCG A-12-3, pág. 220)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1534,6 +2279,12 @@
     "note": "Ámbito legal de la ley en vez de test CNMC solo energía",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion111/20250514/Votacion004/VOT_20250514165630.json": {
@@ -1542,12 +2293,34 @@
     "eje-regulacion-economica--cnmc-2025-concentracion",
     "eje-regulacion-economica--cnmc-2025-puntos-suministro"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Personas que no pueden pagar la energía",
+     "text": "El Gobierno tendría que impulsar una empresa pública de energía que garantice el suministro eléctrico a quien no pueda afrontar los costes.",
+     "locator": "Punto 2 (BOCG D-341, pág. 6)"
+    },
+    {
+     "actor": "Consumidores de electricidad",
+     "text": "Esa empresa pública abarataría los precios.",
+     "locator": "Punto 2 (BOCG D-341, pág. 6)"
+    },
+    {
+     "actor": "Grandes generadoras eléctricas",
+     "text": "Esa empresa pública acabaría con el oligopolio actual en la generación.",
+     "locator": "Punto 2 (BOCG D-341, pág. 6)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion101/20250320/Votacion035/VOT_20250320125739.json": {
@@ -1556,7 +2329,18 @@
     "eje-autonomos-empresa--boe-ley-1-2025-microempresas",
     "eje-regulacion-economica--ine-dirce-2025-comercio-alimentacion"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Agentes de la cadena alimentaria",
+     "text": "Pasan de «llegar a» a «promover» acuerdos o convenios de donación de excedentes.",
+     "locator": "Enmienda núm. 79 (BOCG A-4-8, pág. 4)"
+    },
+    {
+     "actor": "Establecimientos de hasta 1.300 m2",
+     "text": "Quedan exceptuados de esas obligaciones, salvo los que bajo un mismo código de identificación fiscal sumen más de 1.300 m2, que sí quedan obligados.",
+     "locator": "Enmienda núm. 79 (BOCG A-4-8, pág. 4)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1568,6 +2352,12 @@
     "note": "microempresas excluidas del art. 6; empresas del sector",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion101/20250320/Votacion047/VOT_20250320125754.json": {
@@ -1576,7 +2366,23 @@
     "w038--boe-ley-1-2025-sanciones",
     "eje-regulacion-economica--ine-dirce-2025-comercio-alimentacion"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Empresas sancionadas",
+     "text": "Habría menores cuantías de multa y proporcionalidad con la gravedad de los hechos, con criterios de graduación de las sanciones (artículo 19).",
+     "locator": "Enmienda núm. 86 (BOCG A-4-8, pág. 6)"
+    },
+    {
+     "actor": "Comunidades autónomas",
+     "text": "Habrían perdido la posibilidad de subir los umbrales de sanción o de añadir otras sanciones adicionales o accesorias.",
+     "locator": "Enmienda núm. 86 (BOCG A-4-8, pág. 6)"
+    },
+    {
+     "actor": "Empresas sancionadas (prescripción)",
+     "text": "Un artículo nuevo habría regulado el plazo, el cómputo y la interrupción de la prescripción de las sanciones.",
+     "locator": "Enmienda núm. 88 (BOCG A-4-8, pág. 6)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1588,6 +2394,12 @@
     "note": "multas del art. 21 de la ley",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion088/20241219/Votacion001/VOT_20241219162658.json": {
@@ -1596,7 +2408,13 @@
     "eje-regulacion-economica--mapa-2024-desperdicio",
     "eje-regulacion-economica--ine-dirce-2025-comercio-alimentacion"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Agentes de la cadena alimentaria",
+     "text": "Habrían tenido que incorporar criterios de producción, compra y gestión basados en necesidades concretas, para que no se generen excedentes.",
+     "locator": "Enmienda núm. 31 (BOCG A-4-3, pág. 25)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1607,6 +2425,12 @@
     "verdict": "keep",
     "note": "cifras generales ya miden la obligación general",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1616,7 +2440,23 @@
     "eje-regulacion-economica--mapa-2024-desperdicio",
     "eje-regulacion-economica--ine-dirce-2025-comercio-alimentacion"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Agentes de la cadena alimentaria",
+     "text": "Todos habrían tenido que tener un plan de prevención y llegar a acuerdos para donar excedentes, salvo que resulte inviable y se justifique.",
+     "locator": "Enmienda núm. 32 (BOCG A-4-3, pág. 27)"
+    },
+    {
+     "actor": "Partes de contratos comerciales",
+     "text": "Serían nulas de pleno derecho las cláusulas contractuales que impidieran expresamente la donación de alimentos.",
+     "locator": "Enmienda núm. 32 (BOCG A-4-3, pág. 27)"
+    },
+    {
+     "actor": "Administraciones públicas",
+     "text": "Recibirían de todos los agentes la información necesaria para cuantificar los residuos alimentarios.",
+     "locator": "Enmienda núm. 32 (BOCG A-4-3, pág. 27)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1627,6 +2467,12 @@
     "verdict": "keep",
     "note": "cifras generales ya miden la obligación general",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1636,7 +2482,13 @@
     "eje-regulacion-economica--mapa-2024-desperdicio",
     "eje-regulacion-economica--ine-dirce-2025-comercio-alimentacion"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Empresas de la cadena alimentaria",
+     "text": "Sus planes de prevención habrían incluido un listado de casos en que se justifica apartarse de la jerarquía de prioridades.",
+     "locator": "Enmienda núm. 1 (BOCG A-4-3, pág. 1)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1648,6 +2500,12 @@
     "note": "cifras generales ya miden la obligación general",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion088/20241219/Votacion010/VOT_20241219162709.json": {
@@ -1656,7 +2514,18 @@
     "w038--boe-ley-1-2025-sanciones",
     "eje-regulacion-economica--ine-dirce-2025-comercio-alimentacion"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Industria, distribución y hostelería",
+     "text": "No donar alimentos aptos no vendidos, pudiendo hacerlo, sería infracción leve solo si no hubiera justificación en su plan de prevención.",
+     "locator": "Enmienda núm. 6 (BOCG A-4-3, pág. 4)"
+    },
+    {
+     "actor": "Comunidades autónomas",
+     "text": "Sus infracciones se habrían armonizado con las de la ley, incluida la de no aplicar la jerarquía de prioridades sin justificarlo.",
+     "locator": "Enmienda núm. 6 (BOCG A-4-3, pág. 4)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1668,6 +2537,12 @@
     "note": "multas y régimen sancionador de la ley",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion088/20241219/Votacion011/VOT_20241219162710.json": {
@@ -1676,7 +2551,18 @@
     "w038--boe-ley-1-2025-sanciones",
     "eje-regulacion-economica--ine-dirce-2025-comercio-alimentacion"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Empresas sancionadas",
+     "text": "Habría cambiado la escala de multas por infracciones leves, graves y muy graves; la enmienda propone reducir las sanciones.",
+     "locator": "Enmienda núm. 7 (BOCG A-4-3, pág. 5)"
+    },
+    {
+     "actor": "Comunidades autónomas",
+     "text": "La enmienda pide ajustar sus sanciones a las de la ley y considera desproporcionado que añadan otras sanciones adicionales.",
+     "locator": "Enmienda núm. 7 (BOCG A-4-3, pág. 5)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1688,6 +2574,12 @@
     "note": "multas y umbrales autonómicos",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion088/20241219/Votacion015/VOT_20241219162717.json": {
@@ -1696,7 +2588,18 @@
     "eje-regulacion-economica--mapa-2024-desperdicio",
     "eje-regulacion-economica--ine-dirce-2025-comercio-alimentacion"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Agentes de la cadena alimentaria",
+     "text": "Habrían tenido que medir e informar cada año a las administraciones de sus pérdidas y desperdicio, y del producto donado o destinado a alimentación animal.",
+     "locator": "Enmienda núm. 51 (BOCG A-4-3, pág. 43)"
+    },
+    {
+     "actor": "Agricultores y entidades de rebusca",
+     "text": "La ley habría definido el espigueo: rebusca de lo que queda en el campo tras la cosecha, con autorización del titular y sin ánimo de lucro.",
+     "locator": "Enmienda núm. 47 (BOCG A-4-3, pág. 40)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1707,6 +2610,12 @@
     "verdict": "keep",
     "note": "cifras generales ya miden la obligación general",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1716,7 +2625,13 @@
     "eje-regulacion-economica--mapa-2024-desperdicio",
     "eje-regulacion-economica--ine-dirce-2025-comercio-alimentacion"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Agentes de cada fase de la cadena",
+     "text": "El Plan Nacional habría fijado objetivos nacionales de reducción del desperdicio en cada fase de la cadena, con un calendario de reducción por año.",
+     "locator": "Enmienda núm. 141 (BOCG A-4-3, pág. 136)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1728,6 +2643,12 @@
     "note": "cifras generales ya miden la obligación general",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion088/20241219/Votacion032/VOT_20241219162737.json": {
@@ -1735,7 +2656,13 @@
    "facts": [
     "w038--istac-2024-platano"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Productores de fruta, hortalizas y plátano canario",
+     "text": "Las retiradas de fruta, hortalizas y plátano por gestión de crisis o regulación del mercado quedarían fuera del ámbito de aplicación de la ley.",
+     "locator": "Enmienda núm. 236 (BOCG A-4-3, pág. 243)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1747,6 +2674,12 @@
     "note": "retiradas de plátano canario: superficie y producción",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion088/20241219/Votacion039/VOT_20241219162747.json": {
@@ -1755,7 +2688,18 @@
     "eje-regulacion-economica--mapa-2024-desperdicio",
     "eje-regulacion-economica--ine-dirce-2025-comercio-alimentacion"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Empresas de la cadena alimentaria",
+     "text": "Podrían adoptar un orden de prioridades distinto contra el desperdicio en su sector, justificando los motivos y recogiéndolo en su plan de prevención.",
+     "locator": "Enmienda núm. 245 (BOCG A-4-3, pág. 248)"
+    },
+    {
+     "actor": "Empresas con incumplimientos leves o graves",
+     "text": "Si la inspección detecta un incumplimiento leve o grave, podría darles un plazo adecuado y suficiente para subsanarlo antes de sancionar.",
+     "locator": "Enmienda núm. 270 (BOCG A-4-3, pág. 268)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1766,6 +2710,12 @@
     "verdict": "keep",
     "note": "cifras generales ya miden la obligación general",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1775,7 +2725,18 @@
     "eje-regulacion-economica--mapa-2024-desperdicio",
     "eje-regulacion-economica--ine-dirce-2025-comercio-alimentacion"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Industria alimentaria, comercios y hostelería",
+     "text": "Tendrían que firmar convenios para donar excedentes solo cuando una entidad social o banco de alimentos se lo pida formalmente.",
+     "locator": "Enmienda núm. 250 (BOCG A-4-3, pág. 251)"
+    },
+    {
+     "actor": "Entidades sociales y bancos de alimentos",
+     "text": "Para recibir donaciones tendrían que reunir las condiciones del art. 9.1 y disponer de medios para garantizar trazabilidad y seguridad alimentaria.",
+     "locator": "Enmienda núm. 250 (BOCG A-4-3, pág. 251)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1786,6 +2747,12 @@
     "verdict": "keep",
     "note": "cifras generales ya miden la obligación general",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1795,7 +2762,23 @@
     "eje-regulacion-economica--mapa-2024-desperdicio",
     "eje-regulacion-economica--ine-dirce-2025-comercio-alimentacion"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Empresas que venden alimentos al consumidor final",
+     "text": "Las medidas contra el desperdicio se recogerían en guías sectoriales de buenas prácticas elaboradas con las administraciones y las asociaciones del sector.",
+     "locator": "Enmienda núm. 262 (BOCG A-4-3, pág. 261)"
+    },
+    {
+     "actor": "Trabajadores de la cadena alimentaria",
+     "text": "Las guías incluirían medidas de formación y sensibilización para que participen en la prevención del desperdicio.",
+     "locator": "Enmienda núm. 262 (BOCG A-4-3, pág. 261)"
+    },
+    {
+     "actor": "Ciudadanía",
+     "text": "Las guías incluirían medidas de educación y concienciación de la ciudadanía sobre la prevención del desperdicio alimentario.",
+     "locator": "Enmienda núm. 262 (BOCG A-4-3, pág. 261)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1807,6 +2790,12 @@
     "note": "cifras generales ya miden la obligación general",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion070/20241023/Votacion002/VOT_20241023184333.json": {
@@ -1814,12 +2803,29 @@
    "facts": [
     "eje-regulacion-economica--ine-dirce-2025-turismo"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Viajes corporativos, turismo de eventos (MICE) y grupos",
+     "text": "La nueva norma tendría que tener en cuenta su exclusión, pues cumplir con el registro les resulta inviable según el sector.",
+     "locator": "Punto 2 (BOCG D-227, pág. 18)"
+    },
+    {
+     "actor": "Gobierno",
+     "text": "Tendría que elaborar la norma recogiendo los acuerdos ya adoptados con los sujetos obligados desde 2021.",
+     "locator": "Punto 2 (BOCG D-227, pág. 18)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion070/20241023/Votacion004/VOT_20241023184336.json": {
@@ -1827,12 +2833,24 @@
    "facts": [
     "eje-regulacion-economica--ine-dirce-2025-turismo"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Sector turístico",
+     "text": "El Gobierno tendría que apoyar las reivindicaciones planteadas desde 2021 sobre los efectos del Real Decreto 933/2021 en la actividad turística.",
+     "locator": "Punto 4 (BOCG D-227, pág. 18)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion070/20241023/Votacion005/VOT_20241023184338.json": {
@@ -1840,12 +2858,29 @@
    "facts": [
     "eje-regulacion-economica--ine-dirce-2025-turismo"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Asociaciones del sector turístico",
+     "text": "Se abriría un nuevo proceso de diálogo con ellas, incluidas CEHAT, CEAV, AGAVE, FETAVE, UNAV o FENEVAL, para consensuar la orden ministerial.",
+     "locator": "Punto 5 (BOCG D-227, pág. 18)"
+    },
+    {
+     "actor": "Hoteles y alquiladoras de coches",
+     "text": "Hasta alcanzar el consenso, el régimen sancionador no debería tener efecto.",
+     "locator": "Punto 5 (BOCG D-227, pág. 18)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion046/20240613/Votacion003/VOT_20240613125216.json": {
@@ -1853,12 +2888,29 @@
    "facts": [
     "eje-regulacion-economica--ine-tich-2025-menores"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "CNMC",
+     "text": "El Gobierno tendría que dotarla de más recursos presupuestarios, técnicos y humanos como organismo supervisor y sancionador.",
+     "locator": "Punto 3 del texto presentado (BOCG Congreso D-117 (2024-04-05), pág. 21)"
+    },
+    {
+     "actor": "Empresas del ámbito digital",
+     "text": "Tendrían un supervisor con más medios en las leyes digitales (telecomunicaciones, ciberseguridad 5G, audiovisual, DSA, DMA).",
+     "locator": "Punto 3 del texto presentado (BOCG Congreso D-117 (2024-04-05), pág. 21)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion029/20240314/Votacion042/VOT_20240314123755.json": {
@@ -1866,12 +2918,29 @@
    "facts": [
     "eje-regulacion-economica--ine-eea-2023-explotaciones"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Cooperativas y productores agrícolas",
+     "text": "El Gobierno tendría que hacer un plan de fomento de la producción social y cooperativa agrícola.",
+     "locator": "Punto 9 (BOCG D-110, pág. 14)"
+    },
+    {
+     "actor": "SAREB",
+     "text": "Sus terrenos agrícolas se usarían para ese plan de producción social y cooperativa.",
+     "locator": "Punto 9 (BOCG D-110, pág. 14)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   }
  }

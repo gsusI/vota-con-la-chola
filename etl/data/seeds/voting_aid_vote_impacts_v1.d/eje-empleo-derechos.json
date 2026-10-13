@@ -450,6 +450,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "sin texto extraído de la enmienda a la totalidad (sin expediente): no consta qué cambia para cada colectivo",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion200/20260923/Votacion003/VOT_20260923145117.json": {
@@ -800,12 +806,29 @@
     "eje-empleo-derechos--imserso-saad-2026-08",
     "eje-empleo-derechos--ine-epd-2024-discapacidad"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Personas con discapacidad o dependencia",
+     "text": "Podrían elegir libremente a su asistente personal y dirigir ellas los apoyos que reciben, conforme a su voluntad, deseos y preferencias.",
+     "locator": "Disposición final vigesimoséptima (nueva) (BOCG A-64-9, pág. 163)"
+    },
+    {
+     "actor": "Asistentes personales",
+     "text": "El Gobierno tendría que aprobar en doce meses una relación laboral especial, con condiciones laborales dignas, formación y protección social suficiente.",
+     "locator": "Disposición final vigesimoséptima (nueva) (BOCG A-64-9, pág. 163-164)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion050/VOT_20251008195317.json": {
@@ -814,12 +837,24 @@
     "eje-empleo-derechos--ine-epa-2025-transporte-terrestre",
     "eje-empleo-derechos--ss-pensiones-2026-09"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Conductores profesionales del transporte",
+     "text": "Incluidos los taxistas, serían reconocidos como colectivo de riesgo y podrían optar a coeficientes reductores para jubilarse antes.",
+     "locator": "Enmienda núm. 732 (BOCG A-9-4, pág. 613)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion109/20250508/Votacion002/VOT_20250508130739.json": {
@@ -827,7 +862,18 @@
    "facts": [
     "w015--sanidad-snsrrhh-2023-urgencias-061"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Personal sanitario de medios aéreos",
+     "text": "Podrían jubilarse antes mediante coeficientes reductores de la edad de jubilación.",
+     "locator": "Enmienda núm. 10 (BOCG A-20-2, pág. 11)"
+    },
+    {
+     "actor": "Gobierno",
+     "text": "En tres meses desde la entrada en vigor de la ley, el Gobierno tendría que iniciar de oficio el procedimiento para aplicar esos coeficientes a este personal.",
+     "locator": "Enmienda núm. 10 (BOCG A-20-2, pág. 11)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -839,6 +885,12 @@
     "note": "Sin cifra de personal aéreo; usado 112/061 como ámbito",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion056/20240723/Votacion005/VOT_20240723221630.json": {
@@ -847,12 +899,29 @@
     "eje-empleo-derechos--ine-epa-2025-silvicultura",
     "eje-empleo-derechos--miteco-iiff-2025"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Agentes forestales y medioambientales",
+     "text": "Tendrían un reglamento específico de prevención de riesgos laborales que tenga en cuenta sus riesgos, accidentes y enfermedades profesionales propios.",
+     "locator": "Enmienda núm. 110 (BOCG A-14-3, pág. 100)"
+    },
+    {
+     "actor": "Gobierno y administraciones competentes",
+     "text": "En un año desde la entrada en vigor, el Gobierno tendría que aprobar ese reglamento, de acuerdo y elaborado con las administraciones competentes.",
+     "locator": "Enmienda núm. 110 (BOCG A-14-3, pág. 100)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion056/20240723/Votacion034/VOT_20240723221704.json": {
@@ -861,12 +930,29 @@
     "eje-empleo-derechos--ine-epa-2025-silvicultura",
     "eje-empleo-derechos--miteco-iiff-2025"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Bomberos forestales",
+     "text": "Podrían pasar a segunda actividad a los 55 años (a fijar por reglamento), si por dictamen médico tienen disminuida su capacidad para el servicio ordinario.",
+     "locator": "Enmienda núm. 40 (BOCG A-15-3, pág. 32)"
+    },
+    {
+     "actor": "Administraciones públicas",
+     "text": "Podrían crear plazas de segunda actividad dentro del operativo de extinción y adecuar a ellas las retribuciones del personal afectado.",
+     "locator": "Enmienda núm. 40 (BOCG A-15-3, pág. 32)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion159/20260212/Votacion018/VOT_20260212114336.json": {
@@ -905,6 +991,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "Bloque «resto de las enmiendas» sin texto individual extraído; no se puede atribuir un efecto concreto a cada una.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion056/20240723/Votacion036/VOT_20240723221706.json": {
@@ -913,12 +1005,29 @@
     "eje-empleo-derechos--ine-epa-2025-silvicultura",
     "eje-empleo-derechos--miteco-iiff-2025"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Bomberos forestales",
+     "text": "Podrían pasar a segunda actividad y adaptar su puesto si tienen reconocida una incapacidad para el servicio ordinario, en plazas recogidas en la relación de puestos de trabajo.",
+     "locator": "Enmienda núm. 2 (BOCG A-15-3, pág. 2)"
+    },
+    {
+     "actor": "Administraciones públicas",
+     "text": "Podrían establecer plazas de segunda actividad en el operativo y tendrían que adecuar las retribuciones del personal afectado a su puesto y funciones.",
+     "locator": "Enmienda núm. 2 (BOCG A-15-3, pág. 2)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion056/20240723/Votacion039/VOT_20240723221709.json": {
@@ -933,6 +1042,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "Bloque «resto de las enmiendas» sin texto individual extraído; no se puede atribuir un efecto concreto a cada una.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion056/20240723/Votacion040/VOT_20240723221710.json": {
@@ -941,12 +1056,29 @@
     "eje-empleo-derechos--ine-epa-2025-silvicultura",
     "eje-empleo-derechos--miteco-iiff-2025"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Bomberos forestales",
+     "text": "Las administraciones tendrían que reconocer (y no solo procurar) la peligrosidad, penosidad y riesgo psicofísico de su trabajo al negociar sus retribuciones.",
+     "locator": "Enmienda núm. 72 (BOCG A-15-3, pág. 63)"
+    },
+    {
+     "actor": "Administraciones públicas",
+     "text": "Pasarían de «procurar impulsar» a «establecer», en el marco del diálogo social, el reconocimiento de esas condiciones en las retribuciones de los bomberos forestales.",
+     "locator": "Enmienda núm. 72 (BOCG A-15-3, pág. 63)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion049/20240620/Votacion012/VOT_20240620132735.json": {

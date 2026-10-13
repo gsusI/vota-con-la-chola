@@ -155,7 +155,23 @@
     "eje-igualdad-genero--interior-2024-delitos-odio",
     "eje-igualdad-genero--ine-2024-matrimonios-mismo-sexo"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Personas sometidas a terapias de conversión",
+     "text": "Quien aplicara sobre una persona actos o técnicas de conversión de su orientación o identidad sería castigado con pena de prisión.",
+     "locator": "Artículo 173 bis (BOCG B-240-1, pág. 3)"
+    },
+    {
+     "actor": "Profesionales educativos, docentes y deportivos",
+     "text": "Los condenados serían inhabilitados para profesiones u oficios educativos, docentes, deportivos y de tiempo libre.",
+     "locator": "Artículo 173 bis (BOCG B-240-1, pág. 3)"
+    },
+    {
+     "actor": "Personas jurídicas",
+     "text": "Las personas jurídicas responsables de esos delitos recibirían pena de multa.",
+     "locator": "Artículo 173 bis (BOCG B-240-1, pág. 3)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -166,6 +182,12 @@
     "verdict": "keep",
     "note": "Sin cifra oficial específica; delitos de odio ya acotan",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "Texto de la iniciativa original (B-240-1); el dictamen votado puede variar en detalles. No se citan duraciones de penas.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -211,7 +233,23 @@
     "eje-igualdad-genero--eurostat-2025-consejos-cotizadas",
     "eje-igualdad-genero--eurostat-2025-mujeres-parlamento-gobierno"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Gobierno",
+     "text": "Entre vicepresidencias, ministerios y resto de titulares, cada sexo tendría que suponer como mínimo el 40 %.",
+     "locator": "Votación del dictamen (BOCG A-1-1, pág. 6)"
+    },
+    {
+     "actor": "Sociedades cotizadas",
+     "text": "El consejo de administración tendría que garantizar al menos un 40 % de miembros del sexo menos representado.",
+     "locator": "Votación del dictamen (BOCG A-1-1, pág. 8)"
+    },
+    {
+     "actor": "Candidaturas electorales",
+     "text": "Las listas de candidatos y suplentes tendrían una exigencia de paridad más estricta que el 40 % mínimo actual.",
+     "locator": "Votación del dictamen (BOCG A-1-1, pág. 4)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -222,6 +260,12 @@
     "verdict": "keep",
     "note": "Ley general de paridad; cifras actuales encajan",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "Efectos tomados de la exposición de motivos de la iniciativa (A-1-1); el dictamen final no se ha contrastado.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -237,6 +281,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "sin texto extraído de la enmienda a la totalidad (sin expediente): no consta qué cambia para cada colectivo",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion186/20260616/Votacion002/VOT_20260616202226.json": {
@@ -432,6 +482,12 @@
     "verdict": "keep",
     "note": "Cifras de mujeres en consejos y gobierno ya adecuadas",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "sin texto extraído de la enmienda a la totalidad (sin expediente): no consta qué cambia para cada colectivo",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -929,12 +985,24 @@
    "facts": [
     "eje-igualdad-genero--ine-2025-poblacion-mujeres"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Personas destinatarias de la ley",
+     "text": "Se habrían suprimido en toda la ley orgánica las expresiones que desdoblan el género para aludir a los dos sexos.",
+     "locator": "Enmienda núm. 706 (BOCG A-16-3, pág. 814)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion056/20240723/Votacion041/VOT_20240723221711.json": {
@@ -949,6 +1017,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "Bloque «resto de las enmiendas» sin texto individual extraído; no se puede atribuir un efecto concreto a cada una.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion056/20240723/Votacion053/VOT_20240723221724.json": {
@@ -957,7 +1031,18 @@
     "w024--ine-2023-electores-cortes",
     "eje-igualdad-genero--eurostat-2025-mujeres-parlamento-gobierno"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Candidaturas electorales",
+     "text": "Habría que cumplir la paridad en toda la lista y en cada tramo de seis nombres.",
+     "locator": "Enmienda núm. 40 al art. primero, apartado Uno (BOCG A-1-7, pág. 2)"
+    },
+    {
+     "actor": "Candidaturas no presentadas por partidos",
+     "text": "La exigencia de paridad incluiría todas las listas, no solo las presentadas por partidos políticos.",
+     "locator": "Enmienda núm. 40 al art. primero, apartado Uno (BOCG A-1-7, pág. 2)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -969,6 +1054,12 @@
     "note": "Paridad de listas: electorado que vota esas listas",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion052/20240627/Votacion019/VOT_20240627130351.json": {
@@ -977,7 +1068,18 @@
     "eje-igualdad-genero--eurostat-2025-mujeres-parlamento-gobierno",
     "eje-igualdad-genero--eurostat-2025-consejos-cotizadas"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Mujeres y hombres en el Consejo de la autoridad",
+     "text": "Las personas de cada sexo no podrían superar el 50 % del Consejo, con nombramientos de representación equilibrada.",
+     "locator": "Enmienda núm. 70 (BOCG A-10-3, pág. 38)"
+    },
+    {
+     "actor": "Contratistas del sector público",
+     "text": "Algunos contratos del sector público, los fijados por motivos de interés público, quedarían fuera de la ley de desindexación.",
+     "locator": "Enmienda núm. 83 (BOCG A-10-3, pág. 44)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -989,6 +1091,12 @@
     "note": "Sin cifra oficial del consejo de la Autoridad",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "Texto de la enmienda 83 truncado en el lote; se recoge solo el inicio del apartado d).",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion040/20240523/Votacion041/VOT_20240523141011.json": {
@@ -996,12 +1104,24 @@
    "facts": [
     "eje-igualdad-genero--mefd-2025-ley-ensenanzas-artisticas"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Investigadoras y equipos de investigación",
+     "text": "Se habría suprimido el apartado que incentiva proyectos científicos con perspectiva de género, la paridad en los equipos y más mujeres investigadoras principales.",
+     "locator": "Enmienda al artículo 56, punto 4 (BOCG A-5-7, pág. 68)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion191/20260625/Votacion006/VOT_20260625150749.json": {
@@ -1203,7 +1323,23 @@
     "eje-igualdad-genero--eurostat-2025-mujeres-parlamento-gobierno",
     "eje-igualdad-genero--eurostat-2025-consejos-cotizadas"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Radiotelevisión pública (RTVE)",
+     "text": "Habría que fomentar la paridad en lugar de cumplirla.",
+     "locator": "Enmiendas núm. 48-49 y 53, art. duodécimo (BOCG A-1-7, págs. 5-6)"
+    },
+    {
+     "actor": "Agentes sociales",
+     "text": "Las obligaciones de composición equilibrada pasarían a ser códigos de buen gobierno de carácter voluntario, con el principio de «cumplir o explicar».",
+     "locator": "Enmienda núm. 58 (BOCG A-1-7, pág. 6)"
+    },
+    {
+     "actor": "Federaciones deportivas",
+     "text": "Una nueva disposición adicional sexta fijaría la participación equilibrada en las juntas directivas mediante códigos voluntarios de buen gobierno.",
+     "locator": "Enmienda núm. 59, disp. adic. sexta (BOCG A-1-7, pág. 6)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1214,6 +1350,12 @@
     "verdict": "keep",
     "note": "Sin cifra oficial específica de RTVE hallada",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1366,7 +1508,18 @@
     "eje-igualdad-genero--mefd-2025-ley-ensenanzas-artisticas",
     "eje-igualdad-genero--interior-2024-delitos-odio"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Estudiantado",
+     "text": "Se habría sustituido la lista de causas de discriminación (orientación sexual, identidad de género, discapacidad…) por una remisión a las del artículo 14 de la Constitución.",
+     "locator": "Enmienda núm. 304 (BOCG A-5-3, pág. 274)"
+    },
+    {
+     "actor": "Administraciones educativas y centros",
+     "text": "Tendrían que garantizar la igualdad de trato frente a las discriminaciones del artículo 14 de la Constitución, sin la enumeración detallada del texto original.",
+     "locator": "Enmienda núm. 304 (BOCG A-5-3, pág. 274)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -1377,6 +1530,12 @@
     "verdict": "improved",
     "note": "Estudiantes y docentes de la ley artística",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   }

@@ -287,6 +287,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "bloque, «resto de enmiendas», transaccional o sin texto votado identificable: no se puede atribuir el efecto con certeza",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion056/VOT_20260326165143.json": {
@@ -336,6 +342,29 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Personas con tres condenas previas por delitos patrimoniales",
+     "text": "Un hurto de hasta 400 euros ya no se castiga solo con multa: se aplica la pena del apartado 1 del art. 234, y las tres condenas previas agravan el delito.",
+     "locator": "Art. 234.2 y 235.1.7.º (BOCG B-97-6, págs. 5-6)"
+    },
+    {
+     "actor": "Explotaciones agrícolas y ganaderas",
+     "text": "Es delito agravado sustraer productos agrarios o ganaderos, o los medios para obtenerlos, en una explotación si lo sustraído supera 400 euros.",
+     "locator": "Art. 235.1.4.º (BOCG B-97-6, pág. 6)"
+    },
+    {
+     "actor": "Quien sustrae teléfonos móviles",
+     "text": "Sustraer teléfonos móviles u otros dispositivos de comunicación o almacenamiento de datos personales pasa a ser un supuesto agravado de hurto.",
+     "locator": "Art. 235.1.10.º (BOCG B-97-6, pág. 6)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion167/20260324/Votacion001/VOT_20260324205012.json": {
@@ -559,6 +588,24 @@
     "verdict": "keep",
     "note": "Sin cifra oficial específica de sanciones hallada",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Personas que ocupan inmuebles ajenos",
+     "text": "Habría seguido siendo infracción ocupar o permanecer en un inmueble ajeno contra la voluntad del titular, cuando no sea delito.",
+     "locator": "Enmienda a la totalidad núm. 1 (BOCG B-148-5, pág. 21)"
+    },
+    {
+     "actor": "Vendedores ambulantes",
+     "text": "Habría seguido siendo infracción ocupar la vía pública para la venta ambulante no autorizada.",
+     "locator": "Enmienda a la totalidad núm. 1 (BOCG B-148-5, pág. 23)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "Texto alternativo extenso; se recogen solo dos preceptos verificados con kit fetch.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1319,6 +1366,29 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Menores en el entorno digital",
+     "text": "Se impulsaría la lucha contra los delitos que les afectan online y un servicio de información y acompañamiento.",
+     "locator": "Punto 12 del texto presentado (BOCG Congreso D-117 (2024-04-05), pág. 21)"
+    },
+    {
+     "actor": "Fiscalías, Policía Nacional y Guardia Civil",
+     "text": "Recibirían más medios las fiscalías de criminalidad informática, la Brigada Central de Investigación Tecnológica y el Grupo de Delitos Telemáticos.",
+     "locator": "Punto 12 del texto presentado (BOCG Congreso D-117 (2024-04-05), pág. 21)"
+    },
+    {
+     "actor": "Abogados",
+     "text": "Se impulsaría su especialización en estos delitos.",
+     "locator": "Punto 12 del texto presentado (BOCG Congreso D-117 (2024-04-05), pág. 21)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion043/20240530/Votacion006/VOT_20240530120000.json": {
@@ -1378,6 +1448,24 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Funcionarios de prisiones",
+     "text": "Habría sido obligatorio proporcionarles medios adecuados y formación constante y continua en la Academia Nacional de Estudios Penitenciarios.",
+     "locator": "Enmienda núm. 3 (BOCG B-102-4, pág. 5)"
+    },
+    {
+     "actor": "Administración penitenciaria",
+     "text": "Habría tenido que contar con el personal necesario y debidamente cualificado.",
+     "locator": "Enmienda núm. 3 (BOCG B-102-4, pág. 5)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion004/VOT_20260326165027.json": {
@@ -1391,6 +1479,19 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Personas que defraudan el suministro eléctrico",
+     "text": "Se añade un subtipo agravado de defraudación de fluido eléctrico, con mayor reproche penal cuando va ligada a delitos contra la salud pública.",
+     "locator": "Enmienda núm. 12, apartado Siete bis (BOCG B-97-9, pág. 2)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion159/20260212/Votacion003/VOT_20260212114308.json": {
@@ -1404,6 +1505,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "Votación en bloque del resto de enmiendas sin texto extraído; un intento en BOCG B-97-4 no localizó el contenido de las enmiendas de este bloque.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion106/20250410/Votacion002/VOT_20250410155138.json": {
@@ -1416,6 +1523,29 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Asociaciones",
+     "text": "Podrían ser disueltas por un juez civil si hicieran apología del franquismo o del terrorismo, ensalzando a ETA u otra organización terrorista, a sus dirigentes, miembros o presos.",
+     "locator": "Enmienda núm. 2 (BOCG B-141-5, pág. 1-2)"
+    },
+    {
+     "actor": "Víctimas del terrorismo",
+     "text": "Se añadiría la apología del terrorismo con menosprecio de su dignidad o incitación al odio contra ellas como causa de disolución de asociaciones.",
+     "locator": "Enmienda núm. 2 (BOCG B-141-5, pág. 1-2)"
+    },
+    {
+     "actor": "Ministerio Fiscal",
+     "text": "Le correspondería ejercer la acción judicial para disolver las asociaciones por apología del franquismo o del terrorismo.",
+     "locator": "Enmienda núm. 2 (BOCG B-141-5, pág. 1-2)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion059/20240917/Votacion003/VOT_20240917204419.json": {
@@ -1429,6 +1559,29 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Menores en procesos penales",
+     "text": "Habría un Registro Central de Menores de sentencias condenatorias firmes, medidas cautelares, requisitorias y rebeldías, en el Ministerio de la Presidencia, Justicia y Relaciones con las Cortes.",
+     "locator": "Enmienda núm. 8 (BOCG A-17-2, pág. 7)"
+    },
+    {
+     "actor": "Quienes consulten el registro",
+     "text": "El acceso a los datos se ajustaría a la normativa de registros de apoyo a la Justicia y de protección de datos personales.",
+     "locator": "Enmienda núm. 8 (BOCG A-17-2, pág. 7)"
+    },
+    {
+     "actor": "Administración de Justicia",
+     "text": "El registro entraría en funcionamiento en el plazo de un año desde la entrada en vigor de la ley.",
+     "locator": "Enmienda núm. 8 (BOCG A-17-2, pág. 7)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion056/20240723/Votacion007/VOT_20240723221632.json": {
@@ -1441,6 +1594,24 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Agentes forestales",
+     "text": "Como agentes de la autoridad, podrían comprobar personas, bienes y vehículos para investigar infracciones y prevenir delitos, e intervenir objetos usados para ello.",
+     "locator": "Enmienda núm. 16 (BOCG A-14-3, pág. 13)"
+    },
+    {
+     "actor": "Personas en el medio natural",
+     "text": "Podrían tener que identificarse ante un agente forestal si hay indicios de infracción, con respeto a la proporcionalidad y la mínima intervención.",
+     "locator": "Enmienda núm. 16 (BOCG A-14-3, pág. 13)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion185/20260611/Votacion039/VOT_20260611145750.json": {
@@ -1714,6 +1885,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "bloque, «resto de enmiendas», transaccional o sin texto votado identificable: no se puede atribuir el efecto con certeza",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion159/20260212/Votacion023/VOT_20260212114343.json": {
@@ -1764,6 +1941,19 @@
     "note": "Sin cifra oficial específica de sanciones hallada",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Personas que intentan entrar por Ceuta y Melilla",
+     "text": "Habrían sido rechazadas en la frontera (en vez de «podrán ser rechazadas») y su solicitud de protección internacional se habría trasladado a los consulados.",
+     "locator": "Enmienda a la totalidad núm. 2 (BOCG B-148-5, pág. 37)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "Texto alternativo extenso; solo se recoge el efecto verificado con kit fetch.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion056/20240723/Votacion016/VOT_20240723221644.json": {
@@ -1782,6 +1972,19 @@
     "verdict": "improved",
     "note": "Colectivo: unos 6.000 agentes; atentados como contexto",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Personal no funcionario que colabora con agentes forestales",
+     "text": "Las agresiones y desobediencias contra ellos se considerarían cometidas contra agentes de la autoridad, cuando actúen bajo la dirección de agentes forestales.",
+     "locator": "Enmienda núm. 116 (BOCG A-14-3, pág. 104)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },

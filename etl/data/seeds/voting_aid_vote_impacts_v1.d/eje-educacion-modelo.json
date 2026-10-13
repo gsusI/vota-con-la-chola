@@ -203,12 +203,29 @@
     "eje-educacion-modelo--mefd-libros",
     "eje-educacion-modelo--mefd-alumnado-total"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Familias con alumnado escolarizado",
+     "text": "El Gobierno tendría que garantizar gratis libros de texto y material escolar a todo el alumnado, sin depender de la renta ni de la comunidad autónoma.",
+     "locator": "Punto 6 (BOCG D-590, pág. 31)"
+    },
+    {
+     "actor": "Centros educativos",
+     "text": "Se crearían bancos públicos de material escolar y un sistema público de préstamo, intercambio y reutilización de libros y materiales.",
+     "locator": "Punto 6 (BOCG D-590, pág. 31)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion066/20241010/Votacion009/VOT_20241010194925.json": {
@@ -217,12 +234,24 @@
     "eje-educacion-modelo--mefd-alumnado-total",
     "eje-educacion-modelo--eurostat-abandono-temprano"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Comunidad educativa",
+     "text": "El Gobierno tendría que promover derogar la Ley Orgánica 3/2020, que modificó la Ley Orgánica de Educación de 2006.",
+     "locator": "Punto 2 (BOCG D-217, pág. 14)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion198/20260916/Votacion022/VOT_20260916195415.json": {
@@ -231,7 +260,23 @@
     "eje-educacion-modelo--mefd-neae",
     "eje-educacion-modelo--mefd-centros-especiales"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Alumnado con necesidades educativas especiales",
+     "text": "Podrían seguir en centros o unidades de educación especial hasta los veintiún años como mínimo, con escolarización personalizada según sus necesidades.",
+     "locator": "Enmienda al art. primero quince, art. 18 (BOCG A-64-9, pág. 47-48)"
+    },
+    {
+     "actor": "Familias del alumnado con necesidades especiales",
+     "text": "Las familias tendrían garantizado el derecho a elegir el modelo educativo y el centro docente para este alumnado, y los servicios de orientación las escucharían.",
+     "locator": "Enmiendas a art. primero quince y dieciséis, arts. 18 y 21 (BOCG A-64-9, pág. 47-50)"
+    },
+    {
+     "actor": "Centros de educación especial",
+     "text": "Seguirían siendo una modalidad de escolarización reconocida junto a centros ordinarios, escolarización combinada y aulas específicas.",
+     "locator": "Enmienda al art. primero quince, art. 18 (BOCG A-64-9, pág. 47-48)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -243,6 +288,12 @@
     "note": "Alumnado con necesidades especiales ya es el colectivo",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion040/20240523/Votacion036/VOT_20240523141006.json": {
@@ -250,12 +301,24 @@
    "facts": [
     "eje-educacion-modelo--mefd-artisticas-superiores"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Estudiantado de enseñanzas artísticas",
+     "text": "Tiene derecho al estudio en el centro de su elección, en los términos que fije el ordenamiento jurídico, que atenderá a la demanda social que pueda existir.",
+     "locator": "Enmienda al artículo 43 (BOCG A-5-7, pág. 58)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion198/20260916/Votacion009/VOT_20260916195352.json": {
@@ -264,12 +327,29 @@
     "eje-educacion-modelo--mefd-libros",
     "eje-educacion-modelo--mefd-alumnado-total"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Alumnado de centros públicos",
+     "text": "El Gobierno tendría que garantizar acceso universal a materiales pedagógicos diversos, duraderos, reutilizables y sostenibles, incluidos los manipulativos.",
+     "locator": "Punto 7 (BOCG D-590, pág. 31)"
+    },
+    {
+     "actor": "Familias con menos recursos",
+     "text": "Se pediría que estos recursos y servicios, y medidas de conciliación al inicio del curso, no dependan de la capacidad económica de las familias.",
+     "locator": "Punto 7 (BOCG D-590, pág. 31)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion198/20260916/Votacion047/VOT_20260916195453.json": {
@@ -278,7 +358,13 @@
     "eje-educacion-modelo--mefd-centros-especiales",
     "eje-educacion-modelo--mefd-neae"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Alumnado con necesidades educativas especiales",
+     "text": "Se derogaría la disposición adicional cuarta de la Ley Orgánica 3/2020 (LOMLOE) sobre la escolarización de este alumnado.",
+     "locator": "Disposición derogatoria (nueva) (BOCG A-64-9, pág. 137)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -290,6 +376,12 @@
     "note": "Educación especial es el colectivo afectado",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion066/20241010/Votacion013/VOT_20241010194928.json": {
@@ -299,7 +391,23 @@
     "eje-educacion-modelo--mefd-especial",
     "eje-educacion-modelo--mefd-gasto-conciertos"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Familias",
+     "text": "El Gobierno tendría que garantizar su derecho a elegir la educación de sus hijos y evitar imposiciones ideológicas, lingüísticas o afectivosexuales.",
+     "locator": "Punto 6 (BOCG D-217, pág. 14)"
+    },
+    {
+     "actor": "Familias de centros diferenciados o de educación especial",
+     "text": "Se evitarían limitaciones en el acceso a centros de educación diferenciada o de educación especial.",
+     "locator": "Punto 6 (BOCG D-217, pág. 14)"
+    },
+    {
+     "actor": "Alumnado",
+     "text": "Se evitaría la exclusión del español en el sistema educativo.",
+     "locator": "Punto 6 (BOCG D-217, pág. 14)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -311,6 +419,12 @@
     "note": "Cifras de titularidad, especial y conciertos ya ajustadas",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion029/20240314/Votacion013/VOT_20240314123722.json": {
@@ -318,12 +432,24 @@
    "facts": [
     "eje-educacion-modelo--mefd-artisticas-superiores"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Centros de enseñanzas artísticas superiores",
+     "text": "Las administraciones competentes tendrían que dotar a los centros de los recursos que precisen para ejercer su autonomía, sin distinguir si son públicos o privados.",
+     "locator": "Enmienda núm. 95 (BOCG A-5-3, pág. 91)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   }
  }

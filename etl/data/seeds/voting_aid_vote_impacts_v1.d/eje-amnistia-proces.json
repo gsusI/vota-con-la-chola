@@ -292,7 +292,18 @@
    "facts": [
     "eje-amnistia-proces--tjue-2026-amnistia"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Personas investigadas o condenadas por el procés",
+     "text": "Habría quedado amnistiados también actos sin relación directa con las consultas o posteriores a ellas, cometidos entre el 1 de enero de 2012 y el 13 de noviembre de 2023.",
+     "locator": "Enmienda núm. 26 (BOCG B-32-5, pág. 30)"
+    },
+    {
+     "actor": "Jueces y tribunales",
+     "text": "Si vieran posible choque con el derecho europeo, habrían planteado cuestión al TJUE y suspendido el procedimiento, sin que la ley dejara de ser aplicable en general.",
+     "locator": "Enmienda núm. 34 (BOCG B-32-5, pág. 41)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -303,6 +314,12 @@
     "verdict": "keep",
     "note": "Sin cifra oficial de personas amnistiadas; se mantienen",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -358,7 +375,23 @@
     "eje-amnistia-proces--tc-2025-stc-137",
     "eje-amnistia-proces--fge-2024-informes-amnistia"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Personas amnistiadas que están en prisión",
+     "text": "El órgano judicial habría ordenado su puesta en libertad inmediata.",
+     "locator": "Enmienda núm. 28 (BOCG B-32-5, pág. 34)"
+    },
+    {
+     "actor": "Personas amnistiadas con condena u órdenes pendientes",
+     "text": "Se habrían eliminado sus antecedentes penales y dejado sin efecto las órdenes de busca y captura e ingreso en prisión.",
+     "locator": "Enmienda núm. 28 (BOCG B-32-5, pág. 34-35)"
+    },
+    {
+     "actor": "Jueces y tribunales",
+     "text": "Plantear una cuestión de inconstitucionalidad no habría suspendido la ley ni su aplicación, y se podrían haber reformado las medidas de detención o prisión anteriores.",
+     "locator": "Enmienda núm. 33 (BOCG B-32-5, pág. 40)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -369,6 +402,12 @@
     "verdict": "keep",
     "note": "Sin cifra oficial de personas amnistiadas; se mantienen",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -390,6 +429,12 @@
     "note": "Sin cifra oficial de personas amnistiadas; se mantienen",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "Votación en bloque del resto de enmiendas de un grupo: sin texto extraído ni número de enmienda; el dictamen (B-32-7) solo las lista por referencia.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion018/20240130/Votacion004/VOT_20240130183857.json": {
@@ -404,6 +449,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "Transaccional en Comisión sin texto publicado: un intento en B-32-7 solo muestra el listado de transaccionales mantenidas, no su redacción.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion018/20240130/Votacion005/VOT_20240130183859.json": {
@@ -418,6 +469,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "Transaccional en Comisión sin texto publicado: un intento en B-32-7 solo muestra el listado de transaccionales mantenidas, no su redacción.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion018/20240130/Votacion006/VOT_20240130183901.json": {
@@ -437,6 +494,12 @@
     "verdict": "keep",
     "note": "Sin cifra oficial de personas amnistiadas; se mantienen",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "Transaccional en Comisión sin texto publicado: un intento en B-32-7 solo muestra el listado de transaccionales mantenidas, no su redacción.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -458,6 +521,12 @@
     "note": "Sin cifra oficial de personas amnistiadas; se mantienen",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "Votación en bloque de enmiendas sin texto extraído ni números individuales; no se puede atribuir contenido a cada una.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion018/20240130/Votacion008/VOT_20240130183905.json": {
@@ -478,6 +547,12 @@
     "note": "Sin cifra oficial de personas amnistiadas; se mantienen",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "Transaccional en Comisión sin texto publicado: un intento en B-32-7 solo muestra el listado de transaccionales mantenidas, no su redacción.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion018/20240130/Votacion009/VOT_20240130183906.json": {
@@ -487,7 +562,23 @@
     "eje-amnistia-proces--tc-2025-stc-137",
     "eje-amnistia-proces--tjue-2026-amnistia"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Personas implicadas en el procés",
+     "text": "Quedan amnistiados los actos del proceso independentista catalán realizados entre el 1 de enero de 2012 y el 13 de noviembre de 2023, incluidos los de las consultas de 2014 y 2017.",
+     "locator": "Artículo 1 (BOCG B-32-6, pág. 12-13)"
+    },
+    {
+     "actor": "Personas amnistiadas",
+     "text": "La amnistía no da derecho a indemnización ni a recuperar las multas o sanciones ya pagadas.",
+     "locator": "Exposición de motivos (BOCG B-32-6, pág. 12)"
+    },
+    {
+     "actor": "Particulares con reclamaciones civiles",
+     "text": "La amnistía no exonera de la responsabilidad civil frente a particulares.",
+     "locator": "Exposición de motivos (BOCG B-32-6, pág. 12)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
@@ -498,6 +589,12 @@
     "verdict": "keep",
     "note": "Sin cifra oficial de personas amnistiadas; se mantienen",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "Texto tomado de la Ponencia (B-32-6); el dictamen votado (B-32-7) puede diferir en detalles.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },

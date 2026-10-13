@@ -896,7 +896,19 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [
+    {
+     "actor": "Ministra de Educación",
+     "text": "El Congreso la reprueba por los resultados de PISA 2025 y la gestión del inicio de curso en Ceuta, e insta al presidente del Gobierno a cesarla.",
+     "locator": "Punto I (BOCG D-594, pág. 20)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion198/20260916/Votacion011/VOT_20260916195357.json": {
    "question_id": "eje-control-gobierno",
@@ -910,7 +922,19 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [
+    {
+     "actor": "Ministro del Interior",
+     "text": "El Congreso lo reprueba por su gestión, la desprotección de las fronteras y el abandono de Ceuta, e insta al presidente del Gobierno a cesarlo.",
+     "locator": "Primer apartado (BOCG D-590, pág. 42)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion191/20260625/Votacion018/VOT_20260625150811.json": {
    "question_id": "eje-control-gobierno",
@@ -924,7 +948,19 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [
+    {
+     "actor": "Presidente del Gobierno",
+     "text": "Si no convoca elecciones, se le instaría a considerar plantear una cuestión de confianza; el texto es político, sin vinculación jurídica.",
+     "locator": "Punto 3 del texto presentado (BOCG Congreso D-562 (2026-07-02), pág. 44)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion185/20260611/Votacion031/VOT_20260611145739.json": {
    "question_id": "eje-control-gobierno",
@@ -938,11 +974,23 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Plus Ultra Líneas Aéreas",
+     "text": "El Gobierno tendría que revisar de forma inmediata y transparente el acuerdo del rescate público de la compañía y sus informes, criterios de solvencia y controles, para esclarecer posibles irregularidades.",
+     "locator": "Punto 1 del texto presentado (BOCG Congreso D-552 (2026-06-18), pág. 10)"
+    }
+   ],
    "scale_review": {
     "verdict": "improved",
     "note": "Importe del rescate a Plus Ultra, más fondo FASEE",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -957,7 +1005,19 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [
+    {
+     "actor": "Ministro del Interior",
+     "text": "El Congreso reprobaría su gestión de los medios y el respaldo a los agentes que luchan contra el narcotráfico.",
+     "locator": "Punto 1 (BOCG D-543, pág. 17)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion177/20260430/Votacion005/VOT_20260430125148.json": {
    "question_id": "eje-control-gobierno",
@@ -972,7 +1032,19 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [
+    {
+     "actor": "Gobierno",
+     "text": "Tendría que presentar de inmediato el proyecto de Presupuestos Generales del Estado de 2026.",
+     "locator": "Punto 1 del texto presentado (BOCG Congreso D-527 (2026-05-08), pág. 19)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion172/20260415/Votacion011/VOT_20260415133919.json": {
    "question_id": "eje-control-gobierno",
@@ -986,7 +1058,19 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [
+    {
+     "actor": "Congreso y ciudadanía",
+     "text": "El Gobierno tendría que remitir al Congreso, cuanto antes, el expediente completo de la reparación del talud desprendido en Álora: actuaciones, contratos, informes y decisiones.",
+     "locator": "Punto 7 del texto presentado (BOCG Congreso D-517 (2026-04-23), pág. 11)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "El punto del lote (T4 pág. 16) no coincidía; el Punto 7 votado es el del expediente de Álora, verificado en D-517 pág. 13.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion151/20251127/Votacion009/VOT_20251127124058.json": {
    "question_id": "eje-control-gobierno",
@@ -1000,7 +1084,19 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [
+    {
+     "actor": "Ministro del Interior",
+     "text": "El presidente del Gobierno tendría que cesarlo por su gestión y por obstruir las investigaciones de una delegación del Parlamento Europeo.",
+     "locator": "Punto 8 (BOCG D-445, pág. 9)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion142/20251028/Votacion009/VOT_20251028204553.json": {
    "question_id": "eje-control-gobierno",
@@ -1013,7 +1109,19 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [
+    {
+     "actor": "Ministra de Igualdad",
+     "text": "El Congreso la reprobaría y se pediría su destitución inmediata por la gestión de los sistemas telemáticos de seguimiento de las prohibiciones de aproximación.",
+     "locator": "Punto 1 (BOCG D-426, pág. 9)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion139/20251016/Votacion003/VOT_20251016123449.json": {
    "question_id": "eje-control-gobierno",
@@ -1027,7 +1135,24 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [
+    {
+     "actor": "Congreso de los Diputados",
+     "text": "El Gobierno tendría que remitirle un informe con los aplazamientos tributarios concedidos a una empresa inmobiliaria y cada actuación realizada.",
+     "locator": "Punto 1 (BOCG D-416, pág. 15)"
+    },
+    {
+     "actor": "Empresa con aplazamientos tributarios",
+     "text": "Se evaluarían ante el Congreso los aplazamientos concedidos a la empresa y los contactos reconocidos con el gabinete de la ministra.",
+     "locator": "Punto 1 (BOCG D-416, pág. 15)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion124/20250626/Votacion008/VOT_20250626120536.json": {
    "question_id": "eje-control-gobierno",
@@ -1041,11 +1166,23 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Gobierno",
+     "text": "Se le pediría asumir su responsabilidad política por los hechos investigados por la Guardia Civil y poner fin a la estrategia de ocultación y enfrentamiento institucional.",
+     "locator": "Punto 1 (BOCG D-370, pág. 18)"
+    }
+   ],
    "scale_review": {
     "verdict": "keep",
     "note": "Cifras de percepción ya miden el asunto",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1060,7 +1197,19 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [
+    {
+     "actor": "Guardia Civil y agentes de la UCO",
+     "text": "Se reconocería su labor y profesionalidad, y el Gobierno tendría que garantizar la independencia de sus investigaciones.",
+     "locator": "Punto 1 (BOCG D-365, pág. 17)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion118/20250612/Votacion014/VOT_20250612132255.json": {
    "question_id": "eje-control-gobierno",
@@ -1073,7 +1222,19 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [
+    {
+     "actor": "Congreso y ciudadanía",
+     "text": "El Gobierno tendría que trasladar al Congreso la información que comparta con los investigadores europeos del apagón, ACER y otros organismos competentes.",
+     "locator": "Punto 2 del texto presentado (BOCG Congreso D-360 (2025-06-19), pág. 18)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion112/20250520/Votacion006/VOT_20250520203918.json": {
    "question_id": "eje-control-gobierno",
@@ -1088,11 +1249,23 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Empresas rescatadas con fondos de la SEPI",
+     "text": "Se pediría al Gobierno una auditoría independiente de las operaciones del FASEE, en especial las de Air Europa, Plus Ultra y Duro Felguera.",
+     "locator": "Punto 2 del texto presentado (BOCG Congreso D-346 (2025-05-29), pág. 9)"
+    }
+   ],
    "scale_review": {
     "verdict": "improved",
     "note": "Importes de los tres rescates auditados",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1108,7 +1281,19 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [
+    {
+     "actor": "Gobierno",
+     "text": "Tendría que elaborar un informe de sus relaciones con las empresas de Aldama: contratos, subvenciones, licencias y aplazamientos de deuda, con quienes participaron.",
+     "locator": "Punto 1 (BOCG D-296, pág. 7)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion091/20250212/Votacion007/VOT_20250212154042.json": {
    "question_id": "eje-control-gobierno",
@@ -1122,7 +1307,24 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [
+    {
+     "actor": "Fiscal General del Estado",
+     "text": "Se reprobaría su participación en acciones destinadas a difundir información confidencial de personas investigadas, incluido el uso de cuentas privadas de correo electrónico.",
+     "locator": "Punto 3 (BOCG D-286, pág. 19)"
+    },
+    {
+     "actor": "Personas investigadas por la Fiscalía",
+     "text": "Se censuraría la difusión de su información confidencial por motivos de relato político.",
+     "locator": "Punto 3 (BOCG D-286, pág. 19)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion088/20241219/Votacion080/VOT_20241219162832.json": {
    "question_id": "eje-control-gobierno",
@@ -1136,7 +1338,19 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [
+    {
+     "actor": "Gobierno",
+     "text": "Tendría que aclarar la finalidad de la participación de la cónyuge del presidente en una licitación pública de RED.es mediante una declaración de interés.",
+     "locator": "Punto 1 (BOCG D-262, pág. 31)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion082/20241128/Votacion014/VOT_20241128143723.json": {
    "question_id": "eje-control-gobierno",
@@ -1150,7 +1364,24 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [
+    {
+     "actor": "Jueces y tribunales",
+     "text": "Se pediría al Gobierno que dejara de interferir en el normal funcionamiento de la justicia española.",
+     "locator": "Punto 2 (BOCG D-250, pág. 16)"
+    },
+    {
+     "actor": "Personas del entorno del presidente del Gobierno",
+     "text": "Se pediría que el Gobierno no interfiriera en la justicia para beneficiarlas personalmente.",
+     "locator": "Punto 2 (BOCG D-250, pág. 16)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion079/20241121/Votacion028/VOT_20241121173825.json": {
    "question_id": "eje-control-gobierno",
@@ -1169,6 +1400,12 @@
     "note": "Municipios afectados por la DANA según el BOE",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "Declaración de rechazo a la gestión del Gobierno, sin medida concreta: sin efecto directo para colectivos.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion079/20241121/Votacion042/VOT_20241121173839.json": {
@@ -1182,11 +1419,23 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Ministro de Transportes",
+     "text": "Habría sido reprobado por su gestión de la red ferroviaria, que se califica de ineficaz.",
+     "locator": "Punto 10 (BOCG D-249, pág. 47)"
+    }
+   ],
    "scale_review": {
     "verdict": "keep",
     "note": "Viajeros de tren ya miden a los afectados",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1202,11 +1451,28 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Jueces y magistrados",
+     "text": "El Gobierno tendría que defender su labor y expresar su absoluto respeto por todas las decisiones judiciales.",
+     "locator": "Punto 1 del texto presentado (BOCG Congreso D-227 (2024-10-31), pág. 54)"
+    },
+    {
+     "actor": "Investigaciones judiciales en curso",
+     "text": "El Gobierno tendría que colaborar activamente en todas ellas.",
+     "locator": "Punto 1 del texto presentado (BOCG Congreso D-227 (2024-10-31), pág. 54)"
+    }
+   ],
    "scale_review": {
     "verdict": "keep",
     "note": "Sin cifra oficial propia del punto; percepción y condenas sirven",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1222,7 +1488,13 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [],
+   "effects_review": {
+    "verdict": "none",
+    "note": "Reprobación de una ministra: acto político sin efecto directo sobre colectivos.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion066/20241010/Votacion005/VOT_20241010194920.json": {
    "question_id": "eje-control-gobierno",
@@ -1235,11 +1507,28 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Usuarios del tren",
+     "text": "El Gobierno tendría que exigir que los servicios e infraestructuras ferroviarias se gestionen de forma real y efectiva en beneficio de los usuarios.",
+     "locator": "Punto 3 del texto presentado (BOCG Congreso D-194 (2024-09-13), pág. 17)"
+    },
+    {
+     "actor": "Ministro de Transportes",
+     "text": "El Gobierno tendría que exigirle que gestione de manera real y efectiva los servicios e infraestructuras ferroviarias de su competencia.",
+     "locator": "Punto 3 del texto presentado (BOCG Congreso D-194 (2024-09-13), pág. 17)"
+    }
+   ],
    "scale_review": {
     "verdict": "keep",
     "note": "Viajeros de tren ya miden a los afectados",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1254,11 +1543,23 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Miembros del Gobierno",
+     "text": "El Gobierno tendría que rectificar la actitud de una vicepresidenta que elude el control parlamentario por actos electorales sin agenda institucional justificada.",
+     "locator": "Punto 1 del texto presentado (BOCG Congreso D-175 (2024-07-04), pág. 17)"
+    }
+   ],
    "scale_review": {
     "verdict": "keep",
     "note": "Control parlamentario general; art. 108 y 111 adecuados",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1274,7 +1575,19 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [
+    {
+     "actor": "Fiscal general del Estado",
+     "text": "El Gobierno tendría que destituirlo de forma inmediata por su conducta en el desempeño del cargo.",
+     "locator": "Punto 6 (BOCG D-175, pág. 19)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion043/20240530/Votacion008/VOT_20240530120003.json": {
    "question_id": "eje-control-gobierno",
@@ -1288,7 +1601,19 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [
+    {
+     "actor": "Responsables de actuaciones ilegales o ilícitas",
+     "text": "El Gobierno tendría que tomar medidas legales, penales o administrativas para castigarlos o apartarlos de los puestos donde pudieran reincidir.",
+     "locator": "Punto 8 (BOCG D-142, pág. 3)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion040/20240523/Votacion011/VOT_20240523140942.json": {
    "question_id": "eje-control-gobierno",
@@ -1301,11 +1626,23 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Ciudadanía",
+     "text": "El Gobierno tendría que dar a conocer su posición negociadora con el Reino Unido sobre Gibraltar en el marco de las negociaciones con la Comisión Europea.",
+     "locator": "Punto 7 (BOCG D-150, pág. 8)"
+    }
+   ],
    "scale_review": {
     "verdict": "improved",
     "note": "Población y trabajadores del Campo de Gibraltar",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1321,7 +1658,24 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [
+    {
+     "actor": "Ministro del Interior",
+     "text": "El Congreso pediría al Gobierno exigir responsabilidad al ministro del Interior por cualquier ataque a la libertad o seguridad derivado de la reubicación de inmigrantes ilegales.",
+     "locator": "Punto 16 (BOCG D-82, pág. 31)"
+    },
+    {
+     "actor": "Inmigrantes reubicados",
+     "text": "Su reubicación quedaría vinculada a la responsabilidad política del ministro del Interior por cualquier ataque a la libertad o la seguridad que se derive de ella.",
+     "locator": "Punto 16 (BOCG D-82, pág. 31)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion034/20240409/Votacion018/VOT_20240409210647.json": {
    "question_id": "eje-control-gobierno",
@@ -1334,11 +1688,23 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Cortes Generales y ciudadanía",
+     "text": "El Gobierno tendría que comparecer en las Cortes Generales para rendir cuentas de las negociaciones con las fuerzas independentistas, dentro y fuera de España.",
+     "locator": "Punto 4 (BOCG D-126, pág. 13)"
+    }
+   ],
    "scale_review": {
     "verdict": "keep",
     "note": "Control parlamentario general; art. 108 y 111 adecuados",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1353,11 +1719,23 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Ministra de Hacienda",
+     "text": "El Gobierno tendría que promover su cese por dejación de funciones en el control de los contratos públicos.",
+     "locator": "Punto 1 (BOCG D-115, pág. 41)"
+    }
+   ],
    "scale_review": {
     "verdict": "improved",
     "note": "Cifra del Tribunal de Cuentas sobre contratos de emergencia",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1372,11 +1750,28 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Agricultores de Tierra de Barros",
+     "text": "El Gobierno tendría que esclarecer de inmediato los hechos de la paralización del proyecto de regadío de Tierra de Barros.",
+     "locator": "Punto 13 (BOCG D-96, pág. 6)"
+    },
+    {
+     "actor": "Ministros y secretaría de Estado de Agricultura",
+     "text": "Habría que aclarar también sus posibles implicaciones en esa paralización.",
+     "locator": "Punto 13 (BOCG D-96, pág. 6)"
+    }
+   ],
    "scale_review": {
     "verdict": "improved",
     "note": "Superficie e inversión del regadío de Tierra de Barros",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1392,7 +1787,13 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [],
+   "effects_review": {
+    "verdict": "none",
+    "note": "Creación de comisión de investigación sin texto extraído ni expediente; sin efecto directo para colectivos.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion011/20231212/Votacion006/VOT_20231212230040.json": {
    "question_id": "eje-control-gobierno",
@@ -1406,7 +1807,13 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [],
+   "effects_review": {
+    "verdict": "none",
+    "note": "Creación de comisión de investigación sin texto extraído ni expediente; sin efecto directo para colectivos.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion191/20260625/Votacion019/VOT_20260625150812.json": {
    "question_id": "eje-control-gobierno",
@@ -1420,7 +1827,19 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [
+    {
+     "actor": "Presidente del Gobierno",
+     "text": "El Congreso consideraría que la acumulación de investigaciones por corrupción de responsables nombrados por él exige que asuma responsabilidades dimitiendo.",
+     "locator": "Punto 4 (BOCG D-562, pág. 46)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion185/20260611/Votacion032/VOT_20260611145741.json": {
    "question_id": "eje-control-gobierno",
@@ -1433,11 +1852,23 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Plus Ultra Líneas Aéreas",
+     "text": "El Gobierno tendría que revisar, de forma inmediata y transparente, la información económico-financiera de la compañía que motivó en 2020 el aplazamiento de sus deudas con la Seguridad Social.",
+     "locator": "Punto 2 del texto presentado (BOCG Congreso D-552 (2026-06-18), pág. 10)"
+    }
+   ],
    "scale_review": {
     "verdict": "improved",
     "note": "Escala del caso Plus Ultra; sin cifra oficial del aplazamiento",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1452,11 +1883,23 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Plus Ultra Líneas Aéreas",
+     "text": "El Gobierno tendría que revisar, de forma inmediata y transparente, la información económico-financiera de la compañía que motivó en 2020 el aplazamiento de sus deudas con la Seguridad Social.",
+     "locator": "Punto 2 del texto presentado (BOCG Congreso D-552 (2026-06-18), pág. 10)"
+    }
+   ],
    "scale_review": {
     "verdict": "improved",
     "note": "Escala del caso Plus Ultra; sin cifra oficial del aplazamiento",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1471,11 +1914,23 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Plus Ultra Líneas Aéreas",
+     "text": "El Gobierno tendría que revisar, de forma inmediata y transparente, la información económico-financiera de la compañía que motivó en 2020 el aplazamiento de sus deudas con la Seguridad Social.",
+     "locator": "Punto 2 del texto presentado (BOCG Congreso D-552 (2026-06-18), pág. 10)"
+    }
+   ],
    "scale_review": {
     "verdict": "improved",
     "note": "Escala del caso Plus Ultra; sin cifra oficial del aplazamiento",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1491,11 +1946,28 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Congreso de los Diputados",
+     "text": "El Gobierno tendría que dar cuenta al Congreso del rescate y de las actuaciones del Consejo de Ministros y del Ministerio de Inclusión, y darle acceso íntegro a los expedientes.",
+     "locator": "Punto 3 del texto presentado (BOCG Congreso D-552 (2026-06-18), pág. 10)"
+    },
+    {
+     "actor": "Ciudadanía",
+     "text": "Se pediría reforzar los mecanismos de publicidad activa y de control parlamentario sobre el rescate de la compañía.",
+     "locator": "Punto 3 del texto presentado (BOCG Congreso D-552 (2026-06-18), pág. 10)"
+    }
+   ],
    "scale_review": {
     "verdict": "improved",
     "note": "Importe del rescate a Plus Ultra, más fondo FASEE",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1510,7 +1982,24 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [
+    {
+     "actor": "Ministerio de Hacienda",
+     "text": "Tendría que retirar su recurso contencioso-administrativo contra la Resolución 0638/2025 del Consejo de Transparencia y Buen Gobierno.",
+     "locator": "Punto 2 (BOCG D-416, pág. 15)"
+    },
+    {
+     "actor": "Quien solicitó la información",
+     "text": "Se respondería a su solicitud sobre la actuación de Hacienda frente a una empresa, y se enviaría copia de la respuesta al Congreso.",
+     "locator": "Punto 2 (BOCG D-416, pág. 15)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion139/20251016/Votacion005/VOT_20251016123453.json": {
    "question_id": "eje-control-gobierno",
@@ -1524,7 +2013,24 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [
+    {
+     "actor": "Congreso de los Diputados",
+     "text": "Se pediría al Gobierno informar si un ex diputado medió en la contratación del ex director de la SEPI en una empresa.",
+     "locator": "Punto 3 (BOCG D-416, pág. 15)"
+    },
+    {
+     "actor": "Ex altos cargos cesados",
+     "text": "Se aclararía si una contratación hecha dentro de los dos años de compatibilidad, autorizada el 19 de mayo de 2021, tuvo mediación.",
+     "locator": "Punto 3 (BOCG D-416, pág. 15)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion124/20250626/Votacion009/VOT_20250626120537.json": {
    "question_id": "eje-control-gobierno",
@@ -1538,11 +2044,28 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Presidente del Gobierno",
+     "text": "Se le pediría una comparecencia monográfica ante el Pleno del Congreso para explicar las tramas corruptas.",
+     "locator": "Punto 2 (BOCG D-370, pág. 18)"
+    },
+    {
+     "actor": "Pleno del Congreso",
+     "text": "Celebraría una comparecencia monográfica del presidente del Gobierno sobre las graves tramas corruptas.",
+     "locator": "Punto 2 (BOCG D-370, pág. 18)"
+    }
+   ],
    "scale_review": {
     "verdict": "keep",
     "note": "Sin cifra específica; percepción y marco constitucional valen",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1558,7 +2081,19 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [
+    {
+     "actor": "Gobierno",
+     "text": "Tendría que adoptar de inmediato medidas para restaurar la confianza en las instituciones y el Estado de Derecho, con transparencia y depuración efectiva de responsabilidades.",
+     "locator": "Punto 3 (BOCG D-370, pág. 18)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion121/20250619/Votacion007/VOT_20250619120744.json": {
    "question_id": "eje-control-gobierno",
@@ -1571,7 +2106,24 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [
+    {
+     "actor": "Altos cargos y miembros del Gobierno",
+     "text": "Tendrían que detener los ataques e insinuaciones sobre la Guardia Civil y rectificar, pidiendo disculpas, las informaciones falsas difamatorias.",
+     "locator": "Punto 2 (BOCG D-365, pág. 17)"
+    },
+    {
+     "actor": "Agentes de la Guardia Civil",
+     "text": "Dejarían de recibir ataques e insinuaciones de altos cargos y miembros del Gobierno.",
+     "locator": "Punto 2 (BOCG D-365, pág. 17)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion121/20250619/Votacion008/VOT_20250619120746.json": {
    "question_id": "eje-control-gobierno",
@@ -1585,11 +2137,23 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Presidente del Gobierno",
+     "text": "Se le instaría a dar explicaciones urgentes en sede parlamentaria y a asumir su responsabilidad por las tramas de corrupción destapadas por la UCO.",
+     "locator": "Punto 3 (BOCG D-365, pág. 17)"
+    }
+   ],
    "scale_review": {
     "verdict": "keep",
     "note": "Sin cifra específica; percepción y marco valen",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1605,11 +2169,23 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Gobierno",
+     "text": "Tendría que explicar por qué cesó al ex ministro Ábalos y si entonces existían sospechas de su relación con presuntos delitos.",
+     "locator": "Punto 2 (BOCG D-296, pág. 7)"
+    }
+   ],
    "scale_review": {
     "verdict": "keep",
     "note": "Sin cifra oficial específica del cese",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1625,11 +2201,23 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Gobierno",
+     "text": "Tendría que colaborar de forma efectiva y leal con los órganos judiciales y parlamentarios que investigan casos de corrupción, sin omitir información.",
+     "locator": "Punto 4 (BOCG D-296, pág. 7)"
+    }
+   ],
    "scale_review": {
     "verdict": "keep",
     "note": "Sin cifra oficial específica de la colaboración",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1645,7 +2233,19 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [
+    {
+     "actor": "Ministerios de Sanidad e Interior",
+     "text": "Tendrían que remitir al Congreso, cuanto antes, los informes de auditoría interna sobre la contratación con Soluciones de Gestión.",
+     "locator": "Punto 5 (BOCG D-296, pág. 7)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion088/20241219/Votacion081/VOT_20241219162834.json": {
    "question_id": "eje-control-gobierno",
@@ -1659,7 +2259,19 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [
+    {
+     "actor": "Presidencia del Gobierno",
+     "text": "Tendría que remitir al Congreso un informe con las funciones de la Dirección de Programas y sus gestiones ligadas a la actividad empresarial de la cónyuge del presidente.",
+     "locator": "Punto 2 (BOCG D-262, pág. 31)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion088/20241219/Votacion082/VOT_20241219162835.json": {
    "question_id": "eje-control-gobierno",
@@ -1672,7 +2284,19 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [
+    {
+     "actor": "Personal eventual de Presidencia",
+     "text": "El Gobierno tendría que garantizar que se dedica en exclusiva a la representación institucional de la cónyuge del presidente y no a sus actividades privadas.",
+     "locator": "Punto 3 (BOCG D-262, pág. 31)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion088/20241219/Votacion083/VOT_20241219162835.json": {
    "question_id": "eje-control-gobierno",
@@ -1685,7 +2309,19 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [
+    {
+     "actor": "Gobierno",
+     "text": "Tendría que enviar al Congreso un informe sobre el origen y la cadena de transmisión de documentación confidencial salida de la Fiscalía General a cargos del Gobierno.",
+     "locator": "Punto 4 (BOCG D-262, pág. 31)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion082/20241128/Votacion017/VOT_20241128143727.json": {
    "question_id": "eje-control-gobierno",
@@ -1699,11 +2335,23 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Gobierno",
+     "text": "Tendría que dar explicaciones por las acusaciones de hechos presuntamente delictivos de un empresario ante la Audiencia Nacional y por su relación con el Gobierno.",
+     "locator": "Punto 5 (BOCG D-250, pág. 16)"
+    }
+   ],
    "scale_review": {
     "verdict": "keep",
     "note": "Independencia judicial percibida ya mide el asunto",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1719,7 +2367,19 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [
+    {
+     "actor": "Altos cargos que colaboraron con la trama",
+     "text": "El Gobierno tendría que cesar a todos los altos cargos que hayan colaborado activamente con miembros de la trama investigada.",
+     "locator": "Punto 2 del texto presentado (BOCG Congreso D-227 (2024-10-31), pág. 54)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion070/20241023/Votacion015/VOT_20241023184353.json": {
    "question_id": "eje-control-gobierno",
@@ -1732,11 +2392,23 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Ministerio del Interior",
+     "text": "Se pediría al Gobierno dar cuenta del dispositivo policial extraordinario autorizado en Barajas para recibir a la vicepresidenta de Venezuela en 2022.",
+     "locator": "Punto 3 del texto presentado (BOCG Congreso D-227 (2024-10-31), pág. 54)"
+    }
+   ],
    "scale_review": {
     "verdict": "keep",
     "note": "Sin cifra oficial del dispositivo de Barajas",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1751,11 +2423,23 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Ministerio del Interior",
+     "text": "El Gobierno tendría que dar cuenta del dispositivo policial extraordinario autorizado en Barajas para recibir a la vicepresidenta de Venezuela en enero de 2022.",
+     "locator": "Punto 3 del texto presentado (BOCG Congreso D-227 (2024-10-31), pág. 54)"
+    }
+   ],
    "scale_review": {
     "verdict": "keep",
     "note": "Sin cifra oficial del dispositivo de Barajas",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1771,11 +2455,28 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Ministerios que contrataron a Soluciones de Gestión",
+     "text": "El Gobierno tendría que completar la auditoría interna y extenderla a los contratos con esa empresa en otros ministerios, como Sanidad o Interior.",
+     "locator": "Punto 4 del texto presentado (BOCG Congreso D-227 (2024-10-31), pág. 54)"
+    },
+    {
+     "actor": "Empresa Soluciones de Gestión",
+     "text": "Sus contratos con Transportes, Sanidad e Interior serían auditados en sus procedimientos de contratación.",
+     "locator": "Punto 4 del texto presentado (BOCG Congreso D-227 (2024-10-31), pág. 54)"
+    }
+   ],
    "scale_review": {
     "verdict": "keep",
     "note": "Sin cifra oficial de contratos de esa empresa",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1791,11 +2492,23 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Personal del Ministerio del Interior",
+     "text": "El Gobierno tendría que iniciar una investigación interna sobre posibles filtraciones de investigaciones judiciales a miembros del Gobierno y de la trama.",
+     "locator": "Punto 5 del texto presentado (BOCG Congreso D-227 (2024-10-31), pág. 54)"
+    }
+   ],
    "scale_review": {
     "verdict": "keep",
     "note": "Sin cifra oficial de filtraciones de causas judiciales",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1811,7 +2524,13 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [],
+   "effects_review": {
+    "verdict": "none",
+    "note": "Sin texto del punto en el BOCG D-227 (texto aprobado, solo 5 puntos): un intento de búsqueda sin resultado; no se puede redactar el efecto.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion070/20241023/Votacion020/VOT_20241023184400.json": {
    "question_id": "eje-control-gobierno",
@@ -1830,6 +2549,12 @@
     "note": "Petición política sin colectivo cuantificable; percepción vale",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "Sin texto del punto en el BOCG D-227 (texto aprobado, solo 5 puntos): un intento de búsqueda sin resultado; no se puede redactar el efecto.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion070/20241023/Votacion022/VOT_20241023184403.json": {
@@ -1844,7 +2569,13 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [],
+   "effects_review": {
+    "verdict": "none",
+    "note": "Petición de destitución de una ministra: acto político sin efecto directo sobre colectivos.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion052/20240627/Votacion034/VOT_20240627130406.json": {
    "question_id": "eje-control-gobierno",
@@ -1857,7 +2588,19 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [
+    {
+     "actor": "Gobierno de coalición",
+     "text": "El Gobierno solo remitiría a las Cortes proyectos de ley respaldados al menos por los partidos de la coalición representados en el Consejo de Ministros que los envía.",
+     "locator": "Punto 6 del texto presentado (BOCG Congreso D-175 (2024-07-04), pág. 17)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "Punto 6 de la moción presentada (no figura en el texto aprobado, renumerado).",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion033/20240321/Votacion006/VOT_20240321105713.json": {
    "question_id": "eje-control-gobierno",
@@ -1870,11 +2613,23 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Empresas con contratos de emergencia del estado de alarma",
+     "text": "Se auditarían todos esos contratos y la información reunida se enviaría al Tribunal de Cuentas para un informe de fiscalización.",
+     "locator": "Punto 2 (BOCG D-115, pág. 41)"
+    }
+   ],
    "scale_review": {
     "verdict": "improved",
     "note": "Cifra del Tribunal de Cuentas sobre contratos de emergencia",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   }

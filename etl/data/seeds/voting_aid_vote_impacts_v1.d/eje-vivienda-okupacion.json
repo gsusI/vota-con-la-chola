@@ -377,12 +377,34 @@
     "eje-vivienda-okupacion--boe-lph-7-2-cesacion",
     "interior-2024-ocupacion"
    ],
-   "direct_effects": [],
+   "direct_effects": [
+    {
+     "actor": "Comunidades de propietarios",
+     "text": "Podrían haber pedido al juez, como medida cautelar, el cese inmediato de la actividad prohibida y el desalojo del inmueble.",
+     "locator": "Enmienda núm. 675 (BOCG A-16-3, pág. 783)"
+    },
+    {
+     "actor": "Ocupantes sin título",
+     "text": "Si la demanda iba contra un ocupante sin título, se le habría notificado conforme a la Ley de Enjuiciamiento Civil y podría haber sufrido el desalojo cautelar.",
+     "locator": "Enmienda núm. 675 (BOCG A-16-3, pág. 783)"
+    },
+    {
+     "actor": "Propietarios que infringen",
+     "text": "La demanda se habría dirigido contra el propietario y el ocupante, con orden de cese bajo apercibimiento de delito de desobediencia.",
+     "locator": "Enmienda núm. 675 (BOCG A-16-3, pág. 783)"
+    }
+   ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   }
  }

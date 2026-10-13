@@ -10,6 +10,7 @@ downloads so a source fetched once serves everyone.
   fetch URL [-g REGEX]       download once (shared cache), PDF->text with page markers, print only matching lines
   vote URL                   what a Congreso vote was about: expediente text and the point voted (textoSubGrupo)
   ine TABLE [-g REGEX]       latest values of an INE table (servicios.ine.es DATOS_TABLA), one line per series
+  apply-effects DIR          apply per-vote direct effects ({"vote_event_id", "verdict": "written"|"none", "direct_effects", "note"})
   apply-votes DIR            apply per-vote figure reviews (keep/improved, final facts, new facts) to the part files
   apply-reviews DIR          apply reviewer verdicts (one <fact-id>.json each) to the seed and part files
   eurostat DATASET QUERY     Eurostat JSON-stat, e.g. `eurostat ilc_lvho07c "geo=ES&geo=EU27_2020&sinceTimePeriod=2023"`
@@ -162,11 +163,12 @@ def fetch(args: argparse.Namespace) -> None:
         print(f"{len(text)} caracteres en {path}; sin -g muestro el principio (para calcular, lee ese archivo con python)")
         out(text, min(args.max, 1500))
         return
-    rx, lines, page, hits = re.compile(args.grep, re.I), text.split("\n"), "", []
+    rx, lines, page, hits, last = re.compile(args.grep, re.I), text.split("\n"), "", [], -10**9
     for i, line in enumerate(lines):
         if line.startswith("=== pág."):
             page = line.strip("= ")
-        elif rx.search(line):
+        elif rx.search(line) and i > last + args.context:  # skip matches already shown in the previous context
+            last = i
             ctx = " ⏎ ".join(x.strip() for x in lines[max(0, i - args.context) : i + args.context + 1] if x.strip())
             hits.append(f"[{page or 'l.' + str(i)}] {ctx}")
     print(f"{len(hits)} coincidencias")
@@ -300,6 +302,32 @@ def apply_votes(args: argparse.Namespace) -> None:
         print("PROBLEMA " + line)
 
 
+def apply_effects(args: argparse.Namespace) -> None:
+    """Write drafted direct effects into the part file that owns each vote and stamp `effects_review`."""
+    reviews = {r["vote_event_id"]: r for r in (json.loads(p.read_text(encoding="utf-8")) for p in sorted(Path(args.dir).glob("*.json")))}
+    done, problems = 0, []
+    for path in sorted(PARTS.glob("*.json")) + [SEED]:
+        data = json.loads(path.read_text(encoding="utf-8"))
+        changed = False
+        for vid, vote in (data.get("votes") or {}).items():
+            r = reviews.get(vid)
+            if not r:
+                continue
+            effects = r.get("direct_effects") or []
+            if r.get("verdict") == "written" and not (1 <= len(effects) <= 4 and all(e.get("actor") and e.get("text") and e.get("locator") for e in effects)):
+                problems.append(f"{vid[-40:]}: efectos incompletos")
+                continue
+            if r.get("verdict") == "written":
+                vote["direct_effects"] = [{k: e[k] for k in ("actor", "text", "locator")} for e in effects]
+            vote["effects_review"] = {"verdict": r.get("verdict"), "note": r.get("note", ""), "by": args.by, "at": args.at}
+            changed, done = True, done + 1
+        if changed:
+            path.write_text(json.dumps(data, ensure_ascii=False, indent=1 if path != SEED else 2) + "\n", encoding="utf-8")
+    print(f"aplicadas {done} de {len(reviews)}; {collections.Counter(r.get('verdict') for r in reviews.values())}")
+    for line in problems:
+        print("PROBLEMA " + line)
+
+
 def text(url: str) -> str:
     """Cached plain text of a source (raises if blocked or unreachable)."""
     path, status = _download(url)
@@ -368,8 +396,12 @@ def main(argv: list[str] | None = None) -> int:
     av.add_argument("dir")
     av.add_argument("--by", default="claude-sonnet-5-5 (revisión de escalas genéricas)")
     av.add_argument("--at", default="2026-10-13")
+    ae = sub.add_parser("apply-effects")
+    ae.add_argument("dir")
+    ae.add_argument("--by", default="claude-sonnet-5-5 (efectos directos desde el texto oficial)")
+    ae.add_argument("--at", default="2026-10-13")
     args = p.parse_args(argv)
-    {"apply-votes": apply_votes, "apply-reviews": apply_reviews, "catalog": catalog, "fetch": fetch, "vote": vote, "ine": ine, "eurostat": eurostat}[args.cmd](args)
+    {"apply-effects": apply_effects, "apply-votes": apply_votes, "apply-reviews": apply_reviews, "catalog": catalog, "fetch": fetch, "vote": vote, "ine": ine, "eurostat": eurostat}[args.cmd](args)
     return 0
 
 

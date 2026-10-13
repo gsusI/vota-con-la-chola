@@ -268,6 +268,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "Sin texto extraído: votación final de toda la ley (dictamen completo); sin un único cambio concreto que atribuir a un colectivo.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion183/20260528/Votacion012/VOT_20260528125351.json": {
@@ -548,6 +554,12 @@
     "note": "Discapacidad y dependencia son el colectivo exacto",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "sin texto extraído de la enmienda a la totalidad (sin expediente): no consta qué cambia para cada colectivo",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion137/20251014/Votacion002/VOT_20251014202758.json": {
@@ -773,6 +785,19 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Pensionistas",
+     "text": "El Gobierno tendría que revalorizar las pensiones según el coste real de la vida en cada comunidad autónoma, garantizando poder adquisitivo equivalente.",
+     "locator": "Punto 17 (BOCG D-507, pág. 7)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion142/20251028/Votacion023/VOT_20251028204612.json": {
@@ -791,6 +816,19 @@
     "note": "IMV específico; quitada la cifra genérica de desempleo",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Perceptores del Ingreso Mínimo Vital",
+     "text": "Se pediría revisar el sistema de prestaciones para vincular su cobro a la búsqueda activa de empleo y a la contribución efectiva al mercado laboral.",
+     "locator": "Punto 7 (BOCG D-426, pág. 11)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion130/20250910/Votacion001/VOT_20250910213532.json": {
@@ -804,6 +842,24 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Comunidades Autónomas",
+     "text": "El Gobierno tendría que subir hasta al menos 100 millones la dotación del programa de libros de texto y material didáctico para ellas.",
+     "locator": "Punto 1 del texto presentado (BOCG Congreso D-384 (2025-08-29), pág. 17)"
+    },
+    {
+     "actor": "Familias con hijos en edad escolar",
+     "text": "El programa de libros de texto y material didáctico tendría más dotación, con criterios fijados en la Conferencia Sectorial de Educación.",
+     "locator": "Punto 1 del texto presentado (BOCG Congreso D-384 (2025-08-29), pág. 17)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion029/20240314/Votacion045/VOT_20240314123759.json": {
@@ -817,6 +873,24 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Trabajadores del campo",
+     "text": "El Gobierno tendría que impulsar unificar el subsidio agrario con la renta agraria, con una prestación del 50 % del SMI.",
+     "locator": "Punto 12 (BOCG D-110, pág. 14)"
+    },
+    {
+     "actor": "Trabajadores del campo de Andalucía y Extremadura",
+     "text": "Se eliminaría el mínimo de peonadas: bastarían tres años seguidos de residencia previa y 30 días trabajados en el sector en un periodo de uno a dos años.",
+     "locator": "Punto 12 (BOCG D-110, pág. 14)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion198/20260916/Votacion043/VOT_20260916195448.json": {
@@ -835,6 +909,19 @@
     "verdict": "improved",
     "note": "cuidadoras: convenios especiales vigentes",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Personas cuidadoras que dejaron de trabajar",
+     "text": "Quienes figuren en un Programa Individual de Atención y hayan renunciado a su actividad laboral serán colectivo de atención prioritaria en la política de empleo.",
+     "locator": "Disposición adicional vigesimocuarta (nueva) (BOCG A-64-9, pág. 7-8)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -856,6 +943,19 @@
     "note": "Sin cifra oficial de nº de mutualistas; 8 mutualidades",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Mutualistas alternativos, actuales o pasados",
+     "text": "Podrían pedir, en el plazo de un año desde el reglamento, integrarse en el RETA, con sus períodos en la mutualidad reconocidos como cotizados al RETA.",
+     "locator": "Enmienda núm. 28 (BOCG B-162-6, pág. 52)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion079/20241121/Votacion002/VOT_20241121173756.json": {
@@ -869,6 +969,29 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Personas con hipoteca a tipo variable",
+     "text": "Habrían podido recibir ayudas directas si sus cuotas subían por la subida de los tipos de interés.",
+     "locator": "Enmienda núm. 24 (BOCG A-23-3, pág. 34)"
+    },
+    {
+     "actor": "Hogares con deudores vulnerables",
+     "text": "Las ayudas se habrían repartido según la vulnerabilidad y la necesidad de cada unidad familiar deudora.",
+     "locator": "Enmienda núm. 24 (BOCG A-23-3, pág. 34)"
+    },
+    {
+     "actor": "Hacienda",
+     "text": "Habría tenido que crear un fondo por un importe equivalente a lo recaudado con el gravamen sobre los beneficios de la banca.",
+     "locator": "Enmienda núm. 24 (BOCG A-23-3, pág. 34)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion076/20241114/Votacion010/VOT_20241114151018.json": {
@@ -888,6 +1011,24 @@
     "note": "8 mutualidades alternativas; sin censo oficial de mutualistas",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Abogados y procuradores mutualistas",
+     "text": "El Gobierno habría tenido que aprobar en tres meses un real decreto-ley para integrarlos, con carácter voluntario, en la Seguridad Social pública.",
+     "locator": "Enmienda núm. 144 (BOCG A-16-3, pág. 137)"
+    },
+    {
+     "actor": "Mutualidades alternativas al RETA",
+     "text": "Se habrían trasladado a la Seguridad Social los fondos, rendimientos y patrimonio de las mutualidades correspondientes al régimen alternativo al RETA.",
+     "locator": "Enmienda núm. 144 (BOCG A-16-3, pág. 137)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion056/20240723/Votacion017/VOT_20240723221645.json": {
@@ -901,6 +1042,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "bloque, «resto de enmiendas», transaccional o sin texto votado identificable: no se puede atribuir el efecto con certeza",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion054/20240711/Votacion001/VOT_20240711150621.json": {
@@ -920,6 +1067,24 @@
     "note": "8 mutualidades alternativas; sin censo oficial de mutualistas",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Abogados y procuradores en mutualidades alternativas",
+     "text": "Habría un real decreto, en seis meses, para integrarlos voluntariamente en la Seguridad Social pública, tras oírles.",
+     "locator": "Enmienda núm. 144 (BOCG A-6-2, pág. 122)"
+    },
+    {
+     "actor": "Mutualidades alternativas",
+     "text": "Se trasladarían al sistema público los fondos depositados y sus rendimientos, y se computarían las aportaciones y los años cotizados.",
+     "locator": "Enmienda núm. 144 (BOCG A-6-2, pág. 122)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "Texto de la enmienda truncado en el lote tras 'años cotizados en el sistema'.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion198/20260916/Votacion052/VOT_20260916195500.json": {
@@ -933,6 +1098,24 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Víctimas de daños personales, incl. violencia de género",
+     "text": "Las indemnizaciones por responsabilidad civil por daños personales no contarán como renta o ingresos al valorar la carencia de rentas para la pensión no contributiva.",
+     "locator": "Disposición final vigesimotercera (nueva) (BOCG A-64-9, pág. 157-158)"
+    },
+    {
+     "actor": "Solicitantes de pensiones no contributivas",
+     "text": "Seguirán computando los importes de naturaleza salarial, prestacional o de sustitución de rentas, y los rendimientos que produzcan las indemnizaciones.",
+     "locator": "Disposición final vigesimotercera (nueva) (BOCG A-64-9, pág. 158)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion001/VOT_20260714201931.json": {
@@ -951,6 +1134,34 @@
     "verdict": "improved",
     "note": "lista de espera y cuidadoras con convenio",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Personas en situación de dependencia",
+     "text": "Habría tramitación de urgencia de su expediente si concurre especial vulnerabilidad (salud, aislamiento, violencia de género, económica o habitacional).",
+     "locator": "Enmienda núm. 41 (BOCG A-64-5, pág. 36-37)"
+    },
+    {
+     "actor": "Personas dependientes y personas con brecha digital",
+     "text": "La tramitación electrónica garantizaría accesibilidad universal y lectura fácil, con canales presenciales alternativos y asistencia personalizada.",
+     "locator": "Enmienda núm. 41 (BOCG A-64-5, pág. 37)"
+    },
+    {
+     "actor": "Personas dependientes con cuidadora principal enferma",
+     "text": "Si la cuidadora enferma gravemente o es hospitalizada, las Administraciones asignarían un segundo cuidador o un ingreso temporal en un centro.",
+     "locator": "Enmienda núm. 45 (BOCG A-64-5, pág. 39-40)"
+    },
+    {
+     "actor": "Cuidadoras principales tras el fallecimiento del dependiente",
+     "text": "Podrían mantener un año la prestación por cuidados en el entorno familiar, con apoyo psicológico y apoyos para la reinserción laboral.",
+     "locator": "Enmienda núm. 46 (BOCG A-64-5, pág. 40)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -971,6 +1182,24 @@
     "note": "cotización de cuidadoras: convenios especiales",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Cuidadoras de personas con gran dependencia (grado III)",
+     "text": "Podrían mantener la base de cotización de su último empleo si es superior al mínimo; pagarían el 50 % del incremento y el IMSERSO el resto.",
+     "locator": "Enmienda núm. 50 (BOCG A-64-5, pág. 52)"
+    },
+    {
+     "actor": "Cuidadoras que renunciaron a su empleo",
+     "text": "Serían colectivo de atención prioritaria para la política de empleo, en los términos del artículo 50 de la Ley de Empleo.",
+     "locator": "Enmienda núm. 51 (BOCG A-64-5, pág. 53)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion003/VOT_20260714201934.json": {
@@ -989,6 +1218,29 @@
     "verdict": "keep",
     "note": "cifras generales de dependencia miden bien",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Personas en situación de dependencia",
+     "text": "Los acuerdos del Consejo Territorial sobre financiación, acceso, intensidades, calidad y plazos serían vinculantes para todas las Administraciones.",
+     "locator": "Enmienda núm. 55 (BOCG A-64-5, pág. 55)"
+    },
+    {
+     "actor": "Comunidades autónomas",
+     "text": "Tendrían que cumplir esos acuerdos como mínimo común, y podrían mantener modelos propios y mejoras adicionales. Un mecanismo independiente supervisaría el cumplimiento.",
+     "locator": "Enmienda núm. 55 (BOCG A-64-5, pág. 55-56)"
+    },
+    {
+     "actor": "Personas en centros residenciales de más de 120 plazas",
+     "text": "El Gobierno tendría que elaborar en un año un plan de desinstitucionalización a diez años, hacia apoyos comunitarios y viviendas con apoyos.",
+     "locator": "Enmienda núm. 61 (BOCG A-64-5, pág. 60)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1009,6 +1261,19 @@
     "note": "copago afecta a todos los beneficiarios; cifras valen",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Personas usuarias de prestaciones de dependencia",
+     "text": "No podrían exigirse copagos en ninguna de las prestaciones y servicios de la ley.",
+     "locator": "Enmienda núm. 64 (BOCG A-64-5, pág. 62)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion007/VOT_20260714201940.json": {
@@ -1027,6 +1292,12 @@
     "verdict": "keep",
     "note": "medida amplia; cifras actuales valen",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "Sin texto extraído: votación de 'resto de las enmiendas' del grupo, sin enmiendas concretas identificadas en el lote.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1047,6 +1318,24 @@
     "note": "incluye teleasistencia 688.214; sin cifra mejor",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Personas en situación de dependencia",
+     "text": "La teleasistencia sería un servicio continuo y personalizado, según su voluntad y preferencias, con tecnologías accesibles universalmente.",
+     "locator": "Enmienda núm. 101 (BOCG A-64-5, pág. 102)"
+    },
+    {
+     "actor": "Personas dependientes que viven solas o aisladas",
+     "text": "El servicio buscaría su permanencia en el domicilio y prevenir, detectar e intervenir en situaciones de emergencia, inseguridad, soledad y aislamiento.",
+     "locator": "Enmienda núm. 101 (BOCG A-64-5, pág. 102)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion010/VOT_20260714201946.json": {
@@ -1065,6 +1354,12 @@
     "verdict": "keep",
     "note": "medida amplia; cifras actuales valen",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "Votación del «resto de enmiendas» sin texto extraído ni número; el BOCG A-64-5 reúne 143 menciones del grupo y no permite identificar cuáles se votaron.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1085,6 +1380,29 @@
     "note": "prestaciones vigentes miden bien el colectivo",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Personas en situación de dependencia",
+     "text": "Podrían usar a la vez las prestaciones económicas y los servicios del catálogo, sin más límite que la idoneidad y eficacia de los cuidados según su Programa Individual de Atención.",
+     "locator": "Enmienda núm. 14 (BOCG A-64-5, pág. 11)"
+    },
+    {
+     "actor": "Familias cuidadoras",
+     "text": "Se garantizaría que la prestación por cuidados en el entorno familiar fuera compatible con centro de día, residencia temporal, ayuda a domicilio, teleasistencia y asistencia personal.",
+     "locator": "Enmienda núm. 14 (BOCG A-64-5, pág. 11)"
+    },
+    {
+     "actor": "Comunidades autónomas",
+     "text": "Podrían regular cómo se articulan esas compatibilidades, procurando que los cuidados totales no excedan los correspondientes al grado de dependencia reconocido.",
+     "locator": "Enmienda núm. 14 (BOCG A-64-5, pág. 11)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion014/VOT_20260714201955.json": {
@@ -1103,6 +1421,29 @@
     "verdict": "improved",
     "note": "cuidadoras principales: convenios especiales",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Cuidadoras principales de gran dependencia",
+     "text": "Serían colectivo de atención prioritaria en la política de empleo y podrían mantener su base de cotización anterior, si supera el mínimo, pagando el 50 % del incremento.",
+     "locator": "Enmienda núm. 25 (BOCG A-64-5, pág. 22)"
+    },
+    {
+     "actor": "Cuidadoras en solitario",
+     "text": "Quienes críen y cuiden en solitario por abandono del otro progenitor tendrían las mismas medidas de apoyo social, laboral y económico que las víctimas de violencia de género.",
+     "locator": "Enmienda núm. 25 (BOCG A-64-5, pág. 22)"
+    },
+    {
+     "actor": "IMSERSO",
+     "text": "Tendría que abonar a la Tesorería de la Seguridad Social el otro 50 % del incremento de cotización de esas cuidadoras.",
+     "locator": "Enmienda núm. 25 (BOCG A-64-5, pág. 22)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "Texto de la enmienda truncado tras el apartado 5.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1123,6 +1464,24 @@
     "note": "sin cifra oficial de dependientes menores de 65",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Personas dependientes menores de 65 años",
+     "text": "Los poderes públicos reforzarían la red de recursos públicos y concertados para sus necesidades vitales, sanitarias, terapéuticas y de ocio, con oferta suficiente y adecuada.",
+     "locator": "Enmienda núm. 26 (BOCG A-64-5, pág. 23)"
+    },
+    {
+     "actor": "Entidades del sector social",
+     "text": "Colaborarían con los poderes públicos en desarrollar la red de recursos para personas dependientes menores de 65 años.",
+     "locator": "Enmienda núm. 26 (BOCG A-64-5, pág. 23)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion022/VOT_20260714202008.json": {
@@ -1141,6 +1500,29 @@
     "verdict": "keep",
     "note": "sin cifra oficial de afectados por polio localizada",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Personas con polio o síndrome postpolio",
+     "text": "Se las consideraría con deficiencias permanentes que pueden originar discapacidad, y tendrían rehabilitación continuada, ortoprótesis actualizadas y guías clínicas específicas.",
+     "locator": "Enmienda núm. 304 (BOCG A-64-5, pág. 275)"
+    },
+    {
+     "actor": "Gobierno",
+     "text": "Promovería, con las comunidades autónomas, un registro nacional voluntario de personas afectadas para planificar la atención sanitaria, sociosanitaria y social.",
+     "locator": "Enmienda núm. 304 (BOCG A-64-5, pág. 276)"
+    },
+    {
+     "actor": "Profesionales sanitarios y sociales",
+     "text": "Recibirían programas de formación continuada sobre la polio y el síndrome postpolio.",
+     "locator": "Enmienda núm. 304 (BOCG A-64-5, pág. 276)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1162,6 +1544,12 @@
     "note": "desahucios y suspensiones por vulnerabilidad 2025",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "Votación del «resto de enmiendas» sin número; el texto sobre desahucios (BOCG A-64-5, págs. 114-115) no se pudo atribuir con certeza a este grupo.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion024/VOT_20260714202011.json": {
@@ -1180,6 +1568,29 @@
     "verdict": "keep",
     "note": "sin cifra oficial de terapias de dependientes",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Familias de personas dependientes",
+     "text": "Recibirían cada año el 70 % de lo gastado en terapias como fisioterapia, logopedia o musicoterapia, hasta el IPREM anual, presentando la factura ya pagada.",
+     "locator": "Enmienda núm. 217 (BOCG A-64-5, pág. 201)"
+    },
+    {
+     "actor": "Personas dependientes",
+     "text": "Cobrar este abono no reduciría, suspendería ni eliminaría otras prestaciones de su Programa Individual de Atención, como centro de día o asistencia personal.",
+     "locator": "Enmienda núm. 217 (BOCG A-64-5, pág. 201)"
+    },
+    {
+     "actor": "Administración de dependencia",
+     "text": "Tendría que abonar ese 70 % cada año, contra factura de los gastos del año natural anterior.",
+     "locator": "Enmienda núm. 217 (BOCG A-64-5, pág. 201)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "La enmienda 158 modifica la exposición de motivos (texto introductorio sin efecto directo).",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1200,6 +1611,34 @@
     "note": "asistencia personal: prestaciones vigentes agosto 2026",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Personas con discapacidad",
+     "text": "Tendrían derecho a beneficiarse de los sistemas de inteligencia artificial, con interfaces accesibles y participando en el diseño y validación de estos productos.",
+     "locator": "Enmienda núm. 185 (BOCG A-64-5, pág. 177)"
+    },
+    {
+     "actor": "Personas dependientes de cualquier grado y edad",
+     "text": "Podrían acceder al servicio de asistencia personal en cualquier grado de dependencia y con independencia de su edad.",
+     "locator": "Enmienda núm. 196 (BOCG A-64-5, pág. 187)"
+    },
+    {
+     "actor": "Personas con sordoceguera",
+     "text": "El servicio de asistencia personal tendría como finalidad facilitarles la comunicación con su entorno.",
+     "locator": "Enmienda núm. 196 (BOCG A-64-5, pág. 187)"
+    },
+    {
+     "actor": "Administraciones públicas",
+     "text": "Tendrían que fomentar la consulta y participación de las personas con discapacidad y sus organizaciones en productos y servicios digitales con inteligencia artificial.",
+     "locator": "Enmienda núm. 185 (BOCG A-64-5, pág. 177)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "Las enmiendas 161 y 163 modifican la exposición de motivos (sin efecto directo).",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion028/VOT_20260714202019.json": {
@@ -1213,6 +1652,34 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Personas con dependencia reconocida",
+     "text": "Se las consideraría con discapacidad del 33 % (grado I), 65 % (grados II y III) o 75 % (grado III) a efectos de esa ley, pero no a efectos tributarios.",
+     "locator": "Enmienda núm. 173 (BOCG A-64-5, pág. 166)"
+    },
+    {
+     "actor": "Personas con discapacidad",
+     "text": "Podrían acreditar la discapacidad con un informe médico, psicológico o social, además del grado reconocido igual o superior al 33 %.",
+     "locator": "Enmienda núm. 173 (BOCG A-64-5, pág. 166)"
+    },
+    {
+     "actor": "Personas dependientes de grado II y III",
+     "text": "Si no hubiera el servicio de su PIA, tendrían otro servicio o prestación transitoria según sus preferencias; la capacidad económica no sería el único criterio de prioridad.",
+     "locator": "Enmienda núm. 192 (BOCG A-64-5, pág. 184)"
+    },
+    {
+     "actor": "Personas con discapacidad y sus familias",
+     "text": "El Gobierno tendría que remitir en un año un proyecto de ley que actualice los patrimonios protegidos y amplíe su tratamiento fiscal favorable.",
+     "locator": "Enmienda núm. 208 (BOCG A-64-5, pág. 196)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion030/VOT_20260714202022.json": {
@@ -1226,6 +1693,24 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Familias con personas con discapacidad",
+     "text": "Tendrían la máxima consideración en las políticas familiares, con medidas de acción positiva jurídicas, sociales, económicas y de conciliación para las familias cuidadoras.",
+     "locator": "Enmienda núm. 178 (BOCG A-64-5, pág. 171)"
+    },
+    {
+     "actor": "Administraciones públicas",
+     "text": "Al diseñar esas medidas tendrían que valorar no solo los ingresos de la unidad convivencial, sino también los gastos de abordar el problema de salud.",
+     "locator": "Enmienda núm. 178 (BOCG A-64-5, pág. 171)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion034/VOT_20260714202028.json": {
@@ -1244,6 +1729,29 @@
     "verdict": "improved",
     "note": "cuidados familiares y edificios no accesibles",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Personas dependientes y familias cuidadoras",
+     "text": "La prestación por cuidados en el entorno familiar dejaría de reconocerse solo de forma excepcional y podría concederse cuando la persona lo desee y la vivienda sea adecuada.",
+     "locator": "Enmienda núm. 194 (BOCG A-64-5, pág. 185)"
+    },
+    {
+     "actor": "Personas con discapacidad o mayores de 70 años",
+     "text": "Las obras de accesibilidad que pidan en su vivienda o local (rampas, ascensores) podrían alcanzar hasta 24 mensualidades de gastos comunes al año, en vez de 12.",
+     "locator": "Enmienda núm. 203 (BOCG A-64-5, pág. 191)"
+    },
+    {
+     "actor": "Comunidades de propietarios",
+     "text": "El límite anual repercutido por obras de accesibilidad, descontadas ayudas, subiría de 12 a 24 mensualidades ordinarias de gastos comunes.",
+     "locator": "Enmienda núm. 203 (BOCG A-64-5, pág. 191)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1264,6 +1772,34 @@
     "note": "cuidadoras y plazas residenciales",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Dependientes de grado II y III menores de 65 años",
+     "text": "Las administraciones tendrían que dotar plazas públicas suficientes en centros de día, residencias y pisos tutelados, con acceso sin demora si lo solicitan o falta su cuidador.",
+     "locator": "Enmienda núm. 218 (BOCG A-64-5, pág. 202)"
+    },
+    {
+     "actor": "Cuidadoras principales",
+     "text": "Pasarían a llamarse así en vez de «cuidadoras no profesionales» y tendrían un Estatuto con derechos de prestación económica, Seguridad Social y formación.",
+     "locator": "Enmienda núm. 212 (BOCG A-64-5, pág. 198)"
+    },
+    {
+     "actor": "Personas dependientes con cuidadora enferma",
+     "text": "Si su cuidadora principal enfermara gravemente o fuera hospitalizada, se les asignaría un segundo cuidador o un ingreso temporal en centro.",
+     "locator": "Enmienda núm. 210 (BOCG A-64-5, pág. 197)"
+    },
+    {
+     "actor": "Asistentes personales",
+     "text": "Su trabajo, contratado directamente por la persona asistida, sería relación laboral de carácter especial, y el Gobierno tendría un año para regularla por real decreto.",
+     "locator": "Enmienda núm. 206 (BOCG A-64-5, pág. 194)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "Enmienda 195 (teleasistencia no sustituiría apoyos presenciales) y 223 (interoperabilidad SAAD) también incluidas en la votación; la 211 no vino en el lote.",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion037/VOT_20260714202032.json": {
@@ -1282,6 +1818,12 @@
     "verdict": "keep",
     "note": "medida amplia; cifras actuales valen",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "sin texto extraído: votación en bloque de «resto de enmiendas» sin numerar; no se puede atribuir contenido a cada una",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1302,6 +1844,29 @@
     "note": "sin cifra oficial específica localizada",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Personas en situación de dependencia",
+     "text": "Habría un servicio de cuidados y apoyos en viviendas dignas del entorno comunitario, con los cuidados que requieran, incluidos los de alta complejidad.",
+     "locator": "Enmienda núm. 133 (BOCG A-64-5, pág. 130)"
+    },
+    {
+     "actor": "Personas con polio y síndrome postpolio",
+     "text": "Se las consideraría con discapacidad y se garantizaría rehabilitación continuada, productos ortoprotésicos adecuados y protocolos clínicos específicos.",
+     "locator": "Enmienda núm. 142 (BOCG A-64-5, pág. 136)"
+    },
+    {
+     "actor": "Opositores con discapacidad",
+     "text": "En las ofertas de empleo público habría un cupo reservado y apoyos individualizados para quienes se presenten.",
+     "locator": "Enmienda núm. 150 (BOCG A-64-5, pág. 141)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion039/VOT_20260714202035.json": {
@@ -1320,6 +1885,24 @@
     "verdict": "improved",
     "note": "vivienda protegida iniciada en el último año",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Personas con discapacidad",
+     "text": "Al menos un 4 % de las viviendas de cada proyecto protegido tendría diseño accesible, con reservas específicas para discapacidad intelectual y del desarrollo.",
+     "locator": "Enmienda núm. 147 (BOCG A-64-5, pág. 139)"
+    },
+    {
+     "actor": "Entidades sin ánimo de lucro de discapacidad",
+     "text": "Podrían recibir en alquiler viviendas de esa reserva para destinarlas a viviendas asistidas, compartidas o de apoyo a la vida autónoma.",
+     "locator": "Enmienda núm. 147 (BOCG A-64-5, pág. 139)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1341,6 +1924,12 @@
     "note": "desahucios y suspensiones por vulnerabilidad 2025",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "sin texto extraído: votación en bloque de «resto de enmiendas» sin numerar; no se puede atribuir contenido a cada una",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion042/VOT_20260714202040.json": {
@@ -1358,6 +1947,24 @@
     "verdict": "improved",
     "note": "asistencia personal: prestaciones vigentes agosto 2026",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Asistentes personales",
+     "text": "En el plazo de un año tendrían formación propia, un régimen propio en la Seguridad Social y una definición específica en la Clasificación Nacional de Ocupaciones.",
+     "locator": "Enmienda núm. 310 (BOCG A-64-5, pág. 281)"
+    },
+    {
+     "actor": "Personas con discapacidad que usan asistencia",
+     "text": "Podrían contratar directamente al asistente personal sin que este tenga que ser profesional autónomo.",
+     "locator": "Enmienda núm. 310 (BOCG A-64-5, pág. 282)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1378,6 +1985,12 @@
     "note": "medida amplia; cifras actuales valen",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "sin texto extraído: votación en bloque de «resto de enmiendas» sin numerar; no se puede atribuir contenido a cada una",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion045/VOT_20260714202044.json": {
@@ -1391,6 +2004,19 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Jubilados que hicieron el servicio social femenino",
+     "text": "Ese periodo obligatorio, hasta un máximo de un año, contaría como tiempo cotizado para acceder a la pensión de jubilación.",
+     "locator": "Enmienda núm. 82 (BOCG A-64-5, pág. 78)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion046/VOT_20260714202046.json": {
@@ -1410,6 +2036,12 @@
     "note": "medida amplia; sin cifra específica",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "sin texto extraído: votación en bloque de «resto de enmiendas» sin numerar; no se puede atribuir contenido a cada una",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion185/20260611/Votacion005/VOT_20260611145707.json": {
@@ -1428,6 +2060,12 @@
     "verdict": "improved",
     "note": "Sin cifra oficial de nº de mutualistas; 8 mutualidades",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "bloque, «resto de enmiendas», transaccional o sin texto votado identificable: no se puede atribuir el efecto con certeza",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1449,6 +2087,19 @@
     "note": "Sin cifra oficial de nº de mutualistas; 8 mutualidades",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Mutualistas alternativos, actuales o pasados",
+     "text": "Podrían pedir, en el plazo de un año desde el reglamento, integrarse en el RETA, con sus períodos en la mutualidad reconocidos como cotizados al RETA.",
+     "locator": "Enmienda núm. 8 (BOCG B-162-6, pág. 14)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion185/20260611/Votacion007/VOT_20260611145709.json": {
@@ -1469,6 +2120,12 @@
     "note": "Sin cifra oficial de nº de mutualistas; 8 mutualidades",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "bloque, «resto de enmiendas», transaccional o sin texto votado identificable: no se puede atribuir el efecto con certeza",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion185/20260611/Votacion009/VOT_20260611145712.json": {
@@ -1487,6 +2144,24 @@
     "verdict": "improved",
     "note": "Sin cifra oficial de nº de mutualistas; 8 mutualidades",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Mutualistas afectados, sobre todo los próximos a jubilarse",
+     "text": "Habría un plazo máximo de seis meses para aprobar y poner en vigor el reglamento del traspaso a la Seguridad Social.",
+     "locator": "Enmienda núm. 20 (BOCG B-162-6, pág. 36)"
+    },
+    {
+     "actor": "Mutualistas pendientes del traspaso",
+     "text": "La Seguridad Social habría garantizado sus derechos económicos hasta que el traspaso a la TGSS fuese efectivo.",
+     "locator": "Enmienda núm. 20 (BOCG B-162-6, pág. 36)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
    }
   },
@@ -1508,6 +2183,19 @@
     "note": "Sin cifra oficial de nº de mutualistas; 8 mutualidades",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "direct_effects": [
+    {
+     "actor": "Mutualistas alternativos, actuales o pasados",
+     "text": "Podrían pedir, en el plazo de un año desde el reglamento, integrarse en el RETA, con sus períodos en la mutualidad reconocidos como cotizados al RETA.",
+     "locator": "Enmienda núm. 26 (BOCG B-162-6, pág. 49)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion185/20260611/Votacion016/VOT_20260611145721.json": {
@@ -1528,6 +2216,12 @@
     "note": "Sin cifra oficial de nº de mutualistas; 8 mutualidades",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "effects_review": {
+    "verdict": "none",
+    "note": "bloque, «resto de enmiendas», transaccional o sin texto votado identificable: no se puede atribuir el efecto con certeza",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion130/20250910/Votacion002/VOT_20250910213534.json": {
@@ -1541,6 +2235,24 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Comunidades Autónomas",
+     "text": "Se aprobaría con urgencia un programa de cooperación territorial para reforzar sus ayudas educativas, como comedores y transporte escolar.",
+     "locator": "Punto 2 del texto presentado (BOCG Congreso D-384 (2025-08-29), pág. 17)"
+    },
+    {
+     "actor": "Familias con hijos en edad escolar",
+     "text": "Se reforzarían las ayudas de las comunidades en comedores escolares, transporte escolar y otros gastos educativos.",
+     "locator": "Punto 2 del texto presentado (BOCG Congreso D-384 (2025-08-29), pág. 17)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion130/20250910/Votacion003/VOT_20250910213535.json": {
@@ -1554,6 +2266,24 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Familias con hijos de 0 a 3 años",
+     "text": "El Gobierno tendría que garantizar la gratuidad del primer ciclo de Educación Infantil en todos los centros educativos.",
+     "locator": "Punto 3 del texto presentado (BOCG Congreso D-384 (2025-08-29), pág. 17)"
+    },
+    {
+     "actor": "Estado y Comunidades Autónomas",
+     "text": "Cofinanciarían esa gratuidad, aportando cada uno el 50 %.",
+     "locator": "Punto 3 del texto presentado (BOCG Congreso D-384 (2025-08-29), pág. 17)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion079/20241121/Votacion015/VOT_20241121173812.json": {
@@ -1567,6 +2297,24 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "direct_effects": [
+    {
+     "actor": "Personal sanitario de medios aéreos",
+     "text": "Podrían haber accedido a coeficientes reductores para adelantar la edad de jubilación.",
+     "locator": "Enmienda núm. 81 (BOCG A-23-3, pág. 112)"
+    },
+    {
+     "actor": "Gobierno",
+     "text": "Habría tenido que iniciar de oficio, en 3 meses desde la entrada en vigor de la ley, el procedimiento para aplicar esos coeficientes.",
+     "locator": "Enmienda núm. 81 (BOCG A-23-3, pág. 112)"
+    }
+   ],
+   "effects_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
    }
   }
  }
