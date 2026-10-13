@@ -446,6 +446,12 @@ const POSITION_WORDS = { agree: "a favor (Sí)", disagree: "en contra (No)", abs
 // Multi-vote statements can rest on 80+ votes: the AI prompt lists the most recent ones and says how many.
 const MAX_PROMPT_VOTES = 6;
 
+// A law states a rule; to weigh it people need its scale and knock-on effects, not only what it says.
+export const RAMIFICATIONS_ASK =
+  "Explica también sus ramificaciones: a quién afecta y a cuántas personas aproximadamente (con cifras oficiales y su año), qué cambia para cada colectivo y qué efectos de segundo orden podrían producirse, con los argumentos y la evidencia en ambos sentidos. Distingue lo que está medido de lo que son previsiones.";
+
+const EVIDENCE_WORDS = { organismo_publico: "organismo público", estudio: "estudio", debate: "debate en el Congreso" };
+
 function voteLines(question, parties) {
   // One block per roll-call vote behind the question, with each party's majority vote and counts.
   const votes =
@@ -539,6 +545,7 @@ export function buildAiPrompt(question, parties = [], { mode = "why", partyId = 
     lines.push("Explícame en términos sencillos qué se votó en esta votación del Congreso de los Diputados de España y por qué cada partido votó como votó, según sus argumentos públicos (debate en el Pleno, notas de prensa, programa).");
   }
   lines.push("Distingue claramente los hechos comprobables de tus interpretaciones, cita fuentes oficiales cuando puedas y di si no estás seguro. Sé neutral.");
+  lines.push(RAMIFICATIONS_ASK);
   if (question.omnibus) {
     lines.push(
       mode === "explain"
@@ -562,6 +569,9 @@ export function buildAiPrompt(question, parties = [], { mode = "why", partyId = 
       if (dir.length) lines.push(`Cuánto empujó cada partido en el sentido de la afirmación (0 % = siempre en contra, 100 % = siempre a favor): ${dir.join("; ")}`);
     }
   }
+  // A clipped link prompt loses its tail: in the compact one the official figures go before the vote details.
+  const rl = ramificationLines(question, compact);
+  if (compact && rl.length) lines.push("", ...rl);
   votes.forEach((v, i) => {
     lines.push("");
     lines.push(votes.length > 1 ? `Votación ${i + 1}:` : "Votación:");
@@ -589,6 +599,7 @@ export function buildAiPrompt(question, parties = [], { mode = "why", partyId = 
   // Plain-language bullets come first (they say what was voted); literal headings follow as evidence.
   const wv = whatVotedLines(question, compact);
   if (wv.length) lines.push("", ...wv);
+  if (!compact && rl.length) lines.push("", ...rl);
   const hl = highlightLines(question, compact, wv.length > 0);
   if (hl.length) lines.push("", ...hl);
   return lines.join("\n");
@@ -629,12 +640,39 @@ function questionVoteIds(question) {
   return (question.votes || []).map((v) => v.vote_event_id);
 }
 
+// At most this many official figures in «A quién afecta», so the answers stay in reach.
+const MAX_RAMIFICATION_FACTS = 3;
+
+/**
+ * «Ramificaciones» of a question (voting_aid_vote_impacts_v1.json): official figures on who it affects
+ * (statement-level first, then each vote's, deduplicated) and, per vote, what changes for each group and the
+ * second-order effects someone expects or fears, with their evidence. Null when there is nothing to show.
+ */
+function ramificationsFor(question, impacts) {
+  if (!impacts) return null;
+  const facts = impacts.facts || {};
+  const ids = [...(impacts.by_statement?.[question.statement_id]?.facts || [])];
+  const votes = questionVoteIds(question)
+    .map((vid) => {
+      const v = impacts.by_vote?.[vid];
+      if (!v) return null;
+      ids.push(...(v.facts || []));
+      const vote = question.source === "pool" ? { vote_date: question.vote_date } : (question.votes || []).find((x) => x.vote_event_id === vid) || {};
+      return { vote_event_id: vid, vote_date: vote.vote_date, direct: v.direct || [], indirect: v.indirect || [], gaps: v.gaps || "", review: v.review };
+    })
+    .filter(Boolean);
+  const factList = [...new Set(ids)].map((id) => (facts[id] ? { id, ...facts[id] } : null)).filter(Boolean).slice(0, MAX_RAMIFICATION_FACTS);
+  if (!factList.length && !votes.length) return null;
+  return { facts: factList, votes };
+}
+
 /**
  * Attach official-text highlights to each question; `omnibus` is true if any of its votes is omnibus.
  * With `bullets` (voting_aid_vote_bullets_v1.json), `whatVoted` lists, per vote, the plain-language
  * «Qué se votaba» bullets (status "ok"), or "sin_texto_oficial" when there is no official text.
+ * With `impacts` (voting_aid_vote_impacts_v1.json), `ramifications` holds who it affects and what may follow.
  */
-export function attachHighlights(questions, highlights, bullets = null) {
+export function attachHighlights(questions, highlights, bullets = null, impacts = null) {
   const byVote = highlights?.by_vote || {};
   const docs = highlights?.docs || {};
   const bulletsByVote = bullets?.by_vote || {};
@@ -663,6 +701,7 @@ export function attachHighlights(questions, highlights, bullets = null) {
       ...q,
       highlights: unique,
       whatVoted,
+      ramifications: ramificationsFor(q, impacts),
       omnibus: unique.some((h) => h.doc.omnibus),
       offtopic: unique.some((h) => (h.doc.offtopic_riders || []).length > 0),
     };
@@ -680,6 +719,35 @@ function whatVotedLines(question, compact = false) {
     for (const b of w.bullets.slice(0, compact ? 4 : 6)) lines.push(compact ? `  • ${b.text}` : `  • ${b.text} [${b.locator}]`);
     if (w.text_status_label) lines.push(`  (${w.text_status_label})`);
     lines.push(`  Texto oficial: ${w.url}`);
+  }
+  return lines;
+}
+
+/** «Ramificaciones» lines for AI prompts: official figures, then (full prompt only) effects with their sources. */
+function ramificationLines(question, compact = false) {
+  const r = question.ramifications;
+  if (!r) return [];
+  const lines = [];
+  if (r.facts.length) {
+    lines.push("A quién afecta (cifras oficiales):");
+    for (const f of r.facts) lines.push(compact ? `  • ${f.text} (${f.period})` : `  • ${f.text} (${f.source}, ${f.period}: ${f.url})`);
+  }
+  if (compact) return lines;
+  const many = r.votes.length > 1;
+  for (const v of r.votes) {
+    const when = many && v.vote_date ? `, votación del ${v.vote_date}` : "";
+    if (v.direct.length) {
+      lines.push(`Qué cambiaría para cada colectivo (del texto oficial${when}):`);
+      for (const d of v.direct) lines.push(`  • ${d.actor}: ${d.text} [${d.locator}]`);
+    }
+    if (v.indirect.length) {
+      lines.push(`Posibles efectos indirectos que se han señalado${when} (previsiones, no hechos; compruébalas):`);
+      for (const e of v.indirect) {
+        const label = e.kind === "beneficio_esperado" ? "Beneficio esperado" : "Riesgo señalado";
+        lines.push(`  • ${label}: ${e.text} [${EVIDENCE_WORDS[e.evidence] || e.evidence}: ${e.source}, ${e.locator}]`);
+      }
+    }
+    if (v.gaps) lines.push(`Lo que no se sabe: ${v.gaps}`);
   }
   return lines;
 }

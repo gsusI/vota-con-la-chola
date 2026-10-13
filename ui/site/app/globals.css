@@ -7325,6 +7325,77 @@ body:has(.responsibility-article) > .breadcrumbs {
   margin-top: 8px;
 }
 
+/* «Ramificaciones»: who a vote affects (official figures) and its knock-on effects, each with a source */
+.votingAidRamif {
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent-2);
+  border-radius: 12px;
+  padding: 10px 14px;
+  margin-top: 8px;
+  background: #fff;
+  min-width: 0;
+}
+
+.votingAidRamif__facts {
+  margin: 0;
+  padding-left: 1.2em;
+  display: grid;
+  gap: 6px;
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.votingAidRamif__vote {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--line);
+}
+
+.votingAidRamif__when {
+  margin: 0 0 4px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+
+.votingAidRamif__head {
+  margin: 8px 0 4px;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.votingAidRamif__side {
+  border-left: 3px solid var(--line);
+  padding-left: 10px;
+  margin-top: 6px;
+}
+
+.votingAidRamif__side--plus {
+  border-left-color: var(--accent-2);
+}
+
+.votingAidRamif__side--minus {
+  border-left-color: var(--accent);
+}
+
+.votingAidRamif__evidence {
+  display: inline-block;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0 7px;
+  font-weight: 600;
+}
+
+.votingAidRamif__gaps {
+  margin: 8px 0 0;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.votingAidRamif a {
+  overflow-wrap: anywhere;
+}
+
 .votingAidInside--embedded {
   margin: 8px 0 0;
 }

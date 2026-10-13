@@ -23,6 +23,7 @@ export const AMENDMENT_DOCS = "etl/data/seeds/vote_atlas_amendment_docs_v1.json"
 export const AMENDMENT_PROMPT = "docs/etl/sprints/VOTE-ATLAS-20261013/prompts/clasificar-enmiendas.md";
 export const SENADO_EVIDENCE = "docs/etl/sprints/VOTE-ATLAS-20261013/evidence/senado-votos-por-senador-probe-20261013.md";
 export const BULLETS_SEED = "etl/data/seeds/voting_aid_vote_bullets_v1.json";
+export const IMPACTS_SEED = "etl/data/seeds/voting_aid_vote_impacts_v1.json";
 
 export function repoLink(rel) {
   return `${REPO_URL}/blob/main/${rel}`;
@@ -46,6 +47,11 @@ const PROMPT_FILES = [
     file: "vinetas-redaccion.md",
     title: "Redacción de las viñetas «Qué se votaba»",
     who: "Claude Sonnet 5.5 (subagentes, por lotes)",
+  },
+  {
+    file: "ramificaciones-redaccion.md",
+    title: "«Ramificaciones»: a quién afecta y qué puede pasar después (piloto de vivienda)",
+    who: "Claude Opus 5.5 (agente principal)",
   },
   {
     file: "vinetas-revision.md",
@@ -119,11 +125,12 @@ export function loadMethodology() {
   const pool = readPublicJson("citizen/data/voting_aid_pool_v1.json", { meta: {}, items: [] });
   const highlights = readPublicJson("citizen/data/voting_aid_highlights_v1.json", { meta: {} });
   const bullets = readPublicJson("citizen/data/voting_aid_vote_bullets_v1.json", { meta: {} });
+  const impacts = readPublicJson("citizen/data/voting_aid_vote_impacts_v1.json", { meta: {} });
   const seed = readRepoJson(STATEMENTS_SEED) || {};
   const bulletSeed = readRepoJson(BULLETS_SEED);
   const evidence = readRepoJson(STATEMENT_REVIEW);
 
-  const questions = attachHighlights(buildQuestions(snapshot, pool), highlights, bullets);
+  const questions = attachHighlights(buildQuestions(snapshot, pool), highlights, bullets, impacts);
   const curated = questions.find((q) => q.source === "curated");
   const poolQ = questions.find((q) => q.source === "pool" && (q.whatVoted || []).some((w) => w.status === "ok"));
   const examples = [];
@@ -150,6 +157,7 @@ export function loadMethodology() {
     pool,
     highlights,
     bullets,
+    impactsMeta: impacts.meta || {},
     seed,
     sampleStatement: (seed.statements || [])[0] || null,
     bulletStats: bulletSeed ? bulletReviewStats(bulletSeed) : null,

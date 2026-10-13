@@ -316,3 +316,38 @@ test("«Qué se votaba» bullets attach per vote, reach prompts and never reveal
   const bare = questions.find((x) => x.whatVoted.every((w) => w.status === "sin_texto_oficial"));
   if (bare) assert.ok(!m.buildAiPrompt(bare, snap.parties).includes("Qué se votaba (resumen"));
 });
+
+test("«Ramificaciones» attach official figures and both-sided effects, and reach the AI prompts", async () => {
+  const m = await import("../ui/site/app/citizen/vota/votingAidModel.mjs");
+  const dataDir = path.join(here, "..", "ui", "site", "public", "citizen", "data");
+  const read = (f) => JSON.parse(fs.readFileSync(path.join(dataDir, f), "utf-8"));
+  const pool = read("voting_aid_pool_v1.json");
+  const highlights = read("voting_aid_highlights_v1.json");
+  const bullets = read("voting_aid_vote_bullets_v1.json");
+  const impacts = read("voting_aid_vote_impacts_v1.json");
+  for (const version of ["v1", "v2"]) {
+    const snap = read(`voting_aid_generales_${version}.json`);
+    const questions = m.attachHighlights(m.buildQuestions(snap, pool), highlights, bullets, impacts);
+    const withRamif = questions.filter((q) => q.ramifications);
+    assert.ok(withRamif.length >= 3, `${version}: ${withRamif.length}`);
+    for (const q of withRamif) {
+      const r = q.ramifications;
+      assert.ok(r.facts.length >= 1 && r.facts.length <= 3, q.statement_id);
+      for (const f of r.facts) assert.ok(f.text && f.period && f.source && /^https:\/\//u.test(f.url));
+      for (const v of r.votes) {
+        if (v.indirect.length) assert.deepEqual([...new Set(v.indirect.map((e) => e.kind))].sort(), ["beneficio_esperado", "riesgo_senalado"]);
+      }
+      // Shown before answering: the explain prompt carries the figures and the ask, never a party's vote.
+      const explain = m.buildAiPrompt(q, snap.parties, { mode: "explain" });
+      assert.ok(explain.includes(m.RAMIFICATIONS_ASK) && explain.includes(r.facts[0].text), q.statement_id);
+      assert.ok(!snap.parties.some((p) => explain.includes(`${p.label}:`)));
+      const effect = r.votes.find((v) => v.indirect.length)?.indirect[0];
+      if (effect) assert.ok(explain.includes(effect.text));
+      // Even a clipped link keeps the figures (they go before the vote details in the compact prompt).
+      assert.ok(m.linkPrompt(q, snap.parties, { mode: "explain" }).includes(r.facts[0].text.slice(0, 60)), q.statement_id);
+    }
+    // Questions without impacts data still work and do not invent figures.
+    const bare = questions.find((q) => !q.ramifications);
+    assert.ok(!m.buildAiPrompt(bare, snap.parties).includes("A quién afecta (cifras oficiales)"));
+  }
+});

@@ -1,0 +1,376 @@
+{
+  "meta": {
+    "schema_version": "voting_aid_vote_impacts_seed_v1",
+    "description": "Ramificaciones de cada votación de la ayuda al voto: a quién afecta y cuántos son (cifras oficiales), qué cambia para cada colectivo (efectos directos, del texto oficial) y qué efectos indirectos se esperan o se temen, siempre con fuente. Se muestran antes de responder: no nombran partidos ni dicen cómo votó nadie. Piloto: vivienda (alquiler de temporada, pisos turísticos, ocupación).",
+    "rules": [
+      "Las cifras viven en `facts` y solo salen de fuentes oficiales con periodo y URL; la IA nunca escribe un número de memoria.",
+      "Efectos directos: máx. 4 por votación, uno por colectivo, con localizador en el texto oficial (los mismos de «Qué se votaba»).",
+      "Efectos indirectos: máx. 6, cada uno con fuente (organismo público, estudio académico o argumento del debate con su página del Diario de Sesiones).",
+      "Equilibrio: si hay efectos indirectos, al menos uno de cada tipo (beneficio esperado y riesgo señalado).",
+      "Los argumentos del debate se resumen sin nombrar al grupo ni a quien habló; el enlace al Diario permite comprobarlo.",
+      "`gaps` dice lo que no se sabe (p. ej., que una proposición de ley no lleva memoria oficial de impacto)."
+    ],
+    "pilot": "2026-10-13: 5 votaciones de vivienda (v1: vivienda-alquiler-temporada, vivienda-pisos-turisticos, vivienda-okupacion; v2: eje-vivienda-intervencion, eje-vivienda-okupacion)."
+  },
+  "facts": {
+    "ine-ecv-2025-tenencia": {
+      "text": "El 16,7 % de los hogares vive de alquiler a precio de mercado y otro 3,5 % paga un alquiler por debajo del mercado; el 73,3 % vive en una vivienda en propiedad.",
+      "period": "2025",
+      "source": "INE, Encuesta de Condiciones de Vida 2025 (tabla 9996)",
+      "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=9996"
+    },
+    "bde-2024-alquiler-temporada": {
+      "text": "El alquiler de temporada rondaba el 13 % de la oferta de alquiler a mediados de 2024 (más del 40 % en Barcelona y del 30 % en San Sebastián), tras crecer un 55 % en un año, mientras los anuncios de alquiler habitual caían más de un 15 %.",
+      "period": "mediados de 2024",
+      "source": "Banco de España, Documento Ocasional 2432 (2024), pág. 29, con datos de portales inmobiliarios",
+      "url": "https://www.bde.es/f/webbe/SES/Secciones/Publicaciones/PublicacionesSeriadas/DocumentosOcasionales/24/Fich/do2432.pdf"
+    },
+    "ine-vut-2026-05": {
+      "text": "Había 341.001 viviendas turísticas anunciadas en plataformas: el 1,28 % de todas las viviendas. En Canarias son el 4,4 % y en Baleares el 3,3 %, y en 60 municipios superan el 10 %.",
+      "period": "mayo de 2026",
+      "source": "INE, estadística experimental de viviendas turísticas (tablas 39363, 39365 y 39366)",
+      "url": "https://www.ine.es/experimental/viv_turistica/exp_viv_turistica_tablas.htm"
+    },
+    "ts-2026-registro-unico": {
+      "text": "En mayo de 2026 el Tribunal Supremo anuló el número de registro estatal de alquileres de corta duración (Real Decreto 1312/2024); siguen las licencias y registros de las comunidades autónomas.",
+      "period": "21 de mayo de 2026",
+      "source": "Tribunal Supremo, sentencia de 21 de mayo de 2026 (BOE de 26 de junio de 2026)",
+      "url": "https://www.boe.es/boe/dias/2026/06/26/pdfs/BOE-A-2026-13893.pdf"
+    },
+    "interior-2024-ocupacion": {
+      "text": "En 2024 la policía conoció 15.911 usurpaciones de inmuebles que no eran el hogar de nadie (pisos vacíos, locales, solares) y 515 allanamientos de morada (entrar en la vivienda habitual o segunda residencia de alguien).",
+      "period": "2024",
+      "source": "Ministerio del Interior, Sistema Estadístico de Criminalidad (respuesta del Gobierno 184/19204)",
+      "url": "https://www.congreso.es/entradap/l15p/e5/e_0059393_n_000.pdf"
+    },
+    "ine-censo-2021-vacias": {
+      "text": "Había 3.837.328 viviendas vacías (14,4 % de 26,6 millones), según su consumo eléctrico; el 45 % estaban en municipios de menos de 10.000 habitantes.",
+      "period": "1 de enero de 2021",
+      "source": "INE, Censos de Población y Viviendas 2021",
+      "url": "https://ine.es/prensa/censo_2021_jun.pdf"
+    },
+    "cgpj-2024-lanzamientos": {
+      "text": "En 2024 se ejecutaron 27.564 desahucios (lanzamientos): 20.558 de alquileres, 5.073 de hipotecas y 1.933 por otras causas, entre ellas la ocupación.",
+      "period": "2024",
+      "source": "Consejo General del Poder Judicial, Efectos de la crisis en los órganos judiciales (nota de 14 de marzo de 2025)",
+      "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Sala-de-Prensa/Archivo-de-notas-de-prensa/Las-ejecuciones-hipotecarias-rompieron-el-ano-pasado-la-tendencia-a-la-baja-que-mantenian-desde-2022-y-crecieron-un-18-3-por-ciento"
+    }
+  },
+  "statements": {
+    "eje-vivienda-intervencion": {"facts": ["ine-ecv-2025-tenencia", "bde-2024-alquiler-temporada", "ine-vut-2026-05"]},
+    "eje-vivienda-okupacion": {"facts": ["interior-2024-ocupacion", "ine-censo-2021-vacias", "cgpj-2024-lanzamientos"]}
+  },
+  "votes": {
+    "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion059/20240917/Votacion001/VOT_20240917204416.json": {
+      "question_id": "vivienda-alquiler-temporada",
+      "facts": ["ine-ecv-2025-tenencia", "bde-2024-alquiler-temporada"],
+      "direct_effects": [
+        {
+          "actor": "Inquilinos de temporada y de habitaciones",
+          "text": "Su contrato contaría como alquiler de vivienda habitual (plazo mínimo y prórrogas) si no se acredita la causa o pasa de seis meses; podrían irse tras el primer mes avisando con diez días.",
+          "locator": "Artículos 2, 9 bis y 11.2"
+        },
+        {
+          "actor": "Propietarios que alquilan por temporada",
+          "text": "Tendrían que acreditar la causa de la temporalidad, atender averías en cinco días hábiles y pedir como mucho media mensualidad de garantía adicional.",
+          "locator": "Artículos 2.3, 21 bis y 36.5"
+        },
+        {
+          "actor": "Quien necesita una estancia temporal (estudios, trabajo, tratamiento médico)",
+          "text": "Seguiría pudiendo firmar contratos de temporada, pero de hasta seis meses; más allá, o encadenando más de dos, pasarían a ser alquiler de vivienda habitual.",
+          "locator": "Artículo 9 bis"
+        }
+      ],
+      "indirect_effects": [
+        {
+          "kind": "beneficio_esperado",
+          "text": "Podría devolver viviendas al alquiler habitual: el Banco de España señala que el alquiler de temporada, sin límites de renta ni prórrogas obligatorias, empuja a los propietarios a llevar allí su oferta.",
+          "evidence": "organismo_publico",
+          "source": "Banco de España, Documento Ocasional 2432 (2024)",
+          "locator": "pág. 29",
+          "url": "https://www.bde.es/f/webbe/SES/Secciones/Publicaciones/PublicacionesSeriadas/DocumentosOcasionales/24/Fich/do2432.pdf"
+        },
+        {
+          "kind": "beneficio_esperado",
+          "text": "Protegería a quien alquila una habitación o un piso por temporada sin tener otra opción, frente al uso de estos contratos para esquivar la ley de alquileres.",
+          "evidence": "debate",
+          "source": "Debate de toma en consideración, Diario de Sesiones del Pleno núm. 62 (17-09-2024)",
+          "locator": "pág. 7",
+          "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-62.PDF"
+        },
+        {
+          "kind": "riesgo_senalado",
+          "text": "Estudiantes, personas en prácticas o trabajadores desplazados que necesitan quedarse entre seis y doce meses podrían encontrar menos pisos adecuados.",
+          "evidence": "debate",
+          "source": "Debate de toma en consideración, Diario de Sesiones del Pleno núm. 62 (17-09-2024)",
+          "locator": "pág. 12",
+          "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-62.PDF"
+        },
+        {
+          "kind": "riesgo_senalado",
+          "text": "Si los propietarios se sienten menos seguros, parte de las viviendas podría retirarse, venderse o alquilarse en negro en vez de pasar al alquiler habitual.",
+          "evidence": "debate",
+          "source": "Debate de toma en consideración, Diario de Sesiones del Pleno núm. 62 (17-09-2024)",
+          "locator": "pág. 12",
+          "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-62.PDF"
+        },
+        {
+          "kind": "riesgo_senalado",
+          "text": "Acreditar la causa (por ejemplo, un tratamiento médico) podría obligar a enseñar al propietario datos personales delicados.",
+          "evidence": "debate",
+          "source": "Debate de toma en consideración, Diario de Sesiones del Pleno núm. 62 (17-09-2024)",
+          "locator": "pág. 17",
+          "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-62.PDF"
+        }
+      ],
+      "gaps": "Es una proposición de ley de grupos parlamentarios: no lleva memoria oficial de impacto y no hay una estimación pública de cuántos contratos de temporada se firman en España.",
+      "review": {"status": "draft", "drafted_by": "claude-opus-5-5 (sesión principal)", "drafted_at": "2026-10-13", "human_reviewed": false}
+    },
+    "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion086/20241217/Votacion001/VOT_20241217205720.json": {
+      "question_id": "vivienda-alquiler-temporada",
+      "facts": ["ine-ecv-2025-tenencia", "bde-2024-alquiler-temporada"],
+      "direct_effects": [
+        {
+          "actor": "Inquilinos de temporada y de habitaciones",
+          "text": "Su contrato contaría como alquiler de vivienda habitual si la causa no se especifica y comprueba, o si pasa de nueve meses; podrían irse tras el primer mes avisando con diez días.",
+          "locator": "Artículo único, apartados 1, 4 y 5"
+        },
+        {
+          "actor": "Propietarios que alquilan por temporada",
+          "text": "Tendrían que especificar y comprobar la causa, atender avisos de averías en cinco días hábiles y pedir como mucho una mensualidad de garantía adicional.",
+          "locator": "Artículo único, apartados 1, 6 y 7"
+        },
+        {
+          "actor": "Comunidades autónomas",
+          "text": "Donde ya tengan una ley propia sobre esta materia, se aplicaría la autonómica.",
+          "locator": "Artículo único, apartado 8"
+        }
+      ],
+      "indirect_effects": [
+        {
+          "kind": "beneficio_esperado",
+          "text": "Podría devolver viviendas al alquiler habitual: el Banco de España señala que el alquiler de temporada, sin límites de renta ni prórrogas obligatorias, empuja a los propietarios a llevar allí su oferta.",
+          "evidence": "organismo_publico",
+          "source": "Banco de España, Documento Ocasional 2432 (2024)",
+          "locator": "pág. 29",
+          "url": "https://www.bde.es/f/webbe/SES/Secciones/Publicaciones/PublicacionesSeriadas/DocumentosOcasionales/24/Fich/do2432.pdf"
+        },
+        {
+          "kind": "beneficio_esperado",
+          "text": "Evitaría que estos contratos sirvan para saltarse las obligaciones de la ley de alquileres y dejar sin protección a quien solo puede alquilar una habitación.",
+          "evidence": "debate",
+          "source": "Debate de toma en consideración, Diario de Sesiones del Pleno núm. 89 (17-12-2024)",
+          "locator": "pág. 16",
+          "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-89.PDF"
+        },
+        {
+          "kind": "riesgo_senalado",
+          "text": "Los estudiantes podrían tener más difícil irse a estudiar a otra ciudad si el alquiler de temporada desaparece en la práctica.",
+          "evidence": "debate",
+          "source": "Debate de toma en consideración, Diario de Sesiones del Pleno núm. 89 (17-12-2024)",
+          "locator": "pág. 22",
+          "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-89.PDF"
+        },
+        {
+          "kind": "riesgo_senalado",
+          "text": "Los pequeños propietarios, que temen sobre todo el impago, podrían sacar más viviendas del mercado del alquiler.",
+          "evidence": "debate",
+          "source": "Debate de toma en consideración, Diario de Sesiones del Pleno núm. 89 (17-12-2024)",
+          "locator": "pág. 19",
+          "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-89.PDF"
+        }
+      ],
+      "gaps": "Es una proposición de ley de grupos parlamentarios: no lleva memoria oficial de impacto y no hay una estimación pública de cuántos contratos de temporada se firman en España.",
+      "review": {"status": "draft", "drafted_by": "claude-opus-5-5 (sesión principal)", "drafted_at": "2026-10-13", "human_reviewed": false}
+    },
+    "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion135/20251007/Votacion002/VOT_20251007214330.json": {
+      "question_id": "vivienda-pisos-turisticos",
+      "facts": ["ine-vut-2026-05", "ts-2026-registro-unico"],
+      "direct_effects": [
+        {
+          "actor": "Plataformas de alquiler turístico",
+          "text": "Tendrían que comprobar la licencia o el registro y su titular antes de publicar; permitir publicar o contratar un piso sin verificar se multaría con 50.001 a 1.000.000 €.",
+          "locator": "Artículos 4, 9, 10, 15, 17, 18 y 20"
+        },
+        {
+          "actor": "Anfitriones sin licencia",
+          "text": "No podrían anunciar ni alquilar su piso turístico en plataformas.",
+          "locator": "Artículos 5, 7 y 11"
+        },
+        {
+          "actor": "Anfitriones con licencia",
+          "text": "Sus anuncios mostrarían el número de licencia, cuántos alojamientos tienen y si son persona física o empresa.",
+          "locator": "Artículo 6"
+        },
+        {
+          "actor": "Administraciones",
+          "text": "Una unidad especializada revisaría periódicamente las plataformas y avisaría de los anuncios que incumplen.",
+          "locator": "Artículo 25; Disposición adicional tercera"
+        }
+      ],
+      "indirect_effects": [
+        {
+          "kind": "beneficio_esperado",
+          "text": "Menos pisos turísticos ilegales podría aliviar los alquileres en los barrios más turísticos: en Barcelona, más actividad de Airbnb subió los alquileres un 1,9 % en el barrio medio y un 7 % en el 10 % de barrios con más pisos turísticos.",
+          "evidence": "estudio",
+          "source": "García-López, Jofre-Monseny, Martínez-Mazza y Segú (2020), Journal of Urban Economics 119",
+          "locator": "resumen",
+          "url": "https://doi.org/10.1016/j.jue.2020.103278"
+        },
+        {
+          "kind": "beneficio_esperado",
+          "text": "Los anuncios ilegales que ya se retiraron no podrían volver a publicarse, porque la plataforma tendría que verificar antes de publicar y no después.",
+          "evidence": "debate",
+          "source": "Debate de toma en consideración, Diario de Sesiones del Pleno núm. 140 (07-10-2025)",
+          "locator": "pág. 22",
+          "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-140.PDF"
+        },
+        {
+          "kind": "beneficio_esperado",
+          "text": "Quitaría competencia desleal a quien tiene licencia y paga impuestos por su actividad.",
+          "evidence": "debate",
+          "source": "Debate de toma en consideración, Diario de Sesiones del Pleno núm. 140 (07-10-2025)",
+          "locator": "págs. 22 y 32",
+          "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-140.PDF"
+        },
+        {
+          "kind": "riesgo_senalado",
+          "text": "Podría duplicar o chocar con leyes autonómicas de turismo que ya exigen licencia y sancionan a las plataformas, con el consiguiente conflicto de competencias.",
+          "evidence": "debate",
+          "source": "Debate de toma en consideración, Diario de Sesiones del Pleno núm. 140 (07-10-2025)",
+          "locator": "págs. 28 y 29",
+          "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-140.PDF"
+        },
+        {
+          "kind": "riesgo_senalado",
+          "text": "Más control podría empujar parte de la oferta al mercado negro sin bajar los precios.",
+          "evidence": "debate",
+          "source": "Debate de toma en consideración, Diario de Sesiones del Pleno núm. 140 (07-10-2025)",
+          "locator": "pág. 34",
+          "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-140.PDF"
+        }
+      ],
+      "gaps": "Es una proposición de ley de un grupo parlamentario: no lleva memoria oficial de impacto. El estudio citado mide Barcelona antes de esta norma; no hay una estimación de cuántos anuncios ilegales siguen activos.",
+      "review": {"status": "draft", "drafted_by": "claude-opus-5-5 (sesión principal)", "drafted_at": "2026-10-13", "human_reviewed": false}
+    },
+    "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion099/20250318/Votacion001/VOT_20250318201321.json": {
+      "question_id": "vivienda-okupacion",
+      "facts": ["interior-2024-ocupacion", "ine-censo-2021-vacias", "cgpj-2024-lanzamientos"],
+      "direct_effects": [
+        {
+          "actor": "Propietarios, poseedores legítimos y entidades de vivienda social",
+          "text": "Podrían pedir recuperar de inmediato un inmueble ocupado; si los ocupantes no aportan título en 48 horas (vía penal) o cinco días (vía civil), se ordena el desalojo.",
+          "locator": "Artículo uno, apartado Tres; Artículo cuatro, apartados Uno y Cinco"
+        },
+        {
+          "actor": "Ocupantes sin título",
+          "text": "Sus casos dejarían de exigir la información sobre vulnerabilidad y quedarían fuera de la suspensión de desahucios de hogares vulnerables; se avisaría a servicios sociales en el procedimiento penal.",
+          "locator": "Artículo uno, apartado Tres; Artículo dos; Artículo cuatro, apartados Dos a Cuatro"
+        },
+        {
+          "actor": "Juzgados y policía",
+          "text": "La policía podría desalojar al momento en delito flagrante (entradas de las últimas 48 horas) y la usurpación leve iría a juicio inmediato en el juzgado de guardia.",
+          "locator": "Artículo uno, apartados Dos y Cuatro"
+        }
+      ],
+      "indirect_effects": [
+        {
+          "kind": "beneficio_esperado",
+          "text": "Con menos miedo a una ocupación larga, más propietarios podrían volver a alquilar, también a familias con pocos ingresos.",
+          "evidence": "debate",
+          "source": "Debate de toma en consideración, Diario de Sesiones del Pleno núm. 103 (18-03-2025)",
+          "locator": "pág. 9",
+          "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-103.PDF"
+        },
+        {
+          "kind": "beneficio_esperado",
+          "text": "Acortar los plazos quitaría negocio a redes que cobran a familias vulnerables por instalarlas en pisos vacíos.",
+          "evidence": "debate",
+          "source": "Debate de toma en consideración, Diario de Sesiones del Pleno núm. 103 (18-03-2025)",
+          "locator": "págs. 8 y 9",
+          "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-103.PDF"
+        },
+        {
+          "kind": "riesgo_senalado",
+          "text": "Muchos pisos ocupados lo están por familias vulnerables sin adónde ir: desalojar primero y buscar solución después podría dejarlas en la calle.",
+          "evidence": "debate",
+          "source": "Debate de toma en consideración, Diario de Sesiones del Pleno núm. 103 (18-03-2025)",
+          "locator": "págs. 12 y 15",
+          "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-103.PDF"
+        },
+        {
+          "kind": "riesgo_senalado",
+          "text": "Trataría con la misma urgencia entrar en el hogar de alguien que ocupar un piso vacío de un banco o un fondo, cuando son situaciones muy distintas.",
+          "evidence": "debate",
+          "source": "Debate de toma en consideración, Diario de Sesiones del Pleno núm. 103 (18-03-2025)",
+          "locator": "pág. 15",
+          "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-103.PDF"
+        }
+      ],
+      "gaps": "Es una proposición de ley de un grupo parlamentario: no lleva memoria oficial de impacto. Las estadísticas oficiales cuentan denuncias, no viviendas ocupadas en un momento dado, ni cuántas son de particulares o de grandes propietarios.",
+      "review": {"status": "draft", "drafted_by": "claude-opus-5-5 (sesión principal)", "drafted_at": "2026-10-13", "human_reviewed": false}
+    },
+    "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion179/20260519/Votacion001/VOT_20260519203502.json": {
+      "question_id": "vivienda-okupacion",
+      "facts": ["interior-2024-ocupacion", "ine-censo-2021-vacias", "cgpj-2024-lanzamientos"],
+      "direct_effects": [
+        {
+          "actor": "Ocupantes sin título",
+          "text": "Ocupar un inmueble que no es morada se castigaría con cárcel (6 a 18 meses; 1 a 3 años con violencia); tendrían 24 horas para irse o acreditar título y no podrían empadronarse.",
+          "locator": "Artículo 4, apartado Dos; Artículo 5, apartado Dos; Artículo 8"
+        },
+        {
+          "actor": "Propietarios y poseedores legítimos (personas o empresas)",
+          "text": "Podrían pedir la recuperación inmediata de su vivienda; en comunidades de vecinos, también el presidente ante actividades prohibidas.",
+          "locator": "Artículos 3, 6 y 7"
+        },
+        {
+          "actor": "Quien difunda cómo ocupar o señale pisos",
+          "text": "Su conducta pasaría a ser delito, igual que ocupar en grupo organizado.",
+          "locator": "Artículo 4, apartados Dos y Tres"
+        },
+        {
+          "actor": "Ayuntamientos y servicios sociales",
+          "text": "Darían de baja del padrón a los ocupantes; servicios sociales serían avisados si hay menores o personas vulnerables.",
+          "locator": "Artículo 5, apartado Dos; Artículo 8"
+        }
+      ],
+      "indirect_effects": [
+        {
+          "kind": "beneficio_esperado",
+          "text": "Si los propietarios temen menos una ocupación, más viviendas podrían salir al alquiler.",
+          "evidence": "debate",
+          "source": "Debate de toma en consideración, Diario de Sesiones del Pleno núm. 185 (19-05-2026)",
+          "locator": "pág. 8",
+          "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-185.PDF"
+        },
+        {
+          "kind": "beneficio_esperado",
+          "text": "Las ocupaciones largas atraen a redes que venden llaves o cobran alquileres ilegales; acortarlas les quitaría negocio.",
+          "evidence": "debate",
+          "source": "Debate de toma en consideración, Diario de Sesiones del Pleno núm. 185 (19-05-2026)",
+          "locator": "pág. 17",
+          "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-185.PDF"
+        },
+        {
+          "kind": "riesgo_senalado",
+          "text": "Sin empadronamiento, familias en extrema necesidad perderían el acceso a la sanidad, la educación y los servicios sociales.",
+          "evidence": "debate",
+          "source": "Debate de toma en consideración, Diario de Sesiones del Pleno núm. 185 (19-05-2026)",
+          "locator": "pág. 21",
+          "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-185.PDF"
+        },
+        {
+          "kind": "riesgo_senalado",
+          "text": "Subir las penas apenas disuadiría a quien ocupa, y podría chocar con la definición de morada que fija el Tribunal Constitucional.",
+          "evidence": "debate",
+          "source": "Debate de toma en consideración, Diario de Sesiones del Pleno núm. 185 (19-05-2026)",
+          "locator": "págs. 12 y 25",
+          "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-185.PDF"
+        }
+      ],
+      "gaps": "Es una proposición de ley de un grupo parlamentario: no lleva memoria oficial de impacto. Las estadísticas oficiales cuentan denuncias, no viviendas ocupadas en un momento dado, ni cuántas son de particulares o de grandes propietarios.",
+      "review": {"status": "draft", "drafted_by": "claude-opus-5-5 (sesión principal)", "drafted_at": "2026-10-13", "human_reviewed": false}
+    }
+  }
+}

@@ -41,6 +41,7 @@ const AGREEMENT_ICONS = { match: "✓", partial: "≈", clash: "✗", none: "–
 const POOL_PATH = "/citizen/data/voting_aid_pool_v1.json";
 const HIGHLIGHTS_PATH = "/citizen/data/voting_aid_highlights_v1.json";
 const BULLETS_PATH = "/citizen/data/voting_aid_vote_bullets_v1.json";
+const IMPACTS_PATH = "/citizen/data/voting_aid_vote_impacts_v1.json";
 
 // ---------------------------------------------------------------------------
 // State persistence (local only; ids of questions the page has not loaded are kept, never dropped).
@@ -211,6 +212,7 @@ function AxisEvidence({ question, parties }) {
         «A favor de» y «en contra de» indican qué voto cuenta como estar de acuerdo con la afirmación. Qué votación va a cada tema lo
         decidió una IA leyendo el texto oficial; falta la revisión humana.
       </p>
+      <Ramifications question={question} />
       <AskAiToggle
         label="¿Quieres más detalle? Que te lo explique una IA"
         opts={{ mode: "explain" }}
@@ -519,6 +521,113 @@ function WhatsInside({ question, only = null, embedded = false }) {
   );
 }
 
+const EVIDENCE_LABELS = { organismo_publico: "Organismo público", estudio: "Estudio", debate: "Debate en el Congreso" };
+
+function SourceLink({ href, children }) {
+  return (
+    <a href={href} rel="noopener noreferrer" target="_blank">
+      {children}
+    </a>
+  );
+}
+
+/**
+ * «Ramificaciones»: who a vote affects and how many they are (official figures), and, folded, what changes
+ * for each group and the knock-on effects someone expects or fears, each with its source. Shown before
+ * answering, so it never names who argued what: the Diario de Sesiones link says it.
+ */
+function Ramifications({ question }) {
+  const [open, setOpen] = useState(false);
+  const r = question.ramifications;
+  if (!r) return null;
+  const votes = r.votes.filter((v) => v.direct.length || v.indirect.length || v.gaps);
+  const many = votes.length > 1;
+  // Figures come from official sources; only the effects carry a review status.
+  const review = !votes.length ? "" : votes.some((v) => v.review === "draft") ? " · Efectos: borrador sin revisión humana" : " · Efectos: verificados con IA, sin revisión humana";
+  return (
+    <div className="votingAidRamif">
+      {r.facts.length ? (
+        <>
+          <p className="votingAidVoted__title">
+            <span aria-hidden="true">🧭</span> A quién afecta
+          </p>
+          <ul className="votingAidRamif__facts">
+            {r.facts.map((f) => (
+              <li key={f.id}>
+                {f.text}{" "}
+                <span className="votingAidVoted__loc">
+                  <SourceLink href={f.url}>{f.source}</SourceLink>, {f.period}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </>
+      ) : null}
+      {votes.length ? (
+        <p className="votingAidVoted__actions">
+          <button aria-expanded={open} className="votingAidLinkButton" onClick={() => setOpen((o) => !o)} type="button">
+            {open ? "Ocultar consecuencias" : "Ver qué cambia para cada colectivo y posibles consecuencias"}
+          </button>
+        </p>
+      ) : null}
+      {open
+        ? votes.map((v) => {
+            const benefits = v.indirect.filter((e) => e.kind === "beneficio_esperado");
+            const risks = v.indirect.filter((e) => e.kind === "riesgo_senalado");
+            return (
+              <div className="votingAidRamif__vote" key={v.vote_event_id}>
+                {many && v.vote_date ? <p className="votingAidRamif__when">Votación del {formatDate(v.vote_date)}</p> : null}
+                {v.direct.length ? (
+                  <>
+                    <p className="votingAidRamif__head">Qué cambiaría para cada colectivo</p>
+                    <ul className="votingAidVoted__list">
+                      {v.direct.map((d) => (
+                        <li key={d.actor}>
+                          <strong>{d.actor}:</strong> {d.text} <span className="votingAidVoted__loc">{d.locator}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </>
+                ) : null}
+                {[
+                  ["Lo que se espera que mejore", benefits, "plus"],
+                  ["Riesgos que se han señalado", risks, "minus"],
+                ].map(([title, list, tone]) =>
+                  list.length ? (
+                    <div className={`votingAidRamif__side votingAidRamif__side--${tone}`} key={tone}>
+                      <p className="votingAidRamif__head">{title}</p>
+                      <ul className="votingAidVoted__list">
+                        {list.map((e) => (
+                          <li key={e.text}>
+                            {e.text}{" "}
+                            <span className="votingAidVoted__loc">
+                              <span className="votingAidRamif__evidence">{EVIDENCE_LABELS[e.evidence] || e.evidence}</span>{" "}
+                              <SourceLink href={e.url}>{e.source}</SourceLink>, {e.locator}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : null,
+                )}
+                {v.gaps ? (
+                  <p className="votingAidMuted votingAidRamif__gaps">
+                    <strong>Lo que no se sabe:</strong> {v.gaps}
+                  </p>
+                ) : null}
+              </div>
+            );
+          })
+        : null}
+      <p className="votingAidMuted votingAidVoted__src">
+        Cifras de fuentes oficiales.
+        {votes.length ? " Los efectos indirectos son previsiones con su fuente, no hechos; los del debate se resumen sin decir quién los dijo." : ""}
+        {review}
+      </p>
+    </div>
+  );
+}
+
 /**
  * «Qué se votaba»: plain-language bullets written from the official text (draft until reviewed), with a link
  * to the full text, the literal headings/points as evidence and the AI explanation for more detail.
@@ -597,6 +706,7 @@ function WhatVoted({ question, parties }) {
           </div>
         );
       })}
+      <Ramifications question={question} />
       <AskAiToggle
         label="¿Quieres más detalle? Que te lo explique una IA"
         opts={{ mode: "explain" }}
@@ -1492,6 +1602,7 @@ export default function VotingAidClient({ snapshot, startStatementId = null, ver
   const [poolStatus, setPoolStatus] = useState("loading");
   const [highlights, setHighlights] = useState(null);
   const [voteBullets, setVoteBullets] = useState(null);
+  const [voteImpacts, setVoteImpacts] = useState(null);
   const [state, setState] = useState(() => cleanState(null));
   const [loaded, setLoaded] = useState(false);
   const [fromShare, setFromShare] = useState(false);
@@ -1508,8 +1619,8 @@ export default function VotingAidClient({ snapshot, startStatementId = null, ver
   const startedAt = useRef(false);
 
   const questions = useMemo(
-    () => attachHighlights(buildQuestions(snapshot, pool), highlights, voteBullets),
-    [snapshot, pool, highlights, voteBullets],
+    () => attachHighlights(buildQuestions(snapshot, pool), highlights, voteBullets, voteImpacts),
+    [snapshot, pool, highlights, voteBullets, voteImpacts],
   );
   const scoredQuestions = useMemo(
     () => (state.excludeOmnibus ? questions.filter((q) => !q.omnibus) : questions),
@@ -1528,7 +1639,7 @@ export default function VotingAidClient({ snapshot, startStatementId = null, ver
   );
   const answeredCount = useMemo(() => Object.keys(state.answers).filter((id) => questionsById[id]).length, [state.answers, questionsById]);
 
-  // Official-text highlights and «Qué se votaba» bullets are optional: questions work without them.
+  // Official-text highlights, «Qué se votaba» bullets and «Ramificaciones» are optional: questions work without them.
   useEffect(() => {
     let cancelled = false;
     fetch(withBasePath(HIGHLIGHTS_PATH))
@@ -1541,6 +1652,12 @@ export default function VotingAidClient({ snapshot, startStatementId = null, ver
       .then((r) => (r.ok ? r.json() : null))
       .then((data) => {
         if (!cancelled && data) setVoteBullets(data);
+      })
+      .catch(() => {});
+    fetch(withBasePath(IMPACTS_PATH))
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data) => {
+        if (!cancelled && data) setVoteImpacts(data);
       })
       .catch(() => {});
     return () => {

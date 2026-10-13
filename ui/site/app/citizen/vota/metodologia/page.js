@@ -10,6 +10,7 @@ import {
   ATLAS_QA_XIV,
   AXES_SEED,
   BULLETS_SEED,
+  IMPACTS_SEED,
   CLASSIFICATIONS_SEED,
   PROMPTS_DIR,
   REPO_URL,
@@ -154,9 +155,10 @@ export default function VotingAidMethodologyPage() {
           <a href="#paso-4">4. Modo infinito</a>
           <a href="#paso-5">5. Texto oficial</a>
           <a href="#paso-6">6. «Qué se votaba»</a>
-          <a href="#paso-7">7. Revisión</a>
-          <a href="#paso-8">8. Cálculo</a>
-          <a href="#paso-9">9. Privacidad e IA</a>
+          <a href="#paso-7">7. Ramificaciones</a>
+          <a href="#paso-8">8. Revisión</a>
+          <a href="#paso-9">9. Cálculo</a>
+          <a href="#paso-10">10. Privacidad e IA</a>
           <a href="#versiones">Versiones</a>
           <a href="#modelos">Modelos</a>
           <a href="#prompts">Prompts</a>
@@ -251,7 +253,7 @@ export default function VotingAidMethodologyPage() {
           </li>
           <li>
             La versión anterior ({fmt(m.snapshotV1.meta?.quality?.statements_total)} afirmaciones con 1 a 3 votaciones cada una,{" "}
-            <Code rel={STATEMENTS_SEED} />) sigue publicada para que los enlaces compartidos funcionen; su revisión está en el paso 7.
+            <Code rel={STATEMENTS_SEED} />) sigue publicada para que los enlaces compartidos funcionen; su revisión está en el paso 8.
           </li>
         </ul>
         {sample ? (
@@ -474,7 +476,37 @@ export default function VotingAidMethodologyPage() {
         </p>
       </Step>
 
-      <Step n={7} title="Revisión independiente de las afirmaciones">
+      <Step n={7} title="«Ramificaciones»: a quién afecta y qué puede pasar después (piloto)">
+        <p>
+          Una ley describe una regla, pero para juzgarla hace falta saber a cuánta gente toca y qué consecuencias puede tener. Debajo de
+          «Qué se votaba», algunas preguntas muestran tres capas con distinto grado de certeza:
+        </p>
+        <ul className="vaMethod__list">
+          <li>
+            <strong>A quién afecta:</strong> solo cifras oficiales (INE, Banco de España, Interior, CGPJ, BOE…) con su periodo y
+            enlace. Ningún número sale de la memoria de una IA.
+          </li>
+          <li>
+            <strong>Qué cambiaría para cada colectivo:</strong> del texto oficial, con su localizador, incluido el colectivo que sale peor
+            parado.
+          </li>
+          <li>
+            <strong>Posibles consecuencias:</strong> beneficios esperados y riesgos señalados, siempre de los dos tipos, cada uno con su
+            fuente: un organismo público, un estudio publicado o un argumento del debate con su página del Diario de Sesiones (sin decir
+            quién lo dijo, porque se ve antes de responder). Son previsiones, no hechos.
+          </li>
+        </ul>
+        <p>
+          Piloto: {fmt(m.impactsMeta.votes)} votaciones de vivienda y {fmt(m.impactsMeta.facts)} cifras oficiales; de los efectos
+          indirectos, {fmt(m.impactsMeta.indirect_by_evidence?.debate)} vienen del debate, {fmt(m.impactsMeta.indirect_by_evidence?.organismo_publico)}{" "}
+          de organismos públicos y {fmt(m.impactsMeta.indirect_by_evidence?.estudio)} de estudios. Las proposiciones de ley de los grupos
+          no llevan memoria oficial de impacto, y la tarjeta lo dice. Las preguntas a la IA piden lo mismo: escala, efectos por colectivo
+          y consecuencias en ambos sentidos. Datos y reglas en <Code rel={IMPACTS_SEED} />; validador en{" "}
+          <Code rel="scripts/export_voting_aid_vote_impacts.py" />.
+        </p>
+      </Step>
+
+      <Step n={8} title="Revisión independiente de las afirmaciones">
         <p>
           {m.statementReviewMethod ||
             "Dos revisores IA independientes por afirmación leyeron el texto oficial y juzgaron el sentido del voto y la redacción, sin ver cómo votaron los partidos."}
@@ -507,7 +539,7 @@ export default function VotingAidMethodologyPage() {
         </p>
       </Step>
 
-      <Step n={8} title="Cómo se calcula tu coincidencia">
+      <Step n={9} title="Cómo se calcula tu coincidencia">
         <ul className="vaMethod__list">
           <li>Tus respuestas: de acuerdo / sí = +1, neutral / me da igual = 0, en desacuerdo / no = −1.</li>
           <li>
@@ -528,7 +560,7 @@ export default function VotingAidMethodologyPage() {
         </p>
       </Step>
 
-      <Step n={9} title="Privacidad y los botones «Pregúntale a una IA»">
+      <Step n={10} title="Privacidad y los botones «Pregúntale a una IA»">
         <ul className="vaMethod__list">
           <li>Tus respuestas se guardan solo en tu navegador (localStorage). No hay servidor que las reciba.</li>
           <li>Compartir es voluntario y usa el fragmento de la URL (<code>#r=…</code>), que los navegadores no envían al servidor.</li>
@@ -797,6 +829,10 @@ export default function VotingAidMethodologyPage() {
           <li>
             <strong>Sin revisión humana independiente.</strong> Afirmaciones, sentido del voto y viñetas los ha revisado otra IA. Una IA
             revisando a otra reduce errores, pero comparte puntos ciegos.
+          </li>
+          <li>
+            <strong>«Ramificaciones» solo en un piloto y sin revisión humana.</strong> Cubren pocas votaciones de vivienda; la mayoría de
+            sus efectos indirectos vienen del debate parlamentario, porque las proposiciones de ley no llevan evaluación oficial de impacto.
           </li>
           <li>
             <strong>Qué votación va a cada tema lo decide una IA.</strong> La segunda lectura a ciegas coincide en el eje principal el{" "}
