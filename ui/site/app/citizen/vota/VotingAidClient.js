@@ -1071,12 +1071,16 @@ function CrumbMenu({ label, title, children }) {
 
 const CRUMB_MARKS = { current: "▶", answered: "✓", split: "⑂", skipped: "↷", open: "○" };
 
+/** The question's topic list and its neighbours in it (what ‹ › and the ← → keys step through). */
+function topicNeighbors(topics, questionsById, id) {
+  const ids = topics.find((g) => g.topic === questionTopic(questionsById[id]))?.ids || [];
+  const pos = ids.indexOf(id);
+  return { ids, prev: pos > 0 ? ids[pos - 1] : null, next: pos >= 0 && pos < ids.length - 1 ? ids[pos + 1] : null };
+}
+
 function TopicNav({ topics, questionsById, currentId, focusTopic, answers, skipped, split, onTopic, onQuestion }) {
   const currentTopic = questionTopic(questionsById[currentId]);
-  const ids = topics.find((g) => g.topic === currentTopic)?.ids || [];
-  const pos = ids.indexOf(currentId);
-  const prev = pos > 0 ? ids[pos - 1] : null;
-  const next = pos >= 0 && pos < ids.length - 1 ? ids[pos + 1] : null;
+  const { ids, prev, next } = topicNeighbors(topics, questionsById, currentId);
   const keyIds = ids.filter((id) => questionsById[id]?.source === "curated");
   const voteIds = ids.filter((id) => questionsById[id]?.source !== "curated");
   // Position inside its own list (key questions or votes), matching the counts of the topic menu.
@@ -2178,14 +2182,26 @@ export default function VotingAidClient({ snapshot, startStatementId = null, ver
     scrollTop();
   }
 
-  // Keyboard: 1/2/3 answer, 4 «depende» (split), S skip, Enter next after the reveal.
+  // Keyboard: 1/2/3 answer, 4 «depende» (split), S skip, Enter next after the reveal, ← → previous/next question.
   useEffect(() => {
     if (view !== "play") return undefined;
     function onKey(event) {
-      if (event.altKey || event.ctrlKey || event.metaKey) return;
+      if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
       const tag = event.target?.tagName;
       if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
-      if (event.target?.closest?.(".votingAidCrumbs")) return; // the topic/question menus handle their own keys
+      if (event.target?.closest?.(".votingAidCrumbs__popover")) return; // an open topic/question menu handles its own keys
+      if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+        const here = revealId || currentId;
+        if (!here) return;
+        const { prev, next } = topicNeighbors(topics, questionsById, here);
+        const target = event.key === "ArrowLeft" ? prev : next;
+        if (target) {
+          event.preventDefault();
+          goPlay(target);
+        }
+        return;
+      }
+      if (event.target?.closest?.(".votingAidCrumbs")) return;
       if (revealId) {
         if (event.key === "Enter" && tag !== "BUTTON" && tag !== "A") {
           event.preventDefault();
@@ -2358,7 +2374,7 @@ export default function VotingAidClient({ snapshot, startStatementId = null, ver
                 <input checked={state.showReveal !== false} onChange={(e) => update({ ...state, showReveal: e.target.checked })} type="checkbox" />
                 Mostrar cómo votó cada partido después de responder
               </label>
-              <p className="votingAidMuted votingAidShortcuts">Atajos: 1 · 2 · 3 para responder, 4 «depende», S para saltar, Intro para seguir.</p>
+              <p className="votingAidMuted votingAidShortcuts">Atajos: 1 · 2 · 3 para responder, 4 «depende», S para saltar, Intro para seguir, ← → para ir a la pregunta anterior o siguiente.</p>
             </div>
             <MiniLeaderboard onOpen={() => show("results")} previousRanks={previousRanks} results={results} />
           </div>
