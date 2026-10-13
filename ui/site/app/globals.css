@@ -8528,3 +8528,66 @@ html.has-sideDrawer {
   }
 }
 .atlasToggle { display: block; margin: 8px 0; }
+
+/* «Depende» as a 4th, full-width answer: split a summary question into its concrete votes. */
+.votingAidAnswer--split {
+  grid-column: 1 / -1;
+  justify-content: flex-start;
+  min-height: 48px;
+  padding: 8px 14px;
+  border-style: dashed;
+  text-align: left;
+}
+
+.votingAidAnswer__body {
+  display: grid;
+  gap: 2px;
+}
+
+.votingAidAnswer__hint {
+  font-weight: 400;
+  font-size: 0.84rem;
+  line-height: 1.25;
+  color: var(--ink-muted);
+}
+
+/* Waze-style auto-advance: the border of «Siguiente» fills up, then the next question opens. */
+.votingAidNext {
+  position: relative;
+}
+
+.votingAidNext__ring {
+  position: absolute;
+  inset: -1px;
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
+  overflow: visible;
+  pointer-events: none;
+}
+
+.votingAidNext__ring rect {
+  fill: none;
+  stroke: #f5b13d;
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: votingAidNextFill linear forwards;
+}
+
+@keyframes votingAidNextFill {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .votingAidAnswer--split {
+    min-height: 44px;
+    padding: 6px 10px;
+  }
+
+  .votingAidAnswer__hint {
+    font-size: 0.78rem;
+  }
+}

@@ -822,18 +822,9 @@ function OtherVersionResults({ version, pool }) {
   );
 }
 
-function SplitOffer({ question, onSplit, prominent = false }) {
+function SplitOffer({ question, onSplit }) {
   const n = question.subIds?.length || 0;
   if (!n || !onSplit) return null;
-  if (!prominent) {
-    return (
-      <p className="votingAidSplit">
-        <button className="votingAidLinkButton" onClick={onSplit} type="button">
-          ¿Depende? Responde por partes ({n} votaciones concretas)
-        </button>
-      </p>
-    );
-  }
   return (
     <div className="votingAidNotice votingAidNotice--info votingAidSplit votingAidSplit--prominent">
       <p>
@@ -904,6 +895,24 @@ function QuestionCard({ question, parties, answer, important, onAnswer, onSkip, 
             {labels[value]}
           </button>
         ))}
+        {question.subIds?.length ? (
+          <button
+            aria-keyshortcuts="4"
+            className="votingAidAnswer votingAidAnswer--split"
+            onClick={onSplit}
+            type="button"
+          >
+            <span aria-hidden="true" className="votingAidAnswer__key">
+              4
+            </span>
+            <span className="votingAidAnswer__body">
+              Depende
+              <span className="votingAidAnswer__hint">
+                Responde por partes: {question.subIds.length} votaciones concretas en vez de esta pregunta resumen
+              </span>
+            </span>
+          </button>
+        ) : null}
       </div>
 
       {showSwipeHint ? (
@@ -925,7 +934,6 @@ function QuestionCard({ question, parties, answer, important, onAnswer, onSkip, 
           Saltar
         </button>
       </div>
-      <SplitOffer onSplit={onSplit} question={question} />
       {question.parent && parentLabel(question) ? <p className="votingAidMuted votingAidSplit">{parentLabel(question)}</p> : null}
       {question.source === "curated" && question.context && !question.axis_id ? (
         <details className="votingAidDetails">
@@ -1005,12 +1013,37 @@ function parentLabel(question) {
   return question.parentText ? `Parte de: «${question.parentText}»` : null;
 }
 
+const AUTO_NEXT_MS = 7000;
+
+/**
+ * Waze-style auto-advance: the «Siguiente» border fills up and then moves on by itself.
+ * Any touch, scroll or key press stops it (the user wants to read); reduced motion never auto-advances.
+ */
+function useAutoNext(resetKey) {
+  const [auto, setAuto] = useState(false);
+  useEffect(() => {
+    if (reducedMotion()) return undefined;
+    setAuto(true);
+    const stop = () => setAuto(false);
+    const events = ["pointerdown", "wheel", "touchmove", "keydown"];
+    // Listen from the next tick so the click that answered does not cancel its own reveal.
+    const t = setTimeout(() => events.forEach((e) => window.addEventListener(e, stop, { passive: true })), 0);
+    return () => {
+      clearTimeout(t);
+      events.forEach((e) => window.removeEventListener(e, stop));
+      setAuto(false);
+    };
+  }, [resetKey]);
+  return auto;
+}
+
 function RevealCard({ question, parties, answer, reactions, topBefore, onNext, onChange, onSplit }) {
   const msg = revealMessage(answer, reactions, topBefore);
   const nextRef = useRef(null);
   useEffect(() => {
     nextRef.current?.focus({ preventScroll: true });
   }, [question.statement_id]);
+  const autoNext = useAutoNext(question.statement_id);
   const totals = question.source === "pool" ? question.totals : null;
   const margin = totals ? Math.abs((totals[0] || 0) - (totals[1] || 0)) : null;
   return (
@@ -1021,7 +1054,7 @@ function RevealCard({ question, parties, answer, reactions, topBefore, onNext, o
       <p className="votingAidReveal__you">
         Tu respuesta: <strong>{answerLabel(question, answer)}</strong>
       </p>
-      {answer === "neutral" ? <SplitOffer onSplit={onSplit} prominent question={question} /> : null}
+      {answer === "neutral" ? <SplitOffer onSplit={onSplit} question={question} /> : null}
       <p className="votingAidReveal__msg">
         <span aria-hidden="true" className="votingAidReveal__emoji">
           {msg.emoji}
@@ -1065,7 +1098,25 @@ function RevealCard({ question, parties, answer, reactions, topBefore, onNext, o
         <ShareQuestionButton question={question} />
       </p>
       <div className="votingAidActions votingAidStickyBar">
-        <button className="votingAidButton votingAidButton--primary votingAidButton--big" onClick={onNext} ref={nextRef} type="button">
+        <button
+          className={`votingAidButton votingAidButton--primary votingAidButton--big votingAidNext${autoNext ? " is-auto" : ""}`}
+          onClick={onNext}
+          ref={nextRef}
+          title={autoNext ? "Pasa sola en unos segundos. Toca o desplázate para quedarte." : undefined}
+          type="button"
+        >
+          {autoNext ? (
+            <svg aria-hidden="true" className="votingAidNext__ring">
+              <rect
+                height="100%"
+                onAnimationEnd={onNext}
+                pathLength="100"
+                rx="9"
+                style={{ animationDuration: `${AUTO_NEXT_MS}ms` }}
+                width="100%"
+              />
+            </svg>
+          ) : null}
           Siguiente pregunta →
         </button>
         <button className="votingAidLinkButton" onClick={onChange} type="button">
@@ -1719,7 +1770,7 @@ export default function VotingAidClient({ snapshot, startStatementId = null, ver
     scrollTop();
   }
 
-  // Keyboard: 1/2/3 answer, S skip, Enter next after the reveal.
+  // Keyboard: 1/2/3 answer, 4 «depende» (split), S skip, Enter next after the reveal.
   useEffect(() => {
     if (view !== "play") return undefined;
     function onKey(event) {
@@ -1736,6 +1787,9 @@ export default function VotingAidClient({ snapshot, startStatementId = null, ver
       if (["1", "2", "3"].includes(event.key)) {
         event.preventDefault();
         answer(ANSWER_ORDER[Number(event.key) - 1]);
+      } else if (event.key === "4" && current?.subIds?.length) {
+        event.preventDefault();
+        splitStatement(current.statement_id);
       } else if (event.key === "s" || event.key === "S") {
         event.preventDefault();
         skip();
@@ -1869,7 +1923,7 @@ export default function VotingAidClient({ snapshot, startStatementId = null, ver
                 <input checked={state.showReveal !== false} onChange={(e) => update({ ...state, showReveal: e.target.checked })} type="checkbox" />
                 Mostrar cómo votó cada partido después de responder
               </label>
-              <p className="votingAidMuted votingAidShortcuts">Atajos: 1 · 2 · 3 para responder, S para saltar, Intro para seguir.</p>
+              <p className="votingAidMuted votingAidShortcuts">Atajos: 1 · 2 · 3 para responder, 4 «depende», S para saltar, Intro para seguir.</p>
             </div>
             <MiniLeaderboard onOpen={() => show("results")} previousRanks={previousRanks} results={results} />
           </div>
