@@ -42,6 +42,24 @@
     "by": "claude-sonnet-5-5 (revisión de cifras derivadas)",
     "at": "2026-10-13"
    }
+  },
+  "w048--mitma-2024-rce-galicia": {
+   "text": "La Red de Carreteras del Estado en Galicia medía 2.377 km en 2024 y soportó una intensidad media de 10.442 vehículos al día, con 9.059 millones de vehículos-km en el año.",
+   "period": "2024",
+   "source": "Ministerio de Transportes, Carreteras 2024, tabla 1.2.15.2",
+   "url": "https://www.transportes.gob.es/recursos_mfom/comodin/recursos/carreteras_2024.pdf"
+  },
+  "w048--mitma-ap9-usuarios": {
+   "text": "La AP-9 tiene 219,6 km de trazado y unos 71.553 usuarios de media pagan cada día por usarla; desde el 1 de enero de 2025 hay un 50 % de descuento para ligeros con más de 20 viajes al mes y para todos los pesados.",
+   "period": "2025 (esquema vigente en la página consultada en octubre de 2026)",
+   "source": "Ministerio de Transportes, Esquema de bonificaciones de la autopista AP-9",
+   "url": "https://www.transportes.gob.es/carreteras/nuestra-red/autopistas-peaje/esquema-de-bonificaciones-de-la-autopista-ap-9"
+  },
+  "w048--mitma-2024-rce-navarra": {
+   "text": "La Red de Carreteras del Estado en Navarra medía 39,66 km en 2024 y soportó una intensidad media de 15.551 vehículos al día.",
+   "period": "2024",
+   "source": "Ministerio de Transportes, Carreteras 2024, tabla 1.2.15.2",
+   "url": "https://www.transportes.gob.es/recursos_mfom/comodin/recursos/carreteras_2024.pdf"
   }
  },
  "statements": {},
@@ -49,9 +67,9 @@
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion019/20240206/Votacion003/VOT_20240206213124.json": {
    "question_id": "pool-modelo-territorial",
    "facts": [
-    "eje-territorial-autogobierno--ine-ecp-2025-poblacion-ccaa",
-    "eje-territorial-autogobierno--eurostat-2024-transporte",
-    "eje-regulacion-economica--ine-tf-2025-viajeros"
+    "w048--mitma-2024-rce-galicia",
+    "w048--mitma-ap9-usuarios",
+    "eje-territorial-autogobierno--ine-ecp-2025-poblacion-ccaa"
    ],
    "direct_effects": [
     {
@@ -80,13 +98,19 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Carreteras estatales y AP-9 de Galicia sustituyen gasto nacional",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion060/20240918/Votacion006/VOT_20240919102654.json": {
    "question_id": "pool-modelo-territorial",
    "facts": [
     "eje-territorial-autogobierno--ine-ecp-2025-poblacion-ccaa",
-    "eje-territorial-autogobierno--eurostat-2024-transporte"
+    "w048--mitma-2024-rce-navarra"
    ],
    "direct_effects": [
     {
@@ -110,6 +134,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Red estatal navarra sustituye gasto nacional en transporte",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion079/20241121/Votacion045/VOT_20241121173842.json": {

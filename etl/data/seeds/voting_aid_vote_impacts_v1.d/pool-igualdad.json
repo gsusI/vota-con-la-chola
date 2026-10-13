@@ -5,6 +5,12 @@
    "period": "2021",
    "source": "INE, Encuesta de Características Esenciales de la Población y las Viviendas 2021, tabla 56900",
    "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=56900"
+  },
+  "w048--mdsa-2024-tutelas-exlege": {
+   "text": "A 31 de diciembre de 2024 había 32.146 menores bajo tutela «ex lege» de la entidad pública por desamparo (el 59 % de los 55.010 atendidos por el sistema de protección); ese año se dictaron 12.623 tutelas nuevas.",
+   "period": "31 de diciembre de 2024",
+   "source": "Boletín de datos estadísticos de medidas de protección a la infancia, nº 27 (datos 2024), tabla 1",
+   "url": "https://www.juventudeinfancia.gob.es/sites/default/files/boletines_estadisticos/BoletinProteccion2024.pdf"
   }
  },
  "statements": {},
@@ -67,7 +73,7 @@
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion175/20260428/Votacion002/VOT_20260428200329.json": {
    "question_id": "pool-igualdad",
    "facts": [
-    "eje-inmigracion--opi-2026-06-menores-extutelados"
+    "w048--mdsa-2024-tutelas-exlege"
    ],
    "direct_effects": [
     {
@@ -96,6 +102,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Tutelas ex lege 2024 sustituyen cifra de extutelados migrantes",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   }
  }

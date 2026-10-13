@@ -169,7 +169,8 @@ Mandatory loop for any large subagent job (do not launch a full wave blind):
    for a person. Reviewer outputs are one file per item (e.g. `kit apply-reviews <dir>` stamps `review` on facts).
 Reference costs (2026-10-13): drafting old prompt ~0.7 M input tokens per vote; efficient mode ~0.15–0.4 M;
 derived-figure review: pilot 0.7 M per figure → 0.35 M after the first fixes → 0.15–0.25 M
-once the kit fetched+computed in one python call (outliers were TLS-broken hosts and xlsx sources, then added to the kit).
+once the kit fetched+computed in one python call (outliers were TLS-broken hosts and xlsx sources, then added to the kit);
+generic-scale review: pilot 0.23 M per vote → 0.14–0.17 M at scale (50 agents, 447 votes, 74 M total).
 
 ## Working Agreement
 

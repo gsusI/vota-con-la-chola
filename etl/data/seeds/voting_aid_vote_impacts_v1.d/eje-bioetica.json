@@ -50,8 +50,8 @@
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion185/20260611/Votacion042/VOT_20260611145754.json": {
    "question_id": "eje-bioetica",
    "facts": [
-    "eje-bioetica--sanidad-eutanasia-2024-procesos",
-    "eje-bioetica--sanidad-eutanasia-2024-reclamaciones"
+    "eje-bioetica--sanidad-eutanasia-2024-reclamaciones",
+    "eje-bioetica--sanidad-eutanasia-2024-procesos"
    ],
    "direct_effects": [
     {
@@ -80,6 +80,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Reclamaciones ante comisión primero: son los recursos",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion177/20260430/Votacion012/VOT_20260430125200.json": {
@@ -110,6 +116,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "IVE 2024 ya mide el colectivo de la reforma",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion083/20241210/Votacion002/VOT_20241210202032.json": {
@@ -150,8 +162,8 @@
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion079/20241121/Votacion025/VOT_20241121173822.json": {
    "question_id": "eje-bioetica",
    "facts": [
-    "eje-bioetica--sanidad-ive-2024-total",
-    "eje-bioetica--sanidad-ive-2024-publica"
+    "eje-bioetica--sanidad-ive-2024-publica",
+    "eje-bioetica--sanidad-ive-2024-total"
    ],
    "direct_effects": [
     {
@@ -180,6 +192,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Sin cifra oficial de objetores; acceso público primero",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   }
  }

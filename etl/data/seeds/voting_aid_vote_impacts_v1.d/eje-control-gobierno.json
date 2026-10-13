@@ -180,6 +180,42 @@
    "period": "texto vigente",
    "source": "BOE, Constitución Española, art. 88",
    "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1978-31229"
+  },
+  "w011--sepi-air-europa-2020": {
+   "text": "En noviembre de 2020 el Consejo de Ministros autorizó a Air Europa una ayuda de 475 millones de euros del fondo de rescate de empresas estratégicas: 240 millones en préstamo participativo y 235 en préstamo ordinario.",
+   "period": "3 de noviembre de 2020",
+   "source": "La Moncloa, Consejo de Ministros: Apoyo público temporal a Air Europa",
+   "url": "https://www.lamoncloa.gob.es/consejodeministros/Paginas/enlaces/031120-enlace-aireuropa.aspx"
+  },
+  "w011--sepi-duro-felguera-2021": {
+   "text": "En marzo de 2021 el Consejo de Ministros autorizó a Duro Felguera una ayuda de 120 millones de euros del fondo de rescate de empresas estratégicas; la empresa pesa el 1,18 % del valor añadido bruto de Asturias.",
+   "period": "9 de marzo de 2021",
+   "source": "La Moncloa, Consejo de Ministros: operaciones del Fondo de Apoyo a la Solvencia Empresarial",
+   "url": "https://www.lamoncloa.gob.es/consejodeministros/Paginas/enlaces/090321-enlace-solvencia.aspx"
+  },
+  "w012--boe-rdl-6-2024-municipios-dana": {
+   "text": "El Real Decreto-ley 6/2024, de respuesta a los daños de la DANA de octubre de 2024, lista en su anexo 78 municipios afectados, cuyos vecinos y empresas pueden acceder a sus ayudas y beneficios fiscales.",
+   "period": "5 de noviembre de 2024",
+   "source": "BOE-A-2024-22928, anexo «Listado de municipios afectados por la DANA» (recuento propio: 78 filas)",
+   "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2024-22928"
+  },
+  "w009--gibraltar-campo-poblacion-transfronterizos": {
+   "text": "El Gobierno cifra en 300.000 los andaluces del Campo de Gibraltar a quienes afecta el acuerdo UE-Reino Unido sobre Gibraltar, y en unos 15.000 los trabajadores transfronterizos que cruzan cada día.",
+   "period": "14 de julio de 2026 (firma del acuerdo)",
+   "source": "Nota de prensa del Ministerio de Asuntos Exteriores, La Moncloa, 14-7-2026",
+   "url": "https://www.lamoncloa.gob.es/serviciosdeprensa/notasprensa/exteriores/paginas/2026/140726-albares-acuerdo-gibraltar-ue.aspx"
+  },
+  "w013--tcu-contratos-emergencia-covid-estado": {
+   "text": "El Tribunal de Cuentas fiscalizó los contratos de emergencia por la COVID-19 de los ministerios económicos: 152 contratos por 529 millones de euros, 513 de ellos de Sanidad. Cuatro contratos de mascarillas sumaron 217 millones con una misma empresa.",
+   "period": "contratos de emergencia de 2020",
+   "source": "Nota de prensa del Tribunal de Cuentas sobre el informe de fiscalización",
+   "url": "https://tcu.es/es/Comunicacion-y-Espacio-Divulgativo/El-Tribunal-de-Cuentas-aprueba-un-nuevo-informe-sobre-contratacion-de-emergencia-durante-la-pandemia/"
+  },
+  "w013--juntaex-regadio-tierra-de-barros": {
+   "text": "El proyecto de regadío de Tierra de Barros (Badajoz) transformaría unas 15.000 hectáreas. El convenio de 2022 preveía 207 millones de euros de la Junta de Extremadura (14 de expropiaciones y 193 de obras) y 65 millones de la comunidad de regantes.",
+   "period": "convenio de noviembre de 2022",
+   "source": "Nota de prensa del Consejo de Gobierno de la Junta de Extremadura, 9/11/2022",
+   "url": "https://www.juntaex.es/w/20221109-rueda-prensa-consejo-gobierno"
   }
  },
  "statements": {
@@ -527,6 +563,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Cifras de percepción ya miden el asunto",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion115/20250528/Votacion003/VOT_20250528152332.json": {
@@ -561,6 +603,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Viajeros de tren ya miden a los afectados",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion115/20250528/Votacion005/VOT_20250528152337.json": {
@@ -641,6 +689,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Sin cifra oficial específica de la medida",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion076/20241114/Votacion043/VOT_20241114151053.json": {
@@ -691,6 +745,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Sin cifra oficial específica de la Abogacía del Estado",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion068/20241016/Votacion014/VOT_20241017130205.json": {
@@ -720,6 +780,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Viajes en tren ya miden la red afectada",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion033/20240321/Votacion004/VOT_20240321105711.json": {
@@ -745,13 +811,20 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Sin cifra oficial de la compra concreta",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion029/20240314/Votacion050/VOT_20240314123805.json": {
    "question_id": "eje-control-gobierno",
    "facts": [
     "eje-control-gobierno--sepi-2026-fasee",
-    "eje-control-gobierno--ce-rol2026-percepcion-corrupcion"
+    "eje-anticorrupcion--moncloa-plus-ultra-2021",
+    "eje-anticorrupcion--oirescon-licitacion"
    ],
    "direct_effects": [
     {
@@ -780,6 +853,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Rescates y contratación pública, no percepción general",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion026/20240229/Votacion014/VOT_20240229115055.json": {
@@ -850,6 +929,7 @@
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion185/20260611/Votacion031/VOT_20260611145739.json": {
    "question_id": "eje-control-gobierno",
    "facts": [
+    "eje-anticorrupcion--moncloa-plus-ultra-2021",
     "eje-control-gobierno--sepi-2026-fasee"
    ],
    "review": {
@@ -858,7 +938,13 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [],
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Importe del rescate a Plus Ultra, más fondo FASEE",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion183/20260528/Votacion003/VOT_20260528125337.json": {
    "question_id": "eje-control-gobierno",
@@ -955,7 +1041,13 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [],
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Cifras de percepción ya miden el asunto",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion121/20250619/Votacion006/VOT_20250619120743.json": {
    "question_id": "eje-control-gobierno",
@@ -986,7 +1078,9 @@
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion112/20250520/Votacion006/VOT_20250520203918.json": {
    "question_id": "eje-control-gobierno",
    "facts": [
-    "eje-control-gobierno--sepi-2026-fasee"
+    "w011--sepi-air-europa-2020",
+    "w011--sepi-duro-felguera-2021",
+    "eje-anticorrupcion--moncloa-plus-ultra-2021"
    ],
    "review": {
     "status": "draft",
@@ -994,7 +1088,13 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [],
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Importes de los tres rescates auditados",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion095/20250226/Votacion017/VOT_20250226151649.json": {
    "question_id": "eje-control-gobierno",
@@ -1055,7 +1155,7 @@
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion079/20241121/Votacion028/VOT_20241121173825.json": {
    "question_id": "eje-control-gobierno",
    "facts": [
-    "eje-control-gobierno--ce-art-108-111-control"
+    "w012--boe-rdl-6-2024-municipios-dana"
    ],
    "review": {
     "status": "draft",
@@ -1063,7 +1163,13 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [],
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Municipios afectados por la DANA según el BOE",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion079/20241121/Votacion042/VOT_20241121173839.json": {
    "question_id": "eje-control-gobierno",
@@ -1076,7 +1182,13 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [],
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Viajeros de tren ya miden a los afectados",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion070/20241023/Votacion013/VOT_20241023184350.json": {
    "question_id": "eje-control-gobierno",
@@ -1090,7 +1202,13 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [],
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Sin cifra oficial propia del punto; percepción y condenas sirven",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion070/20241023/Votacion021/VOT_20241023184402.json": {
    "question_id": "eje-control-gobierno",
@@ -1117,7 +1235,13 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [],
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Viajeros de tren ya miden a los afectados",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion052/20240627/Votacion029/VOT_20240627130401.json": {
    "question_id": "eje-control-gobierno",
@@ -1130,7 +1254,13 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [],
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Control parlamentario general; art. 108 y 111 adecuados",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion052/20240627/Votacion041/VOT_20240627130414.json": {
    "question_id": "eje-control-gobierno",
@@ -1163,7 +1293,7 @@
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion040/20240523/Votacion011/VOT_20240523140942.json": {
    "question_id": "eje-control-gobierno",
    "facts": [
-    "eje-control-gobierno--ce-art-108-111-control"
+    "w009--gibraltar-campo-poblacion-transfronterizos"
    ],
    "review": {
     "status": "draft",
@@ -1171,7 +1301,13 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [],
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Población y trabajadores del Campo de Gibraltar",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion036/20240423/Votacion019/VOT_20240423213529.json": {
    "question_id": "eje-control-gobierno",
@@ -1198,13 +1334,18 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [],
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Control parlamentario general; art. 108 y 111 adecuados",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion033/20240321/Votacion005/VOT_20240321105712.json": {
    "question_id": "eje-control-gobierno",
    "facts": [
-    "eje-control-gobierno--ce-rol2026-percepcion-corrupcion",
-    "eje-control-gobierno--ce-rol2026-condenas-corrupcion"
+    "w013--tcu-contratos-emergencia-covid-estado"
    ],
    "review": {
     "status": "draft",
@@ -1212,12 +1353,18 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [],
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Cifra del Tribunal de Cuentas sobre contratos de emergencia",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion023/20240222/Votacion015/VOT_20240222110803.json": {
    "question_id": "eje-control-gobierno",
    "facts": [
-    "eje-control-gobierno--ce-art-108-111-control"
+    "w013--juntaex-regadio-tierra-de-barros"
    ],
    "review": {
     "status": "draft",
@@ -1225,7 +1372,13 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [],
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Superficie e inversión del regadío de Tierra de Barros",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion115/20250528/Votacion006/VOT_20250528152339.json": {
    "question_id": "eje-control-gobierno",
@@ -1272,7 +1425,7 @@
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion185/20260611/Votacion032/VOT_20260611145741.json": {
    "question_id": "eje-control-gobierno",
    "facts": [
-    "eje-control-gobierno--sepi-2026-fasee"
+    "eje-anticorrupcion--moncloa-plus-ultra-2021"
    ],
    "review": {
     "status": "draft",
@@ -1280,12 +1433,18 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [],
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Escala del caso Plus Ultra; sin cifra oficial del aplazamiento",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion185/20260611/Votacion033/VOT_20260611145743.json": {
    "question_id": "eje-control-gobierno",
    "facts": [
-    "eje-control-gobierno--sepi-2026-fasee"
+    "eje-anticorrupcion--moncloa-plus-ultra-2021"
    ],
    "review": {
     "status": "draft",
@@ -1293,12 +1452,18 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [],
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Escala del caso Plus Ultra; sin cifra oficial del aplazamiento",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion185/20260611/Votacion034/VOT_20260611145745.json": {
    "question_id": "eje-control-gobierno",
    "facts": [
-    "eje-control-gobierno--sepi-2026-fasee"
+    "eje-anticorrupcion--moncloa-plus-ultra-2021"
    ],
    "review": {
     "status": "draft",
@@ -1306,11 +1471,18 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [],
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Escala del caso Plus Ultra; sin cifra oficial del aplazamiento",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion185/20260611/Votacion035/VOT_20260611145746.json": {
    "question_id": "eje-control-gobierno",
    "facts": [
+    "eje-anticorrupcion--moncloa-plus-ultra-2021",
     "eje-control-gobierno--sepi-2026-fasee"
    ],
    "review": {
@@ -1319,7 +1491,13 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [],
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Importe del rescate a Plus Ultra, más fondo FASEE",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion139/20251016/Votacion004/VOT_20251016123451.json": {
    "question_id": "eje-control-gobierno",
@@ -1360,7 +1538,13 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [],
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Sin cifra específica; percepción y marco constitucional valen",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion124/20250626/Votacion010/VOT_20250626120539.json": {
    "question_id": "eje-control-gobierno",
@@ -1401,7 +1585,13 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [],
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Sin cifra específica; percepción y marco valen",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion095/20250226/Votacion018/VOT_20250226151651.json": {
    "question_id": "eje-control-gobierno",
@@ -1415,7 +1605,13 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [],
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Sin cifra oficial específica del cese",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion095/20250226/Votacion020/VOT_20250226151655.json": {
    "question_id": "eje-control-gobierno",
@@ -1429,7 +1625,13 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [],
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Sin cifra oficial específica de la colaboración",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion095/20250226/Votacion021/VOT_20250226151657.json": {
    "question_id": "eje-control-gobierno",
@@ -1497,7 +1699,13 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [],
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Independencia judicial percibida ya mide el asunto",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion070/20241023/Votacion014/VOT_20241023184352.json": {
    "question_id": "eje-control-gobierno",
@@ -1524,7 +1732,13 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [],
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Sin cifra oficial del dispositivo de Barajas",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion070/20241023/Votacion016/VOT_20241023184355.json": {
    "question_id": "eje-control-gobierno",
@@ -1537,7 +1751,13 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [],
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Sin cifra oficial del dispositivo de Barajas",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion070/20241023/Votacion017/VOT_20241023184356.json": {
    "question_id": "eje-control-gobierno",
@@ -1551,7 +1771,13 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [],
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Sin cifra oficial de contratos de esa empresa",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion070/20241023/Votacion018/VOT_20241023184357.json": {
    "question_id": "eje-control-gobierno",
@@ -1565,7 +1791,13 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [],
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Sin cifra oficial de filtraciones de causas judiciales",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion070/20241023/Votacion019/VOT_20241023184359.json": {
    "question_id": "eje-control-gobierno",
@@ -1592,7 +1824,13 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [],
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Petición política sin colectivo cuantificable; percepción vale",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion070/20241023/Votacion022/VOT_20241023184403.json": {
    "question_id": "eje-control-gobierno",
@@ -1624,8 +1862,7 @@
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion033/20240321/Votacion006/VOT_20240321105713.json": {
    "question_id": "eje-control-gobierno",
    "facts": [
-    "eje-control-gobierno--ce-rol2026-percepcion-corrupcion",
-    "eje-control-gobierno--ce-rol2026-condenas-corrupcion"
+    "w013--tcu-contratos-emergencia-covid-estado"
    ],
    "review": {
     "status": "draft",
@@ -1633,7 +1870,13 @@
     "drafted_at": "2026-10-13",
     "human_reviewed": false
    },
-   "direct_effects": []
+   "direct_effects": [],
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Cifra del Tribunal de Cuentas sobre contratos de emergencia",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   }
   }
  }
 }

@@ -161,6 +161,24 @@
    "period": "2.º trimestre de 2026",
    "source": "INE, Encuesta de Población Activa, tabla 79336 (ocupados por sector económico)",
    "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=79336"
+  },
+  "w037--sanidad-2026-copago-impacto": {
+   "text": "La reforma del copago farmacéutico (tramos de renta, topes mensuales y nuevo tramo de pensionistas) tiene un impacto presupuestario estimado de 265,63 millones de euros, según la memoria del decreto-ley.",
+   "period": "decreto-ley de 12 de mayo de 2026",
+   "source": "Nota de prensa del Ministerio de Sanidad (12-05-2026), citando la Memoria del Análisis de Impacto Normativo",
+   "url": "https://www.sanidad.gob.es/gabinete/notasPrensa.do?id=6905"
+  },
+  "w036--imserso-2026-06-convenio-cuidadores": {
+   "text": "El 30-06-2026 había 104.840 cuidadores no profesionales de personas dependientes con convenio especial con la Seguridad Social; el 87,04 % (91.248) son mujeres.",
+   "period": "30 de junio de 2026",
+   "source": "Imserso, Convenio especial de cuidadores no profesionales, situación a 30-06-2026 (total estado y sexo)",
+   "url": "https://imserso.es/documents/20123/11151726/cecuidadores_20260630.pdf/f33a15bb-bace-f940-5bf5-c101f9a19af9"
+  },
+  "w035--boe-ley-2-2026-pasarela-cuotas": {
+   "text": "La Ley 2/2026 da un año desde su reglamento para pedir el paso voluntario al RETA y sube la cuota de los mutualistas al 86 % en 2026, 93 % en 2027 y 100 % en 2028 de la cuota de autónomos.",
+   "period": "BOE de 31 de julio de 2026",
+   "source": "BOE-A-2026-16653, Ley 2/2026, preámbulo y disposiciones transitorias 46.ª y 47.ª",
+   "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-16653"
   }
  },
  "statements": {
@@ -255,9 +273,9 @@
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion183/20260528/Votacion012/VOT_20260528125351.json": {
    "question_id": "eje-proteccion-social",
    "facts": [
+    "w037--sanidad-2026-copago-impacto",
     "eje-proteccion-social--ss-2026-09-pensiones",
-    "eje-proteccion-social--ss-2026-09-minimos",
-    "eje-proteccion-social--inclusion-2026-06-imv"
+    "eje-proteccion-social--ss-2026-09-minimos"
    ],
    "direct_effects": [
     {
@@ -286,6 +304,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Impacto del decreto, pensionistas y exentos por mínimos",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion164/20260226/Votacion023/VOT_20260226153430.json": {
@@ -393,6 +417,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Cifras ya miden jubilación compatible con trabajo",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion015/20240110/Votacion003/VOT_20240111114814.json": {
@@ -512,6 +542,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Discapacidad y dependencia son el colectivo exacto",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion137/20251014/Votacion002/VOT_20251014202758.json": {
@@ -693,8 +729,8 @@
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion033/20240321/Votacion001/VOT_20240321105708.json": {
    "question_id": "eje-proteccion-social",
    "facts": [
-    "eje-proteccion-social--ss-2026-09-jubilacion-autonomos",
-    "eje-proteccion-social--ss-2026-09-minimos"
+    "eje-autonomos-empresa--dgsfp-2023-mutualidades-alternativas",
+    "eje-proteccion-social--ss-2026-09-jubilacion-autonomos"
    ],
    "direct_effects": [
     {
@@ -718,6 +754,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Sin cifra oficial de nº de mutualistas; 8 mutualidades",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion024/VOT_20260326165056.json": {
@@ -736,14 +778,19 @@
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion142/20251028/Votacion023/VOT_20251028204612.json": {
    "question_id": "eje-proteccion-social",
    "facts": [
-    "eje-proteccion-social--inclusion-2026-06-imv",
-    "eje-proteccion-social--trabajo-2026-08-desempleo"
+    "eje-proteccion-social--inclusion-2026-06-imv"
    ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "IMV específico; quitada la cifra genérica de desempleo",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion130/20250910/Votacion001/VOT_20250910213532.json": {
@@ -775,27 +822,40 @@
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion198/20260916/Votacion043/VOT_20260916195448.json": {
    "question_id": "eje-proteccion-social",
    "facts": [
-    "eje-proteccion-social--imserso-2026-07-prestaciones",
-    "eje-proteccion-social--imserso-2026-07-dependencia"
+    "w036--imserso-2026-06-convenio-cuidadores",
+    "eje-proteccion-social--imserso-2026-07-prestaciones"
    ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "cuidadoras: convenios especiales vigentes",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion185/20260611/Votacion004/VOT_20260611145705.json": {
    "question_id": "eje-proteccion-social",
    "facts": [
-    "eje-proteccion-social--ss-2026-09-jubilacion-autonomos",
-    "eje-proteccion-social--ss-2026-09-minimos"
+    "eje-autonomos-empresa--dgsfp-2023-mutualidades-alternativas",
+    "w035--boe-ley-2-2026-pasarela-cuotas",
+    "eje-proteccion-social--ss-2026-09-jubilacion-autonomos"
    ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Sin cifra oficial de nº de mutualistas; 8 mutualidades",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion079/20241121/Votacion002/VOT_20241121173756.json": {
@@ -814,14 +874,20 @@
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion076/20241114/Votacion010/VOT_20241114151018.json": {
    "question_id": "eje-proteccion-social",
    "facts": [
-    "eje-proteccion-social--ss-2026-09-jubilacion-autonomos",
-    "eje-proteccion-social--ss-2026-09-minimos"
+    "eje-autonomos-empresa--dgsfp-2023-mutualidades-alternativas",
+    "eje-proteccion-social--ss-2026-09-jubilacion-autonomos"
    ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "8 mutualidades alternativas; sin censo oficial de mutualistas",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion056/20240723/Votacion017/VOT_20240723221645.json": {
@@ -840,14 +906,20 @@
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion054/20240711/Votacion001/VOT_20240711150621.json": {
    "question_id": "eje-proteccion-social",
    "facts": [
-    "eje-proteccion-social--ss-2026-09-jubilacion-autonomos",
-    "eje-proteccion-social--ss-2026-09-minimos"
+    "eje-autonomos-empresa--dgsfp-2023-mutualidades-alternativas",
+    "eje-proteccion-social--ss-2026-09-jubilacion-autonomos"
    ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "8 mutualidades alternativas; sin censo oficial de mutualistas",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion198/20260916/Votacion052/VOT_20260916195500.json": {
@@ -867,6 +939,25 @@
    "question_id": "eje-proteccion-social",
    "facts": [
     "eje-proteccion-social--imserso-2026-07-dependencia",
+    "w036--imserso-2026-06-convenio-cuidadores"
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "lista de espera y cuidadoras con convenio",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion002/VOT_20260714201933.json": {
+   "question_id": "eje-proteccion-social",
+   "facts": [
+    "w036--imserso-2026-06-convenio-cuidadores",
     "eje-proteccion-social--imserso-2026-07-prestaciones"
    ],
    "review": {
@@ -874,19 +965,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
-   }
-  },
-  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion002/VOT_20260714201933.json": {
-   "question_id": "eje-proteccion-social",
-   "facts": [
-    "eje-proteccion-social--imserso-2026-07-prestaciones",
-    "eje-proteccion-social--imserso-2026-07-dependencia"
-   ],
-   "review": {
-    "status": "draft",
-    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
-    "drafted_at": "2026-10-13",
-    "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "cotización de cuidadoras: convenios especiales",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion003/VOT_20260714201934.json": {
@@ -900,6 +984,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "cifras generales de dependencia miden bien",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion005/VOT_20260714201937.json": {
@@ -913,6 +1003,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "copago afecta a todos los beneficiarios; cifras valen",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion007/VOT_20260714201940.json": {
@@ -926,6 +1022,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "medida amplia; cifras actuales valen",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion009/VOT_20260714201944.json": {
@@ -939,6 +1041,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "incluye teleasistencia 688.214; sin cifra mejor",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion010/VOT_20260714201946.json": {
@@ -952,6 +1060,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "medida amplia; cifras actuales valen",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion012/VOT_20260714201950.json": {
@@ -965,19 +1079,31 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "prestaciones vigentes miden bien el colectivo",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion014/VOT_20260714201955.json": {
    "question_id": "eje-proteccion-social",
    "facts": [
-    "eje-proteccion-social--imserso-2026-07-prestaciones",
-    "eje-proteccion-social--imserso-2026-07-dependencia"
+    "w036--imserso-2026-06-convenio-cuidadores",
+    "eje-proteccion-social--imserso-2026-07-prestaciones"
    ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "cuidadoras principales: convenios especiales",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion015/VOT_20260714201957.json": {
@@ -991,6 +1117,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "sin cifra oficial de dependientes menores de 65",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion022/VOT_20260714202008.json": {
@@ -1004,19 +1136,32 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "sin cifra oficial de afectados por polio localizada",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion023/VOT_20260714202009.json": {
    "question_id": "eje-proteccion-social",
    "facts": [
-    "eje-proteccion-social--imserso-2026-07-dependencia",
-    "cgpj-2024-lanzamientos"
+    "eje-vivienda-okupacion--cgpj-2025-suspension-lanzamientos",
+    "eje-vivienda-okupacion--cgpj-2025-lanzamientos",
+    "eje-proteccion-social--imserso-2026-07-dependencia"
    ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "desahucios y suspensiones por vulnerabilidad 2025",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion024/VOT_20260714202011.json": {
@@ -1030,12 +1175,18 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "sin cifra oficial de terapias de dependientes",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion027/VOT_20260714202017.json": {
    "question_id": "eje-proteccion-social",
    "facts": [
-    "eje-proteccion-social--imserso-2026-07-prestaciones",
+    "eje-empleo-derechos--imserso-saad-2026-08",
     "eje-proteccion-social--imserso-2024-discapacidad"
    ],
    "review": {
@@ -1043,6 +1194,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "asistencia personal: prestaciones vigentes agosto 2026",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion028/VOT_20260714202019.json": {
@@ -1075,26 +1232,38 @@
    "question_id": "eje-proteccion-social",
    "facts": [
     "eje-proteccion-social--imserso-2026-07-prestaciones",
-    "eje-proteccion-social--imserso-2026-07-dependencia"
+    "pool-igualdad--ine-ece-2021-accesibilidad"
    ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "cuidados familiares y edificios no accesibles",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion035/VOT_20260714202030.json": {
    "question_id": "eje-proteccion-social",
    "facts": [
-    "eje-proteccion-social--imserso-2026-07-prestaciones",
-    "eje-proteccion-social--imserso-2026-07-dependencia"
+    "w036--imserso-2026-06-convenio-cuidadores",
+    "eje-proteccion-social--imserso-2026-07-prestaciones"
    ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "cuidadoras y plazas residenciales",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion037/VOT_20260714202032.json": {
@@ -1108,6 +1277,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "medida amplia; cifras actuales valen",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion038/VOT_20260714202034.json": {
@@ -1121,38 +1296,18 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "sin cifra oficial específica localizada",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion039/VOT_20260714202035.json": {
    "question_id": "eje-proteccion-social",
    "facts": [
-    "eje-proteccion-social--imserso-2024-discapacidad",
-    "ine-ecv-2025-tenencia"
-   ],
-   "review": {
-    "status": "draft",
-    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
-    "drafted_at": "2026-10-13",
-    "human_reviewed": false
-   }
-  },
-  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion040/VOT_20260714202037.json": {
-   "question_id": "eje-proteccion-social",
-   "facts": [
-    "eje-proteccion-social--imserso-2024-discapacidad",
-    "cgpj-2024-lanzamientos"
-   ],
-   "review": {
-    "status": "draft",
-    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
-    "drafted_at": "2026-10-13",
-    "human_reviewed": false
-   }
-  },
-  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion042/VOT_20260714202040.json": {
-   "question_id": "eje-proteccion-social",
-   "facts": [
-    "eje-proteccion-social--imserso-2026-07-prestaciones",
+    "eje-vivienda-intervencion--mivau-vivienda-protegida-2025",
     "eje-proteccion-social--imserso-2024-discapacidad"
    ],
    "review": {
@@ -1160,6 +1315,50 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "vivienda protegida iniciada en el último año",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion040/VOT_20260714202037.json": {
+   "question_id": "eje-proteccion-social",
+   "facts": [
+    "eje-vivienda-okupacion--cgpj-2025-suspension-lanzamientos",
+    "eje-vivienda-okupacion--cgpj-2025-lanzamientos",
+    "eje-proteccion-social--imserso-2024-discapacidad"
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "desahucios y suspensiones por vulnerabilidad 2025",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion042/VOT_20260714202040.json": {
+   "question_id": "eje-proteccion-social",
+   "facts": [
+    "eje-empleo-derechos--imserso-saad-2026-08"
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "asistencia personal: prestaciones vigentes agosto 2026",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion043/VOT_20260714202041.json": {
@@ -1173,6 +1372,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "medida amplia; cifras actuales valen",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion045/VOT_20260714202044.json": {
@@ -1199,12 +1404,18 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "medida amplia; sin cifra específica",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion185/20260611/Votacion005/VOT_20260611145707.json": {
    "question_id": "eje-proteccion-social",
    "facts": [
-    "eje-proteccion-social--ss-2026-09-jubilacion-autonomos",
+    "eje-autonomos-empresa--dgsfp-2023-mutualidades-alternativas",
     "eje-proteccion-social--ss-2026-09-minimos"
    ],
    "review": {
@@ -1212,63 +1423,97 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Sin cifra oficial de nº de mutualistas; 8 mutualidades",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion185/20260611/Votacion006/VOT_20260611145708.json": {
    "question_id": "eje-proteccion-social",
    "facts": [
-    "eje-proteccion-social--ss-2026-09-jubilacion-autonomos",
-    "eje-proteccion-social--ss-2026-09-minimos"
+    "eje-autonomos-empresa--dgsfp-2023-mutualidades-alternativas",
+    "w035--boe-ley-2-2026-pasarela-cuotas",
+    "eje-proteccion-social--ss-2026-09-jubilacion-autonomos"
    ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Sin cifra oficial de nº de mutualistas; 8 mutualidades",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion185/20260611/Votacion007/VOT_20260611145709.json": {
    "question_id": "eje-proteccion-social",
    "facts": [
-    "eje-proteccion-social--ss-2026-09-jubilacion-autonomos",
-    "eje-proteccion-social--ss-2026-09-minimos"
+    "eje-autonomos-empresa--dgsfp-2023-mutualidades-alternativas",
+    "w035--boe-ley-2-2026-pasarela-cuotas",
+    "eje-proteccion-social--ss-2026-09-jubilacion-autonomos"
    ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Sin cifra oficial de nº de mutualistas; 8 mutualidades",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion185/20260611/Votacion009/VOT_20260611145712.json": {
    "question_id": "eje-proteccion-social",
    "facts": [
-    "eje-proteccion-social--ss-2026-09-jubilacion-autonomos",
-    "eje-proteccion-social--ss-2026-09-minimos"
+    "eje-autonomos-empresa--dgsfp-2023-mutualidades-alternativas",
+    "w035--boe-ley-2-2026-pasarela-cuotas"
    ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Sin cifra oficial de nº de mutualistas; 8 mutualidades",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion185/20260611/Votacion013/VOT_20260611145717.json": {
    "question_id": "eje-proteccion-social",
    "facts": [
-    "eje-proteccion-social--ss-2026-09-jubilacion-autonomos",
-    "eje-proteccion-social--ss-2026-09-minimos"
+    "eje-autonomos-empresa--dgsfp-2023-mutualidades-alternativas",
+    "w035--boe-ley-2-2026-pasarela-cuotas",
+    "eje-proteccion-social--ss-2026-09-jubilacion-autonomos"
    ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Sin cifra oficial de nº de mutualistas; 8 mutualidades",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion185/20260611/Votacion016/VOT_20260611145721.json": {
    "question_id": "eje-proteccion-social",
    "facts": [
+    "eje-autonomos-empresa--dgsfp-2023-mutualidades-alternativas",
     "eje-proteccion-social--ss-2026-09-minimos",
     "eje-proteccion-social--ss-2026-09-jubilacion-autonomos"
    ],
@@ -1277,6 +1522,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Sin cifra oficial de nº de mutualistas; 8 mutualidades",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion130/20250910/Votacion002/VOT_20250910213534.json": {

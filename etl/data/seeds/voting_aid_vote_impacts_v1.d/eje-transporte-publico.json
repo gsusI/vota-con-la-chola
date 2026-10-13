@@ -290,9 +290,9 @@
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion091/20250212/Votacion012/VOT_20250212154047.json": {
    "question_id": "eje-transporte-publico",
    "facts": [
-    "eje-transporte-publico--mitma-2025-pagos-ccaa-eell",
+    "eje-proteccion-social--ss-2026-09-pensiones",
     "eje-transporte-publico--ine-tv-2025-viajeros-regular",
-    "cgpj-2024-lanzamientos"
+    "eje-proteccion-social--miteco-2026-bono-social"
    ],
    "direct_effects": [
     {
@@ -321,6 +321,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Pensiones, viajeros y bono social del decreto",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion188/20260618/Votacion009/VOT_20260618162218.json": {
@@ -409,8 +415,8 @@
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion011/VOT_20251008195227.json": {
    "question_id": "eje-transporte-publico",
    "facts": [
-    "eje-transporte-publico--ine-tv-2025-viajeros-regular",
     "eje-transporte-publico--mitma-2025-pagos-ccaa-eell",
+    "eje-transporte-publico--ine-tv-2025-viajeros-regular",
     "eje-transporte-publico--ecepov-2021-medio-trabajo"
    ],
    "direct_effects": [],
@@ -419,6 +425,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Viajeros, ayudas y reparto modal encajan con abonos",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion012/VOT_20251008195228.json": {
@@ -450,6 +462,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Cifras de transporte público ya encajan",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion013/VOT_20251008195229.json": {
@@ -481,6 +499,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Sistema integrado: viajeros, financiación y emisiones",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion019/VOT_20251008195238.json": {
@@ -702,6 +726,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Sin cifra oficial de costes de explotación urbanos",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion073/VOT_20251008195345.json": {

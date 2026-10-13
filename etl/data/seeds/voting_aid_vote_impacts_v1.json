@@ -57,13 +57,28 @@
     }
   },
   "statements": {
-    "eje-vivienda-intervencion": {"facts": ["ine-ecv-2025-tenencia", "bde-2024-alquiler-temporada", "ine-vut-2026-05"]},
-    "eje-vivienda-okupacion": {"facts": ["interior-2024-ocupacion", "ine-censo-2021-vacias", "cgpj-2024-lanzamientos"]}
+    "eje-vivienda-intervencion": {
+      "facts": [
+        "ine-ecv-2025-tenencia",
+        "bde-2024-alquiler-temporada",
+        "ine-vut-2026-05"
+      ]
+    },
+    "eje-vivienda-okupacion": {
+      "facts": [
+        "interior-2024-ocupacion",
+        "ine-censo-2021-vacias",
+        "cgpj-2024-lanzamientos"
+      ]
+    }
   },
   "votes": {
     "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion059/20240917/Votacion001/VOT_20240917204416.json": {
       "question_id": "vivienda-alquiler-temporada",
-      "facts": ["ine-ecv-2025-tenencia", "bde-2024-alquiler-temporada"],
+      "facts": [
+        "bde-2024-alquiler-temporada",
+        "ine-ecv-2025-tenencia"
+      ],
       "direct_effects": [
         {
           "actor": "Inquilinos de temporada y de habitaciones",
@@ -124,11 +139,25 @@
         }
       ],
       "gaps": "Es una proposición de ley de grupos parlamentarios: no lleva memoria oficial de impacto y no hay una estimación pública de cuántos contratos de temporada se firman en España.",
-      "review": {"status": "draft", "drafted_by": "claude-opus-5-5 (sesión principal)", "drafted_at": "2026-10-13", "human_reviewed": false}
+      "review": {
+        "status": "draft",
+        "drafted_by": "claude-opus-5-5 (sesión principal)",
+        "drafted_at": "2026-10-13",
+        "human_reviewed": false
+      },
+      "scale_review": {
+        "verdict": "improved",
+        "note": "cifra de alquiler de temporada primero",
+        "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+        "at": "2026-10-13"
+      }
     },
     "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion086/20241217/Votacion001/VOT_20241217205720.json": {
       "question_id": "vivienda-alquiler-temporada",
-      "facts": ["ine-ecv-2025-tenencia", "bde-2024-alquiler-temporada"],
+      "facts": [
+        "bde-2024-alquiler-temporada",
+        "ine-ecv-2025-tenencia"
+      ],
       "direct_effects": [
         {
           "actor": "Inquilinos de temporada y de habitaciones",
@@ -181,11 +210,25 @@
         }
       ],
       "gaps": "Es una proposición de ley de grupos parlamentarios: no lleva memoria oficial de impacto y no hay una estimación pública de cuántos contratos de temporada se firman en España.",
-      "review": {"status": "draft", "drafted_by": "claude-opus-5-5 (sesión principal)", "drafted_at": "2026-10-13", "human_reviewed": false}
+      "review": {
+        "status": "draft",
+        "drafted_by": "claude-opus-5-5 (sesión principal)",
+        "drafted_at": "2026-10-13",
+        "human_reviewed": false
+      },
+      "scale_review": {
+        "verdict": "improved",
+        "note": "cifra de alquiler de temporada primero",
+        "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+        "at": "2026-10-13"
+      }
     },
     "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion135/20251007/Votacion002/VOT_20251007214330.json": {
       "question_id": "vivienda-pisos-turisticos",
-      "facts": ["ine-vut-2026-05", "ts-2026-registro-unico"],
+      "facts": [
+        "ine-vut-2026-05",
+        "ts-2026-registro-unico"
+      ],
       "direct_effects": [
         {
           "actor": "Plataformas de alquiler turístico",
@@ -251,11 +294,19 @@
         }
       ],
       "gaps": "Es una proposición de ley de un grupo parlamentario: no lleva memoria oficial de impacto. El estudio citado mide Barcelona antes de esta norma; no hay una estimación de cuántos anuncios ilegales siguen activos.",
-      "review": {"status": "draft", "drafted_by": "claude-opus-5-5 (sesión principal)", "drafted_at": "2026-10-13", "human_reviewed": false}
+      "review": {
+        "status": "draft",
+        "drafted_by": "claude-opus-5-5 (sesión principal)",
+        "drafted_at": "2026-10-13",
+        "human_reviewed": false
+      }
     },
     "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion099/20250318/Votacion001/VOT_20250318201321.json": {
       "question_id": "vivienda-okupacion",
-      "facts": ["interior-2024-ocupacion", "ine-censo-2021-vacias", "cgpj-2024-lanzamientos"],
+      "facts": [
+        "interior-2024-ocupacion",
+        "cgpj-2024-lanzamientos"
+      ],
       "direct_effects": [
         {
           "actor": "Propietarios, poseedores legítimos y entidades de vivienda social",
@@ -308,11 +359,25 @@
         }
       ],
       "gaps": "Es una proposición de ley de un grupo parlamentario: no lleva memoria oficial de impacto. Las estadísticas oficiales cuentan denuncias, no viviendas ocupadas en un momento dado, ni cuántas son de particulares o de grandes propietarios.",
-      "review": {"status": "draft", "drafted_by": "claude-opus-5-5 (sesión principal)", "drafted_at": "2026-10-13", "human_reviewed": false}
+      "review": {
+        "status": "draft",
+        "drafted_by": "claude-opus-5-5 (sesión principal)",
+        "drafted_at": "2026-10-13",
+        "human_reviewed": false
+      },
+      "scale_review": {
+        "verdict": "improved",
+        "note": "quita viviendas vacías, genérica",
+        "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+        "at": "2026-10-13"
+      }
     },
     "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion179/20260519/Votacion001/VOT_20260519203502.json": {
       "question_id": "vivienda-okupacion",
-      "facts": ["interior-2024-ocupacion", "ine-censo-2021-vacias", "cgpj-2024-lanzamientos"],
+      "facts": [
+        "interior-2024-ocupacion",
+        "eje-vivienda-okupacion--eurostat-2025-pisos"
+      ],
       "direct_effects": [
         {
           "actor": "Ocupantes sin título",
@@ -370,7 +435,18 @@
         }
       ],
       "gaps": "Es una proposición de ley de un grupo parlamentario: no lleva memoria oficial de impacto. Las estadísticas oficiales cuentan denuncias, no viviendas ocupadas en un momento dado, ni cuántas son de particulares o de grandes propietarios.",
-      "review": {"status": "draft", "drafted_by": "claude-opus-5-5 (sesión principal)", "drafted_at": "2026-10-13", "human_reviewed": false}
+      "review": {
+        "status": "draft",
+        "drafted_by": "claude-opus-5-5 (sesión principal)",
+        "drafted_at": "2026-10-13",
+        "human_reviewed": false
+      },
+      "scale_review": {
+        "verdict": "improved",
+        "note": "pisos en comunidades de vecinos",
+        "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+        "at": "2026-10-13"
+      }
     }
   }
 }

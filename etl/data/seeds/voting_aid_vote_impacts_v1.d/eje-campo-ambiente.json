@@ -102,6 +102,12 @@
    "period": "Objetivo 2030",
    "source": "Comisión Europea, página «Nature Restoration Regulation»",
    "url": "https://environment.ec.europa.eu/topics/nature-and-biodiversity/nature-restoration-law_es"
+  },
+  "w005--chs-tajo-segura-reparto": {
+   "text": "El trasvase Tajo-Segura puede dar hasta 540 hm³ al año a la cuenca del Segura: 110 para abastecimiento, 400 para regadío y hasta 30 por menores pérdidas. Entre 1979 y 2011 aportó de media 176 hm³ al año en destino.",
+   "period": "Régimen legal vigente; media 1979-2011",
+   "source": "Confederación Hidrográfica del Segura, página «Transferencias» (Plan Hidrológico del Segura 2015-2021)",
+   "url": "https://www.chsegura.es/es/cuenca/caracterizacion/recursos-hidricos/transferencias/"
   }
  },
  "statements": {
@@ -153,8 +159,8 @@
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion110/20250513/Votacion001/VOT_20250513201840.json": {
    "question_id": "eje-campo-ambiente",
    "facts": [
-    "eje-campo-ambiente--miteco-tajo-segura",
-    "eje-campo-ambiente--mapa-esyrce-2025-regadio"
+    "w005--chs-tajo-segura-reparto",
+    "eje-campo-ambiente--miteco-tajo-segura"
    ],
    "direct_effects": [
     {
@@ -173,6 +179,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Reparto legal y aporte real del trasvase al Segura",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion036/20240423/Votacion002/VOT_20240423213513.json": {
@@ -209,6 +221,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Censos de lobo norte/sur Duero ya miden la medida",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion161/20260218/Votacion001/VOT_20260218141918.json": {
@@ -245,6 +263,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "PNL multitema agraria; cifras sectoriales generales adecuadas",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion159/20260212/Votacion007/VOT_20260212114315.json": {
@@ -316,8 +340,9 @@
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion142/20251028/Votacion007/VOT_20251028204549.json": {
    "question_id": "eje-campo-ambiente",
    "facts": [
-    "eje-campo-ambiente--mapa-pac-2025-solicitudes",
-    "eje-campo-ambiente--ine-censo-agrario-2020"
+    "eje-campo-comercio--ce-pac-2028-2034",
+    "eje-campo-comercio--mapa-pac-47724",
+    "eje-campo-ambiente--mapa-pac-2025-solicitudes"
    ],
    "direct_effects": [
     {
@@ -336,6 +361,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Cifras del fondo único PAC y presupuesto español",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion139/20251016/Votacion010/VOT_20251016123501.json": {
@@ -420,6 +451,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Cifras actuales miden bien al colectivo",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion043/20240530/Votacion026/VOT_20240530120021.json": {
@@ -440,6 +477,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Cifras actuales miden bien al colectivo",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion036/20240423/Votacion026/VOT_20240423213536.json": {
@@ -465,6 +508,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Cifras actuales miden bien al colectivo",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion029/20240314/Votacion034/VOT_20240314123746.json": {
@@ -491,6 +540,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Sin cifra oficial de explotaciones hiperintensivas localizada",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion023/20240222/Votacion014/VOT_20240222110801.json": {
@@ -511,6 +566,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Cifras actuales miden bien al colectivo",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion101/20250320/Votacion048/VOT_20250320125755.json": {
@@ -542,13 +603,19 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Ganado ovino y lobo sur del Duero ya específicos",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion142/20251028/Votacion008/VOT_20251028204551.json": {
    "question_id": "eje-campo-ambiente",
    "facts": [
-    "eje-campo-ambiente--mapa-pac-2025-solicitudes",
-    "eje-campo-ambiente--ine-censo-agrario-2020"
+    "eje-campo-comercio--ce-pac-2028-2034",
+    "eje-campo-ambiente--mapa-pac-2025-solicitudes"
    ],
    "direct_effects": [
     {
@@ -567,6 +634,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Cifras del fondo único PAC y beneficiarios",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion139/20251016/Votacion011/VOT_20251016123503.json": {
@@ -606,6 +679,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Orden afecta a toda la población de lobo; censo adecuado",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion101/20250320/Votacion057/VOT_20250320125806.json": {
@@ -656,6 +735,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Listado de protección del lobo; censo adecuado",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion052/20240627/Votacion026/VOT_20240627130358.json": {
@@ -681,6 +766,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Cifras actuales miden bien al colectivo",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion052/20240627/Votacion028/VOT_20240627130400.json": {
@@ -726,6 +817,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Cifras actuales miden bien al colectivo",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion043/20240530/Votacion030/VOT_20240530120024.json": {
@@ -751,6 +848,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Cifras actuales miden bien al colectivo",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion043/20240530/Votacion036/VOT_20240530120030.json": {
@@ -836,6 +939,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Sin cifra oficial de cesiones entre regantes localizada",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion029/20240314/Votacion046/VOT_20240314123800.json": {

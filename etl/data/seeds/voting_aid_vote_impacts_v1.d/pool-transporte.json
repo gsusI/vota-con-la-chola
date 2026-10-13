@@ -1,12 +1,24 @@
 {
- "facts": {},
+ "facts": {
+  "w049--padron-2025-capitales-vascas": {
+   "text": "A 1 de enero de 2025 vivían 801.689 personas en Bilbao (351.124), Vitoria-Gasteiz (260.699) y Donostia/San Sebastián (189.866), las tres capitales que une la Y vasca.",
+   "period": "1 de enero de 2025",
+   "source": "INE, Padrón municipal, tabla 29005; suma propia de las tres capitales",
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=29005"
+  },
+  "w049--padron-2025-pamplona-tudela": {
+   "text": "A 1 de enero de 2025 vivían 247.997 personas en Pamplona/Iruña (209.094) y Tudela (38.903), los dos municipios de las estaciones de alta velocidad que pide la moción.",
+   "period": "1 de enero de 2025",
+   "source": "INE, Padrón municipal, tabla 29005; suma propia de los dos municipios",
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=29005"
+  }
+ },
  "statements": {},
  "votes": {
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion029/20240314/Votacion031/VOT_20240314123743.json": {
    "question_id": "pool-transporte",
    "facts": [
-    "eje-control-gobierno--ine-tv-2025-ferrocarril",
-    "eje-regulacion-economica--ine-tf-2025-viajeros"
+    "w049--padron-2025-capitales-vascas"
    ],
    "direct_effects": [
     {
@@ -25,6 +37,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "población de las tres capitales vascas",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion106/20250410/Votacion008/VOT_20250410155146.json": {
@@ -85,8 +103,7 @@
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion132/20250917/Votacion004/VOT_20250917194023.json": {
    "question_id": "pool-transporte",
    "facts": [
-    "eje-control-gobierno--ine-tv-2025-ferrocarril",
-    "eje-regulacion-economica--ine-tf-2025-viajeros"
+    "w049--padron-2025-pamplona-tudela"
    ],
    "direct_effects": [
     {
@@ -105,6 +122,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "población de los dos municipios con estación",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion166/20260318/Votacion004/VOT_20260318175329.json": {

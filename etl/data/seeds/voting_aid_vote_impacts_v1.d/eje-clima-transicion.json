@@ -181,6 +181,36 @@
    "period": "2023",
    "source": "Eurostat, sdg_15_20 (superficie terrestre protegida)",
    "url": "https://ec.europa.eu/eurostat/databrowser/view/sdg_15_20/default/table"
+  },
+  "w007--eurostat-puertos-mercancias-2025": {
+   "text": "En 2025 los puertos españoles manejaron 480,7 millones de toneladas de mercancías (485,996 millones en 2024), todas las direcciones y tipos de carga.",
+   "period": "2025",
+   "source": "Eurostat, mar_go_aa (peso bruto de mercancías en todos los puertos, ES, total)",
+   "url": "https://ec.europa.eu/eurostat/databrowser/view/mar_go_aa/default/table"
+  },
+  "w008--puertos-sistema-2025": {
+   "text": "El sistema portuario del Estado tiene 28 autoridades portuarias y 46 puertos de interés general; en 2025 movió 556,2 millones de toneladas de mercancías y 42,49 millones de pasajeros.",
+   "period": "2025",
+   "source": "Puertos del Estado, Anuario Estadístico 2025 (nota del 1-10-2026)",
+   "url": "https://www.puertos.es/en/comunication/puertos-del-estado-publishes-2025-statistical-yearbook-featuring-comprehensive-data-spains-state-owned-port-system"
+  },
+  "w008--eurostat-pasajeros-ue26-2025": {
+   "text": "En 2025 los aeropuertos españoles movieron 130,5 millones de pasajeros en vuelos con los otros 26 países de la UE, entre ellos 22,5 millones con Italia y 17,9 con Francia.",
+   "period": "2025",
+   "source": "Eurostat, avia_paocc (pasajeros por país socio, total); suma propia de los 26 países",
+   "url": "https://ec.europa.eu/eurostat/databrowser/view/avia_paocc/default/table"
+  },
+  "w008--idae-repoten2-eolica-2026": {
+   "text": "En julio de 2026 el Gobierno asignó 612 millones de euros en ayudas a 173 proyectos de renovación de parques eólicos antiguos y minihidráulicas; los 81 eólicos sustituyen aerogeneradores y sumarán 2.433 MW.",
+   "period": "31 de julio de 2026",
+   "source": "IDAE (MITECO), nota sobre la resolución definitiva de REPOTEN 2",
+   "url": "https://www.idae.es/noticias/el-idae-acelera-la-modernizacion-del-parque-renovable-con-612-millones-en-ayudas-173"
+  },
+  "w008--ine-municipios-10k-50k-2025": {
+   "text": "A 1-1-2025 había 630 municipios de entre 10.000 y 49.999 habitantes, con 13,3 millones de personas, el 27 % de la población de España (49,1 millones).",
+   "period": "1 de enero de 2025",
+   "source": "INE, Cifras oficiales del padrón por municipio (tabla 29005); suma propia por tamaño",
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=29005"
   }
  },
  "statements": {
@@ -196,9 +226,9 @@
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion116/VOT_20251008195430.json": {
    "question_id": "eje-clima-transicion",
    "facts": [
+    "eje-transporte-publico--mitma-2025-pagos-ccaa-eell",
     "eje-clima-transicion--gei-2024-transporte-modos",
-    "eje-clima-transicion--ine-municipios-2025",
-    "eje-clima-transicion--eurostat-vuelos-interiores-2025"
+    "eje-clima-transicion--ine-municipios-2025"
    ],
    "direct_effects": [
     {
@@ -227,6 +257,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Ley de Movilidad: financiación transporte público, sin vuelos interiores",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion128/20250722/Votacion017/VOT_20250722200830.json": {
@@ -533,6 +569,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Política climática nacional; emisiones y objetivos ya la miden",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion111/20250514/Votacion005/VOT_20250514165631.json": {
@@ -677,8 +719,8 @@
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion188/20260618/Votacion010/VOT_20260618162220.json": {
    "question_id": "eje-clima-transicion",
    "facts": [
-    "eje-clima-transicion--gei-2024-transporte-modos",
-    "eje-clima-transicion--gei-2024-comercio-emisiones"
+    "w007--eurostat-puertos-mercancias-2025",
+    "eje-clima-transicion--gei-2024-transporte-modos"
    ],
    "direct_effects": [
     {
@@ -692,14 +734,19 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Puertos y navegación doméstica",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion139/20251016/Votacion007/VOT_20251016123456.json": {
    "question_id": "eje-clima-transicion",
    "facts": [
-    "eje-clima-transicion--eurostat-empleo-agrario-2025",
-    "eje-clima-transicion--gei-2025-total",
-    "eje-clima-transicion--pniec-objetivos-2030"
+    "eje-campo-ambiente--mapa-pac-2025-solicitudes",
+    "eje-clima-transicion--eurostat-empleo-agrario-2025"
    ],
    "direct_effects": [
     {
@@ -718,6 +765,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "PAC y empleo agrario",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion139/20251016/Votacion013/VOT_20251016123506.json": {
@@ -806,13 +859,19 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Emisiones, PNIEC y comercio CO2 miden la medida",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion095/20250226/Votacion008/VOT_20250226151631.json": {
    "question_id": "eje-clima-transicion",
    "facts": [
-    "eje-clima-transicion--gei-2025-total",
-    "eje-clima-transicion--pniec-objetivos-2030",
+    "eje-campo-ambiente--mapa-pac-2025-solicitudes",
+    "eje-campo-ambiente--ine-censo-agrario-2020",
     "eje-clima-transicion--eurostat-empleo-agrario-2025"
    ],
    "direct_effects": [
@@ -832,6 +891,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "PAC, censo agrario y empleo agrario",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion088/20241219/Votacion060/VOT_20241219162809.json": {
@@ -901,8 +966,7 @@
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion043/20240530/Votacion034/VOT_20240530120028.json": {
    "question_id": "eje-clima-transicion",
    "facts": [
-    "eje-clima-transicion--gei-2025-total",
-    "eje-clima-transicion--pniec-objetivos-2030",
+    "eje-campo-ambiente--mapa-pac-2025-solicitudes",
     "eje-clima-transicion--eurostat-empleo-agrario-2025"
    ],
    "direct_effects": [
@@ -917,14 +981,19 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "PAC y empleo agrario",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion036/20240423/Votacion025/VOT_20240423213535.json": {
    "question_id": "eje-clima-transicion",
    "facts": [
-    "eje-clima-transicion--gei-2025-total",
-    "eje-clima-transicion--pniec-objetivos-2030",
-    "eje-clima-transicion--pniec-inversion-empleo"
+    "eje-campo-ambiente--mapa-esyrce-2025-regadio",
+    "eje-campo-ambiente--ine-uso-agua-agrario-2018"
    ],
    "direct_effects": [
     {
@@ -938,13 +1007,19 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Regadío y agua de riego agrario",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion023/20240222/Votacion003/VOT_20240222110735.json": {
    "question_id": "eje-clima-transicion",
    "facts": [
-    "eje-clima-transicion--gei-2025-total",
-    "eje-clima-transicion--pniec-objetivos-2030",
+    "eje-campo-ambiente--mapa-pac-2025-solicitudes",
+    "eje-campo-ambiente--ine-censo-agrario-2020",
     "eje-clima-transicion--eurostat-empleo-agrario-2025"
    ],
    "direct_effects": [
@@ -959,6 +1034,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "PAC, censo agrario y empleo agrario",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion146/20251113/Votacion092/VOT_20251113131413.json": {
@@ -977,14 +1058,20 @@
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion132/20250917/Votacion023/VOT_20250917194050.json": {
    "question_id": "eje-clima-transicion",
    "facts": [
-    "eje-clima-transicion--gei-2024-transporte-modos",
-    "eje-clima-transicion--eurostat-vuelos-interiores-2025"
+    "eje-fiscalidad--eurostat-2025-pasajeros-aereos",
+    "eje-clima-transicion--gei-2024-transporte-modos"
    ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Plan afecta a toda la aviación, no solo vuelos interiores",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion026/20240229/Votacion018/VOT_20240229115100.json": {
@@ -1010,6 +1097,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Vuelos interiores ya miden las rutas afectadas",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion001/VOT_20251008195214.json": {
@@ -1023,6 +1116,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Municipios desde 10.000 habitantes ya medidos",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion002/VOT_20251008195216.json": {
@@ -1062,6 +1161,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Sin cifra oficial específica de planes y carriles",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion006/VOT_20251008195220.json": {
@@ -1080,14 +1185,20 @@
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion007/VOT_20251008195222.json": {
    "question_id": "eje-clima-transicion",
    "facts": [
-    "eje-clima-transicion--gei-2024-transporte-modos",
-    "eje-clima-transicion--gei-2024-comercio-emisiones"
+    "w008--puertos-sistema-2025",
+    "eje-clima-transicion--gei-2024-transporte-modos"
    ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Sistema portuario estatal: 28 autoridades, 46 puertos",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion008/VOT_20251008195223.json": {
@@ -1106,14 +1217,19 @@
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion009/VOT_20251008195224.json": {
    "question_id": "eje-clima-transicion",
    "facts": [
-    "eje-clima-transicion--eurostat-vuelos-interiores-2025",
-    "eje-clima-transicion--gei-2024-transporte-modos"
+    "w008--eurostat-pasajeros-ue26-2025"
    ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Pasajeros aéreos con la UE, no solo interiores",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion042/VOT_20251008195306.json": {
@@ -1197,15 +1313,20 @@
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion053/VOT_20251008195322.json": {
    "question_id": "eje-clima-transicion",
    "facts": [
-    "eje-clima-transicion--ree-mix-2025",
-    "eje-clima-transicion--eurostat-renovables-2024",
-    "eje-clima-transicion--pniec-objetivos-2030"
+    "w008--idae-repoten2-eolica-2026",
+    "eje-clima-transicion--ree-mix-2025"
    ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "REPOTEN 2 mide la repotenciación concreta",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion055/VOT_20251008195324.json": {
@@ -1225,13 +1346,19 @@
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion056/VOT_20251008195325.json": {
    "question_id": "eje-clima-transicion",
    "facts": [
-    "eje-clima-transicion--ine-municipios-2025"
+    "w008--ine-municipios-10k-50k-2025"
    ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Municipios de 10.000 a 50.000 habitantes",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion057/VOT_20251008195327.json": {
@@ -1262,14 +1389,19 @@
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion060/VOT_20251008195330.json": {
    "question_id": "eje-clima-transicion",
    "facts": [
-    "eje-clima-transicion--eurostat-vuelos-interiores-2025",
-    "eje-clima-transicion--gei-2024-transporte-modos"
+    "w008--eurostat-pasajeros-ue26-2025"
    ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Pasajeros aéreos con la UE, no solo interiores",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion063/VOT_20251008195334.json": {
@@ -1309,6 +1441,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Municipios obligados por la ley ya medidos",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion118/20250612/Votacion004/VOT_20250612132243.json": {
@@ -1365,14 +1503,20 @@
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion109/20250508/Votacion005/VOT_20250508130745.json": {
    "question_id": "eje-clima-transicion",
    "facts": [
-    "eje-clima-transicion--gei-2024-transporte-modos",
-    "eje-clima-transicion--eurostat-vuelos-interiores-2025"
+    "eje-fiscalidad--eurostat-2025-pasajeros-aereos",
+    "eje-clima-transicion--gei-2024-transporte-modos"
    ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Plan afecta a toda la aviación, no solo vuelos interiores",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion095/20250226/Votacion009/VOT_20250226151633.json": {
@@ -1393,13 +1537,18 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Cifras generales de clima y PNIEC ya miden París",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion043/20240530/Votacion035/VOT_20240530120029.json": {
    "question_id": "eje-clima-transicion",
    "facts": [
-    "eje-clima-transicion--gei-2025-total",
-    "eje-clima-transicion--pniec-objetivos-2030",
+    "eje-campo-ambiente--mapa-pac-2025-solicitudes",
     "eje-clima-transicion--pniec-inversion-empleo"
    ],
    "direct_effects": [
@@ -1414,6 +1563,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "PAC y PNIEC inversión",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   }
  }

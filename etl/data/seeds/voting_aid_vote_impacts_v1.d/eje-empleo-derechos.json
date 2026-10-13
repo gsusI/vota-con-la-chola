@@ -188,6 +188,24 @@
    "period": "2024",
    "source": "INE, Movimiento Natural de la Población, tabla 6506",
    "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=6506"
+  },
+  "w015--sanidad-agresiones-2024": {
+   "text": "En 2024 se notificaron 17.070 agresiones a profesionales del Sistema Nacional de Salud, 24,61 por cada 1.000 profesionales; 2.364 más que en 2023.",
+   "period": "2024",
+   "source": "Ministerio de Sanidad, Informe de agresiones a profesionales del SNS 2024",
+   "url": "https://www.sanidad.gob.es/areas/profesionesSanitarias/agresiones/docs/InformeAgresiones2024_1.pdf"
+  },
+  "w015--sanidad-snsrrhh-2023-otros-profesionales": {
+   "text": "En 2023 el SNS tenía 382.731 profesionales además de medicina y enfermería; en hospitales, 177.827 de personal sanitario no facultativo (técnicos, fisioterapeutas…) y 139.473 de personal no sanitario (administrativos, celadores…).",
+   "period": "2023",
+   "source": "Ministerio de Sanidad, Recursos humanos, ordenación profesional y formación en el SNS 2024, apartado 3.2.3",
+   "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/sisInfSanSNS/tablasEstadisticas/InfAnual2024/Monografico_RRHH_2024.pdf"
+  },
+  "w015--sanidad-snsrrhh-2023-urgencias-061": {
+   "text": "En 2023 los servicios de urgencias y emergencias 112/061 del SNS tenían 3.708 profesionales de medicina y 4.270 de enfermería, unos 7.980 en total, entre centros coordinadores y ambulancias.",
+   "period": "2023",
+   "source": "Ministerio de Sanidad, RR.HH. del SNS 2024, apartados 3.2.1 y 3.2.2 (suma propia)",
+   "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/sisInfSanSNS/tablasEstadisticas/InfAnual2024/Monografico_RRHH_2024.pdf"
   }
  },
  "statements": {
@@ -269,6 +287,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Jornada y convenios ya miden el colectivo",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion130/20250910/Votacion010/VOT_20250910213544.json": {
@@ -305,6 +329,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Jornada y convenios ya miden el colectivo",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion129/20250909/Votacion002/VOT_20250909221800.json": {
@@ -371,8 +401,7 @@
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion090/20250211/Votacion002/VOT_20250211202649.json": {
    "question_id": "eje-empleo-derechos",
    "facts": [
-    "eje-empleo-derechos--ine-epa-2025-sanidad",
-    "eje-empleo-derechos--ine-profesionales-sanitarios-2025"
+    "w015--sanidad-agresiones-2024"
    ],
    "direct_effects": [
     {
@@ -401,6 +430,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Agresiones notificadas a profesionales del SNS",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion069/20241022/Votacion003/VOT_20241022211825.json": {
@@ -420,8 +455,7 @@
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion200/20260923/Votacion003/VOT_20260923145117.json": {
    "question_id": "eje-empleo-derechos",
    "facts": [
-    "eje-empleo-derechos--ine-epa-2025-sanidad",
-    "eje-empleo-derechos--ine-profesionales-sanitarios-2025"
+    "w015--sanidad-snsrrhh-2023-otros-profesionales"
    ],
    "direct_effects": [
     {
@@ -445,6 +479,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Escala del personal técnico y de gestión del SNS",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion141/20251022/Votacion003/VOT_20251022134517.json": {
@@ -616,6 +656,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Jornada y convenios ya miden el colectivo",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion025/VOT_20260326165058.json": {
@@ -779,8 +825,7 @@
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion109/20250508/Votacion002/VOT_20250508130739.json": {
    "question_id": "eje-empleo-derechos",
    "facts": [
-    "eje-empleo-derechos--ine-epa-2025-sanidad",
-    "eje-empleo-derechos--ss-pensiones-2026-09"
+    "w015--sanidad-snsrrhh-2023-urgencias-061"
    ],
    "direct_effects": [],
    "review": {
@@ -788,6 +833,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Sin cifra de personal aéreo; usado 112/061 como ámbito",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion056/20240723/Votacion005/VOT_20240723221630.json": {

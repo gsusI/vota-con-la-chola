@@ -10,6 +10,7 @@ downloads so a source fetched once serves everyone.
   fetch URL [-g REGEX]       download once (shared cache), PDF->text with page markers, print only matching lines
   vote URL                   what a Congreso vote was about: expediente text and the point voted (textoSubGrupo)
   ine TABLE [-g REGEX]       latest values of an INE table (servicios.ine.es DATOS_TABLA), one line per series
+  apply-votes DIR            apply per-vote figure reviews (keep/improved, final facts, new facts) to the part files
   apply-reviews DIR          apply reviewer verdicts (one <fact-id>.json each) to the seed and part files
   eurostat DATASET QUERY     Eurostat JSON-stat, e.g. `eurostat ilc_lvho07c "geo=ES&geo=EU27_2020&sinceTimePeriod=2023"`
 
@@ -54,7 +55,7 @@ BLOCKED = {
 }
 
 # Official sites whose TLS chain fails from here (seen 2026-10-13). Retry unverified for these hosts only, never globally.
-INSECURE_SSL_HOSTS = {"www.mites.gob.es", "mites.gob.es", "www.sepe.es", "sepe.es", "www.mapa.gob.es", "mapa.gob.es", "www.csd.gob.es", "www.educacionfpydeportes.gob.es", "www.transportes.gob.es", "www.tribunalconstitucional.es"}
+INSECURE_SSL_HOSTS = {"www.mites.gob.es", "mites.gob.es", "www.sepe.es", "sepe.es", "www.mapa.gob.es", "mapa.gob.es", "servicio.mapa.gob.es", "www.csd.gob.es", "www.educacionfpydeportes.gob.es", "www.transportes.gob.es", "www.tribunalconstitucional.es", "www.juventudeinfancia.gob.es", "juventudeinfancia.gob.es", "observatoriodelainfancia.juventudeinfancia.gob.es", "origin.miteco.gob.es"}
 
 
 def out(text: str, limit: int) -> None:
@@ -67,14 +68,31 @@ def catalog(args: argparse.Namespace) -> None:
     for name, path in [("semilla", SEED)] + [(p.stem, p) for p in sorted(PARTS.glob("*.json"))]:
         for fid, f in (json.loads(path.read_text(encoding="utf-8")).get("facts") or {}).items():
             facts.setdefault(fid, (name, f))
-    rx = re.compile(args.regex, re.I) if args.regex else None
+    import unicodedata
+
+    def fold(t: str) -> str:  # accent-insensitive matching: «pension» finds «pensión»
+        return unicodedata.normalize("NFKD", t).encode("ascii", "ignore").decode()
+
+    rx = re.compile("|".join(f"(?:{fold(r)})" for r in args.regex), re.I) if args.regex else None
     lines = []
     for fid, (_, f) in sorted(facts.items()):
-        line = f"{fid} | {f.get('period')} | {str(f.get('source'))[:70]} | {f.get('text')}"
-        if not rx or rx.search(line):
-            lines.append(line)
+        if args.prefix and not fid.startswith(tuple(args.prefix)):
+            continue
+        full = f"{fid} | {f.get('period')} | {f.get('source')} | {f.get('text')} | {f.get('url')}"
+        if not rx or rx.search(fold(full)):
+            # Compact by default: id, period and the start of the text; --full adds source and the whole text.
+            lines.append(full if args.full else f"{fid} | {f.get('period')} | {str(f.get("text"))[:220]}")
     print(f"{len(lines)} de {len(facts)} cifras")
-    out("\n".join(lines), args.max)
+    shown, used = [], 0
+    for line in lines:
+        if used + len(line) > args.max:
+            break
+        shown.append(line)
+        used += len(line) + 1
+    print("\n".join(shown))
+    if len(shown) < len(lines):  # never hide matches silently: list the rest by id
+        rest = [line.split(" | ", 1)[0] for line in lines[len(shown):]]
+        print(f"… y {len(rest)} más (pide `catalog <id>` para ver una): " + ", ".join(rest))
 
 
 def _jaxi_csv(url: str) -> str:
@@ -247,6 +265,41 @@ def apply_reviews(args: argparse.Namespace) -> None:
         print("sin definición encontrada: " + ", ".join(sorted(missing)))
 
 
+def apply_votes(args: argparse.Namespace) -> None:
+    """One <anything>.json per vote: {"vote_event_id", "verdict": "keep"|"improved", "facts": [...], "new_facts": {...}, "note"}.
+    New facts go into the part file that owns the vote; the vote gets its final facts and a `scale_review` stamp."""
+    reviews = [json.loads(p.read_text(encoding="utf-8")) for p in sorted(Path(args.dir).glob("*.json"))]
+    by_vote = {r["vote_event_id"]: r for r in reviews}
+    known = set()
+    for path in [SEED] + sorted(PARTS.glob("*.json")):
+        known |= set((json.loads(path.read_text(encoding="utf-8")).get("facts") or {}))
+    done, problems = 0, []
+    for path in sorted(PARTS.glob("*.json")) + [SEED]:
+        data = json.loads(path.read_text(encoding="utf-8"))
+        changed = False
+        for vid, vote in (data.get("votes") or {}).items():
+            r = by_vote.get(vid)
+            if not r:
+                continue
+            new = r.get("new_facts") or {}
+            final = r.get("facts") or vote.get("facts")
+            missing = [f for f in final if f not in known and f not in new]
+            if r.get("verdict") not in ("keep", "improved") or not 1 <= len(final) <= 3 or missing:
+                problems.append(f"{vid[-40:]}: verdict={r.get('verdict')} facts={final} desconocidas={missing}")
+                continue
+            for fid, fact in new.items():
+                data.setdefault("facts", {})[fid] = {k: fact[k] for k in ("text", "period", "source", "url")}
+                known.add(fid)
+            vote["facts"] = list(final)
+            vote["scale_review"] = {"verdict": r["verdict"], "note": r.get("note", ""), "by": args.by, "at": args.at}
+            changed, done = True, done + 1
+        if changed:
+            path.write_text(json.dumps(data, ensure_ascii=False, indent=1 if path != SEED else 2) + "\n", encoding="utf-8")
+    print(f"aplicadas {done} de {len(reviews)}; {collections.Counter(r.get('verdict') for r in reviews)}")
+    for line in problems:
+        print("PROBLEMA " + line)
+
+
 def text(url: str) -> str:
     """Cached plain text of a source (raises if blocked or unreachable)."""
     path, status = _download(url)
@@ -285,8 +338,10 @@ def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = p.add_subparsers(dest="cmd", required=True)
     c = sub.add_parser("catalog")
-    c.add_argument("regex", nargs="?")
-    c.add_argument("--max", type=int, default=6000)
+    c.add_argument("regex", nargs="*", help="one or more regex (OR), e.g. catalog pesca flota 'talidom'")
+    c.add_argument("--full", action="store_true")
+    c.add_argument("--prefix", action="append", help="only facts whose id starts with this (repeatable, e.g. --prefix eje-inmigracion --prefix eje-sahara)")
+    c.add_argument("--max", type=int, default=3000)
     f = sub.add_parser("fetch")
     f.add_argument("url")
     f.add_argument("-g", "--grep")
@@ -309,8 +364,12 @@ def main(argv: list[str] | None = None) -> int:
     a.add_argument("dir")
     a.add_argument("--by", default="claude-sonnet-5-5 (revisión de cifras derivadas)")
     a.add_argument("--at", default="2026-10-13")
+    av = sub.add_parser("apply-votes")
+    av.add_argument("dir")
+    av.add_argument("--by", default="claude-sonnet-5-5 (revisión de escalas genéricas)")
+    av.add_argument("--at", default="2026-10-13")
     args = p.parse_args(argv)
-    {"apply-reviews": apply_reviews, "catalog": catalog, "fetch": fetch, "vote": vote, "ine": ine, "eurostat": eurostat}[args.cmd](args)
+    {"apply-votes": apply_votes, "apply-reviews": apply_reviews, "catalog": catalog, "fetch": fetch, "vote": vote, "ine": ine, "eurostat": eurostat}[args.cmd](args)
     return 0
 
 

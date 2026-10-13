@@ -149,6 +149,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Ucrania, gasto OTAN y compromiso ya específicos",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion202/20260930/Votacion007/VOT_20260930153602.json": {
@@ -304,8 +310,8 @@
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion040/20240523/Votacion007/VOT_20240523140937.json": {
    "question_id": "eje-defensa-otan",
    "facts": [
-    "eje-defensa-otan--nato-gasto-espana-2014-2026",
-    "eje-defensa-otan--nato-haya-5pct-2035"
+    "eje-defensa-otan--gobierno-plan-defensa-2025",
+    "eje-defensa-otan--nato-gasto-espana-2014-2026"
    ],
    "direct_effects": [
     {
@@ -319,6 +325,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Plan 2025 lleva al 2 % del PIB",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion040/20240523/Votacion054/VOT_20240523141024.json": {
@@ -333,6 +345,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Tratado marco sin cifra oficial propia",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion185/20260611/Votacion022/VOT_20260611145728.json": {
@@ -500,8 +518,8 @@
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion101/20250320/Votacion009/VOT_20250320125710.json": {
    "question_id": "eje-defensa-otan",
    "facts": [
-    "eje-defensa-otan--nato-gasto-espana-2014-2026",
-    "eje-defensa-otan--nato-haya-5pct-2035"
+    "eje-defensa-otan--gobierno-plan-defensa-2025",
+    "eje-defensa-otan--nato-gasto-espana-2014-2026"
    ],
    "direct_effects": [
     {
@@ -515,6 +533,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Plan de defensa 2025 es el aumento concreto",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion101/20250320/Votacion011/VOT_20250320125712.json": {
@@ -554,6 +578,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Cifra de ayuda militar a Ucrania ya específica",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   }
  }

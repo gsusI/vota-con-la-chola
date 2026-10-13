@@ -1,5 +1,12 @@
 {
- "facts": {},
+ "facts": {
+  "w050--eurostat-enfermeras-2024": {
+   "text": "En 2024 había en España una enfermera de cuidados generales en ejercicio por cada 174 habitantes (unas 5,7 por cada 1.000), según Eurostat.",
+   "period": "2024",
+   "source": "Eurostat, hlth_rs_prs2 (Health personnel), habitantes por enfermera en ejercicio",
+   "url": "https://ec.europa.eu/eurostat/databrowser/view/hlth_rs_prs2/default/table"
+  }
+ },
  "statements": {
   "sanidad-ratios-enfermeras": {
    "facts": [
@@ -14,7 +21,7 @@
    "question_id": "sanidad-ratios-enfermeras",
    "facts": [
     "eje-empleo-derechos--ine-profesionales-sanitarios-2025",
-    "eje-empleo-derechos--ine-epa-2025-sanidad"
+    "w050--eurostat-enfermeras-2024"
    ],
    "direct_effects": [
     {
@@ -43,6 +50,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "enfermeras colegiadas y densidad por habitante",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   }
  }

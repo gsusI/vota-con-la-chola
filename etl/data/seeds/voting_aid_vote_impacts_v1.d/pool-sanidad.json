@@ -1,5 +1,12 @@
 {
- "facts": {},
+ "facts": {
+  "w049--sanidad-siap-2024-ap-medicos": {
+   "text": "En 2024 los equipos de Atención Primaria atendían a 48,03 millones de personas con 31.241 médicos de familia (1.349 personas por médico) y 6.719 pediatras (874 niños por pediatra).",
+   "period": "2024",
+   "source": "Ministerio de Sanidad, SIAP, resumen gráfico de recursos, población asignada y actividad en los equipos de Atención Primaria 2024",
+   "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/docs/siap/RGraficoSIAP_SNS_2024.pdf"
+  }
+ },
  "statements": {},
  "votes": {
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion019/20240206/Votacion006/VOT_20240206213128.json": {
@@ -41,8 +48,7 @@
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion052/20240627/Votacion023/VOT_20240627130355.json": {
    "question_id": "pool-sanidad",
    "facts": [
-    "eje-empleo-derechos--ine-profesionales-sanitarios-2025",
-    "eje-empleo-derechos--ine-epa-2025-sanidad"
+    "w049--sanidad-siap-2024-ap-medicos"
    ],
    "direct_effects": [
     {
@@ -66,6 +72,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "cifra propia de Atención Primaria",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion091/20250212/Votacion003/VOT_20250212154038.json": {
@@ -116,6 +128,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "homenaje simbólico a toda la sanidad pública",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion151/20251127/Votacion001/VOT_20251127124047.json": {

@@ -231,7 +231,9 @@
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion183/20260528/Votacion002/VOT_20260528125336.json": {
    "question_id": "pool-politica-exterior",
    "facts": [
-    "eje-territorial-autogobierno--ine-ecp-2025-poblacion-ccaa"
+    "eje-lenguas--idescat-2021-catalan",
+    "eje-lenguas--eustat-2021-euskera",
+    "eje-lenguas--ige-2018-galego"
    ],
    "direct_effects": [
     {
@@ -255,6 +257,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "hablantes de las tres lenguas cuyo estatus en la UE se pide",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion191/20260625/Votacion016/VOT_20260625150808.json": {

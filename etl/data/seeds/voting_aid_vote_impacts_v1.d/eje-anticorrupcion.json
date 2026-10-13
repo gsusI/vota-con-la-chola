@@ -191,8 +191,7 @@
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion024/20240227/Votacion001/VOT_20240227205807.json": {
    "question_id": "eje-anticorrupcion",
    "facts": [
-    "eje-anticorrupcion--moncloa-ley-clasificada-2025",
-    "eje-anticorrupcion--moncloa-23f-153"
+    "eje-anticorrupcion--moncloa-ley-clasificada-2025"
    ],
    "direct_effects": [
     {
@@ -216,6 +215,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Ley de secretos; quitada cifra del 23-F",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion196/20260910/Votacion005/VOT_20260910180633.json": {
@@ -266,6 +271,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "23-F: cifra de desclasificación ya específica",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion185/20260611/Votacion036/VOT_20260611145747.json": {
@@ -321,8 +332,7 @@
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion088/20241219/Votacion084/VOT_20241219162837.json": {
    "question_id": "eje-anticorrupcion",
    "facts": [
-    "eje-anticorrupcion--oci-2026s1-altos-cargos",
-    "eje-anticorrupcion--cis-3562-corrupcion"
+    "eje-anticorrupcion--oci-2026s1-altos-cargos"
    ],
    "direct_effects": [
     {
@@ -336,6 +346,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Altos cargos AGE; quitada cifra genérica del CIS",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion043/20240530/Votacion007/VOT_20240530120002.json": {
@@ -454,7 +470,7 @@
    "question_id": "eje-anticorrupcion",
    "facts": [
     "eje-anticorrupcion--oci-2026s1-altos-cargos",
-    "eje-anticorrupcion--cis-3562-corrupcion"
+    "eje-justicia-independencia--ue-2026-oci"
    ],
    "direct_effects": [
     {
@@ -473,6 +489,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Altos cargos y autorizaciones a exaltos cargos (puertas giratorias)",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion043/20240530/Votacion018/VOT_20240530120013.json": {

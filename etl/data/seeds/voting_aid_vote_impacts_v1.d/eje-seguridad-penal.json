@@ -252,6 +252,18 @@
    "period": "2025",
    "source": "Defensor del Pueblo, Informe anual 2025 (informe del Mecanismo Nacional de Prevención, pág. 336 del PDF)",
    "url": "https://www.defensordelpueblo.es/wp-content/uploads/2026/03/Defensor-del-Pueblo_Informe-anual-2025.pdf"
+  },
+  "w041--moncloa-2025-efectivos-pn-gc": {
+   "text": "Policía Nacional y Guardia Civil sumaban 156.463 agentes en diciembre de 2024, su máximo histórico. En 2025 se convocaron 6.032 plazas nuevas: 2.914 de Policía Nacional y 3.118 de Guardia Civil.",
+   "period": "diciembre de 2024; oferta de empleo 2025",
+   "source": "Referencia del Consejo de Ministros de 15-4-2025, Ministerio del Interior",
+   "url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/Paginas/2025/250415-referencia-del-consejo-de-ministros.aspx"
+  },
+  "w042--moncloa-2024-agentes-forestales": {
+   "text": "Unos 6.000 agentes forestales y medioambientales trabajan en todo el territorio para distintas administraciones públicas; la ley les da un marco básico común de funciones y acceso.",
+   "period": "5 de marzo de 2024",
+   "source": "Referencia del Consejo de Ministros del 5-3-2024 (lamoncloa.gob.es)",
+   "url": "https://www.lamoncloa.gob.es/consejodeministros/resumenes/Paginas/2024/050324-rp-cministros.aspx"
   }
  },
  "statements": {
@@ -523,6 +535,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Alcohol y siniestralidad ya específicos",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion085/20241212/Votacion008/VOT_20241212130551.json": {
@@ -536,6 +554,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Sin cifra oficial específica de sanciones hallada",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion077/20241119/Votacion002/VOT_20241119211708.json": {
@@ -636,6 +660,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Multas y atentados ya miden la reforma",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion067/20241015/Votacion001/VOT_20241015205431.json": {
@@ -990,7 +1020,7 @@
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion151/20251127/Votacion011/VOT_20251127124100.json": {
    "question_id": "eje-seguridad-penal",
    "facts": [
-    "eje-seguridad-penal--eurostat-policia-2024",
+    "w041--moncloa-2025-efectivos-pn-gc",
     "eje-seguridad-penal--ine-2025-atentados",
     "eje-seguridad-penal--bal-2025-hurtos"
    ],
@@ -1021,6 +1051,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Efectivos PN y GC específicos de la moción",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion109/20250508/Votacion009/VOT_20250508130752.json": {
@@ -1161,7 +1197,7 @@
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion183/20260528/Votacion004/VOT_20260528125339.json": {
    "question_id": "eje-seguridad-penal",
    "facts": [
-    "eje-seguridad-penal--eurostat-policia-2024"
+    "w041--moncloa-2025-efectivos-pn-gc"
    ],
    "direct_effects": [
     {
@@ -1175,6 +1211,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Profesión de riesgo afecta solo a PN y GC",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion174/20260422/Votacion001/VOT_20260422151942.json": {
@@ -1200,7 +1242,7 @@
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion151/20251127/Votacion010/VOT_20251127124059.json": {
    "question_id": "eje-seguridad-penal",
    "facts": [
-    "eje-seguridad-penal--eurostat-policia-2024",
+    "w041--moncloa-2025-efectivos-pn-gc",
     "eje-seguridad-penal--ine-2025-atentados"
    ],
    "direct_effects": [
@@ -1220,6 +1262,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "PN y GC específicos; atentados se mantiene",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion142/20251028/Votacion014/VOT_20251028204600.json": {
@@ -1291,6 +1339,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Cifras de ley mordaza ya adecuadas",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion036/20240423/Votacion032/VOT_20240423213542.json": {
@@ -1521,6 +1575,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Atentados condenados miden esta medida",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion174/20260422/Votacion002/VOT_20260422151944.json": {
@@ -1698,11 +1758,18 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Sin cifra oficial específica de sanciones hallada",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion056/20240723/Votacion016/VOT_20240723221644.json": {
    "question_id": "eje-seguridad-penal",
    "facts": [
+    "w042--moncloa-2024-agentes-forestales",
     "eje-seguridad-penal--ine-2025-atentados"
    ],
    "review": {
@@ -1710,6 +1777,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Colectivo: unos 6.000 agentes; atentados como contexto",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion043/20240530/Votacion009/VOT_20240530120004.json": {

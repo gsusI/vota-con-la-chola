@@ -161,6 +161,36 @@
    "period": "Real Decreto 180/2026, de 11 de marzo (BOE de 12-03-2026)",
    "source": "BOE, Real Decreto 180/2026 (preámbulo)",
    "url": "https://www.boe.es/eli/es/rd/2026/03/11/180"
+  },
+  "w027--menores-extranjeros-condenados-2025": {
+   "text": "En 2025 el INE contó 13.245 menores de 14 a 17 años condenados; con un 78,5 % españoles, unos 2.850 eran extranjeros. Solo una parte cumple más de 6 meses de internamiento y sale a los 16 años o más.",
+   "period": "2025",
+   "source": "INE, Población Condenada Menor de edad 2025 (nota de prensa); suma propia (13.245 × 21,5 %)",
+   "url": "https://ine.es/dyngs/Prensa/EPCAEPCM2025.htm"
+  },
+  "w026--igualdad-2025-ejecucion": {
+   "text": "En 2025 el Ministerio de Igualdad reconoció obligaciones por 481,3 millones de euros, el 95,97 % de su presupuesto vigente (un 14,1 % más que en 2024).",
+   "period": "2025 (a 31 de diciembre)",
+   "source": "Ministerio de Igualdad, nota «La ejecución presupuestaria del Ministerio de Igualdad roza el 96% en 2025»",
+   "url": "https://www.igualdad.gob.es/comunicacion/sala-de-prensa/la-ejecucion-presupuestaria-del-ministerio-de-igualdad-roza-el-96-en-2025-y-supera-la-del-ejercicio-anterior/"
+  },
+  "w025--cm-ceuta-2026-09-militares": {
+   "text": "A 29 de septiembre de 2026 había 4.198 militares de las Fuerzas Armadas desplegados en Ceuta, con 8.550 patrullas de vigilancia desde el inicio de la crisis.",
+   "period": "a 29 de septiembre de 2026",
+   "source": "Referencia del Consejo de Ministros de 29-09-2026, informe actualizado sobre la situación en Ceuta",
+   "url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/2026/20260929-referencia-rueda-de-prensa-ministros.aspx"
+  },
+  "w025--cm-ceuta-2026-09-retornos": {
+   "text": "Hasta el 29 de septiembre de 2026 habían regresado 8.243 personas desde Ceuta: 7.794 de forma voluntaria y 449 por expulsión.",
+   "period": "a 29 de septiembre de 2026",
+   "source": "Referencia del Consejo de Ministros de 29-09-2026, informe actualizado sobre la situación en Ceuta",
+   "url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/2026/20260929-referencia-rueda-de-prensa-ministros.aspx"
+  },
+  "w025--cm-ceuta-2026-09-menores": {
+   "text": "A 29 de septiembre de 2026 había 2.493 menores en el sistema de protección de Ceuta; 213 estaban reubicados en la península (69 por reagrupación familiar y 144 en comunidades autónomas).",
+   "period": "a 29 de septiembre de 2026",
+   "source": "Referencia del Consejo de Ministros de 29-09-2026, informe actualizado sobre la situación en Ceuta",
+   "url": "https://www.lamoncloa.gob.es/consejodeministros/referencias/paginas/2026/20260929-referencia-rueda-de-prensa-ministros.aspx"
   }
  },
  "statements": {
@@ -206,6 +236,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Sin cifra oficial de saharauis beneficiarios; solo prensa",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion106/20250410/Votacion015/VOT_20250410155154.json": {
@@ -241,6 +277,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Cifras ya específicas de menores no acompañados",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion197/20260915/Votacion001/VOT_20260915204520.json": {
@@ -271,6 +313,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "llegadas irregulares miden el ámbito de la medida",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion160/20260217/Votacion002/VOT_20260217203204.json": {
@@ -301,6 +349,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "sin cifra oficial de mujeres con burka o nicab",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion131/20250916/Votacion001/VOT_20250916211204.json": {
@@ -367,6 +421,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "sin cifra oficial de extranjeros empadronados irregulares",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion067/20241015/Votacion002/VOT_20241015205432.json": {
@@ -397,13 +457,19 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "nacionalizaciones por residencia ya miden el colectivo",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion057/20240910/Votacion002/VOT_20240910210837.json": {
    "question_id": "eje-inmigracion",
    "facts": [
-    "eje-inmigracion--opi-2026-06-menores-extutelados",
-    "eje-inmigracion--gobierno-2025-02-registro-menores"
+    "w027--menores-extranjeros-condenados-2025",
+    "eje-seguridad-penal--ine-2025-menores-tasa"
    ],
    "direct_effects": [
     {
@@ -422,6 +488,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "estimación propia de menores extranjeros condenados",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion056/20240723/Votacion063/VOT_20240723221735.json": {
@@ -458,6 +530,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "cifras ya miden menores y territorios afectados",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion046/20240613/Votacion021/VOT_20240613125233.json": {
@@ -534,7 +612,7 @@
    "question_id": "eje-inmigracion",
    "facts": [
     "eje-inmigracion--interior-2026-08-llegadas",
-    "eje-inmigracion--eurostat-2025-ordenes-retornos",
+    "eje-inmigracion--opi-2026-06-marruecos",
     "eje-inmigracion--gobierno-2025-02-registro-menores"
    ],
    "direct_effects": [
@@ -564,6 +642,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Ceuta, Marruecos y menores en lugar de retornos generales",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion198/20260916/Votacion001/VOT_20260916195336.json": {
@@ -589,6 +673,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Cifras actuales miden bien el colectivo",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion198/20260916/Votacion010/VOT_20260916195355.json": {
@@ -624,8 +714,8 @@
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion196/20260910/Votacion004/VOT_20260910180632.json": {
    "question_id": "eje-inmigracion",
    "facts": [
+    "eje-sahara-marruecos--ine-ecp-2025-ceuta-melilla",
     "eje-inmigracion--interior-2026-08-llegadas",
-    "eje-inmigracion--frontex-2025-ue",
     "eje-inmigracion--eurostat-2025-ordenes-retornos"
    ],
    "direct_effects": [
@@ -650,6 +740,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Población de Ceuta y Melilla primero; plan 650M para ambas",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion191/20260625/Votacion013/VOT_20260625150802.json": {
@@ -864,9 +960,9 @@
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion164/20260226/Votacion019/VOT_20260226153424.json": {
    "question_id": "eje-inmigracion",
    "facts": [
-    "eje-inmigracion--eurostat-2025-ordenes-retornos",
-    "eje-inmigracion--inclusion-2026-regularizacion-extraordinaria",
-    "eje-inmigracion--opi-2025-nacionalidad-residencia"
+    "eje-inmigracion--opi-2026-06-arraigo",
+    "eje-inmigracion--opi-2025-nacionalidad-residencia",
+    "eje-inmigracion--inclusion-2026-regularizacion-extraordinaria"
    ],
    "direct_effects": [
     {
@@ -895,14 +991,20 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Arraigo y nacionalidades son las cifras específicas",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion148/20251119/Votacion004/VOT_20251119145819.json": {
    "question_id": "eje-inmigracion",
    "facts": [
+    "w026--igualdad-2025-ejecucion",
     "eje-inmigracion--eurostat-2025-ordenes-retornos",
-    "eje-inmigracion--ine-2025-condenados-nacionalidad",
-    "eje-inmigracion--ine-ecp-2026-07-poblacion"
+    "eje-inmigracion--ine-2025-condenados-nacionalidad"
    ],
    "direct_effects": [
     {
@@ -931,6 +1033,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Presupuesto de Igualdad: gasto afectado por supresión",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion132/20250917/Votacion002/VOT_20250917194020.json": {
@@ -967,6 +1075,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Cifras ya miden seguridad, expulsiones y población extranjera",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion132/20250917/Votacion015/VOT_20250917194037.json": {
@@ -1003,6 +1117,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "cifras actuales ya miden la medida",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion121/20250619/Votacion005/VOT_20250619120742.json": {
@@ -1167,6 +1287,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "cifras actuales ya miden la medida",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion060/20240918/Votacion007/VOT_20240919102655.json": {
@@ -1239,55 +1365,79 @@
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion202/20260930/Votacion009/VOT_20260930153607.json": {
    "question_id": "eje-inmigracion",
    "facts": [
+    "w025--cm-ceuta-2026-09-militares",
     "eje-inmigracion--interior-2026-08-llegadas",
-    "eje-inmigracion--frontex-2025-ue"
+    "eje-control-gobierno--ine-ceuta-2025-poblacion"
    ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Militares desplegados en Ceuta y población",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion200/20260923/Votacion006/VOT_20260923145121.json": {
    "question_id": "eje-inmigracion",
    "facts": [
-    "eje-inmigracion--interior-2026-08-llegadas",
-    "eje-inmigracion--gobierno-2025-02-registro-menores",
-    "eje-inmigracion--politica-territorial-2026-02-menores-reubicados"
+    "w025--cm-ceuta-2026-09-retornos",
+    "w025--cm-ceuta-2026-09-menores",
+    "eje-inmigracion--interior-2026-08-llegadas"
    ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Cifras específicas de Ceuta: retornos y menores",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion198/20260916/Votacion013/VOT_20260916195400.json": {
    "question_id": "eje-inmigracion",
    "facts": [
-    "eje-inmigracion--interior-2026-08-llegadas",
-    "eje-inmigracion--gobierno-2025-02-registro-menores",
-    "eje-inmigracion--politica-territorial-2026-02-menores-reubicados"
+    "w025--cm-ceuta-2026-09-retornos",
+    "w025--cm-ceuta-2026-09-menores",
+    "eje-inmigracion--interior-2026-08-llegadas"
    ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Cifras específicas de Ceuta: retornos y menores",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion164/20260226/Votacion002/VOT_20260226153358.json": {
    "question_id": "eje-inmigracion",
    "facts": [
-    "eje-inmigracion--eurostat-2025-ordenes-retornos",
-    "eje-inmigracion--interior-2025-llegadas"
+    "eje-inmigracion--eurostat-2025-ordenes-retornos"
    ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Órdenes y retornos miden la ejecución; quitada llegadas",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion142/20251028/Votacion019/VOT_20251028204607.json": {
@@ -1301,6 +1451,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "cifras actuales ya miden la medida",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion115/VOT_20251008195429.json": {
@@ -1327,6 +1483,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Llegadas y retornos ya miden esta medida",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion098/20250313/Votacion003/VOT_20250313133853.json": {
@@ -1341,6 +1503,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Llegadas por territorio ya miden control fronterizo",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion070/20241023/Votacion028/VOT_20241023184409.json": {
@@ -1368,6 +1536,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Cifras actuales miden bien el colectivo",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion196/20260910/Votacion001/VOT_20260910180627.json": {
@@ -1381,19 +1555,31 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "sin cifra oficial de saharauis beneficiarios",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion003/VOT_20260326165025.json": {
    "question_id": "eje-inmigracion",
    "facts": [
-    "eje-inmigracion--ine-2025-condenados-nacionalidad",
-    "eje-inmigracion--eurostat-2025-ordenes-retornos"
+    "eje-seguridad-penal--ine-2025-hurtos-estafas",
+    "eje-inmigracion--ine-2025-condenados-nacionalidad"
    ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "hurtos condenados como delito típico de reiteración",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion196/20260910/Votacion002/VOT_20260910180629.json": {
@@ -1407,6 +1593,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "sin cifra oficial de saharauis beneficiarios",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion164/20260226/Votacion003/VOT_20260226153400.json": {
@@ -1420,6 +1612,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Condenados extranjeros y órdenes ya miden la medida",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion164/20260226/Votacion004/VOT_20260226153401.json": {
@@ -1433,6 +1631,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Condenados extranjeros y órdenes ya miden la medida",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion164/20260226/Votacion005/VOT_20260226153403.json": {
@@ -1446,19 +1650,30 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Condenados extranjeros y órdenes ya miden la medida",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion164/20260226/Votacion006/VOT_20260226153404.json": {
    "question_id": "eje-inmigracion",
    "facts": [
-    "eje-inmigracion--eurostat-2025-ordenes-retornos",
-    "eje-inmigracion--interior-2025-llegadas"
+    "eje-inmigracion--eurostat-2025-ordenes-retornos"
    ],
    "review": {
     "status": "draft",
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "Expulsiones ordenadas y ejecutadas; quitada llegadas",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion164/20260226/Votacion007/VOT_20260226153405.json": {
@@ -1485,6 +1700,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Llegadas y cruces Frontex miden la vigilancia",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion142/20251028/Votacion020/VOT_20251028204608.json": {
@@ -1511,6 +1732,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "cifras actuales ya miden la medida",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion142/20251028/Votacion024/VOT_20251028204614.json": {
@@ -1524,6 +1751,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "cifras actuales ya miden la medida",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion142/20251028/Votacion025/VOT_20251028204615.json": {
@@ -1537,6 +1770,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "cifras actuales ya miden la medida",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion101/20250320/Votacion016/VOT_20250320125717.json": {
@@ -1550,6 +1789,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Llegadas a Canarias y Frontex ya adecuadas",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion101/20250320/Votacion017/VOT_20250320125719.json": {
@@ -1563,6 +1808,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Llegadas y Frontex ya miden la política",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion101/20250320/Votacion018/VOT_20250320125719.json": {
@@ -1576,6 +1827,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Llegadas y regularización ya adecuadas",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion036/20240423/Votacion005/VOT_20240423213516.json": {
@@ -1589,6 +1846,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Cifras actuales miden bien el colectivo",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion036/20240423/Votacion006/VOT_20240423213517.json": {
@@ -1616,6 +1879,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Sin cifra oficial vigente de subvenciones ONG",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion036/20240423/Votacion008/VOT_20240423213519.json": {
@@ -1668,6 +1937,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Cifras actuales miden bien el colectivo",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion036/20240423/Votacion012/VOT_20240423213523.json": {
@@ -1722,6 +1997,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Cifras actuales miden bien el colectivo",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion036/20240423/Votacion016/VOT_20240423213527.json": {
@@ -1735,6 +2016,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Cifras actuales miden bien el colectivo",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion036/20240423/Votacion017/VOT_20240423213528.json": {
@@ -1761,6 +2048,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Cifras actuales miden bien el colectivo",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion036/20240423/Votacion020/VOT_20240423213530.json": {
@@ -1774,6 +2067,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "Cifras actuales miden bien el colectivo",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   }
  }

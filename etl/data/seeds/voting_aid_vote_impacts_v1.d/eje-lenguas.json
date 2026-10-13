@@ -290,9 +290,8 @@
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion054/20240711/Votacion003/VOT_20240711150623.json": {
    "question_id": "eje-lenguas",
    "facts": [
-    "eje-lenguas--cgpj-2025-asuntos-ingresados",
-    "eje-justicia-independencia--ue-2026-jueces-plantilla",
-    "eje-lenguas--ine-ecp-2026-poblacion-ccaa-lengua"
+    "eje-lenguas--ine-ecp-2026-poblacion-ccaa-lengua",
+    "eje-lenguas--cgpj-2025-asuntos-ingresados"
    ],
    "direct_effects": [
     {
@@ -311,13 +310,20 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "población cooficial primero; quitada plantilla de jueces",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion003/20230921/Votacion004/VOT_20230921120100.json": {
    "question_id": "eje-lenguas",
    "facts": [
-    "eje-lenguas--boe-congreso-2024-contratos-traduccion",
-    "eje-lenguas--ine-ecp-2026-poblacion-ccaa-lengua"
+    "eje-anticorrupcion--loreg-350-diputados",
+    "eje-lenguas--ine-ecp-2026-poblacion-ccaa-lengua",
+    "eje-lenguas--boe-congreso-2024-contratos-traduccion"
    ],
    "direct_effects": [
     {
@@ -341,13 +347,20 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "350 diputados son quienes usarían las lenguas",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion002/20230919/Votacion001/VOT_20230919152005.json": {
    "question_id": "eje-lenguas",
    "facts": [
-    "eje-lenguas--boe-congreso-2024-contratos-traduccion",
-    "eje-lenguas--ine-ecp-2026-poblacion-ccaa-lengua"
+    "eje-anticorrupcion--loreg-350-diputados",
+    "eje-lenguas--ine-ecp-2026-poblacion-ccaa-lengua",
+    "eje-lenguas--boe-congreso-2024-contratos-traduccion"
    ],
    "direct_effects": [
     {
@@ -371,6 +384,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "improved",
+    "note": "350 diputados son quienes usarían las lenguas",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion054/20240711/Votacion005/VOT_20240711150625.json": {
@@ -396,6 +415,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "scale_review": {
+    "verdict": "keep",
+    "note": "sin cifra oficial específica de comunicaciones judiciales",
+    "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
    }
   }
  }
