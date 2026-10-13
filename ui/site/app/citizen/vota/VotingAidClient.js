@@ -1013,7 +1013,7 @@ function parentLabel(question) {
   return question.parentText ? `Parte de: «${question.parentText}»` : null;
 }
 
-const AUTO_NEXT_MS = 7000;
+const AUTO_NEXT_MS = 5000;
 
 /**
  * Waze-style auto-advance: the «Siguiente» border fills up and then moves on by itself.
