@@ -75,6 +75,13 @@ jobs:
       - name: Install site dependencies
         run: npm ci --no-audit --no-fund --prefix ui/site
 
+      - name: Restore verification cache
+        # The immutable PLACSP launch release is verified once per release (see just placsp-launch-verify).
+        uses: actions/cache@v4
+        with:
+          path: etl/data/cache
+          key: placsp-launch-${{ hashFiles('ui/site/public/spending/launch/latest.json', 'tests/test_placsp_launch.py', 'docs/examples/placsp-launch/reproduce.py', 'scripts/build_placsp_launch.py') }}
+
       - name: Normalize snapshot date
         run: |
           echo "SNAPSHOT_DATE=$(date -u +%F)" >> "$GITHUB_ENV"

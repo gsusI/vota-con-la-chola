@@ -88,12 +88,15 @@ def is_published(rel: Path) -> bool:
     return not any(part.startswith(".") for part in rel.parts)
 
 
-def scan_site(site: Path, *, workers: int = 8) -> list[LocalFile]:
+def scan_site(site: Path, *, workers: int = 8, hashes: bool = True) -> list[LocalFile]:
     paths = sorted(
         p for p in site.rglob("*") if p.is_file() and not p.is_symlink() and is_published(p.relative_to(site))
     )
 
     def digest(path: Path) -> LocalFile:
+        if not hashes:  # prune only needs paths and sizes
+            rel = path.relative_to(site).as_posix()
+            return LocalFile(rel, path.stat().st_size, "", "", content_type_for(rel))
         md5 = hashlib.md5(usedforsecurity=False)
         sha = hashlib.sha256()
         with path.open("rb") as handle:
@@ -386,7 +389,7 @@ def main(argv: list[str] | None = None, *, client: Any = None) -> int:
             check=True,
         )
 
-    files = scan_site(site)
+    files = scan_site(site, hashes=not args.prune_only)
     now = datetime.now(timezone.utc)
     stamp = read_build_stamp(site)
     source_commit = args.source_commit or stamp.get("source_commit") or git_head(site)

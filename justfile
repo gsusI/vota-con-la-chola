@@ -4803,9 +4803,19 @@ site-build:
 _site-build-unlocked:
   if [ "${CLOUDFLARE_PAGES_FROZEN_INPUTS:-0}" = "1" ]; then just site-build-frozen; else just site-build-refresh; fi
 
-site-build-frozen:
-  @just privacy-check-public-artifacts
+# The PLACSP launch release is content-addressed and immutable: verify it once per release (and per
+# change to its tests/reproducer), not on every build. The stamp lives in the gitignored cache.
+placsp-launch-verify:
+  #!/usr/bin/env bash
+  set -euo pipefail
+  key="$(cat ui/site/public/spending/launch/latest.json tests/test_placsp_launch.py docs/examples/placsp-launch/reproduce.py scripts/build_placsp_launch.py | shasum -a 256 | cut -c1-32)"
+  stamp="etl/data/cache/placsp-launch-verified-$key"
+  if [ -f "$stamp" ]; then echo "PLACSP launch release already verified ($key)"; exit 0; fi
   python3 -m unittest tests.test_placsp_launch -v
+  mkdir -p etl/data/cache && touch "$stamp"
+
+site-build-frozen:
+  just placsp-launch-verify
   node tests/test_spending_decision_dates.mjs
   node scripts/build_spending_backend.mjs /tmp/vclc-spending-build-validation --plan-only
   cp /tmp/vclc-spending-build-validation/release.json infra/cloudflare/spending-api/src/release.json
