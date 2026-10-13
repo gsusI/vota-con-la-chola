@@ -231,8 +231,14 @@ def sync(
         stale = sorted(
             key for key in remote if key not in wanted and not any(key.startswith(SITE_PREFIX + d) for d in RESERVED_DIRS)
         )
-        if remote and len(stale) > max_delete_ratio * len(remote):
-            raise SystemExit(f"Refusing to delete {len(stale)}/{len(remote)} objects (> {max_delete_ratio:.0%})")
+        # Leftovers outside the R2-served prefixes are shadowed by static assets: always safe to drop.
+        # Inside them, a big deletion means a broken build: keep the ratio guard there.
+        from prepare_site_static_assets import R2_ONLY_PREFIXES
+
+        served = [k for k in remote if k[len(SITE_PREFIX):].startswith(R2_ONLY_PREFIXES)]
+        stale_served = [k for k in stale if k[len(SITE_PREFIX):].startswith(R2_ONLY_PREFIXES)]
+        if served and len(stale_served) > max_delete_ratio * len(served):
+            raise SystemExit(f"Refusing to delete {len(stale_served)}/{len(served)} R2-served objects (> {max_delete_ratio:.0%})")
         for batch in chunked(stale, 1000):
             client.delete_objects(Bucket=bucket, Delete={"Objects": [{"Key": k} for k in batch], "Quiet": True})
         return {"remote_before": len(remote), "deleted": len(stale)}

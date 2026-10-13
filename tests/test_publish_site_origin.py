@@ -282,5 +282,19 @@ class TestSiteLock(unittest.TestCase):
             self.assertEqual(nested.returncode, 0)
 
 
+class PruneOnlyTests(unittest.TestCase):
+    def test_prune_drops_static_leftovers_but_guards_r2_served_prefixes(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            site = write_site(Path(tmp) / "site", {"index.html": b"x", "spending/launch/a/f.json": b"1"})
+            client = FakeS3({f"site/page{i}.html": b"p" for i in range(30)})
+            client.objects["site/spending/launch/a/f.json"] = b"1"
+            argv = ["--site", str(site), "--skip-privacy-check", "--r2-only", "--prune-only", "--release-id", "r", "--source-commit", "c"]
+            pso.main(argv, client=client)
+            self.assertEqual(sorted(client.objects), ["site/spending/launch/a/f.json"])
+            client.objects.update({f"site/spending/launch/old{i}.json": b"o" for i in range(5)})
+            with self.assertRaises(SystemExit):
+                pso.main(argv, client=client)
+
+
 if __name__ == "__main__":
     unittest.main()
