@@ -156,6 +156,21 @@ turns, same validator, same quality).
 - Order waves so later units reuse earlier work (big/thematic units first, then units that mostly pick from the
   catalog). Max 20 concurrent subagents; one output file per agent to avoid write conflicts.
 
+Mandatory loop for any large subagent job (do not launch a full wave blind):
+1. **Pilot with ONE agent** on a small but varied slice (2–5 items of different kinds), run in foreground.
+2. **Measure** with `python3 scripts/subagent_usage_report.py <session-dir>/subagents --only <id>`: turns, input
+   tokens, largest tool results. Ask the agent to end its report with "what tool/data would have saved me turns".
+3. **Fix the wheel, not the agent**: turn every rediscovery into shared tooling (kit subcommand or python helper,
+   pre-extracted field in the worklist, known-blocked host, example in `--help`) and tighten the prompt. Prefer
+   helpers that let the agent fetch + compute in ONE python call over multi-step shell chains.
+4. **Scale gradually while watching**: a second small wave (2–3 agents) with the fixes, re-measure, then the rest.
+   Batch items that share a source in the same agent (cache + context reuse; ~5 items per agent).
+5. **Verify outputs mechanically** (validator/apply script), never by trusting reports; collect reject/unverifiable
+   for a person. Reviewer outputs are one file per item (e.g. `kit apply-reviews <dir>` stamps `review` on facts).
+Reference costs (2026-10-13): drafting old prompt ~0.7 M input tokens per vote; efficient mode ~0.15–0.4 M;
+derived-figure review: pilot 0.7 M per figure → 0.35 M after the first fixes → 0.15–0.25 M
+once the kit fetched+computed in one python call (outliers were TLS-broken hosts and xlsx sources, then added to the kit).
+
 ## Working Agreement
 
 ### Source Of Truth

@@ -31,10 +31,17 @@
    "url": "https://www.ochaopt.org/content/reported-impact-snapshot-gaza-strip-7-october-2026"
   },
   "eje-israel-palestina--ocha-2026-08-cisjordania-muertos": {
-   "text": "Entre enero de 2025 y agosto de 2026 murieron 322 palestinos en Cisjordania, 74 de ellos niños: 284 por fuerzas israelíes, 25 por colonos y 13 sin atribuir.",
+   "text": "Entre enero de 2025 y agosto de 2026 murieron 322 palestinos en Cisjordania, 74 de ellos niños: 284 por fuerzas israelíes, 25 por colonos y 13 por fuerzas o colonos israelíes sin poder precisar cuáles.",
    "period": "1 de enero de 2025 - 31 de agosto de 2026",
-   "source": "OCHA, West Bank monthly snapshot: casualties, property damage and displacement (agosto de 2026), cifras clave",
-   "url": "https://www.ochaopt.org/content/west-bank-monthly-snapshot-casualties-property-damage-and-displacement-august-2026"
+   "source": "OCHA, West Bank monthly snapshot: casualties, property damage and displacement (agosto de 2026), cifras clave (PDF enlazado en la página)",
+   "url": "https://www.ochaopt.org/content/west-bank-monthly-snapshot-casualties-property-damage-and-displacement-august-2026",
+   "review": {
+    "status": "agent_reviewed",
+    "verdict": "corrected",
+    "checked": "PDF del snapshot: 322 muertos (74 niños) = 284 fuerzas + 25 colonos + 13 'fuerzas o colonos' (suma 322). Periodo 1-1-2025 a 31-8-2026 correcto.",
+    "by": "claude-sonnet-5-5 (revisión de cifras derivadas)",
+    "at": "2026-10-13"
+   }
   },
   "eje-israel-palestina--comercio-2025s1-licencias-israel": {
    "text": "Desde octubre de 2023 no se ha autorizado ninguna licencia nueva de venta de material de defensa a Israel. En el primer semestre de 2025 no hubo exportaciones: solo 24 licencias temporales (reparaciones y mantenimiento), sin pago.",

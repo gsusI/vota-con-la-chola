@@ -46,7 +46,14 @@
    "text": "Un hogar español pagó 0,267 euros por kWh de electricidad; sin impuestos ni gravámenes habrían sido 0,184. IVA, impuestos y gravámenes suman 0,083 euros por kWh (31 % del precio).",
    "period": "segundo semestre de 2025",
    "source": "Eurostat, nrg_pc_204 (consumo de 2.500 a 4.999 kWh al año; con y sin impuestos)",
-   "url": "https://ec.europa.eu/eurostat/databrowser/view/nrg_pc_204/default/table?lang=en"
+   "url": "https://ec.europa.eu/eurostat/databrowser/view/nrg_pc_204/default/table?lang=en",
+   "review": {
+    "status": "agent_reviewed",
+    "verdict": "ok",
+    "checked": "Eurostat ES 2025-S2, banda 2.500-4.999 kWh, EUR/kWh: todos los impuestos 0,2669 (0,267); sin impuestos 0,184; diferencia 0,0829 (0,083); 0,0829/0,2669 = 31,06 % (31 %).",
+    "by": "claude-sonnet-5-5 (revisión de cifras derivadas)",
+    "at": "2026-10-13"
+   }
   },
   "eje-nuclear--miteco-2025-06-reserva-hidrica": {
    "text": "El 3 de junio de 2025 los embalses guardaban 43.038 hm³, el 76,8 % de su capacidad: del 92,2 % en el Duero y 85,6 % en el Tajo al 31,1 % en el Segura.",

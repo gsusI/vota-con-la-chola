@@ -16,7 +16,14 @@
    "text": "En el segundo trimestre de 2026 trabajaban en agricultura, ganadería, silvicultura y pesca 787.200 personas (3,5 % de los ocupados): 510.900 asalariadas y 275.600 por cuenta propia.",
    "period": "2.º trimestre de 2026",
    "source": "INE, Encuesta de Población Activa, tabla 79286 (ocupados por sector y situación profesional)",
-   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=79286"
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=79286",
+   "review": {
+    "status": "agent_reviewed",
+    "verdict": "ok",
+    "checked": "ine_series(79286) 2T2026: Agricultura total 787,2; asalariados 510,9; cuenta propia 275,6 (+0,7 otra situación); total ocupados 22.779,0 -> 3,46 % (3,5 %).",
+    "by": "claude-sonnet-5-5 (revisión de cifras derivadas)",
+    "at": "2026-10-13"
+   }
   },
   "eje-campo-comercio--ine-eea-2023-explotaciones": {
    "text": "En 2023 había 784.141 explotaciones agrícolas en España (un 12,4 % menos que en el censo de 2020), con 23,5 millones de hectáreas cultivadas o de pasto; el 28,9 % de sus jefes eran mujeres.",

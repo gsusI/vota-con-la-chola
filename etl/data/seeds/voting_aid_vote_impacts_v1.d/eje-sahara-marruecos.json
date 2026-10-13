@@ -4,7 +4,14 @@
    "text": "ACNUR registraba 173.600 personas refugiadas procedentes del Sáhara Occidental en Argelia a finales de 2025.",
    "period": "finales de 2025",
    "source": "ACNUR, base de datos de población (API), refugiados de Sáhara Occidental acogidos en Argelia, año 2025",
-   "url": "https://api.unhcr.org/population/v1/population/?year=2025&coa=ALG&coo=WSH"
+   "url": "https://api.unhcr.org/population/v1/population/?year=2025&coa=ALG&coo=WSH",
+   "review": {
+    "status": "agent_reviewed",
+    "verdict": "ok",
+    "checked": "Consulté la API de ACNUR (year=2025, coa=ALG, coo=WSH): refugees=173600.",
+    "by": "claude-sonnet-5-5 (revisión de cifras derivadas)",
+    "at": "2026-10-13"
+   }
   },
   "eje-sahara-marruecos--eurostat-2025-comercio-marruecos": {
    "text": "En 2025 España vendió a Marruecos bienes por 12.499 millones de € (el 8,3 % de lo que exporta fuera de la UE) y le compró 10.257 millones de €.",

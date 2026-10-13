@@ -16,7 +16,14 @@
    "text": "A 1 de enero de 2025 vivían en España 7.579.974 mujeres de 45 a 64 años, la franja en la que suelen llegar la perimenopausia y la menopausia.",
    "period": "1 de enero de 2025",
    "source": "INE, Estadística Continua de Población, tabla 56934 (suma de edades simples 45 a 64)",
-   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=56934"
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=56934",
+   "review": {
+    "status": "agent_reviewed",
+    "verdict": "ok",
+    "checked": "Sumé las 20 edades simples 45 a 64 de Mujeres, Total Nacional, 1 ene 2025: 7.579.974.",
+    "by": "claude-sonnet-5-5 (revisión de cifras derivadas)",
+    "at": "2026-10-13"
+   }
   },
   "pool-otros--ine-leon-poblacion-2021": {
    "text": "La provincia de León tenía 451.706 habitantes empadronados en 2021: 219.532 hombres y 232.174 mujeres.",

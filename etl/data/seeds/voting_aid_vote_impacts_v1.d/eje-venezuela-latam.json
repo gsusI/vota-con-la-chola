@@ -55,10 +55,17 @@
    "url": "https://news.un.org/en/story/2026/01/1166706"
   },
   "eje-venezuela-latam--acnur-2025-venezolanos": {
-   "text": "A finales de 2025 ACNUR contaba 7,88 millones de venezolanos fuera de su país: 6,04 millones con necesidad de protección internacional, 1,18 millones solicitantes de asilo, 417.010 refugiados y 237.702 de otros grupos.",
+   "text": "A finales de 2025 ACNUR contaba 7,88 millones de venezolanos fuera de su país (suma de cuatro categorías): 6,04 millones con necesidad de protección internacional, 1,18 millones solicitantes de asilo, 417.010 refugiados y 237.702 de otros grupos.",
    "period": "finales de 2025",
-   "source": "ACNUR, estadísticas de población, país de origen Venezuela",
-   "url": "https://api.unhcr.org/population/v1/population/?year=2025&coo=VEN&limit=500&cf_type=ISO"
+   "source": "ACNUR, estadísticas de población, país de origen Venezuela; suma propia de refugiados, solicitantes de asilo, otros grupos de interés y personas con necesidad de protección internacional",
+   "url": "https://api.unhcr.org/population/v1/population/?year=2025&coo=VEN&limit=500&cf_type=ISO",
+   "review": {
+    "status": "agent_reviewed",
+    "verdict": "corrected",
+    "checked": "Recalculé 6.042.706 (oip) + 1.181.156 (solicitantes) + 417.010 (refugiados) + 237.702 (ooc) = 7.878.574 (7,88 M); cada componente cuadra (6,04 M; 1,18 M).",
+    "by": "claude-sonnet-5-5 (revisión de cifras derivadas)",
+    "at": "2026-10-13"
+   }
   },
   "eje-venezuela-latam--onu-2025-nicaragua-nacionalidad": {
    "text": "El grupo de expertos de la ONU documentó que Nicaragua quitó la nacionalidad a 452 personas (317 hasta 2024, la mayoría apátridas, y otras 135 después) y en la mayoría de los casos les confiscó bienes, pensiones y cuentas.",

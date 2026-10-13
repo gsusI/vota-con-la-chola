@@ -4,7 +4,14 @@
    "text": "En 2021 España tenía 8.131 municipios: 6.335 con 3.000 habitantes o menos, 483 con entre 3.001 y 5.000 y 7.717 (el 95 %) con 20.000 o menos.",
    "period": "2021",
    "source": "INE, distribución de los municipios por tamaño (tabla 2851)",
-   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=2851"
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=2851",
+   "review": {
+    "status": "agent_reviewed",
+    "verdict": "ok",
+    "checked": "Sumé tramos: <=3000 = 1379+2614+1004+874+464 = 6335; 3.001-5.000 = 483; <=20.000 = 6335+483+553+346 = 7717 = 94,9 % de 8131 (95 %).",
+    "by": "claude-sonnet-5-5 (revisión de cifras derivadas)",
+    "at": "2026-10-13"
+   }
   },
   "pool-seguridad-y-justicia--cgpj-2025-civil": {
    "text": "En 2025 los órganos judiciales registraron 3.287.980 asuntos civiles nuevos y a 31 de diciembre quedaban 2.672.464 en trámite.",

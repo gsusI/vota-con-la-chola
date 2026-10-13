@@ -4,25 +4,53 @@
    "text": "En 2025 el transporte público regular sumó 3.599 millones de viajes urbanos (metro y autobús), 932 millones interurbanos en autobús y 695 millones en tren.",
    "period": "2025",
    "source": "INE, Estadística de Transporte de Personas, tabla 49359 (suma de los 12 meses de 2025; la tabla da miles de viajeros)",
-   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=49359"
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=49359",
+   "review": {
+    "status": "agent_reviewed",
+    "verdict": "ok",
+    "checked": "Sumé los 12 meses de 2025 (miles de viajeros) de las series Total Nacional: urbano 3.599.434 (metro 1.457.766 + autobús urbano 2.141.670), interurbano autobús regular 932.280, interurbano ferrocarril 695.496.",
+    "by": "claude-sonnet-5-5 (revisión de cifras derivadas)",
+    "at": "2026-10-13"
+   }
   },
   "eje-transporte-publico--ine-tv-2025-ferrocarril": {
    "text": "En 2025 las Cercanías de tren llevaron 595 millones de viajeros, la media distancia 48 millones y la larga distancia 52 millones (44 millones de ellos en alta velocidad).",
    "period": "2025",
    "source": "INE, Estadística de Transporte de Personas, tabla 49359 (suma de los 12 meses de 2025; la tabla da miles de viajeros)",
-   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=49359"
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=49359",
+   "review": {
+    "status": "agent_reviewed",
+    "verdict": "ok",
+    "checked": "Sumé 12 meses de 2025: Cercanías 595,24; media distancia 47,81; larga distancia 52,45; alta velocidad 43,78 millones.",
+    "by": "claude-sonnet-5-5 (revisión de cifras derivadas)",
+    "at": "2026-10-13"
+   }
   },
   "eje-transporte-publico--ine-tv-2025-autobus-interurbano": {
    "text": "En 2025 el autobús interurbano regular llevó 932 millones de viajeros: 633 millones en servicios de cercanías, 279 millones de media distancia y 20 millones de larga distancia.",
    "period": "2025",
    "source": "INE, Estadística de Transporte de Personas, tabla 49359 (suma de los 12 meses de 2025; la tabla da miles de viajeros)",
-   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=49359"
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=49359",
+   "review": {
+    "status": "agent_reviewed",
+    "verdict": "ok",
+    "checked": "Sumé 12 meses de 2025: autobús interurbano regular 932,28; cercanías 633,11; media distancia 279,35; larga distancia 19,82 millones.",
+    "by": "claude-sonnet-5-5 (revisión de cifras derivadas)",
+    "at": "2026-10-13"
+   }
   },
   "eje-transporte-publico--ine-tv-2025-ferrocarril-larga-distancia": {
    "text": "En 2025 el ferrocarril de larga distancia llevó 52,4 millones de viajeros: 43,8 millones en alta velocidad y 8,7 millones en el resto de servicios de larga distancia.",
    "period": "2025",
    "source": "INE, Estadística de Transporte de Personas, tabla 49359 (suma de los 12 meses de 2025; la tabla da miles de viajeros)",
-   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=49359"
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=49359",
+   "review": {
+    "status": "agent_reviewed",
+    "verdict": "ok",
+    "checked": "Sumé 12 meses de 2025: larga distancia 52,45; alta velocidad 43,78; resto 8,66 millones (43,78+8,66=52,44).",
+    "by": "claude-sonnet-5-5 (revisión de cifras derivadas)",
+    "at": "2026-10-13"
+   }
   },
   "eje-transporte-publico--mitma-2025-pagos-ccaa-eell": {
    "text": "El Ministerio de Transportes pagó 735 millones de euros en 2025 a comunidades autónomas, ayuntamientos y consorcios para financiar el transporte público urbano, interurbano y metropolitano.",
@@ -87,14 +115,28 @@
   "eje-transporte-publico--ine-padron-2021-municipios-pequenos": {
    "text": "En 2021, 6.818 de los 8.131 municipios (84 %) tenían menos de 5.000 habitantes; en ellos vivían 5,7 millones de personas (12 % de la población).",
    "period": "1 de enero de 2021",
-   "source": "INE, Padrón: distribución de municipios y población por tamaño (tablas 2851 y 2915)",
-   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=2915"
+   "source": "INE, Padrón: distribución de municipios y población por tamaño (tablas 2851 y 2915); suma propia de tramos",
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=2915",
+   "review": {
+    "status": "agent_reviewed",
+    "verdict": "corrected",
+    "checked": "Municipios <5.000: 1.379+2.614+1.004+874+464+483 = 6.818 de 8.131 (83,9 %); personas: 78.172+651.192+721.010+1.240.089+2.996.629 = 5.687.092 de 47.385.107 (12,0 %). Cifras cuadran; faltaba decir que es suma propia de tramos.",
+    "by": "claude-sonnet-5-5 (revisión de cifras derivadas)",
+    "at": "2026-10-13"
+   }
   },
   "eje-transporte-publico--ine-padron-2021-municipios-grandes": {
    "text": "En 2021, 414 municipios (5 % del total) de más de 20.000 habitantes reunían 32,9 millones de personas, el 69 % de la población.",
    "period": "1 de enero de 2021",
-   "source": "INE, Padrón: distribución de municipios y población por tamaño (tablas 2851 y 2915)",
-   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=2915"
+   "source": "INE, Padrón: distribución de municipios y población por tamaño (tablas 2851 y 2915); suma propia de tramos",
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=2915",
+   "review": {
+    "status": "agent_reviewed",
+    "verdict": "corrected",
+    "checked": "Municipios >20.000: 155+110+86+57+6 = 414 de 8.131 (5,1 %); personas: 7.837.738+6.178.689+11.216.339+7.668.824 = 32.901.590 de 47.385.107 (69,4 %). Cifras cuadran; faltaba decir que es suma propia de tramos.",
+    "by": "claude-sonnet-5-5 (revisión de cifras derivadas)",
+    "at": "2026-10-13"
+   }
   },
   "eje-transporte-publico--mitma-2026-mapa-concesional": {
    "text": "El nuevo mapa de autobuses estatales prevé 34 corredores, 600 rutas, 2.294 paradas y 1.682 municipios, con unos 31 millones de viajeros al año y una bajada media de tarifas del 22 % según el Ministerio.",

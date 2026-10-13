@@ -82,7 +82,14 @@
    "text": "El 18 de agosto de 2026 los embalses de las cuatro cuencas andaluzas guardaban 8.277 hm³ de 11.084 de capacidad (74,7 %), frente a 5.350 hm³ un año antes (suma de Guadalquivir, Guadalete-Barbate, Tinto-Odiel-Piedras y Mediterránea Andaluza).",
    "period": "18 de agosto de 2026",
    "source": "MITECO, nota «La reserva hídrica española se encuentra al 66,2 % de su capacidad», cuadro por ámbitos (suma propia de cuatro filas)",
-   "url": "https://www.miteco.gob.es/ca/prensa/ultimas-noticias/2026/agosto/la-reserva-hidrica-espanola-se-encuentra-al-66-2---de-su-capacid.html"
+   "url": "https://www.miteco.gob.es/ca/prensa/ultimas-noticias/2026/agosto/la-reserva-hidrica-espanola-se-encuentra-al-66-2---de-su-capacid.html",
+   "review": {
+    "status": "agent_reviewed",
+    "verdict": "ok",
+    "checked": "Sumé las cuatro filas del cuadro: capacidad 229+1.651+8.030+1.174=11.084; actual 170+1.307+5.991+809=8.277 (74,68 %); año anterior 178+756+3.826+590=5.350.",
+    "by": "claude-sonnet-5-5 (revisión de cifras derivadas)",
+    "at": "2026-10-13"
+   }
   }
  },
  "statements": {},

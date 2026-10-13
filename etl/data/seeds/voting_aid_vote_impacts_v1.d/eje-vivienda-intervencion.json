@@ -37,10 +37,17 @@
    "url": "https://www.oecd.org/content/dam/oecd/en/data/datasets/affordable-housing-database/ph4-2-social-rental-housing-stock.pdf"
   },
   "eje-vivienda-intervencion--ine-etdp-2025-compra-juridica": {
-   "text": "En 2025 el 11,3 % de las compraventas de vivienda tuvo como comprador a una persona jurídica (empresa, fondo, sociedad): el 4,4 % a un particular y el 6,9 % a otra persona jurídica.",
+   "text": "En 2025 el 11,3 % de las compraventas de vivienda tuvo como comprador a una persona jurídica (empresa, fondo, sociedad): en el 4,4 % vendía un particular y en el 6,9 % otra persona jurídica.",
    "period": "2025",
-   "source": "INE, Estadística de Transmisión de Derechos de la Propiedad (tabla 50272: porcentaje según transmitente y titular)",
-   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=50272"
+   "source": "INE, Estadística de Transmisiones de Derechos de la Propiedad, tabla 50272 (porcentaje según transmitente y titular); 11,3 % = 4,4 + 6,9, suma propia",
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=50272",
+   "review": {
+    "status": "agent_reviewed",
+    "verdict": "corrected",
+    "checked": "Tabla 50272, 2025: transmitente física/titular jurídica 4,4; transmitente jurídica/titular jurídica 6,9; suma 11,3 (las cuatro celdas suman 100). El orden de columnas es transmitente, titular: el 4,4 es una venta de un particular, no una compra por un particular.",
+    "by": "claude-sonnet-5-5 (revisión de cifras derivadas)",
+    "at": "2026-10-13"
+   }
   },
   "eje-vivienda-intervencion--bde-ia25-deficit": {
    "text": "Entre 2021 y 2025 se terminaron unas 750.000 viviendas menos de las que habrían hecho falta para los hogares nuevos que se formaron: el déficit acumulado que estima el Banco de España.",

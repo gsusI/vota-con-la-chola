@@ -82,7 +82,14 @@
    "text": "A 31 de diciembre de 2025 la flota pesquera española tenía 8.324 buques; 4.125 (casi la mitad) tenían su puerto base en Galicia.",
    "period": "31-12-2025",
    "source": "MAPA, Registro General de la Flota Pesquera, fichero de datos 2006-2025 (recuento de buques distintos por año y comunidad)",
-   "url": "https://www.mapa.gob.es/es/pesca/temas/registro-flota/informacion-sobre-flota-pesquera"
+   "url": "https://www.mapa.gob.es/es/pesca/temas/registro-flota/informacion-sobre-flota-pesquera",
+   "review": {
+    "status": "agent_reviewed",
+    "verdict": "ok",
+    "checked": "Del xlsx 2006-2025, año 2025: 8.324 códigos de buque distintos (8.324 filas, ningún buque en dos CCAA); CCAA=GALICIA 4.125 (49,6 %).",
+    "by": "claude-sonnet-5-5 (revisión de cifras derivadas)",
+    "at": "2026-10-13"
+   }
   },
   "eje-campo-ambiente--mapa-seguros-agrarios-2025": {
    "text": "El 46.º Plan de Seguros Agrarios (2025) está dotado con 315 millones de euros, un 10,7 % más que en 2024; las indemnizaciones de 2024 se estimaban en 674 millones.",

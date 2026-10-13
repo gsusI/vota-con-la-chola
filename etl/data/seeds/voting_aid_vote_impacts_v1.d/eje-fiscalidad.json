@@ -28,7 +28,14 @@
    "text": "En 2023, 1,35 millones de declaraciones (el 5,6 %) con rendimientos de más de 60.000 € aportaron el 42,3 % de la cuota del IRPF; 13,1 millones (54,5 %), con hasta 21.000 €, aportaron el 6,8 %.",
    "period": "ejercicio 2023",
    "source": "AEAT, Estadística de los declarantes del IRPF 2023, partida 587 «Cuota líquida incrementada total» por tramos de rendimiento (23.987.211 declaraciones)",
-   "url": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubikf5d5d6a89697e63061bcadd1e218000cd264611e6.html"
+   "url": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubikf5d5d6a89697e63061bcadd1e218000cd264611e6.html",
+   "review": {
+    "status": "agent_reviewed",
+    "verdict": "ok",
+    "checked": "Sumé tramos (60-150], (150-601], >601: 1.346.400 declaraciones = 5,61 % y 42,31 % de la cuota; tramos hasta 21: 13.080.764 = 54,53 % y 6,80 % de la cuota (sobre 23.987.211 y 118.152.598.785 €).",
+    "by": "claude-sonnet-5-5 (revisión de cifras derivadas)",
+    "at": "2026-10-13"
+   }
   },
   "eje-fiscalidad--ine-ipc-2021-2025-acumulado": {
    "text": "Entre febrero de 2021 y diciembre de 2025 los precios subieron un 23,6 % (IPC general). La variación anual de diciembre de 2025 fue del 2,9 %.",
@@ -100,7 +107,14 @@
    "text": "En 2025 se vendieron 711.543 viviendas: 154.332 nuevas y 557.211 de segunda mano (suma de los doce meses).",
    "period": "2025",
    "source": "INE, Estadística de Transmisiones de Derechos de la Propiedad, tabla 6150",
-   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=6150"
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=6150",
+   "review": {
+    "status": "agent_reviewed",
+    "verdict": "ok",
+    "checked": "Sumé los 12 meses de 2025 Total Nacional: general 711.543 = nuevas 154.332 + segunda mano 557.211.",
+    "by": "claude-sonnet-5-5 (revisión de cifras derivadas)",
+    "at": "2026-10-13"
+   }
   },
   "eje-fiscalidad--ine-ipv-2026t2-precios": {
    "text": "El precio de la vivienda subió un 12,2 % en el año hasta el segundo trimestre de 2026: un 7,4 % la nueva y un 12,9 % la de segunda mano.",
@@ -109,10 +123,17 @@
    "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=80270"
   },
   "eje-fiscalidad--ine-epa-2025-cuenta-propia": {
-   "text": "En 2025 había 3,28 millones de ocupados por cuenta propia (14,7 % del empleo): 2,23 millones sin asalariados y 0,95 millones con asalariados a su cargo.",
-   "period": "2025",
+   "text": "En 2025 había 3,28 millones de ocupados por cuenta propia (14,7 % del empleo): 2,23 millones sin asalariados, 0,95 millones con asalariados a su cargo y 0,09 millones cooperativistas o ayudas familiares.",
+   "period": "media de 2025",
    "source": "INE, Encuesta de Población Activa 2025, ocupados por situación profesional (tabla 65965)",
-   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=65965"
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=65965",
+   "review": {
+    "status": "agent_reviewed",
+    "verdict": "corrected",
+    "checked": "ine_series(65965) media 2025: cuenta propia 3277,5 (14,7 % de 22.221,1); sin asalariados 2231,5; empleadores 954,1. Los dos subtotales suman 3185,6, no 3277,5: faltan cooperativistas (23,7) y ayuda familiar (68,2).",
+    "by": "claude-sonnet-5-5 (revisión de cifras derivadas)",
+    "at": "2026-10-13"
+   }
   },
   "eje-fiscalidad--ine-epa-2026t2-ocupados-jovenes": {
    "text": "En el segundo trimestre de 2026 había 5,91 millones de ocupados de 16 a 34 años, el 26,0 % de los 22,78 millones de ocupados.",
@@ -148,7 +169,14 @@
    "text": "España tiene 8.131 municipios: 1.379 con menos de 101 habitantes y 2.614 con entre 101 y 500.",
    "period": "2021",
    "source": "INE, distribución de los municipios por tamaño (tabla 2851)",
-   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=2851"
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=2851",
+   "review": {
+    "status": "agent_reviewed",
+    "verdict": "ok",
+    "checked": "Tabla 2851 Total Nacional 2021: total 8131, Menos de 101 = 1379, De 101 a 500 = 2614.",
+    "by": "claude-sonnet-5-5 (revisión de cifras derivadas)",
+    "at": "2026-10-13"
+   }
   },
   "eje-fiscalidad--ine-epa-2025-asalariados": {
    "text": "En 2025 había 18,94 millones de asalariados: 16,04 millones con contrato indefinido (84,7 %) y 2,90 millones con contrato temporal (15,3 %).",

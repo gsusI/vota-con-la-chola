@@ -118,7 +118,14 @@
    "text": "En 2025 el transporte público de viajeros sumó 5.778 millones de viajes: 3.599 millones urbanos (1.458 en metro) y 1.689 millones interurbanos regulares (suma de los doce meses).",
    "period": "2025",
    "source": "INE, Estadística de Transporte de Viajeros (tabla 49359, viajeros transportados, miles)",
-   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=49359"
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=49359",
+   "review": {
+    "status": "agent_reviewed",
+    "verdict": "ok",
+    "checked": "Sumé 12 meses de 2025: total 5.777,95; urbano 3.599,43; metro 1.457,77; interurbano regular 1.688,54 (millones).",
+    "by": "claude-sonnet-5-5 (revisión de cifras derivadas)",
+    "at": "2026-10-13"
+   }
   },
   "eje-territorial-autogobierno--transportes-2024-cercanias": {
    "text": "En 2024 los núcleos de Cercanías de Renfe llevaron 442,2 millones de viajeros: 241,7 en Madrid, 117,5 en Barcelona (Rodalies) y 21,0 en Valencia.",

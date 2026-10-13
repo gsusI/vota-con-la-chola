@@ -28,7 +28,14 @@
    "text": "Entre 10,15 millones de trabajadores con convenio de efectos económicos conocidos, el 12,18 % tenía pactadas menos de 37,5 horas semanales, el 30,58 % de 37,5 a 38,5, el 50,18 % de 38,5 a 39,5 y el 7,06 % más de 39,5.",
    "period": "Convenios registrados hasta diciembre de 2025 (provisional)",
    "source": "Ministerio de Trabajo, Estadística de Convenios Colectivos, avance de diciembre de 2025, pág. 8",
-   "url": "https://www.mites.gob.es/estadisticas/cct/cct25dicav/Resumen_resultados_CCT_diciembre-25.pdf"
+   "url": "https://www.mites.gob.es/estadisticas/cct/cct25dicav/Resumen_resultados_CCT_diciembre-25.pdf",
+   "review": {
+    "status": "agent_reviewed",
+    "verdict": "ok",
+    "checked": "PDF pág. 8: 10.151.064 trabajadores; tramos 12,18+30,58+50,18+3,48+3,58=100; más de 39,5 = 3,48+3,58=7,06 %.",
+    "by": "claude-sonnet-5-5 (revisión de cifras derivadas)",
+    "at": "2026-10-13"
+   }
   },
   "eje-empleo-derechos--mites-cct-2025-convenios": {
    "text": "En 2025 se firmaron y registraron 1.017 convenios colectivos (765 de empresa y 252 de ámbito superior). Los 3.366 convenios con efectos económicos conocidos afectaban a 10,15 millones de trabajadores.",
@@ -76,7 +83,14 @@
    "text": "A 1 de enero de 2025 había 3,31 millones de empresas en España: 1,80 millones sin personas asalariadas y 26.646 con 50 o más.",
    "period": "1 de enero de 2025",
    "source": "INE, Directorio Central de Empresas, tabla 39375 (suma de los estratos de 50 o más asalariados)",
-   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=39375"
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=39375",
+   "review": {
+    "status": "agent_reviewed",
+    "verdict": "ok",
+    "checked": "Total 3.310.824 y sin asalariados 1.800.443 leidos; suma de estratos >=50: 13.130+6.758+1.419(200-249)+4.047(250-999)+1.086+206 = 26.646 (el estrato 100-199 y 50-99 verificados por separado; 200-249 y 250-999 leidos de la API de INE).",
+    "by": "claude-sonnet-5-5 (revisión de cifras derivadas)",
+    "at": "2026-10-13"
+   }
   },
   "eje-empleo-derechos--ine-epd-2024-discapacidad": {
    "text": "560.400 personas con discapacidad reconocida (16-64 años) tenían empleo: tasa de empleo del 28,9 % frente al 69,7 % de la población sin discapacidad; tasa de paro del 18,5 % frente al 11,2 %.",
@@ -160,7 +174,14 @@
    "text": "En 2025 se registraron 15,23 millones de contratos iniciales: 6,03 millones indefinidos (39,6 %) y 9,20 millones temporales.",
    "period": "2025",
    "source": "SEPE, Estadística de contratos de diciembre de 2025, resumen IV.2 (suma de los doce meses)",
-   "url": "https://www.sepe.es/SiteSepe/contenidos/que_es_el_sepe/estadisticas/datos_estadisticos/contratos/datos/2025/diciembre_2025/ESTADISTICA_DE_CONTRATOS_MES.pdf"
+   "url": "https://www.sepe.es/SiteSepe/contenidos/que_es_el_sepe/estadisticas/datos_estadisticos/contratos/datos/2025/diciembre_2025/ESTADISTICA_DE_CONTRATOS_MES.pdf",
+   "review": {
+    "status": "agent_reviewed",
+    "verdict": "ok",
+    "checked": "Sumé los 12 meses de las tablas IV.2: indefinidos iniciales 6.030.898, temporales 9.201.797, iniciales 15.232.695; 6.030.898/15.232.695=39,59 %.",
+    "by": "claude-sonnet-5-5 (revisión de cifras derivadas)",
+    "at": "2026-10-13"
+   }
   },
   "eje-empleo-derechos--ine-mnp-2024-nacimientos": {
    "text": "En 2024 nacieron 318.005 criaturas en España (320.656 en 2023).",

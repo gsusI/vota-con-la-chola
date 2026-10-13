@@ -4,7 +4,14 @@
    "text": "Según el padrón de 2025, Ibiza tiene 163.755 habitantes (suma de sus cinco municipios) y Formentera 11.661, de un total de 1.237.480 en Baleares.",
    "period": "2025",
    "source": "INE, tabla 2860 (población por municipios de Illes Balears)",
-   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=2860"
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=2860",
+   "review": {
+    "status": "agent_reviewed",
+    "verdict": "ok",
+    "checked": "Sumé Eivissa 55.337, Sant Antoni 29.132, Sant Joan 7.046, Sant Josep 29.761 y Santa Eulària 42.479 = 163.755; Formentera 11.661; Balears 1.237.480 (2025).",
+    "by": "claude-sonnet-5-5 (revisión de cifras derivadas)",
+    "at": "2026-10-13"
+   }
   }
  },
  "statements": {},

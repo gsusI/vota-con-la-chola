@@ -1,16 +1,30 @@
 {
  "facts": {
   "eje-lenguas--ine-ecp-2026-poblacion-ccaa-lengua": {
-   "text": "A 1 de julio de 2026 vivían 20.066.901 personas (40,3 % de las 49.801.559 de España) en Cataluña, Comunitat Valenciana, Galicia, País Vasco e Illes Balears, comunidades con lengua cooficial.",
+   "text": "A 1 de julio de 2026 vivían 20.066.901 personas (40,3 % de las 49.801.559 de España) en Cataluña, C. Valenciana, Galicia, País Vasco e Illes Balears, con lengua cooficial en todo su territorio (Navarra la tiene solo en parte).",
    "period": "1 de julio de 2026 (provisional)",
-   "source": "INE, Estadística Continua de Población, tabla 59239 (todas las edades, total; suma de las cinco comunidades)",
-   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=59239"
+   "source": "INE, Estadística Continua de Población, tabla 59239 (todas las edades, total; suma propia de las cinco comunidades)",
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=59239",
+   "review": {
+    "status": "agent_reviewed",
+    "verdict": "corrected",
+    "checked": "Cataluña 8.233.788 + C. Valenciana 5.574.948 + Galicia 2.734.494 + País Vasco 2.257.392 + Baleares 1.266.279 = 20.066.901; total nacional 49.801.559; 40,29 % -> 40,3 %. Cuadra, pero Navarra también tiene euskera cooficial (parcial) y el texto sugiere una lista completa.",
+    "by": "claude-sonnet-5-5 (revisión de cifras derivadas)",
+    "at": "2026-10-13"
+   }
   },
   "eje-lenguas--mefpd-2025-26-alumnado-ccaa-lengua": {
-   "text": "En el curso 2025-26 había 3.269.655 alumnos de enseñanzas de régimen general (39,6 % de los 8.249.174 de España) en Cataluña, Comunitat Valenciana, Galicia, País Vasco e Illes Balears, comunidades con lengua cooficial.",
+   "text": "En el curso 2025-26 (datos avance) había 3.269.655 alumnos de enseñanzas de régimen general (39,6 % de los 8.249.174 de España) en Cataluña, C. Valenciana, Galicia, País Vasco y Baleares; no incluye Navarra, con lengua cooficial solo en parte.",
    "period": "curso 2025-26 (datos avance)",
-   "source": "Ministerio de Educación, FP y Deportes, Estadística de las Enseñanzas no universitarias, tabla 1.1 de alumnado de régimen general (suma de las cinco comunidades)",
-   "url": "https://estadisticas.educacion.gob.es/EducaJaxiPx/Tabla.htm?path=/no-universitaria/alumnado/matriculado/series/AlumnadoGen/l0/&file=alumnado_1_01.px&L=0"
+   "source": "Ministerio de Educación, FP y Deportes, Estadística de las Enseñanzas no universitarias, tabla 1.1 de alumnado de régimen general; suma propia de las cinco comunidades",
+   "url": "https://estadisticas.educacion.gob.es/EducaJaxiPx/Tabla.htm?path=/no-universitaria/alumnado/matriculado/series/AlumnadoGen/l0/&file=alumnado_1_01.px&L=0",
+   "review": {
+    "status": "agent_reviewed",
+    "verdict": "corrected",
+    "checked": "CSV oficial de la tabla 1.1, todos los centros, 2025-26(*): Cataluña 1.385.681 + C. Valenciana 926.394 + Galicia 402.244 + País Vasco 357.426 + Baleares 197.910 = 3.269.655; total España 8.249.174; 39,64 %.",
+    "by": "claude-sonnet-5-5 (revisión de cifras derivadas)",
+    "at": "2026-10-13"
+   }
   },
   "eje-lenguas--mefpd-2025-26-alumnado-cataluna": {
    "text": "En el curso 2025-26 había 1.385.681 alumnos de enseñanzas de régimen general en Cataluña, el 16,8 % de los 8.249.174 de toda España.",
@@ -40,7 +54,14 @@
    "text": "En noviembre de 2024 el Congreso adjudicó cuatro contratos de traducción, interpretación, transcripción y subtitulado en directo de lenguas cooficiales; las ofertas elegidas suman 3.297.781,11 euros.",
    "period": "adjudicados el 19 de noviembre de 2024",
    "source": "BOE núm. 8, 9-1-2025, anuncio BOE-B-2025-417 (formalización, expediente CON-2024/9900775.0), apartado 13 (suma de los cuatro contratos)",
-   "url": "https://www.boe.es/boe/dias/2025/01/09/pdfs/BOE-B-2025-417.pdf"
+   "url": "https://www.boe.es/boe/dias/2025/01/09/pdfs/BOE-B-2025-417.pdf",
+   "review": {
+    "status": "agent_reviewed",
+    "verdict": "ok",
+    "checked": "Sumé los cuatro valores de oferta seleccionada del apartado 13: 590.788,11+1.768.500+382.509+555.984 = 3.297.781,11 €; los cuatro contratos con adjudicación el 19-11-2024.",
+    "by": "claude-sonnet-5-5 (revisión de cifras derivadas)",
+    "at": "2026-10-13"
+   }
   },
   "eje-lenguas--cgpj-2025-asuntos-ingresados": {
    "text": "En 2025 los órganos judiciales de España recibieron 7.550.806 asuntos y resolvieron 7.437.033; a 31 de diciembre quedaban 4.673.596 en trámite.",

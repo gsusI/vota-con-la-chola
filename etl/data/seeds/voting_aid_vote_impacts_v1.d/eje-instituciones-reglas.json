@@ -22,7 +22,14 @@
    "text": "En la XIV Legislatura el Pleno contestó 1.179 preguntas orales al Gobierno y celebró 221 interpelaciones; en comisión se contestaron otras 624 preguntas orales.",
    "period": "XIV Legislatura (2019-2023)",
    "source": "Congreso de los Diputados, Memoria de la XIV Legislatura, §18.1 «Función de control: cuadro estadístico» (pág. 478)",
-   "url": "https://app.congreso.es/est_memoriaXIV/resource?id=03%2F18.pdf"
+   "url": "https://app.congreso.es/est_memoriaXIV/resource?id=03%2F18.pdf",
+   "review": {
+    "status": "agent_reviewed",
+    "verdict": "ok",
+    "checked": "Cuadro 18.1 (pag. 1 del capitulo 18): Preguntas con respuesta oral en el Pleno, columna Contestadas = 1179; Interpelaciones, columna Celebradas = 221 (verificado por posicion de columna); Preguntas orales al Gobierno en Comision, Contestadas = 624. Totales de fila cuadran (309, 1306, 2199).",
+    "by": "claude-sonnet-5-5 (revisión de cifras derivadas)",
+    "at": "2026-10-13"
+   }
   },
   "eje-instituciones-reglas--congreso-xiv-pnl": {
    "text": "En la XIV Legislatura se aprobaron 71 proposiciones no de ley ante el Pleno y 977 en comisión.",
@@ -67,10 +74,17 @@
    "url": "https://www.tribunalconstitucional.es/NotasDePrensaDocumentos/NP_2025_068/Memoria_2024.pdf"
   },
   "eje-instituciones-reglas--moncloa-misiones-2024": {
-   "text": "España tenía 3.743 militares desplegados en el exterior, en 15 países, en misiones de la OTAN, la ONU y la UE.",
+   "text": "España tenía 3.743 militares desplegados en el exterior, en 15 países: 2.450 en misiones de la OTAN, 671 de la ONU y 324 de la UE (el resto, en otras misiones).",
    "period": "12 de octubre de 2024",
    "source": "Ministerio de Defensa, nota de prensa de La Moncloa de 12 de octubre de 2024",
-   "url": "https://www.lamoncloa.gob.es/serviciosdeprensa/notasprensa/defensa/paginas/2024/121024-robles-videoconferencia-misiones-exterior.aspx"
+   "url": "https://www.lamoncloa.gob.es/serviciosdeprensa/notasprensa/defensa/paginas/2024/121024-robles-videoconferencia-misiones-exterior.aspx",
+   "review": {
+    "status": "agent_reviewed",
+    "verdict": "corrected",
+    "checked": "La nota (12/10/2024) da 3.743 militares en 15 países; por organización: OTAN 2.450 + ONU 671 + UE 324 = 3.445, es decir 298 fuera de esas tres. El texto atribuía los 3.743 a OTAN, ONU y UE.",
+    "by": "claude-sonnet-5-5 (revisión de cifras derivadas)",
+    "at": "2026-10-13"
+   }
   },
   "eje-instituciones-reglas--moncloa-plan-defensa-2025": {
    "text": "El Plan Industrial y Tecnológico para la Seguridad y la Defensa prevé invertir 10.471 millones de euros en 2025 para llegar al 2 % del PIB en defensa; incluye mejoras para las 16 misiones de paz en el exterior.",

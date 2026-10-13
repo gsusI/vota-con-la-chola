@@ -94,7 +94,14 @@
    "text": "Se hicieron unos 695 millones de viajes en tren interurbano: 595 millones en Cercanías, 48 millones en media distancia y 52 millones en larga distancia (suma de los doce meses; datos provisionales).",
    "period": "2025",
    "source": "INE, Estadística de Transporte de Viajeros (series TV1099, TV1100, TV1101 y TV1102 de la tabla 49359)",
-   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=49359"
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=49359",
+   "review": {
+    "status": "agent_reviewed",
+    "verdict": "ok",
+    "checked": "Sumé los 12 meses de 2025: Cercanías 595,24; media distancia 47,81; larga distancia 52,45; total interurbano ferrocarril (TV1102) 695,50 millones. Códigos TV1099-TV1102 correctos; FK_TipoDato=2 (provisional).",
+    "by": "claude-sonnet-5-5 (revisión de cifras derivadas)",
+    "at": "2026-10-13"
+   }
   },
   "eje-control-gobierno--ciaf-2026-adamuz": {
    "text": "El descarrilamiento de un tren de alta velocidad y su choque con otro en Adamuz (Córdoba) dejó 45 fallecidos (43 viajeros y 2 empleados), 29 heridos graves y 123 leves. La CIAF lo investiga como accidente grave.",

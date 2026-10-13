@@ -4,7 +4,14 @@
    "text": "Había 3.310.824 empresas: el 54 % sin asalariados (1.800.443) y el 95 % con menos de 10 asalariados. Solo 5.339 (el 0,16 %) tenían 250 o más asalariados.",
    "period": "1 de enero de 2025",
    "source": "INE, Directorio Central de Empresas, tabla 73018 (porcentajes y suma de tramos calculados sobre la tabla)",
-   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=73018"
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=73018",
+   "review": {
+    "status": "agent_reviewed",
+    "verdict": "ok",
+    "checked": "ine_series(73018) 2025: total 3.310.824; sin asalariados 1.800.443 = 54,4 %; sin+1-2+3-5+6-9 = 3.149.352 = 95,1 %; 250-999 (4.047)+1000-4999 (1.086)+5000+ (206) = 5.339 = 0,161 %.",
+    "by": "claude-sonnet-5-5 (revisión de cifras derivadas)",
+    "at": "2026-10-13"
+   }
   },
   "eje-regulacion-economica--ine-dirce-2025-transporte": {
    "text": "Hay 99.376 empresas de transporte de mercancías por carretera y mudanzas: 73.304 son personas físicas (autónomos) y 56.596 no tienen ningún asalariado.",
@@ -25,10 +32,17 @@
    "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=73019"
   },
   "eje-regulacion-economica--ine-epa-2025-cuenta-propia": {
-   "text": "De 22,2 millones de ocupados, 3,28 millones trabajaban por cuenta propia (14,7 %): 2,23 millones sin asalariados y 954.100 empleadores.",
+   "text": "De 22,2 millones de ocupados, 3,28 millones trabajaban por cuenta propia (14,7 %): 2,23 millones sin asalariados, 954.100 empleadores y unos 92.000 cooperativistas o ayudas familiares.",
    "period": "media de 2025",
    "source": "INE, Encuesta de Población Activa, tabla 65965 (miles de personas)",
-   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=65965"
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=65965",
+   "review": {
+    "status": "agent_reviewed",
+    "verdict": "corrected",
+    "checked": "Mismos datos: total 22.221,1 (22,2 M), cuenta propia 3277,5 (14,7 %), sin asalariados 2231,5, empleadores 954,1. 2231,5+954,1=3185,6 < 3277,5; faltan 91,9 (cooperativistas 23,7 y ayuda familiar 68,2).",
+    "by": "claude-sonnet-5-5 (revisión de cifras derivadas)",
+    "at": "2026-10-13"
+   }
   },
   "eje-regulacion-economica--bde-2025-reclamaciones": {
    "text": "En 2025 el Banco de España recibió 30.970 reclamaciones de clientes de bancos y otras entidades financieras, un 45 % menos que en 2024 (56.099).",

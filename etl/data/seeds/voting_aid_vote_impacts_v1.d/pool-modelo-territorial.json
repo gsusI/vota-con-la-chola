@@ -34,7 +34,14 @@
    "text": "Los tres municipios de La Palma cuyos deudores pueden pedir otra suspensión de préstamos sumaban 33.421 habitantes en 2025: Los Llanos de Aridane 20.582, El Paso 8.290 y Tazacorte 4.549.",
    "period": "1 de enero de 2025",
    "source": "INE, Padrón, tabla 29005",
-   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=29005"
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=29005",
+   "review": {
+    "status": "agent_reviewed",
+    "verdict": "ok",
+    "checked": "Llanos de Aridane 20.582 + El Paso 8.290 + Tazacorte 4.549 = 33.421 (2025).",
+    "by": "claude-sonnet-5-5 (revisión de cifras derivadas)",
+    "at": "2026-10-13"
+   }
   }
  },
  "statements": {},
