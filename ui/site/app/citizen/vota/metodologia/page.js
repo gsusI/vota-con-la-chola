@@ -86,6 +86,8 @@ export default function VotingAidMethodologyPage() {
           <span className="chip">Solo votos reales del Congreso</span>
           <span className="chip">Cálculo sin IA, reproducible</span>
           <span className="chip">Resúmenes con IA revisados con IA</span>
+          <span className="chip">Todas las votaciones del Congreso XV, por temas</span>
+          <span className="chip">Versiones anteriores siempre accesibles</span>
           <span className="chip vaMethod__chipWarn">Falta revisión humana independiente</span>
           <span className="chip">Código y datos abiertos</span>
         </div>
@@ -104,6 +106,18 @@ export default function VotingAidMethodologyPage() {
             <strong>{fmt(quality.statements_total)} preguntas clave + {fmt(poolMeta.items_total)} votaciones reales una a una</strong> (
             {fmt(totalQuestions)} preguntas en total), de {poolMeta.votes_first_date || "—"} a{" "}
             {meta.votes_last_date > (poolMeta.votes_last_date || "") ? meta.votes_last_date : poolMeta.votes_last_date || "—"}.
+          </li>
+          <li>
+            <strong>Si una pregunta te parece demasiado general, respóndela por partes:</strong> se desglosa en votaciones concretas y
+            tu resultado se afina con ellas.
+          </li>
+          <li>
+            <strong>Además del test:</strong> un mapa con hacia dónde empujó cada partido en {fmt(m.axes.filter((a) => a.votes > 0).length)}{" "}
+            ejes temáticos y una ficha por diputado/a con todas sus votaciones.
+          </li>
+          <li>
+            <strong>Cada mejora del test es una versión nueva</strong>; las anteriores siguen online con tus respuestas para que puedas
+            compararlas.
           </li>
           <li>
             <strong>El cálculo de coincidencia es una fórmula sencilla</strong>, sin IA, que se ejecuta en tu navegador. Tus respuestas
@@ -217,6 +231,13 @@ export default function VotingAidMethodologyPage() {
             al mapa con todas las votaciones.
           </li>
           <li>
+            <strong>Responder por partes:</strong> cada pregunta clave se puede desglosar en hasta 6 votaciones concretas, una por
+            iniciativa (de las más recientes, leyes y decretos antes que mociones). La opción está visible antes de responder y se ofrece
+            de forma destacada si contestas «neutral», porque a menudo «depende». Al desglosar, tu respuesta a la pregunta general deja de
+            contar y cada votación concreta cuenta como una pregunta del modo infinito (si esa votación ya estaba en el modo infinito, es
+            la misma pregunta: nunca respondes dos veces lo mismo).
+          </li>
+          <li>
             La versión anterior ({fmt(m.snapshotV1.meta?.quality?.statements_total)} afirmaciones con 1 a 3 votaciones cada una,{" "}
             <Code rel={STATEMENTS_SEED} />) sigue publicada para que los enlaces compartidos funcionen; su revisión está en el paso 7.
           </li>
@@ -267,8 +288,18 @@ export default function VotingAidMethodologyPage() {
             revisión humana.
           </li>
           <li>
-            <strong>Diputados:</strong> la misma cuenta con el voto de cada persona, más su participación y cuántas veces votó distinto de
-            la mayoría de su partido (incluidas las enmiendas).
+            <strong>Diputados:</strong> la misma cuenta con el voto de cada persona (solo ejes con al menos 3 votaciones), comparada con
+            la de su partido. Su ficha muestra además la participación (votos emitidos entre las votaciones en que era diputado/a), el
+            porcentaje de veces que votó igual que la mayoría de su partido y la lista de votos distintos (incluidas enmiendas y
+            trámites; algunos son errores al votar corregidos en una votación repetida). Quien cambió de grupo se cuenta con el partido
+            en el que estaba en cada votación.
+          </li>
+          <li>
+            <strong>Qué no entra:</strong> {fmt(cov.by_status?.sin_division)} votaciones sin partidos enfrentados (no distinguen a nadie) y{" "}
+            {fmt(cov.by_status?.tramite)} trámites (prórrogas, avocaciones, correcciones técnicas). Las votaciones con contenido pero sin
+            eje claro se marcan con su motivo: demanda local ({fmt(cov.by_status?.["sin_eje:demanda_local"])}), sin eje (
+            {fmt(cov.by_status?.["sin_eje:sin_eje"])}), sin texto ({fmt(cov.by_status?.["sin_eje:sin_texto"])}), trámite (
+            {fmt(cov.by_status?.["sin_eje:procedimiento"])}).
           </li>
         </ol>
         {m.axesRules.length ? (
@@ -538,6 +569,16 @@ export default function VotingAidMethodologyPage() {
                 <td data-label="Comprobación">Validador (≤180 caracteres, sin partidos) · falta revisión humana</td>
               </tr>
               <tr>
+                <td data-label="Tarea">Enlazar cada moción y PNL a su texto oficial y extraer sus puntos</td>
+                <td data-label="Quién">Código determinista (buscador del Congreso + BOCG)</td>
+                <td data-label="Comprobación">Solo se acepta el expediente si su ficha enlaza la misma votación</td>
+              </tr>
+              <tr>
+                <td data-label="Tarea">Direcciones por partido y por diputado, desglose «por partes»</td>
+                <td data-label="Quién">Fórmula determinista (Python y tu navegador), sin IA</td>
+                <td data-label="Comprobación">Tests automáticos</td>
+              </tr>
+              <tr>
                 <td data-label="Tarea">Calcular tu coincidencia</td>
                 <td data-label="Quién">Fórmula en tu navegador, sin IA</td>
                 <td data-label="Comprobación">Tests</td>
@@ -551,7 +592,7 @@ export default function VotingAidMethodologyPage() {
           </table>
         </div>
         <p className="vaMethod__muted">
-          Las fechas de trabajo con IA: 11 y 12 de octubre de 2026. Las afirmaciones revisadas por IA el {m.seed.review?.reviewed_at || "—"}
+          Las fechas de trabajo con IA: 11, 12 y 13 de octubre de 2026 (el 13, el mapa por temas y las preguntas clave). Las afirmaciones revisadas por IA el {m.seed.review?.reviewed_at || "—"}
           ; datos generados el {(meta.generated_at || "").slice(0, 10) || "—"}.
         </p>
       </section>
@@ -605,6 +646,21 @@ export default function VotingAidMethodologyPage() {
           <li>
             <strong>Una versión en una frase:</strong> un resumen breve de cada votación para quien quiera la idea principal de un
             vistazo.
+          </li>
+          <li>
+            <strong>Mirar todo, no 41 votaciones:</strong> identificar lo votado en el Congreso en la legislatura, colocarlo por temas y
+            ver hacia dónde empujó cada partido en cada tema, también por diputado/a, para poder explorar persona a persona.
+          </li>
+          <li>
+            <strong>Menos preguntas, más terreno:</strong> que cada pregunta no sea una votación sino varias votaciones alineadas.
+          </li>
+          <li>
+            <strong>Granularidad a demanda:</strong> si alguien responde «neutral» a una pregunta agregada, ofrecerle responder temas más
+            concretos, y mostrar esa opción también antes de votar.
+          </li>
+          <li>
+            <strong>Versiones en paralelo:</strong> al mejorar el test, mantener accesible el anterior con sus respuestas para revisarlo y
+            compararlo; por defecto se muestra el nuevo. Es la regla para cada actualización futura.
           </li>
         </ol>
         <h3>Ejemplos reales del prompt «Pregúntale a una IA»</h3>
