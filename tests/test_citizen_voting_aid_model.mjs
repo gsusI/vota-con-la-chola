@@ -351,3 +351,40 @@ test("«Ramificaciones» attach official figures and both-sided effects, and rea
     assert.ok(!m.buildAiPrompt(bare, snap.parties).includes("A quién afecta (cifras oficiales)"));
   }
 });
+
+test("topic navigation: one topic list for key questions and votes, next open question inside a topic", async () => {
+  const m = await import("../ui/site/app/citizen/vota/votingAidModel.mjs");
+  const read = (name) => JSON.parse(fs.readFileSync(path.join(here, "..", "ui", "site", "public", "citizen", "data", name), "utf-8"));
+  const questions = m.buildQuestions(read("voting_aid_generales_v2.json"), read("voting_aid_pool_v1.json"));
+  const byId = Object.fromEntries(questions.map((q) => [q.statement_id, q]));
+  const order = m.playOrder(questions, 7);
+  const groups = m.topicGroups(order, byId);
+
+  // Every played question sits in exactly one topic; older pool themes fold into the map's topics.
+  assert.equal(groups.reduce((n, g) => n + g.ids.length, 0), order.length);
+  const names = groups.map((g) => g.topic);
+  for (const old of ["Empleo y pensiones", "Transporte", "Política exterior", "Defensa", "Igualdad", "Instituciones"]) {
+    assert.ok(!names.includes(old), old);
+  }
+  assert.equal(m.questionTopic({ theme: "Transporte" }), "Energía, clima y transporte");
+  assert.equal(m.questionTopic({ theme: "Vivienda" }), "Vivienda");
+  assert.equal(m.questionTopic({}), "Otros");
+  assert.equal(names[0], "Vivienda");
+  assert.equal(names[names.length - 1], "Otros");
+
+  // Inside a topic: key questions first, then votes, in play order; answered and skipped ones are passed over.
+  const vivienda = groups.find((g) => g.topic === "Vivienda").ids;
+  assert.ok(vivienda.length > 2);
+  assert.equal(byId[vivienda[0]].source, "curated");
+  assert.equal(m.nextInTopic(vivienda, byId), vivienda[0]);
+  assert.equal(m.nextInTopic(vivienda, byId, { [vivienda[0]]: "agree" }, { [vivienda[1]]: true }), vivienda[2]);
+  const all = Object.fromEntries(vivienda.map((id) => [id, "neutral"]));
+  assert.equal(m.nextInTopic(vivienda, byId, all), null);
+
+  // A split key question is replaced by its concrete votes, listed after it.
+  const parent = vivienda.find((id) => byId[id].subIds?.length);
+  const split = { [parent]: true };
+  const withSubs = m.topicGroups(order, byId, split).find((g) => g.topic === "Vivienda").ids;
+  for (const sid of byId[parent].subIds) assert.ok(withSubs.includes(sid), sid);
+  assert.equal(m.nextInTopic(withSubs, byId, {}, {}, split), byId[parent].subIds[0]);
+});

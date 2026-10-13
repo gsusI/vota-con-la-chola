@@ -20,14 +20,17 @@ import {
   groupDetails,
   linkPrompt,
   milestoneFor,
+  nextInTopic,
   nextQuestionId,
   partyReactions,
   pendingSubId,
   playOrder,
   podiumShareText,
+  questionTopic,
   scoreParties,
   scorePercent,
   shareCodeFromHash,
+  topicGroups,
 } from "./votingAidModel.mjs";
 import { formatReleased, otherVersions, versionById } from "./votingAidVersions.mjs";
 import SidePanel from "./SidePanel";
@@ -976,6 +979,185 @@ function SplitOffer({ question, onSplit }) {
   );
 }
 
+// ---------------------------------------------------------------------------
+// Topic › question breadcrumb: jump to another topic (and stay in it) or to any question of the current one.
+
+function topicLeftLabel(topics, topic, answers) {
+  const group = topics.find((g) => g.topic === topic);
+  if (!group) return "";
+  const left = group.ids.filter((id) => answers[id] === undefined).length;
+  return left ? `${left === 1 ? "queda 1" : `quedan ${left}`} sin responder` : "todas respondidas";
+}
+
+/**
+ * One breadcrumb step that opens a list of choices (disclosure pattern: a button and a list of buttons).
+ * The list opens on the current choice; arrows / Home / End move, Escape closes, a click outside closes it.
+ */
+function CrumbMenu({ label, title, children }) {
+  const [open, setOpen] = useState(false);
+  const rootRef = useRef(null);
+  const buttonRef = useRef(null);
+  const listRef = useRef(null);
+  useEffect(() => {
+    if (!open) return undefined;
+    const list = listRef.current;
+    const target = list?.querySelector('[aria-current="true"]') || list?.querySelector("button");
+    target?.focus({ preventScroll: true });
+    target?.scrollIntoView({ block: "nearest" });
+    const onPointer = (e) => {
+      if (!rootRef.current?.contains(e.target)) setOpen(false);
+    };
+    document.addEventListener("pointerdown", onPointer);
+    return () => document.removeEventListener("pointerdown", onPointer);
+  }, [open]);
+  function onKeyDown(e) {
+    if (e.key === "Escape" && open) {
+      e.preventDefault();
+      setOpen(false);
+      buttonRef.current?.focus();
+      return;
+    }
+    if (!open || !["ArrowDown", "ArrowUp", "Home", "End"].includes(e.key)) return;
+    e.preventDefault();
+    const items = [...listRef.current.querySelectorAll("button")];
+    const i = items.indexOf(document.activeElement);
+    const step = e.key === "ArrowDown" ? 1 : -1;
+    const next = e.key === "Home" ? 0 : e.key === "End" ? items.length - 1 : Math.max(0, Math.min(items.length - 1, i + step));
+    items[next]?.focus();
+  }
+  return (
+    <div className="votingAidCrumbs__menu" onKeyDown={onKeyDown} ref={rootRef}>
+      <button aria-expanded={open} className="votingAidCrumbs__button" onClick={() => setOpen(!open)} ref={buttonRef} title={title} type="button">
+        <span className="votingAidCrumbs__label">{label}</span>
+        <span aria-hidden="true" className="votingAidCrumbs__caret">
+          ▾
+        </span>
+      </button>
+      {open ? (
+        <div
+          className="votingAidCrumbs__popover"
+          onClick={(e) => {
+            if (e.target.closest("button")) setOpen(false);
+          }}
+          ref={listRef}
+        >
+          {children}
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+const CRUMB_MARKS = { current: "▶", answered: "✓", split: "⑂", skipped: "↷", open: "○" };
+
+function TopicNav({ topics, questionsById, currentId, focusTopic, answers, skipped, split, onTopic, onQuestion }) {
+  const currentTopic = questionTopic(questionsById[currentId]);
+  const ids = topics.find((g) => g.topic === currentTopic)?.ids || [];
+  const pos = ids.indexOf(currentId);
+  const prev = pos > 0 ? ids[pos - 1] : null;
+  const next = pos >= 0 && pos < ids.length - 1 ? ids[pos + 1] : null;
+  const keyIds = ids.filter((id) => questionsById[id]?.source === "curated");
+  const voteIds = ids.filter((id) => questionsById[id]?.source !== "curated");
+
+  function questionItem(id) {
+    const q = questionsById[id];
+    const status =
+      id === currentId ? "current" : answers[id] !== undefined ? "answered" : split?.[id] ? "split" : skipped?.[id] ? "skipped" : "open";
+    const note =
+      status === "answered"
+        ? `Tu respuesta: ${answerLabel(q, answers[id])}`
+        : status === "split"
+          ? "Respondida por partes"
+          : status === "skipped"
+            ? "Saltada"
+            : status === "current"
+              ? "Estás aquí"
+              : q.source === "pool" && q.vote_date
+                ? `Votada el ${formatDate(q.vote_date)}`
+                : "Sin responder";
+    return (
+      <button
+        aria-current={status === "current" ? "true" : undefined}
+        className={`votingAidCrumbs__item votingAidCrumbs__item--${status}${q.parent && split?.[q.parent] ? " votingAidCrumbs__item--sub" : ""}`}
+        key={id}
+        onClick={() => onQuestion(id)}
+        type="button"
+      >
+        <span aria-hidden="true" className="votingAidCrumbs__mark">
+          {CRUMB_MARKS[status]}
+        </span>
+        <span className="votingAidCrumbs__text">
+          <span className="votingAidCrumbs__clamp">{q.text}</span>
+          <span className="votingAidCrumbs__note">{note}</span>
+        </span>
+      </button>
+    );
+  }
+
+  return (
+    <nav aria-label="Temas y preguntas" className="votingAidCrumbs">
+      <CrumbMenu label={currentTopic} title="Cambiar de tema">
+        <p className="votingAidCrumbs__heading">Elige un tema y sigue solo con sus preguntas</p>
+        <button aria-current={focusTopic ? undefined : "true"} className="votingAidCrumbs__item" onClick={() => onTopic(null)} type="button">
+          <span aria-hidden="true" className="votingAidCrumbs__mark">
+            ⤨
+          </span>
+          <span className="votingAidCrumbs__text">Todos los temas, mezclados</span>
+        </button>
+        {topics.map((g) => {
+          const done = g.ids.filter((id) => answers[id] !== undefined).length;
+          return (
+            <button
+              aria-current={focusTopic === g.topic ? "true" : undefined}
+              className="votingAidCrumbs__item"
+              key={g.topic}
+              onClick={() => onTopic(g.topic)}
+              type="button"
+            >
+              <span aria-hidden="true" className="votingAidCrumbs__mark">
+                {done === g.ids.length ? "✓" : "○"}
+              </span>
+              <span className="votingAidCrumbs__text">{g.topic}</span>
+              <span className="votingAidCrumbs__count" title="Respondidas / preguntas del tema">
+                {done}/{g.ids.length}
+              </span>
+            </button>
+          );
+        })}
+      </CrumbMenu>
+      <span aria-hidden="true" className="votingAidCrumbs__sep">
+        ›
+      </span>
+      <CrumbMenu
+        label={
+          pos >= 0 ? (
+            <>
+              <span className="votingAidHideMobile">Pregunta </span>
+              {pos + 1} de {ids.length}
+            </>
+          ) : (
+            "Preguntas"
+          )
+        }
+        title={`Preguntas de ${currentTopic}`}
+      >
+        {keyIds.length ? <p className="votingAidCrumbs__heading">Preguntas clave</p> : null}
+        {keyIds.map(questionItem)}
+        {voteIds.length ? <p className="votingAidCrumbs__heading">Votaciones concretas</p> : null}
+        {voteIds.map(questionItem)}
+      </CrumbMenu>
+      <span className="votingAidCrumbs__step">
+        <button aria-label={`Pregunta anterior de ${currentTopic}`} disabled={!prev} onClick={() => onQuestion(prev)} type="button">
+          ‹
+        </button>
+        <button aria-label={`Pregunta siguiente de ${currentTopic}`} disabled={!next} onClick={() => onQuestion(next)} type="button">
+          ›
+        </button>
+      </span>
+    </nav>
+  );
+}
+
 function QuestionCard({ question, parties, answer, important, onAnswer, onSkip, onImportant, onSplit, showSwipeHint }) {
   const headingRef = useRef(null);
   useEffect(() => {
@@ -1667,6 +1849,8 @@ export default function VotingAidClient({ snapshot, startStatementId = null, ver
   const [shareMessage, setShareMessage] = useState("");
   const [previousRanks, setPreviousRanks] = useState({});
   const [topBefore, setTopBefore] = useState(null);
+  // Topic the user chose to stay in (null: all topics, mixed in play order).
+  const [focusTopic, setFocusTopic] = useState(null);
   const topRef = useRef(null);
   const toastTimer = useRef(null);
   const startedAt = useRef(false);
@@ -1682,6 +1866,7 @@ export default function VotingAidClient({ snapshot, startStatementId = null, ver
   const questionsById = useMemo(() => Object.fromEntries(questions.map((q) => [q.statement_id, q])), [questions]);
   const curatedTotal = useMemo(() => questions.filter((q) => q.source === "curated").length, [questions]);
   const order = useMemo(() => playOrder(questions, state.seed || 1), [questions, state.seed]);
+  const topics = useMemo(() => topicGroups(order, questionsById, state.split), [order, questionsById, state.split]);
   const results = useMemo(
     () => scoreParties({ parties, statements: scoredQuestions }, state.answers, state.important),
     [parties, scoredQuestions, state.answers, state.important],
@@ -1791,9 +1976,19 @@ export default function VotingAidClient({ snapshot, startStatementId = null, ver
     toastTimer.current = setTimeout(() => setToast(null), 3200);
   }
 
-  function goPlay(nextId, answers = state.answers, skipped = state.skipped, split = state.split) {
+  function goPlay(nextId, answers = state.answers, skipped = state.skipped, split = state.split, topic = focusTopic) {
+    let topicNext = null;
+    if (!nextId && topic) {
+      const group = topicGroups(order, questionsById, split).find((g) => g.topic === topic);
+      topicNext = group ? nextInTopic(group.ids, questionsById, answers, skipped, split) : null;
+      if (!topicNext) {
+        setFocusTopic(null);
+        showToast("✅", `Tema completado: ${topic}. Seguimos con todos los temas.`);
+      }
+    }
     const id =
       nextId ||
+      topicNext ||
       pendingSubId(questionsById, split, answers, skipped) ||
       nextQuestionId(
         order.filter((qid) => !split?.[qid]),
@@ -1838,7 +2033,7 @@ export default function VotingAidClient({ snapshot, startStatementId = null, ver
       showToast("🎯", "¡Temas clave completados! Bienvenida/o al modo infinito.");
     }
     if (state.showReveal) setRevealId(id);
-    else goPlay(nextQuestionId(order, answers, skipped), answers, skipped);
+    else goPlay(null, answers, skipped);
   }
 
   /** Answer a multi-vote statement "por partes": clear its own answer and play its concrete votes next. */
@@ -1861,7 +2056,16 @@ export default function VotingAidClient({ snapshot, startStatementId = null, ver
     if (!id) return;
     const skipped = { ...state.skipped, [id]: true };
     update({ ...state, skipped, streak: 0 });
-    goPlay(nextQuestionId(order, state.answers, skipped), state.answers, skipped);
+    goPlay(null, state.answers, skipped);
+  }
+
+  /** Stay in one topic (its next open question; its first one if all are answered), or null to mix them all again. */
+  function chooseTopic(topic) {
+    setFocusTopic(topic);
+    if (!topic) return;
+    const group = topics.find((g) => g.topic === topic);
+    if (!group) return;
+    goPlay(nextInTopic(group.ids, questionsById, state.answers, state.skipped, state.split) || group.ids[0], undefined, undefined, undefined, topic);
   }
 
   function setImportant(id, value) {
@@ -1947,6 +2151,7 @@ export default function VotingAidClient({ snapshot, startStatementId = null, ver
       if (event.altKey || event.ctrlKey || event.metaKey) return;
       const tag = event.target?.tagName;
       if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
+      if (event.target?.closest?.(".votingAidCrumbs")) return; // the topic/question menus handle their own keys
       if (revealId) {
         if (event.key === "Enter" && tag !== "BUTTON" && tag !== "A") {
           event.preventDefault();
@@ -2046,7 +2251,14 @@ export default function VotingAidClient({ snapshot, startStatementId = null, ver
             value={curatedLeft ? curatedTotal - curatedLeft : answeredCount}
           />
           <p className="votingAidMuted votingAidPhase">
-            {curatedLeft
+            {focusTopic ? (
+              <>
+                Solo <strong>{focusTopic}</strong>: {topicLeftLabel(topics, focusTopic, state.answers)}. Al terminarlo, sigues con todos los temas.{" "}
+                <button className="votingAidLinkButton" onClick={() => chooseTopic(null)} type="button">
+                  Mezclar todos los temas
+                </button>
+              </>
+            ) : curatedLeft
               ? `Fase 1 · Temas clave (quedan ${curatedLeft}). Después: modo infinito con votaciones reales.`
               : poolStatus === "ready"
                 ? "♾️ Modo infinito · votaciones reales del Congreso. Para cuando quieras."
@@ -2057,6 +2269,19 @@ export default function VotingAidClient({ snapshot, startStatementId = null, ver
           <PodiumStrip onOpen={() => show("results")} previousRanks={previousRanks} results={results} />
           <div className="votingAidPlay__grid">
             <div>
+              {revealQuestion || current ? (
+                <TopicNav
+                  answers={state.answers}
+                  currentId={(revealQuestion || current).statement_id}
+                  focusTopic={focusTopic}
+                  onQuestion={(id) => goPlay(id)}
+                  onTopic={chooseTopic}
+                  questionsById={questionsById}
+                  skipped={state.skipped}
+                  split={state.split}
+                  topics={topics}
+                />
+              ) : null}
               {revealQuestion ? (
                 <RevealCard
                   answer={state.answers[revealQuestion.statement_id]}

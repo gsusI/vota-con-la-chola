@@ -244,6 +244,7 @@ function attachSubQuestions(curated, items) {
       if (pooled) {
         pooled.parent = pooled.parent || st.statement_id;
         pooled.parentText = pooled.parentText || st.text;
+        pooled.parentTheme = pooled.parentTheme || st.theme;
         st.subIds.push(pooled.statement_id);
         continue;
       }
@@ -330,6 +331,90 @@ export function playOrder(questions, seed = 1) {
     for (const s of sides) if (buckets[s].length) pool.push(buckets[s].shift());
   }
   return [...curated, ...pool];
+}
+
+// Topics for navigation: the vote map's 14 topics (which the key questions use), then leftovers.
+export const TOPIC_ORDER = [
+  "Vivienda",
+  "Empleo y protección social",
+  "Impuestos y economía",
+  "Sanidad",
+  "Educación y lenguas",
+  "Energía, clima y transporte",
+  "Campo y medio rural",
+  "Seguridad y justicia",
+  "Inmigración",
+  "Corrupción y control del Gobierno",
+  "Igualdad y derechos civiles",
+  "Modelo territorial",
+  "Memoria e instituciones",
+  "Política exterior y defensa",
+  "Cultura",
+  "Otros",
+];
+// Endless-mode votes and the first version's statements carry an older, finer theme list.
+const THEME_TOPICS = {
+  "Empleo y pensiones": "Empleo y protección social",
+  "Servicios sociales": "Empleo y protección social",
+  "Coste de vida": "Impuestos y economía",
+  Educación: "Educación y lenguas",
+  "Energía y clima": "Energía, clima y transporte",
+  Transporte: "Energía, clima y transporte",
+  "Campo y mundo rural": "Campo y medio rural",
+  "Corrupción y transparencia": "Corrupción y control del Gobierno",
+  Igualdad: "Igualdad y derechos civiles",
+  Instituciones: "Memoria e instituciones",
+  "Política exterior": "Política exterior y defensa",
+  Defensa: "Política exterior y defensa",
+};
+
+/** Navigation topic of a question (one list for key questions and endless-mode votes). */
+export function questionTopic(question) {
+  // A vote that also backs a key question is listed with it, so «por partes» stays inside one topic.
+  const theme = question?.parentTheme || question?.theme || "Otros";
+  return THEME_TOPICS[theme] || theme;
+}
+
+/**
+ * Questions grouped by topic for the topic/question menus, in play order: key questions first, then the
+ * endless-mode votes. A statement the user split is followed by its concrete votes (they are not in the order).
+ * Returns [{ topic, ids }] in TOPIC_ORDER, unknown topics before «Otros».
+ */
+export function topicGroups(order, questionsById, split = {}) {
+  const byTopic = new Map();
+  const listed = new Set(order);
+  const add = (id) => {
+    const topic = questionTopic(questionsById[id]);
+    if (!byTopic.has(topic)) byTopic.set(topic, []);
+    byTopic.get(topic).push(id);
+  };
+  for (const id of order) {
+    if (!questionsById[id]) continue;
+    add(id);
+    if (split[id]) for (const sid of questionsById[id].subIds || []) if (!listed.has(sid) && questionsById[sid]) add(sid);
+  }
+  const rank = (topic) => {
+    const i = TOPIC_ORDER.indexOf(topic);
+    return i === -1 ? TOPIC_ORDER.length - 1.5 : i;
+  };
+  return [...byTopic.entries()].map(([topic, ids]) => ({ topic, ids })).sort((a, b) => rank(a.topic) - rank(b.topic));
+}
+
+/**
+ * Next question inside one topic: a pending concrete vote of a split statement first, then the first one in the
+ * topic's order that is neither answered nor skipped (split statements excluded), then skipped ones again.
+ * Null when every question of the topic is answered.
+ */
+export function nextInTopic(ids, questionsById, answers = {}, skipped = {}, split = {}) {
+  const inTopic = new Set(ids);
+  const splitHere = Object.fromEntries(Object.keys(split).filter((id) => inTopic.has(id)).map((id) => [id, true]));
+  const sub = pendingSubId(questionsById, splitHere, answers, skipped);
+  if (sub) return sub;
+  return nextQuestionId(
+    ids.filter((id) => !split[id]),
+    answers,
+    skipped,
+  );
 }
 
 /** Next question to ask: first in play order that is neither answered nor skipped; then skipped ones again. */
