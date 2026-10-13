@@ -6764,7 +6764,50 @@ a.votingAidButton {
   color: var(--ink-soft);
 }
 
-/* Desktop: answers sit right under the statement, in the flow; the evidence follows below a divider. */
+/* Desktop: answers sit right under the statement in a dock that sticks to the top while the evidence scrolls.
+   Docked, it floats as a raised bar and recalls the statement in one line (its slot is reserved, so nothing jumps). */
+.votingAidCard--answersFirst .votingAidStatement__text {
+  margin-bottom: 0;
+}
+
+.votingAidDock {
+  position: sticky;
+  top: 12px; /* DOCK_TOP in VotingAidClient.js */
+  z-index: 5;
+  margin: 0 -14px;
+  padding: 0 14px 14px;
+  border-radius: 14px;
+  background: #fff; /* --card is translucent; the evidence must not show through */
+  box-shadow: inset 0 -1px 0 var(--line);
+  transition: box-shadow 0.18s ease;
+}
+
+.votingAidDock__sentinel {
+  height: 0;
+}
+
+.votingAidDock__statement {
+  margin: 0 0 8px;
+  padding-top: 8px;
+  overflow: hidden;
+  font-size: 0.88rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--ink-soft);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  opacity: 0;
+  transition: opacity 0.18s ease;
+}
+
+.votingAidDock.is-docked {
+  box-shadow: 0 0 0 1px var(--line), 0 10px 28px rgba(15, 23, 42, 0.14);
+}
+
+.votingAidDock.is-docked .votingAidDock__statement {
+  opacity: 1;
+}
+
 .votingAidCard--answersFirst .votingAidAnswers {
   position: static;
   margin: 0;
@@ -6774,8 +6817,7 @@ a.votingAidButton {
 }
 
 .votingAidCard--answersFirst .votingAidQuestion__extras {
-  padding-bottom: 18px;
-  border-bottom: 1px solid var(--line);
+  margin-top: 10px;
 }
 
 .votingAidCard--answersFirst .votingAidVoted {
@@ -8202,6 +8244,8 @@ a.votingAidButton {
   .votingAidMini__bar span,
   .votingAidToast,
   .votingAidCard--question,
+  .votingAidDock,
+  .votingAidDock__statement,
   .votingAidAnswer {
     transition: none;
   }

@@ -152,6 +152,26 @@ function useMediaQuery(query) {
   return matches;
 }
 
+// True once the sentinel placed right before a `position: sticky; top: <offset>` element scrolls above that offset.
+function useStuck(enabled, offset) {
+  const sentinelRef = useRef(null);
+  const [stuck, setStuck] = useState(false);
+  useEffect(() => {
+    const el = sentinelRef.current;
+    if (!enabled || !el || typeof IntersectionObserver === "undefined") {
+      setStuck(false);
+      return undefined;
+    }
+    const observer = new IntersectionObserver(
+      ([entry]) => setStuck(!entry.isIntersecting && entry.boundingClientRect.top < offset + 1),
+      { rootMargin: `-${offset + 1}px 0px 0px 0px` },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [enabled, offset]);
+  return [sentinelRef, stuck];
+}
+
 function answerLabel(question, answer) {
   return (question?.source === "pool" ? POOL_ANSWER_LABELS : ANSWER_LABELS)[answer] || "—";
 }
@@ -1196,6 +1216,21 @@ function TopicNav({ topics, questionsById, currentId, focusTopic, answers, skipp
   );
 }
 
+// Matches `top` of .votingAidDock in globals.css.
+const DOCK_TOP = 12;
+
+function DockWrap({ enabled, docked, statement, children }) {
+  if (!enabled) return children;
+  return (
+    <div className={`votingAidDock${docked ? " is-docked" : ""}`}>
+      <p aria-hidden="true" className="votingAidDock__statement">
+        {statement}
+      </p>
+      {children}
+    </div>
+  );
+}
+
 function QuestionCard({ question, parties, answer, important, onAnswer, onSkip, onImportant, onSplit, showSwipeHint }) {
   const headingRef = useRef(null);
   useEffect(() => {
@@ -1209,7 +1244,9 @@ function QuestionCard({ question, parties, answer, important, onAnswer, onSkip, 
     : undefined;
   // Desktop: the answers go right under the statement and the evidence follows, so nothing has to float over it.
   // Mobile keeps the evidence first, with the answers stuck to the bottom of the screen.
+  // There the answers dock sticks to the top while the evidence scrolls, recalling the statement once it is out of view.
   const answersFirst = useMediaQuery(WIDE_QUERY);
+  const [dockSentinelRef, docked] = useStuck(answersFirst, DOCK_TOP);
   const evidence = <WhatVoted parties={parties} question={question} />;
   return (
     <div
@@ -1246,61 +1283,64 @@ function QuestionCard({ question, parties, answer, important, onAnswer, onSkip, 
 
       {answersFirst ? null : evidence}
 
-      <div aria-label="Tu respuesta" className="votingAidAnswers" role="group">
-        {ANSWER_ORDER.map((value, i) => (
-          <button
-            aria-keyshortcuts={String(i + 1)}
-            aria-pressed={answer === value}
-            className={`votingAidAnswer votingAidAnswer--${value}${answer === value ? " is-selected" : ""}`}
-            key={value}
-            onClick={() => onAnswer(value)}
-            type="button"
-          >
-            <span aria-hidden="true" className="votingAidAnswer__key">
-              {i + 1}
-            </span>
-            {labels[value]}
-          </button>
-        ))}
-        {question.subIds?.length ? (
-          <button
-            aria-keyshortcuts="4"
-            className="votingAidAnswer votingAidAnswer--split"
-            onClick={onSplit}
-            type="button"
-          >
-            <span aria-hidden="true" className="votingAidAnswer__key">
-              4
-            </span>
-            <span className="votingAidAnswer__body">
-              Depende
-              <span className="votingAidAnswer__hint">
-                Responde por partes: {question.subIds.length} votaciones concretas en vez de esta pregunta resumen
+      {answersFirst ? <div aria-hidden="true" className="votingAidDock__sentinel" ref={dockSentinelRef} /> : null}
+      <DockWrap docked={docked} enabled={answersFirst} statement={question.source === "pool" ? question.question : question.text}>
+        <div aria-label="Tu respuesta" className="votingAidAnswers" role="group">
+          {ANSWER_ORDER.map((value, i) => (
+            <button
+              aria-keyshortcuts={String(i + 1)}
+              aria-pressed={answer === value}
+              className={`votingAidAnswer votingAidAnswer--${value}${answer === value ? " is-selected" : ""}`}
+              key={value}
+              onClick={() => onAnswer(value)}
+              type="button"
+            >
+              <span aria-hidden="true" className="votingAidAnswer__key">
+                {i + 1}
               </span>
-            </span>
-          </button>
-        ) : null}
-      </div>
+              {labels[value]}
+            </button>
+          ))}
+          {question.subIds?.length ? (
+            <button
+              aria-keyshortcuts="4"
+              className="votingAidAnswer votingAidAnswer--split"
+              onClick={onSplit}
+              type="button"
+            >
+              <span aria-hidden="true" className="votingAidAnswer__key">
+                4
+              </span>
+              <span className="votingAidAnswer__body">
+                Depende
+                <span className="votingAidAnswer__hint">
+                  Responde por partes: {question.subIds.length} votaciones concretas en vez de esta pregunta resumen
+                </span>
+              </span>
+            </button>
+          ) : null}
+        </div>
 
-      {showSwipeHint ? (
-        <p aria-hidden="true" className="votingAidSwipeHint">
-          👈 {labels.disagree} · desliza · {labels.agree} 👉
-        </p>
-      ) : null}
-      <div className="votingAidQuestion__extras">
-        <button
-          aria-pressed={Boolean(important)}
-          className={`votingAidStarToggle${important ? " is-on" : ""}`}
-          onClick={() => onImportant(!important)}
-          type="button"
-        >
-          <span aria-hidden="true">{important ? "★" : "☆"}</span> Me importa mucho{" "}
-          <span className="votingAidMuted votingAidHideMobile">(cuenta doble)</span>
-        </button>
-        <button className="votingAidLinkButton" onClick={onSkip} type="button">
-          Saltar
-        </button>
-      </div>
+        {showSwipeHint ? (
+          <p aria-hidden="true" className="votingAidSwipeHint">
+            👈 {labels.disagree} · desliza · {labels.agree} 👉
+          </p>
+        ) : null}
+        <div className="votingAidQuestion__extras">
+          <button
+            aria-pressed={Boolean(important)}
+            className={`votingAidStarToggle${important ? " is-on" : ""}`}
+            onClick={() => onImportant(!important)}
+            type="button"
+          >
+            <span aria-hidden="true">{important ? "★" : "☆"}</span> Me importa mucho{" "}
+            <span className="votingAidMuted votingAidHideMobile">(cuenta doble)</span>
+          </button>
+          <button className="votingAidLinkButton" onClick={onSkip} type="button">
+            Saltar
+          </button>
+        </div>
+      </DockWrap>
       {answersFirst ? evidence : null}
       {question.parent && parentLabel(question) ? <p className="votingAidMuted votingAidSplit">{parentLabel(question)}</p> : null}
       {question.source === "curated" && question.context && !question.axis_id ? (
