@@ -51,13 +51,16 @@ MAX_INDIRECT = 6
 MAX_TEXT_CHARS = 260
 MAX_GAPS_CHARS = 300
 SHARDS = 128
-# Indirect effects stay in the seed but are not published: a 20-vote human-review sample (2026-10-13) found
-# 4 votes whose effects did not hold, mostly debate arguments about other points of the initiative than the one
-# voted. See docs/etl/sprints/VOTING-AID-20261011/evidence/impacts-review-20261013.json.
-PUBLISH_INDIRECT = False
+# Indirect effects are published only for votes whose ``indirect_scope`` (from the Congreso open-data subgroup)
+# is listed. Reviews on 2026-10-13 (docs/etl/sprints/VOTING-AID-20261011/evidence/impacts-review-20261013.json):
+# 4/20 random votes failed, mostly arguments about other points of the initiative; restricted to whole-initiative
+# votes, 2/10 still failed (debates of a later stage, unsupported benefits, one side's wording). None published.
+INDIRECT_SCOPES = ("votacion_unica", "parcial")
+PUBLISH_INDIRECT_SCOPES: frozenset[str] = frozenset()
 INDIRECT_HIDDEN_REASON = (
-    "Efectos indirectos retirados de la publicación tras una revisión de 20 votaciones al azar: en 4 no aguantaban "
-    "(argumentos del debate sobre otros puntos de la iniciativa que el votado). Se publicarán cuando se corrijan."
+    "No se muestran: en una revisión de 20 votaciones al azar fallaron 4 (argumentos del debate sobre otros puntos de la "
+    "iniciativa que el votado) y, limitados a votaciones de la iniciativa entera, fallaron 2 de 10 (debates de una fase "
+    "posterior, beneficios sin respaldo en el debate o redactados con la voz de un lado)."
 )
 KINDS = ("beneficio_esperado", "riesgo_senalado")
 EVIDENCE = {"organismo_publico", "estudio", "debate"}
@@ -184,6 +187,8 @@ def validate_seed(seed: dict[str, Any], vote_ids: set[str] | None = None, statem
                 errors.append(f"{w}: un argumento del debate debe enlazar al Diario de Sesiones del Pleno")
             if not str(e.get("locator") or "").strip():
                 errors.append(f"{w}: falta localizador (página)")
+        if v.get("indirect_scope") is not None and v["indirect_scope"] not in INDIRECT_SCOPES:
+            errors.append(f"{where}: indirect_scope {v['indirect_scope']!r} no es {' ni '.join(INDIRECT_SCOPES)}")
         kinds = {e.get("kind") for e in indirect}
         if indirect and not set(KINDS) <= kinds:
             errors.append(f"{where}: efectos indirectos de un solo lado; hacen falta beneficios esperados y riesgos señalados")
@@ -192,7 +197,8 @@ def validate_seed(seed: dict[str, Any], vote_ids: set[str] | None = None, statem
     return errors
 
 
-def build_payload(seed: dict[str, Any], publish_indirect: bool = True) -> dict[str, Any]:
+def build_payload(seed: dict[str, Any], publish_scopes: frozenset[str] | None = None) -> dict[str, Any]:
+    """``publish_scopes`` limits indirect effects to votes whose ``indirect_scope`` is listed (None: all)."""
     facts = {
         fid: {k: str(f[k]).strip() for k in ("text", "period", "source", "url")}
         for fid, f in sorted((seed.get("facts") or {}).items())
@@ -200,8 +206,11 @@ def build_payload(seed: dict[str, Any], publish_indirect: bool = True) -> dict[s
     by_vote: dict[str, Any] = {}
     review = {s: 0 for s in sorted(REVIEW_STATUSES)}
     evidence = {e: 0 for e in sorted(EVIDENCE)}
+    published = 0
     for vid, v in sorted((seed.get("votes") or {}).items()):
         review[v["review"]["status"]] += 1
+        publish_indirect = publish_scopes is None or v.get("indirect_scope") in publish_scopes
+        published += bool(publish_indirect and v.get("indirect_effects"))
         for e in v.get("indirect_effects") or []:
             evidence[e["evidence"]] += 1
         by_vote[vid] = {
@@ -232,7 +241,7 @@ def build_payload(seed: dict[str, Any], publish_indirect: bool = True) -> dict[s
             "statements": len(seed.get("statements") or {}),
             "facts": len(facts),
             "indirect_by_evidence": evidence,
-            "indirect_published": publish_indirect,
+            "indirect_votes_published": published,
             "review": review,
         },
         "facts": facts,
@@ -295,9 +304,8 @@ def main(argv: list[str] | None = None) -> int:
             print(f"ERROR {e}", file=sys.stderr)
         print(f"FAIL {len(errors)} errores en la semilla", file=sys.stderr)
         return 1
-    payload = build_payload(seed, publish_indirect=PUBLISH_INDIRECT)
-    if not PUBLISH_INDIRECT:
-        payload["meta"]["indirect_hidden_reason"] = INDIRECT_HIDDEN_REASON
+    payload = build_payload(seed, publish_scopes=PUBLISH_INDIRECT_SCOPES)
+    payload["meta"]["indirect_scope_note"] = INDIRECT_HIDDEN_REASON
     payload["meta"]["coverage"] = {"statements": cov["statements"], "votes": cov["votes"]}
     out = Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)
@@ -313,7 +321,7 @@ def main(argv: list[str] | None = None) -> int:
         (shard_dir / f"{key}.json").write_text(dump(shard), encoding="utf-8")
     m = payload["meta"]
     shown = out.resolve().relative_to(BASE_DIR) if out.resolve().is_relative_to(BASE_DIR) else out
-    print(f"OK impacts -> {shown} (votes={m['votes']} statements={m['statements']} facts={m['facts']} evidence={m['indirect_by_evidence']}) + {len(shards)} shards")
+    print(f"OK impacts -> {shown} (votes={m['votes']} statements={m['statements']} facts={m['facts']} evidence={m['indirect_by_evidence']} indirect_published={m['indirect_votes_published']}) + {len(shards)} shards")
     return 0
 
 

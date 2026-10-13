@@ -56,6 +56,18 @@ class TestValidation(unittest.TestCase):
         # Mirrored by impactShardKey() in votingAidModel.mjs (checked against the published shards in the node test).
         self.assertRegex(vi.shard_key("v1"), r"^[0-9a-f]{2}$")
 
+    def test_publishes_indirect_only_for_listed_scopes(self) -> None:
+        seed = copy.deepcopy(FIXTURE)
+        seed["votes"]["v1"]["indirect_scope"] = "parcial"
+        whole = frozenset({"votacion_unica"})
+        self.assertEqual(vi.build_payload(seed, publish_scopes=whole)["by_vote"]["v1"]["indirect"], [])
+        seed["votes"]["v1"]["indirect_scope"] = "votacion_unica"
+        out = vi.build_payload(seed, publish_scopes=whole)
+        self.assertEqual(len(out["by_vote"]["v1"]["indirect"]), 2)
+        self.assertEqual(out["meta"]["indirect_votes_published"], 1)
+        seed["votes"]["v1"]["indirect_scope"] = "punto"
+        self.assertTrue(vi.validate_seed(seed, {"v1"}, {"eje"}))
+
     def test_accepts_diary_supplement(self) -> None:
         seed = copy.deepcopy(FIXTURE)
         seed["votes"]["v1"]["indirect_effects"][0]["url"] = DS.replace("PL-62.PDF", "PL-163-C1.PDF")

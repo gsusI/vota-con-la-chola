@@ -315,5 +315,171 @@
    },
    "note": "E2 habla de rechazar el Pacto Verde en general, no de la Ley de Restauración (punto 11); el orador la usa con insultos (negacionismo, fascismo). Reformular o quitar."
   }
- ]
+ ],
+ "second_review": {
+  "scope": "10 votaciones al azar (semilla 20261014) entre las de una iniciativa entera (indirect_scope=votacion_unica), excluidas las 20 anteriores",
+  "summary": {
+   "votes": {
+    "quitar_indirectos": 2,
+    "corregir": 5,
+    "ok": 3
+   },
+   "effects": {
+    "flojo": 5,
+    "ok": 33,
+    "no_aplica": 7,
+    "partidista": 1
+   }
+  },
+  "mechanical_check": "96 de 1529 efectos de votaciones únicas citan un Diario de fecha posterior a la votación",
+  "decision": "tampoco se publican (PUBLISH_INDIRECT_SCOPES vacío); el marcado indirect_scope queda en las semillas",
+  "items": [
+   {
+    "n": 1,
+    "id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion196/20260910/Votacion006/VOT_20260910180635.json",
+    "verdict": "quitar_indirectos",
+    "facts": "ok",
+    "direct": "ok",
+    "effects": {
+     "E1": "flojo",
+     "E2": "ok",
+     "E3": "ok"
+    },
+    "note": "E1 no aparece en el debate (VOX solo dice 'rebajar radicalmente'). Sin defensa de la moción, quitando E1 quedan solo riesgos: un solo lado."
+   },
+   {
+    "n": 2,
+    "id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion079/20241121/Votacion062/VOT_20241121173859.json",
+    "verdict": "corregir",
+    "facts": "ok",
+    "direct": "ok",
+    "effects": {
+     "E1": "ok",
+     "E2": "ok",
+     "E3": "ok",
+     "E4": "flojo",
+     "E5": "ok"
+    },
+    "note": "E4 es retórica del PP sobre diésel/seguros de salud, que no figuran en el 'qué cambia' de la ley; quitar o reescribir atribuyéndolo al debate."
+   },
+   {
+    "n": 3,
+    "id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion070/20241023/Votacion012/VOT_20241023184348.json",
+    "verdict": "corregir",
+    "facts": "ok",
+    "direct": "ok",
+    "effects": {
+     "E1": "ok",
+     "E2": "ok",
+     "E3": "ok",
+     "E4": "no_aplica",
+     "E5": "ok"
+    },
+    "note": "E4 habla de las obras actuales del Gobierno en el Corredor (afectaciones, 30 M en servicios alternativos), no de lo que pide la moción; quitar."
+   },
+   {
+    "n": 4,
+    "id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion177/20260430/Votacion001/VOT_20260430125140.json",
+    "verdict": "ok",
+    "facts": "ok",
+    "direct": "ok",
+    "effects": {
+     "E1": "ok",
+     "E2": "ok",
+     "E3": "ok"
+    },
+    "note": "Sin problemas relevantes. Debate del 28-04, anterior a la votación; efectos atribuibles a VOX, Podemos y Más Madrid."
+   },
+   {
+    "n": 5,
+    "id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion185/20260611/Votacion041/VOT_20260611145752.json",
+    "verdict": "ok",
+    "facts": "ok",
+    "direct": "ok",
+    "effects": {
+     "E1": "ok",
+     "E2": "ok",
+     "E3": "ok",
+     "E4": "ok"
+    },
+    "note": "Efectos respaldados por el debate del mismo día (PSOE, BNG); equilibrados."
+   },
+   {
+    "n": 6,
+    "id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion132/20250917/Votacion002/VOT_20250917194020.json",
+    "verdict": "corregir",
+    "facts": "ok",
+    "direct": "ok",
+    "effects": {
+     "E1": "ok",
+     "E2": "ok",
+     "E3": "no_aplica",
+     "E4": "ok",
+     "E5": "flojo",
+     "E6": "ok"
+    },
+    "note": "E3 (más medios a jueces) es crítica del PP al Gobierno, no está en lo votado: quitar. E5 atribuye al texto 'expulsar a todos'; la PNL habla de ilegales y condenados: reescribir."
+   },
+   {
+    "n": 7,
+    "id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion139/20251016/Votacion002/VOT_20251016123448.json",
+    "verdict": "corregir",
+    "facts": "ok",
+    "direct": "ok",
+    "effects": {
+     "E1": "ok",
+     "E2": "ok",
+     "E3": "ok",
+     "E4": "flojo"
+    },
+    "note": "E4 es deducción sobre una intervención que culpa a la Junta del PP; el debate no dice que la inversión estatal no baste. Quitar."
+   },
+   {
+    "n": 8,
+    "id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion129/20250909/Votacion001/VOT_20250909221758.json",
+    "verdict": "corregir",
+    "facts": "ok",
+    "direct": "ok",
+    "effects": {
+     "E1": "ok",
+     "E2": "ok",
+     "E3": "partidista",
+     "E4": "flojo",
+     "E5": "ok"
+    },
+    "note": "E3 adopta el término 'segregación' de EH Bildu como hecho: reescribir como crítica. E4 'restar presión' es deducción del agente sobre una frase de Podemos: quitar."
+   },
+   {
+    "n": 9,
+    "id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion191/20260625/Votacion016/VOT_20260625150808.json",
+    "verdict": "ok",
+    "facts": "ok",
+    "direct": "ok",
+    "effects": {
+     "E1": "ok",
+     "E2": "ok",
+     "E3": "ok",
+     "E4": "ok",
+     "E5": "ok"
+    },
+    "note": "Todos respaldados (Canarias, PNV/EH Bildu, Junts, PP p.83). Debate del 23-06 anterior a la votación."
+   },
+   {
+    "n": 10,
+    "id": "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion116/VOT_20251008195430.json",
+    "verdict": "quitar_indirectos",
+    "facts": "ok",
+    "direct": "ok",
+    "effects": {
+     "E1": "no_aplica",
+     "E2": "ok",
+     "E3": "no_aplica",
+     "E4": "no_aplica",
+     "E5": "no_aplica",
+     "E6": "no_aplica"
+    },
+    "note": "E1,E3-E6 citan el DS 151 de 13-11-2025, posterior a la votación (8-10-2025) y sobre enmiendas del Senado (E5 sobre tasas Aena). Solo vale E2 (BNG, 8-10)."
+   }
+  ]
+ }
 }

@@ -508,9 +508,14 @@ export default function VotingAidMethodologyPage() {
           y consecuencias en ambos sentidos. Datos y reglas en <Code rel={IMPACTS_SEED} />; validador en{" "}
           <Code rel="scripts/export_voting_aid_vote_impacts.py" />.
         </p>
-        {m.impactsMeta.indirect_published === false ? (
+        {m.impactsMeta.indirect_scope_note ? (
           <p>
-            <strong>Las posibles consecuencias no se muestran ahora mismo.</strong> {m.impactsMeta.indirect_hidden_reason} Revisión en{" "}
+            <strong>
+              {m.impactsMeta.indirect_votes_published
+                ? `Posibles consecuencias en ${fmt(m.impactsMeta.indirect_votes_published)} votaciones.`
+                : "Las posibles consecuencias no se muestran ahora mismo."}
+            </strong>{" "}
+            {m.impactsMeta.indirect_scope_note} Revisión en{" "}
             <Code rel="docs/etl/sprints/VOTING-AID-20261011/evidence/impacts-review-20261013.json" />.
           </p>
         ) : null}
