@@ -6696,6 +6696,8 @@ site-publish:
   CLOUDFLARE_PAGES_FROZEN_INPUTS="${CLOUDFLARE_PAGES_FROZEN_INPUTS:-1}" just site-build
   printf '{"source_commit": "%s", "source_dirty": %s, "built_at": "%s"}\n' "$commit" "$dirty" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > "{{site_out_dir}}/.vclc-build.json"
   just site-origin-publish
+  # Pages and their data are served as Worker static assets (no Worker requests); R2 keeps the bulk.
+  just site-origin-worker-deploy
 
 # Needs R2_* env (S3 API); also publishes a sha256 release manifest at /releases/latest.json.
 # Sync the built site (ui/site/out) to the votaconlachola.org R2 origin, changed files only.
@@ -6719,13 +6721,14 @@ site-dataset-mirror:
   if ! python3 -c 'import sys; sys.path.insert(0, "scripts"); import publish_site_origin as o; o.resolve_r2_settings()' 2>/dev/null; then echo "WARN: R2 credentials missing; /datasets/ keeps the previous snapshot" >&2; exit 0; fi
   uv run --no-project --with 'boto3>=1.34' python3 scripts/mirror_dataset_snapshot.py --dataset-repo "{{hf_dataset_repo_id}}"
 
-# Deploy the domain Worker (static shell + R2 origin) with the wrangler OAuth login. Run after site-publish.
+# Deploy the domain Worker with the site as static assets (bulk subtrees stay in R2). site-publish runs it.
 site-origin-worker-deploy:
   #!/usr/bin/env bash
   set -euo pipefail
   site="{{site_out_dir}}"
   test -f "$site/index.html" || { echo "Missing $site; run just site-build first" >&2; exit 2; }
-  env -u CLOUDFLARE_API_TOKEN -u CF_API_TOKEN python3 scripts/publish_spending_static_assets.py --site "$site"
+  # Locally: the wrangler OAuth login (the repo .env token lacks Workers permissions). CI: its API token.
+  if [ -n "${CI:-}" ]; then python3 scripts/publish_site_static_assets.py --site "$site"; else env -u CLOUDFLARE_API_TOKEN -u CF_API_TOKEN python3 scripts/publish_site_static_assets.py --site "$site"; fi
 
 placsp-launch-scoped-publish:
   @echo "RETIRED 2026-10-12: the scoped PLACSP overlay needed the gh-pages tree; full builds include /spending/. Use just site-publish." >&2
