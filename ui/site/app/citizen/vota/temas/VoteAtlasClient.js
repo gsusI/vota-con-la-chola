@@ -15,11 +15,13 @@ import {
   partyChoices,
   pushOf,
   readHash,
+  voteTitle,
   votesForAxis,
   writeHash,
 } from "../voteAtlasModel.mjs";
 
 const PAGE = 15;
+const AMENDMENT_KINDS = new Set(["enmienda", "enmienda_senado", "voto_particular"]);
 
 export function DirectionBar({ score, label, sub, highlight = false, marker = null }) {
   const pct = Number.isFinite(score) ? Math.abs(score) * 50 : 0;
@@ -59,14 +61,14 @@ export function VoteRow({ atlas, vote, axis, kindLabels }) {
         <span className={`votingAidBadge votingAidBadge--${vote.approved ? "agree" : "disagree"}`}>{vote.approved ? "Aprobada" : "Rechazada"}</span>
         {vote.confidence === "baja" ? <span className="votingAidMuted"> · {CONFIDENCE_LABELS.baja}</span> : null}
       </p>
-      <p className="atlasVote__summary">{vote.summary_yes || vote.title}</p>
+      <p className="atlasVote__summary">{vote.summary_yes || voteTitle(atlas, vote)}</p>
       {axis && sign ? (
         <p className="atlasVote__push">
           Votar Sí empuja hacia <strong>«{sign === "+" ? axis.pos_short : axis.neg_short}»</strong>
         </p>
       ) : null}
       <p className="atlasVote__title">
-        {vote.title}
+        {voteTitle(atlas, vote)}
         {vote.subgroup ? <span className="votingAidMuted"> — {vote.subgroup}</span> : null}
       </p>
       <ul aria-label="Voto mayoritario de cada partido" className="atlasChips">
@@ -96,7 +98,11 @@ export function VoteRow({ atlas, vote, axis, kindLabels }) {
 function AxisCard({ atlas, axis, open, onToggle, highlight, kindLabels }) {
   const rows = useMemo(() => axisParties(atlas, axis.axis_id), [atlas, axis.axis_id]);
   const byParty = Object.fromEntries(rows.map((r) => [r.party_id, r]));
-  const votes = useMemo(() => (open ? votesForAxis(atlas, axis.axis_id) : []), [atlas, axis.axis_id, open]);
+  const [onlyMain, setOnlyMain] = useState(false);
+  const votes = useMemo(
+    () => (open ? votesForAxis(atlas, axis.axis_id).filter((v) => !onlyMain || !AMENDMENT_KINDS.has(v.kind)) : []),
+    [atlas, axis.axis_id, open, onlyMain],
+  );
   const [shown, setShown] = useState(PAGE);
   return (
     <article className="atlasAxis votingAidCard" id={`eje-${axis.axis_id}`}>
@@ -133,6 +139,10 @@ function AxisCard({ atlas, axis, open, onToggle, highlight, kindLabels }) {
               <strong>{axis.neg_short}:</strong> {axis.neg}
             </p>
           </details>
+          <label className="atlasSelect atlasToggle">
+            <input checked={onlyMain} onChange={(e) => setOnlyMain(e.target.checked)} type="checkbox" /> Ocultar enmiendas (ver solo leyes,
+            decretos, mociones y proposiciones)
+          </label>
           <ul className="atlasVotes">
             {votes.slice(0, shown).map((v) => (
               <VoteRow atlas={atlas} axis={axis} key={`${v.id}-${axis.axis_id}`} kindLabels={kindLabels} vote={v} />

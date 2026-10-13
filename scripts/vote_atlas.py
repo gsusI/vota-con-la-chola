@@ -107,6 +107,8 @@ def vote_kind(title: str, subgroup_title: str, subgroup_text: str, expediente_te
         return "enmienda" if amendment else "final"
     if "correccion tecnica" in sgt:
         return "procedimiento"
+    if t.startswith("enmiendas del senado") and exp.startswith("votacion de conjunto"):
+        return "final"  # final vote on an organic law, listed under the Senate amendments item
     if t.startswith("enmiendas del senado"):
         return "enmienda_senado" if amendment or sgt or sgx else "enmienda_senado"
     if t.startswith("veto del senado"):
@@ -536,11 +538,32 @@ def cmd_merge(args: argparse.Namespace) -> int:
         for item in doc.get("items") or []:
             vid = item.get("vote_event_id")
             if vid not in units:
+                if args.skip_unknown:
+                    print(f"AVISO: {f.name}: {vid} ya no está en los lotes (texto no localizable tras corregir); se omite", file=sys.stderr)
+                    continue
                 print(f"ERROR: {f.name}: votación desconocida {vid}", file=sys.stderr)
                 return 2
             if vid in merged:
                 print(f"ERROR: {f.name}: votación repetida {vid}", file=sys.stderr)
                 return 2
+            merged[vid] = {
+                "axes": [{k: a.get(k) for k in ("axis_id", "yes_pushes", "confidence")} for a in item.get("axes") or []],
+                "null_reason": None if item.get("axes") else item.get("null_reason"),
+                "summary_yes": clean(item.get("summary_yes")),
+                **({"note": clean(item["note"])} if clean(item.get("note")) else {}),
+                "classifier": str(doc.get("classifier") or f.stem),
+            }
+    # Re-classifications (e.g. after fixing how a text was located) replace the earlier entry for those votes.
+    replaced = 0
+    for f in sorted(p for d in (args.override_dir or []) for p in Path(d).glob("batch_*.out.json")):
+        doc = json.loads(f.read_text(encoding="utf-8"))
+        classifiers.add(str(doc.get("classifier") or f.stem))
+        for item in doc.get("items") or []:
+            vid = item.get("vote_event_id")
+            if vid not in units:
+                print(f"ERROR: {f.name}: votación desconocida {vid}", file=sys.stderr)
+                return 2
+            replaced += vid in merged
             merged[vid] = {
                 "axes": [{k: a.get(k) for k in ("axis_id", "yes_pushes", "confidence")} for a in item.get("axes") or []],
                 "null_reason": None if item.get("axes") else item.get("null_reason"),
@@ -571,7 +594,7 @@ def cmd_merge(args: argparse.Namespace) -> int:
     Path(args.out).write_text(json.dumps(payload, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     axes = Counter(a["axis_id"] for v in merged.values() for a in v["axes"])
     nulls = Counter(v["null_reason"] for v in merged.values() if not v["axes"])
-    print(f"OK merged -> {args.out} (votes={len(merged)} missing={len(missing)} with_axis={sum(1 for v in merged.values() if v['axes'])} nulls={dict(nulls)})")
+    print(f"OK merged -> {args.out} (votes={len(merged)} replaced={replaced} missing={len(missing)} with_axis={sum(1 for v in merged.values() if v['axes'])} nulls={dict(nulls)})")
     print("axes:", dict(axes.most_common()))
     return 0
 
@@ -666,6 +689,8 @@ def main(argv: list[str] | None = None) -> int:
     mg.add_argument("--out", default=str(BASE_DIR / "etl/data/seeds/vote_atlas_classifications_v1.json"))
     mg.add_argument("--model", default="claude-opus-5-5")
     mg.add_argument("--allow-missing", action="store_true")
+    mg.add_argument("--skip-unknown", action="store_true", help="Omitir clasificaciones de votaciones que ya no están en los lotes")
+    mg.add_argument("--override-dir", nargs="*", default=[], help="Reclasificaciones que sustituyen a las anteriores")
     qa = sub.add_parser("qa", help="Medir el acuerdo con una segunda clasificación independiente")
     qa.add_argument("--classifications", default=str(BASE_DIR / "etl/data/seeds/vote_atlas_classifications_v1.json"))
     qa.add_argument("--qa-dir", required=True)

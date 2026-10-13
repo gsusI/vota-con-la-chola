@@ -65,7 +65,8 @@ function partyLabel(person, partiesById) {
 }
 
 function VoteLine({ people, atlas, index, choice, partyCode, classified, axisFilter }) {
-  const [id, path, date, kind, title, subgroup, leg] = people.votes[index];
+  const [id, path, date, kind, titleRef, subgroup, leg] = people.votes[index];
+  const title = Number.isInteger(titleRef) ? people.titles?.[titleRef] || "" : titleRef;
   const v = classified[id];
   const { axisById } = indexAtlas(atlas);
   const axes = (v?.axes || []).filter((a) => !axisFilter || a[0] === axisFilter);

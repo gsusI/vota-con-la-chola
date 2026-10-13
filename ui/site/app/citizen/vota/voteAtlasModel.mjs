@@ -94,6 +94,12 @@ export function votesForAxis(atlas, axisId, { includeEarlier = false } = {}) {
   return out.sort((a, b) => String(b.date).localeCompare(String(a.date)));
 }
 
+/** Official title of an atlas vote (titles are stored once in `atlas.titles`). */
+export function voteTitle(atlas, vote) {
+  if (vote?.title) return vote.title;
+  return Number.isInteger(vote?.t) ? atlas?.titles?.[vote.t] || "" : "";
+}
+
 /** Party majority choices of a vote as [{party, code}] in party order. */
 export function partyChoices(atlas, vote) {
   const codes = String(vote?.parties || "");

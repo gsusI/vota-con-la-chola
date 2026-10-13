@@ -3,7 +3,10 @@ import { withBasePath } from "../../../siteCatalog.mjs";
 import { MIN_ANSWERS_FOR_RANKING } from "../votingAidModel.mjs";
 import { VOTING_AID_VERSIONS, formatReleased } from "../votingAidVersions.mjs";
 import {
+  AMENDMENT_DOCS,
+  AMENDMENT_PROMPT,
   ATLAS_QA,
+  ATLAS_QA_ENM,
   ATLAS_QA_XIV,
   AXES_SEED,
   BULLETS_SEED,
@@ -70,6 +73,7 @@ export default function VotingAidMethodologyPage() {
   const cov = am.coverage || {};
   const qa = am.review?.qa || {};
   const qa14 = am.review?.qa_by_legislature?.["14"] || {};
+  const qaEnm = am.review?.qa_by_legislature?.enmiendas || {};
   const pct = (x) => (Number.isFinite(x) ? `${Math.round(x * 100)} %` : "—");
   const individualParties = (m.seed.parties || []).filter((p) => !p.group_codes?.length);
 
@@ -264,10 +268,23 @@ export default function VotingAidMethodologyPage() {
         </p>
         <ol className="vaMethod__list">
           <li>
-            <strong>Qué se clasifica:</strong> las votaciones con partidos enfrentados (al menos uno vota Sí y otro No) que no son
-            enmiendas ni trámites: tomas en consideración, votaciones finales, decretos ley, enmiendas a la totalidad, proposiciones no de
-            ley y mociones (también punto por punto). Las {fmt(cov.by_status?.enmienda_sin_texto)} votaciones de enmiendas no se
-            clasifican porque los datos solo dan su número, no su texto.
+            <strong>Qué se clasifica:</strong> todas las votaciones con partidos enfrentados (al menos uno vota Sí y otro No) que no son
+            trámites: tomas en consideración, votaciones finales, decretos ley, enmiendas a la totalidad, proposiciones no de ley y
+            mociones (también punto por punto) y, desde el 13 de octubre de 2026, también las enmiendas.
+          </li>
+          <li>
+            <strong>Enmiendas:</strong> la votación solo dice «Enmienda 327» o «Enmiendas al artículo 13», así que para cada ley se localizó
+            su expediente (confirmado porque su ficha lista esas votaciones) y se descargaron del BOCG sus enmiendas («ENMIENDA NÚM.»),
+            las enmiendas del Senado (mensaje motivado) y el dictamen con los votos particulares (<Code rel={AMENDMENT_DOCS} />). Cada
+            votación se empareja por número (rangos incluidos); las transaccionales, por las enmiendas que transaccionan; el «resto de las
+            enmiendas» de un grupo, por sus enmiendas no votadas aparte (en los Presupuestos, solo las de esa sección); las del Senado, por
+            el tramo del mensaje motivado sobre ese precepto. Comprobación: en las {fmt(3594)} enmiendas numeradas, el firmante coincide
+            siempre con el grupo que cita la votación. Las clasificó otro prompt adaptado (<Code rel={AMENDMENT_PROMPT} />): votar Sí =
+            incorporar la enmienda; partidas presupuestarias para una obra o un territorio = demanda local. Todas las enmiendas de una ley
+            comparten un peso por eje, para que una ley con cien enmiendas no pese cien veces más. Muestra de control a ciegas:{" "}
+            {pct(qaEnm.same_primary_axis)} mismo eje principal y {pct(qaEnm.same_sign_when_axis_shared)} mismo sentido (
+            {fmt(qaEnm.votes_compared)} votaciones; <Code rel={ATLAS_QA_ENM} />). Limitación: muchas enmiendas del Senado solo citan su
+            número y su texto está en el BOCG del Senado, que hoy no responde; esas quedan «sin texto», sin dirección inventada.
           </li>
           <li>
             <strong>Texto oficial:</strong> para cada moción y PNL votada se localizó su expediente en el buscador del Congreso (confirmado
@@ -682,7 +699,11 @@ export default function VotingAidMethodologyPage() {
             compararlo; por defecto se muestra el nuevo. Es la regla para cada actualización futura.
           </li>
           <li>
-            <strong>Cuatro años, no tres:</strong> integrar también el final de la XIV legislatura en las fichas de los diputados.
+            <strong>Cuatro años, no tres:</strong> integrar también el final de la XIV legislatura en las fichas de los diputados, con su
+            propia muestra de control a ciegas.
+          </li>
+          <li>
+            <strong>Las enmiendas también:</strong> clasificarlas descargando su texto del BOCG.
           </li>
         </ol>
         <h3>Ejemplos reales del prompt «Pregúntale a una IA»</h3>
@@ -754,8 +775,9 @@ export default function VotingAidMethodologyPage() {
             {pct(qa.same_primary_axis)} de las veces; el resto son casos frontera. Cada votación enlaza a su texto para comprobarlo.
           </li>
           <li>
-            <strong>Las enmiendas no están clasificadas</strong> ({fmt(cov.by_status?.enmienda_sin_texto)} votaciones): buena parte del
-            trabajo legislativo fino queda fuera de las direcciones por tema.
+            <strong>Enmiendas leídas con límites:</strong> las votadas en bloque («resto de las enmiendas») y las transaccionales se leen de
+            forma aproximada, y muchas enmiendas del Senado quedan sin texto ({fmt(cov.by_status?.["sin_eje:sin_texto"])} votaciones de la XV
+            sin texto suficiente, más {fmt(cov.by_status?.enmienda_sin_texto)} enmiendas sin localizar).
           </li>
           <li>
             <strong>Senado sin voto por senador:</strong> sus datos abiertos enlazan los ficheros de votación de la XV, pero el servidor
@@ -803,7 +825,9 @@ export default function VotingAidMethodologyPage() {
 python3 scripts/vote_atlas.py link-texts --db <db>
 python3 scripts/vote_atlas.py units --db <db> --out-dir <lotes>   # lotes para clasificar (personas o IA)
 python3 scripts/vote_atlas.py merge --units-dir <lotes> --classified-dir <clasificados>
-python3 scripts/export_vote_atlas.py --db <db> --out-dir ui/site/public/citizen/data
+python3 scripts/vote_atlas_amendments.py link --db <db> --legislature 15 --legislature 14:2022-10-01
+python3 scripts/vote_atlas_amendments.py units --db <db> --legislature 15 --legislature 14:2022-10-01 --out-dir <lotes>
+python3 scripts/export_vote_atlas.py --db <db> --earlier 14:2022-10-01 --out-dir ui/site/public/citizen/data
 python3 scripts/export_voting_aid_snapshot.py --db <db> --out ui/site/public/citizen/data/voting_aid_generales_v1.json
 python3 scripts/export_voting_aid_pool.py --db <db> --out ui/site/public/citizen/data/voting_aid_pool_v1.json
 python3 scripts/voting_aid_motion_texts.py link --db <db>

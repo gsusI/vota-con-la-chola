@@ -52,6 +52,8 @@ from scripts.vote_atlas import (  # noqa: E402
     motion_key,
 )
 
+from scripts.vote_atlas_amendments import law_group_key  # noqa: E402
+
 ATLAS_SCHEMA_VERSION = "vote_atlas_v1"
 PEOPLE_SCHEMA_VERSION = "vote_atlas_people_v1"
 CLASSIFICATIONS_SCHEMA_VERSION = "vote_atlas_classifications_v1"
@@ -127,6 +129,13 @@ def person_keys(rows: list[tuple]) -> dict[str, str]:
     return out
 
 
+def weight_key(ev: dict[str, Any]) -> str:
+    """Votes sharing one unit of weight per axis: the points of a motion, or all the amendments of one bill."""
+    if ev["kind"] in AMENDMENT_KINDS:
+        return "enm:" + law_group_key(ev)
+    return text_key(ev["legislature"], ev["expediente_text"])
+
+
 def weighted_mean(pairs: list[tuple[float, float]]) -> float | None:
     total = sum(w for _p, w in pairs)
     return None if total <= 0 else sum(p * w for p, w in pairs) / total
@@ -140,12 +149,27 @@ def ballot_majority(majorities: dict[str, str | None], legislature: str, pid: st
     return majorities.get(f"g{legislature}:{group}") if group else None
 
 
+def amendment_doc_urls(docs: dict[str, Any]) -> dict[str, str]:
+    """vote -> BOCG document holding the text the vote was classified with (amendments, Senate message, report)."""
+    role = {"numeros": "enmiendas", "transaccional": "enmiendas", "resto": "enmiendas", "senado": "senado", "voto_particular": "dictamen"}
+    out = {}
+    for bill in (docs.get("bills") or {}).values():
+        urls = bill.get("doc_urls") or {}
+        for vid, ref in (bill.get("votes") or {}).items():
+            got = urls.get(role.get(ref.get("resolution"), ""), [])
+            if got:
+                out[vid] = got[0]
+    return out
+
+
 def build(conn: sqlite3.Connection, seed: dict[str, Any], axes_doc: dict[str, Any], cls: dict[str, Any],
           texts: dict[str, Any], *, legislature: str, generated_at: str,
-          earlier: list[tuple[str, str]] | None = None) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
+          earlier: list[tuple[str, str]] | None = None, amendment_docs: dict[str, Any] | None = None,
+          ) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
     """`legislature` drives parties and the voting aid; `earlier` [(legislature, since_date)] adds older votes to
     the deputies' record only (their groups then do not map cleanly to today's ballot parties)."""
     party_ids = [p["party_id"] for p in seed["parties"]]
+    amendment_urls = amendment_doc_urls(amendment_docs or {})
     legs = [(lg, since) for lg, since in (earlier or [])] + [(legislature, None)]
     events: list[dict[str, Any]] = []
     rows: list[tuple] = []
@@ -209,7 +233,7 @@ def build(conn: sqlite3.Connection, seed: dict[str, Any], axes_doc: dict[str, An
             continue
         for a in item.get("axes") or []:
             if a["confidence"] in SCORED_CONFIDENCE:
-                group_sizes[(text_key(ev["legislature"], ev["expediente_text"]), a["axis_id"])] += 1
+                group_sizes[(weight_key(ev), a["axis_id"])] += 1
                 scored.append((ev, a["axis_id"], 1 if a["yes_pushes"] == "+" else -1))
 
     party_pairs: dict[str, dict[str, list[tuple[float, float]]]] = defaultdict(lambda: defaultdict(list))
@@ -219,7 +243,7 @@ def build(conn: sqlite3.Connection, seed: dict[str, Any], axes_doc: dict[str, An
     axis_inits: dict[str, set] = defaultdict(set)
     for ev, axis_id, sign in scored:
         vid = ev["vote_event_id"]
-        gkey = (text_key(ev["legislature"], ev["expediente_text"]), axis_id)
+        gkey = (weight_key(ev), axis_id)
         w = 1.0 / group_sizes[gkey]
         if ev["legislature"] == legislature:
             # Parties: only the current legislature, where deputies map to today's ballot parties.
@@ -251,14 +275,24 @@ def build(conn: sqlite3.Connection, seed: dict[str, Any], axes_doc: dict[str, An
 
     # --- atlas votes (classified, for drill-down)
     atlas_votes = []
+    titles: list[str] = []
+    title_index: dict[str, int] = {}
+
+    def title_ref(text: str) -> int:
+        # Law titles repeat once per amendment vote: the atlas stores each title once.
+        if text not in title_index:
+            title_index[text] = len(titles)
+            titles.append(text)
+        return title_index[text]
+
     status_by_leg: dict[str, Counter] = defaultdict(Counter)
     for ev in events:
         vid = ev["vote_event_id"]
         item = votes_cls.get(vid)
         count = status_by_leg[ev["legislature"]]
-        if ev["kind"] in AMENDMENT_KINDS:
+        if ev["kind"] in AMENDMENT_KINDS and not item:
             count["enmienda_sin_texto"] += 1
-        elif ev["kind"] not in CLASSIFIABLE_KINDS:
+        elif ev["kind"] not in CLASSIFIABLE_KINDS and ev["kind"] not in AMENDMENT_KINDS:
             count["tramite"] += 1
         elif not contested(majorities[vid]):
             count["sin_division"] += 1
@@ -271,13 +305,15 @@ def build(conn: sqlite3.Connection, seed: dict[str, Any], axes_doc: dict[str, An
         if not item:
             continue
         text = (texts.get(text_key(ev["legislature"], ev["expediente_text"])) or {}).get("text") or {}
+        if not text and vid in amendment_urls:
+            text = {"url": amendment_urls[vid]}
         atlas_votes.append({
             "id": short_id(vid),
             "path": vote_path(vid),
             **({"leg": ev["legislature"]} if ev["legislature"] != legislature else {}),
             "date": ev["vote_date"],
             "kind": ev["kind"],
-            "title": clean(str(ev["expediente_text"]).split("\n")[0]),
+            "t": title_ref(clean(str(ev["expediente_text"]).split("\n")[0])),
             "subgroup": clean(" ".join(x for x in (ev["subgroup_title"], ev["subgroup_text"]) if x)),
             "summary_yes": item.get("summary_yes") or "",
             "axes": [[a["axis_id"], a["yes_pushes"], a["confidence"]] for a in item.get("axes") or []],
@@ -365,7 +401,7 @@ def build(conn: sqlite3.Connection, seed: dict[str, Any], axes_doc: dict[str, An
                 "party_direction": "Media ponderada, por eje, de signo × (Sí − No) / (Sí + No + Abstención) de los diputados del partido; signo +1 si votar Sí empuja hacia el polo positivo.",
                 "weights": "Solo cuentan las clasificaciones de confianza alta o media. Los puntos de una misma moción comparten un peso por eje: una moción votada por puntos cuenta como una iniciativa.",
                 "classification": "Cada votación se clasifica por su contenido (texto oficial del BOCG cuando existe), sin ver cómo votaron los partidos.",
-                "not_classified": "Las enmiendas y votos particulares no se clasifican: los datos de votación solo dan su número, no su texto. Sí cuentan en el historial de cada diputado.",
+                "amendments": "Las enmiendas, enmiendas del Senado y votos particulares se clasifican con su texto del BOCG (localizado por número o precepto); las de una misma ley comparten un peso por eje. Las que no se pudieron localizar quedan sin clasificar.",
             },
             "coverage": {
                 "events_total": n_events,
@@ -384,7 +420,7 @@ def build(conn: sqlite3.Connection, seed: dict[str, Any], axes_doc: dict[str, An
                 "Las direcciones salen solo de votaciones nominales del Pleno del Congreso; no de programas ni declaraciones.",
                 "La clasificación de cada votación en un eje es una lectura del texto votado hecha con IA y revisable: cada votación enlaza a su texto oficial.",
                 "Una puntuación cercana a 0 puede significar abstención, votos divididos o votos en ambos sentidos; mira las votaciones.",
-                "Las enmiendas a las leyes no están clasificadas: una parte de la acción legislativa queda fuera.",
+                "Las enmiendas se clasifican con su texto del BOCG; las votadas en bloque o transaccionadas se leen de forma aproximada.",
             ],
         },
         "topics": axes_doc["topics"],
@@ -397,8 +433,18 @@ def build(conn: sqlite3.Connection, seed: dict[str, Any], axes_doc: dict[str, An
         "parties": [{"party_id": p["party_id"], "label": p["label"]} for p in seed["parties"]],
         "party_axes": party_axes,
         "kind_labels": KIND_LABELS,
+        "titles": titles,
         "votes": atlas_votes,
     }
+    people_titles: list[str] = []
+    people_title_index: dict[str, int] = {}
+
+    def people_title_ref(text: str) -> int:
+        if text not in people_title_index:
+            people_title_index[text] = len(people_titles)
+            people_titles.append(text)
+        return people_title_index[text]
+
     people_doc = {
         "meta": {
             **meta_common,
@@ -420,9 +466,11 @@ def build(conn: sqlite3.Connection, seed: dict[str, Any], axes_doc: dict[str, An
             "path_prefix": VOTE_URL_PREFIX[4:],
         },
         "parties": atlas["parties"],
+        # [id, path, date, kind, title index (into "titles"), subgroup, legislature]
+        "titles": people_titles,
         "votes": [
             [short_id(e["vote_event_id"]), vote_path(e["vote_event_id"]), e["vote_date"], e["kind"],
-             clean(str(e["expediente_text"]).split("\n")[0])[:220],
+             people_title_ref(clean(str(e["expediente_text"]).split("\n")[0])[:220]),
              clean(" ".join(x for x in (e["subgroup_title"], e["subgroup_text"]) if x))[:120], e["legislature"]]
             for e in events
         ],
@@ -471,12 +519,12 @@ def build_voting_aid(ctx: dict[str, Any], seed: dict[str, Any], aid_seed: dict[s
         if len(votes) < min_votes:
             skipped.append({"statement_id": st["statement_id"], "votes": len(votes)})
             continue
-        groups = Counter(motion_key(ev["expediente_text"]) for ev, _s in votes)
+        groups = Counter(weight_key(ev) for ev, _s in votes)
         pairs: dict[str, list[tuple[float, float]]] = defaultdict(list)
         votes_out = []
         for ev, sign in sorted(votes, key=lambda x: x[0]["vote_date"] or "", reverse=True):
             vid = ev["vote_event_id"]
-            w = 1.0 / groups[motion_key(ev["expediente_text"])]
+            w = 1.0 / groups[weight_key(ev)]
             toward = sign * pole  # +1: voting Sí moves towards the statement
             for pid in party_ids:
                 c = ctx["tallies"][vid][pid]
@@ -492,7 +540,7 @@ def build_voting_aid(ctx: dict[str, Any], seed: dict[str, Any], aid_seed: dict[s
                 "title": clean(str(ev["expediente_text"]).split("\n")[0]),
                 "subgroup": clean(" ".join(x for x in (ev["subgroup_title"], ev["subgroup_text"]) if x)),
                 "summary_yes": ctx["votes_cls"][vid].get("summary_yes") or "",
-                "g": motion_key(ev["expediente_text"])[:8],  # initiative key: points of one motion share it
+                "g": hashlib.sha1(weight_key(ev).encode()).hexdigest()[:8],  # initiative key: points of a motion / amendments of a bill
                 "kind": ev["kind"],
                 "agree_vote": "Sí" if toward > 0 else "No",
                 "approved": (ev["yes"] or 0) > (ev["no"] or 0),
@@ -502,12 +550,12 @@ def build_voting_aid(ctx: dict[str, Any], seed: dict[str, Any], aid_seed: dict[s
                 **({"text_url": text["url"]} if text.get("url") else {}),
             })
         # Examples first: the latest vote of each initiative (laws and decrees before motions), then the rest.
-        kind_rank = {"final": 0, "rdl": 0, "toma": 1, "totalidad": 1, "pnl": 2, "mocion": 2}
+        kind_rank = {"final": 0, "rdl": 0, "toma": 1, "totalidad": 1, "pnl": 2, "mocion": 2, "pnl_punto": 3, "mocion_punto": 3}
         seen_groups: set[str] = set()
         heads, rest = [], []
         for v, (ev, _s) in zip(votes_out, sorted(votes, key=lambda x: x[0]["vote_date"] or "", reverse=True)):
-            g = motion_key(ev["expediente_text"])
-            (rest if g in seen_groups else heads).append((kind_rank.get(ev["kind"], 3), v))
+            g = weight_key(ev)
+            (rest if g in seen_groups else heads).append((kind_rank.get(ev["kind"], 4), v))
             seen_groups.add(g)
         heads.sort(key=lambda x: x[0])
         votes_out = [v for _r, v in heads] + [v for _r, v in rest]
@@ -587,6 +635,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     p.add_argument("--axes", default=str(DEFAULT_AXES))
     p.add_argument("--classifications", default=str(DEFAULT_CLASSIFICATIONS))
     p.add_argument("--texts", default=str(DEFAULT_TEXTS))
+    p.add_argument("--amendment-docs", default=str(BASE_DIR / "etl/data/seeds/vote_atlas_amendment_docs_v1.json"))
     p.add_argument("--aid-seed", default=str(DEFAULT_AID_SEED))
     p.add_argument("--earlier", action="append", default=[], metavar="LEG:YYYY-MM-DD",
                    help="Legislatura anterior a añadir al historial de diputados, desde una fecha (p. ej. 14:2022-10-01)")
@@ -610,7 +659,9 @@ def main(argv: list[str] | None = None) -> int:
     try:
         generated_at = datetime.now(timezone.utc).replace(microsecond=0).isoformat()
         earlier = [tuple(x.split(":", 1)) for x in args.earlier]
-        atlas, people, ctx = build(conn, seed, axes_doc, cls, texts, legislature=args.legislature, generated_at=generated_at, earlier=earlier)
+        amendment_docs = json.loads(Path(args.amendment_docs).read_text(encoding="utf-8")) if Path(args.amendment_docs).exists() else {}
+        atlas, people, ctx = build(conn, seed, axes_doc, cls, texts, legislature=args.legislature, generated_at=generated_at,
+                                   earlier=earlier, amendment_docs=amendment_docs)
     finally:
         conn.close()
     aid_seed = json.loads(Path(args.aid_seed).read_text(encoding="utf-8"))

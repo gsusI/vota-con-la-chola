@@ -18,6 +18,9 @@ export const TEXTS_SEED = "etl/data/seeds/vote_atlas_texts_v1.json";
 export const ATLAS_PROMPTS_DIR = "docs/etl/sprints/VOTE-ATLAS-20261013/prompts";
 export const ATLAS_QA = "docs/etl/sprints/VOTE-ATLAS-20261013/evidence/vote-atlas-classification-agreement.json";
 export const ATLAS_QA_XIV = "docs/etl/sprints/VOTE-ATLAS-20261013/evidence/vote-atlas-classification-agreement-xiv.json";
+export const ATLAS_QA_ENM = "docs/etl/sprints/VOTE-ATLAS-20261013/evidence/vote-atlas-classification-agreement-enmiendas.json";
+export const AMENDMENT_DOCS = "etl/data/seeds/vote_atlas_amendment_docs_v1.json";
+export const AMENDMENT_PROMPT = "docs/etl/sprints/VOTE-ATLAS-20261013/prompts/clasificar-enmiendas.md";
 export const SENADO_EVIDENCE = "docs/etl/sprints/VOTE-ATLAS-20261013/evidence/senado-votos-por-senador-probe-20261013.md";
 export const BULLETS_SEED = "etl/data/seeds/voting_aid_vote_bullets_v1.json";
 
@@ -59,6 +62,12 @@ const PROMPT_FILES = [
     dir: ATLAS_PROMPTS_DIR,
     title: "Clasificación de cada votación en un eje temático (mapa y preguntas clave)",
     who: "Claude Opus 5.5 (14 subagentes por lotes + 3 para la muestra de control, sin ver los votos de los partidos)",
+  },
+  {
+    file: "clasificar-enmiendas.md",
+    dir: ATLAS_PROMPTS_DIR,
+    title: "Clasificación de cada enmienda con su texto del BOCG",
+    who: "Claude Opus 5.5 (20 subagentes por lotes + 4 para reclasificar tras corregir el localizador + 3 para la muestra de control)",
   },
   {
     file: "encargos-subagentes.md",
