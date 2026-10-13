@@ -410,5 +410,21 @@ test("topic navigation: one topic list for key questions and votes, next open qu
   const split = { [parent]: true };
   const withSubs = m.topicGroups(order, byId, split).find((g) => g.topic === "Vivienda").ids;
   for (const sid of byId[parent].subIds) assert.ok(withSubs.includes(sid), sid);
+
+  // ← → step through all key questions across topics, and separately through all votes: never from one to the other.
+  const lists = m.stepLists(m.topicGroups(order, byId, split), byId);
+  const curatedIds = questions.filter((q) => q.source === "curated").map((q) => q.statement_id);
+  assert.deepEqual([...lists.keys].sort(), [...curatedIds].sort());
+  assert.ok(lists.votes.every((id) => byId[id].source !== "curated"));
+  for (const sid of byId[parent].subIds) assert.ok(lists.votes.includes(sid), sid);
+  const lastKeyOfTopic = lists.keys.findIndex((id, i) => i < lists.keys.length - 1 && m.questionTopic(byId[id]) !== m.questionTopic(byId[lists.keys[i + 1]]));
+  const crossing = m.stepNeighbors(lists, byId, lists.keys[lastKeyOfTopic]);
+  assert.equal(crossing.isKey, true);
+  assert.equal(byId[crossing.next].source, "curated"); // the next topic's first key, not this topic's votes
+  assert.notEqual(m.questionTopic(byId[crossing.next]), m.questionTopic(byId[lists.keys[lastKeyOfTopic]]));
+  assert.equal(m.stepNeighbors(lists, byId, lists.keys[0]).prev, null);
+  const firstSub = m.stepNeighbors(lists, byId, byId[parent].subIds[0]);
+  assert.equal(firstSub.isKey, false);
+  assert.ok(!firstSub.next || byId[firstSub.next].source !== "curated");
   assert.equal(m.nextInTopic(withSubs, byId, {}, {}, split), byId[parent].subIds[0]);
 });

@@ -32,6 +32,8 @@ import {
   scoreParties,
   scorePercent,
   shareCodeFromHash,
+  stepLists,
+  stepNeighbors,
   topicGroups,
 } from "./votingAidModel.mjs";
 import { formatReleased, otherVersions, versionById } from "./votingAidVersions.mjs";
@@ -1098,22 +1100,14 @@ function CrumbMenu({ label, title, children }) {
 
 const CRUMB_MARKS = { current: "▶", answered: "✓", split: "⑂", skipped: "↷", open: "○" };
 
-/** The question's topic list and its neighbours in it (what ‹ › and the ← → keys step through). */
-function topicNeighbors(topics, questionsById, id) {
-  const ids = topics.find((g) => g.topic === questionTopic(questionsById[id]))?.ids || [];
-  const pos = ids.indexOf(id);
-  return { ids, prev: pos > 0 ? ids[pos - 1] : null, next: pos >= 0 && pos < ids.length - 1 ? ids[pos + 1] : null };
-}
-
-function TopicNav({ topics, questionsById, currentId, focusTopic, answers, skipped, split, onTopic, onQuestion }) {
+function TopicNav({ topics, stepLists, questionsById, currentId, focusTopic, answers, skipped, split, onTopic, onQuestion }) {
   const currentTopic = questionTopic(questionsById[currentId]);
-  const { ids, prev, next } = topicNeighbors(topics, questionsById, currentId);
+  const ids = topics.find((g) => g.topic === currentTopic)?.ids || [];
   const keyIds = ids.filter((id) => questionsById[id]?.source === "curated");
   const voteIds = ids.filter((id) => questionsById[id]?.source !== "curated");
-  // Position inside its own list (key questions or votes), matching the counts of the topic menu.
-  const isKey = questionsById[currentId]?.source === "curated";
-  const section = isKey ? keyIds : voteIds;
-  const sectionPos = section.indexOf(currentId);
+  // ‹ › walk all key questions across topics, or all votes: the position shown is in that same list.
+  const { isKey, ids: section, pos: sectionPos, prev, next } = stepNeighbors(stepLists, questionsById, currentId);
+  const kind = isKey ? "Clave" : "Votación";
 
   function questionItem(id) {
     const q = questionsById[id];
@@ -1198,7 +1192,7 @@ function TopicNav({ topics, questionsById, currentId, focusTopic, answers, skipp
         label={
           sectionPos >= 0 ? (
             <>
-              {isKey ? "Clave" : "Votación"} {sectionPos + 1} de {section.length}
+              {kind} {sectionPos + 1} de {section.length}
             </>
           ) : (
             "Preguntas"
@@ -1212,10 +1206,10 @@ function TopicNav({ topics, questionsById, currentId, focusTopic, answers, skipp
         {voteIds.map(questionItem)}
       </CrumbMenu>
       <span className="votingAidCrumbs__step">
-        <button aria-label={`Pregunta anterior de ${currentTopic}`} disabled={!prev} onClick={() => onQuestion(prev)} type="button">
+        <button aria-label={isKey ? "Pregunta clave anterior" : "Votación anterior"} disabled={!prev} onClick={() => onQuestion(prev)} type="button">
           ‹
         </button>
-        <button aria-label={`Pregunta siguiente de ${currentTopic}`} disabled={!next} onClick={() => onQuestion(next)} type="button">
+        <button aria-label={isKey ? "Pregunta clave siguiente" : "Votación siguiente"} disabled={!next} onClick={() => onQuestion(next)} type="button">
           ›
         </button>
       </span>
@@ -1934,6 +1928,45 @@ function ReviewView({ questions, state, onAnswer, onOpen }) {
 }
 
 // ---------------------------------------------------------------------------
+// Where you are lives in the URL (?p=jugar&q=…&tema=…), so refresh and the back button keep it. Never the answers:
+// those stay in localStorage (and in the explicit #r= share link).
+
+const VIEW_PARAM = { play: "jugar", results: "resultados", party: "partido", review: "respuestas" };
+const PARAM_VIEW = Object.fromEntries(Object.entries(VIEW_PARAM).map(([view, param]) => [param, view]));
+
+function navUrl({ view, questionId, focusTopic, partyId }) {
+  const params = new URLSearchParams();
+  if (VIEW_PARAM[view]) params.set("p", VIEW_PARAM[view]);
+  if (view === "play" && questionId) params.set("q", questionId);
+  if (view === "play" && focusTopic) params.set("tema", focusTopic);
+  if (view === "party" && partyId) params.set("partido", partyId);
+  const query = params.toString();
+  return `${window.location.pathname}${query ? `?${query}` : ""}${window.location.hash}`;
+}
+
+function readNav() {
+  const params = new URLSearchParams(window.location.search);
+  return { view: PARAM_VIEW[params.get("p")] || "intro", questionId: params.get("q"), focusTopic: params.get("tema"), partyId: params.get("partido") };
+}
+
+/** Back to the saved scroll position once the page is tall enough (data and impacts load after the first render). */
+function restoreScroll(y) {
+  if (!Number.isFinite(y) || y <= 0) return;
+  let cancelled = false;
+  const stop = () => {
+    cancelled = true;
+  };
+  const events = ["wheel", "touchstart", "keydown", "mousedown"];
+  for (const e of events) window.addEventListener(e, stop, { once: true, passive: true });
+  [0, 150, 400, 900, 1600].forEach((ms, i, all) =>
+    setTimeout(() => {
+      if (!cancelled && Math.abs(window.scrollY - y) > 2) window.scrollTo(0, y);
+      if (i === all.length - 1) for (const e of events) window.removeEventListener(e, stop);
+    }, ms),
+  );
+}
+
+// ---------------------------------------------------------------------------
 // Page
 
 export default function VotingAidClient({ snapshot, startStatementId = null, versionId = null }) {
@@ -1975,6 +2008,8 @@ export default function VotingAidClient({ snapshot, startStatementId = null, ver
   const topRef = useRef(null);
   const toastTimer = useRef(null);
   const startedAt = useRef(false);
+  const navRestored = useRef(false);
+  const lastUrl = useRef(null);
 
   const questions = useMemo(
     () => attachHighlights(buildQuestions(snapshot, pool), highlights, voteBullets, impacts),
@@ -1988,6 +2023,7 @@ export default function VotingAidClient({ snapshot, startStatementId = null, ver
   const curatedTotal = useMemo(() => questions.filter((q) => q.source === "curated").length, [questions]);
   const order = useMemo(() => playOrder(questions, state.seed || 1), [questions, state.seed]);
   const topics = useMemo(() => topicGroups(order, questionsById, state.split), [order, questionsById, state.split]);
+  const steps = useMemo(() => stepLists(topics, questionsById), [topics, questionsById]);
   const results = useMemo(
     () => scoreParties({ parties, statements: scoredQuestions }, state.answers, state.important),
     [parties, scoredQuestions, state.answers, state.important],
@@ -2059,11 +2095,18 @@ export default function VotingAidClient({ snapshot, startStatementId = null, ver
         const stored = initialState(version, new Set(questions.map((q) => q.statement_id)));
         if (!stored.seed) stored.seed = newSeed();
         setState(stored);
-        if (startStatementId && !startedAt.current && questions.some((q) => q.statement_id === startStatementId)) {
+        const nav = readNav();
+        if (!navRestored.current && nav.view !== "intro") {
+          navRestored.current = true;
+          startedAt.current = true;
+          applyNav(nav, stored, playOrder(questions, stored.seed));
+          restoreScroll(window.history.state?.y);
+        } else if (startStatementId && !startedAt.current && questions.some((q) => q.statement_id === startStatementId)) {
           startedAt.current = true;
           setCurrentId(startStatementId);
           setView("play");
         }
+        navRestored.current = true;
       }
       setLoaded(true);
     }
@@ -2077,6 +2120,50 @@ export default function VotingAidClient({ snapshot, startStatementId = null, ver
     if (loaded && !fromShare) writeStoredState(version.storageKey, state);
   }, [state, loaded, fromShare, version.storageKey]);
 
+  // Each move (question, topic, tab, party) is one history entry; the first one only replaces the landing URL.
+  useEffect(() => {
+    if (!loaded) return;
+    const url = navUrl({ view, questionId: revealId || currentId, focusTopic, partyId });
+    const here = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+    if (url !== here) {
+      if (lastUrl.current === null) window.history.replaceState({ ...window.history.state, y: window.scrollY }, "", url);
+      else window.history.pushState({ y: 0 }, "", url);
+    }
+    lastUrl.current = url;
+  }, [loaded, view, currentId, revealId, focusTopic, partyId]);
+
+  // Back / forward: show the URL's place and its scroll position.
+  useEffect(() => {
+    function onPop(event) {
+      if (shareCodeFromHash(window.location.hash)) return; // the hashchange handler restores shared results
+      applyNav(readNav(), state, order);
+      restoreScroll(event.state?.y);
+    }
+    window.addEventListener("popstate", onPop);
+    return () => window.removeEventListener("popstate", onPop);
+  });
+
+  // Remember the scroll position in the current history entry (we restore it ourselves: content loads late).
+  useEffect(() => {
+    if ("scrollRestoration" in window.history) window.history.scrollRestoration = "manual";
+    let timer = null;
+    function onScroll() {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        try {
+          window.history.replaceState({ ...window.history.state, y: window.scrollY }, "");
+        } catch {
+          // Some browsers rate-limit history updates; losing one position is fine.
+        }
+      }, 200);
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      clearTimeout(timer);
+    };
+  }, []);
+
   useEffect(() => () => clearTimeout(toastTimer.current), []);
 
   const scrollTop = useCallback(() => {
@@ -2086,7 +2173,7 @@ export default function VotingAidClient({ snapshot, startStatementId = null, ver
   function update(next) {
     if (fromShare) {
       setFromShare(false);
-      if (window.location.hash) window.history.replaceState(null, "", window.location.pathname);
+      if (window.location.hash) window.history.replaceState(window.history.state, "", `${window.location.pathname}${window.location.search}`);
     }
     setState(next);
   }
@@ -2097,25 +2184,51 @@ export default function VotingAidClient({ snapshot, startStatementId = null, ver
     toastTimer.current = setTimeout(() => setToast(null), 3200);
   }
 
-  function goPlay(nextId, answers = state.answers, skipped = state.skipped, split = state.split, topic = focusTopic) {
+  /** Next question to play (inside `topic` when one is chosen); `topicDone` when that topic has nothing left. */
+  function pickNext({ answers, skipped, split, topic, playIds = order }) {
     let topicNext = null;
-    if (!nextId && topic) {
-      const group = topicGroups(order, questionsById, split).find((g) => g.topic === topic);
+    if (topic) {
+      const group = topicGroups(playIds, questionsById, split).find((g) => g.topic === topic);
       topicNext = group ? nextInTopic(group.ids, questionsById, answers, skipped, split) : null;
-      if (!topicNext) {
+    }
+    const id =
+      topicNext ||
+      pendingSubId(questionsById, split, answers, skipped) ||
+      nextQuestionId(
+        playIds.filter((qid) => !split?.[qid]),
+        answers,
+        skipped,
+      );
+    return { id, topicDone: Boolean(topic && !topicNext) };
+  }
+
+  /** Show what a URL describes (on load and on the back/forward buttons), without adding history. */
+  function applyNav(nav, st, playIds) {
+    const topic = nav.focusTopic && questions.some((q) => questionTopic(q) === nav.focusTopic) ? nav.focusTopic : null;
+    if (nav.view === "play") {
+      const id = nav.questionId && questionsById[nav.questionId] ? nav.questionId : pickNext({ ...st, topic, playIds }).id;
+      setFocusTopic(topic);
+      setCurrentId(id);
+      setRevealId(id && st.answers[id] !== undefined && st.showReveal !== false ? id : null);
+      setView("play");
+    } else if (nav.view === "party") {
+      setPartyId(nav.partyId);
+      setView(nav.partyId && parties.some((p) => p.party_id === nav.partyId) ? "party" : "results");
+    } else {
+      setView(nav.view);
+    }
+  }
+
+  function goPlay(nextId, answers = state.answers, skipped = state.skipped, split = state.split, topic = focusTopic) {
+    let id = nextId;
+    if (!id) {
+      const next = pickNext({ answers, skipped, split, topic });
+      id = next.id;
+      if (next.topicDone) {
         setFocusTopic(null);
         showToast("✅", `Tema completado: ${topic}. Seguimos con todos los temas.`);
       }
     }
-    const id =
-      nextId ||
-      topicNext ||
-      pendingSubId(questionsById, split, answers, skipped) ||
-      nextQuestionId(
-        order.filter((qid) => !split?.[qid]),
-        answers,
-        skipped,
-      );
     setRevealId(null);
     setCurrentId(id);
     setView("play");
@@ -2246,13 +2359,13 @@ export default function VotingAidClient({ snapshot, startStatementId = null, ver
     setShareMessage("");
     setCurrentId(null);
     setRevealId(null);
-    if (window.location.hash) window.history.replaceState(null, "", window.location.pathname);
+    if (window.location.hash) window.history.replaceState(window.history.state, "", `${window.location.pathname}${window.location.search}`);
     setView("intro");
     scrollTop();
   }
 
   function ownAnswers() {
-    window.history.replaceState(null, "", window.location.pathname);
+    window.history.replaceState(window.history.state, "", `${window.location.pathname}${window.location.search}`);
     setFromShare(false);
     const stored = readStoredState(version.storageKey);
     if (!stored.seed) stored.seed = newSeed();
@@ -2276,7 +2389,7 @@ export default function VotingAidClient({ snapshot, startStatementId = null, ver
       if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
         const here = revealId || currentId;
         if (!here) return;
-        const { prev, next } = topicNeighbors(topics, questionsById, here);
+        const { prev, next } = stepNeighbors(steps, questionsById, here);
         const target = event.key === "ArrowLeft" ? prev : next;
         if (target) {
           event.preventDefault();
@@ -2413,6 +2526,7 @@ export default function VotingAidClient({ snapshot, startStatementId = null, ver
                     questionsById={questionsById}
                     skipped={state.skipped}
                     split={state.split}
+                    stepLists={steps}
                     topics={topics}
                   />
                 ) : null}
@@ -2458,7 +2572,7 @@ export default function VotingAidClient({ snapshot, startStatementId = null, ver
                   <input checked={state.showReveal !== false} onChange={(e) => update({ ...state, showReveal: e.target.checked })} type="checkbox" />
                   Mostrar cómo votó cada partido después de responder
                 </label>
-                <p className="votingAidMuted votingAidShortcuts">Atajos: 1 · 2 · 3 para responder, 4 «depende», S para saltar, Intro para seguir, ← → para ir a la pregunta anterior o siguiente.</p>
+                <p className="votingAidMuted votingAidShortcuts">Atajos: 1 · 2 · 3 para responder, 4 «depende», S para saltar, Intro para seguir, ← → para ir a la clave (o votación) anterior o siguiente.</p>
               </div>
               <MiniLeaderboard onOpen={() => show("results")} previousRanks={previousRanks} results={results} />
             </div>

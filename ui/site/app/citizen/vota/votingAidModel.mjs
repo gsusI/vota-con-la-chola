@@ -417,6 +417,25 @@ export function nextInTopic(ids, questionsById, answers = {}, skipped = {}, spli
   );
 }
 
+/**
+ * What ‹ › and ← → step through: two separate lists, never mixed. Every key question across all topics, in topic
+ * order; and every concrete vote (endless mode and the votes of a split key question), also in topic order.
+ */
+export function stepLists(topics, questionsById) {
+  const keys = [];
+  const votes = [];
+  for (const g of topics) for (const id of g.ids) (questionsById[id]?.source === "curated" ? keys : votes).push(id);
+  return { keys, votes };
+}
+
+/** The list a question is stepped through (key questions or votes), its position and its neighbours there. */
+export function stepNeighbors(lists, questionsById, id) {
+  const isKey = questionsById[id]?.source === "curated";
+  const ids = isKey ? lists.keys : lists.votes;
+  const pos = ids.indexOf(id);
+  return { isKey, ids, pos, prev: pos > 0 ? ids[pos - 1] : null, next: pos >= 0 && pos < ids.length - 1 ? ids[pos + 1] : null };
+}
+
 /** Next question to ask: first in play order that is neither answered nor skipped; then skipped ones again. */
 export function nextQuestionId(order, answers = {}, skipped = {}) {
   const fresh = order.find((id) => answers[id] === undefined && !skipped[id]);
