@@ -43,6 +43,63 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Prohibir contraprestaciones económicas en las prácticas externas podría evitar el clientelismo y la discriminación del alumnado de centros con menos capacidad económica.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 118 (2025-05-27)",
+     "locator": "pág. 23",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-118.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría frenar que las prácticas externas se usen para cubrir puestos de trabajo a coste cero, con el fraude y la precariedad que se denunció que eso supone.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 118 (2025-05-27)",
+     "locator": "pág. 20",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-118.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría evitar que las empresas elijan a quien paga por encima de otros estudiantes, y así mejorar las oportunidades del alumnado de universidades públicas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 118 (2025-05-27)",
+     "locator": "pág. 27",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-118.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin pagos, las empresas dependerían de su buena voluntad, y podrían faltar plazas de prácticas en provincias con pymes y autónomos para unos dos millones de estudiantes.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 118 (2025-05-27)",
+     "locator": "pág. 30",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-118.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría volver ilegales convenios en los que una universidad pública financia prácticas con fines concretos, como fomentar vocaciones científicas entre mujeres.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 118 (2025-05-27)",
+     "locator": "pág. 30",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-118.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría chocar con normas autonómicas que hoy permiten estos convenios y quedar fuera de lo habitual en la legislación de otros países europeos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 118 (2025-05-27)",
+     "locator": "pág. 16",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-118.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; no se conoce cuántos convenios o plazas de prácticas afectaría. Los efectos son argumentos del debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   }
  }

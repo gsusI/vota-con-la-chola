@@ -195,6 +195,63 @@
     "note": "añadida plantilla de la Carrera Fiscal (RD 560/2026)",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que la reforma acerque el sistema de elección del órgano de gobierno de los jueces a los estándares europeos de independencia judicial que exigen la UE y el Consejo de Europa.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 40",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que unos criterios reforzados de profesionalidad e independencia de los miembros del Consejo, y un plazo para adecuar su sistema a la realidad europea, mejoren su funcionamiento.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 41",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Renovar el Consejo en plazo podría evitar situaciones como la de casi seis años con el mandato caducado, que según se señaló restó legitimidad al órgano.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 38",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Las incompatibilidades y plazos para pasar de la judicatura a la política podrían no desincentivar esas idas y vueltas, y facilitarlas sin riesgo y a cargo del contribuyente.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 31",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Si el Consejo sigue nombrando los cargos gubernativos judiciales, podría persistir la percepción de que esos nombramientos responden a afinidades ideológicas de los vocales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 30",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Si los vocales siguen eligiéndose por cuotas de los partidos en Congreso y Senado, podría persistir un reparto partidista del Consejo que algunos consideran contrario a la Constitución.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 37",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate. No se sabe si el nuevo sistema cambiará en la práctica los nombramientos.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion196/20260910/Votacion015/VOT_20260910180649.json": {
@@ -232,6 +289,55 @@
     "note": "Composición y jueces electores ya medidos",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que reducir el peso de los partidos en la elección de vocales ayude a acabar con la imagen de politización de la justicia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 203 (2026-09-10)",
+     "locator": "pág. 76",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-203.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que los jueces elijan a los vocales judiciales se alinea más con las orientaciones de la Comisión Europea y la Comisión de Venecia sobre este órgano.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 203 (2026-09-10)",
+     "locator": "pág. 78",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-203.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría convertir la elección en un asunto corporativo en el que jueces elijan a jueces afines y se perpetúe una misma mayoría judicial.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 203 (2026-09-10)",
+     "locator": "pág. 77",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-203.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Las asociaciones judiciales podrían ejercer una influencia relevante sobre candidatos y campañas, condicionando el proceso electoral.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 203 (2026-09-10)",
+     "locator": "pág. 78",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-203.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría reducir la intervención democrática de las Cortes en la elección de los vocales de un órgano constitucional.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 203 (2026-09-10)",
+     "locator": "pág. 85",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-203.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; la defensa del grupo proponente no consta íntegra en el extracto. Los efectos son argumentos del debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion186/20260616/Votacion001/VOT_20260616202223.json": {
@@ -263,6 +369,47 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que el Consejo General del Poder Judicial elija a los candidatos, con transparencia, mérito y capacidad, podría reducir la interferencia del Ejecutivo en la selección.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 192 (2026-06-16)",
+     "locator": "pág. 6",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-192.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un procedimiento de selección más cercano a las pautas del Consejo de Europa podría reforzar las garantías de independencia de los jueces propuestos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 192 (2026-06-16)",
+     "locator": "pág. 7",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-192.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Dar más poder a un órgano con problemas de legitimación democrática y composición corporativa podría no mejorar la independencia ni la pluralidad.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 192 (2026-06-16)",
+     "locator": "pág. 9",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-192.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Un órgano de selección solo judicial podría quedarse corto frente a la composición diversa (Cortes, universidades, sociedad civil) que se pide desde Europa.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 192 (2026-06-16)",
+     "locator": "pág. 18",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-192.PDF"
+    }
+   ],
+   "gaps": "Proposición de ley sin memoria oficial de impacto; no se sabe cómo funcionaría en la práctica la selección ni si cumpliría las pautas europeas.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion118/20250612/Votacion018/VOT_20250612132301.json": {
@@ -294,6 +441,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reforzar el cuarto turno y combinar la oposición con la experiencia profesional previa podría acercar las carreras judicial y fiscal a la realidad social.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 122 (2025-06-12)",
+     "locator": "pág. 36",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-122.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Pruebas de acceso con casos prácticos, y no solo memorísticas, podrían adaptar la selección a lo que se hace en los tribunales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 122 (2025-06-12)",
+     "locator": "pág. 36",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-122.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un acceso más abierto podría dar a hijos de familias trabajadoras las mismas posibilidades de entrar en la carrera judicial y fiscal.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 122 (2025-06-12)",
+     "locator": "pág. 35",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-122.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Se señala que la reforma podría dar más control sobre la justicia y debilitar la independencia judicial y la separación de poderes.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 122 (2025-06-12)",
+     "locator": "pág. 33",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-122.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Se señala que, sin diálogo con jueces, fiscales y órganos judiciales, la reforma podría quedar sin el respaldo de quienes han de aplicarla.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 122 (2025-06-12)",
+     "locator": "pág. 30",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-122.PDF"
+    }
+   ],
+   "gaps": "Los efectos son argumentos del debate, muy cargado de reproche político; no consta aquí una evaluación oficial del impacto de la reforma.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion053/20240704/Votacion001/VOT_20240704135014.json": {
@@ -335,6 +531,63 @@
     "verdict": "improved",
     "note": "Añade plantilla fiscal; sustituye genéricas",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que la reforma acerque el sistema de elección del órgano de gobierno de los jueces a los estándares europeos de independencia judicial que exigen la UE y el Consejo de Europa.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 40",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que unos criterios reforzados de profesionalidad e independencia de los miembros del Consejo, y un plazo para adecuar su sistema a la realidad europea, mejoren su funcionamiento.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 41",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Renovar el Consejo en plazo podría evitar situaciones como la de casi seis años con el mandato caducado, que según se señaló restó legitimidad al órgano.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 38",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Las incompatibilidades y plazos para pasar de la judicatura a la política podrían no desincentivar esas idas y vueltas, y facilitarlas sin riesgo y a cargo del contribuyente.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 31",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Si el Consejo sigue nombrando los cargos gubernativos judiciales, podría persistir la percepción de que esos nombramientos responden a afinidades ideológicas de los vocales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 30",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Si los vocales siguen eligiéndose por cuotas de los partidos en Congreso y Senado, podría persistir un reparto partidista del Consejo que algunos consideran contrario a la Constitución.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 37",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate. No se sabe si el nuevo sistema cambiará en la práctica los nombramientos.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -378,6 +631,47 @@
     "note": "Composición y jueces electores ya medidos",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que los jueces elijan a los doce vocales judiciales podría reforzar la independencia del Poder Judicial frente a la injerencia de los partidos políticos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 26 (2024-02-27)",
+     "locator": "pág. 21",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-26.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "El sistema de elección directa por los jueces podría desbloquear la renovación del Consejo y responde a lo que piden las asociaciones judiciales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 26 (2024-02-27)",
+     "locator": "pág. 29",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-26.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Un modelo en que solo un cuerpo del Estado elija a vocales de un poder del Estado podría resultar corporativo y poco democrático.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 26 (2024-02-27)",
+     "locator": "pág. 26",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-26.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Las asociaciones judiciales se alinean con corrientes ideológicas, así que la elección por jueces podría trasladar las confrontaciones internas al Consejo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 26 (2024-02-27)",
+     "locator": "pág. 23",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-26.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion183/20260528/Votacion010/VOT_20260528125347.json": {
@@ -414,6 +708,63 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Retirar la reforma que da a la Fiscalía la instrucción penal podría evitar que investigue un órgano cuyo máximo responsable nombra directamente el Gobierno.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 188 (2026-05-27)",
+     "locator": "pág. 118",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-188.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Retirar la reforma de la carrera judicial podría evitar, según se ha argumentado, una mayor influencia política sobre el Poder Judicial.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 188 (2026-05-27)",
+     "locator": "pág. 118",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-188.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Más embarcaciones, medios y protocolos claros para la Guardia Civil podrían dar más seguridad jurídica a los agentes y capacidad para perseguir a las narcolanchas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 188 (2026-05-27)",
+     "locator": "pág. 123",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-188.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Que los jueces elijan a sus vocales podría crear un modelo corporativo y restar legitimidad democrática al órgano de gobierno de los jueces.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 188 (2026-05-27)",
+     "locator": "pág. 119",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-188.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Retirar la reforma de la carrera judicial podría frenar la estabilización de jueces sustitutos y la creación de nuevas plazas de jueces y fiscales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 188 (2026-05-27)",
+     "locator": "pág. 121",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-188.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Introducir reglas de enfrentamiento propias de contextos bélicos podría abrir la puerta al uso de la fuerza letal ante desobediencias y reducir garantías y límites.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 188 (2026-05-27)",
+     "locator": "pág. 124",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-188.PDF"
+    }
+   ],
+   "gaps": "Sin memoria oficial de impacto; son argumentos del debate. El resumen del voto solo recoge los puntos sobre el CGPJ y las reformas; los de seguridad (Guardia Civil) proceden del debate de la moción.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion154/20251211/Votacion003/VOT_20251211175045.json": {
@@ -445,6 +796,31 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Retirar la reforma de la investigación penal podría evitar que la instrucción pase a la Fiscalía y que se limite la presencia de la acusación popular.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 158 (2025-12-10)",
+     "locator": "pág. 100",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-158.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "No seguir adelante con la reforma podría impedir que la investigación penal quede en la Fiscalía bajo control judicial, como ocurre en otros países europeos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 158 (2025-12-10)",
+     "locator": "pág. 105",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-158.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; los efectos son argumentos del debate, que fue en gran parte reproche político.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion076/20241114/Votacion044/VOT_20241114151054.json": {
@@ -481,6 +857,47 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Derogar el decreto sobre RTVE podría evitar el retroceso en libertad de prensa que algunos asocian a la nueva norma.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 74 (2024-10-29)",
+     "locator": "pág. 64",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-74.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Cesar a un fiscal general investigado podría reforzar la confianza en un Ministerio Fiscal sometido a legalidad e imparcialidad.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 74 (2024-10-29)",
+     "locator": "pág. 66",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-74.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Derogar el decreto podría mantener el bloqueo de la renovación del ente público de radiotelevisión, que el decreto pretendía desbloquear.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 74 (2024-10-29)",
+     "locator": "pág. 64",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-74.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Pedir el cese del fiscal general por pertenecer a una asociación profesional podría chocar con el derecho constitucional de asociación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 74 (2024-10-29)",
+     "locator": "pág. 64",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-74.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria de impacto; el debate se centra en reproches políticos y no desarrolla los efectos de pedir elecciones ni de la elección de vocales del CGPJ.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion026/20240229/Votacion015/VOT_20240229115056.json": {
@@ -517,6 +934,31 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que los jueces elijan a los vocales judiciales podría reducir la dependencia del Consejo del Poder Judicial respecto de las mayorías parlamentarias.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 27 (2024-02-28)",
+     "locator": "pág. 61",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-27.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Que los propios jueces elijan a sus vocales podría reforzar una carrera judicial que se describió como endogámica y poco diversa.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 27 (2024-02-28)",
+     "locator": "pág. 62",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-27.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; no hubo mecanismos argumentados sobre el cese del fiscal general.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion095/20250226/Votacion019/VOT_20250226151653.json": {
@@ -538,6 +980,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "El debate es casi todo reproche político cruzado sobre casos de corrupción; no se defienden mecanismos concretos de beneficio o riesgo de las peticiones de la moción (informes, explicaciones, independencia de la Fiscalía).",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion091/20250212/Votacion005/VOT_20250212154040.json": {
@@ -558,6 +1006,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion082/20241128/Votacion013/VOT_20241128143721.json": {
@@ -583,6 +1037,31 @@
     "verdict": "keep",
     "note": "cifras actuales ya miden el colectivo afectado",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Exigir que no se den instrucciones a los jueces podría reforzar la independencia judicial y la no intromisión en su trabajo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 83 (2024-11-26)",
+     "locator": "pág. 54",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-83.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Pedir al Gobierno que actúe sobre un caso judicial concreto podría chocar con el principio de no dar instrucciones a los jueces que la propia moción defiende.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 83 (2024-11-26)",
+     "locator": "pág. 54",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-83.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; el debate es en gran parte reproche político y los efectos recogidos son los pocos mecanismos concretos expuestos.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -610,6 +1089,31 @@
     "note": "cifras actuales ya miden el colectivo afectado",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un Poder Judicial independiente de los otros poderes podría ser la mejor garantía para combatir la corrupción y evitar que se retuerza o se eluda la ley.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 52 (2024-06-25)",
+     "locator": "pág. 70",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-52-C1.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Cuestionar de forma general la politización de la justicia podría minar la legitimidad de las instituciones, lo que se señaló como un riesgo para la democracia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 52 (2024-06-25)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-52-C1.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; el debate se centra en reproches políticos y aporta pocos mecanismos concretos sobre cada punto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion046/20240613/Votacion019/VOT_20240613125231.json": {
@@ -636,6 +1140,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Solo se vota el punto 2 (independencia judicial, instituciones y prensa); el debate sobre él es reproche político cruzado sin mecanismos de efecto distintos de la defensa genérica de la independencia judicial; no hay riesgos señalados.",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion043/20240530/Votacion001/VOT_20240530115955.json": {
@@ -656,6 +1166,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "El debate es sobre todo reproche político y acusaciones cruzadas; no se defienden mecanismos concretos de beneficio o riesgo para los 14 puntos votados.",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion013/20231219/Votacion008/VOT_20231219233121.json": {
@@ -681,6 +1197,12 @@
     "verdict": "keep",
     "note": "cifras actuales ya miden el colectivo afectado",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -708,6 +1230,12 @@
     "note": "cifras actuales ya miden el colectivo afectado",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion082/20241128/Votacion015/VOT_20241128143724.json": {
@@ -734,6 +1262,12 @@
     "note": "cifras actuales ya miden el colectivo afectado",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion082/20241128/Votacion016/VOT_20241128143725.json": {
@@ -755,6 +1289,31 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Mantener mérito y capacidad en el acceso a la carrera judicial podría evitar eludir las normas de acceso mediante jueces no profesionales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 83 (2024-11-26)",
+     "locator": "pág. 51",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-83.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Mantener el acceso actual a la judicatura podría perpetuar la endogamia y la poca presencia de personas de familias trabajadoras entre los jueces.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 83 (2024-11-26)",
+     "locator": "pág. 58",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-83.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; el debate es en gran parte reproche político y los efectos recogidos son los pocos mecanismos concretos expuestos.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion056/20240723/Votacion065/VOT_20240723221737.json": {
@@ -797,6 +1356,63 @@
     "note": "añadida plantilla de la Carrera Fiscal (RD 560/2026)",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que la reforma acerque el sistema de elección del órgano de gobierno de los jueces a los estándares europeos de independencia judicial que exigen la UE y el Consejo de Europa.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 40",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que unos criterios reforzados de profesionalidad e independencia de los miembros del Consejo, y un plazo para adecuar su sistema a la realidad europea, mejoren su funcionamiento.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 41",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Renovar el Consejo en plazo podría evitar situaciones como la de casi seis años con el mandato caducado, que según se señaló restó legitimidad al órgano.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 38",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Las incompatibilidades y plazos para pasar de la judicatura a la política podrían no desincentivar esas idas y vueltas, y facilitarlas sin riesgo y a cargo del contribuyente.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 31",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Si el Consejo sigue nombrando los cargos gubernativos judiciales, podría persistir la percepción de que esos nombramientos responden a afinidades ideológicas de los vocales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 30",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Si los vocales siguen eligiéndose por cuotas de los partidos en Congreso y Senado, podría persistir un reparto partidista del Consejo que algunos consideran contrario a la Constitución.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 37",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate. No se sabe si el nuevo sistema cambiará en la práctica los nombramientos.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion052/20240627/Votacion037/VOT_20240627130410.json": {
@@ -829,6 +1445,31 @@
     "note": "cifras actuales ya miden el colectivo afectado",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un Poder Judicial independiente de los otros poderes podría ser la mejor garantía para combatir la corrupción y evitar que se retuerza o se eluda la ley.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 52 (2024-06-25)",
+     "locator": "pág. 70",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-52-C1.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Cuestionar de forma general la politización de la justicia podría minar la legitimidad de las instituciones, lo que se señaló como un riesgo para la democracia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 52 (2024-06-25)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-52-C1.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; el debate se centra en reproches políticos y aporta pocos mecanismos concretos sobre cada punto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion052/20240627/Votacion038/VOT_20240627130411.json": {
@@ -855,6 +1496,31 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un Poder Judicial independiente de los otros poderes podría ser la mejor garantía para combatir la corrupción y evitar que se retuerza o se eluda la ley.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 52 (2024-06-25)",
+     "locator": "pág. 70",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-52-C1.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Cuestionar de forma general la politización de la justicia podría minar la legitimidad de las instituciones, lo que se señaló como un riesgo para la democracia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 52 (2024-06-25)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-52-C1.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; el debate se centra en reproches políticos y aporta pocos mecanismos concretos sobre cada punto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion052/20240627/Votacion039/VOT_20240627130412.json": {
@@ -881,6 +1547,31 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un Poder Judicial independiente de los otros poderes podría ser la mejor garantía para combatir la corrupción y evitar que se retuerza o se eluda la ley.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 52 (2024-06-25)",
+     "locator": "pág. 70",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-52-C1.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Cuestionar de forma general la politización de la justicia podría minar la legitimidad de las instituciones, lo que se señaló como un riesgo para la democracia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 52 (2024-06-25)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-52-C1.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; el debate se centra en reproches políticos y aporta pocos mecanismos concretos sobre cada punto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion052/20240627/Votacion040/VOT_20240627130413.json": {
@@ -901,6 +1592,31 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un Poder Judicial independiente de los otros poderes podría ser la mejor garantía para combatir la corrupción y evitar que se retuerza o se eluda la ley.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 52 (2024-06-25)",
+     "locator": "pág. 70",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-52-C1.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Cuestionar de forma general la politización de la justicia podría minar la legitimidad de las instituciones, lo que se señaló como un riesgo para la democracia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 52 (2024-06-25)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-52-C1.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; el debate se centra en reproches políticos y aporta pocos mecanismos concretos sobre cada punto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion052/20240627/Votacion042/VOT_20240627130415.json": {
@@ -927,6 +1643,31 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un Poder Judicial independiente de los otros poderes podría ser la mejor garantía para combatir la corrupción y evitar que se retuerza o se eluda la ley.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 52 (2024-06-25)",
+     "locator": "pág. 70",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-52-C1.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Cuestionar de forma general la politización de la justicia podría minar la legitimidad de las instituciones, lo que se señaló como un riesgo para la democracia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 52 (2024-06-25)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-52-C1.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; el debate se centra en reproches políticos y aporta pocos mecanismos concretos sobre cada punto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion043/20240530/Votacion002/VOT_20240530115956.json": {
@@ -952,6 +1693,12 @@
     "verdict": "keep",
     "note": "Sin cifra oficial de casos citados",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "El debate es sobre todo reproche político y acusaciones cruzadas; no se defienden mecanismos concretos de beneficio o riesgo para los 14 puntos votados.",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -979,6 +1726,12 @@
     "note": "Sin cifra oficial de casos citados",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "El debate es sobre todo reproche político y acusaciones cruzadas; no se defienden mecanismos concretos de beneficio o riesgo para los 14 puntos votados.",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion043/20240530/Votacion004/VOT_20240530115958.json": {
@@ -1004,6 +1757,12 @@
     "verdict": "keep",
     "note": "Sin cifra oficial de comisión propuesta",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "El debate es sobre todo reproche político y acusaciones cruzadas; no se defienden mecanismos concretos de beneficio o riesgo para los 14 puntos votados.",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1036,6 +1795,12 @@
     "note": "Colectivo afectado (jueces) ya medido",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "El debate es sobre todo reproche político y acusaciones cruzadas; no se defienden mecanismos concretos de beneficio o riesgo para los 14 puntos votados.",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion043/20240530/Votacion016/VOT_20240530120011.json": {
@@ -1056,6 +1821,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "El debate es sobre todo reproche político y acusaciones cruzadas; no se defienden mecanismos concretos de beneficio o riesgo para los 14 puntos votados.",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion013/20231219/Votacion009/VOT_20231219233123.json": {
@@ -1082,6 +1853,12 @@
     "note": "cifras actuales ya miden el colectivo afectado",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion013/20231219/Votacion010/VOT_20231219233125.json": {
@@ -1103,6 +1880,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   }
  }

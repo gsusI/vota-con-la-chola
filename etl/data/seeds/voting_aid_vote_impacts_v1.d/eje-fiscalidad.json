@@ -431,6 +431,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "El tipo mínimo del 15 % podría frenar la competencia fiscal entre Estados para atraer grandes empresas y reducir el traslado de beneficios a territorios de baja tributación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 82 (2024-11-21)",
+     "locator": "pág. 52",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-82.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que el paquete fiscal aumente la recaudación y permita financiar mejor los servicios públicos y el estado del bienestar.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 82 (2024-11-21)",
+     "locator": "pág. 56",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-82.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Aprobar la ley podría evitar perder los siguientes pagos de fondos europeos y una posible multa por no trasponer la directiva europea.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 82 (2024-11-21)",
+     "locator": "pág. 60",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-82.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los impuestos sobre el diésel y los seguros de salud privados podrían acabar recayendo sobre trabajadores y familias de renta media, no solo sobre grandes fortunas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 82 (2024-11-21)",
+     "locator": "pág. 57",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-82.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Las grandes empresas con asesores fiscales podrían buscar fórmulas de elusión y reducir el efecto del impuesto mínimo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 82 (2024-11-21)",
+     "locator": "pág. 52",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-82.PDF"
+    }
+   ],
+   "gaps": "Las cifras de recaudación citadas en el debate son estimaciones de los intervinientes y no coinciden entre sí; no hay valoración independiente en el debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion056/20240723/Votacion075/VOT_20240723221747.json": {
@@ -510,6 +559,55 @@
     "note": "Destino a alquiler social: peso del parque social",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Gravar más los beneficios extraordinarios de la banca podría repartir de forma más equilibrada los costes de una crisis económica, que no recaerían solo sobre las familias.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 36 (2024-04-09)",
+     "locator": "pág. 21",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-36.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Convertir el gravamen en impuesto permanente podría permitir que las diputaciones forales vascas y navarras también graven más a las entidades financieras, con su propia autonomía fiscal.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 36 (2024-04-09)",
+     "locator": "pág. 24",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-36.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "El diseño y la recaudación centralizados del gravamen podrían restar a Navarra y Euskadi competencias de normativa, gestión y recaudación con las que financian políticas propias.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 36 (2024-04-09)",
+     "locator": "pág. 23",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-36.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Crear un nuevo impuesto sobre márgenes extraordinarios podría generar inseguridad jurídica y ahuyentar a los inversores.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 36 (2024-04-09)",
+     "locator": "pág. 30",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-36.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Con la definición propuesta podrían gravarse con tipos del 50 % o el 75 % beneficios que vienen de ganar eficiencia, reducir costes o rentabilizar inversiones, y no solo los extraordinarios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 36 (2024-04-09)",
+     "locator": "pág. 30",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-36.PDF"
+    }
+   ],
+   "gaps": "Proposición sin estimación de recaudación ni memoria oficial de impacto; los efectos son argumentos del debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion202/20260930/Votacion002/VOT_20260930153550.json": {
@@ -539,6 +637,63 @@
     "verdict": "improved",
     "note": "Se quita el IPC genérico; queda recaudación energética",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una contribución sobre los beneficios extraordinarios podría hacer que las energéticas aporten en una crisis cuyo coste soportan consumidores, autónomos y pymes.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 208 (2026-09-29)",
+     "locator": "pág. 50",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-208.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Combinar un gravamen a las energéticas con un tope al precio del gas, como en 2022, podría aliviar de forma notable la factura de la luz.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 208 (2026-09-29)",
+     "locator": "pág. 57",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-208.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Con reglas claras y previsibles, un gravamen a beneficios sobrevenidos podría aportar recaudación para financiar políticas públicas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 208 (2026-09-29)",
+     "locator": "pág. 55",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-208.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "El gravamen podría trasladarse a los precios y no llegar al consumidor, si no se demuestra cuánto se recauda y cómo se evita esa traslación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 208 (2026-09-29)",
+     "locator": "pág. 55",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-208.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría frenar la inversión en renovables y recaudar menos de lo previsto, como se señaló de la experiencia anterior.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 208 (2026-09-29)",
+     "locator": "pág. 63",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-208.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Un gravamen mal delimitado en base y duración podría poner en riesgo inversiones industriales estratégicas y los empleos asociados.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 208 (2026-09-29)",
+     "locator": "pág. 58",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-208.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria de impacto; el debate no cuantifica la recaudación esperada ni cuánto llegaría al consumidor.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -582,6 +737,39 @@
     "note": "Sin cifra oficial específica de la medida",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Bajar impuestos a los hogares podría aliviar el gasto familiar en bienes de uso diario, como alimentos, electricidad, gas o carburantes.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 203 (2026-09-10)",
+     "locator": "pág. 53",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-203.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Reducir la recaudación fiscal podría obligar a recortar servicios públicos como la seguridad, la sanidad o la educación, que se pagan con impuestos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 203 (2026-09-10)",
+     "locator": "pág. 55",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-203.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Priorizar ayudas según el arraigo podría enfrentar a trabajadores nacionales y extranjeros en lugar de mejorar las condiciones de ambos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 203 (2026-09-10)",
+     "locator": "pág. 54",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-203.PDF"
+    }
+   ],
+   "gaps": "El extracto del debate no incluye la defensa de la moción ni el coste de las medidas; los efectos son argumentos de otras intervenciones.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion154/20251211/Votacion001/VOT_20251211175043.json": {
@@ -613,6 +801,55 @@
     "verdict": "improved",
     "note": "Gasto de hogares en alimentos, carne y pescado",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Bajar el IVA de carne, pescado, huevos y leche podría aliviar la carga económica de los hogares y facilitar el acceso a una alimentación saludable.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 157 (2025-12-09)",
+     "locator": "pág. 62",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-157.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un tipo cero en los alimentos básicos podría evitar que un bien esencial se trate como un lujo fiscal para las familias.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 157 (2025-12-09)",
+     "locator": "pág. 60",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-157.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría ocurrir que parte de la rebaja del IVA no llegue al precio final y se quede en los márgenes de los intermediarios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 157 (2025-12-09)",
+     "locator": "pág. 62",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-157.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una menor recaudación por IVA podría dificultar la financiación de sanidad, infraestructuras y educación si no se calcula bien el coste fiscal.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 157 (2025-12-09)",
+     "locator": "pág. 62",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-157.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Si el encarecimiento viene de los márgenes del sector, como se señaló para los huevos, bajar el IVA podría no corregir el problema de fondo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 157 (2025-12-09)",
+     "locator": "pág. 67",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-157.PDF"
+    }
+   ],
+   "gaps": "PNL sin memoria oficial de impacto; no se sabe cuánto de la rebaja llegaría al precio final ni su coste fiscal, que los propios intervinientes piden estudiar.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -656,6 +893,63 @@
     "note": "Cifra de escolarización 0-2 años",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Presentar unos presupuestos podría dar certidumbre, previsibilidad y estabilidad a la planificación económica y social del Estado.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 150 (2025-11-12)",
+     "locator": "pág. 135",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-150.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Aliviar la carga fiscal y ayudar a las familias podría mejorar la economía doméstica de hogares que dicen no llegar a fin de mes.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 150 (2025-11-12)",
+     "locator": "pág. 131",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-150.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Impulsar la educación gratuita de 0 a 3 años podría reforzar una oferta que ya es gratuita en buena parte del territorio.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 150 (2025-11-12)",
+     "locator": "pág. 135",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-150.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Bajar impuestos podría reducir los recursos para servicios públicos como la sanidad.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 150 (2025-11-12)",
+     "locator": "pág. 133",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-150.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Educación y vivienda son competencia autonómica, por lo que medidas estatales podrían solaparse con las ayudas que ya dan las comunidades.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 150 (2025-11-12)",
+     "locator": "pág. 135",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-150.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Presentar presupuestos sin apoyar la nueva senda de estabilidad obligaría a usar la anterior, más restrictiva, con menos margen para las medidas pedidas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 150 (2025-11-12)",
+     "locator": "pág. 135",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-150.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; no se cuantifica el coste de las medidas ni su efecto en la recaudación.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion130/20250910/Votacion007/VOT_20250910213540.json": {
@@ -692,6 +986,47 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Bajar el IRPF y el IVA podría aliviar la carga de familias y clase media, cuyos impuestos se dijo que han subido.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 134 (2025-09-09)",
+     "locator": "pág. 78",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-134.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Revisar el gasto político y las ineficacias podría liberar recursos para devolverlos a las familias.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 134 (2025-09-09)",
+     "locator": "pág. 79",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-134.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Un recorte de casi la mitad de los presupuestos generales podría comprometer pensiones y servicios públicos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 134 (2025-09-09)",
+     "locator": "pág. 80",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-134.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Rebajar impuestos podría reducir la recaudación pública; se citó un caso autonómico con 400 millones de euros menos de ingresos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 134 (2025-09-09)",
+     "locator": "pág. 80",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-134.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; no se cuantifica el efecto de las rebajas ni del recorte; son argumentos del debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion124/20250626/Votacion007/VOT_20250626120535.json": {
@@ -728,6 +1063,47 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Aliviar la carga fiscal podría recuperar poder adquisitivo de las rentas medias y trabajadoras y reducir la brecha de renta con la media europea.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 126 (2025-06-24)",
+     "locator": "pág. 70",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-126.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Rebajar impuestos indirectos como el IVA sin medidas de gasto podría tener poco efecto redistributivo y no resolver los problemas de acceso a servicios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 126 (2025-06-24)",
+     "locator": "pág. 63",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-126.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Bonificar casi por completo sucesiones y rebajar impuestos de forma general podría favorecer a los patrimonios altos y reducir la capacidad pública de financiar políticas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 126 (2025-06-24)",
+     "locator": "pág. 66",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-126.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Las rebajas fiscales podrían debilitar las herramientas del Estado para afrontar crisis futuras, como la climática o la geopolítica.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 126 (2025-06-24)",
+     "locator": "pág. 67",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-126.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; el debate no cuantifica el coste de las rebajas ni su compensación.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion118/20250612/Votacion001/VOT_20250612132238.json": {
@@ -760,6 +1136,47 @@
     "note": "Declarantes IRPF e IPC ya miden la medida",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Ajustar la tarifa y los mínimos del IRPF a la inflación podría evitar una subida encubierta de impuestos cuando los precios suben.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 120 (2025-06-10)",
+     "locator": "pág. 38",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-120.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Deflactar el IRPF podría aliviar sobre todo a las rentas bajas, que gastan más de sus ingresos en la cesta de la compra y sufren más la inflación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 120 (2025-06-10)",
+     "locator": "pág. 38",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-120.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Más renta disponible podría ayudar a las familias que ya tienen problemas para llegar a fin de mes.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 120 (2025-06-10)",
+     "locator": "pág. 38",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-120.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Rebajar el IRPF podría reducir la recaudación que financia servicios públicos, como ya se señaló respecto a otras rebajas fiscales autonómicas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 120 (2025-06-10)",
+     "locator": "pág. 44",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-120.PDF"
+    }
+   ],
+   "gaps": "No se aporta estimación oficial del coste recaudatorio; se señala que parte de las rentas bajas ya tendrían medidas del Gobierno.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion111/20250514/Votacion002/VOT_20250514165627.json": {
@@ -785,6 +1202,63 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría destinar más recursos a mejorar el transporte público colectivo, especialmente el ferroviario.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 114 (2025-05-13)",
+     "locator": "pág. 45",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-114.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría hacer que quienes usan jets privados y yates de lujo paguen más por la contaminación que generan, con una mayor justicia social en la descarbonización.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 114 (2025-05-13)",
+     "locator": "pág. 40",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-114.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Lo recaudado podría emplearse en una obligación de servicio público en las rutas insulares o en mejorar el transporte público.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 114 (2025-05-13)",
+     "locator": "pág. 46",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-114.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría ser una tasa o prestación patrimonial finalista que algunos territorios con concierto o convenio no podrían regular, lo que plantearía un problema competencial.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 114 (2025-05-13)",
+     "locator": "pág. 46",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-114.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría tener poco efecto sobre las emisiones totales, porque se señala que el problema principal está en el transporte por carretera.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 114 (2025-05-13)",
+     "locator": "pág. 46",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-114.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría afectar a la actividad industrial de mantenimiento de grandes yates en los puertos y a los puestos de trabajo, si antes no se analiza el impacto económico.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 114 (2025-05-13)",
+     "locator": "pág. 49",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-114.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto ni detalle técnico del impuesto; los efectos son argumentos del debate y no se cuantifican.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion101/20250320/Votacion012/VOT_20250320125714.json": {
@@ -820,6 +1294,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Debate dominado por reproches políticos sobre responsabilidades de la DANA; los mecanismos propuestos (plan del agua, embalses, canalización) no tienen contraparte de riesgos argumentada.",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion093/20250219/Votacion001/VOT_20250219135530.json": {
@@ -862,6 +1342,47 @@
     "note": "IVA alimentos y luz medido; se quita tipos genéricos",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Suprimir el impuesto especial sobre la electricidad podría evitar que se pague un impuesto sobre otro impuesto y abaratar la factura de los hogares.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 96 (2025-02-18)",
+     "locator": "pág. 27",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-96.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una rebaja del IRPF podría aliviar a quienes cobran el salario mínimo y tributan por él, y favorecer a las familias.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 96 (2025-02-18)",
+     "locator": "pág. 31",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-96.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Rebajar IVA e IRPF a la vez podría reducir mucho la recaudación que paga hospitales, escuelas y residencias públicas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 96 (2025-02-18)",
+     "locator": "pág. 28",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-96.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una bajada del IRPF podría beneficiar sobre todo a las rentas altas, que tienen menos dificultades para llegar a fin de mes.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 96 (2025-02-18)",
+     "locator": "pág. 28",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-96.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate y no se sabe cuánta recaudación se perdería.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion082/20241128/Votacion002/VOT_20241128143705.json": {
@@ -887,6 +1408,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Dejar a cada ayuntamiento decidir si cobra la tasa podría aliviar la carga fiscal de los vecinos y respetar la autonomía local.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 83 (2024-11-26)",
+     "locator": "pág. 31",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-83.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una obligación igual para todos podría encarecer el servicio en municipios pequeños y rurales con pocos recursos; suprimirla permitiría ajustarla a cada realidad.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 83 (2024-11-26)",
+     "locator": "pág. 31",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-83.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Suprimir la obligación podría perjudicar a los ayuntamientos que ya aplican la tasa, premiar a los que no la cobran y restar incentivo a separar residuos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 83 (2024-11-26)",
+     "locator": "pág. 35",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-83.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Bajar o eliminar la tasa podría dejar el servicio de residuos en pérdidas, porque su coste depende sobre todo de cuánto se recicla.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 83 (2024-11-26)",
+     "locator": "pág. 40",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-83.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "No cumplir los objetivos europeos de residuos podría acarrear sanciones comunitarias.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 83 (2024-11-26)",
+     "locator": "pág. 41",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-83.PDF"
+    }
+   ],
+   "gaps": "Sin memoria oficial de impacto en el debate; no se cuantifica el coste de la tasa por municipio ni el efecto de suprimirla sobre el reciclaje.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion034/20240409/Votacion012/VOT_20240409210642.json": {
@@ -917,6 +1487,63 @@
     "verdict": "keep",
     "note": "Declarantes IRPF e IPC ya miden la medida",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Deflactar la tarifa podría dejar más renta disponible en los hogares y favorecer el consumo privado.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 36 (2024-04-09)",
+     "locator": "pág. 45",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-36.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se evitaría que la inflación suba la recaudación del IRPF a costa de los sueldos sin que suban en términos reales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 36 (2024-04-09)",
+     "locator": "pág. 45",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-36.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Mantener la misma presión fiscal que sin inflación podría aliviar sobre todo a las rentas bajas, que sufren más el alza de precios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 36 (2024-04-09)",
+     "locator": "pág. 49",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-36.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Al deflactar solo los primeros tramos de una tarifa progresiva, también podrían beneficiarse las rentas altas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 36 (2024-04-09)",
+     "locator": "pág. 52",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-36.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Deflactar los mínimos personales y la tarifa del ahorro podría favorecer también a las rentas del capital.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 36 (2024-04-09)",
+     "locator": "pág. 53",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-36.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Ajustar los valores monetarios al IPC podría hacer que la inflación persista y no ayudaría a quienes no tributan.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 36 (2024-04-09)",
+     "locator": "pág. 53",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-36.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; no se cuantifica en el debate cuánta recaudación se perdería ni quién ganaría más.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -960,6 +1587,55 @@
     "note": "Sustituido gasto de hogares por solicitantes de PAC",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Mantener la rebaja del IVA en determinados alimentos podría ayudar a contener sus precios, según se citó de un informe trimestral del Banco de España.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 14 (2023-12-19)",
+     "locator": "pág. 84",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-14.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Apoyar el regadío podría favorecer la incorporación de jóvenes y la actividad económica en las zonas agrarias.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 14 (2023-12-19)",
+     "locator": "pág. 78",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-14.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Poner en marcha ayudas excepcionales podría ayudar a que no abandonen más productores la actividad por razones económicas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 14 (2023-12-19)",
+     "locator": "pág. 77",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-14.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "El enfoque de la moción podría dejar al sector agrario fuera de la política europea y apostar por una visión autárquica.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 14 (2023-12-19)",
+     "locator": "pág. 80",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-14.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Se señaló que defender el sector con menos Europa y sin atender al cambio climático podría perjudicar a la agricultura a medio plazo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 14 (2023-12-19)",
+     "locator": "pág. 84",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-14.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; los efectos son argumentos del debate y el extracto del Diario está recortado. No consta el texto transaccional completo.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion202/20260930/Votacion003/VOT_20260930153552.json": {
@@ -996,6 +1672,39 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un impuesto permanente sobre beneficios extraordinarios podría hacer que los sectores más beneficiados paguen parte del coste de la crisis y revertirlo en las familias.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 208 (2026-09-29)",
+     "locator": "pág. 69",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-208.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Un impuesto nuevo junto con límites de precios podría estrechar tanto los márgenes que algunas empresas dejarían de prestar el servicio o venderían a pérdidas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 208 (2026-09-29)",
+     "locator": "pág. 67",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-208.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "El ahorro concreto para un hogar o un autónomo no está cuantificado, por lo que las medidas podrían no dar soluciones directas e inmediatas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 208 (2026-09-29)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-208.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; los efectos son argumentos del debate. No hay estimación de recaudación, de ahorro por hogar ni de coste de la intervención.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1035,6 +1744,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion177/20260430/Votacion006/VOT_20260430125150.json": {
@@ -1073,6 +1788,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion174/20260422/Votacion014/VOT_20260422152001.json": {
@@ -1104,6 +1825,47 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Deflactar la tarifa del IRPF podría evitar que la inflación suba la factura fiscal de muchos contribuyentes sin que mejore su capacidad económica real (la llamada progresividad en frío).",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 180 (2026-04-22)",
+     "locator": "pág. 65",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-180.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Actualizar la tarifa y los mínimos personales y familiares podría aliviar a las rentas medias y bajas, que según el debate son las más perjudicadas por no haber deflactado.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 180 (2026-04-22)",
+     "locator": "pág. 62",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-180.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una rebaja lineal, igual para quien gana poco y para quien gana mucho, podría acabar beneficiando sobre todo a las rentas más altas en lugar de a las más bajas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 180 (2026-04-22)",
+     "locator": "pág. 63",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-180.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Dejar de recaudar de forma significativa podría reducir los recursos para servicios públicos y para sostener el estado de bienestar ante los retos demográficos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 180 (2026-04-22)",
+     "locator": "pág. 65",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-180.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; el debate no trata la exención de IVA para autónomos (punto 2). Los efectos son argumentos del debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1141,6 +1903,39 @@
     "verdict": "written",
     "note": "Texto de Punto 1 truncado en el lote; resumido con el aprobado.",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Mantener un IVA reducido en la electricidad podría aliviar a los hogares más vulnerables, para quienes la energía pesa más en su gasto, y moderar más su inflación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 37",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Reducir el IVA del gas de forma permanente podría favorecer más a quien más consume, reforzar el consumo de gas y dificultar la transición energética.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 37",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una bajada general de impuestos podría reducir los recursos para servicios públicos y aumentar la desigualdad si no se hace de forma progresiva.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 36",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    }
+   ],
+   "gaps": "Proposición ómnibus con 22 puntos: el debate solo toca algunos (IVA de la energía, IRPF, IVA de vivienda). Sin memoria oficial de impacto; los efectos son argumentos del debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1185,6 +1980,47 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Aliviar la carga fiscal de la clase media trabajadora, por ejemplo deflactando el IRPF, podría aumentar su renta disponible.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 66",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Bajar impuestos podría reducir la capacidad del Estado para financiar sanidad, educación, dependencia y pensiones.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 61",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Las rebajas fiscales podrían beneficiar sobre todo a las rentas altas y vaciar la caja pública sin explicar cómo se compensa.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 63",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Bajar el IVA de carburantes, gas y electricidad podría no abaratar los precios, y dejar menos protegida a la mayoría.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 61",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    }
+   ],
+   "gaps": "Moción de decenas de puntos sin efecto legislativo directo; el debate no analiza punto por punto vivienda (IVA primera vivienda, SAREB) ni transferencia de dependencia.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion048/VOT_20260326165133.json": {
@@ -1227,6 +2063,39 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Suprimir el impuesto a la generación eléctrica, creado para un déficit de tarifa ya casi resuelto, podría abaratar costes a la industria, las empresas y los consumidores.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 72",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Bajar el IVA de la energía y bonificar el carburante podría aliviar el encarecimiento para hogares y sectores como el transporte, el taxi, el campo y la pesca.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 73",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Las medidas podrían beneficiar sobre todo a grandes empresas y no tanto a trabajadores y a quienes tienen menos ingresos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 70",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; parte de las medidas ya figuraban en un real decreto-ley posterior a la interpelación. Los efectos son argumentos del debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1276,6 +2145,55 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Presentar y aprobar presupuestos podría dar más control del Parlamento sobre el gasto público.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 168 (2026-02-24)",
+     "locator": "pág. 59",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-168.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Actualizar las entregas a cuenta podría dar a comunidades y ayuntamientos recursos a tiempo para financiar sus servicios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 168 (2026-02-24)",
+     "locator": "pág. 60",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-168.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Dotar presupuestos con inversión podría mejorar el mantenimiento de carreteras y vías de tren.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 168 (2026-02-24)",
+     "locator": "pág. 60",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-168.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Actualizar las entregas a cuenta por real decreto-ley podría quitar al Congreso el debate y el control que exige una decisión con impacto financiero.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 168 (2026-02-24)",
+     "locator": "pág. 61",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-168.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Actualizar las entregas con previsiones de ingresos de 2026 sin presupuestos aprobados podría crear inseguridad jurídica, porque esas previsiones no tienen rango normativo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 168 (2026-02-24)",
+     "locator": "pág. 61",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-168.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; el debate discute si la falta de presupuestos afecta de verdad a la financiación autonómica.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion161/20260218/Votacion010/VOT_20260218141933.json": {
@@ -1312,6 +2230,39 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reducir burocracia y bajar impuestos a la obra nueva podría acortar los permisos y aumentar la oferta de vivienda, lo que aliviaría los precios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 167 (2026-02-18)",
+     "locator": "pág. 64",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-167.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Bajar impuestos podría reducir el dinero público disponible para construir vivienda asequible y financiar servicios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 167 (2026-02-18)",
+     "locator": "pág. 66",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-167.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Dar suelo público a constructores y rebajas fiscales a propietarios podría no abaratar el alquiler y favorecer la especulación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 167 (2026-02-18)",
+     "locator": "pág. 60",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-167.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; los efectos son argumentos del debate y varios se refieren a la ley de vivienda vigente más que a cada punto votado.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1355,6 +2306,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion154/20251211/Votacion007/VOT_20251211175049.json": {
@@ -1380,6 +2337,12 @@
     "verdict": "written",
     "note": "numeración verificada y reescrita desde el texto presentado",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1418,6 +2381,63 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Deflactar el IRPF podría evitar que trabajadores y autónomos pasen a un tramo más alto solo por la subida general de precios y pierdan poder adquisitivo sin haber mejorado sus ingresos reales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 146 (2025-10-22)",
+     "locator": "pág. 62",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-146.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que el salario mínimo no tribute podría proteger a los trabajadores con menos ingresos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 146 (2025-10-22)",
+     "locator": "pág. 63",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-146.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Frenar las subidas de cuotas podría evitar pedir un esfuerzo extra a autónomos con costes al alza y márgenes menores, y reducir cierres de pequeños negocios, sobre todo en zonas rurales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 146 (2025-10-22)",
+     "locator": "pág. 67",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-146.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Bajar impuestos podría reducir la recaudación con la que se financian hospitales, colegios, universidades, pensiones y becas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 146 (2025-10-22)",
+     "locator": "pág. 71",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-146.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una rebaja de impuestos podría favorecer sobre todo a quienes más tienen, con un coste para el resto de trabajadores si luego se resienten los servicios públicos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 146 (2025-10-22)",
+     "locator": "pág. 71",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-146.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Congelar las cuotas podría mantener un sistema en el que los autónomos con menos ingresos pagan proporcionalmente mucho más que los que ganan más.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 146 (2025-10-22)",
+     "locator": "pág. 61",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-146.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; los efectos son argumentos del debate y se refieren al punto 1. El debate no aporta mecanismos sobre el punto 3 (reducir trámites).",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion139/20251016/Votacion017/VOT_20251016123511.json": {
@@ -1455,6 +2475,31 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Bajar el IVA del pescado al 0 % podría fomentar el consumo de un producto sostenible y saludable y favorecer un mercado con retorno económico en Galicia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 143 (2025-10-15)",
+     "locator": "pág. 110",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-143.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Un IVA del 0 % en el pescado podría no abaratar el precio para el consumidor y servir sobre todo para aumentar los márgenes de beneficio.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 143 (2025-10-15)",
+     "locator": "pág. 110",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-143.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; no se debatieron los efectos de la moratoria eólica, por lo que no se escriben efectos para ese punto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion093/VOT_20251008195406.json": {
@@ -1487,6 +2532,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion109/VOT_20251008195422.json": {
@@ -1517,6 +2568,55 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Mantener vivos la agricultura y la ganadería podría ayudar a prevenir grandes incendios mediante una mejor gestión del territorio, ya que apagar con más medios tiene un límite.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 141 (2025-10-08)",
+     "locator": "pág. 130",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-141.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Los agricultores y ganaderos de la zona podrían seguir siendo útiles en incendios, por ejemplo abriendo cortafuegos con sus tractores, si no abandonan la actividad.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 141 (2025-10-08)",
+     "locator": "pág. 131",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-141.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una fiscalidad agraria diferenciada podría favorecer sobre todo a quienes más tienen y dejar fuera a temporeros, mujeres rurales y pequeños productores.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 141 (2025-10-08)",
+     "locator": "pág. 135",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-141.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Impulsar un modelo agroexportador podría ir en contra de mantener un mundo rural vivo, que se presenta como clave para prevenir incendios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 141 (2025-10-08)",
+     "locator": "pág. 135",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-141.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Pedir al Estado medidas que ya son competencia autonómica, sin compromisos claros de financiación, podría dejarlas en principios sin efecto real.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 141 (2025-10-08)",
+     "locator": "pág. 129",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-141.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; los efectos son argumentos del debate y no se aportan cifras de su efecto sobre los incendios.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1550,6 +2650,12 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1588,6 +2694,12 @@
     "note": "Texto del punto truncado en el lote en el apartado d (supresión de fiscalidad territorial); no se ha usado.",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion098/20250313/Votacion010/VOT_20250313133902.json": {
@@ -1620,6 +2732,39 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Rebajar el IVA de alimentos, luz y gas podría aliviar el gasto de los hogares en bienes básicos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 101 (2025-03-12)",
+     "locator": "pág. 108",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-101.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Bajar impuestos sin medidas que compensen la pérdida de ingresos podría dificultar la financiación de servicios públicos de calidad.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 101 (2025-03-12)",
+     "locator": "pág. 110",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-101.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Rebajar el IVA producto a producto, en vez de reformarlo de forma integral, podría restar sentido al impuesto.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 101 (2025-03-12)",
+     "locator": "pág. 109",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-101.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; en el debate no se cuantifica la pérdida de recaudación de cada rebaja.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion093/20250219/Votacion015/VOT_20250219135555.json": {
@@ -1651,6 +2796,39 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Bajar el IVA de la primera vivienda al 4 % para menores de 40 años podría abaratar la compra a los jóvenes, cuya emancipación se retrasa.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 97 (2025-02-19)",
+     "locator": "pág. 53",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-97.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una rebaja del IVA centrada solo en quien demanda vivienda podría quedarse en una medida paliativa que no resuelva la falta de oferta, sobre todo de vivienda protegida.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 97 (2025-02-19)",
+     "locator": "pág. 54",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-97.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Algunos puntos de la moción podrían invadir competencias de las comunidades autónomas en materia de vivienda, lo que podría generar conflicto competencial.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 97 (2025-02-19)",
+     "locator": "pág. 59",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-97.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; los efectos son argumentos del debate, sin estimación de cuánta vivienda adicional o cuánto ahorro supondría cada punto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1699,6 +2877,31 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un IRPF con mínimo exento más alto podría evitar que quienes cobran de dos pagadores pierdan los beneficios fiscales previstos para rentas bajas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 70 (2024-10-15)",
+     "locator": "pág. 59",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-70.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Bajar impuestos podría reducir los ingresos que financian sanidad, educación y pensiones públicas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 70 (2024-10-15)",
+     "locator": "pág. 62",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-70.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria económica en el debate; no se sabe cuánto se recaudaría de menos ni cuánto de la rebaja llegaría al consumidor.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion066/20241010/Votacion011/VOT_20241010194926.json": {
@@ -1735,6 +2938,31 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Unificar currículos, prueba de acceso y condiciones fiscales podría reducir las diferencias entre comunidades en sueldos, ratios, desgravaciones y dificultad de la Selectividad.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 67 (2024-10-08)",
+     "locator": "pág. 68",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-67.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Un modelo basado en el esfuerzo y la excelencia sin más inversión pública podría reducir la educación pública y aumentar la segregación del alumnado por su origen social.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 67 (2024-10-08)",
+     "locator": "pág. 71",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-67.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; los efectos son argumentos del debate y gran parte de las intervenciones son reproche político.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1779,6 +3007,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Los beneficios (control parlamentario, cumplimiento de mandatos, presupuestos) tienen argumentos, pero los riesgos no se desarrollan: el resto del debate es reproche político sin mecanismos de riesgo.",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion049/20240620/Votacion013/VOT_20240620132736.json": {
@@ -1808,6 +3042,39 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Facilitar la actividad de las empresas y abaratar su coste laboral podría animar a contratar, ya que se las presenta como principales generadoras de empleo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 49 (2024-06-18)",
+     "locator": "pág. 60",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-49.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Incentivar la contratación indefinida podría reducir los contratos que dejan a la persona varios meses al año sin trabajo y dependiente de ayudas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 49 (2024-06-18)",
+     "locator": "pág. 56",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-49.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Bonificaciones y exoneraciones de cuotas a la Seguridad Social presentadas sin memoria económica podrían tener un coste que no se conoce.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 49 (2024-06-18)",
+     "locator": "pág. 57",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-49.PDF"
+    }
+   ],
+   "gaps": "Sin memoria económica en la moción; no se cuantifican ni el empleo que se crearía ni la pérdida de cotizaciones.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1841,6 +3108,55 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Eximir del IRPF a quienes empiezan a trabajar podría aumentar su renta disponible y ayudar a combatir la baja renta juvenil.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 43 (2024-05-28)",
+     "locator": "pág. 51",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-43.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Con más ingresos netos, podría facilitar que los jóvenes se independicen y formen una familia, lo que se apunta como forma de favorecer la natalidad.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 43 (2024-05-28)",
+     "locator": "pág. 51",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-43.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Al ser una exención temporal, podría no dar una solución duradera a problemas estructurales como la inestabilidad laboral y los bajos salarios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 43 (2024-05-28)",
+     "locator": "pág. 59",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-43.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría servir de poco a quienes ya no pagan IRPF por tener ingresos bajos, que según se dijo son la gran mayoría de los jóvenes.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 43 (2024-05-28)",
+     "locator": "pág. 62",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-43.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Bajar impuestos podría reducir los recursos públicos para vivienda, salud mental y medidas contra la desigualdad.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 43 (2024-05-28)",
+     "locator": "pág. 59",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-43.PDF"
+    }
+   ],
+   "gaps": "No consta en el debate el coste recaudatorio de la exención ni cuántos jóvenes pagan IRPF hoy; los datos citados son discutidos entre intervinientes.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion040/20240523/Votacion002/VOT_20240523140932.json": {
@@ -1871,6 +3187,12 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1914,6 +3236,39 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Bajar el IRPF, el IVA y los impuestos al patrimonio podría aliviar a clases medias, autónomos y pequeñas empresas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 40 (2024-05-21)",
+     "locator": "pág. 66",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-40.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Las rebajas de IRPF, IVA y patrimonio podrían beneficiar sobre todo a quienes más tienen.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 40 (2024-05-21)",
+     "locator": "pág. 68",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-40.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Suprimir ministerios o programas de gasto podría no compensar la caída de recaudación y obligar a recortes en servicios como sanidad y educación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 40 (2024-05-21)",
+     "locator": "pág. 70",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-40.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; el debate no cuantifica la pérdida de recaudación ni el ahorro de las subvenciones.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion132/20250917/Votacion025/VOT_20250917194052.json": {
@@ -1939,6 +3294,47 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que regular los drones y simplificar trámites dé más seguridad jurídica y agilice autorizaciones en actividades de menor riesgo, como vuelos médicos o de emergencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 113 (2025-05-08)",
+     "locator": "pág. 10",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-113.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Las deducciones en el impuesto de sociedades podrían incentivar que las aerolíneas inviertan en descarbonizar el transporte aéreo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 137 (2025-09-17)",
+     "locator": "pág. 109",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-137-C1.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "El plan y las deducciones podrían duplicar una estrategia de descarbonización y unos incentivos fiscales que ya existen, sin aportar un efecto nuevo y a costa del gasto público.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 137 (2025-09-17)",
+     "locator": "pág. 104",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-137-C1.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Obligar a repostar un porcentaje creciente de combustible sostenible, con multa automática si no se cumple, podría suponer una carga añadida para un sector ya tensionado.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 113 (2025-05-08)",
+     "locator": "pág. 13",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-113.PDF"
+    }
+   ],
+   "gaps": "Los efectos son argumentos del debate; no se cuantifica el coste de las deducciones ni del plan, ni el impacto de la cuota de combustible sostenible sobre los precios.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1976,6 +3372,47 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reducir el desperdicio podría abaratar los alimentos y generar menos residuos y contaminación, al hacer más eficiente la cadena alimentaria.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 91 (2024-12-19)",
+     "locator": "pág. 13",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-91.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Los acuerdos de donación obligatorios para grandes establecimientos podrían hacer que más excedentes lleguen a entidades sin ánimo de lucro que atienden a personas vulnerables.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 91 (2024-12-19)",
+     "locator": "pág. 9",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-91.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Eximir de IVA los alimentos donados podría favorecer que más excedentes lleguen a entidades que atienden a familias vulnerables, con un coste recaudatorio que se defendió como poco relevante.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 91 (2024-12-19)",
+     "locator": "pág. 7",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-91.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los planes y trámites exigidos podrían suponer más costes y burocracia para las empresas agroalimentarias, incluido el sector primario, donde el desperdicio ya sería escaso.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 91 (2024-12-19)",
+     "locator": "pág. 15",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-91.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley; no se ha consultado la memoria oficial de impacto. Los efectos son argumentos del debate, sin cifras de impacto sobre multas, IVA o lobo.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion088/20241219/Votacion093/VOT_20241219162849.json": {
@@ -2006,6 +3443,12 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -2039,6 +3482,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion009/VOT_20260326165035.json": {
@@ -2064,6 +3513,12 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -2097,6 +3552,31 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Deflactar los tramos del IRPF podría evitar que no actualizar bases y tramos suponga, de hecho, una subida de impuestos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 44",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una bajada general de impuestos podría reducir los recursos para servicios públicos y aumentar la desigualdad si no se hace de forma progresiva.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 36",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    }
+   ],
+   "gaps": "Proposición ómnibus con 22 puntos: el debate solo toca algunos (IVA de la energía, IRPF, IVA de vivienda). Sin memoria oficial de impacto; los efectos son argumentos del debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion013/VOT_20260326165041.json": {
@@ -2128,6 +3608,12 @@
     "verdict": "written",
     "note": "La numeración del texto aprobado (D-507 pág. 7) no coincide con la del voto; se usó el texto original de D-507 con la numeración votada. | numeración verificada y reescrita desde el texto presentado",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -2166,6 +3652,12 @@
     "note": "La numeración del texto aprobado (D-507 pág. 7) no coincide con la del voto; se usó el texto original de D-507 con la numeración votada.",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion017/VOT_20260326165046.json": {
@@ -2192,6 +3684,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion018/VOT_20260326165047.json": {
@@ -2217,6 +3715,12 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -2250,6 +3754,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion028/VOT_20260326165103.json": {
@@ -2275,6 +3785,12 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -2302,6 +3818,12 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -2336,6 +3858,39 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Aliviar la carga fiscal de la clase media trabajadora, por ejemplo deflactando el IRPF, podría aumentar su renta disponible.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 66",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Bajar impuestos podría reducir la capacidad del Estado para financiar sanidad, educación, dependencia y pensiones.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 61",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Las rebajas fiscales podrían beneficiar sobre todo a las rentas altas y vaciar la caja pública sin explicar cómo se compensa.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 63",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    }
+   ],
+   "gaps": "Moción de decenas de puntos sin efecto legislativo directo; el debate no analiza punto por punto vivienda (IVA primera vivienda, SAREB) ni transferencia de dependencia.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion041/VOT_20260326165124.json": {
@@ -2369,6 +3924,39 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Aliviar la carga fiscal de la clase media trabajadora, por ejemplo deflactando el IRPF, podría aumentar su renta disponible.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 66",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Bajar impuestos podría reducir la capacidad del Estado para financiar sanidad, educación, dependencia y pensiones.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 61",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Las rebajas fiscales podrían beneficiar sobre todo a las rentas altas y vaciar la caja pública sin explicar cómo se compensa.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 63",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    }
+   ],
+   "gaps": "Moción de decenas de puntos sin efecto legislativo directo; el debate no analiza punto por punto vivienda (IVA primera vivienda, SAREB) ni transferencia de dependencia.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion042/VOT_20260326165125.json": {
@@ -2401,6 +3989,39 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Aliviar la carga fiscal de la clase media trabajadora, por ejemplo deflactando el IRPF, podría aumentar su renta disponible.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 66",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Bajar impuestos podría reducir la capacidad del Estado para financiar sanidad, educación, dependencia y pensiones.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 61",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Las rebajas fiscales podrían beneficiar sobre todo a las rentas altas y vaciar la caja pública sin explicar cómo se compensa.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 63",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    }
+   ],
+   "gaps": "Moción de decenas de puntos sin efecto legislativo directo; el debate no analiza punto por punto vivienda (IVA primera vivienda, SAREB) ni transferencia de dependencia.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -2444,6 +4065,47 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Aliviar la carga fiscal de la clase media trabajadora, por ejemplo deflactando el IRPF, podría aumentar su renta disponible.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 66",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Bajar impuestos podría reducir la capacidad del Estado para financiar sanidad, educación, dependencia y pensiones.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 61",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Las rebajas fiscales podrían beneficiar sobre todo a las rentas altas y vaciar la caja pública sin explicar cómo se compensa.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 63",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Suprimir el impuesto a la producción eléctrica podría favorecer los beneficios de las empresas energéticas a costa de hogares, pymes y autónomos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 64",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    }
+   ],
+   "gaps": "Moción de decenas de puntos sin efecto legislativo directo; el debate no analiza punto por punto vivienda (IVA primera vivienda, SAREB) ni transferencia de dependencia.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion044/VOT_20260326165128.json": {
@@ -2480,6 +4142,47 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Aliviar la carga fiscal de la clase media trabajadora, por ejemplo deflactando el IRPF, podría aumentar su renta disponible.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 66",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Bajar impuestos podría reducir la capacidad del Estado para financiar sanidad, educación, dependencia y pensiones.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 61",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Las rebajas fiscales podrían beneficiar sobre todo a las rentas altas y vaciar la caja pública sin explicar cómo se compensa.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 63",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Suprimir el impuesto a la producción eléctrica podría favorecer los beneficios de las empresas energéticas a costa de hogares, pymes y autónomos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 64",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    }
+   ],
+   "gaps": "Moción de decenas de puntos sin efecto legislativo directo; el debate no analiza punto por punto vivienda (IVA primera vivienda, SAREB) ni transferencia de dependencia.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -2519,6 +4222,47 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Aliviar la carga fiscal de la clase media trabajadora, por ejemplo deflactando el IRPF, podría aumentar su renta disponible.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 66",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Bajar impuestos podría reducir la capacidad del Estado para financiar sanidad, educación, dependencia y pensiones.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 61",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Las rebajas fiscales podrían beneficiar sobre todo a las rentas altas y vaciar la caja pública sin explicar cómo se compensa.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 63",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Suprimir el impuesto a la producción eléctrica podría favorecer los beneficios de las empresas energéticas a costa de hogares, pymes y autónomos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 64",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    }
+   ],
+   "gaps": "Moción de decenas de puntos sin efecto legislativo directo; el debate no analiza punto por punto vivienda (IVA primera vivienda, SAREB) ni transferencia de dependencia.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion049/VOT_20260326165134.json": {
@@ -2550,6 +4294,31 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Deflactar el IRPF y duplicar los mínimos por hijos podría devolver parte del esfuerzo fiscal y evitar que las familias paguen más sin haber ganado más.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 68",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Las medidas podrían beneficiar sobre todo a grandes empresas y no tanto a trabajadores y a quienes tienen menos ingresos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 70",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; parte de las medidas ya figuraban en un real decreto-ley posterior a la interpelación. Los efectos son argumentos del debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -2583,6 +4352,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion109/20250508/Votacion006/VOT_20250508130747.json": {
@@ -2613,6 +4388,47 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que regular los drones y simplificar trámites dé más seguridad jurídica y agilice autorizaciones en actividades de menor riesgo, como vuelos médicos o de emergencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 113 (2025-05-08)",
+     "locator": "pág. 10",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-113.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Las deducciones en el impuesto de sociedades podrían incentivar que las aerolíneas inviertan en descarbonizar el transporte aéreo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 137 (2025-09-17)",
+     "locator": "pág. 109",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-137-C1.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "El plan y las deducciones podrían duplicar una estrategia de descarbonización y unos incentivos fiscales que ya existen, sin aportar un efecto nuevo y a costa del gasto público.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 137 (2025-09-17)",
+     "locator": "pág. 104",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-137-C1.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Obligar a repostar un porcentaje creciente de combustible sostenible, con multa automática si no se cumple, podría suponer una carga añadida para un sector ya tensionado.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 113 (2025-05-08)",
+     "locator": "pág. 13",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-113.PDF"
+    }
+   ],
+   "gaps": "Los efectos son argumentos del debate; no se cuantifica el coste de las deducciones ni del plan, ni el impacto de la cuota de combustible sostenible sobre los precios.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -2651,6 +4467,55 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Rebajar el IVA de alimentos, luz y gas podría aliviar el gasto de los hogares en bienes básicos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 101 (2025-03-12)",
+     "locator": "pág. 108",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-101.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Dejar a cero el impuesto sobre la producción eléctrica podría abaratar el precio de mercado, porque las generadoras lo repercuten íntegramente en sus ofertas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 101 (2025-03-12)",
+     "locator": "pág. 109",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-101.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Bajar impuestos sin medidas que compensen la pérdida de ingresos podría dificultar la financiación de servicios públicos de calidad.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 101 (2025-03-12)",
+     "locator": "pág. 110",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-101.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Rebajar el IVA producto a producto, en vez de reformarlo de forma integral, podría restar sentido al impuesto.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 101 (2025-03-12)",
+     "locator": "pág. 109",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-101.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Fijar al 0 % el impuesto sobre la producción eléctrica podría reabrir el déficit tarifario del sistema eléctrico.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 101 (2025-03-12)",
+     "locator": "pág. 109",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-101.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; en el debate no se cuantifica la pérdida de recaudación de cada rebaja.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion098/20250313/Votacion012/VOT_20250313133904.json": {
@@ -2682,6 +4547,31 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Deflactar el IRPF podría evitar que la inflación aumente la carga fiscal de los hogares sin que mejore su renta real.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 101 (2025-03-12)",
+     "locator": "pág. 108",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-101.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Bajar impuestos sin medidas que compensen la pérdida de ingresos podría dificultar la financiación de servicios públicos de calidad.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 101 (2025-03-12)",
+     "locator": "pág. 110",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-101.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; en el debate no se cuantifica la pérdida de recaudación de cada rebaja.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -2715,6 +4605,31 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Subir el mínimo exento del IRPF podría hacer que quien cobra el salario mínimo no tribute y conserve más renta.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 101 (2025-03-12)",
+     "locator": "pág. 109",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-101.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Bajar impuestos sin medidas que compensen la pérdida de ingresos podría dificultar la financiación de servicios públicos de calidad.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 101 (2025-03-12)",
+     "locator": "pág. 110",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-101.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; en el debate no se cuantifica la pérdida de recaudación de cada rebaja.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion088/20241219/Votacion098/VOT_20241219162856.json": {
@@ -2741,6 +4656,12 @@
     "note": "Consumo oficial de leches fermentadas en hogares",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion079/20241121/Votacion003/VOT_20241121173757.json": {
@@ -2766,6 +4687,12 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -2797,6 +4724,12 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -2839,6 +4772,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion079/20241121/Votacion006/VOT_20241121173801.json": {
@@ -2858,6 +4797,12 @@
     "verdict": "none",
     "note": "Votación del «resto de las enmiendas»: sin texto de las enmiendas en el lote; un intento de kit fetch sobre BOCG A-23-3 solo devolvió rúbricas y el índice de enmiendas, sin su contenido.",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -2896,6 +4841,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion079/20241121/Votacion009/VOT_20241121173805.json": {
@@ -2921,6 +4872,12 @@
     "verdict": "none",
     "note": "Votación del «resto de las enmiendas»: sin texto de las enmiendas en el lote; un intento de kit fetch sobre BOCG A-23-3 solo devolvió rúbricas y el índice de enmiendas, sin su contenido.",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -2959,6 +4916,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion079/20241121/Votacion011/VOT_20241121173808.json": {
@@ -2996,6 +4959,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion079/20241121/Votacion012/VOT_20241121173809.json": {
@@ -3017,6 +4986,12 @@
     "note": "Votación del «resto de las enmiendas»: sin texto de las enmiendas en el lote; un intento de kit fetch sobre BOCG A-23-3 solo devolvió rúbricas y el índice de enmiendas, sin su contenido.",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion079/20241121/Votacion013/VOT_20241121173810.json": {
@@ -3036,6 +5011,12 @@
     "verdict": "none",
     "note": "Votación en bloque de enmiendas: sin texto de las enmiendas en el lote; un intento de kit fetch sobre BOCG A-23-3 solo devolvió rúbricas y el índice de enmiendas, sin su contenido.",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -3062,6 +5043,12 @@
     "verdict": "none",
     "note": "Enmienda transaccional en Comisión sin texto extraído; un intento en BOCG A-23-3 (enmienda 108) solo devuelve el encabezado y el índice, no el texto transaccional.",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -3106,6 +5093,39 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Bajar el IVA y los impuestos sobre alimentos y energía podría aliviar el gasto básico de hogares que dicen consumir menos productos esenciales por no llegar a fin de mes.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 70 (2024-10-15)",
+     "locator": "pág. 58",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-70.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una rebaja del IVA sin control de precios podría no llegar a las familias y quedarse como margen de las grandes cadenas de distribución.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 70 (2024-10-15)",
+     "locator": "pág. 60",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-70.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Bajar impuestos podría reducir los ingresos que financian sanidad, educación y pensiones públicas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 70 (2024-10-15)",
+     "locator": "pág. 62",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-70.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria económica en el debate; no se sabe cuánto se recaudaría de menos ni cuánto de la rebaja llegaría al consumidor.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion068/20241016/Votacion010/VOT_20241017130201.json": {
@@ -3132,6 +5152,31 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Bajar el IVA y los impuestos sobre alimentos y energía podría aliviar el gasto básico de hogares que dicen consumir menos productos esenciales por no llegar a fin de mes.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 70 (2024-10-15)",
+     "locator": "pág. 58",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-70.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Bajar impuestos podría reducir los ingresos que financian sanidad, educación y pensiones públicas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 70 (2024-10-15)",
+     "locator": "pág. 62",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-70.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria económica en el debate; no se sabe cuánto se recaudaría de menos ni cuánto de la rebaja llegaría al consumidor.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -3166,6 +5211,47 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Mantener y ampliar la rebaja del IVA a carne y pescado podría ayudar a que las familias sigan comprando alimentos frescos en vez de optar por otros más baratos y menos saludables.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 40 (2024-05-21)",
+     "locator": "pág. 39",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-40.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Bajar el IVA de los productos básicos podría aliviar un gasto que pagan todos los hogares por igual, con independencia de su renta y de si llegan a fin de mes.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 40 (2024-05-21)",
+     "locator": "pág. 43",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-40.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una rebaja general del IVA podría no beneficiar especialmente a las rentas más bajas, porque es un impuesto proporcional que no tiene en cuenta la renta de quien compra.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 40 (2024-05-21)",
+     "locator": "pág. 46",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-40.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Bajar el IVA podría reducir la recaudación, y se señala que la propuesta no dice con qué ingresos se compensaría el dinero que se dejaría de ingresar.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 40 (2024-05-21)",
+     "locator": "pág. 43",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-40.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate. No se cuantifica el coste fiscal de la rebaja. Del punto 2 (impuesto al plástico) el debate no aporta mecanismos.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion040/20240523/Votacion019/VOT_20240523140950.json": {
@@ -3191,6 +5277,39 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Ampliar la deducción por hijo podría apoyar a las familias y favorecer la natalidad.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 40 (2024-05-21)",
+     "locator": "pág. 68",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-40.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Bajadas generalizadas de impuestos podrían hundir el Estado del bienestar y con él la natalidad; se planteó una prestación universal por crianza como alternativa.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 40 (2024-05-21)",
+     "locator": "pág. 68",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-40.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Suprimir ministerios o programas de gasto podría no compensar la caída de recaudación y obligar a recortes en servicios como sanidad y educación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 40 (2024-05-21)",
+     "locator": "pág. 70",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-40.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; el debate no cuantifica la pérdida de recaudación ni el ahorro de las subvenciones.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -3224,6 +5343,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion040/20240523/Votacion021/VOT_20240523140951.json": {
@@ -3255,6 +5380,12 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -3299,6 +5430,47 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Bajar el IRPF, el IVA y los impuestos al patrimonio podría aliviar a clases medias, autónomos y pequeñas empresas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 40 (2024-05-21)",
+     "locator": "pág. 66",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-40.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Mantener el IVA al 0 % en alimentos básicos podría abaratar la cesta de la compra de las familias.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 40 (2024-05-21)",
+     "locator": "pág. 67",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-40.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Las rebajas de IRPF, IVA y patrimonio podrían beneficiar sobre todo a quienes más tienen.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 40 (2024-05-21)",
+     "locator": "pág. 68",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-40.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Suprimir ministerios o programas de gasto podría no compensar la caída de recaudación y obligar a recortes en servicios como sanidad y educación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 40 (2024-05-21)",
+     "locator": "pág. 70",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-40.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; el debate no cuantifica la pérdida de recaudación ni el ahorro de las subvenciones.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion040/20240523/Votacion023/VOT_20240523140953.json": {
@@ -3334,6 +5506,39 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Bajar el IRPF, el IVA y los impuestos al patrimonio podría aliviar a clases medias, autónomos y pequeñas empresas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 40 (2024-05-21)",
+     "locator": "pág. 66",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-40.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Las rebajas de IRPF, IVA y patrimonio podrían beneficiar sobre todo a quienes más tienen.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 40 (2024-05-21)",
+     "locator": "pág. 68",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-40.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Suprimir ministerios o programas de gasto podría no compensar la caída de recaudación y obligar a recortes en servicios como sanidad y educación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 40 (2024-05-21)",
+     "locator": "pág. 70",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-40.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; el debate no cuantifica la pérdida de recaudación ni el ahorro de las subvenciones.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   }

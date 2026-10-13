@@ -36,6 +36,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Separar el recuento del voto por correo del presencial podría facilitar la detección de posibles irregularidades y reforzar la transparencia y la confianza en el procedimiento electoral.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 195 (2026-06-23)",
+     "locator": "pág. 20",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-195.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Verificar la identidad de quien deposita el voto por correo podría reforzar las garantías de personalidad y autenticidad del voto.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 195 (2026-06-23)",
+     "locator": "pág. 20",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-195.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Con urna y resultados separados para el voto por correo, en municipios pequeños podría resultar más fácil saber quién vota qué, lo que erosionaría el secreto del voto.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 195 (2026-06-23)",
+     "locator": "pág. 24",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-195.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Tratar el voto por correo de forma separada podría sembrar sospechas sobre quienes lo usan y sobre el sistema electoral, sin que se haya acreditado un fraude que lo justifique.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 195 (2026-06-23)",
+     "locator": "pág. 24",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-195.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una diferencia entre voto por correo y presencial podría confundirse con fraude, cuando puede deberse a la distinta composición de quienes votan de cada forma.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 195 (2026-06-23)",
+     "locator": "pág. 25",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-195.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; en el debate no se aportan datos de fraude acreditado ni estimaciones del coste de duplicar urnas y escrutinios.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   }
  }

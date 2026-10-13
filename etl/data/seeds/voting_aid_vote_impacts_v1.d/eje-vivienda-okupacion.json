@@ -164,6 +164,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion047/VOT_20260326165132.json": {
@@ -190,6 +196,39 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Excluir de las ayudas la protección a inquilinos que dejan de pagar podría evitar trasladar a pequeños propietarios la responsabilidad de garantizar alojamiento y evitar desahucios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 72",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin las medidas de protección del alquiler, muchas familias inquilinas podrían quedar sin prórroga y con dificultades para afrontar el pago del alquiler.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 76",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Las medidas podrían beneficiar sobre todo a grandes empresas y no tanto a trabajadores y a quienes tienen menos ingresos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 70",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; parte de las medidas ya figuraban en un real decreto-ley posterior a la interpelación. Los efectos son argumentos del debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion132/20250917/Votacion019/VOT_20250917194043.json": {
@@ -215,6 +254,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion093/20250219/Votacion007/VOT_20250219135540.json": {
@@ -245,6 +290,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion093/20250219/Votacion016/VOT_20250219135557.json": {
@@ -275,6 +326,31 @@
     "verdict": "keep",
     "note": "Cifras actuales ya miden esta medida",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Desalojar antes las ocupaciones podría permitir que administraciones y entidades sociales gestionen viviendas vacías para destinarlas a familias vulnerables.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 97 (2025-02-19)",
+     "locator": "pág. 59",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-97.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Algunos puntos de la moción podrían invadir competencias de las comunidades autónomas en materia de vivienda, lo que podría generar conflicto competencial.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 97 (2025-02-19)",
+     "locator": "pág. 59",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-97.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; los efectos son argumentos del debate, sin estimación de cuánta vivienda adicional o cuánto ahorro supondría cada punto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -312,6 +388,39 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Desalojar a los okupas en 24 horas y no empadronarlos podría proteger a propietarios y vecinos de los problemas de convivencia, inseguridad y degradación asociados a la ocupación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 38 (2024-04-23)",
+     "locator": "pág. 73",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-38.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Pedir al Gobierno proyectos de ley podría retrasar los cambios frente a las proposiciones y enmiendas ya en trámite en la Cámara sobre usurpación de viviendas y multirreincidencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 38 (2024-04-23)",
+     "locator": "pág. 76",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-38.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Endurecer los desalojos y levantar la suspensión de desahucios podría agravar la situación de familias vulnerables, con riesgo de quedarse sin vivienda, sin abordar la concentración inmobiliaria.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 38 (2024-04-23)",
+     "locator": "pág. 80",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-38.PDF"
+    }
+   ],
+   "gaps": "Moción rechazada, votada por puntos y sin memoria oficial. Los puntos 2 y 5 (salarios y reconocimiento) no tuvieron argumentos de mecanismo en el debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion076/20241114/Votacion005/VOT_20241114151011.json": {
@@ -343,6 +452,55 @@
     "note": "Cifras actuales ya miden esta medida",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Sustituir los juzgados unipersonales por tribunales de instancia podría igualar la carga de trabajo y unificar criterios; las oficinas de justicia permitirían hacer trámites desde el propio municipio.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 56 (2024-07-11)",
+     "locator": "pág. 30",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-56.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que los medios alternativos de solución de conflictos descongestionen la justicia y hagan más habitual resolver los litigios sin ir a juicio.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 91 (2024-12-19)",
+     "locator": "pág. 49",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-91.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que los juzgados de violencia sobre la mujer asuman las violencias sexuales podría mejorar el acceso a la justicia de las víctimas, con justicia gratuita.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 91 (2024-12-19)",
+     "locator": "pág. 44",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-91.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Concentrar competencias en los tribunales de instancia podría vaciar los pequeños juzgados y recortar servicios en el medio rural, alejando la justicia de la ciudadanía.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 56 (2024-07-11)",
+     "locator": "pág. 24",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-56.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "El nuevo sistema de acciones colectivas podría dar un poder excesivo a fondos de litigación y perjudicar a las empresas, con riesgo para la seguridad jurídica.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 56 (2024-07-11)",
+     "locator": "pág. 22",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-56.PDF"
+    }
+   ],
+   "gaps": "Debate de enmienda de totalidad y de veto del Senado; no hay memoria de impacto en el debate. No se detalla qué enmiendas concretas causan el efecto sobre desahucios.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion022/VOT_20260326165053.json": {
@@ -368,6 +526,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion076/20241114/Votacion006/VOT_20241114151012.json": {
@@ -404,6 +568,55 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Sustituir los juzgados unipersonales por tribunales de instancia podría igualar la carga de trabajo y unificar criterios; las oficinas de justicia permitirían hacer trámites desde el propio municipio.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 56 (2024-07-11)",
+     "locator": "pág. 30",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-56.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que los medios alternativos de solución de conflictos descongestionen la justicia y hagan más habitual resolver los litigios sin ir a juicio.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 91 (2024-12-19)",
+     "locator": "pág. 49",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-91.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que los juzgados de violencia sobre la mujer asuman las violencias sexuales podría mejorar el acceso a la justicia de las víctimas, con justicia gratuita.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 91 (2024-12-19)",
+     "locator": "pág. 44",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-91.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Concentrar competencias en los tribunales de instancia podría vaciar los pequeños juzgados y recortar servicios en el medio rural, alejando la justicia de la ciudadanía.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 56 (2024-07-11)",
+     "locator": "pág. 24",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-56.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "El nuevo sistema de acciones colectivas podría dar un poder excesivo a fondos de litigación y perjudicar a las empresas, con riesgo para la seguridad jurídica.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 56 (2024-07-11)",
+     "locator": "pág. 22",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-56.PDF"
+    }
+   ],
+   "gaps": "Debate de enmienda de totalidad y de veto del Senado; no hay memoria de impacto en el debate. No se detalla qué enmiendas concretas causan el efecto sobre desahucios.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   }

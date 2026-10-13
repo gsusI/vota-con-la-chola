@@ -31,6 +31,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Permitir invertir la Reserva para Inversiones en construir, comprar o rehabilitar vivienda de alquiler residencial podría ampliar la oferta y contener los precios del alquiler en Canarias.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 132 (2025-07-22)",
+     "locator": "pág. 28",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-132.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una mayor oferta de alquiler asequible podría ayudar a que médicos y profesores se instalen en islas donde hoy no encuentran vivienda y los servicios públicos tienen déficit de profesionales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 96 (2025-02-18)",
+     "locator": "pág. 7",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-96.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Pasado el plazo de cinco años de mantenimiento, las viviendas podrían volver al mercado privado sin veto al alquiler vacacional ni a otras formas de especulación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 132 (2025-07-22)",
+     "locator": "pág. 23",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-132.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "El incentivo fiscal podría aprovecharlo sobre todo grandes empresas que dejan de pagar impuestos, y destinarse a especular con vivienda en lugar de abaratar el alquiler.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 96 (2025-02-18)",
+     "locator": "pág. 9",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-96.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Un texto muy complejo podría restar seguridad jurídica a los inversores, y el límite de seis meses para alquilar podría desincentivar la inversión por el riesgo de incumplirlo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 96 (2025-02-18)",
+     "locator": "pág. 11",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-96.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate y no hay estimación de cuántas viviendas nuevas ni de cuánto alquiler se abarataría.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion094/20250225/Votacion002/VOT_20250225201647.json": {
@@ -61,6 +110,63 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que evitar la anulación de planes urbanísticos por defectos formales subsanables impida que años de tramitación se pierdan y haya que empezar de cero.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 98 (2025-02-25)",
+     "locator": "pág. 24",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-98.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reducir los plazos de los informes sectoriales y limitar los años para impugnar un plan general podría dar más seguridad a quien decide basándose en un plan aprobado.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 98 (2025-02-25)",
+     "locator": "pág. 24",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-98.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Agilizar los planes generales podría liberar suelo para vivienda protegida que hoy está bloqueado por la regulación actual.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 98 (2025-02-25)",
+     "locator": "pág. 35",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-98.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Limitar las anulaciones por errores formales, como no hacer una consulta ciudadana, podría reducir las garantías de participación y dejar solo una sanción menor.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 98 (2025-02-25)",
+     "locator": "pág. 24",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-98.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Si un plan solo se puede impugnar en los cuatro primeros años, una irregularidad descubierta después podría quedar sin remedio y el proyecto seguir adelante.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 98 (2025-02-25)",
+     "locator": "pág. 24",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-98.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Limitar la impugnación de un planeamiento antes de su ejecución podría dejar indefensas a las personas afectadas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 98 (2025-02-25)",
+     "locator": "pág. 29",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-98.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; el número de viviendas o plazos ganados no se cuantifica en el debate. Los efectos son argumentos de los intervinientes.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   }
  }

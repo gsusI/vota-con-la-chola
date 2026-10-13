@@ -158,6 +158,47 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Modificar partidas del presupuesto prorrogado podría permitir una respuesta rápida y eficiente de apoyo a los municipios afectados y a sus habitantes.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 83 (2024-11-26)",
+     "locator": "pág. 24",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-83.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Añadir 15 000 millones a las ayudas ya aprobadas podría acercar el total a lo que reclama la Generalitat para la reconstrucción.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 83 (2024-11-26)",
+     "locator": "pág. 30",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-83.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Fijar una cifra sin una estimación realista de los daños podría dejar los fondos cortos o sobrados, y sin conocer antes la efectividad de las medidas ya adoptadas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 83 (2024-11-26)",
+     "locator": "pág. 24",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-83.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Si parte de la respuesta son créditos, avales y moratorias y no ayudas directas, podría suponer una carga añadida para los afectados.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 83 (2024-11-26)",
+     "locator": "pág. 30",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-83.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate y aún no hay estimación cerrada de los daños.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion085/20241212/Votacion010/VOT_20241212130554.json": {
@@ -301,6 +342,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Los agricultores y ganaderos podrían contar con protección frente a la pérdida de ingresos, un riesgo de mercado que el seguro actual, centrado en daños climáticos, no cubre.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 17",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Con la nueva PAC, que permite garantizar ingresos mediante seguros y fondos nacionales, se podría integrar el seguro de ingresos en el sistema estatal y darle financiación pública.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 22",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Se ha señalado que la normativa europea podría no permitir subvencionar con fondos públicos este tipo de seguros, lo que pondría en duda su viabilidad.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 31",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Calcular ingresos exige más datos y capacidad administrativa que medir daños, así que podría favorecer a las grandes explotaciones y dejar fuera a las pequeñas y medianas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 31",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría haber pocas aseguradoras dispuestas a cubrir la pérdida de ingresos, como ya ocurre en cultivos donde consideran el riesgo endémico y no quieren asegurarlo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 19",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate. Se discute si la normativa europea permite subvencionar estos seguros.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion177/20260430/Votacion003/VOT_20260430125143.json": {
@@ -327,6 +417,63 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Ejecutar las obras hídricas pendientes podría permitir almacenar agua cuando llueve y evitar su falta cuando no llueve.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 182 (2026-04-29)",
+     "locator": "pág. 44",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-182.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Con más obras hídricas ejecutadas, la falta de agua podría limitar menos la agricultura, la industria, el turismo y el abastecimiento de las familias.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 182 (2026-04-29)",
+     "locator": "pág. 44",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-182.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Invertir en la gestión de recursos hídricos podría reforzar la resiliencia ante la crisis del agua, incluso en municipios pequeños y medianos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 182 (2026-04-29)",
+     "locator": "pág. 52",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-182.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Pedir solo más obras de hormigón, embalses o trasvases podría no resolver el problema del agua ante la crisis climática.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 182 (2026-04-29)",
+     "locator": "pág. 47",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-182.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Reclamar obras a una administración podría no desbloquearlas si falta una autorización de otra, que es quien debe concederla.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 182 (2026-04-29)",
+     "locator": "pág. 53",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-182.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Prometer más obras sin planificar la demanda podría llevar a gestionar el agua como si fuera un recurso ilimitado.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 182 (2026-04-29)",
+     "locator": "pág. 51",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-182.PDF"
+    }
+   ],
+   "gaps": "PNL sin memoria oficial de impacto; el debate discute de quién es la competencia y el retraso de cada obra, y no cuantifica los efectos esperados.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   }
  }

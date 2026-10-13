@@ -118,6 +118,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Destinar esos fondos a educación pública podría reducir ratios, ampliar plazas públicas de 0 a 3 años y de formación profesional y aliviar a los docentes.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 120 (2025-06-10)",
+     "locator": "pág. 53",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-120.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que no subir el gasto militar evite recortes o menor inversión en servicios públicos como sanidad y educación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 120 (2025-06-10)",
+     "locator": "pág. 54",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-120.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría invadir competencias de las comunidades autónomas, que gestionan la educación y ya invierten según sus propias necesidades.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 120 (2025-06-10)",
+     "locator": "pág. 55",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-120.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Frenar la inversión en defensa podría debilitar la capacidad de disuasión y afectar al empleo y a la actividad de la industria nacional de defensa.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 120 (2025-06-10)",
+     "locator": "pág. 62",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-120.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Se advierte de que enfrentar defensa y bienestar sería un falso dilema: ambos serían necesarios, y reducir el gasto en seguridad podría poner en riesgo el segundo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 120 (2025-06-10)",
+     "locator": "pág. 58",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-120.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria económica; el debate discute si gasto militar y educativo son excluyentes sin cifras presupuestarias concretas para 2026.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion101/20250320/Votacion005/VOT_20250320125704.json": {
@@ -155,6 +204,55 @@
     "note": "Ucrania, gasto OTAN y compromiso ya específicos",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Mantener el apoyo a Ucrania, con participación de este país y de la Unión Europea en las negociaciones, podría ayudar a llegar a una paz justa y duradera.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 103 (2025-03-18)",
+     "locator": "pág. 51",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-103.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Cumplir los compromisos de defensa y mantener capacidad de disuasión podría reforzar la seguridad y ayudar a preservar la paz.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 103 (2025-03-18)",
+     "locator": "pág. 42",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-103.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Aumentar el gasto militar podría obligar a recortar gasto en sanidad, educación y otros servicios públicos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 103 (2025-03-18)",
+     "locator": "pág. 46",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-103.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Reforzar el gasto en el marco de la OTAN podría implicar comprar más equipamiento estadounidense y aumentar la dependencia militar de otro país.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 103 (2025-03-18)",
+     "locator": "pág. 47",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-103.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Apostar por el vínculo atlántico podría quedar desfasado si Estados Unidos deja de ser un aliado fiable, frente a una mayor autonomía estratégica europea.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 103 (2025-03-18)",
+     "locator": "pág. 47",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-103.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate, sin coste ni calendario de gasto en defensa concretos.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion202/20260930/Votacion007/VOT_20260930153602.json": {
@@ -180,6 +278,47 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reforzar los medios y la presencia de las Fuerzas Armadas en Ceuta podría dar más garantías de seguridad ante una situación excepcional.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 209 (2026-09-30)",
+     "locator": "pág. 91",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-209.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Desplegar medios policiales o militares podría tener un efecto disuasorio ante una amenaza inminente en la frontera.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 209 (2026-09-30)",
+     "locator": "pág. 95",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-209.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Exigir información sobre las alertas previas podría aclarar qué sabía el Gobierno y permitir exigir responsabilidades con transparencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 209 (2026-09-30)",
+     "locator": "pág. 94",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-209.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Plantear la situación solo como cuestión militar podría ser insuficiente ante una amenaza difícil de resolver únicamente por esa vía.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 209 (2026-09-30)",
+     "locator": "pág. 95",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-209.PDF"
+    }
+   ],
+   "gaps": "No hay memoria oficial de impacto; las denuncias de actuaciones de militares están remitidas a la Fiscalía y no están resueltas. Se desconoce el coste de los medios pedidos.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion185/20260611/Votacion021/VOT_20260611145727.json": {
@@ -199,6 +338,63 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Cesar la actividad militar podría reducir el riesgo de accidentes para la población cercana, el ruido diario y las molestias constantes de la zona.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 190 (2026-06-10)",
+     "locator": "pág. 65",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-190.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Acabar con el uso de munición en un parque natural podría reducir el impacto ambiental sobre la fauna y el suelo y hacer compatible el espacio con su protección.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 190 (2026-06-10)",
+     "locator": "pág. 65",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-190.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un plan de transición con financiación podría dar a la comarca una alternativa económica que no dependa del canon que paga Defensa.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 190 (2026-06-10)",
+     "locator": "pág. 64",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-190.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Dejar de percibir el canon de arrendamiento podría recortar los ingresos de los municipios y los servicios y proyectos que financian en zonas con riesgo de despoblación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 190 (2026-06-10)",
+     "locator": "pág. 73",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-190.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría perderse el único campo de tiro aire-superficie permanente, necesario para el adiestramiento y la certificación de capacidades de combate del Ejército del Aire.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 190 (2026-06-10)",
+     "locator": "pág. 72",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-190.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Al cesar la actividad, el acceso restringido y el control de usos que hoy protegen el hábitat podrían desaparecer y afectar a la fauna y flora de la zona.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 190 (2026-06-10)",
+     "locator": "pág. 72",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-190.PDF"
+    }
+   ],
+   "gaps": "Sin estudio independiente en el debate que cuantifique accidentes, impacto ambiental ni el coste de sustituir el canon; los datos citados son de cada parte.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion185/20260611/Votacion026/VOT_20260611145733.json": {
@@ -224,6 +420,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reducir el gasto militar podría liberar recursos para protección social y mejora de los servicios públicos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 190 (2026-06-10)",
+     "locator": "pág. 85",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-190.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una carrera armamentista podría no disuadir y acercar el riesgo de confrontación; desescalar podría reducirlo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 190 (2026-06-10)",
+     "locator": "pág. 85",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-190.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Gastar menos en armamento podría reducir la dependencia de compras a la industria militar de fuera de Europa y el coste de oportunidad frente a los servicios públicos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 190 (2026-06-10)",
+     "locator": "pág. 92",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-190.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Reducir la inversión en defensa o salir de la OTAN podría debilitar la seguridad ante una guerra en Europa, amenazas híbridas y ciberataques.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 190 (2026-06-10)",
+     "locator": "pág. 94",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-190.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Recortar el gasto militar podría afectar al empleo industrial, la innovación y la formación vinculados a astilleros como Navantia en Ferrol.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 190 (2026-06-10)",
+     "locator": "pág. 95",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-190.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; los efectos son argumentos del debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion174/20260422/Votacion009/VOT_20260422151955.json": {
@@ -244,6 +489,31 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un referéndum podría dar voz a la ciudadanía, buena parte de la cual nunca votó sobre la pertenencia de España a la OTAN.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 179 (2026-04-21)",
+     "locator": "pág. 55",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-179.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Salir de la OTAN podría hacer a España más vulnerable, al perder la protección por disuasión y gestión de crisis que ofrece la Alianza.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 179 (2026-04-21)",
+     "locator": "pág. 63",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-179.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; los efectos son argumentos del debate. El punto 4 (Constitución) no recibió argumentos de mecanismo en el debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion109/20250508/Votacion012/VOT_20250508130758.json": {
@@ -264,6 +534,39 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Presentar los Presupuestos de 2025 podría abrir el debate público sobre cómo se asignan los recursos y cuáles son las prioridades de gasto.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 111 (2025-05-06)",
+     "locator": "pág. 57",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-111.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Contar con Presupuestos podría dar al Gobierno su principal herramienta para fijar una hoja de ruta política y de gasto.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 111 (2025-05-06)",
+     "locator": "pág. 58",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-111.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Incluir los compromisos de gasto militar en los Presupuestos podría restar recursos a barrios, escuelas, hospitales y ayudas sociales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 111 (2025-05-06)",
+     "locator": "pág. 61",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-111.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; el debate se centró en reproches políticos y hay pocos argumentos sobre efectos concretos.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion103/20250326/Votacion010/VOT_20250326194444.json": {
@@ -285,6 +588,47 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un plan plurianual de inversión en defensa podría reforzar la disuasión y evitar la vulnerabilidad que se achaca a la falta de inversión y de coordinación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 107 (2025-03-26)",
+     "locator": "pág. 118",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-107.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Si el aumento del gasto se orienta a tecnología de doble uso y se reparte por el territorio, podría generar también beneficios civiles, como en sanidad o gestión de servicios públicos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 107 (2025-03-26)",
+     "locator": "pág. 122",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-107.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Subir con rapidez el gasto en defensa podría comprometer el estado de bienestar mediante subidas de impuestos o más deuda, si no se recorta gasto de otro tipo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 107 (2025-03-26)",
+     "locator": "pág. 119",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-107.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "El aumento del gasto militar podría venir acompañado de recortes en gasto social, como habrían ocurrido en otros países europeos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 107 (2025-03-26)",
+     "locator": "pág. 120",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-107.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; no se cifra el coste del plan ni qué gasto se recortaría. Los efectos son argumentos del debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion101/20250320/Votacion008/VOT_20250320125708.json": {
@@ -305,6 +649,31 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Rechazar el aumento del gasto militar y el fondo europeo de defensa podría evitar que la Unión Europea alimente la continuidad de la guerra y la escalada belicista.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 103 (2025-03-18)",
+     "locator": "pág. 52",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-103.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Salir de la OTAN u oponerse al fondo europeo de defensa podría debilitar la capacidad de Europa para asumir su propia defensa en un escenario geoestratégico nuevo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 103 (2025-03-18)",
+     "locator": "pág. 58",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-103.PDF"
+    }
+   ],
+   "gaps": "Los efectos son argumentos del debate; no se aportan estimaciones de coste ni de impacto real.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion040/20240523/Votacion007/VOT_20240523140937.json": {
@@ -330,6 +699,12 @@
     "verdict": "improved",
     "note": "Plan 2025 lleva al 2 % del PIB",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -376,6 +751,63 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Cesar la actividad militar podría reducir el riesgo de accidentes para la población cercana, el ruido diario y las molestias constantes de la zona.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 190 (2026-06-10)",
+     "locator": "pág. 65",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-190.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Acabar con el uso de munición en un parque natural podría reducir el impacto ambiental sobre la fauna y el suelo y hacer compatible el espacio con su protección.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 190 (2026-06-10)",
+     "locator": "pág. 65",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-190.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un plan de transición con financiación podría dar a la comarca una alternativa económica que no dependa del canon que paga Defensa.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 190 (2026-06-10)",
+     "locator": "pág. 64",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-190.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Dejar de percibir el canon de arrendamiento podría recortar los ingresos de los municipios y los servicios y proyectos que financian en zonas con riesgo de despoblación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 190 (2026-06-10)",
+     "locator": "pág. 73",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-190.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría perderse el único campo de tiro aire-superficie permanente, necesario para el adiestramiento y la certificación de capacidades de combate del Ejército del Aire.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 190 (2026-06-10)",
+     "locator": "pág. 72",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-190.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Al cesar la actividad, el acceso restringido y el control de usos que hoy protegen el hábitat podrían desaparecer y afectar a la fauna y flora de la zona.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 190 (2026-06-10)",
+     "locator": "pág. 72",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-190.PDF"
+    }
+   ],
+   "gaps": "Sin estudio independiente en el debate que cuantifique accidentes, impacto ambiental ni el coste de sustituir el canon; los datos citados son de cada parte.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion185/20260611/Votacion023/VOT_20260611145729.json": {
@@ -400,6 +832,63 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Cesar la actividad militar podría reducir el riesgo de accidentes para la población cercana, el ruido diario y las molestias constantes de la zona.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 190 (2026-06-10)",
+     "locator": "pág. 65",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-190.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Acabar con el uso de munición en un parque natural podría reducir el impacto ambiental sobre la fauna y el suelo y hacer compatible el espacio con su protección.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 190 (2026-06-10)",
+     "locator": "pág. 65",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-190.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un plan de transición con financiación podría dar a la comarca una alternativa económica que no dependa del canon que paga Defensa.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 190 (2026-06-10)",
+     "locator": "pág. 64",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-190.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Dejar de percibir el canon de arrendamiento podría recortar los ingresos de los municipios y los servicios y proyectos que financian en zonas con riesgo de despoblación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 190 (2026-06-10)",
+     "locator": "pág. 73",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-190.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría perderse el único campo de tiro aire-superficie permanente, necesario para el adiestramiento y la certificación de capacidades de combate del Ejército del Aire.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 190 (2026-06-10)",
+     "locator": "pág. 72",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-190.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Al cesar la actividad, el acceso restringido y el control de usos que hoy protegen el hábitat podrían desaparecer y afectar a la fauna y flora de la zona.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 190 (2026-06-10)",
+     "locator": "pág. 72",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-190.PDF"
+    }
+   ],
+   "gaps": "Sin estudio independiente en el debate que cuantifique accidentes, impacto ambiental ni el coste de sustituir el canon; los datos citados son de cada parte.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion185/20260611/Votacion027/VOT_20260611145735.json": {
@@ -420,6 +909,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion185/20260611/Votacion029/VOT_20260611145737.json": {
@@ -440,6 +935,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion185/20260611/Votacion030/VOT_20260611145738.json": {
@@ -460,6 +961,31 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una carrera armamentista podría no disuadir y acercar el riesgo de confrontación; desescalar podría reducirlo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 190 (2026-06-10)",
+     "locator": "pág. 85",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-190.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Reducir la inversión en defensa o salir de la OTAN podría debilitar la seguridad ante una guerra en Europa, amenazas híbridas y ciberataques.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 190 (2026-06-10)",
+     "locator": "pág. 94",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-190.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; los efectos son argumentos del debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion174/20260422/Votacion010/VOT_20260422151956.json": {
@@ -480,6 +1006,31 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Cerrar las bases de Rota y Morón podría reforzar la soberanía y reducir el riesgo de que se usen en intervenciones militares ilegales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 179 (2026-04-21)",
+     "locator": "pág. 55",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-179.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Poner fin al convenio y a las bases podría restar capacidad frente al terrorismo, la piratería y la seguridad marítima, y supondría romper un tratado vigente.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 179 (2026-04-21)",
+     "locator": "pág. 63",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-179.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; los efectos son argumentos del debate. El punto 4 (Constitución) no recibió argumentos de mecanismo en el debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion174/20260422/Votacion011/VOT_20260422151958.json": {
@@ -500,6 +1051,31 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Revertir el aumento del gasto militar podría liberar recursos públicos para cuidados, educación, sanidad y vivienda.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 179 (2026-04-21)",
+     "locator": "pág. 54",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-179.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Rechazar todo aumento de capacidades militares podría debilitar la disuasión de España en un contexto internacional más inestable.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 179 (2026-04-21)",
+     "locator": "pág. 62",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-179.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; los efectos son argumentos del debate. El punto 4 (Constitución) no recibió argumentos de mecanismo en el debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion174/20260422/Votacion012/VOT_20260422151959.json": {
@@ -519,6 +1095,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion101/20250320/Votacion009/VOT_20250320125710.json": {
@@ -545,6 +1127,31 @@
     "note": "Plan de defensa 2025 es el aumento concreto",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Rechazar el aumento del gasto militar y el fondo europeo de defensa podría evitar que la Unión Europea alimente la continuidad de la guerra y la escalada belicista.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 103 (2025-03-18)",
+     "locator": "pág. 52",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-103.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Renunciar a cualquier aumento del gasto militar podría dejar a Europa dependiendo de terceros para su seguridad y sin capacidad de disuasión propia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 103 (2025-03-18)",
+     "locator": "pág. 57",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-103.PDF"
+    }
+   ],
+   "gaps": "Los efectos son argumentos del debate; no se aportan estimaciones de coste ni de impacto real.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion101/20250320/Votacion011/VOT_20250320125712.json": {
@@ -565,6 +1172,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion040/20240523/Votacion008/VOT_20240523140939.json": {
@@ -589,6 +1202,31 @@
     "verdict": "keep",
     "note": "Cifra de ayuda militar a Ucrania ya específica",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Más medios y respaldo militar a Ucrania, y cumplir el compromiso de gasto en defensa con la OTAN, podría ayudar a Ucrania a defenderse frente a Rusia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 40 (2024-05-21)",
+     "locator": "pág. 60",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-40.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Priorizar el envío de ayuda militar podría no ser la vía más rápida para acabar con el conflicto en Ucrania.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 40 (2024-05-21)",
+     "locator": "pág. 64",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-40.PDF"
+    }
+   ],
+   "gaps": "Moción de varios puntos sin memoria oficial de impacto; el debate se centró sobre todo en reproches políticos.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   }

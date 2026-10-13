@@ -189,6 +189,63 @@
     "note": "Texto de la iniciativa original (B-240-1); el dictamen votado puede variar en detalles. No se citan duraciones de penas.",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "El paso de sanción administrativa a delito podría tener un efecto disuasorio sobre quienes ejercen estas prácticas, incluso dentro de la familia, sobre menores.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 197 (2026-06-25)",
+     "locator": "pág. 14",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-197.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que la vía penal, con intervención de jueces, responda mejor a estas prácticas que las sanciones administrativas, que se consideran insuficientes para una conducta tan grave.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 197 (2026-06-25)",
+     "locator": "pág. 15",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-197.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Penalizar las prácticas aunque la persona o su representante legal las consienta podría evitar que se amparen en un consentimiento que no sería plenamente libre.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 197 (2026-06-25)",
+     "locator": "pág. 23",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-197.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin vivienda ni apoyo económico, las víctimas podrían seguir dependiendo de su entorno familiar y tener más difícil salir del espacio donde sufren la violencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 197 (2026-06-25)",
+     "locator": "pág. 14",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-197.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Las multas podrían quedar cubiertas con colectas a favor de quienes ejercen estas prácticas, con lo que perderían parte de su efecto disuasorio.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 197 (2026-06-25)",
+     "locator": "pág. 14",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-197.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Con penas de prisión, el delito podría alcanzar también a quien acuda por voluntad propia a un psicólogo, un sacerdote o un especialista, y no solo a tratamientos forzados o violentos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 197 (2026-06-25)",
+     "locator": "pág. 22",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-197.PDF"
+    }
+   ],
+   "gaps": "Proposición de ley sin memoria oficial de impacto en este lote; los efectos son argumentos del debate, sin evaluación de su alcance real.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion056/20240723/Votacion068/VOT_20240723221740.json": {
@@ -225,6 +282,47 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Las deportistas profesionales embarazadas o en adopción podrían ampliar un año su contrato y tener permisos de conciliación, algo que antes casi no se les aplicaba.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 68",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que una mayor igualdad de oportunidades entre mujeres y hombres ayude a que lleguen a los puestos de responsabilidad según su mérito y a impulsar el crecimiento económico.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 75",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "La ley podría quedarse en las mujeres que ya pueden llegar a los puestos más altos y no mejorar la vida de las mujeres con empleos precarios, cuidados o pocos ingresos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 70",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Un tope máximo de presencia por sexo podría penalizar a las mujeres cuando superen el 60 %, y limitar su acceso a cargos de liderazgo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 66",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    }
+   ],
+   "gaps": "Proyecto sin cifras de impacto en el debate; los efectos son argumentos de quienes intervinieron y no hay evaluación oficial citada.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion052/20240627/Votacion043/VOT_20240627130415.json": {
@@ -266,6 +364,47 @@
     "verdict": "written",
     "note": "Efectos tomados de la exposición de motivos de la iniciativa (A-1-1); el dictamen final no se ha contrastado.",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Las deportistas profesionales embarazadas o en adopción podrían ampliar un año su contrato y tener permisos de conciliación, algo que antes casi no se les aplicaba.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 68",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que una mayor igualdad de oportunidades entre mujeres y hombres ayude a que lleguen a los puestos de responsabilidad según su mérito y a impulsar el crecimiento económico.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 75",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "La ley podría quedarse en las mujeres que ya pueden llegar a los puestos más altos y no mejorar la vida de las mujeres con empleos precarios, cuidados o pocos ingresos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 70",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Un tope máximo de presencia por sexo podría penalizar a las mujeres cuando superen el 60 %, y limitar su acceso a cargos de liderazgo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 66",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    }
+   ],
+   "gaps": "Proyecto sin cifras de impacto en el debate; los efectos son argumentos de quienes intervinieron y no hay evaluación oficial citada.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -322,6 +461,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reformar el Instituto de las Mujeres podría darle más capacidad de actuar de forma especializada ante vulneraciones de derechos y cumplir lo que exigen dos directivas europeas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 192 (2026-06-16)",
+     "locator": "pág. 22",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-192.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Dar al Instituto un papel en la inteligencia artificial podría ayudar a corregir sesgos de los datos que perjudican a las mujeres.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 192 (2026-06-16)",
+     "locator": "pág. 36",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-192.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una transposición mal hecha podría erosionar competencias autonómicas, crear confusión y duplicidades y debilitar sistemas de igualdad ya consolidados.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 192 (2026-06-16)",
+     "locator": "pág. 26",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-192.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Si el Instituto sigue sometido jerárquicamente al Gobierno, podría no cumplir la independencia que exige el derecho europeo a un organismo de igualdad.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 192 (2026-06-16)",
+     "locator": "pág. 39",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-192.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Tramitarla como proposición, a días del plazo europeo, podría dejarla sin informes de órganos consultivos ni proceso participativo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 192 (2026-06-16)",
+     "locator": "pág. 39",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-192.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate y el plazo de transposición (19 de junio de 2026) estaba a punto de vencer.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion122/20250624/Votacion002/VOT_20250624202325.json": {
@@ -363,6 +551,63 @@
     "note": "Sin cifra oficial específica; delitos de odio ya acotan",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "El paso de sanción administrativa a delito podría tener un efecto disuasorio sobre quienes ejercen estas prácticas, incluso dentro de la familia, sobre menores.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 197 (2026-06-25)",
+     "locator": "pág. 14",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-197.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que la vía penal, con intervención de jueces, responda mejor a estas prácticas que las sanciones administrativas, que se consideran insuficientes para una conducta tan grave.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 197 (2026-06-25)",
+     "locator": "pág. 15",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-197.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Penalizar las prácticas aunque la persona o su representante legal las consienta podría evitar que se amparen en un consentimiento que no sería plenamente libre.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 197 (2026-06-25)",
+     "locator": "pág. 23",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-197.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin vivienda ni apoyo económico, las víctimas podrían seguir dependiendo de su entorno familiar y tener más difícil salir del espacio donde sufren la violencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 197 (2026-06-25)",
+     "locator": "pág. 14",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-197.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Las multas podrían quedar cubiertas con colectas a favor de quienes ejercen estas prácticas, con lo que perderían parte de su efecto disuasorio.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 197 (2026-06-25)",
+     "locator": "pág. 14",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-197.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Con penas de prisión, el delito podría alcanzar también a quien acuda por voluntad propia a un psicólogo, un sacerdote o un especialista, y no solo a tratamientos forzados o violentos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 197 (2026-06-25)",
+     "locator": "pág. 22",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-197.PDF"
+    }
+   ],
+   "gaps": "Proposición de ley sin memoria oficial de impacto en este lote; los efectos son argumentos del debate, sin evaluación de su alcance real.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion102/20250325/Votacion002/VOT_20250325212232.json": {
@@ -393,6 +638,63 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reconocer estos juzgados como especializados podría permitir que sus titulares se trasladen y asciendan, evitando que los abandonen y que las secciones se cubran con personal sin experiencia en la materia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 106 (2025-03-25)",
+     "locator": "pág. 23",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-106.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Sacar de estos juzgados algunos delitos podría aliviar la carga de trabajo de unos órganos que ya se señalan como colapsados.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 106 (2025-03-25)",
+     "locator": "pág. 28",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-106.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reforzar la especialización de jueces y medios podría mejorar la protección de las víctimas y evitar retrasos en sus causas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 106 (2025-03-25)",
+     "locator": "pág. 19",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-106.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Trasladar la instrucción de delitos de violencia sexual fuera de los juzgados especializados podría reducir la especialización y poner en riesgo la protección de las víctimas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 106 (2025-03-25)",
+     "locator": "pág. 22",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-106.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Reducir la especialización judicial en violencia sexual podría ser un paso atrás respecto al compromiso internacional de ofrecer justicia especializada a las víctimas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 106 (2025-03-25)",
+     "locator": "pág. 23",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-106.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Quitar competencias a los juzgados saturados en vez de aumentar sus recursos podría no resolver la falta de medios y solo trasladar el problema a otros juzgados.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 106 (2025-03-25)",
+     "locator": "pág. 31",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-106.PDF"
+    }
+   ],
+   "gaps": "Proposición de ley sin memoria oficial de impacto; los efectos son argumentos del debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion061/20240924/Votacion002/VOT_20240924203511.json": {
@@ -428,6 +730,63 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reforzar la especialización de jueces y fiscales en violencia sexual podría mejorar la atención y la protección de las víctimas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 64 (2024-09-24)",
+     "locator": "pág. 27",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-64.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Garantizar asistencia letrada gratuita y especializada podría hacer más accesible la justicia a las víctimas de violencias sexuales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 64 (2024-09-24)",
+     "locator": "pág. 33",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-64.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Limitar el atenuante de reparación del daño podría evitar que quien tiene mucho poder adquisitivo esquive la pena de delitos sexuales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 64 (2024-09-24)",
+     "locator": "pág. 33",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-64.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "La especialización podría chocar con juzgados de violencia sobre la mujer saturados en muchos territorios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 64 (2024-09-24)",
+     "locator": "pág. 33",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-64.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una redacción imprecisa, con conceptos jurídicos poco definidos, podría generar inseguridad jurídica al aplicar la reforma.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 64 (2024-09-24)",
+     "locator": "pág. 37",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-64.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Modificar de nuevo una ley muy reciente podría restarle estabilidad antes de ejecutarla del todo, cuando el problema señalado es su aplicación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 64 (2024-09-24)",
+     "locator": "pág. 26",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-64.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion038/20240521/Votacion002/VOT_20240521203902.json": {
@@ -463,6 +822,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Redefinir el delito de proxenetismo podría permitir perseguirlo con eficacia, frente a un tipo penal actual que la Fiscalía considera inoperante.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 40 (2024-05-21)",
+     "locator": "pág. 23",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-40.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Endurecer la respuesta penal podría ayudar a proteger a las víctimas y frenar negocios de explotación que captan a menores y jóvenes en redes sociales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 40 (2024-05-21)",
+     "locator": "pág. 24",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-40.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Castigar el lucro y no solo la explotación podría alcanzar a mujeres que se organicen en cooperativas, a quien les alquile un piso o a familiares que viven de sus ingresos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 40 (2024-05-21)",
+     "locator": "pág. 25",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-40.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Quienes ejercen la prostitución en espacios regulados podrían pasar a la clandestinidad o a su entorno familiar, con más riesgo físico y más dependencia de las mafias.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 40 (2024-05-21)",
+     "locator": "pág. 29",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-40.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una reforma limitada al Código Penal podría dejar a las personas en prostitución sin protección social, vivienda ni alternativas laborales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 40 (2024-05-21)",
+     "locator": "pág. 26",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-40.PDF"
+    }
+   ],
+   "gaps": "Proposición de ley sin memoria de impacto en el debate; los efectos son argumentos de los intervinientes y no hay datos que cuantifiquen el efecto sobre la clandestinidad.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion023/20240222/Votacion017/VOT_20240222110807.json": {
@@ -524,6 +932,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que más educación afectivo-sexual ayude a los jóvenes a entender el consentimiento y a distinguir lo real de lo que ven en la pornografía.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 195 (2026-06-23)",
+     "locator": "pág. 45",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-195.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reforzar la coeducación y la educación emocional podría reducir estereotipos de género y prevenir la violencia sexual y machista entre jóvenes.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 195 (2026-06-23)",
+     "locator": "pág. 48",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-195.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una medida impulsada desde el Estado podría invadir competencias educativas de las comunidades autónomas y no respetar lo que ya hacen sus centros.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 195 (2026-06-23)",
+     "locator": "pág. 51",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-195.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Al ser una proposición sin base jurídica ni financiación, podría quedarse en una declaración sin efecto real en las aulas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 195 (2026-06-23)",
+     "locator": "pág. 54",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-195.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin más profesionales, formación del profesorado y recursos, podría quedarse en más papeleo para los centros sin cambios prácticos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 195 (2026-06-23)",
+     "locator": "pág. 55",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-195.PDF"
+    }
+   ],
+   "gaps": "Proposición no de ley sin memoria oficial de impacto; los efectos son argumentos del debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion191/20260625/Votacion015/VOT_20260625150806.json": {
@@ -565,6 +1022,55 @@
     "note": "Sin cifra oficial específica; delitos de odio ya acotan",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una estrategia con prevención, detección, protección y reparación podría dar a las víctimas asistencia psicológica, asesoramiento jurídico y acompañamiento.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 195 (2026-06-23)",
+     "locator": "pág. 59",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-195.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Ayudas económicas específicas y una alternativa de vivienda podrían facilitar que las víctimas denuncien, al romper su dependencia económica y familiar de quienes las someten.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 195 (2026-06-23)",
+     "locator": "pág. 59",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-195.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Estudios, estadísticas y seguimiento periódico podrían aportar datos que hoy faltan sobre una violencia que a menudo no llega a denunciarse.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 195 (2026-06-23)",
+     "locator": "pág. 59",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-195.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Estas prácticas podrían causar depresión, ansiedad, estrés postraumático, autolesiones e ideación suicida, por lo que no actuar mantendría ese daño.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 195 (2026-06-23)",
+     "locator": "pág. 68",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-195.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Nombrar instituciones concretas en documentos oficiales podría estigmatizarlas, y la estrategia podría dejar fuera a las familias cuando hay menores implicados.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 195 (2026-06-23)",
+     "locator": "pág. 66",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-195.PDF"
+    }
+   ],
+   "gaps": "Moción aprobada sin memoria oficial de impacto; no se detalla coste ni calendario de la estrategia. Los efectos son argumentos del debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion188/20260618/Votacion001/VOT_20260618162159.json": {
@@ -600,6 +1106,63 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Protocolos de denuncia y apoyo psicológico y legal a las víctimas podrían animar a denunciar, cuando hoy solo se denuncia una parte pequeña de las discriminaciones.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 192 (2026-06-16)",
+     "locator": "pág. 52",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-192.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Herramientas de actuación inmediata y sanciones efectivas y homogéneas podrían hacer más seguros los recintos deportivos y acabar con la impunidad.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 192 (2026-06-16)",
+     "locator": "pág. 53",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-192.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Exigir responsabilidad a las plataformas digitales podría proteger mejor a las víctimas de discursos de odio en redes.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 192 (2026-06-16)",
+     "locator": "pág. 53",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-192.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría quedarse en una declaración sin efecto si no se desarrolla el régimen sancionador que ya prevé la ley del deporte.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 192 (2026-06-16)",
+     "locator": "pág. 48",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-192.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una definición amplia de discurso de odio podría abarcar conductas lícitas, como pitar un himno o lucir un símbolo en una camiseta.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 192 (2026-06-16)",
+     "locator": "pág. 51",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-192.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría aplicarse de forma desigual: se señaló que ciertos símbolos son retirados o sancionados y que no todas las aficiones reciben el mismo trato.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 192 (2026-06-16)",
+     "locator": "pág. 49",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-192.PDF"
+    }
+   ],
+   "gaps": "Proposición no de ley sin memoria oficial de impacto; los efectos son argumentos del debate. No hay datos sobre su efecto en la práctica.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion174/20260422/Votacion008/VOT_20260422151953.json": {
@@ -634,6 +1197,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Impulsar la erradicación del matrimonio forzado podría evitar que niñas vean interrumpida su educación y sufran violencia, y darles opciones de futuro y autonomía.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 179 (2026-04-21)",
+     "locator": "pág. 46",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-179.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una cooperación con financiación estable, coordinación y evaluación, apoyada en organizaciones locales de mujeres, podría dar más eficacia a la lucha contra esta práctica.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 179 (2026-04-21)",
+     "locator": "pág. 50",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-179.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Actuar sobre las causas, como la pobreza, la falta de educación y la desigualdad, por ejemplo con escuelas abiertas para todas las niñas, podría reducir estos matrimonios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 179 (2026-04-21)",
+     "locator": "pág. 50",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-179.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Si la iniciativa se queda en declaraciones sin recursos adicionales, podría no cambiar nada: se advirtió del riesgo de «literatura institucional» frente a presupuesto y ejecución.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 179 (2026-04-21)",
+     "locator": "pág. 52",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-179.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin condiciones verificables en la cooperación ni presión diplomática real hacia países donde esta práctica existe, la iniciativa podría tener poco efecto.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 179 (2026-04-21)",
+     "locator": "pág. 49",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-179.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria de impacto ni presupuesto asociado; los efectos son argumentos del debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion164/20260226/Votacion001/VOT_20260226153357.json": {
@@ -664,6 +1276,63 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una educación sexual integral podría mejorar la salud sexual y el bienestar emocional y reducir las violencias machistas, sexuales y homofóbicas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 168 (2026-02-24)",
+     "locator": "pág. 40",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-168.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Enseñar al alumnado, según su edad, a identificar situaciones de riesgo y a conocer los canales de denuncia podría favorecer la detección temprana de abusos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 168 (2026-02-24)",
+     "locator": "pág. 38",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-168.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Si la escuela no ofrece esta formación, ese vacío podría llenarlo internet y la pornografía, con estereotipos y desinformación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 168 (2026-02-24)",
+     "locator": "pág. 42",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-168.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Un plan estatal de coordinación y control podría recentralizar competencias educativas y chocar con modelos autonómicos ya desplegados.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 168 (2026-02-24)",
+     "locator": "pág. 39",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-168.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin profesorado formado, materiales, tiempo curricular y presupuesto suficientes, la obligación podría seguir aplicándose solo de forma puntual.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 168 (2026-02-24)",
+     "locator": "pág. 45",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-168.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Si los contenidos no se adaptan a la edad ni respetan el derecho de las familias a la formación según sus convicciones, podrían suscitar rechazo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 168 (2026-02-24)",
+     "locator": "pág. 48",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-168.PDF"
+    }
+   ],
+   "gaps": "Proposición no de ley sin memoria oficial de impacto; los efectos son argumentos del debate. Se vota en los términos de una transaccional que el debate no detalla.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion151/20251127/Votacion003/VOT_20251127124050.json": {
@@ -689,6 +1358,63 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Combatir los discursos que niegan la violencia de género podría reducir el riesgo para la vida de las mujeres y evitar que se ponga en duda su palabra.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 154 (2025-11-25)",
+     "locator": "pág. 38",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-154.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Formar a jueces, policías y sanitarios y reforzar centros de crisis y recursos de acogida podría evitar violencia institucional y ayudar a las mujeres a denunciar.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 154 (2025-11-25)",
+     "locator": "pág. 42",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-154.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Educación y formación obligatorias, con protocolos actualizados, podrían ayudar a los adolescentes a reconocer el control y la presión como violencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 154 (2025-11-25)",
+     "locator": "pág. 48",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-154.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Si los dispositivos de protección de las víctimas no funcionan bien, las mujeres podrían quedar desprotegidas por mucho que se combata el negacionismo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 154 (2025-11-25)",
+     "locator": "pág. 50",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-154.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Pedir al Gobierno lo que ya recoge el Pacto de Estado podría no aportar medidas nuevas; lo urgente sería garantizar que la tecnología de protección funcione.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 154 (2025-11-25)",
+     "locator": "pág. 45",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-154.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Definir la violencia solo como la ejercida contra mujeres en pareja podría dejar sin atención otras violencias dentro del hogar y reducir la eficacia de las políticas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 154 (2025-11-25)",
+     "locator": "pág. 49",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-154.PDF"
+    }
+   ],
+   "gaps": "Proposición no de ley: insta pero no obliga ni dota presupuesto. Los efectos son argumentos del debate; el desacuerdo sobre la definición de violencia de género es de fondo.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion121/20250619/Votacion003/VOT_20250619120739.json": {
@@ -730,6 +1456,47 @@
     "note": "Sin cifra oficial específica; delitos de odio ya acotan",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Condenar la prohibición y pedir medidas europeas podría aumentar la presión para frenarla y evitar que decisiones parecidas se extiendan a otros países.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 123 (2025-06-17)",
+     "locator": "pág. 45",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-123.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reclamar medidas a escala europea podría reforzar la defensa de derechos recogidos en la Carta de Derechos Fundamentales de la UE frente a su vulneración sostenida.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 123 (2025-06-17)",
+     "locator": "pág. 48",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-123.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Pronunciarse sobre la legislación de otro Estado podría percibirse como injerencia en su soberanía y como una crítica selectiva frente a otros países que también persiguen a este colectivo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 123 (2025-06-17)",
+     "locator": "pág. 55",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-123.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una proposición no de ley podría quedarse en un gesto simbólico sin efecto práctico si no va seguida de acciones diplomáticas o de sanciones concretas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 123 (2025-06-17)",
+     "locator": "pág. 50",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-123.PDF"
+    }
+   ],
+   "gaps": "Proposición no de ley sin memoria oficial de impacto; los efectos son argumentos del debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion085/20241212/Votacion001/VOT_20241212130537.json": {
@@ -760,6 +1527,39 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Difundir en centros de enseñanza y otros espacios los nombres de las mujeres constituyentes podría dar visibilidad a su papel y evitar que su aportación se olvide.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 86 (2024-12-10)",
+     "locator": "pág. 35",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-86.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Centrar el homenaje en las parlamentarias constituyentes podría dejar en segundo plano a otras mujeres que resistieron al franquismo y lucharon por las libertades sin ser diputadas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 86 (2024-12-10)",
+     "locator": "pág. 36",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-86.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Se advirtió que difundir el relato de la Transición en las escuelas podría presentar una versión idealizada de ese periodo y de la Constitución.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 86 (2024-12-10)",
+     "locator": "pág. 36",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-86.PDF"
+    }
+   ],
+   "gaps": "Proposición de carácter simbólico, sin memoria oficial de impacto; los efectos son argumentos del debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion068/20241016/Votacion005/VOT_20241017130155.json": {
@@ -795,6 +1595,63 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Contar con más datos sobre la violencia de género digital podría permitir reforzar y adecuar las políticas públicas de prevención, detección y atención.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 70 (2024-10-15)",
+     "locator": "pág. 52",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-70.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Regular a las plataformas para que retiren contenidos de violencia digital podría reducir la difusión de agresiones y la sensación de impunidad.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 70 (2024-10-15)",
+     "locator": "pág. 51",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-70.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Dar a la CNMC capacidad de inspeccionar y sancionar podría hacer cumplir el Reglamento de Servicios Digitales en España.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 70 (2024-10-15)",
+     "locator": "pág. 57",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-70.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Al ser una proposición no vinculante, podría tener poco efecto sin una ley con contenido normativo que regule la detección e intervención.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 70 (2024-10-15)",
+     "locator": "pág. 51",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-70.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Tratar las redes en sí mismas como el problema podría errar el diagnóstico: se señaló que las plataformas son herramientas y que hace falta concienciar y educar.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 70 (2024-10-15)",
+     "locator": "pág. 47",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-70.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Algunas medidas podrían duplicar lo que ya cubren el Código Penal y las fuerzas de seguridad, sin mejorar su cumplimiento.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 70 (2024-10-15)",
+     "locator": "pág. 49",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-70.PDF"
+    }
+   ],
+   "gaps": "Proposición no de ley sin memoria oficial de impacto; los efectos son argumentos del debate. No hay datos sobre el efecto de cada medida.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion049/20240620/Votacion008/VOT_20240620132731.json": {
@@ -835,6 +1692,63 @@
     "note": "Delitos de odio miden el colectivo",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un acuerdo de país contra los discursos de odio podría frenar el aumento de agresiones a colectivos vulnerables que se atribuye a la expansión de esos discursos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 49 (2024-06-18)",
+     "locator": "pág. 44",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-49.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Programas en centros educativos, campañas de sensibilización y formación laboral podrían reducir la discriminación y la hostilidad hacia minorías.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 49 (2024-06-18)",
+     "locator": "pág. 46",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-49.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Combatir el discurso de odio podría proteger la igualdad y la no discriminación como expresión de la dignidad humana, sin amparo en la libertad de expresión.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 49 (2024-06-18)",
+     "locator": "pág. 48",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-49.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Las campañas de sensibilización podrían quedarse cortas si no se acompañan de políticas que den alternativas a las mayorías sociales y atiendan el descontento.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 49 (2024-06-18)",
+     "locator": "pág. 46",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-49.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "La lista de motivos de discriminación podría dejar fuera otros, como la lengua, y así dejar sin protección a quienes la sufren.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 49 (2024-06-18)",
+     "locator": "pág. 46",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-49.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin la autoridad independiente prevista en la ley LGTBI y sin sanciones aplicables, las medidas podrían quedar en declaraciones con poco efecto.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 49 (2024-06-18)",
+     "locator": "pág. 47",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-49.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; las cifras de delitos de odio y sus causas son afirmaciones del debate, no verificadas aquí.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion033/20240321/Votacion003/VOT_20240321105710.json": {
@@ -870,6 +1784,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Revisar el protocolo contra el acoso sexual y fijar sanciones por incumplirlo podría lograr que se active en las denuncias y que la Administración dé ejemplo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 33 (2024-03-19)",
+     "locator": "pág. 64",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-33.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Acompañar a las víctimas y activar medidas de protección podría evitar que una persona acosada deba volver a trabajar junto a quien la agredió.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 33 (2024-03-19)",
+     "locator": "pág. 64",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-33.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Planes de formación continua y mecanismos de detección temprana podrían ayudar a identificar el acoso antes y a proteger a las víctimas y a su entorno.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 33 (2024-03-19)",
+     "locator": "pág. 63",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-33.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Presentar un caso individual como situación general podría perjudicar la imagen de un organismo público de investigación y dejarlo expuesto.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 33 (2024-03-19)",
+     "locator": "pág. 66",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-33.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Si la lista de medidas solo repite lo que el organismo ya hace, podría quedarse corta y no cambiar la protección real de las víctimas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 33 (2024-03-19)",
+     "locator": "pág. 63",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-33.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; el debate cita un caso concreto y no cuantifica el alcance del acoso ni la eficacia de los protocolos actuales.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion142/20251028/Votacion010/VOT_20251028204555.json": {
@@ -891,6 +1854,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion070/20241023/Votacion024/VOT_20241023184405.json": {
@@ -942,6 +1911,31 @@
     "note": "Sin cifra oficial específica; delitos de odio ya acotan",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Eliminar subvenciones consideradas innecesarias podría reducir gasto público improductivo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 40 (2024-05-21)",
+     "locator": "pág. 67",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-40.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Eliminar subvenciones ligadas a igualdad y memoria democrática podría suponer un retroceso en derechos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 40 (2024-05-21)",
+     "locator": "pág. 68",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-40.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; el debate no cuantifica la pérdida de recaudación ni el ahorro de las subvenciones.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion191/20260625/Votacion004/VOT_20260625150745.json": {
@@ -978,6 +1972,12 @@
     "note": "Sin cifra oficial específica; delitos de odio ya acotan",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion076/20241114/Votacion012/VOT_20241114151020.json": {
@@ -1003,6 +2003,55 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Sustituir los juzgados unipersonales por tribunales de instancia podría igualar la carga de trabajo y unificar criterios; las oficinas de justicia permitirían hacer trámites desde el propio municipio.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 56 (2024-07-11)",
+     "locator": "pág. 30",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-56.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que los medios alternativos de solución de conflictos descongestionen la justicia y hagan más habitual resolver los litigios sin ir a juicio.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 91 (2024-12-19)",
+     "locator": "pág. 49",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-91.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que los juzgados de violencia sobre la mujer asuman las violencias sexuales podría mejorar el acceso a la justicia de las víctimas, con justicia gratuita.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 91 (2024-12-19)",
+     "locator": "pág. 44",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-91.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Concentrar competencias en los tribunales de instancia podría vaciar los pequeños juzgados y recortar servicios en el medio rural, alejando la justicia de la ciudadanía.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 56 (2024-07-11)",
+     "locator": "pág. 24",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-56.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "El nuevo sistema de acciones colectivas podría dar un poder excesivo a fondos de litigación y perjudicar a las empresas, con riesgo para la seguridad jurídica.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 56 (2024-07-11)",
+     "locator": "pág. 22",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-56.PDF"
+    }
+   ],
+   "gaps": "Debate de enmienda de totalidad y de veto del Senado; no hay memoria de impacto en el debate. No se detalla qué enmiendas concretas causan el efecto sobre desahucios.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion056/20240723/Votacion041/VOT_20240723221711.json": {
@@ -1022,6 +2071,55 @@
     "verdict": "none",
     "note": "Bloque «resto de las enmiendas» sin texto individual extraído; no se puede atribuir un efecto concreto a cada una.",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una ley básica podría dar a los bomberos forestales reconocimiento legal y seguridad jurídica en sus funciones, que hasta ahora figuraban solo como ocupación estadística.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 63",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Homogeneizar el colectivo y aplicar coeficientes reductores de la edad de jubilación podría mejorar sus condiciones laborales en todo el país.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 57",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Mejores condiciones de trabajo podrían reducir la rotación y el agotamiento del personal y mejorar la eficacia del servicio público de extinción.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 62",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Las excepciones previstas para Navarra y el País Vasco podrían mantener desigualdades de derechos laborales según la comunidad autónoma en la que trabaje cada bombero forestal.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 58",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Aprobarla sin contar con comunidades, ayuntamientos y órganos consultivos podría dificultar su aplicación, pues son quienes en buena parte tendrán que aplicarla.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 60",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    }
+   ],
+   "gaps": "Las votaciones son de enmiendas; los argumentos del debate valoran la ley en su conjunto. No se aportan estimaciones de coste ni de plazos de aplicación.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1060,6 +2158,55 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Las deportistas profesionales embarazadas o en adopción podrían ampliar un año su contrato y tener permisos de conciliación, algo que antes casi no se les aplicaba.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 68",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que una mayor igualdad de oportunidades entre mujeres y hombres ayude a que lleguen a los puestos de responsabilidad según su mérito y a impulsar el crecimiento económico.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 75",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "La ley podría quedarse en las mujeres que ya pueden llegar a los puestos más altos y no mejorar la vida de las mujeres con empleos precarios, cuidados o pocos ingresos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 70",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Cambiar «obligación» por «fomento» y reducir los órganos obligados podría dejar la igualdad sin avanzar, porque aplicar políticas neutras ante una desigualdad existente la mantendría.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 73",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Un tope máximo de presencia por sexo podría penalizar a las mujeres cuando superen el 60 %, y limitar su acceso a cargos de liderazgo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 66",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    }
+   ],
+   "gaps": "Proyecto sin cifras de impacto en el debate; los efectos son argumentos de quienes intervinieron y no hay evaluación oficial citada.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion052/20240627/Votacion019/VOT_20240627130351.json": {
@@ -1097,6 +2244,12 @@
     "note": "Texto de la enmienda 83 truncado en el lote; se recoge solo el inicio del apartado d).",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "La única votación es sobre las enmiendas 70 y 83 (paridad en el Consejo y exclusión de contratos públicos de la desindexación); el debate no argumenta sobre ellas, solo sobre la ley en su conjunto.",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion040/20240523/Votacion041/VOT_20240523141011.json": {
@@ -1121,6 +2274,63 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que incluir las enseñanzas artísticas superiores en el espacio de la enseñanza superior las equipare con el resto de estudios superiores y dignifique al sector.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 38",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que el alumnado gane derechos, como conciliar estudios, familia y trabajo, parar temporalmente los estudios, recibir educación inclusiva y participar en la toma de decisiones del centro.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 43",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría ampliar la oferta con disciplinas nuevas, como el circo o la escritura creativa, y mejorar la movilidad europea, la investigación y el acceso a la universidad de artistas de trayectoria reconocida.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 48",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría trasladar a las comunidades el coste de aplicar la ley si no se asegura una financiación propia y suficiente para los centros.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 49",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría crear un registro estatal de enseñanzas artísticas superiores que duplicaría al Registro de Universidades, Centros y Títulos, ya existente, y añadiría burocracia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 39",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Obligar a especializar centros que hoy dan a la vez enseñanzas superiores y profesionales podría dificultar el acceso fuera de las grandes ciudades, donde a veces hay un solo centro.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 31 (2024-03-14)",
+     "locator": "pág. 4",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-31.PDF"
+    }
+   ],
+   "gaps": "Sin memoria de impacto en el lote; los efectos son argumentos del debate, y partes de varias intervenciones están truncadas en el extracto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1152,6 +2362,12 @@
     "verdict": "keep",
     "note": "Sin cifra oficial específica; delitos de odio ya acotan",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1188,6 +2404,12 @@
     "verdict": "keep",
     "note": "Sin cifra oficial específica; delitos de odio ya acotan",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1230,6 +2452,63 @@
     "note": "Sin cifra oficial específica; delitos de odio ya acotan",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "El paso de sanción administrativa a delito podría tener un efecto disuasorio sobre quienes ejercen estas prácticas, incluso dentro de la familia, sobre menores.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 197 (2026-06-25)",
+     "locator": "pág. 14",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-197.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que la vía penal, con intervención de jueces, responda mejor a estas prácticas que las sanciones administrativas, que se consideran insuficientes para una conducta tan grave.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 197 (2026-06-25)",
+     "locator": "pág. 15",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-197.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Penalizar las prácticas aunque la persona o su representante legal las consienta podría evitar que se amparen en un consentimiento que no sería plenamente libre.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 197 (2026-06-25)",
+     "locator": "pág. 23",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-197.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin vivienda ni apoyo económico, las víctimas podrían seguir dependiendo de su entorno familiar y tener más difícil salir del espacio donde sufren la violencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 197 (2026-06-25)",
+     "locator": "pág. 14",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-197.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Las multas podrían quedar cubiertas con colectas a favor de quienes ejercen estas prácticas, con lo que perderían parte de su efecto disuasorio.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 197 (2026-06-25)",
+     "locator": "pág. 14",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-197.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Con penas de prisión, el delito podría alcanzar también a quien acuda por voluntad propia a un psicólogo, un sacerdote o un especialista, y no solo a tratamientos forzados o violentos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 197 (2026-06-25)",
+     "locator": "pág. 22",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-197.PDF"
+    }
+   ],
+   "gaps": "Proposición de ley sin memoria oficial de impacto en este lote; los efectos son argumentos del debate, sin evaluación de su alcance real.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion142/20251028/Votacion011/VOT_20251028204557.json": {
@@ -1250,6 +2529,31 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Revertir los efectos de la ley del solo sí es sí podría evitar rebajas de condena a agresores sexuales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 147 (2025-10-28)",
+     "locator": "pág. 52",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-147.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Dudar en público de las pulseras podría hacer que las mujeres pierdan confianza en las instituciones y rechacen el dispositivo al denunciar.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 147 (2025-10-28)",
+     "locator": "pág. 53",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-147.PDF"
+    }
+   ],
+   "gaps": "Los fallos del sistema de pulseras no están cuantificados en el debate y hay versiones opuestas sobre su eficacia; moción sin memoria oficial de impacto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion142/20251028/Votacion012/VOT_20251028204558.json": {
@@ -1270,6 +2574,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion142/20251028/Votacion013/VOT_20251028204559.json": {
@@ -1295,6 +2605,39 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Auditar el sistema de pulseras y el gasto de igualdad podría aclarar qué falla y cuánto dinero llega de verdad a las mujeres protegidas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 147 (2025-10-28)",
+     "locator": "pág. 52",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-147.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Dudar en público de las pulseras podría hacer que las mujeres pierdan confianza en las instituciones y rechacen el dispositivo al denunciar.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 147 (2025-10-28)",
+     "locator": "pág. 53",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-147.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Derogar la ley integral y suprimir el ministerio de Igualdad podría suponer un retroceso en los avances de protección frente a la violencia machista.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 147 (2025-10-28)",
+     "locator": "pág. 53",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-147.PDF"
+    }
+   ],
+   "gaps": "Los fallos del sistema de pulseras no están cuantificados en el debate y hay versiones opuestas sobre su eficacia; moción sin memoria oficial de impacto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion142/20251028/Votacion015/VOT_20251028204602.json": {
@@ -1315,6 +2658,31 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Eliminar subvenciones de la ley de igualdad podría liberar recursos para la protección directa de las víctimas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 147 (2025-10-28)",
+     "locator": "pág. 52",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-147.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Dudar en público de las pulseras podría hacer que las mujeres pierdan confianza en las instituciones y rechacen el dispositivo al denunciar.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 147 (2025-10-28)",
+     "locator": "pág. 53",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-147.PDF"
+    }
+   ],
+   "gaps": "Los fallos del sistema de pulseras no están cuantificados en el debate y hay versiones opuestas sobre su eficacia; moción sin memoria oficial de impacto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion056/20240723/Votacion057/VOT_20240723221728.json": {
@@ -1357,6 +2725,55 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Las deportistas profesionales embarazadas o en adopción podrían ampliar un año su contrato y tener permisos de conciliación, algo que antes casi no se les aplicaba.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 68",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que una mayor igualdad de oportunidades entre mujeres y hombres ayude a que lleguen a los puestos de responsabilidad según su mérito y a impulsar el crecimiento económico.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 75",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "La ley podría quedarse en las mujeres que ya pueden llegar a los puestos más altos y no mejorar la vida de las mujeres con empleos precarios, cuidados o pocos ingresos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 70",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Cambiar «obligación» por «fomento» y reducir los órganos obligados podría dejar la igualdad sin avanzar, porque aplicar políticas neutras ante una desigualdad existente la mantendría.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 73",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Un tope máximo de presencia por sexo podría penalizar a las mujeres cuando superen el 60 %, y limitar su acceso a cargos de liderazgo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 66",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    }
+   ],
+   "gaps": "Proyecto sin cifras de impacto en el debate; los efectos son argumentos de quienes intervinieron y no hay evaluación oficial citada.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion052/20240627/Votacion002/VOT_20240627130334.json": {
@@ -1388,6 +2805,55 @@
     "note": "Listas paritarias: electorado y escaños actuales",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Las deportistas profesionales embarazadas o en adopción podrían ampliar un año su contrato y tener permisos de conciliación, algo que antes casi no se les aplicaba.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 68",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que una mayor igualdad de oportunidades entre mujeres y hombres ayude a que lleguen a los puestos de responsabilidad según su mérito y a impulsar el crecimiento económico.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 75",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Permitir hasta tres mujeres seguidas en un tramo de cinco de la lista podría aumentar la presencia de mujeres, pues las cabezas de lista siguen siendo mayoritariamente hombres.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 54 (2024-06-27)",
+     "locator": "pág. 6",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-54.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "La ley podría quedarse en las mujeres que ya pueden llegar a los puestos más altos y no mejorar la vida de las mujeres con empleos precarios, cuidados o pocos ingresos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 70",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Un tope máximo de presencia por sexo podría penalizar a las mujeres cuando superen el 60 %, y limitar su acceso a cargos de liderazgo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 66",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    }
+   ],
+   "gaps": "Proyecto sin cifras de impacto en el debate; los efectos son argumentos de quienes intervinieron y no hay evaluación oficial citada.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion052/20240627/Votacion006/VOT_20240627130338.json": {
@@ -1412,6 +2878,47 @@
     "verdict": "keep",
     "note": "Consejos de cotizadas miden la medida",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Las deportistas profesionales embarazadas o en adopción podrían ampliar un año su contrato y tener permisos de conciliación, algo que antes casi no se les aplicaba.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 68",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que una mayor igualdad de oportunidades entre mujeres y hombres ayude a que lleguen a los puestos de responsabilidad según su mérito y a impulsar el crecimiento económico.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 75",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "La ley podría quedarse en las mujeres que ya pueden llegar a los puestos más altos y no mejorar la vida de las mujeres con empleos precarios, cuidados o pocos ingresos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 70",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Un tope máximo de presencia por sexo podría penalizar a las mujeres cuando superen el 60 %, y limitar su acceso a cargos de liderazgo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 66",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    }
+   ],
+   "gaps": "Proyecto sin cifras de impacto en el debate; los efectos son argumentos de quienes intervinieron y no hay evaluación oficial citada.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1439,6 +2946,47 @@
     "note": "Enmienda a toda la ley; cifras encajan",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Las deportistas profesionales embarazadas o en adopción podrían ampliar un año su contrato y tener permisos de conciliación, algo que antes casi no se les aplicaba.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 68",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que una mayor igualdad de oportunidades entre mujeres y hombres ayude a que lleguen a los puestos de responsabilidad según su mérito y a impulsar el crecimiento económico.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 75",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "La ley podría quedarse en las mujeres que ya pueden llegar a los puestos más altos y no mejorar la vida de las mujeres con empleos precarios, cuidados o pocos ingresos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 70",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Un tope máximo de presencia por sexo podría penalizar a las mujeres cuando superen el 60 %, y limitar su acceso a cargos de liderazgo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 66",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    }
+   ],
+   "gaps": "Proyecto sin cifras de impacto en el debate; los efectos son argumentos de quienes intervinieron y no hay evaluación oficial citada.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion052/20240627/Votacion009/VOT_20240627130341.json": {
@@ -1464,6 +3012,47 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Las deportistas profesionales embarazadas o en adopción podrían ampliar un año su contrato y tener permisos de conciliación, algo que antes casi no se les aplicaba.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 68",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que una mayor igualdad de oportunidades entre mujeres y hombres ayude a que lleguen a los puestos de responsabilidad según su mérito y a impulsar el crecimiento económico.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 75",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "La ley podría quedarse en las mujeres que ya pueden llegar a los puestos más altos y no mejorar la vida de las mujeres con empleos precarios, cuidados o pocos ingresos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 70",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Un tope máximo de presencia por sexo podría penalizar a las mujeres cuando superen el 60 %, y limitar su acceso a cargos de liderazgo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 66",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    }
+   ],
+   "gaps": "Proyecto sin cifras de impacto en el debate; los efectos son argumentos de quienes intervinieron y no hay evaluación oficial citada.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion052/20240627/Votacion044/VOT_20240627130417.json": {
@@ -1500,6 +3089,47 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Las deportistas profesionales embarazadas o en adopción podrían ampliar un año su contrato y tener permisos de conciliación, algo que antes casi no se les aplicaba.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 68",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que una mayor igualdad de oportunidades entre mujeres y hombres ayude a que lleguen a los puestos de responsabilidad según su mérito y a impulsar el crecimiento económico.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 75",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "La ley podría quedarse en las mujeres que ya pueden llegar a los puestos más altos y no mejorar la vida de las mujeres con empleos precarios, cuidados o pocos ingresos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 70",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Un tope máximo de presencia por sexo podría penalizar a las mujeres cuando superen el 60 %, y limitar su acceso a cargos de liderazgo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 66",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    }
+   ],
+   "gaps": "Proyecto sin cifras de impacto en el debate; los efectos son argumentos de quienes intervinieron y no hay evaluación oficial citada.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion029/20240314/Votacion020/VOT_20240314123730.json": {
@@ -1536,6 +3166,63 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que incluir las enseñanzas artísticas superiores en el espacio de la enseñanza superior las equipare con el resto de estudios superiores y dignifique al sector.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 38",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que el alumnado gane derechos, como conciliar estudios, familia y trabajo, parar temporalmente los estudios, recibir educación inclusiva y participar en la toma de decisiones del centro.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 43",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría ampliar la oferta con disciplinas nuevas, como el circo o la escritura creativa, y mejorar la movilidad europea, la investigación y el acceso a la universidad de artistas de trayectoria reconocida.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 48",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría trasladar a las comunidades el coste de aplicar la ley si no se asegura una financiación propia y suficiente para los centros.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 49",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría crear un registro estatal de enseñanzas artísticas superiores que duplicaría al Registro de Universidades, Centros y Títulos, ya existente, y añadiría burocracia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 39",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Obligar a especializar centros que hoy dan a la vez enseñanzas superiores y profesionales podría dificultar el acceso fuera de las grandes ciudades, donde a veces hay un solo centro.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 31 (2024-03-14)",
+     "locator": "pág. 4",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-31.PDF"
+    }
+   ],
+   "gaps": "Sin memoria de impacto en el lote; los efectos son argumentos del debate, y partes de varias intervenciones están truncadas en el extracto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   }

@@ -43,6 +43,63 @@
     "note": "población de las tres capitales vascas",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una línea de alta velocidad podría acortar trayectos que hoy en tren duran el triple que en coche y hacer que el ferrocarril se use.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 29 (2024-03-12)",
+     "locator": "pág. 35",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-29.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Unir en 30 o 40 minutos las tres capitales vascas y con Madrid y Francia podría reducir la congestión y fomentar turismo y empleo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 29 (2024-03-12)",
+     "locator": "pág. 42",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-29.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Completar la conexión con el corredor navarro podría integrar Navarra en la red de alta velocidad y en el eje europeo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 29 (2024-03-12)",
+     "locator": "pág. 36",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-29.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Con la demanda prevista, la infraestructura podría no alcanzar los viajeros que se consideran necesarios para ser rentable.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 29 (2024-03-12)",
+     "locator": "pág. 40",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-29.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Si las inversiones no sirven para mercancías, el gran centro intermodal podría quedar fuera de la red.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 29 (2024-03-12)",
+     "locator": "pág. 40",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-29.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los precios de la alta velocidad y el impacto ambiental de la obra podrían limitar el acceso y el beneficio para la mayoría.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 29 (2024-03-12)",
+     "locator": "pág. 40",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-29.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; las cifras de demanda y rentabilidad son argumentos del debate, no datos verificados.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion106/20250410/Votacion008/VOT_20250410155146.json": {
@@ -68,6 +125,63 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Retirar el mapa y dialogar con las comunidades podría evitar que se pierdan paradas y rutas en pueblos y zonas despobladas, donde el autobús es la única movilidad.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 108 (2025-04-08)",
+     "locator": "pág. 37",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-108.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una financiación estable y licitar las concesiones caducadas con pliegos con menos barreras podría dar más competencia y transparencia al sistema.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 108 (2025-04-08)",
+     "locator": "pág. 37",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-108.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reorganizar la red de autobuses podría mejorar la eficiencia, la sostenibilidad y la calidad del transporte interurbano por carretera.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 108 (2025-04-08)",
+     "locator": "pág. 40",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-108.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "El mapa podría suprimir la ruta en un 74 % de los municipios, según se afirmó, y dificultar ir al médico, al trabajo o a ver a la familia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 108 (2025-04-08)",
+     "locator": "pág. 39",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-108.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Retirar el borrador podría prolongar las concesiones caducadas desde hace más de una década y retrasar la modernización del sistema.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 108 (2025-04-08)",
+     "locator": "pág. 40",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-108.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Cambiar el mapa podría trasladar costes del servicio a las administraciones autonómicas o locales si no llega financiación del Estado.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 108 (2025-04-08)",
+     "locator": "pág. 47",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-108.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate y el mapa concesional citado es un borrador.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion114/20250527/Votacion001/VOT_20250527201600.json": {
@@ -98,6 +212,47 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Más controles de alcohol y drogas a conductores profesionales de viajeros y mercancías podrían reducir accidentes graves, porque pasan más horas en la vía y sus vehículos causan daños mayores.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 118 (2025-05-27)",
+     "locator": "pág. 6",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-118.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Combinar prevención, acompañamiento y rehabilitación, y no solo sanciones, podría ayudar a detectar consumos y adicciones no diagnosticadas entre conductores profesionales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 118 (2025-05-27)",
+     "locator": "pág. 7",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-118.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Unos reconocimientos médicos anuales y controles estrictos podrían resultar excesivos para los trabajadores y no encajar con los plazos de validez de los permisos profesionales fijados por la normativa europea.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 118 (2025-05-27)",
+     "locator": "pág. 11",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-118.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Si el texto no modifica el párrafo que dice cambiar, la reforma podría quedar sin efecto práctico o generar inseguridad jurídica.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 118 (2025-05-27)",
+     "locator": "pág. 12",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-118.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate y algunos intervinientes cuestionan su redacción técnica.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion132/20250917/Votacion004/VOT_20250917194023.json": {
@@ -128,6 +283,63 @@
     "note": "población de los dos municipios con estación",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Sustituir el bucle ferroviario de Pamplona y construir una nueva estación podría eliminar limitaciones que frenan el desarrollo urbano y mejorar el transporte.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 136 (2025-09-16)",
+     "locator": "pág. 57",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-136.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una red ferroviaria moderna y bien conectada podría reforzar la cohesión territorial, el desarrollo económico y la transición ecológica.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 136 (2025-09-16)",
+     "locator": "pág. 57",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-136.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Las infraestructuras ferroviarias podrían mejorar la competitividad de la región y reducir su aislamiento.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 136 (2025-09-16)",
+     "locator": "pág. 60",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-136.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una estación de Tudela alejada del centro podría obligar a más gente a usar el vehículo privado y alargar los tiempos de acceso.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 136 (2025-09-16)",
+     "locator": "pág. 57",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-136.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Priorizar la alta velocidad podría seguir restando inversión a la red convencional, las cercanías y las mercancías, con una deuda ya elevada del gestor.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 136 (2025-09-16)",
+     "locator": "pág. 58",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-136.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Cerrar trazados sin comparar alternativas podría llevar a decisiones que no mejoran el servicio diario, parten el territorio o son muy costosas de revertir.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 136 (2025-09-16)",
+     "locator": "pág. 59",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-136.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; los efectos son argumentos del debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion166/20260318/Votacion004/VOT_20260318175329.json": {
@@ -148,6 +360,63 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Modernizar el trazado existente para tráfico mixto podría mejorar la conexión entre capitales y dar servicio de cercanías a pueblos y comarcas del eje que hoy carecen de él.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 172 (2026-03-18)",
+     "locator": "pág. 94",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-172.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una plataforma que combine viajeros, mercancías y cercanías podría facilitar el transporte de mercancías por tren y permitir una renovación integral de la red en un plazo razonable.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 172 (2026-03-18)",
+     "locator": "pág. 87",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-172.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reorientar la inversión desde la alta velocidad hacia la red convencional podría frenar el declive de las cercanías, el tren de mercancías y el estado de conservación de las vías.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 172 (2026-03-18)",
+     "locator": "pág. 85",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-172.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Mezclar alta velocidad, mercancías y cercanías en una sola plataforma sobre trazados antiguos podría ser inviable: el tráfico va a la velocidad del tren más lento y faltaría suelo urbano para estaciones.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 172 (2026-03-18)",
+     "locator": "pág. 88",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-172.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Que trenes a alta velocidad crucen andenes con viajeros de cercanías podría plantear un problema grave de seguridad.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 172 (2026-03-18)",
+     "locator": "pág. 88",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-172.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Renunciar a una infraestructura nueva podría retrasar la conexión con la red transeuropea y restar competitividad al tren frente al coche y al avión para viajeros y mercancías.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 172 (2026-03-18)",
+     "locator": "pág. 89",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-172.PDF"
+    }
+   ],
+   "gaps": "Moción rechazada; sin memoria oficial de impacto ni estudio comparado de alternativas en el debate. Se cita falta de proyecto y plazos de la Y vasca, sin resolver.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion200/20260923/Votacion001/VOT_20260923145112.json": {
@@ -178,6 +447,63 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "La variante sur ferroviaria podría mejorar la competitividad del puerto de Bilbao y liberar de trenes pesados otras líneas, con más capacidad y servicios de viajeros más regulares.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 206 (2026-09-22)",
+     "locator": "pág. 41",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-206.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Canalizar más mercancías por la Y vasca, pensada para tráfico mixto y ancho europeo, podría evitar que el aumento de trenes recaiga sobre los municipios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 206 (2026-09-22)",
+     "locator": "pág. 42",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-206.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Pasar mercancías de la carretera al tren podría reducir camiones, congestión, contaminación y costes logísticos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 206 (2026-09-22)",
+     "locator": "pág. 52",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-206.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Más trenes de mercancías, y más largos, por la línea C3 podrían aumentar el ruido, las vibraciones y la circulación nocturna en los pueblos y presionar una línea que también da servicio a viajeros.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 206 (2026-09-22)",
+     "locator": "pág. 41",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-206.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "La variante podría trasladar o repartir el problema en vez de resolverlo: el tráfico pesado seguiría pasando por los mismos lugares y por más sitios, con coste ecológico.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 206 (2026-09-22)",
+     "locator": "pág. 54",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-206.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los municipios afectados podrían quedarse sin garantías claras, y las medidas de mitigación podrían llegar después de decidida la obra.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 206 (2026-09-22)",
+     "locator": "pág. 47",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-206.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate. No se han definido todavía las medidas de mitigación ni cuánto aumentarán las circulaciones.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion201/20260929/Votacion002/VOT_20260929202713.json": {
@@ -203,6 +529,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Bajar la tasa máxima de alcohol podría salvar vidas, porque el alcohol aumenta el tiempo de reacción y altera la percepción de distancias y velocidad.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 208 (2026-09-29)",
+     "locator": "pág. 27",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-208.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reducir la tasa podría ayudar a que no se normalice mezclar consumo y conducción, y a decidir antes quién conduce y no bebe.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 208 (2026-09-29)",
+     "locator": "pág. 33",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-208.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Si la mortalidad se concentra en tasas muy altas y en alcohol con drogas, bajar la tasa podría tener poco efecto sobre el riesgo principal.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 208 (2026-09-29)",
+     "locator": "pág. 29",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-208.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin más transporte público y alternativas de movilidad, bajar la tasa podría dificultar volver a casa tras celebraciones sin conducir, sobre todo fuera de las ciudades.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 208 (2026-09-29)",
+     "locator": "pág. 29",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-208.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Tramitarla como proposición, sin informes técnicos previos, podría dejar sin analizar el impacto en el sector agroalimentario y en el mundo rural.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 208 (2026-09-29)",
+     "locator": "pág. 34",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-208.PDF"
+    }
+   ],
+   "gaps": "Sin memoria oficial de impacto al ser proposición de ley; el debate cita datos de siniestralidad pero no el efecto esperado de la nueva tasa ni su coste de aplicación.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   }
  }

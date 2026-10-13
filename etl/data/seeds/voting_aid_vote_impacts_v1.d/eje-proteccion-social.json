@@ -274,6 +274,47 @@
     "note": "Sin texto extraído: votación final de toda la ley (dictamen completo); sin un único cambio concreto que atribuir a un colectivo.",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que la ley fije la financiación estatal del 50 % del gasto certificado podría dar más recursos a las comunidades autónomas y reducir las listas de espera de dependencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 116",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Eliminar incompatibilidades entre prestaciones y reconocer automáticamente la discapacidad a quien ya tiene dependencia podría evitar trámites duplicados y agilizar los procedimientos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 198 (2026-07-14)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-198.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los derechos reconocidos podrían quedarse en el papel si la financiación no llega, si no llega a tiempo o si dependen del lugar de residencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 111",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin más dinero y competencias, la dependencia podría seguir con esperas de entre diez meses y un año desde el diagnóstico hasta recibir la prestación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 121",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley sin memoria de impacto en este material; los efectos son argumentos del debate y no se cuantifican su coste ni el calendario de aplicación.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion183/20260528/Votacion012/VOT_20260528125351.json": {
@@ -535,6 +576,63 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Quien ha cotizado cuarenta años o más y se jubila antes podría conservar su pensión sin una reducción permanente de por vida, que en el debate se sitúa hasta en un 26 %.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 206 (2026-09-22)",
+     "locator": "pág. 28",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-206.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría corregirse que paguen una penalización de por vida quienes se jubilan antes por despido, paro de larga duración o desgaste de trabajos físicos y no por una decisión realmente libre.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 206 (2026-09-22)",
+     "locator": "pág. 26",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-206.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Al permitir recalcular pensiones ya reconocidas, las personas que ya están jubiladas con carreras largas también podrían ver mejorada su pensión.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 206 (2026-09-22)",
+     "locator": "pág. 32",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-206.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría aumentar el coste para la Seguridad Social, y se señala que la propuesta no incluye una memoria económica que permita conocerlo, sobre todo por el recálculo de pensiones ya reconocidas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 206 (2026-09-22)",
+     "locator": "pág. 37",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-206.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Quien sigue trabajando hasta la edad ordinaria de jubilación podría sentirse agraviado frente a quien se jubila antes sin penalización.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 206 (2026-09-22)",
+     "locator": "pág. 26",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-206.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Fijar el umbral en cuarenta años podría crear un salto injusto: un solo mes más de cotización cambiaría la pensión de por vida, sin distinguir cuántos años se adelanta la jubilación ni las bases cotizadas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 206 (2026-09-22)",
+     "locator": "pág. 36",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-206.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria económica oficial; se desconoce el coste y el número exacto de personas afectadas. Los efectos son argumentos del debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion154/20251211/Votacion025/VOT_20251211175112.json": {
@@ -596,6 +694,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que devuelva tiempo a las familias y confianza a las empresas, y que invierta mejor el gasto público en conciliación sin aumentarlo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 142 (2025-10-14)",
+     "locator": "pág. 25",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-142.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Facilitar la conciliación y la corresponsabilidad podría ayudar también a aumentar la natalidad, aunque no deba ser su fin último.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 142 (2025-10-14)",
+     "locator": "pág. 30",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-142.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Las deducciones y bonificaciones fiscales podrían beneficiar sobre todo a las rentas más altas y servir poco a quien no puede adelantar el dinero de una cuidadora o una escuela infantil.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 142 (2025-10-14)",
+     "locator": "pág. 33",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-142.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Eliminar el periodo obligatorio de disfrute simultáneo tras el parto podría hacer que las mujeres carguen solas con los cuidados iniciales mientras los hombres vuelven antes al trabajo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 142 (2025-10-14)",
+     "locator": "pág. 28",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-142.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin presupuesto garantizado ni sanciones, y con permisos cuya retribución no está asegurada, las medidas podrían quedar en papel mojado ante cualquier ajuste presupuestario.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 142 (2025-10-14)",
+     "locator": "pág. 28",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-142.PDF"
+    }
+   ],
+   "gaps": "Proposición de ley sin memoria oficial de impacto en el debate; no se cuantifica el coste ni cuántas familias se beneficiarían.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion200/20260923/Votacion002/VOT_20260923145115.json": {
@@ -616,6 +763,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un título estatal de familia monoparental podría facilitar el acceso, en igualdad de derechos, a prestaciones y ayudas específicas en todo el Estado a hogares con mayor riesgo de pobreza.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 206 (2026-09-22)",
+     "locator": "pág. 57",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-206.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una prestación universal de crianza para familias con menores de 3 años podría reducir la pobreza infantil al llegar de forma automática, sin trabas ni burocracia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 206 (2026-09-22)",
+     "locator": "pág. 57",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-206.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reconocer a las personas cuidadoras principales con una prestación económica ligada al salario mínimo podría permitirles cuidar sin renunciar a sus condiciones de vida.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 206 (2026-09-22)",
+     "locator": "pág. 55",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-206.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Se ha señalado que el proyecto podría invadir competencias de las comunidades autónomas, lo que exigiría pactar límites competenciales para que pueda aprobarse.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 206 (2026-09-22)",
+     "locator": "pág. 58",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-206.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Se ha señalado que las nuevas prestaciones a cuidadoras no vienen cuantificadas, valoradas ni presupuestadas, por lo que su coste y su financiación podrían quedar sin concretar.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 206 (2026-09-22)",
+     "locator": "pág. 68",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-206.PDF"
+    }
+   ],
+   "gaps": "Proposición no de ley sin memoria oficial de impacto; los efectos son argumentos del debate y no hay estimación de coste de las prestaciones.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion134/20250924/Votacion001/VOT_20250924171303.json": {
@@ -645,6 +841,47 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Exigir el certificado consular de nacimiento podría ayudar a que se cumpla la norma vigente y a detectar casos en que se cobra la prestación sin ejercer la paternidad.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 138 (2025-09-23)",
+     "locator": "pág. 43",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-138.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Pedir certificados consulares y trámites adicionales podría dejar sin acceso al permiso a quienes tienen menos recursos o viven lejos de un consulado.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 138 (2025-09-23)",
+     "locator": "pág. 44",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-138.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría crear inseguridad jurídica, porque el nuevo requisito colisionaría con otro artículo ya vigente de la misma norma.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 138 (2025-09-23)",
+     "locator": "pág. 51",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-138.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Embajadas y consulados podrían no tener personal ni presupuesto para verificar documentos con plazos estrictos, y no poder cumplir esa función.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 138 (2025-09-23)",
+     "locator": "pág. 52",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-138.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; en el debate se discute cuántos casos de fraude hay y no se aportan datos contrastados sobre su alcance.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion103/20250326/Votacion001/VOT_20250326194434.json": {
@@ -675,6 +912,63 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Simplificar la tramitación del bono social podría hacer que lleguen a pedirlo más hogares vulnerables, que hoy quedan fuera por la burocracia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 106 (2025-03-25)",
+     "locator": "pág. 53",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-106.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Dejar de dar el bono de forma automática a familias numerosas con rentas medias y altas podría concentrar la ayuda en los hogares más vulnerables.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 106 (2025-03-25)",
+     "locator": "pág. 53",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-106.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Avanzar hacia una concesión más automática podría evitar que las personas más pobres tengan que sortear trámites para recibir el descuento.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 106 (2025-03-25)",
+     "locator": "pág. 56",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-106.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Quitar el acceso automático a algunas familias numerosas podría dejar sin ayuda a hogares con ingresos bajos: cerca de doscientos mil, según se dijo en el debate.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 106 (2025-03-25)",
+     "locator": "pág. 58",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-106.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Condicionar el acceso de las familias numerosas a la renta podría verse como una penalización de tener hijos y desincentivar la natalidad.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 106 (2025-03-25)",
+     "locator": "pág. 52",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-106.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Mejorar el bono social podría no bastar si no se actúa también sobre los costes que encarecen la energía, y no solo sobre las ayudas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 106 (2025-03-25)",
+     "locator": "pág. 52",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-106.PDF"
+    }
+   ],
+   "gaps": "Proposición no de ley sin memoria oficial de impacto; los efectos son argumentos del debate y las cifras de hogares excluidos no se contrastan.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion098/20250313/Votacion008/VOT_20250313133859.json": {
@@ -700,6 +994,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Retribuir el permiso de ocho semanas podría permitir que lo usen también las familias con menos ingresos, sobre todo las monoparentales, hoy frenadas por no cobrar durante el permiso.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 100 (2025-03-11)",
+     "locator": "pág. 57",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-100.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que retribuirlo ayude a cumplir la directiva europea y a evitar nuevas sanciones por incumplimiento.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 100 (2025-03-11)",
+     "locator": "pág. 57",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-100.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Permisos de cuidado retribuidos podrían repartir mejor los cuidados entre mujeres y hombres y reducir el peso del trabajo familiar no remunerado que recae sobre ellas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 100 (2025-03-11)",
+     "locator": "pág. 62",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-100.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Si no se aclara quién paga, el coste podría recaer en pequeñas y medianas empresas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 100 (2025-03-11)",
+     "locator": "pág. 63",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-100.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Introducir la medida sin diálogo ni gradualidad podría tener efectos no previstos en el presupuesto y en la vida laboral, sobre todo de las mujeres.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 100 (2025-03-11)",
+     "locator": "pág. 64",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-100.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de coste; el debate no cuantifica quién asumiría el pago ni el impacto presupuestario.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion091/20250212/Votacion004/VOT_20250212154039.json": {
@@ -736,6 +1079,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Medidas económicas y de conciliación podrían quitar los obstáculos que, según una encuesta citada, frenan tener hijos: falta de medios económicos y dificultades para conciliar vida laboral y familiar.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 95 (2025-02-12)",
+     "locator": "pág. 68",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-95.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "La gratuidad de la educación infantil de 0 a 3 años para todas las familias podría facilitar la conciliación y apoyar la natalidad.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 95 (2025-02-12)",
+     "locator": "pág. 75",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-95.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Medidas fiscales sin estudio de impacto podrían causar problemas de sostenibilidad presupuestaria a las comunidades autónomas y a las entidades locales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 95 (2025-02-12)",
+     "locator": "pág. 75",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-95.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Limitar los apoyos a ciertas familias podría ser discriminatorio y contrario a la Constitución, y excluir a quienes no encajan en ese modelo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 95 (2025-02-12)",
+     "locator": "pág. 75",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-95.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sustituir el nivel de renta por el número de hijos para tributar podría beneficiar a las rentas altas sin resolver vivienda, jornada o salarios, que frenan la natalidad.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 95 (2025-02-12)",
+     "locator": "pág. 73",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-95.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; los efectos son argumentos del debate, sin datos que los cuantifiquen.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion033/20240321/Votacion001/VOT_20240321105708.json": {
@@ -772,6 +1164,12 @@
     "note": "Sin cifra oficial de nº de mutualistas; 8 mutualidades",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "El extracto del debate recoge sobre todo otra iniciativa (ELA); de esta PNL solo aparece el inicio de la intervención sin mecanismos sobre el paso al RETA.",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion024/VOT_20260326165056.json": {
@@ -797,6 +1195,12 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -829,6 +1233,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion130/20250910/Votacion001/VOT_20250910213532.json": {
@@ -860,6 +1270,39 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Aumentar las ayudas para libros de texto y material podría aliviar el gasto de las familias al empezar el curso, que se estimó en unos 500 euros por niño.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 134 (2025-09-09)",
+     "locator": "pág. 54",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-134.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Un programa estatal en materias que gestionan las comunidades podría invadir sus competencias educativas y duplicar ayudas que ya financian con recursos propios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 134 (2025-09-09)",
+     "locator": "pág. 59",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-134.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Financiar libros de texto podría favorecer a las editoriales si siguen cambiando los libros cada año sin que haga falta, en lugar de abaratar el gasto de las familias.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 134 (2025-09-09)",
+     "locator": "pág. 55",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-134.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; el debate no aporta argumentos sobre la gratuidad de 0 a 3 años (punto 3) ni sobre el coste de las medidas.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion029/20240314/Votacion045/VOT_20240314123759.json": {
@@ -890,6 +1333,31 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Rebajar el requisito de peonadas para cobrar la prestación podría dar un colchón a familias jornaleras en un año de sequía con menos jornales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 29 (2024-03-12)",
+     "locator": "pág. 68",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-29.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Algunas recetas podrían no ser viables, y las soluciones centralizadas podrían no respetar la autonomía de cada territorio.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 29 (2024-03-12)",
+     "locator": "pág. 62",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-29.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -923,6 +1391,47 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que la ley fije la financiación estatal del 50 % del gasto certificado podría dar más recursos a las comunidades autónomas y reducir las listas de espera de dependencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 116",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Eliminar incompatibilidades entre prestaciones y reconocer automáticamente la discapacidad a quien ya tiene dependencia podría evitar trámites duplicados y agilizar los procedimientos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 198 (2026-07-14)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-198.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los derechos reconocidos podrían quedarse en el papel si la financiación no llega, si no llega a tiempo o si dependen del lugar de residencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 111",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin más dinero y competencias, la dependencia podría seguir con esperas de entre diez meses y un año desde el diagnóstico hasta recibir la prestación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 121",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley sin memoria de impacto en este material; los efectos son argumentos del debate y no se cuantifican su coste ni el calendario de aplicación.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion185/20260611/Votacion004/VOT_20260611145705.json": {
@@ -955,6 +1464,55 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "La pasarela podría permitir trasladar al RETA los derechos económicos acumulados en las mutualidades, de modo que más profesionales accedan a una pensión pública de jubilación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 86",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que pensiones muy bajas, de unos 300 o 400 euros, pasen a ser de aproximadamente 1200 euros al integrarse en la Seguridad Social.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 97",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Dejar fuera de la pasarela a quienes ya están jubilados podría crear mutualistas de primera y de segunda, y mantener pensiones bajas, como las de unos 600 euros, sin reparación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 88",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Remitir cuestiones importantes a futuros reglamentos podría dejar a miles de mutualistas con derechos pendientes de desarrollo y con menor seguridad jurídica.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 88",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Si las mutualidades no aportan todos los recursos, la Seguridad Social, y con ella toda la sociedad, podría asumir parte del coste en pensiones que esta ley genera.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 97",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate. Un orador señaló que no se compartieron datos reales sobre el impacto con los grupos.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -991,6 +1549,12 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1029,6 +1593,55 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Sustituir los juzgados unipersonales por tribunales de instancia podría igualar la carga de trabajo y unificar criterios; las oficinas de justicia permitirían hacer trámites desde el propio municipio.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 56 (2024-07-11)",
+     "locator": "pág. 30",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-56.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que los medios alternativos de solución de conflictos descongestionen la justicia y hagan más habitual resolver los litigios sin ir a juicio.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 91 (2024-12-19)",
+     "locator": "pág. 49",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-91.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que los juzgados de violencia sobre la mujer asuman las violencias sexuales podría mejorar el acceso a la justicia de las víctimas, con justicia gratuita.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 91 (2024-12-19)",
+     "locator": "pág. 44",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-91.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Concentrar competencias en los tribunales de instancia podría vaciar los pequeños juzgados y recortar servicios en el medio rural, alejando la justicia de la ciudadanía.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 56 (2024-07-11)",
+     "locator": "pág. 24",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-56.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "El nuevo sistema de acciones colectivas podría dar un poder excesivo a fondos de litigación y perjudicar a las empresas, con riesgo para la seguridad jurídica.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 56 (2024-07-11)",
+     "locator": "pág. 22",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-56.PDF"
+    }
+   ],
+   "gaps": "Debate de enmienda de totalidad y de veto del Senado; no hay memoria de impacto en el debate. No se detalla qué enmiendas concretas causan el efecto sobre desahucios.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion056/20240723/Votacion017/VOT_20240723221645.json": {
@@ -1047,6 +1660,55 @@
     "verdict": "none",
     "note": "bloque, «resto de enmiendas», transaccional o sin texto votado identificable: no se puede atribuir el efecto con certeza",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un régimen jurídico básico y común podría armonizar las funciones de los agentes forestales, sea cual sea la administración de la que dependan, y darles más seguridad jurídica.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 43",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reforzar la formación, los medios y la prevención de riesgos laborales podría mejorar la protección de los agentes frente a la peligrosidad y penosidad de su trabajo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 42",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Fijar coeficientes reductores de jubilación podría evitar que agentes de edad avanzada o con problemas de salud sigan en un trabajo peligroso y penoso.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 42",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una ley básica estatal tan detallada podría invadir competencias de las comunidades autónomas sobre el régimen de sus propios funcionarios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 52",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "El texto podría generar inseguridad jurídica a los propios agentes y posibles enfrentamientos con otros funcionarios que ejercen funciones parecidas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 53",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley con memoria del Gobierno que no se aporta aquí; los efectos recogidos son argumentos del debate, sin estimación de impacto ni coste.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1085,6 +1747,47 @@
     "note": "Texto de la enmienda truncado en el lote tras 'años cotizados en el sistema'.",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría ampliar la asistencia jurídica gratuita a personas jurídicas en ciertos casos penales y a microempresas en concurso con recursos insuficientes, supuestos que hasta ahora generaban tensión.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 56 (2024-07-11)",
+     "locator": "pág. 10",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-56.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que mejore la accesibilidad de las personas con discapacidad a sus derechos, con braille, lectura fácil, pictogramas, lengua de signos o intérpretes.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 56 (2024-07-11)",
+     "locator": "pág. 12",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-56.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una solución para el colectivo de la abogacía y la procura atrapado en la mutualidad extinta podría mejorar unas jubilaciones que hoy consideran gravemente mermadas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 56 (2024-07-11)",
+     "locator": "pág. 6",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-56.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Al remitir el turno de oficio a una regulación posterior, podrían seguir sin resolverse la retribución y las condiciones de abogados y procuradores que a veces cobran mal o no cobran.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 56 (2024-07-11)",
+     "locator": "pág. 7",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-56.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley con dictamen de comisión; los efectos son argumentos del debate, sin memoria de impacto citada. Los reproches a la perspectiva de género no incluyen mecanismos y se omiten.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion198/20260916/Votacion052/VOT_20260916195500.json": {
@@ -1115,6 +1818,47 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que la ley fije la financiación estatal del 50 % del gasto certificado podría dar más recursos a las comunidades autónomas y reducir las listas de espera de dependencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 116",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Eliminar incompatibilidades entre prestaciones y reconocer automáticamente la discapacidad a quien ya tiene dependencia podría evitar trámites duplicados y agilizar los procedimientos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 198 (2026-07-14)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-198.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los derechos reconocidos podrían quedarse en el papel si la financiación no llega, si no llega a tiempo o si dependen del lugar de residencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 111",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin más dinero y competencias, la dependencia podría seguir con esperas de entre diez meses y un año desde el diagnóstico hasta recibir la prestación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 121",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley sin memoria de impacto en este material; los efectos son argumentos del debate y no se cuantifican su coste ni el calendario de aplicación.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1163,6 +1907,55 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que la ley fije la financiación estatal del 50 % del gasto certificado podría dar más recursos a las comunidades autónomas y reducir las listas de espera de dependencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 116",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Eliminar incompatibilidades entre prestaciones y reconocer automáticamente la discapacidad a quien ya tiene dependencia podría evitar trámites duplicados y agilizar los procedimientos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 198 (2026-07-14)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-198.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reconocer económicamente los cuidados familiares podría evitar que las cuidadoras principales renuncien a su empleo, a sus cotizaciones y a su autonomía económica.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 198 (2026-07-14)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-198.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los derechos reconocidos podrían quedarse en el papel si la financiación no llega, si no llega a tiempo o si dependen del lugar de residencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 111",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin más dinero y competencias, la dependencia podría seguir con esperas de entre diez meses y un año desde el diagnóstico hasta recibir la prestación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 121",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley sin memoria de impacto en este material; los efectos son argumentos del debate y no se cuantifican su coste ni el calendario de aplicación.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion002/VOT_20260714201933.json": {
@@ -1199,6 +1992,55 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que la ley fije la financiación estatal del 50 % del gasto certificado podría dar más recursos a las comunidades autónomas y reducir las listas de espera de dependencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 116",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Eliminar incompatibilidades entre prestaciones y reconocer automáticamente la discapacidad a quien ya tiene dependencia podría evitar trámites duplicados y agilizar los procedimientos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 198 (2026-07-14)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-198.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reconocer económicamente los cuidados familiares podría evitar que las cuidadoras principales renuncien a su empleo, a sus cotizaciones y a su autonomía económica.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 198 (2026-07-14)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-198.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los derechos reconocidos podrían quedarse en el papel si la financiación no llega, si no llega a tiempo o si dependen del lugar de residencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 111",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin más dinero y competencias, la dependencia podría seguir con esperas de entre diez meses y un año desde el diagnóstico hasta recibir la prestación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 121",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley sin memoria de impacto en este material; los efectos son argumentos del debate y no se cuantifican su coste ni el calendario de aplicación.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1242,6 +2084,47 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que la ley fije la financiación estatal del 50 % del gasto certificado podría dar más recursos a las comunidades autónomas y reducir las listas de espera de dependencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 116",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Eliminar incompatibilidades entre prestaciones y reconocer automáticamente la discapacidad a quien ya tiene dependencia podría evitar trámites duplicados y agilizar los procedimientos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 198 (2026-07-14)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-198.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los derechos reconocidos podrían quedarse en el papel si la financiación no llega, si no llega a tiempo o si dependen del lugar de residencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 111",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin más dinero y competencias, la dependencia podría seguir con esperas de entre diez meses y un año desde el diagnóstico hasta recibir la prestación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 121",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley sin memoria de impacto en este material; los efectos son argumentos del debate y no se cuantifican su coste ni el calendario de aplicación.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion005/VOT_20260714201937.json": {
@@ -1274,6 +2157,47 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que la ley fije la financiación estatal del 50 % del gasto certificado podría dar más recursos a las comunidades autónomas y reducir las listas de espera de dependencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 116",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Eliminar incompatibilidades entre prestaciones y reconocer automáticamente la discapacidad a quien ya tiene dependencia podría evitar trámites duplicados y agilizar los procedimientos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 198 (2026-07-14)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-198.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los derechos reconocidos podrían quedarse en el papel si la financiación no llega, si no llega a tiempo o si dependen del lugar de residencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 111",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin más dinero y competencias, la dependencia podría seguir con esperas de entre diez meses y un año desde el diagnóstico hasta recibir la prestación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 121",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley sin memoria de impacto en este material; los efectos son argumentos del debate y no se cuantifican su coste ni el calendario de aplicación.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion007/VOT_20260714201940.json": {
@@ -1298,6 +2222,47 @@
     "verdict": "none",
     "note": "Sin texto extraído: votación de 'resto de las enmiendas' del grupo, sin enmiendas concretas identificadas en el lote.",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que la ley fije la financiación estatal del 50 % del gasto certificado podría dar más recursos a las comunidades autónomas y reducir las listas de espera de dependencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 116",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Eliminar incompatibilidades entre prestaciones y reconocer automáticamente la discapacidad a quien ya tiene dependencia podría evitar trámites duplicados y agilizar los procedimientos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 198 (2026-07-14)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-198.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los derechos reconocidos podrían quedarse en el papel si la financiación no llega, si no llega a tiempo o si dependen del lugar de residencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 111",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin más dinero y competencias, la dependencia podría seguir con esperas de entre diez meses y un año desde el diagnóstico hasta recibir la prestación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 121",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley sin memoria de impacto en este material; los efectos son argumentos del debate y no se cuantifican su coste ni el calendario de aplicación.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1336,6 +2301,47 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que la ley fije la financiación estatal del 50 % del gasto certificado podría dar más recursos a las comunidades autónomas y reducir las listas de espera de dependencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 116",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Eliminar incompatibilidades entre prestaciones y reconocer automáticamente la discapacidad a quien ya tiene dependencia podría evitar trámites duplicados y agilizar los procedimientos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 198 (2026-07-14)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-198.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los derechos reconocidos podrían quedarse en el papel si la financiación no llega, si no llega a tiempo o si dependen del lugar de residencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 111",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin más dinero y competencias, la dependencia podría seguir con esperas de entre diez meses y un año desde el diagnóstico hasta recibir la prestación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 121",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley sin memoria de impacto en este material; los efectos son argumentos del debate y no se cuantifican su coste ni el calendario de aplicación.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion010/VOT_20260714201946.json": {
@@ -1360,6 +2366,47 @@
     "verdict": "none",
     "note": "Votación del «resto de enmiendas» sin texto extraído ni número; el BOCG A-64-5 reúne 143 menciones del grupo y no permite identificar cuáles se votaron.",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que la ley fije la financiación estatal del 50 % del gasto certificado podría dar más recursos a las comunidades autónomas y reducir las listas de espera de dependencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 116",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Eliminar incompatibilidades entre prestaciones y reconocer automáticamente la discapacidad a quien ya tiene dependencia podría evitar trámites duplicados y agilizar los procedimientos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 198 (2026-07-14)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-198.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los derechos reconocidos podrían quedarse en el papel si la financiación no llega, si no llega a tiempo o si dependen del lugar de residencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 111",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin más dinero y competencias, la dependencia podría seguir con esperas de entre diez meses y un año desde el diagnóstico hasta recibir la prestación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 121",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley sin memoria de impacto en este material; los efectos son argumentos del debate y no se cuantifican su coste ni el calendario de aplicación.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1403,6 +2450,47 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que la ley fije la financiación estatal del 50 % del gasto certificado podría dar más recursos a las comunidades autónomas y reducir las listas de espera de dependencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 116",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Eliminar incompatibilidades entre prestaciones y reconocer automáticamente la discapacidad a quien ya tiene dependencia podría evitar trámites duplicados y agilizar los procedimientos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 198 (2026-07-14)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-198.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los derechos reconocidos podrían quedarse en el papel si la financiación no llega, si no llega a tiempo o si dependen del lugar de residencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 111",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin más dinero y competencias, la dependencia podría seguir con esperas de entre diez meses y un año desde el diagnóstico hasta recibir la prestación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 121",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley sin memoria de impacto en este material; los efectos son argumentos del debate y no se cuantifican su coste ni el calendario de aplicación.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion014/VOT_20260714201955.json": {
@@ -1445,6 +2533,55 @@
     "note": "Texto de la enmienda truncado tras el apartado 5.",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que la ley fije la financiación estatal del 50 % del gasto certificado podría dar más recursos a las comunidades autónomas y reducir las listas de espera de dependencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 116",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Eliminar incompatibilidades entre prestaciones y reconocer automáticamente la discapacidad a quien ya tiene dependencia podría evitar trámites duplicados y agilizar los procedimientos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 198 (2026-07-14)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-198.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reconocer económicamente los cuidados familiares podría evitar que las cuidadoras principales renuncien a su empleo, a sus cotizaciones y a su autonomía económica.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 198 (2026-07-14)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-198.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los derechos reconocidos podrían quedarse en el papel si la financiación no llega, si no llega a tiempo o si dependen del lugar de residencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 111",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin más dinero y competencias, la dependencia podría seguir con esperas de entre diez meses y un año desde el diagnóstico hasta recibir la prestación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 121",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley sin memoria de impacto en este material; los efectos son argumentos del debate y no se cuantifican su coste ni el calendario de aplicación.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion015/VOT_20260714201957.json": {
@@ -1481,6 +2618,47 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que la ley fije la financiación estatal del 50 % del gasto certificado podría dar más recursos a las comunidades autónomas y reducir las listas de espera de dependencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 116",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Eliminar incompatibilidades entre prestaciones y reconocer automáticamente la discapacidad a quien ya tiene dependencia podría evitar trámites duplicados y agilizar los procedimientos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 198 (2026-07-14)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-198.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los derechos reconocidos podrían quedarse en el papel si la financiación no llega, si no llega a tiempo o si dependen del lugar de residencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 111",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin más dinero y competencias, la dependencia podría seguir con esperas de entre diez meses y un año desde el diagnóstico hasta recibir la prestación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 121",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley sin memoria de impacto en este material; los efectos son argumentos del debate y no se cuantifican su coste ni el calendario de aplicación.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1524,6 +2702,47 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que la ley fije la financiación estatal del 50 % del gasto certificado podría dar más recursos a las comunidades autónomas y reducir las listas de espera de dependencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 116",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Eliminar incompatibilidades entre prestaciones y reconocer automáticamente la discapacidad a quien ya tiene dependencia podría evitar trámites duplicados y agilizar los procedimientos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 198 (2026-07-14)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-198.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los derechos reconocidos podrían quedarse en el papel si la financiación no llega, si no llega a tiempo o si dependen del lugar de residencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 111",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin más dinero y competencias, la dependencia podría seguir con esperas de entre diez meses y un año desde el diagnóstico hasta recibir la prestación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 121",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley sin memoria de impacto en este material; los efectos son argumentos del debate y no se cuantifican su coste ni el calendario de aplicación.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion023/VOT_20260714202009.json": {
@@ -1549,6 +2768,47 @@
     "verdict": "none",
     "note": "Votación del «resto de enmiendas» sin número; el texto sobre desahucios (BOCG A-64-5, págs. 114-115) no se pudo atribuir con certeza a este grupo.",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que la ley fije la financiación estatal del 50 % del gasto certificado podría dar más recursos a las comunidades autónomas y reducir las listas de espera de dependencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 116",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Eliminar incompatibilidades entre prestaciones y reconocer automáticamente la discapacidad a quien ya tiene dependencia podría evitar trámites duplicados y agilizar los procedimientos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 198 (2026-07-14)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-198.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los derechos reconocidos podrían quedarse en el papel si la financiación no llega, si no llega a tiempo o si dependen del lugar de residencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 111",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin más dinero y competencias, la dependencia podría seguir con esperas de entre diez meses y un año desde el diagnóstico hasta recibir la prestación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 121",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley sin memoria de impacto en este material; los efectos son argumentos del debate y no se cuantifican su coste ni el calendario de aplicación.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1591,6 +2851,47 @@
     "verdict": "written",
     "note": "La enmienda 158 modifica la exposición de motivos (texto introductorio sin efecto directo).",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que la ley fije la financiación estatal del 50 % del gasto certificado podría dar más recursos a las comunidades autónomas y reducir las listas de espera de dependencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 116",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Eliminar incompatibilidades entre prestaciones y reconocer automáticamente la discapacidad a quien ya tiene dependencia podría evitar trámites duplicados y agilizar los procedimientos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 198 (2026-07-14)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-198.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los derechos reconocidos podrían quedarse en el papel si la financiación no llega, si no llega a tiempo o si dependen del lugar de residencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 111",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin más dinero y competencias, la dependencia podría seguir con esperas de entre diez meses y un año desde el diagnóstico hasta recibir la prestación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 121",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley sin memoria de impacto en este material; los efectos son argumentos del debate y no se cuantifican su coste ni el calendario de aplicación.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1639,6 +2940,47 @@
     "note": "Las enmiendas 161 y 163 modifican la exposición de motivos (sin efecto directo).",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que la ley fije la financiación estatal del 50 % del gasto certificado podría dar más recursos a las comunidades autónomas y reducir las listas de espera de dependencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 116",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Eliminar incompatibilidades entre prestaciones y reconocer automáticamente la discapacidad a quien ya tiene dependencia podría evitar trámites duplicados y agilizar los procedimientos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 198 (2026-07-14)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-198.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los derechos reconocidos podrían quedarse en el papel si la financiación no llega, si no llega a tiempo o si dependen del lugar de residencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 111",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin más dinero y competencias, la dependencia podría seguir con esperas de entre diez meses y un año desde el diagnóstico hasta recibir la prestación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 121",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley sin memoria de impacto en este material; los efectos son argumentos del debate y no se cuantifican su coste ni el calendario de aplicación.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion028/VOT_20260714202019.json": {
@@ -1680,6 +3022,47 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que la ley fije la financiación estatal del 50 % del gasto certificado podría dar más recursos a las comunidades autónomas y reducir las listas de espera de dependencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 116",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Eliminar incompatibilidades entre prestaciones y reconocer automáticamente la discapacidad a quien ya tiene dependencia podría evitar trámites duplicados y agilizar los procedimientos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 198 (2026-07-14)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-198.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los derechos reconocidos podrían quedarse en el papel si la financiación no llega, si no llega a tiempo o si dependen del lugar de residencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 111",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin más dinero y competencias, la dependencia podría seguir con esperas de entre diez meses y un año desde el diagnóstico hasta recibir la prestación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 121",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley sin memoria de impacto en este material; los efectos son argumentos del debate y no se cuantifican su coste ni el calendario de aplicación.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion030/VOT_20260714202022.json": {
@@ -1710,6 +3093,47 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que la ley fije la financiación estatal del 50 % del gasto certificado podría dar más recursos a las comunidades autónomas y reducir las listas de espera de dependencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 116",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Eliminar incompatibilidades entre prestaciones y reconocer automáticamente la discapacidad a quien ya tiene dependencia podría evitar trámites duplicados y agilizar los procedimientos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 198 (2026-07-14)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-198.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los derechos reconocidos podrían quedarse en el papel si la financiación no llega, si no llega a tiempo o si dependen del lugar de residencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 111",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin más dinero y competencias, la dependencia podría seguir con esperas de entre diez meses y un año desde el diagnóstico hasta recibir la prestación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 121",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley sin memoria de impacto en este material; los efectos son argumentos del debate y no se cuantifican su coste ni el calendario de aplicación.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1752,6 +3176,47 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que la ley fije la financiación estatal del 50 % del gasto certificado podría dar más recursos a las comunidades autónomas y reducir las listas de espera de dependencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 116",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Eliminar incompatibilidades entre prestaciones y reconocer automáticamente la discapacidad a quien ya tiene dependencia podría evitar trámites duplicados y agilizar los procedimientos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 198 (2026-07-14)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-198.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los derechos reconocidos podrían quedarse en el papel si la financiación no llega, si no llega a tiempo o si dependen del lugar de residencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 111",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin más dinero y competencias, la dependencia podría seguir con esperas de entre diez meses y un año desde el diagnóstico hasta recibir la prestación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 121",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley sin memoria de impacto en este material; los efectos son argumentos del debate y no se cuantifican su coste ni el calendario de aplicación.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1800,6 +3265,47 @@
     "note": "Enmienda 195 (teleasistencia no sustituiría apoyos presenciales) y 223 (interoperabilidad SAAD) también incluidas en la votación; la 211 no vino en el lote.",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que la ley fije la financiación estatal del 50 % del gasto certificado podría dar más recursos a las comunidades autónomas y reducir las listas de espera de dependencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 116",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Eliminar incompatibilidades entre prestaciones y reconocer automáticamente la discapacidad a quien ya tiene dependencia podría evitar trámites duplicados y agilizar los procedimientos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 198 (2026-07-14)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-198.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los derechos reconocidos podrían quedarse en el papel si la financiación no llega, si no llega a tiempo o si dependen del lugar de residencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 111",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin más dinero y competencias, la dependencia podría seguir con esperas de entre diez meses y un año desde el diagnóstico hasta recibir la prestación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 121",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley sin memoria de impacto en este material; los efectos son argumentos del debate y no se cuantifican su coste ni el calendario de aplicación.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion037/VOT_20260714202032.json": {
@@ -1824,6 +3330,47 @@
     "verdict": "none",
     "note": "sin texto extraído: votación en bloque de «resto de enmiendas» sin numerar; no se puede atribuir contenido a cada una",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que la ley fije la financiación estatal del 50 % del gasto certificado podría dar más recursos a las comunidades autónomas y reducir las listas de espera de dependencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 116",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Eliminar incompatibilidades entre prestaciones y reconocer automáticamente la discapacidad a quien ya tiene dependencia podría evitar trámites duplicados y agilizar los procedimientos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 198 (2026-07-14)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-198.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los derechos reconocidos podrían quedarse en el papel si la financiación no llega, si no llega a tiempo o si dependen del lugar de residencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 111",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin más dinero y competencias, la dependencia podría seguir con esperas de entre diez meses y un año desde el diagnóstico hasta recibir la prestación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 121",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley sin memoria de impacto en este material; los efectos son argumentos del debate y no se cuantifican su coste ni el calendario de aplicación.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1867,6 +3414,47 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que la ley fije la financiación estatal del 50 % del gasto certificado podría dar más recursos a las comunidades autónomas y reducir las listas de espera de dependencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 116",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Eliminar incompatibilidades entre prestaciones y reconocer automáticamente la discapacidad a quien ya tiene dependencia podría evitar trámites duplicados y agilizar los procedimientos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 198 (2026-07-14)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-198.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los derechos reconocidos podrían quedarse en el papel si la financiación no llega, si no llega a tiempo o si dependen del lugar de residencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 111",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin más dinero y competencias, la dependencia podría seguir con esperas de entre diez meses y un año desde el diagnóstico hasta recibir la prestación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 121",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley sin memoria de impacto en este material; los efectos son argumentos del debate y no se cuantifican su coste ni el calendario de aplicación.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion039/VOT_20260714202035.json": {
@@ -1904,6 +3492,47 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que la ley fije la financiación estatal del 50 % del gasto certificado podría dar más recursos a las comunidades autónomas y reducir las listas de espera de dependencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 116",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Eliminar incompatibilidades entre prestaciones y reconocer automáticamente la discapacidad a quien ya tiene dependencia podría evitar trámites duplicados y agilizar los procedimientos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 198 (2026-07-14)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-198.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los derechos reconocidos podrían quedarse en el papel si la financiación no llega, si no llega a tiempo o si dependen del lugar de residencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 111",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin más dinero y competencias, la dependencia podría seguir con esperas de entre diez meses y un año desde el diagnóstico hasta recibir la prestación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 121",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley sin memoria de impacto en este material; los efectos son argumentos del debate y no se cuantifican su coste ni el calendario de aplicación.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion040/VOT_20260714202037.json": {
@@ -1929,6 +3558,47 @@
     "verdict": "none",
     "note": "sin texto extraído: votación en bloque de «resto de enmiendas» sin numerar; no se puede atribuir contenido a cada una",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que la ley fije la financiación estatal del 50 % del gasto certificado podría dar más recursos a las comunidades autónomas y reducir las listas de espera de dependencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 116",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Eliminar incompatibilidades entre prestaciones y reconocer automáticamente la discapacidad a quien ya tiene dependencia podría evitar trámites duplicados y agilizar los procedimientos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 198 (2026-07-14)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-198.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los derechos reconocidos podrían quedarse en el papel si la financiación no llega, si no llega a tiempo o si dependen del lugar de residencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 111",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin más dinero y competencias, la dependencia podría seguir con esperas de entre diez meses y un año desde el diagnóstico hasta recibir la prestación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 121",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley sin memoria de impacto en este material; los efectos son argumentos del debate y no se cuantifican su coste ni el calendario de aplicación.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1966,6 +3636,47 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que la ley fije la financiación estatal del 50 % del gasto certificado podría dar más recursos a las comunidades autónomas y reducir las listas de espera de dependencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 116",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Eliminar incompatibilidades entre prestaciones y reconocer automáticamente la discapacidad a quien ya tiene dependencia podría evitar trámites duplicados y agilizar los procedimientos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 198 (2026-07-14)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-198.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los derechos reconocidos podrían quedarse en el papel si la financiación no llega, si no llega a tiempo o si dependen del lugar de residencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 111",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin más dinero y competencias, la dependencia podría seguir con esperas de entre diez meses y un año desde el diagnóstico hasta recibir la prestación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 121",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley sin memoria de impacto en este material; los efectos son argumentos del debate y no se cuantifican su coste ni el calendario de aplicación.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion043/VOT_20260714202041.json": {
@@ -1990,6 +3701,47 @@
     "verdict": "none",
     "note": "sin texto extraído: votación en bloque de «resto de enmiendas» sin numerar; no se puede atribuir contenido a cada una",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que la ley fije la financiación estatal del 50 % del gasto certificado podría dar más recursos a las comunidades autónomas y reducir las listas de espera de dependencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 116",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Eliminar incompatibilidades entre prestaciones y reconocer automáticamente la discapacidad a quien ya tiene dependencia podría evitar trámites duplicados y agilizar los procedimientos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 198 (2026-07-14)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-198.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los derechos reconocidos podrían quedarse en el papel si la financiación no llega, si no llega a tiempo o si dependen del lugar de residencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 111",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin más dinero y competencias, la dependencia podría seguir con esperas de entre diez meses y un año desde el diagnóstico hasta recibir la prestación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 121",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley sin memoria de impacto en este material; los efectos son argumentos del debate y no se cuantifican su coste ni el calendario de aplicación.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -2017,6 +3769,47 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que la ley fije la financiación estatal del 50 % del gasto certificado podría dar más recursos a las comunidades autónomas y reducir las listas de espera de dependencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 116",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Eliminar incompatibilidades entre prestaciones y reconocer automáticamente la discapacidad a quien ya tiene dependencia podría evitar trámites duplicados y agilizar los procedimientos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 198 (2026-07-14)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-198.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los derechos reconocidos podrían quedarse en el papel si la financiación no llega, si no llega a tiempo o si dependen del lugar de residencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 111",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin más dinero y competencias, la dependencia podría seguir con esperas de entre diez meses y un año desde el diagnóstico hasta recibir la prestación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 121",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley sin memoria de impacto en este material; los efectos son argumentos del debate y no se cuantifican su coste ni el calendario de aplicación.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion046/VOT_20260714202046.json": {
@@ -2042,6 +3835,47 @@
     "note": "sin texto extraído: votación en bloque de «resto de enmiendas» sin numerar; no se puede atribuir contenido a cada una",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que la ley fije la financiación estatal del 50 % del gasto certificado podría dar más recursos a las comunidades autónomas y reducir las listas de espera de dependencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 116",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Eliminar incompatibilidades entre prestaciones y reconocer automáticamente la discapacidad a quien ya tiene dependencia podría evitar trámites duplicados y agilizar los procedimientos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 198 (2026-07-14)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-198.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los derechos reconocidos podrían quedarse en el papel si la financiación no llega, si no llega a tiempo o si dependen del lugar de residencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 111",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin más dinero y competencias, la dependencia podría seguir con esperas de entre diez meses y un año desde el diagnóstico hasta recibir la prestación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 121",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley sin memoria de impacto en este material; los efectos son argumentos del debate y no se cuantifican su coste ni el calendario de aplicación.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion185/20260611/Votacion005/VOT_20260611145707.json": {
@@ -2066,6 +3900,55 @@
     "verdict": "none",
     "note": "bloque, «resto de enmiendas», transaccional o sin texto votado identificable: no se puede atribuir el efecto con certeza",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "La pasarela podría permitir trasladar al RETA los derechos económicos acumulados en las mutualidades, de modo que más profesionales accedan a una pensión pública de jubilación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 86",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que pensiones muy bajas, de unos 300 o 400 euros, pasen a ser de aproximadamente 1200 euros al integrarse en la Seguridad Social.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 97",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reconocer a los mutualistas alternativos los mismos derechos que a los autónomos en complemento a mínimos y gasto sanitario podría ayudar a quienes tienen pensiones muy bajas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 91",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Remitir cuestiones importantes a futuros reglamentos podría dejar a miles de mutualistas con derechos pendientes de desarrollo y con menor seguridad jurídica.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 88",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Si las mutualidades no aportan todos los recursos, la Seguridad Social, y con ella toda la sociedad, podría asumir parte del coste en pensiones que esta ley genera.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 97",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate. Un orador señaló que no se compartieron datos reales sobre el impacto con los grupos.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -2100,6 +3983,55 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "La pasarela podría permitir trasladar al RETA los derechos económicos acumulados en las mutualidades, de modo que más profesionales accedan a una pensión pública de jubilación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 86",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que pensiones muy bajas, de unos 300 o 400 euros, pasen a ser de aproximadamente 1200 euros al integrarse en la Seguridad Social.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 97",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Dejar fuera de la pasarela a quienes ya están jubilados podría crear mutualistas de primera y de segunda, y mantener pensiones bajas, como las de unos 600 euros, sin reparación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 88",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Remitir cuestiones importantes a futuros reglamentos podría dejar a miles de mutualistas con derechos pendientes de desarrollo y con menor seguridad jurídica.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 88",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Si las mutualidades no aportan todos los recursos, la Seguridad Social, y con ella toda la sociedad, podría asumir parte del coste en pensiones que esta ley genera.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 97",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate. Un orador señaló que no se compartieron datos reales sobre el impacto con los grupos.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion185/20260611/Votacion007/VOT_20260611145709.json": {
@@ -2125,6 +4057,55 @@
     "verdict": "none",
     "note": "bloque, «resto de enmiendas», transaccional o sin texto votado identificable: no se puede atribuir el efecto con certeza",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "La pasarela podría permitir trasladar al RETA los derechos económicos acumulados en las mutualidades, de modo que más profesionales accedan a una pensión pública de jubilación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 86",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que pensiones muy bajas, de unos 300 o 400 euros, pasen a ser de aproximadamente 1200 euros al integrarse en la Seguridad Social.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 97",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reconocer a los mutualistas alternativos los mismos derechos que a los autónomos en complemento a mínimos y gasto sanitario podría ayudar a quienes tienen pensiones muy bajas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 91",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Remitir cuestiones importantes a futuros reglamentos podría dejar a miles de mutualistas con derechos pendientes de desarrollo y con menor seguridad jurídica.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 88",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Si las mutualidades no aportan todos los recursos, la Seguridad Social, y con ella toda la sociedad, podría asumir parte del coste en pensiones que esta ley genera.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 97",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate. Un orador señaló que no se compartieron datos reales sobre el impacto con los grupos.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -2163,6 +4144,47 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "La pasarela podría permitir trasladar al RETA los derechos económicos acumulados en las mutualidades, de modo que más profesionales accedan a una pensión pública de jubilación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 86",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que pensiones muy bajas, de unos 300 o 400 euros, pasen a ser de aproximadamente 1200 euros al integrarse en la Seguridad Social.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 97",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Remitir cuestiones importantes a futuros reglamentos podría dejar a miles de mutualistas con derechos pendientes de desarrollo y con menor seguridad jurídica.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 88",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Si las mutualidades no aportan todos los recursos, la Seguridad Social, y con ella toda la sociedad, podría asumir parte del coste en pensiones que esta ley genera.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 97",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate. Un orador señaló que no se compartieron datos reales sobre el impacto con los grupos.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion185/20260611/Votacion013/VOT_20260611145717.json": {
@@ -2196,6 +4218,55 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "La pasarela podría permitir trasladar al RETA los derechos económicos acumulados en las mutualidades, de modo que más profesionales accedan a una pensión pública de jubilación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 86",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que pensiones muy bajas, de unos 300 o 400 euros, pasen a ser de aproximadamente 1200 euros al integrarse en la Seguridad Social.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 97",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Dejar fuera de la pasarela a quienes ya están jubilados podría crear mutualistas de primera y de segunda, y mantener pensiones bajas, como las de unos 600 euros, sin reparación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 88",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Remitir cuestiones importantes a futuros reglamentos podría dejar a miles de mutualistas con derechos pendientes de desarrollo y con menor seguridad jurídica.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 88",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Si las mutualidades no aportan todos los recursos, la Seguridad Social, y con ella toda la sociedad, podría asumir parte del coste en pensiones que esta ley genera.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 97",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate. Un orador señaló que no se compartieron datos reales sobre el impacto con los grupos.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion185/20260611/Votacion016/VOT_20260611145721.json": {
@@ -2221,6 +4292,55 @@
     "verdict": "none",
     "note": "bloque, «resto de enmiendas», transaccional o sin texto votado identificable: no se puede atribuir el efecto con certeza",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "La pasarela podría permitir trasladar al RETA los derechos económicos acumulados en las mutualidades, de modo que más profesionales accedan a una pensión pública de jubilación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 86",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que pensiones muy bajas, de unos 300 o 400 euros, pasen a ser de aproximadamente 1200 euros al integrarse en la Seguridad Social.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 97",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reconocer a los mutualistas alternativos los mismos derechos que a los autónomos en complemento a mínimos y gasto sanitario podría ayudar a quienes tienen pensiones muy bajas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 91",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Remitir cuestiones importantes a futuros reglamentos podría dejar a miles de mutualistas con derechos pendientes de desarrollo y con menor seguridad jurídica.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 88",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Si las mutualidades no aportan todos los recursos, la Seguridad Social, y con ella toda la sociedad, podría asumir parte del coste en pensiones que esta ley genera.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 97",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate. Un orador señaló que no se compartieron datos reales sobre el impacto con los grupos.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -2253,6 +4373,31 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reforzar ayudas como comedor y transporte escolar podría ayudar a que nadie deje de estudiar por motivos económicos, como defienden quienes ya las aplican en su comunidad.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 134 (2025-09-09)",
+     "locator": "pág. 58",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-134.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Un programa estatal en materias que gestionan las comunidades podría invadir sus competencias educativas y duplicar ayudas que ya financian con recursos propios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 134 (2025-09-09)",
+     "locator": "pág. 59",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-134.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; el debate no aporta argumentos sobre la gratuidad de 0 a 3 años (punto 3) ni sobre el coste de las medidas.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion130/20250910/Votacion003/VOT_20250910213535.json": {
@@ -2284,6 +4429,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion079/20241121/Votacion015/VOT_20241121173812.json": {
@@ -2314,6 +4465,12 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   }

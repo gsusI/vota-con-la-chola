@@ -43,6 +43,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Evaluar la eficacia sanitaria y el impacto económico antes de implantar el empaquetado genérico, y consensuarlo con Canarias, podría permitir decidir con datos y evitar efectos no deseados.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 108 (2025-04-08)",
+     "locator": "pág. 66",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-108.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "El empaquetado genérico podría ayudar a reducir el consumo de tabaco y a evitar que adolescentes caigan en la adicción, que es el objetivo de la medida, aunque se discute que funcione.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 108 (2025-04-08)",
+     "locator": "pág. 65",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-108.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Quitar la marca y los distintivos del paquete podría facilitar la falsificación y reforzar el mercado negro y el comercio ilícito, según la experiencia citada de otros países.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 108 (2025-04-08)",
+     "locator": "pág. 65",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-108.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podrían perderse empleos en Canarias en imprentas, empaquetadoras, litografías y papeleras que dependen del sector tabaquero.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 108 (2025-04-08)",
+     "locator": "pág. 61",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-108.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "La medida podría reducir la recaudación fiscal y debilitar a las industrias legales, dando ventaja a las redes ilegales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 108 (2025-04-08)",
+     "locator": "pág. 66",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-108.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; las cifras de empleo y comercio ilícito son argumentos del debate y los estudios citados se contradicen según la fuente.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion109/20250508/Votacion014/VOT_20250508130802.json": {
@@ -108,6 +157,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que la unidad de protección de datos del Ministerio Fiscal vuelva a designarse y cesarse por el Consejo Fiscal podría reforzar su independencia frente al Gobierno.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 147 (2025-10-28)",
+     "locator": "pág. 9",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-147.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Exigir juristas con experiencia en protección de datos y un mandato fijo no renovable podría dar a la autoridad de control más preparación técnica y menos dependencia de quien la nombra.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 147 (2025-10-28)",
+     "locator": "pág. 9",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-147.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Si quien dirige la unidad no tuviera que pertenecer al Ministerio Fiscal, podría perder las salvaguardas y protecciones que da ese estatuto.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 147 (2025-10-28)",
+     "locator": "pág. 8",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-147.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Que una persona ajena maneje los datos personales de las personas encausadas podría equivaler a externalizar el control de datos de la Fiscalía.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 147 (2025-10-28)",
+     "locator": "pág. 15",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-147.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Reforzar la decisión del Consejo Fiscal podría reducir el control democrático sobre la institución y dar más peso a decisiones corporativas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 147 (2025-10-28)",
+     "locator": "pág. 15",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-147.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; el debate se centró en quién nombra al titular de la unidad, no en su efecto sobre los datos.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion161/20260218/Votacion003/VOT_20260218141921.json": {
@@ -133,6 +231,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una mesa de trabajo entre el Gobierno de Canarias y el Ministerio de Economía podría corregir normas aplicadas de forma deficiente y abaratar la vida y la actividad empresarial en las islas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 166 (2026-02-17)",
+     "locator": "pág. 55",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-166.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Compartir datos tributarios y fiscales podría permitir evaluar si las medidas del régimen económico y fiscal de Canarias son adecuadas y están surtiendo efecto.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 166 (2026-02-17)",
+     "locator": "pág. 55",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-166.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Limitar la coordinación a un solo ministerio podría dejar fuera medidas de otros sectores, cuando la condición ultraperiférica afecta a varias áreas del Gobierno.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 166 (2026-02-17)",
+     "locator": "pág. 57",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-166.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "El acceso a información tributaria podría plantear problemas legales o de privacidad si no se limita a fines estadísticos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 166 (2026-02-17)",
+     "locator": "pág. 57",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-166.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una mesa paritaria con el Estado sobre normativa europea podría invadir competencias estatales en las relaciones con la Unión Europea.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 166 (2026-02-17)",
+     "locator": "pág. 60",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-166.PDF"
+    }
+   ],
+   "gaps": "Moción votada en los términos de una transaccional; el debate se refiere al texto original y a las enmiendas. Sin memoria oficial de impacto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion198/20260916/Votacion017/VOT_20260916195408.json": {

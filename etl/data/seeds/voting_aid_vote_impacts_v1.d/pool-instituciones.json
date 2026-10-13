@@ -43,6 +43,31 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que la nueva organización de comisiones agilice la puesta en marcha de los órganos del Congreso y refuerce su labor de control y supervisión del Gobierno.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 10 (2023-11-28)",
+     "locator": "pág. 7",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-10.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Mantener un número elevado de comisiones podría suponer más gasto público en cargos y complementos de cada comisión, frente a la opción de tener menos comisiones.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 10 (2023-11-28)",
+     "locator": "pág. 14",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-10.PDF"
+    }
+   ],
+   "gaps": "Reforma interna del Reglamento sin memoria oficial de impacto; el debate mezcla mucho reproche político y aporta pocos datos verificables.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion179/20260519/Votacion002/VOT_20260519203504.json": {
@@ -67,6 +92,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Debate centrado en reconocer a Formentera un senador propio y en el procedimiento (lectura única, enmiendas rechazadas por heterogeneidad); no se señalan riesgos o costes de la medida, solo argumentos de un lado.",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion181/20260526/Votacion003/VOT_20260526210644.json": {
@@ -125,6 +156,47 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Prever la suspensión temporal de la condición de diputado ante violencia o intimidación grave podría proteger a la Presidencia, la Mesa y al personal de la Cámara.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 191 (2026-06-11)",
+     "locator": "pág. 45",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-191.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Endurecer las medidas ante llamadas al orden incumplidas de forma reiterada podría reforzar su capacidad disuasoria y el normal desarrollo de las sesiones.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 191 (2026-06-11)",
+     "locator": "pág. 50",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-191.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Un reglamento más duro podría usarse en el futuro contra quien opine diferente, con otras mayorías en la Cámara.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 191 (2026-06-11)",
+     "locator": "pág. 47",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-191.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Las sanciones podrían limitar la libertad de expresión y la labor parlamentaria, como ya se habría sentido con retiradas de la palabra tras tres advertencias, incluso por usar una lengua cooficial.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 191 (2026-06-11)",
+     "locator": "pág. 47",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-191.PDF"
+    }
+   ],
+   "gaps": "Toma en consideración de una proposición sin memoria de impacto; el texto podría cambiar en la tramitación. Los efectos son argumentos del debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion188/20260618/Votacion018/VOT_20260618162237.json": {
@@ -149,6 +221,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Debate centrado en reconocer a Formentera un senador propio y en el procedimiento (lectura única, enmiendas rechazadas por heterogeneidad); no se señalan riesgos o costes de la medida, solo argumentos de un lado.",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion051/VOT_20260714202056.json": {

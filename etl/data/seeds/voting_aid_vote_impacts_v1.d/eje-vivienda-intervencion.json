@@ -188,6 +188,63 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría reducir la compra de viviendas por grandes inversores y sociedades, y así dejar más casas disponibles para las familias que las necesitan para vivir.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 204 (2026-09-15)",
+     "locator": "pág. 20",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-204.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría frenar la especulación en las sucesivas reventas de inmuebles residenciales por parte de personas jurídicas, que tratan la vivienda como bien de inversión.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 204 (2026-09-15)",
+     "locator": "pág. 26",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-204.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría aliviar la competencia entre una familia que busca un hogar y una empresa que busca negocio por la misma vivienda, y con ello la presión sobre los precios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 204 (2026-09-15)",
+     "locator": "pág. 33",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-204.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría perjudicar a cooperativas de vivienda, ayuntamientos y empresas públicas, que son personas jurídicas y trabajan para facilitar el acceso a la vivienda; las cooperativas no figuran entre las excepciones.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 204 (2026-09-15)",
+     "locator": "pág. 30",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-204.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría no ayudar a un joven o familia a comprar: no reduce la entrada, los impuestos ni el precio, y una persona física con mucho patrimonio seguiría pudiendo comprar muchas viviendas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 204 (2026-09-15)",
+     "locator": "pág. 31",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-204.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría tener efectos contrarios al acceso a una vivienda digna y asequible, al ser una medida indefinida que no actúa sobre la especulación entre personas físicas ni sobre sus intermediarios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 204 (2026-09-15)",
+     "locator": "pág. 26",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-204.PDF"
+    }
+   ],
+   "gaps": "Proposición de ley sin memoria oficial de impacto; los efectos son argumentos del debate y no hay estimación de su alcance sobre precios u oferta.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion173/20260421/Votacion001/VOT_20260421201008.json": {
@@ -230,6 +287,63 @@
     "note": "derogar arts 18-19 zonas tensionadas y límites desahucio",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Simplificar y acortar la tramitación urbanística podría desbloquear planes y proyectos hoy retrasados durante años, y así aumentar la oferta de vivienda, pública y privada.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 179 (2026-04-21)",
+     "locator": "pág. 14",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-179.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Fijar criterios para conservar actos y limitar los efectos de las nulidades podría reducir las anulaciones de proyectos enteros y dar más seguridad jurídica a ayuntamientos y promotores.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 179 (2026-04-21)",
+     "locator": "pág. 14",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-179.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Eliminar las zonas tensionadas y los topes de precio podría, según se defendió, animar a los propietarios a ofrecer más viviendas en alquiler y aumentar la oferta.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 179 (2026-04-21)",
+     "locator": "pág. 21",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-179.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Endurecer las condiciones de vulnerabilidad y acelerar los juicios podría facilitar desahucios de familias que hoy están protegidas, con menos margen para quienes tienen ingresos bajos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 179 (2026-04-21)",
+     "locator": "pág. 9",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-179.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Suprimir informes de impacto ambiental y apoyarse en el silencio positivo podría debilitar las garantías ambientales y aumentar el riesgo de construir en zonas inundables.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 179 (2026-04-21)",
+     "locator": "pág. 19",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-179.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Derogar las zonas tensionadas y los controles de alquiler podría dejar a los inquilinos sin los límites de precio que algunos ayuntamientos ya estaban aplicando.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 179 (2026-04-21)",
+     "locator": "pág. 12",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-179.PDF"
+    }
+   ],
+   "gaps": "Proposición de ley sin memoria oficial de impacto en el debate; los efectos son argumentos de los intervinientes, sin estimaciones cuantificadas.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion151/20251127/Votacion002/VOT_20251127124049.json": {
@@ -265,6 +379,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Limitar la compra de vivienda a personas físicas podría frenar que empresas y fondos de inversión la conviertan en un activo financiero y presionen los precios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 154 (2025-11-25)",
+     "locator": "pág. 20",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-154.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que impedir la compra por empresas y fondos evite que se siga acaparando vivienda en pocas manos a partir de ahora.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 154 (2025-11-25)",
+     "locator": "pág. 24",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-154.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Restringir la compra podría reducir la oferta de vivienda y, en un mercado ya tensionado, empujar los precios al alza.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 154 (2025-11-25)",
+     "locator": "pág. 28",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-154.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría frenar a inversores que hoy participan en promociones asequibles y hacer inviables nuevas construcciones o proyectos de alquiler.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 154 (2025-11-25)",
+     "locator": "pág. 28",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-154.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría afectar a la construcción de vivienda nueva, buena parte de la cual se promueve mediante empresas, y al empleo que estas generan.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 154 (2025-11-25)",
+     "locator": "pág. 37",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-154.PDF"
+    }
+   ],
+   "gaps": "Toma en consideración sin memoria oficial de impacto; el debate no cuantifica cuántas compras afectaría ni su efecto real sobre precios y oferta.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion144/20251111/Votacion002/VOT_20251111210356.json": {
@@ -301,6 +464,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un impuesto sobre la acumulación de inmuebles a partir del tercero podría desincentivar la compra especulativa de vivienda.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 149 (2025-11-11)",
+     "locator": "pág. 19",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-149.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Lo recaudado con el nuevo impuesto podría destinarse a políticas de vivienda con efecto sobre el bien común.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 149 (2025-11-11)",
+     "locator": "pág. 19",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-149.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Gravar desde la tercera vivienda sin distinguir contextos podría castigar a pequeños propietarios no especuladores y retirar más viviendas del mercado.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 149 (2025-11-11)",
+     "locator": "pág. 21",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-149.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Aplicar el mismo recargo en zonas con poca presión y en zonas tensionadas podría ser desproporcionado, cuando en las primeras lo urgente es incentivar la inversión.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 149 (2025-11-11)",
+     "locator": "pág. 21",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-149.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Subir impuestos a la inversión inmobiliaria podría desincentivar el ahorro y la inversión y no mejorar el acceso a la vivienda.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 149 (2025-11-11)",
+     "locator": "pág. 31",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-149.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto en el debate; no se cuantifica la recaudación ni el efecto sobre la oferta de alquiler. Los efectos son argumentos del debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion096/20250311/Votacion001/VOT_20250311203733.json": {
@@ -337,6 +549,63 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que los activos de la Sareb pasen a las administraciones con competencia en vivienda podría aumentar el parque público de vivienda y atender a familias que la reclaman.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 100 (2025-03-11)",
+     "locator": "pág. 10",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-100.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Flexibilizar la regla de gasto podría permitir que ayuntamientos y consorcios públicos inviertan en vivienda y ejerzan tanteo y retracto sobre viviendas de ejecuciones hipotecarias.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 100 (2025-03-11)",
+     "locator": "pág. 14",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-100.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Poner el patrimonio de la Sareb al servicio de la ciudadanía podría compensar en parte el coste del rescate bancario.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 100 (2025-03-11)",
+     "locator": "pág. 8",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-100.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Ceder activos gratuitamente podría suponer renunciar a cancelar deuda de la Sareb avalada por el Estado, que acabaría pagando la ciudadanía.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 100 (2025-03-11)",
+     "locator": "pág. 25",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-100.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Relajar la regla de gasto podría contravenir el marco europeo de estabilidad presupuestaria y poner en riesgo el objetivo de déficit nacional.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 100 (2025-03-11)",
+     "locator": "pág. 26",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-100.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "La cesión gratuita podría beneficiar más a unas comunidades que a otras, por ejemplo a las que ya compraron inmuebles o suelos a la Sareb a cambio de un precio.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 100 (2025-03-11)",
+     "locator": "pág. 15",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-100.PDF"
+    }
+   ],
+   "gaps": "Proposición autonómica sin memoria oficial de impacto; los efectos son argumentos del debate y no se cuantifican (viviendas útiles, coste para el Estado).",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion180/20260520/Votacion005/VOT_20260520142326.json": {
@@ -362,6 +631,63 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Retirar ventajas fiscales a las sociedades de inversión inmobiliaria podría dejar de premiar la acumulación de viviendas frente a quien solo quiere vivir en una.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 185 (2026-05-19)",
+     "locator": "pág. 60",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-185.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Limitar la compra de vivienda por empresas y fondos podría reducir los desalojos de inquilinos en bloques comprados para revender y aliviar la presión sobre los precios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 185 (2026-05-19)",
+     "locator": "pág. 60",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-185.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una intervención decidida, con límites a precios y fiscalidad, podría compensar que la oferta de vivienda no se produce al ritmo al que crece la necesidad.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 185 (2026-05-19)",
+     "locator": "pág. 56",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-185.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Se señala que prohibir la compra por empresas no actuaría sobre la escasez de oferta ni sobre las causas de los precios altos, de modo que seguiría faltando vivienda asequible.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 185 (2026-05-19)",
+     "locator": "pág. 51",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-185.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Intervenir sin un diagnóstico y un plan integral podría restar seguridad jurídica a propietarios e inversores y limitar su derecho de propiedad.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 185 (2026-05-19)",
+     "locator": "pág. 55",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-185.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una prohibición para todas las personas jurídicas podría alcanzar también a fundaciones, cooperativas de vivienda y entidades sociales, no solo a los fondos de inversión.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 185 (2026-05-19)",
+     "locator": "pág. 58",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-185.PDF"
+    }
+   ],
+   "gaps": "Es una proposición sin memoria oficial de impacto. Se citan datos notariales que muestran que las empresas vendieron más vivienda de la que compraron en 2025; no se han contrastado aquí.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion134/20250924/Votacion002/VOT_20250924171304.json": {
@@ -387,6 +713,63 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Transferir los activos podría ofrecer casi de inmediato una alternativa de vivienda y alquiler social a quien la necesita, al ser inmuebles ya en manos públicas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 138 (2025-09-23)",
+     "locator": "pág. 53",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-138.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Dotar de más recursos propios a las comunidades podría reforzar la intervención pública en el sector de la vivienda.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 138 (2025-09-23)",
+     "locator": "pág. 60",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-138.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que la gestión corresponda a administraciones cercanas podría permitir ajustar las viviendas a lo que se necesita en cada lugar.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 138 (2025-09-23)",
+     "locator": "pág. 61",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-138.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Recibir los activos podría no traducirse en más vivienda protegida si la administración receptora no ejecuta los recursos que ya tiene disponibles.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 138 (2025-09-23)",
+     "locator": "pág. 57",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-138.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "El bajo número de viviendas protegidas terminadas en los últimos años hace dudar de que los activos transferidos vayan a usarse con eficacia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 138 (2025-09-23)",
+     "locator": "pág. 56",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-138.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Cesiones improvisadas podrían restar coherencia al modelo estatal que ya prepara movilizar esos activos para vivienda asequible.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 138 (2025-09-23)",
+     "locator": "pág. 57",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-138.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate. Se votó con una enmienda que amplía el enfoque a otras comunidades.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion134/20250924/Votacion008/VOT_20250924171313.json": {
@@ -423,6 +806,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Derogar la ley de vivienda podría ampliar la oferta de pisos y abaratar alquileres, al reducir la inseguridad jurídica y los trámites que, según se argumentó, frenan la construcción y la inversión.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 138 (2025-09-23)",
+     "locator": "pág. 78",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-138.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Liberar suelo y bajar impuestos a la compra podría facilitar a los jóvenes comprar su primera vivienda y aumentar la construcción.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 138 (2025-09-23)",
+     "locator": "pág. 72",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-138.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Eliminar la regulación de los alquileres podría favorecer a los grandes tenedores y fondos, y encarecer el acceso a la vivienda de las familias.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 138 (2025-09-23)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-138.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Permitir que la vivienda protegida pase al mercado privado podría reducir un parque protegido ya escaso y perjudicar a las familias con menos recursos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 138 (2025-09-23)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-138.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Más deducciones y supresión de impuestos podrían vaciar las arcas públicas y beneficiar poco a las familias precarias, que difícilmente compran o heredan.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 138 (2025-09-23)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-138.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; los efectos son argumentos del debate, sin datos que los cuantifiquen.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion118/20250612/Votacion012/VOT_20250612132253.json": {
@@ -459,6 +891,63 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Regular el alquiler de temporada podría impedir que se usen contratos de temporada, turísticos o por habitaciones para eludir los topes al alquiler.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 121 (2025-06-11)",
+     "locator": "pág. 62",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-121.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Gravar la acumulación de viviendas y quitar ventajas fiscales a las SOCIMI podría frenar que se compren pisos solo para obtener rentas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 121 (2025-06-11)",
+     "locator": "pág. 52",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-121.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Poner un límite a los beneficios del alquiler podría reducir la indefensión de muchas personas inquilinas sin impedir alquilar ni obtener beneficio.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 121 (2025-06-11)",
+     "locator": "pág. 58",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-121.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "La intervención en el mercado y la inseguridad jurídica podrían llevar a pequeños propietarios a dejar de alquilar y reducir la oferta y los contratos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 121 (2025-06-11)",
+     "locator": "pág. 64",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-121.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Regular alquiler de temporada y de habitaciones desde el Estado podría invadir la competencia en derecho civil de comunidades con régimen propio.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 121 (2025-06-11)",
+     "locator": "pág. 61",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-121.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los cambios fiscales y normativos por sí solos podrían no bastar: se señala que hacen falta vivienda pública, trámites más ágiles y recursos mantenidos en el tiempo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 121 (2025-06-11)",
+     "locator": "pág. 57",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-121.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; los efectos son argumentos del debate. Los datos citados sobre alquileres y oferta son discutidos y no se evalúa cada medida por separado.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion115/20250528/Votacion004/VOT_20250528152335.json": {
@@ -495,6 +984,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Menos impuestos y tasas y más colaboración público-privada podrían estimular la construcción de vivienda y aumentar la oferta.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 118 (2025-05-27)",
+     "locator": "pág. 61",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-118.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Retirar la regulación de precios y las zonas tensionadas podría evitar que se estrangule la oferta de alquiler y dar más seguridad jurídica a los propietarios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 118 (2025-05-27)",
+     "locator": "pág. 66",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-118.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Eliminar impuestos a quienes alquilan y liberalizar el suelo podría no mejorar el acceso a la vivienda y beneficiar sobre todo a los propietarios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 118 (2025-05-27)",
+     "locator": "pág. 63",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-118.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Derogar la ley de vivienda podría eliminar herramientas como las zonas tensionadas, que según se señaló bajan los precios donde se aplican.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 118 (2025-05-27)",
+     "locator": "pág. 64",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-118.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Dar prioridad a los españoles en vivienda protegida y ayudas podría dejar fuera a residentes extranjeros sin resolver el problema de acceso de las familias.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 118 (2025-05-27)",
+     "locator": "pág. 63",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-118.PDF"
+    }
+   ],
+   "gaps": "Moción rechazada; sin memoria oficial de impacto. Los datos sobre oferta y precios que citan los intervinientes son contradictorios.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion093/20250219/Votacion010/VOT_20250219135545.json": {
@@ -531,6 +1069,63 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Fomentar la colaboración público-privada y la construcción de vivienda protegida podría aumentar la oferta y aliviar la presión sobre los precios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 96 (2025-02-18)",
+     "locator": "pág. 54",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-96.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Perseguir la ocupación podría dar seguridad a los propietarios y animarles a sacar al alquiler viviendas que hoy mantienen vacías.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 96 (2025-02-18)",
+     "locator": "pág. 51",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-96.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Dar seguridad jurídica al planeamiento y hacer que al sector de la construcción le salgan las cuentas podría desbloquear la construcción de las viviendas que se necesitan.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 96 (2025-02-18)",
+     "locator": "pág. 54",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-96.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Derogar la ley de vivienda eliminaría los topes al alquiler y los precios podrían mantenerse en niveles de mercado muy superiores a los de referencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 96 (2025-02-18)",
+     "locator": "pág. 51",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-96.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Construir más podría no bastar si el problema es que mucha gente no puede pagar las viviendas que ya existen, incluidas las vacías.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 96 (2025-02-18)",
+     "locator": "pág. 51",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-96.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Bonificar por completo el impuesto de transmisiones podría ser ilegal, y dar preferencia según el lugar de nacimiento podría chocar con la legislación comunitaria.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 96 (2025-02-18)",
+     "locator": "pág. 54",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-96.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate y no se cuantifican.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion079/20241121/Votacion026/VOT_20241121173823.json": {
@@ -565,6 +1160,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un plan de rehabilitación integral de los barrios de menor renta podría mejorar la cohesión social y la calidad de vida, y ayudar a retener a la población residente.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 80 (2024-11-19)",
+     "locator": "pág. 42",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-80.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Exigir a las compañías que mantengan el suministro a pequeños clientes con contrato en vigor, aunque haya sustracciones ilegales en la red, podría evitar cortes a usuarios de buena fe.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 80 (2024-11-19)",
+     "locator": "pág. 44",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-80.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Tramitar una ley para rehabilitar barrios podría retrasar las ayudas de rehabilitación que ya están disponibles para comunidades autónomas y ayuntamientos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 80 (2024-11-19)",
+     "locator": "pág. 45",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-80.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Un marco legal uniforme en vivienda podría invadir competencias autonómicas y generar conflictos territoriales que acabarían en los tribunales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 80 (2024-11-19)",
+     "locator": "pág. 50",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-80.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Centrar la respuesta en suministro y rehabilitación sin abordar la seguridad podría dejar sin atender lo que algunos vecinos de estos barrios consideran su principal problema.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 80 (2024-11-19)",
+     "locator": "pág. 45",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-80.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate y no se cuantifican.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion060/20240918/Votacion005/VOT_20240919102653.json": {
@@ -601,6 +1245,47 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Endurecer la lucha contra la okupación y derogar la ley podría reducir la indefensión de los propietarios y devolver viviendas al mercado de alquiler.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 62 (2024-09-17)",
+     "locator": "pág. 67",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-62.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Bajar impuestos a quien compra o tiene vivienda podría animar a poner más pisos en alquiler a precios menores.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 62 (2024-09-17)",
+     "locator": "pág. 66",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-62.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "La okupación se describe como un problema residual: centrar la respuesta en ella podría dejar sin atender los desahucios, mucho más frecuentes.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 62 (2024-09-17)",
+     "locator": "pág. 65",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-62.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Perdonar impuestos a quienes tienen varias viviendas podría beneficiar a los propietarios sin garantizar que los alquileres bajen.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 62 (2024-09-17)",
+     "locator": "pág. 66",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-62.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; las cifras sobre oferta, precios y okupación son afirmaciones del debate no verificadas aquí.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion198/20260916/Votacion003/VOT_20260916195340.json": {
@@ -633,6 +1318,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion180/20260520/Votacion002/VOT_20260520142321.json": {
@@ -658,6 +1349,47 @@
     "verdict": "written",
     "note": "El lote asigna 'punto 3', pero el sí significa y el texto aprobado sitúan la residencia habitual en el Punto 2 del BOCG publicado (numeración tras transacción).",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Más transparencia y control en las adjudicaciones podría reducir el tráfico de influencias y hacer que la vivienda protegida llegue a quien la necesita.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 185 (2026-05-19)",
+     "locator": "pág. 36",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-185.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Fijar desde el Estado registros y controles podría invadir competencias autonómicas y no ajustarse a la realidad de cada territorio.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 185 (2026-05-19)",
+     "locator": "pág. 37",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-185.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Supervisar la situación de las familias inquilinas exigiría estructuras y financiación que, según se señala, no están previstas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 185 (2026-05-19)",
+     "locator": "pág. 38",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-185.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Más registros, inventarios y supervisión podrían suponer más burocracia y centralización sin aumentar la oferta de vivienda.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 185 (2026-05-19)",
+     "locator": "pág. 40",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-185.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate y gran parte de él fue reproche político.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -696,6 +1428,39 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Facilitar la construcción y reducir la burocracia podría aumentar la oferta de vivienda, hoy insuficiente, y aliviar la presión sobre los precios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 185 (2026-05-19)",
+     "locator": "pág. 84",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-185.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reforzar la seguridad jurídica y la protección de los propietarios podría recuperar su confianza y evitar que se retiren viviendas del mercado del alquiler.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 185 (2026-05-19)",
+     "locator": "pág. 79",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-185.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría ocurrir que la vivienda protegida que se promueva salga a precios fuera del alcance de los hogares con ingresos bajos y no alivie el acceso.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 185 (2026-05-19)",
+     "locator": "pág. 87",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-185.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; los efectos son argumentos del debate. No hay argumentos sobre el silencio administrativo positivo.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion011/VOT_20260326165039.json": {
@@ -726,6 +1491,12 @@
     "verdict": "written",
     "note": "La numeración del texto aprobado (D-507 pág. 7) no coincide con la del voto; se usó el texto original de D-507 con la numeración votada.",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -759,6 +1530,39 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Aliviar la carga fiscal de la clase media trabajadora, por ejemplo deflactando el IRPF, podría aumentar su renta disponible.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 66",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Bajar impuestos podría reducir la capacidad del Estado para financiar sanidad, educación, dependencia y pensiones.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 61",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Las rebajas fiscales podrían beneficiar sobre todo a las rentas altas y vaciar la caja pública sin explicar cómo se compensa.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 63",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    }
+   ],
+   "gaps": "Moción de decenas de puntos sin efecto legislativo directo; el debate no analiza punto por punto vivienda (IVA primera vivienda, SAREB) ni transferencia de dependencia.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion161/20260218/Votacion005/VOT_20260218141924.json": {
@@ -790,6 +1594,31 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "La colaboración público-privada y el desbloqueo de desarrollos urbanísticos podrían permitir construir viviendas, también protegidas, que hoy están paradas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 167 (2026-02-18)",
+     "locator": "pág. 58",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-167.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Dar suelo público a constructores y rebajas fiscales a propietarios podría no abaratar el alquiler y favorecer la especulación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 167 (2026-02-18)",
+     "locator": "pág. 60",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-167.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; los efectos son argumentos del debate y varios se refieren a la ley de vivienda vigente más que a cada punto votado.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -828,6 +1657,39 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que las medidas fiscales sobre quien acumula viviendas, pisos turísticos o sociedades inmobiliarias desincentiven la especulación con la vivienda.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 140 (2025-10-07)",
+     "locator": "pág. 61",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-140.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Incluir los alquileres de temporada y de habitaciones en la regulación podría cerrar un vacío legal por el que hoy se escapan del control de precios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 140 (2025-10-07)",
+     "locator": "pág. 58",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-140.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Más regulación del alquiler podría generar inseguridad jurídica para los propietarios y hacer que se retiren viviendas del mercado, empeorando la oferta.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 140 (2025-10-07)",
+     "locator": "pág. 65",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-140.PDF"
+    }
+   ],
+   "gaps": "Proposición no de ley sin memoria oficial de impacto; no hay cifras oficiales de cuántas viviendas movilizaría cada medida. Los puntos 6 a 9 apenas se debaten uno a uno.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion132/20250917/Votacion016/VOT_20250917194038.json": {
@@ -853,6 +1715,31 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Derogar la ley de vivienda podría devolver seguridad jurídica a los propietarios que dudan en alquilar y aumentar la oferta de viviendas en alquiler.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 137 (2025-09-17)",
+     "locator": "pág. 125",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-137-C1.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Derogar la ley podría retirar herramientas de regulación del alquiler que, según se señaló, están funcionando allí donde se aplican.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 137 (2025-09-17)",
+     "locator": "pág. 133",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-137-C1.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; los efectos son argumentos del debate y se discute si la ley de vivienda es la causa del problema de acceso.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -885,6 +1772,47 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una política de vivienda más activa de los poderes públicos podría reducir las desigualdades en el acceso a una vivienda.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 96 (2025-02-18)",
+     "locator": "pág. 39",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-96.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Rebajar los alquileres por ley podría aliviar a jóvenes y familias que hoy no pueden pagar el alquiler.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 96 (2025-02-18)",
+     "locator": "pág. 45",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-96.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una rebaja general y lineal de los alquileres podría penalizar más a los propietarios que ya alquilan a precios asequibles.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 96 (2025-02-18)",
+     "locator": "pág. 40",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-96.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Rebajar alquileres por ley, limitar la compra de vivienda o hacer indefinidos los contratos podría generar inseguridad jurídica y desincentivar la inversión.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 96 (2025-02-18)",
+     "locator": "pág. 47",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-96.PDF"
+    }
+   ],
+   "gaps": "Moción declarativa sin memoria oficial de impacto; los efectos son argumentos del debate. Los puntos 3 y 5 apenas tienen mecanismos propios en el debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -923,6 +1851,39 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Simplificar los trámites urbanísticos podría reducir los plazos de construcción de diez a cuatro años y evitar que un defecto de forma o la falta de un informe paralicen proyectos de vivienda.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 97 (2025-02-19)",
+     "locator": "pág. 52",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-97.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Agilizar la transformación del suelo y eliminar trabas burocráticas podría poner en el mercado suelo disponible para destinarlo a vivienda asequible.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 97 (2025-02-19)",
+     "locator": "pág. 53",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-97.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Algunos puntos de la moción podrían invadir competencias de las comunidades autónomas en materia de vivienda, lo que podría generar conflicto competencial.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 97 (2025-02-19)",
+     "locator": "pág. 59",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-97.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; los efectos son argumentos del debate, sin estimación de cuánta vivienda adicional o cuánto ahorro supondría cada punto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion049/20240620/Votacion014/VOT_20240620132736.json": {
@@ -948,6 +1909,39 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Limitar la compra de vivienda por no residentes en zonas tensionadas, como las islas, podría frenar la especulación y proteger el acceso a la vivienda de la población local.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 49 (2024-06-18)",
+     "locator": "pág. 62",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-49.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Limitar la compra de vivienda a no residentes podría chocar con la libre circulación de capitales de la UE, salvo razones imperiosas de interés general reconocidas por la justicia europea.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 49 (2024-06-18)",
+     "locator": "pág. 66",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-49.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Restringir y prohibir actividad turística podría reducir empleo e ingresos en un sector que se señaló como gran motor del PIB y del empleo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 49 (2024-06-18)",
+     "locator": "pág. 72",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-49.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; las cifras de peso del turismo y los efectos sobre vivienda y empleo son afirmaciones del debate, no estimaciones contrastadas.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -979,6 +1973,31 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Declarar la emergencia habitacional podría dar más base a los poderes públicos para actuar en vivienda invocando el interés social.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 36 (2024-04-09)",
+     "locator": "pág. 35",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-36.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Se señaló que podría invadir competencias de las comunidades autónomas en materia de vivienda.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 36 (2024-04-09)",
+     "locator": "pág. 43",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-36.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate. No hay argumentos específicos sobre el índice de actualización del alquiler (punto 2.4).",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1017,6 +2036,39 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Ampliar el parque público de alquiler con pisos turísticos ilegales o de grandes propietarios podría aumentar la oferta de vivienda asequible.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 204 (2026-09-15)",
+     "locator": "pág. 68",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-204.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Expropiar y regular precios por ley podría restar seguridad jurídica y no aumentar la oferta; se planteó construir más vivienda como alternativa.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 204 (2026-09-15)",
+     "locator": "pág. 75",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-204.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Medidas estatales de vivienda podrían chocar con las competencias autonómicas y con las ya impulsadas en algunos territorios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 204 (2026-09-15)",
+     "locator": "pág. 68",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-204.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; el debate no cuantifica el coste de las medidas ni su encaje legal.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion198/20260916/Votacion005/VOT_20260916195345.json": {
@@ -1054,6 +2106,39 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Ampliar el parque público de alquiler con pisos turísticos ilegales o de grandes propietarios podría aumentar la oferta de vivienda asequible.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 204 (2026-09-15)",
+     "locator": "pág. 68",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-204.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Expropiar y regular precios por ley podría restar seguridad jurídica y no aumentar la oferta; se planteó construir más vivienda como alternativa.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 204 (2026-09-15)",
+     "locator": "pág. 75",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-204.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Medidas estatales de vivienda podrían chocar con las competencias autonómicas y con las ya impulsadas en algunos territorios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 204 (2026-09-15)",
+     "locator": "pág. 68",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-204.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; el debate no cuantifica el coste de las medidas ni su encaje legal.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion180/20260520/Votacion004/VOT_20260520142324.json": {
@@ -1072,6 +2157,55 @@
     "verdict": "none",
     "note": "El texto del lote es solo el aprobado (3 puntos); el resto rechazado no figura en el lote y no se puede citar literal.",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Mantener la calificación protegida de forma permanente podría evitar que las viviendas públicas pasen al mercado privado y ampliar el parque público a largo plazo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 185 (2026-05-19)",
+     "locator": "pág. 36",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-185.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Más transparencia y control en las adjudicaciones podría reducir el tráfico de influencias y hacer que la vivienda protegida llegue a quien la necesita.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 185 (2026-05-19)",
+     "locator": "pág. 36",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-185.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Fijar desde el Estado registros y controles podría invadir competencias autonómicas y no ajustarse a la realidad de cada territorio.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 185 (2026-05-19)",
+     "locator": "pág. 37",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-185.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Supervisar la situación de las familias inquilinas exigiría estructuras y financiación que, según se señala, no están previstas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 185 (2026-05-19)",
+     "locator": "pág. 38",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-185.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Más registros, inventarios y supervisión podrían suponer más burocracia y centralización sin aumentar la oferta de vivienda.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 185 (2026-05-19)",
+     "locator": "pág. 40",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-185.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate y gran parte de él fue reproche político.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1110,6 +2244,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion161/20260218/Votacion008/VOT_20260218141929.json": {
@@ -1135,6 +2275,12 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1173,6 +2319,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion161/20260218/Votacion012/VOT_20260218141936.json": {
@@ -1203,6 +2355,12 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1235,6 +2393,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion091/VOT_20251008195403.json": {
@@ -1266,6 +2430,12 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1309,6 +2479,31 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que las medidas fiscales sobre quien acumula viviendas, pisos turísticos o sociedades inmobiliarias desincentiven la especulación con la vivienda.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 140 (2025-10-07)",
+     "locator": "pág. 61",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-140.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Un recargo del IBI a viviendas vacías podría no aumentar la oferta de alquiler: en un municipio que lo aplicó no se movilizó más vivienda.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 140 (2025-10-07)",
+     "locator": "pág. 62",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-140.PDF"
+    }
+   ],
+   "gaps": "Proposición no de ley sin memoria oficial de impacto; no hay cifras oficiales de cuántas viviendas movilizaría cada medida. Los puntos 6 a 9 apenas se debaten uno a uno.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion094/VOT_20251008195407.json": {
@@ -1340,6 +2535,31 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Incluir los alquileres de temporada y de habitaciones en la regulación podría cerrar un vacío legal por el que hoy se escapan del control de precios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 140 (2025-10-07)",
+     "locator": "pág. 58",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-140.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Más regulación del alquiler podría generar inseguridad jurídica para los propietarios y hacer que se retiren viviendas del mercado, empeorando la oferta.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 140 (2025-10-07)",
+     "locator": "pág. 65",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-140.PDF"
+    }
+   ],
+   "gaps": "Proposición no de ley sin memoria oficial de impacto; no hay cifras oficiales de cuántas viviendas movilizaría cada medida. Los puntos 6 a 9 apenas se debaten uno a uno.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion095/VOT_20251008195408.json": {
@@ -1365,6 +2585,12 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1397,6 +2623,31 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Más vivienda pública y protegida, con los pisos de la Sareb y Sepes y financiación a las administraciones, daría alternativas reales fuera del mercado privado.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 140 (2025-10-07)",
+     "locator": "pág. 58",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-140.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Adquirir o construir vivienda pública costaría mucho y tardaría años, con falta de personal en la construcción, lo que podría frustrar las expectativas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 140 (2025-10-07)",
+     "locator": "pág. 66",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-140.PDF"
+    }
+   ],
+   "gaps": "Proposición no de ley sin memoria oficial de impacto; no hay cifras oficiales de cuántas viviendas movilizaría cada medida. Los puntos 6 a 9 apenas se debaten uno a uno.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion097/VOT_20251008195409.json": {
@@ -1427,6 +2678,31 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Más vivienda pública y protegida, con los pisos de la Sareb y Sepes y financiación a las administraciones, daría alternativas reales fuera del mercado privado.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 140 (2025-10-07)",
+     "locator": "pág. 58",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-140.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Adquirir o construir vivienda pública costaría mucho y tardaría años, con falta de personal en la construcción, lo que podría frustrar las expectativas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 140 (2025-10-07)",
+     "locator": "pág. 66",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-140.PDF"
+    }
+   ],
+   "gaps": "Proposición no de ley sin memoria oficial de impacto; no hay cifras oficiales de cuántas viviendas movilizaría cada medida. Los puntos 6 a 9 apenas se debaten uno a uno.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1459,6 +2735,39 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una política de vivienda más activa de los poderes públicos podría reducir las desigualdades en el acceso a una vivienda.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 96 (2025-02-18)",
+     "locator": "pág. 39",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-96.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Rebajar alquileres por ley, limitar la compra de vivienda o hacer indefinidos los contratos podría generar inseguridad jurídica y desincentivar la inversión.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 96 (2025-02-18)",
+     "locator": "pág. 47",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-96.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Prohibir comprar vivienda salvo para uso propio podría impedir que entidades sociales adquieran viviendas para ofrecer alquiler asequible.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 96 (2025-02-18)",
+     "locator": "pág. 41",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-96.PDF"
+    }
+   ],
+   "gaps": "Moción declarativa sin memoria oficial de impacto; los efectos son argumentos del debate. Los puntos 3 y 5 apenas tienen mecanismos propios en el debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion093/20250219/Votacion008/VOT_20250219135542.json": {
@@ -1489,6 +2798,39 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una política de vivienda más activa de los poderes públicos podría reducir las desigualdades en el acceso a una vivienda.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 96 (2025-02-18)",
+     "locator": "pág. 39",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-96.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Rebajar alquileres por ley, limitar la compra de vivienda o hacer indefinidos los contratos podría generar inseguridad jurídica y desincentivar la inversión.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 96 (2025-02-18)",
+     "locator": "pág. 47",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-96.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Hacer indefinidos los contratos de alquiler podría paralizar el mercado de la vivienda, según se señaló.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 96 (2025-02-18)",
+     "locator": "pág. 40",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-96.PDF"
+    }
+   ],
+   "gaps": "Moción declarativa sin memoria oficial de impacto; los efectos son argumentos del debate. Los puntos 3 y 5 apenas tienen mecanismos propios en el debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1527,6 +2869,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion049/20240620/Votacion015/VOT_20240620132737.json": {
@@ -1558,6 +2906,39 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una moratoria de nuevas licencias de vivienda turística hasta 2028 podría proteger el entorno de territorios sensibles y frenar el crecimiento continuo de plazas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 49 (2024-06-18)",
+     "locator": "pág. 62",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-49.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Imponer desde el Estado la moratoria o los límites a zonas naturales podría invadir competencias de comunidades autónomas y ayuntamientos y ser difícil de aplicar.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 49 (2024-06-18)",
+     "locator": "pág. 67",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-49.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Restringir y prohibir actividad turística podría reducir empleo e ingresos en un sector que se señaló como gran motor del PIB y del empleo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 49 (2024-06-18)",
+     "locator": "pág. 72",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-49.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; las cifras de peso del turismo y los efectos sobre vivienda y empleo son afirmaciones del debate, no estimaciones contrastadas.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1595,6 +2976,47 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Regular el alquiler de temporada y el turístico podría frenar el fraude de quien los usa para eludir la regulación del alquiler habitual.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 36 (2024-04-09)",
+     "locator": "pág. 39",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-36.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Más regulación del alquiler podría reducir la oferta de vivienda, como se dijo que ocurrió con la ley vigente.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 36 (2024-04-09)",
+     "locator": "pág. 40",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-36.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Se señaló que podría aumentar la inseguridad jurídica y la desconfianza de quienes alquilan o invierten en vivienda.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 36 (2024-04-09)",
+     "locator": "pág. 43",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-36.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Se señaló que podría invadir competencias de las comunidades autónomas en materia de vivienda.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 36 (2024-04-09)",
+     "locator": "pág. 43",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-36.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate. No hay argumentos específicos sobre el índice de actualización del alquiler (punto 2.4).",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion034/20240409/Votacion005/VOT_20240409210635.json": {
@@ -1625,6 +3047,47 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Limitar el precio del alquiler por habitaciones podría aliviar el esfuerzo de quienes comparten piso y destinan más del 40 % de su renta.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 36 (2024-04-09)",
+     "locator": "pág. 34",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-36.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Más regulación del alquiler podría reducir la oferta de vivienda, como se dijo que ocurrió con la ley vigente.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 36 (2024-04-09)",
+     "locator": "pág. 40",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-36.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Se señaló que podría aumentar la inseguridad jurídica y la desconfianza de quienes alquilan o invierten en vivienda.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 36 (2024-04-09)",
+     "locator": "pág. 43",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-36.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Se señaló que podría invadir competencias de las comunidades autónomas en materia de vivienda.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 36 (2024-04-09)",
+     "locator": "pág. 43",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-36.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate. No hay argumentos específicos sobre el índice de actualización del alquiler (punto 2.4).",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1663,6 +3126,47 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Regular el alquiler de temporada y el turístico podría frenar el fraude de quien los usa para eludir la regulación del alquiler habitual.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 36 (2024-04-09)",
+     "locator": "pág. 39",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-36.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Más regulación del alquiler podría reducir la oferta de vivienda, como se dijo que ocurrió con la ley vigente.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 36 (2024-04-09)",
+     "locator": "pág. 40",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-36.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Se señaló que podría aumentar la inseguridad jurídica y la desconfianza de quienes alquilan o invierten en vivienda.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 36 (2024-04-09)",
+     "locator": "pág. 43",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-36.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Se señaló que podría invadir competencias de las comunidades autónomas en materia de vivienda.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 36 (2024-04-09)",
+     "locator": "pág. 43",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-36.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate. No hay argumentos específicos sobre el índice de actualización del alquiler (punto 2.4).",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion034/20240409/Votacion007/VOT_20240409210637.json": {
@@ -1693,6 +3197,12 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   }

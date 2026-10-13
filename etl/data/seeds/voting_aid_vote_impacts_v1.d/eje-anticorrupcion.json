@@ -171,6 +171,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una oficina independiente con funciones de prevención y supervisión podría coordinar mejor la lucha contra la corrupción hoy repartida entre varios organismos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 136 (2025-09-16)",
+     "locator": "pág. 22",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-136.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una agencia así podría ayudar a que el miedo o la complicidad no impidan denunciar prácticas corruptas ante los tribunales, incluso entre compañeros.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 136 (2025-09-16)",
+     "locator": "pág. 20",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-136.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podrían aparecer duplicidades con las leyes y organismos ya existentes, y no está claro de quién dependería, cuánto costaría ni cómo se garantizaría su independencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 136 (2025-09-16)",
+     "locator": "pág. 20",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-136.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "El texto podría chocar con las competencias de otras administraciones, un punto que según el debate necesita corregirse.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 136 (2025-09-16)",
+     "locator": "pág. 22",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-136.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una oficina por sí sola podría no acabar con la corrupción, que se describe como un problema sistémico y continuado.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 136 (2025-09-16)",
+     "locator": "pág. 23",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-136.PDF"
+    }
+   ],
+   "gaps": "Es una toma en consideración, no una ley aprobada; el texto aún podría cambiar. No consta memoria de impacto ni coste de la oficina.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion102/20250325/Votacion001/VOT_20250325212231.json": {
@@ -227,6 +276,55 @@
     "note": "Ley de secretos; quitada cifra del 23-F",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Fijar un plazo máximo de vigencia para cada clasificación podría permitir que la información secreta o reservada acabe saliendo a la luz y que la ciudadanía acceda a ella.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 26 (2024-02-27)",
+     "locator": "pág. 10",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-26.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría reforzar la transparencia y el control de los poderes públicos, y acercar la legislación a la de los países del entorno europeo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 26 (2024-02-27)",
+     "locator": "pág. 10",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-26.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Hoy la clasificación se mantiene sin límite de tiempo y no existe listado de documentos secretos; la reforma podría dar seguridad jurídica y desclasificación automática al vencer los plazos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 26 (2024-02-27)",
+     "locator": "pág. 17",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-26.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Las sesiones secretas del Parlamento podrían dejar de serlo, trasladando a la opinión pública debates que por su naturaleza deberían quedar fuera de ese ámbito.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 26 (2024-02-27)",
+     "locator": "pág. 8",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-26.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Si la reforma no tiene como objetivo mejorar la seguridad ante ataques internos o externos, podría debilitar la protección de la información sensible.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 26 (2024-02-27)",
+     "locator": "pág. 19",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-26.PDF"
+    }
+   ],
+   "gaps": "Toma en consideración de una proposición de ley sin memoria de impacto; los efectos son argumentos del debate. El texto exacto de los plazos y de la desclasificación se concretaría en la tramitación.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion196/20260910/Votacion005/VOT_20260910180633.json": {
@@ -252,6 +350,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Actualizar las declaraciones cuando hay cambios sustanciales en ingresos podría dar a la ciudadanía información de lo que cobran los diputados y dirigentes de la oposición.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 203 (2026-09-10)",
+     "locator": "pág. 41",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-203.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Más transparencia podría fortalecer la confianza en las instituciones, ayudar a la ciudadanía a formarse una opinión y favorecer la participación en los asuntos públicos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 203 (2026-09-10)",
+     "locator": "pág. 49",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-203.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Pedir a la Cámara que se comprometa a cumplir normas que ya existen podría sugerir laxitud en su cumplimiento y volverse contra el prestigio de las instituciones.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 203 (2026-09-10)",
+     "locator": "pág. 43",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-203.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "El Parlamento podría no poder comprometerse a impulsar reformas legislativas por esta vía, que no sustituye a una iniciativa de reforma del Reglamento.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 203 (2026-09-10)",
+     "locator": "pág. 43",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-203.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una exigencia que señala a una sola persona podría convertirse en un arma partidista en lugar de una norma general de transparencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 203 (2026-09-10)",
+     "locator": "pág. 44",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-203.PDF"
+    }
+   ],
+   "gaps": "Proposición no de ley sin efecto vinculante; el debate no cuantifica qué información nueva se publicaría ni qué normas se reformarían.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion079/20241121/Votacion027/VOT_20241121173825.json": {
@@ -283,6 +430,39 @@
     "note": "23-F: cifra de desclasificación ya específica",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Desclasificar la documentación del 23-F podría aclarar qué ocurrió antes, durante y después del golpe y resolver dudas históricas que siguen abiertas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 80 (2024-11-19)",
+     "locator": "pág. 58",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-80.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que publicar documentos de hace más de cuarenta años refuerce la transparencia y el acceso a la información pública propios de una democracia madura.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 80 (2024-11-19)",
+     "locator": "pág. 53",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-80.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Desclasificarlo todo sin criterios claros podría chocar con la protección de la seguridad nacional, que debería justificar en cada caso la no desclasificación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 80 (2024-11-19)",
+     "locator": "pág. 53",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-80.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto. Un orador dudó de que existan esos papeles; no se sabe qué documentos hay ni qué contienen.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion185/20260611/Votacion036/VOT_20260611145747.json": {
@@ -308,6 +488,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Debate centrado en reproches políticos y casos de corrupción; no se discuten mecanismos ni efectos de los puntos sobre Plus Ultra.",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion180/20260520/Votacion001/VOT_20260520142319.json": {
@@ -333,6 +519,47 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Más transparencia y control en las adjudicaciones podría reducir el tráfico de influencias y hacer que la vivienda protegida llegue a quien la necesita.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 185 (2026-05-19)",
+     "locator": "pág. 36",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-185.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Fijar desde el Estado registros y controles podría invadir competencias autonómicas y no ajustarse a la realidad de cada territorio.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 185 (2026-05-19)",
+     "locator": "pág. 37",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-185.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Supervisar la situación de las familias inquilinas exigiría estructuras y financiación que, según se señala, no están previstas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 185 (2026-05-19)",
+     "locator": "pág. 38",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-185.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Más registros, inventarios y supervisión podrían suponer más burocracia y centralización sin aumentar la oferta de vivienda.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 185 (2026-05-19)",
+     "locator": "pág. 40",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-185.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate y gran parte de él fue reproche político.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion088/20241219/Votacion084/VOT_20241219162837.json": {
@@ -357,6 +584,12 @@
     "verdict": "improved",
     "note": "Altos cargos AGE; quitada cifra genérica del CIS",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Debate de reproche político y de corrupción sin mecanismos de efecto sobre la población.",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -383,6 +616,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "El debate es sobre todo reproche político y acusaciones cruzadas; no se defienden mecanismos concretos de beneficio o riesgo para los 14 puntos votados.",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion033/20240321/Votacion008/VOT_20240321105715.json": {
@@ -408,6 +647,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Debate de reproche político; solo se menciona la transparencia de contratos, sin riesgos argumentados.",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion116/20250610/Votacion002/VOT_20250610202447.json": {
@@ -444,6 +689,63 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que el registro de grupos de interés dé transparencia sobre quién intenta influir, sobre qué, cuánto gasta y qué resultados obtiene, de modo accesible a quienes puedan verse afectados.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 120 (2025-06-10)",
+     "locator": "pág. 25",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-120.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "La huella legislativa podría permitir seguir toda la tramitación de una ley: quién la vota, quién se ha reunido con quien la vota y qué intereses pueden haber influido.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 120 (2025-06-10)",
+     "locator": "pág. 27",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-120.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un régimen sancionador podría hacer exigibles la publicación de la agenda y las declaraciones de bienes y actividades de los diputados, cuyo incumplimiento hasta ahora no acarrea sanción.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 144 (2025-10-16)",
+     "locator": "pág. 24",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-144.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Exigir lo mismo a una plataforma vecinal que a una gran empresa y su lobista profesional podría dificultar la relación de la ciudadanía con el Congreso.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 120 (2025-06-10)",
+     "locator": "pág. 23",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-120.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Regular a los lobbies podría legitimar al lobista profesional sin abordar las puertas giratorias ni otras vías de presión de los grandes poderes económicos que no pasan por el Congreso.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 120 (2025-06-10)",
+     "locator": "pág. 23",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-120.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los nuevos trámites podrían suponer carga burocrática y ralentizar la actividad legislativa, y un procedimiento sancionador poco técnico podría politizarse.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 120 (2025-06-10)",
+     "locator": "pág. 28",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-120.PDF"
+    }
+   ],
+   "gaps": "Proposición de reforma del Reglamento sin memoria oficial de impacto; los efectos son argumentos del debate. Se desconoce el coste y el alcance real del registro.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion043/20240530/Votacion012/VOT_20240530120007.json": {
@@ -470,6 +772,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "El debate es sobre todo reproche político y acusaciones cruzadas; no se defienden mecanismos concretos de beneficio o riesgo para los 14 puntos votados.",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion043/20240530/Votacion014/VOT_20240530120009.json": {
@@ -501,6 +809,12 @@
     "note": "Altos cargos y autorizaciones a exaltos cargos (puertas giratorias)",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "El debate es sobre todo reproche político y acusaciones cruzadas; no se defienden mecanismos concretos de beneficio o riesgo para los 14 puntos votados.",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion043/20240530/Votacion018/VOT_20240530120013.json": {
@@ -522,6 +836,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "El debate es sobre todo reproche político y acusaciones cruzadas; no se defienden mecanismos concretos de beneficio o riesgo para los 14 puntos votados.",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   }
  }

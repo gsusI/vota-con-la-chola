@@ -78,6 +78,55 @@
     "note": "cifra propia de Atención Primaria",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Permitir que residentes de último año ya cualificados atiendan con supervisión podría aliviar este verano la falta de médicos en atención primaria.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 52 (2024-06-25)",
+     "locator": "pág. 42",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-52-C1.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Acelerar la revisión y homologación de profesionales cualificados no comunitarios podría aumentar el número de profesionales disponibles, como dicen que ocurre en otros países de la UE.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 52 (2024-06-25)",
+     "locator": "pág. 42",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-52-C1.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Retirar temporalmente las notas de corte del MIR podría permitir cubrir plazas de formación que quedan vacías mientras falten médicos de familia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 52 (2024-06-25)",
+     "locator": "pág. 42",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-52-C1.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Homologar títulos sin garantías suficientes podría poner en riesgo la calidad y la seguridad formativa y asistencial.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 52 (2024-06-25)",
+     "locator": "pág. 43",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-52-C1.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Medidas pensadas para este verano podrían ser solo un alivio puntual y no resolver el problema estructural de falta de profesionales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 52 (2024-06-25)",
+     "locator": "pág. 44",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-52-C1.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion091/20250212/Votacion003/VOT_20250212154038.json": {
@@ -103,6 +152,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Dotar de más recursos a la atención sanitaria en Canarias podría aliviar un colapso que también afectaría a la población residente.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 94 (2025-02-11)",
+     "locator": "pág. 61",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-94.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un plan integral de migración y medidas extraordinarias del Estado podrían reducir el sobreesfuerzo que soportan los servicios públicos canarios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 94 (2025-02-11)",
+     "locator": "pág. 58",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-94.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Unos criterios de derivación que tengan en cuenta población, recursos y personas ya acogidas en cada territorio podrían repartir la carga de forma más justa.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 94 (2025-02-11)",
+     "locator": "pág. 55",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-94.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Se señala que pedir más dinero y mantener regularizaciones podría actuar como efecto llamada y consolidar la ruta atlántica.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 94 (2025-02-11)",
+     "locator": "pág. 56",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-94.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Las medidas parciales o puntuales podrían no bastar ante un problema estructural y dejar los servicios sanitarios y sociales tensionados.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 94 (2025-02-11)",
+     "locator": "pág. 58",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-94.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; el debate disponible está recortado y los efectos son argumentos de las intervenciones.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion146/20251113/Votacion058/VOT_20251113131329.json": {
@@ -134,6 +232,47 @@
     "note": "homenaje simbólico a toda la sanidad pública",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un reconocimiento institucional podría explicar a las nuevas generaciones qué supuso la sanidad universal y recordar que estos derechos se pueden perder si no se cuidan.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 149 (2025-11-11)",
+     "locator": "pág. 42",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-149.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reivindicar el papel de los profesionales sanitarios podría reforzar el reconocimiento de quienes sostienen cada día una atención universal y equitativa.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 149 (2025-11-11)",
+     "locator": "pág. 42",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-149.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Un homenaje sin más recursos ni mejores condiciones laborales podría quedarse en lo simbólico mientras la atención primaria y las listas de espera siguen tensionadas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 149 (2025-11-11)",
+     "locator": "pág. 47",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-149.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una mirada nostálgica y complaciente podría ocultar lo pendiente, como un gasto sanitario público por debajo de la media europea y el peso del gasto privado.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 149 (2025-11-11)",
+     "locator": "pág. 48",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-149.PDF"
+    }
+   ],
+   "gaps": "Proposición declarativa sin memoria de impacto; los efectos son argumentos del debate y no hay compromisos de gasto ni medidas concretas.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion151/20251127/Votacion001/VOT_20251127124047.json": {
@@ -164,6 +303,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Detectar enfermedades graves antes de que aparezcan los síntomas podría permitir tratarlas a tiempo y evitar secuelas de por vida, sobre todo en enfermedades raras.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 154 (2025-11-25)",
+     "locator": "pág. 4",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-154.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Revisar el cribado neonatal de forma periódica con criterios de efectividad clínica, coste-efectividad y equidad podría dar seguridad jurídica y agilizar la incorporación de nuevas pruebas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 154 (2025-11-25)",
+     "locator": "pág. 4",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-154.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un cribado amplio y actualizado para todos los recién nacidos podría reducir las diferencias entre comunidades, donde hoy se criban muchas o pocas enfermedades según el lugar de nacimiento.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 154 (2025-11-25)",
+     "locator": "pág. 8",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-154.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "La ley podría invadir competencias sanitarias de las comunidades autónomas, que ya tienen sus propios programas de cribado y ven mal una evaluación impuesta desde el Estado.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 154 (2025-11-25)",
+     "locator": "pág. 11",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-154.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Mientras la sanidad siga descentralizada, la ley podría quedarse en un parche que no iguale del todo el acceso al cribado entre territorios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 110",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    }
+   ],
+   "gaps": "Debate sobre la toma en consideración; el texto pudo cambiar después. No hay memoria de impacto citada en el debate sobre coste para las comunidades.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   }
  }

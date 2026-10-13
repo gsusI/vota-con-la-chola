@@ -256,6 +256,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Debate centrado en reproches políticos y en el trámite de la Mesa; no se defienden mecanismos de efecto sobre ciudadanos ni se señalan riesgos concretos de la moción.",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion177/20260430/Votacion009/VOT_20260430125155.json": {
@@ -292,6 +298,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Priorizar el mantenimiento frente a las inauguraciones y planificar a medio y largo plazo podría mejorar la seguridad y reducir retrasos y averías en trenes y carreteras.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 182 (2026-04-29)",
+     "locator": "pág. 70",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-182.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reducir el déficit de inversión en carreteras podría disminuir los accidentes relacionados con su mal estado.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 182 (2026-04-29)",
+     "locator": "pág. 71",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-182.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Invertir en conservar las infraestructuras podría conectar territorios, crear empleo y generar oportunidades.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 182 (2026-04-29)",
+     "locator": "pág. 76",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-182.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Pedir el cese del ministro podría no resolver los problemas de ejecución presupuestaria de las inversiones, que requerirían cambiar el modelo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 182 (2026-04-29)",
+     "locator": "pág. 72",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-182.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Si las inversiones no se ejecutan y el mantenimiento se degrada, podrían aumentar los retrasos, las averías y el tiempo que pierden los viajeros.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 182 (2026-04-29)",
+     "locator": "pág. 78",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-182.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; las cifras de inversión del debate son de parte y no se han contrastado aquí.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion161/20260218/Votacion004/VOT_20260218141923.json": {
@@ -327,6 +382,63 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una auditoría técnica independiente y puestos de responsabilidad ocupados por perfiles técnicos podrían mejorar la gestión de la seguridad ferroviaria y recuperar la confianza de los usuarios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 166 (2026-02-17)",
+     "locator": "pág. 62",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-166.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un plan nacional de inversiones en la red podría mejorar su operatividad y reforzar la cohesión territorial.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 166 (2026-02-17)",
+     "locator": "pág. 62",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-166.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Hacer las auscultaciones según el riesgo, y no según los medios disponibles, podría detectar antes los defectos internos de la vía.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 166 (2026-02-17)",
+     "locator": "pág. 66",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-166.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Con más viajeros y más trenes aumenta el desgaste, de modo que sin más inspección y mantenimiento podría aumentar el riesgo de accidentes en alta velocidad y cercanías.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 166 (2026-02-17)",
+     "locator": "pág. 66",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-166.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Usar el accidente como arma política antes de conocer su causa podría presionar a la comisión de expertos y aumentar la confusión de las familias de las víctimas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 166 (2026-02-17)",
+     "locator": "pág. 65",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-166.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Las dudas sobre la seguridad y la reducción de velocidades y frecuencias podrían generar preocupación y miedo entre usuarios y trabajadores.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 166 (2026-02-17)",
+     "locator": "pág. 63",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-166.PDF"
+    }
+   ],
+   "gaps": "La causa del accidente seguía en investigación; se señaló que parte de las medidas pedidas ya serían obligaciones legales. Sin memoria oficial de impacto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion159/20260212/Votacion004/VOT_20260212114310.json": {
@@ -357,6 +469,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Auditar y reforzar el mantenimiento preventivo podría detectar fallos antes de que ocurran y mejorar la seguridad de la red, en lugar de reaccionar cuando el problema ya existe.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 163 (2026-02-10)",
+     "locator": "pág. 40",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-163-C1.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Cumplir los plazos fijados por ley y recuperar la inversión efectiva en mantenimiento y prevención podría reducir retrasos, cancelaciones y limitaciones de velocidad.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 163 (2026-02-10)",
+     "locator": "pág. 36",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-163-C1.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una auditoría sin certificación acreditada y reconocida, como la de la autoridad ferroviaria europea, podría quedarse en un gesto sin eficacia real.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 163 (2026-02-10)",
+     "locator": "pág. 40",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-163-C1.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Pedir ceses antes de que termine la investigación del accidente podría adelantar conclusiones; se plantea esperar a conocer qué ocurrió antes de exigir responsabilidades.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 163 (2026-02-10)",
+     "locator": "pág. 39",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-163-C1.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "La propuesta podría no recuperar capacidad técnica propia ni reforzar las plantillas del gestor de infraestructuras, que sostienen el mantenimiento diario de la red.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 163 (2026-02-10)",
+     "locator": "pág. 44",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-163-C1.PDF"
+    }
+   ],
+   "gaps": "Gran parte del debate es reproche político; los efectos aquí son los mecanismos sobre mantenimiento y auditoría. No hay memoria oficial de impacto, y la investigación del accidente seguía abierta.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion159/20260212/Votacion008/VOT_20260212114317.json": {
@@ -424,6 +585,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Los argumentos son de un solo lado (garantizar independencia) o reproche político; no se señalan riesgos con mecanismo.",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion148/20251119/Votacion005/VOT_20251119145820.json": {
@@ -454,6 +621,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Debate de acusaciones cruzadas sobre corrupción; no se defienden mecanismos de efecto de lo votado ni riesgos.",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion141/20251022/Votacion002/VOT_20251022134515.json": {
@@ -488,6 +661,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una auditoría independiente, con evaluación en tiempo real del sistema, podría detectar los fallos de las pulseras y servir de base para medidas de mejora.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 145 (2025-10-21)",
+     "locator": "pág. 45",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-145.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una investigación rigurosa podría aclarar a cuántas mujeres afectó el fallo y de qué modo, e incorporar correcciones al nuevo pliego de contratación de 2026.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 145 (2025-10-21)",
+     "locator": "pág. 51",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-145.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una supervisión permanente y la sustitución de dispositivos poco fiables podrían reforzar la fiabilidad de la protección a las víctimas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 145 (2025-10-21)",
+     "locator": "pág. 50",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-145.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Cuestionar públicamente el sistema podría generar desconfianza y que algunas víctimas lo rechacen, aunque sigue siendo la mejor medida de protección disponible.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 145 (2025-10-21)",
+     "locator": "pág. 52",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-145.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Volver a exigir informes de solvencia de empresas ya adjudicatarias podría duplicar controles que la Administración ya aplica en la contratación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 145 (2025-10-21)",
+     "locator": "pág. 50",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-145.PDF"
+    }
+   ],
+   "gaps": "No hay datos verificados sobre cuántas mujeres afectó el fallo ni sobre causas archivadas: las partes discrepan y se remite a informes de la Fiscalía.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion134/20250924/Votacion009/VOT_20250924171314.json": {
@@ -518,6 +740,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Debate centrado en reproche político y petición de cese; no se describen mecanismos de efecto de la votación.",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion130/20250910/Votacion008/VOT_20250910213542.json": {
@@ -543,6 +771,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Debate de reproche político y acusaciones entre grupos sobre corrupción; no se señalan mecanismos de efecto (beneficios ni riesgos) de la moción.",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion124/20250626/Votacion006/VOT_20250626120534.json": {
@@ -568,6 +802,12 @@
     "verdict": "keep",
     "note": "Cifras de percepción ya miden el asunto",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Debate de reproche político y de corrupción sin mecanismos de efecto sobre la población.",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -609,6 +849,39 @@
     "note": "Viajeros de tren ya miden a los afectados",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un plan de contingencia ante cortes y retenciones podría evitar que viajeros queden tirados durante horas en las estaciones.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 118 (2025-05-27)",
+     "locator": "pág. 57",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-118.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Más inversión y trenes renovados podrían reducir las incidencias, que se atribuyeron a décadas de falta de inversión y material obsoleto.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 118 (2025-05-27)",
+     "locator": "pág. 58",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-118.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Parte de las incidencias se atribuyó a robo de cable o sabotajes, ajenos a la gestión de la red, así que más inversión podría no bastar para evitarlas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 118 (2025-05-27)",
+     "locator": "pág. 59",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-118.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; los efectos son argumentos del debate y el punto de destitución no tuvo mecanismos argumentados.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion115/20250528/Votacion005/VOT_20250528152337.json": {
@@ -639,6 +912,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Debate de reproche político cruzado; solo hay mecanismos de un lado (transparencia y neutralidad de Hacienda) y ningún riesgo argumentado.",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion112/20250520/Votacion003/VOT_20250520203913.json": {
@@ -669,6 +948,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un plan de atención a pasajeros en incidencias extraordinarias podría darles una respuesta más clara, rápida y eficaz cuando se interrumpa el servicio.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 116 (2025-05-20)",
+     "locator": "pág. 42",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-116.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un plan de choque y auditorías independientes de señalización y seguridad podrían reforzar las infraestructuras críticas y prevenir fallos futuros.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 116 (2025-05-20)",
+     "locator": "pág. 42",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-116.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Unos mecanismos de compensación ágiles y transparentes podrían permitir cobrar los costes ocasionados sin esperar a reclamar a los responsables de la incidencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 116 (2025-05-20)",
+     "locator": "pág. 42",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-116.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Centrar el debate en la reprobación personal, sin un análisis de responsabilidades objetivas y de medidas estructurales, podría no ayudar a prevenir nuevos fallos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 116 (2025-05-20)",
+     "locator": "pág. 42",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-116.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Incluir la reprobación junto a medidas consideradas razonables podría dificultar que se apoye el conjunto de la propuesta.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 116 (2025-05-20)",
+     "locator": "pág. 48",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-116.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; no se detalla el coste de los planes ni cómo se financiarían las compensaciones.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion085/20241212/Votacion007/VOT_20241212130549.json": {
@@ -695,6 +1023,12 @@
     "note": "Sin cifra oficial específica de la medida",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Debate de reproche político sin mecanismos de efecto sobre la medida votada (colaborar con la justicia); solo se dijo que el Gobierno ya lo hace.",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion076/20241114/Votacion043/VOT_20241114151053.json": {
@@ -720,6 +1054,31 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que el fiscal general deje el cargo mientras está investigado podría proteger la imparcialidad de la Fiscalía y su imagen ante la ciudadanía.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 74 (2024-10-29)",
+     "locator": "pág. 57",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-74.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Exigir un cese por una imputación aún no resuelta podría dar consecuencias políticas a un auto judicial antes de que termine la investigación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 74 (2024-10-29)",
+     "locator": "pág. 58",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-74.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; el debate se centra mayormente en el reproche político y los efectos concretos son pocos.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion076/20241114/Votacion045/VOT_20241114151055.json": {
@@ -750,6 +1109,12 @@
     "verdict": "keep",
     "note": "Sin cifra oficial específica de la Abogacía del Estado",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Debate de reproche político sin mecanismos de efecto defendidos sobre la medida votada.",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -786,6 +1151,55 @@
     "note": "Viajes en tren ya miden la red afectada",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Restablecer los compromisos de puntualidad y las bonificaciones por retraso podría compensar a los viajeros por los retrasos, averías y cancelaciones.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 71 (2024-10-16)",
+     "locator": "pág. 83",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-71.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Más inversión en la red y en los operadores podría reducir las incidencias que sufren a diario los usuarios de cercanías, media y larga distancia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 71 (2024-10-16)",
+     "locator": "pág. 85",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-71.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Protocolos rápidos de actuación, información a tiempo y salas habilitadas podrían evitar que los viajeros pasen horas de pie sin saber qué hacer en una estación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 71 (2024-10-16)",
+     "locator": "pág. 94",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-71.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Un plan que no aborde la ejecución del presupuesto ni la renovación de infraestructuras envejecidas podría no reducir las incidencias, que vienen de averías en señalización y catenarias.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 71 (2024-10-16)",
+     "locator": "pág. 92",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-71.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Las averías pueden tardar horas en arreglarse, así que mejorar el trato y la información podría aliviar el malestar pero no arreglar las vías ni evitar los retrasos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 71 (2024-10-16)",
+     "locator": "pág. 94",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-71.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; el debate mezcla datos de inversión y mejoras de tiempos con reproches políticos y los efectos aquí son solo argumentos del debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion033/20240321/Votacion004/VOT_20240321105711.json": {
@@ -816,6 +1230,12 @@
     "verdict": "keep",
     "note": "Sin cifra oficial de la compra concreta",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Debate de reproche político cruzado sin mecanismos de efecto de la medida votada.",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -859,6 +1279,31 @@
     "note": "Rescates y contratación pública, no percepción general",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reconocer y depurar las responsabilidades políticas por la compra de mascarillas podría esclarecer el caso también en el ámbito político, y no solo en el judicial.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 30 (2024-03-13)",
+     "locator": "pág. 53",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-30.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Pedir al Gobierno que depure responsabilidades podría adelantar conclusiones que corresponderían a las comisiones de investigación que se van a crear.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 30 (2024-03-13)",
+     "locator": "pág. 54",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-30.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; el debate es en buena parte reproche político y solo aporta estos dos argumentos sobre sus efectos.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion026/20240229/Votacion014/VOT_20240229115055.json": {
@@ -883,6 +1328,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Moción de reprobación y cese de un ministro; el debate es sobre todo reproche político y no describe mecanismos de efecto de lo votado.",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion200/20260923/Votacion005/VOT_20260923145119.json": {
@@ -907,6 +1358,12 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "El debate es sobre todo reproche político y resultados PISA; no se defienden mecanismos de beneficio ni de riesgo para reprobar a la ministra ni para devolver a quienes entraron en Ceuta.",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -934,6 +1391,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion191/20260625/Votacion018/VOT_20260625150811.json": {
@@ -959,6 +1422,12 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Debate dominado por reproche político y alusiones personales; no se defienden mecanismos concretos de efectos sobre la ciudadanía.",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -992,6 +1461,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Debate centrado en reproches políticos y casos de corrupción; no se discuten mecanismos ni efectos de los puntos sobre Plus Ultra.",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion183/20260528/Votacion003/VOT_20260528125337.json": {
@@ -1016,6 +1491,12 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1044,6 +1525,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion172/20260415/Votacion011/VOT_20260415133919.json": {
@@ -1069,6 +1556,12 @@
     "verdict": "written",
     "note": "El punto del lote (T4 pág. 16) no coincidía; el Punto 7 votado es el del expediente de Álora, verificado en D-517 pág. 13.",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "El punto votado (enviar el expediente de la reparación del talud de Álora) solo aparece defendido en el debate; no se señalan riesgos ni mecanismos concretos en contra, solo reproche político.",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1096,6 +1589,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Debate de reproche político y datos de plantilla sin mecanismos de riesgo asociados a las medidas votadas; solo hay argumentos a favor de más medios.",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion142/20251028/Votacion009/VOT_20251028204553.json": {
@@ -1120,6 +1619,12 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1151,6 +1656,12 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Debate dominado por reproches políticos cruzados sobre corrupción y presupuestos; no se defienden mecanismos de efecto de los tres puntos votados, ni riesgos, solo acusaciones.",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1184,6 +1695,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Debate de reproche político cruzado sobre corrupción, sin mecanismos de efectos sobre ciudadanos.",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion121/20250619/Votacion006/VOT_20250619120743.json": {
@@ -1209,6 +1726,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Debate de reproches y acusaciones políticas sobre la Guardia Civil; no hay mecanismos concretos de beneficio ni de riesgo, y los efectos no se argumentan de ambos lados.",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion118/20250612/Votacion014/VOT_20250612132255.json": {
@@ -1233,6 +1756,47 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Hacer pública la información técnica sobre el apagón podría ayudar a aclarar sus causas y permitir que los ciudadanos interesados accedan a ella.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 121 (2025-06-11)",
+     "locator": "pág. 70",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-121.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Aclarar las causas del apagón podría reducir el riesgo de que se repita un colapso del suministro con efectos en transporte, hospitales y comunicaciones.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 121 (2025-06-11)",
+     "locator": "pág. 65",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-121.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Pedir más informes o crear más comisiones podría no aportar soluciones estructurales ni afrontar las causas de fondo, y desviar el debate sobre cómo transformar el sistema eléctrico.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 121 (2025-06-11)",
+     "locator": "pág. 72",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-121.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sacar conclusiones antes de tener los datos oficiales podría dar por ciertas afirmaciones sin base mientras la investigación sigue abierta.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 121 (2025-06-11)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-121.PDF"
+    }
+   ],
+   "gaps": "Debate dominado por reproche político; mecanismos escasos. Las causas del apagón seguían bajo investigación en la fecha del debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1267,6 +1831,31 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una auditoría independiente podría aclarar si las ayudas de solvencia se concedieron con criterios homogéneos, pues una se aprobó en 75 días frente a una media de 200 a 400.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 116 (2025-05-20)",
+     "locator": "pág. 60",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-116.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Pedir medidas a partir de indicios podría poner en cuestión la labor del personal técnico que evalúa las ayudas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 116 (2025-05-20)",
+     "locator": "pág. 65",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-116.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; los efectos son argumentos del debate. No se estima el coste ni el resultado de una auditoría o reforma.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion095/20250226/Votacion017/VOT_20250226151649.json": {
@@ -1292,6 +1881,12 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "El debate es casi todo reproche político cruzado sobre casos de corrupción; no se defienden mecanismos concretos de beneficio o riesgo de las peticiones de la moción (informes, explicaciones, independencia de la Fiscalía).",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1324,6 +1919,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion088/20241219/Votacion080/VOT_20241219162832.json": {
@@ -1349,6 +1950,12 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Debate de reproche político y de corrupción sin mecanismos de efecto sobre la población.",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1381,6 +1988,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion079/20241121/Votacion028/VOT_20241121173825.json": {
@@ -1405,6 +2018,12 @@
     "verdict": "none",
     "note": "Declaración de rechazo a la gestión del Gobierno, sin medida concreta: sin efecto directo para colectivos.",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1436,6 +2055,12 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1473,6 +2098,12 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Debate de reproche político sobre casos de corrupción; no se defienden mecanismos de efecto de los puntos votados (colaboración judicial, ceses, auditoría, investigación).",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1530,6 +2161,31 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una gestión más exigente del servicio podría mejorar la fiabilidad del tren para quienes lo usan a diario para estudiar, ir al médico o trabajar.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 67 (2024-10-08)",
+     "locator": "pág. 42",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-67.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Centrar la exigencia en la gestión del servicio podría no resolver las causas de fondo señaladas en el debate: falta de inversión y de mantenimiento ferroviario.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 67 (2024-10-08)",
+     "locator": "pág. 50",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-67.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate y no hay estimación del coste de las compensaciones ni del efecto real sobre la puntualidad.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion052/20240627/Votacion029/VOT_20240627130401.json": {
@@ -1561,6 +2217,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Los beneficios (control parlamentario, cumplimiento de mandatos, presupuestos) tienen argumentos, pero los riesgos no se desarrollan: el resto del debate es reproche político sin mecanismos de riesgo.",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion052/20240627/Votacion041/VOT_20240627130414.json": {
@@ -1587,6 +2249,31 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un Poder Judicial independiente de los otros poderes podría ser la mejor garantía para combatir la corrupción y evitar que se retuerza o se eluda la ley.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 52 (2024-06-25)",
+     "locator": "pág. 70",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-52-C1.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Cuestionar de forma general la politización de la justicia podría minar la legitimidad de las instituciones, lo que se señaló como un riesgo para la democracia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 52 (2024-06-25)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-52-C1.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; el debate se centra en reproches políticos y aporta pocos mecanismos concretos sobre cada punto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion043/20240530/Votacion008/VOT_20240530120003.json": {
@@ -1612,6 +2299,12 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "El debate es sobre todo reproche político y acusaciones cruzadas; no se defienden mecanismos concretos de beneficio o riesgo para los 14 puntos votados.",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1644,6 +2337,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion036/20240423/Votacion019/VOT_20240423213529.json": {
@@ -1674,6 +2373,55 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un mayor control de la entrada irregular podría reducir la inseguridad que, según se defendió, se vincula a la inmigración ilegal.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 38 (2024-04-23)",
+     "locator": "pág. 43",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-38.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Frenar la inmigración irregular podría aliviar la presión sobre los salarios y sobre la calidad de los servicios públicos, según se argumentó.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 38 (2024-04-23)",
+     "locator": "pág. 43",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-38.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Vincular inmigración e inseguridad podría generar alarma social y señalar como sospechoso a un colectivo vulnerable.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 38 (2024-04-23)",
+     "locator": "pág. 48",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-38.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Acabar con los acuerdos bilaterales con terceros países podría dificultar ejecutar las expulsiones, pues se preguntó con qué mecanismos se harían.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 38 (2024-04-23)",
+     "locator": "pág. 48",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-38.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "El texto podría chocar con el nuevo Pacto Europeo sobre Migración y Asilo y aislar a España de sus socios, según se advirtió.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 38 (2024-04-23)",
+     "locator": "pág. 48",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-38.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate y las cifras sobre delincuencia no se detallaron.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1706,6 +2454,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion033/20240321/Votacion005/VOT_20240321105712.json": {
@@ -1736,6 +2490,12 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Debate de reproche político; solo se menciona la transparencia de contratos, sin riesgos argumentados.",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1839,6 +2599,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Debate dominado por reproche político y alusiones personales; no se defienden mecanismos concretos de efectos sobre la ciudadanía.",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion185/20260611/Votacion032/VOT_20260611145741.json": {
@@ -1869,6 +2635,12 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Debate centrado en reproches políticos y casos de corrupción; no se discuten mecanismos ni efectos de los puntos sobre Plus Ultra.",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1901,6 +2673,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Debate centrado en reproches políticos y casos de corrupción; no se discuten mecanismos ni efectos de los puntos sobre Plus Ultra.",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion185/20260611/Votacion034/VOT_20260611145745.json": {
@@ -1931,6 +2709,12 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Debate centrado en reproches políticos y casos de corrupción; no se discuten mecanismos ni efectos de los puntos sobre Plus Ultra.",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1969,6 +2753,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Debate centrado en reproches políticos y casos de corrupción; no se discuten mecanismos ni efectos de los puntos sobre Plus Ultra.",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion139/20251016/Votacion004/VOT_20251016123451.json": {
@@ -1998,6 +2788,12 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Debate dominado por reproches políticos cruzados sobre corrupción y presupuestos; no se defienden mecanismos de efecto de los tres puntos votados, ni riesgos, solo acusaciones.",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -2029,6 +2825,12 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Debate dominado por reproches políticos cruzados sobre corrupción y presupuestos; no se defienden mecanismos de efecto de los tres puntos votados, ni riesgos, solo acusaciones.",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -2067,6 +2869,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Debate de reproche político cruzado sobre corrupción, sin mecanismos de efectos sobre ciudadanos.",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion124/20250626/Votacion010/VOT_20250626120539.json": {
@@ -2092,6 +2900,12 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Debate de reproche político cruzado sobre corrupción, sin mecanismos de efectos sobre ciudadanos.",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -2122,6 +2936,12 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Debate de reproches y acusaciones políticas sobre la Guardia Civil; no hay mecanismos concretos de beneficio ni de riesgo, y los efectos no se argumentan de ambos lados.",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -2155,6 +2975,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Debate de reproches y acusaciones políticas sobre la Guardia Civil; no hay mecanismos concretos de beneficio ni de riesgo, y los efectos no se argumentan de ambos lados.",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion095/20250226/Votacion018/VOT_20250226151651.json": {
@@ -2186,6 +3012,12 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "El debate es casi todo reproche político cruzado sobre casos de corrupción; no se defienden mecanismos concretos de beneficio o riesgo de las peticiones de la moción (informes, explicaciones, independencia de la Fiscalía).",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -2219,6 +3051,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "El debate es casi todo reproche político cruzado sobre casos de corrupción; no se defienden mecanismos concretos de beneficio o riesgo de las peticiones de la moción (informes, explicaciones, independencia de la Fiscalía).",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion095/20250226/Votacion021/VOT_20250226151657.json": {
@@ -2244,6 +3082,12 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "El debate es casi todo reproche político cruzado sobre casos de corrupción; no se defienden mecanismos concretos de beneficio o riesgo de las peticiones de la moción (informes, explicaciones, independencia de la Fiscalía).",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -2271,6 +3115,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Debate de reproche político y de corrupción sin mecanismos de efecto sobre la población.",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion088/20241219/Votacion082/VOT_20241219162835.json": {
@@ -2296,6 +3146,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Debate de reproche político y de corrupción sin mecanismos de efecto sobre la población.",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion088/20241219/Votacion083/VOT_20241219162835.json": {
@@ -2320,6 +3176,12 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Debate de reproche político y de corrupción sin mecanismos de efecto sobre la población.",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -2353,6 +3215,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion070/20241023/Votacion014/VOT_20241023184352.json": {
@@ -2378,6 +3246,12 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Debate de reproche político sobre casos de corrupción; no se defienden mecanismos de efecto de los puntos votados (colaboración judicial, ceses, auditoría, investigación).",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -2410,6 +3284,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Debate de reproche político sobre casos de corrupción; no se defienden mecanismos de efecto de los puntos votados (colaboración judicial, ceses, auditoría, investigación).",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion070/20241023/Votacion016/VOT_20241023184355.json": {
@@ -2440,6 +3320,12 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Debate de reproche político sobre casos de corrupción; no se defienden mecanismos de efecto de los puntos votados (colaboración judicial, ceses, auditoría, investigación).",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -2478,6 +3364,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Debate de reproche político sobre casos de corrupción; no se defienden mecanismos de efecto de los puntos votados (colaboración judicial, ceses, auditoría, investigación).",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion070/20241023/Votacion018/VOT_20241023184357.json": {
@@ -2510,6 +3402,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Debate de reproche político sobre casos de corrupción; no se defienden mecanismos de efecto de los puntos votados (colaboración judicial, ceses, auditoría, investigación).",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion070/20241023/Votacion019/VOT_20241023184359.json": {
@@ -2529,6 +3427,12 @@
     "verdict": "none",
     "note": "Sin texto del punto en el BOCG D-227 (texto aprobado, solo 5 puntos): un intento de búsqueda sin resultado; no se puede redactar el efecto.",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Debate de reproche político sobre casos de corrupción; no se defienden mecanismos de efecto de los puntos votados (colaboración judicial, ceses, auditoría, investigación).",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -2554,6 +3458,12 @@
     "verdict": "none",
     "note": "Sin texto del punto en el BOCG D-227 (texto aprobado, solo 5 puntos): un intento de búsqueda sin resultado; no se puede redactar el efecto.",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Debate de reproche político sobre casos de corrupción; no se defienden mecanismos de efecto de los puntos votados (colaboración judicial, ceses, auditoría, investigación).",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -2600,6 +3510,12 @@
     "note": "Punto 6 de la moción presentada (no figura en el texto aprobado, renumerado).",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Los beneficios (control parlamentario, cumplimiento de mandatos, presupuestos) tienen argumentos, pero los riesgos no se desarrollan: el resto del debate es reproche político sin mecanismos de riesgo.",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion033/20240321/Votacion006/VOT_20240321105713.json": {
@@ -2630,6 +3546,12 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Debate de reproche político; solo se menciona la transparencia de contratos, sin riesgos argumentados.",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   }

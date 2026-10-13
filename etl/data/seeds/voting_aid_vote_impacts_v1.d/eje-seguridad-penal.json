@@ -293,6 +293,63 @@
     "note": "bloque, «resto de enmiendas», transaccional o sin texto votado identificable: no se puede atribuir el efecto con certeza",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que los funcionarios de prisiones tengan más protección jurídica al ser reconocidos como agentes de la autoridad frente a atentados, resistencia y desobediencia grave.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 191 (2026-06-11)",
+     "locator": "pág. 12",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-191.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría proteger la intimidad del personal penitenciario al identificarlo con su número profesional, y no con sus datos personales, en procedimientos administrativos y judiciales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 191 (2026-06-11)",
+     "locator": "pág. 12",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-191.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que dar valor probatorio a los informes del personal sobre hechos presenciados refuerce el principio de autoridad en los procedimientos disciplinarios de los centros.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 191 (2026-06-11)",
+     "locator": "pág. 12",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-191.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría suponer nuevas obligaciones económicas para la Generalitat sin financiación acordada, lo que restaría recursos a sanidad, educación o infraestructuras.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 191 (2026-06-11)",
+     "locator": "pág. 8",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-191.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría no reducir las agresiones ni la conflictividad si no se abordan las condiciones de los centros, las plantillas y la falta de atención a la salud mental, y quedar en un gesto simbólico.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 49 (2024-06-18)",
+     "locator": "pág. 9",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-49.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Se advierte de que el valor probatorio de los informes no debe sustituir la presunción de inocencia ni impedir valorar otras pruebas contrarias en una sanción.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 191 (2026-06-11)",
+     "locator": "pág. 12",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-191.PDF"
+    }
+   ],
+   "gaps": "Sin memoria oficial de impacto en el debate; no se sabe si habrá menos agresiones ni el coste para las administraciones autonómicas.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion056/VOT_20260326165143.json": {
@@ -329,6 +386,47 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Sustituir la multa por penas más duras podría reducir la sensación de impunidad de quienes hurtan o estafan de forma reiterada y no pueden pagar multas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 165 (2026-02-12)",
+     "locator": "pág. 10",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-165.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Los nuevos tipos agravados podrían proteger mejor a personas mayores y vulnerables ante estafas, y a quienes sufren robos de móviles o de herramientas y cosechas en explotaciones agrarias.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 175 (2026-03-26)",
+     "locator": "pág. 41",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-175.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Endurecer penas de delitos leves podría no prevenir esos delitos y, al hacer los juicios más complejos, colapsar aún más unos juzgados ya saturados.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 165 (2026-02-12)",
+     "locator": "pág. 11",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-165.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Penas más duras por hurto podrían multiplicar la población penitenciaria y elevar el gasto público: una plaza de prisión cuesta más que una de Formación Profesional, según se dijo en el debate.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 175 (2026-03-26)",
+     "locator": "pág. 46",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-175.PDF"
+    }
+   ],
+   "gaps": "Sin memoria oficial de impacto en este material: los efectos son argumentos del debate y no hay datos de cuánto bajarían o subirían los hurtos con la ley.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion159/20260212/Votacion022/VOT_20260212114342.json": {
@@ -365,6 +463,47 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Sustituir la multa por penas más duras podría reducir la sensación de impunidad de quienes hurtan o estafan de forma reiterada y no pueden pagar multas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 165 (2026-02-12)",
+     "locator": "pág. 10",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-165.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Los nuevos tipos agravados podrían proteger mejor a personas mayores y vulnerables ante estafas, y a quienes sufren robos de móviles o de herramientas y cosechas en explotaciones agrarias.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 175 (2026-03-26)",
+     "locator": "pág. 41",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-175.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Endurecer penas de delitos leves podría no prevenir esos delitos y, al hacer los juicios más complejos, colapsar aún más unos juzgados ya saturados.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 165 (2026-02-12)",
+     "locator": "pág. 11",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-165.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Penas más duras por hurto podrían multiplicar la población penitenciaria y elevar el gasto público: una plaza de prisión cuesta más que una de Formación Profesional, según se dijo en el debate.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 175 (2026-03-26)",
+     "locator": "pág. 46",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-175.PDF"
+    }
+   ],
+   "gaps": "Sin memoria oficial de impacto en este material: los efectos son argumentos del debate y no hay datos de cuánto bajarían o subirían los hurtos con la ley.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion167/20260324/Votacion001/VOT_20260324205012.json": {
@@ -390,6 +529,63 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Bajar el umbral de velocidad que se considera delito podría disuadir conductas temerarias y evitar siniestros graves, cuyo impacto es mucho más letal a mayor velocidad.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 7",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Rebajar el umbral podría ajustar el punto en que un exceso de velocidad pasa de infracción administrativa a delito, de modo que conductas muy peligrosas no queden sin respuesta penal.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 6",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Moderar la velocidad podría reducir el consumo de combustible y las emisiones, además de los accidentes.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 13",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Más conductas podrían pasar a ser delito, con consecuencias prácticas para los juzgados y las autoridades de tráfico; en Euskadi los delitos se habrían más que triplicado en 2025.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 8",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Centrar la respuesta en el conductor podría dejar sin abordar otros factores, como el mal estado de las carreteras, citado como causa de uno de cada tres accidentes.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 14",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Tramitarla como proposición, sin informes de órganos como el Consejo Fiscal o el CGPJ, podría dejar errores técnicos del texto sin corregir.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 15",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    }
+   ],
+   "gaps": "Proposición de ley sin informes de órganos consultivos ni memoria de impacto; los efectos son argumentos del debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion165/20260317/Votacion001/VOT_20260317205747.json": {
@@ -420,6 +616,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Impedir que condenados por terrorismo trabajen con menores o reciban subvenciones para proyectos con ellos podría proteger a alumnado y víctimas en los centros educativos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 171 (2026-03-17)",
+     "locator": "pág. 5",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-171.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Extender la medida ya aplicada a condenados por agresiones sexuales podría dar coherencia a las restricciones de contacto con menores.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 171 (2026-03-17)",
+     "locator": "pág. 5",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-171.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una inhabilitación permanente y automática podría ser desproporcionada, no distinguir la gravedad del hecho y chocar con la reinserción que busca la pena.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 171 (2026-03-17)",
+     "locator": "pág. 13",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-171.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Regularla en el Estatuto del Empleado Público y la Ley de Subvenciones podría saltarse el control del Poder Judicial.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 171 (2026-03-17)",
+     "locator": "pág. 13",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-171.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Usar criterios subjetivos de idoneidad moral podría permitir que otro Gobierno aparte a empleados públicos por sus ideas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 171 (2026-03-17)",
+     "locator": "pág. 13",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-171.PDF"
+    }
+   ],
+   "gaps": "Proposición de ley sin memoria oficial de impacto; se discute si existe vacío legal y su encaje constitucional, y la toma en consideración no fue aprobada.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion165/20260317/Votacion002/VOT_20260317205749.json": {
@@ -445,6 +690,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría impedir que salgan de prisión quienes ya han sido condenados por asesinato y vuelven a cometerlo, reduciendo el riesgo de reincidencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 171 (2026-03-17)",
+     "locator": "pág. 19",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-171.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera una respuesta penal más firme ante quien oculta el cadáver, algo que prolonga la incertidumbre de las familias y les impide cerrar el duelo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 171 (2026-03-17)",
+     "locator": "pág. 31",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-171.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría no mejorar la seguridad: se señala que endurecer las penas no reduce por sí solo la delincuencia y que la prevención y los recursos de la justicia sí lo harían.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 171 (2026-03-17)",
+     "locator": "pág. 22",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-171.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría tensionar el principio de reinserción y humanización de la pena que recoge la Constitución, al ampliar una pena cuya revisión es incierta.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 171 (2026-03-17)",
+     "locator": "pág. 23",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-171.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Su aplicación sería muy escasa y no retroactiva, por lo que podría aportar poco efecto práctico a las víctimas actuales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 171 (2026-03-17)",
+     "locator": "pág. 30",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-171.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; no se aportan datos de reincidencia ni de ocultación de cadáveres, solo argumentos de cada parte.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion147/20251118/Votacion001/VOT_20251118204739.json": {
@@ -475,6 +769,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Rebajar la edad penal a 12 años podría permitir responder a delitos graves de menores que hoy se archivan por no ser imputables.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 152 (2025-11-18)",
+     "locator": "pág. 5",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-152.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Endurecer las penas se espera que reduzca la sensación de impunidad que, según se dijo, anima a seguir delinquiendo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 152 (2025-11-18)",
+     "locator": "pág. 5",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-152.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría romper con el espíritu educativo y de reinserción de la ley vigente, convirtiendo el castigo en la regla y no en la excepción.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 152 (2025-11-18)",
+     "locator": "pág. 8",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-152.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Se señaló que podría abrir la puerta a expulsiones automáticas y a la pérdida de nacionalidad de menores integrados en el país.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 152 (2025-11-18)",
+     "locator": "pág. 9",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-152.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría llevar recursos públicos hacia más centros cerrados y castigos y menos prevención, programas educativos y políticas sociales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 152 (2025-11-18)",
+     "locator": "pág. 9",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-152.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; el propio preámbulo reconoce que faltan datos desagregados sobre menores de 14 años. Los efectos son argumentos del debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion119/20250617/Votacion002/VOT_20250617203252.json": {
@@ -505,6 +848,47 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Castigar el transporte y almacenamiento de combustible para narcolanchas podría dificultar que estas se recarguen en el trayecto hasta la costa.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 123 (2025-06-17)",
+     "locator": "pág. 26",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-123.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Tipificar el transporte de combustible a partir de cierto volumen podría cerrar el vacío de impunidad penal que la Fiscalía Antidroga venía señalando.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 123 (2025-06-17)",
+     "locator": "pág. 28",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-123.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Reformar el artículo 568 podría no ser la vía técnicamente adecuada, según las conclusiones de la Fiscalía, y dejar mal resuelto el problema del petaqueo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 123 (2025-06-17)",
+     "locator": "pág. 29",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-123.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Aplicar un delito de peligro abstracto pensado para otro bien jurídico podría producir penas desproporcionadas para quienes transportan combustible.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 123 (2025-06-17)",
+     "locator": "pág. 30",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-123.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion107/20250506/Votacion002/VOT_20250506211454.json": {
@@ -534,6 +918,47 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Endurecer la pena del matrimonio forzado, con pena superior si la víctima es menor, podría reforzar la respuesta penal y la protección de niñas y adolescentes.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 111 (2025-05-06)",
+     "locator": "pág. 21",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-111.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Subir la pena unos meses podría no mejorar la prevención ni la asistencia a las víctimas si no se acompaña de apoyo psicológico, recursos de vivienda y educación preventiva.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 111 (2025-05-06)",
+     "locator": "pág. 26",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-111.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "El mero aumento de las penas podría no traducirse en más prevención ni en menos casos, según los estudios jurídicos que se citaron.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 111 (2025-05-06)",
+     "locator": "pág. 27",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-111.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Si las víctimas no denuncian por miedo, presión familiar o desconocimiento de sus derechos, endurecer las penas podría no aumentar las denuncias ni su protección.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 111 (2025-05-06)",
+     "locator": "pág. 28",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-111.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; el debate aporta pocos datos y los intervinientes discrepan sobre el número de casos.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion099/20250318/Votacion002/VOT_20250318201322.json": {
@@ -569,6 +994,63 @@
     "verdict": "keep",
     "note": "Alcohol y siniestralidad ya específicos",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Rebajar la tasa máxima de alcohol al volante podría reducir los accidentes mortales, pues se señala que cualquier consumo afecta a la capacidad de conducción.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 103 (2025-03-18)",
+     "locator": "pág. 21",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-103.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una única tasa más baja podría acabar con la confusión que causan los distintos límites y reforzar el mensaje de que no se debe beber si se conduce.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 103 (2025-03-18)",
+     "locator": "pág. 22",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-103.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Prohibir difundir en redes dónde están los controles podría evitar que quien ha bebido o consumido drogas los esquive y facilitar que se detecte a más conductores.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 103 (2025-03-18)",
+     "locator": "pág. 28",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-103.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "La redacción sobre difundir ubicaciones de controles podría ser demasiado general y abierta, y alcanzar servicios de mensajería y datos de seguridad vial más allá de lo anunciado.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 103 (2025-03-18)",
+     "locator": "pág. 24",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-103.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Haber retirado la mención a la reincidencia y a doblar la tasa permitida podría quitar un efecto disuasorio y educativo que ya existía.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 103 (2025-03-18)",
+     "locator": "pág. 23",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-103.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Cambiar solo el límite legal podría no bastar sin educación vial, campañas y más controles aleatorios, cuyo efecto disuasorio se considera clave.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 103 (2025-03-18)",
+     "locator": "pág. 25",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-103.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto aportada en el debate; los efectos son argumentos de los intervinientes.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -607,6 +1089,63 @@
     "note": "Texto alternativo extenso; se recogen solo dos preceptos verificados con kit fetch.",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Permitir retractarse tras una falta de respeto a la autoridad podría evitar la escalada de sanciones y favorecer un trato de respeto mutuo entre agentes y ciudadanía.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 88 (2024-12-12)",
+     "locator": "pág. 19",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-88.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que la reforma dé a las fuerzas de seguridad un marco de certidumbre, con mecanismos más claros para trabajar, y a la ciudadanía para ejercer sus derechos y libertades.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 88 (2024-12-12)",
+     "locator": "pág. 23",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-88.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría reducir una gestión autoritaria de las manifestaciones y proteger mejor las libertades de reunión y manifestación, que hoy pueden sancionarse por desobediencia o falta de respeto.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 88 (2024-12-12)",
+     "locator": "pág. 15",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-88.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Eliminar el material antidisturbios actual podría poner en riesgo tanto a policías como a manifestantes.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 88 (2024-12-12)",
+     "locator": "pág. 8",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-88.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Limitar las herramientas de los agentes podría dejarlos sin instrumentos para combatir a personas violentas y delincuentes.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 88 (2024-12-12)",
+     "locator": "pág. 13",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-88.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Modificar la ley podría dejar a la Policía en situación de indefensión ante las consecuencias de sus actuaciones.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 88 (2024-12-12)",
+     "locator": "pág. 16",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-88.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate y no hay estimaciones de su alcance.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion077/20241119/Votacion002/VOT_20241119211708.json": {
@@ -642,6 +1181,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reconocer por ley a los funcionarios de prisiones como agentes de la autoridad, con presunción de veracidad de sus informes, podría reforzar su protección y su seguridad jurídica en el trabajo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 80 (2024-11-19)",
+     "locator": "pág. 19",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-80.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría reforzarse la protección de los funcionarios frente a agresiones en las cárceles, que según el debate han aumentado en los últimos años.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 80 (2024-11-19)",
+     "locator": "pág. 17",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-80.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Dar a los funcionarios el rango de agentes de la autoridad podría aumentar el riesgo de abuso de poder y dificultar que los internos denuncien malos tratos o que estos se investiguen.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 80 (2024-11-19)",
+     "locator": "pág. 23",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-80.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría no reducir las agresiones ni mejorar la convivencia: se señala que en países donde los funcionarios no tienen esa condición hay menos agresiones, y que la medida podría generar tensiones.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 80 (2024-11-19)",
+     "locator": "pág. 21",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-80.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría invadir las competencias penitenciarias ya transferidas a algunas comunidades autónomas y suponer una recentralización encubierta de su modelo propio.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 80 (2024-11-19)",
+     "locator": "pág. 23",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-80.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; no se cuantifica el coste ni se aportan datos propios sobre el efecto en las agresiones. Los efectos son argumentos del debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion074/20241112/Votacion002/VOT_20241112152835.json": {
@@ -672,6 +1260,39 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Si los delitos sexuales graves contra menores no prescribieran, las víctimas podrían denunciar cuando se sientan preparadas, sin importar el tiempo transcurrido.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 77 (2024-11-12)",
+     "locator": "pág. 17",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-77.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que quien abusó de un menor ya no pueda ampararse en el paso del tiempo para evitar responder ante la justicia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 77 (2024-11-12)",
+     "locator": "pág. 22",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-77.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Declarar imprescriptibles estos delitos podría alterar en buena medida las bases del Código Penal y afectar a la coherencia del conjunto de la norma.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 77 (2024-11-12)",
+     "locator": "pág. 35",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-77.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate. El riesgo jurídico se apunta solo de forma general y no se detalla en el fragmento.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion071/20241029/Votacion001/VOT_20241029212331.json": {
@@ -713,6 +1334,63 @@
     "note": "Multas y atentados ya miden la reforma",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Permitir retractarse tras una falta de respeto a la autoridad podría evitar la escalada de sanciones y favorecer un trato de respeto mutuo entre agentes y ciudadanía.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 88 (2024-12-12)",
+     "locator": "pág. 19",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-88.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que la reforma dé a las fuerzas de seguridad un marco de certidumbre, con mecanismos más claros para trabajar, y a la ciudadanía para ejercer sus derechos y libertades.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 88 (2024-12-12)",
+     "locator": "pág. 23",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-88.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría reducir una gestión autoritaria de las manifestaciones y proteger mejor las libertades de reunión y manifestación, que hoy pueden sancionarse por desobediencia o falta de respeto.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 88 (2024-12-12)",
+     "locator": "pág. 15",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-88.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Eliminar el material antidisturbios actual podría poner en riesgo tanto a policías como a manifestantes.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 88 (2024-12-12)",
+     "locator": "pág. 8",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-88.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Limitar las herramientas de los agentes podría dejarlos sin instrumentos para combatir a personas violentas y delincuentes.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 88 (2024-12-12)",
+     "locator": "pág. 13",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-88.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Modificar la ley podría dejar a la Policía en situación de indefensión ante las consecuencias de sus actuaciones.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 88 (2024-12-12)",
+     "locator": "pág. 16",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-88.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate y no hay estimaciones de su alcance.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion067/20241015/Votacion001/VOT_20241015205431.json": {
@@ -742,6 +1420,47 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que exigir arrepentimiento, reparación del daño y colaboración con la justicia evite que condenados por terrorismo vuelvan a figurar en candidaturas sin haber mostrado rechazo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 70 (2024-10-15)",
+     "locator": "pág. 18",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-70.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Exigir a quien ya cumplió su condena una muestra de rechazo para poder presentarse podría excluir a personas del juego democrático por sus ideas, no por delitos pendientes.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 70 (2024-10-15)",
+     "locator": "pág. 14",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-70.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría suponer una limitación preventiva de los derechos políticos mediante criterios ideológicos, en lugar de combatir las ideas en el debate político.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 70 (2024-10-15)",
+     "locator": "pág. 17",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-70.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría chocar con la doctrina del Tribunal Constitucional, que pide extremar el rigor y duda de que no condenar el terrorismo baste, por sí solo, para probar un fraude.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 70 (2024-10-15)",
+     "locator": "pág. 8",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-70.PDF"
+    }
+   ],
+   "gaps": "Debate centrado en reproches políticos; los mecanismos son escasos. No se cuantifica a cuántas personas afectaría la medida.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion061/20240924/Votacion001/VOT_20240924203510.json": {
@@ -776,6 +1495,47 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera mayor control parlamentario del CNI: los diputados podrían ser informados sobre los medios que utiliza, lo que facilitaría supervisar su funcionamiento.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 64 (2024-09-24)",
+     "locator": "pág. 11",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-64.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que el control judicial lo ejerzan tres magistrados del Supremo por unanimidad, y no uno solo, podría ajustar mejor la proporcionalidad de las intromisiones en derechos fundamentales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 64 (2024-09-24)",
+     "locator": "pág. 11",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-64.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Informar a los jueces de los medios previstos y obligar al CNI a explicar después cómo ejecutó lo autorizado podría mejorar el control posterior de sus actuaciones.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 64 (2024-09-24)",
+     "locator": "pág. 11",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-64.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Que el presidente del Gobierno nombre y cese en exclusiva al director del CNI podría restar independencia profesional y técnica al centro y exponerlo a intereses políticos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 64 (2024-09-24)",
+     "locator": "pág. 20",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-64.PDF"
+    }
+   ],
+   "gaps": "Solo se recoge parte del debate. No se discute el coste ni cómo afectarían los nuevos controles a la capacidad operativa del CNI. Los efectos son argumentos del debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion059/20240917/Votacion002/VOT_20240917204417.json": {
@@ -807,6 +1567,47 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Sustituir la multa por penas más duras podría reducir la sensación de impunidad de quienes hurtan o estafan de forma reiterada y no pueden pagar multas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 165 (2026-02-12)",
+     "locator": "pág. 10",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-165.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Los nuevos tipos agravados podrían proteger mejor a personas mayores y vulnerables ante estafas, y a quienes sufren robos de móviles o de herramientas y cosechas en explotaciones agrarias.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 175 (2026-03-26)",
+     "locator": "pág. 41",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-175.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Endurecer penas de delitos leves podría no prevenir esos delitos y, al hacer los juicios más complejos, colapsar aún más unos juzgados ya saturados.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 165 (2026-02-12)",
+     "locator": "pág. 11",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-165.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Penas más duras por hurto podrían multiplicar la población penitenciaria y elevar el gasto público: una plaza de prisión cuesta más que una de Formación Profesional, según se dijo en el debate.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 175 (2026-03-26)",
+     "locator": "pág. 46",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-175.PDF"
+    }
+   ],
+   "gaps": "Sin memoria oficial de impacto en este material: los efectos son argumentos del debate y no hay datos de cuánto bajarían o subirían los hurtos con la ley.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion050/20240625/Votacion001/VOT_20240625212157.json": {
@@ -837,6 +1638,47 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Llevar a la Audiencia Nacional los casos de especial gravedad podría dar una respuesta judicial más especializada al narcotráfico organizado.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 52 (2024-06-25)",
+     "locator": "pág. 14",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-52-C1.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Ampliar la competencia podría saturar la Audiencia Nacional con casos de narcotráfico de poca monta que hoy llevan los tribunales territoriales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 52 (2024-06-25)",
+     "locator": "pág. 14",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-52-C1.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los órganos judiciales territoriales podrían ofrecer más inmediatez y garantías a quien usa el servicio de justicia que un tribunal central con más competencias.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 52 (2024-06-25)",
+     "locator": "pág. 14",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-52-C1.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría chocar con el derecho al juez natural fijado por ley y con la falta de especialización de parte de los magistrados destinados en ese tribunal.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 52 (2024-06-25)",
+     "locator": "pág. 9",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-52-C1.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate. No se estima cuántos casos pasarían a la Audiencia Nacional.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion047/20240618/Votacion001/VOT_20240618211338.json": {
@@ -872,6 +1714,63 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que los funcionarios de prisiones tengan más protección jurídica al ser reconocidos como agentes de la autoridad frente a atentados, resistencia y desobediencia grave.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 191 (2026-06-11)",
+     "locator": "pág. 12",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-191.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría proteger la intimidad del personal penitenciario al identificarlo con su número profesional, y no con sus datos personales, en procedimientos administrativos y judiciales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 191 (2026-06-11)",
+     "locator": "pág. 12",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-191.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que dar valor probatorio a los informes del personal sobre hechos presenciados refuerce el principio de autoridad en los procedimientos disciplinarios de los centros.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 191 (2026-06-11)",
+     "locator": "pág. 12",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-191.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría suponer nuevas obligaciones económicas para la Generalitat sin financiación acordada, lo que restaría recursos a sanidad, educación o infraestructuras.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 191 (2026-06-11)",
+     "locator": "pág. 8",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-191.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría no reducir las agresiones ni la conflictividad si no se abordan las condiciones de los centros, las plantillas y la falta de atención a la salud mental, y quedar en un gesto simbólico.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 49 (2024-06-18)",
+     "locator": "pág. 9",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-49.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Se advierte de que el valor probatorio de los informes no debe sustituir la presunción de inocencia ni impedir valorar otras pruebas contrarias en una sanción.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 191 (2026-06-11)",
+     "locator": "pág. 12",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-191.PDF"
+    }
+   ],
+   "gaps": "Sin memoria oficial de impacto en el debate; no se sabe si habrá menos agresiones ni el coste para las administraciones autonómicas.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion047/20240618/Votacion002/VOT_20240618211339.json": {
@@ -901,6 +1800,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Sanciones administrativas más duras por dañar o poner en riesgo bienes protegidos podrían disuadir ataques que se repiten por el eco que tienen en redes y medios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 49 (2024-06-18)",
+     "locator": "pág. 22",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-49.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría permitir sancionar a quienes ponen en peligro el patrimonio histórico aunque no lo dañen, sin dejar pasar estos actos sin consecuencias.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 49 (2024-06-18)",
+     "locator": "pág. 26",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-49.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría restringir el derecho a la protesta, un derecho fundamental, y dificultar que las protestas pacíficas y simbólicas se hagan visibles.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 49 (2024-06-18)",
+     "locator": "pág. 27",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-49.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Prohibir temporalmente el acceso a museos a las personas sancionadas podría vulnerar el principio de igualdad y no discriminación y contradecir la accesibilidad universal.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 49 (2024-06-18)",
+     "locator": "pág. 29",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-49.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría duplicar protecciones ya existentes, como el Código Penal, que ya castiga los daños a bienes de valor histórico, sin aportar una mejora clara.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 49 (2024-06-18)",
+     "locator": "pág. 22",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-49.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate. No se sabe a cuántas conductas se aplicarían las nuevas sanciones ni cuánto disuadirían.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion044/20240611/Votacion002/VOT_20240611203613.json": {
@@ -937,6 +1885,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Penas de prisión para quien reincide en hurtos y estafas podrían reducir la sensación de impunidad de quienes salen al día siguiente, y el desánimo de policías y jueces.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 46 (2024-06-11)",
+     "locator": "pág. 31",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-46.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una respuesta penal más firme podría reducir el perjuicio para el pequeño comercio y las zonas más afectadas por los hurtos reiterados.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 46 (2024-06-11)",
+     "locator": "pág. 20",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-46.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Endurecer las penas podría no reducir la reincidencia: se citaron estudios según los cuales no ha demostrado ser efectivo para ello.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 46 (2024-06-11)",
+     "locator": "pág. 24",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-46.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Pasar de multa a prisión de hasta tres años por hurtos leves podría ser desproporcionado, como ya declaró el Tribunal Supremo sobre la reforma de 2015.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 46 (2024-06-11)",
+     "locator": "pág. 29",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-46.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Las penas propuestas podrían recaer sobre personas en situación de exclusión social y ser iguales o mayores que las de delitos económicos graves.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 46 (2024-06-11)",
+     "locator": "pág. 30",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-46.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate y no se cuantifica cuánto reduciría la reincidencia.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion019/20240206/Votacion002/VOT_20240206213122.json": {
@@ -972,6 +1969,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "La ley podría añadir dificultades a homenajes y actos de enaltecimiento de condenados por terrorismo, que se señalan como una ofensa para las víctimas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 21 (2024-02-06)",
+     "locator": "pág. 29",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-21.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Pedir a los autores que faciliten información podría aportar a las familias la verdad que la justicia no pudo concluir en su momento.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 21 (2024-02-06)",
+     "locator": "pág. 39",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-21.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Al centrarse en una parte de la violencia terrorista, podría dejar fuera a otras víctimas y casos sin esclarecer.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 21 (2024-02-06)",
+     "locator": "pág. 36",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-21.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "El debate podría avivar el enfrentamiento y dificultar el proceso de memoria y convivencia que se trabaja desde hace años.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 21 (2024-02-06)",
+     "locator": "pág. 33",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-21.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Parte de la colaboración que se pide ya podría articularse con la ley de víctimas y el Código Penal vigentes, por lo que la reforma podría ser redundante.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 21 (2024-02-06)",
+     "locator": "pág. 39",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-21.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate. No se estima el alcance real de los cambios legales propuestos.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion013/20231219/Votacion001/VOT_20231219233101.json": {
@@ -1001,6 +2047,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Definir con más precisión los delitos de expresión podría reducir la inseguridad jurídica que causa aplicar de forma errática tipos penales imprecisos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 14 (2023-12-19)",
+     "locator": "pág. 8",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-14.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que derogar estos delitos evite nuevas condenas del Tribunal Europeo de Derechos Humanos a España y alinee la ley con los compromisos internacionales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 14 (2023-12-19)",
+     "locator": "pág. 8",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-14.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría permitir debatir y criticar sin riesgo penal, aplicando la mínima intervención del derecho penal y dejando el honor protegido por vías civiles, como el derecho al honor o a la rectificación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 14 (2023-12-19)",
+     "locator": "pág. 8",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-14.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Suprimir los delitos contra los sentimientos religiosos y la humillación de víctimas del terrorismo podría dejar sin sanción penal conductas hechas con intención de humillar.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 14 (2023-12-19)",
+     "locator": "pág. 10",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-14.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría quedar sin castigo penal quemar la bandera o pitar el himno, lo que restaría protección a los símbolos nacionales y a la Corona.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 198 (2026-07-14)",
+     "locator": "pág. 99",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-198.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate y no hay estimaciones de casos afectados.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion011/20231212/Votacion002/VOT_20231212230023.json": {
@@ -1031,6 +2126,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Endurecer las penas podría mantener más tiempo en prisión a agresores sexuales con riesgo de reincidencia, reduciendo el peligro para posibles víctimas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 12 (2023-12-12)",
+     "locator": "pág. 34",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-12.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Endurecer las penas podría dar una respuesta penal más severa a las agresiones contra las personas más vulnerables.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 12 (2023-12-12)",
+     "locator": "pág. 33",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-12.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Volver a distinguir entre abuso y agresión según haya violencia o intimidación podría dificultar que se reconozca como agresión un caso sin resistencia física ni heridas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 12 (2023-12-12)",
+     "locator": "pág. 31",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-12.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Volver al modelo penal anterior podría reducir las denuncias y dejar más agresiones sexuales sin castigo, como ocurría cuando se denunciaba una minoría de casos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 12 (2023-12-12)",
+     "locator": "pág. 35",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-12.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría rebajar penas en agresiones en el ámbito laboral o docente y eliminar agravantes como la sumisión química, la relación de pareja o los maltratos previos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 12 (2023-12-12)",
+     "locator": "pág. 37",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-12.PDF"
+    }
+   ],
+   "gaps": "Proposición de ley sin memoria oficial de impacto; los efectos son argumentos del debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion183/20260528/Votacion011/VOT_20260528125348.json": {
@@ -1062,6 +2206,47 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Más embarcaciones, tecnología, protección y plantillas podría permitir a la Guardia Civil perseguir e interceptar a las narcolanchas con más seguridad para los agentes.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 188 (2026-05-27)",
+     "locator": "pág. 123",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-188.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Protocolos claros y mayor seguridad jurídica podrían evitar que un agente dude en plena persecución sobre si después tendrá respaldo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 188 (2026-05-27)",
+     "locator": "pág. 123",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-188.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Introducir reglas de enfrentamiento propias de contextos bélicos y abrir la puerta a la fuerza letal ante desobediencias podría debilitar los límites y la proporcionalidad exigibles a quien porta un arma.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 188 (2026-05-27)",
+     "locator": "pág. 124",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-188.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Centrar la respuesta en la mano dura sin prevención, cohesión social ni oportunidades podría dejar sin atender las causas que hacen crecer el narcotráfico en ciertos territorios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 188 (2026-05-27)",
+     "locator": "pág. 124",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-188.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; los efectos son argumentos del debate y no se aporta coste ni calendario de los medios pedidos.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion151/20251127/Votacion011/VOT_20251127124100.json": {
@@ -1104,6 +2289,12 @@
     "note": "Efectivos PN y GC específicos de la moción",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Debate dominado por reproche político cruzado y sin mecanismos concretos sobre las medidas votadas.",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion109/20250508/Votacion009/VOT_20250508130752.json": {
@@ -1139,6 +2330,63 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Más efectivos y medios y un nuevo despliegue de la Guardia Civil en el medio rural podrían reforzar la prevención del delito y la rapidez de respuesta.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 111 (2025-05-06)",
+     "locator": "pág. 51",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-111.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Restablecer la unidad especial contra el narcotráfico en Andalucía podría reforzar la lucha contra las redes que operan por el Guadalquivir.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 111 (2025-05-06)",
+     "locator": "pág. 51",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-111.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Controlar quién entra y ejecutar retornos podría evitar zonas donde el Estado se ausenta y crecen las redes de tráfico de personas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 111 (2025-05-06)",
+     "locator": "pág. 55",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-111.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Expulsar a migrantes irregulares podría ser difícil de aplicar, porque a menudo se desconoce su nacionalidad y algunos países de origen son reticentes o piden contrapartidas costosas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 111 (2025-05-06)",
+     "locator": "pág. 52",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-111.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Devolver a menores no acompañados podría chocar con la normativa interna e internacional de protección de menores.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 111 (2025-05-06)",
+     "locator": "pág. 52",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-111.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Vincular inmigración y delincuencia podría alimentar el estigma, la discriminación y los delitos de odio contra las personas migrantes.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 111 (2025-05-06)",
+     "locator": "pág. 53",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-111.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; los datos sobre delincuencia e inmigración se discuten sin fuente común en el debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion101/20250320/Votacion013/VOT_20250320125715.json": {
@@ -1169,6 +2417,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Cubrir plantillas, dotar de medios materiales y reforzar la cooperación entre cuerpos de seguridad podría mejorar la seguridad ciudadana.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 104 (2025-03-19)",
+     "locator": "pág. 55",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-104.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Medidas concretas en las ciudades con mayor tasa de criminalidad podrían contribuir a prevenir delitos antes de que se produzcan.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 104 (2025-03-19)",
+     "locator": "pág. 53",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-104.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Legislar contra la multirreincidencia podría duplicar iniciativas que ya están pendientes de tramitación en la Cámara para hurtos y estafas leves.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 104 (2025-03-19)",
+     "locator": "pág. 55",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-104.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Más policía y más castigo, sin prevención ni recursos de reinserción, podrían no reducir la delincuencia a largo plazo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 104 (2025-03-19)",
+     "locator": "pág. 57",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-104.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una respuesta de mano dura podría acabar criminalizando a colectivos que ya están en situación de vulnerabilidad.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 104 (2025-03-19)",
+     "locator": "pág. 57",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-104.PDF"
+    }
+   ],
+   "gaps": "Los datos de criminalidad se discuten en el debate: unos señalan un aumento y otros una tasa por debajo de la media europea. No hay memoria de impacto de los planes de choque.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion026/20240229/Votacion012/VOT_20240229115052.json": {
@@ -1194,6 +2491,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Condenar y sancionar los homenajes a terroristas podría evitar que las víctimas y sus familias vuelvan a sufrir humillación (revictimización).",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 26 (2024-02-27)",
+     "locator": "pág. 55",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-26.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que perseguir estos actos ayude a que los jóvenes dejen de ver a los terroristas como héroes y a frenar la sensación de impunidad.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 26 (2024-02-27)",
+     "locator": "pág. 55",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-26.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Ampliar la respuesta contra el enaltecimiento podría generar inseguridad jurídica, porque el delito actual ya se ha criticado por no precisar con claridad qué conductas castiga.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 26 (2024-02-27)",
+     "locator": "pág. 56",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-26.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sancionar estos actos podría afectar a conductas que entran en el ámbito de la libertad de expresión, que debe ponderarse junto al Código Penal.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 26 (2024-02-27)",
+     "locator": "pág. 57",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-26.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Como las manifestaciones solo pueden prohibirse o disolverse si son ilícitas según el Código Penal, podría ser difícil sancionar actos que no lleguen a ser delito.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 26 (2024-02-27)",
+     "locator": "pág. 62",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-26.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; los efectos son argumentos del debate y no se concreta qué sanciones se aplicarían.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion202/20260930/Votacion008/VOT_20260930153605.json": {
@@ -1214,6 +2560,47 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reforzar los medios y la presencia de las Fuerzas Armadas en Ceuta podría dar más garantías de seguridad ante una situación excepcional.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 209 (2026-09-30)",
+     "locator": "pág. 91",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-209.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Dar a los militares capacidad de actuación directa podría ser inadecuado porque no están entrenados en funciones de orden público.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 209 (2026-09-30)",
+     "locator": "pág. 100",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-209.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Mayor intervención militar podría aumentar el riesgo de actuaciones desproporcionadas contra migrantes, como las que se denuncian en vídeos verificados.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 209 (2026-09-30)",
+     "locator": "pág. 99",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-209.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Plantear la situación solo como cuestión militar podría ser insuficiente ante una amenaza difícil de resolver únicamente por esa vía.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 209 (2026-09-30)",
+     "locator": "pág. 95",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-209.PDF"
+    }
+   ],
+   "gaps": "No hay memoria oficial de impacto; las denuncias de actuaciones de militares están remitidas a la Fiscalía y no están resueltas. Se desconoce el coste de los medios pedidos.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion198/20260916/Votacion012/VOT_20260916195359.json": {
@@ -1239,6 +2626,31 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que más agentes y medios en la frontera y en las calles refuercen el control fronterizo y reduzcan la inseguridad que describen los vecinos de Ceuta.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 132",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría ocurrir que reforzar la frontera actúe sobre el síntoma y no sobre las causas por las que la gente migra, sin resolver el problema de fondo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 143",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; los efectos son argumentos del debate, mezclados con reproche político, y no se cuantifican. Sin mecanismos en el debate para los otros dos puntos.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion183/20260528/Votacion004/VOT_20260528125339.json": {
@@ -1264,6 +2676,12 @@
     "note": "Profesión de riesgo afecta solo a PN y GC",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion174/20260422/Votacion001/VOT_20260422151942.json": {
@@ -1284,6 +2702,39 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Las reformas legales propuestas podrían hacer más eficaz el trabajo policial frente a este tipo de delitos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 179 (2026-04-21)",
+     "locator": "pág. 36",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-179.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Castigar penalmente la reiteración de infracciones administrativas podría chocar con el principio non bis in idem y con la mínima intervención del derecho penal.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 179 (2026-04-21)",
+     "locator": "pág. 44",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-179.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Centrarse en medidas punitivas sin diagnóstico previo podría no abordar causas como el abandono escolar o la falta de oportunidades de los jóvenes.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 179 (2026-04-21)",
+     "locator": "pág. 38",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-179.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; las cifras de aumento de delitos y su origen se discuten en el debate y no hay evaluación de si las medidas reducirían los casos.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion151/20251127/Votacion010/VOT_20251127124059.json": {
@@ -1315,6 +2766,12 @@
     "note": "PN y GC específicos; atentados se mantiene",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Debate de reproche político y datos de plantilla sin mecanismos de riesgo asociados a las medidas votadas; solo hay argumentos a favor de más medios.",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion142/20251028/Votacion014/VOT_20251028204600.json": {
@@ -1334,6 +2791,31 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Poner la protección en manos de Interior y de las fuerzas de seguridad, con más medios, podría reforzar la vigilancia de los agresores.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 147 (2025-10-28)",
+     "locator": "pág. 52",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-147.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Dudar en público de las pulseras podría hacer que las mujeres pierdan confianza en las instituciones y rechacen el dispositivo al denunciar.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 147 (2025-10-28)",
+     "locator": "pág. 53",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-147.PDF"
+    }
+   ],
+   "gaps": "Los fallos del sistema de pulseras no están cuantificados en el debate y hay versiones opuestas sobre su eficacia; moción sin memoria oficial de impacto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion142/20251028/Votacion018/VOT_20251028204605.json": {
@@ -1353,6 +2835,31 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Endurecer las penas del tráfico de migrantes y de quienes colaboran con las mafias podría reforzar la lucha contra estas redes.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 147 (2025-10-28)",
+     "locator": "pág. 58",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-147.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "La fórmula de «colaborar o facilitar medios» con las mafias podría resultar imprecisa y alcanzar a personas que no forman parte de ellas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 147 (2025-10-28)",
+     "locator": "pág. 60",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-147.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; los efectos son argumentos del debate y varios puntos votados (IMV, arraigo, nacionalidad, retornos) apenas se razonaron.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion046/20240613/Votacion012/VOT_20240613125225.json": {
@@ -1389,6 +2896,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion043/20240530/Votacion006/VOT_20240530120000.json": {
@@ -1415,6 +2928,12 @@
     "note": "Cifras de ley mordaza ya adecuadas",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "El debate es sobre todo reproche político y acusaciones cruzadas; no se defienden mecanismos concretos de beneficio o riesgo para los 14 puntos votados.",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion036/20240423/Votacion032/VOT_20240423213542.json": {
@@ -1435,6 +2954,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion185/20260611/Votacion002/VOT_20260611145702.json": {
@@ -1466,6 +2991,63 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que los funcionarios de prisiones tengan más protección jurídica al ser reconocidos como agentes de la autoridad frente a atentados, resistencia y desobediencia grave.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 191 (2026-06-11)",
+     "locator": "pág. 12",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-191.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría proteger la intimidad del personal penitenciario al identificarlo con su número profesional, y no con sus datos personales, en procedimientos administrativos y judiciales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 191 (2026-06-11)",
+     "locator": "pág. 12",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-191.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que dar valor probatorio a los informes del personal sobre hechos presenciados refuerce el principio de autoridad en los procedimientos disciplinarios de los centros.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 191 (2026-06-11)",
+     "locator": "pág. 12",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-191.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría suponer nuevas obligaciones económicas para la Generalitat sin financiación acordada, lo que restaría recursos a sanidad, educación o infraestructuras.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 191 (2026-06-11)",
+     "locator": "pág. 8",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-191.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría no reducir las agresiones ni la conflictividad si no se abordan las condiciones de los centros, las plantillas y la falta de atención a la salud mental, y quedar en un gesto simbólico.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 49 (2024-06-18)",
+     "locator": "pág. 9",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-49.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Se advierte de que el valor probatorio de los informes no debe sustituir la presunción de inocencia ni impedir valorar otras pruebas contrarias en una sanción.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 191 (2026-06-11)",
+     "locator": "pág. 12",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-191.PDF"
+    }
+   ],
+   "gaps": "Sin memoria oficial de impacto en el debate; no se sabe si habrá menos agresiones ni el coste para las administraciones autonómicas.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion004/VOT_20260326165027.json": {
@@ -1492,6 +3074,55 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Sustituir la multa por penas más duras podría reducir la sensación de impunidad de quienes hurtan o estafan de forma reiterada y no pueden pagar multas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 165 (2026-02-12)",
+     "locator": "pág. 10",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-165.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Los nuevos tipos agravados podrían proteger mejor a personas mayores y vulnerables ante estafas, y a quienes sufren robos de móviles o de herramientas y cosechas en explotaciones agrarias.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 175 (2026-03-26)",
+     "locator": "pág. 41",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-175.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un tipo agravado de defraudación eléctrica ligada al tráfico de drogas podría reforzar la respuesta penal frente al cultivo de droga con conexiones eléctricas fraudulentas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 175 (2026-03-26)",
+     "locator": "pág. 51",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-175.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Endurecer penas de delitos leves podría no prevenir esos delitos y, al hacer los juicios más complejos, colapsar aún más unos juzgados ya saturados.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 165 (2026-02-12)",
+     "locator": "pág. 11",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-165.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Penas más duras por hurto podrían multiplicar la población penitenciaria y elevar el gasto público: una plaza de prisión cuesta más que una de Formación Profesional, según se dijo en el debate.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 175 (2026-03-26)",
+     "locator": "pág. 46",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-175.PDF"
+    }
+   ],
+   "gaps": "Sin memoria oficial de impacto en este material: los efectos son argumentos del debate y no hay datos de cuánto bajarían o subirían los hurtos con la ley.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion159/20260212/Votacion003/VOT_20260212114308.json": {
@@ -1510,6 +3141,47 @@
     "verdict": "none",
     "note": "Votación en bloque del resto de enmiendas sin texto extraído; un intento en BOCG B-97-4 no localizó el contenido de las enmiendas de este bloque.",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Sustituir la multa por penas más duras podría reducir la sensación de impunidad de quienes hurtan o estafan de forma reiterada y no pueden pagar multas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 165 (2026-02-12)",
+     "locator": "pág. 10",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-165.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Los nuevos tipos agravados podrían proteger mejor a personas mayores y vulnerables ante estafas, y a quienes sufren robos de móviles o de herramientas y cosechas en explotaciones agrarias.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 175 (2026-03-26)",
+     "locator": "pág. 41",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-175.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Endurecer penas de delitos leves podría no prevenir esos delitos y, al hacer los juicios más complejos, colapsar aún más unos juzgados ya saturados.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 165 (2026-02-12)",
+     "locator": "pág. 11",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-165.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Penas más duras por hurto podrían multiplicar la población penitenciaria y elevar el gasto público: una plaza de prisión cuesta más que una de Formación Profesional, según se dijo en el debate.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 175 (2026-03-26)",
+     "locator": "pág. 46",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-175.PDF"
+    }
+   ],
+   "gaps": "Sin memoria oficial de impacto en este material: los efectos son argumentos del debate y no hay datos de cuánto bajarían o subirían los hurtos con la ley.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1545,6 +3217,12 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1582,6 +3260,47 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Limitar el Registro Central de Menores a sentencias firmes podría evitar que queden registrados menores absueltos o sin condena firme.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 62 (2024-09-17)",
+     "locator": "pág. 38",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-62.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que igualar el registro de menores al de adultos, donde solo entran sentencias firmes, refuerce la presunción de inocencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 62 (2024-09-17)",
+     "locator": "pág. 38",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-62.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Dejar fuera medidas cautelares y sentencias no firmes podría privar al juez de información completa sobre el menor al decidir.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 62 (2024-09-17)",
+     "locator": "pág. 38",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-62.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría dificultar la comunicación automática a las fuerzas de seguridad de órdenes y medidas de protección del menor o de la víctima.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 62 (2024-09-17)",
+     "locator": "pág. 38",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-62.PDF"
+    }
+   ],
+   "gaps": "Proyecto con consenso en el resto del texto; el debate sobre esta enmienda es breve. Sin datos de cuántos menores afectaría ni memoria de impacto específica.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion056/20240723/Votacion007/VOT_20240723221632.json": {
@@ -1611,6 +3330,47 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un régimen jurídico básico y común podría armonizar las funciones de los agentes forestales, sea cual sea la administración de la que dependan, y darles más seguridad jurídica.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 43",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reforzar la formación, los medios y la prevención de riesgos laborales podría mejorar la protección de los agentes frente a la peligrosidad y penosidad de su trabajo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 42",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una ley básica estatal tan detallada podría invadir competencias de las comunidades autónomas sobre el régimen de sus propios funcionarios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 52",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "El texto podría generar inseguridad jurídica a los propios agentes y posibles enfrentamientos con otros funcionarios que ejercen funciones parecidas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 53",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley con memoria del Gobierno que no se aporta aquí; los efectos recogidos son argumentos del debate, sin estimación de impacto ni coste.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1647,6 +3407,63 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que los funcionarios de prisiones tengan más protección jurídica al ser reconocidos como agentes de la autoridad frente a atentados, resistencia y desobediencia grave.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 191 (2026-06-11)",
+     "locator": "pág. 12",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-191.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría proteger la intimidad del personal penitenciario al identificarlo con su número profesional, y no con sus datos personales, en procedimientos administrativos y judiciales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 191 (2026-06-11)",
+     "locator": "pág. 12",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-191.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que dar valor probatorio a los informes del personal sobre hechos presenciados refuerce el principio de autoridad en los procedimientos disciplinarios de los centros.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 191 (2026-06-11)",
+     "locator": "pág. 12",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-191.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría suponer nuevas obligaciones económicas para la Generalitat sin financiación acordada, lo que restaría recursos a sanidad, educación o infraestructuras.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 191 (2026-06-11)",
+     "locator": "pág. 8",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-191.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría no reducir las agresiones ni la conflictividad si no se abordan las condiciones de los centros, las plantillas y la falta de atención a la salud mental, y quedar en un gesto simbólico.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 49 (2024-06-18)",
+     "locator": "pág. 9",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-49.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Se advierte de que el valor probatorio de los informes no debe sustituir la presunción de inocencia ni impedir valorar otras pruebas contrarias en una sanción.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 191 (2026-06-11)",
+     "locator": "pág. 12",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-191.PDF"
+    }
+   ],
+   "gaps": "Sin memoria oficial de impacto en el debate; no se sabe si habrá menos agresiones ni el coste para las administraciones autonómicas.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion183/20260528/Votacion005/VOT_20260528125340.json": {
@@ -1667,6 +3484,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion183/20260528/Votacion006/VOT_20260528125341.json": {
@@ -1687,6 +3510,39 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Más agentes y más medios materiales y de protección podrían reducir la desventaja de Guardia Civil y Policía frente a organizaciones de narcotráfico mejor equipadas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 187 (2026-05-26)",
+     "locator": "pág. 85",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-187.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Reforzar solo medios y dinero podría no bastar: el narcotráfico podría seguir un paso por delante si no se actúa también contra sus redes económicas y el blanqueo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 187 (2026-05-26)",
+     "locator": "pág. 90",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-187.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin medidas contra el paro y el abandono en las zonas afectadas, el narcotráfico podría seguir encontrando allí terreno donde crecer.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 187 (2026-05-26)",
+     "locator": "pág. 89",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-187.PDF"
+    }
+   ],
+   "gaps": "Los efectos son argumentos del debate; no se cita memoria oficial ni datos de coste o de resultados de cada punto votado.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion183/20260528/Votacion007/VOT_20260528125343.json": {
@@ -1707,6 +3563,39 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Más agentes y más medios materiales y de protección podrían reducir la desventaja de Guardia Civil y Policía frente a organizaciones de narcotráfico mejor equipadas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 187 (2026-05-26)",
+     "locator": "pág. 85",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-187.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Reforzar solo medios y dinero podría no bastar: el narcotráfico podría seguir un paso por delante si no se actúa también contra sus redes económicas y el blanqueo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 187 (2026-05-26)",
+     "locator": "pág. 90",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-187.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin medidas contra el paro y el abandono en las zonas afectadas, el narcotráfico podría seguir encontrando allí terreno donde crecer.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 187 (2026-05-26)",
+     "locator": "pág. 89",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-187.PDF"
+    }
+   ],
+   "gaps": "Los efectos son argumentos del debate; no se cita memoria oficial ni datos de coste o de resultados de cada punto votado.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion183/20260528/Votacion008/VOT_20260528125345.json": {
@@ -1727,6 +3616,39 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Dotar de más herramientas de fuerza no letal a los medios marítimos podría compensar las restricciones jurídicas y materiales que los agentes tienen frente a los narcos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 187 (2026-05-26)",
+     "locator": "pág. 85",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-187.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Reforzar solo medios y dinero podría no bastar: el narcotráfico podría seguir un paso por delante si no se actúa también contra sus redes económicas y el blanqueo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 187 (2026-05-26)",
+     "locator": "pág. 90",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-187.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin medidas contra el paro y el abandono en las zonas afectadas, el narcotráfico podría seguir encontrando allí terreno donde crecer.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 187 (2026-05-26)",
+     "locator": "pág. 89",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-187.PDF"
+    }
+   ],
+   "gaps": "Los efectos son argumentos del debate; no se cita memoria oficial ni datos de coste o de resultados de cada punto votado.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion183/20260528/Votacion009/VOT_20260528125346.json": {
@@ -1752,6 +3674,12 @@
     "note": "Atentados condenados miden esta medida",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion174/20260422/Votacion002/VOT_20260422151944.json": {
@@ -1772,6 +3700,39 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Las reformas legales propuestas podrían hacer más eficaz el trabajo policial frente a este tipo de delitos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 179 (2026-04-21)",
+     "locator": "pág. 36",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-179.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Castigar penalmente la reiteración de infracciones administrativas podría chocar con el principio non bis in idem y con la mínima intervención del derecho penal.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 179 (2026-04-21)",
+     "locator": "pág. 44",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-179.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Centrarse en medidas punitivas sin diagnóstico previo podría no abordar causas como el abandono escolar o la falta de oportunidades de los jóvenes.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 179 (2026-04-21)",
+     "locator": "pág. 38",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-179.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; las cifras de aumento de delitos y su origen se discuten en el debate y no hay evaluación de si las medidas reducirían los casos.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion174/20260422/Votacion003/VOT_20260422151946.json": {
@@ -1792,6 +3753,39 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Las reformas legales propuestas podrían hacer más eficaz el trabajo policial frente a este tipo de delitos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 179 (2026-04-21)",
+     "locator": "pág. 36",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-179.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Castigar penalmente la reiteración de infracciones administrativas podría chocar con el principio non bis in idem y con la mínima intervención del derecho penal.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 179 (2026-04-21)",
+     "locator": "pág. 44",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-179.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Centrarse en medidas punitivas sin diagnóstico previo podría no abordar causas como el abandono escolar o la falta de oportunidades de los jóvenes.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 179 (2026-04-21)",
+     "locator": "pág. 38",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-179.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; las cifras de aumento de delitos y su origen se discuten en el debate y no hay evaluación de si las medidas reducirían los casos.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion174/20260422/Votacion004/VOT_20260422151948.json": {
@@ -1812,6 +3806,47 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Poner en marcha el registro de infracciones de seguridad ciudadana podría permitir que la Administración tenga en cuenta la reiteración de sanciones por armas blancas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 179 (2026-04-21)",
+     "locator": "pág. 37",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-179.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Las reformas legales propuestas podrían hacer más eficaz el trabajo policial frente a este tipo de delitos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 179 (2026-04-21)",
+     "locator": "pág. 36",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-179.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Castigar penalmente la reiteración de infracciones administrativas podría chocar con el principio non bis in idem y con la mínima intervención del derecho penal.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 179 (2026-04-21)",
+     "locator": "pág. 44",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-179.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Centrarse en medidas punitivas sin diagnóstico previo podría no abordar causas como el abandono escolar o la falta de oportunidades de los jóvenes.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 179 (2026-04-21)",
+     "locator": "pág. 38",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-179.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; las cifras de aumento de delitos y su origen se discuten en el debate y no hay evaluación de si las medidas reducirían los casos.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion174/20260422/Votacion005/VOT_20260422151949.json": {
@@ -1832,6 +3867,39 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Las reformas legales propuestas podrían hacer más eficaz el trabajo policial frente a este tipo de delitos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 179 (2026-04-21)",
+     "locator": "pág. 36",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-179.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Castigar penalmente la reiteración de infracciones administrativas podría chocar con el principio non bis in idem y con la mínima intervención del derecho penal.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 179 (2026-04-21)",
+     "locator": "pág. 44",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-179.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Centrarse en medidas punitivas sin diagnóstico previo podría no abordar causas como el abandono escolar o la falta de oportunidades de los jóvenes.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 179 (2026-04-21)",
+     "locator": "pág. 38",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-179.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; las cifras de aumento de delitos y su origen se discuten en el debate y no hay evaluación de si las medidas reducirían los casos.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion174/20260422/Votacion006/VOT_20260422151951.json": {
@@ -1852,6 +3920,47 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Las reformas legales propuestas podrían hacer más eficaz el trabajo policial frente a este tipo de delitos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 179 (2026-04-21)",
+     "locator": "pág. 36",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-179.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Endurecer de forma indiscriminada las penas por la mera tenencia de armas blancas podría chocar con el principio de proporcionalidad y con la jurisprudencia constitucional.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 179 (2026-04-21)",
+     "locator": "pág. 44",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-179.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Castigar penalmente la reiteración de infracciones administrativas podría chocar con el principio non bis in idem y con la mínima intervención del derecho penal.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 179 (2026-04-21)",
+     "locator": "pág. 44",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-179.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Centrarse en medidas punitivas sin diagnóstico previo podría no abordar causas como el abandono escolar o la falta de oportunidades de los jóvenes.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 179 (2026-04-21)",
+     "locator": "pág. 38",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-179.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; las cifras de aumento de delitos y su origen se discuten en el debate y no hay evaluación de si las medidas reducirían los casos.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion174/20260422/Votacion007/VOT_20260422151952.json": {
@@ -1872,6 +3981,47 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Revisar la ley de menores podría dar respuesta al aumento de menores implicados en lesiones graves y homicidios con armas blancas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 179 (2026-04-21)",
+     "locator": "pág. 35",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-179.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Las reformas legales propuestas podrían hacer más eficaz el trabajo policial frente a este tipo de delitos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 179 (2026-04-21)",
+     "locator": "pág. 36",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-179.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Castigar penalmente la reiteración de infracciones administrativas podría chocar con el principio non bis in idem y con la mínima intervención del derecho penal.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 179 (2026-04-21)",
+     "locator": "pág. 44",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-179.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Centrarse en medidas punitivas sin diagnóstico previo podría no abordar causas como el abandono escolar o la falta de oportunidades de los jóvenes.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 179 (2026-04-21)",
+     "locator": "pág. 38",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-179.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; las cifras de aumento de delitos y su origen se discuten en el debate y no hay evaluación de si las medidas reducirían los casos.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion007/VOT_20260326165032.json": {
@@ -1890,6 +4040,55 @@
     "verdict": "none",
     "note": "bloque, «resto de enmiendas», transaccional o sin texto votado identificable: no se puede atribuir el efecto con certeza",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Sustituir la multa por penas más duras podría reducir la sensación de impunidad de quienes hurtan o estafan de forma reiterada y no pueden pagar multas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 165 (2026-02-12)",
+     "locator": "pág. 10",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-165.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Los nuevos tipos agravados podrían proteger mejor a personas mayores y vulnerables ante estafas, y a quienes sufren robos de móviles o de herramientas y cosechas en explotaciones agrarias.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 175 (2026-03-26)",
+     "locator": "pág. 41",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-175.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Endurecer penas de delitos leves podría no prevenir esos delitos y, al hacer los juicios más complejos, colapsar aún más unos juzgados ya saturados.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 165 (2026-02-12)",
+     "locator": "pág. 11",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-165.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Penas más duras por hurto podrían multiplicar la población penitenciaria y elevar el gasto público: una plaza de prisión cuesta más que una de Formación Profesional, según se dijo en el debate.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 175 (2026-03-26)",
+     "locator": "pág. 46",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-175.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Vincular la reincidencia delictiva con los permisos de residencia podría limitar el acceso de personas extranjeras a derechos básicos y reforzar la idea de que inmigración y delincuencia van unidas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 175 (2026-03-26)",
+     "locator": "pág. 47",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-175.PDF"
+    }
+   ],
+   "gaps": "Sin memoria oficial de impacto en este material: los efectos son argumentos del debate y no hay datos de cuánto bajarían o subirían los hurtos con la ley.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1922,6 +4121,47 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Sustituir la multa por penas más duras podría reducir la sensación de impunidad de quienes hurtan o estafan de forma reiterada y no pueden pagar multas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 165 (2026-02-12)",
+     "locator": "pág. 10",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-165.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Los nuevos tipos agravados podrían proteger mejor a personas mayores y vulnerables ante estafas, y a quienes sufren robos de móviles o de herramientas y cosechas en explotaciones agrarias.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 175 (2026-03-26)",
+     "locator": "pág. 41",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-175.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Endurecer penas de delitos leves podría no prevenir esos delitos y, al hacer los juicios más complejos, colapsar aún más unos juzgados ya saturados.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 165 (2026-02-12)",
+     "locator": "pág. 11",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-165.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Penas más duras por hurto podrían multiplicar la población penitenciaria y elevar el gasto público: una plaza de prisión cuesta más que una de Formación Profesional, según se dijo en el debate.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 175 (2026-03-26)",
+     "locator": "pág. 46",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-175.PDF"
+    }
+   ],
+   "gaps": "Sin memoria oficial de impacto en este material: los efectos son argumentos del debate y no hay datos de cuánto bajarían o subirían los hurtos con la ley.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion085/20241212/Votacion009/VOT_20241212130552.json": {
@@ -1953,6 +4193,63 @@
     "verdict": "written",
     "note": "Texto alternativo extenso; solo se recoge el efecto verificado con kit fetch.",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Permitir retractarse tras una falta de respeto a la autoridad podría evitar la escalada de sanciones y favorecer un trato de respeto mutuo entre agentes y ciudadanía.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 88 (2024-12-12)",
+     "locator": "pág. 19",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-88.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que la reforma dé a las fuerzas de seguridad un marco de certidumbre, con mecanismos más claros para trabajar, y a la ciudadanía para ejercer sus derechos y libertades.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 88 (2024-12-12)",
+     "locator": "pág. 23",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-88.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría reducir una gestión autoritaria de las manifestaciones y proteger mejor las libertades de reunión y manifestación, que hoy pueden sancionarse por desobediencia o falta de respeto.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 88 (2024-12-12)",
+     "locator": "pág. 15",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-88.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Eliminar el material antidisturbios actual podría poner en riesgo tanto a policías como a manifestantes.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 88 (2024-12-12)",
+     "locator": "pág. 8",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-88.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Limitar las herramientas de los agentes podría dejarlos sin instrumentos para combatir a personas violentas y delincuentes.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 88 (2024-12-12)",
+     "locator": "pág. 13",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-88.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Modificar la ley podría dejar a la Policía en situación de indefensión ante las consecuencias de sus actuaciones.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 88 (2024-12-12)",
+     "locator": "pág. 16",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-88.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate y no hay estimaciones de su alcance.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1986,6 +4283,47 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un régimen jurídico básico y común podría armonizar las funciones de los agentes forestales, sea cual sea la administración de la que dependan, y darles más seguridad jurídica.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 43",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reforzar la formación, los medios y la prevención de riesgos laborales podría mejorar la protección de los agentes frente a la peligrosidad y penosidad de su trabajo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 42",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una ley básica estatal tan detallada podría invadir competencias de las comunidades autónomas sobre el régimen de sus propios funcionarios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 52",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "El texto podría generar inseguridad jurídica a los propios agentes y posibles enfrentamientos con otros funcionarios que ejercen funciones parecidas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 53",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley con memoria del Gobierno que no se aporta aquí; los efectos recogidos son argumentos del debate, sin estimación de impacto ni coste.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion043/20240530/Votacion009/VOT_20240530120004.json": {
@@ -2006,6 +4344,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "El debate es sobre todo reproche político y acusaciones cruzadas; no se defienden mecanismos concretos de beneficio o riesgo para los 14 puntos votados.",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion036/20240423/Votacion033/VOT_20240423213543.json": {
@@ -2026,6 +4370,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion036/20240423/Votacion034/VOT_20240423213544.json": {
@@ -2046,6 +4396,31 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reformar el Código Penal y la ley de enjuiciamiento criminal contra la multirreincidencia podría reducir la impunidad de quienes delinquen de forma reiterada.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 38 (2024-04-23)",
+     "locator": "pág. 77",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-38.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Pedir al Gobierno proyectos de ley podría retrasar los cambios frente a las proposiciones y enmiendas ya en trámite en la Cámara sobre usurpación de viviendas y multirreincidencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 38 (2024-04-23)",
+     "locator": "pág. 76",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-38.PDF"
+    }
+   ],
+   "gaps": "Moción rechazada, votada por puntos y sin memoria oficial. Los puntos 2 y 5 (salarios y reconocimiento) no tuvieron argumentos de mecanismo en el debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion036/20240423/Votacion036/VOT_20240423213546.json": {
@@ -2065,6 +4440,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   }
  }

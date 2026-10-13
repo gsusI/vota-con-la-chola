@@ -112,6 +112,63 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Mantener las centrales abiertas más tiempo podría reforzar la seguridad de suministro y proteger el empleo en las zonas donde se asientan las instalaciones.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 123 (2025-06-17)",
+     "locator": "pág. 13",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-123.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Si las centrales cierran, podría aumentar el consumo de gas en centrales de ciclo combinado, que emiten CO2.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 123 (2025-06-17)",
+     "locator": "pág. 16",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-123.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una industria que quiera instalarse podría necesitar garantía de suministro constante, y la fiabilidad del sistema podría mejorar con más generación estable.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 123 (2025-06-17)",
+     "locator": "pág. 23",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-123.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los costes de residuos y desmantelamiento a largo plazo podrían acabar en manos del Estado, con incertidumbre sobre quién paga y déficit ya acumulado en el fondo de residuos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 123 (2025-06-17)",
+     "locator": "pág. 13",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-123.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Alargar la vida de las centrales podría aumentar los residuos radiactivos y el riesgo de accidentes, sin un emplazamiento definido para almacenarlos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 123 (2025-06-17)",
+     "locator": "pág. 25",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-123.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Obligar a prorrogar si el titular lo pide podría restar margen al Gobierno, chocar con la libre iniciativa empresarial y crear inseguridad jurídica.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 123 (2025-06-17)",
+     "locator": "pág. 15",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-123.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate. Ninguna intervención aporta una estimación del coste de la prórroga ni de las tasas de residuos.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion109/20250508/Votacion008/VOT_20250508130751.json": {
@@ -148,6 +205,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Mantener abiertas más tiempo las centrales nucleares podría aportar generación convencional que dé más estabilidad a la red cuando hay mucha generación renovable.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 111 (2025-05-06)",
+     "locator": "pág. 44",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-111.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una estrategia que combine nucleares y renovables podría reducir la fragilidad del sistema eléctrico que dejó al descubierto el apagón.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 111 (2025-05-06)",
+     "locator": "pág. 38",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-111.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Prolongar la vida de las centrales podría encarecer la electricidad si la energía nuclear resulta más cara que la de las renovables.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 111 (2025-05-06)",
+     "locator": "pág. 41",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-111.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Mantener centrales envejecidas podría aumentar el riesgo de seguridad cada año y acumular residuos radiactivos que exigen gestión durante un tiempo larguísimo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 111 (2025-05-06)",
+     "locator": "pág. 42",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-111.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Condicionar la continuidad de las centrales a rebajas de impuestos y tasas podría beneficiar a unas pocas empresas más que al interés general.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 111 (2025-05-06)",
+     "locator": "pág. 49",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-111.PDF"
+    }
+   ],
+   "gaps": "Proposición no de ley sin memoria de impacto; el debate no cuantifica el coste ni el plazo de alargar la vida de las centrales.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion091/20250212/Votacion001/VOT_20250212154036.json": {
@@ -184,6 +290,63 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Mantener las centrales podría seguir aportando electricidad de forma constante, con bajas emisiones y sin depender del clima, para atender la demanda.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 94 (2025-02-11)",
+     "locator": "pág. 37",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-94.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Alargar su vida podría evitar nuevas dependencias y riesgos de falta de suministro mientras las renovables y el almacenamiento no estén suficientemente desarrollados.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 94 (2025-02-11)",
+     "locator": "pág. 39",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-94.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Prolongar la actividad podría retrasar la pérdida de empleo y de actividad en las comarcas con centrales, para las que se dice que no hay alternativa laboral prevista.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 94 (2025-02-11)",
+     "locator": "pág. 41",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-94.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Para ser rentables podrían necesitar un precio fijado muy por encima del coste de las renovables, lo que encarecería el sistema eléctrico.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 94 (2025-02-11)",
+     "locator": "pág. 36",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-94.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Seguir operando podría agravar la gestión de unos residuos radiactivos con piscinas llenas, y mantener planes de emergencia y evacuación que se consideran insuficientes.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 94 (2025-02-11)",
+     "locator": "pág. 41",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-94.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Prolongar su explotación podría mantener el riesgo de accidentes graves y de dependencia de un uranio que se importa, incluso de proveedores en contexto de guerra.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 94 (2025-02-11)",
+     "locator": "pág. 43",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-94.PDF"
+    }
+   ],
+   "gaps": "Proposición no de ley, no vinculante: pide al Gobierno, no cambia la ley. Sin memoria oficial de impacto; los efectos son argumentos del debate y varios se contradicen entre intervenciones.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion118/20250612/Votacion009/VOT_20250612132249.json": {
@@ -220,6 +383,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion146/20251113/Votacion113/VOT_20251113131441.json": {
@@ -251,6 +420,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que un servicio de tren de proximidad dónde hoy no hay cercanías ayude a compensar el déficit histórico de inversión ferroviaria en la movilidad diaria y urbana.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 30",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría evitar que se supriman paradas de autobús interurbano del mapa de concesiones: las comunidades podrían asumir algunas y el Estado mantendría las demás.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 141 (2025-10-08)",
+     "locator": "pág. 93",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-141.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un mínimo de aportación estatal a los costes de explotación del transporte público podría dar más estabilidad a los servicios y permitir planificar a largo plazo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 37",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría quedarse corta si buena parte de lo previsto depende de un desarrollo reglamentario y presupuestario posterior que no se haga con ambición.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 33",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una ley estatal con visión centralista podría invadir competencias autonómicas y añadir complejidad a la coordinación entre los distintos niveles de decisión.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 34",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley: los efectos son argumentos del debate en el Pleno; no se ha contrastado aquí con la memoria oficial de impacto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   }
  }

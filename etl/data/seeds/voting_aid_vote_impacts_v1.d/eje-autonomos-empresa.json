@@ -153,6 +153,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Eliminar la cuota a quien gana menos del SMI podría aliviar a autónomos con ingresos inciertos, irregulares o temporales que hoy pagan cuota igualmente.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 150 (2025-11-12)",
+     "locator": "pág. 126",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-150.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reducir la presión fiscal sobre los autónomos podría darles más margen para sostener su actividad y el empleo que generan.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 150 (2025-11-12)",
+     "locator": "pág. 129",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-150.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Si muchos autónomos dejan de cotizar, la Seguridad Social podría ingresar menos mientras se pide mejorar las prestaciones.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 150 (2025-11-12)",
+     "locator": "pág. 128",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-150.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Quien no cotiza podría quedarse sin pensión contributiva o con una muy baja, porque las pensiones dependen de lo cotizado.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 150 (2025-11-12)",
+     "locator": "pág. 127",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-150.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Dejar de cotizar podría desproteger a los autónomos y empujarlos hacia la protección privada, con menos derechos que los asalariados.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 150 (2025-11-12)",
+     "locator": "pág. 128",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-150.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; no se cuantifica en el debate el coste de la cuota única ni de la rebaja del IRPF.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion174/20260422/Votacion015/VOT_20260422152002.json": {
@@ -178,6 +227,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion014/VOT_20260326165042.json": {
@@ -203,6 +258,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion159/20260212/Votacion010/VOT_20260212114321.json": {
@@ -228,6 +289,31 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Nuevos tramos para quien más ingresa podrían hacer que cotice más quien más tiene, y así financiar una protección social mejor para el resto.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 164 (2026-02-11)",
+     "locator": "pág. 123",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-164.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Se señala que nuevos tramos de cotización podrían suponer más cuotas y más carga para los autónomos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 164 (2026-02-11)",
+     "locator": "pág. 132",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-164.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; los efectos son argumentos del debate. No hay argumentos sobre el punto 12 (IRPF e impuesto de sociedades).",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion070/20241023/Votacion026/VOT_20241023184407.json": {
@@ -285,6 +371,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion049/20240620/Votacion011/VOT_20240620132734.json": {
@@ -311,6 +403,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion185/20260611/Votacion011/VOT_20260611145715.json": {
@@ -337,6 +435,47 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "La pasarela podría permitir trasladar al RETA los derechos económicos acumulados en las mutualidades, de modo que más profesionales accedan a una pensión pública de jubilación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 86",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que pensiones muy bajas, de unos 300 o 400 euros, pasen a ser de aproximadamente 1200 euros al integrarse en la Seguridad Social.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 97",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Remitir cuestiones importantes a futuros reglamentos podría dejar a miles de mutualistas con derechos pendientes de desarrollo y con menor seguridad jurídica.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 88",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Si las mutualidades no aportan todos los recursos, la Seguridad Social, y con ella toda la sociedad, podría asumir parte del coste en pensiones que esta ley genera.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 97",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate. Un orador señaló que no se compartieron datos reales sobre el impacto con los grupos.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion088/20241219/Votacion016/VOT_20241219162718.json": {
@@ -362,6 +501,39 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reducir el desperdicio podría abaratar los alimentos y generar menos residuos y contaminación, al hacer más eficiente la cadena alimentaria.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 91 (2024-12-19)",
+     "locator": "pág. 13",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-91.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Los acuerdos de donación obligatorios para grandes establecimientos podrían hacer que más excedentes lleguen a entidades sin ánimo de lucro que atienden a personas vulnerables.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 91 (2024-12-19)",
+     "locator": "pág. 9",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-91.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los planes y trámites exigidos podrían suponer más costes y burocracia para las empresas agroalimentarias, incluido el sector primario, donde el desperdicio ya sería escaso.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 91 (2024-12-19)",
+     "locator": "pág. 15",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-91.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley; no se ha consultado la memoria oficial de impacto. Los efectos son argumentos del debate, sin cifras de impacto sobre multas, IVA o lobo.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -394,6 +566,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion159/20260212/Votacion011/VOT_20260212114323.json": {
@@ -419,6 +597,31 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una cuota ajustada a ingresos bajos podría evitar que quienes ganan menos del salario mínimo acaben con pensiones bajas y pobreza futura.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 164 (2026-02-11)",
+     "locator": "pág. 123",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-164.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Se señala que bajar la cotización podría traducirse en menor protección y en pensiones más bajas para los autónomos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 164 (2026-02-11)",
+     "locator": "pág. 125",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-164.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; los efectos son argumentos del debate. No hay argumentos sobre el punto 12 (IRPF e impuesto de sociedades).",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion159/20260212/Votacion015/VOT_20260212114331.json": {
@@ -444,6 +647,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion159/20260212/Votacion019/VOT_20260212114338.json": {
@@ -469,6 +678,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   }
  }

@@ -147,6 +147,47 @@
     "note": "sin texto extraído del dictamen; una consulta al BOCG B-141-7 no devolvió coincidencias (disoluci|apolog)",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Prohibir las asociaciones que hagan apología del franquismo podría evitar que se vuelva a humillar y victimizar a las víctimas de esa dictadura.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 125 (2025-06-19)",
+     "locator": "pág. 8",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-125.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Castigar con la disolución a asociaciones favorables a un régimen pasado podría limitar las libertades ideológica, de expresión y de asociación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 125 (2025-06-19)",
+     "locator": "pág. 13",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-125.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Al tramitarse como proposición de ley, sin informes de los órganos consultivos, una norma que afecta a un derecho fundamental podría tener menos garantías jurídicas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 110 (2025-04-10)",
+     "locator": "pág. 53",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-110.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Al exigir que haya menosprecio de las víctimas, la ley podría tener poca eficacia y no alcanzar a entidades que exaltan el franquismo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 110 (2025-04-10)",
+     "locator": "pág. 51",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-110.PDF"
+    }
+   ],
+   "gaps": "Proposición de ley sin memoria oficial de impacto; los efectos son argumentos del debate y no se cuantifican. Debates de 2024-10 y 2024-11 sin texto disponible.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion172/20260415/Votacion001/VOT_20260415133904.json": {
@@ -182,6 +223,63 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría reconocer como víctimas del franquismo a mujeres internadas en el Patronato que hoy no están reconocidas por la ley vigente.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 177 (2026-04-14)",
+     "locator": "pág. 35",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-177.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que el Estado asuma la búsqueda de documentación, el inventario de centros y la localización de víctimas que quizá no se conocen.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 177 (2026-04-14)",
+     "locator": "pág. 35",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-177.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría abrir la vía a investigaciones completas y a indemnizaciones dignas para las supervivientes.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 177 (2026-04-14)",
+     "locator": "pág. 41",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-177.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Un reconocimiento parcial podría crear una categoría de víctimas oficiales que deje fuera a la mayoría de las afectadas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 177 (2026-04-14)",
+     "locator": "pág. 43",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-177.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Cambiar «establecer indemnizaciones» por «estudiar» podría dejar la reparación económica sin un compromiso firme.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 177 (2026-04-14)",
+     "locator": "pág. 37",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-177.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Encajar en la ley de memoria hechos posteriores a la Constitución podría generar inseguridad jurídica.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 177 (2026-04-14)",
+     "locator": "pág. 46",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-177.PDF"
+    }
+   ],
+   "gaps": "Proposición no de ley sin memoria oficial de impacto; los efectos son argumentos del debate. No se cuantifica cuántas mujeres afectaría ni el coste de una reparación.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion172/20260415/Votacion002/VOT_20260415133905.json": {
@@ -212,6 +310,47 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Documentar y reconocer a libreros y bibliotecarios represaliados podría sacarlos del anonimato y dar visibilidad a personas concretas que arriesgaron su vida por los libros.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 177 (2026-04-14)",
+     "locator": "pág. 55",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-177.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que el estudio rescate una parte silenciada de la memoria, como la quema de libros y diccionarios en euskera en distintos puntos del territorio.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 177 (2026-04-14)",
+     "locator": "pág. 53",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-177.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Un relato genérico de la destrucción de libros podría diluir la persecución específica de lenguas como el catalán, con cierres de bibliotecas y depuración de bibliotecarios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 177 (2026-04-14)",
+     "locator": "pág. 48",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-177.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Un estudio centrado en un solo periodo y bando podría dar una memoria incompleta, al dejar fuera otras destrucciones de bibliotecas y archivos en España.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 177 (2026-04-14)",
+     "locator": "pág. 58",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-177.PDF"
+    }
+   ],
+   "gaps": "Proposición no de ley sin memoria de impacto: no consta coste ni alcance del estudio. Los efectos son argumentos del debate y buena parte de este es reproche político.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -248,6 +387,47 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Desclasificar los documentos de los hechos y colaborar con la vía judicial para reabrir sumarios podría ayudar a esclarecer lo ocurrido.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 126 (2025-06-24)",
+     "locator": "pág. 34",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-126.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un reconocimiento institucional y un acto de recuerdo podrían dar reparación a las víctimas y reconocer unos hechos que siguen sin responsabilidad asumida.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 126 (2025-06-24)",
+     "locator": "pág. 34",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-126.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Se señaló que tribunales y Fiscalía ya tomaron decisiones sobre estos hechos, por lo que reabrir sumarios podría reabrir lo ya resuelto.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 126 (2025-06-24)",
+     "locator": "pág. 41",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-126.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "La iniciativa podría duplicar los pasos de reparación ya dados por las instituciones navarras y dejar fuera a otras víctimas de violencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 126 (2025-06-24)",
+     "locator": "pág. 35",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-126.PDF"
+    }
+   ],
+   "gaps": "No hay estimación de qué documentos siguen clasificados ni de si la vía judicial permitiría reabrir los casos.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion040/20240523/Votacion004/VOT_20240523140934.json": {
@@ -278,6 +458,63 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Garantizar la aplicación de la ley estatal de memoria democrática podría proteger el derecho de las víctimas del franquismo y sus familias a la verdad, la justicia y la reparación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 40 (2024-05-21)",
+     "locator": "pág. 51",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-40.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Mantener las políticas de memoria en todos los niveles de gobierno podría cumplir obligaciones internacionales de derechos humanos, que no admiten retrocesos una vez reconocida la protección.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 40 (2024-05-21)",
+     "locator": "pág. 52",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-40.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Desarrollar por reglamento la ley de memoria democrática, aprobada en 2022 y aún pendiente de desarrollo, podría hacer efectivas sus medidas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 40 (2024-05-21)",
+     "locator": "pág. 51",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-40.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Derogar leyes autonómicas de memoria y sustituirlas por leyes de concordia podría reducir la protección de las víctimas y sus familias en esos territorios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 40 (2024-05-21)",
+     "locator": "pág. 56",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-40.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Aun con la ley estatal, las víctimas podrían seguir sin acceso a la justicia si los tribunales archivan las querellas por la ley de amnistía y la prescripción.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 40 (2024-05-21)",
+     "locator": "pág. 53",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-40.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Fijar por ley una interpretación oficial de la historia podría chocar con la neutralidad ideológica exigida en los centros públicos y con la diversidad de opiniones sobre la guerra.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 40 (2024-05-21)",
+     "locator": "pág. 58",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-40.PDF"
+    }
+   ],
+   "gaps": "Proposición no de ley sin memoria oficial de impacto; los efectos son argumentos del debate, y buena parte de este es reproche político sin mecanismos.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion019/20240206/Votacion005/VOT_20240206213127.json": {
@@ -339,6 +576,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "El debate es sobre todo reproche político y acusaciones cruzadas; no se defienden mecanismos concretos de beneficio o riesgo para los 14 puntos votados.",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion106/20250410/Votacion001/VOT_20250410155136.json": {
@@ -368,6 +611,12 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -400,6 +649,47 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Documentar y reconocer a libreros y bibliotecarios represaliados podría sacarlos del anonimato y dar visibilidad a personas concretas que arriesgaron su vida por los libros.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 177 (2026-04-14)",
+     "locator": "pág. 55",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-177.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que el estudio rescate una parte silenciada de la memoria, como la quema de libros y diccionarios en euskera en distintos puntos del territorio.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 177 (2026-04-14)",
+     "locator": "pág. 53",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-177.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Un relato genérico de la destrucción de libros podría diluir la persecución específica de lenguas como el catalán, con cierres de bibliotecas y depuración de bibliotecarios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 177 (2026-04-14)",
+     "locator": "pág. 48",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-177.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Un estudio centrado en un solo periodo y bando podría dar una memoria incompleta, al dejar fuera otras destrucciones de bibliotecas y archivos en España.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 177 (2026-04-14)",
+     "locator": "pág. 58",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-177.PDF"
+    }
+   ],
+   "gaps": "Proposición no de ley sin memoria de impacto: no consta coste ni alcance del estudio. Los efectos son argumentos del debate y buena parte de este es reproche político.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion172/20260415/Votacion004/VOT_20260415133908.json": {
@@ -425,6 +715,47 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Documentar y reconocer a libreros y bibliotecarios represaliados podría sacarlos del anonimato y dar visibilidad a personas concretas que arriesgaron su vida por los libros.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 177 (2026-04-14)",
+     "locator": "pág. 55",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-177.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que el estudio rescate una parte silenciada de la memoria, como la quema de libros y diccionarios en euskera en distintos puntos del territorio.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 177 (2026-04-14)",
+     "locator": "pág. 53",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-177.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Un relato genérico de la destrucción de libros podría diluir la persecución específica de lenguas como el catalán, con cierres de bibliotecas y depuración de bibliotecarios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 177 (2026-04-14)",
+     "locator": "pág. 48",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-177.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Un estudio centrado en un solo periodo y bando podría dar una memoria incompleta, al dejar fuera otras destrucciones de bibliotecas y archivos en España.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 177 (2026-04-14)",
+     "locator": "pág. 58",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-177.PDF"
+    }
+   ],
+   "gaps": "Proposición no de ley sin memoria de impacto: no consta coste ni alcance del estudio. Los efectos son argumentos del debate y buena parte de este es reproche político.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion106/20250410/Votacion003/VOT_20250410155139.json": {
@@ -460,6 +791,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion106/20250410/Votacion004/VOT_20250410155141.json": {
@@ -490,6 +827,12 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -522,6 +865,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion106/20250410/Votacion006/VOT_20250410155144.json": {
@@ -551,6 +900,12 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -586,6 +941,47 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Prohibir las asociaciones que hagan apología del franquismo podría evitar que se vuelva a humillar y victimizar a las víctimas de esa dictadura.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 125 (2025-06-19)",
+     "locator": "pág. 8",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-125.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Castigar con la disolución a asociaciones favorables a un régimen pasado podría limitar las libertades ideológica, de expresión y de asociación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 125 (2025-06-19)",
+     "locator": "pág. 13",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-125.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Al tramitarse como proposición de ley, sin informes de los órganos consultivos, una norma que afecta a un derecho fundamental podría tener menos garantías jurídicas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 110 (2025-04-10)",
+     "locator": "pág. 53",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-110.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Al exigir que haya menosprecio de las víctimas, la ley podría tener poca eficacia y no alcanzar a entidades que exaltan el franquismo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 110 (2025-04-10)",
+     "locator": "pág. 51",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-110.PDF"
+    }
+   ],
+   "gaps": "Proposición de ley sin memoria oficial de impacto; los efectos son argumentos del debate y no se cuantifican. Debates de 2024-10 y 2024-11 sin texto disponible.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   }
  }

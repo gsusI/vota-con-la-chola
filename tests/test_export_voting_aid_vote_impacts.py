@@ -46,6 +46,11 @@ class TestValidation(unittest.TestCase):
         self.assertEqual(v["gaps"], "No lleva memoria de impacto.")
         self.assertEqual(out["meta"]["indirect_by_evidence"]["debate"], 1)
 
+    def test_accepts_diary_supplement(self) -> None:
+        seed = copy.deepcopy(FIXTURE)
+        seed["votes"]["v1"]["indirect_effects"][0]["url"] = DS.replace("PL-62.PDF", "PL-163-C1.PDF")
+        self.assertEqual(vi.validate_seed(seed, {"v1"}, {"eje"}), [])
+
     def test_rejects_ungrounded_one_sided_or_partisan(self) -> None:
         def ind(s, i=0):
             return s["votes"]["v1"]["indirect_effects"][i]

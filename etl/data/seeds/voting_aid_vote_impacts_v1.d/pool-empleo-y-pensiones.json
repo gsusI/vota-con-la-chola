@@ -77,6 +77,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reconocer jurídicamente funciones que biólogos y trabajadores sociales ya ejercen podría darles garantías y derechos profesionales y adaptar la ley a la realidad asistencial.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 203 (2026-09-10)",
+     "locator": "pág. 94",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-203.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Incluir a los trabajadores sociales como profesión sanitaria podría ayudar a integrar los factores sociales en el tratamiento y a mejorar su eficacia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 203 (2026-09-10)",
+     "locator": "pág. 94",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-203.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una ley estatal que ordene funciones y registros podría invadir competencias autonómicas sobre ordenación profesional y organización de servicios sanitarios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 203 (2026-09-10)",
+     "locator": "pág. 99",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-203.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin financiación suficiente, el reconocimiento podría quedarse en el papel y no mejorar la situación real de estos profesionales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 203 (2026-09-10)",
+     "locator": "pág. 94",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-203.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Un encaje jurídico sin consenso podría afectar a las funciones, la formación y la seguridad de la atención al paciente.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 203 (2026-09-10)",
+     "locator": "pág. 95",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-203.PDF"
+    }
+   ],
+   "gaps": "Proposición de toma en consideración; sin memoria oficial de impacto. Los efectos son argumentos del debate y pueden cambiar en la fase de enmiendas.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   }
  }

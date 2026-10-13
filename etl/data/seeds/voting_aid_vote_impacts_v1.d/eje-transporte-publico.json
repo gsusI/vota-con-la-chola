@@ -358,6 +358,47 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Garantizar paradas, horarios y rutas de autobús podría asegurar que quien vive en un pueblo siga pudiendo ir al médico o a estudiar sin depender de un coche.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 192 (2026-06-16)",
+     "locator": "pág. 55",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-192.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Exigir el cumplimiento inmediato de muchos planes a la vez podría ser inviable en el plazo de la ley y dejar los plazos otra vez incumplidos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 192 (2026-06-16)",
+     "locator": "pág. 60",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-192.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Desarrollar los planes de la ley necesita recursos, planificación y voluntad política; sin ellos, los retrasos podrían seguir y las mejoras no llegar a los usuarios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 192 (2026-06-16)",
+     "locator": "pág. 69",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-192.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Fijar las rutas actuales en un nuevo mapa de concesiones podría perpetuar un servicio pensado para una población menor, aunque la demanda haya crecido.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 192 (2026-06-16)",
+     "locator": "pág. 60",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-192.PDF"
+    }
+   ],
+   "gaps": "Proposición no de ley sin memoria de impacto; apenas se debaten los efectos del punto 9 (transporte marítimo). Los efectos son argumentos del debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion079/20241121/Votacion039/VOT_20241121173836.json": {
@@ -384,6 +425,31 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Renovar trenes obsoletos y reforzar frecuencias podría mejorar la fiabilidad del servicio y permitir a los trabajadores desplazarse con seguridad.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 80 (2024-11-19)",
+     "locator": "pág. 69",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-80.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Reforzar y ampliar servicios y plantilla podría solaparse con inversiones, compras de trenes y ofertas de empleo ya en marcha.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 80 (2024-11-19)",
+     "locator": "pág. 70",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-80.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria de impacto; las cifras de inversión y puntualidad del debate no se han contrastado. La reprobación (punto 10) no se debate por mecanismos.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion010/VOT_20251008195225.json": {
@@ -410,6 +476,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que un servicio de tren de proximidad dónde hoy no hay cercanías ayude a compensar el déficit histórico de inversión ferroviaria en la movilidad diaria y urbana.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 30",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría evitar que se supriman paradas de autobús interurbano del mapa de concesiones: las comunidades podrían asumir algunas y el Estado mantendría las demás.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 141 (2025-10-08)",
+     "locator": "pág. 93",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-141.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un mínimo de aportación estatal a los costes de explotación del transporte público podría dar más estabilidad a los servicios y permitir planificar a largo plazo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 37",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría quedarse corta si buena parte de lo previsto depende de un desarrollo reglamentario y presupuestario posterior que no se haga con ambición.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 33",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una ley estatal con visión centralista podría invadir competencias autonómicas y añadir complejidad a la coordinación entre los distintos niveles de decisión.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 34",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley: los efectos son argumentos del debate en el Pleno; no se ha contrastado aquí con la memoria oficial de impacto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion011/VOT_20251008195227.json": {
@@ -436,6 +551,55 @@
     "verdict": "none",
     "note": "votación en bloque («resto de enmiendas») sin texto extraído; un intento con kit fetch sobre BOCG A-9-4 halló textos de movilidad gratuita (págs. 51 y 83) pero sin poder atribuirlos a esta votación.",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que un servicio de tren de proximidad dónde hoy no hay cercanías ayude a compensar el déficit histórico de inversión ferroviaria en la movilidad diaria y urbana.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 30",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría evitar que se supriman paradas de autobús interurbano del mapa de concesiones: las comunidades podrían asumir algunas y el Estado mantendría las demás.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 141 (2025-10-08)",
+     "locator": "pág. 93",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-141.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un mínimo de aportación estatal a los costes de explotación del transporte público podría dar más estabilidad a los servicios y permitir planificar a largo plazo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 37",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría quedarse corta si buena parte de lo previsto depende de un desarrollo reglamentario y presupuestario posterior que no se haga con ambición.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 33",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una ley estatal con visión centralista podría invadir competencias autonómicas y añadir complejidad a la coordinación entre los distintos niveles de decisión.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 34",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley: los efectos son argumentos del debate en el Pleno; no se ha contrastado aquí con la memoria oficial de impacto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -474,6 +638,55 @@
     "note": "Cifras de transporte público ya encajan",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que un servicio de tren de proximidad dónde hoy no hay cercanías ayude a compensar el déficit histórico de inversión ferroviaria en la movilidad diaria y urbana.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 30",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría evitar que se supriman paradas de autobús interurbano del mapa de concesiones: las comunidades podrían asumir algunas y el Estado mantendría las demás.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 141 (2025-10-08)",
+     "locator": "pág. 93",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-141.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un mínimo de aportación estatal a los costes de explotación del transporte público podría dar más estabilidad a los servicios y permitir planificar a largo plazo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 37",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría quedarse corta si buena parte de lo previsto depende de un desarrollo reglamentario y presupuestario posterior que no se haga con ambición.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 33",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una ley estatal con visión centralista podría invadir competencias autonómicas y añadir complejidad a la coordinación entre los distintos niveles de decisión.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 34",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley: los efectos son argumentos del debate en el Pleno; no se ha contrastado aquí con la memoria oficial de impacto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion013/VOT_20251008195229.json": {
@@ -511,6 +724,55 @@
     "note": "Sistema integrado: viajeros, financiación y emisiones",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que un servicio de tren de proximidad dónde hoy no hay cercanías ayude a compensar el déficit histórico de inversión ferroviaria en la movilidad diaria y urbana.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 30",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría evitar que se supriman paradas de autobús interurbano del mapa de concesiones: las comunidades podrían asumir algunas y el Estado mantendría las demás.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 141 (2025-10-08)",
+     "locator": "pág. 93",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-141.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un mínimo de aportación estatal a los costes de explotación del transporte público podría dar más estabilidad a los servicios y permitir planificar a largo plazo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 37",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría quedarse corta si buena parte de lo previsto depende de un desarrollo reglamentario y presupuestario posterior que no se haga con ambición.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 33",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una ley estatal con visión centralista podría invadir competencias autonómicas y añadir complejidad a la coordinación entre los distintos niveles de decisión.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 34",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley: los efectos son argumentos del debate en el Pleno; no se ha contrastado aquí con la memoria oficial de impacto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion019/VOT_20251008195238.json": {
@@ -537,6 +799,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que un servicio de tren de proximidad dónde hoy no hay cercanías ayude a compensar el déficit histórico de inversión ferroviaria en la movilidad diaria y urbana.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 30",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría evitar que se supriman paradas de autobús interurbano del mapa de concesiones: las comunidades podrían asumir algunas y el Estado mantendría las demás.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 141 (2025-10-08)",
+     "locator": "pág. 93",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-141.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un mínimo de aportación estatal a los costes de explotación del transporte público podría dar más estabilidad a los servicios y permitir planificar a largo plazo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 37",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría quedarse corta si buena parte de lo previsto depende de un desarrollo reglamentario y presupuestario posterior que no se haga con ambición.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 33",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una ley estatal con visión centralista podría invadir competencias autonómicas y añadir complejidad a la coordinación entre los distintos niveles de decisión.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 34",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley: los efectos son argumentos del debate en el Pleno; no se ha contrastado aquí con la memoria oficial de impacto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion020/VOT_20251008195240.json": {
@@ -562,6 +873,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que un servicio de tren de proximidad dónde hoy no hay cercanías ayude a compensar el déficit histórico de inversión ferroviaria en la movilidad diaria y urbana.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 30",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría evitar que se supriman paradas de autobús interurbano del mapa de concesiones: las comunidades podrían asumir algunas y el Estado mantendría las demás.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 141 (2025-10-08)",
+     "locator": "pág. 93",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-141.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un mínimo de aportación estatal a los costes de explotación del transporte público podría dar más estabilidad a los servicios y permitir planificar a largo plazo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 37",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría quedarse corta si buena parte de lo previsto depende de un desarrollo reglamentario y presupuestario posterior que no se haga con ambición.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 33",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una ley estatal con visión centralista podría invadir competencias autonómicas y añadir complejidad a la coordinación entre los distintos niveles de decisión.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 34",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley: los efectos son argumentos del debate en el Pleno; no se ha contrastado aquí con la memoria oficial de impacto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion021/VOT_20251008195241.json": {
@@ -598,6 +958,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que un servicio de tren de proximidad dónde hoy no hay cercanías ayude a compensar el déficit histórico de inversión ferroviaria en la movilidad diaria y urbana.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 30",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría evitar que se supriman paradas de autobús interurbano del mapa de concesiones: las comunidades podrían asumir algunas y el Estado mantendría las demás.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 141 (2025-10-08)",
+     "locator": "pág. 93",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-141.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un mínimo de aportación estatal a los costes de explotación del transporte público podría dar más estabilidad a los servicios y permitir planificar a largo plazo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 37",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría quedarse corta si buena parte de lo previsto depende de un desarrollo reglamentario y presupuestario posterior que no se haga con ambición.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 33",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una ley estatal con visión centralista podría invadir competencias autonómicas y añadir complejidad a la coordinación entre los distintos niveles de decisión.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 34",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley: los efectos son argumentos del debate en el Pleno; no se ha contrastado aquí con la memoria oficial de impacto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion034/VOT_20251008195256.json": {
@@ -618,6 +1027,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que un servicio de tren de proximidad dónde hoy no hay cercanías ayude a compensar el déficit histórico de inversión ferroviaria en la movilidad diaria y urbana.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 30",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría evitar que se supriman paradas de autobús interurbano del mapa de concesiones: las comunidades podrían asumir algunas y el Estado mantendría las demás.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 141 (2025-10-08)",
+     "locator": "pág. 93",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-141.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un mínimo de aportación estatal a los costes de explotación del transporte público podría dar más estabilidad a los servicios y permitir planificar a largo plazo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 37",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría quedarse corta si buena parte de lo previsto depende de un desarrollo reglamentario y presupuestario posterior que no se haga con ambición.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 33",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una ley estatal con visión centralista podría invadir competencias autonómicas y añadir complejidad a la coordinación entre los distintos niveles de decisión.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 34",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley: los efectos son argumentos del debate en el Pleno; no se ha contrastado aquí con la memoria oficial de impacto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion038/VOT_20251008195301.json": {
@@ -644,6 +1102,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que un servicio de tren de proximidad dónde hoy no hay cercanías ayude a compensar el déficit histórico de inversión ferroviaria en la movilidad diaria y urbana.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 30",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría evitar que se supriman paradas de autobús interurbano del mapa de concesiones: las comunidades podrían asumir algunas y el Estado mantendría las demás.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 141 (2025-10-08)",
+     "locator": "pág. 93",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-141.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un mínimo de aportación estatal a los costes de explotación del transporte público podría dar más estabilidad a los servicios y permitir planificar a largo plazo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 37",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría quedarse corta si buena parte de lo previsto depende de un desarrollo reglamentario y presupuestario posterior que no se haga con ambición.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 33",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una ley estatal con visión centralista podría invadir competencias autonómicas y añadir complejidad a la coordinación entre los distintos niveles de decisión.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 34",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley: los efectos son argumentos del debate en el Pleno; no se ha contrastado aquí con la memoria oficial de impacto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion058/VOT_20251008195328.json": {
@@ -675,6 +1182,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que un servicio de tren de proximidad dónde hoy no hay cercanías ayude a compensar el déficit histórico de inversión ferroviaria en la movilidad diaria y urbana.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 30",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría evitar que se supriman paradas de autobús interurbano del mapa de concesiones: las comunidades podrían asumir algunas y el Estado mantendría las demás.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 141 (2025-10-08)",
+     "locator": "pág. 93",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-141.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un mínimo de aportación estatal a los costes de explotación del transporte público podría dar más estabilidad a los servicios y permitir planificar a largo plazo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 37",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría quedarse corta si buena parte de lo previsto depende de un desarrollo reglamentario y presupuestario posterior que no se haga con ambición.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 33",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una ley estatal con visión centralista podría invadir competencias autonómicas y añadir complejidad a la coordinación entre los distintos niveles de decisión.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 34",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley: los efectos son argumentos del debate en el Pleno; no se ha contrastado aquí con la memoria oficial de impacto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion061/VOT_20251008195331.json": {
@@ -701,6 +1257,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que un servicio de tren de proximidad dónde hoy no hay cercanías ayude a compensar el déficit histórico de inversión ferroviaria en la movilidad diaria y urbana.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 30",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría evitar que se supriman paradas de autobús interurbano del mapa de concesiones: las comunidades podrían asumir algunas y el Estado mantendría las demás.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 141 (2025-10-08)",
+     "locator": "pág. 93",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-141.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un mínimo de aportación estatal a los costes de explotación del transporte público podría dar más estabilidad a los servicios y permitir planificar a largo plazo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 37",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría quedarse corta si buena parte de lo previsto depende de un desarrollo reglamentario y presupuestario posterior que no se haga con ambición.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 33",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una ley estatal con visión centralista podría invadir competencias autonómicas y añadir complejidad a la coordinación entre los distintos niveles de decisión.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 34",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley: los efectos son argumentos del debate en el Pleno; no se ha contrastado aquí con la memoria oficial de impacto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion064/VOT_20251008195334.json": {
@@ -738,6 +1343,55 @@
     "note": "Sin cifra oficial de costes de explotación urbanos",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que un servicio de tren de proximidad dónde hoy no hay cercanías ayude a compensar el déficit histórico de inversión ferroviaria en la movilidad diaria y urbana.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 30",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría evitar que se supriman paradas de autobús interurbano del mapa de concesiones: las comunidades podrían asumir algunas y el Estado mantendría las demás.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 141 (2025-10-08)",
+     "locator": "pág. 93",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-141.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un mínimo de aportación estatal a los costes de explotación del transporte público podría dar más estabilidad a los servicios y permitir planificar a largo plazo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 37",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría quedarse corta si buena parte de lo previsto depende de un desarrollo reglamentario y presupuestario posterior que no se haga con ambición.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 33",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una ley estatal con visión centralista podría invadir competencias autonómicas y añadir complejidad a la coordinación entre los distintos niveles de decisión.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 34",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley: los efectos son argumentos del debate en el Pleno; no se ha contrastado aquí con la memoria oficial de impacto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion073/VOT_20251008195345.json": {
@@ -774,6 +1428,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que un servicio de tren de proximidad dónde hoy no hay cercanías ayude a compensar el déficit histórico de inversión ferroviaria en la movilidad diaria y urbana.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 30",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría evitar que se supriman paradas de autobús interurbano del mapa de concesiones: las comunidades podrían asumir algunas y el Estado mantendría las demás.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 141 (2025-10-08)",
+     "locator": "pág. 93",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-141.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un mínimo de aportación estatal a los costes de explotación del transporte público podría dar más estabilidad a los servicios y permitir planificar a largo plazo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 37",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría quedarse corta si buena parte de lo previsto depende de un desarrollo reglamentario y presupuestario posterior que no se haga con ambición.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 33",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una ley estatal con visión centralista podría invadir competencias autonómicas y añadir complejidad a la coordinación entre los distintos niveles de decisión.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 34",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley: los efectos son argumentos del debate en el Pleno; no se ha contrastado aquí con la memoria oficial de impacto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   }
  }

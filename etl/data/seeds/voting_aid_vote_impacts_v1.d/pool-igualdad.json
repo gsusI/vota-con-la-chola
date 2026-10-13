@@ -38,6 +38,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Facilitar las obras de accesibilidad podría permitir a personas mayores o con movilidad reducida salir de su vivienda y llevar una vida independiente.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 103 (2025-03-18)",
+     "locator": "pág. 33",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-103.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Dar a las obras de accesibilidad un trato similar a otras obligaciones de la comunidad podría evitar que dependan del voto de los vecinos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 103 (2025-03-18)",
+     "locator": "pág. 34",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-103.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin ayudas públicas, el coste de adaptar edificios antiguos podría resultar inasumible para las personas que más lo necesitan.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 103 (2025-03-18)",
+     "locator": "pág. 34",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-103.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Al no concretar medidas ni financiación y depender de unas conclusiones aún desconocidas, la propuesta podría quedarse en una declaración.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 103 (2025-03-18)",
+     "locator": "pág. 38",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-103.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Dejar la adaptación en manos del Ministerio podría olvidar a comunidades autónomas y ayuntamientos, que conocen mejor la realidad del territorio.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 103 (2025-03-18)",
+     "locator": "pág. 39",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-103.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; las conclusiones del grupo de trabajo citado no se conocen en el debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion154/20251211/Votacion002/VOT_20251211175044.json": {
@@ -68,6 +117,63 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reconocer el derecho de las personas con discapacidad a beneficiarse de la inteligencia artificial podría favorecer su inclusión y autonomía, y no solo evitar daños.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 157 (2025-12-09)",
+     "locator": "pág. 70",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-157.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que las personas con discapacidad estén representadas en los datos y los modelos podría evitar decisiones automatizadas sesgadas en empleo, sanidad, educación o derechos sociales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 157 (2025-12-09)",
+     "locator": "pág. 76",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-157.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que las organizaciones de personas con discapacidad participen de forma continua en el diseño y la evaluación podría dar soluciones más completas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 157 (2025-12-09)",
+     "locator": "pág. 71",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-157.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin instrumentos concretos, presupuesto ni calendario, la iniciativa podría quedarse en una declaración genérica sin efecto real.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 157 (2025-12-09)",
+     "locator": "pág. 71",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-157.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "El desarrollo posterior podría confundir coordinación con recentralización si no cuenta desde el inicio con las comunidades autónomas, que tienen competencias en servicios sociales, sanidad o educación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 157 (2025-12-09)",
+     "locator": "pág. 71",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-157.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Parte de lo que se propone podría ya estar previsto en normativa europea y nacional, por lo que quizá añada poco si no se aplica lo existente.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 157 (2025-12-09)",
+     "locator": "pág. 77",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-157.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate y no se cuantifican.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion175/20260428/Votacion002/VOT_20260428200329.json": {
@@ -107,6 +213,55 @@
     "verdict": "improved",
     "note": "Tutelas ex lege 2024 sustituyen cifra de extutelados migrantes",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Exigir control judicial desde el inicio de la declaración de desamparo podría reforzar las garantías y dar un control sobre las decisiones que hoy toman los servicios sociales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 181 (2026-04-28)",
+     "locator": "pág. 27",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-181.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Dar prioridad al acogimiento en la familia, revisar las medidas cada dos años y dar más participación a progenitores y menores podría mejorar la atención a los menores tutelados.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 181 (2026-04-28)",
+     "locator": "pág. 35",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-181.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Exigir una resolución judicial previa podría frenar la protección de urgencia, porque la vía judicial no está preparada para responder con rapidez, y perjudicar al menor.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 181 (2026-04-28)",
+     "locator": "pág. 33",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-181.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Judicializar la declaración de desamparo podría no resolver los casos de abuso, que requieren aplicar la prevención, inspección y supervisión ya previstas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 181 (2026-04-28)",
+     "locator": "pág. 31",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-181.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Eliminar las referencias a la violencia de género en la ley de protección de la infancia podría debilitar el reconocimiento de ese tipo de violencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 181 (2026-04-28)",
+     "locator": "pág. 29",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-181.PDF"
+    }
+   ],
+   "gaps": "Se citó un informe del Ministerio de Infancia sin cifras de impacto; no se conoce el efecto real sobre plazos ni sobre casos de abuso.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   }

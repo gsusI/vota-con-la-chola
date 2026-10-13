@@ -56,6 +56,55 @@
     "note": "enfermeras colegiadas y densidad por habitante",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Más enfermeras por paciente podrían reducir errores de medicación y complicaciones evitables como infecciones hospitalarias o úlceras por presión.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 86 (2024-12-10)",
+     "locator": "pág. 10",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-86.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Fijar ratios podría corregir la sobrecarga laboral de enfermería y, según estudios citados, asociarse a estancias más cortas y menos mortalidad y morbilidad.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 86 (2024-12-10)",
+     "locator": "pág. 17",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-86.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Fijar ratios por ley estatal podría invadir las competencias de las comunidades autónomas en la gestión de recursos humanos sanitarios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 86 (2024-12-10)",
+     "locator": "pág. 7",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-86.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Con el déficit actual de enfermeras, una ratio fijada por ley podría ser imposible de cumplir si no va acompañada de otras medidas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 86 (2024-12-10)",
+     "locator": "pág. 10",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-86.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una regulación rígida podría no recoger la complejidad y la gravedad de los pacientes, y reforzar solo enfermería podría dejar fuera al resto del equipo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 86 (2024-12-10)",
+     "locator": "pág. 17",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-86.PDF"
+    }
+   ],
+   "gaps": "Iniciativa legislativa popular sin memoria oficial de impacto; los efectos son argumentos del debate y estudios citados en él.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   }
  }

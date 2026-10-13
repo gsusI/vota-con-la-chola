@@ -50,7 +50,7 @@ KINDS = ("beneficio_esperado", "riesgo_senalado")
 EVIDENCE = {"organismo_publico", "estudio", "debate"}
 URL_RE = re.compile(r"^https://")
 # A debate argument must point at a plenary Diario de Sesiones, where anyone can read who said it.
-DEBATE_URL_RE = re.compile(r"^https://www\.congreso\.es/public_oficiales/L\d+/CONG/DS/PL/DSCD-\d+-PL-\d+\.PDF$")
+DEBATE_URL_RE = re.compile(r"^https://www\.congreso\.es/public_oficiales/L\d+/CONG/DS/PL/DSCD-\d+-PL-\d+(?:-C\d+)?\.PDF$")
 
 
 def known_ids(snapshots: list[dict[str, Any]], pool: dict[str, Any]) -> tuple[set[str], set[str]]:

@@ -123,6 +123,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que mantener la opción de centro de educación especial dé a las familias de alumnado con discapacidad mayor capacidad de elegir el centro y el modelo educativo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 134 (2025-09-09)",
+     "locator": "pág. 6",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-134.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría evitar que los centros de educación especial queden relegados a casos muy extremos y acaben cerrando, con la pérdida de su labor y de sus profesionales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 134 (2025-09-09)",
+     "locator": "pág. 18",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-134.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría dar continuidad a la segregación del alumnado con necesidades educativas especiales en centros especiales, en lugar de escolarizarlo en centros ordinarios inclusivos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 134 (2025-09-09)",
+     "locator": "pág. 12",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-134.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría restar presión para dotar de recursos y apoyos a los centros ordinarios, de modo que familias con hijos con discapacidad leve o moderada sigan sin acceso real a ellos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 134 (2025-09-09)",
+     "locator": "pág. 10",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-134.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una norma estatal única podría interferir en modelos inclusivos autonómicos ya establecidos y en sus competencias educativas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 134 (2025-09-09)",
+     "locator": "pág. 13",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-134.PDF"
+    }
+   ],
+   "gaps": "Sin resultado de votación registrado en los datos. Proposición sin memoria oficial de impacto; no se cuantifica el efecto sobre el alumnado ni sobre los centros.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion185/20260611/Votacion037/VOT_20260611145748.json": {
@@ -159,6 +208,47 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Dar prioridad a los centros de educación especial cuando lo elijan las familias y lo avale el diagnóstico podría mejorar la atención al alumnado con más necesidades.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 190 (2026-06-10)",
+     "locator": "pág. 108",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-190.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reforzar apoyos al alumnado inmigrante en lugar de clases de cultura de origen podría favorecer su integración en el aula.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 190 (2026-06-10)",
+     "locator": "pág. 107",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-190.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Blindar vías paralelas de escolarización podría aumentar la segregación y las desigualdades en lugar de reducirlas, frente al modelo inclusivo vigente.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 190 (2026-06-10)",
+     "locator": "pág. 112",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-190.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Vincular el origen de los niños con la violencia escolar podría provocar discriminación, acoso y más violencia en las aulas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 190 (2026-06-10)",
+     "locator": "pág. 110",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-190.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; los efectos son argumentos del debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion180/20260520/Votacion006/VOT_20260520142328.json": {
@@ -195,6 +285,63 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Bajar las ratios en 0 a 3 años podría permitir una atención más individual y cubrir mejor las necesidades básicas de cada niño o niña.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 185 (2026-05-19)",
+     "locator": "pág. 64",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-185.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Mejorar salarios y condiciones del personal de las escuelas infantiles podría reducir su precariedad y mejorar la calidad del servicio.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 185 (2026-05-19)",
+     "locator": "pág. 65",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-185.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Universalizar y hacer gratuita la etapa 0 a 3 podría garantizar el acceso de todas las familias, sea cual sea su renta.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 185 (2026-05-19)",
+     "locator": "pág. 67",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-185.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Imponer las medidas desde el Estado podría ignorar las competencias autonómicas, la realidad de cada territorio, la disponibilidad de profesionales y la capacidad de los municipios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 185 (2026-05-19)",
+     "locator": "pág. 72",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-185.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin financiación estructural clara, las medidas podrían no ser viables en la práctica.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 185 (2026-05-19)",
+     "locator": "pág. 72",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-185.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Prescindir de la oferta privada y concertada podría reducir plazas, pues hoy completa la red pública donde esta no llega.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 185 (2026-05-19)",
+     "locator": "pág. 76",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-185.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; los efectos son argumentos del debate. No se calcula el coste de bajar ratios ni cuántas plazas públicas nuevas harían falta.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion198/20260916/Votacion008/VOT_20260916195351.json": {
@@ -226,6 +373,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion066/20241010/Votacion009/VOT_20241010194925.json": {
@@ -251,6 +404,12 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -294,6 +453,47 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que la ley fije la financiación estatal del 50 % del gasto certificado podría dar más recursos a las comunidades autónomas y reducir las listas de espera de dependencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 116",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Eliminar incompatibilidades entre prestaciones y reconocer automáticamente la discapacidad a quien ya tiene dependencia podría evitar trámites duplicados y agilizar los procedimientos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 198 (2026-07-14)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-198.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los derechos reconocidos podrían quedarse en el papel si la financiación no llega, si no llega a tiempo o si dependen del lugar de residencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 111",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin más dinero y competencias, la dependencia podría seguir con esperas de entre diez meses y un año desde el diagnóstico hasta recibir la prestación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 121",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley sin memoria de impacto en este material; los efectos son argumentos del debate y no se cuantifican su coste ni el calendario de aplicación.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion040/20240523/Votacion036/VOT_20240523141006.json": {
@@ -318,6 +518,63 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que incluir las enseñanzas artísticas superiores en el espacio de la enseñanza superior las equipare con el resto de estudios superiores y dignifique al sector.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 38",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que el alumnado gane derechos, como conciliar estudios, familia y trabajo, parar temporalmente los estudios, recibir educación inclusiva y participar en la toma de decisiones del centro.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 43",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría ampliar la oferta con disciplinas nuevas, como el circo o la escritura creativa, y mejorar la movilidad europea, la investigación y el acceso a la universidad de artistas de trayectoria reconocida.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 48",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría trasladar a las comunidades el coste de aplicar la ley si no se asegura una financiación propia y suficiente para los centros.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 49",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría crear un registro estatal de enseñanzas artísticas superiores que duplicaría al Registro de Universidades, Centros y Títulos, ya existente, y añadiría burocracia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 39",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Obligar a especializar centros que hoy dan a la vez enseñanzas superiores y profesionales podría dificultar el acceso fuera de las grandes ciudades, donde a veces hay un solo centro.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 31 (2024-03-14)",
+     "locator": "pág. 4",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-31.PDF"
+    }
+   ],
+   "gaps": "Sin memoria de impacto en el lote; los efectos son argumentos del debate, y partes de varias intervenciones están truncadas en el extracto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -350,6 +607,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion198/20260916/Votacion047/VOT_20260916195453.json": {
@@ -381,6 +644,47 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que la ley fije la financiación estatal del 50 % del gasto certificado podría dar más recursos a las comunidades autónomas y reducir las listas de espera de dependencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 116",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Eliminar incompatibilidades entre prestaciones y reconocer automáticamente la discapacidad a quien ya tiene dependencia podría evitar trámites duplicados y agilizar los procedimientos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 198 (2026-07-14)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-198.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los derechos reconocidos podrían quedarse en el papel si la financiación no llega, si no llega a tiempo o si dependen del lugar de residencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 111",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin más dinero y competencias, la dependencia podría seguir con esperas de entre diez meses y un año desde el diagnóstico hasta recibir la prestación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 121",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley sin memoria de impacto en este material; los efectos son argumentos del debate y no se cuantifican su coste ni el calendario de aplicación.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -425,6 +729,39 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Garantizar el español como lengua vehicular en todo el territorio podría asegurar que el alumnado reciba parte de su enseñanza en esa lengua en todas las comunidades.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 67 (2024-10-08)",
+     "locator": "pág. 68",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-67.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Cambiar el modelo de inmersión lingüística podría debilitar el uso social del catalán, que se señala en peligro, y la cohesión social que se atribuye a la escuela en esa lengua.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 67 (2024-10-08)",
+     "locator": "pág. 73",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-67.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Un modelo basado en el esfuerzo y la excelencia sin más inversión pública podría reducir la educación pública y aumentar la segregación del alumnado por su origen social.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 67 (2024-10-08)",
+     "locator": "pág. 71",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-67.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; los efectos son argumentos del debate y gran parte de las intervenciones son reproche político.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion029/20240314/Votacion013/VOT_20240314123722.json": {
@@ -449,6 +786,63 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que incluir las enseñanzas artísticas superiores en el espacio de la enseñanza superior las equipare con el resto de estudios superiores y dignifique al sector.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 38",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que el alumnado gane derechos, como conciliar estudios, familia y trabajo, parar temporalmente los estudios, recibir educación inclusiva y participar en la toma de decisiones del centro.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 43",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría ampliar la oferta con disciplinas nuevas, como el circo o la escritura creativa, y mejorar la movilidad europea, la investigación y el acceso a la universidad de artistas de trayectoria reconocida.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 48",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría trasladar a las comunidades el coste de aplicar la ley si no se asegura una financiación propia y suficiente para los centros.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 49",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría crear un registro estatal de enseñanzas artísticas superiores que duplicaría al Registro de Universidades, Centros y Títulos, ya existente, y añadiría burocracia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 39",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Obligar a especializar centros que hoy dan a la vez enseñanzas superiores y profesionales podría dificultar el acceso fuera de las grandes ciudades, donde a veces hay un solo centro.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 31 (2024-03-14)",
+     "locator": "pág. 4",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-31.PDF"
+    }
+   ],
+   "gaps": "Sin memoria de impacto en el lote; los efectos son argumentos del debate, y partes de varias intervenciones están truncadas en el extracto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   }

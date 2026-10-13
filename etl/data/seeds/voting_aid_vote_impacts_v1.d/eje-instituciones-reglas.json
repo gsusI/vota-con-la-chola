@@ -185,6 +185,47 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría reforzar el control del Parlamento sobre el gasto, al impedir mover créditos entre secciones del presupuesto sin pasar por las Cortes.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 163 (2026-02-10)",
+     "locator": "pág. 26",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-163-C1.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría reforzar la intervención de las Cortes en los créditos extraordinarios y en materia de defensa, que ahora se decidirían sin debate en el Congreso.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 163 (2026-02-10)",
+     "locator": "pág. 34",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-163-C1.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría restar agilidad para reaccionar ante imprevistos y generar más trámites, burocracia y retrasos que acaben en un peor servicio a la ciudadanía.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 163 (2026-02-10)",
+     "locator": "pág. 27",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-163-C1.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría bloquear el traslado de dinero entre partidas y retrasar la respuesta a emergencias y a servicios como sanidad, educación o servicios sociales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 163 (2026-02-10)",
+     "locator": "pág. 24",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-163-C1.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate y no se cuantifica cuánto gasto quedaría afectado.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion110/20250513/Votacion002/VOT_20250513201842.json": {
@@ -215,6 +256,47 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reforzar la independencia del CIS podría recuperar la confianza en su neutralidad y en el rigor científico de sus estudios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 114 (2025-05-13)",
+     "locator": "pág. 15",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-114.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un presidente y un consejo asesor con requisitos de independencia podrían reducir los sesgos señalados en sus estimaciones electorales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 114 (2025-05-13)",
+     "locator": "pág. 26",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-114.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Excluir a quienes hayan estado en partidos, sindicatos u organizaciones empresariales podría dejar un grupo muy reducido de candidatos a presidir el CIS, casi limitado a catedráticos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 114 (2025-05-13)",
+     "locator": "pág. 25",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-114.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Un consejo asesor que actúe como instancia de control parlamentario podría condicionar la independencia técnica del centro en lugar de reforzarla.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 114 (2025-05-13)",
+     "locator": "pág. 25",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-114.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; el debate se centra en la gestión actual del CIS. La intervención sobre periodos electorales está cortada en el texto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion069/20241022/Votacion001/VOT_20241022211822.json": {
@@ -284,6 +366,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un control previo de las leyes orgánicas podría evitar que normas luego declaradas inconstitucionales produzcan efectos difíciles de reparar mientras el tribunal tarda en resolver.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 52 (2024-06-25)",
+     "locator": "pág. 19",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-52-C1.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Fijar un plazo para que el Tribunal Constitucional resuelva podría dar más certeza sobre la validez de una ley orgánica antes de que se aplique.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 52 (2024-06-25)",
+     "locator": "pág. 18",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-52-C1.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría convertirse en un instrumento para que minorías parlamentarias paralicen la tramitación de leyes orgánicas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 52 (2024-06-25)",
+     "locator": "pág. 25",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-52-C1.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría distorsionar la relación entre Parlamento y Tribunal Constitucional, al intervenir el tribunal antes de que la voluntad parlamentaria esté definitivamente formada.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 52 (2024-06-25)",
+     "locator": "pág. 22",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-52-C1.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría tentar al tribunal a introducir modificaciones o adiciones en el texto que juzga de forma preventiva, en lugar de limitarse a controlar la ley ya aprobada.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 52 (2024-06-25)",
+     "locator": "pág. 22",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-52-C1.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate y no se aportan datos sobre cuántas leyes se habrían visto afectadas.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion041/20240528/Votacion001/VOT_20240528203932.json": {
@@ -309,6 +440,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Informar al Parlamento antes de cada Consejo Europeo podría dar más transparencia y control parlamentario a las posiciones que España lleva a Bruselas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 43 (2024-05-28)",
+     "locator": "pág. 10",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-43.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que la intervención del Parlamento aporte más coherencia y estabilidad a las decisiones de política exterior y reduzca el riesgo de arbitrariedad.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 43 (2024-05-28)",
+     "locator": "pág. 14",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-43.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Un debate previo a cada Consejo Europeo podría condicionar la capacidad de negociación del presidente del Gobierno.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 43 (2024-05-28)",
+     "locator": "pág. 16",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-43.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría duplicar una obligación que ya existe en parte, pues otra ley exige al Gobierno explicar por escrito su posición antes de los Consejos Europeos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 43 (2024-05-28)",
+     "locator": "pág. 15",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-43.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Exigir informar de decisiones no previstas en la estrategia exterior podría restar al Gobierno la agilidad que necesita en momentos difíciles de política exterior.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 43 (2024-05-28)",
+     "locator": "pág. 10",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-43.PDF"
+    }
+   ],
+   "gaps": "Proposición de ley sin memoria oficial de impacto; los efectos son argumentos del debate y no se sabe cómo se aplicaría en la práctica.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion185/20260611/Votacion025/VOT_20260611145732.json": {
@@ -329,6 +509,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Debate centrado en reproches cruzados sobre quién ha prorrogado más plazos de enmiendas; apenas hay mecanismos de efecto sobre ciudadanos, solo el bloqueo de iniciativas sin contraargumentos de riesgo.",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion066/20241010/Votacion014/VOT_20241010194929.json": {
@@ -365,6 +551,47 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Limitar los decretos ley y exigir control parlamentario podría reforzar la capacidad de las Cortes para legislar y controlar al Gobierno.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 68 (2024-10-09)",
+     "locator": "pág. 114",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-68.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Instituciones y órganos constitucionales fuera del control del Gobierno podrían aumentar la imparcialidad y la confianza en ellos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 68 (2024-10-09)",
+     "locator": "pág. 114",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-68.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Limitar el poder del Gobierno podría acabar recortando el poder que surge del voto, sin tocar el poder económico y mediático no elegido.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 68 (2024-10-09)",
+     "locator": "pág. 119",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-68.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Al ser una declaración general de principios, podría no traducirse en cambios concretos en las instituciones.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 68 (2024-10-09)",
+     "locator": "pág. 115",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-68.PDF"
+    }
+   ],
+   "gaps": "Debate con mucho reproche político y pocos mecanismos concretos; texto votado es una transaccional. Sin memoria de impacto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion191/20260625/Votacion020/VOT_20260625150814.json": {
@@ -390,6 +617,12 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Debate dominado por reproche político y alusiones personales; no se defienden mecanismos concretos de efectos sobre la ciudadanía.",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -421,6 +654,39 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Someter el plan y sus cambios a debate y votación podría reforzar el control democrático de la Cámara sobre un gasto de defensa de gran volumen.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 126 (2025-06-24)",
+     "locator": "pág. 49",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-126.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Exigir que cada cambio del plan pase por el Congreso podría restar agilidad al Gobierno en un contexto cambiante, y se señaló que no es un trámite de competencia de la Cámara.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 126 (2025-06-24)",
+     "locator": "pág. 46",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-126.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Un plan plurianual que asegure compromisos con la OTAN podría atar el gasto a subidas futuras de gasto militar que, según se advirtió, se pagarían con recortes sociales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 126 (2025-06-24)",
+     "locator": "pág. 45",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-126.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate. No se sabe cuánto gasto adicional implicarían los compromisos futuros con la OTAN.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion112/20250520/Votacion005/VOT_20250520203916.json": {
@@ -445,6 +711,47 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una gestión profesional y neutral de la SEPI podría hacer más rentables las participaciones públicas y asegurar la viabilidad de empresas estratégicas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 116 (2025-05-20)",
+     "locator": "pág. 60",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-116.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Elegir gestores por su perfil técnico podría reducir las pérdidas y fallos que se atribuyen a nombramientos por afinidad.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 116 (2025-05-20)",
+     "locator": "pág. 62",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-116.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Reformar la SEPI bajo la idea de neutralidad y profesionalidad podría hacer que los criterios empresariales primen sobre los sociales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 116 (2025-05-20)",
+     "locator": "pág. 64",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-116.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Pedir medidas a partir de indicios podría poner en cuestión la labor del personal técnico que evalúa las ayudas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 116 (2025-05-20)",
+     "locator": "pág. 65",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-116.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; los efectos son argumentos del debate. No se estima el coste ni el resultado de una auditoría o reforma.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -477,6 +784,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion103/20250326/Votacion011/VOT_20250326194445.json": {
@@ -508,6 +821,55 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Exigir permiso previo del Congreso para activar la cláusula de escape podría asegurar que la Cámara reciba y debata las decisiones del Gobierno en defensa.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 107 (2025-03-26)",
+     "locator": "pág. 123",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-107.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Si el aumento del gasto se orienta a tecnología de doble uso y se reparte por el territorio, podría generar también beneficios civiles, como en sanidad o gestión de servicios públicos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 107 (2025-03-26)",
+     "locator": "pág. 122",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-107.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Subir con rapidez el gasto en defensa podría comprometer el estado de bienestar mediante subidas de impuestos o más deuda, si no se recorta gasto de otro tipo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 107 (2025-03-26)",
+     "locator": "pág. 119",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-107.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "El aumento del gasto militar podría venir acompañado de recortes en gasto social, como habrían ocurrido en otros países europeos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 107 (2025-03-26)",
+     "locator": "pág. 120",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-107.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Pedir autorización previa al Congreso en un contexto muy cambiante podría restar agilidad a las decisiones del Gobierno en defensa.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 107 (2025-03-26)",
+     "locator": "pág. 122",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-107.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; no se cifra el coste del plan ni qué gasto se recortaría. Los efectos son argumentos del debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion091/20250212/Votacion008/VOT_20250212154043.json": {
@@ -533,6 +895,12 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -564,6 +932,39 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Someter el Plan Fiscal Estructural al Congreso podría dar más legitimidad y consenso a unos compromisos fiscales que obligarán durante 4 a 7 años a gobiernos estatales, autonómicos y locales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 64 (2024-09-24)",
+     "locator": "pág. 62",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-64.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Exigir que el Congreso valide el plan podría ser innecesario, porque la norma no lo exige y su validación podría hacerse con los presupuestos, que darían más solidez al plan.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 64 (2024-09-24)",
+     "locator": "pág. 65",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-64.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Un debate parlamentario inmediato sobre el plan podría no ser constructivo en el clima político actual, sin generar confianza ni credibilidad.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 64 (2024-09-24)",
+     "locator": "pág. 65",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-64.PDF"
+    }
+   ],
+   "gaps": "Votación solo del punto 1; no hay estudio oficial de impacto de someter el plan a validación; los efectos son argumentos del debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion052/20240627/Votacion030/VOT_20240627130402.json": {
@@ -594,6 +995,12 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Los beneficios (control parlamentario, cumplimiento de mandatos, presupuestos) tienen argumentos, pero los riesgos no se desarrollan: el resto del debate es reproche político sin mecanismos de riesgo.",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -630,6 +1037,55 @@
     "note": "Sesiones de control: cifra actual ya adecuada",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que los ministros respondan a lo que se les pregunta y justifiquen sus ausencias, de modo que las sesiones de control sirvan para obtener explicaciones y no sean una escenificación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 195 (2026-06-23)",
+     "locator": "pág. 12",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-195.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría reforzar el control parlamentario y la rendición de cuentas, que se presentan como garantía de transparencia y de equilibrio entre poderes.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 195 (2026-06-23)",
+     "locator": "pág. 6",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-195.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría acortar las esperas y reducir las respuestas que no contestan lo preguntado en las preguntas escritas y en las solicitudes de información de los diputados.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 195 (2026-06-23)",
+     "locator": "pág. 9",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-195.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría no cambiar la práctica si el problema es de cultura y respeto institucional y no de redacción del Reglamento, de modo que una norma más exigente no garantizaría respuestas más claras.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 195 (2026-06-23)",
+     "locator": "pág. 12",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-195.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría ocupar el tiempo del Pleno con un trámite formal, como justificar ausencias, en lugar de debatir leyes sobre vivienda, empleo, sanidad o educación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 195 (2026-06-23)",
+     "locator": "pág. 18",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-195.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate. No se sabe qué sanción o consecuencia tendría incumplir la obligación de responder.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion122/20250624/Votacion001/VOT_20250624202324.json": {
@@ -665,6 +1121,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Limitar las prórrogas del plazo de enmiendas podría evitar que las leyes queden paralizadas durante mucho tiempo en esa fase.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 126 (2025-06-24)",
+     "locator": "pág. 7",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-126.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Poner tope a las prórrogas podría devolver al Pleno la decisión sobre el ritmo de las leyes, hoy en manos de la mayoría de la Mesa.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 126 (2025-06-24)",
+     "locator": "pág. 7",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-126.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Plazos más cortos podrían dejar a los grupos pequeños, con pocos medios, sin tiempo para enmendar proyectos complejos o varios a la vez.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 126 (2025-06-24)",
+     "locator": "pág. 9",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-126.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Con plazos más rígidos podría ser más difícil negociar acuerdos y consensos para sacar adelante iniciativas sin mayoría clara.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 126 (2025-06-24)",
+     "locator": "pág. 15",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-126.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Recortar tiempos de tramitación podría reducir la participación ciudadana en leyes aprobadas con urgencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 126 (2025-06-24)",
+     "locator": "pág. 14",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-126.PDF"
+    }
+   ],
+   "gaps": "Reforma del Reglamento sin memoria de impacto; los efectos son argumentos del debate y se discute si el bloqueo actual es abuso o práctica habitual.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion104/20250408/Votacion002/VOT_20250408213859.json": {
@@ -690,6 +1195,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "El debate defiende el debate anual como costumbre parlamentaria y es sobre todo reproche político; no se señalan riesgos concretos de la reforma, por lo que no hay efectos de ambos tipos.",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion124/20250626/Votacion003/VOT_20250626120530.json": {
@@ -719,6 +1230,39 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Someter el plan y sus cambios a debate y votación podría reforzar el control democrático de la Cámara sobre un gasto de defensa de gran volumen.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 126 (2025-06-24)",
+     "locator": "pág. 49",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-126.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Exigir que cada cambio del plan pase por el Congreso podría restar agilidad al Gobierno en un contexto cambiante, y se señaló que no es un trámite de competencia de la Cámara.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 126 (2025-06-24)",
+     "locator": "pág. 46",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-126.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Un plan plurianual que asegure compromisos con la OTAN podría atar el gasto a subidas futuras de gasto militar que, según se advirtió, se pagarían con recortes sociales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 126 (2025-06-24)",
+     "locator": "pág. 45",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-126.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate. No se sabe cuánto gasto adicional implicarían los compromisos futuros con la OTAN.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -750,6 +1294,31 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Los informes detallados de ejecución podrían permitir saber a qué partidas se destina el dinero del plan, incluida la parte que llega al personal de las Fuerzas Armadas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 126 (2025-06-24)",
+     "locator": "pág. 43",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-126.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Un plan plurianual que asegure compromisos con la OTAN podría atar el gasto a subidas futuras de gasto militar que, según se advirtió, se pagarían con recortes sociales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 126 (2025-06-24)",
+     "locator": "pág. 45",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-126.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate. No se sabe cuánto gasto adicional implicarían los compromisos futuros con la OTAN.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion124/20250626/Votacion005/VOT_20250626120533.json": {
@@ -780,6 +1349,31 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Los informes detallados de ejecución podrían permitir saber a qué partidas se destina el dinero del plan, incluida la parte que llega al personal de las Fuerzas Armadas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 126 (2025-06-24)",
+     "locator": "pág. 43",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-126.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Un plan plurianual que asegure compromisos con la OTAN podría atar el gasto a subidas futuras de gasto militar que, según se advirtió, se pagarían con recortes sociales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 126 (2025-06-24)",
+     "locator": "pág. 45",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-126.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate. No se sabe cuánto gasto adicional implicarían los compromisos futuros con la OTAN.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion112/20250520/Votacion008/VOT_20250520203921.json": {
@@ -806,6 +1400,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion112/20250520/Votacion009/VOT_20250520203922.json": {
@@ -830,6 +1430,47 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una gestión profesional y neutral de la SEPI podría hacer más rentables las participaciones públicas y asegurar la viabilidad de empresas estratégicas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 116 (2025-05-20)",
+     "locator": "pág. 60",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-116.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Elegir gestores por su perfil técnico podría reducir las pérdidas y fallos que se atribuyen a nombramientos por afinidad.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 116 (2025-05-20)",
+     "locator": "pág. 62",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-116.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Más control del Congreso y más transparencia en la SEPI podrían aclarar sus operaciones y reducir las suspicacias sobre ellas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 116 (2025-05-20)",
+     "locator": "pág. 65",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-116.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Reformar la SEPI bajo la idea de neutralidad y profesionalidad podría hacer que los criterios empresariales primen sobre los sociales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 116 (2025-05-20)",
+     "locator": "pág. 64",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-116.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; los efectos son argumentos del debate. No se estima el coste ni el resultado de una auditoría o reforma.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -857,6 +1498,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion091/20250212/Votacion010/VOT_20250212154045.json": {
@@ -882,6 +1529,12 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -914,6 +1567,31 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que el Gobierno responda y comparezca en las sesiones de control podría reforzar la función de vigilancia que corresponde al Parlamento.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 95 (2025-02-12)",
+     "locator": "pág. 76",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-95.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Presentar al país como un Estado fallido podría dañar la seguridad jurídica que se considera necesaria para progresar económica y socialmente.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 95 (2025-02-12)",
+     "locator": "pág. 83",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-95.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; los efectos son argumentos del debate, en su mayoría de carácter político. No hay datos sobre el efecto de cada punto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion052/20240627/Votacion031/VOT_20240627130403.json": {
@@ -938,6 +1616,12 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Los beneficios (control parlamentario, cumplimiento de mandatos, presupuestos) tienen argumentos, pero los riesgos no se desarrollan: el resto del debate es reproche político sin mecanismos de riesgo.",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -965,6 +1649,12 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Los beneficios (control parlamentario, cumplimiento de mandatos, presupuestos) tienen argumentos, pero los riesgos no se desarrollan: el resto del debate es reproche político sin mecanismos de riesgo.",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion052/20240627/Votacion035/VOT_20240627130408.json": {
@@ -990,6 +1680,12 @@
     "verdict": "written",
     "note": "Punto 7 de la moción presentada (punto 6 en el texto aprobado).",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Los beneficios (control parlamentario, cumplimiento de mandatos, presupuestos) tienen argumentos, pero los riesgos no se desarrollan: el resto del debate es reproche político sin mecanismos de riesgo.",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   }

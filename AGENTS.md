@@ -174,6 +174,11 @@ generic-scale review: pilot 0.23 M per vote → 0.14–0.17 M at scale (50 agent
 direct effects from official text: 0.05 M per vote (37 agents, 475 votes, 25 M) because a deterministic step reused
 the repo's own extractor to put the literal voted text in each worklist. Check pre-extracted inputs for traps before
 scaling (e.g. approved motions are renumbered: point N voted ≠ point N published).
+Indirect effects from Pleno debates: 0.15 M per initiative / 0.06 M per vote (106 agents, 427 initiatives, 63 M) once each
+worklist carried the debate already cut per speech (presidency turns and co-official-language paragraphs dropped,
+≤2800 chars per speech, `[pág. N]` markers) and the prompt gave the batch's exact line count for parallel 450-line
+Reads; first cut (whole debate) cost 0.58 M per initiative. Apply with `kit apply-indirect <dir> --map exp_votes.json`
+(only votes left with both kinds get effects); the exporter's `PARTY_RE` flags «Sumar» as a verb, so reword it.
 
 ## Working Agreement
 

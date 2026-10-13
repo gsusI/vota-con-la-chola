@@ -10,6 +10,7 @@ downloads so a source fetched once serves everyone.
   fetch URL [-g REGEX]       download once (shared cache), PDF->text with page markers, print only matching lines
   vote URL                   what a Congreso vote was about: expediente text and the point voted (textoSubGrupo)
   ine TABLE [-g REGEX]       latest values of an INE table (servicios.ine.es DATOS_TABLA), one line per series
+  apply-indirect DIR --map M apply initiative-level indirect effects (applies_to: "all" or short vote ids) to its votes
   apply-effects DIR          apply per-vote direct effects ({"vote_event_id", "verdict": "written"|"none", "direct_effects", "note"})
   apply-votes DIR            apply per-vote figure reviews (keep/improved, final facts, new facts) to the part files
   apply-reviews DIR          apply reviewer verdicts (one <fact-id>.json each) to the seed and part files
@@ -328,6 +329,42 @@ def apply_effects(args: argparse.Namespace) -> None:
         print("PROBLEMA " + line)
 
 
+def apply_indirect(args: argparse.Namespace) -> None:
+    """One <expediente>.json per initiative with effects tagged applies_to ["all"] or short vote ids (sha1[:10]).
+    A vote gets the effects that apply to it only if both kinds remain (max 3 of each); votes that already have
+    indirect effects are left alone."""
+    exp_votes = json.loads(Path(args.map).read_text(encoding="utf-8"))
+    per_vote: dict[str, dict] = {}
+    for path in sorted(Path(args.dir).glob("*.json")):
+        r = json.loads(path.read_text(encoding="utf-8"))
+        for vid in exp_votes.get(r.get("expediente"), []):
+            short = hashlib.sha1(vid.encode()).hexdigest()[:10]
+            sel = [e for e in r.get("effects") or [] if "all" in (e.get("applies_to") or []) or short in (e.get("applies_to") or [])]
+            ben = [e for e in sel if e.get("kind") == "beneficio_esperado"][:3]
+            ris = [e for e in sel if e.get("kind") == "riesgo_senalado"][:3]
+            per_vote[vid] = {"effects": ben + ris if ben and ris else [], "gaps": r.get("gaps") or "", "note": r.get("note") or ""}
+    stats = collections.Counter()
+    for path in sorted(PARTS.glob("*.json")) + [SEED]:
+        data = json.loads(path.read_text(encoding="utf-8"))
+        changed = False
+        for vid, vote in (data.get("votes") or {}).items():
+            r = per_vote.get(vid)
+            if not r or vote.get("indirect_effects"):
+                continue
+            if r["effects"]:
+                vote["indirect_effects"] = [{k: e[k] for k in ("kind", "text", "evidence", "source", "locator", "url")} for e in r["effects"]]
+                if r["gaps"] and not vote.get("gaps"):
+                    vote["gaps"] = r["gaps"]
+                stats["con_efectos"] += 1
+            else:
+                stats["sin_equilibrio_o_vacio"] += 1
+            vote["indirect_review"] = {"verdict": "written" if r["effects"] else "none", "note": r["note"], "by": args.by, "at": args.at}
+            changed = True
+        if changed:
+            path.write_text(json.dumps(data, ensure_ascii=False, indent=1 if path != SEED else 2) + "\n", encoding="utf-8")
+    print(dict(stats))
+
+
 def text(url: str) -> str:
     """Cached plain text of a source (raises if blocked or unreachable)."""
     path, status = _download(url)
@@ -400,8 +437,13 @@ def main(argv: list[str] | None = None) -> int:
     ae.add_argument("dir")
     ae.add_argument("--by", default="claude-sonnet-5-5 (efectos directos desde el texto oficial)")
     ae.add_argument("--at", default="2026-10-13")
+    ai = sub.add_parser("apply-indirect")
+    ai.add_argument("dir")
+    ai.add_argument("--map", required=True, help="JSON {expediente: [vote_event_id, ...]}")
+    ai.add_argument("--by", default="claude-sonnet-5-5 (efectos indirectos desde el debate del Pleno)")
+    ai.add_argument("--at", default="2026-10-13")
     args = p.parse_args(argv)
-    {"apply-effects": apply_effects, "apply-votes": apply_votes, "apply-reviews": apply_reviews, "catalog": catalog, "fetch": fetch, "vote": vote, "ine": ine, "eurostat": eurostat}[args.cmd](args)
+    {"apply-indirect": apply_indirect, "apply-effects": apply_effects, "apply-votes": apply_votes, "apply-reviews": apply_reviews, "catalog": catalog, "fetch": fetch, "vote": vote, "ine": ine, "eurostat": eurostat}[args.cmd](args)
     return 0
 
 

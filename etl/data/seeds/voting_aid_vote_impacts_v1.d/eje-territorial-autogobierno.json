@@ -281,6 +281,63 @@
     "note": "Sin texto extraído; B-57-2 (toma en consideración) solo trae el título, sin articulado. Un intento de fetch sin resultado útil.",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Las bonificaciones de peaje ya comprometidas podrían seguir pagándose con cargo al Estado después del traspaso, sin trasladar ese coste a la administración gallega.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 197 (2026-06-25)",
+     "locator": "pág. 34",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-197.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "El reparto de responsabilidades podría quedar claro: el Estado respondería de lo decidido hasta el traspaso y la administración gallega solo de lo que decida cuando sea titular.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 197 (2026-06-25)",
+     "locator": "pág. 34",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-197.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "La transferencia se presenta como un paso hacia recuperar la autopista para el sector público, aunque por sí sola no resolvería el problema de los peajes.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 77",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría seguir cobrándose peaje hasta el final de la concesión en 2048, porque el traspaso de la competencia no elimina por sí mismo los peajes ni acorta la concesión.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 77",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Si un tribunal europeo anulase las prórrogas de la concesión, sin una cláusula expresa podría no estar claro quién paga y el coste podría recaer en la administración gallega.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 83",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Dejar el traspaso a lo que acuerde la Comisión Mixta de Transferencias podría generar dudas de constitucionalidad e inseguridad jurídica sobre cuándo y cómo se transfiere.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 83",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate y no se cuantifica el coste de una posible anulación de la concesión.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion154/20251211/Votacion014/VOT_20251211175058.json": {
@@ -416,6 +473,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Asumir la competencia de tráfico podría reforzar la capacidad operativa de la Policía foral y mejorar la seguridad vial en Navarra.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 82 (2024-11-21)",
+     "locator": "pág. 91",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-82.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reformar la ley foral podría dar un respaldo legal más sólido al traspaso, tras la anulación del decreto anterior por un defecto de procedimiento.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 82 (2024-11-21)",
+     "locator": "pág. 91",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-82.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Los agentes de la Guardia Civil que quisieran seguir prestando servicio en Navarra podrían hacerlo dentro de la Policía foral, evitando una pérdida de efectivos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 82 (2024-11-21)",
+     "locator": "pág. 91",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-82.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "La presencia de la Guardia Civil en las carreteras navarras podría reducirse si las administraciones no pactan fórmulas de colaboración, y se pide completar sus plantillas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 60 (2024-09-10)",
+     "locator": "pág. 33",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-60.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Las fórmulas de colaboración con agentes de otra administración, como una encomienda de gestión, podrían tener límites jurídicos para ejercer como agentes de autoridad.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 82 (2024-11-21)",
+     "locator": "pág. 90",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-82.PDF"
+    }
+   ],
+   "gaps": "Proyecto sin memoria de impacto en este lote; los efectos son argumentos del debate y no se estima cuánto cambiaría la siniestralidad ni la plantilla de agentes.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion193/20260723/Votacion019/VOT_20260723212000.json": {
@@ -434,6 +540,55 @@
     "verdict": "none",
     "note": "Enmiendas a la totalidad de devolución sin texto propio extraído; un intento con kit fetch sobre A-79-1 solo dio el proyecto de ley, no las enmiendas. Sin efectos verificables.",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "La condonación podría reducir la deuda de todas las comunidades al menos 4 puntos de su PIB y acercarlas al umbral europeo de endeudamiento en doce años.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 133",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Quitar deuda podría ahorrar intereses a las comunidades y dejarles más recursos para invertir en las competencias que les corresponden.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 134",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "La fórmula de reparto podría perjudicar a las comunidades que cumplieron las reglas fiscales y sacrificaron servicios para ello.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 126",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Se planteó que la condonación podría incentivar nuevo endeudamiento si las comunidades esperan un rescate futuro.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 133",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los recursos liberados podrían destinarse a rebajas fiscales para quienes más tienen en lugar de reforzar sanidad, educación y servicios sociales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 127",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    }
+   ],
+   "gaps": "Se vota la devolución al Gobierno, no el texto. Los efectos son argumentos del debate; los datos de ahorro proceden del Ejecutivo y se discuten.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -471,6 +626,63 @@
     "note": "Población catalana y inversión estatal en carreteras",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una sociedad mercantil para ejecutar las obras podría agilizar los procesos y acortar los plazos de las inversiones.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 181 (2026-04-28)",
+     "locator": "pág. 8",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-181.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un plan plurianual con criterios sociales, económicos y territoriales, y medidas correctoras ante incumplimientos, podría mejorar la priorización y el cumplimiento de las inversiones.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 181 (2026-04-28)",
+     "locator": "pág. 8",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-181.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que la Generalitat participe en planificar y supervisar podría ajustar las inversiones a las necesidades del territorio, aprovechando su conocimiento de proximidad.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 181 (2026-04-28)",
+     "locator": "pág. 8",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-181.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría aumentar la complejidad institucional y solaparse con los organismos que ya existen, sin que quede claro quién decide, quién ejecuta y quién responde.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 181 (2026-04-28)",
+     "locator": "pág. 13",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-181.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "La sociedad mercantil podría resultar opaca o redundante si no se delimitan bien sus funciones; harían falta controles públicos y transparencia reforzados.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 181 (2026-04-28)",
+     "locator": "pág. 13",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-181.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Crear nuevas estructuras podría no resolver el problema si la inversión sigue sin ejecutarse, pues sus funciones ya las tiene hoy la Administración del Estado.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 181 (2026-04-28)",
+     "locator": "pág. 23",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-181.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate. Solo se votó tramitarla (toma en consideración).",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion171/20260414/Votacion001/VOT_20260414203032.json": {
@@ -507,6 +719,55 @@
     "note": "sin cifra oficial de usuarias de velo integral",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Prohibir los velos integrales en espacios públicos podría proteger la dignidad y la libertad de las mujeres a quienes se impone esa prenda.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 177 (2026-04-14)",
+     "locator": "pág. 19",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-177.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Delegar competencias en Cataluña por el artículo 150.2 de la Constitución podría aplicar mejor el principio de subsidiariedad, según se defendió.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 177 (2026-04-14)",
+     "locator": "pág. 9",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-177.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "La prohibición podría excluir de los espacios públicos a las mujeres que llevan velo integral y empujarlas al aislamiento.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 177 (2026-04-14)",
+     "locator": "pág. 9",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-177.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría dejar sin vida pública a las mujeres a las que solo se permite salir con esa prenda, en lugar de ayudarlas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 177 (2026-04-14)",
+     "locator": "pág. 10",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-177.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría limitar derechos fundamentales como la libertad religiosa, que según se recordó el Tribunal Supremo protegió en 2013.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 177 (2026-04-14)",
+     "locator": "pág. 8",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-177.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate. Del grupo proponente solo consta parte de la intervención y no hay datos sobre cuántas mujeres afecta.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion162/20260224/Votacion002/VOT_20260224201928.json": {
@@ -536,6 +797,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Eliminar el recurso previo contra los estatutos podría evitar que una minoría parlamentaria bloquee con un veto político lo aprobado por las Cortes Generales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 168 (2026-02-24)",
+     "locator": "pág. 21",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-168.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Retirar las facultades de ejecución y sanción del Tribunal Constitucional podría devolverlo a su papel jurisdiccional y rebajar la tensión sobre la separación de poderes.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 168 (2026-02-24)",
+     "locator": "pág. 23",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-168.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Sin sanciones ni suspensión de cargos públicos por incumplir sus resoluciones, los conflictos políticos podrían resolverse más con diálogo y negociación que por la vía judicial.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 168 (2026-02-24)",
+     "locator": "pág. 23",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-168.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin recurso previo, un estatuto contrario a la Constitución podría aplicarse durante años antes de ser corregido.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 168 (2026-02-24)",
+     "locator": "pág. 32",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-168.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Con menos capacidad de ejecución, podría ser más difícil suspender un proceso de separación o un referéndum iniciado por un parlamento autonómico.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 168 (2026-02-24)",
+     "locator": "pág. 32",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-168.PDF"
+    }
+   ],
+   "gaps": "Toma en consideración de una proposición de ley sin memoria oficial de impacto; los efectos son argumentos del debate, en parte centrado en el reproche político.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion133/20250923/Votacion001/VOT_20250923211048.json": {
@@ -578,6 +888,63 @@
     "note": "cifras de extranjería en Cataluña ya específicas",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que la Generalitat sea ventanilla única podría reducir duplicidades entre administraciones, mejorar la integración y adaptar la gestión a las características del territorio, siempre bajo la ley estatal.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 138 (2025-09-23)",
+     "locator": "pág. 5",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-138.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Al ser la administración más próxima a la ciudadanía, podría gestionar la inmigración de forma más eficiente y cercana, según el principio de subsidiariedad.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 138 (2025-09-23)",
+     "locator": "pág. 20",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-138.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Gestionar la inmigración desde Cataluña podría ajustar mejor la llegada de población a la capacidad de escuelas y servicios públicos, que se describen como saturados.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 138 (2025-09-23)",
+     "locator": "pág. 7",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-138.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Se señala que el control de fronteras y de flujos migratorios es competencia exclusiva del Estado y no delegable, por lo que la ley podría ser inconstitucional y generar inseguridad jurídica.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 138 (2025-09-23)",
+     "locator": "pág. 16",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-138.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría fragmentarse la gestión de una frontera única si cada región asumiera competencias en inmigración, un ámbito ligado a elementos básicos de la soberanía del Estado.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 138 (2025-09-23)",
+     "locator": "pág. 25",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-138.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría reforzar un enfoque de seguridad sobre la inmigración al vincularla con delincuencia (más policía autonómica, gestión de CIE) y aumentar la presión sobre la población inmigrante.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 138 (2025-09-23)",
+     "locator": "pág. 18",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-138.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate de toma en consideración y no se conoce su alcance real.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion080/20241126/Votacion003/VOT_20241126173408.json": {
@@ -619,6 +986,55 @@
     "note": "Población protegida por el SNS; dato de 2016",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una tarjeta sanitaria única válida en toda España podría facilitar la atención de un paciente desplazado a otra comunidad, porque hoy a veces no se puede acceder a sus datos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 83 (2024-11-26)",
+     "locator": "pág. 12",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-83.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Avanzar hacia la interoperabilidad práctica de la tarjeta, la historia clínica y la receta electrónica podría mejorar la atención a quien cambia de comunidad o viaja por la Unión Europea.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 83 (2024-11-26)",
+     "locator": "pág. 19",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-83.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Centralizar el sistema podría hacerlo más rígido y menos adaptable a la realidad local de cada comunidad, que según se argumentó ya funciona de forma eficiente.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 83 (2024-11-26)",
+     "locator": "pág. 15",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-83.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Exigir la historia clínica en castellano podría limitar el uso de las lenguas cooficiales en los historiales clínicos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 83 (2024-11-26)",
+     "locator": "pág. 15",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-83.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Regular algo que ya existe podría añadir sobrerregulación sin mejorar el servicio; lo que haría falta, según se señaló, es cumplir la ley vigente.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 83 (2024-11-26)",
+     "locator": "pág. 19",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-83.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; unos intervinientes sostienen que la interoperabilidad ya existe y otros que no funciona en la práctica.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion071/20241029/Votacion002/VOT_20241029212332.json": {
@@ -648,6 +1064,63 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reservar la representación internacional a las federaciones españolas podría asegurar una única representación de España en cada deporte, sin selecciones autonómicas paralelas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 74 (2024-10-29)",
+     "locator": "pág. 30",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-74.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una sola selección podría mantener el deporte como algo compartido, frente a un modelo que se considera que divide a quienes lo celebran.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 74 (2024-10-29)",
+     "locator": "pág. 35",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-74.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Limitar la competición internacional a las federaciones españolas podría evitar que se presente a deportistas de una comunidad bajo la identidad de otra.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 74 (2024-10-29)",
+     "locator": "pág. 36",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-74.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Eliminar la vía para que federaciones autonómicas participen en el ámbito internacional podría impedir que deportes con arraigo histórico compitan con presencia oficial propia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 74 (2024-10-29)",
+     "locator": "pág. 41",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-74.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los deportistas podrían perder libertad de elección, mientras que hoy serían las federaciones internacionales las que deciden quién participa en cada competición.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 74 (2024-10-29)",
+     "locator": "pág. 45",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-74.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Cerrar la participación autonómica en competiciones internacionales podría chocar con la doctrina del Tribunal Constitucional, que declaró constitucional esa participación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 74 (2024-10-29)",
+     "locator": "pág. 47",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-74.PDF"
+    }
+   ],
+   "gaps": "Proposición de ley sin memoria oficial de impacto; no se cuantifica cuántas federaciones o deportistas afectaría. Los efectos son argumentos del debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion057/20240910/Votacion001/VOT_20240910210835.json": {
@@ -672,6 +1145,31 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Suprimir las papeletas solo con partidos territoriales podría evitar la supuesta confusión entre papeletas de coaliciones y federaciones.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 60 (2024-09-10)",
+     "locator": "pág. 8",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-60.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Eliminar esas papeletas podría recortar la representación plural y territorial en las elecciones europeas, al quitar una opción a quienes votan candidaturas de ámbito autonómico.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 60 (2024-09-10)",
+     "locator": "pág. 9",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-60.PDF"
+    }
+   ],
+   "gaps": "Debate mayormente de reproche político, con pocos mecanismos concretos y sin memoria oficial de impacto; el cambio se aplicaría en las elecciones de dentro de cinco años.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion044/20240611/Votacion001/VOT_20240611203611.json": {
@@ -696,6 +1194,31 @@
     "verdict": "none",
     "note": "Toma en consideración; sin texto articulado extraído. Mismo fetch (B-57-2) sin contenido sustantivo.",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "La transferencia se presenta como un paso hacia recuperar la autopista para el sector público, aunque por sí sola no resolvería el problema de los peajes.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 77",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría seguir cobrándose peaje hasta el final de la concesión en 2048, porque el traspaso de la competencia no elimina por sí mismo los peajes ni acorta la concesión.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 77",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate y no se cuantifica el coste de una posible anulación de la concesión.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -727,6 +1250,55 @@
     "verdict": "improved",
     "note": "cifra específica añadida",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Cubrir todas las plazas por concurso entre magistrados de carrera podría reforzar la independencia judicial al alejar a los parlamentos autonómicos del nombramiento.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 29 (2024-03-12)",
+     "locator": "pág. 7",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-29.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Seleccionar por escalafón y años de servicio podría hacer que quienes integran las salas de lo Civil y Penal sean elegidos por mérito y capacidad.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 29 (2024-03-12)",
+     "locator": "pág. 16",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-29.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Dejar de incluir juristas de reconocido prestigio ajenos a la carrera judicial podría empobrecer la composición de las salas, que quedarían solo con magistrados de carrera.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 29 (2024-03-12)",
+     "locator": "pág. 8",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-29.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Quitar a las asambleas autonómicas la propuesta de candidatos podría reducir la participación de la ciudadanía, a través de sus representantes, en los tribunales superiores.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 29 (2024-03-12)",
+     "locator": "pág. 14",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-29.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Dejar de exigir ejercicio profesional en la comunidad y suprimir el turno autonómico podría debilitar la presencia de perfiles ligados al territorio en esos tribunales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 29 (2024-03-12)",
+     "locator": "pág. 9",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-29.PDF"
+    }
+   ],
+   "gaps": "Proposición de ley autonómica sin memoria de impacto en el debate; los efectos son argumentos defendidos o criticados en el Pleno.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -805,6 +1377,12 @@
     "note": "Moción general sobre competencias; cifras ya adecuadas",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "Debate de reproche político y de principios sobre soberanía; no se exponen mecanismos concretos de beneficio y riesgo sobre las medidas votadas.",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion060/20240918/Votacion003/VOT_20240919102650.json": {
@@ -830,6 +1408,47 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Mantener la caja única podría garantizar un criterio de reparto común a todos los territorios y la solidaridad entre territorios y generaciones.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 62 (2024-09-17)",
+     "locator": "pág. 51",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-62.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un régimen económico único podría evitar políticas territoriales distintas que dejarían a algunas comunidades sin poder pagar sus pensiones.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 62 (2024-09-17)",
+     "locator": "pág. 46",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-62.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "No ceder la gestión del ingreso mínimo vital podría dejar sin cambios la protección de unos 2 millones de personas que dependen de él, incluidos niños.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 62 (2024-09-17)",
+     "locator": "pág. 50",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-62.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Bloquear el traspaso de gestión podría perder mejoras de eficiencia que, según el Tribunal Constitucional, aporta sin menoscabar la tesorería estatal.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 62 (2024-09-17)",
+     "locator": "pág. 50",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-62.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate sobre el diseño del sistema.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion058/20240911/Votacion009/VOT_20240911151653.json": {
@@ -860,6 +1479,47 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Negociar entre todas las comunidades podría dar más transparencia y evitar que las reglas de la financiación se cambien entre dos partes.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 61 (2024-09-11)",
+     "locator": "pág. 61",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-61.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un sistema de financiación revisado podría dar a las comunidades recursos suficientes para sostener sanidad, educación y políticas sociales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 61 (2024-09-11)",
+     "locator": "pág. 67",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-61.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Si una comunidad gestiona y recauda sus impuestos aparte, podría reducirse lo que se aporta al sistema común y deteriorarse los servicios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 61 (2024-09-11)",
+     "locator": "pág. 59",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-61.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Exigir negociación multilateral podría cerrar la vía bilateral con una comunidad, que se defendió como legítima; la transparencia depende de la información disponible.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 61 (2024-09-11)",
+     "locator": "pág. 65",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-61.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; no se cuantifica el efecto sobre cada comunidad y las cifras citadas en el debate son dispares.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion046/20240613/Votacion017/VOT_20240613125230.json": {
@@ -901,6 +1561,55 @@
     "note": "",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Suprimir los peajes de la AP-9 podría aliviar la economía de las familias gallegas y mejorar la competitividad de las empresas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 46 (2024-06-11)",
+     "locator": "pág. 54",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-46.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Anular la prórroga y recuperar la autopista para lo público podría evitar que se subvencionen con dinero público los beneficios de una concesionaria privada.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 46 (2024-06-11)",
+     "locator": "pág. 59",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-46.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Anular una prórroga cuestionada por la Comisión Europea por falta de concurrencia podría resolver los expedientes de infracción abiertos al Estado.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 46 (2024-06-11)",
+     "locator": "pág. 53",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-46.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Rescatar la concesión podría tener costes reales para el Estado, y habría que ver si la concesionaria reclama por inversiones hechas con la prórroga.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 46 (2024-06-11)",
+     "locator": "pág. 61",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-46.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Transferir la autopista a Galicia podría chocar con límites jurídicos sobre competencias exclusivas del Estado y plantear quién paga las obras programadas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 46 (2024-06-11)",
+     "locator": "pág. 60",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-46.PDF"
+    }
+   ],
+   "gaps": "No hay estudio oficial en el debate sobre el coste del rescate: unos lo sitúan por debajo de mil millones y otros dicen que no habría indemnización; la moción pide estudiarlo.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion036/20240423/Votacion024/VOT_20240423213534.json": {
@@ -927,6 +1636,39 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una financiación singular que deje más recursos en Cataluña podría mejorar servicios públicos que se describen como saturados o deficientes, como hospitales y trenes.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 38 (2024-04-23)",
+     "locator": "pág. 59",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-38.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Un trato fiscal singular podría romper la igualdad entre ciudadanos y crear privilegios frente a otros territorios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 38 (2024-04-23)",
+     "locator": "pág. 64",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-38.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Medir lo que aporta cada territorio podría debilitar la redistribución entre personas ricas y pobres de distintos lugares, que es lo que se financia con los impuestos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 38 (2024-04-23)",
+     "locator": "pág. 65",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-38.PDF"
+    }
+   ],
+   "gaps": "Moción de unas pocas líneas, sin memoria económica; el debate no concreta cuánto cambiaría el reparto de recursos.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion019/20240206/Votacion007/VOT_20240206213130.json": {
@@ -977,6 +1719,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion037/VOT_20260326165116.json": {
@@ -1008,6 +1756,39 @@
     "note": "Sin cifra oficial de dependencia solo en Cataluña",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Aliviar la carga fiscal de la clase media trabajadora, por ejemplo deflactando el IRPF, podría aumentar su renta disponible.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 66",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Bajar impuestos podría reducir la capacidad del Estado para financiar sanidad, educación, dependencia y pensiones.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 61",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Las rebajas fiscales podrían beneficiar sobre todo a las rentas altas y vaciar la caja pública sin explicar cómo se compensa.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 173 (2026-03-24)",
+     "locator": "pág. 63",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-173.PDF"
+    }
+   ],
+   "gaps": "Moción de decenas de puntos sin efecto legislativo directo; el debate no analiza punto por punto vivienda (IVA primera vivienda, SAREB) ni transferencia de dependencia.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion164/20260226/Votacion011/VOT_20260226153412.json": {
@@ -1038,6 +1819,39 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Traspasar Cercanías con su financiación podría permitir aplicar un plan de mejora propio, con más frecuencias y obras terminadas, en una red con baja ejecución de inversiones.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 169 (2026-02-25)",
+     "locator": "pág. 46",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-169.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Gestionar Cercanías desde la Generalitat podría acercar las decisiones sobre la movilidad cotidiana a quienes viven en el territorio y dar más autogobierno para ordenar sus comarcas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 169 (2026-02-25)",
+     "locator": "pág. 54",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-169.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "El traspaso podría ser inviable o ser impugnado, porque se sostuvo que la gestión de las cercanías es competencia del Estado según la Constitución.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 169 (2026-02-25)",
+     "locator": "pág. 56",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-169.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate. No se detallan costes, personal ni calendario del traspaso, y el debate se centra sobre todo en el reproche político.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion154/20251211/Votacion006/VOT_20251211175048.json": {
@@ -1069,6 +1883,39 @@
     "note": "",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una financiación que pondere mejor la dispersión de la población y el envejecimiento podría reflejar el mayor coste de prestar servicios públicos en Galicia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 158 (2025-12-10)",
+     "locator": "pág. 114",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-158.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Un sistema de cupo o concierto podría empeorar la financiación, porque Galicia recauda menos por habitante y tiene mayores necesidades de gasto.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 158 (2025-12-10)",
+     "locator": "pág. 118",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-158.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Extender a Galicia un sistema de concierto como el de Cataluña podría dejarle menos recursos: se citó una estimación de 627 millones menos con datos de 2022.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 158 (2025-12-10)",
+     "locator": "pág. 121",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-158.PDF"
+    }
+   ],
+   "gaps": "Las cifras del debate (deuda, recursos, estimación del concierto) son afirmaciones de los intervinientes, sin informe oficial de impacto en la moción.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion103/20250326/Votacion007/VOT_20250326194441.json": {
@@ -1089,6 +1936,47 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que el control del servicio esté en manos de las instituciones catalanas podría permitir decisiones más ajustadas a las necesidades de los usuarios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 107 (2025-03-26)",
+     "locator": "pág. 115",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-107.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un servicio ferroviario más fiable podría animar a más usuarios a dejar el coche y a usar el tren, con beneficio para la sostenibilidad.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 107 (2025-03-26)",
+     "locator": "pág. 115",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-107.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Si el traspaso se hace manteniendo el mismo operador, podría no corregir los problemas de gestión y de cultura de empresa que se atribuyen a ese operador.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 107 (2025-03-26)",
+     "locator": "pág. 110",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-107.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "El traspaso por sí solo podría no resolver lo que preocupa a los usuarios (retrasos, averías, infraestructura obsoleta), que reclaman soluciones y un servicio eficiente.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 107 (2025-03-26)",
+     "locator": "pág. 116",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-107.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; los efectos son argumentos del debate. No se sabe qué inversiones ni plazos acompañarían al traspaso.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion101/20250320/Votacion014/VOT_20250320125716.json": {
@@ -1119,6 +2007,12 @@
     "note": "Cifra de Cataluña ya específica; genérica quitada",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "El debate es sobre todo reproche político cruzado; no se defienden mecanismos de beneficio y riesgo por ambos lados (efectos sobre fronteras, Frontex o retornos sin desarrollar).",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion098/20250313/Votacion002/VOT_20250313133851.json": {
@@ -1145,6 +2039,12 @@
     "note": "Población extranjera ya mide el colectivo",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion088/20241219/Votacion065/VOT_20241219162815.json": {
@@ -1169,6 +2069,47 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Ampliar la red eléctrica podría permitir atender nuevos suministros de la industria y que esta se descarbonice y atraiga inversión, algo que hoy se dice frenado por accesos a la red denegados.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 89 (2024-12-17)",
+     "locator": "pág. 60",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-89.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Acordar las inversiones con cada comunidad podría adaptar la red a realidades distintas, como la de un archipiélago con sistemas eléctricos separados y déficit de suministro.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 89 (2024-12-17)",
+     "locator": "pág. 68",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-89.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Ampliar líneas y subestaciones podría tener un impacto sobre el territorio que cada zona puede asumir de forma distinta, por lo que se pide tenerlo en cuenta.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 89 (2024-12-17)",
+     "locator": "pág. 64",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-89.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Mejorar las redes podría no bastar si no hay generación suficiente para atender la demanda de la industria y los hogares: una red sin electricidad que transportar serviría de poco.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 89 (2024-12-17)",
+     "locator": "pág. 65",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-89.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; los efectos son argumentos del debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion082/20241128/Votacion012/VOT_20241128143719.json": {
@@ -1189,6 +2130,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "El debate versa sobre la gestión de la DANA y reproches políticos; no hay argumentos con mecanismos sobre el punto votado (Pacto Nacional del Agua).",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion079/20241121/Votacion029/VOT_20241121173826.json": {
@@ -1219,6 +2166,39 @@
     "verdict": "improved",
     "note": "",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un mando único estatal con las Fuerzas Armadas podría concentrar la planificación y la ejecución del auxilio cuando una catástrofe supera la capacidad operativa de la UME.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 80 (2024-11-19)",
+     "locator": "pág. 62",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-80.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Asumir el mando estatal podría chocar con las competencias que la ley de protección civil da a las comunidades autónomas en emergencias de su ámbito.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 80 (2024-11-19)",
+     "locator": "pág. 65",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-80.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Centrar ahora el debate en buscar culpables podría desviar atención de las necesidades básicas de las personas afectadas y aumentar el descrédito de la política.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 80 (2024-11-19)",
+     "locator": "pág. 64",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-80.PDF"
+    }
+   ],
+   "gaps": "Los efectos son argumentos del debate; no se aportan estudios sobre el efecto real de declarar la situación de interés para la Seguridad Nacional.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1252,6 +2232,39 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Traspasar la AP-9 a la comunidad podría permitir una gestión de proximidad y mejorar la competitividad del territorio que articula.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 70 (2024-10-15)",
+     "locator": "pág. 67",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-70.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Se cuestionó en qué mejoraría el servicio al usuario que la titularidad pase del Estado a la comunidad, por lo que la mejora de gestión podría no notarse.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 70 (2024-10-15)",
+     "locator": "pág. 70",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-70.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "La titularidad o la gestión directa no garantizarían por sí mismas peajes gratuitos o bonificados; eso dependería de las políticas de cada gobierno.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 70 (2024-10-15)",
+     "locator": "pág. 71",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-70.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; los efectos del traspaso son argumentos del debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion066/20241010/Votacion008/VOT_20241010194924.json": {
@@ -1277,6 +2290,39 @@
     "verdict": "keep",
     "note": "Alumnado y gasto educativo miden bien el colectivo",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Unificar currículos, prueba de acceso y condiciones fiscales podría reducir las diferencias entre comunidades en sueldos, ratios, desgravaciones y dificultad de la Selectividad.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 67 (2024-10-08)",
+     "locator": "pág. 68",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-67.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Devolver las competencias de educación al Estado podría concentrar un poder muy amplio sobre el sistema educativo en el Gobierno central.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 67 (2024-10-08)",
+     "locator": "pág. 70",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-67.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Un modelo basado en el esfuerzo y la excelencia sin más inversión pública podría reducir la educación pública y aumentar la segregación del alumnado por su origen social.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 67 (2024-10-08)",
+     "locator": "pág. 71",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-67.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; los efectos son argumentos del debate y gran parte de las intervenciones son reproche político.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1309,6 +2355,39 @@
     "note": "población y gasto sanitario autonómico ya miden la medida",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Unificar el sistema podría reducir las diferencias entre comunidades en servicios y especialidades a las que accede un paciente, por ejemplo ante un diagnóstico de cáncer.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 60 (2024-09-10)",
+     "locator": "pág. 67",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-60.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "La transformación digital del sistema sanitario podría ser una herramienta de gestión potente y una medida de eficiencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 60 (2024-09-10)",
+     "locator": "pág. 71",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-60.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Como la sanidad pública es una responsabilidad compartida con las comunidades, una medida estatal única podría no llegar a todo lo que gestionan las comunidades autónomas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 60 (2024-09-10)",
+     "locator": "pág. 69",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-60.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; en el debate se dijo que la tarjeta y la historia única ya estaban en marcha, y no se detalla su coste ni plazos.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion036/20240423/Votacion021/VOT_20240423213531.json": {
@@ -1328,6 +2407,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un mayor control de la entrada irregular podría reducir la inseguridad que, según se defendió, se vincula a la inmigración ilegal.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 38 (2024-04-23)",
+     "locator": "pág. 43",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-38.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Frenar la inmigración irregular podría aliviar la presión sobre los salarios y sobre la calidad de los servicios públicos, según se argumentó.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 38 (2024-04-23)",
+     "locator": "pág. 43",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-38.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Vincular inmigración e inseguridad podría generar alarma social y señalar como sospechoso a un colectivo vulnerable.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 38 (2024-04-23)",
+     "locator": "pág. 48",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-38.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Acabar con los acuerdos bilaterales con terceros países podría dificultar ejecutar las expulsiones, pues se preguntó con qué mecanismos se harían.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 38 (2024-04-23)",
+     "locator": "pág. 48",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-38.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "El texto podría chocar con el nuevo Pacto Europeo sobre Migración y Asilo y aislar a España de sus socios, según se advirtió.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 38 (2024-04-23)",
+     "locator": "pág. 48",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-38.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate y las cifras sobre delincuencia no se detallaron.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion034/20240409/Votacion019/VOT_20240409210648.json": {
@@ -1348,6 +2476,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion026/20240229/Votacion001/VOT_20240229115034.json": {
@@ -1373,6 +2507,63 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que las comunidades gestionen parte de los fondos europeos podría agilizar su ejecución y evitar que se pierdan fondos sin adjudicar antes de que acabe el plazo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 26 (2024-02-27)",
+     "locator": "pág. 35",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-26.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Con trámites y plazos menos rígidos, las convocatorias podrían animar a más empresas a pedir ayudas, frente a unas bases que hoy desaniman al tejido económico.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 26 (2024-02-27)",
+     "locator": "pág. 31",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-26.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una administración más cercana al tejido industrial podría adaptar las ayudas a las necesidades y los proyectos de las empresas de cada territorio.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 26 (2024-02-27)",
+     "locator": "pág. 40",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-26.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Descentralizar los proyectos estratégicos podría incumplir las obligaciones acordadas con la Unión Europea, ya que son fondos finalistas para áreas concretas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 26 (2024-02-27)",
+     "locator": "pág. 33",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-26.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Si cambian las manos pero se mantienen las mismas reglas de reparto, las ayudas podrían seguir llegando a lugares donde no son tan necesarias.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 26 (2024-02-27)",
+     "locator": "pág. 37",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-26.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin criterios sociales y éticos claros, los fondos podrían acabar en empresas que anuncian despidos o empeoran las condiciones de sus plantillas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 26 (2024-02-27)",
+     "locator": "pág. 43",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-26.PDF"
+    }
+   ],
+   "gaps": "No se sabe qué parte de los fondos sería transferible sin incumplir el acuerdo con la UE ni cómo variaría la ejecución. Los datos de ejecución citados difieren entre intervinientes.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion008/VOT_20260714201942.json": {
@@ -1398,6 +2589,55 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que la ley fije la financiación estatal del 50 % del gasto certificado podría dar más recursos a las comunidades autónomas y reducir las listas de espera de dependencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 116",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Eliminar incompatibilidades entre prestaciones y reconocer automáticamente la discapacidad a quien ya tiene dependencia podría evitar trámites duplicados y agilizar los procedimientos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 198 (2026-07-14)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-198.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Respetar los ámbitos competenciales de cada Administración podría dar seguridad jurídica, evitar interpretaciones diferentes y garantizar la participación de las comunidades en lo que les afecta.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 112",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los derechos reconocidos podrían quedarse en el papel si la financiación no llega, si no llega a tiempo o si dependen del lugar de residencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 111",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin más dinero y competencias, la dependencia podría seguir con esperas de entre diez meses y un año desde el diagnóstico hasta recibir la prestación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 121",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley sin memoria de impacto en este material; los efectos son argumentos del debate y no se cuantifican su coste ni el calendario de aplicación.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1436,6 +2676,63 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que los funcionarios de prisiones tengan más protección jurídica al ser reconocidos como agentes de la autoridad frente a atentados, resistencia y desobediencia grave.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 191 (2026-06-11)",
+     "locator": "pág. 12",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-191.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría proteger la intimidad del personal penitenciario al identificarlo con su número profesional, y no con sus datos personales, en procedimientos administrativos y judiciales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 191 (2026-06-11)",
+     "locator": "pág. 12",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-191.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que dar valor probatorio a los informes del personal sobre hechos presenciados refuerce el principio de autoridad en los procedimientos disciplinarios de los centros.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 191 (2026-06-11)",
+     "locator": "pág. 12",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-191.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría suponer nuevas obligaciones económicas para la Generalitat sin financiación acordada, lo que restaría recursos a sanidad, educación o infraestructuras.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 191 (2026-06-11)",
+     "locator": "pág. 8",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-191.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría no reducir las agresiones ni la conflictividad si no se abordan las condiciones de los centros, las plantillas y la falta de atención a la salud mental, y quedar en un gesto simbólico.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 49 (2024-06-18)",
+     "locator": "pág. 9",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-49.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Se advierte de que el valor probatorio de los informes no debe sustituir la presunción de inocencia ni impedir valorar otras pruebas contrarias en una sanción.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 191 (2026-06-11)",
+     "locator": "pág. 12",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-191.PDF"
+    }
+   ],
+   "gaps": "Sin memoria oficial de impacto en el debate; no se sabe si habrá menos agresiones ni el coste para las administraciones autonómicas.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion159/20260212/Votacion001/VOT_20260212114304.json": {
@@ -1473,6 +2770,47 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Sustituir la multa por penas más duras podría reducir la sensación de impunidad de quienes hurtan o estafan de forma reiterada y no pueden pagar multas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 165 (2026-02-12)",
+     "locator": "pág. 10",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-165.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Los nuevos tipos agravados podrían proteger mejor a personas mayores y vulnerables ante estafas, y a quienes sufren robos de móviles o de herramientas y cosechas en explotaciones agrarias.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 175 (2026-03-26)",
+     "locator": "pág. 41",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-175.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Endurecer penas de delitos leves podría no prevenir esos delitos y, al hacer los juicios más complejos, colapsar aún más unos juzgados ya saturados.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 165 (2026-02-12)",
+     "locator": "pág. 11",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-165.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Penas más duras por hurto podrían multiplicar la población penitenciaria y elevar el gasto público: una plaza de prisión cuesta más que una de Formación Profesional, según se dijo en el debate.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 175 (2026-03-26)",
+     "locator": "pág. 46",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-175.PDF"
+    }
+   ],
+   "gaps": "Sin memoria oficial de impacto en este material: los efectos son argumentos del debate y no hay datos de cuánto bajarían o subirían los hurtos con la ley.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion024/VOT_20251008195246.json": {
@@ -1504,6 +2842,55 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que un servicio de tren de proximidad dónde hoy no hay cercanías ayude a compensar el déficit histórico de inversión ferroviaria en la movilidad diaria y urbana.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 30",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría evitar que se supriman paradas de autobús interurbano del mapa de concesiones: las comunidades podrían asumir algunas y el Estado mantendría las demás.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 141 (2025-10-08)",
+     "locator": "pág. 93",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-141.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un mínimo de aportación estatal a los costes de explotación del transporte público podría dar más estabilidad a los servicios y permitir planificar a largo plazo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 37",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría quedarse corta si buena parte de lo previsto depende de un desarrollo reglamentario y presupuestario posterior que no se haga con ambición.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 33",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una ley estatal con visión centralista podría invadir competencias autonómicas y añadir complejidad a la coordinación entre los distintos niveles de decisión.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 34",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley: los efectos son argumentos del debate en el Pleno; no se ha contrastado aquí con la memoria oficial de impacto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1542,6 +2929,39 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que regular los drones y simplificar trámites dé más seguridad jurídica y agilice autorizaciones en actividades de menor riesgo, como vuelos médicos o de emergencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 113 (2025-05-08)",
+     "locator": "pág. 10",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-113.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una filial de la gestora aeroportuaria con participación vasca podría acercar las decisiones al territorio y mejorar la eficacia y competitividad de sus aeropuertos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 113 (2025-05-08)",
+     "locator": "pág. 6",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-113.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Obligar a repostar un porcentaje creciente de combustible sostenible, con multa automática si no se cumple, podría suponer una carga añadida para un sector ya tensionado.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 113 (2025-05-08)",
+     "locator": "pág. 13",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-113.PDF"
+    }
+   ],
+   "gaps": "Los efectos son argumentos del debate; no se cuantifica el coste de las deducciones ni del plan, ni el impacto de la cuota de combustible sostenible sobre los precios.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion088/20241219/Votacion013/VOT_20241219162714.json": {
@@ -1572,6 +2992,39 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reducir el desperdicio podría abaratar los alimentos y generar menos residuos y contaminación, al hacer más eficiente la cadena alimentaria.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 91 (2024-12-19)",
+     "locator": "pág. 13",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-91.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Los acuerdos de donación obligatorios para grandes establecimientos podrían hacer que más excedentes lleguen a entidades sin ánimo de lucro que atienden a personas vulnerables.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 91 (2024-12-19)",
+     "locator": "pág. 9",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-91.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los planes y trámites exigidos podrían suponer más costes y burocracia para las empresas agroalimentarias, incluido el sector primario, donde el desperdicio ya sería escaso.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 91 (2024-12-19)",
+     "locator": "pág. 15",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-91.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley; no se ha consultado la memoria oficial de impacto. Los efectos son argumentos del debate, sin cifras de impacto sobre multas, IVA o lobo.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion079/20241121/Votacion065/VOT_20241121173902.json": {
@@ -1598,6 +3051,55 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Asumir la competencia de tráfico podría reforzar la capacidad operativa de la Policía foral y mejorar la seguridad vial en Navarra.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 82 (2024-11-21)",
+     "locator": "pág. 91",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-82.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reformar la ley foral podría dar un respaldo legal más sólido al traspaso, tras la anulación del decreto anterior por un defecto de procedimiento.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 82 (2024-11-21)",
+     "locator": "pág. 91",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-82.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Los agentes de la Guardia Civil que quisieran seguir prestando servicio en Navarra podrían hacerlo dentro de la Policía foral, evitando una pérdida de efectivos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 82 (2024-11-21)",
+     "locator": "pág. 91",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-82.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "La presencia de la Guardia Civil en las carreteras navarras podría reducirse si las administraciones no pactan fórmulas de colaboración, y se pide completar sus plantillas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 60 (2024-09-10)",
+     "locator": "pág. 33",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-60.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Las fórmulas de colaboración con agentes de otra administración, como una encomienda de gestión, podrían tener límites jurídicos para ejercer como agentes de autoridad.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 82 (2024-11-21)",
+     "locator": "pág. 90",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-82.PDF"
+    }
+   ],
+   "gaps": "Proyecto sin memoria de impacto en este lote; los efectos son argumentos del debate y no se estima cuánto cambiaría la siniestralidad ni la plantilla de agentes.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion056/20240723/Votacion015/VOT_20240723221643.json": {
@@ -1615,6 +3117,47 @@
     "verdict": "none",
     "note": "bloque, «resto de enmiendas», transaccional o sin texto votado identificable: no se puede atribuir el efecto con certeza",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un régimen jurídico básico y común podría armonizar las funciones de los agentes forestales, sea cual sea la administración de la que dependan, y darles más seguridad jurídica.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 43",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reforzar la formación, los medios y la prevención de riesgos laborales podría mejorar la protección de los agentes frente a la peligrosidad y penosidad de su trabajo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 42",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una ley básica estatal tan detallada podría invadir competencias de las comunidades autónomas sobre el régimen de sus propios funcionarios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 52",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "El texto podría generar inseguridad jurídica a los propios agentes y posibles enfrentamientos con otros funcionarios que ejercen funciones parecidas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 53",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley con memoria del Gobierno que no se aporta aquí; los efectos recogidos son argumentos del debate, sin estimación de impacto ni coste.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1641,6 +3184,47 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Las deportistas profesionales embarazadas o en adopción podrían ampliar un año su contrato y tener permisos de conciliación, algo que antes casi no se les aplicaba.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 68",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que una mayor igualdad de oportunidades entre mujeres y hombres ayude a que lleguen a los puestos de responsabilidad según su mérito y a impulsar el crecimiento económico.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 75",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "La ley podría quedarse en las mujeres que ya pueden llegar a los puestos más altos y no mejorar la vida de las mujeres con empleos precarios, cuidados o pocos ingresos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 70",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Un tope máximo de presencia por sexo podría penalizar a las mujeres cuando superen el 60 %, y limitar su acceso a cargos de liderazgo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 66",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    }
+   ],
+   "gaps": "Proyecto sin cifras de impacto en el debate; los efectos son argumentos de quienes intervinieron y no hay evaluación oficial citada.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion040/20240523/Votacion045/VOT_20240523141015.json": {
@@ -1666,6 +3250,63 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que incluir las enseñanzas artísticas superiores en el espacio de la enseñanza superior las equipare con el resto de estudios superiores y dignifique al sector.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 38",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que el alumnado gane derechos, como conciliar estudios, familia y trabajo, parar temporalmente los estudios, recibir educación inclusiva y participar en la toma de decisiones del centro.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 43",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría ampliar la oferta con disciplinas nuevas, como el circo o la escritura creativa, y mejorar la movilidad europea, la investigación y el acceso a la universidad de artistas de trayectoria reconocida.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 48",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría trasladar a las comunidades el coste de aplicar la ley si no se asegura una financiación propia y suficiente para los centros.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 49",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría crear un registro estatal de enseñanzas artísticas superiores que duplicaría al Registro de Universidades, Centros y Títulos, ya existente, y añadiría burocracia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 39",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Obligar a especializar centros que hoy dan a la vez enseñanzas superiores y profesionales podría dificultar el acceso fuera de las grandes ciudades, donde a veces hay un solo centro.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 31 (2024-03-14)",
+     "locator": "pág. 4",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-31.PDF"
+    }
+   ],
+   "gaps": "Sin memoria de impacto en el lote; los efectos son argumentos del debate, y partes de varias intervenciones están truncadas en el extracto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1703,6 +3344,55 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que la ley fije la financiación estatal del 50 % del gasto certificado podría dar más recursos a las comunidades autónomas y reducir las listas de espera de dependencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 116",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Eliminar incompatibilidades entre prestaciones y reconocer automáticamente la discapacidad a quien ya tiene dependencia podría evitar trámites duplicados y agilizar los procedimientos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 198 (2026-07-14)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-198.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Respetar los ámbitos competenciales de cada Administración podría dar seguridad jurídica, evitar interpretaciones diferentes y garantizar la participación de las comunidades en lo que les afecta.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 112",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los derechos reconocidos podrían quedarse en el papel si la financiación no llega, si no llega a tiempo o si dependen del lugar de residencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 111",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin más dinero y competencias, la dependencia podría seguir con esperas de entre diez meses y un año desde el diagnóstico hasta recibir la prestación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 121",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley sin memoria de impacto en este material; los efectos son argumentos del debate y no se cuantifican su coste ni el calendario de aplicación.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion013/VOT_20260714201953.json": {
@@ -1734,6 +3424,55 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que la ley fije la financiación estatal del 50 % del gasto certificado podría dar más recursos a las comunidades autónomas y reducir las listas de espera de dependencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 116",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Eliminar incompatibilidades entre prestaciones y reconocer automáticamente la discapacidad a quien ya tiene dependencia podría evitar trámites duplicados y agilizar los procedimientos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 198 (2026-07-14)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-198.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Respetar los ámbitos competenciales de cada Administración podría dar seguridad jurídica, evitar interpretaciones diferentes y garantizar la participación de las comunidades en lo que les afecta.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 112",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los derechos reconocidos podrían quedarse en el papel si la financiación no llega, si no llega a tiempo o si dependen del lugar de residencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 111",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin más dinero y competencias, la dependencia podría seguir con esperas de entre diez meses y un año desde el diagnóstico hasta recibir la prestación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 121",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley sin memoria de impacto en este material; los efectos son argumentos del debate y no se cuantifican su coste ni el calendario de aplicación.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion019/VOT_20260714202003.json": {
@@ -1752,6 +3491,55 @@
     "verdict": "none",
     "note": "sin texto extraído: votación en bloque de «resto de enmiendas» sin numerar; no se puede atribuir contenido a cada una",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que la ley fije la financiación estatal del 50 % del gasto certificado podría dar más recursos a las comunidades autónomas y reducir las listas de espera de dependencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 116",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Eliminar incompatibilidades entre prestaciones y reconocer automáticamente la discapacidad a quien ya tiene dependencia podría evitar trámites duplicados y agilizar los procedimientos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 198 (2026-07-14)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-198.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Respetar los ámbitos competenciales de cada Administración podría dar seguridad jurídica, evitar interpretaciones diferentes y garantizar la participación de las comunidades en lo que les afecta.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 112",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los derechos reconocidos podrían quedarse en el papel si la financiación no llega, si no llega a tiempo o si dependen del lugar de residencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 111",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin más dinero y competencias, la dependencia podría seguir con esperas de entre diez meses y un año desde el diagnóstico hasta recibir la prestación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 121",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley sin memoria de impacto en este material; los efectos son argumentos del debate y no se cuantifican su coste ni el calendario de aplicación.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1799,6 +3587,55 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que la ley fije la financiación estatal del 50 % del gasto certificado podría dar más recursos a las comunidades autónomas y reducir las listas de espera de dependencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 116",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Eliminar incompatibilidades entre prestaciones y reconocer automáticamente la discapacidad a quien ya tiene dependencia podría evitar trámites duplicados y agilizar los procedimientos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 198 (2026-07-14)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-198.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Respetar los ámbitos competenciales de cada Administración podría dar seguridad jurídica, evitar interpretaciones diferentes y garantizar la participación de las comunidades en lo que les afecta.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 112",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los derechos reconocidos podrían quedarse en el papel si la financiación no llega, si no llega a tiempo o si dependen del lugar de residencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 111",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin más dinero y competencias, la dependencia podría seguir con esperas de entre diez meses y un año desde el diagnóstico hasta recibir la prestación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 121",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley sin memoria de impacto en este material; los efectos son argumentos del debate y no se cuantifican su coste ni el calendario de aplicación.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion041/VOT_20260714202038.json": {
@@ -1834,6 +3671,55 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que la ley fije la financiación estatal del 50 % del gasto certificado podría dar más recursos a las comunidades autónomas y reducir las listas de espera de dependencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 116",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Eliminar incompatibilidades entre prestaciones y reconocer automáticamente la discapacidad a quien ya tiene dependencia podría evitar trámites duplicados y agilizar los procedimientos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 198 (2026-07-14)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-198.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Respetar los ámbitos competenciales de cada Administración podría dar seguridad jurídica, evitar interpretaciones diferentes y garantizar la participación de las comunidades en lo que les afecta.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 112",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los derechos reconocidos podrían quedarse en el papel si la financiación no llega, si no llega a tiempo o si dependen del lugar de residencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 111",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin más dinero y competencias, la dependencia podría seguir con esperas de entre diez meses y un año desde el diagnóstico hasta recibir la prestación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 121",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley sin memoria de impacto en este material; los efectos son argumentos del debate y no se cuantifican su coste ni el calendario de aplicación.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1876,6 +3762,63 @@
     "note": "cifra específica añadida",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Las bonificaciones de peaje ya comprometidas podrían seguir pagándose con cargo al Estado después del traspaso, sin trasladar ese coste a la administración gallega.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 197 (2026-06-25)",
+     "locator": "pág. 34",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-197.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "El reparto de responsabilidades podría quedar claro: el Estado respondería de lo decidido hasta el traspaso y la administración gallega solo de lo que decida cuando sea titular.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 197 (2026-06-25)",
+     "locator": "pág. 34",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-197.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "La transferencia se presenta como un paso hacia recuperar la autopista para el sector público, aunque por sí sola no resolvería el problema de los peajes.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 77",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría seguir cobrándose peaje hasta el final de la concesión en 2048, porque el traspaso de la competencia no elimina por sí mismo los peajes ni acorta la concesión.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 77",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Si un tribunal europeo anulase las prórrogas de la concesión, sin una cláusula expresa podría no estar claro quién paga y el coste podría recaer en la administración gallega.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 83",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Dejar el traspaso a lo que acuerde la Comisión Mixta de Transferencias podría generar dudas de constitucionalidad e inseguridad jurídica sobre cuándo y cómo se transfiere.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 199 (2026-07-23)",
+     "locator": "pág. 83",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-199.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate y no se cuantifica el coste de una posible anulación de la concesión.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion023/VOT_20260326165055.json": {
@@ -1906,6 +3849,12 @@
     "verdict": "improved",
     "note": "Sin cifra catalana de dependencia; población catalana",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1945,6 +3894,47 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Sustituir la multa por penas más duras podría reducir la sensación de impunidad de quienes hurtan o estafan de forma reiterada y no pueden pagar multas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 165 (2026-02-12)",
+     "locator": "pág. 10",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-165.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Los nuevos tipos agravados podrían proteger mejor a personas mayores y vulnerables ante estafas, y a quienes sufren robos de móviles o de herramientas y cosechas en explotaciones agrarias.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 175 (2026-03-26)",
+     "locator": "pág. 41",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-175.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Endurecer penas de delitos leves podría no prevenir esos delitos y, al hacer los juicios más complejos, colapsar aún más unos juzgados ya saturados.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 165 (2026-02-12)",
+     "locator": "pág. 11",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-165.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Penas más duras por hurto podrían multiplicar la población penitenciaria y elevar el gasto público: una plaza de prisión cuesta más que una de Formación Profesional, según se dijo en el debate.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 175 (2026-03-26)",
+     "locator": "pág. 46",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-175.PDF"
+    }
+   ],
+   "gaps": "Sin memoria oficial de impacto en este material: los efectos son argumentos del debate y no hay datos de cuánto bajarían o subirían los hurtos con la ley.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion154/20251211/Votacion009/VOT_20251211175052.json": {
@@ -1965,6 +3955,39 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Condonar parte de la deuda autonómica podría reducir lo que se destina a pagar principal e intereses y liberar recursos para políticas sociales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 158 (2025-12-10)",
+     "locator": "pág. 114",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-158.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una financiación que pondere mejor la dispersión de la población y el envejecimiento podría reflejar el mayor coste de prestar servicios públicos en Galicia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 158 (2025-12-10)",
+     "locator": "pág. 114",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-158.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "La condonación podría interesar poco a una comunidad cuya deuda ya está por debajo de la media autonómica, según el informe citado en el debate.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 158 (2025-12-10)",
+     "locator": "pág. 121",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-158.PDF"
+    }
+   ],
+   "gaps": "Las cifras del debate (deuda, recursos, estimación del concierto) son afirmaciones de los intervinientes, sin informe oficial de impacto en la moción.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion028/VOT_20251008195250.json": {
@@ -1997,6 +4020,55 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que un servicio de tren de proximidad dónde hoy no hay cercanías ayude a compensar el déficit histórico de inversión ferroviaria en la movilidad diaria y urbana.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 30",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría evitar que se supriman paradas de autobús interurbano del mapa de concesiones: las comunidades podrían asumir algunas y el Estado mantendría las demás.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 141 (2025-10-08)",
+     "locator": "pág. 93",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-141.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un mínimo de aportación estatal a los costes de explotación del transporte público podría dar más estabilidad a los servicios y permitir planificar a largo plazo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 37",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría quedarse corta si buena parte de lo previsto depende de un desarrollo reglamentario y presupuestario posterior que no se haga con ambición.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 33",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una ley estatal con visión centralista podría invadir competencias autonómicas y añadir complejidad a la coordinación entre los distintos niveles de decisión.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 34",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley: los efectos son argumentos del debate en el Pleno; no se ha contrastado aquí con la memoria oficial de impacto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion029/VOT_20251008195251.json": {
@@ -2021,6 +4093,55 @@
     "verdict": "none",
     "note": "Votación sin texto de enmiendas individuales (resto de enmiendas, sin número): no se puede determinar qué cambia para cada colectivo.",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que un servicio de tren de proximidad dónde hoy no hay cercanías ayude a compensar el déficit histórico de inversión ferroviaria en la movilidad diaria y urbana.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 30",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría evitar que se supriman paradas de autobús interurbano del mapa de concesiones: las comunidades podrían asumir algunas y el Estado mantendría las demás.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 141 (2025-10-08)",
+     "locator": "pág. 93",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-141.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un mínimo de aportación estatal a los costes de explotación del transporte público podría dar más estabilidad a los servicios y permitir planificar a largo plazo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 37",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría quedarse corta si buena parte de lo previsto depende de un desarrollo reglamentario y presupuestario posterior que no se haga con ambición.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 33",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una ley estatal con visión centralista podría invadir competencias autonómicas y añadir complejidad a la coordinación entre los distintos niveles de decisión.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 34",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley: los efectos son argumentos del debate en el Pleno; no se ha contrastado aquí con la memoria oficial de impacto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -2064,6 +4185,55 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que un servicio de tren de proximidad dónde hoy no hay cercanías ayude a compensar el déficit histórico de inversión ferroviaria en la movilidad diaria y urbana.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 30",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría evitar que se supriman paradas de autobús interurbano del mapa de concesiones: las comunidades podrían asumir algunas y el Estado mantendría las demás.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 141 (2025-10-08)",
+     "locator": "pág. 93",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-141.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un mínimo de aportación estatal a los costes de explotación del transporte público podría dar más estabilidad a los servicios y permitir planificar a largo plazo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 37",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría quedarse corta si buena parte de lo previsto depende de un desarrollo reglamentario y presupuestario posterior que no se haga con ambición.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 33",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una ley estatal con visión centralista podría invadir competencias autonómicas y añadir complejidad a la coordinación entre los distintos niveles de decisión.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 34",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley: los efectos son argumentos del debate en el Pleno; no se ha contrastado aquí con la memoria oficial de impacto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion032/VOT_20251008195254.json": {
@@ -2106,6 +4276,55 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que un servicio de tren de proximidad dónde hoy no hay cercanías ayude a compensar el déficit histórico de inversión ferroviaria en la movilidad diaria y urbana.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 30",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría evitar que se supriman paradas de autobús interurbano del mapa de concesiones: las comunidades podrían asumir algunas y el Estado mantendría las demás.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 141 (2025-10-08)",
+     "locator": "pág. 93",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-141.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un mínimo de aportación estatal a los costes de explotación del transporte público podría dar más estabilidad a los servicios y permitir planificar a largo plazo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 37",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría quedarse corta si buena parte de lo previsto depende de un desarrollo reglamentario y presupuestario posterior que no se haga con ambición.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 33",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una ley estatal con visión centralista podría invadir competencias autonómicas y añadir complejidad a la coordinación entre los distintos niveles de decisión.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 34",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley: los efectos son argumentos del debate en el Pleno; no se ha contrastado aquí con la memoria oficial de impacto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion035/VOT_20251008195257.json": {
@@ -2137,6 +4356,55 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que un servicio de tren de proximidad dónde hoy no hay cercanías ayude a compensar el déficit histórico de inversión ferroviaria en la movilidad diaria y urbana.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 30",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría evitar que se supriman paradas de autobús interurbano del mapa de concesiones: las comunidades podrían asumir algunas y el Estado mantendría las demás.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 141 (2025-10-08)",
+     "locator": "pág. 93",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-141.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un mínimo de aportación estatal a los costes de explotación del transporte público podría dar más estabilidad a los servicios y permitir planificar a largo plazo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 37",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría quedarse corta si buena parte de lo previsto depende de un desarrollo reglamentario y presupuestario posterior que no se haga con ambición.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 33",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una ley estatal con visión centralista podría invadir competencias autonómicas y añadir complejidad a la coordinación entre los distintos niveles de decisión.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 34",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley: los efectos son argumentos del debate en el Pleno; no se ha contrastado aquí con la memoria oficial de impacto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -2170,6 +4438,55 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que un servicio de tren de proximidad dónde hoy no hay cercanías ayude a compensar el déficit histórico de inversión ferroviaria en la movilidad diaria y urbana.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 30",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría evitar que se supriman paradas de autobús interurbano del mapa de concesiones: las comunidades podrían asumir algunas y el Estado mantendría las demás.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 141 (2025-10-08)",
+     "locator": "pág. 93",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-141.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un mínimo de aportación estatal a los costes de explotación del transporte público podría dar más estabilidad a los servicios y permitir planificar a largo plazo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 37",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría quedarse corta si buena parte de lo previsto depende de un desarrollo reglamentario y presupuestario posterior que no se haga con ambición.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 33",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una ley estatal con visión centralista podría invadir competencias autonómicas y añadir complejidad a la coordinación entre los distintos niveles de decisión.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 34",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley: los efectos son argumentos del debate en el Pleno; no se ha contrastado aquí con la memoria oficial de impacto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion037/VOT_20251008195300.json": {
@@ -2202,6 +4519,55 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que un servicio de tren de proximidad dónde hoy no hay cercanías ayude a compensar el déficit histórico de inversión ferroviaria en la movilidad diaria y urbana.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 30",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría evitar que se supriman paradas de autobús interurbano del mapa de concesiones: las comunidades podrían asumir algunas y el Estado mantendría las demás.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 141 (2025-10-08)",
+     "locator": "pág. 93",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-141.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un mínimo de aportación estatal a los costes de explotación del transporte público podría dar más estabilidad a los servicios y permitir planificar a largo plazo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 37",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría quedarse corta si buena parte de lo previsto depende de un desarrollo reglamentario y presupuestario posterior que no se haga con ambición.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 33",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una ley estatal con visión centralista podría invadir competencias autonómicas y añadir complejidad a la coordinación entre los distintos niveles de decisión.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 34",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley: los efectos son argumentos del debate en el Pleno; no se ha contrastado aquí con la memoria oficial de impacto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion039/VOT_20251008195302.json": {
@@ -2226,6 +4592,55 @@
     "verdict": "none",
     "note": "Votación sin texto de enmiendas individuales (resto de enmiendas, sin número): no se puede determinar qué cambia para cada colectivo.",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que un servicio de tren de proximidad dónde hoy no hay cercanías ayude a compensar el déficit histórico de inversión ferroviaria en la movilidad diaria y urbana.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 30",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría evitar que se supriman paradas de autobús interurbano del mapa de concesiones: las comunidades podrían asumir algunas y el Estado mantendría las demás.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 141 (2025-10-08)",
+     "locator": "pág. 93",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-141.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un mínimo de aportación estatal a los costes de explotación del transporte público podría dar más estabilidad a los servicios y permitir planificar a largo plazo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 37",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría quedarse corta si buena parte de lo previsto depende de un desarrollo reglamentario y presupuestario posterior que no se haga con ambición.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 33",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una ley estatal con visión centralista podría invadir competencias autonómicas y añadir complejidad a la coordinación entre los distintos niveles de decisión.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 34",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley: los efectos son argumentos del debate en el Pleno; no se ha contrastado aquí con la memoria oficial de impacto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -2274,6 +4689,55 @@
     "note": "Enmiendas 623, 624, 641 y 708 no se recogen: 623/624 son definiciones o de mejora técnica y 641 y 708 se leen truncados en el lote.",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que un servicio de tren de proximidad dónde hoy no hay cercanías ayude a compensar el déficit histórico de inversión ferroviaria en la movilidad diaria y urbana.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 30",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría evitar que se supriman paradas de autobús interurbano del mapa de concesiones: las comunidades podrían asumir algunas y el Estado mantendría las demás.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 141 (2025-10-08)",
+     "locator": "pág. 93",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-141.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un mínimo de aportación estatal a los costes de explotación del transporte público podría dar más estabilidad a los servicios y permitir planificar a largo plazo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 37",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría quedarse corta si buena parte de lo previsto depende de un desarrollo reglamentario y presupuestario posterior que no se haga con ambición.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 33",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una ley estatal con visión centralista podría invadir competencias autonómicas y añadir complejidad a la coordinación entre los distintos niveles de decisión.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 34",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley: los efectos son argumentos del debate en el Pleno; no se ha contrastado aquí con la memoria oficial de impacto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion041/VOT_20251008195305.json": {
@@ -2311,6 +4775,55 @@
     "note": "Enmiendas 625, 691 y 702 son definiciones o cambios de rúbrica sin efecto directo para colectivos.",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que un servicio de tren de proximidad dónde hoy no hay cercanías ayude a compensar el déficit histórico de inversión ferroviaria en la movilidad diaria y urbana.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 30",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría evitar que se supriman paradas de autobús interurbano del mapa de concesiones: las comunidades podrían asumir algunas y el Estado mantendría las demás.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 141 (2025-10-08)",
+     "locator": "pág. 93",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-141.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un mínimo de aportación estatal a los costes de explotación del transporte público podría dar más estabilidad a los servicios y permitir planificar a largo plazo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 37",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría quedarse corta si buena parte de lo previsto depende de un desarrollo reglamentario y presupuestario posterior que no se haga con ambición.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 33",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una ley estatal con visión centralista podría invadir competencias autonómicas y añadir complejidad a la coordinación entre los distintos niveles de decisión.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 34",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley: los efectos son argumentos del debate en el Pleno; no se ha contrastado aquí con la memoria oficial de impacto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion045/VOT_20251008195310.json": {
@@ -2335,6 +4848,55 @@
     "verdict": "none",
     "note": "cambio técnico sin efecto para colectivos: la enmienda 673 solo cambia la rúbrica del Capítulo I del Título III.",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que un servicio de tren de proximidad dónde hoy no hay cercanías ayude a compensar el déficit histórico de inversión ferroviaria en la movilidad diaria y urbana.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 30",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría evitar que se supriman paradas de autobús interurbano del mapa de concesiones: las comunidades podrían asumir algunas y el Estado mantendría las demás.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 141 (2025-10-08)",
+     "locator": "pág. 93",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-141.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un mínimo de aportación estatal a los costes de explotación del transporte público podría dar más estabilidad a los servicios y permitir planificar a largo plazo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 37",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría quedarse corta si buena parte de lo previsto depende de un desarrollo reglamentario y presupuestario posterior que no se haga con ambición.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 33",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una ley estatal con visión centralista podría invadir competencias autonómicas y añadir complejidad a la coordinación entre los distintos niveles de decisión.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 34",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley: los efectos son argumentos del debate en el Pleno; no se ha contrastado aquí con la memoria oficial de impacto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -2373,6 +4935,55 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que un servicio de tren de proximidad dónde hoy no hay cercanías ayude a compensar el déficit histórico de inversión ferroviaria en la movilidad diaria y urbana.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 30",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría evitar que se supriman paradas de autobús interurbano del mapa de concesiones: las comunidades podrían asumir algunas y el Estado mantendría las demás.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 141 (2025-10-08)",
+     "locator": "pág. 93",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-141.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un mínimo de aportación estatal a los costes de explotación del transporte público podría dar más estabilidad a los servicios y permitir planificar a largo plazo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 37",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría quedarse corta si buena parte de lo previsto depende de un desarrollo reglamentario y presupuestario posterior que no se haga con ambición.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 33",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una ley estatal con visión centralista podría invadir competencias autonómicas y añadir complejidad a la coordinación entre los distintos niveles de decisión.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 34",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley: los efectos son argumentos del debate en el Pleno; no se ha contrastado aquí con la memoria oficial de impacto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion098/20250313/Votacion004/VOT_20250313133854.json": {
@@ -2399,6 +5010,12 @@
     "note": "Sin cifra oficial específica de policía estatal",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion098/20250313/Votacion007/VOT_20250313133858.json": {
@@ -2424,6 +5041,47 @@
     "verdict": "improved",
     "note": "Asilo y residencia son lo que afecta",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un ejercicio uniforme de las competencias podría evitar que la política migratoria se trocee y varíe según el territorio.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 100 (2025-03-11)",
+     "locator": "pág. 48",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-100.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría evitar que se retiren agentes de seguridad ciudadana de una comunidad para cubrir tareas de frontera, con menos presencia en sus calles.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 100 (2025-03-11)",
+     "locator": "pág. 46",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-100.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "No delegar podría mantener la saturación de las oficinas del Estado en permisos de residencia y citas de protección internacional, que según se señaló se pueden agilizar con la delegación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 100 (2025-03-11)",
+     "locator": "pág. 55",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-100.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Centralizar la política migratoria con un enfoque policial podría dificultar vías seguras de migración y mantener a parte de las personas migrantes en situación irregular.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 100 (2025-03-11)",
+     "locator": "pág. 50",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-100.PDF"
+    }
+   ],
+   "gaps": "Se discute si el acuerdo de delegación afectaría a fronteras o solo a la gestión de permisos; la ley citada aún no se había debatido. Sin memoria oficial de impacto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -2456,6 +5114,39 @@
     "note": "",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Unificar currículos, prueba de acceso y condiciones fiscales podría reducir las diferencias entre comunidades en sueldos, ratios, desgravaciones y dificultad de la Selectividad.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 67 (2024-10-08)",
+     "locator": "pág. 68",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-67.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Garantizar el español como lengua vehicular en todo el territorio podría asegurar que el alumnado reciba parte de su enseñanza en esa lengua en todas las comunidades.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 67 (2024-10-08)",
+     "locator": "pág. 68",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-67.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Un modelo basado en el esfuerzo y la excelencia sin más inversión pública podría reducir la educación pública y aumentar la segregación del alumnado por su origen social.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 67 (2024-10-08)",
+     "locator": "pág. 71",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-67.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; los efectos son argumentos del debate y gran parte de las intervenciones son reproche político.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion056/20240723/Votacion023/VOT_20240723221651.json": {
@@ -2480,6 +5171,47 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un régimen jurídico básico y común podría armonizar las funciones de los agentes forestales, sea cual sea la administración de la que dependan, y darles más seguridad jurídica.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 43",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reforzar la formación, los medios y la prevención de riesgos laborales podría mejorar la protección de los agentes frente a la peligrosidad y penosidad de su trabajo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 42",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una ley básica estatal tan detallada podría invadir competencias de las comunidades autónomas sobre el régimen de sus propios funcionarios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 52",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "El texto podría generar inseguridad jurídica a los propios agentes y posibles enfrentamientos con otros funcionarios que ejercen funciones parecidas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 53",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley con memoria del Gobierno que no se aporta aquí; los efectos recogidos son argumentos del debate, sin estimación de impacto ni coste.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -2517,6 +5249,63 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que incluir las enseñanzas artísticas superiores en el espacio de la enseñanza superior las equipare con el resto de estudios superiores y dignifique al sector.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 38",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que el alumnado gane derechos, como conciliar estudios, familia y trabajo, parar temporalmente los estudios, recibir educación inclusiva y participar en la toma de decisiones del centro.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 43",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría ampliar la oferta con disciplinas nuevas, como el circo o la escritura creativa, y mejorar la movilidad europea, la investigación y el acceso a la universidad de artistas de trayectoria reconocida.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 48",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría trasladar a las comunidades el coste de aplicar la ley si no se asegura una financiación propia y suficiente para los centros.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 49",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría crear un registro estatal de enseñanzas artísticas superiores que duplicaría al Registro de Universidades, Centros y Títulos, ya existente, y añadiría burocracia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 39",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Obligar a especializar centros que hoy dan a la vez enseñanzas superiores y profesionales podría dificultar el acceso fuera de las grandes ciudades, donde a veces hay un solo centro.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 31 (2024-03-14)",
+     "locator": "pág. 4",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-31.PDF"
+    }
+   ],
+   "gaps": "Sin memoria de impacto en el lote; los efectos son argumentos del debate, y partes de varias intervenciones están truncadas en el extracto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion029/20240314/Votacion007/VOT_20240314123715.json": {
@@ -2536,6 +5325,63 @@
     "note": "Votación en bloque del resto de enmiendas de un diputado sin números concretos; un intento con kit fetch en A-5-3 no permite identificar cuáles son. Sin texto votado identificable.",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que incluir las enseñanzas artísticas superiores en el espacio de la enseñanza superior las equipare con el resto de estudios superiores y dignifique al sector.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 38",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que el alumnado gane derechos, como conciliar estudios, familia y trabajo, parar temporalmente los estudios, recibir educación inclusiva y participar en la toma de decisiones del centro.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 43",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría ampliar la oferta con disciplinas nuevas, como el circo o la escritura creativa, y mejorar la movilidad europea, la investigación y el acceso a la universidad de artistas de trayectoria reconocida.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 48",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría trasladar a las comunidades el coste de aplicar la ley si no se asegura una financiación propia y suficiente para los centros.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 49",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría crear un registro estatal de enseñanzas artísticas superiores que duplicaría al Registro de Universidades, Centros y Títulos, ya existente, y añadiría burocracia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 39",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Obligar a especializar centros que hoy dan a la vez enseñanzas superiores y profesionales podría dificultar el acceso fuera de las grandes ciudades, donde a veces hay un solo centro.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 31 (2024-03-14)",
+     "locator": "pág. 4",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-31.PDF"
+    }
+   ],
+   "gaps": "Sin memoria de impacto en el lote; los efectos son argumentos del debate, y partes de varias intervenciones están truncadas en el extracto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion029/20240314/Votacion009/VOT_20240314123717.json": {
@@ -2554,6 +5400,63 @@
     "verdict": "none",
     "note": "Votación en bloque del resto de enmiendas de un grupo (más de 100 coincidencias en A-5-3); no se puede identificar cuáles se votaron. Sin texto votado identificable.",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que incluir las enseñanzas artísticas superiores en el espacio de la enseñanza superior las equipare con el resto de estudios superiores y dignifique al sector.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 38",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que el alumnado gane derechos, como conciliar estudios, familia y trabajo, parar temporalmente los estudios, recibir educación inclusiva y participar en la toma de decisiones del centro.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 43",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría ampliar la oferta con disciplinas nuevas, como el circo o la escritura creativa, y mejorar la movilidad europea, la investigación y el acceso a la universidad de artistas de trayectoria reconocida.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 48",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría trasladar a las comunidades el coste de aplicar la ley si no se asegura una financiación propia y suficiente para los centros.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 49",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría crear un registro estatal de enseñanzas artísticas superiores que duplicaría al Registro de Universidades, Centros y Títulos, ya existente, y añadiría burocracia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 39",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Obligar a especializar centros que hoy dan a la vez enseñanzas superiores y profesionales podría dificultar el acceso fuera de las grandes ciudades, donde a veces hay un solo centro.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 31 (2024-03-14)",
+     "locator": "pág. 4",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-31.PDF"
+    }
+   ],
+   "gaps": "Sin memoria de impacto en el lote; los efectos son argumentos del debate, y partes de varias intervenciones están truncadas en el extracto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -2591,6 +5494,63 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que incluir las enseñanzas artísticas superiores en el espacio de la enseñanza superior las equipare con el resto de estudios superiores y dignifique al sector.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 38",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que el alumnado gane derechos, como conciliar estudios, familia y trabajo, parar temporalmente los estudios, recibir educación inclusiva y participar en la toma de decisiones del centro.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 43",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría ampliar la oferta con disciplinas nuevas, como el circo o la escritura creativa, y mejorar la movilidad europea, la investigación y el acceso a la universidad de artistas de trayectoria reconocida.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 48",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría trasladar a las comunidades el coste de aplicar la ley si no se asegura una financiación propia y suficiente para los centros.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 49",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría crear un registro estatal de enseñanzas artísticas superiores que duplicaría al Registro de Universidades, Centros y Títulos, ya existente, y añadiría burocracia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 39",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Obligar a especializar centros que hoy dan a la vez enseñanzas superiores y profesionales podría dificultar el acceso fuera de las grandes ciudades, donde a veces hay un solo centro.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 31 (2024-03-14)",
+     "locator": "pág. 4",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-31.PDF"
+    }
+   ],
+   "gaps": "Sin memoria de impacto en el lote; los efectos son argumentos del debate, y partes de varias intervenciones están truncadas en el extracto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion029/20240314/Votacion015/VOT_20240314123724.json": {
@@ -2617,6 +5577,63 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que incluir las enseñanzas artísticas superiores en el espacio de la enseñanza superior las equipare con el resto de estudios superiores y dignifique al sector.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 38",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que el alumnado gane derechos, como conciliar estudios, familia y trabajo, parar temporalmente los estudios, recibir educación inclusiva y participar en la toma de decisiones del centro.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 43",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría ampliar la oferta con disciplinas nuevas, como el circo o la escritura creativa, y mejorar la movilidad europea, la investigación y el acceso a la universidad de artistas de trayectoria reconocida.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 48",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría trasladar a las comunidades el coste de aplicar la ley si no se asegura una financiación propia y suficiente para los centros.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 49",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría crear un registro estatal de enseñanzas artísticas superiores que duplicaría al Registro de Universidades, Centros y Títulos, ya existente, y añadiría burocracia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 39",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Obligar a especializar centros que hoy dan a la vez enseñanzas superiores y profesionales podría dificultar el acceso fuera de las grandes ciudades, donde a veces hay un solo centro.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 31 (2024-03-14)",
+     "locator": "pág. 4",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-31.PDF"
+    }
+   ],
+   "gaps": "Sin memoria de impacto en el lote; los efectos son argumentos del debate, y partes de varias intervenciones están truncadas en el extracto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion029/20240314/Votacion016/VOT_20240314123725.json": {
@@ -2635,6 +5652,63 @@
     "verdict": "none",
     "note": "Votación en bloque del resto de enmiendas de un grupo, sin números identificables; sin texto votado extraído. No se intentó adivinar cuáles eran.",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que incluir las enseñanzas artísticas superiores en el espacio de la enseñanza superior las equipare con el resto de estudios superiores y dignifique al sector.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 38",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que el alumnado gane derechos, como conciliar estudios, familia y trabajo, parar temporalmente los estudios, recibir educación inclusiva y participar en la toma de decisiones del centro.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 43",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría ampliar la oferta con disciplinas nuevas, como el circo o la escritura creativa, y mejorar la movilidad europea, la investigación y el acceso a la universidad de artistas de trayectoria reconocida.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 48",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría trasladar a las comunidades el coste de aplicar la ley si no se asegura una financiación propia y suficiente para los centros.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 49",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría crear un registro estatal de enseñanzas artísticas superiores que duplicaría al Registro de Universidades, Centros y Títulos, ya existente, y añadiría burocracia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 42 (2024-05-23)",
+     "locator": "pág. 39",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-42.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Obligar a especializar centros que hoy dan a la vez enseñanzas superiores y profesionales podría dificultar el acceso fuera de las grandes ciudades, donde a veces hay un solo centro.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 31 (2024-03-14)",
+     "locator": "pág. 4",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-31.PDF"
+    }
+   ],
+   "gaps": "Sin memoria de impacto en el lote; los efectos son argumentos del debate, y partes de varias intervenciones están truncadas en el extracto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   }

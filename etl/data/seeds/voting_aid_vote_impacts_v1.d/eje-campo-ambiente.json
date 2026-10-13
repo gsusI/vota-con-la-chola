@@ -154,6 +154,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "En crisis o inestabilidad de mercados, las ayudas a explotaciones y el IVA mínimo en insumos podrían aliviar costes a agricultores y ganaderos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 157 (2025-12-09)",
+     "locator": "pág. 17",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-157.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reforzar seguros agrarios, cooperativas y venta directa podría proteger mejor los ingresos y dar más fuerza negociadora a los productores.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 157 (2025-12-09)",
+     "locator": "pág. 21",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-157.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Al estar redactada de forma muy genérica, la ley podría quedarse en una declaración de intenciones sin efectos prácticos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 157 (2025-12-09)",
+     "locator": "pág. 22",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-157.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría repartir más ayudas sin priorizar a quien produce de verdad y retrasar la adaptación ambiental, de la que dependen suelo fértil, agua y cosechas futuras.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 157 (2025-12-09)",
+     "locator": "pág. 30",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-157.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "El enfoque podría ser demasiado centralista y no respetar el reparto de competencias con las comunidades autónomas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 157 (2025-12-09)",
+     "locator": "pág. 21",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-157.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate. No se concreta el coste de las ayudas ni de la rebaja del IVA.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion110/20250513/Votacion001/VOT_20250513201840.json": {
@@ -184,6 +233,55 @@
     "verdict": "improved",
     "note": "Reparto legal y aporte real del trasvase al Segura",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Mantener el trasvase podría evitar un recorte de más del 50 % del agua para abastecimiento y regadío del levante, que según se defendió dañaría gravemente su economía.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 114 (2025-05-13)",
+     "locator": "pág. 11",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-114.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Como el trasvase influye en el coste y la disponibilidad del agua en varias comunidades, mantenerlo podría dar más estabilidad al regadío y al abastecimiento.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 114 (2025-05-13)",
+     "locator": "pág. 9",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-114.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Blindar el trasvase podría generar falsas expectativas en el sector agrario si no se aborda la menor disponibilidad de agua por el cambio climático y el aumento de consumos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 114 (2025-05-13)",
+     "locator": "pág. 9",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-114.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "La iniciativa podría enfrentar a territorios que comparten la cuenca, en lugar de buscar una gestión integral del agua.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 114 (2025-05-13)",
+     "locator": "pág. 9",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-114.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Se advirtió de que el trasvase podría dejar de funcionar por sequía y cambio climático aunque ninguna norma lo mantenga, lo que limitaría el alcance de la ley.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 114 (2025-05-13)",
+     "locator": "pág. 8",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-114.PDF"
+    }
+   ],
+   "gaps": "Proposición de ley autonómica sin memoria oficial de impacto; los efectos son argumentos del debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -227,6 +325,55 @@
     "note": "Censos de lobo norte/sur Duero ya miden la medida",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Rebajar la protección del lobo al norte del Duero podría reducir los ataques al ganado y frenar el abandono de explotaciones de ganadería extensiva.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 38 (2024-04-23)",
+     "locator": "pág. 21",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-38.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Permitir un control cinegético dentro de un plan nacional de gestión podría ayudar a mantener el equilibrio entre el lobo y la actividad ganadera.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 38 (2024-04-23)",
+     "locator": "pág. 31",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-38.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sacar esa población del listado de protección y permitir su extracción cinegética podría reducir los ejemplares de lobo, aunque aún cumpla los requisitos de protección.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 38 (2024-04-23)",
+     "locator": "pág. 30",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-38.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "La proposición no recoge medidas concretas de convivencia, como cercados, rebaños agrupados o pastores con perros, que según el debate sí reducen los daños.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 38 (2024-04-23)",
+     "locator": "pág. 30",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-38.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría no resolverse el problema de los ataques, pues se dijo que no hay evidencia científica de que las extracciones sean la solución.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 38 (2024-04-23)",
+     "locator": "pág. 33",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-38.PDF"
+    }
+   ],
+   "gaps": "Votación de toma en consideración sin resultado registrado; sin memoria oficial de impacto, los efectos son argumentos del debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion161/20260218/Votacion001/VOT_20260218141918.json": {
@@ -268,6 +415,63 @@
     "verdict": "keep",
     "note": "PNL multitema agraria; cifras sectoriales generales adecuadas",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Rechazar el acuerdo con Mercosur podría evitar que importaciones más baratas y con menos exigencias hundan precios y cierren explotaciones antes de que actúen las salvaguardias.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 166 (2026-02-17)",
+     "locator": "pág. 34",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-166.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reducir cargas ambientales y burocracia podría mejorar la rentabilidad de las explotaciones agrarias.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 166 (2026-02-17)",
+     "locator": "pág. 34",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-166.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reforzar la trazabilidad, las cláusulas espejo y la reciprocidad comercial podría proteger a los productores europeos de la competencia desleal.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 166 (2026-02-17)",
+     "locator": "pág. 37",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-166.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Eliminar el Pacto Verde y las políticas climáticas podría obligar a competir con terceros países con menos estándares, salarios y controles sanitarios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 166 (2026-02-17)",
+     "locator": "pág. 37",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-166.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Endurecer las fronteras comerciales podría provocar que otros países dejen de comprar y dañar las exportaciones españolas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 166 (2026-02-17)",
+     "locator": "pág. 43",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-166.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Renunciar a las políticas de sostenibilidad podría dejar al campo menos preparado ante la sequía y los fenómenos climáticos extremos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 166 (2026-02-17)",
+     "locator": "pág. 42",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-166.PDF"
+    }
+   ],
+   "gaps": "Proposición de 29 puntos votada en bloque; el debate no permite atribuir cada efecto a un punto concreto. Sin memoria oficial de impacto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -335,6 +539,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Flexibilizar las exigencias ambientales de la PAC podría reducir obligaciones, burocracia y condicionalidad y favorecer la producción de agricultores y ganaderos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 74 (2024-10-29)",
+     "locator": "pág. 49",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-74.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Ajustar medidas como las cubiertas vegetales en el olivar podría evitar que dificulten la recolección y compitan con el cultivo, lo que reduciría su producción.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 74 (2024-10-29)",
+     "locator": "pág. 50",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-74.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Exigir reciprocidad a las importaciones podría reducir la competencia de cereales de fuera que no cumplen las mismas condiciones.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 74 (2024-10-29)",
+     "locator": "pág. 50",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-74.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Relajar las exigencias ambientales podría agravar la escasez de agua, vinculada en el debate al cambio climático y al uso intensivo del agua.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 74 (2024-10-29)",
+     "locator": "pág. 53",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-74.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Rebajar las exigencias ambientales podría debilitar los ecorregímenes y dañar a la propia agricultura, que depende del medio ambiente.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 74 (2024-10-29)",
+     "locator": "pág. 54",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-74.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate y no se cuantifican. El debate no desarrolla el efecto de sacar al lobo de la protección.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion142/20251028/Votacion007/VOT_20251028204549.json": {
@@ -367,6 +620,55 @@
     "note": "Cifras del fondo único PAC y presupuesto español",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Mantener la PAC con presupuesto y objetivos propios podría preservar su carácter específico y la capacidad de decisión de los Estados frente a un fondo único.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 147 (2025-10-28)",
+     "locator": "pág. 43",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-147.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Mantener la PAC fuera de un fondo común podría proteger las ayudas específicas de las regiones ultraperiféricas, que de otro modo podrían quedar reducidas a algo marginal.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 147 (2025-10-28)",
+     "locator": "pág. 45",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-147.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reducir cargas y trámites podría mejorar la rentabilidad de las explotaciones, evitar cierres y favorecer el relevo generacional en zonas rurales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 147 (2025-10-28)",
+     "locator": "pág. 43",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-147.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Supeditar menos la PAC a objetivos climáticos podría agravar sequías e inundaciones, que ya dañan las cosechas, y dejar al campo sin apoyo para adaptarse.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 147 (2025-10-28)",
+     "locator": "pág. 46",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-147.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Rechazar la transición climática podría dejar a los agricultores sin adaptación a un clima que ya adelanta las cosechas y perjudicar la biodiversidad.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 147 (2025-10-28)",
+     "locator": "pág. 50",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-147.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; el debate no cuantifica el efecto de un fondo único sobre las rentas agrarias españolas.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion139/20251016/Votacion010/VOT_20251016123501.json": {
@@ -386,6 +688,31 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Recurrir la sentencia podría dar un apoyo más ante la UE a la reclamación de que se valoren las consecuencias económicas y sociales de cerrar 87 zonas a la pesca de fondo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 143 (2025-10-15)",
+     "locator": "pág. 108",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-143.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Recurrir la sentencia podría ser menos eficaz que modificar el reglamento europeo en que se basa la prohibición, excluyendo el palangre de fondo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 143 (2025-10-15)",
+     "locator": "pág. 114",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-143.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; no se debatieron los efectos de la moratoria eólica, por lo que no se escriben efectos para ese punto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion108/VOT_20251008195421.json": {
@@ -411,6 +738,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Mantener vivos la agricultura y la ganadería podría ayudar a prevenir grandes incendios mediante una mejor gestión del territorio, ya que apagar con más medios tiene un límite.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 141 (2025-10-08)",
+     "locator": "pág. 130",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-141.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Los agricultores y ganaderos de la zona podrían seguir siendo útiles en incendios, por ejemplo abriendo cortafuegos con sus tractores, si no abandonan la actividad.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 141 (2025-10-08)",
+     "locator": "pág. 131",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-141.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Revisar normas que impiden desbrozar, cortar leña, hacer cortafuegos o pastorear podría facilitar que los montes tengan menos combustible y ardan menos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 141 (2025-10-08)",
+     "locator": "pág. 128",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-141.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Impulsar un modelo agroexportador podría ir en contra de mantener un mundo rural vivo, que se presenta como clave para prevenir incendios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 141 (2025-10-08)",
+     "locator": "pág. 135",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-141.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Pedir al Estado medidas que ya son competencia autonómica, sin compromisos claros de financiación, podría dejarlas en principios sin efecto real.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 141 (2025-10-08)",
+     "locator": "pág. 129",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-141.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; los efectos son argumentos del debate y no se aportan cifras de su efecto sobre los incendios.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion095/20250226/Votacion014/VOT_20250226151643.json": {
@@ -431,6 +807,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion052/20240627/Votacion025/VOT_20240627130357.json": {
@@ -457,6 +839,12 @@
     "note": "Cifras actuales miden bien al colectivo",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion043/20240530/Votacion026/VOT_20240530120021.json": {
@@ -482,6 +870,12 @@
     "verdict": "keep",
     "note": "Cifras actuales miden bien al colectivo",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -514,6 +908,47 @@
     "note": "Cifras actuales miden bien al colectivo",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Ampliar el regadío podría generar actividad económica y empleo y favorecer que se repueblen zonas rurales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 38 (2024-04-23)",
+     "locator": "pág. 66",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-38.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Interconectar cuencas y construir infraestructuras podría llevar agua a zonas en sequía mientras otras cuencas tienen embalses casi llenos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 38 (2024-04-23)",
+     "locator": "pág. 66",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-38.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Más infraestructuras hídricas podrían permitir aprovechar agua que hoy sale hacia Portugal por encima de lo que obliga el convenio.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 38 (2024-04-23)",
+     "locator": "pág. 66",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-38.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los trasvases y nuevos embalses han provocado contestación social y desplazados, y algún proyecto fue anulado por vulnerar la directiva marco del agua.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 38 (2024-04-23)",
+     "locator": "pág. 71",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-38.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria de impacto; no se debate en detalle el punto 3 (presas) ni el 6 (cesión de derechos de agua).",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion029/20240314/Votacion034/VOT_20240314123746.json": {
@@ -545,6 +980,12 @@
     "verdict": "keep",
     "note": "Sin cifra oficial de explotaciones hiperintensivas localizada",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -609,6 +1050,47 @@
     "note": "Ganado ovino y lobo sur del Duero ya específicos",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reducir el desperdicio podría abaratar los alimentos y generar menos residuos y contaminación, al hacer más eficiente la cadena alimentaria.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 91 (2024-12-19)",
+     "locator": "pág. 13",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-91.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Los acuerdos de donación obligatorios para grandes establecimientos podrían hacer que más excedentes lleguen a entidades sin ánimo de lucro que atienden a personas vulnerables.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 91 (2024-12-19)",
+     "locator": "pág. 9",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-91.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los planes y trámites exigidos podrían suponer más costes y burocracia para las empresas agroalimentarias, incluido el sector primario, donde el desperdicio ya sería escaso.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 91 (2024-12-19)",
+     "locator": "pág. 15",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-91.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Rebajar la protección del lobo mediante una ley ajena podría agravar la situación de una especie que, según el debate, está en estado crítico en algunos territorios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 105 (2025-03-20)",
+     "locator": "pág. 27",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-105.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley; no se ha consultado la memoria oficial de impacto. Los efectos son argumentos del debate, sin cifras de impacto sobre multas, IVA o lobo.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion142/20251028/Votacion008/VOT_20251028204551.json": {
@@ -640,6 +1122,12 @@
     "note": "Cifras del fondo único PAC y beneficiarios",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion139/20251016/Votacion011/VOT_20251016123503.json": {
@@ -659,6 +1147,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion101/20250320/Votacion051/VOT_20250320125759.json": {
@@ -684,6 +1178,47 @@
     "verdict": "keep",
     "note": "Orden afecta a toda la población de lobo; censo adecuado",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reducir el desperdicio podría abaratar los alimentos y generar menos residuos y contaminación, al hacer más eficiente la cadena alimentaria.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 91 (2024-12-19)",
+     "locator": "pág. 13",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-91.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Los acuerdos de donación obligatorios para grandes establecimientos podrían hacer que más excedentes lleguen a entidades sin ánimo de lucro que atienden a personas vulnerables.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 91 (2024-12-19)",
+     "locator": "pág. 9",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-91.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los planes y trámites exigidos podrían suponer más costes y burocracia para las empresas agroalimentarias, incluido el sector primario, donde el desperdicio ya sería escaso.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 91 (2024-12-19)",
+     "locator": "pág. 15",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-91.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Rebajar la protección del lobo mediante una ley ajena podría agravar la situación de una especie que, según el debate, está en estado crítico en algunos territorios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 105 (2025-03-20)",
+     "locator": "pág. 27",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-105.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley; no se ha consultado la memoria oficial de impacto. Los efectos son argumentos del debate, sin cifras de impacto sobre multas, IVA o lobo.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -715,6 +1250,39 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reducir el desperdicio podría abaratar los alimentos y generar menos residuos y contaminación, al hacer más eficiente la cadena alimentaria.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 91 (2024-12-19)",
+     "locator": "pág. 13",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-91.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Los acuerdos de donación obligatorios para grandes establecimientos podrían hacer que más excedentes lleguen a entidades sin ánimo de lucro que atienden a personas vulnerables.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 91 (2024-12-19)",
+     "locator": "pág. 9",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-91.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los planes y trámites exigidos podrían suponer más costes y burocracia para las empresas agroalimentarias, incluido el sector primario, donde el desperdicio ya sería escaso.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 91 (2024-12-19)",
+     "locator": "pág. 15",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-91.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley; no se ha consultado la memoria oficial de impacto. Los efectos son argumentos del debate, sin cifras de impacto sobre multas, IVA o lobo.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion101/20250320/Votacion061/VOT_20250320125810.json": {
@@ -740,6 +1308,47 @@
     "verdict": "keep",
     "note": "Listado de protección del lobo; censo adecuado",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reducir el desperdicio podría abaratar los alimentos y generar menos residuos y contaminación, al hacer más eficiente la cadena alimentaria.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 91 (2024-12-19)",
+     "locator": "pág. 13",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-91.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Los acuerdos de donación obligatorios para grandes establecimientos podrían hacer que más excedentes lleguen a entidades sin ánimo de lucro que atienden a personas vulnerables.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 91 (2024-12-19)",
+     "locator": "pág. 9",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-91.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los planes y trámites exigidos podrían suponer más costes y burocracia para las empresas agroalimentarias, incluido el sector primario, donde el desperdicio ya sería escaso.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 91 (2024-12-19)",
+     "locator": "pág. 15",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-91.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Rebajar la protección del lobo mediante una ley ajena podría agravar la situación de una especie que, según el debate, está en estado crítico en algunos territorios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 105 (2025-03-20)",
+     "locator": "pág. 27",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-105.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley; no se ha consultado la memoria oficial de impacto. Los efectos son argumentos del debate, sin cifras de impacto sobre multas, IVA o lobo.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -772,6 +1381,39 @@
     "note": "Cifras actuales miden bien al colectivo",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un pacto del agua podría corregir retrasos en la planificación hídrica que, según se dijo, han llevado a una grave crisis del agua.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 52 (2024-06-25)",
+     "locator": "pág. 53",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-52-C1.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Modernizar regadíos con fondos públicos podría mejorar el aprovechamiento del agua en el sector agroalimentario.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 52 (2024-06-25)",
+     "locator": "pág. 59",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-52-C1.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Gestionar el agua en sequía con criterios de mercado podría ser ineficaz para un bien básico; se defendió regular los servicios esenciales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 52 (2024-06-25)",
+     "locator": "pág. 58",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-52-C1.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; las cifras sobre empresas y ganado son afirmaciones del debate, no contrastadas aquí.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion052/20240627/Votacion028/VOT_20240627130400.json": {
@@ -797,6 +1439,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion043/20240530/Votacion027/VOT_20240530120022.json": {
@@ -822,6 +1470,12 @@
     "verdict": "keep",
     "note": "Cifras actuales miden bien al colectivo",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -854,6 +1508,31 @@
     "note": "Cifras actuales miden bien al colectivo",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Flexibilizar la PAC podría aliviar a agricultores que, según se dijo, no se acogen a los ecorregímenes porque les cuesta más de lo que reciben.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 43 (2024-05-28)",
+     "locator": "pág. 66",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-43.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Rechazar el Pacto Verde y su normativa podría agravar las pérdidas agrarias por sequía y poner en riesgo la seguridad alimentaria, según se señaló.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 43 (2024-05-28)",
+     "locator": "pág. 69",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-43.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; el debate no trató los puntos 1 y 2 (regadíos y Plan Nacional del Agua).",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion043/20240530/Votacion036/VOT_20240530120030.json": {
@@ -874,6 +1553,31 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Frenar la Ley de Restauración de la Naturaleza podría evitar que limite la capacidad de producción del campo español, como se alegó.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 43 (2024-05-28)",
+     "locator": "pág. 66",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-43.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Rechazar el Pacto Verde y su normativa podría agravar las pérdidas agrarias por sequía y poner en riesgo la seguridad alimentaria, según se señaló.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 43 (2024-05-28)",
+     "locator": "pág. 69",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-43.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; el debate no trató los puntos 1 y 2 (regadíos y Plan Nacional del Agua).",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion036/20240423/Votacion027/VOT_20240423213537.json": {
@@ -894,6 +1598,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion036/20240423/Votacion029/VOT_20240423213539.json": {
@@ -914,6 +1624,47 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Ampliar el regadío podría generar actividad económica y empleo y favorecer que se repueblen zonas rurales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 38 (2024-04-23)",
+     "locator": "pág. 66",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-38.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Interconectar cuencas y construir infraestructuras podría llevar agua a zonas en sequía mientras otras cuencas tienen embalses casi llenos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 38 (2024-04-23)",
+     "locator": "pág. 66",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-38.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Más infraestructuras hídricas podrían permitir aprovechar agua que hoy sale hacia Portugal por encima de lo que obliga el convenio.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 38 (2024-04-23)",
+     "locator": "pág. 66",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-38.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los trasvases y nuevos embalses han provocado contestación social y desplazados, y algún proyecto fue anulado por vulnerar la directiva marco del agua.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 38 (2024-04-23)",
+     "locator": "pág. 71",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-38.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria de impacto; no se debate en detalle el punto 3 (presas) ni el 6 (cesión de derechos de agua).",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion036/20240423/Votacion030/VOT_20240423213540.json": {
@@ -945,6 +1696,12 @@
     "note": "Sin cifra oficial de cesiones entre regantes localizada",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion029/20240314/Votacion046/VOT_20240314123800.json": {
@@ -975,6 +1732,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   }
  }

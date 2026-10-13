@@ -251,6 +251,63 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que exigir responsabilidades a quien recibió ayudas por ERTE y luego traslada su actividad fuera de la UE evite que el dinero público acabe financiando deslocalizaciones.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 168 (2026-02-24)",
+     "locator": "pág. 10",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-168.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Abrir un periodo de consultas, compartir información y presentar un plan de viabilidad en la venta de unidades productivas podría evitar operaciones opacas y cierres encubiertos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 168 (2026-02-24)",
+     "locator": "pág. 11",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-168.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "La participación de la representación de las personas trabajadoras en estos procesos podría ayudar a anticipar riesgos para el empleo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 168 (2026-02-24)",
+     "locator": "pág. 11",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-168.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Vetar despidos y modificaciones laborales según el lugar al que se traslade la actividad podría introducir rigideces que debiliten el tejido productivo que se quiere proteger.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 168 (2026-02-24)",
+     "locator": "pág. 17",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-168.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Al sancionar solo los traslados fuera de la UE o del EEE, podría dejar sin protección a quien pierde su empleo por un traslado a otro Estado miembro, con el mismo perjuicio.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 168 (2026-02-24)",
+     "locator": "pág. 17",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-168.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Reintegrar íntegramente las prestaciones de ERTE de los cuatro años anteriores podría alcanzar a empresas cuyos expedientes tenían causas ajenas al traslado.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 168 (2026-02-24)",
+     "locator": "pág. 17",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-168.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto en el debate; los efectos son argumentos expuestos por los intervinientes.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion137/20251014/Votacion001/VOT_20251014202757.json": {
@@ -292,6 +349,63 @@
     "verdict": "keep",
     "note": "Jornada y convenios ya miden el colectivo",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Trabajar menos horas podría mejorar la conciliación y reducir el estrés, los riesgos psicosociales y las bajas, con menos carga para la sanidad pública.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 142 (2025-10-14)",
+     "locator": "pág. 5",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-142.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que repartir el trabajo facilite el acceso al empleo de más personas, en especial jóvenes, y extienda a más sectores jornadas ya pactadas en convenios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 142 (2025-10-14)",
+     "locator": "pág. 5",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-142.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se defiende que la jornada podría reducirse sin perder rendimiento, como indicarían experiencias piloto y empresas que ya trabajan menos horas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 142 (2025-10-14)",
+     "locator": "pág. 14",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-142.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría suponer más costes y burocracia para pymes y autónomos, que tienen menos margen, con riesgo de dificultar contrataciones o de cierres.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 142 (2025-10-14)",
+     "locator": "pág. 18",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-142.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Se advierte que reducir la jornada por ley, sin acuerdo previo con empresas y sindicatos, podría encarecer el empleo en lugar de crearlo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 142 (2025-10-14)",
+     "locator": "pág. 18",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-142.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin un registro horario que funcione y control del cumplimiento, la reducción podría quedarse en el papel y no llegar a quienes más horas hacen.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 142 (2025-10-14)",
+     "locator": "pág. 14",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-142.PDF"
+    }
+   ],
+   "gaps": "Proposición de ley en toma en consideración; no consta memoria de impacto en el debate y los efectos son argumentos de los intervinientes.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -335,6 +449,63 @@
     "note": "Jornada y convenios ya miden el colectivo",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Trabajar menos horas podría dar más tiempo de vida y mejorar la salud, la igualdad y la conciliación, al repartir mejor el tiempo de trabajo y los cuidados.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 135 (2025-09-10)",
+     "locator": "pág. 142",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-135.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una jornada más corta y bien organizada podría aumentar la productividad y sostener el consumo, según los resultados citados de experiencias de jornada de cuatro días.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 135 (2025-09-10)",
+     "locator": "pág. 142",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-135.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "El registro de jornada podría reducir las horas extraordinarias que hoy no se cotizan ni se cobran, y la desconexión digital podría proteger el tiempo de descanso.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 135 (2025-09-10)",
+     "locator": "pág. 141",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-135.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los pequeños comercios y autónomos, sin convenios con jornada inferior a la legal, podrían soportar un sobrecoste por trabajador mayor que las grandes empresas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 135 (2025-09-10)",
+     "locator": "pág. 135",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-135.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "La medida, aplicada sin acuerdo con los interlocutores sociales, podría perjudicar al empleo y a las empresas que no pueden absorber el coste de trabajar menos horas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 135 (2025-09-10)",
+     "locator": "pág. 125",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-135.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Al pasar a negociaciones colectivas futuras, trabajar menos horas por el mismo sueldo podría traducirse en una reducción de los salarios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 135 (2025-09-10)",
+     "locator": "pág. 125",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-135.PDF"
+    }
+   ],
+   "gaps": "Debate de totalidad; no consta aquí memoria oficial de impacto. Los costes y efectos en empleo, salarios y productividad son argumentos de los intervinientes, no estimaciones verificadas.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion129/20250909/Votacion002/VOT_20250909221800.json": {
@@ -366,6 +537,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Con sanciones más duras y sin acceso a subvenciones públicas, podría dejar de compensar pagar la multa en lugar de cumplir la reserva de empleo, y más empresas podrían contratar a personas con discapacidad.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 134 (2025-09-09)",
+     "locator": "pág. 23",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-134.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Cerrar las vías para eludir la cuota y aclarar el régimen sancionador podría dar más seguridad jurídica y hacer que el cómputo de puestos reservados refleje la realidad.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 134 (2025-09-09)",
+     "locator": "pág. 29",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-134.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Las sanciones por sí solas podrían no crear empleo si no se acompañan de incentivos, formación adaptada, accesibilidad y apoyo en el paso al empleo ordinario.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 134 (2025-09-09)",
+     "locator": "pág. 23",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-134.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Subir las multas podría crear una cultura del miedo en las empresas en lugar de animarlas a contratar, y las pequeñas y medianas podrían carecer de medios para adaptar puestos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 134 (2025-09-09)",
+     "locator": "pág. 32",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-134.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Un objetivo medido solo en porcentaje podría llevar a contrataciones meramente formales, con puestos decorativos o sustituciones, que no logren una inclusión real.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 134 (2025-09-09)",
+     "locator": "pág. 31",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-134.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate y no hay estimación de cuántos empleos se crearían ni del coste para las empresas.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion096/20250311/Votacion002/VOT_20250311203734.json": {
@@ -396,6 +616,47 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Recuperar la bonificación del 50 % de las cuotas patronales podría aliviar costes de las empresas de Ceuta y Melilla, ciudades con dificultades de conectividad.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 100 (2025-03-11)",
+     "locator": "pág. 29",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-100.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Volver al 50 % para todos los contratos y sin adelantar dinero podría dar más certeza a las empresas que la bonificación fija actual y las subvenciones posteriores.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 100 (2025-03-11)",
+     "locator": "pág. 34",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-100.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Bonificaciones generalizadas podrían dispersar los incentivos en vez de centrarlos en colectivos con más dificultades; a veces dan acceso al empleo, no permanencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 100 (2025-03-11)",
+     "locator": "pág. 31",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-100.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Bonificar cuotas patronales podría debilitar la financiación de la protección social (pensiones, paro, incapacidad) con la que se pagan esas cuotas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 100 (2025-03-11)",
+     "locator": "pág. 32",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-100.PDF"
+    }
+   ],
+   "gaps": "El debate dice que la medida ya está en vigor por otra norma desde noviembre de 2024; no se cuantifica el coste de la bonificación ni su efecto en el empleo.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion090/20250211/Votacion002/VOT_20250211202649.json": {
@@ -435,6 +696,63 @@
     "verdict": "improved",
     "note": "Agresiones notificadas a profesionales del SNS",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un plan de prevención obligatorio, con videovigilancia, protocolos ante agresiones y presunción de veracidad del personal sanitario, podría reforzar su seguridad.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 94 (2025-02-11)",
+     "locator": "pág. 26",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-94.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reducir la violencia contra el personal sanitario podría mejorar la calidad de la atención a los pacientes y el funcionamiento del sistema.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 94 (2025-02-11)",
+     "locator": "pág. 24",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-94.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una implicación más directa de la Administración en sanciones y denuncias a los agresores podría proteger mejor a los profesionales.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 94 (2025-02-11)",
+     "locator": "pág. 20",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-94.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una ley estatal podría invadir competencias que corresponden a las comunidades autónomas en sanidad y en sus protocolos propios, y recentralizar la gestión.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 94 (2025-02-11)",
+     "locator": "pág. 23",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-94.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría duplicar medidas que ya aplican muchas comunidades, como planes, observatorios, protocolos y la protección penal reforzada, sin añadir mejoras claras.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 94 (2025-02-11)",
+     "locator": "pág. 22",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-94.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Actuar solo sobre protección y sanciones podría no frenar la violencia si no mejora la atención y las esperas, que generan frustración en pacientes y familiares.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 94 (2025-02-11)",
+     "locator": "pág. 23",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-94.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; el debate no cuantifica coste ni efecto esperado sobre las agresiones, y los datos de agresiones citados varían según la fuente.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -491,6 +809,55 @@
     "note": "Escala del personal técnico y de gestión del SNS",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reclasificar a técnicos sanitarios, celadores y personal de gestión según su formación y funciones actuales podría mejorar su reconocimiento y su retribución.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 206 (2026-09-22)",
+     "locator": "pág. 70",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-206.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Revisar la carrera profesional para que cuente la experiencia y la promoción interna no haga perder derechos adquiridos podría ofrecer mejores vías de progreso.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 206 (2026-09-22)",
+     "locator": "pág. 79",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-206.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin memoria económica no se conoce el coste real de las medidas ni cómo se financiarían, lo que podría trasladar incertidumbre a los servicios de salud.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 206 (2026-09-22)",
+     "locator": "pág. 71",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-206.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Reconocer derechos sin aportar recursos podría trasladar la factura a las comunidades autónomas, que son las que gestionan los servicios sanitarios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 206 (2026-09-22)",
+     "locator": "pág. 76",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-206.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una regulación estatal uniforme podría invadir las competencias autonómicas de organización y gestión de los servicios de salud.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 206 (2026-09-22)",
+     "locator": "pág. 71",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-206.PDF"
+    }
+   ],
+   "gaps": "Según el debate, falta memoria económica de la reforma del estatuto marco; el coste de la reclasificación y su financiación no se concretan.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion141/20251022/Votacion003/VOT_20251022134517.json": {
@@ -516,6 +883,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Consolidar las plazas podría dar estabilidad a quienes llevan años o décadas encadenando contratos temporales y acabar con la incertidumbre sobre si seguirán en su puesto.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 145 (2025-10-21)",
+     "locator": "pág. 59",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-145.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que consolidar las plazas resuelva el abuso de temporalidad con más eficacia que las indemnizaciones o las oposiciones rápidas, que se consideran insuficientes.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 145 (2025-10-21)",
+     "locator": "pág. 59",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-145.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Fijar al personal temporal por esta vía podría resultar prematuro y no encajar con la normativa europea ni la doctrina del TJUE, con cuestiones prejudiciales aún pendientes.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 145 (2025-10-21)",
+     "locator": "pág. 61",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-145.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una solución que no se ajuste a la normativa europea podría mantener el riesgo de procedimientos sancionadores y de retención de fondos europeos del plan de recuperación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 145 (2025-10-21)",
+     "locator": "pág. 61",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-145.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Se señaló que reducir la temporalidad no debe hacerse a costa de la Constitución, por lo que consolidar plazas sin proceso de acceso podría ser cuestionado jurídicamente.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 145 (2025-10-21)",
+     "locator": "pág. 68",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-145.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; los efectos son argumentos del debate y hay cuestiones jurídicas europeas pendientes.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion132/20250917/Votacion003/VOT_20250917194022.json": {
@@ -541,6 +957,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una indemnización más alta por despido improcedente podría hacer que a las empresas les salga menos rentable despedir sin motivo y se lo piensen más antes de hacerlo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 136 (2025-09-16)",
+     "locator": "pág. 45",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-136.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que una indemnización reparadora cubra mejor el daño económico y personal que sufren la persona despedida y su familia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 136 (2025-09-16)",
+     "locator": "pág. 45",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-136.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Si no se fijan criterios de cálculo ni topes mínimos y máximos, la indemnización podría ser difícil de sostener para pymes y autónomos con personas empleadas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 136 (2025-09-16)",
+     "locator": "pág. 46",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-136.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Si la indemnización dependiera de circunstancias como la edad, las cargas familiares o el tamaño de la empresa, podría ser menos previsible y alargar los pleitos para cobrar.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 136 (2025-09-16)",
+     "locator": "pág. 50",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-136.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "La incertidumbre sobre el coste de despedir podría frenar la contratación por parte de las empresas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 136 (2025-09-16)",
+     "locator": "pág. 50",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-136.PDF"
+    }
+   ],
+   "gaps": "Proposición no de ley sin memoria oficial de impacto; no concreta cuantías ni criterios de cálculo. Los efectos son argumentos del debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion088/20241219/Votacion056/VOT_20241219162805.json": {
@@ -566,6 +1031,63 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una indemnización más alta podría hacer que despedir deje de ser un gasto barato para las empresas y tenga un efecto disuasorio.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 89 (2024-12-17)",
+     "locator": "pág. 46",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-89.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría reparar mejor el daño a las personas despedidas sin causa justa, en línea con lo que se pidió desde el Consejo de Europa.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 89 (2024-12-17)",
+     "locator": "pág. 42",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-89.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Si la indemnización tuviera en cuenta edad, situación familiar o antigüedad, podría resultar más justa para cada persona trabajadora.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 89 (2024-12-17)",
+     "locator": "pág. 44",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-89.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría alterar el equilibrio del mercado laboral y encarecer los despidos por encima de lo habitual en la mayoría de países de la UE si no se revisan otras variables.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 89 (2024-12-17)",
+     "locator": "pág. 41",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-89.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Con indemnizaciones más variables o altas, las empresas podrían pensárselo dos veces también a la hora de contratar.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 89 (2024-12-17)",
+     "locator": "pág. 44",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-89.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría introducir más rigidez en las relaciones laborales y dificultar el acceso al empleo, sobre todo de personas en circunstancias desfavorables.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 89 (2024-12-17)",
+     "locator": "pág. 49",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-89.PDF"
+    }
+   ],
+   "gaps": "La votación pide al Gobierno actuar; no concreta importes ni fórmula. Sin memoria de impacto: los efectos son argumentos del debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion058/20240911/Votacion010/VOT_20240911151654.json": {
@@ -602,6 +1124,63 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Trabajar menos horas sin bajar el sueldo podría mejorar la salud, facilitar la conciliación familiar y la calidad de vida de las personas trabajadoras.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 61 (2024-09-11)",
+     "locator": "pág. 77",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-61.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Repartir el trabajo en menos horas podría favorecer la productividad y crear más puestos de trabajo, al hacer falta más contrataciones.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 61 (2024-09-11)",
+     "locator": "pág. 77",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-61.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Tener más tiempo libre podría permitir descansar, atender a la familia, estudiar y participar más en la vida política, sobre todo en los sectores más precarizados.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 61 (2024-09-11)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-61.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los pequeños negocios podrían tener dificultades para asumir la reducción de jornada y los costes de más contrataciones si no cuentan con ayudas públicas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 61 (2024-09-11)",
+     "locator": "pág. 78",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-61.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una norma igual para todos podría no ajustarse a las diferencias entre sectores y acabar perjudicando a los trabajadores; se defiende ajustar la jornada vía negociación colectiva.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 61 (2024-09-11)",
+     "locator": "pág. 82",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-61.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "En actividades con turnos nocturnos o rotatorios, como panaderías, taxis o servicios sanitarios, podría ser difícil limitar horarios sin más concreción.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 61 (2024-09-11)",
+     "locator": "pág. 78",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-61.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; los efectos son argumentos del debate. No se concreta cuántas horas se reducirían ni cómo se repartirían los costes.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion043/20240530/Votacion021/VOT_20240530120016.json": {
@@ -632,6 +1211,55 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Dar a las dos partes de cada convenio la misma información económica completa podría hacer la negociación colectiva más eficiente y justa.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 43 (2024-05-28)",
+     "locator": "pág. 39",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-43.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Información desagregada por tamaño de empresa podría mejorar la representación de microempresas y pymes y el poder adquisitivo de los salarios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 43 (2024-05-28)",
+     "locator": "pág. 39",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-43.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Reunir datos económicos sensibles de empresas sin garantías suficientes podría aumentar el riesgo de filtraciones o de uso indebido.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 43 (2024-05-28)",
+     "locator": "pág. 47",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-43.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Coordinar varios organismos podría generar duplicidades y demoras, y un coste elevado de puesta en marcha y de mantenimiento.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 43 (2024-05-28)",
+     "locator": "pág. 47",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-43.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Si el sistema se aplica mal, podría suponer un cambio de modelo que pusiera en riesgo la autonomía de las partes en el diálogo social.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 43 (2024-05-28)",
+     "locator": "pág. 41",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-43.PDF"
+    }
+   ],
+   "gaps": "Proposición sin memoria oficial de impacto; los efectos son argumentos del debate.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion023/20240222/Votacion002/VOT_20240222110733.json": {
@@ -668,6 +1296,55 @@
     "note": "Jornada y convenios ya miden el colectivo",
     "by": "claude-sonnet-5-5 (revisión de escalas genéricas)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Trabajar menos horas podría dar a las personas más tiempo libre para vivir y mejorar su calidad de vida.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 23 (2024-02-20)",
+     "locator": "pág. 46",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-23-C1.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "El aumento de la productividad podría permitir reducir la jornada sin perder remuneración.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 23 (2024-02-20)",
+     "locator": "pág. 48",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-23-C1.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Con los márgenes empresariales altos, las empresas podrían asumir una jornada máxima menor sin bajar los salarios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 23 (2024-02-20)",
+     "locator": "pág. 54",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-23-C1.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Para pymes y autónomos con pocos empleados podría ser difícil asumir una jornada menor, y algunas tendrían que prestar servicio durante menos tiempo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 23 (2024-02-20)",
+     "locator": "pág. 48",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-23-C1.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Mantener el salario con menos horas podría encarecer el coste por hora para las empresas y poner en peligro puestos de trabajo en las pymes.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 23 (2024-02-20)",
+     "locator": "pág. 59",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-23-C1.PDF"
+    }
+   ],
+   "gaps": "PNL que solo pide abrir un diálogo social, sin memoria oficial de impacto; el debate no cuantifica efectos sobre empleo, costes ni pymes.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion025/VOT_20260326165058.json": {
@@ -698,6 +1375,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion159/20260212/Votacion016/VOT_20260212114333.json": {
@@ -722,6 +1405,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion070/20241023/Votacion025/VOT_20241023184406.json": {
@@ -773,6 +1462,39 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Facilitar la actividad de las empresas y abaratar su coste laboral podría animar a contratar, ya que se las presenta como principales generadoras de empleo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 49 (2024-06-18)",
+     "locator": "pág. 60",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-49.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Incentivar la contratación indefinida podría reducir los contratos que dejan a la persona varios meses al año sin trabajo y dependiente de ayudas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 49 (2024-06-18)",
+     "locator": "pág. 56",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-49.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Bonificaciones y exoneraciones de cuotas a la Seguridad Social presentadas sin memoria económica podrían tener un coste que no se conoce.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 49 (2024-06-18)",
+     "locator": "pág. 57",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-49.PDF"
+    }
+   ],
+   "gaps": "Sin memoria económica en la moción; no se cuantifican ni el empleo que se crearía ni la pérdida de cotizaciones.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion049/20240620/Votacion018/VOT_20240620132740.json": {
@@ -798,6 +1520,31 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Más inspección y límites a la subcontratación podrían reducir la sobreexplotación laboral y los salarios bajos que se asocian al turismo de masas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 49 (2024-06-18)",
+     "locator": "pág. 63",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-49.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Restringir y prohibir actividad turística podría reducir empleo e ingresos en un sector que se señaló como gran motor del PIB y del empleo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 49 (2024-06-18)",
+     "locator": "pág. 72",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-49.PDF"
+    }
+   ],
+   "gaps": "Moción sin memoria oficial de impacto; las cifras de peso del turismo y los efectos sobre vivienda y empleo son afirmaciones del debate, no estimaciones contrastadas.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion198/20260916/Votacion053/VOT_20260916195503.json": {
@@ -829,6 +1576,47 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Que la ley fije la financiación estatal del 50 % del gasto certificado podría dar más recursos a las comunidades autónomas y reducir las listas de espera de dependencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 116",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Eliminar incompatibilidades entre prestaciones y reconocer automáticamente la discapacidad a quien ya tiene dependencia podría evitar trámites duplicados y agilizar los procedimientos.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 198 (2026-07-14)",
+     "locator": "pág. 74",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-198.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Los derechos reconocidos podrían quedarse en el papel si la financiación no llega, si no llega a tiempo o si dependen del lugar de residencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 111",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Sin más dinero y competencias, la dependencia podría seguir con esperas de entre diez meses y un año desde el diagnóstico hasta recibir la prestación.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 205 (2026-09-16)",
+     "locator": "pág. 121",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley sin memoria de impacto en este material; los efectos son argumentos del debate y no se cuantifican su coste ni el calendario de aplicación.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion050/VOT_20251008195317.json": {
@@ -854,6 +1642,55 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que un servicio de tren de proximidad dónde hoy no hay cercanías ayude a compensar el déficit histórico de inversión ferroviaria en la movilidad diaria y urbana.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 30",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Podría evitar que se supriman paradas de autobús interurbano del mapa de concesiones: las comunidades podrían asumir algunas y el Estado mantendría las demás.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 141 (2025-10-08)",
+     "locator": "pág. 93",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-141.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un mínimo de aportación estatal a los costes de explotación del transporte público podría dar más estabilidad a los servicios y permitir planificar a largo plazo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 37",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Podría quedarse corta si buena parte de lo previsto depende de un desarrollo reglamentario y presupuestario posterior que no se haga con ambición.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 33",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una ley estatal con visión centralista podría invadir competencias autonómicas y añadir complejidad a la coordinación entre los distintos niveles de decisión.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 151 (2025-11-13)",
+     "locator": "pág. 34",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-151.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley: los efectos son argumentos del debate en el Pleno; no se ha contrastado aquí con la memoria oficial de impacto.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -891,6 +1728,31 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Se espera que regular los drones y simplificar trámites dé más seguridad jurídica y agilice autorizaciones en actividades de menor riesgo, como vuelos médicos o de emergencia.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 113 (2025-05-08)",
+     "locator": "pág. 10",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-113.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Obligar a repostar un porcentaje creciente de combustible sostenible, con multa automática si no se cumple, podría suponer una carga añadida para un sector ya tensionado.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 113 (2025-05-08)",
+     "locator": "pág. 13",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-113.PDF"
+    }
+   ],
+   "gaps": "Los efectos son argumentos del debate; no se cuantifica el coste de las deducciones ni del plan, ni el impacto de la cuota de combustible sostenible sobre los precios.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion056/20240723/Votacion005/VOT_20240723221630.json": {
@@ -921,6 +1783,55 @@
     "verdict": "written",
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Un régimen jurídico básico y común podría armonizar las funciones de los agentes forestales, sea cual sea la administración de la que dependan, y darles más seguridad jurídica.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 43",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Reforzar la formación, los medios y la prevención de riesgos laborales podría mejorar la protección de los agentes frente a la peligrosidad y penosidad de su trabajo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 42",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Una ley básica estatal tan detallada podría invadir competencias de las comunidades autónomas sobre el régimen de sus propios funcionarios.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 52",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "El texto podría generar inseguridad jurídica a los propios agentes y posibles enfrentamientos con otros funcionarios que ejercen funciones parecidas.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 53",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Dar un año para fijar directrices de riesgos laborales específicos podría alargar la espera de una protección que los agentes ya reclaman frente a accidentes graves.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 51",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    }
+   ],
+   "gaps": "Proyecto de ley con memoria del Gobierno que no se aporta aquí; los efectos recogidos son argumentos del debate, sin estimación de impacto ni coste.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -953,6 +1864,55 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una ley básica podría dar a los bomberos forestales reconocimiento legal y seguridad jurídica en sus funciones, que hasta ahora figuraban solo como ocupación estadística.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 63",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Homogeneizar el colectivo y aplicar coeficientes reductores de la edad de jubilación podría mejorar sus condiciones laborales en todo el país.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 57",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Mejores condiciones de trabajo podrían reducir la rotación y el agotamiento del personal y mejorar la eficacia del servicio público de extinción.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 62",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Las excepciones previstas para Navarra y el País Vasco podrían mantener desigualdades de derechos laborales según la comunidad autónoma en la que trabaje cada bombero forestal.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 58",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Aprobarla sin contar con comunidades, ayuntamientos y órganos consultivos podría dificultar su aplicación, pues son quienes en buena parte tendrán que aplicarla.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 60",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    }
+   ],
+   "gaps": "Las votaciones son de enmiendas; los argumentos del debate valoran la ley en su conjunto. No se aportan estimaciones de coste ni de plazos de aplicación.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion159/20260212/Votacion018/VOT_20260212114336.json": {
@@ -977,6 +1937,12 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_review": {
+    "verdict": "none",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion056/20240723/Votacion035/VOT_20240723221705.json": {
@@ -996,6 +1962,55 @@
     "verdict": "none",
     "note": "Bloque «resto de las enmiendas» sin texto individual extraído; no se puede atribuir un efecto concreto a cada una.",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una ley básica podría dar a los bomberos forestales reconocimiento legal y seguridad jurídica en sus funciones, que hasta ahora figuraban solo como ocupación estadística.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 63",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Homogeneizar el colectivo y aplicar coeficientes reductores de la edad de jubilación podría mejorar sus condiciones laborales en todo el país.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 57",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Mejores condiciones de trabajo podrían reducir la rotación y el agotamiento del personal y mejorar la eficacia del servicio público de extinción.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 62",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Las excepciones previstas para Navarra y el País Vasco podrían mantener desigualdades de derechos laborales según la comunidad autónoma en la que trabaje cada bombero forestal.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 58",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Aprobarla sin contar con comunidades, ayuntamientos y órganos consultivos podría dificultar su aplicación, pues son quienes en buena parte tendrán que aplicarla.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 60",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    }
+   ],
+   "gaps": "Las votaciones son de enmiendas; los argumentos del debate valoran la ley en su conjunto. No se aportan estimaciones de coste ni de plazos de aplicación.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1028,6 +2043,55 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una ley básica podría dar a los bomberos forestales reconocimiento legal y seguridad jurídica en sus funciones, que hasta ahora figuraban solo como ocupación estadística.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 63",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Homogeneizar el colectivo y aplicar coeficientes reductores de la edad de jubilación podría mejorar sus condiciones laborales en todo el país.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 57",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Mejores condiciones de trabajo podrían reducir la rotación y el agotamiento del personal y mejorar la eficacia del servicio público de extinción.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 62",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Las excepciones previstas para Navarra y el País Vasco podrían mantener desigualdades de derechos laborales según la comunidad autónoma en la que trabaje cada bombero forestal.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 58",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Aprobarla sin contar con comunidades, ayuntamientos y órganos consultivos podría dificultar su aplicación, pues son quienes en buena parte tendrán que aplicarla.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 60",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    }
+   ],
+   "gaps": "Las votaciones son de enmiendas; los argumentos del debate valoran la ley en su conjunto. No se aportan estimaciones de coste ni de plazos de aplicación.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion056/20240723/Votacion039/VOT_20240723221709.json": {
@@ -1047,6 +2111,55 @@
     "verdict": "none",
     "note": "Bloque «resto de las enmiendas» sin texto individual extraído; no se puede atribuir un efecto concreto a cada una.",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
+    "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una ley básica podría dar a los bomberos forestales reconocimiento legal y seguridad jurídica en sus funciones, que hasta ahora figuraban solo como ocupación estadística.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 63",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Homogeneizar el colectivo y aplicar coeficientes reductores de la edad de jubilación podría mejorar sus condiciones laborales en todo el país.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 57",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Mejores condiciones de trabajo podrían reducir la rotación y el agotamiento del personal y mejorar la eficacia del servicio público de extinción.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 62",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Las excepciones previstas para Navarra y el País Vasco podrían mantener desigualdades de derechos laborales según la comunidad autónoma en la que trabaje cada bombero forestal.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 58",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Aprobarla sin contar con comunidades, ayuntamientos y órganos consultivos podría dificultar su aplicación, pues son quienes en buena parte tendrán que aplicarla.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 60",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    }
+   ],
+   "gaps": "Las votaciones son de enmiendas; los argumentos del debate valoran la ley en su conjunto. No se aportan estimaciones de coste ni de plazos de aplicación.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
     "at": "2026-10-13"
    }
   },
@@ -1079,6 +2192,55 @@
     "note": "",
     "by": "claude-sonnet-5-5 (efectos directos desde el texto oficial)",
     "at": "2026-10-13"
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Una ley básica podría dar a los bomberos forestales reconocimiento legal y seguridad jurídica en sus funciones, que hasta ahora figuraban solo como ocupación estadística.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 63",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Homogeneizar el colectivo y aplicar coeficientes reductores de la edad de jubilación podría mejorar sus condiciones laborales en todo el país.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 57",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "beneficio_esperado",
+     "text": "Mejores condiciones de trabajo podrían reducir la rotación y el agotamiento del personal y mejorar la eficacia del servicio público de extinción.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 62",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Las excepciones previstas para Navarra y el País Vasco podrían mantener desigualdades de derechos laborales según la comunidad autónoma en la que trabaje cada bombero forestal.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 58",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Aprobarla sin contar con comunidades, ayuntamientos y órganos consultivos podría dificultar su aplicación, pues son quienes en buena parte tendrán que aplicarla.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 58 (2024-07-23)",
+     "locator": "pág. 60",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-58.PDF"
+    }
+   ],
+   "gaps": "Las votaciones son de enmiendas; los argumentos del debate valoran la ley en su conjunto. No se aportan estimaciones de coste ni de plazos de aplicación.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion049/20240620/Votacion012/VOT_20240620132735.json": {
@@ -1099,6 +2261,31 @@
     "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
     "drafted_at": "2026-10-13",
     "human_reviewed": false
+   },
+   "indirect_effects": [
+    {
+     "kind": "beneficio_esperado",
+     "text": "Facilitar la actividad de las empresas y abaratar su coste laboral podría animar a contratar, ya que se las presenta como principales generadoras de empleo.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 49 (2024-06-18)",
+     "locator": "pág. 60",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-49.PDF"
+    },
+    {
+     "kind": "riesgo_senalado",
+     "text": "Bonificaciones y exoneraciones de cuotas a la Seguridad Social presentadas sin memoria económica podrían tener un coste que no se conoce.",
+     "evidence": "debate",
+     "source": "Debate en el Pleno, Diario de Sesiones núm. 49 (2024-06-18)",
+     "locator": "pág. 57",
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-49.PDF"
+    }
+   ],
+   "gaps": "Sin memoria económica en la moción; no se cuantifican ni el empleo que se crearía ni la pérdida de cotizaciones.",
+   "indirect_review": {
+    "verdict": "written",
+    "note": "",
+    "by": "sonnet-5.5-debate-pass",
+    "at": "2026-10-13"
    }
   }
  }
