@@ -38,7 +38,9 @@ jobs:
       CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
       R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
       R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
-      LIVE_ETL_PUBLISH_REQUESTED: ${{ github.event_name == 'schedule' || github.event.inputs.publish == 'true' }}
+      # Nightly runs only validate the site build: deploys are built locally after each push (AGENTS.md),
+      # so a scheduled publish would just redeploy main and hold the R2 lock. Dispatch with publish=true to deploy.
+      LIVE_ETL_PUBLISH_REQUESTED: ${{ github.event.inputs.publish == 'true' }}
       SITE_ONLY_RELEASE: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.release_scope == 'site' }}
       ACCOUNTABILITY_MIN_ENTRIES: "0"
       ACCOUNTABILITY_MIN_ACTORS: "0"
