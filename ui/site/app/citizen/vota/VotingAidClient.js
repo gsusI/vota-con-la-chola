@@ -586,12 +586,12 @@ function SourceLink({ href, children }) {
 }
 
 /**
- * «Ramificaciones»: who a vote affects and how many they are (official figures), and, folded, what changes
- * for each group and the knock-on effects someone expects or fears, each with its source. Shown before
+ * «Ramificaciones»: who a vote affects and how many they are (official figures), and, open by default (as
+ * important as who it affects), what changes for each group and the knock-on effects someone expects or fears, each with its source. Shown before
  * answering, so it never names who argued what: the Diario de Sesiones link says it.
  */
 function Ramifications({ question }) {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const needImpacts = useContext(NeedImpactsContext);
   useEffect(() => needImpacts(question), [needImpacts, question.statement_id]);
   const r = question.ramifications;
