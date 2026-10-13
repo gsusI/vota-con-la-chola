@@ -29,6 +29,9 @@ El validador es `scripts/export_voting_aid_vote_impacts.py` (test `tests/test_ex
 3. Incluye siempre al colectivo que sale peor parado, no solo al que la norma quiere proteger.
 
 ## Capa 3 — `indirect_effects`: efectos de segundo orden
+> **Cerrada (2026-10-13):** no se publica ni se redacta más. Dos revisiones por muestra fallaron (4/20 y 2/10 votaciones);
+> ver `docs/etl/sprints/VOTING-AID-20261011/evidence/impacts-review-20261013.json`. Lo ya redactado queda en las semillas.
+
 1. Máx. 6. Cada uno es `beneficio_esperado` o `riesgo_senalado`. **Si hay alguno, tiene que haber de los dos tipos**: si solo
    encuentras argumentos de un lado, no publiques esta capa.
 2. Cada efecto lleva su evidencia, por este orden de preferencia:

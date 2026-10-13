@@ -167,6 +167,10 @@ Mandatory loop for any large subagent job (do not launch a full wave blind):
    Batch items that share a source in the same agent (cache + context reuse; ~5 items per agent).
 5. **Verify outputs mechanically** (validator/apply script), never by trusting reports; collect reject/unverifiable
    for a person. Reviewer outputs are one file per item (e.g. `kit apply-reviews <dir>` stamps `review` on facts).
+6. **Review a random sample for quality before publishing** (a validator only proves shape): ~10–20 items checked
+   against the source by one reviewer agent, with a decision rule fixed in advance. The voting-aid indirect effects
+   passed every validator but failed this (4/20, then 2/10 on the narrowed scope) and were closed unpublished after
+   ~65 M tokens; a 10-item quality pilot right after the drafting pilot would have caught it.
 Reference costs (2026-10-13): drafting old prompt ~0.7 M input tokens per vote; efficient mode ~0.15–0.4 M;
 derived-figure review: pilot 0.7 M per figure → 0.35 M after the first fixes → 0.15–0.25 M
 once the kit fetched+computed in one python call (outliers were TLS-broken hosts and xlsx sources, then added to the kit);
