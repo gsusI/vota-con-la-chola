@@ -261,7 +261,8 @@ def sync(
     with ThreadPoolExecutor(max_workers=workers) as pool:
         list(pool.map(upload, to_upload))
 
-    after = list_remote(client, bucket, SITE_PREFIX)
+    # Nothing uploaded: the listing above already proved parity (re-listing 35k keys costs ~40 s).
+    after = list_remote(client, bucket, SITE_PREFIX) if to_upload else remote
     mismatched = sorted(key for key, f in wanted.items() if after.get(key) != f.md5)
     if mismatched:
         missing = sum(1 for key in mismatched if key not in after)

@@ -75,6 +75,13 @@ jobs:
       - name: Install site dependencies
         run: npm ci --no-audit --no-fund --prefix ui/site
 
+      - name: Restore Next build cache
+        uses: actions/cache@v4
+        with:
+          path: ui/site/.next/cache
+          key: next-${{ hashFiles('ui/site/package-lock.json') }}-${{ github.sha }}
+          restore-keys: next-${{ hashFiles('ui/site/package-lock.json') }}-
+
       - name: Restore verification cache
         # The immutable PLACSP launch release is verified once per release (see just placsp-launch-verify).
         uses: actions/cache@v4
