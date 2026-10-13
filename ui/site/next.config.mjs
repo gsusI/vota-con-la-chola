@@ -1,5 +1,6 @@
 import { readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
+import { availableParallelism } from "node:os";
 
 function normalizeBasePath(value) {
   const raw = String(value ?? "").trim();
@@ -11,18 +12,18 @@ function normalizeBasePath(value) {
 }
 
 const basePath = normalizeBasePath(process.env.NEXT_PUBLIC_BASE_PATH ?? "");
-const buildCpus = Number.parseInt(process.env.NEXT_BUILD_CPUS ?? "2", 10);
+// Page rendering scales with workers (1.5k pages: ~29 s on 2, ~9 s on 8); CI pins NEXT_BUILD_CPUS.
+const defaultBuildCpus = Math.min(8, Math.max(2, availableParallelism() - 2));
+const buildCpus = Number.parseInt(process.env.NEXT_BUILD_CPUS ?? String(defaultBuildCpus), 10);
 const safeBuildCpus = Number.isFinite(buildCpus) && buildCpus > 0 ? buildCpus : 2;
 
 // The build id is embedded in ~15k of the ~16k published files, so it must not change with app code:
 // a source-derived id made every one-line edit re-upload ~15k files (~4 min of wrangler upload).
-// It changes only with the framework (lockfile, this config), where client/server skew matters;
+// It changes only with the framework (the lockfile), where client/server skew matters;
 // app edits change just the HTML that references the new webpack runtime (~1.7k files).
 function frameworkBuildId() {
   const hash = createHash("sha256");
-  for (const file of ["package-lock.json", "next.config.mjs"]) {
-    hash.update(readFileSync(new URL(file, import.meta.url)));
-  }
+  hash.update(readFileSync(new URL("package-lock.json", import.meta.url)));
   hash.update(basePath);
   return `site-${hash.digest("hex").slice(0, 20)}`;
 }
