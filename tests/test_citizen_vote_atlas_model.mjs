@@ -90,3 +90,25 @@ test("people helpers", () => {
   assert.equal(Math.round(rows[0].gap * 100), 135);
   assert.deepEqual(readHash(writeHash({ p: "p1", eje: "" })), { p: "p1" });
 });
+
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { CURRENT_VERSION, VOTING_AID_VERSIONS, otherVersions } from "../ui/site/app/citizen/vota/votingAidVersions.mjs";
+
+test("every voting-aid version stays published with its own path, data and storage", () => {
+  const here = path.dirname(fileURLToPath(import.meta.url));
+  assert.equal(VOTING_AID_VERSIONS.filter((v) => v.current).length, 1);
+  assert.equal(CURRENT_VERSION.path, "/citizen/vota/");
+  for (const key of ["id", "path", "snapshot", "storageKey"]) {
+    assert.equal(new Set(VOTING_AID_VERSIONS.map((v) => v[key])).size, VOTING_AID_VERSIONS.length, `${key} único por versión`);
+  }
+  for (const v of VOTING_AID_VERSIONS) {
+    const file = path.join(here, "..", "ui", "site", "public", ...v.snapshot.split("/"));
+    assert.ok(fs.existsSync(file), `falta ${v.snapshot}`);
+    if (!v.current) assert.ok(fs.existsSync(path.join(here, "..", "ui", "site", "app", ...v.path.split("/").filter(Boolean), "page.js")), `falta la página ${v.path}`);
+  }
+  // The first version keeps the key its users already have answers under.
+  assert.equal(VOTING_AID_VERSIONS.find((v) => v.id === "v1").storageKey, "vclc.votingAid.generales.v1");
+  assert.deepEqual(otherVersions("v2").map((v) => v.id), ["v1"]);
+});

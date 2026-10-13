@@ -8412,3 +8412,17 @@ body:has(.responsibility-article) > .breadcrumbs {
 .votingAidSplit--prominent .votingAidButton {
   justify-self: start;
 }
+
+.votingAidVersion {
+  margin: 8px 0 12px;
+  font-size: 0.88rem;
+}
+
+.votingAidVersionCompare {
+  margin-top: 16px;
+}
+
+.votingAidVersionCompare h2 {
+  margin-top: 0;
+  font-size: 1.15rem;
+}

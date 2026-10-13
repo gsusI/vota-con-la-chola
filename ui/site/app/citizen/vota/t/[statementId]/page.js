@@ -1,5 +1,5 @@
 import VotingAidClient from "../../VotingAidClient";
-import { SITE_ORIGIN, hookImagePath, hookPagePath, hookStatements, loadVotingAidSnapshot, statementHook } from "../../votingAidHooks.mjs";
+import { SITE_ORIGIN, hookImagePath, hookPagePath, hookStatements, loadVotingAidSnapshot, statementHook, statementVersion } from "../../votingAidHooks.mjs";
 
 // One shareable page per curated statement: same game, opened on that question, with its own OG card.
 export const dynamicParams = false;
@@ -27,5 +27,7 @@ export async function generateMetadata({ params }) {
 
 export default async function VotingAidHookPage({ params }) {
   const { statementId } = await params;
-  return <VotingAidClient snapshot={loadVotingAidSnapshot()} startStatementId={statementId} />;
+  // Statements of earlier versions open in that version, so old shared links still work.
+  const version = statementVersion(statementId);
+  return <VotingAidClient snapshot={loadVotingAidSnapshot(version.id)} startStatementId={statementId} versionId={version.id} />;
 }

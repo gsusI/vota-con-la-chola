@@ -8,7 +8,6 @@ import {
   MIN_ANSWERS_FOR_RANKING,
   POOL_ANSWER_LABELS,
   POSITION_LABELS,
-  STORAGE_KEY,
   agreementKind,
   aiLinks,
   attachHighlights,
@@ -30,6 +29,7 @@ import {
   scorePercent,
   shareCodeFromHash,
 } from "./votingAidModel.mjs";
+import { formatReleased, otherVersions, versionById } from "./votingAidVersions.mjs";
 
 const ANSWER_ORDER = ["agree", "neutral", "disagree"];
 const EMPTY_STATE = { answers: {}, important: {}, skipped: {}, split: {}, history: [], seed: 0, streak: 0, bestStreak: 0, showReveal: true, excludeOmnibus: false };
@@ -59,18 +59,43 @@ function cleanState(raw) {
   return out;
 }
 
-function readStoredState() {
+// Each test version keeps its own answers (see votingAidVersions.mjs).
+function readStoredRaw(key) {
   try {
-    const raw = window.localStorage.getItem(STORAGE_KEY);
-    return cleanState(raw ? JSON.parse(raw) : null);
+    const raw = window.localStorage.getItem(key);
+    return raw ? JSON.parse(raw) : null;
   } catch {
-    return cleanState(null);
+    return null;
   }
 }
 
-function writeStoredState(state) {
+function readStoredState(key) {
+  return cleanState(readStoredRaw(key));
+}
+
+/**
+ * First visit to a new version: start from the answers of the version it replaces, but only for questions both
+ * share (the endless-mode votes). The old version's own storage is never touched.
+ */
+function initialState(version, questionIds) {
+  const own = readStoredRaw(version.storageKey);
+  if (own || !version.seedFrom) return cleanState(own);
+  const prev = cleanState(readStoredRaw(versionById(version.seedFrom).storageKey));
+  const out = cleanState(null);
+  for (const [id, v] of Object.entries(prev.answers)) {
+    if (!questionIds.has(id)) continue;
+    out.answers[id] = v;
+    if (prev.important[id]) out.important[id] = true;
+  }
+  out.history = prev.history.filter((id) => out.answers[id]);
+  out.bestStreak = prev.bestStreak;
+  out.showReveal = prev.showReveal;
+  return out;
+}
+
+function writeStoredState(key, state) {
   try {
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    window.localStorage.setItem(key, JSON.stringify(state));
   } catch {
     // Private mode or blocked storage: answers simply are not remembered.
   }
@@ -609,6 +634,77 @@ function useSwipe(onSwipe, resetKey) {
     },
   };
   return { dx, handlers };
+}
+
+/** Which version of the test this is, with links to the others (they all stay online). */
+function VersionBanner({ version }) {
+  const others = otherVersions(version.id);
+  if (!others.length) return null;
+  if (version.current) {
+    return (
+      <p className="votingAidVersion votingAidMuted">
+        Versión actual del test ({formatReleased(version.released)}). ¿Hiciste una anterior? Tus respuestas siguen ahí:{" "}
+        {others.map((v, i) => (
+          <span key={v.id}>
+            {i ? " · " : ""}
+            <a href={withBasePath(v.path)}>
+              {v.label} ({formatReleased(v.released)})
+            </a>
+          </span>
+        ))}
+        .
+      </p>
+    );
+  }
+  const current = others.find((v) => v.current) || others[0];
+  return (
+    <p className="votingAidNotice votingAidNotice--info votingAidVersion" role="note">
+      <strong>Versión anterior del test</strong> ({version.label}, {formatReleased(version.released)}): {version.summary}. Se mantiene para
+      que puedas revisar tus respuestas y compararlas. <a href={withBasePath(current.path)}>Ir a la versión actual</a> ({current.summary}).
+    </p>
+  );
+}
+
+/** Your top parties in the other versions of the test, computed from the answers saved for each one. */
+function OtherVersionResults({ version, pool }) {
+  const [rows, setRows] = useState([]);
+  useEffect(() => {
+    let cancelled = false;
+    const others = otherVersions(version.id).filter((v) => Object.keys(readStoredState(v.storageKey).answers).length);
+    Promise.all(
+      others.map((v) =>
+        fetch(withBasePath(`/${v.snapshot}`))
+          .then((r) => (r.ok ? r.json() : null))
+          .then((snap) => {
+            if (!snap) return null;
+            const qs = buildQuestions(snap, pool);
+            const ids = new Set(qs.map((q) => q.statement_id));
+            const st = readStoredState(v.storageKey);
+            const answered = Object.keys(st.answers).filter((id) => ids.has(id)).length;
+            const top = scoreParties({ parties: snap.parties || [], statements: qs }, st.answers, st.important).filter((r) => r.match !== null).slice(0, 3);
+            return answered ? { version: v, answered, top } : null;
+          })
+          .catch(() => null),
+      ),
+    ).then((list) => !cancelled && setRows(list.filter(Boolean)));
+    return () => {
+      cancelled = true;
+    };
+  }, [version.id, pool]);
+  if (!rows.length) return null;
+  return (
+    <section className="votingAidCard votingAidVersionCompare">
+      <h2>Compara con {rows.length > 1 ? "las otras versiones" : version.current ? "la versión anterior" : "la versión actual"}</h2>
+      {rows.map((r) => (
+        <p key={r.version.id}>
+          <a href={withBasePath(r.version.path)}>
+            {r.version.label} ({formatReleased(r.version.released)})
+          </a>
+          : {r.answered} respuestas. Tu podio allí: {r.top.map((t, i) => `${i + 1}. ${t.label} ${formatMatch(t.match)}`).join(" · ") || "—"}.
+        </p>
+      ))}
+    </section>
+  );
 }
 
 function SplitOffer({ question, onSplit, prominent = false }) {
@@ -1221,7 +1317,9 @@ function ReviewView({ questions, state, onAnswer, onOpen }) {
 // ---------------------------------------------------------------------------
 // Page
 
-export default function VotingAidClient({ snapshot, startStatementId = null }) {
+export default function VotingAidClient({ snapshot, startStatementId = null, versionId = null }) {
+  const version = versionById(versionId);
+  const [staleShare, setStaleShare] = useState(false);
   const parties = useMemo(() => (Array.isArray(snapshot?.parties) ? snapshot.parties : []), [snapshot]);
   const meta = snapshot?.meta || {};
   const [pool, setPool] = useState(null);
@@ -1307,13 +1405,16 @@ export default function VotingAidClient({ snapshot, startStatementId = null }) {
   useEffect(() => {
     if (poolStatus === "loading") return undefined;
     function load(initial) {
-      const shared = decodeAnyShareCode(questions, shareCodeFromHash(window.location.hash));
+      const code = shareCodeFromHash(window.location.hash);
+      const shared = decodeAnyShareCode(questions, code);
+      // A share link made with another version of the test: offer to open it there.
+      setStaleShare(Boolean(code && !shared));
       if (shared) {
         setState({ ...cleanState(null), answers: shared.answers, important: shared.important, history: Object.keys(shared.answers) });
         setFromShare(true);
         setView("results");
       } else if (initial) {
-        const stored = readStoredState();
+        const stored = initialState(version, new Set(questions.map((q) => q.statement_id)));
         if (!stored.seed) stored.seed = newSeed();
         setState(stored);
         if (startStatementId && !startedAt.current && questions.some((q) => q.statement_id === startStatementId)) {
@@ -1328,11 +1429,11 @@ export default function VotingAidClient({ snapshot, startStatementId = null }) {
     load(true);
     window.addEventListener("hashchange", onHashChange);
     return () => window.removeEventListener("hashchange", onHashChange);
-  }, [poolStatus, questions, startStatementId]);
+  }, [poolStatus, questions, startStatementId, version]);
 
   useEffect(() => {
-    if (loaded && !fromShare) writeStoredState(state);
-  }, [state, loaded, fromShare]);
+    if (loaded && !fromShare) writeStoredState(version.storageKey, state);
+  }, [state, loaded, fromShare, version.storageKey]);
 
   useEffect(() => () => clearTimeout(toastTimer.current), []);
 
@@ -1492,7 +1593,7 @@ export default function VotingAidClient({ snapshot, startStatementId = null }) {
   function ownAnswers() {
     window.history.replaceState(null, "", window.location.pathname);
     setFromShare(false);
-    const stored = readStoredState();
+    const stored = readStoredState(version.storageKey);
     if (!stored.seed) stored.seed = newSeed();
     setState(stored);
     setView("intro");
@@ -1537,6 +1638,20 @@ export default function VotingAidClient({ snapshot, startStatementId = null }) {
   return (
     <main className="shell staticRoute votingAid" ref={topRef}>
       <Toast toast={toast} />
+      <VersionBanner version={version} />
+      {staleShare ? (
+        <p className="votingAidNotice" role="note">
+          Este enlace compartido es de otra versión del test. Ábrelo en:{" "}
+          {otherVersions(version.id).map((v, i) => (
+            <span key={v.id}>
+              {i ? " · " : ""}
+              <a href={`${withBasePath(v.path)}${typeof window !== "undefined" ? window.location.hash : ""}`}>
+                {v.label} ({formatReleased(v.released)})
+              </a>
+            </span>
+          ))}
+        </p>
+      ) : null}
       {view !== "intro" ? (
         <nav aria-label="Secciones" className="votingAidTabs votingAidTabs--main">
           <button
@@ -1669,6 +1784,7 @@ export default function VotingAidClient({ snapshot, startStatementId = null }) {
           shareMessage={shareMessage}
         />
       ) : null}
+      {view === "results" && !fromShare && pool ? <OtherVersionResults pool={pool} version={version} /> : null}
 
       {view === "party" && partyRow ? (
         <PartyView key={partyRow.partyId} parties={parties} onBack={() => show("results")} onEdit={(id) => goPlay(id)} questionsById={questionsById} row={partyRow} />

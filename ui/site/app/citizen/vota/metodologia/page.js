@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { withBasePath } from "../../../siteCatalog.mjs";
 import { MIN_ANSWERS_FOR_RANKING } from "../votingAidModel.mjs";
+import { VOTING_AID_VERSIONS, formatReleased } from "../votingAidVersions.mjs";
 import {
   ATLAS_QA,
   AXES_SEED,
@@ -130,6 +131,7 @@ export default function VotingAidMethodologyPage() {
           <a href="#paso-7">7. Revisión</a>
           <a href="#paso-8">8. Cálculo</a>
           <a href="#paso-9">9. Privacidad e IA</a>
+          <a href="#versiones">Versiones</a>
           <a href="#modelos">Modelos</a>
           <a href="#prompts">Prompts</a>
           <a href="#fuentes">Fuentes</a>
@@ -457,6 +459,29 @@ export default function VotingAidMethodologyPage() {
           </li>
         </ul>
       </Step>
+
+      <section className="card block" id="versiones">
+        <h2>Versiones del test: todas siguen online</h2>
+        <p>
+          Cuando mejoramos el test no borramos el anterior. La versión nueva es la que se abre por defecto; las anteriores siguen en su
+          propia dirección, con sus mismas preguntas y datos, y con tus respuestas guardadas aparte en tu navegador. Así puedes volver a
+          ver lo que respondiste, revisarlo y comparar tu resultado con el de la versión nueva (la página de resultados lo hace por ti).
+          Al estrenar una versión solo se copian las respuestas a preguntas que ambas comparten (las votaciones del modo infinito).
+        </p>
+        <ul className="vaMethod__list">
+          {VOTING_AID_VERSIONS.map((v) => (
+            <li key={v.id}>
+              <Link href={withBasePath(v.path)}>
+                {v.label} ({formatReleased(v.released)})
+              </Link>
+              {v.current ? " · versión actual" : " · versión anterior"}: {v.summary}. Datos: <code>{v.snapshot}</code>.
+            </li>
+          ))}
+        </ul>
+        <p className="vaMethod__muted">
+          Registro de versiones: <Code rel="ui/site/app/citizen/vota/votingAidVersions.mjs" />.
+        </p>
+      </section>
 
       <section className="card block" id="modelos">
         <h2>Quién hizo qué: personas, modelos y código</h2>

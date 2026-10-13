@@ -107,6 +107,9 @@ This repo is intentionally ultra-lean. When expanding ETL/schema/UI, optimize fo
 - Preserve auditability:
   - every stance shown in the citizen UI must link to a concrete explorer drill-down (SQL/evidence/tema)
   - render `unknown/no_signal` explicitly (never silently impute)
+- Versioned voting-aid tests (`/citizen/vota/`): when the test changes (questions, scoring, data set), publish it as a new version and keep every earlier one online in parallel.
+  - Register it in `ui/site/app/citizen/vota/votingAidVersions.mjs`: the new one is `current` at `/citizen/vota/`; old ones keep their own path, snapshot file and localStorage key, so users can reopen, review and compare their old answers.
+  - Never overwrite an old version's published snapshot; a new version gets a new `voting_aid_generales_vN.json`.
 - Enforce performance budgets:
   - citizen snapshot JSON must remain bounded (target <= `5MB`), validated in `just site-build`
   - prefer pre-aggregation (small grids) over shipping raw evidence blobs to the browser

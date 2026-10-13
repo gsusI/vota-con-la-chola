@@ -10,7 +10,7 @@ export const POSITION_LABELS = {
   no_data: "Sin datos",
 };
 export const ANSWER_LABELS = { agree: "De acuerdo", neutral: "Neutral", disagree: "En desacuerdo" };
-export const STORAGE_KEY = "vclc.votingAid.generales.v1";
+// Answers are stored per test version: see `storageKey` in votingAidVersions.mjs.
 
 const ANSWER_CODES = { agree: "a", neutral: "n", disagree: "d" };
 const CODE_ANSWERS = { a: "agree", n: "neutral", d: "disagree" };
