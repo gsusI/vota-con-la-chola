@@ -3,14 +3,9 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
-// Same breakpoint as the voting-aid layout: below it the panel is a modal drawer from the right.
-const DRAWER_QUERY = "(max-width: 900px)";
 const OPEN_EVENT = "sidepanel:open";
 
-/**
- * Side panel for "see more" content. Desktop: a non-modal sidebar docked on the right; the page shifts left and
- * stays usable. Mobile: a modal drawer from the right over a backdrop. Only one panel is open at a time.
- */
+/** Modal drawer from the right for "see more" content, on desktop and mobile. Only one is open at a time. */
 export default function SidePanel({ open, onClose, title, children }) {
   const ref = useRef(null);
   const titleId = useId();
@@ -22,19 +17,15 @@ export default function SidePanel({ open, onClose, title, children }) {
   useEffect(() => {
     const dialog = ref.current;
     if (!dialog || !open) return undefined;
-    const drawer = window.matchMedia(DRAWER_QUERY).matches;
     window.dispatchEvent(new CustomEvent(OPEN_EVENT, { detail: titleId }));
-    if (!dialog.open) (drawer ? dialog.showModal() : dialog.show());
+    if (!dialog.open) dialog.showModal();
     const root = document.documentElement;
-    root.classList.add(drawer ? "has-sideDrawer" : "has-sidePanel");
+    root.classList.add("has-sideDrawer");
     const onOther = (e) => e.detail !== titleId && closeRef.current();
-    const onKey = (e) => e.key === "Escape" && closeRef.current();
     window.addEventListener(OPEN_EVENT, onOther);
-    if (!drawer) document.addEventListener("keydown", onKey);
     return () => {
-      root.classList.remove("has-sideDrawer", "has-sidePanel");
+      root.classList.remove("has-sideDrawer");
       window.removeEventListener(OPEN_EVENT, onOther);
-      document.removeEventListener("keydown", onKey);
       if (dialog.open) dialog.close();
     };
   }, [open, titleId]);
@@ -47,10 +38,7 @@ export default function SidePanel({ open, onClose, title, children }) {
       onClick={(e) => e.target === e.currentTarget && onClose()}
       onClose={onClose}
       // Keep the question card's swipe-to-answer and shortcut keys out of the panel.
-      onKeyDown={(e) => {
-        e.stopPropagation();
-        if (e.key === "Escape") onClose();
-      }}
+      onKeyDown={(e) => e.stopPropagation()}
       onPointerDown={(e) => e.stopPropagation()}
       ref={ref}
     >

@@ -8427,15 +8427,7 @@ body:has(.responsibility-article) > .breadcrumbs {
   font-size: 1.15rem;
 }
 
-/* Side panel ("ver más"): docked sidebar on desktop, modal drawer from the right on mobile (SidePanel.js). */
-:root {
-  --side-panel-w: min(440px, 38vw);
-}
-
-html.has-sidePanel body {
-  padding-right: var(--side-panel-w);
-}
-
+/* Side panel ("ver más"): modal drawer from the right (SidePanel.js). */
 html.has-sideDrawer {
   overflow: hidden;
 }
@@ -8444,7 +8436,7 @@ html.has-sideDrawer {
   position: fixed;
   inset: 0 0 0 auto;
   z-index: 60;
-  width: var(--side-panel-w);
+  width: min(480px, 92vw);
   max-width: 100%;
   height: 100dvh;
   max-height: 100dvh;
@@ -8528,12 +8520,6 @@ html.has-sideDrawer {
 
 .sidePanel .votingAidVoted__list {
   margin-top: 12px;
-}
-
-@media (max-width: 900px) {
-  .sidePanel {
-    width: min(92vw, 440px);
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
