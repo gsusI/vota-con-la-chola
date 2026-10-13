@@ -1380,15 +1380,14 @@ function revealMessage(answer, reactions, topBefore) {
 
 const fillPct = (f) => `${Math.round(f * 100)}%`;
 
-/** Diverging fill: abstention grey centred on the pill, «for» green to its left, «against» red to its right, all in
-    proportion and scaled so the longer side reaches the edge. */
+/** Diverging fill, same scale on every pill (each half = 100 %): abstention grey centred, «for» green to its left,
+    «against» red to its right, each as wide as its share. */
 function mixStops({ yes, abstain, no }) {
-  const scale = 0.5 / Math.max(yes + abstain / 2, no + abstain / 2);
-  const at = (f) => `${(50 + f * scale * 100).toFixed(1)}%`;
+  const at = (f) => `${(50 + f * 50).toFixed(1)}%`;
   return { "--l": at(-(yes + abstain / 2)), "--a0": at(-abstain / 2), "--a1": at(abstain / 2), "--r": at(no + abstain / 2) };
 }
 
-/** «A medias» pills show how the party voted: green (for) / grey (abstention, centred) / red (against). */
+/** Each party pill shows how it voted: green (for) / grey (abstention, centred) / red (against). */
 function ReactionGroup({ kind, label, parties }) {
   if (!parties.length) return null;
   return (
@@ -1398,7 +1397,7 @@ function ReactionGroup({ kind, label, parties }) {
       </p>
       <ul className="votingAidChips">
         {parties.map((p) => {
-          const mix = kind === "partial" ? p.mix : null;
+          const mix = p.mix;
           const title = [
             scorePercent(p.score) === null ? null : "Porcentaje de su empuje en el sentido de la afirmación",
             mix ? `${fillPct(mix.yes)} a favor · ${fillPct(mix.abstain)} abstención · ${fillPct(mix.no)} en contra` : null,

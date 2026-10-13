@@ -1074,11 +1074,16 @@ a.votingAidButton {
   background: linear-gradient(
     to right,
     #fff 0 var(--l),
-    #bfe5cc var(--l) var(--a0),
-    #dfe1e5 var(--a0) var(--a1),
-    #f4c6bc var(--a1) var(--r),
+    #9fd8b2 var(--l) var(--a0),
+    #d3d6db var(--a0) var(--a1),
+    #efab9d var(--a1) var(--r),
     #fff var(--r) 100%
   );
+}
+
+/* Text on the fills keeps ≥ 5:1 (names ≥ 9:1): --ink-soft is too light here. */
+.votingAidChip--mix .votingAidMuted {
+  color: #3f4650;
 }
 
 .votingAidLinksRow {
