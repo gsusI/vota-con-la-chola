@@ -982,11 +982,32 @@ function SplitOffer({ question, onSplit }) {
 // ---------------------------------------------------------------------------
 // Topic › question breadcrumb: jump to another topic (and stay in it) or to any question of the current one.
 
-function topicLeftLabel(topics, topic, answers) {
+// Key questions and concrete votes are counted apart everywhere, so the topic menu, the question menu and the
+// «Fase 1 · quedan N» line add up. A split key question counts as done (its votes are then counted as votes).
+function topicCounts(ids, questionsById, answers, split) {
+  const counts = { keys: 0, keysDone: 0, votes: 0, votesDone: 0 };
+  for (const id of ids) {
+    const done = answers[id] !== undefined || Boolean(split?.[id]);
+    if (questionsById[id]?.source === "curated") {
+      counts.keys += 1;
+      if (done) counts.keysDone += 1;
+    } else {
+      counts.votes += 1;
+      if (done) counts.votesDone += 1;
+    }
+  }
+  return counts;
+}
+
+function topicLeftLabel(topics, topic, questionsById, answers, split) {
   const group = topics.find((g) => g.topic === topic);
   if (!group) return "";
-  const left = group.ids.filter((id) => answers[id] === undefined).length;
-  return left ? `${left === 1 ? "queda 1" : `quedan ${left}`} sin responder` : "todas respondidas";
+  const c = topicCounts(group.ids, questionsById, answers, split);
+  const parts = [];
+  if (c.keys - c.keysDone) parts.push(`${c.keys - c.keysDone} ${c.keys - c.keysDone === 1 ? "pregunta clave" : "preguntas clave"}`);
+  if (c.votes - c.votesDone) parts.push(`${c.votes - c.votesDone} ${c.votes - c.votesDone === 1 ? "votación" : "votaciones"}`);
+  const left = c.keys - c.keysDone + c.votes - c.votesDone;
+  return left ? `${left === 1 ? "te queda" : "te quedan"} ${parts.join(" y ")}` : "todas respondidas";
 }
 
 /**
@@ -1058,6 +1079,10 @@ function TopicNav({ topics, questionsById, currentId, focusTopic, answers, skipp
   const next = pos >= 0 && pos < ids.length - 1 ? ids[pos + 1] : null;
   const keyIds = ids.filter((id) => questionsById[id]?.source === "curated");
   const voteIds = ids.filter((id) => questionsById[id]?.source !== "curated");
+  // Position inside its own list (key questions or votes), matching the counts of the topic menu.
+  const isKey = questionsById[currentId]?.source === "curated";
+  const section = isKey ? keyIds : voteIds;
+  const sectionPos = section.indexOf(currentId);
 
   function questionItem(id) {
     const q = questionsById[id];
@@ -1105,7 +1130,8 @@ function TopicNav({ topics, questionsById, currentId, focusTopic, answers, skipp
           <span className="votingAidCrumbs__text">Todos los temas, mezclados</span>
         </button>
         {topics.map((g) => {
-          const done = g.ids.filter((id) => answers[id] !== undefined).length;
+          const c = topicCounts(g.ids, questionsById, answers, split);
+          const complete = c.keysDone === c.keys && c.votesDone === c.votes;
           return (
             <button
               aria-current={focusTopic === g.topic ? "true" : undefined}
@@ -1115,11 +1141,20 @@ function TopicNav({ topics, questionsById, currentId, focusTopic, answers, skipp
               type="button"
             >
               <span aria-hidden="true" className="votingAidCrumbs__mark">
-                {done === g.ids.length ? "✓" : "○"}
+                {complete ? "✓" : "○"}
               </span>
               <span className="votingAidCrumbs__text">{g.topic}</span>
-              <span className="votingAidCrumbs__count" title="Respondidas / preguntas del tema">
-                {done}/{g.ids.length}
+              <span className="votingAidCrumbs__count">
+                {c.keys ? (
+                  <span title="Preguntas clave respondidas / del tema">
+                    clave {c.keysDone}/{c.keys}
+                  </span>
+                ) : null}
+                {c.votes ? (
+                  <span title="Votaciones concretas respondidas / del tema">
+                    votos {c.votesDone}/{c.votes}
+                  </span>
+                ) : null}
               </span>
             </button>
           );
@@ -1130,10 +1165,9 @@ function TopicNav({ topics, questionsById, currentId, focusTopic, answers, skipp
       </span>
       <CrumbMenu
         label={
-          pos >= 0 ? (
+          sectionPos >= 0 ? (
             <>
-              <span className="votingAidHideMobile">Pregunta </span>
-              {pos + 1} de {ids.length}
+              {isKey ? "Clave" : "Votación"} {sectionPos + 1} de {section.length}
             </>
           ) : (
             "Preguntas"
@@ -2030,7 +2064,7 @@ export default function VotingAidClient({ snapshot, startStatementId = null, ver
     if (!wasAnswered && current && current.at === count) showToast(current.emoji, `¡Nuevo rango: ${current.title}!`);
     else if (!wasAnswered && streak > 0 && streak % 10 === 0) showToast("🔥", `¡Racha de ${streak} sin saltarte ninguna!`);
     if (!wasAnswered && count === curatedTotal && Object.keys(answers).every((qid) => questionsById[qid]?.source === "curated")) {
-      showToast("🎯", "¡Temas clave completados! Bienvenida/o al modo infinito.");
+      showToast("🎯", "¡Preguntas clave completadas! Bienvenida/o al modo infinito.");
     }
     if (state.showReveal) setRevealId(id);
     else goPlay(null, answers, skipped);
@@ -2235,7 +2269,7 @@ export default function VotingAidClient({ snapshot, startStatementId = null, ver
             <span className="votingAidHud__stats">
               <span title="Respuestas seguidas sin saltar">🔥 {state.streak || 0}</span>
               {curatedLeft ? (
-                <span className="votingAidMuted" title="Temas clave respondidos">
+                <span className="votingAidMuted" title="Preguntas clave respondidas">
                   {curatedTotal - curatedLeft}/{curatedTotal}
                 </span>
               ) : (
@@ -2246,20 +2280,20 @@ export default function VotingAidClient({ snapshot, startStatementId = null, ver
             </span>
           </div>
           <ProgressBar
-            label={curatedLeft ? `Temas clave: ${curatedTotal - curatedLeft} de ${curatedTotal}` : `${answeredCount} de ${questions.length}`}
+            label={curatedLeft ? `Preguntas clave: ${curatedTotal - curatedLeft} de ${curatedTotal}` : `${answeredCount} de ${questions.length}`}
             max={curatedLeft ? curatedTotal : questions.length}
             value={curatedLeft ? curatedTotal - curatedLeft : answeredCount}
           />
           <p className="votingAidMuted votingAidPhase">
             {focusTopic ? (
               <>
-                Solo <strong>{focusTopic}</strong>: {topicLeftLabel(topics, focusTopic, state.answers)}. Al terminarlo, sigues con todos los temas.{" "}
+                Solo <strong>{focusTopic}</strong>: {topicLeftLabel(topics, focusTopic, questionsById, state.answers, state.split)}. Al terminarlo, sigues con todos los temas.{" "}
                 <button className="votingAidLinkButton" onClick={() => chooseTopic(null)} type="button">
                   Mezclar todos los temas
                 </button>
               </>
             ) : curatedLeft
-              ? `Fase 1 · Temas clave (quedan ${curatedLeft}). Después: modo infinito con votaciones reales.`
+              ? `Fase 1 · Preguntas clave: ${curatedTotal - curatedLeft} de ${curatedTotal} (quedan ${curatedLeft}). Después: modo infinito con votaciones reales.`
               : poolStatus === "ready"
                 ? "♾️ Modo infinito · votaciones reales del Congreso. Para cuando quieras."
                 : poolStatus === "error"
