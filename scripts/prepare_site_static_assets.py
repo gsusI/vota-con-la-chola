@@ -19,7 +19,13 @@ from publicdata_core.storage import clone_or_copy  # noqa: E402
 # Workers Free: 20,000 files per version and 25 MiB per file; keep headroom.
 MAX_FILES = 19_000
 MAX_FILE_BYTES = 25 * 1024 * 1024
-R2_ONLY_PREFIXES = ("spending/launch/", "accountability-dossiers/", "releases/", "datasets/", "downloads/")
+# Served from R2 only: the content-addressed PLACSP release (35k files, rarely changes) plus the
+# subtrees other publishers write. Everything else is a static asset.
+R2_ONLY_PREFIXES = ("spending/launch/", "releases/", "datasets/", "downloads/")
+
+
+def served_from_r2(rel: str, size: int) -> bool:
+    return rel.startswith(R2_ONLY_PREFIXES) or size > MAX_FILE_BYTES
 HEADERS = """/*
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
@@ -40,9 +46,14 @@ def main() -> int:
     selected, oversized = [], []
     for path in sorted(p for p in site.rglob("*") if p.is_file()):
         rel = path.relative_to(site).as_posix()
-        if any(part.startswith(".") for part in Path(rel).parts) or rel.startswith(R2_ONLY_PREFIXES):
+        if any(part.startswith(".") for part in Path(rel).parts):
             continue
-        (oversized if path.stat().st_size > MAX_FILE_BYTES else selected).append(path)
+        size = path.stat().st_size
+        if served_from_r2(rel, size):
+            if size > MAX_FILE_BYTES:
+                oversized.append(path)
+            continue
+        selected.append(path)
     if len(selected) > MAX_FILES:
         raise SystemExit(f"{len(selected)} static assets exceed the Workers Free budget of {MAX_FILES}")
 

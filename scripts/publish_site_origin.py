@@ -171,6 +171,8 @@ def resolve_r2_settings(
 def make_client() -> Any:
     import boto3  # type: ignore[import-not-found]
 
+    from botocore.config import Config  # type: ignore[import-not-found]
+
     settings = resolve_r2_settings()
     return boto3.client(
         "s3",
@@ -178,6 +180,8 @@ def make_client() -> Any:
         aws_access_key_id=settings["R2_ACCESS_KEY_ID"],
         aws_secret_access_key=settings["R2_SECRET_ACCESS_KEY"],
         region_name="auto",
+        # One pooled connection per upload thread (botocore defaults to 10).
+        config=Config(max_pool_connections=64, retries={"max_attempts": 5, "mode": "adaptive"}),
     )
 
 
@@ -217,9 +221,21 @@ def sync(
     workers: int,
     delete: bool,
     max_delete_ratio: float,
+    r2_scope: Any = None,
+    prune_only: bool = False,
 ) -> dict[str, Any]:
     remote = list_remote(client, bucket, SITE_PREFIX)
-    wanted = {SITE_PREFIX + f.path: f for f in files}
+    # The manifest covers the whole build; R2 only stores what it serves (see --r2-only).
+    wanted = {SITE_PREFIX + f.path: f for f in files if r2_scope is None or r2_scope(f)}
+    if prune_only:
+        stale = sorted(
+            key for key in remote if key not in wanted and not any(key.startswith(SITE_PREFIX + d) for d in RESERVED_DIRS)
+        )
+        if remote and len(stale) > max_delete_ratio * len(remote):
+            raise SystemExit(f"Refusing to delete {len(stale)}/{len(remote)} objects (> {max_delete_ratio:.0%})")
+        for batch in chunked(stale, 1000):
+            client.delete_objects(Bucket=bucket, Delete={"Objects": [{"Key": k} for k in batch], "Quiet": True})
+        return {"remote_before": len(remote), "deleted": len(stale)}
     to_upload = [f for key, f in wanted.items() if remote.get(key) != f.md5]
     stale = sorted(
         key for key in remote if key not in wanted and not any(key.startswith(SITE_PREFIX + d) for d in RESERVED_DIRS)
@@ -328,13 +344,29 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--bucket", default=DEFAULT_BUCKET)
     parser.add_argument("--release-id", default="", help="Defaults to <UTC timestamp>-<source commit[:12]>")
     parser.add_argument("--source-commit", default="", help="Defaults to git HEAD of --site, else of this repo")
-    parser.add_argument("--workers", type=int, default=16)
+    parser.add_argument("--workers", type=int, default=48)
+    parser.add_argument(
+        "--r2-only",
+        action="store_true",
+        help="Store only what R2 serves (prepare_site_static_assets.served_from_r2); the rest ships as Worker static assets",
+    )
     parser.add_argument("--delete", action="store_true", help="Delete objects no longer in the site build")
     parser.add_argument("--max-delete-ratio", type=float, default=0.2)
+    parser.add_argument(
+        "--prune-only",
+        action="store_true",
+        help="Only delete objects R2 no longer needs (run after the Worker deploy); no upload, no manifest",
+    )
     parser.add_argument("--dry-run", action="store_true", help="Hash and report locally; no network")
     parser.add_argument("--skip-privacy-check", action="store_true", help="Only for tests")
     parser.add_argument("--report", type=Path, help="Write a JSON run report here")
     return parser.parse_args(argv)
+
+
+def r2_scope() -> Any:
+    from prepare_site_static_assets import served_from_r2
+
+    return lambda f: served_from_r2(f.path, f.size)
 
 
 def main(argv: list[str] | None = None, *, client: Any = None) -> int:
@@ -380,6 +412,8 @@ def main(argv: list[str] | None = None, *, client: Any = None) -> int:
             workers=args.workers,
             delete=args.delete,
             max_delete_ratio=args.max_delete_ratio,
+            r2_scope=r2_scope() if args.r2_only else None,
+            prune_only=args.prune_only,
         )
     text = json.dumps(report, indent=2, ensure_ascii=False)
     print(text)

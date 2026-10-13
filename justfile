@@ -6702,6 +6702,7 @@ site-publish:
   just site-origin-publish
   # Pages and their data are served as Worker static assets (no Worker requests); R2 keeps the bulk.
   just site-origin-worker-deploy
+  just site-origin-prune
 
 # Needs R2_* env (S3 API); also publishes a sha256 release manifest at /releases/latest.json.
 # Sync the built site (ui/site/out) to the votaconlachola.org R2 origin, changed files only.
@@ -6713,9 +6714,15 @@ site-origin-publish:
   test -f "$site/index.html" || { echo "Missing $site; run just site-publish (or just site-build) first" >&2; exit 2; }
   # R2 credentials: env, else .env; account id: env, else the Worker's wrangler.toml (see make_client).
   # ${arr[@]+...} keeps an empty array safe under set -u on macOS bash 3.2.
+  # Upload only what R2 serves (spending/launch, oversized files); pages ship as Worker static assets.
+  # Stale objects are pruned by site-origin-prune after the Worker deploy, so nothing 404s mid-publish.
   report_arg=(); if [ -n "${SITE_ORIGIN_REPORT:-}" ]; then report_arg=(--report "$SITE_ORIGIN_REPORT"); fi
-  uv run --no-project --with 'boto3>=1.34' python3 scripts/publish_site_origin.py --site "$site" --delete ${report_arg[@]+"${report_arg[@]}"}
+  uv run --no-project --with 'boto3>=1.34' python3 scripts/publish_site_origin.py --site "$site" --r2-only ${report_arg[@]+"${report_arg[@]}"}
   uv run --no-project --with 'boto3>=1.34' python3 scripts/publish_joined_archives.py --site "$site"
+
+# Delete R2 objects the current build no longer serves from R2 (run after site-origin-worker-deploy).
+site-origin-prune:
+  uv run --no-project --with 'boto3>=1.34' python3 scripts/publish_site_origin.py --site "{{site_out_dir}}" --r2-only --prune-only --skip-privacy-check
 
 # Mirror the latest HF dataset snapshot to votaconlachola.org/datasets/ (explorer reads it there).
 # Skips with a warning when no R2 credentials are available.

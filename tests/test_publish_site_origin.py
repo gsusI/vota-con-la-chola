@@ -197,8 +197,8 @@ class SiteOriginRecipeTests(unittest.TestCase):
         return subprocess.run([bash, "-c", self.recipe_command()], env=env, capture_output=True, text=True, check=True).stdout
 
     def test_report_arg_is_optional_under_set_u(self) -> None:
-        self.assertEqual(self.run_recipe(None), "<--site><S><--delete>")
-        self.assertEqual(self.run_recipe("out dir/r.json"), "<--site><S><--delete><--report><out dir/r.json>")
+        self.assertEqual(self.run_recipe(None), "<--site><S><--r2-only>")
+        self.assertEqual(self.run_recipe("out dir/r.json"), "<--site><S><--r2-only><--report><out dir/r.json>")
 
 
 class TestSourceCommit(unittest.TestCase):
