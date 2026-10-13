@@ -33,9 +33,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 if str(BASE_DIR) not in sys.path:
     sys.path.insert(0, str(BASE_DIR))
 
-from scripts.export_voting_aid_snapshot import DEFAULT_SEED, direction_balance, majority_choice, party_resolver  # noqa: E402
+from scripts.export_voting_aid_snapshot import DEFAULT_SEED, direction_balance, majority_choice  # noqa: E402
 from scripts.vote_atlas import (  # noqa: E402
     AMENDMENT_KINDS,
+    CURRENT_LEGISLATURE,
+    LEG_ROMAN,
+    XIV_GROUP_PARTY,
+    affiliation_resolver,
+    fold,
+    text_key,
     CLASSIFIABLE_KINDS,
     DEFAULT_AXES,
     DEFAULT_TEXTS,
@@ -101,17 +107,23 @@ def load_member_votes(conn: sqlite3.Connection, legislature: str) -> list[tuple[
     ).fetchall()
 
 
+def name_key(name: str) -> str:
+    return fold(clean(name))
+
+
 def person_keys(rows: list[tuple]) -> dict[str, str]:
-    """member_name -> stable person key (person_id when the name has one, else the name)."""
+    """member_name -> stable person key, shared across legislatures: person_id when any row with that name
+    (accents and case aside) has one, else a hash of the folded name."""
     ids: dict[str, Counter] = defaultdict(Counter)
     for _vid, name, pid, _g, _c in rows:
         if pid is not None:
-            ids[name][pid] += 1
+            ids[name_key(name)][pid] += 1
     out = {}
     for _vid, name, _pid, _g, _c in rows:
         if name in out:
             continue
-        out[name] = f"p{ids[name].most_common(1)[0][0]}" if ids.get(name) else "n-" + hashlib.sha1(name.encode()).hexdigest()[:8]
+        k = name_key(name)
+        out[name] = f"p{ids[k].most_common(1)[0][0]}" if ids.get(k) else "n-" + hashlib.sha1(k.encode()).hexdigest()[:8]
     return out
 
 
@@ -120,42 +132,71 @@ def weighted_mean(pairs: list[tuple[float, float]]) -> float | None:
     return None if total <= 0 else sum(p * w for p, w in pairs) / total
 
 
+def ballot_majority(majorities: dict[str, str | None], legislature: str, pid: str) -> str | None:
+    """Majority of a ballot party on a vote; in earlier legislatures, through its group then (or None)."""
+    if legislature == CURRENT_LEGISLATURE:
+        return majorities.get(pid)
+    group = next((g for g, p in XIV_GROUP_PARTY.items() if p == pid), None)
+    return majorities.get(f"g{legislature}:{group}") if group else None
+
+
 def build(conn: sqlite3.Connection, seed: dict[str, Any], axes_doc: dict[str, Any], cls: dict[str, Any],
-          texts: dict[str, Any], *, legislature: str, generated_at: str) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
-    resolve = party_resolver(seed)
+          texts: dict[str, Any], *, legislature: str, generated_at: str,
+          earlier: list[tuple[str, str]] | None = None) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
+    """`legislature` drives parties and the voting aid; `earlier` [(legislature, since_date)] adds older votes to
+    the deputies' record only (their groups then do not map cleanly to today's ballot parties)."""
     party_ids = [p["party_id"] for p in seed["parties"]]
-    events = load_congreso_events(conn, legislature)
+    legs = [(lg, since) for lg, since in (earlier or [])] + [(legislature, None)]
+    events: list[dict[str, Any]] = []
+    rows: list[tuple] = []
+    for lg, since in legs:
+        evs = load_congreso_events(conn, lg, since)
+        ids = {e["vote_event_id"] for e in evs}
+        events.extend(evs)
+        rows.extend(r for r in load_member_votes(conn, lg) if r[0] in ids)
+    current = [e for e in events if e["legislature"] == legislature]
     ev_index = {e["vote_event_id"]: i for i, e in enumerate(events)}
-    rows = load_member_votes(conn, legislature)
+    resolvers = {lg: affiliation_resolver(seed, lg) for lg, _s in legs}
     keys = person_keys(rows)
 
     tallies: dict[str, dict[str, Counter]] = defaultdict(lambda: defaultdict(Counter))
     person_choice: dict[str, dict[int, str]] = defaultdict(dict)
-    person_party: dict[str, dict[int, str | None]] = defaultdict(dict)
-    person_groups: dict[str, Counter] = defaultdict(Counter)
+    person_aff: dict[str, dict[int, str | None]] = defaultdict(dict)
+    person_groups: dict[str, dict[str, Counter]] = defaultdict(lambda: defaultdict(Counter))
     names: dict[str, Counter] = defaultdict(Counter)
     person_group_last: dict[str, str] = {}
     person_group_last_i: dict[str, int] = {}
     unmapped: Counter = Counter()
     for vid, name, _pid, group, choice in rows:
-        i = ev_index.get(vid)
-        if i is None:
-            continue
+        i = ev_index[vid]
+        lg = events[i]["legislature"]
         name = str(name or "")
         key = keys[name]
-        pid = resolve(name, str(group or ""))
+        aff = resolvers[lg](name, str(group or ""))
         names[key][name] += 1
         person_choice[key][i] = str(choice or "")
-        person_party[key][i] = pid
-        person_groups[key][str(group or "")] += 1
+        person_aff[key][i] = aff
+        person_groups[key][lg][str(group or "")] += 1
         if i >= person_group_last_i.get(key, -1):
             person_group_last_i[key], person_group_last[key] = i, str(group or "")
-        if pid is None:
-            unmapped[name] += 1
+        if aff is None:
+            if lg == legislature:
+                unmapped[name] += 1
             continue
-        tallies[vid][pid][str(choice or "")] += 1
+        tallies[vid][aff][str(choice or "")] += 1
 
-    majorities = {e["vote_event_id"]: {pid: majority_choice(tallies[e["vote_event_id"]][pid]) for pid in party_ids} for e in events}
+    majorities = {e["vote_event_id"]: {aff: majority_choice(c) for aff, c in tallies[e["vote_event_id"]].items()} for e in events}
+    for e in current:
+        for pid in party_ids:
+            majorities[e["vote_event_id"]].setdefault(pid, None)
+
+    def ballot_codes(ev: dict[str, Any]) -> str:
+        maj = majorities[ev["vote_event_id"]]
+        out = []
+        for pid in party_ids:
+            m = ballot_majority(maj, ev["legislature"], pid)
+            out.append("=" if m == "tie" else CHOICE_CODES.get(m or "", "?"))
+        return "".join(out)
 
     # --- classified votes -> weighted pushes per axis
     axis_ids = [a["axis_id"] for a in axes_doc["axes"]]
@@ -168,7 +209,7 @@ def build(conn: sqlite3.Connection, seed: dict[str, Any], axes_doc: dict[str, An
             continue
         for a in item.get("axes") or []:
             if a["confidence"] in SCORED_CONFIDENCE:
-                group_sizes[(motion_key(ev["expediente_text"]), a["axis_id"])] += 1
+                group_sizes[(text_key(ev["legislature"], ev["expediente_text"]), a["axis_id"])] += 1
                 scored.append((ev, a["axis_id"], 1 if a["yes_pushes"] == "+" else -1))
 
     party_pairs: dict[str, dict[str, list[tuple[float, float]]]] = defaultdict(lambda: defaultdict(list))
@@ -178,16 +219,18 @@ def build(conn: sqlite3.Connection, seed: dict[str, Any], axes_doc: dict[str, An
     axis_inits: dict[str, set] = defaultdict(set)
     for ev, axis_id, sign in scored:
         vid = ev["vote_event_id"]
-        gkey = (motion_key(ev["expediente_text"]), axis_id)
+        gkey = (text_key(ev["legislature"], ev["expediente_text"]), axis_id)
         w = 1.0 / group_sizes[gkey]
-        axis_votes[axis_id] += 1
-        axis_inits[axis_id].add(gkey[0])
-        for pid in party_ids:
-            c = tallies[vid][pid]
-            n = c.get("Sí", 0) + c.get("No", 0) + c.get("Abstención", 0)
-            if n:
-                party_pairs[pid][axis_id].append((sign * (c.get("Sí", 0) - c.get("No", 0)) / n, w))
-                party_inits[pid][axis_id].add(gkey[0])
+        if ev["legislature"] == legislature:
+            # Parties: only the current legislature, where deputies map to today's ballot parties.
+            axis_votes[axis_id] += 1
+            axis_inits[axis_id].add(gkey[0])
+            for pid in party_ids:
+                c = tallies[vid][pid]
+                n = c.get("Sí", 0) + c.get("No", 0) + c.get("Abstención", 0)
+                if n:
+                    party_pairs[pid][axis_id].append((sign * (c.get("Sí", 0) - c.get("No", 0)) / n, w))
+                    party_inits[pid][axis_id].add(gkey[0])
         i = ev_index[vid]
         for key, choices in person_choice.items():
             ch = choices.get(i)
@@ -208,29 +251,30 @@ def build(conn: sqlite3.Connection, seed: dict[str, Any], axes_doc: dict[str, An
 
     # --- atlas votes (classified, for drill-down)
     atlas_votes = []
-    classified_count = Counter()
+    status_by_leg: dict[str, Counter] = defaultdict(Counter)
     for ev in events:
         vid = ev["vote_event_id"]
         item = votes_cls.get(vid)
+        count = status_by_leg[ev["legislature"]]
         if ev["kind"] in AMENDMENT_KINDS:
-            classified_count["enmienda_sin_texto"] += 1
+            count["enmienda_sin_texto"] += 1
         elif ev["kind"] not in CLASSIFIABLE_KINDS:
-            classified_count["tramite"] += 1
+            count["tramite"] += 1
         elif not contested(majorities[vid]):
-            classified_count["sin_division"] += 1
+            count["sin_division"] += 1
         elif not item:
-            classified_count["pendiente"] += 1
+            count["pendiente"] += 1
         elif item.get("axes"):
-            classified_count["con_eje"] += 1
+            count["con_eje"] += 1
         else:
-            classified_count[f"sin_eje:{item.get('null_reason')}"] += 1
+            count[f"sin_eje:{item.get('null_reason')}"] += 1
         if not item:
             continue
-        maj = majorities[vid]
-        text = (texts.get(motion_key(ev["expediente_text"])) or {}).get("text") or {}
+        text = (texts.get(text_key(ev["legislature"], ev["expediente_text"])) or {}).get("text") or {}
         atlas_votes.append({
             "id": short_id(vid),
             "path": vote_path(vid),
+            **({"leg": ev["legislature"]} if ev["legislature"] != legislature else {}),
             "date": ev["vote_date"],
             "kind": ev["kind"],
             "title": clean(str(ev["expediente_text"]).split("\n")[0]),
@@ -240,50 +284,59 @@ def build(conn: sqlite3.Connection, seed: dict[str, Any], axes_doc: dict[str, An
             "null_reason": None if item.get("axes") else item.get("null_reason"),
             "approved": (ev["yes"] or 0) > (ev["no"] or 0),
             "totals": [ev["yes"], ev["no"], ev["abstain"]],
-            "parties": "".join(CHOICE_CODES.get(maj[pid] or "", "?") if maj[pid] != "tie" else "=" for pid in party_ids),
+            "parties": ballot_codes(ev),
             **({"text_url": text["url"]} if text.get("url") else {}),
         })
+    classified_count = status_by_leg[legislature]
+    n_events = len(current)
 
     # --- people
     people = []
-    n_events = len(events)
     for key, choices in person_choice.items():
         idx = sorted(choices)
         name = names[key].most_common(1)[0][0]
-        # Party at the last vote (None when the deputy no longer belongs to a ballot party, e.g. no adscrito).
-        last_party = person_party[key][idx[-1]]
-        party_history = list(dict.fromkeys(person_party[key][i] for i in idx if person_party[key][i]))
+        # Ballot party at the last vote (None for no adscritos, and for deputies who only sat in earlier legislatures).
+        last_aff = person_aff[key][idx[-1]]
+        last_party = last_aff if last_aff in party_ids else None
+        party_history = list(dict.fromkeys(a for i in idx if (a := person_aff[key][i]) in party_ids))
         agree = total = 0
+        by_leg: dict[str, list[int]] = defaultdict(lambda: [0, 0])
         rebels = []
         for i in idx:
             ch = choices[i]
-            pid = person_party[key][i]
-            if ch not in ("Sí", "No", "Abstención") or not pid:
+            aff = person_aff[key][i]
+            if ch not in ("Sí", "No", "Abstención") or not aff:
                 continue
-            maj = majorities[events[i]["vote_event_id"]].get(pid)
+            maj = majorities[events[i]["vote_event_id"]].get(aff)
             if maj in (None, "tie"):
                 continue
             total += 1
+            by_leg[events[i]["legislature"]][1] += 1
             if ch == maj:
                 agree += 1
+                by_leg[events[i]["legislature"]][0] += 1
             else:
                 rebels.append([i, CHOICE_CODES[maj]])
         seated = len(idx)
         voted = sum(1 for i in idx if choices[i] in ("Sí", "No", "Abstención"))
         first, last = idx[0], idx[-1]
+        legs_present = sorted(person_groups[key], key=int)
         people.append({
             "id": key,
             "name": name,
             "party_id": last_party,
             "party_history": party_history,
             "last_group": person_group_last[key],
-            "groups": [g for g, _n in person_groups[key].most_common() if g],
+            "groups": [g for lg in legs_present for g, _n in person_groups[key][lg].most_common() if g],
+            "groups_by_leg": {lg: [g for g, _n in person_groups[key][lg].most_common() if g] for lg in legs_present},
+            "legislatures": legs_present,
             "first": first,
             "votes": "".join(CHOICE_CODES.get(choices.get(i, ""), ".") if i in choices else "." for i in range(first, last + 1)),
             "seated": seated,
             "participation": round(voted / seated, 3) if seated else None,
             "loyalty": round(agree / total, 3) if total else None,
             "loyalty_votes": total,
+            "loyalty_by_leg": {lg: [round(a / t, 3), t] for lg, (a, t) in sorted(by_leg.items()) if t},
             "rebels": rebels,
             "axes": {
                 ax: [round(s, 3), len(person_pairs[key][ax])]
@@ -293,7 +346,8 @@ def build(conn: sqlite3.Connection, seed: dict[str, Any], axes_doc: dict[str, An
         })
     people.sort(key=lambda p: (p["party_id"] or "zz", p["name"]))
 
-    dates = [e["vote_date"] for e in events if e["vote_date"]]
+    dates = [e["vote_date"] for e in current if e["vote_date"]]
+    all_dates = [e["vote_date"] for e in events if e["vote_date"]]
     review = cls.get("review") or {}
     meta_common = {
         "generated_at": generated_at,
@@ -316,8 +370,14 @@ def build(conn: sqlite3.Connection, seed: dict[str, Any], axes_doc: dict[str, An
             "coverage": {
                 "events_total": n_events,
                 "by_status": dict(sorted(classified_count.items())),
-                "scored_votes": len({ev["vote_event_id"] for ev, _a, _s in scored}),
+                "scored_votes": len({ev["vote_event_id"] for ev, _a, _s in scored if ev["legislature"] == legislature}),
                 "axes_with_votes": sum(1 for ax in axis_ids if axis_votes[ax]),
+            },
+            "earlier_legislatures": {
+                lg: {"since": since, "events_total": sum(1 for e in events if e["legislature"] == lg),
+                     "by_status": dict(sorted(status_by_leg[lg].items())),
+                     "note": "Solo cuentan para el historial y la dirección de cada diputado/a; no para los partidos."}
+                for lg, since in (earlier or [])
             },
             "unmapped_member_votes": dict(sorted(unmapped.items())),
             "honesty": [
@@ -343,8 +403,19 @@ def build(conn: sqlite3.Connection, seed: dict[str, Any], axes_doc: dict[str, An
         "meta": {
             **meta_common,
             "schema_version": PEOPLE_SCHEMA_VERSION,
+            "votes_first_date": min(all_dates) if all_dates else None,
+            "legislatures": [
+                {"legislature": lg, "label": LEG_ROMAN.get(lg, lg), "since": since,
+                 "first_index": next((i for i, e in enumerate(events) if e["legislature"] == lg), None),
+                 "events": sum(1 for e in events if e["legislature"] == lg)}
+                for lg, since in legs
+            ],
             "vote_codes": {"S": "Sí", "N": "No", "A": "Abstención", "-": "No vota", ".": "No era diputado/a en esa votación"},
-            "loyalty": "Porcentaje de votaciones en que votó igual que la mayoría de su partido (solo Sí/No/Abstención; empates excluidos).",
+            "loyalty": (
+                "Porcentaje de votaciones en que votó igual que la mayoría de su partido (solo Sí/No/Abstención; empates excluidos). "
+                "En legislaturas anteriores se compara con su grupo parlamentario de entonces, salvo los grupos Mixto y Plural, que "
+                "reunían a varios partidos y no cuentan."
+            ),
             "axes": f"Dirección personal por eje con al menos {MIN_PERSON_AXIS_VOTES} votaciones clasificadas; mismo método y pesos que los partidos.",
             "path_prefix": VOTE_URL_PREFIX[4:],
         },
@@ -352,12 +423,12 @@ def build(conn: sqlite3.Connection, seed: dict[str, Any], axes_doc: dict[str, An
         "votes": [
             [short_id(e["vote_event_id"]), vote_path(e["vote_event_id"]), e["vote_date"], e["kind"],
              clean(str(e["expediente_text"]).split("\n")[0])[:220],
-             clean(" ".join(x for x in (e["subgroup_title"], e["subgroup_text"]) if x))[:120]]
+             clean(" ".join(x for x in (e["subgroup_title"], e["subgroup_text"]) if x))[:120], e["legislature"]]
             for e in events
         ],
         "people": people,
     }
-    ctx = {"events": events, "tallies": tallies, "majorities": majorities, "votes_cls": votes_cls, "party_ids": party_ids}
+    ctx = {"events": current, "tallies": tallies, "majorities": majorities, "votes_cls": votes_cls, "party_ids": party_ids}
     return atlas, people_doc, ctx
 
 
@@ -517,8 +588,10 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     p.add_argument("--classifications", default=str(DEFAULT_CLASSIFICATIONS))
     p.add_argument("--texts", default=str(DEFAULT_TEXTS))
     p.add_argument("--aid-seed", default=str(DEFAULT_AID_SEED))
+    p.add_argument("--earlier", action="append", default=[], metavar="LEG:YYYY-MM-DD",
+                   help="Legislatura anterior a añadir al historial de diputados, desde una fecha (p. ej. 14:2022-10-01)")
     p.add_argument("--out-dir", required=True)
-    p.add_argument("--max-bytes", type=int, default=3_000_000)
+    p.add_argument("--max-bytes", type=int, default=4_500_000)
     return p.parse_args(argv)
 
 
@@ -536,7 +609,8 @@ def main(argv: list[str] | None = None) -> int:
     conn = sqlite3.connect(f"file:{args.db}?mode=ro", uri=True)
     try:
         generated_at = datetime.now(timezone.utc).replace(microsecond=0).isoformat()
-        atlas, people, ctx = build(conn, seed, axes_doc, cls, texts, legislature=args.legislature, generated_at=generated_at)
+        earlier = [tuple(x.split(":", 1)) for x in args.earlier]
+        atlas, people, ctx = build(conn, seed, axes_doc, cls, texts, legislature=args.legislature, generated_at=generated_at, earlier=earlier)
     finally:
         conn.close()
     aid_seed = json.loads(Path(args.aid_seed).read_text(encoding="utf-8"))

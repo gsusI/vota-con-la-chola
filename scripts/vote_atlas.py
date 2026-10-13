@@ -103,6 +103,10 @@ def vote_kind(title: str, subgroup_title: str, subgroup_text: str, expediente_te
         return "voto_particular"
     if "correcciones tecnicas" in sgt or "avocacion" in sgt:
         return "procedimiento"
+    if t.startswith("presupuestos generales del estado"):
+        return "enmienda" if amendment else "final"
+    if "correccion tecnica" in sgt:
+        return "procedimiento"
     if t.startswith("enmiendas del senado"):
         return "enmienda_senado" if amendment or sgt or sgx else "enmienda_senado"
     if t.startswith("veto del senado"):
@@ -165,16 +169,37 @@ def motion_key(expediente_text: str) -> str:
     return hashlib.sha1(fold(first).encode("utf-8")).hexdigest()[:16]
 
 
-def load_congreso_events(conn: sqlite3.Connection, legislature: str = "15") -> list[dict[str, Any]]:
+LEG_ROMAN = {"14": "XIV", "15": "XV"}
+CURRENT_LEGISLATURE = "15"
+# XIV groups that vote as one party; the Plural and Mixto groups mixed several parties, so no majority is used.
+XIV_COHERENT_GROUPS = {"GS", "GP", "GVOX", "GR", "GEH Bildu", "GV (EAJ-PNV)", "GCUP-EC-GC", "GCs"}
+# XIV groups that correspond to one ballot party of today (for the party chips on XIV votes).
+XIV_GROUP_PARTY = {"GS": "psoe", "GP": "pp", "GVOX": "vox", "GR": "erc", "GEH Bildu": "bildu", "GV (EAJ-PNV)": "pnv"}
+
+
+def text_key(legislature: str, expediente_text: str) -> str:
+    """Motion text key; earlier legislatures are prefixed so equal titles never collide."""
+    key = motion_key(expediente_text)
+    return key if str(legislature) == CURRENT_LEGISLATURE else f"{legislature}:{key}"
+
+
+def affiliation_resolver(seed: dict[str, Any], legislature: str):
+    """Who a deputy votes with: the ballot party in the current legislature, the parliamentary group before."""
+    if str(legislature) == CURRENT_LEGISLATURE:
+        return party_resolver(seed)
+    return lambda _name, group: f"g{legislature}:{group}" if group in XIV_COHERENT_GROUPS else None
+
+
+def load_congreso_events(conn: sqlite3.Connection, legislature: str = "15", since: str | None = None) -> list[dict[str, Any]]:
     rows = conn.execute(
         """
         SELECT vote_event_id, legislature, session_number, vote_number, vote_date, title, expediente_text,
                subgroup_title, subgroup_text, totals_yes, totals_no, totals_abstain, totals_no_vote, source_url
         FROM parl_vote_events
-        WHERE source_id = 'congreso_votaciones' AND legislature = ?
+        WHERE source_id = 'congreso_votaciones' AND legislature = ? AND vote_date >= ?
         ORDER BY vote_date, session_number, vote_number, vote_event_id
         """,
-        (legislature,),
+        (legislature, since or ""),
     ).fetchall()
     out = []
     for r in rows:
@@ -186,8 +211,8 @@ def load_congreso_events(conn: sqlite3.Connection, legislature: str = "15") -> l
     return out
 
 
-def party_majorities(conn: sqlite3.Connection, seed: dict[str, Any], vote_ids: list[str]) -> dict[str, dict[str, str | None]]:
-    resolve = party_resolver(seed)
+def party_majorities(conn: sqlite3.Connection, seed: dict[str, Any], vote_ids: list[str], legislature: str = CURRENT_LEGISLATURE) -> dict[str, dict[str, str | None]]:
+    resolve = affiliation_resolver(seed, legislature)
     tallies: dict[str, dict[str, Counter]] = defaultdict(lambda: defaultdict(Counter))
     ids = set(vote_ids)
     for vid, name, group, choice in conn.execute(
@@ -220,15 +245,16 @@ LIST_HEADERS = {
 }
 
 
-def list_type_fresh(tipo: str, cache_dir: Path, stamp: str, timeout: int, sleep: float) -> list[dict[str, Any]]:
-    """Every XV initiative of a type; cached per listing date so later runs see new initiatives."""
+def list_type_fresh(tipo: str, cache_dir: Path, stamp: str, timeout: int, sleep: float, legislature: str = CURRENT_LEGISLATURE) -> list[dict[str, Any]]:
+    """Every initiative of a type in a legislature; cached per listing date so later runs see new initiatives."""
     out: list[dict[str, Any]] = []
     page, total = 1, None
+    leg_tag = "" if legislature == CURRENT_LEGISLATURE else f"L{legislature}_"
     while total is None or len(out) < total:
-        path = cache_dir / "initiatives" / f"list_{tipo}_{stamp}_p{page:03d}.json"
+        path = cache_dir / "initiatives" / f"list_{tipo}_{leg_tag}{stamp}_p{page:03d}.json"
 
         def get(page=page) -> bytes:
-            data = urllib.parse.urlencode({"_iniciativas_legislatura": "15", "_iniciativas_tipo": tipo, "_iniciativas_paginaActual": str(page)}).encode()
+            data = urllib.parse.urlencode({"_iniciativas_legislatura": legislature, "_iniciativas_tipo": tipo, "_iniciativas_paginaActual": str(page)}).encode()
             raw = _request(SEARCH_URL, data, LIST_HEADERS, timeout)
             time.sleep(sleep)
             return raw
@@ -273,16 +299,27 @@ def rank_candidates(obj: str, proposer: str, listing: list[dict[str, Any]], top:
     return [x["id_iniciativa"] for x in ranked[:top] if score(x) > 0.15]
 
 
-def fresh_initiative_page(exp: str, cache_dir: Path, timeout: int) -> str:
-    path = cache_dir / "initiatives" / f"{exp.replace('/', '_')}.html"
-    data = _request(DETAIL_URL.format(exp=urllib.parse.quote(exp, safe="")), timeout=timeout)
+def detail_url(exp: str, legislature: str) -> str:
+    url = DETAIL_URL.format(exp=urllib.parse.quote(exp, safe=""))
+    return url.replace("_iniciativas_legislatura=XV", f"_iniciativas_legislatura={LEG_ROMAN[legislature]}")
+
+
+def leg_initiative_page(exp: str, legislature: str, cache_dir: Path, timeout: int, refresh: bool = False) -> str:
+    """Initiative page (cached). Earlier legislatures get their own cache names: expediente numbers repeat."""
+    if legislature == CURRENT_LEGISLATURE and not refresh:
+        return initiative_page(exp, cache_dir, timeout)
+    prefix = "" if legislature == CURRENT_LEGISLATURE else f"L{legislature}_"
+    path = cache_dir / "initiatives" / f"{prefix}{exp.replace('/', '_')}.html"
+    if path.exists() and path.stat().st_size > 0 and not refresh:
+        return path.read_text(encoding="utf-8", errors="replace")
+    data = _request(detail_url(exp, legislature), timeout=timeout)
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_bytes(data)
     return data.decode("utf-8", errors="replace")
 
 
 def link_group(group: dict[str, Any], listings: dict[str, list[dict[str, Any]]], cache_dir: Path, timeout: int,
-               previous: dict[str, Any] | None) -> dict[str, Any]:
+               previous: dict[str, Any] | None, legislature: str = CURRENT_LEGISLATURE) -> dict[str, Any]:
     kind = group["base_kind"]
     listing = listings["173" if kind == "mocion" else "162"]
     obj = motion_object(group["expediente_text"])
@@ -291,13 +328,13 @@ def link_group(group: dict[str, Any], listings: dict[str, list[dict[str, Any]]],
     wanted = {p for p in (vote_path(u) for u in group["source_urls"]) if p}
     for refresh in (False, True):
         for exp in candidates:
-            html = fresh_initiative_page(exp, cache_dir, timeout) if refresh else initiative_page(exp, cache_dir, timeout)
+            html = leg_initiative_page(exp, legislature, cache_dir, timeout, refresh=refresh)
             page = parse_initiative_page(html)
             if wanted & set(page["vote_paths"]):
                 docs = choose_documents(page["boletines"])
                 return {
                     "expediente": exp, "match": "vote_listed_on_initiative_page", "object": obj,
-                    "initiative_url": DETAIL_URL.format(exp=exp), "boletines": page["boletines"],
+                    "initiative_url": detail_url(exp, legislature), "boletines": page["boletines"],
                     **{f"{k}_doc": d for k, d in docs.items()},
                 }
     return {"expediente": None, "match": "not_found", "object": obj, "candidates": candidates}
@@ -313,12 +350,12 @@ def extract_points(entry: dict[str, Any], cache_dir: Path, *, by_points: bool, a
     return {k: doc[k] for k in ("url", "sha256", "bocg", "text_status", "text_status_label", "voted_terms", "amendments_url", "intro", "points")}
 
 
-def target_groups(events: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
+def target_groups(events: list[dict[str, Any]], legislature: str = CURRENT_LEGISLATURE) -> dict[str, dict[str, Any]]:
     groups: dict[str, dict[str, Any]] = {}
     for ev in events:
         if ev["kind"] not in {"pnl", "pnl_punto", "mocion", "mocion_punto"}:
             continue
-        key = motion_key(ev["expediente_text"])
+        key = text_key(legislature, ev["expediente_text"])
         g = groups.setdefault(key, {
             "base_kind": ev["kind"].split("_")[0], "expediente_text": ev["expediente_text"], "vote_ids": [],
             "source_urls": [], "by_points": False, "approved": False, "terms": voted_terms(ev["expediente_text"]),
@@ -332,18 +369,18 @@ def target_groups(events: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
 
 def cmd_link_texts(args: argparse.Namespace) -> int:
     conn = sqlite3.connect(f"file:{args.db}?mode=ro", uri=True)
-    events = load_congreso_events(conn, args.legislature)
-    groups = target_groups(events)
+    events = load_congreso_events(conn, args.legislature, args.since)
+    groups = target_groups(events, args.legislature)
     cache_dir = Path(args.cache_dir)
     stamp = args.listing_date or datetime.now(timezone.utc).strftime("%Y%m%d")
-    listings = {t: list_type_fresh(t, cache_dir, stamp, args.timeout, args.sleep) for t in ("162", "173")}
+    listings = {t: list_type_fresh(t, cache_dir, stamp, args.timeout, args.sleep, args.legislature) for t in ("162", "173")}
     print(f"listings: 162={len(listings['162'])} 173={len(listings['173'])} groups={len(groups)}", flush=True)
     seed_path = Path(args.out)
     previous = json.loads(seed_path.read_text(encoding="utf-8")).get("motions", {}) if seed_path.exists() else {}
     # Reuse expedientes confirmed by the voting aid's own motion seed.
     legacy = json.loads(Path(args.motion_seed).read_text(encoding="utf-8")).get("votes", {}) if Path(args.motion_seed).exists() else {}
     hints: dict[str, dict[str, Any]] = {}
-    for key, g in groups.items():
+    for key, g in (groups.items() if args.legislature == CURRENT_LEGISLATURE else []):
         for vid in g["vote_ids"]:
             exp = (legacy.get(vid) or {}).get("expediente")
             if exp:
@@ -354,7 +391,7 @@ def cmd_link_texts(args: argparse.Namespace) -> int:
         key, g = item
         prev = previous.get(key) if (previous.get(key) or {}).get("expediente") else hints.get(key)
         try:
-            r = link_group(g, listings, cache_dir, args.timeout, prev)
+            r = link_group(g, listings, cache_dir, args.timeout, prev, args.legislature)
             if r.get("expediente"):
                 try:
                     r["text"] = extract_points(r, cache_dir, by_points=g["by_points"], approved=g["approved"], terms=g["terms"])
@@ -362,7 +399,7 @@ def cmd_link_texts(args: argparse.Namespace) -> int:
                     r["text_error"] = f"{type(exc).__name__}: {exc}"[:240]
         except Exception as exc:  # noqa: BLE001
             r = {"expediente": None, "match": "error", "error": f"{type(exc).__name__}: {exc}"[:240]}
-        r.update({"kind": g["base_kind"], "by_points": g["by_points"], "vote_ids": sorted(g["vote_ids"]),
+        r.update({"legislature": args.legislature, "kind": g["base_kind"], "by_points": g["by_points"], "vote_ids": sorted(g["vote_ids"]),
                   "title": clean(str(g["expediente_text"]).split("\n")[0])})
         return key, r
 
@@ -372,22 +409,25 @@ def cmd_link_texts(args: argparse.Namespace) -> int:
             results[key] = r
             status = "text" if r.get("text") else (r.get("text_error") and "noext") or r["match"]
             print(f"{r['kind']:6} {r.get('expediente') or '-':12} {status} {r['title'][:70]}", flush=True)
+    # Entries of other legislatures (or not re-linked now) are kept: one seed for every legislature.
+    merged = {**previous, **results}
     payload = {
         "meta": {
             "schema_version": TEXTS_SCHEMA_VERSION,
             "generated_at": datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
             "listing_date": stamp,
             "method": (
-                "Expediente elegido entre los listados de PNL (162) y mociones (173) de la XV por similitud de título y "
+                "Expediente elegido entre los listados de PNL (162) y mociones (173) de su legislatura por similitud de título y "
                 "grupo autor, y confirmado porque la ficha de la iniciativa enlaza la misma votación nominal. Texto "
                 "literal de la parte dispositiva extraído del BOCG serie D: el aprobado si la votación fue conjunta y "
                 "salió adelante; el original si se votó por puntos (la numeración de los puntos es la del texto votado)."
             ),
-            "motions": len(results),
-            "linked": sum(1 for r in results.values() if r.get("expediente")),
-            "with_text": sum(1 for r in results.values() if r.get("text")),
+            "motions": len(merged),
+            "linked": sum(1 for r in merged.values() if r.get("expediente")),
+            "with_text": sum(1 for r in merged.values() if r.get("text")),
+            "by_legislature": dict(sorted(Counter(str(r.get("legislature") or CURRENT_LEGISLATURE) for r in merged.values()).items())),
         },
-        "motions": dict(sorted(results.items())),
+        "motions": dict(sorted(merged.items())),
     }
     seed_path.write_text(json.dumps(payload, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     m = payload["meta"]
@@ -416,7 +456,7 @@ def point_text(text: dict[str, Any] | None, subgroup_text: str) -> tuple[list[di
 
 
 def build_units(events: list[dict[str, Any]], majorities: dict[str, dict[str, str | None]], texts: dict[str, Any],
-                bullets: dict[str, Any]) -> list[dict[str, Any]]:
+                bullets: dict[str, Any], legislature: str = CURRENT_LEGISLATURE) -> list[dict[str, Any]]:
     units = []
     for ev in events:
         if ev["kind"] not in CLASSIFIABLE_KINDS or not contested(majorities.get(ev["vote_event_id"], {})):
@@ -424,6 +464,7 @@ def build_units(events: list[dict[str, Any]], majorities: dict[str, dict[str, st
         unit: dict[str, Any] = {
             "vote_event_id": ev["vote_event_id"],
             "vote_date": ev["vote_date"],
+            "legislature": ev["legislature"],
             "kind": ev["kind"],
             "kind_label": KIND_LABELS[ev["kind"]],
             "title": clean(ev["expediente_text"]),
@@ -431,7 +472,7 @@ def build_units(events: list[dict[str, Any]], majorities: dict[str, dict[str, st
             "result": "aprobada" if (ev["yes"] or 0) > (ev["no"] or 0) else "rechazada",
         }
         if ev["kind"] in {"pnl", "pnl_punto", "mocion", "mocion_punto"}:
-            entry = texts.get(motion_key(ev["expediente_text"])) or {}
+            entry = texts.get(text_key(legislature, ev["expediente_text"])) or {}
             text = entry.get("text")
             if text:
                 unit["text_source"] = {"url": text["url"], "bocg": text["bocg"], "text_status": text["text_status"]}
@@ -458,11 +499,11 @@ def build_units(events: list[dict[str, Any]], majorities: dict[str, dict[str, st
 def cmd_units(args: argparse.Namespace) -> int:
     conn = sqlite3.connect(f"file:{args.db}?mode=ro", uri=True)
     seed = json.loads(Path(args.seed).read_text(encoding="utf-8"))
-    events = load_congreso_events(conn, args.legislature)
-    majorities = party_majorities(conn, seed, [e["vote_event_id"] for e in events])
+    events = load_congreso_events(conn, args.legislature, args.since)
+    majorities = party_majorities(conn, seed, [e["vote_event_id"] for e in events], args.legislature)
     texts = json.loads(Path(args.texts).read_text(encoding="utf-8")).get("motions", {}) if Path(args.texts).exists() else {}
     bullets = json.loads(Path(args.bullets).read_text(encoding="utf-8")).get("by_vote", {}) if Path(args.bullets).exists() else {}
-    units = build_units(events, majorities, texts, bullets)
+    units = build_units(events, majorities, texts, bullets, args.legislature)
     out_dir = Path(args.out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
     # Batches keep a motion's points together so one reader sees the whole motion.
@@ -475,7 +516,8 @@ def cmd_units(args: argparse.Namespace) -> int:
             batches.append([])
         batches[-1].extend(by_key[key])
     for i, batch in enumerate(batches, 1):
-        (out_dir / f"batch_{i:03d}.json").write_text(json.dumps(batch, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+        prefix = "" if args.legislature == CURRENT_LEGISLATURE else f"l{args.legislature}_"
+        (out_dir / f"batch_{prefix}{i:03d}.json").write_text(json.dumps(batch, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     kinds = Counter(e["kind"] for e in events)
     issues = Counter(u.get("text_issue", "ok") for u in units)
     print(json.dumps({"events": len(events), "kinds": dict(kinds.most_common()), "units": len(units),
@@ -485,10 +527,10 @@ def cmd_units(args: argparse.Namespace) -> int:
 
 def cmd_merge(args: argparse.Namespace) -> int:
     """Merge classifier outputs into the versioned seed; every unit must be covered exactly once."""
-    units = {u["vote_event_id"]: u for f in sorted(Path(args.units_dir).glob("batch_*.json")) for u in json.loads(f.read_text(encoding="utf-8"))}
+    units = {u["vote_event_id"]: u for d in args.units_dir for f in sorted(Path(d).glob("batch_*.json")) for u in json.loads(f.read_text(encoding="utf-8"))}
     merged: dict[str, Any] = {}
     classifiers: set[str] = set()
-    for f in sorted(Path(args.classified_dir).glob("batch_*.out.json")):
+    for f in sorted(p for d in args.classified_dir for p in Path(d).glob("batch_*.out.json")):
         doc = json.loads(f.read_text(encoding="utf-8"))
         classifiers.add(str(doc.get("classifier") or f.stem))
         for item in doc.get("items") or []:
@@ -510,9 +552,12 @@ def cmd_merge(args: argparse.Namespace) -> int:
     if missing and not args.allow_missing:
         print(f"ERROR: {len(missing)} votaciones sin clasificar, p. ej. {missing[:2]}", file=sys.stderr)
         return 3
+    previous_review = (json.loads(Path(args.out).read_text(encoding="utf-8")).get("review") or {}) if Path(args.out).exists() else {}
     payload = {
         "schema_version": "vote_atlas_classifications_v1",
         "review": {
+            # Quality checks measured on earlier merges stay attached to the seed.
+            **{k: previous_review[k] for k in ("qa", "agreement") if k in previous_review},
             "status": "agent_classified",
             "classified_by": sorted(classifiers),
             "model": args.model,
@@ -598,6 +643,7 @@ def main(argv: list[str] | None = None) -> int:
     lt = sub.add_parser("link-texts", help="Enlazar el texto BOCG de las PNL y mociones votadas (red, con caché)")
     lt.add_argument("--db", required=True)
     lt.add_argument("--legislature", default="15")
+    lt.add_argument("--since", help="Solo votaciones desde esta fecha (YYYY-MM-DD)")
     lt.add_argument("--out", default=str(DEFAULT_TEXTS))
     lt.add_argument("--motion-seed", default=str(DEFAULT_MOTION_SEED))
     lt.add_argument("--cache-dir", default=str(DEFAULT_CACHE))
@@ -608,14 +654,15 @@ def main(argv: list[str] | None = None) -> int:
     un = sub.add_parser("units", help="Escribir lotes de votaciones para clasificar")
     un.add_argument("--db", required=True)
     un.add_argument("--legislature", default="15")
+    un.add_argument("--since", help="Solo votaciones desde esta fecha (YYYY-MM-DD)")
     un.add_argument("--seed", default=str(DEFAULT_SEED))
     un.add_argument("--texts", default=str(DEFAULT_TEXTS))
     un.add_argument("--bullets", default=str(DEFAULT_BULLETS))
     un.add_argument("--out-dir", required=True)
     un.add_argument("--batch-size", type=int, default=45)
     mg = sub.add_parser("merge", help="Unir las clasificaciones de los lotes en la semilla versionada")
-    mg.add_argument("--units-dir", required=True)
-    mg.add_argument("--classified-dir", required=True)
+    mg.add_argument("--units-dir", required=True, nargs="+")
+    mg.add_argument("--classified-dir", required=True, nargs="+")
     mg.add_argument("--out", default=str(BASE_DIR / "etl/data/seeds/vote_atlas_classifications_v1.json"))
     mg.add_argument("--model", default="claude-opus-5-5")
     mg.add_argument("--allow-missing", action="store_true")

@@ -59,10 +59,35 @@ export function axisSpread(atlas, axisId) {
   return rows.length < 2 ? 0 : rows[rows.length - 1].score - rows[0].score;
 }
 
-/** Votes placed on an axis (any confidence), newest first, with the sign of a Sí vote. */
-export function votesForAxis(atlas, axisId) {
+// Parliamentary groups of earlier legislatures, for deputies who are not (or no longer) in a ballot party.
+export const GROUP_LABELS = {
+  GS: "Grupo Socialista",
+  GP: "Grupo Popular",
+  GVOX: "Grupo VOX",
+  GR: "Grupo Republicano (ERC)",
+  "GEH Bildu": "Grupo EH Bildu",
+  "GV (EAJ-PNV)": "Grupo Vasco (PNV)",
+  "GCUP-EC-GC": "Grupo Unidas Podemos",
+  GCs: "Grupo Ciudadanos",
+  GPlu: "Grupo Plural",
+  GMx: "Grupo Mixto",
+  GSUMAR: "Grupo Sumar",
+  GJxCAT: "Grupo Junts",
+};
+export const LEG_LABELS = { 14: "XIV", 15: "XV" };
+
+export function groupLabel(code) {
+  return GROUP_LABELS[code] || code || "Sin grupo";
+}
+
+/**
+ * Votes placed on an axis (any confidence), newest first, with the sign of a Sí vote.
+ * Earlier legislatures (`leg`) count only for deputies, so the party map leaves them out unless asked.
+ */
+export function votesForAxis(atlas, axisId, { includeEarlier = false } = {}) {
   const out = [];
   for (const v of atlas?.votes || []) {
+    if (v.leg && !includeEarlier) continue;
     const hit = (v.axes || []).find((a) => a[0] === axisId);
     if (hit) out.push({ ...v, sign: hit[1], confidence: hit[2], primary: v.axes[0][0] === axisId });
   }

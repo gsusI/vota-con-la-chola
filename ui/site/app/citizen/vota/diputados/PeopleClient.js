@@ -12,7 +12,9 @@ import {
   directionText,
   filterPeople,
   formatDate,
+  groupLabel,
   indexAtlas,
+  LEG_LABELS,
   officialVoteUrl,
   percent,
   personAxisRows,
@@ -57,11 +59,13 @@ function useJson(path) {
 
 function partyLabel(person, partiesById) {
   if (person.party_id) return partiesById[person.party_id]?.label || person.party_id;
-  return person.last_group === "GMx" ? "Grupo Mixto (sin partido de papeleta)" : person.last_group || "Sin partido";
+  const onlyEarlier = (person.legislatures || []).every((lg) => lg !== "15");
+  if (onlyEarlier) return `${groupLabel(person.last_group)} (${(person.legislatures || []).map((lg) => LEG_LABELS[lg] || lg).join(", ")})`;
+  return person.last_group === "GMx" ? "Grupo Mixto (sin partido de papeleta)" : groupLabel(person.last_group);
 }
 
 function VoteLine({ people, atlas, index, choice, partyCode, classified, axisFilter }) {
-  const [id, path, date, kind, title, subgroup] = people.votes[index];
+  const [id, path, date, kind, title, subgroup, leg] = people.votes[index];
   const v = classified[id];
   const { axisById } = indexAtlas(atlas);
   const axes = (v?.axes || []).filter((a) => !axisFilter || a[0] === axisFilter);
@@ -69,6 +73,7 @@ function VoteLine({ people, atlas, index, choice, partyCode, classified, axisFil
     <li className="atlasVote">
       <p className="atlasVote__meta">
         {formatDate(date)} · {atlas.kind_labels?.[kind] || kind}
+        {leg && leg !== "15" ? ` · ${LEG_LABELS[leg] || leg} legislatura` : ""}
       </p>
       {v?.summary_yes ? <p className="atlasVote__summary">{v.summary_yes}</p> : null}
       <p className="atlasVote__title">
@@ -79,7 +84,7 @@ function VoteLine({ people, atlas, index, choice, partyCode, classified, axisFil
         Votó <strong>{CHOICE_LABELS[choice] || choice}</strong>
         {partyCode ? (
           <>
-            ; su partido, <strong>{CHOICE_LABELS[partyCode] || partyCode}</strong>
+            ; {leg && leg !== "15" ? "su grupo" : "su partido"}, <strong>{CHOICE_LABELS[partyCode] || partyCode}</strong>
           </>
         ) : null}
         {axes.map(([axisId, sign]) => {
@@ -148,6 +153,15 @@ function PersonView({ person, people, atlas, partiesById, onBack }) {
           · votaciones del {formatDate(first)} al {formatDate(last)}
         </span>
       </p>
+      <p className="votingAidMuted">
+        {(person.legislatures || []).map((lg, i) => (
+          <span key={lg}>
+            {i ? " · " : ""}
+            {LEG_LABELS[lg] || lg} legislatura: {(person.groups_by_leg?.[lg] || []).map(groupLabel).join(", ")}
+            {person.loyalty_by_leg?.[lg] ? ` (${percent1(person.loyalty_by_leg[lg][0])} igual que su ${lg === "15" ? "partido" : "grupo"})` : ""}
+          </span>
+        ))}
+      </p>
       <ul className="votingAidFacts atlasFacts atlasFacts--grid">
         <li>
           <strong>{percent(person.participation)}</strong>
@@ -157,7 +171,7 @@ function PersonView({ person, people, atlas, partiesById, onBack }) {
           <strong>{percent1(person.loyalty)}</strong>
           <span className="votingAidMuted">
             {" "}
-            igual que su partido
+            {(person.legislatures || []).includes("15") ? (person.legislatures.length > 1 ? "igual que su partido o grupo" : "igual que su partido") : "igual que su grupo"}
             {!person.party_id && person.party_history?.length
               ? ` (mientras estuvo en ${person.party_history.map((p) => partiesById[p]?.label || p).join(", ")})`
               : ""}{" "}
@@ -166,7 +180,7 @@ function PersonView({ person, people, atlas, partiesById, onBack }) {
         </li>
         <li>
           <strong>{(person.rebels || []).length.toLocaleString("es-ES")}</strong>
-          <span className="votingAidMuted"> votos distintos de su partido</span>
+          <span className="votingAidMuted"> votos distintos de su {(person.legislatures || []).includes("15") ? "partido" : "grupo"}</span>
         </li>
       </ul>
 
@@ -277,18 +291,23 @@ export default function PeopleClient() {
   }
 
   const partiesById = useMemo(() => Object.fromEntries((people?.parties || []).map((p) => [p.party_id, p])), [people]);
-  const list = useMemo(() => filterPeople(people?.people, { query, partyId }).sort(SORTS[sort].fn), [people, query, partyId, sort]);
+  const list = useMemo(() => {
+    const earlierOnly = partyId === "_earlier";
+    const found = filterPeople(people?.people, { query, partyId: earlierOnly ? "" : partyId });
+    return (earlierOnly ? found.filter((p) => !(p.legislatures || []).includes("15")) : found).sort(SORTS[sort].fn);
+  }, [people, query, partyId, sort]);
   const person = personId ? (people?.people || []).find((p) => p.id === personId) : null;
   const ready = peopleStatus === "ready" && atlasStatus === "ready";
 
   return (
     <main className="votingAid atlas">
-      <p className="votingAidEyebrow">Congreso de los Diputados · XV legislatura</p>
+      <p className="votingAidEyebrow">Congreso de los Diputados · XIV (desde oct. 2022) y XV legislaturas</p>
       <h1>Qué ha votado tu diputado/a</h1>
       {!person ? (
         <p className="votingAidLead">
-          Busca a cualquier diputado o diputada: hacia dónde ha empujado en cada tema, cuántas veces votó distinto de su partido y todas sus votaciones,
-          enlazadas a la fuente oficial. <Link href="/citizen/vota/temas/">Ver el mapa por partidos</Link>.
+          Busca a cualquier diputado o diputada del Congreso desde octubre de 2022 (final de la XIV legislatura y toda la XV): hacia dónde ha
+          empujado en cada tema, cuántas veces votó distinto de su partido o grupo y todas sus votaciones, enlazadas a la fuente oficial.{" "}
+          <Link href="/citizen/vota/temas/">Ver el mapa por partidos</Link>.
         </p>
       ) : null}
       {peopleStatus === "error" || atlasStatus === "error" ? <p className="votingAidNotice">No se pudieron cargar los datos.</p> : null}
@@ -317,6 +336,7 @@ export default function PeopleClient() {
               Partido{" "}
               <select onChange={(e) => setPartyId(e.target.value)} value={partyId}>
                 <option value="">Todos</option>
+                <option value="_earlier">Solo en la XIV (ya no son diputados)</option>
                 {(people.parties || []).map((p) => (
                   <option key={p.party_id} value={p.party_id}>
                     {p.label}

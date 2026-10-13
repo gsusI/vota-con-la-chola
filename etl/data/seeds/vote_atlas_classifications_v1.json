@@ -1,6 +1,17 @@
 {
  "schema_version": "vote_atlas_classifications_v1",
  "review": {
+  "qa": {
+   "votes_compared": 150,
+   "same_has_axis": 0.96,
+   "same_primary_axis": 0.922,
+   "axis_overlap": 0.974,
+   "same_sign_when_axis_shared": 1.0,
+   "scored_primary_axis_found_in_second": 0.989,
+   "scored_primary_same_sign": 1.0,
+   "evidence": "docs/etl/sprints/VOTE-ATLAS-20261013/evidence/vote-atlas-classification-agreement.json"
+  },
+  "agreement": "en una muestra aleatoria de 150 votaciones, 92 % mismo eje principal y 100 % mismo sentido cuando coinciden en el eje",
   "status": "agent_classified",
   "classified_by": [
    "agent-c01",
@@ -16,26 +27,3594 @@
    "agent-c11",
    "agent-c12",
    "agent-c13",
-   "agent-c14"
+   "agent-c14",
+   "agent-x01",
+   "agent-x02",
+   "agent-x03",
+   "agent-x04"
   ],
   "model": "claude-opus-5-5",
   "prompt": "docs/etl/sprints/VOTE-ATLAS-20261013/prompts/clasificar-votaciones.md",
   "classified_at": "2026-10-13",
   "human_reviewed": false,
-  "note": "Clasificación con IA por lotes, sin ver los votos de los partidos; pendiente de revisión humana.",
-  "qa": {
-   "votes_compared": 150,
-   "same_has_axis": 0.96,
-   "same_primary_axis": 0.922,
-   "axis_overlap": 0.974,
-   "same_sign_when_axis_shared": 1.0,
-   "scored_primary_axis_found_in_second": 0.989,
-   "scored_primary_same_sign": 1.0,
-   "evidence": "docs/etl/sprints/VOTE-ATLAS-20261013/evidence/vote-atlas-classification-agreement.json"
-  },
-  "agreement": "en una muestra aleatoria de 150 votaciones, 92 % mismo eje principal y 100 % mismo sentido cuando coinciden en el eje"
+  "note": "Clasificación con IA por lotes, sin ver los votos de los partidos; pendiente de revisión humana."
  },
  "votes": {
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion206/20221004/Votacion001/VOT_20230302175911.json": {
+   "axes": [
+    {
+     "axis_id": "israel_palestina",
+     "yes_pushes": "-",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Tramitar una ley que niega subvenciones y contratos públicos a asociaciones que promuevan el antisemitismo",
+   "note": "Iniciativa ligada al rechazo al boicot a Israel (BDS); el título no lo detalla, confianza baja.",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion206/20221004/Votacion002/VOT_20230302175913.json": {
+   "axes": [
+    {
+     "axis_id": "instituciones_reglas",
+     "yes_pushes": "+",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Tramitar una ley que refuerce la independencia de la radio y televisión pública estatal frente al Gobierno",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion208/20221006/Votacion001/VOT_20230302174607.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Pedir que se elimine ya la obligación de llevar mascarilla en el transporte público y en farmacias",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion208/20221006/Votacion004/VOT_20230302174615.json": {
+   "axes": [
+    {
+     "axis_id": "clima_transicion",
+     "yes_pushes": "-",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Pedir que se borre toda referencia a la Agenda 2030 y sus objetivos de la comunicación oficial del Gobierno",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion208/20221006/Votacion005/VOT_20230302174617.json": {
+   "axes": [
+    {
+     "axis_id": "clima_transicion",
+     "yes_pushes": "-",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Pedir que el Gobierno renuncie a la Agenda 2030 como eje de toda su acción",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion208/20221006/Votacion006/VOT_20230302174620.json": {
+   "axes": [
+    {
+     "axis_id": "union_europea",
+     "yes_pushes": "-",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Afirmar la soberanía nacional frente a imposiciones de poderes globales",
+   "note": "Punto declarativo; no menciona la UE expresamente.",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion208/20221006/Votacion007/VOT_20230302174621.json": {
+   "axes": [
+    {
+     "axis_id": "clima_transicion",
+     "yes_pushes": "-",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Suprimir la Secretaría de Estado y la dirección general dedicadas a la Agenda 2030",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion208/20221006/Votacion008/VOT_20230302174624.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Quitar «Agenda 2030» del nombre del Ministerio de Derechos Sociales",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion208/20221006/Votacion009/VOT_20230302174626.json": {
+   "axes": [
+    {
+     "axis_id": "clima_transicion",
+     "yes_pushes": "-",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Encargar un informe sobre el coste económico de aplicar las normas derivadas de la Agenda 2030",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion208/20221006/Votacion010/VOT_20230302174628.json": {
+   "axes": [
+    {
+     "axis_id": "fiscalidad",
+     "yes_pushes": "-",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Pedir que se deflacte el IRPF, al menos en los tres primeros tramos, mínimos y deducciones",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion208/20221006/Votacion011/VOT_20230302174629.json": {
+   "axes": [
+    {
+     "axis_id": "fiscalidad",
+     "yes_pushes": "-",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Pedir que la rebaja del IVA del gas y la luz dure todo el invierno",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion208/20221006/Votacion012/VOT_20230302174631.json": {
+   "axes": [
+    {
+     "axis_id": "fiscalidad",
+     "yes_pushes": "-",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Pedir que se baje al 4 % el IVA de alimentos básicos, productos de higiene femenina y pañales",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion208/20221006/Votacion013/VOT_20230302174634.json": {
+   "axes": [
+    {
+     "axis_id": "vivienda_okupacion",
+     "yes_pushes": "-",
+     "confidence": "media"
+    },
+    {
+     "axis_id": "proteccion_social",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Ampliar quién se considera vulnerable en el código de buenas prácticas para deudores hipotecarios",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion208/20221006/Votacion014/VOT_20230302174636.json": {
+   "axes": [
+    {
+     "axis_id": "igualdad_genero",
+     "yes_pushes": "-",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Devolver al Gobierno el proyecto de ley trans y de derechos de las personas LGTBI",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion208/20221006/Votacion015/VOT_20230302174638.json": {
+   "axes": [
+    {
+     "axis_id": "bienestar_animal",
+     "yes_pushes": "-",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Devolver al Gobierno el proyecto de ley de protección y bienestar de los animales",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion208/20221006/Votacion017/VOT_20230302174641.json": {
+   "axes": [
+    {
+     "axis_id": "bienestar_animal",
+     "yes_pushes": "-",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Devolver al Gobierno la reforma del Código Penal que endurece el castigo del maltrato animal",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion208/20221006/Votacion018/VOT_20230302174644.json": {
+   "axes": [
+    {
+     "axis_id": "bioetica",
+     "yes_pushes": "-",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Devolver al Gobierno la reforma de la ley del aborto",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion208/20221006/Votacion019/VOT_20230302174646.json": {
+   "axes": [
+    {
+     "axis_id": "bioetica",
+     "yes_pushes": "-",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Sustituir la reforma de la ley del aborto del Gobierno por un texto alternativo",
+   "note": "Texto alternativo no disponible; se clasifica solo como rechazo al proyecto.",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion211/20221027/Votacion001/VOT_20230302174300.json": {
+   "axes": [
+    {
+     "axis_id": "proteccion_social",
+     "yes_pushes": "-",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Devolver al Gobierno el proyecto de Presupuestos Generales del Estado para 2023",
+   "note": "Presupuesto con fuerte gasto social y subida de pensiones; dirección deducida, confianza baja.",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion213/20221103/Votacion151/VOT_20230302173935.json": {
+   "axes": [
+    {
+     "axis_id": "nuclear",
+     "yes_pushes": "-",
+     "confidence": "baja"
+    },
+    {
+     "axis_id": "territorial_autogobierno",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Pedir un plan de transición y fondos estatales para las zonas de las centrales nucleares ante su cierre",
+   "note": "Mezcla preparar el cierre nuclear con aportar dinero a un fondo de la Generalitat.",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion213/20221103/Votacion152/VOT_20230302173937.json": {
+   "axes": [
+    {
+     "axis_id": "vivienda_okupacion",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Pedir reformas para desalojar viviendas ocupadas en 24 horas y endurecer las penas por ocupación",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion213/20221103/Votacion153/VOT_20230302173939.json": {
+   "axes": [
+    {
+     "axis_id": "instituciones_reglas",
+     "yes_pushes": "+",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Pedir que se garantice la independencia de RTVE y se eviten injerencias políticas en su consejo",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion213/20221103/Votacion154/VOT_20230302173940.json": {
+   "axes": [
+    {
+     "axis_id": "regulacion_economica",
+     "yes_pushes": "-",
+     "confidence": "media"
+    },
+    {
+     "axis_id": "autonomos_empresa",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Aprobar la ley de empresas emergentes, con incentivos fiscales y menos trámites para startups",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion213/20221103/Votacion155/VOT_20230302173942.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Aprobar el dictamen de la nueva Ley del Deporte",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion213/20221103/Votacion163/VOT_20230302173957.json": {
+   "axes": [
+    {
+     "axis_id": "fiscalidad",
+     "yes_pushes": "-",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Sustituir la ley de gravámenes temporales a energéticas y bancos por un texto alternativo",
+   "note": "Votar Sí sustituye el texto que crea los gravámenes.",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion213/20221103/Votacion168/VOT_20230302174008.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Aprobar el acuerdo con Azerbaiyán para intercambiar y proteger información clasificada",
+   "note": "Convenio rechazado; no encaja en ningún eje.",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion386/VOT_20230302165306.json": {
+   "axes": [
+    {
+     "axis_id": "proteccion_social",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Aprobar el Título I de los Presupuestos de 2023, con los créditos de gasto e ingresos",
+   "note": "Título que aprueba los estados de gasto de un presupuesto expansivo; confianza baja.",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion387/VOT_20230302165308.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Aprobar el Título II de los Presupuestos de 2023, sobre gestión presupuestaria",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion388/VOT_20230302165309.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Aprobar el Título III de los Presupuestos de 2023, sobre gastos de personal público",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion389/VOT_20230302165311.json": {
+   "axes": [
+    {
+     "axis_id": "proteccion_social",
+     "yes_pushes": "+",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Aprobar el Título IV de los Presupuestos de 2023, que fija la revalorización de las pensiones",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion390/VOT_20230302165313.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Aprobar el Título VIII de los Presupuestos de 2023, sobre cotizaciones sociales",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion391/VOT_20230302165316.json": {
+   "axes": [
+    {
+     "axis_id": "proteccion_social",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Aprobar la sección de Clases Pasivas (pensiones de funcionarios) de los Presupuestos de 2023",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion392/VOT_20230302165317.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Aprobar el Título V de los Presupuestos de 2023, sobre operaciones financieras y deuda",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion393/VOT_20230302165320.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Aprobar la sección de Deuda Pública de los Presupuestos de 2023",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion394/VOT_20230302165322.json": {
+   "axes": [],
+   "null_reason": "mixto",
+   "summary_yes": "Aprobar el Título VI de los Presupuestos de 2023, con las normas tributarias",
+   "note": "Sin texto; el título combina cambios fiscales de distinto signo.",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion395/VOT_20230302165324.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Aprobar el Título VII de los Presupuestos de 2023, sobre financiación de comunidades y ayuntamientos",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion396/VOT_20230302165326.json": {
+   "axes": [],
+   "null_reason": "mixto",
+   "summary_yes": "Aprobar las disposiciones adicionales, transitorias, derogatoria y finales de los Presupuestos de 2023",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion397/VOT_20230302165329.json": {
+   "axes": [],
+   "null_reason": "mixto",
+   "summary_yes": "Aprobar los anexos I a XIV de los Presupuestos de 2023",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion398/VOT_20230302165331.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Aprobar la sección del Ministerio de Ciencia e Innovación de los Presupuestos de 2023",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion399/VOT_20230302165333.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Aprobar la sección del Ministerio de Asuntos Exteriores de los Presupuestos de 2023",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion400/VOT_20230302165336.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Aprobar la sección de relaciones financieras con la Unión Europea de los Presupuestos de 2023",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion401/VOT_20230302165338.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Aprobar la sección del Ministerio de Justicia de los Presupuestos de 2023",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion402/VOT_20230302165340.json": {
+   "axes": [
+    {
+     "axis_id": "defensa_otan",
+     "yes_pushes": "+",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Aprobar la sección del Ministerio de Defensa de los Presupuestos de 2023",
+   "note": "Presupuesto de defensa con fuerte aumento respecto al año anterior.",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion403/VOT_20230302165342.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Aprobar la sección del Ministerio de Hacienda y Función Pública de los Presupuestos de 2023",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion404/VOT_20230302165344.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Aprobar la sección de Contratación Centralizada de los Presupuestos de 2023",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion405/VOT_20230302165346.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Aprobar la sección de financiación de comunidades y entes locales de los Presupuestos de 2023",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion406/VOT_20230302165348.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Aprobar la sección del Ministerio del Interior de los Presupuestos de 2023",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion407/VOT_20230302165350.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Aprobar la sección del Ministerio de Sanidad de los Presupuestos de 2023",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion408/VOT_20230302165352.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Aprobar la sección del Ministerio de Transportes de los Presupuestos de 2023",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion409/VOT_20230302165354.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Aprobar la sección del Ministerio de Trabajo y Economía Social de los Presupuestos de 2023",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion410/VOT_20230302165356.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Aprobar la sección del Ministerio de Agricultura, Pesca y Alimentación de los Presupuestos de 2023",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion411/VOT_20230302165359.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Aprobar la sección del Ministerio de Política Territorial de los Presupuestos de 2023",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion412/VOT_20230302165401.json": {
+   "axes": [
+    {
+     "axis_id": "memoria_democratica",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Aprobar la sección del Ministerio de Presidencia y Memoria Democrática de los Presupuestos de 2023",
+   "note": "Solo una parte de la sección financia políticas de memoria.",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion413/VOT_20230302165403.json": {
+   "axes": [
+    {
+     "axis_id": "clima_transicion",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Aprobar la sección del Ministerio para la Transición Ecológica de los Presupuestos de 2023",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion414/VOT_20230302165405.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Aprobar la sección del Ministerio de Industria, Comercio y Turismo de los Presupuestos de 2023",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion415/VOT_20230302165407.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Aprobar la sección del Ministerio de Cultura y Deporte de los Presupuestos de 2023",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion416/VOT_20230302165409.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Aprobar la sección del Ministerio de Educación y Formación Profesional de los Presupuestos de 2023",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion417/VOT_20230302165411.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Aprobar la sección del Ministerio de Asuntos Económicos y Transformación Digital de los Presupuestos de 2023",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion418/VOT_20230302165414.json": {
+   "axes": [
+    {
+     "axis_id": "proteccion_social",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Aprobar la sección del Ministerio de Derechos Sociales (dependencia, servicios sociales) de los Presupuestos de 2023",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion419/VOT_20230302165416.json": {
+   "axes": [
+    {
+     "axis_id": "igualdad_genero",
+     "yes_pushes": "+",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Aprobar la sección del Ministerio de Igualdad de los Presupuestos de 2023",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion420/VOT_20230302165418.json": {
+   "axes": [
+    {
+     "axis_id": "regulacion_economica",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Aprobar la sección del Ministerio de Consumo de los Presupuestos de 2023",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion421/VOT_20230302165420.json": {
+   "axes": [
+    {
+     "axis_id": "proteccion_social",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Aprobar la sección del Ministerio de Inclusión, Seguridad Social y Migraciones de los Presupuestos de 2023",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion422/VOT_20230302165422.json": {
+   "axes": [
+    {
+     "axis_id": "proteccion_social",
+     "yes_pushes": "+",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Aprobar la sección de la Seguridad Social (pensiones y prestaciones) de los Presupuestos de 2023",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion423/VOT_20230302165425.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Aprobar la sección del Ministerio de Universidades de los Presupuestos de 2023",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion424/VOT_20230302165427.json": {
+   "axes": [
+    {
+     "axis_id": "monarquia",
+     "yes_pushes": "-",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Aprobar la asignación a la Casa del Rey en los Presupuestos de 2023",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion425/VOT_20230302165429.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Aprobar la sección de las Cortes Generales de los Presupuestos de 2023",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion426/VOT_20230302165431.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Aprobar la sección del Tribunal de Cuentas de los Presupuestos de 2023",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion427/VOT_20230302165433.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Aprobar la sección del Tribunal Constitucional de los Presupuestos de 2023",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion428/VOT_20230302165436.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Aprobar la sección del Consejo de Estado de los Presupuestos de 2023",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion429/VOT_20230302165438.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Aprobar la sección del Consejo General del Poder Judicial de los Presupuestos de 2023",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion430/VOT_20230302165439.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Aprobar las aportaciones al mutualismo administrativo (MUFACE y otras) en los Presupuestos de 2023",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion431/VOT_20230302165441.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Aprobar el Fondo de Contingencia de los Presupuestos de 2023",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion432/VOT_20230302165443.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Aprobar los Fondos de Compensación Interterritorial de los Presupuestos de 2023",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion433/VOT_20230302165446.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Aprobar otras transferencias a comunidades y entes locales en los Presupuestos de 2023",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion434/VOT_20230302165448.json": {
+   "axes": [],
+   "null_reason": "mixto",
+   "summary_yes": "Aprobar los presupuestos de las entidades del sector público y el anexo de inversiones de 2023",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion435/VOT_20230302165450.json": {
+   "axes": [],
+   "null_reason": "mixto",
+   "summary_yes": "Aprobar el estado de ingresos del Estado de los Presupuestos de 2023",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion436/VOT_20230302165451.json": {
+   "axes": [],
+   "null_reason": "mixto",
+   "summary_yes": "Aprobar el preámbulo de la ley de Presupuestos de 2023",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion218/20221124/Votacion061/VOT_20230302163419.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Aprobar la ley de cooperación para el desarrollo sostenible y la solidaridad global",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion219/20221129/Votacion001/VOT_20230302163007.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Tramitar una reforma que obligue al Tribunal Constitucional a motivar y publicar si admite los recursos de amparo",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion219/20221129/Votacion002/VOT_20230302163009.json": {
+   "axes": [
+    {
+     "axis_id": "vivienda_okupacion",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Tramitar una ley contra la ocupación ilegal de viviendas y para la seguridad en comunidades de propietarios",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion221/20221201/Votacion002/VOT_20230302140547.json": {
+   "axes": [
+    {
+     "axis_id": "seguridad_penal",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Pedir que se reforme ya la ley del «solo sí es sí» para recuperar las penas por delitos sexuales anteriores",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion221/20221201/Votacion003/VOT_20230302140551.json": {
+   "axes": [
+    {
+     "axis_id": "transporte_publico",
+     "yes_pushes": "+",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Pedir que se restablezcan todos los servicios de tren suprimidos durante la pandemia",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion221/20221201/Votacion004/VOT_20230302140556.json": {
+   "axes": [
+    {
+     "axis_id": "transporte_publico",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Pedir que Renfe recupere su plantilla de maquinistas cumpliendo su plan de empleo",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion221/20221201/Votacion005/VOT_20230302140601.json": {
+   "axes": [
+    {
+     "axis_id": "transporte_publico",
+     "yes_pushes": "+",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Pedir que se ejecuten los planes de mejora de Cercanías y Rodalies",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion221/20221201/Votacion006/VOT_20230302140607.json": {
+   "axes": [
+    {
+     "axis_id": "transporte_publico",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Pedir que Renfe revise sus precios dinámicos para que no encarezcan el AVE y la larga distancia",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion221/20221201/Votacion007/VOT_20230302140613.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Pedir que Renfe Mercancías elimine la subida de tarifas de este año",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion221/20221201/Votacion008/VOT_20230302140619.json": {
+   "axes": [],
+   "null_reason": "demanda_local",
+   "summary_yes": "Pedir que se acelere la construcción de los corredores ferroviarios Mediterráneo y Atlántico",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion221/20221201/Votacion009/VOT_20230302140625.json": {
+   "axes": [
+    {
+     "axis_id": "clima_transicion",
+     "yes_pushes": "-",
+     "confidence": "baja"
+    },
+    {
+     "axis_id": "control_gobierno",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Pedir un referéndum consultivo sobre la política energética del Gobierno, enfrentando dependencia y «soberanía energética»",
+   "note": "Punto genérico de crítica a la política energética; dirección inferida del marco de la moción",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion221/20221201/Votacion010/VOT_20230302140631.json": {
+   "axes": [
+    {
+     "axis_id": "fiscalidad",
+     "yes_pushes": "-",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Pedir al Gobierno medidas para abaratar la factura energética rebajando los impuestos a la energía",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion221/20221201/Votacion011/VOT_20230302140638.json": {
+   "axes": [
+    {
+     "axis_id": "clima_transicion",
+     "yes_pushes": "-",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Pedir una ley que levante las prohibiciones de explorar y explotar hidrocarburos y otros recursos energéticos en España",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion221/20221201/Votacion012/VOT_20230302140645.json": {
+   "axes": [
+    {
+     "axis_id": "nuclear",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Impulsar la energía nuclear: alargar la vida de las centrales, construir nuevas y apoyarla en la taxonomía europea",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion221/20221201/Votacion036/VOT_20230302140850.json": {
+   "axes": [],
+   "null_reason": "procedimiento",
+   "summary_yes": "Aprobar el dictamen del Tribunal de Cuentas sobre la Cuenta General del Estado de 2020",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion222/20221201/Votacion002/VOT_20230302140405.json": {
+   "axes": [
+    {
+     "axis_id": "amnistia_proces",
+     "yes_pushes": "-",
+     "confidence": "media"
+    },
+    {
+     "axis_id": "seguridad_penal",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Sustituir la reforma penal que deroga la sedición y cambia desórdenes públicos por un texto alternativo",
+   "note": "Sin texto de la enmienda; se clasifica como rechazo al contenido de la reforma",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion222/20221201/Votacion003/VOT_20230302140409.json": {
+   "axes": [
+    {
+     "axis_id": "amnistia_proces",
+     "yes_pushes": "-",
+     "confidence": "media"
+    },
+    {
+     "axis_id": "seguridad_penal",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Sustituir la reforma penal que deroga la sedición y cambia desórdenes públicos por un texto alternativo",
+   "note": "Sin texto de la enmienda; se clasifica como rechazo al contenido de la reforma",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion222/20221201/Votacion005/VOT_20230302140415.json": {
+   "axes": [
+    {
+     "axis_id": "amnistia_proces",
+     "yes_pushes": "-",
+     "confidence": "media"
+    },
+    {
+     "axis_id": "seguridad_penal",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Sustituir la reforma penal que deroga la sedición y cambia desórdenes públicos por un texto alternativo",
+   "note": "Sin texto de la enmienda; se clasifica como rechazo al contenido de la reforma",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion223/20221213/Votacion001/VOT_20230302140239.json": {
+   "axes": [
+    {
+     "axis_id": "seguridad_penal",
+     "yes_pushes": "-",
+     "confidence": "media"
+    },
+    {
+     "axis_id": "instituciones_reglas",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Tramitar una reforma que refuerza el control judicial y los límites del Centro Nacional de Inteligencia",
+   "note": "Solo título",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion225/20221215/Votacion040/VOT_20230302135453.json": {
+   "axes": [
+    {
+     "axis_id": "control_gobierno",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    },
+    {
+     "axis_id": "igualdad_genero",
+     "yes_pushes": "-",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Reprobar a la ministra de Igualdad por su gestión y por los efectos de la ley que impulsó",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion225/20221215/Votacion041/VOT_20230302135454.json": {
+   "axes": [
+    {
+     "axis_id": "control_gobierno",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Pedir al presidente del Gobierno que destituya de inmediato a la ministra de Igualdad",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion225/20221215/Votacion042/VOT_20230302135457.json": {
+   "axes": [
+    {
+     "axis_id": "igualdad_genero",
+     "yes_pushes": "-",
+     "confidence": "alta"
+    },
+    {
+     "axis_id": "control_gobierno",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Pedir que se suprima el Ministerio de Igualdad y se destine su presupuesto a la emergencia social",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion225/20221215/Votacion043/VOT_20230302135459.json": {
+   "axes": [
+    {
+     "axis_id": "clima_transicion",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Reformar la ley de cambio climático para subir al 55 % el objetivo de reducción de emisiones a 2030",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion225/20221215/Votacion044/VOT_20230302135502.json": {
+   "axes": [
+    {
+     "axis_id": "clima_transicion",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Actualizar antes de fin de 2022 los compromisos de reducción de emisiones para no superar 1,5 °C",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion225/20221215/Votacion045/VOT_20230302135504.json": {
+   "axes": [
+    {
+     "axis_id": "clima_transicion",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Pedir a los demás Estados de la UE que presenten ante la ONU sus compromisos de reducción de emisiones",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion225/20221215/Votacion046/VOT_20230302135506.json": {
+   "axes": [
+    {
+     "axis_id": "clima_transicion",
+     "yes_pushes": "+",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Acompañar los Presupuestos de 2023 de un anexo sobre su impacto climático",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion225/20221215/Votacion047/VOT_20230302135508.json": {
+   "axes": [
+    {
+     "axis_id": "regulacion_economica",
+     "yes_pushes": "+",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Acabar con el sistema marginalista de fijación de los precios de la energía",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion225/20221215/Votacion048/VOT_20230302135510.json": {
+   "axes": [
+    {
+     "axis_id": "regulacion_economica",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Controlar el precio final de la electricidad y la energía térmica para combatir la pobreza energética",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion225/20221215/Votacion049/VOT_20230302135512.json": {
+   "axes": [
+    {
+     "axis_id": "clima_transicion",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Ampliar a 5 km la distancia para el autoconsumo fotovoltaico compartido a través de la red",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion225/20221215/Votacion050/VOT_20230302135514.json": {
+   "axes": [
+    {
+     "axis_id": "clima_transicion",
+     "yes_pushes": "+",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Crear una estrategia de salud climática para prevenir los riesgos de la crisis climática para la salud",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion225/20221215/Votacion051/VOT_20230302135516.json": {
+   "axes": [
+    {
+     "axis_id": "territorial_autogobierno",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    },
+    {
+     "axis_id": "transporte_publico",
+     "yes_pushes": "+",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Traspasar Rodalies a las administraciones catalana y valenciana y triplicar la inversión en el servicio",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion225/20221215/Votacion052/VOT_20230302135518.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Transponer en tres meses toda la directiva europea de seguridad nuclear de las instalaciones",
+   "note": "Seguridad nuclear, no sobre mantener o cerrar centrales",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion225/20221215/Votacion053/VOT_20230302135520.json": {
+   "axes": [],
+   "null_reason": "demanda_local",
+   "summary_yes": "Aprobar un nuevo plan de emergencia nuclear de Ascó y Vandellòs ampliando la zona de protección urgente",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion225/20221215/Votacion054/VOT_20230302135522.json": {
+   "axes": [],
+   "null_reason": "demanda_local",
+   "summary_yes": "Garantizar cobertura móvil total y redes de emergencia en los municipios cercanos a Ascó y Vandellòs",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion225/20221215/Votacion055/VOT_20230302135524.json": {
+   "axes": [],
+   "null_reason": "demanda_local",
+   "summary_yes": "Mantener en buen estado las infraestructuras de evacuación del plan de emergencia nuclear de Tarragona",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion225/20221215/Votacion056/VOT_20230302135526.json": {
+   "axes": [
+    {
+     "axis_id": "territorial_autogobierno",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Crear un órgano conjunto de la Generalitat, el Estado y el CSN para dirigir el plan de emergencia nuclear de Tarragona",
+   "note": "Mayormente demanda local; da peso a la Generalitat en la dirección del plan",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion225/20221215/Votacion057/VOT_20230302135528.json": {
+   "axes": [
+    {
+     "axis_id": "seguridad_penal",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Revisar con urgencia la ley del «solo sí es sí» para restaurar las penas por delitos sexuales anteriores",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion225/20221215/Votacion058/VOT_20230302135531.json": {
+   "axes": [
+    {
+     "axis_id": "seguridad_penal",
+     "yes_pushes": "+",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Reformar los delitos sexuales del Código Penal conforme al Pacto de Estado contra la Violencia de Género",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion225/20221215/Votacion059/VOT_20230302135532.json": {
+   "axes": [
+    {
+     "axis_id": "igualdad_genero",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    },
+    {
+     "axis_id": "control_gobierno",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Proteger a las víctimas cuyos agresores han salido o han visto rebajada su pena por la ley de libertad sexual",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion225/20221215/Votacion060/VOT_20230302135534.json": {
+   "axes": [
+    {
+     "axis_id": "igualdad_genero",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Aplicar todas las medidas de sensibilización del Pacto de Estado contra la Violencia de Género sobre delitos sexuales",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion225/20221215/Votacion061/VOT_20230302135536.json": {
+   "axes": [
+    {
+     "axis_id": "igualdad_genero",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Desarrollar las medidas del Pacto de Estado para proteger y recuperar a las víctimas de delitos sexuales",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion225/20221215/Votacion064/VOT_20230302135542.json": {
+   "axes": [
+    {
+     "axis_id": "bioetica",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Aprobar el dictamen de la reforma de la ley del aborto",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion225/20221215/Votacion065/VOT_20230302135544.json": {
+   "axes": [
+    {
+     "axis_id": "bioetica",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Aprobar en conjunto la reforma de la ley del aborto (carácter orgánico)",
+   "classifier": "agent-x01"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion225/20221215/Votacion083/VOT_20230302135620.json": {
+   "axes": [
+    {
+     "axis_id": "territorial_autogobierno",
+     "yes_pushes": "-",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Devolver al Gobierno la ley que actualiza los tributos estatales cedidos a Andalucía",
+   "note": "Sin texto de la enmienda",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion225/20221215/Votacion084/VOT_20230302135622.json": {
+   "axes": [
+    {
+     "axis_id": "territorial_autogobierno",
+     "yes_pushes": "-",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Devolver al Gobierno la ley que actualiza los tributos estatales cedidos a Canarias",
+   "note": "Sin texto de la enmienda",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion225/20221215/Votacion085/VOT_20230302135624.json": {
+   "axes": [
+    {
+     "axis_id": "territorial_autogobierno",
+     "yes_pushes": "-",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Devolver al Gobierno la ley que actualiza los tributos estatales cedidos a Cataluña",
+   "note": "Sin texto de la enmienda",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion225/20221215/Votacion086/VOT_20230302135626.json": {
+   "axes": [
+    {
+     "axis_id": "territorial_autogobierno",
+     "yes_pushes": "-",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Devolver al Gobierno la ley que actualiza los tributos estatales cedidos a la Comunitat Valenciana",
+   "note": "Sin texto de la enmienda",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion225/20221215/Votacion087/VOT_20230302135628.json": {
+   "axes": [
+    {
+     "axis_id": "territorial_autogobierno",
+     "yes_pushes": "-",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Devolver al Gobierno la ley que actualiza los tributos estatales cedidos a Galicia",
+   "note": "Sin texto de la enmienda",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion225/20221215/Votacion088/VOT_20230302135630.json": {
+   "axes": [
+    {
+     "axis_id": "territorial_autogobierno",
+     "yes_pushes": "-",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Devolver al Gobierno la ley que actualiza los tributos estatales cedidos a las Illes Balears",
+   "note": "Sin texto de la enmienda",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion226/20221215/Votacion017/VOT_20230302134918.json": {
+   "axes": [
+    {
+     "axis_id": "amnistia_proces",
+     "yes_pushes": "+",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Aprobar los apartados de la reforma penal que rebajan las penas de malversación sin ánimo de lucro",
+   "note": "Identificación de los apartados 13 bis-quater como reforma de la malversación deducida, no consta el texto",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion226/20221215/Votacion018/VOT_20230302134920.json": {
+   "axes": [
+    {
+     "axis_id": "justicia_independencia",
+     "yes_pushes": "-",
+     "confidence": "media"
+    },
+    {
+     "axis_id": "instituciones_reglas",
+     "yes_pushes": "-",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Aprobar las disposiciones añadidas a la reforma penal que cambian la renovación del Tribunal Constitucional y el CGPJ",
+   "note": "Sin texto; se deduce que son las enmiendas sobre LOPJ/LOTC incorporadas a esta ley",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion226/20221215/Votacion019/VOT_20230302134922.json": {
+   "axes": [
+    {
+     "axis_id": "amnistia_proces",
+     "yes_pushes": "+",
+     "confidence": "media"
+    },
+    {
+     "axis_id": "seguridad_penal",
+     "yes_pushes": "-",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Aprobar el resto de la reforma penal que deroga la sedición y redefine los desórdenes públicos",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion226/20221215/Votacion020/VOT_20230302134924.json": {
+   "axes": [
+    {
+     "axis_id": "amnistia_proces",
+     "yes_pushes": "+",
+     "confidence": "media"
+    },
+    {
+     "axis_id": "seguridad_penal",
+     "yes_pushes": "-",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Aprobar la ley orgánica que deroga la sedición, reforma la malversación y los desórdenes públicos",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion227/20221220/Votacion001/VOT_20230302134703.json": {
+   "axes": [
+    {
+     "axis_id": "inmigracion",
+     "yes_pushes": "-",
+     "confidence": "alta"
+    },
+    {
+     "axis_id": "vivienda_okupacion",
+     "yes_pushes": "+",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Tramitar una reforma para no empadronar a quienes ocupan viviendas ilegalmente ni a inmigrantes en situación irregular",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion227/20221220/Votacion002/VOT_20230302134706.json": {
+   "axes": [
+    {
+     "axis_id": "seguridad_penal",
+     "yes_pushes": "+",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Tramitar una ley contra las agresiones al personal sanitario",
+   "note": "Solo título",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion229/20221222/Votacion357/VOT_20230302133918.json": {
+   "axes": [
+    {
+     "axis_id": "control_gobierno",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Cambiar las estadísticas de paro del SEPE para mostrar a los fijos discontinuos y el «paro efectivo»",
+   "note": "Petición de transparencia estadística con crítica implícita al Gobierno",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion229/20221222/Votacion359/VOT_20230302133923.json": {
+   "axes": [
+    {
+     "axis_id": "territorial_autogobierno",
+     "yes_pushes": "+",
+     "confidence": "media"
+    },
+    {
+     "axis_id": "regulacion_economica",
+     "yes_pushes": "-",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Agilizar los fondos europeos con menos trámites, criterios regionales y cogobernanza con las comunidades",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion229/20221222/Votacion361/VOT_20230302133926.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Reformar la ley de haciendas locales y dar más fondos a los municipios afectados por la despoblación",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion229/20221222/Votacion363/VOT_20230302133930.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Crear un fondo de ecualización para reforzar la financiación de los municipios de zonas despobladas",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion229/20221222/Votacion365/VOT_20230302133935.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Aprobar una ley específica para los pequeños municipios del medio rural",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion229/20221222/Votacion367/VOT_20230302133940.json": {
+   "axes": [
+    {
+     "axis_id": "proteccion_social",
+     "yes_pushes": "+",
+     "confidence": "media"
+    },
+    {
+     "axis_id": "regulacion_economica",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Garantizar atención presencial en la Administración y facilitar el acceso a ayudas como el ingreso mínimo vital",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion229/20221222/Votacion368/VOT_20230302133942.json": {
+   "axes": [
+    {
+     "axis_id": "educacion_modelo",
+     "yes_pushes": "+",
+     "confidence": "media"
+    },
+    {
+     "axis_id": "empleo_derechos",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Aprobar el dictamen de la ley de universidades, que fija financiación pública y reduce la temporalidad del profesorado",
+   "note": "Solo título; contenido conocido de la LOSU",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion229/20221222/Votacion369/VOT_20230302133944.json": {
+   "axes": [
+    {
+     "axis_id": "educacion_modelo",
+     "yes_pushes": "+",
+     "confidence": "media"
+    },
+    {
+     "axis_id": "empleo_derechos",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Aprobar la ley orgánica del sistema universitario",
+   "note": "Solo título; contenido conocido de la LOSU",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion229/20221222/Votacion370/VOT_20230302133945.json": {
+   "axes": [
+    {
+     "axis_id": "proteccion_social",
+     "yes_pushes": "+",
+     "confidence": "media"
+    },
+    {
+     "axis_id": "empleo_derechos",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Aprobar la ley de empleo que reorganiza los servicios públicos de empleo y las políticas activas",
+   "note": "Solo título",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion229/20221222/Votacion371/VOT_20230302133947.json": {
+   "axes": [
+    {
+     "axis_id": "igualdad_genero",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Aprobar la ley trans y de garantía de los derechos de las personas LGTBI",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion229/20221222/Votacion373/VOT_20230302133951.json": {
+   "axes": [
+    {
+     "axis_id": "anticorrupcion",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Aprobar la ley que protege a quienes denuncian infracciones y corrupción",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion231/20230207/Votacion001/VOT_20230302131754.json": {
+   "axes": [
+    {
+     "axis_id": "fiscalidad",
+     "yes_pushes": "-",
+     "confidence": "media"
+    },
+    {
+     "axis_id": "territorial_autogobierno",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Tramitar una reforma del régimen fiscal canario para que las operaciones de trading de empresas de la ZEC tengan ventajas fiscales",
+   "note": "Solo título",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion231/20230207/Votacion002/VOT_20230302131756.json": {
+   "axes": [
+    {
+     "axis_id": "campo_ambiente",
+     "yes_pushes": "+",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Tramitar una reforma para adaptar los parques nacionales existentes y sus usos a los efectos de su declaración",
+   "note": "Solo título; se interpreta como flexibilizar plazos y usos tradicionales",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion233/20230209/Votacion147/VOT_20230302130939.json": {
+   "axes": [
+    {
+     "axis_id": "fiscalidad",
+     "yes_pushes": "-",
+     "confidence": "media"
+    },
+    {
+     "axis_id": "clima_transicion",
+     "yes_pushes": "-",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Apoyar al turismo con ayudas y rechazar tasas turísticas, impuestos al queroseno y subidas fiscales al sector",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion233/20230209/Votacion148/VOT_20230302130942.json": {
+   "axes": [
+    {
+     "axis_id": "justicia_independencia",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    },
+    {
+     "axis_id": "control_gobierno",
+     "yes_pushes": "+",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Pedir al Gobierno que deje de señalar a magistrados y acate las decisiones del Tribunal Constitucional",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion233/20230209/Votacion149/VOT_20230302130944.json": {
+   "axes": [
+    {
+     "axis_id": "amnistia_proces",
+     "yes_pushes": "-",
+     "confidence": "alta"
+    },
+    {
+     "axis_id": "seguridad_penal",
+     "yes_pushes": "+",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Recuperar la sedición, ampliar la rebelión y revertir la rebaja de penas por malversación",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion233/20230209/Votacion150/VOT_20230302130947.json": {
+   "axes": [
+    {
+     "axis_id": "amnistia_proces",
+     "yes_pushes": "-",
+     "confidence": "alta"
+    },
+    {
+     "axis_id": "seguridad_penal",
+     "yes_pushes": "+",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Volver a castigar como delito la convocatoria de referéndums ilegales por autoridades",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion233/20230209/Votacion151/VOT_20230302130950.json": {
+   "axes": [
+    {
+     "axis_id": "amnistia_proces",
+     "yes_pushes": "-",
+     "confidence": "alta"
+    },
+    {
+     "axis_id": "territorial_autogobierno",
+     "yes_pushes": "-",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Disolver la mesa de diálogo con la Generalitat y descartar cualquier consulta en Cataluña",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion233/20230209/Votacion152/VOT_20230302130952.json": {
+   "axes": [
+    {
+     "axis_id": "territorial_autogobierno",
+     "yes_pushes": "-",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Acabar con las cesiones a partidos nacionalistas y quitar «nacionalidades y regiones» del artículo 2 de la Constitución",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion233/20230209/Votacion153/VOT_20230302130954.json": {
+   "axes": [
+    {
+     "axis_id": "amnistia_proces",
+     "yes_pushes": "-",
+     "confidence": "media"
+    },
+    {
+     "axis_id": "anticorrupcion",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Comprometerse contra la corrupción y los delitos contra la unidad de España, sin medidas que los suavicen",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion233/20230209/Votacion154/VOT_20230302130956.json": {
+   "axes": [
+    {
+     "axis_id": "inmigracion",
+     "yes_pushes": "+",
+     "confidence": "media"
+    },
+    {
+     "axis_id": "control_gobierno",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Reprobar al ministro del Interior por la tragedia de la valla de Melilla y traer a un refugiado sudanés expulsado",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion233/20230209/Votacion155/VOT_20230302130958.json": {
+   "axes": [
+    {
+     "axis_id": "amnistia_proces",
+     "yes_pushes": "-",
+     "confidence": "media"
+    },
+    {
+     "axis_id": "territorial_autogobierno",
+     "yes_pushes": "-",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Convocar un referéndum consultivo sobre ilegalizar los partidos separatistas",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion233/20230209/Votacion156/VOT_20230302131000.json": {
+   "axes": [
+    {
+     "axis_id": "territorial_autogobierno",
+     "yes_pushes": "-",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Defender con firmeza la unidad de la nación frente a quienes buscan romper España",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion233/20230209/Votacion157/VOT_20230302131002.json": {
+   "axes": [
+    {
+     "axis_id": "amnistia_proces",
+     "yes_pushes": "-",
+     "confidence": "alta"
+    },
+    {
+     "axis_id": "seguridad_penal",
+     "yes_pushes": "+",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Volver a tipificar como delito la convocatoria y celebración de referéndums ilegales",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion233/20230209/Votacion158/VOT_20230302131004.json": {
+   "axes": [
+    {
+     "axis_id": "territorial_autogobierno",
+     "yes_pushes": "-",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Recuperar para el Estado las competencias de educación, sanidad, seguridad y justicia de las comunidades",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion233/20230209/Votacion159/VOT_20230302131007.json": {
+   "axes": [
+    {
+     "axis_id": "amnistia_proces",
+     "yes_pushes": "-",
+     "confidence": "media"
+    },
+    {
+     "axis_id": "territorial_autogobierno",
+     "yes_pushes": "-",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Reformar la ley de partidos para ilegalizar a los partidos separatistas",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion233/20230209/Votacion160/VOT_20230302131009.json": {
+   "axes": [
+    {
+     "axis_id": "bienestar_animal",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Aprobar la ley de protección de los derechos y el bienestar de los animales",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion233/20230209/Votacion161/VOT_20230302131011.json": {
+   "axes": [
+    {
+     "axis_id": "bienestar_animal",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    },
+    {
+     "axis_id": "seguridad_penal",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Aprobar el dictamen que endurece en el Código Penal el castigo del maltrato animal",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion233/20230209/Votacion162/VOT_20230302131013.json": {
+   "axes": [
+    {
+     "axis_id": "bienestar_animal",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    },
+    {
+     "axis_id": "seguridad_penal",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Aprobar la reforma del Código Penal sobre maltrato animal",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion233/20230209/Votacion165/VOT_20230302131019.json": {
+   "axes": [],
+   "null_reason": "procedimiento",
+   "summary_yes": "Ratificar el acuerdo con la UNESCO sobre el centro de reservas de la biosfera mediterráneas en Barcelona",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion234/20230214/Votacion001/VOT_20230302125908.json": {
+   "axes": [
+    {
+     "axis_id": "amnistia_proces",
+     "yes_pushes": "-",
+     "confidence": "media"
+    },
+    {
+     "axis_id": "seguridad_penal",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Tramitar una reforma electoral para que los prófugos de la justicia no puedan ser candidatos",
+   "note": "Solo título",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion234/20230214/Votacion002/VOT_20230302125910.json": {
+   "axes": [
+    {
+     "axis_id": "sahara_marruecos",
+     "yes_pushes": "+",
+     "confidence": "media"
+    },
+    {
+     "axis_id": "inmigracion",
+     "yes_pushes": "+",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Tramitar una ley para dar la nacionalidad española a los saharauis nacidos bajo soberanía española",
+   "note": "Solo título",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion236/20230216/Votacion005/VOT_20230302125422.json": {
+   "axes": [
+    {
+     "axis_id": "amnistia_proces",
+     "yes_pushes": "-",
+     "confidence": "media"
+    },
+    {
+     "axis_id": "territorial_autogobierno",
+     "yes_pushes": "-",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Convocar un referéndum consultivo sobre ilegalizar los partidos separatistas",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion236/20230216/Votacion006/VOT_20230302125424.json": {
+   "axes": [
+    {
+     "axis_id": "amnistia_proces",
+     "yes_pushes": "-",
+     "confidence": "alta"
+    },
+    {
+     "axis_id": "seguridad_penal",
+     "yes_pushes": "+",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Volver a tipificar como delito la convocatoria y celebración de referéndums ilegales",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion236/20230216/Votacion009/VOT_20230302125430.json": {
+   "axes": [
+    {
+     "axis_id": "proteccion_social",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    },
+    {
+     "axis_id": "control_gobierno",
+     "yes_pushes": "+",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Exigir que la Seguridad Social resuelva sus retrasos en citas y reduzca trabas para acceder a prestaciones",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion236/20230216/Votacion010/VOT_20230302125432.json": {
+   "axes": [
+    {
+     "axis_id": "campo_ambiente",
+     "yes_pushes": "+",
+     "confidence": "media"
+    },
+    {
+     "axis_id": "control_gobierno",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Convocar un referéndum sobre un Plan Nacional del Agua frente al modelo de gestión actual",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion236/20230216/Votacion011/VOT_20230302125434.json": {
+   "axes": [
+    {
+     "axis_id": "campo_ambiente",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Aprobar un Plan Nacional del Agua con interconexión de cuencas para garantizar el acceso al agua",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion236/20230216/Votacion012/VOT_20230302125437.json": {
+   "axes": [
+    {
+     "axis_id": "campo_ambiente",
+     "yes_pushes": "+",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Reforzar el sector primario y la soberanía alimentaria y frenar la despoblación rural",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion237/20230221/Votacion001/VOT_20230302125035.json": {
+   "axes": [
+    {
+     "axis_id": "seguridad_penal",
+     "yes_pushes": "-",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Tramitar una ley que regule de forma integral el cannabis",
+   "note": "Solo título; legalizar y regular el cannabis se asimila a enfoque no punitivo",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion237/20230221/Votacion002/VOT_20230302125038.json": {
+   "axes": [
+    {
+     "axis_id": "amnistia_proces",
+     "yes_pushes": "+",
+     "confidence": "media"
+    },
+    {
+     "axis_id": "seguridad_penal",
+     "yes_pushes": "-",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Derogar la suspensión automática de cargos públicos procesados por rebelión o terrorismo",
+   "note": "Solo título",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion239/20230223/Votacion005/VOT_20230302123949.json": {
+   "axes": [
+    {
+     "axis_id": "sanidad_publica",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Reducir las desigualdades territoriales en diagnóstico y tratamiento del cáncer reforzando el sistema público",
+   "note": "Texto de consenso; eje débil",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion239/20230223/Votacion006/VOT_20230302123952.json": {
+   "axes": [
+    {
+     "axis_id": "empleo_derechos",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Subir la indemnización por despido improcedente a 45 días por año con un tope de 42 mensualidades",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion239/20230223/Votacion007/VOT_20230302123955.json": {
+   "axes": [
+    {
+     "axis_id": "control_gobierno",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    },
+    {
+     "axis_id": "empleo_derechos",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Pedir que se resuelva la huelga de letrados de la Administración de Justicia y se recupere el retraso",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion239/20230223/Votacion008/VOT_20230302123958.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Poner en marcha la plataforma de liquidación y venta de activos prevista en la ley concursal",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion239/20230223/Votacion009/VOT_20230302124001.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Dotar de presupuesto la puesta en marcha de las leyes de eficiencia de la Justicia",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion239/20230223/Votacion013/VOT_20230302124014.json": {
+   "axes": [
+    {
+     "axis_id": "empleo_derechos",
+     "yes_pushes": "+",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Negociar las condiciones de trabajo y compensaciones de los funcionarios de Justicia afectados por el nuevo modelo",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion239/20230223/Votacion014/VOT_20230302124016.json": {
+   "axes": [
+    {
+     "axis_id": "territorial_autogobierno",
+     "yes_pushes": "+",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Aprobar la actualización del Convenio Económico entre el Estado y Navarra",
+   "note": "Lectura única; solo título",
+   "classifier": "agent-x02"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion239/20230223/Votacion015/VOT_20230302124018.json": {
+   "axes": [
+    {
+     "axis_id": "territorial_autogobierno",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Aprobar la reforma del Concierto Económico vasco, que amplía los tributos que gestiona el País Vasco.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion239/20230223/Votacion016/VOT_20230302124020.json": {
+   "axes": [
+    {
+     "axis_id": "territorial_autogobierno",
+     "yes_pushes": "+",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Aprobar la ley del cupo vasco para 2022-2026, que fija lo que el País Vasco paga al Estado por sus competencias.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion240/20230307/Votacion001/VOT_20230307213637.json": {
+   "axes": [
+    {
+     "axis_id": "vivienda_intervencion",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Tramitar la reforma de la ley de arrendamientos urbanos propuesta por el Parlamento balear.",
+   "note": "Solo título; se asume que refuerza la regulación del alquiler.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion240/20230307/Votacion002/VOT_20230307213640.json": {
+   "axes": [
+    {
+     "axis_id": "seguridad_penal",
+     "yes_pushes": "+",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Tramitar la reforma del Código Penal en delitos sexuales que ajusta y eleva penas tras la ley del 'solo sí es sí'.",
+   "note": "Solo título.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion242/20230309/Votacion006/VOT_20230309144249.json": {
+   "axes": [
+    {
+     "axis_id": "clima_transicion",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    },
+    {
+     "axis_id": "campo_ambiente",
+     "yes_pushes": "-",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Pedir al Gobierno que impulse y financie la adaptación de especies y ecosistemas al cambio climático.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion242/20230309/Votacion009/VOT_20230309144258.json": {
+   "axes": [
+    {
+     "axis_id": "defensa_otan",
+     "yes_pushes": "+",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Apoyar los esfuerzos de la UE y la OTAN para que Ucrania recupere sus fronteras de 2014.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion242/20230309/Votacion010/VOT_20230309144300.json": {
+   "axes": [
+    {
+     "axis_id": "defensa_otan",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Pedir al Gobierno que envíe a Ucrania el material militar que solicite e informe al Congreso de cada envío.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion242/20230309/Votacion013/VOT_20230309144307.json": {
+   "axes": [
+    {
+     "axis_id": "instituciones_reglas",
+     "yes_pushes": "+",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Exigir comparecencias mensuales de los ministros sobre Ucrania y los compromisos internacionales de España.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion242/20230309/Votacion014/VOT_20230309144309.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Pedir que se facilite el contacto de diputados y senadores con las misiones militares desplegadas en el Este de Europa.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion242/20230309/Votacion015/VOT_20230309144311.json": {
+   "axes": [
+    {
+     "axis_id": "instituciones_reglas",
+     "yes_pushes": "+",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Exigir al Gobierno que informe de cambios en las misiones OTAN y pida autorización al Congreso para nuevos despliegues.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion242/20230309/Votacion016/VOT_20230309144314.json": {
+   "axes": [
+    {
+     "axis_id": "instituciones_reglas",
+     "yes_pushes": "+",
+     "confidence": "media"
+    },
+    {
+     "axis_id": "defensa_otan",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Exigir que el Gobierno pida autorización al Congreso para desplegar una batería antiaérea NASAMS en Estonia.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion242/20230309/Votacion018/VOT_20230309144318.json": {
+   "axes": [
+    {
+     "axis_id": "defensa_otan",
+     "yes_pushes": "+",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Apoyar los esfuerzos de la UE y la OTAN para que Ucrania recupere sus fronteras de 2014.",
+   "note": "Mismo texto que el punto 2 de la otra parte de la moción.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion242/20230309/Votacion019/VOT_20230309144320.json": {
+   "axes": [
+    {
+     "axis_id": "defensa_otan",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Pedir al Gobierno que envíe a Ucrania el material militar que solicite e informe al Congreso de cada envío.",
+   "note": "Mismo texto que el punto 3 de la otra parte de la moción.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion242/20230309/Votacion020/VOT_20230309144324.json": {
+   "axes": [
+    {
+     "axis_id": "clima_transicion",
+     "yes_pushes": "-",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Someter a referéndum las políticas ambientales y energéticas, incluidas las limitaciones a los coches de combustión.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion242/20230309/Votacion021/VOT_20230309144328.json": {
+   "axes": [
+    {
+     "axis_id": "union_europea",
+     "yes_pushes": "-",
+     "confidence": "alta"
+    },
+    {
+     "axis_id": "clima_transicion",
+     "yes_pushes": "-",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Pedir al Gobierno que bloquee en la UE cualquier iniciativa que considere perjudicial para los españoles.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion242/20230309/Votacion022/VOT_20230309144331.json": {
+   "axes": [
+    {
+     "axis_id": "clima_transicion",
+     "yes_pushes": "-",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Pedir que España actúe en la UE para evitar la prohibición de vender coches de combustión desde 2035.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion242/20230309/Votacion023/VOT_20230309144333.json": {
+   "axes": [
+    {
+     "axis_id": "clima_transicion",
+     "yes_pushes": "-",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Financiar el desarrollo de nuevas formas de propulsión y la prospección y explotación de recursos naturales en España.",
+   "note": "Mezcla I+D en propulsión alternativa con explotación de recursos naturales.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion242/20230309/Votacion024/VOT_20230309144334.json": {
+   "axes": [
+    {
+     "axis_id": "clima_transicion",
+     "yes_pushes": "-",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Pedir la derogación inmediata de la ley de cambio climático y transición energética.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion242/20230309/Votacion030/VOT_20230309144345.json": {
+   "axes": [
+    {
+     "axis_id": "regulacion_economica",
+     "yes_pushes": "-",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Devolver al Gobierno la ley que crea una autoridad independiente para resolver reclamaciones de clientes bancarios.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion242/20230309/Votacion033/VOT_20230309144351.json": {
+   "axes": [
+    {
+     "axis_id": "defensa_otan",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Aprobar el acuerdo con la OTAN para organizar la cumbre de Madrid de junio de 2022.",
+   "note": "Acuerdo logístico de sede; toca la OTAN pero sin controversia de contenido clara.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion242/20230309/Votacion034/VOT_20230309144354.json": {
+   "axes": [],
+   "null_reason": "procedimiento",
+   "summary_yes": "Aprobar el acuerdo con la UNESCO para organizar la III Conferencia Mundial sobre Educación Superior.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion243/20230314/Votacion001/VOT_20230314210132.json": {
+   "axes": [
+    {
+     "axis_id": "territorial_autogobierno",
+     "yes_pushes": "-",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Tramitar una reforma de la prueba de acceso a la universidad para garantizar igualdad de trato entre comunidades.",
+   "note": "Solo título; se entiende como prueba común o armonizada estatal.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion243/20230314/Votacion002/VOT_20230314210135.json": {
+   "axes": [
+    {
+     "axis_id": "empleo_derechos",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Tramitar una ley para recuperar y ampliar derechos laborales.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion245/20230316/Votacion020/VOT_20230316134813.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Pedir al Gobierno que siga gestionando los fondos europeos con cogobernanza autonómica y ejecución acelerada.",
+   "note": "El texto parece de respaldo a la gestión del Gobierno, distinto del enfoque crítico del título; posible desajuste de texto.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion245/20230316/Votacion025/VOT_20230316134826.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Pedir formación al profesorado para detectar a tiempo problemas de salud mental del alumnado.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion245/20230316/Votacion026/VOT_20230316134829.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Pedir formación a docentes y profesionales sobre buen trato a la infancia y prevención de conflictos escolares.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion245/20230316/Votacion034/VOT_20230316134850.json": {
+   "axes": [
+    {
+     "axis_id": "igualdad_genero",
+     "yes_pushes": "-",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Pedir medidas para restaurar la presunción de inocencia y reparar el daño atribuido a la legislación 'de género'.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion245/20230316/Votacion035/VOT_20230316134853.json": {
+   "axes": [
+    {
+     "axis_id": "igualdad_genero",
+     "yes_pushes": "-",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Pedir a la Fiscalía que persiga con firmeza las denuncias falsas de violencia doméstica.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion245/20230316/Votacion036/VOT_20230316134855.json": {
+   "axes": [
+    {
+     "axis_id": "igualdad_genero",
+     "yes_pushes": "-",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Someter a referéndum la supresión de las políticas de igualdad y de violencia de género.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion245/20230316/Votacion037/VOT_20230316134858.json": {
+   "axes": [
+    {
+     "axis_id": "igualdad_genero",
+     "yes_pushes": "-",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Suprimir el Ministerio de Igualdad y crear en su lugar un Ministerio de Familia.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion245/20230316/Votacion038/VOT_20230316134901.json": {
+   "axes": [
+    {
+     "axis_id": "igualdad_genero",
+     "yes_pushes": "-",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Derogar la ley integral contra la violencia de género de 2004 y sus normas de desarrollo.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion245/20230316/Votacion039/VOT_20230316134904.json": {
+   "axes": [
+    {
+     "axis_id": "igualdad_genero",
+     "yes_pushes": "-",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Sustituir la ley de violencia de género por una ley de violencia doméstica sin distinción de sexo.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion245/20230316/Votacion040/VOT_20230316134909.json": {
+   "axes": [
+    {
+     "axis_id": "igualdad_genero",
+     "yes_pushes": "-",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Eliminar el término 'género' de las leyes y sustituir la perspectiva de género por una de familia.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion245/20230316/Votacion042/VOT_20230316134915.json": {
+   "axes": [
+    {
+     "axis_id": "regulacion_economica",
+     "yes_pushes": "-",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Devolver al Gobierno el proyecto de ley del cine y de la cultura audiovisual.",
+   "note": "La ley incluye obligaciones a plataformas y reglas de ayudas; eje aproximado.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion245/20230316/Votacion044/VOT_20230316134926.json": {
+   "axes": [
+    {
+     "axis_id": "regulacion_economica",
+     "yes_pushes": "-",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Devolver al Gobierno la ley que crea la Oficina Española de Derechos de Autor como organismo público.",
+   "note": "Eje aproximado.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion248/20230328/Votacion001/VOT_20230328203359.json": {
+   "axes": [],
+   "null_reason": "sin_texto",
+   "summary_yes": "Tramitar una reforma de la ley de economía social.",
+   "note": "Solo título; no consta el contenido.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion248/20230328/Votacion002/VOT_20230328203401.json": {
+   "axes": [
+    {
+     "axis_id": "seguridad_penal",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Tramitar una reforma del Código Penal para endurecer el castigo de hurtos y estafas, sobre todo a reincidentes.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion250/20230330/Votacion005/VOT_20230330124218.json": {
+   "axes": [
+    {
+     "axis_id": "regulacion_economica",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    },
+    {
+     "axis_id": "empleo_derechos",
+     "yes_pushes": "+",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Condicionar las ayudas públicas a empresas a que no deslocalicen y mantengan el empleo, con devolución si incumplen.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion250/20230330/Votacion006/VOT_20230330124220.json": {
+   "axes": [
+    {
+     "axis_id": "instituciones_reglas",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Pedir pluralismo en los medios públicos con reparto del tiempo de emisión según la representación de cada fuerza.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion250/20230330/Votacion007/VOT_20230330124223.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Pedir que las televisiones públicas y privadas emitan información veraz y plural.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion250/20230330/Votacion008/VOT_20230330124225.json": {
+   "axes": [
+    {
+     "axis_id": "instituciones_reglas",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Pedir que se cumplan estrictamente las normas electorales sobre programación televisiva en campaña.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion250/20230330/Votacion009/VOT_20230330124227.json": {
+   "axes": [
+    {
+     "axis_id": "proteccion_social",
+     "yes_pushes": "-",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Pedir al Gobierno que detalle su plan de consolidación fiscal según las reglas europeas de estabilidad.",
+   "note": "Petición de información con orientación a contener el gasto.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion250/20230330/Votacion010/VOT_20230330124229.json": {
+   "axes": [
+    {
+     "axis_id": "fiscalidad",
+     "yes_pushes": "-",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Recortar el gasto político superfluo para ayudar fiscalmente a familias y empresas sin más deuda.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion250/20230330/Votacion011/VOT_20230330124231.json": {
+   "axes": [
+    {
+     "axis_id": "regulacion_economica",
+     "yes_pushes": "-",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Pedir una agenda de reformas para mejorar la competitividad de las empresas.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion250/20230330/Votacion012/VOT_20230330124233.json": {
+   "axes": [
+    {
+     "axis_id": "control_gobierno",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Pedir al Gobierno que mejore la gestión de los fondos europeos para modernizar el tejido productivo.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion250/20230330/Votacion013/VOT_20230330124236.json": {
+   "axes": [
+    {
+     "axis_id": "proteccion_social",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Aprobar un plan de defensa de las familias centrado en recuperar la clase media.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion250/20230330/Votacion014/VOT_20230330124238.json": {
+   "axes": [
+    {
+     "axis_id": "proteccion_social",
+     "yes_pushes": "+",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Concentrar ayudas en los colectivos más vulnerables para reducir la desigualdad y la pobreza.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion250/20230330/Votacion015/VOT_20230330124240.json": {
+   "axes": [
+    {
+     "axis_id": "control_gobierno",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    },
+    {
+     "axis_id": "anticorrupcion",
+     "yes_pushes": "+",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Rastrear y recuperar los fondos públicos desviados a tramas de corrupción, en particular las que afectan al PSOE.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion250/20230330/Votacion016/VOT_20230330124254.json": {
+   "axes": [
+    {
+     "axis_id": "control_gobierno",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Exigir responsabilidades políticas por el dinero público gastado en tramas de corrupción como el caso Mediador.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion250/20230330/Votacion017/VOT_20230330124257.json": {
+   "axes": [
+    {
+     "axis_id": "anticorrupcion",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Crear mecanismos para proteger la gestión de fondos públicos frente a malversación, cohecho y corrupción.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion250/20230330/Votacion018/VOT_20230330124259.json": {
+   "axes": [
+    {
+     "axis_id": "amnistia_proces",
+     "yes_pushes": "-",
+     "confidence": "alta"
+    },
+    {
+     "axis_id": "anticorrupcion",
+     "yes_pushes": "+",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Recuperar las penas por malversación anteriores a la reforma del Código Penal de diciembre de 2022.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion250/20230330/Votacion020/VOT_20230330124303.json": {
+   "axes": [
+    {
+     "axis_id": "proteccion_social",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    },
+    {
+     "axis_id": "fiscalidad",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Aprobar el decreto de pensiones: subir las mínimas, reducir la brecha de género y elevar cotizaciones para financiarlas.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion251/20230418/Votacion001/VOT_20230418203823.json": {
+   "axes": [
+    {
+     "axis_id": "bioetica",
+     "yes_pushes": "-",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Tramitar una ley de cuidados paliativos al final de la vida.",
+   "note": "Solo título; planteada como alternativa a la eutanasia, eje dudoso.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion251/20230418/Votacion002/VOT_20230418203825.json": {
+   "axes": [
+    {
+     "axis_id": "instituciones_reglas",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Tramitar una reforma del CIS para reforzar su independencia del Gobierno.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion253/20230420/Votacion026/VOT_20230420124315.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Dotar a juzgados y tribunales de medios para recuperar los retrasos tras la huelga de letrados de Justicia.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion253/20230420/Votacion028/VOT_20230420124320.json": {
+   "axes": [],
+   "null_reason": "demanda_local",
+   "summary_yes": "Pedir criterios e inventario para conservar edificios públicos abandonados en la costa, como dos inmuebles de Santander.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion253/20230420/Votacion030/VOT_20230420124324.json": {
+   "axes": [
+    {
+     "axis_id": "control_gobierno",
+     "yes_pushes": "+",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Exigir un plan de choque inmediato para una Administración General del Estado que se califica de colapsada.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion253/20230420/Votacion031/VOT_20230420124327.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Pedir una ley de jornada laboral flexible con presencia obligatoria solo en ciertas franjas horarias.",
+   "note": "Flexibilidad orientada a la conciliación; dirección en empleo_derechos ambigua.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion253/20230420/Votacion032/VOT_20230420124329.json": {
+   "axes": [
+    {
+     "axis_id": "fiscalidad",
+     "yes_pushes": "-",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Deducir en el IRPF el 100 % del gasto en extraescolares, comedor y transporte escolar.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion253/20230420/Votacion033/VOT_20230420124331.json": {
+   "axes": [
+    {
+     "axis_id": "proteccion_social",
+     "yes_pushes": "+",
+     "confidence": "media"
+    },
+    {
+     "axis_id": "educacion_modelo",
+     "yes_pushes": "-",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Crear becas infantiles para familias que no han conseguido plaza en escuelas infantiles públicas.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion253/20230420/Votacion034/VOT_20230420124333.json": {
+   "axes": [
+    {
+     "axis_id": "seguridad_penal",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Aprobar el dictamen de la reforma de delitos sexuales que eleva penas tras la ley del 'solo sí es sí'.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion253/20230420/Votacion035/VOT_20230420124336.json": {
+   "axes": [
+    {
+     "axis_id": "seguridad_penal",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Aprobar la reforma de delitos sexuales que eleva penas tras la ley del 'solo sí es sí'.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion254/20230425/Votacion002/VOT_20230425210938.json": {
+   "axes": [
+    {
+     "axis_id": "vivienda_okupacion",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Tramitar una ley orgánica para combatir la ocupación ilegal de viviendas.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion256/20230427/Votacion154/VOT_20230427151623.json": {
+   "axes": [
+    {
+     "axis_id": "regulacion_economica",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    },
+    {
+     "axis_id": "vivienda_intervencion",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Topar el diferencial de las hipotecas variables, cambiar de hipoteca sin coste y rebajar un 16,5 % la cesta básica a cargo de los comercios.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion256/20230427/Votacion155/VOT_20230427151626.json": {
+   "axes": [
+    {
+     "axis_id": "educacion_modelo",
+     "yes_pushes": "+",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Estudiar bajar ratios en escuelas vulnerables y reducir la segregación escolar repartiendo alumnado entre públicos y concertados.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion256/20230427/Votacion156/VOT_20230427151629.json": {
+   "axes": [
+    {
+     "axis_id": "control_gobierno",
+     "yes_pushes": "+",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Exigir responsabilidades en Transportes por los trenes mal diseñados de Asturias y Cantabria e invertir en su red ferroviaria.",
+   "note": "Mezcla depuración de responsabilidades con demandas ferroviarias de Asturias.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion256/20230427/Votacion157/VOT_20230427151633.json": {
+   "axes": [
+    {
+     "axis_id": "igualdad_genero",
+     "yes_pushes": "-",
+     "confidence": "media"
+    },
+    {
+     "axis_id": "seguridad_penal",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Derogar con urgencia la ley de garantía integral de la libertad sexual ('solo sí es sí').",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion256/20230427/Votacion158/VOT_20230427151636.json": {
+   "axes": [
+    {
+     "axis_id": "seguridad_penal",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Castigar con prisión permanente revisable las agresiones sexuales cometidas en grupo.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion256/20230427/Votacion159/VOT_20230427151640.json": {
+   "axes": [
+    {
+     "axis_id": "seguridad_penal",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Elevar las penas de los delitos sexuales contra menores o personas con discapacidad.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion256/20230427/Votacion160/VOT_20230427151644.json": {
+   "axes": [
+    {
+     "axis_id": "inmigracion",
+     "yes_pushes": "-",
+     "confidence": "alta"
+    },
+    {
+     "axis_id": "seguridad_penal",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Expulsar de inmediato a los extranjeros en situación irregular que cometan delitos sexuales.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion256/20230427/Votacion161/VOT_20230427151648.json": {
+   "axes": [
+    {
+     "axis_id": "inmigracion",
+     "yes_pushes": "-",
+     "confidence": "alta"
+    },
+    {
+     "axis_id": "seguridad_penal",
+     "yes_pushes": "+",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Retirar el permiso de residencia a los extranjeros residentes legales que cometan delitos sexuales.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion256/20230427/Votacion162/VOT_20230427151652.json": {
+   "axes": [
+    {
+     "axis_id": "inmigracion",
+     "yes_pushes": "-",
+     "confidence": "alta"
+    },
+    {
+     "axis_id": "seguridad_penal",
+     "yes_pushes": "+",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Retirar la nacionalidad a quienes no sean españoles de origen y cometan delitos sexuales.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion256/20230427/Votacion163/VOT_20230427151655.json": {
+   "axes": [
+    {
+     "axis_id": "seguridad_penal",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Hacer obligatorias las penas accesorias a las personas jurídicas responsables de delitos sexuales.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion256/20230427/Votacion164/VOT_20230427151658.json": {
+   "axes": [
+    {
+     "axis_id": "igualdad_genero",
+     "yes_pushes": "-",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Pedir medidas para restaurar la igualdad ante la ley y la presunción de inocencia frente a la legislación de género.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion256/20230427/Votacion165/VOT_20230427151701.json": {
+   "axes": [
+    {
+     "axis_id": "control_gobierno",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    },
+    {
+     "axis_id": "igualdad_genero",
+     "yes_pushes": "-",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Destituir a la ministra de Igualdad por su gestión en la protección de las mujeres.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion256/20230427/Votacion166/VOT_20230427151705.json": {
+   "axes": [
+    {
+     "axis_id": "igualdad_genero",
+     "yes_pushes": "-",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Suprimir el Ministerio de Igualdad y todos sus organismos dependientes.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion256/20230427/Votacion167/VOT_20230427151708.json": {
+   "axes": [
+    {
+     "axis_id": "fiscalidad",
+     "yes_pushes": "-",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Ajustar el IRPF a la inflación para las rentas de menos de 40.000 euros.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion256/20230427/Votacion168/VOT_20230427151712.json": {
+   "axes": [
+    {
+     "axis_id": "fiscalidad",
+     "yes_pushes": "-",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Bajar el IVA de carnes, pescados y conservas.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion256/20230427/Votacion169/VOT_20230427151716.json": {
+   "axes": [
+    {
+     "axis_id": "fiscalidad",
+     "yes_pushes": "-",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Recuperar temporalmente la deducción por vivienda habitual para rentas de menos de 40.000 euros con hipoteca.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion256/20230427/Votacion170/VOT_20230427151719.json": {
+   "axes": [
+    {
+     "axis_id": "fiscalidad",
+     "yes_pushes": "-",
+     "confidence": "alta"
+    },
+    {
+     "axis_id": "clima_transicion",
+     "yes_pushes": "-",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Suspender durante un año el impuesto a los plásticos de un solo uso.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion256/20230427/Votacion171/VOT_20230427151724.json": {
+   "axes": [
+    {
+     "axis_id": "autonomos_empresa",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    },
+    {
+     "axis_id": "clima_transicion",
+     "yes_pushes": "-",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Recuperar la ayuda de 20 céntimos por litro de combustible para autónomos que usan su vehículo para trabajar.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion256/20230427/Votacion173/VOT_20230427151734.json": {
+   "axes": [
+    {
+     "axis_id": "vivienda_intervencion",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Aprobar la ley de vivienda: topes al alquiler en zonas tensionadas, más vivienda pública y cargas a grandes tenedores.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion257/20230509/Votacion001/VOT_20230509195206.json": {
+   "axes": [
+    {
+     "axis_id": "clima_transicion",
+     "yes_pushes": "+",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Tramitar una ley para agilizar la conversión de coches de combustión en eléctricos o de hidrógeno.",
+   "classifier": "agent-x03"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion259/20230511/Votacion059/VOT_20230511124828.json": {
+   "axes": [
+    {
+     "axis_id": "fiscalidad",
+     "yes_pushes": "-",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Pedir al Gobierno que abandone la subida de la presión fiscal sobre clases medias y familias",
+   "note": "Primer párrafo = introducción de la PNL; el campo points muestra el punto 1.",
+   "classifier": "agent-x04"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion259/20230511/Votacion060/VOT_20230511124830.json": {
+   "axes": [
+    {
+     "axis_id": "fiscalidad",
+     "yes_pushes": "-",
+     "confidence": "alta"
+    },
+    {
+     "axis_id": "empleo_derechos",
+     "yes_pushes": "-",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Bajar el impuesto de sociedades y las cotizaciones sociales de las empresas para crear empleo",
+   "classifier": "agent-x04"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion259/20230511/Votacion061/VOT_20230511124832.json": {
+   "axes": [
+    {
+     "axis_id": "fiscalidad",
+     "yes_pushes": "-",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Bajar el IRPF, el IVA y el ITP de la vivienda y avanzar hacia suprimir sucesiones y la plusvalía municipal",
+   "classifier": "agent-x04"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion259/20230511/Votacion062/VOT_20230511124835.json": {
+   "axes": [
+    {
+     "axis_id": "territorial_autogobierno",
+     "yes_pushes": "-",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Reducir deuda y gasto político, suprimir organismos y duplicidades del modelo territorial y destinar el ahorro a familias",
+   "note": "Punto de recorte de gasto; el eje territorial solo por las duplicidades autonómicas.",
+   "classifier": "agent-x04"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion259/20230511/Votacion063/VOT_20230511124838.json": {
+   "axes": [
+    {
+     "axis_id": "proteccion_social",
+     "yes_pushes": "+",
+     "confidence": "media"
+    },
+    {
+     "axis_id": "fiscalidad",
+     "yes_pushes": "-",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Ampliar ayudas a familias numerosas: más deducción por hijo, IVA reducido de vehículos, exención de tasas y acceso a vivienda",
+   "classifier": "agent-x04"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion259/20230511/Votacion064/VOT_20230511124841.json": {
+   "axes": [
+    {
+     "axis_id": "clima_transicion",
+     "yes_pushes": "-",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Derogar la ley de cambio climático y permitir explotar los recursos naturales propios para abaratar la energía",
+   "classifier": "agent-x04"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion259/20230511/Votacion065/VOT_20230511124843.json": {
+   "axes": [
+    {
+     "axis_id": "proteccion_social",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Crear un entorno estable de apoyo del Estado a las familias",
+   "note": "Punto genérico, sin medida concreta.",
+   "classifier": "agent-x04"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion259/20230511/Votacion066/VOT_20230511124846.json": {
+   "axes": [
+    {
+     "axis_id": "control_gobierno",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Pedir que las estadísticas de empleo y paro se actualicen para reflejar el desempleo real y los fijos discontinuos",
+   "note": "Transparencia estadística con crítica implícita a los datos oficiales del Gobierno.",
+   "classifier": "agent-x04"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion259/20230511/Votacion068/VOT_20230511124851.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Mantener un diálogo habitual del Gobierno con los representantes del transporte por carretera",
+   "classifier": "agent-x04"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion259/20230511/Votacion069/VOT_20230511124854.json": {
+   "axes": [
+    {
+     "axis_id": "regulacion_economica",
+     "yes_pushes": "+",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Inspeccionar que no se contrate a transportistas por debajo de costes, que cobren en plazo y controlar las empresas buzón",
+   "classifier": "agent-x04"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion259/20230511/Votacion070/VOT_20230511124856.json": {
+   "axes": [
+    {
+     "axis_id": "autonomos_empresa",
+     "yes_pushes": "+",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Aumentar las ayudas a los transportistas autónomos que abandonen la actividad y a su formación",
+   "classifier": "agent-x04"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion259/20230511/Votacion071/VOT_20230511124859.json": {
+   "axes": [
+    {
+     "axis_id": "fiscalidad",
+     "yes_pushes": "-",
+     "confidence": "alta"
+    },
+    {
+     "axis_id": "clima_transicion",
+     "yes_pushes": "-",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Aplicar un IVA reducido a los carburantes mientras duren los precios altos",
+   "classifier": "agent-x04"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion259/20230511/Votacion072/VOT_20230511124902.json": {
+   "axes": [
+    {
+     "axis_id": "fiscalidad",
+     "yes_pushes": "-",
+     "confidence": "alta"
+    },
+    {
+     "axis_id": "clima_transicion",
+     "yes_pushes": "-",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Bajar el impuesto especial sobre hidrocarburos hasta el mínimo que permite la UE",
+   "classifier": "agent-x04"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion259/20230511/Votacion073/VOT_20230511124906.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Aumentar el número de aparcamientos seguros para camiones en áreas de descanso y servicio",
+   "classifier": "agent-x04"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion259/20230511/Votacion074/VOT_20230511124915.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Que los aparcamientos de descanso para transportistas cumplan el estándar europeo de seguridad más alto",
+   "classifier": "agent-x04"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion259/20230511/Votacion075/VOT_20230511124920.json": {
+   "axes": [
+    {
+     "axis_id": "fiscalidad",
+     "yes_pushes": "-",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Devolver de inmediato a los transportistas lo pendiente del céntimo sanitario",
+   "note": "Devolución de un impuesto anulado; eje fiscal débil.",
+   "classifier": "agent-x04"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion259/20230511/Votacion076/VOT_20230511124925.json": {
+   "axes": [
+    {
+     "axis_id": "clima_transicion",
+     "yes_pushes": "-",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Que las ayudas a renovar flotas de camiones también subvencionen vehículos diésel modernos y de gas",
+   "classifier": "agent-x04"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion259/20230511/Votacion077/VOT_20230511124928.json": {
+   "axes": [
+    {
+     "axis_id": "fiscalidad",
+     "yes_pushes": "-",
+     "confidence": "media"
+    },
+    {
+     "axis_id": "clima_transicion",
+     "yes_pushes": "-",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Retirar la propuesta de cobrar por usar autovías y no implantar ese pago en el futuro",
+   "classifier": "agent-x04"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion259/20230511/Votacion078/VOT_20230511124931.json": {
+   "axes": [
+    {
+     "axis_id": "vivienda_intervencion",
+     "yes_pushes": "-",
+     "confidence": "baja"
+    },
+    {
+     "axis_id": "vivienda_okupacion",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Pactar ayudas y avales a jóvenes para comprar o alquilar, más seguridad a propietarios y vivienda con colaboración público-privada",
+   "note": "Mezcla ayudas públicas con enfoque de oferta y seguridad del propietario.",
+   "classifier": "agent-x04"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion259/20230511/Votacion079/VOT_20230511124935.json": {
+   "axes": [
+    {
+     "axis_id": "vivienda_okupacion",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    },
+    {
+     "axis_id": "seguridad_penal",
+     "yes_pushes": "+",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Desalojar viviendas ocupadas en 24 horas y endurecer las penas por usurpación",
+   "classifier": "agent-x04"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion259/20230511/Votacion080/VOT_20230511124939.json": {
+   "axes": [
+    {
+     "axis_id": "control_gobierno",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Reprobar a la ministra de Transportes y Agenda Urbana por su gestión",
+   "classifier": "agent-x04"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion259/20230511/Votacion083/VOT_20230511124950.json": {
+   "axes": [],
+   "null_reason": "procedimiento",
+   "summary_yes": "Ratificar las actas y resoluciones del congreso de la Unión Postal de las Américas, España y Portugal",
+   "classifier": "agent-x04"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion262/20230518/Votacion047/VOT_20230518121340.json": {
+   "axes": [
+    {
+     "axis_id": "justicia_independencia",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Tramitar una ley para que los jueces elijan a los vocales judiciales del CGPJ",
+   "classifier": "agent-x04"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion262/20230518/Votacion052/VOT_20230518121352.json": {
+   "axes": [
+    {
+     "axis_id": "empleo_derechos",
+     "yes_pushes": "-",
+     "confidence": "media"
+    },
+    {
+     "axis_id": "autonomos_empresa",
+     "yes_pushes": "+",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Que el Estado compense a pequeñas empresas el salario de los permisos retribuidos de sus trabajadores",
+   "note": "Punto de compensación dentro de una PNL que amplía permisos.",
+   "classifier": "agent-x04"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion262/20230518/Votacion053/VOT_20230518121354.json": {
+   "axes": [
+    {
+     "axis_id": "clima_transicion",
+     "yes_pushes": "+",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Seguir impulsando la renaturalización de las ciudades para aumentar la biodiversidad urbana",
+   "classifier": "agent-x04"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion262/20230518/Votacion054/VOT_20230518121356.json": {
+   "axes": [
+    {
+     "axis_id": "campo_ambiente",
+     "yes_pushes": "+",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Elaborar un plan de infraestructuras hidráulicas prioritarias por cuenca, con mejora del regadío, ante la sequía",
+   "classifier": "agent-x04"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion262/20230518/Votacion055/VOT_20230518121359.json": {
+   "axes": [],
+   "null_reason": "sin_eje",
+   "summary_yes": "Delimitar con urgencia las zonas afectadas por la sequía para aplicar las ayudas",
+   "classifier": "agent-x04"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion262/20230518/Votacion056/VOT_20230518121401.json": {
+   "axes": [
+    {
+     "axis_id": "campo_ambiente",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Que el Estado financie infraestructuras hídricas en las regiones más afectadas por la sequía",
+   "classifier": "agent-x04"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion262/20230518/Votacion057/VOT_20230518121404.json": {
+   "axes": [
+    {
+     "axis_id": "campo_ambiente",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Financiar y ejecutar todos los proyectos pendientes de modernización y nuevos regadíos",
+   "classifier": "agent-x04"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion262/20230518/Votacion058/VOT_20230518121407.json": {
+   "axes": [],
+   "null_reason": "sin_texto",
+   "summary_yes": "Apoyar el punto 5 de una moción sobre medidas frente a la sequía (texto del punto no disponible)",
+   "note": "Texto del punto no encontrado.",
+   "classifier": "agent-x04"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion262/20230518/Votacion059/VOT_20230518121409.json": {
+   "axes": [],
+   "null_reason": "sin_texto",
+   "summary_yes": "Apoyar el punto 6 de una moción sobre medidas frente a la sequía (texto del punto no disponible)",
+   "note": "Texto del punto no encontrado.",
+   "classifier": "agent-x04"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion262/20230518/Votacion060/VOT_20230518121412.json": {
+   "axes": [],
+   "null_reason": "sin_texto",
+   "summary_yes": "Apoyar el punto 7 de una moción sobre medidas frente a la sequía (texto del punto no disponible)",
+   "note": "Texto del punto no encontrado.",
+   "classifier": "agent-x04"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion262/20230518/Votacion061/VOT_20230518121415.json": {
+   "axes": [],
+   "null_reason": "sin_texto",
+   "summary_yes": "Apoyar el punto 8 de una moción sobre medidas frente a la sequía (texto del punto no disponible)",
+   "note": "Texto del punto no encontrado.",
+   "classifier": "agent-x04"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion262/20230518/Votacion062/VOT_20230518121419.json": {
+   "axes": [],
+   "null_reason": "sin_texto",
+   "summary_yes": "Apoyar el punto 9 de una moción sobre medidas frente a la sequía (texto del punto no disponible)",
+   "note": "Texto del punto no encontrado.",
+   "classifier": "agent-x04"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion262/20230518/Votacion063/VOT_20230518121421.json": {
+   "axes": [],
+   "null_reason": "sin_texto",
+   "summary_yes": "Apoyar el punto 10 de una moción sobre medidas frente a la sequía (texto del punto no disponible)",
+   "note": "Texto del punto no encontrado.",
+   "classifier": "agent-x04"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion262/20230518/Votacion064/VOT_20230518121423.json": {
+   "axes": [
+    {
+     "axis_id": "proteccion_social",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    },
+    {
+     "axis_id": "fiscalidad",
+     "yes_pushes": "+",
+     "confidence": "media"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Rechazar la austeridad, no recortar servicios, mantener el escudo social y prorrogar los gravámenes a banca y energéticas",
+   "classifier": "agent-x04"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion262/20230518/Votacion065/VOT_20230518121426.json": {
+   "axes": [
+    {
+     "axis_id": "campo_ambiente",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Convocar un referéndum consultivo sobre un Plan Nacional del Agua",
+   "note": "Referéndum enmarcado en la defensa del regadío.",
+   "classifier": "agent-x04"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion262/20230518/Votacion066/VOT_20230518121428.json": {
+   "axes": [
+    {
+     "axis_id": "campo_ambiente",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    },
+    {
+     "axis_id": "territorial_autogobierno",
+     "yes_pushes": "-",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Aprobar un Plan Nacional del Agua con interconexión de cuencas entre regiones",
+   "classifier": "agent-x04"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion262/20230518/Votacion067/VOT_20230518121430.json": {
+   "axes": [
+    {
+     "axis_id": "campo_ambiente",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Parar la demolición de presas y embalses y aprovechar mejor las infraestructuras hídricas",
+   "classifier": "agent-x04"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion262/20230518/Votacion068/VOT_20230518121432.json": {
+   "axes": [
+    {
+     "axis_id": "campo_ambiente",
+     "yes_pushes": "+",
+     "confidence": "baja"
+    },
+    {
+     "axis_id": "campo_comercio",
+     "yes_pushes": "-",
+     "confidence": "baja"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Impulsar medidas estructurales en favor del sector primario y la soberanía alimentaria",
+   "classifier": "agent-x04"
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion262/20230518/Votacion069/VOT_20230518121436.json": {
+   "axes": [
+    {
+     "axis_id": "regulacion_economica",
+     "yes_pushes": "+",
+     "confidence": "alta"
+    }
+   ],
+   "null_reason": null,
+   "summary_yes": "Aprobar la ley que crea una autoridad independiente para resolver reclamaciones de clientes contra bancos y aseguradoras",
+   "classifier": "agent-x04"
+  },
   "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion002/20230919/Votacion001/VOT_20230919152005.json": {
    "axes": [
     {

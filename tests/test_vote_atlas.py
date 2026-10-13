@@ -17,6 +17,12 @@ SEED = {
         {"party_id": "b", "label": "B", "group_codes": ["GB"]},
     ],
 }
+SEED_PSOE = {
+    "parties": [
+        {"party_id": "psoe", "label": "PSOE", "group_codes": ["GA"]},
+        {"party_id": "b", "label": "B", "group_codes": ["GB"]},
+    ],
+}
 AXES = {
     "topics": [{"topic_id": "t", "label": "Tema", "concern_id": None}],
     "axes": [
@@ -182,6 +188,40 @@ class ExportTest(unittest.TestCase):
         self.assertEqual(ex.score_position(0.5), "agree")
         self.assertEqual(ex.score_position(-0.4), "disagree")
         self.assertEqual(ex.score_position(0.1), "mixed")
+
+
+class EarlierLegislatureTest(unittest.TestCase):
+    def test_xiv_votes_count_for_deputies_not_parties(self) -> None:
+        conn = _db()
+        self.addCleanup(conn.close)
+        conn.execute(
+            "INSERT INTO parl_vote_events VALUES ('old', '14', 1, 1, '2022-11-01', 'Proposiciones no de Ley.', "
+            "'Proposición no de Ley de algo viejo.', '', '', 1, 2, 0, 0, 'https://example.invalid/old.json', 'congreso_votaciones')"
+        )
+        conn.execute(
+            "INSERT INTO parl_vote_events VALUES ('older', '14', 1, 1, '2020-01-01', 'Proposiciones no de Ley.', "
+            "'Proposición no de Ley fuera de rango.', '', '', 1, 2, 0, 0, 'https://example.invalid/older.json', 'congreso_votaciones')"
+        )
+        # Same person as A1 (accents/case aside), then in group GS; X2 only sat in the XIV, in the Plural group.
+        for name, group, choice in (("a1", "GS", "Sí"), ("Otro GS", "GS", "No"), ("Otro GS 2", "GS", "No"), ("X2", "GPlu", "No")):
+            conn.execute("INSERT INTO parl_vote_member_votes VALUES ('old', ?, NULL, ?, ?)", (name, group, choice))
+        cls = {**CLS, "votes": {**CLS["votes"], "old": {"axes": [{"axis_id": "x", "yes_pushes": "+", "confidence": "alta"}], "summary_yes": "Viejo"}}}
+        atlas, people, ctx = ex.build(conn, SEED_PSOE, AXES, cls, {}, legislature="15", generated_at="t", earlier=[("14", "2022-10-01")])
+        # Parties and the voting aid only see the current legislature.
+        self.assertEqual(atlas["party_axes"]["psoe"]["x"]["votes"], 3)
+        self.assertEqual([e["vote_event_id"] for e in ctx["events"]], ["p1", "p2", "law", "amd"])
+        self.assertEqual(people["votes"][0][-1], "14")
+        self.assertEqual(len(people["votes"]), 5)  # 'older' is before the cut-off date
+        by_name = {p["name"]: p for p in people["people"]}
+        a1 = by_name.get("A1") or by_name["a1"]
+        self.assertEqual(a1["legislatures"], ["14", "15"])
+        self.assertEqual(a1["rebels"][0], [0, "N"])  # voted Sí against the GS majority in the XIV
+        self.assertEqual(a1["loyalty_by_leg"]["14"], [0.0, 1])
+        self.assertEqual(a1["axes"]["x"][1], 4)  # the XIV vote adds to the deputy's own direction
+        self.assertIsNone(by_name["X2"]["party_id"])
+        self.assertEqual(by_name["X2"]["loyalty_votes"], 0)  # Plural group: no single-party majority
+        old = next(v for v in atlas["votes"] if v.get("leg") == "14")
+        self.assertEqual(old["parties"], "N?")  # PSOE through its XIV group; party B has no XIV group
 
 
 class PublishedTest(unittest.TestCase):

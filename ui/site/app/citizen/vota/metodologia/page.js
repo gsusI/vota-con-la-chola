@@ -295,6 +295,15 @@ export default function VotingAidMethodologyPage() {
             en el que estaba en cada votación.
           </li>
           <li>
+            <strong>Final de la XIV legislatura (desde el {am.earlier_legislatures?.["14"]?.since || "1 de octubre de 2022"}):</strong>{" "}
+            {fmt(am.earlier_legislatures?.["14"]?.events_total)} votaciones más, con el mismo método (textos enlazados y{" "}
+            {fmt(am.earlier_legislatures?.["14"]?.by_status?.con_eje)} clasificadas con eje), para cubrir los últimos cuatro años. Solo
+            cuentan en la ficha de cada diputado/a: los grupos de entonces (Unidas Podemos, Ciudadanos, Plural…) no equivalen a los partidos
+            de la papeleta de hoy, así que el mapa por partidos y el test usan solo la XV. En la XIV, «votar distinto» se mide frente a su
+            grupo parlamentario, salvo los grupos Mixto y Plural, que reunían a varios partidos. Una misma persona en las dos legislaturas
+            se reconoce por su identificador o, si falta, por su nombre.
+          </li>
+          <li>
             <strong>Qué no entra:</strong> {fmt(cov.by_status?.sin_division)} votaciones sin partidos enfrentados (no distinguen a nadie) y{" "}
             {fmt(cov.by_status?.tramite)} trámites (prórrogas, avocaciones, correcciones técnicas). Las votaciones con contenido pero sin
             eje claro se marcan con su motivo: demanda local ({fmt(cov.by_status?.["sin_eje:demanda_local"])}), sin eje (
@@ -661,6 +670,9 @@ export default function VotingAidMethodologyPage() {
           <li>
             <strong>Versiones en paralelo:</strong> al mejorar el test, mantener accesible el anterior con sus respuestas para revisarlo y
             compararlo; por defecto se muestra el nuevo. Es la regla para cada actualización futura.
+          </li>
+          <li>
+            <strong>Cuatro años, no tres:</strong> integrar también el final de la XIV legislatura en las fichas de los diputados.
           </li>
         </ol>
         <h3>Ejemplos reales del prompt «Pregúntale a una IA»</h3>
