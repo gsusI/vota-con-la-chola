@@ -6695,6 +6695,10 @@ site-publish:
   dirty=false; if [ -n "$(git status --porcelain --untracked-files=no -- ui/site)" ]; then dirty=true; fi
   CLOUDFLARE_PAGES_FROZEN_INPUTS="${CLOUDFLARE_PAGES_FROZEN_INPUTS:-1}" just site-build
   printf '{"source_commit": "%s", "source_dirty": %s, "built_at": "%s"}\n' "$commit" "$dirty" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > "{{site_out_dir}}/.vclc-build.json"
+  # CI and local sessions share R2: hold the cross-machine lock for the sync and the Worker deploy.
+  owner="${GITHUB_RUN_ID:+ci-$GITHUB_RUN_ID}"; owner="${owner:-local-$(hostname -s)-$$}"
+  uv run --no-project --with 'boto3>=1.34' python3 scripts/r2_publish_lock.py acquire --owner "$owner"
+  trap 'uv run --no-project --with "boto3>=1.34" python3 scripts/r2_publish_lock.py release --owner "$owner"' EXIT
   just site-origin-publish
   # Pages and their data are served as Worker static assets (no Worker requests); R2 keeps the bulk.
   just site-origin-worker-deploy
