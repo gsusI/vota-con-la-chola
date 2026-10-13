@@ -1,0 +1,55 @@
+{
+ "facts": {
+  "pool-cultura--cultura-2022-museos-visitantes": {
+   "text": "En 2022, 1.492 museos y colecciones museográficas (el 98 % de los 1.522 censados) recibieron 51,6 millones de visitantes; en 2018 fueron 65,4 millones.",
+   "period": "2022",
+   "source": "Ministerio de Cultura, Estadística de Museos y Colecciones Museográficas 2022",
+   "url": "https://www.cultura.gob.es/en/dam/jcr:5245f2bb-98ce-4ccd-83bd-535643ab3d28/estadistica-de-museos-y-colecciones-museograficas-2022.pdf"
+  },
+  "pool-cultura--cervantes-2023-estudiantes-espanol": {
+   "text": "Se estima que en 2023 había 23.035.198 estudiantes de español como lengua extranjera en 111 países, en todos los niveles de enseñanza, incluida la no reglada.",
+   "period": "2023",
+   "source": "Instituto Cervantes, El español en el mundo, Anuario 2023",
+   "url": "https://cvc.cervantes.es/lengua/anuario/anuario_23/informes_ic/p01.htm"
+  }
+ },
+ "statements": {},
+ "votes": {
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion029/20240314/Votacion033/VOT_20240314123745.json": {
+   "question_id": "pool-cultura",
+   "facts": [
+    "eje-educacion-modelo--mefd-alumnado-total",
+    "pool-cultura--cultura-2022-museos-visitantes",
+    "pool-cultura--cervantes-2023-estudiantes-espanol"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Alumnado y profesorado",
+     "text": "Podrían ver cómo se elabora un nuevo currículo de Historia sin postulados ideológicos, conforme a las alegaciones de la Real Academia de la Historia.",
+     "locator": "Punto 4"
+    },
+    {
+     "actor": "Museos y archivos",
+     "text": "Podrían tener que asegurar la unidad de sus archivos y colecciones, con leyes si hace falta.",
+     "locator": "Puntos 7 y 8"
+    },
+    {
+     "actor": "Instituto Cervantes, Reales Academias y universidades",
+     "text": "Podrían ser requeridos para una labor diplomática de defensa del legado español y para difundir el Portal de Historia Hispánica.",
+     "locator": "Puntos 5 y 6"
+    },
+    {
+     "actor": "Titulares de monumentos y estatuas de la Hispanidad",
+     "text": "Podrían beneficiarse de acciones diplomáticas para recuperar los atacados y de medidas legales contra el vandalismo del patrimonio.",
+     "locator": "Punto 2"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  }
+ }
+}

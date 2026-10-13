@@ -1,0 +1,250 @@
+{
+ "facts": {
+  "eje-nuclear--ree-2025-nuclear": {
+   "text": "La energía nuclear generó 51,8 TWh en 2025: el 19,0 % de toda la electricidad producida en España (272,3 TWh).",
+   "period": "2025",
+   "source": "Red Eléctrica, REData, estructura de la generación (año 2025)",
+   "url": "https://www.ree.es/es/datos/generacion/estructura-generacion"
+  },
+  "eje-nuclear--ree-2025-renovables": {
+   "text": "Las renovables generaron 151,1 TWh en 2025, el 55,5 % de la electricidad: eólica 21,6 %, solar fotovoltaica 18,5 % e hidráulica 12,4 %.",
+   "period": "2025",
+   "source": "Red Eléctrica, REData, estructura de la generación (año 2025)",
+   "url": "https://www.ree.es/es/datos/generacion/estructura-generacion"
+  },
+  "eje-nuclear--miteco-parque-7-reactores": {
+   "text": "España tiene 5 centrales nucleares en funcionamiento (Almaraz y Ascó con dos reactores cada una): 7 reactores de agua ligera con 7.398,7 MWe de potencia instalada.",
+   "period": "página consultada el 13 de octubre de 2026",
+   "source": "MITECO, Energía nuclear, Centrales nucleares",
+   "url": "https://www.miteco.gob.es/es/energia/nuclear/centrales.html"
+  },
+  "eje-nuclear--boe-pgrr7-cierre-2027-2035": {
+   "text": "El 7.º Plan de Residuos Radiactivos prevé cerrar los siete reactores entre 2027 y 2035 y gestionar los residuos hasta 2100: 28.156 millones de euros desde 1985, 20.220 millones de ellos entre 2024 y 2100.",
+   "period": "plan 2023-2100, aprobado el 27 de diciembre de 2023",
+   "source": "BOE núm. 7 (8-1-2024), Resolución de 28 de diciembre de 2023, pág. 2349-2350",
+   "url": "https://www.boe.es/boe/dias/2024/01/08/pdfs/BOE-A-2024-440.pdf"
+  },
+  "eje-nuclear--boe-ordenes-fechas-cese": {
+   "text": "Las órdenes de 2020 y 2021 fijaron como fecha de cese definitivo: Almaraz I, 1-11-2027; Almaraz II, 31-10-2028; Ascó I, 1-10-2030; Cofrentes, 30-11-2030.",
+   "period": "órdenes de 2020 y 2021",
+   "source": "BOE, Órdenes TED/773/2020 (Almaraz), TED/1084/2021 (Ascó I) y TED/308/2021 (Cofrentes), apartado segundo",
+   "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2020-9328"
+  },
+  "eje-nuclear--boe-ted864-2026-almaraz-2030": {
+   "text": "En agosto de 2026 el Ministerio renovó la autorización de Almaraz I y II hasta el 8 de junio de 2030, con informe favorable del CSN; el cese de todo el parque nuclear sigue fijado en 2035.",
+   "period": "Orden de 12 de agosto de 2026 (BOE de 14 de agosto)",
+   "source": "BOE núm. 199, Orden TED/864/2026, considerandos segundo y tercero",
+   "url": "https://www.boe.es/boe/dias/2026/08/14/pdfs/BOE-A-2026-17756.pdf"
+  },
+  "eje-nuclear--boe-ted864-2026-impacto-pniec": {
+   "text": "El Ministerio estima que prorrogar Almaraz reduciría en 2030 un 1,4 % la generación renovable y un 7 % la de gas en ciclos combinados, frente al escenario del PNIEC.",
+   "period": "estimación de 2026 para 2030",
+   "source": "BOE núm. 199, Orden TED/864/2026, considerando cuarto",
+   "url": "https://www.boe.es/boe/dias/2026/08/14/pdfs/BOE-A-2026-17756.pdf"
+  },
+  "eje-nuclear--eurostat-2025s2-luz-impuestos": {
+   "text": "Un hogar español pagó 0,267 euros por kWh de electricidad; sin impuestos ni gravámenes habrían sido 0,184. IVA, impuestos y gravámenes suman 0,083 euros por kWh (31 % del precio).",
+   "period": "segundo semestre de 2025",
+   "source": "Eurostat, nrg_pc_204 (consumo de 2.500 a 4.999 kWh al año; con y sin impuestos)",
+   "url": "https://ec.europa.eu/eurostat/databrowser/view/nrg_pc_204/default/table?lang=en"
+  },
+  "eje-nuclear--miteco-2025-06-reserva-hidrica": {
+   "text": "El 3 de junio de 2025 los embalses guardaban 43.038 hm³, el 76,8 % de su capacidad: del 92,2 % en el Duero y 85,6 % en el Tajo al 31,1 % en el Segura.",
+   "period": "3 de junio de 2025",
+   "source": "MITECO, nota de prensa «La reserva hídrica española se encuentra al 76,8 % de su capacidad»",
+   "url": "https://www.miteco.gob.es/es/prensa/ultimas-noticias/2025/junio/la-reserva-hidrica-espanola-se-encuentra-al-76-8--de-su-capacida.html"
+  },
+  "eje-nuclear--boe-ley7-2021-art10": {
+   "text": "La ley de cambio climático (art. 10) impide admitir nuevas solicitudes de permisos de exploración, investigación o explotación de minerales radiactivos y de nuevas instalaciones del ciclo del combustible nuclear.",
+   "period": "texto vigente",
+   "source": "BOE, Ley 7/2021, de 20 de mayo, artículo 10",
+   "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2021-8447"
+  }
+ },
+ "statements": {
+  "eje-nuclear": {
+   "facts": [
+    "eje-nuclear--ree-2025-nuclear",
+    "eje-nuclear--miteco-parque-7-reactores",
+    "eje-nuclear--boe-pgrr7-cierre-2027-2035"
+   ]
+  }
+ },
+ "votes": {
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion119/20250617/Votacion001/VOT_20250617203251.json": {
+   "question_id": "eje-nuclear",
+   "facts": [
+    "eje-nuclear--ree-2025-nuclear",
+    "eje-nuclear--boe-pgrr7-cierre-2027-2035",
+    "eje-nuclear--boe-ted864-2026-almaraz-2030"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Titulares de las centrales nucleares",
+     "text": "Podrían operar hasta que cesen a petición propia, venza su autorización sin pedir prórroga o el CSN informe en contra; pedirían prórroga 15 meses antes y el Ministerio resolvería para evitar una parada.",
+     "locator": "Artículo 1, apartados 1 y 3"
+    },
+    {
+     "actor": "Titulares de Almaraz, Ascó I y Cofrentes, y de centrales ya cerradas",
+     "text": "Sus órdenes dejarían de calificar la renovación como «definitiva y última», y una central cerrada por fin de plazo podría pedir su reapertura.",
+     "locator": "Disposición derogatoria única; Disposición final primera"
+    },
+    {
+     "actor": "Administración energética",
+     "text": "La Secretaría de Estado de Energía podría imponer que una central siga abierta por grave riesgo para el suministro, con informe del operador del sistema y la CNMC y visto bueno del CSN.",
+     "locator": "Artículo 1, apartado 2"
+    },
+    {
+     "actor": "ENRESA y planificación energética",
+     "text": "ENRESA tendría que actualizar en tres meses el Plan de Residuos con 10 años más de funcionamiento, y se pediría no contemplar cierres en la próxima revisión del PNIEC.",
+     "locator": "Artículos 2, 3 y 4"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion109/20250508/Votacion008/VOT_20250508130751.json": {
+   "question_id": "eje-nuclear",
+   "facts": [
+    "eje-nuclear--ree-2025-renovables",
+    "eje-nuclear--eurostat-2025s2-luz-impuestos",
+    "eje-nuclear--ree-2025-nuclear"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Promotores de renovables y operadores de red",
+     "text": "Tendrían un plan para resolver congestiones y vertidos, impulsar almacenamiento y fijar calendario de subastas, pero el código pediría no dar preferencia a ninguna tecnología.",
+     "locator": "Puntos 1 y 3"
+    },
+    {
+     "actor": "Titulares de centrales nucleares",
+     "text": "El Gobierno tendría que reconsiderar el cierre programado para extender su operación, con informe favorable del CSN, y activar un mecanismo de reserva de capacidad.",
+     "locator": "Punto 2"
+    },
+    {
+     "actor": "Hogares y empresas que pagan impuestos energéticos",
+     "text": "Se revisaría la fiscalidad energética para armonizarla con la UE, sin crear nuevos impuestos energéticos y con más lucha contra el fraude fiscal.",
+     "locator": "Punto 4"
+    },
+    {
+     "actor": "Industria hiperintensiva y conductores de vehículos eléctricos",
+     "text": "Tendrían una hoja de ruta de descarbonización con estatuto de consumidores hiperintensivos, y un Plan Renove con red de recarga y ayudas a vehículos eléctricos.",
+     "locator": "Puntos 5 y 6"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion091/20250212/Votacion001/VOT_20250212154036.json": {
+   "question_id": "eje-nuclear",
+   "facts": [
+    "eje-nuclear--ree-2025-nuclear",
+    "eje-nuclear--miteco-parque-7-reactores",
+    "eje-nuclear--boe-ley7-2021-art10"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Titulares de las siete unidades",
+     "text": "Se pediría al Gobierno ampliar su vida útil con el CSN, facilitar su sostenibilidad económica y revisar con ellos el protocolo de cierre de 2019, el Plan de Residuos y el PNIEC.",
+     "locator": "Puntos 1, 2 y 7"
+    },
+    {
+     "actor": "Municipios, comunidades y sectores afectados por el cierre",
+     "text": "Se pediría dialogar con ellos y encargar a la CNMC y a Red Eléctrica informes sobre el impacto económico del cierre y sus efectos en el suministro.",
+     "locator": "Puntos 3 y 4"
+    },
+    {
+     "actor": "Empresas mineras y del ciclo del combustible nuclear",
+     "text": "Se promovería derogar el artículo 10 de la Ley 7/2021, que hoy impide nuevos permisos sobre minerales radiactivos y nuevas instalaciones del ciclo del combustible.",
+     "locator": "Punto 6"
+    },
+    {
+     "actor": "Industria nuclear española",
+     "text": "Se pediría adoptar medidas para que pueda aprovechar el reglamento europeo de industria cero emisiones netas.",
+     "locator": "Punto 5"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion118/20250612/Votacion009/VOT_20250612132249.json": {
+   "question_id": "eje-nuclear",
+   "facts": [
+    "eje-nuclear--ree-2025-nuclear",
+    "eje-nuclear--miteco-2025-06-reserva-hidrica",
+    "eje-nuclear--eurostat-2025s2-luz-impuestos"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Titulares de centrales nucleares",
+     "text": "Se instaría a prorrogar la vida útil de las centrales, planificar nuevas en emplazamientos viables y reducir la «Tasa Enresa» y suprimir los impuestos nucleares.",
+     "locator": "Puntos 2.b y 3.c"
+    },
+    {
+     "actor": "Hogares y empresas consumidoras de electricidad",
+     "text": "Se instaría a bajar el IVA de la electricidad al 4 % y a suprimir el Impuesto Especial sobre la Electricidad, el de Hidrocarburos y el de la producción de energía eléctrica.",
+     "locator": "Puntos 3.a y 3.b"
+    },
+    {
+     "actor": "Regantes y usuarios del agua",
+     "text": "Se instaría a aprobar un Plan Nacional del Agua con interconexión de cuencas y nuevos embalses, y a revisar el Convenio de Albufeira para no verter más agua de la estipulada.",
+     "locator": "Puntos 1.d y 2.f"
+    },
+    {
+     "actor": "Promotores de renovables y propietarios de suelo agrícola",
+     "text": "Se instaría a derogar la Ley 7/2021 y revisar el PNIEC, a priorizar repotenciar parques eólicos y a exigir evaluaciones de compatibilidad con el uso agrario del suelo.",
+     "locator": "Puntos 1.c, 1.e y 4"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion146/20251113/Votacion113/VOT_20251113131441.json": {
+   "question_id": "eje-nuclear",
+   "facts": [
+    "eje-nuclear--boe-ordenes-fechas-cese",
+    "eje-nuclear--boe-ted864-2026-almaraz-2030",
+    "eje-nuclear--boe-ted864-2026-impacto-pniec"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Titular de Almaraz I y II",
+     "text": "La orden de 2020 dejaría de fijar un cese definitivo: podría pedir nueva autorización con 18 meses de antelación al 1-11-2027, con la documentación que determine el CSN.",
+     "locator": "Disposición final vigesimocuarta (nueva), apartado 1"
+    },
+    {
+     "actor": "Titulares de Ascó I y Cofrentes",
+     "text": "Podrían pedir nueva autorización 18 meses antes de 2030 con revisión periódica de seguridad, análisis probabilista, plan de envejecimiento y propuesta de revisar el plan de residuos.",
+     "locator": "Disposición final vigesimocuarta (nueva), apartados 2 y 3"
+    },
+    {
+     "actor": "Consejo de Seguridad Nuclear",
+     "text": "Fijaría la documentación de seguridad de Almaraz, mientras que para Ascó I y Cofrentes la fijaría la propia ley, y las tres órdenes perderían la obligación de justificar con un año de antelación las operaciones tras el cese.",
+     "locator": "Disposición final vigesimocuarta (nueva), apartados 1 a 3"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  }
+ }
+}

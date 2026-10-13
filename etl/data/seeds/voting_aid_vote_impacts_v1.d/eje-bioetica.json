@@ -1,0 +1,186 @@
+{
+ "facts": {
+  "eje-bioetica--sanidad-ive-2024-total": {
+   "text": "En 2024 se practicaron 106.172 interrupciones voluntarias del embarazo (12,36 por cada 1.000 mujeres de 15 a 44 años). El 94,6 % fue a petición de la mujer y el 76,6 % con 8 semanas de gestación o menos.",
+   "period": "2024",
+   "source": "Ministerio de Sanidad, Interrupción voluntaria del embarazo 2024 (datos definitivos), tablas EV.4 y EV.5",
+   "url": "https://www.sanidad.gob.es/areas/promocionPrevencion/embarazo/docs/IVE_2024.pdf"
+  },
+  "eje-bioetica--sanidad-ive-2024-publica": {
+   "text": "Solo el 21,3 % de las interrupciones de 2024 se hicieron en centros públicos (10,24 % en hospitales y 11,01 % en centros extrahospitalarios); el 78,7 % se hizo en centros privados.",
+   "period": "2024",
+   "source": "Ministerio de Sanidad, Interrupción voluntaria del embarazo 2024 (datos definitivos), tabla EV.4 (tipo de centro)",
+   "url": "https://www.sanidad.gob.es/areas/promocionPrevencion/embarazo/docs/IVE_2024.pdf"
+  },
+  "eje-bioetica--sanidad-eutanasia-2024-procesos": {
+   "text": "En 2024 hubo 905 nuevas solicitudes de ayuda para morir y se cerraron 929 procesos: 426 acabaron en la prestación (45,9 %), 308 en fallecimiento durante la tramitación, 141 en denegación y 54 en revocación.",
+   "period": "2024",
+   "source": "Ministerio de Sanidad, nota de prensa sobre el Informe Anual 2024 de la Prestación de Ayuda para Morir (23-12-2025)",
+   "url": "https://www.sanidad.gob.es/gabinete/notasPrensa.do?id=6823"
+  },
+  "eje-bioetica--sanidad-eutanasia-2024-reclamaciones": {
+   "text": "En 2024 hubo 157 informes desfavorables a solicitudes de eutanasia; 75 se reclamaron y la comisión de garantía estimó 20, que acabaron aprobándose. Entre solicitud y resolución de la comisión pasó una mediana de 41 días.",
+   "period": "2024",
+   "source": "Ministerio de Sanidad, nota de prensa sobre el Informe Anual 2024 de la Prestación de Ayuda para Morir (23-12-2025)",
+   "url": "https://www.sanidad.gob.es/gabinete/notasPrensa.do?id=6823"
+  },
+  "eje-bioetica--sanidad-eutanasia-2024-instrucciones": {
+   "text": "51 de los 929 procesos de ayuda para morir cerrados en 2024 (5,49 %) se iniciaron mediante instrucciones previas; el resto, por solicitud de una persona con capacidad de decidir (art. 5.1 de la ley).",
+   "period": "2024",
+   "source": "Ministerio de Sanidad, nota de prensa sobre el Informe Anual 2024 de la Prestación de Ayuda para Morir (23-12-2025)",
+   "url": "https://www.sanidad.gob.es/gabinete/notasPrensa.do?id=6823"
+  },
+  "eje-bioetica--sanidad-rnip-2026-01-activas": {
+   "text": "En enero de 2026 había 676.763 personas con instrucciones previas activas en el Registro Nacional (13,78 por cada 1.000 habitantes): de 37,41 por mil en Navarra a 3,66 en Extremadura entre las comunidades.",
+   "period": "enero de 2026",
+   "source": "Ministerio de Sanidad, Registro Nacional de Instrucciones Previas: declarantes con instrucción previa activa por comunidad autónoma y grupos de edad, enero 2026",
+   "url": "https://www.sanidad.gob.es/areas/profesionesSanitarias/rnip/docs/Enero_2026/RNIP_Declarantes_con_Instruccion_Previa_Activa_por_Comunidad_Autonoma_y_grupos_de_edad_Enero_2026.pdf"
+  }
+ },
+ "statements": {
+  "eje-bioetica": {
+   "facts": [
+    "eje-bioetica--sanidad-ive-2024-total",
+    "eje-bioetica--sanidad-ive-2024-publica",
+    "eje-bioetica--sanidad-eutanasia-2024-procesos"
+   ]
+  }
+ },
+ "votes": {
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion185/20260611/Votacion042/VOT_20260611145754.json": {
+   "question_id": "eje-bioetica",
+   "facts": [
+    "eje-bioetica--sanidad-eutanasia-2024-procesos",
+    "eje-bioetica--sanidad-eutanasia-2024-reclamaciones"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Personas que piden la eutanasia",
+     "text": "Si recurren una resolución de la comisión de garantía, el recurso iría al Tribunal Superior de Justicia, con plazos de 3 días para recurrir y 3 para resolver tras la audiencia; la sentencia sería firme, salvo amparo.",
+     "locator": "Artículo 2, apartado 4 (art. 122 quinquies, aps. 1, 5 y 6)"
+    },
+    {
+     "actor": "Personas cuya resolución es recurrida",
+     "text": "El tribunal podría suspender de inmediato la resolución recurrida, sin oír a las demás partes, si se pide en el recurso; la suspensión duraría hasta que se resuelva el proceso.",
+     "locator": "Artículo 2, apartado 4 (art. 122 quinquies, ap. 7)"
+    },
+    {
+     "actor": "Médicos y comisiones de garantía y evaluación",
+     "text": "Tendrían que comparecer a la audiencia, que se convocaría en 5 días desde el recurso y se celebraría en los 10 siguientes.",
+     "locator": "Artículo 2, apartado 4 (art. 122 quinquies, aps. 3 y 6)"
+    },
+    {
+     "actor": "Tribunales superiores de justicia",
+     "text": "La sala de lo contencioso asumiría estos recursos por el procedimiento especial de protección de derechos fundamentales, solo para recursos presentados tras la entrada en vigor.",
+     "locator": "Artículo 1; Artículo 2, apartado 1; Disposición transitoria"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion177/20260430/Votacion012/VOT_20260430125200.json": {
+   "question_id": "eje-bioetica",
+   "facts": [
+    "eje-bioetica--sanidad-ive-2024-total",
+    "eje-bioetica--sanidad-ive-2024-publica"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Mujeres que quieren interrumpir el embarazo",
+     "text": "La Constitución obligaría a los poderes públicos a garantizar ese derecho en condiciones de igualdad real y efectiva, con cuantas prestaciones y servicios hagan falta.",
+     "locator": "Artículo único (nuevo art. 43.4 de la Constitución)"
+    },
+    {
+     "actor": "Administraciones sanitarias",
+     "text": "Tendrían que asegurar las prestaciones y servicios necesarios para ejercer el derecho en todo el territorio, no solo abstenerse de impedirlo.",
+     "locator": "Artículo único (nuevo art. 43.4); Exposición de motivos, III"
+    },
+    {
+     "actor": "Legisladores y gobiernos futuros",
+     "text": "La exposición de motivos presenta la garantía como obligación «indisponible» para los poderes públicos y la defiende frente a «dinámicas regresivas».",
+     "locator": "Exposición de motivos, III y II"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion083/20241210/Votacion002/VOT_20241210202032.json": {
+   "question_id": "eje-bioetica",
+   "facts": [
+    "eje-bioetica--sanidad-rnip-2026-01-activas",
+    "eje-bioetica--sanidad-eutanasia-2024-instrucciones"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Personas mayores de edad",
+     "text": "Podrían dejar por adelantado su voluntad sobre cuidados al final de la vida y sobre pedir la ayuda para morir, y modificarla o revocarla; si conservan capacidad, prevalecería lo que digan entonces.",
+     "locator": "Artículo 1; Artículo 2, apartado 4"
+    },
+    {
+     "actor": "Representantes designados",
+     "text": "Podrían actuar por el mayor beneficio y la dignidad de la persona, cumplir sus instrucciones y, si algo no está previsto, tener en cuenta sus valores.",
+     "locator": "Artículo 2, apartados 2 y 3"
+    },
+    {
+     "actor": "Profesionales sanitarios",
+     "text": "Las instrucciones tendrían que constar en lugar visible de la historia clínica, y los servicios de salud tendrían que garantizarlas, también las que incluyan la ayuda para morir.",
+     "locator": "Artículo 2, apartado 1; Disposición final primera"
+    },
+    {
+     "actor": "Administraciones sanitarias",
+     "text": "Tendrían que ofrecer un modelo de documento y difundir la ley entre profesionales y ciudadanía.",
+     "locator": "Artículo 3; Disposición adicional única"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion079/20241121/Votacion025/VOT_20241121173822.json": {
+   "question_id": "eje-bioetica",
+   "facts": [
+    "eje-bioetica--sanidad-ive-2024-total",
+    "eje-bioetica--sanidad-ive-2024-publica"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Mujeres que quieren interrumpir el embarazo",
+     "text": "El Congreso instaría a garantizar el acceso a la interrupción voluntaria del embarazo en la sanidad pública; la proposición no obliga por sí sola a nadie.",
+     "locator": "Punto 2"
+    },
+    {
+     "actor": "Profesionales sanitarios que objetan por conciencia",
+     "text": "Se pediría culminar y aplicar el protocolo de objetores de conciencia que prevé la Ley Orgánica 1/2023.",
+     "locator": "Punto 2"
+    },
+    {
+     "actor": "Administraciones de igualdad y sanidad",
+     "text": "Se les pediría seguir desarrollando políticas públicas de igualdad de género, con atención especial a los derechos sexuales y reproductivos.",
+     "locator": "Punto 1"
+    },
+    {
+     "actor": "Asociaciones contrarias a la interrupción voluntaria del embarazo",
+     "text": "Se pediría seguir rechazando sus planteamientos y actuaciones, que según el texto ponen en riesgo el acceso a estos derechos.",
+     "locator": "Punto 3"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  }
+ }
+}

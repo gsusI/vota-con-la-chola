@@ -1,0 +1,42 @@
+{
+ "facts": {},
+ "statements": {},
+ "votes": {
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion111/20250514/Votacion006/VOT_20250514165633.json": {
+   "question_id": "pool-energia-y-clima",
+   "facts": [
+    "eje-clima-transicion--miteco-apagon-2025",
+    "eje-regulacion-economica--cnmc-2025-puntos-suministro",
+    "eje-clima-transicion--pniec-inversion-reparto"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Hogares y empresas con suministro eléctrico",
+     "text": "Podrían ver reforzada la seguridad del suministro frente a otro apagón, si se aplicaran los nuevos procedimientos de operación y la protección de instalaciones y red que pidió Red Eléctrica.",
+     "locator": "Punto Tercero"
+    },
+    {
+     "actor": "Operadores de la red eléctrica",
+     "text": "Podrían tener que someter los sistemas afectados a una auditoría independiente de la agencia europea de reguladores (ACER) y adoptar con urgencia los nuevos requisitos de protección.",
+     "locator": "Punto Primero"
+    },
+    {
+     "actor": "Centrales nucleares y sus trabajadores",
+     "text": "Podrían ver analizados en la Estrategia de Seguridad Energética los efectos de un cese de la operación nuclear, que se estudiaría junto a un posible cero eléctrico.",
+     "locator": "Punto Segundo"
+    },
+    {
+     "actor": "Empresas de redes y renovables",
+     "text": "Podrían beneficiarse de incentivos a la inversión en infraestructuras críticas y de más interconexión con países vecinos, con la red preparada para picos de generación renovable.",
+     "locator": "Punto Sexto"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  }
+ }
+}

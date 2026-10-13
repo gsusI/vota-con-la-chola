@@ -1,0 +1,674 @@
+{
+ "facts": {
+  "eje-campo-comercio--mapa-2025-comercio": {
+   "text": "En 2025 el sector agroalimentario y pesquero español exportó 78.044 millones de € e importó 59.720 millones: saldo positivo de 18.324 millones. Sus ventas son el 20,2 % de las exportaciones del país y el 67,2 % fue a la UE.",
+   "period": "2025 (datos provisionales)",
+   "source": "MAPA, nota de prensa del Informe Anual de Comercio Exterior 2025 (6 de agosto de 2026)",
+   "url": "https://www.mapa.gob.es/dam/mapa/contenido/prensa/notas-de-prensa/documentos/documentos-2026/26-08-07-informe-anual-comercio-exterior.pdf"
+  },
+  "eje-campo-comercio--eurostat-2025-extra-ue": {
+   "text": "En 2025 España compró 26.384 millones de € en alimentos y productos del mar a países de fuera de la UE y les vendió 25.974 millones (capítulos 1 a 24 del arancel): con esos países, vende casi tanto como compra.",
+   "period": "2025",
+   "source": "Eurostat, Comext (DS-045409), capítulos 1 a 24, socios fuera de la UE-27",
+   "url": "https://ec.europa.eu/eurostat/api/comext/dissemination/sdmx/2.1/data/DS-045409/A.ES.EXT_EU27_2020.01+02+03+04+05+06+07+08+09+10+11+12+13+14+15+16+17+18+19+20+21+22+23+24.1+2.VALUE_IN_EUROS?startPeriod=2025&endPeriod=2025&format=JSON"
+  },
+  "eje-campo-comercio--ine-epa-2026t2-agricultura": {
+   "text": "En el segundo trimestre de 2026 trabajaban en agricultura, ganadería, silvicultura y pesca 787.200 personas (3,5 % de los ocupados): 510.900 asalariadas y 275.600 por cuenta propia.",
+   "period": "2.º trimestre de 2026",
+   "source": "INE, Encuesta de Población Activa, tabla 79286 (ocupados por sector y situación profesional)",
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=79286"
+  },
+  "eje-campo-comercio--ine-eea-2023-explotaciones": {
+   "text": "En 2023 había 784.141 explotaciones agrícolas en España (un 12,4 % menos que en el censo de 2020), con 23,5 millones de hectáreas cultivadas o de pasto; el 28,9 % de sus jefes eran mujeres.",
+   "period": "2023",
+   "source": "INE, Encuesta sobre la Estructura de las Explotaciones Agrícolas 2023, nota de prensa de 26-02-2025",
+   "url": "https://www.ine.es/dyngs/Prensa/EEEA2023.htm"
+  },
+  "eje-campo-comercio--mapa-pac-47724": {
+   "text": "El presupuesto de la PAC para España en 2021-2027 es de 47.724 millones de €; al sumar la cofinanciación estatal y autonómica del desarrollo rural superaría los 50.000 millones.",
+   "period": "2021-2027",
+   "source": "MAPA, nota de prensa sobre el Plan Estratégico de la PAC (diciembre de 2021)",
+   "url": "https://www.mapa.gob.es/va/prensa/ultimas-noticias/luis-planas-presenta-el-plan-estrat%C3%A9gico-de-la-pac-dotado-con-47.724-millones-de-euros-hasta-2027-que-se-enviar%C3%A1-ma%C3%B1ana-a-la-comisi%C3%B3n-europea/tcm:39-584010"
+  },
+  "eje-campo-comercio--mapa-pac-ayudas": {
+   "text": "El Plan Estratégico de la PAC de España prevé más de 4.800 millones de € al año en ayudas directas a agricultores y ganaderos y unos 230 millones al año en ayudas específicas para jóvenes.",
+   "period": "2023-2027",
+   "source": "MAPA, nota de prensa: el Plan Estratégico de la PAC 2023-2027 aprobado por la Comisión Europea",
+   "url": "https://www.mapa.gob.es/es/prensa/ultimas-noticias/el-plan-estrat%C3%A9gico-de-la-pac-2023-2027-presentado-por-espa%C3%B1a-aprobado-por-la-comisi%C3%B3n-europea/tcm:30-627172"
+  },
+  "eje-campo-comercio--ce-pac-2028-2034": {
+   "text": "La propuesta de la Comisión Europea para 2028-2034 reserva al menos 300.000 millones de € de la PAC a renta y crisis de agricultores de toda la UE, dentro de unos planes nacionales y regionales que suman 865.000 millones.",
+   "period": "propuesta para 2028-2034",
+   "source": "Comisión Europea, «The CAP post-2027 in the next EU budget»",
+   "url": "https://agriculture.ec.europa.eu/common-agricultural-policy/cap-post-2027-next-eu-budget_en"
+  },
+  "eje-campo-comercio--ce-mercosur-cuotas": {
+   "text": "Con el acuerdo UE-Mercosur entrarían 99.000 t de vacuno con arancel del 7,5 % (1,5 % de la producción europea) y 180.000 t de aves sin arancel en cinco años (1,3 %). En 2024 la UE vendió a Mercosur 3.300 millones de € de alimentos.",
+   "period": "2024 (acuerdo en tramitación)",
+   "source": "Comisión Europea, ficha «EU-Mercosur: opening opportunities for European farmers»",
+   "url": "https://policy.trade.ec.europa.eu/eu-trade-relationships-country-and-region/countries-and-regions/mercosur/eu-mercosur-agreement/factsheet-eu-mercosur-partnership-agreement-opening-opportunities-european-farmers_en"
+  },
+  "eje-campo-comercio--eurostat-2025-mercosur-espana": {
+   "text": "En 2025 España compró a Brasil, Argentina, Uruguay y Paraguay 3.962 millones de € en alimentos y productos del mar (252 millones en carne, unas 49.600 t) y les vendió 416 millones.",
+   "period": "2025",
+   "source": "Eurostat, Comext (DS-045409), capítulos 1 a 24 del arancel (carne: capítulo 02)",
+   "url": "https://ec.europa.eu/eurostat/api/comext/dissemination/sdmx/2.1/data/DS-045409/A.ES.BR+AR+UY+PY.01+02+03+04+05+06+07+08+09+10+11+12+13+14+15+16+17+18+19+20+21+22+23+24.1+2.VALUE_IN_EUROS?startPeriod=2025&endPeriod=2025&format=JSON"
+  },
+  "eje-campo-comercio--eurostat-2025-marruecos-hortofruticolas": {
+   "text": "En 2025 España importó 8.079 millones de € en hortalizas y frutas; 1.301 millones (16 %) vinieron de Marruecos, el 27 % de lo comprado fuera de la UE (4.798 millones).",
+   "period": "2025",
+   "source": "Eurostat, Comext (DS-045409), capítulos 07 y 08 del arancel, importaciones de España",
+   "url": "https://ec.europa.eu/eurostat/api/comext/dissemination/sdmx/2.1/data/DS-045409/A.ES.WORLD+EXT_EU27_2020+MA.07+08.1.VALUE_IN_EUROS?startPeriod=2025&endPeriod=2025&format=JSON"
+  },
+  "eje-campo-comercio--eurostat-2025-hortofruticolas-saldo": {
+   "text": "En 2025 España exportó 22.003 millones de € en hortalizas y frutas y importó 8.079 millones: vende al exterior unas 2,7 veces lo que compra.",
+   "period": "2025",
+   "source": "Eurostat, Comext (DS-045409), capítulos 07 y 08 del arancel, comercio de España con el mundo",
+   "url": "https://ec.europa.eu/eurostat/api/comext/dissemination/sdmx/2.1/data/DS-045409/A.ES.WORLD.07+08.1+2.VALUE_IN_EUROS?startPeriod=2025&endPeriod=2025&format=JSON"
+  },
+  "eje-campo-comercio--ce-ue-marruecos-2025": {
+   "text": "En 2025 la UE importó de Marruecos 25.500 millones de € en bienes, de ellos 3.700 millones (14,6 %) en productos agrarios, y le vendió 36.700 millones.",
+   "period": "2025",
+   "source": "Comisión Europea, ficha de comercio UE-Marruecos",
+   "url": "https://policy.trade.ec.europa.eu/eu-trade-relationships-country-and-region/countries-and-regions/morocco_en"
+  },
+  "eje-campo-comercio--congreso-2024-controles-frontera": {
+   "text": "De enero a septiembre de 2024 Sanidad Exterior controló 199.364 partidas importadas de alimentos (152.432 de origen no animal) y en 2024 rechazó en frontera 778 de origen no animal y 555 de origen animal.",
+   "period": "enero-septiembre de 2024 (rechazos: 2024)",
+   "source": "Respuesta escrita del Gobierno a la pregunta 184/19691 (Congreso, febrero de 2025)",
+   "url": "https://www.congreso.es/entradap/l15p/e6/e_0061682_n_000.pdf"
+  },
+  "eje-campo-comercio--efsa-2024-controles-importacion": {
+   "text": "De 39.433 muestras de alimentos importados con controles reforzados de la UE en 2024, el 5,5 % superó los límites de plaguicidas y el 3,6 % fue no conforme; esos lotes no pasaron a la venta.",
+   "period": "2024",
+   "source": "EFSA, informe de la UE sobre residuos de plaguicidas en alimentos 2024 (nota de prensa)",
+   "url": "https://www.efsa.europa.eu/en/news/pesticide-residues-food-latest-data-released"
+  },
+  "eje-campo-comercio--eurostat-2020-edad-titulares": {
+   "text": "En 2020 solo el 7,7 % de los titulares de explotaciones agrarias españolas (70.560 de 914.870) tenía menos de 40 años y el 41,3 % tenía 65 o más. En la UE: 11,9 % y 33,2 %.",
+   "period": "2020",
+   "source": "Eurostat, ef_m_farmang (explotaciones por edad del titular)",
+   "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/ef_m_farmang?format=JSON&lang=EN&geo=ES&geo=EU27_2020&time=2020&statinfo=TOTAL&sex=T&so_eur=TOTAL&uaarea=TOTAL"
+  },
+  "eje-campo-comercio--eurostat-2025-aceite": {
+   "text": "En 2025 España exportó 1,07 millones de t de aceite de oliva (4.850 millones de €) e importó 199.000 t (740 millones), de ellas 65.000 t de Túnez (235 millones).",
+   "period": "2025",
+   "source": "Eurostat, Comext (DS-045409), partida 1509 (aceite de oliva virgen)",
+   "url": "https://ec.europa.eu/eurostat/api/comext/dissemination/sdmx/2.1/data/DS-045409/A.ES.WORLD+TN.1509.1+2.VALUE_IN_EUROS+QUANTITY_IN_100KG?startPeriod=2025&endPeriod=2025&format=JSON"
+  },
+  "eje-campo-comercio--eurostat-2025-chile-espana": {
+   "text": "En 2025 España compró a Chile 684 millones de € en alimentos y productos del mar (239 millones en fruta) y le vendió 220 millones; en todos los productos, 1.873 y 1.980 millones.",
+   "period": "2025",
+   "source": "Eurostat, Comext (DS-045409), capítulos 1 a 24 y total, socio Chile",
+   "url": "https://ec.europa.eu/eurostat/api/comext/dissemination/sdmx/2.1/data/DS-045409/A.ES.CL.01+02+03+04+05+06+07+08+09+10+11+12+13+14+15+16+17+18+19+20+21+22+23+24.1+2.VALUE_IN_EUROS?startPeriod=2025&endPeriod=2025&format=JSON"
+  },
+  "eje-campo-comercio--ce-ue-chile-2025": {
+   "text": "En 2025 el comercio de bienes entre la UE y Chile sumó 21.000 millones de €; el 40 % de lo que la UE compra a Chile son productos vegetales. El acuerdo con Chile se firmó en diciembre de 2023.",
+   "period": "2025",
+   "source": "Comisión Europea, ficha de comercio UE-Chile",
+   "url": "https://policy.trade.ec.europa.eu/eu-trade-relationships-country-and-region/countries-and-regions/chile_en"
+  },
+  "eje-campo-comercio--eurostat-2025-francia-espana": {
+   "text": "En 2025 España vendió a Francia 12.050 millones de € en alimentos y productos del mar (15 % de sus ventas de este tipo) y le compró 7.715 millones.",
+   "period": "2025",
+   "source": "Eurostat, Comext (DS-045409), capítulos 1 a 24 del arancel, socio Francia",
+   "url": "https://ec.europa.eu/eurostat/api/comext/dissemination/sdmx/2.1/data/DS-045409/A.ES.FR.01+02+03+04+05+06+07+08+09+10+11+12+13+14+15+16+17+18+19+20+21+22+23+24.1+2.VALUE_IN_EUROS?startPeriod=2025&endPeriod=2025&format=JSON"
+  }
+ },
+ "statements": {
+  "eje-campo-comercio": {
+   "facts": [
+    "eje-campo-comercio--mapa-2025-comercio",
+    "eje-campo-comercio--eurostat-2025-extra-ue",
+    "eje-campo-comercio--ine-epa-2026t2-agricultura"
+   ]
+  }
+ },
+ "votes": {
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion191/20260625/Votacion017/VOT_20260625150810.json": {
+   "question_id": "eje-campo-comercio",
+   "facts": [
+    "eje-campo-comercio--ce-mercosur-cuotas",
+    "eje-campo-comercio--ce-pac-2028-2034",
+    "eje-campo-comercio--eurostat-2020-edad-titulares"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Agricultores y ganaderos que cobran la PAC",
+     "text": "Se pediría mantener la PAC como política propia, con presupuesto aparte, y no usarla para objetivos climáticos o energéticos.",
+     "locator": "Puntos 1 a 3"
+    },
+    {
+     "actor": "Empresas con derechos de emisión de CO2",
+     "text": "Se pediría suspender ya el régimen de derechos de emisión y promover que se suprima el Mecanismo de Ajuste en Frontera por Carbono.",
+     "locator": "Puntos 4 y 5"
+    },
+    {
+     "actor": "Quienes exportan o importan alimentos con Mercosur y otros países",
+     "text": "Se pediría paralizar la aplicación provisional del acuerdo con Mercosur y someterlo a referéndum; también reciprocidad, cupos estrictos para el aceite de oliva y más inspección fronteriza.",
+     "locator": "Puntos 6 a 10"
+    },
+    {
+     "actor": "Jóvenes agricultores y trabajadores del campo",
+     "text": "Se pediría un plan de relevo con ayudas, rebajas fiscales y sociales, crédito y formación, y un Plan de Empleo Agrario dirigido a trabajadores españoles.",
+     "locator": "Puntos 14 y 15"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion023/20240222/Votacion001/VOT_20240222110730.json": {
+   "question_id": "eje-campo-comercio",
+   "facts": [
+    "eje-campo-comercio--eurostat-2025-francia-espana",
+    "eje-campo-comercio--eurostat-2025-extra-ue"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Agricultores y transportistas españoles",
+     "text": "Podrían contar con una exigencia del Gobierno a Francia para que los proteja de ataques en la frontera y con acciones en la UE contra la competencia desleal.",
+     "locator": "Puntos 1 y 2"
+    },
+    {
+     "actor": "Gobierno de España",
+     "text": "Tendría que exigir al gobierno francés esa protección y promover acciones en la UE para proteger a agricultores, ganaderos y transportistas.",
+     "locator": "Puntos 1 y 2"
+    },
+    {
+     "actor": "Productores de países fuera de la UE",
+     "text": "Podrían ver más trabas a sus ventas a la UE si prosperan las acciones contra la competencia desleal de terceros países.",
+     "locator": "Punto 2"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion142/20251028/Votacion005/VOT_20251028204546.json": {
+   "question_id": "eje-campo-comercio",
+   "facts": [
+    "eje-campo-comercio--mapa-pac-47724",
+    "eje-campo-comercio--ce-pac-2028-2034"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Agricultores y ganaderos",
+     "text": "Podrían contar con una PAC defendida sobre la preferencia comunitaria y la estabilidad de rentas, con el Gobierno apoyándola en el Consejo y el Parlamento Europeo.",
+     "locator": "Punto 2"
+    },
+    {
+     "actor": "Productores de países fuera de la UE",
+     "text": "La preferencia comunitaria daría prioridad a lo producido en la UE frente a las importaciones, así que podrían competir con más dificultad.",
+     "locator": "Punto 2"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion095/20250226/Votacion010/VOT_20250226151635.json": {
+   "question_id": "eje-campo-comercio",
+   "facts": [
+    "eje-campo-comercio--ce-mercosur-cuotas",
+    "eje-campo-comercio--eurostat-2025-mercosur-espana"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Productores del campo español",
+     "text": "Se pediría rechazar el acuerdo UE-Mercosur en lo que perjudique a los productores españoles, al mundo rural y a sus formas de vida.",
+     "locator": "Punto 3"
+    },
+    {
+     "actor": "Exportadores agroalimentarios de la UE a Mercosur",
+     "text": "Podrían perder rebajas de aranceles que el acuerdo prevé (p. ej. para el aceite de oliva, hoy con aranceles de hasta el 31,5 %) si se rechaza en lo que perjudique.",
+     "locator": "Punto 3"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion043/20240530/Votacion029/VOT_20240530120023.json": {
+   "question_id": "eje-campo-comercio",
+   "facts": [
+    "eje-campo-comercio--eurostat-2025-extra-ue",
+    "eje-campo-comercio--ce-mercosur-cuotas"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Productores del sector primario español",
+     "text": "Se pediría recuperar la preferencia comunitaria y la reciprocidad como principios en los acuerdos comerciales que contravengan sus intereses.",
+     "locator": "Punto 4"
+    },
+    {
+     "actor": "Países con acuerdo comercial con la UE",
+     "text": "Podrían tener que renegociar condiciones de acuerdos que se consideren contrarios a los intereses del sector primario español.",
+     "locator": "Punto 4"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion029/20240314/Votacion037/VOT_20240314123750.json": {
+   "question_id": "eje-campo-comercio",
+   "facts": [
+    "eje-campo-comercio--efsa-2024-controles-importacion",
+    "eje-campo-comercio--eurostat-2025-extra-ue"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Productores de países fuera de la UE",
+     "text": "Tendrían que cumplir los mismos estándares de seguridad y salud que las producciones europeas para vender en la UE.",
+     "locator": "Punto 4"
+    },
+    {
+     "actor": "Agricultores y ganaderos europeos",
+     "text": "Competirían con importaciones sometidas a las mismas exigencias, si la Comisión Europea pone en marcha las cláusulas espejo.",
+     "locator": "Punto 4"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion023/20240222/Votacion005/VOT_20240222110741.json": {
+   "question_id": "eje-campo-comercio",
+   "facts": [
+    "eje-campo-comercio--efsa-2024-controles-importacion",
+    "eje-campo-comercio--congreso-2024-controles-frontera"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Productores y exportadores de países fuera de la UE",
+     "text": "Podrían ver prohibida la entrada en la UE de alimentos tratados con fitosanitarios que la UE tiene prohibidos.",
+     "locator": "Punto 3"
+    },
+    {
+     "actor": "Agricultores europeos",
+     "text": "Competirían con importaciones sujetas a la misma prohibición de fitosanitarios que ellos.",
+     "locator": "Punto 3"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion111/20250514/Votacion007/VOT_20250514165634.json": {
+   "question_id": "eje-campo-comercio",
+   "facts": [
+    "eje-campo-comercio--eurostat-2025-chile-espana",
+    "eje-campo-comercio--ce-ue-chile-2025"
+   ],
+   "direct_effects": [],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion095/20250226/Votacion011/VOT_20250226151638.json": {
+   "question_id": "eje-campo-comercio",
+   "facts": [
+    "eje-campo-comercio--eurostat-2025-marruecos-hortofruticolas",
+    "eje-campo-comercio--ce-ue-marruecos-2025"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Exportadores marroquíes de frutas y hortalizas",
+     "text": "Se pediría suspender el Acuerdo de Asociación UE-Marruecos y los acuerdos que permitan importar productos que no cumplan las exigencias fitosanitarias españolas.",
+     "locator": "Punto 4"
+    },
+    {
+     "actor": "Agricultores españoles de hortalizas y frutas",
+     "text": "Podrían competir con menos importaciones de esos productos, si se suspende el acuerdo o se revisan las condiciones de entrada.",
+     "locator": "Punto 4"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion095/20250226/Votacion012/VOT_20250226151639.json": {
+   "question_id": "eje-campo-comercio",
+   "facts": [
+    "eje-campo-comercio--mapa-2025-comercio",
+    "eje-campo-comercio--eurostat-2025-extra-ue"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Gobierno de España",
+     "text": "Se pediría suspender de inmediato la financiación al sector agrícola de terceros países y reasignar esos fondos a la producción agroalimentaria nacional.",
+     "locator": "Punto 5"
+    },
+    {
+     "actor": "Productores agrícolas de los países que reciben esa financiación",
+     "text": "Podrían dejar de recibir esa financiación.",
+     "locator": "Punto 5"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion095/20250226/Votacion016/VOT_20250226151647.json": {
+   "question_id": "eje-campo-comercio",
+   "facts": [
+    "eje-campo-comercio--congreso-2024-controles-frontera",
+    "eje-campo-comercio--efsa-2024-controles-importacion"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Servicios de inspección fronteriza",
+     "text": "Tendrían más personal y controles en los Puestos de Inspección Fronterizos.",
+     "locator": "Punto 9, letra a"
+    },
+    {
+     "actor": "Importadores y exportadores de terceros países",
+     "text": "Se les pediría reciprocidad con cláusulas espejo, etiquetado claro del origen, prohibición de productos con fitosanitarios no permitidos y sanciones disuasorias.",
+     "locator": "Punto 9, letras b a e"
+    },
+    {
+     "actor": "Consumidores",
+     "text": "Podrían identificar con claridad el origen de los productos agroalimentarios gracias a la reforma del etiquetado.",
+     "locator": "Punto 9, letra c"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion043/20240530/Votacion031/VOT_20240530120025.json": {
+   "question_id": "eje-campo-comercio",
+   "facts": [
+    "eje-campo-comercio--efsa-2024-controles-importacion",
+    "eje-campo-comercio--congreso-2024-controles-frontera"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Productores y exportadores de países fuera de la UE",
+     "text": "Podrían ver prohibida la entrada de alimentos tratados con fitosanitarios prohibidos en la UE; una enmienda proponía un límite de residuos de 0 mg/kg para los prohibidos en España.",
+     "locator": "Punto 6"
+    },
+    {
+     "actor": "Agricultores europeos",
+     "text": "Competirían con importaciones sometidas a la misma prohibición de fitosanitarios.",
+     "locator": "Punto 6"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion043/20240530/Votacion032/VOT_20240530120026.json": {
+   "question_id": "eje-campo-comercio",
+   "facts": [
+    "eje-campo-comercio--congreso-2024-controles-frontera",
+    "eje-campo-comercio--efsa-2024-controles-importacion"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Servicios de inspección fronteriza (Administración)",
+     "text": "Tendrían más dotación de personal y de material en los Puestos de Inspección Fronterizos, lo que supone más gasto público.",
+     "locator": "Punto 7"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion043/20240530/Votacion033/VOT_20240530120027.json": {
+   "question_id": "eje-campo-comercio",
+   "facts": [
+    "eje-campo-comercio--efsa-2024-controles-importacion",
+    "eje-campo-comercio--congreso-2024-controles-frontera"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Importadores que incumplan las normas",
+     "text": "Podrían afrontar sanciones disuasorias en la UE si incumplen las normas de importación.",
+     "locator": "Punto 8"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion029/20240314/Votacion044/VOT_20240314123758.json": {
+   "question_id": "eje-campo-comercio",
+   "facts": [
+    "eje-campo-comercio--eurostat-2025-extra-ue",
+    "eje-campo-comercio--ce-mercosur-cuotas"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Gobierno de España",
+     "text": "Se le pediría revisar en la UE los tratados de libre comercio que facilitan la competencia desleal y paralizar las negociaciones de los que están en trámite.",
+     "locator": "Punto 11"
+    },
+    {
+     "actor": "Exportadores agroalimentarios a países con tratado en negociación",
+     "text": "Las negociaciones de los tratados en trámite se paralizarían.",
+     "locator": "Punto 11"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion023/20240222/Votacion006/VOT_20240222110743.json": {
+   "question_id": "eje-campo-comercio",
+   "facts": [
+    "eje-campo-comercio--eurostat-2025-marruecos-hortofruticolas",
+    "eje-campo-comercio--congreso-2024-controles-frontera"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Exportadores marroquíes de frutas y hortalizas",
+     "text": "Podrían afrontar más controles en frontera y comprobación de que cumplen las normas de la UE y las cantidades arancelarias del acuerdo.",
+     "locator": "Punto 4"
+    },
+    {
+     "actor": "Agricultores españoles de hortalizas y frutas",
+     "text": "Competirían con importaciones más controladas.",
+     "locator": "Punto 4"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion023/20240222/Votacion007/VOT_20240222110745.json": {
+   "question_id": "eje-campo-comercio",
+   "facts": [
+    "eje-campo-comercio--eurostat-2025-hortofruticolas-saldo",
+    "eje-campo-comercio--eurostat-2025-extra-ue"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Importadores de alimentos de países fuera de la UE",
+     "text": "Podrían encontrar cupos, aranceles compensatorios y revisión de precios mínimos de entrada en sus compras.",
+     "locator": "Punto 5"
+    },
+    {
+     "actor": "Agricultores españoles",
+     "text": "Se pediría con ello garantizar la rentabilidad de sus explotaciones.",
+     "locator": "Punto 5"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion023/20240222/Votacion008/VOT_20240222110748.json": {
+   "question_id": "eje-campo-comercio",
+   "facts": [
+    "eje-campo-comercio--efsa-2024-controles-importacion",
+    "eje-campo-comercio--eurostat-2025-extra-ue"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Productores de países fuera de la UE",
+     "text": "Tendrían que cumplir en origen las mismas exigencias que los europeos para vender sus productos agrarios en la UE.",
+     "locator": "Punto 6"
+    },
+    {
+     "actor": "Agricultores y ganaderos europeos",
+     "text": "Competirían con importaciones sometidas a las mismas exigencias.",
+     "locator": "Punto 6"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion023/20240222/Votacion009/VOT_20240222110749.json": {
+   "question_id": "eje-campo-comercio",
+   "facts": [
+    "eje-campo-comercio--congreso-2024-controles-frontera",
+    "eje-campo-comercio--efsa-2024-controles-importacion"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Puestos de inspección fronteriza de los puertos",
+     "text": "Tendrían más personal y material, sobre todo donde más importaciones agropecuarias entran.",
+     "locator": "Punto 7"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion023/20240222/Votacion010/VOT_20240222110752.json": {
+   "question_id": "eje-campo-comercio",
+   "facts": [
+    "eje-campo-comercio--ce-mercosur-cuotas",
+    "eje-campo-comercio--eurostat-2025-extra-ue"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Productores agrarios españoles",
+     "text": "Se pediría recuperar la preferencia comunitaria en los acuerdos comerciales del sector primario y usar defensas comerciales para proteger la agricultura europea.",
+     "locator": "Punto 8"
+    },
+    {
+     "actor": "Países socios comerciales de la UE",
+     "text": "Podrían ver defensas comerciales y menos acceso en los acuerdos que afecten al sector primario español.",
+     "locator": "Punto 8"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion023/20240222/Votacion011/VOT_20240222110754.json": {
+   "question_id": "eje-campo-comercio",
+   "facts": [
+    "eje-campo-comercio--eurostat-2025-marruecos-hortofruticolas",
+    "eje-campo-comercio--congreso-2024-controles-frontera"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Importadores y comercializadores",
+     "text": "Tendrían más controles sobre las importaciones y el etiquetado, para evitar vender como «origen España» productos que no lo son.",
+     "locator": "Punto 9"
+    },
+    {
+     "actor": "Consumidores",
+     "text": "Podrían fiarse más del origen que indica la etiqueta.",
+     "locator": "Punto 9"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion023/20240222/Votacion012/VOT_20240222110757.json": {
+   "question_id": "eje-campo-comercio",
+   "facts": [
+    "eje-campo-comercio--ce-mercosur-cuotas",
+    "eje-campo-comercio--eurostat-2025-mercosur-espana"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Productores agrarios españoles",
+     "text": "Se pediría oponerse al acuerdo UE-Mercosur mientras no se garantice que no perjudica a ningún sector.",
+     "locator": "Punto 10"
+    },
+    {
+     "actor": "Exportadores agroalimentarios de la UE a Mercosur",
+     "text": "Podrían ver retrasadas las rebajas de aranceles del acuerdo (p. ej. el aceite de oliva, con aranceles de hasta el 31,5 %).",
+     "locator": "Punto 10"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  }
+ }
+}

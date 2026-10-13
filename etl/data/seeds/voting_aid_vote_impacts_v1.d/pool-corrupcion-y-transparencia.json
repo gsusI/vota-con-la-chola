@@ -1,0 +1,42 @@
+{
+ "facts": {
+  "pool-corrupcion-y-transparencia--correos-voto-correo-23j": {
+   "text": "Para las elecciones generales de 2023 se admitieron 2.622.808 solicitudes de voto por correo, récord histórico; a medianoche del 20 de julio ya habían enviado su voto 2.461.284 personas (1.241.716 en abril de 2019).",
+   "period": "2023",
+   "source": "Correos (operador postal público), notas de prensa de 14 y 21 de julio de 2023",
+   "url": "https://www.correos.com/sala-prensa/exito-de-la-gestion-del-voto-por-correo-que-marca-ya-el-record-de-votos-emitidos-en-unas-elecciones-generales-con-2-461-284-votos/"
+  }
+ },
+ "statements": {},
+ "votes": {
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion189/20260623/Votacion002/VOT_20260623202728.json": {
+   "question_id": "pool-corrupcion-y-transparencia",
+   "facts": [
+    "pool-corrupcion-y-transparencia--correos-voto-correo-23j"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Electores que votan por correo",
+     "text": "Podrían ver sus sobres metidos en una urna aparte, tras comprobar que están en el censo, y su voto escrutado por separado del presencial.",
+     "locator": "Artículo único, apartado Primero (artículo 88.2 de la LOREG)"
+    },
+    {
+     "actor": "Mesas electorales",
+     "text": "Podrían tener que hacer un escrutinio separado de los votos por correo y anunciar el resultado de cada candidatura en total y desglosado entre voto presencial y voto por correo.",
+     "locator": "Artículo único, apartados Segundo y Tercero (artículos 95.4 y 97.2)"
+    },
+    {
+     "actor": "Electores de las comunidades autónomas",
+     "text": "Podrían ver aplicadas las mismas reglas en las elecciones a sus parlamentos autonómicos convocadas por las comunidades.",
+     "locator": "Artículo único, apartado Cuarto (disposición adicional primera, apartado 2)"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  }
+ }
+}

@@ -346,9 +346,11 @@ test("«Ramificaciones» attach official figures and both-sided effects, and rea
       // Even a clipped link keeps the figures (they go before the vote details in the compact prompt).
       assert.ok(m.linkPrompt(q, snap.parties, { mode: "explain" }).includes(r.facts[0].text.slice(0, 60)), q.statement_id);
     }
-    // Questions without impacts data still work and do not invent figures.
-    const bare = questions.find((q) => !q.ramifications);
-    assert.ok(!m.buildAiPrompt(bare, snap.parties).includes("A quién afecta (cifras oficiales)"));
+    // Every question, key or concrete vote, says who it affects.
+    assert.equal(withRamif.length, questions.length, version);
+    // Without impacts data questions still work and do not invent figures.
+    const [bare] = m.attachHighlights(m.buildQuestions(snap, pool), highlights, bullets, null);
+    assert.ok(!bare.ramifications && !m.buildAiPrompt(bare, snap.parties).includes("A quién afecta (cifras oficiales)"));
   }
 });
 

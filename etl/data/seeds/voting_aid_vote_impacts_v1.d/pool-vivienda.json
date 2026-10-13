@@ -1,0 +1,67 @@
+{
+ "facts": {},
+ "statements": {},
+ "votes": {
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion092/20250218/Votacion001/VOT_20250218194306.json": {
+   "question_id": "pool-vivienda",
+   "facts": [
+    "pool-politica-exterior--ine-ecp-2025-canarias-baleares",
+    "ine-ecv-2025-tenencia",
+    "ine-vut-2026-05"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Empresas y autónomos en Canarias",
+     "text": "Podrían destinar la reserva para inversiones (beneficio fiscal) a comprar o construir viviendas para alquilar como vivienda habitual, incluidos autónomos del IRPF en estimación directa.",
+     "locator": "Artículo único, apartado Tres (disposición adicional decimoquinta, apartados 1 y 3)"
+    },
+    {
+     "actor": "Inquilinos",
+     "text": "Podrían tener más viviendas en alquiler como vivienda habitual: la vivienda no habría estado alquilada el año anterior, tendría que alquilarse en 6 meses y mantenerse al menos 5 años.",
+     "locator": "Artículo único, apartados Dos y Tres (artículo 27.8; disposición adicional decimoquinta, apartados 3 y 8)"
+    },
+    {
+     "actor": "Propietarios de vivienda vacacional",
+     "text": "No podrían usar esta reserva para comprar ni para reformar inmuebles destinados a vivienda vacacional.",
+     "locator": "Artículo único, apartado Uno (artículo 27.4, letras A y C)"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion094/20250225/Votacion002/VOT_20250225201647.json": {
+   "question_id": "pool-vivienda",
+   "facts": [
+    "eje-vivienda-intervencion--bde-ia25-deficit",
+    "eje-vivienda-intervencion--mivau-vivienda-protegida-2025"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Ayuntamientos y promotores",
+     "text": "Podrían ver anulados menos planes urbanísticos por defectos de forma: solo en casos tasados, con nulidad parcial cuando fuera posible y un año para subsanar los demás defectos.",
+     "locator": "Artículo único, apartado Seis (artículo 55.2, 55.3, 55.4 y 55.6)"
+    },
+    {
+     "actor": "Vecinos y asociaciones que recurren planes",
+     "text": "Podrían tener menos margen para impugnar: plazo de cuatro años para el recurso indirecto, solo por motivos de fondo, y una acción pública que no podría ser abusiva.",
+     "locator": "Artículo único, apartados Siete y Ocho (artículos 62 y 64.2)"
+    },
+    {
+     "actor": "Propietarios de bienes expropiados",
+     "text": "Podrían perder antes el derecho de reversión: sería más fácil cancelar su constancia registral y esta caducaría a los 30 años de la ocupación.",
+     "locator": "Artículo único, apartado Cinco (artículo 47.4 a 6); Disposición final primera (artículo 54.5 y 6 de la Ley de Expropiación Forzosa)"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  }
+ }
+}

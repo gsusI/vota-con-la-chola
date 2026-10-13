@@ -1,0 +1,174 @@
+{
+ "facts": {
+  "pool-impuestos-y-economia--ine-ese-2023-tabaco": {
+   "text": "El 19,2 % de la población de 15 o más años fuma: el 16,6 % a diario y el 2,6 % de forma ocasional. El 60,0 % no ha fumado nunca y el 20,7 % es exfumadora.",
+   "period": "2023",
+   "source": "INE, Encuesta de Salud de España 2023 (infografía Día Mundial sin Tabaco, junio de 2026)",
+   "url": "https://www.ine.es/infografias/infografia_tabaco.pdf"
+  },
+  "pool-impuestos-y-economia--eurostat-2025-exportaciones-eeuu": {
+   "text": "En 2025 España exportó bienes por 17.041 millones de euros a Estados Unidos: el 4,3 % de sus exportaciones totales (394.380 millones) y un 8,0 % menos que en 2024 (18.519 millones).",
+   "period": "2025",
+   "source": "Eurostat, Comext (DS-045409), exportaciones de España, total de productos, socios EE. UU. y mundo",
+   "url": "https://ec.europa.eu/eurostat/databrowser/view/DS-045409/default/table"
+  }
+ },
+ "statements": {},
+ "votes": {
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion106/20250410/Votacion010/VOT_20250410155149.json": {
+   "question_id": "pool-impuestos-y-economia",
+   "facts": [
+    "eje-territorial-autogobierno--ine-ecp-2025-poblacion-ccaa",
+    "pool-impuestos-y-economia--ine-ese-2023-tabaco"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Fumadores y salud pública",
+     "text": "Se pediría analizar la efectividad del empaquetado genérico con criterios técnicos y de salud pública, además de su impacto industrial, económico y social en Canarias.",
+     "locator": "Punto 1"
+    },
+    {
+     "actor": "Gobierno de Canarias y sectores afectados",
+     "text": "Tendrían que ser consultados antes de adoptar la medida, si el Estado la adopta.",
+     "locator": "Punto 2"
+    },
+    {
+     "actor": "Sector del tabaco en Canarias",
+     "text": "Podría contar con la colaboración del Estado para mantener industria, inversión, innovación y empleo mientras se combate el tabaquismo.",
+     "locator": "Punto 3"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion109/20250508/Votacion014/VOT_20250508130802.json": {
+   "question_id": "pool-impuestos-y-economia",
+   "facts": [
+    "pool-impuestos-y-economia--eurostat-2025-exportaciones-eeuu",
+    "eje-empleo-derechos--ine-dirce-2025-empresas-50"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Empresas con ventas a EE. UU.",
+     "text": "Pueden acceder a avales del Estado por hasta 5.000 millones de euros en total, hasta el 30-6-2026 (ampliable), para financiarse ante los aranceles.",
+     "locator": "Artículo 1"
+    },
+    {
+     "actor": "Empresas exportadoras",
+     "text": "El Fondo para la Internacionalización de la Empresa pasa a 120 millones y el límite de cobertura estatal de riesgos de exportación (CESCE) a 15.000 millones.",
+     "locator": "Artículos 3 y 4"
+    },
+    {
+     "actor": "Sociedades con pérdidas de 2020 y 2021",
+     "text": "Esas pérdidas no cuentan para la causa de disolución hasta el cierre del ejercicio que empiece en 2025, y pueden reformular las cuentas de 2024.",
+     "locator": "Artículo 6 y disposición adicional primera"
+    },
+    {
+     "actor": "Comunidades autónomas",
+     "text": "El Gobierno reparte estos instrumentos según el peso de sus exportaciones a EE. UU. en 2024 e informa cada trimestre al Congreso por territorio y sector.",
+     "locator": "Disposición adicional segunda"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion142/20251028/Votacion001/VOT_20251028204540.json": {
+   "question_id": "pool-impuestos-y-economia",
+   "facts": [
+    "eje-justicia-independencia--boe-rd560-2026-plantilla-fiscal",
+    "eje-justicia-independencia--boe-emf-fiscal-general"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Personas cuyos datos trata el Ministerio Fiscal",
+     "text": "Una Unidad de Supervisión y Control de Protección de Datos vigilaría el tratamiento de esos datos con fines jurisdiccionales.",
+     "locator": "Artículo único, apartados Uno y Tres (artículos 12.n y 20.4)"
+    },
+    {
+     "actor": "Titular de la unidad",
+     "text": "Sería elegido por mayoría absoluta del Consejo Fiscal entre juristas con 15 años de ejercicio, con mandato de 5 años no renovable y cese solo por incapacidad o incumplimiento grave.",
+     "locator": "Artículo único, apartados Dos y Tres (artículos 14.4.l y 20.4)"
+    },
+    {
+     "actor": "Fiscales jefes, superiores y del Supremo",
+     "text": "Sus destinos los proveería el Gobierno a propuesta del Fiscal General.",
+     "locator": "Artículo único, apartados Cuatro y Cinco"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion161/20260218/Votacion003/VOT_20260218141921.json": {
+   "question_id": "pool-impuestos-y-economia",
+   "facts": [
+    "eje-territorial-autogobierno--ine-ecp-2025-poblacion-ccaa",
+    "eje-empleo-derechos--ine-etcl-2026t2-coste-salarial-ccaa"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Gobierno de Canarias",
+     "text": "Tendría una mesa paritaria con el Estado para revisar con urgencia cómo se cumple la normativa de desarrollo económico de Canarias (región ultraperiférica, Régimen Económico y Fiscal).",
+     "locator": "Punto 1"
+    },
+    {
+     "actor": "Administraciones y analistas de la economía canaria",
+     "text": "Podrían acceder con más rapidez a información fiscal agregada con fines estadísticos para seguir los efectos de esas medidas.",
+     "locator": "Punto 2"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion198/20260916/Votacion017/VOT_20260916195408.json": {
+   "question_id": "pool-impuestos-y-economia",
+   "facts": [
+    "eje-control-gobierno--ine-ceuta-2025-poblacion",
+    "eje-empleo-derechos--ine-epa-2026t2-ceuta-melilla"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Autónomos y empresas de Ceuta",
+     "text": "Los autónomos afectados pueden pedir 5.000 euros en la AEAT hasta el 30-11-2026; hay ERTE por fuerza mayor con cuota empresarial exenta al 100 % hasta el 31-12-2026 y cese de actividad al 70 % para autónomos.",
+     "locator": "Artículos 1, 34, 35, 39 y 40"
+    },
+    {
+     "actor": "Contribuyentes de Ceuta",
+     "text": "En el IRPF de 2026 aplican un 10 % de gastos de difícil justificación y un 10 % de reducción en módulos; en Sociedades, bonificación del 60 % de la cuota por rentas obtenidas en Ceuta o Melilla.",
+     "locator": "Artículos 2 y 3"
+    },
+    {
+     "actor": "Comercio, turismo y hostelería de Ceuta",
+     "text": "La Cámara de Comercio recibe hasta 14 millones de euros (10 para comercio y 4 para turismo y hostelería), más planes de exportación y promoción turística y avales de hasta 50 millones.",
+     "locator": "Artículos 4 a 7 y 15 a 17"
+    },
+    {
+     "actor": "Presupuesto del Estado",
+     "text": "Asume créditos de 62,96 millones para menores migrantes no acompañados, 39,5 para atención humanitaria y 74 para Defensa, además de fondos para sanidad, seguridad y desaladora.",
+     "locator": "Artículos 20 a 28 y 32"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  }
+ }
+}

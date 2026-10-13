@@ -1,0 +1,56 @@
+{
+ "facts": {
+  "v1-cultura-tauromaquia--cultura-2023-festejos": {
+   "text": "En 2023 se celebraron 1.474 festejos taurinos en España, de los que 382 fueron corridas de toros (el 25,9 %); en 2019 fueron 1.425.",
+   "period": "2023",
+   "source": "Ministerio de Cultura, Estadística de Asuntos Taurinos 2023",
+   "url": "https://www.cultura.gob.es/dam/jcr:0404e68e-022a-4626-bec2-96b38b6dd057/estadistica-de-asuntos-taurinos-2019-2023.pdf"
+  },
+  "v1-cultura-tauromaquia--cultura-2023-profesionales": {
+   "text": "En 2023 había 10.838 profesionales taurinos inscritos en el Registro General de Profesionales Taurinos; 825 eran matadores de toros (el 7,6 %).",
+   "period": "2023",
+   "source": "Ministerio de Cultura, Estadística de Asuntos Taurinos 2023",
+   "url": "https://www.cultura.gob.es/dam/jcr:0404e68e-022a-4626-bec2-96b38b6dd057/estadistica-de-asuntos-taurinos-2019-2023.pdf"
+  }
+ },
+ "statements": {
+  "cultura-tauromaquia": {
+   "facts": [
+    "v1-cultura-tauromaquia--cultura-2023-festejos",
+    "v1-cultura-tauromaquia--cultura-2023-profesionales"
+   ]
+  }
+ },
+ "votes": {
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion135/20251007/Votacion001/VOT_20251007214328.json": {
+   "question_id": "cultura-tauromaquia",
+   "facts": [
+    "v1-cultura-tauromaquia--cultura-2023-festejos",
+    "v1-cultura-tauromaquia--cultura-2023-profesionales"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Sector taurino",
+     "text": "Podrían perder la declaración legal de la tauromaquia como patrimonio cultural, al derogarse la Ley 18/2013.",
+     "locator": "Artículo primero"
+    },
+    {
+     "actor": "Administraciones públicas",
+     "text": "Podrían dejar de tener la base de la Ley 10/2015 que alude a la tauromaquia, al suprimirse el párrafo undécimo de su preámbulo y su disposición final sexta.",
+     "locator": "Artículo segundo"
+    },
+    {
+     "actor": "Ciudadanía en general",
+     "text": "Los cambios podrían aplicarse desde el día siguiente a su publicación en el BOE.",
+     "locator": "Disposición final única"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  }
+ }
+}

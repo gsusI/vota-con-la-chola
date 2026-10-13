@@ -12,6 +12,11 @@ The seed (etl/data/seeds/voting_aid_vote_impacts_v1.json) holds three layers wit
   kinds must be present (``beneficio_esperado`` and ``riesgo_senalado``), so the card never argues one side.
 
 They are shown before answering: no party or group names. ``gaps`` says what is not known.
+
+Every question must say who it affects, at both levels: each statement (``statements``) and each concrete vote
+(``votes``), including the endless-mode pool. Work is drafted one question at a time into part files under
+``voting_aid_vote_impacts_v1.d/`` (same shape as the seed); they are merged here, and ``--require-complete``
+fails while any question or vote has no official figure.
 """
 
 from __future__ import annotations
@@ -28,6 +33,7 @@ from scripts.export_voting_aid_vote_bullets import PARTY_RE, REVIEW_STATUSES
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 DEFAULT_SEED = BASE_DIR / "etl/data/seeds/voting_aid_vote_impacts_v1.json"
+DEFAULT_PARTS = BASE_DIR / "etl/data/seeds/voting_aid_vote_impacts_v1.d"
 DATA_DIR = BASE_DIR / "ui/site/public/citizen/data"
 DEFAULT_SNAPSHOTS = [DATA_DIR / "voting_aid_generales_v1.json", DATA_DIR / "voting_aid_generales_v2.json"]
 DEFAULT_POOL = DATA_DIR / "voting_aid_pool_v1.json"
@@ -56,6 +62,41 @@ def known_ids(snapshots: list[dict[str, Any]], pool: dict[str, Any]) -> tuple[se
             statements.add(st["statement_id"])
             votes.update(v["vote_event_id"] for v in st.get("votes") or [] if v.get("vote_event_id"))
     return votes, statements
+
+
+def merge_parts(seed: dict[str, Any], parts: list[tuple[str, dict[str, Any]]]) -> tuple[dict[str, Any], list[str]]:
+    """Merge part files into the seed. A fact id may repeat only with the same content; a statement or vote only once."""
+    merged = {"meta": seed.get("meta") or {}, "facts": dict(seed.get("facts") or {}), "statements": dict(seed.get("statements") or {}), "votes": dict(seed.get("votes") or {})}
+    origin = {("facts", k): "semilla" for k in merged["facts"]} | {("statements", k): "semilla" for k in merged["statements"]} | {("votes", k): "semilla" for k in merged["votes"]}
+    errors: list[str] = []
+    for name, part in parts:
+        for section in ("facts", "statements", "votes"):
+            for key, value in (part.get(section) or {}).items():
+                prev = origin.get((section, key))
+                if prev is None:
+                    merged[section][key] = value
+                    origin[(section, key)] = name
+                elif section != "facts" or merged[section][key] != value:
+                    errors.append(f"{name}: {section} {key[-48:]!r} ya está en {prev}")
+    return merged, errors
+
+
+def load_parts(parts_dir: Path) -> list[tuple[str, dict[str, Any]]]:
+    if not parts_dir.is_dir():
+        return []
+    return [(p.name, json.loads(p.read_text(encoding="utf-8"))) for p in sorted(parts_dir.glob("*.json"))]
+
+
+def coverage(seed: dict[str, Any], vote_ids: set[str], statement_ids: set[str]) -> dict[str, Any]:
+    """Questions (statements) and concrete votes that still have no «A quién afecta» figure."""
+    votes_done = {vid for vid, v in (seed.get("votes") or {}).items() if v.get("facts")}
+    statements_done = {sid for sid, st in (seed.get("statements") or {}).items() if st.get("facts")}
+    return {
+        "statements": [len(statement_ids & statements_done), len(statement_ids)],
+        "votes": [len(vote_ids & votes_done), len(vote_ids)],
+        "missing_statements": sorted(statement_ids - statements_done),
+        "missing_votes": sorted(vote_ids - votes_done),
+    }
 
 
 def _text_errors(where: str, text: Any, limit: int = MAX_TEXT_CHARS) -> list[str]:
@@ -189,6 +230,9 @@ def build_payload(seed: dict[str, Any]) -> dict[str, Any]:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--seed", default=str(DEFAULT_SEED))
+    parser.add_argument("--parts-dir", default=str(DEFAULT_PARTS), help="per-question part files merged into the seed")
+    parser.add_argument("--part", help="validate the seed plus only this part file (drafting one question at a time)")
+    parser.add_argument("--require-complete", action="store_true", help="fail while any question or vote lacks «A quién afecta»")
     parser.add_argument("--snapshot", action="append", help="voting-aid snapshot (repeatable; default: v1 and v2)")
     parser.add_argument("--pool", default=str(DEFAULT_POOL))
     parser.add_argument("--out", default=str(DEFAULT_OUT))
@@ -198,13 +242,26 @@ def main(argv: list[str] | None = None) -> int:
     snapshots = [json.loads(Path(p).read_text(encoding="utf-8")) for p in (args.snapshot or DEFAULT_SNAPSHOTS)]
     pool = json.loads(Path(args.pool).read_text(encoding="utf-8"))
     vote_ids, statement_ids = known_ids(snapshots, pool)
-    errors = validate_seed(seed, vote_ids, statement_ids)
+    parts = load_parts(Path(args.parts_dir))
+    if args.part:
+        # Other questions' figures stay reusable; their votes and statements are left out of this check.
+        mine = Path(args.part)
+        parts = [(n, {"facts": pt.get("facts") or {}}) for n, pt in parts if n != mine.name]
+        parts.append((mine.name, json.loads(mine.read_text(encoding="utf-8"))))
+    seed, errors = merge_parts(seed, parts)
+    errors += validate_seed(seed, vote_ids, statement_ids)
+    cov = coverage(seed, vote_ids, statement_ids)
+    print(f"COVERAGE a quién afecta: preguntas {cov['statements'][0]}/{cov['statements'][1]}, votaciones {cov['votes'][0]}/{cov['votes'][1]}")
+    if args.require_complete and (cov["missing_statements"] or cov["missing_votes"]):
+        errors.append(f"faltan {len(cov['missing_statements'])} preguntas y {len(cov['missing_votes'])} votaciones sin «A quién afecta»: "
+                      + ", ".join(cov["missing_statements"][:10]))
     if errors:
         for e in errors[:50]:
             print(f"ERROR {e}", file=sys.stderr)
         print(f"FAIL {len(errors)} errores en la semilla", file=sys.stderr)
         return 1
     payload = build_payload(seed)
+    payload["meta"]["coverage"] = {"statements": cov["statements"], "votes": cov["votes"]}
     out = Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(payload, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")

@@ -1,0 +1,178 @@
+{
+ "facts": {
+  "pool-instituciones--ine-2025-poblacion-pitiusas": {
+   "text": "Según el padrón de 2025, Ibiza tiene 163.755 habitantes (suma de sus cinco municipios) y Formentera 11.661, de un total de 1.237.480 en Baleares.",
+   "period": "2025",
+   "source": "INE, tabla 2860 (población por municipios de Illes Balears)",
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=2860"
+  }
+ },
+ "statements": {},
+ "votes": {
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion009/20231128/Votacion005/VOT_20231128183414.json": {
+   "question_id": "pool-instituciones",
+   "facts": [
+    "eje-anticorrupcion--loreg-350-diputados"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Diputados",
+     "text": "Tienen 23 Comisiones Permanentes Legislativas fijadas en el Reglamento, desde la Constitucional hasta la de Juventud e Infancia.",
+     "locator": "Artículo único"
+    },
+    {
+     "actor": "Ciudadanía",
+     "text": "Materias como vivienda, sanidad e igualdad tienen comisión legislativa propia: Vivienda y Agenda Urbana, Sanidad e Igualdad, entre otras.",
+     "locator": "Artículo único (Artículo 46.1, nuevos puntos 1 a 23)"
+    },
+    {
+     "actor": "Mesa del Congreso",
+     "text": "Debe trasladar los asuntos pendientes a las Comisiones que pasen a ser competentes por razón de la materia.",
+     "locator": "Disposición final primera"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion179/20260519/Votacion002/VOT_20260519203504.json": {
+   "question_id": "pool-instituciones",
+   "facts": [
+    "pool-instituciones--ine-2025-poblacion-pitiusas"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Electores de Ibiza y Formentera",
+     "text": "Podrían elegir senadores en circunscripciones separadas, como las demás islas citadas, aunque no desde ya: solo desde las primeras elecciones al Senado posteriores a la reforma del artículo 69.3 de la Constitución.",
+     "locator": "Artículo único, apartado Uno (artículo 161.2)"
+    },
+    {
+     "actor": "Electores de las islas",
+     "text": "Podrían elegir tres senadores en Gran Canaria, Mallorca y Tenerife, y uno en Ibiza, Formentera, Menorca, Fuerteventura, La Gomera, El Hierro, Lanzarote y La Palma.",
+     "locator": "Artículo único, apartado Dos (artículo 165.2)"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion181/20260526/Votacion003/VOT_20260526210644.json": {
+   "question_id": "pool-instituciones",
+   "facts": [
+    "eje-anticorrupcion--loreg-350-diputados"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Formaciones con 15 o más diputados",
+     "text": "Podrían formar grupo parlamentario con 15 o más diputados.",
+     "locator": "Artículo único, artículo 23, apartado 1"
+    },
+    {
+     "actor": "Formaciones con al menos 5 diputados",
+     "text": "Podrían formar grupo con 5 diputados si su formación logra el 10 % de los votos donde presentó candidatura o el 3 % de los emitidos en toda España.",
+     "locator": "Artículo único, artículo 23, apartado 1"
+    },
+    {
+     "actor": "Diputados de un mismo partido",
+     "text": "No podrían formar grupos separados; tampoco quienes, al tiempo de las elecciones, pertenecieran a formaciones que no se enfrentaron ante el electorado.",
+     "locator": "Artículo único, artículo 23, apartado 2"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion185/20260611/Votacion041/VOT_20260611145752.json": {
+   "question_id": "pool-instituciones",
+   "facts": [
+    "eje-anticorrupcion--loreg-350-diputados"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Diputados que ejerzan violencia",
+     "text": "Podrían quedar suspendidos temporalmente si ejercen violencia o intimidación grave, de obra o de palabra, en el recinto contra la Presidencia, la Mesa, los Letrados o los Ujieres.",
+     "locator": "Artículo único, apartado Uno (artículo 101.1, supuesto 4.º)"
+    },
+    {
+     "actor": "Diputados con tres llamadas al orden",
+     "text": "Podrían ser expulsados del resto de la sesión, con una sanción de hasta 1.000 euros; si no abandonan el salón, no podrían asistir a la siguiente sesión y se les sancionaría hasta con 2.000 euros.",
+     "locator": "Artículo único, apartado Dos (artículo 104.1 y 104.2)"
+    },
+    {
+     "actor": "Presidencia del Congreso",
+     "text": "Ante ofensas proferidas, requeriría retirarlas y ordenaría que no consten en el Diario de Sesiones; negarse podría dar lugar a nuevas llamadas al orden.",
+     "locator": "Artículo único, apartado Dos (artículo 104.3)"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion188/20260618/Votacion018/VOT_20260618162237.json": {
+   "question_id": "pool-instituciones",
+   "facts": [
+    "pool-instituciones--ine-2025-poblacion-pitiusas"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Electores de Formentera",
+     "text": "Eligen senadores en circunscripción propia, separada de Ibiza, igual que el resto de islas con circunscripción insular.",
+     "locator": "Artículo único, apartado Uno (artículo 161.2)"
+    },
+    {
+     "actor": "Electores de las islas",
+     "text": "Eligen tres senadores en Gran Canaria, Mallorca y Tenerife, y uno en Ibiza, Formentera, Menorca, Fuerteventura, La Gomera, El Hierro, Lanzarote y La Palma.",
+     "locator": "Artículo único, apartado Dos (artículo 165.2)"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion192/20260714/Votacion051/VOT_20260714202056.json": {
+   "question_id": "pool-instituciones",
+   "facts": [
+    "eje-instituciones-reglas--cnmc-crtve-2023",
+    "eje-justicia-independencia--ue-2026-rtve"
+   ],
+   "direct_effects": [
+    {
+     "actor": "RTVE",
+     "text": "Podría contar como coste del servicio público los impuestos que no pueda deducir, aunque surjan por sentencias sobre años anteriores, sin alterar su patrimonio ni su resultado.",
+     "locator": "Artículo único (nuevo artículo 33 bis de la Ley 17/2006), párrafos primero y segundo"
+    },
+    {
+     "actor": "Estado",
+     "text": "Tendría que compensar ese coste; la ejecución presupuestaria y el pago podrían hacerse en ejercicios posteriores, sin sobrecompensación.",
+     "locator": "Artículo único (artículo 33 bis), párrafos segundo y tercero"
+    },
+    {
+     "actor": "Gobierno",
+     "text": "Quedaría habilitado para dictar las normas de desarrollo necesarias; la norma entraría en vigor al día siguiente de su publicación.",
+     "locator": "Disposiciones finales segunda y tercera"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  }
+ }
+}

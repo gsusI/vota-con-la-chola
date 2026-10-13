@@ -1,0 +1,656 @@
+{
+ "facts": {
+  "pool-otros--valenciaport-teu-2025": {
+   "text": "El puerto de Valencia movió 5.662.661 contenedores (TEU) en 2025, un 3,4 % más que en 2024 y un récord para un cierre de año.",
+   "period": "2025",
+   "source": "Autoridad Portuaria de Valencia (Valenciaport), nota de 23-1-2026",
+   "url": "https://www.valenciaport.com/en/valenciaport-grew-in-2025/"
+  },
+  "pool-otros--dgt-2024-alcohol-conductores": {
+   "text": "En 2024, 394 conductores fallecidos en siniestros mortales dieron positivo en alcohol y/o drogas; en 218 el positivo fue por alcohol, y el 94 % de ellos eran hombres.",
+   "period": "2024",
+   "source": "DGT, informe temático de alcohol y drogas 2024",
+   "url": "https://www.dgt.es/export/sites/web-DGT/.galleries/downloads/dgt-en-cifras/publicaciones/informes_siniestralidad/INF_TEMA_7_AlcoholyDrogas_v6_FINAL.pdf"
+  },
+  "pool-otros--ine-mujeres-45-64-2025": {
+   "text": "A 1 de enero de 2025 vivían en España 7.579.974 mujeres de 45 a 64 años, la franja en la que suelen llegar la perimenopausia y la menopausia.",
+   "period": "1 de enero de 2025",
+   "source": "INE, Estadística Continua de Población, tabla 56934 (suma de edades simples 45 a 64)",
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=56934"
+  },
+  "pool-otros--ine-leon-poblacion-2021": {
+   "text": "La provincia de León tenía 451.706 habitantes empadronados en 2021: 219.532 hombres y 232.174 mujeres.",
+   "period": "2021",
+   "source": "INE, Cifras de población, tabla 2852",
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=2852"
+  },
+  "pool-otros--eurostat-teletrabajo-2025": {
+   "text": "En 2025, el 15,7 % de los ocupados de 15 a 64 años en España trabajó desde casa: el 7,9 % habitualmente y el 7,8 % a veces. El 84,3 % no lo hizo nunca.",
+   "period": "2025",
+   "source": "Eurostat, lfsa_ehomp (ocupados que trabajan desde casa)",
+   "url": "https://ec.europa.eu/eurostat/databrowser/view/lfsa_ehomp/default/table"
+  },
+  "pool-otros--ine-defunciones-tumores-2024": {
+   "text": "En 2024 murieron por tumores 115.578 personas en España, de un total de 436.118 fallecimientos.",
+   "period": "2024",
+   "source": "INE, Defunciones según la causa de muerte, tabla 7947",
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=7947"
+  },
+  "pool-otros--boe-rdl-12-2026-aportacion-reducida": {
+   "text": "Desde este decreto-ley, quien compra un medicamento de aportación reducida paga el 10 % del precio, con un máximo de 4,98 euros por medicamento.",
+   "period": "2026",
+   "source": "BOE, Real Decreto-ley 12/2026, disposición final primera",
+   "url": "https://www.boe.es/eli/es/rdl/2026/05/26/12"
+  },
+  "pool-otros--eurostat-redes-opinion-2025": {
+   "text": "En 2025, el 69,5 % de las personas en España participó en redes sociales y el 15,1 % expresó opiniones sobre asuntos cívicos o políticos en internet o redes.",
+   "period": "2025",
+   "source": "Eurostat, isoc_ci_ac_i (actividades en internet de las personas)",
+   "url": "https://ec.europa.eu/eurostat/databrowser/view/isoc_ci_ac_i/default/table"
+  },
+  "pool-otros--eurostat-noticias-online-2025": {
+   "text": "En 2025, el 73,0 % de las personas en España leyó noticias, periódicos o revistas de actualidad en internet.",
+   "period": "2025",
+   "source": "Eurostat, isoc_ci_ac_i (actividades en internet de las personas)",
+   "url": "https://ec.europa.eu/eurostat/databrowser/view/isoc_ci_ac_i/default/table"
+  },
+  "pool-otros--boe-rdl-8-2025-beneficios": {
+   "text": "El Real Decreto-ley 8/2025 da a todas las iniciativas que declara los beneficios fiscales máximos del artículo 27.3 de la Ley 49/2002 de mecenazgo.",
+   "period": "2025",
+   "source": "BOE, Real Decreto-ley 8/2025, artículo 1.2",
+   "url": "https://www.boe.es/eli/es/rdl/2025/07/08/8"
+  }
+ },
+ "statements": {},
+ "votes": {
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion011/20231212/Votacion003/VOT_20231212230031.json": {
+   "question_id": "pool-otros",
+   "facts": [
+    "pool-otros--valenciaport-teu-2025",
+    "eje-clima-transicion--eurostat-mercancias-2024"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Operadores portuarios y navieras",
+     "text": "Podrían contar con una nueva terminal norte de contenedores si el Gobierno la apoya y autoriza cuanto antes la licitación del muelle.",
+     "locator": "Punto 2"
+    },
+    {
+     "actor": "Empresas importadoras y exportadoras",
+     "text": "Podrían disponer de más capacidad de manejo de contenedores en el puerto de Valencia, en una terminal que el texto describe como sostenible y neutra en emisiones.",
+     "locator": "Punto 1"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion013/20231219/Votacion002/VOT_20231219233106.json": {
+   "question_id": "pool-otros",
+   "facts": [
+    "eje-igualdad-genero--csd-2025-licencias-federadas"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Deportistas federados",
+     "text": "Podrían elegir acudir o renunciar a las convocatorias de las selecciones, y solo sería infracción muy grave faltar sin justificar si habían optado por acudir.",
+     "locator": "Artículo único, apartados Uno y Cuatro"
+    },
+    {
+     "actor": "Federaciones deportivas",
+     "text": "No podrían establecer relación comercial con deportistas en activo que puedan participar para organizar competiciones oficiales estatales, y tendrían que poner a disposición a quienes designen para las selecciones.",
+     "locator": "Artículo único, apartados Tres y Cuatro"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion052/20240627/Votacion022/VOT_20240627130354.json": {
+   "question_id": "pool-otros",
+   "facts": [
+    "eje-israel-palestina--exteriores-2024-reconocimiento-palestina"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Población de Kosovo",
+     "text": "Podría ver reconocida su República como Estado soberano por España, si el Gobierno lo hiciera.",
+     "locator": "Punto 1"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion066/20241010/Votacion006/VOT_20241010194921.json": {
+   "question_id": "pool-otros",
+   "facts": [
+    "pool-otros--dgt-2024-alcohol-conductores",
+    "eje-seguridad-penal--dgt-2025-fallecidos"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Conductores de coches y motos",
+     "text": "Podrían tener que respetar un máximo de 0,2 g/l de alcohol en sangre.",
+     "locator": "Punto 1"
+    },
+    {
+     "actor": "Ciclistas y usuarios de vehículos no motorizados",
+     "text": "Podrían quedar sujetos al mismo límite de 0,2 g/l que el resto de conductores.",
+     "locator": "Punto 1"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion070/20241023/Votacion012/VOT_20241023184348.json": {
+   "question_id": "pool-otros",
+   "facts": [
+    "eje-clima-transicion--eurostat-mercancias-2024",
+    "eje-regulacion-economica--ine-dirce-2025-transporte"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Empresas de transporte y cargadores de mercancías",
+     "text": "Podrían contar con un corredor ferroviario pensado para mercancías, con vías separadas de las de pasajeros y conexión con puertos y centros logísticos.",
+     "locator": "Puntos 1 a 5"
+    },
+    {
+     "actor": "Usuarios de Rodalies",
+     "text": "Podrían ver los trenes de pasajeros separados de los de mercancías en las vías del Corredor Mediterráneo.",
+     "locator": "Puntos 1 y 2"
+    },
+    {
+     "actor": "Maquinistas y empresas ferroviarias",
+     "text": "Podrían beneficiarse de más formación de maquinistas y de la continuidad de los estímulos del Plan «Mercancías 30».",
+     "locator": "Puntos 6 a 8"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion091/20250212/Votacion002/VOT_20250212154037.json": {
+   "question_id": "pool-otros",
+   "facts": [
+    "pool-otros--ine-mujeres-45-64-2025",
+    "eje-empleo-derechos--ine-profesionales-sanitarios-2025"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Mujeres con síntomas de menopausia",
+     "text": "Podrían tener más estudio de su caso, información sobre qué terapias funcionan y campañas contra la estigmatización.",
+     "locator": "Puntos 1 a 3"
+    },
+    {
+     "actor": "Profesionales sanitarios (matronas, enfermería y medicina de familia)",
+     "text": "Podrían recibir formación sobre menopausia dentro de su especialidad.",
+     "locator": "Punto 6"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion109/20250508/Votacion007/VOT_20250508130749.json": {
+   "question_id": "pool-otros",
+   "facts": [
+    "pool-otros--eurostat-redes-opinion-2025"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Usuarios de redes sociales y medios",
+     "text": "Podrían quedar protegidos frente a la censura previa y a toda intromisión ilegítima en medios y redes, si el Congreso lo hubiera pedido.",
+     "locator": "Puntos 9 y 10"
+    },
+    {
+     "actor": "Docentes, creadores e investigadores",
+     "text": "Podrían ver garantizada la libertad de cátedra y de creación literaria, artística y científica, si el Congreso lo hubiera pedido.",
+     "locator": "Puntos 3 y 5 a 8"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion115/20250528/Votacion002/VOT_20250528152330.json": {
+   "question_id": "pool-otros",
+   "facts": [
+    "eje-fiscalidad--ine-padron-2021-municipios"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Asociaciones de vecinos",
+     "text": "Podrían recibir impulso al asociacionismo, formación en participación y desarrollo comunitario, y un análisis de una regulación propia de sus derechos y obligaciones.",
+     "locator": "Puntos 1 a 3"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion128/20250722/Votacion018/VOT_20250722200832.json": {
+   "question_id": "pool-otros",
+   "facts": [
+    "pool-otros--boe-rdl-8-2025-beneficios"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Organizadores y patrocinadores de las 28 iniciativas",
+     "text": "Las 28 iniciativas culturales, deportivas y de otro tipo tendrían los beneficios fiscales máximos del mecenazgo, durante periodos entre 2025 y 2028.",
+     "locator": "Artículos 1 y 2"
+    },
+    {
+     "actor": "Patrocinadores de deportistas para Los Ángeles 2028",
+     "text": "Su patrocinio contaría para el límite de beneficios del artículo 27.3 de la Ley 49/2002, pero no sería gasto deducible en el impuesto sobre sociedades.",
+     "locator": "Artículo 1.2, párrafos segundo y tercero"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion130/20250910/Votacion006/VOT_20250910213539.json": {
+   "question_id": "pool-otros",
+   "facts": [
+    "eje-transporte-publico--ine-padron-2021-municipios-pequenos"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Comunidades autónomas y ayuntamientos",
+     "text": "Podrían seguir trabajando con el Gobierno para implantar la Agenda 2030 en sus territorios.",
+     "locator": "Punto 3"
+    },
+    {
+     "actor": "Ciudadanía",
+     "text": "Podría recibir campañas de concienciación y formación sobre la Agenda 2030.",
+     "locator": "Punto 2"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion139/20251016/Votacion002/VOT_20251016123448.json": {
+   "question_id": "pool-otros",
+   "facts": [
+    "pool-otros--ine-leon-poblacion-2021"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Vecinos de la provincia de León",
+     "text": "Podrían ver reactivados proyectos estatales paralizados: carreteras, ferrocarril, Puerto de Pajares y equipamientos de la ciudad.",
+     "locator": "Puntos 1 a 8"
+    },
+    {
+     "actor": "Usuarios de autopistas de peaje (AP-66 y AP-71)",
+     "text": "Podrían beneficiarse de un sistema único de bonificaciones al peaje de las autopistas nacionales.",
+     "locator": "Punto 3"
+    },
+    {
+     "actor": "Empresas de logística y transporte ferroviario",
+     "text": "Podrían contar con el ramal de la plataforma logística de Torneros-Grulleros y una línea León-Astorga-Ponferrada modernizada para autopistas ferroviarias.",
+     "locator": "Puntos 4 y 5"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion140/20251021/Votacion002/VOT_20251021205507.json": {
+   "question_id": "pool-otros",
+   "facts": [
+    "eje-fiscalidad--ine-padron-2021-municipios"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Concejales y cargos electos locales",
+     "text": "Podrían pedir votar por vía telemática en caso de embarazo, enfermedad, cuidado de familiares, fallecimiento de familiares u otra situación grave justificada.",
+     "locator": "Artículo único (nuevo apartado 4 del artículo 46)"
+    },
+    {
+     "actor": "Ayuntamientos y secretarías municipales",
+     "text": "Tendrían seis meses para adaptar su normativa y medios, y la alcaldía fijaría el periodo y el sistema de verificación del voto.",
+     "locator": "Disposición transitoria única"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion141/20251022/Votacion001/VOT_20251022134512.json": {
+   "question_id": "pool-otros",
+   "facts": [
+    "pool-otros--eurostat-teletrabajo-2025",
+    "eje-transporte-publico--ine-padron-2021-municipios-pequenos"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Jóvenes del medio rural",
+     "text": "Podrían recibir medidas para atraerlos y retenerlos en municipios rurales, con mejor conectividad 5G, coworking y transporte público.",
+     "locator": "Puntos 1, 3, 4 y 5"
+    },
+    {
+     "actor": "Empleados públicos que viven en zonas rurales",
+     "text": "Podrían teletrabajar con presencialidad mínima y «bolsas de horas» presenciales.",
+     "locator": "Punto 2"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion142/20251028/Votacion003/VOT_20251028204543.json": {
+   "question_id": "pool-otros",
+   "facts": [
+    "pool-otros--ine-defunciones-tumores-2024"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Pacientes de cáncer y sus familias",
+     "text": "Podrían encontrar un lenguaje más responsable y empático sobre el cáncer en medios, centros educativos y sanitarios.",
+     "locator": "Punto 1"
+    },
+    {
+     "actor": "Medios de comunicación",
+     "text": "Podrían recibir recomendaciones científicas para tratar el cáncer, elaboradas con asociaciones de pacientes y colegios profesionales.",
+     "locator": "Punto 2"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion147/20251118/Votacion002/VOT_20251118204741.json": {
+   "question_id": "pool-otros",
+   "facts": [
+    "eje-transporte-publico--ine-padron-2021-municipios-pequenos"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Municipios rurales pequeños",
+     "text": "Podrían tener protección prioritaria en emergencias de interés nacional si no garantizan solos servicios básicos, suministro y conectividad.",
+     "locator": "Artículo 1, apartados Uno y Dos"
+    },
+    {
+     "actor": "Administraciones públicas y protección civil",
+     "text": "Tendrían que dar cursos sobre protocolos de emergencia, y el Estado fijaría mecanismos de financiación de los planes de protección civil.",
+     "locator": "Disposición adicional única"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion152/20251209/Votacion001/VOT_20251209205650.json": {
+   "question_id": "pool-otros",
+   "facts": [
+    "eje-empleo-derechos--ine-epa-2026t2-temporalidad-publico"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Aspirantes a cuerpos y escalas del Grupo A",
+     "text": "Tendrían que tener un título universitario de Grado o equivalente para acceder.",
+     "locator": "Artículo único, artículo 76"
+    },
+    {
+     "actor": "Funcionarios del Grupo A con titulaciones de 6 años",
+     "text": "Podrían ver reconocido un plus dentro del grupo A si se exigen titulaciones de 360 créditos ECTS.",
+     "locator": "Artículo único, artículo 76"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion154/20251211/Votacion012/VOT_20251211175055.json": {
+   "question_id": "pool-otros",
+   "facts": [
+    "eje-empleo-derechos--ine-epa-2026t2-temporalidad-publico"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Empleados públicos",
+     "text": "Verían subir sus retribuciones hasta un 2,5 % en 2025 y hasta un 1,5 % en 2026, más un 0,5 % adicional si el IPC de 2026 es igual o superior al 1,5 %.",
+     "locator": "Artículos 1 y 2"
+    },
+    {
+     "actor": "Personal laboral del sector público",
+     "text": "Su masa salarial podría crecer hasta el mismo porcentaje máximo: 2,5 % en 2025 y 1,5 % más 0,5 % adicional en 2026.",
+     "locator": "Artículo 1, apartado 2, y artículo 2, apartado 3"
+    },
+    {
+     "actor": "Administraciones autonómicas y locales",
+     "text": "Podrían repartir entre 2026 y 2028 los pagos de la subida de 2025, mientras el sector público estatal la pagaría en diciembre de 2025.",
+     "locator": "Artículo 3, apartados 1 y 2"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion160/20260217/Votacion001/VOT_20260217203202.json": {
+   "question_id": "pool-otros",
+   "facts": [
+    "eje-fiscalidad--ine-epa-2026t2-ocupados-jovenes",
+    "eje-transporte-publico--ine-ecp-2026-ninos-jovenes"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Infancia y juventud",
+     "text": "Su impacto sería relevante en las evaluaciones previas de las actuaciones públicas, junto con la igualdad de género, el reto demográfico o la transición verde.",
+     "locator": "Artículo único, apartado Dos"
+    },
+    {
+     "actor": "Agencia Estatal de Evaluación",
+     "text": "Tendría que elaborar indicadores previos de resultados esperados en ámbitos como infancia y juventud, igualdad de género y reto demográfico.",
+     "locator": "Artículo único, apartado Uno"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion166/20260318/Votacion001/VOT_20260318175323.json": {
+   "question_id": "pool-otros",
+   "facts": [
+    "pool-otros--eurostat-noticias-online-2025"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Periodistas",
+     "text": "Podrían contar con apoyo a un periodismo profesional libre y sin censura, y con protocolos ante campañas de odio, acoso y deepfakes.",
+     "locator": "Puntos 1 y 5"
+    },
+    {
+     "actor": "Mujeres periodistas",
+     "text": "Podrían ver reconocida la dimensión machista del acoso y la violencia digital que sufren.",
+     "locator": "Punto 3"
+    },
+    {
+     "actor": "Medios públicos de comunicación",
+     "text": "Podrían ser defendidos como pilar de la democracia, y se revisarían los criterios de reparto de publicidad institucional a medios.",
+     "locator": "Puntos 2 y 4"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion173/20260421/Votacion002/VOT_20260421201010.json": {
+   "question_id": "pool-otros",
+   "facts": [
+    "eje-empleo-derechos--ine-mnp-2024-nacimientos"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Mujeres que crioconservan ovocitos o tejido ovárico",
+     "text": "Podrían conservar ovocitos durante toda su vida, y la conservación de tejido ovárico podría prolongarse hasta que se vea inadecuada a la receptora.",
+     "locator": "Artículo único, artículo 11.1 y 11.3"
+    },
+    {
+     "actor": "Personas con preembriones sobrantes",
+     "text": "Podrían elegir su destino (uso propio, donación reproductiva, donación para investigación o cese de la conservación), con consentimiento informado.",
+     "locator": "Artículo único, artículo 11.4 y 11.5"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion181/20260526/Votacion002/VOT_20260526210642.json": {
+   "question_id": "pool-otros",
+   "facts": [
+    "ine-censo-2021-vacias"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Propietarios de viviendas en comunidades de vecinos",
+     "text": "Podrían asistir a las juntas por videoconferencia y comunicar un correo electrónico para recibir citaciones y notificaciones.",
+     "locator": "Artículo único, apartados Uno y Dos"
+    },
+    {
+     "actor": "Comunidades de propietarios",
+     "text": "Podrían llevar el libro de actas en formato electrónico, según el modelo que apruebe el Ministerio.",
+     "locator": "Artículo único, apartado Tres"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion188/20260618/Votacion014/VOT_20260618162229.json": {
+   "question_id": "pool-otros",
+   "facts": [
+    "pool-otros--boe-rdl-12-2026-aportacion-reducida"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Organizadores y equipos de la final de la Champions 2027",
+     "text": "Tendrían exenciones en Sociedades y Renta de no Residentes, y devolución de IVA sin reciprocidad.",
+     "locator": "Disposición adicional primera"
+    },
+    {
+     "actor": "Quienes compran medicamentos de aportación reducida",
+     "text": "Pagarían el 10 % del precio, con un máximo de 4,98 euros.",
+     "locator": "Disposición final primera"
+    },
+    {
+     "actor": "Organizadores y patrocinadores de las 26 iniciativas",
+     "text": "Tendrían los beneficios fiscales máximos del mecenazgo, durante periodos entre 2026 y 2029.",
+     "locator": "Artículos 1 y 2"
+    },
+    {
+     "actor": "Instituciones eclesiásticas",
+     "text": "Se ampliaría cinco años el plazo de la Ley del Patrimonio Histórico sobre transmisión, cesión e inventario de sus bienes muebles.",
+     "locator": "Disposición adicional segunda"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion191/20260625/Votacion029/VOT_20260625150830.json": {
+   "question_id": "pool-otros",
+   "facts": [
+    "eje-fiscalidad--eurostat-2025-deuda",
+    "eje-territorial-autogobierno--transportes-2024-cercanias"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Renfe-Operadora y sus viajeros",
+     "text": "Podría haberse endeudado hasta 671,1 millones de euros más en 2026, fuera de su límite anual.",
+     "locator": "Artículo único, apartado 3.a)"
+    },
+    {
+     "actor": "Puertos del Estado y Autoridades Portuarias",
+     "text": "Podrían haberse endeudado hasta 247,7 millones de euros en 2026.",
+     "locator": "Artículo único, apartado 3.c)"
+    },
+    {
+     "actor": "Salvamento Marítimo",
+     "text": "Podría haberse endeudado hasta 75 millones para el Plan Nacional de Salvamento 2025-2027, 16,9 millones de ellos en 2026.",
+     "locator": "Artículo único, apartado 3.b)"
+    },
+    {
+     "actor": "ICEX España Exportación e Inversiones",
+     "text": "Podría haberse endeudado hasta 40 millones de euros más.",
+     "locator": "Artículo único, apartado 3.d)"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  }
+ }
+}

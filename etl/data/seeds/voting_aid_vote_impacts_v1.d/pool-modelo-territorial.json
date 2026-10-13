@@ -1,0 +1,375 @@
+{
+ "facts": {
+  "pool-modelo-territorial--formentera-poblacion-2025": {
+   "text": "A 1 de enero de 2025 Formentera tenía 11.661 habitantes (5.976 hombres y 5.685 mujeres). Es la isla que la reforma constitucional convertiría en circunscripción propia para elegir senador.",
+   "period": "1 de enero de 2025",
+   "source": "INE, Padrón, tabla 29005",
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=29005"
+  },
+  "pool-modelo-territorial--ce-art69-3-senadores-islas": {
+   "text": "El artículo 69.3 de la Constitución, tras la reforma de mayo de 2026, da tres senadores a Gran Canaria, Mallorca y Tenerife y uno a cada una de otras ocho islas, entre ellas Ibiza y Formentera por separado.",
+   "period": "texto consolidado, reforma de 19 de mayo de 2026",
+   "source": "BOE, Constitución Española, art. 69.3",
+   "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1978-31229"
+  },
+  "pool-modelo-territorial--canal-navarra-regadio": {
+   "text": "Según el texto de la moción, la 2.ª fase del Canal de Navarra permitiría regar 21.000 hectáreas en la Ribera; el conjunto Itoiz-Canal pondría en regadío cerca de 60.000 hectáreas.",
+   "period": "2024",
+   "source": "Congreso, BOCG serie D n.º 249, p. 53 (exposición de motivos de la moción)",
+   "url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/D/BOCG-15-D-249.PDF"
+  },
+  "pool-modelo-territorial--rdl13-2026-suplementos-locales": {
+   "text": "El decreto concede suplementos de crédito para las entregas a cuenta locales de 2026: 1.575 millones para municipios fuera del modelo de cesión, 2.447 millones para su fondo complementario y 1.952 millones para diputaciones y cabildos.",
+   "period": "2026",
+   "source": "BOE, Real Decreto-ley 13/2026, artículo 1.5",
+   "url": "https://www.boe.es/eli/es/rdl/2026/06/02/13"
+  },
+  "pool-modelo-territorial--andalucia-extremadura-poblacion-2025": {
+   "text": "A 1 de enero de 2025 vivían 8,68 millones de personas en Andalucía y 1,05 millones en Extremadura, las dos comunidades de especial afectación del decreto (las zonas dañadas son solo una parte).",
+   "period": "1 de enero de 2025",
+   "source": "INE, Estadística Continua de Población, tabla 56940",
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=56940"
+  },
+  "pool-modelo-territorial--la-palma-municipios-volcan-2025": {
+   "text": "Los tres municipios de La Palma cuyos deudores pueden pedir otra suspensión de préstamos sumaban 33.421 habitantes en 2025: Los Llanos de Aridane 20.582, El Paso 8.290 y Tazacorte 4.549.",
+   "period": "1 de enero de 2025",
+   "source": "INE, Padrón, tabla 29005",
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=29005"
+  }
+ },
+ "statements": {},
+ "votes": {
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion019/20240206/Votacion003/VOT_20240206213124.json": {
+   "question_id": "pool-modelo-territorial",
+   "facts": [
+    "eje-territorial-autogobierno--ine-ecp-2025-poblacion-ccaa",
+    "eje-territorial-autogobierno--eurostat-2024-transporte",
+    "eje-regulacion-economica--ine-tf-2025-viajeros"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Conductores en Galicia",
+     "text": "Podrían ver un plan urgente de conservación de las carreteras estatales gallegas, de las autovías A-6 y A-52 y de los viaductos de O Castro.",
+     "locator": "Punto 1, apartados 1.1 a 1.3"
+    },
+    {
+     "actor": "Conductores de la AP-9 y la AP-53",
+     "text": "Podrían pagar menos peaje o no pagarlo: se pide liberar de peaje la AP-53 entre Santiago y Alto de Santo Domingo y nuevas bonificaciones en AP-9 y AP-53.",
+     "locator": "Punto 1, apartados 1.6 a 1.8"
+    },
+    {
+     "actor": "Viajeros en tren en Galicia",
+     "text": "Podrían ganar alta velocidad Ourense-Vigo y con Portugal, mejoras en líneas gallegas y trenes Avril, con medidas urgentes en media distancia.",
+     "locator": "Punto 2, apartados 2.3 a 2.13"
+    },
+    {
+     "actor": "Vecinos de Ourense y comarcas afectadas",
+     "text": "Podrían ver licitadas las obras pendientes de la Variante Exterior de Ourense y ejecutadas las variantes de Os Peares-Canabal y Rubián.",
+     "locator": "Punto 2, apartados 2.1 y 2.2"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion060/20240918/Votacion006/VOT_20240919102654.json": {
+   "question_id": "pool-modelo-territorial",
+   "facts": [
+    "eje-territorial-autogobierno--ine-ecp-2025-poblacion-ccaa",
+    "eje-territorial-autogobierno--eurostat-2024-transporte"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Viajeros de Navarra",
+     "text": "Podrían tener alta velocidad en doble vía hasta Pamplona en 2030 y estaciones nuevas en Pamplona y Tudela.",
+     "locator": "Punto 1"
+    },
+    {
+     "actor": "Gobiernos de Navarra y del País Vasco",
+     "text": "Podrían participar en definir el trazado de alta velocidad entre Pamplona y la «Y vasca», con estudios del Ministerio en seis meses.",
+     "locator": "Punto 2"
+    },
+    {
+     "actor": "Conductores del sur de Navarra y Soria",
+     "text": "Podrían ver concluida en cinco años la Autovía A-15 entre Soria, la variante de Ágreda y el límite de Navarra.",
+     "locator": "Punto 3"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion079/20241121/Votacion045/VOT_20241121173842.json": {
+   "question_id": "pool-modelo-territorial",
+   "facts": [
+    "pool-modelo-territorial--canal-navarra-regadio",
+    "eje-territorial-autogobierno--ine-ecp-2025-poblacion-ccaa"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Regantes y agricultores de la Ribera de Navarra",
+     "text": "Podrían ver licitadas y empezadas con urgencia las obras de la 2.ª fase del Canal de Navarra.",
+     "locator": "Punto 3"
+    },
+    {
+     "actor": "Instituciones y organizaciones que impulsaron Itoiz",
+     "text": "Recibirían un reconocimiento del Congreso por su trabajo en el Embalse de Itoiz y el Canal de Navarra.",
+     "locator": "Punto 2"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion128/20250722/Votacion015/VOT_20250722200828.json": {
+   "question_id": "pool-modelo-territorial",
+   "facts": [
+    "eje-territorial-autogobierno--eurostat-2024-gasto-ccaa",
+    "eje-territorial-autogobierno--hacienda-2023-fondo-garantia",
+    "eje-fiscalidad--ine-padron-2021-municipios"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Comunidades autónomas",
+     "text": "Reciben en 2025 entregas a cuenta actualizadas: lo adicional de enero a junio se abona en julio y el resto desde septiembre.",
+     "locator": "Artículo 1"
+    },
+    {
+     "actor": "Ayuntamientos y diputaciones",
+     "text": "Cobran entregas a cuenta actualizadas de 2025 y desde ahora sus liquidaciones definitivas se calculan con reglas fijas indefinidas.",
+     "locator": "Artículos 2 a 7"
+    },
+    {
+     "actor": "Entidades locales que devuelven saldos",
+     "text": "Se les descuenta de sus entregas a cuenta, reteniendo cada trimestre el 25 % de una entrega mensual, hasta tres años.",
+     "locator": "Artículo 2, apartado 2.b"
+    },
+    {
+     "actor": "Municipios fuera del modelo de cesión",
+     "text": "Cada uno recibe lo liquidado en 2003 y el resto se reparte 75 % por población, 12,5 % por esfuerzo fiscal y 12,5 % por capacidad tributaria inversa.",
+     "locator": "Artículo 4, apartado 2"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion157/20260210/Votacion001/VOT_20260210205703.json": {
+   "question_id": "pool-modelo-territorial",
+   "facts": [
+    "pool-modelo-territorial--formentera-poblacion-2025"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Votantes de Formentera",
+     "text": "Podrían elegir su propio senador, separado del de Eivissa.",
+     "locator": "Artículo único"
+    },
+    {
+     "actor": "Votantes de las islas con cabildo o consejo",
+     "text": "Cada isla sería circunscripción: tres senadores en Gran Canaria, Mallorca y Tenerife y uno en cada una de las otras ocho.",
+     "locator": "Artículo único, artículo 69, apartado 3"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion166/20260318/Votacion005/VOT_20260318175331.json": {
+   "question_id": "pool-modelo-territorial",
+   "facts": [
+    "pool-modelo-territorial--andalucia-extremadura-poblacion-2025",
+    "eje-campo-ambiente--mapa-seguros-agrarios-2025"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Afectados por las inundaciones (personas y hogares)",
+     "text": "Podrían cobrar 72.000 € por fallecimiento o incapacidad, hasta 60.480 € si se destruye la vivienda habitual y 150 € por persona y día de desalojo.",
+     "locator": "Artículos 3 y 4"
+    },
+    {
+     "actor": "Ayuntamientos y diputaciones",
+     "text": "Podrían recibir ayudas de hasta el 100 % de los gastos de emergencia y de la reparación de infraestructuras municipales, con 2.000 millones de crédito.",
+     "locator": "Artículos 5 y 7"
+    },
+    {
+     "actor": "Agricultores y pescadores",
+     "text": "Podrían cobrar el 30 % de sus ingresos agrarios de 2024 (5.000 a 25.000 €), prima de seguro subvencionada hasta el 70 % y ayuda a buques.",
+     "locator": "Artículos 9 a 11 y 17"
+    },
+    {
+     "actor": "Empresas, autónomos y trabajadores",
+     "text": "Podrían recibir 5.000 € de ayuda directa, avales, desempleo del 70 % en suspensiones, prohibición de despedir y exención del IBI.",
+     "locator": "Artículos 21 a 23, 31, 33, 37 y 38"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion055/VOT_20260326165142.json": {
+   "question_id": "pool-modelo-territorial",
+   "facts": [
+    "pool-modelo-territorial--formentera-poblacion-2025",
+    "pool-modelo-territorial--ce-art69-3-senadores-islas"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Votantes de Formentera",
+     "text": "Formentera sería circunscripción propia en las elecciones al Senado, separada de Ibiza.",
+     "locator": "Artículo único"
+    },
+    {
+     "actor": "Votantes de Ibiza",
+     "text": "Dejarían de compartir senador con Formentera, pero solo desde las primeras elecciones al Senado posteriores a la entrada en vigor.",
+     "locator": "Disposición transitoria única"
+    },
+    {
+     "actor": "Votantes de las islas con cabildo o consejo",
+     "text": "Tres senadores en Gran Canaria, Mallorca y Tenerife y uno en cada una de las otras ocho islas citadas.",
+     "locator": "Artículo único"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion174/20260422/Votacion017/VOT_20260422152006.json": {
+   "question_id": "pool-modelo-territorial",
+   "facts": [
+    "pool-modelo-territorial--canal-navarra-regadio",
+    "eje-territorial-autogobierno--ine-ecp-2025-poblacion-ccaa"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Regantes y agricultores de la Ribera de Navarra",
+     "text": "Podrían obtener un cronograma concreto para licitar y adjudicar con urgencia las obras de la 2.ª fase del Canal de Navarra.",
+     "locator": "Punto 2"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion188/20260618/Votacion016/VOT_20260618162233.json": {
+   "question_id": "pool-modelo-territorial",
+   "facts": [
+    "eje-territorial-autogobierno--eurostat-2024-gasto-ccaa",
+    "pool-modelo-territorial--rdl13-2026-suplementos-locales",
+    "eje-territorial-autogobierno--hacienda-2023-fondo-garantia"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Comunidades autónomas",
+     "text": "Reciben en 2026 entregas a cuenta actualizadas: la diferencia de enero a junio se paga en julio y el resto desde septiembre, con 3.313.827 miles de euros al Fondo de Garantía.",
+     "locator": "Artículo 1"
+    },
+    {
+     "actor": "Ayuntamientos y demás entidades locales",
+     "text": "Cobran entregas a cuenta de 2026 actualizadas desde septiembre y no devuelven las cuotas de telefonía móvil cobradas de más que el Estado reembolse.",
+     "locator": "Artículos 2 y 3"
+    },
+    {
+     "actor": "Entidades locales con remanente",
+     "text": "Quedan eximidas en 2026-2027 de plan económico-financiero si incumplen reglas fiscales por usar remanente, y regulan el superávit de 2025, incluida vivienda.",
+     "locator": "Artículos 4 y 5"
+    },
+    {
+     "actor": "Funcionarios locales con habilitación nacional",
+     "text": "Su libre designación se modifica, junto con el régimen de ciertos consorcios.",
+     "locator": "Disposiciones finales primera a cuarta"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion198/20260916/Votacion015/VOT_20260916195404.json": {
+   "question_id": "pool-modelo-territorial",
+   "facts": [
+    "pool-modelo-territorial--canal-navarra-regadio",
+    "eje-territorial-autogobierno--ine-ecp-2025-poblacion-ccaa"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Regantes y agricultores de la Ribera de Navarra",
+     "text": "Podrían ver licitadas las obras de la 2.ª fase del Canal de Navarra durante 2026.",
+     "locator": "Punto 2"
+    },
+    {
+     "actor": "Gobierno y ministerio responsable",
+     "text": "Tendrían que fijar un cronograma de los trámites pendientes para licitar y adjudicar la segunda y última fase.",
+     "locator": "Punto 1"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion200/20260923/Votacion010/VOT_20260923145128.json": {
+   "question_id": "pool-modelo-territorial",
+   "facts": [
+    "pool-modelo-territorial--la-palma-municipios-volcan-2025",
+    "eje-territorial-autogobierno--bde-2026t2-deuda-ccaa"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Residentes en La Palma",
+     "text": "Pueden deducirse en el IRPF de 2026 como si residieran en Ceuta o Melilla, igual que de 2022 a 2025.",
+     "locator": "Artículo 1"
+    },
+    {
+     "actor": "Agricultores afectados por el volcán",
+     "text": "Pueden pedir hasta el 15 de octubre de 2026 otra suspensión de seis meses de sus préstamos en El Paso, Los Llanos de Aridane y Tazacorte.",
+     "locator": "Artículo 4"
+    },
+    {
+     "actor": "Comunidades con poca deuda y superávit",
+     "text": "Pueden invertir en 2026-2028 sus superávits sin reducir deuda, y Canarias puede destinar 100 millones a ayudas por la erupción.",
+     "locator": "Artículos 2 y 3"
+    },
+    {
+     "actor": "Autónomos del volcán",
+     "text": "No cuentan las ayudas POSEI en su prestación por cese de actividad y, si empezaron en 2020, se compara con 2020.",
+     "locator": "Artículo 5"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  }
+ }
+}

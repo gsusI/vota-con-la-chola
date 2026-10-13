@@ -137,6 +137,25 @@ This repo is intentionally ultra-lean. When expanding ETL/schema/UI, optimize fo
 - Durable agent knowledge base: `project_kb/README.md`.
 - Use it for stable project learnings, decisions, workflows, and gotchas. Do not duplicate roadmap or tracker authority there.
 
+## Subagent Fan-Out (Efficient Mode From The Start)
+When a task is split across many subagents (one per question, vote, source...), launch them in efficient mode
+from the first wave. Measured on the voting-aid «A quién afecta» pass (2026-10-13): cost is dominated by re-reading
+context every turn (old prompt: 4–25 M cache tokens and 40–160 turns per agent; efficient mode: ~0.6–1.5 M and 5–20
+turns, same validator, same quality).
+- Prepare before launching: a compact per-unit worklist with everything already extracted (texts, locators,
+  voted point, official text URL pre-cached) and a pre-filled output skeleton with every key, so the agent edits
+  instead of building.
+- Self-contained prompt (rules, schema, one example, validation command): tell agents NOT to read seeds, exporters,
+  guides or other agents' outputs.
+- Shared knowledge, not rediscovery: a catalog of already verified facts searchable by regex, a shared download
+  cache, and the list of known blocked hosts. For voting-aid impacts use `python3 -m scripts.voting_aid_impacts_kit`
+  (`catalog`, `fetch`, `vote`, `ine`, `eurostat`); the exporter merges part files and checks coverage
+  (`scripts/export_voting_aid_vote_impacts.py --part/--require-complete`). Guide: `docs/etl/sprints/VOTING-AID-20261011/prompts/ramificaciones-redaccion.md`.
+- Budgets in the prompt: bounded tool outputs (never cat whole files, never Read PDFs/images), ≤4 WebSearch per
+  agent (the quota is shared and runs out), fill all items in one edit, validate at the end, report ≤6 lines.
+- Order waves so later units reuse earlier work (big/thematic units first, then units that mostly pick from the
+  catalog). Max 20 concurrent subagents; one output file per agent to avoid write conflicts.
+
 ## Working Agreement
 
 ### Source Of Truth

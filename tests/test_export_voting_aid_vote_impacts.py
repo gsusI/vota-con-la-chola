@@ -77,9 +77,27 @@ class TestValidation(unittest.TestCase):
         self.assertTrue(vi.validate_seed(FIXTURE, {"v2"}, {"eje"}))
 
 
+class TestParts(unittest.TestCase):
+    def test_merge_reuses_facts_and_rejects_duplicates(self) -> None:
+        part = {"facts": {"hogares": FIXTURE["facts"]["hogares"]}, "votes": {"v2": {"facts": ["hogares"], "review": {"status": "draft"}}}}
+        merged, errors = vi.merge_parts(FIXTURE, [("a.json", part)])
+        self.assertEqual(errors, [])
+        self.assertEqual(sorted(merged["votes"]), ["v1", "v2"])
+        changed = copy.deepcopy(part)
+        changed["facts"]["hogares"]["text"] = "Otra cifra."
+        self.assertTrue(vi.merge_parts(FIXTURE, [("a.json", changed)])[1])
+        self.assertTrue(vi.merge_parts(FIXTURE, [("a.json", part), ("b.json", {"votes": part["votes"]})])[1])
+
+    def test_coverage_counts_both_levels(self) -> None:
+        cov = vi.coverage(FIXTURE, {"v1", "v2"}, {"eje", "otra"})
+        self.assertEqual((cov["statements"], cov["votes"]), ([1, 2], [1, 2]))
+        self.assertEqual((cov["missing_statements"], cov["missing_votes"]), (["otra"], ["v2"]))
+
+
 class TestRealSeed(unittest.TestCase):
     def test_pilot_seed_is_publishable(self) -> None:
-        seed = json.loads(SEED.read_text(encoding="utf-8"))
+        seed, errors = vi.merge_parts(json.loads(SEED.read_text(encoding="utf-8")), vi.load_parts(vi.DEFAULT_PARTS))
+        self.assertEqual(errors, [])
         snapshots = [json.loads((DATA / f"voting_aid_generales_{v}.json").read_text(encoding="utf-8")) for v in ("v1", "v2")]
         pool = json.loads((DATA / "voting_aid_pool_v1.json").read_text(encoding="utf-8"))
         votes, statements = vi.known_ids(snapshots, pool)

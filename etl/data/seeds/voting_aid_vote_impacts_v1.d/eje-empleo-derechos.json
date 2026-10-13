@@ -1,0 +1,901 @@
+{
+ "facts": {
+  "eje-empleo-derechos--ine-epa-2026t2-empleo-paro": {
+   "text": "En el segundo trimestre de 2026 había 22,78 millones de personas ocupadas y 2,50 millones en paro; la tasa de paro era del 9,87 %.",
+   "period": "2.º trimestre de 2026",
+   "source": "INE, Encuesta de Población Activa, tablas 65109 (ocupados), 65218 (parados) y 65219 (tasa de paro)",
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=65219"
+  },
+  "eje-empleo-derechos--ine-epa-2026t2-temporalidad": {
+   "text": "De 19,59 millones de asalariados, 2,96 millones (15,1 %) tenían contrato temporal y 16,63 millones (84,9 %) indefinido. Trabajaban a tiempo parcial 3,12 millones de personas ocupadas (13,7 %).",
+   "period": "2.º trimestre de 2026",
+   "source": "INE, EPA, tablas 65194 (asalariados por tipo de contrato) y 65150 (ocupados por tipo de jornada)",
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=65194"
+  },
+  "eje-empleo-derechos--ine-epa-2026t2-temporalidad-publico": {
+   "text": "En el sector público, 997.200 de 3,65 millones de asalariados (27,3 %) tenían contrato temporal, frente al 15,1 % del conjunto de asalariados.",
+   "period": "2.º trimestre de 2026",
+   "source": "INE, EPA, tabla 65196 (asalariados del sector público por tipo de contrato)",
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=65196"
+  },
+  "eje-empleo-derechos--ine-epa-2026t2-horas": {
+   "text": "Las personas ocupadas trabajaban habitualmente 37,5 horas a la semana de media; las horas efectivas, contando las ausencias de la semana, eran 32,8.",
+   "period": "2.º trimestre de 2026",
+   "source": "INE, EPA, tablas 65163 (horas habituales) y 65159 (horas efectivas)",
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=65163"
+  },
+  "eje-empleo-derechos--mites-cct-2025-jornada-pactada": {
+   "text": "Entre 10,15 millones de trabajadores con convenio de efectos económicos conocidos, el 12,18 % tenía pactadas menos de 37,5 horas semanales, el 30,58 % de 37,5 a 38,5, el 50,18 % de 38,5 a 39,5 y el 7,06 % más de 39,5.",
+   "period": "Convenios registrados hasta diciembre de 2025 (provisional)",
+   "source": "Ministerio de Trabajo, Estadística de Convenios Colectivos, avance de diciembre de 2025, pág. 8",
+   "url": "https://www.mites.gob.es/estadisticas/cct/cct25dicav/Resumen_resultados_CCT_diciembre-25.pdf"
+  },
+  "eje-empleo-derechos--mites-cct-2025-convenios": {
+   "text": "En 2025 se firmaron y registraron 1.017 convenios colectivos (765 de empresa y 252 de ámbito superior). Los 3.366 convenios con efectos económicos conocidos afectaban a 10,15 millones de trabajadores.",
+   "period": "2025 (provisional)",
+   "source": "Ministerio de Trabajo, Estadística de Convenios Colectivos, avance de diciembre de 2025, págs. 2 y 8",
+   "url": "https://www.mites.gob.es/estadisticas/cct/cct25dicav/Resumen_resultados_CCT_diciembre-25.pdf"
+  },
+  "eje-empleo-derechos--mites-ajs-2025-despidos": {
+   "text": "Los juzgados de lo social resolvieron 143.467 asuntos de despido (151.977 personas afectadas). La cuantía media por persona fue de 11.258 euros en sentencia favorable y de 8.041 euros en conciliación.",
+   "period": "Enero-diciembre de 2025",
+   "source": "Ministerio de Trabajo, Estadística de Asuntos Judiciales Sociales, enero-diciembre de 2025, pág. 3",
+   "url": "https://www.mites.gob.es/estadisticas/ajs/ajs_254t/ajs_4t2025.pdf"
+  },
+  "eje-empleo-derechos--ine-etcl-2026t2-indemnizacion-despido": {
+   "text": "El coste medio de la indemnización por persona despedida fue de 7.785 euros: 13.631 en industria, 3.396 en construcción y 7.718 en servicios.",
+   "period": "2.º trimestre de 2026",
+   "source": "INE, Encuesta Trimestral de Coste Laboral, tabla 6056",
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=6056"
+  },
+  "eje-empleo-derechos--ine-etcl-2026t2-coste-laboral": {
+   "text": "Cada persona asalariada costaba de media 3.388 euros al mes a la empresa: 2.513 euros de salarios y 807,69 euros de cotizaciones obligatorias a la Seguridad Social (más otros costes).",
+   "period": "2.º trimestre de 2026",
+   "source": "INE, Encuesta Trimestral de Coste Laboral, tabla 6061",
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=6061"
+  },
+  "eje-empleo-derechos--ine-etcl-2026t2-coste-salarial-ccaa": {
+   "text": "El coste salarial medio mensual por persona asalariada iba de 2.016 euros en Canarias a 3.061 euros en Madrid; la media nacional era de 2.513 euros.",
+   "period": "2.º trimestre de 2026",
+   "source": "INE, Encuesta Trimestral de Coste Laboral, tabla 6061 (por comunidad autónoma)",
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=6061"
+  },
+  "eje-empleo-derechos--boe-smi-2026": {
+   "text": "El salario mínimo interprofesional de 2026 es de 1.221 euros al mes (40,70 euros al día), con un mínimo de 17.094 euros en cómputo anual; sube un 3,1 % respecto a 2025.",
+   "period": "2026",
+   "source": "BOE-A-2026-3815, Real Decreto 126/2026, art. 1, art. 3 y preámbulo",
+   "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2026-3815"
+  },
+  "eje-empleo-derechos--ine-epa-2026t2-ceuta-melilla": {
+   "text": "Ceuta (22,41 %) y Melilla (20,74 %) tenían las mayores tasas de paro del país, frente al 9,87 % de media; entre las dos sumaban unas 64.600 personas ocupadas.",
+   "period": "2.º trimestre de 2026",
+   "source": "INE, EPA, tablas 65335 (tasa de paro por comunidad) y 65302 (ocupados por comunidad)",
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=65335"
+  },
+  "eje-empleo-derechos--ine-dirce-2025-empresas-50": {
+   "text": "A 1 de enero de 2025 había 3,31 millones de empresas en España: 1,80 millones sin personas asalariadas y 26.646 con 50 o más.",
+   "period": "1 de enero de 2025",
+   "source": "INE, Directorio Central de Empresas, tabla 39375 (suma de los estratos de 50 o más asalariados)",
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=39375"
+  },
+  "eje-empleo-derechos--ine-epd-2024-discapacidad": {
+   "text": "560.400 personas con discapacidad reconocida (16-64 años) tenían empleo: tasa de empleo del 28,9 % frente al 69,7 % de la población sin discapacidad; tasa de paro del 18,5 % frente al 11,2 %.",
+   "period": "2024",
+   "source": "INE, El empleo de las personas con discapacidad, nota de prensa de 2024",
+   "url": "https://www.ine.es/dyngs/Prensa/EDML20242023.htm"
+  },
+  "eje-empleo-derechos--boe-lgd-art42-cuota": {
+   "text": "La ley obliga a las empresas públicas y privadas con 50 o más personas empleadas a que al menos el 2 % de la plantilla sean personas con discapacidad, salvo exención con medidas alternativas.",
+   "period": "Texto consolidado, en vigor desde el 2 de abril de 2022",
+   "source": "BOE-A-2013-12632, Real Decreto Legislativo 1/2013, art. 42.1",
+   "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2013-12632"
+  },
+  "eje-empleo-derechos--mites-aut-2026-08-autonomos": {
+   "text": "En agosto de 2026 había 3.483.209 personas autónomas afiliadas a la Seguridad Social: 2.992.814 (85,9 %) sin personas asalariadas y 490.395 (14,1 %) con ellas.",
+   "period": "Agosto de 2026",
+   "source": "Ministerio de Trabajo, Estadística de Autónomos, agosto de 2026, págs. 2 y 17",
+   "url": "https://www.mites.gob.es/estadisticas/AUT/AUT_08_2026.pdf"
+  },
+  "eje-empleo-derechos--ss-pensiones-2026-09": {
+   "text": "En septiembre de 2026 se pagaban casi 6,8 millones de pensiones de jubilación y 1,1 millones de incapacidad permanente. La edad media de acceso a la jubilación era de 65,4 años.",
+   "period": "Septiembre de 2026",
+   "source": "Seguridad Social, nota sobre la nómina de pensiones de septiembre de 2026",
+   "url": "https://revista.seg-social.es/-/pensiones-septiembre-2026"
+  },
+  "eje-empleo-derechos--ss-edad-jubilacion-2026": {
+   "text": "En 2026 la edad ordinaria de jubilación es de 65 años con 38 años y 3 meses cotizados o más, y de 66 años y 10 meses con menos cotización; desde 2027, 67 años (o 65 con 38 años y 6 meses).",
+   "period": "2026",
+   "source": "Seguridad Social, jubilación: edad de acceso, tabla por años",
+   "url": "https://www.seg-social.es/wps/portal/wss/internet/Trabajadores/PrestacionesPensionesTrabajadores/10963/28393/28396/28472"
+  },
+  "eje-empleo-derechos--ine-epa-2025-sanidad": {
+   "text": "En 2025 trabajaban en actividades sanitarias 1,37 millones de personas (2,09 millones con los servicios sociales), de una media de 22,22 millones de personas ocupadas.",
+   "period": "Media de 2025",
+   "source": "INE, EPA, tabla 79484 (ocupados por rama de actividad)",
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=79484"
+  },
+  "eje-empleo-derechos--ine-profesionales-sanitarios-2025": {
+   "text": "En 2025 había 322.787 médicos colegiados y 358.036 enfermeros colegiados en España.",
+   "period": "2025",
+   "source": "INE, Estadística de profesionales sanitarios colegiados, últimos datos",
+   "url": "https://www.ine.es/dyngs/INEbase/operacion.htm?c=Estadistica_C&cid=1254736176781&menu=ultiDatos&idp=1254735573175"
+  },
+  "eje-empleo-derechos--ine-epa-2025-transporte-terrestre": {
+   "text": "En 2025 trabajaban en el transporte terrestre y por tubería unas 711.300 personas, dentro de 1,26 millones de ocupadas en transporte y almacenamiento.",
+   "period": "Media de 2025",
+   "source": "INE, EPA, tabla 79484 (ocupados por rama de actividad)",
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=79484"
+  },
+  "eje-empleo-derechos--ine-epa-2025-hosteleria": {
+   "text": "En 2025 la hostelería daba empleo a 1,83 millones de personas: 473.500 en alojamiento y 1,35 millones en comidas y bebidas.",
+   "period": "Media de 2025",
+   "source": "INE, EPA, tabla 79484 (ocupados por rama de actividad)",
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=79484"
+  },
+  "eje-empleo-derechos--ine-epa-2025-silvicultura": {
+   "text": "En 2025 había unas 30.600 personas ocupadas en silvicultura y explotación forestal, el 0,1 % del empleo total.",
+   "period": "Media de 2025",
+   "source": "INE, EPA, tabla 79484 (ocupados por rama de actividad)",
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=79484"
+  },
+  "eje-empleo-derechos--miteco-iiff-2025": {
+   "text": "En 2025 hubo 8.199 siniestros forestales (5.601 conatos y 2.598 incendios) y ardieron 354.747 hectáreas forestales, la mayor superficie del último decenio (media 2015-2024: 105.614 ha).",
+   "period": "1 de enero a 31 de diciembre de 2025 (avance)",
+   "source": "MITECO, Los incendios forestales en España, avance informativo de 2025, págs. 5-6",
+   "url": "https://www.miteco.gob.es/content/dam/miteco/es/biodiversidad/temas/incendios-forestales/Avance_IIFF_2025_rev.pdf"
+  },
+  "eje-empleo-derechos--imserso-saad-2026-08": {
+   "text": "El 31 de agosto de 2026, 1.768.186 personas recibían alguna prestación del sistema de dependencia; 13.593 de las 2.555.713 prestaciones eran prestaciones económicas de asistencia personal.",
+   "period": "31 de agosto de 2026",
+   "source": "Imserso, información estadística del SAAD a 31-08-2026, hoja 1.1 (evolución de las principales variables)",
+   "url": "https://imserso.es/el-imserso/documentacion/estadisticas/sistema-autonomia-atencion-dependencia-saad/estadisticas-mensual"
+  },
+  "eje-empleo-derechos--ss-afiliacion-2026-04": {
+   "text": "En abril de 2026 había 22,11 millones de personas afiliadas a la Seguridad Social, 3,25 millones de ellas extranjeras (14,7 %).",
+   "period": "Abril de 2026",
+   "source": "Ministerio de Inclusión, Seguridad Social y Migraciones, nota de afiliación de abril de 2026",
+   "url": "https://www.inclusion.gob.es/w/espana-marca-un-nuevo-record-y-supera-los-22-1-millones-de-afiliados-en-la-serie-original-tras-sumar-224.000-en-abril"
+  },
+  "eje-empleo-derechos--sepe-contratos-2025": {
+   "text": "En 2025 se registraron 15,23 millones de contratos iniciales: 6,03 millones indefinidos (39,6 %) y 9,20 millones temporales.",
+   "period": "2025",
+   "source": "SEPE, Estadística de contratos de diciembre de 2025, resumen IV.2 (suma de los doce meses)",
+   "url": "https://www.sepe.es/SiteSepe/contenidos/que_es_el_sepe/estadisticas/datos_estadisticos/contratos/datos/2025/diciembre_2025/ESTADISTICA_DE_CONTRATOS_MES.pdf"
+  },
+  "eje-empleo-derechos--ine-mnp-2024-nacimientos": {
+   "text": "En 2024 nacieron 318.005 criaturas en España (320.656 en 2023).",
+   "period": "2024",
+   "source": "INE, Movimiento Natural de la Población, tabla 6506",
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=6506"
+  }
+ },
+ "statements": {
+  "eje-empleo-derechos": {
+   "facts": [
+    "eje-empleo-derechos--ine-epa-2026t2-empleo-paro",
+    "eje-empleo-derechos--mites-cct-2025-jornada-pactada",
+    "eje-empleo-derechos--ine-etcl-2026t2-coste-laboral"
+   ]
+  }
+ },
+ "votes": {
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion162/20260224/Votacion001/VOT_20260224201927.json": {
+   "question_id": "eje-empleo-derechos",
+   "facts": [
+    "eje-empleo-derechos--ine-dirce-2025-empresas-50",
+    "eje-empleo-derechos--mites-ajs-2025-despidos"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Plantillas de empresas que trasladan su actividad fuera de la UE y del EEE",
+     "text": "Esas empresas no podrían hacer en España despidos colectivos ni objetivos, ni cambiar condiciones; si lo hicieran, los despidos serían improcedentes o, en su caso, nulos.",
+     "locator": "Artículo único, apartado Uno (disposición adicional vigésima octava, apdo. 1)"
+    },
+    {
+     "actor": "Empresas que se deslocalizan",
+     "text": "Tendrían que devolver lo recibido en los cuatro años previos por ERTE o Mecanismo RED: prestaciones y exoneraciones de cotizaciones.",
+     "locator": "Artículo único, apartado Uno (disposición adicional vigésima octava, apdo. 2)"
+    },
+    {
+     "actor": "Plantillas de empresas de 50 o más personas que se venden",
+     "text": "Si la consulta de 30 días acabara sin acuerdo, podrían comprar la unidad productiva, con derecho de tanteo y retracto en 15 días.",
+     "locator": "Artículo único, apartado Dos (disposición adicional vigésima novena, apdo. 1)"
+    },
+    {
+     "actor": "Empresas vendedoras",
+     "text": "Tendrían que presentar un plan de viabilidad y abrir un periodo de consultas; sin él, los cambios y despidos se anularían y la vendedora respondería subsidiariamente.",
+     "locator": "Artículo único, apartado Dos (disposición adicional vigésima novena, apdos. 1 a 3)"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion137/20251014/Votacion001/VOT_20251014202757.json": {
+   "question_id": "eje-empleo-derechos",
+   "facts": [
+    "eje-empleo-derechos--ine-epa-2026t2-horas",
+    "eje-empleo-derechos--mites-cct-2025-jornada-pactada",
+    "eje-empleo-derechos--ine-epa-2026t2-temporalidad"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Personas trabajadoras con más de 35 horas semanales",
+     "text": "Su jornada máxima bajaría a 35 horas semanales sin recorte de retribución; los convenios que superen esa media tendrían seis meses para adaptarse.",
+     "locator": "Artículo primero, apartado Tres (art. 34.1 ET); disposición transitoria primera; disposición adicional primera"
+    },
+    {
+     "actor": "Empresas",
+     "text": "Tendrían que llevar un registro diario digital de la jornada y conservarlo cuatro años, con tres meses para adaptarse.",
+     "locator": "Artículo primero, apartado Cuatro (art. 34 bis); disposición transitoria segunda"
+    },
+    {
+     "actor": "Personas con contrato a tiempo parcial",
+     "text": "El mínimo sería de 20 horas semanales y las horas complementarias solo se admitirían en contratos indefinidos.",
+     "locator": "Artículo primero, apartado Uno (art. 12.4)"
+    },
+    {
+     "actor": "Personas con mensajes de trabajo fuera de horario",
+     "text": "Tendrían derecho a la desconexión digital: sin deber de revisar ni responder fuera del horario, y con tiempo libre si hay disponibilidad excepcional.",
+     "locator": "Artículo primero, apartado Dos (art. 20 bis)"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion130/20250910/Votacion010/VOT_20250910213544.json": {
+   "question_id": "eje-empleo-derechos",
+   "facts": [
+    "eje-empleo-derechos--ine-epa-2026t2-horas",
+    "eje-empleo-derechos--mites-cct-2025-jornada-pactada",
+    "eje-empleo-derechos--ine-epa-2026t2-temporalidad"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Personas trabajadoras, también del servicio del hogar familiar",
+     "text": "La ley devuelta habría fijado la jornada máxima en 37,5 horas semanales de promedio anual sin bajar las retribuciones; los convenios con más horas tenían hasta el 31 de diciembre de 2025.",
+     "locator": "Artículo único, apartado Tres; disposiciones transitoria primera, adicional tercera y final segunda"
+    },
+    {
+     "actor": "Empresas",
+     "text": "Habrían tenido que llevar un registro digital diario de jornada durante 4 años; sin él, se presumirían las horas declaradas por la persona. Multas de 1.000 a 10.000 euros por persona afectada.",
+     "locator": "Artículo único, apartado Cinco (art. 34 bis); disposición final primera, apdos. Uno y Cuatro"
+    },
+    {
+     "actor": "Personas con contrato a tiempo parcial",
+     "text": "Quienes ya tenían jornada igual o superior a la nueva máxima habrían pasado a tiempo completo; el resto podría mantener sus horas con subida proporcional del salario.",
+     "locator": "Disposición transitoria segunda"
+    },
+    {
+     "actor": "Personas con comunicaciones laborales fuera de horario",
+     "text": "Habrían tenido un derecho irrenunciable a la desconexión digital, sin represalias por no atender mensajes; los convenios podrían fijar excepciones.",
+     "locator": "Artículo único, apartado Dos (art. 20 bis)"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion129/20250909/Votacion002/VOT_20250909221800.json": {
+   "question_id": "eje-empleo-derechos",
+   "facts": [
+    "eje-empleo-derechos--ine-epd-2024-discapacidad",
+    "eje-empleo-derechos--boe-lgd-art42-cuota",
+    "eje-empleo-derechos--ine-dirce-2025-empresas-50"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Empresas de 50 o más personas empleadas",
+     "text": "Incumplir la reserva de puestos para personas con discapacidad, o sus medidas alternativas, pasaría de infracción grave a muy grave, con campañas de la Inspección de Trabajo durante tres años.",
+     "locator": "Artículo primero; disposición adicional segunda"
+    },
+    {
+     "actor": "Empresas sancionadas por incumplir la cuota",
+     "text": "Quienes fueran sancionadas con resolución firme por esa infracción muy grave no podrían recibir subvenciones públicas.",
+     "locator": "Artículo segundo"
+    },
+    {
+     "actor": "Administraciones públicas",
+     "text": "Harían campañas informativas sobre la inclusión laboral de personas con discapacidad y la reserva de puestos en las empresas.",
+     "locator": "Disposición adicional primera"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion096/20250311/Votacion002/VOT_20250311203734.json": {
+   "question_id": "eje-empleo-derechos",
+   "facts": [
+    "eje-empleo-derechos--ine-epa-2026t2-ceuta-melilla",
+    "eje-empleo-derechos--ine-etcl-2026t2-coste-laboral"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Empresas de Ceuta y Melilla",
+     "text": "Recuperarían las bonificaciones de la disposición adicional 23.ª de la Ley General de la Seguridad Social, con efecto en los contratos desde el 1 de septiembre de 2023 que las habrían tenido.",
+     "locator": "Artículo 1; disposición adicional"
+    },
+    {
+     "actor": "Empresas de Ceuta y Melilla con contratos indefinidos",
+     "text": "Se derogaría el artículo 31 del Real Decreto-ley 1/2023, que fija una bonificación de 262 euros al mes por contrato indefinido.",
+     "locator": "Disposición derogatoria única, letra a)"
+    },
+    {
+     "actor": "Empresas con subvenciones directas en Ceuta y Melilla",
+     "text": "Se derogaría el Real Decreto 660/2023 el 31 de diciembre del año siguiente al de entrada en vigor de la ley.",
+     "locator": "Disposición derogatoria única, letra b)"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion090/20250211/Votacion002/VOT_20250211202649.json": {
+   "question_id": "eje-empleo-derechos",
+   "facts": [
+    "eje-empleo-derechos--ine-epa-2025-sanidad",
+    "eje-empleo-derechos--ine-profesionales-sanitarios-2025"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Servicios de salud y empresas con personal sanitario",
+     "text": "Tendrían que evaluar el riesgo de agresiones y tener un plan de prevención (por ejemplo, videovigilancia y alarmas), consultado con la representación de los trabajadores.",
+     "locator": "Artículos 3 y 4"
+    },
+    {
+     "actor": "Personal sanitario agredido",
+     "text": "Una agresión que dañara su salud física o psíquica sería accidente de trabajo; podría pedir traslado sin perder sueldo y tendría presunción de veracidad si denuncia sin testigos.",
+     "locator": "Artículos 2 (letra f), 7 (letra e), 10 y 15"
+    },
+    {
+     "actor": "Empleadores y servicios de salud",
+     "text": "Tendrían que ofrecer apoyo psicológico, un servicio para tramitar denuncias ante el Fiscal y un seguro con asistencia jurídica; el Servicio de Salud se personaría como acusación particular.",
+     "locator": "Artículos 13 y 14"
+    },
+    {
+     "actor": "Víctimas de una agresión",
+     "text": "Tendrían que notificarla al empleador en un máximo de 24 horas; el Ministerio de Sanidad crearía un Registro Nacional de actos de violencia sanitaria.",
+     "locator": "Artículos 11 y 12"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion069/20241022/Votacion003/VOT_20241022211825.json": {
+   "question_id": "eje-empleo-derechos",
+   "facts": [
+    "eje-empleo-derechos--ss-pensiones-2026-09",
+    "eje-empleo-derechos--mites-ajs-2025-despidos"
+   ],
+   "direct_effects": [],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion200/20260923/Votacion003/VOT_20260923145117.json": {
+   "question_id": "eje-empleo-derechos",
+   "facts": [
+    "eje-empleo-derechos--ine-epa-2025-sanidad",
+    "eje-empleo-derechos--ine-profesionales-sanitarios-2025"
+   ],
+   "direct_effects": [
+    {
+     "actor": "TCAE, técnicos sanitarios, auxiliares administrativos y celadores",
+     "text": "Se reclasificarían sus categorías con adecuación de sueldos; los TCAE podrían pasar al subgrupo C1.",
+     "locator": "Puntos 2, 3 y 4"
+    },
+    {
+     "actor": "Personal estatutario de los servicios de salud",
+     "text": "Podría acceder cada año a los grados de carrera profesional, con reconocimiento íntegro de la antigüedad al cambiar de categoría.",
+     "locator": "Punto 6"
+    },
+    {
+     "actor": "Estado y comunidades autónomas",
+     "text": "El Estado tendría que garantizar la financiación necesaria para aplicar los cambios en el conjunto de las comunidades.",
+     "locator": "Punto 7"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion141/20251022/Votacion003/VOT_20251022134517.json": {
+   "question_id": "eje-empleo-derechos",
+   "facts": [
+    "eje-empleo-derechos--ine-epa-2026t2-temporalidad-publico",
+    "eje-empleo-derechos--ine-epa-2026t2-temporalidad"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Empleados públicos con contrato por encima del tiempo legal o en abuso de temporalidad",
+     "text": "Podrían pasar a ser fijos, incluidas las personas que ya hayan sido cesadas.",
+     "locator": "Punto 1"
+    },
+    {
+     "actor": "Todas las Administraciones públicas",
+     "text": "Tendrían que dar fijeza a quienes encadenen contratos por encima del tiempo legal, con medidas legislativas.",
+     "locator": "Punto 1"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion132/20250917/Votacion003/VOT_20250917194022.json": {
+   "question_id": "eje-empleo-derechos",
+   "facts": [
+    "eje-empleo-derechos--mites-ajs-2025-despidos",
+    "eje-empleo-derechos--ine-etcl-2026t2-indemnizacion-despido"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Personas despedidas de forma improcedente",
+     "text": "El Congreso pide una indemnización realmente disuasoria y reparadora, conforme a la Carta Social Europea y al Convenio 158 de la OIT.",
+     "locator": "Punto 1"
+    },
+    {
+     "actor": "Empresas que despiden",
+     "text": "Podrían tener que pagar más si el Gobierno regula esa indemnización; la proposición no fija cuantía.",
+     "locator": "Punto 1"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion088/20241219/Votacion056/VOT_20241219162805.json": {
+   "question_id": "eje-empleo-derechos",
+   "facts": [
+    "eje-empleo-derechos--mites-ajs-2025-despidos",
+    "eje-empleo-derechos--ine-etcl-2026t2-indemnizacion-despido"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Personas despedidas de forma improcedente",
+     "text": "Se pedía aumentar la indemnización hasta recuperar la suficiencia previa a la reforma laboral de 2012, en línea con el Consejo de Europa.",
+     "locator": "Punto 1"
+    },
+    {
+     "actor": "Empresas que despiden",
+     "text": "Se pedía modificar la legislación laboral para que la indemnización proteja a la persona trabajadora y disuada a la empresa.",
+     "locator": "Punto 1"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion058/20240911/Votacion010/VOT_20240911151654.json": {
+   "question_id": "eje-empleo-derechos",
+   "facts": [
+    "eje-empleo-derechos--ine-epa-2026t2-horas",
+    "eje-empleo-derechos--mites-cct-2025-jornada-pactada",
+    "eje-empleo-derechos--ss-edad-jubilacion-2026"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Personas trabajadoras",
+     "text": "Se pedía reducir la jornada máxima semanal sin bajar el salario (art. 34 ET) y limitar el trabajo nocturno y los turnos rotatorios.",
+     "locator": "Puntos 1 y 2"
+    },
+    {
+     "actor": "Personas con contrato a tiempo parcial",
+     "text": "Se pedía suprimir las horas complementarias y combatir la parcialidad no deseada.",
+     "locator": "Punto 2"
+    },
+    {
+     "actor": "Empresas",
+     "text": "Podrían tener que cumplir una jornada menor y estarían más vigiladas, con más medios para la Inspección de Trabajo.",
+     "locator": "Punto 2"
+    },
+    {
+     "actor": "Futuras personas pensionistas",
+     "text": "Volvería a fijarse en 65 años la edad ordinaria de jubilación.",
+     "locator": "Punto 3"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion043/20240530/Votacion021/VOT_20240530120016.json": {
+   "question_id": "eje-empleo-derechos",
+   "facts": [
+    "eje-empleo-derechos--mites-cct-2025-convenios",
+    "eje-empleo-derechos--mites-cct-2025-jornada-pactada"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Comisiones negociadoras de convenios",
+     "text": "Tendrían la información de márgenes empresariales publicada cada trimestre, por convenio de ámbito superior a la empresa y por tamaño de empresa.",
+     "locator": "Punto 2"
+    },
+    {
+     "actor": "Hacienda, Seguridad Social y Trabajo",
+     "text": "Tendrían que firmar un convenio para que la Agencia Tributaria, con la Tesorería y la Comisión Consultiva de Convenios, lidere la publicación.",
+     "locator": "Punto 2"
+    },
+    {
+     "actor": "Empresas",
+     "text": "Sus márgenes pasarían a conocerse por convenio y tamaño de empresa durante las negociaciones.",
+     "locator": "Punto 2"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion023/20240222/Votacion002/VOT_20240222110733.json": {
+   "question_id": "eje-empleo-derechos",
+   "facts": [
+    "eje-empleo-derechos--ine-epa-2026t2-horas",
+    "eje-empleo-derechos--mites-cct-2025-jornada-pactada"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Personas trabajadoras",
+     "text": "El Congreso pide reducir la jornada legal de forma progresiva, empezando en 2024 por 38,5 horas semanales de trabajo efectivo.",
+     "locator": "Punto 1"
+    },
+    {
+     "actor": "Gobierno, sindicatos y patronal",
+     "text": "Se pide abrir con urgencia un diálogo social y modificar el artículo 34 del Estatuto de los Trabajadores.",
+     "locator": "Punto 1"
+    },
+    {
+     "actor": "Empresas",
+     "text": "Podrían tener que adaptar su jornada si la reforma sale adelante; la proposición no obliga por sí misma.",
+     "locator": "Punto 1"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion025/VOT_20260326165058.json": {
+   "question_id": "eje-empleo-derechos",
+   "facts": [
+    "eje-empleo-derechos--boe-smi-2026",
+    "eje-empleo-derechos--ine-etcl-2026t2-coste-salarial-ccaa"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Personas con salario mínimo en comunidades con más coste de vida",
+     "text": "El SMI podría ser más alto allí donde los precios de bienes y servicios esenciales sean mayores.",
+     "locator": "Punto 18"
+    },
+    {
+     "actor": "Empresas de esas comunidades",
+     "text": "Podrían tener que pagar un salario mínimo superior al del resto del país.",
+     "locator": "Puntos 18 y 19"
+    },
+    {
+     "actor": "Personas con SMI o pensión en cualquier territorio",
+     "text": "Se pedía un mecanismo de actualización periódica según las variaciones del coste de la vida en cada territorio.",
+     "locator": "Punto 19"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion159/20260212/Votacion016/VOT_20260212114333.json": {
+   "question_id": "eje-empleo-derechos",
+   "facts": [
+    "eje-empleo-derechos--mites-aut-2026-08-autonomos"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Autónomos económicamente dependientes (TRADE)",
+     "text": "Tendrían un registro obligatorio de contratos, derecho a indemnización y una prestación de desempleo efectiva.",
+     "locator": "Punto 8"
+    },
+    {
+     "actor": "Empresas que contratan con TRADE",
+     "text": "Tendrían que inscribir sus contratos con ellos en un registro obligatorio.",
+     "locator": "Punto 8"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion070/20241023/Votacion025/VOT_20241023184406.json": {
+   "question_id": "eje-empleo-derechos",
+   "facts": [
+    "eje-empleo-derechos--ine-etcl-2026t2-coste-laboral",
+    "eje-empleo-derechos--sepe-contratos-2025"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Personas trabajadoras",
+     "text": "Se pedía reducir las cotizaciones sociales a su cargo.",
+     "locator": "Punto 5"
+    },
+    {
+     "actor": "Empresas que contraten con carácter indefinido",
+     "text": "Se pedía bonificar sus cotizaciones el 100 % en los nuevos empleos creados el primer año (a cualquier edad) y el 50 % el segundo.",
+     "locator": "Punto 5"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion049/20240620/Votacion010/VOT_20240620132733.json": {
+   "question_id": "eje-empleo-derechos",
+   "facts": [
+    "eje-empleo-derechos--ine-etcl-2026t2-coste-laboral",
+    "eje-empleo-derechos--sepe-contratos-2025",
+    "eje-empleo-derechos--ss-afiliacion-2026-04"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Empresas que contraten de forma indefinida a trabajadores españoles",
+     "text": "Se pedía bonificar sus cotizaciones el 100 % en los nuevos empleos creados el primer año y el 50 % el segundo.",
+     "locator": "Punto 2"
+    },
+    {
+     "actor": "Trabajadores extranjeros",
+     "text": "Quedarían fuera de esa bonificación, porque la medida se limita a la contratación de trabajadores españoles.",
+     "locator": "Punto 2"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion049/20240620/Votacion018/VOT_20240620132740.json": {
+   "question_id": "eje-empleo-derechos",
+   "facts": [
+    "eje-empleo-derechos--ine-epa-2025-hosteleria",
+    "eje-empleo-derechos--ss-pensiones-2026-09"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Personas que trabajan en el sector turístico",
+     "text": "Se pedía facilitar su jubilación anticipada con coeficientes reductores.",
+     "locator": "Último punto de la moción (reformas laborales del sector turístico)"
+    },
+    {
+     "actor": "Empresas turísticas",
+     "text": "Se pedía prohibir la subcontratación de actividades propias de la empresa y aumentar las inspecciones de trabajo en el sector.",
+     "locator": "Último punto de la moción (reformas laborales del sector turístico)"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion198/20260916/Votacion053/VOT_20260916195503.json": {
+   "question_id": "eje-empleo-derechos",
+   "facts": [
+    "eje-empleo-derechos--imserso-saad-2026-08",
+    "eje-empleo-derechos--ine-epd-2024-discapacidad"
+   ],
+   "direct_effects": [],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion050/VOT_20251008195317.json": {
+   "question_id": "eje-empleo-derechos",
+   "facts": [
+    "eje-empleo-derechos--ine-epa-2025-transporte-terrestre",
+    "eje-empleo-derechos--ss-pensiones-2026-09"
+   ],
+   "direct_effects": [],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion109/20250508/Votacion002/VOT_20250508130739.json": {
+   "question_id": "eje-empleo-derechos",
+   "facts": [
+    "eje-empleo-derechos--ine-epa-2025-sanidad",
+    "eje-empleo-derechos--ss-pensiones-2026-09"
+   ],
+   "direct_effects": [],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion056/20240723/Votacion005/VOT_20240723221630.json": {
+   "question_id": "eje-empleo-derechos",
+   "facts": [
+    "eje-empleo-derechos--ine-epa-2025-silvicultura",
+    "eje-empleo-derechos--miteco-iiff-2025"
+   ],
+   "direct_effects": [],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion056/20240723/Votacion034/VOT_20240723221704.json": {
+   "question_id": "eje-empleo-derechos",
+   "facts": [
+    "eje-empleo-derechos--ine-epa-2025-silvicultura",
+    "eje-empleo-derechos--miteco-iiff-2025"
+   ],
+   "direct_effects": [],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion159/20260212/Votacion018/VOT_20260212114336.json": {
+   "question_id": "eje-empleo-derechos",
+   "facts": [
+    "eje-empleo-derechos--mites-aut-2026-08-autonomos"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Personas que reclaman ser trabajadoras por cuenta ajena (falsos autónomos)",
+     "text": "Frente a empresas con sentencias contrarias en los 9 meses previos a la demanda, solo tendrían que aportar pruebas: se invertiría la carga de la prueba.",
+     "locator": "Punto 10"
+    },
+    {
+     "actor": "Empresas con sentencias contrarias recientes por falsos autónomos",
+     "text": "La carga de la prueba pasaría a recaer sobre ellas en esos procedimientos.",
+     "locator": "Punto 10"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion056/20240723/Votacion035/VOT_20240723221705.json": {
+   "question_id": "eje-empleo-derechos",
+   "facts": [
+    "eje-empleo-derechos--ine-epa-2025-silvicultura",
+    "eje-empleo-derechos--miteco-iiff-2025"
+   ],
+   "direct_effects": [],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion056/20240723/Votacion036/VOT_20240723221706.json": {
+   "question_id": "eje-empleo-derechos",
+   "facts": [
+    "eje-empleo-derechos--ine-epa-2025-silvicultura",
+    "eje-empleo-derechos--miteco-iiff-2025"
+   ],
+   "direct_effects": [],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion056/20240723/Votacion039/VOT_20240723221709.json": {
+   "question_id": "eje-empleo-derechos",
+   "facts": [
+    "eje-empleo-derechos--ine-epa-2025-silvicultura",
+    "eje-empleo-derechos--miteco-iiff-2025"
+   ],
+   "direct_effects": [],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion056/20240723/Votacion040/VOT_20240723221710.json": {
+   "question_id": "eje-empleo-derechos",
+   "facts": [
+    "eje-empleo-derechos--ine-epa-2025-silvicultura",
+    "eje-empleo-derechos--miteco-iiff-2025"
+   ],
+   "direct_effects": [],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion049/20240620/Votacion012/VOT_20240620132735.json": {
+   "question_id": "eje-empleo-derechos",
+   "facts": [
+    "eje-empleo-derechos--ine-mnp-2024-nacimientos",
+    "eje-empleo-derechos--ine-etcl-2026t2-coste-laboral"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Empresas que contraten a familias numerosas o embarazadas",
+     "text": "Se pedía darles deducciones en la cuota del Impuesto sobre Sociedades y reducciones de su cotización a la Seguridad Social; también al contratar a quien tenga hijos con discapacidad.",
+     "locator": "Punto 4"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  }
+ }
+}

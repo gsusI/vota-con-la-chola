@@ -1,0 +1,55 @@
+{
+ "facts": {
+  "v1-empleo-subsidio-desempleo--seg-social-2026-08-importe-medio": {
+   "text": "En agosto de 2026 la prestación por desempleo costó de media 1.203,1 euros al mes por persona beneficiaria (sin contar el subsidio agrario de Andalucía y Extremadura), 31,6 euros más que un año antes.",
+   "period": "agosto de 2026",
+   "source": "Ministerio de Trabajo y Economía Social, nota sobre el paro registrado de septiembre de 2026, apartado «Prestaciones por desempleo en agosto»",
+   "url": "https://revista.seg-social.es/-/el-paro-registrado-aumenta-en-23.587-personas-en-septiembre-y-se-situa-en-2.379.505-la-cifra-mas-baja-en-este-mes-desde-2007"
+  }
+ },
+ "statements": {
+  "empleo-subsidio-desempleo": {
+   "facts": [
+    "eje-proteccion-social--trabajo-2026-08-desempleo",
+    "eje-empleo-derechos--ine-epa-2026t2-empleo-paro"
+   ]
+  }
+ },
+ "votes": {
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion049/20240620/Votacion019/VOT_20240620132741.json": {
+   "question_id": "empleo-subsidio-desempleo",
+   "facts": [
+    "eje-proteccion-social--trabajo-2026-08-desempleo",
+    "v1-empleo-subsidio-desempleo--seg-social-2026-08-importe-medio"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Personas en paro sin prestación contributiva",
+     "text": "Pueden cobrar el subsidio tras agotar la prestación o, sin derecho a ella, con 90 días cotizados, si carecen de rentas propias o tienen cargas familiares.",
+     "locator": "Artículo segundo, apartados Cuatro y Cinco (arts. 274 y 275 LGSS)"
+    },
+    {
+     "actor": "Personas que cobran el subsidio",
+     "text": "Cobran el 95 % del IPREM los primeros 180 días, el 90 % hasta el día 360 y el 80 % a partir de entonces.",
+     "locator": "Artículo segundo, apartado Ocho (art. 278 LGSS)"
+    },
+    {
+     "actor": "Personas que encuentran empleo mientras cobran",
+     "text": "Pueden compatibilizar el subsidio con un empleo hasta 180 días, salvo en empresas con ERE o donde trabajaron el último año; con prestaciones contributivas de más de 12 meses desde el 1-4-2025, desde el mes 10.",
+     "locator": "Artículo segundo, apartados Once y Veintitrés (art. 282.3 y disp. adic. 59.ª LGSS)"
+    },
+    {
+     "actor": "Emigrantes retornados y víctimas de violencia de género o sexual",
+     "text": "Tienen subsidios propios: hasta 18 meses los emigrantes retornados y hasta 30 meses las víctimas de violencia de género o sexual.",
+     "locator": "Artículo segundo, apartados Veintiuno y Veintidós (disp. adic. 57.ª y 58.ª LGSS)"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  }
+ }
+}

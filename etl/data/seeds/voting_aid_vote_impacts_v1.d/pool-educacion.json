@@ -1,0 +1,49 @@
+{
+ "facts": {
+  "pool-educacion--siu-2024-25-estudiantes": {
+   "text": "En el curso 2024-2025 había 1.827.272 estudiantes matriculados en universidades españolas: 1.416.388 en Grado, 313.189 en Máster y 97.695 en Doctorado.",
+   "period": "curso 2024-2025",
+   "source": "Ministerio de Ciencia, Innovación y Universidades, Datos y cifras del Sistema Universitario Español, tabla 3.1.1",
+   "url": "https://www.ciencia.gob.es/dam/jcr:747444d8-7089-4b15-97e1-0fc27874e6a7/DatosCifras_SUE2025_2026.pdf"
+  },
+  "pool-educacion--siu-2024-25-universidades": {
+   "text": "El sistema universitario español contaba en el curso 2024-2025 con 92 universidades con actividad: 50 públicas y 42 privadas.",
+   "period": "curso 2024-2025",
+   "source": "Ministerio de Ciencia, Innovación y Universidades, Datos y cifras del Sistema Universitario Español, capítulo 1",
+   "url": "https://www.ciencia.gob.es/dam/jcr:747444d8-7089-4b15-97e1-0fc27874e6a7/DatosCifras_SUE2025_2026.pdf"
+  }
+ },
+ "statements": {},
+ "votes": {
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion114/20250527/Votacion002/VOT_20250527201601.json": {
+   "question_id": "pool-educacion",
+   "facts": [
+    "pool-educacion--siu-2024-25-estudiantes",
+    "pool-educacion--siu-2024-25-universidades"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Estudiantes de Grado y Máster",
+     "text": "Podrían tener garantizadas unas prácticas externas como actividad formativa, ya que las universidades tendrían que acordar con empresas e instituciones plazas para todo el estudiantado.",
+     "locator": "Artículo único (artículo 9.5 de la Ley Orgánica del Sistema Universitario)"
+    },
+    {
+     "actor": "Universidades y sus fundaciones",
+     "text": "Tendrían prohibido vincular las prácticas curriculares a una contraprestación o donación, directamente o a través de fundaciones vinculadas, y deberían acordar plazas con empresas e instituciones.",
+     "locator": "Artículo único (artículo 9.5, último párrafo)"
+    },
+    {
+     "actor": "Administraciones públicas e investigadores",
+     "text": "El Gobierno, las comunidades y las entidades locales podrían crear espacios de experimentación (bancos de pruebas, laboratorios vivientes) para proyectos piloto de I+D+i, temporales y de ubicación delimitada.",
+     "locator": "Disposición final primera (apartados 1 a 4)"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  }
+ }
+}

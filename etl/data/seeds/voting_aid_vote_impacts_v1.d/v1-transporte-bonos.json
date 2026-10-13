@@ -1,0 +1,48 @@
+{
+ "facts": {},
+ "statements": {
+  "transporte-bonos": {
+   "facts": [
+    "eje-transporte-publico--ecepov-2021-medio-trabajo",
+    "eje-territorial-autogobierno--ine-tv-2025-viajeros"
+   ]
+  }
+ },
+ "votes": {
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion049/20240620/Votacion021/VOT_20240620132743.json": {
+   "question_id": "transporte-bonos",
+   "facts": [
+    "eje-transporte-publico--ine-ecp-2026-jovenes-1995-2007",
+    "eje-transporte-publico--boe-rdl14-2026-jovenes-verano-2025"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Jóvenes nacidos entre 1994 y 2006",
+     "text": "Obtuvieron descuentos en billetes de transporte terrestre para viajes del 1 de julio al 30 de septiembre de 2024, si tenían nacionalidad española o residencia legal.",
+     "locator": "Artículo 1, apartados 1 y 2"
+    },
+    {
+     "actor": "Viajeros de Renfe",
+     "text": "Los jóvenes pagaron un 90 % menos en Media Distancia de ancho convencional y métrico y un 50 % menos en Avant, con 20 millones de compensación a Renfe.",
+     "locator": "Artículo 2, apartados 1, 2 y 6"
+    },
+    {
+     "actor": "Empresas ferroviarias comerciales y concesiones estatales de autobús",
+     "text": "Las empresas ferroviarias podían aplicar un 50 % de descuento (máximo 30 euros por trayecto), con 50 millones de compensación; las concesiones de autobús debían aplicar un 90 %, con 55 millones.",
+     "locator": "Artículo 3, apartados 1 y 2; Artículo 4, apartados 1 y 2"
+    },
+    {
+     "actor": "Jóvenes que viajan con Interrail",
+     "text": "Pagaron un 50 % menos por el Pase Interrail si lo compraban en la web de Renfe, con 5 millones de compensación; tenían que registrarse antes en la web del Ministerio de Transportes.",
+     "locator": "Artículo 6, apartados 1, 2, 4 y 5; Artículo 1, apartado 3"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  }
+ }
+}

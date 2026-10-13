@@ -48,3 +48,30 @@ Una frase: si es proposición de ley (no lleva memoria oficial de impacto), qué
 ## Revisión
 `review.status = draft` hasta que otra mano (IA y después persona) compruebe cada dato en su fuente y cada argumento en su página.
 Ejecuta `python3 -m scripts.export_voting_aid_vote_impacts` y `python3 -m unittest tests.test_export_voting_aid_vote_impacts`.
+
+## Cobertura total: «A quién afecta» en todas las preguntas (2026-10-13)
+Cada pregunta agrupada (`statements`, v1 y v2) y cada votación concreta (`votes`: las que resume cada pregunta de la v2,
+las de la v1 y las del modo infinito) tiene que decir a quién afecta. Se redacta **una pregunta por subagente**
+(Claude Sonnet 5.5), cada uno en su fragmento `etl/data/seeds/voting_aid_vote_impacts_v1.d/<unidad>.json`
+(misma forma que la semilla: `facts`, `statements`, `votes`). El exportador fusiona los fragmentos y
+`--require-complete` falla mientras falte alguna.
+
+- Pregunta agrupada: `statements.<statement_id>.facts` = 1 a 3 cifras oficiales que dan la escala del tema.
+- Votación concreta: `votes.<vote_event_id>` con `facts` (1 a 3, las que dan escala a *esa* votación; reutiliza las del
+  tema si encajan, añade una específica si la medida toca a un colectivo concreto), `direct_effects` (obligatorios si la
+  votación tiene viñetas «Qué se votaba»: mismos localizadores; si no las tiene, solo si abres el texto oficial),
+  `review.status = draft`. Los efectos indirectos no son obligatorios en esta pasada.
+- Ids de cifras nuevas con el prefijo de la unidad (`<unidad>--<fuente>-<periodo>-<tema>`); reutiliza por id cualquier
+  cifra de la semilla o de otro fragmento ya escrito. Mismo id = mismo contenido exacto.
+- Validar el fragmento: `python3 -m scripts.export_voting_aid_vote_impacts --part <fragmento> --out <scratch>/x.json`.
+
+## Eficiencia de los subagentes (lecciones de la primera tanda, 2026-10-13)
+El coste lo dominaba releer el contexto en cada turno (10–25 M tokens de caché por agente, 85–160 turnos; la salida
+era <3 k). Los agentes reinventaban lo mismo: leer la semilla, el exportador y todos los fragmentos; buscar en la web
+cifras que otro ya tenía; reintentar hosts bloqueados; volcar PDFs enteros (o leerlos como imágenes) en el contexto.
+- `python3 -m scripts.voting_aid_impacts_kit`: `catalog` (cifras ya verificadas, para reutilizar por id), `fetch`
+  (caché compartida en `etl/data/raw/voting_aid_sources/`, PDF→texto con páginas, salida filtrada y recortada,
+  hosts bloqueados conocidos), `vote` (expediente y punto votado del JSON de la votación), `ine`, `eurostat`.
+- Prompt autocontenido con las reglas, lista de trabajo compacta (viñetas, punto votado, texto oficial ya cacheado)
+  y un esqueleto de fragmento con todas las claves: el agente edita, no construye.
+- Presupuesto: ≤4 WebSearch, nada de Read sobre PDF/imágenes, rellenar todas las votaciones de una vez, validar al final.

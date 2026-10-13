@@ -1,0 +1,83 @@
+{
+ "facts": {
+  "pool-empleo-y-pensiones--ine-epsc-2025-biologos": {
+   "text": "En 2025 había 713 biólogos con especialidad sanitaria colegiados, de un total de 1.038.354 profesionales sanitarios colegiados. La estadística no recoge a los trabajadores sociales.",
+   "period": "2025",
+   "source": "INE, Estadística de Profesionales Sanitarios Colegiados 2025",
+   "url": "https://www.ine.es/dyngs/Prensa/EPSC2025.pdf"
+  }
+ },
+ "statements": {},
+ "votes": {
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion193/20260723/Votacion008/VOT_20260723211941.json": {
+   "question_id": "pool-empleo-y-pensiones",
+   "facts": [
+    "eje-empleo-derechos--ine-epa-2026t2-temporalidad-publico",
+    "eje-proteccion-social--ss-2025-altas-jubilacion"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Administraciones públicas",
+     "text": "Tendrán que incluir las jubilaciones parciales de su personal laboral en un instrumento de planificación, como la oferta de empleo público, y certificar quién se jubila y quién es relevista.",
+     "locator": "Artículo único, letras a), e), f) y g)"
+    },
+    {
+     "actor": "Personal laboral de las Administraciones",
+     "text": "Podrá jubilarse parcialmente si su relevista tiene un contrato fijo a tiempo completo; mientras se resuelve la convocatoria, puede entrar un relevista temporal.",
+     "locator": "Artículo único, letras b) y c)"
+    },
+    {
+     "actor": "Relevistas",
+     "text": "No tendrán que estar en paro. Podrán servir también contratos fijos formalizados desde el 1 de abril de 2024 en ofertas ordinarias, hasta el 1 de abril de 2027.",
+     "locator": "Artículo único, letra e); Disposición transitoria única"
+    },
+    {
+     "actor": "Personal estatal en Baleares",
+     "text": "El Gobierno revisará en seis meses sus indemnizaciones por residencia, sin reducir las cuantías actuales.",
+     "locator": "Disposición adicional única"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion196/20260910/Votacion016/VOT_20260910180650.json": {
+   "question_id": "pool-empleo-y-pensiones",
+   "facts": [
+    "pool-empleo-y-pensiones--ine-epsc-2025-biologos",
+    "eje-empleo-derechos--ine-epa-2025-sanidad"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Biólogos",
+     "text": "Podrían pasar a ser profesión sanitaria titulada cuando ejerzan en el ámbito sanitario, con funciones en laboratorio clínico, diagnóstico genético y reproducción asistida; se les exigiría título de especialista.",
+     "locator": "Artículo 1, apartados 1 y 2"
+    },
+    {
+     "actor": "Trabajadores sociales",
+     "text": "Podrían ser profesión sanitaria en ese ámbito, con valoración y diagnóstico social sanitario y coordinación sociosanitaria; los requisitos se fijarían por real decreto.",
+     "locator": "Artículo 2"
+    },
+    {
+     "actor": "Ministerio de Sanidad",
+     "text": "Gestionaría los registros de ambas profesiones, integrados en el Sistema de Información Sanitaria del SNS.",
+     "locator": "Artículo 3"
+    },
+    {
+     "actor": "Otras profesiones sanitarias",
+     "text": "No perderían competencias: los reconocimientos se entenderían sin perjuicio de ellas y del carácter multiprofesional de los equipos.",
+     "locator": "Artículo 1, apartado 4; Artículo 2, apartado 3"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  }
+ }
+}

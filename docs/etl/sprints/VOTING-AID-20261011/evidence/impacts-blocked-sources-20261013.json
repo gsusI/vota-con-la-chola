@@ -1,0 +1,66 @@
+{
+ "probe": "voting-aid impacts drafting, blocked official sources",
+ "command": "python3 (urllib, browser User-Agent, timeout 25s) — see docs/etl/sprints/VOTING-AID-20261011/prompts/ramificaciones-redaccion.md",
+ "results": [
+  {
+   "organism": "Ministerio del Interior",
+   "url": "https://www.interior.gob.es/opencms/es/servicios-al-ciudadano/estadisticas/",
+   "probed_at_utc": "2026-10-13T17:08:21Z",
+   "user_agent": "browser UA (Chrome 126)",
+   "status": 403,
+   "cf_mitigated": "challenge",
+   "server": "cloudflare",
+   "challenge": true
+  },
+  {
+   "organism": "Ministerio del Interior (prensa)",
+   "url": "https://www.interior.gob.es/opencms/es/detalle/articulo/",
+   "probed_at_utc": "2026-10-13T17:08:21Z",
+   "user_agent": "browser UA (Chrome 126)",
+   "status": 403,
+   "cf_mitigated": "challenge",
+   "server": "cloudflare",
+   "challenge": true
+  },
+  {
+   "organism": "EUR-Lex (Oficina de Publicaciones UE)",
+   "url": "https://eur-lex.europa.eu/legal-content/ES/TXT/?uri=CELEX:32024R1083",
+   "probed_at_utc": "2026-10-13T17:08:22Z",
+   "user_agent": "browser UA (Chrome 126)",
+   "status": 202,
+   "cf_mitigated": null,
+   "body_head": "",
+   "challenge": false
+  },
+  {
+   "organism": "Consejo de Europa (GRECO)",
+   "url": "https://www.coe.int/es/web/greco",
+   "probed_at_utc": "2026-10-13T17:08:22Z",
+   "user_agent": "browser UA (Chrome 126)",
+   "status": 403,
+   "cf_mitigated": "challenge",
+   "server": "cloudflare",
+   "challenge": true
+  },
+  {
+   "organism": "Dirección General de Ordenación del Juego",
+   "url": "https://www.ordenacionjuego.es/",
+   "probed_at_utc": "2026-10-13T17:08:22Z",
+   "user_agent": "browser UA (Chrome 126)",
+   "status": 200,
+   "cf_mitigated": null,
+   "body_head": "\n<!DOCTYPE html>\n<html lang=\"es\" dir=\"ltr\" xml:lang=\"es\" class=\"h-100\">\n  <head>\n    <meta charset=\"utf-8\" />\n<script>var _paq = _paq || [];(function(){var u=((\"https:\" == document.location.protocol) ",
+   "challenge": false
+  },
+  {
+   "organism": "Consejo de la UE",
+   "url": "https://www.consilium.europa.eu/es/press/press-releases/",
+   "probed_at_utc": "2026-10-13T17:08:25Z",
+   "user_agent": "browser UA (Chrome 126)",
+   "status": 403,
+   "cf_mitigated": "challenge",
+   "server": "cloudflare",
+   "challenge": false
+  }
+ ]
+}

@@ -1,0 +1,152 @@
+{
+ "facts": {},
+ "statements": {},
+ "votes": {
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion019/20240206/Votacion006/VOT_20240206213128.json": {
+   "question_id": "pool-sanidad",
+   "facts": [
+    "eje-fiscalidad--eurostat-2024-gasto-funciones",
+    "eje-territorial-autogobierno--eurostat-2024-sanidad-educacion",
+    "eje-empleo-derechos--imserso-saad-2026-08"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Personas con ELA y gran dependencia",
+     "text": "Podrían contar con una ley de atención integral específica, si el Gobierno la promoviera.",
+     "locator": "Punto 3"
+    },
+    {
+     "actor": "Pacientes con enfermedades raras",
+     "text": "Podrían tener diagnóstico más temprano, menos trámites y más financiación para sus medicamentos huérfanos.",
+     "locator": "Punto 4"
+    },
+    {
+     "actor": "Pacientes de todas las comunidades",
+     "text": "Podrían tener una tarjeta sanitaria única, una historia clínica digital unificada y la misma cartera de servicios vivan donde vivan.",
+     "locator": "Punto 5"
+    },
+    {
+     "actor": "Personal sanitario",
+     "text": "Podría tener salarios más competitivos y equitativos, mejor conciliación familiar y medidas para retenerlo.",
+     "locator": "Punto 6"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion052/20240627/Votacion023/VOT_20240627130355.json": {
+   "question_id": "pool-sanidad",
+   "facts": [
+    "eje-empleo-derechos--ine-profesionales-sanitarios-2025",
+    "eje-empleo-derechos--ine-epa-2025-sanidad"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Pacientes de Atención Primaria",
+     "text": "Podrían tener más profesionales disponibles este verano si se aplicaran medidas urgentes pactadas con las comunidades autónomas.",
+     "locator": "Punto 1"
+    },
+    {
+     "actor": "Médicos con título obtenido fuera de la UE",
+     "text": "Podrían ver priorizada la homologación de sus títulos y especialidades, con garantías de calidad y seguridad.",
+     "locator": "Punto 2"
+    },
+    {
+     "actor": "Médicos residentes (MIR) de cuarto año",
+     "text": "Podrían atender pacientes en Atención Primaria este verano, con supervisión y apoyo.",
+     "locator": "Punto 2"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion091/20250212/Votacion003/VOT_20250212154038.json": {
+   "question_id": "pool-sanidad",
+   "facts": [
+    "eje-inmigracion--interior-2025-llegadas",
+    "eje-inmigracion--boe-2026-sanidad-extranjeros-sin-residencia"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Gobierno de Canarias",
+     "text": "Podría recibir financiación extraordinaria del Estado para la atención sanitaria de los migrantes que llegan a las islas, si ambos gobiernos lo acordaran.",
+     "locator": "Punto 1"
+    },
+    {
+     "actor": "Migrantes recién llegados a Canarias",
+     "text": "Podrían ser atendidos en el sistema sanitario canario con esa financiación extra.",
+     "locator": "Punto 1"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion146/20251113/Votacion058/VOT_20251113131329.json": {
+   "question_id": "pool-sanidad",
+   "facts": [
+    "eje-fiscalidad--eurostat-2024-gasto-funciones",
+    "eje-empleo-derechos--ine-epa-2025-sanidad"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Profesionales sanitarios",
+     "text": "Podrían ver reconocido su papel en la universalidad y equidad del sistema de salud, con actos y jornadas por el 40 aniversario de la ley.",
+     "locator": "Punto 3"
+    },
+    {
+     "actor": "Usuarios del Sistema Nacional de Salud",
+     "text": "Verían reafirmado el compromiso del Congreso con una sanidad pública, gratuita y universal; la declaración no cambia por sí sola las prestaciones.",
+     "locator": "Punto 4"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion151/20251127/Votacion001/VOT_20251127124047.json": {
+   "question_id": "pool-sanidad",
+   "facts": [
+    "eje-empleo-derechos--ine-mnp-2024-nacimientos",
+    "eje-proteccion-social--ine-emn-2025-nacimientos"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Recién nacidos y sus familias",
+     "text": "Podrían tener 12 enfermedades más del cribado neonatal (como fibrosis quística o anemia falciforme) en la cartera común, igual en todas las comunidades, si la ley sale adelante.",
+     "locator": "Artículo segundo (apartado 3.3.1 del anexo I del Real Decreto 1030/2006)"
+    },
+    {
+     "actor": "Comunidades autónomas y Sanidad",
+     "text": "Tendrían que evaluar el programa al menos cada dos años y revisar y armonizar sus cribados en 12 meses.",
+     "locator": "Artículo primero"
+    },
+    {
+     "actor": "Profesionales sanitarios",
+     "text": "Podrían recibir formación en enfermedades raras y diagnóstico asociado al cribado neonatal.",
+     "locator": "Disposición adicional tercera"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  }
+ }
+}

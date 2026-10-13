@@ -1,0 +1,186 @@
+{
+ "facts": {},
+ "statements": {},
+ "votes": {
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion029/20240314/Votacion031/VOT_20240314123743.json": {
+   "question_id": "pool-transporte",
+   "facts": [
+    "eje-control-gobierno--ine-tv-2025-ferrocarril",
+    "eje-regulacion-economica--ine-tf-2025-viajeros"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Viajeros del País Vasco",
+     "text": "Podrían ver acabada antes la red de alta velocidad vasca, con un calendario de obras por tramo y las obras de integración urbana en las capitales vascas.",
+     "locator": "Puntos 1 y 2"
+    },
+    {
+     "actor": "Contribuyentes",
+     "text": "Podrían tener que financiar con créditos presupuestarios adicionales la conexión ferroviaria, incluido el corredor entre Zaragoza, Pamplona y la Y vasca.",
+     "locator": "Puntos 3 y 4"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion106/20250410/Votacion008/VOT_20250410155146.json": {
+   "question_id": "pool-transporte",
+   "facts": [
+    "eje-transporte-publico--mitma-2026-mapa-concesional",
+    "eje-transporte-publico--ine-tv-2025-autobus-interurbano"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Usuarios del autobús interurbano",
+     "text": "Podrían tener que esperar a una nueva propuesta de mapa de autobuses estatales, tras retirar el borrador de 2022.",
+     "locator": "Puntos 1 y 2"
+    },
+    {
+     "actor": "Comunidades autónomas",
+     "text": "Podrían participar en el nuevo mapa, acordar con el Estado los tráficos que se les transfieran y recibir una financiación estable para cubrir su coste.",
+     "locator": "Puntos 2, 3 y 4"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion114/20250527/Votacion001/VOT_20250527201600.json": {
+   "question_id": "pool-transporte",
+   "facts": [
+    "eje-seguridad-penal--intcf-2025-alcohol",
+    "eje-control-gobierno--dgt-2025-siniestralidad"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Conductores profesionales",
+     "text": "Tendrían un reconocimiento médico anual y podrían recibir reconocimientos aleatorios de alcohol y drogas; podrían recuperar hasta cuatro puntos con cursos obligatorios.",
+     "locator": "Artículo 1, apartado Uno; Artículo 2; apartado Tres"
+    },
+    {
+     "actor": "Empresas de transporte",
+     "text": "Podrían hacer reconocimientos médicos aleatorios de alcohol y drogas a sus conductores, además de los controles de las fuerzas de seguridad.",
+     "locator": "Artículo 2"
+    },
+    {
+     "actor": "Profesionales sin permiso por alcohol o drogas",
+     "text": "Tendrían que presentar un reconocimiento médico sin consumo para obtener un nuevo permiso, y podrían acceder a programas de rehabilitación laboral.",
+     "locator": "Artículo 1, apartados Dos, Cuatro y Cinco"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion132/20250917/Votacion004/VOT_20250917194023.json": {
+   "question_id": "pool-transporte",
+   "facts": [
+    "eje-control-gobierno--ine-tv-2025-ferrocarril",
+    "eje-regulacion-economica--ine-tf-2025-viajeros"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Viajeros de Pamplona y Tudela",
+     "text": "Podrían contar en 2030 con nuevas estaciones de alta velocidad conectadas con la línea de Zaragoza.",
+     "locator": "Punto 2"
+    },
+    {
+     "actor": "Vecinos de Pamplona y Tudela",
+     "text": "Podrían ver cambiar el trazado ferroviario del casco urbano, con la sustitución del bucle de Pamplona y la retirada de las vías viejas de Tudela.",
+     "locator": "Puntos 1 y 3"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion166/20260318/Votacion004/VOT_20260318175329.json": {
+   "question_id": "pool-transporte",
+   "facts": [
+    "eje-control-gobierno--ine-tv-2025-ferrocarril",
+    "eje-transporte-publico--eurostat-2024-reparto-mercancias"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Viajeros y transportistas de mercancías del corredor Pamplona-Vitoria-Burgos",
+     "text": "Podrían compartir una única plataforma ferroviaria para alta velocidad, mercancías y cercanías, reformando la infraestructura actual.",
+     "locator": "Punto 1"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion200/20260923/Votacion001/VOT_20260923145112.json": {
+   "question_id": "pool-transporte",
+   "facts": [
+    "eje-transporte-publico--eurostat-2024-reparto-mercancias",
+    "eje-control-gobierno--ine-tv-2025-ferrocarril"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Municipios por donde pasan los trenes de mercancías",
+     "text": "Podrían recibir menos trenes de mercancías y un plan de mitigación de ruido y vibraciones con calendario y financiación.",
+     "locator": "Puntos 2 y 3"
+    },
+    {
+     "actor": "Empresas de transporte ferroviario de mercancías",
+     "text": "Podrían ver priorizada la Y vasca y garantizada la continuidad del Corredor Atlántico hacia la Meseta.",
+     "locator": "Puntos 1 y 2"
+    },
+    {
+     "actor": "Viajeros de la zona",
+     "text": "Podrían ver ajustadas las circulaciones nocturnas para compatibilizar más mercancías con la calidad del servicio de viajeros.",
+     "locator": "Punto 4"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion201/20260929/Votacion002/VOT_20260929202713.json": {
+   "question_id": "pool-transporte",
+   "facts": [
+    "eje-seguridad-penal--intcf-2025-alcohol",
+    "eje-control-gobierno--dgt-2025-siniestralidad"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Conductores",
+     "text": "Tendrían una nueva infracción por conducir entre 0,1 y 0,25 mg/l de alcohol en aire, con 2 puntos de carné si la ley sale adelante.",
+     "locator": "Artículo único, apartados Uno y Cuatro"
+    },
+    {
+     "actor": "Conductores con tasas más altas",
+     "text": "Podrían recibir multa de 1.000 euros y perder 4 o 6 puntos según la tasa, con umbrales más bajos que los actuales.",
+     "locator": "Artículo único, apartados Dos, Tres y Cuatro"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  }
+ }
+}

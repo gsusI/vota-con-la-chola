@@ -1,0 +1,102 @@
+{
+ "facts": {
+  "pool-igualdad--ine-ece-2021-accesibilidad": {
+   "text": "En 2021, 6.447.427 de los 18.810.046 hogares con vivienda principal (el 34,3 %) vivían en edificios que no eran accesibles para una persona en silla de ruedas.",
+   "period": "2021",
+   "source": "INE, Encuesta de Características Esenciales de la Población y las Viviendas 2021, tabla 56900",
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=56900"
+  }
+ },
+ "statements": {},
+ "votes": {
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion101/20250320/Votacion004/VOT_20250320125703.json": {
+   "question_id": "pool-igualdad",
+   "facts": [
+    "pool-igualdad--ine-ece-2021-accesibilidad",
+    "eje-proteccion-social--imserso-2024-discapacidad"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Personas con discapacidad o movilidad reducida",
+     "text": "Podrían tener más fácil entrar y salir de su edificio si se impulsan y favorecen obras de mejora de la accesibilidad en viviendas en propiedad horizontal.",
+     "locator": "Punto 1"
+    },
+    {
+     "actor": "Comunidades de propietarios",
+     "text": "Podrían contar con medidas del Gobierno para impulsar y favorecer obras de accesibilidad, que se concretarían según las conclusiones del Grupo de Trabajo de Accesibilidad del Ministerio de Vivienda y Agenda Urbana.",
+     "locator": "Punto 1"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion154/20251211/Votacion002/VOT_20251211175044.json": {
+   "question_id": "pool-igualdad",
+   "facts": [
+    "eje-proteccion-social--imserso-2024-discapacidad",
+    "eje-empleo-derechos--ine-epd-2024-discapacidad"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Personas con discapacidad",
+     "text": "Podrían ver reconocido su derecho a beneficiarse de los sistemas de IA y ver protegidos sus derechos frente a la discriminación en los algoritmos que deciden sobre productos, entornos y servicios digitales.",
+     "locator": "Punto 1"
+    },
+    {
+     "actor": "Personas que reciben cuidados de larga duración",
+     "text": "Podrían beneficiarse de que se aborden los desafíos éticos de la IA y la innovación en el ámbito de la discapacidad, en especial en los cuidados de larga duración.",
+     "locator": "Punto 5"
+    },
+    {
+     "actor": "Empresas y administraciones que usan IA",
+     "text": "Podrían tener que seguir criterios de diseño universal y, si se estudian, sistemas o certificaciones de uso ético y fiable de la IA respetuoso con los derechos de las personas con discapacidad.",
+     "locator": "Puntos 2 y 4"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion175/20260428/Votacion002/VOT_20260428200329.json": {
+   "question_id": "pool-igualdad",
+   "facts": [
+    "eje-inmigracion--opi-2026-06-menores-extutelados"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Menores tutelados en situación de desamparo",
+     "text": "Podrían ver la declaración de desamparo y la tutela decididas por un juez, con prioridad para volver con su familia de origen o, si no, con la familia extensa.",
+     "locator": "Artículo uno, apartados Uno y Cinco (artículos 172 y 222 del Código Civil)"
+    },
+    {
+     "actor": "Progenitores y familia de origen",
+     "text": "Podrían pedir revocar el desamparo y oponerse a las medidas durante dos años desde la notificación; después solo podría oponerse el Ministerio Fiscal.",
+     "locator": "Artículo uno, apartado Uno (artículo 172.2 del Código Civil)"
+    },
+    {
+     "actor": "Entidades públicas de protección de menores",
+     "text": "Podrían perder la decisión sobre desamparo, guarda y acogimiento, que pasaría a la autoridad judicial; la guarda provisional también requeriría resolución judicial.",
+     "locator": "Artículo dos, apartado Tres (artículo 14 de la Ley de Protección Jurídica del Menor)"
+    },
+    {
+     "actor": "Familias acogedoras",
+     "text": "Podrían ver priorizada a la familia extensa en el acogimiento familiar, y los expedientes en tramitación se resolverían con la nueva regulación.",
+     "locator": "Artículo uno, apartados Dos, Tres y Cuatro (artículos 172 bis, 172 ter y 176 bis)"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  }
+ }
+}

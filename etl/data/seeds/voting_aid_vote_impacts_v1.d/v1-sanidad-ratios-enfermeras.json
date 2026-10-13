@@ -1,0 +1,49 @@
+{
+ "facts": {},
+ "statements": {
+  "sanidad-ratios-enfermeras": {
+   "facts": [
+    "eje-empleo-derechos--ine-profesionales-sanitarios-2025",
+    "eje-empleo-derechos--ine-epa-2025-sanidad",
+    "eje-fiscalidad--eurostat-2024-gasto-funciones"
+   ]
+  }
+ },
+ "votes": {
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion083/20241210/Votacion001/VOT_20241210202031.json": {
+   "question_id": "sanidad-ratios-enfermeras",
+   "facts": [
+    "eje-empleo-derechos--ine-profesionales-sanitarios-2025",
+    "eje-empleo-derechos--ine-epa-2025-sanidad"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Pacientes",
+     "text": "Podrían tener un máximo de 6 pacientes por enfermera en hospitalización (hasta 8 según las condiciones), 2 en UCI y 3 en reanimación, y no más de 1.500 habitantes por enfermera en atención primaria.",
+     "locator": "Artículos 5, 6 y 7"
+    },
+    {
+     "actor": "Enfermeras",
+     "text": "Podrían trabajar con ratios máximas por ley y con plantillas publicadas cada año; una comisión interterritorial concretaría las ratios y el Gobierno podría revisarlas por real decreto.",
+     "locator": "Artículos 4, 5.5 y 13 a 16"
+    },
+    {
+     "actor": "Centros sanitarios y sociosanitarios",
+     "text": "Públicos y privados, tendrían que acreditar ante las comunidades que cumplen las ratios (18 meses para notificarlo) y quedarían sujetos a inspección y sanción. En alarma o emergencias no estarían obligados a cumplirlas.",
+     "locator": "Artículos 3, 8, 11 y 13 a 16; Disposición transitoria única"
+    },
+    {
+     "actor": "Comunidades autónomas",
+     "text": "Tendrían que recibir las acreditaciones de los centros, inspeccionarlos y publicar cada año sus plantillas y ratios; el Gobierno fijaría en un año la ratio de los centros sociosanitarios.",
+     "locator": "Artículos 7, 11 y 13 a 16"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  }
+ }
+}

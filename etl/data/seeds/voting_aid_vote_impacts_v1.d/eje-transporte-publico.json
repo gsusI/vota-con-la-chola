@@ -1,0 +1,702 @@
+{
+ "facts": {
+  "eje-transporte-publico--ine-tv-2025-viajeros-regular": {
+   "text": "En 2025 el transporte público regular sumó 3.599 millones de viajes urbanos (metro y autobús), 932 millones interurbanos en autobús y 695 millones en tren.",
+   "period": "2025",
+   "source": "INE, Estadística de Transporte de Personas, tabla 49359 (suma de los 12 meses de 2025; la tabla da miles de viajeros)",
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=49359"
+  },
+  "eje-transporte-publico--ine-tv-2025-ferrocarril": {
+   "text": "En 2025 las Cercanías de tren llevaron 595 millones de viajeros, la media distancia 48 millones y la larga distancia 52 millones (44 millones de ellos en alta velocidad).",
+   "period": "2025",
+   "source": "INE, Estadística de Transporte de Personas, tabla 49359 (suma de los 12 meses de 2025; la tabla da miles de viajeros)",
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=49359"
+  },
+  "eje-transporte-publico--ine-tv-2025-autobus-interurbano": {
+   "text": "En 2025 el autobús interurbano regular llevó 932 millones de viajeros: 633 millones en servicios de cercanías, 279 millones de media distancia y 20 millones de larga distancia.",
+   "period": "2025",
+   "source": "INE, Estadística de Transporte de Personas, tabla 49359 (suma de los 12 meses de 2025; la tabla da miles de viajeros)",
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=49359"
+  },
+  "eje-transporte-publico--ine-tv-2025-ferrocarril-larga-distancia": {
+   "text": "En 2025 el ferrocarril de larga distancia llevó 52,4 millones de viajeros: 43,8 millones en alta velocidad y 8,7 millones en el resto de servicios de larga distancia.",
+   "period": "2025",
+   "source": "INE, Estadística de Transporte de Personas, tabla 49359 (suma de los 12 meses de 2025; la tabla da miles de viajeros)",
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=49359"
+  },
+  "eje-transporte-publico--mitma-2025-pagos-ccaa-eell": {
+   "text": "El Ministerio de Transportes pagó 735 millones de euros en 2025 a comunidades autónomas, ayuntamientos y consorcios para financiar el transporte público urbano, interurbano y metropolitano.",
+   "period": "2025",
+   "source": "Ministerio de Transportes y Movilidad Sostenible, nota de prensa de 5 de enero de 2026 (La Moncloa)",
+   "url": "https://www.lamoncloa.gob.es/serviciosdeprensa/notasprensa/transportes-movilidad-sostenible/paginas/2026/050126-transporte-publico-urbano.aspx"
+  },
+  "eje-transporte-publico--ecepov-2021-medio-trabajo": {
+   "text": "En 2021 el 63,0 % de quien trabaja o estudia iba en vehículo particular y el 16,1 % en transporte público (19,6 % en 2011). Entre los menores de 30 años, el 29,3 % usaba el transporte público.",
+   "period": "2021",
+   "source": "INE, Encuesta de Características Esenciales de la Población y Viviendas 2021 (nota de prensa, datos definitivos)",
+   "url": "https://www.ine.es/prensa/ecepov_2021.pdf"
+  },
+  "eje-transporte-publico--miteco-gei-2025-transporte": {
+   "text": "En 2025 el transporte fue el sector que más gases de efecto invernadero emitió: el 34,2 % del total (92,5 millones de toneladas de CO2-eq); solo el transporte por carretera, el 31,6 %. Subió un 2,4 % respecto a 2024.",
+   "period": "2025 (avance)",
+   "source": "MITECO, Avance del Inventario de Emisiones de GEI del año 2025, tabla 2 del anexo I",
+   "url": "https://www.miteco.gob.es/content/dam/miteco/es/calidad-y-evaluacion-ambiental/temas/sistema-espanol-de-inventario-sei-/Nota-Avance-GEI-2025.pdf"
+  },
+  "eje-transporte-publico--eurostat-2024-reparto-viajeros": {
+   "text": "En 2024 en España el coche suponía el 80,8 % del transporte interior de pasajeros, el autobús el 10,4 % y el tren el 8,8 % (UE: 82,5 %, 8,6 % y 8,9 %).",
+   "period": "2024",
+   "source": "Eurostat, Modal split of inland passenger transport (tran_hv_psmod)",
+   "url": "https://ec.europa.eu/eurostat/databrowser/view/tran_hv_psmod/default/table"
+  },
+  "eje-transporte-publico--eurostat-2024-reparto-mercancias": {
+   "text": "En 2024 el 96,1 % del transporte interior de mercancías en España fue por carretera y el 3,9 % por ferrocarril (UE: 78,2 % y 16,6 %).",
+   "period": "2024",
+   "source": "Eurostat, Modal split of inland freight transport (tran_hv_frmod)",
+   "url": "https://ec.europa.eu/eurostat/databrowser/view/tran_hv_frmod/default/table"
+  },
+  "eje-transporte-publico--boe-rdl14-2026-jovenes-verano-2025": {
+   "text": "En el verano de 2025 se registraron más de 2.350.000 jóvenes en el programa de descuentos, que hicieron más de 6,8 millones de viajes; se vendieron 6.000 pases Interrail.",
+   "period": "verano de 2025",
+   "source": "BOE, Real Decreto-ley 14/2026, preámbulo (apartado I)",
+   "url": "https://www.boe.es/eli/es/rdl/2026/06/09/14"
+  },
+  "eje-transporte-publico--boe-rdl14-2026-precios-2026": {
+   "text": "A mayo de 2026 el IPC subía un 3,2 % interanual; el componente de transportes, un 6,5 % (abril) y los combustibles y lubricantes de vehículos personales, un 15,5 %.",
+   "period": "abril-mayo de 2026",
+   "source": "BOE, Real Decreto-ley 14/2026, preámbulo (apartado I)",
+   "url": "https://www.boe.es/eli/es/rdl/2026/06/09/14"
+  },
+  "eje-transporte-publico--ine-ecp-2026-jovenes-1996-2008": {
+   "text": "A 1 de julio de 2026 residían 7.331.885 personas nacidas entre 1996 y 2008 (18 a 30 años), las edades del descuento de verano; además hace falta nacionalidad española o residencia legal.",
+   "period": "1 de julio de 2026 (provisional)",
+   "source": "INE, Estadística Continua de Población, tabla 59239 (generaciones de 18 a 30 años)",
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=59239"
+  },
+  "eje-transporte-publico--ine-ecp-2026-jovenes-1995-2007": {
+   "text": "A 1 de julio de 2026 residían 7.334.977 personas nacidas entre 1995 y 2007, las generaciones del descuento de verano de 2025 (hoy de 19 a 31 años).",
+   "period": "1 de julio de 2026 (provisional)",
+   "source": "INE, Estadística Continua de Población, tabla 59239 (generaciones de 19 a 31 años)",
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=59239"
+  },
+  "eje-transporte-publico--ine-ecp-2026-ninos-jovenes": {
+   "text": "A 1 de julio de 2026 residían 5.909.101 personas nacidas entre 2012 y 2026 (gratuidad infantil de 2026) y 6.674.299 nacidas entre 2000 y 2011 (abonos jóvenes).",
+   "period": "1 de julio de 2026 (provisional)",
+   "source": "INE, Estadística Continua de Población, tabla 59239 (generaciones de 0 a 14 y de 15 a 26 años)",
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=59239"
+  },
+  "eje-transporte-publico--ine-padron-2021-municipios-pequenos": {
+   "text": "En 2021, 6.818 de los 8.131 municipios (84 %) tenían menos de 5.000 habitantes; en ellos vivían 5,7 millones de personas (12 % de la población).",
+   "period": "1 de enero de 2021",
+   "source": "INE, Padrón: distribución de municipios y población por tamaño (tablas 2851 y 2915)",
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=2915"
+  },
+  "eje-transporte-publico--ine-padron-2021-municipios-grandes": {
+   "text": "En 2021, 414 municipios (5 % del total) de más de 20.000 habitantes reunían 32,9 millones de personas, el 69 % de la población.",
+   "period": "1 de enero de 2021",
+   "source": "INE, Padrón: distribución de municipios y población por tamaño (tablas 2851 y 2915)",
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=2915"
+  },
+  "eje-transporte-publico--mitma-2026-mapa-concesional": {
+   "text": "El nuevo mapa de autobuses estatales prevé 34 corredores, 600 rutas, 2.294 paradas y 1.682 municipios, con unos 31 millones de viajeros al año y una bajada media de tarifas del 22 % según el Ministerio.",
+   "period": "15 de junio de 2026",
+   "source": "Ministerio de Transportes y Movilidad Sostenible, nota de prensa de 15 de junio de 2026",
+   "url": "https://www.transportes.gob.es/ministerio/comunicacion/sala-prensa/lun-15062026-1234"
+  },
+  "eje-transporte-publico--boe-lirpf-42-3-e": {
+   "text": "La ley del IRPF ya exime de tributar las cantidades que la empresa paga a servicios públicos de transporte colectivo para el trayecto al trabajo, con un límite de 1.500 euros al año por trabajador.",
+   "period": "texto vigente (actualización del 7 de octubre de 2026)",
+   "source": "BOE, Ley 35/2006 del IRPF, artículo 42.3.e)",
+   "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2006-20764"
+  },
+  "eje-transporte-publico--boe-ley9-2025-estrategia-financiacion": {
+   "text": "La Ley 9/2025 de Movilidad Sostenible (3 de diciembre de 2025) incluyó en su disposición adicional 36.ª que el Gobierno elabore en seis meses una estrategia de financiación del transporte público.",
+   "period": "3 de diciembre de 2025",
+   "source": "BOE, Ley 9/2025, disposición adicional trigésima sexta",
+   "url": "https://www.boe.es/eli/es/l/2025/12/03/9"
+  },
+  "eje-transporte-publico--boe-ley9-2025-aparcamientos-seguros": {
+   "text": "La Ley 9/2025 recoge en su artículo 96 un estudio nacional para elegir tramos de carretera que necesitan aparcamientos seguros para camiones y convertir aparcamientos de vialidad invernal.",
+   "period": "3 de diciembre de 2025",
+   "source": "BOE, Ley 9/2025, artículo 96",
+   "url": "https://www.boe.es/eli/es/l/2025/12/03/9"
+  },
+  "eje-transporte-publico--boe-ley9-2025-trenes-nocturnos": {
+   "text": "La Ley 9/2025 manda un estudio de servicios de tren con países vecinos, con atención a los nocturnos, y otro de trenes nocturnos de largo recorrido entre ciudades españolas.",
+   "period": "3 de diciembre de 2025",
+   "source": "BOE, Ley 9/2025, disposición adicional decimoquinta",
+   "url": "https://www.boe.es/eli/es/l/2025/12/03/9"
+  }
+ },
+ "statements": {
+  "eje-transporte-publico": {
+   "facts": [
+    "eje-transporte-publico--ine-tv-2025-viajeros-regular",
+    "eje-transporte-publico--ecepov-2021-medio-trabajo",
+    "eje-transporte-publico--miteco-gei-2025-transporte"
+   ]
+  }
+ },
+ "votes": {
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion191/20260625/Votacion027/VOT_20260625150826.json": {
+   "question_id": "eje-transporte-publico",
+   "facts": [
+    "eje-transporte-publico--boe-rdl14-2026-jovenes-verano-2025",
+    "eje-transporte-publico--ine-ecp-2026-jovenes-1996-2008",
+    "eje-transporte-publico--boe-rdl14-2026-precios-2026"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Jóvenes nacidos entre 1996 y 2008",
+     "text": "Del 1 de julio al 30 de septiembre de 2026 pagan un 90 % menos en Media Distancia de Renfe y en autobuses estatales, un 50 % menos en Avant y la mitad en el Pase Interrail; quien no cumple edad o residencia queda fuera.",
+     "locator": "Artículo 1, apartados 1 y 2; Artículo 2, apartados 1, 2 y 6; Artículo 6, apartados 1, 2, 4 y 5"
+    },
+    {
+     "actor": "Renfe y empresas ferroviarias",
+     "text": "Renfe aplica el 90 % en Media Distancia y el 50 % en Avant, con 20 millones de crédito extraordinario; las demás empresas pueden aplicar un 50 % (máximo 30 euros por trayecto), sin obligación.",
+     "locator": "Artículo 2, apartados 1, 2 y 6; Artículo 3, apartados 1 y 2"
+    },
+    {
+     "actor": "Concesionarias de autobús estatal",
+     "text": "Deben aplicar un 90 % de descuento a los jóvenes, con 62 millones de euros de crédito extraordinario para compensarlas.",
+     "locator": "Artículo 4, apartados 1 y 2"
+    },
+    {
+     "actor": "Administración General del Estado",
+     "text": "Puede adjudicar directamente contratos de autobús en emergencias y necesita acuerdo del Consejo de Ministros si cambiar un servicio exige más subvención pública.",
+     "locator": "Disposición final primera, apartados Uno y Dos"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion156/20260127/Votacion002/VOT_20260127153137.json": {
+   "question_id": "eje-transporte-publico",
+   "facts": [
+    "eje-transporte-publico--ine-ecp-2026-ninos-jovenes",
+    "eje-transporte-publico--ine-tv-2025-ferrocarril",
+    "eje-transporte-publico--mitma-2025-pagos-ccaa-eell"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Niños y jóvenes (nacidos en 2000 o después)",
+     "text": "En 2026 el abono de Cercanías es gratis para nacidos entre 2012 y 2026 y de 10 euros al mes para nacidos entre 2000 y 2011; en autobús estatal, 100 % de descuento para niños y 70 % para jóvenes.",
+     "locator": "Artículo 3, apartado 2; Artículo 1, apartado 2.a)"
+    },
+    {
+     "actor": "Resto de personas usuarias",
+     "text": "En Cercanías, abono mensual de 20 euros; en Media Distancia, 40 % de descuento en abonos; en autobús estatal, 50 % el abono mensual y 40 % el de 10 viajes.",
+     "locator": "Artículo 3, apartado 2; Artículo 1, apartado 2.a)"
+    },
+    {
+     "actor": "Comunidades autónomas y entes locales",
+     "text": "Reciben ayudas en 2026 por la pérdida de ingresos (50 % en títulos jóvenes, 20 % en el resto), pero deben cofinanciar y cumplir requisitos ambientales.",
+     "locator": "Artículos 5 a 8 y 11; Artículo 7, apartado 3"
+    },
+    {
+     "actor": "Canarias, Illes Balears, Asturias y Cantabria",
+     "text": "Canarias (120 millones) e Illes Balears (63 millones) reciben ayuda para el 100 % de descuento en abonos de transporte terrestre; las Cercanías de Asturias y Cantabria tendrán un título multiviaje gratuito.",
+     "locator": "Capítulo IV, artículos 18 y 20; Artículo 23, apartados 1 y 2"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion124/20250626/Votacion011/VOT_20250626120540.json": {
+   "question_id": "eje-transporte-publico",
+   "facts": [
+    "eje-transporte-publico--boe-rdl14-2026-jovenes-verano-2025",
+    "eje-transporte-publico--ecepov-2021-medio-trabajo",
+    "eje-transporte-publico--ine-ecp-2026-jovenes-1995-2007"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Jóvenes nacidos entre 1995 y 2007",
+     "text": "Del 1 de julio al 30 de septiembre de 2025 pagan un 90 % menos en Media Distancia de Renfe y en autobuses estatales, un 50 % menos en Avant y la mitad en el Pase Interrail.",
+     "locator": "Artículo 1, apartados 1 y 2; Artículo 2, apartados 1, 2 y 6; Artículo 6, apartados 1, 2, 4 y 5"
+    },
+    {
+     "actor": "Renfe y empresas ferroviarias",
+     "text": "Renfe aplica el 90 % en Media Distancia y el 50 % en Avant, con 17 millones de crédito; las demás empresas pueden aplicar un 50 % (máximo 30 euros por trayecto), sin obligación.",
+     "locator": "Artículo 2, apartados 1, 2 y 6; Artículo 3, apartados 1 y 2"
+    },
+    {
+     "actor": "Concesionarias de autobús estatal",
+     "text": "Deben aplicar un 90 % de descuento a los jóvenes, con 47,5 millones de euros de crédito.",
+     "locator": "Artículo 4, apartados 1 y 2"
+    },
+    {
+     "actor": "Comunidades autónomas con convenios con Renfe",
+     "text": "Cataluña, País Vasco y otras comunidades pueden pedir en diez días el 90 % en sus trenes de media distancia, que compensa el Ministerio de Transportes.",
+     "locator": "Artículo 2, apartados 4 y 5"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion091/20250212/Votacion012/VOT_20250212154047.json": {
+   "question_id": "eje-transporte-publico",
+   "facts": [
+    "eje-transporte-publico--mitma-2025-pagos-ccaa-eell",
+    "eje-transporte-publico--ine-tv-2025-viajeros-regular",
+    "cgpj-2024-lanzamientos"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Personas usuarias del transporte público",
+     "text": "Del 1 de julio al 31 de diciembre de 2025: gratis hasta los 14 años, 50 % menos para jóvenes y 20 % menos en abonos; en Cercanías, abono mensual de 20 euros.",
+     "locator": "Artículos 7 y 20"
+    },
+    {
+     "actor": "Pensionistas",
+     "text": "Mientras no haya Presupuestos de 2025, las pensiones contributivas suben un 2,8 %, la pensión máxima es de 3.267,60 euros al mes y el complemento de brecha de género, de 35,90 euros al mes.",
+     "locator": "Artículos 64 y 65"
+    },
+    {
+     "actor": "Hogares vulnerables sin alternativa de vivienda",
+     "text": "Hasta el 31 de diciembre de 2025 se puede suspender su desahucio; el bono social eléctrico es del 50 % o 65 % hasta junio y del 42,5 % o 57,5 % después.",
+     "locator": "Artículos 72, apartado Uno, y 82"
+    },
+    {
+     "actor": "Propietarios con un desahucio en curso",
+     "text": "Hasta el 31 de diciembre de 2025 su procedimiento puede quedar suspendido si el hogar es vulnerable y no tiene alternativa de vivienda.",
+     "locator": "Artículo 72, apartado Uno"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion188/20260618/Votacion009/VOT_20260618162218.json": {
+   "question_id": "eje-transporte-publico",
+   "facts": [
+    "eje-transporte-publico--mitma-2026-mapa-concesional",
+    "eje-transporte-publico--ine-tv-2025-autobus-interurbano",
+    "eje-transporte-publico--ine-padron-2021-municipios-pequenos"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Personas usuarias del autobús estatal, sobre todo en el medio rural",
+     "text": "El Gobierno quedaría instado a garantizar como mínimo las paradas, los horarios, las frecuencias y las rutas actuales en el nuevo mapa concesional.",
+     "locator": "Punto 8 de la proposición (BOCG-15-D-535, pág. 10)"
+    },
+    {
+     "actor": "Comunidades autónomas",
+     "text": "Las nuevas licitaciones tendrían que incluir mecanismos de tráfico compartido con las comunidades para cubrir la conectividad que el Gobierno no atienda.",
+     "locator": "Punto 8 de la proposición (BOCG-15-D-535, pág. 10)"
+    },
+    {
+     "actor": "Ministerio de Transportes y futuras concesionarias",
+     "text": "Tendrían que mantener como mínimo todos los servicios actuales y preparar las licitaciones con ese compromiso.",
+     "locator": "Punto 8 de la proposición (BOCG-15-D-535, pág. 10)"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion079/20241121/Votacion039/VOT_20241121173836.json": {
+   "question_id": "eje-transporte-publico",
+   "facts": [
+    "eje-transporte-publico--ine-tv-2025-ferrocarril",
+    "eje-transporte-publico--ine-padron-2021-municipios-pequenos",
+    "eje-transporte-publico--eurostat-2024-reparto-viajeros"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Viajeros de zonas despobladas o con menos infraestructura",
+     "text": "Podrían tener más servicios de Cercanías, media y larga distancia y alta velocidad, con atención especial a esas zonas.",
+     "locator": "Punto 7 de la moción (BOCG-15-D-249, pág. 52)"
+    },
+    {
+     "actor": "Gobierno y Renfe",
+     "text": "Quedarían instados a reforzar y ampliar esos servicios, con el objetivo de conectar todas las regiones.",
+     "locator": "Punto 7 de la moción (BOCG-15-D-249, pág. 52)"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion010/VOT_20251008195225.json": {
+   "question_id": "eje-transporte-publico",
+   "facts": [
+    "eje-transporte-publico--boe-ley9-2025-estrategia-financiacion",
+    "eje-transporte-publico--mitma-2025-pagos-ccaa-eell",
+    "eje-transporte-publico--ine-tv-2025-viajeros-regular"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Gobierno",
+     "text": "Tendría que elaborar en seis meses desde la entrada en vigor una estrategia de financiación del transporte público y presentarla a la Conferencia Sectorial de Transportes.",
+     "locator": "Enmienda 130, disposición adicional nueva (BOCG-15-A-9-4, pág. 111)"
+    },
+    {
+     "actor": "Comunidades autónomas",
+     "text": "Podrían aportar propuestas a la estrategia, que buscaría un esquema estable y a largo plazo con todos los agentes implicados.",
+     "locator": "Enmienda 130, disposición adicional nueva (BOCG-15-A-9-4, pág. 111)"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion011/VOT_20251008195227.json": {
+   "question_id": "eje-transporte-publico",
+   "facts": [
+    "eje-transporte-publico--ine-tv-2025-viajeros-regular",
+    "eje-transporte-publico--mitma-2025-pagos-ccaa-eell",
+    "eje-transporte-publico--ecepov-2021-medio-trabajo"
+   ],
+   "direct_effects": [],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion012/VOT_20251008195228.json": {
+   "question_id": "eje-transporte-publico",
+   "facts": [
+    "eje-transporte-publico--ecepov-2021-medio-trabajo",
+    "eje-transporte-publico--mitma-2025-pagos-ccaa-eell",
+    "eje-transporte-publico--ine-tv-2025-viajeros-regular"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Operadores de transporte público",
+     "text": "Tendrían que respetar precios y tarifas reguladas, fijadas para asegurar que el transporte público sea accesible y asequible.",
+     "locator": "Enmienda 212, artículo 5 (principio rector 12)"
+    },
+    {
+     "actor": "Administraciones públicas",
+     "text": "Tendrían que coordinar sus políticas urbanas, territoriales, económicas y de movilidad para fomentar la ciudad de proximidad y reducir los desplazamientos habituales.",
+     "locator": "Enmienda 201, artículo 5 (principio rector 11)"
+    },
+    {
+     "actor": "Administración del Estado",
+     "text": "Antes de declarar una obligación de servicio público tendría que valorar otros modos de transporte y los beneficios sociales de mantener servicios, sobre todo ferroviarios.",
+     "locator": "Enmienda 186, artículo 45, letras b) y c)"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion013/VOT_20251008195229.json": {
+   "question_id": "eje-transporte-publico",
+   "facts": [
+    "eje-transporte-publico--ine-tv-2025-viajeros-regular",
+    "eje-transporte-publico--mitma-2025-pagos-ccaa-eell",
+    "eje-transporte-publico--miteco-gei-2025-transporte"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Personas usuarias",
+     "text": "El sistema de movilidad tendría que incluir servicios públicos regulares con horarios y frecuencias suficientes y tarifas y bonificaciones adecuadas, sobre todo en tren y Cercanías.",
+     "locator": "Enmienda 163, artículo 4, apartado 4"
+    },
+    {
+     "actor": "Administración General del Estado",
+     "text": "Tendría que dotar de financiación y recursos al sistema integrado y aportar, junto con las comunidades, a un modelo estable de financiación del transporte urbano.",
+     "locator": "Enmiendas 160 y 161, artículo 1, apartado 2.c) y e)"
+    },
+    {
+     "actor": "Comunidades autónomas",
+     "text": "Estarían en la comisión que elabora el documento estatal de orientaciones de movilidad y compartirían la financiación de infraestructuras que afecten a varias competencias.",
+     "locator": "Enmiendas 175 y 180, artículos 16.3 y 23.5"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion019/VOT_20251008195238.json": {
+   "question_id": "eje-transporte-publico",
+   "facts": [
+    "eje-transporte-publico--eurostat-2024-reparto-viajeros",
+    "eje-transporte-publico--ecepov-2021-medio-trabajo",
+    "eje-transporte-publico--ine-tv-2025-viajeros-regular"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Operadores de tren y autobús",
+     "text": "Tendrían que facilitar el uso combinado de su servicio con la bicicleta o ciclo y otros modos de emisiones nulas en trayectos urbanos e interurbanos.",
+     "locator": "Enmienda 214, artículo 40, apartado 2"
+    },
+    {
+     "actor": "Administraciones competentes",
+     "text": "Tendrían que coordinarse para facilitar billetes intermodales que reduzcan los precios del transporte.",
+     "locator": "Enmienda 214, artículo 40, apartado 2"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion020/VOT_20251008195240.json": {
+   "question_id": "eje-transporte-publico",
+   "facts": [
+    "eje-transporte-publico--ine-tv-2025-ferrocarril-larga-distancia",
+    "eje-transporte-publico--boe-ley9-2025-trenes-nocturnos"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Personas viajeras entre Galicia, Madrid y Cataluña y en conexiones internacionales",
+     "text": "Volverían los trenes nocturnos o tren hotel, suspendidos tras el estado de alarma por la pandemia, como el Atlántico (con Madrid) y el Galiza (con Cataluña).",
+     "locator": "Enmienda 227, disposición adicional nueva (BOCG-15-A-9-4, pág. 194)"
+    },
+    {
+     "actor": "Administración del Estado y operadores ferroviarios",
+     "text": "Tendrían que recuperar esos servicios nocturnos internacionales y estatales.",
+     "locator": "Enmienda 227, disposición adicional nueva (BOCG-15-A-9-4, pág. 194)"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion021/VOT_20251008195241.json": {
+   "question_id": "eje-transporte-publico",
+   "facts": [
+    "eje-transporte-publico--ine-tv-2025-ferrocarril",
+    "eje-transporte-publico--ine-padron-2021-municipios-pequenos",
+    "eje-transporte-publico--eurostat-2024-reparto-mercancias"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Habitantes del medio rural y de zonas despobladas",
+     "text": "Tendrían más frecuencias, medios y personal en líneas ferroviarias infrautilizadas hacia las cabeceras de comarca, con una política tarifaria permanente que incluiría bonificaciones y gratuidad para algunos colectivos.",
+     "locator": "Enmienda 228, disposición adicional nueva, punto 1 (BOCG-15-A-9-4, pág. 195)"
+    },
+    {
+     "actor": "Áreas urbanas y metropolitanas sin Cercanías",
+     "text": "Se implantaría el servicio de Cercanías con tarifas atractivas.",
+     "locator": "Enmienda 228, disposición adicional nueva, punto 2 (BOCG-15-A-9-4, pág. 195)"
+    },
+    {
+     "actor": "Transporte de mercancías",
+     "text": "Se impulsaría el tren de mercancías, en especial el corredor Atlántico, y se adaptarían las infraestructuras ferroviarias para convertirlas en autopistas ferroviarias.",
+     "locator": "Enmienda 228, disposición adicional nueva, punto 3 (BOCG-15-A-9-4, pág. 195)"
+    },
+    {
+     "actor": "Administración del Estado",
+     "text": "Tendría que extender y reforzar el transporte ferroviario donde sea posible, con el gasto que supone.",
+     "locator": "Enmienda 228, disposición adicional nueva (BOCG-15-A-9-4, pág. 195)"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion034/VOT_20251008195256.json": {
+   "question_id": "eje-transporte-publico",
+   "facts": [
+    "eje-transporte-publico--ine-tv-2025-ferrocarril",
+    "eje-transporte-publico--mitma-2025-pagos-ccaa-eell"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Administraciones que declaran obligaciones de servicio público en transporte estatal",
+     "text": "Dejarían de aplicarse al declararlas los principios del artículo 45 (necesidad y proporcionalidad, eficiencia, eficacia en el gasto público e intervención temporal).",
+     "locator": "Enmienda 375, supresión del artículo 45 (BOCG-15-A-9-4, pág. 322)"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion038/VOT_20251008195301.json": {
+   "question_id": "eje-transporte-publico",
+   "facts": [
+    "eje-transporte-publico--boe-lirpf-42-3-e",
+    "eje-transporte-publico--ecepov-2021-medio-trabajo",
+    "eje-transporte-publico--eurostat-2024-reparto-viajeros"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Trabajadores cuya empresa paga movilidad compartida",
+     "text": "Lo que la empresa pague por carsharing, motosharing, bicicleta compartida y otros vehículos de movilidad personal para ir al trabajo estaría exento de IRPF hasta 1.500 euros al año.",
+     "locator": "Enmienda 408, disposición final nueva (modifica el artículo 42.3.e de la Ley 35/2006; BOCG-15-A-9-4)"
+    },
+    {
+     "actor": "Hacienda pública",
+     "text": "Esas cantidades dejarían de tributar por IRPF dentro del límite de 1.500 euros por trabajador.",
+     "locator": "Enmienda 408, disposición final nueva (BOCG-15-A-9-4)"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion058/VOT_20251008195328.json": {
+   "question_id": "eje-transporte-publico",
+   "facts": [
+    "eje-transporte-publico--mitma-2025-pagos-ccaa-eell",
+    "eje-transporte-publico--miteco-gei-2025-transporte",
+    "eje-transporte-publico--eurostat-2024-reparto-viajeros"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Gobierno",
+     "text": "Tendría que crear un Fondo de carbono para la descarbonización del transporte, financiado con ingresos de las subastas de derechos de emisión, para pasar del coche al transporte público y de la carretera al tren.",
+     "locator": "Enmienda 302, disposición final nueva (artículo 91 bis de la Ley 2/2011; BOCG-15-A-9-4)"
+    },
+    {
+     "actor": "Servicios de transporte urbano y rural",
+     "text": "El fondo estatal podría financiar bicicletas, metros, tranvías, trenes de Cercanías y regionales y autobuses en ámbitos urbanos y rurales.",
+     "locator": "Enmienda 290, artículo 56, apartado 4"
+    },
+    {
+     "actor": "Ayuntamientos y operadoras urbanas",
+     "text": "Las subvenciones estatales a costes operativos no podrían superar la cuarta parte de su importe total ni el déficit de explotación, y las tarifas tendrían que cubrir al menos el 25 %.",
+     "locator": "Enmienda 291, artículo 61, apartados 1 y 2"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion061/VOT_20251008195331.json": {
+   "question_id": "eje-transporte-publico",
+   "facts": [
+    "eje-transporte-publico--boe-ley9-2025-estrategia-financiacion",
+    "eje-transporte-publico--mitma-2025-pagos-ccaa-eell",
+    "eje-transporte-publico--ine-tv-2025-viajeros-regular"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Gobierno",
+     "text": "Tendría que elaborar en un año desde la entrada en vigor una estrategia de financiación del transporte público y presentarla a la Conferencia Sectorial de Transportes.",
+     "locator": "Enmienda 296, disposición adicional 20.ª nueva, apartado 1"
+    },
+    {
+     "actor": "Comunidades autónomas",
+     "text": "Podrían aportar propuestas a la estrategia, que buscaría un esquema estable y a largo plazo con todos los agentes implicados.",
+     "locator": "Enmienda 296, disposición adicional 20.ª nueva, apartado 1"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion064/VOT_20251008195334.json": {
+   "question_id": "eje-transporte-publico",
+   "facts": [
+    "eje-transporte-publico--mitma-2025-pagos-ccaa-eell",
+    "eje-transporte-publico--ine-tv-2025-viajeros-regular",
+    "eje-transporte-publico--miteco-gei-2025-transporte"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Servicios de transporte colectivo urbano",
+     "text": "El Fondo Estatal de Contribución a la Movilidad Sostenible destinaría en primer lugar subvenciones directas a parte de sus costes operativos, con criterios objetivos, estables y proporcionales a la demanda.",
+     "locator": "Enmienda 320, artículo 58, apartado 1.a)"
+    },
+    {
+     "actor": "Proyectos de inversión en movilidad urbana",
+     "text": "Se financiarían en segundo lugar según el orden de prioridad de la enmienda, y en concurrencia competitiva.",
+     "locator": "Enmienda 320, artículo 58, apartado 1.b)"
+    },
+    {
+     "actor": "Territorios con reto demográfico",
+     "text": "El fondo podría sostener servicios fuera del ámbito urbano que ayuden a la descarbonización, la calidad del aire, la protección social o la despoblación.",
+     "locator": "Enmienda 320, artículo 58, apartado 1.c)"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion136/20251008/Votacion073/VOT_20251008195345.json": {
+   "question_id": "eje-transporte-publico",
+   "facts": [
+    "eje-transporte-publico--ine-padron-2021-municipios-grandes",
+    "eje-transporte-publico--boe-ley9-2025-aparcamientos-seguros",
+    "eje-transporte-publico--eurostat-2024-reparto-mercancias"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Municipios con transporte urbano",
+     "text": "Serían beneficiarios los de más de 50.000 habitantes, los de más de 20.000 con más de 36.000 unidades urbanas y las capitales de provincia o de comunidad; el resto, según un reglamento.",
+     "locator": "Enmienda 580, artículo 59, letra a)"
+    },
+    {
+     "actor": "Comunidades, consorcios y entidades supramunicipales",
+     "text": "También serían beneficiarias si prestan transporte interurbano, incluido el metropolitano y el rural.",
+     "locator": "Enmiendas 580 y 581, artículos 59 y 60"
+    },
+    {
+     "actor": "Municipios pequeños con transporte propio",
+     "text": "No tendrían derecho directo a la subvención; podrían recibirla solo si un reglamento fija condiciones para ellos.",
+     "locator": "Enmienda 580, artículo 59, letra a), punto 4.º"
+    },
+    {
+     "actor": "Conductores y empresas de transporte de mercancías",
+     "text": "El Ministerio, con las comunidades, haría un estudio nacional para elegir tramos con aparcamientos seguros para camiones y fijaría directrices para su explotación pública o privada.",
+     "locator": "Enmienda 597, artículo nuevo, apartados 1 a 3"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  }
+ }
+}

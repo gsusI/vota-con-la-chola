@@ -1,0 +1,297 @@
+{
+ "facts": {
+  "pool-politica-exterior--ine-id-2024-personal": {
+   "text": "En 2024 el personal de I+D en España sumó 295.290 personas (jornada completa), de ellas 184.382 investigadoras e investigadores; el gasto en I+D fue de 23.931 millones de euros, el 1,50 % del PIB.",
+   "period": "2024",
+   "source": "INE, Estadística sobre Actividades de I+D 2024 (nota de prensa, datos definitivos)",
+   "url": "https://www.ine.es/dyngs/Prensa/IMASD2024.htm"
+  },
+  "pool-politica-exterior--ine-ecp-2025-canarias-baleares": {
+   "text": "A 1 de enero de 2025 vivían 2.258.866 personas en Canarias y 1.249.844 en Illes Balears: unos 3,5 millones entre ambos archipiélagos.",
+   "period": "1 de enero de 2025",
+   "source": "INE, Estadística Continua de Población, tabla 56940",
+   "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=56940"
+  }
+ },
+ "statements": {},
+ "votes": {
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion013/20231219/Votacion004/VOT_20231219233113.json": {
+   "question_id": "pool-politica-exterior",
+   "facts": [
+    "eje-campo-comercio--eurostat-2025-francia-espana",
+    "eje-regulacion-economica--ine-tf-2025-viajeros"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Viajeros del Pirineo aragonés",
+     "text": "Podrían contar con la línea terminada entre Sagunto y Canfranc y con una conexión ferroviaria internacional con Francia.",
+     "locator": "Punto 1"
+    },
+    {
+     "actor": "Administraciones de España y Francia",
+     "text": "Tendrían que renegociar la inversión pública en el tramo francés Oloron-Canfranc y reunirse periódicamente en el grupo con Aragón y Nueva Aquitania.",
+     "locator": "Punto 2"
+    },
+    {
+     "actor": "Territorios de Aragón y Nueva Aquitania",
+     "text": "Podrían beneficiarse de fondos europeos y de nuevas ayudas, como las de rehabilitación del túnel entre ambos países.",
+     "locator": "Punto 3"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion103/20250326/Votacion002/VOT_20250326194436.json": {
+   "question_id": "pool-politica-exterior",
+   "facts": [
+    "eje-territorial-autogobierno--eurostat-2024-cooperacion"
+   ],
+   "direct_effects": [
+    {
+     "actor": "ONG de cooperación",
+     "text": "Podrían ver mantenida o reforzada la financiación pública de la cooperación al desarrollo frente a los recortes de algunas administraciones.",
+     "locator": "Punto 1"
+    },
+    {
+     "actor": "Personas en situaciones extremas en países en desarrollo",
+     "text": "Podrían recibir una cooperación española y europea más estable y orientada a la paz y los derechos humanos.",
+     "locator": "Puntos 2 y 3"
+    },
+    {
+     "actor": "Entidades locales",
+     "text": "Podrían ver reconocido su papel y promovida la cooperación descentralizada.",
+     "locator": "Punto 5"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion106/20250410/Votacion012/VOT_20250410155151.json": {
+   "question_id": "pool-politica-exterior",
+   "facts": [
+    "eje-campo-comercio--mapa-2025-comercio",
+    "eje-campo-ambiente--ine-epa-2026t2-agricultura"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Agricultores y ganaderos",
+     "text": "Podrían tener una PAC que preserve sus rentas y apoyo financiero ante la subida de fertilizantes y piensos.",
+     "locator": "Puntos 1 y 5"
+    },
+    {
+     "actor": "Sectores exportadores afectados por aranceles",
+     "text": "Podrían recibir medidas que paliasen el impacto de los aranceles y ayuda para abrir nuevos mercados.",
+     "locator": "Puntos 2 y 4"
+    },
+    {
+     "actor": "Consumidores y cadena alimentaria",
+     "text": "Podrían beneficiarse de una remuneración más justa en toda la cadena, según la Comunicación de la Comisión Europea.",
+     "locator": "Punto 6"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion112/20250520/Votacion004/VOT_20250520203914.json": {
+   "question_id": "pool-politica-exterior",
+   "facts": [
+    "pool-politica-exterior--ine-id-2024-personal"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Personal investigador",
+     "text": "Podría contar con más fondos europeos de I+D+i, con el programa ATRAE dotado de forma estable y con condiciones laborales dignas.",
+     "locator": "Puntos 1 a 3"
+    },
+    {
+     "actor": "Personal investigador con hijos o personas a cargo",
+     "text": "Podría tener garantizados permisos, bajas y licencias de conciliación y cuidados en esos programas.",
+     "locator": "Punto 3"
+    },
+    {
+     "actor": "Territorios con desequilibrios",
+     "text": "Podrían atraer y retener más talento científico gracias a los fondos europeos destinados a ellos.",
+     "locator": "Punto 1"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion148/20251119/Votacion002/VOT_20251119145816.json": {
+   "question_id": "pool-politica-exterior",
+   "facts": [
+    "eje-campo-comercio--mapa-pac-47724",
+    "eje-campo-comercio--ce-pac-2028-2034",
+    "eje-campo-ambiente--mapa-flota-2025"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Agricultores y ganaderos",
+     "text": "Podrían conservar la PAC como política autónoma, con presupuesto propio y ayudas directas protegidas, frente al recorte del 22 %.",
+     "locator": "Puntos 2 y 4"
+    },
+    {
+     "actor": "Sector pesquero",
+     "text": "Podría mantener la Política Pesquera Común con presupuesto propio, frente al recorte del 60 % propuesto.",
+     "locator": "Puntos 2 y 4"
+    },
+    {
+     "actor": "Zonas rurales",
+     "text": "Podrían ver protegidas las inversiones de desarrollo rural y del fondo marítimo y pesquero, separadas de la política de cohesión.",
+     "locator": "Punto 5"
+    },
+    {
+     "actor": "Canarias",
+     "text": "Podría mantener la dotación del POSEI por su insularidad, sin recortes ni integración en fondos multisectoriales.",
+     "locator": "Punto 6"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion159/20260212/Votacion006/VOT_20260212114313.json": {
+   "question_id": "pool-politica-exterior",
+   "facts": [
+    "eje-instituciones-reglas--moncloa-misiones-2024"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Gobierno de España",
+     "text": "No se aprobó; de haberse aprobado, tendría que mantener la defensa de la legalidad internacional y la paz como prioridad de su política exterior.",
+     "locator": "Punto 1"
+    },
+    {
+     "actor": "Diplomacia española",
+     "text": "No se aprobó; de haberse aprobado, tendría que seguir impulsando alianzas y denunciar las vulneraciones del Derecho Internacional.",
+     "locator": "Punto 2"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion177/20260430/Votacion004/VOT_20260430125145.json": {
+   "question_id": "pool-politica-exterior",
+   "facts": [
+    "pool-politica-exterior--ine-ecp-2025-canarias-baleares",
+    "eje-fiscalidad--ine-ipc-2026-energia"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Residentes de Canarias y Baleares",
+     "text": "Podrían recibir una compensación económica específica, ayudas de renta y la actualización de tramos bajos del IRPF.",
+     "locator": "Puntos 3 y 5 a 7"
+    },
+    {
+     "actor": "Empresas y sectores expuestos a la subida de costes",
+     "text": "Podrían recibir ayudas reforzadas y una revisión de los costes eléctricos no peninsulares.",
+     "locator": "Puntos 5 y 6"
+    },
+    {
+     "actor": "Transportistas y usuarios de puertos y aeropuertos insulares",
+     "text": "Podrían beneficiarse de un plan de garantía de abastecimiento y conectividad de combustibles y transporte.",
+     "locator": "Punto 4"
+    },
+    {
+     "actor": "Gobiernos de Canarias y Baleares",
+     "text": "Podrían contar con mesas permanentes de seguimiento y flexibilidad temporal en las reglas fiscales y de gasto.",
+     "locator": "Puntos 8 a 10"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion183/20260528/Votacion002/VOT_20260528125336.json": {
+   "question_id": "pool-politica-exterior",
+   "facts": [
+    "eje-territorial-autogobierno--ine-ecp-2025-poblacion-ccaa"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Hablantes de euskera, gallego y catalán",
+     "text": "Podrían ver estas lenguas como oficiales de la Unión Europea si el resto de Estados miembros lo apoyan.",
+     "locator": "Punto 7"
+    },
+    {
+     "actor": "Regiones y pueblos de la Unión",
+     "text": "Podrían tener voz propia en el marco institucional europeo mediante cambios normativos.",
+     "locator": "Puntos 5 y 6"
+    },
+    {
+     "actor": "Gobierno de España",
+     "text": "Tendría que apoyar en el Consejo Europeo una reforma de los Tratados con más capacidad de la UE en política exterior, seguridad y defensa.",
+     "locator": "Punto 4"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  },
+  "url:https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion191/20260625/Votacion016/VOT_20260625150808.json": {
+   "question_id": "pool-politica-exterior",
+   "facts": [
+    "eje-defensa-otan--ue-fondo-unico-2028-2034",
+    "eje-campo-comercio--mapa-pac-47724",
+    "eje-campo-ambiente--mapa-pac-2025-solicitudes"
+   ],
+   "direct_effects": [
+    {
+     "actor": "Agricultores y ganaderos",
+     "text": "Podrían conservar una PAC de dos pilares, con fondos propios y un presupuesto que, a precios de 2027, no baje del actual.",
+     "locator": "Puntos 2 y 5"
+    },
+    {
+     "actor": "Sector pesquero y Grupos de Acción Local Pesqueros",
+     "text": "Podrían evitar el recorte del 66 % del FEMPA y mantener el desarrollo local participativo.",
+     "locator": "Punto 6"
+    },
+    {
+     "actor": "Regiones ultraperiféricas",
+     "text": "Podrían mantener su reglamento agrícola autónomo y ver subida su dotación.",
+     "locator": "Punto 7"
+    },
+    {
+     "actor": "Comunidades autónomas",
+     "text": "Podrían evitar la recentralización de la PAC y exigir que su gobernanza respete el marco jurídico español.",
+     "locator": "Puntos 3 y 4"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "drafted_by": "claude-sonnet-5-5 (subagente, una pregunta)",
+    "drafted_at": "2026-10-13",
+    "human_reviewed": false
+   }
+  }
+ }
+}
