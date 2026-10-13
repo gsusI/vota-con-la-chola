@@ -2,7 +2,7 @@
 
 Estado actual (`2026-10-12`):
 - La app pública vive en `ui/site`; el build canónico es `just site-build` (el nombre es histórico) y la salida está en `ui/site/out/`.
-- `https://votaconlachola.org/` lo sirve el Worker `infra/cloudflare/votaconlachola-worker/`: shell y `_next` desde Workers Static Assets; todo lo demás desde el bucket R2 `vclc-site` (prefijo `site/`). Sin dependencias de GitHub ni Hugging Face en tiempo de ejecución.
+- `https://votaconlachola.org/` lo sirve el Worker `infra/cloudflare/votaconlachola-worker/`: todas las páginas y sus datos (~16k ficheros) como Workers Static Assets, que no ejecutan el Worker ni consumen su cuota de 100k peticiones/día; desde el bucket R2 `vclc-site` (prefijo `site/`) solo `spending/launch/`, ficheros > 25 MiB, `/releases/`, `/datasets/` y `/downloads/`. Sin dependencias de GitHub ni Hugging Face en tiempo de ejecución.
 - La rama `gh-pages` se retiró el `2026-10-12` (archivada en el tag `archive/gh-pages-20261012`; GitHub Pages despublicado): `just site-publish` sube `ui/site/out/` directamente a R2. El registro de cada publicación son los manifests de R2.
 - Cada sincronización publica `/releases/latest.json` y `/releases/<id>/manifest.json` (sha256 por fichero, commit de `main` del que salió el build y `source_dirty` si había cambios sin commitear en `ui/site`).
 - `/datasets/` replica el último snapshot Parquet de HF (verificado contra `checksums.sha256`); el explorador `/legacy/explorer/` lo lee ahí (`?source=hf` fuerza HF).
@@ -17,9 +17,9 @@ Publicar:
 just site-publish
 ```
 
-Construye y sincroniza `ui/site/out/` con R2 (`just site-origin-publish`; solo sube ficheros cambiados y verifica paridad antes de borrar). Necesita `R2_ACCESS_KEY_ID`/`R2_SECRET_ACCESS_KEY` en el entorno o en `.env` (el entorno gana; la cuenta sale de `R2_ACCOUNT_ID`/`CLOUDFLARE_ACCOUNT_ID` o, si faltan, del `account_id` de `infra/cloudflare/votaconlachola-worker/wrangler.toml`); sin ellas falla, porque una publicación no está completa hasta que el origen está sincronizado. `just etl-publish-hf` replica además el snapshot de HF en `/datasets/` (`just site-dataset-mirror`).
+Construye (frozen), toma el cerrojo de publicación en R2 (`locks/site-publish.json`, compartido por CI y sesiones locales), sube a R2 solo lo que R2 sirve, despliega las páginas como static assets del Worker y poda en R2 lo que ya no sirve. ~5 min en CI con cachés calientes (verificación PLACSP una vez por release, caché de Next). Necesita `R2_ACCESS_KEY_ID`/`R2_SECRET_ACCESS_KEY` (entorno o `.env`) y, para el Worker, la sesión OAuth de wrangler en local o `CLOUDFLARE_API_TOKEN` (plantilla «Edit Cloudflare Workers») en CI.
 
-El Worker cambia poco y se despliega a mano con la sesión OAuth de wrangler:
+`just site-publish` ya despliega el Worker; a mano solo hace falta para cambios de su código:
 
 ```bash
 just site-origin-worker-deploy
