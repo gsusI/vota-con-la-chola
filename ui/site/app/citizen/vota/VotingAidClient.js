@@ -236,7 +236,10 @@ function loadAtlas() {
 
 const AXIS_PAGE = 15;
 
-/** The axis of a statement as in the topic map: where each party pushed, and every vote with party choices. */
+/**
+ * The votes behind an axis statement, with each party's choice: the same ones the test counts (this axis first,
+ * confidence alta/media, current legislature), so the count and the party bars match the question.
+ */
 function AxisVotesPanel({ question }) {
   const [atlas, setAtlas] = useState(null);
   const [failed, setFailed] = useState(false);
@@ -251,7 +254,12 @@ function AxisVotesPanel({ question }) {
     };
   }, []);
   const axis = useMemo(() => (atlas ? indexAtlas(atlas).axisById[question.axis_id] : null), [atlas, question.axis_id]);
-  const votes = useMemo(() => (axis ? votesForAxis(atlas, axis.axis_id) : []), [atlas, axis]);
+  const votes = useMemo(
+    () => (axis ? votesForAxis(atlas, axis.axis_id).filter((v) => v.primary && v.confidence !== "baja") : []),
+    [atlas, axis],
+  );
+  // Party scores come from the question (towards the statement); flip them onto the axis poles.
+  const toAxis = question.pole === "-" ? -1 : 1;
   if (failed) return <p className="votingAidNotice">No se pudieron cargar las votaciones. Inténtalo de nuevo más tarde.</p>;
   if (!atlas) return <p className="votingAidMuted">Cargando votaciones…</p>;
   if (!axis) return <p className="votingAidMuted">Este tema ya no está en el mapa de temas.</p>;
@@ -261,20 +269,21 @@ function AxisVotesPanel({ question }) {
       <PoleLegend axis={axis} />
       <div className="atlasAxis__bars">
         {(atlas.parties || []).map((p) => {
-          const cell = atlas.party_axes?.[p.party_id]?.[axis.axis_id];
-          const score = cell && Number.isFinite(cell.score) ? cell.score : NaN;
+          const cell = question.cells?.[p.party_id];
+          const score = Number.isFinite(cell?.score) ? cell.score * toAxis : NaN;
           return (
             <DirectionBar
               key={p.party_id}
               label={p.label}
               score={score}
-              sub={cell ? `${directionText(axis, score)} · ${cell.votes} vot.` : "Sin votaciones"}
+              sub={Number.isFinite(score) ? `${directionText(axis, score)} · ${cell.votes_with_data} vot.` : "Sin votaciones"}
             />
           );
         })}
       </div>
       <p className="votingAidMuted">
-        {votes.length} votaciones, de la más reciente a la más antigua. <a href={axisMapHref(question)}>Abrir en el mapa de temas</a>
+        Las {votes.length} votaciones que cuentan en esta pregunta, de la más reciente a la más antigua.{" "}
+        <a href={axisMapHref(question)}>Abrir en el mapa de temas</a>
       </p>
       <ul className="atlasVotes">
         {votes.slice(0, shown).map((v) => (
