@@ -1,17 +1,11 @@
 name: Site deploy
 
-# Every push to main that changes what the site ships goes live: no local `just site-publish` needed.
+# Manual fallback: deploys are built locally (`just site-publish`, ~2.5-3 min vs ~5.5 min here; see
+# AGENTS.md). A push trigger would make every local deploy wait on this job's R2 publish lock.
 on:
-  push:
-    branches: [main]
-    paths:
-      - "ui/site/**"
-      - "infra/cloudflare/votaconlachola-worker/**"
   workflow_dispatch:
 
-# One deploy at a time. While one runs, only the newest push waits (GitHub supersedes older pending
-# runs), so a burst of pushes ships once, from the latest main. Local publishes and the nightly ETL
-# publish share the R2 publish lock with this job.
+# One deploy at a time; local publishes and the nightly ETL publish share the R2 publish lock with this job.
 concurrency:
   group: site-deploy
   cancel-in-progress: false
