@@ -74,6 +74,7 @@ export default function VotingAidMethodologyPage() {
   const qa = am.review?.qa || {};
   const qa14 = am.review?.qa_by_legislature?.["14"] || {};
   const qaEnm = am.review?.qa_by_legislature?.enmiendas || {};
+  const amd = am.amendments || {};
   const pct = (x) => (Number.isFinite(x) ? `${Math.round(x * 100)} %` : "—");
   const individualParties = (m.seed.parties || []).filter((p) => !p.group_codes?.length);
 
@@ -93,6 +94,7 @@ export default function VotingAidMethodologyPage() {
           <span className="chip">Cálculo sin IA, reproducible</span>
           <span className="chip">Resúmenes con IA revisados con IA</span>
           <span className="chip">Todas las votaciones del Congreso XV, por temas</span>
+          <span className="chip">Enmiendas leídas en el BOCG</span>
           <span className="chip">Versiones anteriores siempre accesibles</span>
           <span className="chip vaMethod__chipWarn">Falta revisión humana independiente</span>
           <span className="chip">Código y datos abiertos</span>
@@ -112,6 +114,10 @@ export default function VotingAidMethodologyPage() {
             <strong>{fmt(quality.statements_total)} preguntas clave + {fmt(poolMeta.items_total)} votaciones reales una a una</strong> (
             {fmt(totalQuestions)} preguntas en total), de {poolMeta.votes_first_date || "—"} a{" "}
             {meta.votes_last_date > (poolMeta.votes_last_date || "") ? meta.votes_last_date : poolMeta.votes_last_date || "—"}.
+          </li>
+          <li>
+            <strong>También las enmiendas:</strong> cada enmienda votada se leyó en el BOCG (su texto, no solo su número), así que las
+            direcciones por tema recogen también el trabajo fino sobre las leyes, sin que una ley con muchas enmiendas pese más que otra.
           </li>
           <li>
             <strong>Si una pregunta te parece demasiado general, respóndela por partes:</strong> se desglosa en votaciones concretas y
@@ -278,8 +284,14 @@ export default function VotingAidMethodologyPage() {
             las enmiendas del Senado (mensaje motivado) y el dictamen con los votos particulares (<Code rel={AMENDMENT_DOCS} />). Cada
             votación se empareja por número (rangos incluidos); las transaccionales, por las enmiendas que transaccionan; el «resto de las
             enmiendas» de un grupo, por sus enmiendas no votadas aparte (en los Presupuestos, solo las de esa sección); las del Senado, por
-            el tramo del mensaje motivado sobre ese precepto. Comprobación: en las {fmt(3594)} enmiendas numeradas, el firmante coincide
-            siempre con el grupo que cita la votación. Las clasificó otro prompt adaptado (<Code rel={AMENDMENT_PROMPT} />): votar Sí =
+            el tramo del mensaje motivado sobre ese precepto. Resultado: {fmt(amd.votes)} votaciones de enmiendas con partidos enfrentados en{" "}
+            {fmt(amd.bills)} leyes (Presupuestos 2023 incluidos); texto localizado en {fmt((amd.votes || 0) - (amd.by_resolution?.sin_texto || 0))}{" "}
+            ({fmt(amd.by_resolution?.numeros)} por número, {fmt(amd.by_resolution?.transaccional)} transaccionales,{" "}
+            {fmt(amd.by_resolution?.resto)} «resto», {fmt(amd.by_resolution?.senado)} del Senado, {fmt(amd.by_resolution?.voto_particular)}{" "}
+            votos particulares). Comprobación: en las 3.594 enmiendas numeradas, el firmante coincide siempre con el grupo que cita la
+            votación. Los propios clasificadores detectaron tres fallos del localizador (firmantes en plural, «resto» de los Presupuestos
+            sin filtrar por sección, el número propio de las transaccionales); se corrigieron en el código, con tests, y se
+            reclasificaron las votaciones cuyo texto cambió. Las clasificó otro prompt adaptado (<Code rel={AMENDMENT_PROMPT} />): votar Sí =
             incorporar la enmienda; partidas presupuestarias para una obra o un territorio = demanda local. Todas las enmiendas de una ley
             comparten un peso por eje, para que una ley con cien enmiendas no pese cien veces más. Muestra de control a ciegas:{" "}
             {pct(qaEnm.same_primary_axis)} mismo eje principal y {pct(qaEnm.same_sign_when_axis_shared)} mismo sentido (
@@ -295,9 +307,11 @@ export default function VotingAidMethodologyPage() {
             <Code rel={AXES_SEED} />).
           </li>
           <li>
-            <strong>Clasificación:</strong> 14 subagentes de Claude Opus 5.5 leyeron cada votación y decidieron hasta dos ejes, hacia qué
-            polo empuja votar Sí y con qué confianza, <strong>sin ver cómo votó ningún partido</strong>. Resultado: {fmt(cov.by_status?.con_eje)}{" "}
-            con eje y {fmt(cov.scored_votes)} que cuentan (confianza alta o media) (<Code rel={CLASSIFICATIONS_SEED} />).
+            <strong>Clasificación:</strong> subagentes de Claude Opus 5.5 leyeron cada votación y decidieron hasta dos ejes, hacia qué
+            polo empuja votar Sí y con qué confianza, <strong>sin ver cómo votó ningún partido</strong>: 14 para las votaciones de la XV, 4
+            para las de la XIV y 20 para las enmiendas de ambas, más 5 para reclasificar las votaciones cuyo texto cambió al corregir el
+            localizador de enmiendas ({fmt((am.review?.classified_by || []).length)} clasificadores en total). En la XV, {fmt(cov.by_status?.con_eje)}{" "}
+            votaciones tienen eje y {fmt(cov.scored_votes)} cuentan (confianza alta o media) (<Code rel={CLASSIFICATIONS_SEED} />).
           </li>
           <li>
             <strong>Control de calidad:</strong> otros 3 subagentes reclasificaron a ciegas una muestra aleatoria de{" "}
@@ -583,10 +597,24 @@ export default function VotingAidMethodologyPage() {
                 <td data-label="Comprobación">2 revisores Claude Sonnet 5.5 independientes · falta revisión humana</td>
               </tr>
               <tr>
-                <td data-label="Tarea">Clasificar cada votación en un eje temático ({fmt(cov.by_status?.con_eje)} con eje)</td>
-                <td data-label="Quién">Claude Opus 5.5 (14 subagentes, sin ver votos)</td>
+                <td data-label="Tarea">Clasificar cada votación (XV y XIV) en un eje temático</td>
+                <td data-label="Quién">Claude Opus 5.5 (18 subagentes, sin ver votos)</td>
                 <td data-label="Comprobación">
-                  Reclasificación a ciegas de {fmt(qa.votes_compared)} votaciones: {pct(qa.same_primary_axis)} mismo eje · falta revisión humana
+                  Reclasificación a ciegas: XV {pct(qa.same_primary_axis)} y XIV {pct(qa14.same_primary_axis)} mismo eje principal · falta
+                  revisión humana
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Tarea">Localizar el texto de cada enmienda votada en el BOCG y emparejarlo con su votación</td>
+                <td data-label="Quién">Código determinista (Python)</td>
+                <td data-label="Comprobación">Firmante = grupo citado en todas las enmiendas numeradas · tests automáticos</td>
+              </tr>
+              <tr>
+                <td data-label="Tarea">Clasificar cada enmienda en un eje temático</td>
+                <td data-label="Quién">Claude Opus 5.5 (20 subagentes + 5 de reclasificación, sin ver votos)</td>
+                <td data-label="Comprobación">
+                  Reclasificación a ciegas: {pct(qaEnm.same_primary_axis)} mismo eje principal, {pct(qaEnm.same_sign_when_axis_shared)} mismo
+                  sentido · falta revisión humana
                 </td>
               </tr>
               <tr>
@@ -777,7 +805,8 @@ export default function VotingAidMethodologyPage() {
           <li>
             <strong>Enmiendas leídas con límites:</strong> las votadas en bloque («resto de las enmiendas») y las transaccionales se leen de
             forma aproximada, y muchas enmiendas del Senado quedan sin texto ({fmt(cov.by_status?.["sin_eje:sin_texto"])} votaciones de la XV
-            sin texto suficiente, más {fmt(cov.by_status?.enmienda_sin_texto)} enmiendas sin localizar).
+            sin texto suficiente, más {fmt(cov.by_status?.enmienda_sin_texto)} enmiendas sin clasificar porque no se localizó su texto o no
+            enfrentaban a ningún partido).
           </li>
           <li>
             <strong>Senado sin voto por senador:</strong> sus datos abiertos enlazan los ficheros de votación de la XV, pero el servidor

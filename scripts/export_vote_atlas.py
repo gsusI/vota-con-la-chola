@@ -409,6 +409,7 @@ def build(conn: sqlite3.Connection, seed: dict[str, Any], axes_doc: dict[str, An
                 "scored_votes": len({ev["vote_event_id"] for ev, _a, _s in scored if ev["legislature"] == legislature}),
                 "axes_with_votes": sum(1 for ax in axis_ids if axis_votes[ax]),
             },
+            "amendments": {k: (amendment_docs or {}).get("meta", {}).get(k) for k in ("bills", "linked", "votes", "by_resolution")},
             "earlier_legislatures": {
                 lg: {"since": since, "events_total": sum(1 for e in events if e["legislature"] == lg),
                      "by_status": dict(sorted(status_by_leg[lg].items())),

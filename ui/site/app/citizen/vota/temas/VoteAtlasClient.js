@@ -218,8 +218,10 @@ export default function VoteAtlasClient() {
               {formatDate(meta.votes_last_date)}; <strong>{(cov.scored_votes || 0).toLocaleString("es-ES")}</strong> cuentan en algún eje.
             </li>
             <li>
-              Las enmiendas a las leyes (<strong>{(cov.by_status?.enmienda_sin_texto || 0).toLocaleString("es-ES")}</strong>) no se clasifican porque
-              los datos solo dan su número, no su texto; sí aparecen en la ficha de cada diputado.
+              Las enmiendas también cuentan: su texto se buscó en el BOCG (
+              {((meta.amendments?.votes || 0) - (meta.amendments?.by_resolution?.sin_texto || 0)).toLocaleString("es-ES")} de{" "}
+              {(meta.amendments?.votes || 0).toLocaleString("es-ES")} localizadas, XIV y XV) y todas las de una misma ley pesan como una sola
+              iniciativa. Puedes ocultarlas en la lista de votaciones de cada eje.
             </li>
             <li>
               Clasificación con IA a partir del texto oficial, sin ver cómo votó nadie; cada votación enlaza al Congreso y al BOCG.{" "}
