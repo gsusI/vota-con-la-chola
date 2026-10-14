@@ -1,6 +1,6 @@
 import { resolveBasePath } from "../../../path-utils.mjs";
 import VotingAidClient from "../VotingAidClient";
-import { SITE_ORIGIN, loadVotingAidSnapshot } from "../votingAidHooks.mjs";
+import { SITE_ORIGIN, loadVotingAidPageSnapshot } from "../votingAidHooks.mjs";
 import { CURRENT_VERSION, versionById } from "../votingAidVersions.mjs";
 
 // An earlier version of the test, kept online with its own questions and answers (see votingAidVersions.mjs).
@@ -16,5 +16,5 @@ export const metadata = {
 };
 
 export default function VotingAidV1Page() {
-  return <VotingAidClient snapshot={loadVotingAidSnapshot(version.id)} versionId={version.id} />;
+  return <VotingAidClient snapshot={loadVotingAidPageSnapshot(version.id)} versionId={version.id} />;
 }

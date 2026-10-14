@@ -31,6 +31,15 @@ export function loadVotingAidSnapshot(versionId = CURRENT_VERSION.id) {
   return readPublicJson(versionById(versionId).snapshot, { meta: {}, parties: [], statements: [] });
 }
 
+/**
+ * What a test page inlines in its HTML: the snapshot without each statement's vote list (~96% of the file, not
+ * needed for the first paint). The client fetches the full file right away (see VotingAidClient).
+ */
+export function loadVotingAidPageSnapshot(versionId = CURRENT_VERSION.id) {
+  const snapshot = loadVotingAidSnapshot(versionId);
+  return { ...snapshot, statements: (snapshot.statements || []).map(({ votes, ...st }) => st), slim: true };
+}
+
 /** Version a statement belongs to: the newest version that has it (hook pages of old versions keep working). */
 export function statementVersion(statementId) {
   for (const v of VOTING_AID_VERSIONS) {

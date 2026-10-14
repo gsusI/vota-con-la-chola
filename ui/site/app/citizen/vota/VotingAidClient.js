@@ -2127,8 +2127,11 @@ function restoreScroll(y) {
 // ---------------------------------------------------------------------------
 // Page
 
-export default function VotingAidClient({ snapshot, startStatementId = null, versionId = null }) {
+export default function VotingAidClient({ snapshot: pageSnapshot, startStatementId = null, versionId = null }) {
   const version = versionById(versionId);
+  // The page inlines the snapshot without its vote lists (fast first paint); the full file loads with the pool.
+  const [fullSnapshot, setFullSnapshot] = useState(pageSnapshot?.slim ? null : pageSnapshot);
+  const snapshot = fullSnapshot || pageSnapshot;
   const [staleShare, setStaleShare] = useState(false);
   const parties = useMemo(() => (Array.isArray(snapshot?.parties) ? snapshot.parties : []), [snapshot]);
   const meta = snapshot?.meta || {};
@@ -2222,6 +2225,21 @@ export default function VotingAidClient({ snapshot, startStatementId = null, ver
     };
   }, []);
 
+  useEffect(() => {
+    if (fullSnapshot) return undefined;
+    let cancelled = false;
+    fetch(withBasePath(`/${version.snapshot}`))
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`))))
+      // Without the vote lists the test still works: no evidence lists or «por partes» sub-questions.
+      .catch(() => pageSnapshot)
+      .then((data) => {
+        if (!cancelled) setFullSnapshot(data);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [fullSnapshot, pageSnapshot, version.snapshot]);
+
   // Load the pool of real votes (endless mode). The curated statements work even if this fails.
   useEffect(() => {
     let cancelled = false;
@@ -2243,7 +2261,7 @@ export default function VotingAidClient({ snapshot, startStatementId = null, ver
 
   // Restore answers (or a shared link) once the question set is final.
   useEffect(() => {
-    if (poolStatus === "loading") return undefined;
+    if (poolStatus === "loading" || !fullSnapshot) return undefined;
     function load(initial) {
       const code = shareCodeFromHash(window.location.hash);
       const shared = decodeAnyShareCode(questions, code);
@@ -2276,7 +2294,7 @@ export default function VotingAidClient({ snapshot, startStatementId = null, ver
     load(true);
     window.addEventListener("hashchange", onHashChange);
     return () => window.removeEventListener("hashchange", onHashChange);
-  }, [poolStatus, questions, startStatementId, version]);
+  }, [poolStatus, fullSnapshot, questions, startStatementId, version]);
 
   useEffect(() => {
     if (loaded && !fromShare) writeStoredState(version.storageKey, state);

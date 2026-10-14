@@ -1,6 +1,6 @@
 import { resolveBasePath } from "../../path-utils.mjs";
 import VotingAidClient from "./VotingAidClient";
-import { SITE_ORIGIN, hookImagePath, loadVotingAidSnapshot } from "./votingAidHooks.mjs";
+import { SITE_ORIGIN, hookImagePath, loadVotingAidPageSnapshot } from "./votingAidHooks.mjs";
 
 const title = "¿Con quién coincides? Generales | Vota Con La Chola";
 const description =
@@ -17,5 +17,5 @@ export const metadata = {
 };
 
 export default function VotingAidPage() {
-  return <VotingAidClient snapshot={loadVotingAidSnapshot()} />;
+  return <VotingAidClient snapshot={loadVotingAidPageSnapshot()} />;
 }
