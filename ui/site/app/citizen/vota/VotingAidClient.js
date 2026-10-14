@@ -2199,65 +2199,50 @@ export default function VotingAidClient({ snapshot: pageSnapshot, startStatement
   );
   const answeredCount = useMemo(() => Object.keys(state.answers).filter((id) => questionsById[id]).length, [state.answers, questionsById]);
 
-  // Official-text highlights, «Qué se votaba» bullets and «Ramificaciones» are optional: questions work without them.
+  // Data loads after the page's own load event so ~500 KB of JSON never competes with the first paint (LCP).
   useEffect(() => {
     let cancelled = false;
-    fetch(withBasePath(HIGHLIGHTS_PATH))
-      .then((r) => (r.ok ? r.json() : null))
-      .then((data) => {
-        if (!cancelled && data) setHighlights(data);
-      })
-      .catch(() => {});
-    fetch(withBasePath(BULLETS_PATH))
-      .then((r) => (r.ok ? r.json() : null))
-      .then((data) => {
-        if (!cancelled && data) setVoteBullets(data);
-      })
-      .catch(() => {});
-    fetch(withBasePath(IMPACTS_PATH))
-      .then((r) => (r.ok ? r.json() : null))
-      .then((data) => {
-        if (!cancelled && data) setVoteImpacts(data);
-      })
-      .catch(() => {});
+    const optional = (path, set) =>
+      fetch(withBasePath(path))
+        .then((r) => (r.ok ? r.json() : null))
+        .then((data) => {
+          if (!cancelled && data) set(data);
+        })
+        .catch(() => {});
+    function start() {
+      // The full snapshot (with vote lists). Without it the test still works: no evidence lists or «por partes».
+      if (pageSnapshot?.slim) {
+        fetch(withBasePath(`/${version.snapshot}`))
+          .then((r) => (r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`))))
+          .catch(() => pageSnapshot)
+          .then((data) => {
+            if (!cancelled) setFullSnapshot(data);
+          });
+      }
+      // The pool of real votes (endless mode). The curated statements work even if this fails.
+      fetch(withBasePath(POOL_PATH))
+        .then((r) => (r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`))))
+        .then((data) => {
+          if (!cancelled) {
+            setPool(data);
+            setPoolStatus("ready");
+          }
+        })
+        .catch(() => {
+          if (!cancelled) setPoolStatus("error");
+        });
+      // Official-text highlights, «Qué se votaba» bullets and «Ramificaciones» are optional.
+      optional(HIGHLIGHTS_PATH, setHighlights);
+      optional(BULLETS_PATH, setVoteBullets);
+      optional(IMPACTS_PATH, setVoteImpacts);
+    }
+    if (document.readyState === "complete") start();
+    else window.addEventListener("load", start, { once: true });
     return () => {
       cancelled = true;
+      window.removeEventListener("load", start);
     };
-  }, []);
-
-  useEffect(() => {
-    if (fullSnapshot) return undefined;
-    let cancelled = false;
-    fetch(withBasePath(`/${version.snapshot}`))
-      .then((r) => (r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`))))
-      // Without the vote lists the test still works: no evidence lists or «por partes» sub-questions.
-      .catch(() => pageSnapshot)
-      .then((data) => {
-        if (!cancelled) setFullSnapshot(data);
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, [fullSnapshot, pageSnapshot, version.snapshot]);
-
-  // Load the pool of real votes (endless mode). The curated statements work even if this fails.
-  useEffect(() => {
-    let cancelled = false;
-    fetch(withBasePath(POOL_PATH))
-      .then((r) => (r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`))))
-      .then((data) => {
-        if (!cancelled) {
-          setPool(data);
-          setPoolStatus("ready");
-        }
-      })
-      .catch(() => {
-        if (!cancelled) setPoolStatus("error");
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, []);
+  }, [pageSnapshot, version.snapshot]);
 
   // Restore answers (or a shared link) once the question set is final.
   useEffect(() => {
