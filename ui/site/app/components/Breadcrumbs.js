@@ -50,8 +50,12 @@ function formatBreadcrumb(segment, index, segments) {
     vota: "¿Con quién coincides?",
     metodologia: "Cómo se hizo",
     leaderboards: "Clasificaciones",
-    temas: "Mapa por temas",
+    temas: "Votaciones por tema",
     diputados: "Diputados",
+    explorar: "Explorar",
+    partidos: "Partidos",
+    votacion: "Votación",
+    mapa: "Mapa de partidos",
   };
 
   // Voting-aid version and share pages: /citizen/vota/v1/ and /citizen/vota/t/<statement>/.

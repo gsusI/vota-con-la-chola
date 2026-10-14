@@ -4,8 +4,8 @@ import { usePathname } from "next/navigation";
 import { stripBasePath, withBasePath } from "../path-utils.mjs";
 
 const VOTING_AID_PATH = "/citizen/vota/";
-// The test itself: current version, earlier versions (/v1/) and the per-question share pages (/t/<id>/).
-const TEST_PAGE = /^\/citizen\/vota\/(?:(?:v\d+|t(?:\/[^/]+)?)\/)?$/u;
+// Every voting-aid page (test, versions, share pages, Explorar) already carries the section nav.
+const TEST_PAGE = /^\/citizen\/vota\//u;
 
 export default function VotingAidBanner() {
   const pathname = stripBasePath(usePathname() || "/");

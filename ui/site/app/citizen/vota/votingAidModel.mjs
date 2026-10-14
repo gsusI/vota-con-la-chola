@@ -482,6 +482,63 @@ export function voteMix(question, partyId) {
   return total ? { yes: yes / total, abstain: abstain / total, no: no / total } : null;
 }
 
+// Which share of a party's vote mix matches each answer: agreeing = voting for, neutral = abstaining.
+const MIX_FOR_ANSWER = { agree: "yes", neutral: "abstain", disagree: "no" };
+
+/** Share (0..1) of a party's votes that went the way the user answered; null without a mix or an answer. */
+export function matchShare(mix, answer) {
+  const key = MIX_FOR_ANSWER[answer];
+  return mix && key ? mix[key] : null;
+}
+
+function joinNames(names) {
+  if (names.length > 4) return `${names.length} partidos`;
+  return names.length > 1 ? `${names.slice(0, -1).join(", ")} y ${names[names.length - 1]}` : names.join("");
+}
+
+/**
+ * Headline facts of the reveal, from the reaction groups only (no judgement): how many parties with data voted
+ * like the user, which mix share is «como tú» (yes / abstain / no), and one sentence naming who did not.
+ * `multi`: the question rests on many votes, so a party's stance is what it voted most of the time.
+ */
+export function revealSummary(answer, reactions, { multi = false } = {}) {
+  const r = reactions || { with: [], partial: [], against: [], none: [] };
+  const total = r.with.length + r.partial.length + r.against.length;
+  const names = (list) => joinNames(list.map((p) => p.label));
+  const plural = (list, one, many) => (list.length === 1 ? one : many);
+  const mostly = multi ? " mayoritariamente" : "";
+  const parts = [];
+  if (answer === "neutral") {
+    // «Neutral» matches abstaining: the others voted one way or the other.
+    const sideOf = (p) => (p.mix ? (p.mix.yes >= p.mix.no ? "yes" : "no") : (p.score ?? 0) >= 0 ? "yes" : "no");
+    const yes = r.partial.filter((p) => sideOf(p) === "yes");
+    const no = r.partial.filter((p) => sideOf(p) === "no");
+    if (yes.length) parts.push(`${names(yes)} ${plural(yes, "votó", "votaron")}${mostly} a favor.`);
+    if (no.length) parts.push(`${names(no)} ${plural(no, "votó", "votaron")}${mostly} en contra.`);
+  } else {
+    const opposite = answer === "agree" ? "en contra" : "a favor";
+    if (r.against.length) parts.push(`${names(r.against)} ${plural(r.against, "votó", "votaron")}${mostly} ${opposite}.`);
+    else if (total) parts.push("Ningún partido votó lo contrario.");
+    if (r.partial.length) parts.push(`${names(r.partial)} ${plural(r.partial, "quedó", "quedaron")} a medias: abstención o votos divididos.`);
+  }
+  if (r.none.length) parts.push(`Sin datos de ${names(r.none)}.`);
+  return { withCount: r.with.length, total, matching: MIX_FOR_ANSWER[answer] || null, sentence: parts.join(" ") };
+}
+
+// Below this top-to-bottom spread (20 points) every party sits in one narrow band that a few more answers can
+// reorder, so the results page says that no party stands out yet instead of letting the order speak.
+export const NARROW_SPREAD = 0.2;
+
+/** Lowest and highest match among scored rows, and whether they are all within NARROW_SPREAD. Null without rows. */
+export function resultsSpread(rows) {
+  const scored = (rows || []).filter((r) => Number.isFinite(r.match));
+  if (!scored.length) return null;
+  const values = scored.map((r) => r.match);
+  const min = Math.min(...values);
+  const max = Math.max(...values);
+  return { min, max, narrow: scored.length > 1 && max - min < NARROW_SPREAD };
+}
+
 /** Split a party's score details into match / partial / clash / none lists. */
 export function groupDetails(details = []) {
   const out = { match: [], partial: [], clash: [], none: [] };

@@ -428,3 +428,33 @@ test("topic navigation: one topic list for key questions and votes, next open qu
   assert.ok(!firstSub.next || byId[firstSub.next].source !== "curated");
   assert.equal(m.nextInTopic(withSubs, byId, {}, {}, split), byId[parent].subIds[0]);
 });
+
+test("reveal summary and results spread: plain facts from the groups", async () => {
+  const m = await import("../ui/site/app/citizen/vota/votingAidModel.mjs");
+  const p = (label, mix, score = null) => ({ party_id: label.toLowerCase(), label, mix, score });
+  const reactions = {
+    with: [p("A", { yes: 0, abstain: 0, no: 1 }), p("B", { yes: 0.1, abstain: 0, no: 0.9 })],
+    partial: [p("C", { yes: 0.5, abstain: 0.2, no: 0.3 })],
+    against: [p("D", { yes: 0.9, abstain: 0.05, no: 0.05 })],
+    none: [p("E", null)],
+  };
+  const s = m.revealSummary("disagree", reactions, { multi: true });
+  assert.equal(s.withCount, 2);
+  assert.equal(s.total, 4); // parties without data are not counted
+  assert.equal(s.matching, "no");
+  assert.equal(s.sentence, "D votó mayoritariamente a favor. C quedó a medias: abstención o votos divididos. Sin datos de E.");
+  assert.equal(m.revealSummary("agree", { with: reactions.against, partial: [], against: [], none: [] }).sentence, "Ningún partido votó lo contrario.");
+  const neutral = m.revealSummary("neutral", { with: [], partial: [reactions.against[0], reactions.with[0]], against: [], none: [] });
+  assert.equal(neutral.matching, "abstain");
+  assert.equal(neutral.sentence, "D votó a favor. A votó en contra.");
+  const many = ["F", "G", "H", "I", "J"].map((l) => p(l, null));
+  assert.match(m.revealSummary("agree", { with: [], partial: [], against: many, none: [] }).sentence, /^5 partidos votaron en contra\./u);
+  assert.equal(m.matchShare({ yes: 0.2, abstain: 0.3, no: 0.5 }, "agree"), 0.2);
+  assert.equal(m.matchShare({ yes: 0.2, abstain: 0.3, no: 0.5 }, "neutral"), 0.3);
+  assert.equal(m.matchShare(null, "agree"), null);
+
+  assert.equal(m.resultsSpread([]), null);
+  assert.deepEqual(m.resultsSpread([{ match: 0.5 }, { match: 0.6 }, { match: null }]), { min: 0.5, max: 0.6, narrow: true });
+  assert.equal(m.resultsSpread([{ match: 0.3 }, { match: 0.8 }]).narrow, false);
+  assert.equal(m.resultsSpread([{ match: 0.7 }]).narrow, false);
+});

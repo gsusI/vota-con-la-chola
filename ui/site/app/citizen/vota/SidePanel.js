@@ -34,7 +34,8 @@ export default function SidePanel({ open, onClose, title, children }) {
   return createPortal(
     <dialog
       aria-labelledby={titleId}
-      className="sidePanel"
+      // `vota` scopes the shell tokens (--v-*) inside the drawer: it is portalled out of the page's .vota wrapper.
+      className="sidePanel vota"
       onClick={(e) => e.target === e.currentTarget && onClose()}
       onClose={onClose}
       // Keep the question card's swipe-to-answer and shortcut keys out of the panel.
@@ -48,7 +49,9 @@ export default function SidePanel({ open, onClose, title, children }) {
             {title}
           </h2>
           <button aria-label="Cerrar" className="sidePanel__close" onClick={onClose} type="button">
-            ✕
+            <svg aria-hidden="true" fill="none" height="18" stroke="currentColor" strokeLinecap="round" strokeWidth="1.8" viewBox="0 0 24 24" width="18">
+              <path d="M6 6l12 12M18 6L6 18" />
+            </svg>
           </button>
         </header>
         <div className="sidePanel__body">{open ? children : null}</div>
