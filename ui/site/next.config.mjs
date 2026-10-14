@@ -39,6 +39,9 @@ const nextConfig = {
     unoptimized: true,
   },
   experimental: {
+    // CSS ships inside each page's HTML: no render-blocking stylesheet requests, so the first paint lands before
+    // the JS chunks finish (Lighthouse counts every request done before LCP as blocking it: LCP 5 s on mobile).
+    inlineCss: true,
     cpus: safeBuildCpus,
     staticGenerationMaxConcurrency: safeBuildCpus,
   },

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo } from "react";
+import { Suspense, useMemo } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { resolveBasePath, stripBasePath, withBasePath } from "../path-utils.mjs";
 
@@ -85,14 +85,9 @@ function formatBreadcrumb(segment, index, segments) {
   return decodeLabel(segment);
 }
 
-export default function Breadcrumbs() {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const basePath = resolveBasePath();
-
-  const initiativeParam = searchParams.get("initiative");
-
-  const crumbs = useMemo(() => {
+/** The trail; `initiativeParam` (from ?initiative=) adds two crumbs. */
+function useCrumbs(pathname, basePath, initiativeParam) {
+  return useMemo(() => {
     const rawSegments = normalizeSegment(stripBasePath(pathname || "", basePath)).split("/").filter(Boolean);
     const withDynamic = [...rawSegments];
 
@@ -123,7 +118,26 @@ export default function Breadcrumbs() {
 
     return out;
   }, [basePath, pathname, initiativeParam]);
+}
 
+// useSearchParams makes its Suspense boundary render client-side in the static export: the prerendered
+// fallback is the same trail without the query, so the HTML ships it and the client swap shifts nothing.
+function QueryAwareBreadcrumbs({ pathname, basePath }) {
+  return <BreadcrumbTrail basePath={basePath} pathname={pathname} initiativeParam={useSearchParams().get("initiative")} />;
+}
+
+export default function Breadcrumbs() {
+  const pathname = usePathname();
+  const basePath = resolveBasePath();
+  return (
+    <Suspense fallback={<BreadcrumbTrail basePath={basePath} pathname={pathname} />}>
+      <QueryAwareBreadcrumbs basePath={basePath} pathname={pathname} />
+    </Suspense>
+  );
+}
+
+function BreadcrumbTrail({ pathname, basePath, initiativeParam = null }) {
+  const crumbs = useCrumbs(pathname, basePath, initiativeParam);
   if (crumbs.length <= 1) {
     return null;
   }
