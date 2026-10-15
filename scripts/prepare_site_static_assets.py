@@ -29,9 +29,14 @@ def served_from_r2(rel: str, size: int) -> bool:
 HEADERS = """/*
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
-/_next/static/*
+/_next/static/chunks/*
+  Cache-Control: public, max-age=31536000, immutable
+/_next/static/css/*
+  Cache-Control: public, max-age=31536000, immutable
+/_next/static/media/*
   Cache-Control: public, max-age=31536000, immutable
 """
+# Not immutable: /_next/static/runtime/webpack.js keeps its name across builds (ui/site/next.config.mjs).
 
 
 def main() -> int:

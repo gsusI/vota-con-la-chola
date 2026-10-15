@@ -45,6 +45,18 @@ const nextConfig = {
     cpus: safeBuildCpus,
     staticGenerationMaxConcurrency: safeBuildCpus,
   },
+  // The webpack runtime maps every lazy JS/CSS chunk to its hash, so a hashed runtime name changed on any
+  // chunk edit and rewrote all ~1.5k HTML pages that load it (a votingAid.css tweak uploaded 1.7k files, 467 MB).
+  // Under a stable name only the pages that use the changed chunk change (~300 files); it is served
+  // revalidated, not immutable (scripts/prepare_site_static_assets.py).
+  webpack(config, { isServer, dev }) {
+    if (!isServer && !dev) {
+      const filename = config.output.filename;
+      config.output.filename = (pathData) =>
+        pathData.chunk?.name === "webpack" ? "static/runtime/webpack.js" : filename;
+    }
+    return config;
+  },
 };
 
 export default nextConfig;
