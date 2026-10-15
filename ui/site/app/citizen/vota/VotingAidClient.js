@@ -23,6 +23,7 @@ import {
   mergeImpacts,
   nextInTopic,
   nextQuestionId,
+  partyColor,
   partyReactions,
   pendingSubId,
   playOrder,
@@ -192,12 +193,12 @@ function EvidenceVote({ vote: v }) {
  * Evidence for a multi-vote statement, shown before answering: what kind of votes back it (plain summaries,
  * dates, official links), never how anyone voted. The full list with party votes lives in the topic map.
  */
-function AxisEvidence({ question, parties }) {
+function AxisEvidence({ question }) {
   const [panelOpen, setPanelOpen] = useState(false);
   const closePanel = useCallback(() => setPanelOpen(false), []);
   const votes = question.votes || [];
   return (
-    <section aria-label="Qué se votó" className="votingAidVoted votingAidAxisEvidence">
+    <div className="votingAidVoted votingAidAxisEvidence">
       <p className="votingAidVoted__title">
         Resume <strong>{question.votes_total} votaciones</strong> de {question.initiatives_total}{" "}
         {question.initiatives_total === 1 ? "iniciativa" : "iniciativas"} en el Congreso. Algunas:
@@ -230,15 +231,7 @@ function AxisEvidence({ question, parties }) {
         «A favor de» y «en contra de» indican qué voto cuenta como estar de acuerdo con la afirmación. Qué votación va a cada tema lo
         decidió una IA leyendo el texto oficial; falta la revisión humana.
       </p>
-      <Ramifications question={question} />
-      <AskAiToggle
-        label="¿Quieres más detalle? Que te lo explique una IA"
-        opts={{ mode: "explain" }}
-        parties={parties}
-        question={question}
-        title="Pide una explicación sencilla de lo que se votó (sin decirte qué votó cada partido):"
-      />
-    </section>
+    </div>
   );
 }
 
@@ -540,121 +533,151 @@ function SourceLink({ href, children }) {
   );
 }
 
+/** One always-open evidence block with an emoji heading, so the reader can scan and jump between them. */
+function EvSection({ id, emoji, title, children, tone = "" }) {
+  return (
+    <section aria-labelledby={`${id}-t`} className={`va-ev${tone ? ` va-ev--${tone}` : ""}`} id={id}>
+      <h2 className="va-ev__title" id={`${id}-t`}>
+        <span aria-hidden="true" className="va-ev__emoji">
+          {emoji}
+        </span>{" "}
+        {title}
+      </h2>
+      {children}
+    </section>
+  );
+}
+
+// Impact votes with something to show (who changes, knock-on effects or known unknowns).
+function effectVotes(question) {
+  return (question.ramifications?.votes || []).filter((v) => v.direct.length || v.indirect.length || v.gaps);
+}
+
 /**
- * «Ramificaciones»: who a vote affects and how many they are (official figures), and, open by default (as
- * important as who it affects), what changes for each group and the knock-on effects someone expects or fears, each with its source. Shown before
- * answering, so it never names who argued what: the Diario de Sesiones link says it.
+ * «A quién afecta»: who a vote affects and how many they are (official figures). Shown before answering.
  */
-function Ramifications({ question }) {
-  const [open, setOpen] = useState(true);
+function AffectedFacts({ question }) {
   const needImpacts = useContext(NeedImpactsContext);
   useEffect(() => needImpacts(question), [needImpacts, question.statement_id]);
-  const r = question.ramifications;
-  if (!r) return null;
-  const votes = r.votes.filter((v) => v.direct.length || v.indirect.length || v.gaps);
-  const many = votes.length > 1;
-  // Figures come from official sources; only the effects carry a review status.
-  const review = !votes.length ? "" : votes.some((v) => v.review === "draft") ? " · Efectos: borrador sin revisión humana" : " · Efectos: verificados con IA, sin revisión humana";
+  const facts = question.ramifications?.facts || [];
+  if (!facts.length) return null;
   return (
-    <div className="votingAidRamif">
-      {r.facts.length ? (
-        <>
-          <p className="votingAidVoted__title">
-            A quién afecta
-          </p>
-          <ul className="votingAidRamif__facts">
-            {r.facts.map((f) => (
-              <li key={f.id}>
-                {f.text}{" "}
-                <span className="votingAidVoted__loc">
-                  <SourceLink href={f.url}>{f.source}</SourceLink>, {f.period}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </>
+    <EvSection emoji="👥" id="va-ev-who" title="A quién afecta">
+      <ul className="votingAidRamif__facts">
+        {facts.map((f) => (
+          <li key={f.id}>
+            {f.text}{" "}
+            <span className="votingAidVoted__loc">
+              <SourceLink href={f.url}>{f.source}</SourceLink>, {f.period}
+            </span>
+          </li>
+        ))}
+      </ul>
+      <p className="votingAidMuted votingAidVoted__src">Cifras de fuentes oficiales.</p>
+    </EvSection>
+  );
+}
+
+/**
+ * «Qué cambiaría para cada colectivo» and the knock-on effects someone expects or fears, each with its source.
+ * Always open (as important as the question itself). Shown before answering, so it never names who argued
+ * what: the Diario de Sesiones link says it.
+ */
+function GroupEffects({ question }) {
+  const needImpacts = useContext(NeedImpactsContext);
+  useEffect(() => needImpacts(question), [needImpacts, question.statement_id]);
+  const votes = effectVotes(question);
+  if (!votes.length) return null;
+  const many = votes.length > 1;
+  const when = (v) => (many && v.vote_date ? <p className="votingAidRamif__when">Votación del {formatDate(v.vote_date)}</p> : null);
+  const direct = votes.filter((v) => v.direct.length);
+  const sides = [
+    ["📈", "Lo que se espera que mejore", "beneficio_esperado", "plus", "va-ev-up"],
+    ["⚠️", "Riesgos que se han señalado", "riesgo_senalado", "minus", "va-ev-risk"],
+  ];
+  const gaps = votes.filter((v) => v.gaps);
+  // Figures come from official sources; only the effects carry a review status.
+  const review = votes.some((v) => v.review === "draft") ? "Borrador sin revisión humana." : "Verificado con IA, sin revisión humana.";
+  return (
+    <>
+      {direct.length ? (
+        <EvSection emoji="🔄" id="va-ev-change" title="Qué cambiaría para cada colectivo">
+          {direct.map((v) => (
+            <div className="votingAidRamif__vote" key={v.vote_event_id}>
+              {when(v)}
+              <ul className="va-groupFx">
+                {v.direct.map((d) => (
+                  <li key={d.actor}>
+                    <strong className="va-groupFx__actor">{d.actor}</strong>
+                    <span>
+                      {d.text} <span className="votingAidVoted__loc">{d.locator}</span>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+          <p className="votingAidMuted votingAidVoted__src">Según el texto oficial votado. {review}</p>
+        </EvSection>
       ) : null}
-      {votes.length ? (
-        <p className="votingAidVoted__actions">
-          <button aria-expanded={open} className="votingAidLinkButton" onClick={() => setOpen((o) => !o)} type="button">
-            {open ? "Ocultar" : votes.some((v) => v.indirect.length) ? "Ver qué cambia para cada colectivo y posibles consecuencias" : "Ver qué cambia para cada colectivo"}
-          </button>
-        </p>
-      ) : null}
-      {open
-        ? votes.map((v) => {
-            const benefits = v.indirect.filter((e) => e.kind === "beneficio_esperado");
-            const risks = v.indirect.filter((e) => e.kind === "riesgo_senalado");
-            return (
+      {sides.map(([emoji, title, kind, tone, id]) => {
+        const withList = votes.map((v) => [v, v.indirect.filter((e) => e.kind === kind)]).filter(([, list]) => list.length);
+        if (!withList.length) return null;
+        return (
+          <EvSection emoji={emoji} id={id} key={kind} title={title} tone={tone}>
+            {withList.map(([v, list]) => (
               <div className="votingAidRamif__vote" key={v.vote_event_id}>
-                {many && v.vote_date ? <p className="votingAidRamif__when">Votación del {formatDate(v.vote_date)}</p> : null}
-                {v.direct.length ? (
-                  <>
-                    <p className="votingAidRamif__head">Qué cambiaría para cada colectivo</p>
-                    <ul className="votingAidVoted__list">
-                      {v.direct.map((d) => (
-                        <li key={d.actor}>
-                          <strong>{d.actor}:</strong> {d.text} <span className="votingAidVoted__loc">{d.locator}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </>
-                ) : null}
-                {[
-                  ["Lo que se espera que mejore", benefits, "plus"],
-                  ["Riesgos que se han señalado", risks, "minus"],
-                ].map(([title, list, tone]) =>
-                  list.length ? (
-                    <div className={`votingAidRamif__side votingAidRamif__side--${tone}`} key={tone}>
-                      <p className="votingAidRamif__head">{title}</p>
-                      <ul className="votingAidVoted__list">
-                        {list.map((e) => (
-                          <li key={e.text}>
-                            {e.text}{" "}
-                            <span className="votingAidVoted__loc">
-                              <span className="votingAidRamif__evidence">{EVIDENCE_LABELS[e.evidence] || e.evidence}</span>{" "}
-                              <SourceLink href={e.url}>{e.source}</SourceLink>, {e.locator}
-                            </span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ) : null,
-                )}
-                {v.gaps ? (
-                  <p className="votingAidMuted votingAidRamif__gaps">
-                    <strong>Lo que no se sabe:</strong> {v.gaps}
-                  </p>
-                ) : null}
+                {when(v)}
+                <ul className="votingAidVoted__list">
+                  {list.map((e) => (
+                    <li key={e.text}>
+                      {e.text}{" "}
+                      <span className="votingAidVoted__loc">
+                        <span className="votingAidRamif__evidence">{EVIDENCE_LABELS[e.evidence] || e.evidence}</span>{" "}
+                        <SourceLink href={e.url}>{e.source}</SourceLink>, {e.locator}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-            );
-          })
-        : null}
-      <p className="votingAidMuted votingAidVoted__src">
-        Cifras de fuentes oficiales.
-        {votes.some((v) => v.indirect.length) ? " Los efectos indirectos son previsiones con su fuente, no hechos; los del debate se resumen sin decir quién los dijo." : ""}
-        {review}
-      </p>
-    </div>
+            ))}
+            <p className="votingAidMuted votingAidVoted__src">
+              Previsiones con su fuente, no hechos; las del debate se resumen sin decir quién las dijo. {review}
+            </p>
+          </EvSection>
+        );
+      })}
+      {gaps.length ? (
+        <EvSection emoji="❓" id="va-ev-gaps" title="Lo que no se sabe">
+          {gaps.map((v) => (
+            <div className="votingAidRamif__vote" key={v.vote_event_id}>
+              {when(v)}
+              <p className="votingAidRamif__gaps">{v.gaps}</p>
+            </div>
+          ))}
+        </EvSection>
+      ) : null}
+    </>
   );
 }
 
 /**
  * «Qué se votaba»: plain-language bullets written from the official text (draft until reviewed), with a link
- * to the full text, the literal headings/points as evidence and the AI explanation for more detail.
+ * to the full text and the literal headings/points as evidence.
  * Shown before answering, so it never names the proposer nor says how anyone voted.
  */
-function WhatVoted({ question, parties }) {
+function WhatVoted({ question, hideSimple = false }) {
   const [literalFor, setLiteralFor] = useState(null);
   const [expanded, setExpanded] = useState({});
-  const items = question.whatVoted || [];
-  if (question.axis_id) return <AxisEvidence parties={parties} question={question} />;
+  // While answering, the card shows «En pocas palabras» above the answers: here go straight to the points.
+  const items = (question.whatVoted || []).map((w) => (hideSimple && w.simple ? { ...w, simple: "" } : w));
+  if (question.axis_id) return <AxisEvidence question={question} />;
   const many = items.length > 1;
   // Several votes behind one question: 3 bullets each until expanded, so the answers stay in reach.
   const fold = many ? 3 : 6;
   if (!items.length) return null;
   return (
-    <section aria-label="Qué se votaba" className="votingAidVoted">
+    <div className="votingAidVoted">
       <ScopeBadges question={question} />
       {items.map((w, i) => {
         const doc = w.doc || null;
@@ -663,9 +686,7 @@ function WhatVoted({ question, parties }) {
         if (w.status === "pending" && !doc) return null; // bullets still loading, or not drafted yet
         return (
           <div className="votingAidVoted__doc" key={`${w.vote_event_id}-${i}`}>
-            <p className="votingAidVoted__title">
-              Qué se votaba{many && w.vote_date ? ` (votación del ${formatDate(w.vote_date)})` : ""}
-            </p>
+            {many && w.vote_date ? <p className="votingAidRamif__when">Votación del {formatDate(w.vote_date)}</p> : null}
             {w.status === "ok" && w.simple ? (
               <p className="votingAidVoted__simple">
                 <span className="votingAidVoted__simpleLabel">En pocas palabras:</span> {w.simple}
@@ -717,15 +738,7 @@ function WhatVoted({ question, parties }) {
           </div>
         );
       })}
-      <Ramifications question={question} />
-      <AskAiToggle
-        label="¿Quieres más detalle? Que te lo explique una IA"
-        opts={{ mode: "explain" }}
-        parties={parties}
-        question={question}
-        title="Pide una explicación sencilla de lo que se vota (sin decirte qué votó cada partido):"
-      />
-    </section>
+    </div>
   );
 }
 
@@ -1070,10 +1083,16 @@ function ProgressHead({ stepLists: lists, questionsById, hereId, answers, split,
           <button aria-label="Temas y preguntas" className="va-iconBtn va-railToggle" onClick={onRail} type="button">
             <ListIcon />
           </button>
-          <button aria-label={isKey ? "Pregunta clave anterior" : "Votación anterior"} className="va-iconBtn" disabled={!prev} onClick={() => onStep(prev)} type="button">
+          <button aria-label={isKey ? "Pregunta clave anterior" : "Votación anterior"} aria-keyshortcuts="ArrowLeft" className="va-iconBtn va-iconBtn--key" disabled={!prev} onClick={() => onStep(prev)} type="button">
             <span aria-hidden="true">‹</span>
+            <span aria-hidden="true" className="va-key">
+              ←
+            </span>
           </button>
-          <button aria-label={isKey ? "Pregunta clave siguiente" : "Votación siguiente"} className="va-iconBtn" disabled={!next} onClick={() => onStep(next)} type="button">
+          <button aria-label={isKey ? "Pregunta clave siguiente" : "Votación siguiente"} aria-keyshortcuts="ArrowRight" className="va-iconBtn va-iconBtn--key" disabled={!next} onClick={() => onStep(next)} type="button">
+            <span aria-hidden="true" className="va-key">
+              →
+            </span>
             <span aria-hidden="true">›</span>
           </button>
         </span>
@@ -1210,35 +1229,128 @@ function questionMeta(question) {
   return n ? `Basada en ${n} ${n === 1 ? "votación" : "votaciones"} del Congreso.` : null;
 }
 
-/** «¿Qué se votó?»: the evidence behind the question, folded under the card (open state kept between questions). */
-function Evidence({ question, parties, open, onToggle }) {
-  const shown = Math.min(3, question.votes?.length || 0);
-  const summary = question.axis_id && shown ? `¿Qué se votó? ${shown === 3 ? "Tres" : shown} de las ${question.votes_total} votaciones` : "¿Qué se votó?";
+// Evidence blocks present for a question, in reading order, for the emoji jump bar.
+function evidenceSections(question, revealed) {
+  const votes = effectVotes(question);
+  const has = (kind) => votes.some((v) => v.indirect.some((e) => e.kind === kind));
+  return [
+    ["va-ev-voted", "📜", question.axis_id ? "Qué se votó" : "Qué se votaba", true],
+    ["va-ev-who", "👥", "A quién afecta", Boolean(question.ramifications?.facts?.length)],
+    ["va-ev-change", "🔄", "Qué cambia", votes.some((v) => v.direct.length)],
+    ["va-ev-up", "📈", "Mejoras", has("beneficio_esperado")],
+    ["va-ev-risk", "⚠️", "Riesgos", has("riesgo_senalado")],
+    ["va-ev-gaps", "❓", "Dudas", votes.some((v) => v.gaps)],
+    ["va-ev-ai", "🤖", revealed ? "Por qué votaron así" : "Pregunta a una IA", true],
+  ].filter((s) => s[3]);
+}
+
+function EvidenceJump({ question, revealed }) {
+  const sections = evidenceSections(question, revealed);
+  function jump(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const smooth = !window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    el.scrollIntoView({ behavior: smooth ? "smooth" : "auto", block: "start" });
+    el.querySelector("h2")?.focus?.({ preventScroll: true });
+  }
   return (
-    <details className="va-evidence" onToggle={(e) => onToggle(e.currentTarget.open)} open={open}>
-      <summary>
-        <span>{summary}</span>
-        <ChevronIcon />
-      </summary>
-      <div className="va-evidence__body">
-        <WhatVoted parties={parties} question={question} />
-        {question.source === "curated" && question.context && !question.axis_id ? (
-          <>
-            <p>{question.context}</p>
-            <QuestionLinks question={question} />
-          </>
-        ) : null}
-        {question.source === "pool" ? (
-          <p className="v-muted">
-            Fuentes oficiales: <QuestionLinks question={question} />
-          </p>
-        ) : null}
-      </div>
-    </details>
+    <nav aria-label="Ir a" className="va-jump">
+      {sections.map(([id, emoji, label]) => (
+        <button className="va-jump__chip" key={id} onClick={() => jump(id)} type="button">
+          <span aria-hidden="true">{emoji}</span> {label}
+        </button>
+      ))}
+    </nav>
   );
 }
 
-function QuestionCard({ question, parties, answer, important, onAnswer, onSkip, onImportant, onSplit, showSwipeHint, evidenceOpen, onEvidence }) {
+/** Side column: what was voted and who it affects, always open next to the question (and its reveal). */
+function EvidenceSide({ question, revealed }) {
+  return (
+    <aside aria-label="Qué se votó y a quién afecta" className="va-side">
+      <EvidenceJump question={question} revealed={revealed} />
+      <EvSection emoji="📜" id="va-ev-voted" title={question.axis_id ? "Qué se votó" : "Qué se votaba"}>
+        <WhatVoted hideSimple={!revealed} question={question} />
+        {question.source === "curated" && question.context && !question.axis_id ? (
+          <>
+            <p className="va-ev__p">{question.context}</p>
+            <p className="va-ev__p">
+              <QuestionLinks question={question} />
+            </p>
+          </>
+        ) : null}
+        {question.source === "pool" ? (
+          <p className="v-muted va-ev__p">
+            Fuentes oficiales: <QuestionLinks question={question} />
+          </p>
+        ) : null}
+      </EvSection>
+      <AffectedFacts question={question} />
+    </aside>
+  );
+}
+
+/** Under the question: what changes for each group, knock-on effects, and the AI / sources follow-ups. */
+function EvidenceBelow({ question, parties, revealed }) {
+  return (
+    <div className="va-below">
+      <GroupEffects question={question} />
+      <EvSection emoji="🤖" id="va-ev-ai" title={revealed ? "Por qué votaron así" : "Pregunta a una IA"}>
+        {revealed ? (
+          <>
+            <AskAiToggle
+              label="Pide a una IA los argumentos de cada partido"
+              opts={{}}
+              parties={parties}
+              question={question}
+              title="Pide que te expliquen qué se votó y los argumentos de cada partido:"
+            />
+            <p className="va-linksRow">
+              <QuestionLinks question={question} />
+            </p>
+            <p className="va-linksRow">
+              <ShareQuestionButton question={question} />
+            </p>
+          </>
+        ) : (
+          <AskAiToggle
+            label="Que te lo explique una IA, sin decirte qué votó cada partido"
+            opts={{ mode: "explain" }}
+            parties={parties}
+            question={question}
+            title="Pide una explicación sencilla de lo que se votó (sin decirte qué votó cada partido):"
+          />
+        )}
+      </EvSection>
+    </div>
+  );
+}
+
+// «En pocas palabras» lines of the votes behind a question (status ok), shown right above the answers.
+function simpleLines(question) {
+  return (question.whatVoted || []).filter((w) => w.status === "ok" && w.simple);
+}
+
+function SimpleSummary({ question }) {
+  const lines = simpleLines(question);
+  if (!lines.length) return null;
+  const many = lines.length > 1;
+  return (
+    <div className="va-simple">
+      <p className="va-simple__label">
+        <span aria-hidden="true">💬</span> En pocas palabras
+      </p>
+      {lines.map((w, i) => (
+        <p className="va-simple__text" key={`${w.vote_event_id}-${i}`}>
+          {many && w.vote_date ? <span className="votingAidRamif__when">Votación del {formatDate(w.vote_date)}: </span> : null}
+          {w.simple}
+        </p>
+      ))}
+    </div>
+  );
+}
+
+function QuestionCard({ question, answer, important, onAnswer, onSkip, onImportant, onSplit, showSwipeHint }) {
   const headingRef = useRef(null);
   useEffect(() => {
     headingRef.current?.focus({ preventScroll: true });
@@ -1272,6 +1384,7 @@ function QuestionCard({ question, parties, answer, important, onAnswer, onSkip, 
           {meta ? <p className="va-qmeta">{meta}</p> : null}
           {parentLabel(question) ? <p className="va-qmeta">{parentLabel(question)}</p> : null}
         </div>
+        <SimpleSummary question={question} />
         <div aria-label="Tu respuesta" className="va-sheet" role="group">
           {showSwipeHint ? (
             <p aria-hidden="true" className="va-swipeHint">
@@ -1314,16 +1427,21 @@ function QuestionCard({ question, parties, answer, important, onAnswer, onSkip, 
               >
                 <SplitIcon />
                 Depende<span className="va-wide">: responder votación a votación</span>
+                <span aria-hidden="true" className="va-key">
+                  4
+                </span>
               </button>
             ) : null}
             <button aria-keyshortcuts="S" className="va-extra va-extra--skip" onClick={onSkip} type="button">
               <span className="va-wide">No lo sé · saltar</span>
               <span className="va-narrow">Saltar</span>
+              <span aria-hidden="true" className="va-key">
+                S
+              </span>
             </button>
           </div>
         </div>
       </div>
-      <Evidence onToggle={onEvidence} open={evidenceOpen} parties={parties} question={question} />
     </section>
   );
 }
@@ -1411,8 +1529,10 @@ function MixRow({ party, answer }) {
   const share = matchShare(mix, answer);
   const pct = (f) => Math.round(f * 100);
   return (
-    <li className="va-mixRow">
-      <span className="va-mixRow__label">{party.label}</span>
+    <li className="va-mixRow" style={{ "--party": partyColor(party.party_id) }}>
+      <span className="va-mixRow__label">
+        <span aria-hidden="true" className="va-dot" /> {party.label}
+      </span>
       {mix ? (
         <span
           aria-label={`${party.label}: ${pct(mix.yes)} % a favor, ${pct(mix.abstain)} % abstención, ${pct(mix.no)} % en contra`}
@@ -1464,7 +1584,7 @@ function VotesLink({ question }) {
   ) : null;
 }
 
-function RevealCard({ question, parties, answer, reactions, topBefore, onNext, onChange, onSplit }) {
+function RevealCard({ question, answer, reactions, topBefore, onNext, onChange, onSplit }) {
   const nextRef = useRef(null);
   const titleId = useId();
   useEffect(() => {
@@ -1560,81 +1680,57 @@ function RevealCard({ question, parties, answer, reactions, topBefore, onNext, o
         </div>
         <VotesLink question={question} />
       </div>
-      <details className="va-more">
-        <summary>
-          <span>Qué se votó, a quién afecta y por qué votaron así</span>
-          <ChevronIcon />
-        </summary>
-        <div className="va-more__body">
-          <WhatVoted parties={parties} question={question} />
-          <p className="va-linksRow">
-            <QuestionLinks question={question} />
-          </p>
-          <AskAiToggle
-            label="¿Por qué votaron así? Pregúntale a una IA"
-            opts={{}}
-            parties={parties}
-            question={question}
-            title="Pide que te expliquen qué se votó y los argumentos de cada partido:"
-          />
-          <p className="va-linksRow">
-            <ShareQuestionButton question={question} />
-          </p>
-        </div>
-      </details>
     </section>
   );
 }
 
-/** «Tu afinidad»: top five while answering; the whole ranking with ▲/▼ moves right after an answer. */
-function AffinityPanel({ results, previousRanks, revealing, onOpen }) {
+/**
+ * «Tu afinidad»: a slim banner over the question (the evidence matters more), each party in its own color.
+ * Right after an answer it shows ▲/▼ moves.
+ */
+function AffinityBanner({ results, previousRanks, revealing, onOpen }) {
   const titleId = useId();
-  const scored = results.filter((r) => r.match !== null);
-  const rows = revealing ? scored : scored.slice(0, 5);
+  const rows = results.filter((r) => r.match !== null);
   return (
-    <aside aria-labelledby={titleId} className="va-aff">
-      <div className="va-aff__card">
-        <h2 className="v-kicker" id={titleId}>
-          {revealing ? "Tu afinidad · tras esta respuesta" : "Tu afinidad hasta ahora"}
-        </h2>
-        {rows.length === 0 ? (
-          <p className="v-muted">Responde para ver con qué partidos coincides.</p>
-        ) : (
-          <ol className="va-aff__list">
-            {rows.map((row, i) => {
-              const before = previousRanks[row.partyId];
-              const delta = revealing && before !== undefined ? before - i : 0;
-              return (
-                <li key={row.partyId}>
-                  <span className="va-aff__line">
-                    <span className="va-aff__name">
-                      <span className="va-pos">{pad2(i + 1)}</span> {row.label}
-                      {delta ? (
-                        <span className={`va-move ${delta > 0 ? "is-up" : "is-down"}`}>
-                          <span aria-hidden="true"> {delta > 0 ? `▲${delta}` : `▼${-delta}`}</span>
-                          <span className="v-sr">
-                            {" "}
-                            ({delta > 0 ? "sube" : "baja"} {Math.abs(delta)} {Math.abs(delta) === 1 ? "puesto" : "puestos"})
-                          </span>
-                        </span>
-                      ) : null}
+    <section aria-labelledby={titleId} className="va-affBar">
+      <h2 className="va-affBar__title" id={titleId}>
+        {revealing ? "Tu afinidad tras esta respuesta" : "Tu afinidad hasta ahora"}
+      </h2>
+      {rows.length === 0 ? (
+        <p className="va-affBar__empty">Responde para ver con qué partidos coincides.</p>
+      ) : (
+        <ol className="va-affBar__list">
+          {rows.map((row, i) => {
+            const before = previousRanks[row.partyId];
+            const delta = revealing && before !== undefined ? before - i : 0;
+            return (
+              <li className="va-affBar__item" key={row.partyId} style={{ "--party": partyColor(row.partyId) }}>
+                <span className="va-affBar__line">
+                  <span aria-hidden="true" className="va-dot" />
+                  <span className="va-affBar__name">{row.label}</span>
+                  <span className="va-affBar__pct">{pctText(row.match)}</span>
+                  {delta ? (
+                    <span className={`va-move ${delta > 0 ? "is-up" : "is-down"}`}>
+                      <span aria-hidden="true">{delta > 0 ? `▲${delta}` : `▼${-delta}`}</span>
+                      <span className="v-sr">
+                        {" "}
+                        ({delta > 0 ? "sube" : "baja"} {Math.abs(delta)} {Math.abs(delta) === 1 ? "puesto" : "puestos"})
+                      </span>
                     </span>
-                    <span className="va-aff__pct">{pctText(row.match)}</span>
-                  </span>
-                  <span aria-hidden="true" className="v-meter">
-                    <span style={{ width: `${Math.round(row.match * 100)}%` }} />
-                  </span>
-                </li>
-              );
-            })}
-          </ol>
-        )}
-        <button className="v-link-btn va-aff__more" onClick={onOpen} type="button">
-          Ver los {results.length} partidos →
-        </button>
-      </div>
-      {revealing && rows.length ? <p className="v-muted va-aff__note">Las flechas marcan cuántos puestos ha subido o bajado cada partido con esta respuesta.</p> : null}
-    </aside>
+                  ) : null}
+                </span>
+                <span aria-hidden="true" className="va-affBar__meter">
+                  <span style={{ width: `${Math.round(row.match * 100)}%` }} />
+                </span>
+              </li>
+            );
+          })}
+        </ol>
+      )}
+      <button className="v-link-btn va-affBar__more" onClick={onOpen} type="button">
+        Ver resultados →
+      </button>
+    </section>
   );
 }
 
@@ -1918,7 +2014,12 @@ function ResultsView({
                 const top = row.match !== null && i < 3;
                 return (
                   <li key={row.partyId}>
-                    <button className={`va-rank__btn${top ? " is-top" : ""}`} onClick={() => onParty(row.partyId)} type="button">
+                    <button
+                      className={`va-rank__btn${top ? " is-top" : ""}`}
+                      onClick={() => onParty(row.partyId)}
+                      style={{ "--party": partyColor(row.partyId) }}
+                      type="button"
+                    >
                       <span className="va-rank__pos">{row.match === null ? "–" : pad2(i + 1)}</span>
                       <span className="va-rank__label">{row.label}</span>
                       <span aria-hidden="true" className="va-rank__bar">
@@ -2167,7 +2268,6 @@ export default function VotingAidClient({ snapshot: pageSnapshot, startStatement
   // Topic the user chose to stay in (null: all topics, mixed in play order).
   const [focusTopic, setFocusTopic] = useState(null);
   // «¿Qué se votó?» stays as the user left it from one question to the next; the topic drawer is for narrow screens.
-  const [evidenceOpen, setEvidenceOpen] = useState(false);
   const [railOpen, setRailOpen] = useState(false);
   const closeRail = useCallback(() => setRailOpen(false), []);
   const topRef = useRef(null);
@@ -2690,6 +2790,7 @@ export default function VotingAidClient({ snapshot: pageSnapshot, startStatement
 
         {view === "play" ? (
           <div className="va-play">
+            <AffinityBanner onOpen={() => show("results")} previousRanks={previousRanks} results={results} revealing={Boolean(revealQuestion)} />
             {shown ? (
               <ProgressHead
                 answeredCount={answeredCount}
@@ -2715,7 +2816,6 @@ export default function VotingAidClient({ snapshot: pageSnapshot, startStatement
                     }}
                     onNext={() => goPlay()}
                     onSplit={() => splitStatement(revealQuestion.statement_id)}
-                    parties={parties}
                     question={revealQuestion}
                     reactions={partyReactions(revealQuestion, state.answers[revealQuestion.statement_id], parties)}
                     topBefore={topBefore}
@@ -2723,15 +2823,12 @@ export default function VotingAidClient({ snapshot: pageSnapshot, startStatement
                 ) : current ? (
                   <QuestionCard
                     answer={state.answers[current.statement_id]}
-                    evidenceOpen={evidenceOpen}
                     important={state.important[current.statement_id]}
                     key={current.statement_id}
                     onAnswer={answer}
-                    onEvidence={setEvidenceOpen}
                     onImportant={(v) => setImportant(current.statement_id, v)}
                     onSkip={skip}
                     onSplit={() => splitStatement(current.statement_id)}
-                    parties={parties}
                     question={current}
                     showSwipeHint={answeredCount < 3}
                   />
@@ -2744,6 +2841,10 @@ export default function VotingAidClient({ snapshot: pageSnapshot, startStatement
                     </button>
                   </div>
                 )}
+              </div>
+              {shown ? <EvidenceSide key={`s-${shown.statement_id}`} question={shown} revealed={Boolean(revealQuestion)} /> : null}
+              <div className="va-play__below">
+                {shown ? <EvidenceBelow key={`b-${shown.statement_id}`} parties={parties} question={shown} revealed={Boolean(revealQuestion)} /> : null}
                 <div className="va-play__foot">
                   <label className="va-check">
                     <input checked={state.showReveal !== false} onChange={(e) => update({ ...state, showReveal: e.target.checked })} type="checkbox" />
@@ -2752,7 +2853,6 @@ export default function VotingAidClient({ snapshot: pageSnapshot, startStatement
                   <p className="va-shortcuts">Teclado: 1 · 2 · 3 responder · 4 depende · S saltar · Intro seguir · ← → moverse</p>
                 </div>
               </div>
-              <AffinityPanel onOpen={() => show("results")} previousRanks={previousRanks} results={results} revealing={Boolean(revealQuestion)} />
             </div>
             <SidePanel onClose={closeRail} open={railOpen} title="Temas y preguntas">
               {rail}

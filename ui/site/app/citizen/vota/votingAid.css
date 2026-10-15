@@ -1431,20 +1431,46 @@ html.has-sideDrawer {
   background: var(--v-ink);
 }
 
+/* Grid: rail | question + group effects | what was voted and who it affects. On one column the side block
+   goes right under the question, before the effects, so the evidence reads in order. */
 .va-play__grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(260px, 320px);
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 380px);
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "main side"
+    "below side";
   align-items: start;
-  gap: 32px;
+  gap: 24px 32px;
 }
 
 .va-play__rail {
   display: none;
+  grid-area: rail;
+}
+
+.va-play__main {
+  grid-area: main;
+}
+
+.va-side {
+  grid-area: side;
+}
+
+.va-play__below {
+  grid-area: below;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 @media (min-width: 1180px) {
   .va-play__grid {
-    grid-template-columns: 240px minmax(0, 1fr) 300px;
+    grid-template-columns: 220px minmax(0, 1fr) minmax(320px, 400px);
+    grid-template-areas:
+      "rail main side"
+      "rail below side";
   }
   .va-play__rail {
     display: block;
@@ -1457,6 +1483,12 @@ html.has-sideDrawer {
 @media (max-width: 899px) {
   .va-play__grid {
     grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
+    grid-template-areas:
+      "main"
+      "side"
+      "below";
+    gap: 16px;
   }
 }
 
@@ -1867,54 +1899,6 @@ html.has-sideDrawer {
   color: var(--v-no-ink);
 }
 
-/* «¿Qué se votó?» and the reveal's «more» disclosure. */
-.va-evidence,
-.va-more {
-  min-width: 0;
-  padding: 0 28px;
-  border: 1px solid var(--v-line);
-  border-radius: var(--v-radius);
-  background: var(--v-card);
-}
-
-.va-reveal .va-more {
-  padding: 0 20px;
-  border-color: var(--v-line-2);
-  background: var(--v-paper);
-}
-
-.va-evidence > summary,
-.va-more > summary {
-  min-height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  font-weight: 600;
-  list-style: none;
-  cursor: pointer;
-}
-
-.va-evidence > summary::-webkit-details-marker,
-.va-more > summary::-webkit-details-marker {
-  display: none;
-}
-
-.va-evidence[open] > summary .va-chevron,
-.va-more[open] > summary .va-chevron {
-  transform: rotate(180deg);
-}
-
-.va-evidence__body,
-.va-more__body {
-  min-width: 0;
-  display: grid;
-  gap: 10px;
-  padding: 14px 0 20px;
-  border-top: 1px solid var(--v-line-2);
-}
-
-.va-evidence__body > p,
 .va-linksRow {
   margin: 0;
 }
@@ -2050,6 +2034,9 @@ html.has-sideDrawer {
 }
 
 .va-mixRow__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   font-weight: 500;
 }
 
@@ -2123,64 +2110,113 @@ html.has-sideDrawer {
   }
 }
 
-/* «Tu afinidad» side panel. */
-.va-aff {
-  min-width: 0;
+/* «Tu afinidad»: slim banner over the question, one chip per party in its color. */
+.va-affBar {
   display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-@media (min-width: 900px) {
-  .va-aff {
-    position: sticky;
-    top: 16px;
-  }
-}
-
-.va-aff__card {
-  padding: 22px 22px 14px;
+  align-items: center;
+  gap: 12px 16px;
+  margin-bottom: 16px;
+  padding: 10px 14px;
   border: 1px solid var(--v-line);
-  border-radius: var(--v-radius);
+  border-radius: var(--v-radius-s);
   background: var(--v-card);
 }
 
-.va-aff .v-kicker {
-  font-size: 0.75rem;
-  letter-spacing: 0.06em;
-}
-
-.va-aff__list {
-  list-style: none;
-  margin: 14px 0 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.va-aff__list li {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.va-aff__line {
-  display: flex;
-  justify-content: space-between;
-  gap: 8px;
-  font-size: 0.875rem;
-}
-
-.va-pos {
+.va-affBar__title {
+  flex: none;
+  margin: 0;
+  max-width: 9em;
   font-family: var(--v-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   color: var(--v-soft);
 }
 
-.va-aff__pct {
+.va-affBar__empty {
+  flex: 1;
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--v-soft);
+}
+
+.va-affBar__list {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  gap: 8px;
+  margin: 0;
+  padding: 2px 0;
+  list-style: none;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.va-affBar__item {
+  flex: none;
+  min-width: 104px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 6px 10px 7px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--party) 9%, var(--v-card));
+}
+
+.va-affBar__item:first-child {
+  box-shadow: inset 0 0 0 1.5px var(--party);
+}
+
+.va-affBar__line {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  white-space: nowrap;
+}
+
+.va-affBar__name {
+  font-weight: 600;
+}
+
+.va-affBar__pct {
+  margin-left: auto;
   font-family: var(--v-mono);
   font-weight: 500;
+}
+
+.va-affBar__meter {
+  display: block;
+  height: 5px;
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--party) 18%, var(--v-sunk));
+  overflow: hidden;
+}
+
+.va-affBar__meter > span {
+  display: block;
+  height: 100%;
+  border-radius: 3px;
+  background: var(--party);
+}
+
+.va-affBar__more {
+  flex: none;
+  font-size: 0.82rem;
+  font-weight: 500;
   white-space: nowrap;
+}
+
+.va-dot {
+  flex: none;
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--party, var(--v-faint));
+  vertical-align: baseline;
 }
 
 .va-move {
@@ -2196,16 +2232,158 @@ html.has-sideDrawer {
   color: var(--v-no-ink);
 }
 
-.va-aff__more {
-  margin-top: 8px;
-  font-size: 0.875rem;
-  font-weight: 500;
+/* Evidence: always-open blocks with emoji headings (side column + under the question). */
+.va-side {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
-.va-aff__note {
-  margin: 0;
-  padding: 0 4px;
+@media (min-width: 900px) {
+  .va-side {
+    position: sticky;
+    top: 16px;
+    max-height: calc(100vh - 32px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+  }
+}
+
+.va-jump {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.va-jump__chip {
+  min-height: 34px;
+  padding: 4px 11px;
+  border: 1px solid var(--v-line);
+  border-radius: 999px;
+  background: var(--v-card);
+  color: var(--v-ink);
+  font: inherit;
   font-size: 0.82rem;
+  cursor: pointer;
+}
+
+.va-jump__chip:hover {
+  background: var(--v-sunk);
+}
+
+.va-ev {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px 18px 18px;
+  border: 1px solid var(--v-line);
+  border-radius: var(--v-radius);
+  background: var(--v-card);
+  scroll-margin-top: 16px;
+}
+
+.va-ev--plus {
+  border-left: 4px solid var(--v-teal);
+}
+
+.va-ev--minus {
+  border-left: 4px solid var(--v-no);
+}
+
+.va-ev__title {
+  margin: 0;
+  font-family: var(--v-sans);
+  font-size: 1.02rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.va-ev__title:focus {
+  outline: none;
+}
+
+.va-ev__emoji {
+  font-size: 1.1em;
+}
+
+.va-ev__p {
+  margin: 0;
+}
+
+.va-ev .votingAidVoted,
+.va-ev .votingAidRamif__vote {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+}
+
+.va-groupFx {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.va-groupFx li {
+  display: grid;
+  gap: 2px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: var(--v-paper);
+  font-size: 0.94rem;
+  line-height: 1.45;
+}
+
+.va-groupFx__actor {
+  font-size: 0.88rem;
+}
+
+/* «En pocas palabras» right above the answer buttons. */
+.va-simple {
+  display: grid;
+  gap: 4px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: var(--v-paper);
+}
+
+.va-simple__label {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--v-soft);
+}
+
+.va-simple__text {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.45;
+  color: var(--v-ink-2);
+}
+
+/* Prev/next with their arrow key. */
+.va-iconBtn--key {
+  width: auto;
+  min-width: 44px;
+  gap: 6px;
+  padding: 0 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.va-iconBtn--key .va-key {
+  font-size: 0.7rem;
+}
+
+.va-extra .va-key {
+  margin-left: 4px;
 }
 
 /* ---- Results ---- */
@@ -2281,8 +2459,12 @@ html.has-sideDrawer {
   background: var(--v-teal-soft);
 }
 
+.va-rank__fill {
+  background: color-mix(in srgb, var(--party, var(--v-teal)) 45%, var(--v-card));
+}
+
 .va-rank__btn.is-top .va-rank__fill {
-  background: var(--v-teal);
+  background: var(--party, var(--v-teal));
 }
 
 .va-rank__mid {
@@ -2671,15 +2853,9 @@ html.has-sideDrawer {
   .va-narrow {
     display: inline;
   }
-  .va-evidence,
-  .va-more,
-  .va-reveal .va-more {
-    padding: 0 16px;
-    border-radius: 12px;
-  }
-  .va-evidence > summary {
-    min-height: 48px;
-    font-weight: 500;
+  .va-ev {
+    padding: 14px 16px 16px;
+    border-radius: 14px;
   }
   .va-reveal {
     gap: 16px;
@@ -2741,8 +2917,28 @@ html.has-sideDrawer {
   .va-reveal__actions .va-votesLink {
     margin-left: 0;
   }
-  .va-aff__card {
-    padding: 16px;
+  .va-affBar {
+    margin: 0 -16px 12px;
+    padding: 8px 16px;
+    border-width: 1px 0;
+    border-radius: 0;
+  }
+  .va-affBar {
+    flex-wrap: wrap;
+    gap: 6px 12px;
+  }
+  .va-affBar__title {
+    max-width: none;
+  }
+  .va-affBar__more {
+    margin-left: auto;
+  }
+  .va-affBar__list {
+    order: 3;
+    flex-basis: 100%;
+  }
+  .va-affBar__item {
+    min-width: 92px;
   }
   .va-chipsRow {
     flex-wrap: nowrap;

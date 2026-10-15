@@ -991,3 +991,23 @@ function highlightLines(question, compact = false, hasPlainBullets = false) {
   }
   return lines;
 }
+
+// Habitual brand colors, only as a visual cue next to the party name (never the only carrier of meaning).
+export const PARTY_COLORS = {
+  psoe: "#e30613",
+  pp: "#1d5fae",
+  vox: "#5bb52a",
+  sumar: "#e5007e",
+  podemos: "#6c2a7c",
+  erc: "#f5a800",
+  junts: "#00b1a3",
+  bildu: "#a3bd15",
+  pnv: "#1f7a3a",
+  bng: "#6aaedc",
+  cc: "#f2cc00",
+  upn: "#2a52be",
+};
+
+export function partyColor(partyId) {
+  return PARTY_COLORS[partyId] || "#8a8f98";
+}
