@@ -1511,11 +1511,20 @@ html.has-sideDrawer {
   color: var(--v-soft);
 }
 
+.va--nokeys .va-key {
+  display: none;
+}
+
 @media (hover: none) {
   .va-shortcuts,
+  .va-check--keys,
   .va-key {
     display: none;
   }
+}
+
+.v-btn .va-key {
+  margin-left: 6px;
 }
 
 /* Topic rail (inline on wide screens, in the side drawer otherwise). */

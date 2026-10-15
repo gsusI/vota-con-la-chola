@@ -45,7 +45,11 @@ import { DirectionBar, PoleLegend, VoteRow } from "./temas/VoteAtlasClient";
 import { ATLAS_PATH, directionText, formatCount, indexAtlas, votesForAxis } from "./voteAtlasModel.mjs";
 
 const ANSWER_ORDER = ["agree", "neutral", "disagree"];
-const EMPTY_STATE = { answers: {}, important: {}, skipped: {}, split: {}, history: [], seed: 0, streak: 0, bestStreak: 0, showReveal: true, excludeOmnibus: false };
+// WASD layer, by physical key (event.code) so it works on any layout: A left = disagree (like a left swipe),
+// D right = agree, S down = neutral. 1 · 2 · 3 keep working in button order.
+const ANSWER_KEYS = { agree: "D", neutral: "S", disagree: "A" };
+const KEY_ANSWERS = { KeyA: "disagree", KeyS: "neutral", KeyD: "agree" };
+const EMPTY_STATE = { answers: {}, important: {}, skipped: {}, split: {}, history: [], seed: 0, streak: 0, bestStreak: 0, showReveal: true, excludeOmnibus: false, shortcuts: true };
 const AGREEMENT_LABELS = { match: "Coincidís", partial: "A medias", clash: "Discrepáis", none: "Sin datos" };
 const AGREEMENT_ICONS = { match: "✓", partial: "≈", clash: "✗", none: "–" };
 const POOL_PATH = "/citizen/data/voting_aid_pool_v1.json";
@@ -73,6 +77,7 @@ function cleanState(raw) {
   out.bestStreak = Number.isInteger(raw.bestStreak) ? raw.bestStreak : 0;
   out.showReveal = raw.showReveal !== false;
   out.excludeOmnibus = raw.excludeOmnibus === true;
+  out.shortcuts = raw.shortcuts !== false;
   return out;
 }
 
@@ -1083,15 +1088,15 @@ function ProgressHead({ stepLists: lists, questionsById, hereId, answers, split,
           <button aria-label="Temas y preguntas" className="va-iconBtn va-railToggle" onClick={onRail} type="button">
             <ListIcon />
           </button>
-          <button aria-label={isKey ? "Pregunta clave anterior" : "Votación anterior"} aria-keyshortcuts="ArrowLeft" className="va-iconBtn va-iconBtn--key" disabled={!prev} onClick={() => onStep(prev)} type="button">
+          <button aria-label={isKey ? "Pregunta clave anterior" : "Votación anterior"} aria-keyshortcuts="Q ArrowLeft" className="va-iconBtn va-iconBtn--key" disabled={!prev} onClick={() => onStep(prev)} type="button">
             <span aria-hidden="true">‹</span>
             <span aria-hidden="true" className="va-key">
-              ←
+              Q
             </span>
           </button>
-          <button aria-label={isKey ? "Pregunta clave siguiente" : "Votación siguiente"} aria-keyshortcuts="ArrowRight" className="va-iconBtn va-iconBtn--key" disabled={!next} onClick={() => onStep(next)} type="button">
+          <button aria-label={isKey ? "Pregunta clave siguiente" : "Votación siguiente"} aria-keyshortcuts="E ArrowRight" className="va-iconBtn va-iconBtn--key" disabled={!next} onClick={() => onStep(next)} type="button">
             <span aria-hidden="true" className="va-key">
-              →
+              E
             </span>
             <span aria-hidden="true">›</span>
           </button>
@@ -1394,7 +1399,7 @@ function QuestionCard({ question, answer, important, onAnswer, onSkip, onImporta
           <div className="va-answers">
             {ANSWER_ORDER.map((value, i) => (
               <button
-                aria-keyshortcuts={String(i + 1)}
+                aria-keyshortcuts={`${ANSWER_KEYS[value]} ${i + 1}`}
                 aria-pressed={answer === value}
                 className="va-answer"
                 key={value}
@@ -1402,24 +1407,33 @@ function QuestionCard({ question, answer, important, onAnswer, onSkip, onImporta
                 type="button"
               >
                 <span aria-hidden="true" className="va-key">
-                  {i + 1}
+                  {ANSWER_KEYS[value]}
                 </span>
                 {labels[value]}
               </button>
             ))}
           </div>
           <div className={`va-extras${subCount ? "" : " va-extras--two"}`}>
-            <button aria-pressed={Boolean(important)} className={`va-extra${important ? " is-on" : ""}`} onClick={() => onImportant(!important)} type="button">
+            <button
+              aria-keyshortcuts="W"
+              aria-pressed={Boolean(important)}
+              className={`va-extra${important ? " is-on" : ""}`}
+              onClick={() => onImportant(!important)}
+              type="button"
+            >
               <StarIcon filled={Boolean(important)} />
               Me importa
               <span className="va-wide">
                 {" "}
                 mucho <span className="va-soft">· cuenta doble</span>
               </span>
+              <span aria-hidden="true" className="va-key">
+                W
+              </span>
             </button>
             {subCount ? (
               <button
-                aria-keyshortcuts="4"
+                aria-keyshortcuts="F 4"
                 className="va-extra"
                 onClick={onSplit}
                 title={`Responde por partes: ${subCount} votaciones concretas en vez de esta pregunta resumen`}
@@ -1428,15 +1442,15 @@ function QuestionCard({ question, answer, important, onAnswer, onSkip, onImporta
                 <SplitIcon />
                 Depende<span className="va-wide">: responder votación a votación</span>
                 <span aria-hidden="true" className="va-key">
-                  4
+                  F
                 </span>
               </button>
             ) : null}
-            <button aria-keyshortcuts="S" className="va-extra va-extra--skip" onClick={onSkip} type="button">
+            <button aria-keyshortcuts="X" className="va-extra va-extra--skip" onClick={onSkip} type="button">
               <span className="va-wide">No lo sé · saltar</span>
               <span className="va-narrow">Saltar</span>
               <span aria-hidden="true" className="va-key">
-                S
+                X
               </span>
             </button>
           </div>
@@ -1658,6 +1672,7 @@ function RevealCard({ question, answer, reactions, topBefore, onNext, onChange, 
       <div className="va-reveal__actions">
         <div className="va-reveal__bar">
           <button
+            aria-keyshortcuts="Space Enter"
             className={`v-btn v-btn--primary va-next${autoNext ? " is-auto" : ""}`}
             onClick={onNext}
             ref={nextRef}
@@ -1671,11 +1686,14 @@ function RevealCard({ question, answer, reactions, topBefore, onNext, onChange, 
             ) : null}
             Siguiente pregunta
             <span aria-hidden="true" className="va-key va-key--dark">
-              Intro
+              Espacio
             </span>
           </button>
-          <button className="v-btn" onClick={onChange} type="button">
+          <button aria-keyshortcuts="R" className="v-btn" onClick={onChange} type="button">
             Cambiar<span className="va-wide"> respuesta</span>
+            <span aria-hidden="true" className="va-key">
+              R
+            </span>
           </button>
         </div>
         <VotesLink question={question} />
@@ -2640,18 +2658,21 @@ export default function VotingAidClient({ snapshot: pageSnapshot, startStatement
     scrollTop();
   }
 
-  // Keyboard: 1/2/3 answer, 4 «depende» (split), S skip, Enter next after the reveal, ← → previous/next question.
+  // Keyboard (can be turned off): A/S/D or 1/2/3 answer, W «me importa», F or 4 «depende» (split), X skip,
+  // Space/Enter next and R change after the reveal, Q/E or ← → previous/next question.
   useEffect(() => {
-    if (view !== "play") return undefined;
+    if (view !== "play" || state.shortcuts === false) return undefined;
     function onKey(event) {
       if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
       const tag = event.target?.tagName;
-      if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
-      if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+      if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT" || event.target?.isContentEditable) return;
+      const code = event.code;
+      const back = event.key === "ArrowLeft" || code === "KeyQ";
+      if (back || event.key === "ArrowRight" || code === "KeyE") {
         const here = revealId || currentId;
         if (!here) return;
         const { prev, next } = stepNeighbors(steps, questionsById, here);
-        const target = event.key === "ArrowLeft" ? prev : next;
+        const target = back ? prev : next;
         if (target) {
           event.preventDefault();
           goPlay(target);
@@ -2660,19 +2681,30 @@ export default function VotingAidClient({ snapshot: pageSnapshot, startStatement
       }
       if (event.target?.closest?.(".va-rail")) return; // keys typed while browsing the topic list do not answer
       if (revealId) {
-        if (event.key === "Enter" && tag !== "BUTTON" && tag !== "A") {
+        // A focused button already reacts to Space/Enter by itself.
+        if ((event.key === "Enter" || code === "Space") && tag !== "BUTTON" && tag !== "A") {
           event.preventDefault();
           goPlay();
+        } else if (code === "KeyR") {
+          event.preventDefault();
+          setCurrentId(revealId);
+          setRevealId(null);
         }
         return;
       }
       if (["1", "2", "3"].includes(event.key)) {
         event.preventDefault();
         answer(ANSWER_ORDER[Number(event.key) - 1]);
-      } else if (event.key === "4" && current?.subIds?.length) {
+      } else if (KEY_ANSWERS[code]) {
+        event.preventDefault();
+        answer(KEY_ANSWERS[code]);
+      } else if (code === "KeyW" && current) {
+        event.preventDefault();
+        setImportant(current.statement_id, !state.important[current.statement_id]);
+      } else if ((event.key === "4" || code === "KeyF") && current?.subIds?.length) {
         event.preventDefault();
         splitStatement(current.statement_id);
-      } else if (event.key === "s" || event.key === "S") {
+      } else if (code === "KeyX") {
         event.preventDefault();
         skip();
       }
@@ -2752,7 +2784,7 @@ export default function VotingAidClient({ snapshot: pageSnapshot, startStatement
 
   return (
     <NeedImpactsContext.Provider value={needImpacts}>
-      <main className={`va${view === "play" ? ` va--play${revealQuestion ? " is-reveal" : ""}` : ""}`} ref={topRef}>
+      <main className={`va${view === "play" ? ` va--play${revealQuestion ? " is-reveal" : ""}` : ""}${state.shortcuts === false ? " va--nokeys" : ""}`} ref={topRef}>
         <Toast toast={toast} />
         {view === "intro" || !version.current || staleShare ? (
           <div className="va-top">
@@ -2850,7 +2882,15 @@ export default function VotingAidClient({ snapshot: pageSnapshot, startStatement
                     <input checked={state.showReveal !== false} onChange={(e) => update({ ...state, showReveal: e.target.checked })} type="checkbox" />
                     Mostrar cómo votó cada partido después de responder
                   </label>
-                  <p className="va-shortcuts">Teclado: 1 · 2 · 3 responder · 4 depende · S saltar · Intro seguir · ← → moverse</p>
+                  <label className="va-check va-check--keys">
+                    <input checked={state.shortcuts !== false} onChange={(e) => update({ ...state, shortcuts: e.target.checked })} type="checkbox" />
+                    Atajos de teclado
+                  </label>
+                  {state.shortcuts !== false ? (
+                    <p className="va-shortcuts">
+                      A · S · D (o 1 · 2 · 3) responder · W me importa · F depende · X saltar · Espacio seguir · R cambiar · Q · E (o ← →) moverse
+                    </p>
+                  ) : null}
                 </div>
               </div>
             </div>
