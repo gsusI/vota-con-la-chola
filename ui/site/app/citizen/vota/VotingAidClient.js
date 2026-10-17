@@ -817,30 +817,11 @@ function Toast({ toast }) {
 // ---------------------------------------------------------------------------
 // Intro
 
-function IntroView({ meta, questionsTotal, curatedTotal, poolStatus, parties, answeredCount, onStart, onResults }) {
+/** What the test is, its sources and its caveats (the intro, and «Sobre el test» on the dashboard). */
+function IntroFacts({ meta, curatedTotal, parties }) {
   const keyVotes = meta?.quality?.votes_total;
   return (
-    <section aria-labelledby="va-intro-title" className="va-intro">
-      <p className="v-kicker">Elecciones generales · Congreso de los Diputados</p>
-      <h1 className="v-h1" id="va-intro-title">
-        ¿Con quién coincides?
-      </h1>
-      <p className="va-intro__pitch">Prometer no obliga. Votar queda registrado.</p>
-      <p className="v-lead">
-        Las promesas electorales no obligan a nada; lo que vota cada partido en el Congreso queda registrado. Responde qué habrías
-        votado tú en votaciones reales y compara con lo que votó cada partido. Responde todo lo que quieras: hay{" "}
-        {poolStatus === "ready" ? questionsTotal : "cientos de"} preguntas.
-      </p>
-      <div className="va-intro__cta">
-        <button className="v-btn v-btn--primary" onClick={onStart} type="button">
-          {answeredCount ? `Seguir respondiendo (${answeredCount} respondidas)` : "Empezar el test"}
-        </button>
-        {answeredCount > 0 ? (
-          <button className="v-btn" onClick={onResults} type="button">
-            Ver mis resultados
-          </button>
-        ) : null}
-      </div>
+    <>
       <ul className="va-intro__facts">
         <li>
           <strong>Empieza con {curatedTotal} preguntas clave</strong>
@@ -865,6 +846,254 @@ function IntroView({ meta, questionsTotal, curatedTotal, poolStatus, parties, an
         <a href={withBasePath("/citizen/vota/metodologia/")}>Cómo se hizo (fuentes, IA y prompts)</a>
       </p>
       <p className="v-muted">Partidos comparados: {parties.map((p) => p.label).join(", ")}.</p>
+    </>
+  );
+}
+
+function IntroView({ meta, questionsTotal, curatedTotal, poolStatus, parties, answeredCount, onStart, onResults }) {
+  return (
+    <section aria-labelledby="va-intro-title" className="va-intro">
+      <p className="v-kicker">Elecciones generales · Congreso de los Diputados</p>
+      <h1 className="v-h1" id="va-intro-title">
+        ¿Con quién coincides?
+      </h1>
+      <p className="va-intro__pitch">Prometer no obliga. Votar queda registrado.</p>
+      <p className="v-lead">
+        Las promesas electorales no obligan a nada; lo que vota cada partido en el Congreso queda registrado. Responde qué habrías
+        votado tú en votaciones reales y compara con lo que votó cada partido. Responde todo lo que quieras: hay{" "}
+        {poolStatus === "ready" ? questionsTotal : "cientos de"} preguntas.
+      </p>
+      <div className="va-intro__cta">
+        <button className="v-btn v-btn--primary" onClick={onStart} type="button">
+          {answeredCount ? `Seguir respondiendo (${answeredCount} respondidas)` : "Empezar el test"}
+        </button>
+        {answeredCount > 0 ? (
+          <button className="v-btn" onClick={onResults} type="button">
+            Ver mis resultados
+          </button>
+        ) : null}
+      </div>
+      <IntroFacts curatedTotal={curatedTotal} meta={meta} parties={parties} />
+    </section>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Dashboard: what a returning visitor has answered, what is left, and where to go on from.
+
+function plural(n, one, many) {
+  return `${formatCount(n)} ${n === 1 ? one : many}`;
+}
+
+function DashStat({ value, label, detail = null }) {
+  return (
+    <li className="va-dash__stat">
+      <span className="va-dash__statValue">{value}</span>
+      <span className="va-dash__statLabel">{label}</span>
+      {detail}
+    </li>
+  );
+}
+
+function DashboardView({
+  loading,
+  meta,
+  parties,
+  questionsById,
+  topics,
+  state,
+  results,
+  answeredCount,
+  curatedTotal,
+  curatedLeft,
+  votesAnswered,
+  nextId,
+  firstKeyId,
+  firstSkippedId,
+  skippedCount,
+  onPlay,
+  onTopic,
+  onResults,
+  onReview,
+  onReset,
+}) {
+  if (loading) {
+    return (
+      <section aria-busy="true" aria-labelledby="va-dash-title" className="va-dash">
+        <p className="v-kicker">Tu test · guardado en este navegador</p>
+        <h1 className="v-h1" id="va-dash-title">
+          ¿Con quién coincides?
+        </h1>
+        <p className="v-muted">Cargando tu progreso…</p>
+      </section>
+    );
+  }
+  const next = nextId ? questionsById[nextId] : null;
+  const lastId = [...state.history].reverse().find((id) => questionsById[id]);
+  const last = lastId ? questionsById[lastId] : null;
+  const keysDone = curatedTotal - curatedLeft;
+  const importantCount = Object.keys(state.important).filter((id) => questionsById[id] && state.answers[id]).length;
+  const ranked = results.filter((r) => r.match !== null);
+  const provisional = answeredCount < MIN_ANSWERS_FOR_RANKING;
+  const topicRows = topics.map((g) => ({ ...g, counts: topicCounts(g.ids, questionsById, state.answers, state.split) }));
+  const keysFinished = topicRows.filter((g) => g.counts.keys && g.counts.keysDone === g.counts.keys).length;
+  const keyTopics = topicRows.filter((g) => g.counts.keys).length;
+  const nextKind = next ? (next.source === "curated" ? "Pregunta clave" : "Votación concreta") : null;
+
+  return (
+    <section aria-labelledby="va-dash-title" className="va-dash">
+      <header className="va-dash__head">
+        <p className="v-kicker">Tu test · guardado en este navegador</p>
+        <h1 className="v-h1" id="va-dash-title">
+          Llevas {plural(answeredCount, "respuesta", "respuestas")}
+        </h1>
+        <p className="v-lead">
+          {curatedLeft
+            ? `Te ${curatedLeft === 1 ? "queda 1 pregunta clave" : `quedan ${curatedLeft} preguntas clave`} de ${curatedTotal}; después siguen votaciones concretas sin límite.`
+            : `Has terminado las ${curatedTotal} preguntas clave. Ahora cada votación concreta afina tu resultado.`}
+        </p>
+      </header>
+
+      <ul className="va-dash__stats">
+        <DashStat
+          detail={
+            <span aria-hidden="true" className="v-meter va-meter">
+              <span style={{ width: `${curatedTotal ? Math.round((keysDone / curatedTotal) * 100) : 0}%` }} />
+            </span>
+          }
+          label="preguntas clave"
+          value={
+            <>
+              {keysDone}
+              <small>/{curatedTotal}</small>
+            </>
+          }
+        />
+        <DashStat label={votesAnswered === 1 ? "votación concreta" : "votaciones concretas"} value={formatCount(votesAnswered)} />
+        <DashStat label={keyTopics ? `temas con sus claves completas (de ${keyTopics})` : "temas"} value={keysFinished} />
+        <DashStat label={importantCount === 1 ? "marcada «me importa»" : "marcadas «me importa»"} value={importantCount} />
+      </ul>
+
+      <div className="va-dash__grid">
+        <div className="v-card va-dash__resume">
+          <p className="v-kicker">{next ? `Siguiente · ${nextKind} · ${questionTopic(next)}` : "Sin preguntas pendientes"}</p>
+          {next ? <p className="va-dash__next va-clamp">{next.text}</p> : <p className="va-dash__next">Has respondido todas las preguntas.</p>}
+          <div className="va-intro__cta">
+            {next ? (
+              <button className="v-btn v-btn--primary" onClick={() => onPlay(null)} type="button">
+                Seguir en el orden del test
+              </button>
+            ) : null}
+            <button className={next ? "v-btn" : "v-btn v-btn--primary"} onClick={onResults} type="button">
+              Ver mis resultados
+            </button>
+          </div>
+        </div>
+
+        <aside aria-labelledby="va-dash-aff" className="v-card va-dash__aff">
+          <h2 className="va-affBar__title" id="va-dash-aff">
+            Tu afinidad hasta ahora
+          </h2>
+          {ranked.length ? (
+            <ol className="va-dash__affList">
+              {ranked.slice(0, 5).map((row) => (
+                <li key={row.partyId} style={{ "--party": partyColor(row.partyId) }}>
+                  <span className="va-affBar__line">
+                    <span aria-hidden="true" className="va-dot" />
+                    <span className="va-affBar__name">{row.label}</span>
+                    <span className="va-affBar__pct">{pctText(row.match)}</span>
+                  </span>
+                  <span aria-hidden="true" className="va-affBar__meter">
+                    <span style={{ width: `${Math.round(row.match * 100)}%` }} />
+                  </span>
+                </li>
+              ))}
+            </ol>
+          ) : (
+            <p className="v-muted">Aún no hay votos con los que comparar tus respuestas.</p>
+          )}
+          {provisional ? (
+            <p className="va-dash__hint">
+              Provisional: con {MIN_ANSWERS_FOR_RANKING} respuestas o más deja de serlo (te {MIN_ANSWERS_FOR_RANKING - answeredCount === 1 ? "falta 1" : `faltan ${MIN_ANSWERS_FOR_RANKING - answeredCount}`}).
+            </p>
+          ) : null}
+          <button className="v-link-btn va-affBar__more" onClick={onResults} type="button">
+            Ver resultados completos →
+          </button>
+        </aside>
+
+
+        <ul className="va-dash__shortcuts">
+          {curatedLeft && firstKeyId && firstKeyId !== nextId ? (
+            <li>
+              <button className="va-dash__shortcut" onClick={() => onPlay(firstKeyId)} type="button">
+                <strong>Completar las preguntas clave</strong>
+                <span>{plural(curatedLeft, "pendiente", "pendientes")}: son las que más pesan en tu resultado</span>
+              </button>
+            </li>
+          ) : null}
+          {skippedCount && firstSkippedId ? (
+            <li>
+              <button className="va-dash__shortcut" onClick={() => onPlay(firstSkippedId)} type="button">
+                <strong>Repasar las que saltaste</strong>
+                <span>{plural(skippedCount, "pregunta saltada", "preguntas saltadas")}</span>
+              </button>
+            </li>
+          ) : null}
+          {last ? (
+            <li>
+              <button className="va-dash__shortcut" onClick={() => onPlay(lastId)} type="button">
+                <strong>Volver a la última que respondiste</strong>
+                <span className="va-clamp">
+                  {answerLabel(last, state.answers[lastId])} · {last.text}
+                </span>
+              </button>
+            </li>
+          ) : null}
+          <li>
+            <button className="va-dash__shortcut" onClick={onReview} type="button">
+              <strong>Revisar o cambiar mis respuestas</strong>
+              <span>Todas en una lista, por tema</span>
+            </button>
+          </li>
+        </ul>
+
+        <section aria-labelledby="va-dash-topics" className="va-dash__topics">
+          <h2 className="v-h2" id="va-dash-topics">
+            Saltar a un tema
+          </h2>
+          <p className="v-muted">Elige uno y el test sigue solo con sus preguntas hasta que lo termines o vuelvas a mezclarlos.</p>
+          <ul className="va-dash__topicList">
+            {topicRows.map((g) => {
+              const c = g.counts;
+              const keysComplete = c.keys > 0 && c.keysDone === c.keys;
+              return (
+                <li key={g.topic}>
+                  <button className={`va-dash__topic${keysComplete ? " is-done" : ""}`} onClick={() => onTopic(g.topic)} type="button">
+                    <span className="va-dash__topicName">
+                      {keysComplete ? <span aria-hidden="true">✓ </span> : null}
+                      {g.topic}
+                    </span>
+                    {c.keys ? <TopicDots counts={c} showVotes={false} /> : null}
+                    <span className="va-dash__topicLeft">{topicLeftLabel(topics, g.topic, questionsById, state.answers, state.split)}</span>
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+      </div>
+
+      <details className="va-dash__about">
+        <summary>Sobre el test</summary>
+        <IntroFacts curatedTotal={curatedTotal} meta={meta} parties={parties} />
+      </details>
+      <p className="va-dash__foot">
+        Tus respuestas solo están en este navegador.{" "}
+        <button className="v-link-btn va-linkish" onClick={onReset} type="button">
+          Empezar de cero
+        </button>
+      </p>
     </section>
   );
 }
@@ -2275,6 +2504,8 @@ export default function VotingAidClient({ snapshot: pageSnapshot, startStatement
   const [state, setState] = useState(() => cleanState(null));
   const [loaded, setLoaded] = useState(false);
   const [fromShare, setFromShare] = useState(false);
+  // Answers saved by an earlier visit, read before the data loads so the dashboard (not the intro) shows right away.
+  const [returning, setReturning] = useState(false);
   const [view, setView] = useState("intro");
   const [currentId, setCurrentId] = useState(null);
   const [revealId, setRevealId] = useState(null);
@@ -2361,6 +2592,11 @@ export default function VotingAidClient({ snapshot: pageSnapshot, startStatement
       window.removeEventListener("load", start);
     };
   }, [pageSnapshot, version.snapshot]);
+
+  useEffect(() => {
+    const raw = readStoredRaw(version.storageKey) || (version.seedFrom ? readStoredRaw(versionById(version.seedFrom).storageKey) : null);
+    if (raw && Object.keys(raw.answers || {}).length) setReturning(true);
+  }, [version]);
 
   // Restore answers (or a shared link) once the question set is final.
   useEffect(() => {
@@ -2805,7 +3041,35 @@ export default function VotingAidClient({ snapshot: pageSnapshot, startStatement
           </div>
         ) : null}
 
-        {view === "intro" ? (
+        {view === "intro" && !fromShare && (loaded ? answeredCount > 0 : returning) ? (
+          <div className="v-page">
+            <DashboardView
+              answeredCount={answeredCount}
+              curatedLeft={curatedLeft}
+              curatedTotal={curatedTotal}
+              firstKeyId={nextQuestionId(steps.keys.filter((id) => !state.split?.[id]), state.answers, state.skipped)}
+              firstSkippedId={Object.keys(state.skipped).find((id) => questionsById[id] && state.answers[id] === undefined) || null}
+              loading={!loaded}
+              meta={meta}
+              nextId={loaded ? pickNext({ ...state, topic: null }).id : null}
+              onPlay={(id) => {
+                setFocusTopic(null);
+                goPlay(id, undefined, undefined, undefined, null);
+              }}
+              onReset={reset}
+              onResults={() => show("results")}
+              onReview={() => show("review")}
+              onTopic={chooseTopic}
+              parties={parties}
+              questionsById={questionsById}
+              results={results}
+              skippedCount={Object.keys(state.skipped).filter((id) => questionsById[id] && state.answers[id] === undefined).length}
+              state={state}
+              topics={topics}
+              votesAnswered={votesAnswered}
+            />
+          </div>
+        ) : view === "intro" ? (
           <div className="v-page">
             <IntroView
               answeredCount={answeredCount}
