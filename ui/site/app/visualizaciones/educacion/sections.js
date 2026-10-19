@@ -58,7 +58,6 @@ export function Explain({ shows, read, notSay }) {
         gap: "10px 18px",
         margin: "4px 0 14px",
         padding: "12px 14px",
-        borderLeft: "3px solid var(--viz-grid)",
         background: "var(--viz-band)",
         borderRadius: 6,
         fontSize: "0.86rem",

@@ -160,9 +160,12 @@ function Narratives({ items }) {
   return (
     <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "10px 18px", margin: "4px 0 14px", fontSize: "0.86rem", lineHeight: 1.45 }}>
       {items.map(([title, verdict, text]) => (
-        <div key={title} style={{ padding: "10px 12px", background: "var(--viz-band)", borderRadius: 6, borderLeft: `3px solid ${verdict === "No" ? C.orange : verdict === "Sí" ? C.aqua : C.ref}` }}>
+        <div key={title} style={{ padding: "10px 12px", background: "var(--viz-band)", borderRadius: 6 }}>
           <div style={{ fontWeight: 700 }}>
-            «{title}» <span style={{ color: "var(--viz-muted)", fontWeight: 400 }}>· {verdict === "No" ? "los datos no lo sostienen" : verdict === "Sí" ? "los datos lo sostienen" : "los datos no lo resuelven"}</span>
+            «{title}»{" "}
+            <span style={{ color: verdict === "No" ? C.orange : verdict === "Sí" ? C.aqua : "var(--viz-muted)", fontWeight: 600 }}>
+              · {verdict === "No" ? "los datos no lo sostienen" : verdict === "Sí" ? "los datos lo sostienen" : "los datos no lo resuelven"}
+            </span>
           </div>
           <div style={{ color: "var(--viz-ink-2)" }}>{text}</div>
         </div>
