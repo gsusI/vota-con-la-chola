@@ -84,6 +84,44 @@ class Store:
             out[geo].append({"period": period, "value": float(value), "status": status, "name": geo_name})
         return out
 
+    def by_dimension(self, source_id: str, indicator_code: str, unit_code: str, dim: str,
+                     fixed: dict | None = None) -> dict[tuple[str, str], dict[int, float]]:
+        """Latest release as {(geography_code, value of `dim`): {year: value}} for indicators with several series per area."""
+        release_id = self._release(source_id, indicator_code, unit_code)
+        out: dict[tuple[str, str], dict[int, float]] = defaultdict(dict)
+        for geo, dims_json, period, value in self.conn.execute(
+            """
+            SELECT s.geography_code, s.dimensions_json, o.period_label, o.value_decimal
+            FROM indicator_observation_versions o JOIN indicator_series_versions s USING (indicator_series_version_id)
+            WHERE o.indicator_release_id = ? AND o.revision_state != 'deleted' AND o.value_decimal IS NOT NULL
+            """,
+            (release_id,),
+        ):
+            dims = json.loads(dims_json)
+            if fixed and any(dims.get(k) != v for k, v in fixed.items()):
+                continue
+            out[(geo, dims.get(dim))][int(period[:4])] = float(value)
+        return out
+
+    def _release(self, source_id: str, indicator_code: str, unit_code: str) -> str:
+        row = self.conn.execute(
+            """
+            SELECT r.indicator_release_id, r.source_url, r.source_content_sha256, r.source_snapshot_date, r.source_metadata_json
+            FROM indicator_definitions d JOIN indicator_releases r USING (indicator_id)
+            WHERE d.source_id = ? AND d.indicator_code = ? AND d.unit_code = ?
+            ORDER BY r.source_snapshot_date DESC, r.created_at DESC LIMIT 1
+            """,
+            (source_id, indicator_code, unit_code),
+        ).fetchone()
+        if row is None:
+            raise LookupError(f"indicator {source_id}:{indicator_code}:{unit_code} not loaded")
+        release_id, url, sha, snapshot, meta = row
+        self.provenance[source_id].append({
+            "indicator": f"{indicator_code} ({unit_code})", "url": url, "sha256": sha,
+            "snapshot_date": snapshot, "retrieved_at": json.loads(meta or "{}").get("retrieved_at"),
+        })
+        return release_id
+
     def annual(self, source_id: str, indicator_code: str, unit_code: str, geo: str, dims: dict | None = None) -> dict[int, float]:
         return {int(p["period"][:4]): p["value"] for p in self.series(source_id, indicator_code, unit_code, dims).get(geo, [])}
 
@@ -200,6 +238,95 @@ def build(conn: sqlite3.Connection) -> dict:
     }
     schooling = by_area(store.series("owid_grapher", "mean_years_schooling_15_64", "YEARS"), LONG_RUN_AREAS, 2)
 
+    # 7. Regions: PISA 2022 against public spending per non-university student -------------------
+    consejerias = store.by_dimension("mefp_educabase", "gasto_publico_instituciones_no_universitarias", "KEUR",
+                                     "Tipo de administración", {"Cobertura económica": total["Cobertura económica"]})
+    regional_students = store.by_dimension("mefp_educabase", "alumnado_regimen_general_por_ccaa", "PERSONS", "Comunidad autónoma")
+    students_by_region = {region: years for (_geo, region), years in regional_students.items()}
+    pisa_regions = {
+        p["name"]: p["value"]
+        for geo, rows in store.series("vclc_education_curated", "pisa_math_mean", "PISA_SCORE").items()
+        if geo.startswith("ES-CCAA:") for p in rows if p["period"] == "2022"
+    }
+    region_year = 2022
+    regions_pisa = []
+    for (_geo, admin), years in consejerias.items():
+        if not admin or " - Consejería" not in admin:
+            continue
+        region = admin.split(" - ")[0].strip()
+        enrolled = students_by_region.get(region, {})
+        if region_year in years and region_year in enrolled and (region_year - 1) in enrolled:
+            per_student = years[region_year] * 1000 / ((enrolled[region_year - 1] + enrolled[region_year]) / 2)
+            regions_pisa.append({"region": region, "spending_per_student": r(per_student, 0), "math": pisa_regions.get(region)})
+    regions_pisa.sort(key=lambda row: -(row["math"] or 0))
+    paired = [row for row in regions_pisa if row["math"] is not None]
+    n = len(paired)
+    mx = sum(row["spending_per_student"] for row in paired) / n
+    my = sum(row["math"] for row in paired) / n
+    cov = sum((row["spending_per_student"] - mx) * (row["math"] - my) for row in paired)
+    vx = sum((row["spending_per_student"] - mx) ** 2 for row in paired)
+    vy = sum((row["math"] - my) ** 2 for row in paired)
+    pearson = cov / (vx * vy) ** 0.5 if vx and vy else None
+    city_scores = {name: v for name, v in pisa_regions.items() if name in ("Ceuta", "Melilla")}
+
+    # 8. Equity and student mix (PISA, quoted) ------------------------------------------------------
+    def curated(code: str, unit: str = "PC") -> dict[str, dict[int, float]]:
+        return {
+            geo: {int(p["period"]): p["value"] for p in rows}
+            for geo, rows in store.series("vclc_education_curated", code, unit).items()
+        }
+    escs_gap = curated("pisa_escs_gap_math", "PISA_SCORE")
+    escs_var = curated("pisa_escs_variance_pct")
+    resilient = curated("pisa_resilient_pct")
+    immigrant_share = curated("pisa_immigrant_share_pct")
+    immigrant_gap = curated("pisa_immigrant_gap_math", "PISA_SCORE")["ESP"][2022]
+    immigrant_gap_adj = curated("pisa_immigrant_gap_math_escs_adjusted", "PISA_SCORE")["ESP"][2022]
+    immigrant_disadvantaged = curated("pisa_disadvantaged_immigrant_pct")["ESP"][2022]
+    share_change = immigrant_share["ESP"][2022] - immigrant_share["ESP"][2012]
+    es_math = {p["year"]: p["value"] for p in pisa["math"]["ESP"]}
+    math_2012 = es_math.get(2012)
+    composition = {
+        "share_2012": immigrant_share["ESP"][2012], "share_2022": immigrant_share["ESP"][2022],
+        "gap_raw": immigrant_gap, "gap_adjusted": immigrant_gap_adj,
+        "effect_raw_points": r(share_change / 100 * immigrant_gap, 1),
+        "effect_adjusted_points": r(share_change / 100 * immigrant_gap_adj, 1),
+        "math_change_2012_2022": r(es_math.get(2022) - math_2012, 0) if math_2012 else None,
+        "formula": "cambio en la proporción de alumnado inmigrante (2012→2022) × diferencia media de puntuación; "
+        "aritmética ilustrativa que supone que el resto no cambia",
+    }
+
+    # 9. Teachers ------------------------------------------------------------------------------------
+    salaries = store.by_dimension("oecd_eag_finance", "SAL_STA.TE.TYP_EXP", "IX2015", "EDUCATION_LEV", {"PERS_EXP_LEV": "EXP15"})
+    salary_index = {
+        level: {area: points(salaries.get((area, level), {}), 1) for area in PEERS_OECD if salaries.get((area, level))}
+        for level in ("ISCED11_1", "ISCED11_24", "ISCED11_34")
+    }
+    ratios = store.by_dimension("eurostat_sdmx", "pupil_teacher_ratio", "RT", "isced11")
+    pupil_teacher = {level: {geo: points(ratios.get((geo, level), {}), 1) for geo in PEERS_EU} for level in ("ED1", "ED2", "ED3")}
+
+    # 10. Vocational training and attainment ---------------------------------------------------------
+    enrol = store.by_dimension("eurostat_sdmx", "upper_secondary_enrolment", "PERSONS", "isced11")
+    vocational_share = {
+        geo: [{"year": y, "value": r(v / enrol[(geo, "ED3")][y] * 100)} for y, v in sorted(enrol.get((geo, "ED35"), {}).items())
+              if enrol.get((geo, "ED3"), {}).get(y)]
+        for geo in PEERS_EU
+    }
+    grads = store.by_dimension("eurostat_sdmx", "recent_graduates_employment_rate", "PC", "isced11")
+    recent_grads = {level: {geo: points(grads.get((geo, level), {})) for geo in PEERS_EU} for level in ("ED34_44", "ED35_45", "ED5-8")}
+    attain = store.by_dimension("eurostat_sdmx", "attainment_25_34", "PC", "isced11")
+    attainment = {level: {geo: points(attain.get((geo, level), {})) for geo in PEERS_EU} for level in ("ED0-2", "ED3_4", "ED5-8")}
+
+    sal_es = {p["year"]: p["value"] for p in salary_index["ISCED11_24"]["ESP"]}
+    sal_oecd = {p["year"]: p["value"] for p in salary_index["ISCED11_24"]["OECD"]}
+    sal_peak = max(sal_es, key=lambda y: sal_es[y])
+    sal_last = max(sal_es)
+    sal_oecd_last = max(sal_oecd)
+    teachers_headline = {
+        "salary_peak": {"year": sal_peak, "value": sal_es[sal_peak]}, "salary_last": {"year": sal_last, "value": sal_es[sal_last]},
+        "salary_change_from_peak_pct": r((sal_es[sal_last] / sal_es[sal_peak] - 1) * 100, 0),
+        "oecd_2009": sal_oecd.get(2009), "oecd_last": {"year": sal_oecd_last, "value": sal_oecd[sal_oecd_last]},
+    }
+
     sources = {}
     for source_id, releases in store.provenance.items():
         label, page = SOURCE_PAGES[source_id]
@@ -290,6 +417,15 @@ def build(conn: sqlite3.Connection) -> dict:
         "overqualification": overq,
         "overqualification_breaks_es": overq_breaks,
         "long_run": {"literacy": literacy, "schooling": schooling},
+        "regions_pisa": {"year": region_year, "rows": regions_pisa, "pearson": r(pearson, 2), "n": n, "cities": city_scores,
+                         "formula": "gasto de la consejería de educación en centros no universitarios (Ministerio, miles de euros) "
+                         "× 1000 ÷ media del alumnado de régimen general de los cursos 2021-22 y 2022-23"},
+        "equity": {"escs_gap": escs_gap, "escs_variance": escs_var, "resilient": resilient,
+                   "immigrant_share": {geo: points(v) for geo, v in immigrant_share.items()},
+                   "immigrant_disadvantaged_pct": immigrant_disadvantaged, "composition": composition},
+        "teachers": {"salary_index": salary_index, "pupil_teacher": pupil_teacher, "headline": teachers_headline},
+        "vocational": {"share_upper_secondary": vocational_share, "recent_graduates_employment": recent_grads},
+        "attainment_25_34": attainment,
         "sources": sources,
     }
 
@@ -326,6 +462,29 @@ def write_csv(data: dict, path: Path) -> None:
         rows.extend(("owid_grapher", "alfabetizacion_pct", area, p["year"], p["value"]) for p in pts)
     for area, pts in data["long_run"]["schooling"].items():
         rows.extend(("owid_grapher", "anios_escolarizacion_15_64", area, p["year"], p["value"]) for p in pts)
+    for row in data["regions_pisa"]["rows"]:
+        rows.append(("mefp_educabase", "gasto_consejeria_por_alumno_no_universitario_eur", f"ES-CCAA:{row['region']}", data["regions_pisa"]["year"], row["spending_per_student"]))
+        rows.append(("vclc_education_curated", "pisa_math", f"ES-CCAA:{row['region']}", 2022, row["math"]))
+    eq = data["equity"]
+    for key, label in (("escs_gap", "pisa_brecha_isec_matematicas"), ("escs_variance", "pisa_varianza_isec_pct"), ("resilient", "pisa_resilientes_pct")):
+        for area, years in eq[key].items():
+            rows.extend(("vclc_education_curated", label, area, int(y), v) for y, v in years.items())
+    for area, pts in eq["immigrant_share"].items():
+        rows.extend(("vclc_education_curated", "pisa_alumnado_inmigrante_pct", area, p["year"], p["value"]) for p in pts)
+    for level, areas in data["teachers"]["salary_index"].items():
+        for area, pts in areas.items():
+            rows.extend(("oecd_eag_finance", f"salario_real_profesorado_15_anios_indice_2015_{level}", area, p["year"], p["value"]) for p in pts)
+    for level, areas in data["teachers"]["pupil_teacher"].items():
+        for area, pts in areas.items():
+            rows.extend(("eurostat_sdmx", f"alumnos_por_profesor_{level}", area, p["year"], p["value"]) for p in pts)
+    for area, pts in data["vocational"]["share_upper_secondary"].items():
+        rows.extend(("eurostat_sdmx", "fp_pct_secundaria_superior", area, p["year"], p["value"]) for p in pts)
+    for level, areas in data["vocational"]["recent_graduates_employment"].items():
+        for area, pts in areas.items():
+            rows.extend(("eurostat_sdmx", f"empleo_titulados_recientes_{level}", area, p["year"], p["value"]) for p in pts)
+    for level, areas in data["attainment_25_34"].items():
+        for area, pts in areas.items():
+            rows.extend(("eurostat_sdmx", f"nivel_estudios_25_34_{level}", area, p["year"], p["value"]) for p in pts)
     buf = io.StringIO()
     writer = csv.writer(buf, lineterminator="\n")
     writer.writerow(["fuente", "serie", "area", "anio", "valor"])

@@ -93,7 +93,26 @@ class IngestEducationTest(unittest.TestCase):
             for row in rows:
                 self.assertIn(row["document"], data["documents"])
                 self.assertTrue(row["quote"] and row["pdf_page"] > 0)
-                self.assertIn(str(row["value"]), row["quote"])
+                value = format(row["value"], "g")
+                self.assertTrue(value in row["quote"] or value.replace(".", ",") in row["quote"], (key, row["area"], row["year"]))
+
+    def test_teacher_salary_series_keep_every_dimension(self) -> None:
+        payload = json.dumps({"series": {"docs": [{
+            "series_code": "ESP.SAL_STA.IX.INST_EDU_PUB.ISCED11_24._T._T.TE.TYP_EXP.EXP15._Z",
+            "period": ["2009", "2015", "2024"], "value": [113.9, 100.0, "NA"],
+        }]}}).encode()
+        raw = ingest.Raw("oecd_eag_teacher_salaries_dbnomics.json", "https://example.org", payload, "2026-10-19T00:00:00+00:00")
+        (definition, series), = list(ingest.parse_oecd_salaries(raw))
+        self.assertEqual(definition["unit_code"], "IX2015")
+        self.assertEqual(series[0]["dimensions"]["EDUCATION_LEV"], "ISCED11_24")
+        self.assertEqual(series[0]["dimensions"]["PERS_EXP_LEV"], "EXP15")
+        self.assertEqual([o["period"] for o in series[0]["observations"]], ["2009", "2015"])  # "NA" is not a value
+
+    def test_regional_pisa_rows_map_to_ministry_region_names(self) -> None:
+        data = json.loads((ingest.MANUAL_DIR / "pisa_curated_es.json").read_text(encoding="utf-8"))
+        regions = {row["area"] for row in data["series"]["pisa_math_mean"] if row["area"].startswith("ES-CCAA:")}
+        self.assertEqual(len(regions), 19)  # 17 comunidades + Ceuta y Melilla
+        self.assertIn("ES-CCAA:Asturias, Principado de", regions)
 
 
 if __name__ == "__main__":

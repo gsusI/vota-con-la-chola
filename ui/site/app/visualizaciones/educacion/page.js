@@ -5,40 +5,13 @@ import Figure from "../components/Figure";
 import SparseLineChart from "./SparseLineChart";
 import EduTable from "./EduTable";
 import { fmt } from "./formatEdu.mjs";
+import { AttainmentFigure, C, EquityFigure, Explain, Glossary, NAMES, RegionsFigure, TeachersFigure, VocationalFigure, num } from "./sections";
 
 export const metadata = {
   title: "Gasto, resultados y abandono: la educación en España | Vota Con La Chola",
   description:
     "Gasto público real por alumno, PISA, abandono escolar, repetición, sobrecualificación y un siglo de alfabetización en España, frente a la OCDE, la UE y países similares, con fuentes oficiales y datos descargables.",
 };
-
-const C = {
-  blue: "#2a78d6",
-  orange: "#eb6834",
-  aqua: "#1baf7a",
-  yellow: "#eda100",
-  ref: "#52514e",
-  peer: "#b4b2a9",
-};
-
-const NAMES = {
-  ESP: "España",
-  ES: "España",
-  OECD: "Media OCDE",
-  EU25: "Media UE (países de la OCDE)",
-  EU27_2020: "UE-27",
-  DEU: "Alemania",
-  DE: "Alemania",
-  FRA: "Francia",
-  FR: "Francia",
-  ITA: "Italia",
-  IT: "Italia",
-  PRT: "Portugal",
-  PT: "Portugal",
-};
-
-const num = (value, digits = 1) =>
-  Number(value).toLocaleString("es-ES", { minimumFractionDigits: digits, maximumFractionDigits: digits });
 
 function retrieved(source) {
   return source?.retrieved_at ? ` (consultado ${String(source.retrieved_at).slice(0, 10)})` : "";
@@ -78,6 +51,7 @@ export default function EducacionPage() {
     pisa2022: { label: "INEE, PISA 2022. Informe español (2023)", href: src.vclc_education_curated.documents.inee_pisa2022_informe_espanol.landing_page },
     pisaReports: { label: "INEE, informes españoles de PISA 2003-2018", href: "https://www.educacionfpydeportes.gob.es/inee/evaluaciones-internacionales/pisa.html" },
     pisaNote: { label: "OCDE, PISA 2022, nota de país: España (copia del INEE)", href: src.vclc_education_curated.documents.oecd_pisa2022_country_note_es.url },
+    oecdSal: { label: `OCDE, Education at a Glance, salarios del profesorado (réplica DBnomics)${retrieved(src.oecd_eag_finance)}`, href: "https://db.nomics.world/OECD/DSD_EAG_SAL_TREND@DF_TCH_STA" },
     owid: { label: `Our World in Data${retrieved(src.owid_grapher)}`, href: src.owid_grapher.page },
   };
 
@@ -198,16 +172,21 @@ export default function EducacionPage() {
   const aheadIn1950 = ["DEU", "FRA", "ITA"].filter((area) => sch(area, 1950) > sch("ESP", 1950)).map((area) => NAMES[area]);
   const list = (items) => (items.length > 1 ? `${items.slice(0, -1).join(", ")} y ${items.at(-1)}` : items[0] || "");
   const mathRisers = mathDrops.filter((row) => row.delta > 0).map((row) => NAMES[row.area]);
+  const regionScores = data.regions_pisa.rows.filter((row) => row.math != null).map((row) => row.math);
+  const regionSpread = Math.max(...regionScores) - Math.min(...regionScores);
+  const attain = (level) => data.attainment_25_34[level].ES.at(-1).value;
 
   return (
     <main className="shell vizArticle">
       <StaticRouteHero
         eyebrow="Visualizaciones · datos públicos"
         title="Educación en España: más gasto, resultados estancados y mucho menos abandono"
-        summary="Cuánto gasta el Estado por alumno, qué dicen PISA, el abandono escolar, la repetición y la sobrecualificación, y el siglo que llevó a casi toda la población a leer. Cada gráfico enlaza su fuente oficial, compara con la OCDE, la UE y países similares, y trae sus datos en tabla."
+        summary="Cuánto gasta el Estado por alumno y en qué, qué dicen PISA, las comunidades y el origen social, cómo han cambiado el abandono y la repetición, qué pasa con la FP y los titulados, y el siglo que llevó a casi toda la población a leer. Cada gráfico explica qué muestra y qué no, enlaza su fuente oficial, compara con la OCDE, la UE y países similares, y trae sus datos en tabla."
         actions={[
           { href: downloads, label: "Descargar datos (CSV)" },
           { href: "/visualizaciones/data/educacion.json", label: "JSON con procedencia" },
+          { href: "#conclusion", label: "Conclusión" },
+          { href: "#glosario", label: "Glosario" },
           { href: "#metodo", label: "Método y fuentes" },
         ]}
       />
@@ -244,35 +223,33 @@ export default function EducacionPage() {
         </div>
       </section>
 
-      <section className="card vizProse" id="hipotesis" aria-labelledby="hipotesis-title">
-        <h2 id="hipotesis-title">La hipótesis, contrastada</h2>
-        <p>
-          <strong>Hipótesis:</strong> desde 2000 el gasto público real por alumno ha subido mucho y los resultados de PISA se han quedado igual o han
-          bajado. <strong>Resultado: se cumple a medias.</strong>
-        </p>
-        <ul>
+      <section className="card vizProse" id="esencial" aria-labelledby="esencial-title">
+        <h2 id="esencial-title">Lo esencial</h2>
+        <ol>
           <li>
-            <strong>A favor.</strong> El gasto real por alumno es un {num(h.spending_school_change_2000_pct, 0)} % mayor que en 2000 (OCDE) y un{" "}
-            {num(realChange, 0)} % mayor según el Ministerio, mientras PISA matemáticas pasa de {h.math_2003} (2003) a {h.math_2022} (2022), lectura de{" "}
-            {h.reading_2000} (2000) a {h.reading_2022} y ciencias de {h.science_2006} (2006) a {h.science_2022}.
+            <strong>Más gasto, pero no desde 2009.</strong> El gasto público real por alumno es un {num(h.spending_school_change_2000_pct, 0)} % mayor que en
+            2000, pero alcanzó su máximo en {h.spending_school_peak.year}, cayó un{" "}
+            {num((1 - h.spending_school_trough.value / h.spending_school_peak.value) * 100, 0)} % hasta {h.spending_school_trough.year} y España gasta hoy
+            el {h.spending_school_vs_oecd_pct} % de la media OCDE por alumno. <a href="#gasto">Ver gasto</a>
           </li>
           <li>
-            <strong>En contra.</strong> El gasto no subió de forma continua: tocó máximo en {h.spending_school_peak.year}, cayó un{" "}
-            {num((1 - h.spending_school_trough.value / h.spending_school_peak.value) * 100, 0)} % hasta {h.spending_school_trough.year} y en{" "}
-            {h.spending_school_last_year} seguía por debajo de aquel máximo. Además, España gasta por alumno el {h.spending_school_vs_oecd_pct} % de la
-            media OCDE (el {h.spending_school_vs_oecd_2005_pct} % en 2005), y la OCDE, que aumentó su gasto un {h.oecd_school_change_2005_pct} % desde 2005,
-            también vio caer sus resultados: su media de matemáticas pasó de {h.oecd_math_2003} (2003) a {data.pisa.math.OECD.at(-1).value} (2022). {list(biggerDrops)} perdieron más puntos que España.
+            <strong>Resultados estancados, como en casi toda la OCDE.</strong> PISA matemáticas: {h.math_2003} en 2003 y {h.math_2022} en 2022; la media
+            OCDE cayó más, de {h.oecd_math_2003} a {data.pisa.math.OECD.at(-1).value}. <a href="#pisa">Ver PISA</a>
           </li>
           <li>
-            <strong>Lo que sí mejoró, y mucho.</strong> El abandono escolar temprano cayó del {num(h.leavers_2008)} % (2008) al {num(h.leavers_last)} % (
-            {h.leavers_last_year}), y el alumnado de 15 años retrasado de curso bajó del {num(h.behind_peak.value)} % ({h.behind_peak.course}) al{" "}
-            {num(h.behind_last.value)} % ({h.behind_last.course}). Retener en el sistema a alumnos que antes lo dejaban también pesa sobre la media de PISA.
+            <strong>Mucho menos abandono y repetición.</strong> El abandono temprano bajó del {num(h.leavers_2008)} % al {num(h.leavers_last)} % y el
+            alumnado de 15 años retrasado de curso, del {num(h.behind_peak.value)} % al {num(h.behind_last.value)} %. <a href="#abandono">Ver abandono</a>
           </li>
           <li>
-            <strong>Lo que estos datos no pueden decir.</strong> Ninguna de estas series mide causalidad: no separan el efecto del gasto del de la
-            composición del alumnado (inmigración, retención de quienes antes abandonaban), los cambios de ley educativa o la pandemia.
+            <strong>Las diferencias están dentro.</strong> Entre comunidades hay {regionSpread} puntos de PISA, más que entre España y los países
+            comparados, y apenas se relacionan con lo que gasta cada una (correlación {num(data.regions_pisa.pearson, 2)}). <a href="#regiones">Ver comunidades</a>
           </li>
-        </ul>
+          <li>
+            <strong>Un reloj de arena.</strong> El {num(attain("ED5-8"), 0)} % de los jóvenes de 25 a 34 años tiene estudios superiores y el{" "}
+            {num(attain("ED0-2"), 0)} % no pasó de la ESO; faltan técnicos intermedios y sobran universitarios en puestos que no lo piden (
+            {num(h.overq_es)} %). <a href="#titulacion">Ver titulación</a>
+          </li>
+        </ol>
       </section>
 
       <Figure
@@ -295,6 +272,11 @@ export default function EducacionPage() {
           />
         }
       >
+        <Explain
+          shows="Cuánto gastan las administraciones por cada alumno de colegio e instituto, descontada la inflación, con dos fuentes: la OCDE (comparable entre países, con años sueltos antes de 2008) y el Ministerio (cada año, hasta 2024)."
+          read="Si la línea sube, cada alumno recibe más recursos reales. Lo decisivo es la forma: sube hasta 2009, cae con los recortes hasta 2014 y tarda una década en recuperarse."
+          notSay="No dice en qué se gasta (profesorado, edificios, becas) ni si se gasta bien, y no incluye lo que pagan las familias."
+        />
         <div className="vizMultiples">
           <div>
             <h3 className="vizPanelTitle">
@@ -344,6 +326,11 @@ export default function EducacionPage() {
           </>
         }
       >
+        <Explain
+          shows="El mismo gasto por alumno para España y para cada país o media de comparación, en la misma escala, y el esfuerzo total en % del PIB."
+          read="Cada panel enfrenta España (azul) con una referencia (gris oscuro). Si la azul queda por debajo, España gasta menos por alumno, ya corregido por precios."
+          notSay="Gastar menos no es necesariamente peor: depende de los salarios, del número de alumnos por clase y de la riqueza de cada país."
+        />
         <div className="vizMultiples">
           {eagPanels.map((area) => (
             <div key={area}>
@@ -384,6 +371,8 @@ export default function EducacionPage() {
         </div>
       </Figure>
 
+      <TeachersFigure data={data} sources={[S.oecdSal, S.eurostat("educ_uoe_perp04")]} />
+
       <Figure
         id="pisa"
         title={`En matemáticas, España pasa de ${esMath.from} a ${esMath.to} puntos PISA desde 2003; ${list(biggerDrops)} cayeron más`}
@@ -402,6 +391,11 @@ export default function EducacionPage() {
         ]}
         table={<EduTable unit="score" caption="Ver todas las puntuaciones en tabla" series={pisaTable} />}
       >
+        <Explain
+          shows="Puntuación media de los alumnos de 15 años en cada ciclo de PISA, por materia, frente a la media OCDE y a cuatro países parecidos."
+          read="El eje empieza en cero, por eso las líneas parecen planas: las diferencias son de pocas decenas de puntos sobre una media de 500 (ver «qué son 10 puntos» en el glosario). Los puntos huecos no son comparables con los siguientes."
+          notSay="PISA no sigue a los mismos alumnos: cada ciclo es una muestra nueva. Tampoco mide todo lo que enseña la escuela."
+        />
         <div className="vizMultiples">
           {pisaDomains.map((domain) => {
             const es = data.pisa[domain.key].ESP;
@@ -428,6 +422,9 @@ export default function EducacionPage() {
         </div>
       </Figure>
 
+      <RegionsFigure data={data} sources={[S.pisa2022, S.mefp]} />
+      <EquityFigure data={data} sources={[S.pisaNote, S.pisaReports]} />
+
       <Figure
         id="abandono"
         title={`El abandono escolar temprano bajó del ${num(h.leavers_2008)} % en 2008 al ${num(h.leavers_last)} % en ${h.leavers_last_year}`}
@@ -440,6 +437,11 @@ export default function EducacionPage() {
         ]}
         table={<EduTable caption="Ver los datos en tabla (con marcas de Eurostat)" series={leavers.slice().reverse()} />}
       >
+        <Explain
+          shows="Qué parte de los jóvenes de 18 a 24 años dejó de estudiar sin pasar de la ESO, en España, la UE y países comparables, y por comunidad."
+          read="Una línea que baja es una buena noticia. Las líneas verticales marcan cambios de método de la encuesta: los saltos en esos años pueden ser de medida."
+          notSay="No dice por qué bajó (la crisis de 2008 quitó empleo a los jóvenes sin título, hubo cambios de ley y más FP) ni qué hacen hoy quienes abandonaron."
+        />
         <TimeSeriesChart
           series={leavers}
           xMin={1992}
@@ -492,6 +494,11 @@ export default function EducacionPage() {
           </>
         }
       >
+        <Explain
+          shows="Cuántos alumnos de 15 años van retrasados de curso (Ministerio, cada año) y cuántos dicen haber repetido alguna vez (PISA, cada tres años)."
+          read="Son dos medidas distintas de lo mismo: el Ministerio cuenta matrículas y PISA pregunta a los alumnos. Las dos bajan, y PISA permite comparar con la OCDE."
+          notSay="Repetir menos no implica aprender más: puede reflejar normas de promoción más flexibles, como en 2020."
+        />
         <TimeSeriesChart
           series={behind}
           yMax={50}
@@ -518,6 +525,9 @@ export default function EducacionPage() {
         />
       </Figure>
 
+      <VocationalFigure data={data} sources={[S.eurostat("educ_uoe_enrs04"), S.eurostat("edat_lfse_24")]} />
+      <AttainmentFigure data={data} sources={[S.eurostat("edat_lfse_03"), S.eurostat("lfsa_eoqgan")]} overq={{ es: h.overq_es, eu: h.overq_eu }} />
+
       <Figure
         id="sobrecualificacion"
         title={`El ${num(h.overq_es)} % de los titulados superiores con empleo trabaja en un puesto que no exige su título; en la UE, el ${num(h.overq_eu)} %`}
@@ -532,6 +542,11 @@ export default function EducacionPage() {
         ]}
         table={<EduTable caption="Ver los datos en tabla" series={overq.slice().reverse()} />}
       >
+        <Explain
+          shows="Qué parte de los ocupados con estudios superiores trabaja en un puesto que no pide ese nivel."
+          read="Cuanto más alta la línea, mayor el desajuste entre títulos y empleos. España está por encima de todos los países comparados en toda la serie."
+          notSay="No distingue si sobran titulados o faltan empleos cualificados, ni cuánto cobran esas personas."
+        />
         <TimeSeriesChart
           series={overq}
           annotations={breakRows(data.overqualification_breaks_es || [])}
@@ -559,6 +574,11 @@ export default function EducacionPage() {
           </>
         }
       >
+        <Explain
+          shows="Un siglo de progreso educativo: qué parte de la población sabía leer y cuántos años estudiaba de media."
+          read="Los puntos son observaciones (censos y estimaciones) y las líneas solo los unen. La alfabetización se corta tras 1950 porque cambia la fuente."
+          notSay="Las cifras antiguas son reconstrucciones con más incertidumbre y con definiciones distintas de «saber leer»."
+        />
         <div className="vizMultiples">
           <div>
             <h3 className="vizPanelTitle">
@@ -578,6 +598,47 @@ export default function EducacionPage() {
           </div>
         </div>
       </Figure>
+
+      <section className="card vizProse" id="conclusion" aria-labelledby="conclusion-title">
+        <h2 id="conclusion-title">Conclusión: la hipótesis, contrastada</h2>
+        <p>
+          <strong>Hipótesis:</strong> desde 2000 el gasto público real por alumno ha subido mucho y los resultados de PISA se han quedado igual o han
+          bajado. <strong>Resultado: se cumple a medias, y la parte que se cumple no basta para concluir que gastar más no sirve.</strong>
+        </p>
+        <ul>
+          <li>
+            <strong>Dónde se cumple.</strong> El gasto real por alumno es un {num(h.spending_school_change_2000_pct, 0)} % mayor que en 2000 (OCDE) y un{" "}
+            {num(realChange, 0)} % mayor según el Ministerio, mientras PISA matemáticas pasa de {h.math_2003} (2003) a {h.math_2022} (2022), lectura de{" "}
+            {h.reading_2000} (2000) a {h.reading_2022} y ciencias de {h.science_2006} (2006) a {h.science_2022}.
+          </li>
+          <li>
+            <strong>Dónde falla.</strong> Todo el aumento llegó antes de {h.spending_school_peak.year}; después hubo un recorte del{" "}
+            {num((1 - h.spending_school_trough.value / h.spending_school_peak.value) * 100, 0)} % y el sueldo real del profesorado sigue un{" "}
+            {Math.abs(data.teachers.headline.salary_change_from_peak_pct)} % por debajo de entonces. España gasta por alumno el {h.spending_school_vs_oecd_pct} % de
+            la media OCDE (el {h.spending_school_vs_oecd_2005_pct} % en 2005). Y la OCDE, que subió su gasto un {h.oecd_school_change_2005_pct} % desde 2005,
+            también bajó en PISA: su media de matemáticas pasó de {h.oecd_math_2003} a {data.pisa.math.OECD.at(-1).value}; {list(biggerDrops)} perdieron más
+            puntos que España.
+          </li>
+          <li>
+            <strong>Lo que sí mejoró.</strong> El abandono temprano cayó del {num(h.leavers_2008)} % al {num(h.leavers_last)} % y la repetición a los 15
+            años, del {num(h.behind_peak.value)} % al {num(h.behind_last.value)} %. Más alumnos que antes se habrían ido siguen en el sistema y se examinan en
+            PISA, lo que tira de la media hacia abajo aunque el sistema funcione mejor.
+          </li>
+          <li>
+            <strong>Sistema frente a mezcla de alumnos.</strong> El aumento del alumnado inmigrante explicaría unos{" "}
+            {num(data.equity.composition.effect_raw_points)} de los {Math.abs(data.equity.composition.math_change_2012_2022)} puntos perdidos en matemáticas
+            desde 2012, y menos de medio punto a igual nivel socioeconómico: la composición explica poco de la caída. El origen social pesa algo menos que en
+            la OCDE ({data.equity.escs_gap.ESP[2022]} frente a {data.equity.escs_gap.OECD[2022]} puntos de brecha).
+          </li>
+          <li>
+            <strong>Lo que estos datos no pueden decir.</strong> Ninguna de estas series mide causalidad. Para saber si un euro más mejora resultados
+            haría falta comparar alumnos parecidos con distinto gasto (evaluaciones de programas concretos), no medias nacionales. Entre comunidades, la
+            relación entre gasto y PISA es débil, pero 17 casos con renta, población y salarios distintos no bastan para descartarla.
+          </li>
+        </ul>
+      </section>
+
+      <Glossary />
 
       <section className="card vizProse" id="metodo" aria-labelledby="metodo-title">
         <h2 id="metodo-title">Método y fuentes</h2>

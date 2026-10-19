@@ -507,6 +507,14 @@ MEFP_SOURCES = [
         period_var="periodo", region_var="Comunidad autónoma", school=True,
     ),
     mefp_source(
+        "alumnado_1_01", "/no-universitaria/alumnado/matriculado/series/AlumnadoGen", "alumnado_1_01.px",
+        indicator_code="alumnado_regimen_general_por_ccaa",
+        label="Alumnado de Enseñanzas de Régimen General por comunidad autónoma (todos los centros)", unit_code="PERSONS",
+        definition_text="Alumnos matriculados en enseñanzas de régimen general, centros públicos y privados, por comunidad.",
+        keep=lambda c: c["Titularidad del centro"] == "TODOS LOS CENTROS",
+        period_var="periodo", region_var="Comunidad autónoma", school=True,
+    ),
+    mefp_source(
         "idoneidad_05", "/no-universitaria/alumnado/matriculado/series/gen-idoneidad", "idoneidad_05.px",
         indicator_code="tasa_idoneidad_15", label="Tasa de idoneidad a los 15 años (% en el curso teórico, 4.º ESO)",
         unit_code="PC",
@@ -620,6 +628,46 @@ EUROSTAT_SOURCES = [
         ),
     ),
     (
+        "eurostat_educ_uoe_perp04.json",
+        eurostat_url("educ_uoe_perp04", {"unit": "RT", "isced11": ["ED1", "ED2", "ED3"], "geo": PEERS}),
+        parse_eurostat(
+            "educ_uoe_perp04", "pupil_teacher_ratio", "RT", "Alumnos por profesor",
+            "Alumnos por profesor (equivalentes a tiempo completo), por etapa",
+            "Ratio de alumnos y estudiantes por profesor y personal académico, en equivalentes a tiempo completo (UOE).",
+        ),
+    ),
+    (
+        "eurostat_educ_uoe_enrs04.json",
+        eurostat_url("educ_uoe_enrs04", {"unit": "NR", "worktime": "TOTAL", "sector": "TOT_SEC", "sex": "T",
+                                         "isced11": ["ED3", "ED35"], "geo": PEERS}),
+        parse_eurostat(
+            "educ_uoe_enrs04", "upper_secondary_enrolment", "PERSONS", "Alumnos",
+            "Alumnado de secundaria superior (ISCED 3) total y en programas profesionales (FP de grado medio y equivalentes)",
+            "Alumnos matriculados en secundaria superior por orientación del programa (UOE).",
+        ),
+    ),
+    (
+        "eurostat_edat_lfse_24.json",
+        eurostat_url("edat_lfse_24", {"sex": "T", "age": "Y20-34", "duration": "Y1-3", "unit": "PC",
+                                      "isced11": ["ED34_44", "ED35_45", "ED5-8"], "geo": PEERS}),
+        parse_eurostat(
+            "edat_lfse_24", "recent_graduates_employment_rate", "PC", "% de ocupados",
+            "Tasa de empleo de titulados recientes (20-34 años, 1-3 años después de terminar, sin seguir estudiando)",
+            "Ocupados entre los jóvenes de 20 a 34 años que terminaron su nivel más alto hace 1 a 3 años y no siguen estudiando, "
+            "por nivel y orientación (general o profesional). Encuesta de Población Activa.",
+        ),
+    ),
+    (
+        "eurostat_edat_lfse_03.json",
+        eurostat_url("edat_lfse_03", {"sex": "T", "age": "Y25-34", "unit": "PC",
+                                      "isced11": ["ED0-2", "ED3_4", "ED5-8"], "geo": PEERS}),
+        parse_eurostat(
+            "edat_lfse_03", "attainment_25_34", "PC", "% de la población de 25 a 34 años",
+            "Nivel de estudios alcanzado, población de 25 a 34 años",
+            "Población de 25 a 34 años por nivel máximo de estudios terminado (ISCED 2011). Encuesta de Población Activa.",
+        ),
+    ),
+    (
         "eurostat_nama_10_gdp_deflator.json",
         eurostat_url("nama_10_gdp", {"na_item": "B1GQ", "unit": "PD20_NAC", "geo": "ES"}),
         parse_eurostat(
@@ -645,6 +693,43 @@ def oecd_eag_url() -> str:
     return f"https://api.db.nomics.world/v22/series/OECD/{OECD_EAG_DATASET}?" + urllib.parse.urlencode(
         {"dimensions": json.dumps(dims, separators=(",", ":")), "observations": 1, "limit": 500}
     )
+
+
+OECD_SAL_DATASET = "DSD_EAG_SAL_TREND@DF_TCH_STA"
+SAL_LEVELS = {"ISCED11_1": "Primaria", "ISCED11_24": "Secundaria inferior (ESO)", "ISCED11_34": "Secundaria superior (Bachillerato)"}
+
+
+def oecd_salary_url() -> str:
+    dims = {
+        "REF_AREA": OECD_PEERS, "MEASURE": ["SAL_STA"], "UNIT_MEASURE": ["IX"], "INST_TYPE_EDU": ["INST_EDU_PUB"],
+        "EDUCATION_LEV": list(SAL_LEVELS), "PERS_TYPE": ["TE"], "PERS_QUAL_LEV": ["TYP_EXP"], "PERS_EXP_LEV": ["EXP0", "EXP15"],
+    }
+    return f"https://api.db.nomics.world/v22/series/OECD/{OECD_SAL_DATASET}?" + urllib.parse.urlencode(
+        {"dimensions": json.dumps(dims, separators=(",", ":")), "observations": 1, "limit": 500}
+    )
+
+
+def parse_oecd_salaries(raw: Raw) -> Iterable[Batch]:
+    order = ["REF_AREA", "MEASURE", "UNIT_MEASURE", "INST_TYPE_EDU", "EDUCATION_LEV", "AGE", "SEX", "PERS_TYPE",
+             "PERS_QUAL_LEV", "PERS_EXP_LEV", "PRICE_BASE"]
+    series = []
+    for doc_index, doc in enumerate(raw.json()["series"]["docs"]):
+        dims = dict(zip(order, doc["series_code"].split(".")))
+        obs = [
+            {"period": period, "value": value, "pointer": pointer("series", "docs", doc_index, "value", i), "cell_index": i}
+            for i, (period, value) in enumerate(zip(doc["period"], doc["value"]))
+            if isinstance(value, (int, float))
+        ]
+        series.append(area_series(f"{OECD_SAL_DATASET}|{doc['series_code']}", dims["REF_AREA"], dims, obs))
+    yield {
+        "source_id": "oecd_eag_finance", "dataset_code": OECD_SAL_DATASET, "indicator_code": "SAL_STA.TE.TYP_EXP",
+        "frequency_code": "A", "frequency_label": "Anual", "unit_code": "IX2015", "unit_label": "Índice 2015 = 100, precios constantes",
+        "label": "Salario legal del profesorado en centros públicos, en términos reales (índice 2015 = 100)",
+        "definition": "OCDE Education at a Glance: salario anual bruto legal del profesorado con la titulación más habitual, al "
+        "inicio de la carrera y con 15 años de experiencia, deflactado (índice 2015 = 100). Leído de la réplica DBnomics.",
+        "methodology_url": "https://www.oecd.org/en/topics/sub-issues/teachers-salaries.html",
+        "source_url": f"https://db.nomics.world/OECD/{OECD_SAL_DATASET}",
+    }, sorted(series, key=lambda s: s["key"])
 
 
 EAG_LEVELS = {"ISCED11_1T8": "Primaria a terciaria", "ISCED11_1T4": "Primaria a postsecundaria no terciaria"}
@@ -773,6 +858,7 @@ API_SOURCES: list[tuple[str, str, Callable[[Raw], Iterable[Batch]]]] = [
     *MEFP_SOURCES,
     *EUROSTAT_SOURCES,
     ("oecd_eag_per_student_dbnomics.json", oecd_eag_url(), parse_oecd_eag),
+    ("oecd_eag_teacher_salaries_dbnomics.json", oecd_salary_url(), parse_oecd_salaries),
     *WB_SOURCES,
     *OWID_SOURCES,
 ]
@@ -785,6 +871,13 @@ CURATED_LABELS = {
     "pisa_reading_mean": ("PISA_SCORE", "Puntos PISA", "PISA: puntuación media en lectura (informe oficial)"),
     "pisa_science_mean": ("PISA_SCORE", "Puntos PISA", "PISA: puntuación media en ciencias (informe oficial)"),
     "pisa_repeated_grade_pct": ("PC", "% del alumnado de 15 años", "PISA: alumnado que declara haber repetido curso al menos una vez"),
+    "pisa_escs_gap_math": ("PISA_SCORE", "Puntos PISA", "PISA: diferencia en matemáticas entre el 25 % más aventajado y el 25 % más desaventajado (ISEC)"),
+    "pisa_escs_variance_pct": ("PC", "% de la varianza", "PISA: parte de la variación en matemáticas explicada por el índice socioeconómico (ISEC)"),
+    "pisa_resilient_pct": ("PC", "% del alumnado desaventajado", "PISA: alumnado desaventajado en el cuarto superior de rendimiento (resiliente)"),
+    "pisa_immigrant_share_pct": ("PC", "% del alumnado de 15 años", "PISA: alumnado de origen inmigrante"),
+    "pisa_immigrant_gap_math": ("PISA_SCORE", "Puntos PISA", "PISA: diferencia en matemáticas entre alumnado no inmigrante e inmigrante"),
+    "pisa_immigrant_gap_math_escs_adjusted": ("PISA_SCORE", "Puntos PISA", "PISA: diferencia inmigrante en matemáticas tras descontar el ISEC"),
+    "pisa_disadvantaged_immigrant_pct": ("PC", "% del alumnado inmigrante", "PISA: alumnado inmigrante socioeconómicamente desaventajado"),
 }
 
 
@@ -842,7 +935,11 @@ def load_curated(conn: sqlite3.Connection, snapshot_date: str, offline: bool) ->
         counts = load_indicator(
             conn, definition, sha256_bytes(payload), len(payload), rel(path), definition["source_url"], snapshot_date,
             {"documents": data["documents"], "gaps": data.get("gaps", [])},
-            [area_series(f"pisa_curated_es|{key}|{area}", area, {"indicator": key}, obs) for area, obs in sorted(grouped.items())],
+            [
+                area_series(f"pisa_curated_es|{key}|{area}", area, {"indicator": key}, obs,
+                            *((area.split(":", 1)[1], "es-ccaa-name", "region") if area.startswith("ES-CCAA:") else ()))
+                for area, obs in sorted(grouped.items())
+            ],
         )
         totals["releases"] += counts["releases"]
         totals["observations"] += counts["observations"]
