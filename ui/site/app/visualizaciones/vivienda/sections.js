@@ -234,7 +234,7 @@ export function SocialStockBars({ rows, names }) {
   const max = Math.max(...sorted.map((row) => row.value));
   const es = rows.find((row) => row.country === "ESP");
   return (
-    <div className="vizStack" style={{ marginTop: 18 }}>
+    <div className="vizStack">
       <h3>
         Vivienda social en alquiler, % del total de viviendas{es ? ` (España: ${num(es.value)} % en ${es.year})` : ""}
       </h3>
