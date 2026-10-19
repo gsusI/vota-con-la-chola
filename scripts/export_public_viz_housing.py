@@ -180,6 +180,32 @@ def regional(s: "Store", completed_national: dict[int, float]) -> dict:
             "tourist_es_series": [{"period": k, "value": v} for k, v in sorted(tourist["ES"].items())], "rows": rows}
 
 
+def connected_story(completed: dict[int, float], net_households: dict[int, float], intercensal: list[dict],
+                    years_income: dict[int, float], rate: dict[int, float], credit_growth: dict[int, float],
+                    first_year: int = 1995) -> list[dict]:
+    """«El dato mata el relato»: one point per year for a connected scatter.
+
+    x = homes completed per new household (3-year window of EPA households where available, otherwise the intercensal
+    average that covers the year); y = years of median household income (Banco de España, one continuous series);
+    colour = growth of housing credit. Windows that include 2021, when the EPA was reweighted, are flagged."""
+    story = []
+    for y in range(first_year, max(completed) + 1):
+        if y not in completed or y not in years_income:
+            continue
+        span_years = [t for t in (y - 2, y - 1, y) if t in net_households and t in completed]
+        if span_years:
+            built, formed = sum(completed[t] for t in span_years), sum(net_households[t] for t in span_years)
+            x, basis = built / formed, "epa_2021" if 2021 in span_years else "epa"
+        else:
+            span = next((i for i in intercensal if i["from"] < y <= i["to"]), None)
+            if span is None:
+                continue
+            x, basis = completed[y] / span["per_year"], f"censos {span['from']}–{span['to']}"
+        story.append({"year": y, "x": r(x, 2), "y": r(years_income[y], 2), "rate": r(rate.get(y), 2),
+                      "credit_growth": r(credit_growth.get(y), 1), "basis": basis, "window": span_years})
+    return story
+
+
 def build(conn: sqlite3.Connection) -> dict:
     s = Store(conn)
 
@@ -382,6 +408,7 @@ def build(conn: sqlite3.Connection) -> dict:
         "platform_nights_per_capita": nights_pc,
     }
 
+    credit_growth = annual(s.raw("credito_vivienda_hogares_tasa")["ES"])
     norms = None
     if s.optional("boe_housing_norms_per_year"):
         norms_raw = s.raw("boe_housing_norms_per_year")["ES"]
@@ -412,6 +439,8 @@ def build(conn: sqlite3.Connection) -> dict:
         norms["state_laws"] = landmarks
 
     region_block = regional(s, completed)
+
+    story = connected_story(completed, net_households, intercensal, years_bde, rate, credit_growth)
 
     sources = {}
     for source_id, releases in s.provenance.items():
@@ -489,6 +518,7 @@ def build(conn: sqlite3.Connection) -> dict:
         "rents": rents,
         "regions": region_block,
         "drivers": drivers,
+        "story": story,
         "norms": norms,
         "sources": sources,
     }
@@ -583,6 +613,9 @@ def write_csv(data: dict, path: Path) -> None:
     for key in ("net_migration_per_1000", "population_growth_per_1000", "household_size", "platform_nights_per_capita"):
         for geo, points in dr[key].items():
             rows.extend(("eurostat_sdmx", key, geo, p["year"], p["value"]) for p in points)
+    for row in data["story"]:
+        rows.append(("derivado", "relato_viviendas_por_hogar_nuevo", "ES", row["year"], row["x"]))
+        rows.append(("bde_indicadores_vivienda", "relato_anios_renta_hogar", "ES", row["year"], row["y"]))
     for scope, points in (data.get("norms") or {}).items():
         if scope != "state_laws":
             rows.extend(("boe_api", f"normas_vivienda_{scope}", "ES", p["year"], p["value"]) for p in points)

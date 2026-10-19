@@ -5,6 +5,7 @@ import HousingChart from "./HousingChart";
 import HousingTable from "./HousingTable";
 import { formatHousing } from "./format.mjs";
 import { TaxesFigure, CensusStockFigure, YoungOwnershipFigure, SocialStockBars, SpendingBars } from "./sections";
+import StoryFigure from "./StoryFigure";
 import { C, NAMES, PEER_LEGEND, PeerPanels, at, day, howMany, millions, num, thousands } from "./common";
 import { Explain, Part, Verdict } from "./explain";
 import {
@@ -222,6 +223,7 @@ export default function ViviendaPage() {
           construido ({regionWorst.map((row) => row.name).join(", ")}); no explica la burbuja de 2000–2007, que fue de crédito; y la segunda mitad de la hipótesis no se sostiene, porque el gasto público en vivienda sí es bajo.
         </p>
         <ul className="hvToc" aria-label="Partes de la página">
+          <li><a href="#el-dato">El dato frente al relato</a></li>
           <li><a href="#precio">1. El precio</a></li>
           <li><a href="#alquiler-parte">2. El alquiler</a></li>
           <li><a href="#oferta">3. Construcción y hogares</a></li>
@@ -233,6 +235,8 @@ export default function ViviendaPage() {
           <li><a href="#metodo">Método</a></li>
         </ul>
       </section>
+
+      <StoryFigure story={data.story} source={source} />
 
       <Part id="precio" title="1. El precio: cuánto cuesta comprar">Medimos el precio en años de salario, con la tasación y con el precio real de compraventa, por comunidades y frente a otros países.</Part>
 

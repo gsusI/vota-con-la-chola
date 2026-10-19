@@ -126,3 +126,12 @@
   flex: none;
   max-width: 70%;
 }
+
+/* The connected scatter keeps readable labels on phones by scrolling inside its own box, never the page. */
+.viz .hvScatter {
+  overflow-x: auto;
+}
+
+.viz .hvScatter svg {
+  min-width: 620px;
+}

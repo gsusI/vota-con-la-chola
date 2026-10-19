@@ -132,6 +132,17 @@ class RegionalParsingTest(unittest.TestCase):
         self.assertIsNone(pick("Andalucía. Total. Variación anual. "))
         self.assertIsNone(pick("Andalucía. Vivienda colectiva. Índice. "))
 
+    def test_connected_story_uses_epa_windows_census_fallback_and_flags_2021(self) -> None:
+        completed = {2001: 500.0, 2019: 80.0, 2020: 90.0, 2021: 100.0, 2022: 90.0}
+        net = {2019: 100.0, 2020: 100.0, 2021: -50.0, 2022: 300.0}
+        census = [{"from": 1991, "to": 2001, "per_year": 250.0}]
+        income = {y: 7.0 for y in completed}
+        story = {p["year"]: p for p in export.connected_story(completed, net, census, income, {}, {}, first_year=2001)}
+        self.assertEqual((story[2001]["x"], story[2001]["basis"]), (2.0, "censos 1991–2001"))
+        self.assertEqual((story[2020]["x"], story[2020]["basis"]), (0.85, "epa"))
+        self.assertEqual(story[2021]["basis"], "epa_2021")
+        self.assertEqual(story[2022]["window"], [2020, 2021, 2022])
+
     def test_index_rebase(self) -> None:
         self.assertEqual(export.index_to({2015: 80.0, 2025: 100.0}, 2015), {2015: 100.0, 2025: 125.0})
         self.assertEqual(export.index_to({2016: 1.0}, 2015), {})
