@@ -88,9 +88,9 @@ página a otra. Las cifras están en cada informe; esta tabla dice en qué caso 
 | Persona | Vivienda | Empleo | Educación | Sanidad | Fiscalidad |
 |---|---|---|---|---|---|
 | **1. Joven (25–34, el tramo del sueldo neto joven del INE), asalariada, vive sola de alquiler en la ciudad de Madrid** | B | B | 5 (si es extranjera) | Lucía | A |
-| **2. Pareja de 30–44 con hijos, hipoteca o alquiler en un área metropolitana** | C / D | — | 1 / 2 (sus hijos) | — | B |
+| **2. Pareja de 30–44 con dos hijos y dos sueldos (100 % y 67 % del salario medio de la OCDE, Taxing Wages), alquiler en el área metropolitana de Madrid (739 €) o compra** | C / D | — | 1 / 2 (sus hijos) | — | B |
 | **3. Adulto de 45–64 con poca formación, en el sur** | — | A / F | 3 (sus hijos), 6 | Antonio | — |
-| **4. Pensionista de 65 años o más, propietario sin hipoteca, en una provincia del interior** | A | — | 6 (generación) | Carmen | D |
+| **4. Pensionista de 65 años o más que vive solo, con la pensión media por pensionista, propietario sin hipoteca, en una provincia del interior** | A | — | 6 (generación) | Carmen | D |
 | **5. Profesional de 45–54, universitario, en el norte o en Madrid** | — | D | 4 (sus hijos) | Laura | E |
 
 Casos propios de una vertical que se mantienen: el joven que vive con sus padres (vivienda E: no aparece en ninguna
@@ -105,6 +105,7 @@ Reglas para los casos:
   edad…, de su municipio…»), nunca se presenta como una celda observada.
 - Las cifras calculadas (fiscalidad, vivienda) llevan su fórmula y sus supuestos, y se marcan como ilustrativas.
 - La media nacional va siempre al lado, para que se vea el salto.
+- La renta de un caso se calcula una sola vez con el mismo método en todas las páginas (persona 2: sueldos modelo de la OCDE, no la renta encuestada de los inquilinos; persona 4: una pensión, no la de una pareja). Las páginas no se leen unas a otras en ciclo: la que calcula una cifra la publica, y las demás la comprueban.
 
 ## 4. Prioridades: un cambio principal por vertical
 

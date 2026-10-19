@@ -214,6 +214,15 @@
   gap: 6px;
 }
 
+/* Lists are grid items of .vizProse: let them shrink below their longest word (URLs, codes) on phones. */
+.viz :where(.vizProse, .vizExplain) :where(ul, ol) {
+  min-width: 0;
+}
+
+.viz :where(.vizProse, .vizExplain) li {
+  overflow-wrap: anywhere;
+}
+
 .viz .vizProse p {
   margin: 0;
 }
