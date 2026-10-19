@@ -45,7 +45,7 @@ SOURCE_PAGES = {
     "minsan_egsp": ("Ministerio de Sanidad · Estadística de Gasto Sanitario Público 2002-2024", "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/gastoSanitario2005/home.htm"),
     "minsan_barometro": ("Ministerio de Sanidad y CIS · Barómetro Sanitario", "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/barometro/home.htm"),
     "funcas_perfil_gasto": ("Funcas · perfil de gasto sanitario público por edad (DT 673/2012, tabla 15)", "https://www.funcas.es/wp-content/uploads/Migracion/Publicaciones/PDF/1791.pdf"),
-    "who_gho": ("OMS · Global Health Observatory, gasto catastrófico (ODS 3.8.2)", "https://www.who.int/data/gho/data/indicators/indicator-details/GHO/proportion-of-population-with-household-expenditures-on-health-greater-than-10-of-total-household-expenditure-or-income-(sdg-3-8-2)-(-)"),
+    "who_gho": ("OMS · Global Health Observatory, gasto catastrófico (ODS 3.8.2)", "https://www.who.int/data/gho/data/indicators/indicator-details/GHO/population-with-household-expenditures-on-health-greater-than-10-of-total-household-expenditure-or-income-(sdg-3-8-2)-(-)"),
     "minsan_siap": ("Ministerio de Sanidad · Sistema de Información de Atención Primaria (SIAP), resumen 2023", "https://www.sanidad.gob.es/estadEstudios/estadisticas/docs/siap/Resumen_grafico_SIAP__Datos_2023.pdf"),
 }
 
@@ -971,7 +971,7 @@ def segments(store: Store, wait: dict, regions: dict) -> dict:
         return item("Espera media para operarse (procesos más comunes)", days[code], nat_days, "days", region_names[code],
                     f"SISLE, {regions['cut'][:4]}")
     cases = [
-        {"id": "persona-1", "name": "Lucía", "who": "25–29 años, asalariada, vive sola de alquiler en la ciudad de Madrid",
+        {"id": "persona-1", "name": "Lucía", "who": "25–34 años, asalariada, vive sola de alquiler en la ciudad de Madrid",
          "items": [
              bs_item("Necesitó atención de salud mental en el último año", "mental_need", "edad", "De 25 a 34 años", "personas de 25 a 34 años"),
              bs_item("De ellas, atendidas en la privada", "mental_private", "edad", "De 25 a 34 años", "personas de 25 a 34 años"),

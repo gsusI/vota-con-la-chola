@@ -316,6 +316,7 @@ export default function SanidadPage() {
   const betterLast = perc.better.at(-1);
   const worseFirst = perc.worse[0];
   const betterFirst = perc.better[0];
+  const worsePreCovid = perc.worse.findLast((p) => p.year < 2020);
   const percSeries = [
     { id: "better", label: "Creen que las listas han mejorado", shortLabel: "Mejoran", color: C.aqua, points: perc.better },
     { id: "worse", label: "Creen que las listas han empeorado", shortLabel: "Empeoran", color: C.orange, emphasis: true, points: perc.worse },
@@ -529,11 +530,11 @@ export default function SanidadPage() {
 
       <Figure
         id="el-dato-mata-el-relato"
-        title={`España logra la mortalidad tratable de los países que más gastan (${num(story.countries.spain.y, 0)} muertes por 100.000) con un ${num(100 - story.countries.spain.x, 0)} % menos de gasto público por habitante que la media de la UE, ya descontada la edad de su población; dentro de España, el gasto real subió en las ${story.regions.n} comunidades entre ${story.regions.from} y ${story.regions.to} y aun así la espera para las operaciones más comunes creció en ${story.regions.days_up}`}
+        title={`España logra la mortalidad tratable de los países que más gastan (${num(story.countries.spain.y, 0)} muertes por 100.000) con un ${num(100 - story.countries.spain.x, 0)} % menos de gasto público por habitante que la media de la UE en ${story.countries.last}, ya descontada la edad de su población; dentro de España, el gasto real subió en las ${story.regions.n} comunidades entre ${story.regions.from} y ${story.regions.to} y aun así la espera para las operaciones más comunes creció en ${story.regions.days_up}`}
         dek={`Tres paneles que se leen juntos. Arriba, los ${story.countries.rows.length} países de la UE: cuanto más gasta un país, menos muertes evitables por atención sanitaria tiene (correlación de rangos ${num(story.countries.rho, 2)}), y España queda muy por debajo de esa pauta: ningún país que gaste menos tiene menos mortalidad tratable, y solo ${story.countries.lower_mortality.length} la tienen menor, todos gastando por encima de la media. Abajo, las comunidades: el gasto real por habitante pasó de ${formatHealth(story.regions.total.x0, "eur")} a ${formatHealth(story.regions.total.x, "eur")} (euros de 2020), y la espera de los procesos seleccionados subió en ${story.regions.days_up} de ${story.regions.n} y los pacientes en lista por habitante en ${story.regions.rate_up}. Al final, dentro de España: lo que el sistema público cubre llega casi igual a todos los grupos; lo que no cubre, no.`}
         sources={[S.eurostat, S.egsp, S.sisle, S.oecd, S.barometro]}
         notes={[
-          `Panel 3: renuncia médica y dental, EU-SILC (Eurostat hlth_silc_08 y hlth_silc_09), quintiles de renta equivalente, 16 años o más. Especialista, salud mental y cita con el médico de familia: Barómetro Sanitario ${seg.barometro_year} (Ministerio de Sanidad y CIS), 18 años o más; la clase es la que declara el encuestado, no su renta. Cada fila compara los dos extremos de una sola variable: el Barómetro no publica cruces dobles. El margen de error es el del muestreo aleatorio simple sobre la muestra ponderada de cada grupo, como en la ficha técnica; con grupos de menos de 200 personas supera los 7 puntos.`,
+          `Panel 3: renuncia médica y dental, EU-SILC (Eurostat hlth_silc_08 y hlth_silc_09), quintiles de renta equivalente, 16 años o más. Especialista, salud mental y cita con el médico de familia: Barómetro Sanitario ${seg.barometro_year} (Ministerio de Sanidad y CIS), 18 años o más; la clase es la que declara el encuestado, no su renta. Cada fila compara los dos extremos de una sola variable: el Barómetro no publica cruces dobles. El margen de error es el del muestreo aleatorio simple sobre la muestra ponderada de cada grupo, como en la ficha técnica; en los grupos de este panel va de ±${num(Math.min(...seg.gaps.flatMap((g) => [g.a.moe, g.b.moe]).filter(Boolean)))} a ±${num(Math.max(...seg.gaps.flatMap((g) => [g.a.moe, g.b.moe]).filter(Boolean)))} puntos.`,
           `Países: gasto público y obligatorio (HF1) en estándar de poder de compra por habitante, como índice UE-27 = 100 en cada año para que la inflación no desplace los puntos, y ajustado por la estructura de edades de cada país con el perfil de coste por edad español (España pasa de ${num(story.countries.spain.x_raw)} a ${num(story.countries.spain.x)}); mortalidad tratable estandarizada por edad. Trayectorias ${story.countries.first} → ${story.countries.last} para España, Alemania, Francia, Italia, Portugal y la media UE (cuadrado).`,
           `Comunidades: gasto sanitario público consolidado del sector CCAA (EGSP), deflactado a euros de 2020 con el índice de precios que la OCDE aplica al gasto sanitario español (${story.regions.from}: ${num(story.regions.deflator[story.regions.from], 3)}; ${story.regions.to}: ${num(story.regions.deflator[story.regions.to], 3)}). Espera media de los procesos seleccionados del SISLE en diciembre de cada año; tamaño del círculo = pacientes en esa lista por 1.000 habitantes. Ajustado por la estructura de edades de cada comunidad (a la de España) con el mismo perfil de coste por edad. Ceuta y Melilla no tienen gasto en la EGSP. ${story.regions.from} es el primer año comparable tras la ruptura de Andalucía.`,
           `Correlación de rangos entre gasto y espera en ${story.regions.to}: ${num(story.regions.rho_level, 2)}; entre la subida del gasto y la subida de la espera: ${num(story.regions.rho_change, 2)} (las comunidades que más subieron el gasto no redujeron más la espera).`,
@@ -636,7 +637,7 @@ export default function SanidadPage() {
             <strong>«La sanidad se hunde por los recortes».</strong> Los recortes fueron reales en 2010–2013 (ver el gasto por habitante), pero entre {story.regions.from} y {story.regions.to} el gasto real subió en las {story.regions.spend_up} comunidades y la espera subió en {story.regions.days_up} de ellas: el problema de acceso de estos años no se explica por menos dinero.
           </p>
           <p>
-            <strong>«Basta con gastar más».</strong> Entre países, gastar más va con menos mortalidad tratable; entre comunidades, gastar más no va con esperar menos ({num(story.regions.rho_level, 2)}).
+            <strong>«Basta con gastar más».</strong> Entre países, gastar más va con menos mortalidad tratable; entre comunidades, gastar más no va con esperar menos: la correlación de rangos entre gasto real por habitante y espera en {story.regions.to} es de {num(story.regions.rho_level, 2)}{story.regions.rho_level > 0 ? ", positiva: las que más gastan esperan algo más, no menos" : ""}.
           </p>
           <p>
             <strong>Lo que sigue siendo ambiguo.</strong> Por qué España saca tanto con tan poco (¿sistema, hábitos, salarios sanitarios bajos?), si la demanda creció más deprisa que el gasto (envejecimiento, pacientes que antes no se apuntaban) y si las listas de cada comunidad miden lo mismo. Ningún gráfico con estos datos puede separar esas causas. Tampoco hay esperas por edad, renta ni municipio: el SISLE solo las publica por comunidad.
@@ -650,7 +651,7 @@ export default function SanidadPage() {
           «España» no va al médico: van personas que viven en sitios distintos, con edades y rentas distintas. Estas cuatro son las mismas en todas las páginas de visualizaciones. Al lado de cada cifra va la media de España, para ver el salto.
         </p>
         <p style={{ fontSize: "0.86rem", color: "var(--viz-muted)" }}>
-          Cómo se construyen: no hay una estadística oficial de «mujeres de 27 años que viven solas de alquiler en Madrid». Cada cifra viene del corte de una sola variable que describe a la persona (su edad, su municipio, su comunidad o su clase), salvo las marcadas como cruce observado, que salen de una tabla con edad y renta a la vez. El Barómetro lleva su margen de error al 95 %.
+          Cómo se construyen: no hay una estadística oficial de «personas de 25 a 34 años que viven solas de alquiler en la ciudad de Madrid». Cada cifra viene del corte de una sola variable que describe a la persona (su edad, su municipio, su comunidad o su clase), salvo las marcadas como cruce observado, que salen de una tabla con edad y renta a la vez. El Barómetro lleva su margen de error al 95 %.
         </p>
         <div className="vizStats">
           {seg.cases.map((person) => (
@@ -1337,7 +1338,7 @@ export default function SanidadPage() {
       >
         <Explain
           shows="Qué pasa cuando alguien pide cita con su médico de familia: si le atienden enseguida o tiene que esperar, y por qué."
-          read="La línea verde (atención inmediata) es baja y no mejora; la naranja (falta de cita) ronda el 70 %."
+          read={`La línea verde (atención inmediata) es baja y no mejora; la naranja (falta de cita) ronda el ${num(noSlotLast.value, 0)} %.`}
           not="Son respuestas de los pacientes, no registros de los centros de salud; solo hay cuatro años y no se puede comparar con antes de 2022 ni con otros países."
         />
         <HealthChart
@@ -1352,7 +1353,7 @@ export default function SanidadPage() {
 
       <Figure
         id="percepcion"
-        title={`El ${num(worseLast.value, 0)} % cree que las listas de espera empeoraron en el último año; en ${worseFirst.year} lo creía el ${num(worseFirst.value, 0)} %`}
+        title={`El ${num(worseLast.value, 0)} % cree que las listas de espera empeoraron en el último año; en ${worseFirst.year} lo creía el ${num(worseFirst.value, 0)} %${worseFirst.value === Math.min(...perc.worse.map((p) => p.value)) ? ", el mínimo de la serie" : ""}${worsePreCovid ? `, y en ${worsePreCovid.year}, antes de la Covid, el ${num(worsePreCovid.value, 0)} %` : ""}`}
         dek={`Opinión, no medida. Los que creen que mejoraron pasan del ${num(betterFirst.value, 0)} % al ${num(betterLast.value, 0)} %. El pesimismo se dispara con los recortes de 2012–2014 y tras la Covid, y no ha vuelto a los niveles de los 2000, aunque la espera media de toda la lista quirúrgica no haya subido en la serie comparable: lo que la gente percibe se parece más al número de personas esperando y a la espera para el especialista y el médico de familia.`}
         legend={percSeries}
         sources={[{ label: `Ministerio de Sanidad y CIS, Barómetro Sanitario, serie 1998–2025${retrieved("minsan_barometro")}`, href: src.minsan_barometro.page }]}
@@ -1646,7 +1647,7 @@ export default function SanidadPage() {
             <strong>Para quién se cumple.</strong> Lo que cubre la sanidad pública llega casi igual a todos: renunciar al médico apenas depende de la renta ({num(medGap.a.value)} % frente a {num(medGap.b.value)} %). Lo que no cubre o cubre tarde se reparte por renta, edad y lugar: dentista ({num(dentGap.a.value)} % frente a {num(dentGap.b.value)} %), salud mental pagada en la privada ({num(mentalGap.a.value, 0)} % de los jóvenes que la recibieron) y cita rápida con el médico de familia ({num(gpGap.a.value, 0)} % en los pueblos pequeños frente a {num(gpGap.b.value, 0)} % en las grandes ciudades). A los 30 años, {num(leSex.gap_30)} años de esperanza de vida separan a un hombre con estudios primarios de una mujer universitaria.
           </li>
           <li>
-            <strong>Lo que no se puede afirmar.</strong> Que las esperas «llevan subiendo desde 2003»: la serie del Ministerio tiene tres rupturas (2012, 2016, 2018) y antes de 2018 no se pueden comparar cifras. Que gastar más acortaría las esperas: entre comunidades no hay relación entre gasto por habitante y espera (correlación {num(reg.rho_spend_days, 2)}).
+            <strong>Lo que no se puede afirmar.</strong> Que las esperas «llevan subiendo desde 2003»: la serie del Ministerio tiene {wait.breaks.surgery.length} rupturas ({wait.breaks.surgery.map((b) => b.date.slice(0, 4)).join(", ")}) y antes de {sinceLabel} no se pueden comparar cifras. Que gastar más acortaría las esperas: entre comunidades, gastar más por habitante no va con esperar menos (correlación de rangos con el gasto ajustado por edad: {num(story.regions.rho_level, 2)} con la espera de dic {story.regions.to} y {num(reg.rho_adj_spend_days, 2)} con la de {cutLabel(lastRegionCut)}; {num(reg.rho_spend_days, 2)} sin ajustar).
           </li>
         </ul>
         <p>
