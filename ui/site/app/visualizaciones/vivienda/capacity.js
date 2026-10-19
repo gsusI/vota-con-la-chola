@@ -24,6 +24,7 @@ export function CapacityFigure({ capacity, homeM2, source }) {
   const yg = at(c.years_net_young, y);
   const rate = at(c.net_rate_avg, y);
   const rate67 = at(c.net_rate_67, y);
+  const rateMed = at(c.net_rate_median, y);
   const wedge = at(c.tax_wedge, y);
   const effort = c.effort_pct;
   const effortPeak = effort.reduce((a, b) => (b.value > a.value ? b : a));
@@ -31,7 +32,7 @@ export function CapacityFigure({ capacity, homeM2, source }) {
     <Figure
       id="capacidad"
       title={`Con el sueldo neto mediano, un piso de ${homeM2} m² cuesta ${num(m)} años (${num(ms)} con el precio de compraventa), no los ${num(g)} que salen con el salario bruto medio (${y})`}
-      dek={`El mismo piso medido con lo que de verdad cobra un trabajador típico. Del salario bruto se restan el IRPF y las cotizaciones del trabajador (${num(rate)} % para el salario medio, ${num(rate67)} % para uno del 67 % de la media; la cuña fiscal total, contando las cotizaciones de la empresa, es del ${num(wedge)} % del coste laboral). La mediana es lo que cobra el trabajador del medio, menos que la media, que suben los sueldos altos. Para quien tiene de 25 a 34 años: ${num(yg)} años.`}
+      dek={`El mismo piso medido con lo que de verdad cobra un trabajador típico. Del salario bruto se restan el IRPF y las cotizaciones del trabajador (${num(rate)} % para el salario medio, ${num(rateMed)} % para el mediano y ${num(rate67)} % para uno del 67 % de la media; la cuña fiscal total, contando las cotizaciones de la empresa, es del ${num(wedge)} % del coste laboral). La mediana es lo que cobra el trabajador del medio, menos que la media, que suben los sueldos altos. Para quien tiene de 25 a 34 años: ${num(yg)} años.`}
       legend={series}
       sources={[
         source("ine_tempus", "INE, Encuesta de Estructura Salarial (mediana y por edad) y ETCL", "https://www.ine.es/jaxiT3/Tabla.htm?t=28191"),
@@ -40,7 +41,7 @@ export function CapacityFigure({ capacity, homeM2, source }) {
         source("bde_indicadores_vivienda", "Banco de España, esfuerzo teórico"),
       ]}
       notes={[
-        "Neto = bruto × (1 − tipo medio de IRPF y cotizaciones del trabajador de la OCDE para un soltero sin hijos). Para la mediana y los jóvenes se aplica el tipo de quien gana el 67 % del salario medio, el nivel publicado más próximo a la mediana: es una aproximación; con hijos o en pareja el tipo es menor.",
+        "Neto = bruto × (1 − tipo medio de IRPF y cotizaciones del trabajador de la OCDE para un soltero sin hijos). La OCDE publica el tipo al 67 % y al 100 % del salario medio: para el sueldo mediano (en torno al 73 % de ese salario) se interpola entre ambos; para los de 25 a 34 años se usa el del 67 %. Es una aproximación; con hijos o en pareja el tipo es menor.",
         "La Encuesta de Estructura Salarial es anual desde 2008 y se publica con dos años de retraso; incluye tiempo parcial. «Con precio de compraventa» encadena el IPV del INE al valor tasado de 2015.",
       ]}
       table={

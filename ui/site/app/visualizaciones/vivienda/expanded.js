@@ -49,7 +49,10 @@ export function SalePricesFigure({ sale, bases, source }) {
   );
 }
 
-export function RegionalPriceFigure({ regions, homeM2, source }) {
+export function RegionalPriceFigure({ regions, homeM2, capacity, source }) {
+  const netYear = capacity.years_net_median_sale_price.at(-1).year;
+  const netNational = capacity.years_net_median_sale_price.at(-1).value;
+  const grossNational = capacity.years_gross_avg.find((p) => p.year === netYear)?.value;
   const rows = regions.rows.filter((row) => row.years_salary?.[regions.to] != null).sort((a, b) => b.years_salary[regions.to] - a.years_salary[regions.to]);
   const top = rows[0];
   const bottom = last(rows);
@@ -61,8 +64,8 @@ export function RegionalPriceFigure({ regions, homeM2, source }) {
   return (
     <Figure
       id="regiones-precio"
-      title={`Un piso de ${homeM2} m² cuesta ${num(top.years_salary[regions.to])} años de salario en ${top.name} y ${num(bottom.years_salary[regions.to])} en ${bottom.name}`}
-      dek={`Años de salario bruto medio de cada comunidad para pagar un piso de ${homeM2} m² al valor tasado medio de esa comunidad, ${regions.to}. Frente a 2008, al final de la burbuja, ${above2008.length ? `solo ${above2008.map((row) => row.name).join(" y ")} ${above2008.length > 1 ? "están" : "está"} más cara${above2008.length > 1 ? "s" : ""} hoy` : "todas están hoy más baratas"} (lo que más ha subido respecto a 2008 es ${biggest2008.name}: ${num(biggest2008.years_salary[2008])} → ${num(biggest2008.years_salary[regions.to])}); frente a 2015, el año más barato, sube en casi todas, sobre todo en ${biggestRise.name} (${num(biggestRise.years_salary[2015])} → ${num(biggestRise.years_salary[regions.to])}).`}
+      title={`Un piso de ${homeM2} m² cuesta ${num(top.years_salary[regions.to])} años de salario bruto medio en ${top.name} y ${num(bottom.years_salary[regions.to])} en ${bottom.name}`}
+      dek={`Años de salario bruto medio de cada comunidad para pagar un piso de ${homeM2} m² al valor tasado medio de esa comunidad, ${regions.to}. Es la medida bruta, la única con salario por comunidad para todos los años; con el sueldo neto mediano y el precio de compraventa, como en la cifra principal de la página, todas las barras serían bastante más largas (en España, ${num(netNational)} años frente a ${num(grossNational)} en ${netYear}). Frente a 2008, al final de la burbuja, ${above2008.length ? `solo ${above2008.map((row) => row.name).join(" y ")} ${above2008.length > 1 ? "están" : "está"} más cara${above2008.length > 1 ? "s" : ""} hoy` : "todas están hoy más baratas"} (lo que más ha subido respecto a 2008 es ${biggest2008.name}: ${num(biggest2008.years_salary[2008])} → ${num(biggest2008.years_salary[regions.to])}); frente a 2015, el año más barato, sube en casi todas, sobre todo en ${biggestRise.name} (${num(biggestRise.years_salary[2015])} → ${num(biggestRise.years_salary[regions.to])}).`}
       legend={[
         { id: "last", label: String(regions.to), color: C.blue },
         { id: "2015", label: "2015", color: C.peer },

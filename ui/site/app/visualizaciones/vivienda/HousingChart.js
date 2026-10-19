@@ -219,7 +219,7 @@ export default function HousingChart({
             d={pathFor(s)}
             fill="none"
             stroke={s.color}
-            strokeWidth={s.emphasis ? 2.5 : 2}
+            strokeWidth={s.emphasis ? 3 : s.thin ? 1.25 : 2}
             strokeLinejoin="round"
             strokeLinecap="round"
             strokeDasharray={s.dashed ? "5 4" : undefined}

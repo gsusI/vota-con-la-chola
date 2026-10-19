@@ -199,6 +199,19 @@ class RegionalParsingTest(unittest.TestCase):
         self.assertAlmostEqual(export.mortgage_payment(100000, 0), 100000 / 300)
         self.assertAlmostEqual(export.mortgage_payment(265392, 2.78), 1228.36, places=2)
 
+    def test_tax_decomposition_splits_net_years_exactly(self) -> None:
+        # The coordinator's reference: 6.71 gross years in 2025 at a 23.5 % rate, 4.94 in 2000 at 19.8 %.
+        out = export.tax_decomposition({2000: 4.94, 2013: 5.95, 2019: 6.3, 2025: 6.71}, {2000: 19.8, 2013: 22.9, 2019: 21.8, 2025: 23.5}, (2000, 2013, 2019))
+        first = out["from_base"][0]
+        self.assertEqual((first["from"], first["to"]), (2000, 2025))
+        self.assertAlmostEqual(first["years_to"], 8.77, places=2)
+        self.assertAlmostEqual(first["tax_part"], 0.4, places=2)
+        for row in out["from_base"] + out["steps"]:
+            self.assertAlmostEqual(row["price_part"] + row["tax_part"], row["change"], places=1)
+        step = next(row for row in out["steps"] if row["from"] == 2013)
+        self.assertEqual(step["to"], 2019)
+        self.assertLess(step["tax_part"], 0)  # the rate fell between 2013 and 2019
+
     def test_index_rebase(self) -> None:
         self.assertEqual(export.index_to({2015: 80.0, 2025: 100.0}, 2015), {2015: 100.0, 2025: 125.0})
         self.assertEqual(export.index_to({2016: 1.0}, 2015), {})

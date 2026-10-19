@@ -44,13 +44,20 @@ export default function ViviendaPage() {
   const aff = data.affordability;
   const sup = data.supply;
 
-  // 1. Years of salary
+  // 1. Years of pay. Headline: median NET pay at the INE sale price (what the typical worker takes home against what homes
+  // sell for), from 2008. Context, overlapped and labelled, never spliced: average net pay at the appraisal price from
+  // 2000, and the old gross-average measure as a thin line.
+  const capA = data.capacity;
   const yearsSeries = [
-    { id: "ine-retro", label: "Salario INE (ETCL), serie retrospectiva 2000–2007", tableLabel: "INE 2000–2007", color: C.blue, emphasis: true, noEndLabel: true, points: aff.years_ine_retro },
-    { id: "ine", label: "Salario bruto medio INE (ETCL)", shortLabel: "Salario INE", tableLabel: "INE 2008–", color: C.blue, emphasis: true, points: aff.years_ine },
-    { id: "oecd", label: "Salario medio a tiempo completo (OCDE)", shortLabel: "Salario OCDE", tableLabel: "OCDE", color: C.orange, points: aff.years_oecd },
-    { id: "bde", label: "Renta bruta del hogar mediano (Banco de España, 93,75 m²)", shortLabel: "Renta del hogar (BdE)", tableLabel: "BdE, hogar", color: C.aqua, points: aff.years_bde_household },
-    { id: "ipv", label: "Salario INE con precio de compraventa (INE IPV, encadenado al valor tasado de 2015)", shortLabel: "Con precio de compraventa", tableLabel: "Compraventa (INE IPV)", color: C.yellow, dashed: true, emphasis: true, points: data.sale_prices.years_ipv_chained },
+    { id: "net-median-sale", label: "Sueldo neto mediano, precio de compraventa (INE IPV)", shortLabel: "Neto mediano, compraventa", tableLabel: "Neto mediano, compraventa", color: C.blue, emphasis: true, points: capA.years_net_median_sale_price },
+    { id: "net-avg-appraisal", label: "Sueldo neto medio, precio de tasación (serie larga, desde 2000)", shortLabel: "Neto medio, tasación", tableLabel: "Neto medio, tasación", color: C.aqua, dashed: true, points: capA.years_net_avg },
+    { id: "ine-retro", label: "Salario bruto medio, tasación, serie retrospectiva 2000–2007", tableLabel: "Bruto medio 2000–2007", color: C.ref, thin: true, noEndLabel: true, points: aff.years_ine_retro },
+    { id: "ine", label: "Salario bruto medio, precio de tasación (la medida anterior)", shortLabel: "Bruto medio, tasación", tableLabel: "Bruto medio 2008–", color: C.ref, thin: true, points: aff.years_ine },
+    { id: "bde", label: "Renta bruta del hogar mediano (Banco de España, 93,75 m²)", shortLabel: "Renta del hogar (BdE)", tableLabel: "BdE, hogar", color: C.peer, thin: true, points: aff.years_bde_household },
+  ];
+  const grossSeries = [
+    { id: "ine-retro", label: "Salario bruto medio INE, 2000–2007", color: C.blue, emphasis: true, noEndLabel: true, points: aff.years_ine_retro },
+    { id: "ine", label: "Salario bruto medio INE", shortLabel: "Salario INE", color: C.blue, emphasis: true, points: aff.years_ine },
   ];
   const yearsLegend = yearsSeries.filter((s) => s.id !== "ine-retro");
 
@@ -133,10 +140,6 @@ export default function ViviendaPage() {
     .sort((a, b) => spendLast(a).total - spendLast(b).total);
 
   const yearsUp = h.years_last > years2000;
-  const ipvYears = data.sale_prices.years_ipv_chained;
-  const ipvLast = ipvYears.at(-1);
-  const ipvLow = ipvYears.filter((p) => p.year > 2007).reduce((a, b) => (b.value < a.value ? b : a));
-  const ipvPeak = at(ipvYears, 2007);
   const dec = data.drivers.household_decomposition;
   const rents = data.rents;
   const rentYear = rents.ipva_idx.at(-1).year;
@@ -150,7 +153,6 @@ export default function ViviendaPage() {
   const nineties = sup.completed_protected.filter((p) => p.year < 2000).map((p) => (p.value / at(sup.completed_total, p.year)) * 100);
   const credit = data.drivers.credit_pct_gdp;
   const cap = data.capacity;
-  const capYear = Math.min(cap.years_net_median.at(-1).year, cap.years_net_median_sale_price.at(-1).year);
   const esMoney = data.money.find((row) => row.geo === "ESP");
   const deMoney = data.money.find((row) => row.geo === "DEU");
   const burdenYear = cap.peers.overburden_tenants.ES.at(-1).year;
@@ -162,6 +164,14 @@ export default function ViviendaPage() {
   const B = data.bases;
   const ys = B.years_sale;
   const ya = B.years_appraisal;
+  const nms = capA.years_net_median_sale_price;
+  const nmsLast = nms.at(-1);
+  const nmsFirst = nms[0];
+  const nmsAt = (y) => at(nms, y);
+  const TD = capA.tax_decomposition;
+  const tdHead = (base) => TD.headline.from_base.find((row) => row.from === base);
+  const tdLong = (base) => TD.long_run.from_base.find((row) => row.from === base);
+  const signed = (v, d = 1) => `${v > 0 ? "+" : v < 0 ? "−" : ""}${num(Math.abs(v), d)}`;
   const W = B.completed_per_household;
   const wLast = W[W.length - 1];
   const wBoom = W[0];
@@ -194,10 +204,10 @@ export default function ViviendaPage() {
           </div>
         ) : null}
         <div className="card vizStat">
-          <span className="vizStat__label">Piso de {h.home_m2} m² en años de salario bruto medio</span>
-          <span className="vizStat__value">{num(ipvLast.value)}</span>
+          <span className="vizStat__label">Piso de {h.home_m2} m² en años de sueldo neto mediano</span>
+          <span className="vizStat__value">{num(nmsLast.value)}</span>
           <span className="vizStat__note">
-            en {h.last_year} con el precio de compraventa del INE; {num(ys["2019"])} en 2019, {num(ys["2013"])} en 2013 y {num(ys["2007"])} en 2007
+            al precio de compraventa del INE en {nmsLast.year}; {num(nmsAt(2019))} en 2019, {num(nmsAt(2013))} en 2013 y {num(nmsFirst.value)} en {nmsFirst.year} (la serie del sueldo mediano empieza en {nmsFirst.year}). Con el salario bruto medio y la tasación salen {num(ya[String(B.last_year)])} ({B.last_year})
           </span>
         </div>
         <div className="card vizStat">
@@ -227,10 +237,10 @@ export default function ViviendaPage() {
         <h2 id="resumen-title">En resumen</h2>
         <ol>
           <li>
-            <strong>La vivienda es más cara respecto a los sueldos que en 2019 y que en 2013, aunque menos que en 2007.</strong> Un piso de {h.home_m2} m² cuesta{" "}
-            <strong>{num(ys[String(B.last_year)])}</strong> años de salario bruto medio al precio de compraventa del INE ({num(ys["2019"])} en 2019, {num(ys["2013"])} en 2013 y{" "}
-            {num(ys["2007"])} en 2007); con la tasación, {num(ya[String(B.last_year)])} ({num(ya["2000"])} en 2000). Con el sueldo neto mediano, el que cobra el trabajador típico, son{" "}
-            <strong>{num(at(cap.years_net_median_sale_price, capYear))}</strong> años ({capYear}). Quien más lo sufre es quien alquila: el {num(tenantsEs)} % de los inquilinos a
+            <strong>La vivienda es más cara respecto a los sueldos que en 2019 y que en 2013, aunque menos que antes de la crisis.</strong> Un piso de {h.home_m2} m² cuesta{" "}
+            <strong>{num(nmsLast.value)}</strong> años de sueldo neto mediano, el que cobra el trabajador típico, al precio de compraventa del INE ({nmsLast.year}; {num(nmsAt(2019))} en 2019,{" "}
+            {num(nmsAt(2013))} en 2013 y {num(nmsFirst.value)} en {nmsFirst.year}). De los {num(tdHead(2019)?.change, 1)} años más desde 2019, {num(tdHead(2019)?.tax_part, 1)} se deben a que el
+            trabajador paga más IRPF y cotizaciones. Con el salario bruto medio y la tasación, la medida habitual, salen {num(ya[String(B.last_year)])} ({B.last_year}): se queda corta. Quien más lo sufre es quien alquila: el {num(tenantsEs)} % de los inquilinos a
             precio de mercado dedica más del 40 % de su renta a la vivienda (UE: {num(tenantsEu)} %).
           </li>
           <li>
@@ -278,25 +288,68 @@ export default function ViviendaPage() {
 
       <WhoPaysFigure segments={data.segments} source={source} />
 
-      <Part id="precio" title="1. El precio: cuánto cuesta comprar">Medimos el precio en años de salario, con la tasación y con el precio real de compraventa, por comunidades y frente a otros países.</Part>
+      <Part id="precio" title="1. El precio: cuánto cuesta comprar">Medimos el precio en años de sueldo neto, con el precio real de compraventa y con la tasación, por comunidades y frente a otros países.</Part>
 
       <Figure
         id="anios-de-salario"
-        title={`Un piso de ${h.home_m2} m² cuesta ${num(ys[String(B.last_year)])} años de salario al precio de compraventa: ${num(ys[String(B.last_year)] - ys["2019"], 1)} más que en 2019 y ${num(ys[String(B.last_year)] - ys["2013"], 1)} más que en 2013, pero ${num(ys["2007"] - ys[String(B.last_year)], 1)} menos que en 2007 (con la tasación: ${num(ya[String(B.last_year)])}; ${num(ya["2000"])} en 2000)`}
-        dek={`Valor tasado medio de la vivienda libre por m² multiplicado por ${h.home_m2} m², dividido por el salario bruto anual medio. En ${h.last_year}: ${formatHousing(h.home_price_last, "eur")} frente a ${formatHousing(h.wage_last, "eur")} de salario. Tres denominadores distintos, sin empalmar: el salario por trabajador del INE (incluye tiempo parcial), el salario por asalariado a tiempo completo de la OCDE y la renta del hogar mediano que usa el Banco de España.`}
-        legend={yearsLegend}
+        title={`Un piso de ${h.home_m2} m² cuesta ${num(nmsLast.value)} años de sueldo neto mediano al precio de compraventa (${nmsLast.year}): ${num(nmsLast.value - nmsAt(2019), 1)} más que en 2019 y ${num(nmsLast.value - nmsAt(2013), 1)} más que en 2013, pero ${num(nmsFirst.value - nmsLast.value, 1)} menos que en ${nmsFirst.year}; con el salario bruto medio y la tasación salen ${num(ya[String(B.last_year)])}`}
+        dek={`Precio de un piso de ${h.home_m2} m² dividido por lo que de verdad cobra el trabajador del medio: el salario bruto mediano (INE, Encuesta de Estructura Salarial) menos su IRPF y sus cotizaciones. El precio es el de compraventa (índice del INE sobre escrituras, encadenado al valor tasado de 2015). La serie del sueldo mediano empieza en ${nmsFirst.year}; para ver desde 2000 se dibuja aparte, solapada y sin empalmar, el sueldo neto medio con el precio de tasación (${num(at(capA.years_net_avg, 2000))} años en 2000, ${num(at(capA.years_net_avg, 2007))} en 2007, ${num(capA.years_net_avg.at(-1).value)} en ${capA.years_net_avg.at(-1).year}). La línea gris fina es la medida anterior, salario bruto medio y tasación: ${num(ya[String(B.last_year)])} años, un ${num((nmsLast.value / at(aff.years_ine, nmsLast.year) - 1) * 100, 0)} % menos que la principal en ${nmsLast.year}, porque usa el bruto, la media (que suben los sueldos altos) y la tasación. Debajo, cuánto del cambio se debe a que el trabajador paga más impuestos.`}
+        legend={yearsSeries.filter((s) => s.id !== "ine-retro")}
         sources={[
+          source("ine_tempus", "INE, Índice de Precios de Vivienda (compraventa), Encuesta de Estructura Salarial (salario mediano) y Encuesta Trimestral de Coste Laboral (salario medio)", "https://www.ine.es/jaxiT3/Tabla.htm?t=28191"),
+          source("oecd_dbnomics", "OCDE, Taxing Wages: IRPF y cotizaciones del trabajador al 67 % y al 100 % del salario medio (réplica DBnomics)", "https://db.nomics.world/OECD/DSD_TAX_WAGES_COMP@DF_TW_COMP"),
           source("mivau_boletin", "Ministerio de Vivienda, valor tasado de la vivienda libre", "https://apps.fomento.gob.es/BoletinOnline2/?nivel=2&orden=35000000"),
-          source("ine_tempus", "INE, Encuesta Trimestral de Coste Laboral"),
-          source("oecd_dbnomics", "OCDE, Average annual wages (réplica DBnomics)", "https://db.nomics.world/OECD/DSD_EARNINGS@AV_AN_WAGE"),
           source("bde_indicadores_vivienda", "Banco de España, indicadores de vivienda"),
         ]}
         notes={[
-          "Salario INE: coste salarial total por trabajador y mes × 12 (ordinario, pagas extra y atrasos; antes de IRPF y cotizaciones del trabajador). 2000–2007 es la serie retrospectiva del INE y 2008 en adelante la actual: se dibujan como tramos separados.",
-          "Valor tasado: media de tasaciones hipotecarias, no precio escriturado; en los años de subida puede ir por detrás del mercado. Es una media nacional: en Madrid, Barcelona o la costa el piso típico cuesta bastante más.",
-          `Año ${h.last_year}: media de los cuatro trimestres publicados. La serie de la OCDE termina en ${aff.years_oecd.at(-1).year}.`,
+          `Neto = bruto × (1 − t), con t el tipo medio de IRPF y cotizaciones del trabajador de un soltero sin hijos (OCDE). El sueldo mediano es el ${num(capA.median_share_of_oecd_wage.at(-1).value * 100, 0)} % del salario medio de la OCDE (${capA.median_share_of_oecd_wage.at(-1).year}), entre los dos niveles publicados (67 % y 100 %): su tipo se interpola entre ambos por esa proporción (${num(capA.net_rate_median.find((p) => p.year === nmsLast.year)?.value)} % en ${nmsLast.year}). Es una aproximación: con hijos o en pareja el tipo es menor.`,
+          "Descomposición: años netos = años brutos / (1 − t). El cambio entre dos años se separa, sin resto, en precio frente al salario bruto (años brutos del año final con el tipo del inicial menos los del inicial) e impuestos del trabajador (lo que añade pasar del tipo inicial al final). No mide los impuestos de la compra (ITP, IVA), que se ven en la parte 6.",
+          "Salario medio INE: coste salarial total por trabajador × 12, en dos tramos (retrospectiva 2000–2007 y serie actual desde 2008), sin empalmar. Valor tasado: media de tasaciones hipotecarias; en los años de subida va por detrás del mercado. Todo son medias nacionales: en Madrid, Barcelona o la costa el piso típico cuesta bastante más.",
         ]}
-        table={<HousingTable series={yearsSeries} unit="years" />}
+        table={
+          <>
+            <HousingTable series={[...yearsSeries, { id: "rate-med", label: "Tipo del trabajador mediano (%)", points: capA.net_rate_median, unit: "pct" }, { id: "rate-avg", label: "Tipo del trabajador medio (%)", points: capA.net_rate_avg, unit: "pct" }]} unit="years" />
+            <details className="vizTable">
+              <summary>Ver la descomposición en tabla</summary>
+              <div className="vizTable__scroll">
+                <table>
+                  <thead>
+                    <tr>
+                      <th scope="col">Medida</th>
+                      <th scope="col">Tramo</th>
+                      <th scope="col">Años netos al inicio</th>
+                      <th scope="col">Al final</th>
+                      <th scope="col">Cambio</th>
+                      <th scope="col">Por el precio frente al bruto</th>
+                      <th scope="col">Por los impuestos del trabajador</th>
+                      <th scope="col">Tipo del trabajador</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[["headline", "Neto mediano, compraventa"], ["long_run", "Neto medio, tasación"]].flatMap(([key, label]) =>
+                      [...TD[key].from_base, ...TD[key].steps.filter((row) => !TD[key].from_base.some((b) => b.from === row.from && b.to === row.to))].map((row) => (
+                        <tr key={`${key}-${row.from}-${row.to}`}>
+                          <td>{label}</td>
+                          <td>
+                            {row.from}–{row.to}
+                          </td>
+                          <td>{num(row.years_from, 2)}</td>
+                          <td>{num(row.years_to, 2)}</td>
+                          <td>{signed(row.change, 2)}</td>
+                          <td>{signed(row.price_part, 2)}</td>
+                          <td>{signed(row.tax_part, 2)}</td>
+                          <td>
+                            {num(row.rate_from)} % → {num(row.rate_to)} %
+                          </td>
+                        </tr>
+                      )),
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            </details>
+          </>
+        }
       >
         <HousingChart
           series={yearsSeries}
@@ -307,12 +360,23 @@ export default function ViviendaPage() {
             { year: 2008, label: "Quiebra de Lehman", row: 0 },
             { year: 2013, label: "Mínimo de construcción", row: 1 },
           ]}
-          ariaLabel="Años de salario necesarios para comprar un piso de 90 metros cuadrados en España"
+          ariaLabel="Años de sueldo necesarios para comprar un piso de 90 metros cuadrados en España"
         />
+        <div>
+          <h3 className="vizPanelTitle">
+            Cuánto del cambio se debe a pagar más IRPF y cotizaciones
+            <span>años de sueldo neto mediano a precio de compraventa, por tramos; tipo del trabajador mediano entre paréntesis</span>
+          </h3>
+          <TaxSplit rows={TD.headline.steps} />
+          <p className="hvMuted">
+            Desde 2000, con el sueldo neto medio y la tasación: {signed(tdLong(2000)?.change, 2)} años, de los que {signed(tdLong(2000)?.tax_part, 2)} se deben a que el tipo del trabajador medio pasó del{" "}
+            {num(tdLong(2000)?.rate_from)} % al {num(tdLong(2000)?.rate_to)} % ({tdLong(2000)?.to}).
+          </p>
+        </div>
         <Explain
-          shows="Cuántos años de salario bruto medio, sin gastar en nada más, hacen falta para pagar un piso de 90 m² al precio medio de España."
-          read="Más alto = más caro respecto a los sueldos. Las líneas usan salarios o precios distintos; fíjate en la forma común (subida hasta 2007, caída hasta 2013–2015, subida después), no en que coincidan. La línea discontinua usa el precio real de compraventa, que desde 2018 sube más que la tasación."
-          notSay="No incluye intereses de la hipoteca, la entrada, los impuestos ni el precio de tu ciudad: es una media nacional."
+          shows={`Cuántos años de sueldo neto, sin gastar en nada más, hacen falta para pagar un piso de ${h.home_m2} m² al precio medio de España, y cuánto de su subida o bajada se debe al precio y cuánto a los impuestos del trabajador.`}
+          read="Más alto = más caro respecto a lo que se cobra. La línea azul gruesa es la medida principal; la verde discontinua da el largo plazo con otra medida (neto medio, tasación) y no se empalma con la azul. Las grises finas son el bruto y la renta del hogar, como referencia. En las barras de abajo, azul es el precio y naranja los impuestos: si el tipo baja, la naranja resta."
+          notSay="No incluye intereses de la hipoteca, la entrada ni los impuestos de la compra, y es una media nacional: en las grandes ciudades el piso cuesta bastante más (parte 2 y «Quién paga la vivienda»)."
         />
       </Figure>
 
@@ -320,7 +384,7 @@ export default function ViviendaPage() {
 
       <CapacityFigure capacity={data.capacity} homeM2={h.home_m2} source={source} />
 
-      <RegionalPriceFigure regions={data.regions} homeM2={h.home_m2} source={source} />
+      <RegionalPriceFigure regions={data.regions} homeM2={h.home_m2} capacity={data.capacity} source={source} />
 
       <Figure
         id="pares"
@@ -428,7 +492,7 @@ export default function ViviendaPage() {
 
       <Figure
         id="contra"
-        title={`En contra de la hipótesis: entre ${boom.from} y ${boom.to} se terminaron ${num(boom.ratio, 2)} viviendas por cada hogar nuevo y aun así el piso pasó de ${num(years2000)} a ${num(years2007)} años de salario`}
+        title={`En contra de la hipótesis: entre ${boom.from} y ${boom.to} se terminaron ${num(boom.ratio, 2)} viviendas por cada hogar nuevo y aun así el piso pasó de ${num(years2000)} a ${num(years2007)} años de salario bruto medio`}
         dek={`Durante la burbuja sobraban viviendas nuevas y los precios subieron más que nunca. Lo que sí cambió fue el crédito: el tipo de los préstamos para vivienda bajó del ${num(rateAt(1990), 1)} % en 1990 al ${num(rateAt(2005), 1)} % en 2005. La escasez de obra nueva no explica aquella subida; sí encaja con la de después de 2015, con tipos que volvieron a subir en 2023.`}
         legend={[
           { id: "years", label: "Años de salario (INE)", color: C.blue },
@@ -454,7 +518,7 @@ export default function ViviendaPage() {
               Años de salario para un piso de {h.home_m2} m²
               <span>INE, tramos 2000–2007 y desde 2008</span>
             </h3>
-            <HousingChart series={yearsSeries.slice(0, 2)} unit="years" xMin={1989} xMax={h.last_year} height={220} ariaLabel="Años de salario" />
+            <HousingChart series={grossSeries} unit="years" xMin={1989} xMax={h.last_year} height={220} ariaLabel="Años de salario" />
           </div>
           <div>
             <h3 className="vizPanelTitle">
@@ -650,10 +714,10 @@ export default function ViviendaPage() {
         <ul>
           <li>
             <Verdict kind="yes" />
-            <strong>La vivienda se ha encarecido.</strong> Al precio de compraventa, un piso cuesta {num(ys[String(B.last_year)])} años de salario: más que en 2019 ({num(ys["2019"])})
-            y que en 2013 ({num(ys["2013"])}), menos que en 2007 ({num(ys["2007"])}). En euros, el precio de compraventa ha subido un {num(B.sale_price_change_pct["2019"], 0)} % desde 2019
-            y un {num(B.sale_price_change_pct["2007"], 0)} % desde 2007, y el salario medio un {num(B.wage_change_pct["2019"], 0)} % y un {num(B.wage_change_pct["2007"], 0)} %. Con el sueldo neto mediano son{" "}
-            {num(at(cap.years_net_median_sale_price, capYear))} años. Frente a otros países, la carga media de los hogares españoles no es excepcional (casi la mitad de la
+            <strong>La vivienda se ha encarecido.</strong> Al precio de compraventa, un piso cuesta {num(nmsLast.value)} años de sueldo neto mediano ({nmsLast.year}): más que en 2019 ({num(nmsAt(2019))})
+            y que en 2013 ({num(nmsAt(2013))}), menos que en {nmsFirst.year} ({num(nmsFirst.value)}); con el salario bruto medio, {num(ys[String(B.last_year)])} años frente a {num(ys["2007"])} en 2007.
+            Desde 2019, {num(tdHead(2019)?.tax_part, 1)} de los {num(tdHead(2019)?.change, 1)} años más se deben a que el trabajador paga un tipo mayor de IRPF y cotizaciones; entre 2013 y 2019 el tipo bajó. En euros, el precio de compraventa ha subido un {num(B.sale_price_change_pct["2019"], 0)} % desde 2019
+            y un {num(B.sale_price_change_pct["2007"], 0)} % desde 2007, y el salario medio un {num(B.wage_change_pct["2019"], 0)} % y un {num(B.wage_change_pct["2007"], 0)} %. Frente a otros países, la carga media de los hogares españoles no es excepcional (casi la mitad de la
             población vive en una vivienda propia ya pagada), pero la de los inquilinos a precio de mercado sí: el {num(tenantsEs)} % gasta más del 40 % de su renta en vivienda, frente al{" "}
             {num(tenantsEu)} % en la UE. El alquiler medio
             de todos los contratos, en cambio, ha subido al ritmo de salarios y precios ({num(rents.ipva_change_pct["2011"], 0)} % desde 2011 y {num(rents.ipva_change_pct["2019"], 0)} % desde
@@ -709,8 +773,8 @@ export default function ViviendaPage() {
             </dd>
           </div>
           <div>
-            <dt>Años de salario</dt>
-            <dd>Precio de un piso de {h.home_m2} m² dividido por el salario bruto anual medio: cuántos años de sueldo íntegro costaría, sin intereses ni gastos.</dd>
+            <dt>Años de sueldo</dt>
+            <dd>Precio de un piso de {h.home_m2} m² dividido por el sueldo anual: cuántos años de sueldo íntegro costaría, sin intereses ni gastos. La medida principal usa el sueldo neto mediano (lo que cobra el trabajador del medio tras IRPF y cotizaciones) y el precio de compraventa; con el salario bruto medio y la tasación sale bastante menos.</dd>
           </div>
           <div>
             <dt>Hogares nuevos netos</dt>
@@ -772,7 +836,7 @@ export default function ViviendaPage() {
         <h2 id="metodo-title">Método y fuentes</h2>
         <ul>
           <li>
-            <strong>Denominador.</strong> El precio se mide en años de salario y de renta del hogar; la construcción, por hogar nuevo; el gasto público, en % del PIB.
+            <strong>Denominador.</strong> El precio se mide en años de sueldo neto mediano (con el bruto medio y la renta del hogar como complemento); la construcción, por hogar nuevo; el gasto público, en % del PIB.
           </li>
           <li>
             <strong>Rupturas de serie.</strong> Salario del INE en dos tramos (retrospectiva 2000–2007 y serie actual desde 2008); censos frente a encuestas; ECPF frente a ECV en 2004; EPA
@@ -806,5 +870,37 @@ export default function ViviendaPage() {
         </p>
       </section>
     </main>
+  );
+}
+
+// Change in years of net pay between two years, split into price against gross pay and the worker's tax rate.
+function TaxSplit({ rows }) {
+  const max = Math.max(...rows.flatMap((row) => [Math.abs(row.price_part), Math.abs(row.tax_part)]));
+  const bar = (value, color) => (
+    <span className="hvSplit__track">
+      <span className="hvSplit__bar" style={{ width: `${(Math.abs(value) / max) * 50}%`, [value < 0 ? "right" : "left"]: "50%", background: color }} />
+    </span>
+  );
+  const sgn = (v) => `${v > 0 ? "+" : v < 0 ? "−" : ""}${num(Math.abs(v), 2)}`;
+  return (
+    <ul className="hvSplit" aria-label="Cambio en años de sueldo neto por tramos, separado en precio e impuestos">
+      {rows.map((row) => (
+        <li key={`${row.from}-${row.to}`}>
+          <span className="hvSplit__label">
+            {row.from}–{row.to}: <strong>{sgn(row.change)} años</strong>
+          </span>
+          <span className="hvSplit__row">
+            <span>Precio frente al sueldo bruto {sgn(row.price_part)}</span>
+            {bar(row.price_part, C.blue)}
+          </span>
+          <span className="hvSplit__row">
+            <span>
+              IRPF y cotizaciones {sgn(row.tax_part)} ({num(row.rate_from)} % → {num(row.rate_to)} %)
+            </span>
+            {bar(row.tax_part, C.orange)}
+          </span>
+        </li>
+      ))}
+    </ul>
   );
 }

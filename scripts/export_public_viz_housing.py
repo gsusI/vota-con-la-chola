@@ -469,7 +469,17 @@ def build(conn: sqlite3.Connection) -> dict:
         return pts({y: prices[y] / v for y, v in income.items() if y in prices and v}, 2)
 
     net_avg = {y: v * (1 - tw100[y] / 100) for y, v in wage_all.items() if y in tw100}
-    net_median = {y: v * (1 - tw67[y] / 100) for y, v in median.items() if y in tw67}
+    # The median earner gets ~72-74 % of the OECD average wage: interpolate the worker's tax rate between the published
+    # 67 % and 100 % points by that share (nearest year's share when the OECD wage is missing).
+    share_aw = {y: median[y] / wage_oecd[y] for y in median if y in wage_oecd}
+    def median_rate(y: int) -> float | None:
+        if y not in tw67 or y not in tw100 or not share_aw:
+            return None
+        share = share_aw.get(y) or share_aw[min(share_aw, key=lambda k: abs(k - y))]
+        share = min(1.0, max(0.67, share))
+        return tw67[y] + (tw100[y] - tw67[y]) * (share - 0.67) / 0.33
+    tw_med = {y: median_rate(y) for y in sorted(set(tw67) & set(tw100)) if median_rate(y) is not None}
+    net_median = {y: v * (1 - tw_med[y] / 100) for y, v in median.items() if y in tw_med}
     net_young = {y: v * (1 - tw67[y] / 100) for y, v in young_pay.items() if y in tw67}
     burden = {
         "overburden_total": s.raw("ilc_lvho07a.TOTAL"), "overburden_young": s.raw("ilc_lvho07a.Y15-29"),
@@ -486,6 +496,13 @@ def build(conn: sqlite3.Connection) -> dict:
         "years_net_median_sale_price": years_with(net_median, ipv_price),
         "years_net_young_sale_price": years_with(net_young, ipv_price),
         "net_rate_avg": pts(tw100, 1, since=2000), "net_rate_67": pts(tw67, 1, since=2000), "tax_wedge": pts(wedge, 1, since=2000),
+        "net_rate_median": pts(tw_med, 1, since=2000), "median_share_of_oecd_wage": pts(share_aw, 3),
+        "tax_decomposition": {
+            # Headline: median net pay at the INE sale price (the EES median starts in 2008).
+            "headline": tax_decomposition({y: ipv_price[y] / v for y, v in median.items() if y in ipv_price}, tw_med, (2008, 2013, 2019)),
+            # Long run: average pay at the appraisal price, from 2000.
+            "long_run": tax_decomposition({y: home[y] / v for y, v in wage_all.items() if y in home}, tw100, (2000, 2007, 2013, 2019)),
+        },
         "pay": {"gross_avg": pts(wage_all, 0), "net_avg": pts(net_avg, 0), "gross_median": pts(median, 0),
                 "net_median": pts(net_median, 0), "gross_young": pts(young_pay, 0), "net_young": pts(net_young, 0)},
         "effort_pct": pts(effort, 1),
@@ -694,6 +711,33 @@ def build(conn: sqlite3.Connection) -> dict:
         "norms": norms,
         "sources": sources,
     }
+
+
+def split_tax(g_a: float, t_a: float, g_b: float, t_b: float) -> tuple[float, float]:
+    """Years of net pay = years of gross pay / (1 - t), t = worker's income tax + social contributions (as a fraction).
+    The change from a to b splits exactly into the price against gross pay, G_b/(1-t_a) - G_a/(1-t_a), and the worker's
+    tax rate, G_b/(1-t_b) - G_b/(1-t_a)."""
+    return g_b / (1 - t_a) - g_a / (1 - t_a), g_b / (1 - t_b) - g_b / (1 - t_a)
+
+
+def tax_decomposition(gross_years: dict[int, float], rate_pct: dict[int, float], bases: tuple[int, ...]) -> dict:
+    """From each base year to the last year, and step by step between consecutive bases (so a rate that fell and then
+    rose shows both moves)."""
+    years = [y for y in gross_years if y in rate_pct]
+    if not years:
+        return {"from_base": [], "steps": []}
+    last = max(years)
+
+    def row(a: int, b: int) -> dict:
+        g_a, t_a, g_b, t_b = gross_years[a], rate_pct[a] / 100, gross_years[b], rate_pct[b] / 100
+        price, tax = split_tax(g_a, t_a, g_b, t_b)
+        return {"from": a, "to": b, "years_from": r(g_a / (1 - t_a)), "years_to": r(g_b / (1 - t_b)),
+                "change": r(g_b / (1 - t_b) - g_a / (1 - t_a)), "price_part": r(price), "tax_part": r(tax),
+                "gross_from": r(g_a), "gross_to": r(g_b), "rate_from": r(rate_pct[a], 1), "rate_to": r(rate_pct[b], 1)}
+
+    valid = [b for b in bases if b in gross_years and b in rate_pct and b < last]
+    chain = [*valid, last]
+    return {"from_base": [row(b, last) for b in valid], "steps": [row(a, b) for a, b in zip(chain, chain[1:])]}
 
 
 TENURES = ["OWN_NL", "OWN_L", "RENT_MKT", "RENT_FR"]
@@ -959,8 +1003,14 @@ def write_csv(data: dict, path: Path) -> None:
             rows.extend(("eurostat_sdmx", key, geo, p["year"], p["value"]) for p in points)
     cap = data["capacity"]
     for key in ("years_gross_avg", "years_net_avg", "years_gross_median", "years_net_median", "years_net_young",
-                "years_net_median_sale_price", "years_net_young_sale_price", "net_rate_avg", "net_rate_67", "tax_wedge", "effort_pct"):
+                "years_net_median_sale_price", "years_net_young_sale_price", "net_rate_avg", "net_rate_67", "net_rate_median",
+                "median_share_of_oecd_wage", "tax_wedge", "effort_pct"):
         rows.extend(("derivado", f"capacidad_{key}", "ES", p["year"], p["value"]) for p in cap[key])
+    for measure, block in cap["tax_decomposition"].items():
+        for kind, items in block.items():
+            for row in items:
+                for key in ("change", "price_part", "tax_part", "years_from", "years_to", "rate_from", "rate_to"):
+                    rows.append(("derivado", f"descomposicion_irpf_{measure}_{kind}_{row['from']}_{key}", "ES", row["to"], row[key]))
     for key, by_geo in cap["peers"].items():
         for geo, points in by_geo.items():
             rows.extend(("eurostat_sdmx", f"capacidad_{key}", geo, p["year"], p["value"]) for p in points)

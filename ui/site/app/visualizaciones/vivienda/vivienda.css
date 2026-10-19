@@ -460,3 +460,58 @@
     top: 22px;
   }
 }
+
+/* Tax split under the years-of-pay chart: price vs the worker's tax rate, bars diverging from a centre line. */
+.viz .hvSplit {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.82rem;
+}
+
+.viz .hvSplit li {
+  display: grid;
+  grid-template-columns: minmax(120px, 180px) 1fr;
+  gap: 2px 12px;
+  align-items: center;
+}
+
+.viz .hvSplit__label {
+  grid-row: span 2;
+  font-variant-numeric: tabular-nums;
+}
+
+.viz .hvSplit__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(120px, 1fr);
+  gap: 10px;
+  align-items: center;
+  color: var(--viz-ink-2);
+  font-variant-numeric: tabular-nums;
+}
+
+.viz .hvSplit__track {
+  position: relative;
+  height: 10px;
+  border-left: 0;
+  background: linear-gradient(to right, transparent calc(50% - 0.5px), var(--viz-axis) calc(50% - 0.5px), var(--viz-axis) calc(50% + 0.5px), transparent calc(50% + 0.5px));
+}
+
+.viz .hvSplit__bar {
+  position: absolute;
+  top: 1px;
+  height: 8px;
+  border-radius: 2px;
+}
+
+@media (max-width: 640px) {
+  .viz .hvSplit li {
+    grid-template-columns: 1fr;
+  }
+
+  .viz .hvSplit__label {
+    grid-row: auto;
+  }
+}
