@@ -423,38 +423,75 @@ def parse_oecd(raw: Raw) -> Iterable[Batch]:
         }, series
 
 
-EUROSTAT_URL = (
-    "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/gov_10a_taxag"
-    "?geo=ES&geo=EU27_2020&unit=PC_GDP&sector=S13_S212&na_item=D2_D5_D91_D61_M_D995"
-)
+EUROSTAT_API = "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data"
+EUROSTAT_GEOS = ["ES", "DE", "FR", "IT", "PT", "EU27_2020"]
+
+# (dataset, fixed filters, unit_code, unit_label, label, definition)
+EUROSTAT_DATASETS = [
+    (
+        "gov_10a_taxag", {"unit": "PC_GDP", "sector": "S13_S212", "na_item": "D2_D5_D91_D61_M_D995"}, "PC_GDP", "% del PIB",
+        "Carga fiscal total (impuestos y cotizaciones sociales netas), % del PIB",
+        "Impuestos sobre producción e importaciones, renta y patrimonio, de capital y cotizaciones sociales efectivas, "
+        "menos impuestos y cotizaciones evaluados pero no recaudados (SEC 2010).",
+    ),
+    (
+        "nama_10_pc", {"unit": "CP_PPS_EU27_2020_HAB", "na_item": "B1GQ"}, "PPS_HAB", "Estándar de poder adquisitivo (UE-27) por habitante",
+        "PIB por habitante en paridad de poder adquisitivo",
+        "Producto interior bruto a precios corrientes por habitante, en estándar de poder adquisitivo UE-27 (comparable entre países).",
+    ),
+    (
+        "tec00113", {"unit": "PPS_EU27_2020_HAB", "na_item": "B7G", "sector": "S14_S15", "direct": "PAID"}, "PPS_HAB",
+        "Estándar de poder adquisitivo (UE-27) por habitante",
+        "Renta disponible ajustada de los hogares por habitante en paridad de poder adquisitivo",
+        "Renta disponible bruta ajustada de hogares e ISFLSH (incluye las transferencias sociales en especie: sanidad y "
+        "educación públicas) por habitante, en estándar de poder adquisitivo UE-27.",
+    ),
+    (
+        "nasa_10_ki", {"unit": "PC", "na_item": "B7G_R_HAB_2010", "sector": "S14_S15"}, "IDX2010", "Índice 2010 = 100",
+        "Renta disponible ajustada real de los hogares por habitante (2010 = 100)",
+        "Renta disponible bruta ajustada de hogares e ISFLSH por habitante, deflactada por el deflactor del consumo final de los hogares.",
+    ),
+]
 
 
-def parse_eurostat(raw: Raw) -> Iterable[Batch]:
-    data = raw.data
-    geo_idx = data["dimension"]["geo"]["category"]["index"]
-    time_idx = data["dimension"]["time"]["category"]["index"]
-    n_time = len(time_idx)
-    series = []
-    for geo, gi in sorted(geo_idx.items(), key=lambda kv: kv[1]):
-        obs = []
-        for year, ti in sorted(time_idx.items(), key=lambda kv: kv[1]):
-            flat = gi * n_time + ti
-            value = data["value"].get(str(flat))
-            if value is not None:
-                obs.append({"period": year, "value": value, "pointer": pointer("value", flat), "cell_index": flat,
-                            "status": data.get("status", {}).get(str(flat))})
-        dims = {"unit": "PC_GDP", "sector": "S13_S212", "na_item": "D2_D5_D91_D61_M_D995", "geo": geo}
-        series.append(area_series(f"gov_10a_taxag|PC_GDP|S13_S212|D2_D5_D91_D61_M_D995|{geo}", geo, dims, obs))
-    yield {
-        "source_id": "eurostat_sdmx", "dataset_code": "gov_10a_taxag", "indicator_code": "D2_D5_D91_D61_M_D995.S13_S212",
-        "frequency_code": "A", "frequency_label": "Anual", "unit_code": "PC_GDP", "unit_label": "% del PIB",
-        "label": "Carga fiscal total (impuestos y cotizaciones sociales netas), % del PIB",
-        "definition": "Impuestos sobre producción e importaciones, renta y patrimonio, de capital y cotizaciones "
-        "sociales efectivas, menos impuestos y cotizaciones evaluados pero no recaudados (SEC 2010).",
-        "methodology_url": "https://ec.europa.eu/eurostat/cache/metadata/en/gov_10a_taxag_esms.htm",
-        "source_url": "https://ec.europa.eu/eurostat/databrowser/view/gov_10a_taxag/default/table",
-        "source_updated_at": data.get("updated"),
-    }, series
+def eurostat_url(dataset: str, filters: dict[str, str]) -> str:
+    query = [("geo", geo) for geo in EUROSTAT_GEOS] + list(filters.items())
+    return f"{EUROSTAT_API}/{dataset}?" + urllib.parse.urlencode(query)
+
+
+def parse_eurostat_dataset(dataset: str, filters: dict[str, str], unit_code: str, unit_label: str, label: str,
+                           definition: str) -> Callable[[Raw], Iterable[Batch]]:
+    """JSON-stat cube where every dimension but geo and time is fixed to one value."""
+    def parse(raw: Raw) -> Iterable[Batch]:
+        data = raw.data
+        ids, sizes = data["id"], data["size"]
+        strides = [1] * len(ids)
+        for i in range(len(ids) - 2, -1, -1):
+            strides[i] = strides[i + 1] * sizes[i + 1]
+        geo_pos, time_pos = ids.index("geo"), ids.index("time")
+        geo_idx = data["dimension"]["geo"]["category"]["index"]
+        time_idx = data["dimension"]["time"]["category"]["index"]
+        series = []
+        for geo, gi in sorted(geo_idx.items(), key=lambda kv: kv[1]):
+            obs = []
+            for year, ti in sorted(time_idx.items(), key=lambda kv: kv[1]):
+                flat = gi * strides[geo_pos] + ti * strides[time_pos]
+                value = data["value"].get(str(flat))
+                if value is not None:
+                    obs.append({"period": year, "value": value, "pointer": pointer("value", flat), "cell_index": flat,
+                                "status": data.get("status", {}).get(str(flat))})
+            key = "|".join([dataset, *(f"{k}={v}" for k, v in sorted(filters.items())), f"geo={geo}"])
+            series.append(area_series(key, geo, {**filters, "geo": geo}, obs))
+        yield {
+            "source_id": "eurostat_sdmx", "dataset_code": dataset,
+            "indicator_code": ".".join(filters[k] for k in sorted(filters) if k != "unit"),
+            "frequency_code": "A", "frequency_label": "Anual", "unit_code": unit_code, "unit_label": unit_label,
+            "label": label, "definition": definition,
+            "methodology_url": f"https://ec.europa.eu/eurostat/cache/metadata/en/{dataset}_esms.htm",
+            "source_url": f"https://ec.europa.eu/eurostat/databrowser/view/{dataset}/default/table",
+            "source_updated_at": data.get("updated"),
+        }, series
+    return parse
 
 
 WB_INDICATORS = {
@@ -482,7 +519,10 @@ def parse_worldbank(code: str) -> Callable[[Raw], Iterable[Batch]]:
 API_SOURCES: list[tuple[str, str, Callable[[Raw], Iterable[Batch]]]] = [
     ("imf_fpp_rev_esp.json", "https://www.imf.org/external/datamapper/api/v1/rev/ESP", parse_imf),
     ("oecd_revenue_statistics_dbnomics.json", oecd_url(), parse_oecd),
-    ("eurostat_gov_10a_taxag.json", EUROSTAT_URL, parse_eurostat),
+    *[
+        (f"eurostat_{dataset}.json", eurostat_url(dataset, filters), parse_eurostat_dataset(dataset, filters, *rest))
+        for dataset, filters, *rest in EUROSTAT_DATASETS
+    ],
     *[
         (f"worldbank_{code}.json", f"https://api.worldbank.org/v2/country/ESP/indicator/{code}?format=json&per_page=200",
          parse_worldbank(code))
