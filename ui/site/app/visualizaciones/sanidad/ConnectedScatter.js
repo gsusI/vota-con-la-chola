@@ -7,15 +7,15 @@ function niceMax(value) {
 }
 
 // Labels: highlighted points first; a label that would overlap one already placed is dropped (the table has all).
-function placeLabels(points, sx, sy, priority) {
+function placeLabels(points, sx, sy, priority, offset) {
   const placed = [];
   const shown = new Set();
   const order = [...points].sort((a, b) => priority(b) - priority(a));
   for (const p of order) {
-    const x = sx(p.x) + 8;
+    const x = sx(p.x) + offset(p);
     const y = sy(p.y);
-    const w = 6.2 * (p.short || p.name).length;
-    if (placed.every((q) => Math.abs(q.y - y) >= 12 || x + w < q.x || q.x + q.w < x)) {
+    const w = 7.2 * (p.short || p.name).length + 4;
+    if (placed.every((q) => Math.abs(q.y - y) >= 15 || x + w < q.x || q.x + q.w < x)) {
       placed.push({ x, y, w });
       shown.add(p.code);
     }
@@ -65,7 +65,7 @@ export default function ConnectedScatter({
     for (let v = 0; v <= max + 1e-9; v += step) out.push(Math.round(v * 100) / 100);
     return out;
   };
-  const shown = placeLabels(points, sx, sy, (p) => (highlight.includes(p.code) ? 2 : emphasis.includes(p.code) ? 1 : 0));
+  const shown = placeLabels(points, sx, sy, (p) => (highlight.includes(p.code) ? 2 : emphasis.includes(p.code) ? 1 : 0), (p) => radius(p) + 3);
   const tick = (value, unit) => (unit === "eur" ? formatHealth(value, "eur") : formatHealth(value, "count"));
   return (
     <svg role="img" aria-label={ariaLabel} viewBox={`0 0 ${width} ${height}`} style={{ width: "100%", height: "auto", display: "block" }}>
@@ -77,7 +77,7 @@ export default function ConnectedScatter({
           </text>
         </g>
       ))}
-      {ticks(xMax).map((t) => (
+      {ticks(xMax).filter((t) => t > 0).map((t) => (
         <text key={`x${t}`} x={sx(t)} y={margin.top + innerH + 16} textAnchor="middle" className="tsChart__tick">
           {tick(t, xUnit)}
         </text>

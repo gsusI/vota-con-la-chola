@@ -14,8 +14,8 @@ function labelled(points, sx, sy, highlight) {
   for (const p of order) {
     const x = sx(p.x);
     const y = sy(p.y);
-    const w = 6.2 * (p.short || p.name).length;
-    if (placed.every((q) => Math.abs(q.y - y) >= 12 || x + w < q.x || q.x + q.w < x)) {
+    const w = 7.2 * (p.short || p.name).length + 4;
+    if (placed.every((q) => Math.abs(q.y - y) >= 15 || x + w < q.x || q.x + q.w < x)) {
       placed.push({ x, y, w });
       shown.add(p.code);
     }
@@ -53,7 +53,7 @@ export default function Scatter({ points, xLabel, yLabel, xUnit = "eur", yUnit =
           </text>
         </g>
       ))}
-      {ticks(xMax).map((t) => (
+      {ticks(xMax).filter((t) => t > 0).map((t) => (
         <text key={`x${t}`} x={sx(t)} y={margin.top + innerH + 16} textAnchor="middle" className="tsChart__tick">
           {formatHealth(t, xUnit)}
         </text>
