@@ -70,7 +70,7 @@ export function SqueezeFigure({ squeeze, distribution, territory, segments }) {
       title={`Desde ${base}, lo que recauda el Estado por habitante en España ha crecido un ${nf(b0.tax)} % descontada la inflación y la renta de los hogares, un ${nf(b0.income)} %${
         reverse ? `; en la UE, al revés (${nf(eu0.tax)} % y ${nf(eu0.income)} %)` : ""
       }${old && mid ? `; pero desde ${ageBase} la renta mediana real de los mayores de 65 ${moved(old.change[ageBase])} y la de 25 a 49 años ${moved(mid.change[ageBase])}` : ""}`}
-      dek={`El dato mata el relato: a la izquierda, cuánto se paga por habitante en impuestos y cotizaciones y cuánta renta disponible les queda a los hogares por habitante en ${year}, en la misma escala y en estándar de poder adquisitivo (euros que compran lo mismo en cada país). A la derecha, cuánto ha cambiado cada cosa descontada la inflación, también por persona ocupada; cambia el año de partida para ver que la conclusión no depende de él (salvo ${notOutgrows.join(" y ")}). Nivel, cambio, composición y vecinos en una sola figura. Debajo, la renta de los hogares de España partida por edad: la media de todos esconde que unas edades han ganado y otras no.`}
+      dek={`El dato mata el relato: a la izquierda, cuánto se recauda por habitante en impuestos y cotizaciones (de hogares y empresas) y cuánta renta disponible les queda a los hogares por habitante en ${year}, en la misma escala y en estándar de poder adquisitivo (euros que compran lo mismo en cada país). A la derecha, cuánto ha cambiado cada cosa descontada la inflación, también por persona ocupada; cambia el año de partida para ver que la conclusión no depende de él (salvo ${notOutgrows.join(" y ")}). Nivel, cambio, composición y vecinos en una sola figura. Debajo, la renta de los hogares de España partida por edad: la media de todos esconde que unas edades han ganado y otras no.`}
       legend={[
         { id: "tax", label: "Impuestos y cotizaciones por habitante", color: TAX },
         { id: "worker", label: "Impuestos y cotizaciones por persona ocupada (solo el cambio)", color: WORKER },
@@ -170,7 +170,7 @@ export function SqueezeFigure({ squeeze, distribution, territory, segments }) {
               .map((b) => `desde ${b}, ${signedPct1(old.change[String(b)])} frente a ${signedPct1(mid.change[String(b)])}`)
               .join("; ")}
             . Coincide con la subida de la pensión media real (<a href="#descomposicion">más pensión por pensionista</a>) mientras la renta de
-            los adultos en edad de trabajar no ha recuperado del todo la de antes de la crisis.
+            los adultos en edad de trabajar no ha recuperado la de antes de la crisis; coinciden en el tiempo, lo que no prueba que una cosa cause la otra.
             {ageGaps.length
               ? ` Desde ${ageBase}, en ${ageGaps
                   .map((g) => `${g.label} la distancia es ${g.old - g.mid < old.change[ageBase] - mid.change[ageBase] ? "menor" : "mayor"} (${signedPct1(g.old)} frente a ${signedPct1(g.mid)})`)
@@ -183,7 +183,8 @@ export function SqueezeFigure({ squeeze, distribution, territory, segments }) {
         ) : null}
         <li>
           <strong>«En España se pagan más impuestos que en Alemania»</strong>
-          No por persona: en {year} cada habitante paga {nf(es.tax_pps, 0)} frente a {nf(de.tax_pps, 0)} en Alemania, y lo que paga equivale al{" "}
+          No por habitante: en {year} se recaudan {nf(es.tax_pps, 0)} PPS por habitante (de hogares, empresas y no residentes) frente a {nf(de.tax_pps, 0)} en
+          Alemania, y eso equivale al{" "}
           {nf(es.tax_to_income_pct)} % de la renta que les queda a los hogares, casi lo mismo que en Alemania ({nf(de.tax_to_income_pct)} %) y menos que en
           la UE ({nf(eu.tax_to_income_pct)} %). El índice de «esfuerzo fiscal» de Frank, que divide la presión fiscal por el PIB por habitante, deja a
           España en {nf(es.effort_index)} (UE = 100): por encima de {effortBelow.map((row) => `${row.label} (${nf(row.effort_index)})`).join(", ")} y por
@@ -322,7 +323,7 @@ export function SurveyFigure({ squeeze, segments }) {
       notes={[
         `Encuesta frente a contabilidad nacional: aquí el hogar mediano español tiene el ${nf(pctOf(es.median_income_pps, eu.median_income_pps), 0)} % de la renta mediana de la UE; en la figura de arriba, la renta por habitante es el ${nf(pctOf(na.ES.income_pps, na.EU27_2020.income_pps), 0)} %. La encuesta no incluye los servicios públicos en especie ni el alquiler imputado de quien vive en casa propia, ajusta por tamaño del hogar y se basa en lo que declaran los hogares; las dos medidas son oficiales y miden cosas distintas.`,
         "Gastos de vivienda: alquiler o intereses de la hipoteca (no la amortización), suministros, comunidad, reparaciones, seguros e impuestos, netos de ayudas a la vivienda. Sobrecarga: más del 40 % de la renta disponible del hogar.",
-        "Quien vive en casa propia sin hipoteca apenas tiene gastos de vivienda; donde son muchos, como en España e Italia, el dato del país puede ser bajo aunque los inquilinos estén ahogados.",
+        `Quien vive en casa propia sin hipoteca tiene gastos de vivienda bajos${split?.overburden?.OWN_NL != null ? ` (pasa del 40 % de su renta el ${nf(split.overburden.OWN_NL)} %)` : ""}; donde son muchos, como en España e Italia, el dato del país puede ser bajo aunque los inquilinos dediquen mucho más de su renta.`,
       ]}
       table={
         <details className="vizTable">
@@ -386,13 +387,13 @@ export function SurveyFigure({ squeeze, segments }) {
           Alemania ({nf(pctOf(es.median_income_pps, de.median_income_pps), 0)} %). La media española está un {nf(pctOf(es.mean_income_pps, es.median_income_pps) - 100, 0)} %
           por encima de su mediana
           {Math.abs(pctOf(es.mean_income_pps, es.median_income_pps) - pctOf(eu.mean_income_pps, eu.median_income_pps)) < 1
-            ? `, lo mismo que en la UE (${nf(pctOf(eu.mean_income_pps, eu.median_income_pps) - 100, 0)} %): la desigualdad no explica la distancia entre las dos medidas.`
+            ? `, lo mismo que en la UE (${nf(pctOf(eu.mean_income_pps, eu.median_income_pps) - 100, 0)} %): la distancia entre las dos medidas no va con una renta más desigual en España.`
             : `, frente al ${nf(pctOf(eu.mean_income_pps, eu.median_income_pps) - 100, 0)} % de la UE.`}
         </li>
         <li>
           <strong>«La vivienda se come lo que queda»</strong>
           No al hogar típico: los gastos de vivienda son el {nf(es.housing_cost_share)} % de la renta en España, menos que en la UE ({nf(eu.housing_cost_share)} %)
-          y en Alemania ({nf(de.housing_cost_share)} %), porque muchos viven en casa pagada.
+          y en Alemania ({nf(de.housing_cost_share)} %), y en España {split?.population?.OWN_NL != null ? `el ${nf(split.population.OWN_NL)} % de la población` : "mucha gente"} vive en casa pagada.
           {split
             ? ` Y ese ${nf(split.cost_share_mean)} % es una media de cocientes: el hogar mediano dedica el ${nf(split.cost_share_median)} %. Los que alquilan pagan solo de alquiler el ${nf(split.rent_share_renters)} % de su renta, y una persona sola de menos de 65 que alquila, el ${nf(split.rent_share_single_lt65)} %. Entre los propietarios sin hipoteca, solo el ${nf(split.overburden.OWN_NL)} % pasa del 40 %.`
             : ""} Sí a quien alquila: el {nf(es.overburden_renters)} % de los

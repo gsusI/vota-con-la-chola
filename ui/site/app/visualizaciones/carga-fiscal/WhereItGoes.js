@@ -189,7 +189,8 @@ export function WhereItGoesFigure({ spending, results, distribution }) {
           (con cambios de método), el abandono escolar ({nf(value("early_leavers", "ES"))} %) sigue por encima de la UE ({nf(value("early_leavers", "EU27_2020"))} %)
           aunque venía del {nf(over.early_leavers?.from.value)} % en {over.early_leavers?.from.year}, en PISA saca {nf(value("pisa_math", "ES"), 0)} puntos, como
           sus vecinos ({nf(Math.min(...pisaPeers), 0)}–{nf(Math.max(...pisaPeers), 0)}), y la vivienda social es el{" "}
-          {nf(value("social_rental", "ES"))} % del parque frente al {nf(value("social_rental", "FR"))} % de Francia.
+          {nf(value("social_rental", "ES"))} % del parque frente al {nf(value("social_rental", "FR"))} % de Francia. Gasto y resultados aparecen juntos, pero
+          eso no prueba que uno cause el otro.
         </li>
         <li>
           <strong>Lo que esta figura no resuelve</strong>
@@ -253,7 +254,7 @@ export function DecompositionFigure({ spending }) {
   );
 }
 
-export function LongRunSpendingFigure({ spending, imfSource }) {
+export function LongRunSpendingFigure({ spending, imfSource, debtInterest }) {
   const lr = spending.long_run;
   const s = spending.spain_series;
   const until = (rows, y) => rows.filter((p) => p.year <= y);
@@ -275,7 +276,7 @@ export function LongRunSpendingFigure({ spending, imfSource }) {
     <>
       <Figure
         id="gasto-largo-plazo"
-        title={`El gasto público pasó del ${nf(first.value, 0)} % del PIB en ${first.year} al ${nf(lastTe.value, 0)} % en ${lastTe.year}`}
+        title={`Del ${nf(first.value, 0)} % del PIB que gastaba el Estado central en ${first.year} al ${nf(lastTe.value, 0)} % que gastan todas las administraciones en ${lastTe.year}: dos coberturas distintas`}
         dek="Hasta 1980, solo el Estado central (FMI); desde 1995, todas las administraciones (Eurostat). Entre 1981 y 1994 no hay una serie abierta homogénea de todas las administraciones: el hueco se deja visible y no se empalma."
         legend={series}
         sources={[imfSource, ds("gov_10a_main")]}
@@ -289,8 +290,16 @@ export function LongRunSpendingFigure({ spending, imfSource }) {
       <Figure
         id="deuda"
         title={`La deuda pública pasó del ${nf(low.value, 0)} % del PIB en ${low.year}, su mínimo de la segunda mitad del siglo XX, al ${nf(lastDebt.value, 0)} % en ${lastDebt.year}`}
-        dek={`Deuda bruta de las administraciones públicas. Los intereses que genera cuestan hoy el ${nf(s.interest_pct_gdp.at(-1).value)} % del PIB, menos que en ${s.interest_pct_gdp[0].year}, primer año de la serie (${nf(s.interest_pct_gdp[0].value)} %; máximo, ${nf(interestPeak.value)} % en ${interestPeak.year}), gracias a los tipos bajos.`}
-        sources={[imfSource]}
+        dek={`Deuda bruta de las administraciones públicas. Los intereses que genera cuestan hoy el ${nf(s.interest_pct_gdp.at(-1).value)} % del PIB, menos que en ${s.interest_pct_gdp[0].year}, primer año de la serie (${nf(s.interest_pct_gdp[0].value)} %; máximo, ${nf(interestPeak.value)} % en ${interestPeak.year}).${
+          debtInterest
+            ? ` La factura es menor con más deuda porque el tipo medio que se paga ha bajado: intereses del año entre la deuda al cierre del anterior, ${nf(debtInterest.first.rate_pct)} % en ${debtInterest.first.year} (con una deuda del ${nf(debtInterest.first.debt_prev_pct_gdp)} % del PIB)${debtInterest.peak.year !== debtInterest.first.year ? `, ${nf(debtInterest.peak.rate_pct)} % en ${debtInterest.peak.year}` : ""}, ${nf(debtInterest.low.rate_pct)} % en ${debtInterest.low.year} (deuda del ${nf(debtInterest.low.debt_prev_pct_gdp)} %) y ${nf(debtInterest.last.rate_pct)} % en ${debtInterest.last.year} (deuda del ${nf(debtInterest.last.debt_prev_pct_gdp)} %). Los datos no dicen por qué bajó el tipo.`
+            : ""
+        }`}
+        sources={[
+          imfSource,
+          { label: "Eurostat, gov_10a_main (intereses, % del PIB)", href: "https://ec.europa.eu/eurostat/databrowser/view/gov_10a_main/default/table" },
+          { label: "Eurostat, gov_10dd_edpt1 (deuda e intereses en euros, tipo implícito)", href: "https://ec.europa.eu/eurostat/databrowser/view/gov_10dd_edpt1/default/table" },
+        ]}
         notes={["Serie histórica de deuda del FMI (Historical Public Debt Database); en los años antiguos cubre sobre todo al Estado central."]}
         table={<SeriesTable series={debt} />}
       >

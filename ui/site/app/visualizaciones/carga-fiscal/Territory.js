@@ -118,13 +118,14 @@ export default function TerritoryFigure({ territory, sources }) {
         <li>
           <strong>«{placeTitle(lo)} es un paraíso fiscal»</strong>
           Tiene el tipo máximo más bajo ({nf(lo.top_rate_pct)} %), pero sus contribuyentes pagan de media el {nf(lo.irpf_rate_pct)} % de su base, el más{" "}
-          {irpfTop.code === lo.code ? "alto" : `alto tras ${place(irpfTop)}`} de las comunidades de régimen común (frente al {nf(irpfLow.irpf_rate_pct)} % de {place(irpfLow)}), porque sus rentas son más altas:{" "}
-          {nf(lo.irpf_tax_per_return_eur, 0)} € por declaración. El tipo máximo afecta a muy pocos.
+          {irpfTop.code === lo.code ? "alto" : `alto tras ${place(irpfTop)}`} de las comunidades de régimen común (frente al {nf(irpfLow.irpf_rate_pct)} % de {place(irpfLow)}), y sus declaraciones tienen más renta: {nf(lo.irpf_income_per_return_eur, 0)} € de base media frente a{" "}
+          {nf(irpfLow.irpf_income_per_return_eur, 0)} € en {place(irpfLow)} (AEAT, {territory.irpf_tax_year}). El tramo estatal más alto empieza en{" "}
+          {nf(territory.state_top_threshold_eur, 0)} €, y solo el {nf(territory.returns_above_150k_pct, 2)} % de las declaraciones pasa de 150.000 €.
         </li>
         <li>
           <strong>«Unas comunidades reciben mucho más que otras»</strong>
-          Sí, y no sigue a la renta: antes de los fondos de convergencia, la financiación por habitante ajustado va de {nf(finLo.financing_per_adj_inhabitant_eur, 0)} €
-          en {place(finLo)} a {nf(finHi.financing_per_adj_inhabitant_eur, 0)} € en {place(finHi)}. Los fondos suben a las de abajo hasta la media. Las forales gastan
+          Sí, y va poco con el PIB por habitante (correlación de {nf(territory.financing_gdp_correlation, 2)} entre las comunes): antes de los fondos de convergencia, la financiación por habitante ajustado va de {nf(finLo.financing_per_adj_inhabitant_eur, 0)} €
+          en {place(finLo)} a {nf(finHi.financing_per_adj_inhabitant_eur, 0)} € en {place(finHi)}. Los fondos de convergencia suben a las de abajo hasta la media del régimen común. Las forales gastan
           más por habitante ({forals.map((row) => `${placeTitle(row)}: ${nf(row.spending_per_inhabitant_eur, 0)} €`).join("; ")}) que cualquier común (máximo{" "}
           {nf(spendHiCommon.spending_per_inhabitant_eur, 0)} € en {place(spendHiCommon)}), con más competencias y su propio sistema.
         </li>

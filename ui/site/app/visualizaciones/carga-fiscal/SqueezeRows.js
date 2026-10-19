@@ -62,8 +62,8 @@ export default function SqueezeRows({ rows, year, bases, defaultBase, lastYear, 
               <span className="sq__bar sq__bar--bottom" style={{ left: 0, width: lv(row.income_pps), background: incomeColor }} />
             </div>
             <span className="sq__values">
-              <span style={{ color: taxColor }}>paga {nf(row.tax_pps)}</span> ·{" "}
-              <span style={{ color: incomeColor }}>le quedan {nf(row.income_pps)}</span> · {nf(row.tax_to_income_pct, 1)} %
+              <span style={{ color: taxColor }}>recauda {nf(row.tax_pps)}</span> ·{" "}
+              <span style={{ color: incomeColor }}>renta {nf(row.income_pps)}</span> · {nf(row.tax_to_income_pct, 1)} %
             </span>
           </div>
           <div className="sq__panel" role="cell">

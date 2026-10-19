@@ -36,7 +36,7 @@ const CASES = {
   p5_professional_madrid: {
     who: "Persona 5 · profesional de 45 a 54 años, sin hijos, propietario, en Madrid",
     how: (c) =>
-      `Hogar tipo de la OCDE: soltero con el 167 % del salario medio de España. Vivienda: gastos de los propietarios de menos de 65 que viven solos, con y sin hipoteca (EU-SILC), ${nf(c.cost_month)} € al mes; con una hipoteca reciente serían bastante más.`,
+      `Hogar tipo de la OCDE: soltero con el 167 % del salario medio de España. Vivienda: gastos de los propietarios de menos de 65 que viven solos, con y sin hipoteca (EU-SILC), ${nf(c.cost_month)} € al mes; con una hipoteca reciente serían más.`,
   },
 };
 
@@ -61,6 +61,9 @@ export default function HouseholdsFigure({ segments, sources }) {
   const relief = data.family_relief || [];
   const es = relief.find((row) => row.area === "ESP");
   const peers = relief.filter((row) => row.area !== "ESP");
+  const ageShares = (segments?.income_by_age?.areas?.ES || []).filter((row) => row.age !== "TOTAL").map((row) => row.vs_total_last);
+  const ageLo = Math.min(...ageShares);
+  const ageHi = Math.max(...ageShares);
   const loneBelow = peers.filter((row) => row.single_parent_aw67_net_rate < 0);
   const wedgeAbove = peers.filter((row) => row.single_aw100_wedge > es?.single_aw100_wedge);
   const wedgeBelow = peers.filter((row) => row.single_aw100_wedge <= es?.single_aw100_wedge);
@@ -79,7 +82,7 @@ export default function HouseholdsFigure({ segments, sources }) {
         `Lo que queda = salario neto − vivienda; por unidad de consumo, con la escala de la OCDE modificada (1 el primer adulto, 0,5 los demás, 0,3 cada menor de 14). Hogar mediano: renta mediana por unidad de consumo (${nf(nat.income_per_uc)} €, encuesta de ${nat.survey_year}) menos el peso mediano de la vivienda (${nf(nat.median_housing_share_pct, 1)} %); es una aproximación, porque las dos medianas no son del mismo hogar.`,
         `IVA (marca negra): la parte de lo que queda que se iría en IVA si lo gastan, con la mediana del IVA pagado en % de la renta bruta de su tipo de hogar (Eurostat, estadística experimental, ${data.vat_year}). Dentro de cada tipo baja con la renta: del ${nf(q.QU1, 1)} % de la renta en el quintil más pobre al ${nf(q.QU5, 1)} % en el más rico.`,
         `Años mezclados: salarios, tipos y alquileres de ${data.year}; gastos de vivienda de la encuesta de ${rows.find((row) => row.cost_year)?.cost_year} (pasados a euros con la paridad de ${data.ppp_year}, ${nf(data.eur_per_pps, 3)} € por PPS); IVA de ${data.vat_year}. La cotización de la empresa (en la tabla) no sale del salario, pero también la paga el trabajo.`,
-        `El ejemplo habitual, el soltero sin hijos con el salario medio de la OCDE (cuña del ${nf(data.single_aw100_wedge, 1)} % del coste laboral en ${data.year}), describe a poca gente: ese salario medio (${nf(data.average_wage)} €) está un ${nf((data.average_wage / data.median_wage - 1) * 100)} % por encima del salario mediano (${nf(data.median_wage)} €, Encuesta de Estructura Salarial), y la mayoría no vive sola sin hijos.`,
+        `El ejemplo habitual, el soltero sin hijos con el salario medio de la OCDE (cuña del ${nf(data.single_aw100_wedge, 1)} % del coste laboral en ${data.year}), no es el caso típico: ese salario medio (${nf(data.average_wage)} €) está un ${nf((data.average_wage / data.median_wage - 1) * 100)} % por encima del salario mediano (${nf(data.median_wage)} €, Encuesta de Estructura Salarial).`,
         "Faltan: los servicios que cada hogar recibe en especie (sanidad, educación de los hijos), el IBI y otros impuestos locales fuera de los gastos de vivienda, y las diferencias de precios entre comunidades más allá del alquiler (no hay paridades regionales oficiales).",
       ]}
       table={
@@ -216,9 +219,11 @@ export default function HouseholdsFigure({ segments, sources }) {
           <strong>«Los pensionistas viven mejor que los jóvenes»</strong>
           Tras pagar la vivienda, sí: con menos renta bruta ({nf(p4.gross)} € de pensión frente a {nf(p1.gross)} € de salario), al pensionista con la casa
           pagada le quedan {nf(p4.left_per_uc)} € y a la joven que alquila en Madrid, {nf(p1.left_per_uc)} €. Paga menos impuestos ({nf(p4.direct_taxes)} €
-          frente a {nf(p1.direct_taxes)} €, porque la pensión no cotiza) y casi nada de vivienda. Antes de la vivienda, no tanto: la renta disponible
-          apenas cambia con la edad (<a href="#bolsillo">figura anterior</a>). Lo que los separa es la vivienda: el alquiler se lleva el {nf(p1.housing_share_pct)} %
-          de su neto; al pensionista, el {nf(p4.housing_share_pct)} %.
+          frente a {nf(p1.direct_taxes)} €, porque la pensión no paga cotizaciones sociales) y menos vivienda ({nf(p4.housing)} € al año frente a {nf(p1.housing)} €). La renta disponible
+          mediana cambia menos con la edad: va del {nf(ageLo)} % al {nf(ageHi)} % de la de todas las edades (<a href="#bolsillo">figura anterior</a>). La joven gana{" "}
+          {nf(p1.gross - p4.gross)} € brutos más al año y paga {nf(p1.housing - p4.housing)} € más de vivienda, el {nf(((p1.housing - p4.housing) / (p1.gross - p4.gross)) * 100)} % de esa
+          diferencia: el alquiler se lleva el{" "}
+          {nf(p1.housing_share_pct)} % de su neto; al pensionista, el {nf(p4.housing_share_pct)} %.
         </li>
         {es ? (
           <li>

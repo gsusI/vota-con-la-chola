@@ -542,6 +542,11 @@ def territory(store: Store, distribution_block: dict) -> dict | None:
         "state_top_rate_pct": next(iter({r(row["top_rate_pct"] - row["regional_top_rate_pct"], 2) for row in common
                                           if row.get("regional_top_rate_pct") is not None}), None),
         "state_top_threshold_eur": STATE_TOP_THRESHOLD_EUR,
+        # Share of returns above 150.000 euros (the closest AEAT bracket edge below the state top bracket).
+        "returns_above_150k_pct": r(sum(b["share_declarations_pct"] for b in (distribution_block.get("irpf") or {}).get("brackets", [])
+                                        if (b.get("lower_eur") or 0) >= 150000), 2),
+        "financing_gdp_correlation": pearson([(row["gdp_per_inhabitant_eur"], row["financing_per_adj_inhabitant_eur"]) for row in common
+                                              if row.get("gdp_per_inhabitant_eur") and row.get("financing_per_adj_inhabitant_eur")]),
         "regional_threshold_range": [
             {"name": row["name"], "threshold_eur": row["regional_threshold_eur"]}
             for row in (min(common, key=lambda x: x.get("regional_threshold_eur") or 1e12),
@@ -621,6 +626,16 @@ def sibling(key: str) -> tuple[dict, dict]:
     data = json.loads(payload)
     return data, {"page": page, "label": label, "file": f"/visualizaciones/data/{key}.json",
                   "sha256": hashlib.sha256(payload).hexdigest(), "generated_at": data.get("generated_at")}
+
+
+def pearson(pairs: list[tuple[float, float]]) -> float | None:
+    if len(pairs) < 3:
+        return None
+    xs, ys = zip(*pairs)
+    mx, my = sum(xs) / len(xs), sum(ys) / len(ys)
+    sxy = sum((x - mx) * (y - my) for x, y in pairs)
+    sxx, syy = sum((x - mx) ** 2 for x in xs), sum((y - my) ** 2 for y in ys)
+    return r(sxy / math.sqrt(sxx * syy), 2) if sxx and syy else None
 
 
 def interp(points_: list[tuple[float, float]], x: float) -> float:
@@ -825,6 +840,27 @@ def segments(store: Store, pension_per_pensioner: float, pension_year: int) -> d
     }
 
 
+def implicit_interest(store: Store) -> dict | None:
+    """Implicit interest rate on general government debt: interest of the year / debt at the end of the previous year,
+    both from Eurostat's EDP table (same source and coverage), in euros."""
+    try:
+        debt = store.annual("eurostat_sdmx", "GD.S13", "MIO_EUR", "ES")
+        interest = {int(p["period"]): p["value"] for p in store.series("eurostat_sdmx", "D41PAY.S13", "MIO_EUR", "gov_10dd_edpt1").get("ES", [])}
+        debt_pc = {int(p["period"]): p["value"] for p in store.series("eurostat_sdmx", "GD.S13", "PC_GDP", "gov_10dd_edpt1").get("ES", [])}
+    except LookupError:
+        return None
+    rate = {y: interest[y] / debt[y - 1] * 100 for y in sorted(interest) if y - 1 in debt and debt[y - 1]}
+    if not rate:
+        return None
+    first, last = min(rate), max(rate)
+    peak = max(rate, key=lambda y: rate[y])
+    low = min(rate, key=lambda y: rate[y])
+    point = lambda y: {"year": y, "rate_pct": r(rate[y], 1), "debt_prev_pct_gdp": r(debt_pc.get(y - 1), 1),  # noqa: E731
+                       "interest_meur": r(interest[y], 0), "debt_prev_meur": r(debt[y - 1], 0)}
+    return {"source": "eurostat gov_10dd_edpt1 (S13, D41PAY / GD del año anterior)", "first": point(first), "peak": point(peak),
+            "low": point(low), "last": point(last), "series": points(rate, 2)}
+
+
 def build(conn: sqlite3.Connection) -> dict:
     store = Store(conn)
     imf = store.annual("imf_fpp", "rev", "PT_GDP", "ESP")
@@ -899,6 +935,16 @@ def build(conn: sqlite3.Connection) -> dict:
             sources[key] = {"label": label, "page": page, "retrieved_at": None, "releases": []}
 
     first_oecd = esp["_T"][years[0]]
+    # Revenue per person split by who hands it in (OECD classification): households directly (personal income tax, employee
+    # and self-employed contributions), firms (corporate tax, employer contributions), consumption, property (not split).
+    pc_last = per_capita[-1]
+    payer_last = next(row for row in by_payer if row["year"] == pc_last["year"])
+    total_last = esp["_T"][pc_last["year"]]
+    per_capita_payers = {"year": pc_last["year"], "total_eur": pc_last["value"], **{
+        key: {"pct_of_total": r(payer_last[key] / total_last * 100, 1), "eur": r(pc_last["value"] * payer_last[key] / total_last, 0)}
+        for key in ("households", "companies", "consumption", "property")
+    }}
+    debt_interest = implicit_interest(store)
     return {
         "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "storage": "SQLite public-finance-es.db: indicator_* contract (releases, revisions, evidence per value), "
@@ -920,6 +966,8 @@ def build(conn: sqlite3.Connection) -> dict:
             "oecd_tax_pct_gdp": points(esp["_T"]),
         },
         "per_capita_real_eur": per_capita,
+        "per_capita_payers": per_capita_payers,
+        "debt_interest": debt_interest,
         "composition_pct_gdp": {code: points(esp[code]) for code in COMPOSITION},
         "composition_labels": COMPOSITION,
         "by_payer_pct_gdp": by_payer,

@@ -54,6 +54,7 @@ export default function CargaFiscalPage() {
   const data = readPublicJson("visualizaciones/data/carga-fiscal.json", null);
   if (!data) throw new Error("Missing visualizaciones/data/carga-fiscal.json");
   const h = data.headline;
+  const payers = data.per_capita_payers;
   const src = data.sources;
   const oecdSource = { label: "OCDE, Revenue Statistics", href: src.oecd_revenue_statistics.page };
   const imfSource = { label: "FMI, Public Finances in Modern History", href: src.imf_fpp.page };
@@ -328,7 +329,7 @@ export default function CargaFiscalPage() {
 
       <Figure
         id="largo-plazo"
-        title={`De un ${num(h.first_value_imf, 0)} % a un ${num(h.last_value, 0)} % del PIB en un siglo`}
+        title={`Del ${num(h.first_value_imf, 0)} % del PIB que ingresaba el Estado central en ${h.first_year} al ${num(h.last_value, 0)} % que recaudan hoy todas las administraciones (${h.last_year}): dos coberturas distintas`}
         dek="Hasta 1965 solo hay series homogéneas de los ingresos del Estado central; desde 1965 la OCDE mide todos los impuestos y cotizaciones de todas las administraciones. Las dos series se solapan en 1965–1980 para que se vea la diferencia de cobertura: no se empalman."
         legend={longRun}
         sources={[imfSource, oecdSource]}
@@ -351,8 +352,8 @@ export default function CargaFiscalPage() {
 
       <Figure
         id="por-habitante"
-        title={`Cada habitante aporta hoy ${num(pcMultiple, 0)} veces más que en ${h.per_capita_first.year}, descontada la inflación`}
-        dek="Recaudación total (impuestos y cotizaciones) dividida por la población y expresada en euros constantes. Mide cuánto ingresa el sector público por persona; crece a la vez por la presión fiscal y por la economía."
+        title={`La recaudación real por habitante es ${num(pcMultiple)} veces la de ${h.per_capita_first.year}: ${formatValue(h.per_capita_last.value, "eur")} en ${h.per_capita_last.year}`}
+        dek={`Recaudación total (impuestos y cotizaciones) dividida por la población, en euros de ${h.per_capita_base_year}. Es lo que ingresa el sector público por habitante, no lo que paga cada persona: incluye lo que pagan las empresas, los consumidores y los no residentes. ${payers ? `De los ${formatValue(payers.total_eur, "eur")} de ${payers.year}, los hogares pagan directamente (IRPF y cotizaciones del trabajador y de los autónomos) ${formatValue(payers.households.eur, "eur")} (${num(payers.households.pct_of_total)} %); las empresas (Sociedades y cotizaciones de la empresa), ${formatValue(payers.companies.eur, "eur")} (${num(payers.companies.pct_of_total)} %); los impuestos sobre el consumo, ${formatValue(payers.consumption.eur, "eur")} (${num(payers.consumption.pct_of_total)} %), y los de la propiedad, ${formatValue(payers.property.eur, "eur")} (${num(payers.property.pct_of_total)} %), que la OCDE no separa entre hogares y empresas. ` : ""}Crece a la vez por la presión fiscal y por la economía.`}
         sources={[oecdSource, { label: "Banco Mundial, población e IPC", href: src.worldbank_wdi.page }]}
         notes={[`Deflactado con el IPC de España (base ${h.per_capita_base_year}). Pesetas convertidas a euros a 166,386 por la OCDE.`]}
         table={<SeriesTable series={perCapita} unit="eur" />}
@@ -378,7 +379,7 @@ export default function CargaFiscalPage() {
 
       <Figure
         id="desglose"
-        title={`Cotizaciones sociales e IRPF explican el ${num(compShare * 100, 0)} % del aumento`}
+        title={`Cotizaciones sociales e IRPF suman el ${num(compShare * 100, 0)} % del aumento`}
         dek={`De los ${num(compTotal)} puntos del PIB que ha subido la recaudación desde ${h.oecd_first_year}, ${num(compSscIrpf)} vienen de cotizaciones e IRPF. Cada figura en su panel, con la misma escala vertical.`}
         sources={[oecdSource]}
         table={
@@ -485,7 +486,7 @@ export default function CargaFiscalPage() {
           <SpendingSectionIntro />
           <WhereItGoesFigure spending={data.spending} results={data.service_results} distribution={data.distribution} />
           <DecompositionFigure spending={data.spending} />
-          <LongRunSpendingFigure spending={data.spending} imfSource={imfSource} />
+          <LongRunSpendingFigure spending={data.spending} imfSource={imfSource} debtInterest={data.debt_interest} />
         </>
       ) : null}
 

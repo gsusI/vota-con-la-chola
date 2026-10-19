@@ -819,6 +819,22 @@ EUROSTAT_DATASETS: list[dict[str, Any]] = [
         "GF0107 (transacciones de la deuda pública) son sobre todo intereses.",
     },
     {
+        # Interest and debt from the same EDP table and coverage (general government), in euros: implicit interest rate.
+        "name": "gov_10dd_edpt1_eur", "dataset": "gov_10dd_edpt1",
+        "filters": {"unit": "MIO_EUR", "sector": "S13", "na_item": ["GD", "D41PAY"]},
+        "unit_code": "MIO_EUR", "unit_label": "Millones de euros",
+        "label": "Déficit y deuda de las administraciones públicas (procedimiento de déficit excesivo): {label}",
+        "definition": "Tabla EDP de Eurostat, administraciones públicas (S13): deuda bruta consolidada a fin de año (GD) e intereses "
+        "devengados (D41PAY, con permutas de intereses), en millones de euros.",
+    },
+    {
+        "name": "gov_10dd_edpt1_pc", "dataset": "gov_10dd_edpt1",
+        "filters": {"unit": "PC_GDP", "sector": "S13", "na_item": "GD"},
+        "unit_code": "PC_GDP", "unit_label": "% del PIB",
+        "label": "Deuda bruta consolidada de las administraciones públicas (procedimiento de déficit excesivo), % del PIB",
+        "definition": "Tabla EDP de Eurostat, administraciones públicas (S13): deuda bruta consolidada a fin de año en % del PIB.",
+    },
+    {
         "name": "gov_10a_main", "dataset": "gov_10a_main",
         "filters": {"unit": "PC_GDP", "sector": "S13", "na_item": ["TR", "TE", "B9", "D41PAY", "D1PAY"]},
         "unit_code": "PC_GDP", "unit_label": "% del PIB",
