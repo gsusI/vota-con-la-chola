@@ -218,32 +218,295 @@
   margin: 0;
 }
 
-.viz .vizGallery {
+/* Hub: one card per page with the preview of its main chart */
+.viz .vizHub {
+  max-width: 1240px;
+}
+
+.viz .vizHub__hero {
+  padding: 26px 28px 22px;
   display: grid;
-  gap: 14px;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 10px;
 }
 
-.viz .vizGallery__item {
-  padding: 18px;
-  display: grid;
-  gap: 8px;
-  color: inherit;
-  text-decoration: none;
+.viz .vizHub__hero h1 {
+  margin: 0;
 }
 
-.viz .vizGallery__item:hover {
-  border-color: var(--viz-ink-2);
+.viz .vizHub__lede {
+  margin: 0;
+  max-width: 62ch;
+  font-size: 1.12rem;
+  line-height: 1.5;
+  color: var(--viz-ink-2);
 }
 
-.viz .vizGallery__title {
-  font-size: 1.1rem;
+.viz .vizHub__principles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.86rem;
+  color: var(--viz-ink-2);
+}
+
+.viz .vizHub__principles li::before {
+  content: "✓";
+  margin-right: 6px;
+  color: var(--viz-s3);
   font-weight: 700;
 }
 
-.viz .vizGallery__note {
+.viz .vizHub__grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr));
+}
+
+.viz .vizStory {
+  position: relative;
+  padding: 20px 22px 18px;
+  display: grid;
+  gap: 10px;
+  align-content: start;
+  background: var(--viz-surface);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.viz .vizStory:hover,
+.viz .vizStory:focus-within {
+  border-color: rgba(42, 120, 214, 0.55);
+  box-shadow: 0 14px 30px rgba(42, 120, 214, 0.14);
+}
+
+.viz .vizStory--lead {
+  grid-column: 1 / -1;
+}
+
+.viz .vizStory__topic {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--viz-s1);
+  font-weight: 600;
+}
+
+.viz .vizStory__title {
+  margin: 0;
+  font-family: var(--display);
+  font-size: 1.55rem;
+  line-height: 1.18;
+  text-wrap: balance;
+}
+
+.viz .vizStory--lead .vizStory__title {
+  font-size: 1.9rem;
+}
+
+.viz .vizStory__link {
+  color: var(--viz-ink);
+  text-decoration: none;
+}
+
+/* The whole card is clickable; source links stay on top of the stretched link. */
+.viz .vizStory__link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.viz .vizStory__link:focus-visible {
+  outline: none;
+}
+
+.viz .vizStory:has(.vizStory__link:focus-visible) {
+  outline: 2px solid var(--viz-s1);
+  outline-offset: 2px;
+}
+
+.viz .vizStory__dek {
+  margin: 0;
+  max-width: 70ch;
+  color: var(--viz-ink-2);
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+
+.viz .vizStory__chart {
+  display: grid;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.viz .vizStory__unit {
+  font-size: 0.76rem;
+  color: var(--viz-muted);
+}
+
+.viz .vizStory__source,
+.viz .vizStory__also {
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: var(--viz-muted);
+}
+
+.viz .vizStory__also strong {
+  color: var(--viz-ink-2);
+  font-weight: 600;
+}
+
+.viz .vizStory__source a {
+  position: relative;
+  z-index: 2;
+  color: inherit;
+}
+
+.viz .vizStory__cta {
+  justify-self: start;
+  margin-top: 2px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--viz-s1);
+}
+
+.viz .vizStory:hover .vizStory__cta {
+  text-decoration: underline;
+}
+
+.viz .vizHub__data {
+  padding: 18px 22px;
+  display: grid;
+  gap: 8px;
+}
+
+.viz .vizHub__data h2 {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.viz .vizHub__data p {
+  margin: 0;
   color: var(--viz-ink-2);
   font-size: 0.9rem;
+}
+
+.viz .vizHub__data ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap: 6px 18px;
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.9rem;
+}
+
+.viz .vizHub__data li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  align-items: baseline;
+}
+
+.viz .vizHub__data li span {
+  font-weight: 700;
+  min-width: 6.5em;
+}
+
+/* Mini chart (hub previews) */
+.vizMini {
+  position: relative;
+  height: 190px;
+}
+
+.vizStory--lead .vizMini {
+  height: 230px;
+}
+
+.vizMini__plot {
+  position: absolute;
+  top: 8px;
+  bottom: 22px;
+  right: 128px;
+}
+
+.vizMini__plot svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.vizMini__grid {
+  stroke: var(--viz-grid);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.vizMini__base {
+  stroke: var(--viz-axis);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.vizMini__break {
+  stroke: var(--viz-axis);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+  vector-effect: non-scaling-stroke;
+}
+
+.vizMini__tick {
+  position: absolute;
+  font-size: 0.72rem;
+  color: var(--viz-muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.vizMini__tick--y {
+  right: calc(100% + 6px);
+  transform: translateY(-50%);
+}
+
+.vizMini__tick--x {
+  top: calc(100% + 4px);
+}
+
+.vizMini__tick--end {
+  transform: translateX(-100%);
+}
+
+.vizMini__dot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  margin: -4px 0 0 -4px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px var(--viz-surface);
+}
+
+.vizMini__label {
+  position: absolute;
+  left: calc(100% + 10px);
+  transform: translateY(-50%);
+  font-size: 0.78rem;
+  white-space: nowrap;
+  line-height: 1.2;
+}
+
+.vizMini__label b {
+  font-weight: 700;
+}
+
+.vizMini__label.is-strong {
+  font-size: 0.86rem;
 }
 
 /* Chart */
@@ -361,6 +624,30 @@
 @media (max-width: 640px) {
   .viz .vizFigure {
     padding: 16px 12px 12px;
+  }
+
+  .viz .vizHub__hero,
+  .viz .vizStory {
+    padding: 16px 14px;
+  }
+
+  .viz .vizStory__title,
+  .viz .vizStory--lead .vizStory__title {
+    font-size: 1.35rem;
+  }
+
+  .vizMini,
+  .vizStory--lead .vizMini {
+    height: 170px;
+  }
+
+  .vizMini__plot {
+    right: 92px;
+  }
+
+  .vizMini__label span,
+  .vizMini__label b {
+    display: block;
   }
 
   .viz .vizBars li {
