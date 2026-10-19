@@ -880,7 +880,7 @@ def segments(s: "Store", conn: sqlite3.Connection, young_pay: dict[int, float], 
     t_ecv = max(inc_t["Alquiler a precio de mercado"])
     ecv_reg = lambda code: income_reg[code][str(t_ecv)] / income_reg["ES"][str(t_ecv)]  # noqa: E731
     cost = s.raw("ilc_mded03.TOTAL.TOTAL")["ES"]
-    cost_own_65 = s.raw("ilc_mded03.OWN.A2_GE1_GE65")["ES"]
+    cost_own_65 = s.raw("ilc_mded03.OWN.A1_GE65")["ES"]  # one person aged 65+, owner (README §3, persona 4)
     ppp = s.raw("prc_ppp_ind._T")["ES"]
     t_cost = max(int(p) for p in cost if p in cost_own_65)
     ppp_y, ppp_v = max((int(p), v) for p, v in ppp.items() if int(p) <= t_cost)
@@ -894,26 +894,45 @@ def segments(s: "Store", conn: sqlite3.Connection, young_pay: dict[int, float], 
     national_income = income_reg["ES"][str(t_ecv)]
     cases = [case("national", eur(cost[str(t_cost)]), national_income, mean_share_pct=r(mean_share, 1),
                   median_share_pct=r(median_share, 1), overburden_pct=over_of("TOTAL"), survey_year=t_cost)]
+    # Model pay from OECD Taxing Wages (the same households as /visualizaciones/carga-fiscal/), in the year of the rents.
+    tw = lambda code: {int(p): v for p, v in s.raw(code)["ESP"].items()}  # noqa: E731
     madrid = by_city.get("28079")
+    tw_year = min(madrid["year"] if madrid else 9999, max(tw("GEBT.S_C0.AW100")))
+    family_gross = tw("GEBT.C_C2.AW100.AW67")[tw_year]
+    family_rate = tw("NPATR.C_C2.AW100.AW67")[tw_year]
+    family_net = family_gross * (1 - family_rate / 100)
+    # Persona 4's pension: old-age and survivors' pensions (COFOG GF1002 + GF1003, euros) per pensioner (ESSPROS), taxed
+    # with the single earner's income tax at that pay (OECD rate minus the worker's contributions, which pensioners don't pay).
+    pens_spend = {p: v for p, v in s.raw("gov_10a_exp.GF1002")["ES"].items()}
+    pens_spend3 = s.raw("gov_10a_exp.GF1003")["ES"]
+    pensioners = s.raw("spr_pns_ben._T")["ES"]
+    pens_year = max(int(p) for p in pensioners if p in pens_spend and p in pens_spend3 and int(p) <= tw_year)
+    pension = (pens_spend[str(pens_year)] + pens_spend3[str(pens_year)]) * 1e6 / pensioners[str(pens_year)]
+    aw = tw("GEBT.S_C0.AW100")[tw_year]
+    m4 = min(1.0, max(0.67, pension / aw))
+    lerp = lambda lo, hi: lo + (hi - lo) * (m4 - 0.67) / 0.33  # noqa: E731
+    pension_rate = (lerp(tw("NPATR.S_C0.AW67")[tw_year], tw("NPATR.S_C0.AW100")[tw_year])
+                    - lerp(tw("AV_R_EMPEE_SSC.S_C0.AW67")[tw_year], tw("AV_R_EMPEE_SSC.S_C0.AW100")[tw_year]))
+    pension_net = pension * (1 - pension_rate / 100)
     if madrid and madrid.get("young_net"):
         cases.append(case("p1_young_renter_madrid", madrid["rent_month"], madrid["young_net"], rent_year=madrid["year"],
                           pay_year=madrid["young_net_year"], overburden_pct=over_of("RENT_MKT")))
     if madrid and madrid.get("rest_rent_month"):
-        cases.append(case("p2_family_renter_metro", madrid["rest_rent_month"], inc_t["Alquiler a precio de mercado"][t_ecv] * ecv_reg("ES30"),
-                          rent_year=madrid["year"], survey_year=t_ecv, overburden_pct=over_of("RENT_MKT")))
+        cases.append(case("p2_family_renter_metro", madrid["rest_rent_month"], family_net, rent_year=madrid["year"], pay_year=tw_year,
+                          gross_year=r(family_gross, 0), net_rate_pct=r(family_rate, 1), overburden_pct=over_of("RENT_MKT")))
     price_md = annual(s.raw("valor_tasado_vivienda_libre_ccaa")["ES30"])
     py = max(y_ for y_ in price_md if y_ in rate)
     price = price_md[py] * HOME_M2
     payment = mortgage_payment(price * MORTGAGE_LTV, rate[py])
     itp = [row for row in tax_rows if row["key"] == "itp_vivienda_usada" and row["scope"] == "ES-MD"]
     itp_pct = max(itp, key=lambda row: row["year"])["value"] if itp else None
-    income_buyer = inc_t["Propiedad con hipoteca"][t_ecv] * ecv_reg("ES30")
+    income_buyer = family_net
     upfront = price * (1 - MORTGAGE_LTV) + (price * itp_pct / 100 if itp_pct is not None else 0)
     cases.append(case("p2_family_buyer_madrid", payment, income_buyer, price_year=py, home_price=r(price, 0), rate_pct=r(rate[py], 2),
                       ltv_pct=MORTGAGE_LTV * 100, years=MORTGAGE_YEARS, itp_pct=itp_pct, upfront=r(upfront, 0),
-                      upfront_years_income=r(upfront / income_buyer, 1), survey_year=t_ecv, overburden_pct=over_of("OWN_L")))
-    cases.append(case("p4_retired_owner_interior", eur(cost_own_65[str(t_cost)]), inc_t["Propiedad sin hipoteca"][t_ecv] * ecv_reg("ES41"),
-                      survey_year=t_cost, overburden_pct=over_of("OWN_NL")))
+                      upfront_years_income=r(upfront / income_buyer, 1), pay_year=tw_year, overburden_pct=over_of("OWN_L")))
+    cases.append(case("p4_retired_owner_interior", eur(cost_own_65[str(t_cost)]), pension_net, survey_year=t_cost, pension_year=pens_year,
+                      pension_gross=r(pension, 0), pension_tax_pct=r(pension_rate, 1), overburden_pct=over_of("OWN_NL")))
     cases.append({"key": "e_living_with_parents", "at_home_pct": at_home["Y25-34"]["ES"]["value"], "at_home_eu_pct": at_home["Y25-34"]["EU27_2020"]["value"],
                   "year": at_home["Y25-34"]["ES"]["year"]})
     return {

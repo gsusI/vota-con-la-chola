@@ -972,30 +972,41 @@ def dbnomics_obs(doc: dict[str, Any], doc_index: int) -> list[dict[str, Any]]:
 
 TW_DATASET = "DSD_TAX_WAGES_COMP@DF_TW_COMP"
 TW_MEASURES = {"AV_RITEESSC": "Tipo medio de IRPF + cotizaciones del trabajador (% del salario bruto)", "AV_TW": "Cuña fiscal media (% del coste laboral)",
-               "GEBT": "Salario bruto anual del asalariado tipo (euros)"}
+               "GEBT": "Salario bruto anual del asalariado tipo (euros)",
+               "NPATR": "Tipo medio neto personal: IRPF + cotizaciones del trabajador − prestaciones (% del salario bruto)",
+               "AV_R_EMPEE_SSC": "Cotizaciones sociales del trabajador (% del salario bruto)"}
+TW_HOUSEHOLDS = {"S_C0": "soltero sin hijos", "C_C2": "pareja con dos hijos, dos sueldos"}
 TW_UNITS = {"GEBT": ("EUR_YEAR", "Euros al año")}
 
 
 def oecd_tw_url() -> str:
-    dims = {"REF_AREA": OECD_HP_AREAS[:-1], "MEASURE": list(TW_MEASURES), "HOUSEHOLD_TYPE": ["S_C0"], "INCOME_PRINCIPAL": ["AW100", "AW67"]}
+    dims = {"REF_AREA": OECD_HP_AREAS[:-1], "MEASURE": list(TW_MEASURES), "HOUSEHOLD_TYPE": list(TW_HOUSEHOLDS),
+            "INCOME_PRINCIPAL": ["AW100", "AW67"], "INCOME_SPOUSE": ["_Z", "AW67"]}
     return f"https://api.db.nomics.world/v22/series/OECD/{TW_DATASET}?" + urllib.parse.urlencode(
-        {"dimensions": json.dumps(dims, separators=(",", ":")), "observations": 1, "limit": 200})
+        {"dimensions": json.dumps(dims, separators=(",", ":")), "observations": 1, "limit": 1000})
 
 
 def parse_oecd_tw(raw: Raw) -> Iterable[Batch]:
     grouped: dict[tuple[str, str], list[dict[str, Any]]] = {}
     for i, doc in enumerate(raw.data["series"]["docs"]):
-        area, measure, unit, household, income, *_ = doc["series_code"].split(".")
+        area, measure, unit, household, income, spouse, *_ = doc["series_code"].split(".")
         if measure not in TW_MEASURES or (measure == "GEBT" and unit != "XDC"):
             continue
-        grouped.setdefault((measure, income), []).append(geo_series(f"{TW_DATASET}|{doc['series_code']}", area,
-                                                                    {"MEASURE": measure, "UNIT": unit, "INCOME_PRINCIPAL": income}, dbnomics_obs(doc, i)))
-    for (measure, income), series in sorted(grouped.items()):
+        # Singles: one earner (spouse _Z). Couples with two children: the second earner at 67 % of the average wage.
+        if (household, spouse) not in (("S_C0", "_Z"), ("C_C2", "AW67")) or (household == "C_C2" and income != "AW100"):
+            continue
+        code = f"{measure}.S_C0.{income}" if household == "S_C0" else f"{measure}.{household}.{income}.{spouse}"
+        grouped.setdefault((code, measure, household, income), []).append(geo_series(
+            f"{TW_DATASET}|{doc['series_code']}", area,
+            {"MEASURE": measure, "UNIT": unit, "HOUSEHOLD_TYPE": household, "INCOME_PRINCIPAL": income, "INCOME_SPOUSE": spouse},
+            dbnomics_obs(doc, i)))
+    for (code, measure, household, income), series in sorted(grouped.items()):
         yield {
-            "source_id": "oecd_dbnomics", "dataset_code": TW_DATASET, "indicator_code": f"{measure}.S_C0.{income}",
+            "source_id": "oecd_dbnomics", "dataset_code": TW_DATASET, "indicator_code": code,
             "frequency_code": "A", "frequency_label": "Anual", "unit_code": TW_UNITS.get(measure, ("PC", "%"))[0],
             "unit_label": TW_UNITS.get(measure, ("PC", "%"))[1],
-            "label": f"{TW_MEASURES[measure]}, soltero sin hijos, {income.removeprefix('AW')} % del salario medio (OCDE Taxing Wages)",
+            "label": f"{TW_MEASURES[measure]}, {TW_HOUSEHOLDS[household]}, {income.removeprefix('AW')} % del salario medio"
+            f"{' y el segundo sueldo al 67 %' if household == 'C_C2' else ''} (OCDE Taxing Wages)",
             "definition": "OCDE Taxing Wages: impuestos y cotizaciones de un asalariado tipo. Leído de la réplica DBnomics "
             "(sdmx.oecd.org bloquea scripts).",
             "methodology_url": "https://www.oecd.org/en/publications/taxing-wages_20725124.html",
@@ -1115,7 +1126,7 @@ EUROSTAT_DEFS = {
         "unit_code": "MIO_EUR", "unit_label": "Millones de euros corrientes", "split": ["cofog99"],
         "definition": "Eurostat COFOG, sector S13 (todas las administraciones), gasto total (TE). GF0601: desarrollo de "
         "la vivienda (promoción, adquisición y ayudas a la construcción). GF1006: protección social, vivienda "
-        "(ayudas al alquiler y similares a hogares). Excluye beneficios fiscales (p. ej. deducción por vivienda en el IRPF).",
+        "(ayudas al alquiler y similares a hogares). Excluye beneficios fiscales (p. ej. deducción por vivienda en el IRPF). GF1002 y GF1003: pensiones de vejez y supervivencia (para la pensión media por pensionista).",
     },
     "lfst_r_lfsd2hh": {
         "label": "Hogares privados por región NUTS 2 (EPA/EU-LFS), miles",
@@ -1193,6 +1204,11 @@ EUROSTAT_DEFS = {
         "OWN: propietarios con o sin hipoteca; RENT: inquilinos a precio de mercado o reducido; A2_GE1_GE65: dos adultos, "
         "al menos uno de 65 o más años.",
     },
+    "spr_pns_ben": {
+        "label": "Pensionistas de vejez y supervivencia (ESSPROS)", "unit_code": "PERSONS", "unit_label": "Personas", "split": [],
+        "definition": "Eurostat ESSPROS: beneficiarios de pensiones de vejez y supervivencia, todos los regímenes, sin doble "
+        "conteo (una persona con dos pensiones cuenta una vez).",
+    },
     "prc_ppp_ind": {
         "label": "Paridad de poder adquisitivo, consumo individual efectivo (euros por PPS)", "unit_code": "EUR_PER_PPS",
         "unit_label": "Euros por PPS", "split": [],
@@ -1266,7 +1282,7 @@ API_SOURCES: list[tuple[str, str, Callable[[Raw], Iterable[Batch]]]] = [
     ("eurostat_ilc_lvho02.json", eurostat_url("ilc_lvho02", hhcomp="TOTAL", rskpovth=["TOTAL", "A_60", "B_60"], unit="PC",
                                                tenure=["OWN", "OWN_L", "OWN_NL", "RENT", "RENT_MKT", "RENT_FR"], geo=PEERS), parse_eurostat("ilc_lvho02")),
     ("eurostat_gov_10a_exp_housing.json", eurostat_url("gov_10a_exp", unit="MIO_EUR", sector="S13", na_item="TE",
-                                                        cofog99=["GF0601", "GF1006"], geo=PEERS), parse_eurostat("gov_10a_exp")),
+                                                        cofog99=["GF0601", "GF1006", "GF1002", "GF1003"], geo=PEERS), parse_eurostat("gov_10a_exp")),
     ("eurostat_nama_10_gdp.json", eurostat_url("nama_10_gdp", unit="CP_MEUR", na_item="B1GQ", geo=PEERS), parse_eurostat("nama_10_gdp")),
     ("eurostat_lfst_r_lfsd2hh.json", eurostat_url("lfst_r_lfsd2hh", unit="THS_HH", deg_urb="TOTAL", geo=["ES", *CCAA]), parse_eurostat("lfst_r_lfsd2hh")),
     ("eurostat_demo_gind.json", eurostat_url("demo_gind", indic_de=["JAN", "GROWRT", "CNMIGRATRT", "NATGROWRT"], geo=PEERS), parse_eurostat("demo_gind")),
@@ -1282,7 +1298,9 @@ API_SOURCES: list[tuple[str, str, Callable[[Raw], Iterable[Batch]]]] = [
     ("eurostat_ilc_lvps08.json", eurostat_url("ilc_lvps08", unit="PC", sex="T", age=["Y16-29", "Y18-34", "Y25-34"], geo=PEERS), parse_eurostat("ilc_lvps08")),
     ("eurostat_ilc_lvho08a.json", eurostat_url("ilc_lvho08a", unit="PC", sex="T", rskpovth="TOTAL", age="TOTAL", geo=PEERS), parse_eurostat("ilc_lvho08a")),
     ("eurostat_ilc_mded03.json", eurostat_url("ilc_mded03", unit="PPS", rskpovth="TOTAL", tenure=["TOTAL", "OWN", "RENT"],
-                                               hhcomp=["TOTAL", "A2_GE1_GE65"], geo="ES"), parse_eurostat("ilc_mded03")),
+                                               hhcomp=["TOTAL", "A2_GE1_GE65", "A1_GE65"], geo="ES"), parse_eurostat("ilc_mded03")),
+    ("eurostat_spr_pns_ben.json", eurostat_url("spr_pns_ben", unit="PER", spdepm="TOTAL", spscheme="TOTAL", sex="T", spdepb="OLD_SRV", geo="ES"),
+     parse_eurostat("spr_pns_ben")),
     ("eurostat_prc_ppp_ind_a01.json", eurostat_url("prc_ppp_ind", na_item="PPP_EU27_2020", ppp_cat="A01", geo="ES"), parse_eurostat("prc_ppp_ind")),
     *[(f"ine_tabla_{table}.json", ine_table_url(table), parse_ine_split(table)) for table in INE_SPLIT_TABLES],
     ("eurostat_tour_ce_omn12.json", eurostat_url("tour_ce_omn12", unit="NR", c_resid="TOTAL", month="TOTAL", indic_to="NGT_SP", geo=PEERS), parse_eurostat("tour_ce_omn12")),

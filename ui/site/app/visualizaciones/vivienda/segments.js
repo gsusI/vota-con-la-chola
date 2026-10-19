@@ -53,12 +53,12 @@ export default function WhoPaysFigure({ segments, source }) {
     p2r && {
       id: "p2a",
       tag: "2a",
-      who: "Pareja de 30 a 44 años con hijos, de alquiler en el área metropolitana de Madrid",
+      who: "Pareja de 30 a 44 años con dos hijos y dos sueldos, de alquiler en el área metropolitana de Madrid",
       cost: `${eur(p2r.cost_month)} de alquiler`,
       share: p2r.share_pct,
       left: p2r.left_month,
       group: `${num(p2r.overburden_pct)} % (inquilinos de mercado)`,
-      how: `Alquiler mediano del resto de la provincia de Madrid (media de los municipios ponderada por contratos, SERPAVI ${p2r.rent_year}) sobre la renta neta media de los hogares que alquilan a precio de mercado, ajustada a Madrid (${eur(p2r.income_year)}).`,
+      how: `Alquiler mediano del resto de la provincia de Madrid (media de los municipios ponderada por contratos, SERPAVI ${p2r.rent_year}) sobre la renta neta de dos sueldos, al 100 % y al 67 % del salario medio (OCDE Taxing Wages ${p2r.pay_year}: ${eur(p2r.gross_year)} brutos, ${num(p2r.net_rate_pct)} % de IRPF y cotizaciones netos de prestaciones, ${eur(p2r.income_year)} netos), como en la carga fiscal.`,
     },
     p2b && {
       id: "p2b",
@@ -68,17 +68,17 @@ export default function WhoPaysFigure({ segments, source }) {
       share: p2b.share_pct,
       left: p2b.left_month,
       group: `${num(p2b.overburden_pct)} % (con hipoteca; no cuenta la amortización)`,
-      how: `Precio de tasación de ${p2b.price_year} (${eur(p2b.home_price)}), ${num(p2b.ltv_pct, 0)} % financiado a ${p2b.years} años al ${num(p2b.rate_pct, 2)} % (tipo medio, Banco de España); la entrada y el ITP (${num(p2b.itp_pct, 0)} %) suman ${eur(p2b.upfront)}, ${num(p2b.upfront_years_income)} años de su renta neta. Renta: la de los hogares con hipoteca, ajustada a Madrid (${eur(p2b.income_year)}).`,
+      how: `Precio de tasación de ${p2b.price_year} (${eur(p2b.home_price)}), ${num(p2b.ltv_pct, 0)} % financiado a ${p2b.years} años al ${num(p2b.rate_pct, 2)} % (tipo medio, Banco de España); la entrada y el ITP (${num(p2b.itp_pct, 0)} %) suman ${eur(p2b.upfront)}, ${num(p2b.upfront_years_income)} años de su renta neta. Renta: la de los mismos dos sueldos (${eur(p2b.income_year)} netos).`,
     },
     p4 && {
       id: "p4",
       tag: "4",
-      who: "Pareja de 65 años o más, propietaria sin hipoteca, en una provincia del interior (Castilla y León)",
+      who: "Pensionista de 65 años o más que vive solo, propietario sin hipoteca, en una provincia del interior",
       cost: `${eur(p4.cost_month)} de gastos`,
       share: p4.share_pct,
       left: p4.left_month,
       group: `${num(p4.overburden_pct)} % (casa pagada)`,
-      how: `Gasto medio de las parejas propietarias con algún miembro de 65 o más años (EU-SILC, ${num(sg.assumptions.eur_per_pps, 3)} € por PPS) sobre la renta neta media de los hogares con la casa pagada, ajustada a Castilla y León (${eur(p4.income_year)}).`,
+      how: `Gasto medio de quien vive solo con 65 o más años en casa propia (EU-SILC ${p4.survey_year}, ${num(sg.assumptions.eur_per_pps, 3)} € por PPS) sobre la pensión media de vejez y supervivencia por pensionista (${eur(p4.pension_gross)} brutos en ${p4.pension_year}: gasto en pensiones de la contabilidad pública entre pensionistas de Eurostat) menos su IRPF (${num(p4.pension_tax_pct)} %, OCDE), ${eur(p4.income_year)} netos. Es un dato nacional: no hay pensión media por provincia en estas fuentes.`,
     },
   ].filter(Boolean);
 

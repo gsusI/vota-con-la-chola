@@ -212,6 +212,18 @@ class RegionalParsingTest(unittest.TestCase):
         self.assertEqual(step["to"], 2019)
         self.assertLess(step["tax_part"], 0)  # the rate fell between 2013 and 2019
 
+    def test_taxing_wages_keeps_single_earners_and_the_two_earner_couple(self) -> None:
+        docs = [
+            {"series_code": "ESP.NPATR.PT_WG_EARN_G.C_C2.AW100.AW67.A", "period": ["2024"], "value": [19.5]},
+            {"series_code": "ESP.NPATR.PT_WG_EARN_G.C_C2.AW100._Z.A", "period": ["2024"], "value": [9.0]},
+            {"series_code": "ESP.GEBT.XDC.C_C2.AW100.AW67.A", "period": ["2024"], "value": [52558.0]},
+            {"series_code": "ESP.GEBT.USD_PPP.C_C2.AW100.AW67.A", "period": ["2024"], "value": [1.0]},
+            {"series_code": "ESP.NPATR.PT_WG_EARN_G.S_C0.AW67._Z.A", "period": ["2024"], "value": [18.5]},
+        ]
+        raw = ingest.Raw("x.json", "https://db.nomics.world", json.dumps({"series": {"docs": docs}}).encode(), "2026-10-19T00:00:00+00:00")
+        codes = {d["indicator_code"]: d["unit_code"] for d, _s in ingest.parse_oecd_tw(raw)}
+        self.assertEqual(codes, {"NPATR.C_C2.AW100.AW67": "PC", "GEBT.C_C2.AW100.AW67": "EUR_YEAR", "NPATR.S_C0.AW67": "PC"})
+
     def test_index_rebase(self) -> None:
         self.assertEqual(export.index_to({2015: 80.0, 2025: 100.0}, 2015), {2015: 100.0, 2025: 125.0})
         self.assertEqual(export.index_to({2016: 1.0}, 2015), {})
