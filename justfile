@@ -6877,3 +6877,19 @@ public-finance-refresh *args:
 employment-refresh *args:
   python3 scripts/ingest_employment_es.py {{args}}
   python3 scripts/export_public_viz_employment.py
+
+# Spain housing (/visualizaciones/vivienda/): fetch Ministerio de Vivienda (legacy .xls, hence xlrd via uv on the host
+# python so its CA store is used), Banco de España, INE, Eurostat and OCDE (via DBnomics) into the raw cache, load them
+# with the curated purchase-tax rates and census/survey values into housing-es.db (indicator_* contract with releases
+# and revisions), then export the page data from that DB. `just housing-refresh --offline` reloads from the cache.
+housing-refresh *args:
+  UV_CACHE_DIR=.cache/uv uv run -q --no-project --python "$(command -v python3)" --with 'xlrd>=2,<3' python scripts/ingest_housing_es.py {{args}}
+  python3 scripts/export_public_viz_housing.py
+
+# Spain education (/visualizaciones/educacion/): fetch Ministerio de Educación (EDUCAbase PC-Axis), Eurostat, OCDE
+# Education at a Glance (via DBnomics), Banco Mundial EdStats (PISA) and Our World in Data into the raw cache, check
+# the cited PISA 2022 PDFs (sha256 + literal quotes), load everything into education-es.db (indicator_* contract with
+# releases and revisions), then export the page data from that DB. `just education-refresh --offline` reloads the cache.
+education-refresh *args:
+  python3 scripts/ingest_education_es.py {{args}}
+  python3 scripts/export_public_viz_education.py
