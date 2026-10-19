@@ -167,6 +167,8 @@ What we take from those references (the checklist; name the references and copy 
 - Article layout: each page reads as one clean article: a centred text column, charts and tables at full width,
   separation by white space, no card borders or dividers. Don't set inline margins on text (the shared CSS centres
   it) and don't add framed boxes; reading guides and callouts sit in the text column or as a lightly tinted grid.
+  No white sheet: the site's tiled background fades to white towards the centre (shared `.viz::before`), and key
+  figures (`.vizStat`) are tinted tiles set apart from the page.
 - "El dato mata el relato": every visualization has one consolidated figure, placed near the top, that combines
   enough dimensions (e.g. levels and change, composition and peers, two variables over time) that no competing
   narrative can cherry-pick it. Many single charts can each be used to support opposite stories; this one puts the

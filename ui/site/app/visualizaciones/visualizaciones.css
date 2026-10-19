@@ -818,3 +818,52 @@
     font-size: 1.2rem;
   }
 }
+
+/* Background: no white sheet. The site's tiled grid stays visible at the edges and fades quickly to white towards
+   the centre, behind the whole visualization (an isolated white layer masked at the sides and top). */
+.viz {
+  position: relative;
+  isolation: isolate;
+}
+
+.viz::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: var(--viz-surface);
+  -webkit-mask-image:
+    linear-gradient(90deg, transparent 0, #000 clamp(24px, 9vw, 160px), #000 calc(100% - clamp(24px, 9vw, 160px)), transparent 100%),
+    linear-gradient(180deg, transparent 0, #000 96px);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(90deg, transparent 0, #000 clamp(24px, 9vw, 160px), #000 calc(100% - clamp(24px, 9vw, 160px)), transparent 100%),
+    linear-gradient(180deg, transparent 0, #000 96px);
+  mask-composite: intersect;
+}
+
+.viz .vizArticle {
+  background: transparent;
+  border-radius: 0;
+}
+
+/* Key figures are tiles: tinted, rounded, set apart from the white page (no borders). */
+.viz {
+  --viz-tile: #f2f4f1;
+}
+
+.viz .vizArticle .vizStats {
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(168px, 1fr));
+}
+
+.viz .vizArticle .vizStat {
+  padding: 16px 18px 18px;
+  border-radius: 10px;
+  background: var(--viz-tile);
+}
+
+.viz .vizArticle .vizStat__value {
+  font-size: 2.2rem;
+}
