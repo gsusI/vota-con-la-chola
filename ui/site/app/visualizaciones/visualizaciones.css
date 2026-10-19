@@ -882,3 +882,23 @@
 .viz .vizArticle .vizStat__value {
   font-size: 2.2rem;
 }
+
+/* An open data table must scroll inside its box, never widen the figure: grid tracks would otherwise grow to the
+   table's min-content width, shifting and clipping captions and cards. */
+.viz :where(.vizFigure, .vizProse) {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.viz :where(.vizFigure, .vizProse) > * {
+  min-width: 0;
+}
+
+.viz .vizTable,
+.viz .vizTable__scroll {
+  max-width: 100%;
+  min-width: 0;
+}
+
+.viz .vizTable__scroll {
+  overflow: auto;
+}
