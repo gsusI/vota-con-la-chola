@@ -93,6 +93,8 @@ class IngestEducationTest(unittest.TestCase):
             for row in rows:
                 self.assertIn(row["document"], data["documents"])
                 self.assertTrue(row["quote"] and row["pdf_page"] > 0)
+                if key.endswith("_flag"):
+                    continue  # membership flags quote the sentence that lists the group, not a number
                 value = format(row["value"], "g")
                 self.assertTrue(value in row["quote"] or value.replace(".", ",") in row["quote"], (key, row["area"], row["year"]))
 

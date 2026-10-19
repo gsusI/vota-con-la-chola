@@ -877,6 +877,9 @@ CURATED_LABELS = {
     "pisa_immigrant_share_pct": ("PC", "% del alumnado de 15 años", "PISA: alumnado de origen inmigrante"),
     "pisa_immigrant_gap_math": ("PISA_SCORE", "Puntos PISA", "PISA: diferencia en matemáticas entre alumnado no inmigrante e inmigrante"),
     "pisa_immigrant_gap_math_escs_adjusted": ("PISA_SCORE", "Puntos PISA", "PISA: diferencia inmigrante en matemáticas tras descontar el ISEC"),
+    "pisa_isec_above_oecd_flag": ("FLAG", "1 = ISEC medio superior a la media OCDE", "PISA: comunidades con ISEC medio superior a la media OCDE (según el informe español)"),
+    "pisa_isec_mean": ("ISEC", "Índice ISEC (media OCDE = 0)", "PISA: índice medio de estatus económico, social y cultural (ISEC)"),
+    "pisa_isec_r2_math_pct": ("PC", "% de la variación (R²)", "PISA: variación de la puntuación media en matemáticas explicada por el ISEC medio"),
     "pisa_disadvantaged_immigrant_pct": ("PC", "% del alumnado inmigrante", "PISA: alumnado inmigrante socioeconómicamente desaventajado"),
 }
 

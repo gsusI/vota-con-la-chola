@@ -4,6 +4,7 @@ import TimeSeriesChart from "../components/TimeSeriesChart";
 import Figure from "../components/Figure";
 import SparseLineChart from "./SparseLineChart";
 import EduTable from "./EduTable";
+import { StoryFigure } from "./StoryScatter";
 import { fmt } from "./formatEdu.mjs";
 import { AttainmentFigure, C, EquityFigure, Explain, Glossary, NAMES, RegionsFigure, TeachersFigure, VocationalFigure, num } from "./sections";
 
@@ -185,6 +186,7 @@ export default function EducacionPage() {
         actions={[
           { href: downloads, label: "Descargar datos (CSV)" },
           { href: "/visualizaciones/data/educacion.json", label: "JSON con procedencia" },
+          { href: "#dato-relato", label: "Todo en una imagen" },
           { href: "#conclusion", label: "Conclusión" },
           { href: "#glosario", label: "Glosario" },
           { href: "#metodo", label: "Método y fuentes" },
@@ -251,6 +253,12 @@ export default function EducacionPage() {
           </li>
         </ol>
       </section>
+
+      <StoryFigure
+        story={data.story}
+        sources={[S.oecd, S.wb, S.pisaReports, S.pisa2022, S.mefp]}
+        h={{ compositionPoints: data.equity.composition.effect_raw_points, compositionDrop: Math.abs(data.equity.composition.math_change_2012_2022) }}
+      />
 
       <Figure
         id="gasto"

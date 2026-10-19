@@ -648,6 +648,129 @@
         "locator": "Apartado sobre estudiantes de origen inmigrante",
         "quote": "la proporción correspondiente entre los inmigrantes es del 50 %"
       }
+    ],
+    "pisa_isec_above_oecd_flag": [
+      {
+        "area": "ES-CCAA:Asturias, Principado de",
+        "year": 2022,
+        "value": 1,
+        "document": "inee_pisa2022_informe_espanol",
+        "pdf_page": 120,
+        "locator": "Capítulo 3, apartado 3.5.1.1 (Figura 3.5.b)",
+        "quote": "junto al País Vasco, Principado de Asturias, Castilla y León, Galicia, Cantabria y Comunidad Foral de Navarra, conforma el grupo de comunidades autónomas con un ISEC superior al Promedio de la OCDE"
+      },
+      {
+        "area": "ES-CCAA:Cantabria",
+        "year": 2022,
+        "value": 1,
+        "document": "inee_pisa2022_informe_espanol",
+        "pdf_page": 120,
+        "locator": "Capítulo 3, apartado 3.5.1.1 (Figura 3.5.b)",
+        "quote": "junto al País Vasco, Principado de Asturias, Castilla y León, Galicia, Cantabria y Comunidad Foral de Navarra, conforma el grupo de comunidades autónomas con un ISEC superior al Promedio de la OCDE"
+      },
+      {
+        "area": "ES-CCAA:Castilla y León",
+        "year": 2022,
+        "value": 1,
+        "document": "inee_pisa2022_informe_espanol",
+        "pdf_page": 120,
+        "locator": "Capítulo 3, apartado 3.5.1.1 (Figura 3.5.b)",
+        "quote": "junto al País Vasco, Principado de Asturias, Castilla y León, Galicia, Cantabria y Comunidad Foral de Navarra, conforma el grupo de comunidades autónomas con un ISEC superior al Promedio de la OCDE"
+      },
+      {
+        "area": "ES-CCAA:Galicia",
+        "year": 2022,
+        "value": 1,
+        "document": "inee_pisa2022_informe_espanol",
+        "pdf_page": 120,
+        "locator": "Capítulo 3, apartado 3.5.1.1 (Figura 3.5.b)",
+        "quote": "junto al País Vasco, Principado de Asturias, Castilla y León, Galicia, Cantabria y Comunidad Foral de Navarra, conforma el grupo de comunidades autónomas con un ISEC superior al Promedio de la OCDE"
+      },
+      {
+        "area": "ES-CCAA:Madrid, Comunidad de",
+        "year": 2022,
+        "value": 1,
+        "document": "inee_pisa2022_informe_espanol",
+        "pdf_page": 120,
+        "locator": "Capítulo 3, apartado 3.5.1.1 (Figura 3.5.b)",
+        "quote": "el más alto corresponde a la Comunidad de Madrid (0,25)"
+      },
+      {
+        "area": "ES-CCAA:Navarra, Comunidad Foral de",
+        "year": 2022,
+        "value": 1,
+        "document": "inee_pisa2022_informe_espanol",
+        "pdf_page": 120,
+        "locator": "Capítulo 3, apartado 3.5.1.1 (Figura 3.5.b)",
+        "quote": "junto al País Vasco, Principado de Asturias, Castilla y León, Galicia, Cantabria y Comunidad Foral de Navarra, conforma el grupo de comunidades autónomas con un ISEC superior al Promedio de la OCDE"
+      },
+      {
+        "area": "ES-CCAA:País Vasco",
+        "year": 2022,
+        "value": 1,
+        "document": "inee_pisa2022_informe_espanol",
+        "pdf_page": 120,
+        "locator": "Capítulo 3, apartado 3.5.1.1 (Figura 3.5.b)",
+        "quote": "junto al País Vasco, Principado de Asturias, Castilla y León, Galicia, Cantabria y Comunidad Foral de Navarra, conforma el grupo de comunidades autónomas con un ISEC superior al Promedio de la OCDE"
+      }
+    ],
+    "pisa_isec_mean": [
+      {
+        "area": "ES-CCAA:Madrid, Comunidad de",
+        "year": 2022,
+        "value": 0.25,
+        "document": "inee_pisa2022_informe_espanol",
+        "pdf_page": 120,
+        "locator": "Capítulo 3, apartado 3.5.1.1",
+        "quote": "el más alto corresponde a la Comunidad de Madrid (0,25)"
+      },
+      {
+        "area": "ES-CCAA:Melilla",
+        "year": 2022,
+        "value": -0.79,
+        "document": "inee_pisa2022_informe_espanol",
+        "pdf_page": 120,
+        "locator": "Capítulo 3, apartado 3.5.1.1",
+        "quote": "El ISEC más bajo corresponde a Melilla (-0,79)"
+      },
+      {
+        "area": "ESP",
+        "year": 2022,
+        "value": -0.03,
+        "document": "inee_pisa2022_informe_espanol",
+        "pdf_page": 118,
+        "locator": "Capítulo 3, apartado 3.5.1.1",
+        "quote": "El valor del ISEC para España es de -0,03"
+      },
+      {
+        "area": "OECD",
+        "year": 2022,
+        "value": 0,
+        "document": "inee_pisa2022_informe_espanol",
+        "pdf_page": 118,
+        "locator": "Capítulo 3, apartado 3.5.1.1",
+        "quote": "El promedio de la OCDE es 0,00"
+      }
+    ],
+    "pisa_isec_r2_math_pct": [
+      {
+        "area": "ES-CCAA",
+        "year": 2022,
+        "value": 81.3,
+        "document": "inee_pisa2022_informe_espanol",
+        "pdf_page": 122,
+        "locator": "Capítulo 3, apartado 3.5.1.2 (Figura 3.6.b)",
+        "quote": "el 81,30 % (R2) de la variabilidad observada en las puntuaciones medias en matemáticas"
+      },
+      {
+        "area": "OECD-EU-countries",
+        "year": 2022,
+        "value": 40.65,
+        "document": "inee_pisa2022_informe_espanol",
+        "pdf_page": 120,
+        "locator": "Capítulo 3, apartado 3.5.1.2 (Figura 3.6.a)",
+        "quote": "este índice explica el 40,65 % (medido por el coeficiente de determinación, R2)"
+      }
     ]
   },
   "gaps": [

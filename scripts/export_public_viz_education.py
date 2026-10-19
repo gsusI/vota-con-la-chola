@@ -316,6 +316,68 @@ def build(conn: sqlite3.Connection) -> dict:
     attain = store.by_dimension("eurostat_sdmx", "attainment_25_34", "PC", "isced11")
     attainment = {level: {geo: points(attain.get((geo, level), {})) for geo in PEERS_EU} for level in ("ED0-2", "ED3_4", "ED5-8")}
 
+    # 11. «El dato mata el relato»: spending per pupil (Spain 2022 = 100) against PISA maths ---------------
+    eag = {area: {p["year"]: p["value"] for p in rows} for area, rows in eag_school.items()}
+    pisa_math = {area: {p["year"]: p["value"] for p in rows} for area, rows in pisa["math"].items()}
+    base = eag["ESP"][2022]
+
+    def spend_for(area: str, year: int) -> tuple[int, float] | None:
+        """Spending of the PISA year, or of the closest year within one year (2006 uses 2005)."""
+        for candidate in (year, year - 1, year + 1):
+            if candidate in eag.get(area, {}):
+                return candidate, eag[area][candidate]
+        return None
+
+    spain_path = []
+    for year in sorted(pisa_math["ESP"]):
+        found = spend_for("ESP", year)
+        if found:
+            spending_year, value = found
+            spain_path.append({
+                "pisa_year": year, "spending_year": spending_year, "x": r(value / base * 100), "y": pisa_math["ESP"][year],
+                "comparable": year >= PISA_FIRST_COMPARABLE["math"],
+            })
+    peer_arrows = []
+    for area in ("OECD", "DEU", "FRA", "ITA", "PRT"):
+        pts = []
+        for year in (2012, 2022):
+            found = spend_for(area, year)
+            if found and year in pisa_math.get(area, {}):
+                pts.append({"pisa_year": year, "spending_year": found[0], "x": r(found[1] / base * 100), "y": pisa_math[area][year]})
+        if len(pts) == 2:
+            peer_arrows.append({"area": area, "points": pts})
+    above = {
+        p["name"] for geo, rows in store.series("vclc_education_curated", "pisa_isec_above_oecd_flag", "FLAG").items()
+        for p in rows if geo.startswith("ES-CCAA:")
+    }
+    # Spain-wide regional average: all consejerías' spending over all their pupils (not a mean of ratios).
+    spend_sum = students_sum = 0.0
+    for (_geo, admin), years in consejerias.items():
+        if admin and " - Consejería" in admin and region_year in years:
+            region = admin.split(" - ")[0].strip()
+            enrolled = students_by_region.get(region, {})
+            if region_year in enrolled and (region_year - 1) in enrolled:
+                spend_sum += years[region_year] * 1000
+                students_sum += (enrolled[region_year - 1] + enrolled[region_year]) / 2
+    regional_base = spend_sum / students_sum
+    story_regions = [
+        {"region": row["region"], "x": r(row["spending_per_student"] / regional_base * 100), "y": row["math"],
+         "isec_above_oecd": row["region"] in above}
+        for row in regions_pisa if row["math"] is not None
+    ]
+    r2 = {geo: rows[0]["value"] for geo, rows in store.series("vclc_education_curated", "pisa_isec_r2_math_pct", "PC").items()}
+    isec = {geo: rows[0]["value"] for geo, rows in store.series("vclc_education_curated", "pisa_isec_mean", "ISEC").items()}
+    story = {
+        "base": "España 2022 = 100. Países: gasto público por alumno de Primaria a postsecundaria no terciaria (OCDE, dólares PPA "
+        "constantes de 2020). Comunidades: gasto de la consejería por alumno no universitario en 2022 frente a la media de todas "
+        "las consejerías (Ministerio).",
+        "spain_path": spain_path, "peer_arrows": peer_arrows, "regions": story_regions,
+        "regional_base_eur": r(regional_base, 0), "spain_base_usd": base,
+        "r2_isec_regions": r2.get("ES-CCAA"), "r2_isec_countries": r2.get("OECD-EU-countries"),
+        "r2_spending_regions": r(pearson ** 2 * 100, 0) if pearson is not None else None,
+        "isec": isec,
+    }
+
     sal_es = {p["year"]: p["value"] for p in salary_index["ISCED11_24"]["ESP"]}
     sal_oecd = {p["year"]: p["value"] for p in salary_index["ISCED11_24"]["OECD"]}
     sal_peak = max(sal_es, key=lambda y: sal_es[y])
@@ -426,6 +488,7 @@ def build(conn: sqlite3.Connection) -> dict:
         "teachers": {"salary_index": salary_index, "pupil_teacher": pupil_teacher, "headline": teachers_headline},
         "vocational": {"share_upper_secondary": vocational_share, "recent_graduates_employment": recent_grads},
         "attainment_25_34": attainment,
+        "story": story,
         "sources": sources,
     }
 
