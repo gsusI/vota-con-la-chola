@@ -130,6 +130,24 @@ This repo is intentionally ultra-lean. When expanding ETL/schema/UI, optimize fo
   - No insults, speculation, or motive claims beyond what evidence supports.
   - Append-only history; if resolved, mark resolution with proof and keep the original incident visible.
 
+### Public Data Visualizations (`/visualizaciones/`): Methodological Standard
+"Rigorous" is ambiguous on its own, so this project names its references: the data charts of **Jon González**
+(Spanish data communicator on X/Twitter) and of the economist **Luis Garicano** (LSE). Every chart, its copy and any
+post that promotes it (threads, briefs for agents) is held to that standard.
+
+What we take from those references (the checklist; name the references and copy this list into every agent brief for a visualization):
+- Primary or official source linked on every chart, with retrieval date; a mirror only when the official host blocks
+  scripted access, and say so.
+- Denominator first: % of GDP, per person, or constant prices; nominal totals only as a complement.
+- Axes start at zero; one axis per chart (never dual axes); panels of one figure share their scale.
+- Series breaks are shown, never spliced: overlap differently-scoped series and explain the coverage.
+- Compare with peers (OECD/EU averages and similar countries) before saying anything is high or low.
+- The thesis is a hypothesis: publish what contradicts it too (e.g. falling top tax rates in `/visualizaciones/carga-fiscal/`).
+- Name what the data cannot say (legal vs economic incidence, nominal vs effective rates, gaps and low-confidence values).
+- Every number reproducible from the DB (indicator contract with raw payload + sha256), with a table view and
+  downloadable CSV/JSON.
+- Titles state the finding with its number; copy and posts use only figures checked against the published data.
+
 ## Project Skills
 
 - MTurk manual review workflow: `skills/mturk-review-loop/SKILL.md`
