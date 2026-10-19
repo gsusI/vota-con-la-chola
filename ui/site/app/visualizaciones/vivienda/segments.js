@@ -43,12 +43,12 @@ export default function WhoPaysFigure({ segments, source }) {
     p1 && {
       id: "p1",
       tag: "1",
-      who: "Joven de 25 a 29 años que vive sola de alquiler en la ciudad de Madrid",
+      who: "Joven de 25 a 34 años que vive sola de alquiler en la ciudad de Madrid",
       cost: `${eur(p1.cost_month)} de alquiler`,
       share: p1.share_pct,
       left: p1.left_month,
       group: `${num(p1.overburden_pct)} % (inquilinos de mercado)`,
-      how: `Alquiler mediano declarado de la ciudad (SERPAVI ${p1.rent_year}) sobre el sueldo neto medio de 25 a 34 años, ajustado al nivel salarial de Madrid (${eur(p1.income_year)} al año, ${p1.pay_year}).`,
+      how: `Alquiler mediano declarado de la ciudad (SERPAVI ${p1.rent_year}) sobre el sueldo neto medio de 25 a 34 años ajustado al nivel salarial de Madrid, con el tipo de IRPF y cotizaciones que corresponde a ese sueldo (${eur(p1.income_year)} al año, ${p1.pay_year}).`,
     },
     p2r && {
       id: "p2a",

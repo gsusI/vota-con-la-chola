@@ -183,7 +183,7 @@ export function TenantRegionFigure({ territory, segments, source }) {
         source("oecd_dbnomics", "OCDE, Taxing Wages (paso de bruto a neto)", "https://db.nomics.world/OECD/DSD_TAX_WAGES_COMP@DF_TW_COMP"),
       ]}
       notes={[
-        "Sueldo neto: salario bruto medio de 25 a 34 años (INE, EES) menos el IRPF y las cotizaciones de un soltero que gana el 67 % del salario medio (OCDE), multiplicado por el cociente entre el salario de la comunidad y el de España (ETCL). No hay salario oficial por edad y comunidad: es el corte por edad ajustado por el de territorio, una aproximación.",
+        "Sueldo neto: salario bruto medio de 25 a 34 años (INE, EES) multiplicado por el cociente entre el salario de la comunidad y el de España (ETCL), menos el IRPF y las cotizaciones de un soltero con ese sueldo (OCDE Taxing Wages, interpolado entre el 67 % y el 100 % del salario medio). No hay salario oficial por edad y comunidad: es el corte por edad ajustado por el de territorio, una aproximación.",
         "Resto de la provincia: media de las medianas de sus municipios ponderada por el número de pisos alquilados (la mediana del conjunto no se puede rehacer con medianas municipales). El SERPAVI recoge todos los contratos vigentes, no solo los nuevos: quien firma hoy paga más. País Vasco y Navarra tienen su propia Hacienda y entran con menos años (Bilbao, solo 2024).",
       ]}
       table={

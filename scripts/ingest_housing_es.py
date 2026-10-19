@@ -657,7 +657,7 @@ def serpavi_municipalities(rows_iter: Iterable[tuple]) -> Iterable[Batch]:
 # ---------------------------------------------------------------- Banco de España si_1_5 (CSV)
 
 BDE_URL = "https://www.bde.es/webbe/es/estadisticas/compartido/datos/csv/si_1_5.csv"
-BDE_PAGE = "https://www.bde.es/webbe/es/estadisticas/temas/sectores-real/vivienda.html"
+BDE_PAGE = "https://www.bde.es/webbe/es/estadisticas/compartido/datos/pdf/si_1_5.pdf"
 MONTHS = {m: i + 1 for i, m in enumerate(["ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SEP", "OCT", "NOV", "DIC"])}
 FREQ = {"MENSUAL": ("M", "Mensual"), "TRIMESTRAL": ("Q", "Trimestral"), "SEMESTRAL": ("S", "Semestral"), "ANUAL": ("A", "Anual")}
 # alias -> (indicator_code, unit_code, label)
@@ -971,7 +971,9 @@ def dbnomics_obs(doc: dict[str, Any], doc_index: int) -> list[dict[str, Any]]:
 
 
 TW_DATASET = "DSD_TAX_WAGES_COMP@DF_TW_COMP"
-TW_MEASURES = {"AV_RITEESSC": "Tipo medio de IRPF + cotizaciones del trabajador (% del salario bruto)", "AV_TW": "Cuña fiscal media (% del coste laboral)"}
+TW_MEASURES = {"AV_RITEESSC": "Tipo medio de IRPF + cotizaciones del trabajador (% del salario bruto)", "AV_TW": "Cuña fiscal media (% del coste laboral)",
+               "GEBT": "Salario bruto anual del asalariado tipo (euros)"}
+TW_UNITS = {"GEBT": ("EUR_YEAR", "Euros al año")}
 
 
 def oecd_tw_url() -> str:
@@ -984,14 +986,15 @@ def parse_oecd_tw(raw: Raw) -> Iterable[Batch]:
     grouped: dict[tuple[str, str], list[dict[str, Any]]] = {}
     for i, doc in enumerate(raw.data["series"]["docs"]):
         area, measure, unit, household, income, *_ = doc["series_code"].split(".")
-        if measure not in TW_MEASURES:
+        if measure not in TW_MEASURES or (measure == "GEBT" and unit != "XDC"):
             continue
         grouped.setdefault((measure, income), []).append(geo_series(f"{TW_DATASET}|{doc['series_code']}", area,
                                                                     {"MEASURE": measure, "UNIT": unit, "INCOME_PRINCIPAL": income}, dbnomics_obs(doc, i)))
     for (measure, income), series in sorted(grouped.items()):
         yield {
             "source_id": "oecd_dbnomics", "dataset_code": TW_DATASET, "indicator_code": f"{measure}.S_C0.{income}",
-            "frequency_code": "A", "frequency_label": "Anual", "unit_code": "PC", "unit_label": "%",
+            "frequency_code": "A", "frequency_label": "Anual", "unit_code": TW_UNITS.get(measure, ("PC", "%"))[0],
+            "unit_label": TW_UNITS.get(measure, ("PC", "%"))[1],
             "label": f"{TW_MEASURES[measure]}, soltero sin hijos, {income.removeprefix('AW')} % del salario medio (OCDE Taxing Wages)",
             "definition": "OCDE Taxing Wages: impuestos y cotizaciones de un asalariado tipo. Leído de la réplica DBnomics "
             "(sdmx.oecd.org bloquea scripts).",

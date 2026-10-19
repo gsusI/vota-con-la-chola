@@ -25,6 +25,8 @@ export function CapacityFigure({ capacity, homeM2, source }) {
   const rate = at(c.net_rate_avg, y);
   const rate67 = at(c.net_rate_67, y);
   const rateMed = at(c.net_rate_median, y);
+  const shareYear = last(c.median_share_of_oecd_wage).year;
+  const shareMed = last(c.median_share_of_oecd_wage).value;
   const wedge = at(c.tax_wedge, y);
   const effort = c.effort_pct;
   const effortPeak = effort.reduce((a, b) => (b.value > a.value ? b : a));
@@ -41,7 +43,7 @@ export function CapacityFigure({ capacity, homeM2, source }) {
         source("bde_indicadores_vivienda", "Banco de España, esfuerzo teórico"),
       ]}
       notes={[
-        "Neto = bruto × (1 − tipo medio de IRPF y cotizaciones del trabajador de la OCDE para un soltero sin hijos). La OCDE publica el tipo al 67 % y al 100 % del salario medio: para el sueldo mediano (en torno al 73 % de ese salario) se interpola entre ambos; para los de 25 a 34 años se usa el del 67 %. Es una aproximación; con hijos o en pareja el tipo es menor.",
+        `Neto = bruto × (1 − tipo medio de IRPF y cotizaciones del trabajador de la OCDE para un soltero sin hijos). La OCDE publica el tipo al 67 % y al 100 % de su salario medio: para el sueldo mediano (el ${num(shareMed * 100, 0)} % de ese salario en ${shareYear}) y el de 25 a 34 años se interpola entre ambos según lo que cobran. Es una aproximación; con hijos o en pareja el tipo es menor.`,
         "La Encuesta de Estructura Salarial es anual desde 2008 y se publica con dos años de retraso; incluye tiempo parcial. «Con precio de compraventa» encadena el IPV del INE al valor tasado de 2015.",
       ]}
       table={

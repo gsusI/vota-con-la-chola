@@ -19,7 +19,7 @@ import sys
 from collections import defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_DB = REPO_ROOT / "etl/data/staging/housing-es.db"
@@ -38,7 +38,7 @@ REGIONS = {
 GAP_FROM, GAP_TO = 2013, 2025  # households measured at both ends; completions summed over GAP_FROM+1..GAP_TO
 SOURCE_PAGES = {
     "mivau_boletin": ("Ministerio de Vivienda y Agenda Urbana · Boletín estadístico (valor tasado, viviendas terminadas)", "https://apps.fomento.gob.es/BoletinOnline2/"),
-    "bde_indicadores_vivienda": ("Banco de España · Indicadores del mercado de la vivienda (si_1_5)", "https://www.bde.es/webbe/es/estadisticas/temas/sectores-real/vivienda.html"),
+    "bde_indicadores_vivienda": ("Banco de España · Indicadores del mercado de la vivienda (si_1_5)", "https://www.bde.es/webbe/es/estadisticas/compartido/datos/pdf/si_1_5.pdf"),
     "ine_tempus": ("INE · Encuesta Trimestral de Coste Laboral (API Tempus)", "https://www.ine.es/dyngs/INEbase/operacion.htm?c=Estadistica_C&cid=1254736045053&idp=1254735976596"),
     "oecd_dbnomics": ("OCDE · salarios medios y precios de la vivienda (réplica DBnomics)", "https://db.nomics.world/OECD"),
     "eurostat_sdmx": ("Eurostat · yth_demo_030, ilc_lvho02, gov_10a_exp, nama_10_gdp", "https://ec.europa.eu/eurostat/databrowser/"),
@@ -469,18 +469,28 @@ def build(conn: sqlite3.Connection) -> dict:
         return pts({y: prices[y] / v for y, v in income.items() if y in prices and v}, 2)
 
     net_avg = {y: v * (1 - tw100[y] / 100) for y, v in wage_all.items() if y in tw100}
-    # The median earner gets ~72-74 % of the OECD average wage: interpolate the worker's tax rate between the published
-    # 67 % and 100 % points by that share (nearest year's share when the OECD wage is missing).
-    share_aw = {y: median[y] / wage_oecd[y] for y in median if y in wage_oecd}
-    def median_rate(y: int) -> float | None:
-        if y not in tw67 or y not in tw100 or not share_aw:
+    # OECD Taxing Wages publishes the worker's rate (income tax + own contributions) at 67 % and 100 % of the average wage.
+    # A pay level between them gets the rate interpolated by its ratio to Taxing Wages' own average wage (GEBT; the
+    # median earner is ~78 %); a year without it takes the nearest one moved with the INE average wage.
+    tw_aw = {int(p): v for p, v in s.raw("GEBT.S_C0.AW100")["ESP"].items()}  # Taxing Wages' own average wage
+
+    def oecd_wage(y: int) -> float | None:
+        if y in tw_aw:
+            return tw_aw[y]
+        near = min(tw_aw, key=lambda k: abs(k - y)) if tw_aw else None
+        return tw_aw[near] * wage_all[y] / wage_all[near] if near is not None and y in wage_all and near in wage_all else None
+
+    def worker_rate(gross: float, y: int) -> float | None:
+        aw = oecd_wage(y)
+        if y not in tw67 or y not in tw100 or not aw:
             return None
-        share = share_aw.get(y) or share_aw[min(share_aw, key=lambda k: abs(k - y))]
-        share = min(1.0, max(0.67, share))
+        share = min(1.0, max(0.67, gross / aw))
         return tw67[y] + (tw100[y] - tw67[y]) * (share - 0.67) / 0.33
-    tw_med = {y: median_rate(y) for y in sorted(set(tw67) & set(tw100)) if median_rate(y) is not None}
+
+    share_aw = {y: median[y] / oecd_wage(y) for y in median if oecd_wage(y)}
+    tw_med = {y: worker_rate(v, y) for y, v in median.items() if worker_rate(v, y) is not None}
     net_median = {y: v * (1 - tw_med[y] / 100) for y, v in median.items() if y in tw_med}
-    net_young = {y: v * (1 - tw67[y] / 100) for y, v in young_pay.items() if y in tw67}
+    net_young = {y: v * (1 - worker_rate(v, y) / 100) for y, v in young_pay.items() if worker_rate(v, y) is not None}
     burden = {
         "overburden_total": s.raw("ilc_lvho07a.TOTAL"), "overburden_young": s.raw("ilc_lvho07a.Y15-29"),
         "overburden_tenants": s.raw("ilc_lvho07c.RENT_MKT"), "overburden_mortgage": s.raw("ilc_lvho07c.OWN_L"),
@@ -595,7 +605,7 @@ def build(conn: sqlite3.Connection) -> dict:
                  "renters_es_pct": r(renters.get("ES", {}).get(str(max(int(p) for p in renters.get("ES", {"0": 0})))), 1),
                  "income_es": pts(es_income, 0)}
 
-    segments_block = segments(s, conn, net_young, rate, tax_rows)
+    segments_block = segments(s, conn, young_pay, worker_rate, rate, tax_rows)
 
     # 11. Money in versus money out: taxes on immovable property and on its transfer vs public housing spending.
     rev = {code: s.raw(f"TAX_REV.S13.{code}") for code in ("T_4100", "T_4400", "T_4000")}
@@ -757,7 +767,8 @@ def mortgage_payment(principal: float, annual_rate_pct: float, years: int = MORT
     return principal * i / (1 - (1 + i) ** -n) if i else principal / n
 
 
-def segments(s: "Store", conn: sqlite3.Connection, net_young: dict[int, float], rate: dict[int, float], tax_rows: list[dict]) -> dict:
+def segments(s: "Store", conn: sqlite3.Connection, young_pay: dict[int, float], worker_rate: Callable[[float, int], float | None],
+             rate: dict[int, float], tax_rows: list[dict]) -> dict:
     """Who pays for housing: tenure x age (ECV), overburden by tenure (EU-SILC), young people still at home, rents in the big
     cities against the rest of their province (SERPAVI by municipality), and the shared typical cases of
     docs/etl/sprints/VIZ-SEGMENTOS-20261019/README.md, each with the national mean and median beside it."""
@@ -807,14 +818,17 @@ def segments(s: "Store", conn: sqlite3.Connection, net_young: dict[int, float], 
     count_m = s.raw("serpavi_viviendas_alquiladas_vc_municipio")
     wage_reg = {code: annual(v) for code, v in s.raw("etcl_coste_salarial_ccaa").items()}
     income_reg = s.raw("ecv_renta_neta_media_hogar")
-    young_year = max(net_young)
+    young_year = max(young_pay)
 
     def young_net_in(region: str, yr: int) -> tuple[int, float] | None:
-        """Net pay of 25-34 year-olds (Spain, EES) scaled by the region's wage level (ETCL) in the same year."""
+        """Gross pay of 25-34 year-olds (Spain, EES) scaled by the region's wage level (ETCL) in the same year, minus the
+        worker's tax rate for that scaled pay (so a higher Madrid wage also pays a higher rate)."""
         wy = min(yr, young_year)
-        if wy not in net_young or wy not in wage_reg.get(region, {}) or wy not in wage_reg.get("ES", {}):
+        if wy not in young_pay or wy not in wage_reg.get(region, {}) or wy not in wage_reg.get("ES", {}):
             return None
-        return wy, net_young[wy] * wage_reg[region][wy] / wage_reg["ES"][wy]
+        gross = young_pay[wy] * wage_reg[region][wy] / wage_reg["ES"][wy]
+        t = worker_rate(gross, wy)
+        return (wy, gross * (1 - t / 100)) if t is not None else None
 
     cities = []
     for prov, (city, region) in CITIES.items():
@@ -906,7 +920,7 @@ def segments(s: "Store", conn: sqlite3.Connection, net_young: dict[int, float], 
         "year": year, "overburden_total": r(over["TOTAL"]["ES"][y], 1), "overburden_total_eu": r(over["TOTAL"].get("EU27_2020", {}).get(y), 1),
         "cost_share_mean": r(mean_share, 1), "cost_share_median": r(median_share, 1),
         "tenure": tenure, "age_tenure": age_tenure, "at_home": at_home, "cities": cities, "regions": regions,
-        "young_net_es": {"year": young_year, "value": r(net_young[young_year], 0)},
+        "young_net_es": {"year": young_year, "value": r(young_net_in("ES", young_year)[1], 0)} if young_net_in("ES", young_year) else None,
         "assumptions": {"ppp_year": ppp_y, "eur_per_pps": r(ppp_v, 4), "cost_year": t_cost, "ecv_year": t_ecv},
         "cases": cases,
     }
