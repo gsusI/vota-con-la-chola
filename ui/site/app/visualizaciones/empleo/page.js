@@ -6,6 +6,7 @@ import ChapterCausas from "./ch3_causas";
 import ChapterCalidad, { IntermittencyFigure } from "./ch4_calidad";
 import ChapterProductividad from "./ch5_productividad";
 import ChapterCapacidad from "./capacidad";
+import ChapterComposicion from "./composicion";
 import { LimitsCard, MethodCard } from "./sections";
 import { Conclusion, Glossary, Summary } from "./summary";
 import DatoMataRelato from "./relato";
@@ -64,7 +65,10 @@ export default function EmpleoPage() {
             Productividad por hora, {h.productivity_base}–{h.productivity_last}
           </span>
           <span className="vizStat__value">+{num(g.ESP)} %</span>
-          <span className="vizStat__note">frente a +{num(g.EU27)} % en la UE-27 (en volumen)</span>
+          <span className="vizStat__note">
+            frente a +{num(g.EU27)} % en la UE-27; desde 2008, +{num(data.composition?.base_year.productivity.rows.find((r) => r.base === 2008)?.ESP)} % frente a +
+            {num(data.composition?.base_year.productivity.rows.find((r) => r.base === 2008)?.EU27)} %
+          </span>
         </div>
         <div className="card vizStat">
           <span className="vizStat__label">Asalariados temporales</span>
@@ -85,6 +89,7 @@ export default function EmpleoPage() {
       </ChapterCalidad>
       <ChapterProductividad data={data} />
       <ChapterCapacidad data={data} />
+      <ChapterComposicion data={data} />
       <Conclusion data={data} />
       <Glossary />
       <LimitsCard />

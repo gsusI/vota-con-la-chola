@@ -22,6 +22,9 @@ export default function ChapterProductividad({ data }) {
     ...PEERS.map((area) => ({ id: area, label: NAMES[area], color: C.peer, points: p.level_vs_eu27[area] })),
     { id: "eu", label: "Media de la UE-27 = 100", shortLabel: "UE-27", color: C.ref, points: constant(100, h.productivity_base, h.level_last_year) },
   ];
+  const b08 = data.composition?.base_year.productivity.rows.find((r) => r.base === 2008) || { ESP: NaN, EU27: NaN };
+  const wBases = data.composition?.base_year.real_wage.rows || [];
+  const wBehind = wBases.filter((r) => r.ESP < r.EU27).map((r) => r.base);
   const p08 = at(p.index_1995.ESP, 2008);
   const p13 = at(p.index_1995.ESP, 2013);
   const lvFirst = h.level_vs_eu_first.ESP;
@@ -58,8 +61,8 @@ export default function ChapterProductividad({ data }) {
 
       <Fig
         id="productividad"
-        title={`Desde ${h.productivity_base}, la productividad por hora creció un ${num(g.ESP)} % en España y un ${num(g.EU27)} % en la UE-27`}
-        dek={`PIB en volumen por hora trabajada, ${h.productivity_base} = 100. Alemania +${num(g.DEU)} %, Portugal +${num(g.PRT)} %, Francia +${num(g.FRA)} %. ${peersSlower.length ? `Solo ${peersSlower.map(([a]) => NAMES[a]).join(" y ")} creció menos (+${num(peersSlower[0][1])} %).` : ""}`}
+        title={`Desde ${h.productivity_base}, la productividad por hora creció un ${num(g.ESP)} % en España y un ${num(g.EU27)} % en la UE-27; desde 2008, al mismo ritmo (${num(b08.ESP)} % frente a ${num(b08.EU27)} %)`}
+        dek={`PIB en volumen por hora trabajada, ${h.productivity_base} = 100. 1995 es un máximo relativo de España (producía por hora un ${num(lvFirst - 100, 0)} % más que la media de la UE), así que empezar ahí agranda la distancia; la comparación desde cinco años base está en el capítulo 7. Alemania +${num(g.DEU)} %, Portugal +${num(g.PRT)} %, Francia +${num(g.FRA)} %. ${peersSlower.length ? `Solo ${peersSlower.map(([a]) => NAMES[a]).join(" y ")} creció menos (+${num(peersSlower[0][1])} %).` : ""}`}
         legend={[{ id: "ESP", label: "España", color: C.blue }, { id: "EU27", label: "UE-27", color: C.ref }, PEER_LEGEND]}
         sources={[S.eurostat("nama_10_lp_ulc")]}
         notes={["Índice reescalado por nosotros a 1995 = 100 desde el índice 2015 = 100 de Eurostat (productividad real por hora, RLPR_HW)."]}
@@ -94,7 +97,7 @@ export default function ChapterProductividad({ data }) {
         <Fig
           id="salarios"
           title={`Desde ${h.productivity_base}, el salario real por asalariado subió un ${num(wLast("ESP") - 100)} % en España y la productividad por ocupado un ${num(pLast("ESP") - 100)} %; en la UE-27, un ${num(wLast("EU27") - 100)} % y un ${num(pLast("EU27") - 100)} %`}
-          dek={`Italia es el único país del grupo donde el salario real cayó (${num(wLast("ITA") - 100)} %). En Francia (${num(wLast("FRA") - 100)} %) y Portugal (${num(wLast("PRT") - 100)} %) los salarios crecieron incluso más que la productividad. Cada país en su panel, misma escala.`}
+          dek={`${wBehind.length ? `España queda por detrás de la UE empezando en ${wBehind.join(", ")}; solo desde 2019 va por delante. ` : ""}Italia es el único país del grupo donde el salario real cayó (${num(wLast("ITA") - 100)} %). En Francia (${num(wLast("FRA") - 100)} %) y Portugal (${num(wLast("PRT") - 100)} %) los salarios crecieron incluso más que la productividad. Cada país en su panel, misma escala.`}
           legend={[
             { id: "wage", label: "Remuneración real por asalariado", color: C.blue },
             { id: "prod", label: "PIB real por ocupado", color: C.orange },

@@ -253,3 +253,77 @@ export function ContractStack({ quarters, seekers, colors, reformQuarter, height
     </div>
   );
 }
+
+// Scatter with both axes from zero: one dot per region, plus labelled reference points (country, EU).
+export function RegionScatter({ points, refs = [], xLabel, yLabel, color, height = 380 }) {
+  const [ref, width] = useWidth();
+  const [hover, setHover] = useState(null);
+  const m = { top: 14, right: 16, bottom: 42, left: 50 };
+  const innerW = Math.max(120, width - m.left - m.right);
+  const innerH = height - m.top - m.bottom;
+  const all = [...points, ...refs];
+  const xStep = 10;
+  const yStep = 5;
+  const x1 = Math.ceil(Math.max(...all.map((p) => p.x)) / xStep) * xStep;
+  const y1 = Math.ceil(Math.max(...all.map((p) => p.y)) / yStep) * yStep;
+  const sx = (v) => m.left + (v / x1) * innerW;
+  const sy = (v) => m.top + (1 - v / y1) * innerH;
+  const compact = width < 520;
+  const active = hover == null ? null : all.find((p) => p.id === hover);
+  return (
+    <div className="tsChart" ref={ref}>
+      <svg role="img" aria-label={`${yLabel} frente a ${xLabel} por comunidad autónoma`} width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
+        {ticks(0, y1, yStep).map((t) => (
+          <g key={`y${t}`}>
+            <line className={t === 0 ? "tsChart__baseline" : "tsChart__grid"} x1={m.left} x2={m.left + innerW} y1={sy(t)} y2={sy(t)} />
+            <text className="tsChart__tick" x={m.left - 6} y={sy(t) + 4} textAnchor="end">
+              {t}%
+            </text>
+          </g>
+        ))}
+        {ticks(0, x1, xStep).map((t) => (
+          <g key={`x${t}`}>
+            <line className="tsChart__grid" x1={sx(t)} x2={sx(t)} y1={m.top} y2={m.top + innerH} />
+            <text className="tsChart__tick" x={sx(t)} y={m.top + innerH + 16} textAnchor="middle">
+              {t} €
+            </text>
+          </g>
+        ))}
+        <text className="tsChart__tick" x={m.left + innerW} y={height - 4} textAnchor="end">
+          {xLabel}
+        </text>
+        {points.map((p) => (
+          <g key={p.id} onPointerEnter={() => setHover(p.id)} onPointerLeave={() => setHover(null)}>
+            <circle cx={sx(p.x)} cy={sy(p.y)} r={hover === p.id ? 7 : 5.5} fill={color} opacity={0.85} stroke="var(--viz-surface)" strokeWidth={1} />
+            {!compact && p.label ? (
+              <text className="tsChart__noteLabel" x={sx(p.x) + 8} y={sy(p.y) + 4}>
+                {p.label}
+              </text>
+            ) : null}
+          </g>
+        ))}
+        {refs.map((p) => (
+          <g key={p.id} onPointerEnter={() => setHover(p.id)} onPointerLeave={() => setHover(null)}>
+            <rect x={sx(p.x) - 6} y={sy(p.y) - 6} width={12} height={12} fill={p.color} stroke="var(--viz-surface)" strokeWidth={1} transform={`rotate(45 ${sx(p.x)} ${sy(p.y)})`} />
+            <text className="tsChart__endLabel" x={sx(p.x) + 10} y={sy(p.y) + 4}>
+              {p.label}
+            </text>
+          </g>
+        ))}
+      </svg>
+      {active ? (
+        <div className="tsChart__tooltip" style={{ left: sx(active.x) > width * 0.6 ? undefined : sx(active.x) + 12, right: sx(active.x) > width * 0.6 ? width - sx(active.x) + 12 : undefined, top: m.top }} role="status">
+          <span className="tsChart__tooltipYear">{active.name || active.label}</span>
+          <span className="tsChart__tooltipRow">
+            <strong>{num(active.x)} €</strong>
+            <span className="tsChart__tooltipLabel">{xLabel}</span>
+          </span>
+          <span className="tsChart__tooltipRow">
+            <strong>{num(active.y)} %</strong>
+            <span className="tsChart__tooltipLabel">{yLabel}</span>
+          </span>
+        </div>
+      ) : null}
+    </div>
+  );
+}

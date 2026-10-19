@@ -52,7 +52,8 @@ export function Summary({ data }) {
         </li>
         <li>
           <strong>Productividad y salarios casi parados.</strong> La productividad por hora creció un {num(g.ESP)} % desde {h.productivity_base},
-          frente al {num(g.EU27)} % de la UE-27 (Italia: {num(g.ITA)} %).
+          frente al {num(g.EU27)} % de la UE-27 (Italia: {num(g.ITA)} %); pero 1995 es un máximo relativo de España, y desde 2008 crece al ritmo
+          europeo. El retraso está dentro de cada sector, no en la mezcla de sectores.
           {wp?.ESP ? ` El salario real por asalariado, un ${num(wp.ESP.wage.at(-1).value - 100)} % (UE-27: ${num(wp.EU27.wage.at(-1).value - 100)} %).` : ""}{" "}
           <a href="#productividad">Ver gráfico</a>
         </li>
@@ -74,7 +75,8 @@ export function Summary({ data }) {
         <p style={{ margin: 0 }}>
           Capítulos: <a href="#cap-cuanto">1. Cuánto paro</a> · <a href="#cap-ciclo">2. Estructural o cíclico</a> ·{" "}
           <a href="#cap-causas">3. Qué hay detrás</a> · <a href="#cap-calidad">4. Qué empleo</a> ·{" "}
-          <a href="#cap-productividad">5. Productividad y salarios</a> · <a href="#cap-bolsillo">6. Bolsillo y gasto</a>
+          <a href="#cap-productividad">5. Productividad y salarios</a> · <a href="#cap-bolsillo">6. Bolsillo y gasto</a> ·{" "}
+          <a href="#cap-composicion">7. Año base, composición, reparto y territorio</a>
         </p>
       </nav>
     </section>
@@ -126,6 +128,15 @@ export function Conclusion({ data }) {
           {crisis ? `En ${crisis.from}–${crisis.to} el empleo cayó el doble que el PIB (${num(-row(crisis, "ESP").employment)} % frente a ${num(-row(crisis, "ESP").gdp)} %), por la dualidad de contratos y la burbuja de la construcción.` : ""}{" "}
           Con los ERTE, en 2020, pasó lo contrario. Las instituciones del mercado de trabajo cambian cuánto paro deja cada crisis.
         </li>
+        {data.composition ? (
+          <li>
+            <strong>La brecha de productividad depende del año base.</strong> Desde 1995, España creció {num(data.composition.base_year.productivity.rows[0].ESP)} %
+            frente al {num(data.composition.base_year.productivity.rows[0].EU27)} % de la UE; desde 2008,{" "}
+            {num(data.composition.base_year.productivity.rows.find((r) => r.base === 2008).ESP)} % frente a{" "}
+            {num(data.composition.base_year.productivity.rows.find((r) => r.base === 2008).EU27)} %. «Apenas ha crecido frente a sus pares» es cierto
+            desde 1995 o 2000, no desde 2008.
+          </li>
+        ) : null}
         <li>
           <strong>En productividad, Italia lo ha hecho peor</strong> (+{num(g.ITA)} %), y tiene bastante menos paro: productividad baja y paro
           alto no van necesariamente juntos.
@@ -153,6 +164,13 @@ export function Conclusion({ data }) {
           </li>
         ) : null}
         <li>La cuña fiscal española está en la media de la UE y por debajo de la alemana, la francesa y la italiana.</li>
+        {data.composition ? (
+          <li>
+            No es la composición: con solo nacionales, el paro español sigue casi el doble que el de los nacionales de la UE; con la formación
+            media europea, apenas baja; y el retraso de la productividad está dentro de los sectores, no en el peso de la hostelería o la
+            construcción.
+          </li>
+        ) : null}
         {data.labour_policy ? (
           <li>
             «España gasta poco en políticas de empleo» depende de cómo se mida: es mucho en % del PIB y poco por persona que quiere trabajar,

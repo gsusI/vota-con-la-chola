@@ -42,6 +42,8 @@ SOURCE_PAGES = {
     "oecd_productivity": ("OCDE · Productivity Database (réplica DBnomics)", "https://db.nomics.world/OECD/DSD_PDB@DF_PDB"),
     "oecd_earnings": ("OCDE · Earnings, salario mínimo frente al mediano (réplica DBnomics)", "https://db.nomics.world/OECD/DSD_EARNINGS@MIN2AVE"),
     "oecd_registered_unemployment": ("OCDE · paro registrado del SEPE (réplica DBnomics)", "https://db.nomics.world/OECD/DSD_OLAB@DF_OIALAB_INDIC"),
+    "ine_ipt_tempus": ("INE · Índice de Precios del Trabajo", "https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736177025"),
+    "ine_eaes_tempus": ("INE · Encuesta Anual de Estructura Salarial", "https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736177039"),
     "dg_empl_lmp": ("Comisión Europea, DG EMPL · base de datos de políticas de mercado de trabajo (LMP)", "https://webgate.ec.europa.eu/empl/redisstat/databrowser/explore/all/lmp?lang=en"),
     "oecd_taxben": ("OCDE · Tax-Benefit, renta neta con el salario mínimo (réplica DBnomics)", "https://db.nomics.world/OECD/DSD_TAXBEN_IMW@DF_IMW"),
     "seg_social_pxweb": ("Seguridad Social · afiliación media y días cotizados (PX-Web)", "https://w6.seg-social.es/PXWeb/"),
@@ -272,6 +274,8 @@ def build(conn: sqlite3.Connection) -> dict:
     extended = build_extended(store, last_year, esp)
     extended["intermittency"] = intermittency(store)
     extended["capacity"] = capacity(store)
+    reg_u_all = store.annual("eurostat_sdmx", "lfst_r_lfu3rt", "TOTAL.T.Y15-74.PC")
+    extended["composition"] = composition_distribution(store, last_year, reg_u_all)
     extended["labour_policy"] = labour_policy(store, nawru, last_year)
     extended["narratives"] = narratives(store, esp, zutn, nawru, last_year, extended["intermittency"])
     ev, ev_meta = events(conn)
@@ -722,6 +726,158 @@ def labour_policy(store: Store, nawru: dict, last_year: int) -> dict:
             "activation": {EUROSTAT_TO_AREA[g]: points(v_, 1) for g, v_ in act.items() if g in EUROSTAT_TO_AREA}}
 
 
+BASES = [1995, 2000, 2008, 2013, 2019]
+NUTS2_TO_INE = {"ES11": "Galicia", "ES12": "Asturias, Principado de", "ES13": "Cantabria", "ES21": "País Vasco",
+                "ES22": "Navarra, Comunidad Foral de", "ES23": "Rioja, La", "ES24": "Aragón", "ES30": "Madrid, Comunidad de",
+                "ES41": "Castilla y León", "ES42": "Castilla - La Mancha", "ES43": "Extremadura", "ES51": "Cataluña",
+                "ES52": "Comunitat Valenciana", "ES53": "Balears, Illes", "ES61": "Andalucía", "ES62": "Murcia, Región de",
+                "ES70": "Canarias"}
+SS_SECTORS = ["A", "B-E", "F", "G-I", "J", "K", "M_N", "O-Q", "R-U"]  # real estate (L) excluded: imputed rents
+SECTOR_LABELS = {"A": "Agricultura", "B-E": "Industria y energía", "F": "Construcción", "G-I": "Comercio, transporte y hostelería",
+                 "J": "Información y comunicaciones", "K": "Finanzas", "M_N": "Servicios profesionales y administrativos",
+                 "O-Q": "Administración, educación y sanidad", "R-U": "Ocio y otros servicios", "L": "Inmobiliarias"}
+
+
+def table_rows(store: Store, dataset: str, code: str) -> list[tuple[str, str, int, float]]:
+    """INE table indicator: (geography, series name, year, value)."""
+    release_id, _ = store.release(*{"INE_66237": ("ine_epa_tempus", "INE_66237", "66237"),
+                                    "INE_28191": ("ine_eaes_tempus", "INE_28191", "28191")}[dataset])
+    out = []
+    for geo, dims, period, value in store.conn.execute(
+        """
+        SELECT s.geography_code, s.dimensions_json, o.period_label, o.value_decimal
+        FROM indicator_observation_versions o JOIN indicator_series_versions s USING (indicator_series_version_id)
+        WHERE o.indicator_release_id = ? AND o.revision_state != 'deleted' AND o.value_decimal IS NOT NULL
+        """,
+        (release_id,),
+    ):
+        out.append((geo, json.loads(dims)["nombre"], int(period), float(value)))
+    return out
+
+
+def growth_from(rows: dict[int, float], base: int, end: int) -> float | None:
+    return (rows[end] / rows[base] - 1) * 100 if base in rows and end in rows else None
+
+
+def shift_share(Y: dict, H: dict, geo: str, a: int, b: int) -> dict | None:
+    secs = [x for x in SS_SECTORS if all(t in Y[x].get(geo, {}) and t in H[x].get(geo, {}) for t in (a, b))]
+    if len(secs) < len(SS_SECTORS):
+        return None
+    ha, hb = sum(H[x][geo][a] for x in secs), sum(H[x][geo][b] for x in secs)
+    pa, pb = sum(Y[x][geo][a] for x in secs) / ha, sum(Y[x][geo][b] for x in secs) / hb
+    within = sum((Y[x][geo][b] / H[x][geo][b] - Y[x][geo][a] / H[x][geo][a]) * H[x][geo][a] / ha for x in secs)
+    shift = sum(Y[x][geo][a] / H[x][geo][a] * (H[x][geo][b] / hb - H[x][geo][a] / ha) for x in secs)
+    sectors = [{"sector": x, "label": SECTOR_LABELS[x], "hours_share_from": r(H[x][geo][a] / ha * 100, 1), "hours_share_to": r(H[x][geo][b] / hb * 100, 1),
+                "productivity_growth": r((Y[x][geo][b] / H[x][geo][b]) / (Y[x][geo][a] / H[x][geo][a]) * 100 - 100, 1),
+                "relative_productivity_from": r((Y[x][geo][a] / H[x][geo][a]) / pa * 100, 0)} for x in secs]
+    return {"from": a, "to": b, "total": r((pb / pa - 1) * 100, 1), "within": r(within / pa * 100, 1), "shift": r(shift / pa * 100, 1),
+            "interaction": r(((pb - pa) - within - shift) / pa * 100, 1), "sectors": sectors}
+
+
+def composition_distribution(store: Store, last_year: int, reg_u: dict) -> dict:
+    out: dict = {}
+    # Base-year sensitivity.
+    prod = store.annual("eurostat_sdmx", "nama_10_lp_ulc", "I15.RLPR_HW")
+    p_end = min(max(v) for v in prod.values())
+    wage = store.annual("ameco_dbnomics", "RWCDC", "RWCDC")
+    w_end = min(max(y for y in v if y <= last_year) for k, v in wage.items() if k in PEER_AREAS)
+    out["base_year"] = {
+        "productivity": {"end": p_end, "rows": [{"base": b, **{EUROSTAT_TO_AREA[g]: r(growth_from(v, b, p_end), 1) for g, v in prod.items() if g in EUROSTAT_TO_AREA}} for b in BASES]},
+        "real_wage": {"end": w_end, "rows": [{"base": b, **{a: r(growth_from(wage[a], b, w_end), 1) for a in PEER_AREAS if a in wage}} for b in BASES]},
+    }
+    # Shift-share of productivity per hour (A10, real estate excluded).
+    Y = {x: store.annual("eurostat_sdmx", "nama_10_a10", f"CLV15_MEUR.{x}.B1G") for x in SS_SECTORS}
+    H = {x: store.annual("eurostat_sdmx", "nama_10_a10_e", f"THS_HW.{x}.EMP_DC") for x in SS_SECTORS}
+    ss_end = min(max(Y["G-I"][g]) for g in ("ES", "EU27_2020"))
+    out["shift_share"] = {
+        "end": ss_end,
+        "periods": {str(a): {EUROSTAT_TO_AREA[g]: shift_share(Y, H, g, a, ss_end) for g in EUROSTAT_TO_AREA} for a in (1995, 2000, 2008)},
+    }
+    # Unemployment by nationality and the education-mix counterfactual.
+    nat = {c: store.annual("eurostat_sdmx", "lfsa_urgan", f"PC.T.Y15-74.{c}") for c in ("NAT", "FOR", "TOTAL")}
+    lf = {c: store.annual("eurostat_sdmx", "lfsa_agan", f"THS_PER.T.Y15-74.{c}") for c in ("FOR", "TOTAL")}
+    out["nationality"] = {
+        "rates": {c: {EUROSTAT_TO_AREA[g]: points(v, 1) for g, v in rows.items() if g in EUROSTAT_TO_AREA} for c, rows in nat.items()},
+        "foreign_share": {EUROSTAT_TO_AREA[g]: points({y: v / lf["TOTAL"][g][y] * 100 for y, v in rows.items() if y in lf["TOTAL"].get(g, {})}, 1)
+                          for g, rows in lf["FOR"].items() if g in EUROSTAT_TO_AREA},
+    }
+    rate = {e: store.annual("eurostat_sdmx", "lfsa_urgaed", f"PC.T.Y25-64.{e}") for e in ("ED0-2", "ED3_4", "ED5-8", "TOTAL")}
+    lfe = {e: store.annual("eurostat_sdmx", "lfsa_agaed", f"THS_PER.T.Y25-64.{e}") for e in ("ED0-2", "ED3_4", "ED5-8")}
+    cf_rows = []
+    for y in sorted(set(rate["TOTAL"].get("ES", {})) & set(rate["TOTAL"].get("EU27_2020", {}))):
+        try:
+            eu_tot = sum(lfe[e]["EU27_2020"][y] for e in lfe)
+            mix = sum(rate[e]["ES"][y] * lfe[e]["EU27_2020"][y] / eu_tot for e in lfe)
+        except KeyError:
+            continue
+        cf_rows.append({"year": y, "es": r(rate["TOTAL"]["ES"][y], 1), "eu": r(rate["TOTAL"]["EU27_2020"][y], 1), "es_eu_mix": r(mix, 1)})
+    out["education_counterfactual"] = cf_rows
+    # Wages: fixed-composition index vs averages, deflated.
+    hicp = store.annual("eurostat_sdmx", "prc_hicp_aind", "INX_A_AVG.CP00")["ES"]
+    ipt = store.annual("ine_ipt_tempus", "IPT", "IPT239")["ESP"]
+    ees: dict[str, dict[int, float]] = defaultdict(dict)
+    ees_regions: dict[str, dict[str, dict[int, float]]] = defaultdict(lambda: defaultdict(dict))
+    for geo, name, year, value in table_rows(store, "INE_28191", "28191"):
+        stat = name.rstrip(".").split(".")[-1].strip()
+        if geo == "ESP":
+            ees[stat][year] = value
+        ees_regions[geo][stat][year] = value
+    base = 2008
+    def real_index(rows: dict[int, float]) -> dict[int, float]:
+        return {y: (v / hicp[y]) / (rows[base] / hicp[base]) * 100 for y, v in rows.items() if y in hicp and base in rows}
+    out["wage_composition"] = {
+        "base": base,
+        "ipt": points(real_index(ipt), 1),
+        "mean": points(real_index(ees["Media"]), 1),
+        "median": points(real_index(ees["Mediana"]), 1),
+        "p10": points(real_index(ees["Percentil 10"]), 1),
+        "p90": points(real_index(ees["Percentil 90"]), 1),
+        "levels": {stat: points(v, 0) for stat, v in ees.items()},
+    }
+    # Distribution: EPA monthly wage by decile, real index 2008 = 100.
+    dec: dict[str, dict[int, float]] = defaultdict(dict)
+    for _geo, name, year, value in table_rows(store, "INE_66237", "66237"):
+        dec[name.split(".")[1].strip()][year] = value
+    out["deciles"] = {
+        "base": base,
+        "real_index": {k: points(real_index(v), 1) for k, v in dec.items()},
+        "levels": {k: points(v, 1) for k, v in dec.items()},
+    }
+    lw = store.annual("eurostat_sdmx", "earn_ses_pub1s", "PC.T.GE10")
+    out["low_wage_share"] = {EUROSTAT_TO_AREA[g]: points(v, 1) for g, v in lw.items() if g in EUROSTAT_TO_AREA}
+    # Territory: productivity and pay per hour by region, crossed with unemployment.
+    nl = store.annual("eurostat_sdmx", "nama_10r_2nlp", "NLPR_HW.EUR")
+    cw = store.annual("eurostat_sdmx", "nama_10r_2lp10", "TOTAL.D1_SAL_HW.EUR")
+    names = dict(store.conn.execute("SELECT DISTINCT geography_code, geography_name FROM indicator_series_versions WHERE geography_level = 'nuts2'").fetchall())
+    ty = max(y for y in nl["ES"] if y in nl.get("EU27_2020", {}) and y in cw.get("ES", {}))
+    regions = []
+    for g in sorted(nl):
+        if g.startswith("ES") and len(g) == 4 and g != "ESZZ" and ty in nl[g]:
+            eaes = ees_regions.get(NUTS2_TO_INE.get(g, ""), {})
+            median = eaes.get("Mediana", {})
+            regions.append({"code": g, "name": names.get(g, g), "productivity": r(nl[g][ty], 1), "pay": r(cw.get(g, {}).get(ty), 1),
+                            "unemployment": r(reg_u.get(g, {}).get(ty), 1),
+                            "median_wage": r(median.get(max(median)), 0) if median else None,
+                            "median_wage_year": max(median) if median else None})
+    main = [x for x in regions if x["code"] not in ("ES63", "ES64")]
+    def disp(prefix: str) -> dict | None:
+        regs = {k: v for k, v in nl.items() if k.startswith(prefix) and len(k) == 4 and not k.endswith("ZZ")}
+        years = [y for y in range(ty, ty - 4, -1) if sum(y in v for v in regs.values()) > 2]
+        if not years:
+            return None
+        vals = [v[years[0]] for v in regs.values() if years[0] in v]
+        return {"year": years[0], "max_over_min": r(max(vals) / min(vals), 2), "regions": len(vals)}
+    out["territory"] = {
+        "year": ty, "regions": regions,
+        "es": {"productivity": r(nl["ES"][ty], 1), "pay": r(cw["ES"][ty], 1)},
+        "eu": {"productivity": r(nl["EU27_2020"][ty], 1), "pay": r(cw["EU27_2020"][ty], 1), "unemployment": None},
+        "max_over_min_main": r(max(x["productivity"] for x in main) / min(x["productivity"] for x in main), 2),
+        "dispersion_peers": {a: disp(p) for p, a in NUTS_COUNTRY.items()},
+        "above_eu_productivity": sum(x["productivity"] >= nl["EU27_2020"][ty] for x in regions),
+    }
+    return out
+
+
 def write_csv(data: dict, path: Path) -> None:
     rows: list[tuple] = []
 
@@ -797,6 +953,30 @@ def write_csv(data: dict, path: Path) -> None:
                     for g, v in cap["min_wage_pps"]["values"].items())
         add("oecd_taxben", "salario_minimo_neto_pct_neto_mediano", cap["min_wage_net_vs_median"])
         add("eurostat_sdmx:ilc_iw01", "pobreza_laboral_pct_ocupados", cap["in_work_poverty"])
+    comp = ext.get("composition")
+    if comp:
+        for row in comp["base_year"]["productivity"]["rows"]:
+            rows.extend(("eurostat_sdmx:nama_10_lp_ulc", f"productividad_hora_crecimiento_desde_{row['base']}_hasta_{comp['base_year']['productivity']['end']}", a, row["base"], v)
+                        for a, v in row.items() if a != "base")
+        for a_from, by_area in comp["shift_share"]["periods"].items():
+            for area, res in by_area.items():
+                if res:
+                    for part in ("total", "within", "shift", "interaction"):
+                        rows.append(("eurostat_sdmx:nama_10_a10", f"productividad_hora_{part}_{a_from}_{res['to']}", area, res["to"], res[part]))
+        for c_, by_area in comp["nationality"]["rates"].items():
+            add("eurostat_sdmx:lfsa_urgan", f"tasa_paro_{c_.lower()}", by_area)
+        add("eurostat_sdmx:lfsa_agan", "extranjeros_pct_poblacion_activa", comp["nationality"]["foreign_share"])
+        for row in comp["education_counterfactual"]:
+            rows.append(("eurostat_sdmx:lfsa_urgaed+lfsa_agaed", "tasa_paro_25_64_espana_con_composicion_educativa_ue", "ES", row["year"], row["es_eu_mix"]))
+        for key in ("ipt", "mean", "median", "p10", "p90"):
+            add("ine", f"salario_real_{key}_2008_100", {"ESP": comp["wage_composition"][key]})
+        for k, pts in comp["deciles"]["real_index"].items():
+            add("ine_epa_tempus:66237", f"salario_real_decil_{k}_2008_100", {"ESP": pts})
+        add("eurostat_sdmx:earn_ses_pub1s", "asalariados_salario_bajo_pct", comp["low_wage_share"])
+        ty = comp["territory"]["year"]
+        for reg in comp["territory"]["regions"]:
+            rows.append(("eurostat_sdmx:nama_10r_2nlp", "productividad_nominal_hora_eur", f"{reg['code']} {reg['name']}", ty, reg["productivity"]))
+            rows.append(("eurostat_sdmx:nama_10r_2lp10", "remuneracion_hora_eur", f"{reg['code']} {reg['name']}", ty, reg["pay"]))
     lp = ext.get("labour_policy")
     if lp:
         for key, by_area in lp["series"].items():

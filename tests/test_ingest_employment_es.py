@@ -173,5 +173,25 @@ class IngestEmploymentTest(unittest.TestCase):
         self.assertEqual(ingest.period_bounds("2025-S2"), ("2025-07-01", "2025-12-31"))
 
 
+    def test_shift_share_parts_add_up(self) -> None:
+        secs = export.SS_SECTORS
+        Y = {x: {"ES": {2000: 100.0, 2024: 100.0}} for x in secs}
+        H = {x: {"ES": {2000: 10.0, 2024: 10.0}} for x in secs}
+        Y["A"]["ES"][2024] = 130.0  # agriculture becomes 30 % more productive, same hours
+        H["G-I"]["ES"][2024] = 20.0  # hours move into commerce at the same productivity
+        Y["G-I"]["ES"][2024] = 200.0
+        res = export.shift_share(Y, H, "ES", 2000, 2024)
+        self.assertAlmostEqual(res["within"] + res["shift"] + res["interaction"], res["total"], delta=0.15)
+        self.assertGreater(res["within"], 0)
+        self.assertEqual(res["shift"], 0.0)  # every sector had the same starting productivity
+
+    def test_published_composition_blocks(self) -> None:
+        comp = json.loads(export.OUT_JSON.read_text(encoding="utf-8"))["composition"]
+        bases = [row["base"] for row in comp["base_year"]["productivity"]["rows"]]
+        self.assertEqual(bases, export.BASES)
+        for row in comp["education_counterfactual"]:
+            self.assertLessEqual(abs(row["es_eu_mix"] - row["es"]), row["es"])  # a reweighting, not a different scale
+
+
 if __name__ == "__main__":
     unittest.main()

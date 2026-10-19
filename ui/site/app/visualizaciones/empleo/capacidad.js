@@ -38,6 +38,11 @@ export default function ChapterCapacidad({ data }) {
     })),
   );
   const g = cap.net_growth_first_segment;
+  const netSeg = cap.real_eur.single_aw100_net[0];
+  const netFrom = (y) => {
+    const a = netSeg.find((q) => q.year === y);
+    return a ? (netSeg.at(-1).value / a.value - 1) * 100 : null;
+  };
   const ppsYear = last(cap.pps_net.single_aw100.ESP)?.year;
   const ppsRows = AREAS.map((area) => ({ id: area, label: NAMES[area], value: last(cap.pps_net.single_aw100[area])?.value }))
     .filter((r) => r.value != null)
@@ -98,7 +103,7 @@ export default function ChapterCapacidad({ data }) {
       <Fig
         id="salario-neto"
         title={`Descontada la inflación, el sueldo neto de un soltero con el salario medio apenas cambió entre ${g.from} y ${g.to} (${g.net_pct > 0 ? "+" : ""}${num(g.net_pct)} %); el bruto subió un ${num(g.gross_pct)} %`}
-        dek={`El trabajador se queda con una parte menor del bruto: el ${pct(netShare[0].value)} en ${netShare[0].year} y el ${pct(last(netShare).value)} en ${last(netShare).year}. En paridad de poder de compra, el neto de ese trabajador en ${ppsYear} (${num(last(cap.pps_net.single_aw100.ESP).value, 0)} PPS) está en la media de la UE (${num(last(cap.pps_net.single_aw100.EU27).value, 0)}), por debajo de Alemania y por encima de Italia y Portugal.`}
+        dek={`Desde otros años el resultado apenas cambia: ${[2008, 2013, 2019].filter((y) => netFrom(y) != null).map((y) => `${num(netFrom(y))} % desde ${y}`).join(", ")} (hasta ${g.to}). El trabajador se queda con una parte menor del bruto: el ${pct(netShare[0].value)} en ${netShare[0].year} y el ${pct(last(netShare).value)} en ${last(netShare).year}. En paridad de poder de compra, el neto de ese trabajador en ${ppsYear} (${num(last(cap.pps_net.single_aw100.ESP).value, 0)} PPS) está en la media de la UE (${num(last(cap.pps_net.single_aw100.EU27).value, 0)}), por debajo de Alemania y por encima de Italia y Portugal.`}
         legend={[
           { id: "g", label: "Bruto, soltero con el salario medio", color: C.ref },
           { id: "n", label: "Neto, soltero con el salario medio", color: C.blue },

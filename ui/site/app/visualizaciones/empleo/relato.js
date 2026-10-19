@@ -117,6 +117,10 @@ export default function DatoMataRelato({ data }) {
   if (!nar) return null;
   const S = sources(data);
   const sg = nar.structural_gap;
+  const comp = data.composition;
+  const natEs = comp?.nationality.rates.NAT.ESP.at(-1)?.value;
+  const natEu = comp?.nationality.rates.NAT.EU27?.at(-1)?.value;
+  const cfLast = comp?.education_counterfactual.at(-1);
   const rows = sg.rows;
   const lastRow = rows.at(-1);
   const r2007 = rows.find((r) => r.year === 2007);
@@ -186,6 +190,14 @@ export default function DatoMataRelato({ data }) {
               "Es todo estructural: el ciclo da igual",
               `Tampoco. El ciclo llevó la brecha de ${fmt(r2007.gap, "pp")} en ${r2007.year} a ${fmt(r2013.gap, "pp")} en ${r2013.year}: sin su parte cíclica, la de ${r2013.year} habría sido de ${fmt(r2013.structural, "pp")} y el paro español no habría llegado al ${num(r2013.es)} %.`,
             ],
+            ...(comp
+              ? [
+                  [
+                    "Es por la inmigración o por la poca formación",
+                    `No. Los nacionales españoles tienen un paro del ${num(natEs)} % frente al ${num(natEu)} % de los nacionales de la UE, y con la formación media europea el paro español (25 a 64 años) sería del ${num(cfLast.es_eu_mix)} % en vez del ${num(cfLast.es)} %: la brecha está dentro de cada grupo.`,
+                  ],
+                ]
+              : []),
             [
               "España ya converge con Europa",
               `Solo en parte. La brecha de ${lastRow.year} (${fmt(lastRow.gap, "pp")}) es menor que la estructural (${fmt(lastRow.structural, "pp")}) porque el ciclo ahora ayuda (${fmt(lastRow.cyclical, "pp")}). Cuando cambie, la brecha volverá a abrirse si la parte estructural no baja; esa sí se ha reducido, de ${fmt(r2013.structural, "pp")} en ${r2013.year} a ${fmt(lastRow.structural, "pp")}.`,

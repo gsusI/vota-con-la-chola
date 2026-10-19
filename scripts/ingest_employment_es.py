@@ -99,6 +99,18 @@ LOCAL_SOURCES: dict[str, dict[str, str]] = {
         "default_url": "https://db.nomics.world/OECD/DSD_OLAB@DF_OIALAB_INDIC",
         "format": "json",
     },
+    "ine_ipt_tempus": {
+        "name": "INE - Índice de Precios del Trabajo (API Tempus)",
+        "scope": DOMAIN,
+        "default_url": "https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736177025",
+        "format": "json",
+    },
+    "ine_eaes_tempus": {
+        "name": "INE - Encuesta Anual de Estructura Salarial (API Tempus)",
+        "scope": DOMAIN,
+        "default_url": "https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736177039",
+        "format": "json",
+    },
     "dg_empl_lmp": {
         "name": "Comisión Europea, DG EMPL - base de datos de políticas de mercado de trabajo (LMP)",
         "scope": DOMAIN,
@@ -483,6 +495,7 @@ def parse_ameco(code: str) -> Callable[[Raw], Iterable[Batch]]:
 
 
 EUROSTAT_BASE = "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data"
+A10_SECTORS = ["TOTAL", "A", "B-E", "C", "F", "G-I", "J", "K", "L", "M_N", "O-Q", "R-U"]
 EUROSTAT_DATASETS: dict[str, dict[str, Any]] = {
     "une_rt_a": {
         "filters": {"age": ["Y15-74", "Y15-24"], "sex": ["T"], "unit": ["PC_ACT"]},
@@ -531,7 +544,7 @@ EUROSTAT_DATASETS: dict[str, dict[str, Any]] = {
         "definition": "Porcentaje de la población de 25 a 64 años cuyo máximo nivel es ED0-2 (hasta la ESO) o ED5-8 (superiores).",
     },
     "nama_10_a10_e": {
-        "filters": {"nace_r2": ["TOTAL", "F", "A", "C", "G-I"], "na_item": ["EMP_DC"], "unit": ["THS_PER"]},
+        "filters": {"nace_r2": A10_SECTORS, "na_item": ["EMP_DC"], "unit": ["THS_PER", "THS_HW"]},
         "label": "Ocupados por rama de actividad (contabilidad nacional), Eurostat", "unit_label": "Miles de personas",
         "definition": "Empleo total por rama NACE Rev. 2 (A10): F = construcción, A = agricultura, C = industria manufacturera, G-I = comercio, transporte y hostelería.",
     },
@@ -556,6 +569,43 @@ EUROSTAT_DATASETS: dict[str, dict[str, Any]] = {
         "filters": {"statinfo": ["DISP_NUTS2"], "age": ["Y15-74"], "sex": ["T"], "unit": ["PC"]},
         "label": "Dispersión regional de las tasas de paro (NUTS 2), Eurostat", "unit_label": "Coeficiente de variación (%)",
         "definition": "Coeficiente de variación de las tasas de paro regionales NUTS 2 de cada país, ponderado por población activa.",
+    },
+    "nama_10_a10": {
+        "filters": {"nace_r2": A10_SECTORS, "na_item": ["B1G"], "unit": ["CLV15_MEUR"]},
+        "label": "Valor añadido bruto en volumen por rama (A10), millones de euros encadenados de 2015, Eurostat", "unit_label": "Millones de euros de 2015",
+        "definition": "VAB a precios constantes (volumen encadenado, referencia 2015) por rama NACE Rev. 2 A10; se usa con las horas trabajadas de nama_10_a10_e para la descomposición sectorial de la productividad.",
+    },
+    "lfsa_urgan": {
+        "filters": {"age": ["Y15-74"], "sex": ["T"], "citizen": ["NAT", "FOR", "TOTAL"], "unit": ["PC"]},
+        "label": "Tasa de paro por nacionalidad ({age}), Eurostat", "unit_label": "% de la población activa",
+        "definition": "NAT: nacionales del país; FOR: extranjeros (de la UE y de fuera). Encuesta de Población Activa de la UE.",
+    },
+    "lfsa_agan": {
+        "filters": {"age": ["Y15-74"], "sex": ["T"], "citizen": ["NAT", "FOR", "TOTAL"], "unit": ["THS_PER"]},
+        "label": "Población activa por nacionalidad ({age}), Eurostat", "unit_label": "Miles de personas",
+        "definition": "Población activa (ocupados más parados) de nacionales y extranjeros.",
+    },
+    "lfsa_agaed": {
+        "filters": {"age": ["Y25-64"], "sex": ["T"], "isced11": ["ED0-2", "ED3_4", "ED5-8", "TOTAL"], "unit": ["THS_PER"]},
+        "label": "Población activa por nivel educativo ({age}), Eurostat", "unit_label": "Miles de personas",
+        "definition": "Población activa de 25 a 64 años por nivel educativo (CINE 2011); con lfsa_urgaed permite calcular el paro que tendría España con la composición educativa europea.",
+    },
+    "earn_ses_pub1s": {
+        "filters": {"sex": ["T"], "unit": ["PC"], "sizeclas": ["GE10"]},
+        "label": "Asalariados con salario bajo (menos de 2/3 del salario horario mediano nacional), Eurostat SES", "unit_label": "% de los asalariados",
+        "definition": "Encuesta de Estructura Salarial europea (cada cuatro años), empresas de 10 o más asalariados, sin aprendices.",
+    },
+    "nama_10r_2nlp": {
+        "geo_level": ["nuts2", "country", "aggregate"],
+        "filters": {"na_item": ["NLPR_HW"], "unit": ["EUR"]},
+        "label": "Productividad nominal por hora trabajada por región NUTS 2, Eurostat", "unit_label": "Euros por hora",
+        "definition": "VAB nominal por hora trabajada en cada región (cuentas regionales).",
+    },
+    "nama_10r_2lp10": {
+        "geo_level": ["nuts2", "country", "aggregate"],
+        "filters": {"nace_r2": ["TOTAL"], "na_item": ["D1_SAL_HW"], "unit": ["EUR"]},
+        "label": "Remuneración de asalariados por hora trabajada por región NUTS 2, Eurostat", "unit_label": "Euros por hora",
+        "definition": "Remuneración de asalariados (sueldos y cotizaciones de la empresa) por hora trabajada por los asalariados, cuentas regionales.",
     },
     "earn_nt_net": {
         "filters": {"currency": ["EUR", "PPS"], "estruct": ["NET", "GRS"], "ecase": ["P1_NCH_AW100", "P1_NCH_AW67", "CPL_CH2_AW100"]},
@@ -604,7 +654,8 @@ EUROSTAT_DATASETS: dict[str, dict[str, Any]] = {
 def eurostat_url(dataset: str) -> str:
     cfg = EUROSTAT_DATASETS[dataset]
     level = cfg.get("geo_level")
-    params: list[tuple[str, str]] = [("geoLevel", level)] if level else [("geo", g) for g in cfg.get("geos", EUROSTAT_GEOS)]
+    levels = [level] if isinstance(level, str) else (level or [])
+    params: list[tuple[str, str]] = [("geoLevel", lv) for lv in levels] if levels else [("geo", g) for g in cfg.get("geos", EUROSTAT_GEOS)]
     for dim, values in EUROSTAT_DATASETS[dataset]["filters"].items():
         params.extend((dim, v) for v in values)
     return f"{cfg.get('base', EUROSTAT_BASE)}/{dataset}?" + urllib.parse.urlencode(params)
@@ -672,24 +723,67 @@ INE_SERIES = {
     "EPA452436": ("Tasa de paro, menores de 25 años (EPA)", "PC_ACT", "% de la población activa"),
     "EPA416745": ("Asalariados, total (EPA)", "THS_PER", "Miles de personas"),
     "EPA416746": ("Asalariados con contrato indefinido, total (EPA)", "THS_PER", "Miles de personas"),
+    "IPT239": ("Índice de Precios del Trabajo, total nacional (composición fija)", "IDX", "Índice"),
     "EPA416748": ("Asalariados con contrato indefinido discontinuo (fijos discontinuos, EPA)", "THS_PER", "Miles de personas"),
     "EPA416749": ("Asalariados con contrato temporal (EPA)", "THS_PER", "Miles de personas"),
 }
 INE_QUARTER = {19: 1, 20: 2, 21: 3, 22: 4}
+INE_TABLES = {
+    "66237": {"label": "Salario medio mensual por decil del empleo principal (EPA)", "unit": "EUR_MONTH", "unit_label": "Euros brutos al mes",
+              "keep": lambda name: name.startswith("Total.") and "Dato base" in name},
+    "28191": {"label": "Ganancia anual por trabajador: media y percentiles por comunidad autónoma (Encuesta Anual de Estructura Salarial)",
+              "unit": "EUR_YEAR", "unit_label": "Euros brutos al año", "keep": lambda name: name.startswith("Ambos sexos.") and "Dato base" in name},
+}
+
+
+def parse_ine_table(table: str) -> Callable[[Raw], Iterable[Batch]]:
+    """A whole INE Tempus table (annual): one series per COD, name kept as dimension."""
+    cfg = INE_TABLES[table]
+
+    def parse(raw: Raw) -> Iterable[Batch]:
+        series = []
+        for si, item in enumerate(raw.data):
+            name = item.get("Nombre", "").strip()
+            if not cfg["keep"](name):
+                continue
+            obs = [
+                {"period": str(row["Anyo"]), "value": row["Valor"], "pointer": pointer(si, "Data", i, "Valor"), "cell_index": i}
+                for i, row in enumerate(item.get("Data", []))
+                if row.get("Valor") is not None and not row.get("Secreto")
+            ]
+            parts = [p.strip() for p in name.rstrip(".").split(".")]
+            region = parts[1] if table == "28191" else "Total Nacional"
+            geo = "ESP" if region == "Total Nacional" else region
+            entry = area_series(f"INE|{table}|{item['COD']}", geo, {"cod": item["COD"], "nombre": name}, obs)
+            if geo != "ESP":
+                entry.update(geo_name=region, geo_system="INE-CCAA", geo_level="region")
+            series.append(entry)
+        yield {
+            "source_id": "ine_epa_tempus" if table == "66237" else "ine_eaes_tempus", "dataset_code": f"INE_{table}",
+            "indicator_code": table, "frequency_code": "A", "frequency_label": "Anual", "unit_code": cfg["unit"],
+            "unit_label": cfg["unit_label"], "label": cfg["label"],
+            "definition": "Tabla completa de INE Tempus; cada serie conserva su código y nombre oficial.",
+            "methodology_url": f"https://www.ine.es/jaxiT3/Tabla.htm?t={table}",
+            "source_url": f"https://www.ine.es/jaxiT3/Tabla.htm?t={table}",
+        }, series
+
+    return parse
 
 
 def parse_ine(code: str) -> Callable[[Raw], Iterable[Batch]]:
     def parse(raw: Raw) -> Iterable[Batch]:
         label, unit, unit_label = INE_SERIES[code]
+        annual = code.startswith("IPT")
         obs = [
-            {"period": f"{row['Anyo']}T{INE_QUARTER[row['FK_Periodo']]}", "value": row["Valor"],
+            {"period": str(row["Anyo"]) if annual else f"{row['Anyo']}T{INE_QUARTER[row['FK_Periodo']]}", "value": row["Valor"],
              "pointer": pointer("Data", i, "Valor"), "cell_index": i}
             for i, row in enumerate(raw.data["Data"])
-            if row.get("Valor") is not None and not row.get("Secreto") and row.get("FK_Periodo") in INE_QUARTER
+            if row.get("Valor") is not None and not row.get("Secreto") and (annual or row.get("FK_Periodo") in INE_QUARTER)
         ]
         yield {
-            "source_id": "ine_epa_tempus", "dataset_code": "EPA", "indicator_code": code, "frequency_code": "Q",
-            "frequency_label": "Trimestral", "unit_code": unit, "unit_label": unit_label,
+            "source_id": "ine_ipt_tempus" if annual else "ine_epa_tempus", "dataset_code": "IPT" if annual else "EPA",
+            "indicator_code": code, "frequency_code": "A" if annual else "Q",
+            "frequency_label": "Anual" if annual else "Trimestral", "unit_code": unit, "unit_label": unit_label,
             "label": label, "definition": raw.data.get("Nombre", "").strip(),
             "methodology_url": "https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736176918&menu=metodologia&idp=1254735976595",
             "source_url": f"https://www.ine.es/consul/serie.do?s={code}",
@@ -849,6 +943,10 @@ API_SOURCES: list[tuple[str, str, Callable[[Raw], Iterable[Batch]]]] = [
     *[
         (f"ine_{code}.json", f"https://servicios.ine.es/wstempus/js/ES/DATOS_SERIE/{code}?nult=400", parse_ine(code))
         for code in INE_SERIES
+    ],
+    *[
+        (f"ine_tabla_{table}.json", f"https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/{table}?nult=40", parse_ine_table(table))
+        for table in INE_TABLES
     ],
     ("oecd_taxing_wages_dbnomics.json", dbnomics_series_url("OECD", TAX_WAGES_DATASET, TAX_WAGES_DIMS), parse_tax_wages),
     (
