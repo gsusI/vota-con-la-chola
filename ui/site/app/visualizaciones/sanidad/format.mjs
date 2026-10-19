@@ -9,6 +9,7 @@ export function formatHealth(value, unit, digits = 1) {
   if (unit === "days") return `${fixed(0)} días`;
   if (unit === "per1000") return `${fixed(digits)} por mil`;
   if (unit === "per100k") return fixed(0);
+  if (unit === "ratio") return fixed(digits);
   return `${fixed(digits)} %`;
 }
 

@@ -91,7 +91,7 @@ export default function TimeSeriesChart({
   const yTicks = [];
   for (let v = 0; v <= y1 + 1e-9; v += step) yTicks.push(Math.round(v * 100) / 100);
   const span = x1 - x0;
-  const xStep = span > 80 ? (compact ? 25 : 10) : span > 40 ? (compact ? 20 : 10) : compact ? 10 : 5;
+  const xStep = span > 80 ? (compact ? 25 : 10) : span > 40 ? (compact ? 20 : 10) : span <= 8 ? 1 : compact ? 10 : 5;
   const xTicks = [];
   for (let y = Math.ceil(x0 / xStep) * xStep; y <= x1; y += xStep) xTicks.push(y);
 

@@ -115,6 +115,47 @@ class IngestHealthTest(unittest.TestCase):
         self.assertEqual(points[0]["breaks"], ["Andalucía"])
         self.assertEqual(points[1]["rectified"], {"initial": 121, "label": "CLM"})
 
+    def test_barometro_gp_block_is_found_by_label(self) -> None:
+        rows = [
+            (185, {"A": "Pregunta 5c"}),
+            (186, {"A": "Desde que Ud. pidió la cita para esta consulta, hasta que le/la atendió el/la médico/a de familia, ¿cuánto tiempo pasó?"}),
+            (187, {"A": "Le/la atendió ese mismo día que la pidió", "B": "10.8"}),
+            (188, {"A": "Le/la atendió al día siguiente", "B": "11.0"}),
+            (189, {"A": "Pasó más de un día porque no había cita antes", "B": "69.8"}),
+            (213, {"A": "Media", "B": "9.15"}),
+            (383, {"A": "Media  (días)", "B": "128.91"}),
+        ]
+        found = {item["metric"]: (item["row"], item["value"]) for item in ingest.gp_access(2025, {"Resultados": rows})}
+        self.assertEqual(found, {"same_day": (187, 10.8), "next_day": (188, 11.0), "no_slot": (189, 69.8), "mean_days": (213, 9.15)})
+
+    def test_xlsx_reader_reads_shared_strings_and_numbers(self) -> None:
+        import io
+        import zipfile
+
+        buf = io.BytesIO()
+        with zipfile.ZipFile(buf, "w") as z:
+            ns = 'xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"'
+            z.writestr("xl/workbook.xml", f'<workbook {ns}><sheets><sheet name="P 16" sheetId="1" r:id="rId1"/></sheets></workbook>')
+            z.writestr("xl/_rels/workbook.xml.rels", '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+                       '<Relationship Id="rId1" Target="worksheets/sheet1.xml"/></Relationships>')
+            z.writestr("xl/sharedStrings.xml", f'<sst {ns}><si><t>TOTAL</t></si></sst>')
+            z.writestr("xl/worksheets/sheet1.xml", f'<worksheet {ns}><sheetData><row r="25"><c r="A25" t="s"><v>0</v></c>'
+                       '<c r="AB25"><v>8.63</v></c></row></sheetData></worksheet>')
+        self.assertEqual(ingest.read_xlsx(buf.getvalue()), {"P 16": [(25, {"A": "TOTAL", "AB": "8.63"})]})
+
+    def test_spearman_handles_ties_and_order(self) -> None:
+        self.assertAlmostEqual(export.spearman([1, 2, 3, 4], [10, 20, 30, 40]), 1.0)
+        self.assertAlmostEqual(export.spearman([1, 2, 3, 4], [40, 30, 20, 10]), -1.0)
+        self.assertAlmostEqual(export.spearman([1, 1, 2, 3], [5, 5, 6, 7]), 1.0)
+
+    def test_curated_siap_values_are_cited(self) -> None:
+        data = json.loads((ingest.MANUAL_DIR / "siap_2023.json").read_text(encoding="utf-8"))
+        self.assertRegex(data["source"]["sha256"], r"^[0-9a-f]{64}$")
+        for row in data["values"]:
+            self.assertTrue(row["quote"] and row["page"] >= 1, row)
+            digits = f"{int(row['value']):,}".replace(",", ".")
+            self.assertIn(digits, row["quote"], row)
+
 
 if __name__ == "__main__":
     unittest.main()

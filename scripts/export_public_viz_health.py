@@ -42,6 +42,8 @@ SOURCE_PAGES = {
     "oecd_health_statistics": ("OCDE · Health Statistics, gasto sanitario SHA (réplica DBnomics)", "https://db.nomics.world/OECD/DSD_SHA@DF_SHA"),
     "minsan_sisle_sns": ("Ministerio de Sanidad · SISLE-SNS, informes semestrales de listas de espera", "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/listaEspera.htm"),
     "minsan_egsp": ("Ministerio de Sanidad · Estadística de Gasto Sanitario Público 2002-2024", "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/gastoSanitario2005/home.htm"),
+    "minsan_barometro": ("Ministerio de Sanidad y CIS · Barómetro Sanitario", "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/barometro/home.htm"),
+    "minsan_siap": ("Ministerio de Sanidad · Sistema de Información de Atención Primaria (SIAP), resumen 2023", "https://www.sanidad.gob.es/estadEstudios/estadisticas/docs/siap/Resumen_grafico_SIAP__Datos_2023.pdf"),
 }
 
 
@@ -270,12 +272,183 @@ def doctors(store: Store) -> dict:
     }
 
 
+def latest(rows: list[dict]) -> dict | None:
+    return {"year": int(rows[-1]["period"]), "value": rows[-1]["value"]} if rows else None
+
+
+def spearman(xs: list[float], ys: list[float]) -> float:
+    def ranks(values: list[float]) -> list[float]:
+        order = sorted(range(len(values)), key=lambda i: values[i])
+        out = [0.0] * len(values)
+        i = 0
+        while i < len(order):
+            j = i
+            while j + 1 < len(order) and values[order[j + 1]] == values[order[i]]:
+                j += 1
+            for k in range(i, j + 1):
+                out[order[k]] = (i + j) / 2
+            i = j + 1
+        return out
+    rx, ry = ranks(xs), ranks(ys)
+    mx, my = sum(rx) / len(rx), sum(ry) / len(ry)
+    cov = sum((a - mx) * (b - my) for a, b in zip(rx, ry))
+    return cov / ((sum((a - mx) ** 2 for a in rx) * sum((b - my) ** 2 for b in ry)) ** 0.5)
+
+
+def outcomes(store: Store) -> dict:
+    hly = store.series("eurostat_sdmx", "hlth_hlye", "HLY_Y0.T.YR", "YR")
+    hly65 = store.series("eurostat_sdmx", "hlth_hlye", "HLY_Y65.T.YR", "YR")
+    le0 = store.series("eurostat_sdmx", "hlth_hlye", "LE_Y0.T.YR", "YR")
+    trt = store.series("eurostat_sdmx", "hlth_cd_apr", "TRT.T.TOTAL.RT", "RT")
+    prvt = store.series("eurostat_sdmx", "hlth_cd_apr", "PRVT.T.TOTAL.RT", "RT")
+    cancers = {
+        "breast": store.series("oecd_health_statistics", "DSD_HCQO@DF_HCQO", "CCBRNTSR.F", "PC"),
+        "colon": store.series("oecd_health_statistics", "DSD_HCQO@DF_HCQO", "CCCLNTSR._T", "PC"),
+        "lung": store.series("oecd_health_statistics", "DSD_HCQO@DF_HCQO", "CCLUNTSR._T", "PC"),
+    }
+    return {
+        "hly": {g: annual_points(hly[g], 1, flags=True) for g in PEERS_NUTS if g in hly},
+        "hly_le": {g: annual_points(le0[g], 1, flags=True) for g in PEERS_NUTS if g in le0},
+        "hly65": {g: latest(hly65[g]) for g in PEERS_NUTS if g in hly65},
+        "treatable": {g: annual_points(trt[g], 1, flags=True) for g in PEERS_NUTS if g in trt},
+        "preventable": {g: annual_points(prvt[g], 1, flags=True) for g in PEERS_NUTS if g in prvt},
+        "cancer_survival": {k: {g: annual_points(v[g], 1) for g in PEERS_ISO3 if g in v} for k, v in cancers.items()},
+    }
+
+
+def ageing(store: Store) -> dict:
+    p65 = store.series("eurostat_sdmx", "demo_pjanind", "PC_Y65_MAX", "PC")
+    p80 = store.series("eurostat_sdmx", "demo_pjanind", "PC_Y80_MAX", "PC")
+    return {"over65": {g: annual_points(p65[g], 1, flags=True) for g in PEERS_NUTS if g in p65},
+            "over80": {g: annual_points(p80[g], 1, flags=True) for g in PEERS_NUTS if g in p80}}
+
+
+def workforce(store: Store) -> dict:
+    nurses = store.series("eurostat_sdmx", "hlth_rs_prs2", "NRS.PRACT.P_HTHAB", "P_HTHAB")
+    doctors = store.series("eurostat_sdmx", "hlth_rs_prs2", "PHYS.PRACT.P_HTHAB", "P_HTHAB")
+    total = store.series("eurostat_sdmx", "hlth_rs_phys", "TOTAL.T.NR", "NR")
+    older = [store.series("eurostat_sdmx", "hlth_rs_phys", f"{age}.T.NR", "NR") for age in ("Y55-64", "Y65-74", "Y_GE75")]
+    ratio, share55 = {}, {}
+    for g in ("ES", "DE", "FR", "IT", "PT"):
+        n = {int(p["period"]): p["value"] for p in nurses.get(g, [])}
+        d = {int(p["period"]): p["value"] for p in doctors.get(g, [])}
+        common = sorted(set(n) & set(d))
+        if common:
+            ratio[g] = {"year": common[-1], "value": r(n[common[-1]] / d[common[-1]]), "nurses": r(n[common[-1]], 0), "doctors": r(d[common[-1]], 0)}
+        t = {int(p["period"]): p["value"] for p in total.get(g, [])}
+        o = [{int(p["period"]): p["value"] for p in part.get(g, [])} for part in older]
+        pts = [{"year": y, "value": r(100 * sum(part.get(y, 0) for part in o) / t[y], 1)}
+               for y in sorted(t) if t[y] and all(y in part for part in o[:2])]
+        if pts:
+            share55[g] = pts
+    siap = {}
+    units = {"pct_medicos_familia_mas_1500": "PC"}
+    for code in ("poblacion_por_medico_familia", "poblacion_por_pediatra", "poblacion_por_enfermera_ap", "pct_medicos_familia_mas_1500"):
+        point = store.series("minsan_siap", "SIAP.resumen_grafico", code, units.get(code, "PERSONS"))["ES"][-1]
+        raw = store.conn.execute(
+            """
+            SELECT o.raw_value_json FROM indicator_definitions d JOIN indicator_releases r USING (indicator_id)
+            JOIN indicator_observation_versions o USING (indicator_release_id)
+            WHERE d.source_id = 'minsan_siap' AND d.indicator_code = ? ORDER BY r.created_at DESC LIMIT 1
+            """, (code,)).fetchone()
+        cited = json.loads(raw[0])
+        siap[code] = {"year": int(point["period"]), "value": point["value"], "page": cited.get("page"), "quote": cited.get("quote")}
+    return {
+        "nurses": {g: annual_points(nurses[g], 0, flags=True) for g in ("ES", "DE", "FR", "IT", "PT") if g in nurses},
+        "nurses_per_doctor": ratio, "doctors_55plus_share": share55, "siap": siap,
+    }
+
+
+def insurance(store: Store) -> dict:
+    total = store.series("oecd_health_statistics", "DSD_HEALTH_PROT@DF_HEALTH_PROT", "HIC.PHINTPHI", "PT_POP")
+    dup = store.series("oecd_health_statistics", "DSD_HEALTH_PROT@DF_HEALTH_PROT", "HIC.PHINDUPI", "PT_POP")
+    return {"voluntary": {g: annual_points(total[g], 1, flags=True) for g in PEERS_ISO3 if g in total},
+            "duplicate_esp": annual_points(dup.get("ESP", []), 1)}
+
+
+def primary_care(store: Store) -> dict:
+    def series(code: str, unit: str) -> list[dict]:
+        return annual_points(store.series("minsan_barometro", "BS.totales", code, unit)["ES"], 1)
+    return {
+        "same_day": series("pct_cita_mf_mismo_dia", "PC"), "next_day": series("pct_cita_mf_dia_siguiente", "PC"),
+        "no_slot": series("pct_cita_mf_sin_hueco", "PC"), "mean_days": series("dias_medios_cita_mf", "DAYS"),
+    }
+
+
+def perception(store: Store) -> dict:
+    worse = store.series("minsan_barometro", "BS.serie_1998_2025.P16", "pct_listas_empeoran", "PC")
+    better = store.series("minsan_barometro", "BS.serie_1998_2025.P16", "pct_listas_mejoran", "PC")
+    return {"worse": annual_points(worse["ES"], 1), "better": annual_points(better["ES"], 1),
+            "worse_by_region": {g: latest(v) for g, v in worse.items() if g != "ES"}}
+
+
+INTL_PROCEDURES = {"CM8151_8153": "Prótesis de cadera", "CM8154": "Prótesis de rodilla", "CM131_138": "Cataratas"}
+ESP_PROCEDURES = {**INTL_PROCEDURES, "CM683_687_689": "Histerectomía"}
+
+
+def waits_international(store: Store) -> dict:
+    dataset = "DSD_HEALTH_PROC@DF_WAITING"
+    out = {"procedures": {}, "spain_mean_on_list": {}}
+    for code, label in INTL_PROCEDURES.items():
+        series = store.series("oecd_health_statistics", dataset, f"WAIT_MEDIAN.{code}.WTSP", "DAYS")
+        by_year: dict[int, dict[str, float]] = defaultdict(dict)
+        wb_names = {g: rows[0]["name"] for g, rows in store.series("worldbank_wdi", "WDI", "SP.DYN.LE00.IN", "YR").items()}
+        names = {}
+        for g, rows in series.items():
+            names[g] = wb_names.get(g, rows[0]["name"])
+            for p in rows:
+                by_year[int(p["period"])][g] = p["value"]
+        year = max(y for y, v in by_year.items() if "ESP" in v and len(v) >= 8)
+        rows = sorted(({"code": g, "name": names[g], "value": r(v, 0)} for g, v in by_year[year].items()), key=lambda x: -x["value"])
+        out["procedures"][code] = {"label": label, "year": year, "rows": rows, "spain": annual_points(series["ESP"], 0),
+                                   **rank({g: -v for g, v in by_year[year].items()}, "ESP")}
+    for code, label in ESP_PROCEDURES.items():
+        series = store.series("oecd_health_statistics", dataset, f"WAIT_MEAN.{code}.WTPA", "DAYS")
+        out["spain_mean_on_list"][code] = {"label": label, "points": annual_points(series["ESP"], 0)}
+    return out
+
+
+def regions_side_by_side(store: Store, spend: dict, wait: dict, perc: dict) -> dict:
+    le = store.series("ine_wstempus", "IDB_1448", "esperanza_vida_nacimiento_ccaa", "YR")
+    spend_rows = {row["code"]: row["value"] for row in spend["regions_per_person"]["rows"]}
+    last_cut = wait["regions_selected"][0]["days"][-1]["date"]
+    rows = []
+    for region in wait["regions_selected"]:
+        days = next((p["value"] for p in region["days"] if p["date"] == last_cut), None)
+        days18 = next((p["value"] for p in region["days"] if p["date"] == "2018-12-31"), None)
+        rate = next((p["value"] for p in region["rate"] if p["date"] == last_cut), None)
+        rows.append({
+            "code": region["code"], "name": region["name"], "spend": spend_rows.get(region["code"]), "days": days,
+            "days_2018": days18, "rate": rate, "life_expectancy": r(latest(le.get(region["code"], []))["value"], 2) if le.get(region["code"]) else None,
+            "worse_pct": r(perc["worse_by_region"].get(region["code"], {}).get("value"), 1) if perc["worse_by_region"].get(region["code"]) else None,
+        })
+    complete = [row for row in rows if row["spend"] is not None]
+    le_year = max(int(v[-1]["period"]) for v in le.values())
+    return {
+        "cut": last_cut, "spend_year": spend["regions_per_person"]["year"], "le_year": le_year,
+        "rows": rows,
+        "rho_spend_days": r(spearman([x["spend"] for x in complete], [x["days"] for x in complete])),
+        "rho_spend_le": r(spearman([x["spend"] for x in complete], [x["life_expectancy"] for x in complete])),
+        "rho_days_worse": r(spearman([x["days"] for x in complete if x["worse_pct"] is not None],
+                                     [x["worse_pct"] for x in complete if x["worse_pct"] is not None])),
+        "n": len(complete),
+    }
+
+
 def build(conn: sqlite3.Connection) -> dict:
     store = Store(conn)
     le = life_expectancy(store)
     spend = spending(store)
     wait = waiting(store)
     docs = doctors(store)
+    outc = outcomes(store)
+    ages = ageing(store)
+    staff = workforce(store)
+    insur = insurance(store)
+    primary = primary_care(store)
+    perc = perception(store)
+    intl = waits_international(store)
+    regions = regions_side_by_side(store, spend, wait, perc)
 
     def at(rows: list[dict], date: str) -> float:
         return next(p["value"] for p in rows if p["date"] == date)
@@ -312,12 +485,22 @@ def build(conn: sqlite3.Connection) -> dict:
                 "surgery_patients": [at(wait["surgery"]["patients"], last_break), at(wait["surgery"]["patients"], last_cut)],
                 "consult_days": [at(wait["consultations"]["mean_days"], last_break), at(wait["consultations"]["mean_days"], last_cut)],
                 "consult_rate": [at(wait["consultations"]["rate_per_1000"], last_break), at(wait["consultations"]["rate_per_1000"], last_cut)],
+                "selected_days": [next(p["value"] for p in wait["national_selected_days"] if p["date"] == last_break),
+                                  next(p["value"] for p in wait["national_selected_days"] if p["date"] == last_cut)],
             },
         },
         "life_expectancy": le,
         "spending": spend,
         "waiting": wait,
         "doctors": docs,
+        "outcomes": outc,
+        "ageing": ages,
+        "workforce": staff,
+        "insurance": insur,
+        "primary_care": primary,
+        "perception": perc,
+        "waits_international": intl,
+        "regions": regions,
         "sources": sources,
     }
 
@@ -359,6 +542,33 @@ def write_csv(data: dict, path: Path) -> None:
                        ("paediatricians", "pediatras_100k")):
         for geo, pts in data["doctors"][key].items():
             rows.extend(("eurostat_sdmx", label, geo, p["year"], p["value"]) for p in pts)
+    out = data["outcomes"]
+    for key, label in (("hly", "anios_vida_saludable"), ("treatable", "mortalidad_tratable_100k"), ("preventable", "mortalidad_prevenible_100k")):
+        for geo, pts in out[key].items():
+            rows.extend(("eurostat_sdmx", label, geo, p["year"], p["value"]) for p in pts)
+    for cancer, by_area in out["cancer_survival"].items():
+        for area, pts in by_area.items():
+            rows.extend(("oecd_health_statistics", f"supervivencia_5_anios_{cancer}", area, p["year"], p["value"]) for p in pts)
+    for geo, pts in data["ageing"]["over65"].items():
+        rows.extend(("eurostat_sdmx:demo_pjanind", "poblacion_65_mas_pct", geo, p["year"], p["value"]) for p in pts)
+    for geo, pts in data["workforce"]["nurses"].items():
+        rows.extend(("eurostat_sdmx", "enfermeras_ejercicio_100k", geo, p["year"], p["value"]) for p in pts)
+    for geo, pts in data["workforce"]["doctors_55plus_share"].items():
+        rows.extend(("eurostat_sdmx:hlth_rs_phys", "medicos_55_mas_pct", geo, p["year"], p["value"]) for p in pts)
+    for code, item in data["workforce"]["siap"].items():
+        rows.append(("minsan_siap", code, "ES", item["year"], item["value"]))
+    for area, pts in data["insurance"]["voluntary"].items():
+        rows.extend(("oecd_health_statistics", "seguro_voluntario_pct_poblacion", area, p["year"], p["value"]) for p in pts)
+    for key, pts in data["primary_care"].items():
+        rows.extend(("minsan_barometro", f"cita_medico_familia_{key}", "ES", p["year"], p["value"]) for p in pts)
+    for key in ("worse", "better"):
+        rows.extend(("minsan_barometro", f"opinion_listas_{key}_pct", "ES", p["year"], p["value"]) for p in data["perception"][key])
+    for code, item in data["waits_international"]["procedures"].items():
+        rows.extend(("oecd_health_statistics", f"mediana_dias_{code}", row["code"], item["year"], row["value"]) for row in item["rows"])
+    for code, item in data["waits_international"]["spain_mean_on_list"].items():
+        rows.extend(("oecd_health_statistics", f"media_dias_en_lista_{code}", "ESP", p["year"], p["value"]) for p in item["points"])
+    for row in data["regions"]["rows"]:
+        rows.append(("ine_wstempus:1448", "esperanza_vida_ccaa", row["code"], data["regions"]["le_year"], row["life_expectancy"]))
     buf = io.StringIO()
     writer = csv.writer(buf, lineterminator="\n")
     writer.writerow(["fuente", "serie", "area", "periodo", "valor"])

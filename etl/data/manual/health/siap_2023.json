@@ -1,0 +1,67 @@
+{
+ "source": {
+  "name": "Ministerio de Sanidad - SIAP, Resumen gráfico. Datos 2023",
+  "file": "Resumen_grafico_SIAP__Datos_2023.pdf",
+  "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/docs/siap/Resumen_grafico_SIAP__Datos_2023.pdf",
+  "retrieved_at": "2026-10-19T09:26:41+00:00",
+  "sha256": "4102e1145dda6a0fe6b26e7c77664f7d1516aaeff024020559d1fddae61ef263",
+  "page": "https://www.sanidad.gob.es/estadEstudios/estadisticas/estadisticas/estMinisterio/SIAP/home.htm",
+  "note": "Valores nacionales (SNS) impresos como texto en el resumen gráfico del SIAP 2023; el resto del documento son gráficos sin texto y el portal interactivo del SIAP no permite descarga reproducible. TSI = tarjetas sanitarias individuales (población asignada). El orden de los tres mapas de la página 29 es medicina de familia, pediatría y enfermería, como en el resto del informe."
+ },
+ "values": [
+  {
+   "code": "poblacion_por_medico_familia",
+   "year": 2023,
+   "value": 1351,
+   "unit": "PERSONS",
+   "unit_label": "Personas asignadas por médico de familia",
+   "label": "Población asignada por médico de familia (media del SNS)",
+   "page": 29,
+   "quote": "SNS - 1.351"
+  },
+  {
+   "code": "poblacion_por_pediatra",
+   "year": 2023,
+   "value": 901,
+   "unit": "PERSONS",
+   "unit_label": "Personas asignadas por pediatra",
+   "label": "Población asignada por pediatra de atención primaria (media del SNS)",
+   "page": 29,
+   "quote": "SNS - 901  SNS - 1.370"
+  },
+  {
+   "code": "poblacion_por_enfermera_ap",
+   "year": 2023,
+   "value": 1370,
+   "unit": "PERSONS",
+   "unit_label": "Personas asignadas por enfermera",
+   "label": "Población asignada por enfermera de atención primaria (media del SNS)",
+   "page": 29,
+   "quote": "SNS - 901  SNS - 1.370"
+  },
+  {
+   "code": "pct_medicos_familia_mas_1500",
+   "year": 2023,
+   "value": 33,
+   "unit": "PC",
+   "unit_label": "% de médicos de familia",
+   "label": "Médicos de familia con más de 1.500 tarjetas sanitarias asignadas",
+   "page": 26,
+   "quote": "SNS - 33%",
+   "corroboration": {
+    "page": 2,
+    "quote": "67% de médicos de familia tienen menos de 1.501 TSI"
+   }
+  },
+  {
+   "code": "poblacion_asignada_ap",
+   "year": 2023,
+   "value": 47785469,
+   "unit": "PERSONS",
+   "unit_label": "Personas",
+   "label": "Población asignada a atención primaria",
+   "page": 1,
+   "quote": "47.785.469 Personas asignadas"
+  }
+ ]
+}

@@ -6894,9 +6894,9 @@ education-refresh *args:
   python3 scripts/ingest_education_es.py {{args}}
   python3 scripts/export_public_viz_education.py
 
-# Spain health (/visualizaciones/sanidad/): fetch Eurostat, INE, OCDE Health Statistics (via DBnomics), Banco Mundial
-# and Our World in Data into the raw cache, check the cited Ministerio de Sanidad PDFs (SISLE waiting-list reports
-# 2003-2025, EGSP spending by region: sha256 + page + table row), load everything into health-es.db (indicator_*
+# Spain health (/visualizaciones/sanidad/): fetch Eurostat, INE, OCDE Health Statistics (via DBnomics), Banco Mundial,
+# Our World in Data and the Barómetro Sanitario xlsx into the raw cache, check the cited Ministerio de Sanidad PDFs
+# (SISLE waiting-list reports 2003-2025, EGSP spending by region, SIAP 2023: sha256 + page + table row), load everything into health-es.db (indicator_*
 # contract with releases, revisions, series breaks and rectifications), then export the page data from that DB.
 # `just health-refresh --offline` reloads the cache; new semiannual SISLE reports: `--fetch-pdfs`, then
 # `python3 scripts/extract_health_pdfs_es.py` (needs pdftotext) and review the curated JSON diff before loading.

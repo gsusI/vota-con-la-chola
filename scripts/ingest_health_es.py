@@ -80,6 +80,18 @@ LOCAL_SOURCES: dict[str, dict[str, str]] = {
         "default_url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/listaEspera.htm",
         "format": "pdf",
     },
+    "minsan_barometro": {
+        "name": "Ministerio de Sanidad y CIS - Barómetro Sanitario",
+        "scope": "sanidad",
+        "default_url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/BarometroSanitario/home_BS.htm",
+        "format": "xlsx",
+    },
+    "minsan_siap": {
+        "name": "Ministerio de Sanidad - Sistema de Información de Atención Primaria (SIAP)",
+        "scope": "sanidad",
+        "default_url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/estadisticas/estMinisterio/SIAP/home.htm",
+        "format": "pdf",
+    },
     "minsan_egsp": {
         "name": "Ministerio de Sanidad - Estadística de Gasto Sanitario Público (EGSP)",
         "scope": "sanidad",
@@ -430,7 +442,7 @@ def eurostat_batches(raw: Raw, dataset: str, indicator_dims: list[str], label: C
         })
     for ind_key, by_geo in sorted(grouped.items()):
         coords = dict(zip(indicator_dims, ind_key))
-        unit = coords.get(unit_dim, "")
+        unit = coords.get(unit_dim) or "PC"
         series = []
         for geo, obs in sorted(by_geo.items()):
             obs.sort(key=lambda o: o["period"])
@@ -629,6 +641,372 @@ def parse_physcat(raw: Raw) -> Iterable[Batch]:
     )
 
 
+# 5. Outcomes, ageing and workforce beyond the first version
+
+HLYE_URL = eurostat_url("hlth_hlye", {"unit": ["YR"], "hlth_hle": ["HLY_Y0", "LE_Y0", "HLY_Y65"], "sex": ["T"], "geo": PEERS})
+APR_URL = eurostat_url("hlth_cd_apr", {"unit": ["RT"], "sex": ["T"], "icd10": ["TOTAL"], "mortalit": ["TOTAL", "PRVT", "TRT"], "geo": PEERS})
+PJAN_URL = eurostat_url("demo_pjanind", {"indic_de": ["PC_Y65_MAX", "PC_Y80_MAX"], "geo": PEERS})
+NRS_URL = eurostat_url("hlth_rs_prs2", {"med_spec": ["NRS"], "unit": ["P_HTHAB"], "wstatus": ["PRACT"], "geo": PEERS})
+PHYS_AGE_URL = eurostat_url("hlth_rs_phys", {"sex": ["T"], "unit": ["NR"], "geo": PEERS})
+HLE = {"HLY_Y0": "Años de vida saludable al nacer", "LE_Y0": "Esperanza de vida al nacer (base de los años saludables)",
+       "HLY_Y65": "Años de vida saludable a los 65"}
+MORT = {"TOTAL": "Mortalidad evitable total", "PRVT": "Mortalidad evitable por prevención",
+        "TRT": "Mortalidad evitable por tratamiento"}
+AGES = {"PC_Y65_MAX": "Población de 65 años o más (% del total)", "PC_Y80_MAX": "Población de 80 años o más (% del total)"}
+
+
+def parse_hlye(raw: Raw) -> Iterable[Batch]:
+    yield from eurostat_batches(
+        raw, "hlth_hlye", ["hlth_hle", "sex", "unit"], lambda c: HLE[c["hlth_hle"]], {"YR": "Años"},
+        "Años de vida saludable (indicador SILC de limitación de la actividad por problemas de salud). Se basa en "
+        "una pregunta de autopercepción; las diferencias entre países reflejan también cómo responde cada población.",
+    )
+
+
+def parse_apr(raw: Raw) -> Iterable[Batch]:
+    yield from eurostat_batches(
+        raw, "hlth_cd_apr", ["mortalit", "sex", "icd10", "unit"], lambda c: f"{MORT[c['mortalit']]} (tasa estandarizada por 100.000)",
+        {"RT": "Muertes por 100.000 habitantes (tasa estandarizada por edad)"},
+        "Mortalidad evitable antes de los 75 años según la lista OCDE/Eurostat: prevenible (salud pública, hábitos) y "
+        "tratable (atención sanitaria a tiempo y eficaz).",
+    )
+
+
+def parse_pjan(raw: Raw) -> Iterable[Batch]:
+    yield from eurostat_batches(
+        raw, "demo_pjanind", ["indic_de"], lambda c: AGES[c["indic_de"]], {"PC": "%"},
+        "Estructura de la población a 1 de enero.", unit_dim="unit_missing",
+    )
+
+
+def parse_nrs(raw: Raw) -> Iterable[Batch]:
+    yield from eurostat_batches(
+        raw, "hlth_rs_prs2", ["med_spec", "wstatus", "unit"], lambda c: "Enfermeras en ejercicio por 100.000 habitantes",
+        {"P_HTHAB": "Por 100.000 habitantes"}, "Personal de enfermería con cualificación reconocida por la UE, en ejercicio.",
+    )
+
+
+def parse_phys_age(raw: Raw) -> Iterable[Batch]:
+    yield from eurostat_batches(
+        raw, "hlth_rs_phys", ["age", "sex", "unit"], lambda c: f"Médicos por edad ({c['age']})", {"NR": "Personas"},
+        "Médicos por grupo de edad (cada país notifica su categoría habitual: en ejercicio o profesionalmente activos).",
+    )
+
+
+INE_CCAA_URL = "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/1448?nult=60"
+INE_CCAA = {
+    "Andalucía": "01", "Aragón": "02", "Asturias (Principado de)": "03", "Balears (Illes)": "04", "Canarias": "05",
+    "Cantabria": "06", "Castilla y León": "07", "Castilla - La Mancha": "08", "Cataluña": "09",
+    "Comunitat Valenciana": "10", "Extremadura": "11", "Galicia": "12", "Madrid (Comunidad de)": "13",
+    "Murcia (Región de)": "14", "Navarra (Comunidad Foral de)": "15", "País Vasco": "16", "Rioja (La)": "17",
+    "Ceuta (Ciudad Autónoma de)": "18", "Melilla (Ciudad Autónoma de)": "19", "Total Nacional": "ES",
+}
+
+
+def parse_ine_ccaa(raw: Raw) -> Iterable[Batch]:
+    series = []
+    for si, s in enumerate(raw.data):
+        parts = [p.strip() for p in s["Nombre"].rstrip(".").split(".")]
+        if len(parts) < 3 or parts[2] != "Ambos sexos":
+            continue
+        code = INE_CCAA.get(parts[1])
+        if code is None:
+            raise ValueError(f"INE 1448: unknown region {parts[1]!r}")
+        obs = [{"period": str(row["Anyo"]), "value": row["Valor"], "pointer": pointer(si, "Data", i, "Valor"), "cell_index": i}
+               for i, row in enumerate(s["Data"]) if row.get("Valor") is not None and not row.get("Secreto")]
+        name = next((v[1] for k, v in REGIONS.items() if v[0] == code), "España")
+        series.append(area_series(f"INE|1448|{s['COD']}", code, {"ine_cod": s["COD"], "ine_nombre": s["Nombre"]},
+                                  sorted(obs, key=lambda o: o["period"]), name=name,
+                                  system="INE-CODAUTO" if code != "ES" else "NUTS", level="region" if code != "ES" else "country"))
+    yield {
+        "source_id": "ine_wstempus", "dataset_code": "IDB_1448", "indicator_code": "esperanza_vida_nacimiento_ccaa",
+        "frequency_code": "A", "frequency_label": "Anual", "unit_code": "YR", "unit_label": "Años",
+        "label": "Esperanza de vida al nacimiento por comunidad autónoma, ambos sexos (INE)",
+        "methodology_url": "https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736177003",
+        "source_url": "https://www.ine.es/jaxiT3/Tabla.htm?t=1448",
+    }, series
+
+
+def dbnomics_url(dataset: str, dims: dict[str, list[str]], limit: int = 1000) -> str:
+    return f"https://api.db.nomics.world/v22/series/OECD/{dataset}?" + urllib.parse.urlencode(
+        {"dimensions": json.dumps(dims, separators=(",", ":")), "observations": 1, "limit": limit}
+    )
+
+
+PROCEDURES = {"CM131_138": "Cataratas", "CM8151_8153": "Prótesis de cadera", "CM8154": "Prótesis de rodilla",
+              "CM683_687_689": "Histerectomía", "CM603_606": "Prostatectomía transuretral", "CM361": "Bypass coronario"}
+WAIT_MEASURES = {"WAIT_MEDIAN": "Mediana", "WAIT_MEAN": "Media"}
+WAIT_KINDS = {"WTSP": "desde la indicación del especialista hasta la operación", "WTPA": "de los pacientes en lista"}
+OECD_WAIT_URL = dbnomics_url("DSD_HEALTH_PROC@DF_WAITING", {
+    "MEASURE": list(WAIT_MEASURES), "UNIT_MEASURE": ["D"], "MEDICAL_PROCEDURE": list(PROCEDURES), "WAITING_TIME": list(WAIT_KINDS),
+})
+OECD_PROT_URL = dbnomics_url("DSD_HEALTH_PROT@DF_HEALTH_PROT", {
+    "REF_AREA": ["ESP", "DEU", "FRA", "ITA", "PRT"], "UNIT_MEASURE": ["PT_POP"],
+})
+CANCERS = {"CCBRNTSR": "Cáncer de mama (mujeres)", "CCCLNTSR": "Cáncer de colon", "CCLUNTSR": "Cáncer de pulmón",
+           "CCRCNTSR": "Cáncer de recto"}
+OECD_HCQO_URL = dbnomics_url("DSD_HCQO@DF_HCQO", {
+    "REF_AREA": ["ESP", "DEU", "FRA", "ITA", "PRT"], "MEASURE": list(CANCERS),
+})
+
+
+def dbnomics_batches(raw: Raw, dataset: str, key_of: Callable[[dict[str, str]], tuple[str, ...] | None],
+                     describe: Callable[[tuple[str, ...]], dict[str, Any]]) -> Iterable[Batch]:
+    grouped: dict[tuple[str, ...], list[dict[str, Any]]] = {}
+    for doc_index, doc in enumerate(raw.data["series"]["docs"]):
+        dims = doc["dimensions"]
+        key = key_of(dims)
+        if key is None:
+            continue
+        statuses = dict(doc.get("observations_attributes", [])).get("OBS_STATUS", [])
+        obs = []
+        for i, (period, value) in enumerate(zip(doc["period"], doc["value"])):
+            if not isinstance(value, (int, float)):
+                continue
+            status = statuses[i] if i < len(statuses) and statuses[i] else None
+            obs.append({"period": period, "value": value, "pointer": pointer("series", "docs", doc_index, "value", i),
+                        "cell_index": i, "status": status})
+        area = dims["REF_AREA"]
+        grouped.setdefault(key, []).append(
+            area_series(f"{dataset}|{doc['series_code']}", area, dims, obs, name=AREA_META.get(area, (area,))[0]))
+    for key, series in sorted(grouped.items()):
+        yield {
+            "source_id": "oecd_health_statistics", "dataset_code": dataset, "frequency_code": "A", "frequency_label": "Anual",
+            "methodology_url": "https://www.oecd.org/en/data/datasets/oecd-health-statistics.html",
+            "source_url": f"https://db.nomics.world/OECD/{dataset}", **describe(key),
+        }, series
+
+
+def parse_oecd_wait(raw: Raw) -> Iterable[Batch]:
+    yield from dbnomics_batches(
+        raw, "DSD_HEALTH_PROC@DF_WAITING",
+        lambda d: (d["MEASURE"], d["MEDICAL_PROCEDURE"], d["WAITING_TIME"]),
+        lambda k: {
+            "indicator_code": ".".join(k), "unit_code": "DAYS", "unit_label": "Días",
+            "label": f"{WAIT_MEASURES[k[0]]} de días de espera {WAIT_KINDS[k[2]]}: {PROCEDURES[k[1]]}",
+            "definition": "OCDE, tiempos de espera para cirugía programada (solo los países que los notifican). Para "
+            "España procede del SISLE-SNS. Leído de la réplica DBnomics.",
+        },
+    )
+
+
+def parse_oecd_prot(raw: Raw) -> Iterable[Batch]:
+    labels = {"PHINTPHI": "Seguro sanitario voluntario (total)", "PHINDUPI": "Seguro voluntario duplicado (además del público)",
+              "PHINCMPI": "Seguro voluntario complementario (copagos)", "PHINPMPI": "Seguro voluntario primario",
+              "COVGCMED": "Cobertura pública u obligatoria"}
+    yield from dbnomics_batches(
+        raw, "DSD_HEALTH_PROT@DF_HEALTH_PROT",
+        lambda d: (d["INSURANCE_TYPE"],) if d.get("INSURANCE_TYPE") in labels else None,
+        lambda k: {
+            "indicator_code": f"HIC.{k[0]}", "unit_code": "PT_POP", "unit_label": "% de la población",
+            "label": f"{labels[k[0]]} (% de la población)",
+            "definition": "OCDE, cobertura sanitaria de la población por tipo de seguro. Leído de la réplica DBnomics.",
+        },
+    )
+
+
+def parse_oecd_hcqo(raw: Raw) -> Iterable[Batch]:
+    yield from dbnomics_batches(
+        raw, "DSD_HCQO@DF_HCQO",
+        lambda d: (d["MEASURE"], d["SEX"]) if d.get("MEASURE") in CANCERS and d.get("STATISTICAL_OPERATION") == "OBS" else None,
+        lambda k: {
+            "indicator_code": f"{k[0]}.{k[1]}", "unit_code": "PC", "unit_label": "% de pacientes",
+            "label": f"Supervivencia neta a cinco años: {CANCERS[k[0]]} ({'total' if k[1] == '_T' else k[1]})",
+            "definition": "OCDE, calidad y resultados (programa CONCORD). Periodos de diagnóstico de 5 años "
+            "etiquetados con su último año (2004 = 2000-2004).",
+        },
+    )
+
+
+# 6. Barómetro Sanitario (Ministerio de Sanidad y CIS): xlsx files read cell by cell.
+
+XLSX_NS = {"m": "http://schemas.openxmlformats.org/spreadsheetml/2006/main",
+           "r": "http://schemas.openxmlformats.org/officeDocument/2006/relationships"}
+BS_BASE = "https://www.sanidad.gob.es/estadEstudios/estadisticas/BarometroSanitario/"
+BAROMETRO = {
+    2022: BS_BASE + "Barom_Sanit_2022/BS_Total_Oleadas_Estudio_8822.xlsx",
+    2023: BS_BASE + "Barom_Sanit_2023/Barom_Sanit_2023_totales/BS_Total_Oleadas_Estudio_8823.xlsx",
+    2024: BS_BASE + "Barom_Sanit_2024/BS_2024_Totales/BS_Total_Oleadas_Estudio_8824.xlsx",
+    2025: BS_BASE + "Barom_Sanit_2025/Totales/BS-Total-Oleadas-Estudio_8825.xlsx",
+}
+BAROMETRO_HIST = BS_BASE + "Barom_Sanit_2025/Totales/BS_1998-2025_Principales_variables_CCAA.xlsx"
+BS_REGIONS = {
+    "Andalucía": "01", "Aragón": "02", "Asturias": "03", "Baleares": "04", "Canarias": "05", "Cantabria": "06",
+    "Castilla y León": "07", "Castilla-La Mancha": "08", "Cataluña": "09", "Comunidad Valenciana": "10",
+    "Extremadura": "11", "Galicia": "12", "Madrid": "13", "Murcia": "14", "Navarra": "15", "País Vasco": "16",
+    "Rioja": "17", "Ceuta": "18", "Melilla": "19", "TOTAL": "ES",
+}
+
+
+def read_xlsx(payload: bytes) -> dict[str, list[tuple[int, dict[str, str | None]]]]:
+    """Minimal OOXML reader (stdlib only): {sheet name: [(row number, {column letter: text})]}."""
+    import xml.etree.ElementTree as ET
+    import zipfile
+
+    z = zipfile.ZipFile(io.BytesIO(payload))
+    m = "{%s}" % XLSX_NS["m"]
+    shared = []
+    if "xl/sharedStrings.xml" in z.namelist():
+        for si in ET.fromstring(z.read("xl/sharedStrings.xml")).findall("m:si", XLSX_NS):
+            shared.append("".join(t.text or "" for t in si.iter(m + "t")))
+    rels = {r.get("Id"): r.get("Target") for r in ET.fromstring(z.read("xl/_rels/workbook.xml.rels"))}
+    sheets = {}
+    for sheet in ET.fromstring(z.read("xl/workbook.xml")).find("m:sheets", XLSX_NS):
+        target = rels[sheet.get("{%s}id" % XLSX_NS["r"])].lstrip("/")
+        target = target if target.startswith("xl/") else "xl/" + target
+        rows = []
+        for row in ET.fromstring(z.read(target)).iter(m + "row"):
+            cells = {}
+            for c in row.findall("m:c", XLSX_NS):
+                col = re.match(r"[A-Z]+", c.get("r")).group()
+                v = c.find("m:v", XLSX_NS)
+                if v is None:
+                    inline = c.find("m:is", XLSX_NS)
+                    cells[col] = "".join(t.text or "" for t in inline.iter(m + "t")) if inline is not None else None
+                else:
+                    cells[col] = shared[int(v.text)] if c.get("t") == "s" else v.text
+            rows.append((int(row.get("r")), cells))
+        sheets[sheet.get("name")] = rows
+    return sheets
+
+
+def fetch_binary(folder: str, url: str, offline: bool) -> tuple[Path, bytes, dict[str, str]]:
+    target = RAW_ROOT / folder / url.rsplit("/", 1)[-1]
+    meta_path = target.with_name(target.name + ".meta.json")
+    if not offline:
+        req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
+        with urllib.request.urlopen(req, timeout=120) as resp:
+            payload = resp.read()
+        if payload[:2] != b"PK":
+            raise ValueError(f"{url}: not an xlsx file")
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(payload)
+        meta_path.write_text(canonical_json({"url": url, "retrieved_at": now_iso()}), encoding="utf-8")
+    if not target.exists():
+        raise FileNotFoundError(f"missing raw cache {rel(target)}; run without --offline")
+    return target, target.read_bytes(), json.loads(meta_path.read_text(encoding="utf-8"))
+
+
+def gp_access(year: int, sheets: dict) -> list[dict[str, Any]]:
+    """GP appointment question (asked since 2022): share seen the same or next day, and mean days for the rest."""
+    rows = sheets["Resultados"]
+    start = next(r for r, c in rows if "hasta que le/la atendió el/la médico/a de familia" in str(c.get("A") or ""))
+    block = [(r, c) for r, c in rows if start < r <= start + 45]
+    found = {}
+    for r, c in block:
+        label = str(c.get("A") or "")
+        if label.startswith("Le/la atendió ese mismo día"):
+            found["same_day"] = (r, c.get("B"))
+        elif label.startswith("Le/la atendió al día siguiente"):
+            found["next_day"] = (r, c.get("B"))
+        elif label.startswith("Pasó más de un día porque no había cita antes"):
+            found["no_slot"] = (r, c.get("B"))
+        elif label.startswith("Media") and "mean_days" not in found:
+            found["mean_days"] = (r, c.get("B"))
+    if set(found) != {"same_day", "next_day", "no_slot", "mean_days"}:
+        raise ValueError(f"Barómetro {year}: GP access block incomplete: {sorted(found)}")
+    return [{"metric": k, "row": r, "value": float(v)} for k, (r, v) in found.items()]
+
+
+def load_barometro(conn: sqlite3.Connection, snapshot_date: str, offline: bool) -> dict[str, int]:
+    totals = {"releases": 0, "observations": 0}
+    labels = {
+        "same_day": ("pct_cita_mf_mismo_dia", "PC", "%", "Atendidos por su médico de familia el mismo día que pidieron cita"),
+        "next_day": ("pct_cita_mf_dia_siguiente", "PC", "%", "Atendidos por su médico de familia al día siguiente"),
+        "no_slot": ("pct_cita_mf_sin_hueco", "PC", "%", "Esperaron más de un día porque no había cita antes"),
+        "mean_days": ("dias_medios_cita_mf", "DAYS", "Días", "Días de espera para el médico de familia (media de quienes esperaron más de un día)"),
+    }
+    per_metric: dict[str, list[tuple[int, dict, Path, bytes, dict]]] = {}
+    for year, url in sorted(BAROMETRO.items()):
+        path, payload, meta = fetch_binary("barometro", url, offline)
+        for item in gp_access(year, read_xlsx(payload)):
+            per_metric.setdefault(item["metric"], []).append((year, item, path, payload, meta))
+    for metric, items in per_metric.items():
+        code, unit, unit_label, label = labels[metric]
+        obs = [{
+            "period": str(year), "value": item["value"], "cell_index": item["row"],
+            "pointer": f"xlsx:Resultados!B{item['row']}", "evidence_url": meta["url"],
+            "evidence_sha256": sha256_bytes(payload), "evidence_raw_path": rel(path),
+        } for year, item, path, payload, meta in items]
+        bundle = "".join(sha256_bytes(p) for _, _, _, p, _ in items)
+        definition = {
+            "source_id": "minsan_barometro", "dataset_code": "BS.totales", "indicator_code": code,
+            "frequency_code": "A", "frequency_label": "Anual (tres oleadas)", "unit_code": unit, "unit_label": unit_label,
+            "label": label, "extraction_method": "xlsx_cell",
+            "definition": "Barómetro Sanitario (Ministerio de Sanidad y CIS), encuesta a la población. Pregunta a quienes "
+            "consultaron con su médico de familia de la sanidad pública en los últimos doce meses; existe desde 2022.",
+            "methodology_url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/BarometroSanitario/home_BS.htm",
+            "source_url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/barometro/home.htm",
+        }
+        counts = load_indicator(conn, definition, sha256_bytes(bundle.encode()), len(bundle), "etl/data/raw/health/barometro/",
+                                definition["source_url"], snapshot_date,
+                                {"retrieved_at": max(m["retrieved_at"] for *_, m in items)},
+                                [area_series(f"bs|{code}|ES", "ES", {"scope": "nacional"}, obs, name="España", system="NUTS", level="country")])
+        for k in totals:
+            totals[k] += counts[k]
+    # Perception of waiting lists by region, 2000-2025 (P. 16 of the historical workbook).
+    path, payload, meta = fetch_binary("barometro", BAROMETRO_HIST, offline)
+    rows = read_xlsx(payload)["P 16"]
+    blocks, header = [], None
+    for r, c in rows:
+        if c.get("B") in ("1998", "1999") or (c.get("B") == "1998"):
+            header = {col: v for col, v in c.items() if col != "A" and v}
+            blocks.append({"header": header, "rows": []})
+        elif header and c.get("A") and str(c["A"]).strip() in BS_REGIONS:
+            blocks[-1]["rows"].append((r, str(c["A"]).strip(), c))
+    meaning = {0: ("pct_listas_mejoran", "Creen que las listas de espera han mejorado en el último año"),
+               1: ("pct_listas_empeoran", "Creen que las listas de espera han empeorado en el último año"),
+               2: ("pct_listas_igual", "Creen que las listas de espera siguen igual")}
+    for index, (code, label) in meaning.items():
+        series = []
+        for r, region, cells in blocks[index]["rows"]:
+            obs = [{"period": year, "value": cells.get(col), "cell_index": r, "pointer": f"xlsx:P 16!{col}{r}"}
+                   for col, year in blocks[index]["header"].items() if decimal_text(cells.get(col)) is not None]
+            geo = BS_REGIONS[region]
+            name = "España" if geo == "ES" else next(v[1] for v in REGIONS.values() if v[0] == geo)
+            series.append(area_series(f"bs-hist|{code}|{geo}", geo, {"bs_label": region}, obs, name=name,
+                                      system="NUTS" if geo == "ES" else "INE-CODAUTO", level="country" if geo == "ES" else "region"))
+        definition = {
+            "source_id": "minsan_barometro", "dataset_code": "BS.serie_1998_2025.P16", "indicator_code": code,
+            "frequency_code": "A", "frequency_label": "Anual", "unit_code": "PC", "unit_label": "% de encuestados", "label": label,
+            "extraction_method": "xlsx_cell",
+            "definition": "Barómetro Sanitario, P. 16: «En general, ¿cree Ud. que, durante los últimos doce meses, el problema "
+            "de las listas de espera…?». Es una opinión, no una medida de la espera. Sin encuesta en 2001, 2020 y 2021.",
+            "methodology_url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/BarometroSanitario/home_BS.htm",
+            "source_url": meta["url"],
+        }
+        counts = load_indicator(conn, definition, sha256_bytes(payload), len(payload), rel(path), meta["url"], snapshot_date,
+                                {"retrieved_at": meta["retrieved_at"]}, series)
+        for k in totals:
+            totals[k] += counts[k]
+    return totals
+
+
+def load_siap(conn: sqlite3.Connection, snapshot_date: str) -> dict[str, int]:
+    path = MANUAL_DIR / "siap_2023.json"
+    payload = path.read_bytes()
+    data = json.loads(payload)
+    src = data["source"]
+    raw_path, _ = check_pdf(src["file"], "siap", src["sha256"])
+    totals = {"releases": 0, "observations": 0}
+    for index, row in enumerate(data["values"]):
+        definition = {
+            "source_id": "minsan_siap", "dataset_code": "SIAP.resumen_grafico", "indicator_code": row["code"],
+            "frequency_code": "A", "frequency_label": "Anual", "unit_code": row["unit"], "unit_label": row["unit_label"],
+            "label": row["label"], "extraction_method": "curated_citation", "definition": src["note"],
+            "methodology_url": src["page"], "source_url": src["page"],
+        }
+        obs = [{"period": str(row["year"]), "value": row["value"], "cell_index": index, "raw": row,
+                "pointer": f"pdf:page={row['page']};text={row['quote']}", "status_pointer": pointer("values", index),
+                "evidence_url": src["url"], "evidence_sha256": src["sha256"], "evidence_raw_path": raw_path}]
+        counts = load_indicator(conn, definition, sha256_bytes(payload), len(payload), rel(path), src["page"], snapshot_date,
+                                {"retrieved_at": src["retrieved_at"]},
+                                [area_series(f"siap|{row['code']}|ES", "ES", {}, obs, name="España (SNS)", system="NUTS", level="country")])
+        for k in totals:
+            totals[k] += counts[k]
+    return totals
+
+
 API_SOURCES: list[tuple[str, str, str, Callable[..., Iterable[Batch]]]] = [
     ("eurostat_demo_mlexpec.json", LE_URL, "json", parse_life_expectancy),
     ("ine_idb_1414.json", INE_URL, "json", parse_ine),
@@ -637,6 +1015,15 @@ API_SOURCES: list[tuple[str, str, str, Callable[..., Iterable[Batch]]]] = [
     ("oecd_sha_dbnomics.json", oecd_url(), "json", parse_oecd),
     ("eurostat_hlth_rs_prs2.json", PRS_URL, "json", parse_prs),
     ("eurostat_hlth_rs_physcat.json", PHYSCAT_URL, "json", parse_physcat),
+    ("eurostat_hlth_hlye.json", HLYE_URL, "json", parse_hlye),
+    ("eurostat_hlth_cd_apr.json", APR_URL, "json", parse_apr),
+    ("eurostat_demo_pjanind.json", PJAN_URL, "json", parse_pjan),
+    ("eurostat_hlth_rs_prs2_nrs.json", NRS_URL, "json", parse_nrs),
+    ("eurostat_hlth_rs_phys_age.json", PHYS_AGE_URL, "json", parse_phys_age),
+    ("ine_idb_1448.json", INE_CCAA_URL, "json", parse_ine_ccaa),
+    ("oecd_waiting_dbnomics.json", OECD_WAIT_URL, "json", parse_oecd_wait),
+    ("oecd_health_prot_dbnomics.json", OECD_PROT_URL, "json", parse_oecd_prot),
+    ("oecd_hcqo_cancer_dbnomics.json", OECD_HCQO_URL, "json", parse_oecd_hcqo),
 ]
 
 
@@ -812,6 +1199,8 @@ def main() -> int:
                 report["indicators"][f"{definition['source_id']}:{definition['indicator_code']}:{definition['unit_code']}"] = counts
         report["sisle"] = load_sisle(conn, args.snapshot_date)
         report["egsp"] = load_egsp(conn, args.snapshot_date)
+        report["barometro"] = load_barometro(conn, args.snapshot_date, args.offline)
+        report["siap"] = load_siap(conn, args.snapshot_date)
     fk = conn.execute("PRAGMA foreign_key_check").fetchall()
     if fk:
         raise SystemExit(f"foreign_key_check failed: {fk[:5]}")
