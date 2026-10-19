@@ -134,6 +134,7 @@ export function RegionsFigure({ data, sources }) {
       notes={[
         `Gasto por alumno: ${rp.formula}. No incluye el gasto de ayuntamientos ni del Ministerio en cada comunidad; Ceuta y Melilla (${rp.cities.Ceuta} y ${rp.cities.Melilla} puntos) las gestiona el Ministerio y no tienen consejería, por eso quedan fuera de la comparación.`,
         "El denominador es todo el alumnado de régimen general, también el de centros privados sin concierto, que no recibe gasto público: las comunidades con más enseñanza privada sin concierto salen con menos gasto por alumno del que reciben los centros sostenidos con fondos públicos.",
+        "No hay una estadística oficial comparable del sueldo del profesorado por comunidad (cada una fija sus complementos y el Ministerio solo publica el gasto de personal para toda España); queda pendiente.",
         "PISA por comunidad: muestras ampliadas del INEE; cada valor tiene un margen de error de varios puntos. Euros corrientes de 2022 sin corregir por diferencias de precios entre comunidades.",
       ]}
       table={
@@ -146,6 +147,7 @@ export function RegionsFigure({ data, sources }) {
                   <th scope="col">Comunidad</th>
                   <th scope="col">PISA matemáticas 2022</th>
                   <th scope="col">Gasto por alumno 2022</th>
+                  <th scope="col">Abandono temprano {data.territory.leavers_year}</th>
                 </tr>
               </thead>
               <tbody>
@@ -154,6 +156,7 @@ export function RegionsFigure({ data, sources }) {
                     <td>{name(row.region)}</td>
                     <td>{row.math}</td>
                     <td>{fmt(row.spending_per_student, "eur")}</td>
+                    <td>{row.early_leavers != null ? `${num(row.early_leavers)} %` : ""}</td>
                   </tr>
                 ))}
               </tbody>
@@ -163,14 +166,15 @@ export function RegionsFigure({ data, sources }) {
       }
     >
       <Explain
-        shows="Cada fila es una comunidad autónoma, ordenada por su puntuación en matemáticas en PISA 2022. A la izquierda, la puntuación; a la derecha, lo que gastó su consejería de educación por alumno ese año."
+        shows="Cada fila es una comunidad autónoma, ordenada por su puntuación en matemáticas en PISA 2022: la puntuación, lo que gastó su consejería de educación por alumno ese año y su tasa de abandono temprano más reciente."
         read={`Si más gasto significara mejores resultados, las barras verdes se acortarían de arriba abajo igual que las azules. Apenas ocurre: ${name(priciest.region)}, la que más gasta, queda en el puesto ${rank(priciest.region)} de ${rows.length} en PISA; ${name(cheapest.region)}, la que menos, en el ${rank(cheapest.region)}.`}
         notSay="No mide eficiencia ni causalidad: las comunidades difieren en renta, origen del alumnado, dispersión rural, salarios docentes y precios. Una correlación débil con 17 comunidades no prueba que el gasto no importe."
       />
-      <div style={{ display: "grid", gridTemplateColumns: "minmax(110px, 160px) 1fr 1fr", gap: "4px 12px", fontSize: "0.84rem", alignItems: "center" }}>
+      <div style={{ display: "grid", gridTemplateColumns: "minmax(110px, 160px) 1fr 1fr 1fr", gap: "4px 12px", fontSize: "0.84rem", alignItems: "center" }}>
         <span />
         <strong>PISA matemáticas (eje 0–600)</strong>
         <strong>Gasto por alumno (eje desde 0)</strong>
+        <strong>Abandono temprano {data.territory.leavers_year} (eje 0–30 %)</strong>
         {rows.map((row) => (
           <RegionRow key={row.region} row={row} name={name(row.region)} maxSpend={maxSpend} />
         ))}
@@ -193,6 +197,10 @@ function RegionRow({ row, name, maxSpend }) {
         <span style={bar((row.spending_per_student / maxSpend) * 70, C.aqua)} />
         <span>{fmt(row.spending_per_student, "eur")}</span>
       </span>
+      <span style={track}>
+        {row.early_leavers != null ? <span style={bar((row.early_leavers / 30) * 75, C.orange)} /> : null}
+        <span>{row.early_leavers != null ? `${num(row.early_leavers)} %` : "—"}</span>
+      </span>
     </>
   );
 }
@@ -210,7 +218,9 @@ export function EquityFigure({ data, sources }) {
       sources={sources}
       notes={[
         `Efecto composición: ${comp.formula}. ${num(comp.share_2022 - comp.share_2012)} puntos porcentuales más de alumnado inmigrante × ${comp.gap_raw} puntos de diferencia = ${num(comp.effect_raw_points)} puntos de la media; con la diferencia ajustada por nivel socioeconómico (${comp.gap_adjusted}), ${num(comp.effect_adjusted_points)}.`,
-        "ISEC: índice PISA de estatus económico, social y cultural (estudios y profesión de los padres, recursos en casa). Valores de la nota de país de la OCDE y de los informes españoles del INEE, con cita literal.",
+        "ISEC: índice PISA de estatus económico, social y cultural (estudios y profesión de los padres, recursos en casa). Valores de la nota de país de la OCDE y de los informes españoles del INEE, con cita literal. Las barras muestran la distancia a la media OCDE (0) de cada ciclo; el valor de 2015 (−0,51) se aparta mucho del resto y, sin una serie homogénea de la OCDE (oecd.org bloquea la descarga), no lo leemos como tendencia: lo más que puede decirse es que el alumnado español se ha acercado a la media OCDE entre 2012 y 2022.",
+        "Brecha por origen social a lo largo del tiempo: la nota de país de la OCDE afirma que «Entre el 2012 y el 2022, la brecha en el rendimiento matemático entre el mejor 25 % y el peor 25 % de los estudiantes según el ISEC permanecía estable en España, así como en el promedio OCDE». Las puntuaciones por cuartil de cada ciclo solo están en tablas de oecd.org.",
+        "Cobertura: la escolarización es obligatoria hasta los 16 años (Ley Orgánica 1/1990, LOGSE), así que casi todos los alumnos de 15 años están escolarizados y se examinan. La caída del abandono temprano, que se mide entre los 18 y los 24 años, apenas cambia quién hace PISA; lo que sí cambia es en qué curso están (menos repetidores).",
       ]}
       table={
         <EduTable
@@ -225,7 +235,7 @@ export function EquityFigure({ data, sources }) {
       <Explain
         shows="Cuánto pesa el origen familiar en los resultados de PISA y cuánto ha cambiado la composición del alumnado. Separa el «sistema» de la «mezcla» de alumnos."
         read={`Brecha socioeconómica: puntos de diferencia entre el 25 % de alumnos más aventajado y el 25 % menos. Cuanto menor, más equitativo. El efecto composición es una cuenta sencilla: cuánto bajaría la media solo porque cambia quién se examina.`}
-        notSay="La cuenta del efecto composición es ilustrativa: supone que nada más cambió. Tampoco recoge otros cambios de la mezcla, como que hoy siguen en clase alumnos que antes abandonaban o repetían."
+        notSay="La cuenta del efecto composición es ilustrativa: supone que nada más cambió. Tampoco recoge otros cambios de la mezcla, como que hoy hay menos repetidores entre los alumnos de 15 años."
       />
       <div className="vizMultiples">
         <div>
@@ -288,6 +298,17 @@ export function EquityFigure({ data, sources }) {
             ariaLabel="Alumnado de origen inmigrante en PISA"
           />
           <h3 className="vizPanelTitle">
+            Origen social medio del alumnado de España en cada ciclo (ISEC)
+            <span>Media OCDE = 0 en cada ciclo; valores publicados por el INEE</span>
+          </h3>
+          <Bars
+            label="ISEC medio de España por ciclo"
+            unit="ratio"
+            digits={2}
+            max={0.6}
+            rows={(data.composition.isec_by_cycle.ESP || []).map((p) => ({ label: `PISA ${p.year}`, value: Math.abs(p.value), color: C.blue, note: `(${num(p.value, 2)}; por debajo de la media OCDE)` }))}
+          />
+          <h3 className="vizPanelTitle">
             Caída de PISA matemáticas 2012-2022 y parte atribuible al cambio de composición
             <span>Puntos</span>
           </h3>
@@ -328,7 +349,7 @@ export function TeachersFigure({ data, sources }) {
   return (
     <Figure
       id="profesorado"
-      title={`El sueldo real del profesorado de ESO sigue un ${Math.abs(th.salary_change_from_peak_pct)} % por debajo de ${th.salary_peak.year}; en la OCDE ha subido`}
+      title={`El sueldo real del profesorado de ESO es un ${Math.abs(th.salary_change_from_2005_pct)} % menor que en ${th.salary_2005.year} y un ${Math.abs(th.salary_change_from_peak_pct)} % menor que en su máximo de ${th.salary_peak.year}; en la OCDE, un ${th.oecd_change_from_2005_pct} % mayor que en ${th.salary_2005.year}`}
       dek={`Índice de salario legal con 15 años de experiencia, descontada la inflación (2015 = 100): España ${num(th.salary_peak.value)} en ${th.salary_peak.year} y ${num(th.salary_last.value)} en ${th.salary_last.year}; media OCDE ${num(th.oecd_2009)} en 2009 y ${num(th.oecd_last.value)} en ${th.oecd_last.year}. A la vez, hay menos alumnos por profesor que en la UE: ${num(esRatio.value)} en ESO frente a ${euRatio ? num(euRatio.value) : "—"} (${esRatio.year}).`}
       legend={[
         { id: "ESP", label: "España", color: C.blue },
@@ -535,12 +556,15 @@ export function FamiliesFigure({ data, sources }) {
   const cEs = lastOf(cap.household_consumption_share.ES);
   const cEu = lastOf(cap.household_consumption_share.EU27_2020);
   const q = Object.fromEntries(cap.epf_quintiles.map((row) => [row.label, row]));
-  const qMax = Math.max(...cap.epf_quintiles.map((row) => row.per_household));
+  const bands = data.distribution.epf_income_bands;
+  const bandMax = Math.max(...bands.map((row) => row.per_household));
+  const lowBand = bands.find((row) => row.band !== "Total");
+  const highBand = [...bands].reverse().find((row) => row.band !== "Total");
   return (
     <Figure
       id="familias"
       title={`La enseñanza no es gratis para las familias: pagan el ${num(es.value, 0)} % del gasto educativo en España${highest ? ", más que en Alemania, Francia, Italia y Portugal" : ""}, y el ${num(esTertiary.value, 0)} % del universitario`}
-      dek={`Los hogares dedican a educación el ${num(cEs.value)} % de su consumo (UE: ${num(cEu.value)} %, ${cEs.year}). En ${q.Total.year}, el hogar medio gastó ${fmt(q.Total.per_household, "eur")} al año en enseñanza; el 20 % que menos gasta, ${fmt(q["Quintil 1"].per_household, "eur")} (el ${num(q["Quintil 1"].share_of_spending, 2)} % de su gasto), y el 20 % que más, ${fmt(q["Quintil 5"].per_household, "eur")} (${num(q["Quintil 5"].share_of_spending, 2)} %).`}
+      dek={`Los hogares dedican a educación el ${num(cEs.value)} % de su consumo (UE: ${num(cEu.value)} %, ${cEs.year}). En ${q.Total.year}, el hogar medio gastó ${fmt(q.Total.per_household, "eur")} al año en enseñanza; los hogares que ingresan ${lowBand.band.toLowerCase().replace(" euros", " €")} al mes, ${fmt(lowBand.per_household, "eur")} (el ${num(lowBand.share_of_spending, 2)} % de su gasto), y los de ${highBand.band.toLowerCase().replace(" euros", " €")}, ${fmt(highBand.per_household, "eur")} (${num(highBand.share_of_spending, 2)} %): el gasto privado en educación crece mucho más deprisa que la renta.`}
       legend={[
         { id: "ES", label: "España", color: C.blue },
         { id: "ref", label: "UE-27", color: C.ref },
@@ -549,14 +573,14 @@ export function FamiliesFigure({ data, sources }) {
       sources={sources}
       notes={[
         `Origen privado del gasto (${year}): sector privado no educativo —sobre todo hogares— en % del gasto total en educación, de Infantil a universidad (Eurostat UOE). Recoge lo que pagan hogares y otras entidades privadas, como matrículas y cuotas de centros privados y concertados; la estadística no separa la concertada.`,
-        "Encuesta de Presupuestos Familiares: los quintiles son de gasto total del hogar, no de ingresos (es lo que publica el INE para esta tabla); euros corrientes. «Enseñanzas no relacionadas con el sistema educativo» recoge sobre todo academias, idiomas y cursos.",
+        "Encuesta de Presupuestos Familiares (INE): tramos de ingresos mensuales netos regulares del hogar (tabla 73809) y, en la tabla de datos, quintiles de gasto total (tabla 73828); euros corrientes. El porcentaje es la parte de su gasto total que cada tramo dedica a enseñanza. El tramo de menos de 500 € no tiene dato el último año.",
         "Falta: precio de la matrícula universitaria por comunidad en % de la renta del hogar. No hemos encontrado una tabla oficial descargable por script (la nota del Ministerio está en lamoncloa.gob.es, que devolvió un error de conexión TLS a la descarga automática el 19 de octubre de 2026).",
       ]}
       table={
         <>
           <EduTable caption="Ver el origen privado del gasto en tabla" series={areas.map((geo) => ({ id: geo, label: `${NAMES[geo]} · todas las etapas`, points: cap.private_share_all[geo] || [] }))} />
           <EduTable digits={2} caption="Ver el consumo de los hogares en educación en tabla" series={[...consumption].reverse()} />
-          <EduTable unit="eur" caption="Ver el gasto por hogar en tabla (EPF)" series={cap.epf_quintiles.map((row) => ({ id: row.label, label: row.label, points: row.series }))} />
+          <EduTable unit="eur" caption="Ver el gasto por hogar y quintil de gasto total en tabla (EPF)" series={cap.epf_quintiles.map((row) => ({ id: row.label, label: row.label, points: row.series }))} />
         </>
       }
     >
@@ -585,17 +609,17 @@ export function FamiliesFigure({ data, sources }) {
           </h3>
           <SparseLineChart series={consumption} unit="pct" digits={1} height={200} yMax={2} ariaLabel="Gasto de los hogares en educación en porcentaje de su consumo" />
           <h3 className="vizPanelTitle">
-            Gasto en enseñanza por hogar, {q.Total.year}
-            <span>Euros al año, por quintil de gasto total (INE, EPF)</span>
+            Gasto en enseñanza por hogar según sus ingresos, {bands[0]?.year}
+            <span>Euros al año, por ingresos mensuales netos del hogar (INE, EPF)</span>
           </h3>
           <Bars
-            label="Gasto en enseñanza por hogar y quintil"
+            label="Gasto en enseñanza por hogar según ingresos"
             unit="eur"
-            max={qMax}
-            rows={cap.epf_quintiles.map((row) => ({
-              label: row.label === "Total" ? "Media" : row.label.replace("Quintil", "Quintil de gasto"),
+            max={bandMax}
+            rows={bands.map((row) => ({
+              label: row.band === "Total" ? "Media" : row.band.replace(" euros", " €"),
               value: row.per_household,
-              color: row.label === "Total" ? C.ref : C.blue,
+              color: row.band === "Total" ? C.ref : C.blue,
               note: `${num(row.share_of_spending, 2)} % de su gasto`,
             }))}
           />

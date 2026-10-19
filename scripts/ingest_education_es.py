@@ -521,6 +521,14 @@ MEFP_SOURCES = [
         period_var="periodo", region_var="Comunidad autónoma", school=True,
     ),
     mefp_source(
+        "aban_1_08", "/laborales/epa/aban", "aban_1_08.px", indicator_code="abandono_por_formacion_madre",
+        label="Abandono temprano de la educación-formación por nivel de formación de la madre (%)", unit_code="PC",
+        definition_text="Población de 18 a 24 años que abandona prematuramente los estudios, según el nivel de formación de la "
+        "madre (explotación de la EPA del Ministerio).",
+        keep=lambda c: c["Tipo de indicador"].startswith("Tasa de abandono") and c["Sexo"] == "AMBOS SEXOS",
+        period_var="periodo", region_var=None, school=False,
+    ),
+    mefp_source(
         "idoneidad_05", "/no-universitaria/alumnado/matriculado/series/gen-idoneidad", "idoneidad_05.px",
         indicator_code="tasa_idoneidad_15", label="Tasa de idoneidad a los 15 años (% en el curso teórico, 4.º ESO)",
         unit_code="PC",
@@ -817,6 +825,8 @@ def parse_oecd_earnings(raw: Raw) -> Iterable[Batch]:
 
 INE_EPF = {
     73828: ("epf_education_by_spending_quintile", "Gasto de los hogares en servicios de educación por quintil de gasto total del hogar (EPF)",
+            lambda name: "educaci" in name.lower()),
+    73809: ("epf_education_by_income_band", "Gasto de los hogares en servicios de educación por ingresos mensuales netos del hogar (EPF)",
             lambda name: "educaci" in name.lower()),
     75004: ("epf_education_subgroups", "Gasto medio por hogar en enseñanza por nivel (EPF, subgrupos COICOP)",
             lambda name: name.startswith("Enseñanza") and "Dato base. Gasto total. Gasto medio por hogar" in name),

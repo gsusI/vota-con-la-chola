@@ -176,6 +176,7 @@ export function StoryFigure({ story, sources, h }) {
   const trough = by[2015];
   const last = by[2022];
   const cut = pct(peak.x, trough.x);
+  const rob = story.robustness;
   const rise = pct(trough.x, last.x);
   const arrows = story.peer_arrows.map((a) => ({
     area: a.area,
@@ -193,8 +194,8 @@ export function StoryFigure({ story, sources, h }) {
   return (
     <Figure
       id="dato-relato"
-      title={`El dato mata el relato: con los recortes de 2009 a 2015 el gasto por alumno cayó un ${Math.abs(cut)} % y la nota PISA subió ${trough.y - peak.y} puntos; con un ${rise} % más hasta 2022, bajó ${trough.y - last.y}. Entre comunidades, el origen social explica el ${num(story.r2_isec_regions, 0)} % de las diferencias y el gasto, el ${num(story.r2_spending_regions, 0)} %`}
-      dek={`Todo en una imagen: la trayectoria de España en cada ciclo de PISA (línea azul), la media OCDE y cuatro países comparables de 2012 a 2022 (flechas) y las 17 comunidades en 2022 (cuadrados, en verde las de origen social medio por encima de la media OCDE). ${allRightDown ? `Todas las flechas van hacia la derecha y hacia abajo: la OCDE gastó un ${oecd.spend} % más por alumno y perdió ${Math.abs(oecd.score)} puntos.` : ""} Las comunidades de origen social más alto sacan de media ${num(gap, 0)} puntos más, gasten lo que gasten (de ${num(Math.min(...xs), 0)} a ${num(Math.max(...xs), 0)} sobre 100).`}
+      title={`El dato mata el relato: en ${rob.opposite} de los ${rob.total} pares de ciclos PISA, el gasto por alumno y la nota de España se movieron en sentido contrario (en ${rob.same_direction}, en el mismo); entre comunidades, el origen social explica el ${num(story.r2_isec_regions, 0)} % de las diferencias y el gasto, el ${num(story.r2_spending_regions, 0)} %`}
+      dek={`Un ejemplo, elegido en el máximo y el mínimo del gasto: de 2009 a 2015 el gasto por alumno cayó un ${Math.abs(cut)} % y la nota subió ${trough.y - peak.y} puntos; de 2015 a 2022 subió un ${rise} % y la nota bajó ${trough.y - last.y}. Pero no depende de esas fechas: con cualquier par de ciclos entre 2006 y 2022, solo en ${rob.same_direction} de ${rob.total} se movieron juntos. Todo en una imagen: la trayectoria de España en cada ciclo de PISA (línea azul), la media OCDE y cuatro países comparables de 2012 a 2022 (flechas) y las 17 comunidades en 2022 (cuadrados, en verde las de origen social medio por encima de la media OCDE). ${allRightDown ? `Todas las flechas van hacia la derecha y hacia abajo: la OCDE gastó un ${oecd.spend} % más por alumno y perdió ${Math.abs(oecd.score)} puntos.` : ""} Las comunidades de origen social más alto sacan de media ${num(gap, 0)} puntos más, gasten lo que gasten (de ${num(Math.min(...xs), 0)} a ${num(Math.max(...xs), 0)} sobre 100).`}
       legend={[
         { id: "es", label: "España, ciclo a ciclo (2000 hueco: no comparable)", color: C.blue },
         { id: "oecd", label: "Media OCDE, 2012 → 2022", color: C.ref },
@@ -207,6 +208,7 @@ export function StoryFigure({ story, sources, h }) {
         `Eje horizontal: ${story.base} Base: ${num(story.spain_base_usd, 0)} dólares PPA de 2020 por alumno (OCDE) y ${num(story.regional_base_eur, 0)} € por alumno (consejerías, 2022). Las dos escalas están referidas a la media de España en 2022, no convertidas entre sí.`,
         `Eje vertical: puntos de PISA matemáticas por encima o por debajo de la nota de España en 2022 (${story.spain_path.find((p) => p.pisa_year === 2022).y}); entre paréntesis, la nota. Los dos ejes toman como referencia a España en 2022 e incluyen el cero.`,
         "Marcas: círculo = país o media; cuadrado = comunidad autónoma; flecha = de 2012 a 2022. Para PISA 2006 se usa el gasto de 2005 (la OCDE no publica 2006).",
+        `Pares de ciclos: los ${rob.total} pares posibles entre 2006, 2009, 2012, 2015, 2018 y 2022 (2000 y 2003 no son comparables o no tienen gasto). «Mismo sentido» si gasto y nota suben o bajan a la vez; cambios de nota de menos de 3 puntos (${rob.flat} pares) se cuentan como «sin cambio». La lista completa está en los datos descargables (JSON, story.robustness).`,
         `Origen social (ISEC): grupo de comunidades «con un ISEC superior al Promedio de la OCDE» según el informe español de PISA 2022 (Madrid, País Vasco, Asturias, Castilla y León, Galicia, Cantabria y Navarra). R² del ISEC entre comunidades y ciudades autónomas: ${num(story.r2_isec_regions, 1)} % (19 territorios; Ceuta y Melilla, en los extremos, lo elevan), y entre países de la OCDE y la UE: ${num(story.r2_isec_countries, 1)} % (INEE). R² del gasto entre las 17 comunidades: ${num(story.r2_spending_regions, 0)} % (cálculo propio con estos datos; Ceuta y Melilla no tienen consejería).`,
       ]}
       table={
@@ -275,6 +277,11 @@ export function StoryFigure({ story, sources, h }) {
             "Las diferencias entre comunidades son de origen social",
             "Sí",
             `En buena parte: el origen social medio explica el ${num(story.r2_isec_regions, 0)} % de las diferencias en PISA entre comunidades y ciudades autónomas, frente al ${num(story.r2_spending_regions, 0)} % del gasto. Pero el cambio en la mezcla de alumnos explica poco de la caída nacional desde 2012 (${num(h.compositionPoints)} de ${h.compositionDrop} puntos; ver «Equidad»).`,
+          ],
+          [
+            "La bajada del abandono arrastra PISA hacia abajo",
+            "No",
+            "Casi no: la escolarización es obligatoria hasta los 16 años, así que casi todos los alumnos de 15 ya estaban en PISA antes; el abandono se mide entre los 18 y los 24 años. Lo que cambió es en qué curso están (menos repetidores), no quién se examina.",
           ],
           [
             "La educación mejora con cada generación",

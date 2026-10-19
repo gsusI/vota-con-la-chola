@@ -96,7 +96,8 @@ class IngestEducationTest(unittest.TestCase):
                 if key.endswith("_flag"):
                     continue  # membership flags quote the sentence that lists the group, not a number
                 value = format(row["value"], "g")
-                self.assertTrue(value in row["quote"] or value.replace(".", ",") in row["quote"], (key, row["area"], row["year"]))
+                quote = row["quote"].replace("\u2010", "-")  # some INEE PDFs use a Unicode hyphen for the minus sign
+                self.assertTrue(value in quote or value.replace(".", ",") in quote, (key, row["area"], row["year"]))
 
     def test_teacher_salary_series_keep_every_dimension(self) -> None:
         payload = json.dumps({"series": {"docs": [{

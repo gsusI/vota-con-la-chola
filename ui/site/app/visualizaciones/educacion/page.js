@@ -53,6 +53,7 @@ export default function EducacionPage() {
     pisaReports: { label: "INEE, informes españoles de PISA 2003-2018", href: "https://www.educacionfpydeportes.gob.es/inee/evaluaciones-internacionales/pisa.html" },
     pisaNote: { label: "OCDE, PISA 2022, nota de país: España (copia del INEE)", href: src.vclc_education_curated.documents.oecd_pisa2022_country_note_es.url },
     oecdSal: { label: `OCDE, Education at a Glance, salarios del profesorado (réplica DBnomics)${retrieved(src.oecd_eag_finance)}`, href: "https://db.nomics.world/OECD/DSD_EAG_SAL_TREND@DF_TCH_STA" },
+    mefpEpa: { label: `Ministerio de Educación, explotación de la EPA (abandono por estudios de la madre)${retrieved(src.mefp_educabase)}`, href: "https://www.educacionfpydeportes.gob.es/servicios-al-ciudadano/estadisticas/laborales/epa.html" },
     epf: { label: `INE, Encuesta de Presupuestos Familiares${retrieved(src.ine_epf)}`, href: "https://www.ine.es/jaxiT3/Tabla.htm?t=73828" },
     piaac: { label: "INEE, PIAAC 2023. Informe español (2024)", href: src.vclc_education_curated.documents.inee_piaac2023_informe_espanol.landing_page },
     oecdEarn: { label: `OCDE, Education at a Glance, ingresos por nivel de estudios (réplica DBnomics)${retrieved(src.oecd_eag_finance)}`, href: "https://db.nomics.world/OECD/DSD_EAG_LSO_EA@DF_LSO_EARN_REL_UPPER" },
@@ -128,6 +129,16 @@ export default function EducacionPage() {
     }, []);
   const breakNotes = breakRows(el.breaks.filter((year) => year >= 2002));
   const regionMax = Math.max(...el.regions.map((row) => row.first || row.last));
+  const motherLevels = [
+    ["E. Primaria e inferior", "Madre con Primaria o menos", C.orange],
+    ["1ª etapa E. Secundaria", "Madre con ESO o equivalente", C.yellow],
+    ["2ª etapa E. Secundaria", "Madre con Bachillerato o FP", C.aqua],
+    ["E. Superior", "Madre con estudios superiores", C.blue],
+  ];
+  const mother = data.distribution.leavers_by_mother;
+  const motherSeries = motherLevels.filter(([key]) => mother[key]).map(([key, label, color]) => ({ id: key, label, color, points: mother[key] }));
+  const motherYear = mother["E. Superior"]?.at(-1)?.year;
+  const motherLast = (key) => num(mother[key]?.at(-1)?.value ?? 0);
 
   // 4. Repetition ----------------------------------------------------------------------------------
   const behind = [
@@ -176,6 +187,16 @@ export default function EducacionPage() {
   const aheadIn1950 = ["DEU", "FRA", "ITA"].filter((area) => sch(area, 1950) > sch("ESP", 1950)).map((area) => NAMES[area]);
   const list = (items) => (items.length > 1 ? `${items.slice(0, -1).join(", ")} y ${items.at(-1)}` : items[0] || "");
   const mathRisers = mathDrops.filter((row) => row.delta > 0).map((row) => NAMES[row.area]);
+  const firstChange = (domain, area) => data.base_year.pisa[domain][area]?.[0]?.change;
+  const baseRows = ["math", "reading", "science"].flatMap((domain) =>
+    data.base_year.pisa[domain].ESP.map((row) => ({
+      domain,
+      from: row.from,
+      es: row.change,
+      oecd: data.base_year.pisa[domain].OECD.find((o) => o.from === row.from)?.change,
+    })),
+  );
+  const domainName = { math: "Matemáticas", reading: "Lectura", science: "Ciencias" };
   const regionScores = data.regions_pisa.rows.filter((row) => row.math != null).map((row) => row.math);
   const regionSpread = Math.max(...regionScores) - Math.min(...regionScores);
   const attain = (level) => data.attainment_25_34[level].ES.at(-1).value;
@@ -242,7 +263,8 @@ export default function EducacionPage() {
             OCDE cayó más, de {h.oecd_math_2003} a {data.pisa.math.OECD.at(-1).value}. <a href="#pisa">Ver PISA</a>
           </li>
           <li>
-            <strong>Mucho menos abandono y repetición.</strong> El abandono temprano bajó del {num(h.leavers_2008)} % al {num(h.leavers_last)} % y el
+            <strong>Mucho menos abandono y repetición.</strong> El abandono temprano bajó del {num(h.leavers_2000)} % de 2000 (y del{" "}
+            {num(h.leavers_2008)} % del pico de 2008) al {num(h.leavers_last)} % y el
             alumnado de 15 años retrasado de curso, del {num(h.behind_peak.value)} % al {num(h.behind_last.value)} %. <a href="#abandono">Ver abandono</a>
           </li>
           <li>
@@ -401,7 +423,7 @@ export default function EducacionPage() {
 
       <Figure
         id="pisa"
-        title={`En matemáticas, España pasa de ${esMath.from} a ${esMath.to} puntos PISA desde 2003; ${list(biggerDrops)} cayeron más`}
+        title={`Desde su primer año comparable, España pierde ${Math.abs(firstChange("math", "ESP"))} puntos en matemáticas (2003), ${Math.abs(firstChange("reading", "ESP"))} en lectura (2000) y ${Math.abs(firstChange("science", "ESP"))} en ciencias (2006); la media OCDE pierde ${Math.abs(firstChange("math", "OECD"))} en matemáticas y ${Math.abs(firstChange("science", "OECD"))} en ciencias`}
         dek={`La media OCDE de matemáticas bajó de ${h.oecd_math_2003} a ${data.pisa.math.OECD.at(-1).value} en el mismo periodo. ${mathRisers.length ? `${list(mathRisers)}, que partían por debajo, subieron y hoy están a la par. ` : ""}En 2022 España obtuvo ${h.math_2022} en matemáticas (media OCDE ${data.pisa.math.OECD.at(-1).value}), ${h.reading_2022} en lectura (${data.pisa.reading.OECD.at(-1).value}) y ${h.science_2022} en ciencias (${data.pisa.science.OECD.at(-1).value}): en las tres, sin diferencia significativa con la media. El eje empieza en cero; las caídas son de pocas decenas de puntos en una escala centrada en 500.`}
         legend={[
           { id: "ESP", label: "España", color: C.blue },
@@ -415,7 +437,36 @@ export default function EducacionPage() {
           "Media OCDE: la de cada ciclo según los informes españoles del INEE (2003-2015 y 2022) y el Banco Mundial (2018), con cita literal de documento y página. Cambia de países: 30 miembros en 2003, 34 en 2012, 37 en 2022, así que difiere unos puntos de la media de tendencia de la OCDE (solo países presentes en todos los ciclos).",
           "Sin dato con fuente verificable: media OCDE de 2000, de 2009 y de matemáticas en 2006 (en los informes solo aparecen en gráficos), y lectura y ciencias de 2022 de Alemania, Francia, Italia y Portugal. oecd.org bloquea la descarga por script.",
         ]}
-        table={<EduTable unit="score" caption="Ver todas las puntuaciones en tabla" series={pisaTable} />}
+        table={
+          <>
+            <details className="vizTable" open>
+              <summary>El mismo cambio desde cada año de partida (hasta 2022)</summary>
+              <div className="vizTable__scroll">
+                <table>
+                  <thead>
+                    <tr>
+                      <th scope="col">Materia</th>
+                      <th scope="col">Desde</th>
+                      <th scope="col">España</th>
+                      <th scope="col">Media OCDE</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {baseRows.map((row) => (
+                      <tr key={`${row.domain}-${row.from}`}>
+                        <td>{domainName[row.domain]}</td>
+                        <td>{row.from}</td>
+                        <td>{row.es > 0 ? `+${row.es}` : row.es}</td>
+                        <td>{row.oecd == null ? "—" : row.oecd > 0 ? `+${row.oecd}` : row.oecd}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </details>
+            <EduTable unit="score" caption="Ver todas las puntuaciones en tabla" series={pisaTable} />
+          </>
+        }
       >
         <Explain
           shows="Puntuación media de los alumnos de 15 años en cada ciclo de PISA, por materia, frente a la media OCDE y a cuatro países parecidos."
@@ -453,13 +504,14 @@ export default function EducacionPage() {
 
       <Figure
         id="abandono"
-        title={`El abandono escolar temprano bajó del ${num(h.leavers_2008)} % en 2008 al ${num(h.leavers_last)} % en ${h.leavers_last_year}`}
+        title={`El abandono escolar temprano bajó del ${num(h.leavers_first.value)} % en ${h.leavers_first.year} y del ${num(h.leavers_2000)} % en 2000 al ${num(h.leavers_last)} % en ${h.leavers_last_year}; el máximo reciente fue el ${num(h.leavers_2008)} % de 2008`}
         dek={`Jóvenes de 18 a 24 años que como mucho terminaron la ESO y no siguen estudiando. La distancia con la UE-27 pasó de ${num(h.leavers_2008 - h.leavers_eu_2008)} puntos a ${num(h.leavers_last - h.leavers_eu_last)}; España sigue por encima de la media europea (${num(h.leavers_eu_last)} %) y de Alemania, Francia, Italia y Portugal.`}
         legend={leavers.slice().reverse()}
-        sources={[S.eurostat("edat_lfse_14"), S.eurostat("edat_lfse_16")]}
+        sources={[S.eurostat("edat_lfse_14"), S.eurostat("edat_lfse_16"), S.mefpEpa]}
         notes={[
           `Líneas verticales: rupturas de serie que Eurostat marca con «b» en España o la UE (${el.breaks.join(", ")}), por cambios en la Encuesta de Población Activa; desde 2021 los datos de España llevan además la marca «d» (definición distinta). No se ajustan: la serie se muestra tal cual con sus marcas.`,
           "Es una encuesta: las cifras regionales tienen más error muestral, sobre todo en Ceuta, Melilla y La Rioja.",
+          "Estudios de la madre: explotación de la EPA del Ministerio de Educación (tabla aban_1_08), jóvenes de 18 a 24 años; el grupo «no consta» se omite en el gráfico y está en los datos descargables.",
         ]}
         table={<EduTable caption="Ver los datos en tabla (con marcas de Eurostat)" series={leavers.slice().reverse()} />}
       >
@@ -475,6 +527,14 @@ export default function EducacionPage() {
           annotations={breakNotes}
           ariaLabel="Abandono temprano de la educación, España, UE y países comparables"
         />
+        <h3 className="vizPanelTitle">
+          Abandono temprano según los estudios de la madre (%)
+          <span>
+            {motherLast("E. Primaria e inferior")} % si la madre tiene como mucho Primaria; {motherLast("E. Superior")} % si tiene estudios superiores (
+            {motherYear})
+          </span>
+        </h3>
+        <TimeSeriesChart series={motherSeries} height={240} ariaLabel="Abandono temprano según el nivel de estudios de la madre" />
         <h3 className="vizPanelTitle">
           Por comunidad autónoma: {el.regions_first_year} → {el.regions_last_year}
           <span>
@@ -498,7 +558,7 @@ export default function EducacionPage() {
 
       <Figure
         id="repeticion"
-        title={`A los 15 años, el ${num(h.behind_last.value)} % del alumnado va retrasado de curso; en ${h.behind_peak.course} era el ${num(h.behind_peak.value)} %`}
+        title={`A los 15 años, el ${num(h.behind_last.value)} % del alumnado va retrasado de curso, frente al ${num(h.behind_first.value)} % de ${h.behind_first.course} y el ${num(h.behind_peak.value)} % del máximo de ${h.behind_peak.course}`}
         dek={`PISA cuenta lo mismo con otra medida: el alumnado de 15 años que dice haber repetido al menos una vez pasó del ${repSeries.ESP[0].value} % en ${repSeries.ESP[0].year} al ${rep.ESP} % en 2022, y sigue más del doble que la media OCDE (${rep.OECD} %).`}
         sources={[S.mefp, S.pisaReports, S.pisaNote]}
         notes={[
@@ -649,9 +709,9 @@ export default function EducacionPage() {
             puntos que España.
           </li>
           <li>
-            <strong>Lo que sí mejoró.</strong> El abandono temprano cayó del {num(h.leavers_2008)} % al {num(h.leavers_last)} % y la repetición a los 15
-            años, del {num(h.behind_peak.value)} % al {num(h.behind_last.value)} %. Más alumnos que antes se habrían ido siguen en el sistema y se examinan en
-            PISA, lo que tira de la media hacia abajo aunque el sistema funcione mejor.
+            <strong>Lo que sí mejoró.</strong> El abandono temprano cayó del {num(h.leavers_2000)} % de 2000 al {num(h.leavers_last)} % y la repetición a los 15
+            años, del {num(h.behind_first.value)} % de {h.behind_first.course} (máximo: {num(h.behind_peak.value)} %) al {num(h.behind_last.value)} %. Como la escolarización es obligatoria hasta los 16 años, esa mejora
+            apenas cambia quién hace PISA a los 15: cambia en qué curso están (menos repetidores) y cuántos siguen estudiando después.
           </li>
           <li>
             <strong>Sistema frente a mezcla de alumnos.</strong> El aumento del alumnado inmigrante explicaría unos{" "}
@@ -696,9 +756,9 @@ export default function EducacionPage() {
             del gasto tras 2009, el menor gasto relativo a la OCDE, la caída aún mayor de PISA en países que gastan más y la mejora del abandono escolar.
           </li>
           <li>
-            <strong>Lo que no se puede concluir.</strong> Correlación no es causalidad. PISA mide a los alumnos de 15 años escolarizados: si el sistema
-            retiene a quienes antes abandonaban o repetían, la media puede bajar aunque mejore el sistema. El gasto público no incluye lo que pagan
-            las familias.
+            <strong>Lo que no se puede concluir.</strong> Correlación no es causalidad. PISA mide a los alumnos de 15 años escolarizados, casi todos
+            por ser obligatoria la escolarización hasta los 16; la caída del abandono (18-24 años) apenas cambia quién se examina, pero sí la
+            proporción de repetidores. El gasto público no incluye lo que pagan las familias.
           </li>
           <li>
             <strong>Reproducible y reutilizable.</strong> <code>just education-refresh</code> descarga cada fuente, guarda el original y lo carga en SQLite

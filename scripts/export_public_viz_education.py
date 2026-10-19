@@ -440,12 +440,73 @@ def build(conn: sqlite3.Connection) -> dict:
         "piaac_gap_young": young["ESP"] - young["OECD"], "piaac_gap_old": old["ESP"] - old["OECD"],
     }
 
+    # 14. Base year: the same claims from several starting points -----------------------------------
+    def changes(series: dict[int, float], bases: list[int], last: int) -> list[dict]:
+        return [{"from": b, "to": last, "change": r(series[last] - series[b], 0)} for b in bases if b in series and last in series]
+
+    pisa_bases = {}
+    for domain in ("math", "reading", "science"):
+        es_dom = {p["year"]: p["value"] for p in pisa[domain]["ESP"]}
+        oecd_dom = {p["year"]: p["value"] for p in pisa[domain]["OECD"]}
+        first = PISA_FIRST_COMPARABLE[domain]
+        bases = [y for y in sorted(es_dom) if y >= first and y < 2022]
+        pisa_bases[domain] = {"ESP": changes(es_dom, bases, 2022), "OECD": changes(oecd_dom, bases, 2022)}
+    comparable_path = [p for p in spain_path if p["comparable"]]
+    pairs = {"same_direction": 0, "opposite": 0, "flat": 0, "total": 0, "list": []}
+    for i, a in enumerate(comparable_path):
+        for b in comparable_path[i + 1:]:
+            ds, dy = b["x"] - a["x"], b["y"] - a["y"]
+            pairs["total"] += 1
+            kind = "flat" if abs(dy) < 3 else ("same_direction" if ds * dy > 0 else "opposite")
+            pairs[kind] += 1
+            pairs["list"].append({"from": a["pisa_year"], "to": b["pisa_year"], "spending_change_pct": r((b["x"] / a["x"] - 1) * 100, 0),
+                                  "score_change": r(dy, 0), "kind": kind})
+    story["robustness"] = pairs
+
+    # 15. Composition and distribution over time -----------------------------------------------------
+    isec_by_cycle = {geo: points({int(p["period"]): p["value"] for p in rows}, 2)
+                     for geo, rows in store.series("vclc_education_curated", "pisa_isec_mean", "ISEC").items() if not geo.startswith("ES-CCAA:")}
+    mother = store.by_dimension("mefp_educabase", "abandono_por_formacion_madre", "PC", "Nivel de formación de la madre")
+    leavers_by_mother = {level: points(years) for (_geo, level), years in mother.items() if level}
+    epf_inc = store.by_dimension("ine_epf", "epf_education_by_income_band", "EPF_MIXED", "nombre")
+    income_bands = []
+    for (_geo, name), years in epf_inc.items():
+        if name and ". Gasto medio por hogar. Servicios de educación" in name:
+            band = name.split(". Gasto medio por hogar")[0]
+            share = epf_inc.get(("ES", name.replace("Gasto medio por hogar", "Distribución porcentual")), {})
+            last = max(years)
+            income_bands.append({"band": band, "year": last, "per_household": r(years[last], 0), "share_of_spending": r(share.get(last), 2)})
+    order = ["De 500 a 999 euros", "De 1.000 a 1.499 euros", "De 1.500 a 1.999 euros", "De 2.000 a 2.499 euros",
+             "De 2.500 a 2.999 euros", "De 3.000 a 4.999 euros", "5.000 euros o más", "Total"]
+    latest_band_year = max((row["year"] for row in income_bands), default=None)
+    income_bands = [row for row in income_bands if row["year"] == latest_band_year]  # drop bands without a value that year
+    income_bands.sort(key=lambda row: order.index(row["band"]) if row["band"] in order else 99)
+
+    # Territory: early leaving next to PISA and spending, by community (Eurostat NUTS 2 names -> Ministerio names)
+    nuts_to_region = {
+        "Galicia": "Galicia", "Principado de Asturias": "Asturias, Principado de", "Cantabria": "Cantabria",
+        "País Vasco": "País Vasco", "Comunidad Foral de Navarra": "Navarra, Comunidad Foral de", "La Rioja": "Rioja, La",
+        "Aragón": "Aragón", "Comunidad de Madrid": "Madrid, Comunidad de", "Castilla y León": "Castilla y León",
+        "Castilla-La Mancha": "Castilla-La Mancha", "Extremadura": "Extremadura", "Cataluña": "Cataluña",
+        "Comunitat Valenciana": "Comunitat Valenciana", "Illes Balears": "Balears, Illes", "Andalucía": "Andalucía",
+        "Región de Murcia": "Murcia, Región de", "Canarias": "Canarias",
+    }
+    leavers_region = {nuts_to_region.get(row["name"]): row["last"] for row in regions if nuts_to_region.get(row["name"])}
+    for row in regions_pisa:
+        row["early_leavers"] = leavers_region.get(row["region"])
+    with_leavers = [row for row in regions_pisa if row.get("early_leavers") is not None and row["math"] is not None]
+
     sal_es = {p["year"]: p["value"] for p in salary_index["ISCED11_24"]["ESP"]}
     sal_oecd = {p["year"]: p["value"] for p in salary_index["ISCED11_24"]["OECD"]}
     sal_peak = max(sal_es, key=lambda y: sal_es[y])
     sal_last = max(sal_es)
     sal_oecd_last = max(sal_oecd)
+    sal_first = min(y for y in sal_es if y >= 2005)
     teachers_headline = {
+        "salary_2005": {"year": sal_first, "value": sal_es[sal_first]},
+        "salary_change_from_2005_pct": r((sal_es[sal_last] / sal_es[sal_first] - 1) * 100, 0),
+        "oecd_2005": sal_oecd.get(2005),
+        "oecd_change_from_2005_pct": r((sal_oecd[sal_oecd_last] / sal_oecd[2005] - 1) * 100, 0) if sal_oecd.get(2005) else None,
         "salary_peak": {"year": sal_peak, "value": sal_es[sal_peak]}, "salary_last": {"year": sal_last, "value": sal_es[sal_last]},
         "salary_change_from_peak_pct": r((sal_es[sal_last] / sal_es[sal_peak] - 1) * 100, 0),
         "oecd_2009": sal_oecd.get(2009), "oecd_last": {"year": sal_oecd_last, "value": sal_oecd[sal_oecd_last]},
@@ -512,6 +573,7 @@ def build(conn: sqlite3.Connection) -> dict:
             "reading_2000": reading.get(2000), "reading_2022": reading.get(2022),
             "science_2006": science.get(2006), "science_2022": science.get(2022),
             "leavers_2008": es_leavers.get(2008), "leavers_last": es_leavers[last_leavers], "leavers_last_year": last_leavers,
+            "leavers_2000": es_leavers.get(2000), "leavers_first": {"year": min(es_leavers), "value": es_leavers[min(es_leavers)]},
             "leavers_eu_2008": eu_leavers.get(2008), "leavers_eu_last": eu_leavers.get(last_leavers),
             "leavers_breaks": breaks,
             "behind_first": behind[0], "behind_peak": max(behind, key=lambda p: p["value"]), "behind_last": behind[-1],
@@ -551,6 +613,10 @@ def build(conn: sqlite3.Connection) -> dict:
         "vocational": {"share_upper_secondary": vocational_share, "recent_graduates_employment": recent_grads},
         "attainment_25_34": attainment,
         "story": story,
+        "base_year": {"pisa": pisa_bases},
+        "composition": {"isec_by_cycle": isec_by_cycle},
+        "distribution": {"leavers_by_mother": leavers_by_mother, "epf_income_bands": income_bands},
+        "territory": {"leavers_year": last_region_year, "rows_with_leavers": len(with_leavers)},
         "capacity": capacity,
         "outcomes": outcomes,
         "sources": sources,
@@ -633,6 +699,12 @@ def write_csv(data: dict, path: Path) -> None:
     for level, areas in out["earnings"].items():
         for area, pts in areas.items():
             rows.extend(("oecd_eag_finance", f"ingresos_relativos_secundaria_superior_100_{level}", area, p["year"], p["value"]) for p in pts)
+    for level, pts in data["distribution"]["leavers_by_mother"].items():
+        rows.extend(("mefp_educabase", f"abandono_temprano_madre_{level}", "ES", p["year"], p["value"]) for p in pts)
+    for band in data["distribution"]["epf_income_bands"]:
+        rows.append(("ine_epf", f"gasto_hogar_educacion_eur_ingresos_{band['band']}", "ES", band["year"], band["per_household"]))
+    for geo, pts in data["composition"]["isec_by_cycle"].items():
+        rows.extend(("vclc_education_curated", "pisa_isec_medio", geo, p["year"], p["value"]) for p in pts)
     buf = io.StringIO()
     writer = csv.writer(buf, lineterminator="\n")
     writer.writerow(["fuente", "serie", "area", "anio", "valor"])
