@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { svgPointerX } from "../components/pointer";
 // Copy of ../components/TimeSeriesChart.js with this page's units (years, ages, counts), negative values,
 // census points joined across gaps (connect), dashed lines and point markers.
 import { formatHousing as formatValue, tickHousing } from "./format.mjs";
@@ -135,8 +136,7 @@ export default function HousingChart({
   }
 
   function yearFromPointer(event) {
-    const rect = event.currentTarget.getBoundingClientRect();
-    const px = ((event.clientX - rect.left) / rect.width) * width;
+    const px = svgPointerX(event);
     const year = Math.round(x0 + ((px - margin.left) / innerW) * (x1 - x0));
     return Math.min(x1, Math.max(x0, year));
   }

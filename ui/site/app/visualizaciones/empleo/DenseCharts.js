@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { svgPointerX } from "../components/pointer";
 import { fmt, num } from "./format.mjs";
 
 // Dense «el dato mata el relato» charts: one y-scale each, zero always included, two legends (colour + marker/pattern).
@@ -104,8 +105,7 @@ export function GapDecomposition({ rows, colors, height = 340, annotations = [] 
           height={height}
           fill="transparent"
           onPointerMove={(e) => {
-            const rect = e.currentTarget.getBoundingClientRect();
-            const px = ((e.clientX - rect.left) / rect.width) * innerW;
+            const px = svgPointerX(e) - m.left;
             setHover(Math.min(x1, Math.max(x0, x0 + Math.floor(px / band))));
           }}
           onPointerLeave={() => setHover(null)}
@@ -220,8 +220,7 @@ export function ContractStack({ quarters, seekers, colors, reformQuarter, height
           height={height}
           fill="transparent"
           onPointerMove={(e) => {
-            const rect = e.currentTarget.getBoundingClientRect();
-            const px = ((e.clientX - rect.left) / rect.width) * innerW;
+            const px = svgPointerX(e) - m.left;
             setHover(Math.min(n - 1, Math.max(0, Math.round((px / innerW) * (n - 1)))));
           }}
           onPointerLeave={() => setHover(null)}

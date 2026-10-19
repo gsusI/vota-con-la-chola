@@ -5,6 +5,7 @@
 // `breakBefore` starts a new segment (series break: shown, never spliced) and `hollow` points mark values that are
 // not comparable with the rest. Every observation gets a marker so readers see where data actually exists.
 import { useEffect, useMemo, useRef, useState } from "react";
+import { svgPointerX } from "../components/pointer";
 import { fmt } from "./formatEdu.mjs";
 
 const MARGIN = { top: 16, right: 64, bottom: 30, left: 44 };
@@ -111,8 +112,7 @@ export default function SparseLineChart({
   }
 
   function nearestYear(event) {
-    const rect = event.currentTarget.getBoundingClientRect();
-    const px = ((event.clientX - rect.left) / rect.width) * width;
+    const px = svgPointerX(event);
     const target = x0 + ((px - margin.left) / innerW) * (x1 - x0);
     return years.reduce((best, y) => (Math.abs(y - target) < Math.abs(best - target) ? y : best), years[0]);
   }

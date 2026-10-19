@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { svgPointerX } from "../components/pointer";
 // Copy of ../components/TimeSeriesChart.js with this page's units (years of life, days, rates); the shared file
 // only formats %, euros and counts.
 import { formatHealth as formatValue, tickHealth } from "./format.mjs";
@@ -133,8 +134,7 @@ export default function TimeSeriesChart({
   }
 
   function yearFromPointer(event) {
-    const rect = event.currentTarget.getBoundingClientRect();
-    const px = ((event.clientX - rect.left) / rect.width) * width;
+    const px = svgPointerX(event);
     const year = Math.round(x0 + ((px - margin.left) / innerW) * (x1 - x0));
     return Math.min(x1, Math.max(x0, year));
   }
