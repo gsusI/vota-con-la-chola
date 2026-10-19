@@ -6,10 +6,7 @@ import { fmt, num } from "./format.mjs";
 const explainStyle = {
   display: "grid",
   gap: 6,
-  margin: "4px 0 0",
-  padding: "12px 14px",
-  borderRadius: 10,
-  background: "var(--viz-band)",
+  marginTop: 4,
   fontSize: "0.9rem",
   lineHeight: 1.45,
 };
@@ -19,17 +16,17 @@ export function Explain({ what, read, not }) {
   return (
     <div style={explainStyle} className="vizExplain">
       {what ? (
-        <p style={{ margin: 0 }}>
+        <p style={{ marginTop: 0, marginBottom: 0 }}>
           <strong>Qué muestra.</strong> {what}
         </p>
       ) : null}
       {read ? (
-        <p style={{ margin: 0 }}>
+        <p style={{ marginTop: 0, marginBottom: 0 }}>
           <strong>Cómo leerlo.</strong> {read}
         </p>
       ) : null}
       {not ? (
-        <p style={{ margin: 0 }}>
+        <p style={{ marginTop: 0, marginBottom: 0 }}>
           <strong>Qué no dice.</strong> {not}
         </p>
       ) : null}
@@ -167,7 +164,7 @@ export function DataTable({ caption = "Ver los datos en tabla", columns, rows, o
 export function Chapter({ id, kicker, title, children }) {
   return (
     <section className="card vizProse" id={id} aria-labelledby={`${id}-title`}>
-      <p style={{ margin: 0, fontSize: "0.78rem", letterSpacing: "0.06em", textTransform: "uppercase", color: "var(--viz-muted)" }}>{kicker}</p>
+      <p style={{ marginTop: 0, marginBottom: 0, fontSize: "0.78rem", letterSpacing: "0.06em", textTransform: "uppercase", color: "var(--viz-muted)" }}>{kicker}</p>
       <h2 id={`${id}-title`}>{title}</h2>
       {children}
     </section>

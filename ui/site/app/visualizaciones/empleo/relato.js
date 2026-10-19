@@ -4,7 +4,7 @@ import { GapDecomposition, ContractStack } from "./DenseCharts";
 import { fmt, num, thousands } from "./format.mjs";
 
 // «El dato mata el relato»: the two consolidated figures that settle the competing stories on this page.
-const verdictStyle = { display: "grid", gap: 6, margin: 0, padding: 0, listStyle: "none", fontSize: "0.92rem", lineHeight: 1.45 };
+const verdictStyle = { display: "grid", gap: 6, marginTop: 0, marginBottom: 0, paddingLeft: 0, listStyle: "none", fontSize: "0.92rem", lineHeight: 1.45 };
 
 function Verdicts({ settled, ambiguous }) {
   return (

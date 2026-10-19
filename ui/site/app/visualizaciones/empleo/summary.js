@@ -72,7 +72,7 @@ export function Summary({ data }) {
         en las <a href="#conclusion">conclusiones</a>; términos técnicos, en el <a href="#glosario">glosario</a>.
       </p>
       <nav aria-label="Capítulos">
-        <p style={{ margin: 0 }}>
+        <p style={{ marginTop: 0, marginBottom: 0 }}>
           Capítulos: <a href="#cap-cuanto">1. Cuánto paro</a> · <a href="#cap-ciclo">2. Estructural o cíclico</a> ·{" "}
           <a href="#cap-causas">3. Qué hay detrás</a> · <a href="#cap-calidad">4. Qué empleo</a> ·{" "}
           <a href="#cap-productividad">5. Productividad y salarios</a> · <a href="#cap-bolsillo">6. Bolsillo y gasto</a> ·{" "}
@@ -189,7 +189,7 @@ export function Conclusion({ data }) {
         <li>Si el gasto en políticas activas funciona: la base europea mide cuánto se gasta, no qué consigue cada programa.</li>
         {wp?.ESP ? <li>Por qué la productividad no despega aunque el empleo crece: estos datos lo describen, no lo explican.</li> : null}
       </ul>
-      <p style={{ margin: 0, color: "var(--viz-muted)" }}>Países: {["DEU", "FRA", "ITA", "PRT"].map((a) => NAMES[a]).join(", ")} y medias europeas.</p>
+      <p style={{ marginTop: 0, marginBottom: 0, color: "var(--viz-muted)" }}>Países: {["DEU", "FRA", "ITA", "PRT"].map((a) => NAMES[a]).join(", ")} y medias europeas.</p>
     </section>
   );
 }
@@ -219,11 +219,11 @@ export function Glossary() {
   return (
     <section className="card vizProse" id="glosario" aria-labelledby="glosario-title">
       <h2 id="glosario-title">Glosario</h2>
-      <dl style={{ display: "grid", gap: 8, margin: 0 }}>
+      <dl style={{ display: "grid", gap: 8, marginTop: 0, marginBottom: 0 }}>
         {TERMS.map(([term, def]) => (
           <div key={term}>
             <dt style={{ fontWeight: 700 }}>{term}</dt>
-            <dd style={{ margin: 0 }}>{def}</dd>
+            <dd style={{ marginTop: 0, marginBottom: 0 }}>{def}</dd>
           </div>
         ))}
       </dl>
