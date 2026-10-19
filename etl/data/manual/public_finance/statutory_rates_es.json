@@ -1,0 +1,859 @@
+{
+ "series": {
+  "irpf_top_marginal_rate": [
+   {
+    "from_year": 1933,
+    "value_pct": 11.0,
+    "label": "Contribución General sobre la Renta (Ley 20-12-1932)",
+    "source": "Alvaredo & Saez (2010), 'Income and Wealth Concentration in Spain in a Historical and Fiscal Perspective', ch.10 in Atkinson & Piketty (eds.), Top Incomes: A Global Perspective, OUP (shorter version: JEEA 7(5), 2009)",
+    "source_url": "https://wid.world/www-site/uploads/2016/06/Alvaredo_Saez_Chapter10_2010.pdf",
+    "locator": "Table 10A.1 (p.513), bracket 1933-1935: 'excess' over 1,000,000 pts",
+    "confidence": "high",
+    "note": "Scale is a table of average rates by bracket (1%-6.84%), 7.70% on the first 1,000,000 pts and 11% on the excess; 11% is the top marginal rate. Taxable threshold 100,000 pts; individual (not family) unit 1933-1939."
+   },
+   {
+    "from_year": 1936,
+    "value_pct": 11.0,
+    "label": "Contribución General sobre la Renta (threshold lowered to 80,000 pts)",
+    "source": "Alvaredo & Saez (2010), 'Income and Wealth Concentration in Spain in a Historical and Fiscal Perspective', ch.10 in Atkinson & Piketty (eds.), Top Incomes: A Global Perspective, OUP (shorter version: JEEA 7(5), 2009)",
+    "source_url": "https://wid.world/www-site/uploads/2016/06/Alvaredo_Saez_Chapter10_2010.pdf",
+    "locator": "Table 10A.1 (p.513), bracket 1936-1940",
+    "confidence": "high",
+    "note": "First 1,000,000 pts at 8.20%, excess at 11%."
+   },
+   {
+    "from_year": 1941,
+    "value_pct": 40.0,
+    "label": "Contribución sobre la Renta, reform Ley 16-12-1940",
+    "source": "Alvaredo & Saez (2010), 'Income and Wealth Concentration in Spain in a Historical and Fiscal Perspective', ch.10 in Atkinson & Piketty (eds.), Top Incomes: A Global Perspective, OUP (shorter version: JEEA 7(5), 2009)",
+    "source_url": "https://wid.world/www-site/uploads/2016/06/Alvaredo_Saez_Chapter10_2010.pdf",
+    "locator": "Table 10A.1 (p.513), 1941; text p.509",
+    "confidence": "high",
+    "note": "Applies to 1941 incomes; family unit from 1940; plus a 30% surtax for single individuals (not included)."
+   },
+   {
+    "from_year": 1942,
+    "value_pct": 44.0,
+    "label": "Contribución sobre la Renta, Ley 6-2-1943",
+    "source": "Alvaredo & Saez (2010), 'Income and Wealth Concentration in Spain in a Historical and Fiscal Perspective', ch.10 in Atkinson & Piketty (eds.), Top Incomes: A Global Perspective, OUP (shorter version: JEEA 7(5), 2009)",
+    "source_url": "https://wid.world/www-site/uploads/2016/06/Alvaredo_Saez_Chapter10_2010.pdf",
+    "locator": "Table 10A.1 (p.513), 1942-1953; text p.509",
+    "confidence": "high",
+    "note": "Income years 1942-1953; 30% surtax for singles not included."
+   },
+   {
+    "from_year": 1954,
+    "value_pct": 33.0,
+    "label": "Contribución sobre la Renta, Ley 16-12-1953",
+    "source": "Alvaredo & Saez (2010), 'Income and Wealth Concentration in Spain in a Historical and Fiscal Perspective', ch.10 in Atkinson & Piketty (eds.), Top Incomes: A Global Perspective, OUP (shorter version: JEEA 7(5), 2009)",
+    "source_url": "https://wid.world/www-site/uploads/2016/06/Alvaredo_Saez_Chapter10_2010.pdf",
+    "locator": "Table 10A.1 (p.514), 1954-1956",
+    "confidence": "high"
+   },
+   {
+    "from_year": 1957,
+    "value_pct": 44.0,
+    "label": "Contribución sobre la Renta, Ley 26-12-1957",
+    "source": "Alvaredo & Saez (2010), 'Income and Wealth Concentration in Spain in a Historical and Fiscal Perspective', ch.10 in Atkinson & Piketty (eds.), Top Incomes: A Global Perspective, OUP (shorter version: JEEA 7(5), 2009)",
+    "source_url": "https://wid.world/www-site/uploads/2016/06/Alvaredo_Saez_Chapter10_2010.pdf",
+    "locator": "Table 10A.1 (p.514), 1957-1965",
+    "confidence": "high",
+    "note": "Top bracket over 6,000,000 pts."
+   },
+   {
+    "from_year": 1966,
+    "value_pct": 61.4,
+    "label": "Impuesto General sobre la Renta de las Personas Físicas (Ley 11-6-1964, Decreto 27-11-1967)",
+    "source": "Alvaredo & Saez (2010), 'Income and Wealth Concentration in Spain in a Historical and Fiscal Perspective', ch.10 in Atkinson & Piketty (eds.), Top Incomes: A Global Perspective, OUP (shorter version: JEEA 7(5), 2009)",
+    "source_url": "https://wid.world/www-site/uploads/2016/06/Alvaredo_Saez_Chapter10_2010.pdf",
+    "locator": "Table 10A.1 (p.514), 1966-1973; text p.510",
+    "confidence": "high",
+    "note": "A&S: rates 15%-61.4% with an 'average maximum rate' (cap) of 50%."
+   },
+   {
+    "from_year": 1974,
+    "value_pct": 56.12,
+    "label": "IGRPF after Decretos-ley 12/1973 and 13/1975",
+    "source": "Alvaredo & Saez (2010), 'Income and Wealth Concentration in Spain in a Historical and Fiscal Perspective', ch.10 in Atkinson & Piketty (eds.), Top Incomes: A Global Perspective, OUP (shorter version: JEEA 7(5), 2009)",
+    "source_url": "https://wid.world/www-site/uploads/2016/06/Alvaredo_Saez_Chapter10_2010.pdf",
+    "locator": "text p.510 (no table row)",
+    "confidence": "medium",
+    "note": "A&S state the top marginal rate was 'reduced to 56.12 per cent' after the 1973 and 1975 decree-laws, with an average-rate cap of 40%, but give no year-by-year table; the exact first year (1974 vs 1976) is not pinned down."
+   },
+   {
+    "from_year": 1979,
+    "value_pct": 65.51,
+    "label": "IRPF, Ley 44/1978 (BOE-A-1978-23326)",
+    "source": "Ley 44/1978, de 8 de septiembre, del IRPF",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1978-23326",
+    "locator": "art. 28.Uno (scale, 'En adelante 65,51'); art. 28.Dos",
+    "confidence": "high",
+    "note": "Cuota capped at 40% of the tax base (55% jointly with wealth tax). No scale change found for 1980 in BOE amendment list, so 1979-1980."
+   },
+   {
+    "from_year": 1981,
+    "value_pct": 65.09,
+    "label": "IRPF scale for 1981, Ley 74/1980 PGE 1981",
+    "source": "Ley 74/1980, de 29 de diciembre (PGE 1981)",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1980-27973",
+    "locator": "art. 32 (scale, top 'En adelante 65,09')",
+    "confidence": "high",
+    "note": "Matches A&S Table 10C.2 col. 9 (1981)."
+   },
+   {
+    "from_year": 1982,
+    "value_pct": 68.47,
+    "label": "IRPF scale for 1982, Ley 44/1981 PGE 1982",
+    "source": "Ley 44/1981, de 26 de diciembre (PGE 1982)",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1981-29991",
+    "locator": "art. 29.Uno (top 68,47); art. 29.Dos (average-rate cap raised from 40% to 42%)",
+    "confidence": "high",
+    "note": "Matches A&S Table 10C.2 col. 9 (1982)."
+   },
+   {
+    "from_year": 1983,
+    "value_pct": 65.0,
+    "label": "IRPF scale for 1983, Ley 9/1983",
+    "source": "Ley 9/1983, de 13 de julio (PGE 1983)",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1983-19653",
+    "locator": "art. 26 (top 65,00; average-rate cap 45%)",
+    "confidence": "high"
+   },
+   {
+    "from_year": 1984,
+    "value_pct": 66.0,
+    "label": "IRPF scale 1984-1987, Ley 44/1983 PGE 1984",
+    "source": "Ley 44/1983, de 28 de diciembre (PGE 1984)",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1983-34167",
+    "locator": "art. 27 (top 66,00; cap 46% of base, 70% with wealth tax)",
+    "confidence": "high",
+    "note": "Same 66% top confirmed for 1987 in Ley 33/1987 art. 88.Uno; A&S Table 10C.2 col. 9 gives 66 for 1984-1987."
+   },
+   {
+    "from_year": 1988,
+    "value_pct": 56.0,
+    "label": "IRPF scale for 1988, Ley 33/1987 PGE 1988",
+    "source": "Ley 33/1987, de 23 de diciembre (PGE 1988)",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1987-28404",
+    "locator": "art. 88.Dos (top 'en adelante 56,00')",
+    "confidence": "high",
+    "note": "46% average-rate cap eliminated (only the 70% joint cap with wealth tax remains). A&S Table 10C.2 col. 9: 56 for 1988-1998."
+   },
+   {
+    "from_year": 1992,
+    "value_pct": 56.0,
+    "label": "IRPF Ley 18/1991, scale raised by RDL 5/1992",
+    "source": "Real Decreto-ley 5/1992, de 21 de julio (art. 2)",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1992-17364",
+    "locator": "art. 2 (modifies art. 74 Ley 18/1991; top 56,00)",
+    "confidence": "high",
+    "note": "Ley 18/1991 (BOE-A-1991-14391, art. 74) originally set 53%; RDL 5/1992 raised it to 56% for periods ending in 1992. 56% reconfirmed in Ley 41/1994 (BOE-A-1994-28967)."
+   },
+   {
+    "from_year": 1999,
+    "value_pct": 48.0,
+    "label": "IRPF Ley 40/1998: state 39.6 + autonómica/complementaria 8.4",
+    "source": "Ley 40/1998, de 9 de diciembre, del IRPF",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1998-28472",
+    "locator": "art. 50 (state scale top 39,60) + art. 61 (escala autonómica o complementaria top 8,40)",
+    "confidence": "high",
+    "note": "Combined state + complementary scale (regions could alter their part only within limits). Matches A&S Table 10C.2 col. 9 (48 for 1999-2002)."
+   },
+   {
+    "from_year": 2003,
+    "value_pct": 45.0,
+    "label": "IRPF Ley 46/2002: state 29.16 + complementaria 15.84",
+    "source": "Ley 46/2002, de 18 de diciembre",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2002-24711",
+    "locator": "art. 26 (new art. 50 Ley 40/1998, top 29,16) + new art. 61 (top 15,84)",
+    "confidence": "high",
+    "note": "Matches A&S Table 10C.2 col. 9 (45 for 2003-2005)."
+   },
+   {
+    "from_year": 2007,
+    "value_pct": 43.0,
+    "label": "IRPF Ley 35/2006: state 27.13 + complementaria 15.87",
+    "source": "Ley 35/2006, de 28 de noviembre, del IRPF",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2006-20764",
+    "locator": "art. 63 (top 27,13) + art. 74 (escala autonómica o complementaria, top 15,87)",
+    "confidence": "high",
+    "note": "Same 27.13 + 15.87 kept for 2010 by Ley 26/2009 art. 68 (BOE-A-2009-20765); Ley 22/2009 DT 15ª default regional scale for 2010 also tops at 21.5 on a 21.5 state scale = 43."
+   },
+   {
+    "from_year": 2011,
+    "value_pct": 45.0,
+    "label": "IRPF: state 23.5 (Ley 39/2010) + regional reference 21.5",
+    "source": "Ley 39/2010, de 22 de diciembre (PGE 2011)",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2010-19703",
+    "locator": "art. 62.Uno (art. 63 LIRPF: 22,5 above 120,000.20 EUR, 23,5 above 175,000.20 EUR)",
+    "confidence": "medium",
+    "note": "From 2011 each region legislates its own scale (art. 74 LIRPF as amended; no legal default). Combined value uses the 21.5% top of the Ley 22/2009 (BOE-A-2009-20375) reference regional scale; actual combined top varied by region (e.g. higher in Cataluña/Andalucía). State component is high confidence."
+   },
+   {
+    "from_year": 2012,
+    "value_pct": 52.0,
+    "label": "IRPF + gravamen complementario 2012-2014 (+7 points above 300,000 EUR)",
+    "source": "Real Decreto-ley 20/2011, de 30 de diciembre",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2011-20638",
+    "locator": "disposición final segunda, apartado Primero (adds DA 35ª LIRPF: complementary scale, top +7 above 300,000.20 EUR; also +7 on the withholding scale)",
+    "confidence": "medium",
+    "note": "State 23.5 + 7 = 30.5, plus regional reference 21.5 = 52. Extended to 2014 by later law (not re-checked). Same regional-reference caveat as 2011."
+   },
+   {
+    "from_year": 2015,
+    "value_pct": 47.0,
+    "label": "IRPF Ley 26/2014: state 23.5 (2015 transitional scale); combined withholding scale top 47",
+    "source": "Ley 26/2014, de 27 de noviembre",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2014-12327",
+    "locator": "DA 31ª LIRPF (2015 scales: state top 23,50; withholding scale top 47,00)",
+    "confidence": "medium",
+    "note": "Convention for 2015+: combined top = top of the legal withholding scale (state + reference regional half). Many secondary sources quote 46% for 2015 (23.5 + 22.5 typical regional). Regional tops varied."
+   },
+   {
+    "from_year": 2016,
+    "value_pct": 45.0,
+    "label": "IRPF Ley 26/2014: state 22.5 (>60,000 EUR) + reference regional 22.5",
+    "source": "Ley 26/2014, de 27 de noviembre",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2014-12327",
+    "locator": "art. 1 (art. 63.1 LIRPF top 22,50; art. 101 withholding scale top 45,00)",
+    "confidence": "medium",
+    "note": "State component high confidence; combined uses withholding-scale convention."
+   },
+   {
+    "from_year": 2021,
+    "value_pct": 47.0,
+    "label": "IRPF: new state bracket 24.5 above 300,000 EUR + reference regional 22.5",
+    "source": "Ley 11/2020, de 30 de diciembre (PGE 2021)",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2020-17339",
+    "locator": "art. 58 (art. 63.1 LIRPF top 24,50 above 300,000 EUR); withholding scale top 47,00",
+    "confidence": "medium",
+    "note": "Still in force 2026 (consolidated art. 63 checked). Actual 2025 combined range across common-regime regions: 45% (Madrid, regional top 20.5) to 54% (C. Valenciana, regional top 29.5); Hacienda, Tributación Autonómica. Medidas 2025, cap. I, pp.4-5: https://www.hacienda.gob.es/sgfal/financiacionterritorial/autonomica/capitulo-i-tributacion-autonomica-2025.pdf . País Vasco/Navarra (foral) excluded throughout.",
+    "state_top_pct": 24.5
+   }
+  ],
+  "cit_general_rate": [
+   {
+    "from_year": 1967,
+    "value_pct": 30.0,
+    "label": "Impuesto General sobre la Renta de Sociedades (TR Decreto 3359/1967)",
+    "source": "Decreto 3359/1967, de 23 de diciembre, texto refundido Ley IGRS, BOE 18-3-1968",
+    "source_url": "https://www.boe.es/boe/dias/1968/03/18/pdfs/A04047-04058.pdf",
+    "locator": "art. 51 (BOE p.4054)",
+    "confidence": "high",
+    "note": "General rate 30%; 25% for sociedades colectivas/comanditarias, 16% for savings banks. Probably the same rate since the 1964 reform (Ley 41/1964), not verified. A separate 'Gravamen Especial del 4 por 100' on sociedades anónimas is referenced in the same text (not added)."
+   },
+   {
+    "from_year": 1979,
+    "value_pct": 33.0,
+    "label": "Impuesto sobre Sociedades, Ley 61/1978",
+    "source": "Ley 61/1978, de 27 de diciembre, del Impuesto sobre Sociedades",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1978-31230",
+    "locator": "art. 23.Uno ('el tipo del treinta y tres por ciento')",
+    "confidence": "high",
+    "note": "Art. 23 first amended by Ley 44/1983 per BOE amendment list, so 33% for 1979-1983."
+   },
+   {
+    "from_year": 1984,
+    "value_pct": 35.0,
+    "label": "IS general rate raised to 35%",
+    "source": "Ley 44/1983, de 28 de diciembre (PGE 1984)",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1983-34167",
+    "locator": "art. 30.a ('Con carácter general, el 35 por 100')",
+    "confidence": "high",
+    "note": "35% reconfirmed e.g. Ley 31/1991 art. 70 and Ley 41/1994 art. 72."
+   },
+   {
+    "from_year": 1996,
+    "value_pct": 35.0,
+    "label": "IS Ley 43/1995 (new law, same rate)",
+    "source": "Ley 43/1995, de 27 de diciembre, del Impuesto sobre Sociedades",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1995-27752",
+    "locator": "art. 26.1",
+    "confidence": "high",
+    "note": "Continuity point; also TRLIS RDLeg 4/2004 art. 28.1 (35%)."
+   },
+   {
+    "from_year": 2007,
+    "value_pct": 32.5,
+    "label": "IS rate cut, step 1",
+    "source": "Ley 35/2006, de 28 de noviembre",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2006-20764",
+    "locator": "DF 2ª.11 (adds DA 8ª TRLIS: 32.5% for periods from 1-1-2007)",
+    "confidence": "high"
+   },
+   {
+    "from_year": 2008,
+    "value_pct": 30.0,
+    "label": "IS rate cut, step 2",
+    "source": "Ley 35/2006, de 28 de noviembre",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2006-20764",
+    "locator": "DF 2ª.11 (DA 8ª TRLIS: 30% for periods from 1-1-2008)",
+    "confidence": "high"
+   },
+   {
+    "from_year": 2015,
+    "value_pct": 28.0,
+    "label": "IS Ley 27/2014, transitional 2015 rate",
+    "source": "Ley 27/2014, de 27 de noviembre, del Impuesto sobre Sociedades",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2014-12328",
+    "locator": "DT 34ª.i (general rate 28% for periods starting in 2015)",
+    "confidence": "high"
+   },
+   {
+    "from_year": 2016,
+    "value_pct": 25.0,
+    "label": "IS Ley 27/2014 general rate",
+    "source": "Ley 27/2014, de 27 de noviembre, del Impuesto sobre Sociedades",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2014-12328",
+    "locator": "art. 29.1",
+    "confidence": "high",
+    "note": "Still the general rate in 2026; reduced rates for small/micro firms (2023+) are not the general rate."
+   }
+  ],
+  "ssc_general_rate_employer": [
+   {
+    "from_year": 1978,
+    "value_pct": 31.5,
+    "label": "Régimen General (bases tarifadas)",
+    "source": "Real Decreto 95/1978, de 25 de enero",
+    "source_url": "https://www.boe.es/boe/dias/1978/01/26/pdfs/A01947-01948.pdf",
+    "locator": "art. 2.Uno a)-b), BOE 26-1-1978 p.1947",
+    "confidence": "medium",
+    "note": "Old system: single rate 34.3% (29.15 employer / 5.15 employee) on 'base tarifada' + complementary base for all contingencies except unemployment and AT/EP, plus unemployment 2.70 (2.35/0.35) on a different base. Bases not comparable with post-1980s capped real-wage bases. FOGASA/FP not listed. Same rates in 1979 (RD 82/1979, BOE-A-1979-2187, art. 3). Régimen General, indefinite contract, % of capped contribution base; sum of common contingencies + unemployment + FOGASA + vocational training (+MEI from 2023). Excludes AT/EP (occupational risk premiums, employer-only, by activity)."
+   },
+   {
+    "from_year": 1983,
+    "value_pct": 31.8,
+    "label": "Régimen General, tipo general (contrato indefinido)",
+    "source": "Real Decreto 92/1983, de 19 de enero",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1983-2330",
+    "locator": "art. 1-2 (CC 25.8/4.8; desempleo 4.8/1.0; FOGASA 0.8; FP 0.4/0.1); PDF https://www.boe.es/boe/dias/1983/01/22/pdfs/A01672-01675.pdf",
+    "confidence": "medium",
+    "note": "Components summed. The decree/order print the CC total as 30.8 / 30.0 while components sum to 30.6 (OCR/print inconsistency); components used. 1980-1982 not found (gap). Régimen General, indefinite contract, % of capped contribution base; sum of common contingencies + unemployment + FOGASA + vocational training (+MEI from 2023). Excludes AT/EP (occupational risk premiums, employer-only, by activity)."
+   },
+   {
+    "from_year": 1984,
+    "value_pct": 30.7,
+    "label": "Régimen General, tipo general (contrato indefinido)",
+    "source": "Real Decreto 46/1984, de 4 de enero",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1984-613",
+    "locator": "art. 2-3 (CC 24.3/4.8; desempleo 5.2/1.1; FOGASA 0.8; FP 0.4/0.1)",
+    "confidence": "high",
+    "note": "Régimen General, indefinite contract, % of capped contribution base; sum of common contingencies + unemployment + FOGASA + vocational training (+MEI from 2023). Excludes AT/EP (occupational risk premiums, employer-only, by activity)."
+   },
+   {
+    "from_year": 1985,
+    "value_pct": 30.42,
+    "label": "Régimen General, tipo general (contrato indefinido)",
+    "source": "Orden de 15 de enero de 1985 (desarrolla RD 1/1985)",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1985-1607",
+    "locator": "CC 24/4.8; desempleo 5.2/1.1; FOGASA 1.1; FP 0.12/0.10; art. 32 Fondo de Solidaridad para el Empleo 0.28/0.28",
+    "confidence": "medium",
+    "note": "Excludes the 1985-only Fondo de Solidaridad para el Empleo (0.28 employer / 0.28 employee, same base as FP); including it gives 30.70 / 6.28. CC total printed as 28.6 vs components 28.8. Régimen General, indefinite contract, % of capped contribution base; sum of common contingencies + unemployment + FOGASA + vocational training (+MEI from 2023). Excludes AT/EP (occupational risk premiums, employer-only, by activity)."
+   },
+   {
+    "from_year": 1986,
+    "value_pct": 30.9,
+    "label": "Régimen General, tipo general (contrato indefinido)",
+    "source": "Orden de 28 de enero de 1986 (RD 2475/1985); RD 41/1987",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1986-2687",
+    "locator": "CC 24/4.8; desempleo 5.2/1.1; FOGASA 1.1; FP 0.6/0.1",
+    "confidence": "high",
+    "note": "Same rates in 1987 (RD 41/1987, BOE-A-1987-1092). Régimen General, indefinite contract, % of capped contribution base; sum of common contingencies + unemployment + FOGASA + vocational training (+MEI from 2023). Excludes AT/EP (occupational risk premiums, employer-only, by activity)."
+   },
+   {
+    "from_year": 1988,
+    "value_pct": 30.6,
+    "label": "Régimen General, tipo general (contrato indefinido)",
+    "source": "Orden de 27 de enero de 1988",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1988-2409",
+    "locator": "CC 24/4.8; desempleo 5.2/1.1; FOGASA 0.8; FP 0.6/0.1",
+    "confidence": "high",
+    "note": "Régimen General, indefinite contract, % of capped contribution base; sum of common contingencies + unemployment + FOGASA + vocational training (+MEI from 2023). Excludes AT/EP (occupational risk premiums, employer-only, by activity)."
+   },
+   {
+    "from_year": 1989,
+    "value_pct": 30.3,
+    "label": "Régimen General, tipo general (contrato indefinido)",
+    "source": "Real Decreto 24/1989, de 13 de enero",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1989-1103",
+    "locator": "CC 24/4.8; desempleo 5.2/1.1; FOGASA 0.5; FP 0.6/0.1",
+    "confidence": "high",
+    "note": "Régimen General, indefinite contract, % of capped contribution base; sum of common contingencies + unemployment + FOGASA + vocational training (+MEI from 2023). Excludes AT/EP (occupational risk premiums, employer-only, by activity)."
+   },
+   {
+    "from_year": 1990,
+    "value_pct": 30.2,
+    "label": "Régimen General, tipo general (contrato indefinido)",
+    "source": "Real Decreto 234/1990; Real Decreto 9/1991",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1990-4868",
+    "locator": "CC 24/4.8; desempleo 5.2/1.1; FOGASA 0.4; FP 0.6/0.1",
+    "confidence": "high",
+    "note": "Same in 1991 (BOE-A-1991-1060). Régimen General, indefinite contract, % of capped contribution base; sum of common contingencies + unemployment + FOGASA + vocational training (+MEI from 2023). Excludes AT/EP (occupational risk premiums, employer-only, by activity)."
+   },
+   {
+    "from_year": 1992,
+    "value_pct": 31.2,
+    "label": "Régimen General, tipo general (contrato indefinido)",
+    "source": "Orden de 16 de enero de 1992",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1992-1212",
+    "locator": "CC 24/4.8; desempleo 6.2/1.1; FOGASA 0.4; FP 0.6/0.1",
+    "confidence": "high",
+    "note": "Régimen General, indefinite contract, % of capped contribution base; sum of common contingencies + unemployment + FOGASA + vocational training (+MEI from 2023). Excludes AT/EP (occupational risk premiums, employer-only, by activity)."
+   },
+   {
+    "from_year": 1993,
+    "value_pct": 31.6,
+    "label": "Régimen General, tipo general (contrato indefinido)",
+    "source": "Orden de 18 de enero de 1993",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1993-1381",
+    "locator": "CC 24.4/4.9; desempleo 6.2/1.1; FOGASA 0.4; FP 0.6/0.1",
+    "confidence": "high",
+    "note": "Régimen General, indefinite contract, % of capped contribution base; sum of common contingencies + unemployment + FOGASA + vocational training (+MEI from 2023). Excludes AT/EP (occupational risk premiums, employer-only, by activity)."
+   },
+   {
+    "from_year": 1994,
+    "value_pct": 31.6,
+    "label": "Régimen General, tipo general (contrato indefinido)",
+    "source": "Orden de 19 de enero de 1994",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1994-1413",
+    "locator": "CC 24.4/4.9; desempleo 6.2/1.6; FOGASA 0.4; FP 0.6/0.1",
+    "confidence": "high",
+    "note": "Régimen General, indefinite contract, % of capped contribution base; sum of common contingencies + unemployment + FOGASA + vocational training (+MEI from 2023). Excludes AT/EP (occupational risk premiums, employer-only, by activity)."
+   },
+   {
+    "from_year": 1995,
+    "value_pct": 30.8,
+    "label": "Régimen General, tipo general (contrato indefinido)",
+    "source": "Orden de 18 de enero de 1995",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1995-1739",
+    "locator": "CC 23.6/4.7; desempleo 6.2/1.6; FOGASA 0.4; FP 0.6/0.1",
+    "confidence": "high",
+    "note": "Same in 1997-1999 orders (BOE-A-1997-1701, BOE-A-1998-1806, BOE-A-1999-1132); 1996 order text not machine-readable, assumed unchanged. Régimen General, indefinite contract, % of capped contribution base; sum of common contingencies + unemployment + FOGASA + vocational training (+MEI from 2023). Excludes AT/EP (occupational risk premiums, employer-only, by activity)."
+   },
+   {
+    "from_year": 2000,
+    "value_pct": 30.6,
+    "label": "Régimen General, tipo general (contrato indefinido)",
+    "source": "Orden de 28 de enero de 2000",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2000-1799",
+    "locator": "CC 23.6/4.7; desempleo (contratación indefinida) 6.0/1.55; FOGASA 0.4; FP 0.6/0.1",
+    "confidence": "high",
+    "note": "Same through the 2006 order (BOE-A-2006-842). Temporary contracts pay higher unemployment rates (e.g. 6.7/1.6). Régimen General, indefinite contract, % of capped contribution base; sum of common contingencies + unemployment + FOGASA + vocational training (+MEI from 2023). Excludes AT/EP (occupational risk premiums, employer-only, by activity)."
+   },
+   {
+    "from_year": 2007,
+    "value_pct": 30.15,
+    "label": "Régimen General, tipo general (contrato indefinido)",
+    "source": "Orden TAS/31/2007, de 16 de enero",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2007-1113",
+    "locator": "CC 23.6/4.7; desempleo indefinido 5.75/1.55; FOGASA 0.2; FP 0.6/0.1",
+    "confidence": "high",
+    "note": "Unemployment cut 0.25 pts reportedly from 1-7-2006 (Ley 43/2006 reform; mid-2006 date not verified in BOE here). FOGASA 0.4 -> 0.2. Régimen General, indefinite contract, % of capped contribution base; sum of common contingencies + unemployment + FOGASA + vocational training (+MEI from 2023). Excludes AT/EP (occupational risk premiums, employer-only, by activity)."
+   },
+   {
+    "from_year": 2008,
+    "value_pct": 29.9,
+    "label": "Régimen General, tipo general (contrato indefinido)",
+    "source": "Orden TAS/76/2008, de 22 de enero",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2008-1466",
+    "locator": "art. 32.2.1.1: desempleo indefinido 7.30 (5.75/1.55) until 30-6-2008, then 7.05 (5.50/1.55) from 1-7-2008",
+    "confidence": "high",
+    "note": "From 1-7-2008 (Jan-Jun 2008: 30.15/6.35). Unchanged 2009-2022 (checked 2009, 2010, 2012, 2019, 2022 orders). Régimen General, indefinite contract, % of capped contribution base; sum of common contingencies + unemployment + FOGASA + vocational training (+MEI from 2023). Excludes AT/EP (occupational risk premiums, employer-only, by activity)."
+   },
+   {
+    "from_year": 2023,
+    "value_pct": 30.4,
+    "label": "Régimen General, tipo general (contrato indefinido)",
+    "source": "Orden PCM/74/2023; RDL 2/2023 (MEI)",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2023-2472",
+    "locator": "CC 23.6/4.7; desempleo 5.5/1.55; FOGASA 0.2; FP 0.6/0.1; MEI 0.5/0.1",
+    "confidence": "high",
+    "note": "MEI per LGSS DT 43ª as worded by RDL 2/2023 (BOE-A-2023-6967). Régimen General, indefinite contract, % of capped contribution base; sum of common contingencies + unemployment + FOGASA + vocational training (+MEI from 2023). Excludes AT/EP (occupational risk premiums, employer-only, by activity)."
+   },
+   {
+    "from_year": 2024,
+    "value_pct": 30.48,
+    "label": "Régimen General, tipo general (contrato indefinido)",
+    "source": "Orden PJC/51/2024",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2024-1691",
+    "locator": "as 2023 + MEI 0.58/0.12",
+    "confidence": "high",
+    "note": "Régimen General, indefinite contract, % of capped contribution base; sum of common contingencies + unemployment + FOGASA + vocational training (+MEI from 2023). Excludes AT/EP (occupational risk premiums, employer-only, by activity)."
+   },
+   {
+    "from_year": 2025,
+    "value_pct": 30.57,
+    "label": "Régimen General, tipo general (contrato indefinido)",
+    "source": "Orden PJC/178/2025",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2025-3780",
+    "locator": "as 2023 + MEI 0.67/0.13",
+    "confidence": "high",
+    "note": "Régimen General, indefinite contract, % of capped contribution base; sum of common contingencies + unemployment + FOGASA + vocational training (+MEI from 2023). Excludes AT/EP (occupational risk premiums, employer-only, by activity)."
+   },
+   {
+    "from_year": 2026,
+    "value_pct": 30.65,
+    "label": "Régimen General, tipo general (contrato indefinido)",
+    "source": "Orden PJC/297/2026, de 30 de marzo",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2026-7296",
+    "locator": "CC 23.60/4.70; desempleo fijo 5.50/1.55; FOGASA 0.20; FP 0.60/0.10; MEI 0.75/0.15",
+    "confidence": "high",
+    "note": "Régimen General, indefinite contract, % of capped contribution base; sum of common contingencies + unemployment + FOGASA + vocational training (+MEI from 2023). Excludes AT/EP (occupational risk premiums, employer-only, by activity)."
+   },
+   {
+    "from_year": 2027,
+    "value_pct": 30.73,
+    "label": "Régimen General, tipo general (contrato indefinido)",
+    "source": "Real Decreto-ley 2/2023, de 16 de marzo (scheduled MEI)",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2023-6967",
+    "locator": "LGSS DT 43ª: MEI 2027 0.83/0.17",
+    "confidence": "medium",
+    "note": "Scheduled: assumes other rates unchanged (not yet set by an annual order). Régimen General, indefinite contract, % of capped contribution base; sum of common contingencies + unemployment + FOGASA + vocational training (+MEI from 2023). Excludes AT/EP (occupational risk premiums, employer-only, by activity)."
+   },
+   {
+    "from_year": 2028,
+    "value_pct": 30.82,
+    "label": "Régimen General, tipo general (contrato indefinido)",
+    "source": "Real Decreto-ley 2/2023 (scheduled MEI)",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2023-6967",
+    "locator": "LGSS DT 43ª: MEI 2028 0.92/0.18",
+    "confidence": "medium",
+    "note": "Scheduled; same assumption. Régimen General, indefinite contract, % of capped contribution base; sum of common contingencies + unemployment + FOGASA + vocational training (+MEI from 2023). Excludes AT/EP (occupational risk premiums, employer-only, by activity)."
+   },
+   {
+    "from_year": 2029,
+    "value_pct": 30.9,
+    "label": "Régimen General, tipo general (contrato indefinido)",
+    "source": "Real Decreto-ley 2/2023 (scheduled MEI)",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2023-6967",
+    "locator": "LGSS DT 43ª: MEI 2029 1.00/0.20 (kept to 2050)",
+    "confidence": "medium",
+    "note": "Scheduled; same assumption. Régimen General, indefinite contract, % of capped contribution base; sum of common contingencies + unemployment + FOGASA + vocational training (+MEI from 2023). Excludes AT/EP (occupational risk premiums, employer-only, by activity)."
+   }
+  ],
+  "ssc_general_rate_employee": [
+   {
+    "from_year": 1978,
+    "value_pct": 5.5,
+    "label": "Régimen General (bases tarifadas)",
+    "source": "Real Decreto 95/1978, de 25 de enero",
+    "source_url": "https://www.boe.es/boe/dias/1978/01/26/pdfs/A01947-01948.pdf",
+    "locator": "art. 2.Uno a)-b), BOE 26-1-1978 p.1947",
+    "confidence": "medium",
+    "note": "Old system: single rate 34.3% (29.15 employer / 5.15 employee) on 'base tarifada' + complementary base for all contingencies except unemployment and AT/EP, plus unemployment 2.70 (2.35/0.35) on a different base. Bases not comparable with post-1980s capped real-wage bases. FOGASA/FP not listed. Same rates in 1979 (RD 82/1979, BOE-A-1979-2187, art. 3). Régimen General, indefinite contract, % of capped contribution base; sum of common contingencies + unemployment + FOGASA + vocational training (+MEI from 2023). Excludes AT/EP (occupational risk premiums, employer-only, by activity)."
+   },
+   {
+    "from_year": 1983,
+    "value_pct": 5.9,
+    "label": "Régimen General, tipo general (contrato indefinido)",
+    "source": "Real Decreto 92/1983, de 19 de enero",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1983-2330",
+    "locator": "art. 1-2 (CC 25.8/4.8; desempleo 4.8/1.0; FOGASA 0.8; FP 0.4/0.1); PDF https://www.boe.es/boe/dias/1983/01/22/pdfs/A01672-01675.pdf",
+    "confidence": "medium",
+    "note": "Components summed. The decree/order print the CC total as 30.8 / 30.0 while components sum to 30.6 (OCR/print inconsistency); components used. 1980-1982 not found (gap). Régimen General, indefinite contract, % of capped contribution base; sum of common contingencies + unemployment + FOGASA + vocational training (+MEI from 2023). Excludes AT/EP (occupational risk premiums, employer-only, by activity)."
+   },
+   {
+    "from_year": 1984,
+    "value_pct": 6.0,
+    "label": "Régimen General, tipo general (contrato indefinido)",
+    "source": "Real Decreto 46/1984, de 4 de enero",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1984-613",
+    "locator": "art. 2-3 (CC 24.3/4.8; desempleo 5.2/1.1; FOGASA 0.8; FP 0.4/0.1)",
+    "confidence": "high",
+    "note": "Régimen General, indefinite contract, % of capped contribution base; sum of common contingencies + unemployment + FOGASA + vocational training (+MEI from 2023). Excludes AT/EP (occupational risk premiums, employer-only, by activity)."
+   },
+   {
+    "from_year": 1985,
+    "value_pct": 6.0,
+    "label": "Régimen General, tipo general (contrato indefinido)",
+    "source": "Orden de 15 de enero de 1985 (desarrolla RD 1/1985)",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1985-1607",
+    "locator": "CC 24/4.8; desempleo 5.2/1.1; FOGASA 1.1; FP 0.12/0.10; art. 32 Fondo de Solidaridad para el Empleo 0.28/0.28",
+    "confidence": "medium",
+    "note": "Excludes the 1985-only Fondo de Solidaridad para el Empleo (0.28 employer / 0.28 employee, same base as FP); including it gives 30.70 / 6.28. CC total printed as 28.6 vs components 28.8. Régimen General, indefinite contract, % of capped contribution base; sum of common contingencies + unemployment + FOGASA + vocational training (+MEI from 2023). Excludes AT/EP (occupational risk premiums, employer-only, by activity)."
+   },
+   {
+    "from_year": 1986,
+    "value_pct": 6.0,
+    "label": "Régimen General, tipo general (contrato indefinido)",
+    "source": "Orden de 28 de enero de 1986 (RD 2475/1985); RD 41/1987",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1986-2687",
+    "locator": "CC 24/4.8; desempleo 5.2/1.1; FOGASA 1.1; FP 0.6/0.1",
+    "confidence": "high",
+    "note": "Same rates in 1987 (RD 41/1987, BOE-A-1987-1092). Régimen General, indefinite contract, % of capped contribution base; sum of common contingencies + unemployment + FOGASA + vocational training (+MEI from 2023). Excludes AT/EP (occupational risk premiums, employer-only, by activity)."
+   },
+   {
+    "from_year": 1988,
+    "value_pct": 6.0,
+    "label": "Régimen General, tipo general (contrato indefinido)",
+    "source": "Orden de 27 de enero de 1988",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1988-2409",
+    "locator": "CC 24/4.8; desempleo 5.2/1.1; FOGASA 0.8; FP 0.6/0.1",
+    "confidence": "high",
+    "note": "Régimen General, indefinite contract, % of capped contribution base; sum of common contingencies + unemployment + FOGASA + vocational training (+MEI from 2023). Excludes AT/EP (occupational risk premiums, employer-only, by activity)."
+   },
+   {
+    "from_year": 1989,
+    "value_pct": 6.0,
+    "label": "Régimen General, tipo general (contrato indefinido)",
+    "source": "Real Decreto 24/1989, de 13 de enero",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1989-1103",
+    "locator": "CC 24/4.8; desempleo 5.2/1.1; FOGASA 0.5; FP 0.6/0.1",
+    "confidence": "high",
+    "note": "Régimen General, indefinite contract, % of capped contribution base; sum of common contingencies + unemployment + FOGASA + vocational training (+MEI from 2023). Excludes AT/EP (occupational risk premiums, employer-only, by activity)."
+   },
+   {
+    "from_year": 1990,
+    "value_pct": 6.0,
+    "label": "Régimen General, tipo general (contrato indefinido)",
+    "source": "Real Decreto 234/1990; Real Decreto 9/1991",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1990-4868",
+    "locator": "CC 24/4.8; desempleo 5.2/1.1; FOGASA 0.4; FP 0.6/0.1",
+    "confidence": "high",
+    "note": "Same in 1991 (BOE-A-1991-1060). Régimen General, indefinite contract, % of capped contribution base; sum of common contingencies + unemployment + FOGASA + vocational training (+MEI from 2023). Excludes AT/EP (occupational risk premiums, employer-only, by activity)."
+   },
+   {
+    "from_year": 1992,
+    "value_pct": 6.0,
+    "label": "Régimen General, tipo general (contrato indefinido)",
+    "source": "Orden de 16 de enero de 1992",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1992-1212",
+    "locator": "CC 24/4.8; desempleo 6.2/1.1; FOGASA 0.4; FP 0.6/0.1",
+    "confidence": "high",
+    "note": "Régimen General, indefinite contract, % of capped contribution base; sum of common contingencies + unemployment + FOGASA + vocational training (+MEI from 2023). Excludes AT/EP (occupational risk premiums, employer-only, by activity)."
+   },
+   {
+    "from_year": 1993,
+    "value_pct": 6.1,
+    "label": "Régimen General, tipo general (contrato indefinido)",
+    "source": "Orden de 18 de enero de 1993",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1993-1381",
+    "locator": "CC 24.4/4.9; desempleo 6.2/1.1; FOGASA 0.4; FP 0.6/0.1",
+    "confidence": "high",
+    "note": "Régimen General, indefinite contract, % of capped contribution base; sum of common contingencies + unemployment + FOGASA + vocational training (+MEI from 2023). Excludes AT/EP (occupational risk premiums, employer-only, by activity)."
+   },
+   {
+    "from_year": 1994,
+    "value_pct": 6.6,
+    "label": "Régimen General, tipo general (contrato indefinido)",
+    "source": "Orden de 19 de enero de 1994",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1994-1413",
+    "locator": "CC 24.4/4.9; desempleo 6.2/1.6; FOGASA 0.4; FP 0.6/0.1",
+    "confidence": "high",
+    "note": "Régimen General, indefinite contract, % of capped contribution base; sum of common contingencies + unemployment + FOGASA + vocational training (+MEI from 2023). Excludes AT/EP (occupational risk premiums, employer-only, by activity)."
+   },
+   {
+    "from_year": 1995,
+    "value_pct": 6.4,
+    "label": "Régimen General, tipo general (contrato indefinido)",
+    "source": "Orden de 18 de enero de 1995",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1995-1739",
+    "locator": "CC 23.6/4.7; desempleo 6.2/1.6; FOGASA 0.4; FP 0.6/0.1",
+    "confidence": "high",
+    "note": "Same in 1997-1999 orders (BOE-A-1997-1701, BOE-A-1998-1806, BOE-A-1999-1132); 1996 order text not machine-readable, assumed unchanged. Régimen General, indefinite contract, % of capped contribution base; sum of common contingencies + unemployment + FOGASA + vocational training (+MEI from 2023). Excludes AT/EP (occupational risk premiums, employer-only, by activity)."
+   },
+   {
+    "from_year": 2000,
+    "value_pct": 6.35,
+    "label": "Régimen General, tipo general (contrato indefinido)",
+    "source": "Orden de 28 de enero de 2000",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2000-1799",
+    "locator": "CC 23.6/4.7; desempleo (contratación indefinida) 6.0/1.55; FOGASA 0.4; FP 0.6/0.1",
+    "confidence": "high",
+    "note": "Same through the 2006 order (BOE-A-2006-842). Temporary contracts pay higher unemployment rates (e.g. 6.7/1.6). Régimen General, indefinite contract, % of capped contribution base; sum of common contingencies + unemployment + FOGASA + vocational training (+MEI from 2023). Excludes AT/EP (occupational risk premiums, employer-only, by activity)."
+   },
+   {
+    "from_year": 2007,
+    "value_pct": 6.35,
+    "label": "Régimen General, tipo general (contrato indefinido)",
+    "source": "Orden TAS/31/2007, de 16 de enero",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2007-1113",
+    "locator": "CC 23.6/4.7; desempleo indefinido 5.75/1.55; FOGASA 0.2; FP 0.6/0.1",
+    "confidence": "high",
+    "note": "Unemployment cut 0.25 pts reportedly from 1-7-2006 (Ley 43/2006 reform; mid-2006 date not verified in BOE here). FOGASA 0.4 -> 0.2. Régimen General, indefinite contract, % of capped contribution base; sum of common contingencies + unemployment + FOGASA + vocational training (+MEI from 2023). Excludes AT/EP (occupational risk premiums, employer-only, by activity)."
+   },
+   {
+    "from_year": 2008,
+    "value_pct": 6.35,
+    "label": "Régimen General, tipo general (contrato indefinido)",
+    "source": "Orden TAS/76/2008, de 22 de enero",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2008-1466",
+    "locator": "art. 32.2.1.1: desempleo indefinido 7.30 (5.75/1.55) until 30-6-2008, then 7.05 (5.50/1.55) from 1-7-2008",
+    "confidence": "high",
+    "note": "From 1-7-2008 (Jan-Jun 2008: 30.15/6.35). Unchanged 2009-2022 (checked 2009, 2010, 2012, 2019, 2022 orders). Régimen General, indefinite contract, % of capped contribution base; sum of common contingencies + unemployment + FOGASA + vocational training (+MEI from 2023). Excludes AT/EP (occupational risk premiums, employer-only, by activity)."
+   },
+   {
+    "from_year": 2023,
+    "value_pct": 6.45,
+    "label": "Régimen General, tipo general (contrato indefinido)",
+    "source": "Orden PCM/74/2023; RDL 2/2023 (MEI)",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2023-2472",
+    "locator": "CC 23.6/4.7; desempleo 5.5/1.55; FOGASA 0.2; FP 0.6/0.1; MEI 0.5/0.1",
+    "confidence": "high",
+    "note": "MEI per LGSS DT 43ª as worded by RDL 2/2023 (BOE-A-2023-6967). Régimen General, indefinite contract, % of capped contribution base; sum of common contingencies + unemployment + FOGASA + vocational training (+MEI from 2023). Excludes AT/EP (occupational risk premiums, employer-only, by activity)."
+   },
+   {
+    "from_year": 2024,
+    "value_pct": 6.47,
+    "label": "Régimen General, tipo general (contrato indefinido)",
+    "source": "Orden PJC/51/2024",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2024-1691",
+    "locator": "as 2023 + MEI 0.58/0.12",
+    "confidence": "high",
+    "note": "Régimen General, indefinite contract, % of capped contribution base; sum of common contingencies + unemployment + FOGASA + vocational training (+MEI from 2023). Excludes AT/EP (occupational risk premiums, employer-only, by activity)."
+   },
+   {
+    "from_year": 2025,
+    "value_pct": 6.48,
+    "label": "Régimen General, tipo general (contrato indefinido)",
+    "source": "Orden PJC/178/2025",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2025-3780",
+    "locator": "as 2023 + MEI 0.67/0.13",
+    "confidence": "high",
+    "note": "Régimen General, indefinite contract, % of capped contribution base; sum of common contingencies + unemployment + FOGASA + vocational training (+MEI from 2023). Excludes AT/EP (occupational risk premiums, employer-only, by activity)."
+   },
+   {
+    "from_year": 2026,
+    "value_pct": 6.5,
+    "label": "Régimen General, tipo general (contrato indefinido)",
+    "source": "Orden PJC/297/2026, de 30 de marzo",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2026-7296",
+    "locator": "CC 23.60/4.70; desempleo fijo 5.50/1.55; FOGASA 0.20; FP 0.60/0.10; MEI 0.75/0.15",
+    "confidence": "high",
+    "note": "Régimen General, indefinite contract, % of capped contribution base; sum of common contingencies + unemployment + FOGASA + vocational training (+MEI from 2023). Excludes AT/EP (occupational risk premiums, employer-only, by activity)."
+   },
+   {
+    "from_year": 2027,
+    "value_pct": 6.52,
+    "label": "Régimen General, tipo general (contrato indefinido)",
+    "source": "Real Decreto-ley 2/2023, de 16 de marzo (scheduled MEI)",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2023-6967",
+    "locator": "LGSS DT 43ª: MEI 2027 0.83/0.17",
+    "confidence": "medium",
+    "note": "Scheduled: assumes other rates unchanged (not yet set by an annual order). Régimen General, indefinite contract, % of capped contribution base; sum of common contingencies + unemployment + FOGASA + vocational training (+MEI from 2023). Excludes AT/EP (occupational risk premiums, employer-only, by activity)."
+   },
+   {
+    "from_year": 2028,
+    "value_pct": 6.53,
+    "label": "Régimen General, tipo general (contrato indefinido)",
+    "source": "Real Decreto-ley 2/2023 (scheduled MEI)",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2023-6967",
+    "locator": "LGSS DT 43ª: MEI 2028 0.92/0.18",
+    "confidence": "medium",
+    "note": "Scheduled; same assumption. Régimen General, indefinite contract, % of capped contribution base; sum of common contingencies + unemployment + FOGASA + vocational training (+MEI from 2023). Excludes AT/EP (occupational risk premiums, employer-only, by activity)."
+   },
+   {
+    "from_year": 2029,
+    "value_pct": 6.55,
+    "label": "Régimen General, tipo general (contrato indefinido)",
+    "source": "Real Decreto-ley 2/2023 (scheduled MEI)",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2023-6967",
+    "locator": "LGSS DT 43ª: MEI 2029 1.00/0.20 (kept to 2050)",
+    "confidence": "medium",
+    "note": "Scheduled; same assumption. Régimen General, indefinite contract, % of capped contribution base; sum of common contingencies + unemployment + FOGASA + vocational training (+MEI from 2023). Excludes AT/EP (occupational risk premiums, employer-only, by activity)."
+   }
+  ],
+  "vat_standard_rate": [
+   {
+    "from_year": 1964,
+    "value_pct": 1.5,
+    "label": "ITE (Impuesto General sobre el Tráfico de las Empresas), tipo general",
+    "source": "Decreto 3314/1966, de 29 de diciembre, texto refundido ITE (tax created by Ley 41/1964, de 11 de junio)",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1967-2011",
+    "locator": "art. 13 ('al tipo del 1,5 por 100')",
+    "confidence": "medium",
+    "note": "Cascade turnover tax, not comparable with VAT. 1.5% verified in the 1966 TR and again as 'tipo general del uno coma cinco por ciento' in Ley 6/1979 (BOE-A-1979-23318); the 1964 original law text was not checked. A provincial surcharge (0.5% per Ley 6/1979) is excluded."
+   },
+   {
+    "from_year": 1983,
+    "value_pct": 3.0,
+    "label": "ITE tipo general raised to 3%",
+    "source": "Ley 5/1983, de 29 de junio",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1983-18137",
+    "locator": "art. 19.1 (new art. 13 TR ITE: tipo general 3); in force 30-6-1983",
+    "confidence": "high",
+    "note": "Other ITE rates set at the same time (e.g. 4% manufacturer-to-retail sales); provincial surcharge of 1% on the general rate (same law) excluded. No intermediate change 1967-1983 found, but BOE amendment list is incomplete."
+   },
+   {
+    "from_year": 1986,
+    "value_pct": 12.0,
+    "label": "IVA, Ley 30/1985 (in force 1-1-1986)",
+    "source": "Ley 30/1985, de 2 de agosto, del IVA",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1985-16765",
+    "locator": "art. 27.1",
+    "confidence": "high",
+    "from_date": "1986-01-01"
+   },
+   {
+    "from_year": 1992,
+    "value_pct": 13.0,
+    "label": "IVA 13% from 1-1-1992",
+    "source": "Ley 31/1991, de 30 de diciembre (PGE 1992)",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1991-30903",
+    "locator": "art. 81 (new art. 27.1 Ley 30/1985)",
+    "confidence": "high",
+    "from_date": "1992-01-01"
+   },
+   {
+    "from_year": 1992,
+    "value_pct": 15.0,
+    "label": "IVA 15% from 1-8-1992",
+    "source": "Real Decreto-ley 5/1992, de 21 de julio",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1992-17364",
+    "locator": "art. 1.1",
+    "confidence": "high",
+    "note": "Change date 1-8-1992 (date_from: 1992-08-01). Kept by Ley 37/1992 art. 90 (BOE-A-1992-28740) from 1-1-1993.",
+    "date_from": "1992-08-01",
+    "from_date": "1992-08-01"
+   },
+   {
+    "from_year": 1995,
+    "value_pct": 16.0,
+    "label": "IVA 16% from 1-1-1995",
+    "source": "Ley 41/1994, de 30 de diciembre (PGE 1995)",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1994-28967",
+    "locator": "art. 78 (new art. 90.Uno Ley 37/1992)",
+    "confidence": "high",
+    "from_date": "1995-01-01"
+   },
+   {
+    "from_year": 2010,
+    "value_pct": 18.0,
+    "label": "IVA 18% from 1-7-2010",
+    "source": "Ley 26/2009, de 23 de diciembre (PGE 2010)",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2009-20765",
+    "locator": "art. 79.Uno (art. 90.Uno Ley 37/1992)",
+    "confidence": "high",
+    "note": "date_from 2010-07-01.",
+    "date_from": "2010-07-01",
+    "from_date": "2010-07-01"
+   },
+   {
+    "from_year": 2012,
+    "value_pct": 21.0,
+    "label": "IVA 21% from 1-9-2012",
+    "source": "Real Decreto-ley 20/2012, de 13 de julio",
+    "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2012-9364",
+    "locator": "art. 23.Dos (art. 90.Uno Ley 37/1992)",
+    "confidence": "high",
+    "note": "date_from 2012-09-01; still 21% in 2026.",
+    "date_from": "2012-09-01",
+    "from_date": "2012-09-01"
+   }
+  ]
+ },
+ "gaps": [
+  "cit_general_rate 1920s-1966: Contribución sobre Utilidades tarifa III rates (1920 law, 1922 texto refundido, 1940 reform) and the 1957/1964 Impuesto sobre la Renta de Sociedades rate not verified; the only snippet found (12% for sociedades por acciones under the 1900 law) predates the window and is unconfirmed. Needs Gazeta texts or Comín's histories.",
+  "irpf_top_marginal_rate 1974-1978: A&S give 56.12% after DL 12/1973 and DL 13/1975 without a year table; first year uncertain.",
+  "irpf_top_marginal_rate 2011+: no legal combined rate exists once regions set their own scales; the series uses a convention (2011-2014 state + Ley 22/2009 reference regional 21.5; 2015+ legal withholding-scale top). Per-region ranges only checked for 2025 (45-54%). 2014 extension of the 2012 surcharge not re-verified in BOE.",
+  "ssc 1967-1977 (and 'seguros sociales unificados' before 1967) not collected; 1980-1982 annual decrees not found in BOE summary scan (Jan-Apr); 1996 order not machine-readable (assumed equal to 1995/1997).",
+  "ssc: exact mid-year date of the 2006 unemployment cut (6.00 -> 5.75) not verified; 2027-2029 values are scheduled MEI only.",
+  "vat: ITE 1964 original law (Ley 41/1964) not read directly; possible ITE changes 1967-1983 outside art. 13 not excluded."
+ ],
+ "blocked_hosts": [
+  "e-archivo.uc3m.es (HTTP 403, Alonso Olea RHE 1995 Tarifa III article)",
+  "www.congreso.es (HTTP 403 on /constitucion/ficheros/leyes_espa PDFs)",
+  "OECD not attempted (known bot blocking)"
+ ]
+}

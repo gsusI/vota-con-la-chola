@@ -6862,3 +6862,11 @@ snapshot-reproducibility-check:
   python3 -m unittest tests.test_snapshot_attestation tests.test_snapshot_reproducibility_contract tests.test_publicar_hf_scale_snapshot tests.test_verify_hf_scale_origin
   python3 scripts/diff_scale_snapshot_manifests.py --before docs/etl/sprints/REPRODUCIBILITY-20260819/evidence/remote-scale-manifest-5872efaf.json --after docs/etl/sprints/REPRODUCIBILITY-20260819/evidence/current-signed-scale-manifest-5d9ce557.json --out /tmp/vclc-snapshot-manifest-diff-check.json
   python3 scripts/validate_snapshot_reproducibility.py --manifest docs/etl/sprints/REPRODUCIBILITY-20260819/evidence/current-signed-scale-manifest-5d9ce557.json --publish-report docs/etl/sprints/REPRODUCIBILITY-20260819/evidence/signed-scale-publish-report.json --live-signature docs/etl/sprints/REPRODUCIBILITY-20260819/evidence/live-signed-snapshot-verification.json --live-parity docs/etl/sprints/REPRODUCIBILITY-20260819/evidence/live-scale-origin-parity.json --diff docs/etl/sprints/REPRODUCIBILITY-20260819/evidence/published-scale-manifest-diff.json --out docs/etl/sprints/REPRODUCIBILITY-20260819/evidence/snapshot-reproducibility-validation.json
+
+# Spain public finance (/visualizaciones/carga-fiscal/): fetch FMI/OCDE/Eurostat/Banco Mundial into the raw cache,
+# load them with the curated rates and BOE complexity into public-finance-es.db (indicator_* contract with releases and
+# revisions, legal_norms, legal_norm_lineage_edges, legal_norm_text_metrics), then export the page data from that DB.
+# `just public-finance-refresh --offline` reloads from the cache; `python3 scripts/boe_tax_complexity.py` refreshes BOE.
+public-finance-refresh *args:
+  python3 scripts/ingest_public_finance_es.py {{args}}
+  python3 scripts/export_public_viz_fiscal.py

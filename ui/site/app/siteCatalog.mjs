@@ -315,6 +315,31 @@ export const siteSections = [
     ],
   },
   {
+    id: "visualizaciones",
+    href: "/visualizaciones/",
+    navLabel: "Visualizaciones",
+    title: "Visualizaciones de datos públicos",
+    question: "¿Qué cuentan las series oficiales a largo plazo?",
+    description:
+      "Gráficos sobre datos públicos con la fuente oficial enlazada, rupturas de serie señaladas, comparación con países similares y datos descargables.",
+    chips: ["Series largas", "Fuentes oficiales", "Datos descargables"],
+    tasks: [
+      {
+        title: "Cien años de impuestos en España",
+        note: "Presión fiscal desde 1925, recaudación real por habitante, quién paga, tipos legales y complejidad normativa.",
+        href: "/visualizaciones/carga-fiscal/",
+        cta: "Abrir visualización",
+      },
+    ],
+    surfaces: [
+      {
+        title: "Carga y complejidad fiscal",
+        href: "/visualizaciones/carga-fiscal/",
+        note: "FMI, OCDE, Eurostat, Banco Mundial y BOE, con tabla y procedencia por gráfico.",
+      },
+    ],
+  },
+  {
     id: "methods",
     href: "/methods/",
     navLabel: "Datos y método",
@@ -386,6 +411,22 @@ export const siteSections = [
 ];
 
 export const datasetCatalog = [
+  {
+    id: "viz-carga-fiscal",
+    sectionId: "visualizaciones",
+    label: "Carga y complejidad fiscal (CSV)",
+    path: "/visualizaciones/data/carga-fiscal.csv",
+    note: "Series de presión fiscal, desglose y recaudación por habitante usadas en la visualización.",
+    confidence: "Publicado",
+  },
+  {
+    id: "viz-carga-fiscal-json",
+    sectionId: "visualizaciones",
+    label: "Carga y complejidad fiscal (JSON con procedencia)",
+    path: "/visualizaciones/data/carga-fiscal.json",
+    note: "Mismas series con URL, fecha de consulta y SHA-256 de cada fuente original.",
+    confidence: "Publicado",
+  },
   {
     id: "citizen-core",
     sectionId: "topics",

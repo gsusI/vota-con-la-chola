@@ -1,0 +1,400 @@
+/* Visualizaciones: loaded only under /visualizaciones/ so editing it does not rehash every page. */
+.viz {
+  --viz-surface: #ffffff;
+  --viz-ink: #17191f;
+  --viz-ink-2: #52514e;
+  --viz-muted: #6f6e69;
+  --viz-grid: #e8e7e1;
+  --viz-axis: #c3c2b7;
+  --viz-band: rgba(23, 25, 31, 0.05);
+  --viz-s1: #2a78d6;
+  --viz-s2: #eb6834;
+  --viz-s3: #1baf7a;
+  --viz-s4: #eda100;
+  --viz-peer: #b4b2a9;
+  --viz-ref: #52514e;
+}
+
+.viz .vizArticle {
+  display: grid;
+  gap: 14px;
+}
+
+.viz .vizStats {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+}
+
+.viz .vizStat {
+  padding: 16px 18px;
+  display: grid;
+  gap: 4px;
+  align-content: start;
+}
+
+.viz .vizStat__label {
+  font-size: 0.82rem;
+  color: var(--viz-ink-2);
+}
+
+.viz .vizStat__value {
+  font-size: 2.1rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--viz-ink);
+}
+
+.viz .vizStat__note {
+  font-size: 0.8rem;
+  color: var(--viz-muted);
+}
+
+.viz .vizFigure {
+  margin: 0;
+  padding: 20px 20px 16px;
+  background: var(--viz-surface);
+  display: grid;
+  gap: 10px;
+}
+
+.viz .vizFigure h2 {
+  margin: 0;
+  font-size: 1.3rem;
+  line-height: 1.25;
+}
+
+.viz .vizFigure__dek {
+  margin: 0;
+  max-width: 78ch;
+  color: var(--viz-ink-2);
+  line-height: 1.5;
+}
+
+.viz .vizLegend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.82rem;
+  color: var(--viz-ink-2);
+}
+
+.viz .vizLegend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.viz .vizLegend__key {
+  display: inline-block;
+  width: 16px;
+  height: 3px;
+  border-radius: 2px;
+}
+
+.viz .vizFigure__caption {
+  font-size: 0.78rem;
+  color: var(--viz-muted);
+  line-height: 1.5;
+  display: grid;
+  gap: 4px;
+}
+
+.viz .vizFigure__caption a {
+  color: inherit;
+}
+
+.viz .vizTable {
+  font-size: 0.82rem;
+}
+
+.viz .vizTable summary {
+  cursor: pointer;
+  color: var(--viz-ink-2);
+  font-weight: 600;
+}
+
+.viz .vizTable__scroll {
+  max-height: 340px;
+  overflow: auto;
+  margin-top: 8px;
+}
+
+.viz .vizTable table {
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+  min-width: 100%;
+}
+
+.viz .vizTable th,
+.viz .vizTable td {
+  padding: 4px 10px;
+  border-bottom: 1px solid var(--viz-grid);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.viz .vizTable th:first-child,
+.viz .vizTable td:first-child {
+  text-align: left;
+}
+
+.viz .vizTable thead th {
+  position: sticky;
+  top: 0;
+  background: var(--viz-surface);
+}
+
+.viz .vizMultiples {
+  display: grid;
+  gap: 14px 18px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.viz .vizMultiples h3 {
+  margin: 0 0 2px;
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+
+.viz .vizBars {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.viz .vizBars li {
+  display: grid;
+  grid-template-columns: minmax(130px, 220px) 1fr;
+  gap: 10px;
+  align-items: center;
+  font-size: 0.84rem;
+}
+
+.viz .vizBars__track {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.viz .vizBars__bar {
+  height: 18px;
+  border-radius: 0 4px 4px 0;
+  background: var(--viz-s1);
+  min-width: 2px;
+}
+
+.viz .vizBars__value {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.viz .vizProse {
+  padding: 20px;
+  display: grid;
+  gap: 10px;
+  line-height: 1.55;
+}
+
+.viz .vizProse h2 {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.viz .vizProse ul {
+  margin: 0;
+  padding-left: 1.2rem;
+  display: grid;
+  gap: 6px;
+}
+
+.viz .vizProse p {
+  margin: 0;
+}
+
+.viz .vizGallery {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.viz .vizGallery__item {
+  padding: 18px;
+  display: grid;
+  gap: 8px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.viz .vizGallery__item:hover {
+  border-color: var(--viz-ink-2);
+}
+
+.viz .vizGallery__title {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.viz .vizGallery__note {
+  color: var(--viz-ink-2);
+  font-size: 0.9rem;
+}
+
+/* Chart */
+.tsChart {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+
+.tsChart svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  touch-action: pan-y;
+}
+
+.tsChart svg:focus-visible {
+  outline: 2px solid var(--viz-s1);
+  outline-offset: 2px;
+}
+
+.tsChart__grid {
+  stroke: var(--viz-grid);
+  stroke-width: 1;
+}
+
+.tsChart__baseline {
+  stroke: var(--viz-axis);
+  stroke-width: 1;
+}
+
+.tsChart__tick {
+  font-size: 11px;
+  fill: var(--viz-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.tsChart__band {
+  fill: var(--viz-band);
+}
+
+.tsChart__bandLabel {
+  font-size: 10.5px;
+  fill: var(--viz-muted);
+}
+
+.tsChart__note {
+  stroke: var(--viz-axis);
+  stroke-width: 1;
+}
+
+.tsChart__noteLabel {
+  font-size: 10.5px;
+  fill: var(--viz-ink-2);
+}
+
+.tsChart__endLabel {
+  font-size: 11.5px;
+  fill: var(--viz-ink);
+  font-weight: 600;
+}
+
+.tsChart__dot {
+  stroke: var(--viz-surface);
+  stroke-width: 2;
+}
+
+.tsChart__crosshair {
+  stroke: var(--viz-ink-2);
+  stroke-width: 1;
+}
+
+.tsChart__tooltip {
+  position: absolute;
+  z-index: 2;
+  pointer-events: none;
+  display: grid;
+  gap: 3px;
+  min-width: 150px;
+  max-width: min(320px, 70vw);
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: var(--viz-surface);
+  border: 1px solid rgba(11, 11, 11, 0.12);
+  box-shadow: 0 6px 18px rgba(23, 25, 31, 0.12);
+  font-size: 0.78rem;
+}
+
+.tsChart__tooltipYear {
+  font-weight: 700;
+  color: var(--viz-ink);
+}
+
+.tsChart__tooltipRow {
+  display: grid;
+  grid-template-columns: 14px auto 1fr;
+  gap: 6px;
+  align-items: baseline;
+}
+
+.tsChart__tooltipRow strong {
+  font-variant-numeric: tabular-nums;
+}
+
+.tsChart__tooltipLabel {
+  color: var(--viz-ink-2);
+}
+
+.tsChart__key {
+  width: 12px;
+  height: 3px;
+  border-radius: 2px;
+}
+
+@media (max-width: 640px) {
+  .viz .vizFigure {
+    padding: 16px 12px 12px;
+  }
+
+  .viz .vizBars li {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+}
+
+.viz .vizPanelTitle {
+  min-height: 3.9em;
+  display: grid;
+  align-content: start;
+  gap: 2px;
+}
+
+.viz .vizPanelTitle span {
+  font-weight: 400;
+  font-size: 0.78rem;
+  color: var(--viz-ink-2);
+}
+
+.viz .vizStack {
+  display: grid;
+  gap: 18px;
+}
+
+.viz .vizStack h3 {
+  margin: 0 0 6px;
+  font-size: 0.9rem;
+}
+
+.viz .vizBars a,
+.viz .vizTable a {
+  color: inherit;
+  text-decoration-color: var(--viz-axis);
+  text-underline-offset: 2px;
+}

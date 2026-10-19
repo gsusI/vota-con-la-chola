@@ -62,6 +62,11 @@ const routeGroups = [
         title: "Calendario electoral",
         note: "Próximas citas por ámbito, territorio y fuente.",
       },
+      {
+        href: "/visualizaciones/carga-fiscal/",
+        title: "Cien años de impuestos",
+        note: "Presión fiscal, quién paga y complejidad normativa desde 1925, con fuentes oficiales.",
+      },
     ],
   },
   {

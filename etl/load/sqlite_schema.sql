@@ -4294,6 +4294,30 @@ CREATE TABLE IF NOT EXISTS legal_norm_lineage_edges (
   UNIQUE (norm_id, related_norm_id, relation_type, source_url)
 );
 
+-- Size/structure of one version of a norm's text (as published or consolidated at a date), measured
+-- from the BOE XML. Feeds complexity series (e.g. words of the income-tax law 1978 -> today).
+CREATE TABLE IF NOT EXISTS legal_norm_text_metrics (
+  text_metric_id TEXT PRIMARY KEY,
+  norm_id TEXT NOT NULL REFERENCES legal_norms(norm_id) ON DELETE CASCADE,
+  version_kind TEXT NOT NULL CHECK (version_kind IN ('original', 'consolidated')),
+  version_date TEXT NOT NULL,
+  words INTEGER,
+  words_excl_preamble INTEGER,
+  articles INTEGER,
+  disp_adicionales INTEGER,
+  disp_transitorias INTEGER,
+  disp_derogatorias INTEGER,
+  disp_finales INTEGER,
+  emptied_blocks INTEGER,
+  source_id TEXT REFERENCES sources(source_id),
+  source_url TEXT NOT NULL,
+  method TEXT NOT NULL,
+  raw_payload TEXT NOT NULL,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  UNIQUE (norm_id, version_kind, version_date)
+);
+
 -- Sanciones ciudadanas: catalogo de fuentes de volumen + tipologias y metrica garantista.
 CREATE TABLE IF NOT EXISTS sanction_volume_sources (
   sanction_source_id TEXT PRIMARY KEY,

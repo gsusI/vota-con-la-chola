@@ -1,0 +1,354 @@
+import { readPublicJson } from "../../static-snapshot.mjs";
+import { StaticRouteHero } from "../../static-route-components";
+import TimeSeriesChart from "../components/TimeSeriesChart";
+import Figure, { SeriesTable } from "../components/Figure";
+import { formatValue } from "../components/format.mjs";
+import { StatutoryRatesFigure, ComplexityFigures } from "./sections";
+
+export const metadata = {
+  title: "Cien años de impuestos en España | Vota Con La Chola",
+  description:
+    "Presión fiscal, recaudación real por habitante, quién paga y complejidad normativa en España desde 1925, con fuentes oficiales y datos descargables.",
+};
+
+const C = {
+  blue: "#2a78d6",
+  orange: "#eb6834",
+  aqua: "#1baf7a",
+  yellow: "#eda100",
+  ref: "#52514e",
+  peer: "#b4b2a9",
+};
+
+const PEER_LABELS = {
+  ESP: "España",
+  OECD_REP: "Media OCDE",
+  DEU: "Alemania",
+  FRA: "Francia",
+  ITA: "Italia",
+  PRT: "Portugal",
+};
+
+const REFORMS = [
+  { year: 1940, label: "Reforma Larraz", row: 0 },
+  { year: 1957, label: "Navarro Rubio", row: 1 },
+  { year: 1964, label: "Reforma 1964", row: 0 },
+  { year: 1977, label: "Fernández Ordóñez", row: 1 },
+  { year: 1986, label: "IVA", row: 0 },
+];
+
+const num = (value, digits = 1) =>
+  Number(value).toLocaleString("es-ES", { minimumFractionDigits: digits, maximumFractionDigits: digits });
+
+function points(rows, key = "value") {
+  return rows.map((row) => ({ year: row.year, value: row[key] }));
+}
+
+export default function CargaFiscalPage() {
+  const data = readPublicJson("visualizaciones/data/carga-fiscal.json", null);
+  if (!data) throw new Error("Missing visualizaciones/data/carga-fiscal.json");
+  const h = data.headline;
+  const src = data.sources;
+  const oecdSource = { label: "OCDE, Revenue Statistics", href: src.oecd_revenue_statistics.page };
+  const imfSource = { label: "FMI, Public Finances in Modern History", href: src.imf_fpp.page };
+  const downloads = "/visualizaciones/data/carga-fiscal.csv";
+
+  // 1. Long run
+  const longRun = [
+    {
+      id: "oecd",
+      label: "Impuestos y cotizaciones, todas las AAPP (OCDE)",
+      shortLabel: "OCDE",
+      color: C.blue,
+      emphasis: true,
+      points: data.long_run.oecd_tax_pct_gdp,
+    },
+    {
+      id: "imf",
+      label: "Ingresos del Estado central (FMI)",
+      shortLabel: "FMI",
+      color: C.orange,
+      points: data.long_run.imf_revenue_pct_gdp.filter((p) => p.year <= 1980),
+    },
+  ];
+
+  // 2. Per person
+  const perCapita = [
+    {
+      id: "pc",
+      label: `Recaudación por habitante (euros de ${h.per_capita_base_year})`,
+      shortLabel: String(h.per_capita_last.year),
+      color: C.blue,
+      points: data.per_capita_real_eur,
+    },
+  ];
+  const pcMultiple = h.per_capita_last.value / h.per_capita_first.value;
+
+  // 3. Who pays
+  const payer = data.by_payer_pct_gdp;
+  const byPayer = [
+    { id: "households", label: "Personas: IRPF + cotizaciones del trabajador y autónomos", shortLabel: "Personas", color: C.blue, points: points(payer, "households") },
+    { id: "companies", label: "Empresas: Sociedades + cotizaciones empresariales", shortLabel: "Empresas", color: C.orange, points: points(payer, "companies") },
+    { id: "consumption", label: "Consumo: IVA, especiales y otros", shortLabel: "Consumo", color: C.aqua, points: points(payer, "consumption") },
+    { id: "property", label: "Propiedad: IBI, patrimonio, sucesiones, transmisiones", shortLabel: "Propiedad", color: C.yellow, points: points(payer, "property") },
+  ];
+  const first = payer[0];
+  const last = payer.at(-1);
+
+  const compCodes = ["T_1100", "T_2100", "T_2300", "T_1200", "T_2200", "T_5000", "T_4000"];
+  const compDelta = (code) => data.composition_pct_gdp[code].at(-1).value - data.composition_pct_gdp[code][0].value;
+  const compTotal = h.last_value - h.oecd_first_value;
+  const compSscIrpf = ["T_1100", "T_2100", "T_2200", "T_2300"].reduce((sum, code) => sum + compDelta(code), 0);
+  const compShare = compSscIrpf / compTotal;
+  const compMax = Math.max(...compCodes.flatMap((code) => data.composition_pct_gdp[code].map((p) => p.value)));
+
+  // 4. Peers
+  const peerOrder = ["DEU", "FRA", "ITA", "PRT", "OECD_REP", "ESP"];
+  const peers = peerOrder.map((area) => ({
+    id: area,
+    label: PEER_LABELS[area],
+    color: area === "ESP" ? C.blue : area === "OECD_REP" ? C.ref : C.peer,
+    emphasis: area === "ESP",
+    points: data.peers_pct_gdp[area],
+  }));
+  const increases = peerOrder
+    .filter((area) => area !== "OECD_REP")
+    .map((area) => {
+      const rows = data.peers_pct_gdp[area];
+      return { area, delta: rows.at(-1).value - rows[0].value, from: rows[0], to: rows.at(-1) };
+    })
+    .sort((a, b) => b.delta - a.delta);
+  const esIncrease = increases.find((item) => item.area === "ESP");
+  const esRank = increases.indexOf(esIncrease) + 1;
+  const eu = data.eu27_pct_gdp.at(-1);
+  const irpfLaw = data.complexity?.amendments?.find((law) => law.boe_id === "BOE-A-2006-20764");
+  const irpfLengths = (data.complexity?.law_length || []).filter((row) => row.tax === "irpf").sort((a, b) => a.year - b.year);
+  const irpfWords =
+    irpfLengths.length > 1 ? { first: irpfLengths[0].words_excl_preamble, last: irpfLengths.at(-1).words_excl_preamble } : null;
+  const peerMax = Math.max(...peerOrder.flatMap((area) => data.peers_pct_gdp[area].map((p) => p.value)));
+
+  return (
+    <main className="shell vizArticle">
+      <StaticRouteHero
+        eyebrow="Visualizaciones · datos públicos"
+        title="Cien años de impuestos en España"
+        summary="Cuánto recauda el Estado, quién lo paga y cuánto se ha complicado cumplir. Cada gráfico enlaza su fuente oficial, marca las rupturas de serie y trae sus datos en tabla."
+        actions={[
+          { href: downloads, label: "Descargar datos (CSV)" },
+          { href: "/visualizaciones/data/carga-fiscal.json", label: "JSON con procedencia" },
+          { href: "#metodo", label: "Método y fuentes" },
+        ]}
+      />
+
+      <section className="vizStats" aria-label="Cifras clave">
+        <div className="card vizStat">
+          <span className="vizStat__label">Presión fiscal (impuestos + cotizaciones, % PIB)</span>
+          <span className="vizStat__value">×{num(h.multiple_oecd)}</span>
+          <span className="vizStat__note">
+            {num(h.oecd_first_value)} % en {h.oecd_first_year} → {num(h.last_value)} % en {h.last_year}
+          </span>
+        </div>
+        <div className="card vizStat">
+          <span className="vizStat__label">Recaudación real por habitante</span>
+          <span className="vizStat__value">×{num(pcMultiple)}</span>
+          <span className="vizStat__note">
+            {formatValue(h.per_capita_first.value, "eur")} en {h.per_capita_first.year} → {formatValue(h.per_capita_last.value, "eur")} en{" "}
+            {h.per_capita_last.year} (euros de {h.per_capita_base_year})
+          </span>
+        </div>
+        <div className="card vizStat">
+          <span className="vizStat__label">Ingresos del Estado central en {h.first_year}</span>
+          <span className="vizStat__value">{num(h.first_value_imf)} %</span>
+          <span className="vizStat__note">del PIB; sin cotizaciones sociales ni haciendas locales (serie FMI)</span>
+        </div>
+        {irpfLaw ? (
+          <div className="card vizStat">
+            <span className="vizStat__label">Normas que han modificado la Ley del IRPF</span>
+            <span className="vizStat__value">{irpfLaw.total}</span>
+            <span className="vizStat__note">
+              desde {String(irpfLaw.enacted).slice(0, 4)}; su texto tiene hoy {irpfWords ? `${num(irpfWords.last / irpfWords.first)} veces` : "más"} las palabras de la ley de 1978
+            </span>
+          </div>
+        ) : null}
+      </section>
+
+      <Figure
+        id="largo-plazo"
+        title={`De un ${num(h.first_value_imf, 0)} % a un ${num(h.last_value, 0)} % del PIB en un siglo`}
+        dek="Hasta 1965 solo hay series homogéneas de los ingresos del Estado central; desde 1965 la OCDE mide todos los impuestos y cotizaciones de todas las administraciones. Las dos series se solapan en 1965–1980 para que se vea la diferencia de cobertura: no se empalman."
+        legend={longRun}
+        sources={[imfSource, oecdSource]}
+        notes={[
+          "FMI: ingresos totales (también no tributarios) del Estado central; excluye Seguridad Social y entes territoriales, por eso queda por debajo de la OCDE desde los años 70.",
+          "1936–1939: el PIB de la Guerra Civil es una estimación muy incierta; el cociente debe leerse con cautela.",
+        ]}
+        table={<SeriesTable series={longRun} />}
+      >
+        <TimeSeriesChart
+          series={longRun}
+          xMin={1925}
+          xMax={h.last_year}
+          yMax={40}
+          annotations={REFORMS}
+          bands={[{ from: 1936, to: 1939, label: "Guerra" }]}
+          ariaLabel="Presión fiscal en España, 1925 a hoy, en porcentaje del PIB"
+        />
+      </Figure>
+
+      <Figure
+        id="por-habitante"
+        title={`Cada habitante aporta hoy ${num(pcMultiple, 0)} veces más que en ${h.per_capita_first.year}, descontada la inflación`}
+        dek="Recaudación total (impuestos y cotizaciones) dividida por la población y expresada en euros constantes. Mide cuánto ingresa el sector público por persona; crece a la vez por la presión fiscal y por la economía."
+        sources={[oecdSource, { label: "Banco Mundial, población e IPC", href: src.worldbank_wdi.page }]}
+        notes={[`Deflactado con el IPC de España (base ${h.per_capita_base_year}). Pesetas convertidas a euros a 166,386 por la OCDE.`]}
+        table={<SeriesTable series={perCapita} unit="eur" />}
+      >
+        <TimeSeriesChart series={perCapita} unit="eur" xMin={h.oecd_first_year} xMax={h.last_year} ariaLabel="Recaudación real por habitante en España" />
+      </Figure>
+
+      <Figure
+        id="quien-paga"
+        title={`Lo que ingresan las personas se ha multiplicado por ${num(last.households / first.households)} y lo de las empresas por ${num(last.companies / first.companies)} (en % del PIB)`}
+        dek={`Recaudación por quién la ingresa legalmente. Personas: de ${num(first.households)} % a ${num(last.households)} % del PIB. Empresas: de ${num(first.companies)} % a ${num(last.companies)} %. Consumo: de ${num(first.consumption)} % a ${num(last.consumption)} %.`}
+        legend={byPayer}
+        sources={[oecdSource]}
+        notes={[
+          "Quien ingresa un impuesto no es necesariamente quien lo soporta: las cotizaciones empresariales y el Impuesto sobre Sociedades recaen en parte sobre salarios y precios, y el IVA lo pagan los consumidores.",
+        ]}
+        table={<SeriesTable series={byPayer} />}
+      >
+        <TimeSeriesChart series={byPayer} xMin={h.oecd_first_year} xMax={h.last_year} ariaLabel="Recaudación por tipo de contribuyente, porcentaje del PIB" />
+      </Figure>
+
+      <Figure
+        id="desglose"
+        title={`Cotizaciones sociales e IRPF explican el ${num(compShare * 100, 0)} % del aumento`}
+        dek={`De los ${num(compTotal)} puntos del PIB que ha subido la recaudación desde ${h.oecd_first_year}, ${num(compSscIrpf)} vienen de cotizaciones e IRPF. Cada figura en su panel, con la misma escala vertical.`}
+        sources={[oecdSource]}
+        table={
+          <SeriesTable
+            series={compCodes.map((code) => ({ id: code, label: data.composition_labels[code], points: data.composition_pct_gdp[code] }))}
+          />
+        }
+      >
+        <div className="vizMultiples">
+          {compCodes.map((code) => {
+            const rows = data.composition_pct_gdp[code];
+            return (
+              <div key={code}>
+                <h3 className="vizPanelTitle">
+                  {data.composition_labels[code]}
+                  <span>
+                    {num(rows[0].value)} % → {num(rows.at(-1).value)} % del PIB
+                  </span>
+                </h3>
+                <TimeSeriesChart
+                  series={[{ id: code, label: data.composition_labels[code], shortLabel: String(rows.at(-1).year), color: C.blue, points: rows }]}
+                  xMin={h.oecd_first_year}
+                  xMax={h.last_year}
+                  yMax={compMax}
+                  height={190}
+                  ariaLabel={`${data.composition_labels[code]}, porcentaje del PIB`}
+                />
+              </div>
+            );
+          })}
+        </div>
+      </Figure>
+
+      <Figure
+        id="comparacion"
+        title={
+          esRank === 1
+            ? `España es el país del grupo donde más ha subido la presión fiscal desde ${esIncrease.from.year}`
+            : `España es el ${esRank}.º país del grupo en aumento de la presión fiscal desde ${esIncrease.from.year}`
+        }
+        dek={`+${num(esIncrease.delta)} puntos del PIB (${num(esIncrease.from.value)} % → ${num(esIncrease.to.value)} %), frente a +${num(
+          data.peers_pct_gdp.OECD_REP.at(-1).value - data.peers_pct_gdp.OECD_REP[0].value,
+        )} de la media OCDE. Partía muy por debajo: hoy supera la media OCDE y sigue por debajo de la media de la UE (${num(eu.es)} % frente a ${num(eu.eu27)} % en ${eu.year}, según Eurostat).`}
+        legend={[
+          { id: "ESP", label: "España", color: C.blue },
+          { id: "other", label: "País o media de comparación", color: C.ref },
+        ]}
+        sources={[oecdSource, { label: "Eurostat, gov_10a_taxag", href: src.eurostat_sdmx.page }]}
+        notes={[
+          "Media OCDE: media simple de los países miembros actuales. Eurostat y OCDE difieren en unas décimas para España por diferencias de método (Eurostat sigue el SEC 2010 de contabilidad nacional).",
+        ]}
+        table={<SeriesTable series={[...peers].reverse()} />}
+      >
+        <div className="vizMultiples">
+          {peerOrder
+            .filter((area) => area !== "ESP")
+            .reverse()
+            .map((area) => {
+              const other = data.peers_pct_gdp[area];
+              return (
+                <div key={area}>
+                  <h3 className="vizPanelTitle">
+                    España frente a {area === "OECD_REP" ? "la media OCDE" : PEER_LABELS[area]}
+                    <span>
+                      {PEER_LABELS[area]}: {num(other[0].value)} % → {num(other.at(-1).value)} %
+                    </span>
+                  </h3>
+                  <TimeSeriesChart
+                    series={[
+                      { id: area, label: PEER_LABELS[area], color: C.ref, points: other },
+                      { id: "ESP", label: "España", color: C.blue, emphasis: true, points: data.peers_pct_gdp.ESP },
+                    ]}
+                    xMin={h.oecd_first_year}
+                    xMax={h.last_year}
+                    yMax={peerMax}
+                    height={210}
+                    ariaLabel={`Presión fiscal de España frente a ${PEER_LABELS[area]}`}
+                  />
+                </div>
+              );
+            })}
+        </div>
+      </Figure>
+
+      <StatutoryRatesFigure rates={data.statutory_rates} lastYear={Number(String(data.generated_at).slice(0, 4))} />
+      <ComplexityFigures complexity={data.complexity} />
+
+      <section className="card vizProse" id="metodo" aria-labelledby="metodo-title">
+        <h2 id="metodo-title">Método y fuentes</h2>
+        <ul>
+          <li>
+            <strong>Denominador.</strong> La carga se mide en % del PIB, la medida estándar para comparar entre años y países; se complementa con euros constantes por habitante, que reflejan también el crecimiento económico.
+          </li>
+          <li>
+            <strong>Ruptura de serie.</strong> Antes de 1965 solo se dispone de ingresos del Estado central (FMI, a partir de Comín y otras fuentes históricas). No se empalma con la serie de la OCDE: ambas se muestran y se solapan para que se vea la diferencia de cobertura.
+          </li>
+          <li>
+            <strong>Ejes.</strong> Todos los ejes verticales empiezan en cero; los paneles de un mismo gráfico comparten escala.
+          </li>
+          <li>
+            <strong>Comparación.</strong> Cada cifra de España se contrasta con países comparables y con la media de la OCDE y de la UE.
+          </li>
+          <li>
+            <strong>Incidencia.</strong> Se clasifica por quién ingresa legalmente cada tributo, no por quién lo soporta económicamente.
+          </li>
+          <li>
+            <strong>Reproducible y reutilizable.</strong> <code>just public-finance-refresh</code> descarga cada fuente, guarda el original y lo
+            carga en SQLite con el contrato de indicadores del proyecto: cada publicación oficial es una versión nueva, cada valor se compara con
+            la anterior (sin cambios, revisado o eliminado) y apunta a su celda en el fichero original con su SHA-256. Las leyes y sus
+            modificaciones quedan como normas enlazadas. Desde ahí se generan los{" "}
+            <a href={downloads}>datos publicados</a>.
+          </li>
+        </ul>
+        <p>
+          Fuentes: {Object.values(src).map((s, index) => (
+            <span key={s.page}>
+              {index ? "; " : ""}
+              <a href={s.page} rel="noopener noreferrer" target="_blank">
+                {s.label}
+              </a>
+              {s.retrieved_at ? ` (consultado ${String(s.retrieved_at).slice(0, 10)})` : ""}
+            </span>
+          ))}
+          .
+        </p>
+      </section>
+    </main>
+  );
+}
