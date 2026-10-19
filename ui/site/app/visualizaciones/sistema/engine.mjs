@@ -249,10 +249,18 @@ export function simulate(model, levers = DEFAULT_LEVERS, params = centralParams(
     }
 
     // Tax levers: statutory revenue and the behavioural response (taxable income, corporate base).
-    const irpfLeverPp = irpfUnit * lv("irpfAll") + P.recaudacion_por_punto_irpf_alto * (1 - offTop) * lv("irpfTop");
+    // Cutting towards zero, the behavioural offset fades out (at no IRPF there is nothing to recoup), and no lever can
+    // remove more than the tax raises today: what makes illustrative extremes such as «sin IRPF» add up.
+    const abolishPp = C.irpf_revenue_pct ? C.irpf_revenue_pct / P.recaudacion_por_punto_irpf : Infinity;
+    const taper = Math.max(0, 1 - Math.max(0, -lv("irpfAll")) / abolishPp);
+    const irpfLeverPp = Math.max(
+      -(C.irpf_revenue_pct ?? Infinity),
+      P.recaudacion_por_punto_irpf * (1 - offAll * taper) * lv("irpfAll") + P.recaudacion_por_punto_irpf_alto * (1 - offTop) * lv("irpfTop"),
+    );
     const vatRedPp = P.recaudacion_por_punto_iva_reducido * lv("vatRed");
     const corpStatic = P.recaudacion_por_punto_sociedades * lv("corp");
-    const corpPp = corpStatic - (C.corp_revenue_pct * P.semielasticidad_base_sociedades * lv("corp")) / 100;
+    const corpTaper = Math.max(0, 1 - Math.max(0, -lv("corp")) / 25); // the 25 % rate: at zero there is no base to shift
+    const corpPp = Math.max(-C.corp_revenue_pct, corpStatic - (C.corp_revenue_pct * P.semielasticidad_base_sociedades * corpTaper * lv("corp")) / 100);
     // Part of the corporate tax ends up in lower wages (incidence), here as a fall of the wage bill.
     const wageCorp = (-P.traslado_sociedades_salarios * corpStatic) / P.salarios_pib;
 
@@ -370,11 +378,13 @@ export function simulate(model, levers = DEFAULT_LEVERS, params = centralParams(
       if (pc.pension_gross) {
         v += pc.pension_gross * z * (1 - P.tipo_marginal_irpf_pension) - pc.net * (price - pricePrev);
       } else {
-        v += -pc.gross * workerRate * (1 - (pc.marginal_total - pc.worker_ssc_rate));
+        // Nor can a contribution cut return more than the worker's own contributions.
+        v += -pc.gross * Math.max(-pc.worker_ssc_rate, workerRate) * (1 - (pc.marginal_total - pc.worker_ssc_rate));
         v += pc.gross * wageDev * (1 - pc.marginal_total);
         v += -pc.net * (price - P.indiciacion_salarios * pricePrev);
       }
-      v += (-allPp / 100) * pc.irpf_liable - (lv("irpfTop") / 100) * pc.irpf_above_top;
+      // A tax cut cannot return more than the case pays today (illustrative extremes such as abolishing the IRPF).
+      v += Math.min(pc.irpf_paid ?? Infinity, (-allPp / 100) * pc.irpf_liable - (lv("irpfTop") / 100) * pc.irpf_above_top);
       out[`${id}_month`][t] = v / 12;
     }
     pricePrev = price;

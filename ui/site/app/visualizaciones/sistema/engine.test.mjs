@@ -166,3 +166,21 @@ test("more immigration means more households and higher rents", () => {
   const run = simulate(model, { ...DEFAULT_LEVERS, migration: "high" });
   assert.ok(run.hs_migration_hh_k[T35] > 0 && run.hs_rent[T35] > 0);
 });
+
+test("illustrative extremes stay finite and a tax cut never returns more than a case pays", () => {
+  const t = model.years.indexOf(2035);
+  const extremes = [
+    { irpfAll: -35 }, { irpfAll: -35, closure: "iva" }, { vatStd: -21 }, { vatRed: 11 }, { reval: 10 }, { reval: -10 },
+    { contrib: -41 }, { corp: -25 }, { age: 10 }, { pubHomes: 500, closure: "irpf" }, { capCut: 50, capCov: 100 },
+  ];
+  for (const lv of extremes) {
+    const run = simulate(model, { ...DEFAULT_LEVERS, ...lv });
+    for (const [key, values] of Object.entries(run)) {
+      if (Array.isArray(values)) assert.ok(values.every((v) => typeof v !== "number" || Number.isFinite(v)), `${JSON.stringify(lv)} ${key}`);
+    }
+  }
+  const noIrpf = simulate(model, { ...DEFAULT_LEVERS, irpfAll: -35 });
+  for (const id of ["p1", "p2", "p4", "p5"]) {
+    assert.ok(noIrpf[`${id}_month`][t] * 12 <= model.personas[id].irpf_paid + 1, id);
+  }
+});

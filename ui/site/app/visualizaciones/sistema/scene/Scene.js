@@ -98,7 +98,7 @@ function Flow({ id, spec, value, delta, scale, still }) {
   const { d, mid: m } = curve(spec.from, spec.to, spec.bend, spec.at);
   const mid = spec.label || [m[0] + (spec.dx || 0) * scale, m[1] + (spec.dy || 0) * scale];
   const anchor = spec.anchor || "middle";
-  const w = (3 + value * 1.4) * scale;
+  const w = Math.min(44, 3 + value * 1.4) * scale;
   const coins = Math.max(1, Math.min(6, Math.round(value / 3)));
   const changed = Math.abs(delta) >= 0.005;
   return (
@@ -204,9 +204,9 @@ export default function Scene({ model, run, t, composition }) {
     Math.abs(hs("hs_stock_k")) >= 0.5 ? `Viviendas ${k(hs("hs_stock_k"))}` : null,
     Math.abs(hs("hs_emancipated_k")) >= 0.5 ? `Jóvenes que se independizan ${k(hs("hs_emancipated_k"))}` : null,
   ].filter(Boolean);
-  const workers = (B.employment_k[t] + run.employment_k[t]) / 1000;
+  const workers = Math.max(0, (B.employment_k[t] + run.employment_k[t]) / 1000);
   const workersBase = B.employment_k[t] / 1000;
-  const pensioners = (B.pensioners_k[t] * (1 + run.pensioners_dev[t])) / 1000;
+  const pensioners = Math.max(0, (B.pensioners_k[t] * (1 + run.pensioners_dev[t])) / 1000);
   const pensionersBase = B.pensioners_k[t] / 1000;
   const debt = run.debt_pct[t];
   const debtBase = B.debt_pct[t];
@@ -225,12 +225,12 @@ export default function Scene({ model, run, t, composition }) {
         <text x={L.shop[0]} y={L.shop[1] + 44 * sc} textAnchor="middle" className="art__sub">todos pagan IVA al comprar</text>
         <Factory x={L.factory[0]} y={L.factory[1]} s={sc} />
         <text x={L.factory[0]} y={L.factory[1] + 26 * sc} textAnchor="middle" className="art__label">Empresas</text>
-        <Crowd x={L.workers.x} y={L.workers.y} cols={L.workers.cols} count={Math.round(workers)} delta={Math.round(workers) - Math.round(workersBase)}
+        <Crowd x={L.workers.x} y={L.workers.y} cols={L.workers.cols} count={Math.min(40, Math.round(workers))} delta={Math.round(workers) - Math.round(workersBase)}
           label="Trabajan" scale={sc}
           sub={`${n1(workers)} millones${Math.abs(run.employment_k[t]) >= 1 ? ` (${run.employment_k[t] > 0 ? "+" : "−"}${thousands(Math.abs(run.employment_k[t]) / 1000)})` : ""}`} />
         <PiggyBank x={L.piggy[0]} y={L.piggy[1]} s={L.piggy[2]} label="Caja pública"
           sub={run.deficit_pct[t] > 0 ? `déficit del ${n1(run.deficit_pct[t])} % del PIB` : `superávit del ${n1(-run.deficit_pct[t])} % del PIB`} />
-        <Crowd x={L.pensioners.x} y={L.pensioners.y} cols={L.pensioners.cols} count={Math.round(pensioners)} delta={Math.round(pensioners) - Math.round(pensionersBase)}
+        <Crowd x={L.pensioners.x} y={L.pensioners.y} cols={L.pensioners.cols} count={Math.min(30, Math.round(pensioners))} delta={Math.round(pensioners) - Math.round(pensionersBase)}
           old label="Cobran pensión" scale={sc}
           sub={`${n1(pensioners)} millones${Math.abs(pensioners - pensionersBase) >= 0.001 ? ` (${pensioners > pensionersBase ? "+" : "−"}${thousands(Math.abs(pensioners - pensionersBase))})` : ""}`} />
         <Services x={L.services[0]} y={L.services[1]} s={sc} />

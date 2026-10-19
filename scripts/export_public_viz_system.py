@@ -234,6 +234,8 @@ def main() -> int:
                 "marginal_total": r(sum(marginal_at(w / aw) * w for w in earners) / gross, 4),
                 "worker_ssc_rate": r(interp(sorted(ssc.items()), earners[0] / aw) / 100, 4),
                 "irpf_liable": r(sum(a for a, _ in liable), 0), "irpf_above_top": r(sum(b for _, b in liable), 0),
+                # What the case pays today (tax page's direct taxes minus worker contributions): the most a tax cut can return.
+                "irpf_paid": r(row["direct_taxes"] - sum(w * interp(sorted(ssc.items()), w / aw) / 100 for w in earners), 0),
                 "earners": [r(w, 0) for w in earners]}
 
     cat = load_catalog()
@@ -391,6 +393,7 @@ def main() -> int:
             "vat_reduced_rate": 0.10,
             "vat_reduced_basket_share": incidence_block["vat"]["national_basket"]["10"],
             "corp_revenue_pct": corp_revenue_pct,
+            "irpf_revenue_pct": fiscal["composition_pct_gdp"]["T_1100"][-1]["value"],
             "emancipation_adjust_per_year": 0.5,
             **constants_card,
         },
@@ -405,6 +408,7 @@ def main() -> int:
             "irpf_marginal_top": "Tipo marginal aproximado por encima de 60.000 €: 22,5 % de la escala estatal más una escala autonómica típica en torno al 22,5 % (varía por comunidad).",
             "vat_reduced_rate": "Tipo reducido del IVA: 10 % (Ley 37/1992, art. 91.Uno).",
             "vat_reduced_basket_share": "Parte del gasto de consumo de los hogares gravada al 10 %, con la Encuesta de Presupuestos Familiares de Eurostat (2015) y los tipos de la Ley 37/1992 por grupo de gasto (cálculo propio).",
+            "irpf_revenue_pct": "Recaudación de impuestos sobre la renta de las personas en % del PIB (OCDE, último año de la página de carga fiscal): lo más que puede perderse al quitar el IRPF.",
             "corp_revenue_pct": "Recaudación del Impuesto sobre Sociedades en % del PIB, último año de la serie de la OCDE que usa la página de carga fiscal.",
             "wage_tax_rate": "Supuesto: un euro menos de salario bruto pierde unos 56 céntimos de ingresos (cotización total de la base, en torno al 36 %, más un IRPF marginal medio en torno al 20 %).",
             "emancipation_adjust_per_year": "Supuesto: los hogares latentes (jóvenes que se emancipan cuando baja el alquiler) recorren cada año la mitad de la distancia hasta su nuevo nivel.",
@@ -419,7 +423,7 @@ def main() -> int:
             "p2": persona(p2, [aw, 0.67 * aw]),
             "p4": {"key": p4["key"], "gross": p4["gross"], "net": p4["net"], "year": cy, "pension_gross": p4["gross"],
                    "irpf_liable": r(incidence.liable_bases(pension_gross=p4["gross"])[0], 0),
-                   "irpf_above_top": r(incidence.liable_bases(pension_gross=p4["gross"])[1], 0)},
+                   "irpf_above_top": r(incidence.liable_bases(pension_gross=p4["gross"])[1], 0), "irpf_paid": p4["direct_taxes"]},
             "p5": persona(p5, [p5["gross"]]),
         },
         "incidence": incidence_block,

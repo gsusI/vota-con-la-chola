@@ -6,7 +6,7 @@ import FanChart, { fmt } from "../FanChart";
 import { DEFAULT_LEVERS, LAYERS, applyLayer, centralParams, decodeState, encodeState, mainDriver, quintileImpact, runEnsemble, simulate } from "../engine.mjs";
 import { Avatar, Icon, PAL } from "./art";
 import Scene from "./Scene";
-import Controls, { CLOSURE_CHOICES } from "./Controls";
+import Controls, { CLOSURE_CHOICES, POLICIES, outOfRange } from "./Controls";
 import { Ladder, Neighbours } from "./People";
 import Chain from "./Chain";
 import { EdgeCard, LAYER_LABELS, PARAM_LABELS, VotesBlock } from "./parts";
@@ -94,6 +94,20 @@ export function WhoPays({ model }) {
   );
 }
 
+// Bring every lever back inside its reliable range (nearest allowed value).
+function clampToNormal(levers) {
+  const next = { ...levers };
+  for (const p of POLICIES) {
+    const v = next[p.key];
+    if (p.values) {
+      if (!p.values.includes(v)) next[p.key] = p.values.reduce((a, b) => (Math.abs(b - v) < Math.abs(a - v) ? b : a), p.values[0]);
+    } else {
+      next[p.key] = Math.min(p.max, Math.max(p.min, v));
+    }
+  }
+  return next;
+}
+
 export default function Lab({ model, composition }) {
   const [levers, setLeversState] = useState(DEFAULT_LEVERS);
   const [debates, setDebates] = useState({});
@@ -102,10 +116,20 @@ export default function Lab({ model, composition }) {
   const [playing, setPlaying] = useState(false);
   const [selected, setSelected] = useState(null);
   const [ready, setReady] = useState(false);
+  const [unlocked, setUnlocked] = useState(false);
+  // The rate change that removes each tax entirely, from revenue per point (illustrative extremes).
+  const abolish = useMemo(() => {
+    const per = (name) => model.params[name]?.central;
+    return {
+      irpfAll: -Math.round((composition.irpf / per("recaudacion_por_punto_irpf")) * 10) / 10,
+      contrib: -Math.round((composition.contrib / per("base_cotizacion_pib")) * 10) / 10,
+    };
+  }, [model, composition]);
 
   useEffect(() => {
     const { levers: l, debates: d, extra } = decodeState(window.location.hash);
     setLeversState(l);
+    if (outOfRange(l).length) setUnlocked(true); // a shared link with extreme values opens in illustrative mode
     setDebates(d);
     if (extra.y && model.years.includes(Number(extra.y))) setYear(Number(extra.y));
     setReady(true);
@@ -142,6 +166,15 @@ export default function Lab({ model, composition }) {
   const quintiles = quintileImpact(model, run, t, layerParams);
   const edgeById = useMemo(() => Object.fromEntries(model.edges.map((e) => [e.id, e])), [model]);
   const needsClosure = COST_LEVERS.some((k) => levers[k]);
+  const extreme = outOfRange(levers);
+  // How far the tax that pays for it would have to go, in the chosen year.
+  const closureNote = (() => {
+    const fmtPp = (v) => Math.abs(v).toLocaleString("es-ES", { maximumFractionDigits: 1 });
+    if (levers.closure === "iva" && run.closure_vat_pp[t] > 3) return ` Para pagarlo, en ${year} el IVA general tendría que subir ${fmtPp(run.closure_vat_pp[t])} puntos (al ${fmtPp(21 + levers.vatStd + run.closure_vat_pp[t])} %).`;
+    if (levers.closure === "irpf" && run.closure_irpf_pp[t] > 3) return ` Para pagarlo, en ${year} todos los tramos del IRPF tendrían que subir ${fmtPp(run.closure_irpf_pp[t])} puntos.`;
+    if (levers.closure === "cotizaciones" && run.closure_contrib_pp[t] > 3) return ` Para pagarlo, en ${year} las cotizaciones tendrían que subir ${fmtPp(run.closure_contrib_pp[t])} puntos.`;
+    return "";
+  })();
   const base = model.baseline;
   const band = (key) => ({ lo: ensemble.bands[key].lo, hi: ensemble.bands[key].hi });
 
@@ -168,8 +201,20 @@ export default function Lab({ model, composition }) {
   return (
     <div className="lab">
       <div className="lab__grid">
-        <Controls levers={levers} setLever={setLever} setLevers={setLevers} needsClosure={needsClosure} compact />
+        <Controls levers={levers} setLever={setLever} setLevers={setLevers} needsClosure={needsClosure} compact
+          unlocked={unlocked} setUnlocked={setUnlocked} abolish={abolish} />
         <div className="lab__stage">
+          {extreme.length ? (
+            <div className="lab__banner" role="status">
+              <strong>Modo ilustrativo.</strong> {extreme.map((p) => p.title).join(", ")}: fuera del rango en que el modelo es fiable. Los números enseñan el
+              mecanismo (qué se mueve y hacia dónde), no son estimaciones.
+              {closureNote}
+              {run.debt_pct[tEnd] > 300 ? ` La deuda llegaría al ${Math.round(run.debt_pct[tEnd]).toLocaleString("es-ES")} % del PIB en 2050, muy por encima de la de cualquier país rico hoy: mucho antes, nadie prestaría a estos tipos.` : ""}
+              <button type="button" className="chip" onClick={() => setLeversState((prev) => clampToNormal(prev))}>
+                Volver a valores normales
+              </button>
+            </div>
+          ) : null}
           <Scene model={model} run={run} t={t} composition={composition} />
           <Timeline years={model.years} year={year} setYear={(y) => { setPlaying(false); setYear(y); }} playing={playing}
             setPlaying={(p) => { if (p && year >= model.years.at(-1)) setYear(model.years[0]); setPlaying(p); }} />

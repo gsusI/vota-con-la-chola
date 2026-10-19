@@ -28,6 +28,33 @@ export const POLICIES = [
   { key: "ltiCap", icon: "mortgage", title: "Hipoteca frente a renta", unit: "veces la renta", values: [0, 6, 4.5], labels: { 0: "Sin límite" }, tone: PAL.yellow, group: "Vivienda" },
 ];
 
+// Beyond the reliable range: wider limits, bigger steps and shortcuts, unlocked once after a confirmation.
+// `abolish` values (the rate change that removes a tax) are computed by the page from revenue per point.
+export const EXTREMES = {
+  reval: { min: -10, max: 10, step: 1 },
+  age: { min: -5, max: 10, step: 1 },
+  irpfAll: { min: "abolish", max: 20, step: 2, shortcuts: [["abolish", "Sin IRPF"]] },
+  irpfTop: { min: -20, max: 30, step: 5 },
+  vatStd: { min: -21, max: 20, step: 1, shortcuts: [[-21, "Sin IVA general"]] },
+  vatRed: { min: -10, max: 11, step: 1, shortcuts: [[-10, "Sin IVA reducido"], [11, "Todo al 21 %"]] },
+  contrib: { min: "abolish", max: 20, step: 2, shortcuts: [["abolish", "Sin cotizaciones"]] },
+  corp: { min: -25, max: 25, step: 5, shortcuts: [[-25, "Sin Sociedades"]] },
+  pubHomes: { values: [100, 200, 500] },
+  land: { values: [100, 200, 500] },
+  capCut: { values: [30, 50] },
+  ltvCap: { values: [50, 30] },
+  ltiCap: { values: [3, 2] },
+};
+
+/** Lever values outside the reliable range (for the banner and to unlock a shared link). */
+export function outOfRange(levers) {
+  return POLICIES.filter((p) => {
+    const v = levers[p.key];
+    if (p.values) return !p.values.includes(v);
+    return v < p.min - 1e-9 || v > p.max + 1e-9;
+  });
+}
+
 export const CLOSURE_CHOICES = [
   { id: "deuda", icon: "debt", label: "Con deuda", note: "nadie paga hoy; crecen la deuda y sus intereses" },
   { id: "cotizaciones", icon: "payroll", label: "Con cotizaciones", note: "sube la cotización lo necesario" },
@@ -51,37 +78,98 @@ export const PRESETS = [
 
 const fmt = (v) => `${v > 0 ? "+" : v < 0 ? "−" : ""}${Math.abs(v).toLocaleString("es-ES")}`;
 
-function PolicyCard({ p, value, onChange, compact }) {
+function PolicyCard({ p, value, onChange, compact, unlocked, askUnlock, abolish }) {
   const on = value !== 0;
-  const clampStep = (v) => Math.min(p.max, Math.max(p.min, Math.round(v / p.step) * p.step));
-  // Discrete levers (housing): step through their list of values.
-  const idx = p.values ? Math.max(0, p.values.indexOf(value)) : -1;
-  const down = () => (p.values ? onChange(p.values[Math.max(0, idx - 1)]) : onChange(clampStep(value - p.step)));
-  const up = () => (p.values ? onChange(p.values[Math.min(p.values.length - 1, idx + 1)]) : onChange(clampStep(value + p.step)));
-  const atMin = p.values ? idx <= 0 : value <= p.min;
-  const atMax = p.values ? idx >= p.values.length - 1 : value >= p.max;
+  const x = EXTREMES[p.key];
+  const resolve = (v) => (v === "abolish" ? abolish[p.key] : v);
+  // Value lists: the reliable ones, then the extreme ones once unlocked (in the order that moves away from 0).
+  const list = p.values ? (unlocked && x?.values ? [...p.values, ...x.values] : p.values) : null;
+  const lo = unlocked && x && !p.values ? resolve(x.min) : p.min;
+  const hi = unlocked && x && !p.values ? x.max : p.max;
+  const stepAt = (v, dir) => {
+    const outside = dir > 0 ? v >= p.max : v <= p.min;
+    return unlocked && x?.step && outside ? x.step : p.step;
+  };
+  const round = (v) => Math.round(v * 100) / 100;
+  const idx = list ? Math.max(0, list.indexOf(value)) : -1;
+  const go = (dir) => {
+    if (list) {
+      const next = idx + dir;
+      if (next >= list.length) return x?.values && !unlocked ? askUnlock(() => onChange(x.values[0])) : null;
+      return onChange(list[Math.max(0, next)]);
+    }
+    const target = round(value + dir * stepAt(value, dir));
+    if (target > p.max + 1e-9 || target < p.min - 1e-9) {
+      if (!x) return null;
+      if (!unlocked) return askUnlock(() => onChange(target));
+    }
+    return onChange(Math.min(hi, Math.max(lo, target)));
+  };
+  const atMin = list ? idx <= 0 : value <= lo + 1e-9 && (unlocked || !x);
+  const atMax = list ? idx >= list.length - 1 && (unlocked || !x?.values) : value >= hi - 1e-9 && (unlocked || !x);
   const prefix = { capCut: "−", pubHomes: "+", land: "+" }[p.key] ?? "";
-  const shown = p.labels?.[value] ?? (p.values ? (value ? `${prefix}${value.toLocaleString("es-ES")}` : "0") : on ? fmt(value) : "0");
+  const shortcut = x?.shortcuts?.find(([v]) => Math.abs(resolve(v) - value) < 1e-6);
+  const shown = shortcut
+    ? shortcut[1]
+    : p.labels?.[value] ?? (p.values ? (value ? `${prefix}${value.toLocaleString("es-ES")}` : "0") : on ? fmt(round(value)) : "0");
+  const extreme = list ? !p.values.includes(value) : value < p.min - 1e-9 || value > p.max + 1e-9;
   return (
-    <div className={`pcard${on ? " is-on" : ""}`} style={{ "--tone": p.tone }} title={p.hint}>
+    <div className={`pcard${on ? " is-on" : ""}${extreme ? " is-extreme" : ""}`} style={{ "--tone": p.tone }} title={p.hint}>
       <span className="pcard__icon">
         <Icon name={p.icon} size={26} />
       </span>
       <span className="pcard__body">
         <span className="pcard__title">{p.title}</span>
         <span className="pcard__value">
-          {shown} {p.labels?.[value] ? null : <small>{p.unit}</small>}
+          {shown} {shortcut || p.labels?.[value] ? null : <small>{p.unit}</small>}
         </span>
         {p.hint && !compact ? <span className="pcard__hint">{p.hint}</span> : null}
+        {unlocked && x && !p.values ? (
+          <span className="pcard__extreme">
+            <input type="number" step={x.step} min={lo} max={hi} value={round(value)} aria-label={`${p.title}: valor`}
+              onChange={(e) => {
+                const v = Number(e.target.value);
+                if (Number.isFinite(v)) onChange(Math.min(hi, Math.max(lo, v)));
+              }} />
+            {(x.shortcuts || []).map(([v, label]) => (
+              <button key={label} type="button" className="chip chip--tiny" onClick={() => onChange(resolve(v))}>
+                {label}
+              </button>
+            ))}
+          </span>
+        ) : null}
       </span>
       <span className="pcard__steps">
-        <button type="button" aria-label={`${p.title}: menos`} disabled={atMin} onClick={down}>
+        <button type="button" aria-label={`${p.title}: menos`} disabled={atMin} onClick={() => go(-1)}>
           −
         </button>
-        <button type="button" aria-label={`${p.title}: más`} disabled={atMax} onClick={up}>
+        <button type="button" aria-label={`${p.title}: más`} disabled={atMax} onClick={() => go(1)}>
           +
         </button>
       </span>
+    </div>
+  );
+}
+
+function UnlockDialog({ onYes, onNo }) {
+  return (
+    <div className="unlock" role="dialog" aria-modal="true" aria-labelledby="unlock-title">
+      <div className="unlock__box">
+        <h3 id="unlock-title">¿Ver valores extremos?</h3>
+        <p>
+          El modelo está calibrado con cambios parecidos a los que se han visto en España y en países comparables. Fuera de ese rango sigue calculando con
+          las mismas relaciones, en línea recta, así que el resultado sirve para ilustrar el mecanismo (qué se mueve y hacia dónde), no como estimación:
+          quitar un impuesto entero o duplicar las pensiones cambiaría también cosas que el modelo no tiene.
+        </p>
+        <div className="unlock__actions">
+          <button type="button" className="chip is-on" onClick={onYes}>
+            Sí, quiero verlo
+          </button>
+          <button type="button" className="chip" onClick={onNo}>
+            Volver
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
@@ -92,7 +180,9 @@ const GROUPS = [
   { id: "Vivienda", icon: "building" },
 ];
 
-export default function Controls({ levers, setLever, setLevers, needsClosure, compact }) {
+export default function Controls({ levers, setLever, setLevers, needsClosure, compact, unlocked, setUnlocked, abolish }) {
+  const [pending, setPending] = useState(null);
+  const askUnlock = (apply) => setPending(() => apply);
   const activeIn = (g) => POLICIES.filter((p) => p.group === g && levers[p.key]).length;
   const [tab, setTab] = useState("Pensiones");
   // Follow the scenario: open the tab of the first lever that moved (presets, shared links).
@@ -126,10 +216,26 @@ export default function Controls({ levers, setLever, setLevers, needsClosure, co
       </div>
       <div className="ctrl__cards" role="tabpanel">
         {POLICIES.filter((p) => p.group === tab).map((p) => (
-          <PolicyCard key={p.key} p={p} value={levers[p.key]} onChange={(v) => setLever(p.key, v)} compact={compact} />
+          <PolicyCard key={p.key} p={p} value={levers[p.key]} onChange={(v) => setLever(p.key, v)} compact={compact}
+            unlocked={unlocked} askUnlock={askUnlock} abolish={abolish} />
         ))}
       </div>
+      {unlocked ? null : (
+        <button type="button" className="ctrl__unlockLink" onClick={() => askUnlock(() => {})}>
+          Probar valores extremos (quitar un impuesto, duplicar las pensiones…)
+        </button>
+      )}
       </div>
+      {pending ? (
+        <UnlockDialog
+          onYes={() => {
+            setUnlocked(true);
+            pending();
+            setPending(null);
+          }}
+          onNo={() => setPending(null)}
+        />
+      ) : null}
       <fieldset className={`ctrl__closure${needsClosure ? " is-needed" : ""}`}>
         <legend>¿Quién paga lo que cuesta cada año?</legend>
         <div>

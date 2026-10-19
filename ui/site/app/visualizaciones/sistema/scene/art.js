@@ -250,8 +250,9 @@ export function Services({ x = 0, y = 0, s = 1 }) {
 /** Stack of coins, one per `unit` of value; the outline marks the baseline. Origin = bottom centre. */
 export function CoinStack({ x = 0, y = 0, value, base, unit = 10, label, sub }) {
   const coin = 11;
-  const n = value / unit;
-  const nb = base / unit;
+  const MAX = 30; // beyond 300 % of GDP the pile stops growing on screen and says so
+  const n = Math.max(0, Math.min(MAX, value / unit));
+  const nb = Math.max(0, Math.min(MAX, base / unit));
   const full = Math.floor(n);
   const coins = [];
   for (let i = 0; i < Math.ceil(n); i += 1) {
@@ -268,6 +269,9 @@ export function CoinStack({ x = 0, y = 0, value, base, unit = 10, label, sub }) 
     <g transform={`translate(${x} ${y})`}>
       <ellipse cx="0" cy="2" rx="46" ry="8" fill="#00000014" />
       {coins}
+      {value / unit > MAX ? (
+        <text x="0" y={-MAX * coin - 20} textAnchor="middle" className="art__label">↑ sigue subiendo</text>
+      ) : null}
       {Math.abs(nb - n) > 0.05 ? (
         <g>
           <path d={`M-44 ${-nb * coin - 9} L44 ${-nb * coin - 9}`} stroke={PAL.ink2} strokeWidth="2" strokeDasharray="5 4" />
