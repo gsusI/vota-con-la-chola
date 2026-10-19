@@ -207,6 +207,26 @@ def build(conn: sqlite3.Connection) -> dict:
         for y in years
     ]
     eu = {geo: {int(p["period"]): p["value"] for p in rows} for geo, rows in eurostat.items()}
+
+    # Consolidated figure: who pays, per country, in the latest year every area reports every category,
+    # against each country's 1965 total.
+    by_area = {area: {code: annual(code, area) for code in oecd} for area in OECD_AREAS}
+    comp_year = max(set.intersection(*(set(series) for area in by_area.values() for series in area.values())))
+    first_year = years[0]
+    peers_composition = []
+    for area, cat in by_area.items():
+        total = cat["_T"][comp_year]
+        parts = {
+            "households": sum(cat[c][comp_year] for c in ("T_1100", "T_2100", "T_2300")),
+            "companies": sum(cat[c][comp_year] for c in ("T_1200", "T_2200")),
+            "consumption": cat["T_5000"][comp_year],
+            "property": cat["T_4000"][comp_year],
+        }
+        parts["other"] = max(0.0, total - sum(parts.values()))
+        peers_composition.append({
+            "area": area, "total": r(total), "base_total": r(cat["_T"].get(first_year)),
+            **{k: r(v) for k, v in parts.items()},
+        })
     rates = statutory_rates(conn)
     comp = complexity(conn)
 
@@ -246,6 +266,7 @@ def build(conn: sqlite3.Connection) -> dict:
         "composition_labels": COMPOSITION,
         "by_payer_pct_gdp": by_payer,
         "peers_pct_gdp": {area: points(annual("_T", area)) for area in OECD_AREAS},
+        "peers_composition": {"year": comp_year, "base_year": first_year, "areas": peers_composition},
         "eu27_pct_gdp": [
             {"year": y, "es": r(eu.get("ES", {}).get(y)), "eu27": r(v)} for y, v in sorted(eu.get("EU27_2020", {}).items())
         ],

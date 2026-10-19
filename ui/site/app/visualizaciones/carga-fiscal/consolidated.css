@@ -1,0 +1,161 @@
+/* «El dato mata el relato» figure for /visualizaciones/carga-fiscal/ (page-local styles). */
+.cbars {
+  display: grid;
+  gap: 8px;
+}
+
+.cbars__grid {
+  display: grid;
+  gap: 6px;
+}
+
+.cbars__row {
+  display: grid;
+  grid-template-columns: minmax(84px, 130px) 1fr minmax(118px, 170px);
+  gap: 10px;
+  align-items: center;
+  font-size: 0.86rem;
+}
+
+.cbars__row[data-highlight="true"] .cbars__label,
+.cbars__row[data-highlight="true"] .cbars__value strong {
+  font-weight: 800;
+}
+
+.cbars__label {
+  color: var(--viz-ink);
+}
+
+.cbars__track {
+  position: relative;
+  height: 26px;
+}
+
+.cbars__tick {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--viz-grid);
+}
+
+.cbars__stack {
+  position: absolute;
+  inset: 4px 0;
+}
+
+.cbars__seg {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  padding: 0;
+  border: 0;
+  border-right: 2px solid var(--viz-surface);
+  cursor: pointer;
+}
+
+.cbars__seg:last-child {
+  border-radius: 0 4px 4px 0;
+}
+
+.cbars__seg[data-active="true"],
+.cbars__seg:focus-visible {
+  outline: 2px solid var(--viz-ink);
+  outline-offset: 1px;
+  z-index: 1;
+}
+
+.cbars__base {
+  position: absolute;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  margin: -6px 0 0 -6px;
+  border-radius: 50%;
+  background: var(--viz-surface);
+  border: 2px solid var(--viz-ink);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.cbars__value {
+  color: var(--viz-ink-2);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.8rem;
+}
+
+.cbars__value strong {
+  color: var(--viz-ink);
+  font-size: 0.88rem;
+}
+
+.cbars__axis .cbars__track {
+  height: 16px;
+}
+
+.cbars__tickLabel {
+  position: absolute;
+  transform: translateX(-50%);
+  font-size: 11px;
+  color: var(--viz-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.cbars__readout {
+  margin: 0;
+  min-height: 1.4em;
+  font-size: 0.82rem;
+  color: var(--viz-ink-2);
+}
+
+.cbars__key {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid var(--viz-ink);
+  background: var(--viz-surface);
+  vertical-align: -1px;
+}
+
+.viz .vizRelatos {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  font-size: 0.86rem;
+  line-height: 1.45;
+}
+
+.viz .vizRelatos li {
+  padding: 10px 12px;
+  border-left: 3px solid var(--viz-axis);
+  background: rgba(23, 25, 31, 0.03);
+}
+
+.viz .vizRelatos strong {
+  display: block;
+  margin-bottom: 2px;
+}
+
+@media (max-width: 640px) {
+  .cbars__row {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+
+  .cbars__axis {
+    display: none;
+  }
+}
+
+.cbars__legendNote {
+  margin: -4px 0 0;
+  font-size: 0.82rem;
+  color: var(--viz-ink-2);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}

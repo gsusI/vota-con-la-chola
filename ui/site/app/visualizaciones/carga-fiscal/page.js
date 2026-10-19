@@ -4,6 +4,7 @@ import TimeSeriesChart from "../components/TimeSeriesChart";
 import Figure, { SeriesTable } from "../components/Figure";
 import { formatValue } from "../components/format.mjs";
 import { StatutoryRatesFigure, ComplexityFigures } from "./sections";
+import ConsolidatedBars from "./ConsolidatedBars";
 
 export const metadata = {
   title: "Cien años de impuestos en España | Vota Con La Chola",
@@ -121,6 +122,28 @@ export default function CargaFiscalPage() {
   const esIncrease = increases.find((item) => item.area === "ESP");
   const esRank = increases.indexOf(esIncrease) + 1;
   const eu = data.eu27_pct_gdp.at(-1);
+
+  // «El dato mata el relato»: level, composition, change and peers in one figure.
+  const pc = data.peers_composition;
+  const relatoParts = [
+    { key: "households", label: "Personas: IRPF y cotizaciones del trabajador y autónomos", short: "personas", color: C.blue },
+    { key: "companies", label: "Empresas: Sociedades y cotizaciones empresariales", short: "empresas", color: C.orange },
+    { key: "consumption", label: "Consumo: IVA, especiales y otros", short: "consumo", color: C.aqua },
+    { key: "property", label: "Propiedad", short: "propiedad", color: C.yellow },
+    { key: "other", label: "Otros", short: "otros", color: C.peer },
+  ];
+  const relatoRows = pc ? [...pc.areas].map((row) => ({ ...row, label: PEER_LABELS[row.area] })).sort((a, b) => b.total - a.total) : [];
+  const esRow = relatoRows.find((row) => row.area === "ESP");
+  const rankOf = (key, area = "ESP") =>
+    [...relatoRows].sort((a, b) => (b[key] || 0) - (a[key] || 0)).findIndex((row) => row.area === area) + 1;
+  const growthRank =
+    [...relatoRows].sort((a, b) => b.total - b.base_total - (a.total - a.base_total)).findIndex((row) => row.area === "ESP") + 1;
+  const above = relatoRows.filter((row) => row.total > (esRow?.total ?? 0) && row.area !== "OECD_REP").map((row) => row.label);
+  const ordinal = (n) => (n === 1 ? "la que más" : `la ${n}.ª que más`);
+  const relatoMax = Math.ceil(Math.max(...relatoRows.map((row) => row.total), 1) / 10) * 10;
+  // «y» becomes «e» before an /i/ sound (Italia), not before Alemania.
+  const listJoin = (items) =>
+    items.length > 1 ? `${items.slice(0, -1).join(", ")} ${/^h?i(?![aeou])/i.test(items.at(-1)) ? "e" : "y"} ${items.at(-1)}` : items[0] || "";
   const irpfLaw = data.complexity?.amendments?.find((law) => law.boe_id === "BOE-A-2006-20764");
   const irpfLengths = (data.complexity?.law_length || []).filter((row) => row.tax === "irpf").sort((a, b) => a.year - b.year);
   const irpfWords =
@@ -171,6 +194,77 @@ export default function CargaFiscalPage() {
           </div>
         ) : null}
       </section>
+
+      {esRow ? (
+        <Figure
+          id="relato"
+          title={`España es ${ordinal(growthRank)} ha subido desde ${pc.base_year} y ${ordinal(rankOf("companies"))} recauda de las empresas, pero sigue por debajo de ${listJoin(above)}`}
+          dek={`El dato mata el relato: cada barra es lo que recauda cada país en ${pc.year} (% del PIB), repartido por quién lo ingresa; el círculo marca su total en ${pc.base_year}, y la cifra de la derecha, lo que ha subido desde entonces. Nivel, composición, cambio y comparación en una sola figura, para que no se pueda leer a conveniencia.`}
+          legend={[...relatoParts.filter((part) => relatoRows.some((row) => (row[part.key] || 0) > 0.05)).map((part) => ({ id: part.key, label: part.label, color: part.color }))]}
+          legendKind="bar"
+          sources={[oecdSource]}
+          notes={[
+            `Año ${pc.year}: el último con todas las figuras para todos los países (la media OCDE de ${h.last_year} aún no está desglosada). Media OCDE: media simple de los miembros actuales.`,
+            "«Empresas» y «personas» es quién ingresa legalmente el tributo, no quién lo soporta: parte de las cotizaciones empresariales recae sobre el salario y el IVA sobre el consumidor.",
+          ]}
+          table={
+            <details className="vizTable">
+              <summary>Ver los datos en tabla (con el puesto de cada país)</summary>
+              <div className="vizTable__scroll">
+                <table>
+                  <thead>
+                    <tr>
+                      <th scope="col">País</th>
+                      <th scope="col">Total {pc.year}</th>
+                      <th scope="col">Total {pc.base_year}</th>
+                      {relatoParts.map((part) => (
+                        <th scope="col" key={part.key}>
+                          {part.short}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {relatoRows.map((row) => (
+                      <tr key={row.area}>
+                        <td>{row.label}</td>
+                        <td>{formatValue(row.total, "pct")}</td>
+                        <td>{formatValue(row.base_total, "pct")}</td>
+                        {relatoParts.map((part) => (
+                          <td key={part.key}>
+                            {formatValue(row[part.key], "pct")} ({rankOf(part.key, row.area)}.º)
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </details>
+          }
+        >
+          <p className="cbars__legendNote">
+            <span className="cbars__key" aria-hidden="true" /> Total en {pc.base_year}
+          </p>
+          <ConsolidatedBars rows={relatoRows} parts={relatoParts} axisMax={relatoMax} year={pc.year} baseYear={pc.base_year} highlight="ESP" />
+          <ul className="vizRelatos" aria-label="Qué relatos zanja y qué queda abierto">
+            <li>
+              <strong>«España es un infierno fiscal»</strong>
+              En total recauda menos que {listJoin(above)} ({num(esRow.total)} % del PIB). Pero es {ordinal(growthRank)} ha subido (+{num(esRow.total - esRow.base_total)} puntos) y{" "}
+              {ordinal(rankOf("companies"))} ingresa de las empresas ({num(esRow.companies)} %).
+            </li>
+            <li>
+              <strong>«En España se pagan pocos impuestos, hay margen»</strong>
+              La distancia con los grandes está en lo que pagan las personas ({num(esRow.households)} %, puesto {rankOf("households")}.º de {relatoRows.length}) y el consumo (
+              {num(esRow.consumption)} %, puesto {rankOf("consumption")}.º), no en las empresas.
+            </li>
+            <li>
+              <strong>Lo que esta figura no resuelve</strong>
+              Quién soporta de verdad cada tributo, los tipos efectivos frente a los legales, la economía sumergida y qué servicios recibe cada país a cambio.
+            </li>
+          </ul>
+        </Figure>
+      ) : null}
 
       <Figure
         id="largo-plazo"
