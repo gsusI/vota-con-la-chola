@@ -66,7 +66,7 @@
 
 .viz .vizFigure__dek {
   margin: 0;
-  max-width: 78ch;
+  max-width: var(--viz-measure);
   color: var(--viz-ink-2);
   line-height: 1.5;
 }
@@ -684,4 +684,31 @@
   color: inherit;
   text-decoration-color: var(--viz-axis);
   text-underline-offset: 2px;
+}
+
+/* Reading width, adapted to the nature of each element: running text is capped at a comfortable measure,
+   while charts, tables and card grids keep the full width (capping them would make them illegible).
+   :where() keeps specificity at zero, so a component's own max-width still wins. */
+.viz {
+  --viz-measure: 72ch;
+}
+
+.viz :where(p, h4, dt, dd, figcaption, summary, blockquote),
+.viz :where(ul, ol):not([class]),
+.viz :where(.vizProse, .vizExplain) :where(ul, ol) {
+  max-width: var(--viz-measure);
+}
+
+/* Headings are larger, so their measure is set in em to land at a similar line length (about 55-60 characters). */
+.viz :where(h1) {
+  max-width: 18em;
+}
+
+.viz :where(h2, h3) {
+  max-width: 34em;
+}
+
+.viz :where(svg, table, .tsChart, .vizTable__scroll, .vizMultiples, .vizBars, .vizStats, .vizGallery, .vizRelatos, .vizLegend),
+.viz :where(table, .vizBars, .vizLegend, .vizStats, .vizRelatos, .vizMultiples, .vizGallery) :where(p, h3, h4, li, dt, dd, figcaption) {
+  max-width: none;
 }
