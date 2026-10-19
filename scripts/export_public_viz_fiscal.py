@@ -355,15 +355,21 @@ def spending(store: Store) -> dict:
     pop = {g: {int(p["period"]): p["value"] * 1000 for p in rows} for g, rows in store.series("eurostat_sdmx", "POP_NC", "THS_PER").items()}
     eur_gdp = {g: {int(p["period"]): p["value"] for p in rows} for g, rows in store.series("eurostat_sdmx", "B1GQ", "CP_EUR_HAB").items()}
     hicp = {g: {int(p["period"]): p["value"] for p in rows} for g, rows in store.series("eurostat_sdmx", "CP00", "INX_A_AVG").items()}
-    pens_last = max(set.intersection(*(set(ben.get(g, {})) & set(cofog["GF1002"].get(g, {})) for g in EU_AREAS)))
+    pens_eur = defaultdict(dict)
+    for code in ("GF1002", "GF1003"):
+        for g, rows in store.series("eurostat_sdmx", f"{code}.TE.S13", "MIO_EUR", "gov_10a_exp").items():
+            for p in rows:
+                pens_eur[g][int(p["period"])] = pens_eur[g].get(int(p["period"]), 0.0) + p["value"]
+    pens_last = max(set.intersection(*(set(ben.get(g, {})) & set(cofog["GF1002"].get(g, {})) & set(pens_eur.get(g, {})) for g in EU_AREAS)))
     pension_rows = []
     for g in EU_AREAS:
         pens = lambda y: cofog["GF1002"][g][y] + cofog["GF1003"][g][y]  # noqa: E731
         share = lambda y: ben[g][y] / pop[g][y]  # noqa: E731
-        per_ben = lambda y: pens(y) / 100 * eur_gdp[g][y] * pop[g][y] / ben[g][y]  # noqa: E731
+        # Euros per pensioner straight from spending in euros (same table and year as the housing page's persona 4).
+        per_ben = lambda y: pens_eur[g][y] * 1e6 / ben[g][y]  # noqa: E731
         windows_g = {}
         for b in PENSION_WINDOWS:
-            if not all(b in d.get(g, {}) for d in (ben, cofog["GF1002"], cofog["GF1003"], pop, eur_gdp, hicp)):
+            if not all(b in d.get(g, {}) for d in (ben, cofog["GF1002"], cofog["GF1003"], pop, eur_gdp, hicp, pens_eur)):
                 continue
             delta = pens(pens_last) - pens(b)
             total_log = math.log(pens(pens_last) / pens(b))
@@ -626,6 +632,14 @@ def sibling(key: str) -> tuple[dict, dict]:
     data = json.loads(payload)
     return data, {"page": page, "label": label, "file": f"/visualizaciones/data/{key}.json",
                   "sha256": hashlib.sha256(payload).hexdigest(), "generated_at": data.get("generated_at")}
+
+
+def pension_per_pensioner(store: Store, geo: str, year: int) -> float:
+    """Old-age and survivors' pension spending (COFOG GF1002 + GF1003, euros) per pensioner (ESSPROS), unrounded."""
+    spend = sum(next(p["value"] for p in store.series("eurostat_sdmx", f"{code}.TE.S13", "MIO_EUR", "gov_10a_exp")[geo]
+                     if int(p["period"]) == year) for code in ("GF1002", "GF1003"))
+    ben = next(p["value"] for p in store.series("eurostat_sdmx", "T.OLD_SRV.TOTAL.TOTAL", "PER")[geo] if int(p["period"]) == year)
+    return spend * 1e6 / ben
 
 
 def pearson(pairs: list[tuple[float, float]]) -> float | None:
@@ -921,8 +935,7 @@ def build(conn: sqlite3.Connection) -> dict:
     territory_block = territory(store, distribution_block)
     results = service_results()
     pc = spending_block.get("pension_composition") or {}
-    pc_es = next((row for row in pc.get("areas", []) if row["area"] == "ES"), None)
-    segments_block = segments(store, pc_es["per_pensioner_eur"], pc["year"]) if pc_es else None
+    segments_block = segments(store, pension_per_pensioner(store, "ES", pc["year"]), pc["year"]) if pc.get("year") else None
 
     sources = {}
     for source_id, releases in store.provenance.items():

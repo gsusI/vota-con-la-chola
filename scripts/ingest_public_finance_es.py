@@ -835,6 +835,14 @@ EUROSTAT_DATASETS: list[dict[str, Any]] = [
         "definition": "Tabla EDP de Eurostat, administraciones públicas (S13): deuda bruta consolidada a fin de año en % del PIB.",
     },
     {
+        # Pension spending in euros, so spending per pensioner is euros / pensioners with no rounded share in between.
+        "name": "gov_10a_exp_eur", "dataset": "gov_10a_exp",
+        "filters": {"unit": "MIO_EUR", "sector": "S13", "na_item": "TE", "cofog99": ["GF1002", "GF1003"]},
+        "unit_code": "MIO_EUR", "unit_label": "Millones de euros",
+        "label": "Gasto de las administraciones públicas por función (COFOG), millones de euros: {label}",
+        "definition": "Gasto total de las administraciones públicas (S13) por función COFOG, en millones de euros corrientes.",
+    },
+    {
         "name": "gov_10a_main", "dataset": "gov_10a_main",
         "filters": {"unit": "PC_GDP", "sector": "S13", "na_item": ["TR", "TE", "B9", "D41PAY", "D1PAY"]},
         "unit_code": "PC_GDP", "unit_label": "% del PIB",
