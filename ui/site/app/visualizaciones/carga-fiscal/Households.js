@@ -62,6 +62,9 @@ export default function HouseholdsFigure({ segments, sources }) {
   const es = relief.find((row) => row.area === "ESP");
   const peers = relief.filter((row) => row.area !== "ESP");
   const loneBelow = peers.filter((row) => row.single_parent_aw67_net_rate < 0);
+  const wedgeAbove = peers.filter((row) => row.single_aw100_wedge > es?.single_aw100_wedge);
+  const wedgeBelow = peers.filter((row) => row.single_aw100_wedge <= es?.single_aw100_wedge);
+  const reliefSmaller = peers.filter((row) => row.relief_pts > es?.relief_pts);
   const q = data.vat_by_quintile || {};
   const below = rows.filter((row) => row.left_per_uc < nat.after_housing_per_uc);
 
@@ -220,10 +223,12 @@ export default function HouseholdsFigure({ segments, sources }) {
         {es ? (
           <li>
             <strong>«En España se pagan pocos impuestos»</strong>
-            Depende del hogar. El soltero con el salario medio paga menos que en los países vecinos (cuña del {nf(es.single_aw100_wedge, 1)} % frente al{" "}
-            {peers.map((row) => `${nf(row.single_aw100_wedge, 1)} % de ${OECD_LABELS[row.area]}`).join(", ")}). Pero tener hijos alivia poco: una pareja con dos
-            hijos y un solo sueldo paga {nf(es.relief_pts, 1)} puntos menos que el soltero, frente a{" "}
-            {peers.map((row) => `${nf(row.relief_pts, 1)} en ${OECD_LABELS[row.area]}`).join(", ")}. Y una madre sola con dos hijos y el 67 % del salario medio paga
+            Depende del hogar. El soltero con el salario medio soporta una cuña del {nf(es.single_aw100_wedge, 1)} %
+            {wedgeAbove.length ? `, menos que en ${listJoin(wedgeAbove.map((row) => `${OECD_LABELS[row.area]} (${nf(row.single_aw100_wedge, 1)} %)`))}` : ""}
+            {wedgeBelow.length ? ` y más que en ${listJoin(wedgeBelow.map((row) => `${OECD_LABELS[row.area]} (${nf(row.single_aw100_wedge, 1)} %)`))}` : ""}. Tener
+            hijos alivia {reliefSmaller.length === peers.length ? "menos que en todos ellos" : "distinto según el país"}: una pareja con dos hijos y un solo sueldo paga{" "}
+            {nf(es.relief_pts, 1)} puntos menos que el soltero, frente a {listJoin(peers.map((row) => `${nf(row.relief_pts, 1)} en ${OECD_LABELS[row.area]}`))}. Y una
+            madre sola con dos hijos y el 67 % del salario medio paga
             en neto el {nf(es.single_parent_aw67_net_rate, 1)} % de su sueldo
             {loneBelow.length ? `, cuando en ${listJoin(loneBelow.map((row) => OECD_LABELS[row.area]))} recibe más de lo que paga` : ""} (OCDE, {data.year}).
           </li>

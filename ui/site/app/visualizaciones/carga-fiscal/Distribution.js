@@ -100,8 +100,8 @@ export default function DistributionFigure({ distribution, irpfSource }) {
         </li>
         <li>
           <strong>Lo que esta figura no resuelve</strong>
-          Los impuestos indirectos por nivel de renta, quién soporta de verdad las cotizaciones de la empresa, la renta que no se declara y cómo cambia el
-          reparto por edad.
+          Quién soporta de verdad las cotizaciones de la empresa y la renta que no se declara. El IVA por nivel de renta (solo en estadística experimental)
+          está en <a href="#cinco-hogares">cinco hogares</a>, y la renta por edad, en <a href="#bolsillo">lo que pagan y lo que les queda</a>.
         </li>
       </ul>
     </Figure>

@@ -87,13 +87,13 @@ LOCAL_SOURCES: dict[str, dict[str, str]] = {
     "aeat_irpf_stats": {
         "name": "AEAT - Estadística de los declarantes del IRPF (tablas por tramos y por comunidad, curado)",
         "scope": "finanzas_publicas",
-        "default_url": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/",
+        "default_url": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/home.html",
         "format": "json",
     },
     "hacienda_ccaa": {
         "name": "Ministerio de Hacienda - tributación autonómica, liquidación del sistema de financiación y presupuestos liquidados de las CCAA (curado)",
         "scope": "finanzas_publicas",
-        "default_url": "https://www.hacienda.gob.es/es-ES/Areas%20Tematicas/Financiacion%20Autonomica/Paginas/Inicio.aspx",
+        "default_url": "https://www.hacienda.gob.es/es-ES/Areas%20Tematicas/Financiacion%20Autonomica/Paginas/Financiacion%20Autonomica.aspx",
         "format": "json",
     },
     "vclc_tax_law_rates": {
@@ -1075,7 +1075,7 @@ def load_regional(conn: sqlite3.Connection, snapshot_date: str) -> dict[str, int
             "frequency_code": "A", "frequency_label": "Anual", "unit_code": unit, "unit_label": unit_label, "label": label,
             "extraction_method": "curated_table_cell",
             "definition": (data.get("definitions") or {}).get(field) or data.get("source_note") or label,
-            "source_url": "https://www.hacienda.gob.es/es-ES/Areas%20Tematicas/Financiacion%20Autonomica/Paginas/Inicio.aspx",
+            "source_url": "https://www.hacienda.gob.es/es-ES/Areas%20Tematicas/Financiacion%20Autonomica/Paginas/Financiacion%20Autonomica.aspx",
         }
         counts = load_indicator(conn, definition, sha256_bytes(payload), len(payload), rel(path), definition["source_url"],
                                 snapshot_date, {"gaps": data.get("gaps", [])}, series)

@@ -13,7 +13,10 @@ const WORKER = "#1baf7a";
 const OECD_LABELS = { ESP: "España", DEU: "Alemania", FRA: "Francia", ITA: "Italia", PRT: "Portugal" };
 
 const nf = (v, digits = 1) =>
-  Number(v).toLocaleString("es-ES", { minimumFractionDigits: digits, maximumFractionDigits: digits, useGrouping: "always" });
+  Number(v).toLocaleString("es-ES", { minimumFractionDigits: digits, maximumFractionDigits: digits, useGrouping: "always" }).replace("-", "−");
+// «ha subido un 3,1 %» / «ha bajado un 0,7 %»: the verb carries the sign.
+const moved = (v) => `ha ${v < 0 ? "bajado" : "subido"} un ${nf(Math.abs(v))} %`;
+const signedPct1 = (v) => `${v >= 0 ? "+" : "−"}${nf(Math.abs(v))} %`;
 const signedPct = (v) => `${v >= 0 ? "+" : "−"}${nf(Math.abs(v))} %`;
 const ds = (dataset) => ({ label: `Eurostat, ${dataset}`, href: `https://ec.europa.eu/eurostat/databrowser/view/${dataset}/default/table` });
 const SOURCES = [ds("gov_10a_taxag"), ds("nama_10_pc"), ds("tec00113"), ds("nasa_10_ki"), ds("prc_hicp_aind")];
@@ -66,7 +69,7 @@ export function SqueezeFigure({ squeeze, distribution, territory, segments }) {
       id="bolsillo"
       title={`Desde ${base}, lo que recauda el Estado por habitante en España ha crecido un ${nf(b0.tax)} % descontada la inflación y la renta de los hogares, un ${nf(b0.income)} %${
         reverse ? `; en la UE, al revés (${nf(eu0.tax)} % y ${nf(eu0.income)} %)` : ""
-      }${old && mid ? `; pero la renta mediana real de los mayores de 65 ha subido un ${nf(old.change[ageBase])} % desde ${ageBase} y la de 25 a 49 años, un ${nf(mid.change[ageBase])} %` : ""}`}
+      }${old && mid ? `; pero desde ${ageBase} la renta mediana real de los mayores de 65 ${moved(old.change[ageBase])} y la de 25 a 49 años ${moved(mid.change[ageBase])}` : ""}`}
       dek={`El dato mata el relato: a la izquierda, cuánto se paga por habitante en impuestos y cotizaciones y cuánta renta disponible les queda a los hogares por habitante en ${year}, en la misma escala y en estándar de poder adquisitivo (euros que compran lo mismo en cada país). A la derecha, cuánto ha cambiado cada cosa descontada la inflación, también por persona ocupada; cambia el año de partida para ver que la conclusión no depende de él (salvo ${notOutgrows.join(" y ")}). Nivel, cambio, composición y vecinos en una sola figura. Debajo, la renta de los hogares de España partida por edad: la media de todos esconde que unas edades han ganado y otras no.`}
       legend={[
         { id: "tax", label: "Impuestos y cotizaciones por habitante", color: TAX },
@@ -83,7 +86,7 @@ export function SqueezeFigure({ squeeze, distribution, territory, segments }) {
         ...(ages
           ? [
               `Por edad: renta disponible equivalente mediana de las personas de cada edad (Eurostat ilc_di03, bandas de Eurostat: 16–24, 25–49, 50–64 y 65 y más; la etapa común «16–29» de las otras visualizaciones no existe en esta tabla), encuesta de ${ages.first_survey} a ${ages.survey_year} (rentas de ${ages.first_survey - 1} a ${ages.income_year}), deflactada con el IPCA a euros de ${ages.price_year}. Eurostat marca ruptura de serie en España en ${ages.breaks_es.join(" y ")}: la serie empieza en ${ages.first_survey} y no se compara con años anteriores. Alemania y Francia tienen rupturas posteriores y solo se comparan desde ellas.`,
-              "La renta equivalente reparte la del hogar entre sus miembros: un joven que vive con sus padres cuenta con la renta de sus padres. La mitad de los de 25 a 34 años vive aún en casa de sus padres (ver vivienda).",
+              `La renta equivalente reparte la del hogar entre sus miembros: un joven que vive con sus padres cuenta con la renta de sus padres. ${housing?.at_home_25_34 ? `El ${nf(housing.at_home_25_34.value)} % de los de 25 a 34 años vive aún en casa de sus padres (EU-SILC ${housing.at_home_25_34.year}, ver vivienda).` : ""}`,
             ]
           : []),
         `Año de partida: ${base} por defecto porque está a mitad de ciclo; 2007 fue el pico de ingresos de la burbuja inmobiliaria, 2008 el primer año de su caída, 2013 el fondo de la crisis y 2019 el último antes de la pandemia. Por ocupado: personas con empleo en el territorio (contabilidad nacional), para separar lo que sube porque trabaja más gente.`,
@@ -158,12 +161,20 @@ export function SqueezeFigure({ squeeze, distribution, territory, segments }) {
         {old && mid && allAges ? (
           <li>
             <strong>«Los hogares no han ganado nada en quince años»</strong>
-            Depende de la edad. Desde las rentas de {ageBase}, la renta mediana real de todas las edades sube un {nf(allAges.change[ageBase])} %; la de los mayores de
-            65, un {nf(old.change[ageBase])} %, y la de los de 25 a 49 años, un {nf(mid.change[ageBase])} %. Los mayores pasan de tener el {nf(old.vs_total_first, 0)} % de la
-            renta mediana de todos al {nf(old.vs_total_last, 0)} %. Coincide con la subida de la pensión media real (<a href="#descomposicion">más pensión por pensionista</a>) mientras la renta de
+            Depende de la edad. Desde las rentas de {ageBase}, la renta mediana real de todas las edades {moved(allAges.change[ageBase])}; la de los mayores de
+            65 {moved(old.change[ageBase])}, y la de los de 25 a 49 años {moved(mid.change[ageBase])}. Los mayores pasan de tener el {nf(old.vs_total_first, 0)} % de la
+            renta mediana de todos al {nf(old.vs_total_last, 0)} %. {ageBase} es el primer año comparable tras la ruptura de serie y el último antes de la crisis;
+            con otro punto de partida la distancia cambia:{" "}
+            {ages.bases
+              .filter((b) => String(b) !== ageBase && old.change[String(b)] != null)
+              .map((b) => `desde ${b}, ${signedPct1(old.change[String(b)])} frente a ${signedPct1(mid.change[String(b)])}`)
+              .join("; ")}
+            . Coincide con la subida de la pensión media real (<a href="#descomposicion">más pensión por pensionista</a>) mientras la renta de
             los adultos en edad de trabajar no ha recuperado del todo la de antes de la crisis.
             {ageGaps.length
-              ? ` En ${ageGaps.map((g) => `${g.label} la distancia es menor (${signedPct(g.old)} frente a ${signedPct(g.mid)})`).join(" y en ")}.`
+              ? ` Desde ${ageBase}, en ${ageGaps
+                  .map((g) => `${g.label} la distancia es ${g.old - g.mid < old.change[ageBase] - mid.change[ageBase] ? "menor" : "mayor"} (${signedPct1(g.old)} frente a ${signedPct1(g.mid)})`)
+                  .join(" y en ")}.`
               : ""}
             {housing ? ` Y la renta disponible no cuenta la vivienda: el ${nf(housing.old_own_nl)} % de los hogares de 65 o más tiene la casa pagada; de los de 16 a 29 que se han ido de casa, el ${nf(housing.young_rent_mkt)} % alquila a precio de mercado (` : ""}
             {housing ? <a href="#cinco-hogares">cinco hogares</a> : null}
@@ -183,8 +194,8 @@ export function SqueezeFigure({ squeeze, distribution, territory, segments }) {
           <li>
             <strong>«El contribuyente está asfixiado»</strong>
             Depende de quién y de dónde. El IRPF es progresivo: las declaraciones de más de 60.000 € (el {nf(highDecl)} %) pagan el {nf(highTax)} % de la
-            cuota. Pero la cuña fiscal sobre un salario medio (IRPF y cotizaciones) ha subido en España del {nf(wEs.AW100[0])} % al {nf(wEs.AW100[1])} %
-            desde {wedge.first_year}{wFell.length ? `, mientras bajaba en ${wFell.join(", ")}` : ""} (<a href="#quien-carga">quién lo carga</a>).
+            cuota. Pero la cuña fiscal sobre un salario medio (IRPF y cotizaciones) ha subido en España del {nf(wEs.AW100[0])} % en {wedge.first_year} al {nf(wEs.AW100[1])} %
+            en {wedge.year}{wFell.length ? `, mientras bajaba en ${wFell.join(", ")}` : ""} (<a href="#quien-carga">quién lo carga</a>).
             {topMin && topMax
               ? ` Y el tipo máximo del IRPF va del ${nf(topMin.top_rate_pct)} % de ${place(topMin)} al ${nf(topMax.top_rate_pct)} % de ${place(topMax)}, aunque en ${place(topMin)} se paga de media más IRPF (${nf(topMin.irpf_rate_pct)} % de la base)`
               : ""}
@@ -200,7 +211,7 @@ export function SqueezeFigure({ squeeze, distribution, territory, segments }) {
           <strong>Lo que esta figura no resuelve</strong>
           Quién soporta de verdad cada impuesto y qué servicios recibe cada país a cambio (<a href="#destino">más abajo</a>). Son medias de contabilidad
           nacional: en la encuesta a los hogares, el hogar mediano español
-          {survey ? ` (${nf(survey.es.median_income_pps, 0)} por adulto equivalente)` : ""} está mucho más cerca de la mediana europea (
+          {survey ? ` (${nf(survey.es.median_income_pps, 0)} PPS por adulto equivalente)` : ""} está mucho más cerca de la mediana europea (
           <a href="#mediana-vivienda">figura siguiente</a>).
         </li>
       </ul>

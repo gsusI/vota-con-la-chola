@@ -44,8 +44,8 @@ SOURCE_PAGES = {
     "oecd_income_distribution": ("OCDE · Income Distribution Database (réplica DBnomics)", "https://db.nomics.world/OECD/DSD_WISE_IDD@DF_IDD"),
     "oecd_taxing_wages": ("OCDE · Taxing Wages (réplica DBnomics)", "https://db.nomics.world/OECD/DSD_TAX_WAGES_COMP@DF_TW_COMP"),
     "oecd_tax_database": ("OCDE · Tax Database, tipo máximo del IRPF (réplica DBnomics)", "https://db.nomics.world/OECD/DSD_TAX_PIT@DF_PIT_TOP_EARN_THRESH"),
-    "hacienda_ccaa": ("Ministerio de Hacienda · Tributación autonómica 2025, liquidación del sistema de financiación y presupuestos liquidados de las CCAA 2024; INE, Contabilidad Regional", "https://www.hacienda.gob.es/es-ES/Areas%20Tematicas/Financiacion%20Autonomica/Paginas/Inicio.aspx"),
-    "aeat_irpf_stats": ("AEAT · Estadística de los declarantes del IRPF", "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/"),
+    "hacienda_ccaa": ("Ministerio de Hacienda · Tributación autonómica 2025, liquidación del sistema de financiación y presupuestos liquidados de las CCAA 2024; INE, Contabilidad Regional", "https://www.hacienda.gob.es/es-ES/Areas%20Tematicas/Financiacion%20Autonomica/Paginas/Financiacion%20Autonomica.aspx"),
+    "aeat_irpf_stats": ("AEAT · Estadística de los declarantes del IRPF", "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/home.html"),
     "worldbank_wdi": ("Banco Mundial · población (SP.POP.TOTL) e IPC (FP.CPI.TOTL)", "https://data.worldbank.org/indicator/FP.CPI.TOTL?locations=ES"),
     "vclc_tax_law_rates": ("Tipos legales: una norma o fuente citada por cambio", "https://www.boe.es/"),
     "boe_api_legal": ("BOE · API de legislación consolidada", "https://www.boe.es/datosabiertos/api/api.php"),
@@ -483,6 +483,7 @@ AEAT_CCAA = {
     "Cantabria": "CB", "Castilla y León": "CL", "Castilla - La Mancha": "CM", "Cataluña": "CT", "Comunitat Valenciana": "VC",
     "Extremadura": "EX", "Galicia": "GA", "Madrid, Comunidad de": "MD", "Murcia, Región de": "MC", "Rioja, La": "RI",
 }
+STATE_TOP_THRESHOLD_EUR = 300000  # Ley 35/2006 del IRPF, art. 63.1 (escala general estatal, último tramo)
 REGIONAL_FIELDS = {
     "top_rate_pct": ("irpf_top_rate_total", "PC"),
     "regional_top_rate_pct": ("irpf_top_rate_regional", "PC"),
@@ -536,6 +537,16 @@ def territory(store: Store, distribution_block: dict) -> dict | None:
                                                        "financing_after_funds_per_adj_inhabitant_eur", "spending_per_inhabitant_eur",
                                                        "gdp_per_inhabitant_eur", "irpf_rate_pct")},
         "peers_top_rates": distribution_block.get("top_rates"),
+        # State part of the common-regime top rate (combined minus regional, the same in every common community) and the
+        # state scale's top bracket (Ley 35/2006, art. 63.1: from 300.000 euros of taxable base).
+        "state_top_rate_pct": next(iter({r(row["top_rate_pct"] - row["regional_top_rate_pct"], 2) for row in common
+                                          if row.get("regional_top_rate_pct") is not None}), None),
+        "state_top_threshold_eur": STATE_TOP_THRESHOLD_EUR,
+        "regional_threshold_range": [
+            {"name": row["name"], "threshold_eur": row["regional_threshold_eur"]}
+            for row in (min(common, key=lambda x: x.get("regional_threshold_eur") or 1e12),
+                        max(common, key=lambda x: x.get("regional_threshold_eur") or 0))
+        ],
     }
 
 
@@ -756,9 +767,18 @@ def segments(store: Store, pension_per_pensioner: float, pension_year: int) -> d
             "vs_median_pct": r(left / uc / (nat_income * (1 - median_share / 100)) * 100, 0) if median_share else None, **extra,
         }
 
-    young_factor = madrid["young_net"] / hs["young_net_es"]["value"]
+    # Persona 1's pay is the housing page's: its published net (Spain's 25-34 gross pay x Madrid's wage level, minus the
+    # worker's rate at that pay). Recover the gross with the same OECD schedule so both pages show the same net.
     gross_young = next(p["value"] for p in pay["gross_young"] if p["year"] == madrid["young_net_year"])
-    g1 = gross_young * young_factor
+    net_of = lambda g: g * (1 - interp(single["npatr"], g / aw) / 100)  # noqa: E731
+    lo_g, hi_g = madrid["young_net"], madrid["young_net"] * 2
+    for _ in range(60):
+        mid_g = (lo_g + hi_g) / 2
+        lo_g, hi_g = (mid_g, hi_g) if net_of(mid_g) < madrid["young_net"] else (lo_g, mid_g)
+    g1 = (lo_g + hi_g) / 2
+    if abs(net_of(g1) - madrid["young_net"]) > 1:
+        raise SystemExit("persona 1: could not match the housing page's net pay")
+    young_factor = g1 / gross_young
     m1 = g1 / aw
     pension = pension_per_pensioner
     m4 = pension / aw

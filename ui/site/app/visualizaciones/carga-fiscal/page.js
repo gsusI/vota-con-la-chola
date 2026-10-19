@@ -310,7 +310,7 @@ export default function CargaFiscalPage() {
           <ul className="vizRelatos" aria-label="Qué relatos zanja y qué queda abierto">
             <li>
               <strong>«España es un infierno fiscal»</strong>
-              En total recauda menos que {listJoin(above)} ({num(esRow.total)} % del PIB). Pero es {ordinal(growthRank)} ha subido (+{num(esRow.total - esRow.base_total)} puntos) y{" "}
+              En total recauda menos que {listJoin(above)} ({num(esRow.total)} % del PIB en {pc.year}). Pero es {ordinal(growthRank)} ha subido (+{num(esRow.total - esRow.base_total)} puntos) y{" "}
               {ordinal(rankOf("companies"))} ingresa de las empresas ({num(esRow.companies)} %).
             </li>
             <li>
@@ -489,7 +489,7 @@ export default function CargaFiscalPage() {
         </>
       ) : null}
 
-      <StatutoryRatesFigure rates={data.statutory_rates} lastYear={Number(String(data.generated_at).slice(0, 4))} />
+      <StatutoryRatesFigure rates={data.statutory_rates} lastYear={Number(String(data.generated_at).slice(0, 4))} territory={data.territory} />
       <ComplexityFigures complexity={data.complexity} />
 
       <section className="card vizProse" id="metodo" aria-labelledby="metodo-title">

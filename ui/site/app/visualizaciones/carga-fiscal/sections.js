@@ -4,6 +4,15 @@ import { formatValue } from "../components/format.mjs";
 
 const COLORS = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100"];
 
+function spreadNote(territory) {
+  const common = (territory?.rows || []).filter((row) => row.regime === "comun" && row.top_rate_pct != null);
+  if (!common.length) return "";
+  const lo = common.reduce((a, b) => (b.top_rate_pct < a.top_rate_pct ? b : a));
+  const hi = common.reduce((a, b) => (b.top_rate_pct > a.top_rate_pct ? b : a));
+  const pct = (v) => formatValue(v, "pct", 1);
+  return ` (en ${territory.years?.top_rate_pct}, del ${pct(lo.top_rate_pct)} de ${lo.name} al ${pct(hi.top_rate_pct)} de ${hi.name})`;
+}
+
 const RATE_GROUPS = [
   {
     id: "personas",
@@ -39,7 +48,7 @@ function rateSources(rows) {
   return [...seen.entries()].map(([href, label]) => ({ href, label }));
 }
 
-export function StatutoryRatesFigure({ rates, lastYear }) {
+export function StatutoryRatesFigure({ rates, lastYear, territory }) {
   const series = rates?.series;
   if (!series) return null;
   const groups = RATE_GROUPS.map((group) => ({
@@ -63,7 +72,7 @@ export function StatutoryRatesFigure({ rates, lastYear }) {
         { href: "https://www.boe.es/", label: `BOE: la norma de cada cambio (${allRows.filter((row) => String(row.source_url || "").includes("boe.es")).length} filas, en la tabla)` },
       ]}
       notes={[
-        "Renta personal: tipo máximo de la escala general. Desde 1999 suma la escala estatal y la autonómica supletoria o de referencia; desde 2011 cada comunidad fija la suya (en 2025, del 45 % de Madrid al 54 % de la Comunitat Valenciana), así que la serie usa la escala de referencia.",
+        `Renta personal: tipo máximo de la escala general. Desde 1999 suma la escala estatal y la autonómica supletoria o de referencia; desde 2011 cada comunidad fija la suya${spreadNote(territory)}, así que la serie usa la escala de referencia.`,
         "Cotizaciones: régimen general, contrato indefinido (contingencias comunes, desempleo, FOGASA, formación profesional y, desde 2023, MEI). 1978 usa las antiguas bases tarifadas y no es comparable con los años siguientes; falta 1967–1977. Sociedades antes de 1967 no está verificado.",
         ...(lowConfidence.length ? [`${lowConfidence.length} valores con confianza baja; se señalan en la tabla.`] : []),
       ]}

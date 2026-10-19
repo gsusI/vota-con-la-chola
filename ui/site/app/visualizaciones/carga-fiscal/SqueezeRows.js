@@ -93,7 +93,7 @@ export default function SqueezeRows({ rows, year, bases, defaultBase, lastYear, 
           ))}
         </div>
         <div className="sq__track sq__track--axis">
-          {changeTicks.map((t) => (
+          {changeTicks.filter((t) => t % 20 === 0).map((t) => (
             <span className="sq__tickLabel" key={t} style={{ left: ch(t) }}>
               {t > 0 ? `+${t}` : t < 0 ? `−${Math.abs(t)}` : "0"}
             </span>

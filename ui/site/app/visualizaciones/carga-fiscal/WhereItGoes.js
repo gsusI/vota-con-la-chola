@@ -266,6 +266,7 @@ export function LongRunSpendingFigure({ spending, imfSource }) {
     { id: "imf_ie", label: "Intereses del Estado central (FMI)", shortLabel: "", color: "#f4cf7a", points: until(lr.imf_interest_pct_gdp, 1980) },
   ];
   const debt = [{ id: "d", label: "Deuda pública bruta (FMI)", shortLabel: String(lr.imf_debt_pct_gdp.at(-1).year), color: "#52514e", emphasis: true, points: lr.imf_debt_pct_gdp }];
+  const interestPeak = s.interest_pct_gdp.reduce((a, b) => (b.value > a.value ? b : a));
   const low = lr.imf_debt_pct_gdp.filter((p) => p.year >= 1950 && p.year <= 2000).reduce((a, b) => (b.value < a.value ? b : a));
   const lastDebt = lr.imf_debt_pct_gdp.at(-1);
   const first = lr.imf_spending_pct_gdp[0];
@@ -287,8 +288,8 @@ export function LongRunSpendingFigure({ spending, imfSource }) {
       </Figure>
       <Figure
         id="deuda"
-        title={`La deuda pública pasó del ${nf(low.value, 0)} % del PIB en ${low.year} al ${nf(lastDebt.value, 0)} % en ${lastDebt.year}`}
-        dek={`Deuda bruta de las administraciones públicas. Los intereses que genera cuestan hoy el ${nf(s.interest_pct_gdp.at(-1).value)} % del PIB, menos que en ${s.interest_pct_gdp[0].year} (${nf(s.interest_pct_gdp[0].value)} %) gracias a los tipos bajos.`}
+        title={`La deuda pública pasó del ${nf(low.value, 0)} % del PIB en ${low.year}, su mínimo de la segunda mitad del siglo XX, al ${nf(lastDebt.value, 0)} % en ${lastDebt.year}`}
+        dek={`Deuda bruta de las administraciones públicas. Los intereses que genera cuestan hoy el ${nf(s.interest_pct_gdp.at(-1).value)} % del PIB, menos que en ${s.interest_pct_gdp[0].year}, primer año de la serie (${nf(s.interest_pct_gdp[0].value)} %; máximo, ${nf(interestPeak.value)} % en ${interestPeak.year}), gracias a los tipos bajos.`}
         sources={[imfSource]}
         notes={["Serie histórica de deuda del FMI (Historical Public Debt Database); en los años antiguos cubre sobre todo al Estado central."]}
         table={<SeriesTable series={debt} />}

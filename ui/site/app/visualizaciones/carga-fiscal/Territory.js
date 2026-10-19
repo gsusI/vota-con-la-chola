@@ -64,7 +64,7 @@ export default function TerritoryFigure({ territory, sources }) {
       label: row.regime === "foral" ? `${row.code === "NC" ? "Navarra" : row.name} (foral)` : row.name,
       value: row.top_rate_pct,
       kind: row.regime,
-      note: row.regional_threshold_eur ? `desde ${thousand(row.regime === "foral" ? row.regional_threshold_eur : Math.max(300000, row.regional_threshold_eur))}` : "",
+      note: row.regional_threshold_eur ? `desde ${thousand(row.regime === "foral" ? row.regional_threshold_eur : Math.max(territory.state_top_threshold_eur, row.regional_threshold_eur))}` : "",
     })),
     ...peerRows.map((row) => ({ key: row.area, label: OECD_LABELS[row.area], value: row.top_rate_pct, kind: "peer", note: `desde ${nf(row.threshold_x_avg_wage)} × salario medio` })),
     { key: "ESP", label: OECD_LABELS.ESP, value: esOecd.top_rate_pct, kind: "ref", note: `${peers.year}` },
@@ -94,7 +94,7 @@ export default function TerritoryFigure({ territory, sources }) {
     <Figure
       id="territorio"
       title={`El tipo máximo del IRPF va del ${nf(lo.top_rate_pct)} % de ${place(lo)} al ${nf(hi.top_rate_pct)} % de ${place(hi)}: ${wider ? "más distancia dentro de España que" : "tanta distancia dentro de España como"} entre sus vecinos (del ${nf(pLo.top_rate_pct)} % de ${OECD_LABELS[pLo.area]} al ${nf(pHi.top_rate_pct)} % de ${OECD_LABELS[pHi.area]})`}
-      dek={`Tipo marginal máximo del IRPF sobre la renta general en ${y.top_rate_pct}: el estatal (24,5 %) más el de cada comunidad; País Vasco y Navarra tienen su propio IRPF (foral). En el mismo eje, el de los países vecinos según la OCDE. Debajo, lo que cada comunidad recibe del sistema de financiación, lo que gasta y lo que sus contribuyentes pagan de verdad en IRPF, ordenadas por PIB por habitante.`}
+      dek={`Tipo marginal máximo del IRPF sobre la renta general en ${y.top_rate_pct}: el estatal (${nf(territory.state_top_rate_pct)} %) más el de cada comunidad; País Vasco y Navarra tienen su propio IRPF (foral). En el mismo eje, el de los países vecinos según la OCDE. Debajo, lo que cada comunidad recibe del sistema de financiación, lo que gasta y lo que sus contribuyentes pagan de verdad en IRPF, ordenadas por PIB por habitante.`}
       legend={[
         { id: "comun", label: "Comunidad de régimen común", color: COLOR.comun },
         { id: "foral", label: "Régimen foral", color: COLOR.foral },
@@ -104,7 +104,7 @@ export default function TerritoryFigure({ territory, sources }) {
       legendKind="bar"
       sources={sources}
       notes={[
-        "En régimen común el tipo máximo combinado solo se alcanza por encima de 300.000 € de base liquidable (umbral del tramo estatal); el tramo autonómico más alto empieza antes, desde unos 53.000 € (Castilla y León) hasta 200.000 € (Comunitat Valenciana). Las rentas del ahorro tienen otra escala.",
+        `En régimen común el tipo máximo combinado solo se alcanza por encima de ${nf(territory.state_top_threshold_eur, 0)} € de base liquidable (umbral del tramo estatal, Ley 35/2006, art. 63); el tramo autonómico más alto empieza antes, desde ${nf(territory.regional_threshold_range[0].threshold_eur, 0)} € (${territory.regional_threshold_range[0].name}) hasta ${nf(territory.regional_threshold_range[1].threshold_eur, 0)} € (${territory.regional_threshold_range[1].name}). Las rentas del ahorro tienen otra escala.`,
         "País Vasco: escala de Gipuzkoa de 2024 (bizkaia.eus cortó la conexión al descargar y Álava y Gipuzkoa no tenían publicado el resumen de 2025); confianza media. Navarra: texto consolidado de su ley del IRPF en el BOE.",
         "Financiación: liquidación del sistema de régimen común (Hacienda), por habitante ajustado (población ponderada por necesidades de gasto); la columna con fondos de convergencia es un cálculo propio. País Vasco y Navarra no están en el sistema común (Concierto y Convenio) y no hay una cifra oficial comparable.",
         "Gasto por habitante: presupuestos liquidados de cada comunidad, sin las transferencias a ayuntamientos ni la PAC. No es comparable uno a uno: las forales y algunas comunes (policía en Cataluña) tienen más competencias.",
