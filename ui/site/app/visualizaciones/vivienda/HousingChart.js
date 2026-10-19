@@ -200,12 +200,12 @@ export default function HousingChart({
         ))}
         {(compact ? annotations.filter((note) => note.keepOnMobile) : annotations).map((note, index) => (
           <g key={`note-${note.year}-${index}`}>
-            <line className="tsChart__note" x1={sx(note.year)} x2={sx(note.year)} y1={margin.top - 4 - (note.row || 0) * 13} y2={margin.top + innerH} />
+            <line className="tsChart__note" x1={sx(note.year)} x2={sx(note.year)} y1={margin.top - 4 - (note.row || 0) * 16} y2={margin.top + innerH} />
             {!compact || note.keepOnMobile ? (
               <text
                 className="tsChart__noteLabel"
                 x={sx(note.year) + 3}
-                y={margin.top - 8 - (note.row || 0) * 13}
+                y={margin.top - 8 - (note.row || 0) * 16}
                 textAnchor={sx(note.year) > width - 120 ? "end" : "start"}
               >
                 {note.label}

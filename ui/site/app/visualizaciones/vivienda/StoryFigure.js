@@ -18,7 +18,8 @@ function creditColor(value) {
   return t < 0.25 ? ramp[0] : t < 0.6 ? ramp[1] : ramp[2];
 }
 
-const LABELLED = new Set([1995, 1998, 2001, 2004, 2007, 2009, 2011, 2013, 2015, 2019, 2021, 2023, 2025]);
+// Years close to another labelled year (2013/2015, 2014/2016) are left unlabelled so no two labels collide.
+const LABELLED = new Set([1995, 1998, 2001, 2004, 2007, 2009, 2011, 2013, 2019, 2021, 2023, 2025]);
 const avg = (rows, key) => rows.reduce((sum, row) => sum + row[key], 0) / rows.length;
 
 export default function StoryFigure({ story, composition, source }) {
@@ -123,7 +124,8 @@ export default function StoryFigure({ story, composition, source }) {
           </g>
         ))}
         <line x1={sx(1)} x2={sx(1)} y1={M.top} y2={M.top + innerH} className="tsChart__note" strokeDasharray="5 4" />
-        <text x={sx(1) + 6} y={M.top + 12} className="tsChart__noteLabel">
+        {/* Low on the reference line: no year falls below 3 years of income, so the label never meets a point. */}
+        <text x={sx(1) + 6} y={sy(1.6)} className="tsChart__noteLabel">
           1 vivienda por hogar nuevo
         </text>
         <text x={sx(1) - 6} y={M.top + innerH - 8} textAnchor="end" className="tsChart__noteLabel">
