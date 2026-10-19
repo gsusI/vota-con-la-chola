@@ -383,3 +383,18 @@ ejecutados con Node sobre el mismo código del navegador; JSON con fuentes y sha
 - **Siguiente**: corte 3, empleo e inmigración (SMI, jornada, cuota de autónomos), que une cotizantes y hogares. La capa
   de presentación se está rediseñando (escena ilustrada) en otra sesión sobre este corte.
 
+
+## Rediseño ilustrado de la página (2026-10-19)
+
+- **Por qué**: el mantenedor juzgó que el mapa de cajas no comunicaba. La página se rehízo de principio a fin con dibujos.
+- **Qué hay ahora** (`ui/site/app/visualizaciones/sistema/scene/`): una escena ilustrada (tiendas, empresas, quien trabaja, la
+  hucha pública, quien cobra pensión, servicios públicos, la pila de deuda, quien presta y la vivienda) con el dinero circulando
+  en monedas animadas; el grosor de cada flujo es su peso en % del PIB y el número de color, el cambio del escenario; cada figura
+  es un millón de personas y cada moneda de la pila, 10 puntos de deuda. Una línea de tiempo 2025–2050 con reproducción. Las
+  palancas son tarjetas con icono en pestañas (pensiones, impuestos, vivienda), «¿Quién paga?» con cuatro opciones dibujadas y
+  escenarios de ejemplo. Debajo: cuatro vecinos con cara que reacciona (Lucía, Ana y Javi, Carmen y Laura, los casos 1, 2, 4 y 5),
+  la escalera de rentas con una casa por quintil, la cadena de causas paso a paso con la fuerza de su evidencia y su ficha, y las
+  comparaciones de pensiones, impuestos y vivienda con iconos. Gráficos, tabla de capas de certeza y supuestos en disputa quedan
+  plegados en «Los números».
+- **Dos composiciones** de la escena (ancha y estrecha) para que en el móvil se lea sin encoger; respeta `prefers-reduced-motion`.
+- El mapa de cajas (`CausalMap.js`, `HousingMap.js`) queda solo como fuente de los nodos y relaciones de la cadena.

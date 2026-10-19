@@ -1,6 +1,7 @@
 import { readPublicJson } from "../../static-snapshot.mjs";
 import { StaticRouteHero } from "../../static-route-components";
-import Simulator, { ClosureFigure, HousingFigure } from "./Simulator";
+import Lab, { WhoPays } from "./scene/Lab";
+import HousingCompare from "./scene/HousingCompare";
 import { housingRows } from "./housingScenarios.mjs";
 import { CLOSURES, DEFAULT_LEVERS, centralParams, quintileImpact, simulate } from "./engine.mjs";
 import { computeBacktests } from "./backtests.mjs";
@@ -67,7 +68,13 @@ export default function SistemaPage() {
 
   // Housing (slice 2): the same six policies as the consolidated figure, central values for the title and the text.
   const H = model.housing;
-  const hRows = Object.fromEntries(housingRows(model, {}, 2035, 160).map((r) => [r.id, r]));
+  const hRowsList = housingRows(model, {}, 2035, 160);
+  const hRows = Object.fromEntries(hRowsList.map((r) => [r.id, r]));
+  // Size of each flow in the scene: revenue by tax in % of GDP, latest year of the tax page.
+  const fiscal = readPublicJson("visualizaciones/data/carga-fiscal.json", null);
+  const comp = fiscal.composition_pct_gdp;
+  const last = (code) => comp[code].at(-1).value;
+  const composition = { irpf: last("T_1100"), corp: last("T_1200"), contrib: last("T_2100") + last("T_2200") + last("T_2300"), vat: last("T_5000") };
   const verb = (v, d = 1) => (v < 0 ? `baja un ${num(-v, d)} %` : `sube un ${num(v, d)} %`);
   const t35h = model.years.indexOf(2035);
   const pubRun = simulate(model, { ...DEFAULT_LEVERS, pubHomes: 20 });
@@ -99,53 +106,19 @@ export default function SistemaPage() {
         ]}
       />
 
-      <section className="vizStats" aria-label="Cifras clave de la línea base">
-        <div className="card vizStat">
-          <span className="vizStat__label">Gasto en pensiones públicas, ley actual</span>
-          <span className="vizStat__value">
-            {num(b.pension_pct[0])} → {num(b.pension_pct[y2050])} %
-          </span>
-          <span className="vizStat__note">del PIB, {model.years[0]} → 2050 (Ageing Report 2024)</span>
-        </div>
-        <div className="card vizStat">
-          <span className="vizStat__label">Pensionistas</span>
-          <span className="vizStat__value">
-            {num(b.pensioners_k[0] / 1000)} → {num(b.pensioners_k[y2050] / 1000)} M
-          </span>
-          <span className="vizStat__note">{model.years[0]} → 2050, misma fuente</span>
-        </div>
-        <div className="card vizStat">
-          <span className="vizStat__label">Deuda pública si nada más cambiara</span>
-          <span className="vizStat__value">
-            {num(model.start.debt_pct, 0)} → {num(b.debt_pct[y2050], 0)} %
-          </span>
-          <span className="vizStat__note">
-            del PIB, {model.start.year} → 2050: cálculo propio con el resto del presupuesto constante en % del PIB; no es una previsión
-          </span>
-        </div>
-        <div className="card vizStat">
-          <span className="vizStat__label">Hogares nuevos frente a viviendas terminadas</span>
-          <span className="vizStat__value">
-            {num(H.net_households_next_k, 0)} mil / {num(H.completions_free_k + H.completions_protected_k, 0)} mil
-          </span>
-          <span className="vizStat__note">
-            al año: proyección del INE para {H.base_year + 1} frente a la media de obra terminada {H.base_year - 2}–{H.base_year}; en 2035 el INE prevé {num(H.net_households_2035_k, 0)} mil
-          </span>
-        </div>
-      </section>
 
       <div className="vizProse">
         <p>
-          El gasto en pensiones no es una partida aislada: cada euro de más se paga con deuda, con impuestos o recortando otra cosa, y cada una de esas formas
-          tiene sus propios efectos sobre el empleo, los precios y los intereses. Este simulador junta esas piezas en un modelo pequeño, con cada relación
-          respaldada por una ficha con su fuente, su rango y lo que la contradice.
-        </p>
-        <p>
-          La regla del modelo: <strong>solo calcula diferencias frente a la línea base oficial</strong> (la ley actual según la Comisión Europea), año a año
-          hasta 2050. Lo que es aritmética se separa de lo que depende de cómo reaccionen empresas, trabajadores y mercados, y cada resultado dice si su
-          signo aguanta todas las hipótesis.
+          Cada euro de más en pensiones o en vivienda pública se paga con deuda, con impuestos o recortando otra cosa, y cada forma de pagarlo mueve el
+          empleo, los precios y los intereses. Elige un cambio y mira cómo circula el dinero, a quién le toca y por qué. El modelo solo calcula diferencias
+          frente a la ley actual según las proyecciones oficiales, y cada relación tiene una ficha con su fuente, su rango y lo que la contradice.
         </p>
       </div>
+
+      <section id="simulador" aria-label="Simulador">
+        <p className="sim__label">Escenario de un modelo con supuestos visibles, no una predicción.</p>
+        <Lab model={model} composition={composition} />
+      </section>
 
       <figure className="vizFigure" id="tres-formas">
         <h2>
@@ -153,13 +126,14 @@ export default function SistemaPage() {
           caso 1 entre {num(Math.min(...taxPaid), 0)} y {num(Math.max(...taxPaid), 0)} euros al mes en 2035
         </h2>
         <p className="vizFigure__dek">
-          El mismo cambio (todas las pensiones suben cada año un punto más que el IPC desde 2026) con las tres formas de pagarlo. El pensionista del caso 4
-          gana unos {num(p4Gain, 0)} euros al mes en 2035 en los tres casos. El punto es el valor central;
-          la barra, del 5 % al 95 % de las simulaciones. Zanja dos relatos: «subir las pensiones no le cuesta a nadie» (con deuda la factura crece; con impuestos
-          la paga el caso 1 desde el primer año) y «lo pagan solo los jóvenes» (con deuda no paga nadie hoy y con IVA también lo pagan los pensionistas, que
-          recuperan el IPC un año después). Lo que queda abierto: cuánto empleo se pierde con las cotizaciones depende de un supuesto en disputa.
+          El mismo cambio (todas las pensiones suben cada año un punto más que el IPC desde 2026) con las cuatro formas de pagarlo. Carmen, la pensionista del
+          caso 4, gana unos {num(p4Gain, 0)} euros al mes en 2035 si se paga con deuda o con cotizaciones, y unos {num(runs.irpf.p4_month[t35], 0)} si se paga
+          con IRPF, que también paga ella. Cada casilla da el valor central y, debajo, el rango del 5 % al 95 % de las simulaciones; verde, mejor para quien
+          lo vive. Zanja dos relatos: «subir las pensiones no le cuesta a nadie» (con deuda la factura crece; con impuestos la paga Lucía desde el primer año)
+          y «lo pagan solo los jóvenes» (con deuda no paga nadie hoy; con IVA y con IRPF también pagan los pensionistas). Lo que queda abierto: cuánto
+          empleo se pierde con las cotizaciones depende de un supuesto en disputa.
         </p>
-        <ClosureFigure model={model} debates={{}} />
+        <WhoPays model={model} />
         <figcaption className="vizFigure__caption">
           <span>
             Fuente: modelo de esta página sobre la línea base del{" "}
@@ -245,8 +219,8 @@ export default function SistemaPage() {
           del mercado {verb(hRows.capIn.rent.v)} a quien encuentra piso con tope y {verb(hRows.capOut.rent.v)} a quien busca fuera
         </h2>
         <p className="vizFigure__dek">
-          Seis políticas de vivienda con el tamaño que dice cada fila, desde {model.policy_start}, y la inmigración como contexto. El punto es el valor central; la
-          barra, del 5 % al 95 % de las simulaciones. Pone a prueba tres relatos. «Construir no baja el alquiler»: lo baja, pero tarde (la obra pública tarda
+          Seis políticas de vivienda con el tamaño que dice cada fila, desde {model.policy_start}, y la inmigración como contexto. Cada casilla da el valor central y,
+          debajo, el rango del 5 % al 95 % de las simulaciones; verde, mejor para quien alquila o compra. Pone a prueba tres relatos. «Construir no baja el alquiler»: lo baja, pero tarde (la obra pública tarda
           unos {num(P.retardo_obra_publica, 0)} años) y poco a poco: en 2035 suma {num(pubRun.hs_stock_k[t35h], 0)} mil viviendas, un{" "}
           {num((pubRun.hs_stock_k[t35h] / H.households_k[t35h]) * 100, 1)} % de los hogares; los jóvenes que se emancipan al bajar el alquiler (bucle B2) ocupan
           un {num(b2Share * 100, 0)} % de lo construido, y cuesta unos {num(pubCostMeur, 0)} millones al año en 2035. «El tope
@@ -254,7 +228,7 @@ export default function SistemaPage() {
           supuesto más disputado de la página. «Los pisos turísticos son el problema»: retirar la mitad {verb(hRows.tour.rent.v, 1)} el alquiler medio de España, porque son el {num(H.tourist_share * 100, 2)} % de las viviendas (en algunos barrios pesan mucho más). Lo que queda
           abierto: la respuesta de la oferta al tope y cuántos pisos turísticos vuelven a vivienda habitual.
         </p>
-        <HousingFigure model={model} debates={{}} />
+        <HousingCompare rows={hRowsList} />
         <figcaption className="vizFigure__caption">
           <span>
             Fuente: modelo de esta página sobre la{" "}
@@ -303,10 +277,6 @@ export default function SistemaPage() {
         </table>
       </div>
 
-      <section id="simulador" aria-label="Simulador">
-        <p className="sim__label">Escenario de un modelo con supuestos visibles, no una predicción.</p>
-        <Simulator model={model} />
-      </section>
 
       <section className="vizProse" id="metodo">
         <h2>Método</h2>
