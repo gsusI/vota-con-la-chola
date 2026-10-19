@@ -14,6 +14,7 @@ import csv
 import io
 import json
 import sqlite3
+import urllib.parse
 import sys
 from collections import defaultdict
 from datetime import datetime, timezone
@@ -25,7 +26,7 @@ OUT_JSON = REPO_ROOT / "ui/site/public/visualizaciones/data/educacion.json"
 OUT_CSV = REPO_ROOT / "ui/site/public/visualizaciones/data/educacion.csv"
 
 SOURCE_PAGES = {
-    "mefp_educabase": ("Ministerio de Educación, FP y Deportes · EDUCAbase (gasto público, alumnado, idoneidad)", "https://www.educacionfpydeportes.gob.es/servicios-al-ciudadano/estadisticas/economicas/gasto/series.html"),
+    "mefp_educabase": ("Ministerio de Educación, FP y Deportes · EDUCAbase (gasto público, alumnado, idoneidad, abandono por estudios de la madre)", "https://www.educacionfpydeportes.gob.es/servicios-al-ciudadano/estadisticas/economicas/gasto/series.html"),
     "eurostat_sdmx": ("Eurostat · edat_lfse_14, edat_lfse_16, lfsa_eoqgan, gov_10a_exp, educ_uoe_fine09, nama_10_gdp", "https://ec.europa.eu/eurostat/databrowser/view/edat_lfse_14/default/table"),
     "oecd_eag_finance": ("OCDE · Education at a Glance, gasto por estudiante (réplica DBnomics)", "https://db.nomics.world/OECD/DSD_EAG_UOE_FIN@DF_UOE_INDIC_FIN_PERSTUD"),
     "worldbank_edstats": ("Banco Mundial · EdStats, puntuaciones PISA 2000-2018", "https://databank.worldbank.org/source/education-statistics-%5e-all-indicators"),
@@ -446,7 +447,9 @@ def build(conn: sqlite3.Connection) -> dict:
             {"id": "immigrant", "raw": immigrant_gap, "adjusted": immigrant_gap_adj, "share": immigrant_share["ESP"][2022]},
             {"id": "gender", "raw": quoted("pisa_gender_gap_math"), "oecd": quoted("pisa_gender_gap_math", "OECD"),
              "reading": quoted("pisa_gender_gap_reading")},
-            {"id": "change", "raw": r(abs(es_math[2022] - es_math[2003]), 0), "from": 2003, "first": es_math[2003], "last": es_math[2022]},
+            {"id": "change", "raw": r(abs(es_math[2022] - es_math[2003]), 0), "from": 2003, "first": es_math[2003], "last": es_math[2022],
+             "peak_year": max((y for y in es_math if y >= PISA_FIRST_COMPARABLE["math"]), key=lambda y: es_math[y]),
+             "peak": max(v for y, v in es_math.items() if y >= PISA_FIRST_COMPARABLE["math"])},
             {"id": "oecd", "raw": r(abs(es_math[2022] - oecd_math[2022]), 0), "spain": es_math[2022], "oecd_value": oecd_math[2022]},
         ],
         "cases": [
@@ -616,6 +619,9 @@ def build(conn: sqlite3.Connection) -> dict:
     for source_id, releases in store.provenance.items():
         label, page = SOURCE_PAGES[source_id]
         retrieved = max((rel["retrieved_at"] or "" for rel in releases), default="") or None
+        if source_id == "eurostat_sdmx":  # name every dataset the page actually loaded, not a hand-kept list
+            datasets = sorted({urllib.parse.urlparse(rel["url"]).path.rsplit("/", 1)[-1] for rel in releases if rel["url"]})
+            label = "Eurostat · " + ", ".join(datasets)
         sources[source_id] = {"label": label, "page": page, "retrieved_at": retrieved, "releases": releases}
     documents = json.loads(conn.execute(
         """

@@ -167,7 +167,7 @@ export function RegionsFigure({ data, sources }) {
       <Explain
         shows="Cada fila es una comunidad autónoma, ordenada por su puntuación en matemáticas en PISA 2022: la puntuación, lo que gastó su consejería de educación por alumno ese año y su tasa de abandono temprano más reciente."
         read={`Si más gasto significara mejores resultados, las barras verdes se acortarían de arriba abajo igual que las azules. Apenas ocurre: ${name(priciest.region)}, la que más gasta, queda en el puesto ${rank(priciest.region)} de ${rows.length} en PISA; ${name(cheapest.region)}, la que menos, en el ${rank(cheapest.region)}.`}
-        notSay="No mide eficiencia ni causalidad: las comunidades difieren en renta, origen del alumnado, dispersión rural, salarios docentes y precios. Una correlación débil con 17 comunidades no prueba que el gasto no importe."
+        notSay={`No mide eficiencia ni causalidad: las comunidades difieren en renta, origen del alumnado, dispersión rural, salarios docentes y precios. Una correlación débil con ${rp.n} comunidades no prueba que el gasto no importe.`}
       />
       <div style={{ display: "grid", gridTemplateColumns: "minmax(110px, 160px) 1fr 1fr 1fr", gap: "4px 12px", fontSize: "0.84rem", alignItems: "center" }}>
         <span />
@@ -209,6 +209,7 @@ export function EquityFigure({ data, sources }) {
   const eq = data.equity;
   const comp = eq.composition;
   const share = eq.immigrant_share;
+  const isec2015 = data.composition.isec_by_cycle.ESP.find((p) => p.year === 2015)?.value;
   return (
     <Figure
       id="equidad"
@@ -217,7 +218,7 @@ export function EquityFigure({ data, sources }) {
       sources={sources}
       notes={[
         `Efecto composición: ${comp.formula}. ${num(comp.share_2022 - comp.share_2012)} puntos porcentuales más de alumnado inmigrante × ${comp.gap_raw} puntos de diferencia = ${num(comp.effect_raw_points)} puntos de la media; con la diferencia ajustada por nivel socioeconómico (${comp.gap_adjusted}), ${num(comp.effect_adjusted_points)}.`,
-        "ISEC: índice PISA de estatus económico, social y cultural (estudios y profesión de los padres, recursos en casa). Valores de la nota de país de la OCDE y de los informes españoles del INEE, con cita literal. Las barras muestran la distancia a la media OCDE (0) de cada ciclo; el valor de 2015 (−0,51) se aparta mucho del resto y, sin una serie homogénea de la OCDE (oecd.org bloquea la descarga), no lo leemos como tendencia: lo más que puede decirse es que el alumnado español se ha acercado a la media OCDE entre 2012 y 2022.",
+        `ISEC: índice PISA de estatus económico, social y cultural (estudios y profesión de los padres, recursos en casa). Valores de la nota de país de la OCDE y de los informes españoles del INEE, con cita literal. Las barras muestran la distancia a la media OCDE (0) de cada ciclo; el valor de 2015 (${num(isec2015, 2).replace("-", "−")}) se aparta mucho del resto y, sin una serie homogénea de la OCDE (oecd.org bloquea la descarga), no lo leemos como tendencia: lo más que puede decirse es que el alumnado español se ha acercado a la media OCDE entre 2012 y 2022.`,
         "Brecha por origen social a lo largo del tiempo: la nota de país de la OCDE afirma que «Entre el 2012 y el 2022, la brecha en el rendimiento matemático entre el mejor 25 % y el peor 25 % de los estudiantes según el ISEC permanecía estable en España, así como en el promedio OCDE». Las puntuaciones por cuartil de cada ciclo solo están en tablas de oecd.org.",
         "Cobertura: la escolarización es obligatoria hasta los 16 años (Ley Orgánica 1/1990, LOGSE), así que casi todos los alumnos de 15 años están escolarizados y se examinan. La caída del abandono temprano, que se mide entre los 18 y los 24 años, apenas cambia quién hace PISA; lo que sí cambia es en qué curso están (menos repetidores).",
       ]}
@@ -516,7 +517,8 @@ export function AttainmentFigure({ data, sources, overq }) {
             Por generación, {gen.year}
             <span>
               Como mucho ESO: {num(genRow("Y25-34").ES["ED0-2"])} % de 25 a 34 años y {num(genRow("Y55-64").ES["ED0-2"])} % de 55 a 64 (UE-27:{" "}
-              {num(genRow("Y25-34").EU27_2020["ED0-2"])} % y {num(genRow("Y55-64").EU27_2020["ED0-2"])} %)
+              {num(genRow("Y25-34").EU27_2020["ED0-2"])} % y {num(genRow("Y55-64").EU27_2020["ED0-2"])} %). La generación de la persona 4 (65 años o más)
+              no está en esta tabla de Eurostat: la más cercana es la de 55 a 64
             </span>
           </h3>
           <div style={{ display: "grid", gap: 8 }}>

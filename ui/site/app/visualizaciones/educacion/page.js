@@ -152,6 +152,7 @@ export default function EducacionPage() {
   const lmRow = (level) => lm.rows.find((row) => row.level === level);
   const motherLow = lmRow("E. Primaria e inferior");
   const motherHigh = lmRow("E. Superior");
+  const regionLast = (name) => el.regions.find((row) => row.name === name)?.last;
   const birth = data.distribution.leavers_by_birth;
   const bornAbroad = birth.ES.FOR.at(-1);
   const bornHere = birth.ES.NAT.at(-1);
@@ -281,7 +282,7 @@ export default function EducacionPage() {
           </li>
           <li>
             <strong>Menos abandono, en buena parte porque las madres tienen más estudios.</strong> El abandono temprano bajó del{" "}
-            {num(h.leavers_2008)} % de 2008 al {num(h.leavers_last)} %, pero va del {num(motherHigh.rate_last)} % de los jóvenes con madre universitaria al{" "}
+            {num(h.leavers_2008)} % de 2008, su máximo reciente ({num(h.leavers_2000)} % en 2000), al {num(h.leavers_last)} %, pero va del {num(motherHigh.rate_last)} % de los jóvenes con madre universitaria al{" "}
             {num(motherLow.rate_last)} % de los que tienen madre con Primaria o menos, y entre el {num(lmShare.min, 0)} % y el {num(lmShare.max, 0)} % de
             la bajada (según el año de partida) se debe a que hoy hay muchas más madres con estudios. La repetición a los 15 años bajó del{" "}
             {num(h.behind_peak.value)} % al {num(h.behind_last.value)} %. <a href="#abandono">Ver abandono</a>
@@ -289,8 +290,8 @@ export default function EducacionPage() {
           <li>
             <strong>Las diferencias están dentro.</strong> El origen familiar separa {data.equity.escs_gap.ESP[2022]} puntos de PISA entre el cuarto de alumnos
             más favorecido y el menos; entre comunidades hay {regionSpread}, más que entre España y los países comparados, y apenas se relacionan con lo
-            que gasta cada una (correlación {num(data.regions_pisa.pearson, 2)}). La concertada saca {data.gaps.rows.find((r) => r.id === "private").raw} puntos
-            más que la pública, pero {data.gaps.rows.find((r) => r.id === "private").adjusted_school} a igual origen social. <a href="#donde-diferencia">Ver dónde está la diferencia</a>
+            que gasta cada una (correlación {num(data.regions_pisa.pearson, 2)}). Los centros concertados y privados sacan {data.gaps.rows.find((r) => r.id === "private").raw} puntos
+            más que los públicos, pero {data.gaps.rows.find((r) => r.id === "private").adjusted_school} a igual origen social. <a href="#donde-diferencia">Ver dónde está la diferencia</a>
           </li>
           <li>
             <strong>Un reloj de arena.</strong> El {num(attain("ED5-8"), 0)} % de los jóvenes de 25 a 34 años tiene estudios superiores y el{" "}
@@ -527,7 +528,7 @@ export default function EducacionPage() {
 
       <Figure
         id="abandono"
-        title={`El abandono escolar temprano bajó del ${num(h.leavers_2008)} % de 2008 al ${num(h.leavers_last)} % en ${h.leavers_last_year}, pero va del ${num(motherHigh.rate_last)} % con madre universitaria al ${num(motherLow.rate_last)} % con madre con Primaria, y entre el ${num(lmShare.min, 0)} % y el ${num(lmShare.max, 0)} % de la bajada, según el año de partida, viene de que hoy hay más madres con estudios`}
+        title={`El abandono escolar temprano bajó del ${num(h.leavers_2008)} % de 2008, su máximo reciente, al ${num(h.leavers_last)} % en ${h.leavers_last_year}, pero va del ${num(motherHigh.rate_last)} % con madre universitaria al ${num(motherLow.rate_last)} % con madre con Primaria, y entre el ${num(lmShare.min, 0)} % y el ${num(lmShare.max, 0)} % de la bajada, según el año de partida, viene de que hoy hay más madres con estudios`}
         dek={`Jóvenes de 18 a 24 años que como mucho terminaron la ESO y no siguen estudiando. La distancia con la UE-27 pasó de ${num(h.leavers_2008 - h.leavers_eu_2008)} puntos a ${num(h.leavers_last - h.leavers_eu_last)}; España sigue por encima de la media europea (${num(h.leavers_eu_last)} %) y de Alemania, Francia, Italia y Portugal. La media junta realidades muy distintas: según los estudios de la madre, de ${num(motherHigh.rate_last)} % a ${num(motherLow.rate_last)} %; según dónde nació el joven, ${num(bornHere.value)} % y ${num(bornAbroad.value)} %; según la comunidad, de ${num(el.regions[0].last)} % a ${num(el.regions.at(-1).last)} %.`}
         legend={leavers.slice().reverse()}
         sources={[S.eurostat("edat_lfse_14"), S.eurostat("edat_lfse_16"), S.eurostat("edat_lfse_02"), S.mefpEpa]}
@@ -561,6 +562,13 @@ export default function EducacionPage() {
           </span>
         </h3>
         <MotherDumbbell lm={lm} />
+        <p>
+          <strong>Casos tipo</strong> (con el corte que los define, no un cruce observado): los hijos de la persona 3 (de 45 a 64 años, con poca
+          formación, en el sur) abandonan en un {num(motherLow.rate_last)} % si la madre no pasó de Primaria y en un{" "}
+          {num(lmRow("1ª etapa E. Secundaria").rate_last)} % si terminó la ESO; la media de Andalucía es del {num(regionLast("Andalucía"))} %. Los de la
+          persona 5 (con estudios universitarios, en el norte o en Madrid), en un {num(motherHigh.rate_last)} % con madre universitaria; la media del País Vasco es
+          del {num(regionLast("País Vasco"))} % y la de Madrid, del {num(regionLast("Comunidad de Madrid"))} %. La media de España: {num(h.leavers_last)} %.
+        </p>
         <EduTable caption="Ver el abandono por estudios de la madre en tabla" series={motherSeries} />
         <h3 className="vizPanelTitle">
           Cuánto de la bajada es composición y cuánto mejora dentro de cada grupo
@@ -774,7 +782,7 @@ export default function EducacionPage() {
           <li>
             <strong>Lo que estos datos no pueden decir.</strong> Ninguna de estas series mide causalidad. Para saber si un euro más mejora resultados
             haría falta comparar alumnos parecidos con distinto gasto (evaluaciones de programas concretos), no medias nacionales. Entre comunidades, la
-            relación entre gasto y PISA es débil, pero 17 casos con renta, población y salarios distintos no bastan para descartarla.
+            relación entre gasto y PISA es débil, pero {data.regions_pisa.n} casos con renta, población y salarios distintos no bastan para descartarla.
           </li>
         </ul>
       </section>

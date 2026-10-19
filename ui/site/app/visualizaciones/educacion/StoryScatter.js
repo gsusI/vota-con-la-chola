@@ -303,7 +303,7 @@ export function StoryFigure({ story, sources, h }) {
           [
             "¿Sirve o no sirve gastar?",
             "?",
-            "Queda abierto: medias nacionales y 17 comunidades no permiten medir el efecto de un euro más. El gasto actúa con años de retraso, se reparte en salarios, edificios o apoyo y cambia a la vez que la población, las leyes y la pandemia.",
+            `Queda abierto: medias nacionales y ${story.regions.length} comunidades no permiten medir el efecto de un euro más. El gasto actúa con años de retraso, se reparte en salarios, edificios o apoyo y cambia a la vez que la población, las leyes y la pandemia.`,
           ],
         ]}
       />
