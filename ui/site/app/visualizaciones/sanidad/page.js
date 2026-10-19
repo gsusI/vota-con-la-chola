@@ -587,24 +587,24 @@ export default function SanidadPage() {
           highlight={["ES"]}
           ariaLabel="Necesidad dental no atendida por coste, quintiles de ingresos extremos, España y comparables"
         />
-        <section aria-label="Qué relatos zanja este gráfico" style={{ display: "grid", gap: 6, marginTop: 8 }}>
-          <p style={{ margin: 0 }}>
+        <section aria-label="Qué relatos zanja este gráfico">
+          <p>
             <strong>«Tenemos la mejor sanidad del mundo».</strong> En resultados, casi: pocas muertes evitables con poco dinero. En acceso, no: las esperas crecen en casi todas las comunidades, y lo que la sanidad pública no cubre, como el dentista, deja fuera al {num(story.dental.rows.find((row) => row.code === "ES").poor)} % de los más pobres.
           </p>
-          <p style={{ margin: 0 }}>
+          <p>
             <strong>«La sanidad se hunde por los recortes».</strong> Los recortes fueron reales en 2010–2013 (ver el gasto por habitante), pero entre {story.regions.from} y {story.regions.to} el gasto real subió en las {story.regions.spend_up} comunidades y la espera subió en {story.regions.days_up} de ellas: el problema de acceso de estos años no se explica por menos dinero.
           </p>
-          <p style={{ margin: 0 }}>
+          <p>
             <strong>«Basta con gastar más».</strong> Entre países, gastar más va con menos mortalidad tratable; entre comunidades, gastar más no va con esperar menos ({num(story.regions.rho_level, 2)}).
           </p>
-          <p style={{ margin: 0 }}>
+          <p>
             <strong>Lo que sigue siendo ambiguo.</strong> Por qué España saca tanto con tan poco (¿sistema, hábitos, salarios sanitarios bajos?), si la demanda creció más deprisa que el gasto (envejecimiento, pacientes que antes no se apuntaban) y si las listas de cada comunidad miden lo mismo. Ningún gráfico con estos datos puede separar esas causas.
           </p>
         </section>
       </Figure>
 
-      <h2 style={{ margin: "26px 4px 0", fontSize: "1.3rem" }}>1. Resultados de salud</h2>
-      <p style={{ margin: "0 4px", color: "var(--ink-soft)" }}>¿Vivimos mucho y bien, y cuánto tiene que ver la sanidad?</p>
+      <h2 style={{ marginTop: "2.5rem" }}>1. Resultados de salud</h2>
+      <p style={{ color: "var(--ink-soft)" }}>¿Vivimos mucho y bien, y cuánto tiene que ver la sanidad?</p>
 
       <Figure
         id="esperanza-de-vida"
@@ -755,8 +755,8 @@ export default function SanidadPage() {
         <HealthChart series={splitAtBreaks(over65Series)} xMin={1960} xMax={o65Last.year} height={260} ariaLabel="Población de 65 años o más, porcentaje del total" />
       </Figure>
 
-      <h2 style={{ margin: "26px 4px 0", fontSize: "1.3rem" }}>2. Gasto</h2>
-      <p style={{ margin: "0 4px", color: "var(--ink-soft)" }}>¿Cuánto dinero ponemos, entre todos y de nuestro bolsillo?</p>
+      <h2 style={{ marginTop: "2.5rem" }}>2. Gasto</h2>
+      <p style={{ color: "var(--ink-soft)" }}>¿Cuánto dinero ponemos, entre todos y de nuestro bolsillo?</p>
 
       <Figure
         id="gasto-pib"
@@ -1080,8 +1080,8 @@ export default function SanidadPage() {
         </div>
       </Figure>
 
-      <h2 style={{ margin: "26px 4px 0", fontSize: "1.3rem" }}>3. Acceso</h2>
-      <p style={{ margin: "0 4px", color: "var(--ink-soft)" }}>¿Cuánto hay que esperar para operarse, para el especialista y para el médico de familia?</p>
+      <h2 style={{ marginTop: "2.5rem" }}>3. Acceso</h2>
+      <p style={{ color: "var(--ink-soft)" }}>¿Cuánto hay que esperar para operarse, para el especialista y para el médico de familia?</p>
 
       <Figure
         id="listas-quirurgicas"
@@ -1290,8 +1290,8 @@ export default function SanidadPage() {
         <HealthChart series={percSeries} xMin={2000} xMax={worseLast.year} height={260} bands={[{ from: 2012, to: 2014, label: "Recortes" }]} ariaLabel="Opinión sobre la evolución de las listas de espera" />
       </Figure>
 
-      <h2 style={{ margin: "26px 4px 0", fontSize: "1.3rem" }}>4. Quién atiende</h2>
-      <p style={{ margin: "0 4px", color: "var(--ink-soft)" }}>Médicos, enfermeras y relevo generacional.</p>
+      <h2 style={{ marginTop: "2.5rem" }}>4. Quién atiende</h2>
+      <p style={{ color: "var(--ink-soft)" }}>Médicos, enfermeras y relevo generacional.</p>
 
       <Figure
         id="medicos"
@@ -1437,8 +1437,8 @@ export default function SanidadPage() {
         </div>
       </Figure>
 
-      <h2 style={{ margin: "26px 4px 0", fontSize: "1.3rem" }}>5. Comunidades autónomas</h2>
-      <p style={{ margin: "0 4px", color: "var(--ink-soft)" }}>Gasto, esperas y resultados lado a lado.</p>
+      <h2 style={{ marginTop: "2.5rem" }}>5. Comunidades autónomas</h2>
+      <p style={{ color: "var(--ink-soft)" }}>Gasto, esperas y resultados lado a lado.</p>
 
       <Figure
         id="comunidades"
