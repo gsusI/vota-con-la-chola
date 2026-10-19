@@ -152,6 +152,14 @@ What we take from those references (the checklist; name the references and copy 
   never only as a share of GDP or a gross salary.
 - Money in vs results out: public revenue or spending is always crossed with what it buys (service outcomes, access,
   coverage) and with where it goes, and outcomes with what they cost; one without the other invites a convenient story.
+- Base year: a "since YEAR" claim must not start at a peak or a trough unless that is the point and it is said;
+  show the full series or the same claim from several bases (e.g. 2000, 2007, 2013, 2019) so the choice is visible.
+- Composition effects: separate what changed because the population changed (ageing, immigration, household size,
+  sector or education mix) from what changed within groups (per pensioner, per worker, age-standardised, by origin).
+- Distribution: averages hide who bears it; show the split by income (quintile or decile), age and, where relevant,
+  tenure or education.
+- Territory: show the dispersion between autonomous communities when it is larger than the gap with peer countries,
+  and for anything set or financed regionally.
 - "El dato mata el relato": every visualization has one consolidated figure, placed near the top, that combines
   enough dimensions (e.g. levels and change, composition and peers, two variables over time) that no competing
   narrative can cherry-pick it. Many single charts can each be used to support opposite stories; this one puts the
