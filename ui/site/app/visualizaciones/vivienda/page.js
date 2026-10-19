@@ -6,6 +6,7 @@ import HousingTable from "./HousingTable";
 import { formatHousing } from "./format.mjs";
 import { TaxesFigure, CensusStockFigure, YoungOwnershipFigure, SocialStockBars, SpendingBars } from "./sections";
 import StoryFigure from "./StoryFigure";
+import { BurdenPeersFigure, CapacityFigure, MoneyFigure } from "./capacity";
 import { C, NAMES, PEER_LEGEND, PeerPanels, at, day, howMany, millions, num, thousands } from "./common";
 import { Explain, Part, Verdict } from "./explain";
 import {
@@ -144,6 +145,13 @@ export default function ViviendaPage() {
   const protectedShare = sup.completed_protected.at(-1).value / sup.completed_total.at(-1).value;
   const nineties = sup.completed_protected.filter((p) => p.year < 2000).map((p) => (p.value / at(sup.completed_total, p.year)) * 100);
   const credit = data.drivers.credit_pct_gdp;
+  const cap = data.capacity;
+  const capYear = Math.min(cap.years_net_median.at(-1).year, cap.years_net_median_sale_price.at(-1).year);
+  const esMoney = data.money.find((row) => row.geo === "ESP");
+  const deMoney = data.money.find((row) => row.geo === "DEU");
+  const burdenYear = cap.peers.overburden_tenants.ES.at(-1).year;
+  const tenantsEs = at(cap.peers.overburden_tenants.ES, burdenYear);
+  const tenantsEu = at(cap.peers.overburden_tenants.EU27_2020, burdenYear);
   const creditPeak = credit.reduce((a, b) => (b.value > a.value ? b : a));
   const supplyGap = s13.ratio < 1;
 
@@ -198,7 +206,9 @@ export default function ViviendaPage() {
           <li>
             <strong>La vivienda es hoy más cara respecto a los sueldos que hace diez años.</strong> Un piso de {h.home_m2} m² cuesta {num(h.years_last)} años de salario
             bruto medio según la tasación y <strong>{num(ipvLast.value)}</strong> según el precio de compraventa del INE, frente a {num(ipvLow.value)} en {ipvLow.year}. El
-            máximo de la burbuja fue {num(ipvPeak)} en 2007.
+            máximo de la burbuja fue {num(ipvPeak)} en 2007. Con el sueldo neto mediano, el que cobra el trabajador típico, son{" "}
+            <strong>{num(at(cap.years_net_median_sale_price, capYear))}</strong> años ({capYear}). Quien más lo sufre es quien alquila: el {num(tenantsEs)} % de los inquilinos a
+            precio de mercado dedica más del 40 % de su renta a la vivienda (UE: {num(tenantsEu)} %).
           </li>
           <li>
             <strong>Desde {s13.from} se construye mucho menos de lo que crecen los hogares:</strong> {num(s13.ratio, 2)} viviendas terminadas por cada hogar nuevo (
@@ -210,8 +220,9 @@ export default function ViviendaPage() {
             {dec.to} se explica porque hay más habitantes, y en España el crecimiento viene de la inmigración; el resto, porque los hogares son más pequeños.
           </li>
           <li>
-            <strong>El gasto público en vivienda es el más bajo del grupo:</strong> {num(spendLast("ES").total, 2)} % del PIB frente a {num(spendLast("EU27_2020").total, 2)} % en la
-            UE{data.social_rental_stock.find((row) => row.country === "ESP") ? `, y solo el ${num(data.social_rental_stock.find((row) => row.country === "ESP").value, 1)} % de las viviendas es social de alquiler` : ""}.
+            <strong>El gasto público en vivienda es el más bajo del grupo, y no por falta de ingresos:</strong> {num(spendLast("ES").total, 2)} % del PIB frente a{" "}
+            {num(spendLast("EU27_2020").total, 2)} % en la UE, mientras los impuestos sobre inmuebles y sus compraventas recaudan el {num(esMoney.collected, 2)} % ({num(esMoney.collected / esMoney.spent, 0)} euros
+            por cada euro gastado){data.social_rental_stock.find((row) => row.country === "ESP") ? `, y solo el ${num(data.social_rental_stock.find((row) => row.country === "ESP").value, 1)} % de las viviendas es social de alquiler` : ""}.
           </li>
           <li>
             <strong>Quien más lo nota son los jóvenes:</strong> se emancipan a los {num(leaveEs.value)} años (UE: {num(leaveEu.value)}) y los hogares de menores de 35 propietarios de
@@ -224,6 +235,7 @@ export default function ViviendaPage() {
         </p>
         <ul className="hvToc" aria-label="Partes de la página">
           <li><a href="#el-dato">El dato frente al relato</a></li>
+          <li><a href="#el-dato-dinero">Lo que se cobra y lo que se gasta</a></li>
           <li><a href="#precio">1. El precio</a></li>
           <li><a href="#alquiler-parte">2. El alquiler</a></li>
           <li><a href="#oferta">3. Construcción y hogares</a></li>
@@ -237,6 +249,8 @@ export default function ViviendaPage() {
       </section>
 
       <StoryFigure story={data.story} source={source} />
+
+      <MoneyFigure money={data.money} source={source} />
 
       <Part id="precio" title="1. El precio: cuánto cuesta comprar">Medimos el precio en años de salario, con la tasación y con el precio real de compraventa, por comunidades y frente a otros países.</Part>
 
@@ -278,6 +292,8 @@ export default function ViviendaPage() {
 
       <SalePricesFigure sale={data.sale_prices} source={source} />
 
+      <CapacityFigure capacity={data.capacity} homeM2={h.home_m2} source={source} />
+
       <RegionalPriceFigure regions={data.regions} homeM2={h.home_m2} source={source} />
 
       <Figure
@@ -315,6 +331,8 @@ export default function ViviendaPage() {
       <RentFigure rents={data.rents} source={source} />
 
       <RentPeersFigure rents={data.rents} source={source} />
+
+      <BurdenPeersFigure capacity={data.capacity} source={source} />
 
       <Part id="oferta" title="3. Construcción y hogares">El corazón de la hipótesis: ¿se construyen menos viviendas de las que hacen falta? En España y en cada comunidad.</Part>
 
@@ -601,7 +619,10 @@ export default function ViviendaPage() {
           <li>
             <Verdict kind="yes" />
             <strong>La vivienda se ha encarecido.</strong> Desde {ipvLow.year}, el precio de compraventa ha pasado de {num(ipvLow.value)} a {num(ipvLast.value)} años de salario
-            ({num(h.years_trough)} → {num(h.years_last)} con la tasación, que va por detrás). Sigue por debajo del máximo de 2007 ({num(ipvPeak)}), pero se acerca. El alquiler medio
+            ({num(h.years_trough)} → {num(h.years_last)} con la tasación, que va por detrás). Sigue por debajo del máximo de 2007 ({num(ipvPeak)}), pero se acerca; con el sueldo neto mediano son{" "}
+            {num(at(cap.years_net_median_sale_price, capYear))} años. Frente a otros países, la carga media de los hogares españoles no es excepcional (casi la mitad de la
+            población vive en una vivienda propia ya pagada), pero la de los inquilinos a precio de mercado sí: el {num(tenantsEs)} % gasta más del 40 % de su renta en vivienda, frente al{" "}
+            {num(tenantsEu)} % en la UE. El alquiler medio
             de todos los contratos, en cambio, ha subido al ritmo de salarios y precios ({num(at(rents.ipva_idx, rentYear) - 100, 0)} % entre 2015 y {rentYear}); lo que se ha
             disparado son los contratos nuevos, que la estadística oficial no mide por separado.
           </li>
@@ -627,7 +648,9 @@ export default function ViviendaPage() {
             {spendRank[0] === "ES" ? "el menor de su grupo de comparación" : `menos que ${spendRank.slice(spendRank.indexOf("ES") + 1).map((geo) => NAMES[geo]).join(", ")}`},
             y {num(spendLast("EU27_2020").total / spendLast("ES").total, 1)} veces menos que la media de la UE
             {data.social_rental_stock.find((row) => row.country === "ESP") ? `, con un parque social de alquiler del ${num(data.social_rental_stock.find((row) => row.country === "ESP").value, 1)} % de las viviendas frente al ${num((data.social_rental_stock.find((row) => row.country === "OECD") || {}).value ?? 0, 1)} % de media en la OCDE` : ""}.
-            Lo que los datos no permiten afirmar es que gastar más bajaría los precios: eso depende de si el gasto añade viviendas o solo ayuda a pagar las que hay.
+            Y no es por falta de ingresos ligados a la vivienda: los impuestos sobre inmuebles y sus compraventas recaudan el {num(esMoney.collected, 2)} % del PIB,{" "}
+            {num(esMoney.collected / esMoney.spent, 0)} veces lo que se gasta (en Alemania, {num(deMoney.collected / deMoney.spent, 1)}), aunque esa recaudación no está afectada a la
+            vivienda. Lo que los datos no permiten afirmar es que gastar más bajaría los precios: eso depende de si el gasto añade viviendas o solo ayuda a pagar las que hay.
           </li>
         </ul>
         <h2>Lo que estos datos no pueden decir</h2>

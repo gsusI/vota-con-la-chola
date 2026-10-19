@@ -742,6 +742,52 @@ def parse_ine_table(table: str) -> Callable[[Raw], Iterable[Batch]]:
     return parse
 
 
+EES_TABLES = {
+    # table -> [(indicator_code, label, name test)]
+    "28191": [
+        ("ees_ganancia_mediana", "Salario bruto anual mediano (INE, Encuesta de Estructura Salarial)", lambda n: n.startswith("Ambos sexos. ") and n.rstrip(". ").endswith("Dato base. Mediana")),
+        ("ees_ganancia_media", "Salario bruto anual medio (INE, Encuesta de Estructura Salarial)", lambda n: n.startswith("Ambos sexos. ") and n.rstrip(". ").endswith("Dato base. Media")),
+    ],
+    "28201": [
+        ("ees_ganancia_media_edad", "Salario bruto anual medio por edad (INE, Encuesta de Estructura Salarial)",
+         lambda n: n.startswith("Ambos sexos. ") and "Total Nacional. Salario medio bruto" in n),
+    ],
+}
+
+
+def parse_ees(table: str) -> Callable[[Raw], Iterable[Batch]]:
+    def parse(raw: Raw) -> Iterable[Batch]:
+        for code, label, test in EES_TABLES[table]:
+            series = []
+            for si, doc in enumerate(raw.data):
+                name = doc["Nombre"].strip()
+                if not test(name):
+                    continue
+                parts = [part.strip() for part in name.split(". ")]
+                if table == "28201":
+                    geo, key = "ES", parts[1]  # age group
+                else:
+                    geo = "ES" if parts[1] == "Total Nacional" else ccaa_code(parts[1])
+                    key = parts[1]
+                if geo is None:
+                    continue
+                obs = [{"period": ine_period(row), "value": row["Valor"], "pointer": pointer(si, "Data", i, "Valor"), "cell_index": si * 1000 + i}
+                       for i, row in enumerate(doc["Data"]) if row.get("Valor") is not None]
+                series.append(geo_series(f"{table}|{doc['COD']}", geo, {"serie": doc["COD"], "nombre": name, "grupo": key}, obs))
+            if not series:
+                raise ValueError(f"INE {table}: no series for {code}")
+            yield {
+                "source_id": "ine_tempus", "dataset_code": f"INE-{table}", "indicator_code": code, "frequency_code": "A",
+                "frequency_label": "Anual", "unit_code": "EUR_YEAR", "unit_label": "Euros brutos al año", "label": label,
+                "definition": "INE, Encuesta Anual de Estructura Salarial: ganancia bruta anual por trabajador (incluye tiempo "
+                "parcial), antes de IRPF y cotizaciones del trabajador.",
+                "methodology_url": "https://www.ine.es/dyngs/INEbase/operacion.htm?c=Estadistica_C&cid=1254736177025&idp=1254735976596",
+                "source_url": f"https://www.ine.es/jaxiT3/Tabla.htm?t={table}",
+            }, sorted(series, key=lambda s: (s["geo_code"], s["key"]))
+
+    return parse
+
+
 # ---------------------------------------------------------------- OECD via DBnomics
 
 OECD_WAGE_URL = "https://api.db.nomics.world/v22/series/OECD/DSD_EARNINGS@AV_AN_WAGE/ESP.WG.EUR.A.V.MEAN._Z?observations=1"
@@ -767,6 +813,70 @@ def dbnomics_obs(doc: dict[str, Any], doc_index: int) -> list[dict[str, Any]]:
         for i, (period, value) in enumerate(zip(doc["period"], doc["value"]))
         if isinstance(value, (int, float))
     ]
+
+
+TW_DATASET = "DSD_TAX_WAGES_COMP@DF_TW_COMP"
+TW_MEASURES = {"AV_RITEESSC": "Tipo medio de IRPF + cotizaciones del trabajador (% del salario bruto)", "AV_TW": "Cuña fiscal media (% del coste laboral)"}
+
+
+def oecd_tw_url() -> str:
+    dims = {"REF_AREA": OECD_HP_AREAS[:-1], "MEASURE": list(TW_MEASURES), "HOUSEHOLD_TYPE": ["S_C0"], "INCOME_PRINCIPAL": ["AW100", "AW67"]}
+    return f"https://api.db.nomics.world/v22/series/OECD/{TW_DATASET}?" + urllib.parse.urlencode(
+        {"dimensions": json.dumps(dims, separators=(",", ":")), "observations": 1, "limit": 200})
+
+
+def parse_oecd_tw(raw: Raw) -> Iterable[Batch]:
+    grouped: dict[tuple[str, str], list[dict[str, Any]]] = {}
+    for i, doc in enumerate(raw.data["series"]["docs"]):
+        area, measure, unit, household, income, *_ = doc["series_code"].split(".")
+        if measure not in TW_MEASURES:
+            continue
+        grouped.setdefault((measure, income), []).append(geo_series(f"{TW_DATASET}|{doc['series_code']}", area,
+                                                                    {"MEASURE": measure, "UNIT": unit, "INCOME_PRINCIPAL": income}, dbnomics_obs(doc, i)))
+    for (measure, income), series in sorted(grouped.items()):
+        yield {
+            "source_id": "oecd_dbnomics", "dataset_code": TW_DATASET, "indicator_code": f"{measure}.S_C0.{income}",
+            "frequency_code": "A", "frequency_label": "Anual", "unit_code": "PC", "unit_label": "%",
+            "label": f"{TW_MEASURES[measure]}, soltero sin hijos, {income.removeprefix('AW')} % del salario medio (OCDE Taxing Wages)",
+            "definition": "OCDE Taxing Wages: impuestos y cotizaciones de un asalariado tipo. Leído de la réplica DBnomics "
+            "(sdmx.oecd.org bloquea scripts).",
+            "methodology_url": "https://www.oecd.org/en/publications/taxing-wages_20725124.html",
+            "source_url": f"https://db.nomics.world/OECD/{TW_DATASET}",
+        }, series
+
+
+REV_DATASET = "DSD_REV_COMP_OECD@DF_RSOECD"
+REV_CATEGORIES = {"T_4100": "Impuestos periódicos sobre bienes inmuebles (en España, el IBI)",
+                  "T_4400": "Impuestos sobre transacciones financieras y de capital (en España, sobre todo ITP y AJD)",
+                  "T_4000": "Impuestos sobre la propiedad, total"}
+
+
+def oecd_rev_url() -> str:
+    dims = {"REF_AREA": ["ESP", "OECD_REP", "DEU", "FRA", "ITA", "PRT"], "MEASURE": ["TAX_REV"], "SECTOR": ["S13"],
+            "STANDARD_REVENUE": list(REV_CATEGORIES), "UNIT_MEASURE": ["PT_B1GQ"]}
+    return f"https://api.db.nomics.world/v22/series/OECD/{REV_DATASET}?" + urllib.parse.urlencode(
+        {"dimensions": json.dumps(dims, separators=(",", ":")), "observations": 1, "limit": 200})
+
+
+def parse_oecd_rev(raw: Raw) -> Iterable[Batch]:
+    grouped: dict[str, list[dict[str, Any]]] = {}
+    for i, doc in enumerate(raw.data["series"]["docs"]):
+        area, measure, sector, category, ctry, unit, freq = doc["series_code"].split(".")
+        if category not in REV_CATEGORIES or unit != "PT_B1GQ" or ctry not in ("_T", "_Z"):
+            continue
+        geo = "OECD" if area == "OECD_REP" else area
+        grouped.setdefault(category, []).append(geo_series(f"{REV_DATASET}|{doc['series_code']}", geo,
+                                                           {"REF_AREA": area, "STANDARD_REVENUE": category}, dbnomics_obs(doc, i)))
+    for category, series in sorted(grouped.items()):
+        yield {
+            "source_id": "oecd_dbnomics", "dataset_code": REV_DATASET, "indicator_code": f"TAX_REV.S13.{category}",
+            "frequency_code": "A", "frequency_label": "Anual", "unit_code": "PT_B1GQ", "unit_label": "% del PIB",
+            "label": f"{REV_CATEGORIES[category]} (OCDE Revenue Statistics), % del PIB",
+            "definition": "OCDE Revenue Statistics, todas las administraciones públicas. 4100 grava la tenencia de inmuebles "
+            "(viviendas, pero también locales y suelo); 4400, las transmisiones y documentos. Réplica DBnomics.",
+            "methodology_url": "https://www.oecd.org/en/topics/sub-issues/tax-revenue.html",
+            "source_url": f"https://db.nomics.world/OECD/{REV_DATASET}",
+        }, series
 
 
 def parse_oecd_wage(raw: Raw) -> Iterable[Batch]:
@@ -876,6 +986,29 @@ EUROSTAT_DEFS = {
         "definition": "Eurostat, estadística experimental con datos de Airbnb, Booking, Expedia y Tripadvisor: pernoctaciones "
         "en alojamientos de corta estancia (viviendas y habitaciones) reservados en plataformas.",
     },
+    "ilc_lvho07a": {
+        "label": "Tasa de sobrecarga por gastos de vivienda, por edad", "unit_code": "PC", "unit_label": "% de la población",
+        "split": ["age"],
+        "definition": "Eurostat EU-SILC: población que vive en hogares cuyo gasto total en vivienda (alquiler o intereses, "
+        "suministros, comunidad, seguros) supera el 40 % de su renta disponible (netos de ayudas a la vivienda).",
+    },
+    "ilc_lvho07c": {
+        "label": "Tasa de sobrecarga por gastos de vivienda, por régimen de tenencia", "unit_code": "PC",
+        "unit_label": "% de la población", "split": ["tenure"],
+        "definition": "Eurostat EU-SILC: como ilc_lvho07a, por régimen de tenencia (RENT_MKT: inquilinos a precio de mercado).",
+    },
+    "ilc_mded01": {
+        "label": "Gastos de vivienda en % de la renta disponible del hogar", "unit_code": "PC", "unit_label": "% de la renta disponible",
+        "split": [], "definition": "Eurostat EU-SILC: peso medio del gasto total en vivienda sobre la renta disponible del hogar.",
+    },
+    "ilc_mded02": {
+        "label": "Alquiler en % de la renta disponible de los hogares inquilinos", "unit_code": "PC", "unit_label": "% de la renta disponible",
+        "split": [], "definition": "Eurostat EU-SILC: peso medio del alquiler de la vivienda ocupada sobre la renta disponible de los hogares que pagan alquiler.",
+    },
+    "ilc_di03": {
+        "label": "Renta disponible equivalente mediana (EU-SILC), PPS", "unit_code": "PPS", "unit_label": "Estándar de poder adquisitivo",
+        "split": [], "definition": "Eurostat EU-SILC: renta disponible del hogar por adulto equivalente, mediana, en estándar de poder adquisitivo.",
+    },
     "nama_10_gdp": {
         "label": "Producto interior bruto a precios corrientes, millones de euros",
         "unit_code": "CP_MEUR", "unit_label": "Millones de euros corrientes", "split": [],
@@ -935,6 +1068,9 @@ API_SOURCES: list[tuple[str, str, Callable[[Raw], Iterable[Batch]]]] = [
     *[(f"ine_{code}.json", ine_url(code), parse_ine(code)) for code in INE_SERIES],
     ("oecd_av_an_wage_esp_dbnomics.json", OECD_WAGE_URL, parse_oecd_wage),
     ("oecd_house_prices_dbnomics.json", oecd_hp_url(), parse_oecd_house_prices),
+    ("oecd_taxing_wages_dbnomics.json", oecd_tw_url(), parse_oecd_tw),
+    ("oecd_property_tax_revenue_dbnomics.json", oecd_rev_url(), parse_oecd_rev),
+    *[(f"ine_tabla_{table}.json", ine_table_url(table), parse_ees(table)) for table in EES_TABLES],
     ("eurostat_yth_demo_030.json", eurostat_url("yth_demo_030", sex="T", unit="AVG", geo=PEERS), parse_eurostat("yth_demo_030")),
     ("eurostat_ilc_lvho02.json", eurostat_url("ilc_lvho02", hhcomp="TOTAL", rskpovth="TOTAL", unit="PC",
                                                tenure=["OWN", "OWN_L", "RENT", "RENT_MKT", "RENT_FR"], geo=PEERS), parse_eurostat("ilc_lvho02")),
@@ -945,6 +1081,11 @@ API_SOURCES: list[tuple[str, str, Callable[[Raw], Iterable[Batch]]]] = [
     ("eurostat_demo_gind.json", eurostat_url("demo_gind", indic_de=["JAN", "GROWRT", "CNMIGRATRT", "NATGROWRT"], geo=PEERS), parse_eurostat("demo_gind")),
     ("eurostat_ilc_lvph01.json", eurostat_url("ilc_lvph01", unit="AVG", geo=PEERS), parse_eurostat("ilc_lvph01")),
     ("eurostat_prc_hicp_aind.json", eurostat_url("prc_hicp_aind", unit="INX_A_AVG", coicop=["CP041", "CP00"], geo=PEERS), parse_eurostat("prc_hicp_aind")),
+    ("eurostat_ilc_lvho07a.json", eurostat_url("ilc_lvho07a", unit="PC", sex="T", rskpovth="TOTAL", age=["TOTAL", "Y15-29"], geo=PEERS), parse_eurostat("ilc_lvho07a")),
+    ("eurostat_ilc_lvho07c.json", eurostat_url("ilc_lvho07c", unit="PC", tenure=["TOTAL", "RENT_MKT", "OWN_L"], geo=PEERS), parse_eurostat("ilc_lvho07c")),
+    ("eurostat_ilc_mded01.json", eurostat_url("ilc_mded01", unit="PC", hhcomp="TOTAL", rskpovth="TOTAL", geo=PEERS), parse_eurostat("ilc_mded01")),
+    ("eurostat_ilc_mded02.json", eurostat_url("ilc_mded02", unit="PC", hhcomp="TOTAL", rskpovth="TOTAL", geo=PEERS), parse_eurostat("ilc_mded02")),
+    ("eurostat_ilc_di03.json", eurostat_url("ilc_di03", unit="PPS", statinfo="MED_EI", age="TOTAL", sex="T", geo=PEERS), parse_eurostat("ilc_di03")),
     ("eurostat_tour_ce_omn12.json", eurostat_url("tour_ce_omn12", unit="NR", c_resid="TOTAL", month="TOTAL", indic_to="NGT_SP", geo=PEERS), parse_eurostat("tour_ce_omn12")),
 ]
 

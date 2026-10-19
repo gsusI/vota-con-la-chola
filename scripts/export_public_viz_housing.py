@@ -440,6 +440,86 @@ def build(conn: sqlite3.Connection) -> dict:
 
     region_block = regional(s, completed)
 
+    # 10. Capacity lens: the same home against net, median and young earners' pay, plus burdens against peers.
+    tw100 = {int(p): v for p, v in s.raw("AV_RITEESSC.S_C0.AW100")["ESP"].items()}
+    tw67 = {int(p): v for p, v in s.raw("AV_RITEESSC.S_C0.AW67")["ESP"].items()}
+    wedge = {int(p): v for p, v in s.raw("AV_TW.S_C0.AW100")["ESP"].items()}
+    median = {int(p): v for p, v in s.raw("ees_ganancia_mediana")["ES"].items()}
+    by_age_rows = conn.execute(
+        """
+        SELECT sv.dimensions_json, o.period_label, o.value_decimal FROM indicator_definitions d
+        JOIN indicator_releases r ON r.indicator_id = d.indicator_id
+        JOIN indicator_series_versions sv ON sv.indicator_release_id = r.indicator_release_id
+        JOIN indicator_observation_versions o ON o.indicator_series_version_id = sv.indicator_series_version_id
+        WHERE d.indicator_code = 'ees_ganancia_media_edad' AND o.revision_state != 'deleted'
+          AND r.indicator_release_id = (SELECT r2.indicator_release_id FROM indicator_releases r2 WHERE r2.indicator_id = d.indicator_id
+                                        ORDER BY r2.source_snapshot_date DESC, r2.created_at DESC LIMIT 1)
+        """
+    ).fetchall()
+    s.raw("ees_ganancia_media_edad")
+    young_pay = {int(period): float(value) for dims, period, value in by_age_rows if json.loads(dims).get("grupo") == "De 25 a 34 años"}
+    if not young_pay:
+        raise SystemExit("EES: the 25-34 age group was not found")
+    ipv_price = {y: price_m2[2015] * HOME_M2 * v / ipv[2015] for y, v in ipv.items()}
+
+    def years_with(income: dict[int, float], prices: dict[int, float] = home) -> list[dict]:
+        return pts({y: prices[y] / v for y, v in income.items() if y in prices and v}, 2)
+
+    net_avg = {y: v * (1 - tw100[y] / 100) for y, v in wage_all.items() if y in tw100}
+    net_median = {y: v * (1 - tw67[y] / 100) for y, v in median.items() if y in tw67}
+    net_young = {y: v * (1 - tw67[y] / 100) for y, v in young_pay.items() if y in tw67}
+    burden = {
+        "overburden_total": s.raw("ilc_lvho07a.TOTAL"), "overburden_young": s.raw("ilc_lvho07a.Y15-29"),
+        "overburden_tenants": s.raw("ilc_lvho07c.RENT_MKT"), "overburden_mortgage": s.raw("ilc_lvho07c.OWN_L"),
+        "cost_share": s.raw("ilc_mded01._T"), "rent_share_tenants": s.raw("ilc_mded02._T"),
+    }
+    income_pps = s.raw("ilc_di03._T")
+    capacity = {
+        "years_gross_avg": years_with(wage_all),
+        "years_net_avg": years_with(net_avg),
+        "years_gross_median": years_with(median),
+        "years_net_median": years_with(net_median),
+        "years_net_young": years_with(net_young),
+        "years_net_median_sale_price": years_with(net_median, ipv_price),
+        "years_net_young_sale_price": years_with(net_young, ipv_price),
+        "net_rate_avg": pts(tw100, 1, since=2000), "net_rate_67": pts(tw67, 1, since=2000), "tax_wedge": pts(wedge, 1, since=2000),
+        "pay": {"gross_avg": pts(wage_all, 0), "net_avg": pts(net_avg, 0), "gross_median": pts(median, 0),
+                "net_median": pts(net_median, 0), "gross_young": pts(young_pay, 0), "net_young": pts(net_young, 0)},
+        "effort_pct": pts(effort, 1),
+        "peers": {key: {geo: pts({int(p): v for p, v in table.get(geo, {}).items()}, 1) for geo in PEERS_EUROSTAT} for key, table in burden.items()},
+        "residual_pps": {
+            geo: pts({int(p): v * (1 - burden["cost_share"][geo][p] / 100) for p, v in income_pps.get(geo, {}).items()
+                      if p in burden["cost_share"].get(geo, {})}, 0)
+            for geo in PEERS_EUROSTAT
+        },
+        "income_pps": {geo: pts({int(p): v for p, v in income_pps.get(geo, {}).items()}, 0) for geo in PEERS_EUROSTAT},
+    }
+
+    # 11. Money in versus money out: taxes on immovable property and on its transfer vs public housing spending.
+    rev = {code: s.raw(f"TAX_REV.S13.{code}") for code in ("T_4100", "T_4400", "T_4000")}
+    to_eu = {"ESP": "ES", "DEU": "DE", "FRA": "FR", "ITA": "IT", "PRT": "PT", "OECD": None}
+    money = []
+    for geo, eu in to_eu.items():
+        r41 = {int(p): v for p, v in rev["T_4100"].get(geo, {}).items()}
+        r44 = {int(p): v for p, v in rev["T_4400"].get(geo, {}).items()}
+        sp = {row["year"]: row for row in spending.get(eu, [])} if eu else {}
+        years_common = sorted(set(r41) & set(r44) & (set(sp) if eu else set(r41)))
+        if not years_common:
+            continue
+        last_year = years_common[-1]
+        avg = lambda d, key=None: sum((d[y][key] if key else d[y]) for y in range(2015, 2020)) / 5 if all(y in d for y in range(2015, 2020)) else None  # noqa: E731
+        money.append({
+            "geo": geo, "year": last_year,
+            "recurrent_property": r(r41[last_year], 2), "transactions": r(r44[last_year], 2),
+            "collected": r(r41[last_year] + r44[last_year], 2),
+            "spent": r(sp[last_year]["total"], 2) if eu else None,
+            "spent_development": r(sp[last_year]["development"], 2) if eu else None,
+            "spent_allowances": r(sp[last_year]["allowances"], 2) if eu else None,
+            "collected_2015_2019": r((avg(r41) or 0) + (avg(r44) or 0), 2) if avg(r41) is not None and avg(r44) is not None else None,
+            "spent_2015_2019": r(avg(sp, "total"), 2) if eu and avg(sp, "total") is not None else None,
+            "series_collected": pts({y: r41[y] + r44[y] for y in r41 if y in r44}, 2),
+        })
+
     story = connected_story(completed, net_households, intercensal, years_bde, rate, credit_growth)
 
     sources = {}
@@ -519,6 +599,8 @@ def build(conn: sqlite3.Connection) -> dict:
         "regions": region_block,
         "drivers": drivers,
         "story": story,
+        "capacity": capacity,
+        "money": money,
         "norms": norms,
         "sources": sources,
     }
@@ -613,6 +695,18 @@ def write_csv(data: dict, path: Path) -> None:
     for key in ("net_migration_per_1000", "population_growth_per_1000", "household_size", "platform_nights_per_capita"):
         for geo, points in dr[key].items():
             rows.extend(("eurostat_sdmx", key, geo, p["year"], p["value"]) for p in points)
+    cap = data["capacity"]
+    for key in ("years_gross_avg", "years_net_avg", "years_gross_median", "years_net_median", "years_net_young",
+                "years_net_median_sale_price", "years_net_young_sale_price", "net_rate_avg", "net_rate_67", "tax_wedge", "effort_pct"):
+        rows.extend(("derivado", f"capacidad_{key}", "ES", p["year"], p["value"]) for p in cap[key])
+    for key, by_geo in cap["peers"].items():
+        for geo, points in by_geo.items():
+            rows.extend(("eurostat_sdmx", f"capacidad_{key}", geo, p["year"], p["value"]) for p in points)
+    for geo, points in cap["residual_pps"].items():
+        rows.extend(("eurostat_sdmx", "capacidad_renta_tras_vivienda_pps", geo, p["year"], p["value"]) for p in points)
+    for row in data["money"]:
+        for key in ("recurrent_property", "transactions", "collected", "spent", "spent_development", "spent_allowances"):
+            rows.append(("oecd+eurostat", f"dinero_{key}_pct_pib", row["geo"], row["year"], row[key]))
     for row in data["story"]:
         rows.append(("derivado", "relato_viviendas_por_hogar_nuevo", "ES", row["year"], row["x"]))
         rows.append(("bde_indicadores_vivienda", "relato_anios_renta_hogar", "ES", row["year"], row["y"]))

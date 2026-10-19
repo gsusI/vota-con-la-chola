@@ -1,3 +1,4 @@
+import json
 import sqlite3
 import tempfile
 import unittest
@@ -142,6 +143,26 @@ class RegionalParsingTest(unittest.TestCase):
         self.assertEqual((story[2020]["x"], story[2020]["basis"]), (0.85, "epa"))
         self.assertEqual(story[2021]["basis"], "epa_2021")
         self.assertEqual(story[2022]["window"], [2020, 2021, 2022])
+
+    def test_oecd_property_revenue_keeps_totals_and_maps_oecd_average(self) -> None:
+        payload = {"series": {"docs": [
+            {"series_code": "ESP.TAX_REV.S13.T_4100._T.PT_B1GQ.A", "period": ["2023", "2024"], "value": [0.9, 0.89]},
+            {"series_code": "OECD_REP.TAX_REV.S13.T_4400._T.PT_B1GQ.A", "period": ["2023"], "value": [0.37]},
+            {"series_code": "ESP.TAX_REV.S13.T_4100._T.XDC.A", "period": ["2024"], "value": [14.0]},
+        ]}}
+        raw = ingest.Raw("x.json", "https://db.nomics.world", json.dumps(payload).encode(), "2026-10-19T00:00:00+00:00")
+        batches = {d["indicator_code"]: s for d, s in ingest.parse_oecd_rev(raw)}
+        self.assertEqual(sorted(batches), ["TAX_REV.S13.T_4100", "TAX_REV.S13.T_4400"])
+        self.assertEqual([s["geo_code"] for s in batches["TAX_REV.S13.T_4400"]], ["OECD"])
+        self.assertEqual(len(batches["TAX_REV.S13.T_4100"][0]["observations"]), 2)
+
+    def test_wage_survey_selectors(self) -> None:
+        median = ingest.EES_TABLES["28191"][0][2]
+        self.assertTrue(median("Ambos sexos. Total Nacional. Dato base. Mediana. "))
+        self.assertFalse(median("Mujeres. Total Nacional. Dato base. Mediana. "))
+        self.assertFalse(median("Ambos sexos. Total Nacional. Dato base. Percentil 10. "))
+        by_age = ingest.EES_TABLES["28201"][0][2]
+        self.assertTrue(by_age("Ambos sexos. De 25 a 34 años. Dato base. Total Nacional. Salario medio bruto. "))
 
     def test_index_rebase(self) -> None:
         self.assertEqual(export.index_to({2015: 80.0, 2025: 100.0}, 2015), {2015: 100.0, 2025: 125.0})
