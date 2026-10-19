@@ -7,7 +7,8 @@ import { formatHousing } from "./format.mjs";
 import { TaxesFigure, CensusStockFigure, YoungOwnershipFigure, SocialStockBars, SpendingBars } from "./sections";
 import StoryFigure from "./StoryFigure";
 import { BurdenPeersFigure, CapacityFigure, MoneyFigure } from "./capacity";
-import { C, NAMES, PEER_LEGEND, PeerPanels, at, day, howMany, millions, num, thousands } from "./common";
+import { CohortFigure, DistributionFigure, TenantRegionFigure } from "./distribution";
+import { C, NAMES, PEER_LEGEND, PeerPanels, at, day, howMany, joinEs, millions, num, thousands } from "./common";
 import { Explain, Part, Verdict } from "./explain";
 import {
   HouseholdSizeFigure,
@@ -154,6 +155,16 @@ export default function ViviendaPage() {
   const tenantsEu = at(cap.peers.overburden_tenants.EU27_2020, burdenYear);
   const creditPeak = credit.reduce((a, b) => (b.value > a.value ? b : a));
   const supplyGap = s13.ratio < 1;
+  // Headlines are stated from several base years (2000 start, 2007 peak, 2013 trough, 2019), never from the trough alone.
+  const B = data.bases;
+  const ys = B.years_sale;
+  const ya = B.years_appraisal;
+  const W = B.completed_per_household;
+  const wLast = W[W.length - 1];
+  const wBoom = W[0];
+  const decs = data.composition.decomposition;
+  const decLast = decs[decs.length - 1];
+  const cohortPeak = data.composition.cohort_25_39.ES.persons.reduce((a, b) => (b.value > a.value ? b : a));
 
   return (
     <main className="shell vizArticle">
@@ -174,14 +185,14 @@ export default function ViviendaPage() {
           <span className="vizStat__label">Piso de {h.home_m2} m² en años de salario bruto medio</span>
           <span className="vizStat__value">{num(ipvLast.value)}</span>
           <span className="vizStat__note">
-            en {h.last_year} con el precio de compraventa del INE ({num(h.years_last)} con la tasación); {num(ipvLow.value)} en {ipvLow.year} y {num(ipvPeak)} en 2007
+            en {h.last_year} con el precio de compraventa del INE; {num(ys["2019"])} en 2019, {num(ys["2013"])} en 2013 y {num(ys["2007"])} en 2007
           </span>
         </div>
         <div className="card vizStat">
-          <span className="vizStat__label">Viviendas terminadas por cada hogar nuevo, {s13.from}–{s13.to}</span>
-          <span className="vizStat__value">{num(s13.ratio, 2)}</span>
+          <span className="vizStat__label">Viviendas terminadas por cada hogar nuevo, {wLast.from}–{wLast.to}</span>
+          <span className="vizStat__value">{num(wLast.ratio, 2)}</span>
           <span className="vizStat__note">
-            {thousands(s13.completed_per_year)} terminadas al año frente a {thousands(s13.households_per_year)} hogares nuevos
+            {W.slice(0, -1).map((w) => `${num(w.ratio, 2)} en ${w.from}–${w.to}`).join("; ")}
           </span>
         </div>
         <div className="card vizStat">
@@ -204,20 +215,20 @@ export default function ViviendaPage() {
         <h2 id="resumen-title">En resumen</h2>
         <ol>
           <li>
-            <strong>La vivienda es hoy más cara respecto a los sueldos que hace diez años.</strong> Un piso de {h.home_m2} m² cuesta {num(h.years_last)} años de salario
-            bruto medio según la tasación y <strong>{num(ipvLast.value)}</strong> según el precio de compraventa del INE, frente a {num(ipvLow.value)} en {ipvLow.year}. El
-            máximo de la burbuja fue {num(ipvPeak)} en 2007. Con el sueldo neto mediano, el que cobra el trabajador típico, son{" "}
+            <strong>La vivienda es más cara respecto a los sueldos que en 2019 y que en 2013, aunque menos que en 2007.</strong> Un piso de {h.home_m2} m² cuesta{" "}
+            <strong>{num(ys[String(B.last_year)])}</strong> años de salario bruto medio al precio de compraventa del INE ({num(ys["2019"])} en 2019, {num(ys["2013"])} en 2013 y{" "}
+            {num(ys["2007"])} en 2007); con la tasación, {num(ya[String(B.last_year)])} ({num(ya["2000"])} en 2000). Con el sueldo neto mediano, el que cobra el trabajador típico, son{" "}
             <strong>{num(at(cap.years_net_median_sale_price, capYear))}</strong> años ({capYear}). Quien más lo sufre es quien alquila: el {num(tenantsEs)} % de los inquilinos a
             precio de mercado dedica más del 40 % de su renta a la vivienda (UE: {num(tenantsEu)} %).
           </li>
           <li>
-            <strong>Desde {s13.from} se construye mucho menos de lo que crecen los hogares:</strong> {num(s13.ratio, 2)} viviendas terminadas por cada hogar nuevo (
-            {thousands(s13.completed_per_year)} al año frente a {thousands(s13.households_per_year)}). El déficit se concentra en{" "}
+            <strong>Se construye cada vez menos por cada hogar nuevo:</strong> {joinEs(W.map((w) => `${num(w.ratio, 2)} en ${w.from}–${w.to}`))}. El déficit se concentra en{" "}
             {regionWorst.map((row) => `${row.name} (${num(row.ratio, 2)})`).join(", ")}.
           </li>
           <li>
-            <strong>La demanda la empuja sobre todo la población:</strong> el {num((dec.population_effect / dec.total) * 100, 0)} % de los hogares nuevos entre {dec.from} y{" "}
-            {dec.to} se explica porque hay más habitantes, y en España el crecimiento viene de la inmigración; el resto, porque los hogares son más pequeños.
+            <strong>La demanda reciente la empuja sobre todo la población:</strong> el aumento de población explica el{" "}
+            {joinEs(decs.map((d) => `${num((d.population_effect / d.total) * 100, 0)} % en ${d.from}–${d.to}`))} de los hogares nuevos; en España ese aumento viene de la
+            inmigración, porque la generación de 25 a 39 años, la que forma hogares, se encoge desde {cohortPeak.year}. El resto se debe a hogares más pequeños.
           </li>
           <li>
             <strong>El gasto público en vivienda es el más bajo del grupo, y no por falta de ingresos:</strong> {num(spendLast("ES").total, 2)} % del PIB frente a{" "}
@@ -230,8 +241,8 @@ export default function ViviendaPage() {
           </li>
         </ol>
         <p>
-          Veredicto, en detalle en <a href="#conclusion">la conclusión</a>: la falta de construcción explica bien el encarecimiento desde 2013, sobre todo donde menos se ha
-          construido ({regionWorst.map((row) => row.name).join(", ")}); no explica la burbuja de 2000–2007, que fue de crédito; y la segunda mitad de la hipótesis no se sostiene, porque el gasto público en vivienda sí es bajo.
+          Veredicto, en detalle en <a href="#conclusion">la conclusión</a>: la falta de construcción explica bien el encarecimiento de la última década, sobre todo donde menos se ha
+          construido ({joinEs(regionWorst.map((row) => row.name))}); no explica la burbuja de 2000–2007, que fue de crédito; y la segunda mitad de la hipótesis no se sostiene, porque el gasto público en vivienda sí es bajo.
         </p>
         <ul className="hvToc" aria-label="Partes de la página">
           <li><a href="#el-dato">El dato frente al relato</a></li>
@@ -248,7 +259,7 @@ export default function ViviendaPage() {
         </ul>
       </section>
 
-      <StoryFigure story={data.story} source={source} />
+      <StoryFigure story={data.story} composition={data.composition} source={source} />
 
       <MoneyFigure money={data.money} source={source} />
 
@@ -256,7 +267,7 @@ export default function ViviendaPage() {
 
       <Figure
         id="anios-de-salario"
-        title={`Un piso de ${h.home_m2} m² cuesta hoy ${num(h.years_last)} años de salario bruto medio con el valor de tasación y ${num(ipvLast.value)} con el precio de compraventa: más que en ${ipvLow.year} (${num(ipvLow.value)}) y cerca del máximo de 2007 (${num(ipvPeak)})`}
+        title={`Un piso de ${h.home_m2} m² cuesta ${num(ys[String(B.last_year)])} años de salario al precio de compraventa: ${num(ys[String(B.last_year)] - ys["2019"], 1)} más que en 2019 y ${num(ys[String(B.last_year)] - ys["2013"], 1)} más que en 2013, pero ${num(ys["2007"] - ys[String(B.last_year)], 1)} menos que en 2007 (con la tasación: ${num(ya[String(B.last_year)])}; ${num(ya["2000"])} en 2000)`}
         dek={`Valor tasado medio de la vivienda libre por m² multiplicado por ${h.home_m2} m², dividido por el salario bruto anual medio. En ${h.last_year}: ${formatHousing(h.home_price_last, "eur")} frente a ${formatHousing(h.wage_last, "eur")} de salario. Tres denominadores distintos, sin empalmar: el salario por trabajador del INE (incluye tiempo parcial), el salario por asalariado a tiempo completo de la OCDE y la renta del hogar mediano que usa el Banco de España.`}
         legend={yearsLegend}
         sources={[
@@ -290,7 +301,7 @@ export default function ViviendaPage() {
         />
       </Figure>
 
-      <SalePricesFigure sale={data.sale_prices} source={source} />
+      <SalePricesFigure sale={data.sale_prices} bases={data.bases} source={source} />
 
       <CapacityFigure capacity={data.capacity} homeM2={h.home_m2} source={source} />
 
@@ -334,12 +345,14 @@ export default function ViviendaPage() {
 
       <BurdenPeersFigure capacity={data.capacity} source={source} />
 
+      <TenantRegionFigure territory={data.territory} source={source} />
+
       <Part id="oferta" title="3. Construcción y hogares">El corazón de la hipótesis: ¿se construyen menos viviendas de las que hacen falta? En España y en cada comunidad.</Part>
 
       <Figure
         id="construccion-y-hogares"
-        title={`Desde ${s13.from} se han terminado ${howMany(s13.completed, "viviendas")} y se han formado ${howMany(s13.net_households, "hogares nuevos")}`}
-        dek={`De ${s13.from} a ${s13.to}, ${thousands(s13.completed_per_year)} viviendas terminadas al año frente a ${thousands(s13.households_per_year)} hogares nuevos: ${num(s13.ratio, 2)} viviendas por hogar. En la década anterior fue al revés: entre 1991 y 2011 se terminaron más viviendas que hogares nuevos (máximo de ${thousands(h.completed_peak)} terminadas en ${h.completed_peak_year}).`}
+        title={`Las viviendas terminadas por cada hogar nuevo caen tramo a tramo: ${joinEs(W.map((w) => `${num(w.ratio, 2)} en ${w.from}–${w.to}`))}`}
+        dek={`${W.map((w) => `${w.from}–${w.to}: ${thousands(w.completed_per_year)} terminadas y ${thousands(w.households_per_year)} hogares nuevos al año`).join("; ")}. Los tramos evitan medir desde el mínimo de construcción de 2013. En la década anterior fue al revés: entre 1991 y 2011 se terminaron más viviendas que hogares nuevos (máximo de ${thousands(h.completed_peak)} terminadas en ${h.completed_peak_year}).`}
         legend={supplySeries}
         sources={[
           source("mivau_boletin", "Ministerio de Vivienda, viviendas libres terminadas y calificaciones definitivas de vivienda protegida", "https://apps.fomento.gob.es/BoletinOnline2/?nivel=2&orden=32000000"),
@@ -470,6 +483,8 @@ export default function ViviendaPage() {
 
       <PopulationFigure drivers={data.drivers} source={source} />
 
+      <CohortFigure composition={data.composition} source={source} />
+
       <HouseholdSizeFigure drivers={data.drivers} source={source} />
 
       <TouristFigure drivers={data.drivers} regions={data.regions} source={source} />
@@ -504,6 +519,8 @@ export default function ViviendaPage() {
           notSay="No separa a quienes se quedan por falta de vivienda de quienes lo hacen por paro, estudios o costumbre."
         />
       </Figure>
+
+      <DistributionFigure distribution={data.distribution} source={source} />
 
       <Figure
         id="tenencia"
@@ -618,28 +635,30 @@ export default function ViviendaPage() {
         <ul>
           <li>
             <Verdict kind="yes" />
-            <strong>La vivienda se ha encarecido.</strong> Desde {ipvLow.year}, el precio de compraventa ha pasado de {num(ipvLow.value)} a {num(ipvLast.value)} años de salario
-            ({num(h.years_trough)} → {num(h.years_last)} con la tasación, que va por detrás). Sigue por debajo del máximo de 2007 ({num(ipvPeak)}), pero se acerca; con el sueldo neto mediano son{" "}
+            <strong>La vivienda se ha encarecido.</strong> Al precio de compraventa, un piso cuesta {num(ys[String(B.last_year)])} años de salario: más que en 2019 ({num(ys["2019"])})
+            y que en 2013 ({num(ys["2013"])}), menos que en 2007 ({num(ys["2007"])}). En euros, el precio de compraventa ha subido un {num(B.sale_price_change_pct["2019"], 0)} % desde 2019
+            y un {num(B.sale_price_change_pct["2007"], 0)} % desde 2007, y el salario medio un {num(B.wage_change_pct["2019"], 0)} % y un {num(B.wage_change_pct["2007"], 0)} %. Con el sueldo neto mediano son{" "}
             {num(at(cap.years_net_median_sale_price, capYear))} años. Frente a otros países, la carga media de los hogares españoles no es excepcional (casi la mitad de la
             población vive en una vivienda propia ya pagada), pero la de los inquilinos a precio de mercado sí: el {num(tenantsEs)} % gasta más del 40 % de su renta en vivienda, frente al{" "}
             {num(tenantsEu)} % en la UE. El alquiler medio
-            de todos los contratos, en cambio, ha subido al ritmo de salarios y precios ({num(at(rents.ipva_idx, rentYear) - 100, 0)} % entre 2015 y {rentYear}); lo que se ha
+            de todos los contratos, en cambio, ha subido al ritmo de salarios y precios ({num(rents.ipva_change_pct["2011"], 0)} % desde 2011 y {num(rents.ipva_change_pct["2019"], 0)} % desde
+            2019 hasta {rentYear}); lo que se ha
             disparado son los contratos nuevos, que la estadística oficial no mide por separado.
           </li>
           <li>
             <Verdict kind="partly" />
-            <strong>«Desde 2008 se terminan muchas menos viviendas que hogares se forman».</strong> Es cierto desde {s13.from}: {num(s13.ratio, 2)} viviendas por hogar nuevo, un déficit
-            acumulado de {thousands(s13.net_households - s13.completed)} hogares sin vivienda nueva. Entre 2008 y 2012 todavía se terminaban más viviendas que hogares (las obras de la
-            burbuja). Y el déficit no es uniforme: es grave en {regionWorst.map((row) => row.name).join(", ")} y no existe en{" "}
-            {regionSurplus.map((row) => row.name).join(", ")}, donde se terminaron tantas viviendas como hogares nuevos o más.
+            <strong>«Desde 2008 se terminan muchas menos viviendas que hogares se forman».</strong> Es cierto a partir de 2013, no de 2008: {W.map((w) => `${num(w.ratio, 2)} viviendas
+            por hogar nuevo en ${w.from}–${w.to}`).join(", ")}. Entre 2008 y 2012 todavía se terminaban más viviendas que hogares (las obras de la burbuja), y el déficit se agrava en
+            el último tramo, no solo en el mínimo de 2013. Y el déficit no es uniforme: es grave en {joinEs(regionWorst.map((row) => row.name))} y no existe en{" "}
+            {joinEs(regionSurplus.map((row) => row.name))}, donde se terminaron tantas viviendas como hogares nuevos o más.
           </li>
           <li>
             <Verdict kind="partly" />
             <strong>«Sobre todo» por eso.</strong> La escasez explica el ciclo posterior a 2015, pero no el de 2000–2007, cuando se construyeron {num(boom.ratio, 2)} viviendas por hogar
             nuevo y aun así el precio se dobló en años de salario: entonces mandaba el crédito: el saldo de préstamos para comprar vivienda pasó del {num(at(credit, 2000))} % del PIB en 2000 al{" "}
             {num(at(credit, 2007))} % en 2007, con tipos del 3–5 %.
-            La demanda actual tiene causas propias que estos datos sí miden: la inmigración (el {num((dec.population_effect / dec.total) * 100, 0)} % de los hogares nuevos se explica
-            por más población) y los hogares más pequeños. Los pisos turísticos pesan poco en el total ({num(data.regions.tourist_es, 2)} % del parque), pero mucho en algunas
+            La demanda actual tiene causas propias que estos datos sí miden: no es el eco del baby boom (la generación de 25 a 39 años se encoge desde {cohortPeak.year}), sino la inmigración
+            (el {num((decLast.population_effect / decLast.total) * 100, 0)} % de los hogares nuevos de {decLast.from}–{decLast.to} se explica por más población) y, antes, los hogares más pequeños. Los pisos turísticos pesan poco en el total ({num(data.regions.tourist_es, 2)} % del parque), pero mucho en algunas
             comunidades y barrios. Repartir el encarecimiento entre estas causas exige un modelo que esta página no hace.
           </li>
           <li>

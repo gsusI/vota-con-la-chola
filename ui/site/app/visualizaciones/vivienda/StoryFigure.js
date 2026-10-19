@@ -21,7 +21,7 @@ function creditColor(value) {
 const LABELLED = new Set([1995, 1998, 2001, 2004, 2007, 2009, 2011, 2013, 2015, 2019, 2021, 2023, 2025]);
 const avg = (rows, key) => rows.reduce((sum, row) => sum + row[key], 0) / rows.length;
 
-export default function StoryFigure({ story, source }) {
+export default function StoryFigure({ story, composition, source }) {
   if (!story?.length) return null;
   const xMax = Math.ceil(Math.max(...story.map((p) => p.x)) * 2) / 2;
   const yMax = Math.ceil(Math.max(...story.map((p) => p.y)) / 2) * 2;
@@ -42,12 +42,14 @@ export default function StoryFigure({ story, source }) {
   const yTicks = [];
   for (let v = 0; v <= yMax; v += 2) yTicks.push(v);
   const hollow = (p) => p.basis !== "epa";
+  const decLast = composition?.decomposition?.[composition.decomposition.length - 1];
+  const cohortPeak = composition?.cohort_25_39?.ES?.persons?.reduce((a, b) => (b.value > a.value ? b : a));
 
   return (
     <Figure
       id="el-dato"
       title={`Treinta años en un gráfico: de ${boom[0].year} a 2007 la vivienda se encareció terminando ${num(avg(boom, "x"), 1)} viviendas por hogar nuevo con el crédito creciendo un ${num(avg(boom, "credit_growth"), 0)} % al año; desde 2014 se encarece con ${num(avg(scarce, "x"), 1)} y el crédito ${avg(scarce, "credit_growth") < 0 ? "menguando" : "creciendo poco"}`}
-      dek={`Cada punto es un año. Hacia la derecha, más viviendas terminadas por cada hogar nuevo; hacia arriba, más años de renta del hogar mediano para pagar un piso (Banco de España). El color es el crédito a los hogares para comprar vivienda: azul si crece, naranja si mengua. El precio sube en dos situaciones opuestas: a la derecha y en azul (1998–2007: se construía mucho y el crédito se desbordaba) y a la izquierda y en naranja (2014–${lastPoint.year}: se construye poco y el crédito no crece). Ningún relato de una sola causa explica las dos.`}
+      dek={`Cada punto es un año. Hacia la derecha, más viviendas terminadas por cada hogar nuevo; hacia arriba, más años de renta del hogar mediano para pagar un piso (Banco de España). El color es el crédito a los hogares para comprar vivienda: azul si crece, naranja si mengua. El precio sube en dos situaciones opuestas: a la derecha y en azul (1998–2007: se construía mucho y el crédito se desbordaba) y a la izquierda y en naranja (2014–${lastPoint.year}: se construye poco y el crédito no crece). Ningún relato de una sola causa explica las dos.${decLast && cohortPeak ? ` Y la demanda de esta segunda fase no es la de la generación del baby boom, que se encoge desde ${cohortPeak.year}: el ${num((decLast.population_effect / decLast.total) * 100, 0)} % de los hogares nuevos de ${decLast.from}–${decLast.to} se debe al aumento de población, es decir, a la inmigración.` : ""}`}
       sources={[
         source("bde_indicadores_vivienda", "Banco de España: precio / renta del hogar, crédito a hogares para vivienda y tipos de interés"),
         source("mivau_boletin", "Ministerio de Vivienda: viviendas terminadas"),

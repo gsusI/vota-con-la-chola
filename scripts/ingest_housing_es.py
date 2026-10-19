@@ -188,7 +188,10 @@ class Raw:
 
 def check_payload(name: str, payload: bytes) -> None:
     """Never cache an HTML error page over a good payload."""
-    if name.endswith(".xls"):
+    if name.endswith(".xlsx"):
+        if not payload.startswith(b"PK"):
+            raise ValueError(f"{name}: expected an .xlsx (zip) file, got {payload[:40]!r}")
+    elif name.endswith(".xls"):
         if not payload.startswith(XLS_MAGIC):
             raise ValueError(f"{name}: expected a legacy .xls (OLE2) file, got {payload[:40]!r}")
     elif name.endswith(".csv"):
@@ -563,6 +566,51 @@ parse_mivau_transacciones = parse_mivau_quarterly(
     "lo que se vende.", "34000000")
 
 
+SERPAVI_URL = "https://cdn.mivau.gob.es/portal-web-mivau/vivienda/serpavi/2026-03_09_bd_SERPAVI_2011-2024%20-%20DEFINITIVO%20WEB_v2.xlsx"
+SERPAVI_PAGE = "https://www.mivau.gob.es/vivienda/alquila-bien-es-tu-derecho/serpavi"
+INE_CCAA_TO_NUTS = {"01": "ES61", "02": "ES24", "03": "ES12", "04": "ES53", "05": "ES70", "06": "ES13", "07": "ES41", "08": "ES42",
+                    "09": "ES51", "10": "ES52", "11": "ES43", "12": "ES11", "13": "ES30", "14": "ES62", "15": "ES22", "16": "ES21",
+                    "17": "ES23", "18": "ES63", "19": "ES64"}
+SERPAVI_FIELDS = {
+    "ALQTBID12_M_VC": ("serpavi_alquiler_mensual_mediano_vc", ("EUR_MONTH", "Euros al mes"), "Alquiler mensual mediano de vivienda colectiva (SERPAVI)"),
+    "ALQM2_LV_M_VC": ("serpavi_alquiler_m2_mediano_vc", ("EUR_M2_MONTH", "Euros por m² al mes"), "Alquiler mensual mediano por m² de vivienda colectiva (SERPAVI)"),
+}
+
+
+def parse_serpavi(raw: Raw) -> Iterable[Batch]:
+    """Ministerio de Vivienda, Sistema Estatal de Referencia del Precio del Alquiler (rentals declared in the IRPF,
+    Modelo 100, crossed with the Catastro): sheet 'CCAA', one column per measure and year (suffix _YY)."""
+    try:
+        import openpyxl  # noqa: PLC0415 - optional dependency, only for this workbook
+    except ImportError as exc:  # pragma: no cover - environment guard
+        raise SystemExit("SERPAVI is an .xlsx workbook: run via `just housing-refresh` (uv run --with openpyxl)") from exc
+    book = openpyxl.load_workbook(io.BytesIO(raw.payload), read_only=True, data_only=True)
+    rows = list(book["CCAA"].iter_rows(values_only=True))
+    header = rows[0]
+    for prefix, (code, unit, label) in SERPAVI_FIELDS.items():
+        series = []
+        for ri, row in enumerate(rows[1:], start=1):
+            geo = INE_CCAA_TO_NUTS.get(str(row[0]).zfill(2)) if row[0] is not None else None
+            if geo is None:
+                continue
+            obs = []
+            for ci, name in enumerate(header):
+                if isinstance(name, str) and name.startswith(prefix + "_") and name[len(prefix) + 1:].isdigit() and row[ci] is not None:
+                    obs.append({"period": str(2000 + int(name[len(prefix) + 1:])), "value": row[ci],
+                                "pointer": pointer("sheets", "CCAA", "rows", ri, "cols", ci), "cell_index": ri * 1000 + ci})
+            if obs:
+                series.append(geo_series(f"serpavi|{prefix}|{geo}", geo, {"ine_ccaa": str(row[0]), "nombre": row[1]}, obs))
+        yield {
+            "source_id": "mivau_boletin", "dataset_code": "SERPAVI_2011_2024", "indicator_code": code, "frequency_code": "A",
+            "frequency_label": "Anual", "unit_code": unit[0], "unit_label": unit[1], "label": label, "extraction_method": "xlsx_cell",
+            "definition": "Mediana de los alquileres de vivienda habitual declarados en el IRPF (excluidos los alquileres a "
+            "parientes), viviendas en bloque. Incluye todos los contratos vigentes ese año, no solo los nuevos. País Vasco y "
+            "Navarra no están (tienen su propia Hacienda).",
+            "methodology_url": "https://cdn.mivau.gob.es/portal-web-mivau/vivienda/serpavi/2026-03-18_Metodologia_SERPAVI.pdf",
+            "source_url": SERPAVI_PAGE,
+        }, sorted(series, key=lambda s: s["geo_code"])
+
+
 # ---------------------------------------------------------------- Banco de España si_1_5 (CSV)
 
 BDE_URL = "https://www.bde.es/webbe/es/estadisticas/compartido/datos/csv/si_1_5.csv"
@@ -709,6 +757,12 @@ INE_TABLES = {
              "INE, Encuesta Trimestral de Coste Laboral, tabla 6061: coste salarial total (salario bruto), industria, construcción y servicios.",
              "https://www.ine.es/dyngs/INEbase/operacion.htm?c=Estadistica_C&cid=1254736045053&idp=1254735976596",
              _select("Industria, construcción y servicios (excepto actividades de los hogares como empleadores y de organizaciones y organismos extraterritoriales). Coste salarial total")),
+    "9949": ("ecv_renta_neta_media_hogar", ("EUR_YEAR", "Euros al año"), "Renta neta media por hogar (INE, Encuesta de Condiciones de Vida)",
+             "INE ECV: renta disponible neta media por hogar del año anterior a la encuesta (la ECV de 2025 recoge la renta de 2024).",
+             "https://www.ine.es/dyngs/INEbase/operacion.htm?c=Estadistica_C&cid=1254736176807&idp=1254735976608", _select("Renta neta media por hogar")),
+    "9997": ("ecv_hogares_alquiler_mercado_pct", ("PC", "% de los hogares"), "Hogares en alquiler a precio de mercado (INE, ECV)",
+             "INE ECV: régimen de tenencia de la vivienda principal por comunidad autónoma.",
+             "https://www.ine.es/dyngs/INEbase/operacion.htm?c=Estadistica_C&cid=1254736176807&idp=1254735976608", _select("Alquiler a precio de mercado. Hogar")),
     "39365": ("viviendas_turisticas_pct", ("PC", "% de las viviendas censadas"), "Viviendas turísticas sobre el total de viviendas (%)",
               "INE, estadística experimental de viviendas turísticas a partir de anuncios en plataformas (mayo y noviembre de cada año).",
               "https://www.ine.es/dyngs/INEbase/operacion.htm?c=Estadistica_C&cid=1254736177101&idp=1254735976608", _select("Porcentaje de viviendas turísticas")),
@@ -997,6 +1051,14 @@ EUROSTAT_DEFS = {
         "unit_label": "% de la población", "split": ["tenure"],
         "definition": "Eurostat EU-SILC: como ilc_lvho07a, por régimen de tenencia (RENT_MKT: inquilinos a precio de mercado).",
     },
+    "ilc_lvho07b": {
+        "label": "Tasa de sobrecarga por gastos de vivienda, por quintil de renta", "unit_code": "PC", "unit_label": "% de la población",
+        "split": ["quant_inc"], "definition": "Eurostat EU-SILC: como ilc_lvho07a, por quintil de renta equivalente (QU1, el 20 % con menos renta).",
+    },
+    "demo_pjangroup": {
+        "label": "Población a 1 de enero por grupo de edad", "unit_code": "PERSONS", "unit_label": "Personas", "split": ["age"],
+        "definition": "Eurostat, población residente a 1 de enero por grupos quinquenales de edad.",
+    },
     "ilc_mded01": {
         "label": "Gastos de vivienda en % de la renta disponible del hogar", "unit_code": "PC", "unit_label": "% de la renta disponible",
         "split": [], "definition": "Eurostat EU-SILC: peso medio del gasto total en vivienda sobre la renta disponible del hogar.",
@@ -1064,6 +1126,7 @@ API_SOURCES: list[tuple[str, str, Callable[[Raw], Iterable[Batch]]]] = [
         "definitiva se concede al terminar la obra, por eso se usa como viviendas protegidas terminadas.", "31000000")),
     ("mivau_34020150_valor_transacciones.xls", "https://apps.fomento.gob.es/BoletinOnline2/sedal/34020150.XLS", parse_mivau_transacciones),
     ("bde_si_1_5.csv", BDE_URL, parse_bde),
+    ("mivau_serpavi_2011_2024.xlsx", SERPAVI_URL, parse_serpavi),
     *[(f"ine_tabla_{table}.json", ine_table_url(table), parse_ine_table(table)) for table in INE_TABLES],
     *[(f"ine_{code}.json", ine_url(code), parse_ine(code)) for code in INE_SERIES],
     ("oecd_av_an_wage_esp_dbnomics.json", OECD_WAGE_URL, parse_oecd_wage),
@@ -1072,7 +1135,7 @@ API_SOURCES: list[tuple[str, str, Callable[[Raw], Iterable[Batch]]]] = [
     ("oecd_property_tax_revenue_dbnomics.json", oecd_rev_url(), parse_oecd_rev),
     *[(f"ine_tabla_{table}.json", ine_table_url(table), parse_ees(table)) for table in EES_TABLES],
     ("eurostat_yth_demo_030.json", eurostat_url("yth_demo_030", sex="T", unit="AVG", geo=PEERS), parse_eurostat("yth_demo_030")),
-    ("eurostat_ilc_lvho02.json", eurostat_url("ilc_lvho02", hhcomp="TOTAL", rskpovth="TOTAL", unit="PC",
+    ("eurostat_ilc_lvho02.json", eurostat_url("ilc_lvho02", hhcomp="TOTAL", rskpovth=["TOTAL", "A_60", "B_60"], unit="PC",
                                                tenure=["OWN", "OWN_L", "RENT", "RENT_MKT", "RENT_FR"], geo=PEERS), parse_eurostat("ilc_lvho02")),
     ("eurostat_gov_10a_exp_housing.json", eurostat_url("gov_10a_exp", unit="MIO_EUR", sector="S13", na_item="TE",
                                                         cofog99=["GF0601", "GF1006"], geo=PEERS), parse_eurostat("gov_10a_exp")),
@@ -1081,7 +1144,9 @@ API_SOURCES: list[tuple[str, str, Callable[[Raw], Iterable[Batch]]]] = [
     ("eurostat_demo_gind.json", eurostat_url("demo_gind", indic_de=["JAN", "GROWRT", "CNMIGRATRT", "NATGROWRT"], geo=PEERS), parse_eurostat("demo_gind")),
     ("eurostat_ilc_lvph01.json", eurostat_url("ilc_lvph01", unit="AVG", geo=PEERS), parse_eurostat("ilc_lvph01")),
     ("eurostat_prc_hicp_aind.json", eurostat_url("prc_hicp_aind", unit="INX_A_AVG", coicop=["CP041", "CP00"], geo=PEERS), parse_eurostat("prc_hicp_aind")),
-    ("eurostat_ilc_lvho07a.json", eurostat_url("ilc_lvho07a", unit="PC", sex="T", rskpovth="TOTAL", age=["TOTAL", "Y15-29"], geo=PEERS), parse_eurostat("ilc_lvho07a")),
+    ("eurostat_ilc_lvho07a.json", eurostat_url("ilc_lvho07a", unit="PC", sex="T", rskpovth="TOTAL", age=["TOTAL", "Y15-29", "Y_LT18", "Y18-64", "Y_GE65"], geo=PEERS), parse_eurostat("ilc_lvho07a")),
+    ("eurostat_ilc_lvho07b.json", eurostat_url("ilc_lvho07b", unit="PC", quant_inc=["TOTAL", "QU1", "QU2", "QU3", "QU4", "QU5"], geo=PEERS), parse_eurostat("ilc_lvho07b")),
+    ("eurostat_demo_pjangroup.json", eurostat_url("demo_pjangroup", unit="NR", sex="T", age=["TOTAL", "Y25-29", "Y30-34", "Y35-39"], geo=PEERS), parse_eurostat("demo_pjangroup")),
     ("eurostat_ilc_lvho07c.json", eurostat_url("ilc_lvho07c", unit="PC", tenure=["TOTAL", "RENT_MKT", "OWN_L"], geo=PEERS), parse_eurostat("ilc_lvho07c")),
     ("eurostat_ilc_mded01.json", eurostat_url("ilc_mded01", unit="PC", hhcomp="TOTAL", rskpovth="TOTAL", geo=PEERS), parse_eurostat("ilc_mded01")),
     ("eurostat_ilc_mded02.json", eurostat_url("ilc_mded02", unit="PC", hhcomp="TOTAL", rskpovth="TOTAL", geo=PEERS), parse_eurostat("ilc_mded02")),

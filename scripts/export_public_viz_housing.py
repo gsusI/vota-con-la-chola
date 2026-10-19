@@ -55,8 +55,8 @@ class Store:
         self.conn = conn
         self.provenance: dict[str, list[dict]] = defaultdict(list)
 
-    def raw(self, indicator_code: str, source_id: str | None = None) -> dict[str, dict[str, float]]:
-        """Latest release of an indicator as {geography_code: {period: value}}."""
+    def raw(self, indicator_code: str, source_id: str | None = None, where: dict[str, str] | None = None) -> dict[str, dict[str, float]]:
+        """Latest release of an indicator as {geography_code: {period: value}}; `where` filters on series dimensions."""
         row = self.conn.execute(
             """
             SELECT d.source_id, r.indicator_release_id, r.source_url, r.source_content_sha256, r.source_snapshot_date,
@@ -75,14 +75,16 @@ class Store:
             "retrieved_at": json.loads(meta or "{}").get("retrieved_at"),
         })
         out: dict[str, dict[str, float]] = defaultdict(dict)
-        for geo, key, period, value in self.conn.execute(
+        for geo, key, dims, period, value in self.conn.execute(
             """
-            SELECT s.geography_code, s.stable_series_key, o.period_label, o.value_decimal
+            SELECT s.geography_code, s.stable_series_key, s.dimensions_json, o.period_label, o.value_decimal
             FROM indicator_observation_versions o JOIN indicator_series_versions s USING (indicator_series_version_id)
             WHERE o.indicator_release_id = ? AND o.revision_state != 'deleted' AND o.value_decimal IS NOT NULL
             """,
             (release_id,),
         ):
+            if where and any(json.loads(dims).get(k) != v for k, v in where.items()):
+                continue
             out[geo][period] = float(value)
         return out
 
@@ -291,8 +293,8 @@ def build(conn: sqlite3.Connection) -> dict:
             entry[field.removesuffix("_pct")] = row["value"]
     survey_owner = {int(p): v for p, v in s.raw("encuesta_tenencia_propiedad_pct")["ES"].items()}
     survey_rent = {int(p): v for p, v in s.raw("encuesta_tenencia_alquiler_pct")["ES"].items()}
-    silc_own = s.raw("ilc_lvho02.OWN")
-    silc_rent_mkt = s.raw("ilc_lvho02.RENT_MKT")
+    silc_own = s.raw("ilc_lvho02.OWN", where={"rskpovth": "TOTAL"})
+    silc_rent_mkt = s.raw("ilc_lvho02.RENT_MKT", where={"rskpovth": "TOTAL"})
     young = []
     for code in [row[0] for row in conn.execute(
         "SELECT DISTINCT indicator_code FROM indicator_definitions WHERE indicator_code LIKE 'owner_pct_by_age.%' ORDER BY 1")]:
@@ -370,6 +372,7 @@ def build(conn: sqlite3.Connection) -> dict:
         },
         "hicp_rent_nominal_es": pts({int(p): v for p, v in hicp_rent["ES"].items()}, 1),
         "ipc_rent_yoy": pts(annual(s.raw("ipc_alquiler_tasa_interanual")["ES"]), 1),
+        "ipva_change_pct": {str(b): r((ipva[max(ipva)] / ipva[b] - 1) * 100, 1) for b in (2011, 2015, 2019) if b in ipva},
     }
 
     # 9. Competing drivers: credit, population and migration, household size, short-term rentals.
@@ -495,6 +498,86 @@ def build(conn: sqlite3.Connection) -> dict:
         "income_pps": {geo: pts({int(p): v for p, v in income_pps.get(geo, {}).items()}, 0) for geo in PEERS_EUROSTAT},
     }
 
+    # 12. Base years: every headline is also given from the 2000 start, the 2007 peak, the 2013 trough and 2019.
+    bases = (2000, 2007, 2013, 2019)
+    last_y = max(home)
+    def change(series: dict[int, float], base: int) -> float | None:
+        return r((series[last_y] / series[base] - 1) * 100, 1) if base in series and last_y in series else None
+    windows = [(2003, 2007), (2008, 2012), (2013, 2019), (2020, max(net_households))]
+    base_block = {
+        "last_year": last_y, "bases": list(bases),
+        "years_appraisal": {str(b): r(years_ine_all.get(b), 2) for b in (*bases, last_y)},
+        "years_sale": {str(b): r(years_ipv.get(b), 2) for b in (*bases, last_y) if b in years_ipv},
+        "years_household_income": {str(b): r(years_bde.get(b), 2) for b in (*bases, last_y)},
+        "sale_price_change_pct": {str(b): change(ipv, b) for b in bases if b in ipv},
+        "appraisal_change_pct": {str(b): change(price_m2, b) for b in bases},
+        "wage_change_pct": {str(b): change(wage_all, b) for b in bases if b in wage_all},
+        "completed_per_household": [window(a, b) for a, b in windows],
+    }
+
+    # 13. Composition: the household-forming cohort (25-39) and what drives new households in each period.
+    cohort_parts = [s.raw(f"demo_pjangroup.{age}") for age in ("Y25-29", "Y30-34", "Y35-39")]
+    pop_total = s.raw("demo_pjangroup.TOTAL")
+    cohort = {}
+    for geo in PEERS_EUROSTAT:
+        years_c = set.intersection(*(set(part.get(geo, {})) for part in cohort_parts))
+        cohort[geo] = {
+            "persons": pts({int(y): sum(part[geo][y] for part in cohort_parts) for y in years_c}, 0),
+            "share_pct": pts({int(y): sum(part[geo][y] for part in cohort_parts) / pop_total[geo][y] * 100 for y in years_c if y in pop_total.get(geo, {})}, 2),
+        }
+    def decompose(a: int, b: int) -> dict | None:
+        if not all(y in households and y in mid_pop for y in (a, b)):
+            return None
+        size_a = mid_pop[a] / households[a]
+        same = mid_pop[b] / size_a
+        total = households[b] - households[a]
+        return {"from": a, "to": b, "total": r(total, 0), "population_effect": r(same - households[a], 0),
+                "size_effect": r(households[b] - same, 0), "per_year": r(total / (b - a), 0)}
+    composition = {"cohort_25_39": cohort,
+                   "decomposition": [d for d in (decompose(2002, 2007), decompose(2007, 2013), decompose(2013, 2019), decompose(2019, max(y for y in households if y in mid_pop))) if d]}
+
+    # 14. Distribution: overburden by income quintile and age, tenure above and below the poverty line.
+    quint = {q: s.raw(f"ilc_lvho07b.{q}") for q in ("TOTAL", "QU1", "QU2", "QU3", "QU4", "QU5")}
+    ages = {a: s.raw(f"ilc_lvho07a.{a}") for a in ("TOTAL", "Y_LT18", "Y15-29", "Y18-64", "Y_GE65")}
+    tenure_pov = {(ten, pov): s.raw(f"ilc_lvho02.{ten}", where={"rskpovth": pov}) for ten in ("OWN", "RENT_MKT") for pov in ("A_60", "B_60")}
+    def latest_by_geo(table: dict[str, dict[str, float]]) -> dict[str, dict]:
+        return {geo: {"year": int(max(v)), "value": r(v[max(v)], 1)} for geo, v in table.items() if v}
+    distribution = {
+        "overburden_quintile": {q: latest_by_geo(v) for q, v in quint.items()},
+        "overburden_quintile_es_series": {q: pts({int(p): x for p, x in v.get("ES", {}).items()}, 1) for q, v in quint.items()},
+        "overburden_age": {a: latest_by_geo(v) for a, v in ages.items()},
+        "tenure_poverty": {f"{ten}|{pov}": latest_by_geo(v) for (ten, pov), v in tenure_pov.items()},
+        "rent_mkt_below_poverty_es": pts({int(p): x for p, x in tenure_pov[("RENT_MKT", "B_60")].get("ES", {}).items()}, 1),
+        "rent_mkt_above_poverty_es": pts({int(p): x for p, x in tenure_pov[("RENT_MKT", "A_60")].get("ES", {}).items()}, 1),
+    }
+
+    # 15. Territory: median rent of tenants (SERPAVI, IRPF) against the region's net household income (ECV of the
+    # following year, which records that year's income), and the share of households renting at market price.
+    rent_reg = s.raw("serpavi_alquiler_mensual_mediano_vc")
+    income_reg = s.raw("ecv_renta_neta_media_hogar")
+    renters = s.raw("ecv_hogares_alquiler_mercado_pct")
+    rent_rows = []
+    for code, name in REGIONS.items():
+        rents_c = {int(p): v for p, v in rent_reg.get(code, {}).items()}
+        inc = {int(p) - 1: v for p, v in income_reg.get(code, {}).items()}  # ECV survey year t -> income of t-1
+        both = sorted(y for y in rents_c if y in inc)
+        if not both:
+            continue
+        y1 = both[-1]
+        y0 = 2015 if 2015 in both else both[0]
+        rent_rows.append({
+            "code": code, "name": name, "year": y1, "rent_month": r(rents_c[y1], 0), "income_year": r(inc[y1], 0),
+            "burden_pct": r(rents_c[y1] * 12 / inc[y1] * 100, 1), "burden_base_year": y0,
+            "burden_base_pct": r(rents_c[y0] * 12 / inc[y0] * 100, 1) if y0 < y1 else None,
+            "rent_change_pct": r((rents_c[y1] / rents_c[y0] - 1) * 100, 1) if y0 < y1 else None,
+            "income_change_pct": r((inc[y1] / inc[y0] - 1) * 100, 1) if y0 < y1 else None,
+            "renters_pct": r(renters.get(code, {}).get(str(y1 + 1)), 1),
+        })
+    es_income = {int(p) - 1: v for p, v in income_reg.get("ES", {}).items()}
+    territory = {"rows": sorted(rent_rows, key=lambda row: -row["burden_pct"]),
+                 "renters_es_pct": r(renters.get("ES", {}).get(str(max(int(p) for p in renters.get("ES", {"0": 0})))), 1),
+                 "income_es": pts(es_income, 0)}
+
     # 11. Money in versus money out: taxes on immovable property and on its transfer vs public housing spending.
     rev = {code: s.raw(f"TAX_REV.S13.{code}") for code in ("T_4100", "T_4400", "T_4000")}
     to_eu = {"ESP": "ES", "DEU": "DE", "FRA": "FR", "ITA": "IT", "PRT": "PT", "OECD": None}
@@ -600,6 +683,10 @@ def build(conn: sqlite3.Connection) -> dict:
         "drivers": drivers,
         "story": story,
         "capacity": capacity,
+        "bases": base_block,
+        "composition": composition,
+        "distribution": distribution,
+        "territory": territory,
         "money": money,
         "norms": norms,
         "sources": sources,
@@ -707,6 +794,19 @@ def write_csv(data: dict, path: Path) -> None:
     for row in data["money"]:
         for key in ("recurrent_property", "transactions", "collected", "spent", "spent_development", "spent_allowances"):
             rows.append(("oecd+eurostat", f"dinero_{key}_pct_pib", row["geo"], row["year"], row[key]))
+    for geo, block in data["composition"]["cohort_25_39"].items():
+        rows.extend(("eurostat_sdmx", "cohorte_25_39_personas", geo, p["year"], p["value"]) for p in block["persons"])
+        rows.extend(("eurostat_sdmx", "cohorte_25_39_pct_poblacion", geo, p["year"], p["value"]) for p in block["share_pct"])
+    for q, by_geo in data["distribution"]["overburden_quintile"].items():
+        rows.extend(("eurostat_sdmx", f"sobrecarga_quintil_{q}", geo, v["year"], v["value"]) for geo, v in by_geo.items())
+    for a, by_geo in data["distribution"]["overburden_age"].items():
+        rows.extend(("eurostat_sdmx", f"sobrecarga_edad_{a}", geo, v["year"], v["value"]) for geo, v in by_geo.items())
+    for key, by_geo in data["distribution"]["tenure_poverty"].items():
+        rows.extend(("eurostat_sdmx", f"tenencia_{key.replace('|', '_')}", geo, v["year"], v["value"]) for geo, v in by_geo.items())
+    for row in data["territory"]["rows"]:
+        rows.append(("mivau+ine", "alquiler_mediano_mes", row["code"], row["year"], row["rent_month"]))
+        rows.append(("mivau+ine", "alquiler_pct_renta_hogar", row["code"], row["year"], row["burden_pct"]))
+        rows.append(("ine_tempus", "hogares_alquiler_mercado_pct", row["code"], row["year"] + 1, row["renters_pct"]))
     for row in data["story"]:
         rows.append(("derivado", "relato_viviendas_por_hogar_nuevo", "ES", row["year"], row["x"]))
         rows.append(("bde_indicadores_vivienda", "relato_anios_renta_hogar", "ES", row["year"], row["y"]))

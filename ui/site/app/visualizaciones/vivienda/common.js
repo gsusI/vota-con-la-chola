@@ -35,6 +35,8 @@ export const howMany = (value, noun) => (Math.abs(Number(value)) >= 1e6 ? `${mil
 export const day = (iso) => (iso ? String(iso).slice(0, 10) : null);
 export const at = (rows, year) => rows?.find((p) => p.year === year)?.value;
 export const pct = (value, digits = 1) => `${num(value, digits)} %`;
+// «A, B y C».
+export const joinEs = (items) => (items.length < 2 ? items.join("") : `${items.slice(0, -1).join(", ")} y ${items[items.length - 1]}`);
 
 // Bars use at most 70 % of the track so the value label always fits beside them, also on phones.
 export function Bars({ rows, max, label }) {

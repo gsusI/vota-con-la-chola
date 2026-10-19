@@ -6883,7 +6883,7 @@ employment-refresh *args:
 # with the curated purchase-tax rates and census/survey values into housing-es.db (indicator_* contract with releases
 # and revisions), then export the page data from that DB. `just housing-refresh --offline` reloads from the cache.
 housing-refresh *args:
-  UV_CACHE_DIR=.cache/uv uv run -q --no-project --python "$(command -v python3)" --with 'xlrd>=2,<3' python scripts/ingest_housing_es.py {{args}}
+  UV_CACHE_DIR=.cache/uv uv run -q --no-project --python "$(command -v python3)" --with 'xlrd>=2,<3' --with 'openpyxl>=3.1,<4' python scripts/ingest_housing_es.py {{args}}
   python3 scripts/export_public_viz_housing.py
 
 # Spain education (/visualizaciones/educacion/): fetch Ministerio de Educación (EDUCAbase PC-Axis), Eurostat, OCDE

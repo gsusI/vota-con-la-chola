@@ -208,7 +208,7 @@ export function YoungOwnershipFigure({ young, retrieved }) {
   return (
     <Figure
       id="jovenes-propietarios"
-      title={`Entre los hogares de menores de 35 años, los propietarios de su vivienda caen del ${num(peak.value)} % en ${peak.year} al ${num(last.value)} % en ${last.year}`}
+      title={`Entre los hogares de menores de 35 años, los propietarios de su vivienda son el ${num(last.value)} % en ${last.year}, frente al ${num(first.value)} % en ${first.year} y el ${num(peak.value)} % de ${peak.year}`}
       dek={`Hogares que tienen en propiedad su vivienda principal, según la edad de la persona de referencia (Encuesta Financiera de las Familias del Banco de España). ${low.year !== last.year ? `El mínimo fue el ${num(low.value)} % de ${low.year}. ` : ""}En el conjunto de los hogares la caída es mucho menor: del ${num(series.at(-1).points[0].value)} % al ${num(series.at(-1).points.at(-1).value)} %. Cada punto es una ola de la encuesta; las líneas solo unen olas.`}
       legend={series}
       sources={sources}

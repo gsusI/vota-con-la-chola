@@ -164,6 +164,15 @@ class RegionalParsingTest(unittest.TestCase):
         by_age = ingest.EES_TABLES["28201"][0][2]
         self.assertTrue(by_age("Ambos sexos. De 25 a 34 años. Dato base. Total Nacional. Salario medio bruto. "))
 
+    def test_regional_rent_sources_cover_every_region(self) -> None:
+        self.assertEqual(sorted(ingest.INE_CCAA_TO_NUTS.values()), sorted(ingest.CCAA))
+        renters = ingest.INE_TABLES["9997"][-1]
+        income = ingest.INE_TABLES["9949"][-1]
+        self.assertEqual(renters("Andalucía. Alquiler a precio de mercado. Hogar. "), "ES61")
+        self.assertIsNone(renters("Andalucía. Alquiler inferior al precio de mercado. Hogar. "))
+        self.assertEqual(income("Total Nacional. Renta neta media por hogar. Base 2013. "), "ES")
+        self.assertIsNone(income("Total Nacional. Renta media por hogar (con alquiler imputado). Base 2013. "))
+
     def test_index_rebase(self) -> None:
         self.assertEqual(export.index_to({2015: 80.0, 2025: 100.0}, 2015), {2015: 100.0, 2025: 125.0})
         self.assertEqual(export.index_to({2016: 1.0}, 2015), {})

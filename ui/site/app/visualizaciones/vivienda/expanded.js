@@ -2,12 +2,12 @@ import Figure from "../components/Figure";
 import HousingChart from "./HousingChart";
 import HousingTable from "./HousingTable";
 import { Explain } from "./explain";
-import { Bars, C, NAMES, PEER_LEGEND, PeerPanels, at, num, pct, thousands } from "./common";
+import { Bars, C, NAMES, PEER_LEGEND, PeerPanels, at, joinEs, num, pct, thousands } from "./common";
 
 const EU_PEERS = ["EU27_2020", "DE", "FR", "IT", "PT"];
 const last = (rows) => rows[rows.length - 1];
 
-export function SalePricesFigure({ sale, source }) {
+export function SalePricesFigure({ sale, bases, source }) {
   const series = [
     { id: "ipv", label: "Precio de compraventa, ajustado por calidad (INE, IPV)", shortLabel: "Compraventa INE", color: C.aqua, emphasis: true, points: sale.ipv_idx },
     { id: "tx", label: "Valor medio escriturado ante notario (Ministerio de Vivienda)", shortLabel: "Escrituras", color: C.orange, points: sale.transactions_idx },
@@ -19,8 +19,8 @@ export function SalePricesFigure({ sale, source }) {
   return (
     <Figure
       id="compraventa"
-      title={`Desde 2015 el precio de compraventa ha subido un ${num(up(series[0]), 0)} % y el valor de tasación un ${num(up(series[2]), 0)} %: la tasación se queda corta`}
-      dek={`Tres medidas del precio de la vivienda, en índice 2015 = 100. El índice del INE compara viviendas parecidas a partir de las escrituras (descuenta que se vendan pisos más grandes o mejor situados); el valor medio escriturado es la media simple de lo que se paga; la tasación es lo que estima el tasador para el banco. Con precios de compraventa, un piso de 90 m² costaría ${num(last(sale.years_ipv_chained).value)} años de salario en ${last(sale.years_ipv_chained).year}, no los ${num(at(sale.years_ipv_chained, 2015))} de 2015.`}
+      title={`El precio de compraventa ha subido un ${num(bases.sale_price_change_pct["2019"], 0)} % desde 2019 y un ${num(bases.sale_price_change_pct["2007"], 0)} % desde el máximo de 2007; la tasación, un ${num(bases.appraisal_change_pct["2019"], 0)} % y un ${num(bases.appraisal_change_pct["2007"], 0)} %: la tasación se queda corta`}
+      dek={`Tres medidas del precio de la vivienda, en índice 2015 = 100 (2015 es solo la base del índice, no el punto de comparación: arriba se compara con 2007 y 2019; desde el mínimo de 2013 el precio de compraventa ha subido un ${num(bases.sale_price_change_pct["2013"], 0)} %). El índice del INE compara viviendas parecidas a partir de las escrituras (descuenta que se vendan pisos más grandes o mejor situados); el valor medio escriturado es la media simple de lo que se paga; la tasación es lo que estima el tasador para el banco. Con precios de compraventa, un piso de 90 m² costaría ${num(last(sale.years_ipv_chained).value)} años de salario en ${last(sale.years_ipv_chained).year}, no los ${num(at(sale.years_ipv_chained, 2015))} de 2015.`}
       legend={series}
       sources={[
         source("ine_tempus", "INE, Índice de Precios de Vivienda (IPV)", "https://www.ine.es/jaxiT3/Tabla.htm?t=80271"),
@@ -54,12 +54,15 @@ export function RegionalPriceFigure({ regions, homeM2, source }) {
   const top = rows[0];
   const bottom = last(rows);
   const max = Math.max(...rows.flatMap((row) => Object.values(row.years_salary)));
-  const biggestRise = [...rows].sort((a, b) => (b.years_salary[regions.to] - b.years_salary[2015]) - (a.years_salary[regions.to] - a.years_salary[2015]))[0];
+  const rise = (base) => [...rows].filter((row) => row.years_salary[base] != null).sort((a, b) => (b.years_salary[regions.to] - b.years_salary[base]) - (a.years_salary[regions.to] - a.years_salary[base]))[0];
+  const biggestRise = rise(2015);
+  const biggest2008 = rise(2008);
+  const above2008 = rows.filter((row) => row.years_salary[2008] != null && row.years_salary[regions.to] > row.years_salary[2008]);
   return (
     <Figure
       id="regiones-precio"
       title={`Un piso de ${homeM2} m² cuesta ${num(top.years_salary[regions.to])} años de salario en ${top.name} y ${num(bottom.years_salary[regions.to])} en ${bottom.name}`}
-      dek={`Años de salario bruto medio de cada comunidad para pagar un piso de ${homeM2} m² al valor tasado medio de esa comunidad, ${regions.to}. Donde más ha subido desde 2015: ${biggestRise.name}, de ${num(biggestRise.years_salary[2015])} a ${num(biggestRise.years_salary[regions.to])} años.`}
+      dek={`Años de salario bruto medio de cada comunidad para pagar un piso de ${homeM2} m² al valor tasado medio de esa comunidad, ${regions.to}. Frente a 2008, al final de la burbuja, ${above2008.length ? `solo ${above2008.map((row) => row.name).join(" y ")} ${above2008.length > 1 ? "están" : "está"} más cara${above2008.length > 1 ? "s" : ""} hoy` : "todas están hoy más baratas"} (lo que más ha subido respecto a 2008 es ${biggest2008.name}: ${num(biggest2008.years_salary[2008])} → ${num(biggest2008.years_salary[regions.to])}); frente a 2015, el año más barato, sube en casi todas, sobre todo en ${biggestRise.name} (${num(biggestRise.years_salary[2015])} → ${num(biggestRise.years_salary[regions.to])}).`}
       legend={[
         { id: "last", label: String(regions.to), color: C.blue },
         { id: "2015", label: "2015", color: C.peer },
@@ -128,10 +131,11 @@ export function RentFigure({ rents, source }) {
   ];
   const y = last(rents.ipva_idx).year;
   const chg = (rows) => at(rows, y) - 100;
+  const since = (rows, base) => (at(rows, y) / at(rows, base) - 1) * 100;
   return (
     <Figure
       id="alquiler"
-      title={`Los alquileres declarados a Hacienda subieron un ${num(chg(rents.ipva_idx), 0)} % entre 2015 y ${y}, al ritmo de los precios (${num(chg(rents.cpi_idx), 0)} %) y de los salarios (${num(chg(rents.wage_idx), 0)} %)`}
+      title={`Los alquileres declarados a Hacienda subieron un ${num(since(rents.ipva_idx, 2011), 0)} % de 2011 a ${y} y un ${num(since(rents.ipva_idx, 2019), 0)} % desde 2019, como los precios (${num(since(rents.cpi_idx, 2011), 0)} % y ${num(since(rents.cpi_idx, 2019), 0)} %) y los salarios (${num(since(rents.wage_idx, 2011), 0)} % y ${num(since(rents.wage_idx, 2019), 0)} %)`}
       dek={`Índice 2015 = 100. El IPVA del INE mide la renta de todos los contratos de alquiler declarados en el IRPF, también los firmados hace años, que solo se actualizan con el IPC o lo pactado. Por eso sube despacio: el encarecimiento que sufre quien busca piso hoy está en los contratos nuevos, que esta serie diluye.`}
       legend={series}
       sources={[
@@ -185,7 +189,7 @@ export function RegionalGapFigure({ regions, source }) {
   return (
     <Figure
       id="brecha-regional"
-      title={`El déficit no es uniforme: en ${worst.map((row) => row.name).join(", ")} se terminó menos de media vivienda por cada hogar nuevo entre ${regions.from + 1} y ${regions.to}`}
+      title={`El déficit no es uniforme: en ${joinEs(worst.map((row) => row.name))} se terminó menos de media vivienda por cada hogar nuevo entre ${regions.from + 1} y ${regions.to}`}
       dek={`Hogares nuevos menos viviendas terminadas en cada comunidad, por cada 1.000 hogares que había en ${regions.from}. Cuanto más larga la barra, más hogares se han formado sin una vivienda nueva que los acompañe. Entre paréntesis, viviendas terminadas por cada hogar nuevo. Las comunidades con barra cero o negativa construyeron tanto o más de lo que crecieron sus hogares.`}
       legendKind="bar"
       sources={[
@@ -249,24 +253,22 @@ export function RegionalGapFigure({ regions, source }) {
 
 export function PopulationFigure({ drivers, source }) {
   const mig = drivers.net_migration_per_1000;
-  const d = drivers.household_decomposition;
+  const pop = drivers.population_es;
   const max = Math.max(...Object.values(mig).flatMap((rows) => rows.filter((p) => p.year >= 1990).map((p) => p.value)));
-  const sharePop = d.population_effect / d.total;
   const lastEs = last(mig.ES);
   const natural = drivers.natural_growth_per_1000_es;
   const firstNegative = natural.find((p) => p.value < 0 && natural.filter((q) => q.year > p.year).every((q) => q.value < 0));
   return (
     <Figure
       id="poblacion"
-      title={`De los ${num(d.total / 1e6, 2)} millones de hogares nuevos entre ${d.from} y ${d.to}, ${num(d.population_effect / 1e6, 2)} millones (${num(sharePop * 100, 0)} %) se explican por el aumento de población, que en España llega por la inmigración`}
-      dek={`La población residente pasó de ${num(d.population_from / 1e6, 1)} a ${num(d.population_to / 1e6, 1)} millones. Desde ${firstNegative ? firstNegative.year : "2015"} mueren más personas de las que nacen, así que todo el crecimiento viene de la migración: ${num(lastEs.value, 1)} llegadas netas por 1.000 habitantes en ${lastEs.year}, frente a ${num(last(mig.EU27_2020).value, 1)} en la UE. El resto de hogares nuevos (${num(d.size_effect / 1e6, 2)} millones) se debe a que cada hogar tiene menos miembros (${num(d.persons_per_household_from, 2)} → ${num(d.persons_per_household_to, 2)} personas).`}
+      title={`España recibe ${num(lastEs.value, 1)} inmigrantes netos por 1.000 habitantes al año (${lastEs.year}), ${num(lastEs.value / last(mig.EU27_2020).value, 1)} veces la media de la UE: es la fuente del aumento de población que alimenta la demanda de vivienda`}
+      dek={`La población residente pasó de ${num(at(pop, 2000) / 1e6, 1)} millones en 2000 a ${num(at(pop, 2008) / 1e6, 1)} en 2008, ${num(at(pop, 2019) / 1e6, 1)} en 2019 y ${num(last(pop).value / 1e6, 1)} en ${last(pop).year}. Desde ${firstNegative ? firstNegative.year : "2015"} mueren más personas de las que nacen, así que todo el crecimiento viene de la migración. Cuántos hogares nuevos se deben a más población y cuántos a hogares más pequeños, por tramos, en el gráfico siguiente.`}
       legend={PEER_LEGEND}
       sources={[
         source("eurostat_sdmx", "Eurostat, demo_gind (migración neta y población)", "https://ec.europa.eu/eurostat/databrowser/view/demo_gind/default/table"),
         source("bde_indicadores_vivienda", "INE, hogares de la EPA (vía Banco de España)"),
       ]}
       notes={[
-        "Descomposición: hogares que habría con la población final y el tamaño medio inicial (efecto población) frente a los que hay de verdad (efecto tamaño). Población = media de 1 de enero de un año y del siguiente; incluye a quienes no viven en hogares (residencias), por lo que el tamaño medio es aproximado.",
         "Migración neta de Eurostat incluye un ajuste estadístico entre censos y padrón.",
       ]}
       table={
@@ -279,17 +281,9 @@ export function PopulationFigure({ drivers, source }) {
       }
     >
       <PeerPanels data={mig} spain="ES" peers={EU_PEERS} unit="index" xMin={1990} xMax={lastEs.year} yMax={max} panelNote={(rows) => `${num(last(rows).value)} por 1.000 en ${last(rows).year}`} />
-      <Bars
-        rows={[
-          { id: "pop", label: "Por más población", value: d.population_effect, color: C.blue, text: `${thousands(d.population_effect)} hogares (${num(sharePop * 100, 0)} %)` },
-          { id: "size", label: "Por hogares más pequeños", value: d.size_effect, color: C.aqua, text: `${thousands(d.size_effect)} hogares (${num((1 - sharePop) * 100, 0)} %)` },
-        ]}
-        max={d.population_effect}
-        label="De dónde salen los hogares nuevos"
-      />
       <Explain
-        shows="Cuánta gente llega a cada país por migración (en ‰ de la población) y de dónde salen los hogares nuevos de España."
-        read="En los paneles, una línea por encima de cero significa que llega más gente de la que se va. En las barras, cada hogar nuevo se atribuye a que hay más personas o a que viven menos personas por hogar."
+        shows="Cuánta gente llega a cada país por migración, en ‰ de la población, desde 1990."
+        read="Una línea por encima de cero significa que llega más gente de la que se va. España tuvo dos olas, en los años 2000 y desde mediados de los 2010, separadas por años de salida neta durante la crisis."
         notSay="No dice si la inmigración «causa» la subida de precios: también aporta trabajadores a la construcción y renta. Solo dice cuántos hogares nuevos hay que alojar."
       />
     </Figure>
