@@ -117,16 +117,23 @@ export default function EducacionPage() {
   // 3. Early leavers -----------------------------------------------------------------------------
   const el = data.early_leavers;
   const leavers = comparison(el.series, ["ES", "EU27_2020", "DE", "FR", "IT", "PT"], ["EU27_2020"]);
-  // Consecutive break years share one label; labels closer than seven years alternate between two rows.
-  const breakRows = (years) =>
-    years.reduce((notes, year) => {
-      const last = notes.at(-1);
-      if (last && year - last.to <= 1) {
-        return [...notes.slice(0, -1), { ...last, to: year, label: `Rupturas ${last.year}-${String(year).slice(2)}` }];
-      }
-      const row = last && year - last.year < 7 ? 1 - last.row : 0;
-      return [...notes, { year, to: year, label: `Ruptura ${year}`, row }];
-    }, []);
+  // Breaks less than four years apart share one short label at the first year («b» is Eurostat's break flag); every
+  // break keeps its own vertical line, so close breaks never stack overlapping labels.
+  const breakRows = (years) => {
+    const clusters = [];
+    for (const year of years) {
+      const last = clusters.at(-1);
+      if (last && year - last.at(-1) < 4) last.push(year);
+      else clusters.push([year]);
+    }
+    return clusters.flatMap((cluster) =>
+      cluster.map((year, index) => ({
+        year,
+        row: 0,
+        label: index ? "" : `b ${cluster.map((y, i) => (i ? String(y).slice(2) : y)).join("·")}`,
+      })),
+    );
+  };
   const breakNotes = breakRows(el.breaks.filter((year) => year >= 2002));
   const regionMax = Math.max(...el.regions.map((row) => row.first || row.last));
   const motherLevels = [
@@ -509,7 +516,7 @@ export default function EducacionPage() {
         legend={leavers.slice().reverse()}
         sources={[S.eurostat("edat_lfse_14"), S.eurostat("edat_lfse_16"), S.mefpEpa]}
         notes={[
-          `Líneas verticales: rupturas de serie que Eurostat marca con «b» en España o la UE (${el.breaks.join(", ")}), por cambios en la Encuesta de Población Activa; desde 2021 los datos de España llevan además la marca «d» (definición distinta). No se ajustan: la serie se muestra tal cual con sus marcas.`,
+          `Líneas verticales «b»: rupturas de serie que Eurostat marca con «b» en España o la UE (${el.breaks.join(", ")}), por cambios en la Encuesta de Población Activa; desde 2021 los datos de España llevan además la marca «d» (definición distinta). No se ajustan: la serie se muestra tal cual con sus marcas.`,
           "Es una encuesta: las cifras regionales tienen más error muestral, sobre todo en Ceuta, Melilla y La Rioja.",
           "Estudios de la madre: explotación de la EPA del Ministerio de Educación (tabla aban_1_08), jóvenes de 18 a 24 años; el grupo «no consta» se omite en el gráfico y está en los datos descargables.",
         ]}
@@ -623,7 +630,7 @@ export default function EducacionPage() {
         notes={[
           "Mide el encaje entre título y ocupación según la clasificación ISCO, no la calidad del título ni el salario. Puede reflejar tanto exceso de titulados como un tejido productivo con pocos puestos cualificados.",
           ...(data.overqualification_breaks_es?.length
-            ? [`Líneas verticales: rupturas de serie de la Encuesta de Población Activa que Eurostat marca con «b» para España (${data.overqualification_breaks_es.join(", ")}); no se ajustan.`]
+            ? [`Líneas verticales «b»: rupturas de serie de la Encuesta de Población Activa que Eurostat marca con «b» para España (${data.overqualification_breaks_es.join(", ")}); no se ajustan.`]
             : []),
         ]}
         table={<EduTable caption="Ver los datos en tabla" series={overq.slice().reverse()} />}

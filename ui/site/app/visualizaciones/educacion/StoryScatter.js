@@ -18,6 +18,8 @@ const sx = (x) => M.left + (x / X_MAX) * (W - M.left - M.right);
 const syd = (d) => M.top + (H - M.top - M.bottom) * (1 - (d - Y_MIN) / (Y_MAX - Y_MIN));
 
 // Label offsets [dx, dy, anchor] chosen so the dense middle of the cloud stays legible.
+// Region labels that would collide with Spain's path or the peer arrows go below-left of their square.
+const REGION_OFFSET = { Cataluña: [-6, 14, "end"], "Murcia, Región de": [-6, 4, "end"] };
 const SPAIN_LABEL = { 2000: [-8, 4, "end"], 2006: [8, 12, "start"], 2009: [8, -6, "start"], 2012: [6, -9, "start"], 2015: [-8, -6, "end"], 2018: [-8, 14, "end"], 2022: [-10, 4, "end"] };
 const PEER_LABEL = { OECD: [6, 16, "start"], DEU: [6, -8, "start"], FRA: [6, -8, "start"], ITA: [6, 30, "start"], PRT: [6, -8, "start"] };
 
@@ -106,7 +108,13 @@ export default function StoryScatter({ story }) {
             <title>{`${row.region}: gasto ${row.x}, PISA ${row.y} (ISEC ${row.isec_above_oecd ? "superior" : "inferior"} a la media OCDE)`}</title>
           </rect>
           {REGION_LABELS[row.region] ? (
-            <text x={sx(row.x) + 6} y={sy(row.y) - 6} fontSize={10.5} fill={regionColor(row)}>
+            <text
+              x={sx(row.x) + (REGION_OFFSET[row.region] || [6, -6])[0]}
+              y={sy(row.y) + (REGION_OFFSET[row.region] || [6, -6])[1]}
+              textAnchor={(REGION_OFFSET[row.region] || [0, 0, "start"])[2]}
+              fontSize={10.5}
+              fill={regionColor(row)}
+            >
               {REGION_LABELS[row.region]}
             </text>
           ) : null}
