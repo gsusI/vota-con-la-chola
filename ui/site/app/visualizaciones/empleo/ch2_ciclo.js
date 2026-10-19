@@ -10,6 +10,7 @@ const SECTOR_NAMES = { F: "Construcción", C: "Industria manufacturera", "G-I": 
 
 export default function ChapterCiclo({ data, events }) {
   const h = data.headline;
+  const cw = data.wording?.construction;
   const S = sources(data);
   const u = data.unemployment;
   const n = data.nawru;
@@ -56,7 +57,7 @@ export default function ChapterCiclo({ data, events }) {
       <Chapter id="cap-ciclo" kicker="Capítulo 2" title="¿Estructural o cíclico? Las dos cosas a la vez">
         <p>
           «Estructural» significa que el paro no baja de cierto nivel ni en los buenos años; «cíclico», que sube y baja con la economía. En
-          España se dan las dos cosas: un suelo alto y unas oscilaciones enormes. Este capítulo mide ambas y muestra por qué cada crisis destruye
+          España se dan las dos cosas: un suelo alto y unas oscilaciones enormes. Este capítulo mide ambas y con qué rasgos coincide que cada crisis destruya
           aquí tanto empleo.
         </p>
       </Chapter>
@@ -81,7 +82,7 @@ export default function ChapterCiclo({ data, events }) {
         <Fig
           id="ciclo"
           title={`En ${crisis.from}–${crisis.to} el PIB de España cayó un ${num(-esC.gdp)} % y el empleo un ${num(-esC.employment)} %; en Italia, con una caída del PIB mayor (${num(-itC.gdp)} %), el empleo bajó un ${num(-itC.employment)} %`}
-          dek={`En España cada punto de PIB perdido se llevó unos ${num(esC.employment / esC.gdp)} puntos de empleo. En la pandemia (${covid.from}–${covid.to}), con los ERTE, fue al revés: el PIB cayó un ${num(-esP.gdp)} % y el empleo un ${num(-esP.employment)} %.`}
+          dek={`En España, por cada punto que cayó el PIB, el empleo cayó unos ${num(data.wording.employment_per_gdp_point[`${crisis.from}-${crisis.to}`])} puntos. En la pandemia (${covid.from}–${covid.to}), con los ERTE, fue al revés: el PIB cayó un ${num(-esP.gdp)} % y el empleo un ${num(-esP.employment)} %.`}
           sources={[S.ameco, ...(erte ? [{ label: erte.source, href: erte.source_url }] : [])]}
           notes={[
             "Variación entre el año de partida y el de llegada de cada episodio, en PIB en volumen y ocupados de contabilidad nacional (AMECO). Los trabajadores en ERTE cuentan como ocupados.",
@@ -170,7 +171,7 @@ export default function ChapterCiclo({ data, events }) {
       {constr && losses ? (
         <Fig
           id="construccion"
-          title={`La construcción llegó a dar el ${pct(losses.construction_peak.value)} del empleo en ${losses.construction_peak.year} y explica el ${num(losses.construction_share_of_loss, 0)} % de los empleos perdidos en ${losses.from}–${losses.to}`}
+          title={`La construcción llegó a dar el ${pct(losses.construction_peak.value)} del empleo en ${losses.construction_peak.year} y de ella salió el ${num(losses.construction_share_of_loss, 0)} % de los empleos perdidos en ${losses.from}–${losses.to}`}
           dek={`En ${losses.construction_peak.year} la media de la UE-27 era del ${pct(at(cs.EU27, losses.construction_peak.year))}. De los ${thousands(-losses.total)} de empleos destruidos en España entre ${losses.from} y ${losses.to}, ${thousands(-losses.by_sector.F)} eran de la construcción. Hoy su peso (${pct(cs.ESP.at(-1).value)}) está cerca del europeo (${pct(cs.EU27.at(-1).value)}).`}
           legend={[{ id: "ESP", label: "España", color: C.blue }, { id: "EU27", label: "UE-27", color: C.ref }, PEER_LEGEND]}
           sources={[S.eurostat("nama_10_a10_e")]}
@@ -190,8 +191,8 @@ export default function ChapterCiclo({ data, events }) {
           }
           explain={{
             what: "Qué parte de los ocupados trabajaba en la construcción, en España y en Europa.",
-            read: "Un sector que pesa casi el doble que en Europa convierte un pinchazo inmobiliario en una pérdida de empleo concentrada y rápida: la mitad de los empleos destruidos en la crisis salió de una rama que daba más de uno de cada ocho empleos.",
-            not: "No explica por sí solo la brecha de paro antes de 2000 ni después de 2014, cuando el peso de la construcción ya era parecido al europeo y el paro seguía siendo casi el doble.",
+            read: cw ? `En ${cw.peak_year} el peso de la construcción en el empleo era ${num(cw.es_eu_ratio_peak)} veces el de la UE-27 (${pct(cw.es_peak)} frente a ${pct(cw.eu_peak)}), y de ella salió la mitad de los empleos destruidos en la crisis. Que pesara tanto y que la pérdida se concentrara ahí van juntos; la serie no mide cuánto paro habría habido con otro peso.` : "",
+            not: cw ? `No acompaña a toda la brecha de paro: desde ${cw.parity_year}, con un peso de la construcción parecido al europeo (a menos de un punto), el paro español ha estado entre ${num(cw.unemployment_ratio_min_after_parity, 2)} y ${num(cw.unemployment_ratio_max_after_parity, 2)} veces el de la UE-15.` : "",
           }}
         >
           <TimeSeriesChart series={back(constr)} xMin={1995} xMax={h.last_year} ariaLabel="Peso de la construcción en el empleo" />

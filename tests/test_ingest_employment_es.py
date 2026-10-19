@@ -246,6 +246,19 @@ class IngestEmploymentTest(unittest.TestCase):
         self.assertEqual(h["before_years"][1] + 1, h["gap_from_year"])
         self.assertLess(abs(h["ratio_mean_before_gap"] - 1), 0.1)
 
+    def test_wording_ratios_follow_the_published_data(self) -> None:
+        data = json.loads(export.OUT_JSON.read_text(encoding="utf-8"))
+        w, h = data["wording"], data["headline"]
+        m = h["mean_since_1980"]
+        for area, ratio in w["mean_since_1980_ratio"].items():
+            self.assertAlmostEqual(ratio, m["ESP"] / m[area], delta=0.01)
+        mw = w["min_wage_pps"]
+        self.assertTrue(all(x["value"] > mw["es"] for x in mw["above"]))
+        self.assertTrue(all(x["value"] < mw["es"] for x in mw["below"]))
+        c = w["construction"]
+        self.assertAlmostEqual(c["es_eu_ratio_peak"], c["es_peak"] / c["eu_peak"], delta=0.05)
+        self.assertLessEqual(c["unemployment_ratio_min_after_parity"], c["unemployment_ratio_max_after_parity"])
+
 
 if __name__ == "__main__":
     unittest.main()

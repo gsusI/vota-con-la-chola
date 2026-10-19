@@ -92,11 +92,13 @@ export function PairedBars({ rows, measures, unit = "growth", label }) {
       </ul>
       ) : null}
       {rows.map((row) => (
-        <div role="row" key={row.id} style={{ display: "grid", gridTemplateColumns: "minmax(90px, 140px) 1fr", gap: 10, alignItems: "center" }}>
-          <span role="rowheader" style={{ fontSize: "0.84rem", fontWeight: row.emphasis ? 700 : 400 }}>
+        // Label beside the bars when there is room, above them on a phone (flex-wrap, no media query), so the bars keep
+        // the full row width instead of a sliver next to the label.
+        <div role="row" key={row.id} style={{ display: "flex", flexWrap: "wrap", columnGap: 10, rowGap: 2, alignItems: "center" }}>
+          <span role="rowheader" style={{ flex: "1 0 90px", maxWidth: 140, fontSize: "0.84rem", fontWeight: row.emphasis ? 700 : 400 }}>
             {row.label}
           </span>
-          <div style={{ display: "grid", gap: 3 }}>
+          <div style={{ display: "grid", gap: 3, flex: "1 1 16rem", minWidth: 0 }}>
             {measures.map((m) => {
               const value = row[m.key];
               if (value == null) return null;

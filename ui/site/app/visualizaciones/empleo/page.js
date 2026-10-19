@@ -64,7 +64,7 @@ export default function EmpleoPage() {
           <span className="vizStat__label">Paro de España sobre el europeo desde {h.hypothesis_from}</span>
           <span className="vizStat__value">×{num(h.ratio_mean_since, 2)}</span>
           <span className="vizStat__note">
-            de media; por encima de 1,5 veces en {h.years_ratio_ge_1_5} de {h.years_since} años (UE-15)
+            de media; por encima de 1,5 veces en {h.years_ratio_ge_1_5} de {h.years_since} años (UE-15; hasta 1990, con la Alemania Occidental)
           </span>
         </div>
         <div className="card vizStat">

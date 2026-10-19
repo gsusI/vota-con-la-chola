@@ -103,7 +103,7 @@ export default function ChapterComposicion({ data }) {
       <Fig
         id="ano-base"
         title={`La brecha de productividad con la UE depende del año de partida: desde 1995, ${num(p(1995).ESP)} % frente a ${num(p(1995).EU27)} %; desde 2008, ${num(p(2008).ESP)} % frente a ${num(p(2008).EU27)} %`}
-        dek={`En 1995, el primer año de la serie de niveles y el de mayor ventaja, España producía por hora un ${num(data.headline.level_vs_eu_first.ESP - 100, 0)} % más que la media de la UE: empezar ahí exagera la caída. España queda por detrás desde ${behindBases.join(", ")}; desde 2008 crece al ritmo europeo, en parte porque la crisis destruyó primero los empleos menos productivos. ${wageAhead.length ? `Los salarios reales quedan por detrás de la UE desde todas las bases salvo ${wageAhead.join(" y ")}.` : "Los salarios reales quedan por detrás de la UE desde todas las bases."}`}
+        dek={`En 1995, el primer año de la serie de niveles y el de mayor ventaja, España producía por hora un ${num(data.headline.level_vs_eu_first.ESP - 100, 0)} % más que la media de la UE: empezar ahí exagera la caída. España queda por detrás desde ${behindBases.join(", ")}; desde 2008 crece al ritmo europeo; ese periodo empieza con una crisis que destruyó sobre todo empleo poco productivo, lo que por composición sube la media. ${wageAhead.length ? `Los salarios reales quedan por detrás de la UE desde todas las bases salvo ${wageAhead.join(" y ")}.` : "Los salarios reales quedan por detrás de la UE desde todas las bases."}`}
         sources={[S.eurostat("nama_10_lp_ulc"), S.ameco]}
         notes={[`Crecimiento acumulado hasta ${by.productivity.end}: productividad real por hora (Eurostat) y remuneración real por asalariado deflactada con el consumo privado (AMECO).`]}
         table={
@@ -123,7 +123,7 @@ export default function ChapterComposicion({ data }) {
         explain={{
           what: "El mismo cálculo (cuánto ha crecido la productividad y el salario real hasta hoy) empezando en cinco años distintos.",
           read: "Si la barra azul queda por debajo de la gris en todas las filas, la conclusión no depende del año elegido. En productividad, depende: desde 1995 o 2000 España se queda muy atrás; desde 2008, no. En salarios, España queda atrás casi siempre.",
-          not: "No dice qué año es «el bueno»: 1995 es el año de mayor ventaja de España en la serie de niveles (que empieza ese año) y 2008 coincide con el inicio de una crisis que infló la productividad española al destruir empleo poco productivo.",
+          not: "No dice qué año es «el bueno»: 1995 es el año de mayor ventaja de España en la serie de niveles (que empieza ese año) y 2008 coincide con el inicio de una crisis en la que se destruyó sobre todo empleo poco productivo, lo que por composición sube la productividad media.",
         }}
       >
         <div className="vizMultiples">
@@ -252,8 +252,8 @@ export default function ChapterComposicion({ data }) {
 
       <Fig
         id="salarios-composicion"
-        title={`A composición fija, el salario real cayó un ${num(100 - wcLast("ipt").value)} % entre ${wc.base} y ${wcLast("ipt").year}; el salario medio subió un ${num(wcLast("mean").value - 100)} % porque cambió quién trabaja`}
-        dek={`El Índice de Precios del Trabajo del INE sigue el salario de los mismos puestos (misma ocupación, sector y tipo de contrato); la media, el de todos los asalariados de cada año. Tras 2008 se destruyeron sobre todo empleos de salario bajo (construcción y temporales, capítulo 2), lo que subió la media sin que subiera el sueldo de cada puesto. El mediano subió un ${num(wcLast("median").value - 100)} %.`}
+        title={`A composición fija, el salario real cayó un ${num(100 - wcLast("ipt").value)} % entre ${wc.base} y ${wcLast("ipt").year}; el salario medio subió un ${num(wcLast("mean").value - 100)} %: la diferencia es el cambio de quién trabaja`}
+        dek={`El Índice de Precios del Trabajo del INE sigue el salario de los mismos puestos (misma ocupación, sector y tipo de contrato); la media, el de todos los asalariados de cada año. Tras 2008 se destruyeron sobre todo empleos de salario bajo (construcción y temporales, capítulo 2); por composición, eso sube la media aunque no suba el sueldo de cada puesto. El mediano subió un ${num(wcLast("median").value - 100)} %.`}
         legend={wageSeries}
         sources={[S.ipt, S.eaes, S.eurostat("prc_hicp_aind")]}
         notes={[`Índices ${wc.base} = 100 deflactados por nosotros con el IPC armonizado. Salario bruto anual por trabajador.`]}

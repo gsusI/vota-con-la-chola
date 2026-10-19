@@ -68,7 +68,7 @@ export default function ChapterCalidad({ data, epaBreaks, reform, children }) {
 
       <Fig
         id="temporalidad"
-        title={`La temporalidad bajó del ${pct(h.temp_es_2021)} al ${pct(h.temp_es_last)} tras la reforma de 2022, y los fijos discontinuos casi se duplicaron`}
+        title={`La temporalidad bajó del ${pct(h.temp_es_2021)} al ${pct(h.temp_es_last)} tras la reforma de 2022, y los fijos discontinuos se multiplicaron por ${num(data.wording.discont_k_ratio)}`}
         dek={`Tras décadas con la temporalidad más alta de este grupo de países (máximo del ${pct(h.temp_es_max.value)} en ${h.temp_es_max.year}), España queda en ${h.temp_last_year} a ${num(h.temp_es_last - h.temp_eu_last)} puntos de la UE-27 (${pct(h.temp_eu_last)}). La caída de ${num(tempDrop)} puntos desde 2021 no se explica solo por el cambio de etiqueta: los fijos discontinuos, que cuentan como indefinidos, subieron ${num(discontRise)} puntos (de ${num(h.discont_k_2021, 0)} mil a ${num(h.discont_k_last, 0)} mil asalariados, según la EPA).`}
         legend={[{ id: "ESP", label: "España", color: C.blue }, { id: "EU27", label: "UE-27", color: C.ref }, PEER_LEGEND]}
         sources={[S.eurostat("lfsa_etpgan"), S.ine]}
@@ -79,7 +79,7 @@ export default function ChapterCalidad({ data, epaBreaks, reform, children }) {
         table={<SeriesTable series={[...temp, ...epaContracts.map((s) => ({ ...s, label: `EPA (INE): ${s.label}` }))]} />}
         explain={{
           what: "Qué parte de los asalariados tiene un contrato con fecha de fin (izquierda) y, a la derecha, temporales y fijos discontinuos en España según la EPA.",
-          read: "La reforma de 2022 limitó los contratos temporales a causas concretas y empujó a usar el fijo discontinuo para trabajos que se repiten (campañas, temporadas). La línea azul de la derecha cae; la naranja sube, pero mucho menos.",
+          read: "La reforma de 2022 limitó los contratos temporales a causas concretas y señala el fijo discontinuo para los trabajos que se repiten (campañas, temporadas). Desde entonces la línea azul de la derecha cae y la naranja sube, pero mucho menos; la serie muestra que las dos cosas coinciden en el tiempo, no cuánto se debe a la ley y cuánto a la recuperación.",
           not: "Un fijo discontinuo no trabaja ni cobra entre llamamientos: un contrato indefinido puede esconder la misma intermitencia que antes tenía un temporal. La EPA no mide cuántos días al año trabaja cada uno ni cuántos contratos indefinidos terminan en el periodo de prueba.",
         }}
       >
@@ -113,7 +113,7 @@ export default function ChapterCalidad({ data, epaBreaks, reform, children }) {
         table={<SeriesTable series={youth} />}
         explain={{
           what: "El paro de los menores de 25 años que trabajan o buscan trabajo.",
-          read: "El paro juvenil amplifica el general: sube más en las crisis porque los jóvenes son los últimos en entrar y suelen tener contratos temporales, los primeros en no renovarse.",
+          read: "El paro juvenil amplifica el general: sube más en las crisis. Coincide con que los jóvenes son los últimos en entrar y los que más contratos temporales tienen, los primeros en no renovarse; la serie no separa cuánto pesa cada cosa.",
           not: yPop
             ? `Se calcula sobre los jóvenes activos, no sobre todos: muchos estudian. Un ${pct(h.youth_es_last)} de paro juvenil no significa que esa proporción de los jóvenes esté parada: sobre toda la población de 15 a 24 años, los parados son el ${pct(yPop.value)}.`
             : "Se calcula sobre los jóvenes activos, no sobre todos: muchos estudian. Un 25 % de paro juvenil no significa que uno de cada cuatro jóvenes esté parado; la proporción sobre toda la población joven es mucho menor.",
@@ -194,6 +194,7 @@ export default function ChapterCalidad({ data, epaBreaks, reform, children }) {
 export { last };
 
 export function IntermittencyFigure({ data, reform }) {
+  const fdW = data.wording?.fd_affiliates_ratio_since_2021;
   const it = data.intermittency;
   if (!it) return null;
   const S = sources(data);
@@ -267,7 +268,7 @@ export function IntermittencyFigure({ data, reform }) {
       }
       explain={{
         what: "Cuántos fijos discontinuos trabajan cada mes (dados de alta en la Seguridad Social) y cuántos, en los meses sin llamamiento, se inscriben como demandantes de empleo.",
-        read: `La línea mensual sube en temporada y baja fuera de ella: en ${aLast.year} el mes con más fijos discontinuos trabajando tuvo ${num(swingLast.max_over_min, 2)} veces los del mes con menos. Desde 2022 la cifra se multiplicó porque muchos contratos que antes eran temporales pasaron a esta modalidad.`,
+        read: `La línea mensual sube en temporada y baja fuera de ella: en ${aLast.year} el mes con más fijos discontinuos trabajando tuvo ${num(swingLast.max_over_min, 2)} veces los del mes con menos. ${fdW ? `Entre ${fdW.from} y ${fdW.to} la media anual se multiplicó por ${num(fdW.ratio)}, a la vez que caían los temporales; la ley de 2022 reserva a esta modalidad los trabajos que se repiten, pero estos datos no dicen cuántos de esos contratos habrían sido temporales.` : ""}`,
         not: "No mide los días trabajados al año por persona: eso exige los historiales individuales (Muestra Continua de Vidas Laborales), que no son públicos sin solicitud. Tampoco dice cuántos fijos discontinuos sin actividad no se inscriben.",
       }}
     >

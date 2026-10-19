@@ -1032,6 +1032,62 @@ def segments_by_group(store: Store) -> dict:
     }
 
 
+# ---------------------------------------------------------------- figures the copy states in words
+
+ISO2_TO_AREA = {"DE": "DEU", "EL": "GRC", "ES": "ESP", "FR": "FRA", "IE": "IRL", "NL": "NLD", "PT": "PRT"}
+
+
+def wording(data: dict) -> dict:
+    """Ratios and comparisons the page writes as words («1,8 veces», «menos que Alemania»), computed here so the copy
+    follows the data instead of being typed by hand (AGENTS.md, «Words match the numbers»)."""
+    h = data["headline"]
+    lastv = lambda pts: pts[-1]["value"] if pts else None
+    out: dict = {}
+    m = h["mean_since_1980"]
+    out["mean_since_1980_ratio"] = {a: r(m["ESP"] / v, 2) for a, v in m.items() if a != "ESP" and v}
+    eu15 = {p["year"]: p["value"] / 100 for p in data["ratio_es_europe"]["DU15"] if p["year"] < 1991}
+    eu15.update({p["year"]: p["value"] / 100 for p in data["ratio_es_europe"]["EU15"]})
+    out["years_below_1_5_since"] = [y for y, v in sorted(eu15.items()) if y >= h["hypothesis_from"] and v < 1.5]
+    out["discont_k_ratio"] = r(h["discont_k_last"] / h["discont_k_2021"], 2) if h.get("discont_k_2021") else None
+    cs = data.get("construction_share") or {}
+    if cs.get("ESP") and cs.get("EU27"):
+        es = {p["year"]: p["value"] for p in cs["ESP"]}
+        eu = {p["year"]: p["value"] for p in cs["EU27"]}
+        peak = max(es, key=es.get)
+        parity = min((y for y in es if y > peak and y in eu and abs(es[y] - eu[y]) <= 1.0), default=None)
+        ratio_eu15 = {p["year"]: p["value"] / 100 for p in data["ratio_es_europe"]["EU15"]}
+        after = [v for y, v in ratio_eu15.items() if parity and y >= parity]
+        out["construction"] = {
+            "peak_year": peak, "es_peak": es[peak], "eu_peak": eu.get(peak),
+            "es_eu_ratio_peak": r(es[peak] / eu[peak], 1) if eu.get(peak) else None,
+            "parity_year": parity,
+            "unemployment_ratio_min_after_parity": r(min(after), 2) if after else None,
+            "unemployment_ratio_max_after_parity": r(max(after), 2) if after else None,
+        }
+    for ep in (data.get("cycle") or {}).get("episodes", []):
+        row = next((x for x in ep["rows"] if x["area"] == "ESP"), None)
+        if row and row["gdp"]:
+            out.setdefault("employment_per_gdp_point", {})[f"{ep['from']}-{ep['to']}"] = r(row["employment"] / row["gdp"], 1)
+    ed = (data.get("education") or {}).get("population", {}).get("ED0-2", {})
+    if ed.get("ESP") and ed.get("EU27"):
+        out["low_education_share_ratio"] = r(lastv(ed["ESP"]) / lastv(ed["EU27"]), 1)
+    nat = ((data.get("composition") or {}).get("nationality") or {}).get("rates", {}).get("NAT", {})
+    if nat.get("ESP") and nat.get("EU27"):
+        out["nationals_unemployment_ratio"] = r(lastv(nat["ESP"]) / lastv(nat["EU27"]), 2)
+    aff = (data.get("intermittency") or {}).get("annual_affiliates") or []
+    a21 = next((p["value"] for p in aff if p["year"] == 2021), None)
+    if aff and a21:
+        out["fd_affiliates_ratio_since_2021"] = {"from": 2021, "to": aff[-1]["year"], "ratio": r(aff[-1]["value"] / a21, 1)}
+    mw = (data.get("capacity") or {}).get("min_wage_pps")
+    if mw:
+        es_v = mw["values"]["ES"]
+        others = sorted(((ISO2_TO_AREA.get(k, k), v) for k, v in mw["values"].items() if k != "ES"), key=lambda kv: -kv[1])
+        out["min_wage_pps"] = {"period": mw["period"], "es": es_v,
+                               "above": [{"area": a, "value": v} for a, v in others if v > es_v],
+                               "below": [{"area": a, "value": v} for a, v in others if v < es_v]}
+    return out
+
+
 def write_csv(data: dict, path: Path) -> None:
     rows: list[tuple] = []
 
@@ -1191,6 +1247,7 @@ def main() -> int:
         raise SystemExit(f"missing {args.db}; run scripts/ingest_employment_es.py first")
     conn = sqlite3.connect(f"file:{args.db}?mode=ro", uri=True)
     data = build(conn)
+    data["wording"] = wording(data)
     conn.close()
     OUT_JSON.parent.mkdir(parents=True, exist_ok=True)
     OUT_JSON.write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")

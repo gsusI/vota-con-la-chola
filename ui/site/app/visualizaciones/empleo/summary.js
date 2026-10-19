@@ -27,7 +27,7 @@ export function Summary({ data }) {
       <ol>
         <li>
           <strong>Alto y persistente.</strong> Desde {h.hypothesis_from}, el paro español ha sido de media {num(h.ratio_mean_since, 2)} veces el
-          europeo (UE-15) y ha superado 1,5 veces esa media en {h.years_ratio_ge_1_5} de {h.years_since} años. Hoy: {pct(h.es_last)} frente a{" "}
+          europeo (UE-15; hasta 1990, con la Alemania Occidental) y ha superado 1,5 veces esa media en {h.years_ratio_ge_1_5} de {h.years_since} años. Hoy: {pct(h.es_last)} frente a{" "}
           {pct(h.eu27_last)} en la UE-27. <a href="#paro">Ver gráfico</a>
         </li>
         <li>
@@ -40,7 +40,7 @@ export function Summary({ data }) {
             <strong>En la Gran Recesión, el empleo cayó el doble que el PIB.</strong> En {crisis.from}–{crisis.to} el PIB cayó un {num(-row(crisis, "ESP").gdp)} %
             y el empleo un {num(-row(crisis, "ESP").employment)} % (Italia: {num(-row(crisis, "ITA").gdp)} % y {num(-row(crisis, "ITA").employment)} %).
             {adj ? ` Se perdieron ${thousands(-adj.temporal)} de empleos temporales frente a ${thousands(-adj.indefinido)} indefinidos.` : ""}
-            {losses ? ` La construcción explica el ${num(losses.construction_share_of_loss, 0)} % de los empleos perdidos.` : ""}
+            {losses ? ` De la construcción salió el ${num(losses.construction_share_of_loss, 0)} % de los empleos perdidos.` : ""}
             {covid ? ` Con los ERTE de 2020, el empleo cayó un ${num(-row(covid, "ESP").employment)} % con una caída del PIB del ${num(-row(covid, "ESP").gdp)} %.` : ""}{" "}
             <a href="#ciclo">Ver gráfico</a>
           </li>
@@ -52,7 +52,7 @@ export function Summary({ data }) {
           <a href="#temporalidad">Ver gráfico</a>
         </li>
         <li>
-          <strong>Productividad y salarios casi parados.</strong> La productividad por hora creció un {num(g.ESP)} % desde {h.productivity_base},
+          <strong>Productividad y salarios crecen poco.</strong> La productividad por hora creció un {num(g.ESP)} % desde {h.productivity_base},
           frente al {num(g.EU27)} % de la UE-27 (Italia: {num(g.ITA)} %); pero en {h.productivity_base}, el primer año de la serie, España tenía su mayor ventaja sobre la UE en productividad por hora, y desde 2008 crece al ritmo
           europeo. El retraso está dentro de cada sector, no en la mezcla de sectores.
           {wp?.ESP ? ` El salario real por asalariado, un ${num(wp.ESP.wage.at(-1).value - 100)} % (UE-27: ${num(wp.EU27.wage.at(-1).value - 100)} %).` : ""}{" "}
@@ -127,7 +127,7 @@ export function Conclusion({ data }) {
         </li>
         <li>
           <strong>No es solo estructural: el ciclo es enorme.</strong>{" "}
-          {crisis ? `En ${crisis.from}–${crisis.to} el empleo cayó el doble que el PIB (${num(-row(crisis, "ESP").employment)} % frente a ${num(-row(crisis, "ESP").gdp)} %), por la dualidad de contratos y la burbuja de la construcción.` : ""}{" "}
+          {crisis ? `En ${crisis.from}–${crisis.to} el empleo cayó el doble que el PIB (${num(-row(crisis, "ESP").employment)} % frente a ${num(-row(crisis, "ESP").gdp)} %), en un mercado con muchos contratos temporales y un gran peso de la construcción, los rasgos con los que coincide (no prueba que los causaran).` : ""}{" "}
           Con los ERTE, en 2020, pasó lo contrario. Las instituciones del mercado de trabajo cambian cuánto paro deja cada crisis.
         </li>
         {data.composition ? (
@@ -168,7 +168,7 @@ export function Conclusion({ data }) {
         <li>La cuña fiscal española está en la media de la UE y por debajo de la alemana, la francesa y la italiana.</li>
         {data.composition ? (
           <li>
-            No es la composición: con solo nacionales, el paro español sigue casi el doble que el de los nacionales de la UE; con la formación
+            No es la composición: con solo nacionales, el paro español sigue siendo {num(data.wording.nationals_unemployment_ratio, 2)} veces el de los nacionales de la UE; con la formación
             media europea, apenas baja; y el retraso de la productividad está dentro de los sectores, no en el peso de la hostelería o la
             construcción.
           </li>

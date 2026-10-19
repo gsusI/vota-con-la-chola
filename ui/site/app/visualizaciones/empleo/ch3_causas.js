@@ -144,7 +144,7 @@ export default function ChapterCausas({ data, events }) {
           }
           explain={{
             what: "La tasa de paro según el nivel de estudios (líneas) y qué parte de los adultos tiene como máximo la ESO (barras).",
-            read: "En todas partes el paro baja con los estudios. En España la diferencia es mayor y, además, hay casi el doble de adultos con poca formación que en Europa: las dos cosas suman.",
+            read: `En todas partes el paro baja con los estudios. En España la diferencia es mayor y, además, la proporción de adultos con poca formación es ${num(data.wording.low_education_share_ratio)} veces la europea: las dos cosas suman.`,
             not: "No dice si la formación causa el empleo o si los trabajos disponibles no la exigen; ni mide la calidad de la formación ni la sobrecualificación (en /visualizaciones/educacion/).",
           }}
         >

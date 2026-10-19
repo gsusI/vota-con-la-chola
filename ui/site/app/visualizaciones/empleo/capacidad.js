@@ -67,6 +67,12 @@ export default function ChapterCapacidad({ data }) {
     }));
   const nmEs = last(cap.min_wage_net_vs_median.ESP);
   const nm2018 = cap.min_wage_net_vs_median.ESP.find((p) => p.year === 2018)?.value;
+  const joinAreas = (list) => {
+    const names = list.map((x) => NAMES[x.area] || x.area);
+    return names.length > 1 ? `${names.slice(0, -1).join(", ")} y ${names.at(-1)}` : names[0] || "";
+  };
+  const mwW = data.wording?.min_wage_pps;
+  const mwCmp = mwW?.above.length && mwW?.below.length ? { above: joinAreas(mwW.above), below: joinAreas(mwW.below) } : null;
   const grossMedian = last(data.minimum_wage?.ESP);
 
   // 3. In-work poverty.
@@ -145,7 +151,7 @@ export default function ChapterCapacidad({ data }) {
 
       <Fig
         id="salario-minimo-neto"
-        title={`El salario mínimo neto equivale al ${pct(nmEs.value)} de lo que se queda un trabajador con el salario mediano (${pct(nm2018)} en 2018); en poder de compra, ${num(cap.min_wage_pps.values.ES, 0)} PPS al mes, menos que Alemania o Francia`}
+        title={`El salario mínimo neto equivale al ${pct(nmEs.value)} de lo que se queda un trabajador con el salario mediano (${pct(nm2018)} en 2018); en poder de compra, ${num(cap.min_wage_pps.values.ES, 0)} PPS al mes${mwCmp ? `, menos que ${mwCmp.above} y más que ${mwCmp.below}` : ""}`}
         dek={`En bruto, el salario mínimo es el ${pct(grossMedian?.value)} del mediano (OCDE): la distancia se acorta en neto porque quien cobra el mínimo apenas paga IRPF. En el segundo semestre de ${cap.min_wage_pps.period.slice(0, 4)}: Alemania ${num(cap.min_wage_pps.values.DE, 0)} PPS, Francia ${num(cap.min_wage_pps.values.FR, 0)}, Portugal ${num(cap.min_wage_pps.values.PT, 0)}.`}
         legend={netMw.filter((s) => s.color !== C.peer).concat([{ id: "o", label: "Grecia, Países Bajos e Irlanda", color: C.peer }])}
         sources={[taxben, eurostat("earn_mw_cur")]}

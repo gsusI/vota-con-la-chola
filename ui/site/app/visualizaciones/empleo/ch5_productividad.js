@@ -69,8 +69,8 @@ export default function ChapterProductividad({ data }) {
         table={<SeriesTable series={prod} unit="count" digits={1} />}
         explain={{
           what: "Cuánto se produce por cada hora trabajada, descontada la inflación, tomando 1995 como punto de partida.",
-          read: `Una línea plana significa que cada hora de trabajo produce lo mismo que hace treinta años. España creció poco, aunque más que Italia. Entre 2008 y 2013 su índice pasó de ${num(p08)} a ${num(p13)}, más que en los trece años anteriores, porque se destruyeron primero los empleos menos productivos (construcción): es un efecto composición, no una mejora de eficiencia.`,
-          not: "La media de la UE-27 incluye a los países del Este, que crecen deprisa porque parten de niveles bajos: la comparación justa es con Francia, Italia y Alemania. Tampoco separa la productividad de las empresas de la del sector público.",
+          read: `Una línea plana significa que cada hora de trabajo produce lo mismo que hace treinta años. España creció poco, aunque más que Italia. Entre 2008 y 2013 su índice pasó de ${num(p08)} a ${num(p13)}, más que en los trece años anteriores, mientras se destruía sobre todo empleo en ramas de baja productividad (construcción). Parte de esa subida es efecto composición: el capítulo 7 separa la mejora dentro de cada rama del cambio de peso entre ramas.`,
+          not: "La media de la UE-27 incluye a los países del Este, que parten de niveles bajos y crecen deprisa: la comparación más cercana es con Francia, Italia y Alemania. Tampoco separa la productividad de las empresas de la del sector público.",
         }}
       >
         <TimeSeriesChart series={back(prod)} unit="count" xMin={h.productivity_base} xMax={h.productivity_last} ariaLabel="Productividad por hora trabajada, índice 1995 = 100" />
@@ -118,7 +118,7 @@ export default function ChapterProductividad({ data }) {
           }
           explain={{
             what: "Cómo han evolucionado, desde 1995, el poder de compra del coste salarial por asalariado y lo que produce cada ocupado.",
-            read: "Si la línea azul va por debajo de la naranja, los salarios reales crecen menos que la productividad: una parte mayor de lo producido va a beneficios o a otras rentas. En España las dos líneas apenas han subido: el problema principal es que la productividad crece poco.",
+            read: `Si la línea azul va por debajo de la naranja, los salarios reales crecen menos que la productividad: una parte mayor de lo producido va a beneficios o a otras rentas. En España las dos líneas subieron menos que en la UE-27 (salario ${num(wLast("ESP") - 100)} % y productividad por ocupado ${num(pLast("ESP") - 100)} % desde ${h.productivity_base}, frente a ${num(wLast("EU27") - 100)} % y ${num(pLast("EU27") - 100)} %).`,
             not: "Usa la productividad por ocupado (no por hora) para que sea comparable con el salario por asalariado; si se acortan las jornadas, ambas bajan. Tampoco muestra la distribución: el salario medio puede subir mientras el mediano no.",
           }}
         >
