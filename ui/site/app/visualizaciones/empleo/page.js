@@ -10,6 +10,7 @@ import ChapterComposicion from "./composicion";
 import { LimitsCard, MethodCard } from "./sections";
 import { Conclusion, Glossary, Summary } from "./summary";
 import DatoMataRelato from "./relato";
+import { SectorTemporality, TypicalCases, WhoFigure } from "./segmentos";
 import { num } from "./format.mjs";
 
 export const metadata = {
@@ -25,6 +26,7 @@ export default function EmpleoPage() {
   if (!data) throw new Error("Missing visualizaciones/data/empleo.json");
   const h = data.headline;
   const g = h.productivity_growth_pct;
+  const tsec = data.segments?.temporary_by_sector;
   const downloads = "/visualizaciones/data/empleo.csv";
   const events = data.events || [];
   const evYear = (id) => events.find((e) => e.id === id)?.year;
@@ -80,16 +82,26 @@ export default function EmpleoPage() {
           <span className="vizStat__value">{pct(h.temp_es_last)}</span>
           <span className="vizStat__note">
             {pct(h.temp_es_2021)} en 2021; fijos discontinuos (EPA): {num(h.discont_k_2021, 0)} mil → {num(h.discont_k_last, 0)} mil
+            {tsec ? `; en ${tsec.last_year}, sector privado ${pct(tsec.series.private.at(-1).value)} y público ${pct(tsec.series.public.at(-1).value)} (INE)` : ""}
           </span>
         </div>
       </section>
 
-      <DatoMataRelato data={data} />
+      <DatoMataRelato
+        data={data}
+        afterStructural={
+          <>
+            <WhoFigure data={data} />
+            <TypicalCases data={data} />
+          </>
+        }
+      />
       <Summary data={data} />
       <ChapterParo data={data} epaBreaks={epaBreaks} reform={reform} />
       <ChapterCiclo data={data} events={events} />
       <ChapterCausas data={data} events={events} />
       <ChapterCalidad data={data} epaBreaks={epaBreaks} reform={reform}>
+        <SectorTemporality data={data} />
         <IntermittencyFigure data={data} reform={reform} />
       </ChapterCalidad>
       <ChapterProductividad data={data} />

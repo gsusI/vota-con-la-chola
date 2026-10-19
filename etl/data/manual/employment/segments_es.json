@@ -1,0 +1,88 @@
+{
+  "about": "Definiciones (sin cifras) de la figura «Estructural, ¿de quién?» y de los casos tipo de /visualizaciones/empleo/. Las cifras las resuelve scripts/export_public_viz_employment.py desde employment-es.db. Contrato común: docs/etl/sprints/VIZ-SEGMENTOS-20261019/README.md (§2 dimensiones, §3 casos tipo compartidos).",
+  "markets": {
+    "criterion": "Tres mercados de trabajo por paro de 20 a 64 años (Eurostat lfst_r_lfu3rt, 2025) y salario mediano (INE EAES, 2024), más Ceuta y Melilla aparte; agrupación de la síntesis VIZ-SEGMENTOS-20261019, §2.",
+    "groups": [
+      {"id": "bajo_alto", "label": "Paro bajo y salario alto", "regions": ["ES21", "ES22", "ES30", "ES51"]},
+      {"id": "bajo_medio", "label": "Paro bajo y salario medio", "regions": ["ES11", "ES12", "ES13", "ES23", "ES24", "ES41", "ES53"]},
+      {"id": "alto", "label": "Paro alto", "regions": ["ES42", "ES43", "ES52", "ES61", "ES62", "ES70"]},
+      {"id": "ceuta_melilla", "label": "Ceuta y Melilla", "regions": ["ES63", "ES64"]}
+    ]
+  },
+  "cases": [
+    {
+      "id": "persona-1",
+      "persona": 1,
+      "title": "Joven con estudios superiores en Madrid",
+      "who": "25 a 34 años, estudios superiores, Comunidad de Madrid",
+      "cut_note": "Corte marginal: activos de 25 a 34 años con estudios superiores en la Comunidad de Madrid. La persona 1 de las demás páginas tiene 25–29 años y vive de alquiler en la ciudad de Madrid; la EPA regional no baja a esa edad ni al municipio. Su problema no es el paro, sino lo que le cuesta la vivienda (ver /visualizaciones/vivienda/).",
+      "figures": [
+        {"metric": "unemployment", "geo": "ES30", "age": "Y25-34", "isced": "ED5-8", "label": "Paro de su grupo"}
+      ],
+      "national": [
+        {"metric": "unemployment", "geo": "ES", "age": "Y25-34", "isced": "TOTAL", "label": "España, 25 a 34 años"},
+        {"metric": "unemployment", "geo": "ES", "age": "Y15-74", "isced": "TOTAL", "label": "España, total"}
+      ]
+    },
+    {
+      "id": "persona-3",
+      "persona": 3,
+      "title": "Adulto con poca formación en el sur",
+      "who": "45 a 64 años, hasta la ESO, Andalucía",
+      "cut_note": "Corte marginal: activos de 45 a 54 y de 55 a 64 años sin bachillerato ni FP en Andalucía (la EPA regional no da la banda 45–64 entera).",
+      "figures": [
+        {"metric": "unemployment", "geo": "ES61", "age": "Y45-54", "isced": "ED0-2", "label": "Paro, 45 a 54 años"},
+        {"metric": "unemployment", "geo": "ES61", "age": "Y55-64", "isced": "ED0-2", "label": "Paro, 55 a 64 años"}
+      ],
+      "national": [
+        {"metric": "unemployment", "geo": "ES", "age": "Y55-64", "isced": "TOTAL", "label": "España, 55 a 64 años"},
+        {"metric": "unemployment", "geo": "ES", "age": "Y15-74", "isced": "TOTAL", "label": "España, total"}
+      ]
+    },
+    {
+      "id": "persona-5",
+      "persona": 5,
+      "title": "Profesional universitario del norte o de Madrid",
+      "who": "45 a 54 años, estudios superiores, País Vasco o Comunidad de Madrid",
+      "cut_note": "Corte marginal: activos de 45 a 54 años con estudios superiores en cada comunidad.",
+      "figures": [
+        {"metric": "unemployment", "geo": "ES21", "age": "Y45-54", "isced": "ED5-8", "label": "Paro en el País Vasco"},
+        {"metric": "unemployment", "geo": "ES30", "age": "Y45-54", "isced": "ED5-8", "label": "Paro en Madrid"}
+      ],
+      "national": [
+        {"metric": "unemployment", "geo": "EU27_2020", "age": "Y45-54", "isced": "ED5-8", "label": "UE-27, mismo grupo"},
+        {"metric": "unemployment", "geo": "ES", "age": "Y15-74", "isced": "TOTAL", "label": "España, total"}
+      ]
+    },
+    {
+      "id": "interino",
+      "persona": null,
+      "title": "Interino en el sector público",
+      "who": "30 a 39 años, asalariado del sector público (sanidad, educación, administración)",
+      "cut_note": "Corte marginal: asalariados del sector público de 30 a 39 años en toda España (la tabla del INE no baja a comunidad). Temporales sobre el total de asalariados de cada grupo.",
+      "figures": [
+        {"metric": "temporary_share", "sector": "public", "age": "De 30 a 39 años", "label": "Temporales, públicos de 30 a 39 años"},
+        {"metric": "temporary_share", "sector": "public", "age": "De 25 a 29 años", "label": "Temporales, públicos de 25 a 29 años"}
+      ],
+      "national": [
+        {"metric": "temporary_share", "sector": "private", "age": "De 30 a 39 años", "label": "Privados de 30 a 39 años"},
+        {"metric": "temporary_share", "sector": "all", "age": "16 y más años", "label": "Todos los asalariados"}
+      ]
+    },
+    {
+      "id": "parcial-involuntaria",
+      "persona": null,
+      "title": "Jornada parcial que no eligió",
+      "who": "Mujer de 15 a 64 años que trabaja a tiempo parcial",
+      "cut_note": "Cortes marginales: la parcialidad involuntaria es la de las mujeres de 15 a 64 años (Eurostat); el salario es el medio de toda la jornada parcial, hombres y mujeres (INE, EPA). No hay cruce oficial de las dos cosas.",
+      "figures": [
+        {"metric": "involuntary_part_time", "geo": "ES", "sex": "F", "label": "No encuentra jornada completa"},
+        {"metric": "wage_by_working_time", "working_time": "Jornada a tiempo parcial", "label": "Salario medio bruto a tiempo parcial"}
+      ],
+      "national": [
+        {"metric": "involuntary_part_time", "geo": "EU27_2020", "sex": "F", "label": "UE-27, mujeres"},
+        {"metric": "wage_by_working_time", "working_time": "Total", "label": "Salario medio, todas las jornadas"}
+      ]
+    }
+  ]
+}

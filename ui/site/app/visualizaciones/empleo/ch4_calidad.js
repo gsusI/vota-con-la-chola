@@ -28,6 +28,8 @@ export default function ChapterCalidad({ data, epaBreaks, reform, children }) {
     .map(([year]) => year);
   const reformMarks = [...reform("reform_2012", "Reforma 2012"), ...reform("reform_2022", "Reforma 2022")];
   const tempDrop = h.temp_es_2021 - h.temp_es_last;
+  const yPop = data.segments?.youth_population_ratio?.ESP?.at(-1);
+  const yPopEu = data.segments?.youth_population_ratio?.EU27?.at(-1);
   const discontRise = h.discont_last - h.discont_2021;
 
   const y = data.youth;
@@ -103,16 +105,18 @@ export default function ChapterCalidad({ data, epaBreaks, reform, children }) {
 
       <Fig
         id="jovenes"
-        title={`El paro de los jóvenes activos es del ${pct(h.youth_es_last)} en España y del ${pct(h.youth_eu_last)} en la UE-27`}
-        dek={`Menores de 25 años (15–24). Desde 2003 ha sido de media ${num(h.youth_ratio_mean, 2)} veces el europeo y llegó al ${pct(h.youth_es_max.value)} en ${h.youth_es_max.year}.`}
+        title={`El paro de los jóvenes activos es del ${pct(h.youth_es_last)} en España y del ${pct(h.youth_eu_last)} en la UE-27${yPop ? `; sobre todos los jóvenes, los parados son el ${pct(yPop.value)} (${pct(yPopEu?.value)} en la UE)` : ""}`}
+        dek={`Menores de 25 años (15–24). Desde 2003 ha sido de media ${num(h.youth_ratio_mean, 2)} veces el europeo y llegó al ${pct(h.youth_es_max.value)} en ${h.youth_es_max.year}.${yPop ? ` La tasa se calcula sobre los jóvenes que trabajan o buscan empleo; como muchos estudian, los parados son el ${pct(yPop.value)} de todos los jóvenes de 15 a 24 años (Eurostat, ${yPop.year}). La brecha con Europa se mantiene en las dos medidas.` : ""}`}
         legend={youth.filter((s) => s.color !== C.peer).concat([PEER_LEGEND])}
-        sources={[S.eurostat("une_rt_a"), S.eurostat("une_rt_a_h")]}
-        notes={["La serie histórica de Eurostat (cerrada en 2020) y la vigente se solapan para que se vea la ruptura."]}
+        sources={[S.eurostat("une_rt_a"), S.eurostat("une_rt_a_h"), ...(yPop ? [S.eurostat("yth_empl_140")] : [])]}
+        notes={["La serie histórica de Eurostat (cerrada en 2020) y la vigente se solapan para que se vea la ruptura.", ...(yPop ? ["Parados sobre toda la población de 15 a 24 años: Eurostat yth_empl_140."] : [])]}
         table={<SeriesTable series={youth} />}
         explain={{
           what: "El paro de los menores de 25 años que trabajan o buscan trabajo.",
           read: "El paro juvenil amplifica el general: sube más en las crisis porque los jóvenes son los últimos en entrar y suelen tener contratos temporales, los primeros en no renovarse.",
-          not: "Se calcula sobre los jóvenes activos, no sobre todos: muchos estudian. Un 25 % de paro juvenil no significa que uno de cada cuatro jóvenes esté parado; la proporción sobre toda la población joven es mucho menor.",
+          not: yPop
+            ? `Se calcula sobre los jóvenes activos, no sobre todos: muchos estudian. Un ${pct(h.youth_es_last)} de paro juvenil no significa que esa proporción de los jóvenes esté parada: sobre toda la población de 15 a 24 años, los parados son el ${pct(yPop.value)}.`
+            : "Se calcula sobre los jóvenes activos, no sobre todos: muchos estudian. Un 25 % de paro juvenil no significa que uno de cada cuatro jóvenes esté parado; la proporción sobre toda la población joven es mucho menor.",
         }}
       >
         <TimeSeriesChart series={back(youth)} xMin={1993} xMax={h.last_year} annotations={epaBreaks.filter((b) => b.year >= 1993)} ariaLabel="Paro juvenil, España frente a la UE" />

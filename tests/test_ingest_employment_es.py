@@ -192,6 +192,49 @@ class IngestEmploymentTest(unittest.TestCase):
         for row in comp["education_counterfactual"]:
             self.assertLessEqual(abs(row["es_eu_mix"] - row["es"]), row["es"])  # a reweighting, not a different scale
 
+    def test_second_cut_of_a_eurostat_table_keeps_its_own_code(self) -> None:
+        url = ingest.eurostat_url("lfst_r_lfu3rt_es")
+        self.assertIn("/lfst_r_lfu3rt?", url)
+        self.assertIn("geo=ES30", url)
+        self.assertIn("isced11=ED5-8", url)
+        raw = FakeRaw({
+            "id": ["freq", "isced11", "geo", "time"], "size": [1, 1, 2, 1],
+            "dimension": {
+                "freq": {"category": {"index": {"A": 0}}},
+                "isced11": {"category": {"index": {"ED5-8": 0}}},
+                "geo": {"category": {"index": {"ES21": 0, "ES30": 1}, "label": {"ES21": "País Vasco", "ES30": "Comunidad de Madrid"}}},
+                "time": {"category": {"index": {"2025": 0}}},
+            },
+            "value": {"0": 2.9, "1": 3.3},
+            "status": {"0": "du"},
+        })
+        (definition, rows), = list(ingest.parse_eurostat("lfst_r_lfu3rt_es")(raw))
+        self.assertEqual(definition["dataset_code"], "lfst_r_lfu3rt_es")
+        self.assertIn("/lfst_r_lfu3rt/", definition["source_url"])
+        self.assertEqual({r["geo_code"]: r["observations"][0]["status"] for r in rows}, {"ES21": "du", "ES30": None})
+
+    def test_published_segments_never_impute_unreliable_cells(self) -> None:
+        seg = json.loads(export.OUT_JSON.read_text(encoding="utf-8"))["segments"]
+        spec = json.loads(export.SEGMENTS_FILE.read_text(encoding="utf-8"))
+        grouped = {code for g in spec["markets"]["groups"] for code in g["regions"]}
+        self.assertEqual(grouped, {r["code"] for r in seg["regions"]})  # every community in exactly one market
+        observed = []
+        for row in seg["rows"]:
+            for geo, flag in row["flags"].items():
+                if flag in export.UNRELIABLE:
+                    self.assertIsNone(row["values"][geo])
+            observed += [v for v in row["values"].values() if v is not None]
+        self.assertEqual(seg["extremes"]["min"]["value"], min(observed))
+        self.assertEqual(seg["extremes"]["max"]["value"], max(observed))
+        self.assertEqual(len(seg["cases"]), len(spec["cases"]))
+        for case in seg["cases"]:
+            self.assertTrue(all(f["value"] is not None for f in [*case["figures"], *case["national"]]))
+        ts = seg["temporary_by_sector"]
+        for sec in ("all", "private", "public"):
+            self.assertTrue(all(0 < p["value"] < 100 for p in ts["series"][sec]))
+        last = {sec: ts["series"][sec][-1]["value"] for sec in ("all", "private", "public")}
+        self.assertTrue(min(last["private"], last["public"]) <= last["all"] <= max(last["private"], last["public"]))
+
 
 if __name__ == "__main__":
     unittest.main()

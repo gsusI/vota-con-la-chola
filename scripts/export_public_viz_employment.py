@@ -278,6 +278,7 @@ def build(conn: sqlite3.Connection) -> dict:
     extended["composition"] = composition_distribution(store, last_year, reg_u_all)
     extended["labour_policy"] = labour_policy(store, nawru, last_year)
     extended["narratives"] = narratives(store, esp, zutn, nawru, last_year, extended["intermittency"])
+    extended["segments"] = segments_by_group(store)
     ev, ev_meta = events(conn)
     sources = {}
     for source_id, releases in store.provenance.items():
@@ -740,8 +741,8 @@ SECTOR_LABELS = {"A": "Agricultura", "B-E": "Industria y energía", "F": "Constr
 
 def table_rows(store: Store, dataset: str, code: str) -> list[tuple[str, str, int, float]]:
     """INE table indicator: (geography, series name, year, value)."""
-    release_id, _ = store.release(*{"INE_66237": ("ine_epa_tempus", "INE_66237", "66237"),
-                                    "INE_28191": ("ine_eaes_tempus", "INE_28191", "28191")}[dataset])
+    source_id = "ine_eaes_tempus" if dataset == "INE_28191" else "ine_epa_tempus"
+    release_id, _ = store.release(source_id, dataset, code)
     out = []
     for geo, dims, period, value in store.conn.execute(
         """
@@ -878,6 +879,156 @@ def composition_distribution(store: Store, last_year: int, reg_u: dict) -> dict:
     return out
 
 
+# ---------------------------------------------------------------- who carries the unemployment: age x education x region
+
+SEGMENTS_FILE = REPO_ROOT / "etl/data/manual/employment/segments_es.json"
+SEG_AGES = [("Y15-24", "15 a 24"), ("Y25-34", "25 a 34"), ("Y35-44", "35 a 44"), ("Y45-54", "45 a 54"), ("Y55-64", "55 a 64")]
+SEG_LEVELS = [("ED0-2", "Hasta la ESO"), ("ED3_4", "Bachillerato o FP de grado medio"), ("ED5-8", "Estudios superiores")]
+UNRELIABLE = {"u", "bu", "du", "bdu"}  # Eurostat: low reliability (sample size); published empty, never imputed
+
+
+def cells_with_flags(store: Store, source_id: str, dataset: str, code: str) -> dict[str, dict[int, tuple[float, str | None]]]:
+    release_id, _ = store.release(source_id, dataset, code)
+    out: dict[str, dict[int, tuple[float, str | None]]] = defaultdict(dict)
+    for geo, period, value, status in store.conn.execute(
+        """
+        SELECT s.geography_code, o.period_label, o.value_decimal, o.source_status_code
+        FROM indicator_observation_versions o JOIN indicator_series_versions s USING (indicator_series_version_id)
+        WHERE o.indicator_release_id = ? AND o.revision_state != 'deleted' AND o.value_decimal IS NOT NULL
+        """,
+        (release_id,),
+    ):
+        out[geo][int(period)] = (float(value), status)
+    return out
+
+
+def temporary_by_sector(store: Store) -> dict:
+    """INE EPA tables 65978/65979/65980: temporary share of employees by sector and age (both from official counts)."""
+    counts: dict[tuple[str, str, int], dict[str, float]] = defaultdict(dict)
+    for table, sector in (("65978", "all"), ("65979", "private"), ("65980", "public")):
+        for _geo, name, year, value in table_rows(store, f"INE_{table}", table):
+            parts = [x.strip() for x in name.rstrip(".").split(".")]
+            counts[(sector, parts[3], year)]["temporal" if parts[4].startswith("Temporal") else "total"] = value
+    share = {k: 100 * v["temporal"] / v["total"] for k, v in counts.items() if v.get("total") and "temporal" in v}
+    years = sorted({y for (_, _, y) in share})
+    last = years[-1]
+    ages = [a for a in dict.fromkeys(a for (sec, a, y) in share if sec == "all" and y == last) if a != "16 y más años"]
+    total_age = "16 y más años"
+    return {
+        "source_tables": ["65978", "65979", "65980"],
+        "last_year": last,
+        "series": {sec: points({y: share[(sec, total_age, y)] for y in years if (sec, total_age, y) in share}, 1) for sec in ("all", "private", "public")},
+        "by_age_last": [
+            {"age": a, **{sec: r(share.get((sec, a, last)), 1) for sec in ("all", "private", "public")},
+             "public_employees_k": r(counts.get(("public", a, last), {}).get("total"), 1)}
+            for a in ages
+        ],
+        "public_share_of_temporary": points({y: 100 * counts[("public", total_age, y)]["temporal"] / counts[("all", total_age, y)]["temporal"]
+                                             for y in years if counts.get(("public", total_age, y), {}).get("temporal") and counts.get(("all", total_age, y), {}).get("temporal")}, 1),
+        "public_share_of_employees": points({y: 100 * counts[("public", total_age, y)]["total"] / counts[("all", total_age, y)]["total"]
+                                             for y in years if counts.get(("public", total_age, y), {}).get("total") and counts.get(("all", total_age, y), {}).get("total")}, 1),
+        "_share": share,
+    }
+
+
+def segments_by_group(store: Store) -> dict:
+    spec = json.loads(SEGMENTS_FILE.read_text(encoding="utf-8"))
+    markets = spec["markets"]["groups"]
+    region_market = {code: g["id"] for g in markets for code in g["regions"]}
+    names = dict(store.conn.execute(
+        "SELECT DISTINCT geography_code, geography_name FROM indicator_series_versions WHERE geography_level = 'nuts2' AND geography_code LIKE 'ES__'"
+    ).fetchall())
+    grid: dict[tuple[str, str], dict[str, dict[int, tuple[float, str | None]]]] = {}
+    for lvl in [*(c for c, _ in SEG_LEVELS), "TOTAL"]:
+        for age in [*(c for c, _ in SEG_AGES), "Y15-74"]:
+            grid[(lvl, age)] = cells_with_flags(store, "eurostat_sdmx", "lfst_r_lfu3rt_es", f"{lvl}.T.{age}.PC")
+    year = max(grid[("TOTAL", "Y15-74")]["ES"])
+    regions = sorted((g for g in grid[("TOTAL", "Y15-74")] if g.startswith("ES") and len(g) == 4 and year in grid[("TOTAL", "Y15-74")][g]),
+                     key=lambda g: -grid[("TOTAL", "Y15-74")][g][year][0])
+    missing = [g for g in regions if g not in region_market]
+    if missing:
+        raise SystemExit(f"segments_es.json: regions without market group: {missing}")
+
+    def cell(lvl: str, age: str, geo: str) -> tuple[float | None, str | None]:
+        value, flag = grid[(lvl, age)].get(geo, {}).get(year, (None, None))
+        if flag in UNRELIABLE:
+            return None, flag
+        return (r(value, 1) if value is not None else None), flag
+
+    rows = []
+    observed: list[dict] = []
+    for lvl, _ in SEG_LEVELS:
+        for age, _ in SEG_AGES:
+            values, flags = {}, {}
+            for geo in regions:
+                v, f = cell(lvl, age, geo)
+                values[geo] = v
+                if f:
+                    flags[geo] = f
+                if v is not None:
+                    observed.append({"geo": geo, "name": names.get(geo, geo), "age": age, "isced": lvl, "value": v})
+            rows.append({"isced": lvl, "age": age, "es": cell(lvl, age, "ES")[0], "eu": cell(lvl, age, "EU27_2020")[0],
+                         "es_age_total": cell("TOTAL", age, "ES")[0], "values": values, "flags": flags})
+    lo = min(observed, key=lambda c: (c["value"], c["geo"]))
+    hi = max(observed, key=lambda c: (c["value"], c["geo"]))
+    # How much each dimension separates on its own, at national level (same table, same year).
+    es_total = cell("TOTAL", "Y15-74", "ES")[0]
+
+    temp = temporary_by_sector(store)
+    share = temp.pop("_share")
+    ept = store.annual("eurostat_sdmx", "lfsa_eppgai", "PC.F.Y15-64")
+    jornada: dict[str, dict[int, float]] = defaultdict(dict)
+    for _geo, name, wyear, value in table_rows(store, "INE_66237J", "66237J"):
+        jornada[name.split(".")[0].strip()][wyear] = value
+
+    def resolve(fig: dict) -> dict:
+        m = fig["metric"]
+        if m == "unemployment":
+            v, f = cell(fig["isced"], fig["age"], fig["geo"])
+            return {**fig, "value": v, "flag": f, "year": year, "unit": "pct", "source": "eurostat:lfst_r_lfu3rt",
+                    "geo_name": "España" if fig["geo"] == "ES" else "UE-27" if fig["geo"] == "EU27_2020" else names.get(fig["geo"], fig["geo"])}
+        if m == "temporary_share":
+            ty = temp["last_year"]
+            return {**fig, "value": r(share.get((fig["sector"], fig["age"], ty)), 1), "year": ty, "unit": "pct",
+                    "source": f"ine:{ {'all': '65978', 'private': '65979', 'public': '65980'}[fig['sector']] }"}
+        if m == "involuntary_part_time":
+            rows_ = store.annual("eurostat_sdmx", "lfsa_eppgai", f"PC.{fig['sex']}.Y15-64")[fig["geo"]]
+            py = max(rows_)
+            return {**fig, "value": r(rows_[py], 1), "year": py, "unit": "pct", "source": "eurostat:lfsa_eppgai"}
+        if m == "wage_by_working_time":
+            rows_ = jornada[fig["working_time"]]
+            wy = max(rows_)
+            return {**fig, "value": r(rows_[wy], 0), "year": wy, "unit": "eur_month", "source": "ine:66237"}
+        raise SystemExit(f"segments_es.json: unknown metric {m}")
+
+    cases = [{**{k: v for k, v in c.items() if k not in ("figures", "national")},
+              "figures": [resolve(f) for f in c["figures"]], "national": [resolve(f) for f in c["national"]]} for c in spec["cases"]]
+    for c in cases:
+        for f in [*c["figures"], *c["national"]]:
+            if f["value"] is None:
+                raise SystemExit(f"segments case {c['id']}: no value for {f}")
+    yr = store.annual("eurostat_sdmx", "yth_empl_140", "T.Y15-24.PC")
+    return {
+        "year": year,
+        "definitions": "etl/data/manual/employment/segments_es.json",
+        "ages": [{"code": c, "label": l} for c, l in SEG_AGES],
+        "levels": [{"code": c, "label": l} for c, l in SEG_LEVELS],
+        "markets": {"criterion": spec["markets"]["criterion"], "groups": [{"id": g["id"], "label": g["label"]} for g in markets]},
+        "regions": [{"code": g, "name": names.get(g, g), "market": region_market[g], "total": cell("TOTAL", "Y15-74", g)[0]} for g in regions],
+        "es_total": es_total,
+        "eu_total": cell("TOTAL", "Y15-74", "EU27_2020")[0],
+        "rows": rows,
+        "extremes": {"min": lo, "max": hi, "ratio": r(hi["value"] / lo["value"], 1)},
+        "cells_observed": len(observed),
+        "cells_unreliable": sum(1 for row in rows for f in row["flags"].values() if f in UNRELIABLE),
+        "cells_missing": sum(1 for row in rows for g, v in row["values"].items() if v is None and row["flags"].get(g) not in UNRELIABLE),
+        "cases": cases,
+        "temporary_by_sector": temp,
+        "youth_population_ratio": {EUROSTAT_TO_AREA[g]: points(v, 1) for g, v in yr.items() if g in EUROSTAT_TO_AREA},
+        "involuntary_part_time_women": {EUROSTAT_TO_AREA[g]: points(v, 1) for g, v in ept.items() if g in EUROSTAT_TO_AREA},
+    }
+
+
 def write_csv(data: dict, path: Path) -> None:
     rows: list[tuple] = []
 
@@ -1001,6 +1152,24 @@ def write_csv(data: dict, path: Path) -> None:
         add("mites_anuario", "demandantes_fijos_discontinuos_media_anual", {"ESP": it["inactive_job_seekers"]})
         add("mites_anuario", "contratos_fijos_discontinuos", {"ESP": it["contracts_fd"]})
         add("mites_anuario", "contratos_total", {"ESP": it["contracts_total"]})
+    seg = ext.get("segments")
+    if seg:
+        reg_names = {reg["code"]: reg["name"] for reg in seg["regions"]}
+        for row in seg["rows"]:
+            serie = f"tasa_paro_{row['age'].lower().replace('y', '')}_{row['isced']}"
+            rows.append(("eurostat_sdmx:lfst_r_lfu3rt", serie, "ES", seg["year"], row["es"]))
+            rows.append(("eurostat_sdmx:lfst_r_lfu3rt", serie, "EU27", seg["year"], row["eu"]))
+            # unreliable (u) or missing cells are written empty, never imputed
+            rows.extend(("eurostat_sdmx:lfst_r_lfu3rt", serie, f"{g} {reg_names[g]}", seg["year"], "" if v is None else v)
+                        for g, v in row["values"].items())
+        ts = seg["temporary_by_sector"]
+        for sec, label in (("all", "todos"), ("private", "sector_privado"), ("public", "sector_publico")):
+            add(f"ine_epa_tempus:{ {'all': '65978', 'private': '65979', 'public': '65980'}[sec] }", f"temporales_pct_asalariados_{label}", {"ESP": ts["series"][sec]})
+            rows.extend((f"ine_epa_tempus:{ {'all': '65978', 'private': '65979', 'public': '65980'}[sec] }", f"temporales_pct_asalariados_{label}_{a['age']}", "ESP", ts["last_year"], a[sec])
+                        for a in ts["by_age_last"])
+        add("ine_epa_tempus:65978+65980", "sector_publico_pct_temporales", {"ESP": ts["public_share_of_temporary"]})
+        add("eurostat_sdmx:yth_empl_140", "parados_15_24_pct_poblacion", seg["youth_population_ratio"])
+        add("eurostat_sdmx:lfsa_eppgai", "parcial_involuntaria_mujeres_pct", seg["involuntary_part_time_women"])
     buf = io.StringIO()
     writer = csv.writer(buf, lineterminator="\n")
     writer.writerow(["fuente", "serie", "area", "anio", "valor"])

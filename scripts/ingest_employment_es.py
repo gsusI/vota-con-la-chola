@@ -559,6 +559,27 @@ EUROSTAT_DATASETS: dict[str, dict[str, Any]] = {
         "label": "Tasa de paro por región NUTS 2 ({age}), Eurostat", "unit_label": "% de la población activa",
         "definition": "Encuesta de Población Activa de la UE por región NUTS 2; en España, NUTS 2 = comunidades y ciudades autónomas.",
     },
+    # Same table, Spain only, crossed by age and education: who carries the structural unemployment (figure
+    # «estructural, ¿de quién?»). EU27_2020 gives the European rate of the same group with the same bands.
+    "lfst_r_lfu3rt_es": {
+        "dataset": "lfst_r_lfu3rt",
+        "geos": ["ES", "EU27_2020", "ES11", "ES12", "ES13", "ES21", "ES22", "ES23", "ES24", "ES30", "ES41", "ES42", "ES43",
+                 "ES51", "ES52", "ES53", "ES61", "ES62", "ES63", "ES64", "ES70"],
+        "filters": {"age": ["Y15-24", "Y25-34", "Y35-44", "Y45-54", "Y55-64", "Y15-74"], "sex": ["T"],
+                    "isced11": ["ED0-2", "ED3_4", "ED5-8", "TOTAL"], "unit": ["PC"]},
+        "label": "Tasa de paro por comunidad autónoma, edad ({age}) y nivel educativo, Eurostat", "unit_label": "% de la población activa",
+        "definition": "Encuesta de Población Activa de la UE por región NUTS 2 (comunidades y ciudades autónomas), por grupo de edad y nivel educativo (CINE 2011: ED0-2 hasta la ESO, ED3_4 bachillerato y FP de grado medio, ED5-8 superiores). Eurostat marca con u las celdas de baja fiabilidad por tamaño de muestra.",
+    },
+    "yth_empl_140": {
+        "filters": {"age": ["Y15-24"], "sex": ["T"], "unit": ["PC"]},
+        "label": "Ratio de paro juvenil ({age}): parados sobre toda la población de esa edad, Eurostat", "unit_label": "% de la población de esa edad",
+        "definition": "Parados de 15 a 24 años sobre toda la población de esa edad (estudie o no), no sobre los activos: complementa la tasa de paro juvenil.",
+    },
+    "lfsa_eppgai": {
+        "filters": {"age": ["Y15-64"], "sex": ["T", "F", "M"], "unit": ["PC"]},
+        "label": "Jornada parcial involuntaria ({age}): % de quienes trabajan a tiempo parcial porque no encuentran jornada completa, Eurostat", "unit_label": "% de los ocupados a tiempo parcial",
+        "definition": "Ocupados a tiempo parcial que declaran no haber encontrado un empleo a tiempo completo, sobre el total de ocupados a tiempo parcial (LFS).",
+    },
     "lfst_r_lfe2emprt": {
         "geo_level": "nuts2",
         "filters": {"age": ["Y20-64"], "sex": ["T"], "unit": ["PC"]},
@@ -658,7 +679,7 @@ def eurostat_url(dataset: str) -> str:
     params: list[tuple[str, str]] = [("geoLevel", lv) for lv in levels] if levels else [("geo", g) for g in cfg.get("geos", EUROSTAT_GEOS)]
     for dim, values in EUROSTAT_DATASETS[dataset]["filters"].items():
         params.extend((dim, v) for v in values)
-    return f"{cfg.get('base', EUROSTAT_BASE)}/{dataset}?" + urllib.parse.urlencode(params)
+    return f"{cfg.get('base', EUROSTAT_BASE)}/{cfg.get('dataset', dataset)}?" + urllib.parse.urlencode(params)
 
 
 def lower_jsonstat(data: dict[str, Any]) -> dict[str, Any]:
@@ -683,6 +704,7 @@ def parse_eurostat(dataset: str) -> Callable[[Raw], Iterable[Batch]]:
         for d in fixed:
             combos = [{**c, d: code} for c in combos for code in index[d]]
         cfg = EUROSTAT_DATASETS[dataset]
+        code_name = cfg.get("dataset", dataset)  # a config key may be a second cut of the same Eurostat table
         status = data.get("status", {})
         for combo in combos:
             series = []
@@ -710,8 +732,8 @@ def parse_eurostat(dataset: str) -> Callable[[Raw], Iterable[Batch]]:
                 "frequency_label": "Semestral" if dataset == "earn_mw_cur" else "Anual",
                 "unit_code": combo.get("unit", combo.get("currency", "PC")), "unit_label": cfg["unit_label"],
                 "label": cfg["label"].format(age=age), "definition": cfg["definition"],
-                "methodology_url": cfg.get("source_page") or f"https://ec.europa.eu/eurostat/cache/metadata/en/{dataset.removesuffix('_h')}_esms.htm",
-                "source_url": cfg.get("source_page") or f"https://ec.europa.eu/eurostat/databrowser/view/{dataset}/default/table",
+                "methodology_url": cfg.get("source_page") or f"https://ec.europa.eu/eurostat/cache/metadata/en/{code_name.removesuffix('_h')}_esms.htm",
+                "source_url": cfg.get("source_page") or f"https://ec.europa.eu/eurostat/databrowser/view/{code_name}/default/table",
                 "source_updated_at": data.get("updated"),
             }, series
 
@@ -728,11 +750,33 @@ INE_SERIES = {
     "EPA416749": ("Asalariados con contrato temporal (EPA)", "THS_PER", "Miles de personas"),
 }
 INE_QUARTER = {19: 1, 20: 2, 21: 3, 22: 4}
+def _ine_parts(name: str) -> list[str]:
+    return [p.strip() for p in name.rstrip(".").split(".")]
+
+
+# EPA employees by contract and age (annual): all employees, private sector and public sector. Only both sexes and the
+# two counts needed for the temporary share (total and temporary) are kept.
+def _keep_contract(name: str) -> bool:
+    parts = _ine_parts(name)
+    return len(parts) >= 5 and parts[1] == "Total Nacional" and parts[2] == "Ambos sexos" and parts[4] in ("Total", "Temporal: Total")
+
+
 INE_TABLES = {
     "66237": {"label": "Salario medio mensual por decil del empleo principal (EPA)", "unit": "EUR_MONTH", "unit_label": "Euros brutos al mes",
-              "keep": lambda name: name.startswith("Total.") and "Dato base" in name},
+              "source_id": "ine_epa_tempus", "keep": lambda name: name.startswith("Total.") and "Dato base" in name},
+    # Second cut of the same table (its own indicator, so the decile release above is untouched): mean wage by working
+    # time, all deciles.
+    "66237J": {"table": "66237", "label": "Salario medio mensual por tipo de jornada (EPA, empleo principal)", "unit": "EUR_MONTH",
+               "unit_label": "Euros brutos al mes", "source_id": "ine_epa_tempus",
+               "keep": lambda name: "Dato base" in name and _ine_parts(name)[1:2] == ["Total"]},
+    "65978": {"label": "Asalariados por tipo de contrato, sexo y grupo de edad (EPA, media anual)", "unit": "THS_PER", "unit_label": "Miles de personas",
+              "source_id": "ine_epa_tempus", "keep": _keep_contract},
+    "65979": {"label": "Asalariados del sector privado por tipo de contrato, sexo y grupo de edad (EPA, media anual)", "unit": "THS_PER", "unit_label": "Miles de personas",
+              "source_id": "ine_epa_tempus", "keep": _keep_contract},
+    "65980": {"label": "Asalariados del sector público por tipo de contrato, sexo y grupo de edad (EPA, media anual)", "unit": "THS_PER", "unit_label": "Miles de personas",
+              "source_id": "ine_epa_tempus", "keep": _keep_contract},
     "28191": {"label": "Ganancia anual por trabajador: media y percentiles por comunidad autónoma (Encuesta Anual de Estructura Salarial)",
-              "unit": "EUR_YEAR", "unit_label": "Euros brutos al año", "keep": lambda name: name.startswith("Ambos sexos.") and "Dato base" in name},
+              "unit": "EUR_YEAR", "unit_label": "Euros brutos al año", "source_id": "ine_eaes_tempus", "keep": lambda name: name.startswith("Ambos sexos.") and "Dato base" in name},
 }
 
 
@@ -759,12 +803,12 @@ def parse_ine_table(table: str) -> Callable[[Raw], Iterable[Batch]]:
                 entry.update(geo_name=region, geo_system="INE-CCAA", geo_level="region")
             series.append(entry)
         yield {
-            "source_id": "ine_epa_tempus" if table == "66237" else "ine_eaes_tempus", "dataset_code": f"INE_{table}",
+            "source_id": cfg["source_id"], "dataset_code": f"INE_{table}",
             "indicator_code": table, "frequency_code": "A", "frequency_label": "Anual", "unit_code": cfg["unit"],
             "unit_label": cfg["unit_label"], "label": cfg["label"],
             "definition": "Tabla completa de INE Tempus; cada serie conserva su código y nombre oficial.",
-            "methodology_url": f"https://www.ine.es/jaxiT3/Tabla.htm?t={table}",
-            "source_url": f"https://www.ine.es/jaxiT3/Tabla.htm?t={table}",
+            "methodology_url": f"https://www.ine.es/jaxiT3/Tabla.htm?t={cfg.get('table', table)}",
+            "source_url": f"https://www.ine.es/jaxiT3/Tabla.htm?t={cfg.get('table', table)}",
         }, series
 
     return parse
@@ -945,7 +989,7 @@ API_SOURCES: list[tuple[str, str, Callable[[Raw], Iterable[Batch]]]] = [
         for code in INE_SERIES
     ],
     *[
-        (f"ine_tabla_{table}.json", f"https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/{table}?nult=40", parse_ine_table(table))
+        (f"ine_tabla_{table}.json", f"https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/{INE_TABLES[table].get('table', table)}?nult=40", parse_ine_table(table))
         for table in INE_TABLES
     ],
     ("oecd_taxing_wages_dbnomics.json", dbnomics_series_url("OECD", TAX_WAGES_DATASET, TAX_WAGES_DIMS), parse_tax_wages),

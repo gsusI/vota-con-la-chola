@@ -6,7 +6,7 @@ import { fmt, num, thousands } from "./format.mjs";
 // «El dato mata el relato»: the two consolidated figures that settle the competing stories on this page.
 const verdictStyle = { display: "grid", gap: 6, marginTop: 0, marginBottom: 0, paddingLeft: 0, listStyle: "none", fontSize: "0.92rem", lineHeight: 1.45 };
 
-function Verdicts({ settled, ambiguous }) {
+export function Verdicts({ settled, ambiguous }) {
   return (
     <div style={{ display: "grid", gap: 10 }}>
       <div>
@@ -112,7 +112,7 @@ export function MoneyResults({ rows }) {
 }
 
 
-export default function DatoMataRelato({ data }) {
+export default function DatoMataRelato({ data, afterStructural = null }) {
   const nar = data.narratives;
   if (!nar) return null;
   const S = sources(data);
@@ -143,8 +143,8 @@ export default function DatoMataRelato({ data }) {
       <section className="card vizProse" id="dato-relato" aria-labelledby="dato-relato-title">
         <h2 id="dato-relato-title">El dato mata el relato</h2>
         <p>
-          Casi cualquier gráfico suelto de paro sirve para defender una historia y la contraria. Estos tres ponen el problema entero sobre la mesa:
-          cada uno combina varias medidas en una sola escala, de modo que no se puede recortar para contar solo media historia.
+          Casi cualquier gráfico suelto de paro sirve para defender una historia y la contraria. Estas figuras ponen el problema entero sobre la mesa:
+          cada una combina varias medidas en una sola escala, de modo que no se puede recortar para contar solo media historia.
         </p>
       </section>
 
@@ -209,6 +209,8 @@ export default function DatoMataRelato({ data }) {
           ]}
         />
       </Fig>
+
+      {afterStructural}
 
       <Fig
         id="relato-reforma"

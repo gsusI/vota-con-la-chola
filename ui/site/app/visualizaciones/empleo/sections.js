@@ -124,7 +124,10 @@ export function LimitsCard() {
           cambios en qué sectores emplean a más gente. Los niveles en paridad de poder de compra tienen varios puntos de margen de error.
         </li>
         <li>
-          <strong>Diferencias regionales.</strong> Son series nacionales: el paro varía mucho entre comunidades autónomas y aquí no se ve.
+          <strong>Diferencias regionales.</strong> Las comunidades autónomas se ven en el paro por edad y estudios, el paro y el empleo regionales y la
+          productividad por comunidad, pero la mayoría de las series (contratos, salarios, productividad en el tiempo, gasto) son nacionales. La EPA
+          regional no baja a provincia ni a municipio con cruces por edad, y las celdas con poca muestra quedan vacías. No hay paridades de poder
+          adquisitivo oficiales por comunidad: un mismo salario no compra lo mismo en Madrid que en Badajoz, y aquí no se corrige.
         </li>
       </ul>
     </section>
