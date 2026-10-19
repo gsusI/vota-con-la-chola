@@ -168,7 +168,7 @@ export default function ChapterCapacidad({ data }) {
         }
         explain={{
           what: "Cuánto deja en el bolsillo el salario mínimo comparado con un sueldo del medio de la tabla, y cuánto compra en cada país.",
-          read: "Un 72 % significa que quien cobra el mínimo se queda con algo menos de tres cuartas partes de lo que se queda un trabajador típico. Desde 2019 esa distancia se ha estrechado mucho en España.",
+          read: `Un ${pct(nmEs.value)} significa que quien cobra el mínimo se queda con esa parte de lo que se queda un trabajador del medio de la tabla. Desde 2019 esa distancia se ha estrechado mucho en España (${pct(nm2018)} en 2018).`,
           not: "No dice cuánta gente cobra el mínimo ni si su subida destruyó o no empleo (ver el gráfico del salario mínimo en el capítulo 3). Tampoco descuenta el alquiler, que se come una parte muy distinta del sueldo según la ciudad.",
         }}
       >

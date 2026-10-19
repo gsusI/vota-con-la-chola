@@ -62,7 +62,7 @@ export default function ChapterProductividad({ data }) {
       <Fig
         id="productividad"
         title={`Desde ${h.productivity_base}, la productividad por hora creció un ${num(g.ESP)} % en España y un ${num(g.EU27)} % en la UE-27; desde 2008, al mismo ritmo (${num(b08.ESP)} % frente a ${num(b08.EU27)} %)`}
-        dek={`PIB en volumen por hora trabajada, ${h.productivity_base} = 100. 1995 es un máximo relativo de España (producía por hora un ${num(lvFirst - 100, 0)} % más que la media de la UE), así que empezar ahí agranda la distancia; la comparación desde cinco años base está en el capítulo 7. Alemania +${num(g.DEU)} %, Portugal +${num(g.PRT)} %, Francia +${num(g.FRA)} %. ${peersSlower.length ? `Solo ${peersSlower.map(([a]) => NAMES[a]).join(" y ")} creció menos (+${num(peersSlower[0][1])} %).` : ""}`}
+        dek={`PIB en volumen por hora trabajada, ${h.productivity_base} = 100. ${h.productivity_base} es el primer año de la serie de niveles y el de mayor ventaja de España (producía por hora un ${num(lvFirst - 100, 0)} % más que la media de la UE), así que empezar ahí agranda la distancia; la comparación desde cinco años base está en el capítulo 7. Alemania +${num(g.DEU)} %, Portugal +${num(g.PRT)} %, Francia +${num(g.FRA)} %. ${peersSlower.length ? `Solo ${peersSlower.map(([a]) => NAMES[a]).join(" y ")} creció menos (+${num(peersSlower[0][1])} %).` : ""}`}
         legend={[{ id: "ESP", label: "España", color: C.blue }, { id: "EU27", label: "UE-27", color: C.ref }, PEER_LEGEND]}
         sources={[S.eurostat("nama_10_lp_ulc")]}
         notes={["Índice reescalado por nosotros a 1995 = 100 desde el índice 2015 = 100 de Eurostat (productividad real por hora, RLPR_HW)."]}
@@ -152,14 +152,14 @@ export default function ChapterProductividad({ data }) {
       <Fig
         id="tasa-empleo"
         title={`Trabaja el ${pct(h.emp_es_last)} de la población de 20 a 64 años en España, frente al ${pct(h.emp_eu_last)} en la UE-27`}
-        dek={`La distancia con la UE-27 pasó de ${num(empGapMax.gap)} puntos en ${empGapMax.year} a ${num(empGapLast.gap)} en ${empGapLast.year}.`}
+        dek={`La distancia con la UE-27 pasó de ${num(empGapMax.gap)} puntos en ${empGapMax.year}, la mayor de la serie, a ${num(empGapLast.gap)} en ${empGapLast.year}.`}
         legend={emp.filter((s) => s.color !== C.peer).concat([PEER_LEGEND])}
         sources={[S.eurostat("lfsi_emp_a"), S.eurostat("lfsi_emp_a_h")]}
         notes={["La serie histórica (1993–2020) y la vigente se solapan; no se empalman."]}
         table={<SeriesTable series={emp} />}
         explain={{
           what: "Qué parte de las personas de 20 a 64 años tiene empleo.",
-          read: "Es la otra cara del paro y no depende de quién dice estar buscando trabajo. Desde 2013 España ha reducido a menos de la mitad su brecha con Europa: el empleo crece, pero la población activa también.",
+          read: `Es la otra cara del paro y no depende de quién dice estar buscando trabajo. Desde ${empGapMax.year}, el año de mayor distancia, España ha reducido su brecha con Europa de ${num(empGapMax.gap)} a ${num(empGapLast.gap)} puntos: el empleo crece, pero la población activa también.`,
           not: "No distingue jornada completa de parcial ni la calidad del empleo; y una tasa alta puede convivir con mucho paro si mucha gente quiere trabajar.",
         }}
       >

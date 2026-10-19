@@ -31,7 +31,8 @@ export function Summary({ data }) {
           {pct(h.eu27_last)} en la UE-27. <a href="#paro">Ver gráfico</a>
         </li>
         <li>
-          <strong>Pero no siempre ni «el doble».</strong> Hasta 1975 era similar al europeo; solo en {h.years_ratio_ge_2} de {h.years_since} años
+          <strong>Pero no siempre ni «el doble».</strong> Hasta {h.before_years[1]} era similar al europeo ({num(h.ratio_mean_before_gap, 2)} veces en{" "}
+          {h.before_years[0]}–{h.before_years[1]}); solo en {h.years_ratio_ge_2} de {h.years_since} años
           llegó al doble, y en {h.ratio_lowest_since.year} bajó a {num(h.ratio_lowest_since.value, 2)} veces. <a href="#ratio">Ver gráfico</a>
         </li>
         {crisis ? (
@@ -52,7 +53,7 @@ export function Summary({ data }) {
         </li>
         <li>
           <strong>Productividad y salarios casi parados.</strong> La productividad por hora creció un {num(g.ESP)} % desde {h.productivity_base},
-          frente al {num(g.EU27)} % de la UE-27 (Italia: {num(g.ITA)} %); pero 1995 es un máximo relativo de España, y desde 2008 crece al ritmo
+          frente al {num(g.EU27)} % de la UE-27 (Italia: {num(g.ITA)} %); pero en {h.productivity_base}, el primer año de la serie, España tenía su mayor ventaja sobre la UE en productividad por hora, y desde 2008 crece al ritmo
           europeo. El retraso está dentro de cada sector, no en la mezcla de sectores.
           {wp?.ESP ? ` El salario real por asalariado, un ${num(wp.ESP.wage.at(-1).value - 100)} % (UE-27: ${num(wp.EU27.wage.at(-1).value - 100)} %).` : ""}{" "}
           <a href="#productividad">Ver gráfico</a>
@@ -120,8 +121,9 @@ export function Conclusion({ data }) {
           2006 la distancia casi desapareció ({num(h.ratio_lowest_since.value, 2)} veces).
         </li>
         <li>
-          <strong>No es un rasgo permanente del país.</strong> Entre 1960 y 1975 el paro español fue similar al europeo
-          ({pct(h.es_mean_1960_1974)} de media en 1960–1974). La brecha nace con las crisis de los setenta y ochenta.
+          <strong>No es un rasgo permanente del país.</strong> Entre {h.before_years[0]} y {h.before_years[1]}, los primeros años con media europea, el
+          paro español fue similar al europeo ({num(h.ratio_mean_before_gap, 2)} veces); en 1960–1974 era del {pct(h.es_mean_1960_1974)}. La brecha se
+          abre en {h.gap_from_year}, con las crisis de finales de los setenta y los ochenta.
         </li>
         <li>
           <strong>No es solo estructural: el ciclo es enorme.</strong>{" "}

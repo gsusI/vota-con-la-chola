@@ -235,6 +235,17 @@ class IngestEmploymentTest(unittest.TestCase):
         last = {sec: ts["series"][sec][-1]["value"] for sec in ("all", "private", "public")}
         self.assertTrue(min(last["private"], last["public"]) <= last["all"] <= max(last["private"], last["public"]))
 
+    def test_published_copy_claims_hold(self) -> None:
+        data = json.loads(export.OUT_JSON.read_text(encoding="utf-8"))
+        h = data["headline"]
+        # «el primer año de la serie y el de mayor ventaja de España»
+        lv = data["productivity"]["level_vs_eu27"]["ESP"]
+        self.assertEqual(lv[0]["year"], h["productivity_base"])
+        self.assertEqual(max(p["value"] for p in lv), lv[0]["value"])
+        # «parecido al europeo hasta before_years[1]; la brecha se abre en gap_from_year»
+        self.assertEqual(h["before_years"][1] + 1, h["gap_from_year"])
+        self.assertLess(abs(h["ratio_mean_before_gap"] - 1), 0.1)
+
 
 if __name__ == "__main__":
     unittest.main()

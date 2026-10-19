@@ -37,13 +37,13 @@ EPISODES = [(2007, 2013, "Gran Recesión y crisis del euro"), (2019, 2020, "Pand
 SOURCE_PAGES = {
     "ameco_dbnomics": ("Comisión Europea · AMECO (réplica DBnomics)", "https://economy-finance.ec.europa.eu/economic-research-and-databases/economic-databases/ameco-database_en"),
     "eurostat_sdmx": ("Eurostat · Encuesta de Población Activa de la UE y contabilidad nacional", "https://ec.europa.eu/eurostat/web/lfs/database"),
-    "ine_epa_tempus": ("INE · Encuesta de Población Activa (API Tempus)", "https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736176918"),
+    "ine_epa_tempus": ("INE · Encuesta de Población Activa (API Tempus)", "https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736176918&idp=1254735976595"),
     "oecd_taxing_wages": ("OCDE · Taxing Wages (réplica DBnomics)", "https://db.nomics.world/OECD/DSD_TAX_WAGES_COMP@DF_TW_COMP"),
     "oecd_productivity": ("OCDE · Productivity Database (réplica DBnomics)", "https://db.nomics.world/OECD/DSD_PDB@DF_PDB"),
     "oecd_earnings": ("OCDE · Earnings, salario mínimo frente al mediano (réplica DBnomics)", "https://db.nomics.world/OECD/DSD_EARNINGS@MIN2AVE"),
     "oecd_registered_unemployment": ("OCDE · paro registrado del SEPE (réplica DBnomics)", "https://db.nomics.world/OECD/DSD_OLAB@DF_OIALAB_INDIC"),
-    "ine_ipt_tempus": ("INE · Índice de Precios del Trabajo", "https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736177025"),
-    "ine_eaes_tempus": ("INE · Encuesta Anual de Estructura Salarial", "https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736177039"),
+    "ine_ipt_tempus": ("INE · Índice de Precios del Trabajo", "https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736177027&idp=1254735976596"),
+    "ine_eaes_tempus": ("INE · Encuesta Anual de Estructura Salarial", "https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736177025&idp=1254735976596"),
     "dg_empl_lmp": ("Comisión Europea, DG EMPL · base de datos de políticas de mercado de trabajo (LMP)", "https://webgate.ec.europa.eu/empl/redisstat/databrowser/explore/all/lmp?lang=en"),
     "oecd_taxben": ("OCDE · Tax-Benefit, renta neta con el salario mínimo (réplica DBnomics)", "https://db.nomics.world/OECD/DSD_TAXBEN_IMW@DF_IMW"),
     "seg_social_pxweb": ("Seguridad Social · afiliación media y días cotizados (PX-Web)", "https://w6.seg-social.es/PXWeb/"),
@@ -192,7 +192,9 @@ def build(conn: sqlite3.Connection) -> dict:
     ref_eu15 = {**{y: v for y, v in europe["DU15"].items() if y < 1991}, **europe["EU15"]}
     ratio_eu15 = ratio(esp, ref_eu15, 1.0)
     since = {y: v for y, v in ratio_eu15.items() if y >= HYPOTHESIS_FROM}
-    before = {y: v for y, v in ratio_eu15.items() if y < 1977}
+    # The gap opens the first year Spain's rate is 1.2 times the European one or more; before that, «similar».
+    gap_from = min(y for y, v in ratio_eu15.items() if v >= 1.2)
+    before = {y: v for y, v in ratio_eu15.items() if y < gap_from}
     decades = []
     for start in range(1970, last_year + 1, 10):
         span = [v for y, v in ratio_eu15.items() if start <= y < start + 10]
@@ -312,7 +314,8 @@ def build(conn: sqlite3.Connection) -> dict:
             "years_ratio_ge_2": sum(v >= 2.0 for v in since.values()),
             "ratio_lowest_since": {"year": lowest_since[0], "value": r(lowest_since[1])},
             "ratio_highest": {"year": highest[0], "value": r(highest[1])},
-            "ratio_mean_before_1977": r(mean(before.values())) if before else None,
+            "gap_from_year": gap_from,
+            "ratio_mean_before_gap": r(mean(before.values())) if before else None,
             "before_years": [min(before), max(before)] if before else None,
             "es_mean_1960_1974": r(mean(v for y, v in esp.items() if y <= 1974)),
             "mean_since_1980": {area: r(v) for area, v in since_1980_rank.items()},

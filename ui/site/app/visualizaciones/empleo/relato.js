@@ -215,7 +215,7 @@ export default function DatoMataRelato({ data, afterStructural = null }) {
       <Fig
         id="relato-reforma"
         title={`Desde ${rf.base_year} hay ${thousands(-ch.temporal)} de temporales menos, ${thousands(ch.ordinary)} de indefinidos ordinarios más y ${thousands(ch.fd)} de fijos discontinuos más trabajando`}
-        dek={`Asalariados por tipo de contrato cada trimestre (áreas, EPA) con una capa rayada encima de los fijos discontinuos que trabajan: los que no tienen actividad y están inscritos como demandantes (media de cada año, Ministerio de Trabajo). La temporalidad pasó del ${num(share0)} % en ${rf.base_year} al ${num(share1)} % en ${rf.last_year}.`}
+        dek={`Asalariados por tipo de contrato cada trimestre (áreas, EPA) con una capa rayada encima de los fijos discontinuos que trabajan: los que no tienen actividad y están inscritos como demandantes (media de cada año, Ministerio de Trabajo). La temporalidad pasó del ${num(share0)} % en ${rf.base_year} al ${num(share1)} % en ${rf.last_year} (EPA del INE, asalariados de 16 y más años; las cifras clave usan la serie de Eurostat de 15 a 64 años, ${num(data.headline.temp_es_2021)} % y ${num(data.headline.temp_es_last)} %).`}
         legend={[
           { id: "ordinary", label: "Indefinidos ordinarios (área)", color: contractColors.ordinary },
           { id: "fd", label: "Fijos discontinuos trabajando (área)", color: contractColors.fd },

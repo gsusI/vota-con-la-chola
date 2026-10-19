@@ -293,7 +293,7 @@ export function TypicalCases({ data }) {
           <a href="https://www.ine.es/jaxiT3/Tabla.htm?t=65978">65978</a>, <a href="https://www.ine.es/jaxiT3/Tabla.htm?t=65979">65979</a> y{" "}
           <a href="https://www.ine.es/jaxiT3/Tabla.htm?t=65980">65980</a>. Jornada parcial involuntaria: <a href={S.eurostat("lfsa_eppgai").href}>Eurostat, lfsa_eppgai</a>.
           Salario por jornada: <a href="https://www.ine.es/jaxiT3/Tabla.htm?t=66237">INE, tabla 66237</a>. Definiciones de los casos:{" "}
-          <code>{seg.definitions}</code>.
+          <code style={{ overflowWrap: "anywhere" }}>{seg.definitions}</code>.
         </p>
       </details>
     </section>
@@ -348,7 +348,7 @@ export function SectorTemporality({ data }) {
       }
       explain={{
         what: `Qué parte de los asalariados tiene contrato temporal en el sector privado y en el público, desde ${ts.series.all[0].year}, y por edad en ${last}.`,
-        read: "La caída de la temporalidad tras 2022 es casi toda privada. En el sector público la temporalidad apenas ha bajado y se concentra en los menores de 40 años.",
+        read: "La caída de la temporalidad tras 2022 es casi toda privada. En el sector público la temporalidad apenas ha bajado y es más alta cuanto más joven es el asalariado.",
         not: "No distingue entre administraciones (Estado, comunidades, ayuntamientos) ni por comunidad autónoma, y no dice cuánto duran los contratos ni cuántos temporales públicos encadenan sustituciones.",
       }}
     >

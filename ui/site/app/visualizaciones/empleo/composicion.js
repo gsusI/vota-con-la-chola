@@ -31,6 +31,7 @@ export default function ChapterComposicion({ data }) {
   const p = (base) => prodRows.find((r) => r.base === base);
   const wRows = by.real_wage.rows;
   const behindBases = prodRows.filter((r) => r.ESP < r.EU27).map((r) => r.base);
+  const wageAhead = (data.composition?.base_year.real_wage.rows || []).filter((r) => r.ESP >= r.EU27).map((r) => r.base);
 
   const ssP = comp.shift_share.periods["2000"];
   const ss08 = comp.shift_share.periods["2008"];
@@ -102,7 +103,7 @@ export default function ChapterComposicion({ data }) {
       <Fig
         id="ano-base"
         title={`La brecha de productividad con la UE depende del año de partida: desde 1995, ${num(p(1995).ESP)} % frente a ${num(p(1995).EU27)} %; desde 2008, ${num(p(2008).ESP)} % frente a ${num(p(2008).EU27)} %`}
-        dek={`En 1995 España producía por hora un ${num(data.headline.level_vs_eu_first.ESP - 100, 0)} % más que la media de la UE, un máximo relativo: empezar ahí exagera la caída. España queda por detrás desde ${behindBases.join(", ")}; desde 2008 crece al ritmo europeo, en parte porque la crisis destruyó primero los empleos menos productivos. Los salarios reales quedan por detrás de la UE desde todas las bases salvo 2019.`}
+        dek={`En 1995, el primer año de la serie de niveles y el de mayor ventaja, España producía por hora un ${num(data.headline.level_vs_eu_first.ESP - 100, 0)} % más que la media de la UE: empezar ahí exagera la caída. España queda por detrás desde ${behindBases.join(", ")}; desde 2008 crece al ritmo europeo, en parte porque la crisis destruyó primero los empleos menos productivos. ${wageAhead.length ? `Los salarios reales quedan por detrás de la UE desde todas las bases salvo ${wageAhead.join(" y ")}.` : "Los salarios reales quedan por detrás de la UE desde todas las bases."}`}
         sources={[S.eurostat("nama_10_lp_ulc"), S.ameco]}
         notes={[`Crecimiento acumulado hasta ${by.productivity.end}: productividad real por hora (Eurostat) y remuneración real por asalariado deflactada con el consumo privado (AMECO).`]}
         table={
@@ -122,7 +123,7 @@ export default function ChapterComposicion({ data }) {
         explain={{
           what: "El mismo cálculo (cuánto ha crecido la productividad y el salario real hasta hoy) empezando en cinco años distintos.",
           read: "Si la barra azul queda por debajo de la gris en todas las filas, la conclusión no depende del año elegido. En productividad, depende: desde 1995 o 2000 España se queda muy atrás; desde 2008, no. En salarios, España queda atrás casi siempre.",
-          not: "No dice qué año es «el bueno»: 1995 es un máximo relativo de España y 2008 coincide con el inicio de una crisis que infló la productividad española al destruir empleo poco productivo.",
+          not: "No dice qué año es «el bueno»: 1995 es el año de mayor ventaja de España en la serie de niveles (que empieza ese año) y 2008 coincide con el inicio de una crisis que infló la productividad española al destruir empleo poco productivo.",
         }}
       >
         <div className="vizMultiples">

@@ -102,13 +102,13 @@ LOCAL_SOURCES: dict[str, dict[str, str]] = {
     "ine_ipt_tempus": {
         "name": "INE - Índice de Precios del Trabajo (API Tempus)",
         "scope": DOMAIN,
-        "default_url": "https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736177025",
+        "default_url": "https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736177027&idp=1254735976596",
         "format": "json",
     },
     "ine_eaes_tempus": {
         "name": "INE - Encuesta Anual de Estructura Salarial (API Tempus)",
         "scope": DOMAIN,
-        "default_url": "https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736177039",
+        "default_url": "https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736177025&idp=1254735976596",
         "format": "json",
     },
     "dg_empl_lmp": {

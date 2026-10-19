@@ -70,7 +70,15 @@ export function CategoryBars({ rows, unit = "pct", digits = 1, highlight = [], m
 // Paired bars around a zero line: e.g. GDP change vs employment change per country in a recession.
 export function PairedBars({ rows, measures, unit = "growth", label }) {
   const extent = Math.max(1, ...rows.flatMap((row) => measures.map((m) => Math.abs(row[m.key] ?? 0))));
-  const width = (value) => `${(Math.abs(value) / extent) * 36}%`; // leaves room for the value labels
+  // Each half of the cell keeps room for the value label («+3,26 millones», «+41,2 %») so it never leaves the figure on a phone.
+  const width = (value) => `calc(${(Math.abs(value) / extent).toFixed(4)} * max(16px, 50% - 4.2rem))`;
+  // Short labels so they fit beside the bar on a phone: «+3,26 M», «−804 mil», «+41,2 %».
+  const valueLabel = (value) => {
+    if (!unit.includes("thousands")) return fmt(value, unit);
+    const n = Math.abs(value);
+    const sign = value < 0 ? "−" : unit === "dthousands" && value > 0 ? "+" : "";
+    return n >= 1000 ? `${sign}${num(n / 1000, 2)} M` : `${sign}${num(n, 0)} mil`;
+  };
   return (
     <div role="table" aria-label={label} style={{ display: "grid", gap: 10 }}>
       {measures.length > 1 ? (
@@ -118,7 +126,7 @@ export function PairedBars({ rows, measures, unit = "growth", label }) {
                       ...(negative ? { right: `calc(50% + ${width(value)} + 4px)` } : { left: `calc(50% + ${width(value)} + 4px)` }),
                     }}
                   >
-                    {fmt(value, unit)}
+                    {valueLabel(value)}
                   </span>
                 </div>
               );

@@ -13,6 +13,20 @@ export default function ChapterParo({ data, epaBreaks, reform }) {
   const S = sources(data);
   const u = data.unemployment;
   const m = h.mean_since_1980;
+  const SHORT = { DEU_W: "Alemania Occidental" };
+  // 1960-1974 averages of the peers (AMECO), to place Spain before the gap opened.
+  const early = (() => {
+    const avg = (pts) => {
+      const v = (pts || []).filter((p) => p.year <= 1974).map((p) => p.value);
+      return v.length ? v.reduce((a, b) => a + b, 0) / v.length : null;
+    };
+    const rows = ["DEU_W", "FRA", "ITA", "PRT"].map((a) => ({ a, v: avg(data.unemployment.peers[a]) })).filter((r) => r.v != null);
+    const join = (list) => (list.length > 1 ? `${list.slice(0, -1).join(", ")} y ${list.at(-1)}` : list[0] || "");
+    return {
+      lowNames: join(rows.filter((r) => r.v < h.es_mean_1960_1974).map((r) => `${SHORT[r.a] || NAMES[r.a]} (${pct(r.v)})`)),
+      highNames: join(rows.filter((r) => r.v >= h.es_mean_1960_1974).map((r) => `${SHORT[r.a] || NAMES[r.a]} (${pct(r.v)})`)),
+    };
+  })();
 
   const longRun = [
     { id: "ESP", label: "España (AMECO, desde la EPA)", shortLabel: "España", color: C.blue, emphasis: true, points: u.amecos.ESP },
@@ -54,7 +68,7 @@ export default function ChapterParo({ data, epaBreaks, reform }) {
       <Fig
         id="paro"
         title={`Desde ${h.hypothesis_from}, el paro de España ha sido de media ${num(h.ratio_mean_since)} veces el europeo`}
-        dek={`España tuvo un paro parecido al europeo hasta mediados de los setenta (${pct(h.es_mean_1960_1974)} de media en 1960–1974). Desde 1980 la distancia solo se estrechó en el auge previo a 2008: picos del ${pct(h.peaks.max_1980s.value)} (${h.peaks.max_1980s.year}), ${pct(h.peaks.max_1990s.value)} (${h.peaks.max_1990s.year}) y ${pct(h.peaks.max_crisis.value)} (${h.peaks.max_crisis.year}); mínimo del ${pct(h.peaks.min_pre_crisis.value)} en ${h.peaks.min_pre_crisis.year}.`}
+        dek={`España tuvo un paro parecido al europeo hasta ${h.before_years[1]} (${num(h.ratio_mean_before_gap, 2)} veces de media en ${h.before_years[0]}–${h.before_years[1]}, los primeros años con media europea en AMECO; ${pct(h.es_mean_1960_1974)} de paro español en 1960–1974). Desde 1980 la distancia solo se estrechó en el auge previo a 2008: picos del ${pct(h.peaks.max_1980s.value)} (${h.peaks.max_1980s.year}), ${pct(h.peaks.max_1990s.value)} (${h.peaks.max_1990s.year}) y ${pct(h.peaks.max_crisis.value)} (${h.peaks.max_crisis.year}); mínimo del ${pct(h.peaks.min_pre_crisis.value)} en ${h.peaks.min_pre_crisis.year}.`}
         legend={longRun}
         sources={[S.ameco, S.ine]}
         notes={[
@@ -65,7 +79,7 @@ export default function ChapterParo({ data, epaBreaks, reform }) {
         explain={{
           what: "El porcentaje de la población activa (quien trabaja o busca trabajo) que está en paro, en España y en la media europea, cada año desde 1960.",
           read: "Cuanto más se separa la línea azul de las grises, mayor es la brecha con Europa. La media europea cambia de países dos veces (UE-15 con la Alemania Occidental, UE-15, UE-27): por eso son tres líneas distintas y no una sola.",
-          not: "Los años sesenta no son comparables con hoy: la emigración a Europa y el trabajo en el campo familiar rebajaban el paro medido. Tampoco dice por qué la brecha aparece a partir de 1975.",
+          not: "Los años sesenta no son comparables con hoy: la emigración a Europa y el trabajo en el campo familiar rebajaban el paro medido. Tampoco dice por qué la brecha aparece a partir de " + h.gap_from_year + ".",
         }}
       >
         <TimeSeriesChart
@@ -98,7 +112,7 @@ export default function ChapterParo({ data, epaBreaks, reform }) {
       <Fig
         id="paises"
         title={`Desde ${h.hypothesis_from}, el paro medio de España (${pct(m.ESP)}) casi duplica el de Italia (${pct(m.ITA)}), Francia (${pct(m.FRA)}) y Portugal (${pct(m.PRT)})`}
-        dek={`Alemania: ${pct(m.DEU)}. Cada país en su panel, con la misma escala vertical. Antes de 1975 España no tenía más paro que sus vecinos.`}
+        dek={`Alemania: ${pct(m.DEU)}. Cada país en su panel, con la misma escala vertical. En 1960–1974 el paro español (${pct(h.es_mean_1960_1974)} de media) estaba por encima del de ${early.lowNames} y por debajo del de ${early.highNames}.`}
         legend={[
           { id: "ESP", label: "España", color: C.blue },
           { id: "other", label: "País de comparación", color: C.ref },

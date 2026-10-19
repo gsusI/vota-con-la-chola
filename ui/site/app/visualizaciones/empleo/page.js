@@ -78,7 +78,7 @@ export default function EmpleoPage() {
           </span>
         </div>
         <div className="card vizStat">
-          <span className="vizStat__label">Asalariados temporales</span>
+          <span className="vizStat__label">Asalariados temporales (15 a 64 años, Eurostat)</span>
           <span className="vizStat__value">{pct(h.temp_es_last)}</span>
           <span className="vizStat__note">
             {pct(h.temp_es_2021)} en 2021; fijos discontinuos (EPA): {num(h.discont_k_2021, 0)} mil → {num(h.discont_k_last, 0)} mil
