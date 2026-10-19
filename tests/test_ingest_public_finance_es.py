@@ -85,6 +85,14 @@ class IngestPublicFinanceTest(unittest.TestCase):
         self.assertEqual(values, {"ES": [("2023", 4.0), ("2024", 4.1)], "DE": [("2024", 4.5)]})
         self.assertIn("cofog99=GF09", batches["GF09"][1][0]["key"])
 
+    def test_eu_silc_series_are_declared(self) -> None:
+        # The tax page's «bolsillo» figures need EU-SILC median income and housing cost next to the national accounts.
+        names = {spec["name"]: spec for spec in ingest.EUROSTAT_DATASETS}
+        self.assertEqual(names["ilc_di03_pps"]["filters"]["statinfo"], ["MED_EI", "MEAN_EI"])
+        self.assertIn("RENT_MKT", names["ilc_lvho07c"]["filters"]["tenure"])
+        self.assertIn("B_60", names["ilc_mded01"]["filters"]["rskpovth"])
+        self.assertEqual(len(names), len(ingest.EUROSTAT_DATASETS))  # raw file stems must be unique
+
     def test_lineage_relation_mapping(self) -> None:
         self.assertEqual(ingest.relation_type("SE DEROGA"), "deroga")
         self.assertEqual(ingest.relation_type("SE AÑADE"), "modifica")

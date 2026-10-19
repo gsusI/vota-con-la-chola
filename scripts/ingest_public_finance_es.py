@@ -495,6 +495,36 @@ EUROSTAT_DATASETS: list[dict[str, Any]] = [
         "consumo final de los hogares.",
     },
     {
+        "name": "ilc_di03_pps", "dataset": "ilc_di03",
+        "filters": {"unit": "PPS", "age": "TOTAL", "sex": "T", "statinfo": ["MED_EI", "MEAN_EI"]},
+        "unit_code": "PPS", "unit_label": "Estándar de poder adquisitivo",
+        "label": "Renta neta equivalente de los hogares (EU-SILC), {label}, en PPS",
+        "definition": "Renta disponible neta del hogar dividida por sus unidades de consumo (escala OCDE modificada) y asignada a "
+        "cada miembro; encuesta EU-SILC. La renta se refiere al año anterior al de la encuesta en casi todos los países.",
+    },
+    {
+        "name": "ilc_di03_nac", "dataset": "ilc_di03",
+        "filters": {"unit": "NAC", "age": "TOTAL", "sex": "T", "statinfo": ["MED_EI", "MEAN_EI"]},
+        "unit_code": "NAC", "unit_label": "Moneda nacional (euros)",
+        "label": "Renta neta equivalente de los hogares (EU-SILC), {label}, en moneda nacional",
+        "definition": "Como la serie en PPS, en euros corrientes; sirve para calcular su cambio real con el IPCA.",
+    },
+    {
+        "name": "ilc_mded01", "dataset": "ilc_mded01", "filters": {"unit": "PC", "hhcomp": "TOTAL", "rskpovth": ["TOTAL", "B_60"]},
+        "unit_code": "PC", "unit_label": "% de la renta disponible del hogar",
+        "label": "Peso de los gastos de vivienda en la renta disponible de los hogares (EU-SILC), {label}",
+        "definition": "Gastos de vivienda (alquiler o intereses de la hipoteca, suministros, comunidad, reparaciones, seguros e "
+        "impuestos de la vivienda, netos de ayudas a la vivienda) en % de la renta disponible del hogar. "
+        "B_60 = hogares en riesgo de pobreza (renta por debajo del 60 % de la mediana).",
+    },
+    {
+        "name": "ilc_lvho07c", "dataset": "ilc_lvho07c", "filters": {"unit": "PC", "tenure": ["TOTAL", "RENT_MKT", "OWN_L"]},
+        "unit_code": "PC", "unit_label": "% de la población",
+        "label": "Sobrecarga del coste de la vivienda (EU-SILC): {label}",
+        "definition": "Porcentaje de la población que vive en hogares cuyos gastos de vivienda netos de ayudas superan el 40 % de su "
+        "renta disponible, por régimen de tenencia.",
+    },
+    {
         "name": "gov_10a_exp", "dataset": "gov_10a_exp",
         "filters": {"unit": "PC_GDP", "sector": "S13", "na_item": "TE", "cofog99": COFOG},
         "unit_code": "PC_GDP", "unit_label": "% del PIB",

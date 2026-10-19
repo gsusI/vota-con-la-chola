@@ -5,7 +5,7 @@ import Figure, { SeriesTable } from "../components/Figure";
 import { formatValue } from "../components/format.mjs";
 import { StatutoryRatesFigure, ComplexityFigures } from "./sections";
 import ConsolidatedBars from "./ConsolidatedBars";
-import { SqueezeFigure, SqueezeIndexFigure } from "./Squeeze";
+import { SqueezeFigure, SqueezeIndexFigure, SurveyFigure } from "./Squeeze";
 import { SpendingSectionIntro, WhereItGoesFigure, DecompositionFigure, LongRunSpendingFigure } from "./WhereItGoes";
 
 export const metadata = {
@@ -223,6 +223,7 @@ export default function CargaFiscalPage() {
       </section>
 
       {data.squeeze ? <SqueezeFigure squeeze={data.squeeze} /> : null}
+      {data.squeeze?.survey ? <SurveyFigure squeeze={data.squeeze} /> : null}
 
       {esRow ? (
         <Figure

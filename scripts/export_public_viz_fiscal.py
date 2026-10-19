@@ -76,23 +76,23 @@ class Store:
         self.conn = conn
         self.provenance: dict[str, list[dict]] = defaultdict(list)
 
-    def series(self, source_id: str, indicator_code: str, unit_code: str) -> dict[str, list[dict]]:
+    def series(self, source_id: str, indicator_code: str, unit_code: str, dataset_code: str | None = None) -> dict[str, list[dict]]:
         """Latest release of an indicator as {geography_code: [observation]}; deleted rows are dropped."""
         row = self.conn.execute(
             """
             SELECT r.indicator_release_id, r.source_url, r.source_content_sha256, r.source_snapshot_date,
                    r.source_metadata_json
             FROM indicator_definitions d JOIN indicator_releases r USING (indicator_id)
-            WHERE d.source_id = ? AND d.indicator_code = ? AND d.unit_code = ?
+            WHERE d.source_id = ? AND d.indicator_code = ? AND d.unit_code = ? AND (? IS NULL OR d.dataset_code = ?)
             ORDER BY r.source_snapshot_date DESC, r.created_at DESC LIMIT 1
             """,
-            (source_id, indicator_code, unit_code),
+            (source_id, indicator_code, unit_code, dataset_code, dataset_code),
         ).fetchone()
         if row is None:
             raise LookupError(f"indicator {source_id}:{indicator_code}:{unit_code} not loaded")
         release_id, url, sha, snapshot, meta = row
         self.provenance[source_id].append({
-            "indicator": f"{indicator_code} ({unit_code})", "url": url, "sha256": sha,
+            "indicator": f"{dataset_code + ' ' if dataset_code else ''}{indicator_code} ({unit_code})", "url": url, "sha256": sha,
             "snapshot_date": snapshot, "retrieved_at": json.loads(meta or "{}").get("retrieved_at"),
         })
         out: dict[str, list[dict]] = defaultdict(list)
@@ -233,9 +233,37 @@ def squeeze(store: Store) -> dict:
     cpi = store.annual("worldbank_wdi", "FP.CPI.TOTL", "IDX2010", "ESP")
     cpi_last = max(y for y in oecd_eur if y in pop and y in cpi)
     cpi_real = lambda y: oecd_eur[y] * 1e9 / pop[y] / cpi[y]  # noqa: E731
+    survey = household_survey(store, year)
     return {
-        "year": year, "base_year": SQUEEZE_BASE, "index_last_year": idx_last, "areas": areas,
+        "year": year, "base_year": SQUEEZE_BASE, "index_last_year": idx_last, "areas": areas, "survey": survey,
         "spain_cpi_check": {"from": SQUEEZE_BASE, "to": cpi_last, "real_tax_change_pct": r((cpi_real(cpi_last) / cpi_real(SQUEEZE_BASE) - 1) * 100, 1)},
+    }
+
+
+# EU-SILC: what the typical household has and what housing takes from it.
+SURVEY = [
+    ("median_income_pps", "ilc_di03", "TOTAL.T.MED_EI", "PPS"),
+    ("mean_income_pps", "ilc_di03", "TOTAL.T.MEAN_EI", "PPS"),
+    ("housing_cost_share", "ilc_mded01", "TOTAL.TOTAL", "PC"),
+    ("housing_cost_share_poor", "ilc_mded01", "TOTAL.B_60", "PC"),
+    ("overburden", "ilc_lvho07c", "TOTAL", "PC"),
+    ("overburden_renters", "ilc_lvho07c", "RENT_MKT", "PC"),
+    ("overburden_mortgage", "ilc_lvho07c", "OWN_L", "PC"),
+]
+
+
+def household_survey(store: Store, income_year: int) -> dict:
+    """Latest EU-SILC wave every area reports, preferring the wave whose income year matches the tax year."""
+    data = {
+        key: {g: {int(p["period"]): p["value"] for p in rows} for g, rows in store.series("eurostat_sdmx", code, unit, dataset).items()}
+        for key, dataset, code, unit in SURVEY
+    }
+    common = set.intersection(*(set(series.get(g, {})) for series in data.values() for g in EU_AREAS))
+    # EU-SILC income refers to the year before the survey (all six areas here).
+    wave = income_year + 1 if income_year + 1 in common else max(common)
+    return {
+        "survey_year": wave, "income_year": wave - 1,
+        "areas": [{"area": g, **{key: r(data[key][g][wave], 1) for key in data}} for g in EU_AREAS],
     }
 
 
@@ -500,6 +528,9 @@ def write_csv(data: dict, path: Path) -> None:
             rows.append(("eurostat_sdmx", field, row["area"], sq["year"], row[field]))
         for field in ("real_tax_index", "real_income_index"):
             rows.extend(("eurostat_sdmx", f"{field}_{sq['base_year']}_100", row["area"], p["year"], p["value"]) for p in row[field])
+    sv = sq["survey"]
+    for row in sv["areas"]:
+        rows.extend(("eurostat_sdmx", f"eu_silc_{key}", row["area"], sv["survey_year"], row[key]) for key, *_ in SURVEY)
     sp = data["spending"]
     for row in sp["areas"]:
         for field in ("total", "revenue", "balance", "pay", *(f["key"] for f in sp["functions"])):
