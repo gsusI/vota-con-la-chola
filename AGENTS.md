@@ -158,6 +158,13 @@ What we take from those references (the checklist; name the references and copy 
   sector or education mix) from what changed within groups (per pensioner, per worker, age-standardised, by origin).
 - Distribution: averages hide who bears it; show the split by income (quintile or decile), age and, where relevant,
   tenure or education.
+- Typical cases, not the average person: a national mean is not a person (the 16 % housing share is low because most
+  over-65s own outright, while young renters in Madrid pay several times that). Each vertical picks the 2–4 dimensions
+  that split its reality (not every possible cut) and shows a few typical cases with the national figure beside them.
+  Cases are shared across verticals with one definition each (same age, tenure, place); age stages are 16–29 / 30–44 /
+  45–64 / 65+, labelled with the source's real band; territory is the autonomous community plus the second level that
+  separates in that vertical. Where no official cross exists, say the figure comes from the marginal cut. Contract and
+  current cases: `docs/etl/sprints/VIZ-SEGMENTOS-20261019/README.md`.
 - Territory: show the dispersion between autonomous communities when it is larger than the gap with peer countries,
   and for anything set or financed regionally.
 - Reading width by element: running text (paragraphs, notes, captions, headings) is capped at a reading measure
