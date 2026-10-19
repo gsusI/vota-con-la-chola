@@ -87,7 +87,7 @@ página a otra. Las cifras están en cada informe; esta tabla dice en qué caso 
 
 | Persona | Vivienda | Empleo | Educación | Sanidad | Fiscalidad |
 |---|---|---|---|---|---|
-| **1. Joven (25–29), asalariada, vive sola de alquiler en la ciudad de Madrid** | B | B | 5 (si es extranjera) | Lucía | A |
+| **1. Joven (25–34, el tramo del sueldo neto joven del INE), asalariada, vive sola de alquiler en la ciudad de Madrid** | B | B | 5 (si es extranjera) | Lucía | A |
 | **2. Pareja de 30–44 con hijos, hipoteca o alquiler en un área metropolitana** | C / D | — | 1 / 2 (sus hijos) | — | B |
 | **3. Adulto de 45–64 con poca formación, en el sur** | — | A / F | 3 (sus hijos), 6 | Antonio | — |
 | **4. Pensionista de 65 años o más, propietario sin hipoteca, en una provincia del interior** | A | — | 6 (generación) | Carmen | D |
