@@ -455,3 +455,130 @@
     display: none;
   }
 }
+
+.sq__track--three {
+  height: 27px;
+}
+
+.sq__bar--a {
+  top: 1px;
+  height: 7px;
+}
+
+.sq__bar--b {
+  top: 10px;
+  height: 7px;
+}
+
+.sq__bar--c {
+  top: 19px;
+  height: 7px;
+}
+
+/* Pension spending split (PensionSplit). */
+.psplit {
+  display: grid;
+  gap: 6px;
+}
+
+.psplit__row {
+  display: grid;
+  grid-template-columns: minmax(84px, 110px) minmax(0, 1fr) minmax(0, 1.4fr);
+  gap: 10px;
+  align-items: center;
+  font-size: 0.82rem;
+}
+
+.psplit__row[data-highlight="true"] .psplit__label {
+  font-weight: 800;
+}
+
+.psplit__tick {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--viz-grid);
+}
+
+.psplit__net {
+  position: absolute;
+  top: -3px;
+  bottom: -3px;
+  width: 3px;
+  margin-left: -1.5px;
+  background: var(--viz-ink);
+}
+
+.psplit__values {
+  font-variant-numeric: tabular-nums;
+  color: var(--viz-ink-2);
+}
+
+.psplit__values small {
+  color: var(--viz-muted);
+}
+
+.psplit__na {
+  color: var(--viz-muted);
+  font-size: 0.78rem;
+}
+
+.psplit__axis .dbars__track {
+  height: 14px;
+}
+
+@media (max-width: 640px) {
+  .psplit__row {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+}
+
+/* Territory: ranked top-rate bars (Territory.js). */
+.rbars {
+  display: grid;
+  gap: 3px;
+}
+
+.rbars__row {
+  display: grid;
+  grid-template-columns: minmax(120px, 240px) minmax(0, 1fr) minmax(110px, 190px);
+  gap: 10px;
+  align-items: center;
+  font-size: 0.82rem;
+}
+
+.rbars__row[data-kind="peer"] .rbars__label,
+.rbars__row[data-kind="ref"] .rbars__label {
+  font-style: italic;
+}
+
+.rbars__track {
+  position: relative;
+  height: 14px;
+}
+
+.rbars__bar {
+  position: absolute;
+  top: 2px;
+  bottom: 2px;
+  left: 0;
+  border-radius: 0 2px 2px 0;
+}
+
+.rbars__value {
+  font-variant-numeric: tabular-nums;
+  color: var(--viz-ink);
+}
+
+.rbars__value small {
+  color: var(--viz-muted);
+}
+
+@media (max-width: 640px) {
+  .rbars__row {
+    grid-template-columns: 1fr;
+    gap: 1px;
+  }
+}

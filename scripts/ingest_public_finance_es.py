@@ -60,10 +60,40 @@ LOCAL_SOURCES: dict[str, dict[str, str]] = {
         "default_url": "https://db.nomics.world/OECD/DSD_REV_COMP_OECD@DF_RSOECD",
         "format": "json",
     },
+    "oecd_income_distribution": {
+        "name": "OCDE - Income Distribution Database (réplica DBnomics)",
+        "scope": "finanzas_publicas",
+        "default_url": "https://db.nomics.world/OECD/DSD_WISE_IDD@DF_IDD",
+        "format": "json",
+    },
+    "oecd_taxing_wages": {
+        "name": "OCDE - Taxing Wages, tablas comparativas (réplica DBnomics)",
+        "scope": "finanzas_publicas",
+        "default_url": "https://db.nomics.world/OECD/DSD_TAX_WAGES_COMP@DF_TW_COMP",
+        "format": "json",
+    },
+    "oecd_tax_database": {
+        "name": "OCDE - Tax Database, tipos del impuesto sobre la renta personal (réplica DBnomics)",
+        "scope": "finanzas_publicas",
+        "default_url": "https://db.nomics.world/OECD/DSD_TAX_PIT@DF_PIT_TOP_EARN_THRESH",
+        "format": "json",
+    },
     "worldbank_wdi": {
         "name": "Banco Mundial - World Development Indicators (API v2)",
         "scope": "finanzas_publicas",
         "default_url": "https://api.worldbank.org/v2/",
+        "format": "json",
+    },
+    "aeat_irpf_stats": {
+        "name": "AEAT - Estadística de los declarantes del IRPF (tablas por tramos y por comunidad, curado)",
+        "scope": "finanzas_publicas",
+        "default_url": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/",
+        "format": "json",
+    },
+    "hacienda_ccaa": {
+        "name": "Ministerio de Hacienda - tributación autonómica, liquidación del sistema de financiación y presupuestos liquidados de las CCAA (curado)",
+        "scope": "finanzas_publicas",
+        "default_url": "https://www.hacienda.gob.es/es-ES/Areas%20Tematicas/Financiacion%20Autonomica/Paginas/Inicio.aspx",
         "format": "json",
     },
     "vclc_tax_law_rates": {
@@ -89,6 +119,7 @@ OECD_CATEGORIES = {
 OECD_UNITS = {"PT_B1GQ": "% del PIB", "XDC": "Miles de millones de moneda nacional (euros)"}
 AREA_META = {
     "ESP": ("España", "ISO3166-1-alpha-3", "country"),
+    "OECD": ("OCDE (media)", "OECD-aggregate", "aggregate"),
     "DEU": ("Alemania", "ISO3166-1-alpha-3", "country"),
     "FRA": ("Francia", "ISO3166-1-alpha-3", "country"),
     "ITA": ("Italia", "ISO3166-1-alpha-3", "country"),
@@ -436,6 +467,126 @@ def parse_oecd(raw: Raw) -> Iterable[Batch]:
         }, series
 
 
+IDD_DATASET = "DSD_WISE_IDD@DF_IDD"
+IDD_MEASURES = {
+    "INC_MRKT_GINI": "Gini de la renta de mercado (antes de impuestos y transferencias)",
+    "INC_GROSS_GINI": "Gini de la renta bruta (después de transferencias, antes de impuestos)",
+    "INC_DISP_GINI": "Gini de la renta disponible (después de impuestos y transferencias)",
+}
+IDD_AGES = {"_T": "toda la población", "Y18T65": "población de 18 a 65 años"}
+
+
+def idd_url() -> str:
+    dims = {"REF_AREA": [a for a in OECD_AREAS if a != "OECD_REP"], "MEASURE": list(IDD_MEASURES), "AGE": list(IDD_AGES),
+            "METHODOLOGY": ["METH2012"], "DEFINITION": ["D_CUR"]}
+    return f"https://api.db.nomics.world/v22/series/OECD/{IDD_DATASET}?" + urllib.parse.urlencode(
+        {"dimensions": json.dumps(dims, separators=(",", ":")), "observations": 1, "limit": 500}
+    )
+
+
+def parse_oecd_idd(raw: Raw) -> Iterable[Batch]:
+    grouped: dict[tuple[str, str], list[dict[str, Any]]] = {}
+    for doc_index, doc in enumerate(raw.data["series"]["docs"]):
+        dims = doc["dimensions"]
+        if dims.get("MEASURE") not in IDD_MEASURES or dims.get("AGE") not in IDD_AGES:
+            continue
+        obs = [
+            {"period": period, "value": value, "pointer": pointer("series", "docs", doc_index, "value", i), "cell_index": i}
+            for i, (period, value) in enumerate(zip(doc["period"], doc["value"]))
+            if isinstance(value, (int, float))
+        ]
+        grouped.setdefault((dims["MEASURE"], dims["AGE"]), []).append(
+            area_series(f"{IDD_DATASET}|{doc['series_code']}", dims["REF_AREA"], dims, obs))
+    for (measure, age), series in sorted(grouped.items()):
+        yield {
+            "source_id": "oecd_income_distribution", "dataset_code": IDD_DATASET, "indicator_code": f"{measure}.{age}",
+            "frequency_code": "A", "frequency_label": "Anual", "unit_code": "0_TO_1", "unit_label": "Índice de Gini (0–1)",
+            "label": f"{IDD_MEASURES[measure]}, {IDD_AGES[age]}",
+            "definition": "OCDE Income Distribution Database, definición de renta desde 2012. Renta de mercado: salarios, rentas "
+            "del trabajo autónomo y del capital; bruta: más transferencias públicas (pensiones incluidas); disponible: menos "
+            "impuestos directos y cotizaciones pagadas por los hogares. Leído de la réplica DBnomics (oecd.org bloquea scripts).",
+            "methodology_url": "https://www.oecd.org/en/data/datasets/income-and-wealth-distribution-database.html",
+            "source_url": f"https://db.nomics.world/OECD/{IDD_DATASET}",
+        }, series
+
+
+TW_DATASET = "DSD_TAX_WAGES_COMP@DF_TW_COMP"
+TW_LEVELS = {"AW67": "67 %", "AW100": "100 %", "AW167": "167 %"}
+
+
+def tw_url() -> str:
+    dims = {"REF_AREA": [a for a in OECD_AREAS if a != "OECD_REP"] + ["OECD"], "MEASURE": ["AV_TW"],
+            "HOUSEHOLD_TYPE": ["S_C0"], "INCOME_PRINCIPAL": list(TW_LEVELS), "UNIT_MEASURE": ["PT_COS_LB"]}
+    return f"https://api.db.nomics.world/v22/series/OECD/{TW_DATASET}?" + urllib.parse.urlencode(
+        {"dimensions": json.dumps(dims, separators=(",", ":")), "observations": 1, "limit": 500}
+    )
+
+
+def parse_oecd_tw(raw: Raw) -> Iterable[Batch]:
+    grouped: dict[str, list[dict[str, Any]]] = {}
+    for doc_index, doc in enumerate(raw.data["series"]["docs"]):
+        dims = doc["dimensions"]
+        level = dims.get("INCOME_PRINCIPAL")
+        if level not in TW_LEVELS or dims.get("HOUSEHOLD_TYPE") != "S_C0" or dims.get("MEASURE") != "AV_TW":
+            continue
+        obs = [
+            {"period": period, "value": value, "pointer": pointer("series", "docs", doc_index, "value", i), "cell_index": i}
+            for i, (period, value) in enumerate(zip(doc["period"], doc["value"]))
+            if isinstance(value, (int, float))
+        ]
+        grouped.setdefault(level, []).append(area_series(f"{TW_DATASET}|{doc['series_code']}", dims["REF_AREA"], dims, obs))
+    for level, series in sorted(grouped.items()):
+        yield {
+            "source_id": "oecd_taxing_wages", "dataset_code": TW_DATASET, "indicator_code": f"AV_TW.S_C0.{level}",
+            "frequency_code": "A", "frequency_label": "Anual", "unit_code": "PT_COS_LB", "unit_label": "% del coste laboral",
+            "label": f"Cuña fiscal media, soltero sin hijos que gana el {TW_LEVELS[level]} del salario medio",
+            "definition": "OCDE Taxing Wages: impuesto sobre la renta y cotizaciones del trabajador y de la empresa, menos "
+            "prestaciones en efectivo, en % del coste laboral total. Leído de la réplica DBnomics (oecd.org bloquea scripts).",
+            "methodology_url": "https://www.oecd.org/en/topics/sub-issues/tax-wedge.html",
+            "source_url": f"https://db.nomics.world/OECD/{TW_DATASET}",
+        }, series
+
+
+PIT_DATASET = "DSD_TAX_PIT@DF_PIT_TOP_EARN_THRESH"
+PIT_MEASURES = {
+    "TS_PIT": ("PT_WG_EARN_G", "% del salario bruto", "Tipo marginal máximo legal del impuesto sobre la renta (todas las administraciones)"),
+    "TS_PIT_TH": ("FCTR_WG_A_SAL_A", "Veces el salario medio", "Umbral de renta a partir del que se aplica el tipo máximo"),
+}
+
+
+def pit_url() -> str:
+    dims = {"REF_AREA": [a for a in OECD_AREAS if a != "OECD_REP"], "MEASURE": list(PIT_MEASURES)}
+    return f"https://api.db.nomics.world/v22/series/OECD/{PIT_DATASET}?" + urllib.parse.urlencode(
+        {"dimensions": json.dumps(dims, separators=(",", ":")), "observations": 1, "limit": 500}
+    )
+
+
+def parse_oecd_pit(raw: Raw) -> Iterable[Batch]:
+    grouped: dict[str, list[dict[str, Any]]] = {}
+    for doc_index, doc in enumerate(raw.data["series"]["docs"]):
+        dims = doc["dimensions"]
+        measure = dims.get("MEASURE")
+        if measure not in PIT_MEASURES or dims.get("UNIT_MEASURE") != PIT_MEASURES[measure][0]:
+            continue
+        obs = [
+            {"period": period, "value": value, "pointer": pointer("series", "docs", doc_index, "value", i), "cell_index": i}
+            for i, (period, value) in enumerate(zip(doc["period"], doc["value"]))
+            if isinstance(value, (int, float))
+        ]
+        grouped.setdefault(measure, []).append(area_series(f"{PIT_DATASET}|{doc['series_code']}", dims["REF_AREA"], dims, obs))
+    for measure, series in sorted(grouped.items()):
+        unit, unit_label, label = PIT_MEASURES[measure]
+        yield {
+            "source_id": "oecd_tax_database", "dataset_code": PIT_DATASET, "indicator_code": measure,
+            "frequency_code": "A", "frequency_label": "Anual", "unit_code": unit, "unit_label": unit_label, "label": label,
+            "definition": "OCDE Tax Database, tabla I.7: tipo marginal máximo combinado (central y subcentral) del impuesto "
+            "sobre la renta personal; para España la OCDE usa la media de las escalas autonómicas. Leído de la réplica "
+            "DBnomics (oecd.org bloquea scripts).",
+            "methodology_url": "https://www.oecd.org/en/data/datasets/oecd-tax-database.html",
+            "source_url": f"https://db.nomics.world/OECD/{PIT_DATASET}",
+        }, series
+
+
 EUROSTAT_API = "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data"
 EUROSTAT_GEOS = ["ES", "DE", "FR", "IT", "PT", "EU27_2020"]
 
@@ -523,6 +674,37 @@ EUROSTAT_DATASETS: list[dict[str, Any]] = [
         "label": "Sobrecarga del coste de la vivienda (EU-SILC): {label}",
         "definition": "Porcentaje de la población que vive en hogares cuyos gastos de vivienda netos de ayudas superan el 40 % de su "
         "renta disponible, por régimen de tenencia.",
+    },
+    {
+        "name": "nama_10_pe", "dataset": "nama_10_pe", "filters": {"unit": "THS_PER", "na_item": ["POP_NC", "EMP_DC"]},
+        "unit_code": "THS_PER", "unit_label": "Miles de personas",
+        "label": "Población y empleo (contabilidad nacional): {label}",
+        "definition": "Población residente total (POP_NC) y personas ocupadas en el territorio (EMP_DC), media anual, SEC 2010.",
+    },
+    {
+        "name": "spr_pns_ben", "dataset": "spr_pns_ben",
+        "filters": {"unit": "PER", "spdepm": "TOTAL", "spscheme": "TOTAL", "sex": "T", "spdepb": ["OLD_SRV", "TOTAL"]},
+        "unit_code": "PER", "unit_label": "Personas",
+        "label": "Personas que cobran pensión (ESSPROS): {label}",
+        "definition": "Beneficiarios de pensiones a final de año; cada persona cuenta una vez aunque cobre varias pensiones del tipo.",
+    },
+    {
+        "name": "ilc_di12", "dataset": "ilc_di12", "filters": {"age": "TOTAL", "statinfo": "GINI_HND"},
+        "unit_code": "GINI", "unit_label": "Índice de Gini (0–100)",
+        "label": "Gini de la renta disponible equivalente (EU-SILC)",
+        "definition": "Desigualdad de la renta disponible equivalente después de impuestos y transferencias.",
+    },
+    {
+        "name": "ilc_di12b", "dataset": "ilc_di12b", "filters": {"statinfo": "GINI_HND"},
+        "unit_code": "GINI", "unit_label": "Índice de Gini (0–100)",
+        "label": "Gini antes de transferencias sociales, pensiones incluidas en las transferencias (EU-SILC)",
+        "definition": "Desigualdad de la renta disponible equivalente si se quitan todas las transferencias sociales, pensiones incluidas.",
+    },
+    {
+        "name": "ilc_di12c", "dataset": "ilc_di12c", "filters": {"statinfo": "GINI_HND"},
+        "unit_code": "GINI", "unit_label": "Índice de Gini (0–100)",
+        "label": "Gini antes de transferencias sociales, pensiones contadas como renta (EU-SILC)",
+        "definition": "Desigualdad de la renta disponible equivalente si se quitan las transferencias sociales salvo las pensiones.",
     },
     {
         "name": "gov_10a_exp", "dataset": "gov_10a_exp",
@@ -626,6 +808,9 @@ API_SOURCES: list[tuple[str, str, Callable[[Raw], Iterable[Batch]]]] = [
         for code in IMF_FPP
     ],
     ("oecd_revenue_statistics_dbnomics.json", oecd_url(), parse_oecd),
+    ("oecd_income_distribution_dbnomics.json", idd_url(), parse_oecd_idd),
+    ("oecd_taxing_wages_dbnomics.json", tw_url(), parse_oecd_tw),
+    ("oecd_pit_top_rates_dbnomics.json", pit_url(), parse_oecd_pit),
     *[
         (f"eurostat_{spec['name']}.json", eurostat_url(spec["dataset"], spec["filters"]), parse_eurostat_dataset(spec))
         for spec in EUROSTAT_DATASETS
@@ -680,6 +865,115 @@ def load_rates(conn: sqlite3.Connection, snapshot_date: str) -> dict[str, int]:
             {"gaps": data.get("gaps", []), "blocked_hosts": data.get("blocked_hosts", [])},
             [area_series(f"statutory_rates_es|{key}|ESP", "ESP", {"rate": key}, obs)],
         )
+        for k in totals:
+            totals[k] += counts[k]
+    return totals
+
+
+# ---------------------------------------------------------------- AEAT IRPF by income bracket and by community
+
+IRPF_MEASURES = {
+    "declarations": ("COUNT", "Declaraciones", "Número de declaraciones (liquidaciones) del IRPF"),
+    "income_eur": ("EUR", "Euros", "Base imponible general + del ahorro (partidas 435 + 460)"),
+    "tax_eur": ("EUR", "Euros", "Cuota resultante de la autoliquidación (partida 595)"),
+}
+
+
+def load_irpf(conn: sqlite3.Connection, snapshot_date: str) -> dict[str, int]:
+    """AEAT declarants statistics as curated in irpf_by_bracket_es.json: one indicator per measure, series per bracket
+    (Spain, common regime) and per autonomous community, evidence pointing at the AEAT table page."""
+    path = MANUAL_DIR / "irpf_by_bracket_es.json"
+    if not path.exists():
+        return {"releases": 0, "observations": 0, "missing": 1}
+    payload = path.read_bytes()
+    data = json.loads(payload)
+    year = str(data["tax_year"])
+    totals = {"releases": 0, "observations": 0}
+    for measure, (unit, unit_label, label) in IRPF_MEASURES.items():
+        series = []
+        for i, row in enumerate(data["brackets"]):
+            series.append(area_series(
+                f"irpf_by_bracket|ESP|{row['label']}", "ESP", {"bracket": row["label"], "lower_eur": row.get("lower_eur"),
+                                                              "upper_eur": row.get("upper_eur"), "order": i},
+                [{"period": year, "value": row[measure], "pointer": pointer("brackets", i, measure), "cell_index": i,
+                  "evidence_url": data["source_url"], "raw": {"locator": row.get("locator")}}]))
+        series.append(area_series(
+            "irpf_by_bracket|ESP|Total", "ESP", {"bracket": "Total"},
+            [{"period": year, "value": data["totals"][measure], "pointer": pointer("totals", measure),
+              "evidence_url": data["source_url"], "raw": {"locator": data["totals"].get("locator")}}]))
+        for i, row in enumerate((data.get("by_ccaa") or {}).get("rows", [])):
+            series.append(area_series(
+                f"irpf_by_ccaa|{row['name']}", row["name"], {"bracket": "Total", "ccaa": row["name"]},
+                [{"period": year, "value": row[measure], "pointer": pointer("by_ccaa", "rows", i, measure), "cell_index": i,
+                  "evidence_url": (row.get("source_urls") or {}).get("595") or data["source_url"]}]))
+        definition = {
+            "source_id": "aeat_irpf_stats", "dataset_code": "irpf_declarantes", "indicator_code": f"irpf.{measure}",
+            "frequency_code": "A", "frequency_label": "Anual (ejercicio fiscal)", "unit_code": unit, "unit_label": unit_label,
+            "label": f"IRPF: {label}", "extraction_method": "curated_table_cell",
+            "definition": f"{label}. {data['definitions'].get('bracket', '')} Régimen común (sin País Vasco ni Navarra).",
+            "methodology_url": data.get("publication_home"), "source_url": data["source_url"],
+        }
+        counts = load_indicator(conn, definition, sha256_bytes(payload), len(payload), rel(path), data["source_url"],
+                                snapshot_date, {"retrieved_at": data.get("retrieved"), "gaps": data.get("gaps", [])}, series)
+        for k in totals:
+            totals[k] += counts[k]
+    return totals
+
+
+# ---------------------------------------------------------------- Autonomous communities (curated from Hacienda, INE)
+
+REGIONAL = [
+    # file, field, indicator_code, unit, unit_label, label, source_key
+    ("regional_irpf_top_rates_2025.json", "total_top_rate_pct", "irpf_top_rate_total", "PC", "%",
+     "Tipo marginal máximo del IRPF (estatal + autonómico, o foral) sobre la base general", None),
+    ("regional_irpf_top_rates_2025.json", "regional_top_rate_pct", "irpf_top_rate_regional", "PC", "%",
+     "Tipo marginal máximo de la escala autonómica del IRPF", None),
+    ("regional_irpf_top_rates_2025.json", "threshold_eur", "irpf_top_rate_regional_threshold", "EUR", "Euros",
+     "Base liquidable a partir de la que se aplica el tipo autonómico (o foral) máximo", None),
+    ("regional_public_finance_es.json", "financing_per_adj_inhabitant_eur", "financing_homogeneous_per_adj_inhabitant", "EUR", "Euros por habitante ajustado",
+     "Financiación a competencias homogéneas por habitante ajustado, antes de fondos de convergencia (régimen común)", "financing"),
+    ("regional_public_finance_es.json", "financing_after_convergence_funds_per_adj_inhabitant_eur", "financing_after_funds_per_adj_inhabitant", "EUR",
+     "Euros por habitante ajustado", "Financiación homogénea más fondos de Competitividad y Cooperación por habitante ajustado (derivado)", "financing"),
+    ("regional_public_finance_es.json", "spending_per_inhabitant_eur", "spending_nonfinancial_per_inhabitant", "EUR", "Euros por habitante",
+     "Gasto no financiero liquidado de la comunidad (consolidado, sin participación de entes locales ni PAC) por habitante", "spending"),
+    ("regional_public_finance_es.json", "gdp_per_inhabitant_eur", "gdp_per_inhabitant", "EUR", "Euros por habitante",
+     "PIB por habitante (INE, Contabilidad Regional)", "gdp"),
+]
+
+
+def load_regional(conn: sqlite3.Connection, snapshot_date: str) -> dict[str, int]:
+    """Curated regional files (one row per community, with source URL, sha256 and locator) as indicators."""
+    totals = {"releases": 0, "observations": 0}
+    cache: dict[str, tuple[bytes, dict]] = {}
+    for name, field, code, unit, unit_label, label, source_key in REGIONAL:
+        path = MANUAL_DIR / name
+        if not path.exists():
+            continue
+        if name not in cache:
+            payload = path.read_bytes()
+            cache[name] = (payload, json.loads(payload))
+        payload, data = cache[name]
+        year = str(data["year"])
+        series = []
+        for i, row in enumerate(data["rows"]):
+            src = (row.get("fields_sources") or {}).get(source_key) if source_key else row
+            if row.get(field) is None:
+                continue
+            series.append(area_series(
+                f"{code}|{row['code']}", row["code"], {"name": row["name"], "regime": row["regime"]},
+                [{"period": year, "value": row[field], "pointer": pointer("rows", i, field), "cell_index": i,
+                  "evidence_url": (src or {}).get("source_url") or (src or {}).get("url"),
+                  "status": row.get("confidence"),
+                  "raw": {"locator": (src or {}).get("locator"), "sha256": (src or {}).get("sha256")}}]))
+        definition = {
+            "source_id": "hacienda_ccaa", "dataset_code": name.removesuffix(".json"), "indicator_code": code,
+            "frequency_code": "A", "frequency_label": "Anual", "unit_code": unit, "unit_label": unit_label, "label": label,
+            "extraction_method": "curated_table_cell",
+            "definition": (data.get("definitions") or {}).get(field) or data.get("source_note") or label,
+            "source_url": "https://www.hacienda.gob.es/es-ES/Areas%20Tematicas/Financiacion%20Autonomica/Paginas/Inicio.aspx",
+        }
+        counts = load_indicator(conn, definition, sha256_bytes(payload), len(payload), rel(path), definition["source_url"],
+                                snapshot_date, {"gaps": data.get("gaps", [])}, series)
         for k in totals:
             totals[k] += counts[k]
     return totals
@@ -813,6 +1107,8 @@ def main() -> int:
                                         args.snapshot_date, meta, series)
                 report["indicators"][f"{definition['source_id']}:{definition['indicator_code']}:{definition['unit_code']}"] = counts
         report["statutory_rates"] = load_rates(conn, args.snapshot_date)
+        report["irpf_by_bracket"] = load_irpf(conn, args.snapshot_date)
+        report["regional"] = load_regional(conn, args.snapshot_date)
         report["complexity"] = load_complexity(conn, args.snapshot_date)
     fk = conn.execute("PRAGMA foreign_key_check").fetchall()
     if fk:

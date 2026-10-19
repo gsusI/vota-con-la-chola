@@ -13,6 +13,7 @@ import argparse
 import csv
 import hashlib
 import io
+import math
 import json
 import sqlite3
 import sys
@@ -40,6 +41,11 @@ SOURCE_PAGES = {
     "imf_fpp": ("FMI · Public Finances in Modern History (Mauro, Romeu, Binder y Zaman, 2015)", "https://www.imf.org/external/datamapper/datasets/FPP"),
     "oecd_revenue_statistics": ("OCDE · Revenue Statistics, tablas comparativas (réplica DBnomics)", "https://db.nomics.world/OECD/DSD_REV_COMP_OECD@DF_RSOECD"),
     "eurostat_sdmx": ("Eurostat · contabilidad nacional: gov_10a_taxag, gov_10a_main, gov_10a_exp (COFOG), nama_10_pc, tec00113, nasa_10_ki", "https://ec.europa.eu/eurostat/databrowser/view/gov_10a_exp/default/table"),
+    "oecd_income_distribution": ("OCDE · Income Distribution Database (réplica DBnomics)", "https://db.nomics.world/OECD/DSD_WISE_IDD@DF_IDD"),
+    "oecd_taxing_wages": ("OCDE · Taxing Wages (réplica DBnomics)", "https://db.nomics.world/OECD/DSD_TAX_WAGES_COMP@DF_TW_COMP"),
+    "oecd_tax_database": ("OCDE · Tax Database, tipo máximo del IRPF (réplica DBnomics)", "https://db.nomics.world/OECD/DSD_TAX_PIT@DF_PIT_TOP_EARN_THRESH"),
+    "hacienda_ccaa": ("Ministerio de Hacienda · Tributación autonómica 2025, liquidación del sistema de financiación y presupuestos liquidados de las CCAA 2024; INE, Contabilidad Regional", "https://www.hacienda.gob.es/es-ES/Areas%20Tematicas/Financiacion%20Autonomica/Paginas/Inicio.aspx"),
+    "aeat_irpf_stats": ("AEAT · Estadística de los declarantes del IRPF", "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/"),
     "worldbank_wdi": ("Banco Mundial · población (SP.POP.TOTL) e IPC (FP.CPI.TOTL)", "https://data.worldbank.org/indicator/FP.CPI.TOTL?locations=ES"),
     "vclc_tax_law_rates": ("Tipos legales: una norma o fuente citada por cambio", "https://www.boe.es/"),
     "boe_api_legal": ("BOE · API de legislación consolidada", "https://www.boe.es/datosabiertos/api/api.php"),
@@ -48,7 +54,10 @@ SOURCE_PAGES = {
 
 EU_AREAS = ["ES", "DE", "FR", "IT", "PT", "EU27_2020"]
 EU_TO_OECD = {"ES": "ESP", "DE": "DEU", "FR": "FRA", "IT": "ITA", "PT": "PRT"}
-SQUEEZE_BASE = 2008
+SQUEEZE_BASE = 2000  # default base: mid-cycle, before the housing bubble's revenue peak (2007)
+SQUEEZE_BASES = [2000, 2007, 2008, 2013, 2019]  # every base is published so the choice is visible
+SPENDING_WINDOWS = [1995, 2000, 2007, 2013, 2019]
+PENSION_WINDOWS = [2007, 2013, 2019]  # ESSPROS pension beneficiaries start in 2006
 # Spending by function (COFOG). Pensions = old age + survivors; interest = public debt transactions (GF0107).
 FUNCTIONS = [
     ("pensions", "Pensiones (vejez y supervivencia)", ["GF1002", "GF1003"]),
@@ -205,37 +214,53 @@ def squeeze(store: Store) -> dict:
     eur_gdp = {g: {int(p["period"]): p["value"] for p in rows} for g, rows in store.series("eurostat_sdmx", "B1GQ", "CP_EUR_HAB").items()}
     hicp = {g: {int(p["period"]): p["value"] for p in rows} for g, rows in store.series("eurostat_sdmx", "CP00", "INX_A_AVG").items()}
     real_inc = {g: {int(p["period"]): p["value"] for p in rows} for g, rows in store.series("eurostat_sdmx", "B7G_R_HAB_2010.S14_S15", "IDX2010").items()}
+    pop = {g: {int(p["period"]): p["value"] for p in rows} for g, rows in store.series("eurostat_sdmx", "POP_NC", "THS_PER").items()}
+    emp = {g: {int(p["period"]): p["value"] for p in rows} for g, rows in store.series("eurostat_sdmx", "EMP_DC", "THS_PER").items()}
     year = max(set.intersection(*(set(tax[g]) & set(gdp[g]) & set(inc[g]) for g in EU_AREAS)))
-    idx_last = max(set.intersection(*(set(tax[g]) & set(eur_gdp[g]) & set(hicp[g]) & set(real_inc[g]) for g in EU_AREAS)))
+    idx_last = max(set.intersection(*(set(tax[g]) & set(eur_gdp[g]) & set(hicp[g]) & set(real_inc[g]) & set(emp[g]) for g in EU_AREAS)))
+    start = min(SQUEEZE_BASES)
     eu_ratio = tax["EU27_2020"][year] / gdp["EU27_2020"][year]
     areas = []
     for g in EU_AREAS:
         tax_pps = tax[g][year] / 100 * gdp[g][year]
+        span = [y for y in range(start, idx_last + 1) if all(y in d[g] for d in (tax, eur_gdp, hicp, real_inc, pop, emp))]
         # Real taxes per person = tax share x GDP per person in euros / consumer prices (HICP); real income uses the
         # household consumption deflator. Both are consumer-price deflators, so the two indices are comparable.
-        real_tax = {
-            y: tax[g][y] / 100 * eur_gdp[g][y] / hicp[g][y] for y in range(SQUEEZE_BASE, idx_last + 1)
-            if y in tax[g] and y in eur_gdp[g] and y in hicp[g]
+        real_tax = {y: tax[g][y] / 100 * eur_gdp[g][y] / hicp[g][y] for y in span}
+        # Per employed person: removes the part that comes from more people working (employment rate, migration).
+        real_tax_worker = {y: real_tax[y] * pop[g][y] / emp[g][y] for y in span}
+        index = lambda series, base: {y: v / series[base] * 100 for y, v in series.items()}  # noqa: E731
+        income = {y: real_inc[g][y] for y in span}
+        change = lambda series, base: r((series[idx_last] / series[base] - 1) * 100, 1)  # noqa: E731
+        by_base = {
+            str(b): {
+                "tax": change(real_tax, b), "tax_worker": change(real_tax_worker, b), "income": change(income, b),
+                "employment_rate": [r(emp[g][b] / pop[g][b] * 100, 1), r(emp[g][idx_last] / pop[g][idx_last] * 100, 1)],
+                "population_change": r((pop[g][idx_last] / pop[g][b] - 1) * 100, 1),
+            }
+            for b in SQUEEZE_BASES if b in real_tax
         }
-        tax_idx = {y: v / real_tax[SQUEEZE_BASE] * 100 for y, v in real_tax.items()}
-        inc_idx = {y: real_inc[g][y] / real_inc[g][SQUEEZE_BASE] * 100 for y in range(SQUEEZE_BASE, idx_last + 1) if y in real_inc[g]}
         areas.append({
             "area": g, "tax_pct_gdp": r(tax[g][year], 1), "gdp_pps": r(gdp[g][year], 0), "tax_pps": r(tax_pps, 0),
             "income_pps": r(inc[g][year], 0), "tax_to_income_pct": r(tax_pps / inc[g][year] * 100, 1),
             # Frank "esfuerzo fiscal": tax burden divided by GDP per person, EU-27 = 100.
             "effort_index": r(tax[g][year] / gdp[g][year] / eu_ratio * 100, 1),
-            "real_tax_change_pct": r(tax_idx[idx_last] - 100, 1), "real_income_change_pct": r(inc_idx[idx_last] - 100, 1),
-            "real_tax_index": points(tax_idx, 1), "real_income_index": points(inc_idx, 1),
+            "real_tax_change_pct": by_base[str(SQUEEZE_BASE)]["tax"], "real_income_change_pct": by_base[str(SQUEEZE_BASE)]["income"],
+            "real_tax_worker_change_pct": by_base[str(SQUEEZE_BASE)]["tax_worker"],
+            "by_base": by_base,
+            "real_tax_index": points(index(real_tax, start), 1), "real_tax_worker_index": points(index(real_tax_worker, start), 1),
+            "real_income_index": points(index(income, start), 1),
         })
     # Cross-check for Spain with a different deflator: OECD revenue in euros / population / CPI.
     oecd_eur = store.annual("oecd_revenue_statistics", "TAX_REV.S13._T", "XDC", "ESP")
-    pop = store.annual("worldbank_wdi", "SP.POP.TOTL", "PERSONS", "ESP")
+    wb_pop = store.annual("worldbank_wdi", "SP.POP.TOTL", "PERSONS", "ESP")
     cpi = store.annual("worldbank_wdi", "FP.CPI.TOTL", "IDX2010", "ESP")
-    cpi_last = max(y for y in oecd_eur if y in pop and y in cpi)
-    cpi_real = lambda y: oecd_eur[y] * 1e9 / pop[y] / cpi[y]  # noqa: E731
+    cpi_last = max(y for y in oecd_eur if y in wb_pop and y in cpi)
+    cpi_real = lambda y: oecd_eur[y] * 1e9 / wb_pop[y] / cpi[y]  # noqa: E731
     survey = household_survey(store, year)
     return {
-        "year": year, "base_year": SQUEEZE_BASE, "index_last_year": idx_last, "areas": areas, "survey": survey,
+        "year": year, "base_year": SQUEEZE_BASE, "bases": SQUEEZE_BASES, "index_first_year": start, "index_last_year": idx_last,
+        "areas": areas, "survey": survey,
         "spain_cpi_check": {"from": SQUEEZE_BASE, "to": cpi_last, "real_tax_change_pct": r((cpi_real(cpi_last) / cpi_real(SQUEEZE_BASE) - 1) * 100, 1)},
     }
 
@@ -308,7 +333,7 @@ def spending(store: Store) -> dict:
     # Spain: decomposition of the change by function, in % of GDP and in real euros per person (2010 prices).
     es_parts = {y: parts("ES", y) for y in sorted(cofog["TOTAL"]["ES"]) if parts("ES", y)}
     windows = []
-    for start in (min(es_parts), 2007):
+    for start in [y for y in SPENDING_WINDOWS if y in es_parts]:
         p0, p1 = es_parts[start], es_parts[year]
         g0, g1 = real_gdp["ES"][start], real_gdp["ES"][year]
         tr0, tr1 = main["TR"]["ES"][start], main["TR"]["ES"][year]
@@ -324,10 +349,39 @@ def spending(store: Store) -> dict:
                 for k, _label, _codes in FUNCTIONS
             ],
         })
+    # Pensions: % of GDP = (pensioners / population) x (spending per pensioner / GDP per person). The log split says how
+    # much of the change comes from more pensioners and how much from more per pensioner relative to income.
+    ben = {g: {int(p["period"]): p["value"] for p in rows} for g, rows in store.series("eurostat_sdmx", "T.OLD_SRV.TOTAL.TOTAL", "PER").items()}
+    pop = {g: {int(p["period"]): p["value"] * 1000 for p in rows} for g, rows in store.series("eurostat_sdmx", "POP_NC", "THS_PER").items()}
+    eur_gdp = {g: {int(p["period"]): p["value"] for p in rows} for g, rows in store.series("eurostat_sdmx", "B1GQ", "CP_EUR_HAB").items()}
+    hicp = {g: {int(p["period"]): p["value"] for p in rows} for g, rows in store.series("eurostat_sdmx", "CP00", "INX_A_AVG").items()}
+    pens_last = max(set.intersection(*(set(ben.get(g, {})) & set(cofog["GF1002"].get(g, {})) for g in EU_AREAS)))
+    pension_rows = []
+    for g in EU_AREAS:
+        pens = lambda y: cofog["GF1002"][g][y] + cofog["GF1003"][g][y]  # noqa: E731
+        share = lambda y: ben[g][y] / pop[g][y]  # noqa: E731
+        per_ben = lambda y: pens(y) / 100 * eur_gdp[g][y] * pop[g][y] / ben[g][y]  # noqa: E731
+        windows_g = {}
+        for b in PENSION_WINDOWS:
+            if not all(b in d.get(g, {}) for d in (ben, cofog["GF1002"], cofog["GF1003"], pop, eur_gdp, hicp)):
+                continue
+            delta = pens(pens_last) - pens(b)
+            total_log = math.log(pens(pens_last) / pens(b))
+            demo_log = math.log(share(pens_last) / share(b))
+            windows_g[str(b)] = {
+                "pensions_pct": [r(pens(b), 1), r(pens(pens_last), 1)], "change_pts": r(delta, 2),
+                "from_more_pensioners_pts": r(delta * demo_log / total_log, 2) if total_log else None,
+                "from_more_per_pensioner_pts": r(delta * (1 - demo_log / total_log), 2) if total_log else None,
+                "pensioners_per_100": [r(share(b) * 100, 1), r(share(pens_last) * 100, 1)],
+                "real_per_pensioner_change_pct": r((per_ben(pens_last) / hicp[g][pens_last]) / (per_ben(b) / hicp[g][b]) * 100 - 100, 1),
+                "real_gdp_pp_change_pct": r((eur_gdp[g][pens_last] / hicp[g][pens_last]) / (eur_gdp[g][b] / hicp[g][b]) * 100 - 100, 1),
+            }
+        pension_rows.append({"area": g, "per_pensioner_eur": r(per_ben(pens_last), 0), "windows": windows_g})
     imf = {code: store.annual("imf_fpp", code, "PT_GDP", "ESP") for code in ("rev", "exp", "ie", "d")}
     return {
         "year": year, "functions": [{"key": k, "label": label, "cofog": codes} for k, label, codes in FUNCTIONS],
         "areas": areas, "spain_windows": windows,
+        "pension_composition": {"year": pens_last, "windows": PENSION_WINDOWS, "areas": pension_rows},
         "spain_series": {
             "revenue_pct_gdp": points(main["TR"]["ES"], 1), "spending_pct_gdp": points(main["TE"]["ES"], 1),
             "interest_pct_gdp": points(main["D41PAY"]["ES"], 1), "pay_pct_gdp": points(main["D1PAY"]["ES"], 1),
@@ -339,6 +393,149 @@ def spending(store: Store) -> dict:
             "imf_interest_pct_gdp": points(imf["ie"], since=FIRST_YEAR),
             "imf_debt_pct_gdp": points(imf["d"], since=FIRST_YEAR),
         },
+    }
+
+
+OECD_PEERS = ["ESP", "DEU", "FRA", "ITA", "PRT"]
+
+
+def distribution(store: Store) -> dict:
+    """Who carries it: IRPF by income bracket (AEAT), redistribution by stage (OECD IDD), tax wedge by wage level."""
+    conn = store.conn
+    out: dict = {}
+    # AEAT brackets: series dimensions carry the bracket label and order.
+    rel_rows = {}
+    for measure in ("declarations", "income_eur", "tax_eur"):
+        store.series("aeat_irpf_stats", f"irpf.{measure}", {"declarations": "COUNT"}.get(measure, "EUR"))  # provenance
+        for geo, dims, period, value in conn.execute(
+            """
+            SELECT s.geography_code, s.dimensions_json, o.period_label, o.value_decimal
+            FROM indicator_definitions d JOIN indicator_releases r USING (indicator_id)
+            JOIN indicator_series_versions s ON s.indicator_release_id = r.indicator_release_id
+            JOIN indicator_observation_versions o ON o.indicator_series_version_id = s.indicator_series_version_id
+            WHERE d.source_id = 'aeat_irpf_stats' AND d.indicator_code = ? AND o.revision_state != 'deleted'
+              AND r.indicator_release_id = (SELECT r2.indicator_release_id FROM indicator_releases r2
+                WHERE r2.indicator_id = d.indicator_id ORDER BY r2.source_snapshot_date DESC, r2.created_at DESC LIMIT 1)
+            """,
+            (f"irpf.{measure}",),
+        ):
+            dim = json.loads(dims)
+            key = (geo, dim.get("bracket"))
+            rel_rows.setdefault(key, {"geo": geo, **dim, "year": int(period)})[measure] = float(value)
+    if rel_rows:
+        brackets = sorted((v for (geo, b), v in rel_rows.items() if geo == "ESP" and b != "Total"), key=lambda v: v["order"])
+        total = rel_rows[("ESP", "Total")]
+        rate = lambda v: r(v["tax_eur"] / v["income_eur"] * 100, 1) if v["income_eur"] > 0 else None  # noqa: E731
+        out["irpf"] = {
+            "tax_year": total["year"],
+            "brackets": [
+                {"label": v["bracket"], "lower_eur": v.get("lower_eur"), "upper_eur": v.get("upper_eur"),
+                 "declarations": int(v["declarations"]), "income_eur": r(v["income_eur"], 0), "tax_eur": r(v["tax_eur"], 0),
+                 "effective_rate_pct": rate(v),
+                 "share_declarations_pct": r(v["declarations"] / total["declarations"] * 100, 2),
+                 "share_tax_pct": r(v["tax_eur"] / total["tax_eur"] * 100, 2)}
+                for v in brackets
+            ],
+            "total": {"declarations": int(total["declarations"]), "income_eur": r(total["income_eur"], 0),
+                      "tax_eur": r(total["tax_eur"], 0), "effective_rate_pct": rate(total)},
+            "by_ccaa": sorted(
+                [{"name": geo, "declarations": int(v["declarations"]), "income_mean_eur": r(v["income_eur"] / v["declarations"], 0),
+                  "tax_mean_eur": r(v["tax_eur"] / v["declarations"], 0), "effective_rate_pct": rate(v)}
+                 for (geo, b), v in rel_rows.items() if geo != "ESP"],
+                key=lambda row: -row["effective_rate_pct"]),
+        }
+    # OECD IDD: Gini of market, gross (after transfers) and disposable income (after taxes), latest common year per country.
+    stages = {}
+    for age in ("_T", "Y18T65"):
+        g = {m: {a: {int(p["period"]): p["value"] for p in rows} for a, rows in
+                 store.series("oecd_income_distribution", f"{m}.{age}", "0_TO_1").items()}
+             for m in ("INC_MRKT_GINI", "INC_GROSS_GINI", "INC_DISP_GINI")}
+        rows = []
+        for a in OECD_PEERS:
+            years = set.intersection(*(set(g[m].get(a, {})) for m in g))
+            if not years:
+                continue
+            y = max(years)
+            m, gr, d = (g[k][a][y] * 100 for k in ("INC_MRKT_GINI", "INC_GROSS_GINI", "INC_DISP_GINI"))
+            rows.append({"area": a, "year": y, "market": r(m, 1), "gross": r(gr, 1), "disposable": r(d, 1),
+                         "by_transfers": r(m - gr, 1), "by_taxes": r(gr - d, 1)})
+        stages[age] = rows
+    out["redistribution"] = stages
+    # OECD Taxing Wages: average tax wedge, single person without children, at 67 / 100 / 167 % of the average wage.
+    wedge = {lvl: {a: {int(p["period"]): p["value"] for p in rows} for a, rows in
+                   store.series("oecd_taxing_wages", f"AV_TW.S_C0.{lvl}", "PT_COS_LB").items()} for lvl in ("AW67", "AW100", "AW167")}
+    w_last = max(set.intersection(*(set(wedge[l].get(a, {})) for l in wedge for a in OECD_PEERS)))
+    w_first = min(set.intersection(*(set(wedge[l].get(a, {})) for l in wedge for a in OECD_PEERS)))
+    out["tax_wedge"] = {
+        "year": w_last, "first_year": w_first,
+        "areas": [{"area": a, **{lvl: [r(wedge[lvl][a][w_first], 1), r(wedge[lvl][a][w_last], 1)] for lvl in wedge}} for a in OECD_PEERS],
+    }
+    top = {a: {int(p["period"]): p["value"] for p in rows} for a, rows in store.series("oecd_tax_database", "TS_PIT", "PT_WG_EARN_G").items()}
+    thr = {a: {int(p["period"]): p["value"] for p in rows} for a, rows in store.series("oecd_tax_database", "TS_PIT_TH", "FCTR_WG_A_SAL_A").items()}
+    t_last = max(set.intersection(*(set(top.get(a, {})) for a in OECD_PEERS)))
+    out["top_rates"] = {"year": t_last, "areas": [
+        {"area": a, "top_rate_pct": r(top[a][t_last], 1), "threshold_x_avg_wage": r(thr.get(a, {}).get(t_last), 1)} for a in OECD_PEERS]}
+    return out
+
+
+AEAT_CCAA = {
+    "Andalucía": "AN", "Aragón": "AR", "Asturias, Principado de": "AS", "Balears, Illes": "IB", "Canarias": "CN",
+    "Cantabria": "CB", "Castilla y León": "CL", "Castilla - La Mancha": "CM", "Cataluña": "CT", "Comunitat Valenciana": "VC",
+    "Extremadura": "EX", "Galicia": "GA", "Madrid, Comunidad de": "MD", "Murcia, Región de": "MC", "Rioja, La": "RI",
+}
+REGIONAL_FIELDS = {
+    "top_rate_pct": ("irpf_top_rate_total", "PC"),
+    "regional_top_rate_pct": ("irpf_top_rate_regional", "PC"),
+    "regional_threshold_eur": ("irpf_top_rate_regional_threshold", "EUR"),
+    "financing_per_adj_inhabitant_eur": ("financing_homogeneous_per_adj_inhabitant", "EUR"),
+    "financing_after_funds_per_adj_inhabitant_eur": ("financing_after_funds_per_adj_inhabitant", "EUR"),
+    "spending_per_inhabitant_eur": ("spending_nonfinancial_per_inhabitant", "EUR"),
+    "gdp_per_inhabitant_eur": ("gdp_per_inhabitant", "EUR"),
+}
+
+
+def territory(store: Store, distribution_block: dict) -> dict | None:
+    """Autonomous communities: top IRPF rate (common and foral), financing, spending and GDP per person, IRPF paid per
+    return (AEAT), against the peers' top rates (OECD)."""
+    rows: dict[str, dict] = {}
+    years = {}
+    for key, (code, unit) in REGIONAL_FIELDS.items():
+        try:
+            series = store.series("hacienda_ccaa", code, unit)
+        except LookupError:
+            return None
+        for geo, obs in series.items():
+            rows.setdefault(geo, {"code": geo})[key] = r(obs[-1]["value"], 2)
+            years[key] = int(obs[-1]["period"])
+    names = {}
+    regimes = {}
+    for geo, dims in store.conn.execute(
+        """
+        SELECT s.geography_code, s.dimensions_json FROM indicator_series_versions s
+        JOIN indicator_definitions d USING (indicator_id) WHERE d.source_id = 'hacienda_ccaa'
+        """
+    ):
+        dim = json.loads(dims)
+        names[geo] = dim.get("name")
+        regimes[geo] = dim.get("regime")
+    for geo, row in rows.items():
+        row["name"] = names.get(geo)
+        row["regime"] = regimes.get(geo)
+    for item in (distribution_block.get("irpf") or {}).get("by_ccaa", []):
+        geo = AEAT_CCAA.get(item["name"])
+        if geo in rows:
+            rows[geo].update({"irpf_rate_pct": item["effective_rate_pct"], "irpf_tax_per_return_eur": item["tax_mean_eur"],
+                              "irpf_income_per_return_eur": item["income_mean_eur"]})
+    ordered = sorted(rows.values(), key=lambda row: -(row.get("top_rate_pct") or 0))
+    common = [row for row in ordered if row["regime"] == "comun"]
+    spread = lambda key: [min(row[key] for row in common if row.get(key) is not None), max(row[key] for row in common if row.get(key) is not None)]  # noqa: E731
+    return {
+        "years": years, "irpf_tax_year": (distribution_block.get("irpf") or {}).get("tax_year"),
+        "rows": ordered,
+        "spread_common": {key: spread(key) for key in ("top_rate_pct", "financing_per_adj_inhabitant_eur",
+                                                       "financing_after_funds_per_adj_inhabitant_eur", "spending_per_inhabitant_eur",
+                                                       "gdp_per_inhabitant_eur", "irpf_rate_pct")},
+        "peers_top_rates": distribution_block.get("top_rates"),
     }
 
 
@@ -456,6 +653,8 @@ def build(conn: sqlite3.Connection) -> dict:
     comp = complexity(conn)
     squeeze_block = squeeze(store)
     spending_block = spending(store)
+    distribution_block = distribution(store)
+    territory_block = territory(store, distribution_block)
     results = service_results()
 
     sources = {}
@@ -501,6 +700,8 @@ def build(conn: sqlite3.Connection) -> dict:
         "squeeze": squeeze_block,
         "spending": spending_block,
         "service_results": results,
+        "distribution": distribution_block,
+        "territory": territory_block,
         "statutory_rates": rates,
         "complexity": comp,
         "sources": sources,
@@ -540,6 +741,12 @@ def write_csv(data: dict, path: Path) -> None:
         rows.extend(("eurostat_sdmx", key, "ES", p["year"], p["value"]) for p in pts)
     for key, pts in sp["long_run"].items():
         rows.extend(("imf_fpp", key, "ESP", p["year"], p["value"]) for p in pts)
+    for row in (data.get("territory") or {}).get("rows", []):
+        for key in REGIONAL_FIELDS:
+            if row.get(key) is not None:
+                rows.append(("hacienda_ccaa", key, row["code"], data["territory"]["years"].get(key), row[key]))
+    for b in (data.get("distribution") or {}).get("irpf", {}).get("brackets", []):
+        rows.append(("aeat_irpf_stats", f"irpf_tipo_efectivo_{b['label']}", "ESP", data["distribution"]["irpf"]["tax_year"], b["effective_rate_pct"]))
     for ind in (data.get("service_results") or {}).get("indicators", []):
         rows.extend((f"visualizaciones/{ind['page']}", ind["key"], g, v["year"], v["value"]) for g, v in ind["values"].items())
     for key, changes in (data.get("statutory_rates") or {}).get("series", {}).items():

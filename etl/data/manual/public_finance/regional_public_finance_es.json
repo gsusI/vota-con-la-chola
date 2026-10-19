@@ -1,0 +1,768 @@
+{
+ "year": 2024,
+ "source_note": "All figures read from files downloaded 2026-10-19 into etl/data/raw/public_finance/manual/ (gitignored). Financing: Hacienda liquidation of the common-regime financing system 2024 (cuadros, published 2026). Spending: Hacienda liquidated budgets of the CCAA 2024 (definitive, consolidated, net of local-government participation in state revenue (IFL) and CAP pass-through (PAC)). GDP: INE CRE. Population: INE ECP.",
+ "national_reference": {
+  "financing_per_adj_inhabitant_eur_common_regime_total": 3475.53,
+  "gdp_per_inhabitant_eur_spain": 32708.0
+ },
+ "rows": [
+  {
+   "code": "AN",
+   "name": "Andalucía",
+   "regime": "comun",
+   "financing_per_adj_inhabitant_eur": 3412.27,
+   "financing_index_avg100": 98.2,
+   "financing_after_convergence_funds_per_adj_inhabitant_eur": 3488.39,
+   "adjusted_population": 8466186.0,
+   "spending_nonfinancial_total_eur": 35870249610.0,
+   "population_ecp_2024_07_01": 8648311.0,
+   "spending_per_inhabitant_eur": 4147.66,
+   "gdp_per_inhabitant_eur": 24714.0,
+   "fields_sources": {
+    "financing": {
+     "source": "Ministerio de Hacienda (SGFAL), Liquidación del sistema de financiación de las CCAA de régimen común 2024, Cuadros",
+     "url": "https://www.hacienda.gob.es/cdi/sist%20financiacion%20y%20deuda/informaci%C3%B3nccaa/cuadros-liquidacion-2024.pdf",
+     "sha256": "fc45b7a87948822de35f8d3aef0dc497628baea01f9ff35abc650d70e372a5bc",
+     "locator": "Cuadro 2.2.3 (p.36) row \"Andalucía\": col (5) Financiación homogénea por habitante ajustado = 3412.27 €; Total row col (5) = 3475.53 €"
+    },
+    "financing_after_convergence_funds": {
+     "source": "Ministerio de Hacienda (SGFAL), Liquidación del sistema de financiación de las CCAA de régimen común 2024, Cuadros",
+     "url": "https://www.hacienda.gob.es/cdi/sist%20financiacion%20y%20deuda/informaci%C3%B3nccaa/cuadros-liquidacion-2024.pdf",
+     "sha256": "fc45b7a87948822de35f8d3aef0dc497628baea01f9ff35abc650d70e372a5bc",
+     "locator": "[Cuadro 2.2.3 col (3) 28,888,885.04 + Cuadro 3 (p.42) col (7) Fondo de Competitividad 0.00 + col (8) Fondo de Cooperación 644,491.96] miles € / Cuadro 1.9.1 (p.17) col (23) población ajustada 8,466,186"
+    },
+    "spending": {
+     "source": "Ministerio de Hacienda, Liquidación de Presupuestos de las CCAA 2024 (definitivo), datos consolidados, Ingresos y Gastos por capítulos depurados IFL y PAC",
+     "url": "https://serviciostelematicosext.hacienda.gob.es/SGCIEF/PublicacionLiquidaciones/aspx/DescargaEconomicaDCD.aspx?cdcdad=01&ano=2024",
+     "sha256": "718e61561c49d42dccafa5e84b3ca7d70ab96b58beeb815e6612d9f4518b9e60",
+     "locator": "econ_dcd_01_2024.xlsx: entity \"Junta de Andalucía\", gastos row \"Operaciones no financieras\", col D Obligaciones Reconocidas Netas = 35870249.61 miles €"
+    },
+    "population": {
+     "source": "INE Estadística Continua de Población, tabla 56940",
+     "url": "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/56940?nult=8",
+     "sha256": "cbc935cfa5a94df9a7e69841c41e0ca3feff5cc51c701ab0cc4aa709469694bb",
+     "locator": "serie \"Total. Todas las edades. Andalucía. Población. Número.\", fecha 1 julio 2024 = 8648311"
+    },
+    "gdp": {
+     "source": "INE Contabilidad Regional de España, tabla 82285 (PIB per cápita, precios corrientes)",
+     "url": "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/82285?nult=4",
+     "sha256": "ce854cdeb6d94cb54582687f8780bfd216c73cbb95e8a6aed981b4bd632e1180",
+     "locator": "serie \"Andalucía. Dato base. Producto interior bruto a precios de mercado per capita\", Anyo 2024, FK_TipoDato=2"
+    }
+   }
+  },
+  {
+   "code": "AR",
+   "name": "Aragón",
+   "regime": "comun",
+   "financing_per_adj_inhabitant_eur": 3797.32,
+   "financing_index_avg100": 109.3,
+   "financing_after_convergence_funds_per_adj_inhabitant_eur": 3839.21,
+   "adjusted_population": 1435453.0,
+   "spending_nonfinancial_total_eur": 6762814460.0,
+   "population_ecp_2024_07_01": 1356309.0,
+   "spending_per_inhabitant_eur": 4986.19,
+   "gdp_per_inhabitant_eur": 36587.0,
+   "fields_sources": {
+    "financing": {
+     "source": "Ministerio de Hacienda (SGFAL), Liquidación del sistema de financiación de las CCAA de régimen común 2024, Cuadros",
+     "url": "https://www.hacienda.gob.es/cdi/sist%20financiacion%20y%20deuda/informaci%C3%B3nccaa/cuadros-liquidacion-2024.pdf",
+     "sha256": "fc45b7a87948822de35f8d3aef0dc497628baea01f9ff35abc650d70e372a5bc",
+     "locator": "Cuadro 2.2.3 (p.36) row \"Aragón\": col (5) Financiación homogénea por habitante ajustado = 3797.32 €; Total row col (5) = 3475.53 €"
+    },
+    "financing_after_convergence_funds": {
+     "source": "Ministerio de Hacienda (SGFAL), Liquidación del sistema de financiación de las CCAA de régimen común 2024, Cuadros",
+     "url": "https://www.hacienda.gob.es/cdi/sist%20financiacion%20y%20deuda/informaci%C3%B3nccaa/cuadros-liquidacion-2024.pdf",
+     "sha256": "fc45b7a87948822de35f8d3aef0dc497628baea01f9ff35abc650d70e372a5bc",
+     "locator": "[Cuadro 2.2.3 col (3) 5,450,874.14 + Cuadro 3 (p.42) col (7) Fondo de Competitividad 0.00 + col (8) Fondo de Cooperación 60,128.90] miles € / Cuadro 1.9.1 (p.17) col (23) población ajustada 1,435,453"
+    },
+    "spending": {
+     "source": "Ministerio de Hacienda, Liquidación de Presupuestos de las CCAA 2024 (definitivo), datos consolidados, Ingresos y Gastos por capítulos depurados IFL y PAC",
+     "url": "https://serviciostelematicosext.hacienda.gob.es/SGCIEF/PublicacionLiquidaciones/aspx/DescargaEconomicaDCD.aspx?cdcdad=02&ano=2024",
+     "sha256": "41b8dbbf54521c998ae826462b469e63783aee345bd9621015f908b9bf9ea4b8",
+     "locator": "econ_dcd_02_2024.xlsx: entity \"Comunidad Autónoma de Aragón\", gastos row \"Operaciones no financieras\", col D Obligaciones Reconocidas Netas = 6762814.46 miles €"
+    },
+    "population": {
+     "source": "INE Estadística Continua de Población, tabla 56940",
+     "url": "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/56940?nult=8",
+     "sha256": "cbc935cfa5a94df9a7e69841c41e0ca3feff5cc51c701ab0cc4aa709469694bb",
+     "locator": "serie \"Total. Todas las edades. Aragón. Población. Número.\", fecha 1 julio 2024 = 1356309"
+    },
+    "gdp": {
+     "source": "INE Contabilidad Regional de España, tabla 82285 (PIB per cápita, precios corrientes)",
+     "url": "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/82285?nult=4",
+     "sha256": "ce854cdeb6d94cb54582687f8780bfd216c73cbb95e8a6aed981b4bd632e1180",
+     "locator": "serie \"Aragón. Dato base. Producto interior bruto a precios de mercado per capita\", Anyo 2024, FK_TipoDato=2"
+    }
+   }
+  },
+  {
+   "code": "AS",
+   "name": "Principado de Asturias",
+   "regime": "comun",
+   "financing_per_adj_inhabitant_eur": 3668.03,
+   "financing_index_avg100": 105.5,
+   "financing_after_convergence_funds_per_adj_inhabitant_eur": 3844.44,
+   "adjusted_population": 1079477.0,
+   "spending_nonfinancial_total_eur": 5239759170.0,
+   "population_ecp_2024_07_01": 1010547.0,
+   "spending_per_inhabitant_eur": 5185.07,
+   "gdp_per_inhabitant_eur": 29400.0,
+   "fields_sources": {
+    "financing": {
+     "source": "Ministerio de Hacienda (SGFAL), Liquidación del sistema de financiación de las CCAA de régimen común 2024, Cuadros",
+     "url": "https://www.hacienda.gob.es/cdi/sist%20financiacion%20y%20deuda/informaci%C3%B3nccaa/cuadros-liquidacion-2024.pdf",
+     "sha256": "fc45b7a87948822de35f8d3aef0dc497628baea01f9ff35abc650d70e372a5bc",
+     "locator": "Cuadro 2.2.3 (p.36) row \"Principado de Asturias\": col (5) Financiación homogénea por habitante ajustado = 3668.03 €; Total row col (5) = 3475.53 €"
+    },
+    "financing_after_convergence_funds": {
+     "source": "Ministerio de Hacienda (SGFAL), Liquidación del sistema de financiación de las CCAA de régimen común 2024, Cuadros",
+     "url": "https://www.hacienda.gob.es/cdi/sist%20financiacion%20y%20deuda/informaci%C3%B3nccaa/cuadros-liquidacion-2024.pdf",
+     "sha256": "fc45b7a87948822de35f8d3aef0dc497628baea01f9ff35abc650d70e372a5bc",
+     "locator": "[Cuadro 2.2.3 col (3) 3,959,551.56 + Cuadro 3 (p.42) col (7) Fondo de Competitividad 0.00 + col (8) Fondo de Cooperación 190,427.75] miles € / Cuadro 1.9.1 (p.17) col (23) población ajustada 1,079,477"
+    },
+    "spending": {
+     "source": "Ministerio de Hacienda, Liquidación de Presupuestos de las CCAA 2024 (definitivo), datos consolidados, Ingresos y Gastos por capítulos depurados IFL y PAC",
+     "url": "https://serviciostelematicosext.hacienda.gob.es/SGCIEF/PublicacionLiquidaciones/aspx/DescargaEconomicaDCD.aspx?cdcdad=03&ano=2024",
+     "sha256": "51af6e0bd67d4d0bc1cf12143ffe756edfcedf07af1e04688170640fec55ee7f",
+     "locator": "econ_dcd_03_2024.xlsx: entity \"Principado de Asturias\", gastos row \"Operaciones no financieras\", col D Obligaciones Reconocidas Netas = 5239759.17 miles €"
+    },
+    "population": {
+     "source": "INE Estadística Continua de Población, tabla 56940",
+     "url": "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/56940?nult=8",
+     "sha256": "cbc935cfa5a94df9a7e69841c41e0ca3feff5cc51c701ab0cc4aa709469694bb",
+     "locator": "serie \"Total. Todas las edades. Asturias, Principado de. Población. Número.\", fecha 1 julio 2024 = 1010547"
+    },
+    "gdp": {
+     "source": "INE Contabilidad Regional de España, tabla 82285 (PIB per cápita, precios corrientes)",
+     "url": "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/82285?nult=4",
+     "sha256": "ce854cdeb6d94cb54582687f8780bfd216c73cbb95e8a6aed981b4bd632e1180",
+     "locator": "serie \"Asturias, Principado de. Dato base. Producto interior bruto a precios de mercado per capita\", Anyo 2024, FK_TipoDato=2"
+    }
+   }
+  },
+  {
+   "code": "IB",
+   "name": "Illes Balears",
+   "regime": "comun",
+   "financing_per_adj_inhabitant_eur": 2928.9,
+   "financing_index_avg100": 84.3,
+   "financing_after_convergence_funds_per_adj_inhabitant_eur": 3684.07,
+   "adjusted_population": 1211337.0,
+   "spending_nonfinancial_total_eur": 6190777580.0,
+   "population_ecp_2024_07_01": 1241571.0,
+   "spending_per_inhabitant_eur": 4986.25,
+   "gdp_per_inhabitant_eur": 36369.0,
+   "fields_sources": {
+    "financing": {
+     "source": "Ministerio de Hacienda (SGFAL), Liquidación del sistema de financiación de las CCAA de régimen común 2024, Cuadros",
+     "url": "https://www.hacienda.gob.es/cdi/sist%20financiacion%20y%20deuda/informaci%C3%B3nccaa/cuadros-liquidacion-2024.pdf",
+     "sha256": "fc45b7a87948822de35f8d3aef0dc497628baea01f9ff35abc650d70e372a5bc",
+     "locator": "Cuadro 2.2.3 (p.36) row \"Illes Balears\": col (5) Financiación homogénea por habitante ajustado = 2928.90 €; Total row col (5) = 3475.53 €"
+    },
+    "financing_after_convergence_funds": {
+     "source": "Ministerio de Hacienda (SGFAL), Liquidación del sistema de financiación de las CCAA de régimen común 2024, Cuadros",
+     "url": "https://www.hacienda.gob.es/cdi/sist%20financiacion%20y%20deuda/informaci%C3%B3nccaa/cuadros-liquidacion-2024.pdf",
+     "sha256": "fc45b7a87948822de35f8d3aef0dc497628baea01f9ff35abc650d70e372a5bc",
+     "locator": "[Cuadro 2.2.3 col (3) 3,547,882.70 + Cuadro 3 (p.42) col (7) Fondo de Competitividad 914,763.59 + col (8) Fondo de Cooperación 0.00] miles € / Cuadro 1.9.1 (p.17) col (23) población ajustada 1,211,337"
+    },
+    "spending": {
+     "source": "Ministerio de Hacienda, Liquidación de Presupuestos de las CCAA 2024 (definitivo), datos consolidados, Ingresos y Gastos por capítulos depurados IFL y PAC",
+     "url": "https://serviciostelematicosext.hacienda.gob.es/SGCIEF/PublicacionLiquidaciones/aspx/DescargaEconomicaDCD.aspx?cdcdad=04&ano=2024",
+     "sha256": "75a431861be9bd5b4a2b7fa631a3352fd15bd103acbeab14388ca5687c30609e",
+     "locator": "econ_dcd_04_2024.xlsx: entity \"Comunidad Autónoma de Las Illes Balears\", gastos row \"Operaciones no financieras\", col D Obligaciones Reconocidas Netas = 6190777.58 miles €"
+    },
+    "population": {
+     "source": "INE Estadística Continua de Población, tabla 56940",
+     "url": "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/56940?nult=8",
+     "sha256": "cbc935cfa5a94df9a7e69841c41e0ca3feff5cc51c701ab0cc4aa709469694bb",
+     "locator": "serie \"Total. Todas las edades. Balears, Illes. Población. Número.\", fecha 1 julio 2024 = 1241571"
+    },
+    "gdp": {
+     "source": "INE Contabilidad Regional de España, tabla 82285 (PIB per cápita, precios corrientes)",
+     "url": "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/82285?nult=4",
+     "sha256": "ce854cdeb6d94cb54582687f8780bfd216c73cbb95e8a6aed981b4bd632e1180",
+     "locator": "serie \"Balears, Illes. Dato base. Producto interior bruto a precios de mercado per capita\", Anyo 2024, FK_TipoDato=2"
+    }
+   }
+  },
+  {
+   "code": "CN",
+   "name": "Canarias",
+   "regime": "comun",
+   "financing_per_adj_inhabitant_eur": 3034.48,
+   "financing_index_avg100": 87.3,
+   "financing_after_convergence_funds_per_adj_inhabitant_eur": 3475.53,
+   "adjusted_population": 2273136.0,
+   "spending_nonfinancial_total_eur": 11352824610.0,
+   "population_ecp_2024_07_01": 2246943.0,
+   "spending_per_inhabitant_eur": 5052.56,
+   "gdp_per_inhabitant_eur": 25894.0,
+   "fields_sources": {
+    "financing": {
+     "source": "Ministerio de Hacienda (SGFAL), Liquidación del sistema de financiación de las CCAA de régimen común 2024, Cuadros",
+     "url": "https://www.hacienda.gob.es/cdi/sist%20financiacion%20y%20deuda/informaci%C3%B3nccaa/cuadros-liquidacion-2024.pdf",
+     "sha256": "fc45b7a87948822de35f8d3aef0dc497628baea01f9ff35abc650d70e372a5bc",
+     "locator": "Cuadro 2.2.3 (p.36) row \"Canarias\": col (5) Financiación homogénea por habitante ajustado = 3034.48 €; Total row col (5) = 3475.53 €"
+    },
+    "financing_after_convergence_funds": {
+     "source": "Ministerio de Hacienda (SGFAL), Liquidación del sistema de financiación de las CCAA de régimen común 2024, Cuadros",
+     "url": "https://www.hacienda.gob.es/cdi/sist%20financiacion%20y%20deuda/informaci%C3%B3nccaa/cuadros-liquidacion-2024.pdf",
+     "sha256": "fc45b7a87948822de35f8d3aef0dc497628baea01f9ff35abc650d70e372a5bc",
+     "locator": "[Cuadro 2.2.3 col (3) 6,897,785.31 + Cuadro 3 (p.42) col (7) Fondo de Competitividad 842,710.39 + col (8) Fondo de Cooperación 159,866.77] miles € / Cuadro 1.9.1 (p.17) col (23) población ajustada 2,273,136"
+    },
+    "spending": {
+     "source": "Ministerio de Hacienda, Liquidación de Presupuestos de las CCAA 2024 (definitivo), datos consolidados, Ingresos y Gastos por capítulos depurados IFL y PAC",
+     "url": "https://serviciostelematicosext.hacienda.gob.es/SGCIEF/PublicacionLiquidaciones/aspx/DescargaEconomicaDCD.aspx?cdcdad=05&ano=2024",
+     "sha256": "b6c210bbe1140a6b7238b0acb9f72d9238280c33acc10a2791621fb082a7161e",
+     "locator": "econ_dcd_05_2024.xlsx: entity \"Comunidad Autónoma de Canarias\", gastos row \"Operaciones no financieras\", col D Obligaciones Reconocidas Netas = 11352824.61 miles €"
+    },
+    "population": {
+     "source": "INE Estadística Continua de Población, tabla 56940",
+     "url": "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/56940?nult=8",
+     "sha256": "cbc935cfa5a94df9a7e69841c41e0ca3feff5cc51c701ab0cc4aa709469694bb",
+     "locator": "serie \"Total. Todas las edades. Canarias. Población. Número.\", fecha 1 julio 2024 = 2246943"
+    },
+    "gdp": {
+     "source": "INE Contabilidad Regional de España, tabla 82285 (PIB per cápita, precios corrientes)",
+     "url": "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/82285?nult=4",
+     "sha256": "ce854cdeb6d94cb54582687f8780bfd216c73cbb95e8a6aed981b4bd632e1180",
+     "locator": "serie \"Canarias. Dato base. Producto interior bruto a precios de mercado per capita\", Anyo 2024, FK_TipoDato=2"
+    }
+   }
+  },
+  {
+   "code": "CB",
+   "name": "Cantabria",
+   "regime": "comun",
+   "financing_per_adj_inhabitant_eur": 4380.49,
+   "financing_index_avg100": 126.0,
+   "financing_after_convergence_funds_per_adj_inhabitant_eur": 4565.5,
+   "adjusted_population": 600790.0,
+   "spending_nonfinancial_total_eur": 3117403050.0,
+   "population_ecp_2024_07_01": 591395.0,
+   "spending_per_inhabitant_eur": 5271.27,
+   "gdp_per_inhabitant_eur": 30011.0,
+   "fields_sources": {
+    "financing": {
+     "source": "Ministerio de Hacienda (SGFAL), Liquidación del sistema de financiación de las CCAA de régimen común 2024, Cuadros",
+     "url": "https://www.hacienda.gob.es/cdi/sist%20financiacion%20y%20deuda/informaci%C3%B3nccaa/cuadros-liquidacion-2024.pdf",
+     "sha256": "fc45b7a87948822de35f8d3aef0dc497628baea01f9ff35abc650d70e372a5bc",
+     "locator": "Cuadro 2.2.3 (p.36) row \"Cantabria\": col (5) Financiación homogénea por habitante ajustado = 4380.49 €; Total row col (5) = 3475.53 €"
+    },
+    "financing_after_convergence_funds": {
+     "source": "Ministerio de Hacienda (SGFAL), Liquidación del sistema de financiación de las CCAA de régimen común 2024, Cuadros",
+     "url": "https://www.hacienda.gob.es/cdi/sist%20financiacion%20y%20deuda/informaci%C3%B3nccaa/cuadros-liquidacion-2024.pdf",
+     "sha256": "fc45b7a87948822de35f8d3aef0dc497628baea01f9ff35abc650d70e372a5bc",
+     "locator": "[Cuadro 2.2.3 col (3) 2,631,751.97 + Cuadro 3 (p.42) col (7) Fondo de Competitividad 0.00 + col (8) Fondo de Cooperación 111,153.26] miles € / Cuadro 1.9.1 (p.17) col (23) población ajustada 600,790"
+    },
+    "spending": {
+     "source": "Ministerio de Hacienda, Liquidación de Presupuestos de las CCAA 2024 (definitivo), datos consolidados, Ingresos y Gastos por capítulos depurados IFL y PAC",
+     "url": "https://serviciostelematicosext.hacienda.gob.es/SGCIEF/PublicacionLiquidaciones/aspx/DescargaEconomicaDCD.aspx?cdcdad=06&ano=2024",
+     "sha256": "235d47e5ecaeee1a84b3c1ed73a79114698112851c33c88a9220253c315ffea1",
+     "locator": "econ_dcd_06_2024.xlsx: entity \"Gobierno de Cantabria\", gastos row \"Operaciones no financieras\", col D Obligaciones Reconocidas Netas = 3117403.05 miles €"
+    },
+    "population": {
+     "source": "INE Estadística Continua de Población, tabla 56940",
+     "url": "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/56940?nult=8",
+     "sha256": "cbc935cfa5a94df9a7e69841c41e0ca3feff5cc51c701ab0cc4aa709469694bb",
+     "locator": "serie \"Total. Todas las edades. Cantabria. Población. Número.\", fecha 1 julio 2024 = 591395"
+    },
+    "gdp": {
+     "source": "INE Contabilidad Regional de España, tabla 82285 (PIB per cápita, precios corrientes)",
+     "url": "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/82285?nult=4",
+     "sha256": "ce854cdeb6d94cb54582687f8780bfd216c73cbb95e8a6aed981b4bd632e1180",
+     "locator": "serie \"Cantabria. Dato base. Producto interior bruto a precios de mercado per capita\", Anyo 2024, FK_TipoDato=2"
+    }
+   }
+  },
+  {
+   "code": "CL",
+   "name": "Castilla y León",
+   "regime": "comun",
+   "financing_per_adj_inhabitant_eur": 3746.26,
+   "financing_index_avg100": 107.8,
+   "financing_after_convergence_funds_per_adj_inhabitant_eur": 3916.69,
+   "adjusted_population": 2603386.0,
+   "spending_nonfinancial_total_eur": 12005842320.0,
+   "population_ecp_2024_07_01": 2392231.0,
+   "spending_per_inhabitant_eur": 5018.68,
+   "gdp_per_inhabitant_eur": 30793.0,
+   "fields_sources": {
+    "financing": {
+     "source": "Ministerio de Hacienda (SGFAL), Liquidación del sistema de financiación de las CCAA de régimen común 2024, Cuadros",
+     "url": "https://www.hacienda.gob.es/cdi/sist%20financiacion%20y%20deuda/informaci%C3%B3nccaa/cuadros-liquidacion-2024.pdf",
+     "sha256": "fc45b7a87948822de35f8d3aef0dc497628baea01f9ff35abc650d70e372a5bc",
+     "locator": "Cuadro 2.2.3 (p.36) row \"Castilla y León\": col (5) Financiación homogénea por habitante ajustado = 3746.26 €; Total row col (5) = 3475.53 €"
+    },
+    "financing_after_convergence_funds": {
+     "source": "Ministerio de Hacienda (SGFAL), Liquidación del sistema de financiación de las CCAA de régimen común 2024, Cuadros",
+     "url": "https://www.hacienda.gob.es/cdi/sist%20financiacion%20y%20deuda/informaci%C3%B3nccaa/cuadros-liquidacion-2024.pdf",
+     "sha256": "fc45b7a87948822de35f8d3aef0dc497628baea01f9ff35abc650d70e372a5bc",
+     "locator": "[Cuadro 2.2.3 col (3) 9,752,964.39 + Cuadro 3 (p.42) col (7) Fondo de Competitividad 0.00 + col (8) Fondo de Cooperación 443,680.39] miles € / Cuadro 1.9.1 (p.17) col (23) población ajustada 2,603,386"
+    },
+    "spending": {
+     "source": "Ministerio de Hacienda, Liquidación de Presupuestos de las CCAA 2024 (definitivo), datos consolidados, Ingresos y Gastos por capítulos depurados IFL y PAC",
+     "url": "https://serviciostelematicosext.hacienda.gob.es/SGCIEF/PublicacionLiquidaciones/aspx/DescargaEconomicaDCD.aspx?cdcdad=07&ano=2024",
+     "sha256": "4c2572f104e31b7d9241c270d42f8d9d53c361af63f2bb21bb178630e304aec7",
+     "locator": "econ_dcd_07_2024.xlsx: entity \"Comunidad Autónoma de Castilla y León\", gastos row \"Operaciones no financieras\", col D Obligaciones Reconocidas Netas = 12005842.32 miles €"
+    },
+    "population": {
+     "source": "INE Estadística Continua de Población, tabla 56940",
+     "url": "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/56940?nult=8",
+     "sha256": "cbc935cfa5a94df9a7e69841c41e0ca3feff5cc51c701ab0cc4aa709469694bb",
+     "locator": "serie \"Total. Todas las edades. Castilla y León. Población. Número.\", fecha 1 julio 2024 = 2392231"
+    },
+    "gdp": {
+     "source": "INE Contabilidad Regional de España, tabla 82285 (PIB per cápita, precios corrientes)",
+     "url": "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/82285?nult=4",
+     "sha256": "ce854cdeb6d94cb54582687f8780bfd216c73cbb95e8a6aed981b4bd632e1180",
+     "locator": "serie \"Castilla y León. Dato base. Producto interior bruto a precios de mercado per capita\", Anyo 2024, FK_TipoDato=2"
+    }
+   }
+  },
+  {
+   "code": "CM",
+   "name": "Castilla-La Mancha",
+   "regime": "comun",
+   "financing_per_adj_inhabitant_eur": 3478.68,
+   "financing_index_avg100": 100.1,
+   "financing_after_convergence_funds_per_adj_inhabitant_eur": 3545.49,
+   "adjusted_population": 2170650.0,
+   "spending_nonfinancial_total_eur": 9213657850.0,
+   "population_ecp_2024_07_01": 2113135.0,
+   "spending_per_inhabitant_eur": 4360.18,
+   "gdp_per_inhabitant_eur": 26171.0,
+   "fields_sources": {
+    "financing": {
+     "source": "Ministerio de Hacienda (SGFAL), Liquidación del sistema de financiación de las CCAA de régimen común 2024, Cuadros",
+     "url": "https://www.hacienda.gob.es/cdi/sist%20financiacion%20y%20deuda/informaci%C3%B3nccaa/cuadros-liquidacion-2024.pdf",
+     "sha256": "fc45b7a87948822de35f8d3aef0dc497628baea01f9ff35abc650d70e372a5bc",
+     "locator": "Cuadro 2.2.3 (p.36) row \"Castilla-La Mancha\": col (5) Financiación homogénea por habitante ajustado = 3478.68 €; Total row col (5) = 3475.53 €"
+    },
+    "financing_after_convergence_funds": {
+     "source": "Ministerio de Hacienda (SGFAL), Liquidación del sistema de financiación de las CCAA de régimen común 2024, Cuadros",
+     "url": "https://www.hacienda.gob.es/cdi/sist%20financiacion%20y%20deuda/informaci%C3%B3nccaa/cuadros-liquidacion-2024.pdf",
+     "sha256": "fc45b7a87948822de35f8d3aef0dc497628baea01f9ff35abc650d70e372a5bc",
+     "locator": "[Cuadro 2.2.3 col (3) 7,550,999.13 + Cuadro 3 (p.42) col (7) Fondo de Competitividad 0.00 + col (8) Fondo de Cooperación 145,014.37] miles € / Cuadro 1.9.1 (p.17) col (23) población ajustada 2,170,650"
+    },
+    "spending": {
+     "source": "Ministerio de Hacienda, Liquidación de Presupuestos de las CCAA 2024 (definitivo), datos consolidados, Ingresos y Gastos por capítulos depurados IFL y PAC",
+     "url": "https://serviciostelematicosext.hacienda.gob.es/SGCIEF/PublicacionLiquidaciones/aspx/DescargaEconomicaDCD.aspx?cdcdad=08&ano=2024",
+     "sha256": "dd59557dd54efc9a87b4d45c4489738ad44b5b150c7457f46a955217ced246b9",
+     "locator": "econ_dcd_08_2024.xlsx: entity \"Comunidad Autónoma de Castilla-La Mancha\", gastos row \"Operaciones no financieras\", col D Obligaciones Reconocidas Netas = 9213657.85 miles €"
+    },
+    "population": {
+     "source": "INE Estadística Continua de Población, tabla 56940",
+     "url": "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/56940?nult=8",
+     "sha256": "cbc935cfa5a94df9a7e69841c41e0ca3feff5cc51c701ab0cc4aa709469694bb",
+     "locator": "serie \"Total. Todas las edades. Castilla - La Mancha. Población. Número.\", fecha 1 julio 2024 = 2113135"
+    },
+    "gdp": {
+     "source": "INE Contabilidad Regional de España, tabla 82285 (PIB per cápita, precios corrientes)",
+     "url": "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/82285?nult=4",
+     "sha256": "ce854cdeb6d94cb54582687f8780bfd216c73cbb95e8a6aed981b4bd632e1180",
+     "locator": "serie \"Castilla - La Mancha. Dato base. Producto interior bruto a precios de mercado per capita\", Anyo 2024, FK_TipoDato=2"
+    }
+   }
+  },
+  {
+   "code": "CT",
+   "name": "Cataluña",
+   "regime": "comun",
+   "financing_per_adj_inhabitant_eur": 3475.49,
+   "financing_index_avg100": 100.0,
+   "financing_after_convergence_funds_per_adj_inhabitant_eur": 3674.83,
+   "adjusted_population": 7842238.0,
+   "spending_nonfinancial_total_eur": 41154290500.0,
+   "population_ecp_2024_07_01": 8061119.0,
+   "spending_per_inhabitant_eur": 5105.28,
+   "gdp_per_inhabitant_eur": 37553.0,
+   "fields_sources": {
+    "financing": {
+     "source": "Ministerio de Hacienda (SGFAL), Liquidación del sistema de financiación de las CCAA de régimen común 2024, Cuadros",
+     "url": "https://www.hacienda.gob.es/cdi/sist%20financiacion%20y%20deuda/informaci%C3%B3nccaa/cuadros-liquidacion-2024.pdf",
+     "sha256": "fc45b7a87948822de35f8d3aef0dc497628baea01f9ff35abc650d70e372a5bc",
+     "locator": "Cuadro 2.2.3 (p.36) row \"Cataluña\": col (5) Financiación homogénea por habitante ajustado = 3475.49 €; Total row col (5) = 3475.53 €"
+    },
+    "financing_after_convergence_funds": {
+     "source": "Ministerio de Hacienda (SGFAL), Liquidación del sistema de financiación de las CCAA de régimen común 2024, Cuadros",
+     "url": "https://www.hacienda.gob.es/cdi/sist%20financiacion%20y%20deuda/informaci%C3%B3nccaa/cuadros-liquidacion-2024.pdf",
+     "sha256": "fc45b7a87948822de35f8d3aef0dc497628baea01f9ff35abc650d70e372a5bc",
+     "locator": "[Cuadro 2.2.3 col (3) 27,255,611.43 + Cuadro 3 (p.42) col (7) Fondo de Competitividad 1,563,285.33 + col (8) Fondo de Cooperación 0.00] miles € / Cuadro 1.9.1 (p.17) col (23) población ajustada 7,842,238"
+    },
+    "spending": {
+     "source": "Ministerio de Hacienda, Liquidación de Presupuestos de las CCAA 2024 (definitivo), datos consolidados, Ingresos y Gastos por capítulos depurados IFL y PAC",
+     "url": "https://serviciostelematicosext.hacienda.gob.es/SGCIEF/PublicacionLiquidaciones/aspx/DescargaEconomicaDCD.aspx?cdcdad=09&ano=2024",
+     "sha256": "4ffc086626902411c691716ef71717b2e07b9418378852cfd3397b3de9b71043",
+     "locator": "econ_dcd_09_2024.xlsx: entity \"Generalitat\", gastos row \"Operaciones no financieras\", col D Obligaciones Reconocidas Netas = 41154290.5 miles €"
+    },
+    "population": {
+     "source": "INE Estadística Continua de Población, tabla 56940",
+     "url": "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/56940?nult=8",
+     "sha256": "cbc935cfa5a94df9a7e69841c41e0ca3feff5cc51c701ab0cc4aa709469694bb",
+     "locator": "serie \"Total. Todas las edades. Cataluña. Población. Número.\", fecha 1 julio 2024 = 8061119"
+    },
+    "gdp": {
+     "source": "INE Contabilidad Regional de España, tabla 82285 (PIB per cápita, precios corrientes)",
+     "url": "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/82285?nult=4",
+     "sha256": "ce854cdeb6d94cb54582687f8780bfd216c73cbb95e8a6aed981b4bd632e1180",
+     "locator": "serie \"Cataluña. Dato base. Producto interior bruto a precios de mercado per capita\", Anyo 2024, FK_TipoDato=2"
+    }
+   }
+  },
+  {
+   "code": "VC",
+   "name": "Comunitat Valenciana",
+   "regime": "comun",
+   "financing_per_adj_inhabitant_eur": 3138.9,
+   "financing_index_avg100": 90.3,
+   "financing_after_convergence_funds_per_adj_inhabitant_eur": 3475.54,
+   "adjusted_population": 5163817.0,
+   "spending_nonfinancial_total_eur": 23643625810.0,
+   "population_ecp_2024_07_01": 5366621.0,
+   "spending_per_inhabitant_eur": 4405.68,
+   "gdp_per_inhabitant_eur": 27686.0,
+   "fields_sources": {
+    "financing": {
+     "source": "Ministerio de Hacienda (SGFAL), Liquidación del sistema de financiación de las CCAA de régimen común 2024, Cuadros",
+     "url": "https://www.hacienda.gob.es/cdi/sist%20financiacion%20y%20deuda/informaci%C3%B3nccaa/cuadros-liquidacion-2024.pdf",
+     "sha256": "fc45b7a87948822de35f8d3aef0dc497628baea01f9ff35abc650d70e372a5bc",
+     "locator": "Cuadro 2.2.3 (p.36) row \"C. Valenciana\": col (5) Financiación homogénea por habitante ajustado = 3138.90 €; Total row col (5) = 3475.53 €"
+    },
+    "financing_after_convergence_funds": {
+     "source": "Ministerio de Hacienda (SGFAL), Liquidación del sistema de financiación de las CCAA de régimen común 2024, Cuadros",
+     "url": "https://www.hacienda.gob.es/cdi/sist%20financiacion%20y%20deuda/informaci%C3%B3nccaa/cuadros-liquidacion-2024.pdf",
+     "sha256": "fc45b7a87948822de35f8d3aef0dc497628baea01f9ff35abc650d70e372a5bc",
+     "locator": "[Cuadro 2.2.3 col (3) 16,208,706.36 + Cuadro 3 (p.42) col (7) Fondo de Competitividad 1,389,836.20 + col (8) Fondo de Cooperación 348,484.97] miles € / Cuadro 1.9.1 (p.17) col (23) población ajustada 5,163,817"
+    },
+    "spending": {
+     "source": "Ministerio de Hacienda, Liquidación de Presupuestos de las CCAA 2024 (definitivo), datos consolidados, Ingresos y Gastos por capítulos depurados IFL y PAC",
+     "url": "https://serviciostelematicosext.hacienda.gob.es/SGCIEF/PublicacionLiquidaciones/aspx/DescargaEconomicaDCD.aspx?cdcdad=17&ano=2024",
+     "sha256": "c4eb5767171e545cebe537fc3185ccd587249d3d3346702a835e85c3bf9cd9ee",
+     "locator": "econ_dcd_17_2024.xlsx: entity \"Comunidad Autónoma Valenciana\", gastos row \"Operaciones no financieras\", col D Obligaciones Reconocidas Netas = 23643625.81 miles €"
+    },
+    "population": {
+     "source": "INE Estadística Continua de Población, tabla 56940",
+     "url": "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/56940?nult=8",
+     "sha256": "cbc935cfa5a94df9a7e69841c41e0ca3feff5cc51c701ab0cc4aa709469694bb",
+     "locator": "serie \"Total. Todas las edades. Comunitat Valenciana. Población. Número.\", fecha 1 julio 2024 = 5366621"
+    },
+    "gdp": {
+     "source": "INE Contabilidad Regional de España, tabla 82285 (PIB per cápita, precios corrientes)",
+     "url": "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/82285?nult=4",
+     "sha256": "ce854cdeb6d94cb54582687f8780bfd216c73cbb95e8a6aed981b4bd632e1180",
+     "locator": "serie \"Comunitat Valenciana. Dato base. Producto interior bruto a precios de mercado per capita\", Anyo 2024, FK_TipoDato=2"
+    }
+   }
+  },
+  {
+   "code": "EX",
+   "name": "Extremadura",
+   "regime": "comun",
+   "financing_per_adj_inhabitant_eur": 3885.01,
+   "financing_index_avg100": 111.8,
+   "financing_after_convergence_funds_per_adj_inhabitant_eur": 4075.36,
+   "adjusted_population": 1109923.0,
+   "spending_nonfinancial_total_eur": 5673837570.0,
+   "population_ecp_2024_07_01": 1053034.0,
+   "spending_per_inhabitant_eur": 5388.09,
+   "gdp_per_inhabitant_eur": 25173.0,
+   "fields_sources": {
+    "financing": {
+     "source": "Ministerio de Hacienda (SGFAL), Liquidación del sistema de financiación de las CCAA de régimen común 2024, Cuadros",
+     "url": "https://www.hacienda.gob.es/cdi/sist%20financiacion%20y%20deuda/informaci%C3%B3nccaa/cuadros-liquidacion-2024.pdf",
+     "sha256": "fc45b7a87948822de35f8d3aef0dc497628baea01f9ff35abc650d70e372a5bc",
+     "locator": "Cuadro 2.2.3 (p.36) row \"Extremadura\": col (5) Financiación homogénea por habitante ajustado = 3885.01 €; Total row col (5) = 3475.53 €"
+    },
+    "financing_after_convergence_funds": {
+     "source": "Ministerio de Hacienda (SGFAL), Liquidación del sistema de financiación de las CCAA de régimen común 2024, Cuadros",
+     "url": "https://www.hacienda.gob.es/cdi/sist%20financiacion%20y%20deuda/informaci%C3%B3nccaa/cuadros-liquidacion-2024.pdf",
+     "sha256": "fc45b7a87948822de35f8d3aef0dc497628baea01f9ff35abc650d70e372a5bc",
+     "locator": "[Cuadro 2.2.3 col (3) 4,312,059.48 + Cuadro 3 (p.42) col (7) Fondo de Competitividad 0.00 + col (8) Fondo de Cooperación 211,279.95] miles € / Cuadro 1.9.1 (p.17) col (23) población ajustada 1,109,923"
+    },
+    "spending": {
+     "source": "Ministerio de Hacienda, Liquidación de Presupuestos de las CCAA 2024 (definitivo), datos consolidados, Ingresos y Gastos por capítulos depurados IFL y PAC",
+     "url": "https://serviciostelematicosext.hacienda.gob.es/SGCIEF/PublicacionLiquidaciones/aspx/DescargaEconomicaDCD.aspx?cdcdad=10&ano=2024",
+     "sha256": "b80467a2dc1967e073fbfc0fa7744c3bfa0f92a478c0ad253ef0672dfa5464cf",
+     "locator": "econ_dcd_10_2024.xlsx: entity \"Administración General\", gastos row \"Operaciones no financieras\", col D Obligaciones Reconocidas Netas = 5673837.57 miles €"
+    },
+    "population": {
+     "source": "INE Estadística Continua de Población, tabla 56940",
+     "url": "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/56940?nult=8",
+     "sha256": "cbc935cfa5a94df9a7e69841c41e0ca3feff5cc51c701ab0cc4aa709469694bb",
+     "locator": "serie \"Total. Todas las edades. Extremadura. Población. Número.\", fecha 1 julio 2024 = 1053034"
+    },
+    "gdp": {
+     "source": "INE Contabilidad Regional de España, tabla 82285 (PIB per cápita, precios corrientes)",
+     "url": "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/82285?nult=4",
+     "sha256": "ce854cdeb6d94cb54582687f8780bfd216c73cbb95e8a6aed981b4bd632e1180",
+     "locator": "serie \"Extremadura. Dato base. Producto interior bruto a precios de mercado per capita\", Anyo 2024, FK_TipoDato=2"
+    }
+   }
+  },
+  {
+   "code": "GA",
+   "name": "Galicia",
+   "regime": "comun",
+   "financing_per_adj_inhabitant_eur": 3608.07,
+   "financing_index_avg100": 103.8,
+   "financing_after_convergence_funds_per_adj_inhabitant_eur": 3782.64,
+   "adjusted_population": 2909511.0,
+   "spending_nonfinancial_total_eur": 13222904570.0,
+   "population_ecp_2024_07_01": 2705832.0,
+   "spending_per_inhabitant_eur": 4886.82,
+   "gdp_per_inhabitant_eur": 30196.0,
+   "fields_sources": {
+    "financing": {
+     "source": "Ministerio de Hacienda (SGFAL), Liquidación del sistema de financiación de las CCAA de régimen común 2024, Cuadros",
+     "url": "https://www.hacienda.gob.es/cdi/sist%20financiacion%20y%20deuda/informaci%C3%B3nccaa/cuadros-liquidacion-2024.pdf",
+     "sha256": "fc45b7a87948822de35f8d3aef0dc497628baea01f9ff35abc650d70e372a5bc",
+     "locator": "Cuadro 2.2.3 (p.36) row \"Galicia\": col (5) Financiación homogénea por habitante ajustado = 3608.07 €; Total row col (5) = 3475.53 €"
+    },
+    "financing_after_convergence_funds": {
+     "source": "Ministerio de Hacienda (SGFAL), Liquidación del sistema de financiación de las CCAA de régimen común 2024, Cuadros",
+     "url": "https://www.hacienda.gob.es/cdi/sist%20financiacion%20y%20deuda/informaci%C3%B3nccaa/cuadros-liquidacion-2024.pdf",
+     "sha256": "fc45b7a87948822de35f8d3aef0dc497628baea01f9ff35abc650d70e372a5bc",
+     "locator": "[Cuadro 2.2.3 col (3) 10,497,724.39 + Cuadro 3 (p.42) col (7) Fondo de Competitividad 0.00 + col (8) Fondo de Cooperación 507,905.07] miles € / Cuadro 1.9.1 (p.17) col (23) población ajustada 2,909,511"
+    },
+    "spending": {
+     "source": "Ministerio de Hacienda, Liquidación de Presupuestos de las CCAA 2024 (definitivo), datos consolidados, Ingresos y Gastos por capítulos depurados IFL y PAC",
+     "url": "https://serviciostelematicosext.hacienda.gob.es/SGCIEF/PublicacionLiquidaciones/aspx/DescargaEconomicaDCD.aspx?cdcdad=11&ano=2024",
+     "sha256": "bda424e9c4f73bbb9a484039bf06e30488b917cb02afb74c72ff8c690ee52f86",
+     "locator": "econ_dcd_11_2024.xlsx: entity \"Comunidad Autónoma de Galicia\", gastos row \"Operaciones no financieras\", col D Obligaciones Reconocidas Netas = 13222904.57 miles €"
+    },
+    "population": {
+     "source": "INE Estadística Continua de Población, tabla 56940",
+     "url": "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/56940?nult=8",
+     "sha256": "cbc935cfa5a94df9a7e69841c41e0ca3feff5cc51c701ab0cc4aa709469694bb",
+     "locator": "serie \"Total. Todas las edades. Galicia. Población. Número.\", fecha 1 julio 2024 = 2705832"
+    },
+    "gdp": {
+     "source": "INE Contabilidad Regional de España, tabla 82285 (PIB per cápita, precios corrientes)",
+     "url": "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/82285?nult=4",
+     "sha256": "ce854cdeb6d94cb54582687f8780bfd216c73cbb95e8a6aed981b4bd632e1180",
+     "locator": "serie \"Galicia. Dato base. Producto interior bruto a precios de mercado per capita\", Anyo 2024, FK_TipoDato=2"
+    }
+   }
+  },
+  {
+   "code": "MD",
+   "name": "Comunidad de Madrid",
+   "regime": "comun",
+   "financing_per_adj_inhabitant_eur": 3659.76,
+   "financing_index_avg100": 105.3,
+   "financing_after_convergence_funds_per_adj_inhabitant_eur": 3684.07,
+   "adjusted_population": 6762327.0,
+   "spending_nonfinancial_total_eur": 28675707170.0,
+   "population_ecp_2024_07_01": 7047812.0,
+   "spending_per_inhabitant_eur": 4068.74,
+   "gdp_per_inhabitant_eur": 45128.0,
+   "fields_sources": {
+    "financing": {
+     "source": "Ministerio de Hacienda (SGFAL), Liquidación del sistema de financiación de las CCAA de régimen común 2024, Cuadros",
+     "url": "https://www.hacienda.gob.es/cdi/sist%20financiacion%20y%20deuda/informaci%C3%B3nccaa/cuadros-liquidacion-2024.pdf",
+     "sha256": "fc45b7a87948822de35f8d3aef0dc497628baea01f9ff35abc650d70e372a5bc",
+     "locator": "Cuadro 2.2.3 (p.36) row \"Comunidad de Madrid\": col (5) Financiación homogénea por habitante ajustado = 3659.76 €; Total row col (5) = 3475.53 €"
+    },
+    "financing_after_convergence_funds": {
+     "source": "Ministerio de Hacienda (SGFAL), Liquidación del sistema de financiación de las CCAA de régimen común 2024, Cuadros",
+     "url": "https://www.hacienda.gob.es/cdi/sist%20financiacion%20y%20deuda/informaci%C3%B3nccaa/cuadros-liquidacion-2024.pdf",
+     "sha256": "fc45b7a87948822de35f8d3aef0dc497628baea01f9ff35abc650d70e372a5bc",
+     "locator": "[Cuadro 2.2.3 col (3) 24,748,470.03 + Cuadro 3 (p.42) col (7) Fondo de Competitividad 164,394.79 + col (8) Fondo de Cooperación 0.00] miles € / Cuadro 1.9.1 (p.17) col (23) población ajustada 6,762,327"
+    },
+    "spending": {
+     "source": "Ministerio de Hacienda, Liquidación de Presupuestos de las CCAA 2024 (definitivo), datos consolidados, Ingresos y Gastos por capítulos depurados IFL y PAC",
+     "url": "https://serviciostelematicosext.hacienda.gob.es/SGCIEF/PublicacionLiquidaciones/aspx/DescargaEconomicaDCD.aspx?cdcdad=12&ano=2024",
+     "sha256": "cc8da90407445caa9cad20f9813e22c66a617806edb91cbb739b586535dcf0ef",
+     "locator": "econ_dcd_12_2024.xlsx: entity \"Comunidad Autónoma de Madrid\", gastos row \"Operaciones no financieras\", col D Obligaciones Reconocidas Netas = 28675707.17 miles €"
+    },
+    "population": {
+     "source": "INE Estadística Continua de Población, tabla 56940",
+     "url": "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/56940?nult=8",
+     "sha256": "cbc935cfa5a94df9a7e69841c41e0ca3feff5cc51c701ab0cc4aa709469694bb",
+     "locator": "serie \"Total. Todas las edades. Madrid, Comunidad de. Población. Número.\", fecha 1 julio 2024 = 7047812"
+    },
+    "gdp": {
+     "source": "INE Contabilidad Regional de España, tabla 82285 (PIB per cápita, precios corrientes)",
+     "url": "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/82285?nult=4",
+     "sha256": "ce854cdeb6d94cb54582687f8780bfd216c73cbb95e8a6aed981b4bd632e1180",
+     "locator": "serie \"Madrid, Comunidad de. Dato base. Producto interior bruto a precios de mercado per capita\", Anyo 2024, FK_TipoDato=2"
+    }
+   }
+  },
+  {
+   "code": "MC",
+   "name": "Región de Murcia",
+   "regime": "comun",
+   "financing_per_adj_inhabitant_eur": 3294.27,
+   "financing_index_avg100": 94.8,
+   "financing_after_convergence_funds_per_adj_inhabitant_eur": 3475.53,
+   "adjusted_population": 1547608.0,
+   "spending_nonfinancial_total_eur": 6976069580.0,
+   "population_ecp_2024_07_01": 1576891.0,
+   "spending_per_inhabitant_eur": 4423.94,
+   "gdp_per_inhabitant_eur": 26817.0,
+   "fields_sources": {
+    "financing": {
+     "source": "Ministerio de Hacienda (SGFAL), Liquidación del sistema de financiación de las CCAA de régimen común 2024, Cuadros",
+     "url": "https://www.hacienda.gob.es/cdi/sist%20financiacion%20y%20deuda/informaci%C3%B3nccaa/cuadros-liquidacion-2024.pdf",
+     "sha256": "fc45b7a87948822de35f8d3aef0dc497628baea01f9ff35abc650d70e372a5bc",
+     "locator": "Cuadro 2.2.3 (p.36) row \"Región de Murcia\": col (5) Financiación homogénea por habitante ajustado = 3294.27 €; Total row col (5) = 3475.53 €"
+    },
+    "financing_after_convergence_funds": {
+     "source": "Ministerio de Hacienda (SGFAL), Liquidación del sistema de financiación de las CCAA de régimen común 2024, Cuadros",
+     "url": "https://www.hacienda.gob.es/cdi/sist%20financiacion%20y%20deuda/informaci%C3%B3nccaa/cuadros-liquidacion-2024.pdf",
+     "sha256": "fc45b7a87948822de35f8d3aef0dc497628baea01f9ff35abc650d70e372a5bc",
+     "locator": "[Cuadro 2.2.3 col (3) 5,098,235.07 + Cuadro 3 (p.42) col (7) Fondo de Competitividad 173,798.99 + col (8) Fondo de Cooperación 106,730.28] miles € / Cuadro 1.9.1 (p.17) col (23) población ajustada 1,547,608"
+    },
+    "spending": {
+     "source": "Ministerio de Hacienda, Liquidación de Presupuestos de las CCAA 2024 (definitivo), datos consolidados, Ingresos y Gastos por capítulos depurados IFL y PAC",
+     "url": "https://serviciostelematicosext.hacienda.gob.es/SGCIEF/PublicacionLiquidaciones/aspx/DescargaEconomicaDCD.aspx?cdcdad=13&ano=2024",
+     "sha256": "59bbbd991bebbf26fd755930ef28f4ccb0c853961a80fcf7c1716af3ddb58c62",
+     "locator": "econ_dcd_13_2024.xlsx: entity \"Administración General de la Comunidad Autónoma de la Región de Murcia\", gastos row \"Operaciones no financieras\", col D Obligaciones Reconocidas Netas = 6976069.58 miles €"
+    },
+    "population": {
+     "source": "INE Estadística Continua de Población, tabla 56940",
+     "url": "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/56940?nult=8",
+     "sha256": "cbc935cfa5a94df9a7e69841c41e0ca3feff5cc51c701ab0cc4aa709469694bb",
+     "locator": "serie \"Total. Todas las edades. Murcia, Región de. Población. Número.\", fecha 1 julio 2024 = 1576891"
+    },
+    "gdp": {
+     "source": "INE Contabilidad Regional de España, tabla 82285 (PIB per cápita, precios corrientes)",
+     "url": "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/82285?nult=4",
+     "sha256": "ce854cdeb6d94cb54582687f8780bfd216c73cbb95e8a6aed981b4bd632e1180",
+     "locator": "serie \"Murcia, Región de. Dato base. Producto interior bruto a precios de mercado per capita\", Anyo 2024, FK_TipoDato=2"
+    }
+   }
+  },
+  {
+   "code": "NC",
+   "name": "Comunidad Foral de Navarra",
+   "regime": "foral",
+   "financing_per_adj_inhabitant_eur": null,
+   "financing_index_avg100": null,
+   "financing_after_convergence_funds_per_adj_inhabitant_eur": null,
+   "adjusted_population": null,
+   "spending_nonfinancial_total_eur": 5672052240.0,
+   "population_ecp_2024_07_01": 680476.0,
+   "spending_per_inhabitant_eur": 8335.42,
+   "gdp_per_inhabitant_eur": 38816.0,
+   "fields_sources": {
+    "spending": {
+     "source": "Ministerio de Hacienda, Liquidación de Presupuestos de las CCAA 2024 (definitivo), datos consolidados, Ingresos y Gastos por capítulos depurados IFL y PAC",
+     "url": "https://serviciostelematicosext.hacienda.gob.es/SGCIEF/PublicacionLiquidaciones/aspx/DescargaEconomicaDCD.aspx?cdcdad=14&ano=2024",
+     "sha256": "e51052dc2bc831927b864b6ed27d607d6862831061ae7f91c5de27ae30c59515",
+     "locator": "econ_dcd_14_2024.xlsx: entity \"Gobierno de Navarra\", gastos row \"Operaciones no financieras\", col D Obligaciones Reconocidas Netas = 5672052.24 miles €"
+    },
+    "population": {
+     "source": "INE Estadística Continua de Población, tabla 56940",
+     "url": "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/56940?nult=8",
+     "sha256": "cbc935cfa5a94df9a7e69841c41e0ca3feff5cc51c701ab0cc4aa709469694bb",
+     "locator": "serie \"Total. Todas las edades. Navarra, Comunidad Foral de. Población. Número.\", fecha 1 julio 2024 = 680476"
+    },
+    "gdp": {
+     "source": "INE Contabilidad Regional de España, tabla 82285 (PIB per cápita, precios corrientes)",
+     "url": "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/82285?nult=4",
+     "sha256": "ce854cdeb6d94cb54582687f8780bfd216c73cbb95e8a6aed981b4bd632e1180",
+     "locator": "serie \"Navarra, Comunidad Foral de. Dato base. Producto interior bruto a precios de mercado per capita\", Anyo 2024, FK_TipoDato=2"
+    }
+   }
+  },
+  {
+   "code": "PV",
+   "name": "País Vasco",
+   "regime": "foral",
+   "financing_per_adj_inhabitant_eur": null,
+   "financing_index_avg100": null,
+   "financing_after_convergence_funds_per_adj_inhabitant_eur": null,
+   "adjusted_population": null,
+   "spending_nonfinancial_total_eur": 14297371140.0,
+   "population_ecp_2024_07_01": 2234700.0,
+   "spending_per_inhabitant_eur": 6397.89,
+   "gdp_per_inhabitant_eur": 40793.0,
+   "fields_sources": {
+    "spending": {
+     "source": "Ministerio de Hacienda, Liquidación de Presupuestos de las CCAA 2024 (definitivo), datos consolidados, Ingresos y Gastos por capítulos depurados IFL y PAC",
+     "url": "https://serviciostelematicosext.hacienda.gob.es/SGCIEF/PublicacionLiquidaciones/aspx/DescargaEconomicaDCD.aspx?cdcdad=15&ano=2024",
+     "sha256": "c81f28ca3cefdae43aad69637fea004feb3de3048637b31f47b351b67c30b49a",
+     "locator": "econ_dcd_15_2024.xlsx: entity \"Administración General\", gastos row \"Operaciones no financieras\", col D Obligaciones Reconocidas Netas = 14297371.14 miles €"
+    },
+    "population": {
+     "source": "INE Estadística Continua de Población, tabla 56940",
+     "url": "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/56940?nult=8",
+     "sha256": "cbc935cfa5a94df9a7e69841c41e0ca3feff5cc51c701ab0cc4aa709469694bb",
+     "locator": "serie \"Total. Todas las edades. País Vasco. Población. Número.\", fecha 1 julio 2024 = 2234700"
+    },
+    "gdp": {
+     "source": "INE Contabilidad Regional de España, tabla 82285 (PIB per cápita, precios corrientes)",
+     "url": "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/82285?nult=4",
+     "sha256": "ce854cdeb6d94cb54582687f8780bfd216c73cbb95e8a6aed981b4bd632e1180",
+     "locator": "serie \"País Vasco. Dato base. Producto interior bruto a precios de mercado per capita\", Anyo 2024, FK_TipoDato=2"
+    }
+   }
+  },
+  {
+   "code": "RI",
+   "name": "La Rioja",
+   "regime": "comun",
+   "financing_per_adj_inhabitant_eur": 4100.11,
+   "financing_index_avg100": 118.0,
+   "financing_after_convergence_funds_per_adj_inhabitant_eur": 4149.47,
+   "adjusted_population": 334144.0,
+   "spending_nonfinancial_total_eur": 1879120370.0,
+   "population_ecp_2024_07_01": 325215.0,
+   "spending_per_inhabitant_eur": 5778.09,
+   "gdp_per_inhabitant_eur": 33886.0,
+   "fields_sources": {
+    "financing": {
+     "source": "Ministerio de Hacienda (SGFAL), Liquidación del sistema de financiación de las CCAA de régimen común 2024, Cuadros",
+     "url": "https://www.hacienda.gob.es/cdi/sist%20financiacion%20y%20deuda/informaci%C3%B3nccaa/cuadros-liquidacion-2024.pdf",
+     "sha256": "fc45b7a87948822de35f8d3aef0dc497628baea01f9ff35abc650d70e372a5bc",
+     "locator": "Cuadro 2.2.3 (p.36) row \"La Rioja\": col (5) Financiación homogénea por habitante ajustado = 4100.11 €; Total row col (5) = 3475.53 €"
+    },
+    "financing_after_convergence_funds": {
+     "source": "Ministerio de Hacienda (SGFAL), Liquidación del sistema de financiación de las CCAA de régimen común 2024, Cuadros",
+     "url": "https://www.hacienda.gob.es/cdi/sist%20financiacion%20y%20deuda/informaci%C3%B3nccaa/cuadros-liquidacion-2024.pdf",
+     "sha256": "fc45b7a87948822de35f8d3aef0dc497628baea01f9ff35abc650d70e372a5bc",
+     "locator": "[Cuadro 2.2.3 col (3) 1,370,026.61 + Cuadro 3 (p.42) col (7) Fondo de Competitividad 0.00 + col (8) Fondo de Cooperación 16,495.56] miles € / Cuadro 1.9.1 (p.17) col (23) población ajustada 334,144"
+    },
+    "spending": {
+     "source": "Ministerio de Hacienda, Liquidación de Presupuestos de las CCAA 2024 (definitivo), datos consolidados, Ingresos y Gastos por capítulos depurados IFL y PAC",
+     "url": "https://serviciostelematicosext.hacienda.gob.es/SGCIEF/PublicacionLiquidaciones/aspx/DescargaEconomicaDCD.aspx?cdcdad=16&ano=2024",
+     "sha256": "244c258c92ba95416fb4fc50eee7bc94c2b53be368f45ae90007ee8a55a3cdf9",
+     "locator": "econ_dcd_16_2024.xlsx: entity \"Comunidad Autónoma de La Rioja\", gastos row \"Operaciones no financieras\", col D Obligaciones Reconocidas Netas = 1879120.37 miles €"
+    },
+    "population": {
+     "source": "INE Estadística Continua de Población, tabla 56940",
+     "url": "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/56940?nult=8",
+     "sha256": "cbc935cfa5a94df9a7e69841c41e0ca3feff5cc51c701ab0cc4aa709469694bb",
+     "locator": "serie \"Total. Todas las edades. Rioja, La. Población. Número.\", fecha 1 julio 2024 = 325215"
+    },
+    "gdp": {
+     "source": "INE Contabilidad Regional de España, tabla 82285 (PIB per cápita, precios corrientes)",
+     "url": "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/82285?nult=4",
+     "sha256": "ce854cdeb6d94cb54582687f8780bfd216c73cbb95e8a6aed981b4bd632e1180",
+     "locator": "serie \"Rioja, La. Dato base. Producto interior bruto a precios de mercado per capita\", Anyo 2024, FK_TipoDato=2"
+    }
+   }
+  }
+ ],
+ "definitions": {
+  "financing_per_adj_inhabitant_eur": "Hacienda Cuadro 2.2.3 col (5): financiación homogénea (resources provided by the system minus non-homogeneous competences) / adjusted population, before the Fondo de Competitividad and Fondo de Cooperación (it is the figure used to allocate the Fondo de Competitividad). Euros, liquidation year 2024.",
+  "financing_index_avg100": "financing_per_adj_inhabitant_eur / common-regime Total row of Cuadro 2.2.3 col (5) (3.475,53 €) x 100. Derived ratio, not printed in the source.",
+  "financing_after_convergence_funds_per_adj_inhabitant_eur": "Derived: (Cuadro 2.2.3 col 3 financiación homogénea + Cuadro 3 col 7 Fondo de Competitividad + col 8 Fondo de Cooperación) / Cuadro 1.9.1 col 23 población ajustada. Closest to the usual «financiación definitiva a competencias homogéneas por habitante ajustado» but computed here, not printed by Hacienda; convergence funds are added in full without any homogeneity adjustment.",
+  "spending_per_inhabitant_eur": "Obligaciones reconocidas netas, operaciones no financieras (chapters 1-7), consolidated regional public sector under budgetary accounting, depurado IFL y PAC, 2024 / INE ECP resident population at 1 July 2024.",
+  "gdp_per_inhabitant_eur": "INE CRE PIB a precios de mercado per cápita, precios corrientes, 2024 (INE data-type code 2: not yet final).",
+  "adjusted_population": "Hacienda Cuadro 1.9.1 col (23), población ajustada 2024 (needs-weighted population used by the system)."
+ },
+ "gaps": [
+  "País Vasco and Navarra: no financing per adjusted inhabitant. They are outside the common system (Concierto/Convenio); no official comparable figure was downloaded (Fundación BBVA-Ivie / AIReF / Fedea estimates not fetched). Fields are null.",
+  "País Vasco spending covers the Basque Government consolidated sector only; most tax collection and part of spending sit with the Diputaciones Forales, and both foral communities hold competences (e.g. police, prisons in PV, roads in NC) not held by every common-regime CA. Not comparable one-to-one.",
+  "Spending of common-regime CCAA also includes non-homogeneous competences (e.g. Mossos/police in Cataluña, prisons in Cataluña) and Canarias has a separate tax regime (REF, no VAT in the system); compare with caution.",
+  "financing_index_avg100 is computed from the source (ratio to the Total row), not printed by Hacienda; no official per-capita index with average 100 exists in the downloaded cuadros.",
+  "Ceuta and Melilla not included (optional; in Cuadro 3 of the liquidation they only carry Fondo de Suficiencia Global and Fondo de Cooperación amounts).",
+  "GDP 2024 is not final in INE CRE (data-type code 2); 2025 avance also in the file but not used for year consistency.",
+  "Liquidation 2025 not yet available (published July of t+2); 2024 is the latest year for financing and liquidated budgets as of 2026-10-19."
+ ]
+}

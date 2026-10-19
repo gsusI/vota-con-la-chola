@@ -93,6 +93,21 @@ class IngestPublicFinanceTest(unittest.TestCase):
         self.assertIn("B_60", names["ilc_mded01"]["filters"]["rskpovth"])
         self.assertEqual(len(names), len(ingest.EUROSTAT_DATASETS))  # raw file stems must be unique
 
+    def test_oecd_dbnomics_parsers_group_by_measure(self) -> None:
+        raw = ingest.Raw.__new__(ingest.Raw)
+        raw.data = {"series": {"docs": [
+            {"series_code": "ESP.A.INC_DISP_GINI", "period": ["2022", "2023"], "value": [0.32, "NA"],
+             "dimensions": {"REF_AREA": "ESP", "MEASURE": "INC_DISP_GINI", "AGE": "_T"}},
+            {"series_code": "DEU.A.INC_DISP_GINI", "period": ["2022"], "value": [0.31],
+             "dimensions": {"REF_AREA": "DEU", "MEASURE": "INC_DISP_GINI", "AGE": "_T"}},
+            {"series_code": "ESP.A.POP", "period": ["2022"], "value": [1.0],
+             "dimensions": {"REF_AREA": "ESP", "MEASURE": "POP", "AGE": "_T"}},
+        ]}}
+        batches = list(ingest.parse_oecd_idd(raw))
+        self.assertEqual([d["indicator_code"] for d, _ in batches], ["INC_DISP_GINI._T"])  # unknown measures dropped
+        series = {s["geo_code"]: [(o["period"], o["value"]) for o in s["observations"]] for s in batches[0][1]}
+        self.assertEqual(series, {"ESP": [("2022", 0.32)], "DEU": [("2022", 0.31)]})  # "NA" cells skipped
+
     def test_lineage_relation_mapping(self) -> None:
         self.assertEqual(ingest.relation_type("SE DEROGA"), "deroga")
         self.assertEqual(ingest.relation_type("SE AÑADE"), "modifica")

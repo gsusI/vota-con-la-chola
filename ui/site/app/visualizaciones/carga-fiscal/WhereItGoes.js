@@ -3,6 +3,7 @@ import Figure, { SeriesTable } from "../components/Figure";
 import ConsolidatedBars from "./ConsolidatedBars";
 import ResultsGrid from "./ResultsGrid";
 import DeltaBars from "./DeltaBars";
+import PensionSplit from "./PensionSplit";
 
 // Line 2: where the money goes (COFOG by function), against the results of public services, with peers.
 const EU_LABELS = { ES: "España", DE: "Alemania", FR: "Francia", IT: "Italia", PT: "Portugal", EU27_2020: "UE-27" };
@@ -74,6 +75,9 @@ export function WhereItGoesFigure({ spending, results }) {
   const pensionsRank = byPensions.indexOf(es) + 1;
   const pensionsAbove = byPensions.slice(0, pensionsRank - 1).map((row) => row.label);
   const pisa = indicators.find((ind) => ind.key === "pisa_math");
+  const pcEs = spending.pension_composition?.areas.find((row) => row.area === "ES")?.windows || {};
+  const pc07 = pcEs["2007"];
+  const pc13 = pcEs["2013"];
   const pisaPeers = pisa ? Object.entries(pisa.values).filter(([area]) => area !== "ES").map(([, v]) => v.value) : [];
   const lifeRank =
     [...rows].sort((a, b) => (value("life_expectancy", b.area) || 0) - (value("life_expectancy", a.area) || 0)).indexOf(es) + 1;
@@ -163,6 +167,11 @@ export function WhereItGoesFigure({ spending, results }) {
           gasto: pensiones {signedPts(d("pensions"))}, sanidad {signedPts(d("health"))}, educación {signedPts(d("education"))}, intereses{" "}
           {signedPts(d("interest"))}, resto de protección social {signedPts(d("social"))} y todo lo demás {signedPts(d("rest"))}. Aun así, España es el{" "}
           {pensionsRank}.º de {rows.length - 1} países en gasto en pensiones{pensionsAbove.length ? `, por debajo de ${pensionsAbove.join(" y ")}` : ""}.
+          {pc07 && pc13
+            ? ` Por qué suben depende del año de partida: desde 2007, ${nf(pc07.from_more_pensioners_pts)} puntos por más pensionistas y ${nf(pc07.from_more_per_pensioner_pts)} por pensiones más altas frente a un PIB por habitante estancado; desde 2013, ${nf(pc13.from_more_pensioners_pts)} y ${nf(pc13.from_more_per_pensioner_pts)} (`
+            : ""}
+          {pc07 && pc13 ? <a href="#descomposicion">detalle</a> : null}
+          {pc07 && pc13 ? ")." : ""}
         </li>
         <li>
           <strong>«Pagamos más y los servicios están peor»</strong>
@@ -186,35 +195,53 @@ export function WhereItGoesFigure({ spending, results }) {
 }
 
 export function DecompositionFigure({ spending }) {
-  const [w95, w07] = spending.spain_windows;
+  const windows = spending.spain_windows;
   const share = (w, key) => {
     const f = w.functions.find((item) => item.key === key);
     return { pct: f.pct[1] - f.pct[0], eur: f.eur[1] - f.eur[0] };
   };
-  const spend07 = w07.spending_pct[1] - w07.spending_pct[0];
-  const pens07 = share(w07, "pensions").pct;
-  const spendEur95 = w95.spending_eur[1] - w95.spending_eur[0];
-  const pensEur95 = share(w95, "pensions").eur;
+  const keys = spending.functions.map((f) => f.key);
+  const top = (w) => keys.reduce((a, b) => (share(w, b).pct > share(w, a).pct ? b : a));
+  const pensionsTop = windows.filter((w) => top(w) === "pensions");
+  const others = windows.filter((w) => top(w) !== "pensions");
+  // Headline window: the mid-cycle one (2000) when present, never a peak or trough year.
+  const main = windows.find((w) => w.from === 2000) || windows[0];
+  const spendMain = main.spending_pct[1] - main.spending_pct[0];
+  const first = windows[0];
+  const spendEur = first.spending_eur[1] - first.spending_eur[0];
+  const pensEur = share(first, "pensions").eur;
   const labels = Object.fromEntries(spending.functions.map((f) => [f.key, SHORT[f.key]]));
-  const series = spending.functions.map((f) => ({
-    id: f.key,
-    label: f.label,
-    points: spending.spain_series[`${f.key}_pct_gdp`],
-  }));
+  const series = spending.functions.map((f) => ({ id: f.key, label: f.label, points: spending.spain_series[`${f.key}_pct_gdp`] }));
   const pay = spending.spain_series.pay_pct_gdp;
+  const pc = spending.pension_composition;
+  const pRows = pc.areas.map((row) => ({ ...row, label: EU_LABELS[row.area] }));
+  const pEs = pc.areas.find((row) => row.area === "ES").windows;
   return (
     <Figure
       id="descomposicion"
-      title={`Desde ${w07.from} el gasto público ha subido ${nf(spend07)} puntos del PIB; ${nf(pens07)} fueron a pensiones`}
-      dek={`En euros constantes por habitante, desde ${w95.from} el gasto ha crecido ${nf(spendEur95, 0)} €, de los que ${nf(pensEur95, 0)} € (${nf((pensEur95 / spendEur95) * 100, 0)} %) fueron a pensiones, ${nf(share(w95, "health").eur, 0)} € a sanidad y ${nf(share(w95, "education").eur, 0)} € a educación; los intereses bajaron ${nf(-share(w95, "interest").eur, 0)} €. Cambia el año de partida: ${w07.from} es el último año antes de la crisis financiera, con ingresos inflados por la burbuja.`}
-      sources={[ds("gov_10a_exp"), ds("gov_10a_main"), ds("nama_10_pc")]}
+      title={`Las pensiones son la partida de gasto que más sube en ${pensionsTop.length} de los ${windows.length} periodos desde ${first.from}: +${nf(share(main, "pensions").pct)} puntos del PIB desde ${main.from}, de un aumento total de ${nf(spendMain)}`}
+      dek={`Cambio del gasto de España por función desde cada año de partida (${windows.map((w) => w.from).join(", ")}) hasta ${main.to}. ${others.length ? `La excepción: desde ${others.map((w) => `${w.from} sube más «${SHORT[top(w)].toLowerCase()}»`).join(", ")}. ` : ""}En euros constantes por habitante, desde ${first.from} el gasto ha crecido ${nf(spendEur, 0)} €, de los que ${nf(pensEur, 0)} € (${nf((pensEur / spendEur) * 100, 0)} %) fueron a pensiones. Debajo, por qué suben las pensiones: más pensionistas o más pensión por pensionista.`}
+      sources={[ds("gov_10a_exp"), ds("gov_10a_main"), ds("nama_10_pc"), ds("spr_pns_ben"), ds("nama_10_pe")]}
       notes={[
+        "Años de partida: 1995 y 2000, a mitad de ciclo; 2007, último año de la burbuja (gasto bajo y superávit); 2013, fondo de la crisis (gasto alto); 2019, antes de la pandemia.",
         "Euros de 2010 por habitante: % del PIB de cada función × PIB real por habitante (volumen encadenado, deflactor del PIB).",
         `Los sueldos públicos no son una función sino un tipo de gasto repartido entre todas: ${nf(pay[0].value)} % del PIB en ${pay[0].year} y ${nf(pay.at(-1).value)} % en ${pay.at(-1).year}.`,
+        "Pensiones = (pensionistas / habitantes) × (gasto por pensionista / PIB por habitante); el reparto usa logaritmos. Pensionistas: personas con pensión de vejez o supervivencia (Eurostat ESSPROS, desde 2006), cada una contada una vez. «Por pensionista» incluye que los que se jubilan cobran más que los que fallecen (carreras más largas y salarios más altos), no solo las revalorizaciones; separar ambas cosas exige los datos de altas y bajas de la Seguridad Social.",
       ]}
       table={<SeriesTable series={series} />}
     >
-      <DeltaBars windows={[w95, w07]} labels={{ ...labels, revenue: "Ingresos", spending: "Gasto" }} colors={COLORS} />
+      <DeltaBars windows={windows} labels={{ ...labels, revenue: "Ingresos", spending: "Gasto" }} colors={COLORS} />
+      <h3 className="rgrid__title">
+        Por qué sube el gasto en pensiones, en puntos del PIB (España: desde 2007, {signedPts(pEs["2007"].from_more_pensioners_pts)} por más pensionistas y{" "}
+        {signedPts(pEs["2007"].from_more_per_pensioner_pts)} por más pensión frente al PIB por habitante; desde 2013,{" "}
+        {signedPts(pEs["2013"].from_more_pensioners_pts)} y {signedPts(pEs["2013"].from_more_per_pensioner_pts)})
+      </h3>
+      <p className="cbars__legendNote">
+        <span className="cbars__key" style={{ background: COLORS.pensions, borderColor: COLORS.pensions, borderRadius: 2 }} aria-hidden="true" /> Más
+        pensionistas por habitante <span className="cbars__key" style={{ background: COLORS.social, borderColor: COLORS.social, borderRadius: 2 }} aria-hidden="true" /> Más
+        pensión por pensionista frente al PIB por habitante · la raya negra marca el cambio total
+      </p>
+      <PensionSplit rows={pRows} windows={pc.windows.map(String)} year={pc.year} colors={{ pensioners: COLORS.pensions, per: COLORS.social }} highlight="ES" />
     </Figure>
   );
 }

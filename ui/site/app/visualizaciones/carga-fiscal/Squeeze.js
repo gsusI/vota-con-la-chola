@@ -2,40 +2,59 @@ import TimeSeriesChart from "../components/TimeSeriesChart";
 import Figure, { SeriesTable } from "../components/Figure";
 import SqueezeRows from "./SqueezeRows";
 import ResultsGrid from "./ResultsGrid";
+import { place } from "./places.mjs";
 
 // Line 1: the taxpayer's pocket. Taxes paid vs household income left, per person in PPS, and their real change.
 const EU_LABELS = { ES: "España", DE: "Alemania", FR: "Francia", IT: "Italia", PT: "Portugal", EU27_2020: "UE-27" };
 const TAX = "#eb6834";
 const INCOME = "#2a78d6";
+const WORKER = "#1baf7a";
+const OECD_LABELS = { ESP: "España", DEU: "Alemania", FRA: "Francia", ITA: "Italia", PRT: "Portugal" };
 
 const nf = (v, digits = 1) =>
   Number(v).toLocaleString("es-ES", { minimumFractionDigits: digits, maximumFractionDigits: digits, useGrouping: "always" });
 const ds = (dataset) => ({ label: `Eurostat, ${dataset}`, href: `https://ec.europa.eu/eurostat/databrowser/view/${dataset}/default/table` });
 const SOURCES = [ds("gov_10a_taxag"), ds("nama_10_pc"), ds("tec00113"), ds("nasa_10_ki"), ds("prc_hicp_aind")];
 
-export function SqueezeFigure({ squeeze }) {
+export function SqueezeFigure({ squeeze, distribution, territory }) {
   const rows = squeeze.areas.map((row) => ({ ...row, label: EU_LABELS[row.area] })).sort((a, b) => b.income_pps - a.income_pps);
   const by = Object.fromEntries(rows.map((row) => [row.area, row]));
   const es = by.ES;
   const eu = by.EU27_2020;
   const de = by.DE;
   const countries = rows.filter((row) => row.area !== "EU27_2020");
-  const incomeRank = [...countries].sort((a, b) => b.real_income_change_pct - a.real_income_change_pct);
-  const slower = incomeRank.slice(incomeRank.indexOf(es) + 1).map((row) => row.label);
-  const faster = incomeRank.slice(0, incomeRank.indexOf(es));
   const effortAbove = countries.filter((row) => row.effort_index > es.effort_index).sort((a, b) => b.effort_index - a.effort_index);
   const effortBelow = countries.filter((row) => row.effort_index < es.effort_index);
-  const ratio = es.real_tax_change_pct / es.real_income_change_pct;
-  const { year, base_year: base, index_last_year: last } = squeeze;
+  const { year, base_year: base, index_last_year: last, bases } = squeeze;
   const survey = squeeze.survey ? { es: squeeze.survey.areas.find((row) => row.area === "ES") } : null;
+  const at = (row, b) => row.by_base[String(b)];
+  const outgrows = bases.filter((b) => at(es, b).tax > at(es, b).income);
+  const notOutgrows = bases.filter((b) => !outgrows.includes(b));
+  const euIncomeAhead = bases.filter((b) => at(eu, b).income > at(eu, b).tax);
+  const b0 = at(es, base);
+  const eu0 = at(eu, base);
+  const reverse = eu0.income > eu0.tax;
+  const wedge = distribution?.tax_wedge;
+  const wEs = wedge?.areas.find((row) => row.area === "ESP");
+  const wFell = wedge ? wedge.areas.filter((row) => row.area !== "ESP" && row.AW100[1] < row.AW100[0]).map((row) => OECD_LABELS[row.area]) : [];
+  const irpf = distribution?.irpf;
+  const high = irpf ? irpf.brackets.filter((b) => (b.lower_eur || 0) >= 60000) : [];
+  const highDecl = high.reduce((sum, b) => sum + b.share_declarations_pct, 0);
+  const highTax = high.reduce((sum, b) => sum + b.share_tax_pct, 0);
+  const topCommon = (territory?.rows || []).filter((row) => row.regime === "comun" && row.top_rate_pct != null);
+  const topMin = topCommon.length ? topCommon.reduce((a, b) => (b.top_rate_pct < a.top_rate_pct ? b : a)) : null;
+  const topMax = topCommon.length ? topCommon.reduce((a, b) => (b.top_rate_pct > a.top_rate_pct ? b : a)) : null;
 
   return (
     <Figure
       id="bolsillo"
-      title={`Desde ${base}, lo que recauda el Estado por habitante ha crecido un ${nf(es.real_tax_change_pct)} % descontada la inflación; la renta que les queda a los hogares, un ${nf(es.real_income_change_pct)} %`}
-      dek={`El dato mata el relato: a la izquierda, cuánto se paga por habitante en impuestos y cotizaciones y cuánta renta disponible les queda a los hogares por habitante en ${year}, en la misma escala y en estándar de poder adquisitivo (euros que compran lo mismo en cada país). A la derecha, cuánto ha cambiado cada cosa desde ${base}, descontada la inflación. Nivel, cambio y comparación con los vecinos en una sola figura.`}
+      title={`Desde ${base}, lo que recauda el Estado por habitante en España ha crecido un ${nf(b0.tax)} % descontada la inflación y la renta de los hogares, un ${nf(b0.income)} %${
+        reverse ? `; en la UE, al revés (${nf(eu0.tax)} % y ${nf(eu0.income)} %)` : ""
+      }`}
+      dek={`El dato mata el relato: a la izquierda, cuánto se paga por habitante en impuestos y cotizaciones y cuánta renta disponible les queda a los hogares por habitante en ${year}, en la misma escala y en estándar de poder adquisitivo (euros que compran lo mismo en cada país). A la derecha, cuánto ha cambiado cada cosa descontada la inflación, también por persona ocupada; cambia el año de partida para ver que la conclusión no depende de él (salvo ${notOutgrows.join(" y ")}). Nivel, cambio, composición y vecinos en una sola figura.`}
       legend={[
         { id: "tax", label: "Impuestos y cotizaciones por habitante", color: TAX },
+        { id: "worker", label: "Impuestos y cotizaciones por persona ocupada (solo el cambio)", color: WORKER },
         { id: "income", label: "Renta disponible ajustada de los hogares por habitante", color: INCOME },
       ]}
       legendKind="bar"
@@ -45,6 +64,7 @@ export function SqueezeFigure({ squeeze }) {
         `El porcentaje de la izquierda divide los impuestos por habitante entre la renta que queda por habitante; no es un tipo impositivo (incluye lo que ingresan las empresas y la renta ya está descontada de impuestos).`,
         `Recaudación real: carga fiscal × PIB por habitante en euros, deflactada con el IPC armonizado de cada país. Renta real: índice de Eurostat deflactado con el deflactor del consumo de los hogares. Son índices de precios distintos pero ambos de consumo. Para España, con la recaudación de la OCDE en euros, la población y el IPC del Banco Mundial sale +${nf(squeeze.spain_cpi_check.real_tax_change_pct)} % (${squeeze.spain_cpi_check.from}–${squeeze.spain_cpi_check.to}).`,
         `${year}: último año con las tres medidas para los seis países. El estándar de poder adquisitivo corrige las diferencias de precios entre países de forma aproximada.`,
+        `Año de partida: ${base} por defecto porque está a mitad de ciclo; 2007 fue el pico de ingresos de la burbuja inmobiliaria, 2008 el primer año de su caída, 2013 el fondo de la crisis y 2019 el último antes de la pandemia. Por ocupado: personas con empleo en el territorio (contabilidad nacional), para separar lo que sube porque trabaja más gente.`,
       ]}
       table={
         <details className="vizTable">
@@ -60,8 +80,11 @@ export function SqueezeFigure({ squeeze }) {
                   <th scope="col">Renta que queda por habitante (EPA)</th>
                   <th scope="col">Impuestos / renta</th>
                   <th scope="col">Índice de esfuerzo fiscal (UE = 100)</th>
-                  <th scope="col">Impuestos reales {base}–{last}</th>
-                  <th scope="col">Renta real {base}–{last}</th>
+                  {bases.map((b) => (
+                    <th scope="col" key={b}>
+                      Desde {b}: impuestos / por ocupado / renta
+                    </th>
+                  ))}
                 </tr>
               </thead>
               <tbody>
@@ -74,8 +97,11 @@ export function SqueezeFigure({ squeeze }) {
                     <td>{nf(row.income_pps, 0)}</td>
                     <td>{nf(row.tax_to_income_pct)} %</td>
                     <td>{nf(row.effort_index)}</td>
-                    <td>{nf(row.real_tax_change_pct)} %</td>
-                    <td>{nf(row.real_income_change_pct)} %</td>
+                    {bases.map((b) => (
+                      <td key={b}>
+                        {nf(at(row, b).tax)} / {nf(at(row, b).tax_worker)} / {nf(at(row, b).income)} %
+                      </td>
+                    ))}
                   </tr>
                 ))}
               </tbody>
@@ -84,15 +110,25 @@ export function SqueezeFigure({ squeeze }) {
         </details>
       }
     >
-      <SqueezeRows rows={rows} year={year} baseYear={base} lastYear={last} taxColor={TAX} incomeColor={INCOME} highlight="ES" />
+      <SqueezeRows
+        rows={rows}
+        year={year}
+        bases={bases.map(String)}
+        defaultBase={String(base)}
+        lastYear={last}
+        taxColor={TAX}
+        workerColor={WORKER}
+        incomeColor={INCOME}
+        highlight="ES"
+      />
       <ul className="vizRelatos" aria-label="Qué relatos zanja y qué queda abierto">
         <li>
           <strong>«El Estado es más rico y la gente, más pobre»</strong>
-          Medio cierto. Desde {base} la recaudación real por habitante ha crecido {nf(ratio)} veces más deprisa que la renta de los hogares (+
-          {nf(es.real_tax_change_pct)} % frente a +{nf(es.real_income_change_pct)} %). Pero los hogares no son más pobres que en {base}: lo son frente a
-          Europa. Su renta real creció un {nf(eu.real_income_change_pct)} % en la UE
-          {faster.length ? `, ${faster.map((row) => `${nf(row.real_income_change_pct)} % en ${row.label}`).join(", ")}` : ""}
-          {slower.length ? `; solo ${slower.join(" y ")} creció menos` : ""}.
+          En parte. Desde {outgrows.length > 1 ? `${outgrows.slice(0, -1).join(", ")} o ${outgrows.at(-1)}` : outgrows[0]} la recaudación real por habitante crece en España más que la renta de los hogares; solo desde{" "}
+          {notOutgrows.join(" y ")} (pico de ingresos de la burbuja) no. En la UE la renta crece más que la recaudación desde {euIncomeAhead.length === bases.length ? "todos esos años" : euIncomeAhead.join(", ")}.
+          Pero la renta española también sube (+{nf(b0.income)} % desde {base}): los hogares son más pobres frente a Europa (+{nf(eu0.income)} %), no
+          frente a su pasado. Y una parte es composición: trabaja más gente (del {nf(b0.employment_rate[0])} % al {nf(b0.employment_rate[1])} % de la
+          población) y por ocupado la recaudación sube un {nf(b0.tax_worker)} % (UE: {nf(eu0.tax_worker)} %).
         </li>
         <li>
           <strong>«En España se pagan más impuestos que en Alemania»</strong>
@@ -103,6 +139,23 @@ export function SqueezeFigure({ squeeze }) {
           debajo de {effortAbove.map((row) => `${row.label} (${nf(row.effort_index)})`).join(", ")}. Es un índice discutido: supone que la capacidad de
           pagar crece en proporción a la renta y mezcla lo que pagan empresas y hogares.
         </li>
+        {wEs && irpf ? (
+          <li>
+            <strong>«El contribuyente está asfixiado»</strong>
+            Depende de quién y de dónde. El IRPF es progresivo: las declaraciones de más de 60.000 € (el {nf(highDecl)} %) pagan el {nf(highTax)} % de la
+            cuota. Pero la cuña fiscal sobre un salario medio (IRPF y cotizaciones) ha subido en España del {nf(wEs.AW100[0])} % al {nf(wEs.AW100[1])} %
+            desde {wedge.first_year}{wFell.length ? `, mientras bajaba en ${wFell.join(", ")}` : ""} (<a href="#quien-carga">quién lo carga</a>).
+            {topMin && topMax
+              ? ` Y el tipo máximo del IRPF va del ${nf(topMin.top_rate_pct)} % de ${place(topMin)} al ${nf(topMax.top_rate_pct)} % de ${place(topMax)}, aunque en ${place(topMin)} se paga de media más IRPF (${nf(topMin.irpf_rate_pct)} % de la base)`
+              : ""}
+            {topMin ? (
+              <>
+                {" "}
+                (<a href="#territorio">por comunidad</a>).
+              </>
+            ) : null}
+          </li>
+        ) : null}
         <li>
           <strong>Lo que esta figura no resuelve</strong>
           Quién soporta de verdad cada impuesto y qué servicios recibe cada país a cambio (<a href="#destino">más abajo</a>). Son medias de contabilidad
@@ -116,30 +169,36 @@ export function SqueezeFigure({ squeeze }) {
 }
 
 export function SqueezeIndexFigure({ squeeze }) {
-  const { base_year: base, index_last_year: last } = squeeze;
-  const rows = squeeze.areas.map((row) => ({ ...row, label: EU_LABELS[row.area], gap: row.real_tax_change_pct - row.real_income_change_pct }));
-  const ranked = [...rows].filter((row) => row.area !== "EU27_2020").sort((a, b) => b.gap - a.gap);
+  const { index_first_year: first, index_last_year: last, bases } = squeeze;
+  const rows = squeeze.areas.map((row) => ({ ...row, label: EU_LABELS[row.area] }));
   const es = rows.find((row) => row.area === "ES");
-  const esRank = ranked.indexOf(es) + 1;
-  const ahead = ranked.slice(0, esRank - 1).map((row) => row.label);
-  const yMax = Math.ceil(Math.max(...rows.flatMap((row) => [...row.real_tax_index, ...row.real_income_index].map((p) => p.value))) / 10) * 10;
+  const eu = rows.find((row) => row.area === "EU27_2020");
+  const gap = (row, b) => row.by_base[String(b)].tax - row.by_base[String(b)].income;
+  const wider = bases.filter((b) => gap(es, b) > gap(eu, b));
+  const yMax =
+    Math.ceil(Math.max(...rows.flatMap((row) => [...row.real_tax_index, ...row.real_tax_worker_index, ...row.real_income_index].map((p) => p.value))) / 10) * 10;
   const all = rows.flatMap((row) => [
     { id: `${row.area}-tax`, label: `${row.label}: impuestos reales por habitante`, points: row.real_tax_index },
+    { id: `${row.area}-worker`, label: `${row.label}: impuestos reales por ocupado`, points: row.real_tax_worker_index },
     { id: `${row.area}-income`, label: `${row.label}: renta real de los hogares por habitante`, points: row.real_income_index },
   ]);
   return (
     <Figure
       id="indices"
-      title={`La recaudación real por habitante ha crecido ${nf(es.gap)} puntos más que la renta de los hogares en España desde ${base}${
-        esRank === 1 ? ", la mayor distancia del grupo" : `, solo por detrás de ${ahead.join(" y ")}`
-      }`}
-      dek={`Índices ${base} = 100, descontada la inflación. Cuando la línea naranja va por encima de la azul, lo que ingresa el sector público por habitante crece más deprisa que la renta disponible de los hogares. Todos los paneles comparten escala.`}
+      title={`${wider.length === bases.length ? "Con cualquier año de partida" : `Con ${wider.length} de los ${bases.length} años de partida (${bases.filter((b) => !wider.includes(b)).join(", ")} es la excepción)`}, la recaudación real por habitante se separa más de la renta de los hogares en España que en la UE`}
+      dek={`Series completas, ${first} = 100, descontada la inflación. Distancia entre recaudación y renta en España frente a la UE, en puntos: ${bases
+        .map((b) => `desde ${b}, ${nf(gap(es, b))} frente a ${nf(gap(eu, b))}`)
+        .join("; ")}. La línea verde, por persona ocupada, quita lo que sube porque trabaja más gente. Todos los paneles comparten escala.`}
       legend={[
         { id: "tax", label: "Impuestos y cotizaciones por habitante (reales)", color: TAX },
+        { id: "worker", label: "Impuestos y cotizaciones por ocupado (reales)", color: WORKER },
         { id: "income", label: "Renta disponible ajustada de los hogares por habitante (real)", color: INCOME },
       ]}
-      sources={SOURCES}
-      notes={["Mismos deflactores que la figura anterior. En 2020 (pandemia) la recaudación real por habitante cae más que la renta de los hogares en todos los países."]}
+      sources={[...SOURCES, ds("nama_10_pe")]}
+      notes={[
+        "Mismos deflactores que la figura anterior. En 2020 (pandemia) la recaudación real por habitante cae más que la renta de los hogares en todos los países.",
+        "España: la burbuja inflaba la recaudación hasta 2007 y la crisis la hundió hasta 2013; por eso un «desde» elegido en esos años da cifras muy distintas.",
+      ]}
       table={<SeriesTable series={all} unit="count" />}
     >
       <div className="vizMultiples">
@@ -148,22 +207,22 @@ export function SqueezeIndexFigure({ squeeze }) {
             <h3 className="vizPanelTitle">
               {row.label}
               <span>
-                impuestos {row.real_tax_change_pct >= 0 ? "+" : "−"}
-                {nf(Math.abs(row.real_tax_change_pct))} % · renta {row.real_income_change_pct >= 0 ? "+" : "−"}
-                {nf(Math.abs(row.real_income_change_pct))} %
+                desde {first}: impuestos {nf(row.by_base[String(first)].tax)} % · por ocupado {nf(row.by_base[String(first)].tax_worker)} % · renta{" "}
+                {nf(row.by_base[String(first)].income)} %
               </span>
             </h3>
             <TimeSeriesChart
               series={[
                 { id: "tax", label: "Impuestos", shortLabel: "Imp.", color: TAX, emphasis: true, points: row.real_tax_index },
+                { id: "worker", label: "Por ocupado", shortLabel: "Ocup.", color: WORKER, points: row.real_tax_worker_index },
                 { id: "income", label: "Renta", shortLabel: "Renta", color: INCOME, points: row.real_income_index },
               ]}
               unit="count"
-              xMin={base}
+              xMin={first}
               xMax={last}
               yMax={yMax}
               height={200}
-              ariaLabel={`${row.label}: impuestos y renta reales por habitante, ${base} = 100`}
+              ariaLabel={`${row.label}: impuestos y renta reales, ${first} = 100`}
             />
           </div>
         ))}

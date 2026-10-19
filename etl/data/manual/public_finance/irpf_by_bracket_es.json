@@ -1,0 +1,676 @@
+{
+ "tax_year": 2023,
+ "source": "AEAT, Estadística de los declarantes del IRPF (ejercicio 2023)",
+ "source_url": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubikf7a8112a5b41c3fff03083be4a7a651473da97bbe.html",
+ "source_urls": {
+  "595": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubikf7a8112a5b41c3fff03083be4a7a651473da97bbe.html",
+  "435": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubik1d064d3064d0747726aa6982789dae51827fe815.html",
+  "460": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubikf624502f36c2e6dad66f5a456f2c16beaffda8152.html"
+ },
+ "files": {
+  "595": "etl/data/raw/public_finance/manual/aeat_irpf2023_total_595_cuota_resultante.html",
+  "435": "etl/data/raw/public_finance/manual/aeat_irpf2023_total_435_bi_general.html",
+  "460": "etl/data/raw/public_finance/manual/aeat_irpf2023_total_460_bi_ahorro.html"
+ },
+ "sha256": {
+  "595": "3e3bf54974328510fcbc3f68d5ef3ba68355babb823051a41c3c799e144287b5",
+  "435": "12122042e3dd76895b6d876dfabee6852dc5d82832a69cfbaec1b9752b1fd686",
+  "460": "92075be23a1f8b16498fe55f8ccfeb0e10245b6854b9a6293c41e9a709121441"
+ },
+ "retrieved": "2026-10-19",
+ "publication_home": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/home.html",
+ "table": "Estadística por partidas > Por tramos de rendimiento: 595. Cuota resultante de la autoliquidación; 435. Base imponible general; 460. Base imponible del ahorro (Tipo de Declaración: Total, Total nacional, Ejercicio 2023)",
+ "definitions": {
+  "bracket": "Tramos de rendimientos e imputaciones (AEAT bracket variable, published in miles de euros; lower_eur/upper_eur converted to euros, intervals open below and closed above). Unit of observation is the liquidación (tax return; joint returns count once), not the person.",
+  "declarations": "Número total de liquidaciones in the bracket (Datos generales column).",
+  "income": "income_eur = partida 435 Base imponible general + partida 460 Base imponible del ahorro (importe partida, euros as published: Unidad: Importe en euros). This is taxable base before reductions (pension plans etc.), not gross income; the bracket variable (rendimientos e imputaciones) is a different, AEAT-internal aggregate.",
+  "tax": "tax_eur = partida 595 Cuota resultante de la autoliquidación (cuota líquida incrementada minus deductions for double international taxation etc.; state + autonomous shares; before retenciones/pagos a cuenta). euros as published.",
+  "effective_rate_pct": "tax_eur / income_eur * 100 (derived, not published by AEAT)."
+ },
+ "brackets": [
+  {
+   "label": "Negativo y Cero",
+   "lower_eur": null,
+   "upper_eur": 0,
+   "declarations": 1270127,
+   "income_eur": -688445925,
+   "bi_general_eur": -688445925,
+   "bi_ahorro_eur": 0,
+   "tax_eur": 176331,
+   "declarations_with_tax": 37,
+   "effective_rate_pct": null,
+   "locator": {
+    "595": "Negativo y Cero | 1.270.127 | 5,30 | 37 | 0,00 | 176.331 | 0,00 | 4.766",
+    "435": "Negativo y Cero | 1.270.127 | 5,30 | 127.714 | 0,57 | -688.445.925 | -0,13 | -5.391",
+    "460": "Negativo y Cero | 1.270.127 | 5,30 | 0 | 0 | 0 | 0 | 0"
+   }
+  },
+  {
+   "label": "(0 - 1,5] (miles de euros)",
+   "lower_eur": 0,
+   "upper_eur": 1500,
+   "declarations": 1691865,
+   "income_eur": 537036997,
+   "bi_general_eur": 445004112,
+   "bi_ahorro_eur": 92032885,
+   "tax_eur": 293781,
+   "declarations_with_tax": 1544,
+   "effective_rate_pct": 0.05,
+   "locator": {
+    "595": "(0 - 1,5] | 1.691.865 | 7,05 | 1.544 | 0,01 | 293.781 | 0,00 | 190",
+    "435": "(0 - 1,5] | 1.691.865 | 7,05 | 1.361.153 | 6,06 | 445.004.112 | 0,08 | 327",
+    "460": "(0 - 1,5] | 1.691.865 | 7,05 | 749.210 | 7,77 | 92.032.885 | 0,22 | 123"
+   }
+  },
+  {
+   "label": "(1,5 - 6] (miles de euros)",
+   "lower_eur": 1500,
+   "upper_eur": 6000,
+   "declarations": 3127766,
+   "income_eur": 11869786588,
+   "bi_general_eur": 11421045903,
+   "bi_ahorro_eur": 448740685,
+   "tax_eur": 4567774,
+   "declarations_with_tax": 106601,
+   "effective_rate_pct": 0.04,
+   "locator": {
+    "595": "(1,5 - 6] | 3.127.766 | 13,04 | 106.601 | 0,64 | 4.567.774 | 0,00 | 43",
+    "435": "(1,5 - 6] | 3.127.766 | 13,04 | 3.104.475 | 13,81 | 11.421.045.903 | 2,09 | 3.679",
+    "460": "(1,5 - 6] | 3.127.766 | 13,04 | 1.080.278 | 11,20 | 448.740.685 | 1,06 | 415"
+   }
+  },
+  {
+   "label": "(6 - 12] (miles de euros)",
+   "lower_eur": 6000,
+   "upper_eur": 12000,
+   "declarations": 2688297,
+   "income_eur": 23773398424,
+   "bi_general_eur": 23146938905,
+   "bi_ahorro_eur": 626459519,
+   "tax_eur": 753441925,
+   "declarations_with_tax": 1674303,
+   "effective_rate_pct": 3.17,
+   "locator": {
+    "595": "(6 - 12] | 2.688.297 | 11,21 | 1.674.303 | 10,05 | 753.441.925 | 0,64 | 450",
+    "435": "(6 - 12] | 2.688.297 | 11,21 | 2.682.155 | 11,93 | 23.146.938.905 | 4,23 | 8.630",
+    "460": "(6 - 12] | 2.688.297 | 11,21 | 893.624 | 9,27 | 626.459.519 | 1,48 | 701"
+   }
+  },
+  {
+   "label": "(12 - 21] (miles de euros)",
+   "lower_eur": 12000,
+   "upper_eur": 21000,
+   "declarations": 4302709,
+   "income_eur": 73388056318,
+   "bi_general_eur": 72250134157,
+   "bi_ahorro_eur": 1137922161,
+   "tax_eur": 7265122953,
+   "declarations_with_tax": 4023059,
+   "effective_rate_pct": 9.9,
+   "locator": {
+    "595": "(12 - 21] | 4.302.709 | 17,94 | 4.023.059 | 24,16 | 7.265.122.953 | 6,17 | 1.806",
+    "435": "(12 - 21] | 4.302.709 | 17,94 | 4.299.116 | 19,13 | 72.250.134.157 | 13,20 | 16.806",
+    "460": "(12 - 21] | 4.302.709 | 17,94 | 1.437.498 | 14,91 | 1.137.922.161 | 2,69 | 792"
+   }
+  },
+  {
+   "label": "(21 - 30] (miles de euros)",
+   "lower_eur": 21000,
+   "upper_eur": 30000,
+   "declarations": 4277053,
+   "income_eur": 107187997038,
+   "bi_general_eur": 105462578500,
+   "bi_ahorro_eur": 1725418538,
+   "tax_eur": 15881458369,
+   "declarations_with_tax": 4222908,
+   "effective_rate_pct": 14.82,
+   "locator": {
+    "595": "(21 - 30] | 4.277.053 | 17,83 | 4.222.908 | 25,36 | 15.881.458.369 | 13,50 | 3.761",
+    "435": "(21 - 30] | 4.277.053 | 17,83 | 4.275.240 | 19,02 | 105.462.578.500 | 19,27 | 24.668",
+    "460": "(21 - 30] | 4.277.053 | 17,83 | 1.686.759 | 17,49 | 1.725.418.538 | 4,08 | 1.023"
+   }
+  },
+  {
+   "label": "(30 - 60] (miles de euros)",
+   "lower_eur": 30000,
+   "upper_eur": 60000,
+   "declarations": 5282994,
+   "income_eur": 212964135489,
+   "bi_general_eur": 206653385643,
+   "bi_ahorro_eur": 6310749846,
+   "tax_eur": 44169592854,
+   "declarations_with_tax": 5277002,
+   "effective_rate_pct": 20.74,
+   "locator": {
+    "595": "(30 - 60] | 5.282.994 | 22,02 | 5.277.002 | 31,69 | 44.169.592.854 | 37,54 | 8.370",
+    "435": "(30 - 60] | 5.282.994 | 22,02 | 5.280.600 | 23,50 | 206.653.385.643 | 37,76 | 39.134",
+    "460": "(30 - 60] | 5.282.994 | 22,02 | 2.822.549 | 29,27 | 6.310.749.846 | 14,91 | 2.236"
+   }
+  },
+  {
+   "label": "(60 - 150] (miles de euros)",
+   "lower_eur": 60000,
+   "upper_eur": 150000,
+   "declarations": 1170735,
+   "income_eur": 98464730448,
+   "bi_general_eur": 88860368854,
+   "bi_ahorro_eur": 9604361594,
+   "tax_eur": 28462476734,
+   "declarations_with_tax": 1170500,
+   "effective_rate_pct": 28.91,
+   "locator": {
+    "595": "(60 - 150] | 1.170.735 | 4,88 | 1.170.500 | 7,03 | 28.462.476.734 | 24,19 | 24.317",
+    "435": "(60 - 150] | 1.170.735 | 4,88 | 1.169.348 | 5,20 | 88.860.368.854 | 16,24 | 75.991",
+    "460": "(60 - 150] | 1.170.735 | 4,88 | 823.404 | 8,54 | 9.604.361.594 | 22,69 | 11.664"
+   }
+  },
+  {
+   "label": "(150 - 601] (miles de euros)",
+   "lower_eur": 150000,
+   "upper_eur": 601000,
+   "declarations": 160927,
+   "income_eur": 38694067666,
+   "bi_general_eur": 28578584666,
+   "bi_ahorro_eur": 10115483000,
+   "tax_eur": 13128053696,
+   "declarations_with_tax": 160911,
+   "effective_rate_pct": 33.93,
+   "locator": {
+    "595": "(150 - 601] | 160.927 | 0,67 | 160.911 | 0,97 | 13.128.053.696 | 11,16 | 81.586",
+    "435": "(150 - 601] | 160.927 | 0,67 | 160.471 | 0,71 | 28.578.584.666 | 5,22 | 178.092",
+    "460": "(150 - 601] | 160.927 | 0,67 | 135.778 | 1,41 | 10.115.483.000 | 23,90 | 74.500"
+   }
+  },
+  {
+   "label": "Mayor de 601 (miles de euros)",
+   "lower_eur": 601000,
+   "upper_eur": null,
+   "declarations": 14738,
+   "income_eur": 23376187344,
+   "bi_general_eur": 11116532372,
+   "bi_ahorro_eur": 12259654972,
+   "tax_eur": 8008604978,
+   "declarations_with_tax": 14736,
+   "effective_rate_pct": 34.26,
+   "locator": {
+    "595": "Mayor de 601 | 14.738 | 0,06 | 14.736 | 0,09 | 8.008.604.978 | 6,81 | 543.472",
+    "435": "Mayor de 601 | 14.738 | 0,06 | 14.674 | 0,07 | 11.116.532.372 | 2,03 | 757.567",
+    "460": "Mayor de 601 | 14.738 | 0,06 | 13.907 | 0,14 | 12.259.654.972 | 28,97 | 881.546"
+   }
+  }
+ ],
+ "totals": {
+  "declarations": 23987211,
+  "income_eur": 589566950387,
+  "tax_eur": 117673789396,
+  "locator": {
+   "595": "Total | 23.987.211 | 100,00 | 16.651.601 | 100,00 | 117.673.789.396 | 100,00 | 7.067",
+   "435": "Total | 23.987.211 | 100,00 | 22.474.946 | 100,00 | 547.246.127.188 | 100,00 | 24.349",
+   "460": "Total | 23.987.211 | 100,00 | 9.643.007 | 100,00 | 42.320.823.199 | 100,00 | 4.389"
+  }
+ },
+ "by_ccaa": {
+  "tax_year": 2023,
+  "source_url": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/home.html",
+  "note": "Per-CCAA versions of the same three tables (Total row). Régimen común only: País Vasco and Navarra (foral IRPF) are not in AEAT statistics; Ceuta and Melilla have no separate entry in the 2023 CCAA menu.",
+  "sha256": "per row (files and sha256 keyed by partida)",
+  "rows": [
+   {
+    "name": "Andalucía",
+    "declarations": 4302050,
+    "income_eur": 83650330185,
+    "tax_eur": 15185277429,
+    "income_mean_eur": 19444,
+    "tax_mean_eur": 3530,
+    "effective_rate_pct": 18.15,
+    "source_urls": {
+     "595": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubik5ad29f3cb623cbb9e92d06042fe46fc5b6e12dae.html",
+     "435": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubik5eed432af7cbec4e65e087b4a2839d928042e1ac.html",
+     "460": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubikf732e9cbc13b8dcdd7be09661be0633a779db8298.html"
+    },
+    "files": {
+     "595": "aeat_irpf2023_andalucia_595.html",
+     "435": "aeat_irpf2023_andalucia_435.html",
+     "460": "aeat_irpf2023_andalucia_460.html"
+    },
+    "sha256": {
+     "595": "b5bc636d3c53e1051d6b1f13d525d761ae01e4ab770e7440a032d1c3716988c3",
+     "435": "560a12db4e9c3ed57fac1291ed4938cb1770b5c560b519ae0de51911e243eec5",
+     "460": "bc6d9d38a7b8e5c6a2a8bc94f8c0fabe5b9af72469a036fc8dfdfede156e2176"
+    },
+    "locator": {
+     "595": "Total | 4.302.050 | 100,00 | 2.576.478 | 100,00 | 15.185.277.429 | 100,00 | 5.894",
+     "435": "Total | 4.302.050 | 100,00 | 3.896.537 | 100,00 | 78.769.116.781 | 100,00 | 20.215",
+     "460": "Total | 4.302.050 | 100,00 | 1.579.468 | 100,00 | 4.881.213.404 | 100,00 | 3.090"
+    }
+   },
+   {
+    "name": "Aragón",
+    "declarations": 786187,
+    "income_eur": 18675657843,
+    "tax_eur": 3576714314,
+    "income_mean_eur": 23755,
+    "tax_mean_eur": 4549,
+    "effective_rate_pct": 19.15,
+    "source_urls": {
+     "595": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubikf3c79467f6219b3d7069921d99b7e463ac43d8b78.html",
+     "435": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubikf43560c99c517af9da905305e592ec65697b61674.html",
+     "460": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubikf1b12b69c9e0ae13c97da2e0205bc53031ddb5321.html"
+    },
+    "files": {
+     "595": "aeat_irpf2023_aragon_595.html",
+     "435": "aeat_irpf2023_aragon_435.html",
+     "460": "aeat_irpf2023_aragon_460.html"
+    },
+    "sha256": {
+     "595": "6e2272d5f35afb8a8b852f5cd9c6823f1e4568f02edb803cd4877df8aeb89e0e",
+     "435": "6f1b4527070250ea41f07400d9d8ffc2fc93dd0b7137287e249f663e97351e24",
+     "460": "d538fb83c4437d4bc5f5cdd7ca0126b4c96d5b18dadbc4c565b6e460ba3bc9d5"
+    },
+    "locator": {
+     "595": "Total | 786.187 | 100,00 | 568.999 | 100,00 | 3.576.714.314 | 100,00 | 6.286",
+     "435": "Total | 786.187 | 100,00 | 744.552 | 100,00 | 17.497.879.927 | 100,00 | 23.501",
+     "460": "Total | 786.187 | 100,00 | 384.090 | 100,00 | 1.177.777.916 | 100,00 | 3.066"
+    }
+   },
+   {
+    "name": "Asturias, Principado de",
+    "declarations": 563145,
+    "income_eur": 13554704499,
+    "tax_eur": 2571146799,
+    "income_mean_eur": 24070,
+    "tax_mean_eur": 4566,
+    "effective_rate_pct": 18.97,
+    "source_urls": {
+     "595": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubikf462dc9d6334e65e8aceda81bbbb248eba326985c.html",
+     "435": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubikf2dda6a76d49c6b8e07d50bfc8a6c9e9c8b0cc724.html",
+     "460": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubikf21af17e6f35916faeeefbeaf0b46f1eeecc15e2f.html"
+    },
+    "files": {
+     "595": "aeat_irpf2023_asturias_principado_de_595.html",
+     "435": "aeat_irpf2023_asturias_principado_de_435.html",
+     "460": "aeat_irpf2023_asturias_principado_de_460.html"
+    },
+    "sha256": {
+     "595": "40d3c2f105fe4bbce81fee5c1bba10a3298116c1aff1a430792549cce7c15709",
+     "435": "5b707750d81e173709257fd2ea18e1272804858ae4f18151f3179ca3c2d474dc",
+     "460": "317fff4211e1e59decb9136c225e03b9e160d7b38dd93d9756cf426183ae2aa5"
+    },
+    "locator": {
+     "595": "Total | 563.145 | 100,00 | 403.461 | 100,00 | 2.571.146.799 | 100,00 | 6.373",
+     "435": "Total | 563.145 | 100,00 | 527.772 | 100,00 | 12.827.275.489 | 100,00 | 24.305",
+     "460": "Total | 563.145 | 100,00 | 264.990 | 100,00 | 727.429.010 | 100,00 | 2.745"
+    }
+   },
+   {
+    "name": "Balears, Illes",
+    "declarations": 631466,
+    "income_eur": 17125647680,
+    "tax_eur": 3568319940,
+    "income_mean_eur": 27120,
+    "tax_mean_eur": 5651,
+    "effective_rate_pct": 20.84,
+    "source_urls": {
+     "595": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubikf5dc47f523842d5f1dc9e5488a7b68ca3287aaba.html",
+     "435": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubik49dc65b11e6fd1768b3e44e080a958ed41cbc5ca.html",
+     "460": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubikf2c8dbd3e7a4c34bea4e4b89ab4f342ad52bffa55.html"
+    },
+    "files": {
+     "595": "aeat_irpf2023_balears_illes_595.html",
+     "435": "aeat_irpf2023_balears_illes_435.html",
+     "460": "aeat_irpf2023_balears_illes_460.html"
+    },
+    "sha256": {
+     "595": "3ab94399592e79e124b7211110f7700ebe9020d687eb166c2dc71b428982539f",
+     "435": "08a7ea8bbbe2cbc2a80918b4ff290581f936e709b31cd090e67c642ec4e3ba7d",
+     "460": "58983d379bd8b84a2bd4402d4c8c2696ace260e0f91e21a500281410d2732a7f"
+    },
+    "locator": {
+     "595": "Total | 631.466 | 100,00 | 486.653 | 100,00 | 3.568.319.940 | 100,00 | 7.332",
+     "435": "Total | 631.466 | 100,00 | 606.647 | 100,00 | 15.345.678.578 | 100,00 | 25.296",
+     "460": "Total | 631.466 | 100,00 | 215.580 | 100,00 | 1.779.969.102 | 100,00 | 8.257"
+    }
+   },
+   {
+    "name": "Canarias",
+    "declarations": 1085611,
+    "income_eur": 22995900904,
+    "tax_eur": 4023761604,
+    "income_mean_eur": 21182,
+    "tax_mean_eur": 3706,
+    "effective_rate_pct": 17.5,
+    "source_urls": {
+     "595": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubikf44b5037b1de509566c0eace29f1cc87aa5bc8fad.html",
+     "435": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubik33c1d744d3f31f3b93215f4a8c871b978b7e6948.html",
+     "460": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubikf4cef44fd0fbbf6881df2b5b7929b37b9f00d6702.html"
+    },
+    "files": {
+     "595": "aeat_irpf2023_canarias_595.html",
+     "435": "aeat_irpf2023_canarias_435.html",
+     "460": "aeat_irpf2023_canarias_460.html"
+    },
+    "sha256": {
+     "595": "f4fa52700c652dd4efc81d7dce9ece1898fc8012772cc517141c5e2e54d30ef1",
+     "435": "00b9684ef2d9352586b986cf7ff2e8e2b592e8863e36ac35bee8932e720a6e8a",
+     "460": "cd6b926cc0bee6e13611a060ad0a8805b9065402c31d09bcd112bb7297bb4496"
+    },
+    "locator": {
+     "595": "Total | 1.085.611 | 100,00 | 738.872 | 100,00 | 4.023.761.604 | 100,00 | 5.446",
+     "435": "Total | 1.085.611 | 100,00 | 1.002.959 | 100,00 | 21.484.569.678 | 100,00 | 21.421",
+     "460": "Total | 1.085.611 | 100,00 | 348.690 | 100,00 | 1.511.331.226 | 100,00 | 4.334"
+    }
+   },
+   {
+    "name": "Cantabria",
+    "declarations": 319734,
+    "income_eur": 7599324002,
+    "tax_eur": 1430102264,
+    "income_mean_eur": 23768,
+    "tax_mean_eur": 4473,
+    "effective_rate_pct": 18.82,
+    "source_urls": {
+     "595": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubik63fdac385e8cf63a3088d61131d8c6850c063492.html",
+     "435": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubikf7393581b6cac4c1dbf5203564ff623aacf16c025.html",
+     "460": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubik681a49b65825842230cf318dc6c48f6611052f5.html"
+    },
+    "files": {
+     "595": "aeat_irpf2023_cantabria_595.html",
+     "435": "aeat_irpf2023_cantabria_435.html",
+     "460": "aeat_irpf2023_cantabria_460.html"
+    },
+    "sha256": {
+     "595": "db5f226639c63d8b819fb52b141475a7bce0f6e5eaa7b39322b5bd8c5e86dfb1",
+     "435": "fbdeba76cec3f3b33f8f558e1ac56cb29a1a25191b77a332ba9d11bd67ff3f47",
+     "460": "0496c8ebf1d2ae73409de6cec8f4ffadb15d411e3d772c6e7775bd6222c8edfc"
+    },
+    "locator": {
+     "595": "Total | 319.734 | 100,00 | 226.432 | 100,00 | 1.430.102.264 | 100,00 | 6.316",
+     "435": "Total | 319.734 | 100,00 | 301.752 | 100,00 | 7.088.970.411 | 100,00 | 23.493",
+     "460": "Total | 319.734 | 100,00 | 141.406 | 100,00 | 510.353.591 | 100,00 | 3.609"
+    }
+   },
+   {
+    "name": "Castilla y León",
+    "declarations": 1369003,
+    "income_eur": 30246654832,
+    "tax_eur": 5479331578,
+    "income_mean_eur": 22094,
+    "tax_mean_eur": 4002,
+    "effective_rate_pct": 18.12,
+    "source_urls": {
+     "595": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubik16323a9a30e7f4454929b4d9d787d1341ffd5157.html",
+     "435": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubik118a0fb9ea117fc91e4f9be333cb45214ae6370a.html",
+     "460": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubikf13977726399a7c2297b587a361194859a99bef3d.html"
+    },
+    "files": {
+     "595": "aeat_irpf2023_castilla_y_leon_595.html",
+     "435": "aeat_irpf2023_castilla_y_leon_435.html",
+     "460": "aeat_irpf2023_castilla_y_leon_460.html"
+    },
+    "sha256": {
+     "595": "a398689c9ffdfb0fbc2c81cb01c59896eb9fc41dd67bb64c36e41c8642f5ec82",
+     "435": "2a4471600cc1ae5c0942d40ee4426c9726a5699bd77860294cdbf0830a2661af",
+     "460": "30285ad92e57e682c8c09042267dfed44a5eb1765281177d872eccdbdd64e3fb"
+    },
+    "locator": {
+     "595": "Total | 1.369.003 | 100,00 | 945.693 | 100,00 | 5.479.331.578 | 100,00 | 5.794",
+     "435": "Total | 1.369.003 | 100,00 | 1.293.357 | 100,00 | 28.513.881.960 | 100,00 | 22.046",
+     "460": "Total | 1.369.003 | 100,00 | 634.843 | 100,00 | 1.732.772.872 | 100,00 | 2.729"
+    }
+   },
+   {
+    "name": "Castilla - La Mancha",
+    "declarations": 1066343,
+    "income_eur": 21264236825,
+    "tax_eur": 3693224321,
+    "income_mean_eur": 19941,
+    "tax_mean_eur": 3463,
+    "effective_rate_pct": 17.37,
+    "source_urls": {
+     "595": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubikf3468f366fc32ba7e29254e92c52dc23fe8ad0c1c.html",
+     "435": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubik1d0a4153376fd33abc38430f6b4ae6192be376e5.html",
+     "460": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubikfac98bfbdbd8d21dbce857930feda7009e6c406b.html"
+    },
+    "files": {
+     "595": "aeat_irpf2023_castilla_la_mancha_595.html",
+     "435": "aeat_irpf2023_castilla_la_mancha_435.html",
+     "460": "aeat_irpf2023_castilla_la_mancha_460.html"
+    },
+    "sha256": {
+     "595": "1fb31fd7ba0a14a0e1d47820a5f5dd6e462563d3bf02070271ea41f97bb12b76",
+     "435": "4cfa17431f649ec81548c5f88972b25fb56f0e850a53930edb9bf7d613ed707b",
+     "460": "6d931ea7d6da5bc937c90e020cf51b87c4481627fd55bb76c3c9a64da0043b20"
+    },
+    "locator": {
+     "595": "Total | 1.066.343 | 100,00 | 684.424 | 100,00 | 3.693.224.321 | 100,00 | 5.396",
+     "435": "Total | 1.066.343 | 100,00 | 999.925 | 100,00 | 20.252.374.608 | 100,00 | 20.254",
+     "460": "Total | 1.066.343 | 100,00 | 406.628 | 100,00 | 1.011.862.217 | 100,00 | 2.488"
+    }
+   },
+   {
+    "name": "Cataluña",
+    "declarations": 4189836,
+    "income_eur": 120904737396,
+    "tax_eur": 26453425987,
+    "income_mean_eur": 28857,
+    "tax_mean_eur": 6314,
+    "effective_rate_pct": 21.88,
+    "source_urls": {
+     "595": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubikf1fe0668ba50b0dd18389e2e104c3d6e5771b0f89.html",
+     "435": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubikf6d216bfb8a84a435dc603b499b4210b9bea78ce7.html",
+     "460": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubikf730f2efeb9547a8ab1ebc4119c041aeeddecc1bb.html"
+    },
+    "files": {
+     "595": "aeat_irpf2023_cataluna_595.html",
+     "435": "aeat_irpf2023_cataluna_435.html",
+     "460": "aeat_irpf2023_cataluna_460.html"
+    },
+    "sha256": {
+     "595": "5662cfe2fb1b513857594de83dc848d95bf91447849959dd6689d9b90f2bbd66",
+     "435": "7deb3ebafb7ed1a7530632b93f1f369acd0c59d31c095e40f104b55e2541a006",
+     "460": "cc92aeb82fe027c177080c258236eefbbda054d3dca8d61dff5fd0a08a58874f"
+    },
+    "locator": {
+     "595": "Total | 4.189.836 | 100,00 | 3.179.773 | 100,00 | 26.453.425.987 | 100,00 | 8.319",
+     "435": "Total | 4.189.836 | 100,00 | 4.007.133 | 100,00 | 111.448.610.901 | 100,00 | 27.813",
+     "460": "Total | 4.189.836 | 100,00 | 1.566.845 | 100,00 | 9.456.126.495 | 100,00 | 6.035"
+    }
+   },
+   {
+    "name": "Comunitat Valenciana",
+    "declarations": 2718994,
+    "income_eur": 59363410849,
+    "tax_eur": 11253735474,
+    "income_mean_eur": 21833,
+    "tax_mean_eur": 4139,
+    "effective_rate_pct": 18.96,
+    "source_urls": {
+     "595": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubikf6414711bcaa96dd15f00958207feb5505c29976f.html",
+     "435": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubik123c958cbb36a1417d0c8cf5db41a4df968ec004.html",
+     "460": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubikf63e57c647633f8bdbbc8863acee76ea2caabe3b1.html"
+    },
+    "files": {
+     "595": "aeat_irpf2023_comunitat_valenciana_595.html",
+     "435": "aeat_irpf2023_comunitat_valenciana_435.html",
+     "460": "aeat_irpf2023_comunitat_valenciana_460.html"
+    },
+    "sha256": {
+     "595": "f5df4f495177d66d433e0c1181418fdf2d41722d81310f9843770158a30f1cc1",
+     "435": "735d1bb3235184692c9694d85df14e87f73f6d7b52d1905c5eae914166770782",
+     "460": "1e4bb5db80431a407af8f687617c03b63f7b8410e7fd7f33750f942a0f2ae499"
+    },
+    "locator": {
+     "595": "Total | 2.718.994 | 100,00 | 1.822.265 | 100,00 | 11.253.735.474 | 100,00 | 6.176",
+     "435": "Total | 2.718.994 | 100,00 | 2.541.123 | 100,00 | 55.073.373.588 | 100,00 | 21.673",
+     "460": "Total | 2.718.994 | 100,00 | 1.130.322 | 100,00 | 4.290.037.261 | 100,00 | 3.795"
+    }
+   },
+   {
+    "name": "Extremadura",
+    "declarations": 556043,
+    "income_eur": 9419965810,
+    "tax_eur": 1603952570,
+    "income_mean_eur": 16941,
+    "tax_mean_eur": 2885,
+    "effective_rate_pct": 17.03,
+    "source_urls": {
+     "595": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubikf58a91c485d22f1aef529798a789741d26811a7bf.html",
+     "435": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubikf6d4c746caf2afc897bc208abdcd8802be7fe42a3.html",
+     "460": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubik2b3be203ea077be0ae48ee1fa955b9fc95d4e1e7.html"
+    },
+    "files": {
+     "595": "aeat_irpf2023_extremadura_595.html",
+     "435": "aeat_irpf2023_extremadura_435.html",
+     "460": "aeat_irpf2023_extremadura_460.html"
+    },
+    "sha256": {
+     "595": "52673041860f7b8f84511e9f1e1f5dba3068ca774ee8d45c0ee10f1addea26b2",
+     "435": "bffcea3a292b73a61319328b2ab867951f3557662455b0d9c769c72cfc0b2256",
+     "460": "89669f99aaec240bc35f0de04cd2dd28784adf84ee811a4067e39b90644724b6"
+    },
+    "locator": {
+     "595": "Total | 556.043 | 100,00 | 316.878 | 100,00 | 1.603.952.570 | 100,00 | 5.062",
+     "435": "Total | 556.043 | 100,00 | 505.940 | 100,00 | 9.023.716.671 | 100,00 | 17.836",
+     "460": "Total | 556.043 | 100,00 | 174.409 | 100,00 | 396.249.139 | 100,00 | 2.272"
+    }
+   },
+   {
+    "name": "Galicia",
+    "declarations": 1480315,
+    "income_eur": 32745086502,
+    "tax_eur": 6118654170,
+    "income_mean_eur": 22120,
+    "tax_mean_eur": 4133,
+    "effective_rate_pct": 18.69,
+    "source_urls": {
+     "595": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubikf4b99deb7aba815272891225f28c3016512a30160.html",
+     "435": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubikf2c2961a6b20622437a6fcdce1dddaf8099f9de2c.html",
+     "460": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubik7832cb3b4ffaa9751ab6babf6fc5e88324abfd50.html"
+    },
+    "files": {
+     "595": "aeat_irpf2023_galicia_595.html",
+     "435": "aeat_irpf2023_galicia_435.html",
+     "460": "aeat_irpf2023_galicia_460.html"
+    },
+    "sha256": {
+     "595": "cfe4c5363feed47506fe009912180781a6ffd5a6442b38edb8b2462a2c4a9700",
+     "435": "5c2c3ca523398fbf592f8ad0b4ca4afe84b03a40d0404105b27987492a3fc40d",
+     "460": "d989e399778dd1c02cb600b6c517a4c25b87344c74584fd9ff5dbd33661419ff"
+    },
+    "locator": {
+     "595": "Total | 1.480.315 | 100,00 | 1.019.803 | 100,00 | 6.118.654.170 | 100,00 | 6.000",
+     "435": "Total | 1.480.315 | 100,00 | 1.390.373 | 100,00 | 30.625.113.973 | 100,00 | 22.027",
+     "460": "Total | 1.480.315 | 100,00 | 474.051 | 100,00 | 2.119.972.529 | 100,00 | 4.472"
+    }
+   },
+   {
+    "name": "Madrid, Comunidad de",
+    "declarations": 3897784,
+    "income_eur": 130383985737,
+    "tax_eur": 29019085163,
+    "income_mean_eur": 33451,
+    "tax_mean_eur": 7445,
+    "effective_rate_pct": 22.26,
+    "source_urls": {
+     "595": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubik698479334fc4080480cd6ffa337e396a1bf72de3.html",
+     "435": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubik6cc1217591c7ea154077243f88d080d3d9b9455c.html",
+     "460": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubikf7a03b146e9f3859abca60dbec0f5b91da8f76040.html"
+    },
+    "files": {
+     "595": "aeat_irpf2023_madrid_comunidad_de_595.html",
+     "435": "aeat_irpf2023_madrid_comunidad_de_435.html",
+     "460": "aeat_irpf2023_madrid_comunidad_de_460.html"
+    },
+    "sha256": {
+     "595": "373dc762c2b6c610754da4d56f850855e865bd74e2e0861d9c03996865f3beb3",
+     "435": "c123364b514655fd4fc1a7d18a2063ea0ecd75ddd57f07ac3b3c7dde971507fd",
+     "460": "47fb8a171b9e051037a0cb0976098d8b36a8dfc187ee5ece681c9ef4e5cff25b"
+    },
+    "locator": {
+     "595": "Total | 3.897.784 | 100,00 | 3.028.540 | 100,00 | 29.019.085.163 | 100,00 | 9.582",
+     "435": "Total | 3.897.784 | 100,00 | 3.711.909 | 100,00 | 119.026.086.772 | 100,00 | 32.066",
+     "460": "Total | 3.897.784 | 100,00 | 1.879.963 | 100,00 | 11.357.898.965 | 100,00 | 6.042"
+    }
+   },
+   {
+    "name": "Murcia, Región de",
+    "declarations": 756871,
+    "income_eur": 15453007827,
+    "tax_eur": 2739995744,
+    "income_mean_eur": 20417,
+    "tax_mean_eur": 3620,
+    "effective_rate_pct": 17.73,
+    "source_urls": {
+     "595": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubikf35cbbcd7a9144427a385c77fdba6b086fe7cf9c.html",
+     "435": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubik5b473ec66c0d376ea0d5509a61fba40c79a7a23c.html",
+     "460": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubikf79198882a9d1efdbbc07cb4350feb022185fdd1.html"
+    },
+    "files": {
+     "595": "aeat_irpf2023_murcia_region_de_595.html",
+     "435": "aeat_irpf2023_murcia_region_de_435.html",
+     "460": "aeat_irpf2023_murcia_region_de_460.html"
+    },
+    "sha256": {
+     "595": "c1f4583b823ad2e806a96b2a49337f03edcc7fbcc9595d244aec241de9101469",
+     "435": "15c816bf8a0979e644bc239770d6f4ec3a7ed687df7157ea5bb9d4e893e9c899",
+     "460": "9ef97bf944ec23cab28eaa4b77ad85c9dc584e221b5c422aa053eb45b2c348e9"
+    },
+    "locator": {
+     "595": "Total | 756.871 | 100,00 | 470.761 | 100,00 | 2.739.995.744 | 100,00 | 5.820",
+     "435": "Total | 756.871 | 100,00 | 700.026 | 100,00 | 14.467.945.830 | 100,00 | 20.668",
+     "460": "Total | 756.871 | 100,00 | 337.751 | 100,00 | 985.061.997 | 100,00 | 2.917"
+    }
+   },
+   {
+    "name": "Rioja, La",
+    "declarations": 187773,
+    "income_eur": 4278534207,
+    "tax_eur": 792364993,
+    "income_mean_eur": 22786,
+    "tax_mean_eur": 4220,
+    "effective_rate_pct": 18.52,
+    "source_urls": {
+     "595": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubikf510d7a807657c1bc52a0dbbc7b05de1177c15151.html",
+     "435": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubikf191f2266d20b53699381e1b6d380b776bf49a2db.html",
+     "460": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubikf1c8983d765bb9c81c43e1187e0407f7a6c8f8b86.html"
+    },
+    "files": {
+     "595": "aeat_irpf2023_rioja_la_595.html",
+     "435": "aeat_irpf2023_rioja_la_435.html",
+     "460": "aeat_irpf2023_rioja_la_460.html"
+    },
+    "sha256": {
+     "595": "84835a38276f98a9fa373dbc69589d6b759d1d4cc0e10ecf29afc749b67bb9f9",
+     "435": "da3edd16f233dbb874c82300bb2aafe62a45851cbaec6bd80cffb439a8ec79ae",
+     "460": "ddcd4652b15e6bfc325c4638c8b8a7f5990c8602abf087c38b26e4b48d6037fa"
+    },
+    "locator": {
+     "595": "Total | 187.773 | 100,00 | 132.861 | 100,00 | 792.364.993 | 100,00 | 5.964",
+     "435": "Total | 187.773 | 100,00 | 177.343 | 100,00 | 3.985.285.512 | 100,00 | 22.472",
+     "460": "Total | 187.773 | 100,00 | 84.176 | 100,00 | 293.248.695 | 100,00 | 3.484"
+    }
+   }
+  ],
+  "sum_check": {
+   "declarations": 23911155,
+   "income_eur": 587661185098,
+   "tax_eur": 117509092350,
+   "vs_total_pct": {
+    "declarations": 99.683,
+    "income_eur": 99.677,
+    "tax_eur": 99.86
+   }
+  }
+ },
+ "gaps": [
+  "check: brackets sum declarations=23987211 vs total 23987211 (diff 0.0000 %) OK",
+  "check: brackets sum income_eur=589566950387 vs total 589566950387 (diff 0.0000 %) OK",
+  "check: brackets sum tax_eur=117673789395 vs total 117673789396 (diff 0.0000 %) OK",
+  "Excludes País Vasco and Navarra (foral IRPF, own tax agencies) and non-filers below the filing threshold; covers only returns filed (declarantes).",
+  "Bracket variable (rendimientos e imputaciones) differs from income column (base imponible general + ahorro); the \"Negativo y Cero\" bracket has negative base imponible general.",
+  "Cuota resultante includes the autonomous-community share; it is the final tax liability, not the amount paid at filing (retenciones are withheld during the year).",
+  "by_ccaa covers the 15 régimen-común CCAA listed in the AEAT 2023 menu; they sum to 99.68 % of declarations, 99.68 % of income and 99.86 % of tax of the national total; the remainder (Ceuta, Melilla and any unassigned returns) is not published as a separate CCAA entry here.",
+  "Some bracket cells in per-CCAA tables are suppressed by AEAT (secreto estadístico); only the CCAA Total rows are used, and they are complete.",
+  "Unit is the liquidación: joint returns (3,205,705 of 23,987,211) combine two or more people, so brackets mix individuals and households."
+ ]
+}

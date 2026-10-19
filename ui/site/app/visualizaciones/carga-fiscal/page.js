@@ -5,6 +5,8 @@ import Figure, { SeriesTable } from "../components/Figure";
 import { formatValue } from "../components/format.mjs";
 import { StatutoryRatesFigure, ComplexityFigures } from "./sections";
 import ConsolidatedBars from "./ConsolidatedBars";
+import DistributionFigure from "./Distribution";
+import TerritoryFigure from "./Territory";
 import { SqueezeFigure, SqueezeIndexFigure, SurveyFigure } from "./Squeeze";
 import { SpendingSectionIntro, WhereItGoesFigure, DecompositionFigure, LongRunSpendingFigure } from "./WhereItGoes";
 
@@ -222,7 +224,7 @@ export default function CargaFiscalPage() {
         ) : null}
       </section>
 
-      {data.squeeze ? <SqueezeFigure squeeze={data.squeeze} /> : null}
+      {data.squeeze ? <SqueezeFigure squeeze={data.squeeze} distribution={data.distribution} territory={data.territory} /> : null}
       {data.squeeze?.survey ? <SurveyFigure squeeze={data.squeeze} /> : null}
 
       {esRow ? (
@@ -432,6 +434,23 @@ export default function CargaFiscalPage() {
             })}
         </div>
       </Figure>
+
+      {data.distribution?.irpf ? (
+        <DistributionFigure distribution={data.distribution} irpfSource={{ label: "AEAT, Estadística de los declarantes del IRPF", href: src.aeat_irpf_stats?.page }} />
+      ) : null}
+
+      {data.territory ? (
+        <TerritoryFigure
+          territory={data.territory}
+          sources={[
+            { label: "Hacienda, Tributación autonómica. Medidas 2025", href: "https://www.hacienda.gob.es/SGFAL/FinanciacionTerritorial/Autonomica/Capitulo-I-Tributacion-Autonomica-2025.pdf" },
+            { label: "Hacienda, liquidación del sistema de financiación 2024", href: "https://www.hacienda.gob.es/cdi/sist%20financiacion%20y%20deuda/informaci%C3%B3nccaa/cuadros-liquidacion-2024.pdf" },
+            { label: "Hacienda, presupuestos liquidados de las CCAA", href: src.hacienda_ccaa?.page },
+            { label: "AEAT, declarantes del IRPF por comunidad", href: src.aeat_irpf_stats?.page },
+            { label: "OCDE, Tax Database (DBnomics)", href: src.oecd_tax_database?.page },
+          ]}
+        />
+      ) : null}
 
       {data.spending ? (
         <>

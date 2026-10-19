@@ -40,7 +40,7 @@ function Panel({ title, rows, field, digits, suffix, colors }) {
 }
 
 export default function DeltaBars({ windows, labels, colors }) {
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(Math.max(0, windows.findIndex((w) => w.from === 2000)));
   const w = windows[index];
   const functions = w.functions.map((f) => ({
     key: f.key,
