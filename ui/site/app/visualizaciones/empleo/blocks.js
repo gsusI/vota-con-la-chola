@@ -76,6 +76,7 @@ export function PairedBars({ rows, measures, unit = "growth", label }) {
   const width = (value) => `${(Math.abs(value) / extent) * 36}%`; // leaves room for the value labels
   return (
     <div role="table" aria-label={label} style={{ display: "grid", gap: 10 }}>
+      {measures.length > 1 ? (
       <ul className="vizLegend" aria-label="Leyenda">
         {measures.map((m) => (
           <li key={m.key}>
@@ -84,6 +85,7 @@ export function PairedBars({ rows, measures, unit = "growth", label }) {
           </li>
         ))}
       </ul>
+      ) : null}
       {rows.map((row) => (
         <div role="row" key={row.id} style={{ display: "grid", gridTemplateColumns: "minmax(90px, 140px) 1fr", gap: 10, alignItems: "center" }}>
           <span role="rowheader" style={{ fontSize: "0.84rem", fontWeight: row.emphasis ? 700 : 400 }}>
@@ -103,7 +105,7 @@ export function PairedBars({ rows, measures, unit = "growth", label }) {
                       position: "absolute",
                       top: 2,
                       height: 12,
-                      background: m.color,
+                      background: row.color || m.color,
                       opacity: row.emphasis ? 1 : 0.7,
                       left: negative ? `calc(50% - ${width(value)})` : "50%",
                       width: width(value),

@@ -269,6 +269,7 @@ def build(conn: sqlite3.Connection) -> dict:
 
     extended = build_extended(store, last_year, esp)
     extended["intermittency"] = intermittency(store)
+    extended["narratives"] = narratives(store, esp, zutn, nawru, last_year, extended["intermittency"])
     ev, ev_meta = events(conn)
     sources = {}
     for source_id, releases in store.provenance.items():
@@ -585,6 +586,57 @@ def intermittency(store: Store) -> dict:
     }
 
 
+def narratives(store: Store, esp: dict[int, float], zutn: dict, nawru: dict, last_year: int, inter: dict) -> dict:
+    """«El dato mata el relato»: (1) Spain-EU gap split into structural and cyclical parts; (2) employees by contract."""
+    eu = {**{y: v for y, v in zutn["DU15"].items() if y < 1991}, **zutn["EU15"]}
+    n_es = nawru["ESP"]
+    n_eu = {**{y: v for y, v in nawru["DU15"].items() if y < 1991}, **nawru["EU15"]}
+    rows = []
+    for y in range(HYPOTHESIS_FROM, last_year + 1):
+        if all(y in m for m in (esp, eu, n_es, n_eu)):
+            gap, structural = esp[y] - eu[y], n_es[y] - n_eu[y]
+            rows.append({"year": y, "gap": r(gap), "structural": r(structural), "cyclical": r(gap - structural),
+                         "es": r(esp[y]), "eu": r(eu[y]), "nawru_es": r(n_es[y]), "nawru_eu": r(n_eu[y]),
+                         "eu_ref": "UE-15 con la RFA" if y < 1991 else "UE-15"})
+    cyc_min = min(rows, key=lambda x: x["cyclical"])
+    cyc_max = max(rows, key=lambda x: x["cyclical"])
+    structural_block = {
+        "rows": rows,
+        "mean_gap": r(mean(x["gap"] for x in rows)),
+        "mean_structural": r(mean(x["structural"] for x in rows)),
+        "structural_share": r(mean(x["structural"] for x in rows) / mean(x["gap"] for x in rows) * 100, 0),
+        "cyclical_min": {"year": cyc_min["year"], "value": cyc_min["cyclical"]},
+        "cyclical_max": {"year": cyc_max["year"], "value": cyc_max["cyclical"]},
+        "years_cyclical_dominates": sum(abs(x["cyclical"]) > abs(x["structural"]) for x in rows),
+        "structural_min": min(({"year": x["year"], "value": x["structural"]} for x in rows), key=lambda x: x["value"]),
+    }
+
+    total = store.series("ine_epa_tempus", "EPA", "EPA416745")["ESP"]
+    indef = store.series("ine_epa_tempus", "EPA", "EPA416746")["ESP"]
+    fd = store.series("ine_epa_tempus", "EPA", "EPA416748")["ESP"]
+    temp = store.series("ine_epa_tempus", "EPA", "EPA416749")["ESP"]
+    quarters = [q for q in sorted(total, key=lambda q: (int(q[:4]), int(q[5:]))) if int(q[:4]) >= 2019 and q in indef and q in fd and q in temp]
+    qrows = [{"quarter": q, "ordinary": r(indef[q] - fd[q], 1), "fd": r(fd[q], 1), "temporal": r(temp[q], 1), "total": r(total[q], 1)} for q in quarters]
+    def annual(series: dict[str, float]) -> dict[int, float]:
+        return quarterly_to_annual({q: v for q, v in series.items()})
+    a_ord = annual({q: indef[q] - fd[q] for q in indef if q in fd})
+    a_fd, a_tmp, a_tot = annual(fd), annual(temp), annual(total)
+    base, last = 2021, max(y for y in a_tot if y in a_ord)
+    seekers = {p["year"]: p["value"] / 1000 for p in inter.get("inactive_job_seekers", [])}
+    affiliates = {p["year"]: p["value"] / 1000 for p in inter.get("annual_affiliates", [])}
+    reform_block = {
+        "quarters": qrows,
+        "base_year": base, "last_year": last,
+        "annual": {str(y): {"ordinary": r(a_ord[y], 1), "fd": r(a_fd[y], 1), "temporal": r(a_tmp[y], 1), "total": r(a_tot[y], 1)}
+                   for y in sorted(a_tot) if y >= 2019 and y in a_ord},
+        "change": {"ordinary": r(a_ord[last] - a_ord[base], 1), "fd": r(a_fd[last] - a_fd[base], 1),
+                   "temporal": r(a_tmp[last] - a_tmp[base], 1), "total": r(a_tot[last] - a_tot[base], 1)},
+        "fd_inactive_seekers": points(seekers, 1),
+        "fd_affiliates_in_alta": points({y: v for y, v in affiliates.items() if y >= 2019}, 1),
+    }
+    return {"structural_gap": structural_block, "reform": reform_block}
+
+
 def write_csv(data: dict, path: Path) -> None:
     rows: list[tuple] = []
 
@@ -649,6 +701,16 @@ def write_csv(data: dict, path: Path) -> None:
         rows.extend(("eurostat_sdmx:lfst_r_lfu3rt", "tasa_paro_region", f"{r['code']} {r['name']}", rg["year"], r["unemployment"]) for r in rg["spain"])
         rows.extend(("eurostat_sdmx:lfst_r_lfe2emprt", "tasa_empleo_20_64_region", f"{r['code']} {r['name']}", rg["year"], r["employment"]) for r in rg["spain"])
         add("eurostat_sdmx:lfst_r_lmdur", "dispersion_paro_regional", rg["dispersion"])
+    nar = ext.get("narratives")
+    if nar:
+        for row in nar["structural_gap"]["rows"]:
+            rows.append(("ameco_dbnomics", "brecha_paro_espana_menos_ue15_puntos", "ESP", row["year"], row["gap"]))
+            rows.append(("ameco_dbnomics", "brecha_estructural_nawru_puntos", "ESP", row["year"], row["structural"]))
+            rows.append(("ameco_dbnomics", "brecha_ciclica_puntos", "ESP", row["year"], row["cyclical"]))
+        for q in nar["reform"]["quarters"]:
+            rows.append(("ine_epa_tempus", "asalariados_indefinidos_ordinarios_miles", "ESP", q["quarter"], q["ordinary"]))
+            rows.append(("ine_epa_tempus", "asalariados_fijos_discontinuos_miles", "ESP", q["quarter"], q["fd"]))
+            rows.append(("ine_epa_tempus", "asalariados_temporales_miles", "ESP", q["quarter"], q["temporal"]))
     it = ext.get("intermittency")
     if it:
         rows.extend(("seg_social_pxweb", "afiliados_fijos_discontinuos_mensual", "ESP", m["month"], m["fd"]) for m in it["monthly_affiliates"])

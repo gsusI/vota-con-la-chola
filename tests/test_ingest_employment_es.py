@@ -151,5 +151,15 @@ class IngestEmploymentTest(unittest.TestCase):
         self.assertEqual(export.rebase({1994: 50.0, 1995: 80.0, 2025: 100.0}, 1995), {1995: 100.0, 2025: 125.0})
 
 
+    def test_published_narratives_add_up(self) -> None:
+        data = json.loads((export.OUT_JSON).read_text(encoding="utf-8"))
+        nar = data["narratives"]
+        for row in nar["structural_gap"]["rows"]:
+            self.assertAlmostEqual(row["gap"], row["structural"] + row["cyclical"], delta=0.02)
+            self.assertAlmostEqual(row["gap"], row["es"] - row["eu"], delta=0.02)
+        for q in nar["reform"]["quarters"]:
+            self.assertAlmostEqual(q["total"], q["ordinary"] + q["fd"] + q["temporal"], delta=0.5)
+
+
 if __name__ == "__main__":
     unittest.main()

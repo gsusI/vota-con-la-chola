@@ -7,6 +7,7 @@ import ChapterCalidad, { IntermittencyFigure } from "./ch4_calidad";
 import ChapterProductividad from "./ch5_productividad";
 import { LimitsCard, MethodCard } from "./sections";
 import { Conclusion, Glossary, Summary } from "./summary";
+import DatoMataRelato from "./relato";
 import { num } from "./format.mjs";
 
 export const metadata = {
@@ -73,6 +74,7 @@ export default function EmpleoPage() {
         </div>
       </section>
 
+      <DatoMataRelato data={data} />
       <Summary data={data} />
       <ChapterParo data={data} epaBreaks={epaBreaks} reform={reform} />
       <ChapterCiclo data={data} events={events} />

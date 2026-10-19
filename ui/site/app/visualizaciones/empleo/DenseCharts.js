@@ -1,0 +1,255 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import { fmt, num } from "./format.mjs";
+
+// Dense «el dato mata el relato» charts: one y-scale each, zero always included, two legends (colour + marker/pattern).
+
+function useWidth(initial = 720) {
+  const ref = useRef(null);
+  const [width, setWidth] = useState(initial);
+  useEffect(() => {
+    const node = ref.current;
+    if (!node || typeof ResizeObserver === "undefined") return undefined;
+    const observer = new ResizeObserver((entries) => {
+      const next = Math.round(entries[0].contentRect.width);
+      if (next > 0) setWidth(next);
+    });
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+  return [ref, width];
+}
+
+function ticks(min, max, step) {
+  const out = [];
+  for (let v = Math.floor(min / step) * step; v <= max + 1e-9; v += step) out.push(Math.round(v * 100) / 100);
+  return out;
+}
+
+// Spain - Europe unemployment gap per year: structural part (bar from zero), cyclical part (segment from the top of the
+// structural bar to the observed gap) and the observed gap (dot).
+export function GapDecomposition({ rows, colors, height = 340, annotations = [] }) {
+  const [ref, width] = useWidth();
+  const [hover, setHover] = useState(null);
+  const m = { top: annotations.length ? 30 : 12, right: 12, bottom: 28, left: 46 };
+  const innerW = Math.max(120, width - m.left - m.right);
+  const innerH = height - m.top - m.bottom;
+  const values = rows.flatMap((r) => [0, r.structural, r.gap]);
+  const lo = Math.min(...values);
+  const hi = Math.max(...values);
+  const step = hi - lo > 12 ? 4 : 2;
+  const y0 = Math.floor(lo / step) * step;
+  const y1 = Math.ceil(hi / step) * step;
+  const x0 = rows[0].year;
+  const x1 = rows.at(-1).year;
+  const band = innerW / (x1 - x0 + 1);
+  const bw = Math.max(2, band * 0.7);
+  const sx = (year) => m.left + (year - x0) * band + band / 2;
+  const sy = (v) => m.top + ((y1 - v) / (y1 - y0)) * innerH;
+  const compact = width < 520;
+  const xStep = compact ? 10 : 5;
+  const row = hover == null ? null : rows.find((r) => r.year === hover);
+  return (
+    <div className="tsChart" ref={ref}>
+      <svg role="img" aria-label="Brecha de paro entre España y la UE-15 descompuesta en parte estructural y parte cíclica" width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
+        {ticks(y0, y1, step).map((t) => (
+          <g key={t}>
+            <line className={t === 0 ? "tsChart__baseline" : "tsChart__grid"} x1={m.left} x2={m.left + innerW} y1={sy(t)} y2={sy(t)} />
+            <text className="tsChart__tick" x={m.left - 6} y={sy(t) + 4} textAnchor="end">
+              {t > 0 ? "+" : ""}
+              {t.toLocaleString("es-ES")}
+            </text>
+          </g>
+        ))}
+        {rows
+          .filter((r) => r.year % xStep === 0)
+          .map((r) => (
+            <text key={r.year} className="tsChart__tick" x={sx(r.year)} y={height - 8} textAnchor="middle">
+              {r.year}
+            </text>
+          ))}
+        {annotations.map((a) => (
+          <g key={a.year}>
+            <line className="tsChart__note" x1={sx(a.year)} x2={sx(a.year)} y1={m.top - 6} y2={m.top + innerH} />
+            {!compact ? (
+              <text className="tsChart__noteLabel" x={sx(a.year) + 3} y={m.top - 10} textAnchor={sx(a.year) > width - 120 ? "end" : "start"}>
+                {a.label}
+              </text>
+            ) : null}
+          </g>
+        ))}
+        {rows.map((r) => {
+          const x = sx(r.year) - bw / 2;
+          const top = Math.min(sy(r.structural), sy(0));
+          const cycTop = Math.min(sy(r.structural), sy(r.gap));
+          return (
+            <g key={r.year} opacity={hover == null || hover === r.year ? 1 : 0.55}>
+              <rect x={x} y={top} width={bw} height={Math.abs(sy(r.structural) - sy(0))} fill={colors.structural} />
+              <rect
+                x={x + bw * 0.2}
+                y={cycTop}
+                width={bw * 0.6}
+                height={Math.max(1, Math.abs(sy(r.gap) - sy(r.structural)))}
+                fill={r.cyclical >= 0 ? colors.cyclicalUp : colors.cyclicalDown}
+              />
+              <circle cx={sx(r.year)} cy={sy(r.gap)} r={Math.min(4, Math.max(2.5, bw / 3))} fill={colors.gap} stroke="var(--viz-surface)" strokeWidth={1} />
+            </g>
+          );
+        })}
+        <rect
+          x={m.left}
+          y={0}
+          width={innerW}
+          height={height}
+          fill="transparent"
+          onPointerMove={(e) => {
+            const rect = e.currentTarget.getBoundingClientRect();
+            const px = ((e.clientX - rect.left) / rect.width) * innerW;
+            setHover(Math.min(x1, Math.max(x0, x0 + Math.floor(px / band))));
+          }}
+          onPointerLeave={() => setHover(null)}
+        />
+      </svg>
+      {row ? (
+        <div className="tsChart__tooltip" style={{ left: sx(row.year) > width * 0.6 ? undefined : sx(row.year) + 12, right: sx(row.year) > width * 0.6 ? width - sx(row.year) + 12 : undefined, top: m.top }} role="status">
+          <span className="tsChart__tooltipYear">{row.year}</span>
+          <span className="tsChart__tooltipRow">
+            <strong>{fmt(row.gap, "pp")}</strong>
+            <span className="tsChart__tooltipLabel">
+              brecha observada ({num(row.es)} % frente a {num(row.eu)} % en la {row.eu_ref})
+            </span>
+          </span>
+          <span className="tsChart__tooltipRow">
+            <span className="tsChart__key" style={{ background: colors.structural }} aria-hidden="true" />
+            <strong>{fmt(row.structural, "pp")}</strong>
+            <span className="tsChart__tooltipLabel">estructural (NAWRU {num(row.nawru_es)} % frente a {num(row.nawru_eu)} %)</span>
+          </span>
+          <span className="tsChart__tooltipRow">
+            <span className="tsChart__key" style={{ background: row.cyclical >= 0 ? colors.cyclicalUp : colors.cyclicalDown }} aria-hidden="true" />
+            <strong>{fmt(row.cyclical, "pp")}</strong>
+            <span className="tsChart__tooltipLabel">cíclica</span>
+          </span>
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+// Employees by contract each quarter (stacked areas from zero, thousands) plus, as a second encoding, the annual mean
+// of «fijos discontinuos» without activity registered as job seekers (hatched layer stacked on the working ones).
+export function ContractStack({ quarters, seekers, colors, reformQuarter, height = 360 }) {
+  const [ref, width] = useWidth();
+  const [hover, setHover] = useState(null);
+  const m = { top: 26, right: 12, bottom: 28, left: 58 };
+  const innerW = Math.max(120, width - m.left - m.right);
+  const innerH = height - m.top - m.bottom;
+  const idx = (q) => (Number(q.slice(0, 4)) - Number(quarters[0].quarter.slice(0, 4))) * 4 + Number(q.slice(5)) - 1;
+  const n = quarters.length;
+  const sx = (i) => m.left + (i / (n - 1)) * innerW;
+  const seekerByYear = new Map(seekers.map((s) => [s.year, s.value]));
+  const tops = quarters.map((q) => q.total + (seekerByYear.get(Number(q.quarter.slice(0, 4))) || 0));
+  const step = 2500;
+  const y1 = Math.ceil(Math.max(...tops) / step) * step;
+  const sy = (v) => m.top + (1 - v / y1) * innerH;
+  const withSeek = quarters.map((q) => ({ ...q, seek: seekerByYear.get(Number(q.quarter.slice(0, 4))) || 0 }));
+  const layers = [
+    { key: "ordinary", fill: colors.ordinary },
+    { key: "fd", fill: colors.fd },
+    { key: "seek", fill: "url(#fdHatch)", stroke: colors.fd },
+    { key: "temporal", fill: colors.temporal },
+  ];
+  let cumulative = withSeek.map(() => 0);
+  const paths = layers.map((layer) => {
+    const lower = cumulative;
+    const upper = withSeek.map((q, i) => lower[i] + q[layer.key]);
+    cumulative = upper;
+    // Step edges for the annual hatched layer, smooth lines for quarterly layers.
+    const top = upper.map((v, i) => `${i ? "L" : "M"}${sx(i).toFixed(1)},${sy(v).toFixed(1)}`).join("");
+    const bottom = lower
+      .map((v, i) => [i, v])
+      .reverse()
+      .map(([i, v]) => `L${sx(i).toFixed(1)},${sy(v).toFixed(1)}`)
+      .join("");
+    return { ...layer, d: `${top}${bottom}Z` };
+  });
+  const years = [...new Set(quarters.map((q) => Number(q.quarter.slice(0, 4))))];
+  const reformX = reformQuarter ? sx(idx(reformQuarter)) : null;
+  const row = hover == null ? null : quarters[hover];
+  const seek = row ? seekerByYear.get(Number(row.quarter.slice(0, 4))) : null;
+  return (
+    <div className="tsChart" ref={ref}>
+      <svg role="img" aria-label="Asalariados por tipo de contrato y fijos discontinuos inactivos inscritos" width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
+        <defs>
+          <pattern id="fdHatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+            <line x1="0" y1="0" x2="0" y2="6" stroke={colors.fd} strokeWidth="2" />
+          </pattern>
+        </defs>
+        {ticks(0, y1, step).map((t) => (
+          <g key={t}>
+            <line className={t === 0 ? "tsChart__baseline" : "tsChart__grid"} x1={m.left} x2={m.left + innerW} y1={sy(t)} y2={sy(t)} />
+            <text className="tsChart__tick" x={m.left - 6} y={sy(t) + 4} textAnchor="end">
+              {t >= 1000 ? `${(t / 1000).toLocaleString("es-ES")} M` : t}
+            </text>
+          </g>
+        ))}
+        {paths.map((p) => (
+          <path key={p.key} d={p.d} fill={p.fill} opacity={0.9} stroke={p.stroke} strokeDasharray={p.stroke ? "3 2" : undefined} strokeWidth={p.stroke ? 0.8 : 0} />
+        ))}
+        {years.map((y) => {
+          const i = quarters.findIndex((q) => q.quarter === `${y}T1`);
+          return i < 0 ? null : (
+            <text key={y} className="tsChart__tick" x={sx(i)} y={height - 8} textAnchor="middle">
+              {y}
+            </text>
+          );
+        })}
+        {reformX != null ? (
+          <g>
+            <line className="tsChart__note" x1={reformX} x2={reformX} y1={m.top - 6} y2={m.top + innerH} />
+            <text className="tsChart__noteLabel" x={reformX + 3} y={m.top - 10}>
+              Reforma 2022
+            </text>
+          </g>
+        ) : null}
+        {row ? <line className="tsChart__crosshair" x1={sx(hover)} x2={sx(hover)} y1={m.top} y2={m.top + innerH} /> : null}
+        <rect
+          x={m.left}
+          y={0}
+          width={innerW}
+          height={height}
+          fill="transparent"
+          onPointerMove={(e) => {
+            const rect = e.currentTarget.getBoundingClientRect();
+            const px = ((e.clientX - rect.left) / rect.width) * innerW;
+            setHover(Math.min(n - 1, Math.max(0, Math.round((px / innerW) * (n - 1)))));
+          }}
+          onPointerLeave={() => setHover(null)}
+        />
+      </svg>
+      {row ? (
+        <div className="tsChart__tooltip" style={{ left: sx(hover) > width * 0.6 ? undefined : sx(hover) + 12, right: sx(hover) > width * 0.6 ? width - sx(hover) + 12 : undefined, top: m.top }} role="status">
+          <span className="tsChart__tooltipYear">{row.quarter.replace("T", " T")}</span>
+          {[
+            ["ordinary", "Indefinidos ordinarios"],
+            ["fd", "Fijos discontinuos trabajando"],
+            ["temporal", "Temporales"],
+          ].map(([key, label]) => (
+            <span className="tsChart__tooltipRow" key={key}>
+              <span className="tsChart__key" style={{ background: colors[key] }} aria-hidden="true" />
+              <strong>{fmt(row[key], "thousands")}</strong>
+              <span className="tsChart__tooltipLabel">{label}</span>
+            </span>
+          ))}
+          {seek ? (
+            <span className="tsChart__tooltipRow">
+              <span className="tsChart__key" style={{ background: `repeating-linear-gradient(45deg, ${colors.fd} 0 2px, transparent 2px 5px)` }} aria-hidden="true" />
+              <strong>{fmt(seek, "thousands")}</strong>
+              <span className="tsChart__tooltipLabel">fijos discontinuos inactivos inscritos (media del año)</span>
+            </span>
+          ) : null}
+        </div>
+      ) : null}
+    </div>
+  );
+}
