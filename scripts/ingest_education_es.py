@@ -935,11 +935,17 @@ WB_PISA = {
     "LO.PISA.SCI": ("pisa_science_mean", "PISA: puntuación media en ciencias"),
 }
 WB_AREAS = ["ESP", "DEU", "FRA", "ITA", "PRT", "OED"]
+# OECD members of 2003 with valid PISA 2003 maths (the United Kingdom was excluded that year) that the Spanish PISA 2022
+# report lists in its Cuadro 2.1 (Luxembourg is not there): a fixed set to compare the OECD over time with the same countries.
+OECD_FIXED_SET_MATH = ["AUS", "AUT", "BEL", "CAN", "CHE", "CZE", "DEU", "DNK", "ESP", "FIN", "FRA", "GRC", "HUN", "IRL",
+                       "ISL", "ITA", "JPN", "KOR", "MEX", "NLD", "NOR", "NZL", "POL", "PRT", "SVK", "SWE", "TUR", "USA"]
 
 
-def parse_worldbank(code: str) -> Callable[[Raw], Iterable[Batch]]:
+def parse_worldbank(code: str, indicator_override: str | None = None, label_suffix: str = "") -> Callable[[Raw], Iterable[Batch]]:
     def parse(raw: Raw) -> Iterable[Batch]:
         indicator, label = WB_PISA[code]
+        indicator = indicator_override or indicator
+        label = label + label_suffix
         rows = raw.json()[1]
         grouped: dict[str, list[dict[str, Any]]] = {}
         for i, row in enumerate(rows):
@@ -966,6 +972,10 @@ WB_SOURCES = [
      f"https://api.worldbank.org/v2/country/{';'.join(WB_AREAS)}/indicator/{code}?source=12&format=json&per_page=500&date=2000:2025",
      parse_worldbank(code))
     for code in WB_PISA
+] + [
+    ("worldbank_edstats_LO.PISA.MAT_oecd_fixed_set.json",
+     f"https://api.worldbank.org/v2/country/{';'.join(OECD_FIXED_SET_MATH)}/indicator/LO.PISA.MAT?source=12&format=json&per_page=2000&date=2000:2025",
+     parse_worldbank("LO.PISA.MAT", "pisa_math_mean_oecd_fixed_set", ", 28 países de la OCDE con dato en 2003 y 2022")),
 ]
 
 

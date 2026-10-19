@@ -128,7 +128,7 @@ export function RegionsFigure({ data, sources }) {
     <Figure
       id="regiones"
       title={`Entre comunidades hay ${best.math - worst.math} puntos de diferencia en PISA matemáticas, más que entre España, Alemania, Francia, Italia y Portugal (${countrySpread} puntos)`}
-      dek={`${name(best.region)} (${best.math}) y ${name(worst.region)} (${worst.math}) en 2022. El gasto público por alumno apenas lo explica: la correlación entre gasto y puntuación en las ${rp.n} comunidades es de ${num(rp.pearson, 2)}. ${name(priciest.region)} gasta ${fmt(priciest.spending_per_student, "eur")} por alumno y ${name(cheapest.region)} ${fmt(cheapest.spending_per_student, "eur")}.`}
+      dek={`${name(best.region)} (${best.math}) y ${name(worst.region)} (${worst.math}) en 2022. El gasto público por alumno apenas se relaciona con la nota: la correlación entre gasto y puntuación en las ${rp.n} comunidades es de ${num(rp.pearson, 2)}. ${name(priciest.region)} gasta ${fmt(priciest.spending_per_student, "eur")} por alumno y ${name(cheapest.region)} ${fmt(cheapest.spending_per_student, "eur")}.`}
       sources={sources}
       notes={[
         `Gasto por alumno: ${rp.formula}. No incluye el gasto de ayuntamientos ni del Ministerio en cada comunidad; Ceuta y Melilla (${rp.cities.Ceuta} y ${rp.cities.Melilla} puntos) las gestiona el Ministerio y no tienen consejería, por eso quedan fuera de la comparación.`,
@@ -213,7 +213,7 @@ export function EquityFigure({ data, sources }) {
   return (
     <Figure
       id="equidad"
-      title={`El origen social pesa en España algo menos que en la OCDE (${eq.escs_gap.ESP[2022]} frente a ${eq.escs_gap.OECD[2022]} puntos), y la llegada de alumnado inmigrante explicaría solo ${num(comp.effect_raw_points)} de los ${Math.abs(comp.math_change_2012_2022)} puntos perdidos en matemáticas desde 2012`}
+      title={`El origen social pesa en España algo menos que en la OCDE (${eq.escs_gap.ESP[2022]} frente a ${eq.escs_gap.OECD[2022]} puntos), y en una cuenta de composición la llegada de alumnado inmigrante equivale a ${num(comp.effect_raw_points)} de los ${Math.abs(comp.math_change_2012_2022)} puntos perdidos en matemáticas desde 2012`}
       dek={`El alumnado de origen inmigrante pasó del ${num(share.ESP[0].value)} % en ${share.ESP[0].year} al ${num(comp.share_2022, 0)} % en 2022. Saca ${comp.gap_raw} puntos menos en matemáticas, pero solo ${comp.gap_adjusted} cuando se compara con alumnos de su mismo nivel socioeconómico: la diferencia es sobre todo social, no de origen.`}
       sources={sources}
       notes={[
@@ -360,6 +360,7 @@ export function TeachersFigure({ data, sources }) {
       notes={[
         "Salario: profesorado de centros públicos de secundaria inferior con la titulación más habitual y 15 años de experiencia, salario legal (no el cobrado con complementos). Es un índice: compara la evolución de cada país consigo mismo, no niveles entre países.",
         "Alumnos por profesor: equivalentes a tiempo completo, ESO y equivalentes (ISCED 2). No es el tamaño de las clases.",
+        "Media OCDE del índice de salarios: la que publica la OCDE para cada año, con los países que tienen dato; no son siempre los mismos países, así que su evolución no es la de un grupo fijo.",
       ]}
       table={
         <>

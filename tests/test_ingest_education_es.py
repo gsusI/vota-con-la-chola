@@ -188,5 +188,13 @@ DATA=12.8
         self.assertAlmostEqual(split["composition"], -8.25, delta=0.06)
 
 
+    def test_oecd_fixed_set_has_a_quoted_2022_maths_score_per_country(self) -> None:
+        data = json.loads((ingest.MANUAL_DIR / "pisa_curated_es.json").read_text(encoding="utf-8"))
+        quoted = {row["area"] for row in data["series"]["pisa_math_mean"] if row["year"] == 2022}
+        self.assertEqual(len(ingest.OECD_FIXED_SET_MATH), 28)
+        self.assertEqual(sorted(set(ingest.OECD_FIXED_SET_MATH) - quoted), [])
+        name, url, _parse = ingest.WB_SOURCES[-1]
+        self.assertIn("per_page=2000", url)  # 28 countries × 26 years must fit in one page
+
 if __name__ == "__main__":
     unittest.main()

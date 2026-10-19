@@ -165,11 +165,15 @@ def mother_decomposition(rates: dict[str, dict[int, float]], weights: dict[str, 
             "from": first, "to": last, "total_change": r(total[last] - total[first]),
             "within": r(sum(within.values())), "composition": r(sum(mix.values())),
             "within_known_mother": r(sum(v for g, v in within.items() if g != "No consta")),
+            "composition_pct": r(sum(mix.values()) / (total[last] - total[first]) * 100, 0),
         }
 
     last = years[-1]
+    splits = [split(first, last) for first in (years[0], 2008, 2014) if first in total and first < last]
     return {
         "levels": MOTHER_LEVELS,
+        "composition_pct_min": min(d["composition_pct"] for d in splits),
+        "composition_pct_max": max(d["composition_pct"] for d in splits),
         "first_year": years[0], "last_year": last,
         "rows": [
             {"level": g, "rate_first": r(rates[g][years[0]]), "rate_last": r(rates[g][last]),
@@ -179,7 +183,7 @@ def mother_decomposition(rates: dict[str, dict[int, float]], weights: dict[str, 
         "total": {"first": r(total[years[0]]), "last": r(total[last])},
         "share_check": r(sum(share[g][last] for g in MOTHER_LEVELS)),
         "shares": {g: points(share[g]) for g in MOTHER_LEVELS},
-        "decomposition": [split(first, last) for first in (years[0], 2008, 2014) if first in total and first < last],
+        "decomposition": splits,
         "formula": "Peso de cada grupo en la población de 18 a 24 años = peso del grupo entre quienes abandonan × tasa total "
         "÷ tasa del grupo (teorema de Bayes sobre las dos columnas de la tabla aban_1_08). Cambio total = Σ peso medio × "
         "cambio de la tasa del grupo (dentro de los grupos) + Σ cambio del peso × tasa media (composición). «No consta»: "
@@ -235,6 +239,29 @@ def build(conn: sqlite3.Connection) -> dict:
             for area in PISA_AREAS
         }
         pisa[f"{domain}_eu_2022"] = r(curated.get("EU", [{}])[0].get("value"), 0) if curated.get("EU") else None
+
+    # Same countries in every cycle: the published OECD average changes membership (30 countries in 2003, 37 in 2022),
+    # so a change over time is only measured on a fixed set (maths only: no per-country 2022 reading/science in text).
+    fixed_wb = store.series("worldbank_edstats", "pisa_math_mean_oecd_fixed_set", "PISA_SCORE")
+    fixed_2022 = store.series("vclc_education_curated", "pisa_math_mean", "PISA_SCORE")
+    fixed_countries = sorted(fixed_wb)
+    fixed_by_year: dict[int, list[float]] = defaultdict(list)
+    for area in fixed_countries:
+        for p in fixed_wb[area]:
+            fixed_by_year[int(p["period"])].append(p["value"])
+        for p in fixed_2022.get(area, []):
+            if p["period"] == "2022":
+                fixed_by_year[2022].append(p["value"])
+    pisa["math"]["OECD28"] = [
+        {"year": y, "value": r(sum(v) / len(v), 1), "source": "worldbank_edstats+vclc_education_curated", "comparable": y >= PISA_FIRST_COMPARABLE["math"]}
+        for y, v in sorted(fixed_by_year.items()) if len(v) == len(fixed_countries) and y >= PISA_FIRST_COMPARABLE["math"]
+    ]
+    pisa["oecd_fixed_set"] = {
+        "domain": "math", "n": len(fixed_countries), "countries": fixed_countries,
+        "formula": "media sin ponderar de los mismos países en cada ciclo: miembros de la OCDE en 2003 con dato válido de matemáticas "
+        "en 2003 (sin Reino Unido, excluido ese año) que el informe español de 2022 publica (sin Luxemburgo); 2003-2018 Banco "
+        "Mundial EdStats, 2022 INEE Cuadro 2.1",
+    }
 
     # 3. Early leavers ------------------------------------------------------------------------------
     leavers_rows = store.series("eurostat_sdmx", "early_leavers_18_24.T.POP", "PC")
@@ -386,10 +413,11 @@ def build(conn: sqlite3.Connection) -> dict:
     peer_arrows = []
     for area in ("OECD", "DEU", "FRA", "ITA", "PRT"):
         pts = []
+        scores = pisa_math.get("OECD28" if area == "OECD" else area, {})
         for year in (2012, 2022):
             found = spend_for(area, year)
-            if found and year in pisa_math.get(area, {}):
-                pts.append({"pisa_year": year, "spending_year": found[0], "x": r(found[1] / base * 100), "y": pisa_math[area][year]})
+            if found and year in scores:
+                pts.append({"pisa_year": year, "spending_year": found[0], "x": r(found[1] / base * 100), "y": r(scores[year], 0)})
         if len(pts) == 2:
             peer_arrows.append({"area": area, "points": pts})
     above = {
@@ -449,7 +477,9 @@ def build(conn: sqlite3.Connection) -> dict:
              "reading": quoted("pisa_gender_gap_reading")},
             {"id": "change", "raw": r(abs(es_math[2022] - es_math[2003]), 0), "from": 2003, "first": es_math[2003], "last": es_math[2022],
              "peak_year": max((y for y in es_math if y >= PISA_FIRST_COMPARABLE["math"]), key=lambda y: es_math[y]),
-             "peak": max(v for y, v in es_math.items() if y >= PISA_FIRST_COMPARABLE["math"])},
+             "peak": max(v for y, v in es_math.items() if y >= PISA_FIRST_COMPARABLE["math"]),
+             "escs_ratio": r(quoted("pisa_escs_gap_math") / abs(es_math[2022] - es_math[2003]), 1),
+             "share_of_escs_pct": r(abs(es_math[2022] - es_math[2003]) / quoted("pisa_escs_gap_math") * 100, 0)},
             {"id": "oecd", "raw": r(abs(es_math[2022] - oecd_math[2022]), 0), "spain": es_math[2022], "oecd_value": oecd_math[2022]},
         ],
         "cases": [
@@ -529,7 +559,7 @@ def build(conn: sqlite3.Connection) -> dict:
     pisa_bases = {}
     for domain in ("math", "reading", "science"):
         es_dom = {p["year"]: p["value"] for p in pisa[domain]["ESP"]}
-        oecd_dom = {p["year"]: p["value"] for p in pisa[domain]["OECD"]}
+        oecd_dom = {p["year"]: p["value"] for p in pisa[domain].get("OECD28", [])}
         first = PISA_FIRST_COMPARABLE[domain]
         bases = [y for y in sorted(es_dom) if y >= first and y < 2022]
         pisa_bases[domain] = {"ESP": changes(es_dom, bases, 2022), "OECD": changes(oecd_dom, bases, 2022)}
@@ -675,7 +705,8 @@ def build(conn: sqlite3.Connection) -> dict:
             "pps_es": pps_es[last_pps],
             "pps_eu": pps_eu[last_pps],
             "math_2003": math.get(2003), "math_2022": math.get(2022),
-            "oecd_math_2003": next((p["value"] for p in pisa["math"]["OECD"] if p["year"] == 2003), None),
+            "oecd28_math_2003": next((p["value"] for p in pisa["math"]["OECD28"] if p["year"] == 2003), None),
+            "oecd28_math_2022": next((p["value"] for p in pisa["math"]["OECD28"] if p["year"] == 2022), None),
             "reading_2000": reading.get(2000), "reading_2022": reading.get(2022),
             "science_2006": science.get(2006), "science_2022": science.get(2022),
             "leavers_2008": es_leavers.get(2008), "leavers_last": es_leavers[last_leavers], "leavers_last_year": last_leavers,

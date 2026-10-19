@@ -82,7 +82,6 @@ export function GapsFigure({ data, sources }) {
   const gender = row("gender");
   const change = row("change");
   const oecd = row("oecd");
-  const times = Math.round(escs.raw / change.raw);
   const muted = { color: "var(--viz-muted)", fontWeight: 400 };
   const rows = [
     {
@@ -95,7 +94,7 @@ export function GapsFigure({ data, sources }) {
     {
       id: "regions",
       label: `Comunidades: ${regions.best} (${regions.best_value}) frente a ${regions.worst} (${regions.worst_value})`,
-      note: `El origen social medio de cada comunidad explica el ${num(regions.r2_isec, 0)} % de estas diferencias; el gasto por alumno, el ${num(regions.r2_spending, 0)} %`,
+      note: `El origen social medio de cada comunidad recoge el ${num(regions.r2_isec, 0)} % de estas diferencias; el gasto por alumno, el ${num(regions.r2_spending, 0)} % (R², asociación, no causa)`,
       marks: [{ kind: "raw", value: regions.raw }],
       value: `${regions.raw}`,
     },
@@ -156,7 +155,7 @@ export function GapsFigure({ data, sources }) {
   return (
     <Figure
       id="donde-diferencia"
-      title={`Dentro de España, el origen familiar separa ${escs.raw} puntos de PISA: ${times} veces lo que ha caído la nota desde ${change.from} y más que cualquier diferencia entre comunidades o entre centros públicos y privados`}
+      title={`Dentro de España, el origen familiar separa ${escs.raw} puntos de PISA: ${num(change.escs_ratio, 1)} veces lo que ha caído la nota desde ${change.from} y más que cualquier diferencia entre comunidades o entre centros públicos y privados`}
       dek={`Cada fila es una brecha en puntos de PISA matemáticas ${g.year}, todas en la misma escala desde cero. El punto naranja es la diferencia tal cual; el verde, la que queda al comparar alumnos del mismo origen social; el círculo hueco, la que queda si además se compara el origen social medio del centro. Los centros concertados y privados (el INEE los cuenta juntos) sacan ${priv.raw} puntos más que los públicos, pero ${priv.adjusted} a igual origen social del alumno y ${priv.adjusted_school} si además se iguala el del centro. El alumnado inmigrante saca ${imm.raw} menos, pero ${imm.adjusted} a igual origen social. Al lado, las dos cifras que más se discuten son pequeñas: ${change.raw} puntos perdidos desde ${change.from} y ${oecd.raw} de distancia con la OCDE.`}
       legend={[
         { id: "raw", label: "Brecha tal cual", color: C.orange },
@@ -236,8 +235,8 @@ export function GapsFigure({ data, sources }) {
         <strong>Relatos que zanja.</strong> «La concertada enseña mejor»: a igual origen social del alumno y del centro, la diferencia entre centros
         privados (con los concertados) y públicos baja de{" "}
         {priv.raw} a {priv.adjusted_school} puntos. «Los inmigrantes bajan la media»: a igual origen social, {imm.adjusted} puntos. «El problema es la
-        comunidad»: el origen social medio explica el {num(regions.r2_isec, 0)} % de las diferencias entre comunidades. «España se ha hundido»: los{" "}
-        {change.raw} puntos perdidos desde {change.from} son el {num((change.raw / escs.raw) * 100, 0)} % de la brecha por origen social que hay dentro del país.{" "}
+        comunidad»: el origen social medio recoge el {num(regions.r2_isec, 0)} % de las diferencias entre comunidades (R²). «España se ha hundido»: los{" "}
+        {change.raw} puntos perdidos desde {change.from} son el {num(change.share_of_escs_pct, 0)} % de la brecha por origen social que hay dentro del país.{" "}
         <strong>Lo que deja abierto:</strong> por qué el origen familiar pesa tanto, qué parte se debe a la escuela y qué parte a la casa, y si los
         puntos que quedan tras el ajuste son efecto del centro o de quién lo elige.
       </p>

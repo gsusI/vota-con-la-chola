@@ -6,7 +6,7 @@ import SparseLineChart from "./SparseLineChart";
 import EduTable from "./EduTable";
 import { StoryFigure } from "./StoryScatter";
 import { GapsFigure } from "./GapsFigure";
-import { BirthBars, DecompositionBars, MotherDumbbell, leaversComposition } from "./LeaversSegments";
+import { BirthBars, DecompositionBars, MotherDumbbell } from "./LeaversSegments";
 import { fmt } from "./formatEdu.mjs";
 import { AdultSkillsFigure, AttainmentFigure, C, EquityFigure, Explain, FamiliesFigure, Glossary, LabourReturnFigure, NAMES, RegionsFigure, TeachersFigure, VocationalFigure, num } from "./sections";
 
@@ -91,15 +91,16 @@ export default function EducacionPage() {
     { key: "reading", label: "Lectura", first: data.pisa.first_comparable.reading },
     { key: "science", label: "Ciencias", first: data.pisa.first_comparable.science },
   ];
+  const fixedSet = data.pisa.oecd_fixed_set;
   const pisaSeries = (domain) =>
-    ["PRT", "ITA", "FRA", "DEU", "OECD", "ESP"]
+    ["PRT", "ITA", "FRA", "DEU", "OECD28", "ESP"]
       .filter((area) => data.pisa[domain][area]?.length)
       .map((area) => ({
         id: area,
-        label: NAMES[area],
-        color: area === "ESP" ? C.blue : area === "OECD" ? C.ref : C.peer,
+        label: area === "OECD28" ? `OCDE, mismos ${fixedSet.n} países` : NAMES[area],
+        color: area === "ESP" ? C.blue : area === "OECD28" ? C.ref : C.peer,
         emphasis: area === "ESP",
-        noEndLabel: !["ESP", "OECD"].includes(area),
+        noEndLabel: !["ESP", "OECD28"].includes(area),
         points: data.pisa[domain][area].map((p) => ({ ...p, hollow: !p.comparable })),
       }));
   const mathDrops = ["ESP", "DEU", "FRA", "ITA", "PRT"].map((area) => {
@@ -109,9 +110,9 @@ export default function EducacionPage() {
   const esMath = mathDrops.find((row) => row.area === "ESP");
   const biggerDrops = mathDrops.filter((row) => row.area !== "ESP" && row.delta < esMath.delta).map((row) => NAMES[row.area]);
   const pisaTable = pisaDomains.flatMap((domain) =>
-    ["ESP", "OECD", "DEU", "FRA", "ITA", "PRT"].map((area) => ({
+    ["ESP", "OECD28", "OECD", "DEU", "FRA", "ITA", "PRT"].filter((area) => data.pisa[domain.key][area]?.length).map((area) => ({
       id: `${domain.key}-${area}`,
-      label: `${domain.label} · ${NAMES[area]}`,
+      label: `${domain.label} · ${area === "OECD28" ? `OCDE, mismos ${fixedSet.n} países` : area === "OECD" ? "Media OCDE publicada (países distintos en cada ciclo)" : NAMES[area]}`,
       points: data.pisa[domain.key][area].map((p) => ({ ...p, hollow: !p.comparable })),
     })),
   );
@@ -148,7 +149,7 @@ export default function EducacionPage() {
   const motherSeries = motherLevels.filter(([key]) => mother[key]).map(([key, label, color]) => ({ id: key, label, color, points: mother[key] }));
   const lm = data.distribution.leavers_mother;
   const lmFrom = (year) => lm.decomposition.find((d) => d.from === year);
-  const lmShare = leaversComposition(lm);
+  const lmShare = { min: lm.composition_pct_min, max: lm.composition_pct_max };
   const lmRow = (level) => lm.rows.find((row) => row.level === level);
   const motherLow = lmRow("E. Primaria e inferior");
   const motherHigh = lmRow("E. Superior");
@@ -223,7 +224,7 @@ export default function EducacionPage() {
       <StaticRouteHero
         eyebrow="Visualizaciones · datos públicos"
         title="Educación en España: más gasto, resultados estancados y mucho menos abandono"
-        summary="Cuánto gasta el Estado por alumno y en qué, qué dicen PISA, las comunidades y el origen social, cómo han cambiado el abandono y la repetición, qué pasa con la FP y los titulados, y el siglo que llevó a casi toda la población a leer. Cada gráfico explica qué muestra y qué no, enlaza su fuente oficial, compara con la OCDE, la UE y países similares, y trae sus datos en tabla."
+        summary="Cuánto gasta el Estado por alumno y en qué, qué dicen PISA, las comunidades y el origen social, cómo han cambiado el abandono y la repetición, qué pasa con la FP y los titulados, y el siglo en que casi toda la población aprendió a leer. Cada gráfico explica qué muestra y qué no, enlaza su fuente oficial, compara con la OCDE, la UE y países similares, y trae sus datos en tabla."
         actions={[
           { href: downloads, label: "Descargar datos (CSV)" },
           { href: "/visualizaciones/data/educacion.json", label: "JSON con procedencia" },
@@ -278,13 +279,13 @@ export default function EducacionPage() {
           </li>
           <li>
             <strong>Resultados estancados, como en casi toda la OCDE.</strong> PISA matemáticas: {h.math_2003} en 2003 y {h.math_2022} en 2022; la media
-            OCDE cayó más, de {h.oecd_math_2003} a {data.pisa.math.OECD.at(-1).value}. <a href="#pisa">Ver PISA</a>
+            de los mismos {fixedSet.n} países de la OCDE cayó más, de {num(h.oecd28_math_2003)} a {num(h.oecd28_math_2022)}. <a href="#pisa">Ver PISA</a>
           </li>
           <li>
-            <strong>Menos abandono, en buena parte porque las madres tienen más estudios.</strong> El abandono temprano bajó del{" "}
+            <strong>Menos abandono, en buena parte por efecto composición.</strong> El abandono temprano bajó del{" "}
             {num(h.leavers_2008)} % de 2008, su máximo reciente ({num(h.leavers_2000)} % en 2000), al {num(h.leavers_last)} %, pero va del {num(motherHigh.rate_last)} % de los jóvenes con madre universitaria al{" "}
             {num(motherLow.rate_last)} % de los que tienen madre con Primaria o menos, y entre el {num(lmShare.min, 0)} % y el {num(lmShare.max, 0)} % de
-            la bajada (según el año de partida) se debe a que hoy hay muchas más madres con estudios. La repetición a los 15 años bajó del{" "}
+            la bajada (según el año de partida) corresponde a ese cambio de composición: hoy hay muchas más madres con estudios, y sus hijos siempre abandonaron menos. La repetición a los 15 años bajó del{" "}
             {num(h.behind_peak.value)} % al {num(h.behind_last.value)} %. <a href="#abandono">Ver abandono</a>
           </li>
           <li>
@@ -332,6 +333,7 @@ export default function EducacionPage() {
         notes={[
           "OCDE: gasto con origen público en centros educativos, de Primaria a postsecundaria no terciaria (las etapas que mide PISA), por alumno equivalente a tiempo completo; precios constantes (deflactor del PIB) y PPA de 2020. La OCDE publica años sueltos antes de 2008 y la serie pasó de la clasificación ISCED 1997 a ISCED 2011 en 2012; la OCDE la presenta como continua.",
           `Ministerio: ${sp.formula_real_per_student}. Incluye Infantil, FP y Educación Especial; excluye becas y universidad.`,
+          "Media OCDE: la que publica la OCDE para cada año, con los países que tienen dato; no son siempre los mismos países, así que su evolución no es la de un grupo fijo.",
         ]}
         table={
           <EduTable
@@ -387,6 +389,7 @@ export default function EducacionPage() {
         ]}
         sources={[S.oecd, S.eurostat("educ_uoe_fine09"), S.eurostat("gov_10a_exp")]}
         notes={[
+          "Medias de la OCDE y de la UE de la OCDE (EU25): las que publica la OCDE para cada año, con los países que tienen dato ese año; no son siempre los mismos países, así que su evolución y la proporción de España en años distintos no comparan exactamente el mismo grupo. La UE-27 de Eurostat sí es una composición fija.",
           "Los paneles de la OCDE comparten escala. PPS: estándar de poder adquisitivo de Eurostat (euros corregidos por precios relativos), de Infantil 2.º ciclo a universidad. % del PIB: clasificación COFOG 09 de contabilidad nacional, que incluye también gasto no imputable a alumnos.",
         ]}
         table={
@@ -447,18 +450,18 @@ export default function EducacionPage() {
 
       <Figure
         id="pisa"
-        title={`Desde su primer año comparable, España pierde ${Math.abs(firstChange("math", "ESP"))} puntos en matemáticas (2003), ${Math.abs(firstChange("reading", "ESP"))} en lectura (2000) y ${Math.abs(firstChange("science", "ESP"))} en ciencias (2006); la media OCDE pierde ${Math.abs(firstChange("math", "OECD"))} en matemáticas y ${Math.abs(firstChange("science", "OECD"))} en ciencias`}
-        dek={`La media OCDE de matemáticas bajó de ${h.oecd_math_2003} a ${data.pisa.math.OECD.at(-1).value} en el mismo periodo. ${mathRisers.length ? `${list(mathRisers)}, que partían por debajo, subieron y hoy están a la par. ` : ""}En 2022 España obtuvo ${h.math_2022} en matemáticas (media OCDE ${data.pisa.math.OECD.at(-1).value}), ${h.reading_2022} en lectura (${data.pisa.reading.OECD.at(-1).value}) y ${h.science_2022} en ciencias (${data.pisa.science.OECD.at(-1).value}): en las tres, sin diferencia significativa con la media. El eje empieza en cero; las caídas son de pocas decenas de puntos en una escala centrada en 500.`}
+        title={`Desde su primer año comparable, España pierde ${Math.abs(firstChange("math", "ESP"))} puntos en matemáticas (2003), ${Math.abs(firstChange("reading", "ESP"))} en lectura (2000) y ${Math.abs(firstChange("science", "ESP"))} en ciencias (2006); la media de los mismos ${fixedSet.n} países de la OCDE pierde ${Math.abs(firstChange("math", "OECD"))} en matemáticas`}
+        dek={`Con los mismos ${fixedSet.n} países en cada ciclo, la media de la OCDE en matemáticas bajó de ${num(h.oecd28_math_2003)} en 2003 a ${num(h.oecd28_math_2022)} en 2022. En lectura y ciencias no hay datos por país de 2022 publicados en texto, así que España se compara solo con Alemania, Francia, Italia y Portugal. ${mathRisers.length ? `${list(mathRisers)}, que partían por debajo, subieron y hoy están a la par. ` : ""}En 2022 España obtuvo ${h.math_2022} en matemáticas (media OCDE ${data.pisa.math.OECD.at(-1).value}), ${h.reading_2022} en lectura (${data.pisa.reading.OECD.at(-1).value}) y ${h.science_2022} en ciencias (${data.pisa.science.OECD.at(-1).value}): en las tres, sin diferencia significativa con la media. El eje empieza en cero; las caídas son de pocas decenas de puntos en una escala centrada en 500.`}
         legend={[
           { id: "ESP", label: "España", color: C.blue },
-          { id: "OECD", label: "Media OCDE publicada en cada ciclo", color: C.ref },
+          { id: "OECD28", label: `OCDE: media de los mismos ${fixedSet.n} países en cada ciclo (solo matemáticas)`, color: C.ref },
           { id: "peer", label: "Alemania, Francia, Italia, Portugal", color: C.peer },
         ]}
         sources={[S.wb, S.pisaReports, S.pisa2022]}
         notes={[
           "Puntos huecos: ciclos no comparables con los siguientes. La OCDE solo considera comparables las tendencias de lectura desde 2000, matemáticas desde 2003 y ciencias desde 2006.",
           "2022: primer ciclo tras la COVID-19 (cierres de centros en 2020) y aplazado un año; la OCDE advierte de que parte de la caída general puede deberse a la pandemia. España no tiene dato de lectura en 2018: la OCDE no lo publicó por respuestas anómalas.",
-          "Media OCDE: la de cada ciclo según los informes españoles del INEE (2003-2015 y 2022) y el Banco Mundial (2018), con cita literal de documento y página. Cambia de países: 30 miembros en 2003, 34 en 2012, 37 en 2022, así que difiere unos puntos de la media de tendencia de la OCDE (solo países presentes en todos los ciclos).",
+          `Media de la OCDE con los mismos países: ${fixedSet.formula}. Países: ${fixedSet.countries.join(", ")}. La media OCDE publicada en cada ciclo (${data.pisa.math.OECD.at(-1).value} en matemáticas en 2022) cambia de países (30 miembros en 2003, 34 en 2012, 37 en 2022): solo se usa para comparar niveles de un mismo año, nunca un cambio entre años.`,
           "Sin dato con fuente verificable: media OCDE de 2000, de 2009 y de matemáticas en 2006 (en los informes solo aparecen en gráficos), y lectura y ciencias de 2022 de Alemania, Francia, Italia y Portugal. oecd.org bloquea la descarga por script.",
         ]}
         table={
@@ -472,7 +475,7 @@ export default function EducacionPage() {
                       <th scope="col">Materia</th>
                       <th scope="col">Desde</th>
                       <th scope="col">España</th>
-                      <th scope="col">Media OCDE</th>
+                      <th scope="col">OCDE, mismos {fixedSet.n} países (matemáticas)</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -528,7 +531,7 @@ export default function EducacionPage() {
 
       <Figure
         id="abandono"
-        title={`El abandono escolar temprano bajó del ${num(h.leavers_2008)} % de 2008, su máximo reciente, al ${num(h.leavers_last)} % en ${h.leavers_last_year}, pero va del ${num(motherHigh.rate_last)} % con madre universitaria al ${num(motherLow.rate_last)} % con madre con Primaria, y entre el ${num(lmShare.min, 0)} % y el ${num(lmShare.max, 0)} % de la bajada, según el año de partida, viene de que hoy hay más madres con estudios`}
+        title={`El abandono escolar temprano bajó del ${num(h.leavers_2008)} % de 2008, su máximo reciente, al ${num(h.leavers_last)} % en ${h.leavers_last_year}, pero va del ${num(motherHigh.rate_last)} % con madre universitaria al ${num(motherLow.rate_last)} % con madre con Primaria, y entre el ${num(lmShare.min, 0)} % y el ${num(lmShare.max, 0)} % de la bajada, según el año de partida, es efecto composición: hay más madres con estudios`}
         dek={`Jóvenes de 18 a 24 años que como mucho terminaron la ESO y no siguen estudiando. La distancia con la UE-27 pasó de ${num(h.leavers_2008 - h.leavers_eu_2008)} puntos a ${num(h.leavers_last - h.leavers_eu_last)}; España sigue por encima de la media europea (${num(h.leavers_eu_last)} %) y de Alemania, Francia, Italia y Portugal. La media junta realidades muy distintas: según los estudios de la madre, de ${num(motherHigh.rate_last)} % a ${num(motherLow.rate_last)} %; según dónde nació el joven, ${num(bornHere.value)} % y ${num(bornAbroad.value)} %; según la comunidad, de ${num(el.regions[0].last)} % a ${num(el.regions.at(-1).last)} %.`}
         legend={leavers.slice().reverse()}
         sources={[S.eurostat("edat_lfse_14"), S.eurostat("edat_lfse_16"), S.eurostat("edat_lfse_02"), S.mefpEpa]}
@@ -754,22 +757,22 @@ export default function EducacionPage() {
             <strong>Dónde falla.</strong> Todo el aumento llegó antes de {h.spending_school_peak.year}; después hubo un recorte del{" "}
             {num((1 - h.spending_school_trough.value / h.spending_school_peak.value) * 100, 0)} % y el sueldo real del profesorado sigue un{" "}
             {Math.abs(data.teachers.headline.salary_change_from_peak_pct)} % por debajo de entonces. España gasta por alumno el {h.spending_school_vs_oecd_pct} % de
-            la media OCDE (el {h.spending_school_vs_oecd_2005_pct} % en 2005). Y la OCDE, que subió su gasto un {h.oecd_school_change_2005_pct} % desde 2005,
-            también bajó en PISA: su media de matemáticas pasó de {h.oecd_math_2003} a {data.pisa.math.OECD.at(-1).value}; {list(biggerDrops)} perdieron más
-            puntos que España.
+            la media OCDE (el {h.spending_school_vs_oecd_2005_pct} % en 2005; media publicada cada año, con los países que tienen dato). La OCDE, cuyo
+            gasto medio publicado subió un {h.oecd_school_change_2005_pct} % desde 2005, también bajó en PISA: la media de los mismos {fixedSet.n} países pasó de{" "}
+            {num(h.oecd28_math_2003)} a {num(h.oecd28_math_2022)} en matemáticas; {list(biggerDrops)} perdieron más puntos que España.
           </li>
           <li>
-            <strong>Lo que sí mejoró, y por qué.</strong> El abandono temprano cayó del {num(h.leavers_2000)} % de 2000 al {num(h.leavers_last)} %, pero dentro
+            <strong>Lo que sí mejoró, y cuánto es composición.</strong> El abandono temprano cayó del {num(h.leavers_2000)} % de 2000 al {num(h.leavers_last)} %, pero dentro
             de cada grupo de estudios de la madre bajó mucho menos: entre el {num(lmShare.min, 0)} % y el {num(lmShare.max, 0)} % de la bajada, según el año de
-            partida, se debe a que hoy hay más madres con estudios (los jóvenes con madre de Primaria o menos pasaron del {num(motherLow.share_first, 0)} % al{" "}
+            partida, corresponde a que hoy hay más madres con estudios, un cálculo de composición que no dice por qué (los jóvenes con madre de Primaria o menos pasaron del {num(motherLow.share_first, 0)} % al{" "}
             {num(motherLow.share_last, 0)} %). La repetición a los 15
             años, del {num(h.behind_first.value)} % de {h.behind_first.course} (máximo: {num(h.behind_peak.value)} %) al {num(h.behind_last.value)} %. Como la escolarización es obligatoria hasta los 16 años, esa mejora
             apenas cambia quién hace PISA a los 15: cambia en qué curso están (menos repetidores) y cuántos siguen estudiando después.
           </li>
           <li>
-            <strong>Sistema frente a mezcla de alumnos.</strong> El aumento del alumnado inmigrante explicaría unos{" "}
+            <strong>Sistema frente a mezcla de alumnos.</strong> En una cuenta de composición, el aumento del alumnado inmigrante equivale a unos{" "}
             {num(data.equity.composition.effect_raw_points)} de los {Math.abs(data.equity.composition.math_change_2012_2022)} puntos perdidos en matemáticas
-            desde 2012, y menos de medio punto a igual nivel socioeconómico: la composición explica poco de la caída. El origen social pesa algo menos que en
+            desde 2012, y a {num(data.equity.composition.effect_adjusted_points)} a igual nivel socioeconómico: por composición sale poco de la caída. El origen social pesa algo menos que en
             la OCDE ({data.equity.escs_gap.ESP[2022]} frente a {data.equity.escs_gap.OECD[2022]} puntos de brecha).
           </li>
           <li>

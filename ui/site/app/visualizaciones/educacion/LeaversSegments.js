@@ -33,11 +33,6 @@ function Dot({ value, max, hollow, color }) {
   );
 }
 
-export function leaversComposition(lm) {
-  const pct = lm.decomposition.map((d) => (d.composition / d.total_change) * 100);
-  return { min: Math.min(...pct), max: Math.max(...pct) };
-}
-
 export function MotherDumbbell({ lm }) {
   const max = 50;
   const rows = [
@@ -116,7 +111,7 @@ export function DecompositionBars({ lm }) {
           <span>
             Desde {d.from}: {minus(num(d.total_change))} puntos
             <span style={{ ...muted, display: "block", fontSize: "0.78rem" }}>
-              {num((d.composition / d.total_change) * 100, 0)} % por composición
+              {num(d.composition_pct, 0)} % por composición
             </span>
           </span>
           <span className="vizBars__track">
