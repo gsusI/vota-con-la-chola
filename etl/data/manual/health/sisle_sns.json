@@ -1,0 +1,5342 @@
+{
+ "source": {
+  "name": "Ministerio de Sanidad - Sistema de Información sobre Listas de Espera del SNS (SISLE-SNS)",
+  "page": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/listaEspera.htm",
+  "archive": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/listaEsperaInfAnt.htm",
+  "method": "scripts/extract_health_pdfs_es.py: pdftotext -layout; each value from the report's own TOTAL row"
+ },
+ "reports": [
+  {
+   "file": "Listas2.pdf",
+   "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/docs/Listas2.pdf",
+   "sha256": "fa5ef384b7166e9ea65b37e86e401ea7898278dd9a0cb0d8613fb04545a4e0e6",
+   "retrieved_at": "2026-10-19T08:42:24+00:00",
+   "cut_date": "2003-12-31"
+  },
+  {
+   "file": "listasEspera04.pdf",
+   "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/docs/listasEspera04.pdf",
+   "sha256": "250ba34fde7add9ebbf0a906eedbb1c42906e2999d4ef7ff2077e7b3934d39bf",
+   "retrieved_at": "2026-10-19T08:42:23+00:00",
+   "cut_date": "2004-12-31"
+  },
+  {
+   "file": "listasEspera05.pdf",
+   "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/docs/listasEspera05.pdf",
+   "sha256": "42f149810a896d84c993058cf53c0ea14fb61678c9d9f876c0c333617c0cc292",
+   "retrieved_at": "2026-10-19T08:42:22+00:00",
+   "cut_date": "2005-12-31"
+  },
+  {
+   "file": "LEQ_Consejo11dic.pdf",
+   "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/docs/LEQ_Consejo11dic.pdf",
+   "sha256": "a8d867ae336d9dff676f4b3136bbb50fa3e2d422b4f1306e74da550d9bb6f1c6",
+   "retrieved_at": "2026-10-19T08:42:20+00:00",
+   "cut_date": "2006-06-30"
+  },
+  {
+   "file": "listasDiciembre06CI.pdf",
+   "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/docs/listasDiciembre06CI.pdf",
+   "sha256": "ff9e8e8d4e877a7172e88d453d951951adece5c4d0e7b278e59de3ddd19b5f68",
+   "retrieved_at": "2026-10-19T08:42:19+00:00",
+   "cut_date": "2006-12-31"
+  },
+  {
+   "file": "listaPublicacion07CI.pdf",
+   "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/docs/listaPublicacion07CI.pdf",
+   "sha256": "f26d9816ca7d0c69b5ae7dd558a7f84b8a2032dba9d7ce3d916d343fe1a671fb",
+   "retrieved_at": "2026-10-19T08:42:17+00:00",
+   "cut_date": "2007-06-30"
+  },
+  {
+   "file": "listaDiciembre08CI.pdf",
+   "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/docs/listaDiciembre08CI.pdf",
+   "sha256": "033811b1d46426c82e4f031807fc521ad03087cf037bf4b3f998aa6c955408a9",
+   "retrieved_at": "2026-10-19T08:42:16+00:00",
+   "cut_date": "2007-12-31"
+  },
+  {
+   "file": "listaJunio08CI.pdf",
+   "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/docs/listaJunio08CI.pdf",
+   "sha256": "c8d9e91db3d40462a24b6681bb95f20545f6b7df6d3a5a839bdcc0c6d7fafc99",
+   "retrieved_at": "2026-10-19T08:42:14+00:00",
+   "cut_date": "2008-06-30"
+  },
+  {
+   "file": "listaDiciembre08CI2.pdf",
+   "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/docs/listaDiciembre08CI2.pdf",
+   "sha256": "b4f0a102d64c313379e5e5b128fbe6e31bae8ef3930be25cdc746c06efc2101e",
+   "retrieved_at": "2026-10-19T08:42:12+00:00",
+   "cut_date": "2008-12-31"
+  },
+  {
+   "file": "ListaEsperaJunio09CI.pdf",
+   "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/docs/ListaEsperaJunio09CI.pdf",
+   "sha256": "51b566f824bc35a78d9e9897a2844e8e7889b902b0d211a67a01c28d98fbc296",
+   "retrieved_at": "2026-10-19T08:42:11+00:00",
+   "cut_date": "2009-06-30"
+  },
+  {
+   "file": "ListaEsperaDic09_CISNS.pdf",
+   "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/docs/ListaEsperaDic09_CISNS.pdf",
+   "sha256": "35fab84163dbafe325a603d4b86d81723e11ae8885636453177eebd286282bde",
+   "retrieved_at": "2026-10-19T08:42:09+00:00",
+   "cut_date": "2009-12-31"
+  },
+  {
+   "file": "ListaEsperaJunio10_CISNS.pdf",
+   "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/docs/ListaEsperaJunio10_CISNS.pdf",
+   "sha256": "741e085dd4b7525e563f72163afbd29ef0030465b15acc6d79bf6694be00a5c5",
+   "retrieved_at": "2026-10-19T08:42:07+00:00",
+   "cut_date": "2010-06-30"
+  },
+  {
+   "file": "ListaEsperaDic10_CISNS.pdf",
+   "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/docs/ListaEsperaDic10_CISNS.pdf",
+   "sha256": "f60e84f1f81c64a0e44d243237f961cca9cc5768bdc2bc3371434403757b13d7",
+   "retrieved_at": "2026-10-19T08:42:06+00:00",
+   "cut_date": "2010-12-31"
+  },
+  {
+   "file": "ListaEsperaJun11_CISNS.pdf",
+   "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/docs/ListaEsperaJun11_CISNS.pdf",
+   "sha256": "a6c4a8b766d1f5f4cac2d976e73dfa0ca1e319d258c20b92f39cbae513d218dc",
+   "retrieved_at": "2026-10-19T08:42:04+00:00",
+   "cut_date": "2011-06-30"
+  },
+  {
+   "file": "ListaEsperaDic11_CISNS.pdf",
+   "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/docs/ListaEsperaDic11_CISNS.pdf",
+   "sha256": "05108572a644e65454062b3514481541c470a00661796c5c89f5db85ebeea1aa",
+   "retrieved_at": "2026-10-19T08:42:02+00:00",
+   "cut_date": "2011-12-31"
+  },
+  {
+   "file": "LISTAS_PUBLICACION_CI_JUN12_18122012.pdf",
+   "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/docs/LISTAS_PUBLICACION_CI_JUN12_18122012.pdf",
+   "sha256": "270b13936cf045459a91247fa94487258e76eff05b5e901a96612d31f0751dfc",
+   "retrieved_at": "2026-10-19T08:42:01+00:00",
+   "cut_date": "2012-06-30"
+  },
+  {
+   "file": "LISTAS_DE_ESPERA_Diciembre_2012.pdf",
+   "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/docs/LISTAS_DE_ESPERA_Diciembre_2012.pdf",
+   "sha256": "7e1c2cca268edf634e24295994812b7cfbc647a2ace088de67428a3e53970c2c",
+   "retrieved_at": "2026-10-19T08:41:59+00:00",
+   "cut_date": "2012-12-31"
+  },
+  {
+   "file": "LISTAS_PUBLICACION_JUN13.pdf",
+   "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/docs/LISTAS_PUBLICACION_JUN13.pdf",
+   "sha256": "4b44c01e941b9e712eed4c1cb8f4e0a9d2822ce024c3a611dd64059ea818a65c",
+   "retrieved_at": "2026-10-19T08:41:57+00:00",
+   "cut_date": "2013-06-30"
+  },
+  {
+   "file": "LISTAS_PUBLICACION_DIC13.pdf",
+   "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/docs/LISTAS_PUBLICACION_DIC13.pdf",
+   "sha256": "b032a1e100344181910fb8931a442d76ac22184868f331368619a871e23c8c4f",
+   "retrieved_at": "2026-10-19T08:41:55+00:00",
+   "cut_date": "2013-12-31"
+  },
+  {
+   "file": "LISTAS_PUBLICACION_JUN14_CISNS.pdf",
+   "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/docs/LISTAS_PUBLICACION_JUN14_CISNS.pdf",
+   "sha256": "bca89aea99aed46a855f3df00b777a771248b2fad5ce8da000156b09495bc04d",
+   "retrieved_at": "2026-10-19T08:41:53+00:00",
+   "cut_date": "2014-06-30"
+  },
+  {
+   "file": "LISTAS_PUBLICACION_DIC14.pdf",
+   "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/docs/LISTAS_PUBLICACION_DIC14.pdf",
+   "sha256": "34e8fd5d293bffa414a31fa1bcca3929dd26fe1d877b9a159e89d100a3a7c192",
+   "retrieved_at": "2026-10-19T08:41:52+00:00",
+   "cut_date": "2014-12-31"
+  },
+  {
+   "file": "LISTAS_PUBLICACION_JUN15.pdf",
+   "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/docs/LISTAS_PUBLICACION_JUN15.pdf",
+   "sha256": "6d70e3d48f5f5cfbe06fd76985a1ba9c817c00d924c3fd82be402f4edc8861bf",
+   "retrieved_at": "2026-10-19T08:41:50+00:00",
+   "cut_date": "2015-06-30"
+  },
+  {
+   "file": "LISTAS_PUBLICACION_DIC15.pdf",
+   "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/docs/LISTAS_PUBLICACION_DIC15.pdf",
+   "sha256": "5feb934fbcecb49ae285b35126af2824391a4f3dc4bd183960f36dd7ec9d91a8",
+   "retrieved_at": "2026-10-19T08:41:49+00:00",
+   "cut_date": "2015-12-31"
+  },
+  {
+   "file": "LISTAS_PUBLICACION_JUN2016.1.pdf",
+   "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/docs/LISTAS_PUBLICACION_JUN2016.1.pdf",
+   "sha256": "d7a23057762adfce209e47b01583523cf248cfcb3fd339640c34a305624d497f",
+   "retrieved_at": "2026-10-19T08:41:48+00:00",
+   "cut_date": "2016-06-30"
+  },
+  {
+   "file": "LISTAS_PUBLICACION_DIC16.pdf",
+   "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/docs/LISTAS_PUBLICACION_DIC16.pdf",
+   "sha256": "d463a016be79e91ad4ffda4cb2e706aa10347fc602f7dbc40c399f4663c28165",
+   "retrieved_at": "2026-10-19T08:41:46+00:00",
+   "cut_date": "2016-12-31"
+  },
+  {
+   "file": "Indicadores_Resumen_Junio_2017.pdf",
+   "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/docs/Indicadores_Resumen_Junio_2017.pdf",
+   "sha256": "196afe72e0c6bd4ad76cabd9b5f3cf5f4c0ab142a4886d80768ed60899592c72",
+   "retrieved_at": "2026-10-19T08:41:44+00:00",
+   "cut_date": "2017-06-30"
+  },
+  {
+   "file": "Indicadores_Resumen_Diciembre_2017.pdf",
+   "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/docs/Indicadores_Resumen_Diciembre_2017.pdf",
+   "sha256": "ed6c06f14206e65722357de04d132ec57a7739ee1753225c14352edb48fc1d55",
+   "retrieved_at": "2026-10-19T08:41:43+00:00",
+   "cut_date": "2017-12-31"
+  },
+  {
+   "file": "LLEE_SNS_IndicadoresResumen_Junio2018.pdf",
+   "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/docs/LLEE_SNS_IndicadoresResumen_Junio2018.pdf",
+   "sha256": "b6b002acc8ce28f8217561e1b991bab46c4d2ef78a79a017b52b75a07acfc719",
+   "retrieved_at": "2026-10-19T08:41:41+00:00",
+   "cut_date": "2018-06-30"
+  },
+  {
+   "file": "LLEE_SNS_IndicadoresResumen_Diciembre2018.pdf",
+   "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/docs/LLEE_SNS_IndicadoresResumen_Diciembre2018.pdf",
+   "sha256": "db3ebb35dd31492d03ad0a52b5180fc684f3ec5a60e3420e0fac62059febb6ba",
+   "retrieved_at": "2026-10-19T08:41:39+00:00",
+   "cut_date": "2018-12-31"
+  },
+  {
+   "file": "LLEE_SNS_IndicadoresResumen_Junio2019.pdf",
+   "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/docs/LLEE_SNS_IndicadoresResumen_Junio2019.pdf",
+   "sha256": "0ec2e128d5b1389d1531e4eb5172e998401540f6edca7fb5aea1c08247124d6e",
+   "retrieved_at": "2026-10-19T08:41:37+00:00",
+   "cut_date": "2019-06-30"
+  },
+  {
+   "file": "LISTAS_PUBLICACION_dic19.pdf",
+   "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/docs/LISTAS_PUBLICACION_dic19.pdf",
+   "sha256": "8fb095b7bf5427f5296bd2b880dad57105d49aba446178e13c9a7ebf9bddf8da",
+   "retrieved_at": "2026-10-19T08:41:35+00:00",
+   "cut_date": "2019-12-31"
+  },
+  {
+   "file": "LISTAS_PUBLICACION_jun2020.pdf",
+   "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/docs/LISTAS_PUBLICACION_jun2020.pdf",
+   "sha256": "82a9ddd313da173d333ae51f7e0f022f7fd07020e0fbf7376e73dbc31b2c4ff2",
+   "retrieved_at": "2026-10-19T08:41:33+00:00",
+   "cut_date": "2020-06-30"
+  },
+  {
+   "file": "LISTAS_PUBLICACION_dic_2020.pdf",
+   "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/docs/LISTAS_PUBLICACION_dic_2020.pdf",
+   "sha256": "bfbd11aeefcf4c714f46f612f2c1e49cdd498c1f573a52a6b8446007f946a6ff",
+   "retrieved_at": "2026-10-19T08:41:31+00:00",
+   "cut_date": "2020-12-31"
+  },
+  {
+   "file": "LISTAS_PUBLICACION_JUN21.pdf",
+   "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/docs/LISTAS_PUBLICACION_JUN21.pdf",
+   "sha256": "7f08c82a645320e0cf6280689962fc696b913b833e1989e7cced55e39e7e2544",
+   "retrieved_at": "2026-10-19T08:41:29+00:00",
+   "cut_date": "2021-06-30"
+  },
+  {
+   "file": "LISTAS_PUBLICACION_dic21.pdf",
+   "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/docs/LISTAS_PUBLICACION_dic21.pdf",
+   "sha256": "832cc394b9cc805948929ab233899a1b419bbbfd15058016ff7b0e6d3fd7f731",
+   "retrieved_at": "2026-10-19T08:41:27+00:00",
+   "cut_date": "2021-12-31"
+  },
+  {
+   "file": "LISTAS_PUBLICACION_jun2022.pdf",
+   "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/docs/LISTAS_PUBLICACION_jun2022.pdf",
+   "sha256": "f435e7fdb8b0c5ccbb5a4284178fb15a3ed1fa2acac3e0877b7ffd3536636141",
+   "retrieved_at": "2026-10-19T08:41:26+00:00",
+   "cut_date": "2022-06-30"
+  },
+  {
+   "file": "LISTAS_PUBLICACION_dic_2022.pdf",
+   "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/docs/LISTAS_PUBLICACION_dic_2022.pdf",
+   "sha256": "ab934b5f39807ddcd329466960797065775a52361b53abd2c48ff34b56b72228",
+   "retrieved_at": "2026-10-19T08:41:24+00:00",
+   "cut_date": "2022-12-31"
+  },
+  {
+   "file": "LISTAS_PUBLICACION_jun2023.pdf",
+   "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/docs/LISTAS_PUBLICACION_jun2023.pdf",
+   "sha256": "b873ec92bd9fa350544198cc95a93ca0ad78f3aecca40050ac63e07f6472c5d9",
+   "retrieved_at": "2026-10-19T08:41:22+00:00",
+   "cut_date": "2023-06-30"
+  },
+  {
+   "file": "LISTAS_PUBLICACION_dic2023.pdf",
+   "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/docs/LISTAS_PUBLICACION_dic2023.pdf",
+   "sha256": "29fb72da953ffbf4dd4a48e04480082936b942bf085c70fd7f217d7d4b4a2ea9",
+   "retrieved_at": "2026-10-19T08:41:20+00:00",
+   "cut_date": "2023-12-31"
+  },
+  {
+   "file": "LISTAS_PUBLICACION_jun2024.pdf",
+   "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/docs/LISTAS_PUBLICACION_jun2024.pdf",
+   "sha256": "af357950e92fc6c0ccd7d05260aabfe64f3b24d9ad2c6c3a4ed4f60dab391998",
+   "retrieved_at": "2026-10-19T08:41:18+00:00",
+   "cut_date": "2024-06-30"
+  },
+  {
+   "file": "LISTAS_PUBLICACION_dic2024.pdf",
+   "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/docs/LISTAS_PUBLICACION_dic2024.pdf",
+   "sha256": "d7ac857409bf9e7a587cdd81946f80aec8840a01e91bc47999f73087703ef49e",
+   "retrieved_at": "2026-10-19T08:41:16+00:00",
+   "cut_date": "2024-12-31"
+  },
+  {
+   "file": "LISTAS_PUBLICACION_jun25.pdf",
+   "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/docs/LISTAS_PUBLICACION_jun25.pdf",
+   "sha256": "2cdcaebaf3a7b87c7ba328bf14656a4ee835a8309f2f4f71c3d56faaa586c63b",
+   "retrieved_at": "2026-10-19T08:41:15+00:00",
+   "cut_date": "2025-06-30"
+  },
+  {
+   "file": "LISTAS_PUBLICACION_Dic_2025_rectificado.pdf",
+   "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/docs/LISTAS_PUBLICACION_Dic_2025_rectificado.pdf",
+   "sha256": "ddc25d0f2c882eb8eea9c5798a6570f9de83eda3044bae0413360d8a1be98007",
+   "retrieved_at": "2026-10-19T08:41:10+00:00",
+   "cut_date": "2025-12-31"
+  },
+  {
+   "file": "Datos_ccaa_dic2025_rectificado.pdf",
+   "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/docs/Datos_ccaa_dic2025_rectificado.pdf",
+   "sha256": "6fe3e65b851a2023e262339bc665bf6c4c63c4e263f36b41a5496e10eef85c0e",
+   "retrieved_at": "2026-10-19T08:41:11+00:00",
+   "cut_date": "2025-12-31",
+   "role": "annex"
+  },
+  {
+   "file": "Nota_Aclaratoria_Rectificacion_Dic_2025.pdf",
+   "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/docs/Nota_Aclaratoria_Rectificacion_Dic_2025.pdf",
+   "sha256": "e5cd02be553c1f067085dfcf04ac36f6eae59c938ef9d40fc014bd39383fe34f",
+   "retrieved_at": "2026-10-19T08:41:13+00:00",
+   "cut_date": "2025-12-31",
+   "role": "annex"
+  }
+ ],
+ "surgery": [
+  {
+   "cut_date": "2003-12-31",
+   "page": 2,
+   "quote": "TOTAL  436.228  100  10,37  8,02  77",
+   "footnotes": [
+    "Nota: El número de pacientes pendientes incluye datos de un Servicio de Salud estimados a partir de los procesos seleccionados (actualizada la serie tras revisión de datos de"
+   ],
+   "patients": 436228,
+   "rate_per_1000": 10.37,
+   "pct_over_6_months": 8.02,
+   "mean_days": 77.0,
+   "report": "Listas2.pdf"
+  },
+  {
+   "cut_date": "2004-12-31",
+   "page": 2,
+   "quote": "TOTAL  421.716  -14.512  9,78  8,44  74",
+   "footnotes": [
+    "(*) Un Servicio de Salud ha estimado sus datos a partir de los procesos seleccionados y toda la serie histórica se ha revisado de acuerdo con esos datos."
+   ],
+   "patients": 421716,
+   "rate_per_1000": 9.78,
+   "pct_over_6_months": 8.44,
+   "mean_days": 74.0,
+   "report": "listasEspera04.pdf"
+  },
+  {
+   "cut_date": "2005-12-31",
+   "page": 2,
+   "quote": "TOTAL  385.050  -21.611  10,11  9,48  83",
+   "footnotes": [
+    "(*) Los datos de un Servicio de Salud han sido estimados a partir de los procesos seleccionados/ Faltan datos de una Comunidad Autónoma",
+    "(**) Faltan datos de dos Servicios de Salud"
+   ],
+   "patients": 385050,
+   "rate_per_1000": 10.11,
+   "pct_over_6_months": 9.48,
+   "mean_days": 83.0,
+   "report": "listasEspera05.pdf"
+  },
+  {
+   "cut_date": "2006-06-30",
+   "page": 2,
+   "quote": "TOTAL  379.704  -26.958  9,97  6,52  72",
+   "footnotes": [],
+   "patients": 379704,
+   "rate_per_1000": 9.97,
+   "pct_over_6_months": 6.52,
+   "mean_days": 72.0,
+   "report": "LEQ_Consejo11dic.pdf"
+  },
+  {
+   "cut_date": "2006-12-31",
+   "page": 3,
+   "quote": "TOTAL  362.762  -22.288  9,38  7,07  70  -13",
+   "footnotes": [
+    "(*) Los datos de un Servicio de Salud han sido estimados a partir de los procesos seleccionados/ Faltan datos de una Comunidad Autónoma",
+    "(**) Faltan datos de dos Servicios de Salud"
+   ],
+   "patients": 362762,
+   "rate_per_1000": 9.38,
+   "pct_over_6_months": 7.07,
+   "mean_days": 70.0,
+   "report": "listasDiciembre06CI.pdf"
+  },
+  {
+   "cut_date": "2007-06-30",
+   "page": 3,
+   "quote": "TOTAL  364.901  -14.803  9,33  6,25  70  -2",
+   "footnotes": [
+    "(*) Los datos de un Servicio de Salud han sido estimados a partir de los procesos seleccionados/ Faltan datos de una Comunidad Autónoma",
+    "(**) Faltan datos de dos Servicios de Salud"
+   ],
+   "patients": 364901,
+   "rate_per_1000": 9.33,
+   "pct_over_6_months": 6.25,
+   "mean_days": 70.0,
+   "report": "listaPublicacion07CI.pdf"
+  },
+  {
+   "cut_date": "2007-12-31",
+   "page": 3,
+   "quote": "TOTAL  376.242  13.480  9,55  7,36  74",
+   "footnotes": [
+    "(*) Los datos de un Servicio de Salud han sido estimados a partir de los procesos seleccionados/ Faltan datos de una Comunidad Autónoma",
+    "(**) Faltan datos de dos Servicios de Salud"
+   ],
+   "patients": 376242,
+   "rate_per_1000": 9.55,
+   "pct_over_6_months": 7.36,
+   "mean_days": 74.0,
+   "report": "listaDiciembre08CI.pdf"
+  },
+  {
+   "cut_date": "2008-06-30",
+   "page": 3,
+   "quote": "TOTAL  372.572  -3.670  9,38  5,82  68  -6",
+   "footnotes": [
+    "(*) Los datos de un Servicio de Salud han sido estimados a partir de los procesos seleccionados/ Faltan datos de una Comunidad Autónoma",
+    "(**) Faltan datos de dos Servicios de Salud"
+   ],
+   "patients": 372572,
+   "rate_per_1000": 9.38,
+   "pct_over_6_months": 5.82,
+   "mean_days": 68.0,
+   "report": "listaJunio08CI.pdf"
+  },
+  {
+   "cut_date": "2008-12-31",
+   "page": 3,
+   "quote": "TOTAL  364.397  -11.845  9,19  6,74  71  -3",
+   "footnotes": [
+    "(*) Los datos de un Servicio de Salud han sido estimados a partir de los procesos seleccionados/ No se incluyen datos de otra Comunidad Autónoma",
+    "(**) Faltan datos de dos Servicios de Salud"
+   ],
+   "patients": 364397,
+   "rate_per_1000": 9.19,
+   "pct_over_6_months": 6.74,
+   "mean_days": 71.0,
+   "report": "listaDiciembre08CI2.pdf"
+  },
+  {
+   "cut_date": "2009-06-30",
+   "page": 3,
+   "quote": "TOTAL  374.194  1.622  9,42  4,99  63  -5",
+   "footnotes": [
+    "(*) Los datos de un Servicio de Salud han sido estimados a partir de los procesos seleccionados/ No se incluyen datos de otra Comunidad Autónoma",
+    "(**) Faltan datos de dos Servicios de Salud"
+   ],
+   "patients": 374194,
+   "rate_per_1000": 9.42,
+   "pct_over_6_months": 4.99,
+   "mean_days": 63.0,
+   "report": "ListaEsperaJunio09CI.pdf"
+  },
+  {
+   "cut_date": "2009-12-31",
+   "page": 3,
+   "quote": "TOTAL  372.468  8.071  9,30  5,56  67  -4",
+   "footnotes": [
+    "(*) Los datos de un Servicio de Salud han sido estimados a partir de los procesos seleccionados/ No se incluyen datos de otra Comunidad Autónoma",
+    "(1) Información actualizada tras corrección de errores (28/07/2010)"
+   ],
+   "patients": 372468,
+   "rate_per_1000": 9.3,
+   "pct_over_6_months": 5.56,
+   "mean_days": 67.0,
+   "report": "ListaEsperaDic09_CISNS.pdf"
+  },
+  {
+   "cut_date": "2010-06-30",
+   "page": 3,
+   "quote": "TOTAL  381.753  7.559  9,52  4,01  61  -10",
+   "footnotes": [
+    "(*) Los datos de un Servicio de Salud han sido estimados a partir de los procesos seleccionados/ No se incluyen datos de otra Comunidad Autónoma",
+    "(**) Faltan datos de dos Servicios de Salud"
+   ],
+   "patients": 381753,
+   "rate_per_1000": 9.52,
+   "pct_over_6_months": 4.01,
+   "mean_days": 61.0,
+   "report": "ListaEsperaJunio10_CISNS.pdf"
+  },
+  {
+   "cut_date": "2010-12-31",
+   "page": 3,
+   "quote": "TOTAL  392.072  19.604  9,83  5,41  65  -2",
+   "footnotes": [
+    "(*) Falta un servicio de salud, en otro los datos por especialidades han sido estimados a partir de los procesos seleccionados y en un tercero los datos corresponden a la situacion de Junio de 2010"
+   ],
+   "patients": 392072,
+   "rate_per_1000": 9.83,
+   "pct_over_6_months": 5.41,
+   "mean_days": 65.0,
+   "report": "ListaEsperaDic10_CISNS.pdf"
+  },
+  {
+   "cut_date": "2011-06-30",
+   "page": 3,
+   "quote": "TOTAL  417.407  35.654  10,64  5,70  64  3",
+   "footnotes": [
+    "(*) Los datos de un Servicio de Salud han sido estimados a partir de los procesos seleccionados/ No se incluyen datos de otra Comunidad Autónoma",
+    "(**) Faltan datos de dos Servicios de Salud"
+   ],
+   "patients": 417407,
+   "rate_per_1000": 10.64,
+   "pct_over_6_months": 5.7,
+   "mean_days": 64.0,
+   "report": "ListaEsperaJun11_CISNS.pdf"
+  },
+  {
+   "cut_date": "2011-12-31",
+   "page": 3,
+   "quote": "TOTAL  459.885  67.813  11,71  9,97  73  8",
+   "footnotes": [
+    "(*) Faltan datos de un servicio de salud/ en otro servicio de salud el número de pacientes por especialidades han sido estimados a partir de los procesos seleccionados"
+   ],
+   "patients": 459885,
+   "rate_per_1000": 11.71,
+   "pct_over_6_months": 9.97,
+   "mean_days": 73.0,
+   "report": "ListaEsperaDic11_CISNS.pdf"
+  },
+  {
+   "cut_date": "2012-06-30",
+   "page": 3,
+   "quote": "TOTAL  536.911  11,82  9,40  76",
+   "footnotes": [
+    "(1) Se incluyen por primera vez datos de todas las comunidades autónomas",
+    "(2) En un Servicio de Salud los datos del total de LEQ ha sido estimados a partir de los procesos seleccionados/el porcentaje de más de seis meses y tiempo medio de espera",
+    "Nota: Rotura de serie - en esta edición no se proporcionan las diferencias respecto a periodos anteriores debido a la falta de comparabilidad (se incluye una comunidad autónoma más)"
+   ],
+   "patients": 536911,
+   "rate_per_1000": 11.82,
+   "pct_over_6_months": 9.4,
+   "mean_days": 76.0,
+   "report": "LISTAS_PUBLICACION_CI_JUN12_18122012.pdf"
+  },
+  {
+   "cut_date": "2012-12-31",
+   "page": 3,
+   "quote": "TOTAL  571.395  12,89  16,51  100",
+   "footnotes": [
+    "(*) En un Servicio de Salud los datos del total de LEQ han sido estimados a partir de los procesos seleccionados / el porcentaje de más de 6 meses y tiempo medio de espera"
+   ],
+   "patients": 571395,
+   "rate_per_1000": 12.89,
+   "pct_over_6_months": 16.51,
+   "mean_days": 100.0,
+   "report": "LISTAS_DE_ESPERA_Diciembre_2012.pdf"
+  },
+  {
+   "cut_date": "2013-06-30",
+   "page": 3,
+   "quote": "TOTAL  583.612  46.701  12,92  13,73  101  25",
+   "footnotes": [
+    "(*) En un Servicio de Salud los datos del total de LEQ han sido estimados a partir de los procesos seleccionados / el porcentaje de más de 6 meses y tiempo medio de espera corresponden a dichos procesos"
+   ],
+   "patients": 583612,
+   "rate_per_1000": 12.92,
+   "pct_over_6_months": 13.73,
+   "mean_days": 101.0,
+   "report": "LISTAS_PUBLICACION_JUN13.pdf"
+  },
+  {
+   "cut_date": "2013-12-31",
+   "page": 3,
+   "quote": "TOTAL  559.335  -12.060  12,34  14,0  98  -2",
+   "footnotes": [
+    "(*) En un Servicio de Salud los datos del total de LEQ han sido estimados a partir de los procesos seleccionados / el porcentaje de más de 6 meses y tiempo medio de espera corresponden a dichos procesos"
+   ],
+   "patients": 559335,
+   "rate_per_1000": 12.34,
+   "pct_over_6_months": 14.0,
+   "mean_days": 98.0,
+   "report": "LISTAS_PUBLICACION_DIC13.pdf"
+  },
+  {
+   "cut_date": "2014-06-30",
+   "page": 3,
+   "quote": "TOTAL  552.016  -31.596  12,31  10,6  90  -11",
+   "footnotes": [
+    "(*)Datos correspondientes a 17 comunidades autónomas y el INGESA. Para una comunidad autónoma (Cataluña) los datos han sido estimados a partir de los procesos seleccionados en el RD 605/2003"
+   ],
+   "patients": 552016,
+   "rate_per_1000": 12.31,
+   "pct_over_6_months": 10.6,
+   "mean_days": 90.0,
+   "report": "LISTAS_PUBLICACION_JUN14_CISNS.pdf"
+  },
+  {
+   "cut_date": "2014-12-31",
+   "page": 3,
+   "quote": "TOTAL  511.923  -47.412  11,40  9,3  87  -11",
+   "footnotes": [
+    "(*)Datos correspondientes a 17 comunidades autónomas y el INGESA. Para una comunidad autónoma (Cataluña) los datos han sido estimados a partir de los procesos seleccionados en el RD 605/2003"
+   ],
+   "patients": 511923,
+   "rate_per_1000": 11.4,
+   "pct_over_6_months": 9.3,
+   "mean_days": 87.0,
+   "report": "LISTAS_PUBLICACION_DIC14.pdf"
+  },
+  {
+   "cut_date": "2015-06-30",
+   "page": 3,
+   "quote": "TOTAL  522.180  -29.836  11,62  7,7  81  -9",
+   "footnotes": [
+    "(*)Datos correspondientes a 17 comunidades autónomas y el INGESA. Para una comunidad autónoma (Cataluña) los datos han sido estimados a partir de los procesos seleccionados en el RD 605/2003"
+   ],
+   "patients": 522180,
+   "rate_per_1000": 11.62,
+   "pct_over_6_months": 7.7,
+   "mean_days": 81.0,
+   "report": "LISTAS_PUBLICACION_JUN15.pdf"
+  },
+  {
+   "cut_date": "2015-12-31",
+   "page": 3,
+   "quote": "TOTAL  549.424  37.501  12,21  10,6  89  2",
+   "footnotes": [
+    "(*)Datos correspondientes a 17 comunidades autónomas y el INGESA. Para una comunidad autónoma (Cataluña) los datos han sido estimados a partir de los procesos seleccionados en el RD 605/2003."
+   ],
+   "patients": 549424,
+   "rate_per_1000": 12.21,
+   "pct_over_6_months": 10.6,
+   "mean_days": 89.0,
+   "report": "LISTAS_PUBLICACION_DIC15.pdf"
+  },
+  {
+   "cut_date": "2016-06-30",
+   "page": 3,
+   "quote": "TOTAL  569.097  19.673  12,68  8,8  83  -6",
+   "footnotes": [
+    "(*)Datos correspondientes a 17 comunidades autónomas y el INGESA. Para una comunidad autónoma (Cataluña) los datos han sido estimados a partir de los procesos seleccionados en el RD 605/2003."
+   ],
+   "patients": 569097,
+   "rate_per_1000": 12.68,
+   "pct_over_6_months": 8.8,
+   "mean_days": 83.0,
+   "report": "LISTAS_PUBLICACION_JUN2016.1.pdf"
+  },
+  {
+   "cut_date": "2016-12-31",
+   "page": 3,
+   "quote": "TOTAL  614.101  45.004  13,65  18,9  115  32",
+   "footnotes": [
+    "(*) Datos correspondientes a 17 comunidades autónomas y el INGESA. (en Junio, los datos de Cataluña fueron estimados con base en sus datos de procesos seleccionados)"
+   ],
+   "patients": 614101,
+   "rate_per_1000": 13.65,
+   "pct_over_6_months": 18.9,
+   "mean_days": 115.0,
+   "report": "LISTAS_PUBLICACION_DIC16.pdf"
+  },
+  {
+   "cut_date": "2017-06-30",
+   "page": 3,
+   "quote": "TOTAL  604.103  -9.998  13,43  14,3  104  -11",
+   "footnotes": [],
+   "patients": 604103,
+   "rate_per_1000": 13.43,
+   "pct_over_6_months": 14.3,
+   "mean_days": 104.0,
+   "report": "Indicadores_Resumen_Junio_2017.pdf"
+  },
+  {
+   "cut_date": "2017-12-31",
+   "page": 3,
+   "quote": "TOTAL  592.175  -21.926  13,13  17,0  106  -9",
+   "footnotes": [],
+   "patients": 592175,
+   "rate_per_1000": 13.13,
+   "pct_over_6_months": 17.0,
+   "mean_days": 106.0,
+   "report": "Indicadores_Resumen_Diciembre_2017.pdf"
+  },
+  {
+   "cut_date": "2018-06-30",
+   "page": 3,
+   "quote": "TOTAL  584.018  -20.085  12,95  12,2  93  -11",
+   "footnotes": [],
+   "patients": 584018,
+   "rate_per_1000": 12.95,
+   "pct_over_6_months": 12.2,
+   "mean_days": 93.0,
+   "report": "LLEE_SNS_IndicadoresResumen_Junio2018.pdf"
+  },
+  {
+   "cut_date": "2018-12-31",
+   "page": 3,
+   "quote": "TOTAL  668.288  76.113  14,78  20,0  129  23",
+   "footnotes": [
+    "(1) Revisado el sistema de cómputo de Andalucía para la notificación correspondiente a Dic 2018"
+   ],
+   "patients": 668288,
+   "rate_per_1000": 14.78,
+   "pct_over_6_months": 20.0,
+   "mean_days": 129.0,
+   "report": "LLEE_SNS_IndicadoresResumen_Diciembre2018.pdf"
+  },
+  {
+   "cut_date": "2019-06-30",
+   "page": 3,
+   "quote": "TOTAL  671.494  3.206  14,85  15,8  115  -14",
+   "footnotes": [],
+   "patients": 671494,
+   "rate_per_1000": 14.85,
+   "pct_over_6_months": 15.8,
+   "mean_days": 115.0,
+   "report": "LLEE_SNS_IndicadoresResumen_Junio2019.pdf"
+  },
+  {
+   "cut_date": "2019-12-31",
+   "page": 3,
+   "quote": "TOTAL  36.709  15,53  19,9  121  -8",
+   "footnotes": [],
+   "patients": 704997,
+   "rate_per_1000": 15.53,
+   "pct_over_6_months": 19.9,
+   "mean_days": 121.0,
+   "note": "patients from the regional table TOTAL row: TOTAL  704.997  15,53  19,9  121",
+   "report": "LISTAS_PUBLICACION_dic19.pdf"
+  },
+  {
+   "cut_date": "2020-06-30",
+   "page": 3,
+   "quote": "TOTAL  691.508  20.014  15,22  33,8  170  55",
+   "footnotes": [],
+   "patients": 691508,
+   "rate_per_1000": 15.22,
+   "pct_over_6_months": 33.8,
+   "mean_days": 170.0,
+   "report": "LISTAS_PUBLICACION_jun2020.pdf"
+  },
+  {
+   "cut_date": "2020-12-31",
+   "page": 3,
+   "quote": "TOTAL  649.879  -41.629  14,20  27,4  155  -16",
+   "footnotes": [
+    "* Rectificación de datos de 1 CCAA"
+   ],
+   "patients": 649879,
+   "rate_per_1000": 14.2,
+   "pct_over_6_months": 27.4,
+   "mean_days": 155.0,
+   "report": "LISTAS_PUBLICACION_dic_2020.pdf"
+  },
+  {
+   "cut_date": "2021-06-30",
+   "page": 3,
+   "quote": "TOTAL  661.162  -30.346  14,45  18,9  121  -49",
+   "footnotes": [],
+   "patients": 661162,
+   "rate_per_1000": 14.45,
+   "pct_over_6_months": 18.9,
+   "mean_days": 121.0,
+   "report": "LISTAS_PUBLICACION_JUN21.pdf"
+  },
+  {
+   "cut_date": "2021-12-31",
+   "page": 3,
+   "quote": "TOTAL  706.740  56.861  15.232  15,39  20,3  123  -32  -48",
+   "footnotes": [],
+   "patients": 706740,
+   "rate_per_1000": 15.39,
+   "pct_over_6_months": 20.3,
+   "mean_days": 123.0,
+   "report": "LISTAS_PUBLICACION_dic21.pdf"
+  },
+  {
+   "cut_date": "2022-06-30",
+   "page": 3,
+   "quote": "TOTAL  742.518  81.356  16,09  17,6  113  -8",
+   "footnotes": [],
+   "patients": 742518,
+   "rate_per_1000": 16.09,
+   "pct_over_6_months": 17.6,
+   "mean_days": 113.0,
+   "report": "LISTAS_PUBLICACION_jun2022.pdf"
+  },
+  {
+   "cut_date": "2022-12-31",
+   "page": 3,
+   "quote": "TOTAL  793.521  86.781  17,10  20,8  120  -3",
+   "footnotes": [],
+   "patients": 793521,
+   "rate_per_1000": 17.1,
+   "pct_over_6_months": 20.8,
+   "mean_days": 120.0,
+   "report": "LISTAS_PUBLICACION_dic_2022.pdf"
+  },
+  {
+   "cut_date": "2023-06-30",
+   "page": 3,
+   "quote": "TOTAL  819.964  77.446  17,55  17,4  112  -1",
+   "footnotes": [],
+   "patients": 819964,
+   "rate_per_1000": 17.55,
+   "pct_over_6_months": 17.4,
+   "mean_days": 112.0,
+   "report": "LISTAS_PUBLICACION_jun2023.pdf"
+  },
+  {
+   "cut_date": "2023-12-31",
+   "page": 3,
+   "quote": "TOTAL  849.535  56.014  18,11  24,3  128  8",
+   "footnotes": [],
+   "patients": 849535,
+   "rate_per_1000": 18.11,
+   "pct_over_6_months": 24.3,
+   "mean_days": 128.0,
+   "report": "LISTAS_PUBLICACION_dic2023.pdf"
+  },
+  {
+   "cut_date": "2024-06-30",
+   "page": 3,
+   "quote": "TOTAL  848.340  28.376  17,93  20,5  121  9",
+   "footnotes": [],
+   "patients": 848340,
+   "rate_per_1000": 17.93,
+   "pct_over_6_months": 20.5,
+   "mean_days": 121.0,
+   "report": "LISTAS_PUBLICACION_jun2024.pdf"
+  },
+  {
+   "cut_date": "2024-12-31",
+   "page": 3,
+   "quote": "TOTAL  846.583  -2.952  17,80  22,9  126  -2",
+   "footnotes": [],
+   "patients": 846583,
+   "rate_per_1000": 17.8,
+   "pct_over_6_months": 22.9,
+   "mean_days": 126.0,
+   "report": "LISTAS_PUBLICACION_dic2024.pdf"
+  },
+  {
+   "cut_date": "2025-06-30",
+   "page": 3,
+   "quote": "TOTAL  832.728  -15.612  -13.855  17,35  19,6  118,6  -2,4",
+   "footnotes": [],
+   "patients": 832728,
+   "rate_per_1000": 17.35,
+   "pct_over_6_months": 19.6,
+   "mean_days": 118.6,
+   "report": "LISTAS_PUBLICACION_jun25.pdf"
+  },
+  {
+   "cut_date": "2025-12-31",
+   "page": 3,
+   "quote": "TOTAL  853.740  7.157  21.012  17,70  21,6  122  -4",
+   "footnotes": [],
+   "patients": 853740,
+   "rate_per_1000": 17.7,
+   "pct_over_6_months": 21.6,
+   "mean_days": 122.0,
+   "report": "LISTAS_PUBLICACION_Dic_2025_rectificado.pdf"
+  }
+ ],
+ "consultations": [
+  {
+   "cut_date": "2006-12-31",
+   "page": 11,
+   "quote": "TOTAL  35,412  54  29,1",
+   "footnotes": [],
+   "rate_per_1000": 35.412,
+   "mean_days": 54.0,
+   "pct_over_60_days": 29.1,
+   "table": "Total primeras consultas",
+   "report": "listasDiciembre06CI.pdf"
+  },
+  {
+   "cut_date": "2007-06-30",
+   "page": 11,
+   "quote": "TOTAL  37,668  53  31,4",
+   "footnotes": [],
+   "rate_per_1000": 37.668,
+   "mean_days": 53.0,
+   "pct_over_60_days": 31.4,
+   "table": "Total primeras consultas",
+   "report": "listaPublicacion07CI.pdf"
+  },
+  {
+   "cut_date": "2007-12-31",
+   "page": 11,
+   "quote": "TOTAL  39,344  58  37",
+   "footnotes": [],
+   "rate_per_1000": 39.344,
+   "mean_days": 58.0,
+   "pct_over_60_days": 37.0,
+   "table": "Total primeras consultas",
+   "report": "listaDiciembre08CI.pdf"
+  },
+  {
+   "cut_date": "2008-06-30",
+   "page": 11,
+   "quote": "TOTAL  37,057  -2,29  32,6  59",
+   "footnotes": [],
+   "rate_per_1000": 37.057,
+   "mean_days": 59.0,
+   "pct_over_60_days": 32.6,
+   "table": "Total primeras consultas",
+   "report": "listaJunio08CI.pdf"
+  },
+  {
+   "cut_date": "2008-12-31",
+   "page": 11,
+   "quote": "TOTAL  37,485  -1,86  37,4  59",
+   "footnotes": [],
+   "rate_per_1000": 37.485,
+   "mean_days": 59.0,
+   "pct_over_60_days": 37.4,
+   "table": "Total primeras consultas",
+   "report": "listaDiciembre08CI2.pdf"
+  },
+  {
+   "cut_date": "2009-06-30",
+   "page": 11,
+   "quote": "TOTAL  39,114  2,06  33,0  52",
+   "footnotes": [],
+   "rate_per_1000": 39.114,
+   "mean_days": 52.0,
+   "pct_over_60_days": 33.0,
+   "table": "Total primeras consultas",
+   "report": "ListaEsperaJunio09CI.pdf"
+  },
+  {
+   "cut_date": "2009-12-31",
+   "page": 11,
+   "quote": "TOTAL  40,236  2,75  37,0  59",
+   "footnotes": [],
+   "rate_per_1000": 40.236,
+   "mean_days": 59.0,
+   "pct_over_60_days": 37.0,
+   "table": "Total primeras consultas",
+   "report": "ListaEsperaDic09_CISNS.pdf"
+  },
+  {
+   "cut_date": "2010-06-30",
+   "page": 11,
+   "quote": "TOTAL  39,84  0,73  36  53  1",
+   "footnotes": [],
+   "rate_per_1000": 39.84,
+   "mean_days": 53.0,
+   "pct_over_60_days": 36.0,
+   "table": "Total primeras consultas",
+   "report": "ListaEsperaJunio10_CISNS.pdf"
+  },
+  {
+   "cut_date": "2010-12-31",
+   "page": 11,
+   "quote": "TOTAL  33,001  -7,24  35,2  53",
+   "footnotes": [],
+   "rate_per_1000": 33.001,
+   "mean_days": 53.0,
+   "pct_over_60_days": 35.2,
+   "table": "Total primeras consultas",
+   "report": "ListaEsperaDic10_CISNS.pdf"
+  },
+  {
+   "cut_date": "2011-06-30",
+   "page": 11,
+   "quote": "TOTAL  40,36  0,52  36  52  -1",
+   "footnotes": [],
+   "rate_per_1000": 40.36,
+   "mean_days": 52.0,
+   "pct_over_60_days": 36.0,
+   "table": "Total primeras consultas",
+   "report": "ListaEsperaJun11_CISNS.pdf"
+  },
+  {
+   "cut_date": "2011-12-31",
+   "page": 11,
+   "quote": "TOTAL  36,105  3,10  38,2  58",
+   "footnotes": [],
+   "rate_per_1000": 36.105,
+   "mean_days": 58.0,
+   "pct_over_60_days": 38.2,
+   "table": "Total primeras consultas",
+   "report": "ListaEsperaDic11_CISNS.pdf"
+  },
+  {
+   "cut_date": "2012-06-30",
+   "page": 11,
+   "quote": "TOTAL  35,942  -0,16  37,7  53  -5",
+   "footnotes": [],
+   "rate_per_1000": 35.942,
+   "mean_days": 53.0,
+   "pct_over_60_days": 37.7,
+   "table": "Total primeras consultas",
+   "report": "LISTAS_PUBLICACION_CI_JUN12_18122012.pdf"
+  },
+  {
+   "cut_date": "2012-12-31",
+   "page": 11,
+   "quote": "TOTAL  42,167  36,5  59",
+   "footnotes": [],
+   "rate_per_1000": 42.167,
+   "mean_days": 59.0,
+   "pct_over_60_days": 36.5,
+   "table": "Total primeras consultas",
+   "report": "LISTAS_DE_ESPERA_Diciembre_2012.pdf"
+  },
+  {
+   "cut_date": "2013-06-30",
+   "page": 11,
+   "quote": "TOTAL  39,940  4,00  34,1  54  2",
+   "footnotes": [],
+   "rate_per_1000": 39.94,
+   "mean_days": 54.0,
+   "pct_over_60_days": 34.1,
+   "table": "Total primeras consultas",
+   "report": "LISTAS_PUBLICACION_JUN13.pdf"
+  },
+  {
+   "cut_date": "2013-12-31",
+   "page": 11,
+   "quote": "TOTAL  39,0  38,9  67",
+   "footnotes": [],
+   "rate_per_1000": 39.0,
+   "mean_days": 67.0,
+   "pct_over_60_days": 38.9,
+   "table": "Total primeras consultas",
+   "report": "LISTAS_PUBLICACION_DIC13.pdf"
+  },
+  {
+   "cut_date": "2014-06-30",
+   "page": 11,
+   "quote": "TOTAL  38,55  -1,39  30,5  53  -6",
+   "footnotes": [],
+   "rate_per_1000": 38.55,
+   "mean_days": 53.0,
+   "pct_over_60_days": 30.5,
+   "table": "Total primeras consultas",
+   "report": "LISTAS_PUBLICACION_JUN14_CISNS.pdf"
+  },
+  {
+   "cut_date": "2014-12-31",
+   "page": 11,
+   "quote": "TOTAL  39,43  0,40  38,6  65  -2",
+   "footnotes": [],
+   "rate_per_1000": 39.43,
+   "mean_days": 65.0,
+   "pct_over_60_days": 38.6,
+   "table": "Total primeras consultas",
+   "report": "LISTAS_PUBLICACION_DIC14.pdf"
+  },
+  {
+   "cut_date": "2015-06-30",
+   "page": 11,
+   "quote": "TOTAL  38,96  0,49  29,6  50  -4",
+   "footnotes": [],
+   "rate_per_1000": 38.96,
+   "mean_days": 50.0,
+   "pct_over_60_days": 29.6,
+   "table": "Total primeras consultas",
+   "report": "LISTAS_PUBLICACION_JUN15.pdf"
+  },
+  {
+   "cut_date": "2015-12-31",
+   "page": 11,
+   "quote": "TOTAL  43,35  3,93  42,4  58  -7",
+   "footnotes": [],
+   "rate_per_1000": 43.35,
+   "mean_days": 58.0,
+   "pct_over_60_days": 42.4,
+   "table": "Total primeras consultas",
+   "report": "LISTAS_PUBLICACION_DIC15.pdf"
+  },
+  {
+   "cut_date": "2016-06-30",
+   "page": 11,
+   "quote": "TOTAL  40,91  -2,45  41,1  52  -7",
+   "footnotes": [],
+   "rate_per_1000": 40.91,
+   "mean_days": 52.0,
+   "pct_over_60_days": 41.1,
+   "table": "Total primeras consultas",
+   "report": "LISTAS_PUBLICACION_JUN2016.1.pdf"
+  },
+  {
+   "cut_date": "2016-12-31",
+   "page": 13,
+   "quote": "TOTAL  45,66  4,76  46,4  72  20",
+   "footnotes": [],
+   "rate_per_1000": 45.66,
+   "mean_days": 72.0,
+   "pct_over_60_days": 46.4,
+   "table": "Total primeras consultas",
+   "report": "LISTAS_PUBLICACION_DIC16.pdf"
+  },
+  {
+   "cut_date": "2017-06-30",
+   "page": 14,
+   "quote": "TOTAL  43,86  -1,80  40,4  58  6",
+   "footnotes": [],
+   "rate_per_1000": 43.86,
+   "mean_days": 58.0,
+   "pct_over_60_days": 40.4,
+   "table": "Total primeras consultas",
+   "report": "Indicadores_Resumen_Junio_2017.pdf"
+  },
+  {
+   "cut_date": "2017-12-31",
+   "page": 14,
+   "quote": "TOTAL  45,87  0,21  44,3  66  -6",
+   "footnotes": [],
+   "rate_per_1000": 45.87,
+   "mean_days": 66.0,
+   "pct_over_60_days": 44.3,
+   "table": "Total primeras consultas",
+   "report": "Indicadores_Resumen_Diciembre_2017.pdf"
+  },
+  {
+   "cut_date": "2018-06-30",
+   "page": 14,
+   "quote": "TOTAL  43,06  -0,80  37,4  57  -1",
+   "footnotes": [],
+   "rate_per_1000": 43.06,
+   "mean_days": 57.0,
+   "pct_over_60_days": 37.4,
+   "table": "Total primeras consultas",
+   "report": "LLEE_SNS_IndicadoresResumen_Junio2018.pdf"
+  },
+  {
+   "cut_date": "2018-12-31",
+   "page": 14,
+   "quote": "TOTAL  62,48  43,8  96",
+   "footnotes": [],
+   "rate_per_1000": 62.48,
+   "mean_days": 96.0,
+   "pct_over_60_days": 43.8,
+   "table": "Total primeras consultas",
+   "report": "LLEE_SNS_IndicadoresResumen_Diciembre2018.pdf"
+  },
+  {
+   "cut_date": "2019-06-30",
+   "page": 14,
+   "quote": "TOTAL  61,84  42,6  81",
+   "footnotes": [],
+   "rate_per_1000": 61.84,
+   "mean_days": 81.0,
+   "pct_over_60_days": 42.6,
+   "table": "Total primeras consultas",
+   "report": "LLEE_SNS_IndicadoresResumen_Junio2019.pdf"
+  },
+  {
+   "cut_date": "2019-12-31",
+   "page": 14,
+   "quote": "TOTAL  63,72  49,1  88",
+   "footnotes": [],
+   "rate_per_1000": 63.72,
+   "mean_days": 88.0,
+   "pct_over_60_days": 49.1,
+   "table": "Total primeras consultas",
+   "report": "LISTAS_PUBLICACION_dic19.pdf"
+  },
+  {
+   "cut_date": "2020-06-30",
+   "page": 14,
+   "quote": "TOTAL  46,45  52,7  115",
+   "footnotes": [],
+   "rate_per_1000": 46.45,
+   "mean_days": 115.0,
+   "pct_over_60_days": 52.7,
+   "table": "Total primeras consultas",
+   "report": "LISTAS_PUBLICACION_jun2020.pdf"
+  },
+  {
+   "cut_date": "2020-12-31",
+   "page": 14,
+   "quote": "TOTAL  53,60  47,2  99",
+   "footnotes": [],
+   "rate_per_1000": 53.6,
+   "mean_days": 99.0,
+   "pct_over_60_days": 47.2,
+   "table": "Total primeras consultas",
+   "report": "LISTAS_PUBLICACION_dic_2020.pdf"
+  },
+  {
+   "cut_date": "2021-06-30",
+   "page": 14,
+   "quote": "TOTAL  62,00  38,2  75",
+   "footnotes": [],
+   "rate_per_1000": 62.0,
+   "mean_days": 75.0,
+   "pct_over_60_days": 38.2,
+   "table": "Total primeras consultas",
+   "report": "LISTAS_PUBLICACION_JUN21.pdf"
+  },
+  {
+   "cut_date": "2021-12-31",
+   "page": 14,
+   "quote": "TOTAL  77,23  23,63  52,2  89  -10  -26",
+   "footnotes": [],
+   "rate_per_1000": 77.23,
+   "mean_days": 89.0,
+   "pct_over_60_days": 52.2,
+   "table": "Total primeras consultas",
+   "report": "LISTAS_PUBLICACION_dic21.pdf"
+  },
+  {
+   "cut_date": "2022-06-30",
+   "page": 14,
+   "quote": "TOTAL  79,30  49,3  79",
+   "footnotes": [],
+   "rate_per_1000": 79.3,
+   "mean_days": 79.0,
+   "pct_over_60_days": 49.3,
+   "table": "Total primeras consultas",
+   "report": "LISTAS_PUBLICACION_jun2022.pdf"
+  },
+  {
+   "cut_date": "2022-12-31",
+   "page": 14,
+   "quote": "TOTAL  85,43  55,7  95",
+   "footnotes": [],
+   "rate_per_1000": 85.43,
+   "mean_days": 95.0,
+   "pct_over_60_days": 55.7,
+   "table": "Total primeras consultas",
+   "report": "LISTAS_PUBLICACION_dic_2022.pdf"
+  },
+  {
+   "cut_date": "2023-06-30",
+   "page": 14,
+   "quote": "TOTAL  78,47  51,6  87",
+   "footnotes": [],
+   "rate_per_1000": 78.47,
+   "mean_days": 87.0,
+   "pct_over_60_days": 51.6,
+   "table": "Total primeras consultas",
+   "report": "LISTAS_PUBLICACION_jun2023.pdf"
+  },
+  {
+   "cut_date": "2023-12-31",
+   "page": 14,
+   "quote": "TOTAL  81,47  56,3  101",
+   "footnotes": [],
+   "rate_per_1000": 81.47,
+   "mean_days": 101.0,
+   "pct_over_60_days": 56.3,
+   "table": "Total primeras consultas",
+   "report": "LISTAS_PUBLICACION_dic2023.pdf"
+  },
+  {
+   "cut_date": "2024-06-30",
+   "page": 14,
+   "quote": "TOTAL  83,79  54,6  94",
+   "footnotes": [],
+   "rate_per_1000": 83.79,
+   "mean_days": 94.0,
+   "pct_over_60_days": 54.6,
+   "table": "Total primeras consultas",
+   "report": "LISTAS_PUBLICACION_jun2024.pdf"
+  },
+  {
+   "cut_date": "2024-12-31",
+   "page": 15,
+   "quote": "TOTAL  83,21  62,3  105",
+   "footnotes": [],
+   "rate_per_1000": 83.21,
+   "mean_days": 105.0,
+   "pct_over_60_days": 62.3,
+   "table": "Total primeras consultas",
+   "report": "LISTAS_PUBLICACION_dic2024.pdf"
+  },
+  {
+   "cut_date": "2025-06-30",
+   "page": 14,
+   "quote": "TOTAL  81,37  96  61,8",
+   "footnotes": [
+    "*Se incluyen pacientes sin cita asignada, que en el momento del corte superaban los 60 días en el registro"
+   ],
+   "rate_per_1000": 81.37,
+   "mean_days": 96.0,
+   "pct_over_60_days": 61.8,
+   "table": "regional TOTAL row",
+   "report": "LISTAS_PUBLICACION_jun25.pdf"
+  },
+  {
+   "cut_date": "2025-12-31",
+   "page": 14,
+   "quote": "TOTAL  84,42  102  61,5",
+   "footnotes": [
+    "*Se incluyen pacientes sin cita asignada, que en el momento del corte superaban los 60 días en el registro"
+   ],
+   "rate_per_1000": 84.42,
+   "mean_days": 102.0,
+   "pct_over_60_days": 61.5,
+   "table": "regional TOTAL row",
+   "report": "LISTAS_PUBLICACION_Dic_2025_rectificado.pdf"
+  }
+ ],
+ "surgery_selected_by_region": [
+  {
+   "region": "ANDALUCÍA",
+   "page": 11,
+   "quote": "ANDALUCÍA  26.547  3,28  3,5  52",
+   "patients": 26547,
+   "rate_per_1000": 3.28,
+   "pct_over_6_months": 3.5,
+   "mean_days": 52.0,
+   "cut_date": "2017-06-30",
+   "report": "Indicadores_Resumen_Junio_2017.pdf"
+  },
+  {
+   "region": "ANDALUCÍA",
+   "page": 11,
+   "quote": "ANDALUCÍA  29.490  3,63  7,7  61",
+   "patients": 29490,
+   "rate_per_1000": 3.63,
+   "pct_over_6_months": 7.7,
+   "mean_days": 61.0,
+   "cut_date": "2017-12-31",
+   "report": "Indicadores_Resumen_Diciembre_2017.pdf"
+  },
+  {
+   "region": "ANDALUCÍA",
+   "page": 11,
+   "quote": "ANDALUCÍA  29.997  3,73  5,8  59",
+   "patients": 29997,
+   "rate_per_1000": 3.73,
+   "pct_over_6_months": 5.8,
+   "mean_days": 59.0,
+   "cut_date": "2018-06-30",
+   "report": "LLEE_SNS_IndicadoresResumen_Junio2018.pdf"
+  },
+  {
+   "region": "ANDALUCÍA",
+   "page": 11,
+   "quote": "ANDALUCÍA  36.665  4,56  10,9  72",
+   "patients": 36665,
+   "rate_per_1000": 4.56,
+   "pct_over_6_months": 10.9,
+   "mean_days": 72.0,
+   "cut_date": "2018-12-31",
+   "report": "LLEE_SNS_IndicadoresResumen_Diciembre2018.pdf"
+  },
+  {
+   "region": "ANDALUCÍA",
+   "page": 11,
+   "quote": "ANDALUCÍA  37.588  4,65  7,3  64",
+   "patients": 37588,
+   "rate_per_1000": 4.65,
+   "pct_over_6_months": 7.3,
+   "mean_days": 64.0,
+   "cut_date": "2019-06-30",
+   "report": "LLEE_SNS_IndicadoresResumen_Junio2019.pdf"
+  },
+  {
+   "region": "ANDALUCÍA",
+   "page": 11,
+   "quote": "ANDALUCÍA  43.828  5,41  12,9  78",
+   "patients": 43828,
+   "rate_per_1000": 5.41,
+   "pct_over_6_months": 12.9,
+   "mean_days": 78.0,
+   "cut_date": "2019-12-31",
+   "report": "LISTAS_PUBLICACION_dic19.pdf"
+  },
+  {
+   "region": "ANDALUCÍA",
+   "page": 11,
+   "quote": "ANDALUCÍA  40.593  5,00  33,3  130",
+   "patients": 40593,
+   "rate_per_1000": 5.0,
+   "pct_over_6_months": 33.3,
+   "mean_days": 130.0,
+   "cut_date": "2020-06-30",
+   "report": "LISTAS_PUBLICACION_jun2020.pdf"
+  },
+  {
+   "region": "ANDALUCÍA",
+   "page": 11,
+   "quote": "ANDALUCÍA  33.455  4,11  17,8  91",
+   "patients": 33455,
+   "rate_per_1000": 4.11,
+   "pct_over_6_months": 17.8,
+   "mean_days": 91.0,
+   "cut_date": "2020-12-31",
+   "report": "LISTAS_PUBLICACION_dic_2020.pdf"
+  },
+  {
+   "region": "ANDALUCÍA",
+   "page": 11,
+   "quote": "ANDALUCÍA  35.395  4,31  9,6  68",
+   "patients": 35395,
+   "rate_per_1000": 4.31,
+   "pct_over_6_months": 9.6,
+   "mean_days": 68.0,
+   "cut_date": "2021-06-30",
+   "report": "LISTAS_PUBLICACION_JUN21.pdf"
+  },
+  {
+   "region": "ANDALUCÍA",
+   "page": 11,
+   "quote": "ANDALUCÍA  37.453  4,59  11,0  72",
+   "patients": 37453,
+   "rate_per_1000": 4.59,
+   "pct_over_6_months": 11.0,
+   "mean_days": 72.0,
+   "cut_date": "2021-12-31",
+   "report": "LISTAS_PUBLICACION_dic21.pdf"
+  },
+  {
+   "region": "ANDALUCÍA",
+   "page": 11,
+   "quote": "ANDALUCÍA  41.532  5,05  5,8  64",
+   "patients": 41532,
+   "rate_per_1000": 5.05,
+   "pct_over_6_months": 5.8,
+   "mean_days": 64.0,
+   "cut_date": "2022-06-30",
+   "report": "LISTAS_PUBLICACION_jun2022.pdf"
+  },
+  {
+   "region": "ANDALUCÍA",
+   "page": 11,
+   "quote": "ANDALUCÍA  56.041  6,80  19,4  90",
+   "patients": 56041,
+   "rate_per_1000": 6.8,
+   "pct_over_6_months": 19.4,
+   "mean_days": 90.0,
+   "cut_date": "2022-12-31",
+   "report": "LISTAS_PUBLICACION_dic_2022.pdf"
+  },
+  {
+   "region": "ANDALUCÍA",
+   "page": 11,
+   "quote": "ANDALUCÍA  62.720  7,56  14,5  99",
+   "patients": 62720,
+   "rate_per_1000": 7.56,
+   "pct_over_6_months": 14.5,
+   "mean_days": 99.0,
+   "cut_date": "2023-06-30",
+   "report": "LISTAS_PUBLICACION_jun2023.pdf"
+  },
+  {
+   "region": "ANDALUCÍA",
+   "page": 11,
+   "quote": "ANDALUCÍA  65.858  7,92  26,1  128",
+   "patients": 65858,
+   "rate_per_1000": 7.92,
+   "pct_over_6_months": 26.1,
+   "mean_days": 128.0,
+   "cut_date": "2023-12-31",
+   "report": "LISTAS_PUBLICACION_dic2023.pdf"
+  },
+  {
+   "region": "ANDALUCÍA",
+   "page": 11,
+   "quote": "ANDALUCÍA  62.571  7,48  19,7  118",
+   "patients": 62571,
+   "rate_per_1000": 7.48,
+   "pct_over_6_months": 19.7,
+   "mean_days": 118.0,
+   "cut_date": "2024-06-30",
+   "report": "LISTAS_PUBLICACION_jun2024.pdf"
+  },
+  {
+   "region": "ANDALUCÍA",
+   "page": 11,
+   "quote": "ANDALUCÍA  51.799  6,15  12,5  95",
+   "patients": 51799,
+   "rate_per_1000": 6.15,
+   "pct_over_6_months": 12.5,
+   "mean_days": 95.0,
+   "cut_date": "2024-12-31",
+   "report": "LISTAS_PUBLICACION_dic2024.pdf"
+  },
+  {
+   "region": "ANDALUCÍA",
+   "page": 11,
+   "quote": "ANDALUCÍA  52.239  6,17  8,9  82",
+   "patients": 52239,
+   "rate_per_1000": 6.17,
+   "pct_over_6_months": 8.9,
+   "mean_days": 82.0,
+   "cut_date": "2025-06-30",
+   "report": "LISTAS_PUBLICACION_jun25.pdf"
+  },
+  {
+   "region": "ANDALUCÍA",
+   "page": 11,
+   "quote": "ANDALUCÍA  54.824  6,46  11,8  91",
+   "patients": 54824,
+   "rate_per_1000": 6.46,
+   "pct_over_6_months": 11.8,
+   "mean_days": 91.0,
+   "cut_date": "2025-12-31",
+   "report": "LISTAS_PUBLICACION_Dic_2025_rectificado.pdf"
+  },
+  {
+   "region": "ARAGON",
+   "page": 11,
+   "quote": "ARAGON  6.480  5,02  3,8  68",
+   "patients": 6480,
+   "rate_per_1000": 5.02,
+   "pct_over_6_months": 3.8,
+   "mean_days": 68.0,
+   "cut_date": "2017-06-30",
+   "report": "Indicadores_Resumen_Junio_2017.pdf"
+  },
+  {
+   "region": "ARAGON",
+   "page": 11,
+   "quote": "ARAGON  8.282  6,37  4,2  77",
+   "patients": 8282,
+   "rate_per_1000": 6.37,
+   "pct_over_6_months": 4.2,
+   "mean_days": 77.0,
+   "cut_date": "2017-12-31",
+   "report": "Indicadores_Resumen_Diciembre_2017.pdf"
+  },
+  {
+   "region": "ARAGON",
+   "page": 11,
+   "quote": "ARAGON  7.009  5,39  4,2  67",
+   "patients": 7009,
+   "rate_per_1000": 5.39,
+   "pct_over_6_months": 4.2,
+   "mean_days": 67.0,
+   "cut_date": "2018-06-30",
+   "report": "LLEE_SNS_IndicadoresResumen_Junio2018.pdf"
+  },
+  {
+   "region": "ARAGON",
+   "page": 11,
+   "quote": "ARAGON  7.637  5,85  3,2  79",
+   "patients": 7637,
+   "rate_per_1000": 5.85,
+   "pct_over_6_months": 3.2,
+   "mean_days": 79.0,
+   "cut_date": "2018-12-31",
+   "report": "LLEE_SNS_IndicadoresResumen_Diciembre2018.pdf"
+  },
+  {
+   "region": "ARAGON",
+   "page": 11,
+   "quote": "ARAGON  10.292  7,90  5,4  83",
+   "patients": 10292,
+   "rate_per_1000": 7.9,
+   "pct_over_6_months": 5.4,
+   "mean_days": 83.0,
+   "cut_date": "2019-06-30",
+   "report": "LLEE_SNS_IndicadoresResumen_Junio2019.pdf"
+  },
+  {
+   "region": "ARAGON",
+   "page": 11,
+   "quote": "ARAGON  9.608  7,34  10,0  94",
+   "patients": 9608,
+   "rate_per_1000": 7.34,
+   "pct_over_6_months": 10.0,
+   "mean_days": 94.0,
+   "cut_date": "2019-12-31",
+   "report": "LISTAS_PUBLICACION_dic19.pdf"
+  },
+  {
+   "region": "ARAGON",
+   "page": 11,
+   "quote": "ARAGON  8.721  6,65  33,2  152",
+   "patients": 8721,
+   "rate_per_1000": 6.65,
+   "pct_over_6_months": 33.2,
+   "mean_days": 152.0,
+   "cut_date": "2020-06-30",
+   "report": "LISTAS_PUBLICACION_jun2020.pdf"
+  },
+  {
+   "region": "ARAGON",
+   "page": 11,
+   "quote": "ARAGON  10.028  7,64  25,1  144",
+   "patients": 10028,
+   "rate_per_1000": 7.64,
+   "pct_over_6_months": 25.1,
+   "mean_days": 144.0,
+   "cut_date": "2020-12-31",
+   "report": "LISTAS_PUBLICACION_dic_2020.pdf"
+  },
+  {
+   "region": "ARAGON",
+   "page": 11,
+   "quote": "ARAGON  10.331  7,86  18,5  120",
+   "patients": 10331,
+   "rate_per_1000": 7.86,
+   "pct_over_6_months": 18.5,
+   "mean_days": 120.0,
+   "cut_date": "2021-06-30",
+   "report": "LISTAS_PUBLICACION_JUN21.pdf"
+  },
+  {
+   "region": "ARAGON",
+   "page": 11,
+   "quote": "ARAGON  10.554  7,99  23,1  136",
+   "patients": 10554,
+   "rate_per_1000": 7.99,
+   "pct_over_6_months": 23.1,
+   "mean_days": 136.0,
+   "cut_date": "2021-12-31",
+   "report": "LISTAS_PUBLICACION_dic21.pdf"
+  },
+  {
+   "region": "ARAGON",
+   "page": 11,
+   "quote": "ARAGON  11.280  8,53  17,0  120",
+   "patients": 11280,
+   "rate_per_1000": 8.53,
+   "pct_over_6_months": 17.0,
+   "mean_days": 120.0,
+   "cut_date": "2022-06-30",
+   "report": "LISTAS_PUBLICACION_jun2022.pdf"
+  },
+  {
+   "region": "ARAGON",
+   "page": 11,
+   "quote": "ARAGON  10.614  7,98  18,6  104",
+   "patients": 10614,
+   "rate_per_1000": 7.98,
+   "pct_over_6_months": 18.6,
+   "mean_days": 104.0,
+   "cut_date": "2022-12-31",
+   "report": "LISTAS_PUBLICACION_dic_2022.pdf"
+  },
+  {
+   "region": "ARAGON",
+   "page": 11,
+   "quote": "ARAGON  9.663  7,25  10,6  93",
+   "patients": 9663,
+   "rate_per_1000": 7.25,
+   "pct_over_6_months": 10.6,
+   "mean_days": 93.0,
+   "cut_date": "2023-06-30",
+   "report": "LISTAS_PUBLICACION_jun2023.pdf"
+  },
+  {
+   "region": "ARAGON",
+   "page": 11,
+   "quote": "ARAGON  13.430  10,02  24,9  126",
+   "patients": 13430,
+   "rate_per_1000": 10.02,
+   "pct_over_6_months": 24.9,
+   "mean_days": 126.0,
+   "cut_date": "2023-12-31",
+   "report": "LISTAS_PUBLICACION_dic2023.pdf"
+  },
+  {
+   "region": "ARAGON",
+   "page": 11,
+   "quote": "ARAGON  13.693  10,14  22,2  122",
+   "patients": 13693,
+   "rate_per_1000": 10.14,
+   "pct_over_6_months": 22.2,
+   "mean_days": 122.0,
+   "cut_date": "2024-06-30",
+   "report": "LISTAS_PUBLICACION_jun2024.pdf"
+  },
+  {
+   "region": "ARAGON",
+   "page": 11,
+   "quote": "ARAGON  13.515  9,99  23,8  130",
+   "patients": 13515,
+   "rate_per_1000": 9.99,
+   "pct_over_6_months": 23.8,
+   "mean_days": 130.0,
+   "cut_date": "2024-12-31",
+   "report": "LISTAS_PUBLICACION_dic2024.pdf"
+  },
+  {
+   "region": "ARAGON",
+   "page": 11,
+   "quote": "ARAGON  11.067  8,10  14,3  108",
+   "patients": 11067,
+   "rate_per_1000": 8.1,
+   "pct_over_6_months": 14.3,
+   "mean_days": 108.0,
+   "cut_date": "2025-06-30",
+   "report": "LISTAS_PUBLICACION_jun25.pdf"
+  },
+  {
+   "region": "ARAGON",
+   "page": 11,
+   "quote": "ARAGON  10.180  7,39  13,8  107",
+   "patients": 10180,
+   "rate_per_1000": 7.39,
+   "pct_over_6_months": 13.8,
+   "mean_days": 107.0,
+   "cut_date": "2025-12-31",
+   "report": "LISTAS_PUBLICACION_Dic_2025_rectificado.pdf"
+  },
+  {
+   "region": "BALEARES",
+   "page": 11,
+   "quote": "BALEARES  4.534  4,21  2,8  66",
+   "patients": 4534,
+   "rate_per_1000": 4.21,
+   "pct_over_6_months": 2.8,
+   "mean_days": 66.0,
+   "cut_date": "2017-06-30",
+   "report": "Indicadores_Resumen_Junio_2017.pdf"
+  },
+  {
+   "region": "BALEARES",
+   "page": 11,
+   "quote": "BALEARES  4.913  4,50  1,6  73",
+   "patients": 4913,
+   "rate_per_1000": 4.5,
+   "pct_over_6_months": 1.6,
+   "mean_days": 73.0,
+   "cut_date": "2017-12-31",
+   "report": "Indicadores_Resumen_Diciembre_2017.pdf"
+  },
+  {
+   "region": "BALEARES",
+   "page": 11,
+   "quote": "BALEARES  4.724  4,29  2,6  67",
+   "patients": 4724,
+   "rate_per_1000": 4.29,
+   "pct_over_6_months": 2.6,
+   "mean_days": 67.0,
+   "cut_date": "2018-06-30",
+   "report": "LLEE_SNS_IndicadoresResumen_Junio2018.pdf"
+  },
+  {
+   "region": "BALEARES",
+   "page": 11,
+   "quote": "BALEARES  3.518  3,16  3,2  78",
+   "patients": 3518,
+   "rate_per_1000": 3.16,
+   "pct_over_6_months": 3.2,
+   "mean_days": 78.0,
+   "cut_date": "2018-12-31",
+   "report": "LLEE_SNS_IndicadoresResumen_Diciembre2018.pdf"
+  },
+  {
+   "region": "BALEARES",
+   "page": 11,
+   "quote": "BALEARES  4.479  4,01  2,3  67",
+   "patients": 4479,
+   "rate_per_1000": 4.01,
+   "pct_over_6_months": 2.3,
+   "mean_days": 67.0,
+   "cut_date": "2019-06-30",
+   "report": "LLEE_SNS_IndicadoresResumen_Junio2019.pdf"
+  },
+  {
+   "region": "BALEARES",
+   "page": 11,
+   "quote": "BALEARES  4.404  3,88  1,9  72  SNS: 5,54",
+   "patients": 4404,
+   "rate_per_1000": 3.88,
+   "pct_over_6_months": 1.9,
+   "mean_days": 72.0,
+   "cut_date": "2019-12-31",
+   "report": "LISTAS_PUBLICACION_dic19.pdf"
+  },
+  {
+   "region": "BALEARES",
+   "page": 11,
+   "quote": "BALEARES  4.427  3,87  29,0  139",
+   "patients": 4427,
+   "rate_per_1000": 3.87,
+   "pct_over_6_months": 29.0,
+   "mean_days": 139.0,
+   "cut_date": "2020-06-30",
+   "report": "LISTAS_PUBLICACION_jun2020.pdf"
+  },
+  {
+   "region": "BALEARES",
+   "page": 11,
+   "quote": "BALEARES  3.840  3,37  21,7  120  SNS: 4,94",
+   "patients": 3840,
+   "rate_per_1000": 3.37,
+   "pct_over_6_months": 21.7,
+   "mean_days": 120.0,
+   "cut_date": "2020-12-31",
+   "report": "LISTAS_PUBLICACION_dic_2020.pdf"
+  },
+  {
+   "region": "BALEARES",
+   "page": 11,
+   "quote": "BALEARES  4.402  3,81  16,3  105  SNS: 5,24",
+   "patients": 4402,
+   "rate_per_1000": 3.81,
+   "pct_over_6_months": 16.3,
+   "mean_days": 105.0,
+   "cut_date": "2021-06-30",
+   "report": "LISTAS_PUBLICACION_JUN21.pdf"
+  },
+  {
+   "region": "BALEARES",
+   "page": 11,
+   "quote": "BALEARES  5.122  4,44  19,1  124  SNS: 5,61",
+   "patients": 5122,
+   "rate_per_1000": 4.44,
+   "pct_over_6_months": 19.1,
+   "mean_days": 124.0,
+   "cut_date": "2021-12-31",
+   "report": "LISTAS_PUBLICACION_dic21.pdf"
+  },
+  {
+   "region": "BALEARES",
+   "page": 11,
+   "quote": "BALEARES  4.969  4,28  14,4  105  SNS: 5,84",
+   "patients": 4969,
+   "rate_per_1000": 4.28,
+   "pct_over_6_months": 14.4,
+   "mean_days": 105.0,
+   "cut_date": "2022-06-30",
+   "report": "LISTAS_PUBLICACION_jun2022.pdf"
+  },
+  {
+   "region": "BALEARES",
+   "page": 11,
+   "quote": "BALEARES  5.134  4,38  19,9  112",
+   "patients": 5134,
+   "rate_per_1000": 4.38,
+   "pct_over_6_months": 19.9,
+   "mean_days": 112.0,
+   "cut_date": "2022-12-31",
+   "report": "LISTAS_PUBLICACION_dic_2022.pdf"
+  },
+  {
+   "region": "BALEARES",
+   "page": 11,
+   "quote": "BALEARES  4.884  4,09  16,6  110",
+   "patients": 4884,
+   "rate_per_1000": 4.09,
+   "pct_over_6_months": 16.6,
+   "mean_days": 110.0,
+   "cut_date": "2023-06-30",
+   "report": "LISTAS_PUBLICACION_jun2023.pdf"
+  },
+  {
+   "region": "BALEARES",
+   "page": 11,
+   "quote": "BALEARES  5.272  4,37  17,6  113",
+   "patients": 5272,
+   "rate_per_1000": 4.37,
+   "pct_over_6_months": 17.6,
+   "mean_days": 113.0,
+   "cut_date": "2023-12-31",
+   "report": "LISTAS_PUBLICACION_dic2023.pdf"
+  },
+  {
+   "region": "BALEARES",
+   "page": 11,
+   "quote": "BALEARES  4.382  3,60  10,8  112",
+   "patients": 4382,
+   "rate_per_1000": 3.6,
+   "pct_over_6_months": 10.8,
+   "mean_days": 112.0,
+   "cut_date": "2024-06-30",
+   "report": "LISTAS_PUBLICACION_jun2024.pdf"
+  },
+  {
+   "region": "BALEARES",
+   "page": 11,
+   "quote": "BALEARES  4.425  3,61  13,6  98",
+   "patients": 4425,
+   "rate_per_1000": 3.61,
+   "pct_over_6_months": 13.6,
+   "mean_days": 98.0,
+   "cut_date": "2024-12-31",
+   "report": "LISTAS_PUBLICACION_dic2024.pdf"
+  },
+  {
+   "region": "BALEARES",
+   "page": 11,
+   "quote": "BALEARES  4.938  3,97  17,3  107",
+   "patients": 4938,
+   "rate_per_1000": 3.97,
+   "pct_over_6_months": 17.3,
+   "mean_days": 107.0,
+   "cut_date": "2025-06-30",
+   "report": "LISTAS_PUBLICACION_jun25.pdf"
+  },
+  {
+   "region": "BALEARES",
+   "page": 11,
+   "quote": "BALEARES  5.449  4,36  23,1  126",
+   "patients": 5449,
+   "rate_per_1000": 4.36,
+   "pct_over_6_months": 23.1,
+   "mean_days": 126.0,
+   "cut_date": "2025-12-31",
+   "report": "LISTAS_PUBLICACION_Dic_2025_rectificado.pdf"
+  },
+  {
+   "region": "C. FORAL DE NAVARRA",
+   "page": 11,
+   "quote": "C. FORAL DE NAVARRA  3.212  5,16  4,1  65",
+   "patients": 3212,
+   "rate_per_1000": 5.16,
+   "pct_over_6_months": 4.1,
+   "mean_days": 65.0,
+   "cut_date": "2017-06-30",
+   "report": "Indicadores_Resumen_Junio_2017.pdf"
+  },
+  {
+   "region": "C. FORAL DE NAVARRA",
+   "page": 11,
+   "quote": "C. FORAL DE NAVARRA  3.404  5,42  5,4  66",
+   "patients": 3404,
+   "rate_per_1000": 5.42,
+   "pct_over_6_months": 5.4,
+   "mean_days": 66.0,
+   "cut_date": "2017-12-31",
+   "report": "Indicadores_Resumen_Diciembre_2017.pdf"
+  },
+  {
+   "region": "C. FORAL DE NAVARRA",
+   "page": 11,
+   "quote": "C. FORAL DE NAVARRA  3.683  5,84  4,4  65",
+   "patients": 3683,
+   "rate_per_1000": 5.84,
+   "pct_over_6_months": 4.4,
+   "mean_days": 65.0,
+   "cut_date": "2018-06-30",
+   "report": "LLEE_SNS_IndicadoresResumen_Junio2018.pdf"
+  },
+  {
+   "region": "C. FORAL DE NAVARRA",
+   "page": 11,
+   "quote": "C. FORAL DE NAVARRA  3.872  6,09  7,9  76  SNS: 82",
+   "patients": 3872,
+   "rate_per_1000": 6.09,
+   "pct_over_6_months": 7.9,
+   "mean_days": 76.0,
+   "cut_date": "2018-12-31",
+   "report": "LLEE_SNS_IndicadoresResumen_Diciembre2018.pdf"
+  },
+  {
+   "region": "C. FORAL DE NAVARRA",
+   "page": 11,
+   "quote": "C. FORAL DE NAVARRA  3.124  4,92  2,1  62",
+   "patients": 3124,
+   "rate_per_1000": 4.92,
+   "pct_over_6_months": 2.1,
+   "mean_days": 62.0,
+   "cut_date": "2019-06-30",
+   "report": "LLEE_SNS_IndicadoresResumen_Junio2019.pdf"
+  },
+  {
+   "region": "C. FORAL DE NAVARRA",
+   "page": 11,
+   "quote": "C. FORAL DE NAVARRA  3.560  5,56  10,0  83",
+   "patients": 3560,
+   "rate_per_1000": 5.56,
+   "pct_over_6_months": 10.0,
+   "mean_days": 83.0,
+   "cut_date": "2019-12-31",
+   "report": "LISTAS_PUBLICACION_dic19.pdf"
+  },
+  {
+   "region": "C. FORAL DE NAVARRA",
+   "page": 11,
+   "quote": "C. FORAL DE NAVARRA  2.848  4,46  16,3  105",
+   "patients": 2848,
+   "rate_per_1000": 4.46,
+   "pct_over_6_months": 16.3,
+   "mean_days": 105.0,
+   "cut_date": "2020-06-30",
+   "report": "LISTAS_PUBLICACION_jun2020.pdf"
+  },
+  {
+   "region": "C. FORAL DE NAVARRA",
+   "page": 11,
+   "quote": "C. FORAL DE NAVARRA  3.017  4,69  11,0  83  SNS: 114",
+   "patients": 3017,
+   "rate_per_1000": 4.69,
+   "pct_over_6_months": 11.0,
+   "mean_days": 83.0,
+   "cut_date": "2020-12-31",
+   "report": "LISTAS_PUBLICACION_dic_2020.pdf"
+  },
+  {
+   "region": "C. FORAL DE NAVARRA",
+   "page": 11,
+   "quote": "C. FORAL DE NAVARRA  2.556  3,97  7,6  70  SNS: 90",
+   "patients": 2556,
+   "rate_per_1000": 3.97,
+   "pct_over_6_months": 7.6,
+   "mean_days": 70.0,
+   "cut_date": "2021-06-30",
+   "report": "LISTAS_PUBLICACION_JUN21.pdf"
+  },
+  {
+   "region": "C. FORAL DE NAVARRA",
+   "page": 11,
+   "quote": "C. FORAL DE NAVARRA  2.360  3,65  9,8  78  SNS: 96",
+   "patients": 2360,
+   "rate_per_1000": 3.65,
+   "pct_over_6_months": 9.8,
+   "mean_days": 78.0,
+   "cut_date": "2021-12-31",
+   "report": "LISTAS_PUBLICACION_dic21.pdf"
+  },
+  {
+   "region": "C. FORAL DE NAVARRA",
+   "page": 11,
+   "quote": "C. FORAL DE NAVARRA  2.394  3,71  2,8  64  SNS: 90",
+   "patients": 2394,
+   "rate_per_1000": 3.71,
+   "pct_over_6_months": 2.8,
+   "mean_days": 64.0,
+   "cut_date": "2022-06-30",
+   "report": "LISTAS_PUBLICACION_jun2022.pdf"
+  },
+  {
+   "region": "C. FORAL DE NAVARRA",
+   "page": 11,
+   "quote": "C. FORAL DE NAVARRA  3.339  5,13  6,6  75",
+   "patients": 3339,
+   "rate_per_1000": 5.13,
+   "pct_over_6_months": 6.6,
+   "mean_days": 75.0,
+   "cut_date": "2022-12-31",
+   "report": "LISTAS_PUBLICACION_dic_2022.pdf"
+  },
+  {
+   "region": "C. FORAL DE NAVARRA",
+   "page": 11,
+   "quote": "C. FORAL DE NAVARRA  3.526  5,41  2,7  63",
+   "patients": 3526,
+   "rate_per_1000": 5.41,
+   "pct_over_6_months": 2.7,
+   "mean_days": 63.0,
+   "cut_date": "2023-06-30",
+   "report": "LISTAS_PUBLICACION_jun2023.pdf"
+  },
+  {
+   "region": "C. FORAL DE NAVARRA",
+   "page": 11,
+   "quote": "C. FORAL DE NAVARRA  3.515  5,37  10,7  85",
+   "patients": 3515,
+   "rate_per_1000": 5.37,
+   "pct_over_6_months": 10.7,
+   "mean_days": 85.0,
+   "cut_date": "2023-12-31",
+   "report": "LISTAS_PUBLICACION_dic2023.pdf"
+  },
+  {
+   "region": "C. FORAL DE NAVARRA",
+   "page": 11,
+   "quote": "C. FORAL DE NAVARRA  3.820  5,78  3,7  68",
+   "patients": 3820,
+   "rate_per_1000": 5.78,
+   "pct_over_6_months": 3.7,
+   "mean_days": 68.0,
+   "cut_date": "2024-06-30",
+   "report": "LISTAS_PUBLICACION_jun2024.pdf"
+  },
+  {
+   "region": "C. FORAL DE NAVARRA",
+   "page": 11,
+   "quote": "C. FORAL DE NAVARRA  4.676  7,04  8,8  78",
+   "patients": 4676,
+   "rate_per_1000": 7.04,
+   "pct_over_6_months": 8.8,
+   "mean_days": 78.0,
+   "cut_date": "2024-12-31",
+   "report": "LISTAS_PUBLICACION_dic2024.pdf"
+  },
+  {
+   "region": "C. FORAL DE NAVARRA",
+   "page": 11,
+   "quote": "C. FORAL DE NAVARRA  4.362  6,51  4,4  69",
+   "patients": 4362,
+   "rate_per_1000": 6.51,
+   "pct_over_6_months": 4.4,
+   "mean_days": 69.0,
+   "cut_date": "2025-06-30",
+   "report": "LISTAS_PUBLICACION_jun25.pdf"
+  },
+  {
+   "region": "C. FORAL DE NAVARRA",
+   "page": 11,
+   "quote": "C. FORAL DE NAVARRA  4.632  6,85  12,7  84",
+   "patients": 4632,
+   "rate_per_1000": 6.85,
+   "pct_over_6_months": 12.7,
+   "mean_days": 84.0,
+   "cut_date": "2025-12-31",
+   "report": "LISTAS_PUBLICACION_Dic_2025_rectificado.pdf"
+  },
+  {
+   "region": "CANARIAS",
+   "page": 11,
+   "quote": "CANARIAS  10.971  5,60  22,0  130",
+   "patients": 10971,
+   "rate_per_1000": 5.6,
+   "pct_over_6_months": 22.0,
+   "mean_days": 130.0,
+   "cut_date": "2017-06-30",
+   "report": "Indicadores_Resumen_Junio_2017.pdf"
+  },
+  {
+   "region": "CANARIAS",
+   "page": 11,
+   "quote": "CANARIAS  8.492  4,28  24,7  138",
+   "patients": 8492,
+   "rate_per_1000": 4.28,
+   "pct_over_6_months": 24.7,
+   "mean_days": 138.0,
+   "cut_date": "2017-12-31",
+   "report": "Indicadores_Resumen_Diciembre_2017.pdf"
+  },
+  {
+   "region": "CANARIAS",
+   "page": 11,
+   "quote": "CANARIAS  7.988  3,99  15,1  110",
+   "patients": 7988,
+   "rate_per_1000": 3.99,
+   "pct_over_6_months": 15.1,
+   "mean_days": 110.0,
+   "cut_date": "2018-06-30",
+   "report": "LLEE_SNS_IndicadoresResumen_Junio2018.pdf"
+  },
+  {
+   "region": "CANARIAS",
+   "page": 11,
+   "quote": "CANARIAS  7.466  3,71  14,1  105",
+   "patients": 7466,
+   "rate_per_1000": 3.71,
+   "pct_over_6_months": 14.1,
+   "mean_days": 105.0,
+   "cut_date": "2018-12-31",
+   "report": "LLEE_SNS_IndicadoresResumen_Diciembre2018.pdf"
+  },
+  {
+   "region": "CANARIAS",
+   "page": 11,
+   "quote": "CANARIAS  7.747  3,82  11,6  89",
+   "patients": 7747,
+   "rate_per_1000": 3.82,
+   "pct_over_6_months": 11.6,
+   "mean_days": 89.0,
+   "cut_date": "2019-06-30",
+   "report": "LLEE_SNS_IndicadoresResumen_Junio2019.pdf"
+  },
+  {
+   "region": "CANARIAS",
+   "page": 11,
+   "quote": "CANARIAS  8.185  4,01  13,0  98",
+   "patients": 8185,
+   "rate_per_1000": 4.01,
+   "pct_over_6_months": 13.0,
+   "mean_days": 98.0,
+   "cut_date": "2019-12-31",
+   "report": "LISTAS_PUBLICACION_dic19.pdf"
+  },
+  {
+   "region": "CANARIAS",
+   "page": 11,
+   "quote": "CANARIAS  7.449  3,65  21,1  123",
+   "patients": 7449,
+   "rate_per_1000": 3.65,
+   "pct_over_6_months": 21.1,
+   "mean_days": 123.0,
+   "cut_date": "2020-06-30",
+   "report": "LISTAS_PUBLICACION_jun2020.pdf"
+  },
+  {
+   "region": "CANARIAS",
+   "page": 11,
+   "quote": "CANARIAS  7.022  3,43  16,0  107",
+   "patients": 7022,
+   "rate_per_1000": 3.43,
+   "pct_over_6_months": 16.0,
+   "mean_days": 107.0,
+   "cut_date": "2020-12-31",
+   "report": "LISTAS_PUBLICACION_dic_2020.pdf"
+  },
+  {
+   "region": "CANARIAS",
+   "page": 11,
+   "quote": "CANARIAS  8.636  4,19  10,8  89",
+   "patients": 8636,
+   "rate_per_1000": 4.19,
+   "pct_over_6_months": 10.8,
+   "mean_days": 89.0,
+   "cut_date": "2021-06-30",
+   "report": "LISTAS_PUBLICACION_JUN21.pdf"
+  },
+  {
+   "region": "CANARIAS",
+   "page": 11,
+   "quote": "CANARIAS  9.549  4,61  16,5  109",
+   "patients": 9549,
+   "rate_per_1000": 4.61,
+   "pct_over_6_months": 16.5,
+   "mean_days": 109.0,
+   "cut_date": "2021-12-31",
+   "report": "LISTAS_PUBLICACION_dic21.pdf"
+  },
+  {
+   "region": "CANARIAS",
+   "page": 11,
+   "quote": "CANARIAS  10.440  5,03  15,8  107",
+   "patients": 10440,
+   "rate_per_1000": 5.03,
+   "pct_over_6_months": 15.8,
+   "mean_days": 107.0,
+   "cut_date": "2022-06-30",
+   "report": "LISTAS_PUBLICACION_jun2022.pdf"
+  },
+  {
+   "region": "CANARIAS",
+   "page": 11,
+   "quote": "CANARIAS  11.013  5,26  19,7  118",
+   "patients": 11013,
+   "rate_per_1000": 5.26,
+   "pct_over_6_months": 19.7,
+   "mean_days": 118.0,
+   "cut_date": "2022-12-31",
+   "report": "LISTAS_PUBLICACION_dic_2022.pdf"
+  },
+  {
+   "region": "CANARIAS",
+   "page": 11,
+   "quote": "CANARIAS  11.355  5,40  17,1  111",
+   "patients": 11355,
+   "rate_per_1000": 5.4,
+   "pct_over_6_months": 17.1,
+   "mean_days": 111.0,
+   "cut_date": "2023-06-30",
+   "report": "LISTAS_PUBLICACION_jun2023.pdf"
+  },
+  {
+   "region": "CANARIAS",
+   "page": 11,
+   "quote": "CANARIAS  10.636  5,03  19,0  109",
+   "patients": 10636,
+   "rate_per_1000": 5.03,
+   "pct_over_6_months": 19.0,
+   "mean_days": 109.0,
+   "cut_date": "2023-12-31",
+   "report": "LISTAS_PUBLICACION_dic2023.pdf"
+  },
+  {
+   "region": "CANARIAS",
+   "page": 11,
+   "quote": "CANARIAS  11.259  5,27  13,8  95",
+   "patients": 11259,
+   "rate_per_1000": 5.27,
+   "pct_over_6_months": 13.8,
+   "mean_days": 95.0,
+   "cut_date": "2024-06-30",
+   "report": "LISTAS_PUBLICACION_jun2024.pdf"
+  },
+  {
+   "region": "CANARIAS",
+   "page": 11,
+   "quote": "CANARIAS  10.980  5,09  14,9  98",
+   "patients": 10980,
+   "rate_per_1000": 5.09,
+   "pct_over_6_months": 14.9,
+   "mean_days": 98.0,
+   "cut_date": "2024-12-31",
+   "report": "LISTAS_PUBLICACION_dic2024.pdf"
+  },
+  {
+   "region": "CANARIAS",
+   "page": 11,
+   "quote": "CANARIAS  11.011  5,05  10,6  88",
+   "patients": 11011,
+   "rate_per_1000": 5.05,
+   "pct_over_6_months": 10.6,
+   "mean_days": 88.0,
+   "cut_date": "2025-06-30",
+   "report": "LISTAS_PUBLICACION_jun25.pdf"
+  },
+  {
+   "region": "CANARIAS",
+   "page": 11,
+   "quote": "CANARIAS  10.986  5,00  11,3  87",
+   "patients": 10986,
+   "rate_per_1000": 5.0,
+   "pct_over_6_months": 11.3,
+   "mean_days": 87.0,
+   "cut_date": "2025-12-31",
+   "report": "LISTAS_PUBLICACION_Dic_2025_rectificado.pdf"
+  },
+  {
+   "region": "CANTABRIA",
+   "page": 11,
+   "quote": "CANTABRIA  3.229  5,72  3,4  70",
+   "patients": 3229,
+   "rate_per_1000": 5.72,
+   "pct_over_6_months": 3.4,
+   "mean_days": 70.0,
+   "cut_date": "2017-06-30",
+   "report": "Indicadores_Resumen_Junio_2017.pdf"
+  },
+  {
+   "region": "CANTABRIA",
+   "page": 11,
+   "quote": "CANTABRIA  3.264  5,78  4,3  72",
+   "patients": 3264,
+   "rate_per_1000": 5.78,
+   "pct_over_6_months": 4.3,
+   "mean_days": 72.0,
+   "cut_date": "2017-12-31",
+   "report": "Indicadores_Resumen_Diciembre_2017.pdf"
+  },
+  {
+   "region": "CANTABRIA",
+   "page": 11,
+   "quote": "CANTABRIA  2.889  5,12  4,7  63",
+   "patients": 2889,
+   "rate_per_1000": 5.12,
+   "pct_over_6_months": 4.7,
+   "mean_days": 63.0,
+   "cut_date": "2018-06-30",
+   "report": "LLEE_SNS_IndicadoresResumen_Junio2018.pdf"
+  },
+  {
+   "region": "CANTABRIA",
+   "page": 11,
+   "quote": "CANTABRIA  2.873  5,09  5,7  74",
+   "patients": 2873,
+   "rate_per_1000": 5.09,
+   "pct_over_6_months": 5.7,
+   "mean_days": 74.0,
+   "cut_date": "2018-12-31",
+   "report": "LLEE_SNS_IndicadoresResumen_Diciembre2018.pdf"
+  },
+  {
+   "region": "CANTABRIA",
+   "page": 11,
+   "quote": "CANTABRIA  3.139  5,55  6,2  76",
+   "patients": 3139,
+   "rate_per_1000": 5.55,
+   "pct_over_6_months": 6.2,
+   "mean_days": 76.0,
+   "cut_date": "2019-06-30",
+   "report": "LLEE_SNS_IndicadoresResumen_Junio2019.pdf"
+  },
+  {
+   "region": "CANTABRIA",
+   "page": 11,
+   "quote": "CANTABRIA  3.528  6,26  10,9  89",
+   "patients": 3528,
+   "rate_per_1000": 6.26,
+   "pct_over_6_months": 10.9,
+   "mean_days": 89.0,
+   "cut_date": "2019-12-31",
+   "report": "LISTAS_PUBLICACION_dic19.pdf"
+  },
+  {
+   "region": "CANTABRIA",
+   "page": 11,
+   "quote": "CANTABRIA  4.106  7,25  28,4  136",
+   "patients": 4106,
+   "rate_per_1000": 7.25,
+   "pct_over_6_months": 28.4,
+   "mean_days": 136.0,
+   "cut_date": "2020-06-30",
+   "report": "LISTAS_PUBLICACION_jun2020.pdf"
+  },
+  {
+   "region": "CANTABRIA",
+   "page": 11,
+   "quote": "CANTABRIA  3.615  6,38  16,8  111",
+   "patients": 3615,
+   "rate_per_1000": 6.38,
+   "pct_over_6_months": 16.8,
+   "mean_days": 111.0,
+   "cut_date": "2020-12-31",
+   "report": "LISTAS_PUBLICACION_dic_2020.pdf"
+  },
+  {
+   "region": "CANTABRIA",
+   "page": 11,
+   "quote": "CANTABRIA  3.643  6,45  9,6  91",
+   "patients": 3643,
+   "rate_per_1000": 6.45,
+   "pct_over_6_months": 9.6,
+   "mean_days": 91.0,
+   "cut_date": "2021-06-30",
+   "report": "LISTAS_PUBLICACION_JUN21.pdf"
+  },
+  {
+   "region": "CANTABRIA",
+   "page": 11,
+   "quote": "CANTABRIA  4.281  7,55  20,9  114",
+   "patients": 4281,
+   "rate_per_1000": 7.55,
+   "pct_over_6_months": 20.9,
+   "mean_days": 114.0,
+   "cut_date": "2021-12-31",
+   "report": "LISTAS_PUBLICACION_dic21.pdf"
+  },
+  {
+   "region": "CANTABRIA",
+   "page": 11,
+   "quote": "CANTABRIA  4.059  7,16  15,6  100",
+   "patients": 4059,
+   "rate_per_1000": 7.16,
+   "pct_over_6_months": 15.6,
+   "mean_days": 100.0,
+   "cut_date": "2022-06-30",
+   "report": "LISTAS_PUBLICACION_jun2022.pdf"
+  },
+  {
+   "region": "CANTABRIA",
+   "page": 11,
+   "quote": "CANTABRIA  4.770  8,38  21,5  124",
+   "patients": 4770,
+   "rate_per_1000": 8.38,
+   "pct_over_6_months": 21.5,
+   "mean_days": 124.0,
+   "cut_date": "2022-12-31",
+   "report": "LISTAS_PUBLICACION_dic_2022.pdf"
+  },
+  {
+   "region": "CANTABRIA",
+   "page": 11,
+   "quote": "CANTABRIA  5.514  9,67  13,6  105",
+   "patients": 5514,
+   "rate_per_1000": 9.67,
+   "pct_over_6_months": 13.6,
+   "mean_days": 105.0,
+   "cut_date": "2023-06-30",
+   "report": "LISTAS_PUBLICACION_jun2023.pdf"
+  },
+  {
+   "region": "CANTABRIA",
+   "page": 11,
+   "quote": "CANTABRIA  6.604  11,53  32,5  144",
+   "patients": 6604,
+   "rate_per_1000": 11.53,
+   "pct_over_6_months": 32.5,
+   "mean_days": 144.0,
+   "cut_date": "2023-12-31",
+   "report": "LISTAS_PUBLICACION_dic2023.pdf"
+  },
+  {
+   "region": "CANTABRIA",
+   "page": 11,
+   "quote": "CANTABRIA  5.932  10,33  16,0  113",
+   "patients": 5932,
+   "rate_per_1000": 10.33,
+   "pct_over_6_months": 16.0,
+   "mean_days": 113.0,
+   "cut_date": "2024-06-30",
+   "report": "LISTAS_PUBLICACION_jun2024.pdf"
+  },
+  {
+   "region": "CANTABRIA",
+   "page": 11,
+   "quote": "CANTABRIA  6.079  10,56  25,3  124",
+   "patients": 6079,
+   "rate_per_1000": 10.56,
+   "pct_over_6_months": 25.3,
+   "mean_days": 124.0,
+   "cut_date": "2024-12-31",
+   "report": "LISTAS_PUBLICACION_dic2024.pdf"
+  },
+  {
+   "region": "CANTABRIA",
+   "page": 11,
+   "quote": "CANTABRIA  5.272  9,11  10,1  93",
+   "patients": 5272,
+   "rate_per_1000": 9.11,
+   "pct_over_6_months": 10.1,
+   "mean_days": 93.0,
+   "cut_date": "2025-06-30",
+   "report": "LISTAS_PUBLICACION_jun25.pdf"
+  },
+  {
+   "region": "CANTABRIA",
+   "page": 11,
+   "quote": "CANTABRIA  4.889  8,40  13,2  101",
+   "patients": 4889,
+   "rate_per_1000": 8.4,
+   "pct_over_6_months": 13.2,
+   "mean_days": 101.0,
+   "cut_date": "2025-12-31",
+   "report": "LISTAS_PUBLICACION_Dic_2025_rectificado.pdf"
+  },
+  {
+   "region": "CASTILLA Y LEON",
+   "page": 11,
+   "quote": "CASTILLA Y LEON  9.956  4,22  5,3  67",
+   "patients": 9956,
+   "rate_per_1000": 4.22,
+   "pct_over_6_months": 5.3,
+   "mean_days": 67.0,
+   "cut_date": "2017-06-30",
+   "report": "Indicadores_Resumen_Junio_2017.pdf"
+  },
+  {
+   "region": "CASTILLA Y LEON",
+   "page": 11,
+   "quote": "CASTILLA Y LEON  9.837  4,21  5,5  67",
+   "patients": 9837,
+   "rate_per_1000": 4.21,
+   "pct_over_6_months": 5.5,
+   "mean_days": 67.0,
+   "cut_date": "2017-12-31",
+   "report": "Indicadores_Resumen_Diciembre_2017.pdf"
+  },
+  {
+   "region": "CASTILLA Y LEON",
+   "page": 11,
+   "quote": "CASTILLA Y LEON  8.877  3,80  3,3  57",
+   "patients": 8877,
+   "rate_per_1000": 3.8,
+   "pct_over_6_months": 3.3,
+   "mean_days": 57.0,
+   "cut_date": "2018-06-30",
+   "report": "LLEE_SNS_IndicadoresResumen_Junio2018.pdf"
+  },
+  {
+   "region": "CASTILLA Y LEON",
+   "page": 11,
+   "quote": "CASTILLA Y LEON  9.112  3,93  3,2  55",
+   "patients": 9112,
+   "rate_per_1000": 3.93,
+   "pct_over_6_months": 3.2,
+   "mean_days": 55.0,
+   "cut_date": "2018-12-31",
+   "report": "LLEE_SNS_IndicadoresResumen_Diciembre2018.pdf"
+  },
+  {
+   "region": "CASTILLA Y LEON",
+   "page": 11,
+   "quote": "CASTILLA Y LEON  8.384  3,62  4,8  60",
+   "patients": 8384,
+   "rate_per_1000": 3.62,
+   "pct_over_6_months": 4.8,
+   "mean_days": 60.0,
+   "cut_date": "2019-06-30",
+   "report": "LLEE_SNS_IndicadoresResumen_Junio2019.pdf"
+  },
+  {
+   "region": "CASTILLA Y LEON",
+   "page": 11,
+   "quote": "CASTILLA Y LEON  10.348  4,48  10,8  101",
+   "patients": 10348,
+   "rate_per_1000": 4.48,
+   "pct_over_6_months": 10.8,
+   "mean_days": 101.0,
+   "cut_date": "2019-12-31",
+   "report": "LISTAS_PUBLICACION_dic19.pdf"
+  },
+  {
+   "region": "CASTILLA Y LEON",
+   "page": 11,
+   "quote": "CASTILLA Y LEON  8.743  3,80  28,1  147",
+   "patients": 8743,
+   "rate_per_1000": 3.8,
+   "pct_over_6_months": 28.1,
+   "mean_days": 147.0,
+   "cut_date": "2020-06-30",
+   "report": "LISTAS_PUBLICACION_jun2020.pdf"
+  },
+  {
+   "region": "CASTILLA Y LEON",
+   "page": 11,
+   "quote": "CASTILLA Y LEON  11.092  4,81  20,1  119",
+   "patients": 11092,
+   "rate_per_1000": 4.81,
+   "pct_over_6_months": 20.1,
+   "mean_days": 119.0,
+   "cut_date": "2020-12-31",
+   "report": "LISTAS_PUBLICACION_dic_2020.pdf"
+  },
+  {
+   "region": "CASTILLA Y LEON",
+   "page": 11,
+   "quote": "CASTILLA Y LEON  15.576  6,79  17,7  106",
+   "patients": 15576,
+   "rate_per_1000": 6.79,
+   "pct_over_6_months": 17.7,
+   "mean_days": 106.0,
+   "cut_date": "2021-06-30",
+   "report": "LISTAS_PUBLICACION_JUN21.pdf"
+  },
+  {
+   "region": "CASTILLA Y LEON",
+   "page": 11,
+   "quote": "CASTILLA Y LEON  18.522  8,08  22,8  124",
+   "patients": 18522,
+   "rate_per_1000": 8.08,
+   "pct_over_6_months": 22.8,
+   "mean_days": 124.0,
+   "cut_date": "2021-12-31",
+   "report": "LISTAS_PUBLICACION_dic21.pdf"
+  },
+  {
+   "region": "CASTILLA Y LEON",
+   "page": 11,
+   "quote": "CASTILLA Y LEON  16.599  7,21  19,5  112",
+   "patients": 16599,
+   "rate_per_1000": 7.21,
+   "pct_over_6_months": 19.5,
+   "mean_days": 112.0,
+   "cut_date": "2022-06-30",
+   "report": "LISTAS_PUBLICACION_jun2022.pdf"
+  },
+  {
+   "region": "CASTILLA Y LEON",
+   "page": 11,
+   "quote": "CASTILLA Y LEON  13.087  5,70  17,9  105",
+   "patients": 13087,
+   "rate_per_1000": 5.7,
+   "pct_over_6_months": 17.9,
+   "mean_days": 105.0,
+   "cut_date": "2022-12-31",
+   "report": "LISTAS_PUBLICACION_dic_2022.pdf"
+  },
+  {
+   "region": "CASTILLA Y LEON",
+   "page": 11,
+   "quote": "CASTILLA Y LEON  13.577  5,91  12,7  85",
+   "patients": 13577,
+   "rate_per_1000": 5.91,
+   "pct_over_6_months": 12.7,
+   "mean_days": 85.0,
+   "cut_date": "2023-06-30",
+   "report": "LISTAS_PUBLICACION_jun2023.pdf"
+  },
+  {
+   "region": "CASTILLA Y LEON",
+   "page": 11,
+   "quote": "CASTILLA Y LEON  11.769  5,11  18,7  101",
+   "patients": 11769,
+   "rate_per_1000": 5.11,
+   "pct_over_6_months": 18.7,
+   "mean_days": 101.0,
+   "cut_date": "2023-12-31",
+   "report": "LISTAS_PUBLICACION_dic2023.pdf"
+  },
+  {
+   "region": "CASTILLA Y LEON",
+   "page": 11,
+   "quote": "CASTILLA Y LEON  10.898  4,71  12,2  86",
+   "patients": 10898,
+   "rate_per_1000": 4.71,
+   "pct_over_6_months": 12.2,
+   "mean_days": 86.0,
+   "cut_date": "2024-06-30",
+   "report": "LISTAS_PUBLICACION_jun2024.pdf"
+  },
+  {
+   "region": "CASTILLA Y LEON",
+   "page": 11,
+   "quote": "CASTILLA Y LEON  10.484  4,51  12,2  81",
+   "patients": 10484,
+   "rate_per_1000": 4.51,
+   "pct_over_6_months": 12.2,
+   "mean_days": 81.0,
+   "cut_date": "2024-12-31",
+   "report": "LISTAS_PUBLICACION_dic2024.pdf"
+  },
+  {
+   "region": "CASTILLA Y LEON",
+   "page": 11,
+   "quote": "CASTILLA Y LEON  9.181  3,94  7,9  70",
+   "patients": 9181,
+   "rate_per_1000": 3.94,
+   "pct_over_6_months": 7.9,
+   "mean_days": 70.0,
+   "cut_date": "2025-06-30",
+   "report": "LISTAS_PUBLICACION_jun25.pdf"
+  },
+  {
+   "region": "CASTILLA Y LEON",
+   "page": 11,
+   "quote": "CASTILLA Y LEON  8.644  3,68  10,3  75",
+   "patients": 8644,
+   "rate_per_1000": 3.68,
+   "pct_over_6_months": 10.3,
+   "mean_days": 75.0,
+   "cut_date": "2025-12-31",
+   "report": "LISTAS_PUBLICACION_Dic_2025_rectificado.pdf"
+  },
+  {
+   "region": "CASTILLA-LA MANCHA",
+   "page": 11,
+   "quote": "CASTILLA-LA MANCHA  14.534  7,51  22,6  135",
+   "patients": 14534,
+   "rate_per_1000": 7.51,
+   "pct_over_6_months": 22.6,
+   "mean_days": 135.0,
+   "cut_date": "2017-06-30",
+   "report": "Indicadores_Resumen_Junio_2017.pdf"
+  },
+  {
+   "region": "CASTILLA-LA MANCHA",
+   "page": 11,
+   "quote": "CASTILLA-LA MANCHA  15.851  8,22  30,5  142",
+   "patients": 15851,
+   "rate_per_1000": 8.22,
+   "pct_over_6_months": 30.5,
+   "mean_days": 142.0,
+   "cut_date": "2017-12-31",
+   "report": "Indicadores_Resumen_Diciembre_2017.pdf"
+  },
+  {
+   "region": "CASTILLA-LA MANCHA",
+   "page": 11,
+   "quote": "CASTILLA-LA MANCHA  16.194  8,38  24,1  125",
+   "patients": 16194,
+   "rate_per_1000": 8.38,
+   "pct_over_6_months": 24.1,
+   "mean_days": 125.0,
+   "cut_date": "2018-06-30",
+   "report": "LLEE_SNS_IndicadoresResumen_Junio2018.pdf"
+  },
+  {
+   "region": "CASTILLA-LA MANCHA",
+   "page": 11,
+   "quote": "CASTILLA-LA MANCHA  15.672  8,08  31,1  122",
+   "patients": 15672,
+   "rate_per_1000": 8.08,
+   "pct_over_6_months": 31.1,
+   "mean_days": 122.0,
+   "cut_date": "2018-12-31",
+   "report": "LLEE_SNS_IndicadoresResumen_Diciembre2018.pdf"
+  },
+  {
+   "region": "CASTILLA-LA MANCHA",
+   "page": 11,
+   "quote": "CASTILLA-LA MANCHA  15.019  7,80  22,8  126",
+   "patients": 15019,
+   "rate_per_1000": 7.8,
+   "pct_over_6_months": 22.8,
+   "mean_days": 126.0,
+   "cut_date": "2019-06-30",
+   "report": "LLEE_SNS_IndicadoresResumen_Junio2019.pdf"
+  },
+  {
+   "region": "CASTILLA-LA MANCHA",
+   "page": 11,
+   "quote": "CASTILLA-LA MANCHA  14.169  7,34  28,5  135",
+   "patients": 14169,
+   "rate_per_1000": 7.34,
+   "pct_over_6_months": 28.5,
+   "mean_days": 135.0,
+   "cut_date": "2019-12-31",
+   "report": "LISTAS_PUBLICACION_dic19.pdf"
+  },
+  {
+   "region": "CASTILLA-LA MANCHA",
+   "page": 11,
+   "quote": "CASTILLA-LA MANCHA  17.135  8,90  60,8  238",
+   "patients": 17135,
+   "rate_per_1000": 8.9,
+   "pct_over_6_months": 60.8,
+   "mean_days": 238.0,
+   "cut_date": "2020-06-30",
+   "report": "LISTAS_PUBLICACION_jun2020.pdf"
+  },
+  {
+   "region": "CASTILLA-LA MANCHA",
+   "page": 11,
+   "quote": "CASTILLA-LA MANCHA  15.175  7,85  48,9  234",
+   "patients": 15175,
+   "rate_per_1000": 7.85,
+   "pct_over_6_months": 48.9,
+   "mean_days": 234.0,
+   "cut_date": "2020-12-31",
+   "report": "LISTAS_PUBLICACION_dic_2020.pdf"
+  },
+  {
+   "region": "CASTILLA-LA MANCHA",
+   "page": 11,
+   "quote": "CASTILLA-LA MANCHA  12.303  6,34  26,8  148",
+   "patients": 12303,
+   "rate_per_1000": 6.34,
+   "pct_over_6_months": 26.8,
+   "mean_days": 148.0,
+   "cut_date": "2021-06-30",
+   "report": "LISTAS_PUBLICACION_JUN21.pdf"
+  },
+  {
+   "region": "CASTILLA-LA MANCHA",
+   "page": 11,
+   "quote": "CASTILLA-LA MANCHA  11.791  6,06  0,2  102",
+   "patients": 11791,
+   "rate_per_1000": 6.06,
+   "pct_over_6_months": 0.2,
+   "mean_days": 102.0,
+   "cut_date": "2021-12-31",
+   "report": "LISTAS_PUBLICACION_dic21.pdf"
+  },
+  {
+   "region": "CASTILLA-LA MANCHA",
+   "page": 11,
+   "quote": "CASTILLA-LA MANCHA  12.791  6,55  14,2  122",
+   "patients": 12791,
+   "rate_per_1000": 6.55,
+   "pct_over_6_months": 14.2,
+   "mean_days": 122.0,
+   "cut_date": "2022-06-30",
+   "report": "LISTAS_PUBLICACION_jun2022.pdf"
+  },
+  {
+   "region": "CASTILLA-LA MANCHA",
+   "page": 11,
+   "quote": "CASTILLA-LA MANCHA  12.714  6,48  0,0  99",
+   "patients": 12714,
+   "rate_per_1000": 6.48,
+   "pct_over_6_months": 0.0,
+   "mean_days": 99.0,
+   "cut_date": "2022-12-31",
+   "report": "LISTAS_PUBLICACION_dic_2022.pdf"
+  },
+  {
+   "region": "CASTILLA-LA MANCHA",
+   "page": 11,
+   "quote": "CASTILLA-LA MANCHA  13.082  6,66  9,1  93",
+   "patients": 13082,
+   "rate_per_1000": 6.66,
+   "pct_over_6_months": 9.1,
+   "mean_days": 93.0,
+   "cut_date": "2023-06-30",
+   "report": "LISTAS_PUBLICACION_jun2023.pdf"
+  },
+  {
+   "region": "CASTILLA-LA MANCHA",
+   "page": 11,
+   "quote": "CASTILLA-LA MANCHA  13.843  7,03  4,5  88",
+   "patients": 13843,
+   "rate_per_1000": 7.03,
+   "pct_over_6_months": 4.5,
+   "mean_days": 88.0,
+   "cut_date": "2023-12-31",
+   "report": "LISTAS_PUBLICACION_dic2023.pdf"
+  },
+  {
+   "region": "CASTILLA-LA MANCHA",
+   "page": 11,
+   "quote": "CASTILLA-LA MANCHA  15.197  7,69  23,6  108",
+   "patients": 15197,
+   "rate_per_1000": 7.69,
+   "pct_over_6_months": 23.6,
+   "mean_days": 108.0,
+   "cut_date": "2024-06-30",
+   "report": "LISTAS_PUBLICACION_jun2024.pdf"
+  },
+  {
+   "region": "CASTILLA-LA MANCHA",
+   "page": 11,
+   "quote": "CASTILLA-LA MANCHA  14.838  7,48  16,4  109",
+   "patients": 14838,
+   "rate_per_1000": 7.48,
+   "pct_over_6_months": 16.4,
+   "mean_days": 109.0,
+   "cut_date": "2024-12-31",
+   "report": "LISTAS_PUBLICACION_dic2024.pdf"
+  },
+  {
+   "region": "CASTILLA-LA MANCHA",
+   "page": 11,
+   "quote": "CASTILLA-LA MANCHA  15.507  7,76  24,6  109",
+   "patients": 15507,
+   "rate_per_1000": 7.76,
+   "pct_over_6_months": 24.6,
+   "mean_days": 109.0,
+   "cut_date": "2025-06-30",
+   "report": "LISTAS_PUBLICACION_jun25.pdf"
+  },
+  {
+   "region": "CASTILLA-LA MANCHA",
+   "page": 11,
+   "quote": "CASTILLA-LA MANCHA  15.371  7,65  11,2  108",
+   "patients": 15371,
+   "rate_per_1000": 7.65,
+   "pct_over_6_months": 11.2,
+   "mean_days": 108.0,
+   "cut_date": "2025-12-31",
+   "report": "LISTAS_PUBLICACION_Dic_2025_rectificado.pdf"
+  },
+  {
+   "region": "CATALUÑA",
+   "page": 11,
+   "quote": "CATALUÑA  63.203  8,86  15,8  107",
+   "patients": 63203,
+   "rate_per_1000": 8.86,
+   "pct_over_6_months": 15.8,
+   "mean_days": 107.0,
+   "cut_date": "2017-06-30",
+   "report": "Indicadores_Resumen_Junio_2017.pdf"
+  },
+  {
+   "region": "CATALUÑA",
+   "page": 11,
+   "quote": "CATALUÑA  63.131  8,77  22,9  119",
+   "patients": 63131,
+   "rate_per_1000": 8.77,
+   "pct_over_6_months": 22.9,
+   "mean_days": 119.0,
+   "cut_date": "2017-12-31",
+   "report": "Indicadores_Resumen_Diciembre_2017.pdf"
+  },
+  {
+   "region": "CATALUÑA",
+   "page": 11,
+   "quote": "CATALUÑA  58.951  8,16  16,6  106",
+   "patients": 58951,
+   "rate_per_1000": 8.16,
+   "pct_over_6_months": 16.6,
+   "mean_days": 106.0,
+   "cut_date": "2018-06-30",
+   "report": "LLEE_SNS_IndicadoresResumen_Junio2018.pdf"
+  },
+  {
+   "region": "CATALUÑA",
+   "page": 11,
+   "quote": "CATALUÑA  58.951  8,16  16,6  106",
+   "patients": 58951,
+   "rate_per_1000": 8.16,
+   "pct_over_6_months": 16.6,
+   "mean_days": 106.0,
+   "cut_date": "2018-12-31",
+   "report": "LLEE_SNS_IndicadoresResumen_Diciembre2018.pdf"
+  },
+  {
+   "region": "CATALUÑA",
+   "page": 11,
+   "quote": "CATALUÑA  62.036  8,60  20,1  119",
+   "patients": 62036,
+   "rate_per_1000": 8.6,
+   "pct_over_6_months": 20.1,
+   "mean_days": 119.0,
+   "cut_date": "2019-06-30",
+   "report": "LLEE_SNS_IndicadoresResumen_Junio2019.pdf"
+  },
+  {
+   "region": "CATALUÑA",
+   "page": 11,
+   "quote": "CATALUÑA  62.955  8,69  24,4  126",
+   "patients": 62955,
+   "rate_per_1000": 8.69,
+   "pct_over_6_months": 24.4,
+   "mean_days": 126.0,
+   "cut_date": "2019-12-31",
+   "report": "LISTAS_PUBLICACION_dic19.pdf"
+  },
+  {
+   "region": "CATALUÑA",
+   "page": 11,
+   "quote": "CATALUÑA  61.078  8,43  45,4  194",
+   "patients": 61078,
+   "rate_per_1000": 8.43,
+   "pct_over_6_months": 45.4,
+   "mean_days": 194.0,
+   "cut_date": "2020-06-30",
+   "report": "LISTAS_PUBLICACION_jun2020.pdf"
+  },
+  {
+   "region": "CATALUÑA",
+   "page": 11,
+   "quote": "CATALUÑA  48.067  6,46  26,9  146",
+   "patients": 48067,
+   "rate_per_1000": 6.46,
+   "pct_over_6_months": 26.9,
+   "mean_days": 146.0,
+   "cut_date": "2020-12-31",
+   "report": "LISTAS_PUBLICACION_dic_2020.pdf"
+  },
+  {
+   "region": "CATALUÑA",
+   "page": 11,
+   "quote": "CATALUÑA  50.211  6,75  18,2  115",
+   "patients": 50211,
+   "rate_per_1000": 6.75,
+   "pct_over_6_months": 18.2,
+   "mean_days": 115.0,
+   "cut_date": "2021-06-30",
+   "report": "LISTAS_PUBLICACION_JUN21.pdf"
+  },
+  {
+   "region": "CATALUÑA",
+   "page": 11,
+   "quote": "CATALUÑA  55.560  7,43  21,9  123",
+   "patients": 55560,
+   "rate_per_1000": 7.43,
+   "pct_over_6_months": 21.9,
+   "mean_days": 123.0,
+   "cut_date": "2021-12-31",
+   "report": "LISTAS_PUBLICACION_dic21.pdf"
+  },
+  {
+   "region": "CATALUÑA",
+   "page": 11,
+   "quote": "CATALUÑA  59.196  7,91  20,1  121",
+   "patients": 59196,
+   "rate_per_1000": 7.91,
+   "pct_over_6_months": 20.1,
+   "mean_days": 121.0,
+   "cut_date": "2022-06-30",
+   "report": "LISTAS_PUBLICACION_jun2022.pdf"
+  },
+  {
+   "region": "CATALUÑA",
+   "page": 11,
+   "quote": "CATALUÑA  62.339  8,22  23,9  125",
+   "patients": 62339,
+   "rate_per_1000": 8.22,
+   "pct_over_6_months": 23.9,
+   "mean_days": 125.0,
+   "cut_date": "2022-12-31",
+   "report": "LISTAS_PUBLICACION_dic_2022.pdf"
+  },
+  {
+   "region": "CATALUÑA",
+   "page": 11,
+   "quote": "CATALUÑA  62.750  8,19  17,5  110",
+   "patients": 62750,
+   "rate_per_1000": 8.19,
+   "pct_over_6_months": 17.5,
+   "mean_days": 110.0,
+   "cut_date": "2023-06-30",
+   "report": "LISTAS_PUBLICACION_jun2023.pdf"
+  },
+  {
+   "region": "CATALUÑA",
+   "page": 11,
+   "quote": "CATALUÑA  66.378  8,63  23,5  121",
+   "patients": 66378,
+   "rate_per_1000": 8.63,
+   "pct_over_6_months": 23.5,
+   "mean_days": 121.0,
+   "cut_date": "2023-12-31",
+   "report": "LISTAS_PUBLICACION_dic2023.pdf"
+  },
+  {
+   "region": "CATALUÑA",
+   "page": 11,
+   "quote": "CATALUÑA  67.958  8,67  20,4  117",
+   "patients": 67958,
+   "rate_per_1000": 8.67,
+   "pct_over_6_months": 20.4,
+   "mean_days": 117.0,
+   "cut_date": "2024-06-30",
+   "report": "LISTAS_PUBLICACION_jun2024.pdf"
+  },
+  {
+   "region": "CATALUÑA",
+   "page": 11,
+   "quote": "CATALUÑA  70.166  8,96  25,7  126",
+   "patients": 70166,
+   "rate_per_1000": 8.96,
+   "pct_over_6_months": 25.7,
+   "mean_days": 126.0,
+   "cut_date": "2024-12-31",
+   "report": "LISTAS_PUBLICACION_dic2024.pdf"
+  },
+  {
+   "region": "CATALUÑA",
+   "page": 11,
+   "quote": "CATALUÑA  73.157  9,20  24,6  132",
+   "patients": 73157,
+   "rate_per_1000": 9.2,
+   "pct_over_6_months": 24.6,
+   "mean_days": 132.0,
+   "cut_date": "2025-06-30",
+   "report": "LISTAS_PUBLICACION_jun25.pdf"
+  },
+  {
+   "region": "CATALUÑA",
+   "page": 11,
+   "quote": "CATALUÑA  69.124  8,67  25,7  129",
+   "patients": 69124,
+   "rate_per_1000": 8.67,
+   "pct_over_6_months": 25.7,
+   "mean_days": 129.0,
+   "cut_date": "2025-12-31",
+   "report": "LISTAS_PUBLICACION_Dic_2025_rectificado.pdf"
+  },
+  {
+   "region": "CEUTA",
+   "page": 11,
+   "quote": "CEUTA  244  3,21  0,0  48",
+   "patients": 244,
+   "rate_per_1000": 3.21,
+   "pct_over_6_months": 0.0,
+   "mean_days": 48.0,
+   "cut_date": "2017-06-30",
+   "report": "Indicadores_Resumen_Junio_2017.pdf"
+  },
+  {
+   "region": "CEUTA",
+   "page": 11,
+   "quote": "CEUTA  416  5,46  0,5  69",
+   "patients": 416,
+   "rate_per_1000": 5.46,
+   "pct_over_6_months": 0.5,
+   "mean_days": 69.0,
+   "cut_date": "2017-12-31",
+   "report": "Indicadores_Resumen_Diciembre_2017.pdf"
+  },
+  {
+   "region": "CEUTA",
+   "page": 11,
+   "quote": "CEUTA  551  7,20  15,8  106",
+   "patients": 551,
+   "rate_per_1000": 7.2,
+   "pct_over_6_months": 15.8,
+   "mean_days": 106.0,
+   "cut_date": "2018-06-30",
+   "report": "LLEE_SNS_IndicadoresResumen_Junio2018.pdf"
+  },
+  {
+   "region": "CEUTA",
+   "page": 11,
+   "quote": "CEUTA  496  6,47  8,1  78",
+   "patients": 496,
+   "rate_per_1000": 6.47,
+   "pct_over_6_months": 8.1,
+   "mean_days": 78.0,
+   "cut_date": "2018-12-31",
+   "report": "LLEE_SNS_IndicadoresResumen_Diciembre2018.pdf"
+  },
+  {
+   "region": "CEUTA",
+   "page": 11,
+   "quote": "CEUTA  399  5,31  1,3  73",
+   "patients": 399,
+   "rate_per_1000": 5.31,
+   "pct_over_6_months": 1.3,
+   "mean_days": 73.0,
+   "cut_date": "2019-06-30",
+   "report": "LLEE_SNS_IndicadoresResumen_Junio2019.pdf"
+  },
+  {
+   "region": "CEUTA",
+   "page": 11,
+   "quote": "CEUTA  450  5,96  9,3  82",
+   "patients": 450,
+   "rate_per_1000": 5.96,
+   "pct_over_6_months": 9.3,
+   "mean_days": 82.0,
+   "cut_date": "2019-12-31",
+   "report": "LISTAS_PUBLICACION_dic19.pdf"
+  },
+  {
+   "region": "CEUTA",
+   "page": 11,
+   "quote": "CEUTA  328  4,33  22,3  118",
+   "patients": 328,
+   "rate_per_1000": 4.33,
+   "pct_over_6_months": 22.3,
+   "mean_days": 118.0,
+   "cut_date": "2020-06-30",
+   "report": "LISTAS_PUBLICACION_jun2020.pdf"
+  },
+  {
+   "region": "CEUTA",
+   "page": 11,
+   "quote": "CEUTA  384  5,09  14,8  106",
+   "patients": 384,
+   "rate_per_1000": 5.09,
+   "pct_over_6_months": 14.8,
+   "mean_days": 106.0,
+   "cut_date": "2020-12-31",
+   "report": "LISTAS_PUBLICACION_dic_2020.pdf"
+  },
+  {
+   "region": "CEUTA",
+   "page": 11,
+   "quote": "CEUTA  288  3,84  9,0  72",
+   "patients": 288,
+   "rate_per_1000": 3.84,
+   "pct_over_6_months": 9.0,
+   "mean_days": 72.0,
+   "cut_date": "2021-06-30",
+   "report": "LISTAS_PUBLICACION_JUN21.pdf"
+  },
+  {
+   "region": "CEUTA",
+   "page": 11,
+   "quote": "CEUTA  384  5,09  14,8  106",
+   "patients": 384,
+   "rate_per_1000": 5.09,
+   "pct_over_6_months": 14.8,
+   "mean_days": 106.0,
+   "cut_date": "2021-12-31",
+   "report": "LISTAS_PUBLICACION_dic21.pdf"
+  },
+  {
+   "region": "CEUTA",
+   "page": 11,
+   "quote": "CEUTA  399  5,37  8,8  85",
+   "patients": 399,
+   "rate_per_1000": 5.37,
+   "pct_over_6_months": 8.8,
+   "mean_days": 85.0,
+   "cut_date": "2022-06-30",
+   "report": "LISTAS_PUBLICACION_jun2022.pdf"
+  },
+  {
+   "region": "CEUTA",
+   "page": 11,
+   "quote": "CEUTA  486  6,57  15,8  91",
+   "patients": 486,
+   "rate_per_1000": 6.57,
+   "pct_over_6_months": 15.8,
+   "mean_days": 91.0,
+   "cut_date": "2022-12-31",
+   "report": "LISTAS_PUBLICACION_dic_2022.pdf"
+  },
+  {
+   "region": "CEUTA",
+   "page": 11,
+   "quote": "CEUTA  535  7,19  23,7  117",
+   "patients": 535,
+   "rate_per_1000": 7.19,
+   "pct_over_6_months": 23.7,
+   "mean_days": 117.0,
+   "cut_date": "2023-06-30",
+   "report": "LISTAS_PUBLICACION_jun2023.pdf"
+  },
+  {
+   "region": "CEUTA",
+   "page": 11,
+   "quote": "CEUTA  438  5,88  25,8  141",
+   "patients": 438,
+   "rate_per_1000": 5.88,
+   "pct_over_6_months": 25.8,
+   "mean_days": 141.0,
+   "cut_date": "2023-12-31",
+   "report": "LISTAS_PUBLICACION_dic2023.pdf"
+  },
+  {
+   "region": "CEUTA",
+   "page": 11,
+   "quote": "CEUTA  357  4,75  1,1  67",
+   "patients": 357,
+   "rate_per_1000": 4.75,
+   "pct_over_6_months": 1.1,
+   "mean_days": 67.0,
+   "cut_date": "2024-06-30",
+   "report": "LISTAS_PUBLICACION_jun2024.pdf"
+  },
+  {
+   "region": "CEUTA",
+   "page": 11,
+   "quote": "CEUTA  315  4,17  2,9  71",
+   "patients": 315,
+   "rate_per_1000": 4.17,
+   "pct_over_6_months": 2.9,
+   "mean_days": 71.0,
+   "cut_date": "2024-12-31",
+   "report": "LISTAS_PUBLICACION_dic2024.pdf"
+  },
+  {
+   "region": "CEUTA",
+   "page": 11,
+   "quote": "CEUTA  417  5,47  2,6  81",
+   "patients": 417,
+   "rate_per_1000": 5.47,
+   "pct_over_6_months": 2.6,
+   "mean_days": 81.0,
+   "cut_date": "2025-06-30",
+   "report": "LISTAS_PUBLICACION_jun25.pdf"
+  },
+  {
+   "region": "CEUTA",
+   "page": 11,
+   "quote": "CEUTA  338  4,41  3,3  66",
+   "patients": 338,
+   "rate_per_1000": 4.41,
+   "pct_over_6_months": 3.3,
+   "mean_days": 66.0,
+   "cut_date": "2025-12-31",
+   "report": "LISTAS_PUBLICACION_Dic_2025_rectificado.pdf"
+  },
+  {
+   "region": "COMUNIDAD VALENCIANA",
+   "page": 11,
+   "quote": "COMUNIDAD VALENCIANA  25.464  5,37  7,9  71  Tiempo medio de espera (días).",
+   "patients": 25464,
+   "rate_per_1000": 5.37,
+   "pct_over_6_months": 7.9,
+   "mean_days": 71.0,
+   "cut_date": "2017-06-30",
+   "report": "Indicadores_Resumen_Junio_2017.pdf"
+  },
+  {
+   "region": "COMUNIDAD VALENCIANA",
+   "page": 11,
+   "quote": "COMUNIDAD VALENCIANA  21.199  4,56  6,2  64  Tiempo medio de espera (días).",
+   "patients": 21199,
+   "rate_per_1000": 4.56,
+   "pct_over_6_months": 6.2,
+   "mean_days": 64.0,
+   "cut_date": "2017-12-31",
+   "report": "Indicadores_Resumen_Diciembre_2017.pdf"
+  },
+  {
+   "region": "COMUNIDAD VALENCIANA",
+   "page": 11,
+   "quote": "COMUNIDAD VALENCIANA  22.057  4,71  2,8  56  Tiempo medio de espera (días).",
+   "patients": 22057,
+   "rate_per_1000": 4.71,
+   "pct_over_6_months": 2.8,
+   "mean_days": 56.0,
+   "cut_date": "2018-06-30",
+   "report": "LLEE_SNS_IndicadoresResumen_Junio2018.pdf"
+  },
+  {
+   "region": "COMUNIDAD VALENCIANA",
+   "page": 11,
+   "quote": "COMUNIDAD VALENCIANA  21.328  4,56  7,3  68  Tiempo medio de espera (días).",
+   "patients": 21328,
+   "rate_per_1000": 4.56,
+   "pct_over_6_months": 7.3,
+   "mean_days": 68.0,
+   "cut_date": "2018-12-31",
+   "report": "LLEE_SNS_IndicadoresResumen_Diciembre2018.pdf"
+  },
+  {
+   "region": "COMUNIDAD VALENCIANA",
+   "page": 11,
+   "quote": "COMUNIDAD VALENCIANA  23.110  4,95  4,4  63  Tiempo medio de espera (días).",
+   "patients": 23110,
+   "rate_per_1000": 4.95,
+   "pct_over_6_months": 4.4,
+   "mean_days": 63.0,
+   "cut_date": "2019-06-30",
+   "report": "LLEE_SNS_IndicadoresResumen_Junio2019.pdf"
+  },
+  {
+   "region": "COMUNIDAD VALENCIANA",
+   "page": 11,
+   "quote": "COMUNIDAD VALENCIANA  21.514  4,57  8,2  70  Tiempo medio de espera (días).",
+   "patients": 21514,
+   "rate_per_1000": 4.57,
+   "pct_over_6_months": 8.2,
+   "mean_days": 70.0,
+   "cut_date": "2019-12-31",
+   "report": "LISTAS_PUBLICACION_dic19.pdf"
+  },
+  {
+   "region": "COMUNIDAD VALENCIANA",
+   "page": 11,
+   "quote": "COMUNIDAD VALENCIANA  15.826  3,35  24,9  133  Tiempo medio de espera (días).",
+   "patients": 15826,
+   "rate_per_1000": 3.35,
+   "pct_over_6_months": 24.9,
+   "mean_days": 133.0,
+   "cut_date": "2020-06-30",
+   "report": "LISTAS_PUBLICACION_jun2020.pdf"
+  },
+  {
+   "region": "COMUNIDAD VALENCIANA",
+   "page": 11,
+   "quote": "COMUNIDAD VALENCIANA  18.831  4,00  14,4  94  Tiempo medio de espera (días).",
+   "patients": 18831,
+   "rate_per_1000": 4.0,
+   "pct_over_6_months": 14.4,
+   "mean_days": 94.0,
+   "cut_date": "2020-12-31",
+   "report": "LISTAS_PUBLICACION_dic_2020.pdf"
+  },
+  {
+   "region": "COMUNIDAD VALENCIANA",
+   "page": 11,
+   "quote": "COMUNIDAD VALENCIANA  19.578  4,15  7,4  67  Tiempo medio de espera (días).",
+   "patients": 19578,
+   "rate_per_1000": 4.15,
+   "pct_over_6_months": 7.4,
+   "mean_days": 67.0,
+   "cut_date": "2021-06-30",
+   "report": "LISTAS_PUBLICACION_JUN21.pdf"
+  },
+  {
+   "region": "COMUNIDAD VALENCIANA",
+   "page": 11,
+   "quote": "COMUNIDAD VALENCIANA  19.390  4,09  6,4  69  Tiempo medio de espera (días).",
+   "patients": 19390,
+   "rate_per_1000": 4.09,
+   "pct_over_6_months": 6.4,
+   "mean_days": 69.0,
+   "cut_date": "2021-12-31",
+   "report": "LISTAS_PUBLICACION_dic21.pdf"
+  },
+  {
+   "region": "COMUNIDAD VALENCIANA",
+   "page": 11,
+   "quote": "COMUNIDAD VALENCIANA  20.922  4,35  4,2  62  Tiempo medio de espera (días).",
+   "patients": 20922,
+   "rate_per_1000": 4.35,
+   "pct_over_6_months": 4.2,
+   "mean_days": 62.0,
+   "cut_date": "2022-06-30",
+   "report": "LISTAS_PUBLICACION_jun2022.pdf"
+  },
+  {
+   "region": "COMUNIDAD VALENCIANA",
+   "page": 11,
+   "quote": "COMUNIDAD VALENCIANA  22.798  4,70  5,9  65  Tiempo medio de espera (días).",
+   "patients": 22798,
+   "rate_per_1000": 4.7,
+   "pct_over_6_months": 5.9,
+   "mean_days": 65.0,
+   "cut_date": "2022-12-31",
+   "report": "LISTAS_PUBLICACION_dic_2022.pdf"
+  },
+  {
+   "region": "COMUNIDAD VALENCIANA",
+   "page": 11,
+   "quote": "COMUNIDAD VALENCIANA  25.144  5,12  5,4  65  Tiempo medio de espera (días).",
+   "patients": 25144,
+   "rate_per_1000": 5.12,
+   "pct_over_6_months": 5.4,
+   "mean_days": 65.0,
+   "cut_date": "2023-06-30",
+   "report": "LISTAS_PUBLICACION_jun2023.pdf"
+  },
+  {
+   "region": "COMUNIDAD VALENCIANA",
+   "page": 11,
+   "quote": "COMUNIDAD VALENCIANA  20.398  4,12  8,2  64  Tiempo medio de espera (días).",
+   "patients": 20398,
+   "rate_per_1000": 4.12,
+   "pct_over_6_months": 8.2,
+   "mean_days": 64.0,
+   "cut_date": "2023-12-31",
+   "report": "LISTAS_PUBLICACION_dic2023.pdf"
+  },
+  {
+   "region": "COMUNIDAD VALENCIANA",
+   "page": 11,
+   "quote": "COMUNIDAD VALENCIANA  20.453  4,07  4,6  53  Tiempo medio de espera (días).",
+   "patients": 20453,
+   "rate_per_1000": 4.07,
+   "pct_over_6_months": 4.6,
+   "mean_days": 53.0,
+   "cut_date": "2024-06-30",
+   "report": "LISTAS_PUBLICACION_jun2024.pdf"
+  },
+  {
+   "region": "COMUNIDAD VALENCIANA",
+   "page": 11,
+   "quote": "COMUNIDAD VALENCIANA  21.328  4,21  6,7  63  Tiempo medio de espera (días).",
+   "patients": 21328,
+   "rate_per_1000": 4.21,
+   "pct_over_6_months": 6.7,
+   "mean_days": 63.0,
+   "cut_date": "2024-12-31",
+   "report": "LISTAS_PUBLICACION_dic2024.pdf"
+  },
+  {
+   "region": "COMUNIDAD VALENCIANA",
+   "page": 11,
+   "quote": "COMUNIDAD VALENCIANA  17.851  3,47  3,7  46  Tiempo medio de espera (días).",
+   "patients": 17851,
+   "rate_per_1000": 3.47,
+   "pct_over_6_months": 3.7,
+   "mean_days": 46.0,
+   "cut_date": "2025-06-30",
+   "report": "LISTAS_PUBLICACION_jun25.pdf"
+  },
+  {
+   "region": "COMUNIDAD VALENCIANA",
+   "page": 11,
+   "quote": "COMUNIDAD VALENCIANA  18.894  3,61  6,1  57  Tiempo medio de espera (días).",
+   "patients": 18894,
+   "rate_per_1000": 3.61,
+   "pct_over_6_months": 6.1,
+   "mean_days": 57.0,
+   "cut_date": "2025-12-31",
+   "report": "LISTAS_PUBLICACION_Dic_2025_rectificado.pdf"
+  },
+  {
+   "region": "EXTREMADURA",
+   "page": 11,
+   "quote": "EXTREMADURA  6.905  6,56  21,0  113",
+   "patients": 6905,
+   "rate_per_1000": 6.56,
+   "pct_over_6_months": 21.0,
+   "mean_days": 113.0,
+   "cut_date": "2017-06-30",
+   "report": "Indicadores_Resumen_Junio_2017.pdf"
+  },
+  {
+   "region": "EXTREMADURA",
+   "page": 11,
+   "quote": "EXTREMADURA  7.452  7,12  25,2  127",
+   "patients": 7452,
+   "rate_per_1000": 7.12,
+   "pct_over_6_months": 25.2,
+   "mean_days": 127.0,
+   "cut_date": "2017-12-31",
+   "report": "Indicadores_Resumen_Diciembre_2017.pdf"
+  },
+  {
+   "region": "EXTREMADURA",
+   "page": 11,
+   "quote": "EXTREMADURA  6.981  6,70  14,3  100",
+   "patients": 6981,
+   "rate_per_1000": 6.7,
+   "pct_over_6_months": 14.3,
+   "mean_days": 100.0,
+   "cut_date": "2018-06-30",
+   "report": "LLEE_SNS_IndicadoresResumen_Junio2018.pdf"
+  },
+  {
+   "region": "EXTREMADURA",
+   "page": 11,
+   "quote": "EXTREMADURA  7.212  6,94  22,8  113",
+   "patients": 7212,
+   "rate_per_1000": 6.94,
+   "pct_over_6_months": 22.8,
+   "mean_days": 113.0,
+   "cut_date": "2018-12-31",
+   "report": "LLEE_SNS_IndicadoresResumen_Diciembre2018.pdf"
+  },
+  {
+   "region": "EXTREMADURA",
+   "page": 11,
+   "quote": "EXTREMADURA  7.396  7,16  19,6  109",
+   "patients": 7396,
+   "rate_per_1000": 7.16,
+   "pct_over_6_months": 19.6,
+   "mean_days": 109.0,
+   "cut_date": "2019-06-30",
+   "report": "LLEE_SNS_IndicadoresResumen_Junio2019.pdf"
+  },
+  {
+   "region": "EXTREMADURA",
+   "page": 11,
+   "quote": "EXTREMADURA  8.396  8,15  26,1  127",
+   "patients": 8396,
+   "rate_per_1000": 8.15,
+   "pct_over_6_months": 26.1,
+   "mean_days": 127.0,
+   "cut_date": "2019-12-31",
+   "report": "LISTAS_PUBLICACION_dic19.pdf"
+  },
+  {
+   "region": "EXTREMADURA",
+   "page": 11,
+   "quote": "EXTREMADURA  9.706  9,45  22,2  118",
+   "patients": 9706,
+   "rate_per_1000": 9.45,
+   "pct_over_6_months": 22.2,
+   "mean_days": 118.0,
+   "cut_date": "2020-06-30",
+   "report": "LISTAS_PUBLICACION_jun2020.pdf"
+  },
+  {
+   "region": "EXTREMADURA",
+   "page": 11,
+   "quote": "EXTREMADURA  8.495  8,30  35,3  150",
+   "patients": 8495,
+   "rate_per_1000": 8.3,
+   "pct_over_6_months": 35.3,
+   "mean_days": 150.0,
+   "cut_date": "2020-12-31",
+   "report": "LISTAS_PUBLICACION_dic_2020.pdf"
+  },
+  {
+   "region": "EXTREMADURA",
+   "page": 11,
+   "quote": "EXTREMADURA  6.674  6,51  19,0  106",
+   "patients": 6674,
+   "rate_per_1000": 6.51,
+   "pct_over_6_months": 19.0,
+   "mean_days": 106.0,
+   "cut_date": "2021-06-30",
+   "report": "LISTAS_PUBLICACION_JUN21.pdf"
+  },
+  {
+   "region": "EXTREMADURA",
+   "page": 11,
+   "quote": "EXTREMADURA  7.615  7,45  17,2  109",
+   "patients": 7615,
+   "rate_per_1000": 7.45,
+   "pct_over_6_months": 17.2,
+   "mean_days": 109.0,
+   "cut_date": "2021-12-31",
+   "report": "LISTAS_PUBLICACION_dic21.pdf"
+  },
+  {
+   "region": "EXTREMADURA",
+   "page": 11,
+   "quote": "EXTREMADURA  6.587  6,45  12,7  98",
+   "patients": 6587,
+   "rate_per_1000": 6.45,
+   "pct_over_6_months": 12.7,
+   "mean_days": 98.0,
+   "cut_date": "2022-06-30",
+   "report": "LISTAS_PUBLICACION_jun2022.pdf"
+  },
+  {
+   "region": "EXTREMADURA",
+   "page": 11,
+   "quote": "EXTREMADURA  6.085  5,95  16,3  104",
+   "patients": 6085,
+   "rate_per_1000": 5.95,
+   "pct_over_6_months": 16.3,
+   "mean_days": 104.0,
+   "cut_date": "2022-12-31",
+   "report": "LISTAS_PUBLICACION_dic_2022.pdf"
+  },
+  {
+   "region": "EXTREMADURA",
+   "page": 11,
+   "quote": "EXTREMADURA  7.225  7,08  11,2  89",
+   "patients": 7225,
+   "rate_per_1000": 7.08,
+   "pct_over_6_months": 11.2,
+   "mean_days": 89.0,
+   "cut_date": "2023-06-30",
+   "report": "LISTAS_PUBLICACION_jun2023.pdf"
+  },
+  {
+   "region": "EXTREMADURA",
+   "page": 11,
+   "quote": "EXTREMADURA  9.124  8,95  22,9  128",
+   "patients": 9124,
+   "rate_per_1000": 8.95,
+   "pct_over_6_months": 22.9,
+   "mean_days": 128.0,
+   "cut_date": "2023-12-31",
+   "report": "LISTAS_PUBLICACION_dic2023.pdf"
+  },
+  {
+   "region": "EXTREMADURA",
+   "page": 11,
+   "quote": "EXTREMADURA  7.090  6,96  18,3  120",
+   "patients": 7090,
+   "rate_per_1000": 6.96,
+   "pct_over_6_months": 18.3,
+   "mean_days": 120.0,
+   "cut_date": "2024-06-30",
+   "report": "LISTAS_PUBLICACION_jun2024.pdf"
+  },
+  {
+   "region": "EXTREMADURA",
+   "page": 11,
+   "quote": "EXTREMADURA  7.069  6,94  22,2  128",
+   "patients": 7069,
+   "rate_per_1000": 6.94,
+   "pct_over_6_months": 22.2,
+   "mean_days": 128.0,
+   "cut_date": "2024-12-31",
+   "report": "LISTAS_PUBLICACION_dic2024.pdf"
+  },
+  {
+   "region": "EXTREMADURA",
+   "page": 11,
+   "quote": "EXTREMADURA  6.283  6,18  13,1  101",
+   "patients": 6283,
+   "rate_per_1000": 6.18,
+   "pct_over_6_months": 13.1,
+   "mean_days": 101.0,
+   "cut_date": "2025-06-30",
+   "report": "LISTAS_PUBLICACION_jun25.pdf"
+  },
+  {
+   "region": "EXTREMADURA",
+   "page": 11,
+   "quote": "EXTREMADURA  6.408  6,28  15,3  103",
+   "patients": 6408,
+   "rate_per_1000": 6.28,
+   "pct_over_6_months": 15.3,
+   "mean_days": 103.0,
+   "cut_date": "2025-12-31",
+   "report": "LISTAS_PUBLICACION_Dic_2025_rectificado.pdf"
+  },
+  {
+   "region": "GALICIA",
+   "page": 11,
+   "quote": "GALICIA  18.409  6,98  2,8  59",
+   "patients": 18409,
+   "rate_per_1000": 6.98,
+   "pct_over_6_months": 2.8,
+   "mean_days": 59.0,
+   "cut_date": "2017-06-30",
+   "report": "Indicadores_Resumen_Junio_2017.pdf"
+  },
+  {
+   "region": "GALICIA",
+   "page": 11,
+   "quote": "GALICIA  17.743  6,73  3,1  63",
+   "patients": 17743,
+   "rate_per_1000": 6.73,
+   "pct_over_6_months": 3.1,
+   "mean_days": 63.0,
+   "cut_date": "2017-12-31",
+   "report": "Indicadores_Resumen_Diciembre_2017.pdf"
+  },
+  {
+   "region": "GALICIA",
+   "page": 11,
+   "quote": "GALICIA  17.403  6,61  2,2  57",
+   "patients": 17403,
+   "rate_per_1000": 6.61,
+   "pct_over_6_months": 2.2,
+   "mean_days": 57.0,
+   "cut_date": "2018-06-30",
+   "report": "LLEE_SNS_IndicadoresResumen_Junio2018.pdf"
+  },
+  {
+   "region": "GALICIA",
+   "page": 11,
+   "quote": "GALICIA  16.179  6,14  2,1  58",
+   "patients": 16179,
+   "rate_per_1000": 6.14,
+   "pct_over_6_months": 2.1,
+   "mean_days": 58.0,
+   "cut_date": "2018-12-31",
+   "report": "LLEE_SNS_IndicadoresResumen_Diciembre2018.pdf"
+  },
+  {
+   "region": "GALICIA",
+   "page": 11,
+   "quote": "GALICIA  15.696  5,96  1,4  53",
+   "patients": 15696,
+   "rate_per_1000": 5.96,
+   "pct_over_6_months": 1.4,
+   "mean_days": 53.0,
+   "cut_date": "2019-06-30",
+   "report": "LLEE_SNS_IndicadoresResumen_Junio2019.pdf"
+  },
+  {
+   "region": "GALICIA",
+   "page": 11,
+   "quote": "GALICIA  16.738  6,38  0,4  52",
+   "patients": 16738,
+   "rate_per_1000": 6.38,
+   "pct_over_6_months": 0.4,
+   "mean_days": 52.0,
+   "cut_date": "2019-12-31",
+   "report": "LISTAS_PUBLICACION_dic19.pdf"
+  },
+  {
+   "region": "GALICIA",
+   "page": 11,
+   "quote": "GALICIA  16.434  6,29  10,0  98",
+   "patients": 16434,
+   "rate_per_1000": 6.29,
+   "pct_over_6_months": 10.0,
+   "mean_days": 98.0,
+   "cut_date": "2020-06-30",
+   "report": "LISTAS_PUBLICACION_jun2020.pdf"
+  },
+  {
+   "region": "GALICIA",
+   "page": 11,
+   "quote": "GALICIA  15.924  6,07  3,9  67",
+   "patients": 15924,
+   "rate_per_1000": 6.07,
+   "pct_over_6_months": 3.9,
+   "mean_days": 67.0,
+   "cut_date": "2020-12-31",
+   "report": "LISTAS_PUBLICACION_dic_2020.pdf"
+  },
+  {
+   "region": "GALICIA",
+   "page": 11,
+   "quote": "GALICIA  18.237  6,96  3,4  64",
+   "patients": 18237,
+   "rate_per_1000": 6.96,
+   "pct_over_6_months": 3.4,
+   "mean_days": 64.0,
+   "cut_date": "2021-06-30",
+   "report": "LISTAS_PUBLICACION_JUN21.pdf"
+  },
+  {
+   "region": "GALICIA",
+   "page": 11,
+   "quote": "GALICIA  20.348  7,77  4,7  70",
+   "patients": 20348,
+   "rate_per_1000": 7.77,
+   "pct_over_6_months": 4.7,
+   "mean_days": 70.0,
+   "cut_date": "2021-12-31",
+   "report": "LISTAS_PUBLICACION_dic21.pdf"
+  },
+  {
+   "region": "GALICIA",
+   "page": 11,
+   "quote": "GALICIA  21.928  8,37  3,5  70",
+   "patients": 21928,
+   "rate_per_1000": 8.37,
+   "pct_over_6_months": 3.5,
+   "mean_days": 70.0,
+   "cut_date": "2022-06-30",
+   "report": "LISTAS_PUBLICACION_jun2022.pdf"
+  },
+  {
+   "region": "GALICIA",
+   "page": 11,
+   "quote": "GALICIA  22.077  8,42  3,6  68",
+   "patients": 22077,
+   "rate_per_1000": 8.42,
+   "pct_over_6_months": 3.6,
+   "mean_days": 68.0,
+   "cut_date": "2022-12-31",
+   "report": "LISTAS_PUBLICACION_dic_2022.pdf"
+  },
+  {
+   "region": "GALICIA",
+   "page": 11,
+   "quote": "GALICIA  20.308  7,74  1,4  61",
+   "patients": 20308,
+   "rate_per_1000": 7.74,
+   "pct_over_6_months": 1.4,
+   "mean_days": 61.0,
+   "cut_date": "2023-06-30",
+   "report": "LISTAS_PUBLICACION_jun2023.pdf"
+  },
+  {
+   "region": "GALICIA",
+   "page": 11,
+   "quote": "GALICIA  20.200  7,76  1,5  66",
+   "patients": 20200,
+   "rate_per_1000": 7.76,
+   "pct_over_6_months": 1.5,
+   "mean_days": 66.0,
+   "cut_date": "2023-12-31",
+   "report": "LISTAS_PUBLICACION_dic2023.pdf"
+  },
+  {
+   "region": "GALICIA",
+   "page": 11,
+   "quote": "GALICIA  22.647  8,69  1,9  69",
+   "patients": 22647,
+   "rate_per_1000": 8.69,
+   "pct_over_6_months": 1.9,
+   "mean_days": 69.0,
+   "cut_date": "2024-06-30",
+   "report": "LISTAS_PUBLICACION_jun2024.pdf"
+  },
+  {
+   "region": "GALICIA",
+   "page": 11,
+   "quote": "GALICIA  21.757  8,33  2,4  65",
+   "patients": 21757,
+   "rate_per_1000": 8.33,
+   "pct_over_6_months": 2.4,
+   "mean_days": 65.0,
+   "cut_date": "2024-12-31",
+   "report": "LISTAS_PUBLICACION_dic2024.pdf"
+  },
+  {
+   "region": "GALICIA",
+   "page": 11,
+   "quote": "GALICIA  22.221  8,47  2,5  66",
+   "patients": 22221,
+   "rate_per_1000": 8.47,
+   "pct_over_6_months": 2.5,
+   "mean_days": 66.0,
+   "cut_date": "2025-06-30",
+   "report": "LISTAS_PUBLICACION_jun25.pdf"
+  },
+  {
+   "region": "GALICIA",
+   "page": 11,
+   "quote": "GALICIA  22.708  8,63  2,7  70",
+   "patients": 22708,
+   "rate_per_1000": 8.63,
+   "pct_over_6_months": 2.7,
+   "mean_days": 70.0,
+   "cut_date": "2025-12-31",
+   "report": "LISTAS_PUBLICACION_Dic_2025_rectificado.pdf"
+  },
+  {
+   "region": "MADRID",
+   "page": 11,
+   "quote": "MADRID  21.050  3,28  0,3  47",
+   "patients": 21050,
+   "rate_per_1000": 3.28,
+   "pct_over_6_months": 0.3,
+   "mean_days": 47.0,
+   "cut_date": "2017-06-30",
+   "report": "Indicadores_Resumen_Junio_2017.pdf"
+  },
+  {
+   "region": "MADRID",
+   "page": 11,
+   "quote": "MADRID  18.437  2,84  0,2  52",
+   "patients": 18437,
+   "rate_per_1000": 2.84,
+   "pct_over_6_months": 0.2,
+   "mean_days": 52.0,
+   "cut_date": "2017-12-31",
+   "report": "Indicadores_Resumen_Diciembre_2017.pdf"
+  },
+  {
+   "region": "MADRID",
+   "page": 11,
+   "quote": "MADRID  17.017  2,60  0,1  46",
+   "patients": 17017,
+   "rate_per_1000": 2.6,
+   "pct_over_6_months": 0.1,
+   "mean_days": 46.0,
+   "cut_date": "2018-06-30",
+   "report": "LLEE_SNS_IndicadoresResumen_Junio2018.pdf"
+  },
+  {
+   "region": "MADRID",
+   "page": 11,
+   "quote": "MADRID  17.258  2,63  0,2  49",
+   "patients": 17258,
+   "rate_per_1000": 2.63,
+   "pct_over_6_months": 0.2,
+   "mean_days": 49.0,
+   "cut_date": "2018-12-31",
+   "report": "LLEE_SNS_IndicadoresResumen_Diciembre2018.pdf"
+  },
+  {
+   "region": "MADRID",
+   "page": 11,
+   "quote": "MADRID  16.596  2,53  0,1  44",
+   "patients": 16596,
+   "rate_per_1000": 2.53,
+   "pct_over_6_months": 0.1,
+   "mean_days": 44.0,
+   "cut_date": "2019-06-30",
+   "report": "LLEE_SNS_IndicadoresResumen_Junio2019.pdf"
+  },
+  {
+   "region": "MADRID",
+   "page": 11,
+   "quote": "MADRID  18.693  2,84  0,2  51",
+   "patients": 18693,
+   "rate_per_1000": 2.84,
+   "pct_over_6_months": 0.2,
+   "mean_days": 51.0,
+   "cut_date": "2019-12-31",
+   "report": "LISTAS_PUBLICACION_dic19.pdf"
+  },
+  {
+   "region": "MADRID",
+   "page": 11,
+   "quote": "MADRID  20.267  3,04  0,4  41",
+   "patients": 20267,
+   "rate_per_1000": 3.04,
+   "pct_over_6_months": 0.4,
+   "mean_days": 41.0,
+   "cut_date": "2020-06-30",
+   "report": "LISTAS_PUBLICACION_jun2020.pdf"
+  },
+  {
+   "region": "MADRID",
+   "page": 11,
+   "quote": "MADRID  22.627  3,41  11,2  77",
+   "patients": 22627,
+   "rate_per_1000": 3.41,
+   "pct_over_6_months": 11.2,
+   "mean_days": 77.0,
+   "cut_date": "2020-12-31",
+   "report": "LISTAS_PUBLICACION_dic_2020.pdf"
+  },
+  {
+   "region": "MADRID",
+   "page": 11,
+   "quote": "MADRID  26.193  3,94  8,3  74",
+   "patients": 26193,
+   "rate_per_1000": 3.94,
+   "pct_over_6_months": 8.3,
+   "mean_days": 74.0,
+   "cut_date": "2021-06-30",
+   "report": "LISTAS_PUBLICACION_JUN21.pdf"
+  },
+  {
+   "region": "MADRID",
+   "page": 11,
+   "quote": "MADRID  25.063  3,73  8,1  71",
+   "patients": 25063,
+   "rate_per_1000": 3.73,
+   "pct_over_6_months": 8.1,
+   "mean_days": 71.0,
+   "cut_date": "2021-12-31",
+   "report": "LISTAS_PUBLICACION_dic21.pdf"
+  },
+  {
+   "region": "MADRID",
+   "page": 11,
+   "quote": "MADRID  24.354  3,60  5,9  67",
+   "patients": 24354,
+   "rate_per_1000": 3.6,
+   "pct_over_6_months": 5.9,
+   "mean_days": 67.0,
+   "cut_date": "2022-06-30",
+   "report": "LISTAS_PUBLICACION_jun2022.pdf"
+  },
+  {
+   "region": "MADRID",
+   "page": 11,
+   "quote": "MADRID  25.207  3,70  3,3  61",
+   "patients": 25207,
+   "rate_per_1000": 3.7,
+   "pct_over_6_months": 3.3,
+   "mean_days": 61.0,
+   "cut_date": "2022-12-31",
+   "report": "LISTAS_PUBLICACION_dic_2022.pdf"
+  },
+  {
+   "region": "MADRID",
+   "page": 11,
+   "quote": "MADRID  21.111  3,07  0,4  44",
+   "patients": 21111,
+   "rate_per_1000": 3.07,
+   "pct_over_6_months": 0.4,
+   "mean_days": 44.0,
+   "cut_date": "2023-06-30",
+   "report": "LISTAS_PUBLICACION_jun2023.pdf"
+  },
+  {
+   "region": "MADRID",
+   "page": 11,
+   "quote": "MADRID  23.940  3,46  0,6  50",
+   "patients": 23940,
+   "rate_per_1000": 3.46,
+   "pct_over_6_months": 0.6,
+   "mean_days": 50.0,
+   "cut_date": "2023-12-31",
+   "report": "LISTAS_PUBLICACION_dic2023.pdf"
+  },
+  {
+   "region": "MADRID",
+   "page": 11,
+   "quote": "MADRID  23.112  3,31  0,1  48",
+   "patients": 23112,
+   "rate_per_1000": 3.31,
+   "pct_over_6_months": 0.1,
+   "mean_days": 48.0,
+   "cut_date": "2024-06-30",
+   "report": "LISTAS_PUBLICACION_jun2024.pdf"
+  },
+  {
+   "region": "MADRID",
+   "page": 11,
+   "quote": "MADRID  24.260  3,44  0,2  46",
+   "patients": 24260,
+   "rate_per_1000": 3.44,
+   "pct_over_6_months": 0.2,
+   "mean_days": 46.0,
+   "cut_date": "2024-12-31",
+   "report": "LISTAS_PUBLICACION_dic2024.pdf"
+  },
+  {
+   "region": "MADRID",
+   "page": 11,
+   "quote": "MADRID  21.964  3,08  0,6  49",
+   "patients": 21964,
+   "rate_per_1000": 3.08,
+   "pct_over_6_months": 0.6,
+   "mean_days": 49.0,
+   "cut_date": "2025-06-30",
+   "report": "LISTAS_PUBLICACION_jun25.pdf"
+  },
+  {
+   "region": "MADRID",
+   "page": 11,
+   "quote": "MADRID  26.069  3,63  0,4  47",
+   "patients": 26069,
+   "rate_per_1000": 3.63,
+   "pct_over_6_months": 0.4,
+   "mean_days": 47.0,
+   "cut_date": "2025-12-31",
+   "report": "LISTAS_PUBLICACION_Dic_2025_rectificado.pdf"
+  },
+  {
+   "region": "MELILLA",
+   "page": 11,
+   "quote": "MELILLA  87  1,18  0,0  25",
+   "patients": 87,
+   "rate_per_1000": 1.18,
+   "pct_over_6_months": 0.0,
+   "mean_days": 25.0,
+   "cut_date": "2017-06-30",
+   "report": "Indicadores_Resumen_Junio_2017.pdf"
+  },
+  {
+   "region": "MELILLA",
+   "page": 11,
+   "quote": "MELILLA  105  1,42  0,0  34",
+   "patients": 105,
+   "rate_per_1000": 1.42,
+   "pct_over_6_months": 0.0,
+   "mean_days": 34.0,
+   "cut_date": "2017-12-31",
+   "report": "Indicadores_Resumen_Diciembre_2017.pdf"
+  },
+  {
+   "region": "MELILLA",
+   "page": 11,
+   "quote": "MELILLA  92  1,25  0,0  22",
+   "patients": 92,
+   "rate_per_1000": 1.25,
+   "pct_over_6_months": 0.0,
+   "mean_days": 22.0,
+   "cut_date": "2018-06-30",
+   "report": "LLEE_SNS_IndicadoresResumen_Junio2018.pdf"
+  },
+  {
+   "region": "MELILLA",
+   "page": 11,
+   "quote": "MELILLA  136  1,84  0,0  37",
+   "patients": 136,
+   "rate_per_1000": 1.84,
+   "pct_over_6_months": 0.0,
+   "mean_days": 37.0,
+   "cut_date": "2018-12-31",
+   "report": "LLEE_SNS_IndicadoresResumen_Diciembre2018.pdf"
+  },
+  {
+   "region": "MELILLA",
+   "page": 11,
+   "quote": "MELILLA  175  2,35  14,3  87",
+   "patients": 175,
+   "rate_per_1000": 2.35,
+   "pct_over_6_months": 14.3,
+   "mean_days": 87.0,
+   "cut_date": "2019-06-30",
+   "report": "LLEE_SNS_IndicadoresResumen_Junio2019.pdf"
+  },
+  {
+   "region": "MELILLA",
+   "page": 11,
+   "quote": "MELILLA  119  1,59  0,0  40",
+   "patients": 119,
+   "rate_per_1000": 1.59,
+   "pct_over_6_months": 0.0,
+   "mean_days": 40.0,
+   "cut_date": "2019-12-31",
+   "report": "LISTAS_PUBLICACION_dic19.pdf"
+  },
+  {
+   "region": "MELILLA",
+   "page": 11,
+   "quote": "MELILLA  55  0,74  1,8  32",
+   "patients": 55,
+   "rate_per_1000": 0.74,
+   "pct_over_6_months": 1.8,
+   "mean_days": 32.0,
+   "cut_date": "2020-06-30",
+   "report": "LISTAS_PUBLICACION_jun2020.pdf"
+  },
+  {
+   "region": "MELILLA",
+   "page": 11,
+   "quote": "MELILLA  53  0,71  0,0  46",
+   "patients": 53,
+   "rate_per_1000": 0.71,
+   "pct_over_6_months": 0.0,
+   "mean_days": 46.0,
+   "cut_date": "2020-12-31",
+   "report": "LISTAS_PUBLICACION_dic_2020.pdf"
+  },
+  {
+   "region": "MELILLA",
+   "page": 11,
+   "quote": "MELILLA  72  0,97  0,0  38",
+   "patients": 72,
+   "rate_per_1000": 0.97,
+   "pct_over_6_months": 0.0,
+   "mean_days": 38.0,
+   "cut_date": "2021-06-30",
+   "report": "LISTAS_PUBLICACION_JUN21.pdf"
+  },
+  {
+   "region": "MELILLA",
+   "page": 11,
+   "quote": "MELILLA  53  0,71  0,0  46",
+   "patients": 53,
+   "rate_per_1000": 0.71,
+   "pct_over_6_months": 0.0,
+   "mean_days": 46.0,
+   "cut_date": "2021-12-31",
+   "report": "LISTAS_PUBLICACION_dic21.pdf"
+  },
+  {
+   "region": "MELILLA",
+   "page": 11,
+   "quote": "MELILLA  183  2,49  0,0  49",
+   "patients": 183,
+   "rate_per_1000": 2.49,
+   "pct_over_6_months": 0.0,
+   "mean_days": 49.0,
+   "cut_date": "2022-06-30",
+   "report": "LISTAS_PUBLICACION_jun2022.pdf"
+  },
+  {
+   "region": "MELILLA",
+   "page": 11,
+   "quote": "MELILLA  168  2,29  0,0  40",
+   "patients": 168,
+   "rate_per_1000": 2.29,
+   "pct_over_6_months": 0.0,
+   "mean_days": 40.0,
+   "cut_date": "2022-12-31",
+   "report": "LISTAS_PUBLICACION_dic_2022.pdf"
+  },
+  {
+   "region": "MELILLA",
+   "page": 11,
+   "quote": "MELILLA  270  3,70  5,6  88",
+   "patients": 270,
+   "rate_per_1000": 3.7,
+   "pct_over_6_months": 5.6,
+   "mean_days": 88.0,
+   "cut_date": "2023-06-30",
+   "report": "LISTAS_PUBLICACION_jun2023.pdf"
+  },
+  {
+   "region": "MELILLA",
+   "page": 11,
+   "quote": "MELILLA  314  4,36  7,3  83",
+   "patients": 314,
+   "rate_per_1000": 4.36,
+   "pct_over_6_months": 7.3,
+   "mean_days": 83.0,
+   "cut_date": "2023-12-31",
+   "report": "LISTAS_PUBLICACION_dic2023.pdf"
+  },
+  {
+   "region": "MELILLA",
+   "page": 11,
+   "quote": "MELILLA  386  5,42  9,8  95",
+   "patients": 386,
+   "rate_per_1000": 5.42,
+   "pct_over_6_months": 9.8,
+   "mean_days": 95.0,
+   "cut_date": "2024-06-30",
+   "report": "LISTAS_PUBLICACION_jun2024.pdf"
+  },
+  {
+   "region": "MELILLA",
+   "page": 11,
+   "quote": "MELILLA  374  5,29  19,0  114",
+   "patients": 374,
+   "rate_per_1000": 5.29,
+   "pct_over_6_months": 19.0,
+   "mean_days": 114.0,
+   "cut_date": "2024-12-31",
+   "report": "LISTAS_PUBLICACION_dic2024.pdf"
+  },
+  {
+   "region": "MELILLA",
+   "page": 11,
+   "quote": "MELILLA  329  4,66  8,2  84",
+   "patients": 329,
+   "rate_per_1000": 4.66,
+   "pct_over_6_months": 8.2,
+   "mean_days": 84.0,
+   "cut_date": "2025-06-30",
+   "report": "LISTAS_PUBLICACION_jun25.pdf"
+  },
+  {
+   "region": "MELILLA",
+   "page": 11,
+   "quote": "MELILLA  334  4,72  6,6  80",
+   "patients": 334,
+   "rate_per_1000": 4.72,
+   "pct_over_6_months": 6.6,
+   "mean_days": 80.0,
+   "cut_date": "2025-12-31",
+   "report": "LISTAS_PUBLICACION_Dic_2025_rectificado.pdf"
+  },
+  {
+   "region": "MURCIA",
+   "page": 11,
+   "quote": "MURCIA  11.078  7,80  8,3  82  SNS: 82",
+   "patients": 11078,
+   "rate_per_1000": 7.8,
+   "pct_over_6_months": 8.3,
+   "mean_days": 82.0,
+   "cut_date": "2017-06-30",
+   "report": "Indicadores_Resumen_Junio_2017.pdf"
+  },
+  {
+   "region": "MURCIA",
+   "page": 11,
+   "quote": "MURCIA  10.679  7,46  13,2  88",
+   "patients": 10679,
+   "rate_per_1000": 7.46,
+   "pct_over_6_months": 13.2,
+   "mean_days": 88.0,
+   "cut_date": "2017-12-31",
+   "report": "Indicadores_Resumen_Diciembre_2017.pdf"
+  },
+  {
+   "region": "MURCIA",
+   "page": 11,
+   "quote": "MURCIA  10.788  7,50  5,8  74",
+   "patients": 10788,
+   "rate_per_1000": 7.5,
+   "pct_over_6_months": 5.8,
+   "mean_days": 74.0,
+   "cut_date": "2018-06-30",
+   "report": "LLEE_SNS_IndicadoresResumen_Junio2018.pdf"
+  },
+  {
+   "region": "MURCIA",
+   "page": 11,
+   "quote": "MURCIA  9.752  6,73  9,3  77",
+   "patients": 9752,
+   "rate_per_1000": 6.73,
+   "pct_over_6_months": 9.3,
+   "mean_days": 77.0,
+   "cut_date": "2018-12-31",
+   "report": "LLEE_SNS_IndicadoresResumen_Diciembre2018.pdf"
+  },
+  {
+   "region": "MURCIA",
+   "page": 11,
+   "quote": "MURCIA  9.184  6,28  4,9  71",
+   "patients": 9184,
+   "rate_per_1000": 6.28,
+   "pct_over_6_months": 4.9,
+   "mean_days": 71.0,
+   "cut_date": "2019-06-30",
+   "report": "LLEE_SNS_IndicadoresResumen_Junio2019.pdf"
+  },
+  {
+   "region": "MURCIA",
+   "page": 11,
+   "quote": "MURCIA  8.771  5,95  6,0  71",
+   "patients": 8771,
+   "rate_per_1000": 5.95,
+   "pct_over_6_months": 6.0,
+   "mean_days": 71.0,
+   "cut_date": "2019-12-31",
+   "report": "LISTAS_PUBLICACION_dic19.pdf"
+  },
+  {
+   "region": "MURCIA",
+   "page": 11,
+   "quote": "MURCIA  9.736  6,60  19,8  117  SNS: 140",
+   "patients": 9736,
+   "rate_per_1000": 6.6,
+   "pct_over_6_months": 19.8,
+   "mean_days": 117.0,
+   "cut_date": "2020-06-30",
+   "report": "LISTAS_PUBLICACION_jun2020.pdf"
+  },
+  {
+   "region": "MURCIA",
+   "page": 11,
+   "quote": "MURCIA  8.698  5,86  12,7  91",
+   "patients": 8698,
+   "rate_per_1000": 5.86,
+   "pct_over_6_months": 12.7,
+   "mean_days": 91.0,
+   "cut_date": "2020-12-31",
+   "report": "LISTAS_PUBLICACION_dic_2020.pdf"
+  },
+  {
+   "region": "MURCIA",
+   "page": 11,
+   "quote": "MURCIA  8.464  5,69  8,3  75",
+   "patients": 8464,
+   "rate_per_1000": 5.69,
+   "pct_over_6_months": 8.3,
+   "mean_days": 75.0,
+   "cut_date": "2021-06-30",
+   "report": "LISTAS_PUBLICACION_JUN21.pdf"
+  },
+  {
+   "region": "MURCIA",
+   "page": 11,
+   "quote": "MURCIA  9.467  6,32  11,7  85",
+   "patients": 9467,
+   "rate_per_1000": 6.32,
+   "pct_over_6_months": 11.7,
+   "mean_days": 85.0,
+   "cut_date": "2021-12-31",
+   "report": "LISTAS_PUBLICACION_dic21.pdf"
+  },
+  {
+   "region": "MURCIA",
+   "page": 11,
+   "quote": "MURCIA  10.362  6,85  8,0  84",
+   "patients": 10362,
+   "rate_per_1000": 6.85,
+   "pct_over_6_months": 8.0,
+   "mean_days": 84.0,
+   "cut_date": "2022-06-30",
+   "report": "LISTAS_PUBLICACION_jun2022.pdf"
+  },
+  {
+   "region": "MURCIA",
+   "page": 11,
+   "quote": "MURCIA  11.521  7,56  13,0  88  SNS: 95",
+   "patients": 11521,
+   "rate_per_1000": 7.56,
+   "pct_over_6_months": 13.0,
+   "mean_days": 88.0,
+   "cut_date": "2022-12-31",
+   "report": "LISTAS_PUBLICACION_dic_2022.pdf"
+  },
+  {
+   "region": "MURCIA",
+   "page": 11,
+   "quote": "MURCIA  13.213  8,60  7,4  79",
+   "patients": 13213,
+   "rate_per_1000": 8.6,
+   "pct_over_6_months": 7.4,
+   "mean_days": 79.0,
+   "cut_date": "2023-06-30",
+   "report": "LISTAS_PUBLICACION_jun2023.pdf"
+  },
+  {
+   "region": "MURCIA",
+   "page": 11,
+   "quote": "MURCIA  13.391  8,68  15,0  95",
+   "patients": 13391,
+   "rate_per_1000": 8.68,
+   "pct_over_6_months": 15.0,
+   "mean_days": 95.0,
+   "cut_date": "2023-12-31",
+   "report": "LISTAS_PUBLICACION_dic2023.pdf"
+  },
+  {
+   "region": "MURCIA",
+   "page": 11,
+   "quote": "MURCIA  13.255  8,53  8,6  85",
+   "patients": 13255,
+   "rate_per_1000": 8.53,
+   "pct_over_6_months": 8.6,
+   "mean_days": 85.0,
+   "cut_date": "2024-06-30",
+   "report": "LISTAS_PUBLICACION_jun2024.pdf"
+  },
+  {
+   "region": "MURCIA",
+   "page": 11,
+   "quote": "MURCIA  14.033  8,95  16,9  100",
+   "patients": 14033,
+   "rate_per_1000": 8.95,
+   "pct_over_6_months": 16.9,
+   "mean_days": 100.0,
+   "cut_date": "2024-12-31",
+   "report": "LISTAS_PUBLICACION_dic2024.pdf"
+  },
+  {
+   "region": "MURCIA",
+   "page": 11,
+   "quote": "MURCIA  13.735  8,69  10,6  92",
+   "patients": 13735,
+   "rate_per_1000": 8.69,
+   "pct_over_6_months": 10.6,
+   "mean_days": 92.0,
+   "cut_date": "2025-06-30",
+   "report": "LISTAS_PUBLICACION_jun25.pdf"
+  },
+  {
+   "region": "MURCIA",
+   "page": 11,
+   "quote": "MURCIA  13.811  8,67  16,1  96",
+   "patients": 13811,
+   "rate_per_1000": 8.67,
+   "pct_over_6_months": 16.1,
+   "mean_days": 96.0,
+   "cut_date": "2025-12-31",
+   "report": "LISTAS_PUBLICACION_Dic_2025_rectificado.pdf"
+  },
+  {
+   "region": "PAÍS VASCO",
+   "page": 11,
+   "quote": "PAÍS VASCO  8.061  3,68  0,0  45",
+   "patients": 8061,
+   "rate_per_1000": 3.68,
+   "pct_over_6_months": 0.0,
+   "mean_days": 45.0,
+   "cut_date": "2017-06-30",
+   "report": "Indicadores_Resumen_Junio_2017.pdf"
+  },
+  {
+   "region": "PAÍS VASCO",
+   "page": 11,
+   "quote": "PAÍS VASCO  7.688  3,51  0,0  49",
+   "patients": 7688,
+   "rate_per_1000": 3.51,
+   "pct_over_6_months": 0.0,
+   "mean_days": 49.0,
+   "cut_date": "2017-12-31",
+   "report": "Indicadores_Resumen_Diciembre_2017.pdf"
+  },
+  {
+   "region": "PAÍS VASCO",
+   "page": 11,
+   "quote": "PAÍS VASCO  7.968  3,64  0,0  46",
+   "patients": 7968,
+   "rate_per_1000": 3.64,
+   "pct_over_6_months": 0.0,
+   "mean_days": 46.0,
+   "cut_date": "2018-06-30",
+   "report": "LLEE_SNS_IndicadoresResumen_Junio2018.pdf"
+  },
+  {
+   "region": "PAÍS VASCO",
+   "page": 11,
+   "quote": "PAÍS VASCO  7.550  3,44  0,0  47",
+   "patients": 7550,
+   "rate_per_1000": 3.44,
+   "pct_over_6_months": 0.0,
+   "mean_days": 47.0,
+   "cut_date": "2018-12-31",
+   "report": "LLEE_SNS_IndicadoresResumen_Diciembre2018.pdf"
+  },
+  {
+   "region": "PAÍS VASCO",
+   "page": 11,
+   "quote": "PAÍS VASCO  8.043  3,64  0,0  46",
+   "patients": 8043,
+   "rate_per_1000": 3.64,
+   "pct_over_6_months": 0.0,
+   "mean_days": 46.0,
+   "cut_date": "2019-06-30",
+   "report": "LLEE_SNS_IndicadoresResumen_Junio2019.pdf"
+  },
+  {
+   "region": "PAÍS VASCO",
+   "page": 11,
+   "quote": "PAÍS VASCO  6.814  3,08  0,0  45",
+   "patients": 6814,
+   "rate_per_1000": 3.08,
+   "pct_over_6_months": 0.0,
+   "mean_days": 45.0,
+   "cut_date": "2019-12-31",
+   "report": "LISTAS_PUBLICACION_dic19.pdf"
+  },
+  {
+   "region": "PAÍS VASCO",
+   "page": 11,
+   "quote": "PAÍS VASCO  6.858  3,09  8,4  86",
+   "patients": 6858,
+   "rate_per_1000": 3.09,
+   "pct_over_6_months": 8.4,
+   "mean_days": 86.0,
+   "cut_date": "2020-06-30",
+   "report": "LISTAS_PUBLICACION_jun2020.pdf"
+  },
+  {
+   "region": "PAÍS VASCO",
+   "page": 11,
+   "quote": "PAÍS VASCO  5.837  2,63  3,7  60",
+   "patients": 5837,
+   "rate_per_1000": 2.63,
+   "pct_over_6_months": 3.7,
+   "mean_days": 60.0,
+   "cut_date": "2020-12-31",
+   "report": "LISTAS_PUBLICACION_dic_2020.pdf"
+  },
+  {
+   "region": "PAÍS VASCO",
+   "page": 11,
+   "quote": "PAÍS VASCO  7.527  3,37  1,9  52",
+   "patients": 7527,
+   "rate_per_1000": 3.37,
+   "pct_over_6_months": 1.9,
+   "mean_days": 52.0,
+   "cut_date": "2021-06-30",
+   "report": "LISTAS_PUBLICACION_JUN21.pdf"
+  },
+  {
+   "region": "PAÍS VASCO",
+   "page": 11,
+   "quote": "PAÍS VASCO  8.846  3,96  4,3  62",
+   "patients": 8846,
+   "rate_per_1000": 3.96,
+   "pct_over_6_months": 4.3,
+   "mean_days": 62.0,
+   "cut_date": "2021-12-31",
+   "report": "LISTAS_PUBLICACION_dic21.pdf"
+  },
+  {
+   "region": "PAÍS VASCO",
+   "page": 11,
+   "quote": "PAÍS VASCO  9.100  4,07  1,8  56",
+   "patients": 9100,
+   "rate_per_1000": 4.07,
+   "pct_over_6_months": 1.8,
+   "mean_days": 56.0,
+   "cut_date": "2022-06-30",
+   "report": "LISTAS_PUBLICACION_jun2022.pdf"
+  },
+  {
+   "region": "PAÍS VASCO",
+   "page": 11,
+   "quote": "PAÍS VASCO  9.553  4,26  3,5  63",
+   "patients": 9553,
+   "rate_per_1000": 4.26,
+   "pct_over_6_months": 3.5,
+   "mean_days": 63.0,
+   "cut_date": "2022-12-31",
+   "report": "LISTAS_PUBLICACION_dic_2022.pdf"
+  },
+  {
+   "region": "PAÍS VASCO",
+   "page": 11,
+   "quote": "PAÍS VASCO  10.423  4,65  2,1  62",
+   "patients": 10423,
+   "rate_per_1000": 4.65,
+   "pct_over_6_months": 2.1,
+   "mean_days": 62.0,
+   "cut_date": "2023-06-30",
+   "report": "LISTAS_PUBLICACION_jun2023.pdf"
+  },
+  {
+   "region": "PAÍS VASCO",
+   "page": 11,
+   "quote": "PAÍS VASCO  8.787  3,90  0,8  56",
+   "patients": 8787,
+   "rate_per_1000": 3.9,
+   "pct_over_6_months": 0.8,
+   "mean_days": 56.0,
+   "cut_date": "2023-12-31",
+   "report": "LISTAS_PUBLICACION_dic2023.pdf"
+  },
+  {
+   "region": "PAÍS VASCO",
+   "page": 11,
+   "quote": "PAÍS VASCO  8.812  3,96  0,4  54",
+   "patients": 8812,
+   "rate_per_1000": 3.96,
+   "pct_over_6_months": 0.4,
+   "mean_days": 54.0,
+   "cut_date": "2024-06-30",
+   "report": "LISTAS_PUBLICACION_jun2024.pdf"
+  },
+  {
+   "region": "PAÍS VASCO",
+   "page": 11,
+   "quote": "PAÍS VASCO  9.078  4,07  0,6  54",
+   "patients": 9078,
+   "rate_per_1000": 4.07,
+   "pct_over_6_months": 0.6,
+   "mean_days": 54.0,
+   "cut_date": "2024-12-31",
+   "report": "LISTAS_PUBLICACION_dic2024.pdf"
+  },
+  {
+   "region": "PAÍS VASCO",
+   "page": 11,
+   "quote": "PAÍS VASCO  10.016  4,49  0,3  56",
+   "patients": 10016,
+   "rate_per_1000": 4.49,
+   "pct_over_6_months": 0.3,
+   "mean_days": 56.0,
+   "cut_date": "2025-06-30",
+   "report": "LISTAS_PUBLICACION_jun25.pdf"
+  },
+  {
+   "region": "PAÍS VASCO",
+   "page": 11,
+   "quote": "PAÍS VASCO  10.357  4,67  1,1  61",
+   "patients": 10357,
+   "rate_per_1000": 4.67,
+   "pct_over_6_months": 1.1,
+   "mean_days": 61.0,
+   "cut_date": "2025-12-31",
+   "report": "LISTAS_PUBLICACION_Dic_2025_rectificado.pdf"
+  },
+  {
+   "region": "PDO DE ASTURIAS",
+   "page": 11,
+   "quote": "PDO DE ASTURIAS  7.394  7,19  0,0  63",
+   "patients": 7394,
+   "rate_per_1000": 7.19,
+   "pct_over_6_months": 0.0,
+   "mean_days": 63.0,
+   "cut_date": "2017-06-30",
+   "report": "Indicadores_Resumen_Junio_2017.pdf"
+  },
+  {
+   "region": "PDO DE ASTURIAS",
+   "page": 11,
+   "quote": "PDO DE ASTURIAS  7.891  7,70  0,5  73",
+   "patients": 7891,
+   "rate_per_1000": 7.7,
+   "pct_over_6_months": 0.5,
+   "mean_days": 73.0,
+   "cut_date": "2017-12-31",
+   "report": "Indicadores_Resumen_Diciembre_2017.pdf"
+  },
+  {
+   "region": "PDO DE ASTURIAS",
+   "page": 11,
+   "quote": "PDO DE ASTURIAS  7.800  7,65  0,0  68",
+   "patients": 7800,
+   "rate_per_1000": 7.65,
+   "pct_over_6_months": 0.0,
+   "mean_days": 68.0,
+   "cut_date": "2018-06-30",
+   "report": "LLEE_SNS_IndicadoresResumen_Junio2018.pdf"
+  },
+  {
+   "region": "PDO DE ASTURIAS",
+   "page": 11,
+   "quote": "PDO DE ASTURIAS  7.991  7,85  1,5  77",
+   "patients": 7991,
+   "rate_per_1000": 7.85,
+   "pct_over_6_months": 1.5,
+   "mean_days": 77.0,
+   "cut_date": "2018-12-31",
+   "report": "LLEE_SNS_IndicadoresResumen_Diciembre2018.pdf"
+  },
+  {
+   "region": "PDO DE ASTURIAS",
+   "page": 11,
+   "quote": "PDO DE ASTURIAS  8.263  8,17  1,1  74  SNS: 5,35",
+   "patients": 8263,
+   "rate_per_1000": 8.17,
+   "pct_over_6_months": 1.1,
+   "mean_days": 74.0,
+   "cut_date": "2019-06-30",
+   "report": "LLEE_SNS_IndicadoresResumen_Junio2019.pdf"
+  },
+  {
+   "region": "PDO DE ASTURIAS",
+   "page": 11,
+   "quote": "PDO DE ASTURIAS  8.388  8,31  3,4  84",
+   "patients": 8388,
+   "rate_per_1000": 8.31,
+   "pct_over_6_months": 3.4,
+   "mean_days": 84.0,
+   "cut_date": "2019-12-31",
+   "report": "LISTAS_PUBLICACION_dic19.pdf"
+  },
+  {
+   "region": "PDO DE ASTURIAS",
+   "page": 11,
+   "quote": "PDO DE ASTURIAS  8.703  8,65  2,9  55  SNS: 5,37",
+   "patients": 8703,
+   "rate_per_1000": 8.65,
+   "pct_over_6_months": 2.9,
+   "mean_days": 55.0,
+   "cut_date": "2020-06-30",
+   "report": "LISTAS_PUBLICACION_jun2020.pdf"
+  },
+  {
+   "region": "PDO DE ASTURIAS",
+   "page": 11,
+   "quote": "PDO DE ASTURIAS  8.266  8,25  4,8  56",
+   "patients": 8266,
+   "rate_per_1000": 8.25,
+   "pct_over_6_months": 4.8,
+   "mean_days": 56.0,
+   "cut_date": "2020-12-31",
+   "report": "LISTAS_PUBLICACION_dic_2020.pdf"
+  },
+  {
+   "region": "PDO DE ASTURIAS",
+   "page": 11,
+   "quote": "PDO DE ASTURIAS  7.991  7,99  9,3  80",
+   "patients": 7991,
+   "rate_per_1000": 7.99,
+   "pct_over_6_months": 9.3,
+   "mean_days": 80.0,
+   "cut_date": "2021-06-30",
+   "report": "LISTAS_PUBLICACION_JUN21.pdf"
+  },
+  {
+   "region": "PDO DE ASTURIAS",
+   "page": 11,
+   "quote": "PDO DE ASTURIAS  8.444  8,47  10,8  90",
+   "patients": 8444,
+   "rate_per_1000": 8.47,
+   "pct_over_6_months": 10.8,
+   "mean_days": 90.0,
+   "cut_date": "2021-12-31",
+   "report": "LISTAS_PUBLICACION_dic21.pdf"
+  },
+  {
+   "region": "PDO DE ASTURIAS",
+   "page": 11,
+   "quote": "PDO DE ASTURIAS  9.585  9,59  6,6  82",
+   "patients": 9585,
+   "rate_per_1000": 9.59,
+   "pct_over_6_months": 6.6,
+   "mean_days": 82.0,
+   "cut_date": "2022-06-30",
+   "report": "LISTAS_PUBLICACION_jun2022.pdf"
+  },
+  {
+   "region": "PDO DE ASTURIAS",
+   "page": 11,
+   "quote": "PDO DE ASTURIAS  9.902  9,95  9,9  90",
+   "patients": 9902,
+   "rate_per_1000": 9.95,
+   "pct_over_6_months": 9.9,
+   "mean_days": 90.0,
+   "cut_date": "2022-12-31",
+   "report": "LISTAS_PUBLICACION_dic_2022.pdf"
+  },
+  {
+   "region": "PDO DE ASTURIAS",
+   "page": 11,
+   "quote": "PDO DE ASTURIAS  10.738  10,78  5,2  84",
+   "patients": 10738,
+   "rate_per_1000": 10.78,
+   "pct_over_6_months": 5.2,
+   "mean_days": 84.0,
+   "cut_date": "2023-06-30",
+   "report": "LISTAS_PUBLICACION_jun2023.pdf"
+  },
+  {
+   "region": "PDO DE ASTURIAS",
+   "page": 11,
+   "quote": "PDO DE ASTURIAS  11.280  11,29  12,1  99",
+   "patients": 11280,
+   "rate_per_1000": 11.29,
+   "pct_over_6_months": 12.1,
+   "mean_days": 99.0,
+   "cut_date": "2023-12-31",
+   "report": "LISTAS_PUBLICACION_dic2023.pdf"
+  },
+  {
+   "region": "PDO DE ASTURIAS",
+   "page": 11,
+   "quote": "PDO DE ASTURIAS  10.611  10,59  5,9  85",
+   "patients": 10611,
+   "rate_per_1000": 10.59,
+   "pct_over_6_months": 5.9,
+   "mean_days": 85.0,
+   "cut_date": "2024-06-30",
+   "report": "LISTAS_PUBLICACION_jun2024.pdf"
+  },
+  {
+   "region": "PDO DE ASTURIAS",
+   "page": 11,
+   "quote": "PDO DE ASTURIAS  9.496  9,45  8,4  91",
+   "patients": 9496,
+   "rate_per_1000": 9.45,
+   "pct_over_6_months": 8.4,
+   "mean_days": 91.0,
+   "cut_date": "2024-12-31",
+   "report": "LISTAS_PUBLICACION_dic2024.pdf"
+  },
+  {
+   "region": "PDO DE ASTURIAS",
+   "page": 11,
+   "quote": "PDO DE ASTURIAS  8.796  8,74  4,2  78  SNS: 6,06/1.000 hab.",
+   "patients": 8796,
+   "rate_per_1000": 8.74,
+   "pct_over_6_months": 4.2,
+   "mean_days": 78.0,
+   "cut_date": "2025-06-30",
+   "report": "LISTAS_PUBLICACION_jun25.pdf"
+  },
+  {
+   "region": "PDO DE ASTURIAS",
+   "page": 11,
+   "quote": "PDO DE ASTURIAS  9.634  9,52  9,1  89  SNS: 6,12/1.000 hab.",
+   "patients": 9634,
+   "rate_per_1000": 9.52,
+   "pct_over_6_months": 9.1,
+   "mean_days": 89.0,
+   "cut_date": "2025-12-31",
+   "report": "LISTAS_PUBLICACION_Dic_2025_rectificado.pdf"
+  },
+  {
+   "region": "RIOJA",
+   "page": 11,
+   "quote": "RIOJA  1.852  5,96  4,2  71",
+   "patients": 1852,
+   "rate_per_1000": 5.96,
+   "pct_over_6_months": 4.2,
+   "mean_days": 71.0,
+   "cut_date": "2017-06-30",
+   "report": "Indicadores_Resumen_Junio_2017.pdf"
+  },
+  {
+   "region": "RIOJA",
+   "page": 11,
+   "quote": "RIOJA  1.297  4,19  4,0  56",
+   "patients": 1297,
+   "rate_per_1000": 4.19,
+   "pct_over_6_months": 4.0,
+   "mean_days": 56.0,
+   "cut_date": "2017-12-31",
+   "report": "Indicadores_Resumen_Diciembre_2017.pdf"
+  },
+  {
+   "region": "RIOJA",
+   "page": 11,
+   "quote": "RIOJA  1.328  4,30  0,5  45",
+   "patients": 1328,
+   "rate_per_1000": 4.3,
+   "pct_over_6_months": 0.5,
+   "mean_days": 45.0,
+   "cut_date": "2018-06-30",
+   "report": "LLEE_SNS_IndicadoresResumen_Junio2018.pdf"
+  },
+  {
+   "region": "RIOJA",
+   "page": 11,
+   "quote": "RIOJA  1.333  4,30  0,2  45",
+   "patients": 1333,
+   "rate_per_1000": 4.3,
+   "pct_over_6_months": 0.2,
+   "mean_days": 45.0,
+   "cut_date": "2018-12-31",
+   "report": "LLEE_SNS_IndicadoresResumen_Diciembre2018.pdf"
+  },
+  {
+   "region": "RIOJA",
+   "page": 11,
+   "quote": "RIOJA  1.282  4,15  0,0  48",
+   "patients": 1282,
+   "rate_per_1000": 4.15,
+   "pct_over_6_months": 0.0,
+   "mean_days": 48.0,
+   "cut_date": "2019-06-30",
+   "report": "LLEE_SNS_IndicadoresResumen_Junio2019.pdf"
+  },
+  {
+   "region": "RIOJA",
+   "page": 11,
+   "quote": "RIOJA  1.296  4,15  0,3  48",
+   "patients": 1296,
+   "rate_per_1000": 4.15,
+   "pct_over_6_months": 0.3,
+   "mean_days": 48.0,
+   "cut_date": "2019-12-31",
+   "report": "LISTAS_PUBLICACION_dic19.pdf"
+  },
+  {
+   "region": "RIOJA",
+   "page": 11,
+   "quote": "RIOJA  1.069  3,43  2,2  59",
+   "patients": 1069,
+   "rate_per_1000": 3.43,
+   "pct_over_6_months": 2.2,
+   "mean_days": 59.0,
+   "cut_date": "2020-06-30",
+   "report": "LISTAS_PUBLICACION_jun2020.pdf"
+  },
+  {
+   "region": "RIOJA",
+   "page": 11,
+   "quote": "RIOJA  1.462  4,67  8,4  74",
+   "patients": 1462,
+   "rate_per_1000": 4.67,
+   "pct_over_6_months": 8.4,
+   "mean_days": 74.0,
+   "cut_date": "2020-12-31",
+   "report": "LISTAS_PUBLICACION_dic_2020.pdf"
+  },
+  {
+   "region": "RIOJA",
+   "page": 11,
+   "quote": "RIOJA  1.930  6,17  6,6  74",
+   "patients": 1930,
+   "rate_per_1000": 6.17,
+   "pct_over_6_months": 6.6,
+   "mean_days": 74.0,
+   "cut_date": "2021-06-30",
+   "report": "LISTAS_PUBLICACION_JUN21.pdf"
+  },
+  {
+   "region": "RIOJA",
+   "page": 11,
+   "quote": "RIOJA  2.800  8,93  22,0  106",
+   "patients": 2800,
+   "rate_per_1000": 8.93,
+   "pct_over_6_months": 22.0,
+   "mean_days": 106.0,
+   "cut_date": "2021-12-31",
+   "report": "LISTAS_PUBLICACION_dic21.pdf"
+  },
+  {
+   "region": "RIOJA",
+   "page": 11,
+   "quote": "RIOJA  2.987  9,49  14,1  97",
+   "patients": 2987,
+   "rate_per_1000": 9.49,
+   "pct_over_6_months": 14.1,
+   "mean_days": 97.0,
+   "cut_date": "2022-06-30",
+   "report": "LISTAS_PUBLICACION_jun2022.pdf"
+  },
+  {
+   "region": "RIOJA",
+   "page": 11,
+   "quote": "RIOJA  3.398  10,78  26,3  122",
+   "patients": 3398,
+   "rate_per_1000": 10.78,
+   "pct_over_6_months": 26.3,
+   "mean_days": 122.0,
+   "cut_date": "2022-12-31",
+   "report": "LISTAS_PUBLICACION_dic_2022.pdf"
+  },
+  {
+   "region": "RIOJA",
+   "page": 11,
+   "quote": "RIOJA  3.432  10,80  15,2  105",
+   "patients": 3432,
+   "rate_per_1000": 10.8,
+   "pct_over_6_months": 15.2,
+   "mean_days": 105.0,
+   "cut_date": "2023-06-30",
+   "report": "LISTAS_PUBLICACION_jun2023.pdf"
+  },
+  {
+   "region": "RIOJA",
+   "page": 11,
+   "quote": "RIOJA  3.241  10,15  24,1  113",
+   "patients": 3241,
+   "rate_per_1000": 10.15,
+   "pct_over_6_months": 24.1,
+   "mean_days": 113.0,
+   "cut_date": "2023-12-31",
+   "report": "LISTAS_PUBLICACION_dic2023.pdf"
+  },
+  {
+   "region": "RIOJA",
+   "page": 11,
+   "quote": "RIOJA  2.271  7,07  2,3  65",
+   "patients": 2271,
+   "rate_per_1000": 7.07,
+   "pct_over_6_months": 2.3,
+   "mean_days": 65.0,
+   "cut_date": "2024-06-30",
+   "report": "LISTAS_PUBLICACION_jun2024.pdf"
+  },
+  {
+   "region": "RIOJA",
+   "page": 11,
+   "quote": "RIOJA  2.224  6,88  3,4  63",
+   "patients": 2224,
+   "rate_per_1000": 6.88,
+   "pct_over_6_months": 3.4,
+   "mean_days": 63.0,
+   "cut_date": "2024-12-31",
+   "report": "LISTAS_PUBLICACION_dic2024.pdf"
+  },
+  {
+   "region": "RIOJA",
+   "page": 11,
+   "quote": "RIOJA  2.736  8,37  1,9  70",
+   "patients": 2736,
+   "rate_per_1000": 8.37,
+   "pct_over_6_months": 1.9,
+   "mean_days": 70.0,
+   "cut_date": "2025-06-30",
+   "report": "LISTAS_PUBLICACION_jun25.pdf"
+  },
+  {
+   "region": "RIOJA",
+   "page": 11,
+   "quote": "RIOJA  2.660  8,11  7,2  82",
+   "patients": 2660,
+   "rate_per_1000": 8.11,
+   "pct_over_6_months": 7.2,
+   "mean_days": 82.0,
+   "cut_date": "2025-12-31",
+   "report": "LISTAS_PUBLICACION_Dic_2025_rectificado.pdf"
+  },
+  {
+   "region": "TOTAL",
+   "page": 11,
+   "quote": "TOTAL  243.210  5,41  9,2  82",
+   "patients": 243210,
+   "rate_per_1000": 5.41,
+   "pct_over_6_months": 9.2,
+   "mean_days": 82.0,
+   "cut_date": "2017-06-30",
+   "report": "Indicadores_Resumen_Junio_2017.pdf"
+  },
+  {
+   "region": "TOTAL",
+   "page": 11,
+   "quote": "TOTAL  239.571  5,31  12,2  89",
+   "patients": 239571,
+   "rate_per_1000": 5.31,
+   "pct_over_6_months": 12.2,
+   "mean_days": 89.0,
+   "cut_date": "2017-12-31",
+   "report": "Indicadores_Resumen_Diciembre_2017.pdf"
+  },
+  {
+   "region": "TOTAL",
+   "page": 11,
+   "quote": "TOTAL  232.297  5,15  8,5  78",
+   "patients": 232297,
+   "rate_per_1000": 5.15,
+   "pct_over_6_months": 8.5,
+   "mean_days": 78.0,
+   "cut_date": "2018-06-30",
+   "report": "LLEE_SNS_IndicadoresResumen_Junio2018.pdf"
+  },
+  {
+   "region": "TOTAL",
+   "page": 11,
+   "quote": "TOTAL  235.001  5,20  10,2  82",
+   "patients": 235001,
+   "rate_per_1000": 5.2,
+   "pct_over_6_months": 10.2,
+   "mean_days": 82.0,
+   "cut_date": "2018-12-31",
+   "report": "LLEE_SNS_IndicadoresResumen_Diciembre2018.pdf"
+  },
+  {
+   "region": "TOTAL",
+   "page": 11,
+   "quote": "TOTAL  241.952  5,35  9,6  83",
+   "patients": 241952,
+   "rate_per_1000": 5.35,
+   "pct_over_6_months": 9.6,
+   "mean_days": 83.0,
+   "cut_date": "2019-06-30",
+   "report": "LLEE_SNS_IndicadoresResumen_Junio2019.pdf"
+  },
+  {
+   "region": "TOTAL",
+   "page": 11,
+   "quote": "TOTAL  251.764  5,54  12,8  92",
+   "patients": 251764,
+   "rate_per_1000": 5.54,
+   "pct_over_6_months": 12.8,
+   "mean_days": 92.0,
+   "cut_date": "2019-12-31",
+   "report": "LISTAS_PUBLICACION_dic19.pdf"
+  },
+  {
+   "region": "TOTAL",
+   "page": 11,
+   "quote": "TOTAL  244.082  5,37  28,0  140",
+   "patients": 244082,
+   "rate_per_1000": 5.37,
+   "pct_over_6_months": 28.0,
+   "mean_days": 140.0,
+   "cut_date": "2020-06-30",
+   "report": "LISTAS_PUBLICACION_jun2020.pdf"
+  },
+  {
+   "region": "TOTAL",
+   "page": 11,
+   "quote": "TOTAL  225.888  4,94  18,8  114",
+   "patients": 225888,
+   "rate_per_1000": 4.94,
+   "pct_over_6_months": 18.8,
+   "mean_days": 114.0,
+   "cut_date": "2020-12-31",
+   "report": "LISTAS_PUBLICACION_dic_2020.pdf"
+  },
+  {
+   "region": "TOTAL",
+   "page": 11,
+   "quote": "TOTAL  240.007  5,24  12,0  90",
+   "patients": 240007,
+   "rate_per_1000": 5.24,
+   "pct_over_6_months": 12.0,
+   "mean_days": 90.0,
+   "cut_date": "2021-06-30",
+   "report": "LISTAS_PUBLICACION_JUN21.pdf"
+  },
+  {
+   "region": "TOTAL",
+   "page": 11,
+   "quote": "TOTAL  257.602  5,61  13,1  96",
+   "patients": 257602,
+   "rate_per_1000": 5.61,
+   "pct_over_6_months": 13.1,
+   "mean_days": 96.0,
+   "cut_date": "2021-12-31",
+   "report": "LISTAS_PUBLICACION_dic21.pdf"
+  },
+  {
+   "region": "TOTAL",
+   "page": 11,
+   "quote": "TOTAL  269.667  5,84  10,9  90",
+   "patients": 269667,
+   "rate_per_1000": 5.84,
+   "pct_over_6_months": 10.9,
+   "mean_days": 90.0,
+   "cut_date": "2022-06-30",
+   "report": "LISTAS_PUBLICACION_jun2022.pdf"
+  },
+  {
+   "region": "TOTAL",
+   "page": 11,
+   "quote": "TOTAL  290.246  6,25  13,2  95",
+   "patients": 290246,
+   "rate_per_1000": 6.25,
+   "pct_over_6_months": 13.2,
+   "mean_days": 95.0,
+   "cut_date": "2022-12-31",
+   "report": "LISTAS_PUBLICACION_dic_2022.pdf"
+  },
+  {
+   "region": "TOTAL",
+   "page": 11,
+   "quote": "TOTAL  299.470  6,41  10,9  88",
+   "patients": 299470,
+   "rate_per_1000": 6.41,
+   "pct_over_6_months": 10.9,
+   "mean_days": 88.0,
+   "cut_date": "2023-06-30",
+   "report": "LISTAS_PUBLICACION_jun2023.pdf"
+  },
+  {
+   "region": "TOTAL",
+   "page": 11,
+   "quote": "TOTAL  308.418  6,57  17,2  103",
+   "patients": 308418,
+   "rate_per_1000": 6.57,
+   "pct_over_6_months": 17.2,
+   "mean_days": 103.0,
+   "cut_date": "2023-12-31",
+   "report": "LISTAS_PUBLICACION_dic2023.pdf"
+  },
+  {
+   "region": "TOTAL",
+   "page": 11,
+   "quote": "TOTAL  304.704  6,44  13,7  96",
+   "patients": 304704,
+   "rate_per_1000": 6.44,
+   "pct_over_6_months": 13.7,
+   "mean_days": 96.0,
+   "cut_date": "2024-06-30",
+   "report": "LISTAS_PUBLICACION_jun2024.pdf"
+  },
+  {
+   "region": "TOTAL",
+   "page": 11,
+   "quote": "TOTAL  296.896  6,24  14,3  96",
+   "patients": 296896,
+   "rate_per_1000": 6.24,
+   "pct_over_6_months": 14.3,
+   "mean_days": 96.0,
+   "cut_date": "2024-12-31",
+   "report": "LISTAS_PUBLICACION_dic2024.pdf"
+  },
+  {
+   "region": "TOTAL",
+   "page": 11,
+   "quote": "TOTAL  291.082  6,06  12,2  91",
+   "patients": 291082,
+   "rate_per_1000": 6.06,
+   "pct_over_6_months": 12.2,
+   "mean_days": 91.0,
+   "cut_date": "2025-06-30",
+   "report": "LISTAS_PUBLICACION_jun25.pdf"
+  },
+  {
+   "region": "TOTAL",
+   "page": 11,
+   "quote": "TOTAL  295.312  6,12  13,0  93",
+   "patients": 295312,
+   "rate_per_1000": 6.12,
+   "pct_over_6_months": 13.0,
+   "mean_days": 93.0,
+   "cut_date": "2025-12-31",
+   "report": "LISTAS_PUBLICACION_Dic_2025_rectificado.pdf"
+  }
+ ],
+ "breaks": [
+  {
+   "cut_date": "2012-06-30",
+   "report": "LISTAS_PUBLICACION_CI_JUN12_18122012.pdf",
+   "page": 3,
+   "quote": "Nota: Rotura de serie - en esta edición no se proporcionan las diferencias respecto a periodos anteriores debido a la falta de comparabilidad (se incluye una comunidad autónoma más)",
+   "series": [
+    "surgery",
+    "consultations"
+   ],
+   "label": "Cobertura: por primera vez entran datos de todas las comunidades autónomas (hasta 2011 faltaban una o dos)."
+  },
+  {
+   "cut_date": "2016-12-31",
+   "report": "LISTAS_PUBLICACION_DIC16.pdf",
+   "page": 5,
+   "quote": "Porcentaje de pacientes con > 6 meses de espera  Rotura de Serie. (*)",
+   "series": [
+    "surgery"
+   ],
+   "label": "Cataluña pasa a notificar sus datos reales; hasta junio de 2016 se estimaban a partir de los procesos seleccionados."
+  },
+  {
+   "cut_date": "2016-12-31",
+   "report": "LISTAS_PUBLICACION_DIC16.pdf",
+   "page": 18,
+   "quote": "Porcentaje de pacientes con cita a más de sesenta días  Rotura de serie *",
+   "series": [
+    "consultations"
+   ],
+   "label": "Cataluña pasa a notificar sus datos reales en consultas."
+  },
+  {
+   "cut_date": "2018-12-31",
+   "report": "LLEE_SNS_IndicadoresResumen_Diciembre2018.pdf",
+   "page": 6,
+   "quote": "(1) Rotura de serie por cambio del sistema de cómputo en Andalucía.",
+   "series": [
+    "surgery",
+    "consultations"
+   ],
+   "label": "Andalucía cambia su sistema de cómputo de la lista de espera."
+  },
+  {
+   "cut_date": "2025-06-30",
+   "report": "LISTAS_PUBLICACION_jun25.pdf",
+   "page": 14,
+   "quote": "*Se incluyen pacientes sin cita asignada, que en el momento del corte superaban los 60 días en el registro",
+   "series": [
+    "consultations:pct_over_60_days"
+   ],
+   "label": "El porcentaje de consultas a más de 60 días incluye desde junio de 2025 a pacientes sin cita asignada que ya superaban los 60 días."
+  }
+ ],
+ "overrides": [],
+ "revisions": [
+  {
+   "cut_date": "2025-12-31",
+   "series": "surgery",
+   "report": "Nota_Aclaratoria_Rectificacion_Dic_2025.pdf",
+   "initial": {
+    "patients": 853509,
+    "mean_days": 121
+   },
+   "rectified_in": "LISTAS_PUBLICACION_Dic_2025_rectificado.pdf",
+   "quotes": [
+    {
+     "page": 1,
+     "quote": "La versión inicial incluía un total de 853.509 pacientes pendientes. La versión rectificada"
+    },
+    {
+     "page": 1,
+     "quote": "La versión inicial establecía un tiempo medio de espera de 121 días, señalando que dicha"
+    }
+   ],
+   "label": "Castilla-La Mancha rectificó sus datos: +231 pacientes y +1 día de espera media sobre la versión inicial."
+  }
+ ]
+}

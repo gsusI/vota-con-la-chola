@@ -348,6 +348,12 @@ export const siteSections = [
         href: "/visualizaciones/educacion/",
         cta: "Abrir visualización",
       },
+      {
+        title: "Sanidad: vivir más, gastar menos y más gente esperando",
+        note: "Esperanza de vida desde 1925, gasto sanitario público frente a Europa, listas de espera del SNS con sus rupturas de serie y médicos por habitante.",
+        href: "/visualizaciones/sanidad/",
+        cta: "Abrir visualización",
+      },
     ],
     surfaces: [
       {
@@ -369,6 +375,11 @@ export const siteSections = [
         title: "Gasto y resultados educativos",
         href: "/visualizaciones/educacion/",
         note: "Ministerio de Educación, Eurostat, OCDE (Education at a Glance, PISA), Banco Mundial y Our World in Data.",
+      },
+      {
+        title: "Esperanza de vida, gasto y listas de espera",
+        href: "/visualizaciones/sanidad/",
+        note: "Ministerio de Sanidad (SISLE-SNS, EGSP), INE, Eurostat, OCDE y Banco Mundial, con rupturas de serie y procedencia por gráfico.",
       },
     ],
   },
@@ -506,6 +517,22 @@ export const datasetCatalog = [
     label: "Gasto y resultados educativos (JSON con procedencia)",
     path: "/visualizaciones/data/educacion.json",
     note: "Mismas series con URL, fecha de consulta y SHA-256 de cada fuente; valores de PISA 2022 con documento, página y cita.",
+    confidence: "Publicado",
+  },
+  {
+    id: "viz-sanidad",
+    sectionId: "visualizaciones",
+    label: "Esperanza de vida, gasto y listas de espera (CSV)",
+    path: "/visualizaciones/data/sanidad.csv",
+    note: "Esperanza de vida, gasto sanitario público y privado, listas de espera del SNS por corte semestral y comunidad, y médicos por habitante.",
+    confidence: "Publicado",
+  },
+  {
+    id: "viz-sanidad-json",
+    sectionId: "visualizaciones",
+    label: "Esperanza de vida, gasto y listas de espera (JSON con procedencia)",
+    path: "/visualizaciones/data/sanidad.json",
+    note: "Mismas series con URL, fecha de consulta y SHA-256 de cada fuente; rupturas de serie y rectificaciones de las listas de espera marcadas.",
     confidence: "Publicado",
   },
   {
