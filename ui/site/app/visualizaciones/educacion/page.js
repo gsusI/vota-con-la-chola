@@ -76,6 +76,7 @@ export default function EducacionPage() {
     }),
     wb: { label: `Banco Mundial, EdStats (PISA 2000-2018)${retrieved(src.worldbank_edstats)}`, href: src.worldbank_edstats.page },
     pisa2022: { label: "INEE, PISA 2022. Informe español (2023)", href: src.vclc_education_curated.documents.inee_pisa2022_informe_espanol.landing_page },
+    pisaReports: { label: "INEE, informes españoles de PISA 2003-2018", href: "https://www.educacionfpydeportes.gob.es/inee/evaluaciones-internacionales/pisa.html" },
     pisaNote: { label: "OCDE, PISA 2022, nota de país: España (copia del INEE)", href: src.vclc_education_curated.documents.oecd_pisa2022_country_note_es.url },
     owid: { label: `Our World in Data${retrieved(src.owid_grapher)}`, href: src.owid_grapher.page },
   };
@@ -161,6 +162,7 @@ export default function EducacionPage() {
     },
   ];
   const rep = data.repetition.pisa_2022;
+  const repSeries = data.repetition.pisa_series;
 
   // 5. Over-qualification -------------------------------------------------------------------------
   const overq = comparison(data.overqualification, ["ES", "EU27_2020", "DE", "FR", "IT", "PT"], ["EU27_2020"]);
@@ -259,7 +261,7 @@ export default function EducacionPage() {
             {num((1 - h.spending_school_trough.value / h.spending_school_peak.value) * 100, 0)} % hasta {h.spending_school_trough.year} y en{" "}
             {h.spending_school_last_year} seguía por debajo de aquel máximo. Además, España gasta por alumno el {h.spending_school_vs_oecd_pct} % de la
             media OCDE (el {h.spending_school_vs_oecd_2005_pct} % en 2005), y la OCDE, que aumentó su gasto un {h.oecd_school_change_2005_pct} % desde 2005,
-            también vio caer sus resultados. En matemáticas, {list(biggerDrops)} perdieron más puntos que España desde 2003.
+            también vio caer sus resultados: su media de matemáticas pasó de {h.oecd_math_2003} (2003) a {data.pisa.math.OECD.at(-1).value} (2022). {list(biggerDrops)} perdieron más puntos que España.
           </li>
           <li>
             <strong>Lo que sí mejoró, y mucho.</strong> El abandono escolar temprano cayó del {num(h.leavers_2008)} % (2008) al {num(h.leavers_last)} % (
@@ -385,17 +387,18 @@ export default function EducacionPage() {
       <Figure
         id="pisa"
         title={`En matemáticas, España pasa de ${esMath.from} a ${esMath.to} puntos PISA desde 2003; ${list(biggerDrops)} cayeron más`}
-        dek={`${mathRisers.length ? `${list(mathRisers)}, que partían por debajo, subieron y hoy están a la par. ` : ""}En 2022 España obtuvo ${h.math_2022} en matemáticas (media OCDE ${data.pisa.math.OECD.at(-1).value}), ${h.reading_2022} en lectura (${data.pisa.reading.OECD.at(-1).value}) y ${h.science_2022} en ciencias (${data.pisa.science.OECD.at(-1).value}): en las tres, sin diferencia significativa con la media. El eje empieza en cero; las caídas son de pocas decenas de puntos en una escala centrada en 500.`}
+        dek={`La media OCDE de matemáticas bajó de ${h.oecd_math_2003} a ${data.pisa.math.OECD.at(-1).value} en el mismo periodo. ${mathRisers.length ? `${list(mathRisers)}, que partían por debajo, subieron y hoy están a la par. ` : ""}En 2022 España obtuvo ${h.math_2022} en matemáticas (media OCDE ${data.pisa.math.OECD.at(-1).value}), ${h.reading_2022} en lectura (${data.pisa.reading.OECD.at(-1).value}) y ${h.science_2022} en ciencias (${data.pisa.science.OECD.at(-1).value}): en las tres, sin diferencia significativa con la media. El eje empieza en cero; las caídas son de pocas decenas de puntos en una escala centrada en 500.`}
         legend={[
           { id: "ESP", label: "España", color: C.blue },
-          { id: "OECD", label: "Media OCDE (solo 2018 y 2022 con fuente abierta)", color: C.ref },
+          { id: "OECD", label: "Media OCDE publicada en cada ciclo", color: C.ref },
           { id: "peer", label: "Alemania, Francia, Italia, Portugal", color: C.peer },
         ]}
-        sources={[S.wb, S.pisa2022]}
+        sources={[S.wb, S.pisaReports, S.pisa2022]}
         notes={[
           "Puntos huecos: ciclos no comparables con los siguientes. La OCDE solo considera comparables las tendencias de lectura desde 2000, matemáticas desde 2003 y ciencias desde 2006.",
           "2022: primer ciclo tras la COVID-19 (cierres de centros en 2020) y aplazado un año; la OCDE advierte de que parte de la caída general puede deberse a la pandemia. España no tiene dato de lectura en 2018: la OCDE no lo publicó por respuestas anómalas.",
-          "La media OCDE de 2000 a 2015 no se publica en ninguna API abierta y oecd.org bloquea la descarga por script; los valores de 2022 de lectura y ciencias de Alemania, Francia, Italia y Portugal solo aparecen en figuras del informe y no se incluyen.",
+          "Media OCDE: la de cada ciclo según los informes españoles del INEE (2003-2015 y 2022) y el Banco Mundial (2018), con cita literal de documento y página. Cambia de países: 30 miembros en 2003, 34 en 2012, 37 en 2022, así que difiere unos puntos de la media de tendencia de la OCDE (solo países presentes en todos los ciclos).",
+          "Sin dato con fuente verificable: media OCDE de 2000, de 2009 y de matemáticas en 2006 (en los informes solo aparecen en gráficos), y lectura y ciencias de 2022 de Alemania, Francia, Italia y Portugal. oecd.org bloquea la descarga por script.",
         ]}
         table={<EduTable unit="score" caption="Ver todas las puntuaciones en tabla" series={pisaTable} />}
       >
@@ -468,14 +471,26 @@ export default function EducacionPage() {
       <Figure
         id="repeticion"
         title={`A los 15 años, el ${num(h.behind_last.value)} % del alumnado va retrasado de curso; en ${h.behind_peak.course} era el ${num(h.behind_peak.value)} %`}
-        dek={`España sigue entre los países de la OCDE donde más se repite: en PISA 2022, el ${rep.ESP} % del alumnado de 15 años dijo haber repetido al menos una vez, frente al ${rep.OECD} % de media OCDE.`}
-        sources={[S.mefp, S.pisaNote]}
+        dek={`PISA cuenta lo mismo con otra medida: el alumnado de 15 años que dice haber repetido al menos una vez pasó del ${repSeries.ESP[0].value} % en ${repSeries.ESP[0].year} al ${rep.ESP} % en 2022, y sigue más del doble que la media OCDE (${rep.OECD} %).`}
+        sources={[S.mefp, S.pisaReports, S.pisaNote]}
         notes={[
           "Serie anual: 100 menos la tasa de idoneidad a los 15 años del Ministerio (alumnado matriculado en el curso que le corresponde por edad). Se dibuja en el año en que termina cada curso.",
           `La caída de ${num(h.behind_2020)} % (curso 2019-20) a ${num(h.behind_2021)} % (2020-21) refleja la promoción de final del curso 2019-20, flexibilizada por la COVID-19 (Orden EFP/365/2020); después, la LOMLOE (Ley Orgánica 3/2020) y el Real Decreto 984/2021 restringieron la repetición.`,
-          "La repetición declarada en PISA de ciclos anteriores solo está en tablas de oecd.org, que bloquea la descarga por script.",
+          "PISA: respuesta del propio alumno, según los informes españoles del INEE (2012-2018) y la nota de país de la OCDE (2022). La media OCDE solo tiene cita literal para 2018 y 2022.",
         ]}
-        table={<EduTable caption="Ver los datos en tabla" series={behind} rowLabel="Año (fin de curso)" />}
+        table={
+          <>
+            <EduTable caption="Ver los datos en tabla" series={behind} rowLabel="Año (fin de curso)" />
+            <EduTable
+              digits={0}
+              caption="Ver la repetición declarada en PISA en tabla"
+              series={[
+                { id: "ESP", label: "España", points: repSeries.ESP },
+                { id: "OECD", label: "Media OCDE", points: repSeries.OECD },
+              ]}
+            />
+          </>
+        }
       >
         <TimeSeriesChart
           series={behind}
@@ -484,23 +499,23 @@ export default function EducacionPage() {
           ariaLabel="Alumnado de 15 años retrasado de curso en España"
         />
         <h3 className="vizPanelTitle">
-          Alumnado de 15 años que dice haber repetido al menos una vez (PISA 2022)
-          <span>Nota de país de la OCDE</span>
+          Alumnado de 15 años que dice haber repetido al menos una vez (PISA)
+          <span>
+            España: {repSeries.ESP[0].value} % ({repSeries.ESP[0].year}) → {rep.ESP} % (2022); media OCDE: {rep.OECD} %
+          </span>
         </h3>
-        <ul className="vizBars" aria-label="Repetición declarada en PISA 2022">
-          {[
-            ["España", rep.ESP, C.blue],
-            ["Media OCDE", rep.OECD, C.ref],
-          ].map(([label, value, color]) => (
-            <li key={label}>
-              <span>{label}</span>
-              <span className="vizBars__track">
-                <span className="vizBars__bar" style={{ width: `${(value / 50) * 100}%`, background: color }} />
-                <span className="vizBars__value">{value} %</span>
-              </span>
-            </li>
-          ))}
-        </ul>
+        <SparseLineChart
+          series={[
+            { id: "OECD", label: "Media OCDE", color: C.ref, points: repSeries.OECD },
+            { id: "ESP", label: "España", color: C.blue, emphasis: true, points: repSeries.ESP },
+          ]}
+          unit="pct"
+          xMin={2010}
+          xMax={2022}
+          yMax={50}
+          height={220}
+          ariaLabel="Repetición declarada en PISA, España y media OCDE"
+        />
       </Figure>
 
       <Figure

@@ -179,7 +179,10 @@ def build(conn: sqlite3.Connection) -> dict:
     idoneidad = store.series("mefp_educabase", "tasa_idoneidad_15", "PC")
     behind = [{"year": int(p["period"][:4]) + 1, "course": p["period"], "value": r(100 - p["value"])} for p in idoneidad["ES"]]
     pisa_rep = store.series("vclc_education_curated", "pisa_repeated_grade_pct", "PC")
-    repetition_pisa = {area: r(rows[0]["value"], 0) for area, rows in pisa_rep.items()}
+    repetition_pisa_series = {
+        area: [{"year": int(p["period"]), "value": r(p["value"], 0)} for p in rows] for area, rows in pisa_rep.items()
+    }
+    repetition_pisa = {area: rows[-1]["value"] for area, rows in repetition_pisa_series.items()}
 
     # 5. Over-qualification -------------------------------------------------------------------------
     overq_rows = store.series("eurostat_sdmx", "overqualification_rate.Y20-64", "PC")
@@ -254,6 +257,7 @@ def build(conn: sqlite3.Connection) -> dict:
             "pps_es": pps_es[last_pps],
             "pps_eu": pps_eu[last_pps],
             "math_2003": math.get(2003), "math_2022": math.get(2022),
+            "oecd_math_2003": next((p["value"] for p in pisa["math"]["OECD"] if p["year"] == 2003), None),
             "reading_2000": reading.get(2000), "reading_2022": reading.get(2022),
             "science_2006": science.get(2006), "science_2022": science.get(2022),
             "leavers_2008": es_leavers.get(2008), "leavers_last": es_leavers[last_leavers], "leavers_last_year": last_leavers,
@@ -282,7 +286,7 @@ def build(conn: sqlite3.Connection) -> dict:
         "pisa": {**pisa, "first_comparable": PISA_FIRST_COMPARABLE},
         "early_leavers": {"series": leavers, "breaks": breaks, "regions": regions,
                           "regions_first_year": first_region_year, "regions_last_year": last_region_year},
-        "repetition": {"behind_at_15": behind, "pisa_2022": repetition_pisa},
+        "repetition": {"behind_at_15": behind, "pisa_2022": repetition_pisa, "pisa_series": repetition_pisa_series},
         "overqualification": overq,
         "overqualification_breaks_es": overq_breaks,
         "long_run": {"literacy": literacy, "schooling": schooling},
@@ -314,7 +318,8 @@ def write_csv(data: dict, path: Path) -> None:
         rows.append(("eurostat_sdmx", "abandono_temprano_18_24_pct", row["geo"], data["early_leavers"]["regions_first_year"], row["first"]))
         rows.append(("eurostat_sdmx", "abandono_temprano_18_24_pct", row["geo"], data["early_leavers"]["regions_last_year"], row["last"]))
     rows.extend(("mefp_educabase", "alumnado_15_anios_retrasado_pct", "ES", p["year"], p["value"]) for p in data["repetition"]["behind_at_15"])
-    rows.extend(("vclc_education_curated", "pisa_repetidores_pct", area, 2022, v) for area, v in data["repetition"]["pisa_2022"].items())
+    for area, pts in data["repetition"]["pisa_series"].items():
+        rows.extend(("vclc_education_curated", "pisa_repetidores_pct", area, p["year"], p["value"]) for p in pts)
     for area, pts in data["overqualification"].items():
         rows.extend(("eurostat_sdmx", "sobrecualificacion_20_64_pct", area, p["year"], p["value"]) for p in pts)
     for area, pts in data["long_run"]["literacy"].items():
