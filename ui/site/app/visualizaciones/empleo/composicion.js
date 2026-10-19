@@ -67,9 +67,9 @@ export default function ChapterComposicion({ data }) {
   const g1824 = (k) => (at(decIdx[k], 2024) / at(decIdx[k], 2018) - 1) * 100;
   const decSeries = [
     { id: "d1", label: "Decil 1 (el 10 % que menos cobra)", shortLabel: "Decil 1", color: C.blue, emphasis: true, points: decIdx["1"] },
-    { id: "d2", label: "Decil 2", shortLabel: "Decil 2", color: C.aqua, points: decIdx["2"] },
-    { id: "d5", label: "Decil 5 (mitad de la tabla)", shortLabel: "Decil 5", color: C.ref, points: decIdx["5"] },
-    { id: "d10", label: "Decil 10 (el 10 % que más cobra)", shortLabel: "Decil 10", color: C.orange, points: decIdx["10"] },
+    { id: "d2", noEndLabel: true, label: "Decil 2", shortLabel: "Decil 2", color: C.aqua, points: decIdx["2"] },
+    { id: "d5", noEndLabel: true, label: "Decil 5 (mitad de la tabla)", shortLabel: "Decil 5", color: C.ref, points: decIdx["5"] },
+    { id: "d10", noEndLabel: true, label: "Decil 10 (el 10 % que más cobra)", shortLabel: "Decil 10", color: C.orange, points: decIdx["10"] },
   ];
   const lw = comp.low_wage_share;
   const lwRows = AREAS.map((a) => ({ id: a, label: NAMES[a], value: last(lw[a])?.value })).filter((r) => r.value != null).sort((a, b) => b.value - a.value);

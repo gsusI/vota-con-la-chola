@@ -270,6 +270,39 @@ export function RegionScatter({ points, refs = [], xLabel, yLabel, color, height
   const sy = (v) => m.top + (1 - v / y1) * innerH;
   const compact = width < 520;
   const active = hover == null ? null : all.find((p) => p.id === hover);
+  // Greedy label placement: try right, left, above, below, then a farther nudge with a leader line; a label that still
+  // collides with a placed label, a reference label or a dot is left to the tooltip and the table.
+  const CH = 6.4;
+  const LH = 12;
+  const boxes = refs.map((p) => ({ x0: sx(p.x) + 8, x1: sx(p.x) + 10 + p.label.length * 7, y0: sy(p.y) - 8, y1: sy(p.y) + 6 }));
+  const dots = [...points, ...refs].map((p) => ({ x0: sx(p.x) - 6, x1: sx(p.x) + 6, y0: sy(p.y) - 6, y1: sy(p.y) + 6 }));
+  const hit = (a, b) => a.x0 < b.x1 && b.x0 < a.x1 && a.y0 < b.y1 && b.y0 < a.y1;
+  const placed = [];
+  if (!compact) {
+    for (const p of [...points].filter((q) => q.label).sort((a, b) => a.x - b.x)) {
+      const cx = sx(p.x);
+      const cy = sy(p.y);
+      const w = p.label.length * CH;
+      const options = [
+        { tx: cx + 8, ty: cy + 4, anchor: "start", box: { x0: cx + 8, x1: cx + 8 + w, y0: cy - 8, y1: cy + 5 } },
+        { tx: cx - 8, ty: cy + 4, anchor: "end", box: { x0: cx - 8 - w, x1: cx - 8, y0: cy - 8, y1: cy + 5 } },
+        { tx: cx, ty: cy - 9, anchor: "middle", box: { x0: cx - w / 2, x1: cx + w / 2, y0: cy - 9 - LH + 2, y1: cy - 7 } },
+        { tx: cx, ty: cy + 18, anchor: "middle", box: { x0: cx - w / 2, x1: cx + w / 2, y0: cy + 8, y1: cy + 20 } },
+        ...[-1, 1].flatMap((dir) =>
+          [22, 34, 46].map((dy) => ({
+            tx: cx + 14, ty: cy + dir * dy + 4, anchor: "start", leader: true, lx: cx + 12, ly: cy + dir * dy,
+            box: { x0: cx + 14, x1: cx + 14 + w, y0: cy + dir * dy - 8, y1: cy + dir * dy + 5 },
+          })),
+        ),
+      ];
+      const inside = (b) => b.x0 >= m.left && b.x1 <= m.left + innerW && b.y0 >= m.top - 4 && b.y1 <= m.top + innerH;
+      const ok = options.find((o) => inside(o.box) && !boxes.some((b) => hit(o.box, b)) && !dots.some((d) => hit(o.box, d)));
+      if (ok) {
+        boxes.push(ok.box);
+        placed.push({ id: p.id, text: p.label, ...ok, ax: cx, ay: cy });
+      }
+    }
+  }
   return (
     <div className="tsChart" ref={ref}>
       <svg role="img" aria-label={`${yLabel} frente a ${xLabel} por comunidad autónoma`} width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
@@ -284,22 +317,36 @@ export function RegionScatter({ points, refs = [], xLabel, yLabel, color, height
         {ticks(0, x1, xStep).map((t) => (
           <g key={`x${t}`}>
             <line className="tsChart__grid" x1={sx(t)} x2={sx(t)} y1={m.top} y2={m.top + innerH} />
-            <text className="tsChart__tick" x={sx(t)} y={m.top + innerH + 16} textAnchor="middle">
-              {t} €
-            </text>
+            {t > 0 ? (
+              <text className="tsChart__tick" x={sx(t)} y={m.top + innerH + 16} textAnchor="middle">
+                {t} €
+              </text>
+            ) : null}
           </g>
         ))}
         <text className="tsChart__tick" x={m.left + innerW} y={height - 4} textAnchor="end">
           {xLabel}
         </text>
         {points.map((p) => (
-          <g key={p.id} onPointerEnter={() => setHover(p.id)} onPointerLeave={() => setHover(null)}>
-            <circle cx={sx(p.x)} cy={sy(p.y)} r={hover === p.id ? 7 : 5.5} fill={color} opacity={0.85} stroke="var(--viz-surface)" strokeWidth={1} />
-            {!compact && p.label ? (
-              <text className="tsChart__noteLabel" x={sx(p.x) + 8} y={sy(p.y) + 4}>
-                {p.label}
-              </text>
-            ) : null}
+          <circle
+            key={p.id}
+            cx={sx(p.x)}
+            cy={sy(p.y)}
+            r={hover === p.id ? 7 : 5.5}
+            fill={color}
+            opacity={0.85}
+            stroke="var(--viz-surface)"
+            strokeWidth={1}
+            onPointerEnter={() => setHover(p.id)}
+            onPointerLeave={() => setHover(null)}
+          />
+        ))}
+        {placed.map((l) => (
+          <g key={`l-${l.id}`}>
+            {l.leader ? <line x1={l.ax} y1={l.ay} x2={l.lx} y2={l.ly} stroke="var(--viz-axis)" strokeWidth={1} /> : null}
+            <text className="tsChart__noteLabel" x={l.tx} y={l.ty} textAnchor={l.anchor}>
+              {l.text}
+            </text>
           </g>
         ))}
         {refs.map((p) => (

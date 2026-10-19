@@ -50,7 +50,7 @@ export default function ChapterCalidad({ data, epaBreaks, reform, children }) {
   const dispSeries = disp
     ? [
         { id: "ESP", label: "España", color: C.blue, emphasis: true, points: disp.ESP },
-        { id: "EU27", label: "UE-27 (entre todas sus regiones)", shortLabel: "UE-27", color: C.ref, points: disp.EU27 },
+        { id: "EU27", label: "UE-27 (entre todas sus regiones)", shortLabel: "UE-27", color: C.ref, noEndLabel: true, points: disp.EU27 },
         ...PEERS.map((area) => ({ id: area, label: NAMES[area], color: C.peer, points: disp[area] })),
       ]
     : null;

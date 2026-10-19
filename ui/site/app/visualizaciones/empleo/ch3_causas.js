@@ -36,7 +36,7 @@ export default function ChapterCausas({ data, events }) {
         { id: "es_low", label: "España, hasta la ESO (CINE 0–2)", shortLabel: "España, hasta ESO", color: C.blue, emphasis: true, points: ed.rate["ED0-2"].ESP },
         { id: "eu_low", label: "UE-27, hasta la ESO", shortLabel: "UE-27, hasta ESO", color: C.ref, points: ed.rate["ED0-2"].EU27 },
         { id: "es_high", label: "España, estudios superiores (CINE 5–8)", shortLabel: "España, superiores", color: C.aqua, points: ed.rate["ED5-8"].ESP },
-        { id: "eu_high", label: "UE-27, estudios superiores", shortLabel: "UE-27, superiores", color: C.yellow, points: ed.rate["ED5-8"].EU27 },
+        { id: "eu_high", label: "UE-27, estudios superiores", shortLabel: "UE-27, superiores", color: C.yellow, noEndLabel: true, points: ed.rate["ED5-8"].EU27 },
       ]
     : null;
   const lowPop = ed ? AREAS.map((area) => ({ id: area, label: NAMES[area], value: last(ed.population["ED0-2"][area])?.value })).filter((r) => r.value != null).sort((a, b) => b.value - a.value) : [];

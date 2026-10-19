@@ -28,7 +28,12 @@ export default function EmpleoPage() {
   const downloads = "/visualizaciones/data/empleo.csv";
   const events = data.events || [];
   const evYear = (id) => events.find((e) => e.id === id)?.year;
-  const epaBreaks = events.filter((e) => e.kind === "series_break").map((e) => ({ year: e.year, label: `EPA ${e.year}`, row: 1 }));
+  // Breaks a few years apart alternate between label rows 2 and 0 (26 px apart: the shared chart spaces rows 13 px,
+  // less than a label's height); row 0 is shared with reform labels, which sit far enough left in time.
+  const epaBreaks = events
+    .filter((e) => e.kind === "series_break")
+    .sort((a, b) => a.year - b.year)
+    .map((e, i) => ({ year: e.year, label: `EPA ${e.year}`, row: i % 2 === 0 ? 2 : 0 }));
   const reform = (id, label, row = 0) => (evYear(id) ? [{ year: evYear(id), label, row }] : []);
 
   return (
