@@ -1,0 +1,76 @@
+{
+ "agent": "core",
+ "edges": [
+  {
+   "id": "E18_deficit_debt",
+   "from": "saldo_primario",
+   "to": "deuda_publica",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "identidad_deuda",
+    "unit": "pp de deuda por 1 pp de déficit primario",
+    "low": 1,
+    "central": 1,
+    "high": 1
+   },
+   "lag_years": 0,
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://economy-finance.ec.europa.eu/system/files/2024-03/ip271_en.pdf",
+     "title": "Debt Sustainability Monitor 2023 (Institutional Paper 271)",
+     "authors_year": "Comisión Europea (2024)",
+     "country": "UE (España incluida)",
+     "period": "proyección 2024-2034",
+     "method": "identidad de la dinámica de la deuda (saldo primario y efecto bola de nieve)",
+     "locator": "pág. 41",
+     "quote": "By 2027, the favourable impact of this differential – the ‘snowball effect’ – will therefore no longer be large enough",
+     "value_in_source": "deuda_t = deuda_{t-1}·(1+i)/(1+g) − saldo primario"
+    }
+   ],
+   "contrary_evidence": [],
+   "debate": null,
+   "derivation": "Identidad contable: la deuda de cada año es la del anterior multiplicada por (1 + tipo implícito)/(1 + crecimiento nominal) más el déficit primario, la misma que usa la Comisión.",
+   "note_es": "Contabilidad: cada euro de déficit primario se suma a la deuda, y la deuda crece además con el tipo de interés y se diluye con el crecimiento del PIB nominal."
+  },
+  {
+   "id": "E21_migration_pensions",
+   "from": "inmigracion_neta",
+   "to": "gasto_pensiones",
+   "sign": "-",
+   "layer": "contable",
+   "parameter": {
+    "name": "sensibilidad_migracion_2050",
+    "unit": "pp del PIB de gasto en pensiones en 2050 con un 33 % menos de inmigración",
+    "low": 1.4,
+    "central": 1.4,
+    "high": 1.4
+   },
+   "lag_years": [
+    5,
+    25
+   ],
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://economy-finance.ec.europa.eu/document/download/392994f2-c025-4066-bea8-f65cf4bcd411_en?filename=2024-ageing-report-country-fiche-Spain.pdf",
+     "title": "2024 Ageing Report. Country fiche for Spain",
+     "authors_year": "Comisión Europea, EPC y Ministerio de Economía (2024)",
+     "country": "España",
+     "period": "proyección 2022-2070",
+     "method": "escenarios de sensibilidad del Ageing Report (±33 % de inmigración no comunitaria)",
+     "locator": "pág. 36, tabla 20; pág. 37",
+     "quote": "a reduction in migration inflows has the opposite effect and leads to an increase of the public pension expenditure ratio of 1.4 pps in 2070",
+     "value_in_source": "Lower migration (-33%): +0,3 (2030), +0,8 (2040), +1,4 (2050) pp; Higher migration (+33%): -0,3, -0,7, -1,1 pp"
+    }
+   ],
+   "contrary_evidence": [],
+   "debate": null,
+   "derivation": "El simulador usa la serie anual de la sensibilidad oficial (anexo estadístico, hoja ESb) y le resta su valor de 2025, porque el escenario oficial arranca en 2023.",
+   "note_es": "Según el Ageing Report 2024, con un tercio menos de inmigración el gasto en pensiones sería 1,4 puntos de PIB mayor en 2050; con un tercio más, 1,1 puntos menor: más ocupados y más PIB."
+  }
+ ]
+}

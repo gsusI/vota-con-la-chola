@@ -1,0 +1,318 @@
+{
+ "agent": "wave_b",
+ "edges": [
+  {
+   "id": "E04_pension_irpf",
+   "from": "pension_bruta",
+   "to": "recaudacion_irpf",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "tipo_marginal_irpf_pension",
+    "unit": "fracción de cada euro extra de pensión",
+    "low": 0.19,
+    "central": 0.24,
+    "high": 0.3
+   },
+   "lag_years": [
+    0,
+    1
+   ],
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2006-20764",
+     "title": "Ley 35/2006, del IRPF (texto consolidado)",
+     "authors_year": "BOE (Ley 35/2006, versión vigente)",
+     "country": "España",
+     "period": "vigente 2026",
+     "method": "norma legal",
+     "locator": "art. 63.1 (escala general estatal)",
+     "quote": "A la base liquidable general se le aplicarán los tipos que se indican en la siguiente escala",
+     "value_in_source": "tramo 12.450-20.200 EUR: 12,00 %; 20.200-35.200 EUR: 15,00 %; hasta 12.450: 9,50 %"
+    },
+    {
+     "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2006-20764",
+     "title": "Ley 35/2006, del IRPF (texto consolidado)",
+     "authors_year": "BOE (Ley 35/2006, versión vigente)",
+     "country": "España",
+     "period": "vigente 2026",
+     "method": "norma legal",
+     "locator": "art. 20 (reducción por rendimientos del trabajo)",
+     "quote": "Los contribuyentes con rendimientos netos del trabajo inferiores a 19.747,5 euros siempre que no tengan rentas, excluidas las exentas, distintas de las del trabajo superiores a 6.500 euros",
+     "value_in_source": "reducción nula con rendimiento neto >= 19.747,5 EUR"
+    },
+    {
+     "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2006-20764",
+     "title": "Ley 35/2006, del IRPF (texto consolidado)",
+     "authors_year": "BOE (Ley 35/2006, versión vigente)",
+     "country": "España",
+     "period": "vigente 2026",
+     "method": "norma legal",
+     "locator": "art. 19.2.f (otros gastos deducibles)",
+     "quote": "En concepto de otros gastos distintos de los anteriores, 2.000 euros anuales.",
+     "value_in_source": "2.000 EUR"
+    }
+   ],
+   "contrary_evidence": [],
+   "debate": null,
+   "derivation": "Pensión 21.700 EUR: rendimiento neto 21.700 (sin cotizaciones) > 19.747,5, sin reducción del art. 20; base liquidable 21.700 - 2.000 = 19.700 EUR, tramo estatal 12 % (art. 63). Tramo autonómico supuesto 12 % (escala autonómica típica, NO verificada en una ley autonómica) -> 0,24; low 0,19 (9,5+9,5 pensiones bajas), high 0,30 (15+15, por encima de 20.200). El tipo efectivo medio sobre pensiones (AEAT declarantes) no se pudo verificar.",
+   "note_es": "Según la Ley del IRPF, una pensión media de unos 21.700 € anuales tributa en el tramo estatal del 12 %; con un tramo autonómico similar, cada euro extra paga unos 24 céntimos.",
+   "review": {
+    "verdict": "pass",
+    "evidence": "BOE Ley 35/2006: art. 63.1 escala estatal 9,5/12/15 % con tramos 12.450/20.200/35.200, art. 20 umbral 19.747,5 EUR y art. 19.2.f 2.000 EUR, tal como se citan; aritmética (base 19.700 -> 12 % estatal) correcta y el 12 % autonómico está declarado como supuesto en la derivación y en note_es."
+   }
+  },
+  {
+   "id": "E10_ssc_base",
+   "from": "tipo_cotizacion",
+   "to": "recaudacion_cotizaciones",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "base_cotizacion_pib",
+    "unit": "% del PIB recaudado por 1 pp de tipo de cotización",
+    "low": 0.28,
+    "central": 0.31,
+    "high": 0.34
+   },
+   "lag_years": 0,
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://revista.seg-social.es/tag/fondo-de-reserva",
+     "title": "El Fondo de Reserva de la Seguridad Social cerrará 2025 por encima de los 14.000 millones de euros (10/12/2025)",
+     "authors_year": "Revista Seguridad Social, Ministerio de Inclusión (2025)",
+     "country": "España",
+     "period": "enero-10 dic. 2025",
+     "method": "contabilidad de ingresos del Fondo de Reserva",
+     "locator": "noticia del 10/12/2025",
+     "quote": "de los que 3.970,31 provienen del Mecanismo de Equidad Intergeneracional (MEI)",
+     "value_in_source": "3.970,31 M EUR de MEI en 2025 (hasta 10/12)"
+    },
+    {
+     "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2023-6967",
+     "title": "Real Decreto-ley 2/2023 (texto consolidado)",
+     "authors_year": "BOE (2023)",
+     "country": "España",
+     "period": "2023-2050",
+     "method": "norma legal",
+     "locator": "disposición transitoria cuadragésima tercera de la LGSS, introducida por el artículo único, apartado cuarenta y tres",
+     "quote": "En el año 2025, será de 0,80 puntos porcentuales, de los que el 0,67 corresponderá a la empresa y el 0,13 al trabajador.",
+     "value_in_source": "0,80 pp en 2025"
+    },
+    {
+     "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/nama_10_gdp?geo=ES&unit=CP_MEUR&na_item=B1GQ",
+     "title": "Eurostat nama_10_gdp: PIB a precios corrientes (B1GQ, CP_MEUR), España",
+     "authors_year": "Eurostat (2026)",
+     "country": "España",
+     "period": "2010-2025",
+     "method": "cuentas nacionales SEC 2010",
+     "locator": "geo=ES, unit=CP_MEUR, na_item=B1GQ",
+     "quote": "ES B1GQ CP_MEUR: 2013 = 1025652.0; 2025 = 1690012.0",
+     "value_in_source": "PIB 2013 1.025.652 M EUR; 2025 1.690.012 M EUR"
+    }
+   ],
+   "contrary_evidence": [],
+   "debate": null,
+   "derivation": "1 pp sobre la base del MEI (todas las cotizaciones por jubilación) = 3.970,31 M / 0,80 = 4.963 M EUR = 0,294 % del PIB 2025 (1.690.012 M). La cifra cubre dotaciones hasta el 10/12/2025 (falta casi un mes y hay desfase de ingreso); anualizada x12/11 da 0,32 %. Central 0,31; rango 0,28-0,34.",
+   "note_es": "Según la Seguridad Social, el MEI (0,8 puntos en 2025) aportó 3.970 millones hasta el 10 de diciembre: cada punto de cotización sobre esa base equivale a cerca del 0,3 % del PIB.",
+   "review": {
+    "verdict": "fix",
+    "evidence": "Revista SS (10/12/2025) da 3.970,31 M de MEI, RDL 2/2023 fija 0,80 pp en 2025 y Eurostat da PIB 2025 = 1.690.012 M; 4.963 M = 0,294 % y x12/11 = 0,32 % correctos. El locator del RDL es el apartado cuarenta y tres del artículo único, no 'art. 1.43'."
+   }
+  },
+  {
+   "id": "E12_vat_yield",
+   "from": "tipo_iva_general",
+   "to": "recaudacion_iva",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "recaudacion_por_punto_iva",
+    "unit": "% del PIB por 1 pp del tipo general",
+    "low": 0.23,
+    "central": 0.28,
+    "high": 0.32
+   },
+   "lag_years": [
+    0,
+    1
+   ],
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://sede.agenciatributaria.gob.es/static_files/AEAT/Estudios/Estadisticas/Informes_Estadisticos/Informes_Anuales_de_Recaudacion_Tributaria/Ejercicio_2013/IART13_eu_es.pdf",
+     "title": "Informe Anual de Recaudación Tributaria 2013",
+     "authors_year": "Agencia Tributaria (2014)",
+     "country": "España",
+     "period": "2009-2013",
+     "method": "estimación oficial del impacto de cambios normativos",
+     "locator": "Cuadro 1.2, pág. 13 (pág. 15 del PDF), fila IVA",
+     "quote": "Elevación de tipos general y reducido y cambio productos 2.899 3.393 2.263 7.438",
+     "value_in_source": "2010: 2.899; 2011: 3.393; 2012: 2.263; 2013: 7.438 M EUR"
+    },
+    {
+     "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/nama_10_gdp?geo=ES&unit=CP_MEUR&na_item=B1GQ",
+     "title": "Eurostat nama_10_gdp: PIB a precios corrientes (B1GQ, CP_MEUR), España",
+     "authors_year": "Eurostat (2026)",
+     "country": "España",
+     "period": "2010-2025",
+     "method": "cuentas nacionales SEC 2010",
+     "locator": "geo=ES, unit=CP_MEUR, na_item=B1GQ",
+     "quote": "ES B1GQ CP_MEUR: 2013 = 1025652.0; 2025 = 1690012.0",
+     "value_in_source": "PIB 2013 1.025.652 M EUR; 2025 1.690.012 M EUR"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://sede.agenciatributaria.gob.es/static_files/AEAT/Estudios/Estadisticas/Informes_Estadisticos/Informes_Anuales_de_Recaudacion_Tributaria/Ejercicio_2013/IART13_eu_es.pdf",
+     "title": "Informe Anual de Recaudación Tributaria 2013 (pág. 8; pág. 10 del PDF)",
+     "finding": "La AEAT dice que el impacto positivo de la subida de tipos fue contrarrestado en gran parte por una nueva caída del gasto final sujeto a IVA en 2013; no separa un efecto de comportamiento."
+    }
+   ],
+   "debate": null,
+   "derivation": "Cifras incrementales por año: subida de 2010 (+2 general, +1 reducido) = 2.899+3.393 = 6.292 M; subida de 2012 (+3 general, +2 reducido y reclasificación) = 2.263+7.438 = 9.701 M. Resolviendo 2G+R=6.292 y 3G+2R=9.701 (sin reclasificación), G = 2.883 M por punto general = 0,28 % del PIB 2013 (1.025.652 M). Low 0,23 si la base reducida pesa más (R=0,6G en 2010); high 0,32 si los 9.701 M fueran solo del tipo general. Efecto de comportamiento no estimado por separado.",
+   "note_es": "Según la Agencia Tributaria, la subida del IVA de 2012 rindió unos 9.700 millones al año; repartida entre tipos, cada punto del tipo general equivale a cerca del 0,28 % del PIB.",
+   "review": {
+    "verdict": "fix",
+    "evidence": "AEAT IART 2013, Cuadro 1.2 (fila IVA 2.899/3.393/2.263/7.438) y PIB 2013 1.025.652 confirmados; sistema 2G+R=6.292, 3G+2R=9.701 da G=2.883 M = 0,28 % y extremos 0,236/0,315 correctos. El cuadro está en la pág. 15 del PDF = pág. 13 impresa (no 12) y la frase de contrary_evidence en la pág. 10 del PDF (8 impresa), no en la 7."
+   }
+  },
+  {
+   "id": "E13b_vat_basket",
+   "from": "tipo_iva_general",
+   "to": "ipc",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "cuota_iva_general",
+    "unit": "fracción del gasto de consumo (cesta del IPC) gravada al tipo general",
+    "low": 0.5,
+    "central": 0.6,
+    "high": 0.7
+   },
+   "lag_years": 0,
+   "grade": "C",
+   "spain_evidence": "parcial",
+   "sources": [
+    {
+     "url": "https://www.ine.es/daco/daco42/daco421/ipc0912.pdf",
+     "title": "Índices de Precios de Consumo. IPC Base 2011. Septiembre 2012 (nota de prensa)",
+     "authors_year": "INE (2012)",
+     "country": "España",
+     "period": "agosto-septiembre 2012",
+     "method": "IPCA frente a IPCA a impuestos constantes",
+     "locator": "pág. 1 (IPCA anual 3,5 %) y pág. 6 (variación mensual del IPCA 1,9 %; IPCA-IC -0,1 % mensual y 1,4 % anual)",
+     "quote": "Por su parte, la tasa anual en el mes de septiembre es del 1,4%, más de dos puntos por debajo de la del IPCA, debido al aumento del Impuesto sobre el Valor Añadido.",
+     "value_in_source": "sept. 2012: IPCA mensual 1,9 %, IPCA-IC -0,1 %; anual 3,5 % frente a 1,4 %"
+    },
+    {
+     "url": "https://sede.agenciatributaria.gob.es/static_files/AEAT/Estudios/Estadisticas/Informes_Estadisticos/Informes_Anuales_de_Recaudacion_Tributaria/Ejercicio_2013/IART13_eu_es.pdf",
+     "title": "Informe Anual de Recaudación Tributaria 2013",
+     "authors_year": "Agencia Tributaria (2014)",
+     "country": "España",
+     "period": "2010-2013",
+     "method": "impacto oficial de cambios normativos",
+     "locator": "Cuadro 1.2, fila IVA",
+     "quote": "Elevación de tipos general y reducido y cambio productos 2.899 3.393 2.263 7.438",
+     "value_in_source": "reparto implícito: 2.883 M por punto general y 526 M por punto reducido"
+    }
+   ],
+   "contrary_evidence": [],
+   "debate": null,
+   "derivation": "Efecto impositivo de sept. 2012 en el IPCA = 1,9 - (-0,1) = 2,0 pp. Con traslado completo, 2,0 = 2,54 s_g + 1,85 s_r (3/118 y 2/108). Con s_r = s_g/5,5 (cociente de bases G/R del cuadro AEAT) sale s_g = 0,69 (techo, pues la reclasificación de productos al 21 % también suma); con s_r = 0,2 sale 0,64; central 0,6, rango 0,5-0,7. No se ha verificado la ponderación oficial del IPC por tipo de IVA.",
+   "note_es": "Según el INE, la subida del IVA de septiembre de 2012 añadió unos 2 puntos al IPCA en un mes; de ahí se deduce que en torno al 60 % de la cesta tributa al tipo general (estimación, no dato oficial).",
+   "review": {
+    "verdict": "fix",
+    "evidence": "INE ipc0912: IPCA anual 3,5 % (pág. 1), variación mensual del IPCA 1,9 %, IPCA-IC mensual -0,1 % y anual 1,4 % (pág. 6); aritmética 2,54 s_g + 1,85 s_r = 2,0 -> 0,69/0,64 correcta y el carácter de estimación está dicho. El locator 'pág. 1 y tabla IPCA-IC' debe apuntar a la pág. 6, donde está la cita."
+   }
+  },
+  {
+   "id": "E19_mei_path",
+   "from": "mei",
+   "to": "recaudacion_cotizaciones",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "mei_tipo_2029",
+    "unit": "pp de la base de cotización",
+    "low": 1.2,
+    "central": 1.2,
+    "high": 1.2
+   },
+   "lag_years": 0,
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2023-6967",
+     "title": "Real Decreto-ley 2/2023 (texto consolidado)",
+     "authors_year": "BOE (2023)",
+     "country": "España",
+     "period": "2023-2050",
+     "method": "norma legal",
+     "locator": "disposición transitoria cuadragésima tercera; art. 127 bis LGSS",
+     "quote": "En el año 2029, será de 1,2 puntos porcentuales, de los que el 1,00 corresponderá a la empresa y el 0,2 al trabajador.",
+     "value_in_source": "2023 0,60; 2024 0,70; 2025 0,80; 2026 0,90; 2027 1,00; 2028 1,10; 2029-2050 1,2 pp"
+    },
+    {
+     "url": "https://revista.seg-social.es/tag/fondo-de-reserva",
+     "title": "El Fondo de Reserva de la Seguridad Social cerrará 2025 por encima de los 14.000 millones de euros (10/12/2025)",
+     "authors_year": "Revista Seguridad Social, Ministerio de Inclusión (2025)",
+     "country": "España",
+     "period": "enero-10 dic. 2025",
+     "method": "contabilidad de ingresos del Fondo de Reserva",
+     "locator": "noticia del 10/12/2025",
+     "quote": "de los que 3.970,31 provienen del Mecanismo de Equidad Intergeneracional (MEI)",
+     "value_in_source": "3.970,31 M EUR"
+    }
+   ],
+   "contrary_evidence": [],
+   "debate": null,
+   "derivation": "Escala legal: 0,60 pp (0,50 empresa/0,10 trabajador) en 2023, +0,10 pp al año hasta 1,2 pp (1,00/0,2) en 2029, constante hasta 2050; reparto ~5/6 empresa. Ingreso oficial: 3.970,31 M EUR en 2025 hasta el 10 de diciembre, con 0,80 pp.",
+   "note_es": "Según el Real Decreto-ley 2/2023, el MEI sube 0,1 puntos al año hasta 1,2 puntos en 2029 (1 a cargo de la empresa y 0,2 del trabajador) y se mantiene hasta 2050."
+  },
+  {
+   "id": "B01_revaluation_2023_cost",
+   "from": "revalorizacion_2023",
+   "to": "gasto_pensiones",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "coste_revalorizacion_2023",
+    "unit": "millones de euros, primer año",
+    "low": 13600,
+    "central": 13600,
+    "high": 13600
+   },
+   "lag_years": 0,
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://revista.seg-social.es/-/20221227-revalorizaci%C3%B3n-pensiones",
+     "title": "El Gobierno aprueba la revalorización de 11,8 millones de pensiones y prestaciones en 2023 (27/12/2022)",
+     "authors_year": "Revista Seguridad Social, Ministerio de Inclusión (2022)",
+     "country": "España",
+     "period": "2023",
+     "method": "estimación oficial de coste (Consejo de Ministros)",
+     "locator": "noticia del 27/12/2022",
+     "quote": "El coste de la revalorización al 8,5%, estimado para el conjunto de 2023, es de 13.600 millones de euros.",
+     "value_in_source": "13.600 M EUR; 14.500 M con la subida del 15 % de no contributivas e IMV"
+    }
+   ],
+   "contrary_evidence": [],
+   "debate": null,
+   "derivation": "Coste oficial del 8,5 %: 13.600 M EUR en 2023; con el 15 % de pensiones no contributivas e IMV, 14.500 M. Gasto implícito al que se aplica: 13.600 / 0,085 = 160.000 M EUR (no publicado en la nota; derivado).",
+   "note_es": "Según el Gobierno, revalorizar las pensiones un 8,5 % en 2023 costaba 13.600 millones; con la subida del 15 % de las no contributivas y el IMV, 14.500 millones.",
+   "review": {
+    "verdict": "pass",
+    "evidence": "La noticia de la Revista Seguridad Social (27/12/2022) dice literalmente 13.600 M EUR para el 8,5 % en 2023 y 14.500 M con no contributivas e IMV; derivación 13.600/0,085 = 160.000 M correcta."
+   }
+  }
+ ]
+}

@@ -4817,6 +4817,7 @@ placsp-launch-verify:
 site-build-frozen:
   just placsp-launch-verify
   node tests/test_spending_decision_dates.mjs
+  node --test ui/site/app/visualizaciones/sistema/engine.test.mjs
   node scripts/build_spending_backend.mjs /tmp/vclc-spending-build-validation --plan-only
   cp /tmp/vclc-spending-build-validation/release.json infra/cloudflare/spending-api/src/release.json
   node tests/test_spending_backend.mjs /tmp/vclc-spending-build-validation/verify.db --published-release
@@ -6893,6 +6894,16 @@ housing-refresh *args:
 education-refresh *args:
   python3 scripts/ingest_education_es.py {{args}}
   python3 scripts/export_public_viz_education.py
+
+# Policy simulator (/visualizaciones/sistema/), slice 0 pensions + public finances: validate and merge the edge cards
+# (etl/data/manual/system_model/edges, reviewer corrections applied with `scripts/system_model_kit.py apply-reviews`),
+# export the model on the Ageing Report 2024 baseline (raw cache) + 2025 accounts (public-finance-es.db) + typical cases
+# from carga-fiscal.json, then run the engine tests and backtests (Node, same code as the browser).
+system-model-refresh:
+  python3 scripts/system_model_kit.py validate etl/data/manual/system_model/edges/*.json
+  python3 scripts/system_model_kit.py merge
+  python3 scripts/export_public_viz_system.py
+  node --test ui/site/app/visualizaciones/sistema/engine.test.mjs
 
 # Spain health (/visualizaciones/sanidad/): fetch Eurostat, INE, OCDE Health Statistics (via DBnomics), Banco Mundial,
 # Our World in Data and the Barómetro Sanitario xlsx into the raw cache, check the cited Ministerio de Sanidad PDFs

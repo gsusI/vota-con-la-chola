@@ -1,0 +1,12 @@
+{
+ "id": "E13b_vat_basket",
+ "verdict": "fix",
+ "source_ok": false,
+ "value_ok": true,
+ "grade_ok": true,
+ "wording_ok": true,
+ "evidence": "INE ipc0912: IPCA anual 3,5 % (pág. 1), variación mensual del IPCA 1,9 %, IPCA-IC mensual -0,1 % y anual 1,4 % (pág. 6); aritmética 2,54 s_g + 1,85 s_r = 2,0 -> 0,69/0,64 correcta y el carácter de estimación está dicho. El locator 'pág. 1 y tabla IPCA-IC' debe apuntar a la pág. 6, donde está la cita.",
+ "corrections": {
+  "sources.0.locator": "pág. 1 (IPCA anual 3,5 %) y pág. 6 (variación mensual del IPCA 1,9 %; IPCA-IC -0,1 % mensual y 1,4 % anual)"
+ }
+}

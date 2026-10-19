@@ -1,0 +1,22 @@
+{
+ "id": "E02_retirement_cohort",
+ "verdict": "fix",
+ "source_ok": false,
+ "value_ok": true,
+ "grade_ok": true,
+ "wording_ok": true,
+ "evidence": "La nota de La Moncloa (26/8/2025) confirma 215.971 altas hasta julio, 1.613,3, 1.312,9, 1.722,5 EUR y 9,4 M de personas; pero la cifra anual 375.277 que usan la derivación y note_es no está en las fuentes citadas (viene de la ficha del catálogo INSS EVOMOD), así que hay que citarla.",
+ "corrections": {
+  "sources.2": {
+   "url": "https://www.seg-social.es/wps/portal/wss/internet/EstadisticasPresupuestosEstudios/Estadisticas/EST23/EST44",
+   "title": "Evolución de las altas iniciales de jubilación por modalidades (EVOMOD202608)",
+   "authors_year": "INSS (2026)",
+   "country": "España",
+   "period": "2025",
+   "method": "registro administrativo de altas iniciales de jubilación",
+   "locator": "año 2025, total de altas de jubilación (ficha del catálogo eje-proteccion-social--ss-2025-altas-jubilacion)",
+   "quote": "En 2025 hubo 375.277 altas de jubilación",
+   "value_in_source": "375.277 altas de jubilación en 2025"
+  }
+ }
+}

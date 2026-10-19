@@ -1,0 +1,564 @@
+/* /visualizaciones/sistema/: simulator controls, causal map, fan charts, consolidated closure figure. */
+.viz .sim {
+  display: grid;
+  gap: 18px;
+}
+
+.viz .sim__label {
+  margin: 0 0 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--viz-ink-2);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.viz .sim__panel {
+  display: grid;
+  gap: 16px 28px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  padding: 18px 20px;
+  background: rgba(42, 120, 214, 0.06);
+  border-radius: 14px;
+}
+
+.viz .sim__group {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+}
+
+.viz .sim__group h3 {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.viz .sim__slider {
+  display: grid;
+  gap: 4px;
+}
+
+.viz .sim__sliderLabel {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 0.88rem;
+}
+
+.viz .sim__sliderLabel strong {
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.viz .sim__slider input[type="range"] {
+  width: 100%;
+  accent-color: var(--viz-s1);
+}
+
+.viz .sim__hint,
+.viz .sim__muted {
+  font-size: 0.8rem;
+  color: var(--viz-muted);
+  line-height: 1.45;
+}
+
+.viz p.sim__muted,
+.viz p.sim__hint {
+  margin: 0;
+}
+
+.viz .sim__seg {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+}
+
+.viz .sim__seg legend {
+  font-size: 0.88rem;
+  padding: 0;
+  margin-bottom: 6px;
+}
+
+.viz .sim__seg > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.viz .sim__seg label {
+  position: relative;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--viz-surface);
+  box-shadow: inset 0 0 0 1px var(--viz-axis);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.viz .sim__seg label.is-on {
+  background: var(--viz-s1);
+  color: #fff;
+  box-shadow: none;
+}
+
+.viz .sim__seg input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.viz .sim__seg label:focus-within {
+  outline: 2px solid var(--viz-s1);
+  outline-offset: 2px;
+}
+
+.viz .sim__select {
+  display: grid;
+  gap: 4px;
+  font-size: 0.88rem;
+}
+
+.viz .sim__select select {
+  width: 100%;
+  min-height: 36px;
+  font: inherit;
+  font-size: 0.85rem;
+}
+
+.viz .sim__reset {
+  justify-self: start;
+  font: inherit;
+  font-size: 0.85rem;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--viz-axis);
+  background: var(--viz-surface);
+  cursor: pointer;
+}
+
+.viz .sim__callout {
+  margin: 0;
+  max-width: var(--viz-measure);
+  color: var(--viz-ink-2);
+}
+
+.viz .sim__charts {
+  display: grid;
+  gap: 18px 28px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.viz .sim__charts h3 {
+  margin: 0 0 4px;
+}
+
+.viz .sim__people {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.viz .sim__person {
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--tone) 9%, transparent);
+  display: grid;
+  gap: 6px;
+  align-content: start;
+}
+
+.viz .sim__person h3 {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.viz .sim__personValue {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--viz-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.viz .sim__personValue small {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--viz-ink-2);
+}
+
+.viz .sim__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.86rem;
+}
+
+.viz .sim__table th,
+.viz .sim__table td {
+  text-align: left;
+  vertical-align: top;
+  padding: 8px 10px 8px 0;
+  border-bottom: 1px solid var(--viz-grid);
+}
+
+.viz .sim__table td {
+  font-variant-numeric: tabular-nums;
+}
+
+.viz .sim__table thead th {
+  font-weight: 600;
+  color: var(--viz-ink-2);
+}
+
+.viz .sim__table--votes td {
+  text-align: center;
+  padding-right: 4px;
+  min-width: 46px;
+  font-size: 0.78rem;
+}
+
+.viz .sim__table--votes tbody th {
+  min-width: 260px;
+}
+
+.viz .vote--S {
+  background: rgba(27, 175, 122, 0.16);
+}
+
+.viz .vote--N {
+  background: rgba(235, 104, 52, 0.16);
+}
+
+.viz .vote--A {
+  background: rgba(237, 161, 0, 0.14);
+}
+
+.viz .sim__votes + .sim__votes {
+  margin-top: 14px;
+}
+
+.viz .sim__catalog {
+  max-width: 100%;
+}
+
+/* Causal map */
+.viz .cmap svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.viz .cmap__link path {
+  stroke: var(--viz-axis);
+  stroke-width: 1.4;
+}
+
+.viz .cmap__link.is-active path {
+  stroke: var(--viz-s1);
+  stroke-width: 2.4;
+}
+
+.viz .cmap__link.is-selected path {
+  stroke: var(--viz-s2);
+  stroke-width: 3;
+}
+
+.viz .cmap__link[role="button"] {
+  cursor: pointer;
+}
+
+.viz .cmap__link[role="button"]:focus-visible path {
+  stroke: var(--viz-s2);
+  outline: none;
+}
+
+.viz .cmap__link .cmap__hit {
+  stroke: transparent;
+  stroke-width: 16;
+}
+
+.viz .cmap__arrowHead {
+  fill: var(--viz-ink-2);
+}
+
+.viz .cmap__sign {
+  font-size: 15px;
+  font-weight: 700;
+  fill: var(--viz-ink-2);
+}
+
+.viz .cmap__loop {
+  font-size: 15px;
+  font-weight: 700;
+  fill: var(--viz-s2);
+}
+
+.viz .cmap__node rect {
+  fill: var(--viz-surface);
+  stroke: var(--viz-axis);
+  stroke-width: 1.2;
+}
+
+.viz .cmap__node--lever rect {
+  fill: #eef4fc;
+}
+
+.viz .cmap__node--context rect {
+  fill: #f4f3ef;
+  stroke-dasharray: 4 3;
+}
+
+.viz .cmap__node--person rect {
+  stroke-width: 2;
+}
+
+.viz .cmap__node.is-up rect {
+  fill: #e3f0fd;
+  stroke: var(--viz-s1);
+}
+
+.viz .cmap__node.is-down rect {
+  fill: #fdebe3;
+  stroke: var(--viz-s2);
+}
+
+.viz .cmap__label {
+  font-size: 14px;
+  font-weight: 600;
+  fill: var(--viz-ink);
+}
+
+.viz .cmap__value {
+  font-size: 13px;
+  fill: var(--viz-ink-2);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Edge card */
+.viz .edgeCard {
+  display: grid;
+  gap: 6px;
+  max-width: var(--viz-measure);
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: rgba(23, 25, 31, 0.035);
+}
+
+.viz .edgeCard header {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.viz .edgeCard__grade,
+.viz .edgeCard__layer {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--viz-surface);
+  box-shadow: inset 0 0 0 1px var(--viz-axis);
+}
+
+.viz .edgeCard__grade--A {
+  background: rgba(27, 175, 122, 0.16);
+}
+
+.viz .edgeCard__grade--B {
+  background: rgba(42, 120, 214, 0.14);
+}
+
+.viz .edgeCard__grade--C,
+.viz .edgeCard__grade--D {
+  background: rgba(237, 161, 0, 0.16);
+}
+
+.viz .edgeCard p {
+  margin: 0;
+  line-height: 1.45;
+}
+
+.viz .edgeCard__note {
+  font-weight: 600;
+}
+
+.viz .edgeCard__sub {
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.viz .edgeCard__sources {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 0.82rem;
+}
+
+/* Fan chart */
+.viz .fanChart svg {
+  display: block;
+}
+
+.viz .fanChart__grid {
+  stroke: var(--viz-grid);
+}
+
+.viz .fanChart__zero {
+  stroke: var(--viz-axis);
+  stroke-width: 1.4;
+}
+
+.viz .fanChart__tick {
+  font-size: 11px;
+  fill: var(--viz-muted);
+}
+
+.viz .fanChart__hover {
+  stroke: var(--viz-ink-2);
+  stroke-dasharray: 2 3;
+}
+
+.viz .fanChart__readout {
+  margin: 4px 0 0;
+  min-height: 2.6em;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  font-size: 0.8rem;
+  color: var(--viz-ink-2);
+  font-variant-numeric: tabular-nums;
+}
+
+.viz .fanChart__readout span[style] {
+  border-left: 3px solid var(--key);
+  padding-left: 6px;
+}
+
+.viz .fanChart__hint {
+  color: var(--viz-muted);
+}
+
+/* Consolidated figure: three closures x four outcomes */
+.viz .closureFig {
+  display: grid;
+  gap: 18px 28px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.viz .closureFig__panel h3 {
+  margin: 0 0 8px;
+  font-size: 0.92rem;
+}
+
+.viz .closureFig__row {
+  display: grid;
+  grid-template-columns: 7.5rem 1fr 7.5rem;
+  gap: 10px;
+  align-items: center;
+  min-height: 38px;
+}
+
+.viz .closureFig__label {
+  font-size: 0.85rem;
+}
+
+.viz .closureFig__track {
+  position: relative;
+  height: 22px;
+}
+
+.viz .closureFig__zero {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--viz-ink-2);
+}
+
+.viz .closureFig__range {
+  position: absolute;
+  top: 9px;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(42, 120, 214, 0.35);
+}
+
+.viz .closureFig__dot {
+  position: absolute;
+  top: 5px;
+  width: 12px;
+  height: 12px;
+  margin-left: -6px;
+  border-radius: 50%;
+  background: var(--viz-s1);
+}
+
+.viz .closureFig__value {
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  display: grid;
+}
+
+.viz .closureFig__value small {
+  font-weight: 400;
+  font-size: 0.72rem;
+  color: var(--viz-muted);
+}
+
+@media (max-width: 520px) {
+  .viz .closureFig__row {
+    grid-template-columns: 6.2rem 1fr 6.4rem;
+    gap: 6px;
+  }
+  .viz .sim__panel {
+    padding: 14px;
+  }
+}
+
+.viz .cmap__swipe {
+  display: none;
+  margin: 4px 0 0;
+  font-size: 0.78rem;
+  color: var(--viz-muted);
+}
+
+.viz .cmap__chain {
+  margin-top: 8px;
+  font-size: 0.84rem;
+}
+
+.viz .cmap__chain summary {
+  cursor: pointer;
+  color: var(--viz-ink-2);
+}
+
+.viz .cmap__chain ul {
+  margin: 6px 0 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 3px;
+}
+
+.viz .cmap__cardLink {
+  font: inherit;
+  font-size: 0.78rem;
+  padding: 0 6px;
+  border: 1px solid var(--viz-axis);
+  border-radius: 999px;
+  background: var(--viz-surface);
+  cursor: pointer;
+}
+
+@media (max-width: 700px) {
+  .viz .cmap {
+    overflow-x: auto;
+  }
+  .viz .cmap svg {
+    min-width: 760px;
+  }
+  .viz .cmap__swipe {
+    display: block;
+  }
+}

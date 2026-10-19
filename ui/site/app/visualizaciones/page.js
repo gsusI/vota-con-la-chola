@@ -2,6 +2,7 @@ import Link from "next/link";
 import { readPublicJson } from "../static-snapshot.mjs";
 import { getDatasetsForSection, getSectionById, withBasePath } from "../siteCatalog.mjs";
 import MiniChart from "./components/MiniChart";
+import { DEFAULT_LEVERS, simulate } from "./sistema/engine.mjs";
 
 export const metadata = {
   title: "Visualizaciones de datos públicos | Vota Con La Chola",
@@ -154,7 +155,35 @@ function buildStories() {
       sources: [{ label: "Our World in Data (HMD)", href: health.sources.owid_grapher.page, retrieved: day(health.sources.owid_grapher) }],
       also: "Gasto sanitario público frente a Europa, listas de espera del SNS con sus rupturas, médicos por habitante y pago de bolsillo.",
     },
+    simulatorStory(),
   ];
+}
+
+// The simulator's preview: official baseline against the same lever (+1 pp a year over CPI) paid with debt.
+function simulatorStory() {
+  const model = load("sistema");
+  const run = simulate(model, { ...DEFAULT_LEVERS, reval: 1 });
+  const end = model.years.length - 1;
+  const pts = (values) => model.years.map((year, i) => ({ year, value: Math.round(values[i] * 100) / 100 }));
+  return {
+    href: "/visualizaciones/sistema/",
+    topic: "Simulador",
+    title: `Subir las pensiones un punto sobre el IPC suma ${num(run.debt_dev_pp[end], 0)} puntos de deuda en 2050 si se paga con deuda`,
+    dek: `Gasto en pensiones con la ley actual (Ageing Report 2024) y con una revalorización de un punto más que el IPC desde ${model.policy_start}. En la página: el mismo cambio pagado con cotizaciones o con IVA, y qué les pasa a dos casos tipo.`,
+    chart: {
+      series: [
+        { id: "base", color: C.ref, endLabel: "Ley actual", points: pts(model.baseline.pension_pct) },
+        { id: "scen", color: C.blue, emphasis: true, endLabel: "+1 punto", points: pts(run.pension_pct) },
+      ],
+      xMin: model.years[0],
+      xMax: model.years[end],
+      yMax: Math.ceil(Math.max(...run.pension_pct) / 5) * 5,
+      ariaLabel: "Gasto en pensiones públicas en % del PIB, ley actual y revalorización de un punto sobre el IPC",
+    },
+    unitNote: "% del PIB",
+    sources: [{ label: "Comisión Europea, Ageing Report 2024", href: model.sources.ageing_report.page, retrieved: model.sources.ageing_report.retrieved_at }],
+    also: "Mapa causal con 24 fichas de evidencia, edad de jubilación, cotizaciones, quién paga según la financiación y cómo votó cada partido.",
+  };
 }
 
 const PRINCIPLES = [

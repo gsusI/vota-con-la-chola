@@ -354,6 +354,12 @@ export const siteSections = [
         href: "/visualizaciones/sanidad/",
         cta: "Abrir visualización",
       },
+      {
+        title: "Simulador: si se suben las pensiones, ¿quién lo paga?",
+        note: "Mueve la revalorización, la edad de jubilación o las cotizaciones y mira cómo se propaga a la deuda, el empleo y dos casos tipo, según se pague con deuda, cotizaciones o IVA.",
+        href: "/visualizaciones/sistema/",
+        cta: "Abrir simulador",
+      },
     ],
     surfaces: [
       {
@@ -380,6 +386,11 @@ export const siteSections = [
         title: "Esperanza de vida, gasto y listas de espera",
         href: "/visualizaciones/sanidad/",
         note: "Ministerio de Sanidad (SISLE-SNS, EGSP), INE, Eurostat, OCDE y Banco Mundial, con rupturas de serie y procedencia por gráfico.",
+      },
+      {
+        title: "Simulador de pensiones y cuentas públicas",
+        href: "/visualizaciones/sistema/",
+        note: "Modelo sobre la línea base del Ageing Report 2024, con 24 fichas de relaciones causales con fuente, rango y revisión de calidad.",
       },
     ],
   },
@@ -533,6 +544,22 @@ export const datasetCatalog = [
     label: "Esperanza de vida, gasto y listas de espera (JSON con procedencia)",
     path: "/visualizaciones/data/sanidad.json",
     note: "Mismas series con URL, fecha de consulta y SHA-256 de cada fuente; rupturas de serie y rectificaciones de las listas de espera marcadas.",
+    confidence: "Publicado",
+  },
+  {
+    id: "viz-sistema",
+    sectionId: "visualizaciones",
+    label: "Simulador de pensiones: línea base (CSV)",
+    path: "/visualizaciones/data/sistema.csv",
+    note: "Línea base 2025-2050: gasto en pensiones, pensionistas, empleo, crecimiento, tipos, deuda y sensibilidades de inmigración del Ageing Report 2024.",
+    confidence: "Publicado",
+  },
+  {
+    id: "viz-sistema-json",
+    sectionId: "visualizaciones",
+    label: "Simulador de pensiones: modelo completo (JSON con procedencia)",
+    path: "/visualizaciones/data/sistema.json",
+    note: "Línea base, parámetros con rango, fichas de las relaciones con fuente y revisión, casos tipo, votaciones enlazadas y SHA-256 de cada fuente.",
     confidence: "Publicado",
   },
   {

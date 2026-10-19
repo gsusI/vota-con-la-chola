@@ -1,0 +1,19 @@
+{
+ "id": "E06_transfer_multiplier",
+ "verdict": "fix",
+ "source_ok": true,
+ "value_ok": false,
+ "grade_ok": true,
+ "wording_ok": false,
+ "evidence": "BdE DT 1712 pág. 25 da por componente: prestaciones de la Seguridad Social 0,8 en el impacto (más persistente) y cotizaciones 1,0 (se diluye pronto); el 0,5 de pág. 27 es el multiplicador compuesto de ingresos netos/impuestos, no el de transferencias. DT 1408 Tabla 6 (pág. 29) y la cita de pág. 31 sobre el signo contrario están bien.",
+ "corrections": {
+  "parameter.central": 0.8,
+  "parameter.low": 0.5,
+  "parameter.high": 1.0,
+  "sources.0.locator": "pág. 25 (resultados por componente), pág. 27 y conclusiones pág. 32",
+  "sources.0.quote": "Multipliers for social security components are higher on impact: 1.0 for revenues and 0.8 for expenditures.",
+  "sources.0.value_in_source": "prestaciones de la Seguridad Social 0,8 en el impacto (efecto algo más persistente); cotizaciones 1,0 en el impacto (se diluye pronto); impuestos menores y no significativos tras el impacto; ingresos netos compuestos en torno a 0,5",
+  "derivation": "Multiplicador de transferencias: 0,8 en el impacto para prestaciones de la Seguridad Social en Alemania (DT 1712, pág. 25), usado como aproximación al primer año porque su efecto es algo más persistente; bajo 0,5 (multiplicador compuesto de ingresos netos), alto 1,0. Impuestos/cotizaciones: cotizaciones 1,0 en el impacto pero se diluyen pronto, impuestos no significativos tras el impacto; central 0,5 (compuesto), rango 0,1-1,0. Aplicado a España, economía de apertura parecida; el SVAR español no identifica bien los choques de ingresos (signo contrario). La persistencia (0,5; 0,3-0,8) es un supuesto no verificado en una fuente: el gasto en España mantiene el efecto acumulado entre 4 y 8 trimestres (2,12 y 2,06, DT 1408 Tabla 6), pero no hay estimación directa del decaimiento para transferencias.",
+  "note_es": "Según un estudio para Alemania publicado por el Banco de España (Gechert, Paetz y Villanueva, 2017), en el trimestre del cambio cada euro de prestaciones de la Seguridad Social movió el PIB unos 0,8 euros y cada euro de cotizaciones alrededor de 1 euro, un efecto que se diluye pronto; el conjunto de ingresos netos, unos 0,5. Para España no hay estimación fiable de ingresos."
+ }
+}

@@ -1,0 +1,267 @@
+{
+ "agent": "pilot",
+ "edges": [
+  {
+   "id": "E01_pension_turnover",
+   "from": "revalorizacion_real",
+   "to": "pension_media",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "lambda_renovacion",
+    "unit": "fracción del stock de pensiones por año",
+    "low": 0.044,
+    "central": 0.059,
+    "high": 0.061
+   },
+   "lag_years": 1,
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://www.bde.es/webbde/es/estadis/infoest/a2420.pdf",
+     "title": "Boletín Estadístico, cuadro 24.20 Pensiones en vigor (Sistema de Seguridad Social)",
+     "authors_year": "Banco de España (2026), con datos del Ministerio de Trabajo y Economía Social",
+     "country": "España",
+     "period": "2022-2024 (medias mensuales)",
+     "method": "registro administrativo de pensiones contributivas: en vigor, altas iniciales y bajas",
+     "locator": "cuadro 24.20, filas 22 M, 23 M y 24 M, columnas 1-3",
+     "quote": "24.20 Pensiones en vigor ... Miles de pensiones (primer día de cada mes) ... 22 M 9 943 50 42 ... 23 M 10 052 49 37 ... 24 M 10 189 52 38",
+     "value_in_source": "en vigor 9.943/10.052/10.189 mil; altas iniciales 50/49/52 mil al mes; bajas 42/37/38 mil al mes"
+    }
+   ],
+   "contrary_evidence": [],
+   "debate": null,
+   "derivation": "Altas anuales = 12 x media mensual: 600, 588 y 624 mil sobre 9,94-10,19 millones en vigor, 5,85-6,12 % al año; bajas/stock 4,4-5,1 %. Con supervivencia (1-b) y entradas a, la parte nueva del stock es 1-(1-b)/(1-b+a) = 5,8-6,0 %: central 0,059, bajo 0,045 (solo bajas, 2023), alto 0,061 (altas 2024). Medias mensuales redondeadas a miles.",
+   "note_es": "Según el Banco de España (datos del Ministerio de Trabajo), en 2022-2024 entraron cada año unas 600.000 pensiones contributivas nuevas, cerca del 6 % de los 10 millones en vigor.",
+   "review": {
+    "verdict": "fix",
+    "evidence": "BdE cuadro 24.20 confirma 22 M 9.943/50/42, 23 M 10.052/49/37, 24 M 10.189/52/38; altas 5,85-6,12 % y fórmula 5,8-6,0 % correctas, pero el bajo 'solo bajas, 2023' es 444/10.052 = 0,044, no 0,045."
+   }
+  },
+  {
+   "id": "E08_ssc_incidence",
+   "from": "cotizacion_empleador",
+   "to": "salario_bruto",
+   "sign": "-",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "traslado_cotizacion_salario",
+    "unit": "fracción del aumento de cotización empresarial que acaba en menor salario, largo plazo",
+    "low": 0.0,
+    "central": 0.5,
+    "high": 1.0
+   },
+   "lag_years": [
+    2,
+    8
+   ],
+   "grade": "B",
+   "spain_evidence": "no",
+   "sources": [
+    {
+     "url": "https://docs.iza.org/dp12502.pdf",
+     "title": "Does Tax-Benefit Linkage Matter for the Incidence of Social Security Contributions?",
+     "authors_year": "Bozio, Breda y Grenet (2019), IZA DP 12502",
+     "country": "Francia (+ meta-análisis internacional)",
+     "period": "tres reformas francesas de cotizaciones empresariales (ver sección 2 del documento)",
+     "method": "diferencias en diferencias sobre reformas de cotizaciones + meta-análisis de la literatura",
+     "locator": "pág. 7 (introducción) y pág. 30 (conclusión)",
+     "quote": "We find an average pass-through rate of 103 percent for SSCs with strong tax-benefit linkage, compared to an average pass-through of 15 percent for SSCs with weak tax-benefit linkage.",
+     "value_in_source": "1,03 (vínculo fuerte) / 0,15 (vínculo débil)"
+    },
+    {
+     "url": "https://www.ifn.se/media/myddv1k0/2019-saez-schoefer-seim-payroll-taxes-firm-behavior-and-rent-sharing.pdf",
+     "title": "Payroll Taxes, Firm Behavior, and Rent Sharing: Evidence from a Young Workers' Tax Cut in Sweden",
+     "authors_year": "Saez, Schoefer y Seim (2019), American Economic Review 109(5)",
+     "country": "Suecia",
+     "period": "reforma de rebaja para jóvenes de 2007 (ver sección I del artículo)",
+     "method": "diferencias en diferencias por cohorte con datos administrativos",
+     "locator": "pág. 1, resumen",
+     "quote": "We find no effect on net-of-tax wages of young treated workers relative to slightly older untreated workers, and a 2–3 percentage point increase in youth employment.",
+     "value_in_source": "0 (sin efecto en salario neto)"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://www.ifn.se/media/myddv1k0/2019-saez-schoefer-seim-payroll-taxes-firm-behavior-and-rent-sharing.pdf",
+     "title": "Saez, Schoefer y Seim (2019), introducción",
+     "finding": "Recuerdan que la visión canónica supone que la cotización empresarial recae entera en el salario de mercado del trabajador; en su caso las empresas se quedan la rebaja y la reparten con toda la plantilla."
+    }
+   ],
+   "debate": {
+    "id": "incidencia_cotizacion_empleador",
+    "schools": [
+     {
+      "label": "Traslado pleno al salario cuando la cotización da derecho a prestación visible",
+      "central": 1.03,
+      "source_index": 0
+     },
+     {
+      "label": "Traslado escaso cuando la cotización no tiene vínculo con prestación",
+      "central": 0.15,
+      "source_index": 0
+     },
+     {
+      "label": "Sin traslado al salario del grupo afectado (rebaja sueca para jóvenes)",
+      "central": 0.0,
+      "source_index": 1
+     }
+    ]
+   },
+   "derivation": "Bajo 0 (Saez et al.) y alto 1,03 redondeado a 1,0 (Bozio et al., vínculo fuerte). El central 0,5 es un juicio intermedio: la cotización empresarial española financia pensiones contributivas con bases topadas, vínculo parcial; no hay estimación española verificada.",
+   "note_es": "Según una revisión de 21 estimaciones (Bozio, Breda y Grenet), la cotización empresarial se trasladó de media al salario en un 103 % cuando daba derecho a una prestación clara y en un 15 % cuando ese vínculo era débil o nulo; en una rebaja sueca de cotizaciones para jóvenes, el salario no cambió (Saez, Schoefer y Seim).",
+   "review": {
+    "verdict": "fix",
+    "evidence": "IZA DP 12502 pág. 7 y 30 (103 % vínculo fuerte, 15 % débil) y Saez et al. pág. 1 (sin efecto en salario neto) confirmados; pero el 103/15 % es la media de un meta-análisis de 21 estimaciones internacionales, no un resultado francés como dice note_es."
+   }
+  },
+  {
+   "id": "E09_labour_demand",
+   "from": "coste_laboral",
+   "to": "empleo",
+   "sign": "-",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "elasticidad_empleo_coste",
+    "unit": "% de empleo por 1 % de coste laboral, largo plazo",
+    "low": -0.446,
+    "central": -0.246,
+    "high": -0.072
+   },
+   "lag_years": [
+    2,
+    5
+   ],
+   "grade": "B",
+   "spain_evidence": "no",
+   "sources": [
+    {
+     "url": "https://docs.iza.org/dp7958.pdf",
+     "title": "The Own-Wage Elasticity of Labor Demand: A Meta-Regression Analysis",
+     "authors_year": "Lichter, Peichl y Siegloch (2014), IZA DP 7958; European Economic Review (2015)",
+     "country": "internacional (meta-análisis)",
+     "period": "estudios publicados hasta 2014",
+     "method": "meta-regresión de estimaciones publicadas con corrección de sesgo de publicación",
+     "locator": "pág. 22, conclusión",
+     "quote": "the long-run, constant-output elasticity obtained from a structural-form model using administrative panel data at the firm level ... is -0.246, bracketed by the interval [-0.072;-0.446]",
+     "value_in_source": "-0,246 [-0,446; -0,072]"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://docs.iza.org/dp7958.pdf",
+     "title": "Lichter, Peichl y Siegloch, media muestral",
+     "finding": "La media bruta de las estimaciones publicadas es -0,508 (mediana -0,386); los autores la consideran inflada por sesgo de publicación."
+    }
+   ],
+   "debate": null,
+   "derivation": "Central y rango tomados directamente de la estimación preferida (-0,246) y su intervalo [-0,446; -0,072]. Es elasticidad a producción constante: la total (con efecto escala) sería mayor en valor absoluto, por eso la media bruta -0,51 queda como evidencia contraria.",
+   "note_es": "Según un meta-análisis de Lichter, Peichl y Siegloch, un 1 % más de coste laboral se asocia a largo plazo con un 0,25 % menos de empleo, con un rango de 0,07 a 0,45 %.",
+   "review": {
+    "verdict": "pass",
+    "evidence": "IZA DP 7958 pág. 22: -0,246 [-0,072; -0,446] a producción constante; pág. 7 media -0,508 y mediana -0,386, como en contrary_evidence. note_es correcta (podría añadir 'a producción constante', no obligatorio)."
+   }
+  },
+  {
+   "id": "E13_vat_passthrough",
+   "from": "tipo_iva_general",
+   "to": "ipc",
+   "sign": "+",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "traslado_iva_precios",
+    "unit": "fracción del cambio de tipo trasladada a precios de consumo",
+    "low": 0.67,
+    "central": 1.0,
+    "high": 1.39
+   },
+   "lag_years": [
+    0,
+    1
+   ],
+   "grade": "B",
+   "spain_evidence": "parcial",
+   "sources": [
+    {
+     "url": "https://www.cesifo.org/DocDL/cesifo1_wp5531.pdf",
+     "title": "Estimating VAT Pass Through",
+     "authors_year": "Benedek, De Mooij, Keen y Wingender (2015), CESifo WP 5531 (publicado en Int Tax Public Finance 2020)",
+     "country": "17 países de la zona euro, España incluida",
+     "period": "1999-2013",
+     "method": "panel mensual de precios y tipos de IVA desagregados, efectos fijos",
+     "locator": "pág. 2 (resumen) y pág. 16, tabla 3",
+     "quote": "For changes in the standard rate, for instance, final pass through is about 100 percent; for reduced rates it is significantly less, at around 30 percent",
+     "value_in_source": "tipo general ~1,00; tabla 3 total 1,39 (e.e. 0,36); reducido 0,30"
+    },
+    {
+     "url": "https://www.ine.es/daco/daco42/daco421/ipc0912.pdf",
+     "title": "Índices de Precios de Consumo. Septiembre 2012",
+     "authors_year": "INE (2012)",
+     "country": "España",
+     "period": "agosto-septiembre 2012",
+     "method": "IPCA a impuestos constantes frente a IPCA",
+     "locator": "pág. 6",
+     "quote": "la tasa anual en el mes de septiembre es del 1,4%, más de dos puntos por debajo de la del IPCA, debido al aumento del Impuesto sobre el Valor Añadido",
+     "value_in_source": "IPCA 3,5 % frente a IPCA-IC 1,4 % (2,1 puntos)"
+    }
+   ],
+   "contrary_evidence": [],
+   "debate": null,
+   "derivation": "Central 1,0 (traslado final del tipo general según los autores); alto 1,39 (estimación total de la tabla 3); bajo 0,67 = 1,39 - 1,96 x 0,36. El dato del INE mide el efecto mecánico de la subida de 2012 (general y reducido) suponiendo traslado pleno, no el traslado observado; en la muestra el tipo general cubre algo menos del 65 % del consumo.",
+   "note_es": "Según Benedek et al. (17 países del euro, 1999-2013), las subidas del IVA general se trasladaron a precios en torno al 100 %; las del reducido, un 30 %. En 2012 el INE atribuyó 2,1 puntos de IPCA al IVA."
+  },
+  {
+   "id": "E16_debt_risk_premium",
+   "from": "deuda_publica",
+   "to": "tipo_interes_mercado",
+   "sign": "+",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "prima_por_deuda",
+    "unit": "puntos básicos de tipo a largo plazo por 1 pp de deuda/PIB",
+    "low": 4,
+    "central": 5,
+    "high": 6
+   },
+   "lag_years": [
+    1,
+    5
+   ],
+   "grade": "B",
+   "spain_evidence": "parcial",
+   "sources": [
+    {
+     "url": "https://www.federalreserve.gov/pubs/feds/2003/200312/200312pap.pdf",
+     "title": "New Evidence on the Interest Rate Effects of Budget Deficits and Debt",
+     "authors_year": "Laubach (2003), Federal Reserve FEDS 2003-12; JEEA (2009)",
+     "country": "Estados Unidos",
+     "period": "proyecciones CBO/OMB de varias décadas (ver sección 3 del documento)",
+     "method": "regresión de tipos a 10 años esperados a 5 años sobre proyecciones de deuda y déficit",
+     "locator": "pág. 3",
+     "quote": "a percentage point increase in the projected debt-to-GDP ratio raises future interest rates by about 4 to 5 basis points",
+     "value_in_source": "4-5 pb por 1 pp de deuda/PIB"
+    },
+    {
+     "url": "https://economy-finance.ec.europa.eu/system/files/2024-03/ip271_en.pdf",
+     "title": "Debt Sustainability Monitor 2023 (Institutional Paper 271)",
+     "authors_year": "Comisión Europea (2024)",
+     "country": "UE (incluye España, deuda > 90 %)",
+     "period": "supuesto de escenario 2024-2034",
+     "method": "supuesto de prima de riesgo del escenario de tensión financiera (un año, 2024) para países con deuda > 90 % del PIB, basado en Pamies, Carnot y Patarau (2021)",
+     "locator": "pág. 49, nota 27; pág. 60, nota 15",
+     "quote": "The risk premium is equal to 0.06 times the excess of debt over 90% of GDP",
+     "value_in_source": "0,06 pp (6 pb) por pp de deuda por encima del 90 %"
+    }
+   ],
+   "contrary_evidence": [],
+   "debate": null,
+   "derivation": "Bajo 4 y alto 6 pb: el rango de Laubach (4-5 pb por pp de deuda prevista sobre el tipo a 10 años esperado dentro de cinco años, EE. UU.) y el supuesto de la Comisión (0,06 pp = 6 pb por pp de deuda sobre el 90 %, basado en Pamies, Carnot y Patarau 2021), que se aplica a España pero solo en el escenario de tensión financiera de un año, no en el escenario base; central 5 pb. Por debajo del 90 % la Comisión no aplica prima.",
+   "note_es": "Según Laubach (EE. UU.), cada punto más de deuda/PIB prevista se asocia con unos 4-5 puntos básicos más en el tipo a 10 años esperado dentro de cinco años; la Comisión Europea, en su escenario de tensión financiera de un año, añade 6 puntos básicos por cada punto de deuda por encima del 90 % del PIB.",
+   "review": {
+    "verdict": "fix",
+    "evidence": "Laubach pág. 3 confirma 4-5 pb por pp de deuda prevista, sobre el tipo a 10 años esperado a cinco años; DSM 2023 pág. 49 nota 27 y pág. 60 nota 15 confirman 0,06 por exceso sobre el 90 %, pero solo como recargo de un año en el escenario de tensión financiera, y la restricción 'fuera de la zona euro' de la derivación corresponde a otra prueba (tipo de cambio), no a la prima."
+   }
+  }
+ ]
+}

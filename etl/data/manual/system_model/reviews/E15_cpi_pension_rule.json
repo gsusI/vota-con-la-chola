@@ -1,0 +1,14 @@
+{
+ "id": "E15_cpi_pension_rule",
+ "verdict": "fix",
+ "source_ok": false,
+ "value_ok": true,
+ "grade_ok": true,
+ "wording_ok": true,
+ "evidence": "LGSS art. 58.2 y 58.3 dicen lo citado (media de tasas interanuales de los doce meses previos a diciembre; si es negativa no varían), pero el BOE indica que el apartado 4 lo derogó el Real Decreto-ley 2/2023 (art. único.5 y disp. derogatoria.3), que también da la redacción vigente del 58.2 desde el 1/1/2025, no la Ley 21/2021.",
+ "corrections": {
+  "sources.0.locator": "art. 58.2 y 58.3 (58.4 derogado por el Real Decreto-ley 2/2023)",
+  "sources.0.authors_year": "BOE (redacción del Real Decreto-ley 2/2023, vigente desde el 1/1/2025; regla introducida por la Ley 21/2021)",
+  "sources.0.period": "desde 2022 (redacción vigente desde 2025)"
+ }
+}

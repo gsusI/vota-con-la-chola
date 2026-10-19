@@ -1,0 +1,14 @@
+{
+ "id": "E16_debt_risk_premium",
+ "verdict": "fix",
+ "source_ok": true,
+ "value_ok": true,
+ "grade_ok": true,
+ "wording_ok": false,
+ "evidence": "Laubach pág. 3 confirma 4-5 pb por pp de deuda prevista, sobre el tipo a 10 años esperado a cinco años; DSM 2023 pág. 49 nota 27 y pág. 60 nota 15 confirman 0,06 por exceso sobre el 90 %, pero solo como recargo de un año en el escenario de tensión financiera, y la restricción 'fuera de la zona euro' de la derivación corresponde a otra prueba (tipo de cambio), no a la prima.",
+ "corrections": {
+  "sources.1.method": "supuesto de prima de riesgo del escenario de tensión financiera (un año, 2024) para países con deuda > 90 % del PIB, basado en Pamies, Carnot y Patarau (2021)",
+  "derivation": "Bajo 4 y alto 6 pb: el rango de Laubach (4-5 pb por pp de deuda prevista sobre el tipo a 10 años esperado dentro de cinco años, EE. UU.) y el supuesto de la Comisión (0,06 pp = 6 pb por pp de deuda sobre el 90 %, basado en Pamies, Carnot y Patarau 2021), que se aplica a España pero solo en el escenario de tensión financiera de un año, no en el escenario base; central 5 pb. Por debajo del 90 % la Comisión no aplica prima.",
+  "note_es": "Según Laubach (EE. UU.), cada punto más de deuda/PIB prevista se asocia con unos 4-5 puntos básicos más en el tipo a 10 años esperado dentro de cinco años; la Comisión Europea, en su escenario de tensión financiera de un año, añade 6 puntos básicos por cada punto de deuda por encima del 90 % del PIB."
+ }
+}

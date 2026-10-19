@@ -1,0 +1,291 @@
+{
+ "about": "Edges of slice 0 (pensions + public finances) of /visualizaciones/sistema/. Each item says exactly what number the model needs and how it is used. Model: annual steps 2026-2050, deviations from the Ageing Report 2024 baseline for Spain (current law: CPI indexation, MEI, 2023 reform).",
+ "items": [
+  {
+   "id": "E01_pension_turnover",
+   "from": "revalorizacion_real",
+   "to": "pension_media",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "lambda_renovacion",
+    "unit": "fracción del stock de pensiones por año"
+   },
+   "need": "Annual share of the stock of contributory pensions in force that is replaced: new pensions (altas iniciales) per year / pensions in force, Spain, average 2022-2024 (also give bajas / stock). Model use: an extra real revaluation r applies to the whole stock each year, while new pensions enter without it, so the average pension deviation x follows x_t = (1-lambda)(x_{t-1}+r).",
+   "hints": "Seguridad Social, eSTADISS / Boletín de Estadísticas Laborales (pensiones contributivas: altas, bajas, en vigor); Informe Económico-Financiero de los Presupuestos de la Seguridad Social."
+  },
+  {
+   "id": "E02_retirement_cohort",
+   "from": "edad_jubilacion",
+   "to": "pensionistas",
+   "sign": "-",
+   "layer": "contable",
+   "parameter": {
+    "name": "kappa_cohorte",
+    "unit": "fracción de pensionistas por año de edad"
+   },
+   "need": "Share of all public pensioners (persons) that one year of retirement age represents: new retirement pensions (altas de jubilación) per year / total pensioners. Model use: +1 year of effective retirement age removes about kappa of pensioners (phased in), times the share of retirement pensions taken at or near the ordinary age. ALSO give, in derivation and value_in_source, the average monthly amount of NEW retirement pensions (altas de jubilación, régimen general) vs the average of ALL pensions in force, as a ratio (put it in extra_parameters as new_pension_relative).",
+   "hints": "Seguridad Social altas de jubilación por edad (eSTADISS), number of pensioners; AR2024 country fiche Spain gives pensioners 10.24 M in 2024."
+  },
+  {
+   "id": "E03_delay_employment",
+   "from": "edad_jubilacion",
+   "to": "empleo_mayores",
+   "sign": "+",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "permanencia_empleo",
+    "unit": "fracción de la cohorte retrasada que sigue ocupada"
+   },
+   "need": "When the retirement age rises by one year, which share of the affected cohort stays employed (vs moves to disability/unemployment benefits or inactivity without pension). Give also the spillover share to other benefits (for the card's derivation). Put the share of the delayed cohort that moves to OTHER public benefits (disability, unemployment) times the relative cost of those benefits vs a pension in extra_parameters as prestacion_alternativa (fraction of the avoided pension cost that reappears as other benefits).",
+   "hints": "Staubli & Zweimüller (2013, J Public Econ, Austria); Spanish evidence on the 2011/2013 reforms (Banco de España, FEDEA, AIReF); Seibold (2021, AER) on statutory ages; Rabaté et al."
+  },
+  {
+   "id": "E04_pension_irpf",
+   "from": "pension_bruta",
+   "to": "recaudacion_irpf",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "tipo_marginal_irpf_pension",
+    "unit": "fracción de cada euro extra de pensión"
+   },
+   "need": "IRPF marginal rate (state + regional) on an extra euro of pension for the average pensioner (about 21,700 EUR gross per year), and the average effective rate on pension income overall. Model use: net fiscal cost of extra pension = gross cost x (1 - rate).",
+   "hints": "AEAT Estadística de declarantes del IRPF (rendimientos del trabajo: pensiones); IRPF scale 2024-2025 (19 / 24 / 30 %); OECD Pensions at a Glance (net vs gross)."
+  },
+  {
+   "id": "E06_transfer_multiplier",
+   "from": "gasto_transferencias",
+   "to": "pib",
+   "sign": "+",
+   "layer": "segunda_ronda",
+   "parameter": {
+    "name": "multiplicador_transferencias",
+    "unit": "euros de PIB por euro de transferencia, primer año"
+   },
+   "need": "First-year GDP multiplier of transfers to households for Spain (normal times), and its persistence (how much remains in year 2 and 3). Model use: output deviation = multiplier x change in transfers, decaying. ALSO report, in the derivation and an extra source if needed, the first-year multiplier of increases in labour taxes/social contributions and in VAT for Spain (model uses one tax multiplier; put them in extra_parameters as multiplicador_impuestos and persistencia_multiplicador).",
+   "hints": "Banco de España (de Castro, Martí, Montesinos, Pérez, Sánchez-Fuentes 2017 'Fiscal multipliers in Spain'); EC QUEST; IMF; Coenen et al. 2012."
+  },
+  {
+   "id": "E07_budget_semi_elasticity",
+   "from": "pib",
+   "to": "saldo_publico",
+   "sign": "+",
+   "layer": "segunda_ronda",
+   "parameter": {
+    "name": "semielasticidad_saldo",
+    "unit": "pp del PIB de saldo por 1 % de PIB"
+   },
+   "need": "Budget balance semi-elasticity to the output gap for Spain (EU commonly agreed methodology).",
+   "hints": "Mourre, Poissonnier & Lausegger (2019, European Economy Discussion Paper 100); Price, Dang & Botev (2014, OECD WP 1174)."
+  },
+  {
+   "id": "E08_ssc_incidence",
+   "from": "cotizacion_empleador",
+   "to": "salario_bruto",
+   "sign": "-",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "traslado_cotizacion_salario",
+    "unit": "fracción del aumento de cotización empresarial que acaba en menor salario, largo plazo"
+   },
+   "need": "Long-run share of an employer social-contribution increase that is shifted to workers through lower gross wages (incidence). This is contested: give each school (full shifting vs little shifting) with its source; prefer Spanish or EU evidence.",
+   "hints": "Gruber (1997, Chile); Saez, Schoefer & Seim (2019, AER, Sweden); Bozio, Breda & Grenet (France); Kugler & Kugler (2009, Colombia); Melguizo & González-Páramo (2013, meta-analysis); Spanish evidence on contribution reductions (tarifa plana, bonificaciones)."
+  },
+  {
+   "id": "E09_labour_demand",
+   "from": "coste_laboral",
+   "to": "empleo",
+   "sign": "-",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "elasticidad_empleo_coste",
+    "unit": "% de empleo por 1 % de coste laboral, largo plazo"
+   },
+   "need": "Long-run constant-output or total own-wage elasticity of labour demand, preferably meta-analytic plus Spanish estimates. Model use: employment deviation = elasticity x labour-cost deviation (negative number).",
+   "hints": "Lichter, Peichl & Siegloch (2015, European Economic Review, meta-analysis); Hamermesh (1993); Spanish estimates (Banco de España, FEDEA)."
+  },
+  {
+   "id": "E10_ssc_base",
+   "from": "tipo_cotizacion",
+   "to": "recaudacion_cotizaciones",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "base_cotizacion_pib",
+    "unit": "% del PIB recaudado por 1 pp de tipo de cotización"
+   },
+   "need": "Revenue from 1 percentage point of contribution rate on the general contribution base, in % of GDP (e.g. derived from the official MEI yield: 0.6 pp raised X million EUR in 2023 or 2024 / nominal GDP).",
+   "hints": "Seguridad Social / Ministerio de Inclusión (recaudación MEI, Fondo de Reserva dotaciones); AIReF opinions on the 2023 reform; nominal GDP from INE."
+  },
+  {
+   "id": "E11_revenue_per_job",
+   "from": "empleo",
+   "to": "recaudacion_trabajo",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "recaudacion_por_1pct_empleo",
+    "unit": "% del PIB de ingresos públicos por 1 % de empleo"
+   },
+   "need": "Public revenue (IRPF on wages + social contributions) lost when employment falls 1 % at the average wage, plus unemployment benefit cost, in % of GDP. Derive from labour tax revenue in % of GDP (OECD Revenue Statistics / Eurostat gov_10a_taxag, Spain 2023-2024) and unemployment benefit coverage.",
+   "hints": "Eurostat gov_10a_taxag (D61 contributions, D51 income tax), OECD Taxing Wages tax wedge for Spain, SEPE coverage rate."
+  },
+  {
+   "id": "E12_vat_yield",
+   "from": "tipo_iva_general",
+   "to": "recaudacion_iva",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "recaudacion_por_punto_iva",
+    "unit": "% del PIB por 1 pp del tipo general"
+   },
+   "need": "Static VAT revenue from raising the standard VAT rate by 1 pp, in % of GDP, and the behavioural/compliance offset if estimated (the 2012 hike 18->21 % is a Spanish test).",
+   "hints": "AEAT Informe Anual de Recaudación 2012-2013 (efecto de la subida de tipos); AIReF; Ministerio de Hacienda memoria de beneficios fiscales; EC VAT gap reports."
+  },
+  {
+   "id": "E13_vat_passthrough",
+   "from": "tipo_iva_general",
+   "to": "ipc",
+   "sign": "+",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "traslado_iva_precios",
+    "unit": "fracción del cambio de tipo trasladada a precios de consumo"
+   },
+   "need": "Pass-through of a standard-rate VAT change to consumer prices, and the share of the HICP basket taxed at the standard rate in Spain. Spanish 2012 evidence preferred (INE IPC a impuestos constantes).",
+   "hints": "Benedek, De Mooij, Keen & Wingender (2020, Int Tax Public Finance); INE IPC a impuestos constantes (IPC-IC) September 2012; Banco de España notes on the 2012 hike."
+  },
+  {
+   "id": "E14_wage_indexation",
+   "from": "ipc",
+   "to": "salarios",
+   "sign": "+",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "indiciacion_salarios",
+    "unit": "fracción de un aumento del IPC trasladada a salarios en 1-2 años"
+   },
+   "need": "Share of a one-off price-level increase that wages recover within 1-2 years in Spain (coverage of wage-guarantee clauses in collective agreements, estimates of wage response to inflation).",
+   "hints": "Ministerio de Trabajo, Estadística de Convenios Colectivos (cláusula de garantía salarial); Banco de España Informe Anual / boletines 2022-2024 on wage indexation; AENC V."
+  },
+  {
+   "id": "E15_cpi_pension_rule",
+   "from": "ipc",
+   "to": "revalorizacion_pensiones",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "indiciacion_pensiones_ipc",
+    "unit": "fracción del IPC (Dic-Nov) aplicada al año siguiente"
+   },
+   "need": "Legal rule: Ley 21/2021 revaluation with the average year-on-year CPI December-November of the previous year; timing (lag of one year) and any compensation clause. Model use: a price rise in year t raises pensions in t+1 by the same %.",
+   "hints": "BOE Ley 21/2021 (art. 58 LGSS as amended), BOE-A-2021-21652."
+  },
+  {
+   "id": "E16_debt_risk_premium",
+   "from": "deuda_publica",
+   "to": "tipo_interes_mercado",
+   "sign": "+",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "prima_por_deuda",
+    "unit": "puntos básicos de tipo a largo plazo por 1 pp de deuda/PIB"
+   },
+   "need": "Increase in long-term government bond yields per percentage point of debt/GDP (euro area / Spain).",
+   "hints": "Laubach (2009, JEEA); European Commission Debt Sustainability Monitor (assumption on interest-rate effect of debt); ECB papers; Banco de España."
+  },
+  {
+   "id": "E17_refinancing",
+   "from": "tipo_interes_mercado",
+   "to": "tipo_implicito_deuda",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "cuota_refinanciacion",
+    "unit": "fracción de la deuda que se refinancia o emite cada año"
+   },
+   "need": "Average residual maturity of Spanish State debt (Tesoro Público) in years and the implied annual share of debt repriced (gross financing needs / debt). Model use: implicit rate moves toward the market rate by this share each year.",
+   "hints": "Tesoro Público, Estrategia de Financiación 2025 (vida media), Boletín mensual; AIReF debt monitor."
+  },
+  {
+   "id": "E19_mei_path",
+   "from": "mei",
+   "to": "recaudacion_cotizaciones",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "mei_tipo_2029",
+    "unit": "pp de la base de cotización"
+   },
+   "need": "Legislated MEI (Mecanismo de Equidad Intergeneracional) rate path from 2023 to 2050 and its employer/worker split (RDL 2/2023), plus official revenue in EUR for one year.",
+   "hints": "BOE RDL 2/2023 (BOE-A-2023-6967); Seguridad Social press/AIReF on MEI revenue."
+  },
+  {
+   "id": "B01_revaluation_2023_cost",
+   "from": "revalorizacion_2023",
+   "to": "gasto_pensiones",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "coste_revalorizacion_2023",
+    "unit": "millones de euros, primer año"
+   },
+   "need": "BENCHMARK for a backtest: official estimate of the cost of the 8.5 % revaluation of 2023 (contributory + non-contributory), in million EUR, and pension spending of 2022 it applies to.",
+   "hints": "Ministerio de Inclusión, Seguridad Social y Migraciones press release Dec 2022; Presupuestos 2023; AIReF."
+  },
+  {
+   "id": "B02_irp_savings",
+   "from": "irp_2014_2018",
+   "to": "gasto_pensiones",
+   "sign": "-",
+   "layer": "contable",
+   "parameter": {
+    "name": "perdida_poder_adquisitivo_irp",
+    "unit": "% de la pensión real perdida acumulada 2014-2018 frente al IPC"
+   },
+   "need": "BENCHMARK for a backtest: revaluation at the 0.25 % floor (IRP, 2013 reform) vs CPI in 2014-2018, cumulative real loss and any official estimate of savings in % of GDP.",
+   "hints": "BOE revaluation decrees 2014-2017, INE CPI, AIReF / Banco de España / FEDEA on the IRP; AR2015/AR2018 country fiche Spain."
+  },
+  {
+   "id": "B03_dsm_spain",
+   "from": "politica_constante",
+   "to": "deuda_publica",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "deuda_2034_sin_cambios",
+    "unit": "% del PIB"
+   },
+   "need": "BENCHMARK: European Commission Debt Sustainability Monitor 2024 (or 2025 if published) no-policy-change baseline for Spain: gross public debt in % of GDP in 2034 (and 2030), plus the assumed structural primary balance.",
+   "hints": "economy-finance.ec.europa.eu Debt Sustainability Monitor 2024 (Institutional Paper), country annex Spain (statistical table)."
+  },
+  {
+   "id": "E20_labour_output",
+   "from": "empleo",
+   "to": "pib_potencial",
+   "sign": "+",
+   "layer": "segunda_ronda",
+   "parameter": {
+    "name": "elasticidad_producto_empleo",
+    "unit": "% de PIB potencial por 1 % de empleo"
+   },
+   "need": "Output elasticity of labour in the European Commission production function used for potential GDP (and so in the Ageing Report): the labour share alpha in the Cobb-Douglas Y = TFP * L^alpha * K^(1-alpha). Model use: GDP deviation from extra employment = alpha x employment deviation.",
+   "hints": "Havik et al. (2014), 'The Production Function Methodology for Calculating Potential Growth Rates & Output Gaps', European Economy Economic Papers 535; Blondeau et al. (2021) Discussion Paper 150 update."
+  },
+  {
+   "id": "E13b_vat_basket",
+   "from": "tipo_iva_general",
+   "to": "ipc",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "cuota_iva_general",
+    "unit": "fracción del gasto de consumo (cesta del IPC) gravada al tipo general"
+   },
+   "need": "Share of household consumption (CPI/HICP basket weights) taxed at the 21 % standard VAT rate in Spain (rest at 10 %, 4 %, exempt). Derive from INE CPI weights by VAT rate or from the 2012 INE note (IPC a impuestos constantes) or AEAT/EC VAT studies.",
+   "hints": "INE IPC ponderaciones; INE note September 2012 https://www.ine.es/daco/daco42/daco421/ipc0912.pdf; EC 'VAT rates applied in the Member States'; AIReF spending review on tax benefits (beneficios fiscales IVA)."
+  }
+ ]
+}

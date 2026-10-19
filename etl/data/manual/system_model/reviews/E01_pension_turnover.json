@@ -1,0 +1,12 @@
+{
+ "id": "E01_pension_turnover",
+ "verdict": "fix",
+ "source_ok": true,
+ "value_ok": false,
+ "grade_ok": true,
+ "wording_ok": true,
+ "evidence": "BdE cuadro 24.20 confirma 22 M 9.943/50/42, 23 M 10.052/49/37, 24 M 10.189/52/38; altas 5,85-6,12 % y fórmula 5,8-6,0 % correctas, pero el bajo 'solo bajas, 2023' es 444/10.052 = 0,044, no 0,045.",
+ "corrections": {
+  "parameter.low": 0.044
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "id": "E12_vat_yield",
+ "verdict": "fix",
+ "source_ok": false,
+ "value_ok": true,
+ "grade_ok": true,
+ "wording_ok": true,
+ "evidence": "AEAT IART 2013, Cuadro 1.2 (fila IVA 2.899/3.393/2.263/7.438) y PIB 2013 1.025.652 confirmados; sistema 2G+R=6.292, 3G+2R=9.701 da G=2.883 M = 0,28 % y extremos 0,236/0,315 correctos. El cuadro está en la pág. 15 del PDF = pág. 13 impresa (no 12) y la frase de contrary_evidence en la pág. 10 del PDF (8 impresa), no en la 7.",
+ "corrections": {
+  "sources.0.locator": "Cuadro 1.2, pág. 13 (pág. 15 del PDF), fila IVA",
+  "contrary_evidence.0.title": "Informe Anual de Recaudación Tributaria 2013 (pág. 8; pág. 10 del PDF)"
+ }
+}

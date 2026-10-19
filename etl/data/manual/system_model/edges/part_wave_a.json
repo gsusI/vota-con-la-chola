@@ -1,0 +1,279 @@
+{
+ "agent": "wave_a",
+ "edges": [
+  {
+   "id": "E02_retirement_cohort",
+   "from": "edad_jubilacion",
+   "to": "pensionistas",
+   "sign": "-",
+   "layer": "contable",
+   "parameter": {
+    "name": "kappa_cohorte",
+    "unit": "fracción de pensionistas por año de edad",
+    "low": 0.035,
+    "central": 0.038,
+    "high": 0.04
+   },
+   "lag_years": [
+    0,
+    1
+   ],
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://www.lamoncloa.gob.es/serviciosdeprensa/notasprensa/inclusion/paginas/2025/260825-seguridad-social-pensiones-agosto.aspx",
+     "title": "La pensión media de jubilación se sitúa en agosto en 1.507,5 euros, un 4,4% más alta que hace un año",
+     "authors_year": "Ministerio de Inclusión, Seguridad Social y Migraciones (2025)",
+     "country": "España",
+     "period": "enero-agosto de 2025",
+     "method": "registro administrativo (nómina de pensiones contributivas y altas iniciales)",
+     "locator": "apartado «Aumentan las jubilaciones demoradas»",
+     "quote": "Hasta julio (inclusive), último dato disponible, se han registrado 215.971 nuevas altas de jubilación.",
+     "value_in_source": "215.971 altas de jubilación en 7 meses; 10,4 millones de pensiones a cerca de 9,4 millones de personas"
+    },
+    {
+     "url": "https://www.lamoncloa.gob.es/serviciosdeprensa/notasprensa/inclusion/paginas/2025/260825-seguridad-social-pensiones-agosto.aspx",
+     "title": "La pensión media de jubilación se sitúa en agosto en 1.507,5 euros, un 4,4% más alta que hace un año",
+     "authors_year": "Ministerio de Inclusión, Seguridad Social y Migraciones (2025)",
+     "country": "España",
+     "period": "agosto de 2025 (altas: julio de 2025)",
+     "method": "registro administrativo (nómina de pensiones contributivas)",
+     "locator": "párrafos sobre pensión media y nuevas altas",
+     "quote": "En cuanto a las nuevas altas de jubilación, la cuantía media del sistema es de 1.613,3 euros, según los últimos datos disponibles (julio).",
+     "value_in_source": "1.613,3 EUR/mes (altas de jubilación); 1.312,9 EUR/mes (pensión media del sistema); 1.722,5 EUR/mes (altas del Régimen General)"
+    },
+    {
+     "url": "https://www.seg-social.es/wps/portal/wss/internet/EstadisticasPresupuestosEstudios/Estadisticas/EST23/EST44",
+     "title": "Evolución de las altas iniciales de jubilación por modalidades (EVOMOD202608)",
+     "authors_year": "INSS (2026)",
+     "country": "España",
+     "period": "2025",
+     "method": "registro administrativo de altas iniciales de jubilación",
+     "locator": "año 2025, total de altas de jubilación (ficha del catálogo eje-proteccion-social--ss-2025-altas-jubilacion)",
+     "quote": "En 2025 hubo 375.277 altas de jubilación",
+     "value_in_source": "375.277 altas de jubilación en 2025"
+    }
+   ],
+   "contrary_evidence": [],
+   "debate": null,
+   "derivation": "kappa: 215.971 altas de jubilación en enero-julio de 2025 x 12/7 = 370.236 al año (el INSS da 375.277 para todo 2025, ficha del catálogo eje-proteccion-social--ss-2025-altas-jubilacion); 375.277 / 9,4 M de personas pensionistas = 0,040 y / 10,37 M de pensiones = 0,036 (BdE 24.20), central 0,038. Pensión nueva relativa: 1.613,3 / 1.312,9 = 1,229; alto 1.722,5 / 1.312,9 = 1,31 (solo Régimen General); el bajo 1,18 es un supuesto por la variación mensual de la cuantía de las altas, no verificado.",
+   "note_es": "Según la Seguridad Social, en 2025 hubo unas 375.000 nuevas jubilaciones, cerca del 4 % de los 9,4 millones de pensionistas, y la pensión media de esas altas (1.613 €) superaba un 23 % la media del sistema (1.313 €).",
+   "extra_parameters": [
+    {
+     "name": "new_pension_relative",
+     "unit": "pensión media de las altas de jubilación / pensión media de todas",
+     "low": 1.18,
+     "central": 1.23,
+     "high": 1.31
+    }
+   ],
+   "review": {
+    "verdict": "fix",
+    "evidence": "La nota de La Moncloa (26/8/2025) confirma 215.971 altas hasta julio, 1.613,3, 1.312,9, 1.722,5 EUR y 9,4 M de personas; pero la cifra anual 375.277 que usan la derivación y note_es no está en las fuentes citadas (viene de la ficha del catálogo INSS EVOMOD), así que hay que citarla."
+   }
+  },
+  {
+   "id": "E03_delay_employment",
+   "from": "edad_jubilacion",
+   "to": "empleo_mayores",
+   "sign": "+",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "permanencia_empleo",
+    "unit": "fracción de la cohorte retrasada que sigue ocupada",
+    "low": 0.3,
+    "central": 0.36,
+    "high": 0.4
+   },
+   "lag_years": [
+    0,
+    1
+   ],
+   "grade": "B",
+   "spain_evidence": "no",
+   "sources": [
+    {
+     "url": "https://docs.iza.org/dp5863.pdf",
+     "title": "Does Raising the Retirement Age Increase Employment of Older Workers?",
+     "authors_year": "Staubli y Zweimüller (2011, IZA DP 5863; publicado en J Public Econ 2013)",
+     "country": "Austria",
+     "period": "reforma 2000-2006 (edad de jubilación anticipada 60->62,2 hombres, 55->57,2 mujeres)",
+     "method": "diferencias en diferencias con datos administrativos de todos los asalariados privados",
+     "locator": "pág. 3 (resumen)",
+     "quote": "this policy change reduced retirement by 19 percentage points among affected men and by 25 percentage points among affected women",
+     "value_in_source": "jubilación -19 pp (hombres) y -25 pp (mujeres); empleo +7 y +10 pp; tasa de paro +10 y +11 pp; efecto pequeño en incapacidad"
+    },
+    {
+     "url": "https://docs.iza.org/dp14150.pdf",
+     "title": "Increasing the Effective Retirement Age: Key Factors and Interaction Effects",
+     "authors_year": "Rabaté, Jongen y Atav (2021, IZA DP 14150; publicado en AEJ: Economic Policy 2024)",
+     "country": "Países Bajos",
+     "period": "subidas de la edad legal de jubilación desde 2013",
+     "method": "regresión en discontinuidad con datos administrativos de toda la población",
+     "locator": "pág. 18",
+     "quote": "The employment rate increases by 19 percentage points (32% of the decrease in retirement).",
+     "value_in_source": "empleo = 32 % de la caída de la jubilación; prestaciones de incapacidad, paro, asistencia y otras = 39 %; sin ingresos = 30 %"
+    }
+   ],
+   "contrary_evidence": [],
+   "debate": null,
+   "derivation": "Permanencia en el empleo = subida del empleo / caída de la jubilación: Austria 7/19 = 0,37 (hombres) y 10/25 = 0,40 (mujeres); Países Bajos 0,32; rango 0,30-0,40, central 0,36. Prestación alternativa = cuota que pasa a otras prestaciones (Austria paro 10/19 = 0,53 y 11/25 = 0,44; Países Bajos 0,39) x coste relativo de esa prestación frente a una pensión, supuesto 0,3-0,7 (central 0,5; no verificado para España): 0,39x0,3 = 0,12, 0,45x0,5 = 0,22, 0,53x0,7 = 0,37. No hay estimación española equivalente verificada.",
+   "note_es": "Según estudios de Austria y Países Bajos, al subir la edad de jubilación, de quienes dejaron de jubilarse por la reforma entre un 32 % y un 40 % siguió trabajando; otra parte pasó al paro, a la incapacidad u otras prestaciones, que absorben parte del gasto en pensiones evitado.",
+   "extra_parameters": [
+    {
+     "name": "prestacion_alternativa",
+     "unit": "fracción del coste de pensión evitado que reaparece en otras prestaciones",
+     "low": 0.12,
+     "central": 0.22,
+     "high": 0.37
+    }
+   ],
+   "review": {
+    "verdict": "fix",
+    "evidence": "IZA DP 5863 pág. 3 (-19/-25 pp jubilación, +7/+10 empleo, +10/+11 paro) y DP 14150 pág. 18 (32 %, 39 %, 30 %) confirman cifras y rango; pero note_es dice '32-40 % de los afectados', cuando es el 32-40 % de la caída de la jubilación (en Austria el empleo de los afectados sube solo 7-10 pp)."
+   }
+  },
+  {
+   "id": "E20_labour_output",
+   "from": "empleo",
+   "to": "pib_potencial",
+   "sign": "+",
+   "layer": "segunda_ronda",
+   "parameter": {
+    "name": "elasticidad_producto_empleo",
+    "unit": "% de PIB potencial por 1 % de empleo",
+    "low": 0.6,
+    "central": 0.65,
+    "high": 0.7
+   },
+   "lag_years": 0,
+   "grade": "C",
+   "spain_evidence": "no",
+   "sources": [
+    {
+     "url": "https://ec.europa.eu/economy_finance/publications/economic_paper/2014/pdf/ecp535_en.pdf",
+     "title": "The Production Function Methodology for Calculating Potential Growth Rates & Output Gaps",
+     "authors_year": "Havik et al. (2014), European Economy Economic Papers 535",
+     "country": "UE (método común para todos los Estados miembros)",
+     "period": "salario medio UE-15 1960-2003 como guía",
+     "method": "función de producción Cobb-Douglas con elasticidades impuestas",
+     "locator": "pág. 13, nota 5",
+     "quote": "Since these values are close to the conventional mean values of 0.65 & 0.35, the latter are imposed for all countries.",
+     "value_in_source": "alpha = 0,65 (0,63 según la participación salarial media UE-15)"
+    }
+   ],
+   "contrary_evidence": [],
+   "debate": null,
+   "derivation": "La Comisión impone alpha = 0,65 a todos los países (la participación salarial media UE-15 1960-2003 da 0,63). El rango 0,60-0,70 es un supuesto que recoge que la participación salarial española pueda diferir de la media; no se ha verificado una cifra específica para España.",
+   "note_es": "Según el método de la Comisión Europea para el PIB potencial, un 1 % más de empleo eleva el producto potencial un 0,65 %, valor que se impone igual a todos los países."
+  },
+  {
+   "id": "E11_revenue_per_job",
+   "from": "empleo",
+   "to": "recaudacion_trabajo",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "recaudacion_por_1pct_empleo",
+    "unit": "% del PIB de ingresos públicos por 1 % de empleo",
+    "low": 0.19,
+    "central": 0.3,
+    "high": 0.34
+   },
+   "lag_years": [
+    0,
+    1
+   ],
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://ec.europa.eu/eurostat/databrowser/view/gov_10a_taxag/default/table",
+     "title": "Main national accounts tax aggregates (gov_10a_taxag)",
+     "authors_year": "Eurostat (2026)",
+     "country": "España",
+     "period": "2024",
+     "method": "contabilidad nacional (SEC 2010), % del PIB, administraciones públicas e instituciones de la UE",
+     "locator": "geo=ES, unit=PC_GDP, sector=S13_S212, year 2024 (impuesto sobre la renta de los hogares, D611, D613 por tipo de cotizante)",
+     "quote": "Taxes on individual or household income including holding gains",
+     "value_in_source": "IRPF 9,1; cotizaciones de empleadores 9,5, de asalariados 1,9 y de autónomos 0,8 (% del PIB, 2024)"
+    },
+    {
+     "url": "https://ec.europa.eu/eurostat/databrowser/view/gov_10a_exp/default/table",
+     "title": "General government expenditure by function (COFOG) (gov_10a_exp)",
+     "authors_year": "Eurostat (2026)",
+     "country": "España",
+     "period": "2024",
+     "method": "contabilidad nacional, gasto total por función",
+     "locator": "geo=ES, unit=PC_GDP, sector=S13, na_item=TE, cofog99=GF1005 (Unemployment)",
+     "quote": "General government expenditure by function (COFOG)",
+     "value_in_source": "1,5 % del PIB en desempleo (2024)"
+    },
+    {
+     "url": "https://ec.europa.eu/eurostat/databrowser/view/lfsa_egan/default/table",
+     "title": "Employed persons by citizenship (lfsa_egan) y Unemployment by sex and age (une_rt_a)",
+     "authors_year": "Eurostat (2026), EPA",
+     "country": "España",
+     "period": "2024",
+     "method": "encuesta de población activa",
+     "locator": "geo=ES, age=Y15-74, sex=T, unit=THS_PER",
+     "quote": "Employed persons by citizenship",
+     "value_in_source": "21.634 miles de ocupados; 2.771 miles de parados (une_rt_a)"
+    }
+   ],
+   "contrary_evidence": [],
+   "debate": null,
+   "derivation": "Cotizaciones ligadas al empleo 9,5+1,9+0,8 = 12,2 % del PIB; IRPF 9,1 % x parte de rentas salariales supuesta 0,6 (0,5-0,7, no verificada) = 5,5; total 17,7 % -> 1 % de empleo a salario medio = 0,177 pt de PIB. Desempleo: 1,5 % del PIB / 2.771 mil parados x 216 mil (1 % de 21.634 mil ocupados) = 0,117. Central 0,177+0,117 = 0,30; bajo con salario de quien pierde el empleo al 70 % y IRPF al 50 % + paro 0,08 = 0,19; alto 0,122+0,064+0,15 = 0,34.",
+   "note_es": "Según Eurostat, cotizaciones e IRPF sobre salarios suman cerca del 18 % del PIB y el gasto en desempleo el 1,5 %: un 1 % menos de empleo resta unas tres décimas de PIB al saldo público."
+  },
+  {
+   "id": "E14_wage_indexation",
+   "from": "ipc",
+   "to": "salarios",
+   "sign": "+",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "indiciacion_salarios",
+    "unit": "fracción de un aumento del IPC trasladada a salarios en 1-2 años",
+    "low": 0.37,
+    "central": 0.5,
+    "high": 0.69
+   },
+   "lag_years": [
+    1,
+    2
+   ],
+   "grade": "B",
+   "spain_evidence": "parcial",
+   "sources": [
+    {
+     "url": "https://ec.europa.eu/eurostat/databrowser/view/lc_lci_r2_a/default/table",
+     "title": "Labour cost index by NACE Rev. 2 activity - nominal value, annual data (lc_lci_r2_a)",
+     "authors_year": "Eurostat (2026), datos del INE",
+     "country": "España",
+     "period": "2015-2025",
+     "method": "índice de coste laboral por hora, sueldos y salarios",
+     "locator": "geo=ES, unit=PCH_PRE, lcstruct=D11, nace_r2=B-S",
+     "quote": "Labour cost index by NACE Rev. 2 activity - nominal value, annual data",
+     "value_in_source": "2015-2019: 1,2; 0,7; 0,4; 1,3; 2,4 %; 2021: 0,3; 2022: 3,1; 2023: 4,9; 2024: 4,1 %"
+    },
+    {
+     "url": "https://ec.europa.eu/eurostat/databrowser/view/prc_hicp_aind/default/table",
+     "title": "HICP - annual data (average index and rate of change) (prc_hicp_aind)",
+     "authors_year": "Eurostat (2026)",
+     "country": "España",
+     "period": "2015-2025",
+     "method": "índice armonizado de precios de consumo, media anual",
+     "locator": "geo=ES, unit=RCH_A_AVG, coicop=CP00",
+     "quote": "HICP - annual data (average index and rate of change)",
+     "value_in_source": "2015-2019: -0,6; -0,3; 2,0; 1,7; 0,8 %; 2021: 3,0; 2022: 8,3; 2023: 3,4; 2024: 2,9 %"
+    }
+   ],
+   "contrary_evidence": [],
+   "debate": null,
+   "derivation": "Precios 2021-2023: 1,030x1,083x1,034 = +15,3 %; salarios por hora 2021-2023: 1,003x1,031x1,049 = +8,5 % -> 0,55 en bruto; descontando tendencias 2015-2019 (salarios 1,2 %/año, IPCA 0,7 %/año): (8,5-3,6)/(15,3-2,2) = 0,37 (bajo). Hasta 2024 los salarios suben un 12,9 % frente a un 18,7 % de precios (0,69, alto). Central 0,50. Es un cálculo descriptivo, no causal; la cobertura de cláusulas de salvaguarda (BdE) no se pudo verificar en fuente primaria.",
+   "note_es": "Según Eurostat, entre 2021 y 2023 los precios subieron un 15 % y los salarios por hora un 8,5 %: en uno o dos años se recuperó en torno a la mitad de la subida de precios."
+  }
+ ]
+}

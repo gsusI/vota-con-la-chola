@@ -54,6 +54,13 @@ BLOCKED = {
     "www.unrwa.org": "403",
     "reliefweb.int": "403",
     "fra.europa.eu": "403 challenge",
+    # Seen 2026-10-19 (system-model edge cards)
+    "www.imf.org": "403 to scripts (use an IMF eLibrary/NBER/author copy)",
+    "dadun.unav.edu": "403",
+    "cepr.org": "403",
+    "halshs.science": "Anubis bot challenge",
+    "shs.hal.science": "Anubis bot challenge",
+    "www.oecd.org": "403 Cloudflare",
 }
 
 # Official sites whose TLS chain fails from here (seen 2026-10-13). Retry unverified for these hosts only, never globally.
