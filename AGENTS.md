@@ -147,6 +147,13 @@ What we take from those references (the checklist; name the references and copy 
 - Every number reproducible from the DB (indicator contract with raw payload + sha256), with a table view and
   downloadable CSV/JSON.
 - Titles state the finding with its number; copy and posts use only figures checked against the published data.
+- "El dato mata el relato": every visualization has one consolidated figure, placed near the top, that combines
+  enough dimensions (e.g. levels and change, composition and peers, two variables over time) that no competing
+  narrative can cherry-pick it. Many single charts can each be used to support opposite stories; this one puts the
+  whole problem on the table with its complexity and no ambiguity. It may be dense and carry two legends (colour plus
+  marker, size or line style), but never two arbitrary y-scales: use a connected scatter, an index to a common base,
+  a ratio, a decomposition or a ranked dumbbell instead. Its copy names the narratives it settles and what stays
+  ambiguous. If no single figure can do it honestly, say so on the page rather than forcing one.
 
 ## Project Skills
 
