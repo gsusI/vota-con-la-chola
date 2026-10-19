@@ -148,27 +148,43 @@ export function DistributionFigure({ distribution, source }) {
   );
 }
 
-export function TenantRegionFigure({ territory, source }) {
-  const rows = territory.rows;
-  const top = rows.slice(0, 3);
-  const bottom = rows.slice(-3);
-  const max = Math.max(...rows.map((row) => row.burden_pct));
-  const year = rows[0].year;
-  const rentFaster = rows.filter((row) => row.rent_change_pct != null && row.rent_change_pct > row.income_change_pct);
-  const manyRenters = rows.filter((row) => row.renters_pct != null && row.renters_pct > 20);
+const CITY_NAMES = { "28079": "Madrid", "08019": "Barcelona", "07040": "Palma", "46250": "València", "41091": "Sevilla", "29067": "Málaga", "50297": "Zaragoza", "48020": "Bilbao" };
+const PROVINCE_OF = { "28079": "Madrid", "08019": "Barcelona", "07040": "Illes Balears", "46250": "Valencia", "41091": "Sevilla", "29067": "Málaga", "50297": "Zaragoza", "48020": "Bizkaia" };
+
+// Rent against the pay of the people who rent: the median declared rent over the net pay of 25-34 year-olds (scaled to
+// each region's wage level), in each big city against the rest of its province and in each region. The old ratio to the
+// mean income of all households stays in the table: owners earn more than tenants, so it understated the burden.
+export function TenantRegionFigure({ territory, segments, source }) {
+  const cities = (segments?.cities || []).filter((c) => c.burden_young_pct != null).sort((a, b) => b.burden_young_pct - a.burden_young_pct);
+  const regions = segments?.regions || [];
+  if (!cities.length || !regions.length) return null;
+  const old = Object.fromEntries(territory.rows.map((row) => [row.code, row]));
+  const madrid = cities.find((c) => c.code === "28079");
+  const year = cities[0].year;
+  const max = Math.max(...cities.map((c) => c.burden_young_pct), ...regions.map((row) => row.burden_young_pct));
+  const scale = (v) => (v / max) * 82;
+  const top = regions[0];
+  const bottom = regions[regions.length - 1];
+  const youngEs = segments.young_net_es;
+  const cityGap = cities.map((c) => c.burden_young_pct - (c.rest_burden_young_pct ?? c.burden_young_pct));
   return (
     <Figure
       id="alquiler-regiones"
-      title={`Pagar el alquiler mediano declarado cuesta el ${num(top[0].burden_pct, 0)} % de la renta media del hogar en ${joinEs(top.map((row) => row.name))}, y en torno al ${num(bottom[0].burden_pct, 0)} % en ${joinEs(bottom.map((row) => row.name))} (${year})`}
-      dek={`Alquiler mensual mediano de los pisos alquilados como vivienda habitual (declarado en el IRPF) × 12, dividido por la renta neta media de los hogares de la comunidad ese mismo año. En la mayoría de comunidades la renta media creció más que ese alquiler desde 2015; el alquiler creció más en ${joinEs(rentFaster.map((row) => row.name))}. Los hogares que alquilan a precio de mercado son el ${num(territory.renters_es_pct)} % en España y más del 20 % en ${joinEs(manyRenters.map((row) => row.name))}.`}
+      title={`Un piso alquilado en la ciudad de Madrid (${thousands(madrid.rent_month)} € al mes, mediana declarada) se lleva el ${num(madrid.burden_young_pct, 0)} % del sueldo neto de quien tiene de 25 a 34 años, y el ${num(madrid.rest_burden_young_pct, 0)} % en el resto de la provincia; por comunidades, del ${num(top.burden_young_pct, 0)} % en ${top.name} al ${num(bottom.burden_young_pct, 0)} % en ${bottom.name} (${year})`}
+      dek={`Alquiler mensual mediano de los pisos alquilados como vivienda habitual (declarado en el IRPF) × 12, dividido por el sueldo neto medio de las personas de 25 a 34 años, que es quien más alquila: en España, ${thousands(youngEs.value)} € al año (${youngEs.year}), ajustado al nivel salarial de cada comunidad. Arriba, cada gran ciudad frente al resto de su provincia: la capital es entre ${num(Math.min(...cityGap), 0)} y ${num(Math.max(...cityGap), 0)} puntos más cara. Abajo, las comunidades: los inquilinos de mercado son más del 20 % de los hogares en ${joinEs(territory.rows.filter((row) => row.renters_pct > 20).map((row) => row.name))}, frente al ${num(territory.renters_es_pct)} % en España.`}
       legendKind="bar"
+      legend={[
+        { id: "city", label: "La ciudad", color: C.orange },
+        { id: "rest", label: "Resto de su provincia (círculo hueco)", color: "#f6d3c2" },
+      ]}
       sources={[
-        source("mivau_boletin", "Ministerio de Vivienda, Sistema Estatal de Referencia del Precio del Alquiler (SERPAVI 2011–2024)", "https://www.mivau.gob.es/vivienda/alquila-bien-es-tu-derecho/serpavi"),
-        source("ine_tempus", "INE, Encuesta de Condiciones de Vida (renta por hogar y tenencia por comunidad)", "https://www.ine.es/jaxiT3/Tabla.htm?t=9949"),
+        source("mivau_boletin", "Ministerio de Vivienda, Sistema Estatal de Referencia del Precio del Alquiler (SERPAVI 2011–2024), hojas de comunidades y municipios", "https://www.mivau.gob.es/vivienda/alquila-bien-es-tu-derecho/serpavi"),
+        source("ine_tempus", "INE, Encuesta de Estructura Salarial (salario por edad), Encuesta Trimestral de Coste Laboral (salario por comunidad) y Encuesta de Condiciones de Vida (renta y tenencia por comunidad)", "https://www.ine.es/jaxiT3/Tabla.htm?t=28201"),
+        source("oecd_dbnomics", "OCDE, Taxing Wages (paso de bruto a neto)", "https://db.nomics.world/OECD/DSD_TAX_WAGES_COMP@DF_TW_COMP"),
       ]}
       notes={[
-        "La renta es la media de todos los hogares, propietarios incluidos, que suelen ganar más que los inquilinos: el esfuerzo real de quien alquila es mayor que este porcentaje. El alquiler es el de todos los contratos vigentes, no el de los nuevos. País Vasco (solo 2024) y Navarra (desde 2021) tienen su propia Hacienda y entran con menos años.",
-        "La ECV de un año recoge la renta del año anterior: la ECV de 2025 se empareja con el alquiler de 2024.",
+        "Sueldo neto: salario bruto medio de 25 a 34 años (INE, EES) menos el IRPF y las cotizaciones de un soltero que gana el 67 % del salario medio (OCDE), multiplicado por el cociente entre el salario de la comunidad y el de España (ETCL). No hay salario oficial por edad y comunidad: es el corte por edad ajustado por el de territorio, una aproximación.",
+        "Resto de la provincia: media de las medianas de sus municipios ponderada por el número de pisos alquilados (la mediana del conjunto no se puede rehacer con medianas municipales). El SERPAVI recoge todos los contratos vigentes, no solo los nuevos: quien firma hoy paga más. País Vasco y Navarra tienen su propia Hacienda y entran con menos años (Bilbao, solo 2024).",
       ]}
       table={
         <details className="vizTable">
@@ -177,27 +193,51 @@ export function TenantRegionFigure({ territory, source }) {
             <table>
               <thead>
                 <tr>
+                  <th scope="col">Ciudad</th>
+                  <th scope="col">Alquiler mediano (€/mes)</th>
+                  <th scope="col">Resto de la provincia (€/mes)</th>
+                  <th scope="col">Sueldo neto de 25–34 (€/año)</th>
+                  <th scope="col">Ciudad: % del sueldo</th>
+                  <th scope="col">Resto: % del sueldo</th>
+                  <th scope="col">Alquiler en 2019 (€/mes)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {cities.map((c) => (
+                  <tr key={c.code}>
+                    <td>{CITY_NAMES[c.code]}</td>
+                    <td>{thousands(c.rent_month)} €</td>
+                    <td>{c.rest_rent_month != null ? `${thousands(c.rest_rent_month)} €` : "—"}</td>
+                    <td>{thousands(c.young_net)} €</td>
+                    <td>{num(c.burden_young_pct)} %</td>
+                    <td>{c.rest_burden_young_pct != null ? `${num(c.rest_burden_young_pct)} %` : "—"}</td>
+                    <td>{c.rent_2019 != null ? `${thousands(c.rent_2019)} €` : "—"}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <table>
+              <thead>
+                <tr>
                   <th scope="col">Comunidad</th>
                   <th scope="col">Alquiler mediano (€/mes)</th>
-                  <th scope="col">Renta neta media del hogar (€/año)</th>
-                  <th scope="col">Alquiler en % de la renta</th>
+                  <th scope="col">Sueldo neto de 25–34 (€/año)</th>
+                  <th scope="col">Alquiler en % del sueldo joven</th>
+                  <th scope="col">Alquiler en % de la renta media de todos los hogares</th>
                   <th scope="col">Igual, año base</th>
-                  <th scope="col">Alquiler: variación</th>
-                  <th scope="col">Renta: variación</th>
                   <th scope="col">Hogares en alquiler de mercado</th>
                 </tr>
               </thead>
               <tbody>
-                {rows.map((row) => (
+                {regions.map((row) => (
                   <tr key={row.code}>
                     <td>{row.name}</td>
                     <td>{thousands(row.rent_month)} €</td>
-                    <td>{thousands(row.income_year)} €</td>
-                    <td>{num(row.burden_pct)} %</td>
-                    <td>{row.burden_base_pct != null ? `${num(row.burden_base_pct)} % (${row.burden_base_year})` : "—"}</td>
-                    <td>{row.rent_change_pct != null ? `${num(row.rent_change_pct)} %` : "—"}</td>
-                    <td>{row.income_change_pct != null ? `${num(row.income_change_pct)} %` : "—"}</td>
-                    <td>{row.renters_pct != null ? `${num(row.renters_pct)} %` : "—"}</td>
+                    <td>{thousands(row.young_net)} €</td>
+                    <td>{num(row.burden_young_pct)} %</td>
+                    <td>{old[row.code] ? `${num(old[row.code].burden_pct)} %` : "—"}</td>
+                    <td>{old[row.code]?.burden_base_pct != null ? `${num(old[row.code].burden_base_pct)} % (${old[row.code].burden_base_year})` : "—"}</td>
+                    <td>{old[row.code]?.renters_pct != null ? `${num(old[row.code].renters_pct)} %` : "—"}</td>
                   </tr>
                 ))}
               </tbody>
@@ -206,21 +246,54 @@ export function TenantRegionFigure({ territory, source }) {
         </details>
       }
     >
-      <Bars
-        rows={rows.map((row) => ({
-          id: row.code,
-          label: row.name,
-          value: row.burden_pct,
-          color: C.orange,
-          text: `${num(row.burden_pct)} % (${thousands(row.rent_month)} €/mes)${row.burden_base_pct != null ? ` · ${num(row.burden_base_pct)} % en ${row.burden_base_year}` : ""}`,
-        }))}
-        max={max}
-        label="Alquiler en % de la renta del hogar por comunidad"
-      />
+      <div>
+        <h3 className="vizPanelTitle">
+          Las grandes ciudades frente al resto de su provincia
+          <span>alquiler mediano en % del sueldo neto de 25 a 34 años, {year}</span>
+        </h3>
+        <ul className="hvDumbbell" aria-label="Alquiler en % del sueldo joven: ciudad frente al resto de la provincia">
+          {cities.map((c) => {
+            const a = scale(c.rest_burden_young_pct ?? c.burden_young_pct);
+            const b = scale(c.burden_young_pct);
+            return (
+              <li key={c.code}>
+                <span>
+                  {CITY_NAMES[c.code]} <small className="hvMuted">({PROVINCE_OF[c.code]})</small>
+                </span>
+                <span className="hvDumbbell__track" title={`${CITY_NAMES[c.code]}: ${num(c.burden_young_pct)} % (${thousands(c.rent_month)} €); resto de la provincia: ${c.rest_burden_young_pct != null ? `${num(c.rest_burden_young_pct)} % (${thousands(c.rest_rent_month)} €)` : "—"}`}>
+                  <span className="hvDumbbell__line" style={{ left: `${Math.min(a, b)}%`, width: `${Math.abs(b - a)}%` }} />
+                  {c.rest_burden_young_pct != null ? <span className="hvDumbbell__dot" style={{ left: `${a}%` }} /> : null}
+                  <span className="hvDumbbell__dot hvDumbbell__dot--city" style={{ left: `${b}%` }} />
+                  <span className="hvDumbbell__text" style={{ "--hv-at": `calc(${Math.max(a, b)}% + 12px)` }}>
+                    {num(c.burden_young_pct, 0)} % ({thousands(c.rent_month)} €){c.rest_burden_young_pct != null ? ` · resto ${num(c.rest_burden_young_pct, 0)} %` : ""}
+                  </span>
+                </span>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+      <div>
+        <h3 className="vizPanelTitle">
+          Por comunidades
+          <span>alquiler mediano en % del sueldo neto de 25 a 34 años ajustado a la comunidad, {regions[0].year}</span>
+        </h3>
+        <Bars
+          rows={regions.map((row) => ({
+            id: row.code,
+            label: row.name,
+            value: row.burden_young_pct,
+            color: C.orange,
+            text: `${num(row.burden_young_pct)} % (${thousands(row.rent_month)} €/mes)`,
+          }))}
+          max={max}
+          label="Alquiler en % del sueldo neto joven por comunidad"
+        />
+      </div>
       <Explain
-        shows="Cuánto pesa el alquiler típico sobre la renta típica en cada comunidad, y cómo ha cambiado desde 2015."
-        read="Barra más larga = el alquiler se come más renta. El dato final de cada barra compara con 2015: si es mayor que hoy, el alquiler declarado ha subido menos que la renta media."
-        notSay="No es lo que paga quien firma un contrato hoy, que suele ser más, ni la renta de los inquilinos, que suele ser menor; tampoco distingue la capital del resto de la comunidad."
+        shows="Cuánto del sueldo de una persona joven se lleva el alquiler típico donde vive, en las grandes ciudades frente al resto de su provincia y en cada comunidad."
+        read="Punto lleno = la ciudad; hueco = el resto de su provincia. Cuanto más a la derecha, más sueldo se va en el alquiler. Por encima del 40 % se habla de sobrecarga; aquí no se suman los suministros, que lo elevan."
+        notSay="No es lo que paga quien firma un contrato hoy (más caro), ni sirve para quien comparte piso o vive en pareja con dos sueldos; el sueldo por edad y comunidad es una aproximación."
       />
     </Figure>
   );

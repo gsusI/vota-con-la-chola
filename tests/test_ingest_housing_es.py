@@ -173,6 +173,32 @@ class RegionalParsingTest(unittest.TestCase):
         self.assertEqual(income("Total Nacional. Renta neta media por hogar. Base 2013. "), "ES")
         self.assertIsNone(income("Total Nacional. Renta media por hogar (con alquiler imputado). Base 2013. "))
 
+    def test_ecv_split_tables_keep_both_sexes_national_and_single_tenures(self) -> None:
+        by_age = ingest.INE_SPLIT_TABLES["9994"][-1]
+        self.assertEqual(by_age("Ambos sexos. De 16 a 29 años. Total Nacional. Propiedad sin hipoteca. Hogar. "),
+                         {"edad": "De 16 a 29 años", "tenencia": "Propiedad sin hipoteca"})
+        self.assertIsNone(by_age("Hombres. De 16 a 29 años. Total Nacional. Propiedad sin hipoteca. Hogar. "))
+        income = ingest.INE_SPLIT_TABLES["59956"][-1]
+        self.assertEqual(income("Total Nacional. Alquiler a precio de mercado. Renta neta media por hogar. Base 2013. "),
+                         {"tenencia": "Alquiler a precio de mercado"})
+        self.assertIsNone(income("Total Nacional. Propiedad. Renta media por hogar (con alquiler imputado). Base 2013. "))
+
+    def test_serpavi_municipalities_keep_only_city_provinces(self) -> None:
+        rows = [
+            ("CPRO", "NPRO", "CUMUN", "NMUN", "ALQTBID12_M_VC_23", "ALQTBID12_M_VC_24", "BI_ALVHEPCO_TVC_24"),
+            (28, "Madrid", 28079, "Madrid", 820.0, 868.75, 300447),
+            (28, "Madrid", 28065, "Getafe", None, 700.0, 12120),
+            (49, "Zamora", 49275, "Zamora", 400.0, 409.7, 3865),
+        ]
+        batches = {d["indicator_code"]: s for d, s in ingest.serpavi_municipalities(iter(rows))}
+        rent = {s["geo_code"]: [(o["period"], o["value"]) for o in s["observations"]] for s in batches["serpavi_alquiler_mensual_mediano_vc_municipio"]}
+        self.assertEqual(rent, {"28065": [("2024", 700.0)], "28079": [("2023", 820.0), ("2024", 868.75)]})
+        self.assertEqual(batches["serpavi_viviendas_alquiladas_vc_municipio"][1]["geo_level"], "municipality")
+
+    def test_mortgage_payment_is_a_french_annuity(self) -> None:
+        self.assertAlmostEqual(export.mortgage_payment(100000, 0), 100000 / 300)
+        self.assertAlmostEqual(export.mortgage_payment(265392, 2.78), 1228.36, places=2)
+
     def test_index_rebase(self) -> None:
         self.assertEqual(export.index_to({2015: 80.0, 2025: 100.0}, 2015), {2015: 100.0, 2025: 125.0})
         self.assertEqual(export.index_to({2016: 1.0}, 2015), {})

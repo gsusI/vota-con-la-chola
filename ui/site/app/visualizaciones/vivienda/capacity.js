@@ -96,8 +96,8 @@ export function BurdenPeersFigure({ capacity, source }) {
   return (
     <Figure
       id="sobrecarga"
-      title={`El problema se concentra en quien alquila: el ${num(val("overburden_tenants", "ES"))} % de los inquilinos a precio de mercado gasta más del 40 % de su renta en vivienda, frente al ${num(val("overburden_tenants", "EU27_2020"))} % en la UE; en el conjunto de la población España está en la media (${num(val("overburden_total", "ES"))} % frente a ${num(val("overburden_total", "EU27_2020"))} %)`}
-      dek={`Capacidad de pago comparada en niveles con otros países (encuesta europea de condiciones de vida, ${year}). Casi la mitad de la población vive en una vivienda propia ya pagada y gasta poco en ella; la presión cae en los inquilinos. Tras pagar la vivienda, al hogar mediano le quedan ${thousands(residual("ES"))} PPS por adulto equivalente al año, frente a ${thousands(residual("EU27_2020"))} en la UE.`}
+      title={`Frente a Europa, el inquilino español a precio de mercado está más sobrecargado: el ${num(val("overburden_tenants", "ES"))} % gasta más del 40 % de su renta en vivienda, frente al ${num(val("overburden_tenants", "EU27_2020"))} % en la UE; la tasa de toda la población (${num(val("overburden_total", "ES"))} % frente a ${num(val("overburden_total", "EU27_2020"))} %) lo esconde`}
+      dek={`Capacidad de pago comparada en niveles con otros países (encuesta europea de condiciones de vida, ${year}). Casi la mitad de la población vive en una vivienda propia ya pagada y gasta poco en ella; la presión cae en los inquilinos (el desglose por tenencia y edad, en «Quién paga la vivienda»). Tras pagar la vivienda, al hogar mediano le quedan ${thousands(residual("ES"))} PPS por adulto equivalente al año, frente a ${thousands(residual("EU27_2020"))} en la UE.`}
       legendKind="bar"
       legend={[
         { id: "ES", label: "España", color: C.blue },

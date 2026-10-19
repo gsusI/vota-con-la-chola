@@ -578,6 +578,8 @@ def build(conn: sqlite3.Connection) -> dict:
                  "renters_es_pct": r(renters.get("ES", {}).get(str(max(int(p) for p in renters.get("ES", {"0": 0})))), 1),
                  "income_es": pts(es_income, 0)}
 
+    segments_block = segments(s, conn, net_young, rate, tax_rows)
+
     # 11. Money in versus money out: taxes on immovable property and on its transfer vs public housing spending.
     rev = {code: s.raw(f"TAX_REV.S13.{code}") for code in ("T_4100", "T_4400", "T_4000")}
     to_eu = {"ESP": "ES", "DEU": "DE", "FRA": "FR", "ITA": "IT", "PRT": "PT", "OECD": None}
@@ -687,9 +689,182 @@ def build(conn: sqlite3.Connection) -> dict:
         "composition": composition,
         "distribution": distribution,
         "territory": territory,
+        "segments": segments_block,
         "money": money,
         "norms": norms,
         "sources": sources,
+    }
+
+
+TENURES = ["OWN_NL", "OWN_L", "RENT_MKT", "RENT_FR"]
+ECV_TENURE = {"Propiedad sin hipoteca": "OWN_NL", "Propiedad con hipoteca": "OWN_L", "Alquiler a precio de mercado": "RENT_MKT",
+              "Alquiler inferior al precio de mercado": "RENT_FR", "Cesión": "RENT_FR"}
+ECV_AGES = ["De 16 a 29 años", "De 30 a 44 años", "De 45 a 64 años", "65 y más años"]
+AGE_LABEL = {"De 16 a 29 años": "16–29", "De 30 a 44 años": "30–44", "De 45 a 64 años": "45–64", "65 y más años": "65+", "Total": "Total"}
+# INE province -> (city municipality code, NUTS 2 of the province's region); the cities SERPAVI ships by municipality.
+CITIES = {"28": ("28079", "ES30"), "08": ("08019", "ES51"), "07": ("07040", "ES53"), "46": ("46250", "ES52"),
+          "41": ("41091", "ES61"), "29": ("29067", "ES61"), "50": ("50297", "ES24"), "48": ("48020", "ES21")}
+MORTGAGE_LTV, MORTGAGE_YEARS = 0.8, 25
+
+
+def mortgage_payment(principal: float, annual_rate_pct: float, years: int = MORTGAGE_YEARS) -> float:
+    """Monthly payment of a fixed-rate annuity loan (French amortisation)."""
+    i, n = annual_rate_pct / 100 / 12, years * 12
+    return principal * i / (1 - (1 + i) ** -n) if i else principal / n
+
+
+def segments(s: "Store", conn: sqlite3.Connection, net_young: dict[int, float], rate: dict[int, float], tax_rows: list[dict]) -> dict:
+    """Who pays for housing: tenure x age (ECV), overburden by tenure (EU-SILC), young people still at home, rents in the big
+    cities against the rest of their province (SERPAVI by municipality), and the shared typical cases of
+    docs/etl/sprints/VIZ-SEGMENTOS-20261019/README.md, each with the national mean and median beside it."""
+    pop = {t: s.raw(f"ilc_lvho02.{t}", where={"rskpovth": "TOTAL"}) for t in TENURES}
+    over = {t: s.raw(f"ilc_lvho07c.{t}") for t in [*TENURES, "TOTAL"]}
+    year = max(int(p) for p in over["TOTAL"]["ES"] if all(p in pop[t]["ES"] for t in TENURES) and all(p in over[t]["ES"] for t in TENURES))
+    y = str(year)
+    mean_share = s.raw("ilc_mded01._T")["ES"][y]
+    median_share = s.raw("ilc_lvho08a._T")["ES"][y]
+    tenure = [{"key": t, "pop_pct": r(pop[t]["ES"][y], 1), "overburden_pct": r(over[t]["ES"][y], 1),
+               "overburden_eu": r(over[t].get("EU27_2020", {}).get(y), 1)} for t in TENURES]
+
+    # Tenure by age of the household's reference person (INE ECV t=9994): latest year and 2008, before the crisis.
+    rows = conn.execute(
+        """
+        SELECT sv.dimensions_json, o.period_label, o.value_decimal FROM indicator_definitions d
+        JOIN indicator_releases r ON r.indicator_id = d.indicator_id
+        JOIN indicator_series_versions sv ON sv.indicator_release_id = r.indicator_release_id
+        JOIN indicator_observation_versions o ON o.indicator_series_version_id = sv.indicator_series_version_id
+        WHERE d.indicator_code = ? AND o.revision_state != 'deleted' AND o.value_decimal IS NOT NULL
+          AND r.indicator_release_id = (SELECT r2.indicator_release_id FROM indicator_releases r2 WHERE r2.indicator_id = d.indicator_id
+                                        ORDER BY r2.source_snapshot_date DESC, r2.created_at DESC LIMIT 1)
+        """, ("ecv_hogares_tenencia_edad_pct",)).fetchall()
+    s.raw("ecv_hogares_tenencia_edad_pct")
+    cells: dict[tuple[int, str], dict[str, float]] = defaultdict(lambda: defaultdict(float))
+    for dims, period, value in rows:
+        d = json.loads(dims)
+        if d["tenencia"] in ECV_TENURE:
+            cells[(int(period), d["edad"])][ECV_TENURE[d["tenencia"]]] += float(value)
+    # The ECV splits owners by mortgage only from 2010: the comparison year is the first with all four groups.
+    ecv_years = sorted({k[0] for k in cells if "OWN_NL" in cells[k] and "OWN_L" in cells[k]})
+    ecv_last, ecv_first = ecv_years[-1], ecv_years[0]
+    age_tenure = {
+        "year": ecv_last, "first_year": ecv_first,
+        "rows": [{"age": AGE_LABEL[a], "shares": {t: r(cells[(ecv_last, a)][t], 1) for t in TENURES},
+                  "shares_first": {t: r(cells[(ecv_first, a)][t], 1) for t in TENURES}} for a in [*ECV_AGES, "Total"]],
+    }
+
+    # Young people living with their parents (EU-SILC), with the EU average beside Spain.
+    home = {a: s.raw(f"ilc_lvps08.{a}") for a in ("Y16-29", "Y18-34", "Y25-34")}
+    at_home = {a: {geo: {"year": int(max(v)), "value": r(v[max(v)], 1)} for geo, v in table.items() if geo in ("ES", "EU27_2020") and v}
+               for a, table in home.items()}
+
+    # Big cities against the rest of their province (SERPAVI, IRPF): the city's median and the contract-weighted mean of the
+    # other municipalities' medians (a median of the rest cannot be rebuilt from municipal medians: an approximation).
+    rent_m = s.raw("serpavi_alquiler_mensual_mediano_vc_municipio")
+    count_m = s.raw("serpavi_viviendas_alquiladas_vc_municipio")
+    wage_reg = {code: annual(v) for code, v in s.raw("etcl_coste_salarial_ccaa").items()}
+    income_reg = s.raw("ecv_renta_neta_media_hogar")
+    young_year = max(net_young)
+
+    def young_net_in(region: str, yr: int) -> tuple[int, float] | None:
+        """Net pay of 25-34 year-olds (Spain, EES) scaled by the region's wage level (ETCL) in the same year."""
+        wy = min(yr, young_year)
+        if wy not in net_young or wy not in wage_reg.get(region, {}) or wy not in wage_reg.get("ES", {}):
+            return None
+        return wy, net_young[wy] * wage_reg[region][wy] / wage_reg["ES"][wy]
+
+    cities = []
+    for prov, (city, region) in CITIES.items():
+        if city not in rent_m:
+            continue
+        cy = max(int(p) for p in rent_m[city])
+        rest = [(rent_m[m][str(cy)], count_m.get(m, {}).get(str(cy))) for m in rent_m
+                if m != city and m.startswith(prov) and str(cy) in rent_m[m] and count_m.get(m, {}).get(str(cy))]
+        rest_n = sum(n for _v, n in rest)
+        pay = young_net_in(region, cy)
+        row = {"province": prov, "code": city, "region": region, "year": cy,
+               "rent_month": r(rent_m[city][str(cy)], 0), "rent_2019": r(rent_m[city].get("2019"), 0),
+               "contracts": r(count_m.get(city, {}).get(str(cy)), 0),
+               "rest_rent_month": r(sum(v * n for v, n in rest) / rest_n, 0) if rest_n else None,
+               "rest_contracts": r(rest_n, 0) if rest_n else None, "rest_municipalities": len(rest)}
+        if pay:
+            row["young_net_year"], row["young_net"] = pay[0], r(pay[1], 0)
+            row["burden_young_pct"] = r(row["rent_month"] * 12 / pay[1] * 100, 1)
+            row["rest_burden_young_pct"] = r(row["rest_rent_month"] * 12 / pay[1] * 100, 1) if row["rest_rent_month"] else None
+        cities.append(row)
+    by_city = {row["code"]: row for row in cities}
+    rent_reg = s.raw("serpavi_alquiler_mensual_mediano_vc")
+    regions = []
+    for code, name in REGIONS.items():
+        if not rent_reg.get(code):
+            continue
+        ry = max(int(p) for p in rent_reg[code])
+        pay = young_net_in(code, ry)
+        if pay:
+            regions.append({"code": code, "name": name, "year": ry, "rent_month": r(rent_reg[code][str(ry)], 0), "young_net_year": pay[0],
+                            "young_net": r(pay[1], 0), "burden_young_pct": r(rent_reg[code][str(ry)] * 12 / pay[1] * 100, 1)})
+    regions.sort(key=lambda row: -row["burden_young_pct"])
+
+    # Typical cases (README §3). Survey year t of the ECV and the EU-SILC records the income of t-1; costs are of year t.
+    s.raw("ecv_renta_neta_media_hogar_tenencia")
+    ten_rows = conn.execute(
+        """
+        SELECT sv.dimensions_json, o.period_label, o.value_decimal FROM indicator_definitions d
+        JOIN indicator_releases r ON r.indicator_id = d.indicator_id
+        JOIN indicator_series_versions sv ON sv.indicator_release_id = r.indicator_release_id
+        JOIN indicator_observation_versions o ON o.indicator_series_version_id = sv.indicator_series_version_id
+        WHERE d.indicator_code = 'ecv_renta_neta_media_hogar_tenencia' AND o.revision_state != 'deleted'
+          AND r.indicator_release_id = (SELECT r2.indicator_release_id FROM indicator_releases r2 WHERE r2.indicator_id = d.indicator_id
+                                        ORDER BY r2.source_snapshot_date DESC, r2.created_at DESC LIMIT 1)
+        """).fetchall()
+    inc_t: dict[str, dict[int, float]] = defaultdict(dict)
+    for dims, period, value in ten_rows:
+        inc_t[json.loads(dims)["tenencia"]][int(period)] = float(value)
+    t_ecv = max(inc_t["Alquiler a precio de mercado"])
+    ecv_reg = lambda code: income_reg[code][str(t_ecv)] / income_reg["ES"][str(t_ecv)]  # noqa: E731
+    cost = s.raw("ilc_mded03.TOTAL.TOTAL")["ES"]
+    cost_own_65 = s.raw("ilc_mded03.OWN.A2_GE1_GE65")["ES"]
+    ppp = s.raw("prc_ppp_ind._T")["ES"]
+    t_cost = max(int(p) for p in cost if p in cost_own_65)
+    ppp_y, ppp_v = max((int(p), v) for p, v in ppp.items() if int(p) <= t_cost)
+    eur = lambda pps: pps * ppp_v  # noqa: E731
+    over_of = lambda t: r(over[t]["ES"][y], 1)  # noqa: E731
+
+    def case(key: str, monthly_cost: float, income_year: float, **extra) -> dict:
+        return {"key": key, "cost_month": r(monthly_cost, 0), "income_year": r(income_year, 0),
+                "share_pct": r(monthly_cost * 12 / income_year * 100, 1), "left_month": r(income_year / 12 - monthly_cost, 0), **extra}
+
+    national_income = income_reg["ES"][str(t_ecv)]
+    cases = [case("national", eur(cost[str(t_cost)]), national_income, mean_share_pct=r(mean_share, 1),
+                  median_share_pct=r(median_share, 1), overburden_pct=over_of("TOTAL"), survey_year=t_cost)]
+    madrid = by_city.get("28079")
+    if madrid and madrid.get("young_net"):
+        cases.append(case("p1_young_renter_madrid", madrid["rent_month"], madrid["young_net"], rent_year=madrid["year"],
+                          pay_year=madrid["young_net_year"], overburden_pct=over_of("RENT_MKT")))
+    if madrid and madrid.get("rest_rent_month"):
+        cases.append(case("p2_family_renter_metro", madrid["rest_rent_month"], inc_t["Alquiler a precio de mercado"][t_ecv] * ecv_reg("ES30"),
+                          rent_year=madrid["year"], survey_year=t_ecv, overburden_pct=over_of("RENT_MKT")))
+    price_md = annual(s.raw("valor_tasado_vivienda_libre_ccaa")["ES30"])
+    py = max(y_ for y_ in price_md if y_ in rate)
+    price = price_md[py] * HOME_M2
+    payment = mortgage_payment(price * MORTGAGE_LTV, rate[py])
+    itp = [row for row in tax_rows if row["key"] == "itp_vivienda_usada" and row["scope"] == "ES-MD"]
+    itp_pct = max(itp, key=lambda row: row["year"])["value"] if itp else None
+    income_buyer = inc_t["Propiedad con hipoteca"][t_ecv] * ecv_reg("ES30")
+    upfront = price * (1 - MORTGAGE_LTV) + (price * itp_pct / 100 if itp_pct is not None else 0)
+    cases.append(case("p2_family_buyer_madrid", payment, income_buyer, price_year=py, home_price=r(price, 0), rate_pct=r(rate[py], 2),
+                      ltv_pct=MORTGAGE_LTV * 100, years=MORTGAGE_YEARS, itp_pct=itp_pct, upfront=r(upfront, 0),
+                      upfront_years_income=r(upfront / income_buyer, 1), survey_year=t_ecv, overburden_pct=over_of("OWN_L")))
+    cases.append(case("p4_retired_owner_interior", eur(cost_own_65[str(t_cost)]), inc_t["Propiedad sin hipoteca"][t_ecv] * ecv_reg("ES41"),
+                      survey_year=t_cost, overburden_pct=over_of("OWN_NL")))
+    cases.append({"key": "e_living_with_parents", "at_home_pct": at_home["Y25-34"]["ES"]["value"], "at_home_eu_pct": at_home["Y25-34"]["EU27_2020"]["value"],
+                  "year": at_home["Y25-34"]["ES"]["year"]})
+    return {
+        "year": year, "overburden_total": r(over["TOTAL"]["ES"][y], 1), "overburden_total_eu": r(over["TOTAL"].get("EU27_2020", {}).get(y), 1),
+        "cost_share_mean": r(mean_share, 1), "cost_share_median": r(median_share, 1),
+        "tenure": tenure, "age_tenure": age_tenure, "at_home": at_home, "cities": cities, "regions": regions,
+        "young_net_es": {"year": young_year, "value": r(net_young[young_year], 0)},
+        "assumptions": {"ppp_year": ppp_y, "eur_per_pps": r(ppp_v, 4), "cost_year": t_cost, "ecv_year": t_ecv},
+        "cases": cases,
     }
 
 
@@ -807,6 +982,27 @@ def write_csv(data: dict, path: Path) -> None:
         rows.append(("mivau+ine", "alquiler_mediano_mes", row["code"], row["year"], row["rent_month"]))
         rows.append(("mivau+ine", "alquiler_pct_renta_hogar", row["code"], row["year"], row["burden_pct"]))
         rows.append(("ine_tempus", "hogares_alquiler_mercado_pct", row["code"], row["year"] + 1, row["renters_pct"]))
+    seg = data["segments"]
+    rows.append(("eurostat_sdmx", "gasto_vivienda_pct_renta_media", "ES", seg["year"], seg["cost_share_mean"]))
+    rows.append(("eurostat_sdmx", "gasto_vivienda_pct_renta_mediana", "ES", seg["year"], seg["cost_share_median"]))
+    for t in seg["tenure"]:
+        rows.append(("eurostat_sdmx", f"poblacion_tenencia_{t['key']}_pct", "ES", seg["year"], t["pop_pct"]))
+        rows.append(("eurostat_sdmx", f"sobrecarga_tenencia_{t['key']}", "ES", seg["year"], t["overburden_pct"]))
+        rows.append(("eurostat_sdmx", f"sobrecarga_tenencia_{t['key']}", "EU27_2020", seg["year"], t["overburden_eu"]))
+    at = seg["age_tenure"]
+    for row in at["rows"]:
+        for key, yr in (("shares", at["year"]), ("shares_first", at["first_year"])):
+            rows.extend(("ine_tempus", f"hogares_edad_{row['age']}_tenencia_{t}_pct", "ES", yr, v) for t, v in row[key].items())
+    for age, by_geo in seg["at_home"].items():
+        rows.extend(("eurostat_sdmx", f"viven_con_sus_padres_{age}_pct", geo, v["year"], v["value"]) for geo, v in by_geo.items())
+    for c in seg["cities"]:
+        for key in ("rent_month", "rest_rent_month", "contracts", "rest_contracts", "young_net", "burden_young_pct", "rest_burden_young_pct"):
+            if c.get(key) is not None:
+                rows.append(("mivau+ine", f"ciudad_{key}", c["code"], c["year"], c[key]))
+    for c in seg["cases"]:
+        for key, value in c.items():
+            if key != "key" and isinstance(value, (int, float)):
+                rows.append(("derivado", f"caso_{c['key']}_{key}", "ES", c.get("survey_year") or c.get("rent_year") or c.get("year") or seg["year"], value))
     for row in data["story"]:
         rows.append(("derivado", "relato_viviendas_por_hogar_nuevo", "ES", row["year"], row["x"]))
         rows.append(("bde_indicadores_vivienda", "relato_anios_renta_hogar", "ES", row["year"], row["y"]))

@@ -609,6 +609,49 @@ def parse_serpavi(raw: Raw) -> Iterable[Batch]:
             "methodology_url": "https://cdn.mivau.gob.es/portal-web-mivau/vivienda/serpavi/2026-03-18_Metodologia_SERPAVI.pdf",
             "source_url": SERPAVI_PAGE,
         }, sorted(series, key=lambda s: s["geo_code"])
+    yield from serpavi_municipalities(book["Municipios"].iter_rows(values_only=True))
+
+
+# Provinces whose municipalities are kept (sheet 'Municipios'): the big cities against the rest of their province.
+# INE province code -> INE municipality code of the city.
+SERPAVI_CITIES = {"28": "28079", "08": "08019", "07": "07040", "46": "46250", "41": "41091", "29": "29067", "50": "50297", "48": "48020"}
+SERPAVI_MUNI_FIELDS = {
+    "ALQTBID12_M_VC": ("serpavi_alquiler_mensual_mediano_vc_municipio", ("EUR_MONTH", "Euros al mes"),
+                       "Alquiler mensual mediano de vivienda colectiva por municipio (SERPAVI)"),
+    "BI_ALVHEPCO_TVC": ("serpavi_viviendas_alquiladas_vc_municipio", ("DWELLINGS", "Viviendas"),
+                        "Viviendas colectivas alquiladas como vivienda habitual por municipio (SERPAVI, recuento)"),
+}
+
+
+def serpavi_municipalities(rows_iter: Iterable[tuple]) -> Iterable[Batch]:
+    """Sheet 'Municipios' (CPRO, NPRO, CUMUN, NMUN, then one column per measure and year), restricted to the provinces of
+    SERPAVI_CITIES. Geography code: INE municipality code (5 digits)."""
+    rows = list(rows_iter)
+    header = rows[0]
+    for prefix, (code, unit, label) in SERPAVI_MUNI_FIELDS.items():
+        series = []
+        for ri, row in enumerate(rows[1:], start=1):
+            if row[0] is None or row[2] is None or str(row[0]).zfill(2) not in SERPAVI_CITIES:
+                continue
+            muni = str(row[2]).zfill(5)
+            obs = []
+            for ci, name in enumerate(header):
+                if isinstance(name, str) and name.startswith(prefix + "_") and name[len(prefix) + 1:].isdigit() and row[ci] is not None:
+                    obs.append({"period": str(2000 + int(name[len(prefix) + 1:])), "value": row[ci],
+                                "pointer": pointer("sheets", "Municipios", "rows", ri, "cols", ci), "cell_index": ri * 1000 + ci})
+            if obs:
+                s = geo_series(f"serpavi_mun|{prefix}|{muni}", muni, {"cpro": str(row[0]).zfill(2), "provincia": row[1], "nombre": row[3]}, obs)
+                s.update(geo_name=row[3], geo_system="INE-municipio", geo_level="municipality")
+                series.append(s)
+        yield {
+            "source_id": "mivau_boletin", "dataset_code": "SERPAVI_2011_2024", "indicator_code": code, "frequency_code": "A",
+            "frequency_label": "Anual", "unit_code": unit[0], "unit_label": unit[1], "label": label, "extraction_method": "xlsx_cell",
+            "definition": "SERPAVI, hoja Municipios: alquileres de vivienda habitual declarados en el IRPF (excluidos los "
+            "alquileres a parientes), viviendas en bloque, todos los contratos vigentes. Solo municipios de las provincias de "
+            "Madrid, Barcelona, Illes Balears, Valencia, Sevilla, Málaga, Zaragoza y Bizkaia.",
+            "methodology_url": "https://cdn.mivau.gob.es/portal-web-mivau/vivienda/serpavi/2026-03-18_Metodologia_SERPAVI.pdf",
+            "source_url": SERPAVI_PAGE,
+        }, sorted(series, key=lambda s: s["geo_code"])
 
 
 # ---------------------------------------------------------------- Banco de España si_1_5 (CSV)
@@ -792,6 +835,64 @@ def parse_ine_table(table: str) -> Callable[[Raw], Iterable[Batch]]:
             "frequency_label": "Según la tabla", "unit_code": unit[0], "unit_label": unit[1], "label": label,
             "definition": definition, "methodology_url": page, "source_url": f"https://www.ine.es/jaxiT3/Tabla.htm?t={table}",
         }, sorted(series, key=lambda s: s["geo_code"])
+
+    return parse
+
+
+ECV_TENURES = ("Propiedad", "Propiedad sin hipoteca", "Propiedad con hipoteca", "Alquiler a precio de mercado",
+               "Alquiler inferior al precio de mercado", "Cesión")
+
+
+def _tenure_by_age(name: str) -> dict[str, str] | None:
+    """'Ambos sexos. De 16 a 29 años. Total Nacional. Propiedad sin hipoteca. Hogar.' -> {edad, tenencia}."""
+    parts = [p.strip() for p in name.split(". ")]
+    if len(parts) < 4 or parts[0] != "Ambos sexos" or parts[2] != "Total Nacional" or parts[3] not in ECV_TENURES:
+        return None
+    return {"edad": parts[1], "tenencia": parts[3]}
+
+
+def _income_by_tenure(name: str) -> dict[str, str] | None:
+    """'Total Nacional. Propiedad sin hipoteca. Renta neta media por hogar. Base 2013.' -> {tenencia}."""
+    parts = [p.strip() for p in name.split(". ")]
+    if len(parts) < 3 or parts[0] != "Total Nacional" or parts[2] != "Renta neta media por hogar":
+        return None
+    return {"tenencia": parts[1]}
+
+
+# Tables split by more than geography (all national): table -> (indicator_code, unit, label, definition, dims(name)).
+INE_SPLIT_TABLES = {
+    "9994": ("ecv_hogares_tenencia_edad_pct", ("PC", "% de los hogares de cada edad"),
+             "Hogares por régimen de tenencia de la vivienda y edad de la persona de referencia (INE, ECV)",
+             "INE ECV: reparto de los hogares de cada grupo de edad de la persona de referencia entre propiedad (sin o con "
+             "hipoteca), alquiler a precio de mercado, alquiler inferior al de mercado y cesión. Tenencia del año de la encuesta.",
+             _tenure_by_age),
+    "59956": ("ecv_renta_neta_media_hogar_tenencia", ("EUR_YEAR", "Euros al año"),
+              "Renta neta media por hogar según el régimen de tenencia de la vivienda (INE, ECV)",
+              "INE ECV: renta disponible neta media por hogar del año anterior a la encuesta, sin alquiler imputado, por "
+              "régimen de tenencia de la vivienda principal.", _income_by_tenure),
+}
+
+
+def parse_ine_split(table: str) -> Callable[[Raw], Iterable[Batch]]:
+    code, unit, label, definition, dims_of = INE_SPLIT_TABLES[table]
+
+    def parse(raw: Raw) -> Iterable[Batch]:
+        series = []
+        for si, doc in enumerate(raw.data):
+            dims = dims_of(doc["Nombre"].strip())
+            if dims is None:
+                continue
+            obs = [{"period": ine_period(row), "value": row["Valor"], "pointer": pointer(si, "Data", i, "Valor"), "cell_index": si * 1000 + i}
+                   for i, row in enumerate(doc["Data"]) if row.get("Valor") is not None]
+            series.append(geo_series(f"{table}|{doc['COD']}", "ES", {"serie": doc["COD"], "nombre": doc["Nombre"].strip(), **dims}, obs))
+        if not series:
+            raise ValueError(f"INE {table}: no series matched")
+        yield {
+            "source_id": "ine_tempus", "dataset_code": f"INE-{table}", "indicator_code": code, "frequency_code": "A",
+            "frequency_label": "Anual", "unit_code": unit[0], "unit_label": unit[1], "label": label, "definition": definition,
+            "methodology_url": "https://www.ine.es/dyngs/INEbase/operacion.htm?c=Estadistica_C&cid=1254736176807&idp=1254735976608",
+            "source_url": f"https://www.ine.es/jaxiT3/Tabla.htm?t={table}",
+        }, sorted(series, key=lambda s: s["key"])
 
     return parse
 
@@ -1071,6 +1172,30 @@ EUROSTAT_DEFS = {
         "label": "Renta disponible equivalente mediana (EU-SILC), PPS", "unit_code": "PPS", "unit_label": "Estándar de poder adquisitivo",
         "split": [], "definition": "Eurostat EU-SILC: renta disponible del hogar por adulto equivalente, mediana, en estándar de poder adquisitivo.",
     },
+    "ilc_lvps08": {
+        "label": "Jóvenes que viven en casa de sus padres", "unit_code": "PC", "unit_label": "% de la población de esa edad",
+        "split": ["age"], "definition": "Eurostat EU-SILC: % de las personas de cada grupo de edad que viven con sus padres.",
+    },
+    "ilc_lvho08a": {
+        "label": "Mediana del peso de los gastos de vivienda en la renta disponible", "unit_code": "PC",
+        "unit_label": "% de la renta disponible", "split": [],
+        "definition": "Eurostat EU-SILC: mediana de la distribución del cociente gasto total en vivienda / renta disponible "
+        "del hogar (netos de ayudas a la vivienda), toda la población.",
+    },
+    "ilc_mded03": {
+        "label": "Gasto total en vivienda por hogar, PPS al mes", "unit_code": "PPS_MONTH", "unit_label": "Estándar de poder adquisitivo al mes",
+        "split": ["tenure", "hhcomp"],
+        "definition": "Eurostat EU-SILC: gasto total en vivienda del hogar (alquiler o intereses de la hipoteca, sin la "
+        "amortización del capital; suministros, comunidad, seguros, reparaciones e impuestos), netos de ayudas, en PPS al mes. "
+        "OWN: propietarios con o sin hipoteca; RENT: inquilinos a precio de mercado o reducido; A2_GE1_GE65: dos adultos, "
+        "al menos uno de 65 o más años.",
+    },
+    "prc_ppp_ind": {
+        "label": "Paridad de poder adquisitivo, consumo individual efectivo (euros por PPS)", "unit_code": "EUR_PER_PPS",
+        "unit_label": "Euros por PPS", "split": [],
+        "definition": "Eurostat: paridad de poder adquisitivo frente a la UE-27 para el consumo individual efectivo (A01), "
+        "la que se usa para pasar a PPS las magnitudes de los hogares.",
+    },
     "nama_10_gdp": {
         "label": "Producto interior bruto a precios corrientes, millones de euros",
         "unit_code": "CP_MEUR", "unit_label": "Millones de euros corrientes", "split": [],
@@ -1136,7 +1261,7 @@ API_SOURCES: list[tuple[str, str, Callable[[Raw], Iterable[Batch]]]] = [
     *[(f"ine_tabla_{table}.json", ine_table_url(table), parse_ees(table)) for table in EES_TABLES],
     ("eurostat_yth_demo_030.json", eurostat_url("yth_demo_030", sex="T", unit="AVG", geo=PEERS), parse_eurostat("yth_demo_030")),
     ("eurostat_ilc_lvho02.json", eurostat_url("ilc_lvho02", hhcomp="TOTAL", rskpovth=["TOTAL", "A_60", "B_60"], unit="PC",
-                                               tenure=["OWN", "OWN_L", "RENT", "RENT_MKT", "RENT_FR"], geo=PEERS), parse_eurostat("ilc_lvho02")),
+                                               tenure=["OWN", "OWN_L", "OWN_NL", "RENT", "RENT_MKT", "RENT_FR"], geo=PEERS), parse_eurostat("ilc_lvho02")),
     ("eurostat_gov_10a_exp_housing.json", eurostat_url("gov_10a_exp", unit="MIO_EUR", sector="S13", na_item="TE",
                                                         cofog99=["GF0601", "GF1006"], geo=PEERS), parse_eurostat("gov_10a_exp")),
     ("eurostat_nama_10_gdp.json", eurostat_url("nama_10_gdp", unit="CP_MEUR", na_item="B1GQ", geo=PEERS), parse_eurostat("nama_10_gdp")),
@@ -1147,10 +1272,16 @@ API_SOURCES: list[tuple[str, str, Callable[[Raw], Iterable[Batch]]]] = [
     ("eurostat_ilc_lvho07a.json", eurostat_url("ilc_lvho07a", unit="PC", sex="T", rskpovth="TOTAL", age=["TOTAL", "Y15-29", "Y_LT18", "Y18-64", "Y_GE65"], geo=PEERS), parse_eurostat("ilc_lvho07a")),
     ("eurostat_ilc_lvho07b.json", eurostat_url("ilc_lvho07b", unit="PC", quant_inc=["TOTAL", "QU1", "QU2", "QU3", "QU4", "QU5"], geo=PEERS), parse_eurostat("ilc_lvho07b")),
     ("eurostat_demo_pjangroup.json", eurostat_url("demo_pjangroup", unit="NR", sex="T", age=["TOTAL", "Y25-29", "Y30-34", "Y35-39"], geo=PEERS), parse_eurostat("demo_pjangroup")),
-    ("eurostat_ilc_lvho07c.json", eurostat_url("ilc_lvho07c", unit="PC", tenure=["TOTAL", "RENT_MKT", "OWN_L"], geo=PEERS), parse_eurostat("ilc_lvho07c")),
+    ("eurostat_ilc_lvho07c.json", eurostat_url("ilc_lvho07c", unit="PC", tenure=["TOTAL", "OWN_NL", "OWN_L", "RENT_MKT", "RENT_FR"], geo=PEERS), parse_eurostat("ilc_lvho07c")),
     ("eurostat_ilc_mded01.json", eurostat_url("ilc_mded01", unit="PC", hhcomp="TOTAL", rskpovth="TOTAL", geo=PEERS), parse_eurostat("ilc_mded01")),
     ("eurostat_ilc_mded02.json", eurostat_url("ilc_mded02", unit="PC", hhcomp="TOTAL", rskpovth="TOTAL", geo=PEERS), parse_eurostat("ilc_mded02")),
     ("eurostat_ilc_di03.json", eurostat_url("ilc_di03", unit="PPS", statinfo="MED_EI", age="TOTAL", sex="T", geo=PEERS), parse_eurostat("ilc_di03")),
+    ("eurostat_ilc_lvps08.json", eurostat_url("ilc_lvps08", unit="PC", sex="T", age=["Y16-29", "Y18-34", "Y25-34"], geo=PEERS), parse_eurostat("ilc_lvps08")),
+    ("eurostat_ilc_lvho08a.json", eurostat_url("ilc_lvho08a", unit="PC", sex="T", rskpovth="TOTAL", age="TOTAL", geo=PEERS), parse_eurostat("ilc_lvho08a")),
+    ("eurostat_ilc_mded03.json", eurostat_url("ilc_mded03", unit="PPS", rskpovth="TOTAL", tenure=["TOTAL", "OWN", "RENT"],
+                                               hhcomp=["TOTAL", "A2_GE1_GE65"], geo="ES"), parse_eurostat("ilc_mded03")),
+    ("eurostat_prc_ppp_ind_a01.json", eurostat_url("prc_ppp_ind", na_item="PPP_EU27_2020", ppp_cat="A01", geo="ES"), parse_eurostat("prc_ppp_ind")),
+    *[(f"ine_tabla_{table}.json", ine_table_url(table), parse_ine_split(table)) for table in INE_SPLIT_TABLES],
     ("eurostat_tour_ce_omn12.json", eurostat_url("tour_ce_omn12", unit="NR", c_resid="TOTAL", month="TOTAL", indic_to="NGT_SP", geo=PEERS), parse_eurostat("tour_ce_omn12")),
 ]
 

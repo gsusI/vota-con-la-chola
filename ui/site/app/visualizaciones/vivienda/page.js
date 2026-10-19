@@ -6,6 +6,7 @@ import HousingTable from "./HousingTable";
 import { formatHousing } from "./format.mjs";
 import { TaxesFigure, CensusStockFigure, YoungOwnershipFigure, SocialStockBars, SpendingBars } from "./sections";
 import StoryFigure from "./StoryFigure";
+import WhoPaysFigure from "./segments";
 import { BurdenPeersFigure, CapacityFigure, MoneyFigure } from "./capacity";
 import { CohortFigure, DistributionFigure, TenantRegionFigure } from "./distribution";
 import { C, NAMES, PEER_LEGEND, PeerPanels, at, day, howMany, joinEs, millions, num, thousands } from "./common";
@@ -32,6 +33,8 @@ export default function ViviendaPage() {
   const data = readPublicJson("visualizaciones/data/vivienda.json", null);
   if (!data) throw new Error("Missing visualizaciones/data/vivienda.json");
   const h = data.headline;
+  const seg = data.segments;
+  const segT = seg ? Object.fromEntries(seg.tenure.map((row) => [row.key, row])) : {};
   const src = data.sources;
   const source = (id, label, href) => ({
     label: `${label}${src[id]?.retrieved_at ? ` (consultado ${day(src[id].retrieved_at)})` : ""}`,
@@ -181,6 +184,15 @@ export default function ViviendaPage() {
       />
 
       <section className="vizStats" aria-label="Cifras clave">
+        {seg ? (
+          <div className="card vizStat">
+            <span className="vizStat__label">Gastan más del 40 % de su renta en vivienda</span>
+            <span className="vizStat__value">{num(segT.RENT_MKT.overburden_pct)} %</span>
+            <span className="vizStat__note">
+              de quienes alquilan a precio de mercado, frente al {num(segT.OWN_NL.overburden_pct)} % de quienes tienen la casa pagada y el {num(seg.overburden_total)} % de toda la población ({seg.year})
+            </span>
+          </div>
+        ) : null}
         <div className="card vizStat">
           <span className="vizStat__label">Piso de {h.home_m2} m² en años de salario bruto medio</span>
           <span className="vizStat__value">{num(ipvLast.value)}</span>
@@ -247,6 +259,7 @@ export default function ViviendaPage() {
         <ul className="hvToc" aria-label="Partes de la página">
           <li><a href="#el-dato">El dato frente al relato</a></li>
           <li><a href="#el-dato-dinero">Lo que se cobra y lo que se gasta</a></li>
+          <li><a href="#quien-paga">Quién paga la vivienda</a></li>
           <li><a href="#precio">1. El precio</a></li>
           <li><a href="#alquiler-parte">2. El alquiler</a></li>
           <li><a href="#oferta">3. Construcción y hogares</a></li>
@@ -262,6 +275,8 @@ export default function ViviendaPage() {
       <StoryFigure story={data.story} composition={data.composition} source={source} />
 
       <MoneyFigure money={data.money} source={source} />
+
+      <WhoPaysFigure segments={data.segments} source={source} />
 
       <Part id="precio" title="1. El precio: cuánto cuesta comprar">Medimos el precio en años de salario, con la tasación y con el precio real de compraventa, por comunidades y frente a otros países.</Part>
 
@@ -345,7 +360,7 @@ export default function ViviendaPage() {
 
       <BurdenPeersFigure capacity={data.capacity} source={source} />
 
-      <TenantRegionFigure territory={data.territory} source={source} />
+      <TenantRegionFigure territory={data.territory} segments={data.segments} source={source} />
 
       <Part id="oferta" title="3. Construcción y hogares">El corazón de la hipótesis: ¿se construyen menos viviendas de las que hacen falta? En España y en cada comunidad.</Part>
 
@@ -675,7 +690,8 @@ export default function ViviendaPage() {
         <h2>Lo que estos datos no pueden decir</h2>
         <ul>
           <li>Causalidad: tipos de interés, empleo, inmigración, demanda extranjera y alquiler turístico se mueven a la vez; ninguno se aísla aquí.</li>
-          <li>Dónde exactamente: las cifras son nacionales o autonómicas. El déficit se concentra en ciudades y barrios concretos; las viviendas vacías, a menudo donde no hay demanda.</li>
+          <li>Dónde exactamente: casi todas las cifras son nacionales o autonómicas; solo el alquiler declarado baja a municipio (las grandes ciudades frente al resto de su provincia). El déficit se concentra en ciudades y barrios concretos; las viviendas vacías, a menudo donde no hay demanda.</li>
+          <li>Quién, cruzando todo: no hay tabla oficial de sobrecarga por edad, tenencia y comunidad a la vez, ni sueldo oficial por edad y comunidad. Los hogares tipo de «Quién paga la vivienda» combinan cortes sueltos y lo dicen; hacerlo bien pide los microdatos de la ECV, con sus márgenes de error.</li>
           <li>El precio de los alquileres nuevos: no hay una serie oficial larga; el IPVA y el IPCA miden todos los contratos vigentes.</li>
           <li>El suelo: cuánto suelo urbanizable hay y cuánto tarda en tramitarse depende del planeamiento municipal, que no tiene estadística nacional comparable.</li>
           <li>Censos de 1950 y 1960: no hay una fuente oficial digitalizada del régimen de tenencia; la serie empieza en 1970.</li>
