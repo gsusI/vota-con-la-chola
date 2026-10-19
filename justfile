@@ -6870,3 +6870,10 @@ snapshot-reproducibility-check:
 public-finance-refresh *args:
   python3 scripts/ingest_public_finance_es.py {{args}}
   python3 scripts/export_public_viz_fiscal.py
+
+# Spain employment (/visualizaciones/empleo/): fetch AMECO and OCDE (via DBnomics), Eurostat and INE EPA into the raw
+# cache, load them with the curated reforms/EPA breaks into employment-es.db (indicator_* contract with releases and
+# revisions), then export the page data from that DB. `just employment-refresh --offline` reloads from the cache.
+employment-refresh *args:
+  python3 scripts/ingest_employment_es.py {{args}}
+  python3 scripts/export_public_viz_employment.py

@@ -330,12 +330,23 @@ export const siteSections = [
         href: "/visualizaciones/carga-fiscal/",
         cta: "Abrir visualización",
       },
+      {
+        title: "El paro en España: ¿estructural o cíclico?",
+        note: "Paro desde 1960 frente a Europa, paro juvenil, temporalidad y fijos discontinuos, productividad por hora y cuña fiscal.",
+        href: "/visualizaciones/empleo/",
+        cta: "Abrir visualización",
+      },
     ],
     surfaces: [
       {
         title: "Carga y complejidad fiscal",
         href: "/visualizaciones/carga-fiscal/",
         note: "FMI, OCDE, Eurostat, Banco Mundial y BOE, con tabla y procedencia por gráfico.",
+      },
+      {
+        title: "Empleo, paro y productividad",
+        href: "/visualizaciones/empleo/",
+        note: "AMECO, Eurostat, EPA del INE y OCDE, con rupturas de serie marcadas y comparación con la UE.",
       },
     ],
   },
@@ -425,6 +436,22 @@ export const datasetCatalog = [
     label: "Carga y complejidad fiscal (JSON con procedencia)",
     path: "/visualizaciones/data/carga-fiscal.json",
     note: "Mismas series con URL, fecha de consulta y SHA-256 de cada fuente original.",
+    confidence: "Publicado",
+  },
+  {
+    id: "viz-empleo",
+    sectionId: "visualizaciones",
+    label: "Empleo, paro y productividad (CSV)",
+    path: "/visualizaciones/data/empleo.csv",
+    note: "Paro, paro juvenil, temporalidad, productividad por hora, cuña fiscal y tasa de empleo usados en la visualización.",
+    confidence: "Publicado",
+  },
+  {
+    id: "viz-empleo-json",
+    sectionId: "visualizaciones",
+    label: "Empleo, paro y productividad (JSON con procedencia)",
+    path: "/visualizaciones/data/empleo.json",
+    note: "Mismas series con URL, fecha de consulta, ruta del original y SHA-256 de cada fuente.",
     confidence: "Publicado",
   },
   {

@@ -1,0 +1,79 @@
+{
+  "description": "Labour reforms and EPA series breaks marked on /visualizaciones/empleo/. One citation per event; loaded by scripts/ingest_employment_es.py as indicator vclc_employment_events (frequency EVENT, value_text = label).",
+  "curated_at": "2026-10-19",
+  "events": [
+    {
+      "id": "reform_1984_temporary_contracts",
+      "date": "1984-08-24",
+      "kind": "labour_reform",
+      "label": "Ley 32/1984: contratos temporales sin causa",
+      "source": "Ley 32/1984, de 2 de agosto, que modifica el Estatuto de los Trabajadores",
+      "source_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1984-17436",
+      "locator": "BOE-A-1984-17436; desarrollada por el Real Decreto 2104/1984 (BOE-A-1984-25805), que regula los contratos de duración determinada y el de fijos discontinuos",
+      "confidence": "high"
+    },
+    {
+      "id": "reform_2012",
+      "date": "2012-02-12",
+      "kind": "labour_reform",
+      "label": "Reforma laboral de 2012",
+      "source": "Real Decreto-ley 3/2012 (convalidado como Ley 3/2012, BOE-A-2012-9110)",
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2012-2076",
+      "locator": "BOE-A-2012-2076",
+      "confidence": "high"
+    },
+    {
+      "id": "reform_2022",
+      "date": "2022-03-30",
+      "kind": "labour_reform",
+      "label": "Reforma laboral de 2022: el contrato indefinido pasa a ser la regla",
+      "source": "Real Decreto-ley 32/2021, de 28 de diciembre",
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2021-21788",
+      "locator": "BOE-A-2021-21788; el nuevo régimen de contratos (art. 15 ET) se aplica desde el 30 de marzo de 2022",
+      "confidence": "high"
+    },
+    {
+      "id": "epa_break_2001",
+      "date": "2001-01-01",
+      "kind": "series_break",
+      "label": "EPA 2001: nueva definición de parado (búsqueda activa)",
+      "source": "Reglamento (CE) 1897/2000 de la Comisión, definición operativa de desempleo",
+      "source_url": "https://eur-lex.europa.eu/eli/reg/2000/1897/oj",
+      "locator": "Aplicado por el INE en la EPA desde el primer trimestre de 2001",
+      "confidence": "high"
+    },
+    {
+      "id": "epa_break_2005",
+      "date": "2005-01-01",
+      "kind": "series_break",
+      "label": "EPA 2005: nuevo cuestionario y entrevista telefónica",
+      "source": "INE, Encuesta de Población Activa: metodología",
+      "source_url": "https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736176918&menu=metodologia&idp=1254735976595",
+      "locator": "Metodología EPA-2005: nuevo cuestionario, entrevista telefónica centralizada y nuevas proyecciones de población",
+      "confidence": "medium"
+    },
+    {
+      "id": "epa_break_2021",
+      "date": "2021-01-01",
+      "kind": "series_break",
+      "label": "EPA 2021: reglamento europeo IESS",
+      "source": "Reglamento (UE) 2019/1700, estadísticas europeas sobre personas y hogares",
+      "source_url": "https://eur-lex.europa.eu/eli/reg/2019/1700/oj",
+      "locator": "Aplicado por el INE en la EPA desde el primer trimestre de 2021; el INE recalculó las series desde 2002",
+      "confidence": "high"
+    }
+  ],
+  "gaps": [
+    "La API Tempus del INE solo ofrece la EPA desde 2002 (series recalculadas con la metodología de 2021). La EPA de 1976-2001 está en ficheros históricos fuera de la API; para esos años se usa AMECO (Comisión Europea), que parte de la EPA y la homogeneiza.",
+    "AMECO publica previsiones para el año en curso y el siguiente: el exportador corta en el último año con dato observado de Eurostat.",
+    "Los agregados europeos de AMECO cambian de cobertura: UE-15 con la RFA (1971-1991), UE-15 (desde 1991) y UE-27 (desde 2000). Se muestran por separado, sin empalmar."
+  ],
+  "blocked_hosts": [
+    {
+      "host": "sdmx.oecd.org",
+      "checked_at": "2026-10-19",
+      "signal": "HTTP 403 text/html a una petición por script de DSD_TAX_WAGES_COMP@DF_TW_COMP",
+      "fallback": "Réplica DBnomics de la OCDE (Taxing Wages y Productivity Database), que reproduce los códigos SDMX oficiales"
+    }
+  ]
+}
