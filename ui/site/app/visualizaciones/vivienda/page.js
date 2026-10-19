@@ -5,80 +5,25 @@ import HousingChart from "./HousingChart";
 import HousingTable from "./HousingTable";
 import { formatHousing } from "./format.mjs";
 import { TaxesFigure, CensusStockFigure, YoungOwnershipFigure, SocialStockBars, SpendingBars } from "./sections";
+import { C, NAMES, PEER_LEGEND, PeerPanels, at, day, howMany, millions, num, thousands } from "./common";
+import { Explain, Part, Verdict } from "./explain";
+import {
+  HouseholdSizeFigure,
+  NormsFigure,
+  PopulationFigure,
+  RegionalGapFigure,
+  RegionalPriceFigure,
+  RentFigure,
+  RentPeersFigure,
+  SalePricesFigure,
+  TouristFigure,
+} from "./expanded";
 
 export const metadata = {
   title: "Vivienda: ¿falta construir o falta gasto público? | Vota Con La Chola",
   description:
     "Años de salario para comprar un piso, viviendas terminadas frente a hogares nuevos, edad de emancipación, propiedad y alquiler, impuestos de compra y gasto público en vivienda en España, con fuentes oficiales y datos descargables.",
 };
-
-const C = {
-  blue: "#2a78d6",
-  orange: "#eb6834",
-  aqua: "#1baf7a",
-  yellow: "#eda100",
-  ref: "#52514e",
-  peer: "#b4b2a9",
-};
-
-const NAMES = {
-  ES: "España",
-  ESP: "España",
-  EU27_2020: "Media UE-27",
-  EU: "Media UE",
-  OECD: "OCDE",
-  DE: "Alemania",
-  DEU: "Alemania",
-  FR: "Francia",
-  FRA: "Francia",
-  IT: "Italia",
-  ITA: "Italia",
-  PT: "Portugal",
-  PRT: "Portugal",
-};
-
-const num = (value, digits = 1) =>
-  Number(value).toLocaleString("es-ES", { minimumFractionDigits: digits, maximumFractionDigits: digits });
-const thousands = (value) => Math.round(Number(value)).toLocaleString("es-ES", { useGrouping: "always" });
-const millions = (value, digits = 2) =>
-  Math.abs(Number(value)) >= 1e6 ? `${num(Number(value) / 1e6, digits)} millones` : thousands(value);
-// «1,67 millones de hogares» but «957.674 viviendas».
-const howMany = (value, noun) => (Math.abs(Number(value)) >= 1e6 ? `${millions(value)} de ${noun}` : `${thousands(value)} ${noun}`);
-const day = (iso) => (iso ? String(iso).slice(0, 10) : null);
-const at = (rows, year) => rows.find((p) => p.year === year)?.value;
-
-// Spain against each peer, one panel per peer with a shared scale (as in /visualizaciones/carga-fiscal/).
-function PeerPanels({ data, spain, peers, unit, digits = 1, xMin, xMax, yMax, panelNote }) {
-  return (
-    <div className="vizMultiples">
-      {peers.map((geo) => {
-        const other = data[geo] || [];
-        if (!other.length) return null;
-        return (
-          <div key={geo}>
-            <h3 className="vizPanelTitle">
-              España frente a {NAMES[geo]}
-              <span>{panelNote(other, geo)}</span>
-            </h3>
-            <HousingChart
-              series={[
-                { id: geo, label: NAMES[geo], color: geo === "EU27_2020" || geo === "OECD" ? C.ref : C.peer, points: other },
-                { id: spain, label: "España", color: C.blue, emphasis: true, points: data[spain] },
-              ]}
-              unit={unit}
-              digits={digits}
-              xMin={xMin}
-              xMax={xMax}
-              yMax={yMax}
-              height={210}
-              ariaLabel={`España frente a ${NAMES[geo]}`}
-            />
-          </div>
-        );
-      })}
-    </div>
-  );
-}
 
 export default function ViviendaPage() {
   const data = readPublicJson("visualizaciones/data/vivienda.json", null);
@@ -99,6 +44,7 @@ export default function ViviendaPage() {
     { id: "ine", label: "Salario bruto medio INE (ETCL)", shortLabel: "Salario INE", tableLabel: "INE 2008–", color: C.blue, emphasis: true, points: aff.years_ine },
     { id: "oecd", label: "Salario medio a tiempo completo (OCDE)", shortLabel: "Salario OCDE", tableLabel: "OCDE", color: C.orange, points: aff.years_oecd },
     { id: "bde", label: "Renta bruta del hogar mediano (Banco de España, 93,75 m²)", shortLabel: "Renta del hogar (BdE)", tableLabel: "BdE, hogar", color: C.aqua, points: aff.years_bde_household },
+    { id: "ipv", label: "Salario INE con precio de compraventa (INE IPV, encadenado al valor tasado de 2015)", shortLabel: "Con precio de compraventa", tableLabel: "Compraventa (INE IPV)", color: C.yellow, dashed: true, emphasis: true, points: data.sale_prices.years_ipv_chained },
   ];
   const yearsLegend = yearsSeries.filter((s) => s.id !== "ine-retro");
 
@@ -181,6 +127,23 @@ export default function ViviendaPage() {
     .sort((a, b) => spendLast(a).total - spendLast(b).total);
 
   const yearsUp = h.years_last > years2000;
+  const ipvYears = data.sale_prices.years_ipv_chained;
+  const ipvLast = ipvYears.at(-1);
+  const ipvLow = ipvYears.filter((p) => p.year > 2007).reduce((a, b) => (b.value < a.value ? b : a));
+  const ipvPeak = at(ipvYears, 2007);
+  const dec = data.drivers.household_decomposition;
+  const rents = data.rents;
+  const rentYear = rents.ipva_idx.at(-1).year;
+  const youngRows = ten.young.filter((row) => row.age_group === "<35");
+  const youngPeak = youngRows.reduce((a, b) => (b.value > a.value ? b : a), youngRows[0] || { value: 0 });
+  const youngLast = youngRows.at(-1);
+  const regionRows = data.regions.rows.filter((row) => row.ratio != null && !["ES63", "ES64"].includes(row.code));
+  const regionWorst = [...regionRows].sort((a, b) => a.ratio - b.ratio).slice(0, 4);
+  const regionSurplus = data.regions.rows.filter((row) => row.gap != null && row.gap <= 0 && !["ES63", "ES64"].includes(row.code)).concat(regionRows.filter((row) => row.ratio >= 1 && row.gap > 0));
+  const protectedShare = sup.completed_protected.at(-1).value / sup.completed_total.at(-1).value;
+  const nineties = sup.completed_protected.filter((p) => p.year < 2000).map((p) => (p.value / at(sup.completed_total, p.year)) * 100);
+  const credit = data.drivers.credit_pct_gdp;
+  const creditPeak = credit.reduce((a, b) => (b.value > a.value ? b : a));
   const supplyGap = s13.ratio < 1;
 
   return (
@@ -192,7 +155,7 @@ export default function ViviendaPage() {
         actions={[
           { href: downloads, label: "Descargar datos (CSV)" },
           { href: "/visualizaciones/data/vivienda.json", label: "JSON con procedencia" },
-          { href: "#veredicto", label: "Qué dicen los datos" },
+          { href: "#conclusion", label: "Conclusión" },
           { href: "#metodo", label: "Método y fuentes" },
         ]}
       />
@@ -200,9 +163,9 @@ export default function ViviendaPage() {
       <section className="vizStats" aria-label="Cifras clave">
         <div className="card vizStat">
           <span className="vizStat__label">Piso de {h.home_m2} m² en años de salario bruto medio</span>
-          <span className="vizStat__value">{num(h.years_last)}</span>
+          <span className="vizStat__value">{num(ipvLast.value)}</span>
           <span className="vizStat__note">
-            en {h.last_year}; {num(years2000)} en 2000 y {num(h.years_peak)} en el máximo de {h.peak_year}
+            en {h.last_year} con el precio de compraventa del INE ({num(h.years_last)} con la tasación); {num(ipvLow.value)} en {ipvLow.year} y {num(ipvPeak)} en 2007
           </span>
         </div>
         <div className="card vizStat">
@@ -228,9 +191,54 @@ export default function ViviendaPage() {
         </div>
       </section>
 
+      <section className="card hvLead" aria-labelledby="resumen-title">
+        <h2 id="resumen-title">En resumen</h2>
+        <ol>
+          <li>
+            <strong>La vivienda es hoy más cara respecto a los sueldos que hace diez años.</strong> Un piso de {h.home_m2} m² cuesta {num(h.years_last)} años de salario
+            bruto medio según la tasación y <strong>{num(ipvLast.value)}</strong> según el precio de compraventa del INE, frente a {num(ipvLow.value)} en {ipvLow.year}. El
+            máximo de la burbuja fue {num(ipvPeak)} en 2007.
+          </li>
+          <li>
+            <strong>Desde {s13.from} se construye mucho menos de lo que crecen los hogares:</strong> {num(s13.ratio, 2)} viviendas terminadas por cada hogar nuevo (
+            {thousands(s13.completed_per_year)} al año frente a {thousands(s13.households_per_year)}). El déficit se concentra en{" "}
+            {regionWorst.map((row) => `${row.name} (${num(row.ratio, 2)})`).join(", ")}.
+          </li>
+          <li>
+            <strong>La demanda la empuja sobre todo la población:</strong> el {num((dec.population_effect / dec.total) * 100, 0)} % de los hogares nuevos entre {dec.from} y{" "}
+            {dec.to} se explica porque hay más habitantes, y en España el crecimiento viene de la inmigración; el resto, porque los hogares son más pequeños.
+          </li>
+          <li>
+            <strong>El gasto público en vivienda es el más bajo del grupo:</strong> {num(spendLast("ES").total, 2)} % del PIB frente a {num(spendLast("EU27_2020").total, 2)} % en la
+            UE{data.social_rental_stock.find((row) => row.country === "ESP") ? `, y solo el ${num(data.social_rental_stock.find((row) => row.country === "ESP").value, 1)} % de las viviendas es social de alquiler` : ""}.
+          </li>
+          <li>
+            <strong>Quien más lo nota son los jóvenes:</strong> se emancipan a los {num(leaveEs.value)} años (UE: {num(leaveEu.value)}) y los hogares de menores de 35 propietarios de
+            su casa han pasado del {num(youngPeak.value)} % en {youngPeak.year} al {num(youngLast?.value)} % en {youngLast?.year}.
+          </li>
+        </ol>
+        <p>
+          Veredicto, en detalle en <a href="#conclusion">la conclusión</a>: la falta de construcción explica bien el encarecimiento desde 2013, sobre todo donde menos se ha
+          construido ({regionWorst.map((row) => row.name).join(", ")}); no explica la burbuja de 2000–2007, que fue de crédito; y la segunda mitad de la hipótesis no se sostiene, porque el gasto público en vivienda sí es bajo.
+        </p>
+        <ul className="hvToc" aria-label="Partes de la página">
+          <li><a href="#precio">1. El precio</a></li>
+          <li><a href="#alquiler-parte">2. El alquiler</a></li>
+          <li><a href="#oferta">3. Construcción y hogares</a></li>
+          <li><a href="#otras-causas">4. Otras causas</a></li>
+          <li><a href="#consecuencias">5. Consecuencias</a></li>
+          <li><a href="#politicas">6. Impuestos, gasto y normas</a></li>
+          <li><a href="#conclusion">Conclusión</a></li>
+          <li><a href="#glosario">Glosario</a></li>
+          <li><a href="#metodo">Método</a></li>
+        </ul>
+      </section>
+
+      <Part id="precio" title="1. El precio: cuánto cuesta comprar">Medimos el precio en años de salario, con la tasación y con el precio real de compraventa, por comunidades y frente a otros países.</Part>
+
       <Figure
         id="anios-de-salario"
-        title={`Un piso de ${h.home_m2} m² cuesta hoy ${num(h.years_last)} años de salario bruto medio: ${yearsUp ? "más" : "menos"} que en 2000 (${num(years2000)}) y menos que en ${h.peak_year} (${num(h.years_peak)})`}
+        title={`Un piso de ${h.home_m2} m² cuesta hoy ${num(h.years_last)} años de salario bruto medio con el valor de tasación y ${num(ipvLast.value)} con el precio de compraventa: más que en ${ipvLow.year} (${num(ipvLow.value)}) y cerca del máximo de 2007 (${num(ipvPeak)})`}
         dek={`Valor tasado medio de la vivienda libre por m² multiplicado por ${h.home_m2} m², dividido por el salario bruto anual medio. En ${h.last_year}: ${formatHousing(h.home_price_last, "eur")} frente a ${formatHousing(h.wage_last, "eur")} de salario. Tres denominadores distintos, sin empalmar: el salario por trabajador del INE (incluye tiempo parcial), el salario por asalariado a tiempo completo de la OCDE y la renta del hogar mediano que usa el Banco de España.`}
         legend={yearsLegend}
         sources={[
@@ -257,7 +265,16 @@ export default function ViviendaPage() {
           ]}
           ariaLabel="Años de salario necesarios para comprar un piso de 90 metros cuadrados en España"
         />
+        <Explain
+          shows="Cuántos años de salario bruto medio, sin gastar en nada más, hacen falta para pagar un piso de 90 m² al precio medio de España."
+          read="Más alto = más caro respecto a los sueldos. Las líneas usan salarios o precios distintos; fíjate en la forma común (subida hasta 2007, caída hasta 2013–2015, subida después), no en que coincidan. La línea discontinua usa el precio real de compraventa, que desde 2018 sube más que la tasación."
+          notSay="No incluye intereses de la hipoteca, la entrada, los impuestos ni el precio de tu ciudad: es una media nacional."
+        />
       </Figure>
+
+      <SalePricesFigure sale={data.sale_prices} source={source} />
+
+      <RegionalPriceFigure regions={data.regions} homeM2={h.home_m2} source={source} />
 
       <Figure
         id="pares"
@@ -282,7 +299,20 @@ export default function ViviendaPage() {
           yMax={piMax}
           panelNote={(rows, geo) => `${NAMES[geo]}: ${num(rows.at(-1).value, 0)} en ${rows.at(-1).year}; España: ${num(piEs.value, 0)}`}
         />
+        <Explain
+          shows="Si la vivienda está cara o barata respecto a la renta, comparando cada país con su propia historia."
+          read="100 es la media histórica de cada país. Por encima de 100, la vivienda está más cara de lo habitual en ese país en relación con lo que ganan sus habitantes."
+          notSay="No dice qué país es más caro en euros: un país en 120 puede ser más barato en euros que otro en 90."
+        />
       </Figure>
+
+      <Part id="alquiler-parte" title="2. El alquiler">Lo que dicen las estadísticas oficiales del alquiler y, sobre todo, lo que no pueden medir.</Part>
+
+      <RentFigure rents={data.rents} source={source} />
+
+      <RentPeersFigure rents={data.rents} source={source} />
+
+      <Part id="oferta" title="3. Construcción y hogares">El corazón de la hipótesis: ¿se construyen menos viviendas de las que hacen falta? En España y en cada comunidad.</Part>
 
       <Figure
         id="construccion-y-hogares"
@@ -308,6 +338,11 @@ export default function ViviendaPage() {
           annotations={[{ year: 2008, label: "Crisis financiera", row: 0 }]}
           ariaLabel="Viviendas terminadas e iniciadas frente a hogares nuevos en España"
         />
+        <Explain
+          shows="Cuántas viviendas se terminan cada año frente a cuántos hogares nuevos se forman."
+          read="Cuando la línea azul (terminadas) va por encima de la verde (hogares nuevos), se construye más de lo que crece la necesidad de primera vivienda; cuando va por debajo, se acumula déficit. La naranja (iniciadas) adelanta lo que se terminará uno o dos años después."
+          notSay="No cuenta demoliciones, cambios de uso, viviendas vacías que vuelven al mercado ni la demanda de segunda residencia o de compradores extranjeros no residentes."
+        />
       </Figure>
 
       {balancePeak && balanceLast ? (
@@ -327,8 +362,19 @@ export default function ViviendaPage() {
             height={260}
             ariaLabel="Saldo acumulado entre viviendas terminadas y hogares nuevos"
           />
+          <Explain
+            shows="El balance acumulado entre viviendas terminadas y hogares nuevos desde 2003."
+            read="Mientras la línea sube, sobran viviendas nuevas; cuando baja, faltan. Sigue por encima de cero: a escala nacional aún queda parte del excedente de la burbuja."
+            notSay="No dice dónde están esas viviendas ni si están en condiciones o a la venta."
+          />
         </Figure>
       ) : null}
+
+      <RegionalGapFigure regions={data.regions} source={source} />
+
+      <CensusStockFigure rows={data.census_stock} source={source("bde_indicadores_vivienda", "INE, Censos de Población y Viviendas (vía Banco de España)")} />
+
+      <Part id="otras-causas" title="4. Otras causas que compiten con la hipótesis">Crédito y tipos de interés, población e inmigración, hogares más pequeños y pisos turísticos.</Part>
 
       <Figure
         id="contra"
@@ -337,15 +383,17 @@ export default function ViviendaPage() {
         legend={[
           { id: "years", label: "Años de salario (INE)", color: C.blue },
           { id: "rate", label: "Tipo de interés de los préstamos para vivienda (%)", color: C.orange },
+          { id: "credit", label: "Crédito para vivienda (% del PIB)", color: C.aqua },
         ]}
         sources={[source("bde_indicadores_vivienda", "Banco de España, tipos de interés e indicadores de vivienda"), source("ine_tempus", "INE, ETCL")]}
-        notes={["Dos paneles con su propia escala en lugar de un gráfico con dos ejes. Correlación no es causalidad: los tipos, el empleo, la inmigración, la demanda extranjera y el uso turístico se mueven a la vez."]}
+        notes={["Paneles con su propia escala en lugar de un gráfico con varios ejes. Correlación no es causalidad: los tipos, el empleo, la inmigración, la demanda extranjera y el uso turístico se mueven a la vez."]}
         table={
           <HousingTable
             series={[
               { id: "years", label: "Años de salario (INE)", points: [...aff.years_ine_retro, ...aff.years_ine], unit: "years" },
               { id: "rate", label: "Tipo préstamos vivienda", points: rate, unit: "pct", digits: 2 },
               { id: "effort", label: "Esfuerzo teórico (% renta)", points: aff.effort_pct, unit: "pct" },
+              { id: "credit", label: "Crédito vivienda (% PIB)", points: credit, unit: "pct" },
             ]}
           />
         }
@@ -373,11 +421,38 @@ export default function ViviendaPage() {
               height={220}
               ariaLabel="Tipo de interés de los préstamos para vivienda"
             />
+            <div>
+            <h3 className="vizPanelTitle">
+              Crédito a los hogares para comprar vivienda, % del PIB
+              <span>
+                máximo {num(creditPeak.value)} % en {creditPeak.year}; {num(credit.at(-1).value)} % en {credit.at(-1).year}
+              </span>
+            </h3>
+            <HousingChart
+              series={[{ id: "credit", label: "Crédito para vivienda (% del PIB)", shortLabel: String(credit.at(-1).year), color: C.aqua, points: credit }]}
+              unit="pct"
+              xMin={1989}
+              xMax={h.last_year}
+              height={220}
+              ariaLabel="Crédito a los hogares para comprar vivienda en porcentaje del PIB"
+            />
           </div>
         </div>
+        </div>
+        <Explain
+          shows="La subida de 2000–2007 junto al tipo de interés de las hipotecas y el crédito a los hogares para comprar vivienda."
+          read="Compara la forma de las líneas: los años de salario suben cuando los tipos bajan y el crédito crece, y caen cuando el crédito se contrae."
+          notSay="No prueba que los tipos causen los precios: ambos responden al ciclo económico, al empleo y a las expectativas."
+        />
       </Figure>
 
-      <CensusStockFigure rows={data.census_stock} source={source("bde_indicadores_vivienda", "INE, Censos de Población y Viviendas (vía Banco de España)")} />
+      <PopulationFigure drivers={data.drivers} source={source} />
+
+      <HouseholdSizeFigure drivers={data.drivers} source={source} />
+
+      <TouristFigure drivers={data.drivers} regions={data.regions} source={source} />
+
+      <Part id="consecuencias" title="5. Consecuencias">Quién lo nota: emancipación, propiedad y alquiler, y los hogares jóvenes.</Part>
 
       <Figure
         id="emancipacion"
@@ -401,6 +476,11 @@ export default function ViviendaPage() {
           yMax={leaveMax}
           panelNote={(rows) => `${num(rows[0].value)} en ${rows[0].year} → ${num(rows.at(-1).value)} en ${rows.at(-1).year}`}
         />
+        <Explain
+          shows="A qué edad, de media, los jóvenes dejan de vivir con sus padres en España y en países comparables."
+          read="Cada panel compara España (azul) con un país o la media de la UE. Más alto = se van más tarde."
+          notSay="No separa a quienes se quedan por falta de vivienda de quienes lo hacen por paro, estudios o costumbre."
+        />
       </Figure>
 
       <Figure
@@ -419,6 +499,11 @@ export default function ViviendaPage() {
         table={<HousingTable series={tenureSeries} />}
       >
         <HousingChart series={tenureSeries} xMin={ten.census_early[0]?.year ?? 1970} xMax={h.last_year} yMax={100} ariaLabel="Viviendas principales en propiedad y en alquiler en España" />
+        <Explain
+          shows="Qué proporción de hogares vive en una vivienda propia o de alquiler desde 1970."
+          read="Puntos unidos con trazo discontinuo: censos, cada diez años. Líneas continuas: encuestas anuales. Ambas cuentan hogares; el resto hasta 100 % son viviendas cedidas."
+          notSay="No dice si los propietarios tienen hipoteca ni quién compra las viviendas que dejan de estar ocupadas por sus dueños."
+        />
       </Figure>
 
       <Figure
@@ -450,9 +535,16 @@ export default function ViviendaPage() {
           yMax={100}
           panelNote={(rows) => `${num(rows.at(-1).value)} % en ${rows.at(-1).year}`}
         />
+        <Explain
+          shows="El porcentaje de la población que vive en una vivienda en propiedad en España y en otros países."
+          read="Cada panel compara España con otro país o con la media de la UE; mide personas, no hogares."
+          notSay="Mucha propiedad no significa vivienda asequible: Alemania tiene poca propiedad y precios más contenidos."
+        />
       </Figure>
 
       <YoungOwnershipFigure young={ten.young} retrieved={day(src.vclc_housing_curated?.retrieved_at)} />
+
+      <Part id="politicas" title="6. Impuestos, gasto público y normas">Lo que hacen las administraciones: cuánto cobran al comprar, cuánto gastan y cuánto legislan.</Part>
 
       <TaxesFigure taxes={data.taxes} wageLast={h.wage_last} lastYear={h.last_year} retrieved={day(src.vclc_housing_curated?.retrieved_at)} />
 
@@ -487,41 +579,131 @@ export default function ViviendaPage() {
       >
         <SpendingBars spend={spend} names={NAMES} order={["ES", "EU27_2020", "DE", "FR", "IT", "PT"]} />
         <SocialStockBars rows={data.social_rental_stock} names={NAMES} />
+        <Explain
+          shows="Cuánto gastan las administraciones en vivienda (promoción pública, ayudas a la compra y al alquiler) en relación con el tamaño de la economía."
+          read="Barra más larga = más esfuerzo público. Se compara el último año y la media 2015–2019 para no confundir con el Superbonus italiano de 2021–2023."
+          notSay="No incluye deducciones fiscales ni suelo público, y no dice si gastar más bajaría los precios: eso depende de en qué se gaste."
+        />
       </Figure>
 
-      <section className="card vizProse" id="veredicto" aria-labelledby="veredicto-title">
-        <h2 id="veredicto-title">Qué dicen los datos sobre la hipótesis</h2>
+      <NormsFigure norms={data.norms} source={source} />
+
+      <section className="card vizProse" id="conclusion" aria-labelledby="conclusion-title">
+        <h2 id="conclusion-title">Conclusión: dónde acierta y dónde falla la hipótesis</h2>
+        <p>
+          La hipótesis tenía tres partes. Los datos las tratan de forma distinta, y lo decimos también cuando la contradicen.
+        </p>
         <ul>
           <li>
-            <strong>Se ha encarecido, pero no en todas las medidas ni respecto a cualquier año.</strong> Un piso de {h.home_m2} m² cuesta {num(h.years_last)} años de
-            salario en {h.last_year}, frente a {num(years2000)} en 2000 y {num(h.years_trough)} en {h.trough_year}; sigue por debajo del máximo de {h.peak_year} ({num(h.years_peak)}).
-            Con la renta de los hogares (Banco de España) y frente a su propia media histórica (OCDE), la conclusión es la misma.
+            <Verdict kind="yes" />
+            <strong>La vivienda se ha encarecido.</strong> Desde {ipvLow.year}, el precio de compraventa ha pasado de {num(ipvLow.value)} a {num(ipvLast.value)} años de salario
+            ({num(h.years_trough)} → {num(h.years_last)} con la tasación, que va por detrás). Sigue por debajo del máximo de 2007 ({num(ipvPeak)}), pero se acerca. El alquiler medio
+            de todos los contratos, en cambio, ha subido al ritmo de salarios y precios ({num(at(rents.ipva_idx, rentYear) - 100, 0)} % entre 2015 y {rentYear}); lo que se ha
+            disparado son los contratos nuevos, que la estadística oficial no mide por separado.
           </li>
           <li>
-            <strong>{supplyGap ? "Desde 2013 se construye menos de lo que crecen los hogares: se sostiene." : "Desde 2013 no falta construcción: no se sostiene."}</strong>{" "}
-            {thousands(s13.completed_per_year)} viviendas terminadas al año frente a {thousands(s13.households_per_year)} hogares nuevos. Pero entre 2008 y 2012 todavía se terminaron más
-            viviendas que hogares, así que «desde 2008» es inexacto: el déficit empieza hacia 2013, cuando ya se había agotado el ritmo de la burbuja.
+            <Verdict kind="partly" />
+            <strong>«Desde 2008 se terminan muchas menos viviendas que hogares se forman».</strong> Es cierto desde {s13.from}: {num(s13.ratio, 2)} viviendas por hogar nuevo, un déficit
+            acumulado de {thousands(s13.net_households - s13.completed)} hogares sin vivienda nueva. Entre 2008 y 2012 todavía se terminaban más viviendas que hogares (las obras de la
+            burbuja). Y el déficit no es uniforme: es grave en {regionWorst.map((row) => row.name).join(", ")} y no existe en{" "}
+            {regionSurplus.map((row) => row.name).join(", ")}, donde se terminaron tantas viviendas como hogares nuevos o más.
           </li>
           <li>
-            <strong>La escasez no explica la burbuja de 2000–2007.</strong> Entonces se terminaron {num(boom.ratio, 2)} viviendas por hogar nuevo y el precio subió más que nunca, con
-            el crédito barato. La hipótesis describe mejor el ciclo de después de 2015 que el anterior.
+            <Verdict kind="partly" />
+            <strong>«Sobre todo» por eso.</strong> La escasez explica el ciclo posterior a 2015, pero no el de 2000–2007, cuando se construyeron {num(boom.ratio, 2)} viviendas por hogar
+            nuevo y aun así el precio se dobló en años de salario: entonces mandaba el crédito: el saldo de préstamos para comprar vivienda pasó del {num(at(credit, 2000))} % del PIB en 2000 al{" "}
+            {num(at(credit, 2007))} % en 2007, con tipos del 3–5 %.
+            La demanda actual tiene causas propias que estos datos sí miden: la inmigración (el {num((dec.population_effect / dec.total) * 100, 0)} % de los hogares nuevos se explica
+            por más población) y los hogares más pequeños. Los pisos turísticos pesan poco en el total ({num(data.regions.tourist_es, 2)} % del parque), pero mucho en algunas
+            comunidades y barrios. Repartir el encarecimiento entre estas causas exige un modelo que esta página no hace.
           </li>
           <li>
-            <strong>El gasto público en vivienda sí es bajo.</strong> España gasta el {num(spendLast("ES").total, 2)} % del PIB,{" "}
-            {spendRank[0] === "ES" ? "menos que todos sus comparables" : `menos que ${spendRank.slice(spendRank.indexOf("ES") + 1).map((geo) => NAMES[geo]).join(", ")}`} y{" "}
-            {num(spendLast("EU27_2020").total / spendLast("ES").total, 1)} veces menos de lo que gasta la media de la UE
-            {data.social_rental_stock.find((row) => row.country === "ESP") ? `, y su parque de vivienda social en alquiler es de los más pequeños de la OCDE` : ""}. La segunda mitad de la
-            hipótesis («no porque el gasto sea bajo») no se puede sostener tal cual: el gasto es bajo; lo que estos datos no permiten medir es cuánto bajaría el precio si fuera mayor.
+            <Verdict kind="no" />
+            <strong>«No porque el gasto público sea bajo».</strong> El gasto público en vivienda sí es bajo: {num(spendLast("ES").total, 2)} % del PIB,{" "}
+            {spendRank[0] === "ES" ? "el menor de su grupo de comparación" : `menos que ${spendRank.slice(spendRank.indexOf("ES") + 1).map((geo) => NAMES[geo]).join(", ")}`},
+            y {num(spendLast("EU27_2020").total / spendLast("ES").total, 1)} veces menos que la media de la UE
+            {data.social_rental_stock.find((row) => row.country === "ESP") ? `, con un parque social de alquiler del ${num(data.social_rental_stock.find((row) => row.country === "ESP").value, 1)} % de las viviendas frente al ${num((data.social_rental_stock.find((row) => row.country === "OECD") || {}).value ?? 0, 1)} % de media en la OCDE` : ""}.
+            Lo que los datos no permiten afirmar es que gastar más bajaría los precios: eso depende de si el gasto añade viviendas o solo ayuda a pagar las que hay.
           </li>
         </ul>
         <h2>Lo que estos datos no pueden decir</h2>
         <ul>
-          <li>Causalidad: las series se mueven juntas con los tipos de interés, el empleo, la inmigración, la demanda extranjera y el alquiler turístico; ninguna se aísla aquí.</li>
-          <li>Dónde: todo es media nacional. El déficit de vivienda se concentra en grandes ciudades y en la costa; las viviendas vacías, a menudo donde no hay demanda.</li>
-          <li>Precio real de compraventa: se usa el valor de tasación (Ministerio de Vivienda), que va por detrás del mercado en las subidas.</li>
-          <li>Alquiler: el precio del alquiler, que es lo que más ha subido para los jóvenes, no se mide aquí con una serie larga comparable.</li>
-          <li>Normas: no contamos todavía cuántas normas estatales y autonómicas de vivienda se aprueban cada año (pendiente: API del BOE).</li>
+          <li>Causalidad: tipos de interés, empleo, inmigración, demanda extranjera y alquiler turístico se mueven a la vez; ninguno se aísla aquí.</li>
+          <li>Dónde exactamente: las cifras son nacionales o autonómicas. El déficit se concentra en ciudades y barrios concretos; las viviendas vacías, a menudo donde no hay demanda.</li>
+          <li>El precio de los alquileres nuevos: no hay una serie oficial larga; el IPVA y el IPCA miden todos los contratos vigentes.</li>
+          <li>El suelo: cuánto suelo urbanizable hay y cuánto tarda en tramitarse depende del planeamiento municipal, que no tiene estadística nacional comparable.</li>
+          <li>Censos de 1950 y 1960: no hay una fuente oficial digitalizada del régimen de tenencia; la serie empieza en 1970.</li>
         </ul>
+      </section>
+
+      <section className="card vizProse" id="glosario" aria-labelledby="glosario-title">
+        <h2 id="glosario-title">Glosario</h2>
+        <dl className="hvGlossary">
+          <div>
+            <dt>Valor de tasación y precio de compraventa</dt>
+            <dd>
+              La tasación es lo que un tasador homologado estima que vale una vivienda, normalmente para conceder una hipoteca. El precio de compraventa es lo que se paga en la
+              escritura. En las subidas, la tasación suele quedarse por detrás. El IPV del INE mide la compraventa comparando viviendas parecidas (ajuste por calidad).
+            </dd>
+          </div>
+          <div>
+            <dt>Años de salario</dt>
+            <dd>Precio de un piso de {h.home_m2} m² dividido por el salario bruto anual medio: cuántos años de sueldo íntegro costaría, sin intereses ni gastos.</dd>
+          </div>
+          <div>
+            <dt>Hogares nuevos netos</dt>
+            <dd>
+              Hogares que hay al final del año menos los que había al principio. Es neto: resta los que desaparecen (por fallecimiento o porque dos hogares se juntan) a los que se
+              crean (emancipaciones, separaciones, inmigrantes).
+            </dd>
+          </div>
+          <div>
+            <dt>Vivienda iniciada, terminada y visado</dt>
+            <dd>
+              El visado es el permiso del colegio profesional para empezar una obra; iniciada, cuando arranca; terminada, cuando se certifica el fin de obra (vivienda libre) o se
+              concede la calificación definitiva (vivienda protegida). Entre una y otra suelen pasar dos años.
+            </dd>
+          </div>
+          <div>
+            <dt>VPO (vivienda de protección oficial)</dt>
+            <dd>
+              Vivienda con precio de venta o alquiler limitado por ley a cambio de ayudas o suelo público. En {sup.completed_total.at(-1).year} fue el {num(protectedShare * 100, 0)} % de
+              las viviendas terminadas; en los años noventa, entre el {num(Math.min(...nineties), 0)} % y el {num(Math.max(...nineties), 0)} %.
+            </dd>
+          </div>
+          <div>
+            <dt>Vivienda social en alquiler</dt>
+            <dd>Vivienda de alquiler por debajo del precio de mercado y asignada según necesidad, de propiedad pública o de entidades sin ánimo de lucro (definición de la OCDE).</dd>
+          </div>
+          <div>
+            <dt>IPVA e IPCA de alquiler</dt>
+            <dd>
+              El IPVA del INE mide la renta de todos los contratos declarados a Hacienda; el IPCA (índice armonizado de precios de consumo) incluye el alquiler que pagan los
+              inquilinos. Ambos incluyen contratos antiguos y suben más despacio que los anuncios de pisos.
+            </dd>
+          </div>
+          <div>
+            <dt>EPA y NUTS 2</dt>
+            <dd>
+              La Encuesta de Población Activa del INE cuenta también los hogares; Eurostat la publica por regiones NUTS 2, que en España son las comunidades autónomas.
+            </dd>
+          </div>
+          <div>
+            <dt>PPS (estándar de poder adquisitivo)</dt>
+            <dd>
+              Unidad de Eurostat que corrige el euro por el nivel de precios de cada país para comparar niveles. No la usamos: comparamos a cada país consigo mismo (índices y medias
+              de largo plazo) o en % del PIB, que no necesitan esa conversión.
+            </dd>
+          </div>
+          <div>
+            <dt>% del PIB</dt>
+            <dd>Gasto o deuda divididos por todo lo que produce la economía en un año: permite comparar países y años de distinto tamaño.</dd>
+          </div>
+          <div>
+            <dt>Ruptura de serie</dt>
+            <dd>Cambio de método o de fuente que impide unir dos tramos de datos como si fueran la misma medida. Aquí se dibujan separados, nunca empalmados.</dd>
+          </div>
+        </dl>
       </section>
 
       <section className="card vizProse" id="metodo" aria-labelledby="metodo-title">
@@ -538,7 +720,8 @@ export default function ViviendaPage() {
             <strong>Ejes.</strong> Todos los ejes verticales empiezan en cero (el saldo de hogares baja de cero en 2021); los paneles de un mismo gráfico comparten escala; no hay dobles ejes.
           </li>
           <li>
-            <strong>Comparación.</strong> Emancipación, tenencia, precio frente a renta y gasto público se contrastan con la UE, la OCDE, Alemania, Francia, Italia y Portugal.
+            <strong>Comparación.</strong> Precio frente a renta, alquiler real, migración, tamaño del hogar, alquiler turístico, emancipación, tenencia y gasto público se contrastan
+            con la UE, la OCDE, Alemania, Francia, Italia y Portugal; el déficit de construcción y los años de salario, también por comunidad autónoma.
           </li>
           <li>
             <strong>Reproducible y reutilizable.</strong> <code>just housing-refresh</code> descarga cada fuente oficial, guarda el original y lo carga en SQLite con el contrato de indicadores del

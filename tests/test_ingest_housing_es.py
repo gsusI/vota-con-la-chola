@@ -108,5 +108,34 @@ class IngestHousingTest(unittest.TestCase):
         self.assertEqual(export.annual(months, "sum"), {2025: 12.0})
 
 
+class RegionalParsingTest(unittest.TestCase):
+    def test_region_labels_from_mivau_and_ine_map_to_nuts2(self) -> None:
+        cases = {
+            "Madrid (Comunidad de)": "ES30", "Madrid, Comunidad de": "ES30", "Balears (Illes)": "ES53", "Balears, Illes": "ES53",
+            "Castilla - La Mancha": "ES42", "Castilla-La Mancha": "ES42", "Comunitat Valenciana": "ES52", "Rioja (La)": "ES23",
+            "Navarra (Comunidad Foral de) ": "ES22", "País Vasco": "ES21", "Andalucía ": "ES61", "Asturias, Principado de": "ES12",
+        }
+        for label, code in cases.items():
+            self.assertEqual(ingest.ccaa_code(label), code, label)
+        for province in ("Almería", "Valencia/València", "Alicante/Alacant", "Bizkaia", "Total Nacional", None):
+            self.assertIsNone(ingest.ccaa_code(province), province)
+
+    def test_ine_periods(self) -> None:
+        self.assertEqual(ingest.ine_period({"Anyo": 2024, "FK_Periodo": 28}), "2024")
+        self.assertEqual(ingest.ine_period({"Anyo": 2025, "FK_Periodo": 21}), "2025-Q3")
+        self.assertEqual(ingest.ine_period({"Anyo": 2026, "FK_Periodo": 5}), "2026-05")
+
+    def test_ine_table_selector_keeps_national_and_regional_totals_only(self) -> None:
+        pick = ingest.INE_TABLES["59056"][-1]
+        self.assertEqual(pick("Total Nacional. Total. Índice. "), "ES")
+        self.assertEqual(pick("Andalucía. Total. Índice. "), "ES61")
+        self.assertIsNone(pick("Andalucía. Total. Variación anual. "))
+        self.assertIsNone(pick("Andalucía. Vivienda colectiva. Índice. "))
+
+    def test_index_rebase(self) -> None:
+        self.assertEqual(export.index_to({2015: 80.0, 2025: 100.0}, 2015), {2015: 100.0, 2025: 125.0})
+        self.assertEqual(export.index_to({2016: 1.0}, 2015), {})
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -413,74 +413,154 @@ def is_national_total(cell: Any) -> bool:
     return isinstance(cell, str) and cell.strip().lower() == "total nacional"
 
 
+# Autonomous communities = NUTS 2 regions in Spain. Keys are normalized label prefixes used by MIVAU and INE.
+CCAA = {
+    "ES61": ("Andalucía", ["andalucia"]),
+    "ES24": ("Aragón", ["aragon"]),
+    "ES12": ("Asturias", ["asturias"]),
+    "ES53": ("Illes Balears", ["balears", "illes balears"]),
+    "ES70": ("Canarias", ["canarias"]),
+    "ES13": ("Cantabria", ["cantabria"]),
+    "ES41": ("Castilla y León", ["castilla y leon"]),
+    "ES42": ("Castilla-La Mancha", ["castilla-la mancha"]),
+    "ES51": ("Cataluña", ["cataluna"]),
+    "ES52": ("Comunitat Valenciana", ["comunitat valenciana", "comunidad valenciana"]),
+    "ES43": ("Extremadura", ["extremadura"]),
+    "ES11": ("Galicia", ["galicia"]),
+    "ES30": ("Comunidad de Madrid", ["madrid"]),
+    "ES62": ("Región de Murcia", ["murcia"]),
+    "ES22": ("Navarra", ["navarra"]),
+    "ES21": ("País Vasco", ["pais vasco"]),
+    "ES23": ("La Rioja", ["rioja"]),
+    "ES63": ("Ceuta", ["ceuta"]),
+    "ES64": ("Melilla", ["melilla"]),
+}
+for _code, (_name, _keys) in CCAA.items():
+    GEO_META[_code] = (_name, "NUTS", "region")
+
+
+def normalize_label(text: str) -> str:
+    import unicodedata  # noqa: PLC0415
+
+    plain = "".join(ch for ch in unicodedata.normalize("NFKD", text) if not unicodedata.combining(ch)).lower()
+    plain = plain.replace(" - ", "-").replace("(", " ").replace(")", " ").replace(",", " ")
+    return " ".join(plain.split())
+
+
+def ccaa_code(label: Any) -> str | None:
+    if not isinstance(label, str):
+        return None
+    plain = normalize_label(label)
+    for code, (_name, keys) in CCAA.items():
+        if any(plain == key or plain.startswith(key + " ") for key in keys):
+            return code
+    return None
+
+
+def mivau_rows(sheet: Any) -> Iterable[tuple[int, str]]:
+    """(row index, 'ES' or NUTS 2 code) for the national total and the first row of each region (regions precede
+    their provinces; single-province regions repeat the name, the first occurrence is the region)."""
+    seen: set[str] = set()
+    for r in range(sheet.nrows):
+        label = sheet.cell_value(r, 1) if sheet.ncols > 1 else None
+        code = "ES" if is_national_total(label) else ccaa_code(label)
+        if code and code not in seen:
+            seen.add(code)
+            yield r, code
+
+
+def mivau_batches(table: str, indicator_code: str, definition: dict[str, Any], obs_by_geo: dict[str, list[dict[str, Any]]]) -> Iterable[Batch]:
+    if not obs_by_geo.get("ES"):
+        raise ValueError(f"MIVAU {table}: no TOTAL NACIONAL values found")
+    yield {**definition, "indicator_code": indicator_code}, [geo_series(f"{table}|{indicator_code}|ES", "ES", {"table": table}, obs_by_geo["ES"])]
+    regions = sorted(code for code in obs_by_geo if code != "ES")
+    if len(regions) >= 17:
+        yield {**definition, "indicator_code": f"{indicator_code}_ccaa", "label": definition["label"].replace("total nacional", "por comunidad autónoma")}, [
+            geo_series(f"{table}|{indicator_code}|{code}", code, {"table": table}, obs_by_geo[code]) for code in regions
+        ]
+
+
 def parse_mivau_annual(table: str, indicator_code: str, label: str, definition_text: str, orden: str) -> Callable[[Raw], Iterable[Batch]]:
-    """Annual tables: one header row of years (floats) and a 'TOTAL NACIONAL' row."""
+    """Annual tables: one header row of years (floats); national total and regional rows below."""
 
     def parse(raw: Raw) -> Iterable[Batch]:
         book = xls_book(raw)
-        obs = []
+        obs: dict[str, list[dict[str, Any]]] = {}
         for si, sheet in enumerate(book.sheets()):
             header = None
             for r in range(sheet.nrows):
-                row = sheet.row_values(r)
-                years = {c: int(v) for c, v in enumerate(row) if isinstance(v, float) and 1950 <= v <= 2100}
-                if header is None and len(years) >= 5:
+                years = {c: int(v) for c, v in enumerate(sheet.row_values(r)) if isinstance(v, float) and 1950 <= v <= 2100}
+                if len(years) >= 5:
                     header = years
-                elif header and is_national_total(row[1] if len(row) > 1 else None):
-                    for c, year in header.items():
-                        if c < len(row) and isinstance(row[c], float):
-                            obs.append({"period": str(year), "value": row[c], "pointer": pointer("sheets", si, "rows", r, "cols", c),
-                                        "cell_index": r * 1000 + c})
                     break
-        if not obs:
-            raise ValueError(f"MIVAU {table}: no TOTAL NACIONAL row found")
-        yield {
-            "source_id": "mivau_boletin", "dataset_code": table, "indicator_code": indicator_code,
-            "frequency_code": "A", "frequency_label": "Anual", "unit_code": "DWELLINGS", "unit_label": "Viviendas",
-            "label": label, "definition": definition_text, "extraction_method": "xls_cell",
-            "methodology_url": MIVAU_PAGE.format(orden=orden), "source_url": MIVAU_PAGE.format(orden=orden),
-        }, [geo_series(f"{table}|{indicator_code}|ES", "ES", {"table": table}, obs)]
+            if header is None:
+                continue
+            for r, code in mivau_rows(sheet):
+                row = sheet.row_values(r)
+                for c, year in header.items():
+                    if c < len(row) and isinstance(row[c], float):
+                        obs.setdefault(code, []).append({"period": str(year), "value": row[c], "pointer": pointer("sheets", si, "rows", r, "cols", c),
+                                                         "cell_index": r * 1000 + c})
+        yield from mivau_batches(table, indicator_code, {
+            "source_id": "mivau_boletin", "dataset_code": table, "frequency_code": "A", "frequency_label": "Anual",
+            "unit_code": "DWELLINGS", "unit_label": "Viviendas", "label": label, "definition": definition_text,
+            "extraction_method": "xls_cell", "methodology_url": MIVAU_PAGE.format(orden=orden), "source_url": MIVAU_PAGE.format(orden=orden),
+        }, obs)
 
     return parse
 
 
-def parse_mivau_valor_tasado(raw: Raw) -> Iterable[Batch]:
-    """Quarterly appraisal value (€/m²): one sheet per four years, 'Año YYYY' header over four quarter columns."""
-    book = xls_book(raw)
-    obs = []
-    for si, sheet in enumerate(book.sheets()):
-        col_year: dict[int, int] = {}
-        col_quarter: dict[int, int] = {}
-        for r in range(sheet.nrows):
-            row = sheet.row_values(r)
-            labels = {c: str(v).strip() for c, v in enumerate(row) if isinstance(v, str) and v.strip()}
-            if not col_year and any(v.startswith("Año ") for v in labels.values()):
-                current = None
-                for c in range(len(row)):
-                    text = labels.get(c, "")
-                    if text.startswith("Año "):
-                        current = int(text.split()[1])
-                    if current:
-                        col_year[c] = current
-            elif col_year and not col_quarter and sum(v[:1] in "1234" and "º" in v for v in labels.values()) >= 4:
-                col_quarter = {c: int(v[0]) for c, v in labels.items() if v[:1] in "1234" and "º" in v}
-            elif col_quarter and is_national_total(row[1] if len(row) > 1 else None):
+def parse_mivau_quarterly(table: str, indicator_code: str, unit: tuple[str, str], label: str, definition_text: str, orden: str) -> Callable[[Raw], Iterable[Batch]]:
+    """Quarterly tables: one sheet per four years, 'Año YYYY' header over four quarter columns."""
+
+    def parse(raw: Raw) -> Iterable[Batch]:
+        book = xls_book(raw)
+        obs: dict[str, list[dict[str, Any]]] = {}
+        for si, sheet in enumerate(book.sheets()):
+            col_year: dict[int, int] = {}
+            col_quarter: dict[int, int] = {}
+            for r in range(sheet.nrows):
+                row = sheet.row_values(r)
+                labels = {c: str(v).strip() for c, v in enumerate(row) if isinstance(v, str) and v.strip()}
+                if not col_year and any(v.startswith("Año ") for v in labels.values()):
+                    current = None
+                    for c in range(len(row)):
+                        text = labels.get(c, "")
+                        if text.startswith("Año "):
+                            current = int(text.split()[1])
+                        if current:
+                            col_year[c] = current
+                elif col_year and sum(v[:1] in "1234" and "º" in v for v in labels.values()) >= 4:
+                    col_quarter = {c: int(v[0]) for c, v in labels.items() if v[:1] in "1234" and "º" in v}
+                    break
+            if not col_quarter:
+                continue
+            for r, code in mivau_rows(sheet):
+                row = sheet.row_values(r)
                 for c, q in col_quarter.items():
-                    if c in col_year and isinstance(row[c], float):
-                        obs.append({"period": f"{col_year[c]}-Q{q}", "value": row[c],
-                                    "pointer": pointer("sheets", si, "rows", r, "cols", c), "cell_index": r * 1000 + c})
-                break
-    if not obs:
-        raise ValueError("MIVAU 35101000: no quarterly TOTAL NACIONAL values found")
-    yield {
-        "source_id": "mivau_boletin", "dataset_code": "35101000", "indicator_code": "valor_tasado_vivienda_libre",
-        "frequency_code": "Q", "frequency_label": "Trimestral", "unit_code": "EUR_M2", "unit_label": "Euros por m²",
-        "label": "Valor tasado medio de la vivienda libre, total nacional (€/m²)",
-        "definition": "Media de las tasaciones de vivienda libre realizadas por sociedades de tasación homologadas, "
-        "en euros por metro cuadrado construido. Mide el valor de tasación, no el precio de compraventa escriturado.",
-        "extraction_method": "xls_cell",
-        "methodology_url": MIVAU_PAGE.format(orden="35000000"), "source_url": MIVAU_PAGE.format(orden="35000000"),
-    }, [geo_series("35101000|valor_tasado|ES", "ES", {"table": "35101000"}, obs)]
+                    if c in col_year and c < len(row) and isinstance(row[c], float):
+                        obs.setdefault(code, []).append({"period": f"{col_year[c]}-Q{q}", "value": row[c],
+                                                         "pointer": pointer("sheets", si, "rows", r, "cols", c), "cell_index": r * 1000 + c})
+        yield from mivau_batches(table, indicator_code, {
+            "source_id": "mivau_boletin", "dataset_code": table, "frequency_code": "Q", "frequency_label": "Trimestral",
+            "unit_code": unit[0], "unit_label": unit[1], "label": label, "definition": definition_text, "extraction_method": "xls_cell",
+            "methodology_url": MIVAU_PAGE.format(orden=orden), "source_url": MIVAU_PAGE.format(orden=orden),
+        }, obs)
+
+    return parse
+
+
+parse_mivau_valor_tasado = parse_mivau_quarterly(
+    "35101000", "valor_tasado_vivienda_libre", ("EUR_M2", "Euros por m²"),
+    "Valor tasado medio de la vivienda libre, total nacional (€/m²)",
+    "Media de las tasaciones de vivienda libre realizadas por sociedades de tasación homologadas, en euros por metro "
+    "cuadrado construido. Mide el valor de tasación, no el precio de compraventa escriturado.", "35000000")
+parse_mivau_transacciones = parse_mivau_quarterly(
+    "34020150", "valor_medio_transacciones_vivienda_libre", ("EUR", "Euros por transacción"),
+    "Valor medio de las transacciones inmobiliarias de vivienda libre, total nacional (€)",
+    "Importe medio escriturado ante notario por compraventa de vivienda libre (Consejo General del Notariado, "
+    "elaborado por el Ministerio). Es un precio por operación: cambia también si cambia el tamaño o la ubicación de "
+    "lo que se vende.", "34000000")
 
 
 # ---------------------------------------------------------------- Banco de España si_1_5 (CSV)
@@ -507,6 +587,9 @@ BDE_SERIES = {
     "SI_1_5.89": ("censo_principales_cesion_pct", "PC", "Censos: viviendas principales en cesión y otras formas (%)"),
     "SI_1_5.90": ("encuesta_tenencia_propiedad_pct", "PC", "Régimen de tenencia de la vivienda principal: propiedad (ECPF hasta 2004, ECV desde 2005)"),
     "SI_1_5.91": ("encuesta_tenencia_alquiler_pct", "PC", "Régimen de tenencia de la vivienda principal: alquiler (ECPF hasta 2004, ECV desde 2005)"),
+    "SI_1_5.13": ("ipc_alquiler_tasa_interanual", "PC", "IPC: pagos reales de alquiler de la vivienda principal, tasa interanual (INE)"),
+    "SI_1_5.56": ("credito_vivienda_hogares_pct_pib", "PC", "Crédito a los hogares para adquisición de vivienda, saldo en % del PIB"),
+    "SI_1_5.55": ("credito_vivienda_hogares_tasa", "PC", "Crédito a los hogares para adquisición de vivienda, tasa interanual"),
 }
 
 
@@ -589,6 +672,72 @@ def parse_ine(code: str) -> Callable[[Raw], Iterable[Batch]]:
             "methodology_url": "https://www.ine.es/dyngs/INEbase/operacion.htm?c=Estadistica_C&cid=1254736045053&idp=1254735976596",
             "source_url": f"https://www.ine.es/consul/serie.do?s={code}",
         }, [geo_series(f"ETCL|{code}|ES", "ES", {"serie": code}, obs)]
+
+    return parse
+
+
+INE_PERIOD = {**{m: f"{m:02d}" for m in range(1, 13)}, 19: "Q1", 20: "Q2", 21: "Q3", 22: "Q4", 28: "A"}
+
+
+def ine_period(row: dict[str, Any]) -> str:
+    code = INE_PERIOD[int(row["FK_Periodo"])]
+    if code == "A":
+        return str(row["Anyo"])
+    return f"{row['Anyo']}-{code}" if code.startswith("Q") else f"{row['Anyo']}-{code}"
+
+
+# table id -> (indicator_code, unit, label, definition, methodology page, selector(series name) -> geo or None)
+def _select(suffix: str) -> Callable[[str], str | None]:
+    def pick(name: str) -> str | None:
+        head, _, rest = name.partition(". ")
+        if not rest.strip().startswith(suffix):
+            return None
+        return "ES" if normalize_label(head) in ("total nacional", "nacional") else ccaa_code(head)
+    return pick
+
+
+INE_TABLES = {
+    "59056": ("ipva_indice", ("IDX2015", "Índice 2015 = 100"), "Índice de Precios de Vivienda en Alquiler (IPVA), general",
+              "INE, a partir de los alquileres declarados en el IRPF (todos los contratos vigentes, no solo los nuevos). Anual.",
+              "https://www.ine.es/dyngs/INEbase/operacion.htm?c=Estadistica_C&cid=1254736177052&idp=1254735976608", _select("Total. Índice")),
+    "80271": ("ipv_indice_media_anual", ("IDX2025", "Índice 2025 = 100"), "Índice de Precios de Vivienda (IPV), general, media anual",
+              "INE, índice de precios de compraventa de vivienda libre (nueva y usada) a partir de las escrituras notariales, "
+              "con ajuste de calidad (hedónico). Desde 2007.",
+              "https://www.ine.es/dyngs/INEbase/operacion.htm?c=Estadistica_C&cid=1254736152838&idp=1254735976607", _select("Media anual. General")),
+    "6061": ("etcl_coste_salarial_ccaa", ("EUR_WORKER_MONTH", "Euros por trabajador y mes"),
+             "Coste salarial total por trabajador y mes por comunidad autónoma (ETCL)",
+             "INE, Encuesta Trimestral de Coste Laboral, tabla 6061: coste salarial total (salario bruto), industria, construcción y servicios.",
+             "https://www.ine.es/dyngs/INEbase/operacion.htm?c=Estadistica_C&cid=1254736045053&idp=1254735976596",
+             _select("Industria, construcción y servicios (excepto actividades de los hogares como empleadores y de organizaciones y organismos extraterritoriales). Coste salarial total")),
+    "39365": ("viviendas_turisticas_pct", ("PC", "% de las viviendas censadas"), "Viviendas turísticas sobre el total de viviendas (%)",
+              "INE, estadística experimental de viviendas turísticas a partir de anuncios en plataformas (mayo y noviembre de cada año).",
+              "https://www.ine.es/dyngs/INEbase/operacion.htm?c=Estadistica_C&cid=1254736177101&idp=1254735976608", _select("Porcentaje de viviendas turísticas")),
+}
+
+
+def ine_table_url(table: str) -> str:
+    return f"https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/{table}?nult=120"
+
+
+def parse_ine_table(table: str) -> Callable[[Raw], Iterable[Batch]]:
+    code, unit, label, definition, page, pick = INE_TABLES[table]
+
+    def parse(raw: Raw) -> Iterable[Batch]:
+        series = []
+        for si, doc in enumerate(raw.data):
+            geo = pick(doc["Nombre"])
+            if geo is None or any(s["geo_code"] == geo for s in series):
+                continue
+            obs = [{"period": ine_period(row), "value": row["Valor"], "pointer": pointer(si, "Data", i, "Valor"), "cell_index": si * 1000 + i}
+                   for i, row in enumerate(doc["Data"]) if row.get("Valor") is not None]
+            series.append(geo_series(f"{table}|{doc['COD']}", geo, {"serie": doc["COD"], "nombre": doc["Nombre"].strip()}, obs))
+        if not any(s["geo_code"] == "ES" for s in series) and table != "6061":
+            raise ValueError(f"INE {table}: national series not found")
+        yield {
+            "source_id": "ine_tempus", "dataset_code": f"INE-{table}", "indicator_code": code, "frequency_code": "X",
+            "frequency_label": "Según la tabla", "unit_code": unit[0], "unit_label": unit[1], "label": label,
+            "definition": definition, "methodology_url": page, "source_url": f"https://www.ine.es/jaxiT3/Tabla.htm?t={table}",
+        }, sorted(series, key=lambda s: s["geo_code"])
 
     return parse
 
@@ -700,6 +849,33 @@ EUROSTAT_DEFS = {
         "la vivienda (promoción, adquisición y ayudas a la construcción). GF1006: protección social, vivienda "
         "(ayudas al alquiler y similares a hogares). Excluye beneficios fiscales (p. ej. deducción por vivienda en el IRPF).",
     },
+    "lfst_r_lfsd2hh": {
+        "label": "Hogares privados por región NUTS 2 (EPA/EU-LFS), miles",
+        "unit_code": "THS_HH", "unit_label": "Miles de hogares", "split": [],
+        "definition": "Eurostat, encuesta de población activa (en España, la EPA del INE): hogares privados por región.",
+    },
+    "demo_gind": {
+        "label": "Población y migración", "unit_code": "MIXED", "unit_label": "Según indicador", "split": ["indic_de"],
+        "units": {"JAN": ("PERSONS", "Personas"), "GROWRT": ("PER_1000", "Por 1.000 habitantes"),
+                  "CNMIGRATRT": ("PER_1000", "Por 1.000 habitantes"), "NATGROWRT": ("PER_1000", "Por 1.000 habitantes")},
+        "definition": "Eurostat, balance demográfico: población a 1 de enero, crecimiento total, migración neta (con ajuste "
+        "estadístico) y crecimiento natural, por 1.000 habitantes.",
+    },
+    "ilc_lvph01": {
+        "label": "Tamaño medio del hogar (EU-SILC)", "unit_code": "PERSONS_PER_HH", "unit_label": "Personas por hogar", "split": [],
+        "definition": "Eurostat EU-SILC: número medio de personas por hogar privado.",
+    },
+    "prc_hicp_aind": {
+        "label": "IPCA, índice anual (2015 = 100)", "unit_code": "IDX2015", "unit_label": "Índice 2015 = 100", "split": ["coicop"],
+        "definition": "Eurostat, índice de precios de consumo armonizado. CP041: alquileres efectivos de la vivienda (todos "
+        "los contratos vigentes); CP00: índice general.",
+    },
+    "tour_ce_omn12": {
+        "label": "Pernoctaciones en alojamientos de corta estancia reservados en plataformas en línea", "unit_code": "NIGHTS",
+        "unit_label": "Pernoctaciones", "split": [],
+        "definition": "Eurostat, estadística experimental con datos de Airbnb, Booking, Expedia y Tripadvisor: pernoctaciones "
+        "en alojamientos de corta estancia (viviendas y habitaciones) reservados en plataformas.",
+    },
     "nama_10_gdp": {
         "label": "Producto interior bruto a precios corrientes, millones de euros",
         "unit_code": "CP_MEUR", "unit_label": "Millones de euros corrientes", "split": [],
@@ -726,9 +902,10 @@ def parse_eurostat(dataset: str) -> Callable[[Raw], Iterable[Batch]]:
                 "status": status.get(str(flat)),
             })
         for split, series_map in sorted(grouped.items()):
+            unit_code, unit_label = spec.get("units", {}).get(split, (spec["unit_code"], spec["unit_label"]))
             yield {
                 "source_id": "eurostat_sdmx", "dataset_code": dataset, "indicator_code": f"{dataset}.{split}",
-                "frequency_code": "A", "frequency_label": "Anual", "unit_code": spec["unit_code"], "unit_label": spec["unit_label"],
+                "frequency_code": "A", "frequency_label": "Anual", "unit_code": unit_code, "unit_label": unit_label,
                 "label": f"{spec['label']} [{split}]" if split != "_T" else spec["label"],
                 "definition": spec["definition"],
                 "methodology_url": f"https://ec.europa.eu/eurostat/databrowser/view/{dataset}/default/table",
@@ -752,7 +929,9 @@ API_SOURCES: list[tuple[str, str, Callable[[Raw], Iterable[Batch]]]] = [
         "31306000", "vivienda_protegida_calificaciones_definitivas", "Viviendas protegidas terminadas (calificaciones definitivas), total nacional",
         "Número de calificaciones definitivas de vivienda protegida, planes estatales y autonómicos: la calificación "
         "definitiva se concede al terminar la obra, por eso se usa como viviendas protegidas terminadas.", "31000000")),
+    ("mivau_34020150_valor_transacciones.xls", "https://apps.fomento.gob.es/BoletinOnline2/sedal/34020150.XLS", parse_mivau_transacciones),
     ("bde_si_1_5.csv", BDE_URL, parse_bde),
+    *[(f"ine_tabla_{table}.json", ine_table_url(table), parse_ine_table(table)) for table in INE_TABLES],
     *[(f"ine_{code}.json", ine_url(code), parse_ine(code)) for code in INE_SERIES],
     ("oecd_av_an_wage_esp_dbnomics.json", OECD_WAGE_URL, parse_oecd_wage),
     ("oecd_house_prices_dbnomics.json", oecd_hp_url(), parse_oecd_house_prices),
@@ -762,6 +941,11 @@ API_SOURCES: list[tuple[str, str, Callable[[Raw], Iterable[Batch]]]] = [
     ("eurostat_gov_10a_exp_housing.json", eurostat_url("gov_10a_exp", unit="MIO_EUR", sector="S13", na_item="TE",
                                                         cofog99=["GF0601", "GF1006"], geo=PEERS), parse_eurostat("gov_10a_exp")),
     ("eurostat_nama_10_gdp.json", eurostat_url("nama_10_gdp", unit="CP_MEUR", na_item="B1GQ", geo=PEERS), parse_eurostat("nama_10_gdp")),
+    ("eurostat_lfst_r_lfsd2hh.json", eurostat_url("lfst_r_lfsd2hh", unit="THS_HH", deg_urb="TOTAL", geo=["ES", *CCAA]), parse_eurostat("lfst_r_lfsd2hh")),
+    ("eurostat_demo_gind.json", eurostat_url("demo_gind", indic_de=["JAN", "GROWRT", "CNMIGRATRT", "NATGROWRT"], geo=PEERS), parse_eurostat("demo_gind")),
+    ("eurostat_ilc_lvph01.json", eurostat_url("ilc_lvph01", unit="AVG", geo=PEERS), parse_eurostat("ilc_lvph01")),
+    ("eurostat_prc_hicp_aind.json", eurostat_url("prc_hicp_aind", unit="INX_A_AVG", coicop=["CP041", "CP00"], geo=PEERS), parse_eurostat("prc_hicp_aind")),
+    ("eurostat_tour_ce_omn12.json", eurostat_url("tour_ce_omn12", unit="NR", c_resid="TOTAL", month="TOTAL", indic_to="NGT_SP", geo=PEERS), parse_eurostat("tour_ce_omn12")),
 ]
 
 
@@ -867,6 +1051,23 @@ def load_curated(conn: sqlite3.Connection, snapshot_date: str) -> dict[str, Any]
             batches.append((long_path, curated_definition("social_rental_stock_pct", "housing_long_run_es",
                                                           "Parque de vivienda social en alquiler (% del total de viviendas)", "PC", "% de las viviendas"),
                             [geo_series(f"social_rental_stock|{c}", c, {"country": c}, obs) for c, obs in sorted(social.items())], meta))
+
+    norms_path = MANUAL_DIR / "boe_housing_norms_es.json"
+    if norms_path.exists():
+        data = json.loads(norms_path.read_bytes())
+        series = []
+        for field in ("total", "estatal", "autonomica"):
+            obs = [{"period": str(row["year"]), "value": row[field], "pointer": pointer("years", i, field), "cell_index": i,
+                    "raw": {k: row[k] for k in ("year", "total", "estatal", "autonomica", "by_rank") if k in row},
+                    "evidence_url": f"https://www.boe.es/datosabiertos/api/boe/sumario/{row['year']}0101"}
+                   for i, row in enumerate(data.get("years", [])) if row.get(field) is not None]
+            series.append(geo_series(f"boe_housing_norms|{field}", "ES", {"scope": field}, obs))
+        definition = curated_definition("boe_housing_norms_per_year", "boe_housing_norms_es",
+                                        "Disposiciones generales sobre vivienda publicadas en el BOE por año", "COUNT", "Disposiciones")
+        definition["extraction_method"] = "derived_count"
+        definition["definition"] = (data.get("method") or "") + " Generado por scripts/boe_housing_norms.py a partir de los sumarios diarios del BOE guardados en etl/data/raw/housing/boe_sumarios/; la lista de normas con su identificador está en el mismo JSON."
+        definition["source_url"] = "https://www.boe.es/datosabiertos/api/api.php"
+        batches.append((norms_path, definition, series, {"regex": data.get("regex"), "exclusions": data.get("exclusions"), "gaps": data.get("gaps", [])}))
 
     for path, definition, series, meta in batches:
         payload = path.read_bytes()

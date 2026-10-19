@@ -2,6 +2,8 @@ import Figure from "../components/Figure";
 import HousingChart from "./HousingChart";
 import HousingTable from "./HousingTable";
 import { formatHousing } from "./format.mjs";
+import { Bars } from "./common";
+import { Explain } from "./explain";
 
 const C = { blue: "#2a78d6", orange: "#eb6834", aqua: "#1baf7a", yellow: "#eda100", ref: "#52514e", peer: "#b4b2a9" };
 const SCOPES = { ES: "Tipo estatal", "ES-MD": "Madrid", "ES-CT": "Cataluña", "ES-AN": "Andalucía", "ES-VC": "C. Valenciana" };
@@ -17,22 +19,6 @@ const TAX_LABELS = {
 const num = (value, digits = 1) =>
   Number(value).toLocaleString("es-ES", { minimumFractionDigits: digits, maximumFractionDigits: digits });
 const pct = (value) => `${Number(value).toLocaleString("es-ES", { maximumFractionDigits: 2 })} %`;
-
-function Bars({ rows, max, label }) {
-  return (
-    <ul className="vizBars" aria-label={label}>
-      {rows.map((row) => (
-        <li key={row.id}>
-          <span>{row.label}</span>
-          <span className="vizBars__track">
-            <span className="vizBars__bar" style={{ width: `${(row.value / max) * 100}%`, background: row.color }} />
-            <span className="vizBars__value">{row.text}</span>
-          </span>
-        </li>
-      ))}
-    </ul>
-  );
-}
 
 export function TaxesFigure({ taxes, wageLast, lastYear, retrieved }) {
   if (!taxes?.scenarios?.length) return null;
@@ -136,6 +122,11 @@ export function TaxesFigure({ taxes, wageLast, lastYear, retrieved }) {
           </div>
         ))}
       </div>
+      <Explain
+        shows="Cuánto paga el comprador en impuestos al comprar un piso medio, en 2000 y hoy, en las cuatro comunidades con más población."
+        read="Cada barra es el impuesto en euros y, entre paréntesis, en % del precio. La vivienda nueva paga IVA (estatal) más AJD (autonómico); la usada, solo ITP (autonómico)."
+        notSay="No incluye notaría, registro, gestoría ni la plusvalía municipal (la paga el vendedor), ni los tipos reducidos para jóvenes o vivienda protegida."
+      />
     </Figure>
   );
 }
@@ -184,6 +175,11 @@ export function CensusStockFigure({ rows, source }) {
           </div>
         ))}
       </div>
+      <Explain
+        shows="Cuántas viviendas hay en España según cada censo y para qué se usan: residencia habitual, segunda residencia o vacías."
+        read="Cada bloque es un censo. Las barras suman el total de viviendas; el porcentaje es sobre ese total."
+        notSay="No dice cuántas vacías podrían alquilarse o venderse ni dónde están; el método del Censo 2021 no es comparable con los anteriores."
+      />
     </Figure>
   );
 }
@@ -223,6 +219,11 @@ export function YoungOwnershipFigure({ young, retrieved }) {
       table={<HousingTable series={series} />}
     >
       <HousingChart series={series} xMin={first.year} xMax={last.year} yMax={100} ariaLabel="Hogares propietarios de su vivienda por edad" />
+      <Explain
+        shows="Qué parte de los hogares jóvenes (persona de referencia menor de 35 años) y del total es dueña de la vivienda en la que vive."
+        read="Cada punto es una ola de la Encuesta Financiera de las Familias del Banco de España (cada dos o tres años). La distancia entre las dos líneas es la brecha generacional."
+        notSay="Solo cuenta a los jóvenes que ya han formado su propio hogar; los que siguen con sus padres no aparecen."
+      />
     </Figure>
   );
 }

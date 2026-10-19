@@ -1,0 +1,128 @@
+/* /visualizaciones/vivienda/ only: reading aids around the shared figure styles. */
+.viz .hvExplain {
+  display: grid;
+  gap: 10px 18px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  margin: 4px 0 2px;
+  padding: 12px 14px;
+  border-left: 3px solid var(--viz-s1);
+  background: var(--viz-band);
+  border-radius: 0 6px 6px 0;
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+
+.viz .hvExplain h3 {
+  margin: 0 0 2px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--viz-ink-2);
+}
+
+.viz .hvExplain p {
+  margin: 0;
+}
+
+.viz .hvLead {
+  padding: 20px;
+  display: grid;
+  gap: 12px;
+}
+
+.viz .hvLead h2,
+.viz .hvPart h2 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.viz .hvLead ol {
+  margin: 0;
+  padding-left: 1.3rem;
+  display: grid;
+  gap: 8px;
+  line-height: 1.5;
+}
+
+.viz .hvLead strong {
+  font-variant-numeric: tabular-nums;
+}
+
+.viz .hvToc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.86rem;
+}
+
+.viz .hvToc a {
+  color: inherit;
+  text-decoration-color: var(--viz-axis);
+  text-underline-offset: 2px;
+}
+
+.viz .hvPart {
+  margin-top: 14px;
+  padding: 0 4px;
+  display: grid;
+  gap: 4px;
+}
+
+.viz .hvPart p {
+  margin: 0;
+  color: var(--viz-ink-2);
+  line-height: 1.5;
+  max-width: 72ch;
+}
+
+.viz .hvGlossary {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+}
+
+.viz .hvGlossary dt {
+  font-weight: 700;
+}
+
+.viz .hvGlossary dd {
+  margin: 2px 0 0;
+  line-height: 1.5;
+}
+
+.viz .hvVerdict {
+  display: inline-block;
+  margin-right: 6px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #ffffff;
+  vertical-align: 1px;
+}
+
+.viz .hvVerdict--yes {
+  background: #1a8a62;
+}
+
+.viz .hvVerdict--partly {
+  background: #a26f00;
+}
+
+.viz .hvVerdict--no {
+  background: #c24f22;
+}
+
+.viz .hvBars .vizBars__value {
+  white-space: normal;
+  min-width: 0;
+}
+
+.viz .hvBars .vizBars__bar {
+  flex: none;
+  max-width: 70%;
+}
