@@ -57,6 +57,13 @@
       "landing_page": "https://www.educacionfpydeportes.gob.es/inee/evaluaciones-internacionales/pisa/pisa-2018/pisa-2018-informes-es.html",
       "sha256": "680025ff26ee0aacd97de748d889d6e0c928388cbc47b7cb458f5c0db8c7ad84",
       "retrieved_at": "2026-10-19"
+    },
+    "inee_piaac2023_informe_espanol": {
+      "title": "PIAAC 2023. Programa para la Evaluación Internacional de las Competencias de la población adulta. Informe español (INEE, 2024)",
+      "url": "https://www.libreria.educacion.gob.es/ebook/185665/free_download",
+      "landing_page": "https://www.educacionfpydeportes.gob.es/inee/evaluaciones-internacionales/piaac.html",
+      "sha256": "f1843e2809cec443a9df088cc24c65ee9541482a66114a7856fd301f7fc212be",
+      "retrieved_at": "2026-10-19"
     }
   },
   "series": {
@@ -770,6 +777,426 @@
         "pdf_page": 120,
         "locator": "Capítulo 3, apartado 3.5.1.2 (Figura 3.6.a)",
         "quote": "este índice explica el 40,65 % (medido por el coeficiente de determinación, R2)"
+      }
+    ],
+    "piaac_literacy_by_age": [
+      {
+        "area": "ESP",
+        "year": 2023,
+        "value": 257,
+        "document": "inee_piaac2023_informe_espanol",
+        "pdf_page": 54,
+        "locator": "Cuadro 2.1 (rendimiento por grupos de edad)",
+        "quote": "España 257 (2,3) 254 (1,8) 251 (1,7) 246 (1,6) 235 (1,7)",
+        "age": "16-24"
+      },
+      {
+        "area": "ESP",
+        "year": 2023,
+        "value": 254,
+        "document": "inee_piaac2023_informe_espanol",
+        "pdf_page": 54,
+        "locator": "Cuadro 2.1 (rendimiento por grupos de edad)",
+        "quote": "España 257 (2,3) 254 (1,8) 251 (1,7) 246 (1,6) 235 (1,7)",
+        "age": "25-34"
+      },
+      {
+        "area": "ESP",
+        "year": 2023,
+        "value": 251,
+        "document": "inee_piaac2023_informe_espanol",
+        "pdf_page": 54,
+        "locator": "Cuadro 2.1 (rendimiento por grupos de edad)",
+        "quote": "España 257 (2,3) 254 (1,8) 251 (1,7) 246 (1,6) 235 (1,7)",
+        "age": "35-44"
+      },
+      {
+        "area": "ESP",
+        "year": 2023,
+        "value": 246,
+        "document": "inee_piaac2023_informe_espanol",
+        "pdf_page": 54,
+        "locator": "Cuadro 2.1 (rendimiento por grupos de edad)",
+        "quote": "España 257 (2,3) 254 (1,8) 251 (1,7) 246 (1,6) 235 (1,7)",
+        "age": "45-54"
+      },
+      {
+        "area": "ESP",
+        "year": 2023,
+        "value": 235,
+        "document": "inee_piaac2023_informe_espanol",
+        "pdf_page": 54,
+        "locator": "Cuadro 2.1 (rendimiento por grupos de edad)",
+        "quote": "España 257 (2,3) 254 (1,8) 251 (1,7) 246 (1,6) 235 (1,7)",
+        "age": "55-65"
+      },
+      {
+        "area": "EU",
+        "year": 2023,
+        "value": 270,
+        "document": "inee_piaac2023_informe_espanol",
+        "pdf_page": 54,
+        "locator": "Cuadro 2.1 (rendimiento por grupos de edad)",
+        "quote": "Promedio UE 270 (0,6) 270 (0,5) 264 (0,5) 257 (0,5) 241 (0,4)",
+        "age": "16-24"
+      },
+      {
+        "area": "EU",
+        "year": 2023,
+        "value": 270,
+        "document": "inee_piaac2023_informe_espanol",
+        "pdf_page": 54,
+        "locator": "Cuadro 2.1 (rendimiento por grupos de edad)",
+        "quote": "Promedio UE 270 (0,6) 270 (0,5) 264 (0,5) 257 (0,5) 241 (0,4)",
+        "age": "25-34"
+      },
+      {
+        "area": "EU",
+        "year": 2023,
+        "value": 264,
+        "document": "inee_piaac2023_informe_espanol",
+        "pdf_page": 54,
+        "locator": "Cuadro 2.1 (rendimiento por grupos de edad)",
+        "quote": "Promedio UE 270 (0,6) 270 (0,5) 264 (0,5) 257 (0,5) 241 (0,4)",
+        "age": "35-44"
+      },
+      {
+        "area": "EU",
+        "year": 2023,
+        "value": 257,
+        "document": "inee_piaac2023_informe_espanol",
+        "pdf_page": 54,
+        "locator": "Cuadro 2.1 (rendimiento por grupos de edad)",
+        "quote": "Promedio UE 270 (0,6) 270 (0,5) 264 (0,5) 257 (0,5) 241 (0,4)",
+        "age": "45-54"
+      },
+      {
+        "area": "EU",
+        "year": 2023,
+        "value": 241,
+        "document": "inee_piaac2023_informe_espanol",
+        "pdf_page": 54,
+        "locator": "Cuadro 2.1 (rendimiento por grupos de edad)",
+        "quote": "Promedio UE 270 (0,6) 270 (0,5) 264 (0,5) 257 (0,5) 241 (0,4)",
+        "age": "55-65"
+      },
+      {
+        "area": "OECD",
+        "year": 2023,
+        "value": 271,
+        "document": "inee_piaac2023_informe_espanol",
+        "pdf_page": 54,
+        "locator": "Cuadro 2.1 (rendimiento por grupos de edad)",
+        "quote": "Promedio OCDE 271 (0,5) 272 (0,5) 265 (0,4) 256 (0,4) 241 (0,4)",
+        "age": "16-24"
+      },
+      {
+        "area": "OECD",
+        "year": 2023,
+        "value": 272,
+        "document": "inee_piaac2023_informe_espanol",
+        "pdf_page": 54,
+        "locator": "Cuadro 2.1 (rendimiento por grupos de edad)",
+        "quote": "Promedio OCDE 271 (0,5) 272 (0,5) 265 (0,4) 256 (0,4) 241 (0,4)",
+        "age": "25-34"
+      },
+      {
+        "area": "OECD",
+        "year": 2023,
+        "value": 265,
+        "document": "inee_piaac2023_informe_espanol",
+        "pdf_page": 54,
+        "locator": "Cuadro 2.1 (rendimiento por grupos de edad)",
+        "quote": "Promedio OCDE 271 (0,5) 272 (0,5) 265 (0,4) 256 (0,4) 241 (0,4)",
+        "age": "35-44"
+      },
+      {
+        "area": "OECD",
+        "year": 2023,
+        "value": 256,
+        "document": "inee_piaac2023_informe_espanol",
+        "pdf_page": 54,
+        "locator": "Cuadro 2.1 (rendimiento por grupos de edad)",
+        "quote": "Promedio OCDE 271 (0,5) 272 (0,5) 265 (0,4) 256 (0,4) 241 (0,4)",
+        "age": "45-54"
+      },
+      {
+        "area": "OECD",
+        "year": 2023,
+        "value": 241,
+        "document": "inee_piaac2023_informe_espanol",
+        "pdf_page": 54,
+        "locator": "Cuadro 2.1 (rendimiento por grupos de edad)",
+        "quote": "Promedio OCDE 271 (0,5) 272 (0,5) 265 (0,4) 256 (0,4) 241 (0,4)",
+        "age": "55-65"
+      }
+    ],
+    "piaac_numeracy_by_age": [
+      {
+        "area": "ESP",
+        "year": 2023,
+        "value": 256,
+        "document": "inee_piaac2023_informe_espanol",
+        "pdf_page": 54,
+        "locator": "Cuadro 2.1 (rendimiento por grupos de edad)",
+        "quote": "España 256 (2,5) 254 (2,2) 252 (1,9) 249 (1,8) 241 (1,7)",
+        "age": "16-24"
+      },
+      {
+        "area": "ESP",
+        "year": 2023,
+        "value": 254,
+        "document": "inee_piaac2023_informe_espanol",
+        "pdf_page": 54,
+        "locator": "Cuadro 2.1 (rendimiento por grupos de edad)",
+        "quote": "España 256 (2,5) 254 (2,2) 252 (1,9) 249 (1,8) 241 (1,7)",
+        "age": "25-34"
+      },
+      {
+        "area": "ESP",
+        "year": 2023,
+        "value": 252,
+        "document": "inee_piaac2023_informe_espanol",
+        "pdf_page": 54,
+        "locator": "Cuadro 2.1 (rendimiento por grupos de edad)",
+        "quote": "España 256 (2,5) 254 (2,2) 252 (1,9) 249 (1,8) 241 (1,7)",
+        "age": "35-44"
+      },
+      {
+        "area": "ESP",
+        "year": 2023,
+        "value": 249,
+        "document": "inee_piaac2023_informe_espanol",
+        "pdf_page": 54,
+        "locator": "Cuadro 2.1 (rendimiento por grupos de edad)",
+        "quote": "España 256 (2,5) 254 (2,2) 252 (1,9) 249 (1,8) 241 (1,7)",
+        "age": "45-54"
+      },
+      {
+        "area": "ESP",
+        "year": 2023,
+        "value": 241,
+        "document": "inee_piaac2023_informe_espanol",
+        "pdf_page": 54,
+        "locator": "Cuadro 2.1 (rendimiento por grupos de edad)",
+        "quote": "España 256 (2,5) 254 (2,2) 252 (1,9) 249 (1,8) 241 (1,7)",
+        "age": "55-65"
+      },
+      {
+        "area": "EU",
+        "year": 2023,
+        "value": 271,
+        "document": "inee_piaac2023_informe_espanol",
+        "pdf_page": 54,
+        "locator": "Cuadro 2.1 (rendimiento por grupos de edad)",
+        "quote": "Promedio UE 271 (0,6) 272 (0,5) 269 (0,5) 262 (0,5) 248 (0,5)",
+        "age": "16-24"
+      },
+      {
+        "area": "EU",
+        "year": 2023,
+        "value": 272,
+        "document": "inee_piaac2023_informe_espanol",
+        "pdf_page": 54,
+        "locator": "Cuadro 2.1 (rendimiento por grupos de edad)",
+        "quote": "Promedio UE 271 (0,6) 272 (0,5) 269 (0,5) 262 (0,5) 248 (0,5)",
+        "age": "25-34"
+      },
+      {
+        "area": "EU",
+        "year": 2023,
+        "value": 269,
+        "document": "inee_piaac2023_informe_espanol",
+        "pdf_page": 54,
+        "locator": "Cuadro 2.1 (rendimiento por grupos de edad)",
+        "quote": "Promedio UE 271 (0,6) 272 (0,5) 269 (0,5) 262 (0,5) 248 (0,5)",
+        "age": "35-44"
+      },
+      {
+        "area": "EU",
+        "year": 2023,
+        "value": 262,
+        "document": "inee_piaac2023_informe_espanol",
+        "pdf_page": 54,
+        "locator": "Cuadro 2.1 (rendimiento por grupos de edad)",
+        "quote": "Promedio UE 271 (0,6) 272 (0,5) 269 (0,5) 262 (0,5) 248 (0,5)",
+        "age": "45-54"
+      },
+      {
+        "area": "EU",
+        "year": 2023,
+        "value": 248,
+        "document": "inee_piaac2023_informe_espanol",
+        "pdf_page": 54,
+        "locator": "Cuadro 2.1 (rendimiento por grupos de edad)",
+        "quote": "Promedio UE 271 (0,6) 272 (0,5) 269 (0,5) 262 (0,5) 248 (0,5)",
+        "age": "55-65"
+      },
+      {
+        "area": "OECD",
+        "year": 2023,
+        "value": 270,
+        "document": "inee_piaac2023_informe_espanol",
+        "pdf_page": 54,
+        "locator": "Cuadro 2.1 (rendimiento por grupos de edad)",
+        "quote": "Promedio OCDE 270 (0,5) 273 (0,5) 268 (0,5) 261 (0,5) 247 (0,4)",
+        "age": "16-24"
+      },
+      {
+        "area": "OECD",
+        "year": 2023,
+        "value": 273,
+        "document": "inee_piaac2023_informe_espanol",
+        "pdf_page": 54,
+        "locator": "Cuadro 2.1 (rendimiento por grupos de edad)",
+        "quote": "Promedio OCDE 270 (0,5) 273 (0,5) 268 (0,5) 261 (0,5) 247 (0,4)",
+        "age": "25-34"
+      },
+      {
+        "area": "OECD",
+        "year": 2023,
+        "value": 268,
+        "document": "inee_piaac2023_informe_espanol",
+        "pdf_page": 54,
+        "locator": "Cuadro 2.1 (rendimiento por grupos de edad)",
+        "quote": "Promedio OCDE 270 (0,5) 273 (0,5) 268 (0,5) 261 (0,5) 247 (0,4)",
+        "age": "35-44"
+      },
+      {
+        "area": "OECD",
+        "year": 2023,
+        "value": 261,
+        "document": "inee_piaac2023_informe_espanol",
+        "pdf_page": 54,
+        "locator": "Cuadro 2.1 (rendimiento por grupos de edad)",
+        "quote": "Promedio OCDE 270 (0,5) 273 (0,5) 268 (0,5) 261 (0,5) 247 (0,4)",
+        "age": "45-54"
+      },
+      {
+        "area": "OECD",
+        "year": 2023,
+        "value": 247,
+        "document": "inee_piaac2023_informe_espanol",
+        "pdf_page": 54,
+        "locator": "Cuadro 2.1 (rendimiento por grupos de edad)",
+        "quote": "Promedio OCDE 270 (0,5) 273 (0,5) 268 (0,5) 261 (0,5) 247 (0,4)",
+        "age": "55-65"
+      }
+    ],
+    "piaac_literacy_mean": [
+      {
+        "area": "ESP",
+        "year": 2023,
+        "value": 247,
+        "document": "inee_piaac2023_informe_espanol",
+        "pdf_page": 41,
+        "locator": "Capítulo 2, lectura",
+        "quote": "el Promedio OCDE (260), el Promedio UE (259) y España (247)"
+      },
+      {
+        "area": "EU",
+        "year": 2023,
+        "value": 259,
+        "document": "inee_piaac2023_informe_espanol",
+        "pdf_page": 41,
+        "locator": "Capítulo 2, lectura",
+        "quote": "el Promedio OCDE (260), el Promedio UE (259) y España (247)"
+      },
+      {
+        "area": "OECD",
+        "year": 2023,
+        "value": 260,
+        "document": "inee_piaac2023_informe_espanol",
+        "pdf_page": 41,
+        "locator": "Capítulo 2, lectura",
+        "quote": "el Promedio OCDE (260), el Promedio UE (259) y España (247)"
+      },
+      {
+        "area": "PRT",
+        "year": 2023,
+        "value": 235,
+        "document": "inee_piaac2023_informe_espanol",
+        "pdf_page": 41,
+        "locator": "Capítulo 2, lectura",
+        "quote": "Chile (218), Portugal (235), Polonia (236)"
+      }
+    ],
+    "piaac_numeracy_mean": [
+      {
+        "area": "ESP",
+        "year": 2023,
+        "value": 250,
+        "document": "inee_piaac2023_informe_espanol",
+        "pdf_page": 43,
+        "locator": "Capítulo 2, matemáticas",
+        "quote": "menores que los Promedios OCDE (263) y UE (264) y España (250)"
+      },
+      {
+        "area": "EU",
+        "year": 2023,
+        "value": 264,
+        "document": "inee_piaac2023_informe_espanol",
+        "pdf_page": 43,
+        "locator": "Capítulo 2, matemáticas",
+        "quote": "menores que los Promedios OCDE (263) y UE (264) y España (250)"
+      },
+      {
+        "area": "OECD",
+        "year": 2023,
+        "value": 263,
+        "document": "inee_piaac2023_informe_espanol",
+        "pdf_page": 43,
+        "locator": "Capítulo 2, matemáticas",
+        "quote": "menores que los Promedios OCDE (263) y UE (264) y España (250)"
+      },
+      {
+        "area": "PRT",
+        "year": 2023,
+        "value": 238,
+        "document": "inee_piaac2023_informe_espanol",
+        "pdf_page": 43,
+        "locator": "Capítulo 2, matemáticas",
+        "quote": "Chile (214), Portugal (238) y Polonia (239)"
+      }
+    ],
+    "piaac_literacy_tertiary": [
+      {
+        "area": "ESP",
+        "year": 2023,
+        "value": 271,
+        "document": "inee_piaac2023_informe_espanol",
+        "pdf_page": 56,
+        "locator": "Capítulo 2, nivel educativo",
+        "quote": "Para España, la diferencia entre los adultos con educación superior (271)"
+      },
+      {
+        "area": "OECD",
+        "year": 2023,
+        "value": 283,
+        "document": "inee_piaac2023_informe_espanol",
+        "pdf_page": 56,
+        "locator": "Capítulo 2, nivel educativo",
+        "quote": "promedio en los países y economías de la OCDE (283)"
+      }
+    ],
+    "piaac_literacy_below_upper_secondary": [
+      {
+        "area": "ESP",
+        "year": 2023,
+        "value": 218,
+        "document": "inee_piaac2023_informe_espanol",
+        "pdf_page": 56,
+        "locator": "Capítulo 2, nivel educativo",
+        "quote": "aquellos con estudios básicos (218)"
+      },
+      {
+        "area": "OECD",
+        "year": 2023,
+        "value": 207,
+        "document": "inee_piaac2023_informe_espanol",
+        "pdf_page": 56,
+        "locator": "Capítulo 2, nivel educativo",
+        "quote": "no completaron esa educación secundaria superior (207)"
       }
     ]
   },

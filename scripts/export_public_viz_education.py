@@ -29,6 +29,7 @@ SOURCE_PAGES = {
     "eurostat_sdmx": ("Eurostat · edat_lfse_14, edat_lfse_16, lfsa_eoqgan, gov_10a_exp, educ_uoe_fine09, nama_10_gdp", "https://ec.europa.eu/eurostat/databrowser/view/edat_lfse_14/default/table"),
     "oecd_eag_finance": ("OCDE · Education at a Glance, gasto por estudiante (réplica DBnomics)", "https://db.nomics.world/OECD/DSD_EAG_UOE_FIN@DF_UOE_INDIC_FIN_PERSTUD"),
     "worldbank_edstats": ("Banco Mundial · EdStats, puntuaciones PISA 2000-2018", "https://databank.worldbank.org/source/education-statistics-%5e-all-indicators"),
+    "ine_epf": ("INE · Encuesta de Presupuestos Familiares (gasto de los hogares en educación)", "https://www.ine.es/jaxiT3/Tabla.htm?t=73828"),
     "owid_grapher": ("Our World in Data · alfabetización (UNESCO) y años de escolarización (Lee y Lee; Barro y Lee)", "https://ourworldindata.org/global-education"),
     "vclc_education_curated": ("PISA 2022: informe español del INEE y nota de país de la OCDE (cita literal por valor)", "https://www.educacionfpydeportes.gob.es/inee/evaluaciones-internacionales/pisa/pisa-2022/pisa-2022-informes-es.html"),
 }
@@ -378,6 +379,67 @@ def build(conn: sqlite3.Connection) -> dict:
         "isec": isec,
     }
 
+    # 12. Capacity lens: what families pay ------------------------------------------------------------
+    by_source = store.by_dimension("eurostat_sdmx", "education_expenditure_by_source", "MIO_EUR", "sector")
+    by_source_tertiary = store.by_dimension("eurostat_sdmx", "education_expenditure_by_source", "MIO_EUR", "sector", {"isced11": "ED5-8"})
+    by_source_all = store.by_dimension("eurostat_sdmx", "education_expenditure_by_source", "MIO_EUR", "sector", {"isced11": "ED02-8"})
+
+    def private_share(source: dict) -> dict[str, list[dict]]:
+        out = {}
+        for geo in PEERS_EU:
+            total_by_year = source.get((geo, "S1"), {})
+            private = source.get((geo, "S1D"), {})
+            out[geo] = [{"year": y, "value": r(private[y] / total_by_year[y] * 100)} for y in sorted(private) if total_by_year.get(y)]
+        return out
+    household_consumption = by_area(store.series("eurostat_sdmx", "household_consumption_education", "PC_TOT"), PEERS_EU, 2)
+    epf_q = store.by_dimension("ine_epf", "epf_education_by_spending_quintile", "EPF_MIXED", "nombre")
+    quintiles = []
+    for label in ("Quintil 1", "Quintil 2", "Quintil 3", "Quintil 4", "Quintil 5", "Total"):
+        per_household = epf_q.get(("ES", f"Gasto medio por hogar. {label}. Servicios de educación. Dato base."), {})
+        share = epf_q.get(("ES", f"Distribución (porcentajes verticales). {label}. Servicios de educación. Dato base."), {})
+        if per_household:
+            last = max(per_household)
+            quintiles.append({"label": label, "year": last, "per_household": r(per_household[last], 0),
+                              "share_of_spending": r(share.get(last), 2), "series": points(per_household, 0)})
+    epf_sub = store.by_dimension("ine_epf", "epf_education_subgroups", "EPF_MIXED", "nombre")
+    subgroups = []
+    for (_geo, name), years in sorted(epf_sub.items()):
+        if name and years:
+            last = max(years)
+            subgroups.append({"label": name.split(". Dato base")[0], "year": last, "value": r(years[last], 0), "series": points(years, 0)})
+    capacity = {
+        "private_share_all": private_share(by_source_all),
+        "private_share_tertiary": private_share(by_source_tertiary),
+        "household_consumption_share": household_consumption,
+        "epf_quintiles": quintiles,
+        "epf_subgroups": subgroups,
+        "notes": "Origen privado: sector privado no educativo (sobre todo hogares) en % del gasto total en educación (Eurostat UOE). "
+        "EPF: quintiles de gasto total del hogar (no de ingresos); subgrupos en euros constantes de la EPF.",
+    }
+
+    # 13. Results beyond PISA ------------------------------------------------------------------------
+    piaac = {}
+    for key in ("piaac_literacy_by_age", "piaac_numeracy_by_age"):
+        ages = store.by_dimension("vclc_education_curated", key, "PIAAC_SCORE", "age")
+        piaac[key] = {
+            area: [{"age": age, "value": years[2023]} for (geo, age), years in sorted(ages.items()) if geo == area]
+            for area in ("ESP", "OECD", "EU")
+        }
+    for key in ("piaac_literacy_mean", "piaac_numeracy_mean", "piaac_literacy_tertiary", "piaac_literacy_below_upper_secondary"):
+        piaac[key] = {geo: rows[0]["value"] for geo, rows in store.series("vclc_education_curated", key, "PIAAC_SCORE").items()}
+    neet = by_area(store.series("eurostat_sdmx", "neet_15_29", "PC"), PEERS_EU)
+    emp = store.by_dimension("eurostat_sdmx", "employment_rate_by_attainment_25_64", "PC", "isced11")
+    employment = {level: {geo: points(emp.get((geo, level), {})) for geo in PEERS_EU} for level in ("ED0-2", "ED3_4", "ED5-8")}
+    earn = store.by_dimension("oecd_eag_finance", "EARN_REL_UPPER.Y25T64.FT", "PT_EARN_WR_ISCED11A_3", "ATTAINMENT_LEV")
+    earnings = {level: {area: points(earn.get((area, level), {}), 0) for area in PEERS_OECD if earn.get((area, level))}
+                for level in ("ISCED11A_0T2", "ISCED11A_5T8")}
+    young = {area: next((row["value"] for row in piaac["piaac_literacy_by_age"][area] if row["age"] == "16-24"), None) for area in ("ESP", "OECD")}
+    old = {area: next((row["value"] for row in piaac["piaac_literacy_by_age"][area] if row["age"] == "55-65"), None) for area in ("ESP", "OECD")}
+    outcomes = {
+        "piaac": piaac, "neet": neet, "employment": employment, "earnings": earnings,
+        "piaac_gap_young": young["ESP"] - young["OECD"], "piaac_gap_old": old["ESP"] - old["OECD"],
+    }
+
     sal_es = {p["year"]: p["value"] for p in salary_index["ISCED11_24"]["ESP"]}
     sal_oecd = {p["year"]: p["value"] for p in salary_index["ISCED11_24"]["OECD"]}
     sal_peak = max(sal_es, key=lambda y: sal_es[y])
@@ -489,6 +551,8 @@ def build(conn: sqlite3.Connection) -> dict:
         "vocational": {"share_upper_secondary": vocational_share, "recent_graduates_employment": recent_grads},
         "attainment_25_34": attainment,
         "story": story,
+        "capacity": capacity,
+        "outcomes": outcomes,
         "sources": sources,
     }
 
@@ -548,6 +612,27 @@ def write_csv(data: dict, path: Path) -> None:
     for level, areas in data["attainment_25_34"].items():
         for area, pts in areas.items():
             rows.extend(("eurostat_sdmx", f"nivel_estudios_25_34_{level}", area, p["year"], p["value"]) for p in pts)
+    cap = data["capacity"]
+    for key, label in (("private_share_all", "gasto_educacion_origen_privado_pct"), ("private_share_tertiary", "gasto_universidad_origen_privado_pct"),
+                       ("household_consumption_share", "consumo_hogares_educacion_pct")):
+        for area, pts in cap[key].items():
+            rows.extend(("eurostat_sdmx", label, area, p["year"], p["value"]) for p in pts)
+    for q in cap["epf_quintiles"]:
+        rows.extend(("ine_epf", f"gasto_hogar_educacion_eur_{q['label'].replace(' ', '_').lower()}", "ES", p["year"], p["value"]) for p in q["series"])
+    for sub in cap["epf_subgroups"]:
+        rows.extend(("ine_epf", f"gasto_hogar_eur_constantes_{sub['label']}", "ES", p["year"], p["value"]) for p in sub["series"])
+    out = data["outcomes"]
+    for key in ("piaac_literacy_by_age", "piaac_numeracy_by_age"):
+        for area, ages in out["piaac"][key].items():
+            rows.extend(("vclc_education_curated", f"{key}_{a['age']}", area, 2023, a["value"]) for a in ages)
+    for area, pts in out["neet"].items():
+        rows.extend(("eurostat_sdmx", "ninis_15_29_pct", area, p["year"], p["value"]) for p in pts)
+    for level, areas in out["employment"].items():
+        for area, pts in areas.items():
+            rows.extend(("eurostat_sdmx", f"tasa_empleo_25_64_{level}", area, p["year"], p["value"]) for p in pts)
+    for level, areas in out["earnings"].items():
+        for area, pts in areas.items():
+            rows.extend(("oecd_eag_finance", f"ingresos_relativos_secundaria_superior_100_{level}", area, p["year"], p["value"]) for p in pts)
     buf = io.StringIO()
     writer = csv.writer(buf, lineterminator="\n")
     writer.writerow(["fuente", "serie", "area", "anio", "valor"])

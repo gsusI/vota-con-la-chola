@@ -264,7 +264,7 @@ export function StoryFigure({ story, sources, h }) {
           [
             "Más dinero, mejores resultados",
             "No",
-            `No a escala nacional: España gastó más en 2009 que en 2015 y sacó menos nota; la OCDE y los cuatro países comparables gastaron más en 2022 que en 2012 y todos bajaron. Entre comunidades, el gasto explica el ${num(story.r2_spending_regions, 0)} % de las diferencias.`,
+            `No a escala nacional: España gastó más en 2009 que en 2015 y sacó menos nota; la OCDE y los cuatro países comparables gastaron más en 2022 que en 2012 y todos bajaron. Entre comunidades, el gasto explica el ${num(story.r2_spending_regions, 0)} % de las diferencias. Y el eje solo mide gasto público: las familias ponen además el ${num(h.familyShare, 0)} % del total.`,
           ],
           [
             "Los recortes hundieron la educación",
@@ -275,6 +275,11 @@ export function StoryFigure({ story, sources, h }) {
             "Las diferencias entre comunidades son de origen social",
             "Sí",
             `En buena parte: el origen social medio explica el ${num(story.r2_isec_regions, 0)} % de las diferencias en PISA entre comunidades y ciudades autónomas, frente al ${num(story.r2_spending_regions, 0)} % del gasto. Pero el cambio en la mezcla de alumnos explica poco de la caída nacional desde 2012 (${num(h.compositionPoints)} de ${h.compositionDrop} puntos; ver «Equidad»).`,
+          ],
+          [
+            "La educación mejora con cada generación",
+            "?",
+            `En parte: los jóvenes de 16 a 24 años sacan ${h.piaacYoung} en comprensión lectora (PIAAC 2023) y los de 55 a 65, ${h.piaacOld}; hay mucho menos abandono. Pero la distancia con la OCDE es mayor entre los jóvenes (${Math.abs(h.gapYoung)} puntos) que entre los mayores (${Math.abs(h.gapOld)}): España ha mejorado, la OCDE más.`,
           ],
           [
             "¿Sirve o no sirve gastar?",

@@ -72,6 +72,12 @@ LOCAL_SOURCES: dict[str, dict[str, str]] = {
         "default_url": "https://api.worldbank.org/v2/sources/12",
         "format": "json",
     },
+    "ine_epf": {
+        "name": "INE - Encuesta de Presupuestos Familiares (API Tempus)",
+        "scope": DOMAIN,
+        "default_url": "https://servicios.ine.es/wstempus/js/ES/TABLAS_OPERACION/EPF",
+        "format": "json",
+    },
     "owid_grapher": {
         "name": "Our World in Data - series históricas de educación (CSV del grapher)",
         "scope": DOMAIN,
@@ -668,6 +674,43 @@ EUROSTAT_SOURCES = [
         ),
     ),
     (
+        "eurostat_educ_uoe_fine01.json",
+        eurostat_url("educ_uoe_fine01", {"unit": "MIO_EUR", "sector": ["S1", "S1D", "S13"], "isced11": ["ED02-8", "ED5-8"], "geo": PEERS}),
+        parse_eurostat(
+            "educ_uoe_fine01", "education_expenditure_by_source", "MIO_EUR", "Millones de euros",
+            "Gasto total en educación por origen de los fondos (total, administraciones públicas, sector privado no educativo)",
+            "Gasto en educación (UOE) por fuente inicial de los fondos: total de la economía (S1), administraciones públicas "
+            "(S13) y sector privado no educativo, principalmente hogares (S1D).",
+        ),
+    ),
+    (
+        "eurostat_nama_10_co3_p3_cp10.json",
+        eurostat_url("nama_10_co3_p3", {"coicop": "CP10", "unit": "PC_TOT", "geo": PEERS}),
+        parse_eurostat(
+            "nama_10_co3_p3", "household_consumption_education", "PC_TOT", "% del consumo final de los hogares",
+            "Gasto de los hogares en educación (COICOP 10), % de su consumo final",
+            "Consumo final de los hogares por finalidad (contabilidad nacional): enseñanza, en % del consumo total.",
+        ),
+    ),
+    (
+        "eurostat_edat_lfse_20.json",
+        eurostat_url("edat_lfse_20", {"sex": "T", "age": "Y15-29", "training": "NO_FE_NO_NFE", "wstatus": "NEMP", "unit": "PC", "geo": PEERS}),
+        parse_eurostat(
+            "edat_lfse_20", "neet_15_29", "PC", "% de la población de 15 a 29 años",
+            "Jóvenes de 15 a 29 años que ni trabajan ni estudian ni se forman (ninis)",
+            "Jóvenes sin empleo que no siguen ninguna educación o formación, formal o no formal. Encuesta de Población Activa.",
+        ),
+    ),
+    (
+        "eurostat_lfsa_ergaed.json",
+        eurostat_url("lfsa_ergaed", {"sex": "T", "age": "Y25-64", "unit": "PC", "isced11": ["ED0-2", "ED3_4", "ED5-8"], "geo": PEERS}),
+        parse_eurostat(
+            "lfsa_ergaed", "employment_rate_by_attainment_25_64", "PC", "% de ocupados",
+            "Tasa de empleo de 25 a 64 años por nivel de estudios",
+            "Ocupados en % de la población de 25 a 64 años, por nivel máximo de estudios. Encuesta de Población Activa.",
+        ),
+    ),
+    (
         "eurostat_nama_10_gdp_deflator.json",
         eurostat_url("nama_10_gdp", {"na_item": "B1GQ", "unit": "PD20_NAC", "geo": "ES"}),
         parse_eurostat(
@@ -730,6 +773,78 @@ def parse_oecd_salaries(raw: Raw) -> Iterable[Batch]:
         "methodology_url": "https://www.oecd.org/en/topics/sub-issues/teachers-salaries.html",
         "source_url": f"https://db.nomics.world/OECD/{OECD_SAL_DATASET}",
     }, sorted(series, key=lambda s: s["key"])
+
+
+OECD_EARN_DATASET = "DSD_EAG_LSO_EA@DF_LSO_EARN_REL_UPPER"
+
+
+def oecd_earnings_url() -> str:
+    return f"https://api.db.nomics.world/v22/series/OECD/{OECD_EARN_DATASET}?" + urllib.parse.urlencode(
+        {"dimensions": json.dumps({"REF_AREA": OECD_PEERS, "SEX": ["_T"], "AGE": ["Y25T64"],
+                                   "ATTAINMENT_LEV": ["ISCED11A_0T2", "ISCED11A_3", "ISCED11A_5T8"],
+                                   "WORK_TIME_ARNGMNT": ["FT"]}, separators=(",", ":")), "observations": 1, "limit": 1000}
+    )
+
+
+def parse_oecd_earnings(raw: Raw) -> Iterable[Batch]:
+    """Full-time workers aged 25-64, both sexes: earnings relative to upper-secondary graduates (= 100)."""
+    series = []
+    for doc_index, doc in enumerate(raw.json()["series"]["docs"]):
+        parts = doc["series_code"].split(".")
+        if parts[1] != "_T" or parts[2] != "Y25T64" or ".FT." not in doc["series_code"]:
+            continue
+        if parts[3] not in ("ISCED11A_0T2", "ISCED11A_3", "ISCED11A_5T8"):
+            continue
+        obs = [
+            {"period": period, "value": value, "pointer": pointer("series", "docs", doc_index, "value", i), "cell_index": i}
+            for i, (period, value) in enumerate(zip(doc["period"], doc["value"]))
+            if isinstance(value, (int, float))
+        ]
+        series.append(area_series(f"{OECD_EARN_DATASET}|{doc['series_code']}", parts[0],
+                                  {"series_code": doc["series_code"], "ATTAINMENT_LEV": parts[3], "SEX": parts[1], "AGE": parts[2],
+                                   "WORK_TIME": "FT"}, obs))
+    yield {
+        "source_id": "oecd_eag_finance", "dataset_code": OECD_EARN_DATASET, "indicator_code": "EARN_REL_UPPER.Y25T64.FT",
+        "frequency_code": "A", "frequency_label": "Anual", "unit_code": "PT_EARN_WR_ISCED11A_3",
+        "unit_label": "Ingresos relativos (secundaria superior = 100)",
+        "label": "Ingresos laborales relativos por nivel de estudios, trabajadores a tiempo completo de 25 a 64 años",
+        "definition": "OCDE Education at a Glance: ingresos de los trabajadores a tiempo completo con cada nivel de estudios en % "
+        "de los de quienes tienen secundaria superior. Leído de la réplica DBnomics.",
+        "methodology_url": "https://www.oecd.org/en/topics/sub-issues/education-and-earnings.html",
+        "source_url": f"https://db.nomics.world/OECD/{OECD_EARN_DATASET}",
+    }, sorted(series, key=lambda s: s["key"])
+
+
+INE_EPF = {
+    73828: ("epf_education_by_spending_quintile", "Gasto de los hogares en servicios de educación por quintil de gasto total del hogar (EPF)",
+            lambda name: "educaci" in name.lower()),
+    75004: ("epf_education_subgroups", "Gasto medio por hogar en enseñanza por nivel (EPF, subgrupos COICOP)",
+            lambda name: name.startswith("Enseñanza") and "Dato base. Gasto total. Gasto medio por hogar" in name),
+}
+
+
+def parse_ine_epf(table: int) -> Callable[[Raw], Iterable[Batch]]:
+    code, label, keep = INE_EPF[table]
+
+    def parse(raw: Raw) -> Iterable[Batch]:
+        series = []
+        for i, item in enumerate(raw.json()):
+            name = item["Nombre"].strip()
+            if not keep(name):
+                continue
+            obs = [
+                {"period": str(point["Anyo"]), "value": point["Valor"], "pointer": pointer(i, "Data", j, "Valor"), "cell_index": j}
+                for j, point in enumerate(item.get("Data", [])) if point.get("Valor") is not None
+            ]
+            series.append(area_series(f"INE|{table}|{item.get('COD', name)}", "ES", {"nombre": name}, obs))
+        yield {
+            "source_id": "ine_epf", "dataset_code": f"t{table}", "indicator_code": code, "frequency_code": "A",
+            "frequency_label": "Anual", "unit_code": "EPF_MIXED", "unit_label": "Euros por hogar o persona, o porcentaje, según la serie",
+            "label": label, "definition": "INE, Encuesta de Presupuestos Familiares; cada serie lleva en su nombre la medida.",
+            "methodology_url": "https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736176806",
+            "source_url": f"https://www.ine.es/jaxiT3/Tabla.htm?t={table}",
+        }, series
+    return parse
 
 
 EAG_LEVELS = {"ISCED11_1T8": "Primaria a terciaria", "ISCED11_1T4": "Primaria a postsecundaria no terciaria"}
@@ -859,6 +974,11 @@ API_SOURCES: list[tuple[str, str, Callable[[Raw], Iterable[Batch]]]] = [
     *EUROSTAT_SOURCES,
     ("oecd_eag_per_student_dbnomics.json", oecd_eag_url(), parse_oecd_eag),
     ("oecd_eag_teacher_salaries_dbnomics.json", oecd_salary_url(), parse_oecd_salaries),
+    ("oecd_eag_earnings_dbnomics.json", oecd_earnings_url(), parse_oecd_earnings),
+    *[
+        (f"ine_epf_t{table}.json", f"https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/{table}?nult=12", parse_ine_epf(table))
+        for table in INE_EPF
+    ],
     *WB_SOURCES,
     *OWID_SOURCES,
 ]
@@ -880,6 +1000,12 @@ CURATED_LABELS = {
     "pisa_isec_above_oecd_flag": ("FLAG", "1 = ISEC medio superior a la media OCDE", "PISA: comunidades con ISEC medio superior a la media OCDE (según el informe español)"),
     "pisa_isec_mean": ("ISEC", "Índice ISEC (media OCDE = 0)", "PISA: índice medio de estatus económico, social y cultural (ISEC)"),
     "pisa_isec_r2_math_pct": ("PC", "% de la variación (R²)", "PISA: variación de la puntuación media en matemáticas explicada por el ISEC medio"),
+    "piaac_literacy_by_age": ("PIAAC_SCORE", "Puntos PIAAC", "PIAAC 2023: comprensión lectora de adultos por grupo de edad"),
+    "piaac_numeracy_by_age": ("PIAAC_SCORE", "Puntos PIAAC", "PIAAC 2023: matemáticas de adultos por grupo de edad"),
+    "piaac_literacy_mean": ("PIAAC_SCORE", "Puntos PIAAC", "PIAAC 2023: comprensión lectora de adultos (16-65 años)"),
+    "piaac_numeracy_mean": ("PIAAC_SCORE", "Puntos PIAAC", "PIAAC 2023: matemáticas de adultos (16-65 años)"),
+    "piaac_literacy_tertiary": ("PIAAC_SCORE", "Puntos PIAAC", "PIAAC 2023: comprensión lectora de adultos con estudios superiores"),
+    "piaac_literacy_below_upper_secondary": ("PIAAC_SCORE", "Puntos PIAAC", "PIAAC 2023: comprensión lectora de adultos sin secundaria superior"),
     "pisa_disadvantaged_immigrant_pct": ("PC", "% del alumnado inmigrante", "PISA: alumnado inmigrante socioeconómicamente desaventajado"),
 }
 
@@ -920,10 +1046,10 @@ def load_curated(conn: sqlite3.Connection, snapshot_date: str, offline: bool) ->
     totals: dict[str, Any] = {"releases": 0, "observations": 0, "documents": check_documents(data, offline)}
     for key, rows in sorted(data["series"].items()):
         unit_code, unit_label, label = CURATED_LABELS[key]
-        grouped: dict[str, list[dict[str, Any]]] = {}
+        grouped: dict[tuple[str, str | None], list[dict[str, Any]]] = {}
         for index, row in enumerate(rows):
             doc = data["documents"][row["document"]]
-            grouped.setdefault(row["area"], []).append({
+            grouped.setdefault((row["area"], row.get("age")), []).append({
                 "period": str(row["year"]), "value": row["value"], "pointer": pointer("series", key, index, "value"),
                 "cell_index": index, "evidence_url": doc["url"], "raw": {**row, "document_sha256": doc["sha256"]},
             })
@@ -939,9 +1065,10 @@ def load_curated(conn: sqlite3.Connection, snapshot_date: str, offline: bool) ->
             conn, definition, sha256_bytes(payload), len(payload), rel(path), definition["source_url"], snapshot_date,
             {"documents": data["documents"], "gaps": data.get("gaps", [])},
             [
-                area_series(f"pisa_curated_es|{key}|{area}", area, {"indicator": key}, obs,
+                area_series(f"pisa_curated_es|{key}|{area}" + (f"|{age}" if age else ""), area,
+                            {"indicator": key, **({"age": age} if age else {})}, obs,
                             *((area.split(":", 1)[1], "es-ccaa-name", "region") if area.startswith("ES-CCAA:") else ()))
-                for area, obs in sorted(grouped.items())
+                for (area, age), obs in sorted(grouped.items(), key=lambda kv: (kv[0][0], kv[0][1] or ""))
             ],
         )
         totals["releases"] += counts["releases"]

@@ -512,3 +512,277 @@ export function Glossary() {
     </section>
   );
 }
+
+// --------------------------------------------------------------------------------------------- families
+const lastOf = (rows) => (rows?.length ? rows.at(-1) : null);
+
+export function FamiliesFigure({ data, sources }) {
+  const cap = data.capacity;
+  const areas = ["ES", "EU27_2020", "DE", "FR", "IT", "PT"];
+  const shareRows = (key) =>
+    areas
+      .map((geo) => ({ geo, row: lastOf(cap[key][geo]) }))
+      .filter((item) => item.row)
+      .map((item) => ({ label: NAMES[item.geo], value: item.row.value, color: item.geo === "ES" ? C.blue : item.geo === "EU27_2020" ? C.ref : C.peer }));
+  const all = shareRows("private_share_all");
+  const tertiary = shareRows("private_share_tertiary");
+  const es = all.find((row) => row.label === "España");
+  const esTertiary = tertiary.find((row) => row.label === "España");
+  const peersAll = all.filter((row) => row.label !== "España");
+  const highest = peersAll.every((row) => row.value < es.value);
+  const year = lastOf(cap.private_share_all.ES).year;
+  const consumption = comparison(cap.household_consumption_share, areas, ["EU27_2020"]);
+  const cEs = lastOf(cap.household_consumption_share.ES);
+  const cEu = lastOf(cap.household_consumption_share.EU27_2020);
+  const q = Object.fromEntries(cap.epf_quintiles.map((row) => [row.label, row]));
+  const qMax = Math.max(...cap.epf_quintiles.map((row) => row.per_household));
+  return (
+    <Figure
+      id="familias"
+      title={`La enseñanza no es gratis para las familias: pagan el ${num(es.value, 0)} % del gasto educativo en España${highest ? ", más que en Alemania, Francia, Italia y Portugal" : ""}, y el ${num(esTertiary.value, 0)} % del universitario`}
+      dek={`Los hogares dedican a educación el ${num(cEs.value)} % de su consumo (UE: ${num(cEu.value)} %, ${cEs.year}). En ${q.Total.year}, el hogar medio gastó ${fmt(q.Total.per_household, "eur")} al año en enseñanza; el 20 % que menos gasta, ${fmt(q["Quintil 1"].per_household, "eur")} (el ${num(q["Quintil 1"].share_of_spending, 2)} % de su gasto), y el 20 % que más, ${fmt(q["Quintil 5"].per_household, "eur")} (${num(q["Quintil 5"].share_of_spending, 2)} %).`}
+      legend={[
+        { id: "ES", label: "España", color: C.blue },
+        { id: "ref", label: "UE-27", color: C.ref },
+        { id: "peer", label: "Alemania, Francia, Italia, Portugal", color: C.peer },
+      ]}
+      sources={sources}
+      notes={[
+        `Origen privado del gasto (${year}): sector privado no educativo —sobre todo hogares— en % del gasto total en educación, de Infantil a universidad (Eurostat UOE). Recoge lo que pagan hogares y otras entidades privadas, como matrículas y cuotas de centros privados y concertados; la estadística no separa la concertada.`,
+        "Encuesta de Presupuestos Familiares: los quintiles son de gasto total del hogar, no de ingresos (es lo que publica el INE para esta tabla); euros corrientes. «Enseñanzas no relacionadas con el sistema educativo» recoge sobre todo academias, idiomas y cursos.",
+        "Falta: precio de la matrícula universitaria por comunidad en % de la renta del hogar. No hemos encontrado una tabla oficial descargable por script (la nota del Ministerio está en lamoncloa.gob.es, que devolvió un error de conexión TLS a la descarga automática el 19 de octubre de 2026).",
+      ]}
+      table={
+        <>
+          <EduTable caption="Ver el origen privado del gasto en tabla" series={areas.map((geo) => ({ id: geo, label: `${NAMES[geo]} · todas las etapas`, points: cap.private_share_all[geo] || [] }))} />
+          <EduTable digits={2} caption="Ver el consumo de los hogares en educación en tabla" series={[...consumption].reverse()} />
+          <EduTable unit="eur" caption="Ver el gasto por hogar en tabla (EPF)" series={cap.epf_quintiles.map((row) => ({ id: row.label, label: row.label, points: row.series }))} />
+        </>
+      }
+    >
+      <Explain
+        shows="Cuánto pone cada familia de su bolsillo: qué parte del gasto en educación no paga el Estado, cuánto del consumo de los hogares va a enseñanza y cuánto gasta cada tipo de hogar."
+        read="Las barras comparan España (azul) con la UE y cuatro países. En la encuesta del INE, cada quintil es un 20 % de los hogares ordenados de menos a más gasto total."
+        notSay="No separa la concertada de la privada ni mide la renta de los hogares (la encuesta ordena por gasto). Tampoco dice si ese gasto compra mejores resultados."
+      />
+      <div className="vizMultiples">
+        <div>
+          <h3 className="vizPanelTitle">
+            Gasto en educación de origen privado, {year}
+            <span>% del gasto total, de Infantil a universidad</span>
+          </h3>
+          <Bars label="Origen privado del gasto en educación" unit="pct" digits={1} max={50} rows={all} />
+          <h3 className="vizPanelTitle">
+            Ídem en la universidad
+            <span>% del gasto en educación superior</span>
+          </h3>
+          <Bars label="Origen privado del gasto universitario" unit="pct" digits={1} max={50} rows={tertiary} />
+        </div>
+        <div>
+          <h3 className="vizPanelTitle">
+            Gasto de los hogares en educación
+            <span>% de su consumo final (contabilidad nacional)</span>
+          </h3>
+          <SparseLineChart series={consumption} unit="pct" digits={1} height={200} yMax={2} ariaLabel="Gasto de los hogares en educación en porcentaje de su consumo" />
+          <h3 className="vizPanelTitle">
+            Gasto en enseñanza por hogar, {q.Total.year}
+            <span>Euros al año, por quintil de gasto total (INE, EPF)</span>
+          </h3>
+          <Bars
+            label="Gasto en enseñanza por hogar y quintil"
+            unit="eur"
+            max={qMax}
+            rows={cap.epf_quintiles.map((row) => ({
+              label: row.label === "Total" ? "Media" : row.label.replace("Quintil", "Quintil de gasto"),
+              value: row.per_household,
+              color: row.label === "Total" ? C.ref : C.blue,
+              note: `${num(row.share_of_spending, 2)} % de su gasto`,
+            }))}
+          />
+        </div>
+      </div>
+    </Figure>
+  );
+}
+
+// --------------------------------------------------------------------------------------------- adults
+export function AdultSkillsFigure({ data, sources }) {
+  const p = data.outcomes.piaac;
+  const ages = p.piaac_literacy_by_age.ESP.map((row) => row.age);
+  const value = (key, area, age) => p[key][area].find((row) => row.age === age)?.value;
+  const gy = data.outcomes.piaac_gap_young;
+  const go = data.outcomes.piaac_gap_old;
+  return (
+    <Figure
+      id="adultos"
+      title={`Los adultos españoles sacan ${p.piaac_literacy_mean.ESP} puntos en comprensión lectora (OCDE: ${p.piaac_literacy_mean.OECD}), y la distancia es mayor entre los jóvenes de 16 a 24 años (${Math.abs(gy)} puntos) que entre los de 55 a 65 (${Math.abs(go)})`}
+      dek={`PIAAC 2023 mide las competencias de la población de 16 a 65 años: el resultado acumulado del sistema, no solo de la escuela de hoy. En matemáticas, ${p.piaac_numeracy_mean.ESP} frente a ${p.piaac_numeracy_mean.OECD}. Los titulados superiores españoles sacan ${p.piaac_literacy_tertiary.ESP} en lectura frente a ${p.piaac_literacy_tertiary.OECD} de la OCDE; los que no terminaron secundaria superior, ${p.piaac_literacy_below_upper_secondary.ESP} frente a ${p.piaac_literacy_below_upper_secondary.OECD}.`}
+      legend={[
+        { id: "ES", label: "España", color: C.blue },
+        { id: "OECD", label: "Media OCDE", color: C.ref },
+        { id: "EU", label: "Media UE", color: C.peer },
+      ]}
+      legendKind="bar"
+      sources={sources}
+      notes={[
+        "Valores del Cuadro 2.1 y del capítulo 2 del informe español de PIAAC 2023 (INEE), con cita literal. La escala va de 0 a 500. Cada grupo de edad es una generación distinta, no la misma persona a lo largo del tiempo.",
+        "Que los jóvenes saquen más que los mayores refleja sobre todo cuántos años estudió cada generación; que la distancia con la OCDE sea mayor entre los jóvenes indica que la mejora española no ha cerrado la brecha.",
+      ]}
+      table={
+        <details className="vizTable">
+          <summary>Ver los datos en tabla</summary>
+          <div className="vizTable__scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Edad</th>
+                  <th scope="col">Lectura España</th>
+                  <th scope="col">Lectura OCDE</th>
+                  <th scope="col">Lectura UE</th>
+                  <th scope="col">Matemáticas España</th>
+                  <th scope="col">Matemáticas OCDE</th>
+                  <th scope="col">Matemáticas UE</th>
+                </tr>
+              </thead>
+              <tbody>
+                {ages.map((age) => (
+                  <tr key={age}>
+                    <td>{age}</td>
+                    {["piaac_literacy_by_age", "piaac_numeracy_by_age"].flatMap((key) => ["ESP", "OECD", "EU"].map((area) => <td key={`${key}-${area}`}>{value(key, area, age)}</td>))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </details>
+      }
+    >
+      <Explain
+        shows="Qué saben hacer los adultos con un texto y con números, por edad, en España frente a la media de la OCDE y la UE."
+        read="Cada grupo de barras es una generación. Si la barra azul se acercara a la gris oscura en los más jóvenes, la escuela reciente estaría cerrando la brecha; ocurre lo contrario."
+        notSay="No separa lo que aprendieron en la escuela de lo que aprendieron después (trabajo, formación) ni el efecto de la inmigración adulta."
+      />
+      <div className="vizMultiples">
+        {[
+          ["piaac_literacy_by_age", "Comprensión lectora"],
+          ["piaac_numeracy_by_age", "Matemáticas"],
+        ].map(([key, label]) => (
+          <div key={key}>
+            <h3 className="vizPanelTitle">
+              {label} por edad
+              <span>Puntos PIAAC 2023 (eje 0-300)</span>
+            </h3>
+            <div style={{ display: "grid", gap: 6 }}>
+              {ages.map((age) => (
+                <div key={age} style={{ display: "grid", gridTemplateColumns: "56px 1fr", gap: 8, alignItems: "center", fontSize: "0.82rem" }}>
+                  <span>{age}</span>
+                  <span style={{ display: "grid", gap: 2 }}>
+                    {[
+                      ["ESP", C.blue],
+                      ["OECD", C.ref],
+                      ["EU", C.peer],
+                    ].map(([area, color]) => (
+                      <span key={area} style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                        <span style={{ height: 8, width: `${(value(key, area, age) / 300) * 85}%`, background: color, borderRadius: "0 3px 3px 0" }} />
+                        <span style={{ fontSize: "0.74rem" }}>{value(key, area, age)}</span>
+                      </span>
+                    ))}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </Figure>
+  );
+}
+
+// --------------------------------------------------------------------------------------------- labour return
+export function LabourReturnFigure({ data, sources }) {
+  const o = data.outcomes;
+  const areas = ["ES", "EU27_2020", "DE", "FR", "IT", "PT"];
+  const empLast = (level, geo) => lastOf(o.employment[level][geo]);
+  const premium = (area) => lastOf(o.earnings.ISCED11A_5T8[area]);
+  const penalty = (area) => lastOf(o.earnings.ISCED11A_0T2[area]);
+  const earnAreas = ["ESP", "OECD", "EU25", "DEU", "FRA", "ITA", "PRT"].filter((area) => premium(area));
+  const neet = comparison(o.neet, areas, ["EU27_2020"]);
+  const neetEs = lastOf(o.neet.ES);
+  const neetEu = lastOf(o.neet.EU27_2020);
+  const levels = [
+    ["ED0-2", "Como mucho ESO"],
+    ["ED3_4", "Bachillerato o FP media"],
+    ["ED5-8", "Estudios superiores"],
+  ];
+  const year = empLast("ED5-8", "ES").year;
+  return (
+    <Figure
+      id="rendimiento-laboral"
+      title={`Estudiar sigue compensando: un titulado superior cobra un ${premium("ESP").value - 100} % más que uno de Bachillerato o FP (OCDE: ${premium("OECD").value - 100} %) y trabaja el ${num(empLast("ED5-8", "ES").value, 0)} % frente al ${num(empLast("ED0-2", "ES").value, 0)} % de quien no pasó de la ESO`}
+      dek={`Pero el escalón intermedio rinde menos que en Europa: con Bachillerato o FP trabaja el ${num(empLast("ED3_4", "ES").value)} % de los adultos de 25 a 64 años, frente al ${num(empLast("ED3_4", "EU27_2020").value)} % de la UE (${year}). Quien no terminó secundaria superior cobra el ${penalty("ESP").value} % de lo que cobra quien sí la tiene (OCDE: ${penalty("OECD").value} %). Los jóvenes de 15 a 29 años que ni estudian ni trabajan son el ${num(neetEs.value)} % (UE: ${num(neetEu.value)} %).`}
+      legend={[
+        { id: "ES", label: "España", color: C.blue },
+        { id: "ref", label: "UE-27 / media OCDE", color: C.ref },
+        { id: "peer", label: "Alemania, Francia, Italia, Portugal", color: C.peer },
+      ]}
+      sources={sources}
+      notes={[
+        "Ingresos relativos: trabajadores a tiempo completo de 25 a 64 años, secundaria superior = 100 (OCDE, Education at a Glance, vía DBnomics). Último año disponible por país.",
+        "Tasa de empleo: ocupados de 25 a 64 años en % de su grupo de estudios (Eurostat lfsa_ergaed). Ninis: Eurostat edat_lfse_20.",
+      ]}
+      table={
+        <>
+          <EduTable caption="Ver el empleo por nivel de estudios en tabla" series={levels.flatMap(([level, label]) => ["ES", "EU27_2020"].map((geo) => ({ id: `${level}-${geo}`, label: `${label} · ${NAMES[geo]}`, points: o.employment[level][geo] || [] })))} />
+          <EduTable unit="score" caption="Ver los ingresos relativos en tabla" series={earnAreas.flatMap((area) => [["ISCED11A_5T8", "superiores"], ["ISCED11A_0T2", "como mucho ESO"]].map(([level, label]) => ({ id: `${area}-${level}`, label: `${NAMES[area]} · ${label}`, points: o.earnings[level][area] || [] })))} />
+          <EduTable caption="Ver los ninis en tabla" series={[...neet].reverse()} />
+        </>
+      }
+    >
+      <Explain
+        shows="Lo que da cada nivel de estudios en el mercado de trabajo (empleo y sueldo) y cuántos jóvenes se quedan fuera de estudios y empleo."
+        read="Ingresos: 100 es lo que cobra quien tiene Bachillerato o FP media; 150 significa un 50 % más. Empleo: porcentaje de cada grupo que trabaja."
+        notSay="Las diferencias no son solo efecto del título: quien estudia más suele venir de familias con más recursos. Y una media nacional mezcla carreras con salidas muy distintas."
+      />
+      <div className="vizMultiples">
+        <div>
+          <h3 className="vizPanelTitle">
+            Tasa de empleo por nivel de estudios, {year}
+            <span>% de 25 a 64 años</span>
+          </h3>
+          <Bars
+            label="Tasa de empleo por nivel de estudios"
+            unit="pct"
+            digits={1}
+            max={100}
+            rows={levels.flatMap(([level, label]) => [
+              { label: `${label} · España`, value: empLast(level, "ES").value, color: C.blue },
+              { label: `${label} · UE-27`, value: empLast(level, "EU27_2020").value, color: C.ref },
+            ])}
+          />
+        </div>
+        <div>
+          <h3 className="vizPanelTitle">
+            Ingresos de los titulados superiores
+            <span>Secundaria superior = 100; a tiempo completo, 25-64 años</span>
+          </h3>
+          <Bars
+            label="Ingresos relativos de los titulados superiores"
+            unit="score"
+            max={200}
+            rows={earnAreas.map((area) => ({
+              label: NAMES[area],
+              value: premium(area).value,
+              color: area === "ESP" ? C.blue : ["OECD", "EU25"].includes(area) ? C.ref : C.peer,
+              note: `(${premium(area).year})`,
+            }))}
+          />
+          <h3 className="vizPanelTitle">
+            Jóvenes de 15 a 29 años que ni estudian ni trabajan (%)
+            <span>Eurostat, edat_lfse_20</span>
+          </h3>
+          <TimeSeriesChart series={neet} height={200} endLabels={false} ariaLabel="Ninis de 15 a 29 años" />
+        </div>
+      </div>
+    </Figure>
+  );
+}

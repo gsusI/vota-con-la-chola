@@ -6,7 +6,7 @@ import SparseLineChart from "./SparseLineChart";
 import EduTable from "./EduTable";
 import { StoryFigure } from "./StoryScatter";
 import { fmt } from "./formatEdu.mjs";
-import { AttainmentFigure, C, EquityFigure, Explain, Glossary, NAMES, RegionsFigure, TeachersFigure, VocationalFigure, num } from "./sections";
+import { AdultSkillsFigure, AttainmentFigure, C, EquityFigure, Explain, FamiliesFigure, Glossary, LabourReturnFigure, NAMES, RegionsFigure, TeachersFigure, VocationalFigure, num } from "./sections";
 
 export const metadata = {
   title: "Gasto, resultados y abandono: la educación en España | Vota Con La Chola",
@@ -53,6 +53,9 @@ export default function EducacionPage() {
     pisaReports: { label: "INEE, informes españoles de PISA 2003-2018", href: "https://www.educacionfpydeportes.gob.es/inee/evaluaciones-internacionales/pisa.html" },
     pisaNote: { label: "OCDE, PISA 2022, nota de país: España (copia del INEE)", href: src.vclc_education_curated.documents.oecd_pisa2022_country_note_es.url },
     oecdSal: { label: `OCDE, Education at a Glance, salarios del profesorado (réplica DBnomics)${retrieved(src.oecd_eag_finance)}`, href: "https://db.nomics.world/OECD/DSD_EAG_SAL_TREND@DF_TCH_STA" },
+    epf: { label: `INE, Encuesta de Presupuestos Familiares${retrieved(src.ine_epf)}`, href: "https://www.ine.es/jaxiT3/Tabla.htm?t=73828" },
+    piaac: { label: "INEE, PIAAC 2023. Informe español (2024)", href: src.vclc_education_curated.documents.inee_piaac2023_informe_espanol.landing_page },
+    oecdEarn: { label: `OCDE, Education at a Glance, ingresos por nivel de estudios (réplica DBnomics)${retrieved(src.oecd_eag_finance)}`, href: "https://db.nomics.world/OECD/DSD_EAG_LSO_EA@DF_LSO_EARN_REL_UPPER" },
     owid: { label: `Our World in Data${retrieved(src.owid_grapher)}`, href: src.owid_grapher.page },
   };
 
@@ -251,13 +254,27 @@ export default function EducacionPage() {
             {num(attain("ED0-2"), 0)} % no pasó de la ESO; faltan técnicos intermedios y sobran universitarios en puestos que no lo piden (
             {num(h.overq_es)} %). <a href="#titulacion">Ver titulación</a>
           </li>
+          <li>
+            <strong>Ni gratis ni solo escuela.</strong> Las familias pagan el {num(data.capacity.private_share_all.ES.at(-1).value, 0)} % del gasto educativo,
+            más que en los países comparados, y los adultos sacan {data.outcomes.piaac.piaac_literacy_mean.ESP} en PIAAC frente a{" "}
+            {data.outcomes.piaac.piaac_literacy_mean.OECD} de la OCDE, con más distancia entre los jóvenes ({Math.abs(data.outcomes.piaac_gap_young)} puntos) que entre los
+            mayores ({Math.abs(data.outcomes.piaac_gap_old)}). <a href="#familias">Ver familias</a> · <a href="#adultos">Ver adultos</a>
+          </li>
         </ol>
       </section>
 
       <StoryFigure
         story={data.story}
-        sources={[S.oecd, S.wb, S.pisaReports, S.pisa2022, S.mefp]}
-        h={{ compositionPoints: data.equity.composition.effect_raw_points, compositionDrop: Math.abs(data.equity.composition.math_change_2012_2022) }}
+        sources={[S.oecd, S.wb, S.pisaReports, S.pisa2022, S.mefp, S.piaac, S.eurostat("educ_uoe_fine01")]}
+        h={{
+          compositionPoints: data.equity.composition.effect_raw_points,
+          compositionDrop: Math.abs(data.equity.composition.math_change_2012_2022),
+          familyShare: data.capacity.private_share_all.ES.at(-1).value,
+          piaacYoung: data.outcomes.piaac.piaac_literacy_by_age.ESP.find((row) => row.age === "16-24").value,
+          piaacOld: data.outcomes.piaac.piaac_literacy_by_age.ESP.find((row) => row.age === "55-65").value,
+          gapYoung: data.outcomes.piaac_gap_young,
+          gapOld: data.outcomes.piaac_gap_old,
+        }}
       />
 
       <Figure
@@ -379,6 +396,7 @@ export default function EducacionPage() {
         </div>
       </Figure>
 
+      <FamiliesFigure data={data} sources={[S.eurostat("educ_uoe_fine01"), S.eurostat("nama_10_co3_p3"), S.epf]} />
       <TeachersFigure data={data} sources={[S.oecdSal, S.eurostat("educ_uoe_perp04")]} />
 
       <Figure
@@ -562,6 +580,9 @@ export default function EducacionPage() {
         />
       </Figure>
 
+      <AdultSkillsFigure data={data} sources={[S.piaac]} />
+      <LabourReturnFigure data={data} sources={[S.oecdEarn, S.eurostat("lfsa_ergaed"), S.eurostat("edat_lfse_20")]} />
+
       <Figure
         id="largo-plazo"
         title={`En 1900 sabía leer el ${num(h.literacy_1900, 0)} % de la población; en ${h.literacy_last.year}, el ${num(h.literacy_last.value)} %`}
@@ -637,6 +658,13 @@ export default function EducacionPage() {
             {num(data.equity.composition.effect_raw_points)} de los {Math.abs(data.equity.composition.math_change_2012_2022)} puntos perdidos en matemáticas
             desde 2012, y menos de medio punto a igual nivel socioeconómico: la composición explica poco de la caída. El origen social pesa algo menos que en
             la OCDE ({data.equity.escs_gap.ESP[2022]} frente a {data.equity.escs_gap.OECD[2022]} puntos de brecha).
+          </li>
+          <li>
+            <strong>Más allá del gasto público y de PISA.</strong> El gasto público no es todo el gasto: las familias pagan el{" "}
+            {num(data.capacity.private_share_all.ES.at(-1).value, 0)} % (el {num(data.capacity.private_share_tertiary.ES.at(-1).value, 0)} % en la
+            universidad). Y el sistema entrega adultos con menos competencias que la media OCDE ({data.outcomes.piaac.piaac_literacy_mean.ESP} frente a{" "}
+            {data.outcomes.piaac.piaac_literacy_mean.OECD}), con una brecha que no se cierra en las generaciones jóvenes, aunque estudiar siga
+            compensando: un titulado superior cobra un {data.outcomes.earnings.ISCED11A_5T8.ESP.at(-1).value - 100} % más que uno de Bachillerato o FP.
           </li>
           <li>
             <strong>Lo que estos datos no pueden decir.</strong> Ninguna de estas series mide causalidad. Para saber si un euro más mejora resultados

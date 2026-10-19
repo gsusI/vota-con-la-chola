@@ -116,6 +116,30 @@ class IngestEducationTest(unittest.TestCase):
         self.assertEqual(len(regions), 19)  # 17 comunidades + Ceuta y Melilla
         self.assertIn("ES-CCAA:Asturias, Principado de", regions)
 
+    def test_ine_epf_keeps_only_education_series(self) -> None:
+        payload = json.dumps([
+            {"COD": "A", "Nombre": "Gasto medio por hogar. Quintil 1. Servicios de educación. Dato base. ", "Data": [{"Anyo": 2025, "Valor": 190.4}]},
+            {"COD": "B", "Nombre": "Gasto medio por hogar. Quintil 1. Vivienda. Dato base. ", "Data": [{"Anyo": 2025, "Valor": 5000.0}]},
+        ]).encode()
+        raw = ingest.Raw("ine_epf_t73828.json", "https://example.org", payload, "2026-10-19T00:00:00+00:00")
+        (definition, series), = list(ingest.parse_ine_epf(73828)(raw))
+        self.assertEqual(definition["source_id"], "ine_epf")
+        self.assertEqual(len(series), 1)
+        self.assertEqual(series[0]["observations"][0]["pointer"], "/0/Data/0/Valor")
+
+    def test_oecd_earnings_keep_full_time_25_64_both_sexes(self) -> None:
+        def doc(code: str) -> dict:
+            return {"series_code": code, "period": ["2023"], "value": [149.0]}
+        payload = json.dumps({"series": {"docs": [
+            doc("ESP._T.Y25T64.ISCED11A_5T8._T.EARN_RELATIVE._Z._T._Z.ED_NED.EMP._Z.PT_EARN_WR_ISCED11A_3.OBS.FT.EARNINGS.A"),
+            doc("ESP.F.Y25T64.ISCED11A_5T8._T.EARN_RELATIVE._Z._T._Z.ED_NED.EMP._Z.PT_EARN_WR_ISCED11A_3.OBS.FT.EARNINGS.A"),
+            doc("ESP._T.Y25T64.ISCED11A_5T8._T.EARN_RELATIVE._Z._T._Z.ED_NED.EMP._Z.PT_EARN_WR_ISCED11A_3.OBS._T.EARNINGS.A"),
+        ]}}).encode()
+        raw = ingest.Raw("oecd_eag_earnings_dbnomics.json", "https://example.org", payload, "2026-10-19T00:00:00+00:00")
+        (_definition, series), = list(ingest.parse_oecd_earnings(raw))
+        self.assertEqual(len(series), 1)
+        self.assertEqual(series[0]["dimensions"]["ATTAINMENT_LEV"], "ISCED11A_5T8")
+
 
 if __name__ == "__main__":
     unittest.main()
