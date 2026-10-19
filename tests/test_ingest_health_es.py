@@ -156,6 +156,19 @@ class IngestHealthTest(unittest.TestCase):
             digits = f"{int(row['value']):,}".replace(",", ".")
             self.assertIn(digits, row["quote"], row)
 
+    def test_published_data_vs_story_figure_is_complete(self) -> None:
+        data = json.loads((Path(__file__).resolve().parents[1] / "ui/site/public/visualizaciones/data/sanidad.json").read_text(encoding="utf-8"))
+        story = data["data_vs_story"]
+        self.assertGreaterEqual(len(story["countries"]["rows"]), 25)
+        self.assertIn("ES", {c["code"] for c in story["countries"]["rows"]})
+        self.assertEqual(story["countries"]["eu"]["x"], 100.0)
+        regions = story["regions"]
+        self.assertEqual(regions["n"], len(regions["rows"]))
+        for row in regions["rows"]:
+            self.assertGreater(row["x"], 0)
+            self.assertGreater(row["x0"], 0)
+        self.assertEqual(regions["days_up"], sum(1 for x in regions["rows"] if x["y"] > x["y0"]))
+
 
 if __name__ == "__main__":
     unittest.main()

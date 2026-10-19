@@ -33,7 +33,16 @@ export default function Scatter({ points, xLabel, yLabel, xUnit = "eur", yUnit =
   const yMax = niceMax(Math.max(...points.map((p) => p.y)) * 1.05);
   const sx = (v) => margin.left + (v / xMax) * innerW;
   const sy = (v) => margin.top + innerH - (v / yMax) * innerH;
-  const ticks = (max) => [0, 0.25, 0.5, 0.75, 1].map((f) => Math.round(max * f * 100) / 100);
+  // Round tick steps (1, 2, 2.5 or 5 × 10^n) so labels read cleanly.
+  const ticks = (max) => {
+    const raw = max / 5;
+    const pow = 10 ** Math.floor(Math.log10(raw));
+    const unit = raw / pow;
+    const step = (unit <= 1 ? 1 : unit <= 2 ? 2 : unit <= 2.5 ? 2.5 : unit <= 5 ? 5 : 10) * pow;
+    const out = [];
+    for (let v = 0; v <= max + 1e-9; v += step) out.push(Math.round(v * 100) / 100);
+    return out;
+  };
   return (
     <svg role="img" aria-label={ariaLabel} viewBox={`0 0 ${width} ${height}`} style={{ width: "100%", height: "auto", display: "block" }}>
       {ticks(yMax).map((t) => (

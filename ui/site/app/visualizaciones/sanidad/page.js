@@ -6,6 +6,7 @@ import HealthTable, { Bars } from "./HealthTable";
 import { formatHealth } from "./format.mjs";
 import Explain from "./Explain";
 import Scatter from "./Scatter";
+import ConnectedScatter from "./ConnectedScatter";
 
 export const metadata = {
   title: "Sanidad en España: esperanza de vida, gasto y listas de espera | Vota Con La Chola",
@@ -326,6 +327,9 @@ export default function SanidadPage() {
   const selected = wait.national_selected_days.filter((p) => p.date.endsWith("-12-31")).map((p) => ({ year: Number(p.date.slice(0, 4)), value: p.value }));
   const selectedChange = pctChange(wH.selected_days[0], wH.selected_days[1]);
 
+  // 13. «El dato mata el relato»
+  const story = data.data_vs_story;
+
   // 12. Regions side by side
   const reg = data.regions;
   const regComplete = reg.rows.filter((row) => row.spend != null);
@@ -370,7 +374,7 @@ export default function SanidadPage() {
           </li>
         </ol>
         <p>
-          Índice: <a href="#esperanza-de-vida">esperanza de vida</a> · <a href="#salud-y-mortalidad">vida saludable y mortalidad evitable</a> · <a href="#envejecimiento">envejecimiento</a> · <a href="#gasto-pib">gasto</a> · <a href="#pago-directo">bolsillo y seguros</a> · <a href="#listas-quirurgicas">listas de espera</a> · <a href="#operaciones">operaciones concretas</a> · <a href="#consultas">especialista</a> · <a href="#atencion-primaria">médico de familia</a> · <a href="#percepcion">opinión</a> · <a href="#medicos">médicos</a> · <a href="#enfermeras">enfermeras</a> · <a href="#comunidades">comunidades</a> · <a href="#conclusion">conclusión</a> · <a href="#glosario">glosario</a>
+          Índice: <a href="#el-dato-mata-el-relato">el dato frente al relato</a> · <a href="#esperanza-de-vida">esperanza de vida</a> · <a href="#salud-y-mortalidad">vida saludable y mortalidad evitable</a> · <a href="#envejecimiento">envejecimiento</a> · <a href="#gasto-pib">gasto</a> · <a href="#pago-directo">bolsillo y seguros</a> · <a href="#listas-quirurgicas">listas de espera</a> · <a href="#operaciones">operaciones concretas</a> · <a href="#consultas">especialista</a> · <a href="#atencion-primaria">médico de familia</a> · <a href="#percepcion">opinión</a> · <a href="#medicos">médicos</a> · <a href="#enfermeras">enfermeras</a> · <a href="#comunidades">comunidades</a> · <a href="#conclusion">conclusión</a> · <a href="#glosario">glosario</a>
         </p>
       </section>
 
@@ -404,6 +408,91 @@ export default function SanidadPage() {
           </span>
         </div>
       </section>
+
+      <Figure
+        id="el-dato-mata-el-relato"
+        title={`España logra la mortalidad tratable de los países que más gastan (${num(story.countries.spain.y, 0)} muertes por 100.000) con un ${num(100 - story.countries.spain.x, 0)} % menos de gasto público por habitante que la media de la UE; dentro de España, el gasto real subió en las ${story.regions.n} comunidades entre ${story.regions.from} y ${story.regions.to} y aun así la espera para las operaciones más comunes creció en ${story.regions.days_up}`}
+        dek={`Dos gráficos que se leen juntos. Arriba, los ${story.countries.rows.length} países de la UE: cuanto más gasta un país, menos muertes evitables por atención sanitaria tiene (correlación de rangos ${num(story.countries.rho, 2)}), y España queda muy por debajo de esa pauta: ningún país que gaste menos tiene menos mortalidad tratable, y solo ${story.countries.lower_mortality.length} la tienen menor, todos gastando por encima de la media. Abajo, las comunidades: el gasto real por habitante pasó de ${formatHealth(story.regions.total.x0, "eur")} a ${formatHealth(story.regions.total.x, "eur")} (euros de 2020), y la espera de los procesos seleccionados subió en ${story.regions.days_up} de ${story.regions.n} y los pacientes en lista por habitante en ${story.regions.rate_up}.`}
+        sources={[S.eurostat, S.egsp, S.sisle, S.oecd]}
+        notes={[
+          `Países: gasto público y obligatorio (HF1) en estándar de poder de compra por habitante, como índice UE-27 = 100 en cada año para que la inflación no desplace los puntos; mortalidad tratable estandarizada por edad. Trayectorias ${story.countries.first} → ${story.countries.last} para España, Alemania, Francia, Italia, Portugal y la media UE (cuadrado).`,
+          `Comunidades: gasto sanitario público consolidado del sector CCAA (EGSP), deflactado a euros de 2020 con el índice de precios que la OCDE aplica al gasto sanitario español (${story.regions.from}: ${num(story.regions.deflator[story.regions.from], 3)}; ${story.regions.to}: ${num(story.regions.deflator[story.regions.to], 3)}). Espera media de los procesos seleccionados del SISLE en diciembre de cada año; tamaño del círculo = pacientes en esa lista por 1.000 habitantes. Ceuta y Melilla no tienen gasto en la EGSP. ${story.regions.from} es el primer año comparable tras la ruptura de Andalucía.`,
+          `Correlación de rangos entre gasto y espera en ${story.regions.to}: ${num(story.regions.rho_level, 2)}; entre la subida del gasto y la subida de la espera: ${num(story.regions.rho_change, 2)} (las comunidades que más subieron el gasto no redujeron más la espera).`,
+        ]}
+        table={
+          <HealthTable
+            periodLabel="Lugar"
+            keyOf={(p) => p.key}
+            labelOf={(k) => k}
+            caption="Ver los datos de los dos gráficos en tabla"
+            series={[
+              { id: "cx", label: `Gasto público por habitante, UE = 100 (${story.countries.last})`, unit: "count", points: story.countries.rows.map((c) => ({ key: c.name, value: c.x })) },
+              { id: "cy", label: `Mortalidad tratable por 100.000 (${story.countries.last})`, unit: "count", points: story.countries.rows.map((c) => ({ key: c.name, value: c.y })) },
+              { id: "rx0", label: `Gasto CCAA ${story.regions.from}, € de 2020`, unit: "eur", points: story.regions.rows.map((c) => ({ key: c.name, value: c.x0 })) },
+              { id: "rx", label: `Gasto CCAA ${story.regions.to}, € de 2020`, unit: "eur", points: story.regions.rows.map((c) => ({ key: c.name, value: c.x })) },
+              { id: "ry0", label: `Días dic ${story.regions.from}`, unit: "count", points: story.regions.rows.map((c) => ({ key: c.name, value: c.y0 })) },
+              { id: "ry", label: `Días dic ${story.regions.to}`, unit: "count", points: story.regions.rows.map((c) => ({ key: c.name, value: c.y })) },
+              { id: "rs", label: `Pacientes por 1.000 dic ${story.regions.to}`, unit: "ratio", digits: 2, points: story.regions.rows.map((c) => ({ key: c.name, value: c.size })) },
+            ]}
+          />
+        }
+      >
+        <Explain
+          shows="Los dos relatos más repetidos puestos a prueba a la vez: si España tiene «la mejor sanidad del mundo» (resultados frente a gasto, entre países) y si «la sanidad se hunde por los recortes» (gasto real frente a esperas, entre comunidades y en el tiempo)."
+          read="Cada punto es un lugar; la línea va de su posición inicial (círculo hueco) a la final (círculo lleno). Arriba, más a la izquierda es gastar menos y más abajo, morir menos de causas tratables: la esquina inferior izquierda es la de hacer mucho con poco. Abajo, más a la derecha es más gasto real por habitante y más arriba, más días de espera; un círculo más grande indica más pacientes en lista por habitante."
+          not="No prueba causas: la baja mortalidad puede deberse a la dieta, el tabaco o la estructura familiar tanto como al sistema sanitario, y la espera depende de cómo organiza y cuenta cada comunidad su lista. No dice si gastar más acortaría las esperas: dice que gastar más de 2018 a 2024 no lo hizo."
+        />
+        <ul className="vizLegend" aria-label="Leyenda de color">
+          <li><span className="vizLegend__key" style={{ background: "#2a78d6", width: 10, height: 10, borderRadius: 5 }} aria-hidden="true" />España (arriba); Madrid y Cataluña, citadas en el texto (abajo)</li>
+          <li><span className="vizLegend__key" style={{ background: "#52514e", width: 10, height: 10, borderRadius: 5 }} aria-hidden="true" />Alemania, Francia, Italia y Portugal (y la media UE, cuadrado)</li>
+          <li><span className="vizLegend__key" style={{ background: "#b4b2a9", width: 10, height: 10, borderRadius: 5 }} aria-hidden="true" />Resto de la UE / comunidades</li>
+        </ul>
+        <ul className="vizLegend" aria-label="Leyenda de marcadores">
+          <li><span aria-hidden="true" style={{ display: "inline-block", width: 10, height: 10, borderRadius: 5, border: "1.5px solid #52514e" }} />Posición inicial</li>
+          <li><span aria-hidden="true" style={{ display: "inline-block", width: 10, height: 10, borderRadius: 5, background: "#52514e" }} />Posición final</li>
+          <li><span aria-hidden="true" style={{ display: "inline-block", width: 16, height: 16, borderRadius: 8, background: "#b4b2a9" }} />Abajo: más grande = más pacientes en lista por 1.000 habitantes</li>
+        </ul>
+        <h3 className="vizPanelTitle">
+          1. Países de la UE: gasto público por habitante frente a mortalidad tratable, {story.countries.first} → {story.countries.last}
+          <span>Gasto en índice UE-27 = 100 (poder de compra); muertes por 100.000, estandarizadas por edad</span>
+        </h3>
+        <ConnectedScatter
+          points={story.countries.rows}
+          reference={{ ...story.countries.eu, label: "Media UE = 100" }}
+          xLabel="Gasto sanitario público por habitante (UE-27 = 100)"
+          yLabel="Mortalidad tratable por 100.000"
+          emphasis={["DE", "FR", "IT", "PT"]}
+          highlight={["ES"]}
+          ariaLabel="Países de la UE: gasto sanitario público por habitante frente a mortalidad tratable, con la trayectoria de España y sus vecinos"
+        />
+        <h3 className="vizPanelTitle">
+          2. Comunidades autónomas: gasto real por habitante frente a días de espera, {story.regions.from} → {story.regions.to}
+          <span>Euros de 2020; días de espera media de los procesos quirúrgicos seleccionados en diciembre</span>
+        </h3>
+        <ConnectedScatter
+          points={story.regions.rows.map((row) => ({ ...row, short: short(row.name) }))}
+          xLabel="Gasto sanitario público por habitante, euros de 2020"
+          yLabel="Días de espera, procesos seleccionados"
+          xUnit="eur"
+          highlight={["13", "09"]}
+          sizeLabel="Tamaño: pacientes por 1.000 habitantes"
+          ariaLabel="Comunidades autónomas: gasto real por habitante frente a días de espera, de 2018 a 2024"
+        />
+        <section aria-label="Qué relatos zanja este gráfico" style={{ display: "grid", gap: 6, marginTop: 8 }}>
+          <p style={{ margin: 0 }}>
+            <strong>«Tenemos la mejor sanidad del mundo».</strong> En resultados, casi: pocas muertes evitables con poco dinero. En acceso, no: las esperas crecen en casi todas las comunidades.
+          </p>
+          <p style={{ margin: 0 }}>
+            <strong>«La sanidad se hunde por los recortes».</strong> Los recortes fueron reales en 2010–2013 (ver el gasto por habitante), pero entre {story.regions.from} y {story.regions.to} el gasto real subió en las {story.regions.spend_up} comunidades y la espera subió en {story.regions.days_up} de ellas: el problema de acceso de estos años no se explica por menos dinero.
+          </p>
+          <p style={{ margin: 0 }}>
+            <strong>«Basta con gastar más».</strong> Entre países, gastar más va con menos mortalidad tratable; entre comunidades, gastar más no va con esperar menos ({num(story.regions.rho_level, 2)}).
+          </p>
+          <p style={{ margin: 0 }}>
+            <strong>Lo que sigue siendo ambiguo.</strong> Por qué España saca tanto con tan poco (¿sistema, hábitos, salarios sanitarios bajos?), si la demanda creció más deprisa que el gasto (envejecimiento, pacientes que antes no se apuntaban) y si las listas de cada comunidad miden lo mismo. Ningún gráfico con estos datos puede separar esas causas.
+          </p>
+        </section>
+      </Figure>
 
       <h2 style={{ margin: "26px 4px 0", fontSize: "1.3rem" }}>1. Resultados de salud</h2>
       <p style={{ margin: "0 4px", color: "var(--ink-soft)" }}>¿Vivimos mucho y bien, y cuánto tiene que ver la sanidad?</p>

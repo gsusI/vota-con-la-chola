@@ -101,6 +101,9 @@ LOCAL_SOURCES: dict[str, dict[str, str]] = {
 }
 
 PEERS = ["ES", "DE", "FR", "IT", "PT", "EU27_2020"]
+# EU member states, for the one figure that places Spain among all of them (spending vs treatable mortality).
+EU27 = ["AT", "BE", "BG", "CY", "CZ", "DE", "DK", "EE", "EL", "ES", "FI", "FR", "HR", "HU", "IE", "IT", "LT", "LU", "LV",
+        "MT", "NL", "PL", "PT", "RO", "SE", "SI", "SK"]
 ISO3 = {"ES": "ESP", "DE": "DEU", "FR": "FRA", "IT": "ITA", "PT": "PRT"}
 AREA_META = {
     "ESP": ("España", "ISO3166-1-alpha-3", "country"),
@@ -548,7 +551,7 @@ HF_LABELS = {"TOT_HF": "Gasto sanitario total", "HF1": "Gasto sanitario público
              "HF3": "Pago directo de los hogares (HF3)"}
 HF_UNITS = {"PC_GDP": "% del PIB", "EUR_HAB_KP15": "Euros por habitante a precios constantes de 2015",
             "PPS_HAB": "Estándar de poder adquisitivo (PPS) por habitante", "PC_CHE": "% del gasto sanitario corriente"}
-HF_URL = eurostat_url("hlth_sha11_hf", {"icha11_hf": list(HF_LABELS), "unit": list(HF_UNITS), "geo": PEERS})
+HF_URL = eurostat_url("hlth_sha11_hf", {"icha11_hf": list(HF_LABELS), "unit": list(HF_UNITS), "geo": [*EU27, "EU27_2020"]})
 
 
 def parse_hf(raw: Raw) -> Iterable[Batch]:
@@ -575,7 +578,7 @@ OECD_MEMBERS = [
 def oecd_url() -> str:
     dims = {
         "MEASURE": ["EXP_HEALTH"], "UNIT_MEASURE": list(OECD_UNITS), "FINANCING_SCHEME": list(OECD_SCHEMES),
-        "FUNCTION": ["_T"], "PROVIDER": ["_T"], "MODE_PROVISION": ["_T"], "PRICE_BASE": ["Q", "_Z"],
+        "FUNCTION": ["_T"], "PROVIDER": ["_T"], "MODE_PROVISION": ["_T"], "PRICE_BASE": ["Q", "V", "_Z"],
     }
     return f"https://api.db.nomics.world/v22/series/OECD/{OECD_DATASET}?" + urllib.parse.urlencode(
         {"dimensions": json.dumps(dims, separators=(",", ":")), "observations": 1, "limit": 1000}
@@ -644,7 +647,7 @@ def parse_physcat(raw: Raw) -> Iterable[Batch]:
 # 5. Outcomes, ageing and workforce beyond the first version
 
 HLYE_URL = eurostat_url("hlth_hlye", {"unit": ["YR"], "hlth_hle": ["HLY_Y0", "LE_Y0", "HLY_Y65"], "sex": ["T"], "geo": PEERS})
-APR_URL = eurostat_url("hlth_cd_apr", {"unit": ["RT"], "sex": ["T"], "icd10": ["TOTAL"], "mortalit": ["TOTAL", "PRVT", "TRT"], "geo": PEERS})
+APR_URL = eurostat_url("hlth_cd_apr", {"unit": ["RT"], "sex": ["T"], "icd10": ["TOTAL"], "mortalit": ["TOTAL", "PRVT", "TRT"], "geo": [*EU27, "EU27_2020"]})
 PJAN_URL = eurostat_url("demo_pjanind", {"indic_de": ["PC_Y65_MAX", "PC_Y80_MAX"], "geo": PEERS})
 NRS_URL = eurostat_url("hlth_rs_prs2", {"med_spec": ["NRS"], "unit": ["P_HTHAB"], "wstatus": ["PRACT"], "geo": PEERS})
 PHYS_AGE_URL = eurostat_url("hlth_rs_phys", {"sex": ["T"], "unit": ["NR"], "geo": PEERS})

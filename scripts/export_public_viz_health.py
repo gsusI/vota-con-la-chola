@@ -435,6 +435,78 @@ def regions_side_by_side(store: Store, spend: dict, wait: dict, perc: dict) -> d
     }
 
 
+EU_NAMES = {
+    "AT": "Austria", "BE": "Bélgica", "BG": "Bulgaria", "CY": "Chipre", "CZ": "Chequia", "DE": "Alemania", "DK": "Dinamarca",
+    "EE": "Estonia", "EL": "Grecia", "ES": "España", "FI": "Finlandia", "FR": "Francia", "HR": "Croacia", "HU": "Hungría",
+    "IE": "Irlanda", "IT": "Italia", "LT": "Lituania", "LU": "Luxemburgo", "LV": "Letonia", "MT": "Malta", "NL": "Países Bajos",
+    "PL": "Polonia", "PT": "Portugal", "RO": "Rumanía", "SE": "Suecia", "SI": "Eslovenia", "SK": "Eslovaquia",
+}
+STORY_TRAILS = ["ES", "DE", "FR", "IT", "PT"]
+
+
+def data_vs_story(store: Store) -> dict:
+    """«El dato mata el relato»: Spain among EU countries (spending vs treatable mortality, 2014 -> latest) and the
+    regions (real spending vs selected-procedure waits, Dec 2018 -> Dec 2024, size = patients per 1,000)."""
+    pps = {g: {int(p["period"]): p["value"] for p in v}
+           for g, v in store.series("eurostat_sdmx", "hlth_sha11_hf", "HF1.PPS_HAB", "PPS_HAB").items()}
+    trt = {g: {int(p["period"]): p["value"] for p in v}
+           for g, v in store.series("eurostat_sdmx", "hlth_cd_apr", "TRT.T.TOTAL.RT", "RT").items()}
+    eu = pps["EU27_2020"]
+    common = [y for y in sorted(eu) if y in trt.get("EU27_2020", {}) and y in pps.get("ES", {}) and y in trt.get("ES", {})]
+    first, last = common[0], common[-1]
+    countries = []
+    for g in EU_NAMES:
+        if last not in pps.get(g, {}) or last not in trt.get(g, {}):
+            continue
+        row = {"code": g, "name": EU_NAMES[g], "x": r(100 * pps[g][last] / eu[last], 1), "y": r(trt[g][last], 1)}
+        if g in STORY_TRAILS and first in pps[g] and first in trt[g]:
+            row.update({"x0": r(100 * pps[g][first] / eu[first], 1), "y0": r(trt[g][first], 1)})
+        countries.append(row)
+    es = next(c for c in countries if c["code"] == "ES")
+    eu_row = {"x": 100.0, "y": r(trt["EU27_2020"][last], 1), "x0": 100.0, "y0": r(trt["EU27_2020"][first], 1)}
+    # Regions: EGSP (current euros) deflated with the price index the OCDE uses for Spain's health spending (V / Q).
+    q = {int(p["period"]): p["value"] for p in store.series("oecd_health_statistics", "DSD_SHA@DF_SHA", "EXP_HEALTH.HF1.Q", "XDC_PS")["ESP"]}
+    v = {int(p["period"]): p["value"] for p in store.series("oecd_health_statistics", "DSD_SHA@DF_SHA", "EXP_HEALTH.HF1.V", "XDC_PS")["ESP"]}
+    egsp = {g: {int(p["period"]): p["value"] for p in rows}
+            for g, rows in store.series("minsan_egsp", "EGSP", "gasto_sanitario_ccaa_por_habitante", "EUR_HAB").items()}
+    days = store.series("minsan_sisle_sns", "SISLE.surgery_selected_by_region", "dias_medios_procesos_seleccionados", "DAYS")
+    rate = store.series("minsan_sisle_sns", "SISLE.surgery_selected_by_region", "tasa_procesos_seleccionados", "P_THAB")
+    y0, y1 = 2018, max(y for y in egsp["ES-CCAA"] if y in v and y in q)
+    deflator = {y: v[y] / q[y] for y in (y0, y1)}
+    cut0, cut1 = f"{y0}-12-31", f"{y1}-12-31"
+    regions = []
+    for code, rows in days.items():
+        if code == "ES" or code not in egsp:
+            continue
+        d = {p["period"]: p["value"] for p in rows}
+        rt = {p["period"]: p["value"] for p in rate[code]}
+        if cut0 not in d or cut1 not in d:
+            continue
+        regions.append({
+            "code": code, "name": rows[0]["name"],
+            "x0": r(egsp[code][y0] / deflator[y0], 0), "x": r(egsp[code][y1] / deflator[y1], 0),
+            "y0": d[cut0], "y": d[cut1], "size0": rt.get(cut0), "size": rt.get(cut1),
+        })
+    total = egsp["ES-CCAA"]
+    return {
+        "countries": {
+            "first": first, "last": last, "rows": countries, "eu": eu_row, "spain": es,
+            "rho": r(spearman([c["x"] for c in countries], [c["y"] for c in countries])),
+            "lower_mortality": [c["name"] for c in countries if c["y"] < es["y"]],
+            "cheaper_and_better": [c["name"] for c in countries if c["x"] < es["x"] and c["y"] < es["y"]],
+        },
+        "regions": {
+            "from": y0, "to": y1, "rows": sorted(regions, key=lambda x: x["name"]),
+            "deflator": {str(k): r(val, 4) for k, val in deflator.items()},
+            "total": {"x0": r(total[y0] / deflator[y0], 0), "x": r(total[y1] / deflator[y1], 0)},
+            "spend_up": sum(1 for x in regions if x["x"] > x["x0"]), "days_up": sum(1 for x in regions if x["y"] > x["y0"]),
+            "rate_up": sum(1 for x in regions if (x["size"] or 0) > (x["size0"] or 0)), "n": len(regions),
+            "rho_change": r(spearman([x["x"] / x["x0"] for x in regions], [x["y"] - x["y0"] for x in regions])),
+            "rho_level": r(spearman([x["x"] for x in regions], [x["y"] for x in regions])),
+        },
+    }
+
+
 def build(conn: sqlite3.Connection) -> dict:
     store = Store(conn)
     le = life_expectancy(store)
@@ -449,6 +521,7 @@ def build(conn: sqlite3.Connection) -> dict:
     perc = perception(store)
     intl = waits_international(store)
     regions = regions_side_by_side(store, spend, wait, perc)
+    story = data_vs_story(store)
 
     def at(rows: list[dict], date: str) -> float:
         return next(p["value"] for p in rows if p["date"] == date)
@@ -501,6 +574,7 @@ def build(conn: sqlite3.Connection) -> dict:
         "perception": perc,
         "waits_international": intl,
         "regions": regions,
+        "data_vs_story": story,
         "sources": sources,
     }
 
@@ -567,6 +641,13 @@ def write_csv(data: dict, path: Path) -> None:
         rows.extend(("oecd_health_statistics", f"mediana_dias_{code}", row["code"], item["year"], row["value"]) for row in item["rows"])
     for code, item in data["waits_international"]["spain_mean_on_list"].items():
         rows.extend(("oecd_health_statistics", f"media_dias_en_lista_{code}", "ESP", p["year"], p["value"]) for p in item["points"])
+    st = data["data_vs_story"]
+    for c in st["countries"]["rows"]:
+        rows.append(("eurostat_sdmx", "gasto_publico_pps_indice_ue100", c["code"], st["countries"]["last"], c["x"]))
+        rows.append(("eurostat_sdmx", "mortalidad_tratable_100k", c["code"], st["countries"]["last"], c["y"]))
+    for x in st["regions"]["rows"]:
+        for year, key in ((st["regions"]["from"], "x0"), (st["regions"]["to"], "x")):
+            rows.append(("minsan_egsp+oecd_deflactor", "gasto_ccaa_eur_2020_por_habitante", x["code"], year, x[key]))
     for row in data["regions"]["rows"]:
         rows.append(("ine_wstempus:1448", "esperanza_vida_ccaa", row["code"], data["regions"]["le_year"], row["life_expectancy"]))
     buf = io.StringIO()
