@@ -161,9 +161,12 @@ What we take from those references (the checklist; name the references and copy 
 - Territory: show the dispersion between autonomous communities when it is larger than the gap with peer countries,
   and for anything set or financed regionally.
 - Reading width by element: running text (paragraphs, notes, captions, headings) is capped at a reading measure
-  (`--viz-measure`, 72ch; headings in em), while charts, tables and card grids use the full width. The shared rule
+  (`--viz-measure`, 42rem, one column shared by headings and prose), while charts, tables and card grids use the full width. The shared rule
   lives in `ui/site/app/visualizaciones/visualizaciones.css`; use semantic tags (`p`, `h2`, `figcaption`) for text so
   it applies, and do not cap a chart's width unless its form needs it (e.g. a square scatter).
+- Article layout: each page reads as one clean article: a centred text column, charts and tables at full width,
+  separation by white space, no card borders or dividers. Don't set inline margins on text (the shared CSS centres
+  it) and don't add framed boxes; reading guides and callouts sit in the text column or as a lightly tinted grid.
 - "El dato mata el relato": every visualization has one consolidated figure, placed near the top, that combines
   enough dimensions (e.g. levels and change, composition and peers, two variables over time) that no competing
   narrative can cherry-pick it. Many single charts can each be used to support opposite stories; this one puts the

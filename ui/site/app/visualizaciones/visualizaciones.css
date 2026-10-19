@@ -690,7 +690,8 @@
    while charts, tables and card grids keep the full width (capping them would make them illegible).
    :where() keeps specificity at zero, so a component's own max-width still wins. */
 .viz {
-  --viz-measure: 72ch;
+  /* One text column for headings and prose so they share a left edge (~70-75 characters of body text). */
+  --viz-measure: 42rem;
 }
 
 .viz :where(p, h4, dt, dd, figcaption, summary, blockquote),
@@ -699,16 +700,121 @@
   max-width: var(--viz-measure);
 }
 
-/* Headings are larger, so their measure is set in em to land at a similar line length (about 55-60 characters). */
-.viz :where(h1) {
-  max-width: 18em;
-}
-
-.viz :where(h2, h3) {
-  max-width: 34em;
+.viz :where(h1, h2, h3) {
+  max-width: var(--viz-measure);
 }
 
 .viz :where(svg, table, .tsChart, .vizTable__scroll, .vizMultiples, .vizBars, .vizStats, .vizGallery, .vizRelatos, .vizLegend),
 .viz :where(table, .vizBars, .vizLegend, .vizStats, .vizRelatos, .vizMultiples, .vizGallery) :where(p, h3, h4, li, dt, dd, figcaption) {
   max-width: none;
+}
+
+/* Article layout: one clean sheet, a centred reading column, charts and tables at full width,
+   separation by white space instead of card borders and dividers. */
+.viz .vizArticle {
+  max-width: 1280px;
+  margin-inline: auto;
+  padding: clamp(20px, 4vw, 56px) clamp(16px, 4vw, 64px) 64px;
+  background: var(--viz-surface);
+  border-radius: 8px;
+  gap: clamp(36px, 5vw, 64px);
+}
+
+.viz .vizArticle .card {
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
+.viz .vizArticle .vizFigure,
+.viz .vizArticle .vizProse,
+.viz .vizArticle .vizStat,
+.viz .vizArticle .hero {
+  padding: 0;
+}
+
+/* Centre the reading column; capped text sits in the middle, full-width blocks are unaffected. */
+/* :is() and `main.` (not :where()) so the centring beats page rules such as `.viz .hvLead h2 { margin: 0 }`. */
+/* !important only on the horizontal margins: some components set inline `margin: 0` on their text. */
+.viz main.vizArticle :is(p, h1, h2, h3, h4, dt, dd, figcaption, summary, blockquote, ol, ul),
+.viz main.vizArticle :is(.vizProse, .vizExplain) :is(ul, ol) {
+  margin-inline: auto !important;
+}
+
+/* In grid or flex parents an auto-margined block shrinks to its content; pin headings and paragraphs to the column. */
+.viz main.vizArticle :is(h1, h2, h3, p):not(:is(table, .vizBars, .vizLegend, .vizStats, .vizRelatos, .vizMultiples, .vizGallery, .vizTable, svg) *) {
+  width: min(100%, var(--viz-measure));
+}
+
+.viz main.vizArticle :is(table, .vizBars, .vizLegend, .vizStats, .vizRelatos, .vizMultiples, .vizGallery, .vizTable, svg) :is(p, h3, h4, li, dt, dd, figcaption, summary, ol, ul) {
+  margin-inline: 0 !important;
+}
+
+.viz .vizArticle .vizFigure {
+  gap: 14px;
+}
+
+.viz .vizArticle .vizFigure h2,
+.viz .vizArticle .vizProse h2 {
+  font-size: 1.45rem;
+  line-height: 1.25;
+  width: 100%;
+}
+
+.viz .vizArticle .vizFigure__dek,
+.viz .vizArticle .vizProse p,
+.viz .vizArticle .vizProse li {
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+/* Hero as the article's headline block. */
+.viz .vizArticle .staticRouteHero {
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+}
+
+.viz .vizArticle .staticRouteHero__copy {
+  width: 100%;
+  max-width: var(--viz-measure);
+}
+
+.viz .vizArticle .staticRouteHero__summary {
+  font-size: 1.12rem;
+  line-height: 1.6;
+}
+
+/* Key figures: a quiet row of numbers, no boxes. */
+.viz .vizArticle .vizStats {
+  gap: 24px 32px;
+}
+
+/* Legends, captions and tables align with the chart they belong to. */
+.viz .vizArticle .vizLegend,
+.viz .vizArticle .vizTable {
+  width: 100%;
+}
+
+.viz .vizArticle .vizTable summary {
+  margin-inline: 0;
+}
+
+/* Callouts lose their frames: a light tint is enough. */
+.viz .vizArticle .vizRelatos li {
+  border-left: 0;
+  border-radius: 6px;
+  background: rgba(23, 25, 31, 0.035);
+}
+
+@media (max-width: 640px) {
+  .viz .vizArticle {
+    padding: 20px 16px 40px;
+    border-radius: 0;
+  }
+
+  .viz .vizArticle .vizFigure h2,
+  .viz .vizArticle .vizProse h2 {
+    font-size: 1.2rem;
+  }
 }
