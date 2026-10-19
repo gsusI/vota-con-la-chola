@@ -147,6 +147,11 @@ What we take from those references (the checklist; name the references and copy 
 - Every number reproducible from the DB (indicator contract with raw payload + sha256), with a table view and
   downloadable CSV/JSON.
 - Titles state the finding with its number; copy and posts use only figures checked against the published data.
+- Words match the numbers: no causal verbs («gracias a», «por culpa de», «mandaba») for what the data only shows
+  happening together (say what moved with what, and that it is not proof of cause); multipliers as computed (×1,8 is
+  «subió un 80 %», not «se dobló»); no «solo»/«apenas» next to a gap that a cross on the same page shows is larger;
+  per-head aggregates are not «each person pays» when they include firms or non-residents; averages compared over time
+  use the same set of countries (or say they do not).
 - Capacity lens: money that people pay or earn is compared with what households actually have (net, not gross;
   disposable income; purchasing-power standards between countries; what is left after housing and essentials),
   never only as a share of GDP or a gross salary.
