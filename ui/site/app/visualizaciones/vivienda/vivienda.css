@@ -76,7 +76,7 @@
   margin: 0;
   color: var(--viz-ink-2);
   line-height: 1.5;
-  max-width: 72ch;
+  max-width: var(--viz-measure, 72ch);
 }
 
 .viz .hvGlossary {
