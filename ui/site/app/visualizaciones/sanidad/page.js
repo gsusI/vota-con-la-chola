@@ -334,8 +334,9 @@ export default function SanidadPage() {
     points: item.points.map((p) => ([2012, 2016, 2018].includes(p.year) ? { ...p, status: "b" } : p)),
   }));
   const procChange = Object.entries(intl.spain_mean_on_list).map(([code, item]) => ({
-    code, label: item.label, from: at(item.points, 2018), to: item.points.at(-1),
+    code, label: item.label, from: item.change.bases[0].value, to: item.change.last, change: item.change,
   }));
+  const knee = intl.spain_mean_on_list.CM8154.change;
   const selected = wait.national_selected_days.filter((p) => p.date.endsWith("-12-31")).map((p) => ({ year: Number(p.date.slice(0, 4)), value: p.value }));
   const selectedChange = pctChange(wH.selected_days[0], wH.selected_days[1]);
 
@@ -404,7 +405,7 @@ export default function SanidadPage() {
   const g02 = bases.growth[String(bases.first)];
   const g09 = bases.growth["2009"];
   const g13 = bases.growth["2013"];
-  const cut = (k) => ((1 + g09[k] / 100) / (1 + g13[k] / 100) - 1) * 100;
+  const cuts = bases.cuts_2009_2013;
   const indexSeries = [
     { id: "hosp", label: "Hospitales y especializada", shortLabel: "Hospital", color: C.blue, emphasis: true, points: bases.index.hosp },
     { id: "prim", label: "Atención primaria", shortLabel: "Primaria", color: C.orange, emphasis: true, points: bases.index.prim },
@@ -428,9 +429,9 @@ export default function SanidadPage() {
   const leEduYear = leEdu.superior.at(-1).year;
   const eduLabels = { primaria: "Primaria o menos", secundaria_1: "Secundaria (1.ª etapa)", secundaria_2: "Bachillerato o FP media", superior: "Estudios superiores" };
   const leEduRows = Object.keys(eduLabels).map((k) => ({ code: k, name: eduLabels[k], value: at(leEdu[k], leEduYear) }));
-  const eduGapEs = at(leEdu.superior, leEduYear) - at(leEdu.primaria, leEduYear);
+  const eduCmp = data.segments.education_gap_compare;
   const eduGapRows = [
-    { code: "ES", name: `España (${leEduYear}, INE)`, value: Math.round(eduGapEs * 10) / 10 },
+    { code: "ES", name: `España (${eduCmp.peer_year}, INE, primaria o menos; cota superior)`, value: eduCmp.es_upper_bound_peer_year },
     ...dist.education_gap_peers.map((x) => ({ code: x.code, name: `${x.name} (${x.year})`, value: x.gap })),
   ].sort((a, b) => b.value - a.value);
 
@@ -480,10 +481,10 @@ export default function SanidadPage() {
             <strong>{hlyBreak ? "Se vive mucho, pero no igual para todos." : "Se vive mucho y con salud."}</strong> {num(leH.es)} años de esperanza de vida en {leH.year} ({num(leH.eu27)} en la UE), puesto {leH.world_rank.position} de {leH.world_rank.of} en el mundo, y {hlyText}. A los 30 años, a un hombre con estudios primarios le quedan {num(leMenPrim)} años de vida y a una mujer universitaria {num(leWomenSup)}: {num(leSex.gap_30)} años de diferencia ({leSex.year}). La mortalidad que una buena atención sanitaria puede evitar es de {num(trtEs, 0)} muertes por 100.000 habitantes frente a {num(trtEu, 0)} en la UE.
           </li>
           <li>
-            <strong>Con menos gasto público que la media, no con un gasto medio.</strong> {num(spH.pct_gdp_es)} % del PIB frente a {num(spH.pct_gdp_eu27)} % en la UE; por habitante, un {num(ppsRatio, 0)} % de la media europea, y un {num(ppsRatioAdj, 0)} % si se descuenta que la población española es algo más joven. Los hogares pagan de su bolsillo el {num(oopEs)} % del gasto ({num(oopEu)} % en la UE). El 20 % más pobre dedica a la sanidad una parte menor de su presupuesto ({num(at(epfShare["Quintil 1"], epfYear))} % frente a {num(at(epfShare["Quintil 5"], epfYear))} % del más rico) no porque esté mejor cubierto, sino porque renuncia: el {num(dentGap.a.value)} % deja el dentista por no poder pagarlo, frente al {num(dentGap.b.value)} %.
+            <strong>Con menos gasto público que la media, no con un gasto medio.</strong> {num(spH.pct_gdp_es)} % del PIB frente a {num(spH.pct_gdp_eu27)} % en la UE; por habitante, un {num(ppsRatio, 0)} % de la media europea, y un {num(ppsRatioAdj, 0)} % si se descuenta que la población española es algo más joven. Los hogares pagan de su bolsillo el {num(oopEs)} % del gasto ({num(oopEu)} % en la UE). El 20 % más pobre dedica a la sanidad una parte menor de su presupuesto ({num(at(epfShare["Quintil 1"], epfYear))} % frente a {num(at(epfShare["Quintil 5"], epfYear))} % del más rico) y a la vez es el que más renuncia: el {num(dentGap.a.value)} % deja el dentista por no poder pagarlo, frente al {num(dentGap.b.value)} %. Estos datos no separan cuánto de su menor gasto es renuncia y cuánto menor necesidad.
           </li>
           <li>
-            <strong>Cada vez más gente espera.</strong> Desde {sinceLabel}, los pacientes en lista para operarse por 1.000 habitantes suben un {num(surgeryRateChange, 0)} % y los que esperan al especialista un {num(consultRateChange, 0)} %. Por persona de 65 años o más, la lista quirúrgica crece un {num(older.surgery.change_per65, 0)} %: el envejecimiento explica una parte, no todo. Desde {bases.first} el gasto real en hospitales sube un {num(g02.hosp, 0)} % y el de atención primaria un {num(g02.prim, 0)} %; los recortes de 2010–2013 la golpearon el doble. Siete de cada diez pacientes no consiguen cita con su médico de familia para el mismo día o el siguiente ({num(noSlotLast.value, 0)} % por falta de hueco, {pcLast.year}).
+            <strong>Cada vez más gente espera.</strong> Desde {sinceLabel}, los pacientes en lista para operarse por 1.000 habitantes suben un {num(surgeryRateChange, 0)} % y los que esperan al especialista un {num(consultRateChange, 0)} %. Por persona de 65 años o más, la lista quirúrgica crece un {num(older.surgery.change_per65, 0)} %: también crece por persona mayor, no solo porque haya más mayores. Desde {bases.first} el gasto real en hospitales sube un {num(g02.hosp, 0)} % y el de atención primaria un {num(g02.prim, 0)} %; de 2009 a 2013 el gasto real en primaria cayó un {num(-cuts.prim)} % y el de hospitales un {num(-cuts.hosp)} %. Siete de cada diez pacientes no consiguen cita con su médico de familia para el mismo día o el siguiente ({num(noSlotLast.value, 0)} % por falta de hueco, {pcLast.year}).
           </li>
           <li>
             <strong>La espera media general para operarse no sube, pero la de las operaciones más comunes sí.</strong> La media de toda la lista pasa de {num(wH.surgery_days[0], 0)} a {num(wH.surgery_days[1], 0)} días; la de los procesos más frecuentes (cataratas, prótesis, hernias…) de {num(wH.selected_days[0], 0)} a {num(wH.selected_days[1], 0)} días (+{num(selectedChange, 0)} %).
@@ -530,7 +531,7 @@ export default function SanidadPage() {
 
       <Figure
         id="el-dato-mata-el-relato"
-        title={`España logra la mortalidad tratable de los países que más gastan (${num(story.countries.spain.y, 0)} muertes por 100.000) con un ${num(100 - story.countries.spain.x, 0)} % menos de gasto público por habitante que la media de la UE en ${story.countries.last}, ya descontada la edad de su población; dentro de España, el gasto real subió en las ${story.regions.n} comunidades entre ${story.regions.from} y ${story.regions.to} y aun así la espera para las operaciones más comunes creció en ${story.regions.days_up}`}
+        title={`España tiene la mortalidad tratable de los países que más gastan (${num(story.countries.spain.y, 0)} muertes por 100.000) con un ${num(100 - story.countries.spain.x, 0)} % menos de gasto público por habitante que la media de la UE en ${story.countries.last}, ya descontada la edad de su población; dentro de España, el gasto real subió en las ${story.regions.n} comunidades entre ${story.regions.from} y ${story.regions.to} y aun así la espera para las operaciones más comunes creció en ${story.regions.days_up}`}
         dek={`Tres paneles que se leen juntos. Arriba, los ${story.countries.rows.length} países de la UE: cuanto más gasta un país, menos muertes evitables por atención sanitaria tiene (correlación de rangos ${num(story.countries.rho, 2)}), y España queda muy por debajo de esa pauta: ningún país que gaste menos tiene menos mortalidad tratable, y solo ${story.countries.lower_mortality.length} la tienen menor, todos gastando por encima de la media. Abajo, las comunidades: el gasto real por habitante pasó de ${formatHealth(story.regions.total.x0, "eur")} a ${formatHealth(story.regions.total.x, "eur")} (euros de 2020), y la espera de los procesos seleccionados subió en ${story.regions.days_up} de ${story.regions.n} y los pacientes en lista por habitante en ${story.regions.rate_up}. Al final, dentro de España: lo que el sistema público cubre llega casi igual a todos los grupos; lo que no cubre, no.`}
         sources={[S.eurostat, S.egsp, S.sisle, S.oecd, S.barometro]}
         notes={[
@@ -628,13 +629,13 @@ export default function SanidadPage() {
             <strong>«Tenemos la mejor sanidad del mundo».</strong> En resultados, casi: pocas muertes evitables con poco dinero. En acceso, no: las esperas crecen en casi todas las comunidades, y lo que la sanidad pública no cubre, como el dentista, deja fuera al {num(dentGap.a.value)} % de los más pobres (al {num(dentGap.peak.value)} % entre los de {dentGap.peak.label.replace(/^20 % con menos ingresos de /, "")}).
           </p>
           <p>
-            <strong>«La sanidad pública trata igual a todos».</strong> En lo que cubre, sí: renunciar al médico apenas depende de la renta ({num(medGap.a.value)} % frente a {num(medGap.b.value)} %). En lo que no cubre o cubre tarde, no: el {num(mentalGap.a.value, 0)} % de los jóvenes de 18 a 24 años que recibieron atención de salud mental la pagó en la privada (el {num(mentalGap.b.value, 0)} % de los de 65 a 74), y quien se declara de clase alta va al especialista solo por la privada {num(specGap.a.value / specGap.b.value, 0)} veces más que quien se declara de clase baja.
+            <strong>«La sanidad pública trata igual a todos».</strong> En lo que cubre, sí: renunciar al médico apenas depende de la renta ({num(medGap.a.value)} % frente a {num(medGap.b.value)} %). En lo que no cubre o cubre tarde, no: el {num(mentalGap.a.value, 0)} % de los jóvenes de 18 a 24 años que recibieron atención de salud mental la pagó en la privada (el {num(mentalGap.b.value, 0)} % de los de 65 a 74), y quien se declara de clase alta fue al especialista solo por la privada en una proporción {num(specGap.a.value / specGap.b.value)} veces la de quien se declara de clase baja ({num(specGap.a.value)} % frente a {num(specGap.b.value)} %).
           </p>
           <p>
             <strong>«En los pueblos no hay médico».</strong> En la cita con el médico de familia, al revés: en los municipios de hasta 2.000 habitantes atienden el mismo día o al siguiente al {num(gpGap.a.value, 0)} %, y en los de más de un millón al {num(gpGap.b.value, 0)} %. Este dato no mide la distancia al centro de salud, al hospital o a urgencias.
           </p>
           <p>
-            <strong>«La sanidad se hunde por los recortes».</strong> Los recortes fueron reales en 2010–2013 (ver el gasto por habitante), pero entre {story.regions.from} y {story.regions.to} el gasto real subió en las {story.regions.spend_up} comunidades y la espera subió en {story.regions.days_up} de ellas: el problema de acceso de estos años no se explica por menos dinero.
+            <strong>«La sanidad se hunde por los recortes».</strong> Los recortes fueron reales en 2010–2013 (ver el gasto por habitante), pero entre {story.regions.from} y {story.regions.to} el gasto real subió en las {story.regions.spend_up} comunidades y la espera subió en {story.regions.days_up} de ellas: el empeoramiento del acceso en estos años no coincidió con menos dinero.
           </p>
           <p>
             <strong>«Basta con gastar más».</strong> Entre países, gastar más va con menos mortalidad tratable; entre comunidades, gastar más no va con esperar menos: la correlación de rangos entre gasto real por habitante y espera en {story.regions.to} es de {num(story.regions.rho_level, 2)}{story.regions.rho_level > 0 ? ", positiva: las que más gastan esperan algo más, no menos" : ""}.
@@ -895,7 +896,7 @@ export default function SanidadPage() {
 
       <Figure
         id="gasto-por-habitante"
-        title={`Por habitante y a precios constantes, el gasto sanitario público de España es un ${num(ppsRatio, 0)} % de la media de la UE; descontando que su población es algo más joven, un ${num(ppsRatioAdj, 0)} %: la edad explica muy poco de la diferencia`}
+        title={`Por habitante y a precios constantes, el gasto sanitario público de España es un ${num(ppsRatio, 0)} % de la media de la UE; descontando que su población es algo más joven, un ${num(ppsRatioAdj, 0)} %: descontar la edad cambia muy poco la diferencia`}
         dek={`En euros de 2020 y paridad de poder de compra (para comparar países), España gasta ${formatHealth(sp.per_person_ppp_public.ESP.at(-1).value, "eur")} por habitante frente a ${formatHealth(sp.per_person_ppp_public_oecd_mean.at(-1).value, "eur")} de media en la OCDE (puesto ${sp.oecd_rank_per_person.position} de ${sp.oecd_rank_per_person.of}). Dentro de España, el gasto real por habitante cayó de ${formatHealth(peak2009, "eur")} en 2009 a ${formatHealth(low2013, "eur")} en 2013 (${num(pctChange(peak2009, low2013), 0)} %) y no recuperó el nivel de 2009 hasta ${recoveredYear ?? "después"}.`}
         legend={ppp}
         sources={[S.oecd, S.eurostat]}
@@ -1039,13 +1040,14 @@ export default function SanidadPage() {
 
       <Figure
         id="desigualdad"
-        title={`En España la renuncia a atención médica apenas depende de la renta (${num(medEs.poor)} % del 20 % más pobre frente a ${num(medEs.rich)} % del más rico; en la UE, ${num(medEu.poor)} % frente a ${num(medEu.rich)} %) y la esperanza de vida a los 30 años solo varía ${num(eduGapEs)} años según los estudios: la brecha está en el dentista`}
-        dek={`La sanidad pública reparte bastante por igual lo que cubre. La desigualdad aparece en lo que no cubre: el dentista (arriba) y el gasto de bolsillo. El quintil más rico dedica a la sanidad el ${num(at(epfShare["Quintil 5"], epfYear))} % de su presupuesto y el más pobre el ${num(at(epfShare["Quintil 1"], epfYear))} % (${formatHealth(at(epfPer["Quintil 1"], epfYear), "eur")} por persona al año frente a ${formatHealth(at(epfPer["Quintil 5"], epfYear), "eur")}): el más pobre no gasta menos porque esté mejor cubierto, sino porque renuncia a lo que tendría que pagar.`}
+        title={`En España la renuncia a atención médica apenas depende de la renta (${num(medEs.poor)} % del 20 % más pobre frente a ${num(medEs.rich)} % del más rico; en la UE, ${num(medEu.poor)} % frente a ${num(medEu.rich)} %); a los 30 años, entre estudios primarios y superiores hay ${num(eduCmp.gap_both)} años de esperanza de vida (ambos sexos, ${eduCmp.year}) y, cruzando con el sexo, ${num(eduCmp.gap_cross)} entre un hombre con primaria y una mujer universitaria`}
+        dek={`La sanidad pública reparte bastante por igual lo que cubre. La desigualdad aparece en lo que no cubre: el dentista (arriba) y el gasto de bolsillo. El quintil más rico dedica a la sanidad el ${num(at(epfShare["Quintil 5"], epfYear))} % de su presupuesto y el más pobre el ${num(at(epfShare["Quintil 1"], epfYear))} % (${formatHealth(at(epfPer["Quintil 1"], epfYear), "eur")} por persona al año frente a ${formatHealth(at(epfPer["Quintil 5"], epfYear), "eur")}): el más pobre gasta menos y a la vez es el que más renuncia al dentista por no poder pagarlo; estos datos no separan cuánto de su menor gasto es renuncia y cuánto menor necesidad.`}
         sources={[S.eurostat, S.ine]}
         notes={[
           "Necesidad médica no atendida por coste, distancia o lista de espera (EU-SILC), mayores de 16 años, por quintil de ingresos equivalentes.",
           `Gasto de los hogares en sanidad: INE, Encuesta de Presupuestos Familiares ${epfYear}, grupo 06 (medicamentos, gafas, dentista, consultas privadas); no incluye las primas de seguros.`,
-          "Esperanza de vida por estudios: INE (tabla 37663) para España; Eurostat para el resto, que no publica España y solo llega a 2016–2017 en la mayoría de países. Las diferencias de años y de fuente impiden un ranking estricto.",
+          `Esperanza de vida a los 30 años por estudios y sexo: INE, tabla 37663, ${eduCmp.year}. Entre primaria y estudios superiores la brecha es de ${num(eduCmp.gap_men)} años en los hombres, ${num(eduCmp.gap_women)} en las mujeres y ${num(eduCmp.gap_both)} con ambos sexos juntos; entre mujeres y hombres, ${num(eduCmp.gap_sex)}. Los ${num(eduCmp.gap_cross)} años entre un hombre con primaria y una mujer universitaria juntan las dos brechas, pero no son su suma: cada una se mide dentro de su grupo.`,
+          `Comparación con otros países: Eurostat (demo_mlexpecedu) no publica España y su nivel bajo (CINE 0–2) incluye la primera etapa de secundaria, mientras que el del INE es «primaria o menos». Por eso la brecha española de ${eduCmp.peer_year} (${num(eduCmp.es_upper_bound_peer_year)} años, INE) es una cota superior de la que daría la definición de Eurostat. Aun así queda ${eduCmp.es_below_median ? "por debajo" : "por encima"} de la mediana de los ${eduCmp.peers_n} países con dato de ${eduCmp.peer_years[0]}–${eduCmp.peer_years[1]} (${num(eduCmp.peers_median)} años; de ${num(eduCmp.peers_min)} a ${num(eduCmp.peers_max)}), cerca de Italia (${num(eduCmp.it)}) y Portugal (${num(eduCmp.pt)}).`,
           "Seguro privado por renta: no hay una serie oficial descargable por quintil; queda pendiente.",
         ]}
         table={
@@ -1078,7 +1080,7 @@ export default function SanidadPage() {
             <Bars rows={leEduRows} unit="years" digits={1} label="Esperanza de vida a los 30 años por nivel de estudios" />
           </div>
           <div>
-            <h3 className="vizPanelTitle">Brecha por estudios: superiores frente a primaria<span>Años de esperanza de vida a los 30</span></h3>
+            <h3 className="vizPanelTitle">Brecha por estudios: superiores frente a los más bajos<span>Años de esperanza de vida a los 30; España: INE {eduCmp.peer_year}, primaria o menos (cota superior); resto: Eurostat, CINE 0–2</span></h3>
             <Bars rows={eduGapRows} unit="years" digits={1} highlight="ES" label="Brecha de esperanza de vida por estudios" />
           </div>
           <div>
@@ -1090,7 +1092,7 @@ export default function SanidadPage() {
 
       <Figure
         id="a-donde-va-el-dinero"
-        title={`Desde ${bases.first} el gasto real en hospitales casi se duplica (+${num(g02.hosp, 0)} %) y el de atención primaria crece un ${num(g02.prim, 0)} %; los recortes de 2010–2013 redujeron la primaria el doble (${num(cut("prim"), 0)} % frente a ${num(cut("hosp"), 0)} %) y desde 2013 ambos crecen parecido (+${num(g13.hosp, 0)} % y +${num(g13.prim, 0)} %)`}
+        title={`Desde ${bases.first} el gasto real en hospitales sube un ${num(g02.hosp, 0)} % y el de atención primaria crece un ${num(g02.prim, 0)} %; de 2009 a 2013 el gasto real en primaria cayó un ${num(-cuts.prim)} % y el de hospitales un ${num(-cuts.hosp)} % (una caída ${num(cuts.ratio_prim_hosp)} veces mayor en primaria) y desde 2013 ambos crecen parecido (+${num(g13.hosp, 0)} % y +${num(g13.prim, 0)} %)`}
         dek={`Según la Estadística de Gasto Sanitario Público, los hospitales y la atención especializada pasan del ${num(fFirst("Servicios hospitalarios y especializados"))} % del gasto en 2002 al ${num(fLast("Servicios hospitalarios y especializados"))} % en ${money.last}; la atención primaria, del ${num(fFirst("Servicios primarios de salud"))} % al ${num(fLast("Servicios primarios de salud"))} %; la farmacia de receta, del ${num(fFirst("Farmacia"))} % al ${num(fLast("Farmacia"))} %. El año de partida cambia la historia: desde 2009, el pico previo a los recortes, el hospital sube un ${num(g09.hosp, 0)} % y la primaria solo un ${num(g09.prim, 0)} %; desde 2013, el fondo de los recortes, un ${num(g13.hosp, 0)} % y un ${num(g13.prim, 0)} %. Los hospitales se llevan el ${num(provEs.HP1, 0)} % del gasto público, como en Italia y Portugal y frente al ${num(provEu.HP1, 0)} % en la UE; solo el ${num(quickLast.value, 0)} % consigue cita con su médico de familia en el día o al siguiente. El ${num(staffShare, 0)} % del gasto (antes de consolidar) son sueldos del personal y el ${num(conciertos, 0)} %, conciertos con centros privados.`}
         legend={funcSeries}
         sources={[S.egsp, S.eurostat, S.oecd]}
@@ -1209,8 +1211,8 @@ export default function SanidadPage() {
 
       <Figure
         id="operaciones"
-        title={`En las operaciones más comunes la espera sí ha subido: prótesis de rodilla ${num(procChange.find((p) => p.code === "CM8154").from, 0)} → ${num(procChange.find((p) => p.code === "CM8154").to.value, 0)} días de media entre 2018 y ${procChange[0].to.year}`}
-        dek={`Media de días que llevan esperando los pacientes que están en lista, por operación (datos que España envía a la OCDE desde el SISLE). Desde 2018: ${procChange.map((p) => `${p.label.toLowerCase()} ${num(p.from, 0)} → ${num(p.to.value, 0)}`).join("; ")}. Comparada con los ${kneeIntl.rows.length} países que publican esperas, la mediana española desde que el especialista indica la operación está en mitad de la tabla: puesto ${kneeIntl.position} de ${kneeIntl.of} en rodilla (1 = espera más corta), ${hipIntl.position} de ${hipIntl.of} en cadera y ${catIntl.position} de ${catIntl.of} en cataratas.`}
+        title={`Prótesis de rodilla: ${num(knee.last.value, 0)} días de media en lista en ${knee.last.year}, frente a ${num(knee.bases[0].value, 0)} en ${knee.bases[0].year} (primer año comparable tras la ruptura${knee.first_is_min ? " y mínimo del tramo" : ""}) y ${num(knee.bases[1].value, 0)} en ${knee.bases[1].year}; desde ${knee.bases[2].year}, tras la Covid, ${knee.bases[2].pct > 0 ? "+" : ""}${num(knee.bases[2].pct, 0).replace("-", "−")} %`}
+        dek={`Media de días que llevan esperando los pacientes que están en lista, por operación (datos que España envía a la OCDE desde el SISLE). Cambio hasta ${knee.last.year} según el año de partida (${procChange[0].change.bases.map((b) => b.year).join(", ")}): ${procChange.map((p) => `${p.label.toLowerCase()} ${p.change.bases.map((b) => `${b.pct > 0 ? "+" : ""}${num(b.pct, 0)} %`).join(" / ")}`).join("; ")}. Respecto a antes de la Covid la espera es mayor en las cuatro; respecto a ${knee.bases[2].year}, no en todas. Comparada con los ${kneeIntl.rows.length} países que publican esperas, la mediana española desde que el especialista indica la operación está en mitad de la tabla: puesto ${kneeIntl.position} de ${kneeIntl.of} en rodilla (1 = espera más corta), ${hipIntl.position} de ${hipIntl.of} en cadera y ${catIntl.position} de ${catIntl.of} en cataratas.`}
         legend={procSeries}
         sources={[S.oecd, S.sisle]}
         notes={[
@@ -1311,7 +1313,7 @@ export default function SanidadPage() {
 
       <Figure
         id="atencion-primaria"
-        title={`Solo el ${num(quickLast.value, 0)} % consigue cita con su médico de familia el mismo día o al siguiente; quienes esperan, esperan ${num(pcLast.value)} días de media`}
+        title={`El ${num(quickLast.value, 0)} % consigue cita con su médico de familia el mismo día o al siguiente (${num(gpGap.a.value, 0)} % en municipios de hasta 2.000 habitantes, ${num(gpGap.b.value, 0)} % en los de más de un millón); quienes esperan, esperan ${num(pcLast.value)} días de media`}
         dek={`Encuesta del Barómetro Sanitario a quienes fueron a su médico de familia de la sanidad pública en el último año. El ${num(noSlotLast.value, 0)} % dice que pasó más de un día «porque no había cita antes» (${pc.no_slot[0].value.toLocaleString("es-ES")} % en ${pc.no_slot[0].year}). Cada médico de familia tiene asignadas de media ${formatHealth(siap.poblacion_por_medico_familia.value, "count")} personas y un ${num(siap.pct_medicos_familia_mas_1500.value, 0)} % pasa de 1.500, el umbral que usa el propio SIAP (SIAP, ${siap.poblacion_por_medico_familia.year}).`}
         legend={[
           { id: "q", label: "Atendidos el mismo día o al siguiente (%)", color: C.aqua },
@@ -1354,7 +1356,7 @@ export default function SanidadPage() {
       <Figure
         id="percepcion"
         title={`El ${num(worseLast.value, 0)} % cree que las listas de espera empeoraron en el último año; en ${worseFirst.year} lo creía el ${num(worseFirst.value, 0)} %${worseFirst.value === Math.min(...perc.worse.map((p) => p.value)) ? ", el mínimo de la serie" : ""}${worsePreCovid ? `, y en ${worsePreCovid.year}, antes de la Covid, el ${num(worsePreCovid.value, 0)} %` : ""}`}
-        dek={`Opinión, no medida. Los que creen que mejoraron pasan del ${num(betterFirst.value, 0)} % al ${num(betterLast.value, 0)} %. El pesimismo se dispara con los recortes de 2012–2014 y tras la Covid, y no ha vuelto a los niveles de los 2000, aunque la espera media de toda la lista quirúrgica no haya subido en la serie comparable: lo que la gente percibe se parece más al número de personas esperando y a la espera para el especialista y el médico de familia.`}
+        dek={`Opinión, no medida. Los que creen que mejoraron pasan del ${num(betterFirst.value, 0)} % al ${num(betterLast.value, 0)} %. El pesimismo sube de golpe en 2012–2014, los años de los recortes, y tras la Covid, y no ha vuelto a los niveles de los 2000, aunque la espera media de toda la lista quirúrgica no haya subido en la serie comparable: lo que la gente percibe se parece más al número de personas esperando y a la espera para el especialista y el médico de familia.`}
         legend={percSeries}
         sources={[{ label: `Ministerio de Sanidad y CIS, Barómetro Sanitario, serie 1998–2025${retrieved("minsan_barometro")}`, href: src.minsan_barometro.page }]}
         notes={["Pregunta 16: «En general, ¿cree Ud. que, durante los últimos doce meses, el problema de las listas de espera ha mejorado, ha empeorado o sigue igual?». No hubo Barómetro en 2001, 2020 y 2021. El resto responde «sigue igual» o no sabe."]}
@@ -1374,7 +1376,7 @@ export default function SanidadPage() {
       <Figure
         id="medicos"
         title={`España tiene ${num(esDoc, 0)} médicos en ejercicio por 100.000 habitantes, casi como Alemania (${num(deDoc, 0)}) y más que Francia (${num(frDoc, 0)})`}
-        dek={`En el total, España no está por debajo de sus pares. En medicina de familia España notifica ${num(esGp)} por 100.000 habitantes en ${docYear}, por encima de Alemania e Italia; desde la última ruptura de su serie (${esGpBreak.year}, ${num(esGpBreak.value)}) apenas cambia. Estas cifras no dicen dónde trabajan (centro de salud, urgencias, hospital) ni cuántos pacientes atiende cada uno.`}
+        dek={`En el total, España no está por debajo de sus pares. En medicina de familia España notifica ${num(esGp)} por 100.000 habitantes en ${docYear}, por encima de Alemania e Italia; desde la última ruptura de su serie (${docs.gp_es_since_break.from.year}, ${num(docs.gp_es_since_break.from.value)}) sube un ${num(docs.gp_es_since_break.pct)} %. Estas cifras no dicen dónde trabajan (centro de salud, urgencias, hospital) ni cuántos pacientes atiende cada uno.`}
         legend={practisingSeries}
         sources={[S.eurostat]}
         notes={[
@@ -1638,7 +1640,7 @@ export default function SanidadPage() {
             <strong>Gasto «medio»: falla. Es bajo.</strong> {num(spH.pct_gdp_es)} % del PIB frente a {num(spH.pct_gdp_eu27)} % en la UE; un {num(ppsRatio, 0)} % del gasto público por habitante europeo ({num(ppsRatioAdj, 0)} % ajustado por edad); puesto {sp.oecd_rank_per_person.position} de {sp.oecd_rank_per_person.of} en la OCDE. Parte de la diferencia la pagan los hogares de su bolsillo ({num(oopEs)} % frente a {num(oopEu)} %) o con seguros privados duplicados.
           </li>
           <li>
-            <strong>Acceso: se cumple en lo esencial, con un matiz.</strong> Crece mucho el número de personas esperando (+{num(surgeryRateChange, 0)} % en cirugía y +{num(consultRateChange, 0)} % en consultas por habitante desde {sinceLabel}), sube la espera para el especialista ({num(wH.consult_days[0], 0)} → {num(wH.consult_days[1], 0)} días) y la de las operaciones más comunes ({num(wH.selected_days[0], 0)} → {num(wH.selected_days[1], 0)} días), y siete de cada diez pacientes no encuentran cita inmediata con su médico de familia. El matiz: la espera media de <em>toda</em> la lista quirúrgica no sube ({num(wH.surgery_days[0], 0)} → {num(wH.surgery_days[1], 0)} días), porque la componen especialidades que se mueven en sentidos distintos.
+            <strong>Acceso: se cumple en lo esencial, con un matiz.</strong> Crece mucho el número de personas esperando (+{num(surgeryRateChange, 0)} % en cirugía y +{num(consultRateChange, 0)} % en consultas por habitante desde {sinceLabel}), sube la espera para el especialista ({num(wH.consult_days[0], 0)} → {num(wH.consult_days[1], 0)} días) y la de las operaciones más comunes ({num(wH.selected_days[0], 0)} → {num(wH.selected_days[1], 0)} días), y siete de cada diez pacientes no encuentran cita inmediata con su médico de familia. El matiz: la espera media de <em>toda</em> la lista quirúrgica no sube ({num(wH.surgery_days[0], 0)} → {num(wH.surgery_days[1], 0)} días): mezcla especialidades que esta página no separa, y las operaciones más frecuentes sí suben.
           </li>
           <li>
             <strong>Capacidad del paciente y destino del dinero.</strong> Medido contra lo que gastan los hogares, el bolsillo pesa más que en la UE ({num(oopShareEs)} % frente a {num(oopShareEu)} % del consumo) y el dentista excluye a los más pobres ({num(dentalEs.poor)} % frente a {num(dentalEs.rich)} % de los más ricos). El dinero ha ido al hospital ({num(provEs.HP1, 0)} % del gasto público frente al {num(provEu.HP1, 0)} % en la UE) y los recortes de 2010–2013 golpearon el doble a la atención primaria; desde {bases.first} el hospital crece +{num(g02.hosp, 0)} % y la primaria +{num(g02.prim, 0)} % en términos reales. Encaja con la falta de citas del médico de familia. La desigualdad por renta está en lo que la sanidad pública no cubre: la renuncia a atención médica apenas depende de la renta ({num(medEs.poor)} % frente a {num(medEs.rich)} %), la dental sí.

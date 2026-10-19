@@ -281,9 +281,17 @@ def doctors(store: Store) -> dict:
         "practising": {g: annual_points(practising[g], 0, flags=True) for g in geos if g in practising},
         "licensed_pt": annual_points(licensed.get("PT", []), 0, flags=True),
         "gp": {g: annual_points(gp[g], 1, flags=True) for g in geos if g in gp},
+        "gp_es_since_break": since_last_break(annual_points(gp["ES"], 1, flags=True)),
         "specialists": {g: annual_points(spec[g], 0, flags=True) for g in geos if g in spec},
         "paediatricians": {g: annual_points(paed[g], 1, flags=True) for g in geos if g in paed},
     }
+
+
+def since_last_break(points: list[dict]) -> dict:
+    base = next((p for p in reversed(points) if "b" in (p.get("status") or "")), points[0])
+    last = points[-1]
+    return {"from": {"year": base["year"], "value": base["value"]}, "to": {"year": last["year"], "value": last["value"]},
+            "pct": r(100 * (last["value"] / base["value"] - 1), 1)}
 
 
 def latest(rows: list[dict]) -> dict | None:
@@ -419,6 +427,17 @@ def waits_international(store: Store) -> dict:
     for code, label in ESP_PROCEDURES.items():
         series = store.series("oecd_health_statistics", dataset, f"WAIT_MEAN.{code}.WTPA", "DAYS")
         out["spain_mean_on_list"][code] = {"label": label, "points": annual_points(series["ESP"], 0)}
+    # The same «since YEAR» claim from every base of the comparable stretch (SISLE break in 2018), so the choice shows.
+    first_comparable = 2018
+    for code, item in out["spain_mean_on_list"].items():
+        stretch = [p for p in item["points"] if p["year"] >= first_comparable]
+        last = stretch[-1]
+        item["change"] = {
+            "first_comparable": first_comparable, "last": last,
+            "first_is_min": stretch[0]["value"] == min(p["value"] for p in stretch),
+            "bases": [{"year": p["year"], "value": p["value"], "pct": r(100 * (last["value"] / p["value"] - 1), 0)}
+                      for p in stretch if p["year"] in (first_comparable, first_comparable + 1, 2021)],
+        }
     return out
 
 
@@ -775,7 +794,9 @@ def base_years(store: Store, money: dict) -> dict:
     first = min(real["total"])
     index = {key: [{"year": y, "value": r(100 * val / vals[first], 1)} for y, val in sorted(vals.items())] for key, vals in real.items()}
     growth = {str(base): {key: r(100 * (vals[money["last"]] / vals[base] - 1), 1) for key, vals in real.items()} for base in (first, 2009, 2013)}
-    return {"first": first, "index": index, "growth": growth}
+    cuts = {key: r(100 * (vals[2013] / vals[2009] - 1), 1) for key, vals in real.items()}
+    cuts["ratio_prim_hosp"] = r(cuts["prim"] / cuts["hosp"], 1)
+    return {"first": first, "index": index, "growth": growth, "cuts_2009_2013": cuts}
 
 
 def waits_per_older(store: Store, wait: dict) -> dict:
@@ -1012,6 +1033,35 @@ def segments(store: Store, wait: dict, regions: dict) -> dict:
             "cases": cases, "barometro_year": 2025}
 
 
+def education_gap_compare(dist: dict, edu_sex: dict) -> dict:
+    """Life expectancy at 30 by education: Spain's gap, the sex x education cross, and peers on the closest definition.
+
+    Eurostat's low level (ISCED 0-2) includes lower secondary; INE's lowest group is primary or less. Spain's INE gap
+    with «primary or less» is therefore an upper bound of the Eurostat-style gap, compared in the peers' years.
+    """
+    v = edu_sex["values"]
+    at30 = dist["life_expectancy_education"]["30 años"]
+    peers = [x for x in dist["education_gap_peers"] if x["year"] >= 2016]
+    peer_year = max(x["year"] for x in peers)
+    gaps = sorted(x["gap"] for x in peers)
+    mid = len(gaps) // 2
+    median = gaps[mid] if len(gaps) % 2 else (gaps[mid - 1] + gaps[mid]) / 2
+    es_peer = next(p["value"] for p in at30["superior"] if p["year"] == peer_year) - next(p["value"] for p in at30["primaria"] if p["year"] == peer_year)
+    return {
+        "year": edu_sex["year"],
+        "gap_both": r(next(p["value"] for p in at30["superior"] if p["year"] == edu_sex["year"]) - next(p["value"] for p in at30["primaria"] if p["year"] == edu_sex["year"]), 1),
+        "gap_men": r(v["30 años|M|superior"] - v["30 años|M|primaria"], 1),
+        "gap_women": r(v["30 años|F|superior"] - v["30 años|F|primaria"], 1),
+        "gap_sex": r(v["30 años|F|total"] - v["30 años|M|total"], 1),
+        "gap_cross": edu_sex["gap_30"],
+        "peer_year": peer_year, "peer_years": [min(x["year"] for x in peers), peer_year], "peers_n": len(peers),
+        "peers_median": r(median, 1), "peers_min": gaps[0], "peers_max": gaps[-1],
+        "es_upper_bound_peer_year": r(es_peer, 1),
+        "es_below_median": es_peer < median,
+        "it": next((x["gap"] for x in peers if x["code"] == "IT"), None), "pt": next((x["gap"] for x in peers if x["code"] == "PT"), None),
+    }
+
+
 def num_es(value: float, digits: int = 1) -> str:
     return f"{value:.{digits}f}".replace(".", ",")
 
@@ -1040,6 +1090,7 @@ def build(conn: sqlite3.Connection) -> dict:
     older = waits_per_older(store, wait)
     dist = distribution(store)
     seg = segments(store, wait, regions)
+    seg["education_gap_compare"] = education_gap_compare(dist, seg["life_expectancy_edu_sex"])
     story["dental"] = {"year": patient["dental_cost"]["year"],
                        "rows": [row for row in patient["dental_cost"]["rows"] if row["code"] in ("ES", "DE", "FR", "IT", "PT", "EU27_2020")]}
 

@@ -256,6 +256,14 @@ class IngestHealthTest(unittest.TestCase):
             self.assertTrue(all(it["value"] is not None and it["national"] is not None and it["cut"] for it in case["items"]))
         sex = seg["life_expectancy_edu_sex"]
         self.assertAlmostEqual(sex["gap_30"], sex["values"]["30 años|F|superior"] - sex["values"]["30 años|M|primaria"], delta=0.06)
+        cmp = seg["education_gap_compare"]
+        self.assertLess(cmp["gap_both"], cmp["gap_cross"])
+        self.assertLess(cmp["gap_cross"], cmp["gap_sex"] + max(cmp["gap_men"], cmp["gap_women"]) + 0.1)  # joint, not a sum
+        self.assertTrue(cmp["peer_years"][0] >= 2016 and cmp["peers_n"] >= 10)
+        knee = data["waits_international"]["spain_mean_on_list"]["CM8154"]["change"]
+        self.assertEqual([b["year"] for b in knee["bases"]], [2018, 2019, 2021])
+        cuts = data["base_years"]["cuts_2009_2013"]
+        self.assertAlmostEqual(cuts["ratio_prim_hosp"], cuts["prim"] / cuts["hosp"], delta=0.06)
         grid = seg["dental_grid"]["values"]
         self.assertEqual(grid["QU1"]["Y_GE16"], seg["gaps"][1]["a"]["value"])
         self.assertTrue(all(grid[q]["Y45-64"] is not None for q in ("QU1", "QU2", "QU3", "QU4", "QU5")))

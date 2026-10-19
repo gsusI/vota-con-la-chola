@@ -8,6 +8,22 @@ import { formatHealth as formatValue, tickHealth } from "./format.mjs";
 
 const MARGIN = { top: 40, right: 64, bottom: 30, left: 44 };
 
+// On a phone, notes closer than a label's width share one label on the first row («rupturas»); every line stays.
+function mergeCloseNotes(notes, sx, minGap = 46) {
+  const out = [];
+  let lead = null;
+  for (const note of [...notes].sort((a, b) => a.year - b.year)) {
+    if (lead && sx(note.year) - sx(lead.year) < minGap) {
+      lead.label = lead.label.endsWith("s") ? lead.label : `${lead.label}s`;
+      out.push({ ...note, row: 0, label: "" });
+    } else {
+      lead = { ...note, row: 0 };
+      out.push(lead);
+    }
+  }
+  return out;
+}
+
 function niceStep(max, targetTicks) {
   const raw = max / targetTicks;
   const pow = 10 ** Math.floor(Math.log10(raw));
@@ -196,7 +212,7 @@ export default function TimeSeriesChart({
             {tick}
           </text>
         ))}
-        {(compact ? annotations.filter((note) => note.keepOnMobile) : annotations).map((note, index) => (
+        {(compact ? mergeCloseNotes(annotations.filter((note) => note.keepOnMobile), sx) : annotations).map((note, index) => (
           <g key={`note-${note.year}-${index}`}>
             <line className="tsChart__note" x1={sx(note.year)} x2={sx(note.year)} y1={margin.top - 4 - (note.row || 0) * 13} y2={margin.top + innerH} />
             {!compact || note.keepOnMobile ? (
