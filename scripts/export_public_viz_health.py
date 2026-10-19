@@ -14,6 +14,7 @@ import argparse
 import csv
 import io
 import json
+import math
 import sqlite3
 import sys
 from collections import defaultdict
@@ -73,12 +74,30 @@ class Store:
         if row is None:
             raise LookupError(f"indicator {source_id}:{dataset_code}:{indicator_code}:{unit_code} not loaded")
         release_id, url, sha, snapshot, meta = row
+        self.last_release = release_id
         self.provenance[source_id].append({
             "indicator": f"{dataset_code} {indicator_code} ({unit_code})", "url": url, "sha256": sha,
             "snapshot_date": snapshot, "retrieved_at": json.loads(meta or "{}").get("retrieved_at"),
         })
         out: dict[str, list[dict]] = defaultdict(list)
-        for geo, name, dims, period, value, status, labels in self.conn.execute(
+        for geo, name, dims, period, value, status, labels in self._observations(release_id):
+            key = geo if json.loads(dims).get("sex") in (None, "T") else f"{geo}:{json.loads(dims)['sex']}"
+            point = {"period": period, "value": float(value), "name": name}
+            if status:
+                point["status"] = status
+                point["labels"] = json.loads(labels)
+            out[key].append(point)
+        return out
+
+    def cells(self, source_id: str, dataset_code: str, indicator_code: str, unit_code: str) -> list[dict]:
+        """Latest release as flat rows with the series dimensions, for indicators whose series share one geography."""
+        self.series(source_id, dataset_code, indicator_code, unit_code)  # records provenance, raises if missing
+        release_id = self.last_release
+        return [{"geo": geo, "name": name, "dims": json.loads(dims), "period": period, "value": float(value)}
+                for geo, name, dims, period, value, _, _ in self._observations(release_id)]
+
+    def _observations(self, release_id: str) -> list[tuple]:
+        return self.conn.execute(
             """
             SELECT s.geography_code, s.geography_name, s.dimensions_json, o.period_label, o.value_decimal,
                    o.source_status_code, o.source_status_labels_json
@@ -87,14 +106,7 @@ class Store:
             ORDER BY s.geography_code, o.period_start
             """,
             (release_id,),
-        ):
-            key = geo if json.loads(dims).get("sex") in (None, "T") else f"{geo}:{json.loads(dims)['sex']}"
-            point = {"period": period, "value": float(value), "name": name}
-            if status:
-                point["status"] = status
-                point["labels"] = json.loads(labels)
-            out[key].append(point)
-        return out
+        ).fetchall()
 
 
 def annual_points(rows: list[dict], digits: int = 2, since: int | None = None, flags: bool = False) -> list[dict]:
@@ -813,7 +825,7 @@ def distribution(store: Store) -> dict:
         FROM indicator_definitions d JOIN indicator_releases r USING (indicator_id)
         JOIN indicator_series_versions s USING (indicator_release_id)
         JOIN indicator_observation_versions o USING (indicator_series_version_id)
-        WHERE d.dataset_code = 'TM_37663' AND o.revision_state != 'deleted'
+        WHERE d.dataset_code = 'TM_37663' AND d.indicator_code = 'esperanza_vida_nivel_educativo' AND o.revision_state != 'deleted'
         """).fetchall()
     store.series("ine_wstempus", "TM_37663", "esperanza_vida_nivel_educativo", "YR")
     edu: dict[str, dict[str, list]] = defaultdict(lambda: defaultdict(list))
@@ -831,6 +843,177 @@ def distribution(store: Store) -> dict:
                        key=lambda x: -x["gap"])
     return {"medical": {"year": year, "rows": med_rows}, "epf": epf,
             "life_expectancy_education": {age: dict(levels) for age, levels in edu.items()}, "education_gap_peers": peers_gap}
+
+
+BS_CROSS = ("minsan_barometro", "BS.cruces_2025")
+DENT_AGES = ["Y16-24", "Y25-34", "Y35-44", "Y45-64", "Y_GE65", "Y_GE75"]
+DENT_AGE_LABELS = {"Y16-24": "16–24", "Y25-34": "25–34", "Y35-44": "35–44", "Y45-64": "45–64", "Y_GE65": "65+", "Y_GE75": "75+",
+                   "Y_GE16": "16+"}
+QUINTS = ["QU1", "QU2", "QU3", "QU4", "QU5"]
+
+
+def moe95(pct: float, n: float) -> float:
+    """Half-width of a 95 % interval under simple random sampling, as the Barómetro's ficha técnica computes it."""
+    p = pct / 100
+    return r(196 * math.sqrt(p * (1 - p) / n), 1)
+
+
+def segments(store: Store, wait: dict, regions: dict) -> dict:
+    """Groups instead of the average person: the gaps panel, the per-group tables and the shared typical cases.
+
+    Barómetro groups come from one-variable cross sheets, so a typical case combines marginal cuts; the page says so.
+    """
+    def cross(code: str, unit: str = "PC") -> dict[str, dict[str, float]]:
+        out: dict[str, dict[str, float]] = defaultdict(dict)
+        for row in store.cells(*BS_CROSS, code, unit):
+            out[row["dims"]["breakdown"]][row["dims"]["group"]] = row["value"]
+        return out
+    bs = {code: cross(code) for code in ("pct_cita_mf_mismo_dia", "pct_cita_mf_dia_siguiente", "pct_especialista_solo_privada",
+                                         "pct_necesidad_salud_mental", "pct_salud_mental_seguro_privado",
+                                         "pct_salud_mental_privado_sin_seguro")}
+    bs_n = {code: cross(code, "N") for code in ("n_cita_mf", "n_especialista", "n_necesidad_salud_mental", "n_salud_mental_atendidos")}
+
+    def bs_group(kind: str, breakdown: str, group: str) -> dict:
+        codes, n_code = {
+            "gp_quick": (("pct_cita_mf_mismo_dia", "pct_cita_mf_dia_siguiente"), "n_cita_mf"),
+            "specialist_private": (("pct_especialista_solo_privada",), "n_especialista"),
+            "mental_need": (("pct_necesidad_salud_mental",), "n_necesidad_salud_mental"),
+            "mental_private": (("pct_salud_mental_seguro_privado", "pct_salud_mental_privado_sin_seguro"), "n_salud_mental_atendidos"),
+        }[kind]
+        value = sum(bs[c][breakdown][group] for c in codes)
+        n = bs_n[n_code][breakdown][group]
+        return {"value": r(value, 1), "n": r(n, 0), "moe": moe95(value, n)}
+
+    # Every sheet carries the same groups for every question, so the GP block lists them for all four tables.
+    groups = {breakdown: list(by_group) for breakdown, by_group in bs["pct_cita_mf_mismo_dia"].items() if breakdown != "total"}
+    tables = {kind: {breakdown: [{"group": g, **bs_group(kind, breakdown, g)} for g in names] for breakdown, names in groups.items()}
+              for kind in ("gp_quick", "specialist_private", "mental_need", "mental_private")}
+    nat = {kind: bs_group(kind, "total", "TOTAL") for kind in tables}
+
+    def silc(dataset: str, code: str) -> list[dict]:
+        return annual_points(store.series("eurostat_sdmx", dataset, code, "PC").get("ES", []), 1)
+    med = {q: silc("hlth_silc_08", f"TXP_TFAR_WLIST.{q}.Y_GE16.T.PC") for q in ("QU1", "QU5", "TOTAL")}
+    dental: dict[str, dict[str, list[dict]]] = defaultdict(dict)
+    for q in ["TOTAL", *QUINTS]:
+        for age in [*DENT_AGES, "Y_GE16"]:
+            dental[q][age] = silc("hlth_silc_09", f"TXP.{q}.{age}.T.PC")
+    year = max(p["year"] for p in dental["QU1"]["Y45-64"])
+    med_year = max(p["year"] for p in med["QU1"])
+    d = lambda q, age: at_year(dental[q][age], year)  # noqa: E731
+    dental_grid = {"year": year, "ages": [*DENT_AGES, "Y_GE16"], "age_labels": DENT_AGE_LABELS, "quintiles": ["TOTAL", *QUINTS],
+                   "values": {q: {age: d(q, age) for age in [*DENT_AGES, "Y_GE16"]} for q in ["TOTAL", *QUINTS]}}
+    peak_age = max(DENT_AGES, key=lambda age: d("QU1", age) or 0)
+
+    edu: dict[tuple[str, str, str], float] = {}
+    edu_year = None
+    for row in store.cells("ine_wstempus", "TM_37663", "esperanza_vida_nivel_educativo_sexo", "YR"):
+        edu_year = max(edu_year or 0, int(row["period"]))
+    for row in store.cells("ine_wstempus", "TM_37663", "esperanza_vida_nivel_educativo_sexo", "YR"):
+        if int(row["period"]) == edu_year:
+            edu[(row["dims"]["age"], row["dims"]["sex_es"], row["dims"]["education"])] = r(row["value"], 2)
+    totals_rows = store.conn.execute(
+        """
+        SELECT json_extract(s.dimensions_json, '$.age'), o.value_decimal
+        FROM indicator_definitions d JOIN indicator_releases r USING (indicator_id)
+        JOIN indicator_series_versions s USING (indicator_release_id)
+        JOIN indicator_observation_versions o USING (indicator_series_version_id)
+        WHERE d.dataset_code = 'TM_37663' AND d.indicator_code = 'esperanza_vida_nivel_educativo'
+          AND json_extract(s.dimensions_json, '$.education') = 'total' AND o.period_label = ? AND o.revision_state != 'deleted'
+        """, (str(edu_year),)).fetchall()
+    le_total = {age: r(float(v), 2) for age, v in totals_rows}
+    le_edu_sex = {"year": edu_year, "values": {f"{a}|{s}|{e}": v for (a, s, e), v in sorted(edu.items())}, "total": le_total,
+                  "gap_30": r(edu[("30 años", "F", "superior")] - edu[("30 años", "M", "primaria")], 1)}
+
+    days = {row["code"]: row["days"] for row in regions["rows"]}
+    region_names = {row["code"]: row["name"] for row in regions["rows"]}
+    nat_days = next(p["value"] for p in wait["national_selected_days"] if p["date"] == regions["cut"])
+    bs_ccaa = {"01": "Andalucía", "08": "Castilla-La Mancha", "13": "Madrid (Comunidad de)"}
+
+    village, city = "Menos o igual a 2.000 habitantes", "Más de 1.000.000 habitantes"
+    gaps = [
+        {"id": "medico", "label": "Médico: renuncia por coste, distancia o lista de espera", "dimension": "renta",
+         "a": {"label": "20 % con menos ingresos", "value": at_year(med["QU1"], med_year)},
+         "b": {"label": "20 % con más ingresos", "value": at_year(med["QU5"], med_year)},
+         "national": at_year(med["TOTAL"], med_year), "source": f"Eurostat hlth_silc_08, {med_year}, 16 años o más"},
+        {"id": "dentista", "label": "Dentista: renuncia por ser demasiado caro", "dimension": "renta",
+         "a": {"label": "20 % con menos ingresos", "value": d("QU1", "Y_GE16")},
+         "b": {"label": "20 % con más ingresos", "value": d("QU5", "Y_GE16")},
+         "peak": {"label": f"20 % con menos ingresos de {DENT_AGE_LABELS[peak_age]} años", "value": d("QU1", peak_age)},
+         "national": d("TOTAL", "Y_GE16"), "source": f"Eurostat hlth_silc_09, {year}, 16 años o más"},
+        {"id": "especialista", "label": "Especialista: fue solo a la sanidad privada", "dimension": "renta",
+         "a": {"label": "Clase alta y media alta", **bs_group("specialist_private", "clase", "Clase alta y media alta")},
+         "b": {"label": "Clase baja o pobre", **bs_group("specialist_private", "clase", "Clase baja/pobre")},
+         "national": nat["specialist_private"]["value"], "source": "Barómetro Sanitario 2025, clase social autodeclarada, 18 años o más"},
+        {"id": "salud_mental", "label": "Salud mental: atendido en la privada (con seguro o pagando)", "dimension": "edad",
+         "a": {"label": "18 a 24 años", **bs_group("mental_private", "edad", "De 18 a 24 años")},
+         "b": {"label": "65 a 74 años", **bs_group("mental_private", "edad", "De 65 a 74 años")},
+         "national": nat["mental_private"]["value"], "source": "Barómetro Sanitario 2025, de quienes necesitaron atención"},
+        {"id": "cita_mf", "label": "Médico de familia: le atendió el mismo día o al siguiente", "dimension": "territorio",
+         "a": {"label": "Municipios de hasta 2.000 habitantes", **bs_group("gp_quick", "municipio", village)},
+         "b": {"label": "Municipios de más de un millón", **bs_group("gp_quick", "municipio", city)},
+         "national": nat["gp_quick"]["value"], "source": "Barómetro Sanitario 2025, de quienes consultaron"},
+    ]
+
+    def item(label: str, value: float | None, national: float | None, unit: str, cut: str, source: str, moe: float | None = None,
+             note: str | None = None) -> dict:
+        out = {"label": label, "value": value, "national": national, "unit": unit, "cut": cut, "source": source}
+        if moe is not None:
+            out["moe"] = moe
+        if note:
+            out["note"] = note
+        return out
+
+    def bs_item(label: str, kind: str, breakdown: str, group: str, cut: str) -> dict:
+        g = bs_group(kind, breakdown, group)
+        return item(label, g["value"], nat[kind]["value"], "pct", cut, "Barómetro Sanitario 2025", g["moe"])
+
+    def wait_item(code: str) -> dict:
+        return item("Espera media para operarse (procesos más comunes)", days[code], nat_days, "days", region_names[code],
+                    f"SISLE, {regions['cut'][:4]}")
+    cases = [
+        {"id": "persona-1", "name": "Lucía", "who": "25–29 años, asalariada, vive sola de alquiler en la ciudad de Madrid",
+         "items": [
+             bs_item("Necesitó atención de salud mental en el último año", "mental_need", "edad", "De 25 a 34 años", "personas de 25 a 34 años"),
+             bs_item("De ellas, atendidas en la privada", "mental_private", "edad", "De 25 a 34 años", "personas de 25 a 34 años"),
+             bs_item("Su médico de familia la atiende el mismo día o al siguiente", "gp_quick", "municipio", city, "municipios de más de un millón de habitantes"),
+             item("Renuncia al dentista por ser demasiado caro", d("TOTAL", "Y25-34"), d("TOTAL", "Y_GE16"), "pct", "personas de 25 a 34 años",
+                  f"Eurostat hlth_silc_09, {year}", note=f"{num_es(d('QU1', 'Y25-34'))} % si está en el 20 % con menos ingresos"),
+             wait_item("13"),
+         ]},
+        {"id": "persona-3", "name": "Antonio", "who": "45–64 años, estudios primarios, trabajador manual en Andalucía",
+         "items": [
+             item("Esperanza de vida a los 30 años", edu[("30 años", "M", "primaria")], le_total["30 años"], "years",
+                  "hombres con estudios primarios o menos", f"INE, tabla 37663, {edu_year}"),
+             item("Renuncia al dentista por ser demasiado caro", d("QU1", "Y45-64"), d("TOTAL", "Y_GE16"), "pct",
+                  "45 a 64 años del 20 % con menos ingresos (cruce observado)", f"Eurostat hlth_silc_09, {year}"),
+             bs_item("Su médico de familia le atiende el mismo día o al siguiente", "gp_quick", "comunidad", bs_ccaa["01"], "Andalucía"),
+             wait_item("01"),
+         ]},
+        {"id": "persona-4", "name": "Carmen", "who": "65 años o más, pensionista, propietaria sin hipoteca en un pueblo de Castilla-La Mancha",
+         "items": [
+             bs_item("Su médico de familia la atiende el mismo día o al siguiente", "gp_quick", "municipio", village, "municipios de hasta 2.000 habitantes"),
+             wait_item("08"),
+             item("Renuncia al dentista por ser demasiado caro", d("TOTAL", "Y_GE65"), d("TOTAL", "Y_GE16"), "pct", "personas de 65 años o más",
+                  f"Eurostat hlth_silc_09, {year}", note=f"{num_es(d('QU1', 'Y_GE65'))} % si está en el 20 % con menos ingresos"),
+             item("Años que le quedan por vivir a los 65", edu[("65 años", "F", "primaria")], le_total["65 años"], "years",
+                  "mujeres con estudios primarios o menos", f"INE, tabla 37663, {edu_year}"),
+         ]},
+        {"id": "persona-5", "name": "Laura", "who": "45–54 años, universitaria, profesional en Madrid",
+         "items": [
+             bs_item("Fue al especialista solo en la privada", "specialist_private", "clase", "Clase alta y media alta", "clase alta y media alta (autodeclarada)"),
+             item("Esperanza de vida a los 30 años", edu[("30 años", "F", "superior")], le_total["30 años"], "years",
+                  "mujeres con estudios superiores", f"INE, tabla 37663, {edu_year}"),
+             item("Renuncia al dentista por ser demasiado caro", d("QU5", "Y45-64"), d("TOTAL", "Y_GE16"), "pct",
+                  "45 a 64 años del 20 % con más ingresos (cruce observado)", f"Eurostat hlth_silc_09, {year}"),
+             wait_item("13"),
+         ]},
+    ]
+    return {"gaps": gaps, "tables": tables, "national": nat, "dental_grid": dental_grid, "life_expectancy_edu_sex": le_edu_sex,
+            "cases": cases, "barometro_year": 2025}
+
+
+def num_es(value: float, digits: int = 1) -> str:
+    return f"{value:.{digits}f}".replace(".", ",")
 
 
 def build(conn: sqlite3.Connection) -> dict:
@@ -856,6 +1039,7 @@ def build(conn: sqlite3.Connection) -> dict:
     bases = base_years(store, money)
     older = waits_per_older(store, wait)
     dist = distribution(store)
+    seg = segments(store, wait, regions)
     story["dental"] = {"year": patient["dental_cost"]["year"],
                        "rows": [row for row in patient["dental_cost"]["rows"] if row["code"] in ("ES", "DE", "FR", "IT", "PT", "EU27_2020")]}
 
@@ -918,6 +1102,7 @@ def build(conn: sqlite3.Connection) -> dict:
         "base_years": bases,
         "waits_per_older": older,
         "distribution": dist,
+        "segments": seg,
         "sources": sources,
     }
 
@@ -1015,6 +1200,15 @@ def write_csv(data: dict, path: Path) -> None:
         rows.append(("oecd_health_statistics", "medicos_formados_en_espana_en_destino", x["code"], x["year"], x["value"]))
     for row in data["regions"]["rows"]:
         rows.append(("ine_wstempus:1448", "esperanza_vida_ccaa", row["code"], data["regions"]["le_year"], row["life_expectancy"]))
+    seg = data["segments"]
+    for q, by_age in seg["dental_grid"]["values"].items():
+        rows.extend(("eurostat_sdmx:hlth_silc_09", f"dental_no_atendida_coste_{q.lower()}_{age}_pct", "ES", seg["dental_grid"]["year"], v)
+                    for age, v in by_age.items() if v is not None)
+    for kind, by_breakdown in seg["tables"].items():
+        for breakdown, groups in by_breakdown.items():
+            rows.extend(("minsan_barometro:cruces", f"{kind}_{breakdown}_pct|{g['group']}", "ES", seg["barometro_year"], g["value"]) for g in groups)
+    for key, value in seg["life_expectancy_edu_sex"]["values"].items():
+        rows.append(("ine_wstempus:37663", f"esperanza_vida_{key}", "ES", seg["life_expectancy_edu_sex"]["year"], value))
     buf = io.StringIO()
     writer = csv.writer(buf, lineterminator="\n")
     writer.writerow(["fuente", "serie", "area", "periodo", "valor"])

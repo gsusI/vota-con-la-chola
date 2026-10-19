@@ -8,6 +8,7 @@ import Explain from "./Explain";
 import Scatter from "./Scatter";
 import ConnectedScatter from "./ConnectedScatter";
 import Dumbbell from "./Dumbbell";
+import GapDumbbell, { DIMENSION_COLORS, DIMENSION_LABELS } from "./GapDumbbell";
 
 export const metadata = {
   title: "Sanidad en España: esperanza de vida, gasto y listas de espera | Vota Con La Chola",
@@ -95,6 +96,7 @@ export default function SanidadPage() {
     oecd: { label: `OCDE, Health Statistics vía DBnomics${retrieved("oecd_health_statistics")}`, href: src.oecd_health_statistics.page },
     sisle: { label: `Ministerio de Sanidad, SISLE-SNS${retrieved("minsan_sisle_sns")}`, href: src.minsan_sisle_sns.page },
     egsp: { label: `Ministerio de Sanidad, EGSP${retrieved("minsan_egsp")}`, href: src.minsan_egsp.page },
+    barometro: { label: `Ministerio de Sanidad y CIS, Barómetro Sanitario${retrieved("minsan_barometro")}`, href: src.minsan_barometro.page },
   };
 
   // 1. Life expectancy
@@ -237,6 +239,14 @@ export default function SanidadPage() {
   const hlyRows = peerRows(out.hly, hlyYear);
   const hlyEs = at(out.hly.ES, hlyYear);
   const hlyEu = at(out.hly.EU27_2020, hlyYear);
+  // Eurostat flags a series break in Spain's last year: compare it with the EU only next to the year before the break.
+  const hlyBreak = /b/.test(out.hly.ES.at(-1).status || "");
+  const hlyPrevYear = out.hly.ES.at(-2).year;
+  const hlyEsPrev = at(out.hly.ES, hlyPrevYear);
+  const hlyEuPrev = at(out.hly.EU27_2020, hlyPrevYear);
+  const hlyText = hlyBreak
+    ? `${num(hlyEs)} años de vida saludable en ${hlyYear} frente a ${num(hlyEu)} en la UE, pero ese año la serie española tiene una ruptura (Eurostat la marca con «b»): hasta ${hlyPrevYear} España estaba por debajo de la UE (${num(hlyEsPrev)} frente a ${num(hlyEuPrev)})`
+    : `${num(hlyEs)} años de vida saludable frente a ${num(hlyEu)} en la UE`;
   const leForHly = at(out.hly_le.ES, hlyYear);
   const trtYear = out.treatable.ES.at(-1).year;
   const trtEs = at(out.treatable.ES, trtYear);
@@ -426,6 +436,18 @@ export default function SanidadPage() {
   // 13. «El dato mata el relato»
   const story = data.data_vs_story;
 
+  // 14. Groups instead of the average person: gaps panel and typical cases (shared definitions across /visualizaciones/)
+  const seg = data.segments;
+  const gapRow = (id) => seg.gaps.find((row) => row.id === id);
+  const gpGap = gapRow("cita_mf");
+  const dentGap = gapRow("dentista");
+  const mentalGap = gapRow("salud_mental");
+  const medGap = gapRow("medico");
+  const specGap = gapRow("especialista");
+  const leSex = seg.life_expectancy_edu_sex;
+  const leMenPrim = leSex.values["30 años|M|primaria"];
+  const leWomenSup = leSex.values["30 años|F|superior"];
+
   // 12. Regions side by side
   const reg = data.regions;
   const regComplete = reg.rows.filter((row) => row.spend != null);
@@ -454,10 +476,10 @@ export default function SanidadPage() {
         <h2 id="resumen-title">Lo esencial, con sus cifras</h2>
         <ol>
           <li>
-            <strong>Se vive mucho y con salud.</strong> {num(leH.es)} años de esperanza de vida en {leH.year} ({num(leH.eu27)} en la UE), puesto {leH.world_rank.position} de {leH.world_rank.of} en el mundo, y {num(hlyEs)} años de vida saludable frente a {num(hlyEu)} en la UE. La mortalidad que una buena atención sanitaria puede evitar es de {num(trtEs, 0)} muertes por 100.000 habitantes frente a {num(trtEu, 0)} en la UE.
+            <strong>{hlyBreak ? "Se vive mucho, pero no igual para todos." : "Se vive mucho y con salud."}</strong> {num(leH.es)} años de esperanza de vida en {leH.year} ({num(leH.eu27)} en la UE), puesto {leH.world_rank.position} de {leH.world_rank.of} en el mundo, y {hlyText}. A los 30 años, a un hombre con estudios primarios le quedan {num(leMenPrim)} años de vida y a una mujer universitaria {num(leWomenSup)}: {num(leSex.gap_30)} años de diferencia ({leSex.year}). La mortalidad que una buena atención sanitaria puede evitar es de {num(trtEs, 0)} muertes por 100.000 habitantes frente a {num(trtEu, 0)} en la UE.
           </li>
           <li>
-            <strong>Con menos gasto público que la media, no con un gasto medio.</strong> {num(spH.pct_gdp_es)} % del PIB frente a {num(spH.pct_gdp_eu27)} % en la UE; por habitante, un {num(ppsRatio, 0)} % de la media europea, y un {num(ppsRatioAdj, 0)} % si se descuenta que la población española es algo más joven. Los hogares pagan de su bolsillo el {num(oopEs)} % del gasto ({num(oopEu)} % en la UE).
+            <strong>Con menos gasto público que la media, no con un gasto medio.</strong> {num(spH.pct_gdp_es)} % del PIB frente a {num(spH.pct_gdp_eu27)} % en la UE; por habitante, un {num(ppsRatio, 0)} % de la media europea, y un {num(ppsRatioAdj, 0)} % si se descuenta que la población española es algo más joven. Los hogares pagan de su bolsillo el {num(oopEs)} % del gasto ({num(oopEu)} % en la UE). El 20 % más pobre dedica a la sanidad una parte menor de su presupuesto ({num(at(epfShare["Quintil 1"], epfYear))} % frente a {num(at(epfShare["Quintil 5"], epfYear))} % del más rico) no porque esté mejor cubierto, sino porque renuncia: el {num(dentGap.a.value)} % deja el dentista por no poder pagarlo, frente al {num(dentGap.b.value)} %.
           </li>
           <li>
             <strong>Cada vez más gente espera.</strong> Desde {sinceLabel}, los pacientes en lista para operarse por 1.000 habitantes suben un {num(surgeryRateChange, 0)} % y los que esperan al especialista un {num(consultRateChange, 0)} %. Por persona de 65 años o más, la lista quirúrgica crece un {num(older.surgery.change_per65, 0)} %: el envejecimiento explica una parte, no todo. Desde {bases.first} el gasto real en hospitales sube un {num(g02.hosp, 0)} % y el de atención primaria un {num(g02.prim, 0)} %; los recortes de 2010–2013 la golpearon el doble. Siete de cada diez pacientes no consiguen cita con su médico de familia para el mismo día o el siguiente ({num(noSlotLast.value, 0)} % por falta de hueco, {pcLast.year}).
@@ -470,7 +492,7 @@ export default function SanidadPage() {
           </li>
         </ol>
         <p>
-          Índice: <a href="#el-dato-mata-el-relato">el dato frente al relato</a> · <a href="#esperanza-de-vida">esperanza de vida</a> · <a href="#salud-y-mortalidad">vida saludable y mortalidad evitable</a> · <a href="#envejecimiento">envejecimiento</a> · <a href="#gasto-pib">gasto</a> · <a href="#pago-directo">bolsillo y seguros</a> · <a href="#lo-que-paga-el-paciente">lo que paga el paciente</a> · <a href="#desigualdad">desigualdad</a> · <a href="#a-donde-va-el-dinero">a dónde va el dinero</a> · <a href="#listas-quirurgicas">listas de espera</a> · <a href="#operaciones">operaciones concretas</a> · <a href="#consultas">especialista</a> · <a href="#atencion-primaria">médico de familia</a> · <a href="#percepcion">opinión</a> · <a href="#medicos">médicos</a> · <a href="#enfermeras">enfermeras</a> · <a href="#sueldos-y-emigracion">sueldos y emigración</a> · <a href="#comunidades">comunidades</a> · <a href="#conclusion">conclusión</a> · <a href="#glosario">glosario</a>
+          Índice: <a href="#el-dato-mata-el-relato">el dato frente al relato</a> · <a href="#casos">cuatro personas</a> · <a href="#esperanza-de-vida">esperanza de vida</a> · <a href="#salud-y-mortalidad">vida saludable y mortalidad evitable</a> · <a href="#envejecimiento">envejecimiento</a> · <a href="#gasto-pib">gasto</a> · <a href="#pago-directo">bolsillo y seguros</a> · <a href="#lo-que-paga-el-paciente">lo que paga el paciente</a> · <a href="#desigualdad">desigualdad</a> · <a href="#a-donde-va-el-dinero">a dónde va el dinero</a> · <a href="#listas-quirurgicas">listas de espera</a> · <a href="#operaciones">operaciones concretas</a> · <a href="#consultas">especialista</a> · <a href="#atencion-primaria">médico de familia</a> · <a href="#percepcion">opinión</a> · <a href="#medicos">médicos</a> · <a href="#enfermeras">enfermeras</a> · <a href="#sueldos-y-emigracion">sueldos y emigración</a> · <a href="#comunidades">comunidades</a> · <a href="#conclusion">conclusión</a> · <a href="#glosario">glosario</a>
         </p>
       </section>
 
@@ -479,7 +501,7 @@ export default function SanidadPage() {
           <span className="vizStat__label">Esperanza de vida al nacer ({leH.year})</span>
           <span className="vizStat__value">{num(leH.es)} años</span>
           <span className="vizStat__note">
-            UE-27: {num(leH.eu27)}. Puesto {leH.world_rank.position} de {leH.world_rank.of} países y territorios ({leH.world_year}); {leH.oecd_rank.position}.º de la OCDE
+            UE-27: {num(leH.eu27)}. Puesto {leH.world_rank.position} de {leH.world_rank.of} países y territorios ({leH.world_year}). A los 30 años quedan {num(leMenPrim)} a un hombre con primaria y {num(leWomenSup)} a una mujer universitaria ({leSex.year})
           </span>
         </div>
         <div className="card vizStat">
@@ -490,17 +512,17 @@ export default function SanidadPage() {
           </span>
         </div>
         <div className="card vizStat">
-          <span className="vizStat__label">Pacientes esperando una operación, por 1.000 habitantes</span>
-          <span className="vizStat__value">+{num(surgeryRateChange, 0)} %</span>
+          <span className="vizStat__label">Su médico de familia le atiende el mismo día o al siguiente ({seg.barometro_year})</span>
+          <span className="vizStat__value">{num(gpGap.national, 0)} %</span>
           <span className="vizStat__note">
-            {num(wH.surgery_rate[0])} en {sinceLabel} → {num(wH.surgery_rate[1])} en {lastLabel} ({formatHealth(wH.surgery_patients[1], "count")} personas)
+            {num(gpGap.a.value, 0)} % en municipios de hasta 2.000 habitantes; {num(gpGap.b.value, 0)} % en los de más de un millón
           </span>
         </div>
         <div className="card vizStat">
           <span className="vizStat__label">Espera media en las operaciones más comunes</span>
           <span className="vizStat__value">{num(wH.selected_days[1], 0)} días</span>
           <span className="vizStat__note">
-            {num(wH.selected_days[0], 0)} en {sinceLabel} (+{num(selectedChange, 0)} %); la media de toda la lista baja de {num(wH.surgery_days[0], 0)} a {num(wH.surgery_days[1], 0)}
+            {num(wH.selected_days[0], 0)} en {sinceLabel} (+{num(selectedChange, 0)} %), con {num(surgeryRateChange, 0)} % más pacientes en lista por habitante; la media de toda la lista baja de {num(wH.surgery_days[0], 0)} a {num(wH.surgery_days[1], 0)}
           </span>
         </div>
       </section>
@@ -508,9 +530,10 @@ export default function SanidadPage() {
       <Figure
         id="el-dato-mata-el-relato"
         title={`España logra la mortalidad tratable de los países que más gastan (${num(story.countries.spain.y, 0)} muertes por 100.000) con un ${num(100 - story.countries.spain.x, 0)} % menos de gasto público por habitante que la media de la UE, ya descontada la edad de su población; dentro de España, el gasto real subió en las ${story.regions.n} comunidades entre ${story.regions.from} y ${story.regions.to} y aun así la espera para las operaciones más comunes creció en ${story.regions.days_up}`}
-        dek={`Dos gráficos que se leen juntos. Arriba, los ${story.countries.rows.length} países de la UE: cuanto más gasta un país, menos muertes evitables por atención sanitaria tiene (correlación de rangos ${num(story.countries.rho, 2)}), y España queda muy por debajo de esa pauta: ningún país que gaste menos tiene menos mortalidad tratable, y solo ${story.countries.lower_mortality.length} la tienen menor, todos gastando por encima de la media. Abajo, las comunidades: el gasto real por habitante pasó de ${formatHealth(story.regions.total.x0, "eur")} a ${formatHealth(story.regions.total.x, "eur")} (euros de 2020), y la espera de los procesos seleccionados subió en ${story.regions.days_up} de ${story.regions.n} y los pacientes en lista por habitante en ${story.regions.rate_up}.`}
-        sources={[S.eurostat, S.egsp, S.sisle, S.oecd]}
+        dek={`Tres paneles que se leen juntos. Arriba, los ${story.countries.rows.length} países de la UE: cuanto más gasta un país, menos muertes evitables por atención sanitaria tiene (correlación de rangos ${num(story.countries.rho, 2)}), y España queda muy por debajo de esa pauta: ningún país que gaste menos tiene menos mortalidad tratable, y solo ${story.countries.lower_mortality.length} la tienen menor, todos gastando por encima de la media. Abajo, las comunidades: el gasto real por habitante pasó de ${formatHealth(story.regions.total.x0, "eur")} a ${formatHealth(story.regions.total.x, "eur")} (euros de 2020), y la espera de los procesos seleccionados subió en ${story.regions.days_up} de ${story.regions.n} y los pacientes en lista por habitante en ${story.regions.rate_up}. Al final, dentro de España: lo que el sistema público cubre llega casi igual a todos los grupos; lo que no cubre, no.`}
+        sources={[S.eurostat, S.egsp, S.sisle, S.oecd, S.barometro]}
         notes={[
+          `Panel 3: renuncia médica y dental, EU-SILC (Eurostat hlth_silc_08 y hlth_silc_09), quintiles de renta equivalente, 16 años o más. Especialista, salud mental y cita con el médico de familia: Barómetro Sanitario ${seg.barometro_year} (Ministerio de Sanidad y CIS), 18 años o más; la clase es la que declara el encuestado, no su renta. Cada fila compara los dos extremos de una sola variable: el Barómetro no publica cruces dobles. El margen de error es el del muestreo aleatorio simple sobre la muestra ponderada de cada grupo, como en la ficha técnica; con grupos de menos de 200 personas supera los 7 puntos.`,
           `Países: gasto público y obligatorio (HF1) en estándar de poder de compra por habitante, como índice UE-27 = 100 en cada año para que la inflación no desplace los puntos, y ajustado por la estructura de edades de cada país con el perfil de coste por edad español (España pasa de ${num(story.countries.spain.x_raw)} a ${num(story.countries.spain.x)}); mortalidad tratable estandarizada por edad. Trayectorias ${story.countries.first} → ${story.countries.last} para España, Alemania, Francia, Italia, Portugal y la media UE (cuadrado).`,
           `Comunidades: gasto sanitario público consolidado del sector CCAA (EGSP), deflactado a euros de 2020 con el índice de precios que la OCDE aplica al gasto sanitario español (${story.regions.from}: ${num(story.regions.deflator[story.regions.from], 3)}; ${story.regions.to}: ${num(story.regions.deflator[story.regions.to], 3)}). Espera media de los procesos seleccionados del SISLE en diciembre de cada año; tamaño del círculo = pacientes en esa lista por 1.000 habitantes. Ajustado por la estructura de edades de cada comunidad (a la de España) con el mismo perfil de coste por edad. Ceuta y Melilla no tienen gasto en la EGSP. ${story.regions.from} es el primer año comparable tras la ruptura de Andalucía.`,
           `Correlación de rangos entre gasto y espera en ${story.regions.to}: ${num(story.regions.rho_level, 2)}; entre la subida del gasto y la subida de la espera: ${num(story.regions.rho_change, 2)} (las comunidades que más subieron el gasto no redujeron más la espera).`,
@@ -575,21 +598,39 @@ export default function SanidadPage() {
           ariaLabel="Comunidades autónomas: gasto real por habitante frente a días de espera, de 2018 a 2024"
         />
         <h3 className="vizPanelTitle">
-          3. Lo que la sanidad pública no cubre: renuncian al dentista por no poder pagarlo, {story.dental.year}
-          <span>% del quintil de ingresos más bajo (naranja) y más alto (verde)</span>
+          3. ¿Para quién se cumple? Lo que separa a unos grupos de otros dentro de España
+          <span>% de personas de cada grupo, misma escala para todas las filas; la raya gris es la media de España</span>
         </h3>
-        <Dumbbell
-          rows={story.dental.rows}
-          leftKey="poor"
-          rightKey="rich"
-          leftLabel="20 % con menos ingresos"
-          rightLabel="20 % con más ingresos"
-          highlight={["ES"]}
-          ariaLabel="Necesidad dental no atendida por coste, quintiles de ingresos extremos, España y comparables"
+        <ul className="vizLegend" aria-label="Leyenda del panel de brechas">
+          {Object.entries(DIMENSION_LABELS).map(([key, label]) => (
+            <li key={key}><span className="vizLegend__key" style={{ background: DIMENSION_COLORS[key], width: 10, height: 10, borderRadius: 5 }} aria-hidden="true" />{label}</li>
+          ))}
+          <li><span aria-hidden="true" style={{ whiteSpace: "nowrap" }}>● ○</span>&nbsp;Los dos grupos que se comparan, nombrados bajo cada fila</li>
+          <li><span aria-hidden="true">├┤</span>&nbsp;Margen de error al 95 % de la encuesta (Barómetro)</li>
+        </ul>
+        <GapDumbbell rows={seg.gaps} ariaLabel="Brechas entre grupos en el acceso a la sanidad: renta, edad y tamaño del municipio" />
+        <HealthTable
+          periodLabel="Servicio y grupos"
+          keyOf={(p) => p.key}
+          labelOf={(k) => k}
+          caption="Ver los datos del panel de brechas en tabla"
+          series={[
+            { id: "ga", label: "Grupo lleno (●), %", points: seg.gaps.map((g) => ({ key: `${g.label}: ${g.a.label} / ${g.b.label}`, value: g.a.value })) },
+            { id: "gb", label: "Grupo hueco (○), %", points: seg.gaps.map((g) => ({ key: `${g.label}: ${g.a.label} / ${g.b.label}`, value: g.b.value })) },
+            { id: "gn", label: "Media de España, %", points: seg.gaps.map((g) => ({ key: `${g.label}: ${g.a.label} / ${g.b.label}`, value: g.national })) },
+            { id: "gma", label: "Margen ±, grupo lleno (puntos)", unit: "ratio", points: seg.gaps.filter((g) => g.a.moe).map((g) => ({ key: `${g.label}: ${g.a.label} / ${g.b.label}`, value: g.a.moe })) },
+            { id: "gmb", label: "Margen ±, grupo hueco (puntos)", unit: "ratio", points: seg.gaps.filter((g) => g.b.moe).map((g) => ({ key: `${g.label}: ${g.a.label} / ${g.b.label}`, value: g.b.moe })) },
+          ]}
         />
         <section aria-label="Qué relatos zanja este gráfico">
           <p>
-            <strong>«Tenemos la mejor sanidad del mundo».</strong> En resultados, casi: pocas muertes evitables con poco dinero. En acceso, no: las esperas crecen en casi todas las comunidades, y lo que la sanidad pública no cubre, como el dentista, deja fuera al {num(story.dental.rows.find((row) => row.code === "ES").poor)} % de los más pobres.
+            <strong>«Tenemos la mejor sanidad del mundo».</strong> En resultados, casi: pocas muertes evitables con poco dinero. En acceso, no: las esperas crecen en casi todas las comunidades, y lo que la sanidad pública no cubre, como el dentista, deja fuera al {num(dentGap.a.value)} % de los más pobres (al {num(dentGap.peak.value)} % entre los de {dentGap.peak.label.replace(/^20 % con menos ingresos de /, "")}).
+          </p>
+          <p>
+            <strong>«La sanidad pública trata igual a todos».</strong> En lo que cubre, sí: renunciar al médico apenas depende de la renta ({num(medGap.a.value)} % frente a {num(medGap.b.value)} %). En lo que no cubre o cubre tarde, no: el {num(mentalGap.a.value, 0)} % de los jóvenes de 18 a 24 años que recibieron atención de salud mental la pagó en la privada (el {num(mentalGap.b.value, 0)} % de los de 65 a 74), y quien se declara de clase alta va al especialista solo por la privada {num(specGap.a.value / specGap.b.value, 0)} veces más que quien se declara de clase baja.
+          </p>
+          <p>
+            <strong>«En los pueblos no hay médico».</strong> En la cita con el médico de familia, al revés: en los municipios de hasta 2.000 habitantes atienden el mismo día o al siguiente al {num(gpGap.a.value, 0)} %, y en los de más de un millón al {num(gpGap.b.value, 0)} %. Este dato no mide la distancia al centro de salud, al hospital o a urgencias.
           </p>
           <p>
             <strong>«La sanidad se hunde por los recortes».</strong> Los recortes fueron reales en 2010–2013 (ver el gasto por habitante), pero entre {story.regions.from} y {story.regions.to} el gasto real subió en las {story.regions.spend_up} comunidades y la espera subió en {story.regions.days_up} de ellas: el problema de acceso de estos años no se explica por menos dinero.
@@ -598,10 +639,43 @@ export default function SanidadPage() {
             <strong>«Basta con gastar más».</strong> Entre países, gastar más va con menos mortalidad tratable; entre comunidades, gastar más no va con esperar menos ({num(story.regions.rho_level, 2)}).
           </p>
           <p>
-            <strong>Lo que sigue siendo ambiguo.</strong> Por qué España saca tanto con tan poco (¿sistema, hábitos, salarios sanitarios bajos?), si la demanda creció más deprisa que el gasto (envejecimiento, pacientes que antes no se apuntaban) y si las listas de cada comunidad miden lo mismo. Ningún gráfico con estos datos puede separar esas causas.
+            <strong>Lo que sigue siendo ambiguo.</strong> Por qué España saca tanto con tan poco (¿sistema, hábitos, salarios sanitarios bajos?), si la demanda creció más deprisa que el gasto (envejecimiento, pacientes que antes no se apuntaban) y si las listas de cada comunidad miden lo mismo. Ningún gráfico con estos datos puede separar esas causas. Tampoco hay esperas por edad, renta ni municipio: el SISLE solo las publica por comunidad.
           </p>
         </section>
       </Figure>
+
+      <section id="casos" aria-labelledby="casos-title">
+        <h2 id="casos-title" style={{ marginTop: "2.5rem" }}>Cuatro personas en lugar de una media</h2>
+        <p>
+          «España» no va al médico: van personas que viven en sitios distintos, con edades y rentas distintas. Estas cuatro son las mismas en todas las páginas de visualizaciones. Al lado de cada cifra va la media de España, para ver el salto.
+        </p>
+        <p style={{ fontSize: "0.86rem", color: "var(--viz-muted)" }}>
+          Cómo se construyen: no hay una estadística oficial de «mujeres de 27 años que viven solas de alquiler en Madrid». Cada cifra viene del corte de una sola variable que describe a la persona (su edad, su municipio, su comunidad o su clase), salvo las marcadas como cruce observado, que salen de una tabla con edad y renta a la vez. El Barómetro lleva su margen de error al 95 %.
+        </p>
+        <div className="vizStats">
+          {seg.cases.map((person) => (
+            <div className="card vizStat" key={person.id} id={person.id}>
+              <span className="vizStat__value" style={{ fontSize: "1.35rem" }}>{person.name}</span>
+              <span className="vizStat__label">{person.who}</span>
+              <dl style={{ display: "grid", gap: 10, margin: "8px 0 0" }}>
+                {person.items.map((it) => (
+                  <div key={it.label}>
+                    <dt style={{ fontSize: "0.82rem", color: "var(--viz-ink-2)" }}>{it.label}</dt>
+                    <dd style={{ margin: 0 }}>
+                      <strong style={{ fontSize: "1.1rem" }}>{formatHealth(it.value, it.unit, 1)}</strong>
+                      {it.moe ? <span style={{ fontSize: "0.78rem", color: "var(--viz-muted)" }}> ±{formatHealth(it.moe, "ratio", 1)}</span> : null}
+                      <span style={{ fontSize: "0.82rem", color: "var(--viz-muted)" }}> · media {formatHealth(it.national, it.unit, 1)}</span>
+                      <span style={{ display: "block", fontSize: "0.76rem", color: "var(--viz-muted)" }}>
+                        {it.cut}{it.note ? `; ${it.note}` : ""} · {it.source}
+                      </span>
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          ))}
+        </div>
+      </section>
 
       <h2 style={{ marginTop: "2.5rem" }}>1. Resultados de salud</h2>
       <p style={{ color: "var(--ink-soft)" }}>¿Vivimos mucho y bien, y cuánto tiene que ver la sanidad?</p>
@@ -683,11 +757,14 @@ export default function SanidadPage() {
 
       <Figure
         id="salud-y-mortalidad"
-        title={`Además de vivir más, en España se vive más años con buena salud (${num(hlyEs)} frente a ${num(hlyEu)} en la UE) y mueren menos personas por causas que la atención sanitaria puede evitar (${num(trtEs, 0)} por 100.000 frente a ${num(trtEu, 0)})`}
+        title={hlyBreak
+          ? `En España mueren menos personas por causas que la atención sanitaria puede evitar (${num(trtEs, 0)} por 100.000 frente a ${num(trtEu, 0)} en la UE); en años de vida con buena salud, hasta ${hlyPrevYear} estaba por debajo de la UE (${num(hlyEsPrev)} frente a ${num(hlyEuPrev)}) y el salto de ${hlyYear} es una ruptura de serie`
+          : `Además de vivir más, en España se vive más años con buena salud (${num(hlyEs)} frente a ${num(hlyEu)} en la UE) y mueren menos personas por causas que la atención sanitaria puede evitar (${num(trtEs, 0)} por 100.000 frente a ${num(trtEu, 0)})`}
         dek={`La mortalidad «tratable» cuenta las muertes antes de los 75 años que una atención sanitaria eficaz y a tiempo debería evitar (infartos, algunos cánceres, diabetes…); la «prevenible», las que evitarían la salud pública y los hábitos (tabaco, alcohol, accidentes). España está entre los mejores en ambas: ${num(prvEs, 0)} muertes prevenibles por 100.000 frente a ${num(prvEu, 0)} en la UE.`}
         legend={trtSeries}
         sources={[S.eurostat, S.oecd]}
         notes={[
+          ...(hlyBreak ? [`Años de vida saludable de España en ${hlyYear}: ${num(hlyEs)} frente a ${num(hlyEsPrev)} en ${hlyPrevYear}. Eurostat marca ${hlyYear} con «b» (ruptura de serie), así que ese salto no se puede leer como una mejora de la salud ni compararse sin más con la UE (${num(hlyEu)}). La línea del gráfico se corta en la ruptura.`] : []),
           "Años de vida saludable: Eurostat, a partir de la pregunta de la encuesta SILC sobre limitación de la actividad por problemas de salud. Es autopercepción: Italia y Alemania difieren mucho más en lo que se declara que en su salud real, así que el ranking entre países es orientativo.",
           "Mortalidad evitable: tasas estandarizadas por edad (población europea de 2013), lista común OCDE/Eurostat.",
           "Supervivencia a cinco años: OCDE con datos del programa CONCORD, pacientes diagnosticados en 2010–2014 (el último periodo comparable publicado). Los intervalos de confianza se solapan entre varios países.",
@@ -962,7 +1039,7 @@ export default function SanidadPage() {
       <Figure
         id="desigualdad"
         title={`En España la renuncia a atención médica apenas depende de la renta (${num(medEs.poor)} % del 20 % más pobre frente a ${num(medEs.rich)} % del más rico; en la UE, ${num(medEu.poor)} % frente a ${num(medEu.rich)} %) y la esperanza de vida a los 30 años solo varía ${num(eduGapEs)} años según los estudios: la brecha está en el dentista`}
-        dek={`La sanidad pública reparte bastante por igual lo que cubre. La desigualdad aparece en lo que no cubre: el dentista (arriba) y el gasto de bolsillo, que los hogares más ricos pueden permitirse más (el ${num(at(epfShare["Quintil 5"], epfYear))} % de su presupuesto frente al ${num(at(epfShare["Quintil 1"], epfYear))} % del quintil más pobre, que gasta ${formatHealth(at(epfPer["Quintil 1"], epfYear), "eur")} por persona al año frente a ${formatHealth(at(epfPer["Quintil 5"], epfYear), "eur")}).`}
+        dek={`La sanidad pública reparte bastante por igual lo que cubre. La desigualdad aparece en lo que no cubre: el dentista (arriba) y el gasto de bolsillo. El quintil más rico dedica a la sanidad el ${num(at(epfShare["Quintil 5"], epfYear))} % de su presupuesto y el más pobre el ${num(at(epfShare["Quintil 1"], epfYear))} % (${formatHealth(at(epfPer["Quintil 1"], epfYear), "eur")} por persona al año frente a ${formatHealth(at(epfPer["Quintil 5"], epfYear), "eur")}): el más pobre no gasta menos porque esté mejor cubierto, sino porque renuncia a lo que tendría que pagar.`}
         sources={[S.eurostat, S.ine]}
         notes={[
           "Necesidad médica no atendida por coste, distancia o lista de espera (EU-SILC), mayores de 16 años, por quintil de ingresos equivalentes.",
@@ -1554,7 +1631,7 @@ export default function SanidadPage() {
         </p>
         <ul>
           <li>
-            <strong>Resultados de salud: se cumple, y más allá de la esperanza de vida.</strong> {num(leH.es)} años ({leH.world_rank.position}.º de {leH.world_rank.of} en el mundo, {leH.oecd_rank.position}.º de {leH.oecd_rank.of} en la OCDE), {num(hlyEs)} años saludables frente a {num(hlyEu)} en la UE y una mortalidad tratable de {num(trtEs, 0)} por 100.000 frente a {num(trtEu, 0)}. La supervivencia al cáncer no destaca: en mama y pulmón queda algo por debajo de los vecinos.
+            <strong>{hlyBreak ? "Resultados de salud: se cumple en esperanza de vida y mortalidad evitable, no en años saludables." : "Resultados de salud: se cumple, y más allá de la esperanza de vida."}</strong> {num(leH.es)} años ({leH.world_rank.position}.º de {leH.world_rank.of} en el mundo, {leH.oecd_rank.position}.º de {leH.oecd_rank.of} en la OCDE), {hlyBreak ? `años saludables por debajo de la UE hasta ${hlyPrevYear} (${num(hlyEsPrev)} frente a ${num(hlyEuPrev)}; el dato de ${hlyYear} es una ruptura de serie)` : `${num(hlyEs)} años saludables frente a ${num(hlyEu)} en la UE`} y una mortalidad tratable de {num(trtEs, 0)} por 100.000 frente a {num(trtEu, 0)}. La supervivencia al cáncer no destaca: en mama y pulmón queda algo por debajo de los vecinos.
           </li>
           <li>
             <strong>Gasto «medio»: falla. Es bajo.</strong> {num(spH.pct_gdp_es)} % del PIB frente a {num(spH.pct_gdp_eu27)} % en la UE; un {num(ppsRatio, 0)} % del gasto público por habitante europeo ({num(ppsRatioAdj, 0)} % ajustado por edad); puesto {sp.oecd_rank_per_person.position} de {sp.oecd_rank_per_person.of} en la OCDE. Parte de la diferencia la pagan los hogares de su bolsillo ({num(oopEs)} % frente a {num(oopEu)} %) o con seguros privados duplicados.
@@ -1564,6 +1641,9 @@ export default function SanidadPage() {
           </li>
           <li>
             <strong>Capacidad del paciente y destino del dinero.</strong> Medido contra lo que gastan los hogares, el bolsillo pesa más que en la UE ({num(oopShareEs)} % frente a {num(oopShareEu)} % del consumo) y el dentista excluye a los más pobres ({num(dentalEs.poor)} % frente a {num(dentalEs.rich)} % de los más ricos). El dinero ha ido al hospital ({num(provEs.HP1, 0)} % del gasto público frente al {num(provEu.HP1, 0)} % en la UE) y los recortes de 2010–2013 golpearon el doble a la atención primaria; desde {bases.first} el hospital crece +{num(g02.hosp, 0)} % y la primaria +{num(g02.prim, 0)} % en términos reales. Encaja con la falta de citas del médico de familia. La desigualdad por renta está en lo que la sanidad pública no cubre: la renuncia a atención médica apenas depende de la renta ({num(medEs.poor)} % frente a {num(medEs.rich)} %), la dental sí.
+          </li>
+          <li>
+            <strong>Para quién se cumple.</strong> Lo que cubre la sanidad pública llega casi igual a todos: renunciar al médico apenas depende de la renta ({num(medGap.a.value)} % frente a {num(medGap.b.value)} %). Lo que no cubre o cubre tarde se reparte por renta, edad y lugar: dentista ({num(dentGap.a.value)} % frente a {num(dentGap.b.value)} %), salud mental pagada en la privada ({num(mentalGap.a.value, 0)} % de los jóvenes que la recibieron) y cita rápida con el médico de familia ({num(gpGap.a.value, 0)} % en los pueblos pequeños frente a {num(gpGap.b.value, 0)} % en las grandes ciudades). A los 30 años, {num(leSex.gap_30)} años de esperanza de vida separan a un hombre con estudios primarios de una mujer universitaria.
           </li>
           <li>
             <strong>Lo que no se puede afirmar.</strong> Que las esperas «llevan subiendo desde 2003»: la serie del Ministerio tiene tres rupturas (2012, 2016, 2018) y antes de 2018 no se pueden comparar cifras. Que gastar más acortaría las esperas: entre comunidades no hay relación entre gasto por habitante y espera (correlación {num(reg.rho_spend_days, 2)}).
@@ -1613,6 +1693,9 @@ export default function SanidadPage() {
           </li>
           <li>
             <strong>Cada comunidad cuenta a su manera.</strong> El Ministerio agrega lo que notifica cada comunidad; Andalucía cambió su cómputo en 2018 y Castilla-La Mancha rectificó el dato de diciembre de 2025. No hay auditoría externa de las cifras.
+          </li>
+          <li>
+            <strong>Grupos, no personas.</strong> Las esperas del SISLE no se publican por edad, renta ni municipio, solo por comunidad. El Barómetro Sanitario publica cada variable por separado (edad, municipio, clase, comunidad), nunca cruzadas, y con muestras pequeñas en las comunidades menos pobladas; la clase es la que declara el encuestado. No hay esperanza de vida oficial por renta (se usan los estudios) ni seguro privado por renta. La encuesta europea de salud que mide la renuncia a la salud mental por coste solo tiene una ola publicada (2019). La tabla de enfermedad crónica por edad de la EU-SILC (hlth_silc_11) da a los de 16 a 24 años más enfermedad crónica que a los de 25 a 34 todos los años desde 2018 sin marca de la fuente; no se usa hasta poder explicarlo.
           </li>
           <li>
             <strong>Comparación internacional parcial.</strong> Solo una docena de países publica esperas en la OCDE, cada uno con su método; Alemania y Francia no.

@@ -209,6 +209,57 @@ class IngestHealthTest(unittest.TestCase):
         self.assertGreaterEqual(len(data["distribution"]["medical"]["rows"]), 5)
         self.assertTrue(all("spend_adjusted" in row for row in data["regions"]["rows"] if row["spend"] is not None))
 
+    def test_barometro_cross_sheet_reads_every_group_and_skips_no_answer(self) -> None:
+        header = {"A": "", "B": "TOTAL", "C": "De 18 a 24 años", "D": "75 y más años", "E": "N.C."}
+        rows = []
+        for anchor, answers in ingest.BS_CROSS_QUESTIONS.items():
+            base = 100 * (len(rows) + 1)
+            rows.append((base, {"A": f"Pregunta x: {anchor}?"}))
+            rows.append((base + 1, header))
+            for i, prefix in enumerate(answers, start=2):
+                rows.append((base + i, {"A": f"{prefix} (texto)", "B": "10.5", "C": "20.25", "D": "5", "E": "0"}))
+        cells = ingest.barometro_cross_cells("Edad de la persona entrevistada", rows)
+        codes = {code for answers in ingest.BS_CROSS_QUESTIONS.values() for code, _ in answers.values()}
+        self.assertEqual({c["code"] for c in cells}, codes)
+        self.assertEqual({c["group"] for c in cells}, {"TOTAL", "De 18 a 24 años", "75 y más años"})
+        first = next(c for c in cells if c["code"] == "pct_cita_mf_mismo_dia" and c["group"] == "De 18 a 24 años")
+        self.assertEqual((first["column"], first["value"]), ("C", 20.25))
+        with self.assertRaises(ValueError):
+            ingest.barometro_cross_cells("Edad de la persona entrevistada", rows[:-1])  # a missing answer row fails loudly
+
+    def test_dental_age_parser_skips_cells_owned_by_the_16_plus_file(self) -> None:
+        dims = {"reason": ["TXP"], "quant_inc": ["TOTAL", "QU2"], "age": ["Y_GE16", "Y25-34"], "sex": ["T"], "unit": ["PC"],
+                "geo": ["ES"], "time": ["2025"]}
+        data = {"id": list(dims), "size": [len(v) for v in dims.values()],
+                "dimension": {d: {"category": {"index": {c: i for i, c in enumerate(v)}}} for d, v in dims.items()},
+                "value": {str(i): float(i) for i in range(4)}}
+        raw = ingest.Raw("x.json", "https://example.org", json.dumps(data).encode(), "2026-10-19", "json")
+        codes = sorted(d["indicator_code"] for d, _ in ingest.parse_unmet_dental_age(raw))
+        self.assertEqual(codes, ["TXP.QU2.Y25-34.T.PC", "TXP.QU2.Y_GE16.T.PC", "TXP.TOTAL.Y25-34.T.PC"])
+
+    def test_moe_matches_the_barometro_technical_note(self) -> None:
+        self.assertEqual(export.moe95(50, 7197), 1.2)  # ficha técnica: ±1,2 for the whole sample with P = Q
+        self.assertEqual(export.moe95(10, 100), 5.9)
+
+    def test_published_segments_gaps_and_cases(self) -> None:
+        data = json.loads((Path(__file__).resolve().parents[1] / "ui/site/public/visualizaciones/data/sanidad.json").read_text(encoding="utf-8"))
+        seg = data["segments"]
+        self.assertEqual([g["id"] for g in seg["gaps"]], ["medico", "dentista", "especialista", "salud_mental", "cita_mf"])
+        for gap in seg["gaps"]:
+            for side in ("a", "b"):
+                self.assertTrue(0 <= gap[side]["value"] <= 100)
+                if gap["source"].startswith("Barómetro"):
+                    self.assertGreater(gap[side]["moe"], 0)
+                    self.assertGreater(gap[side]["n"], 30)
+        self.assertEqual([c["id"] for c in seg["cases"]], ["persona-1", "persona-3", "persona-4", "persona-5"])
+        for case in seg["cases"]:
+            self.assertTrue(all(it["value"] is not None and it["national"] is not None and it["cut"] for it in case["items"]))
+        sex = seg["life_expectancy_edu_sex"]
+        self.assertAlmostEqual(sex["gap_30"], sex["values"]["30 años|F|superior"] - sex["values"]["30 años|M|primaria"], delta=0.06)
+        grid = seg["dental_grid"]["values"]
+        self.assertEqual(grid["QU1"]["Y_GE16"], seg["gaps"][1]["a"]["value"])
+        self.assertTrue(all(grid[q]["Y45-64"] is not None for q in ("QU1", "QU2", "QU3", "QU4", "QU5")))
+
 
 if __name__ == "__main__":
     unittest.main()

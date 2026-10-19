@@ -997,6 +997,105 @@ def load_barometro(conn: sqlite3.Connection, snapshot_date: str, offline: bool) 
     return totals
 
 
+# Cross tabs of the latest Barómetro (one sheet per breakdown, one column per group, TOTAL in column B). Only single
+# breakdowns are published: a typical case built from them uses marginal cuts, never an observed cell.
+BS_CROSS_YEAR = 2025
+BS_CROSS_SHEETS = {"Edad de la persona entrevistada": "edad", "Tamaño de municipio": "municipio", "Clase social": "clase",
+                   "Comunidad autónoma": "comunidad", "Nivel de estudios": "estudios", "Sexo": "sexo"}
+BS_CROSS_CCAA = {
+    "Andalucía": "01", "Aragón": "02", "Asturias (Principado de)": "03", "Balears (Illes)": "04", "Canarias": "05",
+    "Cantabria": "06", "Castilla y León": "07", "Castilla-La Mancha": "08", "Cataluña": "09", "Comunitat Valenciana": "10",
+    "Extremadura": "11", "Galicia": "12", "Madrid (Comunidad de)": "13", "Murcia (Región de)": "14",
+    "Navarra (Comunidad Foral de)": "15", "País Vasco": "16", "Rioja (La)": "17", "Ceuta (Ciudad Autónoma de)": "18",
+    "Melilla (Ciudad Autónoma de)": "19",
+}
+# question anchor -> (answer label prefix -> indicator code, label); "(N)" is the weighted base of the question.
+BS_CROSS_QUESTIONS = {
+    "hasta que le/la atendió el/la médico/a de familia": {
+        "Le/la atendió ese mismo día": ("pct_cita_mf_mismo_dia", "Atendidos por su médico de familia el mismo día que pidieron cita"),
+        "Le/la atendió al día siguiente": ("pct_cita_mf_dia_siguiente", "Atendidos por su médico de familia al día siguiente"),
+        "(N)": ("n_cita_mf", "Base de la pregunta de la cita con el médico de familia (encuestados ponderados)"),
+    },
+    "¿ha ido Ud. a la consulta de un/a médico/a especialista": {
+        "En la sanidad privada": ("pct_especialista_solo_privada", "Fueron al especialista solo en la sanidad privada (últimos 12 meses)"),
+        "En ambas": ("pct_especialista_ambas", "Fueron al especialista en la sanidad pública y en la privada (últimos 12 meses)"),
+        "(N)": ("n_especialista", "Base de la pregunta del especialista (encuestados ponderados)"),
+    },
+    "por un problema de salud mental, o por un males": {
+        "Sí": ("pct_necesidad_salud_mental", "Necesitaron consultar por un problema de salud mental o malestar psicológico (últimos 12 meses)"),
+        "(N)": ("n_necesidad_salud_mental", "Base de la pregunta de necesidad de salud mental (encuestados ponderados)"),
+    },
+    "principalmente dónde le han atendido o le están atendiendo": {
+        "En un seguro médico privado": ("pct_salud_mental_seguro_privado", "Atendidos de salud mental principalmente con un seguro médico privado"),
+        "En un/a profesional privado/a sin seguro": ("pct_salud_mental_privado_sin_seguro", "Atendidos de salud mental principalmente por un profesional privado sin seguro"),
+        "(N)": ("n_salud_mental_atendidos", "Base de quienes necesitaron atención de salud mental (encuestados ponderados)"),
+    },
+}
+
+
+def barometro_cross_cells(sheet_name: str, rows: list[tuple[int, dict[str, str | None]]]) -> list[dict[str, Any]]:
+    """Every answer of BS_CROSS_QUESTIONS in one cross sheet: [{code, label, row, column, group, value}]."""
+    by_row = dict(rows)
+    cells = []
+    for anchor, answers in BS_CROSS_QUESTIONS.items():
+        start = next(r for r, c in rows if anchor in " ".join(str(v) for v in c.values() if v))
+        header = next(by_row[r] for r in range(start, start + 8) if "TOTAL" in (by_row.get(r) or {}).values())
+        groups = {col: v for col, v in header.items() if col != "A" and v and v not in ("N.C.", "N.S.", "Otras", "Otros")}
+        found = {}
+        for r in range(start, start + 45):
+            label = str((by_row.get(r) or {}).get("A") or "")
+            for prefix, (code, text) in answers.items():
+                if label.startswith(prefix) and code not in found:
+                    found[code] = (r, text)
+        if set(found) != {code for code, _ in answers.values()}:
+            raise ValueError(f"Barómetro {BS_CROSS_YEAR} {sheet_name}: block {anchor!r} incomplete: {sorted(found)}")
+        for code, (r, text) in found.items():
+            for col, group in groups.items():
+                value = by_row[r].get(col)
+                if decimal_text(value) is not None:
+                    cells.append({"code": code, "label": text, "row": r, "column": col, "group": group, "value": float(value)})
+    return cells
+
+
+def load_barometro_crosses(conn: sqlite3.Connection, snapshot_date: str, offline: bool) -> dict[str, int]:
+    path, payload, meta = fetch_binary("barometro", BAROMETRO[BS_CROSS_YEAR], offline)
+    sheets = read_xlsx(payload)
+    per_code: dict[str, dict[str, Any]] = {}
+    for sheet_name, breakdown in BS_CROSS_SHEETS.items():
+        for cell in barometro_cross_cells(sheet_name, sheets[sheet_name]):
+            item = per_code.setdefault(cell["code"], {"label": cell["label"], "series": []})
+            total = cell["group"] == "TOTAL"
+            if total and breakdown != "edad":
+                continue  # the national total is kept once (from the first sheet); every sheet repeats it
+            ccaa = BS_CROSS_CCAA.get(cell["group"]) if breakdown == "comunidad" else None
+            item["series"].append(area_series(
+                f"bs-cross|{cell['code']}|{'total' if total else breakdown}|{cell['group']}", ccaa or "ES",
+                {"breakdown": "total" if total else breakdown, "group": cell["group"], "sheet": sheet_name},
+                [{"period": str(BS_CROSS_YEAR), "value": cell["value"], "cell_index": cell["row"],
+                  "pointer": f"xlsx:{sheet_name}!{cell['column']}{cell['row']}"}],
+                name=cell["group"] if ccaa else "España", system="INE-CODAUTO" if ccaa else "NUTS",
+                level="region" if ccaa else "country"))
+    totals = {"releases": 0, "observations": 0}
+    for code, item in sorted(per_code.items()):
+        is_n = code.startswith("n_")
+        definition = {
+            "source_id": "minsan_barometro", "dataset_code": f"BS.cruces_{BS_CROSS_YEAR}", "indicator_code": code,
+            "frequency_code": "A", "frequency_label": "Anual (tres oleadas)", "unit_code": "N" if is_n else "PC",
+            "unit_label": "Encuestados (ponderados)" if is_n else "% de encuestados del grupo", "label": item["label"],
+            "extraction_method": "xlsx_cell",
+            "definition": "Barómetro Sanitario (Ministerio de Sanidad y CIS), hojas de cruce por una sola variable (edad, "
+            "tamaño de municipio, clase social subjetiva, comunidad, estudios, sexo). No hay cruces dobles. Población de "
+            "18 años o más; error muestral de ±1,2 puntos para el total (ficha técnica), mayor en cada grupo.",
+            "methodology_url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/BarometroSanitario/home_BS.htm",
+            "source_url": meta["url"],
+        }
+        counts = load_indicator(conn, definition, sha256_bytes(payload), len(payload), rel(path), meta["url"], snapshot_date,
+                                {"retrieved_at": meta["retrieved_at"]}, item["series"])
+        for k in totals:
+            totals[k] += counts[k]
+    return totals
+
+
 def load_siap(conn: sqlite3.Connection, snapshot_date: str) -> dict[str, int]:
     path = MANUAL_DIR / "siap_2023.json"
     payload = path.read_bytes()
@@ -1031,6 +1130,30 @@ UNMET_MED_URL = eurostat_url("hlth_silc_08", {"unit": ["PC"], "sex": ["T"], "age
                                               "quant_inc": list(UNMET_QUINT), "geo": PEERS})
 UNMET_DENT_URL = eurostat_url("hlth_silc_09", {"unit": ["PC"], "sex": ["T"], "age": ["Y_GE16"], "reason": list(UNMET_REASONS),
                                                "quant_inc": list(UNMET_QUINT), "geo": [*EU27, "EU27_2020"]})
+# Dental care forgone for cost by age band and every income quintile (typical cases, gaps panel). The 16+ x Q1/Q5/total
+# cells already come from UNMET_DENT_URL and are skipped here so each indicator has a single raw source.
+DENT_AGES = {"Y16-24": "16 a 24 años", "Y25-34": "25 a 34 años", "Y35-44": "35 a 44 años", "Y45-64": "45 a 64 años",
+             "Y_GE65": "65 años o más", "Y_GE75": "75 años o más", "Y_GE16": "16 años o más"}
+DENT_QUINT = {"TOTAL": "toda la población", "QU1": "primer quintil (20 % con menos ingresos)", "QU2": "segundo quintil",
+              "QU3": "tercer quintil", "QU4": "cuarto quintil", "QU5": "quinto quintil (20 % con más ingresos)"}
+UNMET_DENT_AGE_URL = eurostat_url("hlth_silc_09", {"unit": ["PC"], "sex": ["T"], "age": list(DENT_AGES), "reason": ["TXP"],
+                                                   "quant_inc": list(DENT_QUINT), "geo": ["ES", "EU27_2020"]})
+
+
+def parse_unmet_dental_age(raw: Raw) -> Iterable[Batch]:
+    for definition, series in eurostat_batches(
+        raw, "hlth_silc_09", ["reason", "quant_inc", "age", "sex", "unit"],
+        lambda c: f"Necesidad de atención dental no atendida por ser demasiado cara ({DENT_QUINT[c['quant_inc']]}, {DENT_AGES[c['age']]})",
+        {"PC": "% de la población del grupo"},
+        "Encuesta europea de ingresos y condiciones de vida (EU-SILC): personas que declaran haber necesitado atención "
+        "dental en los últimos 12 meses y no haberla recibido por ser demasiado cara, por edad y quintil de ingresos.",
+    ):
+        _, quint, age, *_ = definition["indicator_code"].split(".")
+        if age == "Y_GE16" and quint in ("TOTAL", "QU1", "QU5"):
+            continue
+        yield definition, series
+
+
 HH_CONS_URL = eurostat_url("nama_10_gdp", {"na_item": ["P31_S14"], "unit": ["CP_MEUR"], "geo": PEERS})
 HF_MIO_URL = eurostat_url("hlth_sha11_hf", {"icha11_hf": ["HF3", "HF1"], "unit": ["MIO_EUR"], "geo": PEERS})
 PROVIDERS = {"TOTAL": "todos los proveedores", "HP1": "hospitales", "HP2": "residencias", "HP3": "proveedores ambulatorios",
@@ -1236,6 +1359,23 @@ def parse_ine_le_edu(raw: Raw) -> Iterable[Batch]:
     }, [area_series(f"INE|37663|{k}", "ES", v["dims"], v["obs"], name="España", system="NUTS", level="country") for k, v in sorted(rows.items())]
 
 
+def parse_ine_le_edu_sex(raw: Raw) -> Iterable[Batch]:
+    """Same table by sex: the gap between a man with primary studies and a woman with a degree (typical cases)."""
+    sexes = {"Hombres": "M", "Mujeres": "F"}
+
+    def keep(parts: list[str]):
+        if len(parts) < 8 or parts[3] not in sexes or parts[4] not in ("30 años", "65 años") or parts[7] not in EDU_LEVELS:
+            return None
+        return f"{parts[4]}|{sexes[parts[3]]}|{EDU_LEVELS[parts[7]]}", {"age": parts[4], "sex_es": sexes[parts[3]], "education": EDU_LEVELS[parts[7]]}
+    rows = ine_rows(raw, keep)
+    yield {
+        "source_id": "ine_wstempus", "dataset_code": "TM_37663", "indicator_code": "esperanza_vida_nivel_educativo_sexo",
+        "frequency_code": "A", "frequency_label": "Anual", "unit_code": "YR", "unit_label": "Años",
+        "label": "Esperanza de vida a los 30 y 65 años por nivel educativo y sexo (INE)",
+        "methodology_url": "https://www.ine.es/jaxiT3/Tabla.htm?t=37663", "source_url": "https://www.ine.es/jaxiT3/Tabla.htm?t=37663",
+    }, [area_series(f"INE|37663|{k}", "ES", v["dims"], v["obs"], name="España", system="NUTS", level="country") for k, v in sorted(rows.items())]
+
+
 def parse_ine_epf(raw: Raw) -> Iterable[Batch]:
     measures = {"Gasto medio por persona": ("EUR_PER", "Euros por persona"), "Distribución (porcentajes verticales)": ("PC_BUDGET", "% del gasto del hogar")}
     for measure, (unit, unit_label) in measures.items():
@@ -1305,7 +1445,8 @@ API_SOURCES: list[tuple[str, str, str, Callable[..., Iterable[Batch]]]] = [
     ("eurostat_demo_pjangroup.json", POP_AGE_URL, "json", parse_pop_age("demo_pjangroup")),
     ("eurostat_demo_r_pjangroup_es.json", REG_POP_AGE_URL, "json", parse_pop_age("demo_r_pjangroup")),
     ("eurostat_demo_mlexpecedu.json", LE_EDU_URL, "json", parse_le_edu),
-    ("ine_tm_37663.json", INE_LE_EDU_URL, "json", parse_ine_le_edu),
+    ("ine_tm_37663.json", INE_LE_EDU_URL, "json", lambda raw: [*parse_ine_le_edu(raw), *parse_ine_le_edu_sex(raw)]),
+    ("eurostat_hlth_silc_09_age.json", UNMET_DENT_AGE_URL, "json", parse_unmet_dental_age),
     ("ine_epf_75413.json", INE_EPF_URL, "json", parse_ine_epf),
 ]
 
@@ -1483,6 +1624,7 @@ def main() -> int:
         report["sisle"] = load_sisle(conn, args.snapshot_date)
         report["egsp"] = load_egsp(conn, args.snapshot_date)
         report["barometro"] = load_barometro(conn, args.snapshot_date, args.offline)
+        report["barometro_crosses"] = load_barometro_crosses(conn, args.snapshot_date, args.offline)
         report["siap"] = load_siap(conn, args.snapshot_date)
         report["egsp_structure"] = load_egsp_structure(conn, args.snapshot_date)
         report["age_profile"] = load_age_profile(conn, args.snapshot_date)
