@@ -3,7 +3,8 @@ import { C, NAMES, num } from "./sections";
 
 // Connected scatter: spending per pupil (Spain 2022 = 100) against PISA maths, both axes from zero.
 // Two legends: colour/line says what a mark is (Spain's path, OECD, peers, regions by ISEC group) and marker shape
-// says whether it is a country (circle) or a region (square). Server-rendered SVG that scales with its container.
+// says whether it is a country (circle) or a region (square). Server-rendered SVG that fills the figure width
+// (charts stay full width under the section's reading-measure rule); narrow screens scroll it horizontally.
 // Both axes are referenced to Spain in 2022: spending as an index (= 100) and PISA as points above or below its
 // score, so the origin of the comparison is explicit and the vertical axis includes zero.
 const W = 760;
@@ -62,7 +63,7 @@ export default function StoryScatter({ story }) {
       width="100%"
       role="img"
       aria-label="Gasto por alumno frente a PISA matemáticas: trayectoria de España 2000-2022, media OCDE y países comparables 2012-2022, y comunidades autónomas en 2022"
-      style={{ display: "block", maxWidth: W, height: "auto" }}
+      style={{ display: "block", width: "100%", height: "auto" }}
     >
       <defs>
         {markers.map((color) => (
