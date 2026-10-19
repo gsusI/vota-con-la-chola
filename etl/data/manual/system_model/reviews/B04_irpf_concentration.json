@@ -1,0 +1,12 @@
+{
+ "id": "B04_irpf_concentration",
+ "verdict": "fix",
+ "source_ok": true,
+ "value_ok": true,
+ "grade_ok": true,
+ "wording_ok": true,
+ "evidence": "Columnas de distribución de la tabla de la partida 500 confirmadas (22,02/37,93; 4,88/16,33; 0,67/5,28; 0,06/2,07). Recalculado: α = 2,300, umbral 34.525 €, fracción del tramo por encima = 0,719 (no 0,721), 23,68 + 0,719 × 37,93 = 50,95 % (central 50,9 correcto); uniforme 48,47; 10 % superior 33,7 / 31,2.",
+ "corrections": {
+  "derivation": "El 20 % cae dentro del tramo 30.000-60.000 €. Interpolación de Pareto (α = ln(27,63/5,61)/ln 2 = 2,30; umbral del 20 % ≈ 34.500 €): 23,68 + 0,719 × 37,93 = 50,9 % de la base liquidable general. Reparto uniforme dentro del tramo (cota baja): 48,5 %; alto 52 por la curvatura. Para el 10 % superior, 33,7 % (Pareto) o 31,2 % (uniforme). Orden por rendimientos, no por base; tabla de tramos, no de deciles."
+ }
+}

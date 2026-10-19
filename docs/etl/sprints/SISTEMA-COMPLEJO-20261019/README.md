@@ -1,6 +1,6 @@
 # Simulador del sistema: pensiones, impuestos, vivienda, empleo, sanidad y educación como un solo sistema
 
-Fecha: 2026-10-19. Diseño (§1–§10) y **corte 0 publicado** (§11).
+Fecha: 2026-10-19. Diseño (§1–§10), **corte 0** (§11) y **corte 1** (§12) publicados.
 
 - **Dónde estamos.** Cinco verticales en `/visualizaciones/` (carga fiscal, empleo, educación, sanidad, vivienda), cada una
   con su exporter, sus fuentes con sha256 y cinco casos tipo compartidos ([VIZ-SEGMENTOS](../VIZ-SEGMENTOS-20261019/README.md)).
@@ -10,8 +10,8 @@ Fecha: 2026-10-19. Diseño (§1–§10) y **corte 0 publicado** (§11).
   pensiones», «limitar el alquiler», «copago sanitario») y ve, en tiempo real, cómo se propaga el cambio por un mapa causal,
   cuánto cuesta, quién lo paga, qué les pasa a los cinco casos tipo y con qué incertidumbre. Cada palanca enlaza a cómo
   votó cada partido.
-- **Qué sigue.** Corte 0 hecho (§11): pensiones + cuentas públicas en `/visualizaciones/sistema/`. Siguiente: corte 1,
-  impuestos con incidencia por quintil (§9).
+- **Qué sigue.** Cortes 0 y 1 hechos (§11, §12): pensiones, cuentas públicas e impuestos con reparto por quintil en
+  `/visualizaciones/sistema/`. Siguiente: corte 2, vivienda (§9).
 
 ## 1. Qué tipo de modelo, y por qué
 
@@ -293,3 +293,29 @@ ejecutados con Node sobre el mismo código del navegador; JSON con fuentes y sha
   impuestos (0,5) y su persistencia son supuestos con rango ancho; no hay estimación española de la incidencia de la cotización.
 - **Siguiente**: corte 1 (impuestos: IRPF, IVA y cotizaciones con incidencia por quintil, reutilizando el cierre), luego
   vivienda con el mecanismo de debates.
+
+## 12. Corte 1: impuestos con reparto por quintil (hecho, 2026-10-19)
+
+- **Palancas nuevas**: IRPF en todos los tramos, IRPF por encima de 60.000 €, IVA general, IVA reducido e Impuesto sobre
+  Sociedades; el IRPF es además una cuarta forma de pagar (cierre). Las cotizaciones ya estaban.
+- **Recaudación** (fichas T01–T07, agentes): por punto, IRPF 0,26 % del PIB (AEAT 2023), tramo alto 0,03 %, IVA reducido
+  0,14 % (Memoria de Beneficios Fiscales), Sociedades 0,13 % (AEAT); reacción con la elasticidad de la renta gravable
+  (general y alta, esta en disputa), la semielasticidad de la base de Sociedades y el traslado de Sociedades a salarios
+  (en disputa). Con el valor central de la reacción de las rentas altas, subir el tramo alto no recauda: se dice en la
+  página y se deja elegir la escuela.
+- **Reparto** (`scripts/system_model_incidence.py`, sin red, reglas fijadas en su cabecera): quintiles de personas por
+  renta disponible equivalente con los microdatos de la ECV 2025; base del IRPF por persona con las reglas generales de
+  2024 (simplificadas); IVA con la estructura de gasto por quintil de la EPF de Eurostat (2015, antes de la pandemia;
+  2020 como contraste) y el tipo de la Ley 37/1992 por grupo COICOP; cotizaciones por salarios; Sociedades entre capital
+  y salarios; pensiones por pensiones. El navegador multiplica las cuotas por la recaudación del motor: la vista por
+  quintil es la carga legal (antes de reaccionar), en euros al mes por hogar y en % de la renta disponible.
+- **Casos tipo**: se añaden el 2 (pareja con hijos, dos sueldos) y el 5 (profesional), con la misma renta que en las demás
+  páginas; ninguno llega al tramo de 60.000 €.
+- **Puertas nuevas**: la cuota de gasto al tipo general (EPF + ley) frente a la ficha del IPCA (diferencia 0,05, tolerancia
+  0,1); la concentración de la base (20 % superior: 48,3 % en la microsimulación frente al 50,9 % de la AEAT, ±10 puntos);
+  el IVA es regresivo en el modelo y en la estadística experimental de Eurostat; el reparto suma exactamente la carga.
+- **Resultado principal**: un punto más de IRPF en todos los tramos recauda unos 3.500 millones tras la reacción y pesa
+  unas 5 veces más (en % de la renta) en el quintil más rico que en el más pobre; uno de IVA general, unos 4.800 millones,
+  del 0,84 % al 0,54 % de la renta del primer al quinto quintil.
+- **Límites**: la ECV recoge peor las rentas más altas (el reparto del IRPF sale algo menos progresivo); la EPF de 2015
+  puede no reflejar el gasto actual; no hay declaración conjunta, mínimos familiares ni escalas autonómicas concretas.

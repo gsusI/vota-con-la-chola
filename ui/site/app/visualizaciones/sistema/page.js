@@ -1,13 +1,13 @@
 import { readPublicJson } from "../../static-snapshot.mjs";
 import { StaticRouteHero } from "../../static-route-components";
 import Simulator, { ClosureFigure } from "./Simulator";
-import { CLOSURES, DEFAULT_LEVERS, simulate } from "./engine.mjs";
+import { CLOSURES, DEFAULT_LEVERS, centralParams, quintileImpact, simulate } from "./engine.mjs";
 import { computeBacktests } from "./backtests.mjs";
 
 export const metadata = {
-  title: "Simulador: pensiones y cuentas públicas | Vota Con La Chola",
+  title: "Simulador: pensiones, impuestos y cuentas públicas | Vota Con La Chola",
   description:
-    "Qué pasa si se suben o se bajan las pensiones, se retrasa la jubilación o se cotiza más, y quién lo paga según se financie con deuda, cotizaciones o IVA. Modelo con supuestos visibles sobre la línea base oficial del Ageing Report 2024.",
+    "Qué pasa si se suben o se bajan las pensiones, el IRPF, el IVA, las cotizaciones o el Impuesto sobre Sociedades: cuánto recauda, quién lo paga por nivel de renta y en casos concretos, y cómo se mueven la deuda y el empleo. Modelo con supuestos visibles sobre la línea base oficial del Ageing Report 2024.",
 };
 
 const num = (v, d = 1) => Number(v).toLocaleString("es-ES", { minimumFractionDigits: d, maximumFractionDigits: d });
@@ -35,13 +35,41 @@ export default function SistemaPage() {
   const p1Vat = -runs.iva.p1_month[t35];
   const p1Ssc = -runs.cotizaciones.p1_month[t35];
   const p4Gain = runs.deuda.p4_month[t35];
+  const taxPaid = ["cotizaciones", "iva", "irpf"].map((c) => -runs[c].p1_month[t35]);
+
+  // One more point of each tax from the first year: revenue (statutory and after behaviour) and who bears it.
+  const t1 = model.years.indexOf(model.policy_start);
+  const P = centralParams(model);
+  const meur = (pp) => (pp / 100) * model.start.gdp_meur * model.baseline.real_index[t1];
+  const TAXES = [
+    { key: "irpfAll", label: "IRPF, todos los tramos", stat: "s_irpf_all_pp", rev: (r) => r.irpf_revenue_pp[t1] },
+    { key: "irpfTop", label: "IRPF, tramo de más de 60.000 €", stat: "s_irpf_top_pp", rev: (r) => r.irpf_revenue_pp[t1] },
+    { key: "vatStd", label: "IVA general (21 %)", stat: "s_vat_std_pp", rev: (r) => r.vat_revenue_pp[t1] },
+    { key: "vatRed", label: "IVA reducido (10 %)", stat: "s_vat_red_pp", rev: (r) => r.vat_red_revenue_pp[t1] },
+    { key: "contrib", label: "Cotizaciones sociales", stat: "s_contrib_pp", rev: (r) => r.contrib_revenue_pp[t1] + r.labour_revenue_pp[t1] },
+    { key: "corp", label: "Impuesto sobre Sociedades", stat: "s_corp_pp", rev: (r) => r.corp_revenue_pp[t1] },
+  ].map((tax) => {
+    const run = simulate(model, { ...DEFAULT_LEVERS, [tax.key]: 1 });
+    const q = quintileImpact(model, run, t1, P);
+    return { ...tax, statutory: meur(run[tax.stat][t1]), behaviour: meur(tax.rev(run)), q, cases: ["p1", "p2", "p4", "p5"].map((id) => run[`${id}_month`][t1]) };
+  });
+  const irpfRow = TAXES[0];
+  // Does raising the top bracket raise revenue? One answer per school of the contested elasticity.
+  const topDebate = model.params.eti_alta.debate;
+  const topSchools = (topDebate?.schools || []).map((school, i) => {
+    const run = simulate(model, { ...DEFAULT_LEVERS, irpfTop: 1 }, centralParams(model, { [topDebate.id]: i }));
+    return { label: school.label, eti: school.central, meur: meur(run.irpf_revenue_pp[t1]) };
+  });
+  const vatRow = TAXES[2];
+  const contribRow = TAXES[4];
+  const ratio = (row) => -row.q[4].pctDisposable / -row.q[0].pctDisposable;
 
   return (
     <main className="shell vizArticle">
       <StaticRouteHero
         eyebrow="Visualizaciones · simulador"
-        title="Si se suben las pensiones, ¿quién lo paga?"
-        summary="Un modelo pequeño del sistema de pensiones y las cuentas públicas de España: mueve las palancas y mira cómo se propaga el cambio, cuánto cuesta y a quién, según se pague con deuda, con cotizaciones o con IVA. Es un escenario con supuestos a la vista, no una predicción."
+        title="Si se suben las pensiones o los impuestos, ¿quién lo paga?"
+        summary="Un modelo pequeño de las pensiones, los impuestos y las cuentas públicas de España: mueve las palancas y mira cómo se propaga el cambio, cuánto cuesta y a quién, por nivel de renta y en casos concretos, según se pague con deuda, cotizaciones, IVA o IRPF. Es un escenario con supuestos a la vista, no una predicción."
         actions={[
           { href: "#simulador", label: "Ir al simulador" },
           { href: "/visualizaciones/data/sistema.json", label: "Modelo y datos (JSON)" },
@@ -92,7 +120,7 @@ export default function SistemaPage() {
       <figure className="vizFigure" id="tres-formas">
         <h2>
           Subir las pensiones un punto sobre el IPC suma {num(debt50, 0)} puntos de deuda en 2050 o, si se paga con impuestos, le cuesta a la joven del
-          caso 1 entre {num(p1Vat, 0)} y {num(p1Ssc, 0)} euros al mes en 2035
+          caso 1 entre {num(Math.min(...taxPaid), 0)} y {num(Math.max(...taxPaid), 0)} euros al mes en 2035
         </h2>
         <p className="vizFigure__dek">
           El mismo cambio (todas las pensiones suben cada año un punto más que el IPC desde 2026) con las tres formas de pagarlo. El pensionista del caso 4
@@ -109,6 +137,74 @@ export default function SistemaPage() {
               Ageing Report 2024
             </a>{" "}
             (Comisión Europea) y las fichas del catálogo; casos tipo de <a href="/visualizaciones/carga-fiscal/">Carga fiscal</a>.
+          </span>
+        </figcaption>
+      </figure>
+
+      <figure className="vizFigure" id="impuestos">
+        <h2>
+          Un punto más de IRPF en todos los tramos recauda unos {num(irpfRow.behaviour / 1000, 1)} mil millones y pesa {num(ratio(irpfRow), 1)} veces más en
+          la renta del quintil más rico que en la del más pobre; uno de IVA general, {num(vatRow.behaviour / 1000, 1)} mil millones y pesa más en el más pobre
+        </h2>
+        <p className="vizFigure__dek">
+          Cada fila sube un punto un impuesto desde {model.policy_start}, con todo lo demás igual. La recaudación legal es la aritmética; «tras la reacción»
+          resta lo que la gente y las empresas dejan de declarar o de ganar (elasticidades con su rango en el catálogo). El reparto por quintiles es la carga
+          legal sobre la renta disponible de cada quinto de la población, de menos a más renta. Pone a prueba dos relatos: «subir impuestos lo pagan los
+          ricos» (el IVA general pesa un {num(-vatRow.q[0].pctDisposable, 2)} % de la renta en el primer quintil y un {num(-vatRow.q[4].pctDisposable, 2)} %
+          en el quinto; las cotizaciones, del {num(-contribRow.q[0].pctDisposable, 2)} % al {num(-contribRow.q[4].pctDisposable, 2)} %) y «el IRPF lo
+          pagan las clases medias» (pesa {num(ratio(irpfRow), 1)} veces más arriba que abajo). Lo que queda abierto: si subir el tramo más alto recauda o
+          no depende de cuánto reaccionan las rentas altas, un valor en disputa; y la encuesta recoge peor las rentas más altas.
+        </p>
+        <div className="vizTable__scroll">
+          <table className="sim__table sim__table--taxes">
+            <thead>
+              <tr>
+                <th scope="col" rowSpan={2}>Un punto más de…</th>
+                <th scope="col" colSpan={2}>Recaudación el primer año (millones)</th>
+                <th scope="col" colSpan={5}>Carga en % de la renta disponible, por quintil</th>
+                <th scope="col" colSpan={4}>Casos tipo, euros al mes</th>
+              </tr>
+              <tr>
+                <th scope="col">legal</th>
+                <th scope="col">tras la reacción</th>
+                {["1.º", "2.º", "3.º", "4.º", "5.º"].map((q) => (
+                  <th scope="col" key={q}>{q}</th>
+                ))}
+                {["1", "2", "4", "5"].map((c) => (
+                  <th scope="col" key={c}>caso {c}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {TAXES.map((row) => (
+                <tr key={row.key}>
+                  <th scope="row">{row.label}</th>
+                  <td>{Math.round(row.statutory).toLocaleString("es-ES", { useGrouping: "always" })}</td>
+                  <td className={row.behaviour < 0 ? "sim__neg" : undefined}>{Math.round(row.behaviour).toLocaleString("es-ES", { useGrouping: "always" })}</td>
+                  {row.q.map((q) => (
+                    <td key={q.q} className="sim__heat" style={{ "--heat": Math.min(1, -q.pctDisposable / 0.9) }}>
+                      {num(-q.pctDisposable, 2)}
+                    </td>
+                  ))}
+                  {row.cases.map((v, i) => (
+                    <td key={i}>{Math.abs(v) < 0.5 ? "0" : `−${num(-v, 0)}`}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <figcaption className="vizFigure__caption">
+          <span>
+            Fuente: modelo de esta página; recaudación por punto de la Agencia Tributaria (IRPF y Sociedades), la Memoria de Beneficios Fiscales y la AEAT
+            (IVA) y la Seguridad Social (cotizaciones); reparto con los microdatos de la{" "}
+            <a href={src.ecv_microdata.page} target="_blank" rel="noopener noreferrer">Encuesta de Condiciones de Vida {model.incidence.ecv.year}</a> y la{" "}
+            <a href={src.eurostat_hbs.page} target="_blank" rel="noopener noreferrer">Encuesta de Presupuestos Familiares {model.incidence.vat.year}</a>{" "}
+            (Eurostat) con los tipos de la Ley del IVA.
+          </span>
+          <span>
+            Los casos tipo están por debajo de 60.000 € de base y no pagan el tramo alto. Las cotizaciones se reparten según los salarios; Sociedades, entre
+            los dueños del capital y los salarios según el valor central de su traslado ({num(P.traslado_sociedades_salarios * 100, 0)} %, en disputa).
           </span>
         </figcaption>
       </figure>
@@ -152,7 +248,20 @@ export default function SistemaPage() {
             Sin equilibrio general completo: el PIB solo responde al empleo y a un multiplicador de corto plazo. El efecto del IVA sobre los precios no cambia
             los cocientes sobre el PIB, solo el poder de compra.
           </li>
-          <li>Los casos tipo no cambian de vivienda, de empleo ni de servicios: se miden solo los cambios de pensión, salario, cotización y precios.</li>
+          <li>Los casos tipo no cambian de vivienda, de empleo ni de servicios: se miden solo los cambios de pensión, salario, cotización, IRPF y precios.</li>
+          <li>
+            IRPF: la recaudación por punto sale de las declaraciones de la Agencia Tributaria; el reparto, de una microsimulación con las reglas generales
+            (gastos deducibles, reducción por rendimientos del trabajo, mínimo personal) sin declaración conjunta, mínimos por hijos ni escalas autonómicas
+            concretas. La reacción se mide con la elasticidad de la renta gravable.
+          </li>
+          <li>
+            IVA: el reparto usa el gasto por quintil de {model.incidence.vat.year}, el último antes de la pandemia, con el tipo de la ley que corresponde a cada
+            grupo de gasto; las rebajas temporales de alimentos y energía no cuentan. El precio sube con el traslado medio estimado.
+          </li>
+          <li>
+            Carga legal: los quintiles muestran quién paga cada impuesto antes de que nadie reaccione, salvo el traslado de cotizaciones y de Sociedades a
+            salarios, que sigue el valor central de su ficha.
+          </li>
           <li>
             Las sensibilidades de inmigración son las oficiales, que empiezan en 2023: aquí se les resta su valor de {model.start.year}.
           </li>
@@ -165,6 +274,17 @@ export default function SistemaPage() {
             (+2,9 puntos de PIB en 2040), porque también mueve la participación laboral de toda la franja de 55 a 74 años.
           </li>
           <li>Qué parte de una cotización empresarial acaba en salarios: está en disputa y se deja elegir.</li>
+          <li>
+            Si subir un punto el tramo más alto del IRPF recauda depende de cuánto reaccionan las rentas altas:{" "}
+            {topSchools.map((sc, i) => (
+              <span key={sc.label}>
+                {i ? "; " : ""}
+                «{sc.label}» (elasticidad {num(sc.eti, 2)}): {sc.meur >= 0 ? "+" : "−"}
+                {Math.abs(Math.round(sc.meur)).toLocaleString("es-ES")} millones
+              </span>
+            ))}
+            . Elige la escuela en «Supuestos en disputa».
+          </li>
           <li>Los efectos en sanidad, dependencia, vivienda o educación: llegarán en los siguientes módulos.</li>
         </ul>
       </section>
@@ -272,7 +392,8 @@ export default function SistemaPage() {
           ))}
         </ul>
         <p className="sim__muted">
-          Modelo generado el {String(model.generated_at).slice(0, 10)}. Siguiente módulo: impuestos (IRPF, IVA, cotizaciones) con su reparto por quintil.
+          Modelo generado el {String(model.generated_at).slice(0, 10)}. Siguiente módulo: vivienda (construcción, crédito, límite del alquiler y alquiler
+          turístico).
         </p>
       </section>
     </main>

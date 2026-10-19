@@ -1,0 +1,15 @@
+{
+ "id": "T04_vat_reduced_yield",
+ "verdict": "fix",
+ "source_ok": true,
+ "value_ok": false,
+ "grade_ok": true,
+ "wording_ok": true,
+ "evidence": "Memoria BF 2023 págs. 16-18: la base al 10 % con datos fiscales es 206.316,02 M (× 11 pp = 22.694,76 M en devengo) y 22.428,49 M es esa cifra pasada a caja (factor 98,80 %) en territorio común; 216.189,27 M es la base teórica macroeconómica, no 'sin factor de cumplimiento'. Central 2.039 M/pp = 0,136 % defendible; el bajo 0,051 (residuo AEAT 2010/2012, b = 526 M/pp, aritmética correcta) mezcla reclasificación de productos del 8 % al 21 % y caída del gasto, así que no es un rendimiento estático y no cabe en un enlace contable.",
+ "corrections": {
+  "sources.0.method": "base fiscal de las operaciones al 10 % (206.316,02 M, declaraciones) por el diferencial de 11 pp con el tipo general, pasada de devengo a caja con un factor del 98,80 %; territorio de régimen fiscal común",
+  "sources.0.value_in_source": "22.428,49 M EUR por 11 pp (21 % − 10 %); base fiscal al 10 %: 206.316,02 M EUR; base teórica macroeconómica al 10 %: 216.189,27 M EUR",
+  "parameter.low": 0.122,
+  "derivation": "Central: 22.428,49 M / 11 pp = 2.039 M por pp; / PIB 2023 1.496.277 M = 0,136 % (territorio común). Alto: 1 % de la base teórica macroeconómica al 10 % (216.189 M) = 0,144 %. Bajo: central − 10 % (0,122), suposición por el error de una previsión hecha sobre la base fiscal de 2021. El residuo de las subidas de 2010 y 2012 en la AEAT (2a + b = 6.292, 3a + 2b = 9.701: b = 526 M por pp, 0,051 % del PIB 2013) no se usa como cota: incluye productos que pasaron del 8 % al 21 % y la caída del gasto, que es reacción y no rendimiento estático."
+ }
+}

@@ -1,6 +1,6 @@
 // Checks of the model against real episodes and official projections. The page lists them and engine.test.mjs
 // fails the build when one leaves its tolerance (tolerances fixed here, before looking at the results).
-import { DEFAULT_LEVERS, realChange, revaluationCost, simulate } from "./engine.mjs";
+import { DEFAULT_LEVERS, centralParams, quintileImpact, realChange, revaluationCost, simulate } from "./engine.mjs";
 
 const n = (v, d = 1) => Number(v).toLocaleString("es-ES", { minimumFractionDigits: d, maximumFractionDigits: d });
 
@@ -63,5 +63,32 @@ export function computeBacktests(model) {
     label: "Un tercio menos de inmigración.",
     text: `El gasto en pensiones sube ${n(diff, 2)} puntos de PIB en 2050 frente a la línea base: la sensibilidad oficial del Ageing Report (${n(model.baseline.migration_low_pp[t2050], 2)} puntos desde ${model.years[0]}).`,
   });
+  // 5. IRPF concentration: the survey microsimulation against the tax returns.
+  if (bm.B04_irpf_concentration && bi.ecv_top20_base_share != null) {
+    const official = bm.B04_irpf_concentration.value;
+    const ours = bi.ecv_top20_base_share;
+    out.push({
+      id: "concentracion_irpf",
+      ok: Math.abs(ours - official) <= 10,
+      tolerance: "±10 puntos",
+      label: "Concentración de la base del IRPF.",
+      text: `En la microsimulación con la Encuesta de Condiciones de Vida, el 20 % de contribuyentes con más base tiene el ${n(ours)} % de la base; en las declaraciones de la Agencia Tributaria, el ${n(official)} %. La encuesta recoge peor las rentas más altas, así que el reparto del modelo es algo menos progresivo que el real.`,
+    });
+  }
+
+  // 6. VAT is regressive in both sources: our spending-based split against Eurostat's experimental VAT-by-quintile.
+  if (bi.icw_vat_by_quintile) {
+    const t = model.years.indexOf(model.policy_start);
+    const q = quintileImpact(model, simulate(model, { ...DEFAULT_LEVERS, vatStd: 1 }), t, centralParams(model));
+    const ours = q.map((r) => -r.pctDisposable);
+    const icw = ["QU1", "QU3", "QU5"].map((k) => bi.icw_vat_by_quintile[k]);
+    out.push({
+      id: "iva_regresivo",
+      ok: ours[0] > ours[2] && ours[2] > ours[4] && icw[0] > icw[1] && icw[1] > icw[2],
+      tolerance: "mismo orden de quintiles",
+      label: "El IVA pesa más en las rentas bajas.",
+      text: `Un punto más de IVA general cuesta el ${n(ours[0], 2)} % de la renta disponible al quintil 1 y el ${n(ours[4], 2)} % al quintil 5 en el modelo (gasto de la Encuesta de Presupuestos Familiares); en la estadística experimental de Eurostat, el IVA pagado es el ${n(icw[0])} % de la renta bruta en el quintil 1 y el ${n(icw[2])} % en el 5.`,
+    });
+  }
   return out;
 }

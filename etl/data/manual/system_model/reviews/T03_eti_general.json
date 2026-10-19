@@ -1,0 +1,13 @@
+{
+ "id": "T03_eti_general",
+ "verdict": "fix",
+ "source_ok": true,
+ "value_ok": true,
+ "grade_ok": true,
+ "wording_ok": false,
+ "evidence": "Almunia y López-Rodríguez pág. 5 y 9: 0,45-0,64 fiable, 0,35 GS / 0,54 KS / 0,64 Weber, EBI 0,10-0,24; es la ETI de todos los declarantes del panel IEF sin umbral de renta, pero excluyendo pensionistas (≥65 con rentas del trabajo sin cotizaciones) y rentas negativas (págs. 18-19). SSG pág. 60 «0.12 to 0.4» confirmado.",
+ "corrections": {
+  "parameter.unit": "elasticidad de la renta gravable al neto de impuestos (1 − tipo marginal), todos los declarantes salvo pensionistas",
+  "note_es": "Según Almunia y López-Rodríguez (Banco de España, 2019), con declaraciones de 1999-2014 sin contar a los pensionistas, la renta gravable sube entre un 0,45 % y un 0,64 % por cada 1 % que sube lo que queda tras el impuesto; la renta antes de deducciones reacciona mucho menos (0,10-0,24)."
+ }
+}

@@ -1,0 +1,12 @@
+{
+ "id": "T02_irpf_yield_top",
+ "verdict": "fix",
+ "source_ok": true,
+ "value_ok": false,
+ "grade_ok": true,
+ "wording_ok": true,
+ "evidence": "Tabla de la partida 500 por tramos: (60-150] 1.168.908 / 87.309.747.971 / 74.693; (150-601] 160.311 / 28.234.893.773 / 176.126; >601 14.639 / 11.073.164.445 / 756.415, todo confirmado; Σ n(media − 60.000) = 45.986 M, 0,0307 % del PIB 2023, y Pareto 2,75 / 3,0 reproducidos. Pero la propia derivación dice que 0,031 es un mínimo (Jensen) y el bajo 0,029 queda por debajo sin justificación.",
+ "corrections": {
+  "parameter.low": 0.031
+ }
+}

@@ -562,3 +562,93 @@
     display: block;
   }
 }
+
+.viz .sim__table--taxes th,
+.viz .sim__table--taxes td {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.viz .sim__table--taxes th[scope="row"],
+.viz .sim__table--taxes thead th:first-child {
+  text-align: left;
+  white-space: normal;
+  min-width: 11rem;
+}
+
+.viz .sim__table--taxes thead th {
+  text-align: center;
+}
+
+.viz .sim__heat {
+  background: rgba(235, 104, 52, calc(var(--heat) * 0.45));
+}
+
+.viz .sim__neg {
+  color: #b3401a;
+  font-weight: 600;
+}
+
+/* Quintile figure */
+.viz .qfig__rows {
+  display: grid;
+  gap: 6px;
+}
+
+.viz .qfig__row {
+  display: grid;
+  grid-template-columns: 11rem 1fr 9rem;
+  gap: 10px;
+  align-items: center;
+  min-height: 40px;
+}
+
+.viz .qfig__label {
+  font-size: 0.85rem;
+  display: grid;
+}
+
+.viz .qfig__label small,
+.viz .qfig__value small {
+  font-size: 0.72rem;
+  color: var(--viz-muted);
+  font-weight: 400;
+}
+
+.viz .qfig__track {
+  position: relative;
+  height: 22px;
+}
+
+.viz .qfig__zero {
+  position: absolute;
+  left: 50%;
+  top: -3px;
+  bottom: -3px;
+  width: 1px;
+  background: var(--viz-ink-2);
+}
+
+.viz .qfig__seg {
+  position: absolute;
+  top: 3px;
+  height: 16px;
+}
+
+.viz .qfig__value {
+  display: grid;
+  text-align: right;
+  font-size: 0.88rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 560px) {
+  .viz .qfig__row {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+  .viz .qfig__value {
+    text-align: left;
+  }
+}

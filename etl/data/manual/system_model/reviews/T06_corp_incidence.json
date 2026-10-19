@@ -1,0 +1,22 @@
+{
+ "id": "T06_corp_incidence",
+ "verdict": "fix",
+ "source_ok": true,
+ "value_ok": false,
+ "grade_ok": true,
+ "wording_ok": false,
+ "evidence": "IZA DP 7390 pág. 3 confirma 77 céntimos, pero pág. 6 precisa que es la incidencia total sobre salarios en empresas con convenio colectivo (efecto directo 50, 67 con un retardo); la versión publicada (AER 2018, resumen en aeaweb.org) dice «workers bear about one-half of the total tax burden». Tesoro TP-5 pág. 2: 18 % al trabajo, una convención de reparto y no una estimación empírica; mismo concepto (cuota del impuesto que soporta el trabajo), dominios distintos.",
+ "corrections": {
+  "sources.0.url": "https://www.aeaweb.org/articles?id=10.1257/aer.20130570",
+  "sources.0.title": "Do Higher Corporate Taxes Reduce Wages? Micro Evidence from Germany",
+  "sources.0.authors_year": "Fuest, Peichl y Siegloch (2018, American Economic Review 108(2); IZA DP 7390 de 2013)",
+  "sources.0.period": "20 años de paneles municipales, 6.800 cambios del impuesto local",
+  "sources.0.locator": "resumen (AER); en el IZA DP 7390, págs. 3 y 6: 77 céntimos en empresas con convenio colectivo",
+  "sources.0.quote": "we find that workers bear about one-half of the total tax burden",
+  "sources.0.value_in_source": "0,5 (AER 2018); 0,77 en empresas con convenio colectivo (IZA DP 2013)",
+  "debate.schools.0.central": 0.5,
+  "parameter.central": 0.34,
+  "derivation": "Bajo 0,18 (Tesoro de EE. UU., convención de reparto). Alto 0,77 (IZA DP 7390, incidencia total en empresas con convenio colectivo). Central = punto medio entre las dos escuelas, (0,18 + 0,50) / 2 = 0,34, con 0,50 de la versión publicada en la AER (2018). No hay estimación española; el canal alemán pasa por la negociación colectiva, también extendida en España, lo que es una suposición.",
+  "note_es": "Es una cuestión discutida. Según un estudio con municipios alemanes (Fuest, Peichl y Siegloch, 2018), los trabajadores soportan alrededor de la mitad del impuesto local sobre empresas, y unos 77 céntimos por euro en las empresas con convenio colectivo; el Tesoro de EE. UU. asigna solo el 18 % al trabajo. El simulador usa el 34 %, punto medio entre ambos, sin estimación española."
+ }
+}

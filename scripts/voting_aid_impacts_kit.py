@@ -64,7 +64,7 @@ BLOCKED = {
 }
 
 # Official sites whose TLS chain fails from here (seen 2026-10-13). Retry unverified for these hosts only, never globally.
-INSECURE_SSL_HOSTS = {"www.mites.gob.es", "mites.gob.es", "www.sepe.es", "sepe.es", "www.mapa.gob.es", "mapa.gob.es", "servicio.mapa.gob.es", "www.csd.gob.es", "www.educacionfpydeportes.gob.es", "www.transportes.gob.es", "www.tribunalconstitucional.es", "www.juventudeinfancia.gob.es", "juventudeinfancia.gob.es", "observatoriodelainfancia.juventudeinfancia.gob.es", "origin.miteco.gob.es"}
+INSECURE_SSL_HOSTS = {"www.tesoro.es", "tesoro.es", "www.mites.gob.es", "mites.gob.es", "www.sepe.es", "sepe.es", "www.mapa.gob.es", "mapa.gob.es", "servicio.mapa.gob.es", "www.csd.gob.es", "www.educacionfpydeportes.gob.es", "www.transportes.gob.es", "www.tribunalconstitucional.es", "www.juventudeinfancia.gob.es", "juventudeinfancia.gob.es", "observatoriodelainfancia.juventudeinfancia.gob.es", "origin.miteco.gob.es"}
 
 
 def out(text: str, limit: int) -> None:

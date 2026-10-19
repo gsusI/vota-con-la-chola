@@ -1,0 +1,14 @@
+{
+ "id": "T01_irpf_yield_all",
+ "verdict": "fix",
+ "source_ok": false,
+ "value_ok": true,
+ "grade_ok": true,
+ "wording_ok": true,
+ "evidence": "Partidas 521 (142.859.734.177) y 522 están en la URL citada, pero esa página solo trae el mínimo personal y familiar (511-523); la partida 500 (534.779.537.203) está en la tabla por tramos de la partida 500 (fila Total, URL de T02). (534.779,5 − 142.859,7)/1.496.277 = 0,262 % confirmado; PIB 2023 Eurostat correcto.",
+ "corrections": {
+  "sources.0.title": "Estadística de los declarantes del IRPF 2023: Detalle de partidas, mínimo personal y familiar",
+  "sources.0.locator": "partidas 521 y 522 (Total); la partida 500 (534.779.537.203 €) está en la tabla por tramos de la partida 500, fila Total (sites/irpf/2023/jrubik7a356dde49b85b0e855c7c8edbe15fe1dee6e336.html)",
+  "note_es": "Según la estadística de declarantes del IRPF 2023 de la AEAT (territorio común, sin País Vasco ni Navarra), la base liquidable general menos el mínimo personal y familiar fue de 391.920 M€: subir 1 punto el tipo de todos los tramos recaudaría unos 3.900 M€, el 0,26 % del PIB, antes de reacciones de los contribuyentes."
+ }
+}

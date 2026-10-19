@@ -1,0 +1,262 @@
+{
+ "agent": "tax_b",
+ "edges": [
+  {
+   "id": "T04_vat_reduced_yield",
+   "from": "tipo_iva_reducido",
+   "to": "recaudacion_iva",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "recaudacion_por_punto_iva_reducido",
+    "unit": "% del PIB por 1 pp del tipo reducido (10 %)",
+    "low": 0.122,
+    "central": 0.136,
+    "high": 0.144
+   },
+   "lag_years": [
+    0,
+    1
+   ],
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://www.sepg.pap.hacienda.gob.es/Presup/PGE2023Proyecto/MaestroDocumentos/PGE-ROM/doc/3/2/4/N_23_A_A_1B_C7_1.PDF",
+     "title": "Memoria de Beneficios Fiscales, Proyecto de Presupuestos Generales del Estado para 2023 (IVA)",
+     "authors_year": "Ministerio de Hacienda y Función Pública (2022)",
+     "country": "España",
+     "period": "2023 (previsión; última base fiscal 2021)",
+     "method": "base fiscal de las operaciones al 10 % (206.316,02 M, declaraciones) por el diferencial de 11 pp con el tipo general, pasada de devengo a caja con un factor del 98,80 %; territorio de régimen fiscal común",
+     "locator": "págs. 16-18",
+     "quote": "22.428,49 millones de euros, con un incremento del 1,1 por ciento [...] por las operaciones gravadas al tipo reducido del 10 por ciento",
+     "value_in_source": "22.428,49 M EUR por 11 pp (21 % − 10 %); base fiscal al 10 %: 206.316,02 M EUR; base teórica macroeconómica al 10 %: 216.189,27 M EUR"
+    },
+    {
+     "url": "https://sede.agenciatributaria.gob.es/static_files/AEAT/Estudios/Estadisticas/Informes_Estadisticos/Informes_Anuales_de_Recaudacion_Tributaria/Ejercicio_2013/IART13_eu_es.pdf",
+     "title": "Informe Anual de Recaudación Tributaria 2013",
+     "authors_year": "AEAT, Servicio de Estudios Tributarios y Estadísticas (2014)",
+     "country": "España",
+     "period": "2010-2013",
+     "method": "impacto en caja de cambios normativos por año",
+     "locator": "pág. 15, cuadro de cambios normativos",
+     "quote": "Elevación de tipos general y reducido y cambio productos 2.899 3.393 2.263 7.438",
+     "value_in_source": "subida de 2010: 2.899 + 3.393 = 6.292 M EUR; subida de 2012: 2.263 + 7.438 = 9.701 M EUR"
+    },
+    {
+     "url": "https://ec.europa.eu/eurostat/databrowser/view/nama_10_gdp/default/table",
+     "title": "Eurostat nama_10_gdp: GDP and main components",
+     "authors_year": "Eurostat (consulta 2026-10-19)",
+     "country": "España",
+     "period": "2013, 2023",
+     "method": "contabilidad nacional SEC 2010",
+     "locator": "geo=ES, na_item=B1GQ, unit=CP_MEUR",
+     "quote": "Gross domestic product at market prices | 2023 = 1496277.0; 2013 = 1025652.0",
+     "value_in_source": "1.496.277 M EUR (2023); 1.025.652 M EUR (2013)"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://sede.agenciatributaria.gob.es/static_files/AEAT/Estudios/Estadisticas/Informes_Estadisticos/Informes_Anuales_de_Recaudacion_Tributaria/Ejercicio_2013/IART13_eu_es.pdf",
+     "title": "Informe Anual de Recaudación Tributaria 2013 (pág. 10)",
+     "finding": "La AEAT dice que el impacto positivo de la subida de tipos de 2012 fue contrarrestado en gran parte por una nueva caída del gasto final sujeto a IVA (efecto de comportamiento y de ciclo, no estático)."
+    }
+   ],
+   "debate": null,
+   "derivation": "Central: 22.428,49 M / 11 pp = 2.039 M por pp; / PIB 2023 1.496.277 M = 0,136 % (territorio común). Alto: 1 % de la base teórica macroeconómica al 10 % (216.189 M) = 0,144 %. Bajo: central − 10 % (0,122), suposición por el error de una previsión hecha sobre la base fiscal de 2021. El residuo de las subidas de 2010 y 2012 en la AEAT (2a + b = 6.292, 3a + 2b = 9.701: b = 526 M por pp, 0,051 % del PIB 2013) no se usa como cota: incluye productos que pasaron del 8 % al 21 % y la caída del gasto, que es reacción y no rendimiento estático.",
+   "note_es": "Según la Memoria de Beneficios Fiscales de 2023, aplicar el 21 % en vez del 10 % supondría 22.428 millones: unos 2.039 millones por punto, el 0,136 % del PIB. La AEAT no separa el tipo reducido en la subida de 2012, que en conjunto aportó 9.701 millones al año.",
+   "review": {
+    "verdict": "fix",
+    "evidence": "Memoria BF 2023 págs. 16-18: la base al 10 % con datos fiscales es 206.316,02 M (× 11 pp = 22.694,76 M en devengo) y 22.428,49 M es esa cifra pasada a caja (factor 98,80 %) en territorio común; 216.189,27 M es la base teórica macroeconómica, no 'sin factor de cumplimiento'. Central 2.039 M/pp = 0,136 % defendible; el bajo 0,051 (residuo AEAT 2010/2012, b = 526 M/pp, aritmética correcta) mezcla reclasificación de productos del 8 % al 21 % y caída del gasto, así que no es un rendimiento estático y no cabe en un enlace contable."
+   }
+  },
+  {
+   "id": "T05_corp_yield",
+   "from": "tipo_sociedades",
+   "to": "recaudacion_sociedades",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "recaudacion_por_punto_sociedades",
+    "unit": "% del PIB por 1 pp del tipo nominal del Impuesto sobre Sociedades",
+    "low": 0.094,
+    "central": 0.131,
+    "high": 0.138
+   },
+   "lag_years": [
+    0,
+    1
+   ],
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/sociedadest2/2023/jrubikcdb249755d85be006d2455181004fdca681dae1.html",
+     "title": "Estadística de cuentas anuales no consolidadas del Impuesto sobre Sociedades 2023: número de empresas, resultado contable y base imponible",
+     "authors_year": "AEAT (2025)",
+     "country": "España",
+     "period": "2019-2023",
+     "method": "declaraciones del modelo 200 (estadística censal)",
+     "locator": "fila Base Imponible y fila Inst.Inversión Colectiva (I), ejercicio 2023",
+     "quote": "Base Imponible 153.743 125.294 176.933 177.800 206.530",
+     "value_in_source": "206.530 M EUR en 2023, de ellos 10.415 M de instituciones de inversión colectiva (tipo del 1 %)"
+    },
+    {
+     "url": "https://www3.agenciatributaria.gob.es/static_files/Sede/Tema/Estadisticas/Estadisticas_impuesto/Sociedades/Sociedadesdc/Documentacion/Infografia_SC.pdf",
+     "title": "Cuentas anuales consolidadas del Impuesto sobre Sociedades: infografía",
+     "authors_year": "AEAT (2025)",
+     "country": "España",
+     "period": "último ejercicio publicado",
+     "method": "estadística de declaraciones consolidadas",
+     "locator": "pág. 3",
+     "quote": "Los grupos concentran el 50,5% de la facturación y el 54,8% del beneficio, pero solo aportan el 32,8% de la cuota líquida.",
+     "value_in_source": "tipo efectivo sobre beneficios 12,1 %; grupos 54,8 % del beneficio"
+    },
+    {
+     "url": "https://ftp.zew.de/pub/zew-docs/dp/dp13045.pdf",
+     "title": "Multinationals' Profit Response to Tax Differentials: Effect Size and Shifting Channels (ZEW DP 13-045)",
+     "authors_year": "Heckemeyer y Overesch (2013; publicado en Canadian Journal of Economics 2017)",
+     "country": "internacional (meta-análisis)",
+     "period": "25 estudios empíricos",
+     "method": "meta-regresión",
+     "locator": "pág. 3",
+     "quote": "we predict a tax semi-elasticity of pre-tax profit of about 0.8, in absolute terms",
+     "value_in_source": "0.8"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://sede.agenciatributaria.gob.es/Sede/estadisticas/recaudacion-tributaria/informe-anual/ejercicio-2023/3-impuesto-sobre-sociedades.html",
+     "title": "Informe Anual de Recaudación Tributaria 2023, cap. 3",
+     "finding": "La recaudación del impuesto fue 35.060 M en 2023, muy por debajo del 25 % de la base (deducciones, tipos reducidos para pymes y nuevas empresas, IIC al 1 %): si la cuota líquida subiera en proporción al tipo (26/25), un punto daría 1.402 M, 0,094 % del PIB."
+    }
+   ],
+   "debate": null,
+   "derivation": "Central: base imponible 2023 sin IIC (206.530 - 10.415 = 196.115 M) x 1 pp = 1.961 M / PIB 2023 1.496.277 M = 0,131 %; las deducciones son mayoritariamente fijas y no crecen con el tipo. Alto: toda la base, 0,138 %. Bajo: recaudación 35.060 M / 25 = 1.402 M (0,094 %), si las deducciones con límite en % de cuota absorben parte. Semielasticidad de la base: 0,8 del meta-análisis aplicada solo al 54,8 % del beneficio de los grupos = 0,44; bajo 0 (pymes sin canal internacional).",
+   "note_es": "Según la AEAT, la base imponible del Impuesto sobre Sociedades fue de 206.530 millones en 2023 (196.115 sin fondos al 1 %): un punto más de tipo daría unos 1.961 millones, el 0,131 % del PIB, antes de que las empresas declaren menos beneficio.",
+   "extra_parameters": [
+    {
+     "name": "semielasticidad_base_sociedades",
+     "unit": "% de caída de la base declarada por 1 pp más de tipo",
+     "low": 0.0,
+     "central": 0.44,
+     "high": 0.8
+    }
+   ],
+   "review": {
+    "verdict": "pass",
+    "evidence": "AEAT cuentas no consolidadas 2023: Base Imponible 206.530 M e IIC 10.415 M confirmados (196.115 M → 0,131 %; total 0,138 %); IART 2023 cap. 3: 35.060 M (0,094 %); infografía pág. 3: 12,1 % y 54,8 % del beneficio; ZEW DP 13-045 pág. 3: semielasticidad ≈ 0,8 (0,8 × 0,548 = 0,44). Aplicar la semielasticidad de filiales multinacionales a todos los grupos fiscales (también domésticos) es una suposición, ya marcada por el bajo 0."
+   }
+  },
+  {
+   "id": "T06_corp_incidence",
+   "from": "impuesto_sociedades",
+   "to": "salarios",
+   "sign": "-",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "traslado_sociedades_salarios",
+    "unit": "fracción del Impuesto sobre Sociedades que acaba en menores salarios, largo plazo",
+    "low": 0.18,
+    "central": 0.34,
+    "high": 0.77
+   },
+   "lag_years": [
+    3,
+    10
+   ],
+   "grade": "B",
+   "spain_evidence": "no",
+   "sources": [
+    {
+     "url": "https://www.aeaweb.org/articles?id=10.1257/aer.20130570",
+     "title": "Do Higher Corporate Taxes Reduce Wages? Micro Evidence from Germany",
+     "authors_year": "Fuest, Peichl y Siegloch (2018, American Economic Review 108(2); IZA DP 7390 de 2013)",
+     "country": "Alemania",
+     "period": "20 años de paneles municipales, 6.800 cambios del impuesto local",
+     "method": "diferencias en diferencias con cambios del impuesto local sobre empresas y datos empleador-empleado",
+     "locator": "resumen (AER); en el IZA DP 7390, págs. 3 y 6: 77 céntimos en empresas con convenio colectivo",
+     "quote": "we find that workers bear about one-half of the total tax burden",
+     "value_in_source": "0,5 (AER 2018); 0,77 en empresas con convenio colectivo (IZA DP 2013)"
+    },
+    {
+     "url": "https://home.treasury.gov/system/files/131/TP-5.pdf",
+     "title": "Distributing the Corporate Income Tax: Revised U.S. Treasury Methodology (OTA Technical Paper 5)",
+     "authors_year": "Cronin, Lin, Power y Cooper (2012), U.S. Treasury",
+     "country": "Estados Unidos",
+     "period": "metodología desde el año de modelo 2012",
+     "method": "reparto por rentas normales y supranormales del capital (convención institucional)",
+     "locator": "pág. 2",
+     "quote": "82% of the corporate income tax burden is distributed to capital income and 18% is distributed to labor income.",
+     "value_in_source": "0.18"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://home.treasury.gov/system/files/131/TP-5.pdf",
+     "title": "U.S. Treasury OTA TP-5 (2012)",
+     "finding": "El Tesoro de EE. UU. asigna solo el 18 % al trabajo (24 % entre 2008 y 2011), muy por debajo del 77 % del trabajo alemán."
+    }
+   ],
+   "debate": {
+    "id": "incidencia_sociedades_salarios",
+    "schools": [
+     {
+      "label": "Negociación colectiva y movilidad regional: los trabajadores soportan la mayor parte (Fuest, Peichl y Siegloch, Alemania)",
+      "central": 0.5,
+      "source_index": 0
+     },
+     {
+      "label": "Convención institucional de EE. UU.: el capital soporta la mayor parte (Tesoro)",
+      "central": 0.18,
+      "source_index": 1
+     }
+    ]
+   },
+   "derivation": "Bajo 0,18 (Tesoro de EE. UU., convención de reparto). Alto 0,77 (IZA DP 7390, incidencia total en empresas con convenio colectivo). Central = punto medio entre las dos escuelas, (0,18 + 0,50) / 2 = 0,34, con 0,50 de la versión publicada en la AER (2018). No hay estimación española; el canal alemán pasa por la negociación colectiva, también extendida en España, lo que es una suposición.",
+   "note_es": "Es una cuestión discutida. Según un estudio con municipios alemanes (Fuest, Peichl y Siegloch, 2018), los trabajadores soportan alrededor de la mitad del impuesto local sobre empresas, y unos 77 céntimos por euro en las empresas con convenio colectivo; el Tesoro de EE. UU. asigna solo el 18 % al trabajo. El simulador usa el 34 %, punto medio entre ambos, sin estimación española.",
+   "review": {
+    "verdict": "fix",
+    "evidence": "IZA DP 7390 pág. 3 confirma 77 céntimos, pero pág. 6 precisa que es la incidencia total sobre salarios en empresas con convenio colectivo (efecto directo 50, 67 con un retardo); la versión publicada (AER 2018, resumen en aeaweb.org) dice «workers bear about one-half of the total tax burden». Tesoro TP-5 pág. 2: 18 % al trabajo, una convención de reparto y no una estimación empírica; mismo concepto (cuota del impuesto que soporta el trabajo), dominios distintos."
+   }
+  },
+  {
+   "id": "T07_wage_bill",
+   "from": "salarios",
+   "to": "base_salarial",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "salarios_pib",
+    "unit": "% del PIB: sueldos y salarios brutos (D11)",
+    "low": 36.87,
+    "central": 37.0,
+    "high": 37.67
+   },
+   "lag_years": 0,
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://ec.europa.eu/eurostat/databrowser/view/nama_10_gdp/default/table",
+     "title": "Eurostat nama_10_gdp: GDP and main components (output, expenditure and income)",
+     "authors_year": "Eurostat (consulta 2026-10-19)",
+     "country": "España",
+     "period": "2023-2025",
+     "method": "contabilidad nacional SEC 2010",
+     "locator": "geo=ES, na_item=D11 y B1GQ, unit=CP_MEUR",
+     "quote": "Wages and salaries | 2024 = 591441.0; Gross domestic product at market prices | 2024 = 1598588.0",
+     "value_in_source": "591.441 / 1.598.588 M EUR (2024)"
+    }
+   ],
+   "contrary_evidence": [],
+   "debate": null,
+   "derivation": "2024: 591.441 / 1.598.588 = 37,0 %. Bajo 2023: 551.674 / 1.496.277 = 36,87 %; alto 2025: 636.703 / 1.690.012 = 37,67 %.",
+   "note_es": "Según Eurostat, los sueldos y salarios brutos sumaron 591.441 millones en 2024, el 37,0 % del PIB de España (36,9 % en 2023 y 37,7 % en 2025).",
+   "review": {
+    "verdict": "pass",
+    "evidence": "Eurostat nama_10_gdp (consulta 2026-10-19): D11 551.674 / 591.441 / 636.703 y B1GQ 1.496.277 / 1.598.588 / 1.690.012 para 2023-2025; ratios 36,87 / 37,00 / 37,67 % reproducidos."
+   }
+  }
+ ]
+}

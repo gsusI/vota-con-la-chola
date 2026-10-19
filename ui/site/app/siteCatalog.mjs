@@ -355,8 +355,8 @@ export const siteSections = [
         cta: "Abrir visualización",
       },
       {
-        title: "Simulador: si se suben las pensiones, ¿quién lo paga?",
-        note: "Mueve la revalorización, la edad de jubilación o las cotizaciones y mira cómo se propaga a la deuda, el empleo y dos casos tipo, según se pague con deuda, cotizaciones o IVA.",
+        title: "Simulador: si se suben las pensiones o los impuestos, ¿quién lo paga?",
+        note: "Mueve pensiones, IRPF, IVA, cotizaciones o Sociedades y mira cómo se propaga a la deuda, el empleo, cada quintil de renta y cuatro casos tipo, según se pague con deuda, cotizaciones, IVA o IRPF.",
         href: "/visualizaciones/sistema/",
         cta: "Abrir simulador",
       },
@@ -388,9 +388,9 @@ export const siteSections = [
         note: "Ministerio de Sanidad (SISLE-SNS, EGSP), INE, Eurostat, OCDE y Banco Mundial, con rupturas de serie y procedencia por gráfico.",
       },
       {
-        title: "Simulador de pensiones y cuentas públicas",
+        title: "Simulador de pensiones, impuestos y cuentas públicas",
         href: "/visualizaciones/sistema/",
-        note: "Modelo sobre la línea base del Ageing Report 2024, con 24 fichas de relaciones causales con fuente, rango y revisión de calidad.",
+        note: "Modelo sobre la línea base del Ageing Report 2024, con fichas de relaciones causales con fuente, rango y revisión de calidad, y reparto por quintil con microdatos de la ECV.",
       },
     ],
   },

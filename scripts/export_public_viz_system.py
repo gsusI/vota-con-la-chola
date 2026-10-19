@@ -32,6 +32,8 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT / "scripts"))
 from export_public_viz_fiscal import Store, interp  # noqa: E402
 from ingest_employment_es import xlsx_rows, xlsx_sheet  # noqa: E402
+import system_model_incidence as incidence  # noqa: E402
+from housing_ecv_microdata import MICRO_PAGE, MICRO_URL  # noqa: E402
 
 DEFAULT_DB = REPO_ROOT / "etl/data/staging/public-finance-es.db"
 AR_XLSX = REPO_ROOT / "etl/data/raw/system_model/ar2024_countryfiches.xlsx"
@@ -44,6 +46,11 @@ CATALOG = REPO_ROOT / "etl/data/manual/system_model/catalog.json"
 DATA_DIR = REPO_ROOT / "ui/site/public/visualizaciones/data"
 FISCAL_JSON = DATA_DIR / "carga-fiscal.json"
 VOTING_AID = REPO_ROOT / "ui/site/public/citizen/data/voting_aid_generales_v2.json"
+ECV_ZIP = REPO_ROOT / "etl/data/raw/housing/apis/ine_ecv_microdatos_2025.zip"
+ECV_YEAR = 2025
+HBS_STR = REPO_ROOT / "etl/data/raw/system_model/eurostat_hbs_str_t223_es.json"
+HBS_EXP = REPO_ROOT / "etl/data/raw/system_model/eurostat_hbs_exp_t133_es.json"
+HBS_YEAR, HBS_CHECK_YEAR = "2015", "2020"  # 2015: last wave before the pandemic distorted spending (2020 is the check)
 OUT_JSON = DATA_DIR / "sistema.json"
 OUT_CSV = DATA_DIR / "sistema.csv"
 
@@ -57,18 +64,24 @@ PARAMS = [
     "multiplicador_transferencias", "multiplicador_impuestos", "persistencia_multiplicador", "semielasticidad_saldo",
     "traslado_cotizacion_salario", "elasticidad_empleo_coste", "base_cotizacion_pib", "recaudacion_por_1pct_empleo",
     "recaudacion_por_punto_iva", "traslado_iva_precios", "cuota_iva_general", "indiciacion_salarios", "prima_por_deuda",
-    "cuota_refinanciacion",
+    "cuota_refinanciacion", "recaudacion_por_punto_irpf", "recaudacion_por_punto_irpf_alto", "pareto_a_alto", "eti_general",
+    "eti_alta", "recaudacion_por_punto_iva_reducido", "recaudacion_por_punto_sociedades", "semielasticidad_base_sociedades",
+    "traslado_sociedades_salarios", "salarios_pib",
 ]
 # Model constants from cards (central value, no uncertainty in the engine) or from the law.
 CARD_CONSTANTS = {"new_pension_relative": "new_pension_relative", "labour_output_elasticity": "elasticidad_producto_empleo"}
-BENCHMARKS = ["B01_revaluation_2023_cost", "B02_irp_savings", "B03_dsm_spain"]
+BENCHMARKS = ["B01_revaluation_2023_cost", "B02_irp_savings", "B03_dsm_spain", "B04_irpf_concentration"]
 
 # Votes in the voting-aid snapshot that touch each lever (matched on the plain-language summary).
 LEVER_VOTES = {
     "reval": r"(sub(e|ida)[^.]{0,40}pensiones|revaloric)",
     "age": r"jubila(ción|rse)[^.]{0,60}(anticipad|65 años|penaliz|antes)",
     "contrib": r"(rebajar|bonificar|bonificaciones)[^.]{0,40}(cotizaci|cuotas)",
+    "irpf": r"IRPF[^.]{0,80}(tramo|tipo|deflact|bajar|rebaja|subir|mínimo exento)|(bajar|rebaja|subir)[^.]{0,40}IRPF",
+    "iva": r"\bIVA\b[^.]{0,60}(general|reducido|alimentos|18 %|8 %)|(bajar|rebaja)[^.]{0,30}\bIVA\b",
+    "corp": r"[Ss]ociedades",
 }
+MAX_VOTES = 12
 
 
 def sha256(path: Path) -> str:
@@ -137,7 +150,7 @@ def related_votes(lever: str) -> list[dict]:
                     "statement": {"id": st["statement_id"], "text": st["text"]},
                     "parties": {parties[j]: c for j, c in enumerate(v["parties"]) if j < len(parties)},
                 }
-    rows = sorted(seen.values(), key=lambda x: x["date"], reverse=True)
+    rows = sorted(seen.values(), key=lambda x: x["date"], reverse=True)[:MAX_VOTES]
     return {"party_labels": labels, "party_order": parties, "votes": rows}
 
 
@@ -145,7 +158,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--db", type=Path, default=DEFAULT_DB)
     args = parser.parse_args()
-    missing = [p for p in (args.db, AR_XLSX, CATALOG, FISCAL_JSON, VOTING_AID) if not p.exists()]
+    missing = [p for p in (args.db, AR_XLSX, CATALOG, FISCAL_JSON, VOTING_AID, ECV_ZIP, HBS_STR, HBS_EXP) if not p.exists()]
     if missing:
         print(f"inputs missing ({', '.join(str(p.relative_to(REPO_ROOT)) for p in missing)}); keeping committed artifact")
         return 0
@@ -181,6 +194,23 @@ def main() -> int:
     lo_m, hi_m = (0.67, 1.0) if m1 <= 1.0 else (1.0, 1.67)
     marginal_total = (npatr[hi_m] * hi_m - npatr[lo_m] * lo_m) / (hi_m - lo_m) / 100
     worker_ssc = interp(sorted(ssc.items()), m1) / 100
+
+    def marginal_at(m: float) -> float:
+        lo, hi = (0.67, 1.0) if m <= 1.0 else (1.0, 1.67)
+        return (npatr[hi] * hi - npatr[lo] * lo) / (hi - lo) / 100
+
+    # Average IRPF-only marginal rate around the average wage (both sides of AW100, minus worker contributions).
+    irpf_marginal_avg = (marginal_at(0.9) + marginal_at(1.1)) / 2 - ssc[1.0] / 100
+    p2, p5 = cases["p2_family_renter_metro"], cases["p5_professional_madrid"]
+
+    def persona(row: dict, earners: list[float]) -> dict:
+        liable = [incidence.liable_bases(wage_gross=w) for w in earners]
+        gross = sum(earners)
+        return {"key": row["key"], "gross": row["gross"], "net": row["net"], "year": cy,
+                "marginal_total": r(sum(marginal_at(w / aw) * w for w in earners) / gross, 4),
+                "worker_ssc_rate": r(interp(sorted(ssc.items()), earners[0] / aw) / 100, 4),
+                "irpf_liable": r(sum(a for a, _ in liable), 0), "irpf_above_top": r(sum(b for _, b in liable), 0),
+                "earners": [r(w, 0) for w in earners]}
 
     cat = load_catalog()
     params = {}
@@ -259,8 +289,34 @@ def main() -> int:
                                "high": card["parameter"]["high"], "unit": card["parameter"]["unit"],
                                "derivation": card["derivation"], "sources": card["sources"]}
 
+    # ---- incidence by quintile (offline microsimulation; docs §12)
+    ecv = incidence.ecv_shares(ECV_ZIP.read_bytes(), ECV_YEAR)
+    hbs = {y: incidence.vat_shares(incidence.hbs_vat(HBS_STR, y), incidence.hbs_spending(HBS_EXP, y)) for y in (HBS_YEAR, HBS_CHECK_YEAR)}
+    for y, structure in ((y, incidence.hbs_vat(HBS_STR, y)) for y in (HBS_YEAR, HBS_CHECK_YEAR)):
+        spend = incidence.hbs_spending(HBS_EXP, y)
+        tot = sum(spend.values())
+        hbs[y]["national_basket"] = {rate: r(sum(spend[q] * structure[q].get(rate, 0.0) for q in spend) / tot, 4)
+                                     for rate in ("21", "10", "4", "x")}
+        hbs[y]["structure"] = structure
+    incidence_block = {"ecv": ecv, "vat": {**hbs[HBS_YEAR], "year": HBS_YEAR, "check": {"year": HBS_CHECK_YEAR, **hbs[HBS_CHECK_YEAR]}}}
+    comp = fiscal["composition_pct_gdp"]["T_1200"]
+    corp_revenue_pct = comp[-1]["value"]
+    std_gap = abs(incidence_block["vat"]["national_basket"]["21"] - cat["by_param"]["cuota_iva_general"]["spec"]["central"])
+    gates.append({"id": "vat_basket_vs_hicp", "ok": std_gap <= 0.1, "value": r(std_gap, 3),
+                  "detail": "standard-rate share of household spending (HBS + law, own calculation) vs the HICP-based card E13b"})
+    if not gates[-1]["ok"]:
+        raise SystemExit(f"input gate failed: {gates[-1]}")
+    real_index, acc = [], 1.0
+    for j, y in enumerate(years):
+        if j:
+            acc *= 1 + base["real_growth"][j] / 100
+        real_index.append(r(acc, 5))
+    base["real_index"] = real_index
+
     hicp_idx = {int(p["period"]): p["value"] for p in store.series("eurostat_sdmx", "CP00", "INX_A_AVG").get("ES", [])}
     backtest_inputs = {
+        "ecv_top20_base_share": ecv["top20_base_share"],
+        "icw_vat_by_quintile": fiscal["segments"]["cases"]["vat_by_quintile"],
         "gdp_2022_meur": r(gd_meur[2022] / gd_pct[2022] * 100, 0),
         "pension_pct_ar_2022": r(pens[2022], 3),
         "hicp_rates": {str(y): r((hicp_idx[y] / hicp_idx[y - 1] - 1) * 100, 3) for y in range(2014, 2019)},
@@ -288,6 +344,11 @@ def main() -> int:
             "incidence_lag_years": 3,
             "employment_adjust_per_year": 0.5,
             "wage_tax_rate": 0.56,  # contributions on the base (~36 %) + average marginal IRPF on wages (~20 %)
+            "irpf_marginal_avg": r(irpf_marginal_avg, 4),
+            "irpf_marginal_top": 0.45,
+            "vat_reduced_rate": 0.10,
+            "vat_reduced_basket_share": incidence_block["vat"]["national_basket"]["10"],
+            "corp_revenue_pct": corp_revenue_pct,
             **constants_card,
         },
         "constants_notes": {
@@ -297,6 +358,11 @@ def main() -> int:
             "age_phase_in_per_year": "Supuesto: el retraso de la edad se aplica a dos meses por año, el ritmo de la Ley 27/2011 desde 2019.",
             "incidence_lag_years": "Supuesto: el traslado de la cotización a salarios se completa en tres años.",
             "employment_adjust_per_year": "Supuesto: el empleo recorre cada año la mitad de la distancia hasta su nuevo nivel.",
+            "irpf_marginal_avg": "Tipo marginal medio del IRPF en torno al salario medio, de la escala de la OCDE (Taxing Wages) sin cotizaciones: se usa para la respuesta de la base (elasticidad de la renta gravable).",
+            "irpf_marginal_top": "Tipo marginal aproximado por encima de 60.000 €: 22,5 % de la escala estatal más una escala autonómica típica en torno al 22,5 % (varía por comunidad).",
+            "vat_reduced_rate": "Tipo reducido del IVA: 10 % (Ley 37/1992, art. 91.Uno).",
+            "vat_reduced_basket_share": "Parte del gasto de consumo de los hogares gravada al 10 %, con la Encuesta de Presupuestos Familiares de Eurostat (2015) y los tipos de la Ley 37/1992 por grupo de gasto (cálculo propio).",
+            "corp_revenue_pct": "Recaudación del Impuesto sobre Sociedades en % del PIB, último año de la serie de la OCDE que usa la página de carga fiscal.",
             "wage_tax_rate": "Supuesto: un euro menos de salario bruto pierde unos 56 céntimos de ingresos (cotización total de la base, en torno al 36 %, más un IRPF marginal medio en torno al 20 %).",
             "new_pension_relative": "Pensión media de las altas de jubilación frente a la media de todas (ficha del catálogo).",
             "labour_output_elasticity": "Elasticidad del PIB potencial al empleo en la función de producción de la Comisión (ficha del catálogo).",
@@ -304,10 +370,15 @@ def main() -> int:
         "mei_2029": mei["spec"]["central"] if mei else None,
         "cpi_rule": rate_card["card"]["note_es"] if rate_card else None,
         "personas": {
-            "p1": {"key": p1["key"], "gross": p1["gross"], "net": p1["net"], "year": cy, "marginal_total": r(marginal_total, 4),
-                   "worker_ssc_rate": r(worker_ssc, 4), "aw_multiple": r(m1, 3), "rent_month": p1.get("rent_month")},
-            "p4": {"key": p4["key"], "gross": p4["gross"], "net": p4["net"], "year": cy},
+            "p1": {**persona(p1, [p1["gross"]]), "aw_multiple": r(m1, 3), "rent_month": p1.get("rent_month")},
+            # Two earners at 100 % and 67 % of the OECD average wage (Taxing Wages), as on the tax page.
+            "p2": persona(p2, [aw, 0.67 * aw]),
+            "p4": {"key": p4["key"], "gross": p4["gross"], "net": p4["net"], "year": cy, "pension_gross": p4["gross"],
+                   "irpf_liable": r(incidence.liable_bases(pension_gross=p4["gross"])[0], 0),
+                   "irpf_above_top": r(incidence.liable_bases(pension_gross=p4["gross"])[1], 0)},
+            "p5": persona(p5, [p5["gross"]]),
         },
+        "incidence": incidence_block,
         "edges": cat["cards"],
         "benchmarks": benchmarks,
         "backtest_inputs": backtest_inputs,
@@ -328,6 +399,14 @@ def main() -> int:
                              "generated_at": fiscal.get("generated_at")},
             "catalog": {"label": "Catálogo de relaciones causales del simulador", "file": "etl/data/manual/system_model/catalog.json",
                         "sha256": sha256(CATALOG)},
+            "ecv_microdata": {"label": f"INE · Encuesta de Condiciones de Vida {ECV_YEAR}, microdatos (renta de {ECV_YEAR - 1})",
+                              "page": MICRO_PAGE, "url": MICRO_URL.format(year=ECV_YEAR),
+                              "sha256": sha256(ECV_ZIP)},
+            "eurostat_hbs": {"label": "Eurostat · Encuesta de Presupuestos Familiares por quintil (hbs_str_t223, hbs_exp_t133)",
+                             "page": "https://ec.europa.eu/eurostat/databrowser/view/hbs_str_t223/default/table",
+                             "sha256": sha256(HBS_STR) + " / " + sha256(HBS_EXP), "retrieved_at": "2026-10-19"},
+            "boe_iva": {"label": "BOE · Ley 37/1992 del IVA (arts. 20, 90 y 91), tipos por grupo de gasto",
+                        "page": "https://www.boe.es/buscar/act.php?id=BOE-A-1992-28740"},
             "voting_aid": {"label": "Test de voto v2 (votaciones del Congreso)", "page": "/citizen/vota/",
                            "file": "/citizen/data/voting_aid_generales_v2.json", "sha256": sha256(VOTING_AID)},
         },

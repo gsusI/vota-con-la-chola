@@ -1,15 +1,22 @@
-// Engine of /visualizaciones/sistema/: one module (pensions + public finances), annual steps, deviations from the
+// Engine of /visualizaciones/sistema/: pensions, public finances and taxes, annual steps, deviations from the
 // Ageing Report 2024 baseline for Spain. Pure functions, no dependencies: the page runs it in the browser and
-// `node --test` runs the same file (engine.test.mjs). Equations and their sources: sistema.json
-// (`equations`, `edges`) and docs/etl/sprints/SISTEMA-COMPLEJO-20261019/README.md.
+// `node --test` runs the same file (engine.test.mjs). Sources of every number: sistema.json (`edges`, `constants_notes`)
+// and docs/etl/sprints/SISTEMA-COMPLEJO-20261019/README.md.
 
 export const LAYERS = ["contable", "comportamiento", "segunda_ronda"];
-export const CLOSURES = ["deuda", "cotizaciones", "iva"];
+export const CLOSURES = ["deuda", "cotizaciones", "iva", "irpf"];
+export const QUINTILES = ["Q1", "Q2", "Q3", "Q4", "Q5"];
+export const PERSONAS = ["p1", "p2", "p4", "p5"];
 
 export const DEFAULT_LEVERS = {
   reval: 0, // real revaluation over CPI, pp per year
   age: 0, // effective retirement age vs baseline, years (phased in)
-  contrib: 0, // extra pension contribution rate, pp of the contribution base (split like the MEI)
+  contrib: 0, // extra contribution rate, pp of the contribution base (split like the MEI)
+  irpfAll: 0, // every bracket of the IRPF general scale, pp
+  irpfTop: 0, // the part of the general base above 60,000 EUR, pp
+  vatStd: 0, // standard VAT rate (21 %), pp
+  vatRed: 0, // reduced VAT rate (10 %), pp
+  corp: 0, // nominal corporate income tax rate (25 %), pp
   closure: "deuda", // how the net cost is paid each year
   migration: "base", // context: Ageing Report migration variant (base | low | high)
   rateShock: 0, // context: market interest rate vs baseline, pp
@@ -28,11 +35,15 @@ export const NEUTRAL = {
   multiplicador_impuestos: 0,
   persistencia_multiplicador: 0,
   semielasticidad_saldo: 0,
+  eti_general: 0,
+  eti_alta: 0,
+  semielasticidad_base_sociedades: 0,
+  traslado_sociedades_salarios: 0,
 };
 
 const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
 
-/** Central value of every parameter, with debate schools applied ({paramName: schoolIndex}). */
+/** Central value of every parameter, with debate schools applied ({debateId: schoolIndex}). */
 export function centralParams(model, debates = {}) {
   const out = {};
   for (const [name, p] of Object.entries(model.params)) {
@@ -52,6 +63,8 @@ export function applyLayer(model, params, layer) {
   return out;
 }
 
+const zeros = (n) => new Array(n).fill(0);
+
 /**
  * One deterministic run. Returns arrays aligned with model.years (first year = last actual year, all deviations 0).
  * Units: % of baseline GDP for fiscal flows/stocks, fractions for pension/employment deviations, euros a month
@@ -66,39 +79,24 @@ export function simulate(model, levers = DEFAULT_LEVERS, params = centralParams(
   const start = model.policy_start;
   const es = C.employer_share;
   const mig = L.migration === "low" ? B.migration_low_pp : L.migration === "high" ? B.migration_high_pp : null;
+  // Behavioural offsets of the IRPF levers (elasticity of taxable income) and of the corporate tax base.
+  const offAll = P.eti_general * (C.irpf_marginal_avg / (1 - C.irpf_marginal_avg));
+  const offTop = P.eti_alta * (C.irpf_marginal_top / (1 - C.irpf_marginal_top)) * P.pareto_a_alto;
+  const irpfUnit = P.recaudacion_por_punto_irpf * (1 - offAll); // revenue of 1 pp on every bracket, net of behaviour
 
-  const out = {
-    years: model.years,
-    pension_dev: new Array(n).fill(0), // average pension vs baseline (fraction)
-    pensioners_dev: new Array(n).fill(0), // number of pensioners vs baseline (fraction)
-    employment_dev: new Array(n).fill(0), // fraction of employment
-    employment_k: new Array(n).fill(0), // thousands of people
-    gdp_dev: new Array(n).fill(0), // % of GDP (supply + demand)
-    pension_gross_pp: new Array(n).fill(0), // extra gross pension spending, % GDP
-    other_benefits_pp: new Array(n).fill(0),
-    irpf_back_pp: new Array(n).fill(0),
-    labour_revenue_pp: new Array(n).fill(0),
-    contrib_revenue_pp: new Array(n).fill(0),
-    vat_revenue_pp: new Array(n).fill(0),
-    cycle_revenue_pp: new Array(n).fill(0),
-    migration_pp: new Array(n).fill(0),
-    net_cost_pp: new Array(n).fill(0), // cost before the closure (positive = needs financing)
-    primary_dev_pp: new Array(n).fill(0), // primary deficit deviation after the closure
-    interest_dev_pp: new Array(n).fill(0),
-    debt_dev_pp: new Array(n).fill(0),
-    closure_contrib_pp: new Array(n).fill(0), // extra contribution rate needed, pp of base
-    closure_vat_pp: new Array(n).fill(0), // extra standard VAT rate needed, pp
-    price_level_dev: new Array(n).fill(0), // fraction
-    labour_cost_dev: new Array(n).fill(0), // fraction
-    wage_dev: new Array(n).fill(0), // gross wage, fraction
-    implicit_rate_dev: new Array(n).fill(0), // pp
-    pension_pct: [...B.pension_pct],
-    debt_pct: [...B.debt_pct],
-    deficit_pct: [...B.deficit_pct],
-    p4_month: new Array(n).fill(0),
-    p1_month: new Array(n).fill(0),
-    debt_per_person_eur: new Array(n).fill(0),
-  };
+  const keys = ["pension_dev", "pensioners_dev", "employment_dev", "employment_k", "gdp_dev", "pension_gross_pp",
+    "other_benefits_pp", "irpf_back_pp", "labour_revenue_pp", "contrib_revenue_pp", "vat_revenue_pp", "vat_red_revenue_pp",
+    "irpf_revenue_pp", "corp_revenue_pp", "cycle_revenue_pp", "migration_pp", "net_cost_pp", "primary_dev_pp",
+    "interest_dev_pp", "debt_dev_pp", "closure_contrib_pp", "closure_vat_pp", "closure_irpf_pp", "price_level_dev",
+    "labour_cost_dev", "wage_dev", "implicit_rate_dev", "debt_per_person_eur",
+    // statutory (static) burdens of each instrument, % GDP: the quintile split uses them
+    "s_irpf_all_pp", "s_irpf_top_pp", "s_vat_std_pp", "s_vat_red_pp", "s_contrib_pp", "s_corp_pp", "s_pension_net_pp",
+    ...PERSONAS.map((p) => `${p}_month`)];
+  const out = Object.fromEntries(keys.map((k) => [k, zeros(n)]));
+  out.years = model.years;
+  out.pension_pct = [...B.pension_pct];
+  out.debt_pct = [...B.debt_pct];
+  out.deficit_pct = [...B.deficit_pct];
 
   let x = 0; // average pension deviation of the stock
   let z = 0; // persona 4 (existing pensioner) deviation
@@ -116,9 +114,10 @@ export function simulate(model, levers = DEFAULT_LEVERS, params = centralParams(
     const g = B.nominal_growth[t] / 100;
     const i = B.implicit_rate[t] / 100;
     const base = B.pension_pct[t];
+    const lv = (key) => (on ? L[key] : 0);
 
     // Pensions: extra revaluation compounds on the stock; new pensions enter without it.
-    const r = on ? L.reval / 100 : 0;
+    const r = lv("reval") / 100;
     x = (1 - P.lambda_renovacion) * (x + r);
     z = on ? (1 + z) * (1 + r) - 1 : 0;
     const ageEff = on ? Math.sign(L.age) * Math.min(Math.abs(L.age), C.age_phase_in_per_year * k) : 0;
@@ -130,49 +129,64 @@ export function simulate(model, levers = DEFAULT_LEVERS, params = centralParams(
     const irpfPp = P.tipo_marginal_irpf_pension * (grossPp + otherPp);
     const migPp = on && mig ? mig[t] : 0;
 
+    // Tax levers: statutory revenue and the behavioural response (taxable income, corporate base).
+    const irpfLeverPp = irpfUnit * lv("irpfAll") + P.recaudacion_por_punto_irpf_alto * (1 - offTop) * lv("irpfTop");
+    const vatRedPp = P.recaudacion_por_punto_iva_reducido * lv("vatRed");
+    const corpStatic = P.recaudacion_por_punto_sociedades * lv("corp");
+    const corpPp = corpStatic - (C.corp_revenue_pct * P.semielasticidad_base_sociedades * lv("corp")) / 100;
+    // Part of the corporate tax ends up in lower wages (incidence), here as a fall of the wage bill.
+    const wageCorp = (-P.traslado_sociedades_salarios * corpStatic) / P.salarios_pib;
+
     // Employment from a later retirement: the share of the delayed cohort that stays in work.
     const eAge = (P.permanencia_empleo * P.kappa_cohorte * ageEff * B.pensioners_k[t]) / B.employment_k[t];
-    const contribLever = on ? L.contrib : 0;
+    const contribLever = lv("contrib");
     const theta = P.traslado_cotizacion_salario * clamp(k / C.incidence_lag_years, 0, 1);
+    const unit = { cotizaciones: P.base_cotizacion_pib, iva: P.recaudacion_por_punto_iva, irpf: irpfUnit }[L.closure];
 
     // The closure rate depends on the employment it destroys: solve the fixed point within the year.
-    let closeC = 0;
-    let closeV = 0;
+    let close = 0;
     let parts = null;
     for (let iter = 0; iter < 40; iter += 1) {
+      const closeC = L.closure === "cotizaciones" ? close : 0;
+      const closeV = L.closure === "iva" ? close : 0;
+      const closeI = L.closure === "irpf" ? close : 0;
       const extraRate = contribLever + closeC; // pp of base
       const dTauEr = (es * extraRate) / 100;
       const laborCost = ((1 - theta) * dTauEr) / (1 + C.employer_rate);
-      const wageDev = (-theta * dTauEr) / (1 + C.employer_rate);
+      const wageDev = (-theta * dTauEr) / (1 + C.employer_rate) + wageCorp;
       const eTarget = P.elasticidad_empleo_coste * laborCost;
       const eS = on ? eSsc + (eTarget - eSsc) * C.employment_adjust_per_year : 0;
       const e = eAge + eS;
       // Fewer jobs lose taxes, contributions and pay benefits; a lower gross wage loses the tax rate on wages.
       const labourPp = P.recaudacion_por_1pct_empleo * 100 * e + P.base_cotizacion_pib * 100 * C.wage_tax_rate * wageDev;
       const contribPp = P.base_cotizacion_pib * extraRate;
-      const vatPp = P.recaudacion_por_punto_iva * closeV;
-      const impulse =
-        P.multiplicador_transferencias * (grossPp + otherPp - irpfPp) - P.multiplicador_impuestos * (contribPp + vatPp);
+      const vatPp = P.recaudacion_por_punto_iva * (lv("vatStd") + closeV);
+      const irpfRev = irpfLeverPp + irpfUnit * closeI;
+      const taxes = contribPp + vatPp + vatRedPp + irpfRev + corpPp;
+      const impulse = P.multiplicador_transferencias * (grossPp + otherPp - irpfPp) - P.multiplicador_impuestos * taxes;
       const yNow = P.persistencia_multiplicador * y + (impulse - impulsePrev);
       const cyclePp = P.semielasticidad_saldo * yNow;
-      const costBefore = grossPp + otherPp - irpfPp + migPp - labourPp - P.base_cotizacion_pib * contribLever - cyclePp;
-      parts = { e, eS, wageDev, laborCost, labourPp, contribPp, vatPp, impulse, yNow, cyclePp, costBefore };
+      const leverTaxes = P.base_cotizacion_pib * contribLever + P.recaudacion_por_punto_iva * lv("vatStd") + vatRedPp + irpfLeverPp + corpPp;
+      const costBefore = grossPp + otherPp - irpfPp + migPp - labourPp - leverTaxes - cyclePp;
+      const closureRevenue = unit ? unit * close : 0;
+      parts = { e, eS, wageDev, laborCost, labourPp, contribPp, vatPp, irpfRev, impulse, yNow, cyclePp, costBefore, closureRevenue, closeC, closeV, closeI };
       if (!on || L.closure === "deuda") break;
       // Taxes are set to cover the cost before second-round effects, as a budget would; those go to the deficit.
-      const gap = costBefore + cyclePp - (L.closure === "cotizaciones" ? P.base_cotizacion_pib * closeC : vatPp);
-      if (L.closure === "cotizaciones") closeC += gap / P.base_cotizacion_pib;
-      else closeV += gap / P.recaudacion_por_punto_iva;
+      const gap = costBefore + cyclePp - closureRevenue;
+      close += gap / unit;
       if (Math.abs(gap) < 1e-12) break;
     }
-    const { e, eS, wageDev, laborCost, labourPp, contribPp, vatPp, impulse, yNow, cyclePp, costBefore } = parts;
+    const { e, eS, wageDev, laborCost, labourPp, contribPp, vatPp, irpfRev, impulse, yNow, cyclePp, costBefore, closureRevenue, closeC, closeV, closeI } = parts;
     eSsc = eS;
     y = yNow;
     impulsePrev = impulse;
-    const closureRevenue = L.closure === "cotizaciones" ? P.base_cotizacion_pib * closeC : L.closure === "iva" ? vatPp : 0;
     const primary = costBefore - closureRevenue;
 
-    // VAT closure: price level rises with pass-through on the basket taxed at the standard rate.
-    const price = (P.traslado_iva_precios * P.cuota_iva_general * closeV) / 100 / (1 + C.vat_standard_rate);
+    // VAT raises the price level with pass-through on the basket taxed at each rate.
+    const price =
+      (P.traslado_iva_precios *
+        ((P.cuota_iva_general * (lv("vatStd") + closeV)) / (1 + C.vat_standard_rate) + (C.vat_reduced_basket_share * lv("vatRed")) / (1 + C.vat_reduced_rate))) /
+      100;
 
     // Debt: interest on the extra debt, a risk premium on the extra debt, repricing at the refinancing share.
     const dMarket = (P.prima_por_deuda * D) / 100 + (on ? L.rateShock : 0);
@@ -196,6 +210,9 @@ export function simulate(model, levers = DEFAULT_LEVERS, params = centralParams(
     out.labour_revenue_pp[t] = labourPp;
     out.contrib_revenue_pp[t] = contribPp;
     out.vat_revenue_pp[t] = vatPp;
+    out.vat_red_revenue_pp[t] = vatRedPp;
+    out.irpf_revenue_pp[t] = irpfRev;
+    out.corp_revenue_pp[t] = corpPp;
     out.cycle_revenue_pp[t] = cyclePp;
     out.migration_pp[t] = migPp;
     out.net_cost_pp[t] = costBefore;
@@ -204,6 +221,7 @@ export function simulate(model, levers = DEFAULT_LEVERS, params = centralParams(
     out.debt_dev_pp[t] = D;
     out.closure_contrib_pp[t] = closeC;
     out.closure_vat_pp[t] = closeV;
+    out.closure_irpf_pp[t] = closeI;
     out.price_level_dev[t] = price;
     out.labour_cost_dev[t] = laborCost;
     out.wage_dev[t] = wageDev;
@@ -211,22 +229,66 @@ export function simulate(model, levers = DEFAULT_LEVERS, params = centralParams(
     out.pension_pct[t] = (base + grossPp + migPp) / denom;
     out.debt_pct[t] = (B.debt_pct[t] + D) / denom;
     out.deficit_pct[t] = (B.deficit_pct[t] + primary + interestDev) / denom;
-
-    // Typical cases, euros a month at base-year prices.
-    const p4 = model.personas.p4;
-    out.p4_month[t] = (p4.gross * z * (1 - P.tipo_marginal_irpf_pension) - p4.net * (price - pricePrev)) / 12;
-    const p1 = model.personas.p1;
-    // Worker contributions are deductible in IRPF; a lower gross wage loses the full personal marginal rate.
-    const workerRate = ((1 - es) * (contribLever + closeC)) / 100;
-    out.p1_month[t] =
-      (-p1.gross * workerRate * (1 - (p1.marginal_total - p1.worker_ssc_rate)) +
-        p1.gross * wageDev * (1 - p1.marginal_total) -
-        p1.net * (price - P.indiciacion_salarios * pricePrev)) /
-      12;
     out.debt_per_person_eur[t] = ((D / 100) * model.start.gdp_meur * 1e6) / model.start.population;
+
+    // Statutory burdens (before behaviour), what the quintile split distributes.
+    const allPp = lv("irpfAll") + closeI;
+    out.s_irpf_all_pp[t] = P.recaudacion_por_punto_irpf * allPp;
+    out.s_irpf_top_pp[t] = P.recaudacion_por_punto_irpf_alto * lv("irpfTop");
+    out.s_vat_std_pp[t] = P.recaudacion_por_punto_iva * (lv("vatStd") + closeV);
+    out.s_vat_red_pp[t] = vatRedPp;
+    out.s_contrib_pp[t] = contribPp;
+    out.s_corp_pp[t] = corpStatic;
+    out.s_pension_net_pp[t] = grossPp - P.tipo_marginal_irpf_pension * grossPp;
+
+    // Typical cases, euros a month at base-year prices. Worker contributions are deductible in IRPF; a lower gross
+    // wage loses the full personal marginal rate; prices hit what they spend (all their net income).
+    const workerRate = ((1 - es) * (contribLever + closeC)) / 100;
+    for (const id of PERSONAS) {
+      const pc = model.personas[id];
+      if (!pc) continue;
+      let v = 0;
+      if (pc.pension_gross) {
+        v += pc.pension_gross * z * (1 - P.tipo_marginal_irpf_pension) - pc.net * (price - pricePrev);
+      } else {
+        v += -pc.gross * workerRate * (1 - (pc.marginal_total - pc.worker_ssc_rate));
+        v += pc.gross * wageDev * (1 - pc.marginal_total);
+        v += -pc.net * (price - P.indiciacion_salarios * pricePrev);
+      }
+      v += (-allPp / 100) * pc.irpf_liable - (lv("irpfTop") / 100) * pc.irpf_above_top;
+      out[`${id}_month`][t] = v / 12;
+    }
     pricePrev = price;
   }
   return out;
+}
+
+/**
+ * Who bears the statutory change in year index t, by income quintile: euros a month per household (base-year
+ * prices) and % of disposable income, per instrument. Shares from microdata (sistema.json `incidence`), totals from
+ * the run. Positive = more income.
+ */
+export function quintileImpact(model, run, t, params = centralParams(model)) {
+  const inc = model.incidence;
+  const C = model.constants;
+  const gdpEur = model.start.gdp_meur * 1e6 * (model.baseline.real_index?.[t] ?? 1);
+  const es = C.employer_share;
+  const theta = params.traslado_cotizacion_salario;
+  const wc = params.traslado_sociedades_salarios;
+  const parts = {
+    irpf: (q) => -(run.s_irpf_all_pp[t] * q.share_base_all + run.s_irpf_top_pp[t] * q.share_base_top),
+    iva: (q) => -(run.s_vat_std_pp[t] * inc.vat.by_rate["21"][q.q] + run.s_vat_red_pp[t] * inc.vat.by_rate["10"][q.q]),
+    cotizaciones: (q) => -run.s_contrib_pp[t] * (1 - es + es * theta) * q.share_wages,
+    sociedades: (q) => -run.s_corp_pp[t] * ((1 - wc) * q.share_capital + wc * q.share_wages),
+    pensiones: (q) => run.s_pension_net_pp[t] * q.share_pensions,
+  };
+  return inc.ecv.quintiles.map((q) => {
+    const byPart = Object.fromEntries(
+      Object.entries(parts).map(([name, f]) => [name, (f(q) / 100) * gdpEur / q.households / 12]),
+    );
+    const total = Object.values(byPart).reduce((a, b) => a + b, 0);
+    return { q: q.q, byPart, total, pctDisposable: ((total * 12) / q.disposable_per_household) * 100 };
+  });
 }
 
 // Deterministic PRNG so a shared link reproduces the same bands.
@@ -309,7 +371,7 @@ export function runEnsemble(model, levers, { draws = 200, seed = 20261019, debat
 
 /** Parameter whose draws are most correlated (Spearman) with `key` at year index t. */
 export function mainDriver(model, ensemble, key, t) {
-  const values = ensemble.runs.map((run) => run[key][t]);
+  const values = Array.isArray(key) ? key : ensemble.runs.map((run) => run[key][t]);
   const rank = (arr) => {
     const order = arr.map((v, j) => [v, j]).sort((a, b) => a[0] - b[0]);
     const r = new Array(arr.length);

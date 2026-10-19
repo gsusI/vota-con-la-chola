@@ -182,7 +182,7 @@ function simulatorStory() {
     },
     unitNote: "% del PIB",
     sources: [{ label: "Comisión Europea, Ageing Report 2024", href: model.sources.ageing_report.page, retrieved: model.sources.ageing_report.retrieved_at }],
-    also: "Mapa causal con 24 fichas de evidencia, edad de jubilación, cotizaciones, quién paga según la financiación y cómo votó cada partido.",
+    also: "IRPF, IVA, cotizaciones y Sociedades por quintil de renta, mapa causal con fichas de evidencia, cuatro casos tipo y cómo votó cada partido.",
   };
 }
 

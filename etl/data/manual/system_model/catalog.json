@@ -139,6 +139,45 @@
    "part_file": "part_wave_c.json"
   },
   {
+   "id": "B04_irpf_concentration",
+   "from": "declarantes",
+   "to": "base_irpf",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "cuota_base_irpf_20_superior",
+    "unit": "% de la base liquidable (o renta) del 20 % de declarantes con más renta",
+    "low": 48.5,
+    "central": 50.9,
+    "high": 52.0
+   },
+   "lag_years": 0,
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubik7a356dde49b85b0e855c7c8edbe15fe1dee6e336.html",
+     "title": "Estadística de los declarantes del IRPF 2023: Por tramos de rendimiento, partida 500 Base liquidable general",
+     "authors_year": "AEAT, ejercicio 2023",
+     "country": "España (territorio de régimen común)",
+     "period": "2023",
+     "method": "explotación censal de las autoliquidaciones, por tramos de rendimientos e imputaciones",
+     "locator": "columnas Distribución número total y Distribución importe",
+     "quote": "(30 - 60]: 22,02 % de liquidaciones y 37,93 % del importe; (60 - 150]: 4,88 % y 16,33 %; (150 - 601]: 0,67 % y 5,28 %; Mayor de 601: 0,06 % y 2,07 %",
+     "value_in_source": "el 5,61 % superior tiene el 23,68 %; el 27,63 % superior, el 61,61 %"
+    }
+   ],
+   "contrary_evidence": [],
+   "debate": null,
+   "derivation": "El 20 % cae dentro del tramo 30.000-60.000 €. Interpolación de Pareto (α = ln(27,63/5,61)/ln 2 = 2,30; umbral del 20 % ≈ 34.500 €): 23,68 + 0,719 × 37,93 = 50,9 % de la base liquidable general. Reparto uniforme dentro del tramo (cota baja): 48,5 %; alto 52 por la curvatura. Para el 10 % superior, 33,7 % (Pareto) o 31,2 % (uniforme). Orden por rendimientos, no por base; tabla de tramos, no de deciles.",
+   "note_es": "Según la estadística de declarantes del IRPF 2023 de la AEAT, el 20 % de declaraciones con más rendimientos concentra en torno al 51 % de la base liquidable general (cálculo por tramos) y el 10 % superior, alrededor de un tercio.",
+   "review": {
+    "verdict": "fix",
+    "evidence": "Columnas de distribución de la tabla de la partida 500 confirmadas (22,02/37,93; 4,88/16,33; 0,67/5,28; 0,06/2,07). Recalculado: α = 2,300, umbral 34.525 €, fracción del tramo por encima = 0,719 (no 0,721), 23,68 + 0,719 × 37,93 = 50,95 % (central 50,9 correcto); uniforme 48,47; 10 % superior 33,7 / 31,2."
+   },
+   "part_file": "part_tax_a.json"
+  },
+  {
    "id": "E01_pension_turnover",
    "from": "revalorizacion_real",
    "to": "pension_media",
@@ -1238,6 +1277,524 @@
    "derivation": "El simulador usa la serie anual de la sensibilidad oficial (anexo estadístico, hoja ESb) y le resta su valor de 2025, porque el escenario oficial arranca en 2023.",
    "note_es": "Según el Ageing Report 2024, con un tercio menos de inmigración el gasto en pensiones sería 1,4 puntos de PIB mayor en 2050; con un tercio más, 1,1 puntos menor: más ocupados y más PIB.",
    "part_file": "part_core.json"
+  },
+  {
+   "id": "T01_irpf_yield_all",
+   "from": "tipo_irpf_todos",
+   "to": "recaudacion_irpf",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "recaudacion_por_punto_irpf",
+    "unit": "% del PIB por 1 pp en todos los tramos del IRPF",
+    "low": 0.25,
+    "central": 0.262,
+    "high": 0.29
+   },
+   "lag_years": [
+    0,
+    1
+   ],
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubik379ba920d5abbc332c65c82f7a9f4e0563ba3ae.html",
+     "title": "Estadística de los declarantes del IRPF 2023: Detalle de partidas, mínimo personal y familiar",
+     "authors_year": "AEAT, ejercicio 2023",
+     "country": "España (territorio de régimen común)",
+     "period": "2023",
+     "method": "explotación censal de las autoliquidaciones del IRPF",
+     "locator": "partidas 521 y 522 (Total); la partida 500 (534.779.537.203 €) está en la tabla por tramos de la partida 500, fila Total (sites/irpf/2023/jrubik7a356dde49b85b0e855c7c8edbe15fe1dee6e336.html)",
+     "quote": "500. Base liquidable general: 534.779.537.203; 521. Importe del mínimo personal y familiar de la base liquidable general: 142.859.734.177",
+     "value_in_source": "534.779,5 M€ y 142.859,7 M€"
+    },
+    {
+     "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/nama_10_gdp?geo=ES&na_item=B1GQ&unit=CP_MEUR&sinceTimePeriod=2022",
+     "title": "GDP and main components (nama_10_gdp)",
+     "authors_year": "Eurostat (consulta 2026-10-19)",
+     "country": "España",
+     "period": "2023",
+     "method": "contabilidad nacional",
+     "locator": "B1GQ, CP_MEUR, 2023",
+     "quote": "ES B1GQ CP_MEUR 2023 = 1496277.0",
+     "value_in_source": "1.496.277 M€"
+    }
+   ],
+   "contrary_evidence": [],
+   "debate": null,
+   "derivation": "(534.779,5 − 142.859,7) M€ = 391.919,8 M€ de base liquidable general neta del mínimo aplicado; × 0,01 = 3.919 M€; / PIB 2023 1.496.277 M€ = 0,262 % del PIB por 1 pp del tipo combinado (estatal + autonómico) en todos los tramos. No incluye la base del ahorro (con ella, +40.663,6 M€ netos de su mínimo: 0,289 %). La estadística no cubre País Vasco ni Navarra (no figuran en su menú de CCAA); el alto (0,29) añade un margen de ~8 % por ellos, no verificado.",
+   "note_es": "Según la estadística de declarantes del IRPF 2023 de la AEAT (territorio común, sin País Vasco ni Navarra), la base liquidable general menos el mínimo personal y familiar fue de 391.920 M€: subir 1 punto el tipo de todos los tramos recaudaría unos 3.900 M€, el 0,26 % del PIB, antes de reacciones de los contribuyentes.",
+   "review": {
+    "verdict": "fix",
+    "evidence": "Partidas 521 (142.859.734.177) y 522 están en la URL citada, pero esa página solo trae el mínimo personal y familiar (511-523); la partida 500 (534.779.537.203) está en la tabla por tramos de la partida 500 (fila Total, URL de T02). (534.779,5 − 142.859,7)/1.496.277 = 0,262 % confirmado; PIB 2023 Eurostat correcto."
+   },
+   "part_file": "part_tax_a.json"
+  },
+  {
+   "id": "T02_irpf_yield_top",
+   "from": "tipo_irpf_alto",
+   "to": "recaudacion_irpf",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "recaudacion_por_punto_irpf_alto",
+    "unit": "% del PIB por 1 pp en la base liquidable por encima de 60.000 €",
+    "low": 0.031,
+    "central": 0.031,
+    "high": 0.036
+   },
+   "lag_years": [
+    0,
+    1
+   ],
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubik7a356dde49b85b0e855c7c8edbe15fe1dee6e336.html",
+     "title": "Estadística de los declarantes del IRPF 2023: Por tramos de rendimiento, partida 500 Base liquidable general",
+     "authors_year": "AEAT, ejercicio 2023",
+     "country": "España (territorio de régimen común)",
+     "period": "2023",
+     "method": "explotación censal de las autoliquidaciones, por tramos de rendimientos e imputaciones",
+     "locator": "tramos (60-150], (150-601] y Mayor de 601 (miles de euros)",
+     "quote": "(60 - 150]: 1.168.908 liquidaciones, 87.309.747.971 €, media 74.693; (150 - 601]: 160.311, 28.234.893.773 €, media 176.126; Mayor de 601: 14.639, 11.073.164.445 €, media 756.415",
+     "value_in_source": "1.343.858 liquidaciones con 126.617,8 M€ de base liquidable general"
+    }
+   ],
+   "contrary_evidence": [],
+   "debate": null,
+   "derivation": "Aproximación por medias de tramo: Σ n × (media − 60.000) = 1.168.908×14.693 + 160.311×116.126 + 14.639×696.415 = 45.986 M€; × 0,01 / PIB 2023 1.496.277 M€ = 0,031 % del PIB. Los tramos son de rendimientos, no de base; por Jensen la cifra es un mínimo (dentro del tramo 60-150 quien queda por debajo de 60.000 suma 0), de ahí el alto 0,036, que también cubre País Vasco y Navarra (no verificado). Pareto: media 94.220 / (94.220 − 60.000) = 2,75; con el umbral de 150.000, 224.680/74.680 = 3,0; el bajo 2,3 admite más dispersión dentro del tramo.",
+   "note_es": "Según la estadística de declarantes del IRPF 2023 de la AEAT, 1,34 millones de declaraciones con rendimientos de más de 60.000 € suman unos 46.000 M€ de base por encima de ese umbral: 1 punto más en esa franja daría unos 460 M€, el 0,03 % del PIB, antes de reacciones.",
+   "extra_parameters": [
+    {
+     "name": "pareto_a_alto",
+     "unit": "parámetro de Pareto de la base por encima de 60.000 € (media/(media − 60.000))",
+     "low": 2.3,
+     "central": 2.75,
+     "high": 3.0
+    }
+   ],
+   "review": {
+    "verdict": "fix",
+    "evidence": "Tabla de la partida 500 por tramos: (60-150] 1.168.908 / 87.309.747.971 / 74.693; (150-601] 160.311 / 28.234.893.773 / 176.126; >601 14.639 / 11.073.164.445 / 756.415, todo confirmado; Σ n(media − 60.000) = 45.986 M, 0,0307 % del PIB 2023, y Pareto 2,75 / 3,0 reproducidos. Pero la propia derivación dice que 0,031 es un mínimo (Jensen) y el bajo 0,029 queda por debajo sin justificación."
+   },
+   "part_file": "part_tax_a.json"
+  },
+  {
+   "id": "T03_eti_general",
+   "from": "tipo_irpf_todos",
+   "to": "base_irpf",
+   "sign": "-",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "eti_general",
+    "unit": "elasticidad de la renta gravable al neto de impuestos (1 − tipo marginal), todos los declarantes salvo pensionistas",
+    "low": 0.12,
+    "central": 0.54,
+    "high": 0.64
+   },
+   "lag_years": [
+    1,
+    3
+   ],
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://www.bde.es/f/webbde/SES/Secciones/Publicaciones/PublicacionesSeriadas/DocumentosTrabajo/19/Fich/dt1924e.pdf",
+     "title": "The elasticity of taxable income in Spain: 1999-2014",
+     "authors_year": "Almunia y López-Rodríguez (2019, Banco de España DT 1924; SERIEs 2019)",
+     "country": "España",
+     "period": "1999-2014",
+     "method": "panel de declaraciones del IRPF (IEF) con reformas sucesivas; métodos Gruber-Saez, Kleven-Schultz y Weber",
+     "locator": "pág. 5 (resumen) y pág. 9",
+     "quote": "The most reliable estimates of the elasticity of taxable income (ETI) with respect to the net-of-tax rate for this period are between 0.45 and 0.64.",
+     "value_in_source": "0.45-0.64 (0.35 Gruber-Saez, 0.54 Kleven-Schultz, 0.64 Weber)"
+    },
+    {
+     "url": "https://www.nber.org/system/files/working_papers/w15012/w15012.pdf",
+     "title": "The Elasticity of Taxable Income with Respect to Marginal Tax Rates: A Critical Review",
+     "authors_year": "Saez, Slemrod y Giertz (2009, NBER WP 15012; J. Econ. Lit. 2012)",
+     "country": "internacional (revisión, sobre todo EE. UU.)",
+     "period": "estudios 1980-2008",
+     "method": "revisión crítica de la literatura",
+     "locator": "pág. 60 (conclusión)",
+     "quote": "The most reliable longer-run estimates range from 0.12 to 0.4",
+     "value_in_source": "0.12-0.40"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://www.bde.es/f/webbde/SES/Secciones/Publicaciones/PublicacionesSeriadas/DocumentosTrabajo/19/Fich/dt1924e.pdf",
+     "title": "The elasticity of taxable income in Spain: 1999-2014",
+     "finding": "La elasticidad de la renta amplia (antes de deducciones) es mucho menor, 0,10-0,24: buena parte de la respuesta va por deducciones (p. ej. planes de pensiones) (pág. 5)."
+    },
+    {
+     "url": "https://www.nber.org/system/files/working_papers/w15012/w15012.pdf",
+     "title": "The Elasticity of Taxable Income with Respect to Marginal Tax Rates: A Critical Review",
+     "finding": "Las estimaciones a largo plazo más fiables para EE. UU. van de 0,12 a 0,40, por debajo del rango español (pág. 60)."
+    }
+   ],
+   "debate": null,
+   "derivation": "Central 0,54 = estimación con el método Kleven-Schultz para España 1999-2014 (rango fiable 0,45-0,64; 0,35 con Gruber-Saez); bajo 0,12 = extremo inferior de la revisión de Saez, Slemrod y Giertz; alto 0,64 (método Weber). Con m = 0,30 la pérdida por reacción es 0,54 × 0,30/0,70 = 23 % del cambio estático.",
+   "note_es": "Según Almunia y López-Rodríguez (Banco de España, 2019), con declaraciones de 1999-2014 sin contar a los pensionistas, la renta gravable sube entre un 0,45 % y un 0,64 % por cada 1 % que sube lo que queda tras el impuesto; la renta antes de deducciones reacciona mucho menos (0,10-0,24).",
+   "review": {
+    "verdict": "fix",
+    "evidence": "Almunia y López-Rodríguez pág. 5 y 9: 0,45-0,64 fiable, 0,35 GS / 0,54 KS / 0,64 Weber, EBI 0,10-0,24; es la ETI de todos los declarantes del panel IEF sin umbral de renta, pero excluyendo pensionistas (≥65 con rentas del trabajo sin cotizaciones) y rentas negativas (págs. 18-19). SSG pág. 60 «0.12 to 0.4» confirmado."
+   },
+   "part_file": "part_tax_a.json"
+  },
+  {
+   "id": "T03b_eti_top",
+   "from": "tipo_irpf_alto",
+   "to": "base_irpf_alta",
+   "sign": "-",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "eti_alta",
+    "unit": "elasticidad de la renta gravable al neto de impuestos, rentas altas",
+    "low": 0.12,
+    "central": 0.57,
+    "high": 1.2
+   },
+   "lag_years": [
+    1,
+    3
+   ],
+   "grade": "B",
+   "spain_evidence": "parcial",
+   "sources": [
+    {
+     "url": "https://www.nber.org/system/files/working_papers/w7512/w7512.pdf",
+     "title": "The Elasticity of Taxable Income: Evidence and Implications",
+     "authors_year": "Gruber y Saez (2000, NBER WP 7512; J. Public Econ. 2002)",
+     "country": "Estados Unidos",
+     "period": "1979-1990",
+     "method": "panel de declaraciones con reformas fiscales, variables instrumentales",
+     "locator": "pág. 2 (resumen)",
+     "quote": "taxpayers who have incomes above $100,000 per year, who have an elasticity of 0.57",
+     "value_in_source": "0.57"
+    },
+    {
+     "url": "https://www.nber.org/system/files/working_papers/w15012/w15012.pdf",
+     "title": "The Elasticity of Taxable Income with Respect to Marginal Tax Rates: A Critical Review",
+     "authors_year": "Saez, Slemrod y Giertz (2009, NBER WP 15012; J. Econ. Lit. 2012)",
+     "country": "internacional (revisión, sobre todo EE. UU.)",
+     "period": "estudios 1980-2008",
+     "method": "revisión crítica de la literatura",
+     "locator": "pág. 60 (conclusión)",
+     "quote": "The most reliable longer-run estimates range from 0.12 to 0.4",
+     "value_in_source": "0.12-0.40"
+    },
+    {
+     "url": "https://www.bde.es/f/webbde/SES/Secciones/Publicaciones/PublicacionesSeriadas/DocumentosTrabajo/19/Fich/dt1924e.pdf",
+     "title": "The elasticity of taxable income in Spain: 1999-2014",
+     "authors_year": "Almunia y López-Rodríguez (2019, Banco de España DT 1924; SERIEs 2019)",
+     "country": "España",
+     "period": "1999-2014",
+     "method": "panel de declaraciones del IRPF (IEF) con reformas sucesivas; métodos Gruber-Saez, Kleven-Schultz y Weber",
+     "locator": "pág. 5 (resumen) y pág. 9",
+     "quote": "The most reliable estimates of the elasticity of taxable income (ETI) with respect to the net-of-tax rate for this period are between 0.45 and 0.64.",
+     "value_in_source": "0.45-0.64 (0.35 Gruber-Saez, 0.54 Kleven-Schultz, 0.64 Weber)"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://www.bde.es/f/webbde/SES/Secciones/Publicaciones/PublicacionesSeriadas/DocumentosTrabajo/19/Fich/dt1924e.pdf",
+     "title": "The elasticity of taxable income in Spain: 1999-2014",
+     "finding": "Cita a Mertens y Olea (2018): ETI de alrededor de 1,2 en EE. UU., aún mayor para rentas altas (pág. 11); y en España la ETI de autónomos triplica la de asalariados (pág. 5)."
+    }
+   ],
+   "debate": {
+    "id": "eti_rentas_altas",
+    "schools": [
+     {
+      "label": "Rentas altas de EE. UU. muy sensibles (panel de reformas, Gruber y Saez)",
+      "central": 0.57,
+      "source_index": 0
+     },
+     {
+      "label": "Consenso a largo plazo más moderado (revisión de Saez, Slemrod y Giertz)",
+      "central": 0.25,
+      "source_index": 1
+     },
+     {
+      "label": "España, todos los declarantes 1999-2014, sin desglose por renta (Almunia y López-Rodríguez)",
+      "central": 0.54,
+      "source_index": 2
+     }
+    ]
+   },
+   "derivation": "Central 0,57 = ETI de quienes ganan más de 100.000 $ en Gruber y Saez; bajo 0,12 = extremo inferior de Saez, Slemrod y Giertz (0,12-0,40, punto medio 0,25 en el debate); alto 1,2 = Mertens y Olea según cita de Almunia y López-Rodríguez (no leído en el original). No hay estimación española específica para rentas altas: el valor español medio (0,54) cae cerca del central. Con m = 0,47 la pérdida es 0,57 × 0,47/0,53 = 51 % del cambio estático.",
+   "note_es": "No hay una cifra española para rentas altas. Según Gruber y Saez, en EE. UU. su renta gravable responde con 0,57; la revisión de Saez, Slemrod y Giertz da 0,12-0,40 a largo plazo, y para España, en todos los declarantes, Almunia y López-Rodríguez estiman 0,45-0,64.",
+   "review": {
+    "verdict": "pass",
+    "evidence": "Gruber y Saez pág. 2 (resumen) y pág. 5: 0,57 para rentas de más de 100.000 $; SSG pág. 60 0,12-0,4; Almunia y López-Rodríguez pág. 11 citan a Mertens y Olea «ETI of around 1.2, with an even larger elasticity for high-income earners». Grado B y spain_evidence parcial son honestos; la nota dice que no hay cifra española para rentas altas."
+   },
+   "part_file": "part_tax_a.json"
+  },
+  {
+   "id": "T04_vat_reduced_yield",
+   "from": "tipo_iva_reducido",
+   "to": "recaudacion_iva",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "recaudacion_por_punto_iva_reducido",
+    "unit": "% del PIB por 1 pp del tipo reducido (10 %)",
+    "low": 0.122,
+    "central": 0.136,
+    "high": 0.144
+   },
+   "lag_years": [
+    0,
+    1
+   ],
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://www.sepg.pap.hacienda.gob.es/Presup/PGE2023Proyecto/MaestroDocumentos/PGE-ROM/doc/3/2/4/N_23_A_A_1B_C7_1.PDF",
+     "title": "Memoria de Beneficios Fiscales, Proyecto de Presupuestos Generales del Estado para 2023 (IVA)",
+     "authors_year": "Ministerio de Hacienda y Función Pública (2022)",
+     "country": "España",
+     "period": "2023 (previsión; última base fiscal 2021)",
+     "method": "base fiscal de las operaciones al 10 % (206.316,02 M, declaraciones) por el diferencial de 11 pp con el tipo general, pasada de devengo a caja con un factor del 98,80 %; territorio de régimen fiscal común",
+     "locator": "págs. 16-18",
+     "quote": "22.428,49 millones de euros, con un incremento del 1,1 por ciento [...] por las operaciones gravadas al tipo reducido del 10 por ciento",
+     "value_in_source": "22.428,49 M EUR por 11 pp (21 % − 10 %); base fiscal al 10 %: 206.316,02 M EUR; base teórica macroeconómica al 10 %: 216.189,27 M EUR"
+    },
+    {
+     "url": "https://sede.agenciatributaria.gob.es/static_files/AEAT/Estudios/Estadisticas/Informes_Estadisticos/Informes_Anuales_de_Recaudacion_Tributaria/Ejercicio_2013/IART13_eu_es.pdf",
+     "title": "Informe Anual de Recaudación Tributaria 2013",
+     "authors_year": "AEAT, Servicio de Estudios Tributarios y Estadísticas (2014)",
+     "country": "España",
+     "period": "2010-2013",
+     "method": "impacto en caja de cambios normativos por año",
+     "locator": "pág. 15, cuadro de cambios normativos",
+     "quote": "Elevación de tipos general y reducido y cambio productos 2.899 3.393 2.263 7.438",
+     "value_in_source": "subida de 2010: 2.899 + 3.393 = 6.292 M EUR; subida de 2012: 2.263 + 7.438 = 9.701 M EUR"
+    },
+    {
+     "url": "https://ec.europa.eu/eurostat/databrowser/view/nama_10_gdp/default/table",
+     "title": "Eurostat nama_10_gdp: GDP and main components",
+     "authors_year": "Eurostat (consulta 2026-10-19)",
+     "country": "España",
+     "period": "2013, 2023",
+     "method": "contabilidad nacional SEC 2010",
+     "locator": "geo=ES, na_item=B1GQ, unit=CP_MEUR",
+     "quote": "Gross domestic product at market prices | 2023 = 1496277.0; 2013 = 1025652.0",
+     "value_in_source": "1.496.277 M EUR (2023); 1.025.652 M EUR (2013)"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://sede.agenciatributaria.gob.es/static_files/AEAT/Estudios/Estadisticas/Informes_Estadisticos/Informes_Anuales_de_Recaudacion_Tributaria/Ejercicio_2013/IART13_eu_es.pdf",
+     "title": "Informe Anual de Recaudación Tributaria 2013 (pág. 10)",
+     "finding": "La AEAT dice que el impacto positivo de la subida de tipos de 2012 fue contrarrestado en gran parte por una nueva caída del gasto final sujeto a IVA (efecto de comportamiento y de ciclo, no estático)."
+    }
+   ],
+   "debate": null,
+   "derivation": "Central: 22.428,49 M / 11 pp = 2.039 M por pp; / PIB 2023 1.496.277 M = 0,136 % (territorio común). Alto: 1 % de la base teórica macroeconómica al 10 % (216.189 M) = 0,144 %. Bajo: central − 10 % (0,122), suposición por el error de una previsión hecha sobre la base fiscal de 2021. El residuo de las subidas de 2010 y 2012 en la AEAT (2a + b = 6.292, 3a + 2b = 9.701: b = 526 M por pp, 0,051 % del PIB 2013) no se usa como cota: incluye productos que pasaron del 8 % al 21 % y la caída del gasto, que es reacción y no rendimiento estático.",
+   "note_es": "Según la Memoria de Beneficios Fiscales de 2023, aplicar el 21 % en vez del 10 % supondría 22.428 millones: unos 2.039 millones por punto, el 0,136 % del PIB. La AEAT no separa el tipo reducido en la subida de 2012, que en conjunto aportó 9.701 millones al año.",
+   "review": {
+    "verdict": "fix",
+    "evidence": "Memoria BF 2023 págs. 16-18: la base al 10 % con datos fiscales es 206.316,02 M (× 11 pp = 22.694,76 M en devengo) y 22.428,49 M es esa cifra pasada a caja (factor 98,80 %) en territorio común; 216.189,27 M es la base teórica macroeconómica, no 'sin factor de cumplimiento'. Central 2.039 M/pp = 0,136 % defendible; el bajo 0,051 (residuo AEAT 2010/2012, b = 526 M/pp, aritmética correcta) mezcla reclasificación de productos del 8 % al 21 % y caída del gasto, así que no es un rendimiento estático y no cabe en un enlace contable."
+   },
+   "part_file": "part_tax_b.json"
+  },
+  {
+   "id": "T05_corp_yield",
+   "from": "tipo_sociedades",
+   "to": "recaudacion_sociedades",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "recaudacion_por_punto_sociedades",
+    "unit": "% del PIB por 1 pp del tipo nominal del Impuesto sobre Sociedades",
+    "low": 0.094,
+    "central": 0.131,
+    "high": 0.138
+   },
+   "lag_years": [
+    0,
+    1
+   ],
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/sociedadest2/2023/jrubikcdb249755d85be006d2455181004fdca681dae1.html",
+     "title": "Estadística de cuentas anuales no consolidadas del Impuesto sobre Sociedades 2023: número de empresas, resultado contable y base imponible",
+     "authors_year": "AEAT (2025)",
+     "country": "España",
+     "period": "2019-2023",
+     "method": "declaraciones del modelo 200 (estadística censal)",
+     "locator": "fila Base Imponible y fila Inst.Inversión Colectiva (I), ejercicio 2023",
+     "quote": "Base Imponible 153.743 125.294 176.933 177.800 206.530",
+     "value_in_source": "206.530 M EUR en 2023, de ellos 10.415 M de instituciones de inversión colectiva (tipo del 1 %)"
+    },
+    {
+     "url": "https://www3.agenciatributaria.gob.es/static_files/Sede/Tema/Estadisticas/Estadisticas_impuesto/Sociedades/Sociedadesdc/Documentacion/Infografia_SC.pdf",
+     "title": "Cuentas anuales consolidadas del Impuesto sobre Sociedades: infografía",
+     "authors_year": "AEAT (2025)",
+     "country": "España",
+     "period": "último ejercicio publicado",
+     "method": "estadística de declaraciones consolidadas",
+     "locator": "pág. 3",
+     "quote": "Los grupos concentran el 50,5% de la facturación y el 54,8% del beneficio, pero solo aportan el 32,8% de la cuota líquida.",
+     "value_in_source": "tipo efectivo sobre beneficios 12,1 %; grupos 54,8 % del beneficio"
+    },
+    {
+     "url": "https://ftp.zew.de/pub/zew-docs/dp/dp13045.pdf",
+     "title": "Multinationals' Profit Response to Tax Differentials: Effect Size and Shifting Channels (ZEW DP 13-045)",
+     "authors_year": "Heckemeyer y Overesch (2013; publicado en Canadian Journal of Economics 2017)",
+     "country": "internacional (meta-análisis)",
+     "period": "25 estudios empíricos",
+     "method": "meta-regresión",
+     "locator": "pág. 3",
+     "quote": "we predict a tax semi-elasticity of pre-tax profit of about 0.8, in absolute terms",
+     "value_in_source": "0.8"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://sede.agenciatributaria.gob.es/Sede/estadisticas/recaudacion-tributaria/informe-anual/ejercicio-2023/3-impuesto-sobre-sociedades.html",
+     "title": "Informe Anual de Recaudación Tributaria 2023, cap. 3",
+     "finding": "La recaudación del impuesto fue 35.060 M en 2023, muy por debajo del 25 % de la base (deducciones, tipos reducidos para pymes y nuevas empresas, IIC al 1 %): si la cuota líquida subiera en proporción al tipo (26/25), un punto daría 1.402 M, 0,094 % del PIB."
+    }
+   ],
+   "debate": null,
+   "derivation": "Central: base imponible 2023 sin IIC (206.530 - 10.415 = 196.115 M) x 1 pp = 1.961 M / PIB 2023 1.496.277 M = 0,131 %; las deducciones son mayoritariamente fijas y no crecen con el tipo. Alto: toda la base, 0,138 %. Bajo: recaudación 35.060 M / 25 = 1.402 M (0,094 %), si las deducciones con límite en % de cuota absorben parte. Semielasticidad de la base: 0,8 del meta-análisis aplicada solo al 54,8 % del beneficio de los grupos = 0,44; bajo 0 (pymes sin canal internacional).",
+   "note_es": "Según la AEAT, la base imponible del Impuesto sobre Sociedades fue de 206.530 millones en 2023 (196.115 sin fondos al 1 %): un punto más de tipo daría unos 1.961 millones, el 0,131 % del PIB, antes de que las empresas declaren menos beneficio.",
+   "extra_parameters": [
+    {
+     "name": "semielasticidad_base_sociedades",
+     "unit": "% de caída de la base declarada por 1 pp más de tipo",
+     "low": 0.0,
+     "central": 0.44,
+     "high": 0.8
+    }
+   ],
+   "review": {
+    "verdict": "pass",
+    "evidence": "AEAT cuentas no consolidadas 2023: Base Imponible 206.530 M e IIC 10.415 M confirmados (196.115 M → 0,131 %; total 0,138 %); IART 2023 cap. 3: 35.060 M (0,094 %); infografía pág. 3: 12,1 % y 54,8 % del beneficio; ZEW DP 13-045 pág. 3: semielasticidad ≈ 0,8 (0,8 × 0,548 = 0,44). Aplicar la semielasticidad de filiales multinacionales a todos los grupos fiscales (también domésticos) es una suposición, ya marcada por el bajo 0."
+   },
+   "part_file": "part_tax_b.json"
+  },
+  {
+   "id": "T06_corp_incidence",
+   "from": "impuesto_sociedades",
+   "to": "salarios",
+   "sign": "-",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "traslado_sociedades_salarios",
+    "unit": "fracción del Impuesto sobre Sociedades que acaba en menores salarios, largo plazo",
+    "low": 0.18,
+    "central": 0.34,
+    "high": 0.77
+   },
+   "lag_years": [
+    3,
+    10
+   ],
+   "grade": "B",
+   "spain_evidence": "no",
+   "sources": [
+    {
+     "url": "https://www.aeaweb.org/articles?id=10.1257/aer.20130570",
+     "title": "Do Higher Corporate Taxes Reduce Wages? Micro Evidence from Germany",
+     "authors_year": "Fuest, Peichl y Siegloch (2018, American Economic Review 108(2); IZA DP 7390 de 2013)",
+     "country": "Alemania",
+     "period": "20 años de paneles municipales, 6.800 cambios del impuesto local",
+     "method": "diferencias en diferencias con cambios del impuesto local sobre empresas y datos empleador-empleado",
+     "locator": "resumen (AER); en el IZA DP 7390, págs. 3 y 6: 77 céntimos en empresas con convenio colectivo",
+     "quote": "we find that workers bear about one-half of the total tax burden",
+     "value_in_source": "0,5 (AER 2018); 0,77 en empresas con convenio colectivo (IZA DP 2013)"
+    },
+    {
+     "url": "https://home.treasury.gov/system/files/131/TP-5.pdf",
+     "title": "Distributing the Corporate Income Tax: Revised U.S. Treasury Methodology (OTA Technical Paper 5)",
+     "authors_year": "Cronin, Lin, Power y Cooper (2012), U.S. Treasury",
+     "country": "Estados Unidos",
+     "period": "metodología desde el año de modelo 2012",
+     "method": "reparto por rentas normales y supranormales del capital (convención institucional)",
+     "locator": "pág. 2",
+     "quote": "82% of the corporate income tax burden is distributed to capital income and 18% is distributed to labor income.",
+     "value_in_source": "0.18"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://home.treasury.gov/system/files/131/TP-5.pdf",
+     "title": "U.S. Treasury OTA TP-5 (2012)",
+     "finding": "El Tesoro de EE. UU. asigna solo el 18 % al trabajo (24 % entre 2008 y 2011), muy por debajo del 77 % del trabajo alemán."
+    }
+   ],
+   "debate": {
+    "id": "incidencia_sociedades_salarios",
+    "schools": [
+     {
+      "label": "Negociación colectiva y movilidad regional: los trabajadores soportan la mayor parte (Fuest, Peichl y Siegloch, Alemania)",
+      "central": 0.5,
+      "source_index": 0
+     },
+     {
+      "label": "Convención institucional de EE. UU.: el capital soporta la mayor parte (Tesoro)",
+      "central": 0.18,
+      "source_index": 1
+     }
+    ]
+   },
+   "derivation": "Bajo 0,18 (Tesoro de EE. UU., convención de reparto). Alto 0,77 (IZA DP 7390, incidencia total en empresas con convenio colectivo). Central = punto medio entre las dos escuelas, (0,18 + 0,50) / 2 = 0,34, con 0,50 de la versión publicada en la AER (2018). No hay estimación española; el canal alemán pasa por la negociación colectiva, también extendida en España, lo que es una suposición.",
+   "note_es": "Es una cuestión discutida. Según un estudio con municipios alemanes (Fuest, Peichl y Siegloch, 2018), los trabajadores soportan alrededor de la mitad del impuesto local sobre empresas, y unos 77 céntimos por euro en las empresas con convenio colectivo; el Tesoro de EE. UU. asigna solo el 18 % al trabajo. El simulador usa el 34 %, punto medio entre ambos, sin estimación española.",
+   "review": {
+    "verdict": "fix",
+    "evidence": "IZA DP 7390 pág. 3 confirma 77 céntimos, pero pág. 6 precisa que es la incidencia total sobre salarios en empresas con convenio colectivo (efecto directo 50, 67 con un retardo); la versión publicada (AER 2018, resumen en aeaweb.org) dice «workers bear about one-half of the total tax burden». Tesoro TP-5 pág. 2: 18 % al trabajo, una convención de reparto y no una estimación empírica; mismo concepto (cuota del impuesto que soporta el trabajo), dominios distintos."
+   },
+   "part_file": "part_tax_b.json"
+  },
+  {
+   "id": "T07_wage_bill",
+   "from": "salarios",
+   "to": "base_salarial",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "salarios_pib",
+    "unit": "% del PIB: sueldos y salarios brutos (D11)",
+    "low": 36.87,
+    "central": 37.0,
+    "high": 37.67
+   },
+   "lag_years": 0,
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://ec.europa.eu/eurostat/databrowser/view/nama_10_gdp/default/table",
+     "title": "Eurostat nama_10_gdp: GDP and main components (output, expenditure and income)",
+     "authors_year": "Eurostat (consulta 2026-10-19)",
+     "country": "España",
+     "period": "2023-2025",
+     "method": "contabilidad nacional SEC 2010",
+     "locator": "geo=ES, na_item=D11 y B1GQ, unit=CP_MEUR",
+     "quote": "Wages and salaries | 2024 = 591441.0; Gross domestic product at market prices | 2024 = 1598588.0",
+     "value_in_source": "591.441 / 1.598.588 M EUR (2024)"
+    }
+   ],
+   "contrary_evidence": [],
+   "debate": null,
+   "derivation": "2024: 591.441 / 1.598.588 = 37,0 %. Bajo 2023: 551.674 / 1.496.277 = 36,87 %; alto 2025: 636.703 / 1.690.012 = 37,67 %.",
+   "note_es": "Según Eurostat, los sueldos y salarios brutos sumaron 591.441 millones en 2024, el 37,0 % del PIB de España (36,9 % en 2023 y 37,7 % en 2025).",
+   "review": {
+    "verdict": "pass",
+    "evidence": "Eurostat nama_10_gdp (consulta 2026-10-19): D11 551.674 / 591.441 / 636.703 y B1GQ 1.496.277 / 1.598.588 / 1.690.012 para 2023-2025; ratios 36,87 / 37,00 / 37,67 % reproducidos."
+   },
+   "part_file": "part_tax_b.json"
   }
  ]
 }

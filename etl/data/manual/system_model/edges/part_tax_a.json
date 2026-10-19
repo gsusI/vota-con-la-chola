@@ -1,0 +1,296 @@
+{
+ "agent": "tax_a",
+ "edges": [
+  {
+   "id": "T01_irpf_yield_all",
+   "from": "tipo_irpf_todos",
+   "to": "recaudacion_irpf",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "recaudacion_por_punto_irpf",
+    "unit": "% del PIB por 1 pp en todos los tramos del IRPF",
+    "low": 0.25,
+    "central": 0.262,
+    "high": 0.29
+   },
+   "lag_years": [
+    0,
+    1
+   ],
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubik379ba920d5abbc332c65c82f7a9f4e0563ba3ae.html",
+     "title": "Estadística de los declarantes del IRPF 2023: Detalle de partidas, mínimo personal y familiar",
+     "authors_year": "AEAT, ejercicio 2023",
+     "country": "España (territorio de régimen común)",
+     "period": "2023",
+     "method": "explotación censal de las autoliquidaciones del IRPF",
+     "locator": "partidas 521 y 522 (Total); la partida 500 (534.779.537.203 €) está en la tabla por tramos de la partida 500, fila Total (sites/irpf/2023/jrubik7a356dde49b85b0e855c7c8edbe15fe1dee6e336.html)",
+     "quote": "500. Base liquidable general: 534.779.537.203; 521. Importe del mínimo personal y familiar de la base liquidable general: 142.859.734.177",
+     "value_in_source": "534.779,5 M€ y 142.859,7 M€"
+    },
+    {
+     "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/nama_10_gdp?geo=ES&na_item=B1GQ&unit=CP_MEUR&sinceTimePeriod=2022",
+     "title": "GDP and main components (nama_10_gdp)",
+     "authors_year": "Eurostat (consulta 2026-10-19)",
+     "country": "España",
+     "period": "2023",
+     "method": "contabilidad nacional",
+     "locator": "B1GQ, CP_MEUR, 2023",
+     "quote": "ES B1GQ CP_MEUR 2023 = 1496277.0",
+     "value_in_source": "1.496.277 M€"
+    }
+   ],
+   "contrary_evidence": [],
+   "debate": null,
+   "derivation": "(534.779,5 − 142.859,7) M€ = 391.919,8 M€ de base liquidable general neta del mínimo aplicado; × 0,01 = 3.919 M€; / PIB 2023 1.496.277 M€ = 0,262 % del PIB por 1 pp del tipo combinado (estatal + autonómico) en todos los tramos. No incluye la base del ahorro (con ella, +40.663,6 M€ netos de su mínimo: 0,289 %). La estadística no cubre País Vasco ni Navarra (no figuran en su menú de CCAA); el alto (0,29) añade un margen de ~8 % por ellos, no verificado.",
+   "note_es": "Según la estadística de declarantes del IRPF 2023 de la AEAT (territorio común, sin País Vasco ni Navarra), la base liquidable general menos el mínimo personal y familiar fue de 391.920 M€: subir 1 punto el tipo de todos los tramos recaudaría unos 3.900 M€, el 0,26 % del PIB, antes de reacciones de los contribuyentes.",
+   "review": {
+    "verdict": "fix",
+    "evidence": "Partidas 521 (142.859.734.177) y 522 están en la URL citada, pero esa página solo trae el mínimo personal y familiar (511-523); la partida 500 (534.779.537.203) está en la tabla por tramos de la partida 500 (fila Total, URL de T02). (534.779,5 − 142.859,7)/1.496.277 = 0,262 % confirmado; PIB 2023 Eurostat correcto."
+   }
+  },
+  {
+   "id": "T02_irpf_yield_top",
+   "from": "tipo_irpf_alto",
+   "to": "recaudacion_irpf",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "recaudacion_por_punto_irpf_alto",
+    "unit": "% del PIB por 1 pp en la base liquidable por encima de 60.000 €",
+    "low": 0.031,
+    "central": 0.031,
+    "high": 0.036
+   },
+   "lag_years": [
+    0,
+    1
+   ],
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubik7a356dde49b85b0e855c7c8edbe15fe1dee6e336.html",
+     "title": "Estadística de los declarantes del IRPF 2023: Por tramos de rendimiento, partida 500 Base liquidable general",
+     "authors_year": "AEAT, ejercicio 2023",
+     "country": "España (territorio de régimen común)",
+     "period": "2023",
+     "method": "explotación censal de las autoliquidaciones, por tramos de rendimientos e imputaciones",
+     "locator": "tramos (60-150], (150-601] y Mayor de 601 (miles de euros)",
+     "quote": "(60 - 150]: 1.168.908 liquidaciones, 87.309.747.971 €, media 74.693; (150 - 601]: 160.311, 28.234.893.773 €, media 176.126; Mayor de 601: 14.639, 11.073.164.445 €, media 756.415",
+     "value_in_source": "1.343.858 liquidaciones con 126.617,8 M€ de base liquidable general"
+    }
+   ],
+   "contrary_evidence": [],
+   "debate": null,
+   "derivation": "Aproximación por medias de tramo: Σ n × (media − 60.000) = 1.168.908×14.693 + 160.311×116.126 + 14.639×696.415 = 45.986 M€; × 0,01 / PIB 2023 1.496.277 M€ = 0,031 % del PIB. Los tramos son de rendimientos, no de base; por Jensen la cifra es un mínimo (dentro del tramo 60-150 quien queda por debajo de 60.000 suma 0), de ahí el alto 0,036, que también cubre País Vasco y Navarra (no verificado). Pareto: media 94.220 / (94.220 − 60.000) = 2,75; con el umbral de 150.000, 224.680/74.680 = 3,0; el bajo 2,3 admite más dispersión dentro del tramo.",
+   "note_es": "Según la estadística de declarantes del IRPF 2023 de la AEAT, 1,34 millones de declaraciones con rendimientos de más de 60.000 € suman unos 46.000 M€ de base por encima de ese umbral: 1 punto más en esa franja daría unos 460 M€, el 0,03 % del PIB, antes de reacciones.",
+   "extra_parameters": [
+    {
+     "name": "pareto_a_alto",
+     "unit": "parámetro de Pareto de la base por encima de 60.000 € (media/(media − 60.000))",
+     "low": 2.3,
+     "central": 2.75,
+     "high": 3.0
+    }
+   ],
+   "review": {
+    "verdict": "fix",
+    "evidence": "Tabla de la partida 500 por tramos: (60-150] 1.168.908 / 87.309.747.971 / 74.693; (150-601] 160.311 / 28.234.893.773 / 176.126; >601 14.639 / 11.073.164.445 / 756.415, todo confirmado; Σ n(media − 60.000) = 45.986 M, 0,0307 % del PIB 2023, y Pareto 2,75 / 3,0 reproducidos. Pero la propia derivación dice que 0,031 es un mínimo (Jensen) y el bajo 0,029 queda por debajo sin justificación."
+   }
+  },
+  {
+   "id": "T03_eti_general",
+   "from": "tipo_irpf_todos",
+   "to": "base_irpf",
+   "sign": "-",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "eti_general",
+    "unit": "elasticidad de la renta gravable al neto de impuestos (1 − tipo marginal), todos los declarantes salvo pensionistas",
+    "low": 0.12,
+    "central": 0.54,
+    "high": 0.64
+   },
+   "lag_years": [
+    1,
+    3
+   ],
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://www.bde.es/f/webbde/SES/Secciones/Publicaciones/PublicacionesSeriadas/DocumentosTrabajo/19/Fich/dt1924e.pdf",
+     "title": "The elasticity of taxable income in Spain: 1999-2014",
+     "authors_year": "Almunia y López-Rodríguez (2019, Banco de España DT 1924; SERIEs 2019)",
+     "country": "España",
+     "period": "1999-2014",
+     "method": "panel de declaraciones del IRPF (IEF) con reformas sucesivas; métodos Gruber-Saez, Kleven-Schultz y Weber",
+     "locator": "pág. 5 (resumen) y pág. 9",
+     "quote": "The most reliable estimates of the elasticity of taxable income (ETI) with respect to the net-of-tax rate for this period are between 0.45 and 0.64.",
+     "value_in_source": "0.45-0.64 (0.35 Gruber-Saez, 0.54 Kleven-Schultz, 0.64 Weber)"
+    },
+    {
+     "url": "https://www.nber.org/system/files/working_papers/w15012/w15012.pdf",
+     "title": "The Elasticity of Taxable Income with Respect to Marginal Tax Rates: A Critical Review",
+     "authors_year": "Saez, Slemrod y Giertz (2009, NBER WP 15012; J. Econ. Lit. 2012)",
+     "country": "internacional (revisión, sobre todo EE. UU.)",
+     "period": "estudios 1980-2008",
+     "method": "revisión crítica de la literatura",
+     "locator": "pág. 60 (conclusión)",
+     "quote": "The most reliable longer-run estimates range from 0.12 to 0.4",
+     "value_in_source": "0.12-0.40"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://www.bde.es/f/webbde/SES/Secciones/Publicaciones/PublicacionesSeriadas/DocumentosTrabajo/19/Fich/dt1924e.pdf",
+     "title": "The elasticity of taxable income in Spain: 1999-2014",
+     "finding": "La elasticidad de la renta amplia (antes de deducciones) es mucho menor, 0,10-0,24: buena parte de la respuesta va por deducciones (p. ej. planes de pensiones) (pág. 5)."
+    },
+    {
+     "url": "https://www.nber.org/system/files/working_papers/w15012/w15012.pdf",
+     "title": "The Elasticity of Taxable Income with Respect to Marginal Tax Rates: A Critical Review",
+     "finding": "Las estimaciones a largo plazo más fiables para EE. UU. van de 0,12 a 0,40, por debajo del rango español (pág. 60)."
+    }
+   ],
+   "debate": null,
+   "derivation": "Central 0,54 = estimación con el método Kleven-Schultz para España 1999-2014 (rango fiable 0,45-0,64; 0,35 con Gruber-Saez); bajo 0,12 = extremo inferior de la revisión de Saez, Slemrod y Giertz; alto 0,64 (método Weber). Con m = 0,30 la pérdida por reacción es 0,54 × 0,30/0,70 = 23 % del cambio estático.",
+   "note_es": "Según Almunia y López-Rodríguez (Banco de España, 2019), con declaraciones de 1999-2014 sin contar a los pensionistas, la renta gravable sube entre un 0,45 % y un 0,64 % por cada 1 % que sube lo que queda tras el impuesto; la renta antes de deducciones reacciona mucho menos (0,10-0,24).",
+   "review": {
+    "verdict": "fix",
+    "evidence": "Almunia y López-Rodríguez pág. 5 y 9: 0,45-0,64 fiable, 0,35 GS / 0,54 KS / 0,64 Weber, EBI 0,10-0,24; es la ETI de todos los declarantes del panel IEF sin umbral de renta, pero excluyendo pensionistas (≥65 con rentas del trabajo sin cotizaciones) y rentas negativas (págs. 18-19). SSG pág. 60 «0.12 to 0.4» confirmado."
+   }
+  },
+  {
+   "id": "T03b_eti_top",
+   "from": "tipo_irpf_alto",
+   "to": "base_irpf_alta",
+   "sign": "-",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "eti_alta",
+    "unit": "elasticidad de la renta gravable al neto de impuestos, rentas altas",
+    "low": 0.12,
+    "central": 0.57,
+    "high": 1.2
+   },
+   "lag_years": [
+    1,
+    3
+   ],
+   "grade": "B",
+   "spain_evidence": "parcial",
+   "sources": [
+    {
+     "url": "https://www.nber.org/system/files/working_papers/w7512/w7512.pdf",
+     "title": "The Elasticity of Taxable Income: Evidence and Implications",
+     "authors_year": "Gruber y Saez (2000, NBER WP 7512; J. Public Econ. 2002)",
+     "country": "Estados Unidos",
+     "period": "1979-1990",
+     "method": "panel de declaraciones con reformas fiscales, variables instrumentales",
+     "locator": "pág. 2 (resumen)",
+     "quote": "taxpayers who have incomes above $100,000 per year, who have an elasticity of 0.57",
+     "value_in_source": "0.57"
+    },
+    {
+     "url": "https://www.nber.org/system/files/working_papers/w15012/w15012.pdf",
+     "title": "The Elasticity of Taxable Income with Respect to Marginal Tax Rates: A Critical Review",
+     "authors_year": "Saez, Slemrod y Giertz (2009, NBER WP 15012; J. Econ. Lit. 2012)",
+     "country": "internacional (revisión, sobre todo EE. UU.)",
+     "period": "estudios 1980-2008",
+     "method": "revisión crítica de la literatura",
+     "locator": "pág. 60 (conclusión)",
+     "quote": "The most reliable longer-run estimates range from 0.12 to 0.4",
+     "value_in_source": "0.12-0.40"
+    },
+    {
+     "url": "https://www.bde.es/f/webbde/SES/Secciones/Publicaciones/PublicacionesSeriadas/DocumentosTrabajo/19/Fich/dt1924e.pdf",
+     "title": "The elasticity of taxable income in Spain: 1999-2014",
+     "authors_year": "Almunia y López-Rodríguez (2019, Banco de España DT 1924; SERIEs 2019)",
+     "country": "España",
+     "period": "1999-2014",
+     "method": "panel de declaraciones del IRPF (IEF) con reformas sucesivas; métodos Gruber-Saez, Kleven-Schultz y Weber",
+     "locator": "pág. 5 (resumen) y pág. 9",
+     "quote": "The most reliable estimates of the elasticity of taxable income (ETI) with respect to the net-of-tax rate for this period are between 0.45 and 0.64.",
+     "value_in_source": "0.45-0.64 (0.35 Gruber-Saez, 0.54 Kleven-Schultz, 0.64 Weber)"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://www.bde.es/f/webbde/SES/Secciones/Publicaciones/PublicacionesSeriadas/DocumentosTrabajo/19/Fich/dt1924e.pdf",
+     "title": "The elasticity of taxable income in Spain: 1999-2014",
+     "finding": "Cita a Mertens y Olea (2018): ETI de alrededor de 1,2 en EE. UU., aún mayor para rentas altas (pág. 11); y en España la ETI de autónomos triplica la de asalariados (pág. 5)."
+    }
+   ],
+   "debate": {
+    "id": "eti_rentas_altas",
+    "schools": [
+     {
+      "label": "Rentas altas de EE. UU. muy sensibles (panel de reformas, Gruber y Saez)",
+      "central": 0.57,
+      "source_index": 0
+     },
+     {
+      "label": "Consenso a largo plazo más moderado (revisión de Saez, Slemrod y Giertz)",
+      "central": 0.25,
+      "source_index": 1
+     },
+     {
+      "label": "España, todos los declarantes 1999-2014, sin desglose por renta (Almunia y López-Rodríguez)",
+      "central": 0.54,
+      "source_index": 2
+     }
+    ]
+   },
+   "derivation": "Central 0,57 = ETI de quienes ganan más de 100.000 $ en Gruber y Saez; bajo 0,12 = extremo inferior de Saez, Slemrod y Giertz (0,12-0,40, punto medio 0,25 en el debate); alto 1,2 = Mertens y Olea según cita de Almunia y López-Rodríguez (no leído en el original). No hay estimación española específica para rentas altas: el valor español medio (0,54) cae cerca del central. Con m = 0,47 la pérdida es 0,57 × 0,47/0,53 = 51 % del cambio estático.",
+   "note_es": "No hay una cifra española para rentas altas. Según Gruber y Saez, en EE. UU. su renta gravable responde con 0,57; la revisión de Saez, Slemrod y Giertz da 0,12-0,40 a largo plazo, y para España, en todos los declarantes, Almunia y López-Rodríguez estiman 0,45-0,64.",
+   "review": {
+    "verdict": "pass",
+    "evidence": "Gruber y Saez pág. 2 (resumen) y pág. 5: 0,57 para rentas de más de 100.000 $; SSG pág. 60 0,12-0,4; Almunia y López-Rodríguez pág. 11 citan a Mertens y Olea «ETI of around 1.2, with an even larger elasticity for high-income earners». Grado B y spain_evidence parcial son honestos; la nota dice que no hay cifra española para rentas altas."
+   }
+  },
+  {
+   "id": "B04_irpf_concentration",
+   "from": "declarantes",
+   "to": "base_irpf",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "cuota_base_irpf_20_superior",
+    "unit": "% de la base liquidable (o renta) del 20 % de declarantes con más renta",
+    "low": 48.5,
+    "central": 50.9,
+    "high": 52.0
+   },
+   "lag_years": 0,
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubik7a356dde49b85b0e855c7c8edbe15fe1dee6e336.html",
+     "title": "Estadística de los declarantes del IRPF 2023: Por tramos de rendimiento, partida 500 Base liquidable general",
+     "authors_year": "AEAT, ejercicio 2023",
+     "country": "España (territorio de régimen común)",
+     "period": "2023",
+     "method": "explotación censal de las autoliquidaciones, por tramos de rendimientos e imputaciones",
+     "locator": "columnas Distribución número total y Distribución importe",
+     "quote": "(30 - 60]: 22,02 % de liquidaciones y 37,93 % del importe; (60 - 150]: 4,88 % y 16,33 %; (150 - 601]: 0,67 % y 5,28 %; Mayor de 601: 0,06 % y 2,07 %",
+     "value_in_source": "el 5,61 % superior tiene el 23,68 %; el 27,63 % superior, el 61,61 %"
+    }
+   ],
+   "contrary_evidence": [],
+   "debate": null,
+   "derivation": "El 20 % cae dentro del tramo 30.000-60.000 €. Interpolación de Pareto (α = ln(27,63/5,61)/ln 2 = 2,30; umbral del 20 % ≈ 34.500 €): 23,68 + 0,719 × 37,93 = 50,9 % de la base liquidable general. Reparto uniforme dentro del tramo (cota baja): 48,5 %; alto 52 por la curvatura. Para el 10 % superior, 33,7 % (Pareto) o 31,2 % (uniforme). Orden por rendimientos, no por base; tabla de tramos, no de deciles.",
+   "note_es": "Según la estadística de declarantes del IRPF 2023 de la AEAT, el 20 % de declaraciones con más rendimientos concentra en torno al 51 % de la base liquidable general (cálculo por tramos) y el 10 % superior, alrededor de un tercio.",
+   "review": {
+    "verdict": "fix",
+    "evidence": "Columnas de distribución de la tabla de la partida 500 confirmadas (22,02/37,93; 4,88/16,33; 0,67/5,28; 0,06/2,07). Recalculado: α = 2,300, umbral 34.525 €, fracción del tramo por encima = 0,719 (no 0,721), 23,68 + 0,719 × 37,93 = 50,95 % (central 50,9 correcto); uniforme 48,47; 10 % superior 33,7 / 31,2."
+   }
+  }
+ ]
+}

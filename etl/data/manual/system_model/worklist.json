@@ -286,6 +286,123 @@
    },
    "need": "Share of household consumption (CPI/HICP basket weights) taxed at the 21 % standard VAT rate in Spain (rest at 10 %, 4 %, exempt). Derive from INE CPI weights by VAT rate or from the 2012 INE note (IPC a impuestos constantes) or AEAT/EC VAT studies.",
    "hints": "INE IPC ponderaciones; INE note September 2012 https://www.ine.es/daco/daco42/daco421/ipc0912.pdf; EC 'VAT rates applied in the Member States'; AIReF spending review on tax benefits (beneficios fiscales IVA)."
+  },
+  {
+   "id": "T01_irpf_yield_all",
+   "from": "tipo_irpf_todos",
+   "to": "recaudacion_irpf",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "recaudacion_por_punto_irpf",
+    "unit": "% del PIB por 1 pp en todos los tramos del IRPF"
+   },
+   "need": "Static revenue from raising every bracket of the IRPF general scale (state + regional) by 1 pp, in % of GDP. Derive from the latest AEAT 'Estadística de los declarantes del IRPF' (2023 returns): sum of base liquidable general (and the savings base if you include it, say which) minus the personal and family minimum actually applied (mínimo personal y familiar), times 0.01, divided by nominal GDP of that year (2023 ≈ 1,498,324 M EUR). Model use: revenue = this × pp.",
+   "hints": ""
+  },
+  {
+   "id": "T02_irpf_yield_top",
+   "from": "tipo_irpf_alto",
+   "to": "recaudacion_irpf",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "recaudacion_por_punto_irpf_alto",
+    "unit": "% del PIB por 1 pp en la base liquidable por encima de 60.000 €"
+   },
+   "need": "Static revenue from +1 pp on the part of the general taxable base above 60,000 EUR (top state+regional bracket starts at 60,000 for the state scale): sum over filers of max(0, base liquidable general − 60,000) × 0.01 / GDP. AEAT publishes declarants by tramos of base imponible/liquidable with amounts: use the brackets above 60,000 (count and total base) and say the approximation. extra_parameters pareto_a_alto = mean base above 60,000 / (mean − 60,000) from the same table.",
+   "hints": ""
+  },
+  {
+   "id": "T03_eti_general",
+   "from": "tipo_irpf_todos",
+   "to": "base_irpf",
+   "sign": "-",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "eti_general",
+    "unit": "elasticidad de la renta gravable al neto de impuestos (1 − tipo marginal), todos los contribuyentes"
+   },
+   "need": "Elasticity of taxable income (ETI) with respect to the net-of-tax rate for Spanish taxpayers overall. Spanish estimates: Sanmartín (2007, Hacienda Pública Española / Review of Public Economics) on the 1999 reform; Díaz-Caro & Onrubia (2018); Almunia & López-Rodríguez (2019?) bunching; international: Saez, Slemrod & Giertz (2012, JEL) survey (0.12-0.40). Model use: revenue offset = ETI × m/(1−m) × static change, m ≈ average marginal rate.",
+   "hints": ""
+  },
+  {
+   "id": "T03b_eti_top",
+   "from": "tipo_irpf_alto",
+   "to": "base_irpf_alta",
+   "sign": "-",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "eti_alta",
+    "unit": "elasticidad de la renta gravable al neto de impuestos, rentas altas"
+   },
+   "need": "ETI for high incomes (top brackets) in Spain or comparable countries; this is contested (high values in the US, low in Europe): give a debate with at least two schools and sources. Model use: offset on the top-rate lever = ETI_top × m_top/(1−m_top) × a (Pareto parameter).",
+   "hints": ""
+  },
+  {
+   "id": "B04_irpf_concentration",
+   "from": "declarantes",
+   "to": "base_irpf",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "cuota_base_irpf_20_superior",
+    "unit": "% de la base liquidable (o renta) del 20 % de declarantes con más renta"
+   },
+   "need": "VALIDATION benchmark: share of total base liquidable (or of total gross income declared) accounted for by the 20 % of declarants with the highest income, latest AEAT year (also top 10 % in derivation). AEAT tables by deciles/tramos.",
+   "hints": ""
+  },
+  {
+   "id": "T04_vat_reduced_yield",
+   "from": "tipo_iva_reducido",
+   "to": "recaudacion_iva",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "recaudacion_por_punto_iva_reducido",
+    "unit": "% del PIB por 1 pp del tipo reducido (10 %)"
+   },
+   "need": "Static VAT revenue from +1 pp of the 10 % reduced rate, in % of GDP. The 2012 hike (8 -> 10 %) is a Spanish test: AEAT Informe Anual de Recaudación Tributaria 2012/2013 splits the effect of the rate changes; a previously verified card found 9,701 M EUR a year for the 2012 rise of all rates (standard 18->21, reduced 8->10) and 2,883 M per pp of the standard rate. Divide by GDP of the year (2013 ≈ 1,025,652 M EUR... use the year of the revenue).",
+   "hints": ""
+  },
+  {
+   "id": "T05_corp_yield",
+   "from": "tipo_sociedades",
+   "to": "recaudacion_sociedades",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "recaudacion_por_punto_sociedades",
+    "unit": "% del PIB por 1 pp del tipo nominal del Impuesto sobre Sociedades"
+   },
+   "need": "Static revenue from +1 pp of the nominal Impuesto sobre Sociedades rate (25 %), in % of GDP: AEAT 'Estadística de las declaraciones del Impuesto sobre Sociedades' (base imponible positiva, cuota íntegra, tipo efectivo) latest year; per pp ≈ 1 % × taxable base (note deductions keep effective rates lower). extra_parameters semielasticidad_base_sociedades: semi-elasticity of reported profits to the tax rate (Heckemeyer & Overesch 2017 meta-analysis, about 0.8 % per pp; or Spanish evidence).",
+   "hints": ""
+  },
+  {
+   "id": "T06_corp_incidence",
+   "from": "impuesto_sociedades",
+   "to": "salarios",
+   "sign": "-",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "traslado_sociedades_salarios",
+    "unit": "fracción del Impuesto sobre Sociedades que acaba en menores salarios, largo plazo"
+   },
+   "need": "Long-run share of the corporate income tax borne by workers through lower wages. Contested: Fuest, Peichl & Siegloch (2018, AER, Germany: about 51 %); Arulampalam, Devereux & Maffini (2012, EER: 49 %); US agencies (CBO/JCT 25 %, Treasury 18-21 %); Spanish evidence if any. Give a debate with schools.",
+   "hints": ""
+  },
+  {
+   "id": "T07_wage_bill",
+   "from": "salarios",
+   "to": "base_salarial",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "salarios_pib",
+    "unit": "% del PIB: sueldos y salarios brutos (D11)"
+   },
+   "need": "Wages and salaries (ESA D11) in % of GDP, Spain, 2024 (Eurostat nama_10_gdp, unit PC_GDP or CP_MEUR / B1GQ). Use: python3 -m scripts.voting_aid_impacts_kit eurostat nama_10_gdp \"geo=ES&na_item=D11&na_item=B1GQ&unit=CP_MEUR&sinceTimePeriod=2023\". Accounting, grade A.",
+   "hints": ""
   }
  ]
 }

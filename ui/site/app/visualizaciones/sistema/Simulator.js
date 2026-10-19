@@ -4,10 +4,11 @@ import { useEffect, useMemo, useState } from "react";
 import { SeriesTable } from "../components/Figure";
 import FanChart, { fmt } from "./FanChart";
 import CausalMap from "./CausalMap";
-import { DEFAULT_LEVERS, LAYERS, applyLayer, centralParams, decodeState, encodeState, mainDriver, runEnsemble, simulate } from "./engine.mjs";
+import { DEFAULT_LEVERS, LAYERS, applyLayer, centralParams, decodeState, encodeState, mainDriver, quintileImpact, runEnsemble, simulate } from "./engine.mjs";
+import QuintileFigure from "./QuintileFigure";
 import "./sistema.css";
 
-const C = { base: "#8b8a83", scen: "#2a78d6", p1: "#eb6834", p4: "#1baf7a" };
+const C = { base: "#8b8a83", scen: "#2a78d6", p1: "#eb6834", p2: "#eda100", p4: "#1baf7a", p5: "#7a5af5" };
 
 export const PARAM_LABELS = {
   lambda_renovacion: "renovación anual de las pensiones",
@@ -29,6 +30,16 @@ export const PARAM_LABELS = {
   indiciacion_salarios: "salarios que recuperan la inflación",
   prima_por_deuda: "prima de riesgo por deuda",
   cuota_refinanciacion: "ritmo de refinanciación de la deuda",
+  recaudacion_por_punto_irpf: "recaudación por punto de IRPF",
+  recaudacion_por_punto_irpf_alto: "recaudación por punto del tramo alto",
+  pareto_a_alto: "forma de la distribución de las rentas altas",
+  eti_general: "respuesta de la renta declarada al IRPF",
+  eti_alta: "respuesta de las rentas altas al IRPF",
+  recaudacion_por_punto_iva_reducido: "recaudación por punto de IVA reducido",
+  recaudacion_por_punto_sociedades: "recaudación por punto de Sociedades",
+  semielasticidad_base_sociedades: "beneficios que se declaran fuera o dejan de declararse",
+  traslado_sociedades_salarios: "parte del Impuesto sobre Sociedades que pagan los salarios",
+  salarios_pib: "peso de los salarios en el PIB",
 };
 
 const LAYER_LABELS = {
@@ -41,6 +52,7 @@ const CLOSURES = [
   { id: "deuda", label: "Con deuda", note: "nadie paga hoy; la deuda y sus intereses crecen" },
   { id: "cotizaciones", label: "Con cotizaciones", note: "sube el tipo cada año lo necesario (5/6 empresa, 1/6 trabajador)" },
   { id: "iva", label: "Con IVA", note: "sube el tipo general cada año lo necesario" },
+  { id: "irpf", label: "Con IRPF", note: "suben todos los tramos de la escala general lo necesario" },
 ];
 
 const HORIZONS = [2030, 2035, 2050];
@@ -205,15 +217,22 @@ export default function Simulator({ model }) {
   const edgeById = useMemo(() => Object.fromEntries(model.edges.map((e) => [e.id, e])), [model]);
   const ensemble = useMemo(() => runEnsemble(model, levers, { debates, layer }), [model, levers, debates, layer]);
   const run = ensemble.central;
+  const layerParams = useMemo(() => applyLayer(model, centralParams(model, debates), layer), [model, debates, layer]);
+  const quintiles = quintileImpact(model, run, model.years.indexOf(horizon), layerParams);
   const base = model.baseline;
   const t = model.years.indexOf(horizon);
   const tEnd = model.years.length - 1;
-  const moved = levers.reval || levers.age || levers.contrib || levers.migration !== "base" || levers.rateShock;
+  const moved =
+    levers.reval || levers.age || levers.contrib || levers.irpfAll || levers.irpfTop || levers.vatStd || levers.vatRed || levers.corp ||
+    levers.migration !== "base" || levers.rateShock;
 
   // Same outputs under each certainty layer (central parameters), to show what is arithmetic and what is assumption.
   const layered = useMemo(
     () =>
-      LAYERS.map((ly) => ({ layer: ly, run: simulate(model, levers, applyLayer(model, centralParams(model, debates), ly)) })),
+      LAYERS.map((ly) => {
+        const p = applyLayer(model, centralParams(model, debates), ly);
+        return { layer: ly, run: simulate(model, levers, p), params: p };
+      }),
     [model, levers, debates],
   );
   const outputs = [
@@ -222,9 +241,12 @@ export default function Simulator({ model }) {
     { key: "p4_month", label: `Caso 4 en ${horizon}, al mes`, unit: "eur", digits: 0, t },
     { key: "p1_month", label: `Caso 1 en ${horizon}, al mes`, unit: "eur", digits: 0, t },
     { key: "employment_k", label: `Empleo en ${horizon}`, unit: "k", digits: 0, t },
+    { key: "q1", label: `Hogares del quintil 1 en ${horizon}, al mes`, unit: "eur", digits: 0, t, quintile: 0 },
+    { key: "q5", label: `Hogares del quintil 5 en ${horizon}, al mes`, unit: "eur", digits: 0, t, quintile: 4 },
   ];
+  const valueOf = (o, r, p) => (o.quintile != null ? quintileImpact(model, r, o.t, p)[o.quintile].total : r[o.key][o.t]);
   const debateParams = Object.entries(model.params).filter(([, p]) => p.debate);
-  const closureRate = levers.closure === "cotizaciones" ? "closure_contrib_pp" : levers.closure === "iva" ? "closure_vat_pp" : null;
+  const closureRate = { cotizaciones: "closure_contrib_pp", iva: "closure_vat_pp", irpf: "closure_irpf_pp" }[levers.closure] || null;
   const band = (key) => ({ lo: ensemble.bands[key].lo, hi: ensemble.bands[key].hi });
   const asPoints = (values) => model.years.map((year, i) => ({ year, value: Math.round(values[i] * 100) / 100 }));
 
@@ -237,8 +259,18 @@ export default function Simulator({ model }) {
             onChange={set("reval")} hint="0 = la ley actual (IPC). Se aplica a todas las pensiones desde 2026." />
           <Slider id="lv-age" label="Edad efectiva de jubilación frente a la línea base" value={levers.age} min={-2} max={2} step={0.5} unit="años"
             onChange={set("age")} hint="Se aplica a dos meses por año. La línea base ya sube la edad efectiva de 63,4 (2022) a 66,2 (2050)." />
-          <Slider id="lv-contrib" label="Cotización extra para pensiones" value={levers.contrib} min={-1} max={2} step={0.25} unit="pp"
+          <Slider id="lv-contrib" label="Cotizaciones sociales (para pensiones)" value={levers.contrib} min={-1} max={2} step={0.25} unit="pp"
             onChange={set("contrib")} hint={`Como el MEI, que la ley ya sube hasta ${String(model.mei_2029 ?? 1.2).replace(".", ",")} pp en 2029 (incluido en la línea base).`} />
+        </div>
+        <div className="sim__group">
+          <h3>Impuestos</h3>
+          <Slider id="lv-irpf" label="IRPF: todos los tramos" value={levers.irpfAll} min={-3} max={3} step={0.5} unit="pp" onChange={set("irpfAll")}
+            hint="Escala general, estatal y autonómica." />
+          <Slider id="lv-irpftop" label="IRPF: tramo de más de 60.000 €" value={levers.irpfTop} min={-5} max={5} step={1} unit="pp" onChange={set("irpfTop")} />
+          <Slider id="lv-vat" label="IVA general (21 %)" value={levers.vatStd} min={-3} max={3} step={0.5} unit="pp" onChange={set("vatStd")} />
+          <Slider id="lv-vatred" label="IVA reducido (10 %)" value={levers.vatRed} min={-3} max={3} step={0.5} unit="pp" onChange={set("vatRed")}
+            hint="Alimentos elaborados, restaurantes, transporte, agua." />
+          <Slider id="lv-corp" label="Impuesto sobre Sociedades (25 %)" value={levers.corp} min={-5} max={5} step={1} unit="pp" onChange={set("corp")} />
         </div>
         <div className="sim__group">
           <Segmented name="closure" label="¿Cómo se paga el coste neto de cada año?" value={levers.closure} onChange={set("closure")} options={CLOSURES} />
@@ -323,7 +355,7 @@ export default function Simulator({ model }) {
           </div>
           <div>
             <h3 className="vizPanelTitle">
-              {closureRate === "closure_contrib_pp" ? "Subida de cotización necesaria, pp de la base" : closureRate ? "Subida del IVA general necesaria, pp" : "Deuda extra, pp del PIB"}
+              {{ closure_contrib_pp: "Subida de cotización necesaria, pp de la base", closure_vat_pp: "Subida del IVA general necesaria, pp", closure_irpf_pp: "Subida de todos los tramos del IRPF necesaria, pp" }[closureRate] || "Deuda extra, pp del PIB"}
             </h3>
             <FanChart years={model.years} unit="pp" ariaLabel="Coste del escenario según cómo se paga"
               series={[{ id: "c", label: "Escenario", color: C.scen, emphasis: true, values: run[closureRate || "debt_dev_pp"], ...band(closureRate || "debt_dev_pp") }]} />
@@ -347,15 +379,18 @@ export default function Simulator({ model }) {
       </figure>
 
       <figure className="vizFigure sim__figure" id="personas">
-        <h2>Qué les pasa a dos casos tipo, en {horizon}</h2>
+        <h2>Qué les pasa a cuatro casos tipo, en {horizon}</h2>
         <p className="vizFigure__dek">
-          Euros al mes a precios de {model.personas.p1.year}, frente a la ley actual. Son los casos 1 y 4 de las demás páginas, con su misma renta: el cálculo
-          es ilustrativo y no incluye lo que cambie en vivienda o servicios.
+          Euros al mes a precios de {model.personas.p1.year}, frente a la ley actual. Son los casos 1, 2, 4 y 5 de las demás páginas, con su misma renta:
+          el cálculo es ilustrativo (IRPF con las reglas generales, sin deducciones autonómicas ni por hijos) y no incluye lo que cambie en vivienda o
+          servicios.
         </p>
         <div className="sim__people">
           {[
-            { id: "p4", color: C.p4, title: "Caso 4 · pensionista de 65 años o más, vive solo, casa pagada", base: `Pensión de ${fmt(model.personas.p4.gross, "eur")} brutos al año (${fmt(model.personas.p4.net / 12, "eur")} netos al mes)` },
             { id: "p1", color: C.p1, title: "Caso 1 · 25–34 años, asalariada, vive sola de alquiler en Madrid", base: `Sueldo de ${fmt(model.personas.p1.gross, "eur")} brutos al año (${fmt(model.personas.p1.net / 12, "eur")} netos al mes)` },
+            { id: "p2", color: C.p2, title: "Caso 2 · pareja de 30–44 con dos hijos y dos sueldos", base: `Sueldos de ${fmt(model.personas.p2.gross, "eur")} brutos al año entre los dos (${fmt(model.personas.p2.net / 12, "eur")} netos al mes)` },
+            { id: "p4", color: C.p4, title: "Caso 4 · pensionista de 65 años o más, vive solo, casa pagada", base: `Pensión de ${fmt(model.personas.p4.gross, "eur")} brutos al año (${fmt(model.personas.p4.net / 12, "eur")} netos al mes)` },
+            { id: "p5", color: C.p5, title: "Caso 5 · profesional de 45–54, universitario, en Madrid", base: `Sueldo de ${fmt(model.personas.p5.gross, "eur")} brutos al año (${fmt(model.personas.p5.net / 12, "eur")} netos al mes); no llega al tramo de 60.000 €` },
           ].map((p) => {
             const key = `${p.id}_month`;
             const v = run[key][t];
@@ -383,6 +418,46 @@ export default function Simulator({ model }) {
         ) : null}
       </figure>
 
+      <figure className="vizFigure sim__figure" id="quintiles">
+        <h2>Quién gana y quién pierde por nivel de renta, en {horizon}</h2>
+        <p className="vizFigure__dek">
+          Euros al mes por hogar a precios de {model.start.year}, según el quintil de renta disponible por unidad de consumo. Es la carga legal de
+          cada cambio (antes de que la gente reaccione), repartida con los microdatos de la Encuesta de Condiciones de Vida {model.incidence.ecv.year} y,
+          para el IVA, con el gasto de la Encuesta de Presupuestos Familiares {model.incidence.vat.year}. Lo que se paga con deuda no aparece: lo pagará
+          alguien después.
+        </p>
+        <QuintileFigure rows={quintiles} cuts={model.incidence.ecv.cuts_eq_income} />
+        <details className="vizTable">
+          <summary>Ver los datos en tabla</summary>
+          <div className="vizTable__scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Quintil</th>
+                  {Object.keys(quintiles[0].byPart).map((p) => (
+                    <th scope="col" key={p}>{p}</th>
+                  ))}
+                  <th scope="col">Total al mes</th>
+                  <th scope="col">% de la renta</th>
+                </tr>
+              </thead>
+              <tbody>
+                {quintiles.map((q) => (
+                  <tr key={q.q}>
+                    <td>{q.q}</td>
+                    {Object.values(q.byPart).map((v, i) => (
+                      <td key={i}>{signed(v, "eur", 0)}</td>
+                    ))}
+                    <td>{signed(q.total, "eur", 0)}</td>
+                    <td>{signed(q.pctDisposable, "pct", 2)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </details>
+      </figure>
+
       <figure className="vizFigure sim__figure" id="certeza">
         <h2>Qué parte es aritmética y qué parte es supuesto</h2>
         <p className="vizFigure__dek">
@@ -402,14 +477,15 @@ export default function Simulator({ model }) {
             </thead>
             <tbody>
               {outputs.map((o) => {
-                const same = ensemble.bands[o.key].sameSign[o.t];
-                const central = run[o.key][o.t];
-                const driver = Math.abs(central) > 1e-6 ? mainDriver(model, ensemble, o.key, o.t) : null;
+                const central = valueOf(o, run, layerParams);
+                const values = ensemble.runs.map((r, j) => valueOf(o, r, ensemble.sample[j]));
+                const same = Math.sign(central) ? values.filter((v) => Math.sign(v) === Math.sign(central)).length / values.length : 1;
+                const driver = Math.abs(central) > 1e-6 ? mainDriver(model, ensemble, values, o.t) : null;
                 return (
                   <tr key={o.key}>
                     <th scope="row">{o.label}</th>
                     {layered.map((l) => (
-                      <td key={l.layer}>{signed(l.run[o.key][o.t], o.unit, o.digits)}</td>
+                      <td key={l.layer}>{signed(valueOf(o, l.run, l.params), o.unit, o.digits)}</td>
                     ))}
                     <td>
                       {Math.abs(central) < 1e-6 ? "—" : same >= 0.95 ? "Signo robusto" : `Signo incierto (${Math.round(same * 100)} %)`}
@@ -431,11 +507,15 @@ export default function Simulator({ model }) {
 const VOTE_LABEL = { S: "Sí", N: "No", A: "Abst.", "?": "—" };
 
 function VotesBlock({ model, levers }) {
-  const active = [
-    levers.reval ? ["reval", "Revalorización de las pensiones"] : null,
-    levers.age ? ["age", "Edad de jubilación"] : null,
-    levers.contrib ? ["contrib", "Cotizaciones"] : null,
-  ].filter(Boolean);
+  const groups = [
+    [levers.reval, "reval", "Revalorización de las pensiones"],
+    [levers.age, "age", "Edad de jubilación"],
+    [levers.contrib, "contrib", "Cotizaciones"],
+    [levers.irpfAll || levers.irpfTop || levers.closure === "irpf", "irpf", "IRPF"],
+    [levers.vatStd || levers.vatRed || levers.closure === "iva", "iva", "IVA"],
+    [levers.corp, "corp", "Impuesto sobre Sociedades"],
+  ];
+  const active = groups.filter(([on, id]) => on && model.votes[id]?.votes.length).map(([, id, title]) => [id, title]);
   const shown = active.length ? active : [["reval", "Revalorización de las pensiones"]];
   return (
     <figure className="vizFigure sim__figure" id="votos">

@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
-import { DEFAULT_LEVERS, LAYERS, applyLayer, centralParams, decodeState, encodeState, runEnsemble, simulate } from "./engine.mjs";
+import { DEFAULT_LEVERS, LAYERS, applyLayer, centralParams, decodeState, encodeState, quintileImpact, runEnsemble, simulate } from "./engine.mjs";
 import { computeBacktests } from "./backtests.mjs";
 
 const here = fileURLToPath(new URL(".", import.meta.url));
@@ -28,17 +28,17 @@ test("debt identity: extra debt accumulates primary deficits and interest", () =
 });
 
 test("tax closures pay the cost before second-round effects; only those reach the deficit", () => {
-  for (const closure of ["cotizaciones", "iva"]) {
+  for (const closure of ["cotizaciones", "iva", "irpf"]) {
     const run = simulate(model, { ...DEFAULT_LEVERS, reval: 1, closure });
     run.primary_dev_pp.forEach((v, t) => assert.ok(Math.abs(v + run.cycle_revenue_pp[t]) < 1e-6, `${closure} ${model.years[t]}`));
   }
 });
 
 test("closures converge for every parameter draw", () => {
-  for (const closure of ["cotizaciones", "iva"]) {
+  for (const closure of ["cotizaciones", "iva", "irpf"]) {
     const e = runEnsemble(model, { ...DEFAULT_LEVERS, reval: 2, closure });
     for (const run of e.runs) {
-      const rate = closure === "iva" ? run.closure_vat_pp : run.closure_contrib_pp;
+      const rate = { iva: run.closure_vat_pp, irpf: run.closure_irpf_pp, cotizaciones: run.closure_contrib_pp }[closure];
       assert.ok(rate.every((v) => Number.isFinite(v) && Math.abs(v) < 40), closure);
     }
   }
@@ -83,4 +83,28 @@ test("backtests stay within their tolerances", () => {
   const results = computeBacktests(model);
   assert.ok(results.length >= 4);
   for (const r of results) assert.ok(r.ok, `${r.id}: ${r.text}`);
+});
+
+test("tax levers: zero is zero, raising a tax raises revenue (all but the contested top bracket) and costs the cases", () => {
+  const t = model.years.indexOf(model.policy_start);
+  for (const key of ["irpfAll", "vatStd", "vatRed", "corp"]) {
+    const run = simulate(model, { ...DEFAULT_LEVERS, [key]: 1 });
+    const rev = run.irpf_revenue_pp[t] + run.vat_revenue_pp[t] + run.vat_red_revenue_pp[t] + run.corp_revenue_pp[t];
+    assert.ok(rev > 0, key);
+    assert.ok(run.p1_month[t] < 0, key);
+  }
+  const top = simulate(model, { ...DEFAULT_LEVERS, irpfTop: 5 });
+  for (const id of ["p1", "p2", "p4", "p5"]) assert.equal(top[`${id}_month`][t], 0, id);
+});
+
+test("quintile split distributes exactly the statutory burden", () => {
+  const t = model.years.indexOf(2030);
+  const run = simulate(model, { ...DEFAULT_LEVERS, irpfAll: 1, vatStd: 1, corp: 2, reval: 1 });
+  const p = centralParams(model);
+  const q = quintileImpact(model, run, t, p);
+  const gdpEur = model.start.gdp_meur * 1e6 * model.baseline.real_index[t];
+  const irpf = q.reduce((a, r, i) => a + r.byPart.irpf * model.incidence.ecv.quintiles[i].households * 12, 0);
+  const expected = -((run.s_irpf_all_pp[t] + run.s_irpf_top_pp[t]) / 100) * gdpEur;
+  assert.ok(Math.abs(irpf / expected - 1) < 1e-9);
+  assert.ok(q[0].byPart.pensiones > 0 && q[4].byPart.irpf < q[0].byPart.irpf);
 });

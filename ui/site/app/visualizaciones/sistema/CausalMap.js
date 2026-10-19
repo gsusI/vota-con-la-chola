@@ -5,7 +5,7 @@ import { fmt } from "./FanChart";
 // Causal map of slice 0. Each arrow is a card of the catalog (or an accounting identity); its line says how solid
 // the evidence is (A continuous, B dashed, C/D dotted). Nodes are coloured by their deviation in the chosen year.
 const W = 1000;
-const H = 470;
+const H = 540;
 const NW = 172;
 const NH = 48;
 
@@ -16,6 +16,7 @@ export const NODES = [
   { id: "closure", label: "Cómo se paga", x: 90, y: 276, kind: "lever" },
   { id: "migration", label: "Inmigración", x: 90, y: 352, kind: "context" },
   { id: "rate", label: "Tipos de mercado", x: 90, y: 428, kind: "context" },
+  { id: "tax", label: "IRPF y Sociedades", x: 90, y: 504, kind: "lever" },
   { id: "pension_media", label: "Pensión media", x: 300, y: 48 },
   { id: "pensionistas", label: "Pensionistas", x: 300, y: 124 },
   { id: "coste_laboral", label: "Coste laboral", x: 300, y: 210 },
@@ -51,6 +52,9 @@ export const LINKS = [
   { from: "closure", to: "coste_laboral", sign: "+", when: "cotizaciones" },
   { from: "closure", to: "iva", sign: "+", when: "iva" },
   { from: "closure", to: "deuda", sign: "+", when: "deuda" },
+  { from: "closure", to: "tax", sign: "+", when: "irpf" },
+  { from: "tax", to: "recaudacion", edge: "T01_irpf_yield_all", sign: "+" },
+  { from: "tax", to: "salario", edge: "T06_corp_incidence", sign: "−" },
   { from: "coste_laboral", to: "empleo", edge: "E09_labour_demand", sign: "−", loop: "B1" },
   { from: "coste_laboral", to: "salario", edge: "E08_ssc_incidence", sign: "−" },
   { from: "iva", to: "recaudacion", edge: "E12_vat_yield", sign: "+" },
@@ -81,7 +85,8 @@ export function nodeValues(run, t, levers) {
     pension_media: [run.pension_dev[t] * 100, "pct", 1],
     pensionistas: [run.pensioners_dev[t] * 100, "pct", 1],
     coste_laboral: [run.labour_cost_dev[t] * 100, "pct", 2],
-    iva: [run.closure_vat_pp[t], "pp", 1, "de tipo"],
+    iva: [run.closure_vat_pp[t] + levers.vatStd + levers.vatRed, "pp", 1, levers.vatRed ? `(${levers.vatRed > 0 ? "+" : "−"}${Math.abs(levers.vatRed)} en el reducido)` : "de tipo general"],
+    tax: taxNode(run.closure_irpf_pp[t] + levers.irpfAll, levers.irpfTop, levers.corp),
     ipc: [run.price_level_dev[t] * 100, "pct", 2],
     gasto: [run.pension_gross_pp[t] + run.migration_pp[t], "pp", 2, "del PIB"],
     empleo: [run.employment_k[t], "k", 0],
@@ -96,9 +101,17 @@ export function nodeValues(run, t, levers) {
   };
 }
 
-const CLOSURE_LABEL = { deuda: "con deuda", cotizaciones: "con cotizaciones", iva: "con IVA" };
+// Several tax rates in one node: activity is any change, the text lists them.
+function taxNode(all, top, corp) {
+  const sg = (v) => `${v > 0 ? "+" : "−"}${Math.abs(v).toLocaleString("es-ES", { maximumFractionDigits: 1 })}`;
+  const text = [all ? `IRPF ${sg(all)}` : "", top ? `tramo alto ${sg(top)}` : "", corp ? `Soc. ${sg(corp)}` : ""].filter(Boolean).join(" · ");
+  return [Math.abs(all) + Math.abs(top) + Math.abs(corp), "pp", 1, "", text ? `${text} pp` : null];
+}
 
-function valueText([v, unit, digits, suffix]) {
+const CLOSURE_LABEL = { deuda: "con deuda", cotizaciones: "con cotizaciones", iva: "con IVA", irpf: "con IRPF" };
+
+function valueText([v, unit, digits, suffix, text]) {
+  if (text) return text;
   if (v == null) return CLOSURE_LABEL[unit] || unit;
   if (unit === "años") return `${v > 0 ? "+" : ""}${Number(v).toLocaleString("es-ES")} años`;
   const sign = v > 0 ? "+" : v < 0 ? "−" : "";
