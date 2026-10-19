@@ -436,7 +436,8 @@
     border: 0;
   }
 
-  .viz .hvCases tbody th {
+  .viz .hvCases tbody th,
+  .viz .hvCases .hvCases__survey {
     grid-column: 1 / -1;
     min-width: 0;
   }
@@ -513,5 +514,121 @@
 
   .viz .hvSplit__label {
     grid-row: auto;
+  }
+}
+
+/* Inside each tenure (#quien-paga, ECV microdata): one block per tenure, one row per age, one track per territory. */
+.viz .hvMicro {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px 16px;
+}
+
+.viz .hvMicro__block {
+  min-width: 0;
+}
+
+.viz .hvMicro__head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 6px;
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--viz-ink);
+}
+
+.viz .hvMicro__head i {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  flex: none;
+}
+
+.viz .hvMicro__age {
+  padding: 5px 0;
+  border-top: 1px solid var(--viz-grid);
+}
+
+.viz .hvMicro__age--total {
+  border-top: 1px solid var(--viz-axis);
+}
+
+.viz .hvMicro__ageLabel {
+  display: block;
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--viz-ink-2);
+}
+
+.viz .hvMicro__row {
+  display: grid;
+  grid-template-columns: 4.9em minmax(0, 1fr) 6.2em;
+  gap: 5px;
+  align-items: center;
+  height: 17px;
+  font-size: 0.72rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.viz .hvMicro__terr {
+  color: var(--viz-muted);
+  white-space: nowrap;
+}
+
+.viz .hvMicro__track {
+  position: relative;
+  height: 100%;
+}
+
+.viz .hvMicro__limit {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-left: 1px dashed var(--viz-ref);
+}
+
+.viz .hvMicro__ci {
+  position: absolute;
+  top: 7px;
+  height: 3px;
+  border-radius: 2px;
+  opacity: 0.45;
+}
+
+.viz .hvMicro__dot {
+  position: absolute;
+  top: 3px;
+  width: 11px;
+  height: 11px;
+  margin-left: -5.5px;
+  border-radius: 50%;
+  border: 2px solid;
+}
+
+.viz .hvMicro__empty {
+  position: absolute;
+  left: 0;
+  top: 1px;
+  color: var(--viz-muted);
+  font-style: italic;
+}
+
+.viz .hvMicro__value {
+  text-align: right;
+  white-space: nowrap;
+  color: var(--viz-ink-2);
+}
+
+@media (max-width: 900px) {
+  .viz .hvMicro {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .viz .hvMicro {
+    grid-template-columns: minmax(0, 1fr);
   }
 }

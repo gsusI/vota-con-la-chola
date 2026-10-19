@@ -43,6 +43,8 @@ SOURCE_PAGES = {
     "oecd_dbnomics": ("OCDE · salarios medios y precios de la vivienda (réplica DBnomics)", "https://db.nomics.world/OECD"),
     "eurostat_sdmx": ("Eurostat · yth_demo_030, ilc_lvho02, gov_10a_exp, nama_10_gdp", "https://ec.europa.eu/eurostat/databrowser/"),
     "vclc_housing_curated": ("Normas y publicaciones oficiales citadas fila a fila", "https://www.boe.es/"),
+    "ine_ecv_microdatos": ("INE · Encuesta de Condiciones de Vida, microdatos transversales (estimación propia por celda)",
+                           "https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736176807&menu=resultados&secc=1254736195153&idp=1254735976608"),
 }
 
 
@@ -624,6 +626,7 @@ def build(conn: sqlite3.Connection) -> dict:
                  "income_es": pts(es_income, 0)}
 
     segments_block = segments(s, conn, young_pay, worker_rate, rate, tax_rows)
+    segments_block["micro"] = micro_cells(s, conn)
 
     # 11. Money in versus money out: taxes on immovable property and on its transfer vs public housing spending.
     rev = {code: s.raw(f"TAX_REV.S13.{code}") for code in ("T_4100", "T_4400", "T_4000")}
@@ -974,6 +977,102 @@ def segments(s: "Store", conn: sqlite3.Connection, young_pay: dict[int, float], 
     }
 
 
+MICRO_STATS = ("households_pct", "burden_mean", "burden_median", "overburden_pct", "income_cu_median", "income_cu_mean",
+               "left_cu_median", "left_cu_mean")
+MICRO_TREND_GEOS = ("ES", "ES30", "ES51", "ES_RESTO")
+MICRO_TREND_STATS = ("households_pct", "burden_median", "overburden_pct", "left_cu_median")
+MICRO_DIGITS = {"income_cu_median": 0, "income_cu_mean": 0, "left_cu_median": 0, "left_cu_mean": 0}
+
+
+def micro_cells(s: "Store", conn: sqlite3.Connection) -> dict | None:
+    """Survey cells from the ECV microdata (scripts/housing_ecv_microdata.py, loaded by the ingest): age of the reference
+    person x tenure x territory with sample size and 95 % interval; empty cells (n below the threshold) keep their n only.
+    Only the newest estimator (the method fingerprint after '@' in the dataset code) is read.
+    Latest year in full, earlier years for Spain, Madrid, Cataluña and the rest of Spain."""
+    rows = conn.execute(
+        """
+        SELECT d.indicator_code, sv.dimensions_json, o.period_label, o.value_decimal, r.source_metadata_json, r.source_url,
+               r.source_content_sha256, r.source_snapshot_date, d.unit_code, d.dataset_code
+        FROM indicator_definitions d
+        JOIN indicator_releases r ON r.indicator_id = d.indicator_id
+        JOIN indicator_series_versions sv ON sv.indicator_release_id = r.indicator_release_id
+        JOIN indicator_observation_versions o ON o.indicator_series_version_id = sv.indicator_series_version_id
+        WHERE d.source_id = 'ine_ecv_microdatos' AND o.revision_state != 'deleted' AND o.value_decimal IS NOT NULL
+          AND r.indicator_release_id = (SELECT r2.indicator_release_id FROM indicator_releases r2 WHERE r2.indicator_id = d.indicator_id
+                                        ORDER BY r2.source_snapshot_date DESC, r2.created_at DESC LIMIT 1)
+          AND substr(d.dataset_code, instr(d.dataset_code, '@') + 1) = (
+            SELECT substr(d3.dataset_code, instr(d3.dataset_code, '@') + 1) FROM indicator_definitions d3
+            JOIN indicator_releases r3 ON r3.indicator_id = d3.indicator_id
+            WHERE d3.source_id = 'ine_ecv_microdatos' ORDER BY r3.created_at DESC, d3.dataset_code LIMIT 1)
+        """).fetchall()
+    if not rows:
+        return None
+    cells: dict[int, dict[tuple, dict]] = defaultdict(dict)
+    cases: dict[int, dict[tuple, dict]] = defaultdict(dict)
+    meta_by_year: dict[int, dict] = {}
+    for code, dims_json, period, value, meta, url, sha, snapshot, unit, _dataset in rows:
+        head, _, stat = code.partition(".")
+        year = int(head.rsplit("_", 1)[1])
+        d = json.loads(dims_json)
+        if year not in meta_by_year:
+            meta_by_year[year] = json.loads(meta)
+            s.provenance["ine_ecv_microdatos"].append({"indicator": f"ecv_micro_{year} (celdas)", "url": url, "sha256": sha, "snapshot_date": snapshot,
+                                                       "retrieved_at": meta_by_year[year].get("retrieved_at")})
+        stat = stat.removeprefix("case.")
+        key = (d["caso"], int(d["orden"])) if "caso" in d else (d["geo"], d["edad"], d["tenencia"])
+        target = (cases if "caso" in d else cells)[year].setdefault(key, {"s": {}, **({"label": d["definicion"]} if "caso" in d else {})})
+        if stat == "n_households":
+            target["n"] = int(value)
+            continue
+        measure = d["medida"]
+        slot = target["s"].setdefault(stat, [None, None, None])
+        idx = {"value": 0, "lo": 1, "hi": 2}.get(measure)
+        if idx is not None:
+            slot[idx] = r(value, MICRO_DIGITS.get(stat, 1))
+    years = sorted(cells)
+    last = years[-1]
+    meta = meta_by_year[last]
+    min_n, low_n = meta["min_n"], meta["low_n"]
+
+    def row(key: tuple, cell: dict, keep: tuple[str, ...] = MICRO_STATS) -> dict:
+        out = {"geo": key[0], "age": key[1], "tenure": key[2], "n": cell.get("n")}
+        if cell["s"]:
+            out["s"] = {k: cell["s"][k] for k in keep if k in cell["s"]}
+        return out
+
+    cal = meta["calibration"]
+
+    def overlap(keys: list[tuple], stat: str) -> bool | None:
+        """Whether the 95 % intervals of these cells overlap (the page says «caben en el margen de error» only then)."""
+        got = [cells[last].get(k, {}).get("s", {}).get(stat) for k in keys]
+        if not all(g and g[1] is not None for g in got):
+            return None
+        return max(g[1] for g in got) <= min(g[2] for g in got)
+
+    terr = [(g, "TOTAL", "RENT_MKT") for g in ("ES30", "ES51", "ES_RESTO")]
+    reading = {
+        "rent_territory_overlap": overlap(terr, "overburden_pct"),
+        "rent_territory_median_overlap": overlap(terr, "burden_median"),
+        "rent_young_vs_30_44_overlap": overlap([("ES", "16-29", "RENT_MKT"), ("ES", "30-44", "RENT_MKT")], "overburden_pct"),
+    }
+    return {
+        "year": last, "years": years, "reading": reading,
+        "geo_names": {"ES": "España", "ES_RESTO": "Resto de España", **REGIONS}, "income_year": last - 1, "min_n": min_n, "low_n": low_n,
+        "design_effect": meta["design_effect"],
+        "calibration": {"year": cal["year"], "document_url": cal["document_url"], "deff_median": cal["deff_median"],
+                        "deff_min": cal["deff_min"], "indicators": len(cal["rows"])},
+        "sample_households": {str(y): meta_by_year[y]["sample_households"] for y in years},
+        "validation": {str(y): meta_by_year[y]["validation"] for y in years},
+        "cells": [row(k, c) for k, c in sorted(cells[last].items())],
+        "trend": [{"year": y, **row(k, c, MICRO_TREND_STATS)} for y in years[:-1] for k, c in sorted(cells[y].items()) if k[0] in MICRO_TREND_GEOS],
+        # Earlier years with every statistic and territory go only to the CSV (main() pops this before writing the JSON).
+        "_csv": [{"year": y, **row(k, c)} for y in years[:-1] for k, c in sorted(cells[y].items())],
+        "cases": {case: [{"rank": rank, "label": c["label"], "n": c.get("n"), **({"s": c["s"]} if c["s"] else {})}
+                         for (cs, rank), c in sorted(cases[last].items()) if cs == case]
+                  for case in sorted({k[0] for k in cases[last]})},
+    }
+
+
 def purchase_taxes(rows: list[dict], home: dict[int, float], conn: sqlite3.Connection) -> dict | None:
     """Buyer's taxes on a 90 m² home at the national average appraisal price of each year."""
     if not rows:
@@ -1012,7 +1111,8 @@ def purchase_taxes(rows: list[dict], home: dict[int, float], conn: sqlite3.Conne
     return {"rates": rows, "scenarios": scenarios, "rules": rules}
 
 
-def write_csv(data: dict, path: Path) -> None:
+def write_csv(data: dict, path: Path, micro_csv: list[dict] | None = None) -> None:
+    micro_csv = micro_csv or []
     rows: list[tuple] = []
     aff = data["affordability"]
     for key, src in (("price_eur_m2", "mivau_boletin"), ("home_price_eur", "mivau_boletin"), ("wage_ine_retro_eur", "ine_tempus"),
@@ -1115,6 +1215,14 @@ def write_csv(data: dict, path: Path) -> None:
         for key, value in c.items():
             if key != "key" and isinstance(value, (int, float)):
                 rows.append(("derivado", f"caso_{c['key']}_{key}", "ES", c.get("survey_year") or c.get("rent_year") or c.get("year") or seg["year"], value))
+    micro = seg.get("micro")
+    if micro:
+        for c in [{"year": micro["year"], **c} for c in micro["cells"]] + micro_csv:
+            base = f"ecv_microdatos_edad_{c['age']}_tenencia_{c['tenure']}"
+            rows.append(("ine_ecv_microdatos", f"{base}_n_hogares_muestra", c["geo"], c["year"], c["n"]))
+            for stat, (v, lo, hi) in (c.get("s") or {}).items():
+                rows.extend(("ine_ecv_microdatos", f"{base}_{stat}{suffix}", c["geo"], c["year"], x)
+                            for suffix, x in (("", v), ("_ic95_inf", lo), ("_ic95_sup", hi)))
     for row in data["story"]:
         rows.append(("derivado", "relato_viviendas_por_hogar_nuevo", "ES", row["year"], row["x"]))
         rows.append(("bde_indicadores_vivienda", "relato_anios_renta_hogar", "ES", row["year"], row["y"]))
@@ -1142,9 +1250,10 @@ def main() -> int:
     conn = sqlite3.connect(f"file:{args.db}?mode=ro", uri=True)
     data = build(conn)
     conn.close()
+    micro_csv = data["segments"]["micro"].pop("_csv") if data["segments"].get("micro") else None
     OUT_JSON.parent.mkdir(parents=True, exist_ok=True)
     OUT_JSON.write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
-    write_csv(data, OUT_CSV)
+    write_csv(data, OUT_CSV, micro_csv)
     h = data["headline"]
     print(
         f"vivienda: {h['home_m2']} m² = {h['years_last']} años de salario en {h['last_year']} (pico {h['years_peak']} en "

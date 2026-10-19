@@ -22,6 +22,7 @@ The published site JSON is derived from this DB by scripts/export_public_viz_hou
 from __future__ import annotations
 
 import argparse
+from collections import defaultdict
 import csv
 import hashlib
 import io
@@ -83,6 +84,12 @@ LOCAL_SOURCES: dict[str, dict[str, str]] = {
         "scope": "outcomes",
         "default_url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/",
         "format": "json",
+    },
+    "ine_ecv_microdatos": {
+        "name": "INE - Encuesta de Condiciones de Vida, ficheros de microdatos transversales (base 2013)",
+        "scope": "vivienda",
+        "default_url": "https://www.ine.es/ftp/microdatos/ecv/ecv_b2013/",
+        "format": "zip",
     },
     "vclc_housing_curated": {
         "name": "Vivienda: valores curados con su norma o documento oficial citado",
@@ -188,7 +195,10 @@ class Raw:
 
 def check_payload(name: str, payload: bytes) -> None:
     """Never cache an HTML error page over a good payload."""
-    if name.endswith(".xlsx"):
+    if name.endswith(".pdf"):
+        if not payload.startswith(b"%PDF"):
+            raise ValueError(f"{name}: expected a PDF, got {payload[:40]!r}")
+    elif name.endswith((".xlsx", ".zip")):
         if not payload.startswith(b"PK"):
             raise ValueError(f"{name}: expected an .xlsx (zip) file, got {payload[:40]!r}")
     elif name.endswith(".xls"):
@@ -1307,6 +1317,174 @@ API_SOURCES: list[tuple[str, str, Callable[[Raw], Iterable[Batch]]]] = [
 ]
 
 
+# ---------------------------------------------------------------- INE ECV microdata: age x tenure x territory
+
+from scripts import housing_ecv_microdata as ecvm  # noqa: E402
+
+ECV_MICRO_STATS = {
+    "households_pct": ("PC", "% de los hogares de su edad y territorio", "Hogares de cada edad que viven en cada régimen de tenencia"),
+    "burden_mean": ("PC", "% de la renta disponible", "Peso medio de los gastos de vivienda en la renta disponible del hogar"),
+    "burden_median": ("PC", "% de la renta disponible", "Peso mediano de los gastos de vivienda en la renta disponible del hogar"),
+    "overburden_pct": ("PC", "% de los hogares", "Hogares con gastos de vivienda por encima del 40 % de su renta disponible"),
+    "income_cu_median": ("EUR_YEAR", "Euros al año por unidad de consumo", "Renta disponible mediana por unidad de consumo"),
+    "income_cu_mean": ("EUR_YEAR", "Euros al año por unidad de consumo", "Renta disponible media por unidad de consumo"),
+    "left_cu_median": ("EUR_YEAR", "Euros al año por unidad de consumo", "Renta mediana que queda tras pagar la vivienda, por unidad de consumo"),
+    "left_cu_mean": ("EUR_YEAR", "Euros al año por unidad de consumo", "Renta media que queda tras pagar la vivienda, por unidad de consumo"),
+}
+ECV_MICRO_DEFINITION = (
+    "Estimación propia con los microdatos transversales de la ECV del INE y sus factores de elevación (DB090), por edad "
+    "de la persona de referencia (HB080, edad a 31 de diciembre del año anterior, RB081), régimen de tenencia (HH021; "
+    "alquiler reducido y cesión juntos, como Eurostat) y comunidad (DB040). Gasto de vivienda y sobrecarga como "
+    "Eurostat: (12 x HH070 - HY070G) / (HY020 - HY070G), tope del 100 %, sobrecarga por encima del 40 %. Renta del año "
+    "anterior a la encuesta. Medidas: valor, error estándar (linealización con el hogar como unidad, por la raíz de un "
+    "efecto de diseño calibrado con los intervalos del INE) e intervalo del 95 %. Celdas con menos de "
+    f"{ecvm.MIN_N} hogares en la muestra: vacías."
+)
+ECV_AGE_LABELS = {"De 16 a 29 años": "16-29", "De 30 a 44 años": "30-44", "De 45 a 64 años": "45-64", "65 y más años": "65+", "Total": "TOTAL"}
+ECV_TENURE_LABELS = {"Propiedad sin hipoteca": "OWN_NL", "Propiedad con hipoteca": "OWN_L", "Alquiler a precio de mercado": "RENT_MKT",
+                     "Alquiler inferior al precio de mercado": "RENT_FR", "Cesión": "RENT_FR", "Total": "TOTAL"}
+ECV_GEO_NAMES = {
+    "ES": "España", "ES_RESTO": "España sin Madrid ni Cataluña", "ES11": "Galicia", "ES12": "Principado de Asturias",
+    "ES13": "Cantabria", "ES21": "País Vasco", "ES22": "Comunidad Foral de Navarra", "ES23": "La Rioja", "ES24": "Aragón",
+    "ES30": "Comunidad de Madrid", "ES41": "Castilla y León", "ES42": "Castilla-La Mancha", "ES43": "Extremadura",
+    "ES51": "Cataluña", "ES52": "Comunitat Valenciana", "ES53": "Illes Balears", "ES61": "Andalucía", "ES62": "Región de Murcia",
+    "ES63": "Ceuta", "ES64": "Melilla", "ES70": "Canarias",
+}
+# Rounding tolerance of each published table (values to 0.1 or to the euro; RENT_FR in t=9994 is the sum of two rounded rows).
+ECV_TOLERANCE = {"t9994": 0.05 + 1e-6, "t9994_rent_fr": 0.1 + 1e-6, "t59956": 0.5 + 1e-6, "ilc_lvho07c": 0.05 + 1e-6,
+                 "ilc_lvho08a": 0.05 + 1e-6}
+
+
+def ecv_published(year: int) -> dict[str, dict[str, float]]:
+    """The national figures INE and Eurostat publish for a survey year, read from this run's raw cache."""
+    y = str(year)
+    out: dict[str, dict[str, float]] = {"t9994": {}, "t9994_rent_fr": {}, "t59956": {}, "ilc_lvho07c": {}, "ilc_lvho08a": {}, "ilc_mded01": {}}
+    rent_fr: dict[str, float] = defaultdict(float)
+    for doc in json.loads((RAW_DIR / "ine_tabla_9994.json").read_bytes()):
+        parts = [p.strip() for p in doc["Nombre"].split(". ")]
+        if len(parts) < 4 or parts[0] != "Ambos sexos" or parts[2] != "Total Nacional" or parts[3] not in ECV_TENURE_LABELS:
+            continue
+        age, ten = ECV_AGE_LABELS.get(parts[1]), ECV_TENURE_LABELS[parts[3]]
+        value = next((row["Valor"] for row in doc["Data"] if str(row.get("Anyo")) == y and row.get("Valor") is not None), None)
+        if age is None or value is None or ten == "TOTAL":
+            continue
+        if ten == "RENT_FR":
+            rent_fr[age] += float(value)
+        else:
+            out["t9994"][f"{age}.{ten}"] = float(value)
+    out["t9994_rent_fr"] = {f"{age}.RENT_FR": v for age, v in rent_fr.items()}
+    for doc in json.loads((RAW_DIR / "ine_tabla_59956.json").read_bytes()):
+        parts = [p.strip() for p in doc["Nombre"].split(". ")]
+        if len(parts) >= 3 and parts[0] == "Total Nacional" and parts[2] == "Renta neta media por hogar" and parts[1] in ECV_TENURE_LABELS \
+                and parts[1] not in ("Alquiler inferior al precio de mercado", "Cesión"):
+            value = next((row["Valor"] for row in doc["Data"] if str(row.get("Anyo")) == y and row.get("Valor") is not None), None)
+            if value is not None:
+                out["t59956"][ECV_TENURE_LABELS[parts[1]]] = float(value)
+    for table, key_dim in (("ilc_lvho07c", "tenure"), ("ilc_lvho08a", None), ("ilc_mded01", None)):
+        data = json.loads((RAW_DIR / f"eurostat_{table}.json").read_bytes())
+        for coords, _flat, value in jsonstat_cells(data):
+            if coords["geo"] == "ES" and coords["time"] == y and value is not None:
+                out[table][coords[key_dim] if key_dim else "TOTAL"] = float(value)
+    return out
+
+
+def ecv_validate(year: int, checks: dict[str, Any]) -> dict[str, Any]:
+    """Microdata totals against the published tables; any gap beyond rounding stops the run (ilc_mded01 is reported, see
+    ecvm.national_checks)."""
+    published = ecv_published(year)
+    mine = {
+        "t9994": {f"{a}.{t}": v for a, row in checks["t9994"].items() for t, v in row.items() if t != "RENT_FR"},
+        "t9994_rent_fr": {f"{a}.RENT_FR": row["RENT_FR"] for a, row in checks["t9994"].items()},
+        "t59956": checks["t59956"], "ilc_lvho07c": checks["ilc_lvho07c"], "ilc_lvho08a": {"TOTAL": checks["ilc_lvho08a"]},
+    }
+    problems, compared = [], 0
+    for table, tol in ECV_TOLERANCE.items():
+        for key, value in published[table].items():
+            got = mine[table].get(key)
+            compared += 1
+            if got is None or abs(got - value) > tol:
+                problems.append(f"ECV {year} {table} {key}: microdata {got} vs published {value}")
+    if problems:
+        raise SystemExit("ECV microdata do not reproduce the published tables:\n" + "\n".join(problems))
+    mded = published["ilc_mded01"].get("TOTAL")
+    return {"compared": compared, "ilc_mded01": {"published": mded, "microdata": checks["ilc_mded01"],
+                                                 "excluding_non_positive_income": checks["ilc_mded01_excl"],
+                                                 "non_positive_income_pct": checks["non_positive_income_pct"]}}
+
+
+def _ecv_series(year: int, stat: str, rows: Iterable[tuple[str, dict[str, Any], dict[str, float] | None]], locator: str) -> list[dict[str, Any]]:
+    series = []
+    for key, dims, est in rows:
+        if est is None:
+            continue
+        obs = []
+        for measure in ("value", "se", "lo", "hi"):
+            obs.append({"period": str(year), "value": est[measure], "pointer": f"{locator}#estimate={stat};{key};measure={measure}"})
+            series.append({"key": f"{key}|{measure}", "geo_code": dims.get("geo", "ES"), "geo_name": ECV_GEO_NAMES.get(dims.get("geo", "ES"), "España"),
+                           "geo_system": "NUTS" if dims.get("geo", "ES") != "ES_RESTO" else "custom", "geo_level": "region" if dims.get("geo", "ES") != "ES" else "country",
+                           "dimensions": {**dims, "medida": measure}, "observations": obs[-1:]})
+    return series
+
+
+def load_ecv_microdata(conn: sqlite3.Connection, offline: bool, snapshot_date: str) -> dict[str, Any]:
+    """Fetch the ECV microdata of ecvm.YEARS and INE's published intervals, calibrate the design effect on
+    ecvm.CALIBRATION_YEAR, validate every year against INE/Eurostat and load the cells (indicator_* contract)."""
+    doc = fetch_raw("ine_ecv_cambio_base_ic_2023.pdf", ecvm.CI_DOC_URL, offline)
+    raws = {year: fetch_raw(f"ine_ecv_microdatos_{year}.zip", ecvm.MICRO_URL.format(year=year), offline) for year in ecvm.YEARS}
+    data = {year: ecvm.read_year(raw.payload, year) for year, raw in raws.items()}
+    cal_h, cal_p = data[ecvm.CALIBRATION_YEAR]
+    calibration = ecvm.calibrate_deff(cal_p, len(cal_h))
+    deff = calibration["deff"]
+    method = sha256_bytes((Path(ecvm.__file__).read_bytes()) + doc.sha256.encode() + repr(deff).encode())
+    report: dict[str, Any] = {"design_effect": deff, "calibration_rows": len(calibration["rows"]), "years": {}}
+    for year, raw in raws.items():
+        households, _persons = data[year]
+        validation = ecv_validate(year, ecvm.national_checks(households))
+        cells = ecvm.cells(households, deff)
+        cases = ecvm.case_cells(households, deff)
+        yy = str(year)[2:]
+        locator = f"datos_{year}.zip!ECV_Th_{year}.zip!esudb{yy}h.csv"
+        meta = {"retrieved_at": raw.retrieved_at, "download_url": raw.url, "method_sha256": method, "design_effect": deff,
+                "calibration": {"document_url": doc.url, "document_sha256": doc.sha256, "document_path": rel(doc.path),
+                                "year": ecvm.CALIBRATION_YEAR, **calibration},
+                "validation": validation, "min_n": ecvm.MIN_N, "low_n": ecvm.LOW_N, "sample_households": len(households)}
+        # The method fingerprint is part of the dataset: a new estimator on the same raw file is a new indicator (the
+        # schema keeps one release per raw file), the old estimates stay as history and the exporter reads the newest.
+        base = {"source_id": "ine_ecv_microdatos", "dataset_code": f"INE-ECV-MICRO-{year}@{method[:12]}", "frequency_code": "A", "frequency_label": "Anual",
+                "methodology_url": ecvm.METHOD_URL, "source_url": ecvm.MICRO_PAGE, "extraction_method": "microdata_weighted_estimate",
+                "definition": ECV_MICRO_DEFINITION}
+        batches = []
+        for stat, (unit, unit_label, label) in ECV_MICRO_STATS.items():
+            rows = [(f"geo={c['geo']};age={c['age']};tenure={c['tenure']}", {"geo": c["geo"], "edad": c["age"], "tenencia": c["tenure"]},
+                     (c.get("stats") or {}).get(stat)) for c in cells]
+            batches.append(({**base, "indicator_code": f"ecv_micro_{year}.{stat}", "unit_code": unit, "unit_label": unit_label,
+                             "label": f"{label} (ECV {year}, microdatos)"}, _ecv_series(year, stat, rows, locator)))
+            crow = [(f"case={k};rank={i}", {"caso": k, "definicion": row["label"], "orden": str(i)}, (row.get("stats") or {}).get(stat))
+                    for k, defs in cases.items() for i, row in enumerate(defs)]
+            if stat != "households_pct":
+                batches.append(({**base, "indicator_code": f"ecv_micro_{year}.case.{stat}", "unit_code": unit, "unit_label": unit_label,
+                                 "label": f"{label}: hogares tipo (ECV {year}, microdatos)"}, _ecv_series(year, stat, crow, locator)))
+        n_series = [{"key": f"geo={c['geo']};age={c['age']};tenure={c['tenure']}", "geo_code": c["geo"], "geo_name": ECV_GEO_NAMES.get(c["geo"], c["geo"]),
+                     "geo_system": "NUTS" if c["geo"] != "ES_RESTO" else "custom", "geo_level": "region" if c["geo"] != "ES" else "country",
+                     "dimensions": {"geo": c["geo"], "edad": c["age"], "tenencia": c["tenure"]},
+                     "observations": [{"period": str(year), "value": c["n"], "pointer": f"{locator}#count;geo={c['geo']};age={c['age']};tenure={c['tenure']}"}]}
+                    for c in cells]
+        n_series += [{"key": f"case={k};rank={i}", "geo_code": "ES", "geo_name": "España", "geo_system": "NUTS", "geo_level": "country",
+                      "dimensions": {"caso": k, "definicion": row["label"], "orden": str(i)},
+                      "observations": [{"period": str(year), "value": row["n"], "pointer": f"{locator}#count;case={k};rank={i}"}]}
+                     for k, defs in cases.items() for i, row in enumerate(defs)]
+        batches.append(({**base, "indicator_code": f"ecv_micro_{year}.n_households", "unit_code": "HOUSEHOLDS",
+                         "unit_label": "Hogares de la muestra", "label": f"Tamaño muestral de cada celda (ECV {year}, microdatos)"}, n_series))
+        counts = {"releases": 0, "observations": 0}
+        for definition, series in batches:
+            got = load_indicator(conn, definition, raw.sha256, len(raw.payload), rel(raw.path), raw.url, snapshot_date, meta,
+                                 sorted(series, key=lambda s: s["key"]))
+            counts = {k: counts[k] + got[k] for k in counts}
+        report["years"][year] = {**counts, "households": len(households), "published_cells": sum(1 for c in cells if c.get("stats")),
+                                 "cells": len(cells), "validation": validation}
+    return report
+
+
 # ---------------------------------------------------------------- curated values with citations
 
 def document_ref(row: dict[str, Any]) -> dict[str, str] | None:
@@ -1445,6 +1623,8 @@ def main() -> int:
     parser.add_argument("--db", type=Path, default=DEFAULT_DB)
     parser.add_argument("--offline", action="store_true", help="load from the raw cache without network")
     parser.add_argument("--snapshot-date", default=datetime.now(timezone.utc).date().isoformat())
+    parser.add_argument("--only", choices=["api", "ecv-microdata"], help="run one stage (the microdata stage reads the "
+                        "published INE/Eurostat tables from the raw cache to validate)")
     args = parser.parse_args()
 
     args.db.parent.mkdir(parents=True, exist_ok=True)
@@ -1455,7 +1635,7 @@ def main() -> int:
     conn.execute("PRAGMA foreign_keys = ON")
     report: dict[str, Any] = {"db": rel(args.db), "snapshot_date": args.snapshot_date, "indicators": {}}
     with conn:
-        for name, url, parse in API_SOURCES:
+        for name, url, parse in API_SOURCES if args.only != "ecv-microdata" else []:
             raw = fetch_raw(name, url, args.offline)
             for definition, series in parse(raw):
                 meta = {"retrieved_at": raw.retrieved_at, "source_updated_at": definition.pop("source_updated_at", None),
@@ -1463,7 +1643,10 @@ def main() -> int:
                 counts = load_indicator(conn, definition, raw.sha256, len(raw.payload), rel(raw.path), raw.url,
                                         args.snapshot_date, meta, series)
                 report["indicators"][f"{definition['source_id']}:{definition['indicator_code']}:{definition['unit_code']}"] = counts
-        report["curated"] = load_curated(conn, args.snapshot_date)
+        if args.only != "api":
+            report["ecv_microdata"] = load_ecv_microdata(conn, args.offline, args.snapshot_date)
+        if args.only is None:
+            report["curated"] = load_curated(conn, args.snapshot_date)
     fk = conn.execute("PRAGMA foreign_key_check").fetchall()
     if fk:
         raise SystemExit(f"foreign_key_check failed: {fk[:5]}")

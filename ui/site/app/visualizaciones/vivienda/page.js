@@ -756,7 +756,9 @@ export default function ViviendaPage() {
         <ul>
           <li>Causalidad: tipos de interés, empleo, inmigración, demanda extranjera y alquiler turístico se mueven a la vez; ninguno se aísla aquí.</li>
           <li>Dónde exactamente: casi todas las cifras son nacionales o autonómicas; solo el alquiler declarado baja a municipio (las grandes ciudades frente al resto de su provincia). El déficit se concentra en ciudades y barrios concretos; las viviendas vacías, a menudo donde no hay demanda.</li>
-          <li>Quién, cruzando todo: no hay tabla oficial de sobrecarga por edad, tenencia y comunidad a la vez, ni sueldo oficial por edad y comunidad. Los hogares tipo de «Quién paga la vivienda» combinan cortes sueltos y lo dicen; hacerlo bien pide los microdatos de la ECV, con sus márgenes de error.</li>
+          <li>
+            Quién, cruzando todo: no hay tabla oficial de sobrecarga por edad, tenencia y comunidad a la vez, ni sueldo oficial por edad y comunidad. «Quién paga la vivienda» calcula ese cruce con los microdatos de la ECV, con su margen de error, pero la muestra no baja de comunidad ni llega a todas las celdas (los jóvenes que alquilan en Madrid no llegan a {seg?.micro?.min_n ?? 50} hogares). Los hogares tipo siguen calculándose con cortes sueltos y ponen al lado la celda de la encuesta que más se les parece, diciendo cuál.
+          </li>
           <li>El precio de los alquileres nuevos: no hay una serie oficial larga; el IPVA y el IPCA miden todos los contratos vigentes.</li>
           <li>El suelo: cuánto suelo urbanizable hay y cuánto tarda en tramitarse depende del planeamiento municipal, que no tiene estadística nacional comparable.</li>
           <li>Censos de 1950 y 1960: no hay una fuente oficial digitalizada del régimen de tenencia; la serie empieza en 1970.</li>

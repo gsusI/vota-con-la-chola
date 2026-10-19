@@ -145,7 +145,7 @@ Orden propuesto: empleo, sanidad y educación primero (datos ya disponibles o en
 
 ## 7. Huecos de datos comunes (para decirlos en las páginas)
 
-- No hay cruce oficial edad × tenencia × comunidad (hacen falta microdatos de la ECV, con intervalos de confianza).
+- No hay cruce oficial edad × tenencia × comunidad. Vivienda lo calcula con los microdatos de la ECV, con intervalos y celdas vacías donde la muestra no llega: [vivienda-microdatos.md](vivienda-microdatos.md).
 - No hay precio oficial de los contratos de alquiler nuevos: el SERPAVI recoge los contratos vigentes declarados.
 - No hay paridades de poder adquisitivo regionales oficiales.
 - Las esperas sanitarias no se publican por edad, renta ni municipio.
