@@ -332,7 +332,7 @@ export const siteSections = [
       },
       {
         title: "El paro en España: ¿estructural o cíclico?",
-        note: "Paro desde 1960 frente a Europa, paro juvenil, temporalidad y fijos discontinuos, productividad por hora y cuña fiscal.",
+        note: "Paro desde 1960 frente a Europa, por qué cada crisis destruye tanto empleo, causas de la brecha, fijos discontinuos, regiones, productividad y salarios.",
         href: "/visualizaciones/empleo/",
         cta: "Abrir visualización",
       },
@@ -364,7 +364,7 @@ export const siteSections = [
       {
         title: "Empleo, paro y productividad",
         href: "/visualizaciones/empleo/",
-        note: "AMECO, Eurostat, EPA del INE y OCDE, con rupturas de serie marcadas y comparación con la UE.",
+        note: "AMECO, Eurostat, EPA del INE, OCDE, Seguridad Social y Ministerio de Trabajo, con rupturas de serie marcadas y comparación con la UE.",
       },
       {
         title: "Vivienda, construcción y hogares",

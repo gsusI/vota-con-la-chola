@@ -23,12 +23,17 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import io
 import json
+import re
 import sqlite3
+import ssl
 import sys
 import urllib.parse
 import urllib.request
-from datetime import datetime, timezone
+import xml.etree.ElementTree as ET
+import zipfile
+from datetime import datetime, timedelta, timezone
 from decimal import Decimal
 from pathlib import Path
 from typing import Any, Callable, Iterable
@@ -44,6 +49,7 @@ from publicdata_sqlite.provenance import seed_sources_from_config  # noqa: E402
 
 DEFAULT_DB = REPO_ROOT / "etl/data/staging/employment-es.db"
 RAW_DIR = REPO_ROOT / "etl/data/raw/employment/apis"
+FILES_DIR = REPO_ROOT / "etl/data/raw/employment/files"
 MANUAL_DIR = REPO_ROOT / "etl/data/manual/employment"
 USER_AGENT = "Mozilla/5.0 (compatible; vota-con-la-chola-etl/1.0; +https://votaconlachola.org)"
 EXTRACTOR_VERSION = "ingest_employment_es/1"
@@ -80,6 +86,30 @@ LOCAL_SOURCES: dict[str, dict[str, str]] = {
         "scope": DOMAIN,
         "default_url": "https://db.nomics.world/OECD/DSD_PDB@DF_PDB",
         "format": "json",
+    },
+    "oecd_earnings": {
+        "name": "OCDE - Earnings: salario mínimo frente al mediano (réplica DBnomics)",
+        "scope": DOMAIN,
+        "default_url": "https://db.nomics.world/OECD/DSD_EARNINGS@MIN2AVE",
+        "format": "json",
+    },
+    "oecd_registered_unemployment": {
+        "name": "OCDE - Infra-annual labour statistics: paro registrado (réplica DBnomics, origen SEPE)",
+        "scope": DOMAIN,
+        "default_url": "https://db.nomics.world/OECD/DSD_OLAB@DF_OIALAB_INDIC",
+        "format": "json",
+    },
+    "seg_social_pxweb": {
+        "name": "Seguridad Social - estadísticas de afiliación y días cotizados (PX-Web)",
+        "scope": DOMAIN,
+        "default_url": "https://w6.seg-social.es/PXWeb/",
+        "format": "px",
+    },
+    "mites_anuario": {
+        "name": "Ministerio de Trabajo - Anuario de Estadísticas, Movimiento Laboral Registrado",
+        "scope": DOMAIN,
+        "default_url": "https://www.mites.gob.es/es/estadisticas/anuarios/",
+        "format": "xlsx",
     },
     "vclc_employment_events": {
         "name": "Reformas laborales y rupturas de la EPA (curado, una cita por hecho)",
@@ -167,6 +197,11 @@ def period_bounds(period: str) -> tuple[str, str]:
         return f"{year}-{end_month - 2:02d}-01", f"{year}-{end_month:02d}-{end_day}"
     if len(period) == 10:
         return period, period
+    if len(period) == 7 and period[4] == "-":
+        year, month = int(period[:4]), int(period[5:])
+        nxt = f"{year + month // 12}-{month % 12 + 1:02d}-01"
+        end = (datetime.fromisoformat(nxt) - timedelta(days=1)).date().isoformat()
+        return f"{period}-01", end
     return f"{period}-01-01", f"{period}-12-31"
 
 
@@ -308,7 +343,7 @@ def load_indicator(
             start, end = period_bounds(period)
             obs_rows.append((
                 obs_id, series_id, release_id, period, obs.get("start", start), obs.get("end", end),
-                obs.get("interval_kind", "calendar_quarter" if "T" in period else "calendar_year"), value, text,
+                obs.get("interval_kind", "calendar_quarter" if "T" in period else "calendar_month" if len(period) == 7 else "calendar_year"), value, text,
                 obs.get("status"), canonical_json(obs.get("status_labels", [])), "not_provided", ordinal, state,
                 prev_id, source_metadata.get("source_updated_at"), int(obs.get("cell_index", 0)),
                 canonical_json(obs.get("raw", obs["value"])), ts, ts,
@@ -378,9 +413,28 @@ def dbnomics_series_url(provider: str, dataset: str, dimensions: dict[str, list[
     return f"https://api.db.nomics.world/v22/series/{provider}/{urllib.parse.quote(dataset)}?" + urllib.parse.urlencode(params)
 
 
-AMECO_CODES = {
-    "ZUTN": ("Tasa de paro (% de la población activa), AMECO", "Tasa de paro armonizada por la Comisión Europea a partir de las encuestas de población activa nacionales (para España, la EPA)."),
-    "ZNAWRU": ("NAWRU: paro compatible con salarios estables (% de la población activa), AMECO", "Estimación de la Comisión Europea del paro estructural (tasa de paro que no acelera los salarios), obtenida con su modelo de función de producción. Es una estimación de modelo, no una observación."),
+AMECO_CODES: dict[str, dict[str, str]] = {
+    "ZUTN": {"variant": "1.0.0.0", "unit": "PC_ACT", "unit_label": "% de la población activa",
+             "label": "Tasa de paro (% de la población activa), AMECO",
+             "definition": "Tasa de paro armonizada por la Comisión Europea a partir de las encuestas de población activa nacionales (para España, la EPA)."},
+    "ZNAWRU": {"variant": "1.0.0.0", "unit": "PC_ACT", "unit_label": "% de la población activa",
+               "label": "NAWRU: paro compatible con salarios estables (% de la población activa), AMECO",
+               "definition": "Estimación de la Comisión Europea del paro estructural (tasa de paro que no acelera los salarios), obtenida con su modelo de función de producción. Es una estimación de modelo, no una observación."},
+    "NUTN": {"variant": "1.0.0.0", "unit": "THS_PER", "unit_label": "Miles de personas",
+             "label": "Parados (miles de personas), AMECO",
+             "definition": "Número de parados según la definición de la OIT (encuesta de población activa)."},
+    "NETD": {"variant": "1.0.0.0", "unit": "THS_PER", "unit_label": "Miles de personas",
+             "label": "Ocupados, total de la economía (miles de personas, contabilidad nacional), AMECO",
+             "definition": "Empleo total en el concepto de contabilidad nacional (interior)."},
+    "OVGD": {"variant": "1.1.0.0", "unit": "VOL_NAC", "unit_label": "Miles de millones en volumen (precios de 2015)",
+             "label": "PIB en volumen, AMECO",
+             "definition": "Producto interior bruto a precios constantes de 2015."},
+    "RVGDE": {"variant": "1.1.0.0", "unit": "VOL_NAC_PER", "unit_label": "Miles en volumen por ocupado (precios de 2015)",
+              "label": "PIB en volumen por ocupado, AMECO",
+              "definition": "Productividad aparente del trabajo por persona ocupada, precios de 2015."},
+    "RWCDC": {"variant": "3.1.0.0", "unit": "I20", "unit_label": "Índice 2020 = 100",
+              "label": "Remuneración real por asalariado (deflactor del consumo privado), AMECO",
+              "definition": "Remuneración de asalariados (salario bruto más cotizaciones de la empresa) por asalariado, deflactada con los precios del consumo privado: mide el poder de compra del coste salarial."},
 }
 
 
@@ -388,8 +442,8 @@ def parse_ameco(code: str) -> Callable[[Raw], Iterable[Batch]]:
     def parse(raw: Raw) -> Iterable[Batch]:
         series = []
         for doc_index, doc in enumerate(raw.data["series"]["docs"]):
-            geo = doc["series_code"].split(".")[0]
-            if geo not in AMECO_GEOS:
+            geo, *rest = doc["series_code"].split(".")
+            if geo not in AMECO_GEOS or ".".join(rest[:4]) != AMECO_CODES[code]["variant"]:
                 continue
             indexed_year = int(str(doc.get("indexed_at") or raw.retrieved_at)[:4])
             obs = [
@@ -403,11 +457,11 @@ def parse_ameco(code: str) -> Callable[[Raw], Iterable[Batch]]:
                 if isinstance(value, (int, float))
             ]
             series.append(area_series(f"AMECO|{doc['series_code']}", geo, {"series_code": doc["series_code"]}, obs))
-        label, definition = AMECO_CODES[code]
+        cfg = AMECO_CODES[code]
         yield {
             "source_id": "ameco_dbnomics", "dataset_code": code, "indicator_code": code, "frequency_code": "A",
-            "frequency_label": "Anual", "unit_code": "PC_ACT", "unit_label": "% de la población activa",
-            "label": label, "definition": definition,
+            "frequency_label": "Anual", "unit_code": cfg["unit"], "unit_label": cfg["unit_label"],
+            "label": cfg["label"], "definition": cfg["definition"],
             "methodology_url": "https://economy-finance.ec.europa.eu/economic-research-and-databases/economic-databases/ameco-database_en",
             "source_url": f"https://db.nomics.world/AMECO/{code}",
         }, series
@@ -442,6 +496,53 @@ EUROSTAT_DATASETS: dict[str, dict[str, Any]] = {
         "label": "Tasa de empleo ({age}), Eurostat, serie histórica 1992-2020", "unit_label": "% de la población de esa edad",
         "definition": "Serie histórica de la LFS cerrada en 2020; no se empalma con lfsi_emp_a.",
     },
+    "une_ltu_a": {
+        "filters": {"indic_em": ["LTU"], "age": ["Y15-74"], "sex": ["T"], "unit": ["PC_ACT", "PC_UNE"]},
+        "label": "Paro de larga duración (12 meses o más), Eurostat", "unit_label": "% (ver unidad)",
+        "definition": "Parados que llevan 12 meses o más buscando empleo: PC_ACT sobre la población activa, PC_UNE sobre el total de parados. Serie vigente desde 2003.",
+    },
+    "une_ltu_a_h": {
+        "filters": {"indic_em": ["LTU"], "age": ["Y15-74"], "sex": ["T"], "unit": ["PC_ACT", "PC_UNE"]},
+        "label": "Paro de larga duración, Eurostat, serie histórica 1996-2020", "unit_label": "% (ver unidad)",
+        "definition": "Serie histórica de la LFS cerrada en 2020; no se empalma con une_ltu_a.",
+    },
+    "lfsa_urgaed": {
+        "filters": {"age": ["Y25-64"], "sex": ["T"], "isced11": ["ED0-2", "ED3_4", "ED5-8", "TOTAL"], "unit": ["PC"]},
+        "label": "Tasa de paro por nivel educativo ({age}), Eurostat", "unit_label": "% de la población activa",
+        "definition": "ED0-2: hasta la ESO; ED3_4: bachillerato y FP de grado medio; ED5-8: estudios superiores (CINE 2011). Eurostat marca rupturas de serie (flag b); en 2014 cambia la clasificación de CINE 1997 a CINE 2011.",
+    },
+    "edat_lfse_03": {
+        "filters": {"age": ["Y25-64"], "sex": ["T"], "isced11": ["ED0-2", "ED5-8"], "unit": ["PC"]},
+        "label": "Población de {age} años por nivel educativo alcanzado, Eurostat", "unit_label": "% de la población de esa edad",
+        "definition": "Porcentaje de la población de 25 a 64 años cuyo máximo nivel es ED0-2 (hasta la ESO) o ED5-8 (superiores).",
+    },
+    "nama_10_a10_e": {
+        "filters": {"nace_r2": ["TOTAL", "F", "A", "C", "G-I"], "na_item": ["EMP_DC"], "unit": ["THS_PER"]},
+        "label": "Ocupados por rama de actividad (contabilidad nacional), Eurostat", "unit_label": "Miles de personas",
+        "definition": "Empleo total por rama NACE Rev. 2 (A10): F = construcción, A = agricultura, C = industria manufacturera, G-I = comercio, transporte y hostelería.",
+    },
+    "sbs_sc_ovw": {
+        "filters": {"indic_sbs": ["EMP_NR"], "nace_r2": ["B-S_X_O_S94"], "size_emp": ["TOTAL", "0-9", "10-19", "20-49", "50-249", "GE250"]},
+        "label": "Personas ocupadas por tamaño de empresa (economía empresarial), Eurostat", "unit_label": "Personas",
+        "definition": "Estadísticas estructurales de empresas: personas ocupadas en la economía de mercado no financiera y financiera (NACE B-S sin O ni S94), por tramo de ocupados de la empresa.",
+    },
+    "lfst_r_lfu3rt": {
+        "geo_level": "nuts2",
+        "filters": {"age": ["Y15-74"], "sex": ["T"], "isced11": ["TOTAL"], "unit": ["PC"]},
+        "label": "Tasa de paro por región NUTS 2 ({age}), Eurostat", "unit_label": "% de la población activa",
+        "definition": "Encuesta de Población Activa de la UE por región NUTS 2; en España, NUTS 2 = comunidades y ciudades autónomas.",
+    },
+    "lfst_r_lfe2emprt": {
+        "geo_level": "nuts2",
+        "filters": {"age": ["Y20-64"], "sex": ["T"], "unit": ["PC"]},
+        "label": "Tasa de empleo por región NUTS 2 ({age}), Eurostat", "unit_label": "% de la población de esa edad",
+        "definition": "Ocupados de 20 a 64 años sobre la población de esa edad, por región NUTS 2.",
+    },
+    "lfst_r_lmdur": {
+        "filters": {"statinfo": ["DISP_NUTS2"], "age": ["Y15-74"], "sex": ["T"], "unit": ["PC"]},
+        "label": "Dispersión regional de las tasas de paro (NUTS 2), Eurostat", "unit_label": "Coeficiente de variación (%)",
+        "definition": "Coeficiente de variación de las tasas de paro regionales NUTS 2 de cada país, ponderado por población activa.",
+    },
     "nama_10_lp_ulc": {
         "filters": {"na_item": ["RLPR_HW"], "unit": ["I15"]},
         "label": "Productividad real del trabajo por hora trabajada (índice 2015 = 100), Eurostat",
@@ -452,7 +553,8 @@ EUROSTAT_DATASETS: dict[str, dict[str, Any]] = {
 
 
 def eurostat_url(dataset: str) -> str:
-    params: list[tuple[str, str]] = [("geo", g) for g in EUROSTAT_GEOS]
+    level = EUROSTAT_DATASETS[dataset].get("geo_level")
+    params: list[tuple[str, str]] = [("geoLevel", level)] if level else [("geo", g) for g in EUROSTAT_GEOS]
     for dim, values in EUROSTAT_DATASETS[dataset]["filters"].items():
         params.extend((dim, v) for v in values)
     return f"{EUROSTAT_BASE}/{dataset}?" + urllib.parse.urlencode(params)
@@ -488,9 +590,12 @@ def parse_eurostat(dataset: str) -> Callable[[Raw], Iterable[Batch]]:
                                     "status": status.get(str(flat))})
                 if obs:
                     key = "|".join([dataset, *(combo[d] for d in fixed), geo])
-                    series.append(area_series(key, geo, {**combo, "geo": geo}, obs))
+                    item = area_series(key, geo, {**combo, "geo": geo}, obs)
+                    if geo not in AREA_META:
+                        item.update(geo_name=labels["geo"].get(geo, geo), geo_system="NUTS", geo_level="nuts2" if len(geo) == 4 else "nuts")
+                    series.append(item)
             code = ".".join(combo[d] for d in fixed)
-            age = labels.get("age", {}).get(combo.get("age", ""), combo.get("age", ""))
+            age = combo.get("age", "").replace("Y", "").replace("-", "–")
             yield {
                 "source_id": "eurostat_sdmx", "dataset_code": dataset, "indicator_code": code, "frequency_code": "A",
                 "frequency_label": "Anual", "unit_code": combo.get("unit", "PC"), "unit_label": cfg["unit_label"],
@@ -507,6 +612,7 @@ INE_SERIES = {
     "EPA452434": ("Tasa de paro, total nacional, 16 y más años (EPA)", "PC_ACT", "% de la población activa"),
     "EPA452436": ("Tasa de paro, menores de 25 años (EPA)", "PC_ACT", "% de la población activa"),
     "EPA416745": ("Asalariados, total (EPA)", "THS_PER", "Miles de personas"),
+    "EPA416746": ("Asalariados con contrato indefinido, total (EPA)", "THS_PER", "Miles de personas"),
     "EPA416748": ("Asalariados con contrato indefinido discontinuo (fijos discontinuos, EPA)", "THS_PER", "Miles de personas"),
     "EPA416749": ("Asalariados con contrato temporal (EPA)", "THS_PER", "Miles de personas"),
 }
@@ -591,6 +697,62 @@ def parse_pdb(raw: Raw) -> Iterable[Batch]:
     }, series
 
 
+MIN_WAGE_DATASET = "DSD_EARNINGS@MIN2AVE"
+MIN_WAGE_AREAS = ["ESP", "DEU", "FRA", "PRT", "GRC", "NLD", "IRL", "GBR", "USA"]
+
+
+def parse_min_wage(raw: Raw) -> Iterable[Batch]:
+    series = []
+    for doc_index, doc in enumerate(raw.data["series"]["docs"]):
+        parts = doc["series_code"].split(".")
+        area = parts[0]
+        if area not in MIN_WAGE_AREAS or "MEDIAN" not in parts:
+            continue
+        obs = [
+            {"period": p, "value": v, "pointer": pointer("series", "docs", doc_index, "value", i), "cell_index": i}
+            for i, (p, v) in enumerate(zip(doc["period"], doc["value"])) if isinstance(v, (int, float))
+        ]
+        item = area_series(f"{MIN_WAGE_DATASET}|{doc['series_code']}", area, {"series_code": doc["series_code"]}, obs)
+        if area not in AREA_META:
+            item.update(geo_name=area, geo_system="ISO3166-1-alpha-3", geo_level="country")
+        series.append(item)
+    yield {
+        "source_id": "oecd_earnings", "dataset_code": MIN_WAGE_DATASET, "indicator_code": "MR_WG_FT.MEDIAN",
+        "frequency_code": "A", "frequency_label": "Anual", "unit_code": "PT_WG_MEDIAN",
+        "unit_label": "% del salario mediano a tiempo completo",
+        "label": "Salario mínimo en % del salario mediano de los trabajadores a tiempo completo (OCDE)",
+        "definition": "OCDE Earnings: salario mínimo legal dividido por el salario mediano bruto de los asalariados a "
+        "tiempo completo. Italia no tiene salario mínimo legal general.",
+        "methodology_url": "https://www.oecd.org/en/data/datasets/minimum-wages-relative-to-median-wages.html",
+        "source_url": f"https://db.nomics.world/OECD/{MIN_WAGE_DATASET}",
+    }, series
+
+
+OLAB_DATASET = "DSD_OLAB@DF_OIALAB_INDIC"
+
+
+def parse_registered(raw: Raw) -> Iterable[Batch]:
+    series = []
+    for doc_index, doc in enumerate(raw.data["series"]["docs"]):
+        if doc["series_code"] != "ESP.REG_UNE.PS._Z.N.S1.A":
+            continue
+        obs = [
+            {"period": p, "value": v, "pointer": pointer("series", "docs", doc_index, "value", i), "cell_index": i}
+            for i, (p, v) in enumerate(zip(doc["period"], doc["value"])) if isinstance(v, (int, float))
+        ]
+        series.append(area_series(f"{OLAB_DATASET}|{doc['series_code']}", "ESP", {"series_code": doc["series_code"]}, obs))
+    yield {
+        "source_id": "oecd_registered_unemployment", "dataset_code": OLAB_DATASET, "indicator_code": "REG_UNE.A",
+        "frequency_code": "A", "frequency_label": "Anual (media de meses)", "unit_code": "PERSONS", "unit_label": "Personas",
+        "label": "Paro registrado en los servicios públicos de empleo (SEPE), media anual (OCDE)",
+        "definition": "Demandantes de empleo parados inscritos en las oficinas públicas de empleo, según la OCDE "
+        "(Infra-annual labour statistics), que recoge la serie del SEPE/Ministerio de Trabajo. Excluye a los demandantes "
+        "con relación laboral (entre ellos, fijos discontinuos inactivos).",
+        "methodology_url": "https://www.sepe.es/HomeSepe/que-es-el-sepe/estadisticas/datos-avance/paro.html",
+        "source_url": f"https://db.nomics.world/OECD/{OLAB_DATASET}",
+    }, series
+
+
 API_SOURCES: list[tuple[str, str, Callable[[Raw], Iterable[Batch]]]] = [
     *[(f"ameco_{code.lower()}.json", dbnomics_series_url("AMECO", code), parse_ameco(code)) for code in AMECO_CODES],
     *[(f"eurostat_{ds}.json", eurostat_url(ds), parse_eurostat(ds)) for ds in EUROSTAT_DATASETS],
@@ -604,7 +766,230 @@ API_SOURCES: list[tuple[str, str, Callable[[Raw], Iterable[Batch]]]] = [
         dbnomics_series_url("OECD", PDB_DATASET, {"MEASURE": ["GDPHRS"], "REF_AREA": PDB_AREAS, "UNIT_MEASURE": ["USD_PPP_H"]}),
         parse_pdb,
     ),
+    (
+        "oecd_min2ave_dbnomics.json",
+        dbnomics_series_url("OECD", MIN_WAGE_DATASET, {"REF_AREA": MIN_WAGE_AREAS}),
+        parse_min_wage,
+    ),
+    (
+        "oecd_olab_reg_une_esp_dbnomics.json",
+        dbnomics_series_url("OECD", OLAB_DATASET, {"REF_AREA": ["ESP"], "MEASURE": ["REG_UNE"], "FREQ": ["A"]}),
+        parse_registered,
+    ),
 ]
+
+
+# ---------------------------------------------------------------- non-JSON official files (PC-Axis, xlsx)
+
+class RawFile:
+    def __init__(self, name: str, url: str, payload: bytes, retrieved_at: str):
+        self.name, self.url, self.payload, self.retrieved_at = name, url, payload, retrieved_at
+        self.sha256 = sha256_bytes(payload)
+        self.path = FILES_DIR / name
+
+
+# Hosts whose TLS chain is incomplete for Python's verifier (curl/macOS accept it); integrity is kept by sha256.
+INSECURE_TLS_HOSTS = {"www.mites.gob.es"}
+
+
+def fetch_file(name: str, url: str, offline: bool) -> RawFile:
+    path = FILES_DIR / name
+    meta_path = FILES_DIR / f"{name}.meta.json"
+    if not offline:
+        req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
+        host = urllib.parse.urlparse(url).hostname
+        context = ssl._create_unverified_context() if host in INSECURE_TLS_HOSTS else None  # noqa: S323 - per-host
+        with urllib.request.urlopen(req, timeout=180, context=context) as resp:
+            payload = resp.read()
+        if payload[:200].lstrip().lower().startswith((b"<!doctype", b"<html")):
+            raise ValueError(f"{url} returned HTML instead of a data file")
+        FILES_DIR.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(payload)
+        meta_path.write_text(canonical_json({"url": url, "retrieved_at": now_iso()}), encoding="utf-8")
+    if not path.exists():
+        raise FileNotFoundError(f"missing raw cache {rel(path)}; run without --offline")
+    meta = json.loads(meta_path.read_text(encoding="utf-8"))
+    return RawFile(name, meta["url"], path.read_bytes(), meta["retrieved_at"])
+
+
+def parse_px(payload: bytes) -> tuple[list[tuple[str, list[str]]], list[str]]:
+    """PC-Axis: returns ([(variable, values)] in STUB+HEADING order, flat DATA tokens). The last variable varies fastest."""
+    text = payload.decode("cp1252")
+    head, data = text.split("DATA=", 1)
+    def keyword(name: str) -> list[str]:
+        m = re.search(rf"^{name}=(.*?);", head, re.S | re.M)
+        return re.findall(r'"(.*?)"', m.group(1)) if m else []
+    values = {m.group(1): re.findall(r'"(.*?)"', m.group(2)) for m in re.finditer(r'^VALUES\("(.*?)"\)=(.*?);', head, re.S | re.M)}
+    order = keyword("STUB") + keyword("HEADING")
+    tokens = re.findall(r'"[^"]*"|[^\s;]+', data.split(";")[0])
+    return [(var, values[var]) for var in order], tokens
+
+
+def px_cell(dims: list[tuple[str, list[str]]], tokens: list[str], coords: dict[str, str]) -> tuple[int, float | None]:
+    flat = 0
+    for var, vals in dims:
+        flat = flat * len(vals) + vals.index(coords[var])
+    token = tokens[flat].strip('"')
+    try:
+        return flat, float(token)
+    except ValueError:
+        return flat, None
+
+
+def xlsx_sheet(payload: bytes, sheet_name: str) -> dict[str, Any]:
+    """Minimal xlsx reader (stdlib): {cell_ref: value} for one sheet, shared strings resolved."""
+    ns = {"m": "http://schemas.openxmlformats.org/spreadsheetml/2006/main",
+          "r": "http://schemas.openxmlformats.org/officeDocument/2006/relationships",
+          "p": "http://schemas.openxmlformats.org/package/2006/relationships"}
+    with zipfile.ZipFile(io.BytesIO(payload)) as zf:
+        shared = []
+        if "xl/sharedStrings.xml" in zf.namelist():
+            for si in ET.fromstring(zf.read("xl/sharedStrings.xml")).findall("m:si", ns):
+                shared.append("".join(t.text or "" for t in si.iter(f"{{{ns['m']}}}t")))
+        wb = ET.fromstring(zf.read("xl/workbook.xml"))
+        rid = next(sh.get(f"{{{ns['r']}}}id") for sh in wb.find("m:sheets", ns) if sh.get("name") == sheet_name)
+        rels = ET.fromstring(zf.read("xl/_rels/workbook.xml.rels"))
+        target = next(rel.get("Target") for rel in rels.findall("p:Relationship", ns) if rel.get("Id") == rid)
+        sheet = ET.fromstring(zf.read("xl/" + target.lstrip("/").removeprefix("xl/")))
+    cells: dict[str, Any] = {}
+    for c in sheet.iter(f"{{{ns['m']}}}c"):
+        v = c.find("m:v", ns)
+        if v is None:
+            continue
+        cells[c.get("r")] = shared[int(v.text)] if c.get("t") == "s" else v.text
+    return cells
+
+
+def xlsx_rows(cells: dict[str, Any]) -> dict[int, dict[str, Any]]:
+    rows: dict[int, dict[str, Any]] = {}
+    for ref, value in cells.items():
+        m = re.match(r"([A-Z]+)(\d+)", ref)
+        rows.setdefault(int(m.group(2)), {})[m.group(1)] = value
+    return rows
+
+
+SS_PX = "https://w6.seg-social.es/PXWeb/Resources/PX/Databases/"
+SS_AFFILIATES = SS_PX + "Afiliados%20en%20alta%20laboral/Afiliados%20Medios/07m.%20Afiliados%20R.%20GENERAL%20por%20tipo%20de%20contrato%20y%20jornada,%20tramos%20de%20edad%20y%20sexo.px"
+SS_DAYS = SS_PX + "Dias%20cotizados/Datos%20de%20cotizantes%20y%20d%C3%ADas%20de%20cotizaci%C3%B3n%20CNAE09%20(hasta%20dic-2025).px"
+AFFILIATE_TYPES = {
+    "TODAS LAS MODALIDADES DE CONTRATOS": "TOTAL",
+    "INDEFINIDO-T. Completo": "IND_TC",
+    "INDEFINIDO-T. Parcial": "IND_TP",
+    "INDEFINIDO-Fijos Discontinuos": "IND_FD",
+}
+DAY_TYPES = {
+    "INDEFINIDO FIJO DISCONTINUO TIEMPO COMPLETO": "FD_TC",
+    "INDEFINIDO FIJO DISCONTINUO TIEMPO PARCIAL": "FD_TP",
+    "INDEFINIDO TIEMPO COMPLETO": "IND_TC",
+    "INDEFINIDO TIEMPO PARCIAL": "IND_TP",
+}
+DAY_VALUES = {"DÍAS TOTALES": "DIAS_TOTALES", "COTIZANTES": "COTIZANTES"}
+
+
+def month_label(period: str) -> str:
+    return f"{period[:4]}-{period[4:6]}"
+
+
+def load_ss_affiliates(conn: sqlite3.Connection, raw: RawFile, snapshot_date: str) -> dict[str, int]:
+    dims, tokens = parse_px(raw.payload)
+    periods = dict(dims)["Periodo"]
+    totals = {"releases": 0, "observations": 0}
+    for label, code in AFFILIATE_TYPES.items():
+        obs = []
+        for period in periods:
+            flat, value = px_cell(dims, tokens, {"Periodo": period, "tipo contrato": label, "Tramos de edad": "Total Edad", "Sexo": "Total Sexo"})
+            if value is not None:
+                obs.append({"period": month_label(period), "value": value, "pointer": pointer("DATA", flat), "cell_index": flat})
+        counts = load_indicator(conn, {
+            "source_id": "seg_social_pxweb", "dataset_code": "afiliados_medios_07m", "indicator_code": code,
+            "frequency_code": "M", "frequency_label": "Mensual", "unit_code": "PERSONS", "unit_label": "Afiliados medios",
+            "label": f"Afiliados medios al Régimen General, {label}", "extraction_method": "pcaxis_cell",
+            "definition": "Media mensual de trabajadores en alta laboral en el Régimen General por tipo de contrato. Un fijo "
+            "discontinuo solo figura en alta mientras trabaja: en los periodos de inactividad causa baja.",
+            "methodology_url": "https://www.seg-social.es/wps/portal/wss/internet/EstadisticasPresupuestosEstudios/Estadisticas/EST8/EST10",
+            "source_url": raw.url,
+        }, raw.sha256, len(raw.payload), rel(raw.path), raw.url, snapshot_date, {"retrieved_at": raw.retrieved_at},
+            [area_series(f"07m|{code}|ESP", "ESP", {"tipo_contrato": label, "edad": "Total Edad", "sexo": "Total Sexo"}, obs)])
+        for k in totals:
+            totals[k] += counts[k]
+    return totals
+
+
+def load_ss_days(conn: sqlite3.Connection, raw: RawFile, snapshot_date: str) -> dict[str, int]:
+    dims, tokens = parse_px(raw.payload)
+    periods = dict(dims)["Periodo"]
+    totals = {"releases": 0, "observations": 0}
+    for ctype, ccode in DAY_TYPES.items():
+        for vlabel, vcode in DAY_VALUES.items():
+            obs = []
+            for period in periods:
+                flat, value = px_cell(dims, tokens, {"Periodo": period, "Género": "TOTAL SEXO", "Sección": "TOTAL SECCION",
+                                                     "Tipo de contrato": ctype, "Valores": vlabel})
+                if value is not None:
+                    obs.append({"period": month_label(period), "value": value, "pointer": pointer("DATA", flat), "cell_index": flat})
+            counts = load_indicator(conn, {
+                "source_id": "seg_social_pxweb", "dataset_code": "dias_cotizados_cnae09", "indicator_code": f"{ccode}.{vcode}",
+                "frequency_code": "M", "frequency_label": "Mensual",
+                "unit_code": "DAYS" if vcode != "COTIZANTES" else "PERSONS",
+                "unit_label": "Días cotizados en el mes" if vcode != "COTIZANTES" else "Cotizantes con al menos un día en el mes",
+                "label": f"{vlabel.capitalize()}, {ctype.lower()}", "extraction_method": "pcaxis_cell",
+                "definition": "Días cotizados y cotizantes por tipo de contrato, todas las secciones de actividad. Un cotizante "
+                "es quien cotiza al menos un día del mes: los meses sin actividad de un fijo discontinuo no cuentan.",
+                "methodology_url": "https://www.seg-social.es/wps/portal/wss/internet/EstadisticasPresupuestosEstudios/Estadisticas",
+                "source_url": raw.url,
+            }, raw.sha256, len(raw.payload), rel(raw.path), raw.url, snapshot_date, {"retrieved_at": raw.retrieved_at},
+                [area_series(f"dias|{ccode}|{vcode}|ESP", "ESP", {"tipo_contrato": ctype, "valores": vlabel}, obs)])
+            for k in totals:
+                totals[k] += counts[k]
+    return totals
+
+
+MLR_EDITIONS = [2023, 2024, 2025]
+MLR_ROWS = {
+    "MLR-18": {"Trabajadores fijos discontinuos": "demandantes_fijos_discontinuos", "AMBOS SEXOS (2)": "demandantes_no_parados_total",
+               "Ocupados o con relación laboral": "demandantes_con_relacion_laboral"},
+    "MLR-25": {"AMBOS SEXOS": "contratos_total", "Fijos discontinuos": "contratos_fijos_discontinuos",
+               "Duración indefinida": "contratos_indefinidos", "Duración temporal": "contratos_temporales"},
+}
+
+
+def load_mlr(conn: sqlite3.Connection, edition: int, raw: RawFile, snapshot_date: str) -> dict[str, int]:
+    """Anuario MLR: first block (ambos sexos) of MLR-18 and MLR-25, the two absolute-value year columns."""
+    totals = {"releases": 0, "observations": 0}
+    for sheet, wanted in MLR_ROWS.items():
+        rows = xlsx_rows(xlsx_sheet(raw.payload, sheet))
+        year_row = next(r for r in sorted(rows) if [str(v).strip() for v in rows[r].values()][:2] == [str(edition - 1), str(edition)])
+        year_cols = [col for col, v in sorted(rows[year_row].items(), key=lambda kv: (len(kv[0]), kv[0]))][:2]
+        found: dict[str, int] = {}
+        for r in sorted(rows):
+            if r <= year_row:
+                continue
+            label = str(rows[r].get("A", "") or next(iter(rows[r].values()), "")).strip()
+            label = re.sub(r"\s+", " ", label)
+            if label in ("HOMBRES", "HOMBRES (2)"):
+                break  # only the first block (ambos sexos)
+            if label in wanted and wanted[label] not in found:
+                found[wanted[label]] = r
+        for code, r in found.items():
+            obs = []
+            for col, year in zip(year_cols, (edition - 1, edition)):
+                value = rows[r].get(col)
+                if value not in (None, ""):
+                    obs.append({"period": str(year), "value": float(value), "pointer": pointer(sheet, f"{col}{r}"), "cell_index": r})
+            counts = load_indicator(conn, {
+                "source_id": "mites_anuario", "dataset_code": f"anuario_{edition}_{sheet}", "indicator_code": code,
+                "frequency_code": "A", "frequency_label": "Anual (media o total del año)", "unit_code": "PERSONS" if sheet == "MLR-18" else "CONTRACTS",
+                "unit_label": "Personas, media anual" if sheet == "MLR-18" else "Contratos registrados en el año",
+                "label": f"{code.replace('_', ' ')} (Anuario {edition}, {sheet})", "extraction_method": "xlsx_cell",
+                "definition": "MLR-18: demandantes de empleo no parados, media anual (los fijos discontinuos sin actividad que se "
+                "inscriben figuran aquí, no como parados). MLR-25: contratos registrados en el año por modalidad.",
+                "methodology_url": "https://www.mites.gob.es/es/estadisticas/anuarios/",
+                "source_url": raw.url,
+            }, raw.sha256, len(raw.payload), rel(raw.path), raw.url, snapshot_date, {"retrieved_at": raw.retrieved_at, "edition": edition},
+                [area_series(f"anuario_{edition}|{sheet}|{code}|ESP", "ESP", {"sheet": sheet, "row_label": code}, obs)])
+            for k in totals:
+                totals[k] += counts[k]
+    return totals
 
 
 # ---------------------------------------------------------------- curated events
@@ -664,6 +1049,11 @@ def main() -> int:
                 counts = load_indicator(conn, definition, raw.sha256, len(raw.payload), rel(raw.path), raw.url,
                                         args.snapshot_date, meta, series)
                 report["indicators"][f"{definition['source_id']}:{definition['dataset_code']}:{definition['indicator_code']}"] = counts
+        report["seg_social_affiliates"] = load_ss_affiliates(conn, fetch_file("ss_afiliados_07m.px", SS_AFFILIATES, args.offline), args.snapshot_date)
+        report["seg_social_days"] = load_ss_days(conn, fetch_file("ss_dias_cotizados_cnae09.px", SS_DAYS, args.offline), args.snapshot_date)
+        for edition in MLR_EDITIONS:
+            url = f"https://www.mites.gob.es/ficheros/ministerio/estadisticas/anuarios/{edition}/MLR/MLR.xlsx"
+            report[f"anuario_{edition}"] = load_mlr(conn, edition, fetch_file(f"mites_anuario_{edition}_MLR.xlsx", url, args.offline), args.snapshot_date)
         report["events"] = load_events(conn, args.snapshot_date)
     fk = conn.execute("PRAGMA foreign_key_check").fetchall()
     if fk:

@@ -1,6 +1,8 @@
+import io
 import json
 import sqlite3
 import unittest
+import zipfile
 from pathlib import Path
 
 from etl.politicos_es.config import DEFAULT_SCHEMA
@@ -111,6 +113,42 @@ class IngestEmploymentTest(unittest.TestCase):
         self.assertTrue(all(event["source_url"].startswith("https://") for event in data["events"]))
         counts = ingest.load_events(self.conn, "2026-10-19")
         self.assertEqual(counts["observations"], len(data["events"]))
+
+
+    def test_monthly_periods(self) -> None:
+        self.assertEqual(ingest.period_bounds("2024-02"), ("2024-02-01", "2024-02-29"))
+        self.assertEqual(ingest.period_bounds("2025-12"), ("2025-12-01", "2025-12-31"))
+
+    def test_pcaxis_cell_order_last_variable_fastest(self) -> None:
+        px = (
+            'STUB="Periodo","tipo contrato";\nHEADING="Sexo";\n'
+            'VALUES("Periodo")="202501","202502";\nVALUES("tipo contrato")="TOTAL","FD";\nVALUES("Sexo")="Total Sexo","Mujer";\n'
+            'DATA=\n100 60 10 4\n110 65 12 ".";\n'
+        ).encode("cp1252")
+        dims, tokens = ingest.parse_px(px)
+        self.assertEqual([d for d, _ in dims], ["Periodo", "tipo contrato", "Sexo"])
+        self.assertEqual(ingest.px_cell(dims, tokens, {"Periodo": "202502", "tipo contrato": "FD", "Sexo": "Total Sexo"}), (6, 12.0))
+        self.assertEqual(ingest.px_cell(dims, tokens, {"Periodo": "202502", "tipo contrato": "FD", "Sexo": "Mujer"}), (7, None))
+
+    def test_xlsx_reader_resolves_shared_strings(self) -> None:
+        buf = io.BytesIO()
+        with zipfile.ZipFile(buf, "w") as zf:
+            zf.writestr("xl/workbook.xml", '<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" '
+                        'xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets>'
+                        '<sheet name="MLR-18" sheetId="1" r:id="rId1"/></sheets></workbook>')
+            zf.writestr("xl/_rels/workbook.xml.rels", '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+                        '<Relationship Id="rId1" Target="worksheets/sheet1.xml"/></Relationships>')
+            zf.writestr("xl/sharedStrings.xml", '<sst xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">'
+                        '<si><t>Trabajadores fijos discontinuos</t></si></sst>')
+            zf.writestr("xl/worksheets/sheet1.xml", '<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetData>'
+                        '<row r="18"><c r="A18" t="s"><v>0</v></c><c r="C18"><v>687884.25</v></c></row></sheetData></worksheet>')
+        cells = ingest.xlsx_sheet(buf.getvalue(), "MLR-18")
+        self.assertEqual(ingest.xlsx_rows(cells)[18], {"A": "Trabajadores fijos discontinuos", "C": "687884.25"})
+
+    def test_pct_change_and_rebase(self) -> None:
+        self.assertAlmostEqual(export.pct_change({2007: 200.0, 2013: 168.2}, 2007, 2013), -15.9)
+        self.assertIsNone(export.pct_change({2007: 1.0}, 2007, 2013))
+        self.assertEqual(export.rebase({1994: 50.0, 1995: 80.0, 2025: 100.0}, 1995), {1995: 100.0, 2025: 125.0})
 
 
 if __name__ == "__main__":

@@ -61,19 +61,66 @@
       "source_url": "https://eur-lex.europa.eu/eli/reg/2019/1700/oj",
       "locator": "Aplicado por el INE en la EPA desde el primer trimestre de 2021; el INE recalculó las series desde 2002",
       "confidence": "high"
+    },
+    {
+      "id": "erte_2020",
+      "date": "2020-03-18",
+      "kind": "labour_reform",
+      "label": "ERTE por COVID-19: suspensión de contratos sin despido",
+      "source": "Real Decreto-ley 8/2020, de 17 de marzo",
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2020-3824",
+      "locator": "BOE-A-2020-3824, arts. 22 a 28 (expedientes de regulación temporal de empleo por fuerza mayor y causas ETOP)",
+      "confidence": "high"
+    },
+    {
+      "id": "smi_2019",
+      "date": "2019-01-01",
+      "kind": "labour_reform",
+      "label": "Salario mínimo +22,3 % (900 € en 14 pagas)",
+      "source": "Real Decreto 1462/2018, de 21 de diciembre",
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2018-17773",
+      "locator": "BOE-A-2018-17773, art. 1: 30 €/día o 900 €/mes para 2019 (735,90 € en 2018)",
+      "confidence": "high"
+    },
+    {
+      "id": "lit_bentolila_2012",
+      "date": "2012-02-01",
+      "kind": "literature",
+      "label": "Con la protección del empleo de Francia, España habría evitado en torno al 45 % del aumento de su paro en la Gran Recesión",
+      "source": "Bentolila, Cahuc, Dolado y Le Barbanchon (2012), «Two-tier labour markets in the Great Recession: France versus Spain», The Economic Journal 122, F155-F187",
+      "source_url": "https://www.cemfi.es/ftp/wp/1009.pdf",
+      "locator": "Resumen: modelo de búsqueda calibrado; la causa es la brecha de costes de despido entre indefinidos y temporales y la laxitud en el uso de temporales (versión de trabajo CEMFI 1009)",
+      "confidence": "high"
     }
   ],
   "gaps": [
     "La API Tempus del INE solo ofrece la EPA desde 2002 (series recalculadas con la metodología de 2021). La EPA de 1976-2001 está en ficheros históricos fuera de la API; para esos años se usa AMECO (Comisión Europea), que parte de la EPA y la homogeneiza.",
     "AMECO publica previsiones para el año en curso y el siguiente: el exportador corta en el último año con dato observado de Eurostat.",
-    "Los agregados europeos de AMECO cambian de cobertura: UE-15 con la RFA (1971-1991), UE-15 (desde 1991) y UE-27 (desde 2000). Se muestran por separado, sin empalmar."
+    "Los agregados europeos de AMECO cambian de cobertura: UE-15 con la RFA (1971-1991), UE-15 (desde 1991) y UE-27 (desde 2000). Se muestran por separado, sin empalmar.",
+    "Intermitencia de los fijos discontinuos: no hay serie pública de días trabajados al año por persona; exige la Muestra Continua de Vidas Laborales (microdatos bajo solicitud). Se publican afiliados en alta (Seguridad Social, solo Régimen General), días cotizados por cotizante y demandantes inactivos inscritos (Anuario de Trabajo 2022-2024).",
+    "El Anuario de Estadísticas 2025 del Ministerio de Trabajo (MLR-18) ya no separa a los fijos discontinuos entre los demandantes no parados: no hay cifra oficial publicada para 2025.",
+    "Los Anuarios de 2020-2022 se publican en .xls (BIFF), que no se lee sin dependencias externas: la serie de demandantes fijos discontinuos empieza en 2022 (Anuario 2023).",
+    "Paro registrado: se toma de la OCDE (Infra-annual labour statistics), que recoge la serie mensual del SEPE; los ficheros del SEPE cambian de nombre cada mes y su cabecera .xls está dañada."
   ],
   "blocked_hosts": [
     {
       "host": "sdmx.oecd.org",
       "checked_at": "2026-10-19",
       "signal": "HTTP 403 text/html a una petición por script de DSD_TAX_WAGES_COMP@DF_TW_COMP",
-      "fallback": "Réplica DBnomics de la OCDE (Taxing Wages y Productivity Database), que reproduce los códigos SDMX oficiales"
+      "fallback": "Réplica DBnomics de la OCDE (Taxing Wages y Productivity Database), que reproduce los códigos SDMX oficiales",
+      "name_and_shame_incident": "nso-2026-10-oecd-cf-challenge (docs/etl/name-and-shame-access-blockers.md)"
+    },
+    {
+      "host": "www.mites.gob.es",
+      "checked_at": "2026-10-19",
+      "signal": "cadena TLS incompleta para el verificador de Python (CERTIFICATE_VERIFY_FAILED); curl la acepta",
+      "fallback": "descarga sin verificar el certificado solo para ese host (INSECURE_TLS_HOSTS en scripts/ingest_employment_es.py); el fichero se guarda con su SHA-256"
+    },
+    {
+      "host": "www.inclusion.gob.es",
+      "checked_at": "2026-10-19",
+      "signal": "HTTP 403 text/html (708 bytes) a una petición por script",
+      "fallback": "las mismas estadísticas de afiliación se leen de w6.seg-social.es (PX-Web, ficheros PC-Axis)"
     }
   ]
 }

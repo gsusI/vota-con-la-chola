@@ -3,43 +3,6 @@ import { formatValue } from "../components/format.mjs";
 const num = (value, digits = 1) =>
   Number(value).toLocaleString("es-ES", { minimumFractionDigits: digits, maximumFractionDigits: digits });
 
-export function HypothesisCard({ h }) {
-  const g = h.productivity_growth_pct;
-  return (
-    <section className="card vizProse" id="hipotesis" aria-labelledby="hipotesis-title">
-      <h2 id="hipotesis-title">La hipótesis, contrastada</h2>
-      <p>
-        <strong>Hipótesis:</strong> el paro de España es estructural, no cíclico. Desde 1980 ha sido aproximadamente el doble de la
-        media europea en casi todos los ciclos, y la productividad por hora apenas ha crecido desde 1995 frente a países comparables.
-      </p>
-      <p>
-        <strong>Veredicto: se sostiene en lo esencial, con dos matices importantes.</strong>
-      </p>
-      <ul>
-        <li>
-          <strong>A favor.</strong> Desde {h.hypothesis_from}, el paro español ha sido de media {num(h.ratio_mean_since, 2)} veces el de la
-          UE-15 y ha superado 1,5 veces esa media en {h.years_ratio_ge_1_5} de {h.years_since} años. La Comisión Europea estima su paro
-          estructural (NAWRU) en {num(h.nawru_ratio_mean_since, 2)} veces el europeo en el mismo periodo, y nunca por debajo del{" "}
-          {num(h.nawru_min_since.value)} %. La productividad por hora creció un {num(g.ESP)} % desde {h.productivity_base}, frente al{" "}
-          {num(g.EU27)} % de la UE-27, {num(g.DEU)} % de Alemania, {num(g.PRT)} % de Portugal y {num(g.FRA)} % de Francia.
-        </li>
-        <li>
-          <strong>En contra: no es «el doble en casi todos los ciclos».</strong> Solo en {h.years_ratio_ge_2} de {h.years_since} años llegó al
-          doble. En el auge previo a 2008 bajó a {num(h.ratio_lowest_since.value, 2)} veces ({h.ratio_lowest_since.year}), y en {h.last_year} está
-          en {num(h.ratio_eu27_last, 2)} veces la UE-27. Antes de 1975 España tenía un paro similar al europeo, así que no es un rasgo
-          permanente del país sino algo que aparece con las crisis de los setenta y ochenta.
-        </li>
-        <li>
-          <strong>En contra: el ciclo pesa mucho.</strong> El paro pasó del {num(h.peaks.min_pre_crisis.value)} % ({h.peaks.min_pre_crisis.year}) al{" "}
-          {num(h.peaks.max_crisis.value)} % ({h.peaks.max_crisis.year}) y ha vuelto al {num(h.es_last)} %. Esa amplitud es cíclica; lo que
-          parece estructural es que cada crisis empieza y termina más arriba que en Europa. Y en productividad Italia lo ha hecho peor
-          (+{num(g.ITA)} %).
-        </li>
-      </ul>
-    </section>
-  );
-}
-
 export function RatioDecadesTable({ decades, series }) {
   const years = [...new Set(series.flatMap((s) => s.points.map((p) => p.year)))].sort((a, b) => b - a);
   const lookup = series.map((s) => new Map(s.points.map((p) => [p.year, p.value])));
@@ -138,9 +101,9 @@ export function LimitsCard() {
       <h2 id="limites-title">Lo que estos datos no pueden decir</h2>
       <ul>
         <li>
-          <strong>Causas.</strong> Las series muestran que el paro español es más alto y más volátil, no por qué. Las explicaciones habituales
-          (dualidad de contratos, negociación colectiva, peso de la construcción y el turismo, políticas activas débiles) no se prueban con
-          estos gráficos.
+          <strong>Causas.</strong> Las series muestran que el paro español es más alto y más volátil y con qué rasgos coincide (dualidad de
+          contratos, construcción, formación), no cuánto pesa cada causa. Eso exige modelos y microdatos; aquí se citan estudios cuando existen.
+          Tampoco se mide la negociación colectiva ni la eficacia de las políticas activas de empleo.
         </li>
         <li>
           <strong>Estructural frente a cíclico.</strong> No hay una medida directa del paro estructural. El NAWRU es la estimación de un modelo
@@ -148,8 +111,9 @@ export function LimitsCard() {
         </li>
         <li>
           <strong>Efecto de la reforma de 2022.</strong> La caída de la temporalidad coincide con la reforma, pero también con la recuperación
-          tras la pandemia; la serie no aísla el efecto de la ley. La EPA no mide cuántos días trabaja al año un fijo discontinuo ni cuántos
-          contratos indefinidos terminan en el periodo de prueba.
+          tras la pandemia; la serie no aísla el efecto de la ley. Ni la EPA ni las
+          estadísticas publicadas miden cuántos días trabaja al año cada fijo discontinuo (hace falta la Muestra Continua de Vidas Laborales) ni
+          cuántos contratos indefinidos terminan en el periodo de prueba.
         </li>
         <li>
           <strong>Paro registrado y economía sumergida.</strong> La EPA es una encuesta: mide quien busca empleo, no quien está inscrito en las
@@ -178,7 +142,7 @@ export function MethodCard({ data, downloads, events }) {
           cuña fiscal sobre el coste laboral: nunca totales nominales.
         </li>
         <li>
-          <strong>Ejes.</strong> Todos los ejes verticales empiezan en cero; los paneles de un mismo gráfico comparten escala. No hay doble eje:
+          <strong>Ejes.</strong> Todos los ejes verticales incluyen el cero; los paneles de un mismo gráfico comparten escala. No hay doble eje:
           las comparaciones de crecimiento se indexan a un año base (1995 = 100) y las de nivel a la media europea (= 100).
         </li>
         <li>
@@ -187,7 +151,10 @@ export function MethodCard({ data, downloads, events }) {
         </li>
         <li>
           <strong>Fuente oficial y réplica.</strong> AMECO y la OCDE se leen de DBnomics, que replica los códigos oficiales, porque
-          sdmx.oecd.org responde HTTP 403 a las descargas por script. No se ha sorteado ningún bloqueo.
+          sdmx.oecd.org responde HTTP 403 a las descargas por script (incidente registrado en el registro público de bloqueos). La Seguridad
+          Social se lee de sus ficheros PC-Axis y el Ministerio de Trabajo de su Anuario en Excel; el servidor del Ministerio presenta una cadena
+          TLS incompleta y se descarga sin verificar el certificado solo para ese servidor (el fichero queda guardado con su SHA-256). No se ha
+          sorteado ningún bloqueo.
         </li>
         <li>
           <strong>Reproducible.</strong> <code>just employment-refresh</code> descarga cada fuente, guarda el fichero original y lo carga en
