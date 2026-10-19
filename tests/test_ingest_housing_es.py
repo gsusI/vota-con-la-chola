@@ -224,6 +224,12 @@ class RegionalParsingTest(unittest.TestCase):
         codes = {d["indicator_code"]: d["unit_code"] for d, _s in ingest.parse_oecd_tw(raw)}
         self.assertEqual(codes, {"NPATR.C_C2.AW100.AW67": "PC", "GEBT.C_C2.AW100.AW67": "EUR_YEAR", "NPATR.S_C0.AW67": "PC"})
 
+    def test_boom_multiplier_is_stated_as_computed(self) -> None:
+        out = export.boom_block({2000: 4.94, 2007: 9.0}, {2000: 6.17, 2007: 11.34}, {2000: 26.8, 2007: 59.0},
+                                {2000: 5.79, 2003: 3.4, 2007: 5.25}, 2000, 2007)
+        self.assertEqual((out["gross_change_pct"], out["net_change_pct"]), (82.0, 84.0))  # ×1.8, not «se dobló»
+        self.assertEqual((out["rate_min"], out["rate_max"], out["credit_to"]), (3.4, 5.8, 59.0))
+
     def test_index_rebase(self) -> None:
         self.assertEqual(export.index_to({2015: 80.0, 2025: 100.0}, 2015), {2015: 100.0, 2025: 125.0})
         self.assertEqual(export.index_to({2016: 1.0}, 2015), {})

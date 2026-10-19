@@ -2,7 +2,7 @@ import Figure from "../components/Figure";
 import HousingChart from "./HousingChart";
 import HousingTable from "./HousingTable";
 import { Explain } from "./explain";
-import { Bars, C, NAMES, PEER_LEGEND, PeerPanels, at, joinEs, num, pct, thousands } from "./common";
+import { Bars, C, NAMES, PEER_LEGEND, PeerPanels, at, joinEs, num, paceWord, pct, thousands } from "./common";
 
 const EU_PEERS = ["EU27_2020", "DE", "FR", "IT", "PT"];
 const last = (rows) => rows[rows.length - 1];
@@ -134,12 +134,13 @@ export function RentFigure({ rents, source }) {
   ];
   const y = last(rents.ipva_idx).year;
   const chg = (rows) => at(rows, y) - 100;
-  const since = (rows, base) => (at(rows, y) / at(rows, base) - 1) * 100;
+  const S = rents.since;
+  const sinceRows = [...S.bases].sort((a, b) => b.base - a.base);
   return (
     <Figure
       id="alquiler"
-      title={`Los alquileres declarados a Hacienda subieron un ${num(since(rents.ipva_idx, 2011), 0)} % de 2011 a ${y} y un ${num(since(rents.ipva_idx, 2019), 0)} % desde 2019, como los precios (${num(since(rents.cpi_idx, 2011), 0)} % y ${num(since(rents.cpi_idx, 2019), 0)} %) y los salarios (${num(since(rents.wage_idx, 2011), 0)} % y ${num(since(rents.wage_idx, 2019), 0)} %)`}
-      dek={`Índice 2015 = 100. El IPVA del INE mide la renta de todos los contratos de alquiler declarados en el IRPF, también los firmados hace años, que solo se actualizan con el IPC o lo pactado. Por eso sube despacio: el encarecimiento que sufre quien busca piso hoy está en los contratos nuevos, que esta serie diluye.`}
+      title={`Los alquileres declarados a Hacienda subieron ${sinceRows.map((b) => `un ${num(b.rent, 0)} % desde ${b.base}${b.base === S.low ? ", su mínimo" : b.base === S.first ? `, primer año de la serie${S.first_is_local_high ? " y un máximo" : ""}` : ""} (${paceWord(b.rent, b.wage, b.cpi)} salarios, ${num(b.wage, 0)} %, y precios, ${num(b.cpi, 0)} %)`).join("; ")}`}
+      dek={`Índice 2015 = 100. El IPVA del INE mide la renta de todos los contratos de alquiler declarados en el IRPF, también los firmados hace años, que solo se actualizan con el IPC o lo pactado. Por eso se mueve despacio: lo que paga quien firma hoy queda diluido entre todos los contratos y la estadística oficial no lo publica aparte.`}
       legend={series}
       sources={[
         source("ine_tempus", "INE, Índice de Precios de Vivienda en Alquiler", "https://www.ine.es/jaxiT3/Tabla.htm?t=59056"),
@@ -260,12 +261,11 @@ export function PopulationFigure({ drivers, source }) {
   const max = Math.max(...Object.values(mig).flatMap((rows) => rows.filter((p) => p.year >= 1990).map((p) => p.value)));
   const lastEs = last(mig.ES);
   const natural = drivers.natural_growth_per_1000_es;
-  const firstNegative = natural.find((p) => p.value < 0 && natural.filter((q) => q.year > p.year).every((q) => q.value < 0));
   return (
     <Figure
       id="poblacion"
-      title={`España recibe ${num(lastEs.value, 1)} inmigrantes netos por 1.000 habitantes al año (${lastEs.year}), ${num(lastEs.value / last(mig.EU27_2020).value, 1)} veces la media de la UE: es la fuente del aumento de población que alimenta la demanda de vivienda`}
-      dek={`La población residente pasó de ${num(at(pop, 2000) / 1e6, 1)} millones en 2000 a ${num(at(pop, 2008) / 1e6, 1)} en 2008, ${num(at(pop, 2019) / 1e6, 1)} en 2019 y ${num(last(pop).value / 1e6, 1)} en ${last(pop).year}. Desde ${firstNegative ? firstNegative.year : "2015"} mueren más personas de las que nacen, así que todo el crecimiento viene de la migración. Cuántos hogares nuevos se deben a más población y cuántos a hogares más pequeños, por tramos, en el gráfico siguiente.`}
+      title={`España recibe ${num(lastEs.value, 1)} inmigrantes netos por 1.000 habitantes al año (${lastEs.year}), ${num(lastEs.value / last(mig.EU27_2020).value, 1)} veces la media de la UE; ${drivers.natural_negative_since ? `desde ${drivers.natural_negative_since} todo el aumento de población viene de la migración` : "la migración es la mayor parte del aumento de población"}`}
+      dek={`La población residente pasó de ${num(at(pop, 2000) / 1e6, 1)} millones en 2000 a ${num(at(pop, 2008) / 1e6, 1)} en 2008, ${num(at(pop, 2019) / 1e6, 1)} en 2019 y ${num(last(pop).value / 1e6, 1)} en ${last(pop).year}. ${drivers.natural_negative_since ? `Desde ${drivers.natural_negative_since} mueren más personas de las que nacen, así que todo el crecimiento viene de la migración.` : ""} Cuántos hogares nuevos se deben a más población y cuántos a hogares más pequeños, por tramos, en el gráfico siguiente.`}
       legend={PEER_LEGEND}
       sources={[
         source("eurostat_sdmx", "Eurostat, demo_gind (migración neta y población)", "https://ec.europa.eu/eurostat/databrowser/view/demo_gind/default/table"),

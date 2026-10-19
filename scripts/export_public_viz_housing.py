@@ -302,7 +302,10 @@ def build(conn: sqlite3.Connection) -> dict:
         for row in s.curated_rows(code):
             young.append({"source_key": code.split(".", 1)[1], "age_group": row["dims"].get("age_group"), "year": int(row["period"]),
                           "value": r(row["value"], 1), "source": row["row"].get("source"), "source_url": row["url"],
-                          "locator": row["row"].get("locator"), "confidence": row["row"].get("confidence")})
+                          "locator": row["row"].get("locator"), "confidence": row["row"].get("confidence"),
+                          **({"revised": True, "original_value": row["row"].get("original_all_ages_owner_pct" if row["dims"].get("age_group") == "total" else "original_owner_pct"),
+                              "original_source": row["row"].get("original_source"), "revision_published": row["row"].get("revision_published"),
+                              "original_published": row["row"].get("original_published")} if row["row"].get("revision") else {})})
     social = []
     if s.optional("social_rental_stock_pct"):
         for row in s.curated_rows("social_rental_stock_pct"):
@@ -374,6 +377,17 @@ def build(conn: sqlite3.Connection) -> dict:
         "ipc_rent_yoy": pts(annual(s.raw("ipc_alquiler_tasa_interanual")["ES"]), 1),
         "ipva_change_pct": {str(b): r((ipva[max(ipva)] / ipva[b] - 1) * 100, 1) for b in (2011, 2015, 2019) if b in ipva},
     }
+    # Base years for the rent headline: the first year of the IPVA (2011, a local high), its low, and 2019, for rents,
+    # wages and prices alike (Base year rule: the choice of start is visible).
+    ipva_last = max(ipva)
+    ipva_low = min((y for y in ipva if y < ipva_last), key=ipva.get)
+    rent_bases = sorted({min(ipva), ipva_low, 2019})
+    def since(series: dict[int, float], b: int) -> float | None:
+        return r((series[ipva_last] / series[b] - 1) * 100, 1) if b in series and ipva_last in series else None
+    rents["since"] = {
+        "last": ipva_last, "first": min(ipva), "low": ipva_low, "first_is_local_high": ipva[min(ipva)] > ipva[min(ipva) + 1] if min(ipva) + 1 in ipva else None,
+        "bases": [{"base": b, "rent": since(ipva, b), "wage": since(wage_all, b), "cpi": since(es_cpi, b)} for b in rent_bases],
+    }
 
     # 9. Competing drivers: credit, population and migration, household size, short-term rentals.
     pop = s.raw("demo_gind.JAN")
@@ -405,6 +419,8 @@ def build(conn: sqlite3.Connection) -> dict:
         "net_migration_per_1000": {geo: pts({int(p): v for p, v in migration.get(geo, {}).items()}, 1) for geo in PEERS_EUROSTAT},
         "population_growth_per_1000": {geo: pts({int(p): v for p, v in growth.get(geo, {}).items()}, 1) for geo in PEERS_EUROSTAT},
         "natural_growth_per_1000_es": pts({int(p): v for p, v in natural["ES"].items()}, 1),
+        # First year from which deaths have outnumbered births every year (natural growth below zero ever since).
+        "natural_negative_since": min((y for y in (int(p) for p in natural["ES"]) if all(v < 0 for p, v in natural["ES"].items() if int(p) >= y)), default=None),
         "population_es": pts(pop_es, 0),
         "household_size": {geo: pts({int(p): v for p, v in hh_size.get(geo, {}).items()}, 2) for geo in PEERS_EUROSTAT},
         "household_decomposition": decomposition,
@@ -540,6 +556,8 @@ def build(conn: sqlite3.Connection) -> dict:
         "appraisal_change_pct": {str(b): change(price_m2, b) for b in bases},
         "wage_change_pct": {str(b): change(wage_all, b) for b in bases if b in wage_all},
         "completed_per_household": [window(a, b) for a, b in windows],
+        # The 2000-2007 boom stated as computed multipliers (never «se dobló» for ×1.8), with what moved alongside it.
+        "boom": boom_block(years_ine_all, {y: home[y] / v for y, v in net_avg.items() if y in home}, annual(s.raw("credito_vivienda_hogares_pct_pib")["ES"]), rate, 2000, 2007),
     }
 
     # 13. Composition: the household-forming cohort (25-39) and what drives new households in each period.
@@ -721,6 +739,17 @@ def build(conn: sqlite3.Connection) -> dict:
         "norms": norms,
         "sources": sources,
     }
+
+
+def boom_block(gross_years: dict[int, float], net_years: dict[int, float], credit: dict[int, float], rate: dict[int, float],
+               a: int, b: int) -> dict:
+    span = [y for y in range(a, b + 1) if y in rate]
+    return {"from": a, "to": b,
+            "gross_from": r(gross_years.get(a)), "gross_to": r(gross_years.get(b)),
+            "gross_change_pct": r((gross_years[b] / gross_years[a] - 1) * 100, 0) if a in gross_years and b in gross_years else None,
+            "net_change_pct": r((net_years[b] / net_years[a] - 1) * 100, 0) if a in net_years and b in net_years else None,
+            "credit_from": r(credit.get(a), 1), "credit_to": r(credit.get(b), 1),
+            "rate_min": r(min(rate[y] for y in span), 1) if span else None, "rate_max": r(max(rate[y] for y in span), 1) if span else None}
 
 
 def split_tax(g_a: float, t_a: float, g_b: float, t_b: float) -> tuple[float, float]:

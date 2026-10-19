@@ -92,3 +92,10 @@ export const PEER_LEGEND = [
   { id: "ES", label: "España", color: C.blue },
   { id: "other", label: "País o media de comparación", color: C.ref },
 ];
+
+// «menos que» / «más que» / «al ritmo de»: compares a change with two others, within one point counts as the same pace.
+export function paceWord(value, ...others) {
+  if (others.every((o) => value < o - 1)) return "menos que";
+  if (others.every((o) => value > o + 1)) return "más que";
+  return "al ritmo de";
+}

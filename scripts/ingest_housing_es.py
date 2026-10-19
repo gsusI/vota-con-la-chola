@@ -1389,9 +1389,12 @@ def load_curated(conn: sqlite3.Connection, snapshot_date: str) -> dict[str, Any]
             for (sk, age), obs in sorted(young.items()):
                 if sk != source_key:
                     continue
-                unique = {o["period"]: o for o in obs}  # a wave reprinted in two rows keeps its own article's value (first)
-                for o in reversed(obs):
-                    unique.setdefault(o["period"], o)
+                # A wave the Banco de España later revised keeps the revised value (row flagged "revision"); the
+                # original stays in that row's original_* fields and the page notes it.
+                unique: dict[str, dict[str, Any]] = {}
+                for o in obs:
+                    if o["period"] not in unique or o["raw"].get("revision"):
+                        unique[o["period"]] = o
                 series.append(geo_series(f"young_ownership|{sk}|{age}", "ES", {"age_group": age}, sorted(unique.values(), key=lambda o: o["period"])))
             batches.append((long_path, curated_definition(f"owner_pct_by_age.{source_key}", "housing_long_run_es",
                                                           "Hogares con la vivienda principal en propiedad, por edad de la persona de referencia (%)", "PC", "% de hogares"),

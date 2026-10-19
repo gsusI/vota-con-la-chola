@@ -186,6 +186,7 @@ export function CensusStockFigure({ rows, source }) {
 
 export function YoungOwnershipFigure({ young, retrieved }) {
   if (!young?.length) return null;
+  const revised = young.filter((row) => row.revised && row.original_value != null);
   const groups = [...new Set(young.map((row) => row.age_group))];
   const ordered = [...groups.filter((g) => g !== "total"), ...groups.filter((g) => g === "total")];
   const colors = [C.blue, C.orange, C.aqua, C.yellow];
@@ -214,7 +215,7 @@ export function YoungOwnershipFigure({ young, retrieved }) {
       sources={sources}
       notes={[
         "La encuesta es de hogares: los jóvenes que siguen en casa de sus padres no forman hogar propio y no cuentan aquí, así que la caída infravalora el problema de acceso.",
-        "Cada ola se toma de su propio artículo del Banco de España; algunas se revisaron después (2011: 69,8 % en su artículo, 69,3 % en el de 2014). Edad de la persona de referencia (cabeza de familia).",
+        `Cada ola se toma de su propio artículo del Banco de España salvo cuando el banco la revisó después: entonces va el valor revisado más reciente${revised.length ? ` (${revised.map((row) => `${row.year}, ${row.age_group === "total" ? "todos los hogares" : "menores de 35"}: ${num(row.value)} % según la revisión publicada en ${row.revision_published}; ${num(row.original_value)} % en la publicación original, de ${row.original_published}`).join("; ")})` : ""}. Edad de la persona de referencia (cabeza de familia).`,
       ]}
       table={<HousingTable series={series} />}
     >

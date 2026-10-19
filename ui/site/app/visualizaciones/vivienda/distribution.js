@@ -19,7 +19,7 @@ export function CohortFigure({ composition, source }) {
   return (
     <Figure
       id="cohorte"
-      title={`La generación que forma hogares (25 a 39 años) pasó de ${num(peak.value / 1e6, 1)} millones en ${peak.year} a ${num(now.value / 1e6, 1)} en ${now.year}: el eco del baby boom ya no empuja la demanda; los hogares nuevos de ${dec[dec.length - 1].from}–${dec[dec.length - 1].to} salen en un ${num(share(dec[dec.length - 1]), 0)} % del aumento de población`}
+      title={`La generación que forma hogares (25 a 39 años) pasó de ${num(peak.value / 1e6, 1)} millones en ${peak.year} a ${num(now.value / 1e6, 1)} en ${now.year}: el eco del baby boom ya no aporta hogares nuevos; los de de ${dec[dec.length - 1].from}–${dec[dec.length - 1].to} salen en un ${num(share(dec[dec.length - 1]), 0)} % del aumento de población`}
       dek={`Los nacidos en el baby boom español (hasta mediados de los setenta) llenaron la franja de 25 a 39 años en los 2000, justo en la burbuja; desde ${peak.year} esa franja se encoge. Aun así se siguen formando hogares por dos vías que se separan abajo, en cuatro tramos: más población (sobre todo inmigración) o menos personas por hogar.`}
       legend={PEER_LEGEND}
       sources={[

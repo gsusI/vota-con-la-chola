@@ -9,7 +9,7 @@ import StoryFigure from "./StoryFigure";
 import WhoPaysFigure from "./segments";
 import { BurdenPeersFigure, CapacityFigure, MoneyFigure } from "./capacity";
 import { CohortFigure, DistributionFigure, TenantRegionFigure } from "./distribution";
-import { C, NAMES, PEER_LEGEND, PeerPanels, at, day, howMany, joinEs, millions, num, thousands } from "./common";
+import { C, NAMES, PEER_LEGEND, PeerPanels, at, day, howMany, joinEs, millions, num, paceWord, thousands } from "./common";
 import { Explain, Part, Verdict } from "./explain";
 import {
   HouseholdSizeFigure,
@@ -142,10 +142,10 @@ export default function ViviendaPage() {
   const yearsUp = h.years_last > years2000;
   const dec = data.drivers.household_decomposition;
   const rents = data.rents;
-  const rentYear = rents.ipva_idx.at(-1).year;
   const youngRows = ten.young.filter((row) => row.age_group === "<35");
   const youngPeak = youngRows.reduce((a, b) => (b.value > a.value ? b : a), youngRows[0] || { value: 0 });
   const youngLast = youngRows.at(-1);
+  const youngFirst = youngRows[0];
   const regionRows = data.regions.rows.filter((row) => row.ratio != null && !["ES63", "ES64"].includes(row.code));
   const regionWorst = [...regionRows].sort((a, b) => a.ratio - b.ratio).slice(0, 4);
   const regionSurplus = data.regions.rows.filter((row) => row.gap != null && row.gap <= 0 && !["ES63", "ES64"].includes(row.code)).concat(regionRows.filter((row) => row.ratio >= 1 && row.gap > 0));
@@ -250,9 +250,8 @@ export default function ViviendaPage() {
             {regionWorst.map((row) => `${row.name} (${num(row.ratio, 2)})`).join(", ")}.
           </li>
           <li>
-            <strong>La demanda reciente la empuja sobre todo la población:</strong> el aumento de población explica el{" "}
-            {joinEs(decs.map((d) => `${num((d.population_effect / d.total) * 100, 0)} % en ${d.from}–${d.to}`))} de los hogares nuevos; en España ese aumento viene de la
-            inmigración, porque la generación de 25 a 39 años, la que forma hogares, se encoge desde {cohortPeak.year}. El resto se debe a hogares más pequeños.
+            <strong>La mayoría de los hogares nuevos sale del aumento de población:</strong> es el{" "}
+            {joinEs(decs.map((d) => `${num((d.population_effect / d.total) * 100, 0)} % en ${d.from}–${d.to}`))} de los hogares nuevos (el resto, de hogares más pequeños){data.drivers.natural_negative_since ? `; desde ${data.drivers.natural_negative_since} mueren más personas de las que nacen, así que ese aumento viene de la inmigración` : ""}. No es la generación de 25 a 39 años, la que forma hogares, que se encoge desde {cohortPeak.year}.
           </li>
           <li>
             <strong>El gasto público en vivienda es el más bajo del grupo, y no por falta de ingresos:</strong> {num(spendLast("ES").total, 2)} % del PIB frente a{" "}
@@ -261,12 +260,12 @@ export default function ViviendaPage() {
           </li>
           <li>
             <strong>Quien más lo nota son los jóvenes:</strong> se emancipan a los {num(leaveEs.value)} años (UE: {num(leaveEu.value)}) y los hogares de menores de 35 propietarios de
-            su casa han pasado del {num(youngPeak.value)} % en {youngPeak.year} al {num(youngLast?.value)} % en {youngLast?.year}.
+            su casa han pasado del {num(youngPeak.value)} % en {youngPeak.year}, el máximo de la serie ({num(youngFirst?.value)} % en {youngFirst?.year}, la primera ola), al {num(youngLast?.value)} % en {youngLast?.year}.
           </li>
         </ol>
         <p>
-          Veredicto, en detalle en <a href="#conclusion">la conclusión</a>: la falta de construcción explica bien el encarecimiento de la última década, sobre todo donde menos se ha
-          construido ({joinEs(regionWorst.map((row) => row.name))}); no explica la burbuja de 2000–2007, que fue de crédito; y la segunda mitad de la hipótesis no se sostiene, porque el gasto público en vivienda sí es bajo.
+          Veredicto, en detalle en <a href="#conclusion">la conclusión</a>: la falta de construcción coincide con el encarecimiento de la última década, sobre todo donde menos se ha
+          construido ({joinEs(regionWorst.map((row) => row.name))}); no coincide con la burbuja de {B.boom.from}–{B.boom.to}, cuando se construía mucho y el crédito para vivienda pasó del {num(B.boom.credit_from)} % al {num(B.boom.credit_to)} % del PIB; y la segunda mitad de la hipótesis no se sostiene, porque el gasto público en vivienda sí es bajo. Coincidir en el tiempo no prueba la causa.
         </p>
         <ul className="hvToc" aria-label="Partes de la página">
           <li><a href="#el-dato">El dato frente al relato</a></li>
@@ -397,7 +396,7 @@ export default function ViviendaPage() {
           { id: "other", label: "País o media de comparación", color: C.ref },
         ]}
         sources={[source("oecd_dbnomics", "OCDE, Analytical house price indicators (réplica DBnomics)", "https://db.nomics.world/OECD/DSD_AN_HOUSE_PRICES@DF_HOUSE_PRICES")]}
-        notes={["La OCDE calcula la media de largo plazo con todos los años disponibles de cada país; un valor de 120 significa un 20 % por encima de esa media, no un 20 % más cara que otro país."]}
+        notes={["La OCDE calcula la media de largo plazo con todos los años disponibles de cada país; un valor de 120 significa un 20 % por encima de esa media, no un 20 % más cara que otro país.", "El agregado «OCDE» es el que publica la OCDE; la serie no dice qué países entran en él cada año, así que puede no ser el mismo grupo en todo el periodo. Los países, uno a uno, sí son comparables en el tiempo."]}
         table={<HousingTable series={["ESP", ...piPeers].map((geo) => ({ id: geo, label: NAMES[geo], points: data.peers_price_income[geo] || [], unit: "index" }))} />}
       >
         <PeerPanels
@@ -495,7 +494,7 @@ export default function ViviendaPage() {
       <Figure
         id="contra"
         title={`En contra de la hipótesis: entre ${boom.from} y ${boom.to} se terminaron ${num(boom.ratio, 2)} viviendas por cada hogar nuevo y aun así el piso pasó de ${num(years2000)} a ${num(years2007)} años de salario bruto medio`}
-        dek={`Durante la burbuja sobraban viviendas nuevas y los precios subieron más que nunca. Lo que sí cambió fue el crédito: el tipo de los préstamos para vivienda bajó del ${num(rateAt(1990), 1)} % en 1990 al ${num(rateAt(2005), 1)} % en 2005. La escasez de obra nueva no explica aquella subida; sí encaja con la de después de 2015, con tipos que volvieron a subir en 2023.`}
+        dek={`Durante la burbuja sobraban viviendas nuevas y aun así el precio en años de salario bruto medio subió un ${num(B.boom.gross_change_pct, 0)} % entre ${B.boom.from} y ${B.boom.to}. Lo que sí cambió a la vez fue el crédito: el tipo de los préstamos para vivienda bajó del ${num(rateAt(1990), 1)} % en 1990 al ${num(rateAt(2005), 1)} % en 2005. La escasez de obra nueva no coincide con aquella subida; sí con la de después de 2015, con tipos que volvieron a subir en 2023.`}
         legend={[
           { id: "years", label: "Años de salario bruto medio (INE)", color: C.blue },
           { id: "rate", label: "Tipo de interés de los préstamos para vivienda (%)", color: C.orange },
@@ -721,10 +720,9 @@ export default function ViviendaPage() {
             Desde 2019, {num(tdHead(2019)?.tax_part, 2)} de los {num(tdHead(2019)?.change, 2)} años más se deben a que el trabajador paga un tipo mayor de IRPF y cotizaciones; entre 2013 y 2019 el tipo bajó. En euros, el precio de compraventa ha subido un {num(B.sale_price_change_pct["2019"], 0)} % desde 2019
             y un {num(B.sale_price_change_pct["2007"], 0)} % desde 2007, y el salario medio un {num(B.wage_change_pct["2019"], 0)} % y un {num(B.wage_change_pct["2007"], 0)} %. Frente a otros países, la carga media de los hogares españoles no es excepcional (casi la mitad de la
             población vive en una vivienda propia ya pagada), pero la de los inquilinos a precio de mercado sí: el {num(tenantsEs)} % gasta más del 40 % de su renta en vivienda, frente al{" "}
-            {num(tenantsEu)} % en la UE. El alquiler medio
-            de todos los contratos, en cambio, ha subido al ritmo de salarios y precios ({num(rents.ipva_change_pct["2011"], 0)} % desde 2011 y {num(rents.ipva_change_pct["2019"], 0)} % desde
-            2019 hasta {rentYear}); lo que se ha
-            disparado son los contratos nuevos, que la estadística oficial no mide por separado.
+            {num(tenantsEu)} % en la UE. El alquiler declarado de todos los contratos vigentes subió hasta {rents.since.last}{" "}
+            {rents.since.bases.map((b) => `un ${num(b.rent, 0)} % desde ${b.base} (${paceWord(b.rent, b.wage, b.cpi)} salarios y precios: ${num(b.wage, 0)} % y ${num(b.cpi, 0)} %)`).join(", ")};{" "}
+            {rents.since.first} es el primer año de la serie{rents.since.first_is_local_high ? " y un máximo" : ""}, y {rents.since.low} su mínimo. El precio de los contratos nuevos, el que paga quien busca piso hoy, no lo publica la estadística oficial por separado.
           </li>
           <li>
             <Verdict kind="partly" />
@@ -735,11 +733,12 @@ export default function ViviendaPage() {
           </li>
           <li>
             <Verdict kind="partly" />
-            <strong>«Sobre todo» por eso.</strong> La escasez explica el ciclo posterior a 2015, pero no el de 2000–2007, cuando se construyeron {num(boom.ratio, 2)} viviendas por hogar
-            nuevo y aun así el precio se dobló en años de salario: entonces mandaba el crédito: el saldo de préstamos para comprar vivienda pasó del {num(at(credit, 2000))} % del PIB en 2000 al{" "}
-            {num(at(credit, 2007))} % en 2007, con tipos del 3–5 %.
-            La demanda actual tiene causas propias que estos datos sí miden: no es el eco del baby boom (la generación de 25 a 39 años se encoge desde {cohortPeak.year}), sino la inmigración
-            (el {num((decLast.population_effect / decLast.total) * 100, 0)} % de los hogares nuevos de {decLast.from}–{decLast.to} se explica por más población) y, antes, los hogares más pequeños. Los pisos turísticos pesan poco en el total ({num(data.regions.tourist_es, 2)} % del parque), pero mucho en algunas
+            <strong>«Sobre todo» por eso.</strong> La escasez coincide con el ciclo posterior a 2015, pero no con el de {B.boom.from}–{B.boom.to}, cuando se construyeron {num(boom.ratio, 2)} viviendas por hogar
+            nuevo ({boom.from}–{boom.to}) y aun así el precio en años de salario bruto medio subió un {num(B.boom.gross_change_pct, 0)} % (de {num(B.boom.gross_from)} a {num(B.boom.gross_to)}; con el neto medio, un{" "}
+            {num(B.boom.net_change_pct, 0)} %). A la vez, el saldo de préstamos para comprar vivienda pasó del {num(B.boom.credit_from)} % del PIB en {B.boom.from} al {num(B.boom.credit_to)} % en {B.boom.to}, con el tipo
+            hipotecario entre el {num(B.boom.rate_min)} % y el {num(B.boom.rate_max)} %. Que el crédito y el precio subieran juntos no prueba que uno causara el otro.
+            De dónde salen los hogares nuevos de ahora sí lo miden estos datos: no del eco del baby boom (la generación de 25 a 39 años se encoge desde {cohortPeak.year}), sino del aumento de población, que viene de la inmigración
+            (el {num((decLast.population_effect / decLast.total) * 100, 0)} % de los hogares nuevos de {decLast.from}–{decLast.to}), y antes de hogares más pequeños. Los pisos turísticos pesan poco en el total ({num(data.regions.tourist_es, 2)} % del parque), pero mucho en algunas
             comunidades y barrios. Repartir el encarecimiento entre estas causas exige un modelo que esta página no hace.
           </li>
           <li>
