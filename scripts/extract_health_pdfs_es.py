@@ -234,6 +234,67 @@ def egsp() -> dict:
     raise SystemExit("egsp: per-inhabitant regional table not found")
 
 
+EGSP_STRUCTURE = {
+    "economica": ["Remuneración del personal", "Consumo intermedio", "Consumo de capital fijo", "Conciertos",
+                  "Transferencias corrientes", "Gasto de capital", "GASTO TOTAL SECTORES", "TOTAL CONSOLIDADO"],
+    "funcional": ["Servicios hospitalarios y especializados", "Servicios primarios de salud", "Servicios de salud pública",
+                  "Servicios colectivos de salud", "Farmacia", "Traslado, protesis y ap. terapéuticos", "Gasto de capital",
+                  "TOTAL CONSOLIDADO"],
+}
+
+
+def egsp_structure() -> dict:
+    """National consolidated public health spending by economic and functional classification, 2002-2024 (thousand €)."""
+    meta = json.loads(EGSP_PDF.with_name(EGSP_PDF.name + ".meta.json").read_text(encoding="utf-8"))
+    pages = pages_of(EGSP_PDF)
+    for number, page in enumerate(pages, start=1):
+        if "CLASIFICACIÓN ECONÓMICO-PRESUPUESTARIA" not in page or "CLASIFICACIÓN FUNCIONAL" not in page:
+            continue
+        lines = page.splitlines()
+        header = next(line for line in lines if re.match(r"^\s*2002\s+2003", line))
+        years = [int(y) for y in re.findall(r"(\d{4})", header)][:23]
+        out = {"economica": [], "funcional": []}
+        section = None
+        for line in lines:
+            if "CLASIFICACIÓN ECONÓMICO-PRESUPUESTARIA" in line:
+                section = "economica"
+                continue
+            if "CLASIFICACIÓN FUNCIONAL" in line:
+                section = "funcional"
+                continue
+            if "AGREGADOS DE CONTABILIDAD" in line:
+                section = None
+            if section is None:
+                continue
+            label = next((k for k in EGSP_STRUCTURE[section] if line.strip().startswith(k)), None)
+            if not label:
+                continue
+            values = re.findall(r"\d{1,3}(?:\.\d{3})+|\d+", line[line.index(label) + len(label):])[: len(years)]
+            if len(values) != len(years):
+                raise SystemExit(f"egsp structure: {label}: {len(values)} values")
+            out[section].append({"label": label, "page": number, "quote": squash(line)[:160],
+                                 "values": {str(y): as_int(v) for y, v in zip(years, values)}})
+        for section, rows in out.items():
+            # Economic items add up to the sum of sectors (before removing transfers between them); functions add up
+            # to the consolidated total.
+            total = next(r for r in rows if r["label"] == ("GASTO TOTAL SECTORES" if section == "economica" else "TOTAL CONSOLIDADO"))
+            parts = [r for r in rows if r["label"] not in ("TOTAL CONSOLIDADO", "GASTO TOTAL SECTORES")]
+            for y in map(str, years):
+                gap = abs(sum(r["values"][y] for r in parts) - total["values"][y])
+                if gap > 5:  # thousand euros of rounding
+                    raise SystemExit(f"egsp structure: {section} {y} parts do not add up ({gap})")
+        return {
+            "source": {
+                "name": "Ministerio de Sanidad - EGSP 2002-2024, gasto sanitario público consolidado por clasificación económica y funcional",
+                "page": EGSP_PAGE, "url": meta["url"], "retrieved_at": meta["retrieved_at"],
+                "sha256": hashlib.sha256(EGSP_PDF.read_bytes()).hexdigest(), "file": EGSP_PDF.name,
+                "unit": "miles de euros corrientes", "method": "scripts/extract_health_pdfs_es.py: pdftotext -layout; each row checked against the TOTAL CONSOLIDADO row",
+            },
+            **out,
+        }
+    raise SystemExit("egsp structure: page not found")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--out", type=Path, default=OUT)
@@ -290,6 +351,9 @@ def main() -> int:
         spend = egsp()
         EGSP_OUT.write_text(json.dumps(spend, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
         print(f"egsp: {len(spend['rows'])} regions")
+        structure = egsp_structure()
+        (EGSP_OUT.parent / "egsp_estructura.json").write_text(json.dumps(structure, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+        print(f"egsp structure: {len(structure['economica'])} economic, {len(structure['funcional'])} functional rows")
     return 0
 
 

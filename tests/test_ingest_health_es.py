@@ -169,6 +169,26 @@ class IngestHealthTest(unittest.TestCase):
             self.assertGreater(row["x0"], 0)
         self.assertEqual(regions["days_up"], sum(1 for x in regions["rows"] if x["y"] > x["y0"]))
 
+    def test_published_patient_and_money_sections(self) -> None:
+        data = json.loads((Path(__file__).resolve().parents[1] / "ui/site/public/visualizaciones/data/sanidad.json").read_text(encoding="utf-8"))
+        dental = data["patient"]["dental_cost"]
+        self.assertGreaterEqual(dental["of"], 25)
+        es = next(row for row in dental["rows"] if row["code"] == "ES")
+        self.assertGreater(es["poor"], es["rich"])
+        shares = data["money"]["functional_shares"]
+        last = data["money"]["last"]
+        total = sum(next(p["value"] for p in pts if p["year"] == last) for pts in shares.values())
+        self.assertAlmostEqual(total, 100.0, delta=0.6)  # shares of the consolidated total, rounded to one decimal
+        self.assertIn("doctors_in_spain", data["pay"]["doctors_abroad"])
+
+    def test_curated_egsp_structure_adds_up(self) -> None:
+        data = json.loads((ingest.MANUAL_DIR / "egsp_estructura.json").read_text(encoding="utf-8"))
+        for section, total_label in (("economica", "GASTO TOTAL SECTORES"), ("funcional", "TOTAL CONSOLIDADO")):
+            total = next(r for r in data[section] if r["label"] == total_label)["values"]
+            parts = [r for r in data[section] if r["label"] not in ("TOTAL CONSOLIDADO", "GASTO TOTAL SECTORES")]
+            for year, value in total.items():
+                self.assertLessEqual(abs(sum(r["values"][year] for r in parts) - value), 5, (section, year))
+
 
 if __name__ == "__main__":
     unittest.main()

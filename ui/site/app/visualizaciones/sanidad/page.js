@@ -7,6 +7,7 @@ import { formatHealth } from "./format.mjs";
 import Explain from "./Explain";
 import Scatter from "./Scatter";
 import ConnectedScatter from "./ConnectedScatter";
+import Dumbbell from "./Dumbbell";
 
 export const metadata = {
   title: "Sanidad en España: esperanza de vida, gasto y listas de espera | Vota Con La Chola",
@@ -327,6 +328,66 @@ export default function SanidadPage() {
   const selected = wait.national_selected_days.filter((p) => p.date.endsWith("-12-31")).map((p) => ({ year: Number(p.date.slice(0, 4)), value: p.value }));
   const selectedChange = pctChange(wH.selected_days[0], wH.selected_days[1]);
 
+  // 14. Patient's side (capacity lens), where the money goes, pay and migration
+  const pat = data.patient;
+  const oopShare = pat.oop_share_household_consumption;
+  const oopShareYear = oopShare.ES.at(-1).year;
+  const oopShareEs = at(oopShare.ES, oopShareYear);
+  const oopShareEu = at(oopShare.EU27_2020, oopShareYear);
+  const oopShareSeries = [
+    ...["DE", "FR", "IT", "PT"].map((geo) => ({ id: geo, label: NAMES[geo], color: C.peer, points: oopShare[geo] || [] })),
+    { id: "EU27", label: "Media UE-27", color: C.ref, points: oopShare.EU27_2020 },
+    { id: "ES", label: "España", color: C.blue, emphasis: true, points: oopShare.ES },
+  ];
+  const oopPpsRows = Object.entries(pat.oop_pps_per_person)
+    .map(([geo, v]) => ({ code: geo, name: NAMES[geo], value: v.value, color: geo === "EU27_2020" ? C.ref : undefined }))
+    .sort((a, b) => b.value - a.value);
+  const dental = pat.dental_cost;
+  const dentalEs = dental.rows.find((row) => row.code === "ES");
+  const dentalEu = dental.rows.find((row) => row.code === "EU27_2020");
+  const dentalPeak = pat.dental_cost.spain_q1.ES.reduce((best, p) => (p.value > best.value ? p : best), pat.dental_cost.spain_q1.ES[0]);
+  const medWait = pat.medical.WLIST;
+  const medWaitEs = medWait.ES.at(-1);
+  const medWait2018 = at(medWait.ES, 2018);
+  const medAll = pat.medical.TXP_TFAR_WLIST;
+  const cata = pat.catastrophic_10.ESP || [];
+  const cataLast = cata.at(-1);
+  const medWaitSeries = [
+    { id: "EU27", label: "Media UE-27", color: C.ref, points: medWait.EU27_2020 },
+    { id: "ES", label: "España", color: C.blue, emphasis: true, points: medWait.ES },
+  ];
+  const money = data.money;
+  const fs = money.functional_shares;
+  const funcSeries = [
+    { id: "hosp", label: "Hospitales y especializada", shortLabel: "Hospital", color: C.blue, emphasis: true, points: fs["Servicios hospitalarios y especializados"] },
+    { id: "prim", label: "Atención primaria", shortLabel: "Primaria", color: C.orange, emphasis: true, points: fs["Servicios primarios de salud"] },
+    { id: "farm", label: "Farmacia (recetas)", shortLabel: "Farmacia", color: C.aqua, points: fs["Farmacia"] },
+    { id: "pub", label: "Salud pública", shortLabel: "Salud pública", color: C.yellow, points: fs["Servicios de salud pública"] },
+  ];
+  const fLast = (label) => fs[label].at(-1).value;
+  const fFirst = (label) => fs[label][0].value;
+  const growth = money.real_growth_2009;
+  const growthRows = [
+    { code: "hosp", name: "Hospitales y especializada", value: growth["Servicios hospitalarios y especializados"] },
+    { code: "tot", name: "Total", value: growth["TOTAL CONSOLIDADO"] },
+    { code: "prim", name: "Atención primaria", value: growth["Servicios primarios de salud"] },
+    { code: "farm", name: "Farmacia", value: growth["Farmacia"] },
+  ];
+  const es = money.economic_shares;
+  const staffShare = es["Remuneración del personal"].at(-1).value;
+  const conciertos = es["Conciertos"].at(-1).value;
+  const provRows = (key) =>
+    money.providers.map((row) => ({ code: row.code, name: `${NAMES[row.code]} (${row.year})`, value: row[key], color: row.code === "EU27_2020" ? C.ref : undefined }))
+      .sort((a, b) => b.value - a.value);
+  const provEs = money.providers.find((row) => row.code === "ES");
+  const provEu = money.providers.find((row) => row.code === "EU27_2020");
+  const pay = data.pay;
+  const payRows = (prof) => pay.pay[prof].map((x) => ({ code: x.code, name: `${x.name} (${x.year})`, value: x.ratio }));
+  const nurseEs = pay.pay.RINF.find((x) => x.code === "ESP");
+  const specEs = pay.pay.EMPLSPMP.find((x) => x.code === "ESP");
+  const specDe = pay.pay.EMPLSPMP.find((x) => x.code === "DEU");
+  const abroad = pay.doctors_abroad;
+
   // 13. «El dato mata el relato»
   const story = data.data_vs_story;
 
@@ -364,7 +425,7 @@ export default function SanidadPage() {
             <strong>Con menos gasto público que la media, no con un gasto medio.</strong> {num(spH.pct_gdp_es)} % del PIB frente a {num(spH.pct_gdp_eu27)} % en la UE; por habitante, un {num(ppsRatio, 0)} % de la media europea. Los hogares pagan de su bolsillo el {num(oopEs)} % del gasto ({num(oopEu)} % en la UE).
           </li>
           <li>
-            <strong>Cada vez más gente espera.</strong> Desde {sinceLabel}, los pacientes en lista para operarse por 1.000 habitantes suben un {num(surgeryRateChange, 0)} % y los que esperan al especialista un {num(consultRateChange, 0)} %. Siete de cada diez pacientes no consiguen cita con su médico de familia para el mismo día o el siguiente ({num(noSlotLast.value, 0)} % por falta de hueco, {pcLast.year}).
+            <strong>Cada vez más gente espera.</strong> Desde {sinceLabel}, los pacientes en lista para operarse por 1.000 habitantes suben un {num(surgeryRateChange, 0)} % y los que esperan al especialista un {num(consultRateChange, 0)} %. Desde 2009 el gasto real en hospitales sube un {num(growth["Servicios hospitalarios y especializados"], 0)} % y el de atención primaria un {num(growth["Servicios primarios de salud"], 0)} %. Siete de cada diez pacientes no consiguen cita con su médico de familia para el mismo día o el siguiente ({num(noSlotLast.value, 0)} % por falta de hueco, {pcLast.year}).
           </li>
           <li>
             <strong>La espera media general para operarse no sube, pero la de las operaciones más comunes sí.</strong> La media de toda la lista pasa de {num(wH.surgery_days[0], 0)} a {num(wH.surgery_days[1], 0)} días; la de los procesos más frecuentes (cataratas, prótesis, hernias…) de {num(wH.selected_days[0], 0)} a {num(wH.selected_days[1], 0)} días (+{num(selectedChange, 0)} %).
@@ -374,7 +435,7 @@ export default function SanidadPage() {
           </li>
         </ol>
         <p>
-          Índice: <a href="#el-dato-mata-el-relato">el dato frente al relato</a> · <a href="#esperanza-de-vida">esperanza de vida</a> · <a href="#salud-y-mortalidad">vida saludable y mortalidad evitable</a> · <a href="#envejecimiento">envejecimiento</a> · <a href="#gasto-pib">gasto</a> · <a href="#pago-directo">bolsillo y seguros</a> · <a href="#listas-quirurgicas">listas de espera</a> · <a href="#operaciones">operaciones concretas</a> · <a href="#consultas">especialista</a> · <a href="#atencion-primaria">médico de familia</a> · <a href="#percepcion">opinión</a> · <a href="#medicos">médicos</a> · <a href="#enfermeras">enfermeras</a> · <a href="#comunidades">comunidades</a> · <a href="#conclusion">conclusión</a> · <a href="#glosario">glosario</a>
+          Índice: <a href="#el-dato-mata-el-relato">el dato frente al relato</a> · <a href="#esperanza-de-vida">esperanza de vida</a> · <a href="#salud-y-mortalidad">vida saludable y mortalidad evitable</a> · <a href="#envejecimiento">envejecimiento</a> · <a href="#gasto-pib">gasto</a> · <a href="#pago-directo">bolsillo y seguros</a> · <a href="#lo-que-paga-el-paciente">lo que paga el paciente</a> · <a href="#a-donde-va-el-dinero">a dónde va el dinero</a> · <a href="#listas-quirurgicas">listas de espera</a> · <a href="#operaciones">operaciones concretas</a> · <a href="#consultas">especialista</a> · <a href="#atencion-primaria">médico de familia</a> · <a href="#percepcion">opinión</a> · <a href="#medicos">médicos</a> · <a href="#enfermeras">enfermeras</a> · <a href="#sueldos-y-emigracion">sueldos y emigración</a> · <a href="#comunidades">comunidades</a> · <a href="#conclusion">conclusión</a> · <a href="#glosario">glosario</a>
         </p>
       </section>
 
@@ -478,9 +539,22 @@ export default function SanidadPage() {
           sizeLabel="Tamaño: pacientes por 1.000 habitantes"
           ariaLabel="Comunidades autónomas: gasto real por habitante frente a días de espera, de 2018 a 2024"
         />
+        <h3 className="vizPanelTitle">
+          3. Lo que la sanidad pública no cubre: renuncian al dentista por no poder pagarlo, {story.dental.year}
+          <span>% del quintil de ingresos más bajo (naranja) y más alto (verde)</span>
+        </h3>
+        <Dumbbell
+          rows={story.dental.rows}
+          leftKey="poor"
+          rightKey="rich"
+          leftLabel="20 % con menos ingresos"
+          rightLabel="20 % con más ingresos"
+          highlight={["ES"]}
+          ariaLabel="Necesidad dental no atendida por coste, quintiles de ingresos extremos, España y comparables"
+        />
         <section aria-label="Qué relatos zanja este gráfico" style={{ display: "grid", gap: 6, marginTop: 8 }}>
           <p style={{ margin: 0 }}>
-            <strong>«Tenemos la mejor sanidad del mundo».</strong> En resultados, casi: pocas muertes evitables con poco dinero. En acceso, no: las esperas crecen en casi todas las comunidades.
+            <strong>«Tenemos la mejor sanidad del mundo».</strong> En resultados, casi: pocas muertes evitables con poco dinero. En acceso, no: las esperas crecen en casi todas las comunidades, y lo que la sanidad pública no cubre, como el dentista, deja fuera al {num(story.dental.rows.find((row) => row.code === "ES").poor)} % de los más pobres.
           </p>
           <p style={{ margin: 0 }}>
             <strong>«La sanidad se hunde por los recortes».</strong> Los recortes fueron reales en 2010–2013 (ver el gasto por habitante), pero entre {story.regions.from} y {story.regions.to} el gasto real subió en las {story.regions.spend_up} comunidades y la espera subió en {story.regions.days_up} de ellas: el problema de acceso de estos años no se explica por menos dinero.
@@ -782,6 +856,134 @@ export default function SanidadPage() {
         <p className="vizFigure__dek">
           En España casi todo el seguro privado es «duplicado»: se paga además de la cobertura pública, sobre todo para esperar menos y elegir médico ({num(ins.duplicate_esp.at(-1)?.value)} % de la población en {ins.duplicate_esp.at(-1)?.year}). La OCDE solo publica este dato para España cada tres años y hasta {vhiEs.at(-1).year}. Alemania y Francia no se comparan aquí porque allí el seguro privado cumple otra función (sustituye o completa al público) y sus series tienen rupturas.
         </p>
+      </Figure>
+
+      <Figure
+        id="lo-que-paga-el-paciente"
+        title={`Medido contra lo que gastan los hogares, la sanidad que pagan de su bolsillo pesa más en España (${num(oopShareEs)} % de su consumo) que en la UE (${num(oopShareEu)} %); y el ${num(dentalEs.poor)} % del 20 % más pobre deja de ir al dentista por no poder pagarlo, frente al ${num(dentalEs.rich)} % del más rico`}
+        dek={`El porcentaje del gasto sanitario que pagan los hogares (arriba, ${num(oopEs)} %) no dice cuánto les pesa. Aquí se mide contra su capacidad: lo que gastan en consumo y por persona en poder de compra (${formatHealth(pat.oop_pps_per_person.ES.value, "count")} PPS frente a ${formatHealth(pat.oop_pps_per_person.EU27_2020.value, "count")} en la UE). El dentista casi no está en la sanidad pública: España es el ${dental.spain_rank}.º país de ${dental.of} de la UE donde más personas pobres renuncian a él por coste (máximo del ${num(dentalPeak.value)} % en ${dentalPeak.year}). En atención médica la renuncia es baja (${num(medAll.ES.at(-1).value)} %), pero la causada por listas de espera ha pasado del ${num(medWait2018)} % en 2018 al ${num(medWaitEs.value)} % en ${medWaitEs.year}.`}
+        legend={[
+          { id: "ES", label: "España", color: C.blue },
+          { id: "eu", label: "Media UE-27", color: C.ref },
+          { id: "peer", label: "Alemania, Francia, Italia y Portugal", color: C.peer },
+        ]}
+        sources={[S.eurostat, { label: `OMS, gasto catastrófico${retrieved("who_gho")}`, href: src.who_gho.page }]}
+        notes={[
+          "Bolsillo: gasto sanitario de los hogares (régimen HF3) dividido por su gasto en consumo final (contabilidad nacional); la OMS y la OCDE usan el consumo como medida de capacidad de pago. Por persona y no por hogar porque el tamaño medio del hogar cambia entre países.",
+          `Necesidades no atendidas: encuesta EU-SILC a mayores de 16 años; «por coste» es la respuesta «demasiado caro». Gasto catastrófico (OMS, ODS 3.8.2): ${cataLast ? `${num(cataLast.value)} % de la población gastaba en sanidad más del 10 % de su presupuesto en ${cataLast.year}` : "sin dato"}; para Alemania, Italia y Portugal solo hay años sueltos y antiguos, y Francia no tiene dato, así que no se comparan.`,
+        ]}
+        table={
+          <HealthTable
+            series={[
+              ...oopShareSeries.map((s) => ({ ...s, id: `o-${s.id}`, label: `${s.label}: bolsillo, % del consumo`, digits: 2 })),
+              ...medWaitSeries.map((s) => ({ ...s, id: `w-${s.id}`, label: `${s.label}: renuncia médica por lista de espera, %` })),
+              { id: "cata", label: "España: gasto catastrófico (>10 %), % de la población", digits: 2, points: cata },
+            ]}
+          />
+        }
+      >
+        <Explain
+          shows="Cuánto pesa en los hogares lo que pagan de su bolsillo por la sanidad y quién deja de recibir atención por coste, distancia o listas de espera."
+          read="Arriba, más alto es más carga para los hogares. En las mancuernas, el punto naranja es el 20 % con menos ingresos y el verde el 20 % con más: cuanto más separados, más desigual el acceso."
+          not="No dice si ese gasto es por necesidad o por preferencia (evitar una espera, elegir médico), ni cuánta gente ni siquiera intenta ir. Son respuestas de encuesta."
+        />
+        <div className="vizMultiples">
+          <div>
+            <h3 className="vizPanelTitle">
+              Gasto de bolsillo en sanidad, % del consumo de los hogares
+              <span>{oopShare.ES[0].year}–{oopShareYear}</span>
+            </h3>
+            <HealthChart series={oopShareSeries} xMin={oopShare.ES[0].year} xMax={oopShareYear} height={230} ariaLabel="Gasto sanitario de bolsillo en porcentaje del consumo de los hogares" />
+          </div>
+          <div>
+            <h3 className="vizPanelTitle">
+              Gasto de bolsillo por persona
+              <span>Estándar de poder de compra, {pat.oop_pps_per_person.ES.year}</span>
+            </h3>
+            <Bars rows={oopPpsRows} unit="count" highlight="ES" label="Gasto sanitario de bolsillo por persona" />
+            <h3 className="vizPanelTitle" style={{ marginTop: 12 }}>
+              Renuncian a atención médica por la lista de espera
+              <span>% de la población</span>
+            </h3>
+            <HealthChart series={splitAtBreaks(medWaitSeries)} xMin={2008} xMax={medWaitEs.year} height={170} ariaLabel="Necesidad médica no atendida por lista de espera" />
+          </div>
+        </div>
+        <h3 className="vizPanelTitle">
+          Renuncian al dentista por no poder pagarlo, {dental.year}
+          <span>% de los mayores de 16 años en el quintil de ingresos más bajo y en el más alto; los {dental.of} países de la UE</span>
+        </h3>
+        <Dumbbell
+          rows={dental.rows}
+          leftKey="poor"
+          rightKey="rich"
+          leftLabel="20 % con menos ingresos"
+          rightLabel="20 % con más ingresos"
+          highlight={["ES"]}
+          ariaLabel="Necesidad dental no atendida por coste en los quintiles de ingresos más bajo y más alto, países de la UE"
+        />
+      </Figure>
+
+      <Figure
+        id="a-donde-va-el-dinero"
+        title={`El dinero público de la sanidad se ha ido al hospital: desde 2009 el gasto real en hospitales sube un ${num(growth["Servicios hospitalarios y especializados"], 0)} % y el de atención primaria solo un ${num(growth["Servicios primarios de salud"], 0)} %; los hospitales se llevan el ${num(provEs.HP1, 0)} % del gasto público, como en Italia y Portugal y frente al ${num(provEu.HP1, 0)} % en la UE`}
+        dek={`Según la Estadística de Gasto Sanitario Público, los hospitales y la atención especializada pasan del ${num(fFirst("Servicios hospitalarios y especializados"))} % del gasto en 2002 al ${num(fLast("Servicios hospitalarios y especializados"))} % en ${money.last}; la atención primaria, del ${num(fFirst("Servicios primarios de salud"))} % al ${num(fLast("Servicios primarios de salud"))} %; la farmacia de receta, del ${num(fFirst("Farmacia"))} % al ${num(fLast("Farmacia"))} %. Es la otra cara de las esperas del médico de familia: el ${num(quickLast.value, 0)} % consigue cita en el día o al siguiente con un presupuesto de primaria que en términos reales apenas crece. El ${num(staffShare, 0)} % del gasto (antes de consolidar) son sueldos del personal y el ${num(conciertos, 0)} %, conciertos con centros privados.`}
+        legend={funcSeries}
+        sources={[S.egsp, S.eurostat, S.oecd]}
+        notes={[
+          `Funciones: EGSP, total consolidado; ${money.last - 1} y ${money.last} son provisionales. Crecimiento real ${2009}–${money.last} deflactado con el índice de precios que la OCDE aplica al gasto sanitario español.`,
+          "Proveedores (comparación entre países): Eurostat, gasto público y obligatorio (HF1) por proveedor. «Hospitales» incluye las consultas externas de especialistas que en España se hacen en el hospital; «ambulatorios» incluye centros de salud, consultas médicas y dentistas. En países donde el especialista trabaja fuera del hospital (Alemania) la comparación exagera la diferencia.",
+          "Sueldos y conciertos: clasificación económica de la EGSP sobre la suma de sectores.",
+        ]}
+        table={
+          <HealthTable
+            series={[
+              ...funcSeries.map((s) => ({ ...s, label: `${s.label}, % del gasto público` })),
+              { id: "staff", label: "Sueldos del personal, %", points: es["Remuneración del personal"] },
+              { id: "conc", label: "Conciertos, %", points: es["Conciertos"] },
+            ]}
+          />
+        }
+      >
+        <Explain
+          shows="En qué se gasta el dinero público de la sanidad (hospital, primaria, farmacia, salud pública; sueldos y conciertos) y cómo ha cambiado desde 2002, con la comparación por proveedor frente a la UE."
+          read="Las líneas son porcentajes del total: si una sube, otra baja. Las barras de crecimiento descuentan la inflación."
+          not="No dice qué parte del gasto del hospital es en realidad atención especializada ambulatoria, ni si cada euro rinde igual en cada sitio. Las clasificaciones de cada país no son idénticas."
+        />
+        <div className="vizMultiples">
+          <div>
+            <h3 className="vizPanelTitle">
+              Reparto del gasto sanitario público, España
+              <span>% del total consolidado, 2002–{money.last}</span>
+            </h3>
+            <HealthChart series={funcSeries} xMin={2002} xMax={money.last} yMax={70} height={250} ariaLabel="Reparto funcional del gasto sanitario público en España" />
+          </div>
+          <div>
+            <h3 className="vizPanelTitle">
+              Crecimiento real del gasto desde 2009
+              <span>% en euros constantes, 2009–{money.last}</span>
+            </h3>
+            <Bars rows={growthRows.filter((row) => row.value >= 0)} unit="pct" digits={1} label="Crecimiento real del gasto por función" />
+            <p className="vizFigure__dek" style={{ marginTop: 6 }}>
+              Farmacia: {num(growth["Farmacia"])} %; cae sobre todo entre 2010 y 2013, con las rebajas de precios y el copago de 2012.
+            </p>
+          </div>
+        </div>
+        <div className="vizMultiples">
+          <div>
+            <h3 className="vizPanelTitle">
+              Gasto público que va a hospitales
+              <span>% del gasto público corriente; último año</span>
+            </h3>
+            <Bars rows={provRows("HP1")} unit="pct" digits={1} highlight="ES" max={100} label="Gasto público en hospitales" />
+          </div>
+          <div>
+            <h3 className="vizPanelTitle">
+              Gasto público en proveedores ambulatorios
+              <span>Centros de salud, consultas y dentistas; % del gasto público corriente</span>
+            </h3>
+            <Bars rows={provRows("HP3")} unit="pct" digits={1} highlight="ES" max={100} label="Gasto público en proveedores ambulatorios" />
+          </div>
+        </div>
       </Figure>
 
       <h2 style={{ margin: "26px 4px 0", fontSize: "1.3rem" }}>3. Acceso</h2>
@@ -1094,6 +1296,51 @@ export default function SanidadPage() {
         </div>
       </Figure>
 
+      <Figure
+        id="sueldos-y-emigracion"
+        title={`Una enfermera de hospital gana en España ${num(nurseEs.ratio, 2)} veces el salario medio, más que en Alemania, Francia o Italia; un especialista, ${num(specEs.ratio, 2)} veces, menos que en Alemania (${num(specDe.ratio, 2)})`}
+        dek={`Comparar sueldos en euros engaña porque los salarios del país son distintos: aquí se miden en veces el salario medio de cada país. Al menos ${formatHealth(abroad.total, "count")} médicos formados en España trabajan en otros países de la OCDE según sus registros (años distintos), frente a ${formatHealth(abroad.doctors_in_spain.value, "count")} médicos en España (${abroad.doctors_in_spain.year}, Eurostat).`}
+        sources={[S.oecd]}
+        notes={[
+          "Retribución bruta anual de asalariados según la OCDE (DBnomics). Cada país incluye conceptos distintos (guardias, complementos, dedicación exclusiva); para Alemania no hay dato de médicos de familia asalariados.",
+          "Médicos formados en España en el extranjero: suma de los registros de cada país de destino, con su último año disponible (Portugal 2017, Estados Unidos 2016). Incluye a extranjeros que estudiaron en España y volvieron; no es una medida de emigración neta.",
+        ]}
+        table={
+          <HealthTable
+            periodLabel="País"
+            keyOf={(p) => p.key}
+            labelOf={(k) => k}
+            unit="ratio"
+            digits={2}
+            series={[
+              { id: "g", label: "Médicos de familia", points: pay.pay.EMPLGENP.map((x) => ({ key: x.name, value: x.ratio })) },
+              { id: "s", label: "Especialistas", points: pay.pay.EMPLSPMP.map((x) => ({ key: x.name, value: x.ratio })) },
+              { id: "n", label: "Enfermeras de hospital", points: pay.pay.RINF.map((x) => ({ key: x.name, value: x.ratio })) },
+            ]}
+          />
+        }
+      >
+        <Explain
+          shows="Cuánto cobran médicos y enfermeras en relación con el salario medio de su país y cuántos médicos formados en España trabajan fuera."
+          read="Una barra de 2 significa el doble del sueldo medio del país. Más largo, mejor pagado en términos relativos."
+          not="No incluye la carga de trabajo, las guardias ni la temporalidad, que es otra razón para irse; los datos de emigración son incompletos y de años distintos."
+        />
+        <div className="vizMultiples">
+          <div>
+            <h3 className="vizPanelTitle">Especialistas<span>Veces el salario medio anual</span></h3>
+            <Bars rows={payRows("EMPLSPMP")} unit="ratio" digits={2} highlight="ESP" label="Retribución de especialistas" />
+          </div>
+          <div>
+            <h3 className="vizPanelTitle">Enfermeras de hospital<span>Veces el salario medio anual</span></h3>
+            <Bars rows={payRows("RINF")} unit="ratio" digits={2} highlight="ESP" label="Retribución de enfermeras" />
+          </div>
+          <div>
+            <h3 className="vizPanelTitle">Médicos formados en España en otros países<span>Último año de cada destino</span></h3>
+            <Bars rows={abroad.rows.slice(0, 8).map((x) => ({ code: x.code, name: `${x.name} (${x.year})`, value: x.value }))} unit="count" label="Médicos formados en España que trabajan en otros países" />
+          </div>
+        </div>
+      </Figure>
+
       <h2 style={{ margin: "26px 4px 0", fontSize: "1.3rem" }}>5. Comunidades autónomas</h2>
       <p style={{ margin: "0 4px", color: "var(--ink-soft)" }}>Gasto, esperas y resultados lado a lado.</p>
 
@@ -1216,6 +1463,9 @@ export default function SanidadPage() {
           </li>
           <li>
             <strong>Acceso: se cumple en lo esencial, con un matiz.</strong> Crece mucho el número de personas esperando (+{num(surgeryRateChange, 0)} % en cirugía y +{num(consultRateChange, 0)} % en consultas por habitante desde {sinceLabel}), sube la espera para el especialista ({num(wH.consult_days[0], 0)} → {num(wH.consult_days[1], 0)} días) y la de las operaciones más comunes ({num(wH.selected_days[0], 0)} → {num(wH.selected_days[1], 0)} días), y siete de cada diez pacientes no encuentran cita inmediata con su médico de familia. El matiz: la espera media de <em>toda</em> la lista quirúrgica no sube ({num(wH.surgery_days[0], 0)} → {num(wH.surgery_days[1], 0)} días), porque la componen especialidades que se mueven en sentidos distintos.
+          </li>
+          <li>
+            <strong>Capacidad del paciente y destino del dinero.</strong> Medido contra lo que gastan los hogares, el bolsillo pesa más que en la UE ({num(oopShareEs)} % frente a {num(oopShareEu)} % del consumo) y el dentista excluye a los más pobres ({num(dentalEs.poor)} % frente a {num(dentalEs.rich)} % de los más ricos). El dinero ha ido al hospital ({num(provEs.HP1, 0)} % del gasto público frente al {num(provEu.HP1, 0)} % en la UE) mientras la atención primaria apenas creció en términos reales (+{num(growth["Servicios primarios de salud"], 0)} % desde 2009): encaja con la falta de citas del médico de familia.
           </li>
           <li>
             <strong>Lo que no se puede afirmar.</strong> Que las esperas «llevan subiendo desde 2003»: la serie del Ministerio tiene tres rupturas (2012, 2016, 2018) y antes de 2018 no se pueden comparar cifras. Que gastar más acortaría las esperas: entre comunidades no hay relación entre gasto por habitante y espera (correlación {num(reg.rho_spend_days, 2)}).

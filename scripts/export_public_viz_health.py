@@ -43,6 +43,7 @@ SOURCE_PAGES = {
     "minsan_sisle_sns": ("Ministerio de Sanidad · SISLE-SNS, informes semestrales de listas de espera", "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/listaEspera.htm"),
     "minsan_egsp": ("Ministerio de Sanidad · Estadística de Gasto Sanitario Público 2002-2024", "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/gastoSanitario2005/home.htm"),
     "minsan_barometro": ("Ministerio de Sanidad y CIS · Barómetro Sanitario", "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/barometro/home.htm"),
+    "who_gho": ("OMS · Global Health Observatory, gasto catastrófico (ODS 3.8.2)", "https://www.who.int/data/gho/data/indicators/indicator-details/GHO/proportion-of-population-with-household-expenditures-on-health-greater-than-10-of-total-household-expenditure-or-income-(sdg-3-8-2)-(-)"),
     "minsan_siap": ("Ministerio de Sanidad · Sistema de Información de Atención Primaria (SIAP), resumen 2023", "https://www.sanidad.gob.es/estadEstudios/estadisticas/docs/siap/Resumen_grafico_SIAP__Datos_2023.pdf"),
 }
 
@@ -507,6 +508,130 @@ def data_vs_story(store: Store) -> dict:
     }
 
 
+def by_year(series: dict[str, list[dict]]) -> dict[str, dict[int, float]]:
+    return {g: {int(p["period"]): p["value"] for p in v} for g, v in series.items()}
+
+
+def patient_side(store: Store) -> dict:
+    """Capacity lens: what the patient pays and what goes unmet, against household means."""
+    hf3 = by_year(store.series("eurostat_sdmx", "hlth_sha11_hf", "HF3.MIO_EUR", "MIO_EUR"))
+    cons = by_year(store.series("eurostat_sdmx", "nama_10_gdp", "P31_S14.CP_MEUR", "CP_MEUR"))
+    pps = by_year(store.series("eurostat_sdmx", "hlth_sha11_hf", "HF3.PPS_HAB", "PPS_HAB"))
+    share = {g: [{"year": y, "value": r(100 * hf3[g][y] / cons[g][y], 2)} for y in sorted(hf3.get(g, {})) if y in cons.get(g, {})]
+             for g in PEERS_NUTS if g in hf3 and g in cons}
+    pps_last = {g: {"year": max(v), "value": r(v[max(v)], 0)} for g, v in pps.items() if g in PEERS_NUTS}
+
+    def unmet(dataset: str, code: str) -> dict[str, list[dict]]:
+        return {g: annual_points(v, 1, flags=True) for g, v in store.series("eurostat_sdmx", dataset, code, "PC").items()}
+
+    dental_q1 = unmet("hlth_silc_09", "TXP.QU1.Y_GE16.T.PC")
+    dental_q5 = unmet("hlth_silc_09", "TXP.QU5.Y_GE16.T.PC")
+    dental_total = unmet("hlth_silc_09", "TXP.TOTAL.Y_GE16.T.PC")
+    year = max(p["year"] for p in dental_q1["ES"])
+    dental_rows = sorted(
+        ({"code": g, "name": EU_NAMES.get(g, "Media UE-27"), "poor": at_year(dental_q1[g], year), "rich": at_year(dental_q5.get(g, []), year)}
+         for g in dental_q1 if at_year(dental_q1[g], year) is not None),
+        key=lambda x: -x["poor"],
+    )
+    countries_only = [row for row in dental_rows if row["code"] != "EU27_2020"]
+    med = {key: unmet("hlth_silc_08", f"{key}.TOTAL.Y_GE16.T.PC") for key in ("TXP_TFAR_WLIST", "TXP", "WLIST")}
+    cata = store.series("who_gho", "GHO", "FINPROTECTION_CATA_TOT_10_POP", "PC_POP")
+    cata25 = store.series("who_gho", "GHO", "FINPROTECTION_CATA_TOT_25_POP", "PC_POP")
+    return {
+        "oop_share_household_consumption": share,
+        "oop_pps_per_person": pps_last,
+        "dental_cost": {"year": year, "rows": dental_rows, "spain_rank": 1 + sum(1 for row in countries_only if row["poor"] > at_year(dental_q1["ES"], year)),
+                        "of": len(countries_only), "spain_q1": {g: dental_q1[g] for g in PEERS_NUTS if g in dental_q1},
+                        "spain_total": {g: dental_total[g] for g in PEERS_NUTS if g in dental_total}},
+        "medical": {key: {g: v[g] for g in PEERS_NUTS if g in v} for key, v in med.items()},
+        "catastrophic_10": {g: annual_points(v, 2) for g, v in cata.items()},
+        "catastrophic_25": {g: annual_points(v, 2) for g, v in cata25.items()},
+    }
+
+
+def at_year(points: list[dict], year: int) -> float | None:
+    return next((p["value"] for p in points if p["year"] == year), None)
+
+
+def money_allocation(store: Store) -> dict:
+    """Where the public health money goes: EGSP functions and inputs (Spain, 2002-2024) and providers vs peers."""
+    func_rows = store.conn.execute(
+        """
+        SELECT json_extract(s.dimensions_json, '$.partida'), o.period_label, o.value_decimal
+        FROM indicator_definitions d JOIN indicator_releases r USING (indicator_id)
+        JOIN indicator_series_versions s USING (indicator_release_id)
+        JOIN indicator_observation_versions o USING (indicator_series_version_id)
+        WHERE d.source_id = 'minsan_egsp' AND d.dataset_code = 'EGSP.consolidado' AND d.indicator_code = ?
+          AND r.indicator_release_id = (SELECT r2.indicator_release_id FROM indicator_releases r2 WHERE r2.indicator_id = d.indicator_id
+                                        ORDER BY r2.source_snapshot_date DESC, r2.created_at DESC LIMIT 1)
+          AND o.revision_state != 'deleted'
+        """, ("clasificacion_funcional",)).fetchall()
+    econ_rows = store.conn.execute(
+        """
+        SELECT json_extract(s.dimensions_json, '$.partida'), o.period_label, o.value_decimal
+        FROM indicator_definitions d JOIN indicator_releases r USING (indicator_id)
+        JOIN indicator_series_versions s USING (indicator_release_id)
+        JOIN indicator_observation_versions o USING (indicator_series_version_id)
+        WHERE d.source_id = 'minsan_egsp' AND d.dataset_code = 'EGSP.consolidado' AND d.indicator_code = ?
+          AND r.indicator_release_id = (SELECT r2.indicator_release_id FROM indicator_releases r2 WHERE r2.indicator_id = d.indicator_id
+                                        ORDER BY r2.source_snapshot_date DESC, r2.created_at DESC LIMIT 1)
+          AND o.revision_state != 'deleted'
+        """, ("clasificacion_economica",)).fetchall()
+    store.series("minsan_egsp", "EGSP.consolidado", "clasificacion_funcional", "THS_EUR")  # provenance
+    store.series("minsan_egsp", "EGSP.consolidado", "clasificacion_economica", "THS_EUR")
+
+    def shares(rows: list, total_label: str) -> dict[str, list[dict]]:
+        table: dict[str, dict[int, float]] = defaultdict(dict)
+        for label, year, value in rows:
+            table[label][int(year)] = float(value)
+        total = table[total_label]
+        return {label: [{"year": y, "value": r(100 * v / total[y], 1)} for y, v in sorted(vals.items())]
+                for label, vals in table.items() if label not in ("TOTAL CONSOLIDADO", "GASTO TOTAL SECTORES")}, table
+
+    func_shares, func_table = shares(func_rows, "TOTAL CONSOLIDADO")
+    econ_shares, _ = shares(econ_rows, "GASTO TOTAL SECTORES")
+    q = {int(p["period"]): p["value"] for p in store.series("oecd_health_statistics", "DSD_SHA@DF_SHA", "EXP_HEALTH.HF1.Q", "XDC_PS")["ESP"]}
+    v = {int(p["period"]): p["value"] for p in store.series("oecd_health_statistics", "DSD_SHA@DF_SHA", "EXP_HEALTH.HF1.V", "XDC_PS")["ESP"]}
+
+    def real_growth(label: str, y0: int, y1: int) -> float:
+        a = func_table[label][y0] / (v[y0] / q[y0])
+        b = func_table[label][y1] / (v[y1] / q[y1])
+        return r(100 * (b / a - 1), 1)
+
+    last = max(func_table["TOTAL CONSOLIDADO"])
+    providers = {k: by_year(store.series("eurostat_sdmx", "hlth_sha11_hphf", f"{k}.HF1.PC_CHE", "PC_CHE")) for k in ("TOTAL", "HP1", "HP3", "HP5")}
+    provider_rows = []
+    for g in PEERS_NUTS:
+        tot = {y: val for y, val in providers["TOTAL"].get(g, {}).items() if val and providers["HP1"].get(g, {}).get(y)}
+        if not tot:
+            continue
+        y = max(tot)
+        provider_rows.append({"code": g, "year": y, **{k: r(100 * providers[k][g].get(y, 0) / tot[y], 1) for k in ("HP1", "HP3", "HP5")}})
+    return {
+        "functional_shares": func_shares, "economic_shares": econ_shares, "last": last,
+        "real_growth_2009": {label: real_growth(label, 2009, last) for label in ("Servicios hospitalarios y especializados", "Servicios primarios de salud", "Farmacia", "TOTAL CONSOLIDADO")},
+        "providers": provider_rows,
+    }
+
+
+def pay_and_migration(store: Store) -> dict:
+    out = {}
+    for prof in ("EMPLGENP", "EMPLSPMP", "RINF"):
+        ratio = store.series("oecd_health_statistics", "DSD_HEALTH_REAC_EMP@DF_REMUN", f"REMUN.{prof}", "RATIO_AVG_WAGE")
+        ppp = store.series("oecd_health_statistics", "DSD_HEALTH_REAC_EMP@DF_REMUN", f"REMUN.{prof}", "USD_PPP")
+        out[prof] = sorted(({"code": g, "name": rows[-1]["name"], "year": int(rows[-1]["period"]), "ratio": r(rows[-1]["value"]),
+                             "ppp": r(next((p["value"] for p in ppp.get(g, []) if p["period"] == rows[-1]["period"]), None) or 0, 0),
+                             "series": annual_points(rows, 2)}
+                            for g, rows in ratio.items()), key=lambda x: -x["ratio"])
+    abroad = store.series("oecd_health_statistics", "DSD_HEALTH_WFMI@DF_HEALTH_WFMI", "FOREIGN_TRAINED_IN_ESP.PHYS", "PS")
+    wb_names = {g: rows[0]["name"] for g, rows in store.series("worldbank_wdi", "WDI", "SP.DYN.LE00.IN", "YR").items()}
+    destinations = sorted(({"code": g, "name": wb_names.get(g, g), "year": int(rows[-1]["period"]), "value": r(rows[-1]["value"], 0)}
+                           for g, rows in abroad.items() if rows), key=lambda x: -x["value"])
+    in_spain = store.series("eurostat_sdmx", "hlth_rs_phys", "TOTAL.T.NR", "NR")["ES"][-1]
+    return {"pay": out, "doctors_abroad": {"rows": destinations, "total": r(sum(x["value"] for x in destinations), 0),
+                                           "doctors_in_spain": {"year": int(in_spain["period"]), "value": r(in_spain["value"], 0)}}}
+
+
 def build(conn: sqlite3.Connection) -> dict:
     store = Store(conn)
     le = life_expectancy(store)
@@ -522,6 +647,11 @@ def build(conn: sqlite3.Connection) -> dict:
     intl = waits_international(store)
     regions = regions_side_by_side(store, spend, wait, perc)
     story = data_vs_story(store)
+    patient = patient_side(store)
+    money = money_allocation(store)
+    pay = pay_and_migration(store)
+    story["dental"] = {"year": patient["dental_cost"]["year"],
+                       "rows": [row for row in patient["dental_cost"]["rows"] if row["code"] in ("ES", "DE", "FR", "IT", "PT", "EU27_2020")]}
 
     def at(rows: list[dict], date: str) -> float:
         return next(p["value"] for p in rows if p["date"] == date)
@@ -575,6 +705,9 @@ def build(conn: sqlite3.Connection) -> dict:
         "waits_international": intl,
         "regions": regions,
         "data_vs_story": story,
+        "patient": patient,
+        "money": money,
+        "pay": pay,
         "sources": sources,
     }
 
@@ -648,6 +781,28 @@ def write_csv(data: dict, path: Path) -> None:
     for x in st["regions"]["rows"]:
         for year, key in ((st["regions"]["from"], "x0"), (st["regions"]["to"], "x")):
             rows.append(("minsan_egsp+oecd_deflactor", "gasto_ccaa_eur_2020_por_habitante", x["code"], year, x[key]))
+    pat = data["patient"]
+    for geo, pts in pat["oop_share_household_consumption"].items():
+        rows.extend(("eurostat_sdmx", "bolsillo_pct_consumo_hogares", geo, p["year"], p["value"]) for p in pts)
+    for row in pat["dental_cost"]["rows"]:
+        rows.append(("eurostat_sdmx:hlth_silc_09", "dental_no_atendida_coste_q1_pct", row["code"], pat["dental_cost"]["year"], row["poor"]))
+        rows.append(("eurostat_sdmx:hlth_silc_09", "dental_no_atendida_coste_q5_pct", row["code"], pat["dental_cost"]["year"], row["rich"]))
+    for key, by_geo in pat["medical"].items():
+        for geo, pts in by_geo.items():
+            rows.extend(("eurostat_sdmx:hlth_silc_08", f"medica_no_atendida_{key}_pct", geo, p["year"], p["value"]) for p in pts)
+    for geo, pts in pat["catastrophic_10"].items():
+        rows.extend(("who_gho", "gasto_catastrofico_10_pct", geo, p["year"], p["value"]) for p in pts)
+    for label, pts in data["money"]["functional_shares"].items():
+        rows.extend(("minsan_egsp", f"funcional_pct_{label}", "ES", p["year"], p["value"]) for p in pts)
+    for label, pts in data["money"]["economic_shares"].items():
+        rows.extend(("minsan_egsp", f"economica_pct_{label}", "ES", p["year"], p["value"]) for p in pts)
+    for row in data["money"]["providers"]:
+        for k in ("HP1", "HP3", "HP5"):
+            rows.append(("eurostat_sdmx:hlth_sha11_hphf", f"gasto_publico_pct_{k}", row["code"], row["year"], row[k]))
+    for prof, items in data["pay"]["pay"].items():
+        rows.extend(("oecd_health_statistics", f"retribucion_veces_salario_medio_{prof}", x["code"], x["year"], x["ratio"]) for x in items)
+    for x in data["pay"]["doctors_abroad"]["rows"]:
+        rows.append(("oecd_health_statistics", "medicos_formados_en_espana_en_destino", x["code"], x["year"], x["value"]))
     for row in data["regions"]["rows"]:
         rows.append(("ine_wstempus:1448", "esperanza_vida_ccaa", row["code"], data["regions"]["le_year"], row["life_expectancy"]))
     buf = io.StringIO()

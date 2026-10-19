@@ -86,6 +86,12 @@ LOCAL_SOURCES: dict[str, dict[str, str]] = {
         "default_url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/BarometroSanitario/home_BS.htm",
         "format": "xlsx",
     },
+    "who_gho": {
+        "name": "OMS - Global Health Observatory (API OData)",
+        "scope": "sanidad",
+        "default_url": "https://ghoapi.azureedge.net/api/",
+        "format": "json",
+    },
     "minsan_siap": {
         "name": "Ministerio de Sanidad - Sistema de Información de Atención Primaria (SIAP)",
         "scope": "sanidad",
@@ -1010,6 +1016,155 @@ def load_siap(conn: sqlite3.Connection, snapshot_date: str) -> dict[str, int]:
     return totals
 
 
+# 7. The patient's side (capacity lens) and where the money goes
+
+UNMET_REASONS = {"TXP": "por ser demasiado caro", "WLIST": "por lista de espera", "TFAR": "por estar demasiado lejos",
+                 "TXP_TFAR_WLIST": "por coste, distancia o lista de espera"}
+UNMET_QUINT = {"TOTAL": "toda la población", "QU1": "20 % con menos ingresos", "QU5": "20 % con más ingresos"}
+UNMET_MED_URL = eurostat_url("hlth_silc_08", {"unit": ["PC"], "sex": ["T"], "age": ["Y_GE16"], "reason": list(UNMET_REASONS),
+                                              "quant_inc": list(UNMET_QUINT), "geo": PEERS})
+UNMET_DENT_URL = eurostat_url("hlth_silc_09", {"unit": ["PC"], "sex": ["T"], "age": ["Y_GE16"], "reason": list(UNMET_REASONS),
+                                               "quant_inc": list(UNMET_QUINT), "geo": [*EU27, "EU27_2020"]})
+HH_CONS_URL = eurostat_url("nama_10_gdp", {"na_item": ["P31_S14"], "unit": ["CP_MEUR"], "geo": PEERS})
+HF_MIO_URL = eurostat_url("hlth_sha11_hf", {"icha11_hf": ["HF3", "HF1"], "unit": ["MIO_EUR"], "geo": PEERS})
+PROVIDERS = {"TOTAL": "todos los proveedores", "HP1": "hospitales", "HP2": "residencias", "HP3": "proveedores ambulatorios",
+             "HP4": "servicios auxiliares", "HP5": "farmacias y otros minoristas", "HP6": "prevención", "HP7": "administración"}
+HPHF_URL = eurostat_url("hlth_sha11_hphf", {"icha11_hf": ["HF1"], "unit": ["PC_CHE"], "icha11_hp": list(PROVIDERS), "geo": PEERS})
+
+
+def parse_unmet(dataset: str, label: str) -> Callable[[Raw], Iterable[Batch]]:
+    def parse(raw: Raw) -> Iterable[Batch]:
+        yield from eurostat_batches(
+            raw, dataset, ["reason", "quant_inc", "age", "sex", "unit"],
+            lambda c: f"Necesidad de {label} no atendida {UNMET_REASONS[c['reason']]} ({UNMET_QUINT[c['quant_inc']]})",
+            {"PC": "% de la población de 16 años o más"},
+            "Encuesta europea de ingresos y condiciones de vida (EU-SILC): personas que declaran haber necesitado "
+            f"{label} en los últimos 12 meses y no haberla recibido, por motivo y quintil de ingresos.",
+        )
+    return parse
+
+
+def parse_hh_cons(raw: Raw) -> Iterable[Batch]:
+    yield from eurostat_batches(
+        raw, "nama_10_gdp", ["na_item", "unit"], lambda c: "Gasto en consumo final de los hogares (millones de euros corrientes)",
+        {"CP_MEUR": "Millones de euros corrientes"}, "Contabilidad nacional, consumo final de los hogares (P31_S14).",
+    )
+
+
+def parse_hf_mio(raw: Raw) -> Iterable[Batch]:
+    yield from eurostat_batches(
+        raw, "hlth_sha11_hf", ["icha11_hf", "unit"], lambda c: f"{HF_LABELS[c['icha11_hf']]} (millones de euros)",
+        {"MIO_EUR": "Millones de euros corrientes"}, "Sistema de Cuentas de Salud (SHA 2011).",
+    )
+
+
+def parse_hphf(raw: Raw) -> Iterable[Batch]:
+    yield from eurostat_batches(
+        raw, "hlth_sha11_hphf", ["icha11_hp", "icha11_hf", "unit"],
+        lambda c: f"Gasto sanitario público (HF1) en {PROVIDERS[c['icha11_hp']]}, % del gasto sanitario corriente",
+        {"PC_CHE": "% del gasto sanitario corriente total"}, "SHA 2011: gasto por proveedor y régimen de financiación.",
+    )
+
+
+WHO_INDICATORS = {"FINPROTECTION_CATA_TOT_10_POP": 10, "FINPROTECTION_CATA_TOT_25_POP": 25}
+
+
+def who_url(code: str) -> str:
+    areas = " or ".join(f"SpatialDim eq '{c}'" for c in ("ESP", "DEU", "FRA", "ITA", "PRT"))
+    return f"https://ghoapi.azureedge.net/api/{code}?" + urllib.parse.urlencode({"$filter": f"({areas})"})
+
+
+def parse_who(code: str) -> Callable[[Raw], Iterable[Batch]]:
+    def parse(raw: Raw) -> Iterable[Batch]:
+        by_area: dict[str, list[dict[str, Any]]] = {}
+        for i, row in enumerate(raw.data["value"]):
+            if row.get("Dim1") != "RESIDENCEAREATYPE_TOTL" or row.get("NumericValue") is None:
+                continue
+            by_area.setdefault(row["SpatialDim"], []).append({
+                "period": str(row["TimeDim"]), "value": row["NumericValue"], "pointer": pointer("value", i, "NumericValue"),
+                "cell_index": i, "raw": {"source": row.get("DataSourceDim")},
+            })
+        threshold = WHO_INDICATORS[code]
+        yield {
+            "source_id": "who_gho", "dataset_code": "GHO", "indicator_code": code, "frequency_code": "A",
+            "frequency_label": "Irregular (encuestas de presupuestos familiares)", "unit_code": "PC_POP", "unit_label": "% de la población",
+            "label": f"Población con gasto sanitario de bolsillo superior al {threshold} % del gasto o ingreso del hogar (ODS 3.8.2)",
+            "definition": "OMS, Global Health Observatory, indicador ODS 3.8.2 (gasto catastrófico). Se calcula sobre el "
+            "presupuesto total del hogar, no sobre su capacidad de pago; la Oficina Europea de la OMS publica otra medida.",
+            "methodology_url": f"https://www.who.int/data/gho/data/indicators/indicator-details/GHO/{code.lower()}",
+            "source_url": f"https://ghoapi.azureedge.net/api/{code}",
+        }, [area_series(f"GHO|{code}|{a}", a, {"country": a}, sorted(o, key=lambda x: x["period"])) for a, o in sorted(by_area.items())]
+    return parse
+
+
+REMUN_PROF = {"EMPLGENP": "Médicos de familia (asalariados)", "EMPLSPMP": "Médicos especialistas (asalariados)",
+              "RINF": "Enfermeras de hospital (asalariadas)"}
+REMUN_UNITS = {"FCTR_WG_A_SAL_A": ("RATIO_AVG_WAGE", "Veces el salario medio anual"), "USD_PPP": ("USD_PPP", "Dólares PPA corrientes")}
+OECD_REMUN_URL = dbnomics_url("DSD_HEALTH_REAC_EMP@DF_REMUN", {
+    "REF_AREA": ["ESP", "DEU", "FRA", "ITA", "PRT"], "UNIT_MEASURE": list(REMUN_UNITS), "HEALTH_PROF": list(REMUN_PROF),
+})
+OECD_WFMI_URL = dbnomics_url("DSD_HEALTH_WFMI@DF_HEALTH_WFMI", {"ORIGIN": ["ESP"], "MEASURE": ["HW"], "HEALTH_PROF": ["PHYS", "MINU"]})
+
+
+def parse_remun(raw: Raw) -> Iterable[Batch]:
+    yield from dbnomics_batches(
+        raw, "DSD_HEALTH_REAC_EMP@DF_REMUN",
+        lambda d: (d["HEALTH_PROF"], d["UNIT_MEASURE"]) if d.get("HEALTH_PROF") in REMUN_PROF and d.get("UNIT_MEASURE") in REMUN_UNITS
+        and d.get("WORKER_STATUS") == "ICSE93_1" and d.get("SEX") == "_T" else None,
+        lambda k: {
+            "indicator_code": f"REMUN.{k[0]}", "unit_code": REMUN_UNITS[k[1]][0], "unit_label": REMUN_UNITS[k[1]][1],
+            "label": f"Retribución anual bruta: {REMUN_PROF[k[0]]} ({REMUN_UNITS[k[1]][1].lower()})",
+            "definition": "OCDE, remuneración de profesionales sanitarios (asalariados). Cada país incluye conceptos distintos "
+            "(guardias, complementos); leído de la réplica DBnomics.",
+        },
+    )
+
+
+def parse_wfmi(raw: Raw) -> Iterable[Batch]:
+    yield from dbnomics_batches(
+        raw, "DSD_HEALTH_WFMI@DF_HEALTH_WFMI",
+        lambda d: (d["HEALTH_PROF"],),
+        lambda k: {
+            "indicator_code": f"FOREIGN_TRAINED_IN_ESP.{k[0]}", "unit_code": "PS", "unit_label": "Personas",
+            "label": f"{'Médicos' if k[0] == 'PHYS' else 'Enfermeras'} formados en España que trabajan en otro país de la OCDE",
+            "definition": "OCDE, migración del personal sanitario: profesionales formados en España registrados en cada país "
+            "de destino. Cada destino publica años distintos.",
+        },
+    )
+
+
+def load_egsp_structure(conn: sqlite3.Connection, snapshot_date: str) -> dict[str, int]:
+    path = MANUAL_DIR / "egsp_estructura.json"
+    payload = path.read_bytes()
+    data = json.loads(payload)
+    src = data["source"]
+    raw_path, _ = check_pdf(src["file"], "egsp", src["sha256"])
+    totals = {"releases": 0, "observations": 0}
+    for section in ("economica", "funcional"):
+        series = []
+        for index, row in enumerate(data[section]):
+            obs = [{
+                "period": year, "value": value, "cell_index": index,
+                "pointer": f"pdf:page={row['page']};row={row['label']};year={year}", "status_pointer": pointer(section, index, "values", year),
+                "evidence_url": src["url"], "evidence_sha256": src["sha256"], "evidence_raw_path": raw_path,
+            } for year, value in sorted(row["values"].items())]
+            series.append(area_series(f"egsp|{section}|{row['label']}", "ES", {"partida": row["label"]}, obs,
+                                      name="España (sector público)", system="NUTS", level="country"))
+        definition = {
+            "source_id": "minsan_egsp", "dataset_code": "EGSP.consolidado", "indicator_code": f"clasificacion_{section}",
+            "frequency_code": "A", "frequency_label": "Anual", "unit_code": "THS_EUR", "unit_label": "Miles de euros corrientes",
+            "label": f"Gasto sanitario público por clasificación {'económica' if section == 'economica' else 'funcional'}",
+            "definition": "EGSP 2002-2024. Clasificación económica sobre la suma de sectores (antes de consolidar transferencias); "
+            "funcional sobre el total consolidado. 2023 y 2024, cifras provisionales.", "extraction_method": "pdftotext_layout_row",
+            "methodology_url": src["page"], "source_url": src["page"],
+        }
+        counts = load_indicator(conn, definition, sha256_bytes(payload), len(payload), rel(path), src["page"], snapshot_date,
+                                {"retrieved_at": src["retrieved_at"]}, series)
+        for k in totals:
+            totals[k] += counts[k]
+    return totals
+
+
 API_SOURCES: list[tuple[str, str, str, Callable[..., Iterable[Batch]]]] = [
     ("eurostat_demo_mlexpec.json", LE_URL, "json", parse_life_expectancy),
     ("ine_idb_1414.json", INE_URL, "json", parse_ine),
@@ -1027,6 +1182,14 @@ API_SOURCES: list[tuple[str, str, str, Callable[..., Iterable[Batch]]]] = [
     ("oecd_waiting_dbnomics.json", OECD_WAIT_URL, "json", parse_oecd_wait),
     ("oecd_health_prot_dbnomics.json", OECD_PROT_URL, "json", parse_oecd_prot),
     ("oecd_hcqo_cancer_dbnomics.json", OECD_HCQO_URL, "json", parse_oecd_hcqo),
+    ("eurostat_hlth_silc_08.json", UNMET_MED_URL, "json", parse_unmet("hlth_silc_08", "atención médica")),
+    ("eurostat_hlth_silc_09.json", UNMET_DENT_URL, "json", parse_unmet("hlth_silc_09", "atención dental")),
+    ("eurostat_nama_10_gdp_p31s14.json", HH_CONS_URL, "json", parse_hh_cons),
+    ("eurostat_hlth_sha11_hf_mio.json", HF_MIO_URL, "json", parse_hf_mio),
+    ("eurostat_hlth_sha11_hphf.json", HPHF_URL, "json", parse_hphf),
+    *[(f"who_gho_{code}.json", who_url(code), "json", parse_who(code)) for code in WHO_INDICATORS],
+    ("oecd_remuneration_dbnomics.json", OECD_REMUN_URL, "json", parse_remun),
+    ("oecd_wfmi_esp_dbnomics.json", OECD_WFMI_URL, "json", parse_wfmi),
 ]
 
 
@@ -1204,6 +1367,7 @@ def main() -> int:
         report["egsp"] = load_egsp(conn, args.snapshot_date)
         report["barometro"] = load_barometro(conn, args.snapshot_date, args.offline)
         report["siap"] = load_siap(conn, args.snapshot_date)
+        report["egsp_structure"] = load_egsp_structure(conn, args.snapshot_date)
     fk = conn.execute("PRAGMA foreign_key_check").fetchall()
     if fk:
         raise SystemExit(f"foreign_key_check failed: {fk[:5]}")
