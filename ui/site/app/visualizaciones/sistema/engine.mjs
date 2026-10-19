@@ -1,5 +1,5 @@
-// Engine of /visualizaciones/sistema/: pensions, public finances and taxes, annual steps, deviations from the
-// Ageing Report 2024 baseline for Spain. Pure functions, no dependencies: the page runs it in the browser and
+// Engine of /visualizaciones/sistema/: pensions, public finances, taxes and housing, annual steps, deviations from the
+// Ageing Report 2024 baseline for Spain (housing: INE household projection, completions held constant). Pure functions, no dependencies: the page runs it in the browser and
 // `node --test` runs the same file (engine.test.mjs). Sources of every number: sistema.json (`edges`, `constants_notes`)
 // and docs/etl/sprints/SISTEMA-COMPLEJO-20261019/README.md.
 
@@ -18,6 +18,13 @@ export const DEFAULT_LEVERS = {
   vatRed: 0, // reduced VAT rate (10 %), pp
   corp: 0, // nominal corporate income tax rate (25 %), pp
   closure: "deuda", // how the net cost is paid each year
+  pubHomes: 0, // extra public rental completions a year from the programme, thousands (decided from 2026)
+  land: 0, // finalist land released for this many dwellings a year, thousands
+  ltvCap: 0, // maximum loan-to-price (LTP, the Banco de España measure) of new mortgages, % (0 = no cap, as now)
+  ltiCap: 0, // maximum loan-to-income of new mortgages, times gross income (0 = no cap, as now)
+  capCov: 0, // rent cap: share of market-rent households in covered (stressed) areas, % (beyond those already covered)
+  capCut: 0, // rent cap: average cut the cap imposes on covered rents vs the market, %
+  tourCut: 0, // tourist dwellings withdrawn, % of the current stock (licences, bans)
   migration: "base", // context: Ageing Report migration variant (base | low | high)
   rateShock: 0, // context: market interest rate vs baseline, pp
 };
@@ -39,7 +46,37 @@ export const NEUTRAL = {
   eti_alta: 0,
   semielasticidad_base_sociedades: 0,
   traslado_sociedades_salarios: 0,
+  // housing: the accounting layer keeps the arithmetic (dwellings built, cap as the law says) and nothing else
+  respuesta_oferta_tope: 0,
+  cumplimiento_tope: 1,
+  traslado_escasez_alquiler: 0,
+  desplazamiento_obra_privada: 0,
+  elasticidad_oferta_privada: 0,
+  absorcion_suelo: 0,
+  conversion_turistica: 0,
+  respuesta_alquiler_parque: 0,
+  elasticidad_emancipacion: 0,
+  perdida_credito_restringido: 0,
+  elasticidad_precio_credito: 0,
+  elasticidad_credito_precio: 0,
+  sustitucion_alquiler: 0,
 };
+
+export const HOUSING_KEYS = ["hs_stock_k", "hs_completions_k", "hs_public_k", "hs_private_k", "hs_tourist_k", "hs_households_k",
+  "hs_migration_hh_k", "hs_emancipated_hh_k", "hs_emancipated_k", "hs_at_home_pp", "hs_rent", "hs_rent_cov", "hs_rent_unc",
+  "hs_rent_new", "hs_rent_paid", "hs_price", "hs_credit", "hs_new_credit", "hs_credit_cut", "hs_rental_stock_k", "hs_cost_pp",
+  "hs_binding", "p1_rent_cov_month", "p1_rent_unc_month", "p1_rent_paid_month", "p2r_rent_cov_month", "p2r_rent_unc_month",
+  "p2b_payment_month", "p2b_upfront_eur"];
+
+// Completed share of a programme decided at k = 1 after `lag` years (0 before, 1 after, linear in between).
+const ramp = (k, lag) => clamp(k - lag, 0, 1);
+
+/** Share of new mortgage volume above the chosen caps (independent LTV and LTI, a simplification the page states). */
+export function bindingShare(P, ltvCap, ltiCap) {
+  const ltv = { 90: P.hip_sobre_ltv90, 80: P.hip_sobre_ltv80, 70: P.hip_sobre_ltv70 }[ltvCap] ?? 0;
+  const lti = { 6: P.hip_sobre_lti6, 4.5: P.hip_sobre_lti45 }[ltiCap] ?? 0;
+  return 1 - (1 - ltv) * (1 - lti);
+}
 
 const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
 
@@ -91,7 +128,7 @@ export function simulate(model, levers = DEFAULT_LEVERS, params = centralParams(
     "labour_cost_dev", "wage_dev", "implicit_rate_dev", "debt_per_person_eur",
     // statutory (static) burdens of each instrument, % GDP: the quintile split uses them
     "s_irpf_all_pp", "s_irpf_top_pp", "s_vat_std_pp", "s_vat_red_pp", "s_contrib_pp", "s_corp_pp", "s_pension_net_pp",
-    ...PERSONAS.map((p) => `${p}_month`)];
+    ...PERSONAS.map((p) => `${p}_month`), ...HOUSING_KEYS];
   const out = Object.fromEntries(keys.map((k) => [k, zeros(n)]));
   out.years = model.years;
   out.pension_pct = [...B.pension_pct];
@@ -106,6 +143,17 @@ export function simulate(model, levers = DEFAULT_LEVERS, params = centralParams(
   let dImp = 0; // implicit interest rate deviation, pp
   let D = 0; // debt deviation, % baseline GDP
   let pricePrev = 0;
+  // Housing state (thousands of dwellings or households; rents, prices and credit as fractions)
+  const Hs = model.housing;
+  const hp = [0, 0]; // house price deviation history (for the two-year supply lag)
+  let flowCum = 0;
+  let pubStock = 0;
+  let privCum = 0;
+  let dHm = 0;
+  let dHem = 0;
+  let dCred = 0;
+  let paidCov = 0;
+  let paidUnc = 0;
 
   for (let t = 1; t < n; t += 1) {
     const year = model.years[t];
@@ -128,6 +176,77 @@ export function simulate(model, levers = DEFAULT_LEVERS, params = centralParams(
     const otherPp = base * -nSpend * P.prestacion_alternativa;
     const irpfPp = P.tipo_marginal_irpf_pension * (grossPp + otherPp);
     const migPp = on && mig ? mig[t] : 0;
+
+    // ---- Housing (slice 2). Stock and households in thousands; rents, prices and credit as log deviations.
+    let hsCostPp = 0;
+    if (Hs) {
+      const Lp = P.retardo_obra_publica;
+      const Lq = P.retardo_obra_privada;
+      const pubC = on ? L.pubHomes * ramp(k, Lp) : 0;
+      pubStock += pubC;
+      const landC = on ? L.land * P.absorcion_suelo * ramp(k, Lq + 1) : 0;
+      const crowd = -P.desplazamiento_obra_privada * pubC;
+      const privResp = P.elasticidad_oferta_privada * hp[hp.length - 2] * Hs.completions_free_k;
+      const completions = pubC + landC + crowd + privResp;
+      flowCum += completions;
+      privCum += landC + crowd + privResp;
+      const freed = on ? (L.tourCut / 100) * Hs.tourist_k * Math.min(1, k / 2) : 0;
+      const tourist = P.conversion_turistica * freed;
+      const dS = flowCum + tourist;
+      // Migration context: the Ageing Report variants move net migration by a third; each migrant forms households.
+      const migShare = L.migration === "low" ? -1 / 3 : L.migration === "high" ? 1 / 3 : 0;
+      if (on) dHm += migShare * Hs.net_migration_k[t] * P.hogares_por_inmigrante;
+      // Credit: caps remove part of the new lending above them; new lending follows prices (collateral, loop R2).
+      const binding = on ? bindingShare(P, L.ltvCap, L.ltiCap) : 0;
+      const cut = -P.perdida_credito_restringido * binding;
+      const dNew = cut + P.elasticidad_credito_precio * hp[hp.length - 1];
+      dCred = (1 - P.cuota_credito_nuevo) * dCred + P.cuota_credito_nuevo * dNew;
+      // Market rent from dwellings per household, with latent households (loop B2) adjusting halfway each year.
+      const Hb = Hs.households_k[t];
+      const a = C.emancipation_adjust_per_year;
+      const E = (P.elasticidad_emancipacion * Hs.at_home_k) / P.personas_por_hogar_nuevo;
+      const beta = P.respuesta_alquiler_parque;
+      const num = (-beta * (dS - dHm - (1 - a) * dHem)) / Hb + P.sustitucion_alquiler * -cut;
+      const dR = num / (1 + (beta * a * E) / Hb);
+      dHem = (1 - a) * dHem + a * -E * dR;
+      const dP = dR + P.elasticidad_precio_credito * dCred;
+      // Rent cap: covered contracts pay less, some landlords leave the market, uncovered rents absorb the shortage.
+      const cov = on ? L.capCov / 100 : 0;
+      const kappa = (L.capCut / 100) * P.cumplimiento_tope * (cov > 0 ? 1 : 0);
+      const W = P.respuesta_oferta_tope * kappa * cov * Hs.renters_k * Math.min(1, k / 2);
+      const spill = (P.traslado_escasez_alquiler * W) / Hs.renters_k;
+      const rCov = dR - kappa;
+      const rUnc = dR + spill;
+      const rNew = cov * rCov + (1 - cov) * rUnc;
+      const rho = P.renovacion_contratos;
+      paidCov += rho * (rCov - paidCov);
+      paidUnc += rho * (rUnc - paidUnc);
+      const paid = cov * paidCov + (1 - cov) * paidUnc;
+      // Public budget: each dwelling is paid in the two years before it is finished; social rents come back.
+      const spend = on ? L.pubHomes * P.coste_vivienda_publica * P.cuota_financiacion_publica * (ramp(k + 1, Lp) + ramp(k + 2, Lp)) / 2 : 0;
+      const rents = (P.renta_social_mes * 12 * pubStock * P.cuota_financiacion_publica) / 1000;
+      hsCostPp = ((spend - rents) / (model.start.gdp_meur * (B.real_index?.[t] ?? 1))) * 100;
+      hp.push(dP);
+      const c1 = Hs.cases.p1;
+      const c2 = Hs.cases.p2_renter;
+      const b2 = Hs.cases.p2_buyer;
+      const price = b2.home_price * (1 + dP);
+      const ltvMax = Math.min(b2.ltv_pct / 100, L.ltvCap && on ? L.ltvCap / 100 : 1, L.ltiCap && on ? (L.ltiCap * c2.gross_year) / price : 1);
+      const loan0 = b2.home_price * (b2.ltv_pct / 100);
+      const loan = price * ltvMax;
+      const set = {
+        hs_stock_k: dS, hs_completions_k: completions, hs_public_k: pubStock, hs_private_k: privCum, hs_tourist_k: tourist,
+        hs_households_k: dHm + dHem, hs_migration_hh_k: dHm, hs_emancipated_hh_k: dHem,
+        hs_emancipated_k: dHem * P.personas_por_hogar_nuevo, hs_at_home_pp: (-dHem * P.personas_por_hogar_nuevo * 100) / Hs.pop_2534_k,
+        hs_rent: dR, hs_rent_cov: cov ? rCov : 0, hs_rent_unc: rUnc, hs_rent_new: rNew, hs_rent_paid: paid, hs_price: dP,
+        hs_credit: dCred, hs_new_credit: dNew, hs_credit_cut: cut, hs_rental_stock_k: -W, hs_cost_pp: hsCostPp, hs_binding: binding,
+        p1_rent_cov_month: cov ? c1.rent_month * rCov : 0, p1_rent_unc_month: c1.rent_month * rUnc, p1_rent_paid_month: c1.rent_month * paid,
+        p2r_rent_cov_month: cov ? c2.rent_month * rCov : 0, p2r_rent_unc_month: c2.rent_month * rUnc,
+        p2b_payment_month: b2.cost_month * (loan / loan0 - 1),
+        p2b_upfront_eur: price * (1 - ltvMax + b2.itp_pct / 100) - b2.home_price * (1 - b2.ltv_pct / 100 + b2.itp_pct / 100),
+      };
+      for (const [key, v] of Object.entries(set)) out[key][t] = v;
+    }
 
     // Tax levers: statutory revenue and the behavioural response (taxable income, corporate base).
     const irpfLeverPp = irpfUnit * lv("irpfAll") + P.recaudacion_por_punto_irpf_alto * (1 - offTop) * lv("irpfTop");
@@ -167,7 +286,7 @@ export function simulate(model, levers = DEFAULT_LEVERS, params = centralParams(
       const yNow = P.persistencia_multiplicador * y + (impulse - impulsePrev);
       const cyclePp = P.semielasticidad_saldo * yNow;
       const leverTaxes = P.base_cotizacion_pib * contribLever + P.recaudacion_por_punto_iva * lv("vatStd") + vatRedPp + irpfLeverPp + corpPp;
-      const costBefore = grossPp + otherPp - irpfPp + migPp - labourPp - leverTaxes - cyclePp;
+      const costBefore = grossPp + otherPp - irpfPp + migPp + hsCostPp - labourPp - leverTaxes - cyclePp;
       const closureRevenue = unit ? unit * close : 0;
       parts = { e, eS, wageDev, laborCost, labourPp, contribPp, vatPp, irpfRev, impulse, yNow, cyclePp, costBefore, closureRevenue, closeC, closeV, closeI };
       if (!on || L.closure === "deuda") break;

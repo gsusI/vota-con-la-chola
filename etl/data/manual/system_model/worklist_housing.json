@@ -1,0 +1,299 @@
+{
+ "about": "Edges of slice 2 (housing) of /visualizaciones/sistema/. Model (slice 2, housing): annual steps 2026-2050 in deviations from a baseline (INE household projection 2026-2041, completions held at the 2023-2025 average). Rents move with dwellings per household (inverse demand), young adults leave home when rents fall (loop B2), house prices follow rents plus a credit term, and housing credit responds to prices (loop R2). Levers: public completions a year, released land, LTV/LTI caps, rent cap in stressed areas (coverage and % cut), limits on tourist rentals.",
+ "items": [
+  {
+   "id": "V01_rent_cap_supply",
+   "agent": "pilot",
+   "from": "tope_alquiler",
+   "to": "oferta_alquiler_cubierta",
+   "sign": "-",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "respuesta_oferta_tope",
+    "unit": "% de caída de la oferta de alquiler de mercado cubierta por cada 1 % de rebaja efectiva del alquiler"
+   },
+   "need": "CONTESTED -> debate with >= 3 schools, each with its own source and central value in this SAME unit. How much does the market rental supply in the covered area fall per 1 % of effective rent reduction caused by a rent cap (second-generation controls on new contracts)? Normalise each study: supply change (%) / rent change (%) of covered units. Schools: (a) Catalonia 2020 law (Ley 11/2020): Jofre-Monseny, Martínez-Mazza & Segú (2023, J. Urban Econ., 'Effectiveness and supply effects of high-coverage rent control policies') and/or García-Montalvo & Monràs ('The effect of second generation rent controls: new evidence from Catalonia', 2023); (b) Diamond, McQuade & Qian (2019, AER, San Francisco: landlords treated by rent control reduced rental supply by 15 %); (c) a review: Kholodilin (2024, J. Housing Econ., 'Rent control effects through the lens of empirical research'). Central = your judgement of the most relevant for Spain; low/high = span of the schools. Say in derivation how each normalisation was done and which numbers are approximations. Put in contrary_evidence studies finding no supply effect or effects through quality/maintenance rather than quantity.",
+   "hints": "IZA/NBER/CEPR working-paper versions are easiest to fetch (docs.iza.org, www.nber.org/system/files/working_papers/wNNNNN/wNNNNN.pdf). Barcelona IEB working papers: ieb.ub.edu. AER papers: try the NBER WP version (Diamond, McQuade, Qian NBER w24181)."
+  },
+  {
+   "id": "V02_private_supply_elasticity",
+   "agent": "pilot",
+   "from": "precio_vivienda",
+   "to": "obra_privada",
+   "sign": "+",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "elasticidad_oferta_privada",
+    "unit": "% de cambio de las viviendas libres terminadas por cada 1 % de cambio del precio real de la vivienda (largo plazo)"
+   },
+   "need": "Price elasticity of new private housing supply, Spain if possible. Candidates: Caldera & Johansson (2013, J. Housing Econ., 'The price responsiveness of housing supply in OECD countries': long-run estimate for Spain); Banco de España work on housing supply (e.g. Documentos Ocasionales on the housing market 2023-2025); Saiz (2010) only as US contrast. Model use: private completions deviation = elasticity × price deviation two years earlier × baseline private completions (about 80,000 a year).",
+   "hints": "OECD working-paper version: 'The price responsiveness of housing supply in OECD countries', OECD Economics Department WP 837 (www.oecd.org is blocked: try one-search or a mirror such as ideas.repec.org links, or the ECO/WKP pdf on read.oecd-ilibrary.org)."
+  },
+  {
+   "id": "V03_mortgage_binding_share",
+   "agent": "pilot",
+   "from": "tope_ltv_lti",
+   "to": "credito_hipotecario_nuevo",
+   "sign": "-",
+   "layer": "contable",
+   "parameter": {
+    "name": "hip_sobre_ltv80",
+    "unit": "fracción del volumen de nuevas hipotecas para vivienda con LTP (préstamo/precio) > 80 %"
+   },
+   "need": "Distribution of NEW housing mortgage lending in Spain by loan-to-price (LTP/LTV) and loan-to-income (LTI) or debt-service-to-income, latest year (Banco de España Informe de Estabilidad Financiera, spring/autumn 2024-2025, or its data annex). Main parameter: share of new lending VOLUME (or of loans, say which) with LTP > 80 %. extra_parameters: hip_sobre_ltv90 (LTP > 90 %), hip_sobre_ltv70 (LTP > 70 %; if only a 60-80 bucket exists, interpolate and say so), hip_sobre_lti6 (LTI > 6 or the nearest published threshold), hip_sobre_lti45 (LTI > 4.5 or nearest). Accounting, grade A if published by BdE. Low/high = the range over the last 2-3 years published.",
+   "hints": "BdE IEF pdfs: https://www.bde.es/wbe/es/publicaciones/informes-memorias-anuales/informe-estabilidad-financiera/ (look for 'LTP', 'LTV', 'LSTI', 'LTI', 'préstamo-precio'). Also BdE 'Indicadores de la política macroprudencial' (CCA). The ICO guarantee lines for young buyers (from 2023) allow LTP up to 100 %: mention if the IEF says so."
+  },
+  {
+   "id": "V04_tourist_conversion",
+   "agent": "pilot",
+   "from": "limite_alquiler_turistico",
+   "to": "parque_residencial",
+   "sign": "+",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "conversion_turistica",
+    "unit": "fracción de las viviendas turísticas retiradas que pasan a vivienda habitual (alquiler o venta) en 1-2 años"
+   },
+   "need": "When tourist rentals are restricted (licences withdrawn, bans), which share of the removed tourist dwellings returns to long-term residential use (rental or owner-occupied) within 1-2 years, vs. staying empty, becoming seasonal/mid-term lets (alquiler de temporada) or continuing illegally? Evidence: Barcelona (licence moratorium, 2028 ban), Valencia, Palma, Lisbon, Amsterdam, New York Local Law 18 (2023: listings fell ~80 %, little change in long-term rental supply per several reports), Los Angeles HSO (Koster, van Ommeren & Volkhausen 2021, J. Urban Econ.). Give central/low/high with derivation; grade B or C, D if only reports/assumption.",
+   "hints": "Koster et al. 2021 Tinbergen Institute DP version (papers.tinbergen.nl). NYC: Inside Airbnb / NYC Comptroller or Office of Special Enforcement reports. Barcelona: Ajuntament reports on 'pisos turístics' converted. Seasonal-lets (temporada) leakage in Spain: say if documented."
+  },
+  {
+   "id": "V05_rent_cap_compliance",
+   "agent": "rental",
+   "from": "tope_alquiler",
+   "to": "alquiler_cubierto",
+   "sign": "-",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "cumplimiento_tope",
+    "unit": "fracción de la rebaja exigida por el tope que se materializa en los alquileres de los contratos cubiertos"
+   },
+   "need": "For second-generation rent caps on new contracts (rent at most a reference index), which fraction of the mandated reduction actually shows up in contract rents (non-compliance, side payments, furniture/seasonal lets, reclassification)? Spain first: Catalonia 2020 (Ley 11/2020) with Incasòl deposit data; Catalonia 2024 (Ley 12/2023 zones, from March 2024) if evaluated; compute as measured average rent change of covered contracts / mandated average cut (share of contracts above the index × average gap above it) where the studies give both. Model use: covered rent change = - mandated cut × this fraction.",
+   "hints": "Jofre-Monseny, Martínez-Mazza & Segú (IEB WP 2022/04 or J. Urban Econ. 2023); García-Montalvo & Monràs (UPF/BSE working paper); Generalitat/Incasòl or Agència de l'Habitatge evaluation reports; Kholodilin review."
+  },
+  {
+   "id": "V06_rental_scarcity_spillover",
+   "agent": "rental",
+   "from": "oferta_alquiler",
+   "to": "alquiler_no_cubierto",
+   "sign": "-",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "traslado_escasez_alquiler",
+    "unit": "% de subida del alquiler de mercado no cubierto por cada 1 % de caída de la oferta total de alquiler de mercado"
+   },
+   "need": "Inverse demand / spillover within the rental market: when the market rental supply falls by 1 % (e.g. landlords exit because of a cap), by how much do rents of uncovered units / new searchers rise? Evidence: Diamond, McQuade & Qian (2019): treated supply -15 %, citywide rents +5.1 % (derive the share of the rental stock treated to normalise); Catalonia 2020 spillovers to non-regulated units (García-Montalvo & Monràs; Jofre-Monseny et al.); Autor, Palmer & Pathak (2014, JPE, Cambridge decontrol) as contrast. Give central/low/high in the stated unit with the normalisation.",
+   "hints": "NBER w24181 (Diamond et al.), NBER w18125 (Autor, Palmer, Pathak)."
+  },
+  {
+   "id": "V07_rent_renewal",
+   "agent": "rental",
+   "from": "alquiler_mercado",
+   "to": "alquiler_pagado",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "renovacion_contratos",
+    "unit": "fracción de los contratos de alquiler de vivienda que son nuevos o se renegocian cada año"
+   },
+   "need": "Share of rental contracts (habitual residence) that are new or renegotiated each year in Spain: new contracts per year (deposits of fianzas, SERPAVI or regional deposit registers; INE/Incasòl) / stock of rented main residences; and the legal duration (Ley 29/1994 LAU art. 9 as amended by RDL 7/2019: 5 years, 7 if the landlord is a company; annual update caps 2023-2024, index from 2025). Model use: rents paid by sitting tenants converge to market rents at this rate. Accounting, grade A if from deposits/law.",
+   "hints": "Incasòl publishes contracts per year in Catalonia (habitatge.gencat.cat); SERPAVI methodology (MIVAU) gives contracts per year from IRPF; ECV/Censo 2021 gives rented main residences (~3.3-3.8 M)."
+  },
+  {
+   "id": "B05_catalonia_2020",
+   "agent": "rental",
+   "from": "tope_alquiler",
+   "to": "alquiler_cubierto",
+   "sign": "-",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "efecto_tope_cataluna_2020",
+    "unit": "% de cambio medido del alquiler medio de los contratos cubiertos por la Ley 11/2020 (Cataluña), sept. 2020 - mar. 2022"
+   },
+   "need": "VALIDATION benchmark for the backtest of the 2020 Catalan rent cap (Ley 11/2020, in force 22 Sept 2020 until annulled by STC 37/2022, March 2022): measured effect on average rents of covered units (main parameter, %, negative = fall) from the quasi-experimental studies; extra_parameters: efecto_oferta_cataluna_2020 (% change in rental supply/listings/contracts of covered units), cobertura_cataluna_2020 (share of Catalan rental contracts in the 61 covered municipalities), cuota_sobre_indice_2020 (share of contracts above the reference index before the law), brecha_sobre_indice_2020 (average % gap of those contracts above the index). If a value is not published, set grade D for it in derivation and give your best documented approximation.",
+   "hints": "Same studies as V05/V06; Incasòl deposit statistics; Decret llei 1/2020 / Ley 11/2020 BOE (www.boe.es)."
+  },
+  {
+   "id": "V08_public_lag",
+   "agent": "supply",
+   "from": "vivienda_publica",
+   "to": "obra_publica_terminada",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "retardo_obra_publica",
+    "unit": "años desde la decisión (programa con suelo disponible) hasta la vivienda pública terminada"
+   },
+   "need": "Years from a public housing programme decision (land available) to completed dwellings in Spain: planning + tender + permit + construction. Evidence: average construction time of new dwellings (INE/MIVAU: starts vs completions, ~2 years), Plan Vive Madrid, SEPES / Casa 47, EMVS Madrid, Incasòl or IMPSOL timelines; Tribunal de Cuentas or AIReF evaluations of the Plan Estatal de Vivienda execution. extra_parameters: retardo_obra_privada (years from start/permit to completion for private dwellings).",
+   "hints": "MIVAU boletín (licencias, iniciadas, terminadas); AIReF spending review on housing ('Evaluación del gasto público 2019: Programa de ayudas a la vivienda' or later)."
+  },
+  {
+   "id": "V09_public_cost",
+   "agent": "supply",
+   "from": "vivienda_publica",
+   "to": "gasto_publico",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "coste_vivienda_publica",
+    "unit": "miles de euros de gasto público por vivienda pública en alquiler terminada (construcción; suelo público aparte)"
+   },
+   "need": "Public cost per new public rental dwelling in Spain (construction + fees; say whether land is included): recent tenders/budgets of SEPES (Casa 47), EMVS Madrid, Incasòl, IMPSOL, IVVSA/EVHA, Plan Estatal de Vivienda 2022-2025 or 2026-2030 cost per dwelling, PERTE/MRR social rental programme (Plan de vivienda en alquiler social, 4,000 M€ for ~20,000 dwellings?). extra_parameters: renta_social_mes (average monthly rent of public rental housing, €), cuota_financiacion_publica (share of the cost borne by public budgets vs loans repaid from rents, 0-1). Accounting.",
+   "hints": "MIVAU press releases on Plan de Recuperación housing component (C02.I02); Casa 47 annual report; BOE resolutions of Plan Estatal."
+  },
+  {
+   "id": "V10_crowd_out",
+   "agent": "supply",
+   "from": "obra_publica",
+   "to": "obra_privada",
+   "sign": "-",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "desplazamiento_obra_privada",
+    "unit": "fracción de las viviendas públicas terminadas compensada por menos viviendas privadas (sin contar el efecto del precio)"
+   },
+   "need": "Crowding out of private construction by public/subsidised construction. Literature: Murray (1999, 2021 'Subsidized and unsubsidized housing stocks 1935 to 1987'/'crowding out revisited'), Sinai & Waldfogel (2005, J. Public Econ.), Eriksen & Rosenthal (2010, J. Public Econ., LIHTC ~ full crowd-out), Baum-Snow & Marion (2009). Our model separately has private supply responding to prices (elasticity card V02), so give the DIRECT part (capacity: land, builders, workers) if studies separate it, or the total and say the model's direct parameter should be lower. Spain: any evidence on construction capacity (labour shortage reports, CNC/Seopan). Central/low/high with derivation.",
+   "hints": "NBER/working-paper versions; Sinai-Waldfogel NBER w9255."
+  },
+  {
+   "id": "V11_land_absorption",
+   "agent": "supply",
+   "from": "suelo_liberado",
+   "to": "obra_privada",
+   "sign": "+",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "absorcion_suelo",
+    "unit": "fracción de la capacidad de suelo finalista liberada que se convierte en viviendas terminadas al año"
+   },
+   "need": "When land for X dwellings a year is released (finalist land, urbanised, with permits), which share becomes completed dwellings each year, after the private lag? Evidence: Spain's 1998 Ley 6/1998 land liberalisation and its outcome; BdE or OECD analysis of land-use regulation and supply in Spain; Hilber & Vermeulen (2016, Econ. J., UK); Gyourko & Molloy (2015, Handbook). Likely grade C/D: give a documented range and say it is an assumption if no estimate exists.",
+   "hints": "BdE Documento Ocasional on housing supply (2024-2025); OECD 'Brick by Brick' (2021) blocked at oecd.org: try mirrors."
+  },
+  {
+   "id": "V12_rent_stock_elasticity",
+   "agent": "demand",
+   "from": "parque_por_hogar",
+   "to": "alquiler_mercado",
+   "sign": "-",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "respuesta_alquiler_parque",
+    "unit": "% de caída del alquiler por cada 1 % más de viviendas por hogar"
+   },
+   "need": "Inverse demand elasticity: by how much do rents (and prices) fall when the housing stock rises 1 % relative to households? From estimates of the price elasticity of housing demand (−0.3 to −0.9 → inverse 1.1-3.3) or direct estimates (UK: Meen; England housing need models; Mulheirn critique; BdE estimates for Spain if any; Asquith, Mast & Reed 2023 on new buildings and nearby rents as local contrast; Pennington 2021). Central/low/high in the stated unit with derivation; contrary_evidence: studies finding small effects (Mulheirn 2019).",
+   "hints": "BdE DO 2415 / 2024-2025 housing papers; Upjohn Institute WP (Mast) ; UK MHCLG 'affordability model'."
+  },
+  {
+   "id": "V13_emancipation_rent",
+   "agent": "demand",
+   "from": "alquiler_mercado",
+   "to": "jovenes_en_casa",
+   "sign": "+",
+   "layer": "segunda_ronda",
+   "parameter": {
+    "name": "elasticidad_emancipacion",
+    "unit": "% de cambio de los jóvenes de 18-34 que viven con sus padres por cada 1 % de cambio del alquiler"
+   },
+   "need": "Elasticity of young adults living with parents (or of headship/household formation) with respect to rents, Spain if possible: Martínez-Granado & Ruiz-Castillo (2002, J. Population Econ.); Fernández & Ruiz-Castillo; Consejo de la Juventud Observatorio de Emancipación (descriptive); US/EU: Matsudaira (2016, Demography), Paciorek (2016, Regional Science and Urban Economics 'The long and the short of household formation'), Laferrère. Normalise to the stated unit; say if the source gives a semi-elasticity or a headship effect. This is a second-round effect (loop B2).",
+   "hints": ""
+  },
+  {
+   "id": "V14_new_household_size",
+   "agent": "demand",
+   "from": "emancipacion",
+   "to": "hogares",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "personas_por_hogar_nuevo",
+    "unit": "personas por hogar nuevo formado al emanciparse jóvenes de 18-34"
+   },
+   "need": "Average number of young adults per newly formed household when they leave home (singles vs couples; ECV/EPA/Censo 2021 household composition of 25-34 heads, INE 'Encuesta Continua de Hogares'). extra_parameters: hogares_por_inmigrante (households formed per net immigrant: 1 / average size of households of recent immigrants, INE ECH or Censo 2021). Model use: emancipated persons / this = new households; net migration × hogares_por_inmigrante = new households.",
+   "hints": "INE Encuesta Continua de Hogares (tables by nationality and size); python3 -m scripts.voting_aid_impacts_kit ine TABLE -g REGEX."
+  },
+  {
+   "id": "B07_tourist_rents",
+   "agent": "demand",
+   "from": "viviendas_turisticas",
+   "to": "alquiler_mercado",
+   "sign": "+",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "efecto_turistico_alquiler",
+    "unit": "% de subida del alquiler por cada punto (1 % del parque) de viviendas en plataformas turísticas"
+   },
+   "need": "VALIDATION benchmark: quasi-experimental effect of tourist rentals on long-term rents in Spain: Garcia-López, Jofre-Monseny, Martínez-Mazza & Segú (2020, J. Urban Econ., 'Do short-term rental platforms affect housing markets? Evidence from Airbnb in Barcelona'). Normalise to % rent change per 1 percentage point of the dwelling stock listed (give the listings-per-dwelling figure used). extra_parameters: efecto_turistico_precio (same for prices). Also cite other Spanish/EU estimates if quickly available (Valencia, Lisbon, Madrid).",
+   "hints": "IEB working paper version (ieb.ub.edu) or SSRN; "
+  },
+  {
+   "id": "V15_constrained_credit_loss",
+   "agent": "credit",
+   "from": "tope_ltv_lti",
+   "to": "credito_hipotecario_nuevo",
+   "sign": "-",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "perdida_credito_restringido",
+    "unit": "fracción del volumen de nuevas hipotecas por encima del límite que desaparece (no se reconvierte en un préstamo menor)"
+   },
+   "need": "When a borrower-based cap on new mortgages binds, which fraction of the VOLUME of the loans above the cap disappears from new lending? It counts both the mechanical part (a loan at 90 % of price cut to 80 % loses 11 % of its amount) and borrowers who drop out, delay or buy much cheaper; borrowers who add savings or family help to buy the same home lose only the mechanical part. Model use: new lending change = − this fraction × share of new lending volume above the cap. For scale: in Spain 43.8 % of new lending had loan-to-price > 80 % at end-2025 (BdE IEF spring 2026), but the mean loan-to-price is about 78 %, so most loans above 80 % are only slightly above. Evidence: Ireland 2015 mortgage measures (Central Bank of Ireland evaluations; Acharya et al. 2022, 'Real effects of borrower-based macroprudential policy', J. Financial Econ.), UK 2014 LTI flow limit, Netherlands, Israel (Tzur-Ilan), New Zealand LVR; cross-country Alam et al. (2019 IMF iMaPP) and Araujo et al. (2024 meta-analysis of macroprudential policy). extra_parameters: efecto_ltv_meta_precio (house price growth effect of a typical LTV tightening, pp, from a meta-analysis) and efecto_ltv_meta_credito (same for credit growth).",
+   "hints": "IMF is blocked at www.imf.org: try elibrary.imf.org or SSRN/BIS mirrors; Central Bank of Ireland: www.centralbank.ie."
+  },
+  {
+   "id": "V16_price_credit_elasticity",
+   "agent": "credit",
+   "from": "credito_hipotecario",
+   "to": "precio_vivienda",
+   "sign": "+",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "elasticidad_precio_credito",
+    "unit": "% de cambio del precio real de la vivienda por cada 1 % de cambio del saldo real de crédito a la vivienda"
+   },
+   "need": "Elasticity of house prices to housing credit (stock), Spain if possible: Gimeno & Martínez-Carrascal (2010, Banco de España DT 1027 / Regional Science and Urban Economics, 'The relationship between house prices and house purchase loans: the Spanish case'); Akin, Montalvo, García Villar, Peydró & Raya (2014, SERIEs, 'The real estate and credit bubble: evidence from Spain'); Favara & Imbs (2015, AER) as quasi-experimental US contrast (mortgage credit → prices). Normalise to the stated unit (long-run).",
+   "hints": "BdE DT pdfs: https://www.bde.es/f/webbde/SES/Secciones/Publicaciones/PublicacionesSeriadas/DocumentosTrabajo/10/Fich/dt1027e.pdf (check)."
+  },
+  {
+   "id": "V17_credit_price_feedback",
+   "agent": "credit",
+   "from": "precio_vivienda",
+   "to": "credito_hipotecario_nuevo",
+   "sign": "+",
+   "layer": "segunda_ronda",
+   "parameter": {
+    "name": "elasticidad_credito_precio",
+    "unit": "% de cambio del nuevo crédito hipotecario por cada 1 % de cambio del precio de la vivienda (garantía)"
+   },
+   "need": "Feedback of house prices onto mortgage credit (collateral channel, loop R2): elasticity of new housing lending (or credit demand/supply) to house prices, Spain if possible (Gimeno & Martínez-Carrascal 2010 long-run credit equation; BdE models). extra_parameters: cuota_credito_nuevo (new housing loans per year / stock of household housing credit, latest year, Banco de España: new operations 'préstamos a la vivienda' vs outstanding stock) — accounting, A.",
+   "hints": "BdE Boletín Estadístico tables 19.x (nuevas operaciones), 4.13; python3 -m scripts.voting_aid_impacts_kit fetch URL -g REGEX."
+  },
+  {
+   "id": "V18_tenure_substitution",
+   "agent": "credit",
+   "from": "credito_hipotecario_nuevo",
+   "to": "alquiler_mercado",
+   "sign": "-",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "sustitucion_alquiler",
+    "unit": "% de subida del alquiler de mercado por cada 1 % de caída del nuevo crédito hipotecario"
+   },
+   "need": "When mortgage credit is tightened (macroprudential caps), some would-be buyers rent instead: effect on rents. Evidence: Ireland 2015 rules (rents? Central Bank evaluations 2019/2021 'Framework review'); Tzur-Ilan (2023, Israel LTV limits and housing choice); Kinghan, McCarthy & O'Toole; US tenure choice and credit (Mian & Sufi as contrast). Likely grade C/D with a wide range including 0.",
+   "hints": ""
+  },
+  {
+   "id": "B06_boom_credit",
+   "agent": "credit",
+   "from": "credito_hipotecario",
+   "to": "precio_vivienda",
+   "sign": "+",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "cuota_boom_credito",
+    "unit": "fracción de la subida del precio real de la vivienda en España 1997-2007 atribuida al crédito y las condiciones de financiación"
+   },
+   "need": "VALIDATION benchmark: published decompositions of the Spanish 1997/2000-2007 house price boom: share attributed to credit/financing conditions (interest rates, credit supply, LTV/maturity) vs fundamentals (income, demography/immigration) vs overvaluation. Candidates: Ayuso, Blanco & Restoy (2006, BdE DT 0603 'House prices and real interest rates in Spain'); Akin et al. (2014, SERIEs); BdE Informe Anual 2007 or IEF boxes; Bover (2011?). Main parameter = share attributed to credit/financing (0-1, low/high across studies); derivation explains the definitions; extra_parameters: subida_precio_real_boom (log change of real house prices in the period the source uses).",
+   "hints": "BdE DT pdfs under www.bde.es/f/webbde/SES/Secciones/Publicaciones/PublicacionesSeriadas/DocumentosTrabajo/YY/Fich/dtNNNN.pdf."
+  }
+ ]
+}

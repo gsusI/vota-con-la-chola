@@ -3,13 +3,14 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
-import { DEFAULT_LEVERS, LAYERS, applyLayer, centralParams, decodeState, encodeState, quintileImpact, runEnsemble, simulate } from "./engine.mjs";
+import { DEFAULT_LEVERS, HOUSING_KEYS, LAYERS, applyLayer, centralParams, decodeState, encodeState, quintileImpact, runEnsemble, simulate } from "./engine.mjs";
 import { computeBacktests } from "./backtests.mjs";
 
 const here = fileURLToPath(new URL(".", import.meta.url));
-const model = JSON.parse(fs.readFileSync(`${here}../../../public/visualizaciones/data/sistema.json`, "utf8"));
+// SISTEMA_JSON: a development export (scripts/export_public_viz_system.py --out); the default is the published file.
+const model = JSON.parse(fs.readFileSync(process.env.SISTEMA_JSON || `${here}../../../public/visualizaciones/data/sistema.json`, "utf8"));
 const END = model.years.length - 1;
-const DEVS = ["debt_dev_pp", "pension_gross_pp", "employment_k", "p1_month", "p4_month", "gdp_dev", "price_level_dev"];
+const DEVS = ["debt_dev_pp", "pension_gross_pp", "employment_k", "p1_month", "p4_month", "gdp_dev", "price_level_dev", ...HOUSING_KEYS];
 
 test("current law: every deviation is zero and the baseline is returned unchanged", () => {
   const run = simulate(model, DEFAULT_LEVERS);
@@ -71,7 +72,7 @@ test("ensemble is deterministic and fast enough for the browser", () => {
 });
 
 test("URL fragment round-trip", () => {
-  const levers = { ...DEFAULT_LEVERS, reval: -0.5, closure: "iva", migration: "low" };
+  const levers = { ...DEFAULT_LEVERS, reval: -0.5, closure: "iva", migration: "low", ltiCap: 4.5, capCov: 50, capCut: 10 };
   const hash = encodeState(levers, { incidencia: 1 }, { h: 2050 });
   const back = decodeState(`#${hash}`);
   assert.deepEqual(back.levers, levers);
@@ -107,4 +108,61 @@ test("quintile split distributes exactly the statutory burden", () => {
   const expected = -((run.s_irpf_all_pp[t] + run.s_irpf_top_pp[t]) / 100) * gdpEur;
   assert.ok(Math.abs(irpf / expected - 1) < 1e-9);
   assert.ok(q[0].byPart.pensiones > 0 && q[4].byPart.irpf < q[0].byPart.irpf);
+});
+
+// ---- Housing (slice 2)
+const T35 = model.years.indexOf(2035);
+
+test("housing stock identity: extra dwellings are the sum of completions plus tourist conversions", () => {
+  const run = simulate(model, { ...DEFAULT_LEVERS, pubHomes: 20, land: 10, tourCut: 30, ltvCap: 80 });
+  let cum = 0;
+  for (let t = 1; t < model.years.length; t += 1) {
+    cum += run.hs_completions_k[t];
+    assert.ok(Math.abs(cum + run.hs_tourist_k[t] - run.hs_stock_k[t]) < 1e-9, String(model.years[t]));
+  }
+});
+
+test("building lowers rents, emancipates young adults (B2) and the cost reaches debt or taxes", () => {
+  const run = simulate(model, { ...DEFAULT_LEVERS, pubHomes: 20 });
+  assert.ok(run.hs_stock_k[T35] > 0 && run.hs_rent[T35] < 0 && run.hs_emancipated_k[T35] > 0);
+  assert.ok(run.hs_cost_pp[T35] > 0 && run.debt_dev_pp[T35] > 0);
+  const iva = simulate(model, { ...DEFAULT_LEVERS, pubHomes: 20, closure: "iva" });
+  assert.ok(iva.p1_month[T35] < 0, "paying with VAT costs case 1");
+  // Without emancipation the same dwellings lower rents more: B2 absorbs part of what is built.
+  const p = { ...centralParams(model), elasticidad_emancipacion: 0 };
+  const noB2 = simulate(model, { ...DEFAULT_LEVERS, pubHomes: 20 }, p);
+  assert.ok(noB2.hs_rent[T35] < run.hs_rent[T35]);
+});
+
+test("rent cap: covered contracts pay the cut in the accounting layer; behaviour adds supply exit and spillover", () => {
+  const lv = { ...DEFAULT_LEVERS, capCov: 50, capCut: 10 };
+  const acc = simulate(model, lv, applyLayer(model, centralParams(model), "contable"));
+  assert.ok(Math.abs(acc.hs_rent_cov[T35] + 0.1) < 1e-12);
+  assert.ok(acc.hs_rental_stock_k[T35] === 0 && acc.hs_rent_unc[T35] === 0);
+  const full = simulate(model, lv);
+  assert.ok(full.hs_rent_cov[T35] < 0 && full.hs_rent_unc[T35] >= 0 && full.hs_rental_stock_k[T35] <= 0);
+  // Every school of the contested supply response keeps covered rents down.
+  const d = model.params.respuesta_oferta_tope.debate;
+  d.schools.forEach((_, i) => assert.ok(simulate(model, lv, centralParams(model, { [d.id]: i })).hs_rent_cov[T35] < 0));
+});
+
+test("mortgage caps cut credit and prices; the credit-price loop (R2) amplifies the fall", () => {
+  const lv = { ...DEFAULT_LEVERS, ltvCap: 80, ltiCap: 4.5 };
+  const run = simulate(model, lv);
+  assert.ok(run.hs_credit[T35] < 0 && run.hs_price[T35] < 0 && run.hs_binding[T35] > 0);
+  const noLoop = simulate(model, lv, { ...centralParams(model), elasticidad_credito_precio: 0 });
+  assert.ok(run.hs_price[T35] < noLoop.hs_price[T35]);
+  assert.ok(run.p2b_upfront_eur[T35] > 0, "a 4.5 LTI cap binds for case 2's purchase");
+});
+
+test("housing converges for every parameter draw (no explosive credit loop)", () => {
+  const e = runEnsemble(model, { ...DEFAULT_LEVERS, ltvCap: 70, ltiCap: 4.5, pubHomes: 60, capCov: 100, capCut: 20, tourCut: 100, migration: "high" });
+  for (const run of e.runs) {
+    for (const key of ["hs_price", "hs_rent", "hs_rent_unc", "hs_credit"]) assert.ok(run[key].every((v) => Number.isFinite(v) && Math.abs(v) < 1), key);
+  }
+});
+
+test("more immigration means more households and higher rents", () => {
+  const run = simulate(model, { ...DEFAULT_LEVERS, migration: "high" });
+  assert.ok(run.hs_migration_hh_k[T35] > 0 && run.hs_rent[T35] > 0);
 });

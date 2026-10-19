@@ -1,0 +1,17 @@
+{
+ "id": "V01_rent_cap_supply",
+ "verdict": "fix",
+ "source_ok": false,
+ "value_ok": false,
+ "grade_ok": true,
+ "wording_ok": false,
+ "evidence": "Jofre-Monseny et al. pág. 3 (sin caída de contratos ni stock) y Monràs y García-Montalvo pág. 18 ('a decrease of 1%... around 2%'), Tabla V panel B pág. 42 (IV 1,987) y 2,3 en la introducción se confirman; Diamond et al. dan -15 % (pág. 2 y 32) y 2.300-6.600 $ por persona y año (pág. 6), pero no publican ninguna rebaja de alquiler: el 25 % es un supuesto propio y el '3.000 $/mes' es solo la normalización de cálculo del modelo (pág. 15), no un alquiler observado. El periodo de Monràs es 2016-jun. 2021, no 2017-2022.",
+ "corrections": {
+  "sources.1.period": "contratos ene. 2016 - jun. 2021",
+  "sources.1.locator": "pág. 4-5 (introducción, 'around 2.3'), pág. 18 (cita) y pág. 42 (Tabla V panel B col. 1: 1,987)",
+  "sources.2.locator": "pág. 2 (resumen) y pág. 32",
+  "debate.schools.2.label": "San Francisco, largo plazo: -15 % de oferta sobre una rebaja supuesta del 25 % (Diamond, McQuade y Qian)",
+  "derivation": "Normalización = cambio de oferta (%) / rebaja de alquiler (%) en unidades cubiertas. Jofre-Monseny et al.: 0 / (4-6 %) = 0. Monràs y García-Montalvo: elasticidad IV publicada ≈ 2 de los nuevos contratos (Tabla V: 1,987; 2,3 en la introducción). Diamond et al.: -15 % de oferta en edificios tratados; el artículo no publica la rebaja de alquiler que da el control, así que el 25 % es un SUPUESTO propio (grado D): beneficio de 2.300-6.600 $ por persona y año (1995-2012) frente a un alquiler de mercado supuesto de unos 3.000 $/mes (el 3.000 del artículo es solo una normalización de cálculo); 15/25 ≈ 0,6 (0,4-1,15 con rebajas del 37 % al 13 %). Central 1,0 = juicio: punto medio de las dos escuelas catalanas (stock frente a flujo de contratos), cerca de San Francisco; bajo y alto = extremos de las escuelas. La revisión de Kholodilin no da una cifra comparable y se usa solo como evidencia de dirección y calidad.",
+  "note_es": "Según dos estudios de la ley catalana de 2020, la oferta de alquiler cayó entre un 0 % (stock y contratos) y unos 2 % de contratos nuevos por cada 1 % de rebaja; en San Francisco la oferta de los edificios regulados cayó un 15 %, unos 0,6 % por cada 1 % si se supone una rebaja del 25 % (supuesto nuestro). Usamos 1 %, con rango 0-2,3. Las revisiones hallan además peor mantenimiento."
+ }
+}

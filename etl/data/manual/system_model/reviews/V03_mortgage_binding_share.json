@@ -1,0 +1,20 @@
+{
+ "id": "V03_mortgage_binding_share",
+ "verdict": "fix",
+ "source_ok": true,
+ "value_ok": false,
+ "grade_ok": false,
+ "wording_ok": true,
+ "evidence": "IEF primavera 2026 cap. 4 pág. 9: 'La proporción de nuevas operaciones con LTP por encima del 80 %... del 39,2 %... al 43,8 %' (LTP = préstamo/precio de compraventa, media 80,4 % al final de 2025); el IEF 2025 (pág. 9) habla de 'peso relativo del crédito' 41,3 %. Es una proporción de operaciones, sin indicar ponderación por importe, no 'del volumen'; el LTP medio 81,2 % de la derivación no aparece (es 80,4 %), y los cuatro extra son supuestos.",
+ "corrections": {
+  "parameter.unit": "fracción de las nuevas operaciones hipotecarias para vivienda con LTP (préstamo/precio de compraventa) > 80 % (el BdE habla de 'operaciones' sin precisar si pondera por importe)",
+  "extra_parameters.0.unit": "fracción de las nuevas operaciones hipotecarias para vivienda con LTP > 90 %",
+  "extra_parameters.1.unit": "fracción de las nuevas operaciones hipotecarias para vivienda con LTP > 70 %",
+  "extra_parameters.0.grade": "D",
+  "extra_parameters.1.grade": "D",
+  "extra_parameters.2.grade": "D",
+  "extra_parameters.3.grade": "D",
+  "sources.0.locator": "pág. 9 (texto y gráfico 4.5.a; LTP medio 80,4 % al final de 2025); pág. 10 (LTV>80 %, gráfico 4.5.b; gráfico 4.6.a LTI>5 solo en gráfico)",
+  "derivation": "Parámetro principal publicado por el BdE: 43,8 % de las nuevas operaciones con LTP > 80 % a finales de 2025 (central = alto), 41,3 % del crédito nuevo en 2024 y 39,2 % a comienzos de 2024 (bajo); el texto habla de 'operaciones' en 2026 y de 'peso del crédito' en 2025, sin precisar si es número o importe. Los parámetros extra NO están publicados en cifras (solo LTI>5 y LSTI>30 % en gráficos sin datos): LTP>90 y >70 son supuestos (grado D) anclados en el LTP medio de 77,8-80,4 % y el 43,8 % sobre 80; LTI>6 y >4,5 son supuestos (grado D) anclados en el LTI medio de 4,4-4,5. Los capítulos leídos no mencionan las líneas de avales ICO."
+ }
+}

@@ -6895,10 +6895,11 @@ education-refresh *args:
   python3 scripts/ingest_education_es.py {{args}}
   python3 scripts/export_public_viz_education.py
 
-# Policy simulator (/visualizaciones/sistema/), slice 0 pensions + public finances: validate and merge the edge cards
-# (etl/data/manual/system_model/edges, reviewer corrections applied with `scripts/system_model_kit.py apply-reviews`),
-# export the model on the Ageing Report 2024 baseline (raw cache) + 2025 accounts (public-finance-es.db) + typical cases
-# from carga-fiscal.json, then run the engine tests and backtests (Node, same code as the browser).
+# Policy simulator (/visualizaciones/sistema/), slices 0-2 (pensions + public finances, taxes, housing): validate and
+# merge the edge cards (etl/data/manual/system_model/edges, reviewer corrections applied with
+# `scripts/system_model_kit.py apply-reviews`), export the model on the Ageing Report 2024 baseline (raw cache) + 2025
+# accounts (public-finance-es.db) + typical cases from carga-fiscal.json + housing inputs from vivienda.json and the INE
+# household projection (raw cache), then run the engine tests and backtests (Node, same code as the browser).
 system-model-refresh:
   python3 scripts/system_model_kit.py validate etl/data/manual/system_model/edges/*.json
   python3 scripts/system_model_kit.py merge

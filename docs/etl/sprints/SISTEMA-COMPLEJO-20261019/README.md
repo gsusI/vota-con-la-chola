@@ -1,6 +1,6 @@
 # Simulador del sistema: pensiones, impuestos, vivienda, empleo, sanidad y educación como un solo sistema
 
-Fecha: 2026-10-19. Diseño (§1–§10), **corte 0** (§11) y **corte 1** (§12) publicados.
+Fecha: 2026-10-19. Diseño (§1–§10), **corte 0** (§11) y **corte 1** (§12) publicados; **corte 2** (vivienda, §13) en `main`.
 
 - **Dónde estamos.** Cinco verticales en `/visualizaciones/` (carga fiscal, empleo, educación, sanidad, vivienda), cada una
   con su exporter, sus fuentes con sha256 y cinco casos tipo compartidos ([VIZ-SEGMENTOS](../VIZ-SEGMENTOS-20261019/README.md)).
@@ -10,8 +10,9 @@ Fecha: 2026-10-19. Diseño (§1–§10), **corte 0** (§11) y **corte 1** (§12)
   pensiones», «limitar el alquiler», «copago sanitario») y ve, en tiempo real, cómo se propaga el cambio por un mapa causal,
   cuánto cuesta, quién lo paga, qué les pasa a los cinco casos tipo y con qué incertidumbre. Cada palanca enlaza a cómo
   votó cada partido.
-- **Qué sigue.** Cortes 0 y 1 hechos (§11, §12): pensiones, cuentas públicas e impuestos con reparto por quintil en
-  `/visualizaciones/sistema/`. Siguiente: corte 2, vivienda (§9).
+- **Qué sigue.** Cortes 0, 1 y 2 hechos (§11–§13): pensiones, cuentas públicas, impuestos con reparto por quintil y
+  vivienda (obra, suelo, tope, turísticos, crédito; bucles B2 y R2) en `/visualizaciones/sistema/`. Siguiente: corte 3,
+  empleo e inmigración (§9).
 
 ## 1. Qué tipo de modelo, y por qué
 
@@ -319,3 +320,66 @@ ejecutados con Node sobre el mismo código del navegador; JSON con fuentes y sha
   del 0,84 % al 0,54 % de la renta del primer al quinto quintil.
 - **Límites**: la ECV recoge peor las rentas más altas (el reparto del IRPF sale algo menos progresivo); la EPF de 2015
   puede no reflejar el gasto actual; no hay declaración conjunta, mínimos familiares ni escalas autonómicas concretas.
+
+## 13. Corte 2: vivienda (hecho, 2026-10-19)
+
+- **Palancas**: vivienda pública en alquiler (miles al año, decidida desde 2026), suelo finalista liberado (viviendas
+  posibles al año), límite al préstamo sobre el precio (LTP 90/80/70 %, la medida del Banco de España) y sobre la renta
+  bruta (LTI 6 y 4,5), tope del alquiler en zonas tensionadas (cobertura y rebaja exigida) y retirada de viviendas
+  turísticas. La inmigración del corte 0 (variantes ±33 % del Ageing Report) mueve ahora también los hogares. El coste
+  neto de la vivienda pública entra en el cierre («¿Cómo se paga?»): con IVA, el caso 1 paga menos de 1 € al mes en 2035
+  por 20.000 viviendas al año y su alquiler de un contrato nuevo baja unos 6 €.
+- **Datos** (`scripts/system_model_housing.py`, reglas en su cabecera): hogares de la Proyección de Hogares del INE
+  (tabla 54562, caché con sha256; después de 2040 crecen con la población del Ageing Report), obra terminada constante en
+  la media 2023–2025 (94.700 al año: supuesto, nadie la proyecta), parque del Censo 2021 más lo terminado, viviendas
+  turísticas (INE experimental, 1,28 %), inquilinos de mercado de la celda de la ECV, jóvenes de 25–34 en casa
+  (Eurostat) y los casos tipo con los alquileres del SERPAVI de `vivienda.json` (sha256), sin recalcular. Puertas: hogares
+  del INE frente a la EPA, viviendas por hogar entre 1,2 y 1,5, inquilinos de mercado entre el 12 % y el 25 %.
+- **Motor** (`engine.mjs`, el mismo en el navegador y en `node --test`): el alquiler de mercado se mueve con las viviendas
+  por hogar (elasticidad inversa de la demanda); los hogares latentes de jóvenes se emancipan al bajar el alquiler y
+  recorren la mitad del camino cada año (B2); el precio sigue al alquiler y al saldo de crédito, y el crédito nuevo sigue al
+  precio (R2); la obra privada responde al precio de dos años antes (B3) y la pública la desplaza en parte; el tope rebaja
+  los contratos cubiertos (con su cumplimiento), saca pisos del alquiler y sube los no cubiertos; los inquilinos con
+  contrato se acercan al mercado al renovar. Nuevas salidas `hs_*`, `p1_rent_*`, `p2r_rent_*`, `p2b_*`.
+- **Catálogo**: 21 fichas nuevas (18 relaciones y 3 pruebas), 54 en total. Tres debates: salida de oferta con el tope
+  (Cataluña sin caída de oferta, 0; Cataluña en contratos nuevos, ≈2; San Francisco, ≈0,6 con una rebaja supuesta),
+  traslado de la escasez al alquiler no cubierto (0,85 San Francisco frente a 0 Cataluña) y desplazamiento de la obra
+  privada (0,115 frente a 0,67). Grado D a la vista: coste total por vivienda pública (solo la ayuda, 39.800 €, está
+  publicada), alquiler social, suelo que se construye, pisos turísticos que vuelven, crédito que desaparece con un límite,
+  paso a alquilar, los umbrales de LTI y LTP distintos del 80 %.
+- **Bucle de agentes** (AGENTS.md): piloto de 4 fichas, 61 turnos y 5,9 M de tokens de entrada (los mismos que en el corte
+  0), casi todo buscando PDF. Arreglos: lista de URL comprobadas, regla de parar tras 3 intentos, ventana de texto en una
+  llamada. Segunda ola (2 agentes): 35 y 59 turnos, 3,3 y 6,3 M; tercera (2): 45 y 50 turnos, 4,3 y 4,5 M (≈1 M por
+  ficha). Lecciones: la lista de URL solo comprobaba el código HTTP y dos entradas eran otro documento (NBER w9255 y el DO
+  2415 del Banco de España); el esqueleto no traía `extra_parameters` aunque el prompt los pedía. Lo que más turnos
+  ahorraría: un buscador de mangos de `repositorio.bde.es` por número de documento, un `bde` para las tablas del Boletín
+  Estadístico y un buscador de tablas del INE.
+- **Revisión de calidad** (regla fijada antes; 10 de 21 sorteadas con semilla 20261019, publicable con ≥ 8 bien o
+  corregidas y ninguna sin respaldo): 3 bien, 7 corregidas, 0 sin respaldo. Correcciones con efecto en la lectura: la
+  rebaja de San Francisco (25 %) es nuestra, no del artículo; el 43,8 % de hipotecas con LTP > 80 % es de operaciones, no de
+  volumen (el motor lo usa como volumen y se dice); el coste por vivienda es coste total, con la parte pública aparte.
+  Los grados pueden ir ahora por parámetro (`extra_parameters[].grade`), porque varias fichas mezclan un dato publicado con
+  supuestos.
+- **Pruebas** (tolerancias fijadas el 2026-10-19 antes de rellenar las fichas, `backtests.mjs`): tope catalán de 2020
+  (−4,0 % en el modelo frente al −5,0 % medido; ±50 %; no independiente: el cumplimiento sale del mismo estudio), burbuja
+  2000–2007 (el término de crédito da cuenta del 46 % de la subida del precio en años de salario, frente a 30–100 % en los
+  estudios, ±15 puntos; prueba débil porque la referencia es D; el canal de parque por hogar apunta al revés: se terminaron
+  0,82 millones de viviendas más que hogares nuevos) y pisos turísticos en Barcelona (0,66 % por punto del parque en el
+  modelo frente a 1,25 % en el cuasi-experimento; entre un tercio y el triple). Seis pruebas nuevas del motor: identidad
+  del parque, B2 amortigua, el tope en la capa contable es exactamente la ley, R2 amplifica, convergencia en todos los
+  sorteos, inmigración y alquiler.
+- **Resultado principal** (2035, valor central y 5–95 %): 20.000 viviendas públicas más al año suman 96.000 viviendas
+  (0,4 % de los hogares) y bajan el alquiler de un contrato nuevo un 0,7 % (0,4–0,9; 2,4 % en 2050) por unos 770 millones
+  al año; los jóvenes que se emancipan ocupan un 3 % de lo construido, así que B2 resulta pequeño con estas fichas (la
+  elasticidad de la demanda ya incluye parte de la formación de hogares). Un tope del 10 % sobre la mitad del alquiler de
+  mercado baja un 4,0 % (3,0–5,4) el contrato cubierto y sube un 1,7 % (0,3–3,6) el no cubierto, con 66.000 pisos menos
+  de alquiler; según la escuela, de ningún piso menos y ningún cambio fuera del tope (Cataluña, oferta total) a −132.000 pisos y +3,4 % (Cataluña, contratos nuevos).
+  Retirar la mitad de los pisos turísticos: −0,5 %. Limitar la hipoteca al 80 % del precio y a 4,5 veces la renta: precio
+  −5,5 % (−1,3 a −9,5), de los que R2 multiplica por 1,17; el alquiler sube un 1,0 % porque parte de los compradores
+  alquila (supuesto D). Un tercio más de inmigración: alquiler +2,2 %.
+- **Límites que la página dice**: un solo mercado nacional (sin barrios ni comunidades); los pisos que salen del alquiler
+  con el tope no cambian el parque total; LTP y LTI independientes; la obra pública no tiene multiplicador; el esfuerzo por
+  edad aplica el cambio del alquiler a todo el gasto en vivienda de la celda.
+- **Siguiente**: corte 3, empleo e inmigración (SMI, jornada, cuota de autónomos), que une cotizantes y hogares. La capa
+  de presentación se está rediseñando (escena ilustrada) en otra sesión sobre este corte.
+

@@ -1,0 +1,206 @@
+{
+ "agent": "housing_demand",
+ "edges": [
+  {
+   "id": "V12_rent_stock_elasticity",
+   "from": "parque_por_hogar",
+   "to": "alquiler_mercado",
+   "sign": "-",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "respuesta_alquiler_parque",
+    "unit": "% de caída del alquiler por cada 1 % más de viviendas por hogar",
+    "low": 1.1,
+    "central": 1.65,
+    "high": 2.2
+   },
+   "lag_years": [
+    0,
+    2
+   ],
+   "grade": "B",
+   "spain_evidence": "no",
+   "sources": [
+    {
+     "url": "https://thinkhouse.org.uk/site/assets/files/1394/cache0819b.pdf",
+     "title": "Tackling the UK housing crisis: is supply the answer?",
+     "authors_year": "Mulheirn (2019), UK Collaborative Centre for Housing Evidence",
+     "country": "Reino Unido (con referencias a Francia, Alemania y EE. UU.)",
+     "period": "revisión de estudios de demanda inversa (Meen 2013, OBR 2014, Oxford Economics 2016, modelo del MHCLG)",
+     "method": "revisión de ecuaciones de demanda inversa de servicios de vivienda (precio en función del parque, hogares, renta y coste de uso)",
+     "locator": "pág. 25, fig. 11; pág. 6",
+     "quote": "the sensitivity of house prices to additional stock (the inverse of the price elasticity of demand for housing) reported as being in the range of -1.1 to -2.2",
+     "value_in_source": "-1.1 a -2.2 (Reino Unido); -1.5 Francia, -1.2 Alemania, -1.3 a -2.1 EE. UU.; MHCLG supone -2"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://thinkhouse.org.uk/site/assets/files/1394/cache0819b.pdf",
+     "title": "Tackling the UK housing crisis: is supply the answer? (Mulheirn 2019)",
+     "finding": "Con esa misma elasticidad, construir 300.000 viviendas al año en Inglaterra solo bajaría los precios en torno a un 10 % en 20 años; el autor atribuye la subida de precios sobre todo a los tipos de interés, no a la falta de oferta (crítica de Bramley y otros a su enfoque)."
+    }
+   ],
+   "debate": null,
+   "derivation": "La revisión da una sensibilidad del precio al parque de -1,1 a -2,2 (inversa de una elasticidad-precio de la demanda de -0,45 a -0,9); low 1,1 y high 2,2 son los extremos y central 1,65 su punto medio, dentro del 1,5-2 % que el autor resume para precios «y por implicación alquileres». No hay estimación española verificada (la pista DO 2415 del Banco de España es un documento sobre sandboxes fintech, no de vivienda); se aplica al alquiler sin ajuste.",
+   "note_es": "Según la revisión de Mulheirn (2019) para Reino Unido, un 1 % más de viviendas respecto a los hogares se asocia a precios y alquileres entre un 1,1 % y un 2,2 % más bajos (central 1,65 %). No hay estimación propia para España."
+  },
+  {
+   "id": "V13_emancipation_rent",
+   "from": "alquiler_mercado",
+   "to": "jovenes_en_casa",
+   "sign": "+",
+   "layer": "segunda_ronda",
+   "parameter": {
+    "name": "elasticidad_emancipacion",
+    "unit": "% de cambio de los jóvenes de 18-34 que viven con sus padres por cada 1 % de cambio del alquiler",
+    "low": 0.18,
+    "central": 0.29,
+    "high": 0.53
+   },
+   "lag_years": [
+    1,
+    3
+   ],
+   "grade": "B",
+   "spain_evidence": "no",
+   "sources": [
+    {
+     "url": "https://www.federalreserve.gov/pubs/feds/2013/201326/201326pap.pdf",
+     "title": "The Long and the Short of Household Formation (FEDS 2013-26)",
+     "authors_year": "Paciorek (2013/2016)",
+     "country": "EE. UU.",
+     "period": "censos 1980 y 2000 (largo plazo); ACS 2006 y 2010 (corto plazo)",
+     "method": "logit multinomial del estado de convivencia con efectos fijos de área metropolitana; efectos marginales de log alquiler del área",
+     "locator": "Tabla 2 pág. 33, Tabla 3 pág. 34 y Tabla 7 pág. 38 (fila Log Rent (MSA), columna Family); cita en pág. 18 (todos los adultos, 2006-2010, Tabla 6: 0,163)",
+     "quote": "20 percent higher rents—about one standard deviation—implying that individuals are about 3 percentage points more likely to live at home",
+     "value_in_source": "efecto marginal de log alquiler sobre vivir con la familia: 0,121 (todos los adultos, 1980-2000), 0,199 (jóvenes 18-30, 1980-2000), 0,364 (jóvenes, 2006-2010)"
+    },
+    {
+     "url": "https://ec.europa.eu/eurostat/databrowser/view/ilc_lvps08/default/table",
+     "title": "Share of young adults aged 18-34 living with their parents (ilc_lvps08)",
+     "authors_year": "Eurostat (2026)",
+     "country": "España",
+     "period": "2025",
+     "method": "EU-SILC (ECV)",
+     "locator": "geo=ES, age=Y18-34, sex=T",
+     "quote": "España, 18-34 años, ambos sexos, 2025: 68,7",
+     "value_in_source": "68,7 %"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://www.federalreserve.gov/pubs/feds/2013/201326/201326pap.pdf",
+     "title": "The Long and the Short of Household Formation (Paciorek)",
+     "finding": "El autor no encuentra una correlación temporal estadística ni económicamente relevante entre la tasa de jefatura de hogar y los índices agregados de alquiler, aunque sí en el corte transversal entre áreas."
+    }
+   ],
+   "debate": null,
+   "derivation": "Paciorek da efectos marginales sobre la probabilidad de vivir con la familia (padres u otros parientes), en puntos por log de alquiler del área: 0,121 todos los adultos, 0,199 jóvenes de 18-30 a largo plazo, 0,364 jóvenes a corto plazo. Divididos por la proporción española de 18-34 que vive con sus padres (68,7 % en 2025): 0,121/0,687=0,18, 0,199/0,687=0,29, 0,364/0,687=0,53 % por punto logarítmico (≈1 %) de alquiler. Así se traslada el efecto en puntos de EE. UU., no su elasticidad (la base de EE. UU. es menor, lo que daría cifras más altas); el bajo usa el coeficiente de todos los adultos. No se verificó una estimación española (Martínez-Granado y Ruiz-Castillo 2002 sin acceso abierto).",
+   "note_es": "Según Paciorek (EE. UU.), un alquiler un 20 % más alto va con unos 3 puntos más de adultos viviendo con su familia. Trasladado al 68,7 % de jóvenes de 18-34 que vive con sus padres en España, un 1 % más de alquiler iría con un 0,29 % más (0,18-0,53); no hay una estimación española verificada.",
+   "review": {
+    "verdict": "fix",
+    "evidence": "Paciorek: Log Rent (MSA), columna Family: 0,121 (Tabla 2, todos los adultos, pág. 33), 0,199 (Tabla 3, 18-30, pág. 34), 0,364 (Tabla 7, 18-30, 2006-2010, pág. 38); la cita está en pág. 18 y se refiere a todos los adultos 2006-2010 (Tabla 6: 0,163). Dividir el efecto marginal (puntos por log de alquiler) por la base española 68,7 % (Eurostat ilc_lvps08 2025, confirmado) da una elasticidad por punto logarítmico correcta, pero traslada el efecto en puntos de EE. UU. (familia, 18-30) a una base mayor, y el bajo usa el coeficiente de todos los adultos: hay que decirlo y no usar 'supone'."
+   }
+  },
+  {
+   "id": "V14_new_household_size",
+   "from": "emancipacion",
+   "to": "hogares",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "personas_por_hogar_nuevo",
+    "unit": "personas por hogar nuevo formado al emanciparse jóvenes de 18-34",
+    "low": 1.2,
+    "central": 1.5,
+    "high": 1.8
+   },
+   "lag_years": 0,
+   "grade": "D",
+   "spain_evidence": "parcial",
+   "sources": [
+    {
+     "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=54562",
+     "title": "Proyección de Hogares: hogares por tamaño del hogar",
+     "authors_year": "INE (2026)",
+     "country": "España",
+     "period": "proyección 2026-2041",
+     "method": "proyección oficial de hogares",
+     "locator": "tabla 54562, Total Nacional, 2041",
+     "quote": "Total Nacional. Tamaño medio del hogar. 2041: 2,43",
+     "value_in_source": "2,43 personas por hogar (2041); 6,72 millones de hogares de 1 persona de 21,94 millones"
+    },
+    {
+     "url": "https://ec.europa.eu/eurostat/databrowser/view/ilc_lvph01/default/table",
+     "title": "Average household size (ilc_lvph01)",
+     "authors_year": "Eurostat (2026)",
+     "country": "España",
+     "period": "2022-2025",
+     "method": "EU-SILC (ECV)",
+     "locator": "geo=ES",
+     "quote": "España, tamaño medio del hogar, 2025: 2,5",
+     "value_in_source": "2,5"
+    }
+   ],
+   "contrary_evidence": [],
+   "debate": null,
+   "derivation": "Supuesto (grado D): un joven que se emancipa forma un hogar unipersonal (1 persona) o en pareja con otro joven que también deja el hogar (2 personas); central 1,5 = mitad y mitad, rango 1,2-1,8. No se verificó la composición de los hogares nuevos de 25-34 (la Encuesta Continua de Hogares ya no está en la API del INE y el Censo 2021 no ofrece esa tabla en ella). hogares_por_inmigrante = 1/tamaño medio: 1/2,5=0,40 (tamaño medio de todos los hogares, Eurostat 2025), rango 1/3,0=0,33 a 1/2,0=0,50; tamaño de los hogares de inmigrantes recientes no verificado.",
+   "note_es": "Supuesto del modelo: cada hogar nuevo de jóvenes que se emancipan tiene de media 1,5 personas (1,2-1,8), y cada inmigrante neto forma 0,40 hogares (1 entre 2,5 personas por hogar en España según Eurostat). No hay dato oficial verificado de ambos.",
+   "extra_parameters": [
+    {
+     "name": "hogares_por_inmigrante",
+     "unit": "hogares nuevos por inmigrante neto",
+     "low": 0.33,
+     "central": 0.4,
+     "high": 0.5
+    }
+   ]
+  },
+  {
+   "id": "B07_tourist_rents",
+   "from": "viviendas_turisticas",
+   "to": "alquiler_mercado",
+   "sign": "+",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "efecto_turistico_alquiler",
+    "unit": "% de subida del alquiler por cada punto (1 % del parque) de viviendas en plataformas turísticas",
+    "low": 0.68,
+    "central": 1.25,
+    "high": 1.89
+   },
+   "lag_years": [
+    0,
+    1
+   ],
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://ieb.ub.edu/wp-content/uploads/2019/07/2019-IEB-WorkingPaper-05-1.pdf",
+     "title": "Do short-term rental platforms affect housing markets? Evidence from Airbnb in Barcelona (IEB WP 2019/05; J. Urban Econ. 2020)",
+     "authors_year": "Garcia-López, Jofre-Monseny, Martínez-Mazza y Segú (2019/2020)",
+     "country": "España (Barcelona)",
+     "period": "2009-2017, áreas estadísticas básicas (BSA)",
+     "method": "panel con efectos fijos, variable instrumental shift-share y estudios de evento",
+     "locator": "pág. 6; pág. 11; tabla 4 (pág. 19)",
+     "quote": "54 more active listings in a small neighborhood (about the average level in 2016) increase rents by 1.9%, while transaction and posted prices increase by 5.3% and 3.67%",
+     "value_in_source": "Airbnb count (x100): alquiler 0,035; precio de compraventa 0,097; precio ofertado 0,068; densidad (anuncios/viviendas): 0,0068 (n.s.), 0,039, 0,019; media 4T2016: 56 anuncios = 1,57 % del parque"
+    }
+   ],
+   "contrary_evidence": [],
+   "debate": null,
+   "derivation": "La media de 56 anuncios por BSA equivale al 1,57 % del parque (tabla 4). Alquiler: 0,035×0,56=1,96 % / 1,57 puntos = 1,25 % por punto (central); con la densidad directa 0,68 % (no significativo; low); sin controles 0,053×0,56/1,57=1,89 % (high); en el decil más turístico 7 %/5 puntos=1,4 %. Precio de compraventa: 0,097×0,56/1,57=3,46 % (central); densidad 3,9 % (high); precio ofertado con densidad 1,9 % (low).",
+   "note_es": "Según García-López y otros (2020) para Barcelona, cada punto del parque de viviendas anunciado en Airbnb se asocia a alquileres un 1,25 % más altos (0,68-1,89) y a precios de compraventa un 3,5 % más altos; en los barrios más turísticos (5 % del parque) el alquiler subió un 7 %.",
+   "extra_parameters": [
+    {
+     "name": "efecto_turistico_precio",
+     "unit": "% de subida del precio de compraventa por cada punto (1 % del parque) de viviendas en plataformas turísticas",
+     "low": 1.9,
+     "central": 3.46,
+     "high": 3.9
+    }
+   ]
+  }
+ ]
+}

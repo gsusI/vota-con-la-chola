@@ -84,6 +84,8 @@ def problems(card: dict) -> list[str]:
         for key in ("name", "unit", "low", "central", "high"):
             if x.get(key) in (None, ""):
                 out.append(f"extra_parameters[{i}].{key} empty")
+        if x.get("grade") is not None and x["grade"] not in GRADES:
+            out.append(f"extra_parameters[{i}].grade must be A, B, C or D (optional: defaults to the card's)")
         if all(isinstance(x.get(k), (int, float)) for k in ("low", "central", "high")):
             if not x["low"] <= x["central"] <= x["high"]:
                 out.append(f"extra_parameters[{i}] must satisfy low <= central <= high")

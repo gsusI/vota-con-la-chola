@@ -1,0 +1,323 @@
+{
+ "agent": "housing_credit",
+ "edges": [
+  {
+   "id": "V15_constrained_credit_loss",
+   "from": "tope_ltv_lti",
+   "to": "credito_hipotecario_nuevo",
+   "sign": "-",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "perdida_credito_restringido",
+    "unit": "fracción del volumen de nuevas hipotecas por encima del límite que desaparece (no se reconvierte en un préstamo menor)",
+    "low": 0.1,
+    "central": 0.3,
+    "high": 0.6
+   },
+   "extra_parameters": [
+    {
+     "name": "efecto_ltv_meta_precio",
+     "unit": "pp de crecimiento interanual del precio de la vivienda tras un endurecimiento típico de medidas sobre préstamos (LTV/DSTI)",
+     "low": -1.7,
+     "central": -1.0,
+     "high": 0.0
+    },
+    {
+     "name": "efecto_ltv_meta_credito",
+     "unit": "pp de crecimiento interanual del crédito a hogares tras un endurecimiento típico del LTV",
+     "low": -0.85,
+     "central": -0.6,
+     "high": -0.4
+    }
+   ],
+   "lag_years": [
+    0,
+    1
+   ],
+   "grade": "D",
+   "spain_evidence": "parcial",
+   "sources": [
+    {
+     "url": "https://www.nber.org/system/files/working_papers/w27292/w27292.pdf",
+     "title": "The Anatomy of the Transmission of Macroprudential Policies",
+     "authors_year": "Acharya, Bergant, Crosignani, Eisert y McCann (2020; J. Finance 2022)",
+     "country": "Irlanda",
+     "period": "2013-2016 (límites LTV/LTI de febrero de 2015)",
+     "method": "microdatos de préstamos hipotecarios, exposición de bancos y condados a los límites",
+     "locator": "pág. 4",
+     "quote": "the increase in “conforming” issuance oﬀsets the collapse in the issuance of those mortgages that exceed the newly imposed limits, leaving aggregate issuance barely aﬀected",
+     "value_in_source": "43 % de la emisión afectada; emisión agregada apenas afectada"
+    },
+    {
+     "url": "https://www.bde.es/f/webbe/Secciones/Publicaciones/InformesBoletinesRevistas/InformesEstabilidadFinancera/26/IEF_2026_1_Cap4.pdf",
+     "title": "Informe de Estabilidad Financiera, primavera 2026, cap. 4",
+     "authors_year": "Banco de España (2026)",
+     "country": "España",
+     "period": "2024-2025",
+     "method": "estadística supervisora de nuevas hipotecas",
+     "locator": "pág. 9",
+     "quote": "La proporción de nuevas operaciones con LTP por encima del 80 % ha tenido una tendencia ligeramente creciente, pasando del 39,2 % a comienzos de 2024 al 43,8 % a finales de 2025",
+     "value_in_source": "43,8 %"
+    },
+    {
+     "url": "https://www.elibrary.imf.org/view/journals/001/2019/066/article-A001-en.xml",
+     "title": "Digging Deeper—Evidence on the Effects of Macroprudential Policies from a New Database (IMF WP 19/66)",
+     "authors_year": "Alam, Alter, Eiseman, Gelos, Kang, Narita, Nier y Wang (2019)",
+     "country": "internacional (134 países)",
+     "period": "1990-2016",
+     "method": "panel iMaPP con estimación por propensity score",
+     "locator": "introducción y sección III",
+     "quote": "a one-ppt LTV tightening cumulatively reduces household credit growth by about 0.7 ppts after four quarters",
+     "value_in_source": "-0,7 pp (endurecimientos < 10 pp); -0,4 pp (10-25 pp); precios: -1 pp, -1,7 pp en avanzadas"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://www.elibrary.imf.org/view/journals/001/2020/067/article-A001-en.xml",
+     "title": "Effects of Macroprudential Policy: Evidence from Over 6,000 Estimates (IMF WP 20/67)",
+     "finding": "Meta-análisis: los límites LTV y DSTI reducen el crédito unas 0,05-0,065 desviaciones típicas (≈ -0,6 pp de crecimiento interanual con la conversión de la tabla 5), pero su efecto medio sobre el precio de la vivienda no es significativo."
+    }
+   ],
+   "debate": null,
+   "derivation": "Mínimo 0,1 = solo la parte mecánica para préstamos algo por encima del 80 % (de 90 % a 80 % se pierde 1 - 80/90 = 11 %); en Irlanda 2015 la emisión conforme compensó casi toda la caída de la no conforme, lo que apunta a pérdidas bajas, pero parte de la compensación fue de otros prestatarios. Central 0,3 y máximo 0,6 son supuesto de calibración (grado D): ninguna fuente publica esta fracción. Extras: precio de Alam et al. (-1 pp todos, -1,7 pp avanzadas, 0 por el meta-análisis no significativo); crédito -0,6 pp (-0,05 DT × 13 %) a -0,85 pp (-0,065 DT), y -0,4 pp por punto en endurecimientos grandes según Alam et al.",
+   "note_es": "Según el Banco Central de Irlanda (Acharya et al.), tras los límites de 2015 la emisión agregada apenas cayó: los préstamos dentro del límite compensaron a los que lo superaban. Suponemos que desaparece entre el 10 % y el 60 % (central 30 %) del volumen por encima del límite; no hay estimación publicada."
+  },
+  {
+   "id": "V16_price_credit_elasticity",
+   "from": "credito_hipotecario",
+   "to": "precio_vivienda",
+   "sign": "+",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "elasticidad_precio_credito",
+    "unit": "% de cambio del precio real de la vivienda por cada 1 % de cambio del crédito real para compra de vivienda por hogar (largo plazo)",
+    "low": 0.2,
+    "central": 0.35,
+    "high": 0.54
+   },
+   "lag_years": [
+    2,
+    6
+   ],
+   "grade": "B",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://repositorio.bde.es/bitstream/123456789/6858/1/dt0605e.pdf",
+     "title": "The interaction between house prices and loans for house purchase. The Spanish case (DT 0605)",
+     "authors_year": "Gimeno y Martínez-Carrascal (2006)",
+     "country": "España",
+     "period": "datos trimestrales hasta 2005 aprox.",
+     "method": "VECM con dos vectores de cointegración (crédito y precio)",
+     "locator": "pág. 36, tabla 4 (β2)",
+     "quote": "β2 -0.328 1 0 -1.200 ; std errors 0.132 0 0.691 (columnas lh, p, i, yh)",
+     "value_in_source": "0,328 (e.e. 0,132)"
+    },
+    {
+     "url": "https://www.suomenpankki.fi/globalassets/en/research/seminars-and-conferences/conferences-and-workshops/documents/suerf2009/suerf2009_martinezcarrascal_paper.pdf",
+     "title": "House prices and loans for house purchase: revised evidence for the Spanish case (SUERF 2009)",
+     "authors_year": "Gimeno y Martínez-Carrascal (2009)",
+     "country": "España",
+     "period": "datos trimestrales hasta 2008",
+     "method": "VECM condicional con stock de viviendas por hogar",
+     "locator": "pág. 21, tabla 2 (β2)",
+     "quote": "β2 -0.54 1.00 0.00 -0.99 7.69 (columnas lh, p, i, yh, sh)",
+     "value_in_source": "0,54 (e.e. 0,05)"
+    },
+    {
+     "url": "https://repositorio.bde.es/bitstream/123456789/6781/1/dt0307e.pdf",
+     "title": "Analysis of house prices in Spain (DT 0307)",
+     "authors_year": "Martínez Pagés y Maza (2003)",
+     "country": "España",
+     "period": "1976-2002 (anual)",
+     "method": "modelo de corrección del error con elasticidad unitaria a la renta impuesta",
+     "locator": "pág. 21",
+     "quote": "The estimated long-run elasticity of house prices to credit is 0.35 and the semi-elasticity to the nominal interest rate, -4.5.",
+     "value_in_source": "0,35"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://repositorio.bde.es/bitstream/123456789/6781/1/dt0307e.pdf",
+     "title": "Analysis of house prices in Spain (DT 0307)",
+     "finding": "Los autores avisan de que estas elasticidades podrían sobrestimar el efecto real por la fuerte correlación entre renta, endeudamiento y tipos (problema de identificación); sin restricción sobre la renta el crédito no es significativo."
+    }
+   ],
+   "debate": null,
+   "derivation": "Elasticidades de largo plazo del precio real al crédito para vivienda por hogar en España: 0,328 (Gimeno y Martínez-Carrascal 2006), 0,35 (Martínez Pagés y Maza 2003) y 0,54 (revisión 2009 con stock de viviendas). Central 0,35; mínimo 0,2 ≈ 0,328 - 1 e.e. (0,132); máximo 0,54. Son estimaciones de series temporales, no cuasi-experimentos; el ajuste del precio es del 8 % por trimestre (DT 0605), de ahí el retardo de 2-6 años. Favara e Imbs (2015) no se consultó.",
+   "note_es": "Según tres modelos del Banco de España con datos españoles, a largo plazo un 1 % más de crédito a la vivienda por hogar va con un precio real entre un 0,33 % y un 0,54 % más alto (central 0,35 %). Los autores avisan de que separar crédito, renta y tipos es difícil.",
+   "review": {
+    "verdict": "fix",
+    "evidence": "DT 0605 pág. 36 Tabla 4: β2 = (-0,328; 1; 0; -1,200) con e.e. 0,132 y ajuste del precio -0,080 por trimestre; SUERF 2009 pág. 21: β2 -0,54 (e.e. 0,05); DT 0307 pág. 21: 0,35 con el aviso de sobreestimación por identificación. La variable es crédito real para compra de vivienda por hogar (lh), no el saldo total, y la unidad debe decirlo."
+   }
+  },
+  {
+   "id": "V17_credit_price_feedback",
+   "from": "precio_vivienda",
+   "to": "credito_hipotecario_nuevo",
+   "sign": "+",
+   "layer": "segunda_ronda",
+   "parameter": {
+    "name": "elasticidad_credito_precio",
+    "unit": "% de cambio del nuevo crédito hipotecario por cada 1 % de cambio del precio de la vivienda (garantía)",
+    "low": 0.6,
+    "central": 0.78,
+    "high": 0.98
+   },
+   "extra_parameters": [
+    {
+     "name": "cuota_credito_nuevo",
+     "unit": "nuevas operaciones de crédito a la vivienda en el año / saldo vivo de crédito a la vivienda a fin de año",
+     "low": 0.137,
+     "central": 0.161,
+     "high": 0.161
+    }
+   ],
+   "lag_years": [
+    1,
+    4
+   ],
+   "grade": "B",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://repositorio.bde.es/bitstream/123456789/6858/1/dt0605e.pdf",
+     "title": "The interaction between house prices and loans for house purchase. The Spanish case (DT 0605)",
+     "authors_year": "Gimeno y Martínez-Carrascal (2006)",
+     "country": "España",
+     "period": "datos trimestrales hasta 2005 aprox.",
+     "method": "VECM con dos vectores de cointegración",
+     "locator": "pág. 16 y tabla 4 (β1), pág. 36",
+     "quote": "borrowing elasticity to interest rates is 10, while the elasticity to house prices is 0.78",
+     "value_in_source": "0,784 (e.e. 0,079)"
+    },
+    {
+     "url": "https://www.suomenpankki.fi/globalassets/en/research/seminars-and-conferences/conferences-and-workshops/documents/suerf2009/suerf2009_martinezcarrascal_paper.pdf",
+     "title": "House prices and loans for house purchase: revised evidence for the Spanish case (SUERF 2009)",
+     "authors_year": "Gimeno y Martínez-Carrascal (2009)",
+     "country": "España",
+     "period": "datos trimestrales hasta 2008",
+     "method": "VECM condicional; elasticidad a la riqueza inmobiliaria (precio × stock)",
+     "locator": "pág. 21, tabla 2 (β1)",
+     "quote": "β1 1.00 -0.98 9.20 -0.96 -0.98 (columnas lh, p, i, yh, sh)",
+     "value_in_source": "0,98 (e.e. 0,10)"
+    },
+    {
+     "url": "https://www.bde.es/webbe/es/estadisticas/compartido/datos/csv/be1912.csv",
+     "title": "Boletín Estadístico, tablas 19.12 (nuevas operaciones, importes) y 19.16 (saldos vivos)",
+     "authors_year": "Banco de España (2026)",
+     "country": "España",
+     "period": "2024-2025",
+     "method": "estadística oficial de tipos de interés e importes (entidades de crédito y EFC, hogares e ISFLSH)",
+     "locator": "be1912 col. 'Crédito vivienda' (suma ene-dic); be1916 col. 'Crédito a la vivienda' (dic)",
+     "quote": "Importes totales estimados. Hogares e ISFLSH. Crédito vivienda: suma 2025 = 82.748 M€; saldo vivo dic 2025 = 515.335 M€",
+     "value_in_source": "82.748 / 515.335 = 0,161 (2024: 67.952 / 497.214 = 0,137)"
+    }
+   ],
+   "contrary_evidence": [],
+   "debate": null,
+   "derivation": "Elasticidad de largo plazo del saldo de crédito para vivienda por hogar al precio real: 0,78 (DT 0605) y 0,98 a la riqueza inmobiliaria (revisión 2009); mínimo 0,6 ≈ 0,784 - 2 e.e. (0,079). Se aplica al nuevo crédito porque en estado estacionario flujo y saldo crecen igual (supuesto; a corto plazo el flujo reacciona más). Cuota: 82.748 M€ de nuevas operaciones en 2025 / 515.335 M€ de saldo = 0,161; 2024: 0,137. Las nuevas operaciones incluyen renegociaciones, así que 0,161 es un techo.",
+   "note_es": "Según el Banco de España, a largo plazo el crédito a la vivienda por hogar sube un 0,78 % por cada 1 % de subida del precio real (0,98 % en la revisión de 2009). En 2025 se firmaron 82.748 M€ de crédito nuevo a la vivienda, el 16 % del saldo vivo."
+  },
+  {
+   "id": "V18_tenure_substitution",
+   "from": "credito_hipotecario_nuevo",
+   "to": "alquiler_mercado",
+   "sign": "-",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "sustitucion_alquiler",
+    "unit": "% de subida del alquiler de mercado por cada 1 % de caída del nuevo crédito hipotecario",
+    "low": 0.0,
+    "central": 0.05,
+    "high": 0.25
+   },
+   "lag_years": [
+    0,
+    2
+   ],
+   "grade": "D",
+   "spain_evidence": "no",
+   "sources": [
+    {
+     "url": "https://www.nber.org/system/files/working_papers/w27292/w27292.pdf",
+     "title": "The Anatomy of the Transmission of Macroprudential Policies",
+     "authors_year": "Acharya, Bergant, Crosignani, Eisert y McCann (2020; J. Finance 2022)",
+     "country": "Irlanda",
+     "period": "2013-2016",
+     "method": "microdatos de préstamos hipotecarios",
+     "locator": "pág. 4",
+     "quote": "the increase in “conforming” issuance oﬀsets the collapse in the issuance of those mortgages that exceed the newly imposed limits, leaving aggregate issuance barely aﬀected",
+     "value_in_source": "emisión agregada apenas afectada (sin estimación sobre alquileres)"
+    }
+   ],
+   "contrary_evidence": [],
+   "debate": null,
+   "derivation": "Supuesto (grado D): no se encontró ni consultó una estimación publicada del efecto del endurecimiento del crédito hipotecario sobre los alquileres (Tzur-Ilan 2023 y las revisiones del Banco Central de Irlanda no se pudieron verificar). El rango incluye 0 porque en Irlanda la emisión agregada apenas cambió y por tanto el desplazamiento hacia el alquiler fue pequeño; el máximo 0,25 deja margen a que los compradores excluidos se concentren en mercados tensionados.",
+   "note_es": "No hay una estimación publicada verificada. Suponemos que por cada 1 % menos de crédito hipotecario nuevo el alquiler sube entre un 0 % y un 0,25 % (central 0,05 %), porque parte de los compradores excluidos alquila; en Irlanda 2015 la emisión total apenas cambió."
+  },
+  {
+   "id": "B06_boom_credit",
+   "from": "credito_hipotecario",
+   "to": "precio_vivienda",
+   "sign": "+",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "cuota_boom_credito",
+    "unit": "fracción de la subida del precio real de la vivienda en España 1997-2007 atribuida al crédito y las condiciones de financiación",
+    "low": 0.3,
+    "central": 0.5,
+    "high": 1.0
+   },
+   "extra_parameters": [
+    {
+     "name": "subida_precio_real_boom",
+     "unit": "cambio logarítmico del precio real de la vivienda en el periodo de la fuente (1997-2002)",
+     "low": 0.438,
+     "central": 0.438,
+     "high": 0.438
+    }
+   ],
+   "lag_years": [
+    5,
+    10
+   ],
+   "grade": "D",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://repositorio.bde.es/bitstream/123456789/6319/1/do0608e.pdf",
+     "title": "House prices and real interest rates in Spain (Documento Ocasional 0608)",
+     "authors_year": "Ayuso, Blanco y Restoy (2006)",
+     "country": "España",
+     "period": "años noventa-2005",
+     "method": "modelos de valoración de activos con factor de descuento estocástico",
+     "locator": "Conclusiones",
+     "quote": "some simple calculations allow the recent boom in house prices in this country to be fully explained as a simple consequence of the drastic reduction in (ex-post) real interest rates",
+     "value_in_source": "1,0 con cálculo simple; menor con modelos refinados (sin cifra)"
+    },
+    {
+     "url": "https://repositorio.bde.es/bitstream/123456789/6781/1/dt0307e.pdf",
+     "title": "Analysis of house prices in Spain (DT 0307)",
+     "authors_year": "Martínez Pagés y Maza (2003)",
+     "country": "España",
+     "period": "1976-2002",
+     "method": "modelo de corrección del error (renta, crédito, tipo nominal)",
+     "locator": "pág. 5 (subida) y pág. 22 (sobrevaloración)",
+     "quote": "In 2002, real house prices stood between 8% and 17% above their long-term equilibrium",
+     "value_in_source": "subida real 1997-2002: 55 %; sobrevaloración 2002: 8-17 %"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://repositorio.bde.es/bitstream/123456789/6319/1/do0608e.pdf",
+     "title": "House prices and real interest rates in Spain (Documento Ocasional 0608)",
+     "finding": "Con un modelo de valoración refinado, los cambios del factor de descuento no explican del todo la evolución de los precios: el coste real efectivo de la financiación pudo bajar mucho menos que los tipos reales ex post."
+    }
+   ],
+   "debate": null,
+   "derivation": "Ninguna fuente consultada publica la fracción atribuida al crédito para 1997-2007, así que el rango es un supuesto (grado D) acotado por dos datos: el cálculo simple de Ayuso et al. atribuye toda la subida a la caída de los tipos reales (máximo 1,0), y Martínez Pagés y Maza sitúan la sobrevaloración de 2002 en 8-17 % frente a una subida real de 55 % en 1997-2002, es decir ln(1,08..1,17)/ln(1,55) = 18-36 % sin explicar por fundamentos (renta, crédito y tipos), 64-82 % explicado; la parte de crédito dentro de ese 64-82 % no se publica. Extra: ln(1,55) = 0,438.",
+   "note_es": "Según el Banco de España, el precio real subió un 55 % en 1997-2002; un cálculo simple lo atribuye todo a la caída de los tipos reales, pero modelos más finos dejan un 8-17 % de sobrevaloración en 2002. Suponemos que el crédito explica entre el 30 % y el 100 % (central 50 %)."
+  }
+ ]
+}

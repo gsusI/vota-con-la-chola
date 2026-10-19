@@ -1,0 +1,12 @@
+{
+ "id": "V16_price_credit_elasticity",
+ "verdict": "fix",
+ "source_ok": true,
+ "value_ok": false,
+ "grade_ok": true,
+ "wording_ok": true,
+ "evidence": "DT 0605 pág. 36 Tabla 4: β2 = (-0,328; 1; 0; -1,200) con e.e. 0,132 y ajuste del precio -0,080 por trimestre; SUERF 2009 pág. 21: β2 -0,54 (e.e. 0,05); DT 0307 pág. 21: 0,35 con el aviso de sobreestimación por identificación. La variable es crédito real para compra de vivienda por hogar (lh), no el saldo total, y la unidad debe decirlo.",
+ "corrections": {
+  "parameter.unit": "% de cambio del precio real de la vivienda por cada 1 % de cambio del crédito real para compra de vivienda por hogar (largo plazo)"
+ }
+}

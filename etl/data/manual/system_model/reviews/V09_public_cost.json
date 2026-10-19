@@ -1,0 +1,15 @@
+{
+ "id": "V09_public_cost",
+ "verdict": "fix",
+ "source_ok": true,
+ "value_ok": false,
+ "grade_ok": true,
+ "wording_ok": false,
+ "evidence": "Art. 65.1 RD 853/2021 (700 €/m², máx. 50.000 €), Construible/MIVAU (994.556.620 € 'ayudas acordadas' / 24.964 = 39,8 mil €) y BOCM (8.807.933 €/210 = 41,9 mil €, ≈60 m² a 700 €/m²) cuadran; ninguna fuente publica el coste total, así que 125 mil € es un supuesto (grado D declarado). Pero la unidad dice 'gasto público por vivienda' cuando 125 es el coste total y la parte pública va en cuota_financiacion_publica (doble cómputo), y la nota dice 'fue de' para ayudas solo acordadas.",
+ "corrections": {
+  "parameter.unit": "miles de euros de coste total por vivienda pública en alquiler terminada (edificación, gastos generales y honorarios; suelo público aparte); la parte a cargo de presupuestos la da cuota_financiacion_publica",
+  "extra_parameters.0.grade": "D",
+  "extra_parameters.1.grade": "D",
+  "note_es": "Según el Ministerio, las ayudas acordadas del Plan de Recuperación sumaban 994,6 millones para 24.964 viviendas sociales (39.800 € cada una). El coste total, que estimamos en 125.000 € por vivienda sin suelo (95.000-165.000), y la renta de 400 € al mes son hipótesis."
+ }
+}

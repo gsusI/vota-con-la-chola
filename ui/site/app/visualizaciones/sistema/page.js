@@ -1,13 +1,14 @@
 import { readPublicJson } from "../../static-snapshot.mjs";
 import { StaticRouteHero } from "../../static-route-components";
-import Simulator, { ClosureFigure } from "./Simulator";
+import Simulator, { ClosureFigure, HousingFigure } from "./Simulator";
+import { housingRows } from "./housingScenarios.mjs";
 import { CLOSURES, DEFAULT_LEVERS, centralParams, quintileImpact, simulate } from "./engine.mjs";
 import { computeBacktests } from "./backtests.mjs";
 
 export const metadata = {
-  title: "Simulador: pensiones, impuestos y cuentas públicas | Vota Con La Chola",
+  title: "Simulador: pensiones, impuestos, vivienda y cuentas públicas | Vota Con La Chola",
   description:
-    "Qué pasa si se suben o se bajan las pensiones, el IRPF, el IVA, las cotizaciones o el Impuesto sobre Sociedades: cuánto recauda, quién lo paga por nivel de renta y en casos concretos, y cómo se mueven la deuda y el empleo. Modelo con supuestos visibles sobre la línea base oficial del Ageing Report 2024.",
+    "Qué pasa si se suben o se bajan las pensiones, el IRPF, el IVA, las cotizaciones o el Impuesto sobre Sociedades, o si se construye vivienda pública, se libera suelo, se topa el alquiler, se limitan las hipotecas o los pisos turísticos: cuánto cuesta, quién lo paga y qué les pasa a casos concretos. Modelo con supuestos visibles sobre líneas base oficiales (Ageing Report 2024, proyección de hogares del INE).",
 };
 
 const num = (v, d = 1) => Number(v).toLocaleString("es-ES", { minimumFractionDigits: d, maximumFractionDigits: d });
@@ -64,14 +65,34 @@ export default function SistemaPage() {
   const contribRow = TAXES[4];
   const ratio = (row) => -row.q[4].pctDisposable / -row.q[0].pctDisposable;
 
+  // Housing (slice 2): the same six policies as the consolidated figure, central values for the title and the text.
+  const H = model.housing;
+  const hRows = Object.fromEntries(housingRows(model, {}, 2035, 160).map((r) => [r.id, r]));
+  const verb = (v, d = 1) => (v < 0 ? `baja un ${num(-v, d)} %` : `sube un ${num(v, d)} %`);
+  const t35h = model.years.indexOf(2035);
+  const pubRun = simulate(model, { ...DEFAULT_LEVERS, pubHomes: 20 });
+  const pubCostMeur = (pubRun.hs_cost_pp[t35h] / 100) * model.start.gdp_meur * model.baseline.real_index[t35h];
+  const b2Share = pubRun.hs_households_k[t35h] / pubRun.hs_stock_k[t35h];
+  const capDebate = model.params.respuesta_oferta_tope.debate;
+  const capSchools = (capDebate?.schools || []).map((school, i) => {
+    const run = simulate(model, { ...DEFAULT_LEVERS, capCov: 50, capCut: 10 }, centralParams(model, { [capDebate.id]: i }));
+    return { label: school.label, value: school.central, stock: run.hs_rental_stock_k[t35h], cov: run.hs_rent_cov[t35h], unc: run.hs_rent_unc[t35h],
+      p1cov: run.p1_rent_cov_month[t35h], p1unc: run.p1_rent_unc_month[t35h] };
+  });
+  const creditRun = simulate(model, { ...DEFAULT_LEVERS, ltvCap: 80, ltiCap: 4.5 });
+  const creditNoLoop = simulate(model, { ...DEFAULT_LEVERS, ltvCap: 80, ltiCap: 4.5 }, { ...P, elasticidad_credito_precio: 0 });
+  const r2 = creditRun.hs_price[t35h] / creditNoLoop.hs_price[t35h];
+  const baseGap = H.net_households_next_k - (H.completions_free_k + H.completions_protected_k);
+
   return (
     <main className="shell vizArticle">
       <StaticRouteHero
         eyebrow="Visualizaciones · simulador"
-        title="Si se suben las pensiones o los impuestos, ¿quién lo paga?"
-        summary="Un modelo pequeño de las pensiones, los impuestos y las cuentas públicas de España: mueve las palancas y mira cómo se propaga el cambio, cuánto cuesta y a quién, por nivel de renta y en casos concretos, según se pague con deuda, cotizaciones, IVA o IRPF. Es un escenario con supuestos a la vista, no una predicción."
+        title="Si se suben las pensiones o los impuestos, o se interviene la vivienda, ¿quién lo paga?"
+        summary="Un modelo pequeño de las pensiones, los impuestos, la vivienda y las cuentas públicas de España: mueve las palancas y mira cómo se propaga el cambio, cuánto cuesta y a quién, por nivel de renta y en casos concretos, según se pague con deuda, cotizaciones, IVA o IRPF. Es un escenario con supuestos a la vista, no una predicción."
         actions={[
           { href: "#simulador", label: "Ir al simulador" },
+          { href: "#vivienda", label: "Vivienda" },
           { href: "/visualizaciones/data/sistema.json", label: "Modelo y datos (JSON)" },
           { href: "/visualizaciones/data/sistema.csv", label: "Línea base (CSV)" },
           { href: "#metodo", label: "Método y fuentes" },
@@ -100,6 +121,15 @@ export default function SistemaPage() {
           </span>
           <span className="vizStat__note">
             del PIB, {model.start.year} → 2050: cálculo propio con el resto del presupuesto constante en % del PIB; no es una previsión
+          </span>
+        </div>
+        <div className="card vizStat">
+          <span className="vizStat__label">Hogares nuevos frente a viviendas terminadas</span>
+          <span className="vizStat__value">
+            {num(H.net_households_next_k, 0)} mil / {num(H.completions_free_k + H.completions_protected_k, 0)} mil
+          </span>
+          <span className="vizStat__note">
+            al año: proyección del INE para {H.base_year + 1} frente a la media de obra terminada {H.base_year - 2}–{H.base_year}; en 2035 el INE prevé {num(H.net_households_2035_k, 0)} mil
           </span>
         </div>
       </section>
@@ -209,6 +239,70 @@ export default function SistemaPage() {
         </figcaption>
       </figure>
 
+      <figure className="vizFigure" id="vivienda">
+        <h2>
+          Veinte mil viviendas públicas más al año bajan el alquiler de un contrato nuevo un {num(-hRows.pub.rent.v)} % en 2035; un tope del 10 % en la mitad
+          del mercado {verb(hRows.capIn.rent.v)} a quien encuentra piso con tope y {verb(hRows.capOut.rent.v)} a quien busca fuera
+        </h2>
+        <p className="vizFigure__dek">
+          Seis políticas de vivienda con el tamaño que dice cada fila, desde {model.policy_start}, y la inmigración como contexto. El punto es el valor central; la
+          barra, del 5 % al 95 % de las simulaciones. Pone a prueba tres relatos. «Construir no baja el alquiler»: lo baja, pero tarde (la obra pública tarda
+          unos {num(P.retardo_obra_publica, 0)} años) y poco a poco: en 2035 suma {num(pubRun.hs_stock_k[t35h], 0)} mil viviendas, un{" "}
+          {num((pubRun.hs_stock_k[t35h] / H.households_k[t35h]) * 100, 1)} % de los hogares; los jóvenes que se emancipan al bajar el alquiler (bucle B2) ocupan
+          un {num(b2Share * 100, 0)} % de lo construido, y cuesta unos {num(pubCostMeur, 0)} millones al año en 2035. «El tope
+          abarata el alquiler»: a quien tiene o encuentra un contrato cubierto, sí; a quien busca fuera, depende de cuántos caseros dejen el alquiler, que es el
+          supuesto más disputado de la página. «Los pisos turísticos son el problema»: retirar la mitad {verb(hRows.tour.rent.v, 1)} el alquiler medio de España, porque son el {num(H.tourist_share * 100, 2)} % de las viviendas (en algunos barrios pesan mucho más). Lo que queda
+          abierto: la respuesta de la oferta al tope y cuántos pisos turísticos vuelven a vivienda habitual.
+        </p>
+        <HousingFigure model={model} debates={{}} />
+        <figcaption className="vizFigure__caption">
+          <span>
+            Fuente: modelo de esta página sobre la{" "}
+            <a href={src.ine_proh.page} target="_blank" rel="noopener noreferrer">proyección de hogares del INE</a>, la obra terminada, el parque, las
+            viviendas turísticas y los alquileres del SERPAVI de la página de <a href="/visualizaciones/vivienda/">vivienda</a>, y las fichas del catálogo.
+          </span>
+          <span>
+            Las hipotecas: limitarlas al 80 % del precio y a 4,5 veces la renta {verb(hRows.credit.price.v)} el precio en 2035 y el alquiler{" "}
+            {verb(hRows.credit.rent.v, 1)} (algunos compradores pasan a alquilar); el bucle crédito-precio (R2) multiplica la caída del precio por{" "}
+            {num(r2, 2)}.
+          </span>
+        </figcaption>
+      </figure>
+
+      <section className="vizProse" aria-label="El tope del alquiler según cada escuela">
+        <p>
+          <strong>El tope, según cada escuela.</strong> Con el mismo tope (rebaja del 10 % en la mitad del alquiler de mercado), en 2035:
+        </p>
+      </section>
+      <div className="vizTable__scroll">
+        <table className="sim__table">
+          <thead>
+            <tr>
+              <th scope="col">Escuela (pisos que salen por cada 1 % de rebaja)</th>
+              <th scope="col">Pisos de alquiler de mercado</th>
+              <th scope="col">Contrato nuevo con tope</th>
+              <th scope="col">Contrato nuevo sin tope</th>
+              <th scope="col">Caso 1, con tope / sin tope, al mes</th>
+            </tr>
+          </thead>
+          <tbody>
+            {capSchools.map((sc) => (
+              <tr key={sc.label}>
+                <th scope="row">
+                  {sc.label} <span className="sim__muted">({num(sc.value, 1)})</span>
+                </th>
+                <td>{Math.round(sc.stock).toLocaleString("es-ES", { useGrouping: "always" })} mil</td>
+                <td>{num(sc.cov * 100)} %</td>
+                <td>{sc.unc >= 0 ? "+" : "−"}{num(Math.abs(sc.unc * 100))} %</td>
+                <td>
+                  {num(sc.p1cov, 0)} € / {sc.p1unc >= 0 ? "+" : "−"}{num(Math.abs(sc.p1unc), 0)} €
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
       <section id="simulador" aria-label="Simulador">
         <p className="sim__label">Escenario de un modelo con supuestos visibles, no una predicción.</p>
         <Simulator model={model} />
@@ -237,6 +331,17 @@ export default function SistemaPage() {
           su fuente. Las 200 simulaciones de cada escenario sortean todos los parámetros dentro de su rango (hipercubo latino con semilla fija, así que un
           enlace reproduce el mismo resultado) y tardan unas decenas de milisegundos en el navegador.
         </p>
+        <p>
+          <strong>Vivienda.</strong> La línea base son los hogares de la{" "}
+          <a href={src.ine_proh.page} target="_blank" rel="noopener noreferrer">proyección del INE</a> (hasta {H.households_source_last_year - 1}; después crecen con la
+          población del Ageing Report) y la obra terminada constante en {num(H.completions_free_k + H.completions_protected_k, 0)} mil viviendas al año, que es un
+          supuesto: nadie publica una proyección oficial de obra. El parque parte del Censo 2021 más lo terminado desde entonces ({num(H.stock_k / 1000, 1)}{" "}
+          millones de viviendas, {num(H.stock_k / H.households_k[0], 2)} por hogar porque hay vacías y secundarias). El alquiler de mercado se mueve con las
+          viviendas por hogar; los jóvenes que viven con sus padres ({num(H.at_home_share_2534 * 100, 0)} % de los de 25 a 34 años) se emancipan cuando baja; el
+          precio sigue al alquiler y al crédito, y el crédito sigue al precio. El tope rebaja los contratos cubiertos, saca del alquiler una parte de los pisos
+          y sube los no cubiertos; quien ya tiene contrato se acerca al mercado al renovarlo. La vivienda pública se paga en los dos años antes de terminarse y
+          recupera su alquiler social; ese coste entra en «¿Cómo se paga?».
+        </p>
         <h2>Simplificaciones</h2>
         <ul>
           <li>Economía pequeña y abierta: tipos del BCE, crecimiento europeo y productividad son contexto, no resultados.</li>
@@ -263,6 +368,12 @@ export default function SistemaPage() {
             salarios, que sigue el valor central de su ficha.
           </li>
           <li>
+            Vivienda: un solo mercado nacional (el alquiler medio de España), sin barrios ni comunidades; el tope se aplica a la parte del alquiler que elijas.
+            Los pisos que salen del alquiler por el tope se venden o se usan de otra forma sin cambiar el parque total. Los límites de LTP y LTI se tratan como
+            independientes. La obra pública no tiene multiplicador sobre el PIB ni crea empleo en el modelo. El esfuerzo por edad aplica el cambio del alquiler
+            a todo el gasto en vivienda de cada celda.
+          </li>
+          <li>
             Las sensibilidades de inmigración son las oficiales, que empiezan en 2023: aquí se les resta su valor de {model.start.year}.
           </li>
         </ul>
@@ -285,7 +396,14 @@ export default function SistemaPage() {
             ))}
             . Elige la escuela en «Supuestos en disputa».
           </li>
-          <li>Los efectos en sanidad, dependencia, vivienda o educación: llegarán en los siguientes módulos.</li>
+          <li>
+            Cuántos caseros dejan el alquiler con un tope: los estudios de Cataluña y San Francisco no coinciden. Elige la escuela en «Supuestos en disputa».
+          </li>
+          <li>
+            Qué pasa en un barrio concreto: el modelo es nacional. En los barrios con muchos pisos turísticos o mucha demanda el efecto de cada política puede ser
+            varias veces mayor.
+          </li>
+          <li>Los efectos en sanidad, dependencia, empleo o educación: llegarán en los siguientes módulos.</li>
         </ul>
       </section>
 
@@ -392,8 +510,8 @@ export default function SistemaPage() {
           ))}
         </ul>
         <p className="sim__muted">
-          Modelo generado el {String(model.generated_at).slice(0, 10)}. Siguiente módulo: vivienda (construcción, crédito, límite del alquiler y alquiler
-          turístico).
+          Modelo generado el {String(model.generated_at).slice(0, 10)}. Siguiente módulo: empleo e inmigración (salario mínimo, jornada, cuota de
+          autónomos e inmigración como contexto), que une las cotizaciones con los hogares.
         </p>
       </section>
     </main>

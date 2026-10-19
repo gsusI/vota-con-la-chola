@@ -1,0 +1,264 @@
+{
+ "agent": "housing_supply",
+ "edges": [
+  {
+   "id": "V08_public_lag",
+   "from": "vivienda_publica",
+   "to": "obra_publica_terminada",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "retardo_obra_publica",
+    "unit": "años desde la decisión (programa con suelo disponible) hasta la vivienda pública terminada",
+    "low": 3,
+    "central": 4,
+    "high": 6
+   },
+   "extra_parameters": [
+    {
+     "name": "retardo_obra_privada",
+     "unit": "años desde el inicio de obra (licencia) hasta la vivienda privada terminada",
+     "low": 1.5,
+     "central": 2,
+     "high": 2.5,
+     "grade": "D"
+    }
+   ],
+   "lag_years": [
+    3,
+    6
+   ],
+   "grade": "C",
+   "spain_evidence": "parcial",
+   "sources": [
+    {
+     "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2021-16233",
+     "title": "Real Decreto 853/2021, programas de ayuda en materia de rehabilitación residencial y vivienda social del PRTR (programa 6, C02.I02)",
+     "authors_year": "BOE (2021)",
+     "country": "España",
+     "period": "2021-2026",
+     "method": "norma (plazos y cuantías del programa)",
+     "locator": "art. 67.2 (programa 6; el art. 18.2 fija el mismo plazo para el programa 1)",
+     "quote": "En caso de que a 30 de junio de 2026 no se hubiesen cumplido los requisitos establecidos para la ejecución de las actuaciones, la cuantía de la subvención será [...] sobre las viviendas efectivamente finalizadas",
+     "value_in_source": "programa aprobado el 5-10-2021; viviendas terminadas antes del 30-6-2026 (4,7 años)"
+    },
+    {
+     "url": "https://bocm.es/boletin/CM_Orden_BOCM/2024/12/04/BOCM-20241204-22.PDF",
+     "title": "Convenio Comunidad de Madrid - Arganda Residential Leasehold: subvención de 8.807.933 euros para 210 viviendas en alquiler asequible (C02.I02)",
+     "authors_year": "BOCM (2024)",
+     "country": "España (Comunidad de Madrid)",
+     "period": "2024-2026",
+     "method": "convenio de subvención con plazo de obra",
+     "locator": "BOCM núm. 289, 4-12-2024, pág. 8 del PDF",
+     "quote": "se compromete a finalizar las obras y obtener el Certificado Final de Obra objeto de esta subvención antes de la fecha del 30 de junio de 2026",
+     "value_in_source": "convenio diciembre 2024, fin de obra junio 2026 (1,6 años)"
+    }
+   ],
+   "contrary_evidence": [],
+   "debate": null,
+   "derivation": "El programa estatal (RD 853/2021, 5-10-2021) fija el 30-6-2026 como fecha de viviendas terminadas: 4,7 años desde la decisión con suelo público disponible; un convenio de diciembre de 2024 deja 1,6 años de obra. Central 4 años (unos 2 de licitación, proyecto y licencia y 2 de obra), bajo 3, alto 6 por prórrogas. El retardo privado (1,5-2,5, central 2) es una hipótesis: la duración prevista de las licencias existe en la estadística de construcción de edificios pero no la obtuvimos.",
+   "note_es": "Según el Real Decreto 853/2021, las viviendas sociales del Plan de Recuperación aprobado en octubre de 2021 debían terminarse antes de junio de 2026 (4,7 años); un convenio de Madrid de 2024 deja 1,6 años de obra. Usamos 4 años (rango 3-6); 2 para la obra privada es una hipótesis.",
+   "review": {
+    "verdict": "fix",
+    "evidence": "El RD 853/2021 fija el 30-6-2026 para el programa 6 en el art. 67.2 ('viviendas efectivamente finalizadas'), no en el art. 18.2 (programa 1, mismo plazo con otro texto); el BOCM 4-12-2024 pág. 8 trae literal el compromiso de fin de obra antes del 30-6-2026 (8.807.933 €, 210 viviendas, pág. 1). El retardo privado es hipótesis declarada y debe llevar grado D."
+   }
+  },
+  {
+   "id": "V09_public_cost",
+   "from": "vivienda_publica",
+   "to": "gasto_publico",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "coste_vivienda_publica",
+    "unit": "miles de euros de coste total por vivienda pública en alquiler terminada (edificación, gastos generales y honorarios; suelo público aparte); la parte a cargo de presupuestos la da cuota_financiacion_publica",
+    "low": 95,
+    "central": 125,
+    "high": 165
+   },
+   "extra_parameters": [
+    {
+     "name": "renta_social_mes",
+     "unit": "euros al mes de renta media de la vivienda pública en alquiler",
+     "low": 250,
+     "central": 400,
+     "high": 600,
+     "grade": "D"
+    },
+    {
+     "name": "cuota_financiacion_publica",
+     "unit": "fracción del coste a cargo de presupuestos públicos (frente a préstamos devueltos con rentas), 0-1",
+     "low": 0.3,
+     "central": 0.4,
+     "high": 1.0,
+     "grade": "D"
+    }
+   ],
+   "lag_years": [
+    0,
+    2
+   ],
+   "grade": "D",
+   "spain_evidence": "parcial",
+   "sources": [
+    {
+     "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2021-16233",
+     "title": "Real Decreto 853/2021, programas de ayuda en materia de rehabilitación residencial y vivienda social del PRTR (programa 6, C02.I02)",
+     "authors_year": "BOE (2021)",
+     "country": "España",
+     "period": "2021-2026",
+     "method": "norma (plazos y cuantías del programa)",
+     "locator": "art. 65.1",
+     "quote": "podrán obtener una ayuda, proporcional a la superficie útil de cada vivienda, de hasta un máximo de 700 euros por metro cuadrado de superficie útil de vivienda",
+     "value_in_source": "700 €/m² útil, máximo 50.000 € por vivienda"
+    },
+    {
+     "url": "https://www.construible.es/2024/04/11/construccion-viviendas-energeticamente-eficientes-fondos-prtr-eleva-24964",
+     "title": "La construcción de viviendas energéticamente eficientes con fondos del PRTR se eleva a 24.964 (informe de ejecución del MIVAU)",
+     "authors_year": "MIVAU, recogido por Construible (2024)",
+     "country": "España",
+     "period": "2021-2024",
+     "method": "contabilidad del programa C02.I02",
+     "locator": "párrafo 1",
+     "quote": "Mivau ha alcanzado las 24.964 viviendas financiadas con ayudas acordadas por un importe de 994.556.620 euros",
+     "value_in_source": "994.556.620 € / 24.964 viviendas"
+    },
+    {
+     "url": "https://bocm.es/boletin/CM_Orden_BOCM/2024/12/04/BOCM-20241204-22.PDF",
+     "title": "Convenio Comunidad de Madrid - Arganda Residential Leasehold (210 viviendas, C02.I02)",
+     "authors_year": "BOCM (2024)",
+     "country": "España (Comunidad de Madrid)",
+     "period": "2024-2026",
+     "method": "convenio de subvención",
+     "locator": "BOCM núm. 289, pág. 1 y 7 del PDF",
+     "quote": "concesión directa de una subvención por importe estimado de 8.807.933,00 euros, para la promoción de 210 viviendas",
+     "value_in_source": "8.807.933 € / 210 viviendas"
+    }
+   ],
+   "contrary_evidence": [],
+   "debate": null,
+   "derivation": "Ayuda europea media 994,56 M€ / 24.964 = 39,8 mil € por vivienda; en Arganda 8,81 M€ / 210 = 41,9 mil €, que a 700 €/m² útil implica unos 60 m² útiles. El coste total (obra y honorarios, sin suelo) de 125 mil € (95-165) supone 1.600-2.700 €/m² útil y es una hipótesis: ninguna fuente leída publica el coste total. La cuota pública 0,4 parte de 39,8/125 = 0,32 más cofinanciación autonómica (1,0 si todo va a presupuesto); la renta social de 400 €/mes (250-600) también es hipótesis: el RD 853/2021 (art. 66) deja el precio por m² a cada comisión bilateral.",
+   "note_es": "Según el Ministerio, las ayudas acordadas del Plan de Recuperación sumaban 994,6 millones para 24.964 viviendas sociales (39.800 € cada una). El coste total, que estimamos en 125.000 € por vivienda sin suelo (95.000-165.000), y la renta de 400 € al mes son hipótesis.",
+   "review": {
+    "verdict": "fix",
+    "evidence": "Art. 65.1 RD 853/2021 (700 €/m², máx. 50.000 €), Construible/MIVAU (994.556.620 € 'ayudas acordadas' / 24.964 = 39,8 mil €) y BOCM (8.807.933 €/210 = 41,9 mil €, ≈60 m² a 700 €/m²) cuadran; ninguna fuente publica el coste total, así que 125 mil € es un supuesto (grado D declarado). Pero la unidad dice 'gasto público por vivienda' cuando 125 es el coste total y la parte pública va en cuota_financiacion_publica (doble cómputo), y la nota dice 'fue de' para ayudas solo acordadas."
+   }
+  },
+  {
+   "id": "V10_crowd_out",
+   "from": "obra_publica",
+   "to": "obra_privada",
+   "sign": "-",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "desplazamiento_obra_privada",
+    "unit": "fracción de las viviendas públicas terminadas compensada por menos viviendas privadas (sin contar el efecto del precio)",
+    "low": 0.0,
+    "central": 0.2,
+    "high": 0.5
+   },
+   "lag_years": [
+    1,
+    3
+   ],
+   "grade": "B",
+   "spain_evidence": "no",
+   "sources": [
+    {
+     "url": "https://www.nber.org/system/files/working_papers/w8709/w8709.pdf",
+     "title": "Do Low-Income Housing Subsidies Increase Housing Consumption?",
+     "authors_year": "Sinai y Waldfogel (2002, NBER w8709; J. Public Econ. 2005)",
+     "country": "EE. UU.",
+     "period": "censo 1990, lugares censales",
+     "method": "sección cruzada por lugar censal, controlando demanda de vivienda",
+     "locator": "pág. 2 (resumen) y pág. 19 (tabla 8)",
+     "quote": "on average three government-subsidized units displace two units that would otherwise have been provided by the private market",
+     "value_in_source": "desplazamiento ~0,67 (0,7-0,8 para vivienda pública de proyecto)"
+    },
+    {
+     "url": "https://conference.nber.org/conf_papers/f240610/f240610.slides.pdf",
+     "title": "The Effect of LIHTC on Housing Markets: Quantities, Rents, and Welfare (diapositivas)",
+     "authors_year": "Ferreira, Meyer y Turner (2026)",
+     "country": "EE. UU.",
+     "period": "1990-2020s, block groups",
+     "method": "ganadores frente a perdedores de adjudicaciones LIHTC, diferencias en diferencias",
+     "locator": "págs. 8 y 17",
+     "quote": "89 LIHTC units allocated ⇒ 87 placed-in-service ⇒ 77 ACS multi-family units ... =11.5% crowd-out, CI95[-6%,28%]",
+     "value_in_source": "0,115 (IC95 -0,06 a 0,28); repaso: Eriksen y Rosenthal IV 100 %, Baum-Snow y Marion ~20 %"
+    },
+    {
+     "url": "https://www.alimarket.es/construccion/noticia_amp/427996/el-banco-de-espana-pide-cambiar-los-planes-urbanisticos-y-densificar-el-suelo-para-sumar-1-2-m-de-viviendas",
+     "title": "El Banco de España pide cambiar los planes urbanísticos y densificar el suelo (resumen del Informe Anual 2025)",
+     "authors_year": "Banco de España, recogido por Alimarket (2026)",
+     "country": "España",
+     "period": "2013-2025",
+     "method": "diagnóstico institucional",
+     "locator": "párrafo 2",
+     "quote": "la producción por hora trabajada en la construcción cayó un 13% entre los años 2013 y 2025",
+     "value_in_source": "-13 % productividad por hora 2013-2025"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://conference.nber.org/conf_papers/f240610/f240610.slides.pdf",
+     "title": "Eriksen y Rosenthal (2010), citado en Ferreira, Meyer y Turner (2026), pág. 8",
+     "finding": "Con variables instrumentales estiman un desplazamiento cercano al 100 % de las viviendas LIHTC (15 % por MCO)."
+    }
+   ],
+   "debate": {
+    "id": "desplazamiento_obra_publica",
+    "schools": [
+     {
+      "label": "Desplazamiento bajo (diseños cuasi-experimentales recientes)",
+      "central": 0.115,
+      "source_index": 1
+     },
+     {
+      "label": "Desplazamiento alto (paneles por mercado)",
+      "central": 0.67,
+      "source_index": 0
+     }
+    ]
+   },
+   "derivation": "Las estimaciones totales de EE. UU. van de 0,115 (Ferreira-Meyer-Turner) y ~0,2 (Baum-Snow-Marion) a 0,67 (Sinai-Waldfogel) y ~1 (Eriksen-Rosenthal IV), mediana ~0,43; incluyen el canal de precios que el modelo ya recoge con la elasticidad de oferta (V02). Para la parte directa (suelo, empresas, mano de obra) tomamos la mitad, 0,2, con rango 0 (límite inferior del IC de FMT truncado) a 0,5; la caída de productividad en España (-13 % por hora 2013-2025, Banco de España) sugiere no usar cero. Ningún estudio separa la parte directa: es una hipótesis acotada.",
+   "note_es": "En EE. UU., según los estudios, de cada vivienda pública o subvencionada se pierden entre 0,1 y 1 viviendas privadas (Sinai y Waldfogel: 2 de cada 3). Sin el efecto precio, usamos 0,2 (0-0,5); no hay estimación para España."
+  },
+  {
+   "id": "V11_land_absorption",
+   "from": "suelo_liberado",
+   "to": "obra_privada",
+   "sign": "+",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "absorcion_suelo",
+    "unit": "fracción de la capacidad de suelo finalista liberada que se convierte en viviendas terminadas al año",
+    "low": 0.15,
+    "central": 0.35,
+    "high": 0.6
+   },
+   "lag_years": [
+    1.5,
+    3
+   ],
+   "grade": "D",
+   "spain_evidence": "parcial",
+   "sources": [
+    {
+     "url": "https://www.alimarket.es/construccion/noticia_amp/427996/el-banco-de-espana-pide-cambiar-los-planes-urbanisticos-y-densificar-el-suelo-para-sumar-1-2-m-de-viviendas",
+     "title": "El Banco de España pide cambiar los planes urbanísticos y densificar el suelo para sumar 1,2 M de viviendas (resumen del Informe Anual 2025)",
+     "authors_year": "Banco de España, recogido por Alimarket (2026)",
+     "country": "España",
+     "period": "2021-2025",
+     "method": "diagnóstico institucional",
+     "locator": "párrafo 2",
+     "quote": "las trabas administrativas, la lentitud en la ejecución de los planes urbanísticos y una preocupante crisis de productividad",
+     "value_in_source": "sin cifra de absorción; suelo y planeamiento como restricción junto a capacidad constructora"
+    }
+   ],
+   "contrary_evidence": [],
+   "debate": null,
+   "derivation": "No encontramos una estimación de qué parte del suelo finalista liberado se construye cada año. Hipótesis: un suelo con licencias se edifica en 2 a 6 años según la demanda y la capacidad de las constructoras, es decir, entre 1/6 (0,17, redondeado a 0,15) y 1/2 al año, central 0,35; alto 0,6 si la demanda es fuerte. El Banco de España señala que, además del suelo, pesan la lentitud del planeamiento y la productividad, por lo que la absorción no es 1.",
+   "note_es": "No hay una estimación publicada para España: suponemos que cada año se construye el 35 % (15-60 %) del suelo listo para edificar que se libera. Según el Banco de España, la oferta también depende del planeamiento y de la productividad de las constructoras."
+  }
+ ]
+}

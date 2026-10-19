@@ -1,0 +1,14 @@
+{
+ "id": "V13_emancipation_rent",
+ "verdict": "fix",
+ "source_ok": false,
+ "value_ok": true,
+ "grade_ok": true,
+ "wording_ok": false,
+ "evidence": "Paciorek: Log Rent (MSA), columna Family: 0,121 (Tabla 2, todos los adultos, pág. 33), 0,199 (Tabla 3, 18-30, pág. 34), 0,364 (Tabla 7, 18-30, 2006-2010, pág. 38); la cita está en pág. 18 y se refiere a todos los adultos 2006-2010 (Tabla 6: 0,163). Dividir el efecto marginal (puntos por log de alquiler) por la base española 68,7 % (Eurostat ilc_lvps08 2025, confirmado) da una elasticidad por punto logarítmico correcta, pero traslada el efecto en puntos de EE. UU. (familia, 18-30) a una base mayor, y el bajo usa el coeficiente de todos los adultos: hay que decirlo y no usar 'supone'.",
+ "corrections": {
+  "sources.0.locator": "Tabla 2 pág. 33, Tabla 3 pág. 34 y Tabla 7 pág. 38 (fila Log Rent (MSA), columna Family); cita en pág. 18 (todos los adultos, 2006-2010, Tabla 6: 0,163)",
+  "derivation": "Paciorek da efectos marginales sobre la probabilidad de vivir con la familia (padres u otros parientes), en puntos por log de alquiler del área: 0,121 todos los adultos, 0,199 jóvenes de 18-30 a largo plazo, 0,364 jóvenes a corto plazo. Divididos por la proporción española de 18-34 que vive con sus padres (68,7 % en 2025): 0,121/0,687=0,18, 0,199/0,687=0,29, 0,364/0,687=0,53 % por punto logarítmico (≈1 %) de alquiler. Así se traslada el efecto en puntos de EE. UU., no su elasticidad (la base de EE. UU. es menor, lo que daría cifras más altas); el bajo usa el coeficiente de todos los adultos. No se verificó una estimación española (Martínez-Granado y Ruiz-Castillo 2002 sin acceso abierto).",
+  "note_es": "Según Paciorek (EE. UU.), un alquiler un 20 % más alto va con unos 3 puntos más de adultos viviendo con su familia. Trasladado al 68,7 % de jóvenes de 18-34 que vive con sus padres en España, un 1 % más de alquiler iría con un 0,29 % más (0,18-0,53); no hay una estimación española verificada."
+ }
+}

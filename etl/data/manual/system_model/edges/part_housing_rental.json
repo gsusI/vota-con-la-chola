@@ -1,0 +1,281 @@
+{
+ "agent": "housing_rental",
+ "edges": [
+  {
+   "id": "V05_rent_cap_compliance",
+   "from": "tope_alquiler",
+   "to": "alquiler_cubierto",
+   "sign": "-",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "cumplimiento_tope",
+    "unit": "fracción de la rebaja exigida por el tope que se materializa en los alquileres de los contratos cubiertos",
+    "low": 0.25,
+    "central": 0.4,
+    "high": 0.6
+   },
+   "lag_years": [
+    0,
+    1
+   ],
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://www.frbsf.org/wp-content/uploads/wp2023-28.pdf",
+     "title": "Second-Generation Rent Controls: Evidence from Catalonia",
+     "authors_year": "Monràs y García-Montalvo (2023), FRBSF WP 2023-28",
+     "country": "España (Cataluña)",
+     "period": "contratos ene. 2016 - jun. 2021",
+     "method": "diferencias en diferencias con microdatos de fianzas (Incasòl) y precio de referencia por vivienda; municipios tensionados frente a no tensionados",
+     "locator": "pág. 16 (sección 4.1) y Tabla III panel C, pág. 40",
+     "quote": "The decline in the fraction of units with prices above the reference price, which was around 50% before the policy, fluctuates between 13 and 22 percentage points",
+     "value_in_source": "cuota sobre el índice antes: ~50 %; caída 13-22 pp (Tabla III C: -0,135 a -0,216); incumplimiento hasta 74 %"
+    },
+    {
+     "url": "https://www.frbsf.org/wp-content/uploads/wp2023-28.pdf",
+     "title": "Second-Generation Rent Controls: Evidence from Catalonia",
+     "authors_year": "Monràs y García-Montalvo (2023), FRBSF WP 2023-28",
+     "country": "España (Cataluña)",
+     "period": "contratos ene. 2016 - jun. 2021",
+     "method": "diferencias en diferencias con microdatos de fianzas (Incasòl) y precio de referencia por vivienda; municipios tensionados frente a no tensionados",
+     "locator": "Tabla III panel B, pág. 40; conclusiones pág. 29",
+     "quote": "We estimate that the policy change led to price reductions of around 5%",
+     "value_in_source": "efecto en ln(precio): -0,037 a -0,080; central ~-5 %"
+    }
+   ],
+   "contrary_evidence": [],
+   "debate": null,
+   "derivation": "Cumplimiento por contratos: caída de la cuota sobre el índice / cuota previa = 0,135/0,50 a 0,216/0,50 = 0,27-0,43 (los autores dan incumplimiento de hasta 74 %, es decir 0,26). Cumplimiento por precio: -5 % medido / rebaja exigida (0,50 x brecha media sobre el índice); la brecha no se publica en cifras (solo histogramas): con una brecha supuesta del 20 % (grado D), 5/10 = 0,5. Rango 0,25-0,6, central 0,4; la regla de no superar la renta anterior hace la rebaja exigida mayor, lo que empuja hacia el extremo bajo.",
+   "note_es": "Según Monràs y García-Montalvo, con el tope catalán de 2020 la cuota de contratos por encima del índice bajó del 50 % en 13-22 puntos y los alquileres cayeron un 5 %: se cumplió entre un cuarto y algo más de la mitad de la rebaja exigida."
+  },
+  {
+   "id": "V06_rental_scarcity_spillover",
+   "from": "oferta_alquiler",
+   "to": "alquiler_no_cubierto",
+   "sign": "-",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "traslado_escasez_alquiler",
+    "unit": "% de subida del alquiler de mercado no cubierto por cada 1 % de caída de la oferta total de alquiler de mercado",
+    "low": 0.0,
+    "central": 0.85,
+    "high": 1.3
+   },
+   "lag_years": [
+    0,
+    3
+   ],
+   "grade": "B",
+   "spain_evidence": "parcial",
+   "sources": [
+    {
+     "url": "https://www.nber.org/system/files/working_papers/w24181/w24181.pdf",
+     "title": "The Effects of Rent Control Expansion on Tenants, Landlords, and Inequality: Evidence from San Francisco",
+     "authors_year": "Diamond, McQuade y Qian (2018), NBER w24181",
+     "country": "Estados Unidos (San Francisco)",
+     "period": "ampliación de 1994; datos 1990-2016",
+     "method": "diferencias en diferencias por fecha de construcción + modelo dinámico de elección de barrio (equilibrio general)",
+     "locator": "pág. 31, sección 6.2.1",
+     "quote": "We find that 6% decrease in housing supply led to 5.1% increase in rental prices.",
+     "value_in_source": "oferta -6 % (ciudad), alquileres +5,1 %; oferta de los tratados -15 %"
+    },
+    {
+     "url": "https://www.frbsf.org/wp-content/uploads/wp2023-28.pdf",
+     "title": "Second-Generation Rent Controls: Evidence from Catalonia",
+     "authors_year": "Monràs y García-Montalvo (2023), FRBSF WP 2023-28",
+     "country": "España (Cataluña)",
+     "period": "contratos ene. 2016 - jun. 2021",
+     "method": "diferencias en diferencias con microdatos de fianzas (Incasòl) y precio de referencia por vivienda; municipios tensionados frente a no tensionados",
+     "locator": "pág. 19-20, sección 4.2.3 'Lack of spillovers'",
+     "quote": "We estimate a gap of similar magnitude than with our difference-in-differences estimates, which indicates an absence of spillovers.",
+     "value_in_source": "nuevos contratos -10 % a -20 % en municipios tratados; sin traslado de precios a municipios vecinos no tratados"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://www.nber.org/system/files/working_papers/w18125/w18125.pdf",
+     "title": "Housing Market Spillovers: Evidence from the End of Rent Control in Cambridge, Massachusetts",
+     "finding": "Autor, Palmer y Pathak (2014): al eliminar el control, el valor de las viviendas nunca controladas cercanas subió; más de la mitad de la revalorización inducida fue a ellas, un canal de externalidades de barrio y no de escasez de alquiler."
+    }
+   ],
+   "debate": {
+    "id": "traslado_escasez_alquiler",
+    "schools": [
+     {
+      "label": "Equilibrio general San Francisco (el recorte de oferta encarece el resto del mercado)",
+      "central": 0.85,
+      "source_index": 0
+     },
+     {
+      "label": "Cataluña 2020 (sin traslado medible entre municipios)",
+      "central": 0.0,
+      "source_index": 1
+     }
+    ]
+   },
+   "derivation": "Diamond et al. normalizan ellos mismos: la caída del 15 % en las viviendas tratadas equivale a un 6 % de la oferta de la ciudad y da +5,1 % de alquileres, es decir 5,1/6 = 0,85 % por cada 1 % de oferta. Bajo 0: en Cataluña no se mide traslado entre municipios (ni caída del parque según Jofre-Monseny et al.), aunque allí casi todo el mercado estaba cubierto y no mide la demanda inversa dentro del municipio. Alto 1,3 = 0,85 x 1,5, supuesto (grado D) sin fuente propia.",
+   "note_es": "Según Diamond, McQuade y Qian, en San Francisco una caída del 6 % de la oferta de alquiler fue con alquileres un 5,1 % más altos (0,85 % por cada 1 %); en Cataluña 2020 no se midió traslado a municipios vecinos."
+  },
+  {
+   "id": "V07_rent_renewal",
+   "from": "alquiler_mercado",
+   "to": "alquiler_pagado",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "renovacion_contratos",
+    "unit": "fracción de los contratos de alquiler de vivienda que son nuevos o se renegocian cada año",
+    "low": 0.15,
+    "central": 0.2,
+    "high": 0.26
+   },
+   "lag_years": 0,
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://recam.amb.cat/bitstreams/53bb4828-4c8a-4a0b-b713-f2eafc9bf851/download",
+     "title": "Els contractes de lloguer a la demarcació de Barcelona. 2010-2023",
+     "authors_year": "O-HB / Ajuntament de Barcelona (2024), a partir del Registre de fiances de l'Incasòl",
+     "country": "España (demarcación de Barcelona)",
+     "period": "2010-2023",
+     "method": "recuento de fianzas depositadas: nuevos contratos, extinguidos e índice de rotación",
+     "locator": "Taula A1 total demarcació, pág. 20",
+     "quote": "2019: nous contractes 124.720; vigent 498.742. 2022: 117.719; 545.626. 2023: 100.932; 566.976 (vigent 2018: 481.288)",
+     "value_in_source": "nuevos/vigentes año anterior: 25,9 % (2019), 22,5 % (2022), 18,5 % (2023); rotación 14,5-25,7 %"
+    },
+    {
+     "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1994-26003",
+     "title": "Ley 29/1994, de 24 de noviembre, de Arrendamientos Urbanos (texto consolidado)",
+     "authors_year": "BOE (texto vigente tras RDL 7/2019)",
+     "country": "España",
+     "period": "desde marzo de 2019",
+     "method": "norma",
+     "locator": "art. 9.1 y art. 10.1",
+     "quote": "hasta que el arrendamiento alcance una duración mínima de cinco años, o de siete años si el arrendador fuese persona jurídica",
+     "value_in_source": "5 años (7 si el arrendador es persona jurídica)"
+    },
+    {
+     "url": "https://recam.amb.cat/bitstreams/53bb4828-4c8a-4a0b-b713-f2eafc9bf851/download",
+     "title": "Els contractes de lloguer a la demarcació de Barcelona. 2010-2023",
+     "authors_year": "O-HB / Ajuntament de Barcelona (2024)",
+     "country": "España (Barcelona)",
+     "period": "2021-2023",
+     "method": "índice de rotación (extinguidos / vigentes año anterior)",
+     "locator": "pág. 13",
+     "quote": "entre el 2021 i el 2023, l'índex de rotació es reduís del 23,1% al 14,4% a Barcelona",
+     "value_in_source": "rotación 23,1 % -> 14,4 %, atribuida a la LAU 2019"
+    }
+   ],
+   "contrary_evidence": [],
+   "debate": null,
+   "derivation": "Demarcación de Barcelona (fianzas Incasòl): nuevos contratos / contratos vigentes a final del año anterior = 124.720/481.288 = 25,9 % (2019), 117.719/522.661 = 22,5 % (2022), 100.932/545.626 = 18,5 % (2023). Con duración legal de 5-7 años el ritmo de equilibrio es 1/7-1/5 = 14-20 %. Central 0,20, rango 0,15-0,26; no incluye renegociaciones dentro del contrato (las prórrogas solo actualizan por índice), y se extrapola de Barcelona a España.",
+   "note_es": "Según el registro de fianzas del Incasòl, en la demarcación de Barcelona se firman cada año nuevos contratos equivalentes al 18-26 % de los vigentes; la LAU fija 5 años de duración mínima (7 si el casero es empresa).",
+   "review": {
+    "verdict": "pass",
+    "evidence": "Informe O-HB 2010-2023, Taula A1 total demarcació pág. 20: nuevos 124.720 (2019), 117.719 (2022), 100.932 (2023) y vigentes 481.288 (2018), 522.661 (2021), 545.626 (2022) dan 25,9 %, 22,5 % y 18,5 %; pág. 13 la rotación de Barcelona 23,1 %→14,4 % atribuida a la LAU 2019. La cita de la LAU (art. 9.1) está literal en el BOE consolidado."
+   }
+  },
+  {
+   "id": "B05_catalonia_2020",
+   "from": "tope_alquiler",
+   "to": "alquiler_cubierto",
+   "sign": "-",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "efecto_tope_cataluna_2020",
+    "unit": "% de cambio medido del alquiler medio de los contratos cubiertos por la Ley 11/2020 (Cataluña), sept. 2020 - mar. 2022",
+    "low": -8.0,
+    "central": -5.0,
+    "high": -3.7
+   },
+   "lag_years": [
+    0,
+    1.5
+   ],
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://www.frbsf.org/wp-content/uploads/wp2023-28.pdf",
+     "title": "The Effect of Second-Generation Rent Controls: New Evidence from Catalonia",
+     "authors_year": "Monràs y García-Montalvo (2023), FRBSF WP 2023-28",
+     "country": "España (Cataluña)",
+     "period": "contratos ene. 2016 - jun. 2021",
+     "method": "diferencias en diferencias con microdatos de fianzas (Incasòl) y precio de referencia por vivienda; municipios tensionados frente a no tensionados",
+     "locator": "Tabla III panel B pág. 40; Tabla I pág. 39; Tabla IV pág. 41",
+     "quote": "We estimate that the policy change led to price reductions of around 5%",
+     "value_in_source": "ln(precio) -0,037 a -0,080; nuevos contratos -0,207 (ln, OLS); Tabla I obs. 474.477 regulados y 118.758 no regulados"
+    },
+    {
+     "url": "https://ieb.ub.edu/wp-content/uploads/2022/02/Doc2022-02.pdf",
+     "title": "Effectiveness and supply effects of high-coverage rent control policies",
+     "authors_year": "Jofre-Monseny, Martínez-Mazza y Segú (2022), IEB WP 2022/02",
+     "country": "España (Cataluña)",
+     "period": "2016-2022, trimestral por municipio",
+     "method": "diferencias en diferencias y event study con microdatos de contratos de alquiler (registro de fianzas)",
+     "locator": "resumen pág. 3, introducción pág. 4; Tabla 2 col. 3 y texto pág. 13-14 (-4,5 %); 61 municipios pág. 8",
+     "quote": "Our results indicate that the regulation reduced average rents paid by about 4% to 6%. We do not find evidence of a reduction in the supply of rental units",
+     "value_in_source": "-4,5 % (especificación preferida); rango 4-6 %; oferta sin cambio"
+    }
+   ],
+   "contrary_evidence": [],
+   "debate": {
+    "id": "efecto_oferta_cataluna_2020",
+    "schools": [
+     {
+      "label": "Monràs y García-Montalvo: caen los nuevos contratos (~-10 %)",
+      "central": -10.0,
+      "source_index": 0
+     },
+     {
+      "label": "Jofre-Monseny et al.: sin caída de contratos ni del parque",
+      "central": 0.0,
+      "source_index": 1
+     }
+    ]
+   },
+   "derivation": "Alquiler: central -5 % (Monràs y García-Montalvo; Jofre-Monseny et al. -4,5 %, 4-6 %), rango de la Tabla III B: -8,0 % a -3,7 %. Oferta: -10 % (conclusiones), bajo exp(-0,207)-1 = -18,7 % ~ -19 %, alto 0 (Jofre-Monseny et al.). Cobertura = 474.477/(474.477+118.758) = 0,80 de los contratos de la muestra (grado B, solo contratos con precio de referencia). Cuota sobre el índice ~0,50 (publicada). Brecha media sobre el índice no publicada en cifras (solo histogramas): 20 % con rango 12-30 % es un supuesto (grado D).",
+   "note_es": "Según dos estudios con microdatos de fianzas, el tope catalán de 2020 fue con alquileres un 4-6 % más bajos en los 61 municipios cubiertos; uno mide un 10 % menos de contratos nuevos y el otro no ve caída de la oferta.",
+   "extra_parameters": [
+    {
+     "name": "efecto_oferta_cataluna_2020",
+     "unit": "% de cambio de los nuevos contratos de alquiler en municipios cubiertos",
+     "low": -19.0,
+     "central": -10.0,
+     "high": 0.0,
+     "grade": "A"
+    },
+    {
+     "name": "cobertura_cataluna_2020",
+     "unit": "fracción de los contratos de alquiler de Cataluña firmados en los 61 municipios cubiertos",
+     "low": 0.75,
+     "central": 0.8,
+     "high": 0.85,
+     "grade": "B"
+    },
+    {
+     "name": "cuota_sobre_indice_2020",
+     "unit": "fracción de contratos de municipios cubiertos por encima del índice de referencia antes de la ley",
+     "low": 0.45,
+     "central": 0.5,
+     "high": 0.55,
+     "grade": "A"
+    },
+    {
+     "name": "brecha_sobre_indice_2020",
+     "unit": "% medio por encima del índice de los contratos que lo superaban antes de la ley",
+     "low": 12.0,
+     "central": 20.0,
+     "high": 30.0,
+     "grade": "D"
+    }
+   ],
+   "review": {
+    "verdict": "fix",
+    "evidence": "FRBSF WP 2023-28: 'price reductions of around 5%' (resumen), Tabla III panel B pág. 40 ln precio -0,037 a -0,080, Tabla IV pág. 41 OLS -0,207, oferta -10 % en conclusiones, Tabla I pág. 39 474.477/118.758 y cuota ~50 % sobre el índice en el resumen; datos ene. 2016-jun. 2021 (pág. 11). El título del FRBSF es otro y en el IEB el resumen está en pág. 3 y la Tabla 2 col. 3 (-4,5 %) en pág. 13-14; los extra no llevan grado propio (brecha 20 % es supuesto)."
+   }
+  }
+ ]
+}

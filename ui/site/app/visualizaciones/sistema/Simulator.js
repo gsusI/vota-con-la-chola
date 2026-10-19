@@ -4,6 +4,8 @@ import { useEffect, useMemo, useState } from "react";
 import { SeriesTable } from "../components/Figure";
 import FanChart, { fmt } from "./FanChart";
 import CausalMap from "./CausalMap";
+import HousingMap from "./HousingMap";
+import { housingRows } from "./housingScenarios.mjs";
 import { DEFAULT_LEVERS, LAYERS, applyLayer, centralParams, decodeState, encodeState, mainDriver, quintileImpact, runEnsemble, simulate } from "./engine.mjs";
 import QuintileFigure from "./QuintileFigure";
 import "./sistema.css";
@@ -40,6 +42,33 @@ export const PARAM_LABELS = {
   semielasticidad_base_sociedades: "beneficios que se declaran fuera o dejan de declararse",
   traslado_sociedades_salarios: "parte del Impuesto sobre Sociedades que pagan los salarios",
   salarios_pib: "peso de los salarios en el PIB",
+  respuesta_oferta_tope: "pisos de alquiler que salen del mercado con el tope",
+  elasticidad_oferta_privada: "respuesta de la obra privada al precio",
+  hip_sobre_ltv80: "hipotecas por encima del 80 % del precio",
+  hip_sobre_ltv90: "hipotecas por encima del 90 % del precio",
+  hip_sobre_ltv70: "hipotecas por encima del 70 % del precio",
+  hip_sobre_lti6: "hipotecas de más de 6 veces la renta",
+  hip_sobre_lti45: "hipotecas de más de 4,5 veces la renta",
+  conversion_turistica: "pisos turísticos que vuelven a vivienda habitual",
+  cumplimiento_tope: "parte del tope que se cumple",
+  traslado_escasez_alquiler: "subida del alquiler sin tope cuando falta oferta",
+  renovacion_contratos: "contratos de alquiler nuevos cada año",
+  retardo_obra_publica: "años hasta terminar la vivienda pública",
+  retardo_obra_privada: "años de obra de la vivienda privada",
+  coste_vivienda_publica: "coste de cada vivienda pública",
+  renta_social_mes: "alquiler de la vivienda pública",
+  cuota_financiacion_publica: "parte del coste que paga el presupuesto",
+  desplazamiento_obra_privada: "obra privada que desplaza la pública",
+  absorcion_suelo: "suelo liberado que acaba construido",
+  respuesta_alquiler_parque: "respuesta del alquiler a las viviendas por hogar",
+  elasticidad_emancipacion: "jóvenes que se emancipan cuando baja el alquiler",
+  personas_por_hogar_nuevo: "personas por hogar nuevo",
+  hogares_por_inmigrante: "hogares por inmigrante",
+  perdida_credito_restringido: "crédito que desaparece con el límite",
+  elasticidad_precio_credito: "respuesta del precio al crédito",
+  elasticidad_credito_precio: "respuesta del crédito al precio (garantía)",
+  cuota_credito_nuevo: "crédito nuevo sobre el saldo",
+  sustitucion_alquiler: "compradores que pasan a alquilar",
 };
 
 const LAYER_LABELS = {
@@ -129,6 +158,56 @@ function EdgeCard({ edge }) {
   );
 }
 
+/** Rows × panels of central value (dot) and 5-95 % range (bar), zero always on the axis. */
+export function DotRangeFigure({ rows, panels, ariaLabel }) {
+  return (
+    <div className="closureFig" role="table" aria-label={ariaLabel}>
+      {panels.map((panel) => {
+        const vals = rows.filter((r) => r[panel.key]).flatMap((r) => [r[panel.key].lo, r[panel.key].hi, 0]);
+        const lo = Math.min(...vals);
+        const hi = Math.max(...vals);
+        const sx = (v) => ((v - lo) / (hi - lo || 1)) * 100;
+        return (
+          <div className="closureFig__panel" key={panel.key} role="rowgroup">
+            <h3>{panel.title}</h3>
+            {rows.map((r) => {
+              const d = r[panel.key];
+              if (!d) return null;
+              return (
+                <div className="closureFig__row" key={r.id} role="row">
+                  <span className="closureFig__label" role="rowheader">{r.label}</span>
+                  <span className="closureFig__track" aria-hidden="true">
+                    <span className="closureFig__zero" style={{ left: `${sx(0)}%` }} />
+                    <span className="closureFig__range" style={{ left: `${sx(d.lo)}%`, width: `${Math.max(0.6, sx(d.hi) - sx(d.lo))}%` }} />
+                    <span className="closureFig__dot" style={{ left: `${sx(d.v)}%` }} />
+                  </span>
+                  <span className="closureFig__value" role="cell">
+                    {signed(d.v, panel.unit, panel.digits)}
+                    <small>
+                      {signed(d.lo, panel.unit, panel.digits)} a {signed(d.hi, panel.unit, panel.digits)}
+                    </small>
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+export function HousingFigure({ model, debates }) {
+  const rows = useMemo(() => housingRows(model, debates), [model, debates]);
+  const panels = [
+    { key: "rent", title: "Alquiler de un contrato nuevo en 2035", unit: "pct", digits: 1 },
+    { key: "p1", title: "Caso 1 (joven en Madrid), alquiler al mes en 2035", unit: "eur", digits: 0 },
+    { key: "homes", title: "Viviendas para residentes en 2035 (en el tope: pisos que salen del alquiler)", unit: "k", digits: 0 },
+    { key: "young", title: "Jóvenes que se emancipan en 2035", unit: "k", digits: 0 },
+  ];
+  return <DotRangeFigure rows={rows} panels={panels} ariaLabel="Seis políticas de vivienda: alquiler, caso 1, viviendas y emancipación en 2035" />;
+}
+
 // «Tres formas de pagar lo mismo»: the same lever under each closure, four outcomes, central value and 5-95 % range.
 function ClosureFigure({ model, debates }) {
   const t30 = model.years.indexOf(2035);
@@ -154,40 +233,7 @@ function ClosureFigure({ model, debates }) {
     { key: "p1", title: "Caso 1 (joven asalariada) en 2035", unit: "eur", digits: 0, suffix: "al mes" },
     { key: "jobs", title: "Empleo en 2035", unit: "k", digits: 0, suffix: "" },
   ];
-  return (
-    <div className="closureFig" role="table" aria-label="Subir las pensiones un punto sobre el IPC: resultados según cómo se pague">
-      {panels.map((panel) => {
-        const vals = rows.flatMap((r) => [r[panel.key].lo, r[panel.key].hi, 0]);
-        const lo = Math.min(...vals);
-        const hi = Math.max(...vals);
-        const sx = (v) => ((v - lo) / (hi - lo || 1)) * 100;
-        return (
-          <div className="closureFig__panel" key={panel.key} role="rowgroup">
-            <h3>{panel.title}</h3>
-            {rows.map((r) => {
-              const d = r[panel.key];
-              return (
-                <div className="closureFig__row" key={r.id} role="row">
-                  <span className="closureFig__label" role="rowheader">{r.label}</span>
-                  <span className="closureFig__track" aria-hidden="true">
-                    <span className="closureFig__zero" style={{ left: `${sx(0)}%` }} />
-                    <span className="closureFig__range" style={{ left: `${sx(d.lo)}%`, width: `${Math.max(0.6, sx(d.hi) - sx(d.lo))}%` }} />
-                    <span className="closureFig__dot" style={{ left: `${sx(d.v)}%` }} />
-                  </span>
-                  <span className="closureFig__value" role="cell">
-                    {signed(d.v, panel.unit, panel.digits)}
-                    <small>
-                      {signed(d.lo, panel.unit, panel.digits)} a {signed(d.hi, panel.unit, panel.digits)}
-                    </small>
-                  </span>
-                </div>
-              );
-            })}
-          </div>
-        );
-      })}
-    </div>
-  );
+  return <DotRangeFigure rows={rows} panels={panels} ariaLabel="Subir las pensiones un punto sobre el IPC: resultados según cómo se pague" />;
 }
 
 export default function Simulator({ model }) {
@@ -224,7 +270,8 @@ export default function Simulator({ model }) {
   const tEnd = model.years.length - 1;
   const moved =
     levers.reval || levers.age || levers.contrib || levers.irpfAll || levers.irpfTop || levers.vatStd || levers.vatRed || levers.corp ||
-    levers.migration !== "base" || levers.rateShock;
+    levers.migration !== "base" || levers.rateShock || housingMoved(levers);
+  const housingOn = housingMoved(levers) || levers.migration !== "base";
 
   // Same outputs under each certainty layer (central parameters), to show what is arithmetic and what is assumption.
   const layered = useMemo(
@@ -243,8 +290,18 @@ export default function Simulator({ model }) {
     { key: "employment_k", label: `Empleo en ${horizon}`, unit: "k", digits: 0, t },
     { key: "q1", label: `Hogares del quintil 1 en ${horizon}, al mes`, unit: "eur", digits: 0, t, quintile: 0 },
     { key: "q5", label: `Hogares del quintil 5 en ${horizon}, al mes`, unit: "eur", digits: 0, t, quintile: 4 },
+    ...(housingOn
+      ? [
+          { key: "hs_rent_unc", label: `Alquiler de un contrato nuevo sin tope en ${horizon}`, unit: "pct", digits: 1, t, scale: 100 },
+          ...(levers.capCov && levers.capCut ? [{ key: "hs_rent_cov", label: `Alquiler de un contrato nuevo con tope en ${horizon}`, unit: "pct", digits: 1, t, scale: 100 },
+            { key: "hs_rental_stock_k", label: `Pisos de alquiler de mercado en ${horizon}`, unit: "k", digits: 0, t }] : []),
+          { key: "hs_price", label: `Precio de la vivienda en ${horizon}`, unit: "pct", digits: 1, t, scale: 100 },
+          { key: "hs_stock_k", label: `Viviendas para residentes en ${horizon}`, unit: "k", digits: 0, t },
+          { key: "hs_emancipated_k", label: `Jóvenes que se emancipan en ${horizon}`, unit: "k", digits: 0, t },
+        ]
+      : []),
   ];
-  const valueOf = (o, r, p) => (o.quintile != null ? quintileImpact(model, r, o.t, p)[o.quintile].total : r[o.key][o.t]);
+  const valueOf = (o, r, p) => (o.quintile != null ? quintileImpact(model, r, o.t, p)[o.quintile].total : r[o.key][o.t] * (o.scale || 1));
   const debateParams = Object.entries(model.params).filter(([, p]) => p.debate);
   const closureRate = { cotizaciones: "closure_contrib_pp", iva: "closure_vat_pp", irpf: "closure_irpf_pp" }[levers.closure] || null;
   const band = (key) => ({ lo: ensemble.bands[key].lo, hi: ensemble.bands[key].hi });
@@ -271,6 +328,23 @@ export default function Simulator({ model }) {
           <Slider id="lv-vatred" label="IVA reducido (10 %)" value={levers.vatRed} min={-3} max={3} step={0.5} unit="pp" onChange={set("vatRed")}
             hint="Alimentos elaborados, restaurantes, transporte, agua." />
           <Slider id="lv-corp" label="Impuesto sobre Sociedades (25 %)" value={levers.corp} min={-5} max={5} step={1} unit="pp" onChange={set("corp")} />
+        </div>
+        <div className="sim__group">
+          <h3>Vivienda</h3>
+          <Slider id="lv-pub" label="Vivienda pública en alquiler, más al año" value={levers.pubHomes} min={0} max={60} step={5} unit="mil"
+            onChange={set("pubHomes")} hint={`Hoy se terminan unas ${fmt(model.housing.completions_protected_k, "k")} protegidas al año (de todo tipo). Se paga como diga «¿Cómo se paga?».`} />
+          <Slider id="lv-land" label="Suelo liberado, viviendas posibles al año" value={levers.land} min={0} max={60} step={5} unit="mil"
+            onChange={set("land")} hint="Suelo finalista listo para construir; lo que se construya depende de los promotores." />
+          <Slider id="lv-tour" label="Viviendas turísticas retiradas" value={levers.tourCut} min={0} max={100} step={10} unit="%"
+            onChange={set("tourCut")} hint={`Hoy son el ${String(model.housing.tourist_share * 100).replace(".", ",")} % de las viviendas (unas ${fmt(model.housing.tourist_k, "k")}).`} />
+          <Slider id="lv-capcov" label="Tope del alquiler: alquiler cubierto" value={levers.capCov} min={0} max={100} step={10} unit="%"
+            onChange={set("capCov")} hint="Parte de los hogares de alquiler de mercado en zonas tensionadas declaradas, además de las que ya lo aplican." />
+          <Slider id="lv-capcut" label="Tope del alquiler: rebaja que exige" value={levers.capCut} min={0} max={20} step={2} unit="%"
+            onChange={set("capCut")} hint="Rebaja media que impone a los contratos cubiertos frente al precio de mercado." />
+          <Segmented name="ltv" label="Hipoteca máxima sobre el precio de compra (LTP)" value={String(levers.ltvCap)} onChange={(v) => set("ltvCap")(Number(v))}
+            options={[{ id: "0", label: "Sin límite" }, { id: "90", label: "90 %" }, { id: "80", label: "80 %" }, { id: "70", label: "70 %" }]} />
+          <Segmented name="lti" label="Hipoteca máxima sobre la renta bruta (LTI)" value={String(levers.ltiCap)} onChange={(v) => set("ltiCap")(Number(v))}
+            options={[{ id: "0", label: "Sin límite" }, { id: "6", label: "6 veces" }, { id: "4.5", label: "4,5 veces" }]} />
         </div>
         <div className="sim__group">
           <Segmented name="closure" label="¿Cómo se paga el coste neto de cada año?" value={levers.closure} onChange={set("closure")} options={CLOSURES} />
@@ -458,6 +532,20 @@ export default function Simulator({ model }) {
         </details>
       </figure>
 
+      <figure className="vizFigure sim__figure" id="mapa-vivienda">
+        <h2>Vivienda: cómo se propaga el cambio, en {horizon}</h2>
+        <p className="vizFigure__dek">
+          Las mismas reglas que el mapa de arriba. B2: construir abarata, abaratar emancipa y los hogares nuevos ocupan parte de lo construido. R2: el
+          crédito sube el precio y el precio sube la garantía del crédito. B3: si baja el precio, la obra privada se retira.
+        </p>
+        <HousingMap run={run} t={t} levers={levers} edges={model.edges} selected={selected} onSelect={setSelected} />
+        <EdgeCard edge={selected ? edgeById[selected] : null} />
+      </figure>
+
+      <HousingSeries model={model} run={run} band={band} />
+
+      <HousingPeople model={model} run={run} ensemble={ensemble} t={t} horizon={horizon} levers={levers} />
+
       <figure className="vizFigure sim__figure" id="certeza">
         <h2>Qué parte es aritmética y qué parte es supuesto</h2>
         <p className="vizFigure__dek">
@@ -506,6 +594,171 @@ export default function Simulator({ model }) {
 
 const VOTE_LABEL = { S: "Sí", N: "No", A: "Abst.", "?": "—" };
 
+export function housingMoved(levers) {
+  return Boolean(levers.pubHomes || levers.land || levers.tourCut || (levers.capCov && levers.capCut) || levers.ltvCap || levers.ltiCap);
+}
+
+function HousingSeries({ model, run, band }) {
+  const pctBand = (key) => {
+    const b = band(key);
+    return { lo: b.lo.map((v) => v * 100), hi: b.hi.map((v) => v * 100) };
+  };
+  const pct = (key) => run[key].map((v) => v * 100);
+  const capOn = run.hs_rent_cov.some((v) => v !== 0);
+  return (
+    <figure className="vizFigure sim__figure" id="series-vivienda">
+      <h2>Vivienda: escenario frente a la línea base, 2025–2050</h2>
+      <p className="vizFigure__dek">
+        Desviaciones frente a la línea base: los hogares de la proyección del INE ({model.housing.households_k[1].toLocaleString("es-ES", { maximumFractionDigits: 0 })} mil
+        en {model.years[1]}) y la obra terminada constante en la media de {model.housing.base_year - 2}–{model.housing.base_year} ({fmt(model.housing.completions_free_k + model.housing.completions_protected_k, "k")} al año). Banda: del 5 % al 95 % de las simulaciones.
+      </p>
+      <div className="sim__charts">
+        <div>
+          <h3 className="vizPanelTitle">Alquiler de un contrato nuevo, % frente a la línea base</h3>
+          <FanChart years={model.years} unit="pct" ariaLabel="Alquiler de contratos nuevos frente a la línea base"
+            series={[
+              { id: "u", label: capOn ? "Sin tope" : "Mercado", color: C.scen, values: pct("hs_rent_unc"), emphasis: true, ...pctBand("hs_rent_unc") },
+              ...(capOn ? [{ id: "c", label: "Con tope", color: C.p1, values: pct("hs_rent_cov"), ...pctBand("hs_rent_cov") }] : []),
+            ]} />
+        </div>
+        <div>
+          <h3 className="vizPanelTitle">Precio de la vivienda y crédito, % frente a la línea base</h3>
+          <FanChart years={model.years} unit="pct" ariaLabel="Precio de la vivienda y crédito frente a la línea base"
+            series={[
+              { id: "p", label: "Precio", color: C.scen, values: pct("hs_price"), emphasis: true, ...pctBand("hs_price") },
+              { id: "c", label: "Crédito", color: C.p5, values: pct("hs_credit") },
+            ]} />
+        </div>
+        <div>
+          <h3 className="vizPanelTitle">Viviendas y hogares de más, miles</h3>
+          <FanChart years={model.years} unit="k" digits={0} ariaLabel="Viviendas y hogares de más frente a la línea base"
+            series={[
+              { id: "s", label: "Viviendas", color: C.scen, values: run.hs_stock_k, emphasis: true, ...band("hs_stock_k") },
+              { id: "h", label: "Hogares", color: C.p2, values: run.hs_households_k, ...band("hs_households_k") },
+            ]} />
+        </div>
+        <div>
+          <h3 className="vizPanelTitle">Jóvenes que se emancipan (miles) y pisos de alquiler de mercado (miles)</h3>
+          <FanChart years={model.years} unit="k" digits={0} ariaLabel="Jóvenes emancipados y oferta de alquiler frente a la línea base"
+            series={[
+              { id: "e", label: "Jóvenes emancipados", color: C.p4, values: run.hs_emancipated_k, emphasis: true, ...band("hs_emancipated_k") },
+              ...(capOn ? [{ id: "r", label: "Pisos de alquiler", color: C.p1, values: run.hs_rental_stock_k, ...band("hs_rental_stock_k") }] : []),
+            ]} />
+        </div>
+      </div>
+    </figure>
+  );
+}
+
+const share = (rent, net) => (rent / (net / 12)) * 100;
+
+function HousingPeople({ model, run, ensemble, t, horizon, levers }) {
+  const H = model.housing;
+  const c1 = H.cases.p1;
+  const c2 = H.cases.p2_renter;
+  const b2 = H.cases.p2_buyer;
+  const capOn = Boolean(levers.capCov && levers.capCut);
+  const rentLine = (label, key, base, net) => {
+    const v = run[key][t];
+    const b = ensemble.bands[key];
+    return (
+      <li key={key}>
+        {label}: <strong>{Math.abs(v) < 0.5 ? "sin cambio" : `${signed(v, "eur", 0)} al mes`}</strong>
+        {Math.abs(v) >= 0.5 ? <span className="sim__muted"> ({signed(b.lo[t], "eur", 0)} a {signed(b.hi[t], "eur", 0)})</span> : null}; esfuerzo del{" "}
+        {share(base, net).toLocaleString("es-ES", { maximumFractionDigits: 1 })} % al {share(base + v, net).toLocaleString("es-ES", { maximumFractionDigits: 1 })} % de la renta neta
+      </li>
+    );
+  };
+  const rentFactor = run.hs_rent_paid[t];
+  const cells = H.effort_cells.filter((c) => c.burden_mean);
+  const label = { "16-29": "16–29", "30-44": "30–44", "45-64": "45–64", "65+": "65 o más" };
+  return (
+    <figure className="vizFigure sim__figure" id="personas-vivienda">
+      <h2>Vivienda: qué les pasa a los casos 1 y 2, en {horizon}</h2>
+      <p className="vizFigure__dek">
+        Alquileres del SERPAVI de {c1.rent_year} y rentas netas de la página de <a href="/visualizaciones/vivienda/">vivienda</a>, a precios de entonces. Un
+        contrato nuevo es lo que paga quien busca piso; quien ya tiene contrato se acerca al mercado a medida que renueva.
+      </p>
+      <div className="sim__people">
+        <div className="sim__person" style={{ "--tone": C.p1 }}>
+          <h3>Caso 1 · 25–34 años, vive sola de alquiler en Madrid ({fmt(c1.rent_month, "eur")} al mes)</h3>
+          <ul className="sim__list">
+            {capOn ? rentLine("Si encuentra un piso con tope", "p1_rent_cov_month", c1.rent_month, c1.net_year) : null}
+            {rentLine(capOn ? "Si busca fuera del tope" : "Contrato nuevo", "p1_rent_unc_month", c1.rent_month, c1.net_year)}
+            {capOn ? (
+              <li>
+                Pisos de alquiler de mercado: <strong>{signed(run.hs_rental_stock_k[t], "k", 0)}</strong> en toda España (
+                {signed((run.hs_rental_stock_k[t] / H.renters_k) * 100, "pct", 1)} de la oferta).
+              </li>
+            ) : null}
+          </ul>
+        </div>
+        <div className="sim__person" style={{ "--tone": C.p2 }}>
+          <h3>Caso 2 · pareja con dos hijos, alquila en el área de Madrid ({fmt(c2.rent_month, "eur")} al mes)</h3>
+          <ul className="sim__list">
+            {capOn ? rentLine("Si encuentra un piso con tope", "p2r_rent_cov_month", c2.rent_month, c2.net_year) : null}
+            {rentLine(capOn ? "Si busca fuera del tope" : "Contrato nuevo", "p2r_rent_unc_month", c2.rent_month, c2.net_year)}
+          </ul>
+        </div>
+        <div className="sim__person" style={{ "--tone": C.p2 }}>
+          <h3>Caso 2 · la misma pareja compra un piso de {fmt(b2.home_price, "eur")} en Madrid</h3>
+          <ul className="sim__list">
+            <li>
+              Precio: <strong>{signed(run.hs_price[t] * b2.home_price, "eur", 0)}</strong>; entrada e impuestos necesarios:{" "}
+              <strong>{signed(run.p2b_upfront_eur[t], "eur", 0)}</strong> (hoy {fmt(b2.upfront, "eur")}, {String(b2.upfront_years_income).replace(".", ",")} años de renta neta).
+            </li>
+            <li>
+              Cuota de la hipoteca: <strong>{signed(run.p2b_payment_month[t], "eur", 0)} al mes</strong> (hoy {fmt(b2.cost_month, "eur")}, al {String(b2.rate_pct).replace(".", ",")} % y {b2.years} años).
+            </li>
+            <li className="sim__muted">
+              Sus sueldos brutos ({fmt(c2.gross_year, "eur")}) dan {(((b2.home_price * b2.ltv_pct) / 100) / c2.gross_year).toLocaleString("es-ES", { maximumFractionDigits: 2 })} veces la renta con una hipoteca del {b2.ltv_pct} %: un LTI de 4,5 los obliga a
+              poner más entrada.
+            </li>
+          </ul>
+        </div>
+      </div>
+      <details className="vizTable" open={capOn || Math.abs(rentFactor) > 0.005}>
+        <summary>Esfuerzo de los hogares de alquiler de mercado por edad (Encuesta de Condiciones de Vida {H.effort_year})</summary>
+        <p className="sim__muted">
+          Gasto en vivienda sobre la renta disponible, media de cada celda con su intervalo del 95 %, y cómo quedaría con el cambio medio del alquiler que pagan
+          los inquilinos de mercado en {horizon} ({signed(rentFactor * 100, "pct", 1)}, contando renovaciones). Quien tiene hipoteca no cambia: su cuota está
+          fijada; quien es propietario sin hipoteca, tampoco.
+        </p>
+        <div className="vizTable__scroll">
+          <table className="sim__table">
+            <thead>
+              <tr>
+                <th scope="col">Edad de la persona de referencia</th>
+                <th scope="col">España, alquiler de mercado</th>
+                <th scope="col">España, con el escenario</th>
+                <th scope="col">Comunidad de Madrid, alquiler de mercado</th>
+                <th scope="col">Madrid, con el escenario</th>
+              </tr>
+            </thead>
+            <tbody>
+              {["16-29", "30-44", "45-64", "65+"].map((age) => {
+                const es = cells.find((c) => c.geo === "ES" && c.age === age && c.tenure === "RENT_MKT");
+                const md = cells.find((c) => c.geo === "ES30" && c.age === age && c.tenure === "RENT_MKT");
+                const cellText = (c) => (c ? `${c.burden_mean[0].toLocaleString("es-ES")} % (${c.burden_mean[1].toLocaleString("es-ES")}–${c.burden_mean[2].toLocaleString("es-ES")})` : "muestra pequeña");
+                const scen = (c) => (c ? `${(c.burden_mean[0] * (1 + rentFactor)).toLocaleString("es-ES", { maximumFractionDigits: 1 })} %` : "—");
+                return (
+                  <tr key={age}>
+                    <th scope="row">{label[age]}</th>
+                    <td>{cellText(es)}</td>
+                    <td>{scen(es)}</td>
+                    <td>{cellText(md)}</td>
+                    <td>{scen(md)}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </details>
+    </figure>
+  );
+}
+
 function VotesBlock({ model, levers }) {
   const groups = [
     [levers.reval, "reval", "Revalorización de las pensiones"],
@@ -514,6 +767,11 @@ function VotesBlock({ model, levers }) {
     [levers.irpfAll || levers.irpfTop || levers.closure === "irpf", "irpf", "IRPF"],
     [levers.vatStd || levers.vatRed || levers.closure === "iva", "iva", "IVA"],
     [levers.corp, "corp", "Impuesto sobre Sociedades"],
+    [levers.pubHomes, "publica", "Vivienda pública"],
+    [levers.land, "suelo", "Suelo y licencias"],
+    [levers.capCov && levers.capCut, "tope", "Tope y regulación del alquiler"],
+    [levers.tourCut, "turistico", "Viviendas turísticas"],
+    [levers.ltvCap || levers.ltiCap, "credito", "Hipotecas y avales"],
   ];
   const active = groups.filter(([on, id]) => on && model.votes[id]?.votes.length).map(([, id, title]) => [id, title]);
   const shown = active.length ? active : [["reval", "Revalorización de las pensiones"]];

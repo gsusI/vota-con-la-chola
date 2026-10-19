@@ -90,5 +90,57 @@ export function computeBacktests(model) {
       text: `Un punto más de IVA general cuesta el ${n(ours[0], 2)} % de la renta disponible al quintil 1 y el ${n(ours[4], 2)} % al quintil 5 en el modelo (gasto de la Encuesta de Presupuestos Familiares); en la estadística experimental de Eurostat, el IVA pagado es el ${n(icw[0])} % de la renta bruta en el quintil 1 y el ${n(icw[2])} % en el 5.`,
     });
   }
+  // Housing (slice 2). Tolerances fixed on 2026-10-19 before the cards were filled (README §13).
+  const P = centralParams(model);
+  const pct = (v, d = 1) => `${v >= 0 ? "+" : "−"}${n(Math.abs(v), d)} %`;
+
+  // 7. Catalan rent cap of 2020 (Ley 11/2020): the cap arithmetic with the compliance card against the measured effect.
+  const cat = bm.B05_catalonia_2020;
+  if (cat) {
+    const x = Object.fromEntries((cat.extra || []).map((e) => [e.name, e.central]));
+    const mandated = (x.cuota_sobre_indice_2020 ?? 0) * (x.brecha_sobre_indice_2020 ?? 0); // % of the average covered rent
+    const model_ = -P.cumplimiento_tope * mandated;
+    const measured = cat.value;
+    const supply = (model.params.respuesta_oferta_tope.debate?.schools || []).map((s) => `«${s.label}» ${pct(-s.central * -model_, 0)}`);
+    out.push({
+      id: "tope_cataluna_2020",
+      ok: Math.sign(model_) === Math.sign(measured) && Math.abs(model_ - measured) <= 0.5 * Math.abs(measured),
+      tolerance: "mismo signo y ±50 % del efecto medido",
+      label: "Tope catalán del alquiler de 2020.",
+      text: `Con un ${n((x.cuota_sobre_indice_2020 ?? 0) * 100, 0)} % de contratos por encima del índice y una brecha media del ${n(x.brecha_sobre_indice_2020 ?? 0, 0)} %, la ley exigía bajar de media un ${n(mandated)} % el alquiler cubierto; con el cumplimiento de la ficha (${n(P.cumplimiento_tope * 100, 0)} %), el modelo da ${pct(model_)}, frente al ${pct(measured)} medido. La oferta de alquiler cubierta cambiaría ${supply.join("; ")}, frente a ${pct(x.efecto_oferta_cataluna_2020 ?? 0, 0)} medido. ${cat.same_study ? "El cumplimiento sale en parte del mismo estudio: es una prueba de coherencia, no independiente." : ""}`,
+    });
+  }
+
+  // 8. Housing boom 2000-2007: how much of the rise in price-to-wage the credit term explains, against the literature.
+  const boomCard = bm.B06_boom_credit;
+  const boom = model.housing?.boom;
+  if (boomCard && boom) {
+    const credit = Math.log(boom.credit_to / boom.credit_from);
+    const price = Math.log(boom.years_income_to / boom.years_income_from);
+    const share = (P.elasticidad_precio_credito * credit) / price;
+    const extraHomes = boom.completed - boom.net_households;
+    const stockOnly = -P.respuesta_alquiler_parque * (extraHomes / 1000 / model.housing.households_k[0]);
+    out.push({
+      id: "boom_credito",
+      ok: share >= boomCard.low - 0.15 && share <= boomCard.high + 0.15,
+      tolerance: "dentro del rango publicado ±15 puntos",
+      label: `Burbuja de ${boom.from}–${boom.to}.`,
+      text: `El crédito a la vivienda pasó del ${n(boom.credit_from)} % al ${n(boom.credit_to)} % del PIB y el precio de ${n(boom.years_income_from, 2)} a ${n(boom.years_income_to, 2)} años de salario. Con su elasticidad, el término de crédito del modelo da cuenta de un ${n(share * 100, 0)} % de esa subida; los estudios atribuyen al crédito y a la financiación entre un ${n(boomCard.low * 100, 0)} % y un ${n(boomCard.high * 100, 0)} %. El canal de parque por hogar apunta al revés: se terminaron ${n(extraHomes / 1e6, 2)} millones de viviendas más que hogares nuevos, lo que en el modelo bajaría el alquiler un ${n(Math.abs(stockOnly) * 100, 0)} %. No fue escasez: el modelo no explica la burbuja sin crédito, tipos y expectativas.`,
+    });
+  }
+
+  // 9. Tourist rentals: the model's chain (conversion × inverse demand) against the Barcelona quasi-experiment.
+  const tour = bm.B07_tourist_rents;
+  if (tour) {
+    const model_ = P.conversion_turistica * P.respuesta_alquiler_parque; // % rent per 1 pp of the stock in tourist use
+    const ratio = model_ / tour.value;
+    out.push({
+      id: "turistico_barcelona",
+      ok: ratio >= 1 / 3 && ratio <= 3,
+      tolerance: "entre un tercio y el triple",
+      label: "Viviendas turísticas y alquiler.",
+      text: `En el modelo, que un punto del parque deje de ser turístico baja el alquiler un ${n(model_, 2)} % (conversión × respuesta del alquiler al parque); el estudio cuasi-experimental de Barcelona da ${n(tour.value, 2)} % por punto. ${ratio > 1 ? "El modelo da más" : "El modelo da menos"} (${n(ratio, 1)} veces): el efecto local de un barrio no es el de todo un mercado.`,
+    });
+  }
   return out;
 }

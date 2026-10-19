@@ -62,14 +62,13 @@ export const LINKS = [
   { from: "ipc", to: "p1", edge: "E14_wage_indexation", sign: "−" },
   { from: "recaudacion", to: "saldo", sign: "−" },
   { from: "saldo", to: "deuda", edge: "E18_deficit_debt", sign: "+" },
-  { from: "deuda", to: "tipo_deuda", edge: "E16_debt_risk_premium", sign: "+", loop: "R1" },
-  { from: "tipo_deuda", to: "deuda", edge: "E17_refinancing", sign: "+", loop: "R1" },
+  { from: "deuda", to: "tipo_deuda", edge: "E16_debt_risk_premium", sign: "+", loop: "R1", curve: -16 },
+  { from: "tipo_deuda", to: "deuda", edge: "E17_refinancing", sign: "+", loop: "R1", curve: 16 },
   { from: "rate", to: "tipo_deuda", sign: "+" },
   { from: "pension_media", to: "p4", sign: "+" },
   { from: "salario", to: "p1", sign: "+" },
 ];
 
-const pos = Object.fromEntries(NODES.map((n) => [n.id, n]));
 
 /** Deviation shown in each node at year index t (value, unit, digits). */
 export function nodeValues(run, t, levers) {
@@ -110,7 +109,7 @@ function taxNode(all, top, corp) {
 
 const CLOSURE_LABEL = { deuda: "con deuda", cotizaciones: "con cotizaciones", iva: "con IVA", irpf: "con IRPF" };
 
-function valueText([v, unit, digits, suffix, text]) {
+export function valueText([v, unit, digits, suffix, text]) {
   if (text) return text;
   if (v == null) return CLOSURE_LABEL[unit] || unit;
   if (unit === "años") return `${v > 0 ? "+" : ""}${Number(v).toLocaleString("es-ES")} años`;
@@ -121,7 +120,16 @@ function valueText([v, unit, digits, suffix, text]) {
 const isOn = ([v, unit, digits]) => v != null && Math.abs(v) >= 0.5 * 10 ** -(digits ?? 1);
 
 export default function CausalMap({ run, t, levers, edges, selected, onSelect }) {
-  const values = nodeValues(run, t, levers);
+  return (
+    <MapView nodes={NODES} links={LINKS} values={nodeValues(run, t, levers)} closure={levers.closure} edges={edges} selected={selected}
+      onSelect={onSelect} loops={[{ label: "R1", x: 720 - NW / 2 - 26, y: 368 }, { label: "B1", x: 366, y: 176 }]}
+      ariaLabel="Mapa causal del módulo de pensiones y cuentas públicas" />
+  );
+}
+
+/** Generic causal map: boxes coloured by their deviation, arrows lit when both ends move, dashes by evidence grade. */
+export function MapView({ nodes, links, values, closure, edges, selected, onSelect, loops = [], width = W, height = H, ariaLabel, id = "cmap" }) {
+  const pos = Object.fromEntries(nodes.map((n) => [n.id, n]));
   const grade = Object.fromEntries(edges.map((e) => [e.id, e.grade]));
   const anchor = (a, b) => {
     const dx = b.x - a.x;
@@ -133,20 +141,19 @@ export default function CausalMap({ run, t, levers, edges, selected, onSelect })
   };
   return (
     <div className="cmap">
-      <svg viewBox={`0 0 ${W} ${H}`} width="100%" role="img" aria-label="Mapa causal del módulo de pensiones y cuentas públicas">
+      <svg viewBox={`0 0 ${width} ${height}`} width="100%" role="img" aria-label={ariaLabel}>
         <defs>
-          <marker id="cmap-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <marker id={`${id}-arrow`} viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
             <path d="M0,0 L10,5 L0,10 z" className="cmap__arrowHead" />
           </marker>
         </defs>
-        {LINKS.map((link) => {
+        {links.map((link) => {
           const a = pos[link.from];
           const b = pos[link.to];
-          if (link.when && levers.closure !== link.when) return null;
-          const back = link.from === "tipo_deuda" && link.to === "deuda";
+          if (link.when && closure !== link.when) return null;
           const [x1, y1] = anchor(a, b);
           const [x2, y2] = anchor(b, a);
-          const offset = link.loop === "R1" ? (back ? 16 : -16) : 0;
+          const offset = link.curve || 0;
           const g = link.edge ? grade[link.edge] : "A";
           const active = isOn(values[link.from]) && isOn(values[link.to]);
           const dash = g === "A" ? undefined : g === "B" ? "7 4" : "2 4";
@@ -165,7 +172,7 @@ export default function CausalMap({ run, t, levers, edges, selected, onSelect })
                 d={`M${x1 + offset},${y1} Q${mid[0] + offset},${mid[1]} ${x2 + offset},${y2}`}
                 fill="none"
                 strokeDasharray={dash}
-                markerEnd="url(#cmap-arrow)"
+                markerEnd={`url(#${id}-arrow)`}
               />
               {link.edge ? <path d={`M${x1 + offset},${y1} L${x2 + offset},${y2}`} className="cmap__hit" /> : null}
               <text x={mid[0] + 4} y={mid[1] - 4} className="cmap__sign">
@@ -174,9 +181,10 @@ export default function CausalMap({ run, t, levers, edges, selected, onSelect })
             </g>
           );
         })}
-        <text x={720 - NW / 2 - 26} y={368} className="cmap__loop">R1</text>
-        <text x={366} y={176} className="cmap__loop">B1</text>
-        {NODES.map((node) => {
+        {loops.map((lp) => (
+          <text key={lp.label} x={lp.x} y={lp.y} className="cmap__loop">{lp.label}</text>
+        ))}
+        {nodes.map((node) => {
           const v = values[node.id];
           const on = isOn(v);
           const tone = !on || v[0] == null ? "none" : v[0] > 0 ? "up" : "down";
@@ -194,14 +202,14 @@ export default function CausalMap({ run, t, levers, edges, selected, onSelect })
         })}
       </svg>
       <p className="cmap__swipe">Desliza el mapa a los lados para verlo entero.</p>
-      <ActiveChain values={values} levers={levers} onSelect={onSelect} />
+      <ActiveChain values={values} links={links} pos={pos} closure={closure} onSelect={onSelect} />
     </div>
   );
 }
 
 // The same propagation as text: every active arrow with the values at both ends (readable on a phone and by screen readers).
-function ActiveChain({ values, levers, onSelect }) {
-  const active = LINKS.filter((l) => (!l.when || levers.closure === l.when) && isOn(values[l.from]) && isOn(values[l.to]));
+function ActiveChain({ values, links, pos, closure, onSelect }) {
+  const active = links.filter((l) => (!l.when || closure === l.when) && isOn(values[l.from]) && isOn(values[l.to]));
   if (!active.length) return null;
   return (
     <details className="cmap__chain" open>

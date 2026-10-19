@@ -1,0 +1,17 @@
+{
+ "id": "B05_catalonia_2020",
+ "verdict": "fix",
+ "source_ok": false,
+ "value_ok": true,
+ "grade_ok": false,
+ "wording_ok": true,
+ "evidence": "FRBSF WP 2023-28: 'price reductions of around 5%' (resumen), Tabla III panel B pág. 40 ln precio -0,037 a -0,080, Tabla IV pág. 41 OLS -0,207, oferta -10 % en conclusiones, Tabla I pág. 39 474.477/118.758 y cuota ~50 % sobre el índice en el resumen; datos ene. 2016-jun. 2021 (pág. 11). El título del FRBSF es otro y en el IEB el resumen está en pág. 3 y la Tabla 2 col. 3 (-4,5 %) en pág. 13-14; los extra no llevan grado propio (brecha 20 % es supuesto).",
+ "corrections": {
+  "sources.0.title": "The Effect of Second-Generation Rent Controls: New Evidence from Catalonia",
+  "sources.1.locator": "resumen pág. 3, introducción pág. 4; Tabla 2 col. 3 y texto pág. 13-14 (-4,5 %); 61 municipios pág. 8",
+  "extra_parameters.0.grade": "A",
+  "extra_parameters.1.grade": "B",
+  "extra_parameters.2.grade": "A",
+  "extra_parameters.3.grade": "D"
+ }
+}

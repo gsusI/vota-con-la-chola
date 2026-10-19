@@ -1,0 +1,14 @@
+{
+ "id": "V08_public_lag",
+ "verdict": "fix",
+ "source_ok": false,
+ "value_ok": true,
+ "grade_ok": false,
+ "wording_ok": true,
+ "evidence": "El RD 853/2021 fija el 30-6-2026 para el programa 6 en el art. 67.2 ('viviendas efectivamente finalizadas'), no en el art. 18.2 (programa 1, mismo plazo con otro texto); el BOCM 4-12-2024 pág. 8 trae literal el compromiso de fin de obra antes del 30-6-2026 (8.807.933 €, 210 viviendas, pág. 1). El retardo privado es hipótesis declarada y debe llevar grado D.",
+ "corrections": {
+  "sources.0.locator": "art. 67.2 (programa 6; el art. 18.2 fija el mismo plazo para el programa 1)",
+  "sources.0.quote": "En caso de que a 30 de junio de 2026 no se hubiesen cumplido los requisitos establecidos para la ejecución de las actuaciones, la cuantía de la subvención será [...] sobre las viviendas efectivamente finalizadas",
+  "extra_parameters.0.grade": "D"
+ }
+}

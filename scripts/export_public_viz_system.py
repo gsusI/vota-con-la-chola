@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Export /visualizaciones/sistema/ (slice 0: pensions + public finances) to sistema.json.
+"""Export /visualizaciones/sistema/ (slices 0-2: pensions, public finances, taxes, housing) to sistema.json.
 
 Inputs, all with sha256 in the output:
 - European Commission, 2024 Ageing Report, statistical annex (country fiches xlsx, raw cache): the official baseline
@@ -10,6 +10,9 @@ Inputs, all with sha256 in the output:
 - The carga-fiscal page JSON: typical cases 1 and 4 (computed there, checked here, never recomputed).
 - The edge catalog (etl/data/manual/system_model/catalog.json, built with scripts/system_model_kit.py merge).
 - The voting-aid v2 snapshot: votes related to each lever.
+- Housing (slice 2, scripts/system_model_housing.py): the housing page JSON (vivienda.json: completions, census stock,
+  tourist dwellings, ECV cells, SERPAVI rents of the typical cases), INE household projection (table 54562, raw
+  cache) and Eurostat population 25-34 (raw cache).
 
 The engine (ui/site/app/visualizaciones/sistema/engine.mjs) works in deviations from this baseline. When an input is
 missing (CI checkouts) the committed artifact is kept.
@@ -33,6 +36,7 @@ sys.path.insert(0, str(REPO_ROOT / "scripts"))
 from export_public_viz_fiscal import Store, interp  # noqa: E402
 from ingest_employment_es import xlsx_rows, xlsx_sheet  # noqa: E402
 import system_model_incidence as incidence  # noqa: E402
+import system_model_housing as housing  # noqa: E402
 from housing_ecv_microdata import MICRO_PAGE, MICRO_URL  # noqa: E402
 
 DEFAULT_DB = REPO_ROOT / "etl/data/staging/public-finance-es.db"
@@ -51,6 +55,10 @@ ECV_YEAR = 2025
 HBS_STR = REPO_ROOT / "etl/data/raw/system_model/eurostat_hbs_str_t223_es.json"
 HBS_EXP = REPO_ROOT / "etl/data/raw/system_model/eurostat_hbs_exp_t133_es.json"
 HBS_YEAR, HBS_CHECK_YEAR = "2015", "2020"  # 2015: last wave before the pandemic distorted spending (2020 is the check)
+VIVIENDA_JSON = DATA_DIR / "vivienda.json"
+INE_PROH = REPO_ROOT / "etl/data/raw/system_model/ine_proh_54562.json"
+INE_PROH_URL = "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/54562?nult=30"
+EUROSTAT_PJAN = REPO_ROOT / "etl/data/raw/housing/apis/eurostat_demo_pjangroup.json"
 OUT_JSON = DATA_DIR / "sistema.json"
 OUT_CSV = DATA_DIR / "sistema.csv"
 
@@ -67,10 +75,18 @@ PARAMS = [
     "cuota_refinanciacion", "recaudacion_por_punto_irpf", "recaudacion_por_punto_irpf_alto", "pareto_a_alto", "eti_general",
     "eti_alta", "recaudacion_por_punto_iva_reducido", "recaudacion_por_punto_sociedades", "semielasticidad_base_sociedades",
     "traslado_sociedades_salarios", "salarios_pib",
+    # slice 2, housing
+    "respuesta_oferta_tope", "elasticidad_oferta_privada", "hip_sobre_ltv80", "hip_sobre_ltv90", "hip_sobre_ltv70",
+    "hip_sobre_lti6", "hip_sobre_lti45", "conversion_turistica", "cumplimiento_tope", "traslado_escasez_alquiler",
+    "renovacion_contratos", "retardo_obra_publica", "retardo_obra_privada", "coste_vivienda_publica", "renta_social_mes",
+    "cuota_financiacion_publica", "desplazamiento_obra_privada", "absorcion_suelo", "respuesta_alquiler_parque",
+    "elasticidad_emancipacion", "personas_por_hogar_nuevo", "hogares_por_inmigrante", "perdida_credito_restringido",
+    "elasticidad_precio_credito", "elasticidad_credito_precio", "cuota_credito_nuevo", "sustitucion_alquiler",
 ]
 # Model constants from cards (central value, no uncertainty in the engine) or from the law.
 CARD_CONSTANTS = {"new_pension_relative": "new_pension_relative", "labour_output_elasticity": "elasticidad_producto_empleo"}
-BENCHMARKS = ["B01_revaluation_2023_cost", "B02_irp_savings", "B03_dsm_spain", "B04_irpf_concentration"]
+BENCHMARKS = ["B01_revaluation_2023_cost", "B02_irp_savings", "B03_dsm_spain", "B04_irpf_concentration",
+              "B05_catalonia_2020", "B06_boom_credit", "B07_tourist_rents"]
 
 # Votes in the voting-aid snapshot that touch each lever (matched on the plain-language summary).
 LEVER_VOTES = {
@@ -80,6 +96,11 @@ LEVER_VOTES = {
     "irpf": r"IRPF[^.]{0,80}(tramo|tipo|deflact|bajar|rebaja|subir|mínimo exento)|(bajar|rebaja|subir)[^.]{0,40}IRPF",
     "iva": r"\bIVA\b[^.]{0,60}(general|reducido|alimentos|18 %|8 %)|(bajar|rebaja)[^.]{0,30}\bIVA\b",
     "corp": r"[Ss]ociedades",
+    "tope": r"(control de rentas|rebaj\w* por ley[^.]{0,30}alquiler|topes? del alquiler|tope del 2|índice de actualización del alquiler|limitar precios)",
+    "turistico": r"(viviendas?|pisos?|alquiler)[^.]{0,25}tur[ií]stic",
+    "publica": r"(vivienda (protegida|pública|social|asequible)|parque público|SAREB|gasto en vivienda)",
+    "suelo": r"(liberar suelo|transformación de suelo|urbanismo|licencias de vivienda(?! tur)|trabas administrativas|millón de viviendas|más oferta)",
+    "credito": r"(avales públicos|hipotecad|hipotecas? )",
 }
 MAX_VOTES = 12
 
@@ -157,8 +178,11 @@ def related_votes(lever: str) -> list[dict]:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--db", type=Path, default=DEFAULT_DB)
+    parser.add_argument("--provisional", type=Path, help="development only: JSON of parameters not yet in the catalog")
+    parser.add_argument("--out", type=Path, default=OUT_JSON)
     args = parser.parse_args()
-    missing = [p for p in (args.db, AR_XLSX, CATALOG, FISCAL_JSON, VOTING_AID, ECV_ZIP, HBS_STR, HBS_EXP) if not p.exists()]
+    missing = [p for p in (args.db, AR_XLSX, CATALOG, FISCAL_JSON, VOTING_AID, ECV_ZIP, HBS_STR, HBS_EXP, VIVIENDA_JSON,
+                           INE_PROH, EUROSTAT_PJAN) if not p.exists()]
     if missing:
         print(f"inputs missing ({', '.join(str(p.relative_to(REPO_ROOT)) for p in missing)}); keeping committed artifact")
         return 0
@@ -213,14 +237,18 @@ def main() -> int:
                 "earners": [r(w, 0) for w in earners]}
 
     cat = load_catalog()
+    provisional = json.loads(args.provisional.read_text(encoding="utf-8")) if args.provisional else {}
     params = {}
     for name in PARAMS:
         hit = cat["by_param"].get(name)
+        if not hit and name in provisional:  # development only: never publish with provisional values
+            params[name] = {**provisional[name], "debate": provisional[name].get("debate"), "provisional": True}
+            continue
         if not hit:
             raise SystemExit(f"catalog has no card for parameter {name}")
         spec, card = hit["spec"], hit["card"]
         params[name] = {"low": spec["low"], "central": spec["central"], "high": spec["high"], "unit": spec["unit"],
-                        "layer": card["layer"], "edge": card["id"], "grade": card["grade"], "debate": None}
+                        "layer": card["layer"], "edge": card["id"], "grade": spec.get("grade", card["grade"]), "debate": None}
         if card.get("debate") and spec is card["parameter"]:
             params[name]["debate"] = card["debate"]
     constants_card = {key: cat["by_param"][name]["spec"]["central"] for key, name in CARD_CONSTANTS.items()}
@@ -287,7 +315,13 @@ def main() -> int:
         if card:
             benchmarks[bid] = {"value": card["parameter"]["central"], "low": card["parameter"]["low"],
                                "high": card["parameter"]["high"], "unit": card["parameter"]["unit"],
-                               "derivation": card["derivation"], "sources": card["sources"]}
+                               "derivation": card["derivation"], "sources": card["sources"],
+                               "extra": [{"name": x["name"], "central": x["central"], "low": x["low"], "high": x["high"],
+                                          "unit": x["unit"]} for x in card.get("extra_parameters") or []]}
+    # The Catalan backtest is independent only if the compliance card does not come from the same studies.
+    if "B05_catalonia_2020" in benchmarks and "cumplimiento_tope" in cat["by_param"]:
+        urls = {src["url"] for src in cat["by_param"]["cumplimiento_tope"]["card"]["sources"]}
+        benchmarks["B05_catalonia_2020"]["same_study"] = any(src["url"] in urls for src in benchmarks["B05_catalonia_2020"]["sources"])
 
     # ---- incidence by quintile (offline microsimulation; docs §12)
     ecv = incidence.ecv_shares(ECV_ZIP.read_bytes(), ECV_YEAR)
@@ -313,6 +347,14 @@ def main() -> int:
         real_index.append(r(acc, 5))
     base["real_index"] = real_index
 
+    # ---- housing (slice 2): baseline and starting point read from vivienda.json and the raw cache
+    viv = json.loads(VIVIENDA_JSON.read_text(encoding="utf-8"))
+    housing_inputs, housing_gates = housing.housing_block(viv, INE_PROH, EUROSTAT_PJAN, a["Population (million)"],
+                                                          a["Net migration (thousands)"], years)
+    gates.extend(housing_gates)
+    if not all(g["ok"] for g in housing_gates):
+        raise SystemExit(f"input gate failed: {[g for g in housing_gates if not g['ok']]}")
+
     hicp_idx = {int(p["period"]): p["value"] for p in store.series("eurostat_sdmx", "CP00", "INX_A_AVG").get("ES", [])}
     backtest_inputs = {
         "ecv_top20_base_share": ecv["top20_base_share"],
@@ -323,7 +365,7 @@ def main() -> int:
     }
     model = {
         "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-        "slice": "0: pensiones y cuentas públicas",
+        "slice": "0-2: pensiones, cuentas públicas, impuestos y vivienda",
         "years": years,
         "policy_start": POLICY_START,
         "start": {
@@ -349,6 +391,7 @@ def main() -> int:
             "vat_reduced_rate": 0.10,
             "vat_reduced_basket_share": incidence_block["vat"]["national_basket"]["10"],
             "corp_revenue_pct": corp_revenue_pct,
+            "emancipation_adjust_per_year": 0.5,
             **constants_card,
         },
         "constants_notes": {
@@ -364,6 +407,7 @@ def main() -> int:
             "vat_reduced_basket_share": "Parte del gasto de consumo de los hogares gravada al 10 %, con la Encuesta de Presupuestos Familiares de Eurostat (2015) y los tipos de la Ley 37/1992 por grupo de gasto (cálculo propio).",
             "corp_revenue_pct": "Recaudación del Impuesto sobre Sociedades en % del PIB, último año de la serie de la OCDE que usa la página de carga fiscal.",
             "wage_tax_rate": "Supuesto: un euro menos de salario bruto pierde unos 56 céntimos de ingresos (cotización total de la base, en torno al 36 %, más un IRPF marginal medio en torno al 20 %).",
+            "emancipation_adjust_per_year": "Supuesto: los hogares latentes (jóvenes que se emancipan cuando baja el alquiler) recorren cada año la mitad de la distancia hasta su nuevo nivel.",
             "new_pension_relative": "Pensión media de las altas de jubilación frente a la media de todas (ficha del catálogo).",
             "labour_output_elasticity": "Elasticidad del PIB potencial al empleo en la función de producción de la Comisión (ficha del catálogo).",
         },
@@ -379,6 +423,7 @@ def main() -> int:
             "p5": persona(p5, [p5["gross"]]),
         },
         "incidence": incidence_block,
+        "housing": housing_inputs,
         "edges": cat["cards"],
         "benchmarks": benchmarks,
         "backtest_inputs": backtest_inputs,
@@ -407,22 +452,35 @@ def main() -> int:
                              "sha256": sha256(HBS_STR) + " / " + sha256(HBS_EXP), "retrieved_at": "2026-10-19"},
             "boe_iva": {"label": "BOE · Ley 37/1992 del IVA (arts. 20, 90 y 91), tipos por grupo de gasto",
                         "page": "https://www.boe.es/buscar/act.php?id=BOE-A-1992-28740"},
+            "vivienda": {"label": "Visualizaciones · Vivienda (obra terminada, parque, celdas de la ECV, alquileres SERPAVI de los casos tipo)",
+                         "page": "/visualizaciones/vivienda/", "file": "/visualizaciones/data/vivienda.json",
+                         "sha256": sha256(VIVIENDA_JSON), "generated_at": viv.get("generated_at")},
+            "ine_proh": {"label": "INE · Proyección de Hogares 2026-2041 (tabla 54562)",
+                         "page": "https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736176954&idp=1254735572981",
+                         "url": INE_PROH_URL, "sha256": sha256(INE_PROH), "retrieved_at": "2026-10-19"},
+            "eurostat_pop": {"label": "Eurostat · población por grupo de edad (demo_pjangroup), 25-34 años",
+                             "page": "https://ec.europa.eu/eurostat/databrowser/view/demo_pjangroup/default/table",
+                             "sha256": sha256(EUROSTAT_PJAN)},
             "voting_aid": {"label": "Test de voto v2 (votaciones del Congreso)", "page": "/citizen/vota/",
                            "file": "/citizen/data/voting_aid_generales_v2.json", "sha256": sha256(VOTING_AID)},
         },
     }
-    OUT_JSON.write_text(json.dumps(model, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")
+    if any(p.get("provisional") for p in params.values()) and args.out == OUT_JSON:
+        raise SystemExit("provisional parameters: write to --out elsewhere, never to the published JSON")
+    out_json = args.out
+    out_json.write_text(json.dumps(model, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")
     buf = io.StringIO()
     w = csv.writer(buf)
     keys = list(base)
     w.writerow(["year", *keys])
     for j, y in enumerate(years):
         w.writerow([y, *[base[k][j] for k in keys]])
-    OUT_CSV.write_text(buf.getvalue(), encoding="utf-8")
-    size = OUT_JSON.stat().st_size
+    if out_json == OUT_JSON:
+        OUT_CSV.write_text(buf.getvalue(), encoding="utf-8")
+    size = out_json.stat().st_size
     if size > 1_000_000:
         raise SystemExit(f"sistema.json is {size} bytes (> 1 MB budget)")
-    print(json.dumps({"out": OUT_JSON.name, "bytes": size, "edges": len(cat["cards"]),
+    print(json.dumps({"out": out_json.name, "bytes": size, "edges": len(cat["cards"]),
                       "debt_2050": base["debt_pct"][-1], "pension_2050": base["pension_pct"][-1], "gates": gates},
                      ensure_ascii=False))
     return 0

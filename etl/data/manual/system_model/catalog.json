@@ -178,6 +178,218 @@
    "part_file": "part_tax_a.json"
   },
   {
+   "id": "B05_catalonia_2020",
+   "from": "tope_alquiler",
+   "to": "alquiler_cubierto",
+   "sign": "-",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "efecto_tope_cataluna_2020",
+    "unit": "% de cambio medido del alquiler medio de los contratos cubiertos por la Ley 11/2020 (Cataluña), sept. 2020 - mar. 2022",
+    "low": -8.0,
+    "central": -5.0,
+    "high": -3.7
+   },
+   "lag_years": [
+    0,
+    1.5
+   ],
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://www.frbsf.org/wp-content/uploads/wp2023-28.pdf",
+     "title": "The Effect of Second-Generation Rent Controls: New Evidence from Catalonia",
+     "authors_year": "Monràs y García-Montalvo (2023), FRBSF WP 2023-28",
+     "country": "España (Cataluña)",
+     "period": "contratos ene. 2016 - jun. 2021",
+     "method": "diferencias en diferencias con microdatos de fianzas (Incasòl) y precio de referencia por vivienda; municipios tensionados frente a no tensionados",
+     "locator": "Tabla III panel B pág. 40; Tabla I pág. 39; Tabla IV pág. 41",
+     "quote": "We estimate that the policy change led to price reductions of around 5%",
+     "value_in_source": "ln(precio) -0,037 a -0,080; nuevos contratos -0,207 (ln, OLS); Tabla I obs. 474.477 regulados y 118.758 no regulados"
+    },
+    {
+     "url": "https://ieb.ub.edu/wp-content/uploads/2022/02/Doc2022-02.pdf",
+     "title": "Effectiveness and supply effects of high-coverage rent control policies",
+     "authors_year": "Jofre-Monseny, Martínez-Mazza y Segú (2022), IEB WP 2022/02",
+     "country": "España (Cataluña)",
+     "period": "2016-2022, trimestral por municipio",
+     "method": "diferencias en diferencias y event study con microdatos de contratos de alquiler (registro de fianzas)",
+     "locator": "resumen pág. 3, introducción pág. 4; Tabla 2 col. 3 y texto pág. 13-14 (-4,5 %); 61 municipios pág. 8",
+     "quote": "Our results indicate that the regulation reduced average rents paid by about 4% to 6%. We do not find evidence of a reduction in the supply of rental units",
+     "value_in_source": "-4,5 % (especificación preferida); rango 4-6 %; oferta sin cambio"
+    }
+   ],
+   "contrary_evidence": [],
+   "debate": {
+    "id": "efecto_oferta_cataluna_2020",
+    "schools": [
+     {
+      "label": "Monràs y García-Montalvo: caen los nuevos contratos (~-10 %)",
+      "central": -10.0,
+      "source_index": 0
+     },
+     {
+      "label": "Jofre-Monseny et al.: sin caída de contratos ni del parque",
+      "central": 0.0,
+      "source_index": 1
+     }
+    ]
+   },
+   "derivation": "Alquiler: central -5 % (Monràs y García-Montalvo; Jofre-Monseny et al. -4,5 %, 4-6 %), rango de la Tabla III B: -8,0 % a -3,7 %. Oferta: -10 % (conclusiones), bajo exp(-0,207)-1 = -18,7 % ~ -19 %, alto 0 (Jofre-Monseny et al.). Cobertura = 474.477/(474.477+118.758) = 0,80 de los contratos de la muestra (grado B, solo contratos con precio de referencia). Cuota sobre el índice ~0,50 (publicada). Brecha media sobre el índice no publicada en cifras (solo histogramas): 20 % con rango 12-30 % es un supuesto (grado D).",
+   "note_es": "Según dos estudios con microdatos de fianzas, el tope catalán de 2020 fue con alquileres un 4-6 % más bajos en los 61 municipios cubiertos; uno mide un 10 % menos de contratos nuevos y el otro no ve caída de la oferta.",
+   "extra_parameters": [
+    {
+     "name": "efecto_oferta_cataluna_2020",
+     "unit": "% de cambio de los nuevos contratos de alquiler en municipios cubiertos",
+     "low": -19.0,
+     "central": -10.0,
+     "high": 0.0,
+     "grade": "A"
+    },
+    {
+     "name": "cobertura_cataluna_2020",
+     "unit": "fracción de los contratos de alquiler de Cataluña firmados en los 61 municipios cubiertos",
+     "low": 0.75,
+     "central": 0.8,
+     "high": 0.85,
+     "grade": "B"
+    },
+    {
+     "name": "cuota_sobre_indice_2020",
+     "unit": "fracción de contratos de municipios cubiertos por encima del índice de referencia antes de la ley",
+     "low": 0.45,
+     "central": 0.5,
+     "high": 0.55,
+     "grade": "A"
+    },
+    {
+     "name": "brecha_sobre_indice_2020",
+     "unit": "% medio por encima del índice de los contratos que lo superaban antes de la ley",
+     "low": 12.0,
+     "central": 20.0,
+     "high": 30.0,
+     "grade": "D"
+    }
+   ],
+   "review": {
+    "verdict": "fix",
+    "evidence": "FRBSF WP 2023-28: 'price reductions of around 5%' (resumen), Tabla III panel B pág. 40 ln precio -0,037 a -0,080, Tabla IV pág. 41 OLS -0,207, oferta -10 % en conclusiones, Tabla I pág. 39 474.477/118.758 y cuota ~50 % sobre el índice en el resumen; datos ene. 2016-jun. 2021 (pág. 11). El título del FRBSF es otro y en el IEB el resumen está en pág. 3 y la Tabla 2 col. 3 (-4,5 %) en pág. 13-14; los extra no llevan grado propio (brecha 20 % es supuesto)."
+   },
+   "part_file": "part_housing_rental.json"
+  },
+  {
+   "id": "B06_boom_credit",
+   "from": "credito_hipotecario",
+   "to": "precio_vivienda",
+   "sign": "+",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "cuota_boom_credito",
+    "unit": "fracción de la subida del precio real de la vivienda en España 1997-2007 atribuida al crédito y las condiciones de financiación",
+    "low": 0.3,
+    "central": 0.5,
+    "high": 1.0
+   },
+   "extra_parameters": [
+    {
+     "name": "subida_precio_real_boom",
+     "unit": "cambio logarítmico del precio real de la vivienda en el periodo de la fuente (1997-2002)",
+     "low": 0.438,
+     "central": 0.438,
+     "high": 0.438
+    }
+   ],
+   "lag_years": [
+    5,
+    10
+   ],
+   "grade": "D",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://repositorio.bde.es/bitstream/123456789/6319/1/do0608e.pdf",
+     "title": "House prices and real interest rates in Spain (Documento Ocasional 0608)",
+     "authors_year": "Ayuso, Blanco y Restoy (2006)",
+     "country": "España",
+     "period": "años noventa-2005",
+     "method": "modelos de valoración de activos con factor de descuento estocástico",
+     "locator": "Conclusiones",
+     "quote": "some simple calculations allow the recent boom in house prices in this country to be fully explained as a simple consequence of the drastic reduction in (ex-post) real interest rates",
+     "value_in_source": "1,0 con cálculo simple; menor con modelos refinados (sin cifra)"
+    },
+    {
+     "url": "https://repositorio.bde.es/bitstream/123456789/6781/1/dt0307e.pdf",
+     "title": "Analysis of house prices in Spain (DT 0307)",
+     "authors_year": "Martínez Pagés y Maza (2003)",
+     "country": "España",
+     "period": "1976-2002",
+     "method": "modelo de corrección del error (renta, crédito, tipo nominal)",
+     "locator": "pág. 5 (subida) y pág. 22 (sobrevaloración)",
+     "quote": "In 2002, real house prices stood between 8% and 17% above their long-term equilibrium",
+     "value_in_source": "subida real 1997-2002: 55 %; sobrevaloración 2002: 8-17 %"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://repositorio.bde.es/bitstream/123456789/6319/1/do0608e.pdf",
+     "title": "House prices and real interest rates in Spain (Documento Ocasional 0608)",
+     "finding": "Con un modelo de valoración refinado, los cambios del factor de descuento no explican del todo la evolución de los precios: el coste real efectivo de la financiación pudo bajar mucho menos que los tipos reales ex post."
+    }
+   ],
+   "debate": null,
+   "derivation": "Ninguna fuente consultada publica la fracción atribuida al crédito para 1997-2007, así que el rango es un supuesto (grado D) acotado por dos datos: el cálculo simple de Ayuso et al. atribuye toda la subida a la caída de los tipos reales (máximo 1,0), y Martínez Pagés y Maza sitúan la sobrevaloración de 2002 en 8-17 % frente a una subida real de 55 % en 1997-2002, es decir ln(1,08..1,17)/ln(1,55) = 18-36 % sin explicar por fundamentos (renta, crédito y tipos), 64-82 % explicado; la parte de crédito dentro de ese 64-82 % no se publica. Extra: ln(1,55) = 0,438.",
+   "note_es": "Según el Banco de España, el precio real subió un 55 % en 1997-2002; un cálculo simple lo atribuye todo a la caída de los tipos reales, pero modelos más finos dejan un 8-17 % de sobrevaloración en 2002. Suponemos que el crédito explica entre el 30 % y el 100 % (central 50 %).",
+   "part_file": "part_housing_credit.json"
+  },
+  {
+   "id": "B07_tourist_rents",
+   "from": "viviendas_turisticas",
+   "to": "alquiler_mercado",
+   "sign": "+",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "efecto_turistico_alquiler",
+    "unit": "% de subida del alquiler por cada punto (1 % del parque) de viviendas en plataformas turísticas",
+    "low": 0.68,
+    "central": 1.25,
+    "high": 1.89
+   },
+   "lag_years": [
+    0,
+    1
+   ],
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://ieb.ub.edu/wp-content/uploads/2019/07/2019-IEB-WorkingPaper-05-1.pdf",
+     "title": "Do short-term rental platforms affect housing markets? Evidence from Airbnb in Barcelona (IEB WP 2019/05; J. Urban Econ. 2020)",
+     "authors_year": "Garcia-López, Jofre-Monseny, Martínez-Mazza y Segú (2019/2020)",
+     "country": "España (Barcelona)",
+     "period": "2009-2017, áreas estadísticas básicas (BSA)",
+     "method": "panel con efectos fijos, variable instrumental shift-share y estudios de evento",
+     "locator": "pág. 6; pág. 11; tabla 4 (pág. 19)",
+     "quote": "54 more active listings in a small neighborhood (about the average level in 2016) increase rents by 1.9%, while transaction and posted prices increase by 5.3% and 3.67%",
+     "value_in_source": "Airbnb count (x100): alquiler 0,035; precio de compraventa 0,097; precio ofertado 0,068; densidad (anuncios/viviendas): 0,0068 (n.s.), 0,039, 0,019; media 4T2016: 56 anuncios = 1,57 % del parque"
+    }
+   ],
+   "contrary_evidence": [],
+   "debate": null,
+   "derivation": "La media de 56 anuncios por BSA equivale al 1,57 % del parque (tabla 4). Alquiler: 0,035×0,56=1,96 % / 1,57 puntos = 1,25 % por punto (central); con la densidad directa 0,68 % (no significativo; low); sin controles 0,053×0,56/1,57=1,89 % (high); en el decil más turístico 7 %/5 puntos=1,4 %. Precio de compraventa: 0,097×0,56/1,57=3,46 % (central); densidad 3,9 % (high); precio ofertado con densidad 1,9 % (low).",
+   "note_es": "Según García-López y otros (2020) para Barcelona, cada punto del parque de viviendas anunciado en Airbnb se asocia a alquileres un 1,25 % más altos (0,68-1,89) y a precios de compraventa un 3,5 % más altos; en los barrios más turísticos (5 % del parque) el alquiler subió un 7 %.",
+   "extra_parameters": [
+    {
+     "name": "efecto_turistico_precio",
+     "unit": "% de subida del precio de compraventa por cada punto (1 % del parque) de viviendas en plataformas turísticas",
+     "low": 1.9,
+     "central": 3.46,
+     "high": 3.9
+    }
+   ],
+   "part_file": "part_housing_demand.json"
+  },
+  {
    "id": "E01_pension_turnover",
    "from": "revalorizacion_real",
    "to": "pension_media",
@@ -1795,6 +2007,1133 @@
     "evidence": "Eurostat nama_10_gdp (consulta 2026-10-19): D11 551.674 / 591.441 / 636.703 y B1GQ 1.496.277 / 1.598.588 / 1.690.012 para 2023-2025; ratios 36,87 / 37,00 / 37,67 % reproducidos."
    },
    "part_file": "part_tax_b.json"
+  },
+  {
+   "id": "V01_rent_cap_supply",
+   "from": "tope_alquiler",
+   "to": "oferta_alquiler_cubierta",
+   "sign": "-",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "respuesta_oferta_tope",
+    "unit": "% de caída de la oferta de alquiler de mercado cubierta por cada 1 % de rebaja efectiva del alquiler",
+    "low": 0.0,
+    "central": 1.0,
+    "high": 2.3
+   },
+   "lag_years": [
+    1,
+    5
+   ],
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://ieb.ub.edu/wp-content/uploads/2022/02/Doc2022-02.pdf",
+     "title": "Effectiveness and supply effects of high-coverage rent control policies",
+     "authors_year": "Jofre-Monseny, Martínez-Mazza y Segú (2022, IEB WP 2022/02; Regional Science and Urban Economics 2023)",
+     "country": "España (Cataluña, Ley 11/2020)",
+     "period": "2016-2022",
+     "method": "diferencias en diferencias y event study, municipios regulados frente a no regulados (fianzas INCASÒL)",
+     "locator": "pág. 3 (resumen) y Tabla 2",
+     "quote": "the regulation reduced average rents paid by about 4% to 6%. We do not find evidence of a reduction in the supply of rental units",
+     "value_in_source": "alquiler -4 % a -6 %; sin caída de contratos firmados, terminados ni stock activo"
+    },
+    {
+     "url": "https://www.frbsf.org/wp-content/uploads/wp2023-28.pdf",
+     "title": "The Effect of Second-Generation Rent Controls: New Evidence from Catalonia",
+     "authors_year": "Monràs y García-Montalvo (2023, FRBSF WP 2023-28)",
+     "country": "España (Cataluña, Ley 11/2020)",
+     "period": "contratos ene. 2016 - jun. 2021",
+     "method": "diferencias en diferencias; elasticidad IV de nuevos contratos sobre el precio con la ley como instrumento",
+     "locator": "pág. 4-5 (introducción, 'around 2.3'), pág. 18 (cita) y pág. 42 (Tabla V panel B col. 1: 1,987)",
+     "quote": "a decrease of 1% in rental prices implies a decrease of around 2% in the supply of rental housing",
+     "value_in_source": "elasticidad ≈ 2 (Tabla V); 'around 2.3' en la introducción; oferta total -10 %"
+    },
+    {
+     "url": "https://www.nber.org/system/files/working_papers/w24181/w24181.pdf",
+     "title": "The Effects of Rent Control Expansion on Tenants, Landlords, and Inequality: Evidence from San Francisco",
+     "authors_year": "Diamond, McQuade y Qian (2018, NBER WP 24181; AER 2019)",
+     "country": "Estados Unidos (San Francisco)",
+     "period": "1994-2016",
+     "method": "diferencias en diferencias por fecha de construcción (edificios de 2-4 viviendas anteriores a 1980)",
+     "locator": "pág. 2 (resumen) y pág. 32",
+     "quote": "Landlords treated by rent control reduced rental housing supply by 15%, causing a 5.1% city-wide rent increase",
+     "value_in_source": "-15 % de oferta de alquiler en edificios tratados"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://www.diw.de/documents/publikationen/73/diw_01.c.860959.de/dp2026.pdf",
+     "title": "Rent control effects through the lens of empirical research: An almost complete review of the literature (Kholodilin, DIW DP 2026 / J. Housing Econ. 2024)",
+     "finding": "El efecto sobre la construcción nueva es el más ambiguo (más de la mitad de estudios negativo, varios sin efecto significativo); casi todos los estudios hallan deterioro de calidad y mantenimiento, no solo menos cantidad."
+    }
+   ],
+   "debate": {
+    "id": "respuesta_oferta_tope_escuelas",
+    "schools": [
+     {
+      "label": "Cataluña, stock y contratos: sin caída de oferta (Jofre-Monseny et al.)",
+      "central": 0.0,
+      "source_index": 0
+     },
+     {
+      "label": "Cataluña, nuevos contratos: elasticidad ≈ 2 (Monràs y García-Montalvo)",
+      "central": 2.0,
+      "source_index": 1
+     },
+     {
+      "label": "San Francisco, largo plazo: -15 % de oferta sobre una rebaja supuesta del 25 % (Diamond, McQuade y Qian)",
+      "central": 0.6,
+      "source_index": 2
+     }
+    ]
+   },
+   "derivation": "Normalización = cambio de oferta (%) / rebaja de alquiler (%) en unidades cubiertas. Jofre-Monseny et al.: 0 / (4-6 %) = 0. Monràs y García-Montalvo: elasticidad IV publicada ≈ 2 de los nuevos contratos (Tabla V: 1,987; 2,3 en la introducción). Diamond et al.: -15 % de oferta en edificios tratados; el artículo no publica la rebaja de alquiler que da el control, así que el 25 % es un SUPUESTO propio (grado D): beneficio de 2.300-6.600 $ por persona y año (1995-2012) frente a un alquiler de mercado supuesto de unos 3.000 $/mes (el 3.000 del artículo es solo una normalización de cálculo); 15/25 ≈ 0,6 (0,4-1,15 con rebajas del 37 % al 13 %). Central 1,0 = juicio: punto medio de las dos escuelas catalanas (stock frente a flujo de contratos), cerca de San Francisco; bajo y alto = extremos de las escuelas. La revisión de Kholodilin no da una cifra comparable y se usa solo como evidencia de dirección y calidad.",
+   "note_es": "Según dos estudios de la ley catalana de 2020, la oferta de alquiler cayó entre un 0 % (stock y contratos) y unos 2 % de contratos nuevos por cada 1 % de rebaja; en San Francisco la oferta de los edificios regulados cayó un 15 %, unos 0,6 % por cada 1 % si se supone una rebaja del 25 % (supuesto nuestro). Usamos 1 %, con rango 0-2,3. Las revisiones hallan además peor mantenimiento.",
+   "review": {
+    "verdict": "fix",
+    "evidence": "Jofre-Monseny et al. pág. 3 (sin caída de contratos ni stock) y Monràs y García-Montalvo pág. 18 ('a decrease of 1%... around 2%'), Tabla V panel B pág. 42 (IV 1,987) y 2,3 en la introducción se confirman; Diamond et al. dan -15 % (pág. 2 y 32) y 2.300-6.600 $ por persona y año (pág. 6), pero no publican ninguna rebaja de alquiler: el 25 % es un supuesto propio y el '3.000 $/mes' es solo la normalización de cálculo del modelo (pág. 15), no un alquiler observado. El periodo de Monràs es 2016-jun. 2021, no 2017-2022."
+   },
+   "part_file": "part_housing_pilot.json"
+  },
+  {
+   "id": "V02_private_supply_elasticity",
+   "from": "precio_vivienda",
+   "to": "obra_privada",
+   "sign": "+",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "elasticidad_oferta_privada",
+    "unit": "% de cambio de las viviendas libres terminadas por cada 1 % de cambio del precio real de la vivienda (largo plazo)",
+    "low": 0.35,
+    "central": 0.45,
+    "high": 0.57
+   },
+   "lag_years": [
+    2,
+    8
+   ],
+   "grade": "B",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2011/05/the-price-responsiveness-of-housing-supply-in-oecd-countries_g17a1f3a/5kgk9qhrnn33-en.pdf",
+     "title": "The Price Responsiveness of Housing Supply in OECD Countries",
+     "authors_year": "Caldera Sánchez y Johansson (2011, OECD ECO WP 837; J. Housing Econ. 2013)",
+     "country": "OCDE, 21 países (estimación por país, incluida España)",
+     "period": "principios de los 80 a mediados de los 2000",
+     "method": "modelo de corrección de error de la inversión residencial sobre el precio real de la vivienda",
+     "locator": "Tabla 3, pág. 22; texto pág. 23",
+     "quote": "Spain 0.452 (0.051)***",
+     "value_in_source": "0,452 (e.e. 0,051); velocidad de ajuste -0,076; 0,57 en 1977-2009 y 0,47 (Taltavull 2008) citados en pág. 23"
+    }
+   ],
+   "contrary_evidence": [],
+   "debate": null,
+   "derivation": "Elasticidad de largo plazo para España 0,452 (Tabla 3): central 0,45; bajo 0,35 ≈ 0,452 - 2×0,051; alto 0,57 (estimación 1977-2009 citada en pág. 23; Taltavull 2008 da 0,47). La variable dependiente es la inversión residencial, no las viviendas libres terminadas: se aplica a las terminaciones privadas (~80.000/año) como aproximación. La velocidad de ajuste de -0,076 anual indica un ajuste lento, de ahí el desfase 2-8 años (el modelo usa 2).",
+   "note_es": "Según la OCDE (Caldera y Johansson), en España la obra residencial sube a largo plazo un 0,45 % por cada 1 % de subida del precio real (rango 0,35-0,57), menos que en EE. UU. (2,0) o Suecia (1,4) y con un ajuste lento.",
+   "review": {
+    "verdict": "pass",
+    "evidence": "OECD ECO WP 837 (descargado con curl; el kit lo marca bloqueado): Tabla 3 pág. 22-23 'Spain 0.452 (0.051)***', ajuste -0,076, y en el texto Taltavull 0,47 frente a 0,57 en 1977-2009; bajo 0,452-2×0,051=0,35. La dependiente es inversión residencial y la derivación lo dice."
+   },
+   "part_file": "part_housing_pilot.json"
+  },
+  {
+   "id": "V03_mortgage_binding_share",
+   "from": "tope_ltv_lti",
+   "to": "credito_hipotecario_nuevo",
+   "sign": "-",
+   "layer": "contable",
+   "parameter": {
+    "name": "hip_sobre_ltv80",
+    "unit": "fracción de las nuevas operaciones hipotecarias para vivienda con LTP (préstamo/precio de compraventa) > 80 % (el BdE habla de 'operaciones' sin precisar si pondera por importe)",
+    "low": 0.392,
+    "central": 0.438,
+    "high": 0.438
+   },
+   "lag_years": 0,
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://www.bde.es/f/webbe/Secciones/Publicaciones/InformesBoletinesRevistas/InformesEstabilidadFinancera/26/IEF_2026_1_Cap4.pdf",
+     "title": "Informe de Estabilidad Financiera. Primavera 2026. Capítulo 4 (mercado inmobiliario)",
+     "authors_year": "Banco de España (2026)",
+     "country": "España",
+     "period": "2024-2025 (trimestral)",
+     "method": "datos del Colegio de Registradores sobre nuevas hipotecas para compra de vivienda",
+     "locator": "pág. 9 (texto y gráfico 4.5.a; LTP medio 80,4 % al final de 2025); pág. 10 (LTV>80 %, gráfico 4.5.b; gráfico 4.6.a LTI>5 solo en gráfico)",
+     "quote": "pasando del 39,2 % a comienzos de 2024 al 43,8 % a finales de 2025",
+     "value_in_source": "LTP>80 %: 39,2 % (inicio 2024) → 43,8 % (final 2025); LTV>80 %: 10,8 % → 15,6 %"
+    },
+    {
+     "url": "https://www.bde.es/f/webbe/Secciones/Publicaciones/InformesBoletinesRevistas/InformesEstabilidadFinancera/25/IEF_2025_1_Cap4.pdf",
+     "title": "Informe de Estabilidad Financiera. Primavera 2025. Capítulo 4",
+     "authors_year": "Banco de España (2025)",
+     "country": "España",
+     "period": "2020-2024",
+     "method": "datos del Colegio de Registradores",
+     "locator": "pág. 9",
+     "quote": "el peso relativo del crédito hipotecario nuevo con valores de LTP por encima del 80 % fue del 41,3 % en 2024",
+     "value_in_source": "41,3 % (2024); LTP medio 76,6 %"
+    },
+    {
+     "url": "https://www.bde.es/f/webbe/Secciones/Publicaciones/InformesBoletinesRevistas/InformesEstabilidadFinancera/25/IEF_2025_2_Cap4.pdf",
+     "title": "Informe de Estabilidad Financiera. Otoño 2025. Capítulo 4",
+     "authors_year": "Banco de España (2025)",
+     "country": "España",
+     "period": "junio 2024 - junio 2025",
+     "method": "datos del Colegio de Registradores",
+     "locator": "pág. 10-11",
+     "quote": "La ratio LTI se situaba en promedio en 4,5 a mediados de 2025, ligeramente por encima del nivel de 4,4 en junio de 2024.",
+     "value_in_source": "LTI medio 4,5 (jun-2025); LSTI medio 22,6 %; LTP medio 77,8 % (1S 2025)"
+    }
+   ],
+   "contrary_evidence": [],
+   "debate": null,
+   "derivation": "Parámetro principal publicado por el BdE: 43,8 % de las nuevas operaciones con LTP > 80 % a finales de 2025 (central = alto), 41,3 % del crédito nuevo en 2024 y 39,2 % a comienzos de 2024 (bajo); el texto habla de 'operaciones' en 2026 y de 'peso del crédito' en 2025, sin precisar si es número o importe. Los parámetros extra NO están publicados en cifras (solo LTI>5 y LSTI>30 % en gráficos sin datos): LTP>90 y >70 son supuestos (grado D) anclados en el LTP medio de 77,8-80,4 % y el 43,8 % sobre 80; LTI>6 y >4,5 son supuestos (grado D) anclados en el LTI medio de 4,4-4,5. Los capítulos leídos no mencionan las líneas de avales ICO.",
+   "note_es": "Según el Banco de España, el 43,8 % de las nuevas hipotecas para vivienda de finales de 2025 superaba el 80 % del precio de compra (39,2 % a comienzos de 2024). El préstamo medio equivale a unas 4,5 veces la renta.",
+   "extra_parameters": [
+    {
+     "name": "hip_sobre_ltv90",
+     "unit": "fracción de las nuevas operaciones hipotecarias para vivienda con LTP > 90 %",
+     "low": 0.05,
+     "central": 0.12,
+     "high": 0.2,
+     "grade": "D"
+    },
+    {
+     "name": "hip_sobre_ltv70",
+     "unit": "fracción de las nuevas operaciones hipotecarias para vivienda con LTP > 70 %",
+     "low": 0.55,
+     "central": 0.65,
+     "high": 0.75,
+     "grade": "D"
+    },
+    {
+     "name": "hip_sobre_lti6",
+     "unit": "fracción de nuevas hipotecas para vivienda con LTI (préstamo/renta) > 6",
+     "low": 0.02,
+     "central": 0.05,
+     "high": 0.1,
+     "grade": "D"
+    },
+    {
+     "name": "hip_sobre_lti45",
+     "unit": "fracción de nuevas hipotecas para vivienda con LTI (préstamo/renta) > 4,5",
+     "low": 0.3,
+     "central": 0.4,
+     "high": 0.5,
+     "grade": "D"
+    }
+   ],
+   "review": {
+    "verdict": "fix",
+    "evidence": "IEF primavera 2026 cap. 4 pág. 9: 'La proporción de nuevas operaciones con LTP por encima del 80 %... del 39,2 %... al 43,8 %' (LTP = préstamo/precio de compraventa, media 80,4 % al final de 2025); el IEF 2025 (pág. 9) habla de 'peso relativo del crédito' 41,3 %. Es una proporción de operaciones, sin indicar ponderación por importe, no 'del volumen'; el LTP medio 81,2 % de la derivación no aparece (es 80,4 %), y los cuatro extra son supuestos."
+   },
+   "part_file": "part_housing_pilot.json"
+  },
+  {
+   "id": "V04_tourist_conversion",
+   "from": "limite_alquiler_turistico",
+   "to": "parque_residencial",
+   "sign": "+",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "conversion_turistica",
+    "unit": "fracción de las viviendas turísticas retiradas que pasan a vivienda habitual (alquiler o venta) en 1-2 años",
+    "low": 0.15,
+    "central": 0.4,
+    "high": 0.8
+   },
+   "lag_years": [
+    1,
+    2
+   ],
+   "grade": "D",
+   "spain_evidence": "parcial",
+   "sources": [
+    {
+     "url": "https://ieb.ub.edu/wp-content/uploads/2019/07/2019-IEB-WorkingPaper-05-1.pdf",
+     "title": "Do short-term rental platforms affect housing markets? Evidence from Airbnb in Barcelona",
+     "authors_year": "Garcia-López, Jofre-Monseny, Martínez-Mazza y Segú (2019, IEB WP 2019/05; J. Urban Econ. 2020)",
+     "country": "España (Barcelona)",
+     "period": "2009-2017",
+     "method": "panel de barrios con efectos fijos e instrumentos; resultado: número de hogares",
+     "locator": "pág. 22, Tabla 5",
+     "quote": "100 Airbnb listings would reduce the number of households by 80",
+     "value_in_source": "-2,8 % de hogares por 100 anuncios (≈ 0,8 hogares por anuncio)"
+    }
+   ],
+   "contrary_evidence": [],
+   "debate": null,
+   "derivation": "Solo hay una cifra verificada y en sentido inverso: en Barcelona la entrada de 100 anuncios se asocia con 80 hogares menos (0,8 por anuncio), que tomamos como techo de la reconversión. Central 0,4 y bajo 0,15 son SUPUESTOS (grado D): recogen fugas a alquiler de temporada, viviendas vacías o actividad ilegal, documentadas en informes sobre Nueva York (Local Law 18) y Barcelona que no se han podido verificar en esta revisión.",
+   "note_es": "Supuesto: un 40 % de las viviendas turísticas retiradas vuelve a uso habitual en 1-2 años (rango 15-80 %). Según un estudio de Barcelona, 100 anuncios de Airbnb se asocian con 80 hogares menos; el regreso puede ser menor por el alquiler de temporada.",
+   "review": {
+    "verdict": "pass",
+    "evidence": "IEB WP 2019/05 pág. 22, Tabla 5 col. 2: '100 Airbnb listings decrease the number of households by 2.8%... would reduce the number of households by 80'. El card lo usa solo como techo, marca el resto como supuesto (D) y la nota dice 'se asocian', más prudente que el propio artículo."
+   },
+   "part_file": "part_housing_pilot.json"
+  },
+  {
+   "id": "V05_rent_cap_compliance",
+   "from": "tope_alquiler",
+   "to": "alquiler_cubierto",
+   "sign": "-",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "cumplimiento_tope",
+    "unit": "fracción de la rebaja exigida por el tope que se materializa en los alquileres de los contratos cubiertos",
+    "low": 0.25,
+    "central": 0.4,
+    "high": 0.6
+   },
+   "lag_years": [
+    0,
+    1
+   ],
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://www.frbsf.org/wp-content/uploads/wp2023-28.pdf",
+     "title": "Second-Generation Rent Controls: Evidence from Catalonia",
+     "authors_year": "Monràs y García-Montalvo (2023), FRBSF WP 2023-28",
+     "country": "España (Cataluña)",
+     "period": "contratos ene. 2016 - jun. 2021",
+     "method": "diferencias en diferencias con microdatos de fianzas (Incasòl) y precio de referencia por vivienda; municipios tensionados frente a no tensionados",
+     "locator": "pág. 16 (sección 4.1) y Tabla III panel C, pág. 40",
+     "quote": "The decline in the fraction of units with prices above the reference price, which was around 50% before the policy, fluctuates between 13 and 22 percentage points",
+     "value_in_source": "cuota sobre el índice antes: ~50 %; caída 13-22 pp (Tabla III C: -0,135 a -0,216); incumplimiento hasta 74 %"
+    },
+    {
+     "url": "https://www.frbsf.org/wp-content/uploads/wp2023-28.pdf",
+     "title": "Second-Generation Rent Controls: Evidence from Catalonia",
+     "authors_year": "Monràs y García-Montalvo (2023), FRBSF WP 2023-28",
+     "country": "España (Cataluña)",
+     "period": "contratos ene. 2016 - jun. 2021",
+     "method": "diferencias en diferencias con microdatos de fianzas (Incasòl) y precio de referencia por vivienda; municipios tensionados frente a no tensionados",
+     "locator": "Tabla III panel B, pág. 40; conclusiones pág. 29",
+     "quote": "We estimate that the policy change led to price reductions of around 5%",
+     "value_in_source": "efecto en ln(precio): -0,037 a -0,080; central ~-5 %"
+    }
+   ],
+   "contrary_evidence": [],
+   "debate": null,
+   "derivation": "Cumplimiento por contratos: caída de la cuota sobre el índice / cuota previa = 0,135/0,50 a 0,216/0,50 = 0,27-0,43 (los autores dan incumplimiento de hasta 74 %, es decir 0,26). Cumplimiento por precio: -5 % medido / rebaja exigida (0,50 x brecha media sobre el índice); la brecha no se publica en cifras (solo histogramas): con una brecha supuesta del 20 % (grado D), 5/10 = 0,5. Rango 0,25-0,6, central 0,4; la regla de no superar la renta anterior hace la rebaja exigida mayor, lo que empuja hacia el extremo bajo.",
+   "note_es": "Según Monràs y García-Montalvo, con el tope catalán de 2020 la cuota de contratos por encima del índice bajó del 50 % en 13-22 puntos y los alquileres cayeron un 5 %: se cumplió entre un cuarto y algo más de la mitad de la rebaja exigida.",
+   "part_file": "part_housing_rental.json"
+  },
+  {
+   "id": "V06_rental_scarcity_spillover",
+   "from": "oferta_alquiler",
+   "to": "alquiler_no_cubierto",
+   "sign": "-",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "traslado_escasez_alquiler",
+    "unit": "% de subida del alquiler de mercado no cubierto por cada 1 % de caída de la oferta total de alquiler de mercado",
+    "low": 0.0,
+    "central": 0.85,
+    "high": 1.3
+   },
+   "lag_years": [
+    0,
+    3
+   ],
+   "grade": "B",
+   "spain_evidence": "parcial",
+   "sources": [
+    {
+     "url": "https://www.nber.org/system/files/working_papers/w24181/w24181.pdf",
+     "title": "The Effects of Rent Control Expansion on Tenants, Landlords, and Inequality: Evidence from San Francisco",
+     "authors_year": "Diamond, McQuade y Qian (2018), NBER w24181",
+     "country": "Estados Unidos (San Francisco)",
+     "period": "ampliación de 1994; datos 1990-2016",
+     "method": "diferencias en diferencias por fecha de construcción + modelo dinámico de elección de barrio (equilibrio general)",
+     "locator": "pág. 31, sección 6.2.1",
+     "quote": "We find that 6% decrease in housing supply led to 5.1% increase in rental prices.",
+     "value_in_source": "oferta -6 % (ciudad), alquileres +5,1 %; oferta de los tratados -15 %"
+    },
+    {
+     "url": "https://www.frbsf.org/wp-content/uploads/wp2023-28.pdf",
+     "title": "Second-Generation Rent Controls: Evidence from Catalonia",
+     "authors_year": "Monràs y García-Montalvo (2023), FRBSF WP 2023-28",
+     "country": "España (Cataluña)",
+     "period": "contratos ene. 2016 - jun. 2021",
+     "method": "diferencias en diferencias con microdatos de fianzas (Incasòl) y precio de referencia por vivienda; municipios tensionados frente a no tensionados",
+     "locator": "pág. 19-20, sección 4.2.3 'Lack of spillovers'",
+     "quote": "We estimate a gap of similar magnitude than with our difference-in-differences estimates, which indicates an absence of spillovers.",
+     "value_in_source": "nuevos contratos -10 % a -20 % en municipios tratados; sin traslado de precios a municipios vecinos no tratados"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://www.nber.org/system/files/working_papers/w18125/w18125.pdf",
+     "title": "Housing Market Spillovers: Evidence from the End of Rent Control in Cambridge, Massachusetts",
+     "finding": "Autor, Palmer y Pathak (2014): al eliminar el control, el valor de las viviendas nunca controladas cercanas subió; más de la mitad de la revalorización inducida fue a ellas, un canal de externalidades de barrio y no de escasez de alquiler."
+    }
+   ],
+   "debate": {
+    "id": "traslado_escasez_alquiler",
+    "schools": [
+     {
+      "label": "Equilibrio general San Francisco (el recorte de oferta encarece el resto del mercado)",
+      "central": 0.85,
+      "source_index": 0
+     },
+     {
+      "label": "Cataluña 2020 (sin traslado medible entre municipios)",
+      "central": 0.0,
+      "source_index": 1
+     }
+    ]
+   },
+   "derivation": "Diamond et al. normalizan ellos mismos: la caída del 15 % en las viviendas tratadas equivale a un 6 % de la oferta de la ciudad y da +5,1 % de alquileres, es decir 5,1/6 = 0,85 % por cada 1 % de oferta. Bajo 0: en Cataluña no se mide traslado entre municipios (ni caída del parque según Jofre-Monseny et al.), aunque allí casi todo el mercado estaba cubierto y no mide la demanda inversa dentro del municipio. Alto 1,3 = 0,85 x 1,5, supuesto (grado D) sin fuente propia.",
+   "note_es": "Según Diamond, McQuade y Qian, en San Francisco una caída del 6 % de la oferta de alquiler fue con alquileres un 5,1 % más altos (0,85 % por cada 1 %); en Cataluña 2020 no se midió traslado a municipios vecinos.",
+   "part_file": "part_housing_rental.json"
+  },
+  {
+   "id": "V07_rent_renewal",
+   "from": "alquiler_mercado",
+   "to": "alquiler_pagado",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "renovacion_contratos",
+    "unit": "fracción de los contratos de alquiler de vivienda que son nuevos o se renegocian cada año",
+    "low": 0.15,
+    "central": 0.2,
+    "high": 0.26
+   },
+   "lag_years": 0,
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://recam.amb.cat/bitstreams/53bb4828-4c8a-4a0b-b713-f2eafc9bf851/download",
+     "title": "Els contractes de lloguer a la demarcació de Barcelona. 2010-2023",
+     "authors_year": "O-HB / Ajuntament de Barcelona (2024), a partir del Registre de fiances de l'Incasòl",
+     "country": "España (demarcación de Barcelona)",
+     "period": "2010-2023",
+     "method": "recuento de fianzas depositadas: nuevos contratos, extinguidos e índice de rotación",
+     "locator": "Taula A1 total demarcació, pág. 20",
+     "quote": "2019: nous contractes 124.720; vigent 498.742. 2022: 117.719; 545.626. 2023: 100.932; 566.976 (vigent 2018: 481.288)",
+     "value_in_source": "nuevos/vigentes año anterior: 25,9 % (2019), 22,5 % (2022), 18,5 % (2023); rotación 14,5-25,7 %"
+    },
+    {
+     "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1994-26003",
+     "title": "Ley 29/1994, de 24 de noviembre, de Arrendamientos Urbanos (texto consolidado)",
+     "authors_year": "BOE (texto vigente tras RDL 7/2019)",
+     "country": "España",
+     "period": "desde marzo de 2019",
+     "method": "norma",
+     "locator": "art. 9.1 y art. 10.1",
+     "quote": "hasta que el arrendamiento alcance una duración mínima de cinco años, o de siete años si el arrendador fuese persona jurídica",
+     "value_in_source": "5 años (7 si el arrendador es persona jurídica)"
+    },
+    {
+     "url": "https://recam.amb.cat/bitstreams/53bb4828-4c8a-4a0b-b713-f2eafc9bf851/download",
+     "title": "Els contractes de lloguer a la demarcació de Barcelona. 2010-2023",
+     "authors_year": "O-HB / Ajuntament de Barcelona (2024)",
+     "country": "España (Barcelona)",
+     "period": "2021-2023",
+     "method": "índice de rotación (extinguidos / vigentes año anterior)",
+     "locator": "pág. 13",
+     "quote": "entre el 2021 i el 2023, l'índex de rotació es reduís del 23,1% al 14,4% a Barcelona",
+     "value_in_source": "rotación 23,1 % -> 14,4 %, atribuida a la LAU 2019"
+    }
+   ],
+   "contrary_evidence": [],
+   "debate": null,
+   "derivation": "Demarcación de Barcelona (fianzas Incasòl): nuevos contratos / contratos vigentes a final del año anterior = 124.720/481.288 = 25,9 % (2019), 117.719/522.661 = 22,5 % (2022), 100.932/545.626 = 18,5 % (2023). Con duración legal de 5-7 años el ritmo de equilibrio es 1/7-1/5 = 14-20 %. Central 0,20, rango 0,15-0,26; no incluye renegociaciones dentro del contrato (las prórrogas solo actualizan por índice), y se extrapola de Barcelona a España.",
+   "note_es": "Según el registro de fianzas del Incasòl, en la demarcación de Barcelona se firman cada año nuevos contratos equivalentes al 18-26 % de los vigentes; la LAU fija 5 años de duración mínima (7 si el casero es empresa).",
+   "review": {
+    "verdict": "pass",
+    "evidence": "Informe O-HB 2010-2023, Taula A1 total demarcació pág. 20: nuevos 124.720 (2019), 117.719 (2022), 100.932 (2023) y vigentes 481.288 (2018), 522.661 (2021), 545.626 (2022) dan 25,9 %, 22,5 % y 18,5 %; pág. 13 la rotación de Barcelona 23,1 %→14,4 % atribuida a la LAU 2019. La cita de la LAU (art. 9.1) está literal en el BOE consolidado."
+   },
+   "part_file": "part_housing_rental.json"
+  },
+  {
+   "id": "V08_public_lag",
+   "from": "vivienda_publica",
+   "to": "obra_publica_terminada",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "retardo_obra_publica",
+    "unit": "años desde la decisión (programa con suelo disponible) hasta la vivienda pública terminada",
+    "low": 3,
+    "central": 4,
+    "high": 6
+   },
+   "extra_parameters": [
+    {
+     "name": "retardo_obra_privada",
+     "unit": "años desde el inicio de obra (licencia) hasta la vivienda privada terminada",
+     "low": 1.5,
+     "central": 2,
+     "high": 2.5,
+     "grade": "D"
+    }
+   ],
+   "lag_years": [
+    3,
+    6
+   ],
+   "grade": "C",
+   "spain_evidence": "parcial",
+   "sources": [
+    {
+     "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2021-16233",
+     "title": "Real Decreto 853/2021, programas de ayuda en materia de rehabilitación residencial y vivienda social del PRTR (programa 6, C02.I02)",
+     "authors_year": "BOE (2021)",
+     "country": "España",
+     "period": "2021-2026",
+     "method": "norma (plazos y cuantías del programa)",
+     "locator": "art. 67.2 (programa 6; el art. 18.2 fija el mismo plazo para el programa 1)",
+     "quote": "En caso de que a 30 de junio de 2026 no se hubiesen cumplido los requisitos establecidos para la ejecución de las actuaciones, la cuantía de la subvención será [...] sobre las viviendas efectivamente finalizadas",
+     "value_in_source": "programa aprobado el 5-10-2021; viviendas terminadas antes del 30-6-2026 (4,7 años)"
+    },
+    {
+     "url": "https://bocm.es/boletin/CM_Orden_BOCM/2024/12/04/BOCM-20241204-22.PDF",
+     "title": "Convenio Comunidad de Madrid - Arganda Residential Leasehold: subvención de 8.807.933 euros para 210 viviendas en alquiler asequible (C02.I02)",
+     "authors_year": "BOCM (2024)",
+     "country": "España (Comunidad de Madrid)",
+     "period": "2024-2026",
+     "method": "convenio de subvención con plazo de obra",
+     "locator": "BOCM núm. 289, 4-12-2024, pág. 8 del PDF",
+     "quote": "se compromete a finalizar las obras y obtener el Certificado Final de Obra objeto de esta subvención antes de la fecha del 30 de junio de 2026",
+     "value_in_source": "convenio diciembre 2024, fin de obra junio 2026 (1,6 años)"
+    }
+   ],
+   "contrary_evidence": [],
+   "debate": null,
+   "derivation": "El programa estatal (RD 853/2021, 5-10-2021) fija el 30-6-2026 como fecha de viviendas terminadas: 4,7 años desde la decisión con suelo público disponible; un convenio de diciembre de 2024 deja 1,6 años de obra. Central 4 años (unos 2 de licitación, proyecto y licencia y 2 de obra), bajo 3, alto 6 por prórrogas. El retardo privado (1,5-2,5, central 2) es una hipótesis: la duración prevista de las licencias existe en la estadística de construcción de edificios pero no la obtuvimos.",
+   "note_es": "Según el Real Decreto 853/2021, las viviendas sociales del Plan de Recuperación aprobado en octubre de 2021 debían terminarse antes de junio de 2026 (4,7 años); un convenio de Madrid de 2024 deja 1,6 años de obra. Usamos 4 años (rango 3-6); 2 para la obra privada es una hipótesis.",
+   "review": {
+    "verdict": "fix",
+    "evidence": "El RD 853/2021 fija el 30-6-2026 para el programa 6 en el art. 67.2 ('viviendas efectivamente finalizadas'), no en el art. 18.2 (programa 1, mismo plazo con otro texto); el BOCM 4-12-2024 pág. 8 trae literal el compromiso de fin de obra antes del 30-6-2026 (8.807.933 €, 210 viviendas, pág. 1). El retardo privado es hipótesis declarada y debe llevar grado D."
+   },
+   "part_file": "part_housing_supply.json"
+  },
+  {
+   "id": "V09_public_cost",
+   "from": "vivienda_publica",
+   "to": "gasto_publico",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "coste_vivienda_publica",
+    "unit": "miles de euros de coste total por vivienda pública en alquiler terminada (edificación, gastos generales y honorarios; suelo público aparte); la parte a cargo de presupuestos la da cuota_financiacion_publica",
+    "low": 95,
+    "central": 125,
+    "high": 165
+   },
+   "extra_parameters": [
+    {
+     "name": "renta_social_mes",
+     "unit": "euros al mes de renta media de la vivienda pública en alquiler",
+     "low": 250,
+     "central": 400,
+     "high": 600,
+     "grade": "D"
+    },
+    {
+     "name": "cuota_financiacion_publica",
+     "unit": "fracción del coste a cargo de presupuestos públicos (frente a préstamos devueltos con rentas), 0-1",
+     "low": 0.3,
+     "central": 0.4,
+     "high": 1.0,
+     "grade": "D"
+    }
+   ],
+   "lag_years": [
+    0,
+    2
+   ],
+   "grade": "D",
+   "spain_evidence": "parcial",
+   "sources": [
+    {
+     "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2021-16233",
+     "title": "Real Decreto 853/2021, programas de ayuda en materia de rehabilitación residencial y vivienda social del PRTR (programa 6, C02.I02)",
+     "authors_year": "BOE (2021)",
+     "country": "España",
+     "period": "2021-2026",
+     "method": "norma (plazos y cuantías del programa)",
+     "locator": "art. 65.1",
+     "quote": "podrán obtener una ayuda, proporcional a la superficie útil de cada vivienda, de hasta un máximo de 700 euros por metro cuadrado de superficie útil de vivienda",
+     "value_in_source": "700 €/m² útil, máximo 50.000 € por vivienda"
+    },
+    {
+     "url": "https://www.construible.es/2024/04/11/construccion-viviendas-energeticamente-eficientes-fondos-prtr-eleva-24964",
+     "title": "La construcción de viviendas energéticamente eficientes con fondos del PRTR se eleva a 24.964 (informe de ejecución del MIVAU)",
+     "authors_year": "MIVAU, recogido por Construible (2024)",
+     "country": "España",
+     "period": "2021-2024",
+     "method": "contabilidad del programa C02.I02",
+     "locator": "párrafo 1",
+     "quote": "Mivau ha alcanzado las 24.964 viviendas financiadas con ayudas acordadas por un importe de 994.556.620 euros",
+     "value_in_source": "994.556.620 € / 24.964 viviendas"
+    },
+    {
+     "url": "https://bocm.es/boletin/CM_Orden_BOCM/2024/12/04/BOCM-20241204-22.PDF",
+     "title": "Convenio Comunidad de Madrid - Arganda Residential Leasehold (210 viviendas, C02.I02)",
+     "authors_year": "BOCM (2024)",
+     "country": "España (Comunidad de Madrid)",
+     "period": "2024-2026",
+     "method": "convenio de subvención",
+     "locator": "BOCM núm. 289, pág. 1 y 7 del PDF",
+     "quote": "concesión directa de una subvención por importe estimado de 8.807.933,00 euros, para la promoción de 210 viviendas",
+     "value_in_source": "8.807.933 € / 210 viviendas"
+    }
+   ],
+   "contrary_evidence": [],
+   "debate": null,
+   "derivation": "Ayuda europea media 994,56 M€ / 24.964 = 39,8 mil € por vivienda; en Arganda 8,81 M€ / 210 = 41,9 mil €, que a 700 €/m² útil implica unos 60 m² útiles. El coste total (obra y honorarios, sin suelo) de 125 mil € (95-165) supone 1.600-2.700 €/m² útil y es una hipótesis: ninguna fuente leída publica el coste total. La cuota pública 0,4 parte de 39,8/125 = 0,32 más cofinanciación autonómica (1,0 si todo va a presupuesto); la renta social de 400 €/mes (250-600) también es hipótesis: el RD 853/2021 (art. 66) deja el precio por m² a cada comisión bilateral.",
+   "note_es": "Según el Ministerio, las ayudas acordadas del Plan de Recuperación sumaban 994,6 millones para 24.964 viviendas sociales (39.800 € cada una). El coste total, que estimamos en 125.000 € por vivienda sin suelo (95.000-165.000), y la renta de 400 € al mes son hipótesis.",
+   "review": {
+    "verdict": "fix",
+    "evidence": "Art. 65.1 RD 853/2021 (700 €/m², máx. 50.000 €), Construible/MIVAU (994.556.620 € 'ayudas acordadas' / 24.964 = 39,8 mil €) y BOCM (8.807.933 €/210 = 41,9 mil €, ≈60 m² a 700 €/m²) cuadran; ninguna fuente publica el coste total, así que 125 mil € es un supuesto (grado D declarado). Pero la unidad dice 'gasto público por vivienda' cuando 125 es el coste total y la parte pública va en cuota_financiacion_publica (doble cómputo), y la nota dice 'fue de' para ayudas solo acordadas."
+   },
+   "part_file": "part_housing_supply.json"
+  },
+  {
+   "id": "V10_crowd_out",
+   "from": "obra_publica",
+   "to": "obra_privada",
+   "sign": "-",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "desplazamiento_obra_privada",
+    "unit": "fracción de las viviendas públicas terminadas compensada por menos viviendas privadas (sin contar el efecto del precio)",
+    "low": 0.0,
+    "central": 0.2,
+    "high": 0.5
+   },
+   "lag_years": [
+    1,
+    3
+   ],
+   "grade": "B",
+   "spain_evidence": "no",
+   "sources": [
+    {
+     "url": "https://www.nber.org/system/files/working_papers/w8709/w8709.pdf",
+     "title": "Do Low-Income Housing Subsidies Increase Housing Consumption?",
+     "authors_year": "Sinai y Waldfogel (2002, NBER w8709; J. Public Econ. 2005)",
+     "country": "EE. UU.",
+     "period": "censo 1990, lugares censales",
+     "method": "sección cruzada por lugar censal, controlando demanda de vivienda",
+     "locator": "pág. 2 (resumen) y pág. 19 (tabla 8)",
+     "quote": "on average three government-subsidized units displace two units that would otherwise have been provided by the private market",
+     "value_in_source": "desplazamiento ~0,67 (0,7-0,8 para vivienda pública de proyecto)"
+    },
+    {
+     "url": "https://conference.nber.org/conf_papers/f240610/f240610.slides.pdf",
+     "title": "The Effect of LIHTC on Housing Markets: Quantities, Rents, and Welfare (diapositivas)",
+     "authors_year": "Ferreira, Meyer y Turner (2026)",
+     "country": "EE. UU.",
+     "period": "1990-2020s, block groups",
+     "method": "ganadores frente a perdedores de adjudicaciones LIHTC, diferencias en diferencias",
+     "locator": "págs. 8 y 17",
+     "quote": "89 LIHTC units allocated ⇒ 87 placed-in-service ⇒ 77 ACS multi-family units ... =11.5% crowd-out, CI95[-6%,28%]",
+     "value_in_source": "0,115 (IC95 -0,06 a 0,28); repaso: Eriksen y Rosenthal IV 100 %, Baum-Snow y Marion ~20 %"
+    },
+    {
+     "url": "https://www.alimarket.es/construccion/noticia_amp/427996/el-banco-de-espana-pide-cambiar-los-planes-urbanisticos-y-densificar-el-suelo-para-sumar-1-2-m-de-viviendas",
+     "title": "El Banco de España pide cambiar los planes urbanísticos y densificar el suelo (resumen del Informe Anual 2025)",
+     "authors_year": "Banco de España, recogido por Alimarket (2026)",
+     "country": "España",
+     "period": "2013-2025",
+     "method": "diagnóstico institucional",
+     "locator": "párrafo 2",
+     "quote": "la producción por hora trabajada en la construcción cayó un 13% entre los años 2013 y 2025",
+     "value_in_source": "-13 % productividad por hora 2013-2025"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://conference.nber.org/conf_papers/f240610/f240610.slides.pdf",
+     "title": "Eriksen y Rosenthal (2010), citado en Ferreira, Meyer y Turner (2026), pág. 8",
+     "finding": "Con variables instrumentales estiman un desplazamiento cercano al 100 % de las viviendas LIHTC (15 % por MCO)."
+    }
+   ],
+   "debate": {
+    "id": "desplazamiento_obra_publica",
+    "schools": [
+     {
+      "label": "Desplazamiento bajo (diseños cuasi-experimentales recientes)",
+      "central": 0.115,
+      "source_index": 1
+     },
+     {
+      "label": "Desplazamiento alto (paneles por mercado)",
+      "central": 0.67,
+      "source_index": 0
+     }
+    ]
+   },
+   "derivation": "Las estimaciones totales de EE. UU. van de 0,115 (Ferreira-Meyer-Turner) y ~0,2 (Baum-Snow-Marion) a 0,67 (Sinai-Waldfogel) y ~1 (Eriksen-Rosenthal IV), mediana ~0,43; incluyen el canal de precios que el modelo ya recoge con la elasticidad de oferta (V02). Para la parte directa (suelo, empresas, mano de obra) tomamos la mitad, 0,2, con rango 0 (límite inferior del IC de FMT truncado) a 0,5; la caída de productividad en España (-13 % por hora 2013-2025, Banco de España) sugiere no usar cero. Ningún estudio separa la parte directa: es una hipótesis acotada.",
+   "note_es": "En EE. UU., según los estudios, de cada vivienda pública o subvencionada se pierden entre 0,1 y 1 viviendas privadas (Sinai y Waldfogel: 2 de cada 3). Sin el efecto precio, usamos 0,2 (0-0,5); no hay estimación para España.",
+   "part_file": "part_housing_supply.json"
+  },
+  {
+   "id": "V11_land_absorption",
+   "from": "suelo_liberado",
+   "to": "obra_privada",
+   "sign": "+",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "absorcion_suelo",
+    "unit": "fracción de la capacidad de suelo finalista liberada que se convierte en viviendas terminadas al año",
+    "low": 0.15,
+    "central": 0.35,
+    "high": 0.6
+   },
+   "lag_years": [
+    1.5,
+    3
+   ],
+   "grade": "D",
+   "spain_evidence": "parcial",
+   "sources": [
+    {
+     "url": "https://www.alimarket.es/construccion/noticia_amp/427996/el-banco-de-espana-pide-cambiar-los-planes-urbanisticos-y-densificar-el-suelo-para-sumar-1-2-m-de-viviendas",
+     "title": "El Banco de España pide cambiar los planes urbanísticos y densificar el suelo para sumar 1,2 M de viviendas (resumen del Informe Anual 2025)",
+     "authors_year": "Banco de España, recogido por Alimarket (2026)",
+     "country": "España",
+     "period": "2021-2025",
+     "method": "diagnóstico institucional",
+     "locator": "párrafo 2",
+     "quote": "las trabas administrativas, la lentitud en la ejecución de los planes urbanísticos y una preocupante crisis de productividad",
+     "value_in_source": "sin cifra de absorción; suelo y planeamiento como restricción junto a capacidad constructora"
+    }
+   ],
+   "contrary_evidence": [],
+   "debate": null,
+   "derivation": "No encontramos una estimación de qué parte del suelo finalista liberado se construye cada año. Hipótesis: un suelo con licencias se edifica en 2 a 6 años según la demanda y la capacidad de las constructoras, es decir, entre 1/6 (0,17, redondeado a 0,15) y 1/2 al año, central 0,35; alto 0,6 si la demanda es fuerte. El Banco de España señala que, además del suelo, pesan la lentitud del planeamiento y la productividad, por lo que la absorción no es 1.",
+   "note_es": "No hay una estimación publicada para España: suponemos que cada año se construye el 35 % (15-60 %) del suelo listo para edificar que se libera. Según el Banco de España, la oferta también depende del planeamiento y de la productividad de las constructoras.",
+   "part_file": "part_housing_supply.json"
+  },
+  {
+   "id": "V12_rent_stock_elasticity",
+   "from": "parque_por_hogar",
+   "to": "alquiler_mercado",
+   "sign": "-",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "respuesta_alquiler_parque",
+    "unit": "% de caída del alquiler por cada 1 % más de viviendas por hogar",
+    "low": 1.1,
+    "central": 1.65,
+    "high": 2.2
+   },
+   "lag_years": [
+    0,
+    2
+   ],
+   "grade": "B",
+   "spain_evidence": "no",
+   "sources": [
+    {
+     "url": "https://thinkhouse.org.uk/site/assets/files/1394/cache0819b.pdf",
+     "title": "Tackling the UK housing crisis: is supply the answer?",
+     "authors_year": "Mulheirn (2019), UK Collaborative Centre for Housing Evidence",
+     "country": "Reino Unido (con referencias a Francia, Alemania y EE. UU.)",
+     "period": "revisión de estudios de demanda inversa (Meen 2013, OBR 2014, Oxford Economics 2016, modelo del MHCLG)",
+     "method": "revisión de ecuaciones de demanda inversa de servicios de vivienda (precio en función del parque, hogares, renta y coste de uso)",
+     "locator": "pág. 25, fig. 11; pág. 6",
+     "quote": "the sensitivity of house prices to additional stock (the inverse of the price elasticity of demand for housing) reported as being in the range of -1.1 to -2.2",
+     "value_in_source": "-1.1 a -2.2 (Reino Unido); -1.5 Francia, -1.2 Alemania, -1.3 a -2.1 EE. UU.; MHCLG supone -2"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://thinkhouse.org.uk/site/assets/files/1394/cache0819b.pdf",
+     "title": "Tackling the UK housing crisis: is supply the answer? (Mulheirn 2019)",
+     "finding": "Con esa misma elasticidad, construir 300.000 viviendas al año en Inglaterra solo bajaría los precios en torno a un 10 % en 20 años; el autor atribuye la subida de precios sobre todo a los tipos de interés, no a la falta de oferta (crítica de Bramley y otros a su enfoque)."
+    }
+   ],
+   "debate": null,
+   "derivation": "La revisión da una sensibilidad del precio al parque de -1,1 a -2,2 (inversa de una elasticidad-precio de la demanda de -0,45 a -0,9); low 1,1 y high 2,2 son los extremos y central 1,65 su punto medio, dentro del 1,5-2 % que el autor resume para precios «y por implicación alquileres». No hay estimación española verificada (la pista DO 2415 del Banco de España es un documento sobre sandboxes fintech, no de vivienda); se aplica al alquiler sin ajuste.",
+   "note_es": "Según la revisión de Mulheirn (2019) para Reino Unido, un 1 % más de viviendas respecto a los hogares se asocia a precios y alquileres entre un 1,1 % y un 2,2 % más bajos (central 1,65 %). No hay estimación propia para España.",
+   "part_file": "part_housing_demand.json"
+  },
+  {
+   "id": "V13_emancipation_rent",
+   "from": "alquiler_mercado",
+   "to": "jovenes_en_casa",
+   "sign": "+",
+   "layer": "segunda_ronda",
+   "parameter": {
+    "name": "elasticidad_emancipacion",
+    "unit": "% de cambio de los jóvenes de 18-34 que viven con sus padres por cada 1 % de cambio del alquiler",
+    "low": 0.18,
+    "central": 0.29,
+    "high": 0.53
+   },
+   "lag_years": [
+    1,
+    3
+   ],
+   "grade": "B",
+   "spain_evidence": "no",
+   "sources": [
+    {
+     "url": "https://www.federalreserve.gov/pubs/feds/2013/201326/201326pap.pdf",
+     "title": "The Long and the Short of Household Formation (FEDS 2013-26)",
+     "authors_year": "Paciorek (2013/2016)",
+     "country": "EE. UU.",
+     "period": "censos 1980 y 2000 (largo plazo); ACS 2006 y 2010 (corto plazo)",
+     "method": "logit multinomial del estado de convivencia con efectos fijos de área metropolitana; efectos marginales de log alquiler del área",
+     "locator": "Tabla 2 pág. 33, Tabla 3 pág. 34 y Tabla 7 pág. 38 (fila Log Rent (MSA), columna Family); cita en pág. 18 (todos los adultos, 2006-2010, Tabla 6: 0,163)",
+     "quote": "20 percent higher rents—about one standard deviation—implying that individuals are about 3 percentage points more likely to live at home",
+     "value_in_source": "efecto marginal de log alquiler sobre vivir con la familia: 0,121 (todos los adultos, 1980-2000), 0,199 (jóvenes 18-30, 1980-2000), 0,364 (jóvenes, 2006-2010)"
+    },
+    {
+     "url": "https://ec.europa.eu/eurostat/databrowser/view/ilc_lvps08/default/table",
+     "title": "Share of young adults aged 18-34 living with their parents (ilc_lvps08)",
+     "authors_year": "Eurostat (2026)",
+     "country": "España",
+     "period": "2025",
+     "method": "EU-SILC (ECV)",
+     "locator": "geo=ES, age=Y18-34, sex=T",
+     "quote": "España, 18-34 años, ambos sexos, 2025: 68,7",
+     "value_in_source": "68,7 %"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://www.federalreserve.gov/pubs/feds/2013/201326/201326pap.pdf",
+     "title": "The Long and the Short of Household Formation (Paciorek)",
+     "finding": "El autor no encuentra una correlación temporal estadística ni económicamente relevante entre la tasa de jefatura de hogar y los índices agregados de alquiler, aunque sí en el corte transversal entre áreas."
+    }
+   ],
+   "debate": null,
+   "derivation": "Paciorek da efectos marginales sobre la probabilidad de vivir con la familia (padres u otros parientes), en puntos por log de alquiler del área: 0,121 todos los adultos, 0,199 jóvenes de 18-30 a largo plazo, 0,364 jóvenes a corto plazo. Divididos por la proporción española de 18-34 que vive con sus padres (68,7 % en 2025): 0,121/0,687=0,18, 0,199/0,687=0,29, 0,364/0,687=0,53 % por punto logarítmico (≈1 %) de alquiler. Así se traslada el efecto en puntos de EE. UU., no su elasticidad (la base de EE. UU. es menor, lo que daría cifras más altas); el bajo usa el coeficiente de todos los adultos. No se verificó una estimación española (Martínez-Granado y Ruiz-Castillo 2002 sin acceso abierto).",
+   "note_es": "Según Paciorek (EE. UU.), un alquiler un 20 % más alto va con unos 3 puntos más de adultos viviendo con su familia. Trasladado al 68,7 % de jóvenes de 18-34 que vive con sus padres en España, un 1 % más de alquiler iría con un 0,29 % más (0,18-0,53); no hay una estimación española verificada.",
+   "review": {
+    "verdict": "fix",
+    "evidence": "Paciorek: Log Rent (MSA), columna Family: 0,121 (Tabla 2, todos los adultos, pág. 33), 0,199 (Tabla 3, 18-30, pág. 34), 0,364 (Tabla 7, 18-30, 2006-2010, pág. 38); la cita está en pág. 18 y se refiere a todos los adultos 2006-2010 (Tabla 6: 0,163). Dividir el efecto marginal (puntos por log de alquiler) por la base española 68,7 % (Eurostat ilc_lvps08 2025, confirmado) da una elasticidad por punto logarítmico correcta, pero traslada el efecto en puntos de EE. UU. (familia, 18-30) a una base mayor, y el bajo usa el coeficiente de todos los adultos: hay que decirlo y no usar 'supone'."
+   },
+   "part_file": "part_housing_demand.json"
+  },
+  {
+   "id": "V14_new_household_size",
+   "from": "emancipacion",
+   "to": "hogares",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "personas_por_hogar_nuevo",
+    "unit": "personas por hogar nuevo formado al emanciparse jóvenes de 18-34",
+    "low": 1.2,
+    "central": 1.5,
+    "high": 1.8
+   },
+   "lag_years": 0,
+   "grade": "D",
+   "spain_evidence": "parcial",
+   "sources": [
+    {
+     "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=54562",
+     "title": "Proyección de Hogares: hogares por tamaño del hogar",
+     "authors_year": "INE (2026)",
+     "country": "España",
+     "period": "proyección 2026-2041",
+     "method": "proyección oficial de hogares",
+     "locator": "tabla 54562, Total Nacional, 2041",
+     "quote": "Total Nacional. Tamaño medio del hogar. 2041: 2,43",
+     "value_in_source": "2,43 personas por hogar (2041); 6,72 millones de hogares de 1 persona de 21,94 millones"
+    },
+    {
+     "url": "https://ec.europa.eu/eurostat/databrowser/view/ilc_lvph01/default/table",
+     "title": "Average household size (ilc_lvph01)",
+     "authors_year": "Eurostat (2026)",
+     "country": "España",
+     "period": "2022-2025",
+     "method": "EU-SILC (ECV)",
+     "locator": "geo=ES",
+     "quote": "España, tamaño medio del hogar, 2025: 2,5",
+     "value_in_source": "2,5"
+    }
+   ],
+   "contrary_evidence": [],
+   "debate": null,
+   "derivation": "Supuesto (grado D): un joven que se emancipa forma un hogar unipersonal (1 persona) o en pareja con otro joven que también deja el hogar (2 personas); central 1,5 = mitad y mitad, rango 1,2-1,8. No se verificó la composición de los hogares nuevos de 25-34 (la Encuesta Continua de Hogares ya no está en la API del INE y el Censo 2021 no ofrece esa tabla en ella). hogares_por_inmigrante = 1/tamaño medio: 1/2,5=0,40 (tamaño medio de todos los hogares, Eurostat 2025), rango 1/3,0=0,33 a 1/2,0=0,50; tamaño de los hogares de inmigrantes recientes no verificado.",
+   "note_es": "Supuesto del modelo: cada hogar nuevo de jóvenes que se emancipan tiene de media 1,5 personas (1,2-1,8), y cada inmigrante neto forma 0,40 hogares (1 entre 2,5 personas por hogar en España según Eurostat). No hay dato oficial verificado de ambos.",
+   "extra_parameters": [
+    {
+     "name": "hogares_por_inmigrante",
+     "unit": "hogares nuevos por inmigrante neto",
+     "low": 0.33,
+     "central": 0.4,
+     "high": 0.5
+    }
+   ],
+   "part_file": "part_housing_demand.json"
+  },
+  {
+   "id": "V15_constrained_credit_loss",
+   "from": "tope_ltv_lti",
+   "to": "credito_hipotecario_nuevo",
+   "sign": "-",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "perdida_credito_restringido",
+    "unit": "fracción del volumen de nuevas hipotecas por encima del límite que desaparece (no se reconvierte en un préstamo menor)",
+    "low": 0.1,
+    "central": 0.3,
+    "high": 0.6
+   },
+   "extra_parameters": [
+    {
+     "name": "efecto_ltv_meta_precio",
+     "unit": "pp de crecimiento interanual del precio de la vivienda tras un endurecimiento típico de medidas sobre préstamos (LTV/DSTI)",
+     "low": -1.7,
+     "central": -1.0,
+     "high": 0.0
+    },
+    {
+     "name": "efecto_ltv_meta_credito",
+     "unit": "pp de crecimiento interanual del crédito a hogares tras un endurecimiento típico del LTV",
+     "low": -0.85,
+     "central": -0.6,
+     "high": -0.4
+    }
+   ],
+   "lag_years": [
+    0,
+    1
+   ],
+   "grade": "D",
+   "spain_evidence": "parcial",
+   "sources": [
+    {
+     "url": "https://www.nber.org/system/files/working_papers/w27292/w27292.pdf",
+     "title": "The Anatomy of the Transmission of Macroprudential Policies",
+     "authors_year": "Acharya, Bergant, Crosignani, Eisert y McCann (2020; J. Finance 2022)",
+     "country": "Irlanda",
+     "period": "2013-2016 (límites LTV/LTI de febrero de 2015)",
+     "method": "microdatos de préstamos hipotecarios, exposición de bancos y condados a los límites",
+     "locator": "pág. 4",
+     "quote": "the increase in “conforming” issuance oﬀsets the collapse in the issuance of those mortgages that exceed the newly imposed limits, leaving aggregate issuance barely aﬀected",
+     "value_in_source": "43 % de la emisión afectada; emisión agregada apenas afectada"
+    },
+    {
+     "url": "https://www.bde.es/f/webbe/Secciones/Publicaciones/InformesBoletinesRevistas/InformesEstabilidadFinancera/26/IEF_2026_1_Cap4.pdf",
+     "title": "Informe de Estabilidad Financiera, primavera 2026, cap. 4",
+     "authors_year": "Banco de España (2026)",
+     "country": "España",
+     "period": "2024-2025",
+     "method": "estadística supervisora de nuevas hipotecas",
+     "locator": "pág. 9",
+     "quote": "La proporción de nuevas operaciones con LTP por encima del 80 % ha tenido una tendencia ligeramente creciente, pasando del 39,2 % a comienzos de 2024 al 43,8 % a finales de 2025",
+     "value_in_source": "43,8 %"
+    },
+    {
+     "url": "https://www.elibrary.imf.org/view/journals/001/2019/066/article-A001-en.xml",
+     "title": "Digging Deeper—Evidence on the Effects of Macroprudential Policies from a New Database (IMF WP 19/66)",
+     "authors_year": "Alam, Alter, Eiseman, Gelos, Kang, Narita, Nier y Wang (2019)",
+     "country": "internacional (134 países)",
+     "period": "1990-2016",
+     "method": "panel iMaPP con estimación por propensity score",
+     "locator": "introducción y sección III",
+     "quote": "a one-ppt LTV tightening cumulatively reduces household credit growth by about 0.7 ppts after four quarters",
+     "value_in_source": "-0,7 pp (endurecimientos < 10 pp); -0,4 pp (10-25 pp); precios: -1 pp, -1,7 pp en avanzadas"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://www.elibrary.imf.org/view/journals/001/2020/067/article-A001-en.xml",
+     "title": "Effects of Macroprudential Policy: Evidence from Over 6,000 Estimates (IMF WP 20/67)",
+     "finding": "Meta-análisis: los límites LTV y DSTI reducen el crédito unas 0,05-0,065 desviaciones típicas (≈ -0,6 pp de crecimiento interanual con la conversión de la tabla 5), pero su efecto medio sobre el precio de la vivienda no es significativo."
+    }
+   ],
+   "debate": null,
+   "derivation": "Mínimo 0,1 = solo la parte mecánica para préstamos algo por encima del 80 % (de 90 % a 80 % se pierde 1 - 80/90 = 11 %); en Irlanda 2015 la emisión conforme compensó casi toda la caída de la no conforme, lo que apunta a pérdidas bajas, pero parte de la compensación fue de otros prestatarios. Central 0,3 y máximo 0,6 son supuesto de calibración (grado D): ninguna fuente publica esta fracción. Extras: precio de Alam et al. (-1 pp todos, -1,7 pp avanzadas, 0 por el meta-análisis no significativo); crédito -0,6 pp (-0,05 DT × 13 %) a -0,85 pp (-0,065 DT), y -0,4 pp por punto en endurecimientos grandes según Alam et al.",
+   "note_es": "Según el Banco Central de Irlanda (Acharya et al.), tras los límites de 2015 la emisión agregada apenas cayó: los préstamos dentro del límite compensaron a los que lo superaban. Suponemos que desaparece entre el 10 % y el 60 % (central 30 %) del volumen por encima del límite; no hay estimación publicada.",
+   "part_file": "part_housing_credit.json"
+  },
+  {
+   "id": "V16_price_credit_elasticity",
+   "from": "credito_hipotecario",
+   "to": "precio_vivienda",
+   "sign": "+",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "elasticidad_precio_credito",
+    "unit": "% de cambio del precio real de la vivienda por cada 1 % de cambio del crédito real para compra de vivienda por hogar (largo plazo)",
+    "low": 0.2,
+    "central": 0.35,
+    "high": 0.54
+   },
+   "lag_years": [
+    2,
+    6
+   ],
+   "grade": "B",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://repositorio.bde.es/bitstream/123456789/6858/1/dt0605e.pdf",
+     "title": "The interaction between house prices and loans for house purchase. The Spanish case (DT 0605)",
+     "authors_year": "Gimeno y Martínez-Carrascal (2006)",
+     "country": "España",
+     "period": "datos trimestrales hasta 2005 aprox.",
+     "method": "VECM con dos vectores de cointegración (crédito y precio)",
+     "locator": "pág. 36, tabla 4 (β2)",
+     "quote": "β2 -0.328 1 0 -1.200 ; std errors 0.132 0 0.691 (columnas lh, p, i, yh)",
+     "value_in_source": "0,328 (e.e. 0,132)"
+    },
+    {
+     "url": "https://www.suomenpankki.fi/globalassets/en/research/seminars-and-conferences/conferences-and-workshops/documents/suerf2009/suerf2009_martinezcarrascal_paper.pdf",
+     "title": "House prices and loans for house purchase: revised evidence for the Spanish case (SUERF 2009)",
+     "authors_year": "Gimeno y Martínez-Carrascal (2009)",
+     "country": "España",
+     "period": "datos trimestrales hasta 2008",
+     "method": "VECM condicional con stock de viviendas por hogar",
+     "locator": "pág. 21, tabla 2 (β2)",
+     "quote": "β2 -0.54 1.00 0.00 -0.99 7.69 (columnas lh, p, i, yh, sh)",
+     "value_in_source": "0,54 (e.e. 0,05)"
+    },
+    {
+     "url": "https://repositorio.bde.es/bitstream/123456789/6781/1/dt0307e.pdf",
+     "title": "Analysis of house prices in Spain (DT 0307)",
+     "authors_year": "Martínez Pagés y Maza (2003)",
+     "country": "España",
+     "period": "1976-2002 (anual)",
+     "method": "modelo de corrección del error con elasticidad unitaria a la renta impuesta",
+     "locator": "pág. 21",
+     "quote": "The estimated long-run elasticity of house prices to credit is 0.35 and the semi-elasticity to the nominal interest rate, -4.5.",
+     "value_in_source": "0,35"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://repositorio.bde.es/bitstream/123456789/6781/1/dt0307e.pdf",
+     "title": "Analysis of house prices in Spain (DT 0307)",
+     "finding": "Los autores avisan de que estas elasticidades podrían sobrestimar el efecto real por la fuerte correlación entre renta, endeudamiento y tipos (problema de identificación); sin restricción sobre la renta el crédito no es significativo."
+    }
+   ],
+   "debate": null,
+   "derivation": "Elasticidades de largo plazo del precio real al crédito para vivienda por hogar en España: 0,328 (Gimeno y Martínez-Carrascal 2006), 0,35 (Martínez Pagés y Maza 2003) y 0,54 (revisión 2009 con stock de viviendas). Central 0,35; mínimo 0,2 ≈ 0,328 - 1 e.e. (0,132); máximo 0,54. Son estimaciones de series temporales, no cuasi-experimentos; el ajuste del precio es del 8 % por trimestre (DT 0605), de ahí el retardo de 2-6 años. Favara e Imbs (2015) no se consultó.",
+   "note_es": "Según tres modelos del Banco de España con datos españoles, a largo plazo un 1 % más de crédito a la vivienda por hogar va con un precio real entre un 0,33 % y un 0,54 % más alto (central 0,35 %). Los autores avisan de que separar crédito, renta y tipos es difícil.",
+   "review": {
+    "verdict": "fix",
+    "evidence": "DT 0605 pág. 36 Tabla 4: β2 = (-0,328; 1; 0; -1,200) con e.e. 0,132 y ajuste del precio -0,080 por trimestre; SUERF 2009 pág. 21: β2 -0,54 (e.e. 0,05); DT 0307 pág. 21: 0,35 con el aviso de sobreestimación por identificación. La variable es crédito real para compra de vivienda por hogar (lh), no el saldo total, y la unidad debe decirlo."
+   },
+   "part_file": "part_housing_credit.json"
+  },
+  {
+   "id": "V17_credit_price_feedback",
+   "from": "precio_vivienda",
+   "to": "credito_hipotecario_nuevo",
+   "sign": "+",
+   "layer": "segunda_ronda",
+   "parameter": {
+    "name": "elasticidad_credito_precio",
+    "unit": "% de cambio del nuevo crédito hipotecario por cada 1 % de cambio del precio de la vivienda (garantía)",
+    "low": 0.6,
+    "central": 0.78,
+    "high": 0.98
+   },
+   "extra_parameters": [
+    {
+     "name": "cuota_credito_nuevo",
+     "unit": "nuevas operaciones de crédito a la vivienda en el año / saldo vivo de crédito a la vivienda a fin de año",
+     "low": 0.137,
+     "central": 0.161,
+     "high": 0.161
+    }
+   ],
+   "lag_years": [
+    1,
+    4
+   ],
+   "grade": "B",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://repositorio.bde.es/bitstream/123456789/6858/1/dt0605e.pdf",
+     "title": "The interaction between house prices and loans for house purchase. The Spanish case (DT 0605)",
+     "authors_year": "Gimeno y Martínez-Carrascal (2006)",
+     "country": "España",
+     "period": "datos trimestrales hasta 2005 aprox.",
+     "method": "VECM con dos vectores de cointegración",
+     "locator": "pág. 16 y tabla 4 (β1), pág. 36",
+     "quote": "borrowing elasticity to interest rates is 10, while the elasticity to house prices is 0.78",
+     "value_in_source": "0,784 (e.e. 0,079)"
+    },
+    {
+     "url": "https://www.suomenpankki.fi/globalassets/en/research/seminars-and-conferences/conferences-and-workshops/documents/suerf2009/suerf2009_martinezcarrascal_paper.pdf",
+     "title": "House prices and loans for house purchase: revised evidence for the Spanish case (SUERF 2009)",
+     "authors_year": "Gimeno y Martínez-Carrascal (2009)",
+     "country": "España",
+     "period": "datos trimestrales hasta 2008",
+     "method": "VECM condicional; elasticidad a la riqueza inmobiliaria (precio × stock)",
+     "locator": "pág. 21, tabla 2 (β1)",
+     "quote": "β1 1.00 -0.98 9.20 -0.96 -0.98 (columnas lh, p, i, yh, sh)",
+     "value_in_source": "0,98 (e.e. 0,10)"
+    },
+    {
+     "url": "https://www.bde.es/webbe/es/estadisticas/compartido/datos/csv/be1912.csv",
+     "title": "Boletín Estadístico, tablas 19.12 (nuevas operaciones, importes) y 19.16 (saldos vivos)",
+     "authors_year": "Banco de España (2026)",
+     "country": "España",
+     "period": "2024-2025",
+     "method": "estadística oficial de tipos de interés e importes (entidades de crédito y EFC, hogares e ISFLSH)",
+     "locator": "be1912 col. 'Crédito vivienda' (suma ene-dic); be1916 col. 'Crédito a la vivienda' (dic)",
+     "quote": "Importes totales estimados. Hogares e ISFLSH. Crédito vivienda: suma 2025 = 82.748 M€; saldo vivo dic 2025 = 515.335 M€",
+     "value_in_source": "82.748 / 515.335 = 0,161 (2024: 67.952 / 497.214 = 0,137)"
+    }
+   ],
+   "contrary_evidence": [],
+   "debate": null,
+   "derivation": "Elasticidad de largo plazo del saldo de crédito para vivienda por hogar al precio real: 0,78 (DT 0605) y 0,98 a la riqueza inmobiliaria (revisión 2009); mínimo 0,6 ≈ 0,784 - 2 e.e. (0,079). Se aplica al nuevo crédito porque en estado estacionario flujo y saldo crecen igual (supuesto; a corto plazo el flujo reacciona más). Cuota: 82.748 M€ de nuevas operaciones en 2025 / 515.335 M€ de saldo = 0,161; 2024: 0,137. Las nuevas operaciones incluyen renegociaciones, así que 0,161 es un techo.",
+   "note_es": "Según el Banco de España, a largo plazo el crédito a la vivienda por hogar sube un 0,78 % por cada 1 % de subida del precio real (0,98 % en la revisión de 2009). En 2025 se firmaron 82.748 M€ de crédito nuevo a la vivienda, el 16 % del saldo vivo.",
+   "part_file": "part_housing_credit.json"
+  },
+  {
+   "id": "V18_tenure_substitution",
+   "from": "credito_hipotecario_nuevo",
+   "to": "alquiler_mercado",
+   "sign": "-",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "sustitucion_alquiler",
+    "unit": "% de subida del alquiler de mercado por cada 1 % de caída del nuevo crédito hipotecario",
+    "low": 0.0,
+    "central": 0.05,
+    "high": 0.25
+   },
+   "lag_years": [
+    0,
+    2
+   ],
+   "grade": "D",
+   "spain_evidence": "no",
+   "sources": [
+    {
+     "url": "https://www.nber.org/system/files/working_papers/w27292/w27292.pdf",
+     "title": "The Anatomy of the Transmission of Macroprudential Policies",
+     "authors_year": "Acharya, Bergant, Crosignani, Eisert y McCann (2020; J. Finance 2022)",
+     "country": "Irlanda",
+     "period": "2013-2016",
+     "method": "microdatos de préstamos hipotecarios",
+     "locator": "pág. 4",
+     "quote": "the increase in “conforming” issuance oﬀsets the collapse in the issuance of those mortgages that exceed the newly imposed limits, leaving aggregate issuance barely aﬀected",
+     "value_in_source": "emisión agregada apenas afectada (sin estimación sobre alquileres)"
+    }
+   ],
+   "contrary_evidence": [],
+   "debate": null,
+   "derivation": "Supuesto (grado D): no se encontró ni consultó una estimación publicada del efecto del endurecimiento del crédito hipotecario sobre los alquileres (Tzur-Ilan 2023 y las revisiones del Banco Central de Irlanda no se pudieron verificar). El rango incluye 0 porque en Irlanda la emisión agregada apenas cambió y por tanto el desplazamiento hacia el alquiler fue pequeño; el máximo 0,25 deja margen a que los compradores excluidos se concentren en mercados tensionados.",
+   "note_es": "No hay una estimación publicada verificada. Suponemos que por cada 1 % menos de crédito hipotecario nuevo el alquiler sube entre un 0 % y un 0,25 % (central 0,05 %), porque parte de los compradores excluidos alquila; en Irlanda 2015 la emisión total apenas cambió.",
+   "part_file": "part_housing_credit.json"
   }
  ]
 }
