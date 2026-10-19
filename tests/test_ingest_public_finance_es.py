@@ -59,6 +59,32 @@ class IngestPublicFinanceTest(unittest.TestCase):
         self.assertEqual(evidence, 6)  # every stored value (not deletions) points at its raw cell
         self.assertEqual(self.conn.execute("PRAGMA foreign_key_check").fetchall(), [])
 
+    def test_eurostat_list_filter_yields_one_indicator_per_code(self) -> None:
+        # JSON-stat cube: freq(1) x unit(1) x cofog99(2) x geo(2) x time(2), flattened row-major.
+        cube = {
+            "id": ["freq", "unit", "cofog99", "geo", "time"], "size": [1, 1, 2, 2, 2],
+            "dimension": {
+                "freq": {"category": {"index": {"A": 0}}},
+                "unit": {"category": {"index": {"PC_GDP": 0}}},
+                "cofog99": {"category": {"index": {"GF07": 0, "GF09": 1}, "label": {"GF07": "Health", "GF09": "Education"}}},
+                "geo": {"category": {"index": {"ES": 0, "DE": 1}}},
+                "time": {"category": {"index": {"2023": 0, "2024": 1}}},
+            },
+            "value": {"0": 6.4, "1": 6.5, "2": 7.5, "3": 7.6, "4": 4.0, "5": 4.1, "7": 4.5},
+        }
+        raw = ingest.Raw.__new__(ingest.Raw)
+        raw.data = cube
+        spec = {
+            "name": "t", "dataset": "gov_10a_exp", "filters": {"unit": "PC_GDP", "cofog99": ["GF07", "GF09", "GF99"]},
+            "unit_code": "PC_GDP", "unit_label": "%", "label": "Gasto: {label}", "definition": "x",
+        }
+        batches = {d["indicator_code"]: (d, series) for d, series in ingest.parse_eurostat_dataset(spec)(raw)}
+        self.assertEqual(sorted(batches), ["GF07", "GF09"])  # codes absent from the cube are skipped
+        self.assertEqual(batches["GF09"][0]["label"], "Gasto: Education")
+        values = {s["geo_code"]: [(o["period"], o["value"]) for o in s["observations"]] for s in batches["GF09"][1]}
+        self.assertEqual(values, {"ES": [("2023", 4.0), ("2024", 4.1)], "DE": [("2024", 4.5)]})
+        self.assertIn("cofog99=GF09", batches["GF09"][1][0]["key"])
+
     def test_lineage_relation_mapping(self) -> None:
         self.assertEqual(ingest.relation_type("SE DEROGA"), "deroga")
         self.assertEqual(ingest.relation_type("SE AÑADE"), "modifica")

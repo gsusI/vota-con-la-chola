@@ -370,20 +370,33 @@ def area_series(key: str, geo: str, dimensions: dict[str, Any], observations: li
 Batch = tuple[dict[str, Any], list[dict[str, Any]]]
 
 
-def parse_imf(raw: Raw) -> Iterable[Batch]:
-    values = raw.data["values"]["rev"]["ESP"]
-    definition = {
-        "source_id": "imf_fpp", "dataset_code": "FPP", "indicator_code": "rev", "frequency_code": "A",
-        "frequency_label": "Anual", "unit_code": "PT_GDP", "unit_label": "% del PIB",
-        "label": "Ingresos públicos (% del PIB), serie histórica FMI",
-        "definition": "Ingresos totales del gobierno en % del PIB (Mauro, Romeu, Binder y Zaman, 2015). Para España "
-        "y años antiguos cubre el Estado central: incluye ingresos no tributarios y excluye la Seguridad Social y "
-        "los entes territoriales.",
-        "methodology_url": "https://www.imf.org/external/datamapper/datasets/FPP",
-        "source_url": "https://www.imf.org/external/datamapper/datasets/FPP",
-    }
-    obs = [{"period": year, "value": value, "pointer": pointer("values", "rev", "ESP", year)} for year, value in sorted(values.items())]
-    yield definition, [area_series("FPP|rev|ESP", "ESP", {"indicator": "rev", "country": "ESP"}, obs)]
+IMF_FPP = {
+    "rev": ("Ingresos públicos (% del PIB), serie histórica FMI",
+            "Ingresos totales del gobierno en % del PIB (Mauro, Romeu, Binder y Zaman, 2015). Para España y años antiguos "
+            "cubre el Estado central: incluye ingresos no tributarios y excluye la Seguridad Social y los entes territoriales."),
+    "exp": ("Gasto público (% del PIB), serie histórica FMI",
+            "Gasto total del gobierno en % del PIB (FPP). Para España, Estado central hasta los años 90 y administraciones "
+            "públicas después: la cobertura cambia y no es homogénea entre 1981 y 1994."),
+    "ie": ("Intereses de la deuda pública (% del PIB), serie histórica FMI",
+           "Gasto en intereses del gobierno en % del PIB (FPP); misma cobertura que el gasto."),
+    "d": ("Deuda pública bruta (% del PIB), serie histórica FMI",
+          "Deuda bruta del gobierno en % del PIB (Historical Public Debt Database, Abbas y otros, integrada en FPP)."),
+}
+
+
+def parse_imf(code: str) -> Callable[[Raw], Iterable[Batch]]:
+    def parse(raw: Raw) -> Iterable[Batch]:
+        values = raw.data["values"][code]["ESP"]
+        label, text = IMF_FPP[code]
+        definition = {
+            "source_id": "imf_fpp", "dataset_code": "FPP", "indicator_code": code, "frequency_code": "A",
+            "frequency_label": "Anual", "unit_code": "PT_GDP", "unit_label": "% del PIB", "label": label, "definition": text,
+            "methodology_url": "https://www.imf.org/external/datamapper/datasets/FPP",
+            "source_url": "https://www.imf.org/external/datamapper/datasets/FPP",
+        }
+        obs = [{"period": year, "value": value, "pointer": pointer("values", code, "ESP", year)} for year, value in sorted(values.items())]
+        yield definition, [area_series(f"FPP|{code}|ESP", "ESP", {"indicator": code, "country": "ESP"}, obs)]
+    return parse
 
 
 def oecd_url() -> str:
@@ -426,71 +439,132 @@ def parse_oecd(raw: Raw) -> Iterable[Batch]:
 EUROSTAT_API = "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data"
 EUROSTAT_GEOS = ["ES", "DE", "FR", "IT", "PT", "EU27_2020"]
 
-# (dataset, fixed filters, unit_code, unit_label, label, definition)
-EUROSTAT_DATASETS = [
-    (
-        "gov_10a_taxag", {"unit": "PC_GDP", "sector": "S13_S212", "na_item": "D2_D5_D91_D61_M_D995"}, "PC_GDP", "% del PIB",
-        "Carga fiscal total (impuestos y cotizaciones sociales netas), % del PIB",
-        "Impuestos sobre producción e importaciones, renta y patrimonio, de capital y cotizaciones sociales efectivas, "
-        "menos impuestos y cotizaciones evaluados pero no recaudados (SEC 2010).",
-    ),
-    (
-        "nama_10_pc", {"unit": "CP_PPS_EU27_2020_HAB", "na_item": "B1GQ"}, "PPS_HAB", "Estándar de poder adquisitivo (UE-27) por habitante",
-        "PIB por habitante en paridad de poder adquisitivo",
-        "Producto interior bruto a precios corrientes por habitante, en estándar de poder adquisitivo UE-27 (comparable entre países).",
-    ),
-    (
-        "tec00113", {"unit": "PPS_EU27_2020_HAB", "na_item": "B7G", "sector": "S14_S15", "direct": "PAID"}, "PPS_HAB",
-        "Estándar de poder adquisitivo (UE-27) por habitante",
-        "Renta disponible ajustada de los hogares por habitante en paridad de poder adquisitivo",
-        "Renta disponible bruta ajustada de hogares e ISFLSH (incluye las transferencias sociales en especie: sanidad y "
-        "educación públicas) por habitante, en estándar de poder adquisitivo UE-27.",
-    ),
-    (
-        "nasa_10_ki", {"unit": "PC", "na_item": "B7G_R_HAB_2010", "sector": "S14_S15"}, "IDX2010", "Índice 2010 = 100",
-        "Renta disponible ajustada real de los hogares por habitante (2010 = 100)",
-        "Renta disponible bruta ajustada de hogares e ISFLSH por habitante, deflactada por el deflactor del consumo final de los hogares.",
-    ),
+COFOG = ["TOTAL", "GF01", "GF0107", "GF02", "GF03", "GF04", "GF05", "GF06", "GF07", "GF08", "GF09", "GF10",
+         "GF1001", "GF1002", "GF1003", "GF1004", "GF1005", "GF1006", "GF1007"]
+
+# raw file stem, dataset, filters (a list value varies: one indicator per combination), unit_code, unit_label,
+# label (may use {label} = label of the varying code), definition.
+EUROSTAT_DATASETS: list[dict[str, Any]] = [
+    {
+        "name": "gov_10a_taxag", "dataset": "gov_10a_taxag",
+        "filters": {"unit": "PC_GDP", "sector": "S13_S212", "na_item": "D2_D5_D91_D61_M_D995"},
+        "unit_code": "PC_GDP", "unit_label": "% del PIB",
+        "label": "Carga fiscal total (impuestos y cotizaciones sociales netas), % del PIB",
+        "definition": "Impuestos sobre producción e importaciones, renta y patrimonio, de capital y cotizaciones sociales "
+        "efectivas, menos impuestos y cotizaciones evaluados pero no recaudados (SEC 2010).",
+    },
+    {
+        "name": "nama_10_pc", "dataset": "nama_10_pc", "filters": {"unit": "CP_PPS_EU27_2020_HAB", "na_item": "B1GQ"},
+        "unit_code": "PPS_HAB", "unit_label": "Estándar de poder adquisitivo (UE-27) por habitante",
+        "label": "PIB por habitante en paridad de poder adquisitivo",
+        "definition": "Producto interior bruto a precios corrientes por habitante, en estándar de poder adquisitivo UE-27 "
+        "(comparable entre países).",
+    },
+    {
+        "name": "nama_10_pc_clv", "dataset": "nama_10_pc", "filters": {"unit": "CLV10_EUR_HAB", "na_item": "B1GQ"},
+        "unit_code": "CLV10_EUR_HAB", "unit_label": "Euros encadenados de 2010 por habitante",
+        "label": "PIB real por habitante (volumen encadenado, euros de 2010)",
+        "definition": "Producto interior bruto en volumen encadenado (referencia 2010) por habitante: deflactado con el "
+        "deflactor del PIB de cada país. Sirve para medir crecimiento real, no para comparar niveles entre países.",
+    },
+    {
+        "name": "nama_10_pc_eur", "dataset": "nama_10_pc", "filters": {"unit": "CP_EUR_HAB", "na_item": "B1GQ"},
+        "unit_code": "CP_EUR_HAB", "unit_label": "Euros corrientes por habitante",
+        "label": "PIB por habitante a precios corrientes (euros)",
+        "definition": "Producto interior bruto a precios corrientes por habitante, en euros.",
+    },
+    {
+        "name": "prc_hicp_aind", "dataset": "prc_hicp_aind", "filters": {"unit": "INX_A_AVG", "coicop": "CP00"},
+        "unit_code": "INX_A_AVG", "unit_label": "Índice (2015 = 100), media anual",
+        "label": "Índice de precios de consumo armonizado (IPCA), general",
+        "definition": "Índice de precios de consumo armonizado, todos los artículos, media anual (2015 = 100).",
+    },
+    {
+        "name": "tec00113", "dataset": "tec00113",
+        "filters": {"unit": "PPS_EU27_2020_HAB", "na_item": "B7G", "sector": "S14_S15", "direct": "PAID"},
+        "unit_code": "PPS_HAB", "unit_label": "Estándar de poder adquisitivo (UE-27) por habitante",
+        "label": "Renta disponible ajustada de los hogares por habitante en paridad de poder adquisitivo",
+        "definition": "Renta disponible bruta ajustada de hogares e ISFLSH (incluye las transferencias sociales en especie: "
+        "sanidad y educación públicas) por habitante, en estándar de poder adquisitivo UE-27.",
+    },
+    {
+        "name": "nasa_10_ki", "dataset": "nasa_10_ki", "filters": {"unit": "PC", "na_item": "B7G_R_HAB_2010", "sector": "S14_S15"},
+        "unit_code": "IDX2010", "unit_label": "Índice 2010 = 100",
+        "label": "Renta disponible ajustada real de los hogares por habitante (2010 = 100)",
+        "definition": "Renta disponible bruta ajustada de hogares e ISFLSH por habitante, deflactada por el deflactor del "
+        "consumo final de los hogares.",
+    },
+    {
+        "name": "gov_10a_exp", "dataset": "gov_10a_exp",
+        "filters": {"unit": "PC_GDP", "sector": "S13", "na_item": "TE", "cofog99": COFOG},
+        "unit_code": "PC_GDP", "unit_label": "% del PIB",
+        "label": "Gasto de las administraciones públicas por función (COFOG): {label}",
+        "definition": "Gasto total de las administraciones públicas (S13) clasificado por función según COFOG, en % del PIB. "
+        "GF0107 (transacciones de la deuda pública) son sobre todo intereses.",
+    },
+    {
+        "name": "gov_10a_main", "dataset": "gov_10a_main",
+        "filters": {"unit": "PC_GDP", "sector": "S13", "na_item": ["TR", "TE", "B9", "D41PAY", "D1PAY"]},
+        "unit_code": "PC_GDP", "unit_label": "% del PIB",
+        "label": "Cuentas de las administraciones públicas: {label}",
+        "definition": "Agregados principales de las administraciones públicas (S13), SEC 2010, en % del PIB.",
+    },
 ]
 
 
-def eurostat_url(dataset: str, filters: dict[str, str]) -> str:
-    query = [("geo", geo) for geo in EUROSTAT_GEOS] + list(filters.items())
+def eurostat_url(dataset: str, filters: dict[str, Any]) -> str:
+    query = [("geo", geo) for geo in EUROSTAT_GEOS]
+    for key, value in filters.items():
+        query.extend((key, v) for v in (value if isinstance(value, list) else [value]))
     return f"{EUROSTAT_API}/{dataset}?" + urllib.parse.urlencode(query)
 
 
-def parse_eurostat_dataset(dataset: str, filters: dict[str, str], unit_code: str, unit_label: str, label: str,
-                           definition: str) -> Callable[[Raw], Iterable[Batch]]:
-    """JSON-stat cube where every dimension but geo and time is fixed to one value."""
+def parse_eurostat_dataset(spec: dict[str, Any]) -> Callable[[Raw], Iterable[Batch]]:
+    """JSON-stat cube: geo and time vary, plus at most one listed dimension (one indicator per value)."""
+    dataset, filters = spec["dataset"], spec["filters"]
+    varying = [k for k, v in filters.items() if isinstance(v, list)]
+    if len(varying) > 1:
+        raise ValueError(f"{dataset}: at most one list-valued filter")
+
     def parse(raw: Raw) -> Iterable[Batch]:
         data = raw.data
         ids, sizes = data["id"], data["size"]
         strides = [1] * len(ids)
         for i in range(len(ids) - 2, -1, -1):
             strides[i] = strides[i + 1] * sizes[i + 1]
-        geo_pos, time_pos = ids.index("geo"), ids.index("time")
         geo_idx = data["dimension"]["geo"]["category"]["index"]
         time_idx = data["dimension"]["time"]["category"]["index"]
-        series = []
-        for geo, gi in sorted(geo_idx.items(), key=lambda kv: kv[1]):
-            obs = []
-            for year, ti in sorted(time_idx.items(), key=lambda kv: kv[1]):
-                flat = gi * strides[geo_pos] + ti * strides[time_pos]
-                value = data["value"].get(str(flat))
-                if value is not None:
-                    obs.append({"period": year, "value": value, "pointer": pointer("value", flat), "cell_index": flat,
-                                "status": data.get("status", {}).get(str(flat))})
-            key = "|".join([dataset, *(f"{k}={v}" for k, v in sorted(filters.items())), f"geo={geo}"])
-            series.append(area_series(key, geo, {**filters, "geo": geo}, obs))
-        yield {
-            "source_id": "eurostat_sdmx", "dataset_code": dataset,
-            "indicator_code": ".".join(filters[k] for k in sorted(filters) if k != "unit"),
-            "frequency_code": "A", "frequency_label": "Anual", "unit_code": unit_code, "unit_label": unit_label,
-            "label": label, "definition": definition,
-            "methodology_url": f"https://ec.europa.eu/eurostat/cache/metadata/en/{dataset}_esms.htm",
-            "source_url": f"https://ec.europa.eu/eurostat/databrowser/view/{dataset}/default/table",
-            "source_updated_at": data.get("updated"),
-        }, series
+        choices = [None] if not varying else [
+            code for code in filters[varying[0]] if code in data["dimension"][varying[0]]["category"]["index"]
+        ]
+        for choice in choices:
+            fixed = {**filters, **({varying[0]: choice} if varying else {})}
+            base = sum(
+                data["dimension"][dim]["category"]["index"][fixed[dim]] * strides[pos]
+                for pos, dim in enumerate(ids) if dim not in ("geo", "time") and dim in fixed
+            )
+            series = []
+            for geo, gi in sorted(geo_idx.items(), key=lambda kv: kv[1]):
+                obs = []
+                for year, ti in sorted(time_idx.items(), key=lambda kv: kv[1]):
+                    flat = base + gi * strides[ids.index("geo")] + ti * strides[ids.index("time")]
+                    value = data["value"].get(str(flat))
+                    if value is not None:
+                        obs.append({"period": year, "value": value, "pointer": pointer("value", flat), "cell_index": flat,
+                                    "status": data.get("status", {}).get(str(flat))})
+                key = "|".join([dataset, *(f"{k}={v}" for k, v in sorted(fixed.items())), f"geo={geo}"])
+                series.append(area_series(key, geo, {**fixed, "geo": geo}, obs))
+            code_label = data["dimension"][varying[0]]["category"]["label"].get(choice, choice) if varying else ""
+            yield {
+                "source_id": "eurostat_sdmx", "dataset_code": dataset,
+                "indicator_code": ".".join(fixed[k] for k in sorted(fixed) if k != "unit"),
+                "frequency_code": "A", "frequency_label": "Anual", "unit_code": spec["unit_code"],
+                "unit_label": spec["unit_label"], "label": spec["label"].format(label=code_label),
+                "definition": spec["definition"],
+                "methodology_url": f"https://ec.europa.eu/eurostat/cache/metadata/en/{dataset}_esms.htm",
+                "source_url": f"https://ec.europa.eu/eurostat/databrowser/view/{dataset}/default/table",
+                "source_updated_at": data.get("updated"),
+            }, series
     return parse
 
 
@@ -517,11 +591,14 @@ def parse_worldbank(code: str) -> Callable[[Raw], Iterable[Batch]]:
 
 
 API_SOURCES: list[tuple[str, str, Callable[[Raw], Iterable[Batch]]]] = [
-    ("imf_fpp_rev_esp.json", "https://www.imf.org/external/datamapper/api/v1/rev/ESP", parse_imf),
+    *[
+        (f"imf_fpp_{code}_esp.json", f"https://www.imf.org/external/datamapper/api/v1/{code}/ESP", parse_imf(code))
+        for code in IMF_FPP
+    ],
     ("oecd_revenue_statistics_dbnomics.json", oecd_url(), parse_oecd),
     *[
-        (f"eurostat_{dataset}.json", eurostat_url(dataset, filters), parse_eurostat_dataset(dataset, filters, *rest))
-        for dataset, filters, *rest in EUROSTAT_DATASETS
+        (f"eurostat_{spec['name']}.json", eurostat_url(spec["dataset"], spec["filters"]), parse_eurostat_dataset(spec))
+        for spec in EUROSTAT_DATASETS
     ],
     *[
         (f"worldbank_{code}.json", f"https://api.worldbank.org/v2/country/ESP/indicator/{code}?format=json&per_page=200",

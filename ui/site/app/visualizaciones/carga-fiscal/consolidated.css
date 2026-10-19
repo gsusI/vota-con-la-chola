@@ -159,3 +159,299 @@
   align-items: center;
   gap: 6px;
 }
+
+.cbars__marker {
+  position: absolute;
+  top: 50%;
+  width: 11px;
+  height: 11px;
+  margin: -5.5px 0 0 -5.5px;
+  transform: rotate(45deg);
+  background: var(--viz-ink);
+  border: 2px solid var(--viz-surface);
+  z-index: 3;
+  pointer-events: none;
+}
+
+.cbars__key--marker {
+  border-radius: 0;
+  transform: rotate(45deg);
+  background: var(--viz-ink);
+  border-color: var(--viz-ink);
+  width: 9px;
+  height: 9px;
+  margin: 0 2px;
+}
+
+/* Line 1: taxes paid vs income left per person (SqueezeRows). */
+.sq {
+  display: grid;
+  gap: 4px;
+}
+
+.sq__row {
+  display: grid;
+  grid-template-columns: minmax(84px, 120px) minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: 6px 14px;
+  align-items: center;
+  font-size: 0.86rem;
+}
+
+.sq__head {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--viz-ink-2);
+  align-items: end;
+}
+
+.sq__head em {
+  font-style: normal;
+  font-weight: 400;
+}
+
+.sq__row[data-highlight="true"] .sq__label {
+  font-weight: 800;
+}
+
+.sq__row[data-highlight="true"] .sq__panel {
+  background: rgba(42, 120, 214, 0.06);
+}
+
+.sq__panel {
+  display: grid;
+  gap: 2px;
+  padding: 4px 0;
+}
+
+.sq__track {
+  position: relative;
+  height: 22px;
+}
+
+.sq__track--axis {
+  height: 16px;
+}
+
+.sq__tick {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--viz-grid);
+}
+
+.sq__tick--zero {
+  background: var(--viz-axis);
+  width: 1.5px;
+}
+
+.sq__bar {
+  position: absolute;
+  height: 9px;
+  border-radius: 0 2px 2px 0;
+}
+
+.sq__bar--top {
+  top: 1px;
+}
+
+.sq__bar--bottom {
+  top: 12px;
+}
+
+.sq__values {
+  font-size: 0.76rem;
+  color: var(--viz-ink-2);
+  font-variant-numeric: tabular-nums;
+}
+
+.sq__tickLabel {
+  position: absolute;
+  transform: translateX(-50%);
+  font-size: 11px;
+  color: var(--viz-muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .sq__row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .sq__label {
+    grid-column: 1 / -1;
+  }
+
+  .sq__head span:first-child,
+  .sq__axis > span:first-child {
+    display: none;
+  }
+
+  .sq__head {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Line 2: service results next to the spending bars (ResultsGrid). */
+.rgrid__scroll {
+  overflow-x: auto;
+}
+
+.rgrid {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.rgrid th,
+.rgrid td {
+  padding: 4px 8px 4px 0;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.rgrid thead th {
+  font-size: 0.76rem;
+  color: var(--viz-ink-2);
+  vertical-align: bottom;
+  min-width: 96px;
+}
+
+.rgrid thead th span {
+  display: block;
+  font-weight: 400;
+  color: var(--viz-muted);
+}
+
+.rgrid tbody tr[data-highlight="true"] th {
+  font-weight: 800;
+}
+
+.rgrid td {
+  min-width: 96px;
+}
+
+.rgrid__track {
+  display: block;
+  position: relative;
+  height: 7px;
+  background: var(--viz-grid);
+  border-radius: 2px;
+}
+
+.rgrid__bar {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: 2px;
+}
+
+.rgrid__value {
+  color: var(--viz-ink);
+}
+
+.rgrid__value small,
+.rgrid__na {
+  color: var(--viz-muted);
+}
+
+/* Line 2: Spain's change in spending by function (DeltaBars). */
+.dbars {
+  display: grid;
+  gap: 10px;
+}
+
+.dbars__toggle {
+  display: flex;
+  gap: 6px;
+}
+
+.dbars__toggle button {
+  font: inherit;
+  font-size: 0.82rem;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--viz-axis);
+  background: var(--viz-surface);
+  color: var(--viz-ink);
+  cursor: pointer;
+}
+
+.dbars__toggle button[aria-pressed="true"] {
+  background: var(--viz-ink);
+  color: var(--viz-surface);
+  border-color: var(--viz-ink);
+}
+
+.dbars__panel {
+  display: grid;
+  gap: 4px;
+}
+
+.dbars__row {
+  display: grid;
+  grid-template-columns: minmax(96px, 140px) 1fr minmax(64px, 76px);
+  gap: 8px;
+  align-items: center;
+  font-size: 0.82rem;
+}
+
+.dbars__row[data-total="true"] .dbars__label {
+  font-weight: 700;
+}
+
+.dbars__row[data-total="true"]:nth-child(3) {
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--viz-grid);
+}
+
+.dbars__track {
+  position: relative;
+  height: 16px;
+}
+
+.dbars__zero {
+  position: absolute;
+  top: -2px;
+  bottom: -2px;
+  width: 1.5px;
+  background: var(--viz-axis);
+}
+
+.dbars__bar {
+  position: absolute;
+  top: 2px;
+  bottom: 2px;
+  border-radius: 2px;
+}
+
+.dbars__value {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  color: var(--viz-ink-2);
+}
+
+.sq__track--axis .sq__tickLabel:first-child {
+  transform: none;
+}
+
+.sq__track--axis .sq__tickLabel:last-child {
+  transform: translateX(-100%);
+}
+
+.rgrid__title {
+  margin: 10px 0 0;
+  font-size: 0.95rem;
+}
+
+.rgrid tbody th {
+  vertical-align: bottom;
+  font-weight: 400;
+}
+
+@media (max-width: 640px) {
+  .sq__axis > div:nth-child(2) .sq__tickLabel:nth-child(even) {
+    display: none;
+  }
+}

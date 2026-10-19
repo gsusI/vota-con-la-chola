@@ -3,18 +3,19 @@
 import { useState } from "react";
 import "./consolidated.css";
 
-// Stacked "who pays" bar per country (latest common year) + a ring at the country's total in the base year,
-// joined by a hairline: level, composition, change and peers in one figure.
-export default function ConsolidatedBars({ rows, parts, axisMax, year, baseYear, highlight }) {
+// Stacked bar per country (latest common year) + a ring at the country's total in the base year: level,
+// composition, change and peers in one figure. Optional diamond marker (e.g. revenue against spending).
+export default function ConsolidatedBars({ rows, parts, axisMax, year, baseYear, highlight, marker, ariaLabel }) {
   const [active, setActive] = useState(null);
   const ticks = [];
   for (let t = 0; t <= axisMax; t += 10) ticks.push(t);
   const pct = (v) => `${(v / axisMax) * 100}%`;
   const fmt = (v) => `${Number(v).toLocaleString("es-ES", { minimumFractionDigits: 1, maximumFractionDigits: 1 })} %`;
+  const signed = (v) => `${v >= 0 ? "+" : "−"}${Math.abs(v).toLocaleString("es-ES", { minimumFractionDigits: 1, maximumFractionDigits: 1 })}`;
 
   return (
     <div className="cbars">
-      <div className="cbars__grid" role="list" aria-label={`Recaudación por quién la ingresa, ${year}, y total en ${baseYear}`}>
+      <div className="cbars__grid" role="list" aria-label={ariaLabel || `Recaudación por quién la ingresa, ${year}, y total en ${baseYear}`}>
         {rows.map((row) => {
           let offset = 0;
           return (
@@ -51,7 +52,15 @@ export default function ConsolidatedBars({ rows, parts, axisMax, year, baseYear,
                   <span
                     className="cbars__base"
                     style={{ left: pct(row.base_total) }}
-                    title={`${row.label}: ${fmt(row.base_total)} del PIB en ${baseYear}`}
+                    title={`${row.label}: ${fmt(row.base_total)} del PIB en ${row.base_year ?? baseYear}`}
+                    aria-hidden="true"
+                  />
+                ) : null}
+                {marker && row[marker.key] != null ? (
+                  <span
+                    className="cbars__marker"
+                    style={{ left: pct(row[marker.key]) }}
+                    title={`${row.label}: ${marker.label} ${fmt(row[marker.key])} del PIB en ${year}`}
                     aria-hidden="true"
                   />
                 ) : null}
@@ -61,7 +70,7 @@ export default function ConsolidatedBars({ rows, parts, axisMax, year, baseYear,
                 {row.base_total != null ? (
                   <span>
                     {" "}
-                    +{Number(row.total - row.base_total).toLocaleString("es-ES", { maximumFractionDigits: 1, minimumFractionDigits: 1 })} desde {baseYear}
+                    {signed(row.total - row.base_total)} desde {row.base_year ?? baseYear}
                   </span>
                 ) : null}
               </span>

@@ -5,11 +5,13 @@ import Figure, { SeriesTable } from "../components/Figure";
 import { formatValue } from "../components/format.mjs";
 import { StatutoryRatesFigure, ComplexityFigures } from "./sections";
 import ConsolidatedBars from "./ConsolidatedBars";
+import { SqueezeFigure, SqueezeIndexFigure } from "./Squeeze";
+import { SpendingSectionIntro, WhereItGoesFigure, DecompositionFigure, LongRunSpendingFigure } from "./WhereItGoes";
 
 export const metadata = {
   title: "Cien años de impuestos en España | Vota Con La Chola",
   description:
-    "Presión fiscal, recaudación real por habitante, quién paga y complejidad normativa en España desde 1925, con fuentes oficiales y datos descargables.",
+    "Presión fiscal, lo que pagan y lo que les queda a los hogares frente a Europa, quién paga, a dónde va el gasto y qué resultados dan los servicios, y complejidad normativa en España desde 1925, con fuentes oficiales y datos descargables.",
 };
 
 const C = {
@@ -148,6 +150,9 @@ export default function CargaFiscalPage() {
   const irpfLengths = (data.complexity?.law_length || []).filter((row) => row.tax === "irpf").sort((a, b) => a.year - b.year);
   const irpfWords =
     irpfLengths.length > 1 ? { first: irpfLengths[0].words_excl_preamble, last: irpfLengths.at(-1).words_excl_preamble } : null;
+  const sqEs = data.squeeze?.areas.find((row) => row.area === "ES");
+  const sqEu = data.squeeze?.areas.find((row) => row.area === "EU27_2020");
+  const spEs = data.spending?.areas.find((row) => row.area === "ES");
   const peerMax = Math.max(...peerOrder.flatMap((area) => data.peers_pct_gdp[area].map((p) => p.value)));
 
   return (
@@ -155,10 +160,11 @@ export default function CargaFiscalPage() {
       <StaticRouteHero
         eyebrow="Visualizaciones · datos públicos"
         title="Cien años de impuestos en España"
-        summary="Cuánto recauda el Estado, quién lo paga y cuánto se ha complicado cumplir. Cada gráfico enlaza su fuente oficial, marca las rupturas de serie y trae sus datos en tabla."
+        summary="Cuánto recauda el Estado, cuánto les queda a los hogares, quién lo paga, a dónde va y cuánto se ha complicado cumplir. Cada gráfico enlaza su fuente oficial, marca las rupturas de serie y trae sus datos en tabla."
         actions={[
           { href: downloads, label: "Descargar datos (CSV)" },
           { href: "/visualizaciones/data/carga-fiscal.json", label: "JSON con procedencia" },
+          { href: "#a-donde-va", label: "¿A dónde va lo recaudado?" },
           { href: "#metodo", label: "Método y fuentes" },
         ]}
       />
@@ -184,6 +190,27 @@ export default function CargaFiscalPage() {
           <span className="vizStat__value">{num(h.first_value_imf)} %</span>
           <span className="vizStat__note">del PIB; sin cotizaciones sociales ni haciendas locales (serie FMI)</span>
         </div>
+        {sqEs ? (
+          <div className="card vizStat">
+            <span className="vizStat__label">Desde {data.squeeze.base_year}, por habitante y descontada la inflación</span>
+            <span className="vizStat__value">+{num(sqEs.real_tax_change_pct)} %</span>
+            <span className="vizStat__note">
+              de impuestos frente a +{num(sqEs.real_income_change_pct)} % de renta de los hogares (UE: +{num(sqEu.real_tax_change_pct)} % y +
+              {num(sqEu.real_income_change_pct)} %)
+            </span>
+          </div>
+        ) : null}
+        {spEs ? (
+          <div className="card vizStat">
+            <span className="vizStat__label">Gasto en pensiones desde {spEs.parts_base_year}</span>
+            <span className="vizStat__value">+{num(spEs.parts_change.pensions)} pts</span>
+            <span className="vizStat__note">
+              del PIB, hasta el {num(spEs.pensions)} %; sanidad {spEs.parts_change.health >= 0 ? "+" : "−"}
+              {num(Math.abs(spEs.parts_change.health))}, educación {spEs.parts_change.education >= 0 ? "+" : "−"}
+              {num(Math.abs(spEs.parts_change.education))}
+            </span>
+          </div>
+        ) : null}
         {irpfLaw ? (
           <div className="card vizStat">
             <span className="vizStat__label">Normas que han modificado la Ley del IRPF</span>
@@ -194,6 +221,8 @@ export default function CargaFiscalPage() {
           </div>
         ) : null}
       </section>
+
+      {data.squeeze ? <SqueezeFigure squeeze={data.squeeze} /> : null}
 
       {esRow ? (
         <Figure
@@ -300,6 +329,8 @@ export default function CargaFiscalPage() {
         <TimeSeriesChart series={perCapita} unit="eur" xMin={h.oecd_first_year} xMax={h.last_year} ariaLabel="Recaudación real por habitante en España" />
       </Figure>
 
+      {data.squeeze ? <SqueezeIndexFigure squeeze={data.squeeze} /> : null}
+
       <Figure
         id="quien-paga"
         title={`Lo que ingresan las personas se ha multiplicado por ${num(last.households / first.households)} y lo de las empresas por ${num(last.companies / first.companies)} (en % del PIB)`}
@@ -401,6 +432,15 @@ export default function CargaFiscalPage() {
         </div>
       </Figure>
 
+      {data.spending ? (
+        <>
+          <SpendingSectionIntro />
+          <WhereItGoesFigure spending={data.spending} results={data.service_results} />
+          <DecompositionFigure spending={data.spending} />
+          <LongRunSpendingFigure spending={data.spending} imfSource={imfSource} />
+        </>
+      ) : null}
+
       <StatutoryRatesFigure rates={data.statutory_rates} lastYear={Number(String(data.generated_at).slice(0, 4))} />
       <ComplexityFigures complexity={data.complexity} />
 
@@ -418,6 +458,17 @@ export default function CargaFiscalPage() {
           </li>
           <li>
             <strong>Comparación.</strong> Cada cifra de España se contrasta con países comparables y con la media de la OCDE y de la UE.
+          </li>
+          <li>
+            <strong>Lo que paga y lo que le queda a cada habitante.</strong> Se compara en estándar de poder adquisitivo (Eurostat), que corrige las
+            diferencias de precios entre países; la renta es la disponible ajustada de los hogares, que incluye los servicios públicos en especie. Los
+            cambios reales usan índices de precios de consumo (IPC armonizado para la recaudación, deflactor del consumo para la renta).
+          </li>
+          <li>
+            <strong>A dónde va el gasto.</strong> Clasificación funcional COFOG de Eurostat (desde 1995). Los resultados de los servicios se toman tal cual
+            de los datos publicados por las páginas de <a href="/visualizaciones/sanidad/">sanidad</a>,{" "}
+            <a href="/visualizaciones/educacion/">educación</a> y <a href="/visualizaciones/vivienda/">vivienda</a>, con la huella SHA-256 del fichero
+            leído en el JSON de esta página.
           </li>
           <li>
             <strong>Incidencia.</strong> Se clasifica por quién ingresa legalmente cada tributo, no por quién lo soporta económicamente.
