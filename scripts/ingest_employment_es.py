@@ -99,6 +99,18 @@ LOCAL_SOURCES: dict[str, dict[str, str]] = {
         "default_url": "https://db.nomics.world/OECD/DSD_OLAB@DF_OIALAB_INDIC",
         "format": "json",
     },
+    "dg_empl_lmp": {
+        "name": "Comisión Europea, DG EMPL - base de datos de políticas de mercado de trabajo (LMP)",
+        "scope": DOMAIN,
+        "default_url": "https://webgate.ec.europa.eu/empl/redisstat/",
+        "format": "json",
+    },
+    "oecd_taxben": {
+        "name": "OCDE - Tax-Benefit: ingresos netos de quien cobra el salario mínimo (réplica DBnomics)",
+        "scope": DOMAIN,
+        "default_url": "https://db.nomics.world/OECD/DSD_TAXBEN_IMW@DF_IMW",
+        "format": "json",
+    },
     "seg_social_pxweb": {
         "name": "Seguridad Social - estadísticas de afiliación y días cotizados (PX-Web)",
         "scope": DOMAIN,
@@ -197,6 +209,8 @@ def period_bounds(period: str) -> tuple[str, str]:
         return f"{year}-{end_month - 2:02d}-01", f"{year}-{end_month:02d}-{end_day}"
     if len(period) == 10:
         return period, period
+    if len(period) == 7 and period[5] == "S":
+        return (f"{period[:4]}-01-01", f"{period[:4]}-06-30") if period[6] == "1" else (f"{period[:4]}-07-01", f"{period[:4]}-12-31")
     if len(period) == 7 and period[4] == "-":
         year, month = int(period[:4]), int(period[5:])
         nxt = f"{year + month // 12}-{month % 12 + 1:02d}-01"
@@ -343,7 +357,7 @@ def load_indicator(
             start, end = period_bounds(period)
             obs_rows.append((
                 obs_id, series_id, release_id, period, obs.get("start", start), obs.get("end", end),
-                obs.get("interval_kind", "calendar_quarter" if "T" in period else "calendar_month" if len(period) == 7 else "calendar_year"), value, text,
+                obs.get("interval_kind", "calendar_quarter" if "T" in period else "calendar_half" if "-S" in period else "calendar_month" if len(period) == 7 else "calendar_year"), value, text,
                 obs.get("status"), canonical_json(obs.get("status_labels", [])), "not_provided", ordinal, state,
                 prev_id, source_metadata.get("source_updated_at"), int(obs.get("cell_index", 0)),
                 canonical_json(obs.get("raw", obs["value"])), ts, ts,
@@ -543,6 +557,41 @@ EUROSTAT_DATASETS: dict[str, dict[str, Any]] = {
         "label": "Dispersión regional de las tasas de paro (NUTS 2), Eurostat", "unit_label": "Coeficiente de variación (%)",
         "definition": "Coeficiente de variación de las tasas de paro regionales NUTS 2 de cada país, ponderado por población activa.",
     },
+    "earn_nt_net": {
+        "filters": {"currency": ["EUR", "PPS"], "estruct": ["NET", "GRS"], "ecase": ["P1_NCH_AW100", "P1_NCH_AW67", "CPL_CH2_AW100"]},
+        "label": "Ingresos anuales netos y brutos de un asalariado tipo, Eurostat (modelo impuestos-prestaciones OCDE)", "unit_label": "Euros o PPS al año",
+        "definition": "Ingresos de un trabajador a tiempo completo del sector empresarial: P1_NCH_AW100 soltero sin hijos con el salario medio; P1_NCH_AW67 con el 67 %; CPL_CH2_AW100 pareja con dos hijos y un solo sueldo medio. NET = bruto menos IRPF y cotizaciones del trabajador más prestaciones familiares.",
+    },
+    "earn_mw_cur": {
+        "filters": {"currency": ["EUR", "PPS"]},
+        "label": "Salario mínimo mensual bruto, Eurostat", "unit_label": "Euros o PPS al mes",
+        "definition": "Salario mínimo nacional bruto mensual, a 1 de enero (S1) y 1 de julio (S2). Para España, el SMI en 12 pagas (prorrateando las extraordinarias). PPS: paridad de poder de compra.",
+        "geos": ["ES", "DE", "FR", "PT", "EL", "NL", "IE"],
+    },
+    "ilc_iw01": {
+        "filters": {"wstatus": ["EMP"], "sex": ["T"], "age": ["Y_GE18"], "unit": ["PC"]},
+        "label": "Tasa de riesgo de pobreza de los ocupados (18 y más años), Eurostat EU-SILC", "unit_label": "% de los ocupados",
+        "definition": "Ocupados que viven en hogares con ingresos equivalentes por debajo del 60 % de la mediana nacional (después de transferencias). La renta se refiere al año anterior al de la encuesta.",
+    },
+    "prc_hicp_aind": {
+        "filters": {"unit": ["INX_A_AVG"], "coicop": ["CP00"]},
+        "label": "Índice de precios de consumo armonizado, media anual (2015 = 100), Eurostat", "unit_label": "Índice 2015 = 100",
+        "definition": "IPCA general; se usa para expresar los ingresos netos en euros constantes.",
+    },
+    "lmp_ind_exp": {
+        "base": "https://webgate.ec.europa.eu/empl/redisstat/api/dissemination/statistics/1.0/data",
+        "filters": {"unit": ["PPS_PWW", "PC_GDP"], "lmp_type": ["1", "TOT2_7", "TOT8_9", "TOT1_9"], "exptype": ["XTOT"]},
+        "label": "Gasto en políticas de mercado de trabajo, Comisión Europea (DG EMPL, base LMP)", "unit_label": "PPS por persona que quiere trabajar, o % del PIB",
+        "definition": "Base de datos LMP: tipo 1 = servicios de empleo; TOT2_7 = medidas activas (formación, incentivos a la contratación, empleo protegido, creación directa de empleo, emprendimiento); TOT8_9 = medidas pasivas (prestaciones por desempleo y jubilación anticipada). PPS_PWW: paridad de poder de compra por persona que quiere trabajar (parados más inactivos disponibles).",
+        "source_page": "https://webgate.ec.europa.eu/empl/redisstat/databrowser/explore/all/lmp?lang=en",
+    },
+    "lmp_ind_actru": {
+        "base": "https://webgate.ec.europa.eu/empl/redisstat/api/dissemination/statistics/1.0/data",
+        "filters": {"unit": ["RT"], "age": ["TOTAL"], "sex": ["T"], "regis_es": ["REG_UNE"], "lmp_type": ["TOT2_7"]},
+        "label": "Activación de los parados registrados: participantes en medidas activas por cada 100 parados registrados (DG EMPL)", "unit_label": "Participantes por cada 100 parados registrados",
+        "definition": "Participantes en medidas activas (tipos 2 a 7) que estaban registrados como parados, por cada 100 parados registrados más esos participantes.",
+        "source_page": "https://webgate.ec.europa.eu/empl/redisstat/databrowser/explore/all/lmp?lang=en",
+    },
     "nama_10_lp_ulc": {
         "filters": {"na_item": ["RLPR_HW"], "unit": ["I15"]},
         "label": "Productividad real del trabajo por hora trabajada (índice 2015 = 100), Eurostat",
@@ -553,18 +602,25 @@ EUROSTAT_DATASETS: dict[str, dict[str, Any]] = {
 
 
 def eurostat_url(dataset: str) -> str:
-    level = EUROSTAT_DATASETS[dataset].get("geo_level")
-    params: list[tuple[str, str]] = [("geoLevel", level)] if level else [("geo", g) for g in EUROSTAT_GEOS]
+    cfg = EUROSTAT_DATASETS[dataset]
+    level = cfg.get("geo_level")
+    params: list[tuple[str, str]] = [("geoLevel", level)] if level else [("geo", g) for g in cfg.get("geos", EUROSTAT_GEOS)]
     for dim, values in EUROSTAT_DATASETS[dataset]["filters"].items():
         params.extend((dim, v) for v in values)
-    return f"{EUROSTAT_BASE}/{dataset}?" + urllib.parse.urlencode(params)
+    return f"{cfg.get('base', EUROSTAT_BASE)}/{dataset}?" + urllib.parse.urlencode(params)
+
+
+def lower_jsonstat(data: dict[str, Any]) -> dict[str, Any]:
+    """DG EMPL's redisstat names dimensions in upper case (GEO, TIME_PERIOD); map them to Eurostat's (geo, time)."""
+    rename = {d: ("time" if d == "TIME_PERIOD" else d.lower()) for d in data["id"]}
+    return {**data, "id": [rename[d] for d in data["id"]], "dimension": {rename.get(k, k): v for k, v in data["dimension"].items()}}
 
 
 def parse_eurostat(dataset: str) -> Callable[[Raw], Iterable[Batch]]:
     """JSON-stat 2.0: one indicator per combination of non-geo dimensions, one series per geo."""
 
     def parse(raw: Raw) -> Iterable[Batch]:
-        data = raw.data
+        data = lower_jsonstat(raw.data)
         dims, sizes = data["id"], data["size"]
         strides = [1] * len(dims)
         for i in range(len(dims) - 2, -1, -1):
@@ -582,7 +638,7 @@ def parse_eurostat(dataset: str) -> Callable[[Raw], Iterable[Batch]]:
             for geo, gi in sorted(index["geo"].items(), key=lambda kv: kv[1]):
                 obs = []
                 for year, ti in sorted(index["time"].items(), key=lambda kv: kv[1]):
-                    coords = {**combo, "geo": geo, "time": year, "freq": "A"}
+                    coords = {**combo, "geo": geo, "time": year, "freq": next(iter(index["freq"]), "A") if "freq" in index else "A"}
                     flat = sum(strides[i] * (index[d][coords[d]] if d in coords else 0) for i, d in enumerate(dims))
                     value = data["value"].get(str(flat))
                     if value is not None:
@@ -596,12 +652,15 @@ def parse_eurostat(dataset: str) -> Callable[[Raw], Iterable[Batch]]:
                     series.append(item)
             code = ".".join(combo[d] for d in fixed)
             age = combo.get("age", "").replace("Y", "").replace("-", "–")
+            dg_empl = "base" in cfg
             yield {
-                "source_id": "eurostat_sdmx", "dataset_code": dataset, "indicator_code": code, "frequency_code": "A",
-                "frequency_label": "Anual", "unit_code": combo.get("unit", "PC"), "unit_label": cfg["unit_label"],
+                "source_id": "dg_empl_lmp" if dg_empl else "eurostat_sdmx", "dataset_code": dataset, "indicator_code": code,
+                "frequency_code": "S" if dataset == "earn_mw_cur" else "A",
+                "frequency_label": "Semestral" if dataset == "earn_mw_cur" else "Anual",
+                "unit_code": combo.get("unit", combo.get("currency", "PC")), "unit_label": cfg["unit_label"],
                 "label": cfg["label"].format(age=age), "definition": cfg["definition"],
-                "methodology_url": f"https://ec.europa.eu/eurostat/cache/metadata/en/{dataset.removesuffix('_h')}_esms.htm",
-                "source_url": f"https://ec.europa.eu/eurostat/databrowser/view/{dataset}/default/table",
+                "methodology_url": cfg.get("source_page") or f"https://ec.europa.eu/eurostat/cache/metadata/en/{dataset.removesuffix('_h')}_esms.htm",
+                "source_url": cfg.get("source_page") or f"https://ec.europa.eu/eurostat/databrowser/view/{dataset}/default/table",
                 "source_updated_at": data.get("updated"),
             }, series
 
@@ -728,6 +787,37 @@ def parse_min_wage(raw: Raw) -> Iterable[Batch]:
     }, series
 
 
+IMW_DATASET = "DSD_TAXBEN_IMW@DF_IMW"
+IMW_SERIES = "{area}.NFI.PT_INC_DISP_HH_TP_REF_WG_MEDIAN.S_C0.Y4_6._Z.NO.NO.FT_ISICCK.MW_DATE.A"
+
+
+def parse_net_min_wage(raw: Raw) -> Iterable[Batch]:
+    series = []
+    for doc_index, doc in enumerate(raw.data["series"]["docs"]):
+        area = doc["series_code"].split(".")[0]
+        if doc["series_code"] != IMW_SERIES.format(area=area):
+            continue
+        obs = [
+            {"period": p, "value": v, "pointer": pointer("series", "docs", doc_index, "value", i), "cell_index": i}
+            for i, (p, v) in enumerate(zip(doc["period"], doc["value"])) if isinstance(v, (int, float))
+        ]
+        item = area_series(f"{IMW_DATASET}|{doc['series_code']}", area, {"series_code": doc["series_code"]}, obs)
+        if area not in AREA_META:
+            item.update(geo_name=area, geo_system="ISO3166-1-alpha-3", geo_level="country")
+        series.append(item)
+    yield {
+        "source_id": "oecd_taxben", "dataset_code": IMW_DATASET, "indicator_code": "NFI.MINW.S_C0.vs_MEDIAN",
+        "frequency_code": "A", "frequency_label": "Anual", "unit_code": "PT_NET_MEDIAN",
+        "unit_label": "% de la renta neta de un soltero con el salario mediano",
+        "label": "Renta neta de un soltero sin hijos con el salario mínimo a tiempo completo, en % de la de un soltero con el salario mediano (OCDE TaxBEN)",
+        "definition": "Modelo de impuestos y prestaciones de la OCDE: salario mínimo bruto menos impuestos y cotizaciones del "
+        "trabajador más prestaciones en efectivo, sin ayudas de vivienda ni asistencia social; referencia: salario mediano "
+        "a tiempo completo (FT_ISICCK), salario mínimo vigente a la fecha (MW_DATE).",
+        "methodology_url": "https://www.oecd.org/en/topics/sub-issues/minimum-wages.html",
+        "source_url": f"https://db.nomics.world/OECD/{IMW_DATASET}",
+    }, series
+
+
 OLAB_DATASET = "DSD_OLAB@DF_OIALAB_INDIC"
 
 
@@ -770,6 +860,11 @@ API_SOURCES: list[tuple[str, str, Callable[[Raw], Iterable[Batch]]]] = [
         "oecd_min2ave_dbnomics.json",
         dbnomics_series_url("OECD", MIN_WAGE_DATASET, {"REF_AREA": MIN_WAGE_AREAS}),
         parse_min_wage,
+    ),
+    (
+        "oecd_taxben_imw_dbnomics.json",
+        dbnomics_series_url("OECD", IMW_DATASET, {"REF_AREA": ["ESP", "DEU", "FRA", "PRT", "GRC", "NLD", "IRL"], "MEASURE": ["NFI"], "HOUSEHOLD_TYPE": ["S_C0"]}),
+        parse_net_min_wage,
     ),
     (
         "oecd_olab_reg_une_esp_dbnomics.json",

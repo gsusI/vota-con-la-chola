@@ -1,5 +1,5 @@
 import { DataTable, Fig, PairedBars } from "./blocks";
-import { C, sources } from "./common.mjs";
+import { C, NAMES, sources } from "./common.mjs";
 import { GapDecomposition, ContractStack } from "./DenseCharts";
 import { fmt, num, thousands } from "./format.mjs";
 
@@ -35,6 +35,83 @@ function Verdicts({ settled, ambiguous }) {
   );
 }
 
+const LP_PARTS = [
+  { key: "services", label: "Servicios de empleo", color: "#1baf7a" },
+  { key: "active", label: "Medidas activas", color: "#2a78d6" },
+  { key: "passive", label: "Prestaciones (pasivas)", color: "#b4b2a9" },
+];
+
+function StackCell({ row, prefix, max, unit }) {
+  const total = row[`${prefix}_total`] ?? LP_PARTS.reduce((sum, p) => sum + (row[`${prefix}_${p.key}`] || 0), 0);
+  return (
+    <div style={{ display: "grid", gap: 2 }}>
+      <div style={{ display: "flex", height: 14, width: "100%", background: "var(--viz-band)", borderRadius: 3, overflow: "hidden" }} aria-hidden="true">
+        {LP_PARTS.map((p) => (
+          <span key={p.key} style={{ width: `${((row[`${prefix}_${p.key}`] || 0) / max) * 100}%`, background: p.color }} />
+        ))}
+      </div>
+      <span style={{ fontSize: "0.78rem", fontWeight: row.area === "ESP" ? 700 : 400 }}>
+        {unit === "gdp" ? `${num(total, 2)} % del PIB` : `${num(total, 0)} PPS`}
+      </span>
+    </div>
+  );
+}
+
+function BarCell({ value, max, color, suffix }) {
+  return (
+    <div style={{ display: "grid", gap: 2 }}>
+      <div style={{ height: 14, width: "100%", background: "var(--viz-band)", borderRadius: 3, overflow: "hidden" }} aria-hidden="true">
+        <span style={{ display: "block", height: "100%", width: `${((value || 0) / max) * 100}%`, background: color }} />
+      </div>
+      <span style={{ fontSize: "0.78rem" }}>{value == null ? "—" : `${num(value)}${suffix}`}</span>
+    </div>
+  );
+}
+
+export function MoneyResults({ rows }) {
+  const maxGdp = Math.max(...rows.map((r) => r.gdp_total || 0));
+  const maxPps = Math.max(...rows.map((r) => r.pps_total || 0));
+  const maxNawru = Math.max(...rows.map((r) => r.nawru || 0));
+  const maxLtu = Math.max(...rows.map((r) => r.ltu_rate || 0));
+  const head = { fontSize: "0.78rem", color: "var(--viz-muted)", fontWeight: 600 };
+  const grid = { display: "grid", gridTemplateColumns: "minmax(70px, 100px) repeat(4, minmax(0, 1fr))", gap: "8px 12px", alignItems: "center" };
+  return (
+    <div style={{ display: "grid", gap: 10, overflowX: "auto" }}>
+      <ul className="vizLegend" aria-label="Leyenda del gasto">
+        {LP_PARTS.map((p) => (
+          <li key={p.key}>
+            <span className="vizLegend__key" style={{ background: p.color, height: 10, width: 10 }} aria-hidden="true" />
+            {p.label}
+          </li>
+        ))}
+        <li>
+          <span className="vizLegend__key" style={{ background: "#52514e", height: 10, width: 10 }} aria-hidden="true" />
+          Resultados: paro estructural y paro de larga duración
+        </li>
+      </ul>
+      <div style={{ ...grid, minWidth: 560 }} role="table" aria-label="Gasto en políticas de empleo frente a resultados">
+        <span style={head} role="columnheader">País</span>
+        <span style={head} role="columnheader">Dinero: % del PIB</span>
+        <span style={head} role="columnheader">Dinero: PPS por persona que quiere trabajar</span>
+        <span style={head} role="columnheader">Resultado: paro estructural (NAWRU)</span>
+        <span style={head} role="columnheader">Resultado: paro de larga duración (% activos)</span>
+        {rows.map((row) => (
+          <div key={row.area} role="row" style={{ display: "contents" }}>
+            <span role="rowheader" style={{ fontSize: "0.84rem", fontWeight: row.area === "ESP" ? 700 : 400 }}>
+              {NAMES[row.area]}
+            </span>
+            <StackCell row={row} prefix="gdp" max={maxGdp} unit="gdp" />
+            <StackCell row={row} prefix="pps" max={maxPps} unit="pps" />
+            <BarCell value={row.nawru} max={maxNawru} color={row.area === "ESP" ? "#17191f" : "#52514e"} suffix=" %" />
+            <BarCell value={row.ltu_rate} max={maxLtu} color={row.area === "ESP" ? "#17191f" : "#52514e"} suffix=" %" />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+
 export default function DatoMataRelato({ data }) {
   const nar = data.narratives;
   if (!nar) return null;
@@ -62,7 +139,7 @@ export default function DatoMataRelato({ data }) {
       <section className="card vizProse" id="dato-relato" aria-labelledby="dato-relato-title">
         <h2 id="dato-relato-title">El dato mata el relato</h2>
         <p>
-          Casi cualquier gráfico suelto de paro sirve para defender una historia y la contraria. Estos dos ponen el problema entero sobre la mesa:
+          Casi cualquier gráfico suelto de paro sirve para defender una historia y la contraria. Estos tres ponen el problema entero sobre la mesa:
           cada uno combina varias medidas en una sola escala, de modo que no se puede recortar para contar solo media historia.
         </p>
       </section>
@@ -190,6 +267,72 @@ export default function DatoMataRelato({ data }) {
           ]}
         />
       </Fig>
+      {data.labour_policy ? <MoneyFigure data={data} /> : null}
     </>
+  );
+}
+
+function MoneyFigure({ data }) {
+  const lp = data.labour_policy;
+  const src = data.sources;
+  const lmp = { label: `Comisión Europea, DG EMPL, base LMP (consultado ${String(src.dg_empl_lmp?.retrieved_at || "").slice(0, 10)})`, href: src.dg_empl_lmp?.page };
+  const S = sources(data);
+  const rows = [...lp.rows].sort((a, b) => (b.pps_total || 0) - (a.pps_total || 0));
+  const es = lp.rows.find((r) => r.area === "ESP");
+  const eu = lp.rows.find((r) => r.area === "EU27");
+  const de = lp.rows.find((r) => r.area === "DEU");
+  const passiveShare = (r) => (r.pps_passive / r.pps_total) * 100;
+  return (
+    <Fig
+      id="relato-gasto"
+      title={`España dedica al paro el ${num(es.gdp_total, 2)} % del PIB, más que la UE (${num(eu.gdp_total, 2)} %), pero por persona que quiere trabajar gasta menos (${num(es.pps_total, 0)} PPS frente a ${num(eu.pps_total, 0)}) y su paro estructural es del ${num(es.nawru)} % frente al ${num(eu.nawru)} %`}
+      dek={`Dinero que entra (gasto en políticas de mercado de trabajo, ${lp.year}) frente a resultados que salen (paro estructural estimado por la Comisión y paro de más de un año), en la misma fila para cada país, ordenados por gasto por persona.`}
+      sources={[lmp, S.ameco, S.eurostat("une_ltu_a")]}
+      notes={[
+        "PPS por persona que quiere trabajar: gasto en paridad de poder de compra dividido por los parados más los inactivos disponibles para trabajar. Servicios = categoría 1 de la base LMP; activas = categorías 2 a 7; pasivas = 8 y 9 (prestaciones y jubilación anticipada).",
+        "Cada columna tiene su propia escala, indicada en su cabecera; las barras de una columna son comparables entre países, no entre columnas.",
+      ]}
+      table={
+        <DataTable
+          columns={[
+            { key: "area", label: "País", format: (v) => NAMES[v] || v },
+            { key: "gdp_total", label: "% PIB total", format: (v) => (v == null ? "" : num(v, 2)) },
+            { key: "gdp_services", label: "% PIB servicios", format: (v) => (v == null ? "" : num(v, 2)) },
+            { key: "gdp_active", label: "% PIB activas", format: (v) => (v == null ? "" : num(v, 2)) },
+            { key: "gdp_passive", label: "% PIB pasivas", format: (v) => (v == null ? "" : num(v, 2)) },
+            { key: "pps_total", label: "PPS por persona, total", format: (v) => (v == null ? "" : num(v, 0)) },
+            { key: "pps_services", label: "PPS servicios", format: (v) => (v == null ? "" : num(v, 0)) },
+            { key: "pps_active", label: "PPS activas", format: (v) => (v == null ? "" : num(v, 0)) },
+            { key: "pps_passive", label: "PPS pasivas", format: (v) => (v == null ? "" : num(v, 0)) },
+            { key: "nawru", label: "Paro estructural", format: (v) => (v == null ? "" : fmt(v)) },
+            { key: "ltu_rate", label: "Paro larga duración", format: (v) => (v == null ? "" : fmt(v)) },
+          ]}
+          rows={rows.map((r) => ({ ...r, id: r.area }))}
+        />
+      }
+    >
+      <MoneyResults rows={rows} />
+      <Verdicts
+        settled={[
+          [
+            "España gasta poco contra el paro",
+            `No en relación con su economía: el ${num(es.gdp_total, 2)} % del PIB, por encima de la UE (${num(eu.gdp_total, 2)} %) y de Alemania (${num(de.gdp_total, 2)} %). Pero es porque tiene muchos más parados.`,
+          ],
+          [
+            "España gasta mucho contra el paro",
+            `No por persona: ${num(es.pps_total, 0)} PPS por cada persona que quiere trabajar, frente a ${num(eu.pps_total, 0)} en la UE y ${num(de.pps_total, 0)} en Alemania. En servicios de empleo, ${num(es.pps_services, 0)} frente a ${num(eu.pps_services, 0)}.`,
+          ],
+          [
+            "El dinero se va en subsidios",
+            `Las prestaciones son el ${num(passiveShare(es), 0)} % del gasto por persona en España y el ${num(passiveShare(eu), 0)} % en la UE; por persona, España paga en prestaciones casi lo mismo que la media europea (${num(es.pps_passive, 0)} frente a ${num(eu.pps_passive, 0)} PPS). La diferencia está en orientación e intermediación, no en prestaciones.`,
+          ],
+        ]}
+        ambiguous={[
+          "La causalidad va en los dos sentidos: más paro eleva el gasto en % del PIB y reparte el gasto por persona entre más gente. Esta comparación no dice que gastar más reduzca el paro.",
+          "Los países no clasifican igual sus programas (Italia apenas declara gasto en servicios de empleo) y la base no mide la eficacia de cada uno.",
+          "La proporción de contrataciones que pasan por los servicios públicos de empleo no tiene una estadística comparable entre países; la serie europea de quién contacta con ellos se cerró en 2020.",
+        ]}
+      />
+    </Fig>
   );
 }

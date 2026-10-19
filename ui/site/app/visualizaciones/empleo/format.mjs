@@ -1,6 +1,6 @@
 // Number formats for /visualizaciones/empleo/ (the shared format.mjs only knows %, euros and counts).
 export function num(value, digits = 1) {
-  return Number(value).toLocaleString("es-ES", { minimumFractionDigits: digits, maximumFractionDigits: digits });
+  return Number(value).toLocaleString("es-ES", { minimumFractionDigits: digits, maximumFractionDigits: digits, useGrouping: "always" });
 }
 
 export function signed(value, digits = 1) {

@@ -19,7 +19,7 @@ export function Summary({ data }) {
   const { h, crisis, covid, row, adj, losses, wp, it, g } = facts(data);
   return (
     <section className="card vizProse" id="resumen" aria-labelledby="resumen-title">
-      <h2 id="resumen-title">En cinco datos</h2>
+      <h2 id="resumen-title">En seis datos</h2>
       <p>
         <strong>La hipótesis:</strong> el paro de España es estructural, no cíclico. Desde 1980 ha sido aproximadamente el doble de la media
         europea en casi todos los ciclos, y la productividad por hora apenas ha crecido desde 1995 frente a países comparables.
@@ -56,6 +56,15 @@ export function Summary({ data }) {
           {wp?.ESP ? ` El salario real por asalariado, un ${num(wp.ESP.wage.at(-1).value - 100)} % (UE-27: ${num(wp.EU27.wage.at(-1).value - 100)} %).` : ""}{" "}
           <a href="#productividad">Ver gráfico</a>
         </li>
+        {data.capacity && data.labour_policy ? (
+          <li>
+            <strong>Lo que queda en el bolsillo y lo que se gasta.</strong> Descontada la inflación, el neto de un soltero con el salario medio
+            cambió un {num(data.capacity.net_growth_first_segment.net_pct)} % entre {data.capacity.net_growth_first_segment.from} y{" "}
+            {data.capacity.net_growth_first_segment.to}; el {pct(data.capacity.in_work_poverty.ESP.at(-1).value)} de los ocupados está en riesgo de
+            pobreza (UE: {pct(data.capacity.in_work_poverty.EU27.at(-1).value)}). España dedica al paro más PIB que la UE pero menos dinero por
+            persona que quiere trabajar, sobre todo en servicios de empleo. <a href="#relato-gasto">Ver gráfico</a>
+          </li>
+        ) : null}
       </ol>
       <p>
         <strong>Veredicto:</strong> la hipótesis se sostiene en lo esencial, pero el paro español es a la vez estructural y muy cíclico. Detalle
@@ -65,7 +74,7 @@ export function Summary({ data }) {
         <p style={{ margin: 0 }}>
           Capítulos: <a href="#cap-cuanto">1. Cuánto paro</a> · <a href="#cap-ciclo">2. Estructural o cíclico</a> ·{" "}
           <a href="#cap-causas">3. Qué hay detrás</a> · <a href="#cap-calidad">4. Qué empleo</a> ·{" "}
-          <a href="#cap-productividad">5. Productividad y salarios</a>
+          <a href="#cap-productividad">5. Productividad y salarios</a> · <a href="#cap-bolsillo">6. Bolsillo y gasto</a>
         </p>
       </nav>
     </section>
@@ -93,6 +102,14 @@ export function Conclusion({ data }) {
           Francia ({num(g.FRA)} %) y Portugal ({num(g.PRT)} %). España pasó de estar por encima de la media europea en productividad por hora a
           estar por debajo.
         </li>
+        {data.capacity ? (
+          <li>
+            Y se nota en el bolsillo: descontada la inflación, el neto de un trabajador con el salario medio cambió un{" "}
+            {num(data.capacity.net_growth_first_segment.net_pct)} % entre {data.capacity.net_growth_first_segment.from} y{" "}
+            {data.capacity.net_growth_first_segment.to}, y el {pct(data.capacity.in_work_poverty.ESP.at(-1).value)} de los ocupados vive en riesgo de
+            pobreza, más que en la UE ({pct(data.capacity.in_work_poverty.EU27.at(-1).value)}).
+          </li>
+        ) : null}
       </ul>
       <h3>Falla o hay que matizarla</h3>
       <ul>
@@ -136,6 +153,13 @@ export function Conclusion({ data }) {
           </li>
         ) : null}
         <li>La cuña fiscal española está en la media de la UE y por debajo de la alemana, la francesa y la italiana.</li>
+        {data.labour_policy ? (
+          <li>
+            «España gasta poco en políticas de empleo» depende de cómo se mida: es mucho en % del PIB y poco por persona que quiere trabajar,
+            sobre todo en servicios de empleo ({num(data.labour_policy.rows.find((r) => r.area === "ESP").pps_services, 0)} PPS frente a{" "}
+            {num(data.labour_policy.rows.find((r) => r.area === "EU27").pps_services, 0)} en la UE).
+          </li>
+        ) : null}
       </ul>
       <h3>Qué queda abierto</h3>
       <ul>
@@ -144,6 +168,7 @@ export function Conclusion({ data }) {
           sin actividad crecieron y la estadística oficial que los separaba dejó de publicarse en el Anuario de 2025.
         </li>
         <li>Cuánto pesa cada causa: medirlo exige modelos y microdatos, no series agregadas.</li>
+        <li>Si el gasto en políticas activas funciona: la base europea mide cuánto se gasta, no qué consigue cada programa.</li>
         {wp?.ESP ? <li>Por qué la productividad no despega aunque el empleo crece: estos datos lo describen, no lo explican.</li> : null}
       </ul>
       <p style={{ margin: 0, color: "var(--viz-muted)" }}>Países: {["DEU", "FRA", "ITA", "PRT"].map((a) => NAMES[a]).join(", ")} y medias europeas.</p>

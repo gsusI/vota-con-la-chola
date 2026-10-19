@@ -42,6 +42,8 @@ SOURCE_PAGES = {
     "oecd_productivity": ("OCDE · Productivity Database (réplica DBnomics)", "https://db.nomics.world/OECD/DSD_PDB@DF_PDB"),
     "oecd_earnings": ("OCDE · Earnings, salario mínimo frente al mediano (réplica DBnomics)", "https://db.nomics.world/OECD/DSD_EARNINGS@MIN2AVE"),
     "oecd_registered_unemployment": ("OCDE · paro registrado del SEPE (réplica DBnomics)", "https://db.nomics.world/OECD/DSD_OLAB@DF_OIALAB_INDIC"),
+    "dg_empl_lmp": ("Comisión Europea, DG EMPL · base de datos de políticas de mercado de trabajo (LMP)", "https://webgate.ec.europa.eu/empl/redisstat/databrowser/explore/all/lmp?lang=en"),
+    "oecd_taxben": ("OCDE · Tax-Benefit, renta neta con el salario mínimo (réplica DBnomics)", "https://db.nomics.world/OECD/DSD_TAXBEN_IMW@DF_IMW"),
     "seg_social_pxweb": ("Seguridad Social · afiliación media y días cotizados (PX-Web)", "https://w6.seg-social.es/PXWeb/"),
     "mites_anuario": ("Ministerio de Trabajo · Anuario de Estadísticas, Movimiento Laboral Registrado", "https://www.mites.gob.es/es/estadisticas/anuarios/"),
     "vclc_employment_events": ("Reformas laborales (BOE) y rupturas de la EPA (INE, EUR-Lex)", "https://www.boe.es/"),
@@ -269,6 +271,8 @@ def build(conn: sqlite3.Connection) -> dict:
 
     extended = build_extended(store, last_year, esp)
     extended["intermittency"] = intermittency(store)
+    extended["capacity"] = capacity(store)
+    extended["labour_policy"] = labour_policy(store, nawru, last_year)
     extended["narratives"] = narratives(store, esp, zutn, nawru, last_year, extended["intermittency"])
     ev, ev_meta = events(conn)
     sources = {}
@@ -637,6 +641,87 @@ def narratives(store: Store, esp: dict[int, float], zutn: dict, nawru: dict, las
     return {"structural_gap": structural_block, "reform": reform_block}
 
 
+def segments(rows: dict[int, float], flags: dict[int, str]) -> list[dict[int, float]]:
+    """Split a series at Eurostat break flags ('b'): each segment starts at a flagged year."""
+    out: list[dict[int, float]] = [{}]
+    for y in sorted(rows):
+        if "b" in (flags.get(y) or "") and out[-1]:
+            out.append({})
+        out[-1][y] = rows[y]
+    return out
+
+
+def capacity(store: Store) -> dict:
+    """Capacity lens: net pay (real, PPS), the minimum wage net and in PPS, in-work poverty."""
+    hicp = store.annual("eurostat_sdmx", "prc_hicp_aind", "INX_A_AVG.CP00")
+    cases = {"P1_NCH_AW100": "single_aw100", "P1_NCH_AW67": "single_aw67", "CPL_CH2_AW100": "couple2_aw100"}
+    out: dict = {"cases": cases, "real_eur": {}, "pps_net": {}, "breaks": []}
+    flags = store.flags("eurostat_sdmx", "earn_nt_net", "EUR.NET.P1_NCH_AW100", "ES")
+    out["breaks"] = sorted(y for y, f in flags.items() if "b" in f)
+    es_hicp = hicp["ES"]
+    base_year = max(es_hicp)
+    for ecase, key in cases.items():
+        for kind in ("NET", "GRS"):
+            rows = store.annual("eurostat_sdmx", "earn_nt_net", f"EUR.{kind}.{ecase}").get("ES", {})
+            real = {y: v * es_hicp[base_year] / es_hicp[y] for y, v in rows.items() if y in es_hicp}
+            out["real_eur"][f"{key}_{kind.lower()}"] = [points(seg, 0) for seg in segments(real, flags)]
+        pps = store.annual("eurostat_sdmx", "earn_nt_net", f"PPS.NET.{ecase}")
+        out["pps_net"][key] = {EUROSTAT_TO_AREA[g]: points(v, 0) for g, v in pps.items() if g in EUROSTAT_TO_AREA}
+    out["real_base_year"] = base_year
+    first_seg = out["real_eur"]["single_aw100_net"][0]
+    gross_seg = out["real_eur"]["single_aw100_grs"][0]
+    out["net_growth_first_segment"] = {
+        "from": first_seg[0]["year"], "to": first_seg[-1]["year"],
+        "net_pct": r((first_seg[-1]["value"] / first_seg[0]["value"] - 1) * 100, 1),
+        "gross_pct": r((gross_seg[-1]["value"] / gross_seg[0]["value"] - 1) * 100, 1),
+    }
+    net_es = store.annual("eurostat_sdmx", "earn_nt_net", "EUR.NET.P1_NCH_AW100")["ES"]
+    grs_es = store.annual("eurostat_sdmx", "earn_nt_net", "EUR.GRS.P1_NCH_AW100")["ES"]
+    out["net_share_of_gross"] = points({y: net_es[y] / grs_es[y] * 100 for y in net_es if y in grs_es}, 1)
+
+    mw = store.series("eurostat_sdmx", "earn_mw_cur", "PPS")
+    mw_eur = store.series("eurostat_sdmx", "earn_mw_cur", "EUR")
+    last_sem = max(mw["ES"])
+    out["min_wage_pps"] = {"period": last_sem, "values": {g: r(v.get(last_sem), 0) for g, v in mw.items() if v.get(last_sem) is not None}}
+    out["min_wage_es"] = {"eur": [{"period": k, "value": r(v, 0)} for k, v in sorted(mw_eur["ES"].items())],
+                          "pps": [{"period": k, "value": r(v, 0)} for k, v in sorted(mw["ES"].items())]}
+    net_mw = store.annual("oecd_taxben", "DSD_TAXBEN_IMW@DF_IMW", "NFI.MINW.S_C0.vs_MEDIAN")
+    out["min_wage_net_vs_median"] = {area: points(rows, 1) for area, rows in net_mw.items()}
+
+    iw = store.annual("eurostat_sdmx", "ilc_iw01", "EMP.T.Y_GE18.PC")
+    out["in_work_poverty"] = {EUROSTAT_TO_AREA[g]: points(v, 1) for g, v in iw.items() if g in EUROSTAT_TO_AREA}
+    return out
+
+
+def labour_policy(store: Store, nawru: dict, last_year: int) -> dict:
+    """Money in vs results out: spending on labour market policies per person wanting to work and % of GDP."""
+    kinds = {"1": "services", "TOT2_7": "active", "TOT8_9": "passive", "TOT1_9": "total"}
+    pps = {k: store.annual("dg_empl_lmp", "lmp_ind_exp", f"PPS_PWW.{code}.XTOT") for code, k in kinds.items()}
+    gdp = {k: store.annual("dg_empl_lmp", "lmp_ind_exp", f"PC_GDP.{code}.XTOT") for code, k in kinds.items()}
+    act = store.annual("dg_empl_lmp", "lmp_ind_actru", "RT.TOTAL.T.REG_UNE.TOT2_7")
+    ltu_share = store.annual("eurostat_sdmx", "une_ltu_a", "LTU.Y15-74.T.PC_UNE")
+    ltu_rate = store.annual("eurostat_sdmx", "une_ltu_a", "LTU.Y15-74.T.PC_ACT")
+    year = max(y for y in pps["active"]["ES"] if all(y in pps[k].get("ES", {}) for k in pps))
+    nawru_map = {"ES": "ESP", "DE": "DEU", "FR": "FRA", "IT": "ITA", "PT": "PRT", "EU27_2020": "EU27"}
+    rows = []
+    for geo, area in nawru_map.items():
+        def v(table: dict, y: int = year) -> float | None:
+            return table.get(geo, {}).get(y)
+        rows.append({
+            "area": area, "year": year,
+            **{f"pps_{k}": r(v(pps[k]), 0) for k in kinds.values()},
+            **{f"gdp_{k}": r(v(gdp[k]), 2) for k in kinds.values()},
+            "activation": r(v(act), 1), "ltu_share": r(v(ltu_share), 1), "ltu_rate": r(v(ltu_rate), 1),
+            "nawru": r(nawru.get(area, {}).get(year), 1),
+        })
+    series = {
+        f"{measure}_{k}": {EUROSTAT_TO_AREA[g]: points(rows_, 2 if measure == "gdp" else 0) for g, rows_ in table[k].items() if g in EUROSTAT_TO_AREA}
+        for measure, table in (("pps", pps), ("gdp", gdp)) for k in kinds.values()
+    }
+    return {"year": year, "rows": rows, "series": series,
+            "activation": {EUROSTAT_TO_AREA[g]: points(v_, 1) for g, v_ in act.items() if g in EUROSTAT_TO_AREA}}
+
+
 def write_csv(data: dict, path: Path) -> None:
     rows: list[tuple] = []
 
@@ -701,6 +786,22 @@ def write_csv(data: dict, path: Path) -> None:
         rows.extend(("eurostat_sdmx:lfst_r_lfu3rt", "tasa_paro_region", f"{r['code']} {r['name']}", rg["year"], r["unemployment"]) for r in rg["spain"])
         rows.extend(("eurostat_sdmx:lfst_r_lfe2emprt", "tasa_empleo_20_64_region", f"{r['code']} {r['name']}", rg["year"], r["employment"]) for r in rg["spain"])
         add("eurostat_sdmx:lfst_r_lmdur", "dispersion_paro_regional", rg["dispersion"])
+    cap = ext.get("capacity")
+    if cap:
+        for key, segs in cap["real_eur"].items():
+            for seg in segs:
+                rows.extend(("eurostat_sdmx:earn_nt_net", f"{key}_eur_constantes_{cap['real_base_year']}", "ES", p["year"], p["value"]) for p in seg)
+        for key, by_area in cap["pps_net"].items():
+            add("eurostat_sdmx:earn_nt_net", f"{key}_neto_pps", by_area)
+        rows.extend(("eurostat_sdmx:earn_mw_cur", f"salario_minimo_pps_{cap['min_wage_pps']['period']}", g, cap["min_wage_pps"]["period"][:4], v)
+                    for g, v in cap["min_wage_pps"]["values"].items())
+        add("oecd_taxben", "salario_minimo_neto_pct_neto_mediano", cap["min_wage_net_vs_median"])
+        add("eurostat_sdmx:ilc_iw01", "pobreza_laboral_pct_ocupados", cap["in_work_poverty"])
+    lp = ext.get("labour_policy")
+    if lp:
+        for key, by_area in lp["series"].items():
+            add("dg_empl_lmp:lmp_ind_exp", f"gasto_lmp_{key}", by_area)
+        add("dg_empl_lmp:lmp_ind_actru", "activacion_parados_registrados", lp["activation"])
     nar = ext.get("narratives")
     if nar:
         for row in nar["structural_gap"]["rows"]:

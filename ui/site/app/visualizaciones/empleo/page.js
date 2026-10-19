@@ -5,6 +5,7 @@ import ChapterCiclo from "./ch2_ciclo";
 import ChapterCausas from "./ch3_causas";
 import ChapterCalidad, { IntermittencyFigure } from "./ch4_calidad";
 import ChapterProductividad from "./ch5_productividad";
+import ChapterCapacidad from "./capacidad";
 import { LimitsCard, MethodCard } from "./sections";
 import { Conclusion, Glossary, Summary } from "./summary";
 import DatoMataRelato from "./relato";
@@ -36,7 +37,7 @@ export default function EmpleoPage() {
         title="El paro en España: ¿estructural o cíclico?"
         summary="Ponemos a prueba una hipótesis: que el paro español es estructural, casi el doble del europeo en cada ciclo desde 1980, y que la productividad por hora apenas ha crecido desde 1995. Medimos también las causas que se suelen señalar y publicamos lo que contradice la hipótesis."
         actions={[
-          { href: "#resumen", label: "Resumen en cinco datos" },
+          { href: "#resumen", label: "Resumen en seis datos" },
           { href: downloads, label: "Descargar datos (CSV)" },
           { href: "/visualizaciones/data/empleo.json", label: "JSON con procedencia" },
           { href: "#metodo", label: "Método y fuentes" },
@@ -83,6 +84,7 @@ export default function EmpleoPage() {
         <IntermittencyFigure data={data} reform={reform} />
       </ChapterCalidad>
       <ChapterProductividad data={data} />
+      <ChapterCapacidad data={data} />
       <Conclusion data={data} />
       <Glossary />
       <LimitsCard />

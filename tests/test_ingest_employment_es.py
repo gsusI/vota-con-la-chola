@@ -161,5 +161,17 @@ class IngestEmploymentTest(unittest.TestCase):
             self.assertAlmostEqual(q["total"], q["ordinary"] + q["fd"] + q["temporal"], delta=0.5)
 
 
+    def test_series_split_at_eurostat_breaks(self) -> None:
+        segs = export.segments({2022: 1.0, 2023: 2.0, 2024: 9.0, 2025: 10.0}, {2024: "b"})
+        self.assertEqual(segs, [{2022: 1.0, 2023: 2.0}, {2024: 9.0, 2025: 10.0}])
+
+    def test_dg_empl_upper_case_jsonstat_is_normalised(self) -> None:
+        data = {"id": ["FREQ", "GEO", "TIME_PERIOD"], "dimension": {"FREQ": {}, "GEO": {}, "TIME_PERIOD": {}}}
+        out = ingest.lower_jsonstat(data)
+        self.assertEqual(out["id"], ["freq", "geo", "time"])
+        self.assertEqual(sorted(out["dimension"]), ["freq", "geo", "time"])
+        self.assertEqual(ingest.period_bounds("2025-S2"), ("2025-07-01", "2025-12-31"))
+
+
 if __name__ == "__main__":
     unittest.main()

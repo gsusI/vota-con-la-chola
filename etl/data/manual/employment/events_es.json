@@ -100,7 +100,10 @@
     "Intermitencia de los fijos discontinuos: no hay serie pública de días trabajados al año por persona; exige la Muestra Continua de Vidas Laborales (microdatos bajo solicitud). Se publican afiliados en alta (Seguridad Social, solo Régimen General), días cotizados por cotizante y demandantes inactivos inscritos (Anuario de Trabajo 2022-2024).",
     "El Anuario de Estadísticas 2025 del Ministerio de Trabajo (MLR-18) ya no separa a los fijos discontinuos entre los demandantes no parados: no hay cifra oficial publicada para 2025.",
     "Los Anuarios de 2020-2022 se publican en .xls (BIFF), que no se lee sin dependencias externas: la serie de demandantes fijos discontinuos empieza en 2022 (Anuario 2023).",
-    "Paro registrado: se toma de la OCDE (Infra-annual labour statistics), que recoge la serie mensual del SEPE; los ficheros del SEPE cambian de nombre cada mes y su cabecera .xls está dañada."
+    "Paro registrado: se toma de la OCDE (Infra-annual labour statistics), que recoge la serie mensual del SEPE; los ficheros del SEPE cambian de nombre cada mes y su cabecera .xls está dañada.",
+    "Gasto en políticas de mercado de trabajo: Eurostat dejó de difundir lmp_expsumm/lmp_ind_exp; la base LMP se lee de la API de DG EMPL (webgate.ec.europa.eu/empl/redisstat), con el mismo formato JSON-stat.",
+    "No hay estadística comparable entre países de la proporción de contrataciones que pasan por los servicios públicos de empleo; la serie de Eurostat sobre parados que contactan con ellos (lfsa_ugmsw) se cerró en 2020.",
+    "Ingresos netos (earn_nt_net): Eurostat marca ruptura de serie en 2024 por el cambio de definición del salario medio; los tramos se muestran por separado."
   ],
   "blocked_hosts": [
     {
